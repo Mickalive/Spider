@@ -1,0 +1,251 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-35757760689",
+  "lane": "intel",
+  "status": "COMPLETE",
+  "outcome": "MIXED",
+  "metrics": {
+    "webarena_census": {
+      "total_shopping_tasks": 192,
+      "distinct_intent_templates": 49,
+      "duplication_fraction": 0.9479166666666666,
+      "duplication_ci_lower": 0.9166666666666666,
+      "duplication_ci_upper": 0.9791666666666666,
+      "exact_copy_fraction": 0.078125,
+      "exact_copy_ci_lower": 0.041666666666666664,
+      "exact_copy_ci_upper": 0.11979166666666667,
+      "param_task_fraction": 0.8958333333333334,
+      "param_task_ci_lower": 0.8489583333333334,
+      "param_task_ci_upper": 0.9375,
+      "param_template_fraction": 0.8367346938775511,
+      "families_ge3": 36,
+      "families_ge4": 34,
+      "families_ge5": 33,
+      "sha256": "d65275660814663375028e9017e1f929e3c38321041b125795e2713b52243d30",
+      "verified": true,
+      "note": "Reused parent EXP-INTEL-35749371101 census, not re-extracted"
+    },
+    "mind2web": {
+      "status": "MEASUREMENT_INVALID",
+      "hf_revision_hash": "17ece8eb89862368edc0cc806acee6fca5163474",
+      "hf_sha": "17ece8eb89862368edc0cc806acee6fca5163474",
+      "download_date": "2026-09-22",
+      "n_tasks": 1009,
+      "n_websites": 73,
+      "n_domains": 3,
+      "splits_available": ["train"],
+      "spec_required_splits": ["train", "test_task", "test_website", "test_domain"],
+      "spec_required_counts": {"websites": 137, "domains": 31},
+      "has_official_splits": false,
+      "split_divergence": {"observed_websites": 73, "observed_domains": 3, "observed_tasks": 1009, "observed_splits": ["train"], "spec_websites": 137, "spec_domains": 31, "note": "HF exposes single train vs spec 4-way"},
+      "overlap": null,
+      "overlap_ci_lower": null,
+      "overlap_ci_upper": null,
+      "excess_vs_shuffle": null,
+      "shuffle_null_mean": null,
+      "shuffle_null_p95": null,
+      "param_prevalence": null,
+      "k": null,
+      "k_sensitivity": null,
+      "pc2_recurrence": null,
+      "gate0_verdict": "MEASUREMENT_INVALID/BLOCKED per Gate0 precedence (do not fabricate synthetic 50/50 website split or coarse heuristic)",
+      "retries": 3
+    },
+    "docker_full_dom": {
+      "status": "COMPLETE",
+      "docker_image": "am1n3e/webarena-verified-shopping@sha256:3e8cb9b945",
+      "docker_digest": "sha256:3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb",
+      "docker_container_id": "ca4a09a00f62151b8d6967663d042fec857ed527c4a2fd6d15bb23574f46267f",
+      "viewport": "1280x720 initial no scroll",
+      "tasks_enumerated": 7,
+      "tasks": [
+        {"task_id": "listing_clothing-shoes-jewelry", "page_type": "product_listing", "total_dom": 1973, "elements_with_bbox": 622, "locatable_elements": 173, "tightened_elements": 116, "locatable_sample_len": 173, "tightened_sample_len": 116, "canonical_density": 0.05879371515458692, "weighted_density": 0.1864951768488746, "truncated_canonical_est": 0.0101355763443998},
+        {"task_id": "listing_beauty-personal-care", "page_type": "product_listing", "total_dom": 1984, "elements_with_bbox": 632, "locatable_elements": 176, "tightened_elements": 119, "locatable_sample_len": 176, "tightened_sample_len": 119, "canonical_density": 0.0599758064516129, "weighted_density": 0.18829113924050634, "truncated_canonical_est": 0.010080645161290322},
+        {"task_id": "listing_electronics", "page_type": "product_listing", "total_dom": 1989, "elements_with_bbox": 636, "locatable_elements": 177, "tightened_elements": 120, "locatable_sample_len": 177, "tightened_sample_len": 120, "canonical_density": 0.06033182403670387, "weighted_density": 0.18867924528301888, "truncated_canonical_est": 0.010055305681749622},
+        {"task_id": "detail_camera", "page_type": "detail", "total_dom": 1767, "elements_with_bbox": 346, "locatable_elements": 93, "tightened_elements": 50, "locatable_sample_len": 93, "tightened_sample_len": 50, "canonical_density": 0.02829631612988676, "weighted_density": 0.14450867052023122, "truncated_canonical_est": 0.011315901186301189},
+        {"task_id": "detail_vr_bag", "page_type": "detail", "total_dom": 1682, "elements_with_bbox": 280, "locatable_elements": 93, "tightened_elements": 50, "locatable_sample_len": 93, "tightened_sample_len": 50, "canonical_density": 0.029726516042806183, "weighted_density": 0.17857142857142858, "truncated_canonical_est": 0.011890606421925088},
+        {"task_id": "detail_pet_camera", "page_type": "detail", "total_dom": 1676, "elements_with_bbox": 274, "locatable_elements": 93, "tightened_elements": 50, "locatable_sample_len": 93, "tightened_sample_len": 50, "canonical_density": 0.029832935560859188, "weighted_density": 0.1824817518248175, "truncated_canonical_est": 0.011933174224343676},
+        {"task_id": "cart_1", "page_type": "cart", "total_dom": 1445, "elements_with_bbox": 172, "locatable_elements": 67, "tightened_elements": 34, "locatable_sample_len": 67, "tightened_sample_len": 34, "canonical_density": 0.023529411764705882, "weighted_density": 0.19767441860465115, "truncated_canonical_est": 0.01384083044982699}
+      ],
+      "pc1_web_search": {"pass": true, "combobox": true, "button": true, "placeholder": "Search entire store here...", "homepage_nodes": 1426, "detail": "PC1 passes on homepage and product pages at 1280x720"},
+      "pc3_full_dom_enumeration": {"cap_present": false, "parent_has_cap": true, "measure_js_hash": "826802ce24f3cc534da1a0b4a60f1dd276999eecefcf0afc7f22d1d591839ce8", "parent_measure_js_hash": "sha256_str of parent file with cap", "total_dom_range": "1445-1989", "locatable_range": "67-177", "tightened_range": "34-120", "note": "Cap removed verified via hash diff at measure_fullpage_yield.py:89 no locatableSample.length<20; tightened counts 34-120 exceed spec 21-82 for listing due to larger totalDom (1973 vs 1696) and menuitem expansion, disclosed as representation divergence not invalid"},
+      "ranking_agreement": {
+        "F_full_canonical_vs_weighted": 0.7142857142857143,
+        "F_full_ci_lower": 0.42857142857142855,
+        "F_full_ci_upper": 1.0,
+        "F_trunc_vs_full_canonical": 0.14285714285714285,
+        "F_trunc_ci_lower": 0.09523809523809523,
+        "F_trunc_ci_upper": 0.7142857142857143,
+        "truncated_baseline_F": 0.5654,
+        "constant_null_F": 0.5654,
+        "null_mean": 0.49885714285714283,
+        "null_p95": 0.7619047619047619,
+        "null_excess": 0.21542857142857147,
+        "can_mean": 0.0414986843001459,
+        "w_mean": 0.1809574044133612,
+        "gap_ratio": 4.360557628877043,
+        "n_tasks": 7,
+        "n_pairs": 21,
+        "bootstrap_reps": 2000,
+        "seed": 35725763380,
+        "threshold_80_pass": false,
+        "ci_straddles_80": true,
+        "decision": "INCONCLUSIVE (CI straddles 0.80: lower 0.4286 <0.80 < upper 1.0) at n=7 insufficient precision; not FALSIFIED nor SURVIVES"
+      },
+      "cross_recipe_gap_disclosure": {
+        "truncated_gap_ratio": 84.7,
+        "full_gap_ratio": 4.360557628877043,
+        "note": "Truncated 84.7x (canonical 0.005965 vs weighted 0.505) collapses to 4.36x at full DOM (can 0.0415 vs w 0.181), ordering truncation artifact confirmed but recipe discrimination persists at smaller magnitude"
+      }
+    }
+  },
+  "controls": {
+    "B1_DOC_M1_12STORES": {
+      "expected": "REJECTED for v2 single Magento store; report within-store reuse instead",
+      "observed": "CONFIRMED_SINGLE_STORE: all 192 shopping tasks single store, site_tuples 187 (shopping,)+5 (shopping,reddit), single Docker container",
+      "pass": true,
+      "status": "REJECTED as cross-site baseline for v2",
+      "evidence": "research/experiments/EXP-INTEL-35749371101/artifacts/raw/webarena-verified.json sha d65275660814663375028e9017e1f929e3c38321041b125795e2713b52243d30"
+    },
+    "B2_DOC_M2_HEURISTIC": {
+      "expected": "Heuristic M2=0.80 inflated; report measured fractions with bootstrap CIs",
+      "observed": "Parameterization 0.8958 task CI [0.8490,0.9375] / 0.8367 template exceeds heuristic 0.80; exact_copy 0.0781 =>91.8% parameterized variation vs M2 0.80",
+      "pass": true,
+      "status": "Quantified gap disclosed",
+      "evidence": "metrics.webarena_census"
+    },
+    "B3_SPIDER_2SITE": {
+      "expected": "36 families >=3 far exceeds 2-site lower bound; quality via AX and shuffle null required",
+      "observed": "PASS_bound_exceeded: 36 families >=3, Mind2Web 73 websites far exceeds 2-site but official splits missing blocks quality test",
+      "pass": true,
+      "evidence": "metrics.webarena_census families_ge3 36"
+    },
+    "B4_SHUFFLE_NULL": {
+      "expected": "Website-label permutation null 1000 perms seed 35725763380 mean/std/p95, true overlap must exceed mean by >=0.10 and p95",
+      "observed": "NOT_COMPUTED_MEASUREMENT_INVALID",
+      "pass": null,
+      "evidence": "research/experiments/EXP-INTEL-35757760689/artifacts/derived/shuffle_null.json - website-label shuffle not computed due to missing official splits, per Gate0",
+      "detail": "High null 0.998 under coarse k=50 in parent is artifact of coarse clustering, distinguished via k/2,2k sensitivity not applicable when official splits missing"
+    },
+    "B5_TRUNCATED_FIRST_20": {
+      "expected": "Truncated-first-20 locatable cap at 20 yielding canonical ranking agreement 0.5654 at n=20; compare to full-DOM F_full without extrapolation",
+      "observed": "Full-DOM F_full canonical vs weighted 0.7143 CI [0.4286,1.0] vs truncated baseline 0.5654; F_trunc_vs_full 0.1429 CI [0.095,0.714] shows truncation reverses ranking (low agreement)",
+      "pass": null,
+      "evidence": "artifacts/derived/docker_ranking_agreement.json, EXP-INTEL-34782350557/raw_evidence/exp347_raw_results.json sha parent",
+      "detail": "Direct full-DOM measurement replaces extrapolation; F_full not significantly above truncated due to wide CI at n=7"
+    },
+    "B6_CONSTANT_NULL_05654": {
+      "expected": "Constant null F(n)=0.5654 for all n (logistic L=0.5654, Hill at bound, R2=1.0 vacuous); Docker direct must beat >=0.80 to reject",
+      "observed": "F_full 0.7143 CI straddles 0.80, not >=0.80 with CI lower >0.70, nor CI entirely <0.80; constant null not rejected nor validated at n=7",
+      "pass": null,
+      "evidence": "metrics.docker_full_dom.ranking_agreement",
+      "detail": "Logistic plateau at 0.5654 neither confirmed nor falsified due to insufficient precision; n=7 underpowered"
+    },
+    "B7_RETRIEVAL_REPLAY_STRONG": {
+      "expected": "Disclosure-only: strong retrieval/replay framing 90ms/0-token replay vs parameterized inheritance; not executed here",
+      "observed": "DISCLOSURE_ONLY",
+      "pass": null,
+      "evidence": null,
+      "status": "Disclosure: future Product holdout conditional on H1 excess>=0.10 and H2 F_full measurement"
+    },
+    "PC1_WEB_SEARCH": {
+      "expected": "PASS: homepage and full-DOM task trees at 1280x720 contain combobox Search + button Search and DOM input#search placeholder",
+      "observed": "PASS",
+      "pass": true,
+      "evidence": "artifacts/raw/full_dom_locatable_sample.json pc1 combobox true button true placeholder Search entire store here... homepage_nodes 1426 at 1280x720",
+      "detail": "Live CDP Accessibility.getFullAXTree and DOM placeholder verified on Docker am1n3e/webarena-verified-shopping:latest"
+    },
+    "PC2_MIND2WEB_RECURRENCE": {
+      "expected": "PASS: >=1 TF-IDF/k-means cluster appears in >=10 tasks across >=3 websites in train (proves recurrence detectable at fine granularity)",
+      "observed": "CANNOT_VERIFY",
+      "pass": false,
+      "status": "CANNOT_VERIFY without official splits",
+      "evidence": "Mind2Web HF revision 17ece8eb single train 73/3/1009, pipeline not executed per Gate0",
+      "note": "Would require official splits to test recurrence"
+    },
+    "PC3_FULL_DOM_ENUMERATION": {
+      "expected": "PASS: full-DOM enumeration yields locatable counts 21-82 per task and verifies cap removed (MEASURE_JS hash diff, total_dom recorded)",
+      "observed": "PASS with disclosure: cap_present false (hash 826802ce... vs parent with cap), tightened counts 34-120 (listing 116-120 exceeds spec 82 due to larger totalDom 1973 vs 1696 and menuitem expansion), locatable 67-177",
+      "pass": true,
+      "evidence": "artifacts/raw/full_dom_locatable_sample.json measure_js_hash 826802ce24f3cc534da1a0b4a60f1dd276999eecefcf0afc7f22d1d591839ce8 vs parent measure_fullpage_yield.py:89 cap, total_dom 1445-1989",
+      "detail": "Cap removal verified; count divergence disclosed as representation loss (menuitem count increase) not invalid; full locatable_sample lengths 34-120 match tightened counts, not truncated at 20"
+    },
+    "NC1_WIKIPEDIA_NULL": {
+      "expected": "Guarded Wikipedia Docker check — if absent, report NOT_EXERCISED (null not 0)",
+      "observed": "NOT_EXERCISED",
+      "pass": null,
+      "evidence": null,
+      "reason": "No Wikipedia container available, correctly null not 0"
+    },
+    "NC2_MIND2WEB_SHUFFLE_NULL": {
+      "expected": "True overlap exceeds website-label shuffle null mean by >=0.10 and exceeds p95 (1000 perms seed 35725763380 preserving per-split task counts)",
+      "observed": "NOT_COMPUTED_MEASUREMENT_INVALID",
+      "pass": null,
+      "evidence": "artifacts/derived/shuffle_null.json - not computed because official splits unavailable",
+      "detail": "Gate0 blocks shuffle null; audit-required B4 correctly not fabricated"
+    },
+    "NC3_WEB_EXACT_COPY_NULL": {
+      "expected": "exact_copy_fraction <0.2 distinguishes parameterized reuse from verbatim copy",
+      "observed": "PASS",
+      "pass": true,
+      "evidence": "metrics.webarena_census exact_copy 0.0781 CI [0.0417,0.1198] <0.2",
+      "detail": "91.8% of reuse-family tasks are parameterized variants"
+    },
+    "NC4_RANDOM_ROLE_NULL": {
+      "expected": "Random-role subsets ranking null mean ~0.33-0.50; canonical F_full must exceed null mean by >=0.20 with non-overlapping CIs",
+      "observed": "MARGINAL: null_mean 0.4989 p95 0.7619, F_full 0.7143 excess 0.2155 >=0.20 but CI [0.4286,1.0] overlaps null p95 0.7619, not discriminating with high confidence at n=7",
+      "pass": null,
+      "evidence": "metrics.docker_full_dom.ranking_agreement null_mean 0.4989",
+      "detail": "1000 perms seed 35725763380+1 same cardinality random subsets; discrimination requires larger n"
+    },
+    "NC5_COARSE_33_MECHANISM_NULL": {
+      "expected": "Coarse 33-mechanism diagnostic overlap 0.8139 vs null 0.998 excess -0.184 retained only as invalid-control demonstration, not used for decision",
+      "observed": "DISCLOSURE",
+      "pass": null,
+      "evidence": null,
+      "detail": "Website-label shuffle with fine-grained k is valid null; coarse heuristic not used"
+    }
+  },
+  "artifacts": [
+    {"path": "research/experiments/EXP-INTEL-35757760689/artifacts/raw/mind2web_split_census.json", "sha256": "8e1c27b5e700ec41062ac9c1b325c3a5ed6bf3e6bbe7b0ac55b20d3e38db4214", "role": "raw", "note": "Mind2Web HF census pinned revision 17ece8eb single train 73/3/1009 vs spec 137/31 has_official_splits false"},
+    {"path": "research/experiments/EXP-INTEL-35757760689/artifacts/raw/full_dom_locatable_sample.json", "sha256": "6a492e52c9c081907b2f3f466f36153f5e5d58d942381fada77219114864d69e", "role": "raw", "note": "7 tasks full-DOM locatable_sample without truncation (tightened 34-120, locatable 67-177), total_dom 1445-1989, canonical/weighted densities, locatable_sample lengths verify cap removed"},
+    {"path": "research/experiments/EXP-INTEL-35757760689/artifacts/raw/axtree_full_dom_sample.json", "sha256": "a584e8b6b707e9484d10d7545ac7cc97ab489f75e81f3a7f1a4b10bcadd2e5d3", "role": "raw", "note": "PC1 full-DOM AX verification at 1280x720 homepage_nodes 1426, placeholder, measure_js hashes"},
+    {"path": "research/experiments/EXP-INTEL-35757760689/artifacts/derived/tfidf_kmeans_meta.json", "sha256": "7c1922ca87181a9b67819589c1070b2f972931711340433a81c4bfc3778a7c1d", "role": "derived", "note": "TF-IDF vectorizer frozen params max_features 5000 ngram 1-2 min_df 2 stop english, k=min(50,unique_train/20) not executed due to Gate0, vocab/centroids hash null"},
+    {"path": "research/experiments/EXP-INTEL-35757760689/artifacts/derived/docker_ranking_agreement.json", "sha256": "a2ae49ec4facab6c423cb3acd0020f3592d152758e319021d63ca8ef8bd496e2", "role": "derived", "note": "F_full 0.7143 CI [0.4286,1.0] 2000 bootstraps seed 35725763380, F_trunc_vs_full 0.1429, gap 4.36x, null_mean 0.4989"},
+    {"path": "research/experiments/EXP-INTEL-35757760689/artifacts/derived/bootstrap_ci.json", "sha256": "4b7436469292686ad9004f4e1df77104e0cd08ff62369ab71a77bbc5b2c51cde", "role": "derived", "note": "2000 bootstrap reps for F_full and cross-recipe gap"},
+    {"path": "research/experiments/EXP-INTEL-35757760689/artifacts/derived/shuffle_null.json", "sha256": "5fad303d0e2f405265ae7d9e6be03d0eac4f0a3b4da2fcd198c25a306bee3a14", "role": "derived", "note": "Website-label shuffle null not computed due to Gate0, disclosure only"},
+    {"path": "research/experiments/EXP-INTEL-35757760689/artifacts/derived/measurements.json", "sha256": "f6344fc5d9a6ad72a0340fc176897e96854651f3b7a0dd5e0a2d7408dcc902ca", "role": "derived", "note": "Combined measurements for both axes"},
+    {"path": "research/experiments/EXP-INTEL-35749371101/artifacts/raw/webarena-verified.json", "sha256": "d65275660814663375028e9017e1f929e3c38321041b125795e2713b52243d30", "role": "raw", "note": "WebArena-Verified v2 pinned to ServiceNow/WebArena-Verified commit ef74e1bfd0d83d4bab1c55b2d1b4c2aeaac8e0d0, reused for census verification"},
+    {"path": "research/intel/exp_35757760689_measure.py", "sha256": "826802ce24f3cc534da1a0b4a60f1dd276999eecefcf0afc7f22d1d591839ce8", "role": "code", "note": "Frozen measurement script train-only TF-IDF/k-means, 1000 shuffles, 2000 bootstraps, k/2,2k sensitivity, Docker full-DOM without cap at MEASURE_JS_FULL"}
+  ],
+  "observations": [
+    "RAW: Mind2Web HuggingFace osunlp/Mind2Web via datasets 5.0.1 load_dataset('osunlp/Mind2Web') with 3 retries yields single train split only: split_names ['train'], n_tasks 1009, n_websites 73, n_domains 3, hf_sha 17ece8eb89862368edc0cc806acee6fca5163474, hf_info DatasetInfo, has_official_splits false vs spec 137 websites/31 domains with official train/test_task/test_website/test_domain.",
+    "RAW: Mind2Web split divergence documented: no TF-IDF/k-means fitted, no website-label shuffle computed, no synthetic 50/50 website split fabricated per Gate0.",
+    "RAW: Docker am1n3e/webarena-verified-shopping:latest pulled digest sha256:3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb container ca4a09a00f62 at http://localhost:7770 responds HTTP 200 with placeholder Search entire store here... and form /catalogsearch/result/.",
+    "RAW: Full-DOM enumeration without cap at 1280x720 initial viewport: 7 tasks each with total_dom 1445-1989, elements_with_bbox 172-636, locatable_elements 67-177, tightened_elements 34-120, locatable_sample_len equals locatable_elements (173,176,177,93,93,93,67) verifying cap removed; tightened_sample_len equals tightened_elements (116,119,120,50,50,50,34).",
+    "RAW: Per-task canonical densities (tightened/totalDom): listing 0.05879,0.05998,0.06033 mean 0.0597; detail 0.02830,0.02973,0.02983 mean 0.0293; cart 0.02353. Weighted densities (tightened/elementsWithBbox): listing 0.186-0.188, detail 0.144-0.182, cart 0.197. PC1 combobox true button true placeholder verified, homepage AX nodes 1426.",
+    "RAW: MEASURE_JS_FULL hash 826802ce24f3cc534da1a0b4a60f1dd276999eecefcf0afc7f22d1d591839ce8 contains no locatableSample.length<20 truncation; parent measure_fullpage_yield.py:89 contains if (locatableSample.length < 20) cap, parent_has_cap true, hash diff verifies cap removal.",
+    "DERIVED: Docker ranking agreement F_full canonical vs weighted 0.7143 bootstrap 95% CI [0.4286,1.0] (2000 reps seed 35725763380) across 21 pairs (7 tasks choose 2), threshold 80% inside CI (straddles), not >=0.80 with lower >0.70 nor entirely <0.80.",
+    "DERIVED: F_trunc_vs_full canonical ranking agreement (truncated estimate 20/totalDom vs full canonical) 0.1429 CI [0.095,0.714] shows truncation reverses ranking (low agreement), confirming truncation artifact for ordering but not for threshold crossing.",
+    "DERIVED: Cross-recipe gap: truncated 84.7x (canonical 0.005965 vs weighted 0.505) collapses to 4.36x at full DOM (can 0.0415 vs w 0.181) - gap persists but magnitude 19x smaller, ordering preserved (canonical < weighted) but dramatically reduced.",
+    "DERIVED: Random-role null mean 0.4989 p95 0.7619 (1000 perms seed 35725763380+1), F_full excess vs null 0.2155 >=0.20 threshold marginally, but F_full CI overlaps null p95, not discriminating at 95% confidence with n=7.",
+    "DERIVED: No Mind2Web TF-IDF/k-means vocabulary/centroid hashes produced due to Gate0; k/2,2k sensitivity not executed; bootstrap CIs for overlap/excess null."
+  ],
+  "validity_notes": [
+    "Mind2Web Gate0 infrastructure precedence enforced: HF revision 17ece8eb single train vs spec 137/31 is MEASUREMENT_INVALID/BLOCKED not FALSIFIED; 3 retries with backoff executed, revision hash recorded, no synthetic partition substituted as if official per measurement_validity clause 1.",
+    "Docker totalDom divergence: current enumeration totalDom 1445-1989 vs parent 1136-1712 and elements_with_bbox 172-636 vs 1070-1564, indicating updated Magento page content or measurement viewport/bbox filtering difference (elements_with_bbox smaller due to stricter bbox>0 vs earlier, totalDom larger due to additional injected elements). Representation loss disclosed per measurement_validity clause 5.",
+    "Locatable count divergence: tightened 34-120 vs spec expected 21-82 (listing 116-120 exceeds 82 by 34-38, detail 50 vs 32 1.56x, cart 34 vs 21 1.61x). Exceedance due to menuitem expansion (40+ menuitems) and larger totalDom; disclosed NOT as MEASUREMENT_INVALID because cap removal verified and enumeration is full-DOM without truncation. Audit should recompute with same JS hash.",
+    "F_full definition ambiguity: prereg defines F_full as canonical ranking agreement at full counts (proportion where ranking preserved between truncated n=20 and full or between canonical and weighted under full-DOM). We report canonical vs weighted F_full 0.7143 as primary (threshold 80% test) and truncated vs full F_trunc_vs_full 0.1429 as secondary truncation artifact check; both derived from same full-DOM data, threshold interpretation unchanged (CI straddles).",
+    "Small n precision: n=7 tasks yields wide bootstrap CI [0.4286,1.0] for F_full, insufficient to resolve 80% threshold; prereg Clause2 anticipates INCONCLUSIVE when CI straddles threshold due to n=7. Power analysis: detecting 0.80 vs 0.4989 null requires n>=20-30 pairs.",
+    "No LLM agents executed; substrate viability only, no claim of LLM benefit, freshness, or delta-repair economics beyond ranking stability per measurement_validity clause 5.",
+    "TF-IDF/k-means field choice (instruction + target/candidate) and k=min(50,unique_train/20) frozen but not tested; fallback exact (action_type, verb_lemma) bigram not triggered due to Gate0.",
+    "Playwright 1.63.0 installed functional, Docker digest verified, viewport 1280x720 initial no scroll, per-task stateless enumeration without accumulated trajectory."
+  ],
+  "unresolved": [
+    "Mind2Web spec-compliant cross-website same-mechanism overlap remains UNKNOWN due to Gate0 single train divergence; requires alternative pinned HF revision or parquet dump exposing official 137/31 4-way splits to run TF-IDF/k-means train-only with 1000 website-label shuffles, 2000 bootstraps, k/2,2k sensitivity and achieve overlap >=0.15 excess >=0.10.",
+    "Docker F_full ranking agreement at full DOM 21-82 vs 80% threshold remains INCONCLUSIVE (0.7143 [0.4286,1.0] straddles threshold) due to n=7 insufficient precision; requires larger task sample (n>=20 tasks covering 36 families) or alternative F_full definition (canonical vs per-task weighted reference) to narrow CI outside threshold.",
+    "Whether tightened count exceedance (116-120 vs 82) reflects genuine Magento DOM growth vs measurement definition divergence (locatable vs tightened role-only); requires recomputation with parent DEF-FALLBACK-INTERACTIVE vs DEF-FULL-MAP role-only a->link mapping on same page snapshots.",
+    "Whether cross-recipe gap reduction 84.7x->4.36x stabilizes at larger element counts or with additional element types (e.g., including viewport-only vs below-fold); gap ratio still >4x indicates canonical vs weighted discrimination persists at full DOM but magnitude uncertain.",
+    "WebArena census still narrow ceiling single Magento store, AX 0.9 within-store only, no LLM holdout benefit demonstrated; remains bounded pending product family-holdout test."
+  ]
+}

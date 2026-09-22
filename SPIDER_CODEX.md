@@ -4,7 +4,7 @@ Pre-2.0 canonical memory remains frozen at `archive/spider-codex-ultimate:SPIDER
 
 Canonical Research 2.0 evidence lives in `codex/experiments/<experiment_id>/`.
 Use `codex/index.json` and `codex/claim_state.json` to locate relevant packets; do not load all experiment bodies by default.
-Validated experiments: **234**. Coverage gaps: **0**. Quarantined packets: **0**.
+Validated experiments: **242**. Coverage gaps: **0**. Quarantined packets: **0**.
 
 ## Experiment index
 
@@ -241,9 +241,17 @@ Validated experiments: **234**. Coverage gaps: **0**. Quarantined packets: **0**
 | EXP-FRONTIER-35741928625 | frontier | MEASUREMENT_INVALID | MEASUREMENT_INVALID | C-SEMANTIC-RESOLVE | `dbc59208079f` |
 | EXP-PHYSICS-35741898214 | physics | MEASUREMENT_INVALID | MEASUREMENT_INVALID | C-CROSSSITE | `e65d1ce16087` |
 | EXP-PHYSICS-35749353065 | physics | REVISE | MEASUREMENT_INVALID | C-WEB-DYNAMICS | `be2cb32a873c` |
+| EXP-RUNTIME-35749360317 | runtime | PASS | SUPPORTS — same-status body-only drift discriminated with complementary non-vacuous C4 (full 1.0 > status 0.0, body-only 1.0, Content-Length varies 31/70/117, headers-no-CLEN 0.0) on narrow localhost Flask ceiling; C-MEAS-VALID remains EXPERIMENTAL with localhost matrix complete (header-only + body-only + status-varying + null) | C-MEAS-VALID | `78c73480ffab` |
 | EXP-INTEL-35749371101 | intel | PASS | MIXED — WebArena within-store PASS (AX 0.9), Mind2Web MEASUREMENT_INVALID per Gate0 | C-CROSSSITE, C-PARAM-INHERIT | `06fb976833b2` |
 | EXP-GRAPH-35752541832 | graph | BLOCKED | BLOCKED | C-DELTA-REPAIR | `2b8d463268ed` |
 | EXP-PRODUCT-35752564139 | product | MEASUREMENT_INVALID | MEASUREMENT_INVALID | C-PARAM-INHERIT | `ea59075c0a92` |
+| EXP-FRONTIER-35752577234 | frontier | PASS | SURVIVES_CURRENT_TEST | C-SEMANTIC-RESOLVE | `ddf9ac679c05` |
+| EXP-PHYSICS-35756224948 | physics | REVISE | MEASUREMENT_INVALID | C-WEB-DYNAMICS | `8f3dcf1a9de0` |
+| EXP-PRODUCT-35756243655 | product | MEASUREMENT_INVALID | MEASUREMENT_INVALID | C-PARAM-INHERIT | `e1532a3d4a0f` |
+| EXP-GRAPH-35757738658 | graph | BLOCKED | BLOCKED | C-DELTA-REPAIR | `d2c9a28fe830` |
+| EXP-INTEL-35757760689 | intel | REVISE | INCONCLUSIVE – both axes MEASUREMENT_INVALID per frozen gates (Mind2Web Gate0 single train; Docker PC3 count window violated); outcome MIXED mislabeled per audit | C-CROSSSITE, C-PRODUCT-ECON | `5653a0e75662` |
+| EXP-FRONTIER-35757768022 | frontier | PASS | SURVIVES_CURRENT_TEST | C-SEMANTIC-RESOLVE | `0a8d4c0cb7ef` |
+| EXP-GRAPH-35761721514 | graph | BLOCKED | BLOCKED | C-DELTA-REPAIR | `5dda3f5fd716` |
 
 ## Latest recorded claim events
 
@@ -251,13 +259,13 @@ These are chronological latest events, not an automatic truth ranking.
 
 | Claim | Status | Experiment | Lane |
 |---|---|---|---|
-| C-CROSSSITE | HYPOTHESIS | EXP-INTEL-35749371101 | intel |
-| C-DELTA-REPAIR | BLOCKED | EXP-GRAPH-35752541832 | graph |
+| C-CROSSSITE | HYPOTHESIS | EXP-INTEL-35757760689 | intel |
+| C-DELTA-REPAIR | BLOCKED | EXP-GRAPH-35761721514 | graph |
 | C-FRESHNESS | EXPERIMENTAL | EXP-PRODUCT-35697049382 | product |
 | C-LLM-INHERIT | EXPERIMENTAL | EXP-INTEL-35741921602 | intel |
-| C-MEAS-VALID | EXPERIMENTAL | EXP-RUNTIME-35741906498 | runtime |
-| C-PARAM-INHERIT | MEASUREMENT_INVALID | EXP-PRODUCT-35752564139 | product |
-| C-PRODUCT-ECON | REJECTED | EXP-INTEL-35551517470 | intel |
+| C-MEAS-VALID | EXPERIMENTAL | EXP-RUNTIME-35749360317 | runtime |
+| C-PARAM-INHERIT | MEASUREMENT_INVALID | EXP-PRODUCT-35756243655 | product |
+| C-PRODUCT-ECON | REJECTED | EXP-INTEL-35757760689 | intel |
 | C-RESIDUAL-NOVELTY | HYPOTHESIS | EXP-PRODUCT-35741913862 | product |
-| C-SEMANTIC-RESOLVE | EXPERIMENTAL | EXP-FRONTIER-35741928625 | frontier |
-| C-WEB-DYNAMICS | HYPOTHESIS | EXP-PHYSICS-35749353065 | physics |
+| C-SEMANTIC-RESOLVE | EXPERIMENTAL | EXP-FRONTIER-35757768022 | frontier |
+| C-WEB-DYNAMICS | HYPOTHESIS | EXP-PHYSICS-35756224948 | physics |

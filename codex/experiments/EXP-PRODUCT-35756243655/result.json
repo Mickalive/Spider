@@ -1,0 +1,106 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-35756243655",
+  "lane": "product",
+  "status": "MEASUREMENT_INVALID",
+  "outcome": "INCONCLUSIVE",
+  "metrics": {
+    "M-LLM-AVAILABLE": false,
+    "M-LLM-CALLS-TOTAL": 0,
+    "M-LLM-FAILURE-RATE": 1.0,
+    "M-KERNEL-FIX-COMMITTED": false,
+    "M-DISTILL-PARAMETERIZED-EXISTS": false,
+    "M-COMMON-PREFIX-AND-SUFFIX-EXISTS": false,
+    "M-EXTRACT-VARYING-VALUES-EXISTS": false,
+    "M-FIELD-PATH-TO-SLOT-NAME-EXISTS": false,
+    "M-WEBARENA-LOADED": false,
+    "M-WEBARENA-VALIDATED-V2": false,
+    "M-NGINX-HIT-CACHE-AVAILABLE": false,
+    "M-PLAYWRIGHT-BROWSERS-AVAILABLE": false,
+    "M-PREVIOUS-EXECUTION-ATTEMPTS": 4,
+    "M-PREVIOUS-EXIT-CODE": 124,
+    "M-PREVIOUS-CATEGORY": "transient-timeout"
+  },
+  "controls": {
+    "PC-PARAM-REGRESSION-AND-LITERAL-HIT": {
+      "expected_behavior": "PC1 same-A B-REPLAY hit_rate 1.0 cost 50 tok success 1.0; PC2 multi-param same-A EXECUTABLE 1.0 binding 1.0 success >=0.90",
+      "observed_behavior": "NOT EXECUTED — kernel fix not committed (distill_parameterized absent from src/spider/kernel.py), LLM API unavailable, nginx not running, no browsers configured",
+      "pass_fail": "NOT_MEASURED",
+      "evidence_ref": "src/spider/kernel.py hash 46929b3a951df48d7f9d1fd850871073c0d91c1868aa117e13d389fe274e8d61 contains only base SpiderKernel class with distill/resolve/verify; no distill_parameterized, _common_prefix_and_suffix, _extract_varying_values, or _field_path_to_slot_name"
+    },
+    "B-COLD": {
+      "expected_behavior": "Same model gpt-4o-mini-2024-07-18 temp 0 seed 42, 15 steps, 4096 tokens, Playwright toolset, no memory",
+      "observed_behavior": "NOT EXECUTED — LLM API unavailable (no OPENAI_API_KEY in environment)",
+      "pass_fail": "NOT_MEASURED",
+      "evidence_ref": "env check: no OPENAI_API_KEY; openai Python package 3.17.0 installed but unconfigured"
+    },
+    "B-INSTR": {
+      "expected_behavior": "Same LLM/tools/budget with hand-authored instructions (200 tok amortized 200/f)",
+      "observed_behavior": "NOT EXECUTED — LLM API unavailable",
+      "pass_fail": "NOT_MEASURED",
+      "evidence_ref": "Same as B-COLD; LLM API unavailable"
+    },
+    "B-RAG": {
+      "expected_behavior": "Jaccard retrieval threshold 0.30 over training A, verbatim replay without parameterization",
+      "observed_behavior": "NOT EXECUTED — LLM API unavailable; retrieval path not exercised",
+      "pass_fail": "NOT_MEASURED",
+      "evidence_ref": "LLM API unavailable; Jaccard retrieval not tested"
+    },
+    "B-REPLAY": {
+      "expected_behavior": "0-token exact replay with LLM fallback on miss; hit cost 50 tok verification only",
+      "observed_behavior": "NOT EXECUTED — LLM API unavailable; nginx not running for HIT/SWR/SIE/304 provenance",
+      "pass_fail": "NOT_MEASURED",
+      "evidence_ref": "nginx installed but inactive (systemctl status: inactive/dead); no HIT-cache provenance substrate"
+    },
+    "B-LITERAL": {
+      "expected_behavior": "Literal mechanisms without slots must fail on held-out B (success <=0.15)",
+      "observed_behavior": "NOT EXECUTED — LLM API unavailable",
+      "pass_fail": "NOT_MEASURED",
+      "evidence_ref": "LLM API unavailable; baseline not exercised on held-out B"
+    },
+    "NC-SHUFFLED-AND-RANDOM": {
+      "expected_behavior": "NC1 shuffled success <= B-COLD +0.05, false_accept >=0.25; NC2 random false_accept >=0.30 or success <= B-COLD",
+      "observed_behavior": "NOT EXECUTED — all pipeline substrates unavailable",
+      "pass_fail": "NOT_MEASURED",
+      "evidence_ref": "Entire pipeline unexecutable due to missing kernel fix, LLM API, and nginx substrate"
+    }
+  },
+  "artifacts": [
+    {"path": "src/spider/kernel.py", "sha256": "46929b3a951df48d7f9d1fd850871073c0d91c1868aa117e13d389fe274e8d61", "role": "code", "note": "Base SpiderKernel class only; distill_parameterized, _common_prefix_and_suffix, _extract_varying_values, _field_path_to_slot_name NOT present"},
+    {"path": "src/spider/models.py", "sha256": "338aaf4d7ba0e31f7a5fe8a47abdbb2ea52d9c1c4ef0ce014f2b809b9a2a9b78", "role": "code"},
+    {"path": "src/spider/registry.py", "sha256": "51fb440d3827f21cccb5f77ad17dc0e76ccdbc2d52d7b05044cd821bb8a9322c", "role": "code"},
+    {"path": "tests/test_kernel.py", "sha256": "ff9c1561c4169d306fba56d52442546a3bbfdab11d3ab56c51d7369309e9c0b6", "role": "test"},
+    {"path": "research/experiments/EXP-PRODUCT-35756243655/freeze.json", "sha256": "6eb39e0f005c30b317c87cf0a9b3a4e85a8f54e8ecffc861a00c83bba2a94455", "role": "freeze-hash"},
+    {"path": "/tmp/opencode/webarena-verified.json", "sha256": null, "role": "data-attempt", "note": "Raw WebArena data (812 tasks, 190 templates, 12 families) found at /tmp/opencode/webarena-verified.json but NOT the Intel-validated v2 family-stratified version (missing measured duplication 0.9479, AX 0.9 mapping, 49-template structure, family A/B disjoint pools)"},
+    {"path": "research/experiments/EXP-PRODUCT-35756243655/execution_checkpoint.json", "sha256": null, "role": "checkpoint", "note": "Pre-execute sha 325f6c14cd976e0512c9d30e2dd186201fc8155e recorded at 2026-09-22T16:50:47"},
+    {"path": "research/experiments/EXP-PRODUCT-35756243655/model_execute.json", "sha256": null, "role": "execution-log", "note": "4 retry attempts all failed with exit_code 124 (timeout), category 'transient', model 'opencode/big-pickle'"}
+  ],
+  "observations": [
+    "src/spider/kernel.py (sha256 46929b3a...) contains only the base SpiderKernel class with methods distill(), resolve(), verify(), invalidate(), observe(). It does NOT contain distill_parameterized(), _common_prefix_and_suffix(), _extract_varying_values(), or _field_path_to_slot_name(). The committed kernel fix specified in spec.json and prereg.md §3 has NOT been applied.",
+    "No OPENAI_API_KEY or equivalent environment variable is configured. The openai Python package (3.17.0) is installed but cannot make API calls without credentials. All 5 conditions (SPIDER/COLD/INSTR/RAG/REPLAY) plus B-LITERAL and controls require real LLM execution per spec measurement_validity #1.",
+    "Previous execution attempts: model_execute.json records 4 retry attempts on model 'opencode/big-pickle', all with exit_code 124 (timeout) and category 'transient'. Per AGENTS.md failure discipline, infrastructure failure is not scientific falsification.",
+    "nginx is installed (/usr/sbin/nginx) but inactive (systemctl status: inactive/dead). No HIT-cache provenance substrate available for _matches postcondition verification on actual DOM/response state.",
+    "Playwright (1.63.0) is installed and the CLI exists at /opt/hostedtoolcache/Python/3.12.14/x64/bin/playwright, but no browsers are configured (playwright list returns error). Cannot execute browser-based agent tasks.",
+    "WebArena data exists at /tmp/opencode/webarena-verified.json (812 tasks, 190 templates, 12 site families) but this is the raw unvalidated data — NOT the Intel-validated WebArena-Verified v2 family-stratified version with measured duplication 0.9479, AX 0.9 longest-prefix mapping on 20 CDP trees, and explicit family A/B disjoint pools with zero value overlap.",
+    "The experiment was frozen at 2026-09-22T16:50:35.399196+00:00 (freeze.json) with hashes: prereg 40f1240b7aa94ca092b98625b6d3ab9bde843fa06717bac8a1624918aecdaac0, request 6eb39e0f005c30b317c87cf0a9b3a4e85a8f54e8ecffc861a00c83bba2a94455, spec f1e7729ce50335a66de374e71fee46bea39cd54305d38c610099cd371c4e1d59."
+  ],
+  "validity_notes": [
+    "MEASUREMENT_INVALID per frozen spec decision_rule: kernel fix not committed to src/spider/kernel.py (audit import/hash check fails; distill_parameterized absent). This is the first MEASUREMENT_INVALID criterion in the spec falsifier.",
+    "MEASUREMENT_INVALID per frozen spec: LLM API unavailable >50% trials after 3x exponential backoff (0% availability, no OPENAI_API_KEY). Per AGENTS.md failure discipline, infrastructure failure is MEASUREMENT_INVALID, not scientific FALSIFICATION.",
+    "MEASUREMENT_INVALID per frozen spec: WebArena-Verified v2 family-stratified data not loaded with measured duplication 0.9479 and AX 0.9 mapping. Raw data found but insufficient for product claim ceiling.",
+    "MEASUREMENT_INVALID per frozen spec: nginx HIT-cache provenance unavailable (nginx inactive, no HIT/SWR/SIE/304 discrimination possible). Verification via _matches postconditions on actual DOM/response state cannot be exercised.",
+    "No outcome-bearing measurements were performed. No LLM agent runs, no Playwright executions, no binding success readouts. The experiment status reflects substrate unavailability, not a scientific answer to the C-PARAM-INHERIT question.",
+    "Per EXPERIMENT_PACKET.md §9 and AGENTS.md failure discipline: 'Never invent a result when infrastructure fails' and 'infrastructure failure is not a scientific negative'.",
+    "Prior parent handoff (EXP-PRODUCT-35752564139) also classified MEASUREMENT_INVALID for LLM API unavailability and double-prefix binding bug. This experiment inherits the same substrate gap.",
+    "Representation loss disclosed: Without real browser execution, no DOM/CDP observations, no nginx response provenance, no per-task token/call/latency data can be collected. The abstraction to parameter_slots cannot even be exercised."
+  ],
+  "unresolved": [
+    "Does corrected _common_prefix_and_suffix on disjoint A/B pools achieve EXECUTABLE >=0.75 and binding >=0.90 with exact equality? (Kernel fix not yet committed; cannot test)",
+    "What is real LLM success on held-out B for SPIDER vs B-COLD/B-INSTR/B-RAG/B-REPLAY with same model/tools/budget and deterministic verification? (LLM API unavailable)",
+    "What is amortized cost per success at f=10 and does SPIDER achieve >=25% saving vs COLD and <=0.85x vs RAG with family-stratified bootstrap? (No execution possible)",
+    "Can family hold-out on true WebArena-Verified v2 (192 tasks, 49 templates, duplication measured) be loaded and does multi-param transfer generalize? (Raw data found but not validated v2 family-stratified version)",
+    "Does kernel-integrated mechanism survive noise-field filtering and structure_similarity >=0.75 without spurious slot hallucination on real browser observations? (No real browser data)",
+    "Is freshness guard behavioral_score required vs excessive abstention? (nginx substrate unavailable)",
+    "What is the smallest action to unblock: (1) obtain OPENAI_API_KEY or equivalent LLM substrate, (2) commit distill_parameterized fix to src/spider/kernel.py, (3) start nginx for HIT-cache provenance, (4) configure Playwright browsers, (5) validate Intel WebArena-Verified v2 family-stratified data with measured duplication 0.9479 and AX 0.9"
+  ]
+}

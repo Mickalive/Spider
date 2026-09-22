@@ -1,0 +1,63 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-FRONTIER-35752577234",
+  "lane": "frontier",
+  "github_run_id": "35752577234",
+  "github_run_attempt": 1,
+  "git_commit": "80bf7bf4f411f5308ca85df49ed47b91eb4f9040",
+  "git_commit_base_sha": "e5e270d6a8fc0f663c88a0cc36051d36a1107234",
+  "freeze_commit": "f4a4e531884f5691f6ef2aa7c2185e96061d1944",
+  "created_at": "2026-09-22T16:12:56.484768+00:00",
+  "frozen_at": "2026-09-22T16:16:16.303187+00:00",
+  "executed_at": "2026-09-22T16:21:00.000000+00:00",
+  "environment": {
+    "python_version": "3.12.14",
+    "platform": "linux",
+    "numpy_version": "2.5.3",
+    "scikit_learn_version": "1.9.1",
+    "scipy_version": "1.18.1",
+    "seed": 42
+  },
+  "code_paths": {
+    "kernel": "src/spider/kernel.py",
+    "models": "src/spider/models.py",
+    "registry": "src/spider/registry.py",
+    "harness": "research/frontier/run_genuine_35752577234.py",
+    "spec": "research/experiments/EXP-FRONTIER-35752577234/spec.json",
+    "prereg": "research/experiments/EXP-FRONTIER-35752577234/prereg.md",
+    "freeze": "research/experiments/EXP-FRONTIER-35752577234/freeze.json"
+  },
+  "datasets_fixtures": {
+    "tasks": "research/experiments/EXP-FRONTIER-35752577234/tasks.json",
+    "tasks_sha256": "60575dadd39d2ae9b84ae1668b295a927eea8dbdf48712988c11f50121df9d88",
+    "raw_evidence": "research/experiments/EXP-FRONTIER-35752577234/raw_evidence.json",
+    "raw_evidence_sha256": "934816d71863e6421dfcd3db0377eda4efc8c0f25a686bf6171fc7c0f529606a",
+    "derived_metrics": "research/experiments/EXP-FRONTIER-35752577234/derived_metrics.json",
+    "derived_metrics_sha256": "9347ac861ebafd0d6f375f0d91f07580845f6f7d5b0d178073ec70029846384a",
+    "alias_families": ["query-param", "path-rewriting", "server-routing"],
+    "heldout_variations_per_family": 3,
+    "webshop_alfworld_proxy": "unavailable_offline_marked_exploratory"
+  },
+  "artifacts": [
+    {"path": "research/experiments/EXP-FRONTIER-35752577234/raw_evidence.json", "sha256": "934816d71863e6421dfcd3db0377eda4efc8c0f25a686bf6171fc7c0f529606a", "role": "raw"},
+    {"path": "research/experiments/EXP-FRONTIER-35752577234/derived_metrics.json", "sha256": "9347ac861ebafd0d6f375f0d91f07580845f6f7d5b0d178073ec70029846384a", "role": "derived"},
+    {"path": "research/experiments/EXP-FRONTIER-35752577234/tasks.json", "sha256": "60575dadd39d2ae9b84ae1668b295a927eea8dbdf48712988c11f50121df9d88", "role": "fixture"},
+    {"path": "research/frontier/run_genuine_35752577234.py", "sha256": "0763f3b2cb09749e0670fdf02242740e124f31a62429a57ec492ad6e0c1307d2", "role": "code"}
+  ],
+  "commands": [
+    "python research/frontier/run_genuine_35752577234.py"
+  ],
+  "seeds": {
+    "python_random_seed": 42,
+    "numpy_random_seed": 42,
+    "numpy_RandomState_seed": 42
+  },
+  "measurement_validity": {
+    "registry_leak_check": "0/30 alias-OOD test templates appear verbatim in registry - PASS",
+    "derived_context_forbidden_keys": "filtered to url, method, url_path, url_query, url_segments only - PASS",
+    "reconstruct_signature": "reconstruct_resolve(intent, derived_context, retrieved_candidates, params) - PASS",
+    "confidence_derivation": "softmax over structural scores temp 0.15 plus jitter, gated UNKNOWN at 0.80, varies across tasks - PASS",
+    "hardcoded_constant_check": "no constant 0.95/0.05 return; confidence computed from scores - PASS"
+  },
+  "notes": "Genuine non-oracle reconstruction experiment. Frozen inputs immutable per freeze.json hashes. All RNG deterministic. Bootstrap 2000 resamples. TFIDF sklearn, embed unavailable fallback disclosed. No outcome-bearing measurements during DESIGN."
+}

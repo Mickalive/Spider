@@ -1,0 +1,113 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-35761721514",
+  "lane": "graph",
+  "status": "BLOCKED",
+  "producer_claim_supported": false,
+  "required_fixes": [
+    "Provide OPENAI_API_KEY environment variable for real gpt-4o-mini model calls with token counting (spec measurement_validity #4, #8)",
+    "Install openai SDK (pip install openai) and playwright SDK (pip install playwright && playwright install chromium)",
+    "Configure nginx 1.24.0 reverse proxy with proxy_cache for HIT/SWR/SIE/304 stages matching EXP-RUNTIME-35611612543 substrate (nginx.conf hash recorded)",
+    "Deploy Flask 3.1.3 + PyJWT HS256 + SQLite testbed_server.py with perturbation endpoints (F-DOM: DOM attr/text, F-ENDPOINT: param/header, F-CACHE: Cache-Control/ETag)",
+    "Implement execute_delta_repair_real.py with real LLM calls (record model id gpt-4o-mini, temperature 0.0, max_tokens, provider, per-call token counts, 15-step budget), real Playwright execution (goto/click/fill/evaluate/fetch with trace logs), and real verify() on actual DOM/response state (selector existence via Playwright evaluate, status/header/body match) with independent oracle for false accepts",
+    "Execute 48 perturbation instances (3 families x2 variants x8 seeds) with N>=24 unrelated mechanisms, family-stratified TRAIN24/TEST24 split (TRAIN seeds 0-3, TEST seeds 4-7 per variant), registry clone isolation, cache purge per instance, perturbation manifest holdout (never in repair prompt), verification threshold fit on TRAIN only",
+    "Compute all metrics on TEST with trajectory-grouped uncertainty: Wilson 95% CI for rates, instance-block bootstrap 2000 resamples for cost ratios, block-permutation for verification/retrieval nulls, apply frozen decision rule C1-C8 exactly"
+  ],
+  "validity_findings": [
+    "INFRASTRUCTURE_BLOCKER_CONFIRMED: No OPENAI_API_KEY in execution environment (env | grep OPENAI_API_KEY absent). No Anthropic or Mimo API key alternative present. This is a hard infrastructure failure, not a scientific result.",
+    "SDKS_MISSING: openai SDK not installed (pip show openai not found), playwright SDK not installed (pip show playwright not found). Both required per spec measurement_validity #4, #8 for real LLM token counting and real browser execution.",
+    "SUBSTRATE_INCOMPLETE: nginx 1.24.0 binary present (Ubuntu build) but proxy_cache for HIT/SWR/SIE/304 not configured. Flask 3.1.3 + PyJWT HS256 + SQLite backend not deployed. B-RUNTIME-BYTE-IDENTITY gate (C3) unmeasurable on real nginx.",
+    "NO_MEASUREMENT_EXECUTED: Zero perturbation instances generated or executed. No LLM calls, no Playwright traces, no verify() signals. All 15 controls observed=null, pass=null, evidence=NOT_MEASURED. Metrics {} correctly reflects no measurement rather than zero/negative result.",
+    "FROZEN_INTEGRITY_PRESERVED: SHA256 hashes of request.json (77f7db7a), spec.json (01c99c55), prereg.md (59522090) match freeze.json exactly. No post-freeze mutation detected. Git commit 3835093717705577f43a7a7a5ee1531f014017a7 recorded.",
+    "SIMULATION_FALLBACK_RESISTED: Producer correctly refused to execute hardcoded simulation (COLD_TOKENS_BASE 2250, retrieval 320, verify 180, heuristic 1364 forbidden per spec). This preserves the distinction between this BLOCKED run and the prior simulation EXP-GRAPH-35741890679 (audit REVISE, SIMULATION_NOT_MEASUREMENT).",
+    "PARENT_PARITY: This experiment replicates the exact same infrastructure diagnosis as parent EXP-GRAPH-35757738658 (BLOCKED, MISSING_LLM_API_KEY, audit V_BLOCKED_CORRECTLY_CLASSIFIED, V_NO_SIMULATION_FALLBACK_RESISTED). No new scientific evidence added across two consecutive Graph allocations."
+  ],
+  "baseline_findings": [
+    {
+      "control_id": "B-COLD-FULL-REEXPLORATION",
+      "finding": "NOT_MEASURED - requires real LLM API key and Playwright execution"
+    },
+    {
+      "control_id": "B-VERBATIM-REPLAY",
+      "finding": "NOT_MEASURED - requires real Playwright on perturbed substrate"
+    },
+    {
+      "control_id": "B-RETRIEVAL-RAG",
+      "finding": "NOT_MEASURED - requires embedding API, LLM, and Playwright"
+    },
+    {
+      "control_id": "B-ORACLE-HAND-PATCH",
+      "finding": "NOT_MEASURED - requires Playwright execution on real substrate"
+    },
+    {
+      "control_id": "B-RUNTIME-BYTE-IDENTITY",
+      "finding": "NOT_MEASURED - requires nginx+Flask deployment; synthetic gzip sanity True is not real nginx measurement"
+    },
+    {
+      "control_id": "PC-LOCALIZED-REPAIR-SUCCEEDS",
+      "finding": "NOT_MEASURED - requires real LLM + Playwright + verify pipeline"
+    },
+    {
+      "control_id": "NC-ZERO-AND-DISTANT-PERTURBATION",
+      "finding": "NOT_MEASURED - requires real pipeline with trajectory-grouped block-permutation"
+    },
+    {
+      "control_id": "C1_PC_GATE",
+      "finding": "NOT_MEASURED - PC1/PC2 on real gpt-4o-mini pipeline unmeasured; B-RUNTIME non-vacuous full>body discrimination unmeasured"
+    },
+    {
+      "control_id": "C2_NC_GATE",
+      "finding": "NOT_MEASURED - NC1/NC2 on real pipeline unmeasured; random-patch block-permutation AUROC/FA unmeasured"
+    },
+    {
+      "control_id": "C3_BYTE_IDENTITY_GATE",
+      "finding": "NOT_MEASURED - pre-perturbation byte identity >=0.99 on real nginx unmeasured; synthetic gzip.decompress sanity passes but is not real nginx"
+    },
+    {
+      "control_id": "C4_SUCCESS_GATE",
+      "finding": "NOT_MEASURED - repair success on TEST unmeasured"
+    },
+    {
+      "control_id": "C5_COST_GATE",
+      "finding": "NOT_MEASURED - real token/browser costs with trajectory-grouped bootstrap CIs unmeasured"
+    },
+    {
+      "control_id": "C6_CONTAMINATION_GATE",
+      "finding": "NOT_MEASURED - real contamination measurement on N>=24 unrelated mechanisms unmeasured"
+    },
+    {
+      "control_id": "C7_VERIFICATION_GATE",
+      "finding": "NOT_MEASURED - real verification AUROC/precision with TRAIN-calibrated threshold on TEST unmeasured"
+    },
+    {
+      "control_id": "C8_AMORTIZED_GATE",
+      "finding": "NOT_MEASURED - real amortized economics with real retrieval costs trajectory-grouped unmeasured"
+    }
+  ],
+  "recomputed_metrics": {},
+  "claim_ceiling": "BLOCKED — No new evidence. C-DELTA-REPAIR remains HYPOTHESIS on real nginx HIT-cache localhost substrate with real LLM+Playwright+verify(). The only existing ceiling is the bounded simulation from EXP-GRAPH-35741890679 (audit REVISE, SIMULATION_NOT_MEASUREMENT): deterministic heuristic on 36 instances showed pooled repair success 0.833 but token ratio 0.613 CI [0.569,0.661] failing <0.50, browser ratio 0.431 CI [0.396,0.469] failing <0.40, verification AUROC 1.0/precision 1.0 by construction (perfect separation artefact), contamination 0.0046 hardcoded, amortized 2.1x cold failing. Audit explicitly limited that ceiling to simulation parameters only. This experiment adds zero real measurements. Claim ceiling unchanged.",
+  "evidence_refs": [
+    "research/experiments/EXP-GRAPH-35761721514/request.json (sha256 77f7db7ab59be1070ad0c200e07098cf8a53042b77670f2b51a615a613ea729f, director_mandate REOPEN C-DELTA-REPAIR)",
+    "research/experiments/EXP-GRAPH-35761721514/spec.json (sha256 01c99c559c1ba02fe25fea74bbcd637e2d138579e1f77c7319e1697cd4749af5, frozen design with C1-C8 gates)",
+    "research/experiments/EXP-GRAPH-35761721514/prereg.md (sha256 59522090d0aa384481fa10e0f4fd79249e521aa9d9163e5e73ab659f519aba45, trajectory-grouped decision rule)",
+    "research/experiments/EXP-GRAPH-35761721514/freeze.json (sha256 04c744e8bfacb14f48c4c6c8d68d6b44059ad716c05f3e4d855ac874d1383abb, frozen_at 2026-09-22T17:39:20)",
+    "research/experiments/EXP-GRAPH-35761721514/result.json (status BLOCKED outcome NOT_APPLICABLE metrics {} controls 15 null)",
+    "research/experiments/EXP-GRAPH-35761721514/report.md (BLOCKED infrastructure, gates C1-C8 NOT_MEASURED)",
+    "research/experiments/EXP-GRAPH-35761721514/provenance.json (status BLOCKED blocker MISSING_LLM_API_KEY retryable, frozen_inputs hashes_match_freeze true)",
+    "research/experiments/EXP-GRAPH-35757738658/handoff.json (parent BLOCKED sha256 78edbbc4eb4bc638d5a5ba463f4231ea90a4ce8300924fcb9e36d90161e6e602, identical infrastructure diagnosis)",
+    "research/experiments/EXP-GRAPH-35757738658/audit.json (status BLOCKED producer_claim_supported false recompute_match true claim_ceiling BLOCKED)",
+    "research/experiments/EXP-GRAPH-35741890679/audit.json (status REVISE simulation ceiling token 0.613 browser 0.431 amortized 2.1x SIMULATION_NOT_MEASUREMENT)",
+    "research/experiments/EXP-RUNTIME-35611612543 (runtime dependency: nginx HIT/SWR/SIE/304 960/960 byte-identical oracle-free gzip.decompress on synthetic, not yet re-measured on real nginx)",
+    "codex/claim_state.json#C-DELTA-REPAIR (status BLOCKED, prior MEASUREMENT_INVALID, bounded simulation ceiling, no product promotion)",
+    "research/claims/registry.json#C-DELTA-REPAIR HYPOTHESIS owner_lanes graph/runtime/product"
+  ],
+  "unresolved": [
+    "Whether real LLM gpt-4o-mini 15-step achieves repair token cost <50% cold and browser <40% cold on F-DOM/F-ENDPOINT/F-CACHE (C5 gate)",
+    "Whether real verification on actual DOM/response discriminates with AUROC>=0.75 and precision>=0.80 at TRAIN threshold trajectory-grouped (C7 gate)",
+    "Whether contamination <0.10 and random-patch false_accept <5% on real registry N>=24 block-permutation (C6/C2 gates)",
+    "Whether amortized cost at 10 reuses (repair+verification+10*retrieval) < B-COLD cost with real retrieval trajectory-grouped (C8 gate)",
+    "Whether nginx HIT/SWR/SIE/304 byte identity >=0.99 on real nginx with non-vacuous full>body>status isolation (C3 gate, dependency EXP-RUNTIME-35611612543)",
+    "Whether per-family cost heterogeneity exists at TEST n=8 (Wilson half-width ±0.26 exploratory) and whether 2-3 resource radius changes economics",
+    "Whether B-VERBATIM (~0%) and B-RETRIEVAL-RAG (20-40%) replicate on real substrate with block-permutation sanity"
+  ]
+}

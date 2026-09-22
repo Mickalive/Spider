@@ -1,0 +1,438 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-FRONTIER-35757768022",
+  "lane": "frontier",
+  "status": "COMPLETE",
+  "outcome": "SUPPORTS",
+  "metrics": {
+    "alias_OOD": {
+      "reconstruction_correct_resolution": 1.0,
+      "reconstruction_correct_count": 30,
+      "reconstruction_false_accept": 0.0,
+      "reconstruction_unknown": 0.0,
+      "reconstruction_n": 30,
+      "wilson_correct_ci": [
+        0.886482908609522,
+        1.0
+      ],
+      "wilson_false_ci": [
+        0.0,
+        0.11351709139047801
+      ],
+      "exact_match_correct_rate": 0.0,
+      "verbatim_false_accept_rate": 1.0,
+      "tfidf_correct_rate": 0.0,
+      "random_correct_rate": 0.0,
+      "binomial_p_vs_0.10": 1.0000000000000017e-30,
+      "mcnemar_rec_vs_exact": {
+        "b": 30,
+        "c": 0,
+        "chi2": 28.033333333333335,
+        "p": 1.192436684949172e-07
+      },
+      "mcnemar_fa_rec_vs_verbatim": {
+        "b": 0,
+        "c": 30,
+        "chi2": 28.033333333333335,
+        "p": 1.192436684949172e-07
+      },
+      "diff_verbatim_minus_recon_false_accept": 1.0,
+      "per_family_and_heldout": {
+        "fam0_standard": {
+          "n": 7,
+          "correct_rate": 1.0,
+          "fa_rate": 0.0
+        },
+        "fam0_heldout": {
+          "n": 3,
+          "correct_rate": 1.0,
+          "fa_rate": 0.0
+        },
+        "fam0_overall": {
+          "n": 10,
+          "correct_rate": 1.0
+        },
+        "fam1_standard": {
+          "n": 7,
+          "correct_rate": 1.0,
+          "fa_rate": 0.0
+        },
+        "fam1_heldout": {
+          "n": 3,
+          "correct_rate": 1.0,
+          "fa_rate": 0.0
+        },
+        "fam1_overall": {
+          "n": 10,
+          "correct_rate": 1.0
+        },
+        "fam2_standard": {
+          "n": 7,
+          "correct_rate": 1.0,
+          "fa_rate": 0.0
+        },
+        "fam2_heldout": {
+          "n": 3,
+          "correct_rate": 1.0,
+          "fa_rate": 0.0
+        },
+        "fam2_overall": {
+          "n": 10,
+          "correct_rate": 1.0
+        },
+        "heldout_9": {
+          "n": 9,
+          "correct_rate": 1.0,
+          "fa_rate": 0.0
+        }
+      },
+      "channel_isolation_diagnostics": {
+        "RULE-URL-ONLY": {
+          "n": 30,
+          "correct_rate": 0.0,
+          "per_family": {
+            "fam0": {
+              "n": 10,
+              "correct_rate": 0.0
+            },
+            "fam1": {
+              "n": 10,
+              "correct_rate": 0.0
+            },
+            "fam2": {
+              "n": 10,
+              "correct_rate": 0.0
+            }
+          }
+        },
+        "RULE-BODY-ONLY": {
+          "n": 30,
+          "correct_rate": 0.3333333333333333,
+          "per_family": {
+            "fam0": {
+              "n": 10,
+              "correct_rate": 0.0
+            },
+            "fam1": {
+              "n": 10,
+              "correct_rate": 1.0
+            },
+            "fam2": {
+              "n": 10,
+              "correct_rate": 0.0
+            }
+          }
+        },
+        "RULE-HEADERS-ONLY": {
+          "n": 30,
+          "correct_rate": 0.6666666666666666,
+          "per_family": {
+            "fam0": {
+              "n": 10,
+              "correct_rate": 1.0
+            },
+            "fam1": {
+              "n": 10,
+              "correct_rate": 0.0
+            },
+            "fam2": {
+              "n": 10,
+              "correct_rate": 1.0
+            }
+          }
+        }
+      }
+    },
+    "exact_match": {
+      "reconstruction_correct_rate": 1.0,
+      "exact_match_baseline_correct_rate": 1.0,
+      "reconstruction_n": 12,
+      "wilson_ci_recon": [
+        0.7574992425007574,
+        0.9999999999999998
+      ]
+    },
+    "no_applicable": {
+      "reconstruction_unknown_precision": 1.0,
+      "reconstruction_false_accept_rate": 0.0,
+      "reconstruction_ece_over_all": 0.0758371063491121,
+      "ece_bootstrap_mean": 0.07587975996714175,
+      "ece_bootstrap_ci": [
+        0.06658054086105684,
+        0.08500358126683184
+      ],
+      "ece_alias": 0.1083408793648909,
+      "ece_exact": 0.02083333333333337,
+      "ece_noapp": 0.05766666666666668,
+      "all_methods_precision": {
+        "B-EXACT-MATCH": 1.0,
+        "B-VERBATIM-REPLAY": 1.0,
+        "B-RAG-TFIDF": 1.0,
+        "B-RAG-EMBED": null,
+        "B-RANDOM": 1.0,
+        "RECONSTRUCTION-RULE": 1.0,
+        "RECONSTRUCTION-LEARNED": null
+      },
+      "all_methods_false_accept": {
+        "B-EXACT-MATCH": 0.0,
+        "B-VERBATIM-REPLAY": 0.0,
+        "B-RAG-TFIDF": 0.0,
+        "B-RAG-EMBED": null,
+        "B-RANDOM": 0.0,
+        "RECONSTRUCTION-RULE": 0.0,
+        "RECONSTRUCTION-LEARNED": null
+      },
+      "empty_registry_unknown_rate": 1.0,
+      "empty_registry_all_methods_unknown": true,
+      "bins_reconstruction": [
+        {
+          "bin": 0,
+          "count": 18,
+          "acc": 0.0,
+          "avg_conf": 0.058333333333333334,
+          "edges": [
+            0.0,
+            0.2
+          ]
+        },
+        {
+          "bin": 1,
+          "count": 0,
+          "acc": 0.0,
+          "avg_conf": 0.0,
+          "edges": [
+            0.2,
+            0.4
+          ]
+        },
+        {
+          "bin": 2,
+          "count": 0,
+          "acc": 0.0,
+          "avg_conf": 0.0,
+          "edges": [
+            0.4,
+            0.6000000000000001
+          ]
+        },
+        {
+          "bin": 3,
+          "count": 0,
+          "acc": 0.0,
+          "avg_conf": 0.0,
+          "edges": [
+            0.6000000000000001,
+            0.8
+          ]
+        },
+        {
+          "bin": 4,
+          "count": 42,
+          "acc": 1.0,
+          "avg_conf": 0.9166612766441256,
+          "edges": [
+            0.8,
+            1.0
+          ]
+        }
+      ],
+      "reconstruction_confidence_std": 0.3948260639904762
+    },
+    "controls": {
+      "PC_EXACT_MATCH_pass": true,
+      "NC_NO_APPLICABLE_pass_recon": true,
+      "NC_ALL_pass": true,
+      "NC_EMPTY_pass": true,
+      "PC_BROWSERGYM_HEALTH_pass": false,
+      "pc_baseline_correct": 1.0,
+      "pc_recon_correct": 1.0
+    },
+    "live": {
+      "attempted": 0,
+      "healthy": 0,
+      "exploratory_bound": true,
+      "browsergym_probe": {
+        "browsergym": [
+          false,
+          "ModuleNotFoundError: No module named 'browsergym'"
+        ],
+        "playwright": [
+          false,
+          "ModuleNotFoundError: No module named 'playwright'"
+        ]
+      }
+    },
+    "availability": {
+      "B_RAG_EMBED_available": false,
+      "B_RAG_EMBED_message": "sentence-transformers unavailable: ModuleNotFoundError: No module named 'sentence_transformers'",
+      "RECONSTRUCTION_LEARNED_available": false,
+      "RECONSTRUCTION_LEARNED_message": "offline LLM stack unavailable: ModuleNotFoundError: No module named 'transformers'",
+      "note": "Per frozen spec: B-RAG-EMBED unavailable -> B-RAG-TFIDF is the strong retrieval baseline; RECONSTRUCTION-LEARNED (GRPO/System-One) unavailable without offline LLM -> no learned metrics fabricated."
+    },
+    "decision_components": {
+      "S1_correct_ge_0.50": true,
+      "S1_binom_p_lt_0.05": true,
+      "S1_mcnemar_p_lt_0.05": true,
+      "S1_pass": true,
+      "S2_fa_le_0.15": true,
+      "S2_diff_ge_0.15": true,
+      "S2_mcnemar_p_lt_0.05": true,
+      "S2_pass": true,
+      "S3_pass": true,
+      "S4_precision_ge_0.85": true,
+      "S4_ece_le_0.15": true,
+      "S4_pass": true,
+      "S5_not_dominated_by_retrieval": true,
+      "S5_best_rag_correct": 0.0
+    },
+    "overall": {
+      "status": "COMPLETE",
+      "outcome": "SUPPORTS",
+      "all_survives": true,
+      "falsified": false,
+      "bounded_to": "synthetic orthogonal families (header/body/auth); live BrowserGym and learned GRPO arms unavailable and disclosed"
+    },
+    "harness_errors": [],
+    "sample_counts": {
+      "alias-OOD": 30,
+      "exact-match": 12,
+      "no-applicable": 12,
+      "empty-registry": 6
+    }
+  },
+  "controls": {
+    "PC-EXACT-MATCH": {
+      "id": "PC-EXACT-MATCH",
+      "expected": "On exact-match stratum (N=12, test intent equals registry intent verbatim, no aliasing): B-EXACT-MATCH and RECONSTRUCTION-RULE correct_resolution >=0.90 and false_accept <=0.10 with no crashes.",
+      "observed": {
+        "B-EXACT-MATCH_correct_rate": 1.0,
+        "RECONSTRUCTION-RULE_correct_rate": 1.0,
+        "reconstruction_n": 12,
+        "harness_errors": 0
+      },
+      "pass": true,
+      "evidence_ref": "derived_metrics.json:exact_match; derived_metrics.json:controls.PC_EXACT_MATCH_pass"
+    },
+    "NC-NO-APPLICABLE": {
+      "id": "NC-NO-APPLICABLE",
+      "expected": "On no-applicable stratum (N=12, OOD intent, registry has other intents): UNKNOWN precision >=0.90 and false_accept <=0.10 for every evaluated method.",
+      "observed": {
+        "RECONSTRUCTION-RULE_unknown_precision": 1.0,
+        "RECONSTRUCTION-RULE_false_accept_rate": 0.0,
+        "all_methods_precision": {
+          "B-EXACT-MATCH": 1.0,
+          "B-VERBATIM-REPLAY": 1.0,
+          "B-RAG-TFIDF": 1.0,
+          "B-RAG-EMBED": null,
+          "B-RANDOM": 1.0,
+          "RECONSTRUCTION-RULE": 1.0,
+          "RECONSTRUCTION-LEARNED": null
+        },
+        "all_methods_false_accept": {
+          "B-EXACT-MATCH": 0.0,
+          "B-VERBATIM-REPLAY": 0.0,
+          "B-RAG-TFIDF": 0.0,
+          "B-RAG-EMBED": null,
+          "B-RANDOM": 0.0,
+          "RECONSTRUCTION-RULE": 0.0,
+          "RECONSTRUCTION-LEARNED": null
+        }
+      },
+      "pass": true,
+      "evidence_ref": "derived_metrics.json:no_applicable.all_methods_precision"
+    },
+    "NC-EMPTY-REGISTRY": {
+      "id": "NC-EMPTY-REGISTRY",
+      "expected": "Empty registry (N=6) -> UNKNOWN 100% for every evaluated method (kernel does not hallucinate).",
+      "observed": {
+        "RECONSTRUCTION-RULE_unknown_rate": 1.0,
+        "all_methods_unknown": true
+      },
+      "pass": true,
+      "evidence_ref": "derived_metrics.json:no_applicable.empty_registry_*"
+    },
+    "PC-BROWSERGYM-HEALTH": {
+      "id": "PC-BROWSERGYM-HEALTH",
+      "expected": ">=80% of attempted live BrowserGym tasks load DOM/AX tree at 1280x720 (exploratory gating control).",
+      "observed": {
+        "attempted": 0,
+        "healthy": 0,
+        "browsergym_probe": {
+          "browsergym": [
+            false,
+            "ModuleNotFoundError: No module named 'browsergym'"
+          ],
+          "playwright": [
+            false,
+            "ModuleNotFoundError: No module named 'playwright'"
+          ]
+        }
+      },
+      "pass": false,
+      "note": "Live substrate unavailable in environment (no browsergym/playwright modules); control not applicable -> live stratum exploratory, claim bounded to synthetic orthogonal per frozen spec (not MEASUREMENT_INVALID).",
+      "evidence_ref": "derived_metrics.json:live"
+    },
+    "LEAK-CHECK-0/30": {
+      "id": "LEAK-CHECK-0/30",
+      "expected": "No alias-OOD test template appears verbatim in its registry (frozen: 'No test template appears verbatim in registry (0/30 leakage check)').",
+      "observed": {
+        "alias_OOD_registry_template_leaks": 0,
+        "tasks_total": 60
+      },
+      "pass": true,
+      "evidence_ref": "harness assert (run_genuine_35757768022.py leak==0); tasks.json re-checked: 0 leaks"
+    }
+  },
+  "artifacts": [
+    {
+      "path": "research/frontier/run_genuine_35757768022.py",
+      "sha256": "8168cd88dbaeb3ae4b280eba33e88e286389c2f225fd9828017d3377a7437343",
+      "role": "code"
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-35757768022/tasks.json",
+      "sha256": "81c11a8496b419c724941750e614118000f46a763f2f36f63d72a088f208f98d",
+      "role": "fixture"
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-35757768022/raw_evidence.json",
+      "sha256": "525969cf77f82023d0947dc28fee9e4f4c3454ce2323d5057a1156ef7dfd6d01",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-35757768022/derived_metrics.json",
+      "sha256": "4556ef1f596e260f7c891bbe5bcd74184dee0cc524ac57adf51a5d33f9c71316",
+      "role": "derived"
+    }
+  ],
+  "observations": [
+    "Tasks: 60 synthetic = 30 alias-OOD (3 families x 10: 7 standard prefix/resource combos + 3 held-out novel forms) + 12 exact-match + 12 no-applicable + 6 empty-registry.",
+    "Leak check: 0/30 alias-OOD tasks have the expected/test template present in their registry (asserted in harness and re-verified on serialized tasks.json).",
+    "Forbidden-key filter: 0 forbidden-key violations detected in any task derived_context (ALLOWED_STATE_KEYS whitelist enforced; derive_state asserts).",
+    "Harness errors: 0 across 60 tasks x 7 methods (420 eval rows) plus 90 diagnostic rows (510 total raw rows).",
+    "RECONSTRUCTION-RULE on alias-OOD: 30/30 correct_resolution, 0 false_accept, 0 UNKNOWN.",
+    "Baselines on alias-OOD: B-EXACT-MATCH 0/30, B-VERBATIM-REPLAY 0/30 (false_accept 30/30), B-RAG-TFIDF 0/30, B-RANDOM 0/30.",
+    "Per family (10 each) all 1.0: header (fam0) 10/10, body JSON field (fam1) 10/10, auth permission (fam2) 10/10; held-out-9 subset 9/9 correct, 0 false_accept.",
+    "Exact-match stratum: RECONSTRUCTION-RULE 12/12 correct (PC), B-EXACT-MATCH 12/12 correct (PC).",
+    "No-applicable: RECONSTRUCTION-RULE UNKNOWN precision 1.0, false_accept 0.0; all evaluated methods precision 1.0 / false_accept 0.0. Empty registry: UNKNOWN 1.0 for all evaluated methods.",
+    "RECONSTRUCTION-RULE confidence varies across tasks (std 0.395, min 0.050, max 0.980) - not constant.",
+    "ECE (RECONSTRUCTION-RULE, all strata, 5 bins) 0.0758; bootstrap 2000 mean 0.0759 CI [0.0666, 0.0850].",
+    "Channel-isolation diagnostics (rule with reduced channels): RULE-URL-ONLY 0/30 (abstains when no credential channel present), RULE-BODY-ONLY 10/30 (fam1 body family only), RULE-HEADERS-ONLY 20/30 (fam0+fam2 header families only).",
+    "Statistical tests: one-sided binomial p=1.0e-30 vs 0.10 null; McNemar RECONSTRUCTION-RULE vs B-EXACT-MATCH on correct p=1.19e-07 (b=30, c=0); McNemar false_accept vs B-VERBATIM-REPLAY p=1.19e-07 (b=0, c=30); false_accept gap verbatim-minus-reconstruction = 1.0.",
+    "Unavailable arms disclosed (no fabrication): B-RAG-EMBED (sentence-transformers absent; strong retrieval baseline remains B-RAG-TFIDF per frozen spec note), RECONSTRUCTION-LEARNED (offline LLM stack absent; no learned metrics emitted), live BrowserGym/Playwright absent (live stratum exploratory-bound)."
+  ],
+  "validity_notes": [
+    "Environment limitations: no browsergym/playwright/torch/transformers/sentence-transformers in this runner; live BrowserGym WebShop/ALFWorld stratum (frozen: up to 40 tasks) was not measured, so per frozen decision rule the confirmatory claim SURVIVES is bounded to synthetic orthogonal families (header/body/auth) with disclosure - not MEASUREMENT_INVALID.",
+    "B-RAG-EMBED reported unavailable; frozen spec authorizes B-RAG-TFIDF as the strong retrieval baseline for the S5 domination gate in that case.",
+    "RECONSTRUCTION-LEARNED (GRPO/System-One) unavailable without offline LLM; frozen spec: 'mark LEARNED unavailable and report RULE vs RAG only with disclosure; do not fabricate learned metrics'. Training cost/stability and verification-boundary economics for LEARNED are not reported. RULE economics (no external calls; linear-template structural scoring) noted in report.",
+    "Confidence distribution is bimodal (18 abstain at ~0.05-0.06, 42 at ~0.92-0.98), reflecting the binary accept/abstain gate at 0.80; ECE on 5 bins is dominated by these two buckets and may understate calibration under differently-binned/continuous confidence (parent carry-forward).",
+    "Synthetic tasks use the minimal derived dict (url, url_path, url_query, url_segments, headers_observed, body_observed; ax_tree fields None) to isolate the orthogonal header/body/auth alias mechanism; synthetic-to-real DOM/AX drift remains an open domain (do-not-assume).",
+    "Intent strings are deliberately held equal between test and all registry mechanisms on alias-OOD (frozen design), so intent-matching baselines fail solely due to template aliasing; B-EXACT-MATCH 0/30 and B-RAG-TFIDF 0/30 do not prove any retriever fails on intent-dissimilar tasks.",
+    "All methods are deterministic and seeded (SEED=42); TFIDF corpus is the per-task registry (train mechanisms only; test templates never registered)."
+  ],
+  "unresolved": [
+    "Live-browser (WebShop/ALFWorld at 1280x720 with real CDP AX trees) generalization is untested in this run; requires a runner with BrowserGym 0.14.3 + Playwright + network fixtures.",
+    "Learned GRPO/System-One critique-reconstruct adapter non-inferiority (within 0.10 correct, 0.05 ECE of RULE) and training cost/stability (3 seeds) are untested; requires offline LLM stack.",
+    "Whether 30/30 and 0.0 false_accept generalize to production SPAs, session/drift, and mixed multi-channel aliasing within one request (cross-family combination) is not covered by this stratum."
+  ]
+}
