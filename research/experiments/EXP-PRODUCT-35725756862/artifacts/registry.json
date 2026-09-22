@@ -1,0 +1,19 @@
+{
+  "action_template": {
+    "body": {
+      "sku": "${sku}",
+      "store": "${store_id}"
+    },
+    "method": "POST",
+    "path": "/api/cart/add/${sku}"
+  },
+  "applicability_guards": {},
+  "confidence": 0.9,
+  "intent": "shopping_checkout",
+  "mechanism_id": "param-shopping-001",
+  "parameter_slots": [
+    "sku",
+    "store_id"
+  ],
+  "preconditions": {}
+}

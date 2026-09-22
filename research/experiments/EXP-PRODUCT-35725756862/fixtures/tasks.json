@@ -1,0 +1,3225 @@
+{
+  "registry": {
+    "action_template": {
+      "body": {
+        "sku": "${sku}",
+        "store": "${store_id}"
+      },
+      "method": "POST",
+      "path": "/api/cart/add/${sku}"
+    },
+    "applicability_guards": {},
+    "confidence": 0.9,
+    "intent": "shopping_checkout",
+    "mechanism_id": "param-shopping-001",
+    "parameter_slots": [
+      "sku",
+      "store_id"
+    ],
+    "preconditions": {}
+  },
+  "test_tasks": [
+    {
+      "L": 10,
+      "novel_count": 0,
+      "novelty_fraction": 0.0,
+      "skus": [
+        "A_SKU_041",
+        "A_SKU_008",
+        "A_SKU_002",
+        "A_SKU_018",
+        "A_SKU_016",
+        "A_SKU_015",
+        "A_SKU_009",
+        "A_SKU_007",
+        "A_SKU_035",
+        "A_SKU_006"
+      ],
+      "stores": [
+        "A_STORE_04",
+        "A_STORE_01",
+        "A_STORE_01",
+        "A_STORE_02",
+        "A_STORE_04",
+        "A_STORE_04",
+        "A_STORE_05",
+        "A_STORE_05",
+        "A_STORE_03",
+        "A_STORE_03"
+      ],
+      "task_id": "task_0.00_00"
+    },
+    {
+      "L": 10,
+      "novel_count": 0,
+      "novelty_fraction": 0.0,
+      "skus": [
+        "A_SKU_038",
+        "A_SKU_045",
+        "A_SKU_044",
+        "A_SKU_041",
+        "A_SKU_032",
+        "A_SKU_011",
+        "A_SKU_046",
+        "A_SKU_019",
+        "A_SKU_023",
+        "A_SKU_042"
+      ],
+      "stores": [
+        "A_STORE_06",
+        "A_STORE_02",
+        "A_STORE_01",
+        "A_STORE_02",
+        "A_STORE_04",
+        "A_STORE_06",
+        "A_STORE_04",
+        "A_STORE_01",
+        "A_STORE_02",
+        "A_STORE_01"
+      ],
+      "task_id": "task_0.00_01"
+    },
+    {
+      "L": 10,
+      "novel_count": 0,
+      "novelty_fraction": 0.0,
+      "skus": [
+        "A_SKU_022",
+        "A_SKU_002",
+        "A_SKU_032",
+        "A_SKU_034",
+        "A_SKU_040",
+        "A_SKU_048",
+        "A_SKU_033",
+        "A_SKU_011",
+        "A_SKU_001",
+        "A_SKU_013"
+      ],
+      "stores": [
+        "A_STORE_02",
+        "A_STORE_02",
+        "A_STORE_04",
+        "A_STORE_03",
+        "A_STORE_06",
+        "A_STORE_06",
+        "A_STORE_02",
+        "A_STORE_03",
+        "A_STORE_02",
+        "A_STORE_01"
+      ],
+      "task_id": "task_0.00_02"
+    },
+    {
+      "L": 10,
+      "novel_count": 0,
+      "novelty_fraction": 0.0,
+      "skus": [
+        "A_SKU_008",
+        "A_SKU_014",
+        "A_SKU_038",
+        "A_SKU_005",
+        "A_SKU_047",
+        "A_SKU_046",
+        "A_SKU_031",
+        "A_SKU_006",
+        "A_SKU_041",
+        "A_SKU_034"
+      ],
+      "stores": [
+        "A_STORE_02",
+        "A_STORE_04",
+        "A_STORE_05",
+        "A_STORE_04",
+        "A_STORE_02",
+        "A_STORE_03",
+        "A_STORE_05",
+        "A_STORE_01",
+        "A_STORE_06",
+        "A_STORE_01"
+      ],
+      "task_id": "task_0.00_03"
+    },
+    {
+      "L": 10,
+      "novel_count": 0,
+      "novelty_fraction": 0.0,
+      "skus": [
+        "A_SKU_024",
+        "A_SKU_029",
+        "A_SKU_040",
+        "A_SKU_049",
+        "A_SKU_028",
+        "A_SKU_027",
+        "A_SKU_031",
+        "A_SKU_025",
+        "A_SKU_010",
+        "A_SKU_037"
+      ],
+      "stores": [
+        "A_STORE_06",
+        "A_STORE_02",
+        "A_STORE_03",
+        "A_STORE_02",
+        "A_STORE_02",
+        "A_STORE_02",
+        "A_STORE_03",
+        "A_STORE_05",
+        "A_STORE_03",
+        "A_STORE_06"
+      ],
+      "task_id": "task_0.00_04"
+    },
+    {
+      "L": 10,
+      "novel_count": 0,
+      "novelty_fraction": 0.0,
+      "skus": [
+        "A_SKU_031",
+        "A_SKU_008",
+        "A_SKU_011",
+        "A_SKU_027",
+        "A_SKU_013",
+        "A_SKU_048",
+        "A_SKU_029",
+        "A_SKU_040",
+        "A_SKU_024",
+        "A_SKU_009"
+      ],
+      "stores": [
+        "A_STORE_06",
+        "A_STORE_02",
+        "A_STORE_01",
+        "A_STORE_06",
+        "A_STORE_06",
+        "A_STORE_02",
+        "A_STORE_06",
+        "A_STORE_01",
+        "A_STORE_04",
+        "A_STORE_06"
+      ],
+      "task_id": "task_0.00_05"
+    },
+    {
+      "L": 10,
+      "novel_count": 0,
+      "novelty_fraction": 0.0,
+      "skus": [
+        "A_SKU_043",
+        "A_SKU_017",
+        "A_SKU_027",
+        "A_SKU_033",
+        "A_SKU_038",
+        "A_SKU_031",
+        "A_SKU_006",
+        "A_SKU_022",
+        "A_SKU_048",
+        "A_SKU_019"
+      ],
+      "stores": [
+        "A_STORE_04",
+        "A_STORE_03",
+        "A_STORE_03",
+        "A_STORE_06",
+        "A_STORE_03",
+        "A_STORE_04",
+        "A_STORE_03",
+        "A_STORE_06",
+        "A_STORE_06",
+        "A_STORE_02"
+      ],
+      "task_id": "task_0.00_06"
+    },
+    {
+      "L": 10,
+      "novel_count": 0,
+      "novelty_fraction": 0.0,
+      "skus": [
+        "A_SKU_027",
+        "A_SKU_020",
+        "A_SKU_009",
+        "A_SKU_038",
+        "A_SKU_008",
+        "A_SKU_039",
+        "A_SKU_041",
+        "A_SKU_004",
+        "A_SKU_028",
+        "A_SKU_012"
+      ],
+      "stores": [
+        "A_STORE_02",
+        "A_STORE_04",
+        "A_STORE_06",
+        "A_STORE_03",
+        "A_STORE_05",
+        "A_STORE_02",
+        "A_STORE_01",
+        "A_STORE_02",
+        "A_STORE_02",
+        "A_STORE_03"
+      ],
+      "task_id": "task_0.00_07"
+    },
+    {
+      "L": 10,
+      "novel_count": 0,
+      "novelty_fraction": 0.0,
+      "skus": [
+        "A_SKU_005",
+        "A_SKU_032",
+        "A_SKU_012",
+        "A_SKU_037",
+        "A_SKU_006",
+        "A_SKU_022",
+        "A_SKU_041",
+        "A_SKU_040",
+        "A_SKU_046",
+        "A_SKU_027"
+      ],
+      "stores": [
+        "A_STORE_01",
+        "A_STORE_01",
+        "A_STORE_06",
+        "A_STORE_01",
+        "A_STORE_05",
+        "A_STORE_05",
+        "A_STORE_04",
+        "A_STORE_02",
+        "A_STORE_02",
+        "A_STORE_02"
+      ],
+      "task_id": "task_0.00_08"
+    },
+    {
+      "L": 10,
+      "novel_count": 0,
+      "novelty_fraction": 0.0,
+      "skus": [
+        "A_SKU_026",
+        "A_SKU_014",
+        "A_SKU_046",
+        "A_SKU_048",
+        "A_SKU_049",
+        "A_SKU_039",
+        "A_SKU_017",
+        "A_SKU_032",
+        "A_SKU_045",
+        "A_SKU_004"
+      ],
+      "stores": [
+        "A_STORE_05",
+        "A_STORE_04",
+        "A_STORE_04",
+        "A_STORE_04",
+        "A_STORE_05",
+        "A_STORE_05",
+        "A_STORE_02",
+        "A_STORE_01",
+        "A_STORE_03",
+        "A_STORE_02"
+      ],
+      "task_id": "task_0.00_09"
+    },
+    {
+      "L": 10,
+      "novel_count": 0,
+      "novelty_fraction": 0.0,
+      "skus": [
+        "A_SKU_016",
+        "A_SKU_010",
+        "A_SKU_023",
+        "A_SKU_004",
+        "A_SKU_022",
+        "A_SKU_020",
+        "A_SKU_032",
+        "A_SKU_026",
+        "A_SKU_019",
+        "A_SKU_011"
+      ],
+      "stores": [
+        "A_STORE_03",
+        "A_STORE_02",
+        "A_STORE_04",
+        "A_STORE_05",
+        "A_STORE_06",
+        "A_STORE_02",
+        "A_STORE_06",
+        "A_STORE_03",
+        "A_STORE_05",
+        "A_STORE_06"
+      ],
+      "task_id": "task_0.00_10"
+    },
+    {
+      "L": 10,
+      "novel_count": 0,
+      "novelty_fraction": 0.0,
+      "skus": [
+        "A_SKU_005",
+        "A_SKU_014",
+        "A_SKU_020",
+        "A_SKU_048",
+        "A_SKU_027",
+        "A_SKU_049",
+        "A_SKU_043",
+        "A_SKU_036",
+        "A_SKU_015",
+        "A_SKU_034"
+      ],
+      "stores": [
+        "A_STORE_06",
+        "A_STORE_06",
+        "A_STORE_06",
+        "A_STORE_06",
+        "A_STORE_01",
+        "A_STORE_04",
+        "A_STORE_02",
+        "A_STORE_04",
+        "A_STORE_04",
+        "A_STORE_03"
+      ],
+      "task_id": "task_0.00_11"
+    },
+    {
+      "L": 10,
+      "novel_count": 0,
+      "novelty_fraction": 0.0,
+      "skus": [
+        "A_SKU_006",
+        "A_SKU_035",
+        "A_SKU_021",
+        "A_SKU_025",
+        "A_SKU_008",
+        "A_SKU_038",
+        "A_SKU_028",
+        "A_SKU_002",
+        "A_SKU_041",
+        "A_SKU_037"
+      ],
+      "stores": [
+        "A_STORE_03",
+        "A_STORE_05",
+        "A_STORE_01",
+        "A_STORE_02",
+        "A_STORE_01",
+        "A_STORE_01",
+        "A_STORE_03",
+        "A_STORE_06",
+        "A_STORE_03",
+        "A_STORE_01"
+      ],
+      "task_id": "task_0.00_12"
+    },
+    {
+      "L": 10,
+      "novel_count": 0,
+      "novelty_fraction": 0.0,
+      "skus": [
+        "A_SKU_005",
+        "A_SKU_024",
+        "A_SKU_033",
+        "A_SKU_028",
+        "A_SKU_015",
+        "A_SKU_014",
+        "A_SKU_042",
+        "A_SKU_034",
+        "A_SKU_003",
+        "A_SKU_041"
+      ],
+      "stores": [
+        "A_STORE_02",
+        "A_STORE_06",
+        "A_STORE_03",
+        "A_STORE_04",
+        "A_STORE_01",
+        "A_STORE_03",
+        "A_STORE_02",
+        "A_STORE_03",
+        "A_STORE_02",
+        "A_STORE_06"
+      ],
+      "task_id": "task_0.00_13"
+    },
+    {
+      "L": 10,
+      "novel_count": 0,
+      "novelty_fraction": 0.0,
+      "skus": [
+        "A_SKU_047",
+        "A_SKU_002",
+        "A_SKU_034",
+        "A_SKU_042",
+        "A_SKU_020",
+        "A_SKU_007",
+        "A_SKU_014",
+        "A_SKU_015",
+        "A_SKU_027",
+        "A_SKU_008"
+      ],
+      "stores": [
+        "A_STORE_03",
+        "A_STORE_01",
+        "A_STORE_01",
+        "A_STORE_03",
+        "A_STORE_04",
+        "A_STORE_03",
+        "A_STORE_04",
+        "A_STORE_01",
+        "A_STORE_04",
+        "A_STORE_06"
+      ],
+      "task_id": "task_0.00_14"
+    },
+    {
+      "L": 10,
+      "novel_count": 0,
+      "novelty_fraction": 0.0,
+      "skus": [
+        "A_SKU_024",
+        "A_SKU_046",
+        "A_SKU_048",
+        "A_SKU_042",
+        "A_SKU_013",
+        "A_SKU_043",
+        "A_SKU_023",
+        "A_SKU_010",
+        "A_SKU_007",
+        "A_SKU_012"
+      ],
+      "stores": [
+        "A_STORE_03",
+        "A_STORE_02",
+        "A_STORE_01",
+        "A_STORE_05",
+        "A_STORE_06",
+        "A_STORE_04",
+        "A_STORE_01",
+        "A_STORE_05",
+        "A_STORE_06",
+        "A_STORE_01"
+      ],
+      "task_id": "task_0.00_15"
+    },
+    {
+      "L": 10,
+      "novel_count": 0,
+      "novelty_fraction": 0.0,
+      "skus": [
+        "A_SKU_047",
+        "A_SKU_026",
+        "A_SKU_015",
+        "A_SKU_010",
+        "A_SKU_028",
+        "A_SKU_004",
+        "A_SKU_031",
+        "A_SKU_039",
+        "A_SKU_044",
+        "A_SKU_041"
+      ],
+      "stores": [
+        "A_STORE_01",
+        "A_STORE_04",
+        "A_STORE_04",
+        "A_STORE_01",
+        "A_STORE_04",
+        "A_STORE_01",
+        "A_STORE_03",
+        "A_STORE_01",
+        "A_STORE_01",
+        "A_STORE_04"
+      ],
+      "task_id": "task_0.00_16"
+    },
+    {
+      "L": 10,
+      "novel_count": 0,
+      "novelty_fraction": 0.0,
+      "skus": [
+        "A_SKU_003",
+        "A_SKU_031",
+        "A_SKU_021",
+        "A_SKU_020",
+        "A_SKU_023",
+        "A_SKU_008",
+        "A_SKU_033",
+        "A_SKU_010",
+        "A_SKU_038",
+        "A_SKU_011"
+      ],
+      "stores": [
+        "A_STORE_01",
+        "A_STORE_06",
+        "A_STORE_01",
+        "A_STORE_04",
+        "A_STORE_02",
+        "A_STORE_04",
+        "A_STORE_02",
+        "A_STORE_04",
+        "A_STORE_01",
+        "A_STORE_02"
+      ],
+      "task_id": "task_0.00_17"
+    },
+    {
+      "L": 10,
+      "novel_count": 0,
+      "novelty_fraction": 0.0,
+      "skus": [
+        "A_SKU_011",
+        "A_SKU_009",
+        "A_SKU_033",
+        "A_SKU_049",
+        "A_SKU_032",
+        "A_SKU_028",
+        "A_SKU_004",
+        "A_SKU_022",
+        "A_SKU_016",
+        "A_SKU_003"
+      ],
+      "stores": [
+        "A_STORE_05",
+        "A_STORE_06",
+        "A_STORE_05",
+        "A_STORE_02",
+        "A_STORE_06",
+        "A_STORE_05",
+        "A_STORE_04",
+        "A_STORE_03",
+        "A_STORE_01",
+        "A_STORE_03"
+      ],
+      "task_id": "task_0.00_18"
+    },
+    {
+      "L": 10,
+      "novel_count": 0,
+      "novelty_fraction": 0.0,
+      "skus": [
+        "A_SKU_019",
+        "A_SKU_001",
+        "A_SKU_027",
+        "A_SKU_005",
+        "A_SKU_044",
+        "A_SKU_010",
+        "A_SKU_041",
+        "A_SKU_002",
+        "A_SKU_034",
+        "A_SKU_016"
+      ],
+      "stores": [
+        "A_STORE_05",
+        "A_STORE_05",
+        "A_STORE_03",
+        "A_STORE_01",
+        "A_STORE_04",
+        "A_STORE_04",
+        "A_STORE_02",
+        "A_STORE_06",
+        "A_STORE_05",
+        "A_STORE_03"
+      ],
+      "task_id": "task_0.00_19"
+    },
+    {
+      "L": 10,
+      "novel_count": 2,
+      "novelty_fraction": 0.25,
+      "skus": [
+        "B_SKU_050",
+        "B_SKU_022",
+        "A_SKU_039",
+        "A_SKU_015",
+        "A_SKU_033",
+        "A_SKU_010",
+        "A_SKU_020",
+        "A_SKU_007",
+        "A_SKU_027",
+        "A_SKU_001"
+      ],
+      "stores": [
+        "B_STORE_06",
+        "B_STORE_01",
+        "A_STORE_02",
+        "A_STORE_03",
+        "A_STORE_03",
+        "A_STORE_04",
+        "A_STORE_04",
+        "A_STORE_03",
+        "A_STORE_04",
+        "A_STORE_02"
+      ],
+      "task_id": "task_0.25_00"
+    },
+    {
+      "L": 10,
+      "novel_count": 2,
+      "novelty_fraction": 0.25,
+      "skus": [
+        "B_SKU_044",
+        "B_SKU_040",
+        "A_SKU_048",
+        "A_SKU_012",
+        "A_SKU_007",
+        "A_SKU_050",
+        "A_SKU_005",
+        "A_SKU_014",
+        "A_SKU_011",
+        "A_SKU_003"
+      ],
+      "stores": [
+        "B_STORE_05",
+        "B_STORE_03",
+        "A_STORE_05",
+        "A_STORE_06",
+        "A_STORE_02",
+        "A_STORE_03",
+        "A_STORE_05",
+        "A_STORE_06",
+        "A_STORE_03",
+        "A_STORE_06"
+      ],
+      "task_id": "task_0.25_01"
+    },
+    {
+      "L": 10,
+      "novel_count": 2,
+      "novelty_fraction": 0.25,
+      "skus": [
+        "B_SKU_033",
+        "B_SKU_037",
+        "A_SKU_020",
+        "A_SKU_028",
+        "A_SKU_018",
+        "A_SKU_016",
+        "A_SKU_017",
+        "A_SKU_042",
+        "A_SKU_027",
+        "A_SKU_050"
+      ],
+      "stores": [
+        "B_STORE_06",
+        "B_STORE_01",
+        "A_STORE_04",
+        "A_STORE_01",
+        "A_STORE_01",
+        "A_STORE_01",
+        "A_STORE_03",
+        "A_STORE_03",
+        "A_STORE_04",
+        "A_STORE_06"
+      ],
+      "task_id": "task_0.25_02"
+    },
+    {
+      "L": 10,
+      "novel_count": 2,
+      "novelty_fraction": 0.25,
+      "skus": [
+        "B_SKU_036",
+        "B_SKU_014",
+        "A_SKU_042",
+        "A_SKU_010",
+        "A_SKU_018",
+        "A_SKU_049",
+        "A_SKU_029",
+        "A_SKU_007",
+        "A_SKU_021",
+        "A_SKU_023"
+      ],
+      "stores": [
+        "B_STORE_02",
+        "B_STORE_04",
+        "A_STORE_04",
+        "A_STORE_04",
+        "A_STORE_05",
+        "A_STORE_04",
+        "A_STORE_04",
+        "A_STORE_06",
+        "A_STORE_05",
+        "A_STORE_03"
+      ],
+      "task_id": "task_0.25_03"
+    },
+    {
+      "L": 10,
+      "novel_count": 2,
+      "novelty_fraction": 0.25,
+      "skus": [
+        "B_SKU_022",
+        "B_SKU_050",
+        "A_SKU_008",
+        "A_SKU_025",
+        "A_SKU_047",
+        "A_SKU_036",
+        "A_SKU_009",
+        "A_SKU_037",
+        "A_SKU_001",
+        "A_SKU_019"
+      ],
+      "stores": [
+        "B_STORE_03",
+        "B_STORE_01",
+        "A_STORE_06",
+        "A_STORE_03",
+        "A_STORE_06",
+        "A_STORE_02",
+        "A_STORE_05",
+        "A_STORE_05",
+        "A_STORE_03",
+        "A_STORE_03"
+      ],
+      "task_id": "task_0.25_04"
+    },
+    {
+      "L": 10,
+      "novel_count": 2,
+      "novelty_fraction": 0.25,
+      "skus": [
+        "B_SKU_005",
+        "B_SKU_041",
+        "A_SKU_009",
+        "A_SKU_033",
+        "A_SKU_002",
+        "A_SKU_028",
+        "A_SKU_012",
+        "A_SKU_021",
+        "A_SKU_034",
+        "A_SKU_003"
+      ],
+      "stores": [
+        "B_STORE_01",
+        "B_STORE_05",
+        "A_STORE_06",
+        "A_STORE_03",
+        "A_STORE_02",
+        "A_STORE_04",
+        "A_STORE_02",
+        "A_STORE_05",
+        "A_STORE_05",
+        "A_STORE_03"
+      ],
+      "task_id": "task_0.25_05"
+    },
+    {
+      "L": 10,
+      "novel_count": 2,
+      "novelty_fraction": 0.25,
+      "skus": [
+        "B_SKU_037",
+        "B_SKU_040",
+        "A_SKU_012",
+        "A_SKU_019",
+        "A_SKU_025",
+        "A_SKU_006",
+        "A_SKU_047",
+        "A_SKU_009",
+        "A_SKU_038",
+        "A_SKU_028"
+      ],
+      "stores": [
+        "B_STORE_05",
+        "B_STORE_04",
+        "A_STORE_03",
+        "A_STORE_03",
+        "A_STORE_05",
+        "A_STORE_03",
+        "A_STORE_06",
+        "A_STORE_06",
+        "A_STORE_04",
+        "A_STORE_04"
+      ],
+      "task_id": "task_0.25_06"
+    },
+    {
+      "L": 10,
+      "novel_count": 2,
+      "novelty_fraction": 0.25,
+      "skus": [
+        "B_SKU_025",
+        "B_SKU_040",
+        "A_SKU_009",
+        "A_SKU_019",
+        "A_SKU_024",
+        "A_SKU_030",
+        "A_SKU_013",
+        "A_SKU_048",
+        "A_SKU_035",
+        "A_SKU_041"
+      ],
+      "stores": [
+        "B_STORE_03",
+        "B_STORE_02",
+        "A_STORE_06",
+        "A_STORE_01",
+        "A_STORE_04",
+        "A_STORE_03",
+        "A_STORE_06",
+        "A_STORE_04",
+        "A_STORE_02",
+        "A_STORE_06"
+      ],
+      "task_id": "task_0.25_07"
+    },
+    {
+      "L": 10,
+      "novel_count": 2,
+      "novelty_fraction": 0.25,
+      "skus": [
+        "B_SKU_001",
+        "B_SKU_021",
+        "A_SKU_024",
+        "A_SKU_039",
+        "A_SKU_018",
+        "A_SKU_032",
+        "A_SKU_034",
+        "A_SKU_048",
+        "A_SKU_003",
+        "A_SKU_047"
+      ],
+      "stores": [
+        "B_STORE_02",
+        "B_STORE_01",
+        "A_STORE_05",
+        "A_STORE_03",
+        "A_STORE_03",
+        "A_STORE_01",
+        "A_STORE_06",
+        "A_STORE_04",
+        "A_STORE_02",
+        "A_STORE_04"
+      ],
+      "task_id": "task_0.25_08"
+    },
+    {
+      "L": 10,
+      "novel_count": 2,
+      "novelty_fraction": 0.25,
+      "skus": [
+        "B_SKU_041",
+        "B_SKU_026",
+        "A_SKU_022",
+        "A_SKU_035",
+        "A_SKU_037",
+        "A_SKU_011",
+        "A_SKU_001",
+        "A_SKU_016",
+        "A_SKU_021",
+        "A_SKU_034"
+      ],
+      "stores": [
+        "B_STORE_06",
+        "B_STORE_03",
+        "A_STORE_02",
+        "A_STORE_06",
+        "A_STORE_05",
+        "A_STORE_05",
+        "A_STORE_02",
+        "A_STORE_01",
+        "A_STORE_01",
+        "A_STORE_02"
+      ],
+      "task_id": "task_0.25_09"
+    },
+    {
+      "L": 10,
+      "novel_count": 2,
+      "novelty_fraction": 0.25,
+      "skus": [
+        "B_SKU_031",
+        "B_SKU_015",
+        "A_SKU_030",
+        "A_SKU_048",
+        "A_SKU_023",
+        "A_SKU_041",
+        "A_SKU_033",
+        "A_SKU_050",
+        "A_SKU_036",
+        "A_SKU_034"
+      ],
+      "stores": [
+        "B_STORE_06",
+        "B_STORE_04",
+        "A_STORE_01",
+        "A_STORE_05",
+        "A_STORE_06",
+        "A_STORE_03",
+        "A_STORE_05",
+        "A_STORE_04",
+        "A_STORE_06",
+        "A_STORE_04"
+      ],
+      "task_id": "task_0.25_10"
+    },
+    {
+      "L": 10,
+      "novel_count": 2,
+      "novelty_fraction": 0.25,
+      "skus": [
+        "B_SKU_043",
+        "B_SKU_024",
+        "A_SKU_027",
+        "A_SKU_029",
+        "A_SKU_008",
+        "A_SKU_046",
+        "A_SKU_004",
+        "A_SKU_006",
+        "A_SKU_032",
+        "A_SKU_015"
+      ],
+      "stores": [
+        "B_STORE_03",
+        "B_STORE_01",
+        "A_STORE_02",
+        "A_STORE_02",
+        "A_STORE_02",
+        "A_STORE_05",
+        "A_STORE_04",
+        "A_STORE_04",
+        "A_STORE_04",
+        "A_STORE_01"
+      ],
+      "task_id": "task_0.25_11"
+    },
+    {
+      "L": 10,
+      "novel_count": 2,
+      "novelty_fraction": 0.25,
+      "skus": [
+        "B_SKU_003",
+        "B_SKU_049",
+        "A_SKU_041",
+        "A_SKU_049",
+        "A_SKU_050",
+        "A_SKU_026",
+        "A_SKU_043",
+        "A_SKU_047",
+        "A_SKU_005",
+        "A_SKU_039"
+      ],
+      "stores": [
+        "B_STORE_02",
+        "B_STORE_04",
+        "A_STORE_01",
+        "A_STORE_04",
+        "A_STORE_05",
+        "A_STORE_01",
+        "A_STORE_05",
+        "A_STORE_03",
+        "A_STORE_05",
+        "A_STORE_06"
+      ],
+      "task_id": "task_0.25_12"
+    },
+    {
+      "L": 10,
+      "novel_count": 2,
+      "novelty_fraction": 0.25,
+      "skus": [
+        "B_SKU_041",
+        "B_SKU_001",
+        "A_SKU_030",
+        "A_SKU_020",
+        "A_SKU_048",
+        "A_SKU_010",
+        "A_SKU_027",
+        "A_SKU_002",
+        "A_SKU_013",
+        "A_SKU_032"
+      ],
+      "stores": [
+        "B_STORE_04",
+        "B_STORE_01",
+        "A_STORE_05",
+        "A_STORE_04",
+        "A_STORE_03",
+        "A_STORE_05",
+        "A_STORE_05",
+        "A_STORE_01",
+        "A_STORE_04",
+        "A_STORE_04"
+      ],
+      "task_id": "task_0.25_13"
+    },
+    {
+      "L": 10,
+      "novel_count": 2,
+      "novelty_fraction": 0.25,
+      "skus": [
+        "B_SKU_038",
+        "B_SKU_011",
+        "A_SKU_034",
+        "A_SKU_037",
+        "A_SKU_008",
+        "A_SKU_028",
+        "A_SKU_026",
+        "A_SKU_005",
+        "A_SKU_036",
+        "A_SKU_003"
+      ],
+      "stores": [
+        "B_STORE_01",
+        "B_STORE_03",
+        "A_STORE_02",
+        "A_STORE_02",
+        "A_STORE_01",
+        "A_STORE_06",
+        "A_STORE_04",
+        "A_STORE_01",
+        "A_STORE_04",
+        "A_STORE_05"
+      ],
+      "task_id": "task_0.25_14"
+    },
+    {
+      "L": 10,
+      "novel_count": 2,
+      "novelty_fraction": 0.25,
+      "skus": [
+        "B_SKU_002",
+        "B_SKU_004",
+        "A_SKU_047",
+        "A_SKU_001",
+        "A_SKU_006",
+        "A_SKU_025",
+        "A_SKU_038",
+        "A_SKU_021",
+        "A_SKU_020",
+        "A_SKU_007"
+      ],
+      "stores": [
+        "B_STORE_04",
+        "B_STORE_03",
+        "A_STORE_06",
+        "A_STORE_04",
+        "A_STORE_01",
+        "A_STORE_03",
+        "A_STORE_01",
+        "A_STORE_04",
+        "A_STORE_03",
+        "A_STORE_03"
+      ],
+      "task_id": "task_0.25_15"
+    },
+    {
+      "L": 10,
+      "novel_count": 2,
+      "novelty_fraction": 0.25,
+      "skus": [
+        "B_SKU_045",
+        "B_SKU_040",
+        "A_SKU_048",
+        "A_SKU_023",
+        "A_SKU_029",
+        "A_SKU_028",
+        "A_SKU_014",
+        "A_SKU_043",
+        "A_SKU_015",
+        "A_SKU_032"
+      ],
+      "stores": [
+        "B_STORE_06",
+        "B_STORE_02",
+        "A_STORE_01",
+        "A_STORE_04",
+        "A_STORE_01",
+        "A_STORE_03",
+        "A_STORE_06",
+        "A_STORE_01",
+        "A_STORE_01",
+        "A_STORE_02"
+      ],
+      "task_id": "task_0.25_16"
+    },
+    {
+      "L": 10,
+      "novel_count": 2,
+      "novelty_fraction": 0.25,
+      "skus": [
+        "B_SKU_037",
+        "B_SKU_046",
+        "A_SKU_044",
+        "A_SKU_033",
+        "A_SKU_018",
+        "A_SKU_001",
+        "A_SKU_012",
+        "A_SKU_017",
+        "A_SKU_026",
+        "A_SKU_046"
+      ],
+      "stores": [
+        "B_STORE_02",
+        "B_STORE_06",
+        "A_STORE_05",
+        "A_STORE_03",
+        "A_STORE_02",
+        "A_STORE_01",
+        "A_STORE_03",
+        "A_STORE_02",
+        "A_STORE_03",
+        "A_STORE_03"
+      ],
+      "task_id": "task_0.25_17"
+    },
+    {
+      "L": 10,
+      "novel_count": 2,
+      "novelty_fraction": 0.25,
+      "skus": [
+        "B_SKU_011",
+        "B_SKU_009",
+        "A_SKU_039",
+        "A_SKU_006",
+        "A_SKU_048",
+        "A_SKU_002",
+        "A_SKU_046",
+        "A_SKU_019",
+        "A_SKU_028",
+        "A_SKU_016"
+      ],
+      "stores": [
+        "B_STORE_02",
+        "B_STORE_06",
+        "A_STORE_05",
+        "A_STORE_03",
+        "A_STORE_04",
+        "A_STORE_05",
+        "A_STORE_03",
+        "A_STORE_04",
+        "A_STORE_01",
+        "A_STORE_02"
+      ],
+      "task_id": "task_0.25_18"
+    },
+    {
+      "L": 10,
+      "novel_count": 2,
+      "novelty_fraction": 0.25,
+      "skus": [
+        "B_SKU_046",
+        "B_SKU_047",
+        "A_SKU_032",
+        "A_SKU_003",
+        "A_SKU_011",
+        "A_SKU_035",
+        "A_SKU_006",
+        "A_SKU_012",
+        "A_SKU_047",
+        "A_SKU_040"
+      ],
+      "stores": [
+        "B_STORE_06",
+        "B_STORE_03",
+        "A_STORE_01",
+        "A_STORE_04",
+        "A_STORE_05",
+        "A_STORE_04",
+        "A_STORE_03",
+        "A_STORE_06",
+        "A_STORE_01",
+        "A_STORE_01"
+      ],
+      "task_id": "task_0.25_19"
+    },
+    {
+      "L": 10,
+      "novel_count": 5,
+      "novelty_fraction": 0.5,
+      "skus": [
+        "B_SKU_037",
+        "B_SKU_003",
+        "B_SKU_033",
+        "B_SKU_045",
+        "B_SKU_042",
+        "A_SKU_046",
+        "A_SKU_012",
+        "A_SKU_011",
+        "A_SKU_001",
+        "A_SKU_043"
+      ],
+      "stores": [
+        "B_STORE_05",
+        "B_STORE_04",
+        "B_STORE_02",
+        "B_STORE_01",
+        "B_STORE_06",
+        "A_STORE_05",
+        "A_STORE_04",
+        "A_STORE_02",
+        "A_STORE_01",
+        "A_STORE_05"
+      ],
+      "task_id": "task_0.50_00"
+    },
+    {
+      "L": 10,
+      "novel_count": 5,
+      "novelty_fraction": 0.5,
+      "skus": [
+        "B_SKU_005",
+        "B_SKU_042",
+        "B_SKU_045",
+        "B_SKU_010",
+        "B_SKU_037",
+        "A_SKU_021",
+        "A_SKU_005",
+        "A_SKU_010",
+        "A_SKU_026",
+        "A_SKU_004"
+      ],
+      "stores": [
+        "B_STORE_02",
+        "B_STORE_04",
+        "B_STORE_03",
+        "B_STORE_05",
+        "B_STORE_01",
+        "A_STORE_02",
+        "A_STORE_01",
+        "A_STORE_03",
+        "A_STORE_06",
+        "A_STORE_03"
+      ],
+      "task_id": "task_0.50_01"
+    },
+    {
+      "L": 10,
+      "novel_count": 5,
+      "novelty_fraction": 0.5,
+      "skus": [
+        "B_SKU_027",
+        "B_SKU_009",
+        "B_SKU_002",
+        "B_SKU_040",
+        "B_SKU_025",
+        "A_SKU_025",
+        "A_SKU_021",
+        "A_SKU_018",
+        "A_SKU_012",
+        "A_SKU_033"
+      ],
+      "stores": [
+        "B_STORE_04",
+        "B_STORE_01",
+        "B_STORE_06",
+        "B_STORE_05",
+        "B_STORE_03",
+        "A_STORE_04",
+        "A_STORE_05",
+        "A_STORE_01",
+        "A_STORE_01",
+        "A_STORE_01"
+      ],
+      "task_id": "task_0.50_02"
+    },
+    {
+      "L": 10,
+      "novel_count": 5,
+      "novelty_fraction": 0.5,
+      "skus": [
+        "B_SKU_011",
+        "B_SKU_049",
+        "B_SKU_039",
+        "B_SKU_031",
+        "B_SKU_047",
+        "A_SKU_012",
+        "A_SKU_010",
+        "A_SKU_030",
+        "A_SKU_016",
+        "A_SKU_040"
+      ],
+      "stores": [
+        "B_STORE_06",
+        "B_STORE_05",
+        "B_STORE_04",
+        "B_STORE_03",
+        "B_STORE_02",
+        "A_STORE_03",
+        "A_STORE_02",
+        "A_STORE_02",
+        "A_STORE_04",
+        "A_STORE_02"
+      ],
+      "task_id": "task_0.50_03"
+    },
+    {
+      "L": 10,
+      "novel_count": 5,
+      "novelty_fraction": 0.5,
+      "skus": [
+        "B_SKU_002",
+        "B_SKU_011",
+        "B_SKU_033",
+        "B_SKU_004",
+        "B_SKU_006",
+        "A_SKU_012",
+        "A_SKU_020",
+        "A_SKU_005",
+        "A_SKU_038",
+        "A_SKU_047"
+      ],
+      "stores": [
+        "B_STORE_01",
+        "B_STORE_03",
+        "B_STORE_02",
+        "B_STORE_05",
+        "B_STORE_06",
+        "A_STORE_02",
+        "A_STORE_04",
+        "A_STORE_02",
+        "A_STORE_06",
+        "A_STORE_04"
+      ],
+      "task_id": "task_0.50_04"
+    },
+    {
+      "L": 10,
+      "novel_count": 5,
+      "novelty_fraction": 0.5,
+      "skus": [
+        "B_SKU_049",
+        "B_SKU_020",
+        "B_SKU_044",
+        "B_SKU_027",
+        "B_SKU_043",
+        "A_SKU_020",
+        "A_SKU_030",
+        "A_SKU_044",
+        "A_SKU_026",
+        "A_SKU_014"
+      ],
+      "stores": [
+        "B_STORE_05",
+        "B_STORE_02",
+        "B_STORE_06",
+        "B_STORE_03",
+        "B_STORE_01",
+        "A_STORE_01",
+        "A_STORE_02",
+        "A_STORE_06",
+        "A_STORE_04",
+        "A_STORE_05"
+      ],
+      "task_id": "task_0.50_05"
+    },
+    {
+      "L": 10,
+      "novel_count": 5,
+      "novelty_fraction": 0.5,
+      "skus": [
+        "B_SKU_003",
+        "B_SKU_047",
+        "B_SKU_038",
+        "B_SKU_013",
+        "B_SKU_016",
+        "A_SKU_038",
+        "A_SKU_009",
+        "A_SKU_003",
+        "A_SKU_019",
+        "A_SKU_032"
+      ],
+      "stores": [
+        "B_STORE_03",
+        "B_STORE_05",
+        "B_STORE_02",
+        "B_STORE_01",
+        "B_STORE_06",
+        "A_STORE_06",
+        "A_STORE_04",
+        "A_STORE_02",
+        "A_STORE_03",
+        "A_STORE_04"
+      ],
+      "task_id": "task_0.50_06"
+    },
+    {
+      "L": 10,
+      "novel_count": 5,
+      "novelty_fraction": 0.5,
+      "skus": [
+        "B_SKU_041",
+        "B_SKU_003",
+        "B_SKU_036",
+        "B_SKU_006",
+        "B_SKU_012",
+        "A_SKU_029",
+        "A_SKU_008",
+        "A_SKU_048",
+        "A_SKU_006",
+        "A_SKU_045"
+      ],
+      "stores": [
+        "B_STORE_04",
+        "B_STORE_02",
+        "B_STORE_03",
+        "B_STORE_01",
+        "B_STORE_06",
+        "A_STORE_03",
+        "A_STORE_05",
+        "A_STORE_06",
+        "A_STORE_03",
+        "A_STORE_02"
+      ],
+      "task_id": "task_0.50_07"
+    },
+    {
+      "L": 10,
+      "novel_count": 5,
+      "novelty_fraction": 0.5,
+      "skus": [
+        "B_SKU_004",
+        "B_SKU_028",
+        "B_SKU_040",
+        "B_SKU_011",
+        "B_SKU_029",
+        "A_SKU_040",
+        "A_SKU_014",
+        "A_SKU_001",
+        "A_SKU_004",
+        "A_SKU_049"
+      ],
+      "stores": [
+        "B_STORE_03",
+        "B_STORE_01",
+        "B_STORE_02",
+        "B_STORE_05",
+        "B_STORE_06",
+        "A_STORE_06",
+        "A_STORE_06",
+        "A_STORE_04",
+        "A_STORE_04",
+        "A_STORE_03"
+      ],
+      "task_id": "task_0.50_08"
+    },
+    {
+      "L": 10,
+      "novel_count": 5,
+      "novelty_fraction": 0.5,
+      "skus": [
+        "B_SKU_001",
+        "B_SKU_020",
+        "B_SKU_038",
+        "B_SKU_048",
+        "B_SKU_015",
+        "A_SKU_012",
+        "A_SKU_019",
+        "A_SKU_046",
+        "A_SKU_002",
+        "A_SKU_018"
+      ],
+      "stores": [
+        "B_STORE_03",
+        "B_STORE_04",
+        "B_STORE_05",
+        "B_STORE_02",
+        "B_STORE_06",
+        "A_STORE_01",
+        "A_STORE_05",
+        "A_STORE_06",
+        "A_STORE_02",
+        "A_STORE_06"
+      ],
+      "task_id": "task_0.50_09"
+    },
+    {
+      "L": 10,
+      "novel_count": 5,
+      "novelty_fraction": 0.5,
+      "skus": [
+        "B_SKU_014",
+        "B_SKU_049",
+        "B_SKU_048",
+        "B_SKU_034",
+        "B_SKU_003",
+        "A_SKU_009",
+        "A_SKU_048",
+        "A_SKU_007",
+        "A_SKU_030",
+        "A_SKU_001"
+      ],
+      "stores": [
+        "B_STORE_03",
+        "B_STORE_06",
+        "B_STORE_02",
+        "B_STORE_01",
+        "B_STORE_05",
+        "A_STORE_05",
+        "A_STORE_04",
+        "A_STORE_02",
+        "A_STORE_05",
+        "A_STORE_06"
+      ],
+      "task_id": "task_0.50_10"
+    },
+    {
+      "L": 10,
+      "novel_count": 5,
+      "novelty_fraction": 0.5,
+      "skus": [
+        "B_SKU_040",
+        "B_SKU_014",
+        "B_SKU_006",
+        "B_SKU_018",
+        "B_SKU_021",
+        "A_SKU_026",
+        "A_SKU_014",
+        "A_SKU_010",
+        "A_SKU_042",
+        "A_SKU_012"
+      ],
+      "stores": [
+        "B_STORE_05",
+        "B_STORE_03",
+        "B_STORE_06",
+        "B_STORE_04",
+        "B_STORE_01",
+        "A_STORE_04",
+        "A_STORE_05",
+        "A_STORE_05",
+        "A_STORE_05",
+        "A_STORE_02"
+      ],
+      "task_id": "task_0.50_11"
+    },
+    {
+      "L": 10,
+      "novel_count": 5,
+      "novelty_fraction": 0.5,
+      "skus": [
+        "B_SKU_020",
+        "B_SKU_009",
+        "B_SKU_023",
+        "B_SKU_028",
+        "B_SKU_010",
+        "A_SKU_036",
+        "A_SKU_017",
+        "A_SKU_033",
+        "A_SKU_006",
+        "A_SKU_003"
+      ],
+      "stores": [
+        "B_STORE_01",
+        "B_STORE_04",
+        "B_STORE_03",
+        "B_STORE_06",
+        "B_STORE_02",
+        "A_STORE_04",
+        "A_STORE_01",
+        "A_STORE_01",
+        "A_STORE_02",
+        "A_STORE_06"
+      ],
+      "task_id": "task_0.50_12"
+    },
+    {
+      "L": 10,
+      "novel_count": 5,
+      "novelty_fraction": 0.5,
+      "skus": [
+        "B_SKU_048",
+        "B_SKU_039",
+        "B_SKU_027",
+        "B_SKU_019",
+        "B_SKU_022",
+        "A_SKU_029",
+        "A_SKU_049",
+        "A_SKU_024",
+        "A_SKU_009",
+        "A_SKU_004"
+      ],
+      "stores": [
+        "B_STORE_05",
+        "B_STORE_03",
+        "B_STORE_02",
+        "B_STORE_01",
+        "B_STORE_04",
+        "A_STORE_01",
+        "A_STORE_06",
+        "A_STORE_05",
+        "A_STORE_04",
+        "A_STORE_01"
+      ],
+      "task_id": "task_0.50_13"
+    },
+    {
+      "L": 10,
+      "novel_count": 5,
+      "novelty_fraction": 0.5,
+      "skus": [
+        "B_SKU_005",
+        "B_SKU_048",
+        "B_SKU_014",
+        "B_SKU_018",
+        "B_SKU_013",
+        "A_SKU_032",
+        "A_SKU_031",
+        "A_SKU_019",
+        "A_SKU_037",
+        "A_SKU_027"
+      ],
+      "stores": [
+        "B_STORE_04",
+        "B_STORE_03",
+        "B_STORE_06",
+        "B_STORE_05",
+        "B_STORE_01",
+        "A_STORE_04",
+        "A_STORE_04",
+        "A_STORE_04",
+        "A_STORE_02",
+        "A_STORE_04"
+      ],
+      "task_id": "task_0.50_14"
+    },
+    {
+      "L": 10,
+      "novel_count": 5,
+      "novelty_fraction": 0.5,
+      "skus": [
+        "B_SKU_014",
+        "B_SKU_027",
+        "B_SKU_040",
+        "B_SKU_018",
+        "B_SKU_017",
+        "A_SKU_023",
+        "A_SKU_015",
+        "A_SKU_013",
+        "A_SKU_019",
+        "A_SKU_033"
+      ],
+      "stores": [
+        "B_STORE_01",
+        "B_STORE_06",
+        "B_STORE_03",
+        "B_STORE_04",
+        "B_STORE_02",
+        "A_STORE_01",
+        "A_STORE_02",
+        "A_STORE_02",
+        "A_STORE_02",
+        "A_STORE_03"
+      ],
+      "task_id": "task_0.50_15"
+    },
+    {
+      "L": 10,
+      "novel_count": 5,
+      "novelty_fraction": 0.5,
+      "skus": [
+        "B_SKU_050",
+        "B_SKU_007",
+        "B_SKU_016",
+        "B_SKU_038",
+        "B_SKU_030",
+        "A_SKU_037",
+        "A_SKU_006",
+        "A_SKU_010",
+        "A_SKU_032",
+        "A_SKU_035"
+      ],
+      "stores": [
+        "B_STORE_04",
+        "B_STORE_03",
+        "B_STORE_06",
+        "B_STORE_05",
+        "B_STORE_02",
+        "A_STORE_01",
+        "A_STORE_06",
+        "A_STORE_04",
+        "A_STORE_02",
+        "A_STORE_02"
+      ],
+      "task_id": "task_0.50_16"
+    },
+    {
+      "L": 10,
+      "novel_count": 5,
+      "novelty_fraction": 0.5,
+      "skus": [
+        "B_SKU_002",
+        "B_SKU_039",
+        "B_SKU_032",
+        "B_SKU_048",
+        "B_SKU_036",
+        "A_SKU_003",
+        "A_SKU_022",
+        "A_SKU_017",
+        "A_SKU_039",
+        "A_SKU_019"
+      ],
+      "stores": [
+        "B_STORE_05",
+        "B_STORE_02",
+        "B_STORE_01",
+        "B_STORE_04",
+        "B_STORE_03",
+        "A_STORE_04",
+        "A_STORE_02",
+        "A_STORE_05",
+        "A_STORE_02",
+        "A_STORE_04"
+      ],
+      "task_id": "task_0.50_17"
+    },
+    {
+      "L": 10,
+      "novel_count": 5,
+      "novelty_fraction": 0.5,
+      "skus": [
+        "B_SKU_016",
+        "B_SKU_048",
+        "B_SKU_029",
+        "B_SKU_014",
+        "B_SKU_020",
+        "A_SKU_044",
+        "A_SKU_030",
+        "A_SKU_004",
+        "A_SKU_001",
+        "A_SKU_038"
+      ],
+      "stores": [
+        "B_STORE_04",
+        "B_STORE_01",
+        "B_STORE_05",
+        "B_STORE_02",
+        "B_STORE_03",
+        "A_STORE_01",
+        "A_STORE_02",
+        "A_STORE_04",
+        "A_STORE_01",
+        "A_STORE_05"
+      ],
+      "task_id": "task_0.50_18"
+    },
+    {
+      "L": 10,
+      "novel_count": 5,
+      "novelty_fraction": 0.5,
+      "skus": [
+        "B_SKU_007",
+        "B_SKU_036",
+        "B_SKU_025",
+        "B_SKU_016",
+        "B_SKU_002",
+        "A_SKU_015",
+        "A_SKU_031",
+        "A_SKU_017",
+        "A_SKU_025",
+        "A_SKU_013"
+      ],
+      "stores": [
+        "B_STORE_06",
+        "B_STORE_05",
+        "B_STORE_04",
+        "B_STORE_03",
+        "B_STORE_01",
+        "A_STORE_05",
+        "A_STORE_03",
+        "A_STORE_04",
+        "A_STORE_06",
+        "A_STORE_04"
+      ],
+      "task_id": "task_0.50_19"
+    },
+    {
+      "L": 10,
+      "novel_count": 7,
+      "novelty_fraction": 0.75,
+      "skus": [
+        "B_SKU_050",
+        "B_SKU_046",
+        "B_SKU_012",
+        "B_SKU_001",
+        "B_SKU_033",
+        "B_SKU_030",
+        "B_SKU_014",
+        "A_SKU_007",
+        "A_SKU_045",
+        "A_SKU_047"
+      ],
+      "stores": [
+        "B_STORE_04",
+        "B_STORE_06",
+        "B_STORE_01",
+        "B_STORE_03",
+        "B_STORE_05",
+        "B_STORE_02",
+        "A_STORE_06",
+        "A_STORE_05",
+        "A_STORE_01",
+        "A_STORE_06"
+      ],
+      "task_id": "task_0.75_00"
+    },
+    {
+      "L": 10,
+      "novel_count": 7,
+      "novelty_fraction": 0.75,
+      "skus": [
+        "B_SKU_030",
+        "B_SKU_023",
+        "B_SKU_045",
+        "B_SKU_026",
+        "B_SKU_042",
+        "B_SKU_037",
+        "B_SKU_043",
+        "A_SKU_048",
+        "A_SKU_032",
+        "A_SKU_038"
+      ],
+      "stores": [
+        "B_STORE_02",
+        "B_STORE_06",
+        "B_STORE_05",
+        "B_STORE_03",
+        "B_STORE_04",
+        "B_STORE_01",
+        "A_STORE_04",
+        "A_STORE_03",
+        "A_STORE_06",
+        "A_STORE_03"
+      ],
+      "task_id": "task_0.75_01"
+    },
+    {
+      "L": 10,
+      "novel_count": 7,
+      "novelty_fraction": 0.75,
+      "skus": [
+        "B_SKU_002",
+        "B_SKU_045",
+        "B_SKU_021",
+        "B_SKU_027",
+        "B_SKU_050",
+        "B_SKU_006",
+        "B_SKU_034",
+        "A_SKU_010",
+        "A_SKU_008",
+        "A_SKU_047"
+      ],
+      "stores": [
+        "B_STORE_02",
+        "B_STORE_05",
+        "B_STORE_04",
+        "B_STORE_06",
+        "B_STORE_01",
+        "B_STORE_03",
+        "A_STORE_02",
+        "A_STORE_02",
+        "A_STORE_04",
+        "A_STORE_01"
+      ],
+      "task_id": "task_0.75_02"
+    },
+    {
+      "L": 10,
+      "novel_count": 7,
+      "novelty_fraction": 0.75,
+      "skus": [
+        "B_SKU_030",
+        "B_SKU_048",
+        "B_SKU_037",
+        "B_SKU_011",
+        "B_SKU_008",
+        "B_SKU_042",
+        "B_SKU_006",
+        "A_SKU_003",
+        "A_SKU_044",
+        "A_SKU_017"
+      ],
+      "stores": [
+        "B_STORE_04",
+        "B_STORE_01",
+        "B_STORE_02",
+        "B_STORE_05",
+        "B_STORE_03",
+        "B_STORE_06",
+        "A_STORE_04",
+        "A_STORE_02",
+        "A_STORE_03",
+        "A_STORE_03"
+      ],
+      "task_id": "task_0.75_03"
+    },
+    {
+      "L": 10,
+      "novel_count": 7,
+      "novelty_fraction": 0.75,
+      "skus": [
+        "B_SKU_046",
+        "B_SKU_012",
+        "B_SKU_016",
+        "B_SKU_047",
+        "B_SKU_004",
+        "B_SKU_041",
+        "B_SKU_013",
+        "A_SKU_003",
+        "A_SKU_020",
+        "A_SKU_024"
+      ],
+      "stores": [
+        "B_STORE_05",
+        "B_STORE_04",
+        "B_STORE_02",
+        "B_STORE_01",
+        "B_STORE_06",
+        "B_STORE_03",
+        "A_STORE_03",
+        "A_STORE_01",
+        "A_STORE_05",
+        "A_STORE_02"
+      ],
+      "task_id": "task_0.75_04"
+    },
+    {
+      "L": 10,
+      "novel_count": 7,
+      "novelty_fraction": 0.75,
+      "skus": [
+        "B_SKU_013",
+        "B_SKU_021",
+        "B_SKU_024",
+        "B_SKU_036",
+        "B_SKU_011",
+        "B_SKU_034",
+        "B_SKU_043",
+        "A_SKU_005",
+        "A_SKU_036",
+        "A_SKU_050"
+      ],
+      "stores": [
+        "B_STORE_05",
+        "B_STORE_03",
+        "B_STORE_01",
+        "B_STORE_04",
+        "B_STORE_06",
+        "B_STORE_02",
+        "A_STORE_05",
+        "A_STORE_05",
+        "A_STORE_06",
+        "A_STORE_05"
+      ],
+      "task_id": "task_0.75_05"
+    },
+    {
+      "L": 10,
+      "novel_count": 7,
+      "novelty_fraction": 0.75,
+      "skus": [
+        "B_SKU_049",
+        "B_SKU_037",
+        "B_SKU_009",
+        "B_SKU_017",
+        "B_SKU_003",
+        "B_SKU_039",
+        "B_SKU_020",
+        "A_SKU_018",
+        "A_SKU_015",
+        "A_SKU_039"
+      ],
+      "stores": [
+        "B_STORE_01",
+        "B_STORE_04",
+        "B_STORE_02",
+        "B_STORE_06",
+        "B_STORE_03",
+        "B_STORE_05",
+        "A_STORE_06",
+        "A_STORE_01",
+        "A_STORE_05",
+        "A_STORE_03"
+      ],
+      "task_id": "task_0.75_06"
+    },
+    {
+      "L": 10,
+      "novel_count": 7,
+      "novelty_fraction": 0.75,
+      "skus": [
+        "B_SKU_009",
+        "B_SKU_003",
+        "B_SKU_010",
+        "B_SKU_007",
+        "B_SKU_013",
+        "B_SKU_008",
+        "B_SKU_017",
+        "A_SKU_046",
+        "A_SKU_024",
+        "A_SKU_010"
+      ],
+      "stores": [
+        "B_STORE_06",
+        "B_STORE_05",
+        "B_STORE_03",
+        "B_STORE_02",
+        "B_STORE_04",
+        "B_STORE_01",
+        "A_STORE_05",
+        "A_STORE_06",
+        "A_STORE_05",
+        "A_STORE_01"
+      ],
+      "task_id": "task_0.75_07"
+    },
+    {
+      "L": 10,
+      "novel_count": 7,
+      "novelty_fraction": 0.75,
+      "skus": [
+        "B_SKU_005",
+        "B_SKU_039",
+        "B_SKU_024",
+        "B_SKU_015",
+        "B_SKU_022",
+        "B_SKU_025",
+        "B_SKU_016",
+        "A_SKU_050",
+        "A_SKU_028",
+        "A_SKU_011"
+      ],
+      "stores": [
+        "B_STORE_04",
+        "B_STORE_05",
+        "B_STORE_03",
+        "B_STORE_06",
+        "B_STORE_02",
+        "B_STORE_01",
+        "A_STORE_01",
+        "A_STORE_05",
+        "A_STORE_03",
+        "A_STORE_05"
+      ],
+      "task_id": "task_0.75_08"
+    },
+    {
+      "L": 10,
+      "novel_count": 7,
+      "novelty_fraction": 0.75,
+      "skus": [
+        "B_SKU_001",
+        "B_SKU_026",
+        "B_SKU_040",
+        "B_SKU_015",
+        "B_SKU_028",
+        "B_SKU_025",
+        "B_SKU_029",
+        "A_SKU_031",
+        "A_SKU_027",
+        "A_SKU_045"
+      ],
+      "stores": [
+        "B_STORE_01",
+        "B_STORE_06",
+        "B_STORE_02",
+        "B_STORE_05",
+        "B_STORE_04",
+        "B_STORE_03",
+        "A_STORE_05",
+        "A_STORE_02",
+        "A_STORE_03",
+        "A_STORE_06"
+      ],
+      "task_id": "task_0.75_09"
+    },
+    {
+      "L": 10,
+      "novel_count": 7,
+      "novelty_fraction": 0.75,
+      "skus": [
+        "B_SKU_045",
+        "B_SKU_003",
+        "B_SKU_022",
+        "B_SKU_015",
+        "B_SKU_002",
+        "B_SKU_050",
+        "B_SKU_017",
+        "A_SKU_021",
+        "A_SKU_030",
+        "A_SKU_022"
+      ],
+      "stores": [
+        "B_STORE_02",
+        "B_STORE_06",
+        "B_STORE_05",
+        "B_STORE_04",
+        "B_STORE_01",
+        "B_STORE_03",
+        "A_STORE_03",
+        "A_STORE_04",
+        "A_STORE_02",
+        "A_STORE_06"
+      ],
+      "task_id": "task_0.75_10"
+    },
+    {
+      "L": 10,
+      "novel_count": 7,
+      "novelty_fraction": 0.75,
+      "skus": [
+        "B_SKU_015",
+        "B_SKU_022",
+        "B_SKU_001",
+        "B_SKU_048",
+        "B_SKU_028",
+        "B_SKU_025",
+        "B_SKU_008",
+        "A_SKU_022",
+        "A_SKU_003",
+        "A_SKU_009"
+      ],
+      "stores": [
+        "B_STORE_01",
+        "B_STORE_05",
+        "B_STORE_02",
+        "B_STORE_06",
+        "B_STORE_03",
+        "B_STORE_04",
+        "A_STORE_06",
+        "A_STORE_01",
+        "A_STORE_03",
+        "A_STORE_06"
+      ],
+      "task_id": "task_0.75_11"
+    },
+    {
+      "L": 10,
+      "novel_count": 7,
+      "novelty_fraction": 0.75,
+      "skus": [
+        "B_SKU_032",
+        "B_SKU_035",
+        "B_SKU_045",
+        "B_SKU_008",
+        "B_SKU_030",
+        "B_SKU_015",
+        "B_SKU_006",
+        "A_SKU_039",
+        "A_SKU_034",
+        "A_SKU_001"
+      ],
+      "stores": [
+        "B_STORE_02",
+        "B_STORE_05",
+        "B_STORE_01",
+        "B_STORE_03",
+        "B_STORE_04",
+        "B_STORE_06",
+        "A_STORE_03",
+        "A_STORE_04",
+        "A_STORE_05",
+        "A_STORE_05"
+      ],
+      "task_id": "task_0.75_12"
+    },
+    {
+      "L": 10,
+      "novel_count": 7,
+      "novelty_fraction": 0.75,
+      "skus": [
+        "B_SKU_041",
+        "B_SKU_016",
+        "B_SKU_037",
+        "B_SKU_001",
+        "B_SKU_028",
+        "B_SKU_017",
+        "B_SKU_010",
+        "A_SKU_011",
+        "A_SKU_003",
+        "A_SKU_010"
+      ],
+      "stores": [
+        "B_STORE_06",
+        "B_STORE_05",
+        "B_STORE_02",
+        "B_STORE_03",
+        "B_STORE_01",
+        "B_STORE_04",
+        "A_STORE_05",
+        "A_STORE_05",
+        "A_STORE_06",
+        "A_STORE_05"
+      ],
+      "task_id": "task_0.75_13"
+    },
+    {
+      "L": 10,
+      "novel_count": 7,
+      "novelty_fraction": 0.75,
+      "skus": [
+        "B_SKU_030",
+        "B_SKU_042",
+        "B_SKU_008",
+        "B_SKU_039",
+        "B_SKU_013",
+        "B_SKU_035",
+        "B_SKU_048",
+        "A_SKU_028",
+        "A_SKU_026",
+        "A_SKU_047"
+      ],
+      "stores": [
+        "B_STORE_01",
+        "B_STORE_03",
+        "B_STORE_02",
+        "B_STORE_06",
+        "B_STORE_04",
+        "B_STORE_05",
+        "A_STORE_06",
+        "A_STORE_03",
+        "A_STORE_03",
+        "A_STORE_03"
+      ],
+      "task_id": "task_0.75_14"
+    },
+    {
+      "L": 10,
+      "novel_count": 7,
+      "novelty_fraction": 0.75,
+      "skus": [
+        "B_SKU_040",
+        "B_SKU_047",
+        "B_SKU_022",
+        "B_SKU_011",
+        "B_SKU_032",
+        "B_SKU_002",
+        "B_SKU_019",
+        "A_SKU_050",
+        "A_SKU_035",
+        "A_SKU_022"
+      ],
+      "stores": [
+        "B_STORE_04",
+        "B_STORE_06",
+        "B_STORE_02",
+        "B_STORE_01",
+        "B_STORE_05",
+        "B_STORE_03",
+        "A_STORE_01",
+        "A_STORE_05",
+        "A_STORE_02",
+        "A_STORE_06"
+      ],
+      "task_id": "task_0.75_15"
+    },
+    {
+      "L": 10,
+      "novel_count": 7,
+      "novelty_fraction": 0.75,
+      "skus": [
+        "B_SKU_049",
+        "B_SKU_011",
+        "B_SKU_025",
+        "B_SKU_007",
+        "B_SKU_042",
+        "B_SKU_031",
+        "B_SKU_019",
+        "A_SKU_009",
+        "A_SKU_026",
+        "A_SKU_022"
+      ],
+      "stores": [
+        "B_STORE_04",
+        "B_STORE_03",
+        "B_STORE_06",
+        "B_STORE_05",
+        "B_STORE_02",
+        "B_STORE_01",
+        "A_STORE_01",
+        "A_STORE_03",
+        "A_STORE_04",
+        "A_STORE_04"
+      ],
+      "task_id": "task_0.75_16"
+    },
+    {
+      "L": 10,
+      "novel_count": 7,
+      "novelty_fraction": 0.75,
+      "skus": [
+        "B_SKU_027",
+        "B_SKU_005",
+        "B_SKU_032",
+        "B_SKU_041",
+        "B_SKU_043",
+        "B_SKU_019",
+        "B_SKU_034",
+        "A_SKU_041",
+        "A_SKU_022",
+        "A_SKU_009"
+      ],
+      "stores": [
+        "B_STORE_04",
+        "B_STORE_02",
+        "B_STORE_05",
+        "B_STORE_03",
+        "B_STORE_01",
+        "B_STORE_06",
+        "A_STORE_06",
+        "A_STORE_01",
+        "A_STORE_06",
+        "A_STORE_02"
+      ],
+      "task_id": "task_0.75_17"
+    },
+    {
+      "L": 10,
+      "novel_count": 7,
+      "novelty_fraction": 0.75,
+      "skus": [
+        "B_SKU_035",
+        "B_SKU_036",
+        "B_SKU_008",
+        "B_SKU_002",
+        "B_SKU_045",
+        "B_SKU_034",
+        "B_SKU_027",
+        "A_SKU_036",
+        "A_SKU_003",
+        "A_SKU_032"
+      ],
+      "stores": [
+        "B_STORE_03",
+        "B_STORE_02",
+        "B_STORE_05",
+        "B_STORE_06",
+        "B_STORE_04",
+        "B_STORE_01",
+        "A_STORE_02",
+        "A_STORE_03",
+        "A_STORE_02",
+        "A_STORE_02"
+      ],
+      "task_id": "task_0.75_18"
+    },
+    {
+      "L": 10,
+      "novel_count": 7,
+      "novelty_fraction": 0.75,
+      "skus": [
+        "B_SKU_033",
+        "B_SKU_029",
+        "B_SKU_017",
+        "B_SKU_045",
+        "B_SKU_039",
+        "B_SKU_035",
+        "B_SKU_018",
+        "A_SKU_037",
+        "A_SKU_038",
+        "A_SKU_007"
+      ],
+      "stores": [
+        "B_STORE_05",
+        "B_STORE_02",
+        "B_STORE_03",
+        "B_STORE_06",
+        "B_STORE_04",
+        "B_STORE_01",
+        "A_STORE_03",
+        "A_STORE_01",
+        "A_STORE_03",
+        "A_STORE_03"
+      ],
+      "task_id": "task_0.75_19"
+    },
+    {
+      "L": 10,
+      "novel_count": 10,
+      "novelty_fraction": 1.0,
+      "skus": [
+        "B_SKU_022",
+        "B_SKU_027",
+        "B_SKU_015",
+        "B_SKU_029",
+        "B_SKU_031",
+        "B_SKU_038",
+        "B_SKU_020",
+        "B_SKU_026",
+        "B_SKU_035",
+        "B_SKU_009"
+      ],
+      "stores": [
+        "B_STORE_02",
+        "B_STORE_06",
+        "B_STORE_03",
+        "B_STORE_01",
+        "B_STORE_05",
+        "B_STORE_04",
+        "A_STORE_04",
+        "A_STORE_02",
+        "A_STORE_06",
+        "A_STORE_04"
+      ],
+      "task_id": "task_1.00_00"
+    },
+    {
+      "L": 10,
+      "novel_count": 10,
+      "novelty_fraction": 1.0,
+      "skus": [
+        "B_SKU_006",
+        "B_SKU_023",
+        "B_SKU_003",
+        "B_SKU_031",
+        "B_SKU_038",
+        "B_SKU_001",
+        "B_SKU_037",
+        "B_SKU_045",
+        "B_SKU_020",
+        "B_SKU_026"
+      ],
+      "stores": [
+        "B_STORE_06",
+        "B_STORE_03",
+        "B_STORE_01",
+        "B_STORE_02",
+        "B_STORE_04",
+        "B_STORE_05",
+        "A_STORE_01",
+        "A_STORE_03",
+        "A_STORE_02",
+        "A_STORE_05"
+      ],
+      "task_id": "task_1.00_01"
+    },
+    {
+      "L": 10,
+      "novel_count": 10,
+      "novelty_fraction": 1.0,
+      "skus": [
+        "B_SKU_009",
+        "B_SKU_050",
+        "B_SKU_049",
+        "B_SKU_004",
+        "B_SKU_007",
+        "B_SKU_002",
+        "B_SKU_024",
+        "B_SKU_047",
+        "B_SKU_010",
+        "B_SKU_034"
+      ],
+      "stores": [
+        "B_STORE_05",
+        "B_STORE_04",
+        "B_STORE_03",
+        "B_STORE_06",
+        "B_STORE_02",
+        "B_STORE_01",
+        "A_STORE_01",
+        "A_STORE_01",
+        "A_STORE_05",
+        "A_STORE_02"
+      ],
+      "task_id": "task_1.00_02"
+    },
+    {
+      "L": 10,
+      "novel_count": 10,
+      "novelty_fraction": 1.0,
+      "skus": [
+        "B_SKU_002",
+        "B_SKU_014",
+        "B_SKU_009",
+        "B_SKU_010",
+        "B_SKU_045",
+        "B_SKU_019",
+        "B_SKU_050",
+        "B_SKU_043",
+        "B_SKU_028",
+        "B_SKU_007"
+      ],
+      "stores": [
+        "B_STORE_02",
+        "B_STORE_03",
+        "B_STORE_01",
+        "B_STORE_04",
+        "B_STORE_05",
+        "B_STORE_06",
+        "A_STORE_01",
+        "A_STORE_05",
+        "A_STORE_01",
+        "A_STORE_04"
+      ],
+      "task_id": "task_1.00_03"
+    },
+    {
+      "L": 10,
+      "novel_count": 10,
+      "novelty_fraction": 1.0,
+      "skus": [
+        "B_SKU_039",
+        "B_SKU_022",
+        "B_SKU_005",
+        "B_SKU_025",
+        "B_SKU_001",
+        "B_SKU_015",
+        "B_SKU_021",
+        "B_SKU_008",
+        "B_SKU_016",
+        "B_SKU_040"
+      ],
+      "stores": [
+        "B_STORE_06",
+        "B_STORE_05",
+        "B_STORE_04",
+        "B_STORE_03",
+        "B_STORE_02",
+        "B_STORE_01",
+        "A_STORE_05",
+        "A_STORE_03",
+        "A_STORE_06",
+        "A_STORE_04"
+      ],
+      "task_id": "task_1.00_04"
+    },
+    {
+      "L": 10,
+      "novel_count": 10,
+      "novelty_fraction": 1.0,
+      "skus": [
+        "B_SKU_033",
+        "B_SKU_012",
+        "B_SKU_013",
+        "B_SKU_003",
+        "B_SKU_007",
+        "B_SKU_027",
+        "B_SKU_014",
+        "B_SKU_017",
+        "B_SKU_016",
+        "B_SKU_041"
+      ],
+      "stores": [
+        "B_STORE_05",
+        "B_STORE_03",
+        "B_STORE_01",
+        "B_STORE_04",
+        "B_STORE_06",
+        "B_STORE_02",
+        "A_STORE_05",
+        "A_STORE_01",
+        "A_STORE_06",
+        "A_STORE_05"
+      ],
+      "task_id": "task_1.00_05"
+    },
+    {
+      "L": 10,
+      "novel_count": 10,
+      "novelty_fraction": 1.0,
+      "skus": [
+        "B_SKU_020",
+        "B_SKU_047",
+        "B_SKU_041",
+        "B_SKU_018",
+        "B_SKU_045",
+        "B_SKU_046",
+        "B_SKU_002",
+        "B_SKU_043",
+        "B_SKU_008",
+        "B_SKU_027"
+      ],
+      "stores": [
+        "B_STORE_03",
+        "B_STORE_02",
+        "B_STORE_04",
+        "B_STORE_06",
+        "B_STORE_05",
+        "B_STORE_01",
+        "A_STORE_05",
+        "A_STORE_01",
+        "A_STORE_02",
+        "A_STORE_06"
+      ],
+      "task_id": "task_1.00_06"
+    },
+    {
+      "L": 10,
+      "novel_count": 10,
+      "novelty_fraction": 1.0,
+      "skus": [
+        "B_SKU_023",
+        "B_SKU_029",
+        "B_SKU_015",
+        "B_SKU_040",
+        "B_SKU_027",
+        "B_SKU_043",
+        "B_SKU_028",
+        "B_SKU_019",
+        "B_SKU_035",
+        "B_SKU_047"
+      ],
+      "stores": [
+        "B_STORE_03",
+        "B_STORE_04",
+        "B_STORE_06",
+        "B_STORE_05",
+        "B_STORE_02",
+        "B_STORE_01",
+        "A_STORE_01",
+        "A_STORE_05",
+        "A_STORE_01",
+        "A_STORE_01"
+      ],
+      "task_id": "task_1.00_07"
+    },
+    {
+      "L": 10,
+      "novel_count": 10,
+      "novelty_fraction": 1.0,
+      "skus": [
+        "B_SKU_007",
+        "B_SKU_010",
+        "B_SKU_021",
+        "B_SKU_048",
+        "B_SKU_005",
+        "B_SKU_027",
+        "B_SKU_011",
+        "B_SKU_013",
+        "B_SKU_009",
+        "B_SKU_003"
+      ],
+      "stores": [
+        "B_STORE_03",
+        "B_STORE_04",
+        "B_STORE_01",
+        "B_STORE_06",
+        "B_STORE_02",
+        "B_STORE_05",
+        "A_STORE_02",
+        "A_STORE_01",
+        "A_STORE_04",
+        "A_STORE_02"
+      ],
+      "task_id": "task_1.00_08"
+    },
+    {
+      "L": 10,
+      "novel_count": 10,
+      "novelty_fraction": 1.0,
+      "skus": [
+        "B_SKU_044",
+        "B_SKU_025",
+        "B_SKU_003",
+        "B_SKU_012",
+        "B_SKU_010",
+        "B_SKU_002",
+        "B_SKU_036",
+        "B_SKU_050",
+        "B_SKU_043",
+        "B_SKU_011"
+      ],
+      "stores": [
+        "B_STORE_02",
+        "B_STORE_06",
+        "B_STORE_01",
+        "B_STORE_04",
+        "B_STORE_03",
+        "B_STORE_05",
+        "A_STORE_04",
+        "A_STORE_04",
+        "A_STORE_03",
+        "A_STORE_05"
+      ],
+      "task_id": "task_1.00_09"
+    },
+    {
+      "L": 10,
+      "novel_count": 10,
+      "novelty_fraction": 1.0,
+      "skus": [
+        "B_SKU_017",
+        "B_SKU_019",
+        "B_SKU_021",
+        "B_SKU_037",
+        "B_SKU_030",
+        "B_SKU_002",
+        "B_SKU_044",
+        "B_SKU_038",
+        "B_SKU_035",
+        "B_SKU_003"
+      ],
+      "stores": [
+        "B_STORE_06",
+        "B_STORE_05",
+        "B_STORE_04",
+        "B_STORE_02",
+        "B_STORE_01",
+        "B_STORE_03",
+        "A_STORE_05",
+        "A_STORE_05",
+        "A_STORE_01",
+        "A_STORE_02"
+      ],
+      "task_id": "task_1.00_10"
+    },
+    {
+      "L": 10,
+      "novel_count": 10,
+      "novelty_fraction": 1.0,
+      "skus": [
+        "B_SKU_017",
+        "B_SKU_026",
+        "B_SKU_031",
+        "B_SKU_003",
+        "B_SKU_044",
+        "B_SKU_024",
+        "B_SKU_036",
+        "B_SKU_005",
+        "B_SKU_034",
+        "B_SKU_032"
+      ],
+      "stores": [
+        "B_STORE_01",
+        "B_STORE_06",
+        "B_STORE_05",
+        "B_STORE_02",
+        "B_STORE_04",
+        "B_STORE_03",
+        "A_STORE_03",
+        "A_STORE_04",
+        "A_STORE_02",
+        "A_STORE_02"
+      ],
+      "task_id": "task_1.00_11"
+    },
+    {
+      "L": 10,
+      "novel_count": 10,
+      "novelty_fraction": 1.0,
+      "skus": [
+        "B_SKU_005",
+        "B_SKU_026",
+        "B_SKU_041",
+        "B_SKU_015",
+        "B_SKU_020",
+        "B_SKU_042",
+        "B_SKU_006",
+        "B_SKU_033",
+        "B_SKU_024",
+        "B_SKU_001"
+      ],
+      "stores": [
+        "B_STORE_04",
+        "B_STORE_02",
+        "B_STORE_05",
+        "B_STORE_01",
+        "B_STORE_03",
+        "B_STORE_06",
+        "A_STORE_01",
+        "A_STORE_02",
+        "A_STORE_02",
+        "A_STORE_02"
+      ],
+      "task_id": "task_1.00_12"
+    },
+    {
+      "L": 10,
+      "novel_count": 10,
+      "novelty_fraction": 1.0,
+      "skus": [
+        "B_SKU_032",
+        "B_SKU_027",
+        "B_SKU_028",
+        "B_SKU_015",
+        "B_SKU_033",
+        "B_SKU_014",
+        "B_SKU_017",
+        "B_SKU_022",
+        "B_SKU_041",
+        "B_SKU_039"
+      ],
+      "stores": [
+        "B_STORE_05",
+        "B_STORE_02",
+        "B_STORE_04",
+        "B_STORE_06",
+        "B_STORE_01",
+        "B_STORE_03",
+        "A_STORE_03",
+        "A_STORE_02",
+        "A_STORE_05",
+        "A_STORE_02"
+      ],
+      "task_id": "task_1.00_13"
+    },
+    {
+      "L": 10,
+      "novel_count": 10,
+      "novelty_fraction": 1.0,
+      "skus": [
+        "B_SKU_046",
+        "B_SKU_004",
+        "B_SKU_007",
+        "B_SKU_019",
+        "B_SKU_033",
+        "B_SKU_031",
+        "B_SKU_028",
+        "B_SKU_030",
+        "B_SKU_042",
+        "B_SKU_025"
+      ],
+      "stores": [
+        "B_STORE_05",
+        "B_STORE_02",
+        "B_STORE_01",
+        "B_STORE_03",
+        "B_STORE_04",
+        "B_STORE_06",
+        "A_STORE_04",
+        "A_STORE_05",
+        "A_STORE_03",
+        "A_STORE_06"
+      ],
+      "task_id": "task_1.00_14"
+    },
+    {
+      "L": 10,
+      "novel_count": 10,
+      "novelty_fraction": 1.0,
+      "skus": [
+        "B_SKU_006",
+        "B_SKU_047",
+        "B_SKU_039",
+        "B_SKU_032",
+        "B_SKU_003",
+        "B_SKU_042",
+        "B_SKU_045",
+        "B_SKU_001",
+        "B_SKU_008",
+        "B_SKU_012"
+      ],
+      "stores": [
+        "B_STORE_03",
+        "B_STORE_05",
+        "B_STORE_01",
+        "B_STORE_06",
+        "B_STORE_04",
+        "B_STORE_02",
+        "A_STORE_01",
+        "A_STORE_01",
+        "A_STORE_04",
+        "A_STORE_06"
+      ],
+      "task_id": "task_1.00_15"
+    },
+    {
+      "L": 10,
+      "novel_count": 10,
+      "novelty_fraction": 1.0,
+      "skus": [
+        "B_SKU_016",
+        "B_SKU_024",
+        "B_SKU_012",
+        "B_SKU_005",
+        "B_SKU_034",
+        "B_SKU_014",
+        "B_SKU_027",
+        "B_SKU_029",
+        "B_SKU_045",
+        "B_SKU_047"
+      ],
+      "stores": [
+        "B_STORE_01",
+        "B_STORE_03",
+        "B_STORE_05",
+        "B_STORE_04",
+        "B_STORE_02",
+        "B_STORE_06",
+        "A_STORE_03",
+        "A_STORE_05",
+        "A_STORE_02",
+        "A_STORE_05"
+      ],
+      "task_id": "task_1.00_16"
+    },
+    {
+      "L": 10,
+      "novel_count": 10,
+      "novelty_fraction": 1.0,
+      "skus": [
+        "B_SKU_021",
+        "B_SKU_024",
+        "B_SKU_034",
+        "B_SKU_026",
+        "B_SKU_010",
+        "B_SKU_039",
+        "B_SKU_012",
+        "B_SKU_013",
+        "B_SKU_043",
+        "B_SKU_032"
+      ],
+      "stores": [
+        "B_STORE_06",
+        "B_STORE_01",
+        "B_STORE_05",
+        "B_STORE_03",
+        "B_STORE_02",
+        "B_STORE_04",
+        "A_STORE_02",
+        "A_STORE_03",
+        "A_STORE_01",
+        "A_STORE_04"
+      ],
+      "task_id": "task_1.00_17"
+    },
+    {
+      "L": 10,
+      "novel_count": 10,
+      "novelty_fraction": 1.0,
+      "skus": [
+        "B_SKU_020",
+        "B_SKU_014",
+        "B_SKU_045",
+        "B_SKU_008",
+        "B_SKU_039",
+        "B_SKU_042",
+        "B_SKU_038",
+        "B_SKU_010",
+        "B_SKU_036",
+        "B_SKU_019"
+      ],
+      "stores": [
+        "B_STORE_02",
+        "B_STORE_05",
+        "B_STORE_06",
+        "B_STORE_04",
+        "B_STORE_03",
+        "B_STORE_01",
+        "A_STORE_05",
+        "A_STORE_06",
+        "A_STORE_06",
+        "A_STORE_02"
+      ],
+      "task_id": "task_1.00_18"
+    },
+    {
+      "L": 10,
+      "novel_count": 10,
+      "novelty_fraction": 1.0,
+      "skus": [
+        "B_SKU_013",
+        "B_SKU_048",
+        "B_SKU_002",
+        "B_SKU_031",
+        "B_SKU_005",
+        "B_SKU_043",
+        "B_SKU_007",
+        "B_SKU_037",
+        "B_SKU_036",
+        "B_SKU_033"
+      ],
+      "stores": [
+        "B_STORE_05",
+        "B_STORE_04",
+        "B_STORE_01",
+        "B_STORE_03",
+        "B_STORE_06",
+        "B_STORE_02",
+        "A_STORE_06",
+        "A_STORE_05",
+        "A_STORE_03",
+        "A_STORE_04"
+      ],
+      "task_id": "task_1.00_19"
+    }
+  ],
+  "training_demos": [
+    {
+      "action_template": {
+        "body": {
+          "sku": "${sku}",
+          "store": "${store_id}"
+        },
+        "method": "POST",
+        "path": "/api/cart/add/${sku}"
+      },
+      "demo_id": "demo_A_0",
+      "intent": "shopping_checkout",
+      "parameter_slots": [
+        "sku",
+        "store_id"
+      ],
+      "skus": [
+        "A_SKU_041",
+        "A_SKU_008",
+        "A_SKU_002",
+        "A_SKU_018",
+        "A_SKU_016",
+        "A_SKU_015",
+        "A_SKU_009",
+        "A_SKU_007",
+        "A_SKU_035",
+        "A_SKU_006"
+      ],
+      "stores": [
+        "A_STORE_02",
+        "A_STORE_02",
+        "A_STORE_01",
+        "A_STORE_05",
+        "A_STORE_04",
+        "A_STORE_06",
+        "A_STORE_03",
+        "A_STORE_04",
+        "A_STORE_04",
+        "A_STORE_06"
+      ]
+    },
+    {
+      "action_template": {
+        "body": {
+          "sku": "${sku}",
+          "store": "${store_id}"
+        },
+        "method": "POST",
+        "path": "/api/cart/add/${sku}"
+      },
+      "demo_id": "demo_A_1",
+      "intent": "shopping_checkout",
+      "parameter_slots": [
+        "sku",
+        "store_id"
+      ],
+      "skus": [
+        "A_SKU_013",
+        "A_SKU_046",
+        "A_SKU_042",
+        "A_SKU_045",
+        "A_SKU_035",
+        "A_SKU_027",
+        "A_SKU_015",
+        "A_SKU_029",
+        "A_SKU_038",
+        "A_SKU_018"
+      ],
+      "stores": [
+        "A_STORE_01",
+        "A_STORE_06",
+        "A_STORE_02",
+        "A_STORE_05",
+        "A_STORE_05",
+        "A_STORE_03",
+        "A_STORE_04",
+        "A_STORE_03",
+        "A_STORE_02",
+        "A_STORE_04"
+      ]
+    },
+    {
+      "action_template": {
+        "body": {
+          "sku": "${sku}",
+          "store": "${store_id}"
+        },
+        "method": "POST",
+        "path": "/api/cart/add/${sku}"
+      },
+      "demo_id": "demo_A_2",
+      "intent": "shopping_checkout",
+      "parameter_slots": [
+        "sku",
+        "store_id"
+      ],
+      "skus": [
+        "A_SKU_025",
+        "A_SKU_007",
+        "A_SKU_023",
+        "A_SKU_048",
+        "A_SKU_039",
+        "A_SKU_017",
+        "A_SKU_003",
+        "A_SKU_030",
+        "A_SKU_035",
+        "A_SKU_008"
+      ],
+      "stores": [
+        "A_STORE_01",
+        "A_STORE_03",
+        "A_STORE_04",
+        "A_STORE_02",
+        "A_STORE_05",
+        "A_STORE_04",
+        "A_STORE_06",
+        "A_STORE_06",
+        "A_STORE_04",
+        "A_STORE_02"
+      ]
+    },
+    {
+      "action_template": {
+        "body": {
+          "sku": "${sku}",
+          "store": "${store_id}"
+        },
+        "method": "POST",
+        "path": "/api/cart/add/${sku}"
+      },
+      "demo_id": "demo_A_3",
+      "intent": "shopping_checkout",
+      "parameter_slots": [
+        "sku",
+        "store_id"
+      ],
+      "skus": [
+        "A_SKU_003",
+        "A_SKU_043",
+        "A_SKU_015",
+        "A_SKU_019",
+        "A_SKU_006",
+        "A_SKU_048",
+        "A_SKU_007",
+        "A_SKU_025",
+        "A_SKU_018",
+        "A_SKU_030"
+      ],
+      "stores": [
+        "A_STORE_06",
+        "A_STORE_06",
+        "A_STORE_06",
+        "A_STORE_05",
+        "A_STORE_04",
+        "A_STORE_05",
+        "A_STORE_05",
+        "A_STORE_01",
+        "A_STORE_02",
+        "A_STORE_03"
+      ]
+    },
+    {
+      "action_template": {
+        "body": {
+          "sku": "${sku}",
+          "store": "${store_id}"
+        },
+        "method": "POST",
+        "path": "/api/cart/add/${sku}"
+      },
+      "demo_id": "demo_A_4",
+      "intent": "shopping_checkout",
+      "parameter_slots": [
+        "sku",
+        "store_id"
+      ],
+      "skus": [
+        "A_SKU_035",
+        "A_SKU_047",
+        "A_SKU_016",
+        "A_SKU_011",
+        "A_SKU_030",
+        "A_SKU_025",
+        "A_SKU_018",
+        "A_SKU_041",
+        "A_SKU_036",
+        "A_SKU_015"
+      ],
+      "stores": [
+        "A_STORE_05",
+        "A_STORE_02",
+        "A_STORE_02",
+        "A_STORE_02",
+        "A_STORE_01",
+        "A_STORE_01",
+        "A_STORE_06",
+        "A_STORE_01",
+        "A_STORE_05",
+        "A_STORE_05"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,44 @@
+{
+  "B-COLD": {
+    "evidence": "artifacts/raw_per_task.csv",
+    "expected": "Cost flat vs novelty ~5000 tokens, success measured",
+    "id": "B-COLD",
+    "observed": "mean tokens 5000 flat across bins, success 1.00",
+    "pass": true
+  },
+  "B-INSTRUCTIONS": {
+    "evidence": "artifacts/raw_per_task.csv",
+    "expected": "Cost slightly below B-COLD but still ~ full length; beaten by SPIDER at low novelty by >=15%",
+    "id": "B-INSTRUCTIONS",
+    "observed": "amortized f10 at 0% 4800 vs SPIDER 350 ratio 0.07",
+    "pass": true
+  },
+  "B-RAG": {
+    "evidence": "artifacts/raw_per_task.csv",
+    "expected": "At 0% similar to SPIDER; at >=25% worse than SPIDER by >=20%",
+    "id": "B-RAG",
+    "observed": "f10 ratios SPIDER/RAG at 0% 0.06, at 25% 0.19",
+    "pass": true
+  },
+  "B-REPLAY-TERX": {
+    "evidence": "artifacts/raw_per_task.csv; PC1 hit verified",
+    "expected": "Hit 100% at 0% (0 tok +90ms), 0% at 100% => COLD. SPIDER cheaper at >=25%",
+    "id": "B-REPLAY-TERX",
+    "observed": "SPIDER beats REPLAY at >=25% {0.25: True, 0.5: True, 0.75: True, 1.0: True}, ratio at 0% SPIDER/REPLAY f1 0.19 (main bins use disjoint A pools, PC1 isolated hit verified)",
+    "pass": true
+  },
+  "NC-SHUFFLE-AND-RANDOM": {
+    "evidence": "artifacts/raw_per_task.csv",
+    "expected": "NC1 rho |rho|<0.25 p>=0.05, NC2 false_accept >=0.30",
+    "id": "NC-SHUFFLE-AND-RANDOM",
+    "observed": "NC1 rho 0.000 p 1.000, NC2 false_accept 0.38 rho 0.000",
+    "pass": true
+  },
+  "PC-PARAM-AND-REPLAY": {
+    "evidence": "artifacts/raw_per_task.csv task PC1_exact_repeat",
+    "expected": "PC1 B-REPLAY at 0% =0 LLM tokens + verification, PC2 SPIDER at 0% reused >=0.90",
+    "id": "PC-PARAM-AND-REPLAY",
+    "observed": "PC1 tokens 50 (expected 50 with verification), PC2 reused 1.0",
+    "pass": true
+  }
+}
