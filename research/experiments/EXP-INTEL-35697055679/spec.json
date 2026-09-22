@@ -1,17 +1,30 @@
 {
   "experiment_id": "EXP-INTEL-35697055679",
   "lane": "intel",
-  "claim_ids": [],
-  "question": "",
-  "hypothesis": "",
-  "falsifier": "",
-  "baselines": [],
-  "positive_control": "",
-  "null_control": "",
-  "measurement_validity": [],
-  "decision_rule": "",
-  "product_consequence_positive": "",
-  "product_consequence_negative": "",
-  "estimated_cost": "",
-  "expected_information_gain": ""
+  "claim_ids": ["C-LLM-INHERIT", "C-CROSSSITE"],
+  "question": "Can actual mechanism sharing be verified on WebArena Docker datasets by extracting accessibility trees from 2-3 shopping stores and measuring mechanism overlap fraction, parameterization prevalence, and duplication fraction — resolving audit VF5 (cross-site mechanism sharing assumed not verified) and unblocking C-LLM-INHERIT experiment design?",
+  "hypothesis": "WebArena shopping stores (12 instances) share common mechanisms (search, add-to-cart, checkout) with parameterized variations, as suggested by documentation (M1=1.0 cross-site structure). Mechanism overlap fraction across 2-3 stores will be ≥0.5, parameterization prevalence ≥0.3, and duplication fraction <0.8 (tasks are not just copies across stores).",
+  "falsifier": "ANY of: (1) Mechanism overlap fraction <0.5 across stores — mechanisms are store-specific, not shared. (2) Duplication fraction ≥0.8 — tasks are duplicated across stores, diluting cross-site inheritance meaning. (3) Parameterization prevalence <0.1 — mechanisms lack parameter slots needed for parameterized inheritance. (4) Docker deployment fails or accessibility tree extraction fails on ≥1 store — infrastructure blocks measurement. (5) Documented intent templates do not map to actual interactive elements in accessibility trees — documentation-level structure does not translate to executable mechanisms.",
+  "baselines": [
+    "Documentation-based M1=1.0 cross-site structure (EXP-INTEL-35651934683 result.json)",
+    "Heuristic M2=0.8 parameterization (EXP-INTEL-35651934683 result.json)",
+    "Corrected Mind2Web M1=0.31 (audit VF1) as comparison for cross-site density",
+    "SPIDER 2-site corpus (quotes + books) as lower bound for cross-site diversity"
+  ],
+  "positive_control": "Search mechanism (input field + submit button) appears in all sampled stores. Intent templates with variable fields (e.g., product name) are present in task definitions.",
+  "null_control": "Wikipedia store (if Docker available) does not contain shopping mechanisms (search for product, add-to-cart, checkout).",
+  "measurement_validity": [
+    "Docker Hub am1n3e/webarena-verified-shopping:latest pullable and accessible",
+    "Playwright + Chromium functional for accessibility tree extraction",
+    "Task definitions parsed from WebArena-Verified dataset (JSON files)",
+    "Accessibility tree extraction script validated on at least one store",
+    "Frozen random seed for task selection across stores",
+    "Raw accessibility trees saved with durable sha256",
+    "Intent template mapping verified by manual inspection of 5 tasks"
+  ],
+  "decision_rule": "If ALL of: (1) mechanism overlap fraction ≥0.5 across stores, AND (2) duplication fraction <0.8, AND (3) parameterization prevalence ≥0.1, AND (4) positive control passes (search mechanism in all stores), AND (5) infrastructure blocks ≤1 store (if 2 stores succeed, proceed), THEN verdict = SURVIVES_CURRENT_TEST. If mechanism overlap fraction <0.5, verdict = FALSIFIED-IN-SETTING. If duplication fraction ≥0.8, verdict = MIXED (tasks duplicated, inheritance less meaningful). If infrastructure blocks ≥2 stores, verdict = BLOCKED. If intent templates do not map to accessibility tree elements, verdict = MEASUREMENT_INVALID (documentation vs execution mismatch).",
+  "product_consequence_positive": "C-LLM-INHERIT experiment design can proceed with WebArena shopping cross-site pairs. Product lane can design train-on-N-stores, test-on-held-out-stores experiment with verified mechanism sharing. Duplication fraction informs task uniqueness for novelty fraction measurement.",
+  "product_consequence_negative": "If mechanisms are not shared across stores, C-LLM-INHERIT cannot use WebArena shopping for cross-site inheritance. Product lane must either (a) use a single store with parameter variation, (b) use Mind2Web cross-website splits (if verified), or (c) stay bounded to 2-site corpus. The documentation-level M1=1.0 is shown to be misleading.",
+  "estimated_cost": "Medium: Docker container deployment for 2-3 stores, Playwright accessibility tree extraction on 20-30 tasks, task definition parsing, mechanism overlap analysis. Estimated 3-4 hours compute. Manual verification of intent template mapping ~1 hour.",
+  "expected_information_gain": "High: This directly resolves audit VF5 (cross-site mechanism sharing assumed not verified). A clear positive outcome unblocks C-LLM-INHERIT experiment design. A clear negative outcome redirects product lane away from WebArena cross-site inheritance. Even MIXED (duplication high) is valuable because it informs task uniqueness for novelty fraction measurement."
 }
