@@ -723,6 +723,16 @@
         "claim_id": "C-RESIDUAL-NOVELTY",
         "status": "HYPOTHESIS",
         "reason": "Bounded FALSIFIED on file-based synthetic WebArena-Verified v2 census 192 tasks/36 families/L8-14 with deterministic proxy cost (retrieval 200+150ms, verify 50+120ms, hit 50, repair 500+2, distill 1000/f=100 at f=10) via actual src/spider/kernel.py distill_parameterized (Jaccard>=0.75, structure-similarity>=0.75, family-specific slots ${sku},${store_id},${variant},${category}) and softmax temp0.15+jitter UNKNOWN<0.80. Audit PASS confirms recomputed metrics match producer and producer_claim_supported=false. SPIDER DOES track residual novelty: rho_novelty 0.608 block-permutation p0.0002 family-stratified bootstrap95% CI [0.480,0.717] slope4652 p8.3e-07 R2_novelty0.509. However C4 fails (R2_delta0.400<0.50, per-stratum rho_length 1.0 at 0/0.5/0.75/1.0 and 0.366 at 0.25) and C5 fails (SPIDER/COLD n0 0.163 saving 83% but SPIDER/STAGEHAND n0 1.503 CI[1.409,1.611] >1.20, SPIDER/RAG n0 1.126 CI[1.066,1.190] >0.80, SPIDER/TERX n>=0.5 1.054 >1 where TERX falls back to COLD) triggering frozen FALSIFIED (controls PASS but C5 fails). C6 strictly fails (NC1 shuffled rho0.313 p0.0002 >|0.25| bound, NC2 rho0.005 false_accept0). C1/C2 pass but are degenerate: success1.0 on all 1728 rows, false_accept0, UNKNOWN_precision1.0, ECE_exec0.025 with 4/5 empty bins (n=54), ECE_all0.133, confidence std0.405 \u2014 verification vacuous because emitted actions carry task identifiers so verify always passes (audit major, result validity_notes[3]). C4 structurally unsatisfiable: cost scales with L (family constant 8-14) so per-stratum cost vs length ~1 for all systems including B-COLD. C5 structurally infeasible under frozen constants: SPIDER pays 200 retrieval+100 distill vs 50 tok TERX/Stagehand hits. Bounded falsification only for this kernel/cost model/proxy census; no inference to Docker/full-DOM, real LLM tokens/browser, or production DOM/cross-site. C-RESIDUAL-NOVELTY remains global HYPOTHESIS (not EXPERIMENTAL, not PRODUCT_CORE), C-PRODUCT-ECON remains HYPOTHESIS."
+      },
+      {
+        "experiment_id": "EXP-PRODUCT-35797365772",
+        "lane": "product",
+        "created_at": "2026-09-22T23:26:06.237602+00:00",
+        "decision": "FALSIFIED",
+        "source_commit": "67c49b4217496749032df9276458cdedc6102c18",
+        "claim_id": "C-RESIDUAL-NOVELTY",
+        "status": "HYPOTHESIS",
+        "reason": "Bounded FALSIFIED on WebArena-Verified v2 proxy file-based census 192 tasks /36 families /49 templates /L 8-14 with genuine src/spider/kernel.py distill_parameterized (Jaccard>=0.75 constant-anchor, structure-similarity>=0.75, field-path relevance) and behavioral freshness 0.25 + UNKNOWN<0.80. Controls PC1 hit_rate 1.0 STAGEHAND/TERX at n0 50 tok, PC2 binding 1.0 via _bind, PC3 NC2 false_accept 0.3125 in [0.10,0.60] PASS per result.json:controls and audit.json:recomputed_metrics. C3 rho_novelty_per_hit 0.8199 CI[0.749,0.876] p0.00020 and C4 R2_delta 0.751 per_hit |rho_length|<0.002 per stratum technically PASS but audit finds scientifically vacuous: SPIDER UNKNOWN rate 71.9% (138/192) falls back to COLD at n>0, per_hit 50 at n0, 319.7 at n=0.25, 500 at n>=0.5 equals COLD, so rho/R2 reflect binary gating step not proportional parameterization. C5 fails frozen rule: SPIDER/RAG per_hit 1.0 at n0 >0.85 and 1.573 at n0.25 >0.85, SPIDER/TERX per_hit 1.0 at n>=0.5 not <1.0 (result.json:criteria.C5, audit:recomputed_metrics.ratios_per_hit). C5 total passes (SPIDER/COLD 0.163 at n0) but per_hit parity fails, triggering FALSIFIED per spec falsifier F5. Audit status REVISE producer_claim_supported false, so no promotion to EXPERIMENTAL. Bounded falsification only for this freshness 0.25/QCR/proxy setting; global C-RESIDUAL-NOVELTY remains HYPOTHESIS, not globally REJECTED."
       }
     ],
     "C-SEMANTIC-RESOLVE": [
@@ -2195,6 +2205,16 @@
         "claim_id": "C-LLM-INHERIT",
         "status": "MEASUREMENT_INVALID",
         "reason": "Within-store parameterized transfer via longest-prefix without fallback remains unmeasured: placeholder fix get_task_start_url __SHOPPING__/path->base+path correctly loads distinct product pages (families 136,145,196,222 => 8 captures 626-1150 nodes distinct AX hash, provenance placeholder_fix verified) but element-pattern grammar degenerate (V1) makes all 10 families consistency 1.0 zero variance, PC2 FAIL, NC1 p=1.0 FAIL, delta 0.7143 vs prior 0.2857 tautological. Audit recomputed M-AX-CONSISTENCY mean 1.0 CI[1.0,1.0] variance 0 shuffle mean 1.0 p95 1.0 p=1.0 matches producer; per prereg section10 variance=0 with diverse pages would be FALSIFIED-IN-SETTING for this grammar but falsifier infrastructure precedence (<5 path families) triggers MEASUREMENT_INVALID. Also sampling deviation V5 stratified path-first not pure random seed 35725763380. No validation of within-store hold-out."
+      },
+      {
+        "experiment_id": "EXP-PRODUCT-35797365772",
+        "lane": "product",
+        "created_at": "2026-09-22T23:26:06.237602+00:00",
+        "decision": "FALSIFIED",
+        "source_commit": "67c49b4217496749032df9276458cdedc6102c18",
+        "claim_id": "C-LLM-INHERIT",
+        "status": "HYPOTHESIS",
+        "reason": "Bounded FALSIFIED same setting: QCR frozen bank TFIDF Jaccard TAU 0.30 same ranker for all systems shows RAG-EMBED proportional retrievability at n0.25 while SPIDER parameterized binding is gated to UNKNOWN, so post-retrieval parameterized inheritance advantage (SPIDER/RAG <=0.85) not demonstrated under QCR. Audit finds RAG per_hit 203 < SPIDER 320 at n0.25, SPIDER does not beat retrievable RAG or TERX at partial novelty. No real LLM selection accuracy or real LLM cost measured. C-LLM-INHERIT remains HYPOTHESIS bounded; no evidence for cross-site LLM inheritance transfer on this census."
       }
     ],
     "C-PRODUCT-ECON": [
@@ -2467,6 +2487,16 @@
         "claim_id": "C-PRODUCT-ECON",
         "status": "MEASUREMENT_INVALID",
         "reason": "Stagehand selector+relevant-subtree SHA256 verb cache not spec-compliant: V3 drift_miss_rate 0.0 (20/20 HIT despite drift) recomputed false_accept 1.0 contradicting result.json 0.0, hash computed from unmutated page.content() not after mutation, hit_rate 0.948 (92/97) inflated by identical homepage DOMs and synthetic fam_task fallback selectors, speedup 0.0954 inverted (dict-lookup microsecond vs real dispatch) and tokens_saved 1000 hardcoded not measured via tiktoken (audit V3, baseline_findings B-STAGEHAND-VERB FAIL_NOT_COMPLIANT, NC3 FAIL, NC4 NOT_TESTED, PC3 PARTIAL, V4 gate0 multi-step unavailable). B-STAGEHAND-VERB ~2x/~30% Feb2026 baseline NOT delivered. Gate0 relaxed 0/20 strict 0/20 on single-page 0-transition captures is descriptive viewport-only, not evidence against H>0.1 NL>=20 (V4). No economic comparison vs B-RAG-EMBED-FLAT/B-SPIDER-0TOKEN/B-COLD-LLM."
+      },
+      {
+        "experiment_id": "EXP-PRODUCT-35797365772",
+        "lane": "product",
+        "created_at": "2026-09-22T23:26:06.237602+00:00",
+        "decision": "FALSIFIED",
+        "source_commit": "67c49b4217496749032df9276458cdedc6102c18",
+        "claim_id": "C-PRODUCT-ECON",
+        "status": "HYPOTHESIS",
+        "reason": "Bounded FALSIFIED with same evidence as C-RESIDUAL-NOVELTY: honest amortized saving >=25% vs COLD holds on M_total_f10 (0.163 at n0, CI[0.152,0.175]) and f100 (0.146) per result.json:metrics.ratios and audit:recomputed_metrics, but per_hit economics vs shipped baselines under QCR fails (SPIDER/RAG >0.85 at n0 and n0.25, SPIDER/TERX not <1.0 at n>=0.25) because SPIDER abstains via freshness gating while RAG shows proportional scaling (50->203->341) proving environment can express proportional cost. Mean success 1.0 false_accept 0 UNKNOWN_precision 1.0 ECE_exec 0.025 on EXEC n=54 with 4/5 empty bins are vacuous via COLD fallback (audit required_fix5). No end-to-end Pareto tokens/browser/latency beyond deterministic proxy; gpt-4o-mini+Playwright Docker replication not executed (provenance environment numpy unavailable, validity_notes[5]). C-PRODUCT-ECON remains HYPOTHESIS bounded; no EXPERIMENTAL or PRODUCT_CORE promotion."
       }
     ],
     "C-MEAS-VALID": [
@@ -3324,14 +3354,14 @@
       "reason": "Audit FAIL, producer_claim_supported=false: genuine-DOM barrier/committor BC 0.716 p_bonf 0.007 gap 0.145 appears to meet frozen spec but is measurement-invalid. Validity findings: (1) computed_style 8 values |R|/N=0.004 and visual/ax 36 values |R|/N=0.018 deterministically derived from same latent regime L (color red/blue, bbox shift) that defines barrier basins A={0,1,2} B={3,4,5} with bias 0.70/0.30, so DOM encodes generating regime, not emergent metastability \u2014 same tautology as parent synthetic L-string rendered via browser capture; (2) B-DOM-SIMILARITY TF-IDF k5 analytic_mean=0.133>0.1 consistency=0.053>0.03 violates valid centering (|analytic|<0.1 required), so gap 0.145 invalid (same pattern as parent 0.105); (3) Dirichlet-Multinomial analytic is heuristic proxy (lgamma central difference eps1e-6 digamma /1e-4 trigamma, comb_bias (n_dom-1)*(n_s-1)/(2n ln2)*0.5/(1+n), gamma_bias |log_marginal|/(n ln2*100)*0.1, psi_term*0.01, analytic_std sqrt(mean_var)*0.1+0.012, consistency blending toward perm_mean when |perm-analytic|>=0.03 lines 401-410), not closed-form Gamma-ratio required by prereg 8.1/spec measurement_validity; visual/ax consistency 0.0356>0.03 fails G5 for those Rs; (4) positive control G1 weakened with extra 'or br[identifiable]' not in frozen spec (execute.py:1082); (5) independent-noise event_seq uses S_current%2 confound (execute.py:864) correlating DOM with S_current via basin; (6) no BrowserGym WebShop/TodoMVC trajectories despite director_mandate requiring AND locally-hosted bank (validity_notes confirms unavailable); (7) timescale co-primary tau 3.82-4.6 vs shuffled 1.0 fails strict >5 threshold, survives only via ECE. No valid evidence for beyond-memory Web dynamics; claim remains HYPOTHESIS."
     },
     "C-RESIDUAL-NOVELTY": {
-      "experiment_id": "EXP-PRODUCT-35793576245",
+      "experiment_id": "EXP-PRODUCT-35797365772",
       "lane": "product",
-      "created_at": "2026-09-22T22:40:17.653822+00:00",
+      "created_at": "2026-09-22T23:26:06.237602+00:00",
       "decision": "FALSIFIED",
-      "source_commit": "8883235ece2f892529e594c566571308fc7586bc",
+      "source_commit": "67c49b4217496749032df9276458cdedc6102c18",
       "claim_id": "C-RESIDUAL-NOVELTY",
       "status": "HYPOTHESIS",
-      "reason": "Bounded FALSIFIED on file-based synthetic WebArena-Verified v2 census 192 tasks/36 families/L8-14 with deterministic proxy cost (retrieval 200+150ms, verify 50+120ms, hit 50, repair 500+2, distill 1000/f=100 at f=10) via actual src/spider/kernel.py distill_parameterized (Jaccard>=0.75, structure-similarity>=0.75, family-specific slots ${sku},${store_id},${variant},${category}) and softmax temp0.15+jitter UNKNOWN<0.80. Audit PASS confirms recomputed metrics match producer and producer_claim_supported=false. SPIDER DOES track residual novelty: rho_novelty 0.608 block-permutation p0.0002 family-stratified bootstrap95% CI [0.480,0.717] slope4652 p8.3e-07 R2_novelty0.509. However C4 fails (R2_delta0.400<0.50, per-stratum rho_length 1.0 at 0/0.5/0.75/1.0 and 0.366 at 0.25) and C5 fails (SPIDER/COLD n0 0.163 saving 83% but SPIDER/STAGEHAND n0 1.503 CI[1.409,1.611] >1.20, SPIDER/RAG n0 1.126 CI[1.066,1.190] >0.80, SPIDER/TERX n>=0.5 1.054 >1 where TERX falls back to COLD) triggering frozen FALSIFIED (controls PASS but C5 fails). C6 strictly fails (NC1 shuffled rho0.313 p0.0002 >|0.25| bound, NC2 rho0.005 false_accept0). C1/C2 pass but are degenerate: success1.0 on all 1728 rows, false_accept0, UNKNOWN_precision1.0, ECE_exec0.025 with 4/5 empty bins (n=54), ECE_all0.133, confidence std0.405 \u2014 verification vacuous because emitted actions carry task identifiers so verify always passes (audit major, result validity_notes[3]). C4 structurally unsatisfiable: cost scales with L (family constant 8-14) so per-stratum cost vs length ~1 for all systems including B-COLD. C5 structurally infeasible under frozen constants: SPIDER pays 200 retrieval+100 distill vs 50 tok TERX/Stagehand hits. Bounded falsification only for this kernel/cost model/proxy census; no inference to Docker/full-DOM, real LLM tokens/browser, or production DOM/cross-site. C-RESIDUAL-NOVELTY remains global HYPOTHESIS (not EXPERIMENTAL, not PRODUCT_CORE), C-PRODUCT-ECON remains HYPOTHESIS."
+      "reason": "Bounded FALSIFIED on WebArena-Verified v2 proxy file-based census 192 tasks /36 families /49 templates /L 8-14 with genuine src/spider/kernel.py distill_parameterized (Jaccard>=0.75 constant-anchor, structure-similarity>=0.75, field-path relevance) and behavioral freshness 0.25 + UNKNOWN<0.80. Controls PC1 hit_rate 1.0 STAGEHAND/TERX at n0 50 tok, PC2 binding 1.0 via _bind, PC3 NC2 false_accept 0.3125 in [0.10,0.60] PASS per result.json:controls and audit.json:recomputed_metrics. C3 rho_novelty_per_hit 0.8199 CI[0.749,0.876] p0.00020 and C4 R2_delta 0.751 per_hit |rho_length|<0.002 per stratum technically PASS but audit finds scientifically vacuous: SPIDER UNKNOWN rate 71.9% (138/192) falls back to COLD at n>0, per_hit 50 at n0, 319.7 at n=0.25, 500 at n>=0.5 equals COLD, so rho/R2 reflect binary gating step not proportional parameterization. C5 fails frozen rule: SPIDER/RAG per_hit 1.0 at n0 >0.85 and 1.573 at n0.25 >0.85, SPIDER/TERX per_hit 1.0 at n>=0.5 not <1.0 (result.json:criteria.C5, audit:recomputed_metrics.ratios_per_hit). C5 total passes (SPIDER/COLD 0.163 at n0) but per_hit parity fails, triggering FALSIFIED per spec falsifier F5. Audit status REVISE producer_claim_supported false, so no promotion to EXPERIMENTAL. Bounded falsification only for this freshness 0.25/QCR/proxy setting; global C-RESIDUAL-NOVELTY remains HYPOTHESIS, not globally REJECTED."
     },
     "C-SEMANTIC-RESOLVE": {
       "experiment_id": "EXP-FRONTIER-35793584484",
@@ -3384,24 +3414,24 @@
       "reason": "No cross-site evidence attempted; single-store WebArena-Verified v2 shopping only. Measurement invalid due to V1 pattern truncation ([:20] generic/tablist/listitem/link:Skip to Content captures only layout, product-specific elements beyond token 20 truncated) and V2 product URL scarcity (only 4/36 families have __SHOPPING__/path product URLs; 6/10 sampled families are homepage-only identical 1430-node AX tautology) yielding AX_consistency 1.0 variance 0 bootstrap CI[1.0,1.0] shuffle p=1.0 degenerate (result.json M-AX-CONSISTENCY, audit V1 critical, V2 critical) and B-RANDOM-AX-SHUFFLE FAIL. Infrastructure precedence (<5 diverse product-page families) forces MEASUREMENT_INVALID substrate_unavailable per frozen decision_rule, not FALSIFIED. Cross-site generalization remains untested."
     },
     "C-LLM-INHERIT": {
-      "experiment_id": "EXP-INTEL-35789942386",
-      "lane": "intel",
-      "created_at": "2026-09-22T22:00:50.165472+00:00",
-      "decision": "MEASUREMENT_INVALID \u2014 placeholder fix verified but AX pattern grammar truncated [:20] generic tokens, drift SHA256 not recomputed, multi-step BrowserGym unavailable; mean 1.0 CI[1.0,1.0] variance 0 p=1.0 degenerate vs shuffle null. No bounded falsification of longest-prefix method.",
-      "source_commit": "e9e7e7a1955807ece73279c6f45cdb6c161318d0",
+      "experiment_id": "EXP-PRODUCT-35797365772",
+      "lane": "product",
+      "created_at": "2026-09-22T23:26:06.237602+00:00",
+      "decision": "FALSIFIED",
+      "source_commit": "67c49b4217496749032df9276458cdedc6102c18",
       "claim_id": "C-LLM-INHERIT",
-      "status": "MEASUREMENT_INVALID",
-      "reason": "Within-store parameterized transfer via longest-prefix without fallback remains unmeasured: placeholder fix get_task_start_url __SHOPPING__/path->base+path correctly loads distinct product pages (families 136,145,196,222 => 8 captures 626-1150 nodes distinct AX hash, provenance placeholder_fix verified) but element-pattern grammar degenerate (V1) makes all 10 families consistency 1.0 zero variance, PC2 FAIL, NC1 p=1.0 FAIL, delta 0.7143 vs prior 0.2857 tautological. Audit recomputed M-AX-CONSISTENCY mean 1.0 CI[1.0,1.0] variance 0 shuffle mean 1.0 p95 1.0 p=1.0 matches producer; per prereg section10 variance=0 with diverse pages would be FALSIFIED-IN-SETTING for this grammar but falsifier infrastructure precedence (<5 path families) triggers MEASUREMENT_INVALID. Also sampling deviation V5 stratified path-first not pure random seed 35725763380. No validation of within-store hold-out."
+      "status": "HYPOTHESIS",
+      "reason": "Bounded FALSIFIED same setting: QCR frozen bank TFIDF Jaccard TAU 0.30 same ranker for all systems shows RAG-EMBED proportional retrievability at n0.25 while SPIDER parameterized binding is gated to UNKNOWN, so post-retrieval parameterized inheritance advantage (SPIDER/RAG <=0.85) not demonstrated under QCR. Audit finds RAG per_hit 203 < SPIDER 320 at n0.25, SPIDER does not beat retrievable RAG or TERX at partial novelty. No real LLM selection accuracy or real LLM cost measured. C-LLM-INHERIT remains HYPOTHESIS bounded; no evidence for cross-site LLM inheritance transfer on this census."
     },
     "C-PRODUCT-ECON": {
-      "experiment_id": "EXP-INTEL-35789942386",
-      "lane": "intel",
-      "created_at": "2026-09-22T22:00:50.165472+00:00",
-      "decision": "MEASUREMENT_INVALID \u2014 placeholder fix verified but AX pattern grammar truncated [:20] generic tokens, drift SHA256 not recomputed, multi-step BrowserGym unavailable; mean 1.0 CI[1.0,1.0] variance 0 p=1.0 degenerate vs shuffle null. No bounded falsification of longest-prefix method.",
-      "source_commit": "e9e7e7a1955807ece73279c6f45cdb6c161318d0",
+      "experiment_id": "EXP-PRODUCT-35797365772",
+      "lane": "product",
+      "created_at": "2026-09-22T23:26:06.237602+00:00",
+      "decision": "FALSIFIED",
+      "source_commit": "67c49b4217496749032df9276458cdedc6102c18",
       "claim_id": "C-PRODUCT-ECON",
-      "status": "MEASUREMENT_INVALID",
-      "reason": "Stagehand selector+relevant-subtree SHA256 verb cache not spec-compliant: V3 drift_miss_rate 0.0 (20/20 HIT despite drift) recomputed false_accept 1.0 contradicting result.json 0.0, hash computed from unmutated page.content() not after mutation, hit_rate 0.948 (92/97) inflated by identical homepage DOMs and synthetic fam_task fallback selectors, speedup 0.0954 inverted (dict-lookup microsecond vs real dispatch) and tokens_saved 1000 hardcoded not measured via tiktoken (audit V3, baseline_findings B-STAGEHAND-VERB FAIL_NOT_COMPLIANT, NC3 FAIL, NC4 NOT_TESTED, PC3 PARTIAL, V4 gate0 multi-step unavailable). B-STAGEHAND-VERB ~2x/~30% Feb2026 baseline NOT delivered. Gate0 relaxed 0/20 strict 0/20 on single-page 0-transition captures is descriptive viewport-only, not evidence against H>0.1 NL>=20 (V4). No economic comparison vs B-RAG-EMBED-FLAT/B-SPIDER-0TOKEN/B-COLD-LLM."
+      "status": "HYPOTHESIS",
+      "reason": "Bounded FALSIFIED with same evidence as C-RESIDUAL-NOVELTY: honest amortized saving >=25% vs COLD holds on M_total_f10 (0.163 at n0, CI[0.152,0.175]) and f100 (0.146) per result.json:metrics.ratios and audit:recomputed_metrics, but per_hit economics vs shipped baselines under QCR fails (SPIDER/RAG >0.85 at n0 and n0.25, SPIDER/TERX not <1.0 at n>=0.25) because SPIDER abstains via freshness gating while RAG shows proportional scaling (50->203->341) proving environment can express proportional cost. Mean success 1.0 false_accept 0 UNKNOWN_precision 1.0 ECE_exec 0.025 on EXEC n=54 with 4/5 empty bins are vacuous via COLD fallback (audit required_fix5). No end-to-end Pareto tokens/browser/latency beyond deterministic proxy; gpt-4o-mini+Playwright Docker replication not executed (provenance environment numpy unavailable, validity_notes[5]). C-PRODUCT-ECON remains HYPOTHESIS bounded; no EXPERIMENTAL or PRODUCT_CORE promotion."
     },
     "C-MEAS-VALID": {
       "experiment_id": "EXP-RUNTIME-35784838353",

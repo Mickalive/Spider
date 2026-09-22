@@ -4,7 +4,7 @@ Pre-2.0 canonical memory remains frozen at `archive/spider-codex-ultimate:SPIDER
 
 Canonical Research 2.0 evidence lives in `codex/experiments/<experiment_id>/`.
 Use `codex/index.json` and `codex/claim_state.json` to locate relevant packets; do not load all experiment bodies by default.
-Validated experiments: **267**. Coverage gaps: **0**. Quarantined packets: **0**.
+Validated experiments: **268**. Coverage gaps: **0**. Quarantined packets: **0**.
 
 ## Experiment index
 
@@ -277,6 +277,7 @@ Validated experiments: **267**. Coverage gaps: **0**. Quarantined packets: **0**
 | EXP-PRODUCT-35793576245 | product | PASS | FALSIFIED | C-RESIDUAL-NOVELTY | `8883235ece2f` |
 | EXP-FRONTIER-35793584484 | frontier | PASS | FALSIFIED-IN-SETTING | C-SEMANTIC-RESOLVE | `7c767ed15ff4` |
 | EXP-PHYSICS-35796855042 | physics | FAIL | MEASUREMENT_INVALID | C-WEB-DYNAMICS | `ec13a32ed8f0` |
+| EXP-PRODUCT-35797365772 | product | REVISE | FALSIFIED | C-RESIDUAL-NOVELTY, C-PRODUCT-ECON, C-LLM-INHERIT | `67c49b421749` |
 
 ## Latest recorded claim events
 
@@ -287,10 +288,10 @@ These are chronological latest events, not an automatic truth ranking.
 | C-CROSSSITE | MEASUREMENT_INVALID | EXP-INTEL-35789942386 | intel |
 | C-DELTA-REPAIR | BLOCKED | EXP-GRAPH-35764315683 | graph |
 | C-FRESHNESS | MEASUREMENT_INVALID | EXP-RUNTIME-35784838353 | runtime |
-| C-LLM-INHERIT | MEASUREMENT_INVALID | EXP-INTEL-35789942386 | intel |
+| C-LLM-INHERIT | HYPOTHESIS | EXP-PRODUCT-35797365772 | product |
 | C-MEAS-VALID | MEASUREMENT_INVALID | EXP-RUNTIME-35784838353 | runtime |
 | C-PARAM-INHERIT | MEASUREMENT_INVALID | EXP-GRAPH-35793560957 | graph |
-| C-PRODUCT-ECON | MEASUREMENT_INVALID | EXP-INTEL-35789942386 | intel |
-| C-RESIDUAL-NOVELTY | HYPOTHESIS | EXP-PRODUCT-35793576245 | product |
+| C-PRODUCT-ECON | HYPOTHESIS | EXP-PRODUCT-35797365772 | product |
+| C-RESIDUAL-NOVELTY | HYPOTHESIS | EXP-PRODUCT-35797365772 | product |
 | C-SEMANTIC-RESOLVE | EXPERIMENTAL | EXP-FRONTIER-35793584484 | frontier |
 | C-WEB-DYNAMICS | HYPOTHESIS | EXP-PHYSICS-35796855042 | physics |
