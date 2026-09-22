@@ -1,0 +1,68 @@
+{
+  "experiment_id": "EXP-PHYSICS-35782523165",
+  "lane": "physics",
+  "schema_version": 1,
+  "github_run_id": "35782523165",
+  "github_run_attempt": 1,
+  "pre_execute_sha": "38b9c82c099c928a8a68b4427e47d57c02604102",
+  "base_sha": "546954c060591637d3d8ec24b51e0d3bf9ecff23",
+  "head_sha": "57ed5b831ca0c440683a5460a505925e63a6a4b5",
+  "freeze_hashes": {
+    "prereg.md": "9ca9a03387f101dada84fad5d190f221daf1be1c6496bb81b5d4b15c64f4ff31",
+    "request.json": "5e646d17480afb10c3562088d0da3418bc2c9c78cd687e5d99afc5b82ebf81c5",
+    "spec.json": "7234404b206be2c98e6f161a5331947f759937c6d6e78874e124d0022288568b"
+  },
+  "code_paths": [
+    {
+      "path": "research/experiments/EXP-PHYSICS-35782523165/execute.py",
+      "sha256": "9cb24333adb124a19ab3a74185cde1c4a6ad28448070305f86725518448f9a6d",
+      "role": "code"
+    }
+  ],
+  "datasets": [
+    {
+      "name": "correlated-state primary",
+      "path": "research/experiments/EXP-PHYSICS-35782523165/raw_transitions_correlated.json",
+      "sha256": "2ffc9e95f8b7c244deee256f4009d95a6b1a53c289795093333e4e55801ab195",
+      "n": 1999,
+      "trajectories": 50,
+      "steps_per_trajectory": 40,
+      "construction": "6-state FSM L per trajectory (A/B) basin bias 0.70/0.30, DOM_before SHA256(L|state|variant%3), URL hash fragment, Action click:button|next|| constant, seeds PYTHONHASHSEED=0 numpy 42"
+    },
+    {
+      "name": "independent-noise replication",
+      "path": "research/experiments/EXP-PHYSICS-35782523165/raw_transitions_independent.json",
+      "sha256": "4ee10d7067e5000ee4701adece711ce5d9778c8b3fae2ced5b4951339e4bbc71",
+      "n": 1999,
+      "construction": "Same FSM without L, DOM variant independent per-step 3 per state, transition uniform 0.5, seeds 42+999/12345"
+    },
+    {
+      "name": "iid synthetic null",
+      "path": "research/experiments/EXP-PHYSICS-35782523165/raw_transitions_iid.json",
+      "sha256": "ab685d9d21cea93881c8a813d0b7e844fa28229ad7f2d7698484a1e5e1c3c95b",
+      "n": 1999,
+      "construction": "Same marginal P(S) but S_next iid uniform independent per step, DOM correlated with phantom L but S_next independent, title without L, seeds 42+777"
+    }
+  ],
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-PHYSICS-35782523165/raw_results.json",
+      "sha256": "2ec15c2c02dfb29a280f42913ae3f1ef0baa687cf939c0b9ee88ffe8ecd53168",
+      "role": "derived"
+    }
+  ],
+  "environment": {
+    "python_version": "3.12.14",
+    "packages": ["numpy", "scikit-learn"],
+    "platform": "linux",
+    "pythonhashseed": "0",
+    "numpy_seed": 42,
+    "sklearn_version": "1.7.1"
+  },
+  "commands": [
+    "PYTHONHASHSEED=0 python research/experiments/EXP-PHYSICS-35782523165/execute.py"
+  ],
+  "elapsed_seconds": 42.5,
+  "determinism": "Deterministic seeds PYTHONHASHSEED=0 numpy 42 sklearn random_state 42, trajectory-grouped permutation 1000 perms seed 42, re-executable byte-identical aside from elapsed",
+  "reproduction": "Run PYTHONHASHSEED=0 python research/experiments/EXP-PHYSICS-35782523165/execute.py from repo root at commit 57ed5b83, verify freeze hashes match freeze.json, outputs raw_transitions_* and raw_results.json with sha256 as above"
+}

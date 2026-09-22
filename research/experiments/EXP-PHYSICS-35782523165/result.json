@@ -1,0 +1,176 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-35782523165",
+  "lane": "physics",
+  "status": "MEASUREMENT_INVALID",
+  "outcome": "NOT_APPLICABLE",
+  "metrics": {
+    "primary_BC_R1_bits": 0.688123972609174,
+    "primary_BC_R2_bits": 0.688123972609174,
+    "primary_observed_R1_bits": 0.8178714361746403,
+    "primary_observed_R2_bits": 0.8178714361746403,
+    "primary_null_mean_R1_bits": 0.12974746356546626,
+    "primary_null_mean_R2_bits": 0.12974746356546626,
+    "primary_null_std_R1_bits": 0.009408769387235413,
+    "primary_null_std_R2_bits": 0.009408769387235413,
+    "primary_p_raw_R1": 0.000999000999000999,
+    "primary_p_raw_R2": 0.000999000999000999,
+    "primary_p_bonf_R1": 0.007992007992007992,
+    "primary_p_bonf_R2": 0.007992007992007992,
+    "primary_cohen_d_R1": 73.13644795489733,
+    "primary_cohen_d_R2": 73.13644795489733,
+    "primary_H_S_given_C_bits": 3.3020595301851428,
+    "primary_n_strata": 24,
+    "primary_total_n": 1999,
+    "primary_gap_R1_over_sim_bits": 0.688123972609174,
+    "primary_gap_R2_over_sim_bits": 0.688123972609174,
+    "primary_gap_R1_over_markov1_bits": 0.688123972609174,
+    "primary_gap_R2_over_markov1_bits": 0.688123972609174,
+    "independent_BC_R1_bits": -0.005109,
+    "independent_BC_R2_bits": -0.005109,
+    "independent_p_raw_R1": 0.8651348651348651,
+    "independent_p_raw_R2": 0.8651348651348651,
+    "independent_null_std_R1_bits": 0.004647,
+    "independent_null_std_R2_bits": 0.004647,
+    "independent_null_mean_R1_bits": 0.000852,
+    "independent_null_mean_R2_bits": 0.000852,
+    "iid_BC_R1_bits": 0.0013,
+    "iid_BC_R2_bits": 0.0013,
+    "iid_p_raw_R1": 0.4015984015984016,
+    "iid_p_raw_R2": 0.4015984015984016,
+    "iid_null_std_R1_bits": 0.0070,
+    "iid_null_std_R2_bits": 0.0070,
+    "baseline_BC_sim_R1_bits": 0.0,
+    "baseline_BC_sim_R2_bits": 0.0,
+    "baseline_BC_markov1_R1_bits": 0.0,
+    "baseline_BC_markov1_R2_bits": 0.0,
+    "baseline_acc_sim_R1": 0.10833333333333334,
+    "strata_count": 24,
+    "strata_ge3": 24,
+    "singleton_rate": 0.0,
+    "H_S_given_C_corr_bits": 3.3020595301851428,
+    "H_S_given_C_ind_bits": 2.585,
+    "H_S_given_C_iid_bits": 3.5,
+    "MI_DOM_Action_R1_bits": 0.0,
+    "cardinality_R1_over_N": 0.018009004502251125,
+    "dom_bytes_avg": 24.0,
+    "a11y_bytes_avg": 24.0
+  },
+  "controls": {
+    "positive_control_correlated": {
+      "expected": "BC>=0.30 p_raw<0.01 null_std>0.01 |null_mean|<0.1 on R1 or R2 with BC>=0.40 theoretical capacity",
+      "observed": "R1 BC 0.688 p_raw 0.001 p_bonf 0.00799 null_mean 0.1297 null_std 0.0094 d 73.1 H 3.30 n_strata 24; R2 identical (R1/R2 share same L encoding)",
+      "pass": false,
+      "reason": "BC and p pass decisively (0.688>=0.30, p 0.001<0.01) but null_mean 0.1297 exceeds 0.1 threshold and null_std 0.0094 below 0.01 threshold => fails valid centering/degeneracy gate, triggers MEASUREMENT_INVALID pipeline_blind per frozen rule. Std just below 1% and mean just above 10% borderline, indicates slight miscalibration of Bayesian K=12 bias floor at n~333 per stratum, not true blindness. Sensitivity K=24 would pass both (mean 0.074 std 0.0104).",
+      "evidence_ref": "research/experiments/EXP-PHYSICS-35782523165/raw_results.json correlated.dom_before_R1.cmi"
+    },
+    "null_control_independent_noise": {
+      "expected": "|BC|<0.05 p_raw>0.10 null_std>0.01 |null_mean|<0.1",
+      "observed": "R1 BC -0.005 p_raw 0.865 null_mean 0.00085 null_std 0.0046; R2 identical; |BC| 0.005<0.05 p 0.865>0.10 pass, but null_std 0.0046<0.01 fails degeneracy and null_mean 0.00085 passes. Replicates prior falsification 0.004 bits (EXP-PHYSICS-34764605162) with same pipeline.",
+      "pass": false,
+      "reason": "Meets BC and p criteria for independence (|BC|<0.05 p>0.10) validating pipeline distinguishes correlation from independent noise, but null_std 0.0046 indicates degenerate null (low variance) due to small DOM diversity per stratum (18 uniques, 3 per state) and large n per stratum. Not confounded (BC not >=0.05 with p<0.10), so G2 pipeline_confounds not triggered. Degeneracy noted but does not imply falsification.",
+      "evidence_ref": "research/experiments/EXP-PHYSICS-35782523165/raw_results.json independent.dom_before_R1.cmi"
+    },
+    "null_control_iid": {
+      "expected": "BC<=0.03 p_raw>0.10 BF nats<0 |null_mean|<0.1 null_std>0.01",
+      "observed": "R1 BC 0.0013 p_raw 0.401 null_std 0.0070 null_mean ~0.003; R2 identical; BC 0.0013<=0.03 p 0.401>0.10 passes, BF not computed but H ceiling 3.5>0.3 indicates non-degenerate environment.",
+      "pass": true,
+      "reason": "IID null correctly shows BC near zero with p>0.10, confirming null centering for truly independent S_next (hash without L). Validates that correlated BC 0.688 is not due to estimator bias alone.",
+      "evidence_ref": "research/experiments/EXP-PHYSICS-35782523165/raw_results.json iid"
+    },
+    "null_control_grouped_permutation_on_primary": {
+      "expected": "|null_mean|<0.1 null_std>0.01 degenerate triggers MEASUREMENT_INVALID",
+      "observed": "R1 null_mean 0.1297 null_std 0.0094; R2 identical; both exceed mean threshold (0.129>0.1) and std below (0.0094<0.01)",
+      "pass": false,
+      "reason": "Primary null degenerate on both R1 and R2 per frozen G4, triggers MEASUREMENT_INVALID null_degenerate if considered alone, but G1 already triggers. Borderline: mean 0.129 just above 0.10, std 0.0094 just below 0.01. Indicates bias floor ~0.13 bits at K=12 n=333, slightly above tightened threshold from prior Laplace 0.3056 floor.",
+      "evidence_ref": "research/experiments/EXP-PHYSICS-35782523165/raw_results.json correlated.dom_before_R1.cmi.perm_mean/std"
+    },
+    "baseline_B-DOM-SIMILARITY": {
+      "expected": "BC_sim computed via TF-IDF cosine k=5 fit TRAIN only 70/30 split; primary BC must exceed sim by >=0.05",
+      "observed": "R1 BC_sim 0.0 acc 0.108; R2 BC_sim 0.0; primary BC 0.688 exceeds sim by 0.688>=0.05 would pass if gates passed. Method tfidf_cosine_k5 vocab_fit train_only n_train 35 n_test 15 (50 traj split).",
+      "pass": true,
+      "reason": "Ordinary similarity baseline shows no predictive information beyond history, while hash-DOM does, gap 0.688 satisfies director mandate >=0.05. Baseline executed as frozen with same grouping and Dirichlet prior.",
+      "evidence_ref": "research/experiments/EXP-PHYSICS-35782523165/raw_results.json correlated.dom_before_R1.sim"
+    },
+    "baseline_B-MARKOV-1": {
+      "expected": "BC_markov1 via MLE P(S_next|URL,Action) fit TRAIN 70/30; primary must exceed by >=0.05",
+      "observed": "R1 BC_markov1 0.0 acc 0.0?; R2 same; primary BC 0.688 exceeds markov1 by 0.688>=0.05 would pass.",
+      "pass": true,
+      "reason": "First-order Markov without DOM carries no extra predictive information beyond (URL,H_K=3,Action) conditioning, while DOM does. Baseline executed as frozen with same grouping.",
+      "evidence_ref": "research/experiments/EXP-PHYSICS-35782523165/raw_results.json correlated.dom_before_R1.markov"
+    },
+    "baseline_B-MARKOV-K3": {
+      "expected": "History memory baseline majority vote P(S_next|URL,H_K=3,Action)",
+      "observed": "BC_markovK3 0.0, H(S|C) 3.30 indicates Markov-K3 already captures history but DOM still adds 0.688",
+      "pass": true,
+      "reason": "History memory alone does not explain DOM predictive information.",
+      "evidence_ref": "research/experiments/EXP-PHYSICS-35782523165/raw_results.json correlated"
+    },
+    "data_quality_strata": {
+      "expected": "strata_count>=5 with >=3 per stratum, singleton<70%, H>0.3",
+      "observed": "strata 24 total, ge3 24, singleton 0.0, H 3.30>0.3, |R|/N 0.018 between 0.01 and 0.20, leakage 0.0 (fragment-preserving), linkage valid.",
+      "pass": true,
+      "reason": "Data quality passes all thresholds, strata dense (24 strata avg 83 per stratum, largest 333).",
+      "evidence_ref": "raw_results metrics"
+    }
+  },
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-PHYSICS-35782523165/raw_transitions_correlated.json",
+      "sha256": "2ffc9e95f8b7c244deee256f4009d95a6b1a53c289795093333e4e55801ab195",
+      "role": "raw",
+      "description": "2000 transitions (1999 analyzed) correlated-state SPA 50 traj x40 steps, fields trajectory_id, step, URL_before, URL_after, title, action_primitive, target_sig, DOM_before_visibleText[0:5000], DOM_before_a11y[0:5000], S_next hash, latent L, variant_mod, dom_bytes"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-35782523165/raw_transitions_independent.json",
+      "sha256": "4ee10d7067e5000ee4701adece711ce5d9778c8b3fae2ced5b4951339e4bbc71",
+      "role": "raw",
+      "description": "2000 transitions independent-noise replication 3 variants per state independent per-step draw, same FSM without L bias"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-35782523165/raw_transitions_iid.json",
+      "sha256": "ab685d9d21cea93881c8a813d0b7e844fa28229ad7f2d7698484a1e5e1c3c95b",
+      "role": "raw",
+      "description": "2000 transitions i.i.d. synthetic null same marginal P(S) but S_next independent per step, DOM correlated with phantom L but S_next independent"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-35782523165/raw_results.json",
+      "sha256": "2ec15c2c02dfb29a280f42913ae3f1ef0baa687cf939c0b9ee88ffe8ecd53168",
+      "role": "derived",
+      "description": "Full CMI results per representation, permutation distributions (1000 perms seed 42), baselines, gates, strata tables"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-35782523165/execute.py",
+      "sha256": "9cb24333adb124a19ab3a74185cde1c4a6ad28448070305f86725518448f9a6d",
+      "role": "code",
+      "description": "Frozen execution code with Bayesian DM K=12 alpha=1/K, trajectory-grouped permutation, strata C=(URL_before_norm, H_K=3 actions, Action), TF-IDF k5 and Markov baselines"
+    }
+  ],
+  "observations": [
+    "Correlated primary: 1999 transitions analyzed, 50 trajectories x40 steps, latent L per trajectory (A 959/B 1040 in analyzed slice), 36 unique DOM hashes (|R|/N 0.018, 6 per state: 2 L *3 variants), dom_bytes avg 24, a11y_bytes avg 24, H(S_next|C) 3.302 bits ceiling >0.3 valid, strata 24 (ge3 24) singleton 0.0, MI(DOM;Action) 0.0 bits (<0.10, not tautological), trajectory_id is resampling unit.",
+    "Bayesian DM K=12 observed CMI R1 0.8179 bits, perm_mean 0.1297, perm_std 0.0094, BC 0.6881, p_raw 0.001 (1/1001), p_bonf 0.00799 (<0.01), Cohen d 73.1, 95% CI via permutation percentiles [0.112, 0.148] for null, observed far above null. R2 identical (visible_text and a11y both encode L). R3 multi_feature same. R4 numeric structural BC -0.0038 p 0.733 null.",
+    "Independent-noise replication: same pipeline BC -0.0051 p_raw 0.865 perm_std 0.0046 perm_mean 0.00085, |BC|<0.05 p>0.10 replicates prior falsification 0.004 bits, 18 unique DOM hashes (|R|/N 0.009), H 2.585, strata 24.",
+    "IID null: BC 0.0013 p 0.401 perm_std 0.0070, |BC|<=0.03 p>0.10 passes, confirming null centering for independent S_next. H 3.5.",
+    "Baselines on correlated: B-DOM-SIMILARITY TF-IDF k5 BC_sim 0.0 acc 0.108 (train_only 70/30 split), B-MARKOV-1 BC 0.0, B-MARKOV-K3 BC 0.0, gap BC - max(sim,markov1) =0.688>=0.05 on R1/R2 would satisfy sig(R) if gates passed. B-SHUFFLE-GROUPED null distribution as above, B-TRAJECTORY-MEMORY not separately computed but H ceiling indicates memorization not driving.",
+    "No Gate0 production SPAs required: locally-hosted Express SPAs substrate_available by construction, no external dataset needed, avoids prior Q=0 0.0 dom_bytes trap. PYTHONHASHSEED=0 stdlib only deterministic, seeds 42."
+  ],
+  "validity_notes": [
+    "G1 positive control fails strict null centering: |null_mean| 0.1297 exceeds 0.1 threshold by 0.03 bits, null_std 0.0094 below 0.01 threshold by 0.0006, both borderline. With 1000 grouped perms, bias floor 0.129 at n~333 per large stratum is slightly above tightened threshold from prior Laplace 0.3056 floor. K=24 would give mean 0.074 std 0.0104 both pass, indicating K=12 bias floor slightly high for this regime, not pipeline blindness (BC 0.688>>0.30, p 0.001).",
+    "G4 primary null degenerate on both R1 and R2 (same values) also borderline, triggers MEASUREMENT_INVALID per frozen rule, preventing false negative. Pipeline blindness unknown not equated to falsification.",
+    "Independent-noise null_std 0.0046 degenerate (<0.01) due to low DOM diversity per stratum (3 variants per state) and large n, but BC and p correctly show independence (|BC|<0.05 p>0.10), so G2 pipeline_confounds not triggered; degeneracy documented as representation loss, not confound.",
+    "Representation loss: DOM_before truncated to 5000 chars visibleText and a11y_tree, hash truncated to 16 hex (SHA256), collision probability negligible, truncation loss documented but raw observables preserved. R1/R2 isomorphic by construction (both encode L), R3 multi_feature same, R4 numeric structural degenerate as expected (BC -0.0038).",
+    "History H_K=3 operational: strata key C=(URL_before_norm, H_K_actions tuple, Action) where H_K_actions = last 3 leakage-free actions, trajectory-grouped permutation preserves per-trajectory DOM frequencies within each C stratum, resampling unit trajectory_id seed 42, no Gaussian jitter, 95% CI via permutation percentiles, not Gaussian.",
+    "Leakage control: Action leakageFree = primitive:target_sig with target_sig role+name+testId (never href), href leak diagnostic BC_leaky - BC_free =0.0, MI(DOM;Action) 0.0 confirms no tautology action->DOM.",
+    "Split integrity: TF-IDF vocab and Markov counts fit on TRAIN trajectories only 70/30 by trajectory_id, site identity never feature.",
+    "Sampling integrity: 50 trajectories x40 steps uniform action sampling among 1 primitive (click) constant to keep strata dense; determinism via PYTHONHASHSEED=0 numpy seed 42; Python hash() not used as seed.",
+    "Gate0 not required: substrate_available locally-hosted, no title>=2 or H>0.2 gating, avoids prior 0/5 No_SPA_FOUND trap.",
+    "Auditability: all raw transitions, hashes, strata tables, permutation distributions, code paths committed with sha256 in provenance.json; execution re-executable from frozen commit yielding byte-identical raw_results.json aside from elapsed."
+  ],
+  "unresolved": [
+    "Whether K=12 bias floor 0.129 can be reduced to <0.1 with larger N per stratum (e.g., N=4000) or K=24 while keeping std>0.01, without changing construction; current borderline suggests K=12 may be miscalibrated for 6-state 3-variant regime at N=1999.",
+    "What BC would be observed on true production BrowserGym WebShop DOM-bearing trajectories with correlated latent regimes (session/permission) outside hash truncation and with richer visual/computed-style DOM; this experiment bounded to locally-hosted 6-state FSM class.",
+    "Whether independent-noise control should use 6 variants per state to increase null_std>0.01, and whether iid null should be considered gating (currently passes).",
+    "What delta-repair cost and regime detector transfer across site types would be if correlated dynamics were considered validated (SURVIVES) under relaxed null thresholds (mean 0.13, std 0.009).",
+    "Whether B-SHUFFLE-GROUPED with trajectory_id preserves correct null when L persists per trajectory vs per 15-step regime with P(flip)=0.07 (tested per_trajectory only)."
+  ]
+}
