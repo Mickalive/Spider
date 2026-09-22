@@ -1,0 +1,50 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-35697043449",
+  "lane": "runtime",
+  "target_lane": "runtime",
+  "next_question": "Does the HTTP fingerprint substrate discriminate when response bodies and status codes are identical but server-side state changes only independent headers (e.g., Cache-Control, ETag, Set-Cookie) — isolating header-only drift from body/status confounds?",
+  "why_next": "The current experiment demonstrates discrimination on maximally-distinct writable controls (status+body change simultaneously), but C4 is vacuous (full==body==status==1.0) and cannot support the claim that the full vector adds marginal value. The audit's V2 (ceiling effect) and V3 (header correlation via Content-Length) identify that header-independent drift is the critical untested condition for C-FRESHNESS (session/auth drift when response content is unchanged) and C-DELTA-REPAIR (perturbation measurement when only metadata varies). A header-only drift experiment where bodies and statuses are identical but server-side state changes ETag/Cache-Control/Set-Cookie would directly test whether the substrate can detect non-body/non-status state changes, which is the actual use case for freshness detection and delta repair.",
+  "carry_forward": {
+    "established": [
+      "HTTP fingerprint substrate (status + body bytes + filtered standard headers) deterministically discriminates maximally-distinct writable controls on localhost Flask 3.1.3 + PyJWT 2.14.0 + SQLite WAL: permission escalation (SQLite UPDATE users SET role='admin', 403 vs 200+admin dashboard, Jaccard 1.0, N=20 but 1 unique fingerprint per state) and session invalidation (SQLite DELETE sessions, 200 vs 401, Jaccard 1.0). Null control on auth-state drift (fresh vs near-expiry valid JWT, identical responses) discrimination 0.0, CI[0.0,0.0]. All five frozen decision-rule conditions C1-C5 pass (EXP-RUNTIME-35697043449, audit REVISE with producer_claim_supported=false but recomputed metrics match producer).",
+      "Server reads role from SQLite (not from JWT payload) on each request, making writable role changes observable via HTTP. Session validity checked via SQLite DELETE, making session invalidation observable.",
+      "Auth-state drift (fresh vs near-expiry JWT with identical claims) produces identical server responses because server validates expiry but ignores remaining-time difference while both tokens are valid."
+    ],
+    "rejected": [],
+    "unknown": [
+      "Does the substrate discriminate when response bodies and status codes are identical but server-side state changes only independent headers (Cache-Control, ETag, Set-Cookie) — header-only drift (audit V3, result.json unresolved[1])",
+      "Does the substrate discriminate same-status body-only permission changes (e.g., 200 with reader vs admin body content) without status code change (audit V2, result.json unresolved[3])",
+      "Does discrimination hold on production middleware (Django, Express, FastAPI) with realistic response variation (ETag, Cache-Control, Set-Cookie, non-deterministic Date/X-Request-Id) (audit V4, result.json unresolved[1])",
+      "Does the substrate discriminate under partial body overlap, concurrent load, HTTP/2, TLS, or multi-client scenarios (result.json unresolved[3-5])",
+      "Does N=20 suffice for non-degenerate bootstrap CI when responses have non-deterministic elements — current CI is degenerate due to deterministic responses (audit V1, result.json unresolved[5])"
+    ],
+    "do_not_assume": [
+      "C-MEAS-VALID is ready for VALIDATED or PRODUCT_CORE promotion — the audit REVISE status, vacuous C4, degenerate bootstrap CI, and untested header-only drift prevent advancement beyond EXPERIMENTAL",
+      "The full-vector fingerprint adds marginal value beyond single-field baselines — C4 is vacuous (1.0>=1.0 equality) because status and body change simultaneously on both positive conditions; body alone already achieves perfect discrimination",
+      "C-FRESHNESS and C-DELTA-REPAIR are unblocked for distributed/production testing — this experiment demonstrates only localhost synthetic measurement substrate; production middleware, CDN, and distributed infrastructure are untested",
+      "Localhost Flask dev server results generalize to production WSGI/nginx — Flask development server (Werkzeug) on 127.0.0.1:19847 produces deterministic static JSON with no dynamic fields, no concurrency, no TLS/HTTP/2, no ETag/Cache-Control/Set-Cookie variation (audit V4)",
+      "Bootstrap CI [1.0,1.0] or [0.0,0.0] reflects sampling precision — CI is degenerate because all 20 fingerprints within each state are byte-identical (effective N=1, not 20); jitter 50-150ms has no observable effect on deterministic responses (audit V1)",
+      "B-HEADERS-ONLY discrimination 1.0 demonstrates independent header signal — headers are body-correlated via Content-Length (22 vs 108, 57 vs 28 bytes); no independent header-only variation tested (audit V3)",
+      "Null control validates header-only drift detection — null tests identical-code-path responses (fresh vs near-expiry JWT, same status+body+headers); header-only drift where bodies identical but headers vary is a separate untested condition"
+    ]
+  },
+  "dependencies": [
+    "Flask 3.1.3 + PyJWT 2.14.0 + SQLite 3.45.0 on localhost 127.0.0.1:19847 (Werkzeug dev server)",
+    "Same HTTP fingerprint computation: hash(status + body_bytes + sorted_filtered_headers) with EXCLUDED_HEADERS = [Date, Server, X-Request-Id]",
+    "Same discrimination metric: 1.0 - Jaccard(fingerprint_set_A, fingerprint_set_B)",
+    "Same seed (SEED=44) and jitter (50-150ms uniform) for reproducibility",
+    "SQLite-backed role lookup (role not in JWT payload) and session validity via DELETE"
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-RUNTIME-35697043449/spec.json — frozen question, hypothesis, falsifier, decision_rule C1-C5",
+    "research/experiments/EXP-RUNTIME-35697043449/result.json — metrics (permission 1.0, session 1.0, null 0.0, baselines all 1.0), controls C1-C5 all pass, validity_notes (degenerate CI, ceiling effect)",
+    "research/experiments/EXP-RUNTIME-35697043449/audit.json — status=REVISE, claim_ceiling narrowed, V1-V7 validity findings, baseline_findings, recomputed_metrics match producer",
+    "research/experiments/EXP-RUNTIME-35697043449/raw_observations.jsonl — 120 lines, 6 states x20, 1 unique fingerprint per state",
+    "research/experiments/EXP-RUNTIME-35697043449/provenance.json — environment, artifacts sha256, seed 44, excluded_headers",
+    "research/experiments/EXP-RUNTIME-35697043449/report.md — 2.2 baseline equivalence, 3.3 claim ceiling, 3.4 baselines vacuous at ceiling",
+    "research/experiments/EXP-RUNTIME-35697043449/request.json — director_mandate PIVOT C-MEAS-VALID, parent_handoff EXP-RUNTIME-35611612543",
+    "research/experiments/EXP-RUNTIME-35697043449/freeze.json — frozen hashes"
+  ],
+  "recommended_action": "Design and execute a header-only drift experiment on the same Flask+SQLite+JWT localhost testbed where: (1) bodies and status codes are identical across conditions (same 200 + same JSON body); (2) server-side state changes only independent headers (e.g., Cache-Control max-age changes from 3600 to 0 after session metadata update, or ETag changes after data modification, or Set-Cookie is added/removed); (3) B-HEADERS-ONLY baseline should achieve discrimination > 0.0 while B-STATUS-ONLY and B-BODY-ONLY achieve 0.0; (4) full-vector discrimination should exceed B-BODY-ONLY (the first non-vacuous C4 test). This directly addresses audit V2 (ceiling effect), V3 (header correlation), and the C-FRESHNESS/C-DELTA-REPAIR use case of detecting state changes when response content is unchanged."
+}

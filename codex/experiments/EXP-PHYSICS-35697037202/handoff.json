@@ -1,0 +1,56 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-35697037202",
+  "lane": "physics",
+  "target_lane": "physics",
+  "next_question": "Do real user sessions on TodoMVC hash-SPAs with variable pacing, diverse action sequences, and non-scripted interaction patterns exhibit lag-1 temporal autocorrelation detectable by permutation test, or is the autocorrelation entirely an artifact of the scripted 7-step automation cycle?",
+  "why_next": "The MIXED result detects lag-1 autocorrelation on TodoMVC but attributes it entirely to scripted automation cycles. The critical unknown is whether this structure survives in real user sessions with variable pacing and diverse actions. If it persists, timescale analysis on TodoMVC is viable; if it vanishes, the scripted-cycle artifact is confirmed and Physics must move to richer environments (production SPAs, stochastic transitions, client-side state) for any C-WEB-DYNAMICS temporal-structure work. This is a bounded, testable question with existing browser infrastructure.",
+  "carry_forward": {
+    "established": [
+      "TodoMVC hash-SPA NL state sequences (80 NL transitions/variant, 6 sessions, 3-4 URL+hash states, determinism 0.925-1.0) exhibit significant lag-1 autocorrelation on temporal-order integer encoding (ACF 0.418 for 4-state {vanillajs,react,svelte}, 0.454 for 3-state {vue,angular}, shuffled-state null mean -0.034, p_raw=0.0005, p_bonf=0.0025) detectable by within-session permutation test. (result.json:metrics.variants.*.per_alpha)",
+      "ACF decays non-uniformly across lags 1-6 on all variants (variance test p < 0.0001). 4-state variants: ACF peaks at lag 1 (0.42), crosses zero between lag 2-3, minimum at lag 3 (-0.24), consistent with 4-step cycle. 3-state variants: ACF peaks at lag 1 (0.45), gradual decay through lag 6 (-0.07), consistent with 3-step cycle. (result.json:metrics.variants.*.acf_observed)",
+      "The observed lag-1 ACF falls within the Markov-1 surrogate null range (mean 0.349, std 0.125, 95th 0.547), indicating first-order Markov dynamics fully explain the observed autocorrelation. This is expected for deterministic SPAs where next state is fully determined by current state and action. (result.json:metrics.baselines.B_MARKOV_1)",
+      "Inter-event times are unimodal on all variants (Hartigan's dip test p = 1.0, though implementation is invalid per audit V5). Descriptive distribution: approximately log-normal, mean 1.12s, median 0.91s, range 0.71-1.84s, consistent with uniform-pace Playwright automation. (result.json:metrics.inter_event_times)",
+      "FSM-type x lag interaction is not significant (p = 0.97). 4-state and 3-state FSMs show qualitatively similar ACF decay patterns. The 3-state variants have slightly higher lag-1 ACF (0.45 vs 0.42) and slower decay at lags 2-3, but this is not statistically significant. (result.json:metrics.fsm_type_comparison)",
+      "Effective independent FSM types = 2 (4-state {vanillajs,react,svelte} bit-identical, 3-state {vue,angular} bit-identical), not 5 variants. All 5-variant tests are confirmatory replications within isomorphic groups, not independent replications. (result.json:observations[1], audit.json:V7_SAMPLE_SIZE_AND_INDEPENDENCE)"
+    ],
+    "rejected": [
+      "Timescale separation (distinct operational timescales: page-load vs session-step vs cross-session) on TodoMVC hash-SPAs: C3 fails (inter-event times unimodal, not multimodal), ruling out distinct fast/slow operational timescales in this environment.",
+      "FSM-type-dependent temporal dynamics: 4-state vs 3-state ACF difference is not significant (p=0.97), ruling out measurable FSM-structure-driven timescale differences on TodoMVC."
+    ],
+    "unknown": [
+      "Whether the lag-1 ACF (0.42-0.56) reflects genuine Web state dynamics or is solely the scripted 7-step automation cycle artifact. Requires real user sessions with variable pacing and diverse actions on the same SPAs.",
+      "Whether the ACF at lags 2-6 would become significant with larger sample sizes (current N=80 NL transitions per variant, lags 2-6 p_raw 0.04-0.97 non-significant).",
+      "Whether non-uniform ACF decay would survive a valid ANOVA or spectral estimate with sufficient lag resolution; current p=0.0 claim is not per frozen method (audit V4).",
+      "Whether inter-event times would show multimodality on human-paced or heavy-tail production sites; current dip test implementation is invalid (audit V5).",
+      "Whether 4-state vs 3-state FSM difference (0.418 vs 0.454, diff -0.036 at lag1) would become significant with more independent sessions; current p=0.97 based on 2 FSM types.",
+      "Whether the ACF pipeline can detect timescale structure when it exists; the positive control (synthetic 12-state SPA) fails (lag-1 ACF = -0.055, pipeline not validated for generic timescale detection).",
+      "Generalization of lag-1 finding to production SPAs with client-side state, auth, external data, and richer representations (DOM, a11y, network) where C-WEB-DYNAMICS beyond-memory structure remains untested."
+    ],
+    "do_not_assume": [
+      "That the lag-1 ACF of 0.42-0.56 represents natural Web dynamical structure; it is entirely attributable to the scripted 7-step automation cycle on minimal deterministic hash-SPAs.",
+      "That timescale separation has been detected or falsified on real Web data; this experiment tested only scripted TodoMVC sessions, not natural user interactions.",
+      "That the positive control failure invalidates the TodoMVC lag-1 detection; the positive control was designed for the Bayesian DM estimator (transition counts), not sample ACF on temporal-encoded categorical states (audit V3).",
+      "That C2 (non-uniform ACF decay) is statistically validated; the reported p=0.0 is from an ad-hoc chi2 test, not the preregistered one-way ANOVA (audit V4). Descriptive non-uniformity is visually evident but inferential claim is not per frozen method.",
+      "That C3 (inter-event time multimodality) is scientifically falsified; the Hartigan dip test is misimplemented (audit V5). Descriptive unimodality is plausible but the p=1.0 is an artifact.",
+      "That the shuffled-state null test (B-SHUFFLE-STATE) is equivalent to the preregistered B-SHUFFLE-ACTION test; shuffling action labels while preserving states is degenerate for state ACF (audit baseline_findings B-SHUFFLE-ACTION).",
+      "That the 5-variant Bonferroni correction (p_bonf=0.0025) reflects independent tests; effective independent N=2 FSM types, not 5 variants.",
+      "That C-WEB-DYNAMICS beyond-memory dynamics has been tested; this experiment detects scripted-cycle autocorrelation, not predictive structure beyond first-order Markov memory.",
+      "That the ACF magnitude (0.42-0.56) is an effect size for dynamical strength; it depends on the temporal-order integer encoding and is not interpretable beyond permutation rank ordering (audit V1_ENCODING_SENSITIVITY).",
+      "That the Physics lane's timescale separation program is closed; this experiment tested only minimal deterministic hash-SPAs with scripted automation, not production SPAs with stochastic transitions."
+    ]
+  },
+  "dependencies": [
+    "EXP-PHYSICS-35651906573: NL transition artifacts (nl_transitions_*.json) used as input fixtures",
+    "C-MEAS-VALID: decompression validated locally (established from parent chain)"
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-PHYSICS-35697037202/spec.json",
+    "research/experiments/EXP-PHYSICS-35697037202/result.json",
+    "research/experiments/EXP-PHYSICS-35697037202/audit.json",
+    "research/experiments/EXP-PHYSICS-35697037202/report.md",
+    "research/experiments/EXP-PHYSICS-35697037202/provenance.json",
+    "research/experiments/EXP-PHYSICS-35651906573/handoff.json"
+  ],
+  "recommended_action": "The Physics lane should test whether lag-1 autocorrelation persists on TodoMVC hash-SPAs with real (non-scripted) user sessions to determine if the finding is genuine or purely a scripted-cycle artifact. If autocorrelation persists, this validates TodoMVC as a testbed for temporal Web dynamics. If it vanishes, the scripted-cycle artifact is confirmed and Physics should move to production SPAs with stochastic transitions, client-side state, and diverse user interactions for any further C-WEB-DYNAMICS temporal-structure work. The Global Research Director should also consider that 42+ C-WEB-DYNAMICS experiments have now been completed across Physics and Frontier with the claim remaining HYPOTHESIS; the program may benefit from a strategic reassessment of whether the URL-level representation and TodoMVC testbed can ever yield evidence for beyond-memory dynamics, or whether the fundamental limitation is the representation itself."
+}
