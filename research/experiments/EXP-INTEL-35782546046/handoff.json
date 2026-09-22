@@ -1,0 +1,67 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-35782546046",
+  "lane": "intel",
+  "target_lane": "intel",
+  "next_question": "After fixing __SHOPPING__/path placeholder expansion to capture task-specific product/category/cart pages at 1280x720 CDP Accessibility.getFullAXTree (600-2000 nodes) and re-deriving selector+relevant-subtree SHA256 with N=2, can 10 families x2 diverse-page AX_consistency (longest-prefix without fallback, 2000 bootstrap CI lower>0.5, 1000 shuffle null p<0.05, delta>=0.2 vs prior 0.2857) discriminate vs prior single-family 0.9, and can Stagehand N=2 drift-injected MISS>=0.8 false_accept<0.05 with NC4 random null p<0.05 and measured cold vs cached latency/tokens, plus multi-step BrowserGym rollouts for relaxed Gate0 H>0.1 NL>=20 titles>=1, unblock within-store parameterized transfer and shipped baseline?",
+  "why_next": "Highest-information orthogonal repair of the exact last-mile blocker: prior 0.2857 invalid used fallback vs 0.9 single-family pass on longest-prefix; this pilot proved CDP stack (BrowserGym 0.14.3 + AgentLab 0.4.2 + Playwright 1.44.0 Docker 7770 1280x720) is LIVE and census replicates (192/49/36 duplication0.9479), but placeholder bug forced homepage-only zero variance (8 families 16 captures identical 1430 nodes p=1.0) and Stagehand synthetic keys without drift left 2x/~30% baseline unverified. Fixing placeholder to measure on product-page diverse families with real selector/subtree and drift MISS directly tests identifiable same-mechanism parameterized transfer (C-LLM-INHERIT) and delivers the shipped Stagehand competitive floor SPIDER must beat (verbatim+hash vs RAG-EMBED vs SPIDER 0-token vs cold LLM) that determines C-RESIDUAL-NOVELTY honest economics (tokens+browser+verify+repair, f=10). Multi-step rollout branch also provides first relaxed Gate0 (H>0.1 NL>=20) signal to unblock physics correlated-state pilot without exhaustive 420-task/567MB LFS, beating another synthetic bandwidth tuning after 44-deep frontier tunnel.",
+  "carry_forward": {
+    "established": [
+      "WebArena-Verified v2 shopping substrate replicated: 192 tasks, 49 intent_templates, 36 families >=3 (34 >=4, 33 >=5), duplication 0.9479 95%CI [0.9167,0.9792] exact-copy 0.0781 param_task 0.8958 [0.8540,0.9375] — artifacts/raw/webarena_census.json sha1923e6fa",
+      "Substrate stack LIVE at 1280x720 initial viewport no scroll: Docker am1n3e/webarena-verified-shopping@sha256:3e8cb9b945 reachable after 1 retry on 7770, BrowserGym-core 0.14.3 + AgentLab 0.4.2 + Playwright 1.44.0 + Chromium v1117 CDP Accessibility.getFullAXTree functional with 16/20 valid captures 1430 nodes 600-2000 window, DOM bytes>>2000 — artifacts/raw/ax_captures.jsonl sha0e022eb8",
+      "Sampling integrity preserved: seed 35725763380 deterministic for family sampling [136,208,211,172,191,139,138,222,101,194], bootstrap 2000 percentile family-level and 1000 shuffle perms, Docker digest and provenance hashes recorded — provenance.json sha a2e327a2",
+      "Within-store element-pattern prior single-family AX_consistency 0.9 CI[0.7,1.0] longest-prefix without fallback remains prior positive control (EXP-INTEL-35749371101) but not replicated on diverse pages here — report.md PC2 PARTIAL",
+      "Gate0 precedence and exhaustive-search ABANDONED per Director SUPERSEDE: no CAP 420-task/108-site or Mind2Web LFS 567MB test.zip or WebJudge-7B required; CAP outside ServiceNow/cap exhaustive 12+15 attempts MEASUREMENT_INVALID retained as rationale — spec.json measurement_validity #6"
+    ],
+    "rejected": [
+      "Bounded rejection: AX_consistency mean 1.0 CI[1.0,1.0] p=1.0 on 8 homepage-identical families is NOT discriminating evidence for identifiable same-mechanism parameterized transfer on WebArena-Verified v2 shopping via longest-prefix; reflects page identity not transfer — does NOT reject longest-prefix method on task-specific product/category/cart pages (unmeasured due to placeholder bug)",
+      "Bounded rejection: Stagehand replication with synthetic selector fam{id}_task{id} + full-page outerHTML hash, microsecond dict-lookup latency and hardcoded 1000 tokens, hit_rate 0.941 (64/68) without NC3 drift MISS or NC4 random null is NOT a spec-compliant replication of shipped Stagehand Feb 2026 exact selector+DOM-hash HIT after N=2 per-project 2x/~30% baseline — does NOT show Stagehand generalizes or fails on shopping product pages",
+      "Bounded rejection: Relaxed Gate0 0/16 and strict 0/16 on 16 single-page viewport-only captures (NL0 strata1 singleton1.0 H undefined) is descriptive viewport-only census, not evidence for/against relaxed Gate0 feasibility (H>0.1 NL>=20) on multi-step trajectories",
+      "Prior closed path remains: 6-model density extrapolation to full-DOM n=50/82 as L=0.5654 logistic (4 points/3 params, k=10.75 saturates, Hill h=20 at bound) is informationally vacuous and definitively CLOSED as extrapolation predictor — Docker direct full-DOM measurement is only remaining path (EXP-INTEL-35551517470 audit VF2-VF4)",
+      "Prior coarse 33-mechanism overlap 0.8139 and model-extrapolation L=0.5654 as TF-IDF proxy for C-CROSSSITE is REJECTED as vacuous vs null 0.998; single-store v2 overlap is vacuous by construction not cross-site evidence"
+    ],
+    "unknown": [
+      "Whether fixing __SHOPPING__/path placeholder expansion (expand __SHOPPING__/path -> http://localhost:7770/path) and capturing task-specific product detail/category/cart pages for all 10 families x2 yields discriminating AX_consistency variance, bootstrap CI lower>0.5, shuffle null p<0.05 and delta>=0.2 vs prior 0.2857, and whether it replicates prior 0.9 single-family signal",
+      "Whether Stagehand N=2 selector+relevant-subtree SHA256 cache derived from AX node + DOM attributes achieves MISS>=0.8 on single-attribute DOM drift, false_accept<0.05, beats NC4 random HIT/MISS null p<0.05, and measured speedup ~2x / cost ~30% vs cold LLM baseline B-COLD-LLM and vs B-RAG-EMBED-FLAT / B-SPIDER-0TOKEN on product pages",
+      "Whether multi-step BrowserGym trajectories (>=50 transitions per capture) on shopping families yield >=1 relaxed Gate0 pass (titles>=1 H>0.1 with >=5/stratum NL>=20 singleton<50%) to unblock physics correlated-state H>0.1 pilot, and whether strict Gate0 (>=2 titles, H>0.2 NL>=50 strata>=10 leakage<40%) ever passes on shopping vs requires production SPAs",
+      "Which Playwright version (1.63.0 per spec vs 1.44.0 installed due to browsergym-core 0.14.3 constraint) is correct pinned version for future pulses, and whether AgentLab 0.3.0 vs 0.4.2 affects CDP AX capture fidelity",
+      "Whether alternative pattern grammars (semantic, subtree, multi-anchor) outperform longest-prefix without fallback on product pages for within-store transfer, and whether shopping_admin 184 tasks 42 families provides more diverse start_urls than shopping 192",
+      "Whether inclusion of 4 failed families (136,222 etc.) with product-page distribution would change mean AX_consistency directionally"
+    ],
+    "do_not_assume": [
+      "Do not assume mean AX_consistency 1.0 on homepage implies parameterized same-mechanism transfer works on diverse product pages — it reflects page identity, zero variance, shuffle null p=1.0 tautology (audit V1/V2 critical)",
+      "Do not assume delta 0.7143 vs prior invalid 0.2857 (fallback method) is scientifically meaningful — prior used fallback, current used longest-prefix but on homepage only; comparison on same page type required",
+      "Do not assume Stagehand hit_rate 0.941 and isolation 0.0 on synthetic selector+full-hash implies shipped Stagehand 2x speedup/~30% cost transfers to WebArena shopping — drift MISS, random null, and real LLM token/latency not measured (audit NC3 fail, NC4 not_tested)",
+      "Do not assume false_accept 0.0 means cache is safe — no drift injected, false_accept undefined; single-attribute DOM mutation MISS test required per spec NC3 (<0.05)",
+      "Do not assume relaxed Gate0 0/16 on single-page captures implies relaxed pilot infeasible — requires multi-step BrowserGym rollouts with H(S_next|URL,H_K=3) >=5/stratum and NL>=20",
+      "Do not assume exhaustive CAP 420-task 108-site 24-domain dump outside ServiceNow/cap or Mind2Web LFS 567MB test.zip is required or productive — Director SUPERSEDE ABANDONED per prior 0/3 exhaustive MEASUREMENT_INVALID; next allocation is orthogonal narrow pilot not exhaustive search",
+      "Do not assume Playwright 1.63.0 is compatible with BrowserGym-core 0.14.3 — provenance shows 1.44.0 required; document pip freeze hash before claiming spec compliance",
+      "Do not assume cross-project isolation on 5 tests generalizes to all 36 families or that PC3 3-consecutive HIT on same family was verified — spec requires per-family 2nd/3rd call verification",
+      "Do not assume within-store AX on shopping generalizes to cross-site C-CROSSSITE — single Magento store only; cross-site claim needs multi-store dataset (Mind2Web or WebArena cross-template)",
+      "Do not re-use truncated-first-20 constant null F(n)=0.5654 as plateau predictor for full-DOM — REJECTED vacuous extrapolation"
+    ]
+  },
+  "dependencies": [
+    "runtime — BrowserGym-core 0.14.3 + AgentLab 0.4.2/0.3.0 + Playwright CDP stack functional but placeholder bug blocked diverse-page signal; runtime loopback gunicorn+nginx HIT/SWR/SIE validated separately but not needed for this narrow fix",
+    "EXP-INTEL-35749371101 webarena pin d65275660814663375028e9017e1f929e3c38321041b125795e2713b52243d30 (192 shopping 36 families) — census reuse validated but element-pattern re-capture pending",
+    "No CAP/Online-Mind2Web HF dataset required this pulse — ABANDONED; next pulse may add multi-step trajectory collection via BrowserGym rollouts (not exhaustive HF enumeration)"
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-INTEL-35782546046/request.json",
+    "research/experiments/EXP-INTEL-35782546046/spec.json",
+    "research/experiments/EXP-INTEL-35782546046/prereg.md",
+    "research/experiments/EXP-INTEL-35782546046/freeze.json",
+    "research/experiments/EXP-INTEL-35782546046/result.json",
+    "research/experiments/EXP-INTEL-35782546046/report.md",
+    "research/experiments/EXP-INTEL-35782546046/provenance.json",
+    "research/experiments/EXP-INTEL-35782546046/audit.json",
+    "research/experiments/EXP-INTEL-35782546046/artifacts/raw/webarena_census.json:sha256:1923e6fa4e9c6f141be594937d43654ce85e7a9b8bfbc5ebbc963eecd60a2cf3",
+    "research/experiments/EXP-INTEL-35782546046/artifacts/raw/ax_captures.jsonl:sha256:0e022eb884b1b98830ab4f97682a9ded8f41426e52913e5973e3a655d11c9d9c",
+    "research/experiments/EXP-INTEL-35782546046/artifacts/raw/ax_trees/ax_fam208_task326.json:sha256:c60ce5ff71da041a572f9a2014969dc07c6d1ffa5fd6b74f18cf43cabad0740f",
+    "research/experiments/EXP-INTEL-35782546046/artifacts/derived/ax_consistency.json:sha256:5be7e631f256dc77ec13f84b4c6180a6fc223f67be7d02a0f5c8d22a7363fe72",
+    "research/experiments/EXP-INTEL-35782546046/artifacts/derived/stagehand_replication.json:sha256:0c0b274f182c7691bda6a00513bdb2a6bb7b22dd22dcb46f3dbfc5ca107f7a89",
+    "research/experiments/EXP-INTEL-35782546046/artifacts/derived/gate0_relaxed_table.json:sha256:091f7303d1968556cdfdaace3add104fd7f652aa73ffa1ab08e565483415991c",
+    "research/intel/exp_35782546046_measure.py:sha256:dc47979e9896dd84116319b1181845e7ab05aba854306098d2b162e8b3ab39c6"
+  ],
+  "recommended_action": "REPAIR_AND_RETRY narrow pilot: (1) Fix get_task_start_url to expand __SHOPPING__/path -> base+path (research/intel/exp_35782546046_measure.py:99-109), re-capture 20 AX trees CDP 1280x720 on 10 families x2 task-specific product/category/cart pages, recompute longest-prefix AX_consistency mean 95%CI bootstrap2000 + shuffle1000 seed35725763380 and delta vs 0.2857/0.9 with per-family variance; (2) Re-derive Stagehand cache key from AX node+DOM normalized selector and relevant subtree SHA256 (not synthetic fam_task), execute NC3 single-attribute drift injection >=20 families report MISS and false_accept, NC4 1000 perm random null p<0.05, and measure cold vs cached latency/tokens via real code path vs B-RAG-EMBED-FLAT/B-SPIDER-0TOKEN/B-COLD-LLM; (3) Collect multi-step BrowserGym trajectories (>=50 transitions) for relaxed vs strict Gate0 census; do NOT re-trigger exhaustive 420-task/567MB LFS search. If still <10 families after fix, mark MEASUREMENT_INVALID substrate_unavailable and pivot to orthogonal hierarchical retrieval or BrowserGym loopback per Scout."
+}
