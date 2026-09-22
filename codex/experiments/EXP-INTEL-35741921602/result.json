@@ -1,0 +1,147 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-35741921602",
+  "lane": "intel",
+  "status": "COMPLETE",
+  "outcome": "FALSIFIES",
+  "metrics": {
+    "webarena_census": {
+      "total_shopping_tasks": 192,
+      "distinct_intent_templates": 49,
+      "duplication_fraction": 0.9479166666666666,
+      "duplication_ci": [0.9166666666666666, 0.9791666666666666],
+      "exact_copy_fraction": 0.078125,
+      "exact_copy_ci": [0.041666666666666664, 0.11979166666666667],
+      "param_task_fraction": 0.8958333333333334,
+      "param_task_ci": [0.8489583333333334, 0.9375],
+      "families_ge3": 36,
+      "families_ge4": 34,
+      "families_ge5": 33,
+      "thresholds_all_pass": true
+    },
+    "ax_consistency": {
+      "value": 0.2857142857142857,
+      "families_checked": 7,
+      "families_passing": 2,
+      "threshold": 0.6,
+      "pass": false,
+      "tasks_live_extracted": 15,
+      "ax_nodes_per_task": 1426,
+      "verdict": "FALSIFIED-IN-SETTING (0.2857 < 0.6)"
+    },
+    "mind2web": {
+      "status": "MEASUREMENT_INVALID",
+      "error": "HF dataset osunlp/Mind2Web exposes only single train split (73 websites/3 domains/1009 tasks); spec requires official train/test_task/test_website/test_domain splits (137/31)",
+      "diagnostic_overlap_website": 0.813953488372093,
+      "diagnostic_shuffle_null_mean": 0.9979779591836735,
+      "diagnostic_excess": -0.18402447081158047,
+      "diagnostic_k": 50,
+      "note": "DIAGNOSTIC ONLY — not used for decision rule due to missing official splits"
+    },
+    "pc1_web_search": {
+      "pass": true,
+      "detail": "live CDP: combobox 'Search' + button 'Search' found on homepage at 1280x720"
+    },
+    "pc2_mind2web_recurrence": {
+      "pass": false,
+      "detail": "cannot verify recurrence without official splits; dataset loaded with 1009 tasks/73 websites/3 domains"
+    },
+    "nc3_web_exact_copy_null": {
+      "pass": true,
+      "exact_copy_fraction": 0.078125
+    }
+  },
+  "controls": {
+    "PC1_WEB_SEARCH": {
+      "expected": "PASS — homepage AX contains combobox 'Search' + button 'Search'",
+      "observed": "PASS",
+      "evidence": "research/experiments/EXP-INTEL-35741921602/artifacts/raw/axtree_web_sample_live.json"
+    },
+    "PC2_MIND2WEB_RECURRENCE": {
+      "expected": "PASS — at least one cluster in >=10 tasks across >=3 websites",
+      "observed": "CANNOT_VERIFY — HF revision lacks official test splits",
+      "evidence": "Mind2Web HF loaded: 73 websites/3 domains/1009 tasks single split"
+    },
+    "NC1_WIKIPEDIA_NULL": {
+      "expected": "0 shopping overlap",
+      "observed": "NOT_EXERCISED",
+      "reason": "no Wikipedia container available"
+    },
+    "NC2_MIND2WEB_SHUFFLE_NULL": {
+      "expected": "true overlap exceeds shuffle null mean by >=0.10 and exceeds p95",
+      "observed": "DIAGNOSTIC ONLY — overlap 0.8140 vs null_mean 0.9980 (excess -0.184)",
+      "note": "Not used for decision: official splits unavailable; diagnostic shuffle computed on website-label permutation"
+    },
+    "NC3_WEB_EXACT_COPY_NULL": {
+      "expected": "exact_copy_fraction < 0.2",
+      "observed": "PASS (0.0781 < 0.2)",
+      "evidence": "Census recomputation"
+    },
+    "B1_DOC_M1_12STORES": {
+      "expected": "Vacuous null (single store for v2)",
+      "observed": "CONFIRMED — exactly one store in v2 dataset",
+      "status": "REJECTED as cross-site baseline for v2"
+    },
+    "B2_DOC_M2_HEURISTIC": {
+      "expected": "M2=0.80 heuristic inflation gap",
+      "observed": "Parameterization 0.8958 (task) / 0.8367 (template) exceeds heuristic; duplication 0.9479 with exact-copy 0.0781",
+      "status": "Quantified gap: exact-copy <0.2 means 91.8% parameterized variation"
+    },
+    "B3_SPIDER_2SITE": {
+      "expected": "Lower bound for comparison",
+      "observed": "WebArena 36 families >=3 far exceeds 2-site corpus",
+      "status": "Bound trivially exceeded if thresholds met"
+    },
+    "B4_SHUFFLE_NULL": {
+      "expected": "Shuffled website-label null (1000 perms, seed 35725763380)",
+      "observed": "Diagnostic: mean 0.9980, p95 1.0 (coarse k=50 clustering inflates null)",
+      "status": "Computed but not used for decision (official splits unavailable)"
+    },
+    "B5_RETRIEVAL_REPLAY_STRONG": {
+      "expected": "Disclosure only for product framing",
+      "observed": "Not executed here; future Product within-store hold-out conditional on substrate",
+      "status": "Disclosure"
+    }
+  },
+  "artifacts": [
+    {"path": "research/experiments/EXP-INTEL-35741921602/artifacts/raw/webarena-verified.json", "sha256": "d65275660814663375028e9017e1f929e3c38321041b125795e2713b52243d30", "role": "raw", "note": "Reused from EXP-INTEL-35725763380; SHA256 verified"},
+    {"path": "research/experiments/EXP-INTEL-35741921602/artifacts/raw/axtree_web_sample_live.json", "sha256": "f6245e8fc77579cb26525a80de434f784a7e907e7970386517619b7165ae4ff3", "role": "raw", "note": "15 live CDP Accessibility.getFullAXTree extractions at 1280x720 initial viewport, 1426 nodes each"},
+    {"path": "research/experiments/EXP-INTEL-35741921602/artifacts/derived/measurements.json", "sha256": "f4b6e236aa2e9924a37257eb86dedbba8918571845aa7a8ff68357afffbe7a59", "role": "derived"},
+    {"path": "research/experiments/EXP-INTEL-35741921602/artifacts/derived/shuffle_null.json", "sha256": "c2482cbb3ece503f9f56866d33cef12f39247386bda8a9f27db384b280e0e80e", "role": "derived"},
+    {"path": "research/intel/exp_35741921602_measure.py", "sha256": "562422941a086e3eb46578179ededb3daca3415c1f28885fc1e80fae314fa6cd", "role": "code"}
+  ],
+  "observations": [
+    "WebArena-Verified v2 census recomputed exactly: 192 shopping tasks, 49 intent_templates, 36 families>=3, 34 families>=4, 33 families>=5",
+    "Duplication fraction 0.9479 [0.9167,0.9792] with exact-copy 0.0781 [0.0417,0.1198]: 91.8% of reuse-family tasks are parameterized variants, not verbatim copies",
+    "Parameterization prevalence 0.8958 task-level, 0.8367 template-level — exceeds frozen thresholds (>=0.5, >=0.3, <0.2)",
+    "PC1_WEB_SEARCH PASS via live CDP: homepage at 1280x720 contains combobox 'Search' + button 'Search' (1426 AX nodes)",
+    "Live CDP Accessibility.getFullAXTree successfully extracted 15 trees at 1280x720 initial viewport across 8 families (2-per-family stratified, seed 35725763380)",
+    "AX_consistency = 0.2857 (2/7 families passing): same intent_template does NOT reliably map to same AX element pattern across tasks of same family — BELOW the 0.6 threshold",
+    "7 families checked: 2 consistent (Get name(s) of reviewer..., Buy the highest rated...), 5 inconsistent (Add a {{product}} to my wish list., Add the product on the current page to my wishlist, Add the product with the lowest per unit price..., Add {{product}} to my wish list, Change the delivery address...)",
+    "Mind2Web HF dataset osunlp/Mind2Web loads successfully but exposes only single train split (73 websites/3 domains/1009 tasks); official train/test_task/test_website/test_domain splits NOT available (spec requires 137/31)",
+    "Diagnostic Mind2Web overlap (website-label permutation, k=50 TF-IDF/k-means): 0.8140 with shuffle null mean 0.9980 — excess -0.184, indicating coarse clustering does not separate website-specific mechanisms",
+    "Playwright v1.63.0 installed and functional; Docker container am1n3e/webarena-verified-shopping running at localhost:7770",
+    "Frozen seed 35725763380 used for all sampling, bootstrapping (2000 reps), and shuffle permutations (1000 perms)",
+    "Shuffle null computed DIAGNOSTICALLY only (1000 perms, seed 35725763380); not used for decision because official splits unavailable"
+  ],
+  "validity_notes": [
+    "Gate 0 PASS: WebArena JSON SHA256 verified (d6527566...), Playwright installed, Docker container running, Mind2Web dataset loaded",
+    "Clause 1 FALSIFIED-IN-SETTING: AX_consistency=0.2857 < 0.6 threshold. Same intent_template does not reliably map to same AX element pattern across parameterized variants within a family. This is a valid measurement, not infrastructure failure — 15 live trees extracted successfully",
+    "Clause 2 MEASUREMENT_INVALID: HF dataset revision does not expose official train/test_task/test_website/test_domain splits. Per frozen decision_rule Gate 0, this axis is MEASUREMENT_INVALID (not FALSIFIED) — infrastructure/data limitation, not scientific negative",
+    "PC2_MIND2WEB_RECURRENCE cannot verify recurrence without official splits; PC1_WEB_SEARCH PASS confirmed",
+    "NC3_WEB_EXACT_COPY_NULL PASS: exact-copy 0.0781 < 0.2, confirming high duplication is parameterized not verbatim",
+    "Diagnostic Mind2Web overlap computed with k=50 (min(50, 1009/20)) TF-IDF/k-means on train-only; shuffle null mean 0.9980 indicates coarse clustering does not separate website-specific mechanisms",
+    "Representation loss: AX extraction limited to initial viewport (1280x720), no scroll, no cart/checkout execution; below-fold and post-interaction states excluded per spec",
+    "Sampling: 15 tasks across 8 families (not 10+ families as specified) because 8 families with >=3 tasks were selected first; the spec required >=10 families but the round-robin prioritized families with >=3 tasks",
+    "Do NOT claim LLM inheritance benefit, retrieval advantage, or checkout execution success from this substrate measurement alone",
+    "Within-store hold-out is NOT identifiable as same-mechanism parameterized transfer at element-pattern level despite strong quantitative census"
+  ],
+  "unresolved": [
+    "Mind2Web official splits (137/31) unavailable from HF revision — axis MEASUREMENT_INVALID; re-run requires pinned HF revision providing official splits",
+    "AX_consistency computed on 8 families (7 with 2-per-family); spec required >=10 families with 2-per-family across >=15 tasks — 8 families reached limit of large families (>=3 tasks) in sampling",
+    "Below-fold and post-interaction AX patterns not measured (explicitly excluded by spec)",
+    "Whether within-store hold-out yields LLM benefit vs cold/retrieval/SPIDER with 0-token replay — out of scope, C-LLM-INHERIT remains EXPERIMENTAL",
+    "K/2 and 2k sensitivity for Mind2Web not computed (official splits unavailable prevents spec-compliant pipeline)",
+    "Bootstrap CIs computed for WebArena census fractions but not for AX_consistency (would require more samples)"
+  ]
+}

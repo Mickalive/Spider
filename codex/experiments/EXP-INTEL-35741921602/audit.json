@@ -1,0 +1,166 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-35741921602",
+  "lane": "intel",
+  "status": "REVISE",
+  "producer_claim_supported": false,
+  "required_fixes": [
+    "AX sampling non-compliance: spec requires >=15 tasks stratified 2-per-family across >=10 families (=> >=20 tasks for 10x2) but producer computed AX_consistency on 7 families with 2 tasks each (15 trees total, 1 orphan task 672 without pair) per result.json:metrics.ax_consistency.families_checked=7 and measurements.json:ax_consistency.family_details length 7. spec requires >= >= spec10 threshold (result.json:validity_notes and provenance.json:execution_notes.sampling_note acknowledge 8 families vs spec >=10). Fix: resolve spec/task-count inconsistency, ensure round-robin yields >=10 families x2, disclose sampling code frozen before extraction and recompute threshold gate as MEASUREMENT_INVALID until coverage met.",
+    "AX element-pattern mapping bug: research/intel/exp_35741921602_measure.py pattern_map ordering causes all 'Add*' families to match first prefix 'Add {{product}} to my wish list' (expecting button 'Add to Wish List') via prefix.split('{{')[0]='Add' in tpl[:30] early-exit, so Add the product on the current page..., Add the product with lowest..., Add a {{product}}..., Add {{product}}... all incorrectly expect 'Add to Wish List' button. Homepage has no 'Add to Wish List' button (only 'My Wish List' link + 'Add to Cart' / 'Search' buttons; verified in axtree_web_sample_live.json role extraction) so 5/7 families fail artifactually. Correct fix: longest-prefix match, distinct prefix without fallthrough, validate mapping against known product-page vs homepage AX, and freeze corrected table before recomputation.",
+    "AX representation non-discriminating: all 15 live trees have 1426 nodes and URL http://localhost:7770/?task={id} but per raw tree inspection normalized hashes remain 15 distinct yet all contain same homepage button set (combobox Search true, Add to Cart true, wishlist button false on all 15). Navigation to ?task= param lands on identical homepage state, not task-specific start states (product/cart/account pages). Hence AX_consistency tests whether homepage contains template-required element (e.g., 'Save' for address change, 'Submit' for contact forms) not whether same intent_template maps to same element pattern across parameterized variants. Fix: verify task url field vs homepage, navigate to task-specific start_url/category/product_id or disclose that AX_consistency as defined measures homepage coverage only and cannot falsify within-family identifiability; rename metric to avoid overclaim.",
+    "Mind2Web spec-compliance: producer correctly reports MEASUREMENT_INVALID per spec Gate 0 (HF osunlp/Mind2Web single train split 73 websites/3 domains/1009 tasks vs spec 137/31 and 4 official splits). Diagnostic overlap 0.8139 vs shuffle null mean 0.9979 excess -0.1840 computed with website-label permutation on 50/50 website split is correctly labeled diagnostic in measurements.json:mind2web_diagnostic.note and not used for decision. Fix: pin HF dataset revision hash (currently 'unknown' in provenance.json:datasets.mind2web.revision), record per-split census on pinned revision exposing official train/test_task/test_website/test_domain before computing TF-IDF->k-means train-only and 1000 shuffle perms; until then keep Mind2Web axis BLOCKED/MEASUREMENT_INVALID and do not report k/2,2k sensitivity as if spec-compliant.",
+    "Missing uncertainty and artifact gaps: report.md artifacts table hashes (6dec7bb2..., e5e7b8e1..., a1b2c3d4...) do not match result.json artifacts shas (f4b6e236..., c2482cbb..., 56242294...); no bootstrap CI for AX_consistency; no k/2 and 2k sensitivity for Mind2Web (correctly noted as unresolved but should be explicitly BLOCKED); shuffle_null.json and measurements.json are distinct derived artifacts but share overlapping content without provenance link. Fix: regenerate artifact table from result.json hashes, add bootstrap CI for AX_consistency (requires >=10 families), and log TF-IDF vocab hash / centroids hash per spec measurement_validity."
+  ],
+  "validity_findings": [
+    {
+      "finding": "WebArena census replication VALID",
+      "severity": "none",
+      "detail": "Recomputed from research/experiments/EXP-INTEL-35725763380/artifacts/raw/webarena-verified.json sha256 d65275660814663375028e9017e1f929e3c38321041b125795e2713b52243d30: 192 shopping tasks, 49 distinct intent_templates, duplication 182/192=0.9479 CI [0.9167,0.9792], exact_copy 15/192=0.0781 CI [0.0417,0.1198], param_task 172/192=0.8958 CI [0.8490,0.9375], families_ge3=36 ge4=34 ge5=33 exact match to result.json:metrics.webarena_census and measurements.json:webarena_census. Site tuples 187 ('shopping',) +5 ('shopping','reddit') confirmed. thresholds_all_pass true correctly. Bootstrap CI via random.Random(35725763380) approximates producer.",
+      "evidence": "result.json:metrics.webarena_census, measurements.json:webarena_census, provenance.json:datasets.webarena_verified.verified_sha true"
+    },
+    {
+      "finding": "AX_consistency measurement INVALID despite Gate 0 PASS",
+      "severity": "critical",
+      "detail": "Producer reports AX_consistency=0.2857 (2/7) <0.6 => FALSIFIED-IN-SETTING. Recomputed value matches producer arithmetic (2/7=0.2857) but operational definition invalid: (a) coverage 7 < spec 10 families, so per spec falsifier clause 'AX_consistency is null/unmeasurable (fewer than 10 families with 2-per-family)' should classify as null/MEASUREMENT_INVALID, not clean falsification; (b) pattern_map bug causes false negatives for all Add* families (see required_fixes); (c) all 15 trees extracted via CDP Accessibility.getFullAXTree at 1280x720 with 1426 nodes each share identical homepage role set (combobox Search present, Add to Cart present, Add to Wish List absent) after normalizing ?task= URL, so consistency reflects homepage element presence not cross-task variant pattern stability. Homepage PC1 passes via same tree. Effect could not express within-family parameterized transfer. Therefore FALSIFIED-IN-SETTING verdict is not justified as valid scientific negative; correct state is MEASUREMENT_INVALID/INCONCLUSIVE for element-pattern level pending corrected mapping and task-specific navigation.",
+      "evidence": "result.json:metrics.ax_consistency.value=0.285714, result.json:validity_notes sampling, provenance.json:execution_notes.sampling_note 8 families, measurements.json:ax_consistency.family_details, research/intel/exp_35741921602_measure.py:compute_ax_consistency pattern_map[2] ordering, artifacts/raw/axtree_web_sample_live.json 15 trees 1426 nodes distinct hashes but identical role sets (all has_comboboxSearch true, has_button_cart true, has_wishlist false)"
+    },
+    {
+      "finding": "Mind2Web axis correctly MEASUREMENT_INVALID per Gate 0",
+      "severity": "none",
+      "detail": "Producer correctly implements spec decision_rule Gate 0: Mind2Web HF revision unknown, single train split, no official test_splits, so axis is MEASUREMENT_INVALID/BLOCKED not FALSIFIED. Producer does not use diagnostic overlap (0.8139) or shuffle null (mean 0.9979, p95 1.0, excess -0.184 <0.10) for decision, correctly labeling diagnostic. Recomputed diagnostic shuffle matches: 1000 perms seed 35725763380 on 504/505 split gives mean 0.998 ~ producer 0.9979. No leakage: TF-IDF fit diagnostic on full train not applied to test per spec train-only, but not used for decision so not leakage to claim.",
+      "evidence": "result.json:metrics.mind2web.status MEASUREMENT_INVALID, provenance.json:datasets.mind2web.revision unknown splits_available [train], measurements.json:mind2web_raw.has_official_splits false, measurements.json:mind2web_diagnostic"
+    },
+    {
+      "finding": "Controls partially mis-handled",
+      "severity": "medium",
+      "detail": "PC1_WEB_SEARCH PASS validated: recomputed collect_role_names finds combobox Search and button Search on homepage AX (1426 nodes) per result.json:controls.PC1_WEB_SEARCH PASS - strong. PC2_MIND2WEB_RECURRENCE correctly marked CANNOT_VERIFY (needs official splits) - not a failure. NC3_WEB_EXACT_COPY_NULL PASS (0.0781<0.2) validated - distinguishes parameterized reuse. NC2_MIND2WEB_SHUFFLE_NULL correctly computed diagnostic but website-label shuffle null mean 0.998 inflated due to coarse k=50 clustering (42-43 distinct mechanisms) not website sharing, as spec B4 warns high null indicates coarse clustering not sharing - producer notes this correctly. NC1_WIKIPEDIA_NULL NOT_EXERCISED correctly not 0.",
+      "evidence": "result.json:controls.{PC1,PC2,NC1,NC2,NC3}, spec.json:positive_control and null_control clauses"
+    },
+    {
+      "finding": "Representation loss and scope bound not fully disclosed in interpretation",
+      "severity": "medium",
+      "detail": "Spec measurement_validity requires disclosure that AX extraction limited to initial viewport, no scroll, no cart/checkout execution - producer does disclose in validity_notes and report.md. But does not disclose that ?task= URL yields homepage for all shopping tasks, so viewport-only equals homepage-only for this dataset, limiting claim to homepage pattern coverage not product-page mechanisms. Bootstrap CIs for WebArena fractions valid (2000 reps seed 35725763380) but no CI for AX_consistency.",
+      "evidence": "spec.json:measurement_validity[3][4], report.md Validity Threats table, measurements.json:bootstrap_cis"
+    }
+  ],
+  "baseline_findings": [
+    {
+      "baseline_id": "B1_DOC_M1_12STORES",
+      "assessment": "handled correctly",
+      "detail": "Producer confirms REJECTED for v2 (single store, 192 tasks, 49 templates, single container am1n3e/webarena-verified-shopping@sha256:3e8cb9b9...) vs v1 docs 12-store M1=1.0. Retained as strong falsification baseline, not re-inflated. Evidence result.json:controls.B1_DOC_M1_12STORES CONFIRMED."
+    },
+    {
+      "baseline_id": "B2_DOC_M2_HEURISTIC",
+      "assessment": "handled correctly but incomplete",
+      "detail": "Producer reports measured param_task 0.8958 / template 0.8367 vs heuristic M2=0.80, with exact-copy 0.0781 decomposition => 91.8% parameterized variation, quantifying inflation gap per spec. For Mind2Web, heuristic 0.65 gap not quantified because Mind2Web axis MEASUREMENT_INVALID and fine-grained param prevalence not computed (spec requires TF-IDF/k-means train-only). Disclosure gap noted but not misclaimed."
+    },
+    {
+      "baseline_id": "B3_SPIDER_2SITE",
+      "assessment": "handled correctly as lower bound",
+      "detail": "Producer states 36 families >=3 trivially exceeds 2-site corpus, not re-measured quantitatively. No comparative metric invented, appropriate disclosure-only bound."
+    },
+    {
+      "baseline_id": "B4_SHUFFLE_NULL",
+      "assessment": "correctly reimplemented per audit fix",
+      "detail": "Producer implements website-label permutation (1000 perms seed 35725763380, mean 0.9979 p95 1.0) not previous label-shuffle with random split_point. Correctly rejects coarse 33-mechanism high null artifact via k/2,2k sensitivity disclosure (not computed due to BLOCKED). Null excess -0.184 correctly not mistaken for website sharing."
+    },
+    {
+      "baseline_id": "B5_RETRIEVAL_REPLAY_STRONG",
+      "assessment": "correctly disclosure-only",
+      "detail": "Producer does not execute retrieval/replay baseline, explicitly marks Not executed disclosure per spec for future Product within-store hold-out vs cold/retrieval/SPIDER with 0-token replay. No conflation of 0.9479 duplication with inheritance benefit."
+    },
+    {
+      "baseline_id": "PC1_WEB_SEARCH",
+      "assessment": "PASS verified",
+      "detail": "Live CDP homepage contains combobox Search + button Search + input#search placeholder 'Search entire store here...' form /catalogsearch/result/ with 1426 nodes at 1280x720, PC1 PASS strongly confirms CDP/Playwright/viewport/container (Playwright 1.63.0, docker_available true) not traduced."
+    },
+    {
+      "baseline_id": "PC2_MIND2WEB_RECURRENCE",
+      "assessment": "correctly BLOCKED",
+      "detail": "Producer marks CANNOT_VERIFY due to missing official splits, not fabricating recurrence. Prevents tautological pass."
+    }
+  ],
+  "recomputed_metrics": {
+    "webarena_census_recomputed": {
+      "total_shopping_tasks": 192,
+      "distinct_intent_templates": 49,
+      "duplication_fraction": 0.9479166666666666,
+      "duplication_ci": [0.9166666666666666, 0.9791666666666666],
+      "exact_copy_fraction": 0.078125,
+      "exact_copy_ci": [0.041666666666666664, 0.11979166666666667],
+      "param_task_fraction": 0.8958333333333334,
+      "param_task_ci": [0.8489583333333334, 0.9375],
+      "param_template_fraction": 0.8367346938775511,
+      "families_ge3": 36,
+      "families_ge4": 34,
+      "families_ge5": 33,
+      "match_producer": true,
+      "source": "research/experiments/EXP-INTEL-35725763380/artifacts/raw/webarena-verified.json sha256 d65275660814663375028e9017e1f929e3c38321041b125795e2713b52243d30"
+    },
+    "ax_consistency_producer": {
+      "value": 0.2857142857142857,
+      "families_checked": 7,
+      "families_passing": 2,
+      "tasks_live_extracted": 15,
+      "threshold": 0.6,
+      "pass": false,
+      "recomputed_arithmetic": "2/7=0.285714 matches producer",
+      "disputed_validity": true,
+      "corrected_estimate_homepage_generic_fallback": 1.0,
+      "reason_disputed": "pattern_map ordering bug and homepage-only extraction; generic fallback (any button/combobox/link) would give 7/7=1.0; corrected longest-prefix mapping expecting Add to Cart for Add* families would give 6/7 or 1.0 depending on wishlist interpretation; neither tests within-family variant consistency"
+    },
+    "ax_raw_evidence": {
+      "trees_extracted": 15,
+      "node_counts_unique": [1426],
+      "distinct_normalized_hashes": 15,
+      "identical_role_sets_across_tasks": true,
+      "comboboxSearch_present_all": true,
+      "button_Add_to_Cart_present_all": true,
+      "button_Add_to_Wish_List_present_all": false,
+      "evidence": "artifacts/raw/axtree_web_sample_live.json role extraction"
+    },
+    "mind2web_diagnostic_recomputed": {
+      "status": "MEASUREMENT_INVALID per Gate 0",
+      "n_tasks": 1009,
+      "n_websites": 73,
+      "n_domains": 3,
+      "has_official_splits": false,
+      "diagnostic_k": 50,
+      "diagnostic_overlap_website": 0.813953488372093,
+      "diagnostic_shuffle_null_mean": 0.9979779591836735,
+      "diagnostic_shuffle_null_p95": 1.0,
+      "diagnostic_excess": -0.18402447081158047,
+      "excess_ge_0_10": false,
+      "match_producer": true,
+      "note": "Diagnostic computed on 50/50 website split from single train, not used for decision per spec"
+    },
+    "controls_recomputed": {
+      "PC1_WEB_SEARCH": "PASS confirmed via live CDP combobox+button",
+      "PC2_MIND2WEB_RECURRENCE": "CANNOT_VERIFY correctly",
+      "NC3_WEB_EXACT_COPY_NULL": "PASS 0.0781<0.2 confirmed"
+    }
+  },
+  "claim_ceiling": "WebArena-Verified v2 single-store census replicates exactly (192 shopping tasks, 49 intent_templates, duplication 0.9479 [0.9167,0.9792], exact-copy 0.0781 [0.0417,0.1198] => 91.8% parameterized variants, param_task 0.8958 [0.8490,0.9375], families_ge3=36 ge4=34 ge5=33) and live CDP infrastructure verified (Playwright 1.63.0, Docker am1n3e/webarena-verified-shopping@sha256:3e8cb9b9 at 1280x720, 1426 homepage AX nodes, PC1 PASS). Within-store same-mechanism element-pattern identifiability (AX_consistency >=0.6, 2-per-family across >=10 families) remains UNMEASURED due to sampling deficiency (7/10 families) and buggy pattern_map/homepage-only extraction; therefore narrow ceiling is quantitative parameterized family reuse only, not element-pattern identifiability. Mind2Web cross-website overlap with spec-compliant TF-IDF->k-means train-only on official train/test_website/test_domain splits remains MEASUREMENT_INVALID/BLOCKED (HF osunlp/Mind2Web revision unknown, single train 73/3/1009 vs spec 137/31, no k/2,2k sensitivity). No LLM inheritance, no retrieval advantage, no checkout execution, and no cross-website same-mechanism transfer demonstrated. Product within-store family hold-out remains BLOCKED pending valid AX remeasurement; Mind2Web website-holdout remains BLOCKED pending pinned HF revision with official splits. B1 M1=1.0 12-store claim remains falsified for v2.",
+  "evidence_refs": [
+    "request.json:director_mandate.question (7 audit fixes, seed 35725763380, AX >=0.6, TF-IDF k=min(50,unique/20) train-only, 1000 shuffles, 2000 bootstraps)",
+    "spec.json:hypothesis H1_WEB_HOLDOUT/H2_MIND2WEB_OVERLAP, falsifier Gate0/Clause1/Clause2, measurement_validity[0-5], decision_rule Gate0 Clause1 Clause5",
+    "prereg.md:5.4 AX_consistency sampling 15 across >=10 families 2-per-family mapping table, 5.5 Mind2Web website-label shuffle, 13 audit prep",
+    "freeze.json:hashes prereg 72b8ab7b..., spec a1f156e0...",
+    "result.json:status COMPLETE outcome FALSIFIES, metrics.webarena_census, metrics.ax_consistency.value 0.2857 families_checked 7, metrics.mind2web.status MEASUREMENT_INVALID, controls.{PC1,B1,B4}, validity_notes sampling 8 families, unresolved[1] spec required >=10",
+    "report.md:Executive Summary FALSIFIES + MEASUREMENT_INVALID, Table 1.3 2/7 families, Section 4 Validity Threats 8 families vs spec >=10",
+    "provenance.json:datasets.webarena_verified sha256 d6527566... verified_sha true, datasets.mind2web revision unknown splits_available [train] 73/3/1009, environments.playwright 1.63.0 docker_available true, artifacts paths with sha256 f6245e8f..., parameters seed 35725763380",
+    "artifacts/raw/axtree_web_sample_live.json sha256 f6245e8fc77579cb26525a80de434f784a7e907e7970386517619b7165ae4ff3 - 15 CDP trees 1426 nodes each, URLs http://localhost:7770/?task={id}, role extraction shows comboboxSearch true / Add to Cart true / Add to Wish List false on all",
+    "artifacts/derived/measurements.json sha256 f4b6e236aa2e9924a37257eb86dedbba8918571845aa7a8ff68357afffbe7a59 - webarena_census exact, ax_consistency 0.2857 family_details 7, mind2web_raw has_official_splits false",
+    "artifacts/derived/shuffle_null.json sha256 c2482cbb3ece503f9f56866d33cef12f39247386bda8a9f27db384b280e0e80e - diagnostic null mean 0.998",
+    "research/intel/exp_35741921602_measure.py sha256 562422941a086e3eb46578179ededb3daca3415c1f28885fc1e80fae314fa6cd - compute_ax_consistency pattern_map ordering bug (line 302-349) and sample_webarena_tasks_live n=15 => max 7 families with 2",
+    "parent handoff research/experiments/EXP-INTEL-35725763380/handoff.json sha256 1ff31f803ffec5c110dff97720771c995f1f451a9d340d55de530b20b2d367d0 - established census 192/49 REVISE with 7 required_fixes"
+  ],
+  "unresolved": [
+    "Whether corrected element-pattern mapping with task-specific navigation (product-page/category-page/cart page, not ?task= homepage) yields AX_consistency >=0.6 across >=10 families with 2-per-family at 1280x720 viewport - requires code fix and re-extraction of 20+ discriminating trees",
+    "Whether within-store hold-out is viable at template-count level vs element-pattern level - count-level thresholds (36 families >=3) pass but pattern-level does not; future Product experiment must test both levels vs cold/retrieval/SPIDER with 0-token replay baseline",
+    "Whether Mind2Web pinned HF revision exposing official train/test_task/test_website/test_domain (137/31) exists and what spec-compliant TF-IDF->k-means (k=min(50,unique/20) train-only) overlap and website-label shuffle excess (>=0.10) and k/2,2k sensitivity show - currently BLOCKED on revision unknown",
+    "Below-fold and post-interaction AX patterns (add-to-cart flow, checkout, scroll) explicitly excluded per spec 1280x720 initial viewport - element-pattern coverage for non-homepage actions remains unknown",
+    "Whether parameterized reuse (0.8958) predicts LLM inheritance benefit vs literal/retrieval baselines - out of scope for this substrate experiment, C-LLM-INHERIT remains EXPERIMENTAL, C-CROSSSITE remains HYPOTHESIS per Codex claim_state.json",
+    "Bootstrap CI and statistical power for AX_consistency with small n=7 families - CI not computed, requires larger sample for >=0.05 margin check in Clause 3 SURVIVES"
+  ]
+}

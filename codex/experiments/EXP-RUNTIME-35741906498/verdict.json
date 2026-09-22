@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-35741906498",
+  "lane": "runtime",
+  "decision": "SUPPORTS — header-only drift discriminated with first non-vacuous C4 (full 1.0 > body/status 0.0, C6 Content-Length isolation holds) on narrow localhost Flask ceiling; C-MEAS-VALID remains EXPERIMENTAL",
+  "claim_updates": [
+    {
+      "claim_id": "C-MEAS-VALID",
+      "status": "EXPERIMENTAL",
+      "reason": "Audit PASS confirms producer SUPPORTS: all six frozen conditions C1-C6 pass with recomputed metrics exactly matching producer (header_drift_full 1.0 degenerate CI [1.0,1.0] effective N=1, header_drift_headers 1.0 on A vs E and 3/3 isolations A vs B Cache-Control 1.0, A vs C ETag 1.0, A vs D Set-Cookie 1.0, header_drift_status 0.0 and header_drift_body 0.0 on all header comparisons, null_A1 vs null_A2 full 0.0 CI [0.0,0.0] with status/body 0.0, C4 1.0 > max(0.0,0.0) strict non-vacuous, C6 Content-Length 31 identical across A/B/C/D/E body SHA d0ca833f843c6d70ec9d6755f52a92dcbfc8b4ab601b871bced09ad027172e34 and body_len 31 on 180 lines, all status 200, 15 batch_state_log entries all match_expected true, fingerprint_mismatches 0). This closes parent audit V2 ceiling (prior full==body==status 1.0 vacuous equality) and V3 Content-Length correlation and expands ceiling to include header-only drift (Cache-Control, ETag, Set-Cookie, Vary) on localhost Flask 3.1.3 + PyJWT 2.14.0 HS256 + SQLite WAL + Werkzeug 3.1.8 Python 3.12.14 at 127.0.0.1:19848 single sequential client SEED 44 jitter 50-150ms nominal N=20 per state but effective distinct N=1 per state per source (degenerate CI disclosed as deterministic existence, not inferential precision). Remains EXPERIMENTAL, not VALIDATED: deterministic, no production WSGI/nginx/CDN/concurrency/TLS/HTTP2/browser DOM, no non-degenerate CI, Vary alone not isolated, header value sensitivity gradient unmeasured."
+    }
+  ],
+  "product_action": "no_promotion — remains EXPERIMENTAL localhost synthetic; unblocks C-FRESHNESS/C-DELTA-REPAIR for localhost header-only drift testing only, not for distributed/production",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "Does the HTTP fingerprint substrate discriminate same-status body-only drift where response status is identical (200 vs 200) but response bodies differ via server-side permission/content variation, isolating body-only signal with status confound removed and yielding the complementary non-vacuous full > status test?",
+  "reason": "Grounded in exact upstream evidence: result.json status COMPLETE outcome SUPPORTS with metrics header_drift_full 1.0, header_drift_headers 1.0, cache/etag/cookie_only_full 1.0 each, header_drift_status/body 0.0, null_control_full 0.0 and controls C1-C6 all pass true with failing_conditions []; audit.json status PASS producer_claim_supported true, validity_findings V1 degeneracy disclosed through V6 tautological sensitivity acknowledged, baseline_findings B-STATUS-ONLY/B-BODY-ONLY/B-HEADERS-ONLY/C4 all PASS, recomputed_metrics exactly matching producer (180 lines, 15 batch_state_log, all_status_200 true, content_length_identity pass, fingerprint_mismatches 0, header isolation verified 5 unique filtered header JSONs, excluded-header leakage 0). Claim ceiling bounded strictly to localhost existence per audit claim_ceiling; no promotion warranted. Next question targets the remaining half of parent V2 (same-status 200 vs 200 body-only discrimination) which is the highest-information orthogonal gap before any production scaling, complementing the now-validated header-only branch and decompression body-identical branch.",
+  "evidence_refs": [
+    "research/experiments/EXP-RUNTIME-35741906498/spec.json sha80e8cef6a256201c8cfb64f296c87c24fcc8085f83f95b96132c96e5ecad7c7c frozen C1-C6",
+    "research/experiments/EXP-RUNTIME-35741906498/prereg.md sha1143ca059319a5dd083a18fb08116a36a2a6398fad97c3a78787257cf207c3df frozen",
+    "research/experiments/EXP-RUNTIME-35741906498/freeze.json frozen hashes",
+    "research/experiments/EXP-RUNTIME-35741906498/result.json schema_version 1 status COMPLETE outcome SUPPORTS controls C1-C6 + B-* all pass metrics header_drift_full 1.0 header_drift_status 0.0 header_drift_body 0.0 header_drift_headers 1.0 effective_distinct_n 1 content_length 31 body_sha d0ca833f843c6d70ec9d6755f52a92dcbfc8b4ab601b871bced09ad027172e34",
+    "research/experiments/EXP-RUNTIME-35741906498/audit.json schema_version 1 status PASS producer_claim_supported true recomputed_metrics matching fingerprint_mismatches 0 baseline_findings PASS claim_ceiling narrow localhost",
+    "research/experiments/EXP-RUNTIME-35741906498/raw_observations.jsonl sha3883b538c9d8d57d6b0a0eaefb1100cdfd5420b8c1faecbea5972c91a34e2f92 180 lines all 200 body SHA identical",
+    "research/experiments/EXP-RUNTIME-35741906498/batch_state_log.jsonl sha1e0cc63152bb74b547c1c13a2e6ba3fee67c83d3792135bd9169534a612eb47b 15 entries all match_expected true",
+    "research/experiments/EXP-RUNTIME-35741906498/experiment_result.json sha23b77d24546daa892cf5148e6658d051bd6de68ed4069ed8256ef9232c2aae7b derived metrics",
+    "research/experiments/EXP-RUNTIME-35741906498/run_experiment.py sha47ff8910c3d9cc95c9a20e223faa5a212be1d11aa73ac43df6fc0142d5b43e87 fingerprint identical to parent",
+    "research/experiments/EXP-RUNTIME-35741906498/provenance.json sha7f7d8dbe2395332fec02d0dd8879746fb527f05e16b14e82fb54ce07a9a6bced Flask 3.1.3 PyJWT 2.14.0 Python 3.12.14 127.0.0.1:19848",
+    "research/experiments/EXP-RUNTIME-35697043449/handoff.json shad3144036f4663aabfd22b0fc44386f8d067f3da8cf3ced65b53a400e270d2f43 parent ceiling V1-V3 carry_forward"
+  ]
+}
