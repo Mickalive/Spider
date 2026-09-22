@@ -1,0 +1,26 @@
+{
+  "found_manifest": null,
+  "manifest_data": null,
+  "gate_rows": [
+    {
+      "site_id": "NO_SPA_FOUND",
+      "manifest_path": "NONE",
+      "unique_titles": 0,
+      "title_entropy": 0.0,
+      "H_Snext_given_URL_HK3": 0.0,
+      "leakage_rate": 1.0,
+      "NL": 0,
+      "singleton_strata_rate": 1.0,
+      "qualifies": false,
+      "reason": "substrate_unavailable: Intel production SPA manifest not found at any candidate path; BrowserGym/AgentLab 1280x720 capture not supplied"
+    }
+  ],
+  "qualifying": 0,
+  "candidates": [
+    "/home/runner/work/Spider/Spider/research/experiments/EXP-PHYSICS-35749353065/intel_spa_manifest.json",
+    "research/intel/intel_spa_manifest.json",
+    "research/intel/manifest.json",
+    "research/experiments/EXP-INTEL-35697055679/intel_spa_manifest.json",
+    "intel_spa_manifest.json"
+  ]
+}
