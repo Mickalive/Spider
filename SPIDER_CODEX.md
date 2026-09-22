@@ -4,7 +4,7 @@ Pre-2.0 canonical memory remains frozen at `archive/spider-codex-ultimate:SPIDER
 
 Canonical Research 2.0 evidence lives in `codex/experiments/<experiment_id>/`.
 Use `codex/index.json` and `codex/claim_state.json` to locate relevant packets; do not load all experiment bodies by default.
-Validated experiments: **229**. Coverage gaps: **0**. Quarantined packets: **0**.
+Validated experiments: **230**. Coverage gaps: **0**. Quarantined packets: **0**.
 
 ## Experiment index
 
@@ -236,6 +236,7 @@ Validated experiments: **229**. Coverage gaps: **0**. Quarantined packets: **0**
 | EXP-INTEL-35725763380 | intel | REVISE | REVISE — WebArena quantitative census replicates exactly (192 shopping tasks, 49 intent_templates, 36 families >=3 [34 >=4, 33 >=5], duplication 0.9479 95% CI [0.9167,0.9792], exact-copy 0.0781 [0.0417,0.1198], param_task 0.8958 [0.8490,0.9375]) but within-store same-mechanism AX consistency (threshold >=0.6, requires 15 tasks 2-per-family live CDP Accessibility.getFullAXTree at 1280x720 initial viewport) is UNMEASURED (ax_consistency=null, REUSED 10 trees 1-per-family, playwright_installed=false despite docker_available=true) so frozen clause 1 is FALSIFIED-IN-SETTING per spec, not PARTIAL; Mind2Web cross-website overlap measurement is methodologically non-compliant (coarse 33-mechanism heuristic vs frozen TF-IDF->k-means k=min(50,unique_tasks/20) train-only, synthetic 60/40 website shuffle replacing official train/test_website/test_domain splits, shuffle null as label-shuffle with random split_point, 73/3 vs spec 137/31 divergence revision_unknown) so Mind2Web axis is INCONCLUSIVE not falsified; producer MIXED verdict not supported as stated; bounded ceiling is census-level parameterized family reuse only, no LLM inheritance demonstrated | C-LLM-INHERIT, C-CROSSSITE | `4264b65fcf92` |
 | EXP-GRAPH-35741890679 | graph | REVISE | MEASUREMENT_INVALID | C-DELTA-REPAIR | `4011af9167da` |
 | EXP-RUNTIME-35741906498 | runtime | PASS | SUPPORTS — header-only drift discriminated with first non-vacuous C4 (full 1.0 > body/status 0.0, C6 Content-Length isolation holds) on narrow localhost Flask ceiling; C-MEAS-VALID remains EXPERIMENTAL | C-MEAS-VALID | `63ddea9ecb67` |
+| EXP-PRODUCT-35741913862 | product | REVISE | REVISE — SURVIVES_CURRENT_TEST fails frozen C2/C3 and PC hit-rate; producer MIXED not justified as confirmatory; C-RESIDUAL-NOVELTY remains HYPOTHESIS at bounded synthetic mock ceiling | C-RESIDUAL-NOVELTY | `1382bf264b25` |
 | EXP-INTEL-35741921602 | intel | REVISE | REVISE — WebArena census replicates exactly and live CDP infrastructure verified, but AX_consistency 0.2857 (2/7) is MEASUREMENT_INVALID not valid FALSIFIED-IN-SETTING per audit; Mind2Web axis correctly MEASUREMENT_INVALID per Gate 0; bounded ceiling remains quantitative census only | C-LLM-INHERIT, C-CROSSSITE | `3377d6b4dbca` |
 | EXP-FRONTIER-35741928625 | frontier | MEASUREMENT_INVALID | MEASUREMENT_INVALID | C-SEMANTIC-RESOLVE | `dbc59208079f` |
 | EXP-PHYSICS-35741898214 | physics | MEASUREMENT_INVALID | MEASUREMENT_INVALID | C-CROSSSITE | `e65d1ce16087` |
@@ -253,6 +254,6 @@ These are chronological latest events, not an automatic truth ranking.
 | C-MEAS-VALID | EXPERIMENTAL | EXP-RUNTIME-35741906498 | runtime |
 | C-PARAM-INHERIT | EXPERIMENTAL | EXP-PRODUCT-35353007958 | product |
 | C-PRODUCT-ECON | REJECTED | EXP-INTEL-35551517470 | intel |
-| C-RESIDUAL-NOVELTY | MEASUREMENT_INVALID | EXP-PRODUCT-35725756862 | product |
+| C-RESIDUAL-NOVELTY | HYPOTHESIS | EXP-PRODUCT-35741913862 | product |
 | C-SEMANTIC-RESOLVE | EXPERIMENTAL | EXP-FRONTIER-35741928625 | frontier |
 | C-WEB-DYNAMICS | EXPERIMENTAL | EXP-PHYSICS-35697037202 | physics |

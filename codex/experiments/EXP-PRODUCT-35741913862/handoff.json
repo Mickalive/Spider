@@ -1,0 +1,68 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-35741913862",
+  "lane": "product",
+  "target_lane": "product",
+  "next_question": "Does a repaired residual-novelty pipeline with 20/20 exact-repeat tasks at n=0.0 (main-set B-REPLAY-TERX hit_rate=1.0 and B-RAG hit_rate≈1.0 via overlap-proportional Jaccard sampling), per-task verification-derived cost variance at all bins without deterministic UNKNOWN gating, and honest per-hit cost accounting (distill 1000/f only SPIDER, per-hit REPLAY 50 tok) show SPIDER cost tracking residual novelty (Spearman rho>=0.60 block-permutation two-sided p<0.01, R2_delta>=0.15) and beating retrievable RAG/REPLAY at low novelty (f=10) on the same L=10 synthetic mock?",
+  "why_next": "Current packet is REVISE with producer_claim_supported=false: SPIDER pipeline now executes via SpiderKernel.resolve/MechanismRegistry with freshness/confidence UNKNOWN exercised (UNKNOWN 1.0 at n>=0.75) and B-LENGTH falsifier reachable (rho0 R20), but strong baseline comparisons remain invalid. B-REPLAY-TERX main-set hit 0.05 not 1.0 and B-RAG hit 0.05 not 1.0 violate frozen PC expectation (VF-PC-HIT-MISREPORT high), SPIDER cost variance 0 at 4/5 bins via hardcoded gating makes rho 0.97 degenerate and bootstrap CI meaningless (VF-SP-DETERMINISTIC-COST high), honest per-hit SPIDER/REPLAY 25.0 fails C2 vs reported 0.239 diluted mean (VF-C2-PER-HIT-VS-MEAN high), NC controls flat 5750 variance 0 not pipeline-derived (VF-NC-FLAT), and C3 p 0.017 fails two-sided 0.01 even for perfect monotone 5 bins. Without 20/20 exact repeats at 0%, genuine per-task verification variance, and per-hit accounting, the Director-mandated question pay-novelty-not-length vs TERX 0-token replay cannot be answered and C-PRODUCT-ECON scale-up to real LLM/Docker remains blocked. Repairing task generation, removing deterministic UNKNOWN, and measuring retrievable RAG/replay hits inside set is the minimum substrate fix before any commercial viability claim.",
+  "carry_forward": {
+    "established": [
+      "Harness can execute SPIDER resolve/bind pipeline via actual SpiderKernel.resolve + MechanismRegistry with required_slots check, _bind, freshness gating (behavioral_score threshold 0.25) and confidence gating (<0.80 -> UNKNOWN) exercised per task (result.json M-UNKNOWN-RATE 0.0/0.0/0.0/1.0/1.0, observations UNKNOWN at n>=0.75, provenance.json no_llm_api_calls, run_experiment.py 283-313, artifacts/registry.json 06faf017 confidence 0.90 single mechanism)",
+      "B-LENGTH-PROPORTIONAL correctly demonstrates environment can express flat-cost falsified outcome: rho 0.000 R2 0.000 (result.json M-B-LENGTH-RHO 0.0, audit recomputed 0.0, controls B-LENGTH-PROPORTIONAL pass true) satisfying RF9 and proving MIXED is reachable, not only SURVIVES",
+      "Descriptive pipeline costs at synthetic L=10 mock (12 stores, 5 A demos, token proxy 500 tok/novel step, 200 retrieval, 50 verification, 120ms/call): SPIDER mean tokens per bin 250/1250/2550/5200/5200 (result.json M-COST-TOKENS-SPIDER, raw_per_task.csv 2d117272), B-COLD flat 5000 success 0.94 (valid baseline), R2_length 0.0 tautological with constant length, but not confirmatory beyond mock",
+      "Substrate can measure 0-token replay cost in isolation: PC1_exact_repeat_REPLAY 50 tokens (0 LLM +50 verification) +1 browser call success 1.0 exists as isolated row (result.json M-PC1-TOKENS-REPLAY-0pct 50, provenance), but not inside main 100-task compared set",
+      "Prior C-RESIDUAL-NOVELTY ceiling remains: EXP-INTEL-35651934683 doc survey only (WebArena shopping M1 corrected 0.311 not 0.818, M2 heuristic, M3 false WebArena true Mind2Web but mechanism overlap unresolved, audit VF1-VF6) and EXP-FRONTIER-35651943981 FALSIFIED-IN-SETTING spec contradiction bounded; C-PRODUCT-ECON logistic REJECTED (k10.75 R21.0 vacuous) remains closed"
+    ],
+    "rejected": [
+      "Bounded rejection: that this packet demonstrates SURVIVES_CURRENT_TEST for C-RESIDUAL-NOVELTY at synthetic mock ceiling — rejected; C2 fails (SPIDER/COLD 100% 1.116>1.10, SPIDER/REPLAY honest per-hit 25.0>2.0 vs reported 0.239 diluted) and C3 fails (rho 0.97 block-permutation p 0.0172 exact 0.0167 >0.01 two-sided) per frozen C1-C6 ALL required",
+      "Bounded rejection: interpretation that SPIDER beats retrievable B-RAG (ratios 0.064/0.247) or B-REPLAY-TERX (beats at >=25%) demonstrates parameterized inheritance advantage over retrieval/caching — rejected; RAG hit 1/20=0.05 mean 4952.5 and REPLAY hit 1/20=0.05 mean 5227.5 starved by task generation (audit VF-PC-HIT-MISREPORT high, BF B-RAG/B-REPLAY fail as strong baselines), so ratios are handicaps not measured advantages",
+      "Bounded rejection: that Spearman rho 0.97 R2 0.927 slope 5540 demonstrate novelty-proportional work compression beyond deterministic gating — rejected; SPIDER variance 0 at 4/5 bins via hardcoded UNKNOWN (behavioral_score 0.15, confidence 0.70) makes correlation bijective with gating (VF-SP-DETERMINISTIC-COST high, VF-R2-ARTIFICIAL medium, bootstrap CI [0.966,0.974] degenerate)",
+      "Bounded rejection: that NC1 shuffled rho0 p1.0 and NC2 false_accept 0.43 validate mapping/ranking matters — rejected; both constant 5750 variance 0 via hardcoded novel_steps=L (run_experiment.py shuffled_execute 554-582, VF-NC-FLAT medium), not pipeline-derived verification failures (RF7 not satisfied)",
+      "No broader rejection: residual-novelty economics globally, caching-vs-generalization tension, or parameterization generalizability are NOT closed — falsifiers were unreachable due to deterministic gating and starved baselines (VF10 analogue); C-RESIDUAL-NOVELTY remains HYPOTHESIS not REJECTED"
+    ],
+    "unknown": [
+      "Whether SPIDER with 20/20 exact-repeat tasks at n=0.0 (hit_rate 1.0 main-set) and honest per-hit REPLAY 50 tok would still be within 2x of REPLAY at 0% and cheaper than RAG/REPLAY at low novelty (f=10) with retrieval-derived success — untested due to task generation flaw",
+      "Whether per-task verification-derived cost variance at all bins (without forced UNKNOWN at >=0.75) would yield Spearman rho>=0.60 with block-permutation p<0.01 (one-sided 0.0083 would pass, two-sided 0.0167 fails) and R2_delta>=0.15 beyond hardcoded gating — untested",
+      "Whether novelty tracking holds with real LLM tokens/latency vs frozen proxy 500 tok/step (sensitivity rho>0.60 at +-50% uses formula not pipeline variance, audit VF-R2-ARTIFICIAL) and whether amortization over f=1,10,100 rescues retrieval cost at commercial frequencies",
+      "Whether effect persists when full task length co-varies with novelty (L=10 constant guarantees R2_length 0) and with richer WebArena DOM/auth drift, 36-family template, or 2 synthetic slots ${sku},${store_id} generalizes to richer form fields with harness-only _extract_varying_values",
+      "Whether NC1 with real permuted _bind + verification (variability) would still show null vs observed rho, and whether UNKNOWN abstention cost at high novelty (~1.0x COLD) is acceptable product trade-off vs false_accept contamination",
+      "Whether honest block-permutation power with zero within-bin variance and n=100 provides >0.90 power as claimed, and whether two-sided vs one-sided threshold is appropriate for 5-bin monotone"
+    ],
+    "do_not_assume": [
+      "Do not assume C-RESIDUAL-NOVELTY is supported, EXPERIMENTAL, or SURVIVES was achieved — audit REVISE producer_claim_supported false, decision REVISE HYPOTHESIS, promote_to_product false, no promotion authorized",
+      "Do not assume rho 0.970 p 0.017 R2 0.927 slope 5540 demonstrate work compression — deterministic gating artifact with variance 0 at 4/5 bins and degenerate bootstrap CI [0.966,0.974]; exact two-sided p 0.0167 fails frozen C3 p<0.01",
+      "Do not assume SPIDER beats strong baselines at low novelty — B-RAG and B-REPLAY-TERX were starved (1/20 hits at 0% vs expected 20/20), ratios 0.064/0.247 and beating at >=25% are vs cold+penalty 5500 miss cost, not vs retrievable hits; honest per-hit REPLAY ratio 25.0 opposite direction",
+      "Do not assume NC1/NC2 controls proved mapping/ranking matters — flat 5750 by construction, not verification-derived; false_accept 0.43 same class as parent hash-assigned",
+      "Do not assume reported amortized ratios use per-hit units — producer diluted REPLAY mean 5227.5 with 19 misses vs 1 hit 50 tok; honest per-hit comparison is SPIDER 1250 / 50 =25.0",
+      "Do not assume success 1.0 false_accept 0.0 UNKNOWN 0.0 at low novelty demonstrate correctness/abstention — UNKNOWN only exercised at n>=0.75 via forced gating, not via emergent verification failure model (5%/15%/30% modeling assumptions)",
+      "Do not assume synthetic L=10 catalog mock, token proxy, single-family, harness-level distill generalize to WebArena-Verified DOM, cross-site transfer, or production hosting — ceiling bounded to synthetic mock; Intel sample-level mechanism overlap and Runtime distributed replication remain Director prerequisites for Docker full-DOM scale-up (request.json director_mandate dependencies intel/runtime/graph)",
+      "Do not assume prior inflated M1=0.818 — corrected 0.311 is honest bound; do not assume WebArena has official instance splits (M3 false); do not import frontier TV/KDE rho1.0 translation-only signal as Web evidence"
+    ]
+  },
+  "dependencies": [
+    "Substrate repair RF1-RF3,RF5-RF7 from audit.json required_fixes[0-2,3-5]: generate 20/20 exact repeats at n=0.0 for main-set hit_rate 1.0 (B-REPLAY-TERX and B-RAG), make cost variance from verification outcomes not deterministic UNKNOWN thresholds, report per-hit vs mean cost honestly, make NC exercise real permuted binding/ranking",
+    "intel sample-level mechanism overlap verification (Director dependencies intel) — required before WebArena family cross-site claim can be instantiated on real DOM beyond synthetic mock",
+    "runtime distributed replication / header isolation (runtime) and graph parameterized reuse beyond single-char (graph) — prerequisites for Docker full-DOM hosting flagged in portfolio_assessment but not gating for proxy-isolation repair",
+    "No LLM keys needed for proxy repair; future scale-up to real LLM measurement (C-PRODUCT-ECON) will require real token/latency measurement and production hosting"
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-PRODUCT-35741913862/request.json",
+    "research/experiments/EXP-PRODUCT-35741913862/spec.json",
+    "research/experiments/EXP-PRODUCT-35741913862/prereg.md",
+    "research/experiments/EXP-PRODUCT-35741913862/freeze.json",
+    "research/experiments/EXP-PRODUCT-35741913862/result.json",
+    "research/experiments/EXP-PRODUCT-35741913862/report.md",
+    "research/experiments/EXP-PRODUCT-35741913862/provenance.json",
+    "research/experiments/EXP-PRODUCT-35741913862/audit.json",
+    "research/experiments/EXP-PRODUCT-35741913862/artifacts/raw_per_task.csv",
+    "research/experiments/EXP-PRODUCT-35741913862/artifacts/registry.json",
+    "research/experiments/EXP-PRODUCT-35741913862/artifacts/cost_config.json",
+    "research/experiments/EXP-PRODUCT-35741913862/fixtures/tasks.json",
+    "research/experiments/EXP-PRODUCT-35741913862/run_experiment.py",
+    "research/experiments/EXP-PRODUCT-35741913862/compute_metrics.py",
+    "research/experiments/EXP-PRODUCT-35725756862/handoff.json",
+    "codex/claim_state.json",
+    "codex/index.json"
+  ],
+  "recommended_action": "Repair substrate per audit required_fixes RF1-RF5 and re-run a tightly scoped NEW product experiment on same synthetic L=10 mock with frozen proxy: (1) regenerate fixtures so 20/20 tasks at n=0.0 are exact repeats of training trajectories (action_template string equality) so main-set B-REPLAY-TERX hit_rate=1.0 and B-RAG Jaccard 1.0, with overlap-proportional sampling at intermediate bins; (2) remove hardcoded behavioral_score 0.15 and confidence 0.70 UNKNOWN determinism, make UNKNOWN derive from actual verification postconditions with per-task sampling variability so all bins have variance>0; (3) make NC1/NC2 go through actual permuted _bind + verification to introduce variability (RF7); (4) report both per-hit 50 tok and diluted mean costs for C2 with matching bootstrap CIs on same amortized units; keep block-permutation two-sided p<0.01 primary and note one-sided 0.0083 boundary. Keep scope to product lane harness-only (no Docker/LLM keys). Demonstrate at least B-LENGTH remains flat. Do not attempt C-PRODUCT-ECON scale-up to real LLM/Docker until this proxy-isolation passes with honest retrievable baselines."
+}
