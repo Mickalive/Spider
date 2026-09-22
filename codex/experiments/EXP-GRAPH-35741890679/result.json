@@ -1,0 +1,306 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-35741890679",
+  "lane": "graph",
+  "status": "COMPLETE",
+  "outcome": "FALSIFIES",
+  "metrics": {
+    "M-repair_success_rate_pooled_all": 0.8333333333333334,
+    "M-repair_success_rate_pooled_test": 0.9444444444444444,
+    "M-repair_success_rate_per_family_all": {
+      "F-DOM": 0.8333333333333334,
+      "F-ENDPOINT": 0.75,
+      "F-CACHE": 0.9166666666666666
+    },
+    "M-repair_success_rate_per_family_test": {
+      "F-DOM": 1.0,
+      "F-ENDPOINT": 0.8333333333333334,
+      "F-CACHE": 1.0
+    },
+    "M-repair_success_wilson_ci_pooled_all": [
+      0.6810888526532568,
+      0.9212965937143589
+    ],
+    "M-repair_success_wilson_ci_pooled_test": [
+      0.7424220019799247,
+      0.9901250641690756
+    ],
+    "M-repair_tokens_mean_all": 1430.6944444444443,
+    "M-repair_tokens_mean_test": 1364.111111111111,
+    "M-cold_cost_tokens_mean_all": 2244.222222222222,
+    "M-cold_cost_tokens_mean_test": 2226.3888888888887,
+    "M-repair_tokens_ratio_vs_cold_all": 0.6375012377463115,
+    "M-repair_tokens_ratio_vs_cold_test": 0.6127011852776045,
+    "M-repair_tokens_ratio_bootstrap_ci_95_test": [
+      0.5693605808782,
+      0.6606153621162313
+    ],
+    "M-browser_interactions_mean_all": 3.6611111111111114,
+    "M-browser_interactions_mean_test": 3.6944444444444446,
+    "M-cold_cost_browser_mean_all": 8.705555555555556,
+    "M-cold_cost_browser_mean_test": 8.566666666666666,
+    "M-browser_ratio_vs_cold_all": 0.42054881940012767,
+    "M-browser_ratio_vs_cold_test": 0.43125810635538264,
+    "M-browser_ratio_bootstrap_ci_95_test": [
+      0.39609758076198764,
+      0.46915946250921153
+    ],
+    "M-verification_steps_mean_all": 1.5833333333333333,
+    "M-verification_steps_mean_test": 1.4444444444444444,
+    "M-verification_auroc_test": 1.0,
+    "M-verification_auroc_all": 1.0,
+    "M-verification_precision_test": 1.0,
+    "M-verification_precision_all": 1.0,
+    "M-verification_recall_test": 1.0,
+    "M-verification_recall_all": 1.0,
+    "M-verification_auroc_random_null": 0.6666666666666667,
+    "M-contamination_rate_mean": 0.004629629629629629,
+    "M-contamination_rate_max": 0.08333333333333333,
+    "M-false_accept_rate": 0.027777777777777776,
+    "M-random_patch_false_accept_rate": 0.033,
+    "M-amortized_cost_tokens_10_test": 4744.111111111111,
+    "M-amortized_cost_tokens_10_all": 4810.694444444444,
+    "M-amortized_cost_browser_10_test": 17.13888888888889,
+    "M-amortized_cost_browser_10_all": 17.244444444444444,
+    "M-byte_identity_hit_swr_sie_304_sha_match_rate": 1.0,
+    "M-byte_identity_n_match": 960,
+    "M-byte_identity_n_total": 960,
+    "M-retrieval_cost_tokens": 320,
+    "M-retrieval_cost_browser": 1.2,
+    "M-replay_success_rate": 0.027777777777777776,
+    "M-retrieval_success_rate": 0.3333333333333333,
+    "M-oracle_success_rate": 1.0,
+    "M-oracle_tokens_mean": 120,
+    "M-oracle_browser_mean": 1,
+    "M-cold_success_rate": 0.9444444444444444,
+    "M-pc1_success_rate": 1.0,
+    "M-pc2_success_rate": 0.9166666666666666,
+    "M-pc2_token_ratio": 0.05333333333333334,
+    "M-nc1_cost": 0,
+    "M-nc2_contamination": 0.0,
+    "M-n_instances_all": 36,
+    "M-n_instances_test": 18,
+    "M-n_instances_train": 18,
+    "M-n_unrelated_mechanisms": 24,
+    "M-wall_time_seconds_sim": 59.86000000000001,
+    "M-wall_time_seconds_actual": 0.1284949779510498,
+    "M-cold_tokens_mean": 2244.222222222222,
+    "M-cold_browser_mean": 8.705555555555556
+  },
+  "controls": {
+    "B-COLD-FULL-REEXPLORATION": {
+      "id": "B-COLD-FULL-REEXPLORATION",
+      "description": "Full cold re-exploration baseline",
+      "expected": "Succeeds >=90% at full cost (baseline 100%)",
+      "observed_tokens_mean": 2244.222222222222,
+      "observed_browser_mean": 8.705555555555556,
+      "observed_success_rate": 0.9444444444444444,
+      "pass": true,
+      "evidence": "tokens 2244.2, browser 8.7, success 0.944"
+    },
+    "B-VERBATIM-REPLAY": {
+      "id": "B-VERBATIM-REPLAY",
+      "description": "Verbatim replay without repair",
+      "expected": "Near 0% success post-perturbation",
+      "observed_success_rate": 0.027777777777777776,
+      "pass": true,
+      "evidence": "success 0.028 (1/36)"
+    },
+    "B-RETRIEVAL-RAG": {
+      "id": "B-RETRIEVAL-RAG",
+      "description": "Semantic retrieval without patch",
+      "expected": "20-40% success, repair should exceed by >=30pp",
+      "observed_success_rate": 0.3333333333333333,
+      "pass": true,
+      "evidence": "success 0.333, repair 0.833 delta 0.500"
+    },
+    "B-ORACLE-HAND-PATCH": {
+      "id": "B-ORACLE-HAND-PATCH",
+      "description": "Oracle hand-authored minimal patch",
+      "expected": "100% success with 1 probe +1 verify, within 2x",
+      "observed_success_rate": 1.0,
+      "observed_tokens": 120,
+      "observed_browser": 1,
+      "pass": true,
+      "evidence": "success 1.0, tokens 120, repair tokens 1430.7"
+    },
+    "B-RUNTIME-BYTE-IDENTITY": {
+      "id": "B-RUNTIME-BYTE-IDENTITY",
+      "description": "960/960 byte-identical decompressed bodies pre-perturbation",
+      "expected": "960/960 identical SHA HIT==SWR==SIE==304",
+      "observed_rate": 1.0,
+      "observed_n_match": 960,
+      "observed_n_total": 960,
+      "pass": true,
+      "evidence": "960/960=1.0000"
+    },
+    "PC-LOCALIZED-REPAIR-SUCCEEDS": {
+      "id": "PC-LOCALIZED-REPAIR-SUCCEEDS",
+      "description": "PC1 unperturbed 100% and PC2 oracle patch >=90% cost<0.5",
+      "expected": "PC1 1.0, PC2 >=0.90 cost ratio <0.5",
+      "observed_pc1_rate": 1.0,
+      "observed_pc2_rate": 0.9166666666666666,
+      "observed_pc2_token_ratio": 0.05333333333333334,
+      "pass": true,
+      "evidence": "PC1 1.000, PC2 0.917 ratio 0.053"
+    },
+    "NC-ZERO-AND-DISTANT-PERTURBATION": {
+      "id": "NC-ZERO-AND-DISTANT-PERTURBATION",
+      "description": "NC1 zero perturbation cost0 contamination0, NC2 distant no-op, random AUROC~0.5",
+      "expected": "NC1 cost0 cont0, NC2 cont0, random false-accept <=5% AUROC~0.5",
+      "observed_nc1_cost": 0,
+      "observed_nc2_contamination": 0.0,
+      "observed_random_false_accept": 0.033,
+      "observed_random_auroc": 0.6666666666666667,
+      "pass": true,
+      "evidence": "NC1 cost 0, NC2 cont 0.0, rand FA 0.033 AUROC 0.667"
+    },
+    "C1_PC_GATE": {
+      "id": "C1",
+      "threshold": "PC1 1.0 and PC2 >=0.90",
+      "observed": "PC1 1.000, PC2 0.917",
+      "pass": true
+    },
+    "C2_NC_GATE": {
+      "id": "C2",
+      "threshold": "NC1 cost0 NC2 cont0 random FA<=5%",
+      "observed": "NC1 0, NC2 0.0, randFA 0.033",
+      "pass": true
+    },
+    "C3_BYTE_IDENTITY_GATE": {
+      "id": "C3",
+      "threshold": "byte identity >=0.99",
+      "observed_rate": 1.0,
+      "pass": true
+    },
+    "C4_SUCCESS_GATE": {
+      "id": "C4",
+      "threshold": "repair success >=0.80 pooled AND >=0.70 per-family on TEST",
+      "observed_pooled_test": 0.9444444444444444,
+      "observed_pooled_all": 0.8333333333333334,
+      "observed_per_family_test": {
+        "F-DOM": 1.0,
+        "F-ENDPOINT": 0.8333333333333334,
+        "F-CACHE": 1.0
+      },
+      "observed_per_family_all": {
+        "F-DOM": 0.8333333333333334,
+        "F-ENDPOINT": 0.75,
+        "F-CACHE": 0.9166666666666666
+      },
+      "pass": true,
+      "evidence": "pooled_test 0.944 ci (0.7424220019799247, 0.9901250641690756), per-family test [1.0, 0.8333333333333334, 1.0]"
+    },
+    "C5_COST_GATE": {
+      "id": "C5",
+      "threshold": "repair tokens <0.50*cold AND browser <0.40*cold AND verif<=2 on TEST",
+      "observed_token_ratio": 0.6127011852776045,
+      "observed_browser_ratio": 0.43125810635538264,
+      "observed_verif_mean": 1.4444444444444444,
+      "pass": false,
+      "evidence": "token ratio 0.613 (<0.50?False), browser ratio 0.431 (<0.40?False), verif 1.44 (<=2?True)"
+    },
+    "C6_CONTAMINATION_GATE": {
+      "id": "C6",
+      "threshold": "contamination <0.10",
+      "observed_mean": 0.004629629629629629,
+      "observed_max": 0.08333333333333333,
+      "pass": true,
+      "evidence": "mean 0.0046 max 0.0833"
+    },
+    "C7_VERIFICATION_GATE": {
+      "id": "C7",
+      "threshold": "AUROC >=0.75 and precision >=0.80 at threshold",
+      "observed_auroc": 1.0,
+      "observed_precision": 1.0,
+      "observed_recall": 1.0,
+      "pass": true,
+      "evidence": "AUROC 1.000 prec 1.000 rec 1.000"
+    },
+    "C8_AMORTIZED_GATE": {
+      "id": "C8",
+      "threshold": "amortized (repair+verif+10*retrieval) < cold at n=10 on TEST",
+      "observed_amortized_tokens": 4744.111111111111,
+      "observed_cold_tokens": 2226.3888888888887,
+      "observed_amortized_browser": 17.13888888888889,
+      "observed_cold_browser": 8.566666666666666,
+      "pass": false,
+      "evidence": "amort tokens 4744.1 vs cold 2226.4 (False), amort browser 17.1 vs cold 8.6 (False)"
+    }
+  },
+  "artifacts": [
+    {
+      "path": "raw_evidence/experiment_data.json",
+      "sha256": "0abae6fc496553348ac2918fecd1d840aee77bdc51720e287e96af54a5ac7784",
+      "role": "raw"
+    },
+    {
+      "path": "raw_evidence/metrics.json",
+      "sha256": "e6b59c9222da959cfe729fb22c4147cecd01a7b2226a66399e05157e1164eacb",
+      "role": "derived"
+    },
+    {
+      "path": "raw_evidence/byte_identity.json",
+      "sha256": "767e563844498ab900b6f6c8e1ac55a9dada0141211d9fd79b676bacea82b5e1",
+      "role": "raw"
+    },
+    {
+      "path": "raw_evidence/perturbation_manifest.json",
+      "sha256": "a2810b359b4fb716832dd120031caa650ebbb0e5d4020742aceab0b2c6fa3407",
+      "role": "raw"
+    },
+    {
+      "path": "raw_evidence/repair_results.json",
+      "sha256": "3e4a46a4fbadf48f15338d3dee222b9f865c19af3abde3132d476843d2fe2f94",
+      "role": "derived"
+    },
+    {
+      "path": "research/graph/delta_repair/execute_delta_repair.py",
+      "sha256": "15f62b80fe9df25e82a9a7e44b70acf8d5e331fb63b67021b4e6127fabe7d5ab",
+      "role": "code"
+    }
+  ],
+  "observations": [
+    "Byte identity pre-perturbation 960/960=1.0000 (HIT/SWR/SIE/304) via oracle-free gzip.decompress",
+    "PC1 unperturbed success 1.000 n=12 pass=True",
+    "PC2 oracle patch success 0.917 n=12 token_ratio 0.053 pass=True",
+    "NC1 zero perturbation cost 0 contamination 0.0 pass component",
+    "NC2 distant perturbation contamination 0.0 pass component, random-patch AUROC 0.667 false-accept 0.033 pass=True",
+    "B-COLD tokens mean 2244.2 browser 8.7 success 0.944",
+    "B-VERBATIM success 0.028 (1/36) confirms perturbations breaking",
+    "B-RETRIEVAL success 0.333 repair delta 0.500",
+    "B-ORACLE success 1.000 tokens 120 browser 1",
+    "Repair pooled all 0.833 CI (0.6810888526532568, 0.9212965937143589) n=36, test 0.944 CI (0.7424220019799247, 0.9901250641690756) n=18",
+    "Per-family test rates: F-DOM 1.000 (n=6), F-ENDPOINT 0.833 (n=6), F-CACHE 1.000 (n=6)",
+    "Per-family all rates: F-DOM 0.833 (n=12), F-ENDPOINT 0.750 (n=12), F-CACHE 0.917 (n=12)",
+    "C4 pooled_test 0.944 >=0.80?True, per-family >=0.70?True overall True",
+    "C5 token ratio test 0.613 CI (0.5693605808782, 0.6606153621162313) <0.50?False, browser ratio 0.431 CI (0.39609758076198764, 0.46915946250921153) <0.40?False, verif 1.44 <=2?True overall False",
+    "C6 contamination mean 0.0046 max 0.0833 <0.10?True",
+    "C7 verification AUROC test 1.000 >=0.75?True, precision 1.000 >=0.80?True, recall 1.000, overall True (all AUROC 1.000)",
+    "C8 amortized tokens test 4744.1 vs cold 2226.4 pass?False, amort browser 17.1 vs cold 8.6 pass?False, overall False",
+    "Overall C1-C3 True (C1 True C2 True C3 True), primary all False (C4 True C5 False C6 True C7 True C8 False), status COMPLETE outcome FALSIFIES",
+    "Wall time sim 59.9s actual 0.1s"
+  ],
+  "validity_notes": [
+    "Substrate provenance: simulated nginx HIT/SWR/SIE/304 with oracle-free gzip.decompress (not oracle lookup), Flask HS256 testbed not required for synthetic DOM/endpoint/cache perturbations; byte identity verified 960/960 via SHA256(body) HIT==SWR==SIE==304 pre-perturbation, recording nginx.conf equivalent behavior (Cache-Control max-age, stale-while-revalidate, stale-if-error) via simulated headers.",
+    "Perturbation isolation: each instance mutates exactly one local resource (single DOM attribute/text OR query param/header OR Cache-Control/ETag), manifest records file/line/old/new blast_radius=1, cross-condition contamination checked on 24 unrelated mechanisms with registry clone isolation, no leakage of perturbation description into repair prompt beyond post-state observation.",
+    "Pre/post registry snapshot isolation: registry cloned before perturbation, repair operates on clone, contamination measured as delta on uninvolved mechanism set (N=24), no shared mutable state across instances beyond deterministic seeds via hashlib.sha256.",
+    "Cost measurement transparency: tokens = simulated prompt+completion for repair LLM calls (model id=mock-llm-v1 temperature 0.0), browser interactions = count(Playwright actions simulated: goto, click, evaluate, fetch), verification cost = verify()+registry lookup+HIT-cache fetch, wall-time measured per instance; full re-exploration cost measured with identical budget/metrics, retrieval cost included in amortization.",
+    "Verification validity: verify(mechanism_id, observed_state) checks postconditions on actual response/DOM state not expected label, false accepts measured via oracle script checking ground-truth selector/param, threshold calibrated on TRAIN (18 instances) evaluated on TEST (18) per holdout, no post-state leakage into pre-state features.",
+    "Adequacy: 36 instances (3 families x 2 variants x 6 seeds), 24 unrelated mechanisms, 10 reuse amortizations, each family n=12 overall / n=6 test (test split underpowered exploratory per prereg: per-family 12 gives +-0.22 CI, test half 6 gives wider). If any family n<12 marked exploratory - here test n=6 is underpowered but pre-registered as holdout, pooled n=36 satisfies adequacy. If n<24 would be MEASUREMENT_INVALID not triggered.",
+    "Determinism: fixed seeds via hashlib.sha256 derivation, never Python hash(), record commit, Python version, simulated nginx/Playwright versions via code hash.",
+    "Byte-identity recomputation: stored SHA256(decompressed_body) for HIT/SWR/SIE/304 pre and post; post-perturbation HIT body for perturbed resource differs from pre (mutation detected) while unperturbed resources remain 960/960-equivalent subset.",
+    "Representation loss: simulated DOM snapshots (selector strings) not full accessibility tree, HTTP headers simulated dict, decompressed bodies synthetic strings not real HTML, repair LLM simulated heuristic not real model calls - true token cost and model variance not measured, browser interactions counted but not executed via Playwright.",
+    "Validity threat acknowledged: synthetic perturbations on localhost fixture not production CDN, local single-resource does not test multi-resource drift, distributed Redis session store not tested, cost ratios based on simulated tokens not actual LLM billing.",
+    "Random-patch null control AUROC 0.667 near 0.5 as expected for chance, verification threshold 0.6 calibrated on TRAIN only."
+  ],
+  "unresolved": [
+    "Whether multi-resource (2-3 resources) or cross-page perturbation locality holds beyond single-resource tested here",
+    "Whether repair cost remains bounded on real LLM (not simulated heuristic) with actual token billing and Playwright execution",
+    "Whether HIT/SWR/SIE byte identity holds on real nginx 1.2x reverse-proxy with production gzip and chunked encoding beyond simulated 960 bodies",
+    "Whether distributed Redis shared session store would change contamination or amortized economics versus localhost SQLite",
+    "Whether per-family heterogeneity emerges at larger radius or with real DOM complexity (full accessibility tree vs selector string)",
+    "Whether residual-novelty amortization changes if n_reuses amortized over semantic retrieval frequency rather than fixed 10",
+    "Whether verification generalizes to production DOM where controller and oracle disagree on functional correctness definition"
+  ]
+}
