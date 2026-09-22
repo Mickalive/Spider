@@ -1,0 +1,225 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-35798169917",
+  "lane": "graph",
+  "status": "MEASUREMENT_INVALID",
+  "outcome": "NOT_APPLICABLE",
+  "metrics": {
+    "M-EXECUTABLE-SPIDER": null,
+    "M-BINDING-CORRECT": null,
+    "M-UNSUBSTITUTED-TEMPLATES": null,
+    "M-SUCCESS-SPIDER": null,
+    "M-SUCCESS-COLD": null,
+    "M-SUCCESS-RAG": null,
+    "M-SUCCESS-REPLAY": null,
+    "M-SUCCESS-INSTR": null,
+    "M-SUCCESS-LITERAL": null,
+    "M-FALSE-ACCEPT-SPIDER": null,
+    "M-UNKNOWN-RATE": null,
+    "M-ECE": null,
+    "M-CONTAMINATION": null,
+    "M-AMORTIZED-SAVING-vs-COLD": null,
+    "M-COST-RATIO-RAG": null,
+    "tasks_valid": 10,
+    "families_valid": 1,
+    "census_verified": false,
+    "census_synthetic_verified": true,
+    "census_tasks": 242,
+    "census_templates": 50,
+    "census_duplication": 0.7933884297520661,
+    "families_ge3": 23,
+    "pilot_family": "add_to_cart",
+    "pool_a_size": 10,
+    "pool_b_size": 10,
+    "zero_overlap_verified": true,
+    "llm_available": false,
+    "playwright_available": false,
+    "kernel_sha256": "3c61f9fc251668237a58e986c3348e1bf1057e38824a0e1b9ea1e2426a1c938a",
+    "kernel_checks": {
+      "distill_parameterized": true,
+      "_common_prefix_and_suffix": true,
+      "_extract_varying_values": true,
+      "_structure_similarity": true,
+      "_is_allowed_path": true,
+      "_field_path_to_slot_name": true,
+      "_sanitize_slot": true,
+      "confidence_090": true,
+      "single_prefix_comment": true,
+      "jaccard_thresh": true
+    },
+    "unit_tests_passed": true,
+    "PC1-HIT-RATE": 1.0,
+    "PC1-COST": 50,
+    "PC1-SUCCESS": 1.0,
+    "PC2-EXECUTABLE": 1.0,
+    "PC2-BINDING": 1.0,
+    "PC2-SUCCESS": 1.0
+  },
+  "controls": {
+    "PC-PARAM-REGRESSION-AND-LITERAL-HIT": {
+      "id": "PC-PARAM-REGRESSION-AND-LITERAL-HIT",
+      "description": "Two positive controls exercising real pipeline on same substrate: PC1 same-A literal hit 1.0 cost 50 tok success 1.0; PC2 multi-param same-A EXECUTABLE 1.0 binding 1.0 success >=0.90",
+      "expected": "PC1 hit_rate 1.0 cost 50 tok success 1.0; PC2 EXECUTABLE 1.0 binding 1.0 success >=0.90 zero templates",
+      "observed": "PC1 hit=1.0 cost=50 success=1.0; PC2 exec=1.0 binding=1.0 success=1.0 detail=slots=['qty', 'resource_id', 'sku', 'x_csrf_token'] template_keys=['url', 'body', 'headers'] evidence_values={'resource_id': ['https://shop.example.com/store/S1/item/I1', 'https://shop.example.com/store/S2/item/I2', 'https://shop.example.com/store/S3/item/I3'], 'sku': ['A1', 'A2', 'A3'], 'qty': ['2', '3', '4'], 'x_csrf_token': ['tokA', 'tokB', 'tokC']}",
+      "pass": true,
+      "evidence_ref": "research/experiments/EXP-GRAPH-35798169917/raw_evidence/registry.json and per_task.csv (synthetic same-A via real kernel)"
+    },
+    "B-COLD": {
+      "id": "B-COLD",
+      "description": "Cold LLM agent no memory",
+      "expected": "Success lower than SPIDER",
+      "observed": null,
+      "pass": "unknown",
+      "reason": "Not measured: OPENAI_API_KEY absent, synthetic census not real WebArena"
+    },
+    "B-RAG": {
+      "id": "B-RAG",
+      "description": "RAG Jaccard 0.30 verbatim",
+      "expected": "Hit ~0.05 success << SPIDER",
+      "observed": null,
+      "pass": "unknown",
+      "reason": "Not measured: requires real LLM held-out B"
+    },
+    "B-REPLAY-TERX": {
+      "id": "B-REPLAY-TERX",
+      "description": "0-token exact replay 50 tok verify",
+      "expected": "Hit ~0 on hold-out",
+      "observed": null,
+      "pass": "unknown",
+      "reason": "Not measured on held-out B; same-A validated via PC1"
+    },
+    "B-INSTR": {
+      "id": "B-INSTR",
+      "description": "Instructions 200 tok amortized",
+      "expected": "Cost below COLD",
+      "observed": null,
+      "pass": "unknown",
+      "reason": "Not measured"
+    },
+    "B-LITERAL": {
+      "id": "B-LITERAL",
+      "description": "Literal distill without slots",
+      "expected": "Success ~0 on hold-out",
+      "observed": null,
+      "pass": "unknown",
+      "reason": "Not measured; leakage check requires real execution"
+    },
+    "NC-SHUFFLED-AND-RANDOM": {
+      "id": "NC-SHUFFLED-AND-RANDOM",
+      "description": "NC1 shuffled NC2 random via real bind/verify",
+      "expected": "NC1 success <=COLD+0.05 false_accept >=0.25 binding <0.50; NC2 false_accept >=0.30",
+      "observed": null,
+      "pass": "unknown",
+      "reason": "Not measured: requires held-out B and real verification"
+    },
+    "CENSUS-VERIFICATION": {
+      "id": "CENSUS-VERIFICATION",
+      "description": "WebArena-Verified v2 census 192/49/36 dup 0.9479 hash d652756...",
+      "expected": "192 tasks verified",
+      "observed": "synthetic census 242 tasks sha 0ee8b1f7d410c922d0c5d0493356fcec1704ccd278c67b8a04d79575384e1064 duplication 0.7934 not Docker",
+      "pass": false,
+      "evidence_ref": "research/experiments/EXP-GRAPH-35798169917/census.json"
+    },
+    "KERNEL-FIX": {
+      "id": "KERNEL-FIX",
+      "description": "distill_parameterized single-prefix field-filter Jaccard >=0.75 distinct slot confidence 0.90 ported to src/spider/kernel.py",
+      "expected": "7 functions present, sha logged, git diff non-empty, unit tests pass",
+      "observed": "checks={'distill_parameterized': True, '_common_prefix_and_suffix': True, '_extract_varying_values': True, '_structure_similarity': True, '_is_allowed_path': True, '_field_path_to_slot_name': True, '_sanitize_slot': True, 'confidence_090': True, 'single_prefix_comment': True, 'jaccard_thresh': True} sha=3c61f9fc251668237a58e986c3348e1bf1057e38824a0e1b9ea1e2426a1c938a unit_tests_pass=True",
+      "pass": true,
+      "evidence_ref": "src/spider/kernel.py"
+    }
+  },
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-GRAPH-35798169917/raw_evidence/per_task.csv",
+      "sha256": "b96a39cf74d29371d0193afa695ae9ce4dd20a1529c55d7fcb54ea803f3cb9fb",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-35798169917/raw_evidence/registry.json",
+      "sha256": "90f78b522cd1a83d71105c727e3455c4c901840a00b179a392939910c460aee1",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-35798169917/raw_evidence/cost_config.json",
+      "sha256": "0049777e730b445fb85672f7afab8d084d9e8cf41b6c3ea03168080ed8debc17",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-35798169917/raw_evidence/census_attempts.json",
+      "sha256": "975ab3ae2bdb09d10ca5b5a1ffc0e4cd423909ee64da9d8e6822f2c6ad8c225c",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-35798169917/raw_evidence/kernel_check.json",
+      "sha256": "5028fa7a4dd13df1e95104c800256f44cdf4190acc38d4ffcbbe814fb62c1690",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-35798169917/raw_evidence/unit_test_output.json",
+      "sha256": "e33415a8d7070b193b85171c903a0e0af8144606dc1a2bfbf9dfa388daf066c5",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-35798169917/census.json",
+      "sha256": "0ee8b1f7d410c922d0c5d0493356fcec1704ccd278c67b8a04d79575384e1064",
+      "role": "raw"
+    },
+    {
+      "path": "src/spider/kernel.py",
+      "sha256": "3c61f9fc251668237a58e986c3348e1bf1057e38824a0e1b9ea1e2426a1c938a",
+      "role": "code"
+    },
+    {
+      "path": "src/spider/models.py",
+      "sha256": "23ef7f750e6bb7776c648316956cb8be95576271ca479f632de934d6eef22177",
+      "role": "code"
+    },
+    {
+      "path": "tests/test_kernel_param_inherit.py",
+      "sha256": "5ba22fbf10de8f88f598ce4eeb06738e9a88f62ad47c84d510c78b4820aee836",
+      "role": "code"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-35798169917/run_experiment.py",
+      "sha256": "232f16a74f84f0d1da3225495c7baad11a5c98342da08cef4bb52d56ba7727dd",
+      "role": "code"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-35798169917/pilot_family.json",
+      "sha256": "df68cc79bf8b67e9734bfeb99fcc6b8b860f4ec706a13c498713b09961b51555",
+      "role": "raw"
+    }
+  ],
+  "observations": [
+    "Census generated synthetic at /home/runner/work/Spider/Spider/research/experiments/EXP-GRAPH-35798169917/census.json sha 0ee8b1f7d410c922d0c5d0493356fcec1704ccd278c67b8a04d79575384e1064 tasks 242 templates 50 duplication 0.7934 families_ge3 23",
+    "Pilot family add_to_cart pool_A 10 pool_B 10 zero_overlap True a_vals ['SKU-A001', 'SKU-A002', 'SKU-A003']... b_vals ['SKU-B001', 'SKU-B002', 'SKU-B003']...",
+    "Kernel fix ported to /home/runner/work/Spider/Spider/src/spider/kernel.py sha 3c61f9fc251668237a58e986c3348e1bf1057e38824a0e1b9ea1e2426a1c938a checks {\"distill_parameterized\": true, \"_common_prefix_and_suffix\": true, \"_extract_varying_values\": true, \"_structure_similarity\": true, \"_is_allowed_path\": true, \"_field_path_to_slot_name\": true, \"_sanitize_slot\": true, \"confidence_090\": true, \"single_prefix_comment\": true, \"jaccard_thresh\": true} kernel_ok True",
+    "Unit tests tests/test_kernel_param_inherit.py passed=True stdout ",
+    "PC1 same-A literal hit_rate=1.0 cost=50 success=1.0",
+    "PC2 multi-param same-A executable=1.0 binding=1.0 success=1.0 detail=slots=['qty', 'resource_id', 'sku', 'x_csrf_token'] template_keys=['url', 'body', 'headers'] evidence_values={'resource_id': ['https://shop.example.com/store/S1/item/I1', 'https://shop.example.com/store/S2/item/I2', 'https://shop.example.com/store/S3/item/I3'], 'sku': ['A1', 'A2', 'A3'], 'qty': ['2', '3', '4'], 'x_csrf_token': ['tokA', 'tokB', 'tokC']}",
+    "LLM availability OPENAI_API_KEY present=False playwright not installed available=False",
+    "Census verification: synthetic fallback not real Docker am1n3e/webarena-verified-shopping@sha256:3e8cb9b945 hash d65275660814663375028e9017e1f929e3c38321041b125795e2713b52243d30 -> MEASUREMENT_INVALID for WebArena claim per prereg",
+    "Infrastructure ready=False tasks_valid 10 >=10 True zero_overlap True",
+    "Per EXPERIMENT_PACKET.md s9 infrastructure failure not falsification; C-PARAM-INHERIT remains EXPERIMENTAL synthetic ceiling"
+  ],
+  "validity_notes": [
+    "MEASUREMENT_INVALID: WebArena-Verified v2 census not loaded from real Docker am1n3e/webarena-verified-shopping@sha256:3e8cb9b945 (hash d652756...) - synthetic fallback used (duplication 0.7934 vs target 0.9479 CI [0.9167,0.9792]); per prereg fallback synthetic mock requires ceiling downgrade to MEASUREMENT_INVALID for WebArena claim",
+    "MEASUREMENT_INVALID: OPENAI_API_KEY absent (>50% trials would fail). Real LLM execution (gpt-4o-mini-2024-07-18 temp 0.0 seed 42, 15 steps, Playwright chromium) not available for any condition SPIDER/COLD/RAG/REPLAY/INSTR/LITERAL. Per prereg MEASUREMENT_INVALID outcome=NOT_APPLICABLE not falsification.",
+    "Adequacy gate NOW PASSES: pilot B 10 tasks >=10 minimum with zero overlap verified; previous 7<10 fixed. Synthetic census still blocks WebArena ceiling but adequacy no longer contributes.",
+    "Kernel fix DURABLY ported to src/spider/kernel.py sha 3c61f9fc251668237a58e986c3348e1bf1057e38824a0e1b9ea1e2426a1c938a with git diff non-empty (verified), 7-function code inspection PASS, and 13/13 +3 kernel unit tests PASS (including B1/B4/D1/E1/B2/B3/B5/C2 distinct slot zero-template). PC1/PC2 synthetic same-A controls PASS via real registry/_bind/verify exercising src/spider/kernel.py.",
+    "Positive controls PC1 (hit 1.0 cost 50 tok success 1.0) and PC2 (EXECUTABLE 1.0 binding 1.0 success >=0.90 zero templates) PASS, confirming induction works before generalization to B. However B generalization not tested due to missing LLM.",
+    "Family hold-out zero overlap proven (A SKU-A001..A010 disjoint B SKU-B001..B010); B-LITERAL leakage check not measured still requires real execution.",
+    "Honest cost accounting tokens+browser+retrieval+verification amortized f=10 not measured; bijective proxy not used (would be MEASUREMENT_INVALID per agent-prior).",
+    "Per EXPERIMENT_PACKET.md s9 infrastructure failure must never be encoded as falsification; this run correctly reports MEASUREMENT_INVALID.",
+    "Previous audit fixes for durability and artifact persistence addressed: kernel now durable, census.json persisted under exp dir with hash, test file present."
+  ],
+  "unresolved": [
+    "Does real-LLM parameterized inheritance on WebArena-Verified v2 family hold-out achieve EXECUTABLE >=0.75 binding >=0.90 zero templates on never-observed B?",
+    "Does SPIDER success exceed B-COLD/B-RAG/B-REPLAY/B-INSTR by >=0.12 with bootstrap CI >0.02 and McNemar p<0.05?",
+    "Does false_accept <=0.10 UNKNOWN [0.00,0.15] ECE <=0.15 contamination <0.10 hold?",
+    "Does honest amortized saving >=25% vs COLD at f=10 and ratio <=0.85 vs RAG hold?",
+    "Does kernel distinct slot naming generalize to path+body+headers multi-param across >=10 families >=60 tasks with zero overlap on real Docker census?",
+    "What is actual WebArena-Verified v2 census hash and duplication after loading real data via Docker?"
+  ]
+}

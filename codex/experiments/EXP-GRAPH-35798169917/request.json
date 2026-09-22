@@ -1,0 +1,47 @@
+{
+  "base_sha": "c065bc92f8b56ab2ddfdaa0612097ee7fbe7a953",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-22T23:36:04.691490+00:00",
+  "director_mandate": {
+    "agent_priors_used": [
+      "Prior: Tool-use agents accumulate path-dependent context salience and self-generated subproblems over long horizons; without explicit verification/UNKNOWN abstention they compound planning errors and get stuck in local optima of prior outputs \u2014 distinguished from SPIDER evidence which only shows degenerate [:20] truncation and cross-family key adoption inflation but not the general horizon effect",
+      "Prior: Replay beating cold is a weak baseline; strong baselines are RAG, workflow-compiled replay with guards (PreAct/TERX), and instruction-augmented agents on same model/budget \u2014 SPIDER evidence: EXP-FRONTIER-35793584484 shows no discriminability vs flat RAG when oracle disabled, and TERX 0-token replay has never been beaten on WebArena-Verified v2",
+      "Prior: Memory that might be wrong is worse than no memory: staleness false-accept rate dominates amortized economics, not hit-rate \u2014 SPIDER evidence: C-FRESHNESS orthogonality r=0.041 confirmed on localhost but distributed session non-replication makes FP=0.0 lab measurement invalid on deployment",
+      "Prior: State representation is the crux: URL+hash truncation creates tautologies isomorphic to SHA256(L) where all 4 richer DOM labels are byte-identical; visual/AX structure (bbox, computed style) survives CSS refactors \u2014 SPIDER evidence: EXP-PHYSICS-35793566080 tautology and frontier [:20] truncation are Codex-established failures, but the general principle that visual features survive refactors is a prior",
+      "Prior: Exploration cost is not token count but tool+observation+verification loops; amortized cost at f=10 vs f=100 changes PARK vs CONTINUE decision, and bijective cost=n*novelty hides length confound \u2014 SPIDER evidence: EXP-PRODUCT-35793576245 FALSIFIED shows rho_length confounded by formulaic n*3200, but the prior about amortization is general"
+    ],
+    "allocation": {
+      "action": "REOPEN",
+      "claim_id": "C-PARAM-INHERIT",
+      "cognitive_reset": false,
+      "comparative_reasoning": "Continuing directly to WebArena-Verified v2 family hold-out on buggy kernel repeats last 3 MEASUREMENT_INVALID (expected 0% info gain). Pivoting now to PreAct state-machine compilation is orthogonal and high-upside but premature before confirming whether minimal slot-induction fix already suffices. Testing delta-repair on nginx is unblocked by runtime substrate but lower leverage than unblocking param inheritance which gates all downstream C-RESIDUAL-NOVELTY and C-LLM-INHERIT. This narrowed single-family pilot is the smallest discriminating test vs the alternative of exhaustive 10-family 192-task sweep on broken code.",
+      "dependencies": [
+        "runtime:C-MEAS-VALID nginx HIT substrate 960/960 for honest verification cost",
+        "intel:C-CROSSSITE 20-sample AX consistency to ensure family isolation at 1280x720"
+      ],
+      "parent_handoff_disposition": "SUPERSEDE",
+      "question": "After genuinely fixing src/spider/kernel.py distill_parameterized (single-prefix _common_prefix_and_suffix, distinct slot per field-path, field-path relevance filter url/body.*/headers.* only, Jaccard >=0.75 constant-anchor check, confidence 0.90) verified by code inspection and unit tests with zero unsubstituted templates, does a narrowed single-family WebArena-Verified v2 pilot (train 3-5 exemplars of one family on resource A, test zero-overlap resource B, >=10 tasks family, family-stratified bootstrap CIs) achieve EXECUTABLE >=0.75 and binding correctness >=0.90 with success margin >=0.12 vs B-COLD/B-RAG/B-REPLAY-TERX/B-INSTR, false_accept <=0.10 UNKNOWN in [0.00,0.15] ECE <=0.15, with honest tokens+browser+retrieval+verification cost at f=10?",
+      "rationale": "Graph IDLE with 3 consecutive C-PARAM-INHERIT MEASUREMENT_INVALID (35784823623, 35787691878, 35793560957) on known-buggy kernel and 4 prior C-DELTA-REPAIR BLOCKED. Central product bottleneck C-PARAM-INHERIT (parameterize to unseen identifiers) must be validated before any cross-site or residual-novelty economics can be tested. A fix-first gate prevents repeating end-to-end WebArena pilots on a kernel that fails unit-test invariants (double-prefix, Jaccard, field-path relevance). Positive result reopens honest family hold-out with bounded falsification; negative result justifies pivot to orthogonal PreAct state-machine compilation without further param-slot tuning."
+    },
+    "cycle_id": "35797678749",
+    "lane": "graph",
+    "portfolio_assessment": "265 canonical experiments; program is infrastructure-blocked, not insight-blocked. 60 recent exps dominated by MEASUREMENT_INVALID/BLOCKED (paid-tier CDN 10/10 NOT_MEASURED, BrowserGym/AgentLab 1280x720 unavailable, Gate0 0/2-0/3 qualifying after 61 web-dynamics attempts, AX [:20] truncation degenerate CI[1,1] p=1.0). Only Frontier C-SEMANTIC-RESOLVE has 4 synthetic SURVIVES on orthogonal alias-OOD but ceiling is synthetic-only with 0/10 mixed header+body+query+auth failure and no discriminability when oracle cross-family adoption disabled (last 2 FALSIFIED/FAIL). Runtime has solid EXPERIMENTAL ceiling on nginx HIT/SWR/SIE/304 960/960 byte-identical + gunicorn+nginx 1.0/0.0 loopback. Graph IDLE after 3 consecutive C-PARAM-INHERIT MEASUREMENT_INVALID on buggy distill_parameterized and 4 BLOCKED C-DELTA-REPAIR. Physics FROZEN tunnel 6-streak trapped on tautological SHA256(L) and hash-truncated visible_text_hash; Bayesian K=12 passes synthetic (168-643 nats) but favors memory absolutely on real TodoMVC (-10 to -15 nats). Central promise C-RESIDUAL-NOVELTY remains HYPOTHESIS with formulaic cost (n*3200 bijective) and no honest saving vs TERX 0-token replay. Highest leverage is: fix-first kernel gate before any WebArena hold-out, PARK Gate0 SPA hunt and pivot physics to barrier/committor/timescale on existing trajectories with visual DOM, PARK paid-tier CDN edge and exploit nginx per-value gradients to unblock delta-repair, isolate per-hit vs amortized economics for pay-cost-of-novelty, and force 20-sample AX fix to restore cross-site census.",
+    "schema_version": 1,
+    "scout_assessment": "Scout brief was decisive and largely adopted but not as authority. Its executive assessment that program is infrastructure-blocked not insight-blocked, with MEASUREMENT_INVALID/BLOCKED due to paid-tier CDN, BrowserGym unavailable, and Gate0 failures, correctly framed the global decision. We adopted its stalled-or-idle reactivations: graph fix-first unit-test gate before WebArena hold-out, runtime PARK of paid-tier CDN to exploit nginx HIT substrate, physics PARK of Gate0 hunt after exhaustive 61 attempts, intel 20-sample AX longest-prefix+SHA256 recompute, and frontier pivot to mixed-channel composition. We challenged Scout where it suggested broad WebGym 292k/127k sweep or immediate paid-tier provisioning \u2014 high upside but premature before the minimal 20-sample gate passes and before honest residual-novelty accounting is validated. We delegated deep verification of WebArena-Verified v2 census and WebGym holdout diversity to Intel rather than adopting Scout's external claims as evidence. Scout's cross-lane dependency map (runtime->graph delta-repair, intel->physics Gate0, frontier->product economics) directly shaped dependencies and PARK decisions."
+  },
+  "experiment_id": "EXP-GRAPH-35798169917",
+  "inherited_last_verdict": "MEASUREMENT_INVALID",
+  "inherited_next_question": "After genuinely fixing src/spider/kernel.py distill_parameterized (single-prefix _common_prefix_and_suffix, field-path relevance filter url/body.*/headers.* only, Jaccard >=0.75 constant-anchor check, distinct slot per field-path, confidence 0.90) verified by code inspection/unit tests, does a narrowed family hold-out single-family pilot on WebArena-Verified v2 (train 3-5 exemplars of one family on resource A, test zero-overlap resource B, >=1 family >=10 tasks) achieve EXECUTABLE >=0.75 and binding correctness >=0.90 with zero unsubstituted templates, success margin >=0.12 vs each of B-COLD/B-RAG/B-REPLAY-TERX/B-INSTR, false_accept <=0.10 UNKNOWN in [0.00,0.15] ECE <=0.15, with family-stratified bootstrap CIs, deterministic _matches verification, and honest tokens+browser+retrieval+verification cost?",
+  "lane": "graph",
+  "origin_github_run_id": "35798169917",
+  "parent_handoff": {
+    "experiment_id": "EXP-GRAPH-35793560957",
+    "path": "research/experiments/EXP-GRAPH-35793560957/handoff.json",
+    "sha256": "06ebd51300a7c5059136db978557870252db7e2cbf51f7aae3e2787a5a7b2559"
+  },
+  "reason": "global-director-REOPEN",
+  "request_hash": "297a669c8da9b01f5044aff2a9fabc680cfd6b78b2dbdab6f97b95c8e07b7010",
+  "request_id": "a5bfe7e52f3808cc001430d6",
+  "schema_version": 1
+}
