@@ -4,7 +4,7 @@ Pre-2.0 canonical memory remains frozen at `archive/spider-codex-ultimate:SPIDER
 
 Canonical Research 2.0 evidence lives in `codex/experiments/<experiment_id>/`.
 Use `codex/index.json` and `codex/claim_state.json` to locate relevant packets; do not load all experiment bodies by default.
-Validated experiments: **264**. Coverage gaps: **0**. Quarantined packets: **0**.
+Validated experiments: **265**. Coverage gaps: **0**. Quarantined packets: **0**.
 
 ## Experiment index
 
@@ -271,6 +271,7 @@ Validated experiments: **264**. Coverage gaps: **0**. Quarantined packets: **0**
 | EXP-PHYSICS-35787698409 | physics | MEASUREMENT_INVALID | MEASUREMENT_INVALID | C-WEB-DYNAMICS | `7aff37743b75` |
 | EXP-FRONTIER-35789949165 | frontier | FAIL | MIXED | C-SEMANTIC-RESOLVE | `87e0410e20f3` |
 | EXP-INTEL-35789942386 | intel | MEASUREMENT_INVALID | MEASUREMENT_INVALID — placeholder fix verified but AX pattern grammar truncated [:20] generic tokens, drift SHA256 not recomputed, multi-step BrowserGym unavailable; mean 1.0 CI[1.0,1.0] variance 0 p=1.0 degenerate vs shuffle null. No bounded falsification of longest-prefix method. | C-CROSSSITE, C-LLM-INHERIT, C-PRODUCT-ECON | `e9e7e7a19558` |
+| EXP-GRAPH-35793560957 | graph | MEASUREMENT_INVALID | MEASUREMENT_INVALID | C-PARAM-INHERIT | `3e8d13a4f6da` |
 | EXP-PHYSICS-35793566080 | physics | FAIL | MEASUREMENT_INVALID | C-WEB-DYNAMICS | `f06a69af7e6c` |
 | EXP-PRODUCT-35793576245 | product | PASS | FALSIFIED | C-RESIDUAL-NOVELTY | `8883235ece2f` |
 | EXP-FRONTIER-35793584484 | frontier | PASS | FALSIFIED-IN-SETTING | C-SEMANTIC-RESOLVE | `7c767ed15ff4` |
@@ -286,7 +287,7 @@ These are chronological latest events, not an automatic truth ranking.
 | C-FRESHNESS | EXPERIMENTAL | EXP-PRODUCT-35697049382 | product |
 | C-LLM-INHERIT | MEASUREMENT_INVALID | EXP-INTEL-35789942386 | intel |
 | C-MEAS-VALID | MEASUREMENT_INVALID | EXP-RUNTIME-35774047385 | runtime |
-| C-PARAM-INHERIT | MEASUREMENT_INVALID | EXP-GRAPH-35787691878 | graph |
+| C-PARAM-INHERIT | MEASUREMENT_INVALID | EXP-GRAPH-35793560957 | graph |
 | C-PRODUCT-ECON | MEASUREMENT_INVALID | EXP-INTEL-35789942386 | intel |
 | C-RESIDUAL-NOVELTY | HYPOTHESIS | EXP-PRODUCT-35793576245 | product |
 | C-SEMANTIC-RESOLVE | EXPERIMENTAL | EXP-FRONTIER-35793584484 | frontier |
