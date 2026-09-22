@@ -605,6 +605,38 @@
         "reason": "Audit MEASUREMENT_INVALID with producer_claim_supported=false. VF1-VF10 establish the measurement is invalid: (1) M-COST-TOKENS-SPIDER = 250+500*int(10*novelty_fraction) in 100/100 rows so rho=1.0 slope=5000 R2=0.995 are arithmetic identities not measurements (run_experiment.py:158-169); (2) mechanism under test never executed \u2014 registry.json static constant never consulted, unknown=True branch never called (M-UNKNOWN-RATE 0.0 at all bins including 1.0), no freshness probe (threshold 0.25), no confidence gating (<0.80), no bind/verification/repair (VF2-VF4); (3) controls are constants by construction (NC1 flat 5200, NC2 hash-assigned false_accept 0.38, PC2 reused forced 1.0) so they cannot validate parameterization (VF7, RF7); (4) frozen baseline semantics contradiction exploited \u2014 spec B-REPLAY-TERX expects hit_rate=1.0 at 0% but prereg 4.1 defines n=0 not exact replay, execution makes REPLAY miss 0/100 to satisfy C2/C5 vs starved baseline (VF6, RF3, BF4); B-RAG >=0.75 hit threshold unreachable (1/100 hits) and success hash-assigned (RF4, BF3, VF7b); (5) statistics invalid: p=0.0 normal approximation on 20-fold ties of 5 values, exact two-sided block-permutation p=2/5!=0.0167 fails frozen C3 p<0.01 (VF5, RF5); bootstrap CI [1.0,1.0] degenerate; (6) cost accounting adds SPIDER-only DISTILL_TOKENS/f to all baselines and mismatches units (VF8, RF6, BF6). Environment cannot express falsifiers F1/F3/F5, MIXED, or binding-error MEASUREMENT_INVALID (VF10). Maximum justified ceiling is deterministic simulation reproducing its own formula. C-RESIDUAL-NOVELTY remains HYPOTHESIS per codex (EXP-INTEL-35651934683 doc survey bounded M1 0.311 not 0.818, EXP-FRONTIER-35651943981 FALSIFIED-IN-SETTING bounded); this run neither supports nor falsifies it. No promotion."
       }
     ],
+    "C-SEMANTIC-RESOLVE": [
+      {
+        "experiment_id": "EXP-GRAPH-34409639346",
+        "lane": "graph",
+        "created_at": "2026-09-09T21:56:55.733643+00:00",
+        "decision": "SUPPORTED",
+        "source_commit": "6c64f47170523c09a57a2b51e5dc5b724118324a",
+        "claim_id": "C-SEMANTIC-RESOLVE",
+        "status": "EXPERIMENTAL",
+        "reason": "Experiment SUPPORTS hypothesis: kernel does NOT perform semantic aliasing resolution. 0/10 aliased-first conditions select template-matching mechanism (binomial p=1.0 one-sided). Kernel uses exact intent matching (kernel.py L97: m.intent != intent) and selection is determined entirely by mechanism_id ordering via stable sort (L112). Claim ceiling bounded: simple path aliasing with equal confidence 0.9, preconditions={}, applicability_guards={}, 10 synthetic intent-template pairs, deterministic single-run cold kernel. NOT established: query-parameter aliasing, path rewriting, server-side routing, confidence-differentiated aliasing, real HTTP grounding, multi-intent, non-empty guards, or any fix adding semantic resolution. C-SEMANTIC-RESOLVE is not globally falsified \u2014 it is falsified at current kernel level for this narrow scope. Product must implement explicit aliasing or require exact intent matching."
+      },
+      {
+        "experiment_id": "EXP-GRAPH-34586318405",
+        "lane": "graph",
+        "created_at": "2026-09-11T09:51:45.561325+00:00",
+        "decision": "MIXED \u2014 H1 supported: kernel is deterministic exact-intent matcher (L97) with no URL template analysis, confirmed for complex aliasing types (query-param, path-rewriting, server-side routing) at equal confidence 0.9, n=6 aliased-first conditions (0/6 correct, binomial p=0.016). H2 falsified-in-setting: HTTP status-code grounding provides zero autonomous signal on jsonplaceholder.typicode.com (0/12 status differences across 12 aliased conditions; substrate returns 200 for malformed templates like /posts?id=1/comments). Body-based grounding is an exploratory non-autonomous finding (4/4 body differences in asymmetric scenarios B and C, but requires external oracle to determine correctness, produces false positives for equivalent templates in A and F). Experiment does not meet SURVIVES_CURRENT_TEST per frozen decision rule condition (4): for asymmetric scenarios B and C, HTTP execution per frozen status-code definition correctly identifies valid template in 0/4 cases, not 100%.",
+        "source_commit": "0fc2196920aeb2ed772d83e524b079ebfd9ac9f9",
+        "claim_id": "C-SEMANTIC-RESOLVE",
+        "status": "EXPERIMENTAL",
+        "reason": "Kernel is deterministic exact-intent matcher (kernel.py L97) with no URL template analysis. Confirmed for complex aliasing: query-param (/posts/${id} vs /posts?id=${id}), path-rewriting (/users/${id}/posts vs /users?userId=${id}/posts), server-side routing (/albums/${id}/photos vs /photos?albumId=${id}). Combined 0/16 aliased-first correct across this experiment (0/6, p=0.016) and parent EXP-GRAPH-34409639346 (0/10, p=1.0). HTTP status-code grounding falsified on jsonplaceholder: 0/12 status differences despite 2 asymmetric scenarios designed to produce 404. Body-based grounding is exploratory and non-autonomous: body-difference metric measures whether selected and alternative responses differ, not which is correct; requires external schema oracle; produces false positives for functionally equivalent templates (A list vs dict artifact, F 100 vs 0 posts). Claim bounded to proof-of-concept: equal confidence 0.9, preconditions={}, applicability_guards={}, GET only, synthetic intents, single test API. Broader generalization to confidence-differentiated aliasing, guard/context scenarios, POST/PUT/DELETE, or strict APIs not tested."
+      },
+      {
+        "experiment_id": "EXP-FRONTIER-35741928625",
+        "lane": "frontier",
+        "created_at": "2026-09-22T14:40:34.933911+00:00",
+        "decision": "MEASUREMENT_INVALID",
+        "source_commit": "dbc59208079f8e686a7166a1146758fdc520d81c",
+        "claim_id": "C-SEMANTIC-RESOLVE",
+        "status": "EXPERIMENTAL",
+        "reason": "MEASUREMENT_INVALID per independent audit (audit.json status MEASUREMENT_INVALID, producer_claim_supported=false). Producer reported alias-OOD RECONSTRUCTION 30/30 correct (1.0, Wilson CI 0.886-1.0, binomial p=1e-30 vs 0.10, McNemar p=1.19e-07 vs B-EXACT-MATCH, false_accept 0.0 vs verbatim 1.0) with all SURVIVES conditions passing including PC-EXACT-MATCH 12/12 and NC-NO-APPLICABLE 12/12. Audit recomputed metrics exactly match producer (recomputed_metrics alias_OOD_correct 1.0, exact 0.0, verbatim 1.0) but finds reconstruction adapter (research/frontier/run_experiment.py lines 379-434 reconstruct_resolve) is a hardcoded oracle reading ground-truth context signals (alias_family, query_key, target_prefix, resource, slot, target_style, path_style, routing_prefix) that directly encode expected template; it ignores retrieved mechanism template for alias-OOD, hardcodes confidence 0.95 (0.05 for no-applicable), making ECE 0.055 artificially perfect rather than calibrated. Context signals are test-fixture keys, not browser-observable state. Thus hypothesis 'state-conditioned reconstruction over retrieved mechanisms achieves applicability resolution' was not tested. No valid evidence for or against genuine reconstruction (rule-based structural critique/rewrite or GRPO/System-One). Prior narrow ceiling preserved: deterministic exact-intent matcher (kernel.py L97 m.intent != intent, confidence 0.9) fails complex aliasing 0/6 (query-param/path-rewriting/server-routing, binomial p=0.016) and simple path aliasing 0/10, with combined 0/16 and 0/12 HTTP status grounding, status EXPERIMENTAL per EXP-GRAPH-34409639346 and EXP-GRAPH-34586318405 audits PASS. This experiment neither advances nor regresses C-SEMANTIC-RESOLVE beyond that bounded ceiling; reconstruction sub-hypothesis remains HYPOTHESIS untested."
+      }
+    ],
     "C-PARAM-INHERIT": [
       {
         "experiment_id": "EXP-PRODUCT-33528829801",
@@ -985,28 +1017,6 @@
         "claim_id": "C-PARAM-INHERIT",
         "status": "EXPERIMENTAL",
         "reason": "No change. This experiment accumulated zero evidence for or against C-PARAM-INHERIT. The parent's committed-code synthetic single-slot analytical ceiling (C-PARAM-INHERIT EXPERIMENTAL from EXP-PRODUCT-35330741529) is unchanged. Real LLM selection accuracy, real completion tokens, real resolution success, and real total workflow cost remain unmeasured. C-PARAM-INHERIT remains EXPERIMENTAL."
-      }
-    ],
-    "C-SEMANTIC-RESOLVE": [
-      {
-        "experiment_id": "EXP-GRAPH-34409639346",
-        "lane": "graph",
-        "created_at": "2026-09-09T21:56:55.733643+00:00",
-        "decision": "SUPPORTED",
-        "source_commit": "6c64f47170523c09a57a2b51e5dc5b724118324a",
-        "claim_id": "C-SEMANTIC-RESOLVE",
-        "status": "EXPERIMENTAL",
-        "reason": "Experiment SUPPORTS hypothesis: kernel does NOT perform semantic aliasing resolution. 0/10 aliased-first conditions select template-matching mechanism (binomial p=1.0 one-sided). Kernel uses exact intent matching (kernel.py L97: m.intent != intent) and selection is determined entirely by mechanism_id ordering via stable sort (L112). Claim ceiling bounded: simple path aliasing with equal confidence 0.9, preconditions={}, applicability_guards={}, 10 synthetic intent-template pairs, deterministic single-run cold kernel. NOT established: query-parameter aliasing, path rewriting, server-side routing, confidence-differentiated aliasing, real HTTP grounding, multi-intent, non-empty guards, or any fix adding semantic resolution. C-SEMANTIC-RESOLVE is not globally falsified \u2014 it is falsified at current kernel level for this narrow scope. Product must implement explicit aliasing or require exact intent matching."
-      },
-      {
-        "experiment_id": "EXP-GRAPH-34586318405",
-        "lane": "graph",
-        "created_at": "2026-09-11T09:51:45.561325+00:00",
-        "decision": "MIXED \u2014 H1 supported: kernel is deterministic exact-intent matcher (L97) with no URL template analysis, confirmed for complex aliasing types (query-param, path-rewriting, server-side routing) at equal confidence 0.9, n=6 aliased-first conditions (0/6 correct, binomial p=0.016). H2 falsified-in-setting: HTTP status-code grounding provides zero autonomous signal on jsonplaceholder.typicode.com (0/12 status differences across 12 aliased conditions; substrate returns 200 for malformed templates like /posts?id=1/comments). Body-based grounding is an exploratory non-autonomous finding (4/4 body differences in asymmetric scenarios B and C, but requires external oracle to determine correctness, produces false positives for equivalent templates in A and F). Experiment does not meet SURVIVES_CURRENT_TEST per frozen decision rule condition (4): for asymmetric scenarios B and C, HTTP execution per frozen status-code definition correctly identifies valid template in 0/4 cases, not 100%.",
-        "source_commit": "0fc2196920aeb2ed772d83e524b079ebfd9ac9f9",
-        "claim_id": "C-SEMANTIC-RESOLVE",
-        "status": "EXPERIMENTAL",
-        "reason": "Kernel is deterministic exact-intent matcher (kernel.py L97) with no URL template analysis. Confirmed for complex aliasing: query-param (/posts/${id} vs /posts?id=${id}), path-rewriting (/users/${id}/posts vs /users?userId=${id}/posts), server-side routing (/albums/${id}/photos vs /photos?albumId=${id}). Combined 0/16 aliased-first correct across this experiment (0/6, p=0.016) and parent EXP-GRAPH-34409639346 (0/10, p=1.0). HTTP status-code grounding falsified on jsonplaceholder: 0/12 status differences despite 2 asymmetric scenarios designed to produce 404. Body-based grounding is exploratory and non-autonomous: body-difference metric measures whether selected and alternative responses differ, not which is correct; requires external schema oracle; produces false positives for functionally equivalent templates (A list vs dict artifact, F 100 vs 0 posts). Claim bounded to proof-of-concept: equal confidence 0.9, preconditions={}, applicability_guards={}, GET only, synthetic intents, single test API. Broader generalization to confidence-differentiated aliasing, guard/context scenarios, POST/PUT/DELETE, or strict APIs not tested."
       }
     ],
     "C-FRESHNESS": [
@@ -2801,6 +2811,16 @@
       "status": "MEASUREMENT_INVALID",
       "reason": "Audit MEASUREMENT_INVALID with producer_claim_supported=false. VF1-VF10 establish the measurement is invalid: (1) M-COST-TOKENS-SPIDER = 250+500*int(10*novelty_fraction) in 100/100 rows so rho=1.0 slope=5000 R2=0.995 are arithmetic identities not measurements (run_experiment.py:158-169); (2) mechanism under test never executed \u2014 registry.json static constant never consulted, unknown=True branch never called (M-UNKNOWN-RATE 0.0 at all bins including 1.0), no freshness probe (threshold 0.25), no confidence gating (<0.80), no bind/verification/repair (VF2-VF4); (3) controls are constants by construction (NC1 flat 5200, NC2 hash-assigned false_accept 0.38, PC2 reused forced 1.0) so they cannot validate parameterization (VF7, RF7); (4) frozen baseline semantics contradiction exploited \u2014 spec B-REPLAY-TERX expects hit_rate=1.0 at 0% but prereg 4.1 defines n=0 not exact replay, execution makes REPLAY miss 0/100 to satisfy C2/C5 vs starved baseline (VF6, RF3, BF4); B-RAG >=0.75 hit threshold unreachable (1/100 hits) and success hash-assigned (RF4, BF3, VF7b); (5) statistics invalid: p=0.0 normal approximation on 20-fold ties of 5 values, exact two-sided block-permutation p=2/5!=0.0167 fails frozen C3 p<0.01 (VF5, RF5); bootstrap CI [1.0,1.0] degenerate; (6) cost accounting adds SPIDER-only DISTILL_TOKENS/f to all baselines and mismatches units (VF8, RF6, BF6). Environment cannot express falsifiers F1/F3/F5, MIXED, or binding-error MEASUREMENT_INVALID (VF10). Maximum justified ceiling is deterministic simulation reproducing its own formula. C-RESIDUAL-NOVELTY remains HYPOTHESIS per codex (EXP-INTEL-35651934683 doc survey bounded M1 0.311 not 0.818, EXP-FRONTIER-35651943981 FALSIFIED-IN-SETTING bounded); this run neither supports nor falsifies it. No promotion."
     },
+    "C-SEMANTIC-RESOLVE": {
+      "experiment_id": "EXP-FRONTIER-35741928625",
+      "lane": "frontier",
+      "created_at": "2026-09-22T14:40:34.933911+00:00",
+      "decision": "MEASUREMENT_INVALID",
+      "source_commit": "dbc59208079f8e686a7166a1146758fdc520d81c",
+      "claim_id": "C-SEMANTIC-RESOLVE",
+      "status": "EXPERIMENTAL",
+      "reason": "MEASUREMENT_INVALID per independent audit (audit.json status MEASUREMENT_INVALID, producer_claim_supported=false). Producer reported alias-OOD RECONSTRUCTION 30/30 correct (1.0, Wilson CI 0.886-1.0, binomial p=1e-30 vs 0.10, McNemar p=1.19e-07 vs B-EXACT-MATCH, false_accept 0.0 vs verbatim 1.0) with all SURVIVES conditions passing including PC-EXACT-MATCH 12/12 and NC-NO-APPLICABLE 12/12. Audit recomputed metrics exactly match producer (recomputed_metrics alias_OOD_correct 1.0, exact 0.0, verbatim 1.0) but finds reconstruction adapter (research/frontier/run_experiment.py lines 379-434 reconstruct_resolve) is a hardcoded oracle reading ground-truth context signals (alias_family, query_key, target_prefix, resource, slot, target_style, path_style, routing_prefix) that directly encode expected template; it ignores retrieved mechanism template for alias-OOD, hardcodes confidence 0.95 (0.05 for no-applicable), making ECE 0.055 artificially perfect rather than calibrated. Context signals are test-fixture keys, not browser-observable state. Thus hypothesis 'state-conditioned reconstruction over retrieved mechanisms achieves applicability resolution' was not tested. No valid evidence for or against genuine reconstruction (rule-based structural critique/rewrite or GRPO/System-One). Prior narrow ceiling preserved: deterministic exact-intent matcher (kernel.py L97 m.intent != intent, confidence 0.9) fails complex aliasing 0/6 (query-param/path-rewriting/server-routing, binomial p=0.016) and simple path aliasing 0/10, with combined 0/16 and 0/12 HTTP status grounding, status EXPERIMENTAL per EXP-GRAPH-34409639346 and EXP-GRAPH-34586318405 audits PASS. This experiment neither advances nor regresses C-SEMANTIC-RESOLVE beyond that bounded ceiling; reconstruction sub-hypothesis remains HYPOTHESIS untested."
+    },
     "C-PARAM-INHERIT": {
       "experiment_id": "EXP-PRODUCT-35353007958",
       "lane": "product",
@@ -2810,16 +2830,6 @@
       "claim_id": "C-PARAM-INHERIT",
       "status": "EXPERIMENTAL",
       "reason": "No change. This experiment accumulated zero evidence for or against C-PARAM-INHERIT. The parent's committed-code synthetic single-slot analytical ceiling (C-PARAM-INHERIT EXPERIMENTAL from EXP-PRODUCT-35330741529) is unchanged. Real LLM selection accuracy, real completion tokens, real resolution success, and real total workflow cost remain unmeasured. C-PARAM-INHERIT remains EXPERIMENTAL."
-    },
-    "C-SEMANTIC-RESOLVE": {
-      "experiment_id": "EXP-GRAPH-34586318405",
-      "lane": "graph",
-      "created_at": "2026-09-11T09:51:45.561325+00:00",
-      "decision": "MIXED \u2014 H1 supported: kernel is deterministic exact-intent matcher (L97) with no URL template analysis, confirmed for complex aliasing types (query-param, path-rewriting, server-side routing) at equal confidence 0.9, n=6 aliased-first conditions (0/6 correct, binomial p=0.016). H2 falsified-in-setting: HTTP status-code grounding provides zero autonomous signal on jsonplaceholder.typicode.com (0/12 status differences across 12 aliased conditions; substrate returns 200 for malformed templates like /posts?id=1/comments). Body-based grounding is an exploratory non-autonomous finding (4/4 body differences in asymmetric scenarios B and C, but requires external oracle to determine correctness, produces false positives for equivalent templates in A and F). Experiment does not meet SURVIVES_CURRENT_TEST per frozen decision rule condition (4): for asymmetric scenarios B and C, HTTP execution per frozen status-code definition correctly identifies valid template in 0/4 cases, not 100%.",
-      "source_commit": "0fc2196920aeb2ed772d83e524b079ebfd9ac9f9",
-      "claim_id": "C-SEMANTIC-RESOLVE",
-      "status": "EXPERIMENTAL",
-      "reason": "Kernel is deterministic exact-intent matcher (kernel.py L97) with no URL template analysis. Confirmed for complex aliasing: query-param (/posts/${id} vs /posts?id=${id}), path-rewriting (/users/${id}/posts vs /users?userId=${id}/posts), server-side routing (/albums/${id}/photos vs /photos?albumId=${id}). Combined 0/16 aliased-first correct across this experiment (0/6, p=0.016) and parent EXP-GRAPH-34409639346 (0/10, p=1.0). HTTP status-code grounding falsified on jsonplaceholder: 0/12 status differences despite 2 asymmetric scenarios designed to produce 404. Body-based grounding is exploratory and non-autonomous: body-difference metric measures whether selected and alternative responses differ, not which is correct; requires external schema oracle; produces false positives for functionally equivalent templates (A list vs dict artifact, F 100 vs 0 posts). Claim bounded to proof-of-concept: equal confidence 0.9, preconditions={}, applicability_guards={}, GET only, synthetic intents, single test API. Broader generalization to confidence-differentiated aliasing, guard/context scenarios, POST/PUT/DELETE, or strict APIs not tested."
     },
     "C-FRESHNESS": {
       "experiment_id": "EXP-PRODUCT-35697049382",

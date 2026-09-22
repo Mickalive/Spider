@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-FRONTIER-35741928625",
+  "lane": "frontier",
+  "decision": "MEASUREMENT_INVALID",
+  "claim_updates": [
+    {
+      "claim_id": "C-SEMANTIC-RESOLVE",
+      "status": "EXPERIMENTAL",
+      "reason": "MEASUREMENT_INVALID per independent audit (audit.json status MEASUREMENT_INVALID, producer_claim_supported=false). Producer reported alias-OOD RECONSTRUCTION 30/30 correct (1.0, Wilson CI 0.886-1.0, binomial p=1e-30 vs 0.10, McNemar p=1.19e-07 vs B-EXACT-MATCH, false_accept 0.0 vs verbatim 1.0) with all SURVIVES conditions passing including PC-EXACT-MATCH 12/12 and NC-NO-APPLICABLE 12/12. Audit recomputed metrics exactly match producer (recomputed_metrics alias_OOD_correct 1.0, exact 0.0, verbatim 1.0) but finds reconstruction adapter (research/frontier/run_experiment.py lines 379-434 reconstruct_resolve) is a hardcoded oracle reading ground-truth context signals (alias_family, query_key, target_prefix, resource, slot, target_style, path_style, routing_prefix) that directly encode expected template; it ignores retrieved mechanism template for alias-OOD, hardcodes confidence 0.95 (0.05 for no-applicable), making ECE 0.055 artificially perfect rather than calibrated. Context signals are test-fixture keys, not browser-observable state. Thus hypothesis 'state-conditioned reconstruction over retrieved mechanisms achieves applicability resolution' was not tested. No valid evidence for or against genuine reconstruction (rule-based structural critique/rewrite or GRPO/System-One). Prior narrow ceiling preserved: deterministic exact-intent matcher (kernel.py L97 m.intent != intent, confidence 0.9) fails complex aliasing 0/6 (query-param/path-rewriting/server-routing, binomial p=0.016) and simple path aliasing 0/10, with combined 0/16 and 0/12 HTTP status grounding, status EXPERIMENTAL per EXP-GRAPH-34409639346 and EXP-GRAPH-34586318405 audits PASS. This experiment neither advances nor regresses C-SEMANTIC-RESOLVE beyond that bounded ceiling; reconstruction sub-hypothesis remains HYPOTHESIS untested."
+    }
+  ],
+  "product_action": "NO_PROMOTION — Do not add reconstruction layer to product. The reported 1.0 vs 0.0 advantage and ECE 0.055 are oracle artifacts, not evidence of calibrated adaptation. Keep exact-intent matching and require pre-normalized intents or explicit alias catalogs until a valid non-oracle reconstruction test passes. Baselines (B-EXACT-MATCH, B-VERBATIM-REPLAY, B-RAG-TFIDF) correctly show retrieval alone does not resolve aliasing (0/30 in this run, consistent with prior 0/6 and 0/10 ceilings), but that does not justify productizing an oracle.",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "Does a genuine (non-oracle) state-conditioned reconstruction adapter that critiques/reconstructs the retrieved template via structural analysis of (intent, observation-derived state, retrieved_template) — without access to ground-truth alias_family/query_key/target_prefix signals and without hardcoded confidence — achieve alias-OOD correct_resolution >=0.50 (binomial p<0.05 vs 0.10, McNemar p<0.05 vs exact matcher) and false_accept <=0.15 (>=0.15 below verbatim, p<0.05) while preserving exact-match >=0.90 and no-applicable UNKNOWN precision >=0.85 with ECE <=0.15, tested on the same three alias families (query-param, path-rewriting, server-routing) plus held-out variations and a limited live-browser WebShop/ALFWorld proxy where available?",
+  "reason": "Grounded in frozen design (spec.json:measurement_validity, prereg.md:71-73), producer evidence (result.json metrics alias_OOD_reconstruction_correct 1.0, controls PC/NC PASS, observations 30/30 per family), and independent audit (audit.json status MEASUREMENT_INVALID, producer_claim_supported false, validity_findings critical oracle leak, required_fixes 1-4, claim_ceiling remains HYPOTHESIS for reconstruction, recomputed_metrics confirming baselines but invalidating reconstruction ECE). The oracle violates preregistered mechanism ('parse intent, score structural match, rewrite best template then _bind') by instead branching on ground-truth context to construct expected URL and hardcoding confidence, making decision components S1-S5 tautological. Baselines are valid (exact matcher 0/30, verbatim 1.0 false_accept, TFIDF 0/30, random 0/30) replicating prior alias ceilings, but reconstruction measurement is invalid. Therefore FALSIFIED or SURVIVES cannot be decided; leaving prior EXPERIMENTAL claim ceiling intact is the conservative bounded decision. No product promotion allowed for audited-failed code (audit MEASUREMENT_INVALID). Next question is the minimum repair that would provide a valid falsifiable test of the director-mandated orthogonal mechanism without reusing the ground-truth leak, preserving discriminant power with same baselines/controls/CALIBRATION gates.",
+  "evidence_refs": [
+    "research/experiments/EXP-FRONTIER-35741928625/spec.json",
+    "research/experiments/EXP-FRONTIER-35741928625/prereg.md",
+    "research/experiments/EXP-FRONTIER-35741928625/freeze.json",
+    "research/experiments/EXP-FRONTIER-35741928625/result.json",
+    "research/experiments/EXP-FRONTIER-35741928625/derived_metrics.json",
+    "research/experiments/EXP-FRONTIER-35741928625/raw_evidence.json",
+    "research/experiments/EXP-FRONTIER-35741928625/tasks.json",
+    "research/experiments/EXP-FRONTIER-35741928625/audit.json",
+    "research/experiments/EXP-FRONTIER-35741928625/report.md",
+    "research/experiments/EXP-FRONTIER-35741928625/provenance.json",
+    "research/frontier/run_experiment.py:379-434",
+    "codex/claim_state.json:C-SEMANTIC-RESOLVE"
+  ]
+}
