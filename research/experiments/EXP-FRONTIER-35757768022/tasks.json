@@ -1,0 +1,4103 @@
+[
+  {
+    "task_id": "alias-0-0",
+    "stratum": "alias-OOD",
+    "family": 0,
+    "intent": "fetch_user_hdr_0",
+    "derived_context": {
+      "url": "/api/data",
+      "method": "GET",
+      "url_path": "/api/data",
+      "url_query": {},
+      "url_segments": [
+        "api",
+        "data"
+      ],
+      "headers_observed": {
+        "Authorization": "Bearer tok_0_0"
+      },
+      "body_observed": {},
+      "ax_tree_snapshot": null,
+      "ax_nodes_count": null,
+      "viewport_observed": null
+    },
+    "params": {
+      "token": "tok_0_0"
+    },
+    "hidden_expected": {
+      "alias_family": 0,
+      "is_heldout": false,
+      "train_template": {
+        "url": "/api/data",
+        "headers": {
+          "ApiKey": "${token}"
+        }
+      },
+      "dist_template": {
+        "url": "/api/data",
+        "headers": {
+          "X-Reset-Token": "${token}"
+        }
+      },
+      "expected_template": {
+        "url": "/api/data",
+        "headers": {
+          "Authorization": "Bearer ${token}"
+        }
+      },
+      "expected_bound": {
+        "url": "/api/data",
+        "headers": {
+          "Authorization": "Bearer tok_0_0"
+        }
+      }
+    },
+    "expected_outcome": "correct",
+    "is_heldout": false,
+    "registry": [
+      {
+        "mechanism_id": "m-0-0-train",
+        "intent": "fetch_user_hdr_0",
+        "template": {
+          "url": "/api/data",
+          "headers": {
+            "ApiKey": "${token}"
+          }
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-0-0-dist",
+        "intent": "fetch_user_hdr_0",
+        "template": {
+          "url": "/api/data",
+          "headers": {
+            "X-Reset-Token": "${token}"
+          }
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-0-0-low",
+        "intent": "fetch_user_hdr_0",
+        "template": {
+          "url": "/api/data",
+          "headers": {
+            "X-Api-Key": "${token}"
+          }
+        },
+        "confidence": 0.8
+      }
+    ]
+  },
+  {
+    "task_id": "alias-0-1",
+    "stratum": "alias-OOD",
+    "family": 0,
+    "intent": "fetch_user_hdr_1",
+    "derived_context": {
+      "url": "/api/users",
+      "method": "GET",
+      "url_path": "/api/users",
+      "url_query": {},
+      "url_segments": [
+        "api",
+        "users"
+      ],
+      "headers_observed": {
+        "Authorization": "Bearer tok_0_1"
+      },
+      "body_observed": {},
+      "ax_tree_snapshot": null,
+      "ax_nodes_count": null,
+      "viewport_observed": null
+    },
+    "params": {
+      "token": "tok_0_1"
+    },
+    "hidden_expected": {
+      "alias_family": 0,
+      "is_heldout": false,
+      "train_template": {
+        "url": "/api/users",
+        "headers": {
+          "ApiKey": "${token}"
+        }
+      },
+      "dist_template": {
+        "url": "/api/users",
+        "headers": {
+          "X-Reset-Token": "${token}"
+        }
+      },
+      "expected_template": {
+        "url": "/api/users",
+        "headers": {
+          "Authorization": "Bearer ${token}"
+        }
+      },
+      "expected_bound": {
+        "url": "/api/users",
+        "headers": {
+          "Authorization": "Bearer tok_0_1"
+        }
+      }
+    },
+    "expected_outcome": "correct",
+    "is_heldout": false,
+    "registry": [
+      {
+        "mechanism_id": "m-0-1-train",
+        "intent": "fetch_user_hdr_1",
+        "template": {
+          "url": "/api/users",
+          "headers": {
+            "ApiKey": "${token}"
+          }
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-0-1-dist",
+        "intent": "fetch_user_hdr_1",
+        "template": {
+          "url": "/api/users",
+          "headers": {
+            "X-Reset-Token": "${token}"
+          }
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-0-1-low",
+        "intent": "fetch_user_hdr_1",
+        "template": {
+          "url": "/api/users",
+          "headers": {
+            "X-Api-Key": "${token}"
+          }
+        },
+        "confidence": 0.8
+      }
+    ]
+  },
+  {
+    "task_id": "alias-0-2",
+    "stratum": "alias-OOD",
+    "family": 0,
+    "intent": "fetch_user_hdr_2",
+    "derived_context": {
+      "url": "/v2/items",
+      "method": "GET",
+      "url_path": "/v2/items",
+      "url_query": {},
+      "url_segments": [
+        "v2",
+        "items"
+      ],
+      "headers_observed": {
+        "Authorization": "Bearer tok_0_2"
+      },
+      "body_observed": {},
+      "ax_tree_snapshot": null,
+      "ax_nodes_count": null,
+      "viewport_observed": null
+    },
+    "params": {
+      "token": "tok_0_2"
+    },
+    "hidden_expected": {
+      "alias_family": 0,
+      "is_heldout": false,
+      "train_template": {
+        "url": "/v2/items",
+        "headers": {
+          "ApiKey": "${token}"
+        }
+      },
+      "dist_template": {
+        "url": "/v2/items",
+        "headers": {
+          "X-Reset-Token": "${token}"
+        }
+      },
+      "expected_template": {
+        "url": "/v2/items",
+        "headers": {
+          "Authorization": "Bearer ${token}"
+        }
+      },
+      "expected_bound": {
+        "url": "/v2/items",
+        "headers": {
+          "Authorization": "Bearer tok_0_2"
+        }
+      }
+    },
+    "expected_outcome": "correct",
+    "is_heldout": false,
+    "registry": [
+      {
+        "mechanism_id": "m-0-2-train",
+        "intent": "fetch_user_hdr_2",
+        "template": {
+          "url": "/v2/items",
+          "headers": {
+            "ApiKey": "${token}"
+          }
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-0-2-dist",
+        "intent": "fetch_user_hdr_2",
+        "template": {
+          "url": "/v2/items",
+          "headers": {
+            "X-Reset-Token": "${token}"
+          }
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-0-2-low",
+        "intent": "fetch_user_hdr_2",
+        "template": {
+          "url": "/v2/items",
+          "headers": {
+            "X-Api-Key": "${token}"
+          }
+        },
+        "confidence": 0.8
+      }
+    ]
+  },
+  {
+    "task_id": "alias-0-3",
+    "stratum": "alias-OOD",
+    "family": 0,
+    "intent": "fetch_user_hdr_3",
+    "derived_context": {
+      "url": "/v1/orders",
+      "method": "GET",
+      "url_path": "/v1/orders",
+      "url_query": {},
+      "url_segments": [
+        "v1",
+        "orders"
+      ],
+      "headers_observed": {
+        "Authorization": "Bearer tok_0_3"
+      },
+      "body_observed": {},
+      "ax_tree_snapshot": null,
+      "ax_nodes_count": null,
+      "viewport_observed": null
+    },
+    "params": {
+      "token": "tok_0_3"
+    },
+    "hidden_expected": {
+      "alias_family": 0,
+      "is_heldout": false,
+      "train_template": {
+        "url": "/v1/orders",
+        "headers": {
+          "ApiKey": "${token}"
+        }
+      },
+      "dist_template": {
+        "url": "/v1/orders",
+        "headers": {
+          "X-Reset-Token": "${token}"
+        }
+      },
+      "expected_template": {
+        "url": "/v1/orders",
+        "headers": {
+          "Authorization": "Bearer ${token}"
+        }
+      },
+      "expected_bound": {
+        "url": "/v1/orders",
+        "headers": {
+          "Authorization": "Bearer tok_0_3"
+        }
+      }
+    },
+    "expected_outcome": "correct",
+    "is_heldout": false,
+    "registry": [
+      {
+        "mechanism_id": "m-0-3-train",
+        "intent": "fetch_user_hdr_3",
+        "template": {
+          "url": "/v1/orders",
+          "headers": {
+            "ApiKey": "${token}"
+          }
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-0-3-dist",
+        "intent": "fetch_user_hdr_3",
+        "template": {
+          "url": "/v1/orders",
+          "headers": {
+            "X-Reset-Token": "${token}"
+          }
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-0-3-low",
+        "intent": "fetch_user_hdr_3",
+        "template": {
+          "url": "/v1/orders",
+          "headers": {
+            "X-Api-Key": "${token}"
+          }
+        },
+        "confidence": 0.8
+      }
+    ]
+  },
+  {
+    "task_id": "alias-0-4",
+    "stratum": "alias-OOD",
+    "family": 0,
+    "intent": "fetch_user_hdr_4",
+    "derived_context": {
+      "url": "/admin/settings",
+      "method": "GET",
+      "url_path": "/admin/settings",
+      "url_query": {},
+      "url_segments": [
+        "admin",
+        "settings"
+      ],
+      "headers_observed": {
+        "Authorization": "Bearer tok_0_4"
+      },
+      "body_observed": {},
+      "ax_tree_snapshot": null,
+      "ax_nodes_count": null,
+      "viewport_observed": null
+    },
+    "params": {
+      "token": "tok_0_4"
+    },
+    "hidden_expected": {
+      "alias_family": 0,
+      "is_heldout": false,
+      "train_template": {
+        "url": "/admin/settings",
+        "headers": {
+          "ApiKey": "${token}"
+        }
+      },
+      "dist_template": {
+        "url": "/admin/settings",
+        "headers": {
+          "X-Reset-Token": "${token}"
+        }
+      },
+      "expected_template": {
+        "url": "/admin/settings",
+        "headers": {
+          "Authorization": "Bearer ${token}"
+        }
+      },
+      "expected_bound": {
+        "url": "/admin/settings",
+        "headers": {
+          "Authorization": "Bearer tok_0_4"
+        }
+      }
+    },
+    "expected_outcome": "correct",
+    "is_heldout": false,
+    "registry": [
+      {
+        "mechanism_id": "m-0-4-train",
+        "intent": "fetch_user_hdr_4",
+        "template": {
+          "url": "/admin/settings",
+          "headers": {
+            "ApiKey": "${token}"
+          }
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-0-4-dist",
+        "intent": "fetch_user_hdr_4",
+        "template": {
+          "url": "/admin/settings",
+          "headers": {
+            "X-Reset-Token": "${token}"
+          }
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-0-4-low",
+        "intent": "fetch_user_hdr_4",
+        "template": {
+          "url": "/admin/settings",
+          "headers": {
+            "X-Api-Key": "${token}"
+          }
+        },
+        "confidence": 0.8
+      }
+    ]
+  },
+  {
+    "task_id": "alias-0-5",
+    "stratum": "alias-OOD",
+    "family": 0,
+    "intent": "fetch_user_hdr_5",
+    "derived_context": {
+      "url": "/api/reports",
+      "method": "GET",
+      "url_path": "/api/reports",
+      "url_query": {},
+      "url_segments": [
+        "api",
+        "reports"
+      ],
+      "headers_observed": {
+        "Authorization": "Bearer tok_0_5"
+      },
+      "body_observed": {},
+      "ax_tree_snapshot": null,
+      "ax_nodes_count": null,
+      "viewport_observed": null
+    },
+    "params": {
+      "token": "tok_0_5"
+    },
+    "hidden_expected": {
+      "alias_family": 0,
+      "is_heldout": false,
+      "train_template": {
+        "url": "/api/reports",
+        "headers": {
+          "ApiKey": "${token}"
+        }
+      },
+      "dist_template": {
+        "url": "/api/reports",
+        "headers": {
+          "X-Reset-Token": "${token}"
+        }
+      },
+      "expected_template": {
+        "url": "/api/reports",
+        "headers": {
+          "Authorization": "Bearer ${token}"
+        }
+      },
+      "expected_bound": {
+        "url": "/api/reports",
+        "headers": {
+          "Authorization": "Bearer tok_0_5"
+        }
+      }
+    },
+    "expected_outcome": "correct",
+    "is_heldout": false,
+    "registry": [
+      {
+        "mechanism_id": "m-0-5-train",
+        "intent": "fetch_user_hdr_5",
+        "template": {
+          "url": "/api/reports",
+          "headers": {
+            "ApiKey": "${token}"
+          }
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-0-5-dist",
+        "intent": "fetch_user_hdr_5",
+        "template": {
+          "url": "/api/reports",
+          "headers": {
+            "X-Reset-Token": "${token}"
+          }
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-0-5-low",
+        "intent": "fetch_user_hdr_5",
+        "template": {
+          "url": "/api/reports",
+          "headers": {
+            "X-Api-Key": "${token}"
+          }
+        },
+        "confidence": 0.8
+      }
+    ]
+  },
+  {
+    "task_id": "alias-0-6",
+    "stratum": "alias-OOD",
+    "family": 0,
+    "intent": "fetch_user_hdr_6",
+    "derived_context": {
+      "url": "/v3/audit",
+      "method": "GET",
+      "url_path": "/v3/audit",
+      "url_query": {},
+      "url_segments": [
+        "v3",
+        "audit"
+      ],
+      "headers_observed": {
+        "Authorization": "Bearer tok_0_6"
+      },
+      "body_observed": {},
+      "ax_tree_snapshot": null,
+      "ax_nodes_count": null,
+      "viewport_observed": null
+    },
+    "params": {
+      "token": "tok_0_6"
+    },
+    "hidden_expected": {
+      "alias_family": 0,
+      "is_heldout": false,
+      "train_template": {
+        "url": "/v3/audit",
+        "headers": {
+          "ApiKey": "${token}"
+        }
+      },
+      "dist_template": {
+        "url": "/v3/audit",
+        "headers": {
+          "X-Reset-Token": "${token}"
+        }
+      },
+      "expected_template": {
+        "url": "/v3/audit",
+        "headers": {
+          "Authorization": "Bearer ${token}"
+        }
+      },
+      "expected_bound": {
+        "url": "/v3/audit",
+        "headers": {
+          "Authorization": "Bearer tok_0_6"
+        }
+      }
+    },
+    "expected_outcome": "correct",
+    "is_heldout": false,
+    "registry": [
+      {
+        "mechanism_id": "m-0-6-train",
+        "intent": "fetch_user_hdr_6",
+        "template": {
+          "url": "/v3/audit",
+          "headers": {
+            "ApiKey": "${token}"
+          }
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-0-6-dist",
+        "intent": "fetch_user_hdr_6",
+        "template": {
+          "url": "/v3/audit",
+          "headers": {
+            "X-Reset-Token": "${token}"
+          }
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-0-6-low",
+        "intent": "fetch_user_hdr_6",
+        "template": {
+          "url": "/v3/audit",
+          "headers": {
+            "X-Api-Key": "${token}"
+          }
+        },
+        "confidence": 0.8
+      }
+    ]
+  },
+  {
+    "task_id": "alias-0-7",
+    "stratum": "alias-OOD",
+    "family": 0,
+    "intent": "fetch_user_hdr_7",
+    "derived_context": {
+      "url": "/api/data",
+      "method": "GET",
+      "url_path": "/api/data",
+      "url_query": {},
+      "url_segments": [
+        "api",
+        "data"
+      ],
+      "headers_observed": {
+        "X-Api-Key": "tok_0_7"
+      },
+      "body_observed": {},
+      "ax_tree_snapshot": null,
+      "ax_nodes_count": null,
+      "viewport_observed": null
+    },
+    "params": {
+      "token": "tok_0_7"
+    },
+    "hidden_expected": {
+      "alias_family": 0,
+      "is_heldout": true,
+      "train_template": {
+        "url": "/api/data",
+        "headers": {
+          "ApiKey": "${token}"
+        }
+      },
+      "dist_template": {
+        "url": "/api/data",
+        "headers": {
+          "X-Reset-Token": "${token}"
+        }
+      },
+      "expected_template": {
+        "url": "/api/data",
+        "headers": {
+          "X-Api-Key": "${token}"
+        }
+      },
+      "expected_bound": {
+        "url": "/api/data",
+        "headers": {
+          "X-Api-Key": "tok_0_7"
+        }
+      }
+    },
+    "expected_outcome": "correct",
+    "is_heldout": true,
+    "registry": [
+      {
+        "mechanism_id": "m-0-7-train",
+        "intent": "fetch_user_hdr_7",
+        "template": {
+          "url": "/api/data",
+          "headers": {
+            "ApiKey": "${token}"
+          }
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-0-7-dist",
+        "intent": "fetch_user_hdr_7",
+        "template": {
+          "url": "/api/data",
+          "headers": {
+            "X-Reset-Token": "${token}"
+          }
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-0-7-low",
+        "intent": "fetch_user_hdr_7",
+        "template": {
+          "url": "/api/data",
+          "headers": {
+            "Authorization": "Bearer ${token}"
+          }
+        },
+        "confidence": 0.8
+      }
+    ]
+  },
+  {
+    "task_id": "alias-0-8",
+    "stratum": "alias-OOD",
+    "family": 0,
+    "intent": "fetch_user_hdr_8",
+    "derived_context": {
+      "url": "/api/v2/data",
+      "method": "GET",
+      "url_path": "/api/v2/data",
+      "url_query": {},
+      "url_segments": [
+        "api",
+        "v2",
+        "data"
+      ],
+      "headers_observed": {
+        "X-Auth-Key": "tok_0_8"
+      },
+      "body_observed": {},
+      "ax_tree_snapshot": null,
+      "ax_nodes_count": null,
+      "viewport_observed": null
+    },
+    "params": {
+      "token": "tok_0_8"
+    },
+    "hidden_expected": {
+      "alias_family": 0,
+      "is_heldout": true,
+      "train_template": {
+        "url": "/api/v2/data",
+        "headers": {
+          "ApiKey": "${token}"
+        }
+      },
+      "dist_template": {
+        "url": "/api/v2/data",
+        "headers": {
+          "X-Reset-Token": "${token}"
+        }
+      },
+      "expected_template": {
+        "url": "/api/v2/data",
+        "headers": {
+          "X-Auth-Key": "${token}"
+        }
+      },
+      "expected_bound": {
+        "url": "/api/v2/data",
+        "headers": {
+          "X-Auth-Key": "tok_0_8"
+        }
+      }
+    },
+    "expected_outcome": "correct",
+    "is_heldout": true,
+    "registry": [
+      {
+        "mechanism_id": "m-0-8-train",
+        "intent": "fetch_user_hdr_8",
+        "template": {
+          "url": "/api/v2/data",
+          "headers": {
+            "ApiKey": "${token}"
+          }
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-0-8-dist",
+        "intent": "fetch_user_hdr_8",
+        "template": {
+          "url": "/api/v2/data",
+          "headers": {
+            "X-Reset-Token": "${token}"
+          }
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-0-8-low",
+        "intent": "fetch_user_hdr_8",
+        "template": {
+          "url": "/api/v2/data",
+          "headers": {
+            "Authorization": "Bearer ${token}"
+          }
+        },
+        "confidence": 0.8
+      }
+    ]
+  },
+  {
+    "task_id": "alias-0-9",
+    "stratum": "alias-OOD",
+    "family": 0,
+    "intent": "fetch_user_hdr_9",
+    "derived_context": {
+      "url": "/api/v3/data",
+      "method": "GET",
+      "url_path": "/api/v3/data",
+      "url_query": {},
+      "url_segments": [
+        "api",
+        "v3",
+        "data"
+      ],
+      "headers_observed": {
+        "Api-Token": "tok_0_9"
+      },
+      "body_observed": {},
+      "ax_tree_snapshot": null,
+      "ax_nodes_count": null,
+      "viewport_observed": null
+    },
+    "params": {
+      "token": "tok_0_9"
+    },
+    "hidden_expected": {
+      "alias_family": 0,
+      "is_heldout": true,
+      "train_template": {
+        "url": "/api/v3/data",
+        "headers": {
+          "ApiKey": "${token}"
+        }
+      },
+      "dist_template": {
+        "url": "/api/v3/data",
+        "headers": {
+          "X-Reset-Token": "${token}"
+        }
+      },
+      "expected_template": {
+        "url": "/api/v3/data",
+        "headers": {
+          "Api-Token": "${token}"
+        }
+      },
+      "expected_bound": {
+        "url": "/api/v3/data",
+        "headers": {
+          "Api-Token": "tok_0_9"
+        }
+      }
+    },
+    "expected_outcome": "correct",
+    "is_heldout": true,
+    "registry": [
+      {
+        "mechanism_id": "m-0-9-train",
+        "intent": "fetch_user_hdr_9",
+        "template": {
+          "url": "/api/v3/data",
+          "headers": {
+            "ApiKey": "${token}"
+          }
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-0-9-dist",
+        "intent": "fetch_user_hdr_9",
+        "template": {
+          "url": "/api/v3/data",
+          "headers": {
+            "X-Reset-Token": "${token}"
+          }
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-0-9-low",
+        "intent": "fetch_user_hdr_9",
+        "template": {
+          "url": "/api/v3/data",
+          "headers": {
+            "Authorization": "Bearer ${token}"
+          }
+        },
+        "confidence": 0.8
+      }
+    ]
+  },
+  {
+    "task_id": "alias-1-0",
+    "stratum": "alias-OOD",
+    "family": 1,
+    "intent": "create_item_body_0",
+    "derived_context": {
+      "url": "/api/data",
+      "method": "GET",
+      "url_path": "/api/data",
+      "url_query": {},
+      "url_segments": [
+        "api",
+        "data"
+      ],
+      "headers_observed": {},
+      "body_observed": {
+        "token": "tok_1_0"
+      },
+      "ax_tree_snapshot": null,
+      "ax_nodes_count": null,
+      "viewport_observed": null
+    },
+    "params": {
+      "token": "tok_1_0"
+    },
+    "hidden_expected": {
+      "alias_family": 1,
+      "is_heldout": false,
+      "train_template": {
+        "url": "/api/data",
+        "body": {
+          "apiKey": "${token}"
+        }
+      },
+      "dist_template": {
+        "url": "/api/data",
+        "body": {
+          "key": "${token}"
+        }
+      },
+      "expected_template": {
+        "url": "/api/data",
+        "body": {
+          "token": "${token}"
+        }
+      },
+      "expected_bound": {
+        "url": "/api/data",
+        "body": {
+          "token": "tok_1_0"
+        }
+      }
+    },
+    "expected_outcome": "correct",
+    "is_heldout": false,
+    "registry": [
+      {
+        "mechanism_id": "m-1-0-train",
+        "intent": "create_item_body_0",
+        "template": {
+          "url": "/api/data",
+          "body": {
+            "apiKey": "${token}"
+          }
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-1-0-dist",
+        "intent": "create_item_body_0",
+        "template": {
+          "url": "/api/data",
+          "body": {
+            "key": "${token}"
+          }
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-1-0-low",
+        "intent": "create_item_body_0",
+        "template": {
+          "url": "/api/data",
+          "body": {
+            "api_token": "${token}"
+          }
+        },
+        "confidence": 0.8
+      }
+    ]
+  },
+  {
+    "task_id": "alias-1-1",
+    "stratum": "alias-OOD",
+    "family": 1,
+    "intent": "create_item_body_1",
+    "derived_context": {
+      "url": "/api/users",
+      "method": "GET",
+      "url_path": "/api/users",
+      "url_query": {},
+      "url_segments": [
+        "api",
+        "users"
+      ],
+      "headers_observed": {},
+      "body_observed": {
+        "token": "tok_1_1"
+      },
+      "ax_tree_snapshot": null,
+      "ax_nodes_count": null,
+      "viewport_observed": null
+    },
+    "params": {
+      "token": "tok_1_1"
+    },
+    "hidden_expected": {
+      "alias_family": 1,
+      "is_heldout": false,
+      "train_template": {
+        "url": "/api/users",
+        "body": {
+          "apiKey": "${token}"
+        }
+      },
+      "dist_template": {
+        "url": "/api/users",
+        "body": {
+          "key": "${token}"
+        }
+      },
+      "expected_template": {
+        "url": "/api/users",
+        "body": {
+          "token": "${token}"
+        }
+      },
+      "expected_bound": {
+        "url": "/api/users",
+        "body": {
+          "token": "tok_1_1"
+        }
+      }
+    },
+    "expected_outcome": "correct",
+    "is_heldout": false,
+    "registry": [
+      {
+        "mechanism_id": "m-1-1-train",
+        "intent": "create_item_body_1",
+        "template": {
+          "url": "/api/users",
+          "body": {
+            "apiKey": "${token}"
+          }
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-1-1-dist",
+        "intent": "create_item_body_1",
+        "template": {
+          "url": "/api/users",
+          "body": {
+            "key": "${token}"
+          }
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-1-1-low",
+        "intent": "create_item_body_1",
+        "template": {
+          "url": "/api/users",
+          "body": {
+            "api_token": "${token}"
+          }
+        },
+        "confidence": 0.8
+      }
+    ]
+  },
+  {
+    "task_id": "alias-1-2",
+    "stratum": "alias-OOD",
+    "family": 1,
+    "intent": "create_item_body_2",
+    "derived_context": {
+      "url": "/v2/items",
+      "method": "GET",
+      "url_path": "/v2/items",
+      "url_query": {},
+      "url_segments": [
+        "v2",
+        "items"
+      ],
+      "headers_observed": {},
+      "body_observed": {
+        "token": "tok_1_2"
+      },
+      "ax_tree_snapshot": null,
+      "ax_nodes_count": null,
+      "viewport_observed": null
+    },
+    "params": {
+      "token": "tok_1_2"
+    },
+    "hidden_expected": {
+      "alias_family": 1,
+      "is_heldout": false,
+      "train_template": {
+        "url": "/v2/items",
+        "body": {
+          "apiKey": "${token}"
+        }
+      },
+      "dist_template": {
+        "url": "/v2/items",
+        "body": {
+          "key": "${token}"
+        }
+      },
+      "expected_template": {
+        "url": "/v2/items",
+        "body": {
+          "token": "${token}"
+        }
+      },
+      "expected_bound": {
+        "url": "/v2/items",
+        "body": {
+          "token": "tok_1_2"
+        }
+      }
+    },
+    "expected_outcome": "correct",
+    "is_heldout": false,
+    "registry": [
+      {
+        "mechanism_id": "m-1-2-train",
+        "intent": "create_item_body_2",
+        "template": {
+          "url": "/v2/items",
+          "body": {
+            "apiKey": "${token}"
+          }
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-1-2-dist",
+        "intent": "create_item_body_2",
+        "template": {
+          "url": "/v2/items",
+          "body": {
+            "key": "${token}"
+          }
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-1-2-low",
+        "intent": "create_item_body_2",
+        "template": {
+          "url": "/v2/items",
+          "body": {
+            "api_token": "${token}"
+          }
+        },
+        "confidence": 0.8
+      }
+    ]
+  },
+  {
+    "task_id": "alias-1-3",
+    "stratum": "alias-OOD",
+    "family": 1,
+    "intent": "create_item_body_3",
+    "derived_context": {
+      "url": "/v1/orders",
+      "method": "GET",
+      "url_path": "/v1/orders",
+      "url_query": {},
+      "url_segments": [
+        "v1",
+        "orders"
+      ],
+      "headers_observed": {},
+      "body_observed": {
+        "token": "tok_1_3"
+      },
+      "ax_tree_snapshot": null,
+      "ax_nodes_count": null,
+      "viewport_observed": null
+    },
+    "params": {
+      "token": "tok_1_3"
+    },
+    "hidden_expected": {
+      "alias_family": 1,
+      "is_heldout": false,
+      "train_template": {
+        "url": "/v1/orders",
+        "body": {
+          "apiKey": "${token}"
+        }
+      },
+      "dist_template": {
+        "url": "/v1/orders",
+        "body": {
+          "key": "${token}"
+        }
+      },
+      "expected_template": {
+        "url": "/v1/orders",
+        "body": {
+          "token": "${token}"
+        }
+      },
+      "expected_bound": {
+        "url": "/v1/orders",
+        "body": {
+          "token": "tok_1_3"
+        }
+      }
+    },
+    "expected_outcome": "correct",
+    "is_heldout": false,
+    "registry": [
+      {
+        "mechanism_id": "m-1-3-train",
+        "intent": "create_item_body_3",
+        "template": {
+          "url": "/v1/orders",
+          "body": {
+            "apiKey": "${token}"
+          }
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-1-3-dist",
+        "intent": "create_item_body_3",
+        "template": {
+          "url": "/v1/orders",
+          "body": {
+            "key": "${token}"
+          }
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-1-3-low",
+        "intent": "create_item_body_3",
+        "template": {
+          "url": "/v1/orders",
+          "body": {
+            "api_token": "${token}"
+          }
+        },
+        "confidence": 0.8
+      }
+    ]
+  },
+  {
+    "task_id": "alias-1-4",
+    "stratum": "alias-OOD",
+    "family": 1,
+    "intent": "create_item_body_4",
+    "derived_context": {
+      "url": "/admin/settings",
+      "method": "GET",
+      "url_path": "/admin/settings",
+      "url_query": {},
+      "url_segments": [
+        "admin",
+        "settings"
+      ],
+      "headers_observed": {},
+      "body_observed": {
+        "token": "tok_1_4"
+      },
+      "ax_tree_snapshot": null,
+      "ax_nodes_count": null,
+      "viewport_observed": null
+    },
+    "params": {
+      "token": "tok_1_4"
+    },
+    "hidden_expected": {
+      "alias_family": 1,
+      "is_heldout": false,
+      "train_template": {
+        "url": "/admin/settings",
+        "body": {
+          "apiKey": "${token}"
+        }
+      },
+      "dist_template": {
+        "url": "/admin/settings",
+        "body": {
+          "key": "${token}"
+        }
+      },
+      "expected_template": {
+        "url": "/admin/settings",
+        "body": {
+          "token": "${token}"
+        }
+      },
+      "expected_bound": {
+        "url": "/admin/settings",
+        "body": {
+          "token": "tok_1_4"
+        }
+      }
+    },
+    "expected_outcome": "correct",
+    "is_heldout": false,
+    "registry": [
+      {
+        "mechanism_id": "m-1-4-train",
+        "intent": "create_item_body_4",
+        "template": {
+          "url": "/admin/settings",
+          "body": {
+            "apiKey": "${token}"
+          }
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-1-4-dist",
+        "intent": "create_item_body_4",
+        "template": {
+          "url": "/admin/settings",
+          "body": {
+            "key": "${token}"
+          }
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-1-4-low",
+        "intent": "create_item_body_4",
+        "template": {
+          "url": "/admin/settings",
+          "body": {
+            "api_token": "${token}"
+          }
+        },
+        "confidence": 0.8
+      }
+    ]
+  },
+  {
+    "task_id": "alias-1-5",
+    "stratum": "alias-OOD",
+    "family": 1,
+    "intent": "create_item_body_5",
+    "derived_context": {
+      "url": "/api/reports",
+      "method": "GET",
+      "url_path": "/api/reports",
+      "url_query": {},
+      "url_segments": [
+        "api",
+        "reports"
+      ],
+      "headers_observed": {},
+      "body_observed": {
+        "token": "tok_1_5"
+      },
+      "ax_tree_snapshot": null,
+      "ax_nodes_count": null,
+      "viewport_observed": null
+    },
+    "params": {
+      "token": "tok_1_5"
+    },
+    "hidden_expected": {
+      "alias_family": 1,
+      "is_heldout": false,
+      "train_template": {
+        "url": "/api/reports",
+        "body": {
+          "apiKey": "${token}"
+        }
+      },
+      "dist_template": {
+        "url": "/api/reports",
+        "body": {
+          "key": "${token}"
+        }
+      },
+      "expected_template": {
+        "url": "/api/reports",
+        "body": {
+          "token": "${token}"
+        }
+      },
+      "expected_bound": {
+        "url": "/api/reports",
+        "body": {
+          "token": "tok_1_5"
+        }
+      }
+    },
+    "expected_outcome": "correct",
+    "is_heldout": false,
+    "registry": [
+      {
+        "mechanism_id": "m-1-5-train",
+        "intent": "create_item_body_5",
+        "template": {
+          "url": "/api/reports",
+          "body": {
+            "apiKey": "${token}"
+          }
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-1-5-dist",
+        "intent": "create_item_body_5",
+        "template": {
+          "url": "/api/reports",
+          "body": {
+            "key": "${token}"
+          }
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-1-5-low",
+        "intent": "create_item_body_5",
+        "template": {
+          "url": "/api/reports",
+          "body": {
+            "api_token": "${token}"
+          }
+        },
+        "confidence": 0.8
+      }
+    ]
+  },
+  {
+    "task_id": "alias-1-6",
+    "stratum": "alias-OOD",
+    "family": 1,
+    "intent": "create_item_body_6",
+    "derived_context": {
+      "url": "/v3/audit",
+      "method": "GET",
+      "url_path": "/v3/audit",
+      "url_query": {},
+      "url_segments": [
+        "v3",
+        "audit"
+      ],
+      "headers_observed": {},
+      "body_observed": {
+        "token": "tok_1_6"
+      },
+      "ax_tree_snapshot": null,
+      "ax_nodes_count": null,
+      "viewport_observed": null
+    },
+    "params": {
+      "token": "tok_1_6"
+    },
+    "hidden_expected": {
+      "alias_family": 1,
+      "is_heldout": false,
+      "train_template": {
+        "url": "/v3/audit",
+        "body": {
+          "apiKey": "${token}"
+        }
+      },
+      "dist_template": {
+        "url": "/v3/audit",
+        "body": {
+          "key": "${token}"
+        }
+      },
+      "expected_template": {
+        "url": "/v3/audit",
+        "body": {
+          "token": "${token}"
+        }
+      },
+      "expected_bound": {
+        "url": "/v3/audit",
+        "body": {
+          "token": "tok_1_6"
+        }
+      }
+    },
+    "expected_outcome": "correct",
+    "is_heldout": false,
+    "registry": [
+      {
+        "mechanism_id": "m-1-6-train",
+        "intent": "create_item_body_6",
+        "template": {
+          "url": "/v3/audit",
+          "body": {
+            "apiKey": "${token}"
+          }
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-1-6-dist",
+        "intent": "create_item_body_6",
+        "template": {
+          "url": "/v3/audit",
+          "body": {
+            "key": "${token}"
+          }
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-1-6-low",
+        "intent": "create_item_body_6",
+        "template": {
+          "url": "/v3/audit",
+          "body": {
+            "api_token": "${token}"
+          }
+        },
+        "confidence": 0.8
+      }
+    ]
+  },
+  {
+    "task_id": "alias-1-7",
+    "stratum": "alias-OOD",
+    "family": 1,
+    "intent": "create_item_body_7",
+    "derived_context": {
+      "url": "/api/data",
+      "method": "GET",
+      "url_path": "/api/data",
+      "url_query": {},
+      "url_segments": [
+        "api",
+        "data"
+      ],
+      "headers_observed": {},
+      "body_observed": {
+        "api_token": "tok_1_7"
+      },
+      "ax_tree_snapshot": null,
+      "ax_nodes_count": null,
+      "viewport_observed": null
+    },
+    "params": {
+      "token": "tok_1_7"
+    },
+    "hidden_expected": {
+      "alias_family": 1,
+      "is_heldout": true,
+      "train_template": {
+        "url": "/api/data",
+        "body": {
+          "apiKey": "${token}"
+        }
+      },
+      "dist_template": {
+        "url": "/api/data",
+        "body": {
+          "key": "${token}"
+        }
+      },
+      "expected_template": {
+        "url": "/api/data",
+        "body": {
+          "api_token": "${token}"
+        }
+      },
+      "expected_bound": {
+        "url": "/api/data",
+        "body": {
+          "api_token": "tok_1_7"
+        }
+      }
+    },
+    "expected_outcome": "correct",
+    "is_heldout": true,
+    "registry": [
+      {
+        "mechanism_id": "m-1-7-train",
+        "intent": "create_item_body_7",
+        "template": {
+          "url": "/api/data",
+          "body": {
+            "apiKey": "${token}"
+          }
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-1-7-dist",
+        "intent": "create_item_body_7",
+        "template": {
+          "url": "/api/data",
+          "body": {
+            "key": "${token}"
+          }
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-1-7-low",
+        "intent": "create_item_body_7",
+        "template": {
+          "url": "/api/data",
+          "body": {
+            "token": "${token}"
+          }
+        },
+        "confidence": 0.8
+      }
+    ]
+  },
+  {
+    "task_id": "alias-1-8",
+    "stratum": "alias-OOD",
+    "family": 1,
+    "intent": "create_item_body_8",
+    "derived_context": {
+      "url": "/api/v2/data",
+      "method": "GET",
+      "url_path": "/api/v2/data",
+      "url_query": {},
+      "url_segments": [
+        "api",
+        "v2",
+        "data"
+      ],
+      "headers_observed": {},
+      "body_observed": {
+        "authToken": "tok_1_8"
+      },
+      "ax_tree_snapshot": null,
+      "ax_nodes_count": null,
+      "viewport_observed": null
+    },
+    "params": {
+      "token": "tok_1_8"
+    },
+    "hidden_expected": {
+      "alias_family": 1,
+      "is_heldout": true,
+      "train_template": {
+        "url": "/api/v2/data",
+        "body": {
+          "apiKey": "${token}"
+        }
+      },
+      "dist_template": {
+        "url": "/api/v2/data",
+        "body": {
+          "key": "${token}"
+        }
+      },
+      "expected_template": {
+        "url": "/api/v2/data",
+        "body": {
+          "authToken": "${token}"
+        }
+      },
+      "expected_bound": {
+        "url": "/api/v2/data",
+        "body": {
+          "authToken": "tok_1_8"
+        }
+      }
+    },
+    "expected_outcome": "correct",
+    "is_heldout": true,
+    "registry": [
+      {
+        "mechanism_id": "m-1-8-train",
+        "intent": "create_item_body_8",
+        "template": {
+          "url": "/api/v2/data",
+          "body": {
+            "apiKey": "${token}"
+          }
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-1-8-dist",
+        "intent": "create_item_body_8",
+        "template": {
+          "url": "/api/v2/data",
+          "body": {
+            "key": "${token}"
+          }
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-1-8-low",
+        "intent": "create_item_body_8",
+        "template": {
+          "url": "/api/v2/data",
+          "body": {
+            "token": "${token}"
+          }
+        },
+        "confidence": 0.8
+      }
+    ]
+  },
+  {
+    "task_id": "alias-1-9",
+    "stratum": "alias-OOD",
+    "family": 1,
+    "intent": "create_item_body_9",
+    "derived_context": {
+      "url": "/api/v3/data",
+      "method": "GET",
+      "url_path": "/api/v3/data",
+      "url_query": {},
+      "url_segments": [
+        "api",
+        "v3",
+        "data"
+      ],
+      "headers_observed": {},
+      "body_observed": {
+        "access_key": "tok_1_9"
+      },
+      "ax_tree_snapshot": null,
+      "ax_nodes_count": null,
+      "viewport_observed": null
+    },
+    "params": {
+      "token": "tok_1_9"
+    },
+    "hidden_expected": {
+      "alias_family": 1,
+      "is_heldout": true,
+      "train_template": {
+        "url": "/api/v3/data",
+        "body": {
+          "apiKey": "${token}"
+        }
+      },
+      "dist_template": {
+        "url": "/api/v3/data",
+        "body": {
+          "key": "${token}"
+        }
+      },
+      "expected_template": {
+        "url": "/api/v3/data",
+        "body": {
+          "access_key": "${token}"
+        }
+      },
+      "expected_bound": {
+        "url": "/api/v3/data",
+        "body": {
+          "access_key": "tok_1_9"
+        }
+      }
+    },
+    "expected_outcome": "correct",
+    "is_heldout": true,
+    "registry": [
+      {
+        "mechanism_id": "m-1-9-train",
+        "intent": "create_item_body_9",
+        "template": {
+          "url": "/api/v3/data",
+          "body": {
+            "apiKey": "${token}"
+          }
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-1-9-dist",
+        "intent": "create_item_body_9",
+        "template": {
+          "url": "/api/v3/data",
+          "body": {
+            "key": "${token}"
+          }
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-1-9-low",
+        "intent": "create_item_body_9",
+        "template": {
+          "url": "/api/v3/data",
+          "body": {
+            "token": "${token}"
+          }
+        },
+        "confidence": 0.8
+      }
+    ]
+  },
+  {
+    "task_id": "alias-2-0",
+    "stratum": "alias-OOD",
+    "family": 2,
+    "intent": "grant_access_auth_0",
+    "derived_context": {
+      "url": "/api/data",
+      "method": "GET",
+      "url_path": "/api/data",
+      "url_query": {},
+      "url_segments": [
+        "api",
+        "data"
+      ],
+      "headers_observed": {
+        "X-Permission": "read"
+      },
+      "body_observed": {},
+      "ax_tree_snapshot": null,
+      "ax_nodes_count": null,
+      "viewport_observed": null
+    },
+    "params": {
+      "perm": "read"
+    },
+    "hidden_expected": {
+      "alias_family": 2,
+      "is_heldout": false,
+      "train_template": {
+        "url": "/api/data?scope=read"
+      },
+      "dist_template": {
+        "url": "/api/data?admin_scope=${perm}"
+      },
+      "expected_template": {
+        "url": "/api/data",
+        "headers": {
+          "X-Permission": "${perm}"
+        }
+      },
+      "expected_bound": {
+        "url": "/api/data",
+        "headers": {
+          "X-Permission": "read"
+        }
+      }
+    },
+    "expected_outcome": "correct",
+    "is_heldout": false,
+    "registry": [
+      {
+        "mechanism_id": "m-2-0-train",
+        "intent": "grant_access_auth_0",
+        "template": {
+          "url": "/api/data?scope=read"
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-2-0-dist",
+        "intent": "grant_access_auth_0",
+        "template": {
+          "url": "/api/data?admin_scope=${perm}"
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-2-0-low",
+        "intent": "grant_access_auth_0",
+        "template": {
+          "url": "/api/data?permission=read"
+        },
+        "confidence": 0.8
+      }
+    ]
+  },
+  {
+    "task_id": "alias-2-1",
+    "stratum": "alias-OOD",
+    "family": 2,
+    "intent": "grant_access_auth_1",
+    "derived_context": {
+      "url": "/api/users",
+      "method": "GET",
+      "url_path": "/api/users",
+      "url_query": {},
+      "url_segments": [
+        "api",
+        "users"
+      ],
+      "headers_observed": {
+        "X-Permission": "read"
+      },
+      "body_observed": {},
+      "ax_tree_snapshot": null,
+      "ax_nodes_count": null,
+      "viewport_observed": null
+    },
+    "params": {
+      "perm": "read"
+    },
+    "hidden_expected": {
+      "alias_family": 2,
+      "is_heldout": false,
+      "train_template": {
+        "url": "/api/users?scope=read"
+      },
+      "dist_template": {
+        "url": "/api/users?admin_scope=${perm}"
+      },
+      "expected_template": {
+        "url": "/api/users",
+        "headers": {
+          "X-Permission": "${perm}"
+        }
+      },
+      "expected_bound": {
+        "url": "/api/users",
+        "headers": {
+          "X-Permission": "read"
+        }
+      }
+    },
+    "expected_outcome": "correct",
+    "is_heldout": false,
+    "registry": [
+      {
+        "mechanism_id": "m-2-1-train",
+        "intent": "grant_access_auth_1",
+        "template": {
+          "url": "/api/users?scope=read"
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-2-1-dist",
+        "intent": "grant_access_auth_1",
+        "template": {
+          "url": "/api/users?admin_scope=${perm}"
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-2-1-low",
+        "intent": "grant_access_auth_1",
+        "template": {
+          "url": "/api/users?permission=read"
+        },
+        "confidence": 0.8
+      }
+    ]
+  },
+  {
+    "task_id": "alias-2-2",
+    "stratum": "alias-OOD",
+    "family": 2,
+    "intent": "grant_access_auth_2",
+    "derived_context": {
+      "url": "/v2/items",
+      "method": "GET",
+      "url_path": "/v2/items",
+      "url_query": {},
+      "url_segments": [
+        "v2",
+        "items"
+      ],
+      "headers_observed": {
+        "X-Permission": "read"
+      },
+      "body_observed": {},
+      "ax_tree_snapshot": null,
+      "ax_nodes_count": null,
+      "viewport_observed": null
+    },
+    "params": {
+      "perm": "read"
+    },
+    "hidden_expected": {
+      "alias_family": 2,
+      "is_heldout": false,
+      "train_template": {
+        "url": "/v2/items?scope=read"
+      },
+      "dist_template": {
+        "url": "/v2/items?admin_scope=${perm}"
+      },
+      "expected_template": {
+        "url": "/v2/items",
+        "headers": {
+          "X-Permission": "${perm}"
+        }
+      },
+      "expected_bound": {
+        "url": "/v2/items",
+        "headers": {
+          "X-Permission": "read"
+        }
+      }
+    },
+    "expected_outcome": "correct",
+    "is_heldout": false,
+    "registry": [
+      {
+        "mechanism_id": "m-2-2-train",
+        "intent": "grant_access_auth_2",
+        "template": {
+          "url": "/v2/items?scope=read"
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-2-2-dist",
+        "intent": "grant_access_auth_2",
+        "template": {
+          "url": "/v2/items?admin_scope=${perm}"
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-2-2-low",
+        "intent": "grant_access_auth_2",
+        "template": {
+          "url": "/v2/items?permission=read"
+        },
+        "confidence": 0.8
+      }
+    ]
+  },
+  {
+    "task_id": "alias-2-3",
+    "stratum": "alias-OOD",
+    "family": 2,
+    "intent": "grant_access_auth_3",
+    "derived_context": {
+      "url": "/v1/orders",
+      "method": "GET",
+      "url_path": "/v1/orders",
+      "url_query": {},
+      "url_segments": [
+        "v1",
+        "orders"
+      ],
+      "headers_observed": {
+        "X-Permission": "read"
+      },
+      "body_observed": {},
+      "ax_tree_snapshot": null,
+      "ax_nodes_count": null,
+      "viewport_observed": null
+    },
+    "params": {
+      "perm": "read"
+    },
+    "hidden_expected": {
+      "alias_family": 2,
+      "is_heldout": false,
+      "train_template": {
+        "url": "/v1/orders?scope=read"
+      },
+      "dist_template": {
+        "url": "/v1/orders?admin_scope=${perm}"
+      },
+      "expected_template": {
+        "url": "/v1/orders",
+        "headers": {
+          "X-Permission": "${perm}"
+        }
+      },
+      "expected_bound": {
+        "url": "/v1/orders",
+        "headers": {
+          "X-Permission": "read"
+        }
+      }
+    },
+    "expected_outcome": "correct",
+    "is_heldout": false,
+    "registry": [
+      {
+        "mechanism_id": "m-2-3-train",
+        "intent": "grant_access_auth_3",
+        "template": {
+          "url": "/v1/orders?scope=read"
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-2-3-dist",
+        "intent": "grant_access_auth_3",
+        "template": {
+          "url": "/v1/orders?admin_scope=${perm}"
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-2-3-low",
+        "intent": "grant_access_auth_3",
+        "template": {
+          "url": "/v1/orders?permission=read"
+        },
+        "confidence": 0.8
+      }
+    ]
+  },
+  {
+    "task_id": "alias-2-4",
+    "stratum": "alias-OOD",
+    "family": 2,
+    "intent": "grant_access_auth_4",
+    "derived_context": {
+      "url": "/admin/settings",
+      "method": "GET",
+      "url_path": "/admin/settings",
+      "url_query": {},
+      "url_segments": [
+        "admin",
+        "settings"
+      ],
+      "headers_observed": {
+        "X-Permission": "read"
+      },
+      "body_observed": {},
+      "ax_tree_snapshot": null,
+      "ax_nodes_count": null,
+      "viewport_observed": null
+    },
+    "params": {
+      "perm": "read"
+    },
+    "hidden_expected": {
+      "alias_family": 2,
+      "is_heldout": false,
+      "train_template": {
+        "url": "/admin/settings?scope=read"
+      },
+      "dist_template": {
+        "url": "/admin/settings?admin_scope=${perm}"
+      },
+      "expected_template": {
+        "url": "/admin/settings",
+        "headers": {
+          "X-Permission": "${perm}"
+        }
+      },
+      "expected_bound": {
+        "url": "/admin/settings",
+        "headers": {
+          "X-Permission": "read"
+        }
+      }
+    },
+    "expected_outcome": "correct",
+    "is_heldout": false,
+    "registry": [
+      {
+        "mechanism_id": "m-2-4-train",
+        "intent": "grant_access_auth_4",
+        "template": {
+          "url": "/admin/settings?scope=read"
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-2-4-dist",
+        "intent": "grant_access_auth_4",
+        "template": {
+          "url": "/admin/settings?admin_scope=${perm}"
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-2-4-low",
+        "intent": "grant_access_auth_4",
+        "template": {
+          "url": "/admin/settings?permission=read"
+        },
+        "confidence": 0.8
+      }
+    ]
+  },
+  {
+    "task_id": "alias-2-5",
+    "stratum": "alias-OOD",
+    "family": 2,
+    "intent": "grant_access_auth_5",
+    "derived_context": {
+      "url": "/api/reports",
+      "method": "GET",
+      "url_path": "/api/reports",
+      "url_query": {},
+      "url_segments": [
+        "api",
+        "reports"
+      ],
+      "headers_observed": {
+        "X-Permission": "read"
+      },
+      "body_observed": {},
+      "ax_tree_snapshot": null,
+      "ax_nodes_count": null,
+      "viewport_observed": null
+    },
+    "params": {
+      "perm": "read"
+    },
+    "hidden_expected": {
+      "alias_family": 2,
+      "is_heldout": false,
+      "train_template": {
+        "url": "/api/reports?scope=read"
+      },
+      "dist_template": {
+        "url": "/api/reports?admin_scope=${perm}"
+      },
+      "expected_template": {
+        "url": "/api/reports",
+        "headers": {
+          "X-Permission": "${perm}"
+        }
+      },
+      "expected_bound": {
+        "url": "/api/reports",
+        "headers": {
+          "X-Permission": "read"
+        }
+      }
+    },
+    "expected_outcome": "correct",
+    "is_heldout": false,
+    "registry": [
+      {
+        "mechanism_id": "m-2-5-train",
+        "intent": "grant_access_auth_5",
+        "template": {
+          "url": "/api/reports?scope=read"
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-2-5-dist",
+        "intent": "grant_access_auth_5",
+        "template": {
+          "url": "/api/reports?admin_scope=${perm}"
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-2-5-low",
+        "intent": "grant_access_auth_5",
+        "template": {
+          "url": "/api/reports?permission=read"
+        },
+        "confidence": 0.8
+      }
+    ]
+  },
+  {
+    "task_id": "alias-2-6",
+    "stratum": "alias-OOD",
+    "family": 2,
+    "intent": "grant_access_auth_6",
+    "derived_context": {
+      "url": "/v3/audit",
+      "method": "GET",
+      "url_path": "/v3/audit",
+      "url_query": {},
+      "url_segments": [
+        "v3",
+        "audit"
+      ],
+      "headers_observed": {
+        "X-Permission": "read"
+      },
+      "body_observed": {},
+      "ax_tree_snapshot": null,
+      "ax_nodes_count": null,
+      "viewport_observed": null
+    },
+    "params": {
+      "perm": "read"
+    },
+    "hidden_expected": {
+      "alias_family": 2,
+      "is_heldout": false,
+      "train_template": {
+        "url": "/v3/audit?scope=read"
+      },
+      "dist_template": {
+        "url": "/v3/audit?admin_scope=${perm}"
+      },
+      "expected_template": {
+        "url": "/v3/audit",
+        "headers": {
+          "X-Permission": "${perm}"
+        }
+      },
+      "expected_bound": {
+        "url": "/v3/audit",
+        "headers": {
+          "X-Permission": "read"
+        }
+      }
+    },
+    "expected_outcome": "correct",
+    "is_heldout": false,
+    "registry": [
+      {
+        "mechanism_id": "m-2-6-train",
+        "intent": "grant_access_auth_6",
+        "template": {
+          "url": "/v3/audit?scope=read"
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-2-6-dist",
+        "intent": "grant_access_auth_6",
+        "template": {
+          "url": "/v3/audit?admin_scope=${perm}"
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-2-6-low",
+        "intent": "grant_access_auth_6",
+        "template": {
+          "url": "/v3/audit?permission=read"
+        },
+        "confidence": 0.8
+      }
+    ]
+  },
+  {
+    "task_id": "alias-2-7",
+    "stratum": "alias-OOD",
+    "family": 2,
+    "intent": "grant_access_auth_7",
+    "derived_context": {
+      "url": "/api/data?permission=read",
+      "method": "GET",
+      "url_path": "/api/data",
+      "url_query": {
+        "permission": "read"
+      },
+      "url_segments": [
+        "api",
+        "data"
+      ],
+      "headers_observed": {},
+      "body_observed": {},
+      "ax_tree_snapshot": null,
+      "ax_nodes_count": null,
+      "viewport_observed": null
+    },
+    "params": {
+      "perm": "read"
+    },
+    "hidden_expected": {
+      "alias_family": 2,
+      "is_heldout": true,
+      "train_template": {
+        "url": "/api/data?scope=read"
+      },
+      "dist_template": {
+        "url": "/api/data?admin_scope=${perm}"
+      },
+      "expected_template": {
+        "url": "/api/data?permission=read"
+      },
+      "expected_bound": {
+        "url": "/api/data?permission=read"
+      }
+    },
+    "expected_outcome": "correct",
+    "is_heldout": true,
+    "registry": [
+      {
+        "mechanism_id": "m-2-7-train",
+        "intent": "grant_access_auth_7",
+        "template": {
+          "url": "/api/data?scope=read"
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-2-7-dist",
+        "intent": "grant_access_auth_7",
+        "template": {
+          "url": "/api/data?admin_scope=${perm}"
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-2-7-low",
+        "intent": "grant_access_auth_7",
+        "template": {
+          "url": "/api/data",
+          "headers": {
+            "X-Permission": "${perm}"
+          }
+        },
+        "confidence": 0.8
+      }
+    ]
+  },
+  {
+    "task_id": "alias-2-8",
+    "stratum": "alias-OOD",
+    "family": 2,
+    "intent": "grant_access_auth_8",
+    "derived_context": {
+      "url": "/api/v2/data?access_scope=read",
+      "method": "GET",
+      "url_path": "/api/v2/data",
+      "url_query": {
+        "access_scope": "read"
+      },
+      "url_segments": [
+        "api",
+        "v2",
+        "data"
+      ],
+      "headers_observed": {},
+      "body_observed": {},
+      "ax_tree_snapshot": null,
+      "ax_nodes_count": null,
+      "viewport_observed": null
+    },
+    "params": {
+      "perm": "read"
+    },
+    "hidden_expected": {
+      "alias_family": 2,
+      "is_heldout": true,
+      "train_template": {
+        "url": "/api/v2/data?scope=read"
+      },
+      "dist_template": {
+        "url": "/api/v2/data?admin_scope=${perm}"
+      },
+      "expected_template": {
+        "url": "/api/v2/data?access_scope=read"
+      },
+      "expected_bound": {
+        "url": "/api/v2/data?access_scope=read"
+      }
+    },
+    "expected_outcome": "correct",
+    "is_heldout": true,
+    "registry": [
+      {
+        "mechanism_id": "m-2-8-train",
+        "intent": "grant_access_auth_8",
+        "template": {
+          "url": "/api/v2/data?scope=read"
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-2-8-dist",
+        "intent": "grant_access_auth_8",
+        "template": {
+          "url": "/api/v2/data?admin_scope=${perm}"
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-2-8-low",
+        "intent": "grant_access_auth_8",
+        "template": {
+          "url": "/api/v2/data",
+          "headers": {
+            "X-Permission": "${perm}"
+          }
+        },
+        "confidence": 0.8
+      }
+    ]
+  },
+  {
+    "task_id": "alias-2-9",
+    "stratum": "alias-OOD",
+    "family": 2,
+    "intent": "grant_access_auth_9",
+    "derived_context": {
+      "url": "/api/v3/data",
+      "method": "GET",
+      "url_path": "/api/v3/data",
+      "url_query": {},
+      "url_segments": [
+        "api",
+        "v3",
+        "data"
+      ],
+      "headers_observed": {
+        "X-Scope": "read"
+      },
+      "body_observed": {},
+      "ax_tree_snapshot": null,
+      "ax_nodes_count": null,
+      "viewport_observed": null
+    },
+    "params": {
+      "perm": "read"
+    },
+    "hidden_expected": {
+      "alias_family": 2,
+      "is_heldout": true,
+      "train_template": {
+        "url": "/api/v3/data?scope=read"
+      },
+      "dist_template": {
+        "url": "/api/v3/data?admin_scope=${perm}"
+      },
+      "expected_template": {
+        "url": "/api/v3/data",
+        "headers": {
+          "X-Scope": "${perm}"
+        }
+      },
+      "expected_bound": {
+        "url": "/api/v3/data",
+        "headers": {
+          "X-Scope": "read"
+        }
+      }
+    },
+    "expected_outcome": "correct",
+    "is_heldout": true,
+    "registry": [
+      {
+        "mechanism_id": "m-2-9-train",
+        "intent": "grant_access_auth_9",
+        "template": {
+          "url": "/api/v3/data?scope=read"
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-2-9-dist",
+        "intent": "grant_access_auth_9",
+        "template": {
+          "url": "/api/v3/data?admin_scope=${perm}"
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-2-9-low",
+        "intent": "grant_access_auth_9",
+        "template": {
+          "url": "/api/v3/data",
+          "headers": {
+            "X-Permission": "${perm}"
+          }
+        },
+        "confidence": 0.8
+      }
+    ]
+  },
+  {
+    "task_id": "exact-0",
+    "stratum": "exact-match",
+    "family": 0,
+    "intent": "exact_intent_0",
+    "derived_context": {
+      "url": "/api/data",
+      "method": "GET",
+      "url_path": "/api/data",
+      "url_query": {},
+      "url_segments": [
+        "api",
+        "data"
+      ],
+      "headers_observed": {
+        "ApiKey": "tok_x0"
+      },
+      "body_observed": {},
+      "ax_tree_snapshot": null,
+      "ax_nodes_count": null,
+      "viewport_observed": null
+    },
+    "params": {
+      "token": "tok_x0"
+    },
+    "hidden_expected": {
+      "expected_template": {
+        "url": "/api/data",
+        "headers": {
+          "ApiKey": "${token}"
+        }
+      },
+      "expected_bound": {
+        "url": "/api/data",
+        "headers": {
+          "ApiKey": "tok_x0"
+        }
+      }
+    },
+    "expected_outcome": "correct",
+    "is_heldout": false,
+    "registry": [
+      {
+        "mechanism_id": "m-exact-0",
+        "intent": "exact_intent_0",
+        "template": {
+          "url": "/api/data",
+          "headers": {
+            "ApiKey": "${token}"
+          }
+        },
+        "confidence": 0.9
+      }
+    ]
+  },
+  {
+    "task_id": "exact-1",
+    "stratum": "exact-match",
+    "family": 1,
+    "intent": "exact_intent_1",
+    "derived_context": {
+      "url": "/api/data",
+      "method": "GET",
+      "url_path": "/api/data",
+      "url_query": {},
+      "url_segments": [
+        "api",
+        "data"
+      ],
+      "headers_observed": {},
+      "body_observed": {
+        "apiKey": "tok_x1"
+      },
+      "ax_tree_snapshot": null,
+      "ax_nodes_count": null,
+      "viewport_observed": null
+    },
+    "params": {
+      "token": "tok_x1"
+    },
+    "hidden_expected": {
+      "expected_template": {
+        "url": "/api/data",
+        "body": {
+          "apiKey": "${token}"
+        }
+      },
+      "expected_bound": {
+        "url": "/api/data",
+        "body": {
+          "apiKey": "tok_x1"
+        }
+      }
+    },
+    "expected_outcome": "correct",
+    "is_heldout": false,
+    "registry": [
+      {
+        "mechanism_id": "m-exact-1",
+        "intent": "exact_intent_1",
+        "template": {
+          "url": "/api/data",
+          "body": {
+            "apiKey": "${token}"
+          }
+        },
+        "confidence": 0.9
+      }
+    ]
+  },
+  {
+    "task_id": "exact-2",
+    "stratum": "exact-match",
+    "family": 2,
+    "intent": "exact_intent_2",
+    "derived_context": {
+      "url": "/api/auth?scope=read",
+      "method": "GET",
+      "url_path": "/api/auth",
+      "url_query": {
+        "scope": "read"
+      },
+      "url_segments": [
+        "api",
+        "auth"
+      ],
+      "headers_observed": {},
+      "body_observed": {},
+      "ax_tree_snapshot": null,
+      "ax_nodes_count": null,
+      "viewport_observed": null
+    },
+    "params": {
+      "perm": "read"
+    },
+    "hidden_expected": {
+      "expected_template": {
+        "url": "/api/auth?scope=read"
+      },
+      "expected_bound": {
+        "url": "/api/auth?scope=read"
+      }
+    },
+    "expected_outcome": "correct",
+    "is_heldout": false,
+    "registry": [
+      {
+        "mechanism_id": "m-exact-2",
+        "intent": "exact_intent_2",
+        "template": {
+          "url": "/api/auth?scope=read"
+        },
+        "confidence": 0.9
+      }
+    ]
+  },
+  {
+    "task_id": "exact-3",
+    "stratum": "exact-match",
+    "family": 0,
+    "intent": "exact_intent_3",
+    "derived_context": {
+      "url": "/api/auth",
+      "method": "GET",
+      "url_path": "/api/auth",
+      "url_query": {},
+      "url_segments": [
+        "api",
+        "auth"
+      ],
+      "headers_observed": {
+        "X-Scope": "read"
+      },
+      "body_observed": {},
+      "ax_tree_snapshot": null,
+      "ax_nodes_count": null,
+      "viewport_observed": null
+    },
+    "params": {
+      "perm": "read"
+    },
+    "hidden_expected": {
+      "expected_template": {
+        "url": "/api/auth",
+        "headers": {
+          "X-Scope": "${perm}"
+        }
+      },
+      "expected_bound": {
+        "url": "/api/auth",
+        "headers": {
+          "X-Scope": "read"
+        }
+      }
+    },
+    "expected_outcome": "correct",
+    "is_heldout": false,
+    "registry": [
+      {
+        "mechanism_id": "m-exact-3",
+        "intent": "exact_intent_3",
+        "template": {
+          "url": "/api/auth",
+          "headers": {
+            "X-Scope": "${perm}"
+          }
+        },
+        "confidence": 0.9
+      }
+    ]
+  },
+  {
+    "task_id": "exact-4",
+    "stratum": "exact-match",
+    "family": 0,
+    "intent": "exact_intent_4",
+    "derived_context": {
+      "url": "/api/data",
+      "method": "GET",
+      "url_path": "/api/data",
+      "url_query": {},
+      "url_segments": [
+        "api",
+        "data"
+      ],
+      "headers_observed": {
+        "X-Reset-Token": "tok_x4"
+      },
+      "body_observed": {},
+      "ax_tree_snapshot": null,
+      "ax_nodes_count": null,
+      "viewport_observed": null
+    },
+    "params": {
+      "token": "tok_x4"
+    },
+    "hidden_expected": {
+      "expected_template": {
+        "url": "/api/data",
+        "headers": {
+          "X-Reset-Token": "${token}"
+        }
+      },
+      "expected_bound": {
+        "url": "/api/data",
+        "headers": {
+          "X-Reset-Token": "tok_x4"
+        }
+      }
+    },
+    "expected_outcome": "correct",
+    "is_heldout": false,
+    "registry": [
+      {
+        "mechanism_id": "m-exact-4",
+        "intent": "exact_intent_4",
+        "template": {
+          "url": "/api/data",
+          "headers": {
+            "X-Reset-Token": "${token}"
+          }
+        },
+        "confidence": 0.9
+      }
+    ]
+  },
+  {
+    "task_id": "exact-5",
+    "stratum": "exact-match",
+    "family": 1,
+    "intent": "exact_intent_5",
+    "derived_context": {
+      "url": "/api/data",
+      "method": "GET",
+      "url_path": "/api/data",
+      "url_query": {},
+      "url_segments": [
+        "api",
+        "data"
+      ],
+      "headers_observed": {},
+      "body_observed": {
+        "key": "tok_x5"
+      },
+      "ax_tree_snapshot": null,
+      "ax_nodes_count": null,
+      "viewport_observed": null
+    },
+    "params": {
+      "token": "tok_x5"
+    },
+    "hidden_expected": {
+      "expected_template": {
+        "url": "/api/data",
+        "body": {
+          "key": "${token}"
+        }
+      },
+      "expected_bound": {
+        "url": "/api/data",
+        "body": {
+          "key": "tok_x5"
+        }
+      }
+    },
+    "expected_outcome": "correct",
+    "is_heldout": false,
+    "registry": [
+      {
+        "mechanism_id": "m-exact-5",
+        "intent": "exact_intent_5",
+        "template": {
+          "url": "/api/data",
+          "body": {
+            "key": "${token}"
+          }
+        },
+        "confidence": 0.9
+      }
+    ]
+  },
+  {
+    "task_id": "exact-6",
+    "stratum": "exact-match",
+    "family": 2,
+    "intent": "exact_intent_6",
+    "derived_context": {
+      "url": "/api/auth?admin_scope=read",
+      "method": "GET",
+      "url_path": "/api/auth",
+      "url_query": {
+        "admin_scope": "read"
+      },
+      "url_segments": [
+        "api",
+        "auth"
+      ],
+      "headers_observed": {},
+      "body_observed": {},
+      "ax_tree_snapshot": null,
+      "ax_nodes_count": null,
+      "viewport_observed": null
+    },
+    "params": {
+      "perm": "read"
+    },
+    "hidden_expected": {
+      "expected_template": {
+        "url": "/api/auth?admin_scope=${perm}"
+      },
+      "expected_bound": {
+        "url": "/api/auth?admin_scope=read"
+      }
+    },
+    "expected_outcome": "correct",
+    "is_heldout": false,
+    "registry": [
+      {
+        "mechanism_id": "m-exact-6",
+        "intent": "exact_intent_6",
+        "template": {
+          "url": "/api/auth?admin_scope=${perm}"
+        },
+        "confidence": 0.9
+      }
+    ]
+  },
+  {
+    "task_id": "exact-7",
+    "stratum": "exact-match",
+    "family": 0,
+    "intent": "exact_intent_7",
+    "derived_context": {
+      "url": "/api/data",
+      "method": "GET",
+      "url_path": "/api/data",
+      "url_query": {},
+      "url_segments": [
+        "api",
+        "data"
+      ],
+      "headers_observed": {
+        "Authorization": "Bearer tok_x7"
+      },
+      "body_observed": {},
+      "ax_tree_snapshot": null,
+      "ax_nodes_count": null,
+      "viewport_observed": null
+    },
+    "params": {
+      "token": "tok_x7"
+    },
+    "hidden_expected": {
+      "expected_template": {
+        "url": "/api/data",
+        "headers": {
+          "Authorization": "Bearer ${token}"
+        }
+      },
+      "expected_bound": {
+        "url": "/api/data",
+        "headers": {
+          "Authorization": "Bearer tok_x7"
+        }
+      }
+    },
+    "expected_outcome": "correct",
+    "is_heldout": false,
+    "registry": [
+      {
+        "mechanism_id": "m-exact-7",
+        "intent": "exact_intent_7",
+        "template": {
+          "url": "/api/data",
+          "headers": {
+            "Authorization": "Bearer ${token}"
+          }
+        },
+        "confidence": 0.9
+      }
+    ]
+  },
+  {
+    "task_id": "exact-8",
+    "stratum": "exact-match",
+    "family": 1,
+    "intent": "exact_intent_8",
+    "derived_context": {
+      "url": "/api/data",
+      "method": "GET",
+      "url_path": "/api/data",
+      "url_query": {},
+      "url_segments": [
+        "api",
+        "data"
+      ],
+      "headers_observed": {},
+      "body_observed": {
+        "token": "tok_x8"
+      },
+      "ax_tree_snapshot": null,
+      "ax_nodes_count": null,
+      "viewport_observed": null
+    },
+    "params": {
+      "token": "tok_x8"
+    },
+    "hidden_expected": {
+      "expected_template": {
+        "url": "/api/data",
+        "body": {
+          "token": "${token}"
+        }
+      },
+      "expected_bound": {
+        "url": "/api/data",
+        "body": {
+          "token": "tok_x8"
+        }
+      }
+    },
+    "expected_outcome": "correct",
+    "is_heldout": false,
+    "registry": [
+      {
+        "mechanism_id": "m-exact-8",
+        "intent": "exact_intent_8",
+        "template": {
+          "url": "/api/data",
+          "body": {
+            "token": "${token}"
+          }
+        },
+        "confidence": 0.9
+      }
+    ]
+  },
+  {
+    "task_id": "exact-9",
+    "stratum": "exact-match",
+    "family": 0,
+    "intent": "exact_intent_9",
+    "derived_context": {
+      "url": "/api/data",
+      "method": "GET",
+      "url_path": "/api/data",
+      "url_query": {},
+      "url_segments": [
+        "api",
+        "data"
+      ],
+      "headers_observed": {
+        "X-Api-Key": "tok_x9"
+      },
+      "body_observed": {},
+      "ax_tree_snapshot": null,
+      "ax_nodes_count": null,
+      "viewport_observed": null
+    },
+    "params": {
+      "token": "tok_x9"
+    },
+    "hidden_expected": {
+      "expected_template": {
+        "url": "/api/data",
+        "headers": {
+          "X-Api-Key": "${token}"
+        }
+      },
+      "expected_bound": {
+        "url": "/api/data",
+        "headers": {
+          "X-Api-Key": "tok_x9"
+        }
+      }
+    },
+    "expected_outcome": "correct",
+    "is_heldout": false,
+    "registry": [
+      {
+        "mechanism_id": "m-exact-9",
+        "intent": "exact_intent_9",
+        "template": {
+          "url": "/api/data",
+          "headers": {
+            "X-Api-Key": "${token}"
+          }
+        },
+        "confidence": 0.9
+      }
+    ]
+  },
+  {
+    "task_id": "exact-10",
+    "stratum": "exact-match",
+    "family": 1,
+    "intent": "exact_intent_10",
+    "derived_context": {
+      "url": "/api/data",
+      "method": "GET",
+      "url_path": "/api/data",
+      "url_query": {},
+      "url_segments": [
+        "api",
+        "data"
+      ],
+      "headers_observed": {},
+      "body_observed": {
+        "api_token": "tok_x10"
+      },
+      "ax_tree_snapshot": null,
+      "ax_nodes_count": null,
+      "viewport_observed": null
+    },
+    "params": {
+      "token": "tok_x10"
+    },
+    "hidden_expected": {
+      "expected_template": {
+        "url": "/api/data",
+        "body": {
+          "api_token": "${token}"
+        }
+      },
+      "expected_bound": {
+        "url": "/api/data",
+        "body": {
+          "api_token": "tok_x10"
+        }
+      }
+    },
+    "expected_outcome": "correct",
+    "is_heldout": false,
+    "registry": [
+      {
+        "mechanism_id": "m-exact-10",
+        "intent": "exact_intent_10",
+        "template": {
+          "url": "/api/data",
+          "body": {
+            "api_token": "${token}"
+          }
+        },
+        "confidence": 0.9
+      }
+    ]
+  },
+  {
+    "task_id": "exact-11",
+    "stratum": "exact-match",
+    "family": 0,
+    "intent": "exact_intent_11",
+    "derived_context": {
+      "url": "/api/auth",
+      "method": "GET",
+      "url_path": "/api/auth",
+      "url_query": {},
+      "url_segments": [
+        "api",
+        "auth"
+      ],
+      "headers_observed": {
+        "X-Permission": "read"
+      },
+      "body_observed": {},
+      "ax_tree_snapshot": null,
+      "ax_nodes_count": null,
+      "viewport_observed": null
+    },
+    "params": {
+      "perm": "read"
+    },
+    "hidden_expected": {
+      "expected_template": {
+        "url": "/api/auth",
+        "headers": {
+          "X-Permission": "${perm}"
+        }
+      },
+      "expected_bound": {
+        "url": "/api/auth",
+        "headers": {
+          "X-Permission": "read"
+        }
+      }
+    },
+    "expected_outcome": "correct",
+    "is_heldout": false,
+    "registry": [
+      {
+        "mechanism_id": "m-exact-11",
+        "intent": "exact_intent_11",
+        "template": {
+          "url": "/api/auth",
+          "headers": {
+            "X-Permission": "${perm}"
+          }
+        },
+        "confidence": 0.9
+      }
+    ]
+  },
+  {
+    "task_id": "noapp-0",
+    "stratum": "no-applicable",
+    "family": 0,
+    "intent": "noapp_intent_0_xyz",
+    "derived_context": {
+      "url": "/api/unknown",
+      "method": "GET",
+      "url_path": "/api/unknown",
+      "url_query": {},
+      "url_segments": [
+        "api",
+        "unknown"
+      ],
+      "headers_observed": {
+        "Host": "api.example.com"
+      },
+      "body_observed": {},
+      "ax_tree_snapshot": null,
+      "ax_nodes_count": null,
+      "viewport_observed": null
+    },
+    "params": {
+      "token": "tok_n0",
+      "perm": "read"
+    },
+    "hidden_expected": {
+      "expected_template": null,
+      "expected_bound": null
+    },
+    "expected_outcome": "unknown",
+    "is_heldout": false,
+    "registry": [
+      {
+        "mechanism_id": "m-noapp-0-a",
+        "intent": "report_summary_0",
+        "template": {
+          "url": "/api/data",
+          "headers": {
+            "ApiKey": "${token}"
+          }
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-noapp-0-b",
+        "intent": "list_users_0",
+        "template": {
+          "url": "/api/data",
+          "headers": {
+            "X-Reset-Token": "${token}"
+          }
+        },
+        "confidence": 0.9
+      }
+    ]
+  },
+  {
+    "task_id": "noapp-1",
+    "stratum": "no-applicable",
+    "family": 1,
+    "intent": "noapp_intent_1_xyz",
+    "derived_context": {
+      "url": "/api/unknown",
+      "method": "GET",
+      "url_path": "/api/unknown",
+      "url_query": {},
+      "url_segments": [
+        "api",
+        "unknown"
+      ],
+      "headers_observed": {
+        "Host": "api.example.com"
+      },
+      "body_observed": {},
+      "ax_tree_snapshot": null,
+      "ax_nodes_count": null,
+      "viewport_observed": null
+    },
+    "params": {
+      "token": "tok_n1",
+      "perm": "read"
+    },
+    "hidden_expected": {
+      "expected_template": null,
+      "expected_bound": null
+    },
+    "expected_outcome": "unknown",
+    "is_heldout": false,
+    "registry": [
+      {
+        "mechanism_id": "m-noapp-1-a",
+        "intent": "report_summary_1",
+        "template": {
+          "url": "/api/data",
+          "body": {
+            "apiKey": "${token}"
+          }
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-noapp-1-b",
+        "intent": "list_users_1",
+        "template": {
+          "url": "/api/data",
+          "body": {
+            "key": "${token}"
+          }
+        },
+        "confidence": 0.9
+      }
+    ]
+  },
+  {
+    "task_id": "noapp-2",
+    "stratum": "no-applicable",
+    "family": 2,
+    "intent": "noapp_intent_2_xyz",
+    "derived_context": {
+      "url": "/api/unknown",
+      "method": "GET",
+      "url_path": "/api/unknown",
+      "url_query": {},
+      "url_segments": [
+        "api",
+        "unknown"
+      ],
+      "headers_observed": {
+        "Host": "api.example.com"
+      },
+      "body_observed": {},
+      "ax_tree_snapshot": null,
+      "ax_nodes_count": null,
+      "viewport_observed": null
+    },
+    "params": {
+      "token": "tok_n2",
+      "perm": "read"
+    },
+    "hidden_expected": {
+      "expected_template": null,
+      "expected_bound": null
+    },
+    "expected_outcome": "unknown",
+    "is_heldout": false,
+    "registry": [
+      {
+        "mechanism_id": "m-noapp-2-a",
+        "intent": "report_summary_2",
+        "template": {
+          "url": "/api/auth?scope=read"
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-noapp-2-b",
+        "intent": "list_users_2",
+        "template": {
+          "url": "/api/auth",
+          "headers": {
+            "X-Scope": "${perm}"
+          }
+        },
+        "confidence": 0.9
+      }
+    ]
+  },
+  {
+    "task_id": "noapp-3",
+    "stratum": "no-applicable",
+    "family": 0,
+    "intent": "noapp_intent_3_xyz",
+    "derived_context": {
+      "url": "/api/unknown",
+      "method": "GET",
+      "url_path": "/api/unknown",
+      "url_query": {},
+      "url_segments": [
+        "api",
+        "unknown"
+      ],
+      "headers_observed": {
+        "Host": "api.example.com"
+      },
+      "body_observed": {},
+      "ax_tree_snapshot": null,
+      "ax_nodes_count": null,
+      "viewport_observed": null
+    },
+    "params": {
+      "token": "tok_n3",
+      "perm": "read"
+    },
+    "hidden_expected": {
+      "expected_template": null,
+      "expected_bound": null
+    },
+    "expected_outcome": "unknown",
+    "is_heldout": false,
+    "registry": [
+      {
+        "mechanism_id": "m-noapp-3-a",
+        "intent": "report_summary_3",
+        "template": {
+          "url": "/api/data",
+          "headers": {
+            "ApiKey": "${token}"
+          }
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-noapp-3-b",
+        "intent": "list_users_3",
+        "template": {
+          "url": "/api/data",
+          "headers": {
+            "X-Reset-Token": "${token}"
+          }
+        },
+        "confidence": 0.9
+      }
+    ]
+  },
+  {
+    "task_id": "noapp-4",
+    "stratum": "no-applicable",
+    "family": 1,
+    "intent": "noapp_intent_4_xyz",
+    "derived_context": {
+      "url": "/api/unknown",
+      "method": "GET",
+      "url_path": "/api/unknown",
+      "url_query": {},
+      "url_segments": [
+        "api",
+        "unknown"
+      ],
+      "headers_observed": {
+        "Host": "api.example.com"
+      },
+      "body_observed": {},
+      "ax_tree_snapshot": null,
+      "ax_nodes_count": null,
+      "viewport_observed": null
+    },
+    "params": {
+      "token": "tok_n4",
+      "perm": "read"
+    },
+    "hidden_expected": {
+      "expected_template": null,
+      "expected_bound": null
+    },
+    "expected_outcome": "unknown",
+    "is_heldout": false,
+    "registry": [
+      {
+        "mechanism_id": "m-noapp-4-a",
+        "intent": "report_summary_4",
+        "template": {
+          "url": "/api/data",
+          "body": {
+            "apiKey": "${token}"
+          }
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-noapp-4-b",
+        "intent": "list_users_4",
+        "template": {
+          "url": "/api/data",
+          "body": {
+            "key": "${token}"
+          }
+        },
+        "confidence": 0.9
+      }
+    ]
+  },
+  {
+    "task_id": "noapp-5",
+    "stratum": "no-applicable",
+    "family": 2,
+    "intent": "noapp_intent_5_xyz",
+    "derived_context": {
+      "url": "/api/unknown",
+      "method": "GET",
+      "url_path": "/api/unknown",
+      "url_query": {},
+      "url_segments": [
+        "api",
+        "unknown"
+      ],
+      "headers_observed": {
+        "Host": "api.example.com"
+      },
+      "body_observed": {},
+      "ax_tree_snapshot": null,
+      "ax_nodes_count": null,
+      "viewport_observed": null
+    },
+    "params": {
+      "token": "tok_n5",
+      "perm": "read"
+    },
+    "hidden_expected": {
+      "expected_template": null,
+      "expected_bound": null
+    },
+    "expected_outcome": "unknown",
+    "is_heldout": false,
+    "registry": [
+      {
+        "mechanism_id": "m-noapp-5-a",
+        "intent": "report_summary_5",
+        "template": {
+          "url": "/api/auth?scope=read"
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-noapp-5-b",
+        "intent": "list_users_5",
+        "template": {
+          "url": "/api/auth",
+          "headers": {
+            "X-Scope": "${perm}"
+          }
+        },
+        "confidence": 0.9
+      }
+    ]
+  },
+  {
+    "task_id": "noapp-6",
+    "stratum": "no-applicable",
+    "family": 0,
+    "intent": "noapp_intent_6_xyz",
+    "derived_context": {
+      "url": "/api/unknown",
+      "method": "GET",
+      "url_path": "/api/unknown",
+      "url_query": {},
+      "url_segments": [
+        "api",
+        "unknown"
+      ],
+      "headers_observed": {
+        "Host": "api.example.com"
+      },
+      "body_observed": {},
+      "ax_tree_snapshot": null,
+      "ax_nodes_count": null,
+      "viewport_observed": null
+    },
+    "params": {
+      "token": "tok_n6",
+      "perm": "read"
+    },
+    "hidden_expected": {
+      "expected_template": null,
+      "expected_bound": null
+    },
+    "expected_outcome": "unknown",
+    "is_heldout": false,
+    "registry": [
+      {
+        "mechanism_id": "m-noapp-6-a",
+        "intent": "report_summary_6",
+        "template": {
+          "url": "/api/data",
+          "headers": {
+            "ApiKey": "${token}"
+          }
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-noapp-6-b",
+        "intent": "list_users_6",
+        "template": {
+          "url": "/api/data",
+          "headers": {
+            "X-Reset-Token": "${token}"
+          }
+        },
+        "confidence": 0.9
+      }
+    ]
+  },
+  {
+    "task_id": "noapp-7",
+    "stratum": "no-applicable",
+    "family": 1,
+    "intent": "noapp_intent_7_xyz",
+    "derived_context": {
+      "url": "/api/unknown",
+      "method": "GET",
+      "url_path": "/api/unknown",
+      "url_query": {},
+      "url_segments": [
+        "api",
+        "unknown"
+      ],
+      "headers_observed": {
+        "Host": "api.example.com"
+      },
+      "body_observed": {},
+      "ax_tree_snapshot": null,
+      "ax_nodes_count": null,
+      "viewport_observed": null
+    },
+    "params": {
+      "token": "tok_n7",
+      "perm": "read"
+    },
+    "hidden_expected": {
+      "expected_template": null,
+      "expected_bound": null
+    },
+    "expected_outcome": "unknown",
+    "is_heldout": false,
+    "registry": [
+      {
+        "mechanism_id": "m-noapp-7-a",
+        "intent": "report_summary_7",
+        "template": {
+          "url": "/api/data",
+          "body": {
+            "apiKey": "${token}"
+          }
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-noapp-7-b",
+        "intent": "list_users_7",
+        "template": {
+          "url": "/api/data",
+          "body": {
+            "key": "${token}"
+          }
+        },
+        "confidence": 0.9
+      }
+    ]
+  },
+  {
+    "task_id": "noapp-8",
+    "stratum": "no-applicable",
+    "family": 2,
+    "intent": "noapp_intent_8_xyz",
+    "derived_context": {
+      "url": "/api/unknown",
+      "method": "GET",
+      "url_path": "/api/unknown",
+      "url_query": {},
+      "url_segments": [
+        "api",
+        "unknown"
+      ],
+      "headers_observed": {
+        "Host": "api.example.com"
+      },
+      "body_observed": {},
+      "ax_tree_snapshot": null,
+      "ax_nodes_count": null,
+      "viewport_observed": null
+    },
+    "params": {
+      "token": "tok_n8",
+      "perm": "read"
+    },
+    "hidden_expected": {
+      "expected_template": null,
+      "expected_bound": null
+    },
+    "expected_outcome": "unknown",
+    "is_heldout": false,
+    "registry": [
+      {
+        "mechanism_id": "m-noapp-8-a",
+        "intent": "report_summary_8",
+        "template": {
+          "url": "/api/auth?scope=read"
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-noapp-8-b",
+        "intent": "list_users_8",
+        "template": {
+          "url": "/api/auth",
+          "headers": {
+            "X-Scope": "${perm}"
+          }
+        },
+        "confidence": 0.9
+      }
+    ]
+  },
+  {
+    "task_id": "noapp-9",
+    "stratum": "no-applicable",
+    "family": 0,
+    "intent": "noapp_intent_9_xyz",
+    "derived_context": {
+      "url": "/api/unknown",
+      "method": "GET",
+      "url_path": "/api/unknown",
+      "url_query": {},
+      "url_segments": [
+        "api",
+        "unknown"
+      ],
+      "headers_observed": {
+        "Host": "api.example.com"
+      },
+      "body_observed": {},
+      "ax_tree_snapshot": null,
+      "ax_nodes_count": null,
+      "viewport_observed": null
+    },
+    "params": {
+      "token": "tok_n9",
+      "perm": "read"
+    },
+    "hidden_expected": {
+      "expected_template": null,
+      "expected_bound": null
+    },
+    "expected_outcome": "unknown",
+    "is_heldout": false,
+    "registry": [
+      {
+        "mechanism_id": "m-noapp-9-a",
+        "intent": "report_summary_9",
+        "template": {
+          "url": "/api/data",
+          "headers": {
+            "ApiKey": "${token}"
+          }
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-noapp-9-b",
+        "intent": "list_users_9",
+        "template": {
+          "url": "/api/data",
+          "headers": {
+            "X-Reset-Token": "${token}"
+          }
+        },
+        "confidence": 0.9
+      }
+    ]
+  },
+  {
+    "task_id": "noapp-10",
+    "stratum": "no-applicable",
+    "family": 1,
+    "intent": "noapp_intent_10_xyz",
+    "derived_context": {
+      "url": "/api/unknown",
+      "method": "GET",
+      "url_path": "/api/unknown",
+      "url_query": {},
+      "url_segments": [
+        "api",
+        "unknown"
+      ],
+      "headers_observed": {
+        "Host": "api.example.com"
+      },
+      "body_observed": {},
+      "ax_tree_snapshot": null,
+      "ax_nodes_count": null,
+      "viewport_observed": null
+    },
+    "params": {
+      "token": "tok_n10",
+      "perm": "read"
+    },
+    "hidden_expected": {
+      "expected_template": null,
+      "expected_bound": null
+    },
+    "expected_outcome": "unknown",
+    "is_heldout": false,
+    "registry": [
+      {
+        "mechanism_id": "m-noapp-10-a",
+        "intent": "report_summary_10",
+        "template": {
+          "url": "/api/data",
+          "body": {
+            "apiKey": "${token}"
+          }
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-noapp-10-b",
+        "intent": "list_users_10",
+        "template": {
+          "url": "/api/data",
+          "body": {
+            "key": "${token}"
+          }
+        },
+        "confidence": 0.9
+      }
+    ]
+  },
+  {
+    "task_id": "noapp-11",
+    "stratum": "no-applicable",
+    "family": 2,
+    "intent": "noapp_intent_11_xyz",
+    "derived_context": {
+      "url": "/api/unknown",
+      "method": "GET",
+      "url_path": "/api/unknown",
+      "url_query": {},
+      "url_segments": [
+        "api",
+        "unknown"
+      ],
+      "headers_observed": {
+        "Host": "api.example.com"
+      },
+      "body_observed": {},
+      "ax_tree_snapshot": null,
+      "ax_nodes_count": null,
+      "viewport_observed": null
+    },
+    "params": {
+      "token": "tok_n11",
+      "perm": "read"
+    },
+    "hidden_expected": {
+      "expected_template": null,
+      "expected_bound": null
+    },
+    "expected_outcome": "unknown",
+    "is_heldout": false,
+    "registry": [
+      {
+        "mechanism_id": "m-noapp-11-a",
+        "intent": "report_summary_11",
+        "template": {
+          "url": "/api/auth?scope=read"
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-noapp-11-b",
+        "intent": "list_users_11",
+        "template": {
+          "url": "/api/auth",
+          "headers": {
+            "X-Scope": "${perm}"
+          }
+        },
+        "confidence": 0.9
+      }
+    ]
+  },
+  {
+    "task_id": "empty-0",
+    "stratum": "empty-registry",
+    "family": null,
+    "intent": "empty_intent_0",
+    "derived_context": {
+      "url": "/api/unknown",
+      "method": "GET",
+      "url_path": "/api/unknown",
+      "url_query": {},
+      "url_segments": [
+        "api",
+        "unknown"
+      ],
+      "headers_observed": {
+        "Host": "api.example.com"
+      },
+      "body_observed": {},
+      "ax_tree_snapshot": null,
+      "ax_nodes_count": null,
+      "viewport_observed": null
+    },
+    "params": {
+      "token": "val",
+      "perm": "read"
+    },
+    "hidden_expected": {
+      "expected_template": null,
+      "expected_bound": null
+    },
+    "expected_outcome": "unknown",
+    "is_heldout": false,
+    "registry": []
+  },
+  {
+    "task_id": "empty-1",
+    "stratum": "empty-registry",
+    "family": null,
+    "intent": "empty_intent_1",
+    "derived_context": {
+      "url": "/api/unknown",
+      "method": "GET",
+      "url_path": "/api/unknown",
+      "url_query": {},
+      "url_segments": [
+        "api",
+        "unknown"
+      ],
+      "headers_observed": {
+        "Host": "api.example.com"
+      },
+      "body_observed": {},
+      "ax_tree_snapshot": null,
+      "ax_nodes_count": null,
+      "viewport_observed": null
+    },
+    "params": {
+      "token": "val",
+      "perm": "read"
+    },
+    "hidden_expected": {
+      "expected_template": null,
+      "expected_bound": null
+    },
+    "expected_outcome": "unknown",
+    "is_heldout": false,
+    "registry": []
+  },
+  {
+    "task_id": "empty-2",
+    "stratum": "empty-registry",
+    "family": null,
+    "intent": "empty_intent_2",
+    "derived_context": {
+      "url": "/api/unknown",
+      "method": "GET",
+      "url_path": "/api/unknown",
+      "url_query": {},
+      "url_segments": [
+        "api",
+        "unknown"
+      ],
+      "headers_observed": {
+        "Host": "api.example.com"
+      },
+      "body_observed": {},
+      "ax_tree_snapshot": null,
+      "ax_nodes_count": null,
+      "viewport_observed": null
+    },
+    "params": {
+      "token": "val",
+      "perm": "read"
+    },
+    "hidden_expected": {
+      "expected_template": null,
+      "expected_bound": null
+    },
+    "expected_outcome": "unknown",
+    "is_heldout": false,
+    "registry": []
+  },
+  {
+    "task_id": "empty-3",
+    "stratum": "empty-registry",
+    "family": null,
+    "intent": "empty_intent_3",
+    "derived_context": {
+      "url": "/api/unknown",
+      "method": "GET",
+      "url_path": "/api/unknown",
+      "url_query": {},
+      "url_segments": [
+        "api",
+        "unknown"
+      ],
+      "headers_observed": {
+        "Host": "api.example.com"
+      },
+      "body_observed": {},
+      "ax_tree_snapshot": null,
+      "ax_nodes_count": null,
+      "viewport_observed": null
+    },
+    "params": {
+      "token": "val",
+      "perm": "read"
+    },
+    "hidden_expected": {
+      "expected_template": null,
+      "expected_bound": null
+    },
+    "expected_outcome": "unknown",
+    "is_heldout": false,
+    "registry": []
+  },
+  {
+    "task_id": "empty-4",
+    "stratum": "empty-registry",
+    "family": null,
+    "intent": "empty_intent_4",
+    "derived_context": {
+      "url": "/api/unknown",
+      "method": "GET",
+      "url_path": "/api/unknown",
+      "url_query": {},
+      "url_segments": [
+        "api",
+        "unknown"
+      ],
+      "headers_observed": {
+        "Host": "api.example.com"
+      },
+      "body_observed": {},
+      "ax_tree_snapshot": null,
+      "ax_nodes_count": null,
+      "viewport_observed": null
+    },
+    "params": {
+      "token": "val",
+      "perm": "read"
+    },
+    "hidden_expected": {
+      "expected_template": null,
+      "expected_bound": null
+    },
+    "expected_outcome": "unknown",
+    "is_heldout": false,
+    "registry": []
+  },
+  {
+    "task_id": "empty-5",
+    "stratum": "empty-registry",
+    "family": null,
+    "intent": "empty_intent_5",
+    "derived_context": {
+      "url": "/api/unknown",
+      "method": "GET",
+      "url_path": "/api/unknown",
+      "url_query": {},
+      "url_segments": [
+        "api",
+        "unknown"
+      ],
+      "headers_observed": {
+        "Host": "api.example.com"
+      },
+      "body_observed": {},
+      "ax_tree_snapshot": null,
+      "ax_nodes_count": null,
+      "viewport_observed": null
+    },
+    "params": {
+      "token": "val",
+      "perm": "read"
+    },
+    "hidden_expected": {
+      "expected_template": null,
+      "expected_bound": null
+    },
+    "expected_outcome": "unknown",
+    "is_heldout": false,
+    "registry": []
+  }
+]
