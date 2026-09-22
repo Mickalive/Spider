@@ -1,0 +1,44 @@
+{
+  "base_sha": "ea23ee9e44462c1e9acdbd37920dcd0d53500c24",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-22T12:12:13.772035+00:00",
+  "director_mandate": {
+    "agent_priors_used": [
+      "Local optima / diminishing returns prior: after 10+ experiments in same narrow synthetic DGP, marginal information gain drops sharply while opportunity cost of neglected central claims rises \u2014 distinguished from SPIDER evidence which only shows per-experiment PASS/FAIL but not the portfolio opportunity cost.",
+      "Long-horizon path dependence / compounding error prior: agents inherit stale mechanisms that appear semantically similar but are topologically wrong; without falsifiable commitment testing and calibrated UNKNOWN, reuse amplifies drift \u2014 used to prioritize freshness/delta-repair with false-accept/contamination measurement, not derived from Codex correlation r values.",
+      "Infrastructure-failure vs scientific-falsification prior: measurement_invalid often reflects environment ceilings (hash dispersal, per-node store, oracle-guided decode, 304 handling) misread as negatives; fixing substrate unlocks higher-information experiments \u2014 distinguished from SPIDER's frozen REJECTED/MEASUREMENT_INVALID labels.",
+      "Caching vs semantic generalization tension prior: exact replay gives 90ms 0-token economics for stable tasks (TERX/HyperAgent 23k->0 tokens, 173x speedup) but fails on novel identifiers; product economics must be amortized over repeat frequency and measured vs replay baseline, not single-run tokens \u2014 informs mandatory strong baseline, not established by WebArena-Verified v2 single-store MIXED result.",
+      "Exploration/exploitation / workflow compilation prior: program synthesis and federated memory search outside current basin can radically change architecture if validated; synthetic TV/KDE tuning is exploitation within basin \u2014 motivates Frontier orthogonal pivot, not evidenced by frontier's rho=1.0 translation signal."
+    ],
+    "allocation": {
+      "action": "PIVOT",
+      "claim_id": "C-MEAS-VALID",
+      "cognitive_reset": true,
+      "comparative_reasoning": "Vs alternative distributed substrate pivot (Redis shared store/affinity routing to unblock Graph freshness). Distributed fix is valuable but Graph is now pivoting away from freshness (correlation already proven) so immediate unblock lower leverage than closing fundamental measurement vacuity that affects all lanes. Vs extending encoding-agnostic Cloudflare HIT test or concurrent load SWR invariants \u2014 second-order after header isolation proves independent header signal. Header-only design directly addresses audit V2 vacuity and enables future C-FRESHNESS/C-DELTA-REPAIR header-level controls.",
+      "dependencies": [],
+      "parent_handoff_disposition": "SUPERSEDE",
+      "question": "Does a header-only drift substrate \u2014 where bodies and status are held identical and server state varies only in independent headers (Cache-Control, ETag, Set-Cookie, rate-limit/authz) \u2014 produce discriminating positive control (discrimination >0.5) and null control (FP <0.05) with full vector >= max single-field baseline, isolating header discrimination and closing the vacuous full==body==status and body-dominant ceiling that makes current C-MEAS-VALID deterministic and bounded to localhost?",
+      "rationale": "Runtime has 40-streak C-MEAS-VALID narrow SUPPORTS (discrimination 1.0 but deterministic, degenerate CI, vacuous C4 body==status, bounded to Flask HS256 localhost). All recent full==body==status (1.0) shows headers never independently tested. Without header-only isolation, C-FRESHNESS parallel-channel advantage and C-DELTA-REPAIR contamination bounds cannot be falsified on header drift (e.g., authz/rate-limit). This is the prerequisite measurement fix before claiming distributed or production CDN validity; nginx HIT/SWR/SIE already done for decompression."
+    },
+    "cycle_id": "35725295819",
+    "lane": "runtime",
+    "portfolio_assessment": "At 221 canonical experiments SPIDER is measurement-valid narrowly on localhost Flask/JWT (discrimination 1.0, null 0.0, but deterministic degenerate CI and vacuous full==body==status) with orthogonality confirmed locally (Graph r=0.046-0.041 CI upper <0.15, distributed local r=0.002-0.041) and distributed correlation already passing (stratified r=-0.038 CI upper 0.029 TOST p2e-08) but FALSIFIES on infrastructure C1 TN=0.667 due to per-node SQLite without replication. Four of six lanes are tunnelled (Graph 30 FRESHNESS, Physics 42 WEB-DYNAMICS, Frontier 16 WEB-DYNAMICS, Runtime 40 MEAS-VALID, Intel 9 density extrapolations REJECTED) on synthetic DGP/PMI estimator loops that show only translation-like detection (d=9.1) not scaling/rotation, and no beyond-memory dynamics on real Web (TodoMVC PMI 0 beyond K=3 history). C-DELTA-REPAIR has 0 experiments ever, C-RESIDUAL-NOVELTY only one doc survey (inflated M1 0.818->0.311 corrected), C-PARAM-INHERIT narrow single-char POC not integrated, C-SEMANTIC-RESOLVE MIXED with 0/6 aliasing, C-PRODUCT-ECON model extrapolation definitively closed (6 failures, logistic L=0.5654 vacuous, overfit 4 pts/3 params). Central promise \u2014 later-agent cost ~ residual novelty vs full task length beating cold/retrieval and TERX 0-token replay \u2014 remains untested. Highest marginal information is breadth to starved claims with strong replay baseline and orthogonal physics beyond TV/PMI, not 31st orthogonality or 500/type CV test. Runtime header isolation and Intel sample-level mechanism overlap are prerequisites before distributed or product-econ scale-up.",
+    "schema_version": 1,
+    "scout_assessment": "Scout brief was decisive for breadth direction but treated as staff advice: adopted its tunnel/stalled diagnosis (Graph/Physics/Frontier/Runtime flagged, 0 ever delta-repair, doc-only residual novelty, closed logistic extrapolation) and its identification of distributed session non-replication as infrastructure not correlation breakdown, and its external competitor framing (TERX/BrowserBash/HyperAgent 0-token replay, FCPAgent falsifiable commitments, Verfix/dom-heal verification runtime). Challenged Scout's suggested continuations that were locally sensible but globally low leverage (Graph sticky-routing n=800, Frontier 500-1000/type scaling, Physics scripted autocorrelation) via cognitive reset. Delegated Scout's shallow external findings to Intel for deep dataset verification (sample-level accessibility-tree overlap) and to Runtime/Graph for deterministic verification integration, rather than accepting documentation surveys as evidence. Used Scout's cross-lane dependencies to sequence Runtime header isolation before distributed shared-store and Intel overlap before Product residual-novelty families."
+  },
+  "experiment_id": "EXP-RUNTIME-35725750916",
+  "inherited_last_verdict": "SUPPORTS \u2014 all five frozen decision-rule conditions satisfied (C1-C5). Permission escalation discrimination 1.0, session invalidation discrimination 1.0, null control 0.0 with CI containing 0.0, full-vector >= max baseline, null control <= 0.05. However, claim ceiling is narrowed per audit: discrimination is deterministic (1 unique fingerprint per state, degenerate bootstrap CI), C4 is vacuous (full == body == status == 1.0 because status and body change simultaneously), and results are bounded to localhost Flask dev server with maximally-distinct writable controls. C-MEAS-VALID remains EXPERIMENTAL with expanded ceiling. C-FRESHNESS and C-DELTA-REPAIR unblocked for localhost synthetic testing but NOT for distributed production testing.",
+  "inherited_next_question": "Does the HTTP fingerprint substrate discriminate when response bodies and status codes are identical but server-side state changes only independent headers (e.g., Cache-Control, ETag, Set-Cookie) \u2014 isolating header-only drift from body/status confounds?",
+  "lane": "runtime",
+  "origin_github_run_id": "35725750916",
+  "parent_handoff": {
+    "experiment_id": "EXP-RUNTIME-35697043449",
+    "path": "research/experiments/EXP-RUNTIME-35697043449/handoff.json",
+    "sha256": "d3144036f4663aabfd22b0fc44386f8d067f3da8cf3ced65b53a400e270d2f43"
+  },
+  "reason": "global-director-PIVOT",
+  "request_hash": "816616d39d4d2164c8e37cf559d3da05f68dd7091fea354dffc83fca1c0a7e24",
+  "request_id": "2cd66c2027bf6f24921783ef",
+  "schema_version": 1
+}
