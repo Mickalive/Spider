@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-35741898214",
+  "lane": "physics",
+  "decision": "MEASUREMENT_INVALID",
+  "claim_updates": [
+    {
+      "claim_id": "C-CROSSSITE",
+      "status": "MEASUREMENT_INVALID",
+      "reason": "MEASUREMENT_INVALID per frozen spec.json falsifier and prereg Decision Rule: required substrate unavailable. Mind2Web HF revision 17ece8eb89862368edc0cc806acee6fca5163474 provides only train (1009 tasks, 73 websites) vs required train/test_website/test_domain; web-arena/web-arena-verified returns 404 on HF/GitHub. Audit PASS (status MEASUREMENT_INVALID, producer_claim_supported=false, V1 critical) independently recomputed load_dataset train ok 1009 test_website ValueError Unknown split. All six controls correctly UNKNOWN (not fabricated) per audit V5. Proxy 100-shuffle website-label null is degenerate mean 1.0 p95 1.0 std 0.0 (audit V2) confirming holdout overlap cannot be estimated without official splits — correctly not used for decision. Target integrity (clean task+action text only, leakage_tokens_in_top100=[]) verified per V3, k=50 definition and cluster validity (50 clusters max fraction 0.107 <0.40 no collapse) per V4, synthetic 60/40 shuffle correctly refused per V7. No delta, p, overlap_observed for C1/C2/C3 is valid. Infrastructure failure is not falsification; C-CROSSSITE remains HYPOTHESIS bounded to census-level reuse."
+    }
+  ],
+  "product_action": "none",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "Can the official Mind2Web train/test_website/test_domain splits and WebArena-Verified v2 family data be recovered from alternative sources (author backup, alternate HF revision/archived parquet, Docker/GitHub raw dumps) to enable the spec-compliant TF-IDF->k-means train-only holdout test for C-CROSSSITE (delta>=0.10 vs 1000 website-label shuffles, k/2 and 2k sensitivity, PC/NC controls), or must an alternative website-holdout corpus be adopted?",
+  "reason": "Grounded in exact upstream evidence: result.json status MEASUREMENT_INVALID outcome NOT_APPLICABLE with metrics dataset_revision 17ece8eb..., n_train 1009, k 50 vocab 1655, null mean 1.0 p95 1.0 degenerate, all controls UNKNOWN; audit.json status MEASUREMENT_INVALID producer_claim_supported false with V1 split_integrity correctly triggers MEASUREMENT_INVALID (official splits unavailable), V2 degenerate proxy null confirms environment cannot express effect, V3 target integrity verified, V4 k/cluster validity correct, V5 controls correctly UNKNOWN, V6 provenance hashes matching, V7 synthetic shuffle correctly avoided, claim_ceiling bounds to operational pipeline only with no C-CROSSSITE inference; provenance.json datasets osunlp/Mind2Web INCOMPLETE 73 websites and web-arena/web-arena-verified NOT_FOUND 404, plus independent recomputation load_dataset test_website Unknown split. Per frozen spec falsifier MEASUREMENT_INVALID if official splits unavailable or cross-store invoked on single-store v2, and prereg 'If HF lacks 3-way splits record MEASUREMENT_INVALID'. No evidence accumulated for or against C-CROSSSITE; do not promote to product. Next step requires substrate recovery, not another PMI/TV tuning, consistent with Director PIVOT rationale (PIVOT to true website holdout next_gate) and portfolio tunneling diagnosis.",
+  "evidence_refs": [
+    "research/experiments/EXP-PHYSICS-35741898214/request.json: director_mandate PIVOT C-CROSSSITE question true website-holdout TF-IDF k-means train-only 1000 shuffles",
+    "research/experiments/EXP-PHYSICS-35741898214/spec.json: claim_ids C-CROSSSITE hypothesis delta>=0.10 falsifier MEASUREMENT_INVALID if official splits unavailable, k min(50, unique/20)",
+    "research/experiments/EXP-PHYSICS-35741898214/prereg.md: H1 operational TF-IDF->KMeans train-only, overlap |C_train cap C_test|/|C_test|, null 1000 shuffles, Decision Rule C1 C2 C3 PC NC SENS, MEASUREMENT_INVALID if splits unavailable",
+    "research/experiments/EXP-PHYSICS-35741898214/freeze.json: frozen_at 2026-09-22T14:44:05 hashes prereg 9b9bc... spec 695672... request 9c6577...",
+    "research/experiments/EXP-PHYSICS-35741898214/result.json: status MEASUREMENT_INVALID outcome NOT_APPLICABLE metrics dataset_revision 17ece8eb89862368edc0cc806acee6fca5163474 available_splits [train] k 50 vocab 1655 null mean 1.0 p95 1.0 std 0.0 controls all UNKNOWN observations 8 validity_notes 7 unresolved 5",
+    "research/experiments/EXP-PHYSICS-35741898214/audit.json: status MEASUREMENT_INVALID producer_claim_supported false validity_findings V1 split_integrity critical V2 degenerate null high V3 target integrity info V4 k validity info V5 controls UNKNOWN info V7 synthetic avoided info recomputed_metrics all match claim_ceiling no C-CROSSSITE inference",
+    "research/experiments/EXP-PHYSICS-35741898214/provenance.json: datasets osunlp/Mind2Web INCOMPLETE train only 1009 tasks 73 websites revision 17ece8... web-arena/web-arena-verified NOT_FOUND 404 environment sklearn 1.9.1 datasets 5.0.1",
+    "research/experiments/EXP-PHYSICS-35741898214/pipeline_results.json: n_train 1009 k 50 k_half 25 k_double 100 tfidf vocab 1655 50 clusters max fraction 0.107 collapse false leakage [] null mean 1.0 p95 1.0 std 0.0 n_valid 100",
+    "research/experiments/EXP-PHYSICS-35741898214/report.md: Status MEASUREMENT_INVALID dataset unavailability table pipeline verification",
+    "codex/claim_state.json: C-CROSSSITE HYPOTHESIS after EXP-INTEL-35697055679 MIXED vacuous single store and EXP-INTEL-35725763380 REVISE 73/3 vs spec 137/31 non-compliant",
+    "research/claims/registry.json: C-CROSSSITE status HYPOTHESIS next_gate true website holdout without site identity leakage"
+  ]
+}
