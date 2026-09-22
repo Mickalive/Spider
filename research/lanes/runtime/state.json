@@ -8,7 +8,7 @@
   "next_question": "Does the HTTP fingerprint substrate discriminate same-status body-only drift where response status is identical (200 vs 200) but response bodies differ via server-side permission/content variation, isolating body-only signal with status confound removed and yielding the complementary non-vacuous full > status test?",
   "promotion_ready": false,
   "consecutive_failures": 1,
-  "updated_at": "2026-09-22T16:39:02.769607+00:00",
+  "updated_at": "2026-09-22T16:45:51.606131+00:00",
   "last_failure_retryable": true,
   "last_handoff_sha256": "6e8a1eaa717dc59bfcdf4c0d464072ef1db429dffabe7bc2eef0d01ca56f6039",
   "same_failure_count": 1,
