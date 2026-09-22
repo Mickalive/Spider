@@ -1,0 +1,120 @@
+{
+  "mean": 1.0,
+  "ci_lower": 1.0,
+  "ci_upper": 1.0,
+  "per_family": {
+    "145": 1,
+    "196": 1,
+    "153": 1,
+    "138": 1,
+    "136": 1,
+    "147": 1,
+    "139": 1,
+    "222": 1,
+    "101": 1,
+    "137": 1
+  },
+  "per_family_details": {
+    "145": {
+      "patterns": [
+        "generic:unnamed|tablist:unnamed|generic:unnamed|link:Skip to Content|generic:unnamed|tabpanel:unnamed|listitem:unnamed|listitem:unnamed|generic:unnamed|generic:unnamed|generic:unnamed|generic:unnamed|generic:unnamed|generic:unnamed|generic:unnamed|generic:unnamed|generic:unnamed|generic:unnamed|tablist:unnamed|generic:unnamed",
+        "generic:unnamed|tablist:unnamed|generic:unnamed|link:Skip to Content|generic:unnamed|tabpanel:unnamed|listitem:unnamed|listitem:unnamed|generic:unnamed|generic:unnamed|generic:unnamed|generic:unnamed|generic:unnamed|generic:unnamed|generic:unnamed|generic:unnamed|generic:unnamed|generic:unnamed|tablist:unnamed|generic:unnamed"
+      ],
+      "lcp": "generic:unnamed|tablist:unnamed|generic:unnamed|link:Skip to Content|generic:unnamed|tabpanel:unnamed|listitem:unnamed|listitem:unnamed|generic:unnamed|generic:unnamed|generic:unnamed|generic:unnamed|generic:unnamed|generic:unnamed|generic:unnamed|generic:unnamed|generic:unnamed|generic:unnamed|tablist:unnamed|generic:unnamed",
+      "lcp_tokens": 20,
+      "score": 1
+    },
+    "196": {
+      "patterns": [
+        "generic:unnamed|tablist:unnamed|generic:unnamed|link:Skip to Content|generic:unnamed|tabpanel:unnamed|listitem:unnamed|listitem:unnamed|generic:unnamed|generic:unnamed|generic:unnamed|generic:unnamed|generic:unnamed|generic:unnamed|generic:unnamed|generic:unnamed|generic:unnamed|generic:unnamed|tablist:unnamed|generic:unnamed",
+        "generic:unnamed|tablist:unnamed|generic:unnamed|link:Skip to Content|generic:unnamed|tabpanel:unnamed|listitem:unnamed|listitem:unnamed|generic:unnamed|generic:unnamed|generic:unnamed|generic:unnamed|generic:unnamed|generic:unnamed|generic:unnamed|generic:unnamed|generic:unnamed|generic:unnamed|tablist:unnamed|generic:unnamed"
+      ],
+      "lcp": "generic:unnamed|tablist:unnamed|generic:unnamed|link:Skip to Content|generic:unnamed|tabpanel:unnamed|listitem:unnamed|listitem:unnamed|generic:unnamed|generic:unnamed|generic:unnamed|generic:unnamed|generic:unnamed|generic:unnamed|generic:unnamed|generic:unnamed|generic:unnamed|generic:unnamed|tablist:unnamed|generic:unnamed",
+      "lcp_tokens": 20,
+      "score": 1
+    },
+    "153": {
+      "patterns": [
+        "generic:unnamed|tablist:unnamed|generic:unnamed|link:Skip to Content|generic:unnamed|tabpanel:unnamed|generic:unnamed|generic:unnamed|generic:unnamed|generic:unnamed|generic:unnamed|generic:unnamed|listitem:unnamed|listitem:unnamed|listitem:unnamed|listitem:unnamed|listitem:unnamed|listitem:unnamed|link:store logo|generic:unnamed",
+        "generic:unnamed|tablist:unnamed|generic:unnamed|link:Skip to Content|generic:unnamed|tabpanel:unnamed|generic:unnamed|generic:unnamed|generic:unnamed|generic:unnamed|generic:unnamed|generic:unnamed|listitem:unnamed|listitem:unnamed|listitem:unnamed|listitem:unnamed|listitem:unnamed|listitem:unnamed|link:store logo|generic:unnamed"
+      ],
+      "lcp": "generic:unnamed|tablist:unnamed|generic:unnamed|link:Skip to Content|generic:unnamed|tabpanel:unnamed|generic:unnamed|generic:unnamed|generic:unnamed|generic:unnamed|generic:unnamed|generic:unnamed|listitem:unnamed|listitem:unnamed|listitem:unnamed|listitem:unnamed|listitem:unnamed|listitem:unnamed|link:store logo|generic:unnamed",
+      "lcp_tokens": 20,
+      "score": 1
+    },
+    "138": {
+      "patterns": [
+        "generic:unnamed|tablist:unnamed|generic:unnamed|link:Skip to Content|generic:unnamed|tabpanel:unnamed|generic:unnamed|generic:unnamed|generic:unnamed|generic:unnamed|generic:unnamed|generic:unnamed|listitem:unnamed|listitem:unnamed|listitem:unnamed|listitem:unnamed|listitem:unnamed|listitem:unnamed|link:store logo|generic:unnamed",
+        "generic:unnamed|tablist:unnamed|generic:unnamed|link:Skip to Content|generic:unnamed|tabpanel:unnamed|generic:unnamed|generic:unnamed|generic:unnamed|generic:unnamed|generic:unnamed|generic:unnamed|listitem:unnamed|listitem:unnamed|listitem:unnamed|listitem:unnamed|listitem:unnamed|listitem:unnamed|link:store logo|generic:unnamed"
+      ],
+      "lcp": "generic:unnamed|tablist:unnamed|generic:unnamed|link:Skip to Content|generic:unnamed|tabpanel:unnamed|generic:unnamed|generic:unnamed|generic:unnamed|generic:unnamed|generic:unnamed|generic:unnamed|listitem:unnamed|listitem:unnamed|listitem:unnamed|listitem:unnamed|listitem:unnamed|listitem:unnamed|link:store logo|generic:unnamed",
+      "lcp_tokens": 20,
+      "score": 1
+    },
+    "136": {
+      "patterns": [
+        "generic:unnamed|tablist:unnamed|generic:unnamed|link:Skip to Content|generic:unnamed|tabpanel:unnamed|listitem:unnamed|listitem:unnamed|generic:unnamed|generic:unnamed|generic:unnamed|generic:unnamed|generic:unnamed|generic:unnamed|generic:unnamed|generic:unnamed|generic:unnamed|generic:unnamed|tablist:unnamed|generic:unnamed",
+        "generic:unnamed|tablist:unnamed|generic:unnamed|link:Skip to Content|generic:unnamed|tabpanel:unnamed|listitem:unnamed|listitem:unnamed|generic:unnamed|generic:unnamed|generic:unnamed|generic:unnamed|generic:unnamed|generic:unnamed|generic:unnamed|generic:unnamed|generic:unnamed|generic:unnamed|tablist:unnamed|generic:unnamed"
+      ],
+      "lcp": "generic:unnamed|tablist:unnamed|generic:unnamed|link:Skip to Content|generic:unnamed|tabpanel:unnamed|listitem:unnamed|listitem:unnamed|generic:unnamed|generic:unnamed|generic:unnamed|generic:unnamed|generic:unnamed|generic:unnamed|generic:unnamed|generic:unnamed|generic:unnamed|generic:unnamed|tablist:unnamed|generic:unnamed",
+      "lcp_tokens": 20,
+      "score": 1
+    },
+    "147": {
+      "patterns": [
+        "generic:unnamed|tablist:unnamed|generic:unnamed|link:Skip to Content|generic:unnamed|tabpanel:unnamed|generic:unnamed|generic:unnamed|generic:unnamed|generic:unnamed|generic:unnamed|generic:unnamed|listitem:unnamed|listitem:unnamed|listitem:unnamed|listitem:unnamed|listitem:unnamed|listitem:unnamed|link:store logo|generic:unnamed",
+        "generic:unnamed|tablist:unnamed|generic:unnamed|link:Skip to Content|generic:unnamed|tabpanel:unnamed|generic:unnamed|generic:unnamed|generic:unnamed|generic:unnamed|generic:unnamed|generic:unnamed|listitem:unnamed|listitem:unnamed|listitem:unnamed|listitem:unnamed|listitem:unnamed|listitem:unnamed|link:store logo|generic:unnamed"
+      ],
+      "lcp": "generic:unnamed|tablist:unnamed|generic:unnamed|link:Skip to Content|generic:unnamed|tabpanel:unnamed|generic:unnamed|generic:unnamed|generic:unnamed|generic:unnamed|generic:unnamed|generic:unnamed|listitem:unnamed|listitem:unnamed|listitem:unnamed|listitem:unnamed|listitem:unnamed|listitem:unnamed|link:store logo|generic:unnamed",
+      "lcp_tokens": 20,
+      "score": 1
+    },
+    "139": {
+      "patterns": [
+        "generic:unnamed|tablist:unnamed|generic:unnamed|link:Skip to Content|generic:unnamed|tabpanel:unnamed|generic:unnamed|generic:unnamed|generic:unnamed|generic:unnamed|generic:unnamed|generic:unnamed|listitem:unnamed|listitem:unnamed|listitem:unnamed|listitem:unnamed|listitem:unnamed|listitem:unnamed|link:store logo|generic:unnamed",
+        "generic:unnamed|tablist:unnamed|generic:unnamed|link:Skip to Content|generic:unnamed|tabpanel:unnamed|generic:unnamed|generic:unnamed|generic:unnamed|generic:unnamed|generic:unnamed|generic:unnamed|listitem:unnamed|listitem:unnamed|listitem:unnamed|listitem:unnamed|listitem:unnamed|listitem:unnamed|link:store logo|generic:unnamed"
+      ],
+      "lcp": "generic:unnamed|tablist:unnamed|generic:unnamed|link:Skip to Content|generic:unnamed|tabpanel:unnamed|generic:unnamed|generic:unnamed|generic:unnamed|generic:unnamed|generic:unnamed|generic:unnamed|listitem:unnamed|listitem:unnamed|listitem:unnamed|listitem:unnamed|listitem:unnamed|listitem:unnamed|link:store logo|generic:unnamed",
+      "lcp_tokens": 20,
+      "score": 1
+    },
+    "222": {
+      "patterns": [
+        "generic:unnamed|tablist:unnamed|generic:unnamed|link:Skip to Content|generic:unnamed|tabpanel:unnamed|listitem:unnamed|listitem:unnamed|generic:unnamed|generic:unnamed|generic:unnamed|generic:unnamed|generic:unnamed|generic:unnamed|generic:unnamed|generic:unnamed|generic:unnamed|generic:unnamed|tablist:unnamed|generic:unnamed",
+        "generic:unnamed|tablist:unnamed|generic:unnamed|link:Skip to Content|generic:unnamed|tabpanel:unnamed|listitem:unnamed|listitem:unnamed|generic:unnamed|generic:unnamed|generic:unnamed|generic:unnamed|generic:unnamed|generic:unnamed|generic:unnamed|generic:unnamed|generic:unnamed|generic:unnamed|tablist:unnamed|generic:unnamed"
+      ],
+      "lcp": "generic:unnamed|tablist:unnamed|generic:unnamed|link:Skip to Content|generic:unnamed|tabpanel:unnamed|listitem:unnamed|listitem:unnamed|generic:unnamed|generic:unnamed|generic:unnamed|generic:unnamed|generic:unnamed|generic:unnamed|generic:unnamed|generic:unnamed|generic:unnamed|generic:unnamed|tablist:unnamed|generic:unnamed",
+      "lcp_tokens": 20,
+      "score": 1
+    },
+    "101": {
+      "patterns": [
+        "generic:unnamed|tablist:unnamed|generic:unnamed|link:Skip to Content|generic:unnamed|tabpanel:unnamed|generic:unnamed|generic:unnamed|generic:unnamed|generic:unnamed|generic:unnamed|generic:unnamed|listitem:unnamed|listitem:unnamed|listitem:unnamed|listitem:unnamed|listitem:unnamed|listitem:unnamed|link:store logo|generic:unnamed",
+        "generic:unnamed|tablist:unnamed|generic:unnamed|link:Skip to Content|generic:unnamed|tabpanel:unnamed|generic:unnamed|generic:unnamed|generic:unnamed|generic:unnamed|generic:unnamed|generic:unnamed|listitem:unnamed|listitem:unnamed|listitem:unnamed|listitem:unnamed|listitem:unnamed|listitem:unnamed|link:store logo|generic:unnamed"
+      ],
+      "lcp": "generic:unnamed|tablist:unnamed|generic:unnamed|link:Skip to Content|generic:unnamed|tabpanel:unnamed|generic:unnamed|generic:unnamed|generic:unnamed|generic:unnamed|generic:unnamed|generic:unnamed|listitem:unnamed|listitem:unnamed|listitem:unnamed|listitem:unnamed|listitem:unnamed|listitem:unnamed|link:store logo|generic:unnamed",
+      "lcp_tokens": 20,
+      "score": 1
+    },
+    "137": {
+      "patterns": [
+        "generic:unnamed|tablist:unnamed|generic:unnamed|link:Skip to Content|generic:unnamed|tabpanel:unnamed|generic:unnamed|generic:unnamed|generic:unnamed|generic:unnamed|generic:unnamed|generic:unnamed|listitem:unnamed|listitem:unnamed|listitem:unnamed|listitem:unnamed|listitem:unnamed|listitem:unnamed|link:store logo|generic:unnamed",
+        "generic:unnamed|tablist:unnamed|generic:unnamed|link:Skip to Content|generic:unnamed|tabpanel:unnamed|generic:unnamed|generic:unnamed|generic:unnamed|generic:unnamed|generic:unnamed|generic:unnamed|listitem:unnamed|listitem:unnamed|listitem:unnamed|listitem:unnamed|listitem:unnamed|listitem:unnamed|link:store logo|generic:unnamed"
+      ],
+      "lcp": "generic:unnamed|tablist:unnamed|generic:unnamed|link:Skip to Content|generic:unnamed|tabpanel:unnamed|generic:unnamed|generic:unnamed|generic:unnamed|generic:unnamed|generic:unnamed|generic:unnamed|listitem:unnamed|listitem:unnamed|listitem:unnamed|listitem:unnamed|listitem:unnamed|listitem:unnamed|link:store logo|generic:unnamed",
+      "lcp_tokens": 20,
+      "score": 1
+    }
+  },
+  "shuffle_null": {
+    "mean": 1.0,
+    "std": 0.0,
+    "p95": 1.0,
+    "p_value": 1.0
+  },
+  "delta_vs_prior": 0.7142999999999999,
+  "valid_families": 10,
+  "valid_captures": 20,
+  "path_families_captured": 0,
+  "homepage_families_captured": 0
+}
