@@ -57,11 +57,8 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          ACTIVE=$(gh run list --workflow=factory-pulse.yml --limit 20 --json status |
-            jq '[.[] | select(.status=="queued" or .status=="in_progress" or .status=="waiting" or .status=="requested")] | length')
-          if [[ "$ACTIVE" == "0" ]]; then
-            gh workflow run factory-pulse.yml --ref main
-            echo "SPIDER_FACTORY_WAKE_AFTER_CODEX"
-          else
-            echo "SPIDER_FACTORY_WAKE_SKIPPED_ACTIVE count=$ACTIVE"
-          fi
+          # Always dispatch the freshest canonical state. Factory Pulse has
+          # cancel-in-progress=true, so a fresh Codex decision supersedes any
+          # older direction cycle instead of being skipped behind stale work.
+          gh workflow run factory-pulse.yml --ref main
+          echo "SPIDER_FACTORY_WAKE_AFTER_CODEX"
