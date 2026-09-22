@@ -1,0 +1,73 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-35773128019",
+  "lane": "product",
+  "status": "MEASUREMENT_INVALID",
+  "producer_claim_supported": false,
+  "required_fixes": [
+    "Provision OPENAI_API_KEY for gpt-4o-mini-2024-07-18 with 3x exponential backoff (spec measurement_validity[0], falsifier clause: LLM API unavailable >50% -> MEASUREMENT_INVALID)",
+    "Start nginx HIT-cache provenance (nginx 1.24.0) with HIT/SWR/SIE/304 discrimination for deterministic _matches on header/body/status per runtime EXP-RUNTIME-35764329925 matrix (spec measurement_validity[2][5])",
+    "Configure Playwright chromium headless 1280x720 with 30s/step timeout for 15-step observe() DOM/CDP execution (spec measurement_validity[0])",
+    "Load Intel-validated WebArena-Verified v2 family-stratified data (192 tasks, 49 templates, 36 families, measured duplication 0.9479, param_task 0.8958, AX 0.9 on 20 CDP trees) with >=10 families >=60 tasks after dedup and zero value overlap A∩B=0 per family (spec measurement_validity[1], decision_rule <60 valid tasks gate)"
+  ],
+  "validity_findings": [
+    "Infrastructure failure correctly classified as MEASUREMENT_INVALID, not FALSIFIES: LLM API 0% available (OPENAI_API_KEY absent, openai package missing, M-LLM-CALLS-TOTAL 0), WebArena-Verified v2 not loaded (only 12-family 1-template mock available vs required 49 templates 36 families), nginx inactive (no HIT/SWR/SIE/304 provenance), Playwright not installed. Per AGENTS.md failure discipline and EXPERIMENT_PACKET §9, operational failure is not scientific falsification — producer correctly reports null metrics with explanation.",
+    "Synthetic binding evidence (M-SYNTHETIC-BINDING-CORRECT 1.0, M-SYNTHETIC-EXECUTABLE-RATE 1.0, M-SYNTHETIC-UNSUBSTITUTED-TEMPLATES 0) is a valid narrow OBSERVATION on the committed kernel path for disjoint A/B pools with full B identifiers, but does NOT constitute WebArena-Verified v2 family hold-out evidence. The synthetic pool (3 observations per case, 6 trials total) lacks family structure, header/body/status provenance, browser noise, and the 0.9479 duplication / 0.8958 param_task distribution. Claim ceiling remains bounded to synthetic.",
+    "Kernel fix commitment verified: src/spider/kernel.py sha256 35b1155e6d93b98a364816c0a201ac01da5b95f1c60d908ad5f0307ceb6379d3 (504 lines) contains distill_parameterized, _common_prefix_and_suffix (double-prefix corrected to scaffold-only/full-slot), _field_path_to_slot_name distinct per field-path, _compute_jaccard >=0.75 anchor, _compute_structure_similarity >=0.75, field-path relevance filter. Audit import+hash passes — satisfies measurement_validity[2] and falsifier gate 1 (not monkey-patch). This advances kernel integration from prior MEASUREMENT_INVALID (0/72 binding A_SKU_00_00B_SKU) to committed-code synthetic binding 1.0.",
+    "All primary C1-C4 metrics are null on the required substrate (WebArena + LLM + Playwright + nginx). No family-stratified bootstrap CIs, Wilson intervals, cost ratios, false_accept rates, ECE, or UNKNOWN rates were measured. The frozen decision_rule C1-C6 cannot be evaluated on valid WebArena measurement — correctly NOT_MEASURED.",
+    "Positive control PC2 synthetic passes on committed kernel (EXECUTABLE 1.0 binding 1.0 exact equality, Jaccard 1.0, no double-prefix) but PC1 live nginx HIT same-A replay not measured (nginx inactive). Null control NC1 synthetic shuffled binding 0.0 (<0.50) as expected but not on WebArena with LLM+verification variance. B-LITERAL synthetic analogue passes (literal EXECUTABLE 0.0, param 1.0) but WebArena B-LITERAL gate <=0.15 untested.",
+    "No per-task CSV, registry.jsonl, cost_config, bound_action exact equality logs, or Playwright traces produced on WebArena. Representation loss: DOM/CDP, header/body/status provenance, browser events, network response not preserved — abstraction to parameter_slots and templates tested only on synthetic."
+  ],
+  "baseline_findings": [
+    "B-COLD: NOT_MEASURED — LLM unavailable, no cold exploration cost/success measured. Would be upper-bound re-exploration baseline with same model/tools/budget.",
+    "B-INSTR: NOT_MEASURED — Instruction injection path (200 tok amortized 200/f) not exercised. No cost or success measured.",
+    "B-RAG: NOT_MEASURED — Jaccard 0.30 retrieval over A, 200 tok+150ms, verbatim replay without parameterization. Family hold-out ensures ~0 hit_rate on param_task 0.8958 but unverified.",
+    "B-REPLAY: NOT_MEASURED — 0-token exact replay (TERX) requires nginx HIT provenance (50 tok verification) unavailable. Strongest economics baseline (hit cost 50 tok, miss = COLD) not tested.",
+    "B-LITERAL: NOT_MEASURED on WebArena — synthetic analogue shows literal fails (0.0) while parameterized succeeds (1.0), confirming necessity. WebArena gate <=0.15 untested.",
+    "All baselines correctly report NOT_MEASURED with evidence_refs to infrastructure absence, not hardcoded constants. Prior parent denominator bug (cost ratio 0.010 using SPIDER success for COLD denominator) avoided."
+  ],
+  "recomputed_metrics": {
+    "M-SYNTHETIC-EXECUTABLE-RATE": 1.0,
+    "M-SYNTHETIC-BINDING-CORRECT": 1.0,
+    "M-SYNTHETIC-UNSUBSTITUTED-TEMPLATES": 0,
+    "M-SYNTHETIC-DOUBLE-PREFIX-RESOLVED": true,
+    "M-SYNTHETIC-DISTINCT-SLOT-NAMING": true,
+    "M-SYNTHETIC-JACCARD-GUARD-PASS": true,
+    "M-SYNTHETIC-STRUCTURE-SIMILARITY-PASS": true,
+    "M-LLM-AVAILABLE": false,
+    "M-LLM-FAILURE-RATE": 1.0,
+    "M-LLM-CALLS-TOTAL": 0,
+    "M-WEBARENA-LOADED": false,
+    "M-WEBARENA-VALIDATED-V2": false,
+    "M-NGINX-HIT-CACHE-AVAILABLE": false,
+    "M-PLAYWRIGHT-BROWSERS-AVAILABLE": false,
+    "M-KERNEL-FIX-COMMITTED": true,
+    "M-DISTILL-PARAMETERIZED-EXISTS": true,
+    "M-COMMON-PREFIX-AND-SUFFIX-EXISTS": true,
+    "M-EXTRACT-VARYING-VALUES-EXISTS": true,
+    "M-FIELD-PATH-TO-SLOT-NAME-EXISTS": true
+  },
+  "claim_ceiling": "C-PARAM-INHERIT remains EXPERIMENTAL at narrow synthetic ceilings only: EXP-PRODUCT-33528829801 (audit PASS single-param POC 10 identifiers, 5.42% analytical saving), EXP-PRODUCT-33741671686 (audit PASS harness-only 21/21 EXECUTABLE 21/21 binding 1.0 0 unsubstituted — not kernel, deterministic synthetic), plus this packet's committed-code synthetic single-pool double-prefix resolution (PC2 synthetic PASS on committed kernel). No advancement to VALIDATED at WebArena-Verified v2 family hold-out (192/49/36 duplication 0.9479 measured, param_task 0.8958, path+body+headers distinct slots with Jaccard>=0.75, real Playwright+header/body/status verification per runtime dependency). C-RESIDUAL-NOVELTY, C-PRODUCT-ECON, C-LLM-INHERIT remain blocked by param-inherit gate. No PRODUCT_CORE promotion authorized.",
+  "evidence_refs": [
+    "research/experiments/EXP-PRODUCT-35773128019/request.json (director_mandate CONTINUE C-PARAM-INHERIT)",
+    "research/experiments/EXP-PRODUCT-35773128019/spec.json (frozen C1-C6 decision_rule, measurement_validity 1-8)",
+    "research/experiments/EXP-PRODUCT-35773128019/prereg.md (frozen hypothesis, falsifier, controls, baselines, procedure)",
+    "research/experiments/EXP-PRODUCT-35773128019/freeze.json (hashes prereg/spec/request frozen 2026-09-22T19:24:59Z)",
+    "research/experiments/EXP-PRODUCT-35773128019/result.json (MEASUREMENT_INVALID, null primary metrics, synthetic metrics, controls NOT_MEASURED)",
+    "research/experiments/EXP-PRODUCT-35773128019/report.md (execution details, infrastructure failures table, synthetic evidence table)",
+    "research/experiments/EXP-PRODUCT-35773128019/provenance.json (code artifacts kernel.py sha35b1155e..., infrastructure status, dependencies status)",
+    "research/experiments/EXP-PRODUCT-35773128019/synthetic_evidence.json (sha256 5315f2ce9dc7d264d103b51530911b88e033671652577baba31801f6bb86c70b, synthetic binding 1.0 on committed kernel)",
+    "src/spider/kernel.py sha256 35b1155e6d93b98a364816c0a201ac01da5b95f1c60d908ad5f0307ceb6379d3 (committed fix with Jaccard>=0.75, structure_similarity>=0.75, field-path relevance, distinct slots)",
+    "research/experiments/EXP-PRODUCT-35756243655/handoff.json (parent MEASUREMENT_INVALID, sha256 92869eb23ba40845288653564771d9593678a2854e28e59dc8fac8a1c14751d9)",
+    "codex/index.json entries for EXP-PRODUCT-33528829801 (PASS), EXP-PRODUCT-33741671686 (PASS), EXP-PRODUCT-33974562602 (KERNEL-INTEGRATION-FALSIFIED), EXP-PRODUCT-33993747223 (FIXES-FALSIFIED), EXP-PRODUCT-34015741916 (KERNEL-INTEGRATION-PARTIAL)"
+  ],
+  "unresolved": [
+    "Does corrected _common_prefix_and_suffix on disjoint A/B pools (e.g., A_SKU_00_000 vs B_SKU_00_000 zero overlap) achieve EXECUTABLE >=0.75 and binding >=0.90 with zero ${} and exact expected_bound_action equality on true WebArena-Verified v2 family hold-out (192/49/36 dup 0.9479 param_task 0.8958 AX 0.9)? Synthetic shows 1.0 but not WebArena.",
+    "What is real LLM success on held-out B for SPIDER vs B-COLD/B-INSTR/B-RAG/B-REPLAY with identical gpt-4o-mini-2024-07-18 temp0 seed42 15 steps 4096 tokens Playwright and deterministic _matches on nginx HIT provenance including header/body/status discrimination?",
+    "What is honest amortized cost per success at f=10 (distill 1000 tok only SPIDER, instr 200/f only INSTR, retrieval 200 tok verification 50 tok repair 500 tok+2 calls) and does SPIDER achieve >=25% saving vs COLD (ratio <=0.75) and <=0.85x vs RAG with family-stratified bootstrap 95% CI?",
+    "What are false_accept and UNKNOWN abstention rates with correct _matches postconditions and ECE <=0.15, and does UNKNOWN correctly abstain when confidence <0.80 or required_slots missing or behavioral_score <0.25?",
+    "Can family hold-out on true WebArena-Verified v2 be loaded with >=10 families >=60 tasks and zero value overlap A∩B=0 and does multi-param transfer generalize with field-path relevance path+body+headers?",
+    "Does kernel survive field-path relevance filtering (url/path body.* headers.* excluding top-level metadata/noise) and structure_similarity >=0.75 without spurious slot hallucination on real browser observations with timestamps/request_duration_ms etc?",
+    "Is freshness guard behavioral_score >=0.25 and confidence >=0.80 -> UNKNOWN calibrated with ECE <=0.15 required vs excessive abstention on nginx distribution with HIT/SWR/SIE/304?"
+  ]
+}

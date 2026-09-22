@@ -1,0 +1,115 @@
+{
+  "experiment_id": "EXP-RUNTIME-35774047385",
+  "lane": "runtime",
+  "run_type": "github_actions",
+  "github_run_id": "35774047385",
+  "github_run_number": "909",
+  "git": {
+    "head_sha": "a9a76ce509ba0f91f387e0df78dcbb856e5f7c93",
+    "execution_base_sha": "f50de84df1c3608a01420384f8098acbc0dbef57",
+    "pre_execute_sha": "ac8bd5719cf678baf7ad8992f43203f23e3ea830",
+    "note": "no git writes performed (commit/push/switch/reset forbidden)"
+  },
+  "code": {
+    "run_experiment.py": {
+      "path": "/home/runner/work/Spider/Spider/research/experiments/EXP-RUNTIME-35774047385/run_experiment.py",
+      "sha256": "9dd101240ec58eb1653f288a68ea7af8a981231ffc3b8b67e45b4166897bec61",
+      "fingerprint_algorithm": "byte-identical to EXP-RUNTIME-35764329925/run_experiment.py compute_fingerprint (lowercased sorted keys, sort_keys=True, separators (',',':'))"
+    }
+  },
+  "environment": {
+    "python": "3.12.14",
+    "flask": "3.1.3",
+    "gunicorn": "23.0.0 (frozen pin; reinstalled over preinstalled 26.2.0)",
+    "nginx": "(Ubuntu)",
+    "sqlite": "3.45.1",
+    "docker": "Docker version 28.0.4, build b8034c0"
+  },
+  "fixtures": {
+    "DB_PATH": "/tmp/spider_cdnfp_testbed.db",
+    "RUN_DIR": "/tmp/spider-runtime-35774047385",
+    "dummy_cert": "nginx self-signed (write_nginx_conf)",
+    "seed": 44,
+    "n_samples_per_batch": 20,
+    "concurrency": 4,
+    "bootstrap_b": 1000,
+    "jitter_ms": [
+      50,
+      150
+    ],
+    "body_pins": {
+      "A": {
+        "len": 31,
+        "sha256": "d0ca833f843c6d70ec9d6755f52a92dcbfc8b4ab601b871bced09ad027172e34"
+      },
+      "A1": {
+        "len": 32,
+        "sha256": "72f28c5c2b8fe28314392298accd9a9e44747e45b4ad497d63839332cef24f26"
+      },
+      "A2": {
+        "len": 33,
+        "sha256": "2667bef51a10d006c22eb01972648a7c989bf7b4f786e4551be7b186c0f5e72b"
+      },
+      "A3": {
+        "len": 35,
+        "sha256": "d79643f246bd4a4ff18dab702de41940d11d2f72863424143ba8a121c396decf"
+      },
+      "B": {
+        "len": 70,
+        "sha256": "67c186f2cee1ccf01f55c80235eb9b1b1d14b073223a807b9ce944405e67999c"
+      },
+      "C": {
+        "len": 117,
+        "sha256": "b46c461cceeefa595c3ac0d706689ed382340b59c20a269a930c786c8389dd32"
+      }
+    }
+  },
+  "artifacts": [
+    {
+      "path": "/home/runner/work/Spider/Spider/research/experiments/EXP-RUNTIME-35774047385/raw_observations.jsonl",
+      "sha256": "c057702c3133898ac1620a47d584421ed272ea7670ded18f0fe57dcdf7432f05",
+      "role": "raw"
+    },
+    {
+      "path": "/home/runner/work/Spider/Spider/research/experiments/EXP-RUNTIME-35774047385/batch_state_log.jsonl",
+      "sha256": "aafc6571eebc0c8820761c8eaa325555ce79c18265cce4064b1c0a2ddd0a19b6",
+      "role": "raw"
+    },
+    {
+      "path": "/home/runner/work/Spider/Spider/research/experiments/EXP-RUNTIME-35774047385/sanity_l_raw_observations.jsonl",
+      "sha256": "94fedf960e7819908957442297fa23c5c00ea083bac905f3bc140da93861ba14",
+      "role": "raw"
+    },
+    {
+      "path": "/home/runner/work/Spider/Spider/research/experiments/EXP-RUNTIME-35774047385/sanity_l_result.json",
+      "sha256": "fbc0acd6f484a4de0ff9f2bb6827d511a615d0c277b6ae80d731f995f090eaad",
+      "role": "derived"
+    },
+    {
+      "path": "/home/runner/work/Spider/Spider/research/experiments/EXP-RUNTIME-35774047385/cdn_probe.json",
+      "sha256": "f808d6a1dd99c82122d2646918a7f1697e6d6e0a4b382d7bf6f1e638723544cb",
+      "role": "raw"
+    },
+    {
+      "path": "/home/runner/work/Spider/Spider/research/experiments/EXP-RUNTIME-35774047385/bg_probe.json",
+      "sha256": "a66834afc8acf96b20813d5e0a0c70f285b5b991606109de6b1b82ed8572edbb",
+      "role": "raw"
+    },
+    {
+      "path": "/home/runner/work/Spider/Spider/research/experiments/EXP-RUNTIME-35774047385/experiment_result.json",
+      "sha256": "043d594de25ce998780d2f5407100ece741db59b5ce8d004b480724240ceb888",
+      "role": "derived"
+    },
+    {
+      "path": "/home/runner/work/Spider/Spider/research/experiments/EXP-RUNTIME-35774047385/run_experiment.py",
+      "sha256": "9dd101240ec58eb1653f288a68ea7af8a981231ffc3b8b67e45b4166897bec61",
+      "role": "code"
+    }
+  ],
+  "commands": [
+    "python3 run_experiment.py --smoke",
+    "python3 run_experiment.py --sanity",
+    "python3 run_experiment.py",
+    "pip install flask==3.1.3 pyjwt==2.14.0 requests==2.34.2 werkzeug==3.1.8 gunicorn==23.0.0 (frozen pins)"
+  ]
+}

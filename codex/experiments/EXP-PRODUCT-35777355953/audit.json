@@ -1,0 +1,194 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-35777355953",
+  "lane": "product",
+  "status": "PASS",
+  "producer_claim_supported": true,
+  "required_fixes": [
+    "To justify the frozen live-browser claim (WebShop/ALFWorld alias-OOD correct>=0.50 at BrowserGym 0.14.3 1280x720 with real CDP AX trees, including mixed multi-channel and production-SPA heterogeneity): install browsergym build that provides browsergym.webshop and browsergym.alfworld task modules and re-run live stratum N>=20 with PC-BROWSERGYM-HEALTH >=80% (currently live_attempted=0 ModuleNotFoundError browsergym.webshop/alfworld; see raw_evidence.json and browser_probe.json). Until then live claim must remain exploratory.",
+    "To complete frozen economics comparison vs strong baselines: run B-RAG-EMBED (sentence-transformers/all-MiniLM-L6-v2 offline deterministic) and B-INSTRUCTION (LLM site-instruction with 200 tokens amortized f=10 at equal model/tools/budget) head-to-head on identical alias-OOD/mixed splits and report retrieval+reconstruction+verification amortized cost per success (currently both marked unavailable with disclosure per spec sanction; see result.json controls B-RAG-EMBED/B-INSTRUCTION and derived_metrics.json availability).",
+    "To support learned-variant stability claim beyond rule port: run GRPO/System-One 3-seed training with deterministic report of wall-clock, tokens/calls, CV across seeds 42/43/44 (currently unmeasured, per spec non-gating but required for VALIDATED->PRODUCT_CORE promotion)."
+  ],
+  "validity_findings": [
+    {
+      "id": "VF-SYNTHETIC-TAUTOLOGY",
+      "severity": "medium",
+      "category": "representation_validity",
+      "observation": "Synthetic derived_context is bound-then-parse tautology: headers_observed/body_observed/url_query already contain the exact expected header/body/query key and value (e.g., fam0 alias-0-0 derived_context headers_observed=Authorization:Bearer tok_0_0 equals hidden_expected expected_bound). The adapter's adopt-any-observed-key-not-in-registry logic copies observed keys verbatim into rewritten template, so 40/40 is trivial copy of parser output, not evidence of AX denoising or header/body extraction robustness.",
+      "evidence": "research/experiments/EXP-PRODUCT-35777355953/tasks.json: alias-0-0 derived_context.headers_observed vs hidden_expected.expected_template; raw_evidence.json P-SPIDER-RECONSTRUCT reason 'rewrote base template adopting 1 observed keys [('headers', 'Authorization', 'Bearer ${token}')]' across all 40 tasks; prereg.md section 2.3 and 9 explicitly disclose tautology and limit ceiling to synthetic",
+      "impact": "Synthetic 1.0 does not transfer to noisy real DOM/AX without live test; claim must be bounded to synthetic orthogonal+mixed URL/header/body dict, no AX tree, as producer correctly does. Not a measurement failure but a ceiling bound."
+    },
+    {
+      "id": "VF-LIVE-STRATUM-UNMEASURED",
+      "severity": "high",
+      "category": "sampling_validity",
+      "observation": "Live BrowserGym WebShop/ALFWorld stratum (N>=20 confirmatory) was not measured: browser_probe.json shows attempted_live_tasks=0, webshop_module=ModuleNotFoundError browsergym.webshop, alfworld_module=ModuleNotFoundError browsergym.alfworld on browsergym 0.14.3. PC-BROWSERGYM-HEALTH fails but per frozen spec C1 this correctly bounds claim to synthetic exploratory rather than triggering MEASUREMENT_INVALID. Chromium+CDP AX substrate verified separately (example.com 15 AX nodes healthy, data URL 8 nodes unhealthy) at 1280x720.",
+      "evidence": "research/experiments/EXP-PRODUCT-35777355953/browser_probe.json; result.json controls.PC-BROWSERGYM-HEALTH observed live_attempted 0 live_healthy 0; derived_metrics.json live.attempted 0; provenance.json environment browsergym 0.14.3 webshop/alfworld modules absent",
+      "impact": "Full prereg question (synthetic + live at 1280x720 with real CDP AX trees, mixed multi-channel, production-SPA heterogeneity) is untested. SURVIVES synthetic does not imply live generalization. Status PASS bounded to synthetic only."
+    },
+    {
+      "id": "VF-ECE-POOLING",
+      "severity": "low",
+      "category": "measurement_validity",
+      "observation": "ECE 0.0653 is computed over all 70 pooled rows (52 alias-OOD+exact-match correct with conf ~0.912, 18 no-applicable+empty-registry UNKNOWN with conf 0.0). Bins 1-3 empty, disclosed. Pooling inflates apparent calibration because UNKNOWN stratum is trivially calibrated at 0.0 and alias-OOD at ~0.91. Confidence std 0.400 confirms not constant (C6 std>0.05 passes). All-strata ECE within frozen C6 <=0.15 and C8 delta 0.015 vs proxy (proxy ECE 0.0803, same 3 empty bins).",
+      "evidence": "research/experiments/EXP-PRODUCT-35777355953/derived_metrics.json no_applicable.bins_product [bin0 cnt18 acc0 avg_conf0, bin4 cnt52 acc1 avg_conf0.912]; result.json P-SPIDER-RECONSTRUCT::ECE_all_strata 0.06525 R-FRONTIER-RULE-PROXY::ECE_all_strata 0.08025; recomputed ECE 0.06525 by audit (see recomputed_metrics)",
+      "impact": "ECE passes frozen gates but is not stratified: per-stratum ECE (alias-OOD only) would be ~0.088 (0.912 vs 1.0). Still <=0.15, so gate unaffected, but calibration on synthetic tautology has 3 empty bins and limited diagnostic value for live."
+    },
+    {
+      "id": "VF-EMPTY-REGISTRY-CONFIDENCE-DETAIL",
+      "severity": "low",
+      "category": "measurement_validity",
+      "observation": "Empty-registry UNKNOWN confidence differs product (0.0 kernel default) vs proxy (0.05-0.068 intent-hash) both 6/6 UNKNOWN. This 0.058 avg_conf gap on bin0 drives the disclosed ECE delta 0.0653 vs 0.0803, within C8 0.05 bound, correctly noted as representation difference not failure.",
+      "evidence": "research/experiments/EXP-PRODUCT-35777355953/raw_evidence.json empty-registry P-SPIDER-RECONSTRUCT observed_confidence 0.0 vs R-FRONTIER-RULE-PROXY 0.05-0.068; derived_metrics.json audit and result.json validity_notes",
+      "impact": "No gate failure; disclosure adequate."
+    },
+    {
+      "id": "VF-STABILITY-CV-VACUOUS",
+      "severity": "low",
+      "category": "measurement_validity",
+      "observation": "Stability CV 0.0 across seeds 42/43/44 reflects order-invariant reconstruction scoring on deterministic per-task permutations of frozen registry lists (content identical). No true registry-content variation or learned-parameter variation was tested. Rule port determinism makes CV=0 expected, but CV is non-informative for order-sensitive baselines only (B-EXACT-MATCH tie-breaks) which were 0/40 under every seed anyway.",
+      "evidence": "research/experiments/EXP-PRODUCT-35777355953/derived_metrics.json stability.per_seed 1.0/1.0/1.0 CV 0.0 note 'content identical, reconstruction scoring is order-invariant'; result.json stability::cv_3_seeds 0.0",
+      "impact": "C8/C3 stability gate not failed but also not a strong demonstration of robustness to distribution shift; learned-variant CV remains unmeasured."
+    },
+    {
+      "id": "VF-FORBIDDEN-KEY-CLEAN",
+      "severity": "info",
+      "category": "provenance",
+      "observation": "Audit recomputed: src/spider/kernel.py ALLOWED_STATE_KEYS correctly restricts to url/method/url_path/url_query/url_segments/headers_observed/body_observed/ax_tree_snapshot/ax_nodes_count/viewport_observed; zero literal reads of forbidden keys alias_family/query_key/target_prefix/routing_prefix/target_style/path_style/header_key/body_field/auth_scope/expected_template (word-boundary regex). Leakage 0/40 verified on tasks.json (no expected_template verbatim in registry). Reconstruct flag correctly whitelists derived_context.",
+      "evidence": "src/spider/kernel.py ALLOWED_STATE_KEYS and _reconstruct_resolve; research/experiments/EXP-PRODUCT-35777355953/derived_metrics.json audit.forbidden_key_reads_kernel_source [] kernel_changed true (a5726515 vs 46929b3a); tasks.json leak 0/40 recomputed",
+      "impact": "Supports genuine non-oracle reconstruction (no hidden_expected access) and hardcoded-confidence gate (std 0.400 >0.05, softmax temp 0.15 + jitter, gated <0.80)."
+    }
+  ],
+  "baseline_findings": [
+    {
+      "id": "BF-EXACT-MATCH-MCNEMAR",
+      "baseline_id": "B-EXACT-MATCH",
+      "expected": "0/40 correct on alias-OOD (exact intent equality cannot resolve aliasing), McNemar reference",
+      "observed": "0/40 correct_rate 0.0 recomputed 0/40; paired McNemar vs P-SPIDER-RECONSTRUCT b=40 c=0 chi2=38.025 p=6.98e-10",
+      "verdict": "PASS",
+      "evidence": "research/experiments/EXP-PRODUCT-35777355953/raw_evidence.json B-EXACT-MATCH 40 rows is_correct false; derived_metrics.json alias_OOD.exact_match_correct_rate 0.0 mcnemar_product_vs_exact b40 c0 p6.98e-10"
+    },
+    {
+      "id": "BF-VERBATIM-REPLAY",
+      "baseline_id": "B-VERBATIM-REPLAY",
+      "expected": "1.0 false_accept on alias-OOD (replays wrong channel), gap >=0.15 vs product with McNemar p<0.05",
+      "observed": "false_accept 1.0 (40/40) recomputed; product false_accept 0.0 gap 1.0 McNemar b=0 c=40 chi2=38.025 p=6.98e-10",
+      "verdict": "PASS",
+      "evidence": "research/experiments/EXP-PRODUCT-35777355953/raw_evidence.json B-VERBATIM-REPLAY 40 false_accept true; derived_metrics.json verbatim_false_accept_rate 1.0 diff_verbatim_minus_product 1.0 mcnemar_fa_product_vs_verbatim p6.98e-10"
+    },
+    {
+      "id": "BF-RAG-TFIDF",
+      "baseline_id": "B-RAG-TFIDF",
+      "expected": "0/40 on alias-OOD (retrieval alone without adaptation cannot solve orthogonal aliasing)",
+      "observed": "0/40 correct recomputed (TFIDF confidence ~0.335); gap product - TFIDF =1.0 not dominated (C7 requires not >0.10 below best RAG)",
+      "verdict": "PASS",
+      "evidence": "research/experiments/EXP-PRODUCT-35777355953/raw_evidence.json B-RAG-TFIDF 40 rows is_correct false; derived_metrics.json alias_OOD.tfidf_correct_rate 0.0 gates.C7 true best_rag_correct 0.0"
+    },
+    {
+      "id": "BF-RAG-EMBED-UNAVAILABLE",
+      "baseline_id": "B-RAG-EMBED",
+      "expected": "0/40 on alias-OOD if available; spec sanctions marking unavailable offline deterministically with disclosure",
+      "observed": "unavailable: ModuleNotFoundError No module named sentence_transformers; product C7 evaluated vs B-RAG-TFIDF as strong retrieval baseline per spec",
+      "verdict": "UNAVAILABLE_DISCLOSED",
+      "evidence": "research/experiments/EXP-PRODUCT-35777355953/result.json controls.B-RAG-EMBED available false; derived_metrics.json availability.B_RAG_EMBED_available false"
+    },
+    {
+      "id": "BF-RANDOM",
+      "baseline_id": "B-RANDOM",
+      "expected": "~3-10% chance correct on alias-OOD; confirms not solvable by guessing",
+      "observed": "0/40 correct recomputed (random among 3 candidates, no registry-content variation on this DGP)",
+      "verdict": "PASS",
+      "evidence": "research/experiments/EXP-PRODUCT-35777355953/raw_evidence.json B-RANDOM 40 rows is_correct false; derived_metrics.json random_correct_rate 0.0"
+    },
+    {
+      "id": "BF-INSTRUCTION-UNAVAILABLE",
+      "baseline_id": "B-INSTRUCTION",
+      "expected": "LLM site-instruction baseline 200 tokens amortized f=10 below product correct and cheaper amortized per success; requires LLM agent",
+      "observed": "unavailable: no LLM provider API key (OPENAI_API_KEY/ANTHROPIC_API_KEY unset); no fabricated metrics; economics vs instruction not measured",
+      "verdict": "UNAVAILABLE_DISCLOSED",
+      "evidence": "research/experiments/EXP-PRODUCT-35777355953/result.json controls.B-INSTRUCTION available false; derived_metrics.json availability.B_INSTRUCTION_available false; report.md Economics section disclosed"
+    },
+    {
+      "id": "BF-FRONTIER-PROXY-PARITY",
+      "baseline_id": "R-FRONTIER-RULE-PROXY",
+      "expected": "Parity anchor 40/40 pooled, not to beat; product within 0.10 correct and 0.05 ECE",
+      "observed": "proxy 40/40 1.0 pooled, orthogonal 30/30, mixed 10/10, per-family gap 0.0, ECE 0.0803 product 0.0653 delta 0.015 within 0.05; identical softmax/jitter arithmetic",
+      "verdict": "PASS",
+      "evidence": "research/experiments/EXP-PRODUCT-35777355953/raw_evidence.json R-FRONTIER-RULE-PROXY 40 correct; derived_metrics.json per_family_proxy all 1.0 per_family_gap 0.0; result.json C8::per_family_max_gap 0.0 R-FRONTIER-RULE-PROXY::ECE 0.08025"
+    },
+    {
+      "id": "BF-CONTROLS-PC-NC",
+      "baseline_id": "PC-EXACT-MATCH/NC-NO-APPLICABLE/NC-EMPTY",
+      "expected": "PC-EXACT-MATCH 12/12 >=0.90 no regression; NC-NO-APPLICABLE UNKNOWN precision >=0.90 FA<=0.10; NC-EMPTY 6/6 100%",
+      "observed": "PC-EXACT-MATCH product 12/12 1.0 FA 0.0 proxy 12/12 baseline 12/12 PASS; NC-NO-APPLICABLE UNKNOWN precision 1.0 FA 0.0 PASS; NC-EMPTY 6/6 100% PASS",
+      "verdict": "PASS",
+      "evidence": "research/experiments/EXP-PRODUCT-35777355953/raw_evidence.json stratum=exact-match 12 correct stratum=no-applicable 12 UNKNOWN stratum=empty-registry 6 UNKNOWN; result.json controls PC-EXACT-MATCH pass true NC-NO-APPLICABLE pass true NC-EMPTY pass true"
+    }
+  ],
+  "recomputed_metrics": {
+    "P-SPIDER-RECONSTRUCT::alias-OOD::correct_rate": 1.0,
+    "P-SPIDER-RECONSTRUCT::alias-OOD::correct_count": 40,
+    "P-SPIDER-RECONSTRUCT::alias-OOD::false_accept_rate": 0.0,
+    "P-SPIDER-RECONSTRUCT::alias-OOD::unknown_rate": 0.0,
+    "P-SPIDER-RECONSTRUCT::alias-OOD::wilson95_correct": [0.9123754607496077, 1.0],
+    "P-SPIDER-RECONSTRUCT::orthogonal_subset::correct_rate": 1.0,
+    "P-SPIDER-RECONSTRUCT::mixed_subset::correct_rate": 1.0,
+    "P-SPIDER-RECONSTRUCT::heldout_9::correct_rate": 1.0,
+    "P-SPIDER-RECONSTRUCT::per_family": {"fam0": 1.0, "fam1": 1.0, "fam2": 1.0, "fam3": 1.0},
+    "R-FRONTIER-RULE-PROXY::alias-OOD::correct_rate": 1.0,
+    "B-EXACT-MATCH::alias-OOD::correct_rate": 0.0,
+    "B-VERBATIM-REPLAY::alias-OOD::false_accept_rate": 1.0,
+    "B-RAG-TFIDF::alias-OOD::correct_rate": 0.0,
+    "B-RANDOM::alias-OOD::correct_rate": 0.0,
+    "P-SPIDER-RECONSTRUCT::exact-match::correct_rate": 1.0,
+    "P-SPIDER-RECONSTRUCT::exact-match::false_accept_rate": 0.0,
+    "P-SPIDER-RECONSTRUCT::no-applicable::unknown_precision": 1.0,
+    "P-SPIDER-RECONSTRUCT::no-applicable::false_accept_rate": 0.0,
+    "P-SPIDER-RECONSTRUCT::empty-registry::unknown_rate": 1.0,
+    "P-SPIDER-RECONSTRUCT::ECE_all_strata": 0.0652516342187119,
+    "R-FRONTIER-RULE-PROXY::ECE_all_strata": 0.0802516342187119,
+    "P-SPIDER-RECONSTRUCT::confidence_std": 0.4000051211339946,
+    "stats::binomial_p_vs_0.10_40of40": 1.0000000000000022e-40,
+    "stats::binomial_p_vs_0.10_30of30": 1.0000000000000017e-30,
+    "stats::mcnemar_correct_vs_exact_p": 6.984393063902417e-10,
+    "stats::mcnemar_correct_vs_exact_chi2_continuity": 38.025,
+    "stats::mcnemar_fa_vs_verbatim_p": 6.984393063902417e-10,
+    "stats::diff_verbatim_minus_product_fa": 1.0,
+    "C8::per_family_max_gap": 0.0,
+    "C8::ECE_delta_product_vs_proxy": 0.015,
+    "PC-EXACT-MATCH": {"product_correct": 1.0, "product_false_accept": 0.0, "proxy_correct": 1.0, "baseline_correct": 1.0, "pass": true},
+    "PC-BROWSERGYM-HEALTH": {"live_attempted": 0, "live_healthy": 0, "pass": false, "correctly_bounded_exploratory": true},
+    "NC-NO-APPLICABLE": {"unknown_precision": 1.0, "false_accept_rate": 0.0, "pass": true},
+    "NC-EMPTY-REGISTRY": {"unknown_rate": 1.0, "pass": true},
+    "leak_check": 0,
+    "forbidden_key_reads_in_kernel": [],
+    "kernel_sha256_post": "a57265155603581bb9cb7a00db5349afa52d8af43d208d296564ca60ac2150a1",
+    "kernel_changed": true,
+    "harness_errors": 0,
+    "economics::P-SPIDER-RECONSTRUCT::mean_latency_ms": 0.39994714285714283,
+    "stability::cv_3_seeds": 0.0
+  },
+  "claim_ceiling": "Product kernel port of Frontier's audit-PASS rule-based critique-reconstruct adapter into src/spider/kernel.py reconstruct=True SURVIVES at synthetic-only ceiling: 40/40 pooled alias-OOD correct (Wilson [0.912,1.0], binomial p=1e-40 vs 0.10, McNemar p=6.98e-10 vs B-EXACT-MATCH 0/40), orthogonal 30/30 and mixed header+body+query 10/10 and held-out 9/9 and per-family 10/10 each with 0.0 false_accept (1.0 below B-VERBATIM-REPLAY 40/40, McNemar p=6.98e-10), exact-match 12/12 no regression, no-applicable UNKNOWN precision 1.0 FA 0.0, empty-registry 6/6 UNKNOWN, ECE 0.065 (binned 5, 3 empty bins disclosed) within 0.05 of Frontier proxy 0.080, confidence std 0.400 not constant, parity gap 0.0 within 0.10. Bounding: deterministic synthetic URL/header/body dict with tautological derived_context (observed state already encodes answer via bound-then-parse, no AX tree, no header/body extraction noise), viewport 1280x720 probe only (Chromium+CDP viable example.com 15 AX nodes), zero live WebShop/ALFWorld tasks, zero real SPA heterogeneity, zero learned GRPO, and unavailable RAG-embed/instruction baselines (TFIDF only). C-SEMANTIC-RESOLVE therefore SURVIVES_CURRENT_TEST at product-kernel level bounded to genuine reconstruction on the 3 orthogonal families plus mixed composition with calibrated UNKNOWN, but does not advance to VALIDATED for live browser or PRODUCT_CORE without live replication, learned stability, and end-to-end browser/network economics at scale.",
+  "evidence_refs": [
+    "research/experiments/EXP-PRODUCT-35777355953/result.json",
+    "research/experiments/EXP-PRODUCT-35777355953/report.md",
+    "research/experiments/EXP-PRODUCT-35777355953/provenance.json",
+    "research/experiments/EXP-PRODUCT-35777355953/raw_evidence.json sha256 af1af741b0287bd1637d486e333754901338c0d74065d7bdee26b44dd2f961cf",
+    "research/experiments/EXP-PRODUCT-35777355953/tasks.json sha256 4abf148721fdee9dfe56ac776f6b3112344821a4ea80d183c5313adeced1f35e",
+    "research/experiments/EXP-PRODUCT-35777355953/derived_metrics.json sha256 bb01b2ac02f143982997c67216217c010a5e8c580de03fdcf1f795faee8788dc",
+    "research/experiments/EXP-PRODUCT-35777355953/browser_probe.json",
+    "research/experiments/EXP-PRODUCT-35777355953/frontier_proxy.py sha256 ba3202f834c95761e67f00b41f8ac095e646e7b7a0d8c1795ad1ddb53e6ab155",
+    "src/spider/kernel.py sha256 a57265155603581bb9cb7a00db5349afa52d8af43d208d296564ca60ac2150a1 (pre-port 46929b3a951df48d7f9d1fd850871073c0d91c1868aa117e13d389fe274e8d61)",
+    "research/experiments/EXP-PRODUCT-35777355953/spec.json",
+    "research/experiments/EXP-PRODUCT-35777355953/prereg.md",
+    "research/experiments/EXP-PRODUCT-35777355953/freeze.json"
+  ],
+  "unresolved": [
+    "Live generalization on real BrowserGym WebShop/ALFWorld CDP AX trees at 1280x720 (header/body/query extraction robustness, mixed multi-channel within one request under AX noise, production-SPA heterogeneity AX nodes>10, viewport truncation) — 0/40 tasks measured; requires browsergym build with webshop/alfworld modules.",
+    "Learned GRPO/System-One 3-seed stability, training wall-clock/tokens, CV and calibration transfer vs rule port — unmeasured (offline LLM stack absent, non-gating per spec).",
+    "B-RAG-EMBED head-to-head retrieval comparison and amortized retrieval+reconstruction+verification economics vs best retrieval — TFIDF only baseline measured.",
+    "B-INSTRUCTION economics (200 tokens instruction amortized f=10) vs reconstruction at equal model/tools/budget — unmeasured, no LLM provider key.",
+    "Scale behavior with larger registries (>3 mechanisms per intent), long-lived freshness/repair boundaries, and browser/network/session economics beyond in-process 0.40ms deterministic latency.",
+    "Per-stratum ECE stratified by alias-OOD vs exact-match vs no-applicable and live AX noise impact on ECE/UNKNOWN precision — currently pooled."
+  ]
+}
