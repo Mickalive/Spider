@@ -1,0 +1,7490 @@
+[
+  {
+    "task_id": "alias-0-0",
+    "stratum": "alias-OOD",
+    "family": 0,
+    "method": "B-EXACT-MATCH",
+    "intent": "fetch_user_q_0",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/users?user=val0_0"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/users/val0_0"
+    },
+    "observed_confidence": 0.9,
+    "is_correct": false,
+    "is_false_accept": true,
+    "is_unknown": false,
+    "reason": "applicability guards and confidence threshold passed",
+    "registry_size": 3,
+    "is_heldout": false
+  },
+  {
+    "task_id": "alias-0-0",
+    "stratum": "alias-OOD",
+    "family": 0,
+    "method": "B-VERBATIM-REPLAY",
+    "intent": "fetch_user_q_0",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/users?user=val0_0"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/users/val0_0"
+    },
+    "observed_confidence": 0.9,
+    "is_correct": false,
+    "is_false_accept": true,
+    "is_unknown": false,
+    "reason": "verbatim replay",
+    "registry_size": 3,
+    "is_heldout": false
+  },
+  {
+    "task_id": "alias-0-0",
+    "stratum": "alias-OOD",
+    "family": 0,
+    "method": "B-RAG-TFIDF",
+    "intent": "fetch_user_q_0",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/users?user=val0_0"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/users/val0_0"
+    },
+    "observed_confidence": 0.4532946552278861,
+    "is_correct": false,
+    "is_false_accept": true,
+    "is_unknown": false,
+    "reason": "tfidf",
+    "registry_size": 3,
+    "is_heldout": false
+  },
+  {
+    "task_id": "alias-0-0",
+    "stratum": "alias-OOD",
+    "family": 0,
+    "method": "B-RAG-EMBED",
+    "intent": "fetch_user_q_0",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/users?user=val0_0"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/users/val0_0"
+    },
+    "observed_confidence": 0.4532946552278861,
+    "is_correct": false,
+    "is_false_accept": true,
+    "is_unknown": false,
+    "reason": "embed_unavailable_fallback_tfidf:tfidf",
+    "registry_size": 3,
+    "is_heldout": false
+  },
+  {
+    "task_id": "alias-0-0",
+    "stratum": "alias-OOD",
+    "family": 0,
+    "method": "B-RANDOM",
+    "intent": "fetch_user_q_0",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/users?user=val0_0"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/items/val0_0"
+    },
+    "observed_confidence": 0.5,
+    "is_correct": false,
+    "is_false_accept": true,
+    "is_unknown": false,
+    "reason": "random",
+    "registry_size": 3,
+    "is_heldout": false
+  },
+  {
+    "task_id": "alias-0-0",
+    "stratum": "alias-OOD",
+    "family": 0,
+    "method": "RECONSTRUCTION",
+    "intent": "fetch_user_q_0",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/users?user=val0_0"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/users?user=val0_0"
+    },
+    "observed_confidence": 0.9251090838344066,
+    "is_correct": true,
+    "is_false_accept": false,
+    "is_unknown": false,
+    "reason": "rewritten from derived state score 1.000 conf 0.925",
+    "registry_size": 3,
+    "is_heldout": false
+  },
+  {
+    "task_id": "alias-0-1",
+    "stratum": "alias-OOD",
+    "family": 0,
+    "method": "B-EXACT-MATCH",
+    "intent": "fetch_user_q_1",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/users?user=val0_1"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/users/val0_1"
+    },
+    "observed_confidence": 0.9,
+    "is_correct": false,
+    "is_false_accept": true,
+    "is_unknown": false,
+    "reason": "applicability guards and confidence threshold passed",
+    "registry_size": 3,
+    "is_heldout": false
+  },
+  {
+    "task_id": "alias-0-1",
+    "stratum": "alias-OOD",
+    "family": 0,
+    "method": "B-VERBATIM-REPLAY",
+    "intent": "fetch_user_q_1",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/users?user=val0_1"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/users/val0_1"
+    },
+    "observed_confidence": 0.9,
+    "is_correct": false,
+    "is_false_accept": true,
+    "is_unknown": false,
+    "reason": "verbatim replay",
+    "registry_size": 3,
+    "is_heldout": false
+  },
+  {
+    "task_id": "alias-0-1",
+    "stratum": "alias-OOD",
+    "family": 0,
+    "method": "B-RAG-TFIDF",
+    "intent": "fetch_user_q_1",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/users?user=val0_1"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/users/val0_1"
+    },
+    "observed_confidence": 0.4532946552278861,
+    "is_correct": false,
+    "is_false_accept": true,
+    "is_unknown": false,
+    "reason": "tfidf",
+    "registry_size": 3,
+    "is_heldout": false
+  },
+  {
+    "task_id": "alias-0-1",
+    "stratum": "alias-OOD",
+    "family": 0,
+    "method": "B-RAG-EMBED",
+    "intent": "fetch_user_q_1",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/users?user=val0_1"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/users/val0_1"
+    },
+    "observed_confidence": 0.4532946552278861,
+    "is_correct": false,
+    "is_false_accept": true,
+    "is_unknown": false,
+    "reason": "embed_unavailable_fallback_tfidf:tfidf",
+    "registry_size": 3,
+    "is_heldout": false
+  },
+  {
+    "task_id": "alias-0-1",
+    "stratum": "alias-OOD",
+    "family": 0,
+    "method": "B-RANDOM",
+    "intent": "fetch_user_q_1",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/users?user=val0_1"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/users/val0_1"
+    },
+    "observed_confidence": 0.5,
+    "is_correct": false,
+    "is_false_accept": true,
+    "is_unknown": false,
+    "reason": "random",
+    "registry_size": 3,
+    "is_heldout": false
+  },
+  {
+    "task_id": "alias-0-1",
+    "stratum": "alias-OOD",
+    "family": 0,
+    "method": "RECONSTRUCTION",
+    "intent": "fetch_user_q_1",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/users?user=val0_1"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/users?user=val0_1"
+    },
+    "observed_confidence": 0.9251090838344066,
+    "is_correct": true,
+    "is_false_accept": false,
+    "is_unknown": false,
+    "reason": "rewritten from derived state score 1.000 conf 0.925",
+    "registry_size": 3,
+    "is_heldout": false
+  },
+  {
+    "task_id": "alias-0-2",
+    "stratum": "alias-OOD",
+    "family": 0,
+    "method": "B-EXACT-MATCH",
+    "intent": "fetch_user_q_2",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/users?user=val0_2"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/users/val0_2"
+    },
+    "observed_confidence": 0.9,
+    "is_correct": false,
+    "is_false_accept": true,
+    "is_unknown": false,
+    "reason": "applicability guards and confidence threshold passed",
+    "registry_size": 3,
+    "is_heldout": false
+  },
+  {
+    "task_id": "alias-0-2",
+    "stratum": "alias-OOD",
+    "family": 0,
+    "method": "B-VERBATIM-REPLAY",
+    "intent": "fetch_user_q_2",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/users?user=val0_2"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/users/val0_2"
+    },
+    "observed_confidence": 0.9,
+    "is_correct": false,
+    "is_false_accept": true,
+    "is_unknown": false,
+    "reason": "verbatim replay",
+    "registry_size": 3,
+    "is_heldout": false
+  },
+  {
+    "task_id": "alias-0-2",
+    "stratum": "alias-OOD",
+    "family": 0,
+    "method": "B-RAG-TFIDF",
+    "intent": "fetch_user_q_2",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/users?user=val0_2"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/users/val0_2"
+    },
+    "observed_confidence": 0.4532946552278861,
+    "is_correct": false,
+    "is_false_accept": true,
+    "is_unknown": false,
+    "reason": "tfidf",
+    "registry_size": 3,
+    "is_heldout": false
+  },
+  {
+    "task_id": "alias-0-2",
+    "stratum": "alias-OOD",
+    "family": 0,
+    "method": "B-RAG-EMBED",
+    "intent": "fetch_user_q_2",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/users?user=val0_2"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/users/val0_2"
+    },
+    "observed_confidence": 0.4532946552278861,
+    "is_correct": false,
+    "is_false_accept": true,
+    "is_unknown": false,
+    "reason": "embed_unavailable_fallback_tfidf:tfidf",
+    "registry_size": 3,
+    "is_heldout": false
+  },
+  {
+    "task_id": "alias-0-2",
+    "stratum": "alias-OOD",
+    "family": 0,
+    "method": "B-RANDOM",
+    "intent": "fetch_user_q_2",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/users?user=val0_2"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/users/val0_2"
+    },
+    "observed_confidence": 0.5,
+    "is_correct": false,
+    "is_false_accept": true,
+    "is_unknown": false,
+    "reason": "random",
+    "registry_size": 3,
+    "is_heldout": false
+  },
+  {
+    "task_id": "alias-0-2",
+    "stratum": "alias-OOD",
+    "family": 0,
+    "method": "RECONSTRUCTION",
+    "intent": "fetch_user_q_2",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/users?user=val0_2"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/users?user=val0_2"
+    },
+    "observed_confidence": 0.9251090838344066,
+    "is_correct": true,
+    "is_false_accept": false,
+    "is_unknown": false,
+    "reason": "rewritten from derived state score 1.000 conf 0.925",
+    "registry_size": 3,
+    "is_heldout": false
+  },
+  {
+    "task_id": "alias-0-3",
+    "stratum": "alias-OOD",
+    "family": 0,
+    "method": "B-EXACT-MATCH",
+    "intent": "fetch_user_q_3",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/users?user=val0_3"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/users/val0_3"
+    },
+    "observed_confidence": 0.9,
+    "is_correct": false,
+    "is_false_accept": true,
+    "is_unknown": false,
+    "reason": "applicability guards and confidence threshold passed",
+    "registry_size": 3,
+    "is_heldout": false
+  },
+  {
+    "task_id": "alias-0-3",
+    "stratum": "alias-OOD",
+    "family": 0,
+    "method": "B-VERBATIM-REPLAY",
+    "intent": "fetch_user_q_3",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/users?user=val0_3"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/users/val0_3"
+    },
+    "observed_confidence": 0.9,
+    "is_correct": false,
+    "is_false_accept": true,
+    "is_unknown": false,
+    "reason": "verbatim replay",
+    "registry_size": 3,
+    "is_heldout": false
+  },
+  {
+    "task_id": "alias-0-3",
+    "stratum": "alias-OOD",
+    "family": 0,
+    "method": "B-RAG-TFIDF",
+    "intent": "fetch_user_q_3",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/users?user=val0_3"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/users/val0_3"
+    },
+    "observed_confidence": 0.4532946552278861,
+    "is_correct": false,
+    "is_false_accept": true,
+    "is_unknown": false,
+    "reason": "tfidf",
+    "registry_size": 3,
+    "is_heldout": false
+  },
+  {
+    "task_id": "alias-0-3",
+    "stratum": "alias-OOD",
+    "family": 0,
+    "method": "B-RAG-EMBED",
+    "intent": "fetch_user_q_3",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/users?user=val0_3"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/users/val0_3"
+    },
+    "observed_confidence": 0.4532946552278861,
+    "is_correct": false,
+    "is_false_accept": true,
+    "is_unknown": false,
+    "reason": "embed_unavailable_fallback_tfidf:tfidf",
+    "registry_size": 3,
+    "is_heldout": false
+  },
+  {
+    "task_id": "alias-0-3",
+    "stratum": "alias-OOD",
+    "family": 0,
+    "method": "B-RANDOM",
+    "intent": "fetch_user_q_3",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/users?user=val0_3"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/items/val0_3"
+    },
+    "observed_confidence": 0.5,
+    "is_correct": false,
+    "is_false_accept": true,
+    "is_unknown": false,
+    "reason": "random",
+    "registry_size": 3,
+    "is_heldout": false
+  },
+  {
+    "task_id": "alias-0-3",
+    "stratum": "alias-OOD",
+    "family": 0,
+    "method": "RECONSTRUCTION",
+    "intent": "fetch_user_q_3",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/users?user=val0_3"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/users?user=val0_3"
+    },
+    "observed_confidence": 0.9251090838344066,
+    "is_correct": true,
+    "is_false_accept": false,
+    "is_unknown": false,
+    "reason": "rewritten from derived state score 1.000 conf 0.925",
+    "registry_size": 3,
+    "is_heldout": false
+  },
+  {
+    "task_id": "alias-0-4",
+    "stratum": "alias-OOD",
+    "family": 0,
+    "method": "B-EXACT-MATCH",
+    "intent": "fetch_user_q_4",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/users?user=val0_4"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/users/val0_4"
+    },
+    "observed_confidence": 0.9,
+    "is_correct": false,
+    "is_false_accept": true,
+    "is_unknown": false,
+    "reason": "applicability guards and confidence threshold passed",
+    "registry_size": 3,
+    "is_heldout": false
+  },
+  {
+    "task_id": "alias-0-4",
+    "stratum": "alias-OOD",
+    "family": 0,
+    "method": "B-VERBATIM-REPLAY",
+    "intent": "fetch_user_q_4",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/users?user=val0_4"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/users/val0_4"
+    },
+    "observed_confidence": 0.9,
+    "is_correct": false,
+    "is_false_accept": true,
+    "is_unknown": false,
+    "reason": "verbatim replay",
+    "registry_size": 3,
+    "is_heldout": false
+  },
+  {
+    "task_id": "alias-0-4",
+    "stratum": "alias-OOD",
+    "family": 0,
+    "method": "B-RAG-TFIDF",
+    "intent": "fetch_user_q_4",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/users?user=val0_4"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/users/val0_4"
+    },
+    "observed_confidence": 0.4532946552278861,
+    "is_correct": false,
+    "is_false_accept": true,
+    "is_unknown": false,
+    "reason": "tfidf",
+    "registry_size": 3,
+    "is_heldout": false
+  },
+  {
+    "task_id": "alias-0-4",
+    "stratum": "alias-OOD",
+    "family": 0,
+    "method": "B-RAG-EMBED",
+    "intent": "fetch_user_q_4",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/users?user=val0_4"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/users/val0_4"
+    },
+    "observed_confidence": 0.4532946552278861,
+    "is_correct": false,
+    "is_false_accept": true,
+    "is_unknown": false,
+    "reason": "embed_unavailable_fallback_tfidf:tfidf",
+    "registry_size": 3,
+    "is_heldout": false
+  },
+  {
+    "task_id": "alias-0-4",
+    "stratum": "alias-OOD",
+    "family": 0,
+    "method": "B-RANDOM",
+    "intent": "fetch_user_q_4",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/users?user=val0_4"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/accounts/val0_4"
+    },
+    "observed_confidence": 0.5,
+    "is_correct": false,
+    "is_false_accept": true,
+    "is_unknown": false,
+    "reason": "random",
+    "registry_size": 3,
+    "is_heldout": false
+  },
+  {
+    "task_id": "alias-0-4",
+    "stratum": "alias-OOD",
+    "family": 0,
+    "method": "RECONSTRUCTION",
+    "intent": "fetch_user_q_4",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/users?user=val0_4"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/users?user=val0_4"
+    },
+    "observed_confidence": 0.9251090838344066,
+    "is_correct": true,
+    "is_false_accept": false,
+    "is_unknown": false,
+    "reason": "rewritten from derived state score 1.000 conf 0.925",
+    "registry_size": 3,
+    "is_heldout": false
+  },
+  {
+    "task_id": "alias-0-5",
+    "stratum": "alias-OOD",
+    "family": 0,
+    "method": "B-EXACT-MATCH",
+    "intent": "fetch_user_q_5",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/users?user=val0_5"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/users/val0_5"
+    },
+    "observed_confidence": 0.9,
+    "is_correct": false,
+    "is_false_accept": true,
+    "is_unknown": false,
+    "reason": "applicability guards and confidence threshold passed",
+    "registry_size": 3,
+    "is_heldout": false
+  },
+  {
+    "task_id": "alias-0-5",
+    "stratum": "alias-OOD",
+    "family": 0,
+    "method": "B-VERBATIM-REPLAY",
+    "intent": "fetch_user_q_5",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/users?user=val0_5"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/users/val0_5"
+    },
+    "observed_confidence": 0.9,
+    "is_correct": false,
+    "is_false_accept": true,
+    "is_unknown": false,
+    "reason": "verbatim replay",
+    "registry_size": 3,
+    "is_heldout": false
+  },
+  {
+    "task_id": "alias-0-5",
+    "stratum": "alias-OOD",
+    "family": 0,
+    "method": "B-RAG-TFIDF",
+    "intent": "fetch_user_q_5",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/users?user=val0_5"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/users/val0_5"
+    },
+    "observed_confidence": 0.4532946552278861,
+    "is_correct": false,
+    "is_false_accept": true,
+    "is_unknown": false,
+    "reason": "tfidf",
+    "registry_size": 3,
+    "is_heldout": false
+  },
+  {
+    "task_id": "alias-0-5",
+    "stratum": "alias-OOD",
+    "family": 0,
+    "method": "B-RAG-EMBED",
+    "intent": "fetch_user_q_5",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/users?user=val0_5"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/users/val0_5"
+    },
+    "observed_confidence": 0.4532946552278861,
+    "is_correct": false,
+    "is_false_accept": true,
+    "is_unknown": false,
+    "reason": "embed_unavailable_fallback_tfidf:tfidf",
+    "registry_size": 3,
+    "is_heldout": false
+  },
+  {
+    "task_id": "alias-0-5",
+    "stratum": "alias-OOD",
+    "family": 0,
+    "method": "B-RANDOM",
+    "intent": "fetch_user_q_5",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/users?user=val0_5"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/users/val0_5"
+    },
+    "observed_confidence": 0.5,
+    "is_correct": false,
+    "is_false_accept": true,
+    "is_unknown": false,
+    "reason": "random",
+    "registry_size": 3,
+    "is_heldout": false
+  },
+  {
+    "task_id": "alias-0-5",
+    "stratum": "alias-OOD",
+    "family": 0,
+    "method": "RECONSTRUCTION",
+    "intent": "fetch_user_q_5",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/users?user=val0_5"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/users?user=val0_5"
+    },
+    "observed_confidence": 0.9251090838344066,
+    "is_correct": true,
+    "is_false_accept": false,
+    "is_unknown": false,
+    "reason": "rewritten from derived state score 1.000 conf 0.925",
+    "registry_size": 3,
+    "is_heldout": false
+  },
+  {
+    "task_id": "alias-0-6",
+    "stratum": "alias-OOD",
+    "family": 0,
+    "method": "B-EXACT-MATCH",
+    "intent": "fetch_user_q_6",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/users?user=val0_6"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/users/val0_6"
+    },
+    "observed_confidence": 0.9,
+    "is_correct": false,
+    "is_false_accept": true,
+    "is_unknown": false,
+    "reason": "applicability guards and confidence threshold passed",
+    "registry_size": 3,
+    "is_heldout": false
+  },
+  {
+    "task_id": "alias-0-6",
+    "stratum": "alias-OOD",
+    "family": 0,
+    "method": "B-VERBATIM-REPLAY",
+    "intent": "fetch_user_q_6",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/users?user=val0_6"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/users/val0_6"
+    },
+    "observed_confidence": 0.9,
+    "is_correct": false,
+    "is_false_accept": true,
+    "is_unknown": false,
+    "reason": "verbatim replay",
+    "registry_size": 3,
+    "is_heldout": false
+  },
+  {
+    "task_id": "alias-0-6",
+    "stratum": "alias-OOD",
+    "family": 0,
+    "method": "B-RAG-TFIDF",
+    "intent": "fetch_user_q_6",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/users?user=val0_6"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/users/val0_6"
+    },
+    "observed_confidence": 0.4532946552278861,
+    "is_correct": false,
+    "is_false_accept": true,
+    "is_unknown": false,
+    "reason": "tfidf",
+    "registry_size": 3,
+    "is_heldout": false
+  },
+  {
+    "task_id": "alias-0-6",
+    "stratum": "alias-OOD",
+    "family": 0,
+    "method": "B-RAG-EMBED",
+    "intent": "fetch_user_q_6",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/users?user=val0_6"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/users/val0_6"
+    },
+    "observed_confidence": 0.4532946552278861,
+    "is_correct": false,
+    "is_false_accept": true,
+    "is_unknown": false,
+    "reason": "embed_unavailable_fallback_tfidf:tfidf",
+    "registry_size": 3,
+    "is_heldout": false
+  },
+  {
+    "task_id": "alias-0-6",
+    "stratum": "alias-OOD",
+    "family": 0,
+    "method": "B-RANDOM",
+    "intent": "fetch_user_q_6",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/users?user=val0_6"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/users/val0_6"
+    },
+    "observed_confidence": 0.5,
+    "is_correct": false,
+    "is_false_accept": true,
+    "is_unknown": false,
+    "reason": "random",
+    "registry_size": 3,
+    "is_heldout": false
+  },
+  {
+    "task_id": "alias-0-6",
+    "stratum": "alias-OOD",
+    "family": 0,
+    "method": "RECONSTRUCTION",
+    "intent": "fetch_user_q_6",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/users?user=val0_6"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/users?user=val0_6"
+    },
+    "observed_confidence": 0.9251090838344066,
+    "is_correct": true,
+    "is_false_accept": false,
+    "is_unknown": false,
+    "reason": "rewritten from derived state score 1.000 conf 0.925",
+    "registry_size": 3,
+    "is_heldout": false
+  },
+  {
+    "task_id": "alias-0-7",
+    "stratum": "alias-OOD",
+    "family": 0,
+    "method": "B-EXACT-MATCH",
+    "intent": "fetch_user_q_7",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/users?uid=val0_7"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/users/val0_7"
+    },
+    "observed_confidence": 0.9,
+    "is_correct": false,
+    "is_false_accept": true,
+    "is_unknown": false,
+    "reason": "applicability guards and confidence threshold passed",
+    "registry_size": 3,
+    "is_heldout": true
+  },
+  {
+    "task_id": "alias-0-7",
+    "stratum": "alias-OOD",
+    "family": 0,
+    "method": "B-VERBATIM-REPLAY",
+    "intent": "fetch_user_q_7",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/users?uid=val0_7"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/users/val0_7"
+    },
+    "observed_confidence": 0.9,
+    "is_correct": false,
+    "is_false_accept": true,
+    "is_unknown": false,
+    "reason": "verbatim replay",
+    "registry_size": 3,
+    "is_heldout": true
+  },
+  {
+    "task_id": "alias-0-7",
+    "stratum": "alias-OOD",
+    "family": 0,
+    "method": "B-RAG-TFIDF",
+    "intent": "fetch_user_q_7",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/users?uid=val0_7"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/users/val0_7"
+    },
+    "observed_confidence": 0.4532946552278861,
+    "is_correct": false,
+    "is_false_accept": true,
+    "is_unknown": false,
+    "reason": "tfidf",
+    "registry_size": 3,
+    "is_heldout": true
+  },
+  {
+    "task_id": "alias-0-7",
+    "stratum": "alias-OOD",
+    "family": 0,
+    "method": "B-RAG-EMBED",
+    "intent": "fetch_user_q_7",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/users?uid=val0_7"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/users/val0_7"
+    },
+    "observed_confidence": 0.4532946552278861,
+    "is_correct": false,
+    "is_false_accept": true,
+    "is_unknown": false,
+    "reason": "embed_unavailable_fallback_tfidf:tfidf",
+    "registry_size": 3,
+    "is_heldout": true
+  },
+  {
+    "task_id": "alias-0-7",
+    "stratum": "alias-OOD",
+    "family": 0,
+    "method": "B-RANDOM",
+    "intent": "fetch_user_q_7",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/users?uid=val0_7"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/users/val0_7"
+    },
+    "observed_confidence": 0.5,
+    "is_correct": false,
+    "is_false_accept": true,
+    "is_unknown": false,
+    "reason": "random",
+    "registry_size": 3,
+    "is_heldout": true
+  },
+  {
+    "task_id": "alias-0-7",
+    "stratum": "alias-OOD",
+    "family": 0,
+    "method": "RECONSTRUCTION",
+    "intent": "fetch_user_q_7",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/users?uid=val0_7"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/users?uid=val0_7"
+    },
+    "observed_confidence": 0.9221090838344066,
+    "is_correct": true,
+    "is_false_accept": false,
+    "is_unknown": false,
+    "reason": "rewritten from derived state score 1.000 conf 0.922",
+    "registry_size": 3,
+    "is_heldout": true
+  },
+  {
+    "task_id": "alias-0-8",
+    "stratum": "alias-OOD",
+    "family": 0,
+    "method": "B-EXACT-MATCH",
+    "intent": "fetch_user_q_8",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/v2/users?user=val0_8"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/users/val0_8"
+    },
+    "observed_confidence": 0.9,
+    "is_correct": false,
+    "is_false_accept": true,
+    "is_unknown": false,
+    "reason": "applicability guards and confidence threshold passed",
+    "registry_size": 3,
+    "is_heldout": true
+  },
+  {
+    "task_id": "alias-0-8",
+    "stratum": "alias-OOD",
+    "family": 0,
+    "method": "B-VERBATIM-REPLAY",
+    "intent": "fetch_user_q_8",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/v2/users?user=val0_8"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/users/val0_8"
+    },
+    "observed_confidence": 0.9,
+    "is_correct": false,
+    "is_false_accept": true,
+    "is_unknown": false,
+    "reason": "verbatim replay",
+    "registry_size": 3,
+    "is_heldout": true
+  },
+  {
+    "task_id": "alias-0-8",
+    "stratum": "alias-OOD",
+    "family": 0,
+    "method": "B-RAG-TFIDF",
+    "intent": "fetch_user_q_8",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/v2/users?user=val0_8"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/users/val0_8"
+    },
+    "observed_confidence": 0.4532946552278861,
+    "is_correct": false,
+    "is_false_accept": true,
+    "is_unknown": false,
+    "reason": "tfidf",
+    "registry_size": 3,
+    "is_heldout": true
+  },
+  {
+    "task_id": "alias-0-8",
+    "stratum": "alias-OOD",
+    "family": 0,
+    "method": "B-RAG-EMBED",
+    "intent": "fetch_user_q_8",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/v2/users?user=val0_8"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/users/val0_8"
+    },
+    "observed_confidence": 0.4532946552278861,
+    "is_correct": false,
+    "is_false_accept": true,
+    "is_unknown": false,
+    "reason": "embed_unavailable_fallback_tfidf:tfidf",
+    "registry_size": 3,
+    "is_heldout": true
+  },
+  {
+    "task_id": "alias-0-8",
+    "stratum": "alias-OOD",
+    "family": 0,
+    "method": "B-RANDOM",
+    "intent": "fetch_user_q_8",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/v2/users?user=val0_8"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/items/val0_8"
+    },
+    "observed_confidence": 0.5,
+    "is_correct": false,
+    "is_false_accept": true,
+    "is_unknown": false,
+    "reason": "random",
+    "registry_size": 3,
+    "is_heldout": true
+  },
+  {
+    "task_id": "alias-0-8",
+    "stratum": "alias-OOD",
+    "family": 0,
+    "method": "RECONSTRUCTION",
+    "intent": "fetch_user_q_8",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/v2/users?user=val0_8"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/v2/users?user=val0_8"
+    },
+    "observed_confidence": 0.964173788330998,
+    "is_correct": true,
+    "is_false_accept": false,
+    "is_unknown": false,
+    "reason": "rewritten from derived state score 1.000 conf 0.964",
+    "registry_size": 3,
+    "is_heldout": true
+  },
+  {
+    "task_id": "alias-0-9",
+    "stratum": "alias-OOD",
+    "family": 0,
+    "method": "B-EXACT-MATCH",
+    "intent": "fetch_user_q_9",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/accounts?user=val0_9"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/users/val0_9"
+    },
+    "observed_confidence": 0.9,
+    "is_correct": false,
+    "is_false_accept": true,
+    "is_unknown": false,
+    "reason": "applicability guards and confidence threshold passed",
+    "registry_size": 3,
+    "is_heldout": true
+  },
+  {
+    "task_id": "alias-0-9",
+    "stratum": "alias-OOD",
+    "family": 0,
+    "method": "B-VERBATIM-REPLAY",
+    "intent": "fetch_user_q_9",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/accounts?user=val0_9"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/users/val0_9"
+    },
+    "observed_confidence": 0.9,
+    "is_correct": false,
+    "is_false_accept": true,
+    "is_unknown": false,
+    "reason": "verbatim replay",
+    "registry_size": 3,
+    "is_heldout": true
+  },
+  {
+    "task_id": "alias-0-9",
+    "stratum": "alias-OOD",
+    "family": 0,
+    "method": "B-RAG-TFIDF",
+    "intent": "fetch_user_q_9",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/accounts?user=val0_9"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/users/val0_9"
+    },
+    "observed_confidence": 0.4532946552278861,
+    "is_correct": false,
+    "is_false_accept": true,
+    "is_unknown": false,
+    "reason": "tfidf",
+    "registry_size": 3,
+    "is_heldout": true
+  },
+  {
+    "task_id": "alias-0-9",
+    "stratum": "alias-OOD",
+    "family": 0,
+    "method": "B-RAG-EMBED",
+    "intent": "fetch_user_q_9",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/accounts?user=val0_9"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/users/val0_9"
+    },
+    "observed_confidence": 0.4532946552278861,
+    "is_correct": false,
+    "is_false_accept": true,
+    "is_unknown": false,
+    "reason": "embed_unavailable_fallback_tfidf:tfidf",
+    "registry_size": 3,
+    "is_heldout": true
+  },
+  {
+    "task_id": "alias-0-9",
+    "stratum": "alias-OOD",
+    "family": 0,
+    "method": "B-RANDOM",
+    "intent": "fetch_user_q_9",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/accounts?user=val0_9"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/users/val0_9"
+    },
+    "observed_confidence": 0.5,
+    "is_correct": false,
+    "is_false_accept": true,
+    "is_unknown": false,
+    "reason": "random",
+    "registry_size": 3,
+    "is_heldout": true
+  },
+  {
+    "task_id": "alias-0-9",
+    "stratum": "alias-OOD",
+    "family": 0,
+    "method": "RECONSTRUCTION",
+    "intent": "fetch_user_q_9",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/accounts?user=val0_9"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/accounts?user=val0_9"
+    },
+    "observed_confidence": 0.9131090838344066,
+    "is_correct": true,
+    "is_false_accept": false,
+    "is_unknown": false,
+    "reason": "rewritten from derived state score 1.000 conf 0.913",
+    "registry_size": 3,
+    "is_heldout": true
+  },
+  {
+    "task_id": "alias-1-0",
+    "stratum": "alias-OOD",
+    "family": 1,
+    "method": "B-EXACT-MATCH",
+    "intent": "fetch_user_rw_0",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/api/v2/users/val1_0"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/users/val1_0"
+    },
+    "observed_confidence": 0.9,
+    "is_correct": false,
+    "is_false_accept": true,
+    "is_unknown": false,
+    "reason": "applicability guards and confidence threshold passed",
+    "registry_size": 3,
+    "is_heldout": false
+  },
+  {
+    "task_id": "alias-1-0",
+    "stratum": "alias-OOD",
+    "family": 1,
+    "method": "B-VERBATIM-REPLAY",
+    "intent": "fetch_user_rw_0",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/api/v2/users/val1_0"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/users/val1_0"
+    },
+    "observed_confidence": 0.9,
+    "is_correct": false,
+    "is_false_accept": true,
+    "is_unknown": false,
+    "reason": "verbatim replay",
+    "registry_size": 3,
+    "is_heldout": false
+  },
+  {
+    "task_id": "alias-1-0",
+    "stratum": "alias-OOD",
+    "family": 1,
+    "method": "B-RAG-TFIDF",
+    "intent": "fetch_user_rw_0",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/api/v2/users/val1_0"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/users/val1_0"
+    },
+    "observed_confidence": 0.4532946552278861,
+    "is_correct": false,
+    "is_false_accept": true,
+    "is_unknown": false,
+    "reason": "tfidf",
+    "registry_size": 3,
+    "is_heldout": false
+  },
+  {
+    "task_id": "alias-1-0",
+    "stratum": "alias-OOD",
+    "family": 1,
+    "method": "B-RAG-EMBED",
+    "intent": "fetch_user_rw_0",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/api/v2/users/val1_0"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/users/val1_0"
+    },
+    "observed_confidence": 0.4532946552278861,
+    "is_correct": false,
+    "is_false_accept": true,
+    "is_unknown": false,
+    "reason": "embed_unavailable_fallback_tfidf:tfidf",
+    "registry_size": 3,
+    "is_heldout": false
+  },
+  {
+    "task_id": "alias-1-0",
+    "stratum": "alias-OOD",
+    "family": 1,
+    "method": "B-RANDOM",
+    "intent": "fetch_user_rw_0",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/api/v2/users/val1_0"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/items/val1_0"
+    },
+    "observed_confidence": 0.5,
+    "is_correct": false,
+    "is_false_accept": true,
+    "is_unknown": false,
+    "reason": "random",
+    "registry_size": 3,
+    "is_heldout": false
+  },
+  {
+    "task_id": "alias-1-0",
+    "stratum": "alias-OOD",
+    "family": 1,
+    "method": "RECONSTRUCTION",
+    "intent": "fetch_user_rw_0",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/api/v2/users/val1_0"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/api/v2/users/val1_0"
+    },
+    "observed_confidence": 0.8850706316015922,
+    "is_correct": true,
+    "is_false_accept": false,
+    "is_unknown": false,
+    "reason": "rewritten from derived state score 1.000 conf 0.885",
+    "registry_size": 3,
+    "is_heldout": false
+  },
+  {
+    "task_id": "alias-1-1",
+    "stratum": "alias-OOD",
+    "family": 1,
+    "method": "B-EXACT-MATCH",
+    "intent": "fetch_user_rw_1",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/api/v2/users/val1_1"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/users/val1_1"
+    },
+    "observed_confidence": 0.9,
+    "is_correct": false,
+    "is_false_accept": true,
+    "is_unknown": false,
+    "reason": "applicability guards and confidence threshold passed",
+    "registry_size": 3,
+    "is_heldout": false
+  },
+  {
+    "task_id": "alias-1-1",
+    "stratum": "alias-OOD",
+    "family": 1,
+    "method": "B-VERBATIM-REPLAY",
+    "intent": "fetch_user_rw_1",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/api/v2/users/val1_1"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/users/val1_1"
+    },
+    "observed_confidence": 0.9,
+    "is_correct": false,
+    "is_false_accept": true,
+    "is_unknown": false,
+    "reason": "verbatim replay",
+    "registry_size": 3,
+    "is_heldout": false
+  },
+  {
+    "task_id": "alias-1-1",
+    "stratum": "alias-OOD",
+    "family": 1,
+    "method": "B-RAG-TFIDF",
+    "intent": "fetch_user_rw_1",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/api/v2/users/val1_1"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/users/val1_1"
+    },
+    "observed_confidence": 0.4532946552278861,
+    "is_correct": false,
+    "is_false_accept": true,
+    "is_unknown": false,
+    "reason": "tfidf",
+    "registry_size": 3,
+    "is_heldout": false
+  },
+  {
+    "task_id": "alias-1-1",
+    "stratum": "alias-OOD",
+    "family": 1,
+    "method": "B-RAG-EMBED",
+    "intent": "fetch_user_rw_1",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/api/v2/users/val1_1"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/users/val1_1"
+    },
+    "observed_confidence": 0.4532946552278861,
+    "is_correct": false,
+    "is_false_accept": true,
+    "is_unknown": false,
+    "reason": "embed_unavailable_fallback_tfidf:tfidf",
+    "registry_size": 3,
+    "is_heldout": false
+  },
+  {
+    "task_id": "alias-1-1",
+    "stratum": "alias-OOD",
+    "family": 1,
+    "method": "B-RANDOM",
+    "intent": "fetch_user_rw_1",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/api/v2/users/val1_1"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/items/val1_1"
+    },
+    "observed_confidence": 0.5,
+    "is_correct": false,
+    "is_false_accept": true,
+    "is_unknown": false,
+    "reason": "random",
+    "registry_size": 3,
+    "is_heldout": false
+  },
+  {
+    "task_id": "alias-1-1",
+    "stratum": "alias-OOD",
+    "family": 1,
+    "method": "RECONSTRUCTION",
+    "intent": "fetch_user_rw_1",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/api/v2/users/val1_1"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/api/v2/users/val1_1"
+    },
+    "observed_confidence": 0.8850706316015922,
+    "is_correct": true,
+    "is_false_accept": false,
+    "is_unknown": false,
+    "reason": "rewritten from derived state score 1.000 conf 0.885",
+    "registry_size": 3,
+    "is_heldout": false
+  },
+  {
+    "task_id": "alias-1-2",
+    "stratum": "alias-OOD",
+    "family": 1,
+    "method": "B-EXACT-MATCH",
+    "intent": "fetch_user_rw_2",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/api/v2/users/val1_2"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/users/val1_2"
+    },
+    "observed_confidence": 0.9,
+    "is_correct": false,
+    "is_false_accept": true,
+    "is_unknown": false,
+    "reason": "applicability guards and confidence threshold passed",
+    "registry_size": 3,
+    "is_heldout": false
+  },
+  {
+    "task_id": "alias-1-2",
+    "stratum": "alias-OOD",
+    "family": 1,
+    "method": "B-VERBATIM-REPLAY",
+    "intent": "fetch_user_rw_2",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/api/v2/users/val1_2"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/users/val1_2"
+    },
+    "observed_confidence": 0.9,
+    "is_correct": false,
+    "is_false_accept": true,
+    "is_unknown": false,
+    "reason": "verbatim replay",
+    "registry_size": 3,
+    "is_heldout": false
+  },
+  {
+    "task_id": "alias-1-2",
+    "stratum": "alias-OOD",
+    "family": 1,
+    "method": "B-RAG-TFIDF",
+    "intent": "fetch_user_rw_2",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/api/v2/users/val1_2"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/users/val1_2"
+    },
+    "observed_confidence": 0.4532946552278861,
+    "is_correct": false,
+    "is_false_accept": true,
+    "is_unknown": false,
+    "reason": "tfidf",
+    "registry_size": 3,
+    "is_heldout": false
+  },
+  {
+    "task_id": "alias-1-2",
+    "stratum": "alias-OOD",
+    "family": 1,
+    "method": "B-RAG-EMBED",
+    "intent": "fetch_user_rw_2",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/api/v2/users/val1_2"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/users/val1_2"
+    },
+    "observed_confidence": 0.4532946552278861,
+    "is_correct": false,
+    "is_false_accept": true,
+    "is_unknown": false,
+    "reason": "embed_unavailable_fallback_tfidf:tfidf",
+    "registry_size": 3,
+    "is_heldout": false
+  },
+  {
+    "task_id": "alias-1-2",
+    "stratum": "alias-OOD",
+    "family": 1,
+    "method": "B-RANDOM",
+    "intent": "fetch_user_rw_2",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/api/v2/users/val1_2"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/items/val1_2"
+    },
+    "observed_confidence": 0.5,
+    "is_correct": false,
+    "is_false_accept": true,
+    "is_unknown": false,
+    "reason": "random",
+    "registry_size": 3,
+    "is_heldout": false
+  },
+  {
+    "task_id": "alias-1-2",
+    "stratum": "alias-OOD",
+    "family": 1,
+    "method": "RECONSTRUCTION",
+    "intent": "fetch_user_rw_2",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/api/v2/users/val1_2"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/api/v2/users/val1_2"
+    },
+    "observed_confidence": 0.8850706316015922,
+    "is_correct": true,
+    "is_false_accept": false,
+    "is_unknown": false,
+    "reason": "rewritten from derived state score 1.000 conf 0.885",
+    "registry_size": 3,
+    "is_heldout": false
+  },
+  {
+    "task_id": "alias-1-3",
+    "stratum": "alias-OOD",
+    "family": 1,
+    "method": "B-EXACT-MATCH",
+    "intent": "fetch_user_rw_3",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/api/v2/users/val1_3"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/users/val1_3"
+    },
+    "observed_confidence": 0.9,
+    "is_correct": false,
+    "is_false_accept": true,
+    "is_unknown": false,
+    "reason": "applicability guards and confidence threshold passed",
+    "registry_size": 3,
+    "is_heldout": false
+  },
+  {
+    "task_id": "alias-1-3",
+    "stratum": "alias-OOD",
+    "family": 1,
+    "method": "B-VERBATIM-REPLAY",
+    "intent": "fetch_user_rw_3",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/api/v2/users/val1_3"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/users/val1_3"
+    },
+    "observed_confidence": 0.9,
+    "is_correct": false,
+    "is_false_accept": true,
+    "is_unknown": false,
+    "reason": "verbatim replay",
+    "registry_size": 3,
+    "is_heldout": false
+  },
+  {
+    "task_id": "alias-1-3",
+    "stratum": "alias-OOD",
+    "family": 1,
+    "method": "B-RAG-TFIDF",
+    "intent": "fetch_user_rw_3",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/api/v2/users/val1_3"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/users/val1_3"
+    },
+    "observed_confidence": 0.4532946552278861,
+    "is_correct": false,
+    "is_false_accept": true,
+    "is_unknown": false,
+    "reason": "tfidf",
+    "registry_size": 3,
+    "is_heldout": false
+  },
+  {
+    "task_id": "alias-1-3",
+    "stratum": "alias-OOD",
+    "family": 1,
+    "method": "B-RAG-EMBED",
+    "intent": "fetch_user_rw_3",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/api/v2/users/val1_3"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/users/val1_3"
+    },
+    "observed_confidence": 0.4532946552278861,
+    "is_correct": false,
+    "is_false_accept": true,
+    "is_unknown": false,
+    "reason": "embed_unavailable_fallback_tfidf:tfidf",
+    "registry_size": 3,
+    "is_heldout": false
+  },
+  {
+    "task_id": "alias-1-3",
+    "stratum": "alias-OOD",
+    "family": 1,
+    "method": "B-RANDOM",
+    "intent": "fetch_user_rw_3",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/api/v2/users/val1_3"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/users/val1_3"
+    },
+    "observed_confidence": 0.5,
+    "is_correct": false,
+    "is_false_accept": true,
+    "is_unknown": false,
+    "reason": "random",
+    "registry_size": 3,
+    "is_heldout": false
+  },
+  {
+    "task_id": "alias-1-3",
+    "stratum": "alias-OOD",
+    "family": 1,
+    "method": "RECONSTRUCTION",
+    "intent": "fetch_user_rw_3",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/api/v2/users/val1_3"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/api/v2/users/val1_3"
+    },
+    "observed_confidence": 0.8850706316015922,
+    "is_correct": true,
+    "is_false_accept": false,
+    "is_unknown": false,
+    "reason": "rewritten from derived state score 1.000 conf 0.885",
+    "registry_size": 3,
+    "is_heldout": false
+  },
+  {
+    "task_id": "alias-1-4",
+    "stratum": "alias-OOD",
+    "family": 1,
+    "method": "B-EXACT-MATCH",
+    "intent": "fetch_user_rw_4",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/api/v2/users/val1_4"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/users/val1_4"
+    },
+    "observed_confidence": 0.9,
+    "is_correct": false,
+    "is_false_accept": true,
+    "is_unknown": false,
+    "reason": "applicability guards and confidence threshold passed",
+    "registry_size": 3,
+    "is_heldout": false
+  },
+  {
+    "task_id": "alias-1-4",
+    "stratum": "alias-OOD",
+    "family": 1,
+    "method": "B-VERBATIM-REPLAY",
+    "intent": "fetch_user_rw_4",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/api/v2/users/val1_4"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/users/val1_4"
+    },
+    "observed_confidence": 0.9,
+    "is_correct": false,
+    "is_false_accept": true,
+    "is_unknown": false,
+    "reason": "verbatim replay",
+    "registry_size": 3,
+    "is_heldout": false
+  },
+  {
+    "task_id": "alias-1-4",
+    "stratum": "alias-OOD",
+    "family": 1,
+    "method": "B-RAG-TFIDF",
+    "intent": "fetch_user_rw_4",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/api/v2/users/val1_4"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/users/val1_4"
+    },
+    "observed_confidence": 0.4532946552278861,
+    "is_correct": false,
+    "is_false_accept": true,
+    "is_unknown": false,
+    "reason": "tfidf",
+    "registry_size": 3,
+    "is_heldout": false
+  },
+  {
+    "task_id": "alias-1-4",
+    "stratum": "alias-OOD",
+    "family": 1,
+    "method": "B-RAG-EMBED",
+    "intent": "fetch_user_rw_4",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/api/v2/users/val1_4"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/users/val1_4"
+    },
+    "observed_confidence": 0.4532946552278861,
+    "is_correct": false,
+    "is_false_accept": true,
+    "is_unknown": false,
+    "reason": "embed_unavailable_fallback_tfidf:tfidf",
+    "registry_size": 3,
+    "is_heldout": false
+  },
+  {
+    "task_id": "alias-1-4",
+    "stratum": "alias-OOD",
+    "family": 1,
+    "method": "B-RANDOM",
+    "intent": "fetch_user_rw_4",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/api/v2/users/val1_4"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/items/val1_4"
+    },
+    "observed_confidence": 0.5,
+    "is_correct": false,
+    "is_false_accept": true,
+    "is_unknown": false,
+    "reason": "random",
+    "registry_size": 3,
+    "is_heldout": false
+  },
+  {
+    "task_id": "alias-1-4",
+    "stratum": "alias-OOD",
+    "family": 1,
+    "method": "RECONSTRUCTION",
+    "intent": "fetch_user_rw_4",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/api/v2/users/val1_4"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/api/v2/users/val1_4"
+    },
+    "observed_confidence": 0.8850706316015922,
+    "is_correct": true,
+    "is_false_accept": false,
+    "is_unknown": false,
+    "reason": "rewritten from derived state score 1.000 conf 0.885",
+    "registry_size": 3,
+    "is_heldout": false
+  },
+  {
+    "task_id": "alias-1-5",
+    "stratum": "alias-OOD",
+    "family": 1,
+    "method": "B-EXACT-MATCH",
+    "intent": "fetch_user_rw_5",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/api/v2/users/val1_5"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/users/val1_5"
+    },
+    "observed_confidence": 0.9,
+    "is_correct": false,
+    "is_false_accept": true,
+    "is_unknown": false,
+    "reason": "applicability guards and confidence threshold passed",
+    "registry_size": 3,
+    "is_heldout": false
+  },
+  {
+    "task_id": "alias-1-5",
+    "stratum": "alias-OOD",
+    "family": 1,
+    "method": "B-VERBATIM-REPLAY",
+    "intent": "fetch_user_rw_5",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/api/v2/users/val1_5"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/users/val1_5"
+    },
+    "observed_confidence": 0.9,
+    "is_correct": false,
+    "is_false_accept": true,
+    "is_unknown": false,
+    "reason": "verbatim replay",
+    "registry_size": 3,
+    "is_heldout": false
+  },
+  {
+    "task_id": "alias-1-5",
+    "stratum": "alias-OOD",
+    "family": 1,
+    "method": "B-RAG-TFIDF",
+    "intent": "fetch_user_rw_5",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/api/v2/users/val1_5"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/users/val1_5"
+    },
+    "observed_confidence": 0.4532946552278861,
+    "is_correct": false,
+    "is_false_accept": true,
+    "is_unknown": false,
+    "reason": "tfidf",
+    "registry_size": 3,
+    "is_heldout": false
+  },
+  {
+    "task_id": "alias-1-5",
+    "stratum": "alias-OOD",
+    "family": 1,
+    "method": "B-RAG-EMBED",
+    "intent": "fetch_user_rw_5",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/api/v2/users/val1_5"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/users/val1_5"
+    },
+    "observed_confidence": 0.4532946552278861,
+    "is_correct": false,
+    "is_false_accept": true,
+    "is_unknown": false,
+    "reason": "embed_unavailable_fallback_tfidf:tfidf",
+    "registry_size": 3,
+    "is_heldout": false
+  },
+  {
+    "task_id": "alias-1-5",
+    "stratum": "alias-OOD",
+    "family": 1,
+    "method": "B-RANDOM",
+    "intent": "fetch_user_rw_5",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/api/v2/users/val1_5"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/accounts/val1_5"
+    },
+    "observed_confidence": 0.5,
+    "is_correct": false,
+    "is_false_accept": true,
+    "is_unknown": false,
+    "reason": "random",
+    "registry_size": 3,
+    "is_heldout": false
+  },
+  {
+    "task_id": "alias-1-5",
+    "stratum": "alias-OOD",
+    "family": 1,
+    "method": "RECONSTRUCTION",
+    "intent": "fetch_user_rw_5",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/api/v2/users/val1_5"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/api/v2/users/val1_5"
+    },
+    "observed_confidence": 0.8850706316015922,
+    "is_correct": true,
+    "is_false_accept": false,
+    "is_unknown": false,
+    "reason": "rewritten from derived state score 1.000 conf 0.885",
+    "registry_size": 3,
+    "is_heldout": false
+  },
+  {
+    "task_id": "alias-1-6",
+    "stratum": "alias-OOD",
+    "family": 1,
+    "method": "B-EXACT-MATCH",
+    "intent": "fetch_user_rw_6",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/api/v2/users/val1_6"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/users/val1_6"
+    },
+    "observed_confidence": 0.9,
+    "is_correct": false,
+    "is_false_accept": true,
+    "is_unknown": false,
+    "reason": "applicability guards and confidence threshold passed",
+    "registry_size": 3,
+    "is_heldout": false
+  },
+  {
+    "task_id": "alias-1-6",
+    "stratum": "alias-OOD",
+    "family": 1,
+    "method": "B-VERBATIM-REPLAY",
+    "intent": "fetch_user_rw_6",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/api/v2/users/val1_6"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/users/val1_6"
+    },
+    "observed_confidence": 0.9,
+    "is_correct": false,
+    "is_false_accept": true,
+    "is_unknown": false,
+    "reason": "verbatim replay",
+    "registry_size": 3,
+    "is_heldout": false
+  },
+  {
+    "task_id": "alias-1-6",
+    "stratum": "alias-OOD",
+    "family": 1,
+    "method": "B-RAG-TFIDF",
+    "intent": "fetch_user_rw_6",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/api/v2/users/val1_6"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/users/val1_6"
+    },
+    "observed_confidence": 0.4532946552278861,
+    "is_correct": false,
+    "is_false_accept": true,
+    "is_unknown": false,
+    "reason": "tfidf",
+    "registry_size": 3,
+    "is_heldout": false
+  },
+  {
+    "task_id": "alias-1-6",
+    "stratum": "alias-OOD",
+    "family": 1,
+    "method": "B-RAG-EMBED",
+    "intent": "fetch_user_rw_6",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/api/v2/users/val1_6"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/users/val1_6"
+    },
+    "observed_confidence": 0.4532946552278861,
+    "is_correct": false,
+    "is_false_accept": true,
+    "is_unknown": false,
+    "reason": "embed_unavailable_fallback_tfidf:tfidf",
+    "registry_size": 3,
+    "is_heldout": false
+  },
+  {
+    "task_id": "alias-1-6",
+    "stratum": "alias-OOD",
+    "family": 1,
+    "method": "B-RANDOM",
+    "intent": "fetch_user_rw_6",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/api/v2/users/val1_6"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/users/val1_6"
+    },
+    "observed_confidence": 0.5,
+    "is_correct": false,
+    "is_false_accept": true,
+    "is_unknown": false,
+    "reason": "random",
+    "registry_size": 3,
+    "is_heldout": false
+  },
+  {
+    "task_id": "alias-1-6",
+    "stratum": "alias-OOD",
+    "family": 1,
+    "method": "RECONSTRUCTION",
+    "intent": "fetch_user_rw_6",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/api/v2/users/val1_6"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/api/v2/users/val1_6"
+    },
+    "observed_confidence": 0.8850706316015922,
+    "is_correct": true,
+    "is_false_accept": false,
+    "is_unknown": false,
+    "reason": "rewritten from derived state score 1.000 conf 0.885",
+    "registry_size": 3,
+    "is_heldout": false
+  },
+  {
+    "task_id": "alias-1-7",
+    "stratum": "alias-OOD",
+    "family": 1,
+    "method": "B-EXACT-MATCH",
+    "intent": "fetch_user_rw_7",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/api/users/val1_7"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/users/val1_7"
+    },
+    "observed_confidence": 0.9,
+    "is_correct": false,
+    "is_false_accept": true,
+    "is_unknown": false,
+    "reason": "applicability guards and confidence threshold passed",
+    "registry_size": 3,
+    "is_heldout": true
+  },
+  {
+    "task_id": "alias-1-7",
+    "stratum": "alias-OOD",
+    "family": 1,
+    "method": "B-VERBATIM-REPLAY",
+    "intent": "fetch_user_rw_7",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/api/users/val1_7"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/users/val1_7"
+    },
+    "observed_confidence": 0.9,
+    "is_correct": false,
+    "is_false_accept": true,
+    "is_unknown": false,
+    "reason": "verbatim replay",
+    "registry_size": 3,
+    "is_heldout": true
+  },
+  {
+    "task_id": "alias-1-7",
+    "stratum": "alias-OOD",
+    "family": 1,
+    "method": "B-RAG-TFIDF",
+    "intent": "fetch_user_rw_7",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/api/users/val1_7"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/users/val1_7"
+    },
+    "observed_confidence": 0.4532946552278861,
+    "is_correct": false,
+    "is_false_accept": true,
+    "is_unknown": false,
+    "reason": "tfidf",
+    "registry_size": 3,
+    "is_heldout": true
+  },
+  {
+    "task_id": "alias-1-7",
+    "stratum": "alias-OOD",
+    "family": 1,
+    "method": "B-RAG-EMBED",
+    "intent": "fetch_user_rw_7",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/api/users/val1_7"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/users/val1_7"
+    },
+    "observed_confidence": 0.4532946552278861,
+    "is_correct": false,
+    "is_false_accept": true,
+    "is_unknown": false,
+    "reason": "embed_unavailable_fallback_tfidf:tfidf",
+    "registry_size": 3,
+    "is_heldout": true
+  },
+  {
+    "task_id": "alias-1-7",
+    "stratum": "alias-OOD",
+    "family": 1,
+    "method": "B-RANDOM",
+    "intent": "fetch_user_rw_7",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/api/users/val1_7"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/users/val1_7"
+    },
+    "observed_confidence": 0.5,
+    "is_correct": false,
+    "is_false_accept": true,
+    "is_unknown": false,
+    "reason": "random",
+    "registry_size": 3,
+    "is_heldout": true
+  },
+  {
+    "task_id": "alias-1-7",
+    "stratum": "alias-OOD",
+    "family": 1,
+    "method": "RECONSTRUCTION",
+    "intent": "fetch_user_rw_7",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/api/users/val1_7"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/api/users/val1_7"
+    },
+    "observed_confidence": 0.8565404281876797,
+    "is_correct": true,
+    "is_false_accept": false,
+    "is_unknown": false,
+    "reason": "rewritten from derived state score 1.000 conf 0.857",
+    "registry_size": 3,
+    "is_heldout": true
+  },
+  {
+    "task_id": "alias-1-8",
+    "stratum": "alias-OOD",
+    "family": 1,
+    "method": "B-EXACT-MATCH",
+    "intent": "fetch_user_rw_8",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/v2/accounts/val1_8"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/users/val1_8"
+    },
+    "observed_confidence": 0.9,
+    "is_correct": false,
+    "is_false_accept": true,
+    "is_unknown": false,
+    "reason": "applicability guards and confidence threshold passed",
+    "registry_size": 3,
+    "is_heldout": true
+  },
+  {
+    "task_id": "alias-1-8",
+    "stratum": "alias-OOD",
+    "family": 1,
+    "method": "B-VERBATIM-REPLAY",
+    "intent": "fetch_user_rw_8",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/v2/accounts/val1_8"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/users/val1_8"
+    },
+    "observed_confidence": 0.9,
+    "is_correct": false,
+    "is_false_accept": true,
+    "is_unknown": false,
+    "reason": "verbatim replay",
+    "registry_size": 3,
+    "is_heldout": true
+  },
+  {
+    "task_id": "alias-1-8",
+    "stratum": "alias-OOD",
+    "family": 1,
+    "method": "B-RAG-TFIDF",
+    "intent": "fetch_user_rw_8",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/v2/accounts/val1_8"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/users/val1_8"
+    },
+    "observed_confidence": 0.4532946552278861,
+    "is_correct": false,
+    "is_false_accept": true,
+    "is_unknown": false,
+    "reason": "tfidf",
+    "registry_size": 3,
+    "is_heldout": true
+  },
+  {
+    "task_id": "alias-1-8",
+    "stratum": "alias-OOD",
+    "family": 1,
+    "method": "B-RAG-EMBED",
+    "intent": "fetch_user_rw_8",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/v2/accounts/val1_8"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/users/val1_8"
+    },
+    "observed_confidence": 0.4532946552278861,
+    "is_correct": false,
+    "is_false_accept": true,
+    "is_unknown": false,
+    "reason": "embed_unavailable_fallback_tfidf:tfidf",
+    "registry_size": 3,
+    "is_heldout": true
+  },
+  {
+    "task_id": "alias-1-8",
+    "stratum": "alias-OOD",
+    "family": 1,
+    "method": "B-RANDOM",
+    "intent": "fetch_user_rw_8",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/v2/accounts/val1_8"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/users/val1_8"
+    },
+    "observed_confidence": 0.5,
+    "is_correct": false,
+    "is_false_accept": true,
+    "is_unknown": false,
+    "reason": "random",
+    "registry_size": 3,
+    "is_heldout": true
+  },
+  {
+    "task_id": "alias-1-8",
+    "stratum": "alias-OOD",
+    "family": 1,
+    "method": "RECONSTRUCTION",
+    "intent": "fetch_user_rw_8",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/v2/accounts/val1_8"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/v2/accounts/val1_8"
+    },
+    "observed_confidence": 0.8625404281876797,
+    "is_correct": true,
+    "is_false_accept": false,
+    "is_unknown": false,
+    "reason": "rewritten from derived state score 1.000 conf 0.863",
+    "registry_size": 3,
+    "is_heldout": true
+  },
+  {
+    "task_id": "alias-1-9",
+    "stratum": "alias-OOD",
+    "family": 1,
+    "method": "B-EXACT-MATCH",
+    "intent": "fetch_user_rw_9",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/api/v2/accounts/val1_9"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/users/val1_9"
+    },
+    "observed_confidence": 0.9,
+    "is_correct": false,
+    "is_false_accept": true,
+    "is_unknown": false,
+    "reason": "applicability guards and confidence threshold passed",
+    "registry_size": 3,
+    "is_heldout": true
+  },
+  {
+    "task_id": "alias-1-9",
+    "stratum": "alias-OOD",
+    "family": 1,
+    "method": "B-VERBATIM-REPLAY",
+    "intent": "fetch_user_rw_9",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/api/v2/accounts/val1_9"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/users/val1_9"
+    },
+    "observed_confidence": 0.9,
+    "is_correct": false,
+    "is_false_accept": true,
+    "is_unknown": false,
+    "reason": "verbatim replay",
+    "registry_size": 3,
+    "is_heldout": true
+  },
+  {
+    "task_id": "alias-1-9",
+    "stratum": "alias-OOD",
+    "family": 1,
+    "method": "B-RAG-TFIDF",
+    "intent": "fetch_user_rw_9",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/api/v2/accounts/val1_9"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/users/val1_9"
+    },
+    "observed_confidence": 0.4532946552278861,
+    "is_correct": false,
+    "is_false_accept": true,
+    "is_unknown": false,
+    "reason": "tfidf",
+    "registry_size": 3,
+    "is_heldout": true
+  },
+  {
+    "task_id": "alias-1-9",
+    "stratum": "alias-OOD",
+    "family": 1,
+    "method": "B-RAG-EMBED",
+    "intent": "fetch_user_rw_9",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/api/v2/accounts/val1_9"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/users/val1_9"
+    },
+    "observed_confidence": 0.4532946552278861,
+    "is_correct": false,
+    "is_false_accept": true,
+    "is_unknown": false,
+    "reason": "embed_unavailable_fallback_tfidf:tfidf",
+    "registry_size": 3,
+    "is_heldout": true
+  },
+  {
+    "task_id": "alias-1-9",
+    "stratum": "alias-OOD",
+    "family": 1,
+    "method": "B-RANDOM",
+    "intent": "fetch_user_rw_9",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/api/v2/accounts/val1_9"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/users/val1_9"
+    },
+    "observed_confidence": 0.5,
+    "is_correct": false,
+    "is_false_accept": true,
+    "is_unknown": false,
+    "reason": "random",
+    "registry_size": 3,
+    "is_heldout": true
+  },
+  {
+    "task_id": "alias-1-9",
+    "stratum": "alias-OOD",
+    "family": 1,
+    "method": "RECONSTRUCTION",
+    "intent": "fetch_user_rw_9",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/api/v2/accounts/val1_9"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/api/v2/accounts/val1_9"
+    },
+    "observed_confidence": 0.8730706316015922,
+    "is_correct": true,
+    "is_false_accept": false,
+    "is_unknown": false,
+    "reason": "rewritten from derived state score 1.000 conf 0.873",
+    "registry_size": 3,
+    "is_heldout": true
+  },
+  {
+    "task_id": "alias-2-0",
+    "stratum": "alias-OOD",
+    "family": 2,
+    "method": "B-EXACT-MATCH",
+    "intent": "fetch_post_0",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/p/val2_0"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/posts/val2_0"
+    },
+    "observed_confidence": 0.9,
+    "is_correct": false,
+    "is_false_accept": true,
+    "is_unknown": false,
+    "reason": "applicability guards and confidence threshold passed",
+    "registry_size": 3,
+    "is_heldout": false
+  },
+  {
+    "task_id": "alias-2-0",
+    "stratum": "alias-OOD",
+    "family": 2,
+    "method": "B-VERBATIM-REPLAY",
+    "intent": "fetch_post_0",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/p/val2_0"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/posts/val2_0"
+    },
+    "observed_confidence": 0.9,
+    "is_correct": false,
+    "is_false_accept": true,
+    "is_unknown": false,
+    "reason": "verbatim replay",
+    "registry_size": 3,
+    "is_heldout": false
+  },
+  {
+    "task_id": "alias-2-0",
+    "stratum": "alias-OOD",
+    "family": 2,
+    "method": "B-RAG-TFIDF",
+    "intent": "fetch_post_0",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/p/val2_0"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/posts/val2_0"
+    },
+    "observed_confidence": 0.5228423068642596,
+    "is_correct": false,
+    "is_false_accept": true,
+    "is_unknown": false,
+    "reason": "tfidf",
+    "registry_size": 3,
+    "is_heldout": false
+  },
+  {
+    "task_id": "alias-2-0",
+    "stratum": "alias-OOD",
+    "family": 2,
+    "method": "B-RAG-EMBED",
+    "intent": "fetch_post_0",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/p/val2_0"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/posts/val2_0"
+    },
+    "observed_confidence": 0.5228423068642596,
+    "is_correct": false,
+    "is_false_accept": true,
+    "is_unknown": false,
+    "reason": "embed_unavailable_fallback_tfidf:tfidf",
+    "registry_size": 3,
+    "is_heldout": false
+  },
+  {
+    "task_id": "alias-2-0",
+    "stratum": "alias-OOD",
+    "family": 2,
+    "method": "B-RANDOM",
+    "intent": "fetch_post_0",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/p/val2_0"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/posts/val2_0"
+    },
+    "observed_confidence": 0.5,
+    "is_correct": false,
+    "is_false_accept": true,
+    "is_unknown": false,
+    "reason": "random",
+    "registry_size": 3,
+    "is_heldout": false
+  },
+  {
+    "task_id": "alias-2-0",
+    "stratum": "alias-OOD",
+    "family": 2,
+    "method": "RECONSTRUCTION",
+    "intent": "fetch_post_0",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/p/val2_0"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/p/val2_0"
+    },
+    "observed_confidence": 0.8978257661766912,
+    "is_correct": true,
+    "is_false_accept": false,
+    "is_unknown": false,
+    "reason": "rewritten from derived state score 1.000 conf 0.898",
+    "registry_size": 3,
+    "is_heldout": false
+  },
+  {
+    "task_id": "alias-2-1",
+    "stratum": "alias-OOD",
+    "family": 2,
+    "method": "B-EXACT-MATCH",
+    "intent": "fetch_post_1",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/p/val2_1"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/posts/val2_1"
+    },
+    "observed_confidence": 0.9,
+    "is_correct": false,
+    "is_false_accept": true,
+    "is_unknown": false,
+    "reason": "applicability guards and confidence threshold passed",
+    "registry_size": 3,
+    "is_heldout": false
+  },
+  {
+    "task_id": "alias-2-1",
+    "stratum": "alias-OOD",
+    "family": 2,
+    "method": "B-VERBATIM-REPLAY",
+    "intent": "fetch_post_1",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/p/val2_1"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/posts/val2_1"
+    },
+    "observed_confidence": 0.9,
+    "is_correct": false,
+    "is_false_accept": true,
+    "is_unknown": false,
+    "reason": "verbatim replay",
+    "registry_size": 3,
+    "is_heldout": false
+  },
+  {
+    "task_id": "alias-2-1",
+    "stratum": "alias-OOD",
+    "family": 2,
+    "method": "B-RAG-TFIDF",
+    "intent": "fetch_post_1",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/p/val2_1"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/posts/val2_1"
+    },
+    "observed_confidence": 0.5228423068642596,
+    "is_correct": false,
+    "is_false_accept": true,
+    "is_unknown": false,
+    "reason": "tfidf",
+    "registry_size": 3,
+    "is_heldout": false
+  },
+  {
+    "task_id": "alias-2-1",
+    "stratum": "alias-OOD",
+    "family": 2,
+    "method": "B-RAG-EMBED",
+    "intent": "fetch_post_1",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/p/val2_1"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/posts/val2_1"
+    },
+    "observed_confidence": 0.5228423068642596,
+    "is_correct": false,
+    "is_false_accept": true,
+    "is_unknown": false,
+    "reason": "embed_unavailable_fallback_tfidf:tfidf",
+    "registry_size": 3,
+    "is_heldout": false
+  },
+  {
+    "task_id": "alias-2-1",
+    "stratum": "alias-OOD",
+    "family": 2,
+    "method": "B-RANDOM",
+    "intent": "fetch_post_1",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/p/val2_1"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/items/val2_1"
+    },
+    "observed_confidence": 0.5,
+    "is_correct": false,
+    "is_false_accept": true,
+    "is_unknown": false,
+    "reason": "random",
+    "registry_size": 3,
+    "is_heldout": false
+  },
+  {
+    "task_id": "alias-2-1",
+    "stratum": "alias-OOD",
+    "family": 2,
+    "method": "RECONSTRUCTION",
+    "intent": "fetch_post_1",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/p/val2_1"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/p/val2_1"
+    },
+    "observed_confidence": 0.8978257661766912,
+    "is_correct": true,
+    "is_false_accept": false,
+    "is_unknown": false,
+    "reason": "rewritten from derived state score 1.000 conf 0.898",
+    "registry_size": 3,
+    "is_heldout": false
+  },
+  {
+    "task_id": "alias-2-2",
+    "stratum": "alias-OOD",
+    "family": 2,
+    "method": "B-EXACT-MATCH",
+    "intent": "fetch_post_2",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/p/val2_2"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/posts/val2_2"
+    },
+    "observed_confidence": 0.9,
+    "is_correct": false,
+    "is_false_accept": true,
+    "is_unknown": false,
+    "reason": "applicability guards and confidence threshold passed",
+    "registry_size": 3,
+    "is_heldout": false
+  },
+  {
+    "task_id": "alias-2-2",
+    "stratum": "alias-OOD",
+    "family": 2,
+    "method": "B-VERBATIM-REPLAY",
+    "intent": "fetch_post_2",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/p/val2_2"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/posts/val2_2"
+    },
+    "observed_confidence": 0.9,
+    "is_correct": false,
+    "is_false_accept": true,
+    "is_unknown": false,
+    "reason": "verbatim replay",
+    "registry_size": 3,
+    "is_heldout": false
+  },
+  {
+    "task_id": "alias-2-2",
+    "stratum": "alias-OOD",
+    "family": 2,
+    "method": "B-RAG-TFIDF",
+    "intent": "fetch_post_2",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/p/val2_2"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/posts/val2_2"
+    },
+    "observed_confidence": 0.5228423068642596,
+    "is_correct": false,
+    "is_false_accept": true,
+    "is_unknown": false,
+    "reason": "tfidf",
+    "registry_size": 3,
+    "is_heldout": false
+  },
+  {
+    "task_id": "alias-2-2",
+    "stratum": "alias-OOD",
+    "family": 2,
+    "method": "B-RAG-EMBED",
+    "intent": "fetch_post_2",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/p/val2_2"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/posts/val2_2"
+    },
+    "observed_confidence": 0.5228423068642596,
+    "is_correct": false,
+    "is_false_accept": true,
+    "is_unknown": false,
+    "reason": "embed_unavailable_fallback_tfidf:tfidf",
+    "registry_size": 3,
+    "is_heldout": false
+  },
+  {
+    "task_id": "alias-2-2",
+    "stratum": "alias-OOD",
+    "family": 2,
+    "method": "B-RANDOM",
+    "intent": "fetch_post_2",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/p/val2_2"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/items/val2_2"
+    },
+    "observed_confidence": 0.5,
+    "is_correct": false,
+    "is_false_accept": true,
+    "is_unknown": false,
+    "reason": "random",
+    "registry_size": 3,
+    "is_heldout": false
+  },
+  {
+    "task_id": "alias-2-2",
+    "stratum": "alias-OOD",
+    "family": 2,
+    "method": "RECONSTRUCTION",
+    "intent": "fetch_post_2",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/p/val2_2"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/p/val2_2"
+    },
+    "observed_confidence": 0.8978257661766912,
+    "is_correct": true,
+    "is_false_accept": false,
+    "is_unknown": false,
+    "reason": "rewritten from derived state score 1.000 conf 0.898",
+    "registry_size": 3,
+    "is_heldout": false
+  },
+  {
+    "task_id": "alias-2-3",
+    "stratum": "alias-OOD",
+    "family": 2,
+    "method": "B-EXACT-MATCH",
+    "intent": "fetch_post_3",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/p/val2_3"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/posts/val2_3"
+    },
+    "observed_confidence": 0.9,
+    "is_correct": false,
+    "is_false_accept": true,
+    "is_unknown": false,
+    "reason": "applicability guards and confidence threshold passed",
+    "registry_size": 3,
+    "is_heldout": false
+  },
+  {
+    "task_id": "alias-2-3",
+    "stratum": "alias-OOD",
+    "family": 2,
+    "method": "B-VERBATIM-REPLAY",
+    "intent": "fetch_post_3",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/p/val2_3"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/posts/val2_3"
+    },
+    "observed_confidence": 0.9,
+    "is_correct": false,
+    "is_false_accept": true,
+    "is_unknown": false,
+    "reason": "verbatim replay",
+    "registry_size": 3,
+    "is_heldout": false
+  },
+  {
+    "task_id": "alias-2-3",
+    "stratum": "alias-OOD",
+    "family": 2,
+    "method": "B-RAG-TFIDF",
+    "intent": "fetch_post_3",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/p/val2_3"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/posts/val2_3"
+    },
+    "observed_confidence": 0.5228423068642596,
+    "is_correct": false,
+    "is_false_accept": true,
+    "is_unknown": false,
+    "reason": "tfidf",
+    "registry_size": 3,
+    "is_heldout": false
+  },
+  {
+    "task_id": "alias-2-3",
+    "stratum": "alias-OOD",
+    "family": 2,
+    "method": "B-RAG-EMBED",
+    "intent": "fetch_post_3",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/p/val2_3"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/posts/val2_3"
+    },
+    "observed_confidence": 0.5228423068642596,
+    "is_correct": false,
+    "is_false_accept": true,
+    "is_unknown": false,
+    "reason": "embed_unavailable_fallback_tfidf:tfidf",
+    "registry_size": 3,
+    "is_heldout": false
+  },
+  {
+    "task_id": "alias-2-3",
+    "stratum": "alias-OOD",
+    "family": 2,
+    "method": "B-RANDOM",
+    "intent": "fetch_post_3",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/p/val2_3"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/posts/val2_3"
+    },
+    "observed_confidence": 0.5,
+    "is_correct": false,
+    "is_false_accept": true,
+    "is_unknown": false,
+    "reason": "random",
+    "registry_size": 3,
+    "is_heldout": false
+  },
+  {
+    "task_id": "alias-2-3",
+    "stratum": "alias-OOD",
+    "family": 2,
+    "method": "RECONSTRUCTION",
+    "intent": "fetch_post_3",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/p/val2_3"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/p/val2_3"
+    },
+    "observed_confidence": 0.8978257661766912,
+    "is_correct": true,
+    "is_false_accept": false,
+    "is_unknown": false,
+    "reason": "rewritten from derived state score 1.000 conf 0.898",
+    "registry_size": 3,
+    "is_heldout": false
+  },
+  {
+    "task_id": "alias-2-4",
+    "stratum": "alias-OOD",
+    "family": 2,
+    "method": "B-EXACT-MATCH",
+    "intent": "fetch_post_4",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/p/val2_4"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/posts/val2_4"
+    },
+    "observed_confidence": 0.9,
+    "is_correct": false,
+    "is_false_accept": true,
+    "is_unknown": false,
+    "reason": "applicability guards and confidence threshold passed",
+    "registry_size": 3,
+    "is_heldout": false
+  },
+  {
+    "task_id": "alias-2-4",
+    "stratum": "alias-OOD",
+    "family": 2,
+    "method": "B-VERBATIM-REPLAY",
+    "intent": "fetch_post_4",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/p/val2_4"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/posts/val2_4"
+    },
+    "observed_confidence": 0.9,
+    "is_correct": false,
+    "is_false_accept": true,
+    "is_unknown": false,
+    "reason": "verbatim replay",
+    "registry_size": 3,
+    "is_heldout": false
+  },
+  {
+    "task_id": "alias-2-4",
+    "stratum": "alias-OOD",
+    "family": 2,
+    "method": "B-RAG-TFIDF",
+    "intent": "fetch_post_4",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/p/val2_4"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/posts/val2_4"
+    },
+    "observed_confidence": 0.5228423068642596,
+    "is_correct": false,
+    "is_false_accept": true,
+    "is_unknown": false,
+    "reason": "tfidf",
+    "registry_size": 3,
+    "is_heldout": false
+  },
+  {
+    "task_id": "alias-2-4",
+    "stratum": "alias-OOD",
+    "family": 2,
+    "method": "B-RAG-EMBED",
+    "intent": "fetch_post_4",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/p/val2_4"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/posts/val2_4"
+    },
+    "observed_confidence": 0.5228423068642596,
+    "is_correct": false,
+    "is_false_accept": true,
+    "is_unknown": false,
+    "reason": "embed_unavailable_fallback_tfidf:tfidf",
+    "registry_size": 3,
+    "is_heldout": false
+  },
+  {
+    "task_id": "alias-2-4",
+    "stratum": "alias-OOD",
+    "family": 2,
+    "method": "B-RANDOM",
+    "intent": "fetch_post_4",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/p/val2_4"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/items/val2_4"
+    },
+    "observed_confidence": 0.5,
+    "is_correct": false,
+    "is_false_accept": true,
+    "is_unknown": false,
+    "reason": "random",
+    "registry_size": 3,
+    "is_heldout": false
+  },
+  {
+    "task_id": "alias-2-4",
+    "stratum": "alias-OOD",
+    "family": 2,
+    "method": "RECONSTRUCTION",
+    "intent": "fetch_post_4",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/p/val2_4"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/p/val2_4"
+    },
+    "observed_confidence": 0.8978257661766912,
+    "is_correct": true,
+    "is_false_accept": false,
+    "is_unknown": false,
+    "reason": "rewritten from derived state score 1.000 conf 0.898",
+    "registry_size": 3,
+    "is_heldout": false
+  },
+  {
+    "task_id": "alias-2-5",
+    "stratum": "alias-OOD",
+    "family": 2,
+    "method": "B-EXACT-MATCH",
+    "intent": "fetch_post_5",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/p/val2_5"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/posts/val2_5"
+    },
+    "observed_confidence": 0.9,
+    "is_correct": false,
+    "is_false_accept": true,
+    "is_unknown": false,
+    "reason": "applicability guards and confidence threshold passed",
+    "registry_size": 3,
+    "is_heldout": false
+  },
+  {
+    "task_id": "alias-2-5",
+    "stratum": "alias-OOD",
+    "family": 2,
+    "method": "B-VERBATIM-REPLAY",
+    "intent": "fetch_post_5",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/p/val2_5"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/posts/val2_5"
+    },
+    "observed_confidence": 0.9,
+    "is_correct": false,
+    "is_false_accept": true,
+    "is_unknown": false,
+    "reason": "verbatim replay",
+    "registry_size": 3,
+    "is_heldout": false
+  },
+  {
+    "task_id": "alias-2-5",
+    "stratum": "alias-OOD",
+    "family": 2,
+    "method": "B-RAG-TFIDF",
+    "intent": "fetch_post_5",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/p/val2_5"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/posts/val2_5"
+    },
+    "observed_confidence": 0.5228423068642596,
+    "is_correct": false,
+    "is_false_accept": true,
+    "is_unknown": false,
+    "reason": "tfidf",
+    "registry_size": 3,
+    "is_heldout": false
+  },
+  {
+    "task_id": "alias-2-5",
+    "stratum": "alias-OOD",
+    "family": 2,
+    "method": "B-RAG-EMBED",
+    "intent": "fetch_post_5",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/p/val2_5"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/posts/val2_5"
+    },
+    "observed_confidence": 0.5228423068642596,
+    "is_correct": false,
+    "is_false_accept": true,
+    "is_unknown": false,
+    "reason": "embed_unavailable_fallback_tfidf:tfidf",
+    "registry_size": 3,
+    "is_heldout": false
+  },
+  {
+    "task_id": "alias-2-5",
+    "stratum": "alias-OOD",
+    "family": 2,
+    "method": "B-RANDOM",
+    "intent": "fetch_post_5",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/p/val2_5"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/posts/val2_5"
+    },
+    "observed_confidence": 0.5,
+    "is_correct": false,
+    "is_false_accept": true,
+    "is_unknown": false,
+    "reason": "random",
+    "registry_size": 3,
+    "is_heldout": false
+  },
+  {
+    "task_id": "alias-2-5",
+    "stratum": "alias-OOD",
+    "family": 2,
+    "method": "RECONSTRUCTION",
+    "intent": "fetch_post_5",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/p/val2_5"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/p/val2_5"
+    },
+    "observed_confidence": 0.8978257661766912,
+    "is_correct": true,
+    "is_false_accept": false,
+    "is_unknown": false,
+    "reason": "rewritten from derived state score 1.000 conf 0.898",
+    "registry_size": 3,
+    "is_heldout": false
+  },
+  {
+    "task_id": "alias-2-6",
+    "stratum": "alias-OOD",
+    "family": 2,
+    "method": "B-EXACT-MATCH",
+    "intent": "fetch_post_6",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/p/val2_6"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/posts/val2_6"
+    },
+    "observed_confidence": 0.9,
+    "is_correct": false,
+    "is_false_accept": true,
+    "is_unknown": false,
+    "reason": "applicability guards and confidence threshold passed",
+    "registry_size": 3,
+    "is_heldout": false
+  },
+  {
+    "task_id": "alias-2-6",
+    "stratum": "alias-OOD",
+    "family": 2,
+    "method": "B-VERBATIM-REPLAY",
+    "intent": "fetch_post_6",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/p/val2_6"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/posts/val2_6"
+    },
+    "observed_confidence": 0.9,
+    "is_correct": false,
+    "is_false_accept": true,
+    "is_unknown": false,
+    "reason": "verbatim replay",
+    "registry_size": 3,
+    "is_heldout": false
+  },
+  {
+    "task_id": "alias-2-6",
+    "stratum": "alias-OOD",
+    "family": 2,
+    "method": "B-RAG-TFIDF",
+    "intent": "fetch_post_6",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/p/val2_6"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/posts/val2_6"
+    },
+    "observed_confidence": 0.5228423068642596,
+    "is_correct": false,
+    "is_false_accept": true,
+    "is_unknown": false,
+    "reason": "tfidf",
+    "registry_size": 3,
+    "is_heldout": false
+  },
+  {
+    "task_id": "alias-2-6",
+    "stratum": "alias-OOD",
+    "family": 2,
+    "method": "B-RAG-EMBED",
+    "intent": "fetch_post_6",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/p/val2_6"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/posts/val2_6"
+    },
+    "observed_confidence": 0.5228423068642596,
+    "is_correct": false,
+    "is_false_accept": true,
+    "is_unknown": false,
+    "reason": "embed_unavailable_fallback_tfidf:tfidf",
+    "registry_size": 3,
+    "is_heldout": false
+  },
+  {
+    "task_id": "alias-2-6",
+    "stratum": "alias-OOD",
+    "family": 2,
+    "method": "B-RANDOM",
+    "intent": "fetch_post_6",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/p/val2_6"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/items/val2_6"
+    },
+    "observed_confidence": 0.5,
+    "is_correct": false,
+    "is_false_accept": true,
+    "is_unknown": false,
+    "reason": "random",
+    "registry_size": 3,
+    "is_heldout": false
+  },
+  {
+    "task_id": "alias-2-6",
+    "stratum": "alias-OOD",
+    "family": 2,
+    "method": "RECONSTRUCTION",
+    "intent": "fetch_post_6",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/p/val2_6"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/p/val2_6"
+    },
+    "observed_confidence": 0.8978257661766912,
+    "is_correct": true,
+    "is_false_accept": false,
+    "is_unknown": false,
+    "reason": "rewritten from derived state score 1.000 conf 0.898",
+    "registry_size": 3,
+    "is_heldout": false
+  },
+  {
+    "task_id": "alias-2-7",
+    "stratum": "alias-OOD",
+    "family": 2,
+    "method": "B-EXACT-MATCH",
+    "intent": "fetch_post_7",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/post/val2_7"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/posts/val2_7"
+    },
+    "observed_confidence": 0.9,
+    "is_correct": false,
+    "is_false_accept": true,
+    "is_unknown": false,
+    "reason": "applicability guards and confidence threshold passed",
+    "registry_size": 3,
+    "is_heldout": true
+  },
+  {
+    "task_id": "alias-2-7",
+    "stratum": "alias-OOD",
+    "family": 2,
+    "method": "B-VERBATIM-REPLAY",
+    "intent": "fetch_post_7",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/post/val2_7"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/posts/val2_7"
+    },
+    "observed_confidence": 0.9,
+    "is_correct": false,
+    "is_false_accept": true,
+    "is_unknown": false,
+    "reason": "verbatim replay",
+    "registry_size": 3,
+    "is_heldout": true
+  },
+  {
+    "task_id": "alias-2-7",
+    "stratum": "alias-OOD",
+    "family": 2,
+    "method": "B-RAG-TFIDF",
+    "intent": "fetch_post_7",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/post/val2_7"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/posts/val2_7"
+    },
+    "observed_confidence": 0.5228423068642596,
+    "is_correct": false,
+    "is_false_accept": true,
+    "is_unknown": false,
+    "reason": "tfidf",
+    "registry_size": 3,
+    "is_heldout": true
+  },
+  {
+    "task_id": "alias-2-7",
+    "stratum": "alias-OOD",
+    "family": 2,
+    "method": "B-RAG-EMBED",
+    "intent": "fetch_post_7",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/post/val2_7"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/posts/val2_7"
+    },
+    "observed_confidence": 0.5228423068642596,
+    "is_correct": false,
+    "is_false_accept": true,
+    "is_unknown": false,
+    "reason": "embed_unavailable_fallback_tfidf:tfidf",
+    "registry_size": 3,
+    "is_heldout": true
+  },
+  {
+    "task_id": "alias-2-7",
+    "stratum": "alias-OOD",
+    "family": 2,
+    "method": "B-RANDOM",
+    "intent": "fetch_post_7",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/post/val2_7"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/items/val2_7"
+    },
+    "observed_confidence": 0.5,
+    "is_correct": false,
+    "is_false_accept": true,
+    "is_unknown": false,
+    "reason": "random",
+    "registry_size": 3,
+    "is_heldout": true
+  },
+  {
+    "task_id": "alias-2-7",
+    "stratum": "alias-OOD",
+    "family": 2,
+    "method": "RECONSTRUCTION",
+    "intent": "fetch_post_7",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/post/val2_7"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/post/val2_7"
+    },
+    "observed_confidence": 0.9068257661766912,
+    "is_correct": true,
+    "is_false_accept": false,
+    "is_unknown": false,
+    "reason": "rewritten from derived state score 1.000 conf 0.907",
+    "registry_size": 3,
+    "is_heldout": true
+  },
+  {
+    "task_id": "alias-2-8",
+    "stratum": "alias-OOD",
+    "family": 2,
+    "method": "B-EXACT-MATCH",
+    "intent": "fetch_post_8",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/x/val2_8"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/posts/val2_8"
+    },
+    "observed_confidence": 0.9,
+    "is_correct": false,
+    "is_false_accept": true,
+    "is_unknown": false,
+    "reason": "applicability guards and confidence threshold passed",
+    "registry_size": 3,
+    "is_heldout": true
+  },
+  {
+    "task_id": "alias-2-8",
+    "stratum": "alias-OOD",
+    "family": 2,
+    "method": "B-VERBATIM-REPLAY",
+    "intent": "fetch_post_8",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/x/val2_8"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/posts/val2_8"
+    },
+    "observed_confidence": 0.9,
+    "is_correct": false,
+    "is_false_accept": true,
+    "is_unknown": false,
+    "reason": "verbatim replay",
+    "registry_size": 3,
+    "is_heldout": true
+  },
+  {
+    "task_id": "alias-2-8",
+    "stratum": "alias-OOD",
+    "family": 2,
+    "method": "B-RAG-TFIDF",
+    "intent": "fetch_post_8",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/x/val2_8"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/posts/val2_8"
+    },
+    "observed_confidence": 0.5228423068642596,
+    "is_correct": false,
+    "is_false_accept": true,
+    "is_unknown": false,
+    "reason": "tfidf",
+    "registry_size": 3,
+    "is_heldout": true
+  },
+  {
+    "task_id": "alias-2-8",
+    "stratum": "alias-OOD",
+    "family": 2,
+    "method": "B-RAG-EMBED",
+    "intent": "fetch_post_8",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/x/val2_8"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/posts/val2_8"
+    },
+    "observed_confidence": 0.5228423068642596,
+    "is_correct": false,
+    "is_false_accept": true,
+    "is_unknown": false,
+    "reason": "embed_unavailable_fallback_tfidf:tfidf",
+    "registry_size": 3,
+    "is_heldout": true
+  },
+  {
+    "task_id": "alias-2-8",
+    "stratum": "alias-OOD",
+    "family": 2,
+    "method": "B-RANDOM",
+    "intent": "fetch_post_8",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/x/val2_8"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/items/val2_8"
+    },
+    "observed_confidence": 0.5,
+    "is_correct": false,
+    "is_false_accept": true,
+    "is_unknown": false,
+    "reason": "random",
+    "registry_size": 3,
+    "is_heldout": true
+  },
+  {
+    "task_id": "alias-2-8",
+    "stratum": "alias-OOD",
+    "family": 2,
+    "method": "RECONSTRUCTION",
+    "intent": "fetch_post_8",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/x/val2_8"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/x/val2_8"
+    },
+    "observed_confidence": 0.8978257661766912,
+    "is_correct": true,
+    "is_false_accept": false,
+    "is_unknown": false,
+    "reason": "rewritten from derived state score 1.000 conf 0.898",
+    "registry_size": 3,
+    "is_heldout": true
+  },
+  {
+    "task_id": "alias-2-9",
+    "stratum": "alias-OOD",
+    "family": 2,
+    "method": "B-EXACT-MATCH",
+    "intent": "fetch_post_9",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/p/v2/val2_9"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/posts/val2_9"
+    },
+    "observed_confidence": 0.9,
+    "is_correct": false,
+    "is_false_accept": true,
+    "is_unknown": false,
+    "reason": "applicability guards and confidence threshold passed",
+    "registry_size": 3,
+    "is_heldout": true
+  },
+  {
+    "task_id": "alias-2-9",
+    "stratum": "alias-OOD",
+    "family": 2,
+    "method": "B-VERBATIM-REPLAY",
+    "intent": "fetch_post_9",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/p/v2/val2_9"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/posts/val2_9"
+    },
+    "observed_confidence": 0.9,
+    "is_correct": false,
+    "is_false_accept": true,
+    "is_unknown": false,
+    "reason": "verbatim replay",
+    "registry_size": 3,
+    "is_heldout": true
+  },
+  {
+    "task_id": "alias-2-9",
+    "stratum": "alias-OOD",
+    "family": 2,
+    "method": "B-RAG-TFIDF",
+    "intent": "fetch_post_9",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/p/v2/val2_9"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/posts/val2_9"
+    },
+    "observed_confidence": 0.5228423068642596,
+    "is_correct": false,
+    "is_false_accept": true,
+    "is_unknown": false,
+    "reason": "tfidf",
+    "registry_size": 3,
+    "is_heldout": true
+  },
+  {
+    "task_id": "alias-2-9",
+    "stratum": "alias-OOD",
+    "family": 2,
+    "method": "B-RAG-EMBED",
+    "intent": "fetch_post_9",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/p/v2/val2_9"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/posts/val2_9"
+    },
+    "observed_confidence": 0.5228423068642596,
+    "is_correct": false,
+    "is_false_accept": true,
+    "is_unknown": false,
+    "reason": "embed_unavailable_fallback_tfidf:tfidf",
+    "registry_size": 3,
+    "is_heldout": true
+  },
+  {
+    "task_id": "alias-2-9",
+    "stratum": "alias-OOD",
+    "family": 2,
+    "method": "B-RANDOM",
+    "intent": "fetch_post_9",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/p/v2/val2_9"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/items/val2_9"
+    },
+    "observed_confidence": 0.5,
+    "is_correct": false,
+    "is_false_accept": true,
+    "is_unknown": false,
+    "reason": "random",
+    "registry_size": 3,
+    "is_heldout": true
+  },
+  {
+    "task_id": "alias-2-9",
+    "stratum": "alias-OOD",
+    "family": 2,
+    "method": "RECONSTRUCTION",
+    "intent": "fetch_post_9",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/p/v2/val2_9"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/p/v2/val2_9"
+    },
+    "observed_confidence": 0.9028257661766912,
+    "is_correct": true,
+    "is_false_accept": false,
+    "is_unknown": false,
+    "reason": "rewritten from derived state score 1.000 conf 0.903",
+    "registry_size": 3,
+    "is_heldout": true
+  },
+  {
+    "task_id": "exact-0",
+    "stratum": "exact-match",
+    "family": null,
+    "method": "B-EXACT-MATCH",
+    "intent": "exact_intent_0",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/items/val_exact_0"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/items/val_exact_0"
+    },
+    "observed_confidence": 0.9,
+    "is_correct": true,
+    "is_false_accept": false,
+    "is_unknown": false,
+    "reason": "applicability guards and confidence threshold passed",
+    "registry_size": 1,
+    "is_heldout": false
+  },
+  {
+    "task_id": "exact-0",
+    "stratum": "exact-match",
+    "family": null,
+    "method": "B-VERBATIM-REPLAY",
+    "intent": "exact_intent_0",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/items/val_exact_0"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/items/val_exact_0"
+    },
+    "observed_confidence": 0.9,
+    "is_correct": true,
+    "is_false_accept": false,
+    "is_unknown": false,
+    "reason": "verbatim replay",
+    "registry_size": 1,
+    "is_heldout": false
+  },
+  {
+    "task_id": "exact-0",
+    "stratum": "exact-match",
+    "family": null,
+    "method": "B-RAG-TFIDF",
+    "intent": "exact_intent_0",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/items/val_exact_0"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/items/val_exact_0"
+    },
+    "observed_confidence": 0.5773502691896258,
+    "is_correct": true,
+    "is_false_accept": false,
+    "is_unknown": false,
+    "reason": "tfidf",
+    "registry_size": 1,
+    "is_heldout": false
+  },
+  {
+    "task_id": "exact-0",
+    "stratum": "exact-match",
+    "family": null,
+    "method": "B-RAG-EMBED",
+    "intent": "exact_intent_0",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/items/val_exact_0"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/items/val_exact_0"
+    },
+    "observed_confidence": 0.5773502691896258,
+    "is_correct": true,
+    "is_false_accept": false,
+    "is_unknown": false,
+    "reason": "embed_unavailable_fallback_tfidf:tfidf",
+    "registry_size": 1,
+    "is_heldout": false
+  },
+  {
+    "task_id": "exact-0",
+    "stratum": "exact-match",
+    "family": null,
+    "method": "B-RANDOM",
+    "intent": "exact_intent_0",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/items/val_exact_0"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/items/val_exact_0"
+    },
+    "observed_confidence": 0.5,
+    "is_correct": true,
+    "is_false_accept": false,
+    "is_unknown": false,
+    "reason": "random",
+    "registry_size": 1,
+    "is_heldout": false
+  },
+  {
+    "task_id": "exact-0",
+    "stratum": "exact-match",
+    "family": null,
+    "method": "RECONSTRUCTION",
+    "intent": "exact_intent_0",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/items/val_exact_0"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/items/val_exact_0"
+    },
+    "observed_confidence": 0.962,
+    "is_correct": true,
+    "is_false_accept": false,
+    "is_unknown": false,
+    "reason": "selected best candidate (exact) score 1.000 conf 0.962",
+    "registry_size": 1,
+    "is_heldout": false
+  },
+  {
+    "task_id": "exact-1",
+    "stratum": "exact-match",
+    "family": null,
+    "method": "B-EXACT-MATCH",
+    "intent": "exact_intent_1",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/items/val_exact_1"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/items/val_exact_1"
+    },
+    "observed_confidence": 0.9,
+    "is_correct": true,
+    "is_false_accept": false,
+    "is_unknown": false,
+    "reason": "applicability guards and confidence threshold passed",
+    "registry_size": 1,
+    "is_heldout": false
+  },
+  {
+    "task_id": "exact-1",
+    "stratum": "exact-match",
+    "family": null,
+    "method": "B-VERBATIM-REPLAY",
+    "intent": "exact_intent_1",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/items/val_exact_1"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/items/val_exact_1"
+    },
+    "observed_confidence": 0.9,
+    "is_correct": true,
+    "is_false_accept": false,
+    "is_unknown": false,
+    "reason": "verbatim replay",
+    "registry_size": 1,
+    "is_heldout": false
+  },
+  {
+    "task_id": "exact-1",
+    "stratum": "exact-match",
+    "family": null,
+    "method": "B-RAG-TFIDF",
+    "intent": "exact_intent_1",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/items/val_exact_1"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/items/val_exact_1"
+    },
+    "observed_confidence": 0.5773502691896258,
+    "is_correct": true,
+    "is_false_accept": false,
+    "is_unknown": false,
+    "reason": "tfidf",
+    "registry_size": 1,
+    "is_heldout": false
+  },
+  {
+    "task_id": "exact-1",
+    "stratum": "exact-match",
+    "family": null,
+    "method": "B-RAG-EMBED",
+    "intent": "exact_intent_1",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/items/val_exact_1"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/items/val_exact_1"
+    },
+    "observed_confidence": 0.5773502691896258,
+    "is_correct": true,
+    "is_false_accept": false,
+    "is_unknown": false,
+    "reason": "embed_unavailable_fallback_tfidf:tfidf",
+    "registry_size": 1,
+    "is_heldout": false
+  },
+  {
+    "task_id": "exact-1",
+    "stratum": "exact-match",
+    "family": null,
+    "method": "B-RANDOM",
+    "intent": "exact_intent_1",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/items/val_exact_1"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/items/val_exact_1"
+    },
+    "observed_confidence": 0.5,
+    "is_correct": true,
+    "is_false_accept": false,
+    "is_unknown": false,
+    "reason": "random",
+    "registry_size": 1,
+    "is_heldout": false
+  },
+  {
+    "task_id": "exact-1",
+    "stratum": "exact-match",
+    "family": null,
+    "method": "RECONSTRUCTION",
+    "intent": "exact_intent_1",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/items/val_exact_1"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/items/val_exact_1"
+    },
+    "observed_confidence": 0.962,
+    "is_correct": true,
+    "is_false_accept": false,
+    "is_unknown": false,
+    "reason": "selected best candidate (exact) score 1.000 conf 0.962",
+    "registry_size": 1,
+    "is_heldout": false
+  },
+  {
+    "task_id": "exact-2",
+    "stratum": "exact-match",
+    "family": null,
+    "method": "B-EXACT-MATCH",
+    "intent": "exact_intent_2",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/items/val_exact_2"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/items/val_exact_2"
+    },
+    "observed_confidence": 0.9,
+    "is_correct": true,
+    "is_false_accept": false,
+    "is_unknown": false,
+    "reason": "applicability guards and confidence threshold passed",
+    "registry_size": 1,
+    "is_heldout": false
+  },
+  {
+    "task_id": "exact-2",
+    "stratum": "exact-match",
+    "family": null,
+    "method": "B-VERBATIM-REPLAY",
+    "intent": "exact_intent_2",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/items/val_exact_2"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/items/val_exact_2"
+    },
+    "observed_confidence": 0.9,
+    "is_correct": true,
+    "is_false_accept": false,
+    "is_unknown": false,
+    "reason": "verbatim replay",
+    "registry_size": 1,
+    "is_heldout": false
+  },
+  {
+    "task_id": "exact-2",
+    "stratum": "exact-match",
+    "family": null,
+    "method": "B-RAG-TFIDF",
+    "intent": "exact_intent_2",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/items/val_exact_2"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/items/val_exact_2"
+    },
+    "observed_confidence": 0.5773502691896258,
+    "is_correct": true,
+    "is_false_accept": false,
+    "is_unknown": false,
+    "reason": "tfidf",
+    "registry_size": 1,
+    "is_heldout": false
+  },
+  {
+    "task_id": "exact-2",
+    "stratum": "exact-match",
+    "family": null,
+    "method": "B-RAG-EMBED",
+    "intent": "exact_intent_2",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/items/val_exact_2"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/items/val_exact_2"
+    },
+    "observed_confidence": 0.5773502691896258,
+    "is_correct": true,
+    "is_false_accept": false,
+    "is_unknown": false,
+    "reason": "embed_unavailable_fallback_tfidf:tfidf",
+    "registry_size": 1,
+    "is_heldout": false
+  },
+  {
+    "task_id": "exact-2",
+    "stratum": "exact-match",
+    "family": null,
+    "method": "B-RANDOM",
+    "intent": "exact_intent_2",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/items/val_exact_2"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/items/val_exact_2"
+    },
+    "observed_confidence": 0.5,
+    "is_correct": true,
+    "is_false_accept": false,
+    "is_unknown": false,
+    "reason": "random",
+    "registry_size": 1,
+    "is_heldout": false
+  },
+  {
+    "task_id": "exact-2",
+    "stratum": "exact-match",
+    "family": null,
+    "method": "RECONSTRUCTION",
+    "intent": "exact_intent_2",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/items/val_exact_2"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/items/val_exact_2"
+    },
+    "observed_confidence": 0.962,
+    "is_correct": true,
+    "is_false_accept": false,
+    "is_unknown": false,
+    "reason": "selected best candidate (exact) score 1.000 conf 0.962",
+    "registry_size": 1,
+    "is_heldout": false
+  },
+  {
+    "task_id": "exact-3",
+    "stratum": "exact-match",
+    "family": null,
+    "method": "B-EXACT-MATCH",
+    "intent": "exact_intent_3",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/items/val_exact_3"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/items/val_exact_3"
+    },
+    "observed_confidence": 0.9,
+    "is_correct": true,
+    "is_false_accept": false,
+    "is_unknown": false,
+    "reason": "applicability guards and confidence threshold passed",
+    "registry_size": 1,
+    "is_heldout": false
+  },
+  {
+    "task_id": "exact-3",
+    "stratum": "exact-match",
+    "family": null,
+    "method": "B-VERBATIM-REPLAY",
+    "intent": "exact_intent_3",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/items/val_exact_3"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/items/val_exact_3"
+    },
+    "observed_confidence": 0.9,
+    "is_correct": true,
+    "is_false_accept": false,
+    "is_unknown": false,
+    "reason": "verbatim replay",
+    "registry_size": 1,
+    "is_heldout": false
+  },
+  {
+    "task_id": "exact-3",
+    "stratum": "exact-match",
+    "family": null,
+    "method": "B-RAG-TFIDF",
+    "intent": "exact_intent_3",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/items/val_exact_3"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/items/val_exact_3"
+    },
+    "observed_confidence": 0.5773502691896258,
+    "is_correct": true,
+    "is_false_accept": false,
+    "is_unknown": false,
+    "reason": "tfidf",
+    "registry_size": 1,
+    "is_heldout": false
+  },
+  {
+    "task_id": "exact-3",
+    "stratum": "exact-match",
+    "family": null,
+    "method": "B-RAG-EMBED",
+    "intent": "exact_intent_3",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/items/val_exact_3"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/items/val_exact_3"
+    },
+    "observed_confidence": 0.5773502691896258,
+    "is_correct": true,
+    "is_false_accept": false,
+    "is_unknown": false,
+    "reason": "embed_unavailable_fallback_tfidf:tfidf",
+    "registry_size": 1,
+    "is_heldout": false
+  },
+  {
+    "task_id": "exact-3",
+    "stratum": "exact-match",
+    "family": null,
+    "method": "B-RANDOM",
+    "intent": "exact_intent_3",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/items/val_exact_3"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/items/val_exact_3"
+    },
+    "observed_confidence": 0.5,
+    "is_correct": true,
+    "is_false_accept": false,
+    "is_unknown": false,
+    "reason": "random",
+    "registry_size": 1,
+    "is_heldout": false
+  },
+  {
+    "task_id": "exact-3",
+    "stratum": "exact-match",
+    "family": null,
+    "method": "RECONSTRUCTION",
+    "intent": "exact_intent_3",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/items/val_exact_3"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/items/val_exact_3"
+    },
+    "observed_confidence": 0.962,
+    "is_correct": true,
+    "is_false_accept": false,
+    "is_unknown": false,
+    "reason": "selected best candidate (exact) score 1.000 conf 0.962",
+    "registry_size": 1,
+    "is_heldout": false
+  },
+  {
+    "task_id": "exact-4",
+    "stratum": "exact-match",
+    "family": null,
+    "method": "B-EXACT-MATCH",
+    "intent": "exact_intent_4",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/items/val_exact_4"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/items/val_exact_4"
+    },
+    "observed_confidence": 0.9,
+    "is_correct": true,
+    "is_false_accept": false,
+    "is_unknown": false,
+    "reason": "applicability guards and confidence threshold passed",
+    "registry_size": 1,
+    "is_heldout": false
+  },
+  {
+    "task_id": "exact-4",
+    "stratum": "exact-match",
+    "family": null,
+    "method": "B-VERBATIM-REPLAY",
+    "intent": "exact_intent_4",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/items/val_exact_4"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/items/val_exact_4"
+    },
+    "observed_confidence": 0.9,
+    "is_correct": true,
+    "is_false_accept": false,
+    "is_unknown": false,
+    "reason": "verbatim replay",
+    "registry_size": 1,
+    "is_heldout": false
+  },
+  {
+    "task_id": "exact-4",
+    "stratum": "exact-match",
+    "family": null,
+    "method": "B-RAG-TFIDF",
+    "intent": "exact_intent_4",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/items/val_exact_4"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/items/val_exact_4"
+    },
+    "observed_confidence": 0.5773502691896258,
+    "is_correct": true,
+    "is_false_accept": false,
+    "is_unknown": false,
+    "reason": "tfidf",
+    "registry_size": 1,
+    "is_heldout": false
+  },
+  {
+    "task_id": "exact-4",
+    "stratum": "exact-match",
+    "family": null,
+    "method": "B-RAG-EMBED",
+    "intent": "exact_intent_4",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/items/val_exact_4"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/items/val_exact_4"
+    },
+    "observed_confidence": 0.5773502691896258,
+    "is_correct": true,
+    "is_false_accept": false,
+    "is_unknown": false,
+    "reason": "embed_unavailable_fallback_tfidf:tfidf",
+    "registry_size": 1,
+    "is_heldout": false
+  },
+  {
+    "task_id": "exact-4",
+    "stratum": "exact-match",
+    "family": null,
+    "method": "B-RANDOM",
+    "intent": "exact_intent_4",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/items/val_exact_4"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/items/val_exact_4"
+    },
+    "observed_confidence": 0.5,
+    "is_correct": true,
+    "is_false_accept": false,
+    "is_unknown": false,
+    "reason": "random",
+    "registry_size": 1,
+    "is_heldout": false
+  },
+  {
+    "task_id": "exact-4",
+    "stratum": "exact-match",
+    "family": null,
+    "method": "RECONSTRUCTION",
+    "intent": "exact_intent_4",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/items/val_exact_4"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/items/val_exact_4"
+    },
+    "observed_confidence": 0.962,
+    "is_correct": true,
+    "is_false_accept": false,
+    "is_unknown": false,
+    "reason": "selected best candidate (exact) score 1.000 conf 0.962",
+    "registry_size": 1,
+    "is_heldout": false
+  },
+  {
+    "task_id": "exact-5",
+    "stratum": "exact-match",
+    "family": null,
+    "method": "B-EXACT-MATCH",
+    "intent": "exact_intent_5",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/items/val_exact_5"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/items/val_exact_5"
+    },
+    "observed_confidence": 0.9,
+    "is_correct": true,
+    "is_false_accept": false,
+    "is_unknown": false,
+    "reason": "applicability guards and confidence threshold passed",
+    "registry_size": 1,
+    "is_heldout": false
+  },
+  {
+    "task_id": "exact-5",
+    "stratum": "exact-match",
+    "family": null,
+    "method": "B-VERBATIM-REPLAY",
+    "intent": "exact_intent_5",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/items/val_exact_5"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/items/val_exact_5"
+    },
+    "observed_confidence": 0.9,
+    "is_correct": true,
+    "is_false_accept": false,
+    "is_unknown": false,
+    "reason": "verbatim replay",
+    "registry_size": 1,
+    "is_heldout": false
+  },
+  {
+    "task_id": "exact-5",
+    "stratum": "exact-match",
+    "family": null,
+    "method": "B-RAG-TFIDF",
+    "intent": "exact_intent_5",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/items/val_exact_5"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/items/val_exact_5"
+    },
+    "observed_confidence": 0.5773502691896258,
+    "is_correct": true,
+    "is_false_accept": false,
+    "is_unknown": false,
+    "reason": "tfidf",
+    "registry_size": 1,
+    "is_heldout": false
+  },
+  {
+    "task_id": "exact-5",
+    "stratum": "exact-match",
+    "family": null,
+    "method": "B-RAG-EMBED",
+    "intent": "exact_intent_5",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/items/val_exact_5"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/items/val_exact_5"
+    },
+    "observed_confidence": 0.5773502691896258,
+    "is_correct": true,
+    "is_false_accept": false,
+    "is_unknown": false,
+    "reason": "embed_unavailable_fallback_tfidf:tfidf",
+    "registry_size": 1,
+    "is_heldout": false
+  },
+  {
+    "task_id": "exact-5",
+    "stratum": "exact-match",
+    "family": null,
+    "method": "B-RANDOM",
+    "intent": "exact_intent_5",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/items/val_exact_5"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/items/val_exact_5"
+    },
+    "observed_confidence": 0.5,
+    "is_correct": true,
+    "is_false_accept": false,
+    "is_unknown": false,
+    "reason": "random",
+    "registry_size": 1,
+    "is_heldout": false
+  },
+  {
+    "task_id": "exact-5",
+    "stratum": "exact-match",
+    "family": null,
+    "method": "RECONSTRUCTION",
+    "intent": "exact_intent_5",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/items/val_exact_5"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/items/val_exact_5"
+    },
+    "observed_confidence": 0.962,
+    "is_correct": true,
+    "is_false_accept": false,
+    "is_unknown": false,
+    "reason": "selected best candidate (exact) score 1.000 conf 0.962",
+    "registry_size": 1,
+    "is_heldout": false
+  },
+  {
+    "task_id": "exact-6",
+    "stratum": "exact-match",
+    "family": null,
+    "method": "B-EXACT-MATCH",
+    "intent": "exact_intent_6",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/items/val_exact_6"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/items/val_exact_6"
+    },
+    "observed_confidence": 0.9,
+    "is_correct": true,
+    "is_false_accept": false,
+    "is_unknown": false,
+    "reason": "applicability guards and confidence threshold passed",
+    "registry_size": 1,
+    "is_heldout": false
+  },
+  {
+    "task_id": "exact-6",
+    "stratum": "exact-match",
+    "family": null,
+    "method": "B-VERBATIM-REPLAY",
+    "intent": "exact_intent_6",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/items/val_exact_6"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/items/val_exact_6"
+    },
+    "observed_confidence": 0.9,
+    "is_correct": true,
+    "is_false_accept": false,
+    "is_unknown": false,
+    "reason": "verbatim replay",
+    "registry_size": 1,
+    "is_heldout": false
+  },
+  {
+    "task_id": "exact-6",
+    "stratum": "exact-match",
+    "family": null,
+    "method": "B-RAG-TFIDF",
+    "intent": "exact_intent_6",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/items/val_exact_6"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/items/val_exact_6"
+    },
+    "observed_confidence": 0.5773502691896258,
+    "is_correct": true,
+    "is_false_accept": false,
+    "is_unknown": false,
+    "reason": "tfidf",
+    "registry_size": 1,
+    "is_heldout": false
+  },
+  {
+    "task_id": "exact-6",
+    "stratum": "exact-match",
+    "family": null,
+    "method": "B-RAG-EMBED",
+    "intent": "exact_intent_6",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/items/val_exact_6"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/items/val_exact_6"
+    },
+    "observed_confidence": 0.5773502691896258,
+    "is_correct": true,
+    "is_false_accept": false,
+    "is_unknown": false,
+    "reason": "embed_unavailable_fallback_tfidf:tfidf",
+    "registry_size": 1,
+    "is_heldout": false
+  },
+  {
+    "task_id": "exact-6",
+    "stratum": "exact-match",
+    "family": null,
+    "method": "B-RANDOM",
+    "intent": "exact_intent_6",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/items/val_exact_6"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/items/val_exact_6"
+    },
+    "observed_confidence": 0.5,
+    "is_correct": true,
+    "is_false_accept": false,
+    "is_unknown": false,
+    "reason": "random",
+    "registry_size": 1,
+    "is_heldout": false
+  },
+  {
+    "task_id": "exact-6",
+    "stratum": "exact-match",
+    "family": null,
+    "method": "RECONSTRUCTION",
+    "intent": "exact_intent_6",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/items/val_exact_6"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/items/val_exact_6"
+    },
+    "observed_confidence": 0.962,
+    "is_correct": true,
+    "is_false_accept": false,
+    "is_unknown": false,
+    "reason": "selected best candidate (exact) score 1.000 conf 0.962",
+    "registry_size": 1,
+    "is_heldout": false
+  },
+  {
+    "task_id": "exact-7",
+    "stratum": "exact-match",
+    "family": null,
+    "method": "B-EXACT-MATCH",
+    "intent": "exact_intent_7",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/items/val_exact_7"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/items/val_exact_7"
+    },
+    "observed_confidence": 0.9,
+    "is_correct": true,
+    "is_false_accept": false,
+    "is_unknown": false,
+    "reason": "applicability guards and confidence threshold passed",
+    "registry_size": 1,
+    "is_heldout": false
+  },
+  {
+    "task_id": "exact-7",
+    "stratum": "exact-match",
+    "family": null,
+    "method": "B-VERBATIM-REPLAY",
+    "intent": "exact_intent_7",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/items/val_exact_7"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/items/val_exact_7"
+    },
+    "observed_confidence": 0.9,
+    "is_correct": true,
+    "is_false_accept": false,
+    "is_unknown": false,
+    "reason": "verbatim replay",
+    "registry_size": 1,
+    "is_heldout": false
+  },
+  {
+    "task_id": "exact-7",
+    "stratum": "exact-match",
+    "family": null,
+    "method": "B-RAG-TFIDF",
+    "intent": "exact_intent_7",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/items/val_exact_7"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/items/val_exact_7"
+    },
+    "observed_confidence": 0.5773502691896258,
+    "is_correct": true,
+    "is_false_accept": false,
+    "is_unknown": false,
+    "reason": "tfidf",
+    "registry_size": 1,
+    "is_heldout": false
+  },
+  {
+    "task_id": "exact-7",
+    "stratum": "exact-match",
+    "family": null,
+    "method": "B-RAG-EMBED",
+    "intent": "exact_intent_7",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/items/val_exact_7"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/items/val_exact_7"
+    },
+    "observed_confidence": 0.5773502691896258,
+    "is_correct": true,
+    "is_false_accept": false,
+    "is_unknown": false,
+    "reason": "embed_unavailable_fallback_tfidf:tfidf",
+    "registry_size": 1,
+    "is_heldout": false
+  },
+  {
+    "task_id": "exact-7",
+    "stratum": "exact-match",
+    "family": null,
+    "method": "B-RANDOM",
+    "intent": "exact_intent_7",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/items/val_exact_7"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/items/val_exact_7"
+    },
+    "observed_confidence": 0.5,
+    "is_correct": true,
+    "is_false_accept": false,
+    "is_unknown": false,
+    "reason": "random",
+    "registry_size": 1,
+    "is_heldout": false
+  },
+  {
+    "task_id": "exact-7",
+    "stratum": "exact-match",
+    "family": null,
+    "method": "RECONSTRUCTION",
+    "intent": "exact_intent_7",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/items/val_exact_7"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/items/val_exact_7"
+    },
+    "observed_confidence": 0.962,
+    "is_correct": true,
+    "is_false_accept": false,
+    "is_unknown": false,
+    "reason": "selected best candidate (exact) score 1.000 conf 0.962",
+    "registry_size": 1,
+    "is_heldout": false
+  },
+  {
+    "task_id": "exact-8",
+    "stratum": "exact-match",
+    "family": null,
+    "method": "B-EXACT-MATCH",
+    "intent": "exact_intent_8",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/items/val_exact_8"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/items/val_exact_8"
+    },
+    "observed_confidence": 0.9,
+    "is_correct": true,
+    "is_false_accept": false,
+    "is_unknown": false,
+    "reason": "applicability guards and confidence threshold passed",
+    "registry_size": 1,
+    "is_heldout": false
+  },
+  {
+    "task_id": "exact-8",
+    "stratum": "exact-match",
+    "family": null,
+    "method": "B-VERBATIM-REPLAY",
+    "intent": "exact_intent_8",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/items/val_exact_8"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/items/val_exact_8"
+    },
+    "observed_confidence": 0.9,
+    "is_correct": true,
+    "is_false_accept": false,
+    "is_unknown": false,
+    "reason": "verbatim replay",
+    "registry_size": 1,
+    "is_heldout": false
+  },
+  {
+    "task_id": "exact-8",
+    "stratum": "exact-match",
+    "family": null,
+    "method": "B-RAG-TFIDF",
+    "intent": "exact_intent_8",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/items/val_exact_8"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/items/val_exact_8"
+    },
+    "observed_confidence": 0.5773502691896258,
+    "is_correct": true,
+    "is_false_accept": false,
+    "is_unknown": false,
+    "reason": "tfidf",
+    "registry_size": 1,
+    "is_heldout": false
+  },
+  {
+    "task_id": "exact-8",
+    "stratum": "exact-match",
+    "family": null,
+    "method": "B-RAG-EMBED",
+    "intent": "exact_intent_8",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/items/val_exact_8"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/items/val_exact_8"
+    },
+    "observed_confidence": 0.5773502691896258,
+    "is_correct": true,
+    "is_false_accept": false,
+    "is_unknown": false,
+    "reason": "embed_unavailable_fallback_tfidf:tfidf",
+    "registry_size": 1,
+    "is_heldout": false
+  },
+  {
+    "task_id": "exact-8",
+    "stratum": "exact-match",
+    "family": null,
+    "method": "B-RANDOM",
+    "intent": "exact_intent_8",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/items/val_exact_8"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/items/val_exact_8"
+    },
+    "observed_confidence": 0.5,
+    "is_correct": true,
+    "is_false_accept": false,
+    "is_unknown": false,
+    "reason": "random",
+    "registry_size": 1,
+    "is_heldout": false
+  },
+  {
+    "task_id": "exact-8",
+    "stratum": "exact-match",
+    "family": null,
+    "method": "RECONSTRUCTION",
+    "intent": "exact_intent_8",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/items/val_exact_8"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/items/val_exact_8"
+    },
+    "observed_confidence": 0.962,
+    "is_correct": true,
+    "is_false_accept": false,
+    "is_unknown": false,
+    "reason": "selected best candidate (exact) score 1.000 conf 0.962",
+    "registry_size": 1,
+    "is_heldout": false
+  },
+  {
+    "task_id": "exact-9",
+    "stratum": "exact-match",
+    "family": null,
+    "method": "B-EXACT-MATCH",
+    "intent": "exact_intent_9",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/items/val_exact_9"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/items/val_exact_9"
+    },
+    "observed_confidence": 0.9,
+    "is_correct": true,
+    "is_false_accept": false,
+    "is_unknown": false,
+    "reason": "applicability guards and confidence threshold passed",
+    "registry_size": 1,
+    "is_heldout": false
+  },
+  {
+    "task_id": "exact-9",
+    "stratum": "exact-match",
+    "family": null,
+    "method": "B-VERBATIM-REPLAY",
+    "intent": "exact_intent_9",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/items/val_exact_9"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/items/val_exact_9"
+    },
+    "observed_confidence": 0.9,
+    "is_correct": true,
+    "is_false_accept": false,
+    "is_unknown": false,
+    "reason": "verbatim replay",
+    "registry_size": 1,
+    "is_heldout": false
+  },
+  {
+    "task_id": "exact-9",
+    "stratum": "exact-match",
+    "family": null,
+    "method": "B-RAG-TFIDF",
+    "intent": "exact_intent_9",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/items/val_exact_9"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/items/val_exact_9"
+    },
+    "observed_confidence": 0.5773502691896258,
+    "is_correct": true,
+    "is_false_accept": false,
+    "is_unknown": false,
+    "reason": "tfidf",
+    "registry_size": 1,
+    "is_heldout": false
+  },
+  {
+    "task_id": "exact-9",
+    "stratum": "exact-match",
+    "family": null,
+    "method": "B-RAG-EMBED",
+    "intent": "exact_intent_9",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/items/val_exact_9"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/items/val_exact_9"
+    },
+    "observed_confidence": 0.5773502691896258,
+    "is_correct": true,
+    "is_false_accept": false,
+    "is_unknown": false,
+    "reason": "embed_unavailable_fallback_tfidf:tfidf",
+    "registry_size": 1,
+    "is_heldout": false
+  },
+  {
+    "task_id": "exact-9",
+    "stratum": "exact-match",
+    "family": null,
+    "method": "B-RANDOM",
+    "intent": "exact_intent_9",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/items/val_exact_9"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/items/val_exact_9"
+    },
+    "observed_confidence": 0.5,
+    "is_correct": true,
+    "is_false_accept": false,
+    "is_unknown": false,
+    "reason": "random",
+    "registry_size": 1,
+    "is_heldout": false
+  },
+  {
+    "task_id": "exact-9",
+    "stratum": "exact-match",
+    "family": null,
+    "method": "RECONSTRUCTION",
+    "intent": "exact_intent_9",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/items/val_exact_9"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/items/val_exact_9"
+    },
+    "observed_confidence": 0.962,
+    "is_correct": true,
+    "is_false_accept": false,
+    "is_unknown": false,
+    "reason": "selected best candidate (exact) score 1.000 conf 0.962",
+    "registry_size": 1,
+    "is_heldout": false
+  },
+  {
+    "task_id": "exact-10",
+    "stratum": "exact-match",
+    "family": null,
+    "method": "B-EXACT-MATCH",
+    "intent": "exact_intent_10",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/items/val_exact_10"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/items/val_exact_10"
+    },
+    "observed_confidence": 0.9,
+    "is_correct": true,
+    "is_false_accept": false,
+    "is_unknown": false,
+    "reason": "applicability guards and confidence threshold passed",
+    "registry_size": 1,
+    "is_heldout": false
+  },
+  {
+    "task_id": "exact-10",
+    "stratum": "exact-match",
+    "family": null,
+    "method": "B-VERBATIM-REPLAY",
+    "intent": "exact_intent_10",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/items/val_exact_10"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/items/val_exact_10"
+    },
+    "observed_confidence": 0.9,
+    "is_correct": true,
+    "is_false_accept": false,
+    "is_unknown": false,
+    "reason": "verbatim replay",
+    "registry_size": 1,
+    "is_heldout": false
+  },
+  {
+    "task_id": "exact-10",
+    "stratum": "exact-match",
+    "family": null,
+    "method": "B-RAG-TFIDF",
+    "intent": "exact_intent_10",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/items/val_exact_10"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/items/val_exact_10"
+    },
+    "observed_confidence": 0.5773502691896258,
+    "is_correct": true,
+    "is_false_accept": false,
+    "is_unknown": false,
+    "reason": "tfidf",
+    "registry_size": 1,
+    "is_heldout": false
+  },
+  {
+    "task_id": "exact-10",
+    "stratum": "exact-match",
+    "family": null,
+    "method": "B-RAG-EMBED",
+    "intent": "exact_intent_10",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/items/val_exact_10"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/items/val_exact_10"
+    },
+    "observed_confidence": 0.5773502691896258,
+    "is_correct": true,
+    "is_false_accept": false,
+    "is_unknown": false,
+    "reason": "embed_unavailable_fallback_tfidf:tfidf",
+    "registry_size": 1,
+    "is_heldout": false
+  },
+  {
+    "task_id": "exact-10",
+    "stratum": "exact-match",
+    "family": null,
+    "method": "B-RANDOM",
+    "intent": "exact_intent_10",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/items/val_exact_10"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/items/val_exact_10"
+    },
+    "observed_confidence": 0.5,
+    "is_correct": true,
+    "is_false_accept": false,
+    "is_unknown": false,
+    "reason": "random",
+    "registry_size": 1,
+    "is_heldout": false
+  },
+  {
+    "task_id": "exact-10",
+    "stratum": "exact-match",
+    "family": null,
+    "method": "RECONSTRUCTION",
+    "intent": "exact_intent_10",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/items/val_exact_10"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/items/val_exact_10"
+    },
+    "observed_confidence": 0.966,
+    "is_correct": true,
+    "is_false_accept": false,
+    "is_unknown": false,
+    "reason": "selected best candidate (exact) score 1.000 conf 0.966",
+    "registry_size": 1,
+    "is_heldout": false
+  },
+  {
+    "task_id": "exact-11",
+    "stratum": "exact-match",
+    "family": null,
+    "method": "B-EXACT-MATCH",
+    "intent": "exact_intent_11",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/items/val_exact_11"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/items/val_exact_11"
+    },
+    "observed_confidence": 0.9,
+    "is_correct": true,
+    "is_false_accept": false,
+    "is_unknown": false,
+    "reason": "applicability guards and confidence threshold passed",
+    "registry_size": 1,
+    "is_heldout": false
+  },
+  {
+    "task_id": "exact-11",
+    "stratum": "exact-match",
+    "family": null,
+    "method": "B-VERBATIM-REPLAY",
+    "intent": "exact_intent_11",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/items/val_exact_11"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/items/val_exact_11"
+    },
+    "observed_confidence": 0.9,
+    "is_correct": true,
+    "is_false_accept": false,
+    "is_unknown": false,
+    "reason": "verbatim replay",
+    "registry_size": 1,
+    "is_heldout": false
+  },
+  {
+    "task_id": "exact-11",
+    "stratum": "exact-match",
+    "family": null,
+    "method": "B-RAG-TFIDF",
+    "intent": "exact_intent_11",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/items/val_exact_11"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/items/val_exact_11"
+    },
+    "observed_confidence": 0.5773502691896258,
+    "is_correct": true,
+    "is_false_accept": false,
+    "is_unknown": false,
+    "reason": "tfidf",
+    "registry_size": 1,
+    "is_heldout": false
+  },
+  {
+    "task_id": "exact-11",
+    "stratum": "exact-match",
+    "family": null,
+    "method": "B-RAG-EMBED",
+    "intent": "exact_intent_11",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/items/val_exact_11"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/items/val_exact_11"
+    },
+    "observed_confidence": 0.5773502691896258,
+    "is_correct": true,
+    "is_false_accept": false,
+    "is_unknown": false,
+    "reason": "embed_unavailable_fallback_tfidf:tfidf",
+    "registry_size": 1,
+    "is_heldout": false
+  },
+  {
+    "task_id": "exact-11",
+    "stratum": "exact-match",
+    "family": null,
+    "method": "B-RANDOM",
+    "intent": "exact_intent_11",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/items/val_exact_11"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/items/val_exact_11"
+    },
+    "observed_confidence": 0.5,
+    "is_correct": true,
+    "is_false_accept": false,
+    "is_unknown": false,
+    "reason": "random",
+    "registry_size": 1,
+    "is_heldout": false
+  },
+  {
+    "task_id": "exact-11",
+    "stratum": "exact-match",
+    "family": null,
+    "method": "RECONSTRUCTION",
+    "intent": "exact_intent_11",
+    "expected_outcome": "correct",
+    "expected_bound": {
+      "url": "/items/val_exact_11"
+    },
+    "observed_status": "EXECUTABLE",
+    "observed_bound": {
+      "url": "/items/val_exact_11"
+    },
+    "observed_confidence": 0.966,
+    "is_correct": true,
+    "is_false_accept": false,
+    "is_unknown": false,
+    "reason": "selected best candidate (exact) score 1.000 conf 0.966",
+    "registry_size": 1,
+    "is_heldout": false
+  },
+  {
+    "task_id": "noapp-0",
+    "stratum": "no-applicable",
+    "family": null,
+    "method": "B-EXACT-MATCH",
+    "intent": "unknown_intent_0_xyz",
+    "expected_outcome": "unknown",
+    "expected_bound": null,
+    "observed_status": "UNKNOWN",
+    "observed_bound": null,
+    "observed_confidence": 0.0,
+    "is_correct": false,
+    "is_false_accept": false,
+    "is_unknown": true,
+    "reason": "no applicable validated mechanism",
+    "registry_size": 2,
+    "is_heldout": false
+  },
+  {
+    "task_id": "noapp-0",
+    "stratum": "no-applicable",
+    "family": null,
+    "method": "B-VERBATIM-REPLAY",
+    "intent": "unknown_intent_0_xyz",
+    "expected_outcome": "unknown",
+    "expected_bound": null,
+    "observed_status": "UNKNOWN",
+    "observed_bound": null,
+    "observed_confidence": 0.0,
+    "is_correct": false,
+    "is_false_accept": false,
+    "is_unknown": true,
+    "reason": "no applicable validated mechanism",
+    "registry_size": 2,
+    "is_heldout": false
+  },
+  {
+    "task_id": "noapp-0",
+    "stratum": "no-applicable",
+    "family": null,
+    "method": "B-RAG-TFIDF",
+    "intent": "unknown_intent_0_xyz",
+    "expected_outcome": "unknown",
+    "expected_bound": null,
+    "observed_status": "UNKNOWN",
+    "observed_bound": null,
+    "observed_confidence": 0.0,
+    "is_correct": false,
+    "is_false_accept": false,
+    "is_unknown": true,
+    "reason": "tfidf below threshold",
+    "registry_size": 2,
+    "is_heldout": false
+  },
+  {
+    "task_id": "noapp-0",
+    "stratum": "no-applicable",
+    "family": null,
+    "method": "B-RAG-EMBED",
+    "intent": "unknown_intent_0_xyz",
+    "expected_outcome": "unknown",
+    "expected_bound": null,
+    "observed_status": "UNKNOWN",
+    "observed_bound": null,
+    "observed_confidence": 0.0,
+    "is_correct": false,
+    "is_false_accept": false,
+    "is_unknown": true,
+    "reason": "embed_unavailable_fallback_tfidf:tfidf below threshold",
+    "registry_size": 2,
+    "is_heldout": false
+  },
+  {
+    "task_id": "noapp-0",
+    "stratum": "no-applicable",
+    "family": null,
+    "method": "B-RANDOM",
+    "intent": "unknown_intent_0_xyz",
+    "expected_outcome": "unknown",
+    "expected_bound": null,
+    "observed_status": "UNKNOWN",
+    "observed_bound": null,
+    "observed_confidence": 0.0,
+    "is_correct": false,
+    "is_false_accept": false,
+    "is_unknown": true,
+    "reason": "no eligible",
+    "registry_size": 2,
+    "is_heldout": false
+  },
+  {
+    "task_id": "noapp-0",
+    "stratum": "no-applicable",
+    "family": null,
+    "method": "RECONSTRUCTION",
+    "intent": "unknown_intent_0_xyz",
+    "expected_outcome": "unknown",
+    "expected_bound": null,
+    "observed_status": "UNKNOWN",
+    "observed_bound": null,
+    "observed_confidence": 0.068,
+    "is_correct": false,
+    "is_false_accept": false,
+    "is_unknown": true,
+    "reason": "no candidates - abstain",
+    "registry_size": 2,
+    "is_heldout": false
+  },
+  {
+    "task_id": "noapp-1",
+    "stratum": "no-applicable",
+    "family": null,
+    "method": "B-EXACT-MATCH",
+    "intent": "unknown_intent_1_xyz",
+    "expected_outcome": "unknown",
+    "expected_bound": null,
+    "observed_status": "UNKNOWN",
+    "observed_bound": null,
+    "observed_confidence": 0.0,
+    "is_correct": false,
+    "is_false_accept": false,
+    "is_unknown": true,
+    "reason": "no applicable validated mechanism",
+    "registry_size": 2,
+    "is_heldout": false
+  },
+  {
+    "task_id": "noapp-1",
+    "stratum": "no-applicable",
+    "family": null,
+    "method": "B-VERBATIM-REPLAY",
+    "intent": "unknown_intent_1_xyz",
+    "expected_outcome": "unknown",
+    "expected_bound": null,
+    "observed_status": "UNKNOWN",
+    "observed_bound": null,
+    "observed_confidence": 0.0,
+    "is_correct": false,
+    "is_false_accept": false,
+    "is_unknown": true,
+    "reason": "no applicable validated mechanism",
+    "registry_size": 2,
+    "is_heldout": false
+  },
+  {
+    "task_id": "noapp-1",
+    "stratum": "no-applicable",
+    "family": null,
+    "method": "B-RAG-TFIDF",
+    "intent": "unknown_intent_1_xyz",
+    "expected_outcome": "unknown",
+    "expected_bound": null,
+    "observed_status": "UNKNOWN",
+    "observed_bound": null,
+    "observed_confidence": 0.0,
+    "is_correct": false,
+    "is_false_accept": false,
+    "is_unknown": true,
+    "reason": "tfidf below threshold",
+    "registry_size": 2,
+    "is_heldout": false
+  },
+  {
+    "task_id": "noapp-1",
+    "stratum": "no-applicable",
+    "family": null,
+    "method": "B-RAG-EMBED",
+    "intent": "unknown_intent_1_xyz",
+    "expected_outcome": "unknown",
+    "expected_bound": null,
+    "observed_status": "UNKNOWN",
+    "observed_bound": null,
+    "observed_confidence": 0.0,
+    "is_correct": false,
+    "is_false_accept": false,
+    "is_unknown": true,
+    "reason": "embed_unavailable_fallback_tfidf:tfidf below threshold",
+    "registry_size": 2,
+    "is_heldout": false
+  },
+  {
+    "task_id": "noapp-1",
+    "stratum": "no-applicable",
+    "family": null,
+    "method": "B-RANDOM",
+    "intent": "unknown_intent_1_xyz",
+    "expected_outcome": "unknown",
+    "expected_bound": null,
+    "observed_status": "UNKNOWN",
+    "observed_bound": null,
+    "observed_confidence": 0.0,
+    "is_correct": false,
+    "is_false_accept": false,
+    "is_unknown": true,
+    "reason": "no eligible",
+    "registry_size": 2,
+    "is_heldout": false
+  },
+  {
+    "task_id": "noapp-1",
+    "stratum": "no-applicable",
+    "family": null,
+    "method": "RECONSTRUCTION",
+    "intent": "unknown_intent_1_xyz",
+    "expected_outcome": "unknown",
+    "expected_bound": null,
+    "observed_status": "UNKNOWN",
+    "observed_bound": null,
+    "observed_confidence": 0.054000000000000006,
+    "is_correct": false,
+    "is_false_accept": false,
+    "is_unknown": true,
+    "reason": "no candidates - abstain",
+    "registry_size": 2,
+    "is_heldout": false
+  },
+  {
+    "task_id": "noapp-2",
+    "stratum": "no-applicable",
+    "family": null,
+    "method": "B-EXACT-MATCH",
+    "intent": "unknown_intent_2_xyz",
+    "expected_outcome": "unknown",
+    "expected_bound": null,
+    "observed_status": "UNKNOWN",
+    "observed_bound": null,
+    "observed_confidence": 0.0,
+    "is_correct": false,
+    "is_false_accept": false,
+    "is_unknown": true,
+    "reason": "no applicable validated mechanism",
+    "registry_size": 2,
+    "is_heldout": false
+  },
+  {
+    "task_id": "noapp-2",
+    "stratum": "no-applicable",
+    "family": null,
+    "method": "B-VERBATIM-REPLAY",
+    "intent": "unknown_intent_2_xyz",
+    "expected_outcome": "unknown",
+    "expected_bound": null,
+    "observed_status": "UNKNOWN",
+    "observed_bound": null,
+    "observed_confidence": 0.0,
+    "is_correct": false,
+    "is_false_accept": false,
+    "is_unknown": true,
+    "reason": "no applicable validated mechanism",
+    "registry_size": 2,
+    "is_heldout": false
+  },
+  {
+    "task_id": "noapp-2",
+    "stratum": "no-applicable",
+    "family": null,
+    "method": "B-RAG-TFIDF",
+    "intent": "unknown_intent_2_xyz",
+    "expected_outcome": "unknown",
+    "expected_bound": null,
+    "observed_status": "UNKNOWN",
+    "observed_bound": null,
+    "observed_confidence": 0.0,
+    "is_correct": false,
+    "is_false_accept": false,
+    "is_unknown": true,
+    "reason": "tfidf below threshold",
+    "registry_size": 2,
+    "is_heldout": false
+  },
+  {
+    "task_id": "noapp-2",
+    "stratum": "no-applicable",
+    "family": null,
+    "method": "B-RAG-EMBED",
+    "intent": "unknown_intent_2_xyz",
+    "expected_outcome": "unknown",
+    "expected_bound": null,
+    "observed_status": "UNKNOWN",
+    "observed_bound": null,
+    "observed_confidence": 0.0,
+    "is_correct": false,
+    "is_false_accept": false,
+    "is_unknown": true,
+    "reason": "embed_unavailable_fallback_tfidf:tfidf below threshold",
+    "registry_size": 2,
+    "is_heldout": false
+  },
+  {
+    "task_id": "noapp-2",
+    "stratum": "no-applicable",
+    "family": null,
+    "method": "B-RANDOM",
+    "intent": "unknown_intent_2_xyz",
+    "expected_outcome": "unknown",
+    "expected_bound": null,
+    "observed_status": "UNKNOWN",
+    "observed_bound": null,
+    "observed_confidence": 0.0,
+    "is_correct": false,
+    "is_false_accept": false,
+    "is_unknown": true,
+    "reason": "no eligible",
+    "registry_size": 2,
+    "is_heldout": false
+  },
+  {
+    "task_id": "noapp-2",
+    "stratum": "no-applicable",
+    "family": null,
+    "method": "RECONSTRUCTION",
+    "intent": "unknown_intent_2_xyz",
+    "expected_outcome": "unknown",
+    "expected_bound": null,
+    "observed_status": "UNKNOWN",
+    "observed_bound": null,
+    "observed_confidence": 0.058,
+    "is_correct": false,
+    "is_false_accept": false,
+    "is_unknown": true,
+    "reason": "no candidates - abstain",
+    "registry_size": 2,
+    "is_heldout": false
+  },
+  {
+    "task_id": "noapp-3",
+    "stratum": "no-applicable",
+    "family": null,
+    "method": "B-EXACT-MATCH",
+    "intent": "unknown_intent_3_xyz",
+    "expected_outcome": "unknown",
+    "expected_bound": null,
+    "observed_status": "UNKNOWN",
+    "observed_bound": null,
+    "observed_confidence": 0.0,
+    "is_correct": false,
+    "is_false_accept": false,
+    "is_unknown": true,
+    "reason": "no applicable validated mechanism",
+    "registry_size": 2,
+    "is_heldout": false
+  },
+  {
+    "task_id": "noapp-3",
+    "stratum": "no-applicable",
+    "family": null,
+    "method": "B-VERBATIM-REPLAY",
+    "intent": "unknown_intent_3_xyz",
+    "expected_outcome": "unknown",
+    "expected_bound": null,
+    "observed_status": "UNKNOWN",
+    "observed_bound": null,
+    "observed_confidence": 0.0,
+    "is_correct": false,
+    "is_false_accept": false,
+    "is_unknown": true,
+    "reason": "no applicable validated mechanism",
+    "registry_size": 2,
+    "is_heldout": false
+  },
+  {
+    "task_id": "noapp-3",
+    "stratum": "no-applicable",
+    "family": null,
+    "method": "B-RAG-TFIDF",
+    "intent": "unknown_intent_3_xyz",
+    "expected_outcome": "unknown",
+    "expected_bound": null,
+    "observed_status": "UNKNOWN",
+    "observed_bound": null,
+    "observed_confidence": 0.0,
+    "is_correct": false,
+    "is_false_accept": false,
+    "is_unknown": true,
+    "reason": "tfidf below threshold",
+    "registry_size": 2,
+    "is_heldout": false
+  },
+  {
+    "task_id": "noapp-3",
+    "stratum": "no-applicable",
+    "family": null,
+    "method": "B-RAG-EMBED",
+    "intent": "unknown_intent_3_xyz",
+    "expected_outcome": "unknown",
+    "expected_bound": null,
+    "observed_status": "UNKNOWN",
+    "observed_bound": null,
+    "observed_confidence": 0.0,
+    "is_correct": false,
+    "is_false_accept": false,
+    "is_unknown": true,
+    "reason": "embed_unavailable_fallback_tfidf:tfidf below threshold",
+    "registry_size": 2,
+    "is_heldout": false
+  },
+  {
+    "task_id": "noapp-3",
+    "stratum": "no-applicable",
+    "family": null,
+    "method": "B-RANDOM",
+    "intent": "unknown_intent_3_xyz",
+    "expected_outcome": "unknown",
+    "expected_bound": null,
+    "observed_status": "UNKNOWN",
+    "observed_bound": null,
+    "observed_confidence": 0.0,
+    "is_correct": false,
+    "is_false_accept": false,
+    "is_unknown": true,
+    "reason": "no eligible",
+    "registry_size": 2,
+    "is_heldout": false
+  },
+  {
+    "task_id": "noapp-3",
+    "stratum": "no-applicable",
+    "family": null,
+    "method": "RECONSTRUCTION",
+    "intent": "unknown_intent_3_xyz",
+    "expected_outcome": "unknown",
+    "expected_bound": null,
+    "observed_status": "UNKNOWN",
+    "observed_bound": null,
+    "observed_confidence": 0.062,
+    "is_correct": false,
+    "is_false_accept": false,
+    "is_unknown": true,
+    "reason": "no candidates - abstain",
+    "registry_size": 2,
+    "is_heldout": false
+  },
+  {
+    "task_id": "noapp-4",
+    "stratum": "no-applicable",
+    "family": null,
+    "method": "B-EXACT-MATCH",
+    "intent": "unknown_intent_4_xyz",
+    "expected_outcome": "unknown",
+    "expected_bound": null,
+    "observed_status": "UNKNOWN",
+    "observed_bound": null,
+    "observed_confidence": 0.0,
+    "is_correct": false,
+    "is_false_accept": false,
+    "is_unknown": true,
+    "reason": "no applicable validated mechanism",
+    "registry_size": 2,
+    "is_heldout": false
+  },
+  {
+    "task_id": "noapp-4",
+    "stratum": "no-applicable",
+    "family": null,
+    "method": "B-VERBATIM-REPLAY",
+    "intent": "unknown_intent_4_xyz",
+    "expected_outcome": "unknown",
+    "expected_bound": null,
+    "observed_status": "UNKNOWN",
+    "observed_bound": null,
+    "observed_confidence": 0.0,
+    "is_correct": false,
+    "is_false_accept": false,
+    "is_unknown": true,
+    "reason": "no applicable validated mechanism",
+    "registry_size": 2,
+    "is_heldout": false
+  },
+  {
+    "task_id": "noapp-4",
+    "stratum": "no-applicable",
+    "family": null,
+    "method": "B-RAG-TFIDF",
+    "intent": "unknown_intent_4_xyz",
+    "expected_outcome": "unknown",
+    "expected_bound": null,
+    "observed_status": "UNKNOWN",
+    "observed_bound": null,
+    "observed_confidence": 0.0,
+    "is_correct": false,
+    "is_false_accept": false,
+    "is_unknown": true,
+    "reason": "tfidf below threshold",
+    "registry_size": 2,
+    "is_heldout": false
+  },
+  {
+    "task_id": "noapp-4",
+    "stratum": "no-applicable",
+    "family": null,
+    "method": "B-RAG-EMBED",
+    "intent": "unknown_intent_4_xyz",
+    "expected_outcome": "unknown",
+    "expected_bound": null,
+    "observed_status": "UNKNOWN",
+    "observed_bound": null,
+    "observed_confidence": 0.0,
+    "is_correct": false,
+    "is_false_accept": false,
+    "is_unknown": true,
+    "reason": "embed_unavailable_fallback_tfidf:tfidf below threshold",
+    "registry_size": 2,
+    "is_heldout": false
+  },
+  {
+    "task_id": "noapp-4",
+    "stratum": "no-applicable",
+    "family": null,
+    "method": "B-RANDOM",
+    "intent": "unknown_intent_4_xyz",
+    "expected_outcome": "unknown",
+    "expected_bound": null,
+    "observed_status": "UNKNOWN",
+    "observed_bound": null,
+    "observed_confidence": 0.0,
+    "is_correct": false,
+    "is_false_accept": false,
+    "is_unknown": true,
+    "reason": "no eligible",
+    "registry_size": 2,
+    "is_heldout": false
+  },
+  {
+    "task_id": "noapp-4",
+    "stratum": "no-applicable",
+    "family": null,
+    "method": "RECONSTRUCTION",
+    "intent": "unknown_intent_4_xyz",
+    "expected_outcome": "unknown",
+    "expected_bound": null,
+    "observed_status": "UNKNOWN",
+    "observed_bound": null,
+    "observed_confidence": 0.052000000000000005,
+    "is_correct": false,
+    "is_false_accept": false,
+    "is_unknown": true,
+    "reason": "no candidates - abstain",
+    "registry_size": 2,
+    "is_heldout": false
+  },
+  {
+    "task_id": "noapp-5",
+    "stratum": "no-applicable",
+    "family": null,
+    "method": "B-EXACT-MATCH",
+    "intent": "unknown_intent_5_xyz",
+    "expected_outcome": "unknown",
+    "expected_bound": null,
+    "observed_status": "UNKNOWN",
+    "observed_bound": null,
+    "observed_confidence": 0.0,
+    "is_correct": false,
+    "is_false_accept": false,
+    "is_unknown": true,
+    "reason": "no applicable validated mechanism",
+    "registry_size": 2,
+    "is_heldout": false
+  },
+  {
+    "task_id": "noapp-5",
+    "stratum": "no-applicable",
+    "family": null,
+    "method": "B-VERBATIM-REPLAY",
+    "intent": "unknown_intent_5_xyz",
+    "expected_outcome": "unknown",
+    "expected_bound": null,
+    "observed_status": "UNKNOWN",
+    "observed_bound": null,
+    "observed_confidence": 0.0,
+    "is_correct": false,
+    "is_false_accept": false,
+    "is_unknown": true,
+    "reason": "no applicable validated mechanism",
+    "registry_size": 2,
+    "is_heldout": false
+  },
+  {
+    "task_id": "noapp-5",
+    "stratum": "no-applicable",
+    "family": null,
+    "method": "B-RAG-TFIDF",
+    "intent": "unknown_intent_5_xyz",
+    "expected_outcome": "unknown",
+    "expected_bound": null,
+    "observed_status": "UNKNOWN",
+    "observed_bound": null,
+    "observed_confidence": 0.0,
+    "is_correct": false,
+    "is_false_accept": false,
+    "is_unknown": true,
+    "reason": "tfidf below threshold",
+    "registry_size": 2,
+    "is_heldout": false
+  },
+  {
+    "task_id": "noapp-5",
+    "stratum": "no-applicable",
+    "family": null,
+    "method": "B-RAG-EMBED",
+    "intent": "unknown_intent_5_xyz",
+    "expected_outcome": "unknown",
+    "expected_bound": null,
+    "observed_status": "UNKNOWN",
+    "observed_bound": null,
+    "observed_confidence": 0.0,
+    "is_correct": false,
+    "is_false_accept": false,
+    "is_unknown": true,
+    "reason": "embed_unavailable_fallback_tfidf:tfidf below threshold",
+    "registry_size": 2,
+    "is_heldout": false
+  },
+  {
+    "task_id": "noapp-5",
+    "stratum": "no-applicable",
+    "family": null,
+    "method": "B-RANDOM",
+    "intent": "unknown_intent_5_xyz",
+    "expected_outcome": "unknown",
+    "expected_bound": null,
+    "observed_status": "UNKNOWN",
+    "observed_bound": null,
+    "observed_confidence": 0.0,
+    "is_correct": false,
+    "is_false_accept": false,
+    "is_unknown": true,
+    "reason": "no eligible",
+    "registry_size": 2,
+    "is_heldout": false
+  },
+  {
+    "task_id": "noapp-5",
+    "stratum": "no-applicable",
+    "family": null,
+    "method": "RECONSTRUCTION",
+    "intent": "unknown_intent_5_xyz",
+    "expected_outcome": "unknown",
+    "expected_bound": null,
+    "observed_status": "UNKNOWN",
+    "observed_bound": null,
+    "observed_confidence": 0.054000000000000006,
+    "is_correct": false,
+    "is_false_accept": false,
+    "is_unknown": true,
+    "reason": "no candidates - abstain",
+    "registry_size": 2,
+    "is_heldout": false
+  },
+  {
+    "task_id": "noapp-6",
+    "stratum": "no-applicable",
+    "family": null,
+    "method": "B-EXACT-MATCH",
+    "intent": "unknown_intent_6_xyz",
+    "expected_outcome": "unknown",
+    "expected_bound": null,
+    "observed_status": "UNKNOWN",
+    "observed_bound": null,
+    "observed_confidence": 0.0,
+    "is_correct": false,
+    "is_false_accept": false,
+    "is_unknown": true,
+    "reason": "no applicable validated mechanism",
+    "registry_size": 2,
+    "is_heldout": false
+  },
+  {
+    "task_id": "noapp-6",
+    "stratum": "no-applicable",
+    "family": null,
+    "method": "B-VERBATIM-REPLAY",
+    "intent": "unknown_intent_6_xyz",
+    "expected_outcome": "unknown",
+    "expected_bound": null,
+    "observed_status": "UNKNOWN",
+    "observed_bound": null,
+    "observed_confidence": 0.0,
+    "is_correct": false,
+    "is_false_accept": false,
+    "is_unknown": true,
+    "reason": "no applicable validated mechanism",
+    "registry_size": 2,
+    "is_heldout": false
+  },
+  {
+    "task_id": "noapp-6",
+    "stratum": "no-applicable",
+    "family": null,
+    "method": "B-RAG-TFIDF",
+    "intent": "unknown_intent_6_xyz",
+    "expected_outcome": "unknown",
+    "expected_bound": null,
+    "observed_status": "UNKNOWN",
+    "observed_bound": null,
+    "observed_confidence": 0.0,
+    "is_correct": false,
+    "is_false_accept": false,
+    "is_unknown": true,
+    "reason": "tfidf below threshold",
+    "registry_size": 2,
+    "is_heldout": false
+  },
+  {
+    "task_id": "noapp-6",
+    "stratum": "no-applicable",
+    "family": null,
+    "method": "B-RAG-EMBED",
+    "intent": "unknown_intent_6_xyz",
+    "expected_outcome": "unknown",
+    "expected_bound": null,
+    "observed_status": "UNKNOWN",
+    "observed_bound": null,
+    "observed_confidence": 0.0,
+    "is_correct": false,
+    "is_false_accept": false,
+    "is_unknown": true,
+    "reason": "embed_unavailable_fallback_tfidf:tfidf below threshold",
+    "registry_size": 2,
+    "is_heldout": false
+  },
+  {
+    "task_id": "noapp-6",
+    "stratum": "no-applicable",
+    "family": null,
+    "method": "B-RANDOM",
+    "intent": "unknown_intent_6_xyz",
+    "expected_outcome": "unknown",
+    "expected_bound": null,
+    "observed_status": "UNKNOWN",
+    "observed_bound": null,
+    "observed_confidence": 0.0,
+    "is_correct": false,
+    "is_false_accept": false,
+    "is_unknown": true,
+    "reason": "no eligible",
+    "registry_size": 2,
+    "is_heldout": false
+  },
+  {
+    "task_id": "noapp-6",
+    "stratum": "no-applicable",
+    "family": null,
+    "method": "RECONSTRUCTION",
+    "intent": "unknown_intent_6_xyz",
+    "expected_outcome": "unknown",
+    "expected_bound": null,
+    "observed_status": "UNKNOWN",
+    "observed_bound": null,
+    "observed_confidence": 0.054000000000000006,
+    "is_correct": false,
+    "is_false_accept": false,
+    "is_unknown": true,
+    "reason": "no candidates - abstain",
+    "registry_size": 2,
+    "is_heldout": false
+  },
+  {
+    "task_id": "noapp-7",
+    "stratum": "no-applicable",
+    "family": null,
+    "method": "B-EXACT-MATCH",
+    "intent": "unknown_intent_7_xyz",
+    "expected_outcome": "unknown",
+    "expected_bound": null,
+    "observed_status": "UNKNOWN",
+    "observed_bound": null,
+    "observed_confidence": 0.0,
+    "is_correct": false,
+    "is_false_accept": false,
+    "is_unknown": true,
+    "reason": "no applicable validated mechanism",
+    "registry_size": 2,
+    "is_heldout": false
+  },
+  {
+    "task_id": "noapp-7",
+    "stratum": "no-applicable",
+    "family": null,
+    "method": "B-VERBATIM-REPLAY",
+    "intent": "unknown_intent_7_xyz",
+    "expected_outcome": "unknown",
+    "expected_bound": null,
+    "observed_status": "UNKNOWN",
+    "observed_bound": null,
+    "observed_confidence": 0.0,
+    "is_correct": false,
+    "is_false_accept": false,
+    "is_unknown": true,
+    "reason": "no applicable validated mechanism",
+    "registry_size": 2,
+    "is_heldout": false
+  },
+  {
+    "task_id": "noapp-7",
+    "stratum": "no-applicable",
+    "family": null,
+    "method": "B-RAG-TFIDF",
+    "intent": "unknown_intent_7_xyz",
+    "expected_outcome": "unknown",
+    "expected_bound": null,
+    "observed_status": "UNKNOWN",
+    "observed_bound": null,
+    "observed_confidence": 0.0,
+    "is_correct": false,
+    "is_false_accept": false,
+    "is_unknown": true,
+    "reason": "tfidf below threshold",
+    "registry_size": 2,
+    "is_heldout": false
+  },
+  {
+    "task_id": "noapp-7",
+    "stratum": "no-applicable",
+    "family": null,
+    "method": "B-RAG-EMBED",
+    "intent": "unknown_intent_7_xyz",
+    "expected_outcome": "unknown",
+    "expected_bound": null,
+    "observed_status": "UNKNOWN",
+    "observed_bound": null,
+    "observed_confidence": 0.0,
+    "is_correct": false,
+    "is_false_accept": false,
+    "is_unknown": true,
+    "reason": "embed_unavailable_fallback_tfidf:tfidf below threshold",
+    "registry_size": 2,
+    "is_heldout": false
+  },
+  {
+    "task_id": "noapp-7",
+    "stratum": "no-applicable",
+    "family": null,
+    "method": "B-RANDOM",
+    "intent": "unknown_intent_7_xyz",
+    "expected_outcome": "unknown",
+    "expected_bound": null,
+    "observed_status": "UNKNOWN",
+    "observed_bound": null,
+    "observed_confidence": 0.0,
+    "is_correct": false,
+    "is_false_accept": false,
+    "is_unknown": true,
+    "reason": "no eligible",
+    "registry_size": 2,
+    "is_heldout": false
+  },
+  {
+    "task_id": "noapp-7",
+    "stratum": "no-applicable",
+    "family": null,
+    "method": "RECONSTRUCTION",
+    "intent": "unknown_intent_7_xyz",
+    "expected_outcome": "unknown",
+    "expected_bound": null,
+    "observed_status": "UNKNOWN",
+    "observed_bound": null,
+    "observed_confidence": 0.05,
+    "is_correct": false,
+    "is_false_accept": false,
+    "is_unknown": true,
+    "reason": "no candidates - abstain",
+    "registry_size": 2,
+    "is_heldout": false
+  },
+  {
+    "task_id": "noapp-8",
+    "stratum": "no-applicable",
+    "family": null,
+    "method": "B-EXACT-MATCH",
+    "intent": "unknown_intent_8_xyz",
+    "expected_outcome": "unknown",
+    "expected_bound": null,
+    "observed_status": "UNKNOWN",
+    "observed_bound": null,
+    "observed_confidence": 0.0,
+    "is_correct": false,
+    "is_false_accept": false,
+    "is_unknown": true,
+    "reason": "no applicable validated mechanism",
+    "registry_size": 2,
+    "is_heldout": false
+  },
+  {
+    "task_id": "noapp-8",
+    "stratum": "no-applicable",
+    "family": null,
+    "method": "B-VERBATIM-REPLAY",
+    "intent": "unknown_intent_8_xyz",
+    "expected_outcome": "unknown",
+    "expected_bound": null,
+    "observed_status": "UNKNOWN",
+    "observed_bound": null,
+    "observed_confidence": 0.0,
+    "is_correct": false,
+    "is_false_accept": false,
+    "is_unknown": true,
+    "reason": "no applicable validated mechanism",
+    "registry_size": 2,
+    "is_heldout": false
+  },
+  {
+    "task_id": "noapp-8",
+    "stratum": "no-applicable",
+    "family": null,
+    "method": "B-RAG-TFIDF",
+    "intent": "unknown_intent_8_xyz",
+    "expected_outcome": "unknown",
+    "expected_bound": null,
+    "observed_status": "UNKNOWN",
+    "observed_bound": null,
+    "observed_confidence": 0.0,
+    "is_correct": false,
+    "is_false_accept": false,
+    "is_unknown": true,
+    "reason": "tfidf below threshold",
+    "registry_size": 2,
+    "is_heldout": false
+  },
+  {
+    "task_id": "noapp-8",
+    "stratum": "no-applicable",
+    "family": null,
+    "method": "B-RAG-EMBED",
+    "intent": "unknown_intent_8_xyz",
+    "expected_outcome": "unknown",
+    "expected_bound": null,
+    "observed_status": "UNKNOWN",
+    "observed_bound": null,
+    "observed_confidence": 0.0,
+    "is_correct": false,
+    "is_false_accept": false,
+    "is_unknown": true,
+    "reason": "embed_unavailable_fallback_tfidf:tfidf below threshold",
+    "registry_size": 2,
+    "is_heldout": false
+  },
+  {
+    "task_id": "noapp-8",
+    "stratum": "no-applicable",
+    "family": null,
+    "method": "B-RANDOM",
+    "intent": "unknown_intent_8_xyz",
+    "expected_outcome": "unknown",
+    "expected_bound": null,
+    "observed_status": "UNKNOWN",
+    "observed_bound": null,
+    "observed_confidence": 0.0,
+    "is_correct": false,
+    "is_false_accept": false,
+    "is_unknown": true,
+    "reason": "no eligible",
+    "registry_size": 2,
+    "is_heldout": false
+  },
+  {
+    "task_id": "noapp-8",
+    "stratum": "no-applicable",
+    "family": null,
+    "method": "RECONSTRUCTION",
+    "intent": "unknown_intent_8_xyz",
+    "expected_outcome": "unknown",
+    "expected_bound": null,
+    "observed_status": "UNKNOWN",
+    "observed_bound": null,
+    "observed_confidence": 0.058,
+    "is_correct": false,
+    "is_false_accept": false,
+    "is_unknown": true,
+    "reason": "no candidates - abstain",
+    "registry_size": 2,
+    "is_heldout": false
+  },
+  {
+    "task_id": "noapp-9",
+    "stratum": "no-applicable",
+    "family": null,
+    "method": "B-EXACT-MATCH",
+    "intent": "unknown_intent_9_xyz",
+    "expected_outcome": "unknown",
+    "expected_bound": null,
+    "observed_status": "UNKNOWN",
+    "observed_bound": null,
+    "observed_confidence": 0.0,
+    "is_correct": false,
+    "is_false_accept": false,
+    "is_unknown": true,
+    "reason": "no applicable validated mechanism",
+    "registry_size": 2,
+    "is_heldout": false
+  },
+  {
+    "task_id": "noapp-9",
+    "stratum": "no-applicable",
+    "family": null,
+    "method": "B-VERBATIM-REPLAY",
+    "intent": "unknown_intent_9_xyz",
+    "expected_outcome": "unknown",
+    "expected_bound": null,
+    "observed_status": "UNKNOWN",
+    "observed_bound": null,
+    "observed_confidence": 0.0,
+    "is_correct": false,
+    "is_false_accept": false,
+    "is_unknown": true,
+    "reason": "no applicable validated mechanism",
+    "registry_size": 2,
+    "is_heldout": false
+  },
+  {
+    "task_id": "noapp-9",
+    "stratum": "no-applicable",
+    "family": null,
+    "method": "B-RAG-TFIDF",
+    "intent": "unknown_intent_9_xyz",
+    "expected_outcome": "unknown",
+    "expected_bound": null,
+    "observed_status": "UNKNOWN",
+    "observed_bound": null,
+    "observed_confidence": 0.0,
+    "is_correct": false,
+    "is_false_accept": false,
+    "is_unknown": true,
+    "reason": "tfidf below threshold",
+    "registry_size": 2,
+    "is_heldout": false
+  },
+  {
+    "task_id": "noapp-9",
+    "stratum": "no-applicable",
+    "family": null,
+    "method": "B-RAG-EMBED",
+    "intent": "unknown_intent_9_xyz",
+    "expected_outcome": "unknown",
+    "expected_bound": null,
+    "observed_status": "UNKNOWN",
+    "observed_bound": null,
+    "observed_confidence": 0.0,
+    "is_correct": false,
+    "is_false_accept": false,
+    "is_unknown": true,
+    "reason": "embed_unavailable_fallback_tfidf:tfidf below threshold",
+    "registry_size": 2,
+    "is_heldout": false
+  },
+  {
+    "task_id": "noapp-9",
+    "stratum": "no-applicable",
+    "family": null,
+    "method": "B-RANDOM",
+    "intent": "unknown_intent_9_xyz",
+    "expected_outcome": "unknown",
+    "expected_bound": null,
+    "observed_status": "UNKNOWN",
+    "observed_bound": null,
+    "observed_confidence": 0.0,
+    "is_correct": false,
+    "is_false_accept": false,
+    "is_unknown": true,
+    "reason": "no eligible",
+    "registry_size": 2,
+    "is_heldout": false
+  },
+  {
+    "task_id": "noapp-9",
+    "stratum": "no-applicable",
+    "family": null,
+    "method": "RECONSTRUCTION",
+    "intent": "unknown_intent_9_xyz",
+    "expected_outcome": "unknown",
+    "expected_bound": null,
+    "observed_status": "UNKNOWN",
+    "observed_bound": null,
+    "observed_confidence": 0.054000000000000006,
+    "is_correct": false,
+    "is_false_accept": false,
+    "is_unknown": true,
+    "reason": "no candidates - abstain",
+    "registry_size": 2,
+    "is_heldout": false
+  },
+  {
+    "task_id": "noapp-10",
+    "stratum": "no-applicable",
+    "family": null,
+    "method": "B-EXACT-MATCH",
+    "intent": "unknown_intent_10_xyz",
+    "expected_outcome": "unknown",
+    "expected_bound": null,
+    "observed_status": "UNKNOWN",
+    "observed_bound": null,
+    "observed_confidence": 0.0,
+    "is_correct": false,
+    "is_false_accept": false,
+    "is_unknown": true,
+    "reason": "no applicable validated mechanism",
+    "registry_size": 2,
+    "is_heldout": false
+  },
+  {
+    "task_id": "noapp-10",
+    "stratum": "no-applicable",
+    "family": null,
+    "method": "B-VERBATIM-REPLAY",
+    "intent": "unknown_intent_10_xyz",
+    "expected_outcome": "unknown",
+    "expected_bound": null,
+    "observed_status": "UNKNOWN",
+    "observed_bound": null,
+    "observed_confidence": 0.0,
+    "is_correct": false,
+    "is_false_accept": false,
+    "is_unknown": true,
+    "reason": "no applicable validated mechanism",
+    "registry_size": 2,
+    "is_heldout": false
+  },
+  {
+    "task_id": "noapp-10",
+    "stratum": "no-applicable",
+    "family": null,
+    "method": "B-RAG-TFIDF",
+    "intent": "unknown_intent_10_xyz",
+    "expected_outcome": "unknown",
+    "expected_bound": null,
+    "observed_status": "UNKNOWN",
+    "observed_bound": null,
+    "observed_confidence": 0.0,
+    "is_correct": false,
+    "is_false_accept": false,
+    "is_unknown": true,
+    "reason": "tfidf below threshold",
+    "registry_size": 2,
+    "is_heldout": false
+  },
+  {
+    "task_id": "noapp-10",
+    "stratum": "no-applicable",
+    "family": null,
+    "method": "B-RAG-EMBED",
+    "intent": "unknown_intent_10_xyz",
+    "expected_outcome": "unknown",
+    "expected_bound": null,
+    "observed_status": "UNKNOWN",
+    "observed_bound": null,
+    "observed_confidence": 0.0,
+    "is_correct": false,
+    "is_false_accept": false,
+    "is_unknown": true,
+    "reason": "embed_unavailable_fallback_tfidf:tfidf below threshold",
+    "registry_size": 2,
+    "is_heldout": false
+  },
+  {
+    "task_id": "noapp-10",
+    "stratum": "no-applicable",
+    "family": null,
+    "method": "B-RANDOM",
+    "intent": "unknown_intent_10_xyz",
+    "expected_outcome": "unknown",
+    "expected_bound": null,
+    "observed_status": "UNKNOWN",
+    "observed_bound": null,
+    "observed_confidence": 0.0,
+    "is_correct": false,
+    "is_false_accept": false,
+    "is_unknown": true,
+    "reason": "no eligible",
+    "registry_size": 2,
+    "is_heldout": false
+  },
+  {
+    "task_id": "noapp-10",
+    "stratum": "no-applicable",
+    "family": null,
+    "method": "RECONSTRUCTION",
+    "intent": "unknown_intent_10_xyz",
+    "expected_outcome": "unknown",
+    "expected_bound": null,
+    "observed_status": "UNKNOWN",
+    "observed_bound": null,
+    "observed_confidence": 0.060000000000000005,
+    "is_correct": false,
+    "is_false_accept": false,
+    "is_unknown": true,
+    "reason": "no candidates - abstain",
+    "registry_size": 2,
+    "is_heldout": false
+  },
+  {
+    "task_id": "noapp-11",
+    "stratum": "no-applicable",
+    "family": null,
+    "method": "B-EXACT-MATCH",
+    "intent": "unknown_intent_11_xyz",
+    "expected_outcome": "unknown",
+    "expected_bound": null,
+    "observed_status": "UNKNOWN",
+    "observed_bound": null,
+    "observed_confidence": 0.0,
+    "is_correct": false,
+    "is_false_accept": false,
+    "is_unknown": true,
+    "reason": "no applicable validated mechanism",
+    "registry_size": 2,
+    "is_heldout": false
+  },
+  {
+    "task_id": "noapp-11",
+    "stratum": "no-applicable",
+    "family": null,
+    "method": "B-VERBATIM-REPLAY",
+    "intent": "unknown_intent_11_xyz",
+    "expected_outcome": "unknown",
+    "expected_bound": null,
+    "observed_status": "UNKNOWN",
+    "observed_bound": null,
+    "observed_confidence": 0.0,
+    "is_correct": false,
+    "is_false_accept": false,
+    "is_unknown": true,
+    "reason": "no applicable validated mechanism",
+    "registry_size": 2,
+    "is_heldout": false
+  },
+  {
+    "task_id": "noapp-11",
+    "stratum": "no-applicable",
+    "family": null,
+    "method": "B-RAG-TFIDF",
+    "intent": "unknown_intent_11_xyz",
+    "expected_outcome": "unknown",
+    "expected_bound": null,
+    "observed_status": "UNKNOWN",
+    "observed_bound": null,
+    "observed_confidence": 0.0,
+    "is_correct": false,
+    "is_false_accept": false,
+    "is_unknown": true,
+    "reason": "tfidf below threshold",
+    "registry_size": 2,
+    "is_heldout": false
+  },
+  {
+    "task_id": "noapp-11",
+    "stratum": "no-applicable",
+    "family": null,
+    "method": "B-RAG-EMBED",
+    "intent": "unknown_intent_11_xyz",
+    "expected_outcome": "unknown",
+    "expected_bound": null,
+    "observed_status": "UNKNOWN",
+    "observed_bound": null,
+    "observed_confidence": 0.0,
+    "is_correct": false,
+    "is_false_accept": false,
+    "is_unknown": true,
+    "reason": "embed_unavailable_fallback_tfidf:tfidf below threshold",
+    "registry_size": 2,
+    "is_heldout": false
+  },
+  {
+    "task_id": "noapp-11",
+    "stratum": "no-applicable",
+    "family": null,
+    "method": "B-RANDOM",
+    "intent": "unknown_intent_11_xyz",
+    "expected_outcome": "unknown",
+    "expected_bound": null,
+    "observed_status": "UNKNOWN",
+    "observed_bound": null,
+    "observed_confidence": 0.0,
+    "is_correct": false,
+    "is_false_accept": false,
+    "is_unknown": true,
+    "reason": "no eligible",
+    "registry_size": 2,
+    "is_heldout": false
+  },
+  {
+    "task_id": "noapp-11",
+    "stratum": "no-applicable",
+    "family": null,
+    "method": "RECONSTRUCTION",
+    "intent": "unknown_intent_11_xyz",
+    "expected_outcome": "unknown",
+    "expected_bound": null,
+    "observed_status": "UNKNOWN",
+    "observed_bound": null,
+    "observed_confidence": 0.064,
+    "is_correct": false,
+    "is_false_accept": false,
+    "is_unknown": true,
+    "reason": "no candidates - abstain",
+    "registry_size": 2,
+    "is_heldout": false
+  },
+  {
+    "task_id": "empty-0",
+    "stratum": "empty-registry",
+    "family": null,
+    "method": "B-EXACT-MATCH",
+    "intent": "any_intent_0",
+    "expected_outcome": "unknown",
+    "expected_bound": null,
+    "observed_status": "UNKNOWN",
+    "observed_bound": null,
+    "observed_confidence": 0.0,
+    "is_correct": false,
+    "is_false_accept": false,
+    "is_unknown": true,
+    "reason": "no applicable validated mechanism",
+    "registry_size": 0,
+    "is_heldout": false
+  },
+  {
+    "task_id": "empty-0",
+    "stratum": "empty-registry",
+    "family": null,
+    "method": "B-VERBATIM-REPLAY",
+    "intent": "any_intent_0",
+    "expected_outcome": "unknown",
+    "expected_bound": null,
+    "observed_status": "UNKNOWN",
+    "observed_bound": null,
+    "observed_confidence": 0.0,
+    "is_correct": false,
+    "is_false_accept": false,
+    "is_unknown": true,
+    "reason": "no applicable validated mechanism",
+    "registry_size": 0,
+    "is_heldout": false
+  },
+  {
+    "task_id": "empty-0",
+    "stratum": "empty-registry",
+    "family": null,
+    "method": "B-RAG-TFIDF",
+    "intent": "any_intent_0",
+    "expected_outcome": "unknown",
+    "expected_bound": null,
+    "observed_status": "UNKNOWN",
+    "observed_bound": null,
+    "observed_confidence": 0.0,
+    "is_correct": false,
+    "is_false_accept": false,
+    "is_unknown": true,
+    "reason": "empty registry",
+    "registry_size": 0,
+    "is_heldout": false
+  },
+  {
+    "task_id": "empty-0",
+    "stratum": "empty-registry",
+    "family": null,
+    "method": "B-RAG-EMBED",
+    "intent": "any_intent_0",
+    "expected_outcome": "unknown",
+    "expected_bound": null,
+    "observed_status": "UNKNOWN",
+    "observed_bound": null,
+    "observed_confidence": 0.0,
+    "is_correct": false,
+    "is_false_accept": false,
+    "is_unknown": true,
+    "reason": "embed_unavailable_fallback_tfidf:empty registry",
+    "registry_size": 0,
+    "is_heldout": false
+  },
+  {
+    "task_id": "empty-0",
+    "stratum": "empty-registry",
+    "family": null,
+    "method": "B-RANDOM",
+    "intent": "any_intent_0",
+    "expected_outcome": "unknown",
+    "expected_bound": null,
+    "observed_status": "UNKNOWN",
+    "observed_bound": null,
+    "observed_confidence": 0.0,
+    "is_correct": false,
+    "is_false_accept": false,
+    "is_unknown": true,
+    "reason": "no eligible",
+    "registry_size": 0,
+    "is_heldout": false
+  },
+  {
+    "task_id": "empty-0",
+    "stratum": "empty-registry",
+    "family": null,
+    "method": "RECONSTRUCTION",
+    "intent": "any_intent_0",
+    "expected_outcome": "unknown",
+    "expected_bound": null,
+    "observed_status": "UNKNOWN",
+    "observed_bound": null,
+    "observed_confidence": 0.064,
+    "is_correct": false,
+    "is_false_accept": false,
+    "is_unknown": true,
+    "reason": "no candidates - abstain",
+    "registry_size": 0,
+    "is_heldout": false
+  },
+  {
+    "task_id": "empty-1",
+    "stratum": "empty-registry",
+    "family": null,
+    "method": "B-EXACT-MATCH",
+    "intent": "any_intent_1",
+    "expected_outcome": "unknown",
+    "expected_bound": null,
+    "observed_status": "UNKNOWN",
+    "observed_bound": null,
+    "observed_confidence": 0.0,
+    "is_correct": false,
+    "is_false_accept": false,
+    "is_unknown": true,
+    "reason": "no applicable validated mechanism",
+    "registry_size": 0,
+    "is_heldout": false
+  },
+  {
+    "task_id": "empty-1",
+    "stratum": "empty-registry",
+    "family": null,
+    "method": "B-VERBATIM-REPLAY",
+    "intent": "any_intent_1",
+    "expected_outcome": "unknown",
+    "expected_bound": null,
+    "observed_status": "UNKNOWN",
+    "observed_bound": null,
+    "observed_confidence": 0.0,
+    "is_correct": false,
+    "is_false_accept": false,
+    "is_unknown": true,
+    "reason": "no applicable validated mechanism",
+    "registry_size": 0,
+    "is_heldout": false
+  },
+  {
+    "task_id": "empty-1",
+    "stratum": "empty-registry",
+    "family": null,
+    "method": "B-RAG-TFIDF",
+    "intent": "any_intent_1",
+    "expected_outcome": "unknown",
+    "expected_bound": null,
+    "observed_status": "UNKNOWN",
+    "observed_bound": null,
+    "observed_confidence": 0.0,
+    "is_correct": false,
+    "is_false_accept": false,
+    "is_unknown": true,
+    "reason": "empty registry",
+    "registry_size": 0,
+    "is_heldout": false
+  },
+  {
+    "task_id": "empty-1",
+    "stratum": "empty-registry",
+    "family": null,
+    "method": "B-RAG-EMBED",
+    "intent": "any_intent_1",
+    "expected_outcome": "unknown",
+    "expected_bound": null,
+    "observed_status": "UNKNOWN",
+    "observed_bound": null,
+    "observed_confidence": 0.0,
+    "is_correct": false,
+    "is_false_accept": false,
+    "is_unknown": true,
+    "reason": "embed_unavailable_fallback_tfidf:empty registry",
+    "registry_size": 0,
+    "is_heldout": false
+  },
+  {
+    "task_id": "empty-1",
+    "stratum": "empty-registry",
+    "family": null,
+    "method": "B-RANDOM",
+    "intent": "any_intent_1",
+    "expected_outcome": "unknown",
+    "expected_bound": null,
+    "observed_status": "UNKNOWN",
+    "observed_bound": null,
+    "observed_confidence": 0.0,
+    "is_correct": false,
+    "is_false_accept": false,
+    "is_unknown": true,
+    "reason": "no eligible",
+    "registry_size": 0,
+    "is_heldout": false
+  },
+  {
+    "task_id": "empty-1",
+    "stratum": "empty-registry",
+    "family": null,
+    "method": "RECONSTRUCTION",
+    "intent": "any_intent_1",
+    "expected_outcome": "unknown",
+    "expected_bound": null,
+    "observed_status": "UNKNOWN",
+    "observed_bound": null,
+    "observed_confidence": 0.05,
+    "is_correct": false,
+    "is_false_accept": false,
+    "is_unknown": true,
+    "reason": "no candidates - abstain",
+    "registry_size": 0,
+    "is_heldout": false
+  },
+  {
+    "task_id": "empty-2",
+    "stratum": "empty-registry",
+    "family": null,
+    "method": "B-EXACT-MATCH",
+    "intent": "any_intent_2",
+    "expected_outcome": "unknown",
+    "expected_bound": null,
+    "observed_status": "UNKNOWN",
+    "observed_bound": null,
+    "observed_confidence": 0.0,
+    "is_correct": false,
+    "is_false_accept": false,
+    "is_unknown": true,
+    "reason": "no applicable validated mechanism",
+    "registry_size": 0,
+    "is_heldout": false
+  },
+  {
+    "task_id": "empty-2",
+    "stratum": "empty-registry",
+    "family": null,
+    "method": "B-VERBATIM-REPLAY",
+    "intent": "any_intent_2",
+    "expected_outcome": "unknown",
+    "expected_bound": null,
+    "observed_status": "UNKNOWN",
+    "observed_bound": null,
+    "observed_confidence": 0.0,
+    "is_correct": false,
+    "is_false_accept": false,
+    "is_unknown": true,
+    "reason": "no applicable validated mechanism",
+    "registry_size": 0,
+    "is_heldout": false
+  },
+  {
+    "task_id": "empty-2",
+    "stratum": "empty-registry",
+    "family": null,
+    "method": "B-RAG-TFIDF",
+    "intent": "any_intent_2",
+    "expected_outcome": "unknown",
+    "expected_bound": null,
+    "observed_status": "UNKNOWN",
+    "observed_bound": null,
+    "observed_confidence": 0.0,
+    "is_correct": false,
+    "is_false_accept": false,
+    "is_unknown": true,
+    "reason": "empty registry",
+    "registry_size": 0,
+    "is_heldout": false
+  },
+  {
+    "task_id": "empty-2",
+    "stratum": "empty-registry",
+    "family": null,
+    "method": "B-RAG-EMBED",
+    "intent": "any_intent_2",
+    "expected_outcome": "unknown",
+    "expected_bound": null,
+    "observed_status": "UNKNOWN",
+    "observed_bound": null,
+    "observed_confidence": 0.0,
+    "is_correct": false,
+    "is_false_accept": false,
+    "is_unknown": true,
+    "reason": "embed_unavailable_fallback_tfidf:empty registry",
+    "registry_size": 0,
+    "is_heldout": false
+  },
+  {
+    "task_id": "empty-2",
+    "stratum": "empty-registry",
+    "family": null,
+    "method": "B-RANDOM",
+    "intent": "any_intent_2",
+    "expected_outcome": "unknown",
+    "expected_bound": null,
+    "observed_status": "UNKNOWN",
+    "observed_bound": null,
+    "observed_confidence": 0.0,
+    "is_correct": false,
+    "is_false_accept": false,
+    "is_unknown": true,
+    "reason": "no eligible",
+    "registry_size": 0,
+    "is_heldout": false
+  },
+  {
+    "task_id": "empty-2",
+    "stratum": "empty-registry",
+    "family": null,
+    "method": "RECONSTRUCTION",
+    "intent": "any_intent_2",
+    "expected_outcome": "unknown",
+    "expected_bound": null,
+    "observed_status": "UNKNOWN",
+    "observed_bound": null,
+    "observed_confidence": 0.066,
+    "is_correct": false,
+    "is_false_accept": false,
+    "is_unknown": true,
+    "reason": "no candidates - abstain",
+    "registry_size": 0,
+    "is_heldout": false
+  },
+  {
+    "task_id": "empty-3",
+    "stratum": "empty-registry",
+    "family": null,
+    "method": "B-EXACT-MATCH",
+    "intent": "any_intent_3",
+    "expected_outcome": "unknown",
+    "expected_bound": null,
+    "observed_status": "UNKNOWN",
+    "observed_bound": null,
+    "observed_confidence": 0.0,
+    "is_correct": false,
+    "is_false_accept": false,
+    "is_unknown": true,
+    "reason": "no applicable validated mechanism",
+    "registry_size": 0,
+    "is_heldout": false
+  },
+  {
+    "task_id": "empty-3",
+    "stratum": "empty-registry",
+    "family": null,
+    "method": "B-VERBATIM-REPLAY",
+    "intent": "any_intent_3",
+    "expected_outcome": "unknown",
+    "expected_bound": null,
+    "observed_status": "UNKNOWN",
+    "observed_bound": null,
+    "observed_confidence": 0.0,
+    "is_correct": false,
+    "is_false_accept": false,
+    "is_unknown": true,
+    "reason": "no applicable validated mechanism",
+    "registry_size": 0,
+    "is_heldout": false
+  },
+  {
+    "task_id": "empty-3",
+    "stratum": "empty-registry",
+    "family": null,
+    "method": "B-RAG-TFIDF",
+    "intent": "any_intent_3",
+    "expected_outcome": "unknown",
+    "expected_bound": null,
+    "observed_status": "UNKNOWN",
+    "observed_bound": null,
+    "observed_confidence": 0.0,
+    "is_correct": false,
+    "is_false_accept": false,
+    "is_unknown": true,
+    "reason": "empty registry",
+    "registry_size": 0,
+    "is_heldout": false
+  },
+  {
+    "task_id": "empty-3",
+    "stratum": "empty-registry",
+    "family": null,
+    "method": "B-RAG-EMBED",
+    "intent": "any_intent_3",
+    "expected_outcome": "unknown",
+    "expected_bound": null,
+    "observed_status": "UNKNOWN",
+    "observed_bound": null,
+    "observed_confidence": 0.0,
+    "is_correct": false,
+    "is_false_accept": false,
+    "is_unknown": true,
+    "reason": "embed_unavailable_fallback_tfidf:empty registry",
+    "registry_size": 0,
+    "is_heldout": false
+  },
+  {
+    "task_id": "empty-3",
+    "stratum": "empty-registry",
+    "family": null,
+    "method": "B-RANDOM",
+    "intent": "any_intent_3",
+    "expected_outcome": "unknown",
+    "expected_bound": null,
+    "observed_status": "UNKNOWN",
+    "observed_bound": null,
+    "observed_confidence": 0.0,
+    "is_correct": false,
+    "is_false_accept": false,
+    "is_unknown": true,
+    "reason": "no eligible",
+    "registry_size": 0,
+    "is_heldout": false
+  },
+  {
+    "task_id": "empty-3",
+    "stratum": "empty-registry",
+    "family": null,
+    "method": "RECONSTRUCTION",
+    "intent": "any_intent_3",
+    "expected_outcome": "unknown",
+    "expected_bound": null,
+    "observed_status": "UNKNOWN",
+    "observed_bound": null,
+    "observed_confidence": 0.060000000000000005,
+    "is_correct": false,
+    "is_false_accept": false,
+    "is_unknown": true,
+    "reason": "no candidates - abstain",
+    "registry_size": 0,
+    "is_heldout": false
+  },
+  {
+    "task_id": "empty-4",
+    "stratum": "empty-registry",
+    "family": null,
+    "method": "B-EXACT-MATCH",
+    "intent": "any_intent_4",
+    "expected_outcome": "unknown",
+    "expected_bound": null,
+    "observed_status": "UNKNOWN",
+    "observed_bound": null,
+    "observed_confidence": 0.0,
+    "is_correct": false,
+    "is_false_accept": false,
+    "is_unknown": true,
+    "reason": "no applicable validated mechanism",
+    "registry_size": 0,
+    "is_heldout": false
+  },
+  {
+    "task_id": "empty-4",
+    "stratum": "empty-registry",
+    "family": null,
+    "method": "B-VERBATIM-REPLAY",
+    "intent": "any_intent_4",
+    "expected_outcome": "unknown",
+    "expected_bound": null,
+    "observed_status": "UNKNOWN",
+    "observed_bound": null,
+    "observed_confidence": 0.0,
+    "is_correct": false,
+    "is_false_accept": false,
+    "is_unknown": true,
+    "reason": "no applicable validated mechanism",
+    "registry_size": 0,
+    "is_heldout": false
+  },
+  {
+    "task_id": "empty-4",
+    "stratum": "empty-registry",
+    "family": null,
+    "method": "B-RAG-TFIDF",
+    "intent": "any_intent_4",
+    "expected_outcome": "unknown",
+    "expected_bound": null,
+    "observed_status": "UNKNOWN",
+    "observed_bound": null,
+    "observed_confidence": 0.0,
+    "is_correct": false,
+    "is_false_accept": false,
+    "is_unknown": true,
+    "reason": "empty registry",
+    "registry_size": 0,
+    "is_heldout": false
+  },
+  {
+    "task_id": "empty-4",
+    "stratum": "empty-registry",
+    "family": null,
+    "method": "B-RAG-EMBED",
+    "intent": "any_intent_4",
+    "expected_outcome": "unknown",
+    "expected_bound": null,
+    "observed_status": "UNKNOWN",
+    "observed_bound": null,
+    "observed_confidence": 0.0,
+    "is_correct": false,
+    "is_false_accept": false,
+    "is_unknown": true,
+    "reason": "embed_unavailable_fallback_tfidf:empty registry",
+    "registry_size": 0,
+    "is_heldout": false
+  },
+  {
+    "task_id": "empty-4",
+    "stratum": "empty-registry",
+    "family": null,
+    "method": "B-RANDOM",
+    "intent": "any_intent_4",
+    "expected_outcome": "unknown",
+    "expected_bound": null,
+    "observed_status": "UNKNOWN",
+    "observed_bound": null,
+    "observed_confidence": 0.0,
+    "is_correct": false,
+    "is_false_accept": false,
+    "is_unknown": true,
+    "reason": "no eligible",
+    "registry_size": 0,
+    "is_heldout": false
+  },
+  {
+    "task_id": "empty-4",
+    "stratum": "empty-registry",
+    "family": null,
+    "method": "RECONSTRUCTION",
+    "intent": "any_intent_4",
+    "expected_outcome": "unknown",
+    "expected_bound": null,
+    "observed_status": "UNKNOWN",
+    "observed_bound": null,
+    "observed_confidence": 0.052000000000000005,
+    "is_correct": false,
+    "is_false_accept": false,
+    "is_unknown": true,
+    "reason": "no candidates - abstain",
+    "registry_size": 0,
+    "is_heldout": false
+  },
+  {
+    "task_id": "empty-5",
+    "stratum": "empty-registry",
+    "family": null,
+    "method": "B-EXACT-MATCH",
+    "intent": "any_intent_5",
+    "expected_outcome": "unknown",
+    "expected_bound": null,
+    "observed_status": "UNKNOWN",
+    "observed_bound": null,
+    "observed_confidence": 0.0,
+    "is_correct": false,
+    "is_false_accept": false,
+    "is_unknown": true,
+    "reason": "no applicable validated mechanism",
+    "registry_size": 0,
+    "is_heldout": false
+  },
+  {
+    "task_id": "empty-5",
+    "stratum": "empty-registry",
+    "family": null,
+    "method": "B-VERBATIM-REPLAY",
+    "intent": "any_intent_5",
+    "expected_outcome": "unknown",
+    "expected_bound": null,
+    "observed_status": "UNKNOWN",
+    "observed_bound": null,
+    "observed_confidence": 0.0,
+    "is_correct": false,
+    "is_false_accept": false,
+    "is_unknown": true,
+    "reason": "no applicable validated mechanism",
+    "registry_size": 0,
+    "is_heldout": false
+  },
+  {
+    "task_id": "empty-5",
+    "stratum": "empty-registry",
+    "family": null,
+    "method": "B-RAG-TFIDF",
+    "intent": "any_intent_5",
+    "expected_outcome": "unknown",
+    "expected_bound": null,
+    "observed_status": "UNKNOWN",
+    "observed_bound": null,
+    "observed_confidence": 0.0,
+    "is_correct": false,
+    "is_false_accept": false,
+    "is_unknown": true,
+    "reason": "empty registry",
+    "registry_size": 0,
+    "is_heldout": false
+  },
+  {
+    "task_id": "empty-5",
+    "stratum": "empty-registry",
+    "family": null,
+    "method": "B-RAG-EMBED",
+    "intent": "any_intent_5",
+    "expected_outcome": "unknown",
+    "expected_bound": null,
+    "observed_status": "UNKNOWN",
+    "observed_bound": null,
+    "observed_confidence": 0.0,
+    "is_correct": false,
+    "is_false_accept": false,
+    "is_unknown": true,
+    "reason": "embed_unavailable_fallback_tfidf:empty registry",
+    "registry_size": 0,
+    "is_heldout": false
+  },
+  {
+    "task_id": "empty-5",
+    "stratum": "empty-registry",
+    "family": null,
+    "method": "B-RANDOM",
+    "intent": "any_intent_5",
+    "expected_outcome": "unknown",
+    "expected_bound": null,
+    "observed_status": "UNKNOWN",
+    "observed_bound": null,
+    "observed_confidence": 0.0,
+    "is_correct": false,
+    "is_false_accept": false,
+    "is_unknown": true,
+    "reason": "no eligible",
+    "registry_size": 0,
+    "is_heldout": false
+  },
+  {
+    "task_id": "empty-5",
+    "stratum": "empty-registry",
+    "family": null,
+    "method": "RECONSTRUCTION",
+    "intent": "any_intent_5",
+    "expected_outcome": "unknown",
+    "expected_bound": null,
+    "observed_status": "UNKNOWN",
+    "observed_bound": null,
+    "observed_confidence": 0.060000000000000005,
+    "is_correct": false,
+    "is_false_accept": false,
+    "is_unknown": true,
+    "reason": "no candidates - abstain",
+    "registry_size": 0,
+    "is_heldout": false
+  }
+]

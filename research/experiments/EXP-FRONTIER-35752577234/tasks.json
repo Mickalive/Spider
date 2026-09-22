@@ -1,0 +1,2792 @@
+[
+  {
+    "task_id": "alias-0-0",
+    "stratum": "alias-OOD",
+    "intent": "fetch_user_q_0",
+    "derived_context": {
+      "url": "/users?user=val0_0",
+      "method": "GET",
+      "url_path": "/users",
+      "url_query": {
+        "user": "val0_0"
+      },
+      "url_segments": [
+        "users"
+      ]
+    },
+    "params": {
+      "id": "val0_0"
+    },
+    "hidden_expected": {
+      "alias_family": 0,
+      "expected_template": "/users?user=${id}",
+      "expected_bound": {
+        "url": "/users?user=val0_0"
+      },
+      "is_heldout": false,
+      "train_template": "/users/${id}",
+      "dist_template": "/accounts/${id}"
+    },
+    "expected_outcome": "correct",
+    "is_heldout": false,
+    "registry": [
+      {
+        "mechanism_id": "m-alias-0-0-train",
+        "intent": "fetch_user_q_0",
+        "template": {
+          "url": "/users/${id}"
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-alias-0-0-dist",
+        "intent": "fetch_user_q_0",
+        "template": {
+          "url": "/accounts/${id}"
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-alias-0-0-low",
+        "intent": "fetch_user_q_0",
+        "template": {
+          "url": "/items/${id}"
+        },
+        "confidence": 0.8
+      }
+    ]
+  },
+  {
+    "task_id": "alias-0-1",
+    "stratum": "alias-OOD",
+    "intent": "fetch_user_q_1",
+    "derived_context": {
+      "url": "/users?user=val0_1",
+      "method": "GET",
+      "url_path": "/users",
+      "url_query": {
+        "user": "val0_1"
+      },
+      "url_segments": [
+        "users"
+      ]
+    },
+    "params": {
+      "id": "val0_1"
+    },
+    "hidden_expected": {
+      "alias_family": 0,
+      "expected_template": "/users?user=${id}",
+      "expected_bound": {
+        "url": "/users?user=val0_1"
+      },
+      "is_heldout": false,
+      "train_template": "/users/${id}",
+      "dist_template": "/accounts/${id}"
+    },
+    "expected_outcome": "correct",
+    "is_heldout": false,
+    "registry": [
+      {
+        "mechanism_id": "m-alias-0-1-train",
+        "intent": "fetch_user_q_1",
+        "template": {
+          "url": "/users/${id}"
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-alias-0-1-dist",
+        "intent": "fetch_user_q_1",
+        "template": {
+          "url": "/accounts/${id}"
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-alias-0-1-low",
+        "intent": "fetch_user_q_1",
+        "template": {
+          "url": "/items/${id}"
+        },
+        "confidence": 0.8
+      }
+    ]
+  },
+  {
+    "task_id": "alias-0-2",
+    "stratum": "alias-OOD",
+    "intent": "fetch_user_q_2",
+    "derived_context": {
+      "url": "/users?user=val0_2",
+      "method": "GET",
+      "url_path": "/users",
+      "url_query": {
+        "user": "val0_2"
+      },
+      "url_segments": [
+        "users"
+      ]
+    },
+    "params": {
+      "id": "val0_2"
+    },
+    "hidden_expected": {
+      "alias_family": 0,
+      "expected_template": "/users?user=${id}",
+      "expected_bound": {
+        "url": "/users?user=val0_2"
+      },
+      "is_heldout": false,
+      "train_template": "/users/${id}",
+      "dist_template": "/accounts/${id}"
+    },
+    "expected_outcome": "correct",
+    "is_heldout": false,
+    "registry": [
+      {
+        "mechanism_id": "m-alias-0-2-train",
+        "intent": "fetch_user_q_2",
+        "template": {
+          "url": "/users/${id}"
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-alias-0-2-dist",
+        "intent": "fetch_user_q_2",
+        "template": {
+          "url": "/accounts/${id}"
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-alias-0-2-low",
+        "intent": "fetch_user_q_2",
+        "template": {
+          "url": "/items/${id}"
+        },
+        "confidence": 0.8
+      }
+    ]
+  },
+  {
+    "task_id": "alias-0-3",
+    "stratum": "alias-OOD",
+    "intent": "fetch_user_q_3",
+    "derived_context": {
+      "url": "/users?user=val0_3",
+      "method": "GET",
+      "url_path": "/users",
+      "url_query": {
+        "user": "val0_3"
+      },
+      "url_segments": [
+        "users"
+      ]
+    },
+    "params": {
+      "id": "val0_3"
+    },
+    "hidden_expected": {
+      "alias_family": 0,
+      "expected_template": "/users?user=${id}",
+      "expected_bound": {
+        "url": "/users?user=val0_3"
+      },
+      "is_heldout": false,
+      "train_template": "/users/${id}",
+      "dist_template": "/accounts/${id}"
+    },
+    "expected_outcome": "correct",
+    "is_heldout": false,
+    "registry": [
+      {
+        "mechanism_id": "m-alias-0-3-train",
+        "intent": "fetch_user_q_3",
+        "template": {
+          "url": "/users/${id}"
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-alias-0-3-dist",
+        "intent": "fetch_user_q_3",
+        "template": {
+          "url": "/accounts/${id}"
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-alias-0-3-low",
+        "intent": "fetch_user_q_3",
+        "template": {
+          "url": "/items/${id}"
+        },
+        "confidence": 0.8
+      }
+    ]
+  },
+  {
+    "task_id": "alias-0-4",
+    "stratum": "alias-OOD",
+    "intent": "fetch_user_q_4",
+    "derived_context": {
+      "url": "/users?user=val0_4",
+      "method": "GET",
+      "url_path": "/users",
+      "url_query": {
+        "user": "val0_4"
+      },
+      "url_segments": [
+        "users"
+      ]
+    },
+    "params": {
+      "id": "val0_4"
+    },
+    "hidden_expected": {
+      "alias_family": 0,
+      "expected_template": "/users?user=${id}",
+      "expected_bound": {
+        "url": "/users?user=val0_4"
+      },
+      "is_heldout": false,
+      "train_template": "/users/${id}",
+      "dist_template": "/accounts/${id}"
+    },
+    "expected_outcome": "correct",
+    "is_heldout": false,
+    "registry": [
+      {
+        "mechanism_id": "m-alias-0-4-train",
+        "intent": "fetch_user_q_4",
+        "template": {
+          "url": "/users/${id}"
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-alias-0-4-dist",
+        "intent": "fetch_user_q_4",
+        "template": {
+          "url": "/accounts/${id}"
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-alias-0-4-low",
+        "intent": "fetch_user_q_4",
+        "template": {
+          "url": "/items/${id}"
+        },
+        "confidence": 0.8
+      }
+    ]
+  },
+  {
+    "task_id": "alias-0-5",
+    "stratum": "alias-OOD",
+    "intent": "fetch_user_q_5",
+    "derived_context": {
+      "url": "/users?user=val0_5",
+      "method": "GET",
+      "url_path": "/users",
+      "url_query": {
+        "user": "val0_5"
+      },
+      "url_segments": [
+        "users"
+      ]
+    },
+    "params": {
+      "id": "val0_5"
+    },
+    "hidden_expected": {
+      "alias_family": 0,
+      "expected_template": "/users?user=${id}",
+      "expected_bound": {
+        "url": "/users?user=val0_5"
+      },
+      "is_heldout": false,
+      "train_template": "/users/${id}",
+      "dist_template": "/accounts/${id}"
+    },
+    "expected_outcome": "correct",
+    "is_heldout": false,
+    "registry": [
+      {
+        "mechanism_id": "m-alias-0-5-train",
+        "intent": "fetch_user_q_5",
+        "template": {
+          "url": "/users/${id}"
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-alias-0-5-dist",
+        "intent": "fetch_user_q_5",
+        "template": {
+          "url": "/accounts/${id}"
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-alias-0-5-low",
+        "intent": "fetch_user_q_5",
+        "template": {
+          "url": "/items/${id}"
+        },
+        "confidence": 0.8
+      }
+    ]
+  },
+  {
+    "task_id": "alias-0-6",
+    "stratum": "alias-OOD",
+    "intent": "fetch_user_q_6",
+    "derived_context": {
+      "url": "/users?user=val0_6",
+      "method": "GET",
+      "url_path": "/users",
+      "url_query": {
+        "user": "val0_6"
+      },
+      "url_segments": [
+        "users"
+      ]
+    },
+    "params": {
+      "id": "val0_6"
+    },
+    "hidden_expected": {
+      "alias_family": 0,
+      "expected_template": "/users?user=${id}",
+      "expected_bound": {
+        "url": "/users?user=val0_6"
+      },
+      "is_heldout": false,
+      "train_template": "/users/${id}",
+      "dist_template": "/accounts/${id}"
+    },
+    "expected_outcome": "correct",
+    "is_heldout": false,
+    "registry": [
+      {
+        "mechanism_id": "m-alias-0-6-train",
+        "intent": "fetch_user_q_6",
+        "template": {
+          "url": "/users/${id}"
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-alias-0-6-dist",
+        "intent": "fetch_user_q_6",
+        "template": {
+          "url": "/accounts/${id}"
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-alias-0-6-low",
+        "intent": "fetch_user_q_6",
+        "template": {
+          "url": "/items/${id}"
+        },
+        "confidence": 0.8
+      }
+    ]
+  },
+  {
+    "task_id": "alias-0-7",
+    "stratum": "alias-OOD",
+    "intent": "fetch_user_q_7",
+    "derived_context": {
+      "url": "/users?uid=val0_7",
+      "method": "GET",
+      "url_path": "/users",
+      "url_query": {
+        "uid": "val0_7"
+      },
+      "url_segments": [
+        "users"
+      ]
+    },
+    "params": {
+      "id": "val0_7"
+    },
+    "hidden_expected": {
+      "alias_family": 0,
+      "expected_template": "/users?uid=${id}",
+      "expected_bound": {
+        "url": "/users?uid=val0_7"
+      },
+      "is_heldout": true,
+      "train_template": "/users/${id}",
+      "dist_template": "/accounts/${id}"
+    },
+    "expected_outcome": "correct",
+    "is_heldout": true,
+    "registry": [
+      {
+        "mechanism_id": "m-alias-0-7-train",
+        "intent": "fetch_user_q_7",
+        "template": {
+          "url": "/users/${id}"
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-alias-0-7-dist",
+        "intent": "fetch_user_q_7",
+        "template": {
+          "url": "/accounts/${id}"
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-alias-0-7-low",
+        "intent": "fetch_user_q_7",
+        "template": {
+          "url": "/items/${id}"
+        },
+        "confidence": 0.8
+      }
+    ]
+  },
+  {
+    "task_id": "alias-0-8",
+    "stratum": "alias-OOD",
+    "intent": "fetch_user_q_8",
+    "derived_context": {
+      "url": "/v2/users?user=val0_8",
+      "method": "GET",
+      "url_path": "/v2/users",
+      "url_query": {
+        "user": "val0_8"
+      },
+      "url_segments": [
+        "v2",
+        "users"
+      ]
+    },
+    "params": {
+      "id": "val0_8"
+    },
+    "hidden_expected": {
+      "alias_family": 0,
+      "expected_template": "/v2/users?user=${id}",
+      "expected_bound": {
+        "url": "/v2/users?user=val0_8"
+      },
+      "is_heldout": true,
+      "train_template": "/users/${id}",
+      "dist_template": "/accounts/${id}"
+    },
+    "expected_outcome": "correct",
+    "is_heldout": true,
+    "registry": [
+      {
+        "mechanism_id": "m-alias-0-8-train",
+        "intent": "fetch_user_q_8",
+        "template": {
+          "url": "/users/${id}"
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-alias-0-8-dist",
+        "intent": "fetch_user_q_8",
+        "template": {
+          "url": "/accounts/${id}"
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-alias-0-8-low",
+        "intent": "fetch_user_q_8",
+        "template": {
+          "url": "/items/${id}"
+        },
+        "confidence": 0.8
+      }
+    ]
+  },
+  {
+    "task_id": "alias-0-9",
+    "stratum": "alias-OOD",
+    "intent": "fetch_user_q_9",
+    "derived_context": {
+      "url": "/accounts?user=val0_9",
+      "method": "GET",
+      "url_path": "/accounts",
+      "url_query": {
+        "user": "val0_9"
+      },
+      "url_segments": [
+        "accounts"
+      ]
+    },
+    "params": {
+      "id": "val0_9"
+    },
+    "hidden_expected": {
+      "alias_family": 0,
+      "expected_template": "/accounts?user=${id}",
+      "expected_bound": {
+        "url": "/accounts?user=val0_9"
+      },
+      "is_heldout": true,
+      "train_template": "/users/${id}",
+      "dist_template": "/accounts/${id}"
+    },
+    "expected_outcome": "correct",
+    "is_heldout": true,
+    "registry": [
+      {
+        "mechanism_id": "m-alias-0-9-train",
+        "intent": "fetch_user_q_9",
+        "template": {
+          "url": "/users/${id}"
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-alias-0-9-dist",
+        "intent": "fetch_user_q_9",
+        "template": {
+          "url": "/accounts/${id}"
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-alias-0-9-low",
+        "intent": "fetch_user_q_9",
+        "template": {
+          "url": "/items/${id}"
+        },
+        "confidence": 0.8
+      }
+    ]
+  },
+  {
+    "task_id": "alias-1-0",
+    "stratum": "alias-OOD",
+    "intent": "fetch_user_rw_0",
+    "derived_context": {
+      "url": "/api/v2/users/val1_0",
+      "method": "GET",
+      "url_path": "/api/v2/users/val1_0",
+      "url_query": {},
+      "url_segments": [
+        "api",
+        "v2",
+        "users",
+        "val1_0"
+      ]
+    },
+    "params": {
+      "id": "val1_0"
+    },
+    "hidden_expected": {
+      "alias_family": 1,
+      "expected_template": "/api/v2/users/${id}",
+      "expected_bound": {
+        "url": "/api/v2/users/val1_0"
+      },
+      "is_heldout": false,
+      "train_template": "/users/${id}",
+      "dist_template": "/accounts/${id}"
+    },
+    "expected_outcome": "correct",
+    "is_heldout": false,
+    "registry": [
+      {
+        "mechanism_id": "m-alias-1-0-train",
+        "intent": "fetch_user_rw_0",
+        "template": {
+          "url": "/users/${id}"
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-alias-1-0-dist",
+        "intent": "fetch_user_rw_0",
+        "template": {
+          "url": "/accounts/${id}"
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-alias-1-0-low",
+        "intent": "fetch_user_rw_0",
+        "template": {
+          "url": "/items/${id}"
+        },
+        "confidence": 0.8
+      }
+    ]
+  },
+  {
+    "task_id": "alias-1-1",
+    "stratum": "alias-OOD",
+    "intent": "fetch_user_rw_1",
+    "derived_context": {
+      "url": "/api/v2/users/val1_1",
+      "method": "GET",
+      "url_path": "/api/v2/users/val1_1",
+      "url_query": {},
+      "url_segments": [
+        "api",
+        "v2",
+        "users",
+        "val1_1"
+      ]
+    },
+    "params": {
+      "id": "val1_1"
+    },
+    "hidden_expected": {
+      "alias_family": 1,
+      "expected_template": "/api/v2/users/${id}",
+      "expected_bound": {
+        "url": "/api/v2/users/val1_1"
+      },
+      "is_heldout": false,
+      "train_template": "/users/${id}",
+      "dist_template": "/accounts/${id}"
+    },
+    "expected_outcome": "correct",
+    "is_heldout": false,
+    "registry": [
+      {
+        "mechanism_id": "m-alias-1-1-train",
+        "intent": "fetch_user_rw_1",
+        "template": {
+          "url": "/users/${id}"
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-alias-1-1-dist",
+        "intent": "fetch_user_rw_1",
+        "template": {
+          "url": "/accounts/${id}"
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-alias-1-1-low",
+        "intent": "fetch_user_rw_1",
+        "template": {
+          "url": "/items/${id}"
+        },
+        "confidence": 0.8
+      }
+    ]
+  },
+  {
+    "task_id": "alias-1-2",
+    "stratum": "alias-OOD",
+    "intent": "fetch_user_rw_2",
+    "derived_context": {
+      "url": "/api/v2/users/val1_2",
+      "method": "GET",
+      "url_path": "/api/v2/users/val1_2",
+      "url_query": {},
+      "url_segments": [
+        "api",
+        "v2",
+        "users",
+        "val1_2"
+      ]
+    },
+    "params": {
+      "id": "val1_2"
+    },
+    "hidden_expected": {
+      "alias_family": 1,
+      "expected_template": "/api/v2/users/${id}",
+      "expected_bound": {
+        "url": "/api/v2/users/val1_2"
+      },
+      "is_heldout": false,
+      "train_template": "/users/${id}",
+      "dist_template": "/accounts/${id}"
+    },
+    "expected_outcome": "correct",
+    "is_heldout": false,
+    "registry": [
+      {
+        "mechanism_id": "m-alias-1-2-train",
+        "intent": "fetch_user_rw_2",
+        "template": {
+          "url": "/users/${id}"
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-alias-1-2-dist",
+        "intent": "fetch_user_rw_2",
+        "template": {
+          "url": "/accounts/${id}"
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-alias-1-2-low",
+        "intent": "fetch_user_rw_2",
+        "template": {
+          "url": "/items/${id}"
+        },
+        "confidence": 0.8
+      }
+    ]
+  },
+  {
+    "task_id": "alias-1-3",
+    "stratum": "alias-OOD",
+    "intent": "fetch_user_rw_3",
+    "derived_context": {
+      "url": "/api/v2/users/val1_3",
+      "method": "GET",
+      "url_path": "/api/v2/users/val1_3",
+      "url_query": {},
+      "url_segments": [
+        "api",
+        "v2",
+        "users",
+        "val1_3"
+      ]
+    },
+    "params": {
+      "id": "val1_3"
+    },
+    "hidden_expected": {
+      "alias_family": 1,
+      "expected_template": "/api/v2/users/${id}",
+      "expected_bound": {
+        "url": "/api/v2/users/val1_3"
+      },
+      "is_heldout": false,
+      "train_template": "/users/${id}",
+      "dist_template": "/accounts/${id}"
+    },
+    "expected_outcome": "correct",
+    "is_heldout": false,
+    "registry": [
+      {
+        "mechanism_id": "m-alias-1-3-train",
+        "intent": "fetch_user_rw_3",
+        "template": {
+          "url": "/users/${id}"
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-alias-1-3-dist",
+        "intent": "fetch_user_rw_3",
+        "template": {
+          "url": "/accounts/${id}"
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-alias-1-3-low",
+        "intent": "fetch_user_rw_3",
+        "template": {
+          "url": "/items/${id}"
+        },
+        "confidence": 0.8
+      }
+    ]
+  },
+  {
+    "task_id": "alias-1-4",
+    "stratum": "alias-OOD",
+    "intent": "fetch_user_rw_4",
+    "derived_context": {
+      "url": "/api/v2/users/val1_4",
+      "method": "GET",
+      "url_path": "/api/v2/users/val1_4",
+      "url_query": {},
+      "url_segments": [
+        "api",
+        "v2",
+        "users",
+        "val1_4"
+      ]
+    },
+    "params": {
+      "id": "val1_4"
+    },
+    "hidden_expected": {
+      "alias_family": 1,
+      "expected_template": "/api/v2/users/${id}",
+      "expected_bound": {
+        "url": "/api/v2/users/val1_4"
+      },
+      "is_heldout": false,
+      "train_template": "/users/${id}",
+      "dist_template": "/accounts/${id}"
+    },
+    "expected_outcome": "correct",
+    "is_heldout": false,
+    "registry": [
+      {
+        "mechanism_id": "m-alias-1-4-train",
+        "intent": "fetch_user_rw_4",
+        "template": {
+          "url": "/users/${id}"
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-alias-1-4-dist",
+        "intent": "fetch_user_rw_4",
+        "template": {
+          "url": "/accounts/${id}"
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-alias-1-4-low",
+        "intent": "fetch_user_rw_4",
+        "template": {
+          "url": "/items/${id}"
+        },
+        "confidence": 0.8
+      }
+    ]
+  },
+  {
+    "task_id": "alias-1-5",
+    "stratum": "alias-OOD",
+    "intent": "fetch_user_rw_5",
+    "derived_context": {
+      "url": "/api/v2/users/val1_5",
+      "method": "GET",
+      "url_path": "/api/v2/users/val1_5",
+      "url_query": {},
+      "url_segments": [
+        "api",
+        "v2",
+        "users",
+        "val1_5"
+      ]
+    },
+    "params": {
+      "id": "val1_5"
+    },
+    "hidden_expected": {
+      "alias_family": 1,
+      "expected_template": "/api/v2/users/${id}",
+      "expected_bound": {
+        "url": "/api/v2/users/val1_5"
+      },
+      "is_heldout": false,
+      "train_template": "/users/${id}",
+      "dist_template": "/accounts/${id}"
+    },
+    "expected_outcome": "correct",
+    "is_heldout": false,
+    "registry": [
+      {
+        "mechanism_id": "m-alias-1-5-train",
+        "intent": "fetch_user_rw_5",
+        "template": {
+          "url": "/users/${id}"
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-alias-1-5-dist",
+        "intent": "fetch_user_rw_5",
+        "template": {
+          "url": "/accounts/${id}"
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-alias-1-5-low",
+        "intent": "fetch_user_rw_5",
+        "template": {
+          "url": "/items/${id}"
+        },
+        "confidence": 0.8
+      }
+    ]
+  },
+  {
+    "task_id": "alias-1-6",
+    "stratum": "alias-OOD",
+    "intent": "fetch_user_rw_6",
+    "derived_context": {
+      "url": "/api/v2/users/val1_6",
+      "method": "GET",
+      "url_path": "/api/v2/users/val1_6",
+      "url_query": {},
+      "url_segments": [
+        "api",
+        "v2",
+        "users",
+        "val1_6"
+      ]
+    },
+    "params": {
+      "id": "val1_6"
+    },
+    "hidden_expected": {
+      "alias_family": 1,
+      "expected_template": "/api/v2/users/${id}",
+      "expected_bound": {
+        "url": "/api/v2/users/val1_6"
+      },
+      "is_heldout": false,
+      "train_template": "/users/${id}",
+      "dist_template": "/accounts/${id}"
+    },
+    "expected_outcome": "correct",
+    "is_heldout": false,
+    "registry": [
+      {
+        "mechanism_id": "m-alias-1-6-train",
+        "intent": "fetch_user_rw_6",
+        "template": {
+          "url": "/users/${id}"
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-alias-1-6-dist",
+        "intent": "fetch_user_rw_6",
+        "template": {
+          "url": "/accounts/${id}"
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-alias-1-6-low",
+        "intent": "fetch_user_rw_6",
+        "template": {
+          "url": "/items/${id}"
+        },
+        "confidence": 0.8
+      }
+    ]
+  },
+  {
+    "task_id": "alias-1-7",
+    "stratum": "alias-OOD",
+    "intent": "fetch_user_rw_7",
+    "derived_context": {
+      "url": "/api/users/val1_7",
+      "method": "GET",
+      "url_path": "/api/users/val1_7",
+      "url_query": {},
+      "url_segments": [
+        "api",
+        "users",
+        "val1_7"
+      ]
+    },
+    "params": {
+      "id": "val1_7"
+    },
+    "hidden_expected": {
+      "alias_family": 1,
+      "expected_template": "/api/users/${id}",
+      "expected_bound": {
+        "url": "/api/users/val1_7"
+      },
+      "is_heldout": true,
+      "train_template": "/users/${id}",
+      "dist_template": "/accounts/${id}"
+    },
+    "expected_outcome": "correct",
+    "is_heldout": true,
+    "registry": [
+      {
+        "mechanism_id": "m-alias-1-7-train",
+        "intent": "fetch_user_rw_7",
+        "template": {
+          "url": "/users/${id}"
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-alias-1-7-dist",
+        "intent": "fetch_user_rw_7",
+        "template": {
+          "url": "/accounts/${id}"
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-alias-1-7-low",
+        "intent": "fetch_user_rw_7",
+        "template": {
+          "url": "/items/${id}"
+        },
+        "confidence": 0.8
+      }
+    ]
+  },
+  {
+    "task_id": "alias-1-8",
+    "stratum": "alias-OOD",
+    "intent": "fetch_user_rw_8",
+    "derived_context": {
+      "url": "/v2/accounts/val1_8",
+      "method": "GET",
+      "url_path": "/v2/accounts/val1_8",
+      "url_query": {},
+      "url_segments": [
+        "v2",
+        "accounts",
+        "val1_8"
+      ]
+    },
+    "params": {
+      "id": "val1_8"
+    },
+    "hidden_expected": {
+      "alias_family": 1,
+      "expected_template": "/v2/accounts/${id}",
+      "expected_bound": {
+        "url": "/v2/accounts/val1_8"
+      },
+      "is_heldout": true,
+      "train_template": "/users/${id}",
+      "dist_template": "/accounts/${id}"
+    },
+    "expected_outcome": "correct",
+    "is_heldout": true,
+    "registry": [
+      {
+        "mechanism_id": "m-alias-1-8-train",
+        "intent": "fetch_user_rw_8",
+        "template": {
+          "url": "/users/${id}"
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-alias-1-8-dist",
+        "intent": "fetch_user_rw_8",
+        "template": {
+          "url": "/accounts/${id}"
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-alias-1-8-low",
+        "intent": "fetch_user_rw_8",
+        "template": {
+          "url": "/items/${id}"
+        },
+        "confidence": 0.8
+      }
+    ]
+  },
+  {
+    "task_id": "alias-1-9",
+    "stratum": "alias-OOD",
+    "intent": "fetch_user_rw_9",
+    "derived_context": {
+      "url": "/api/v2/accounts/val1_9",
+      "method": "GET",
+      "url_path": "/api/v2/accounts/val1_9",
+      "url_query": {},
+      "url_segments": [
+        "api",
+        "v2",
+        "accounts",
+        "val1_9"
+      ]
+    },
+    "params": {
+      "id": "val1_9"
+    },
+    "hidden_expected": {
+      "alias_family": 1,
+      "expected_template": "/api/v2/accounts/${id}",
+      "expected_bound": {
+        "url": "/api/v2/accounts/val1_9"
+      },
+      "is_heldout": true,
+      "train_template": "/users/${id}",
+      "dist_template": "/accounts/${id}"
+    },
+    "expected_outcome": "correct",
+    "is_heldout": true,
+    "registry": [
+      {
+        "mechanism_id": "m-alias-1-9-train",
+        "intent": "fetch_user_rw_9",
+        "template": {
+          "url": "/users/${id}"
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-alias-1-9-dist",
+        "intent": "fetch_user_rw_9",
+        "template": {
+          "url": "/accounts/${id}"
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-alias-1-9-low",
+        "intent": "fetch_user_rw_9",
+        "template": {
+          "url": "/items/${id}"
+        },
+        "confidence": 0.8
+      }
+    ]
+  },
+  {
+    "task_id": "alias-2-0",
+    "stratum": "alias-OOD",
+    "intent": "fetch_post_0",
+    "derived_context": {
+      "url": "/p/val2_0",
+      "method": "GET",
+      "url_path": "/p/val2_0",
+      "url_query": {},
+      "url_segments": [
+        "p",
+        "val2_0"
+      ]
+    },
+    "params": {
+      "postId": "val2_0"
+    },
+    "hidden_expected": {
+      "alias_family": 2,
+      "expected_template": "/p/${postId}",
+      "expected_bound": {
+        "url": "/p/val2_0"
+      },
+      "is_heldout": false,
+      "train_template": "/posts/${postId}",
+      "dist_template": "/api/posts/${postId}"
+    },
+    "expected_outcome": "correct",
+    "is_heldout": false,
+    "registry": [
+      {
+        "mechanism_id": "m-alias-2-0-train",
+        "intent": "fetch_post_0",
+        "template": {
+          "url": "/posts/${postId}"
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-alias-2-0-dist",
+        "intent": "fetch_post_0",
+        "template": {
+          "url": "/api/posts/${postId}"
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-alias-2-0-low",
+        "intent": "fetch_post_0",
+        "template": {
+          "url": "/items/${postId}"
+        },
+        "confidence": 0.8
+      }
+    ]
+  },
+  {
+    "task_id": "alias-2-1",
+    "stratum": "alias-OOD",
+    "intent": "fetch_post_1",
+    "derived_context": {
+      "url": "/p/val2_1",
+      "method": "GET",
+      "url_path": "/p/val2_1",
+      "url_query": {},
+      "url_segments": [
+        "p",
+        "val2_1"
+      ]
+    },
+    "params": {
+      "postId": "val2_1"
+    },
+    "hidden_expected": {
+      "alias_family": 2,
+      "expected_template": "/p/${postId}",
+      "expected_bound": {
+        "url": "/p/val2_1"
+      },
+      "is_heldout": false,
+      "train_template": "/posts/${postId}",
+      "dist_template": "/api/posts/${postId}"
+    },
+    "expected_outcome": "correct",
+    "is_heldout": false,
+    "registry": [
+      {
+        "mechanism_id": "m-alias-2-1-train",
+        "intent": "fetch_post_1",
+        "template": {
+          "url": "/posts/${postId}"
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-alias-2-1-dist",
+        "intent": "fetch_post_1",
+        "template": {
+          "url": "/api/posts/${postId}"
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-alias-2-1-low",
+        "intent": "fetch_post_1",
+        "template": {
+          "url": "/items/${postId}"
+        },
+        "confidence": 0.8
+      }
+    ]
+  },
+  {
+    "task_id": "alias-2-2",
+    "stratum": "alias-OOD",
+    "intent": "fetch_post_2",
+    "derived_context": {
+      "url": "/p/val2_2",
+      "method": "GET",
+      "url_path": "/p/val2_2",
+      "url_query": {},
+      "url_segments": [
+        "p",
+        "val2_2"
+      ]
+    },
+    "params": {
+      "postId": "val2_2"
+    },
+    "hidden_expected": {
+      "alias_family": 2,
+      "expected_template": "/p/${postId}",
+      "expected_bound": {
+        "url": "/p/val2_2"
+      },
+      "is_heldout": false,
+      "train_template": "/posts/${postId}",
+      "dist_template": "/api/posts/${postId}"
+    },
+    "expected_outcome": "correct",
+    "is_heldout": false,
+    "registry": [
+      {
+        "mechanism_id": "m-alias-2-2-train",
+        "intent": "fetch_post_2",
+        "template": {
+          "url": "/posts/${postId}"
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-alias-2-2-dist",
+        "intent": "fetch_post_2",
+        "template": {
+          "url": "/api/posts/${postId}"
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-alias-2-2-low",
+        "intent": "fetch_post_2",
+        "template": {
+          "url": "/items/${postId}"
+        },
+        "confidence": 0.8
+      }
+    ]
+  },
+  {
+    "task_id": "alias-2-3",
+    "stratum": "alias-OOD",
+    "intent": "fetch_post_3",
+    "derived_context": {
+      "url": "/p/val2_3",
+      "method": "GET",
+      "url_path": "/p/val2_3",
+      "url_query": {},
+      "url_segments": [
+        "p",
+        "val2_3"
+      ]
+    },
+    "params": {
+      "postId": "val2_3"
+    },
+    "hidden_expected": {
+      "alias_family": 2,
+      "expected_template": "/p/${postId}",
+      "expected_bound": {
+        "url": "/p/val2_3"
+      },
+      "is_heldout": false,
+      "train_template": "/posts/${postId}",
+      "dist_template": "/api/posts/${postId}"
+    },
+    "expected_outcome": "correct",
+    "is_heldout": false,
+    "registry": [
+      {
+        "mechanism_id": "m-alias-2-3-train",
+        "intent": "fetch_post_3",
+        "template": {
+          "url": "/posts/${postId}"
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-alias-2-3-dist",
+        "intent": "fetch_post_3",
+        "template": {
+          "url": "/api/posts/${postId}"
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-alias-2-3-low",
+        "intent": "fetch_post_3",
+        "template": {
+          "url": "/items/${postId}"
+        },
+        "confidence": 0.8
+      }
+    ]
+  },
+  {
+    "task_id": "alias-2-4",
+    "stratum": "alias-OOD",
+    "intent": "fetch_post_4",
+    "derived_context": {
+      "url": "/p/val2_4",
+      "method": "GET",
+      "url_path": "/p/val2_4",
+      "url_query": {},
+      "url_segments": [
+        "p",
+        "val2_4"
+      ]
+    },
+    "params": {
+      "postId": "val2_4"
+    },
+    "hidden_expected": {
+      "alias_family": 2,
+      "expected_template": "/p/${postId}",
+      "expected_bound": {
+        "url": "/p/val2_4"
+      },
+      "is_heldout": false,
+      "train_template": "/posts/${postId}",
+      "dist_template": "/api/posts/${postId}"
+    },
+    "expected_outcome": "correct",
+    "is_heldout": false,
+    "registry": [
+      {
+        "mechanism_id": "m-alias-2-4-train",
+        "intent": "fetch_post_4",
+        "template": {
+          "url": "/posts/${postId}"
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-alias-2-4-dist",
+        "intent": "fetch_post_4",
+        "template": {
+          "url": "/api/posts/${postId}"
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-alias-2-4-low",
+        "intent": "fetch_post_4",
+        "template": {
+          "url": "/items/${postId}"
+        },
+        "confidence": 0.8
+      }
+    ]
+  },
+  {
+    "task_id": "alias-2-5",
+    "stratum": "alias-OOD",
+    "intent": "fetch_post_5",
+    "derived_context": {
+      "url": "/p/val2_5",
+      "method": "GET",
+      "url_path": "/p/val2_5",
+      "url_query": {},
+      "url_segments": [
+        "p",
+        "val2_5"
+      ]
+    },
+    "params": {
+      "postId": "val2_5"
+    },
+    "hidden_expected": {
+      "alias_family": 2,
+      "expected_template": "/p/${postId}",
+      "expected_bound": {
+        "url": "/p/val2_5"
+      },
+      "is_heldout": false,
+      "train_template": "/posts/${postId}",
+      "dist_template": "/api/posts/${postId}"
+    },
+    "expected_outcome": "correct",
+    "is_heldout": false,
+    "registry": [
+      {
+        "mechanism_id": "m-alias-2-5-train",
+        "intent": "fetch_post_5",
+        "template": {
+          "url": "/posts/${postId}"
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-alias-2-5-dist",
+        "intent": "fetch_post_5",
+        "template": {
+          "url": "/api/posts/${postId}"
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-alias-2-5-low",
+        "intent": "fetch_post_5",
+        "template": {
+          "url": "/items/${postId}"
+        },
+        "confidence": 0.8
+      }
+    ]
+  },
+  {
+    "task_id": "alias-2-6",
+    "stratum": "alias-OOD",
+    "intent": "fetch_post_6",
+    "derived_context": {
+      "url": "/p/val2_6",
+      "method": "GET",
+      "url_path": "/p/val2_6",
+      "url_query": {},
+      "url_segments": [
+        "p",
+        "val2_6"
+      ]
+    },
+    "params": {
+      "postId": "val2_6"
+    },
+    "hidden_expected": {
+      "alias_family": 2,
+      "expected_template": "/p/${postId}",
+      "expected_bound": {
+        "url": "/p/val2_6"
+      },
+      "is_heldout": false,
+      "train_template": "/posts/${postId}",
+      "dist_template": "/api/posts/${postId}"
+    },
+    "expected_outcome": "correct",
+    "is_heldout": false,
+    "registry": [
+      {
+        "mechanism_id": "m-alias-2-6-train",
+        "intent": "fetch_post_6",
+        "template": {
+          "url": "/posts/${postId}"
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-alias-2-6-dist",
+        "intent": "fetch_post_6",
+        "template": {
+          "url": "/api/posts/${postId}"
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-alias-2-6-low",
+        "intent": "fetch_post_6",
+        "template": {
+          "url": "/items/${postId}"
+        },
+        "confidence": 0.8
+      }
+    ]
+  },
+  {
+    "task_id": "alias-2-7",
+    "stratum": "alias-OOD",
+    "intent": "fetch_post_7",
+    "derived_context": {
+      "url": "/post/val2_7",
+      "method": "GET",
+      "url_path": "/post/val2_7",
+      "url_query": {},
+      "url_segments": [
+        "post",
+        "val2_7"
+      ]
+    },
+    "params": {
+      "postId": "val2_7"
+    },
+    "hidden_expected": {
+      "alias_family": 2,
+      "expected_template": "/post/${postId}",
+      "expected_bound": {
+        "url": "/post/val2_7"
+      },
+      "is_heldout": true,
+      "train_template": "/posts/${postId}",
+      "dist_template": "/api/posts/${postId}"
+    },
+    "expected_outcome": "correct",
+    "is_heldout": true,
+    "registry": [
+      {
+        "mechanism_id": "m-alias-2-7-train",
+        "intent": "fetch_post_7",
+        "template": {
+          "url": "/posts/${postId}"
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-alias-2-7-dist",
+        "intent": "fetch_post_7",
+        "template": {
+          "url": "/api/posts/${postId}"
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-alias-2-7-low",
+        "intent": "fetch_post_7",
+        "template": {
+          "url": "/items/${postId}"
+        },
+        "confidence": 0.8
+      }
+    ]
+  },
+  {
+    "task_id": "alias-2-8",
+    "stratum": "alias-OOD",
+    "intent": "fetch_post_8",
+    "derived_context": {
+      "url": "/x/val2_8",
+      "method": "GET",
+      "url_path": "/x/val2_8",
+      "url_query": {},
+      "url_segments": [
+        "x",
+        "val2_8"
+      ]
+    },
+    "params": {
+      "postId": "val2_8"
+    },
+    "hidden_expected": {
+      "alias_family": 2,
+      "expected_template": "/x/${postId}",
+      "expected_bound": {
+        "url": "/x/val2_8"
+      },
+      "is_heldout": true,
+      "train_template": "/posts/${postId}",
+      "dist_template": "/api/posts/${postId}"
+    },
+    "expected_outcome": "correct",
+    "is_heldout": true,
+    "registry": [
+      {
+        "mechanism_id": "m-alias-2-8-train",
+        "intent": "fetch_post_8",
+        "template": {
+          "url": "/posts/${postId}"
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-alias-2-8-dist",
+        "intent": "fetch_post_8",
+        "template": {
+          "url": "/api/posts/${postId}"
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-alias-2-8-low",
+        "intent": "fetch_post_8",
+        "template": {
+          "url": "/items/${postId}"
+        },
+        "confidence": 0.8
+      }
+    ]
+  },
+  {
+    "task_id": "alias-2-9",
+    "stratum": "alias-OOD",
+    "intent": "fetch_post_9",
+    "derived_context": {
+      "url": "/p/v2/val2_9",
+      "method": "GET",
+      "url_path": "/p/v2/val2_9",
+      "url_query": {},
+      "url_segments": [
+        "p",
+        "v2",
+        "val2_9"
+      ]
+    },
+    "params": {
+      "postId": "val2_9"
+    },
+    "hidden_expected": {
+      "alias_family": 2,
+      "expected_template": "/p/v2/${postId}",
+      "expected_bound": {
+        "url": "/p/v2/val2_9"
+      },
+      "is_heldout": true,
+      "train_template": "/posts/${postId}",
+      "dist_template": "/api/posts/${postId}"
+    },
+    "expected_outcome": "correct",
+    "is_heldout": true,
+    "registry": [
+      {
+        "mechanism_id": "m-alias-2-9-train",
+        "intent": "fetch_post_9",
+        "template": {
+          "url": "/posts/${postId}"
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-alias-2-9-dist",
+        "intent": "fetch_post_9",
+        "template": {
+          "url": "/api/posts/${postId}"
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-alias-2-9-low",
+        "intent": "fetch_post_9",
+        "template": {
+          "url": "/items/${postId}"
+        },
+        "confidence": 0.8
+      }
+    ]
+  },
+  {
+    "task_id": "exact-0",
+    "stratum": "exact-match",
+    "intent": "exact_intent_0",
+    "derived_context": {
+      "url": "/items/val_exact_0",
+      "method": "GET",
+      "url_path": "/items/val_exact_0",
+      "url_query": {},
+      "url_segments": [
+        "items",
+        "val_exact_0"
+      ]
+    },
+    "params": {
+      "itemId": "val_exact_0"
+    },
+    "hidden_expected": {
+      "expected_template": "/items/${itemId}",
+      "expected_bound": {
+        "url": "/items/val_exact_0"
+      }
+    },
+    "expected_outcome": "correct",
+    "is_heldout": false,
+    "registry": [
+      {
+        "mechanism_id": "m-exact-0",
+        "intent": "exact_intent_0",
+        "template": {
+          "url": "/items/${itemId}"
+        },
+        "confidence": 0.9
+      }
+    ]
+  },
+  {
+    "task_id": "exact-1",
+    "stratum": "exact-match",
+    "intent": "exact_intent_1",
+    "derived_context": {
+      "url": "/items/val_exact_1",
+      "method": "GET",
+      "url_path": "/items/val_exact_1",
+      "url_query": {},
+      "url_segments": [
+        "items",
+        "val_exact_1"
+      ]
+    },
+    "params": {
+      "itemId": "val_exact_1"
+    },
+    "hidden_expected": {
+      "expected_template": "/items/${itemId}",
+      "expected_bound": {
+        "url": "/items/val_exact_1"
+      }
+    },
+    "expected_outcome": "correct",
+    "is_heldout": false,
+    "registry": [
+      {
+        "mechanism_id": "m-exact-1",
+        "intent": "exact_intent_1",
+        "template": {
+          "url": "/items/${itemId}"
+        },
+        "confidence": 0.9
+      }
+    ]
+  },
+  {
+    "task_id": "exact-2",
+    "stratum": "exact-match",
+    "intent": "exact_intent_2",
+    "derived_context": {
+      "url": "/items/val_exact_2",
+      "method": "GET",
+      "url_path": "/items/val_exact_2",
+      "url_query": {},
+      "url_segments": [
+        "items",
+        "val_exact_2"
+      ]
+    },
+    "params": {
+      "itemId": "val_exact_2"
+    },
+    "hidden_expected": {
+      "expected_template": "/items/${itemId}",
+      "expected_bound": {
+        "url": "/items/val_exact_2"
+      }
+    },
+    "expected_outcome": "correct",
+    "is_heldout": false,
+    "registry": [
+      {
+        "mechanism_id": "m-exact-2",
+        "intent": "exact_intent_2",
+        "template": {
+          "url": "/items/${itemId}"
+        },
+        "confidence": 0.9
+      }
+    ]
+  },
+  {
+    "task_id": "exact-3",
+    "stratum": "exact-match",
+    "intent": "exact_intent_3",
+    "derived_context": {
+      "url": "/items/val_exact_3",
+      "method": "GET",
+      "url_path": "/items/val_exact_3",
+      "url_query": {},
+      "url_segments": [
+        "items",
+        "val_exact_3"
+      ]
+    },
+    "params": {
+      "itemId": "val_exact_3"
+    },
+    "hidden_expected": {
+      "expected_template": "/items/${itemId}",
+      "expected_bound": {
+        "url": "/items/val_exact_3"
+      }
+    },
+    "expected_outcome": "correct",
+    "is_heldout": false,
+    "registry": [
+      {
+        "mechanism_id": "m-exact-3",
+        "intent": "exact_intent_3",
+        "template": {
+          "url": "/items/${itemId}"
+        },
+        "confidence": 0.9
+      }
+    ]
+  },
+  {
+    "task_id": "exact-4",
+    "stratum": "exact-match",
+    "intent": "exact_intent_4",
+    "derived_context": {
+      "url": "/items/val_exact_4",
+      "method": "GET",
+      "url_path": "/items/val_exact_4",
+      "url_query": {},
+      "url_segments": [
+        "items",
+        "val_exact_4"
+      ]
+    },
+    "params": {
+      "itemId": "val_exact_4"
+    },
+    "hidden_expected": {
+      "expected_template": "/items/${itemId}",
+      "expected_bound": {
+        "url": "/items/val_exact_4"
+      }
+    },
+    "expected_outcome": "correct",
+    "is_heldout": false,
+    "registry": [
+      {
+        "mechanism_id": "m-exact-4",
+        "intent": "exact_intent_4",
+        "template": {
+          "url": "/items/${itemId}"
+        },
+        "confidence": 0.9
+      }
+    ]
+  },
+  {
+    "task_id": "exact-5",
+    "stratum": "exact-match",
+    "intent": "exact_intent_5",
+    "derived_context": {
+      "url": "/items/val_exact_5",
+      "method": "GET",
+      "url_path": "/items/val_exact_5",
+      "url_query": {},
+      "url_segments": [
+        "items",
+        "val_exact_5"
+      ]
+    },
+    "params": {
+      "itemId": "val_exact_5"
+    },
+    "hidden_expected": {
+      "expected_template": "/items/${itemId}",
+      "expected_bound": {
+        "url": "/items/val_exact_5"
+      }
+    },
+    "expected_outcome": "correct",
+    "is_heldout": false,
+    "registry": [
+      {
+        "mechanism_id": "m-exact-5",
+        "intent": "exact_intent_5",
+        "template": {
+          "url": "/items/${itemId}"
+        },
+        "confidence": 0.9
+      }
+    ]
+  },
+  {
+    "task_id": "exact-6",
+    "stratum": "exact-match",
+    "intent": "exact_intent_6",
+    "derived_context": {
+      "url": "/items/val_exact_6",
+      "method": "GET",
+      "url_path": "/items/val_exact_6",
+      "url_query": {},
+      "url_segments": [
+        "items",
+        "val_exact_6"
+      ]
+    },
+    "params": {
+      "itemId": "val_exact_6"
+    },
+    "hidden_expected": {
+      "expected_template": "/items/${itemId}",
+      "expected_bound": {
+        "url": "/items/val_exact_6"
+      }
+    },
+    "expected_outcome": "correct",
+    "is_heldout": false,
+    "registry": [
+      {
+        "mechanism_id": "m-exact-6",
+        "intent": "exact_intent_6",
+        "template": {
+          "url": "/items/${itemId}"
+        },
+        "confidence": 0.9
+      }
+    ]
+  },
+  {
+    "task_id": "exact-7",
+    "stratum": "exact-match",
+    "intent": "exact_intent_7",
+    "derived_context": {
+      "url": "/items/val_exact_7",
+      "method": "GET",
+      "url_path": "/items/val_exact_7",
+      "url_query": {},
+      "url_segments": [
+        "items",
+        "val_exact_7"
+      ]
+    },
+    "params": {
+      "itemId": "val_exact_7"
+    },
+    "hidden_expected": {
+      "expected_template": "/items/${itemId}",
+      "expected_bound": {
+        "url": "/items/val_exact_7"
+      }
+    },
+    "expected_outcome": "correct",
+    "is_heldout": false,
+    "registry": [
+      {
+        "mechanism_id": "m-exact-7",
+        "intent": "exact_intent_7",
+        "template": {
+          "url": "/items/${itemId}"
+        },
+        "confidence": 0.9
+      }
+    ]
+  },
+  {
+    "task_id": "exact-8",
+    "stratum": "exact-match",
+    "intent": "exact_intent_8",
+    "derived_context": {
+      "url": "/items/val_exact_8",
+      "method": "GET",
+      "url_path": "/items/val_exact_8",
+      "url_query": {},
+      "url_segments": [
+        "items",
+        "val_exact_8"
+      ]
+    },
+    "params": {
+      "itemId": "val_exact_8"
+    },
+    "hidden_expected": {
+      "expected_template": "/items/${itemId}",
+      "expected_bound": {
+        "url": "/items/val_exact_8"
+      }
+    },
+    "expected_outcome": "correct",
+    "is_heldout": false,
+    "registry": [
+      {
+        "mechanism_id": "m-exact-8",
+        "intent": "exact_intent_8",
+        "template": {
+          "url": "/items/${itemId}"
+        },
+        "confidence": 0.9
+      }
+    ]
+  },
+  {
+    "task_id": "exact-9",
+    "stratum": "exact-match",
+    "intent": "exact_intent_9",
+    "derived_context": {
+      "url": "/items/val_exact_9",
+      "method": "GET",
+      "url_path": "/items/val_exact_9",
+      "url_query": {},
+      "url_segments": [
+        "items",
+        "val_exact_9"
+      ]
+    },
+    "params": {
+      "itemId": "val_exact_9"
+    },
+    "hidden_expected": {
+      "expected_template": "/items/${itemId}",
+      "expected_bound": {
+        "url": "/items/val_exact_9"
+      }
+    },
+    "expected_outcome": "correct",
+    "is_heldout": false,
+    "registry": [
+      {
+        "mechanism_id": "m-exact-9",
+        "intent": "exact_intent_9",
+        "template": {
+          "url": "/items/${itemId}"
+        },
+        "confidence": 0.9
+      }
+    ]
+  },
+  {
+    "task_id": "exact-10",
+    "stratum": "exact-match",
+    "intent": "exact_intent_10",
+    "derived_context": {
+      "url": "/items/val_exact_10",
+      "method": "GET",
+      "url_path": "/items/val_exact_10",
+      "url_query": {},
+      "url_segments": [
+        "items",
+        "val_exact_10"
+      ]
+    },
+    "params": {
+      "itemId": "val_exact_10"
+    },
+    "hidden_expected": {
+      "expected_template": "/items/${itemId}",
+      "expected_bound": {
+        "url": "/items/val_exact_10"
+      }
+    },
+    "expected_outcome": "correct",
+    "is_heldout": false,
+    "registry": [
+      {
+        "mechanism_id": "m-exact-10",
+        "intent": "exact_intent_10",
+        "template": {
+          "url": "/items/${itemId}"
+        },
+        "confidence": 0.9
+      }
+    ]
+  },
+  {
+    "task_id": "exact-11",
+    "stratum": "exact-match",
+    "intent": "exact_intent_11",
+    "derived_context": {
+      "url": "/items/val_exact_11",
+      "method": "GET",
+      "url_path": "/items/val_exact_11",
+      "url_query": {},
+      "url_segments": [
+        "items",
+        "val_exact_11"
+      ]
+    },
+    "params": {
+      "itemId": "val_exact_11"
+    },
+    "hidden_expected": {
+      "expected_template": "/items/${itemId}",
+      "expected_bound": {
+        "url": "/items/val_exact_11"
+      }
+    },
+    "expected_outcome": "correct",
+    "is_heldout": false,
+    "registry": [
+      {
+        "mechanism_id": "m-exact-11",
+        "intent": "exact_intent_11",
+        "template": {
+          "url": "/items/${itemId}"
+        },
+        "confidence": 0.9
+      }
+    ]
+  },
+  {
+    "task_id": "noapp-0",
+    "stratum": "no-applicable",
+    "intent": "unknown_intent_0_xyz",
+    "derived_context": {
+      "url": "/unknown",
+      "method": "GET",
+      "url_path": "/unknown",
+      "url_query": {},
+      "url_segments": [
+        "unknown"
+      ]
+    },
+    "params": {
+      "id": "val_unknown_0",
+      "postId": "val_unknown_0"
+    },
+    "hidden_expected": {
+      "expected_template": null,
+      "expected_bound": null
+    },
+    "expected_outcome": "unknown",
+    "is_heldout": false,
+    "registry": [
+      {
+        "mechanism_id": "m-noapp-0-other1",
+        "intent": "other_intent_0_a",
+        "template": {
+          "url": "/users/${id}"
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-noapp-0-other2",
+        "intent": "other_intent_0_b",
+        "template": {
+          "url": "/posts/${postId}"
+        },
+        "confidence": 0.9
+      }
+    ]
+  },
+  {
+    "task_id": "noapp-1",
+    "stratum": "no-applicable",
+    "intent": "unknown_intent_1_xyz",
+    "derived_context": {
+      "url": "/unknown",
+      "method": "GET",
+      "url_path": "/unknown",
+      "url_query": {},
+      "url_segments": [
+        "unknown"
+      ]
+    },
+    "params": {
+      "id": "val_unknown_1",
+      "postId": "val_unknown_1"
+    },
+    "hidden_expected": {
+      "expected_template": null,
+      "expected_bound": null
+    },
+    "expected_outcome": "unknown",
+    "is_heldout": false,
+    "registry": [
+      {
+        "mechanism_id": "m-noapp-1-other1",
+        "intent": "other_intent_1_a",
+        "template": {
+          "url": "/users/${id}"
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-noapp-1-other2",
+        "intent": "other_intent_1_b",
+        "template": {
+          "url": "/posts/${postId}"
+        },
+        "confidence": 0.9
+      }
+    ]
+  },
+  {
+    "task_id": "noapp-2",
+    "stratum": "no-applicable",
+    "intent": "unknown_intent_2_xyz",
+    "derived_context": {
+      "url": "/unknown",
+      "method": "GET",
+      "url_path": "/unknown",
+      "url_query": {},
+      "url_segments": [
+        "unknown"
+      ]
+    },
+    "params": {
+      "id": "val_unknown_2",
+      "postId": "val_unknown_2"
+    },
+    "hidden_expected": {
+      "expected_template": null,
+      "expected_bound": null
+    },
+    "expected_outcome": "unknown",
+    "is_heldout": false,
+    "registry": [
+      {
+        "mechanism_id": "m-noapp-2-other1",
+        "intent": "other_intent_2_a",
+        "template": {
+          "url": "/users/${id}"
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-noapp-2-other2",
+        "intent": "other_intent_2_b",
+        "template": {
+          "url": "/posts/${postId}"
+        },
+        "confidence": 0.9
+      }
+    ]
+  },
+  {
+    "task_id": "noapp-3",
+    "stratum": "no-applicable",
+    "intent": "unknown_intent_3_xyz",
+    "derived_context": {
+      "url": "/unknown",
+      "method": "GET",
+      "url_path": "/unknown",
+      "url_query": {},
+      "url_segments": [
+        "unknown"
+      ]
+    },
+    "params": {
+      "id": "val_unknown_3",
+      "postId": "val_unknown_3"
+    },
+    "hidden_expected": {
+      "expected_template": null,
+      "expected_bound": null
+    },
+    "expected_outcome": "unknown",
+    "is_heldout": false,
+    "registry": [
+      {
+        "mechanism_id": "m-noapp-3-other1",
+        "intent": "other_intent_3_a",
+        "template": {
+          "url": "/users/${id}"
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-noapp-3-other2",
+        "intent": "other_intent_3_b",
+        "template": {
+          "url": "/posts/${postId}"
+        },
+        "confidence": 0.9
+      }
+    ]
+  },
+  {
+    "task_id": "noapp-4",
+    "stratum": "no-applicable",
+    "intent": "unknown_intent_4_xyz",
+    "derived_context": {
+      "url": "/unknown",
+      "method": "GET",
+      "url_path": "/unknown",
+      "url_query": {},
+      "url_segments": [
+        "unknown"
+      ]
+    },
+    "params": {
+      "id": "val_unknown_4",
+      "postId": "val_unknown_4"
+    },
+    "hidden_expected": {
+      "expected_template": null,
+      "expected_bound": null
+    },
+    "expected_outcome": "unknown",
+    "is_heldout": false,
+    "registry": [
+      {
+        "mechanism_id": "m-noapp-4-other1",
+        "intent": "other_intent_4_a",
+        "template": {
+          "url": "/users/${id}"
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-noapp-4-other2",
+        "intent": "other_intent_4_b",
+        "template": {
+          "url": "/posts/${postId}"
+        },
+        "confidence": 0.9
+      }
+    ]
+  },
+  {
+    "task_id": "noapp-5",
+    "stratum": "no-applicable",
+    "intent": "unknown_intent_5_xyz",
+    "derived_context": {
+      "url": "/unknown",
+      "method": "GET",
+      "url_path": "/unknown",
+      "url_query": {},
+      "url_segments": [
+        "unknown"
+      ]
+    },
+    "params": {
+      "id": "val_unknown_5",
+      "postId": "val_unknown_5"
+    },
+    "hidden_expected": {
+      "expected_template": null,
+      "expected_bound": null
+    },
+    "expected_outcome": "unknown",
+    "is_heldout": false,
+    "registry": [
+      {
+        "mechanism_id": "m-noapp-5-other1",
+        "intent": "other_intent_5_a",
+        "template": {
+          "url": "/users/${id}"
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-noapp-5-other2",
+        "intent": "other_intent_5_b",
+        "template": {
+          "url": "/posts/${postId}"
+        },
+        "confidence": 0.9
+      }
+    ]
+  },
+  {
+    "task_id": "noapp-6",
+    "stratum": "no-applicable",
+    "intent": "unknown_intent_6_xyz",
+    "derived_context": {
+      "url": "/unknown",
+      "method": "GET",
+      "url_path": "/unknown",
+      "url_query": {},
+      "url_segments": [
+        "unknown"
+      ]
+    },
+    "params": {
+      "id": "val_unknown_6",
+      "postId": "val_unknown_6"
+    },
+    "hidden_expected": {
+      "expected_template": null,
+      "expected_bound": null
+    },
+    "expected_outcome": "unknown",
+    "is_heldout": false,
+    "registry": [
+      {
+        "mechanism_id": "m-noapp-6-other1",
+        "intent": "other_intent_6_a",
+        "template": {
+          "url": "/users/${id}"
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-noapp-6-other2",
+        "intent": "other_intent_6_b",
+        "template": {
+          "url": "/posts/${postId}"
+        },
+        "confidence": 0.9
+      }
+    ]
+  },
+  {
+    "task_id": "noapp-7",
+    "stratum": "no-applicable",
+    "intent": "unknown_intent_7_xyz",
+    "derived_context": {
+      "url": "/unknown",
+      "method": "GET",
+      "url_path": "/unknown",
+      "url_query": {},
+      "url_segments": [
+        "unknown"
+      ]
+    },
+    "params": {
+      "id": "val_unknown_7",
+      "postId": "val_unknown_7"
+    },
+    "hidden_expected": {
+      "expected_template": null,
+      "expected_bound": null
+    },
+    "expected_outcome": "unknown",
+    "is_heldout": false,
+    "registry": [
+      {
+        "mechanism_id": "m-noapp-7-other1",
+        "intent": "other_intent_7_a",
+        "template": {
+          "url": "/users/${id}"
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-noapp-7-other2",
+        "intent": "other_intent_7_b",
+        "template": {
+          "url": "/posts/${postId}"
+        },
+        "confidence": 0.9
+      }
+    ]
+  },
+  {
+    "task_id": "noapp-8",
+    "stratum": "no-applicable",
+    "intent": "unknown_intent_8_xyz",
+    "derived_context": {
+      "url": "/unknown",
+      "method": "GET",
+      "url_path": "/unknown",
+      "url_query": {},
+      "url_segments": [
+        "unknown"
+      ]
+    },
+    "params": {
+      "id": "val_unknown_8",
+      "postId": "val_unknown_8"
+    },
+    "hidden_expected": {
+      "expected_template": null,
+      "expected_bound": null
+    },
+    "expected_outcome": "unknown",
+    "is_heldout": false,
+    "registry": [
+      {
+        "mechanism_id": "m-noapp-8-other1",
+        "intent": "other_intent_8_a",
+        "template": {
+          "url": "/users/${id}"
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-noapp-8-other2",
+        "intent": "other_intent_8_b",
+        "template": {
+          "url": "/posts/${postId}"
+        },
+        "confidence": 0.9
+      }
+    ]
+  },
+  {
+    "task_id": "noapp-9",
+    "stratum": "no-applicable",
+    "intent": "unknown_intent_9_xyz",
+    "derived_context": {
+      "url": "/unknown",
+      "method": "GET",
+      "url_path": "/unknown",
+      "url_query": {},
+      "url_segments": [
+        "unknown"
+      ]
+    },
+    "params": {
+      "id": "val_unknown_9",
+      "postId": "val_unknown_9"
+    },
+    "hidden_expected": {
+      "expected_template": null,
+      "expected_bound": null
+    },
+    "expected_outcome": "unknown",
+    "is_heldout": false,
+    "registry": [
+      {
+        "mechanism_id": "m-noapp-9-other1",
+        "intent": "other_intent_9_a",
+        "template": {
+          "url": "/users/${id}"
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-noapp-9-other2",
+        "intent": "other_intent_9_b",
+        "template": {
+          "url": "/posts/${postId}"
+        },
+        "confidence": 0.9
+      }
+    ]
+  },
+  {
+    "task_id": "noapp-10",
+    "stratum": "no-applicable",
+    "intent": "unknown_intent_10_xyz",
+    "derived_context": {
+      "url": "/unknown",
+      "method": "GET",
+      "url_path": "/unknown",
+      "url_query": {},
+      "url_segments": [
+        "unknown"
+      ]
+    },
+    "params": {
+      "id": "val_unknown_10",
+      "postId": "val_unknown_10"
+    },
+    "hidden_expected": {
+      "expected_template": null,
+      "expected_bound": null
+    },
+    "expected_outcome": "unknown",
+    "is_heldout": false,
+    "registry": [
+      {
+        "mechanism_id": "m-noapp-10-other1",
+        "intent": "other_intent_10_a",
+        "template": {
+          "url": "/users/${id}"
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-noapp-10-other2",
+        "intent": "other_intent_10_b",
+        "template": {
+          "url": "/posts/${postId}"
+        },
+        "confidence": 0.9
+      }
+    ]
+  },
+  {
+    "task_id": "noapp-11",
+    "stratum": "no-applicable",
+    "intent": "unknown_intent_11_xyz",
+    "derived_context": {
+      "url": "/unknown",
+      "method": "GET",
+      "url_path": "/unknown",
+      "url_query": {},
+      "url_segments": [
+        "unknown"
+      ]
+    },
+    "params": {
+      "id": "val_unknown_11",
+      "postId": "val_unknown_11"
+    },
+    "hidden_expected": {
+      "expected_template": null,
+      "expected_bound": null
+    },
+    "expected_outcome": "unknown",
+    "is_heldout": false,
+    "registry": [
+      {
+        "mechanism_id": "m-noapp-11-other1",
+        "intent": "other_intent_11_a",
+        "template": {
+          "url": "/users/${id}"
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-noapp-11-other2",
+        "intent": "other_intent_11_b",
+        "template": {
+          "url": "/posts/${postId}"
+        },
+        "confidence": 0.9
+      }
+    ]
+  },
+  {
+    "task_id": "empty-0",
+    "stratum": "empty-registry",
+    "intent": "any_intent_0",
+    "derived_context": {
+      "url": "/empty",
+      "method": "GET",
+      "url_path": "/empty",
+      "url_query": {},
+      "url_segments": [
+        "empty"
+      ]
+    },
+    "params": {
+      "id": "val"
+    },
+    "hidden_expected": {
+      "expected_template": null,
+      "expected_bound": null
+    },
+    "expected_outcome": "unknown",
+    "is_heldout": false,
+    "registry": []
+  },
+  {
+    "task_id": "empty-1",
+    "stratum": "empty-registry",
+    "intent": "any_intent_1",
+    "derived_context": {
+      "url": "/empty",
+      "method": "GET",
+      "url_path": "/empty",
+      "url_query": {},
+      "url_segments": [
+        "empty"
+      ]
+    },
+    "params": {
+      "id": "val"
+    },
+    "hidden_expected": {
+      "expected_template": null,
+      "expected_bound": null
+    },
+    "expected_outcome": "unknown",
+    "is_heldout": false,
+    "registry": []
+  },
+  {
+    "task_id": "empty-2",
+    "stratum": "empty-registry",
+    "intent": "any_intent_2",
+    "derived_context": {
+      "url": "/empty",
+      "method": "GET",
+      "url_path": "/empty",
+      "url_query": {},
+      "url_segments": [
+        "empty"
+      ]
+    },
+    "params": {
+      "id": "val"
+    },
+    "hidden_expected": {
+      "expected_template": null,
+      "expected_bound": null
+    },
+    "expected_outcome": "unknown",
+    "is_heldout": false,
+    "registry": []
+  },
+  {
+    "task_id": "empty-3",
+    "stratum": "empty-registry",
+    "intent": "any_intent_3",
+    "derived_context": {
+      "url": "/empty",
+      "method": "GET",
+      "url_path": "/empty",
+      "url_query": {},
+      "url_segments": [
+        "empty"
+      ]
+    },
+    "params": {
+      "id": "val"
+    },
+    "hidden_expected": {
+      "expected_template": null,
+      "expected_bound": null
+    },
+    "expected_outcome": "unknown",
+    "is_heldout": false,
+    "registry": []
+  },
+  {
+    "task_id": "empty-4",
+    "stratum": "empty-registry",
+    "intent": "any_intent_4",
+    "derived_context": {
+      "url": "/empty",
+      "method": "GET",
+      "url_path": "/empty",
+      "url_query": {},
+      "url_segments": [
+        "empty"
+      ]
+    },
+    "params": {
+      "id": "val"
+    },
+    "hidden_expected": {
+      "expected_template": null,
+      "expected_bound": null
+    },
+    "expected_outcome": "unknown",
+    "is_heldout": false,
+    "registry": []
+  },
+  {
+    "task_id": "empty-5",
+    "stratum": "empty-registry",
+    "intent": "any_intent_5",
+    "derived_context": {
+      "url": "/empty",
+      "method": "GET",
+      "url_path": "/empty",
+      "url_query": {},
+      "url_segments": [
+        "empty"
+      ]
+    },
+    "params": {
+      "id": "val"
+    },
+    "hidden_expected": {
+      "expected_template": null,
+      "expected_bound": null
+    },
+    "expected_outcome": "unknown",
+    "is_heldout": false,
+    "registry": []
+  }
+]
