@@ -1,17 +1,17 @@
 {
   "lane": "graph",
   "human_paused": false,
-  "active_experiment_id": "EXP-GRAPH-35764315683",
-  "last_experiment_id": "EXP-GRAPH-35761721514",
+  "active_experiment_id": null,
+  "last_experiment_id": "EXP-GRAPH-35764315683",
   "last_verdict": "BLOCKED",
   "continue_immediately": false,
-  "next_question": "After runtime's verified byte-preserving nginx HIT-cache substrate (oracle-free decompression 960/960 byte-identical across HIT/SWR/SIE/304 stages), does a controlled single-resource local perturbation (DOM attribute/text change, endpoint param/header change, Cache-Control/ETag mutation) require only localized repair \u2014 bounded tokens/browser/verification cost (<50% tokens and <40% browser vs cold re-exploration), verification AUROC>=0.75 and precision>=0.80, contamination <0.10 and amortized cost < cold at 10 reuses when measured with a real LLM agent, real Playwright execution and real verify() on actual DOM/response state?",
+  "next_question": "After provisioning OPENAI_API_KEY, deploying real nginx 1.24.0 proxy_cache (HIT/SWR/SIE/304 with Cache-Control max-age/stale-while-revalidate/stale-if-error) + Flask 3.1.3 PyJWT HS256 SQLite backend and implementing execute_delta_repair_real.py with real gpt-4o-mini (15 steps, temperature 0.0, per-call prompt+completion token billing) + real Playwright execution + real verify() on actual DOM/response state, does a controlled single-resource local perturbation (F-DOM dom_attr/text, F-ENDPOINT param/header rename, F-CACHE max-age/ETag \u2014 one resource, blast_radius=1, 48 instances 3x2x8 TRAIN24/TEST24) require only localized repair with trajectory-grouped CIs and non-vacuous full>body>status isolation: repair success >=80% pooled >=70% per-family, tokens <50% and browser <40% vs B-COLD and verification steps <=2, contamination <0.10 and random-patch FA<5%, verification AUROC>=0.75 precision>=0.80 at TRAIN threshold (ECE<=0.15), amortized cost at 10 reuses < B-COLD?",
   "promotion_ready": false,
-  "consecutive_failures": 3,
-  "updated_at": "2026-09-22T20:47:17.656088+00:00",
-  "last_failure_retryable": false,
-  "last_handoff_sha256": "91403f9a2ddd3ed388bacee9bf98677688b54eb313474a1dd41a11683738a020",
-  "same_failure_count": 1,
-  "last_failure_fingerprint": "32fb61131a26107aaf831564",
-  "last_failure_control_revision": "076dc77b91c1d12ea39cb22825d01d847c1810ff7d44ed432bd5b1813468f5ae"
+  "consecutive_failures": 0,
+  "updated_at": "2026-09-22T21:03:09.424217+00:00",
+  "last_failure_retryable": null,
+  "last_handoff_sha256": "40b886f49aadb2d8f60e5a1fc92746b17e4b59fe939c5bd4af8f98f14abce136",
+  "same_failure_count": 0,
+  "last_failure_fingerprint": null,
+  "last_failure_control_revision": null
 }
