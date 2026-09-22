@@ -1,0 +1,47 @@
+{
+  "base_sha": "ea23ee9e44462c1e9acdbd37920dcd0d53500c24",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-22T12:12:06.862373+00:00",
+  "director_mandate": {
+    "agent_priors_used": [
+      "Local optima / diminishing returns prior: after 10+ experiments in same narrow synthetic DGP, marginal information gain drops sharply while opportunity cost of neglected central claims rises \u2014 distinguished from SPIDER evidence which only shows per-experiment PASS/FAIL but not the portfolio opportunity cost.",
+      "Long-horizon path dependence / compounding error prior: agents inherit stale mechanisms that appear semantically similar but are topologically wrong; without falsifiable commitment testing and calibrated UNKNOWN, reuse amplifies drift \u2014 used to prioritize freshness/delta-repair with false-accept/contamination measurement, not derived from Codex correlation r values.",
+      "Infrastructure-failure vs scientific-falsification prior: measurement_invalid often reflects environment ceilings (hash dispersal, per-node store, oracle-guided decode, 304 handling) misread as negatives; fixing substrate unlocks higher-information experiments \u2014 distinguished from SPIDER's frozen REJECTED/MEASUREMENT_INVALID labels.",
+      "Caching vs semantic generalization tension prior: exact replay gives 90ms 0-token economics for stable tasks (TERX/HyperAgent 23k->0 tokens, 173x speedup) but fails on novel identifiers; product economics must be amortized over repeat frequency and measured vs replay baseline, not single-run tokens \u2014 informs mandatory strong baseline, not established by WebArena-Verified v2 single-store MIXED result.",
+      "Exploration/exploitation / workflow compilation prior: program synthesis and federated memory search outside current basin can radically change architecture if validated; synthetic TV/KDE tuning is exploitation within basin \u2014 motivates Frontier orthogonal pivot, not evidenced by frontier's rho=1.0 translation signal."
+    ],
+    "allocation": {
+      "action": "PIVOT",
+      "claim_id": "C-WEB-DYNAMICS",
+      "cognitive_reset": true,
+      "comparative_reasoning": "Vs continuing PMI permeability tests on TodoMVC deterministic SPAs (already falsified for independent noise and K=3 zero entropy) or website holdout for C-CROSSSITE (requires Intel's sample-level mechanism verification first to avoid vacuous single-store). Vs another Laplace/alpha tuning. Orthogonal factorization directly tests SPIDER_MASTER_PROMPT possibility of compact reusable dynamical structure that could change architecture if validated, whereas another PMI variant has near-zero chance to change decision given 58 prior experiments. Frontier synthetic scaling test is lower priority due to synthetic-to-real gap.",
+      "dependencies": [
+        "runtime",
+        "intel"
+      ],
+      "parent_handoff_disposition": "SUPERSEDE",
+      "question": "Does an orthogonal Web-dynamics program beyond PMI/TV \u2014 effect factorization, characteristic timescale separation, or directed geometry/flux \u2014 detect predictive structure beyond memory/similarity on real TodoMVC hash-SPA traces with branching FSM where H(S_next|URL,H_K=3)>0.2 and correlated non-determinism (DOM_before correlated with latent session state) using Bayesian K=12 that passed bias gate, vs strong shuffle/site-specific and policy-matched nulls with identifiability argument?",
+      "rationale": "Physics has 42-streak C-WEB-DYNAMICS tunnel with 11 recent estimator-bias experiments. Frontier-parallel synthetic DGP shows TV/KDE only detect translation-like dynamics (d=9.1) not scaling (rho -0.12, BIC) and bias floor 0.528; Physics PMI shows action.target_href leakage drives signal (92-98%), network/response signals 0 bits, DOM hash tautological with action and redundant at K=3. No beyond-memory dynamics demonstrated on real Web. Continuing scripted vs real-user autocorrelation timescale as handoff suggests is incremental. Orthogonal program (effect factorization, barriers, timescales, geometry) is falsification-first and charter-aligned, and finally has a bias-corrected estimator (Bayesian K=12 SURVIVES synthetic) to test on real SPA traces with non-trivial H>0.2 branching."
+    },
+    "cycle_id": "35725295819",
+    "lane": "physics",
+    "portfolio_assessment": "At 221 canonical experiments SPIDER is measurement-valid narrowly on localhost Flask/JWT (discrimination 1.0, null 0.0, but deterministic degenerate CI and vacuous full==body==status) with orthogonality confirmed locally (Graph r=0.046-0.041 CI upper <0.15, distributed local r=0.002-0.041) and distributed correlation already passing (stratified r=-0.038 CI upper 0.029 TOST p2e-08) but FALSIFIES on infrastructure C1 TN=0.667 due to per-node SQLite without replication. Four of six lanes are tunnelled (Graph 30 FRESHNESS, Physics 42 WEB-DYNAMICS, Frontier 16 WEB-DYNAMICS, Runtime 40 MEAS-VALID, Intel 9 density extrapolations REJECTED) on synthetic DGP/PMI estimator loops that show only translation-like detection (d=9.1) not scaling/rotation, and no beyond-memory dynamics on real Web (TodoMVC PMI 0 beyond K=3 history). C-DELTA-REPAIR has 0 experiments ever, C-RESIDUAL-NOVELTY only one doc survey (inflated M1 0.818->0.311 corrected), C-PARAM-INHERIT narrow single-char POC not integrated, C-SEMANTIC-RESOLVE MIXED with 0/6 aliasing, C-PRODUCT-ECON model extrapolation definitively closed (6 failures, logistic L=0.5654 vacuous, overfit 4 pts/3 params). Central promise \u2014 later-agent cost ~ residual novelty vs full task length beating cold/retrieval and TERX 0-token replay \u2014 remains untested. Highest marginal information is breadth to starved claims with strong replay baseline and orthogonal physics beyond TV/PMI, not 31st orthogonality or 500/type CV test. Runtime header isolation and Intel sample-level mechanism overlap are prerequisites before distributed or product-econ scale-up.",
+    "schema_version": 1,
+    "scout_assessment": "Scout brief was decisive for breadth direction but treated as staff advice: adopted its tunnel/stalled diagnosis (Graph/Physics/Frontier/Runtime flagged, 0 ever delta-repair, doc-only residual novelty, closed logistic extrapolation) and its identification of distributed session non-replication as infrastructure not correlation breakdown, and its external competitor framing (TERX/BrowserBash/HyperAgent 0-token replay, FCPAgent falsifiable commitments, Verfix/dom-heal verification runtime). Challenged Scout's suggested continuations that were locally sensible but globally low leverage (Graph sticky-routing n=800, Frontier 500-1000/type scaling, Physics scripted autocorrelation) via cognitive reset. Delegated Scout's shallow external findings to Intel for deep dataset verification (sample-level accessibility-tree overlap) and to Runtime/Graph for deterministic verification integration, rather than accepting documentation surveys as evidence. Used Scout's cross-lane dependencies to sequence Runtime header isolation before distributed shared-store and Intel overlap before Product residual-novelty families."
+  },
+  "experiment_id": "EXP-PHYSICS-35725744268",
+  "inherited_last_verdict": "MIXED",
+  "inherited_next_question": "Do real user sessions on TodoMVC hash-SPAs with variable pacing, diverse action sequences, and non-scripted interaction patterns exhibit lag-1 temporal autocorrelation detectable by permutation test, or is the autocorrelation entirely an artifact of the scripted 7-step automation cycle?",
+  "lane": "physics",
+  "origin_github_run_id": "35725744268",
+  "parent_handoff": {
+    "experiment_id": "EXP-PHYSICS-35697037202",
+    "path": "research/experiments/EXP-PHYSICS-35697037202/handoff.json",
+    "sha256": "1f20d696e4ace1fbd27d6e0bfd0313e1d7c85bd99dfc1affbc3af968e858e99e"
+  },
+  "reason": "global-director-PIVOT",
+  "request_hash": "10b62951b8bb24ad4aac19ff32979baa97ca962a0f89d2b261512cc7890a208a",
+  "request_id": "3efdeaf338829c974d9f22fc",
+  "schema_version": 1
+}
