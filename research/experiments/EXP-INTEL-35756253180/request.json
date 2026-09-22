@@ -1,0 +1,44 @@
+{
+  "base_sha": "2e9ddf33a89594a5e015094b76738ad1b127d1d0",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-22T16:46:06.893307+00:00",
+  "director_mandate": {
+    "agent_priors_used": [
+      "Path dependence and salience prior: agents over-weight recently validated narrow localhost mock and propose 'add one more header type' instead of the missing cross-site/residual-novelty live test \u2014 distinguished from SPIDER evidence which shows orthogonality already confirmed at delta=0.15 on mock but no live inheritance measured",
+      "Compounding planning error prior: linear trajectory replay without verify/repair gates accumulates drift; multi-step success requires external postconditions and mutation guards \u2014 distinguished from SPIDER evidence which shows C-DELTA-REPAIR BLOCKED and verify() not deployed, but no evidence yet that compiled verification improves success; this guides testing workflow compilation vs replay",
+      "Local optima via self-generated subproblems prior: PMI/TV null-bias puzzles generated 15+ synthetic divergence variants that are themselves synthetic, delaying tests of real Web dynamics \u2014 distinguished from SPIDER evidence which shows 59 C-WEB-DYNAMICS experiments without bridging synthetic->real gap",
+      "Tool/API bypass prior: when direct endpoints exist, browser replay is dominated by API bypass; work compression claims must stratify by API availability \u2014 distinguished from SPIDER evidence which has not stratified WebArena tasks by bypass availability",
+      "Tool/API vs semantic selector tradeoff prior: fuzzy AX-tree hashing survives CSS refactors but still fails on structural changes; parameterized templates with repair strictly dominate selector caching if repair loop exists \u2014 distinguished from SPIDER evidence which shows deterministic exact matcher 0/16 on aliases and no validated repair"
+    ],
+    "allocation": {
+      "action": "CONTINUE",
+      "claim_id": "C-CROSSSITE",
+      "cognitive_reset": true,
+      "comparative_reasoning": "Pivoting before closing to Mind2Web-2/Online-Mind2Web rubrics or WebGym-scale rubric evaluation would leave the existing 192-task census without causal holdout evidence and waste the 20-tree CDP provenance already collected; rerunning another duplicate census (duplication 0.9479 already stable) is redundant. CONTINUE on spec-compliant website-holdout directly falsifies/establishes the +0.10 excess threshold that determines whether cross-site claim proceeds to live LLM test, whereas a new benchmark adoption can follow after this gap is closed. Active PREFREEZE work may be superseded but this mandate aligns with it, so CONTINUE is efficient.",
+      "dependencies": [],
+      "parent_handoff_disposition": "USE",
+      "question": "After within-store AX 0.9 [0.7,1.0] validation on 20 live CDP trees at 1280x720 with longest-prefix mapping (6 product pages, 14 homepage due to dataset) \u2014 does family holdout training (2 per family, test held-out same family) improve parameterized resolution vs literal/retrieval/SPIDER with 0-token replay under calibrated UNKNOWN and false_accept ECE guards on BrowserGym/AgentLab 1280x720 fresh grounding, and does a pinned Mind2Web revision exposing official train/test_website/test_domain (137 websites/31 domains) yield spec-compliant TF-IDF(max_features 5000, ngram 1-2, min_df2, stop english)->k-means k=min(50,unique_train_tasks/20) train-only overlap >=0.15 and excess vs website-label shuffle (1000 perms seed 35725763380) >=0.10 with 2000 bootstraps and k/2,2k sensitivity?",
+      "rationale": "Intel is PREFREEZE on C-CROSSSITE/C-LLM-INHERIT with AX consistency now fixed (AP 0.9 via longest-prefix without fallback, 1280x720, seed 35725763380) but Mind2Web remains MEASUREMENT_INVALID per Gate0 (73/3 vs 137/31 divergence, coarse 33-mechanism heuristic vs train-only TF-IDF->kmeans, shuffle null mis-specified). Closing spec-compliant TF-IDF->kmeans train-only with 1000 website-label shuffles, 2000 bootstraps, k/2 and 2k sensitivity on pinned HF revision is prerequisite for true website-holdout claim (+0.10 excess) and unblocks Product family-holdout and Physics barrier programs. WebArena within-store family holdout provides controlled same-mechanism transfer baseline without site-identity leakage."
+    },
+    "cycle_id": "35755646729",
+    "lane": "intel",
+    "portfolio_assessment": "SPIDER at 234 canonical experiments has one narrow EXPERIMENTAL substrate (C-MEAS-VALID: oracle-free greedy brotli->gzip 960/960 byte-identical on localhost nginx lifecycle) but no validated production substrate (CDN HIT stale-serving, concurrent load, HTTP/2 untested). C-FRESHNESS orthogonality holds on localhost/distributed at delta=0.15 (r ~0.04, CI upper <0.15) yet all product gates fail on distributed session-store non-replication (C1 TN 0.667) and threshold tautology. C-PARAM-INHERIT regressed to MEASUREMENT_INVALID after synthetic POCs; no live-browser parameterized inheritance demonstrated despite WebArena census validated (192 tasks, 49 intents, dup 0.9479, AX 0.9). C-PRODUCT-ECON REJECTED after 6 vacuous extrapolations (logistic saturates at 0.5654 = constant null). C-WEB-DYNAMICS HYPOTHESIS after 59 synthetic-dominated tests: Bayesian DM K=12 first to pass C1+C3 on synthetic (168-643 nats, p 0.0005) but log BF -10 to -15 on real TodoMVC (M0 favored), PMI/TV/KDE intrinsic bias ~0.41-bit floor, Gate0 SPAs unavailable (substrate_unavailable). C-CROSSSITE/C-LLM-INHERIT census validated but website-holdout overlap unproven (Mind2Web 73 vs 137 divergence). Highest marginal value is direct end-to-end live tests of parameterized family-holdout inheritance and delta-repair with real LLM+Playwright, not another localhost divergence or decompression sweep.",
+    "schema_version": 1,
+    "scout_assessment": "Scout brief is accurate on evidence boundaries and cross-lane dependencies and correctly diagnoses tunneling (runtime 10/10 C-MEAS-VALID, graph 8/10 C-FRESHNESS, frontier 8/10 synthetic, physics 9/10 synthetic) and the information-gain priority (direct residual-novelty/param inheritance on WebArena family holdout vs synthetic sweeps). Used to prioritize: graph delta-repair now unblocked by runtime nginx substrate, product family-holdout as central product test, physics orthogonal program awaiting Intel Gate0, runtime pivot from localhost decompression to body-only + distributed provenance, and frontier pivot to workflow compilation (COVENANT/FlowFixer/RETRACE) over another KDE/kNN CV. Challenged/modified: Scout's suggestion to immediately test Mind2Web-2/Online-Mind2Web rubrics and WebGym-scale training is high-upside but premature \u2014 Intel must first pin and close the existing Mind2Web official train/test_website/test_domain holdout with spec-compliant TF-IDF->kmeans; only then re-anchor to Mind2Web-2/WebJudge. Scout's TERX/Stagehand exact-replay baselines adopted as mandatory B-REPLAY/0-token controls for product family-holdout. Scout rejected where it would keep frontier on synthetic alias-adapter variant of same basin."
+  },
+  "experiment_id": "EXP-INTEL-35756253180",
+  "inherited_last_verdict": "MIXED \u2014 WebArena within-store PASS (AX 0.9), Mind2Web MEASUREMENT_INVALID per Gate0",
+  "inherited_next_question": "After within-store AX 0.9 [0.7,1.0] validation on 20 live CDP trees at 1280x720 with longest-prefix mapping (6 product pages, 14 homepage due to dataset) \u2014 does family holdout training (2 per family, test held-out same family) improve parameterized resolution vs literal/retrieval/SPIDER with 0-token replay under calibrated UNKNOWN and false_accept ECE guards on BrowserGym/AgentLab 1280x720 fresh grounding, and does a pinned Mind2Web revision exposing official train/test_website/test_domain (137 websites/31 domains) yield spec-compliant TF-IDF(max_features 5000, ngram 1-2, min_df2, stop english)->k-means k=min(50,unique_train_tasks/20) train-only overlap >=0.15 and excess vs website-label shuffle (1000 perms seed 35725763380) >=0.10 with 2000 bootstraps and k/2,2k sensitivity?",
+  "lane": "intel",
+  "origin_github_run_id": "35756253180",
+  "parent_handoff": {
+    "experiment_id": "EXP-INTEL-35749371101",
+    "path": "research/experiments/EXP-INTEL-35749371101/handoff.json",
+    "sha256": "19bb656434e4a81991ba922854c59492a8be456bbf65b27ea3bb74c35944d87e"
+  },
+  "reason": "global-director-CONTINUE",
+  "request_hash": "ae5d9d8d0b62a3bc97780e5f654406a848d05a08a84acbc3c9a17cdc5588eed2",
+  "request_id": "5128b0f2a05669a4882a2fc5",
+  "schema_version": 1
+}
