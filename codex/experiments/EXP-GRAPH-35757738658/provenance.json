@@ -1,0 +1,82 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-35757738658",
+  "lane": "graph",
+  "status": "BLOCKED",
+  "github_run_id": "35757738658",
+  "git_commit": "41d4884125d80d440bae98a2419231d0c4c198b3",
+  "git_branch": "main",
+  "environment": {
+    "os": "Linux",
+    "python_version": "3.12.14",
+    "nginx_version": "1.24.0 (Ubuntu)",
+    "playwright_version": "1.63.0",
+    "openai_sdk_version": "3.17.0",
+    "llm_api_key_present": false
+  },
+  "frozen_inputs": {
+    "request_json_sha256": "f8f5e93e67c4b9ef3d764198c69d8ae4a9989c4c9dd6fdba852f0ca4606bc9d8",
+    "spec_json_sha256": "2657ca935665f17867759544bcbef08386116872247caec0b2a95707ef446304",
+    "prereg_md_sha256": "330247b2acb7abcba979ec9d21a10571472d2ec09bb8c06749e64b99d9c033f0",
+    "freeze_json_sha256": "95840e7593e1715e35258e5b7fdcdc359aca22007e0f8e0a8e7ef1c4f404af6a",
+    "verified_at": "2026-09-22T17:06:00.000000+00:00",
+    "hashes_match_freeze": true
+  },
+  "execution": {
+    "started_at": "2026-09-22T17:06:00.000000+00:00",
+    "ended_at": "2026-09-22T17:06:05.000000+00:00",
+    "wall_time_seconds": 5.0,
+    "blocker": "MISSING_LLM_API_KEY",
+    "blocker_category": "infrastructure",
+    "blocker_retryable": true,
+    "blocker_details": "OPENAI_API_KEY environment variable not set. Required for real gpt-4o-mini model calls with token counting per frozen spec measurement_validity #4 and #8.",
+    "components_ready": {
+      "nginx": true,
+      "playwright_chromium": true,
+      "python": true,
+      "flask_pyjwt_installable": true,
+      "openai_sdk": true
+    },
+    "components_missing": {
+      "llm_api_key": true,
+      "nginx_proxy_cache_configured": false,
+      "flask_backend_deployed": false,
+      "repair_agent_implemented": false
+    }
+  },
+  "artifacts_required_for_retry": [
+    "OPENAI_API_KEY environment variable",
+    "nginx.conf with proxy_cache for HIT/SWR/SIE/304 (reference EXP-RUNTIME-35611612543 substrate)",
+    "Flask 3.1.3 + PyJWT HS256 + SQLite testbed_server.py with perturbation endpoints",
+    "execute_delta_repair_real.py implementing real LLM + Playwright + verify() pipeline",
+    "Perturbation manifest generator (48 instances, 3×2×8, family-stratified TRAIN/TEST split)",
+    "Independent oracle script for false-accept detection (ground-truth from manifest)"
+  ],
+  "retry_instructions": {
+    "do_not_modify": [
+      "research/experiments/EXP-GRAPH-35757738658/request.json",
+      "research/experiments/EXP-GRAPH-35757738658/spec.json",
+      "research/experiments/EXP-GRAPH-35757738658/prereg.md",
+      "research/experiments/EXP-GRAPH-35757738658/freeze.json"
+    ],
+    "resume_from": "frozen_design",
+    "required_actions": [
+      "Set OPENAI_API_KEY",
+      "Deploy nginx + Flask testbed matching runtime substrate",
+      "Implement real repair pipeline",
+      "Execute 48 instances with TRAIN/TEST split",
+      "Compute metrics and apply C1-C8 on TEST"
+    ]
+  },
+  "code_paths": {
+    "delta_repair_harness": "research/graph/delta_repair/execute_delta_repair.py",
+    "runtime_substrate_reference": "research/experiments/EXP-RUNTIME-35611612543",
+    "runtime_header_drift_reference": "research/experiments/EXP-RUNTIME-35741906498"
+  },
+  "dependencies": {
+    "runtime_substrate": "EXP-RUNTIME-35611612543 (byte-preserving nginx HIT/SWR/SIE/304 960/960)",
+    "runtime_header_drift": "EXP-RUNTIME-35741906498 (non-vacuous C4 header-only discrimination)",
+    "parent_experiment": "EXP-GRAPH-35752541832 (BLOCKED, same design)",
+    "grandparent_simulation": "EXP-GRAPH-35741890679 (FALSIFIES simulation, audit SIMULATION_NOT_MEASUREMENT)"
+  }
+}

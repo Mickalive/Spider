@@ -1,0 +1,254 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-35756224948",
+  "lane": "physics",
+  "status": "MEASUREMENT_INVALID",
+  "outcome": "NOT_APPLICABLE",
+  "metrics": {
+    "gate0_found_manifest": null,
+    "gate0_candidate_paths_checked": 5,
+    "gate0_qualifying_spas": 0,
+    "gate0_required_min": 1,
+    "gate0_table": {
+      "site_id": "NO_SPA_FOUND",
+      "unique_titles": 0,
+      "title_entropy_bits": 0.0,
+      "H_Snext_given_URL_HK3_bits": 0.0,
+      "leakage_rate_validOnly": 1.0,
+      "NL": 0,
+      "singleton_strata_rate": 1.0,
+      "qualifies": false
+    },
+    "synthetic_positive_control": {
+      "NL": 200,
+      "n_trajectories": 20,
+      "steps_per_trajectory": 10,
+      "unique_titles": 6,
+      "title_entropy_bits": 2.559,
+      "H_Snext_given_URL_HK3_bits": 0.962,
+      "valid_strata_K3": 9,
+      "singleton_rate": 0.0,
+      "leakage_rate_validOnly": 0.0,
+      "representations_tested": 5,
+      "BC_PMI_R1_visible_text_hash_bits": 0.0752,
+      "BC_PMI_R2_a11y_tree_hash_bits": 0.0752,
+      "BC_PMI_R3_title_before_bits": 0.0752,
+      "BC_PMI_R4_combined_hash_bits": 0.0752,
+      "BC_PMI_corr_L_step_hash_bits": 0.0752,
+      "perm_mean_R1": 0.00423,
+      "perm_std_R1": 0.01528,
+      "p_raw_R1": 0.001,
+      "p_bonf6_R1": 0.00599,
+      "cohen_d_R1": 4.92,
+      "ci_low_R1": -0.0178,
+      "ci_high_R1": 0.03927,
+      "accuracy_history_only": 0.483,
+      "accuracy_history_plus_DOM_R1": 0.783,
+      "delta_accuracy_R1": 0.30,
+      "p_delta_R1": 0.01,
+      "threshold_BC_PMI_required": 0.5,
+      "threshold_p_required": 0.005,
+      "threshold_d_required": 2.0,
+      "threshold_delta_required": 0.1,
+      "positive_control_pass": false,
+      "reason": "BC 0.075 <0.5 despite p_raw 0.001 d 4.92 delta 0.30; theoretical ceiling under P=0.3 channel is I(L;L_next)=0.119 bits, so threshold 0.5 unreachable by construction"
+    },
+    "synthetic_negative_control_independent_noise": {
+      "NL": 200,
+      "unique_titles": 3,
+      "title_entropy_bits": 1.584,
+      "H_Snext_given_URL_HK3_bits": 0.986,
+      "valid_strata_K3": 9,
+      "BC_PMI_R1_bits": -0.0,
+      "BC_PMI_R2_bits": -0.0,
+      "BC_PMI_R3_bits": 0.0,
+      "BC_PMI_R4_bits": -0.0,
+      "BC_PMI_corr_bits": -0.0,
+      "perm_std_R1": 0.0,
+      "p_raw_R1": 1.0,
+      "p_bonf6_R1": 1.0,
+      "delta_accuracy_R1": 0.0,
+      "threshold_BC_PMI_max": 0.05,
+      "threshold_p_min": 0.1,
+      "null_std_zero": true,
+      "note": "degenerate null_std 0 indicates bias floor from Laplace unique-hash smoothing is permutation-invariant; matches parent degenerate R1/R4/corr finding"
+    },
+    "positive_control_grouped_vs_item_level": {
+      "grouped_BC_corr": 0.0752,
+      "grouped_perm_std_corr": 0.0153,
+      "parent_item_level_BC_corr": 0.8539,
+      "parent_grouped_recomputed_BC_corr": 0.8392,
+      "delta_grouped_item": -0.764,
+      "explanation": "Drop from 0.84 to 0.075 is due to P flip 0.3 vs 0.0, not grouping alone; grouping preserves within-trajectory sequences as required"
+    },
+    "estimation": {
+      "estimator": "history-conditioned CMI I(S_next; DOM_before | URL_before, H_K=3, Action_leakageFree) plug-in Laplace alpha=1.0 Miller-Madow corrected weighted by stratum size, BC PMI = observed - mean(grouped within-strata cross-trajectory permutation)",
+      "laplace_alpha": 1.0,
+      "bias_correction": "Miller-Madow per-stratum (m_joint - m_r - m_s +1)/(2n) bits",
+      "n_permutations_per_config": 1000,
+      "permutation_grouping": "trajectory_id within strata (URL,HK,Action), preserving stratum sizes and within-trajectory DOM sequences, seed 42, cross-trajectory block shuffle with flatten-rechunk",
+      "bonferroni_divisor_primary": 6,
+      "bonferroni_alpha_primary": 0.005,
+      "min_stratum_size": 5,
+      "rare_strata_excluded": true,
+      "resampling_unit": "trajectory_id",
+      "positive_control_construction": "FSM 3-state, L in {A,B} P(flip)=0.30 per step exactly, URL=hash(step_mod_3), DOM_before=SHA256(L||step_mod_3), S_next branched by L_next, H=0.962 bits, leakage 0%, NL=200, PYTHONHASHSEED=0 numpy 42"
+    },
+    "baselines_positive_control": {
+      "B-HISTORY-MARKOV_accuracy": 0.483,
+      "B-HISTORY-DOM_accuracy": 0.783,
+      "B-DOM-SIMILARITY_TFIDF_cosine_k5_accuracy": 0.467,
+      "B-DOM-SIMILARITY_R2_accuracy": 0.6,
+      "B-TRAJECTORY-MEMORY_accuracy": 0.483,
+      "B-ACTION-FREQ-SHUFFLE_freq_acc": 0.166,
+      "B-ACTION-FREQ-action_freq_acc": 0.17,
+      "B-RANDOM-DOM_BC_positive_R1_bits": 0.0,
+      "B-SITE-LEAKAGE-DIAGNOSTIC_bc_leaky_minus_free_bits": 0.0,
+      "B-DOM-SIMILARITY_vs_CMI_gap_bits": -0.392,
+      "note": "DOM similarity 0.467 < history+DOM 0.783 but history alone 0.483 already equals trajectory-memory; gap shows history-conditioned CMI beyond similarity is 0.075 bits, far below 0.10 threshold but similarity alone does not beat history+DOM"
+    },
+    "barrier_committor_exploratory": {
+      "branched_revisit_count": 0,
+      "total_revisit_states": 3,
+      "divergent_future_rate": 0.0,
+      "committor_variance": 0.0,
+      "avg_autocorr": 0.0,
+      "feasible_barrier": false,
+      "note": "No >=10 revisits to same (URL,DOM) with divergent futures on synthetic controls; barrier program not feasible on this FSM substrate"
+    },
+    "production_SPAs": null
+  },
+  "controls": {
+    "positive_control_correlated_SPA": {
+      "expected": "BC_PMI >=0.50 bits, raw p <0.005, Cohen d >2.0, delta_accuracy >=0.10 with p_delta <0.01 on R1 or R2 or corr with P=0.30 DOM=SHA256(L||step_mod)",
+      "observed": "BC_R1 0.0752 bits, p_raw 0.001, d 4.92, delta 0.30 p_delta 0.01; BC_corr identical 0.0752; observed 0.0795 perm_mean 0.00423 perm_std 0.01528",
+      "pass": false,
+      "reason": "FAIL threshold BC<0.5 despite significance and delta; theoretical ceiling 0.119 bits under BSC(p=0.3) makes threshold unreachable; construction frozen P=0.30 is outcome-noncompliant with threshold 0.5",
+      "evidence": "raw_cmi_results.json positive_control dom_before_R1/corr, synthetic_positive_control.json",
+      "frozen_construction": "P(flip)=0.30 exactly, DOM=SHA256(L||step_mod) per spec, PYTHONHASHSEED=0 numpy 42"
+    },
+    "null_control_shuffled_DOM_grouped": {
+      "expected": "|null_mean|<3*null_std AND null_std>0.01 AND Bonferroni p>0.10 per production SPA; degenerate null_std==0 or singleton>50% => MEASUREMENT_INVALID",
+      "observed": "POS R1 perm_mean 0.00423 null_std 0.01528 |mean|=0.28sd <3sd, std>0.01 true, p_bonf6 0.00599; NEG R1 perm_mean 0.3056 perm_std 0.0 degenerate",
+      "pass": "partial",
+      "note": "Positive control null well-centered but NEG degenerate std 0 due to Laplace bias floor on unique hashes; production SPA check skipped due Gate0 failure",
+      "resampling_unit": "trajectory_id"
+    },
+    "null_control_independent_noise_synthetic": {
+      "expected": "BC_PMI <=0.05 bits AND p>0.10 on same grouped pipeline, non-degenerate R2 calibrates threshold",
+      "observed": "BC_R1 -0.0 bits p 1.0 std 0.0 | NEG R2 -0.0 bits p 1.0 std 0.0",
+      "pass": false,
+      "reason": "BC passes <=0.05 and p>0.10 but null_std==0 degenerate triggers MEASUREMENT_INVALID for that representation per frozen rule; only degenerate case exists because unique-hash DOM makes permutation invariant",
+      "evidence": "raw_cmi_results.json negative_control"
+    },
+    "B-HISTORY-MARKOV": {
+      "expected": "majority P(S_next|URL,HK,Action) accuracy floor; DOM must exceed by delta>0.03",
+      "observed": "accuracy 0.483 POS, DOM+history 0.783 delta 0.30 p_delta 0.01 passes delta but BC fails",
+      "pass": true,
+      "evidence": "raw_cmi_results.json positive_control dom_before_R1 acc"
+    },
+    "B-ACTION-FREQ-SHUFFLE": {
+      "expected": "within-strata shuffle of DOM and S_next labels frequency-only predictor ~1/|S|=0.166",
+      "observed": "freq_acc 0.166 action_freq_acc 0.17, shuffled PMI ~0",
+      "pass": true,
+      "grouping": "trajectory_id"
+    },
+    "B-DOM-SIMILARITY": {
+      "expected": "kNN TF-IDF cosine k=5 without history conditioning must be executed; history-conditioned CMI must beat similarity",
+      "observed": "TF-IDF cosine k5 accuracy R1 0.467 R2 0.600 vs history+DOM 0.783; similarity alone does not beat history Markov 0.483 except R2 slight; executed as frozen fit on train only",
+      "pass": true,
+      "executed": true,
+      "method": "sklearn TfidfVectorizer 500 max_features fit train only, cosine_similarity, k=5 vote"
+    },
+    "B-TRAJECTORY-MEMORY": {
+      "expected": "exact (URL,HK,Action)->S_next memorization from train, computed separately not equal to history Markov",
+      "observed": "accuracy 0.483 equals history Markov in this constant-action FSM",
+      "pass": true,
+      "note": "Equal due to deterministic history mapping with constant action"
+    },
+    "B-SITE-LEAKAGE-DIAGNOSTIC": {
+      "expected": "PMI_leaky - PMI_leakageFree calibrated BC delta quantifies target leakage",
+      "observed": "delta 0.0 bits for both POS and NEG (leakage 0% by construction, href not in leakageFree)",
+      "pass": true,
+      "method": "same grouped estimator for both leaky and leakageFree action keys"
+    },
+    "B-INDEPENDENT-NOISE-SYNTHETIC": {
+      "expected": "independent per-step DOM variant i.i.d. independent of L expected ~0 bits on grouped pipeline",
+      "observed": "BC -0.0 bits p 1.0 degenerate std 0, bias floor 0.305 observed identical to perm mean",
+      "pass": false,
+      "degenerate": true,
+      "replicates_parent": "parent EXP-PHYSICS-34764605162 0.004-0.025 bits but parent std non-zero only for R2 0.0033 p 0.458; here all reps degenerate due to grouped block shuffle"
+    },
+    "B-RANDOM-DOM": {
+      "expected": "SHA256(random_counter) independent expected ~0 within 3*null_std",
+      "observed": "BC ~0 p 1.0 on both controls",
+      "pass": true
+    }
+  },
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-PHYSICS-35756224948/gate0_table.json",
+      "sha256": "5f7cb7e2d4328cce485712e659cc021c6ee8800ad41afe9909627a2ca70380ef",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-35756224948/raw_cmi_results.json",
+      "sha256": "07155ecbe7b2e0ed02f1c74762e06211622cdc944e15bd99d3943f2d370ea2ab",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-35756224948/synthetic_positive_control.json",
+      "sha256": "49ab4ea1144d9dd32e0250c0e81341f1a3260caa8f451e805465f0392668f6e1",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-35756224948/synthetic_negative_control.json",
+      "sha256": "bbbcd3150d86dd9dcfc6caff80b33e082b9b50c0e501d25e6c97d4869d90029f",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-35756224948/execute.py",
+      "sha256": "79cfe181fcd180378efea15935b90c0aca6e5eef947abc955dafc1535d5f5e20",
+      "role": "code"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-35756224948/spec.json",
+      "sha256": "fb5616892559cf4c7843c5c98ba27688ff00f3e25d7de9037fd8ea7c9a54e26d",
+      "role": "fixture"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-35756224948/prereg.md",
+      "sha256": "44ce30352174d31355925fd9d817479f8700288747edf58cbc5133f3e1c6c456",
+      "role": "fixture"
+    }
+  ],
+  "observations": [
+    "RAW GATE0: checked 5 candidate paths for intel_spa_manifest.json (EXP dir, research/intel/intel_spa_manifest.json, research/intel/manifest.json, EXP-INTEL-35697055679, ./) found_manifest=null, gate_rows=[NO_SPA_FOUND unique_titles 0 H 0.0 leakage 1.0 NL 0 singleton 1.0 qualifies false], qualifying 0",
+    "RAW SYNTHETIC POSITIVE: generated 200 transitions 20 trajectories x10 steps, P(flip)=0.30 exactly via rng.random()<0.30, DOM=SHA256(L||step_mod) per frozen, H(S_next|URL,HK)=0.962 bits valid_strata 9 singleton 0.0 leakage 0.0 unique_titles 6 title_entropy 2.559",
+    "RAW SYNTHETIC POSITIVE CMI R1: observed 0.07946 perm_mean 0.00423 perm_std 0.01528 BC 0.07523 p_raw 0.001 p_bonf6 0.00599 cohen_d 4.92 ci_low -0.0178 ci_high 0.03927 resampling_unit trajectory_id n_strata 9 total_n 188",
+    "RAW SYNTHETIC POSITIVE ACC R1: acc_history 0.483 acc_history_dom 0.783 delta 0.30 p_delta 0.01 grouped p_delta 0.01",
+    "RAW SYNTHETIC POSITIVE DOM_SIMILARITY R1: TFIDF cosine k5 accuracy 0.467 vs history+DOM 0.783; R2 0.600 vs 0.783; trajectory-memory 0.483; leakage delta 0.0; random_dom BC 0.0",
+    "RAW SYNTHETIC NEGATIVE: 200 transitions, H 0.986 bits, BC_R1 -0.0 perm_std 0.0 p 1.0 degenerate, observed 0.3056 perm_mean 0.3056 bias floor from Laplace alpha 1.0",
+    "RAW BARRIER EXPLORATORY: branched_revisit_count 0 total_revisit_states 3 divergent_future_rate 0.0 committor_variance 0.0 feasible_barrier false, no >=10 revisits to same (URL,DOM) with divergent futures",
+    "DERIVED METRIC: BC 0.075 <0.5 threshold fails positive_control_pass=false despite p_raw 0.001 <0.005 and d 4.92 >2.0 and delta 0.30 >0.10",
+    "DERIVED GATE: qualifying 0 <1 => decision_rule Gate0 substrate_unavailable => MEASUREMENT_INVALID, no C-WEB-DYNAMICS update, production SPA primary not evaluated"
+  ],
+  "validity_notes": [
+    "Gate0 substrate invalid: Intel manifest not found at any candidate path; repo lacks research/intel/ and EXP-INTEL-35697055679, no BrowserGym/AgentLab 1280x720 trajectories supplied; execution halted per frozen Data clause forbidding self-collection without re-freeze; result is infrastructure substrate_unavailable not scientific falsification",
+    "Positive control threshold miscalibrated: frozen BC>=0.5 unreachable under BSC(p=0.30) channel where I(L;L_next)=1-H(0.3)=0.119 bits; observed BC 0.075 is 63% of theoretical ceiling, consistent with noise; parent item-level positive control with P=0.0 gave 0.854 bits grouped 0.839 bits, so drop is due to P=0.30 not grouping; pipeline blind under current threshold is protocol violation of spec's own construction vs threshold",
+    "Null degeneracy: NEG independent-noise synthetic shows perm_std 0.0 degenerate due to Laplace alpha 1.0 bias floor on unique hash DOMs (observed 0.3056 = perm_mean); permutation invariant when each DOM hash unique; matches parent finding degenerate R1/R4/corr; grouped block shuffle preserves size but not diversity; spec requires null_std>0.01 for valid centering, so NEG fails valid centering",
+    "Grouped permutation integrity: resampling unit trajectory_id executed as cross-trajectory block shuffle with flatten-rechunk preserving within-trajectory DOM sequences and stratum sizes; disclosed as required; item-level shuffle would give larger perm_std (~0.015 vs 0.024 in parent) but frozen requires grouped; our grouped std R1 0.01528 smaller than parent item-level 0.0151 similar",
+    "Representation loss: R1 visible_text_hash truncated 5000 chars, R2 a11y_tree_hash serialized AX role/name/value 5k chars, hash collision negligible, 5k truncation documented; raw observables preserved in synthetic controls; production raw DOM/a11y bytes not available due Gate0",
+    "Estimator bias: plug-in Laplace alpha 1.0 plus Miller-Madow per stratum weighted; sensitivity nosmooth alpha 0 not computed separately in this run (would be lower by bias floor 0.30); leakage diagnostic uses same estimator not uncorrected plug-in per frozen",
+    "Split integrity: 70/30 by trajectory_id grouped, TF-IDF fit train only, site identity not feature, PYTHONHASHSEED=0 numpy 42 deterministic; auditability via raw_cmi_results.json byte-identical aside from elapsed if re-executed",
+    "Baseline execution: B-DOM-SIMILARITY TF-IDF cosine k=5 executed as frozen (sklearn fit train only, else Jaccard fallback), B-ACTION-FREQ-SHUFFLE frequency 0.166 vs 1/|S|, B-TRAJECTORY-MEMORY executed, B-RANDOM-DOM executed, all with grouped grouping per frozen"
+  ],
+  "unresolved": [
+    "Whether Intel can supply manifest satisfying Gate0 (>=2 titles, H>0.2, leakage<40%, NL>=50, strata>=10, singleton<50%) with BrowserGym/AgentLab 1280x720 provenance; binding director_mandate dependency unresolved",
+    "What BC PMI, Bonferroni p, Cohen d, CI and delta accuracy would be observed on qualifying production SPAs for R1/R2 with leakage-free action and trajectory-grouped CMI; production substrate unavailable",
+    "Whether frozen positive-control threshold BC>=0.5 should be recalibrated to 0.10 to match theoretical channel capacity 0.119 bits under P=0.30, or P should be reduced to 0.10 (I=0.53) to satisfy 0.5; current frozen pair is inconsistent",
+    "Whether trajectory-grouped permutation null can be made non-degenerate for independent-noise hash DOMs without lowering Laplace alpha or using coarser discretization; degenerate makes null centering MEASUREMENT_INVALID per frozen rule",
+    "Feasibility of barrier/committor (>=10 revisits to same URL,DOM with divergent futures) and dwell-time/timescale separation on production SPA substrate; exploratory on synthetic shows 0 branched revisits, not feasible on this FSM",
+    "Whether Playwright 1280x720 self-collection of production sites is in scope for physics retry or strictly Intel deliverable per spec Data clause ambiguity noted in parent handoff"
+  ]
+}

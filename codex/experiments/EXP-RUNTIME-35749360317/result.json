@@ -1,0 +1,1010 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-35749360317",
+  "lane": "runtime",
+  "status": "COMPLETE",
+  "outcome": "SUPPORTS",
+  "metrics": {
+    "body_drift_AvsC_full": {
+      "discrimination": 1.0,
+      "ci_95": [
+        1.0,
+        1.0
+      ],
+      "set_a_unique_fingerprints": 1,
+      "set_b_unique_fingerprints": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "degenerate_ci": true
+    },
+    "body_drift_AvsC_status": {
+      "discrimination": 0.0,
+      "ci_95": [
+        0.0,
+        0.0
+      ],
+      "set_a_unique_fingerprints": 1,
+      "set_b_unique_fingerprints": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "degenerate_ci": true
+    },
+    "body_drift_AvsC_body": {
+      "discrimination": 1.0,
+      "ci_95": [
+        1.0,
+        1.0
+      ],
+      "set_a_unique_fingerprints": 1,
+      "set_b_unique_fingerprints": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "degenerate_ci": true
+    },
+    "body_drift_AvsC_headers": {
+      "discrimination": 1.0,
+      "ci_95": [
+        1.0,
+        1.0
+      ],
+      "set_a_unique_fingerprints": 1,
+      "set_b_unique_fingerprints": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "degenerate_ci": true
+    },
+    "body_drift_AvsC_headers_no_clen": {
+      "discrimination": 0.0,
+      "ci_95": [
+        0.0,
+        0.0
+      ],
+      "set_a_unique_fingerprints": 1,
+      "set_b_unique_fingerprints": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "degenerate_ci": true
+    },
+    "body_drift_AvsB_full": {
+      "discrimination": 1.0,
+      "ci_95": [
+        1.0,
+        1.0
+      ],
+      "set_a_unique_fingerprints": 1,
+      "set_b_unique_fingerprints": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "degenerate_ci": true
+    },
+    "body_drift_AvsB_status": {
+      "discrimination": 0.0,
+      "ci_95": [
+        0.0,
+        0.0
+      ],
+      "set_a_unique_fingerprints": 1,
+      "set_b_unique_fingerprints": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "degenerate_ci": true
+    },
+    "body_drift_AvsB_body": {
+      "discrimination": 1.0,
+      "ci_95": [
+        1.0,
+        1.0
+      ],
+      "set_a_unique_fingerprints": 1,
+      "set_b_unique_fingerprints": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "degenerate_ci": true
+    },
+    "body_drift_AvsB_headers": {
+      "discrimination": 1.0,
+      "ci_95": [
+        1.0,
+        1.0
+      ],
+      "set_a_unique_fingerprints": 1,
+      "set_b_unique_fingerprints": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "degenerate_ci": true
+    },
+    "body_drift_AvsB_headers_no_clen": {
+      "discrimination": 0.0,
+      "ci_95": [
+        0.0,
+        0.0
+      ],
+      "set_a_unique_fingerprints": 1,
+      "set_b_unique_fingerprints": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "degenerate_ci": true
+    },
+    "null_control_N1_full": {
+      "discrimination": 0.0,
+      "ci_95": [
+        0.0,
+        0.0
+      ],
+      "set_a_unique_fingerprints": 1,
+      "set_b_unique_fingerprints": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "degenerate_ci": true
+    },
+    "null_control_N1_status": {
+      "discrimination": 0.0,
+      "ci_95": [
+        0.0,
+        0.0
+      ],
+      "set_a_unique_fingerprints": 1,
+      "set_b_unique_fingerprints": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "degenerate_ci": true
+    },
+    "null_control_N1_body": {
+      "discrimination": 0.0,
+      "ci_95": [
+        0.0,
+        0.0
+      ],
+      "set_a_unique_fingerprints": 1,
+      "set_b_unique_fingerprints": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "degenerate_ci": true
+    },
+    "null_control_N1_headers": {
+      "discrimination": 0.0,
+      "ci_95": [
+        0.0,
+        0.0
+      ],
+      "set_a_unique_fingerprints": 1,
+      "set_b_unique_fingerprints": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "degenerate_ci": true
+    },
+    "null_control_N1_headers_no_clen": {
+      "discrimination": 0.0,
+      "ci_95": [
+        0.0,
+        0.0
+      ],
+      "set_a_unique_fingerprints": 1,
+      "set_b_unique_fingerprints": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "degenerate_ci": true
+    },
+    "null_control_N2_full": {
+      "discrimination": 0.0,
+      "ci_95": [
+        0.0,
+        0.0
+      ],
+      "set_a_unique_fingerprints": 1,
+      "set_b_unique_fingerprints": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "degenerate_ci": true
+    },
+    "null_control_N2_status": {
+      "discrimination": 0.0,
+      "ci_95": [
+        0.0,
+        0.0
+      ],
+      "set_a_unique_fingerprints": 1,
+      "set_b_unique_fingerprints": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "degenerate_ci": true
+    },
+    "null_control_N2_body": {
+      "discrimination": 0.0,
+      "ci_95": [
+        0.0,
+        0.0
+      ],
+      "set_a_unique_fingerprints": 1,
+      "set_b_unique_fingerprints": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "degenerate_ci": true
+    },
+    "null_control_N2_headers": {
+      "discrimination": 0.0,
+      "ci_95": [
+        0.0,
+        0.0
+      ],
+      "set_a_unique_fingerprints": 1,
+      "set_b_unique_fingerprints": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "degenerate_ci": true
+    },
+    "null_control_N2_headers_no_clen": {
+      "discrimination": 0.0,
+      "ci_95": [
+        0.0,
+        0.0
+      ],
+      "set_a_unique_fingerprints": 1,
+      "set_b_unique_fingerprints": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "degenerate_ci": true
+    },
+    "classic_perm_full": {
+      "discrimination": 1.0,
+      "ci_95": [
+        1.0,
+        1.0
+      ],
+      "set_a_unique_fingerprints": 1,
+      "set_b_unique_fingerprints": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "degenerate_ci": true
+    },
+    "classic_perm_status": {
+      "discrimination": 1.0,
+      "ci_95": [
+        1.0,
+        1.0
+      ],
+      "set_a_unique_fingerprints": 1,
+      "set_b_unique_fingerprints": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "degenerate_ci": true
+    },
+    "classic_perm_body": {
+      "discrimination": 1.0,
+      "ci_95": [
+        1.0,
+        1.0
+      ],
+      "set_a_unique_fingerprints": 1,
+      "set_b_unique_fingerprints": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "degenerate_ci": true
+    },
+    "classic_perm_headers": {
+      "discrimination": 1.0,
+      "ci_95": [
+        1.0,
+        1.0
+      ],
+      "set_a_unique_fingerprints": 1,
+      "set_b_unique_fingerprints": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "degenerate_ci": true
+    },
+    "classic_perm_headers_no_clen": {
+      "discrimination": 1.0,
+      "ci_95": [
+        1.0,
+        1.0
+      ],
+      "set_a_unique_fingerprints": 1,
+      "set_b_unique_fingerprints": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "degenerate_ci": true
+    },
+    "classic_sess_full": {
+      "discrimination": 1.0,
+      "ci_95": [
+        1.0,
+        1.0
+      ],
+      "set_a_unique_fingerprints": 1,
+      "set_b_unique_fingerprints": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "degenerate_ci": true
+    },
+    "classic_sess_status": {
+      "discrimination": 1.0,
+      "ci_95": [
+        1.0,
+        1.0
+      ],
+      "set_a_unique_fingerprints": 1,
+      "set_b_unique_fingerprints": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "degenerate_ci": true
+    },
+    "classic_sess_body": {
+      "discrimination": 1.0,
+      "ci_95": [
+        1.0,
+        1.0
+      ],
+      "set_a_unique_fingerprints": 1,
+      "set_b_unique_fingerprints": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "degenerate_ci": true
+    },
+    "classic_sess_headers": {
+      "discrimination": 1.0,
+      "ci_95": [
+        1.0,
+        1.0
+      ],
+      "set_a_unique_fingerprints": 1,
+      "set_b_unique_fingerprints": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "degenerate_ci": true
+    },
+    "classic_sess_headers_no_clen": {
+      "discrimination": 1.0,
+      "ci_95": [
+        1.0,
+        1.0
+      ],
+      "set_a_unique_fingerprints": 1,
+      "set_b_unique_fingerprints": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "degenerate_ci": true
+    },
+    "perm_null_full": {
+      "discrimination": 0.0,
+      "ci_95": [
+        0.0,
+        0.0
+      ],
+      "set_a_unique_fingerprints": 1,
+      "set_b_unique_fingerprints": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "degenerate_ci": true
+    },
+    "perm_null_status": {
+      "discrimination": 0.0,
+      "ci_95": [
+        0.0,
+        0.0
+      ],
+      "set_a_unique_fingerprints": 1,
+      "set_b_unique_fingerprints": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "degenerate_ci": true
+    },
+    "perm_null_body": {
+      "discrimination": 0.0,
+      "ci_95": [
+        0.0,
+        0.0
+      ],
+      "set_a_unique_fingerprints": 1,
+      "set_b_unique_fingerprints": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "degenerate_ci": true
+    },
+    "perm_null_headers": {
+      "discrimination": 0.0,
+      "ci_95": [
+        0.0,
+        0.0
+      ],
+      "set_a_unique_fingerprints": 1,
+      "set_b_unique_fingerprints": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "degenerate_ci": true
+    },
+    "perm_null_headers_no_clen": {
+      "discrimination": 0.0,
+      "ci_95": [
+        0.0,
+        0.0
+      ],
+      "set_a_unique_fingerprints": 1,
+      "set_b_unique_fingerprints": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "degenerate_ci": true
+    },
+    "sess_null_full": {
+      "discrimination": 0.0,
+      "ci_95": [
+        0.0,
+        0.0
+      ],
+      "set_a_unique_fingerprints": 1,
+      "set_b_unique_fingerprints": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "degenerate_ci": true
+    },
+    "sess_null_status": {
+      "discrimination": 0.0,
+      "ci_95": [
+        0.0,
+        0.0
+      ],
+      "set_a_unique_fingerprints": 1,
+      "set_b_unique_fingerprints": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "degenerate_ci": true
+    },
+    "sess_null_body": {
+      "discrimination": 0.0,
+      "ci_95": [
+        0.0,
+        0.0
+      ],
+      "set_a_unique_fingerprints": 1,
+      "set_b_unique_fingerprints": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "degenerate_ci": true
+    },
+    "sess_null_headers": {
+      "discrimination": 0.0,
+      "ci_95": [
+        0.0,
+        0.0
+      ],
+      "set_a_unique_fingerprints": 1,
+      "set_b_unique_fingerprints": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "degenerate_ci": true
+    },
+    "sess_null_headers_no_clen": {
+      "discrimination": 0.0,
+      "ci_95": [
+        0.0,
+        0.0
+      ],
+      "set_a_unique_fingerprints": 1,
+      "set_b_unique_fingerprints": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "degenerate_ci": true
+    },
+    "effective_distinct_n": {
+      "body_A": {
+        "full": 1,
+        "status": 1,
+        "body": 1,
+        "headers": 1,
+        "headers_no_clen": 1
+      },
+      "body_B": {
+        "full": 1,
+        "status": 1,
+        "body": 1,
+        "headers": 1,
+        "headers_no_clen": 1
+      },
+      "body_C": {
+        "full": 1,
+        "status": 1,
+        "body": 1,
+        "headers": 1,
+        "headers_no_clen": 1
+      },
+      "null_A1": {
+        "full": 1,
+        "status": 1,
+        "body": 1,
+        "headers": 1,
+        "headers_no_clen": 1
+      },
+      "null_A2": {
+        "full": 1,
+        "status": 1,
+        "body": 1,
+        "headers": 1,
+        "headers_no_clen": 1
+      },
+      "null_C1": {
+        "full": 1,
+        "status": 1,
+        "body": 1,
+        "headers": 1,
+        "headers_no_clen": 1
+      },
+      "null_C2": {
+        "full": 1,
+        "status": 1,
+        "body": 1,
+        "headers": 1,
+        "headers_no_clen": 1
+      },
+      "perm403_null_1": {
+        "full": 1,
+        "status": 1,
+        "body": 1,
+        "headers": 1,
+        "headers_no_clen": 1
+      },
+      "perm403_null_2": {
+        "full": 1,
+        "status": 1,
+        "body": 1,
+        "headers": 1,
+        "headers_no_clen": 1
+      },
+      "perm_200": {
+        "full": 1,
+        "status": 1,
+        "body": 1,
+        "headers": 1,
+        "headers_no_clen": 1
+      },
+      "perm_403": {
+        "full": 1,
+        "status": 1,
+        "body": 1,
+        "headers": 1,
+        "headers_no_clen": 1
+      },
+      "sess401_null_1": {
+        "full": 1,
+        "status": 1,
+        "body": 1,
+        "headers": 1,
+        "headers_no_clen": 1
+      },
+      "sess401_null_2": {
+        "full": 1,
+        "status": 1,
+        "body": 1,
+        "headers": 1,
+        "headers_no_clen": 1
+      },
+      "sess_200": {
+        "full": 1,
+        "status": 1,
+        "body": 1,
+        "headers": 1,
+        "headers_no_clen": 1
+      },
+      "sess_401": {
+        "full": 1,
+        "status": 1,
+        "body": 1,
+        "headers": 1,
+        "headers_no_clen": 1
+      }
+    },
+    "body_sha256_by_state": {
+      "body_A": [
+        "d0ca833f843c6d70ec9d6755f52a92dcbfc8b4ab601b871bced09ad027172e34"
+      ],
+      "body_B": [
+        "67c186f2cee1ccf01f55c80235eb9b1b1d14b073223a807b9ce944405e67999c"
+      ],
+      "body_C": [
+        "b46c461cceeefa595c3ac0d706689ed382340b59c20a269a930c786c8389dd32"
+      ]
+    },
+    "content_length_by_state": {
+      "body_A": [
+        "31"
+      ],
+      "body_B": [
+        "70"
+      ],
+      "body_C": [
+        "117"
+      ]
+    },
+    "body_len_by_state": {
+      "body_A": [
+        31
+      ],
+      "body_B": [
+        70
+      ],
+      "body_C": [
+        117
+      ]
+    },
+    "non_clen_headers_by_state": {
+      "body_A": [
+        "{\"Cache-Control\": \"max-age=3600\", \"Connection\": \"close\", \"Content-Type\": \"application/json\", \"ETag\": \"W/\\\"fixed-aaa-111\\\"\", \"Vary\": \"Accept-Encoding\"}"
+      ],
+      "body_B": [
+        "{\"Cache-Control\": \"max-age=3600\", \"Connection\": \"close\", \"Content-Type\": \"application/json\", \"ETag\": \"W/\\\"fixed-aaa-111\\\"\", \"Vary\": \"Accept-Encoding\"}"
+      ],
+      "body_C": [
+        "{\"Cache-Control\": \"max-age=3600\", \"Connection\": \"close\", \"Content-Type\": \"application/json\", \"ETag\": \"W/\\\"fixed-aaa-111\\\"\", \"Vary\": \"Accept-Encoding\"}"
+      ]
+    },
+    "statuses_by_state": {
+      "body_A": [
+        200
+      ],
+      "body_B": [
+        200
+      ],
+      "body_C": [
+        200
+      ]
+    },
+    "raw_line_count": 300,
+    "failing_conditions": []
+  },
+  "controls": {
+    "C1_FULL_BODY_DRIFT": {
+      "type": "positive",
+      "expected": "full-vector discrimination > 0.5 on STATE_A vs STATE_C (both 200, bodies byte-different, non-CLEN headers identical)",
+      "observed": {
+        "full_AvsC": 1.0,
+        "statuses_AvsC": [
+          [
+            200
+          ],
+          [
+            200
+          ]
+        ],
+        "body_sha_distinct": true,
+        "content_length_distinct": true
+      },
+      "pass": true,
+      "evidence_refs": "metrics.body_drift_AvsC_full; identity_checks (status/body sha/CLEN for body_A, body_C)"
+    },
+    "C2_BODY_ONLY_SIGNAL": {
+      "type": "positive",
+      "expected": "B-BODY-ONLY > 0.5 on A vs C AND on A vs B; B-HEADERS-NO-CLEN = 0.0 on A vs C",
+      "observed": {
+        "body_only_AvsC": 1.0,
+        "body_only_AvsB": 1.0,
+        "headers_no_clen_AvsC": 0.0
+      },
+      "pass": true,
+      "evidence_refs": "metrics.body_drift_AvsC_body, body_drift_AvsB_body, body_drift_AvsC_headers_no_clen"
+    },
+    "C3_STATUS_ISOLATED": {
+      "type": "strong-null",
+      "expected": "B-STATUS-ONLY = 0.0 on A vs C and A vs B (status confound removed)",
+      "observed": {
+        "status_only_AvsC": 0.0,
+        "status_only_AvsB": 0.0
+      },
+      "pass": true,
+      "evidence_refs": "metrics.body_drift_AvsC_status, body_drift_AvsB_status"
+    },
+    "C4_FULL_EXCEEDS_STATUS_NONVACUOUS": {
+      "type": "positive",
+      "expected": "full-vector discrimination > B-STATUS-ONLY strictly on A vs C (e.g., 1.0 > 0.0); equality at ceiling is vacuous and fails",
+      "observed": {
+        "full": 1.0,
+        "status": 0.0
+      },
+      "pass": true,
+      "evidence_refs": "metrics.body_drift_AvsC_full vs body_drift_AvsC_status"
+    },
+    "C5_NULL_NO_FALSE_POSITIVE": {
+      "type": "null",
+      "expected": "null N1 (STATE_A resampled) full = 0.0, CI contains 0.0, point <= 0.05; status-only and body-only also 0.0",
+      "observed": {
+        "full": 0.0,
+        "ci_95": [
+          0.0,
+          0.0
+        ],
+        "status": 0.0,
+        "body": 0.0
+      },
+      "pass": true,
+      "evidence_refs": "metrics.null_control_N1_full/status/body"
+    },
+    "C6_CONTENT_LENGTH_VARIES_AND_HEADERS_CONSTANT": {
+      "type": "validity",
+      "expected": "Content-Length differs across A/B/C proportional to body_len and body SHA-256 distinct, non-CLEN filtered headers identical across A/B/C (Cache-Control, ETag, Vary, no Set-Cookie), CLEN == body_len on each observation",
+      "observed": {
+        "content_length_by_state": {
+          "body_A": [
+            "31"
+          ],
+          "body_B": [
+            "70"
+          ],
+          "body_C": [
+            "117"
+          ]
+        },
+        "body_len_by_state": {
+          "body_A": [
+            31
+          ],
+          "body_B": [
+            70
+          ],
+          "body_C": [
+            117
+          ]
+        },
+        "body_sha_by_state": {
+          "body_A": [
+            "d0ca833f843c6d70ec9d6755f52a92dcbfc8b4ab601b871bced09ad027172e34"
+          ],
+          "body_B": [
+            "67c186f2cee1ccf01f55c80235eb9b1b1d14b073223a807b9ce944405e67999c"
+          ],
+          "body_C": [
+            "b46c461cceeefa595c3ac0d706689ed382340b59c20a269a930c786c8389dd32"
+          ]
+        },
+        "non_clen_headers_identical": true,
+        "set_cookie_absent": true,
+        "clen_equals_body_len_all_obs": true
+      },
+      "pass": true,
+      "evidence_refs": "identity_checks (raw Content-Length per observation)"
+    },
+    "C7_WRITABLE_PERMISSION_LEVEL": {
+      "type": "positive",
+      "expected": "(a) body-filtered permission reader 200 vs admin 200 (A vs C) full >= 0.7; (b) classic permission escalation 403 vs 200 via committed SQLite role write full >= 0.7; same-state 403 null = 0.0 CI contains 0.0 <= 0.05",
+      "observed": {
+        "reader_admin_200_AvsC": 1.0,
+        "classic_perm_403_vs_200": 1.0,
+        "perm_null": {
+          "full": 0.0,
+          "ci_95": [
+            0.0,
+            0.0
+          ]
+        },
+        "statuses_403_200": true,
+        "bodies_distinct": true
+      },
+      "pass": true,
+      "evidence_refs": "metrics.body_drift_AvsC_full, classic_perm_full, perm_null_full; batch_state_log set_role writes"
+    },
+    "C8_WRITABLE_SESSION_INVALIDATION": {
+      "type": "positive",
+      "expected": "writable session invalidation 401 vs 200 via committed SQLite session write full >= 0.7; same-state 401 null = 0.0 CI contains 0.0 <= 0.05",
+      "observed": {
+        "classic_sess_401_vs_200": 1.0,
+        "sess_null": {
+          "full": 0.0,
+          "ci_95": [
+            0.0,
+            0.0
+          ]
+        },
+        "statuses_401_200": true,
+        "bodies_distinct": true
+      },
+      "pass": true,
+      "evidence_refs": "metrics.classic_sess_full, sess_null_full; batch_state_log invalidate_session write"
+    },
+    "C5B_NULL_N2_EXPLORATORY": {
+      "type": "null-exploratory",
+      "expected": "exploratory N2 (STATE_C resampled) = 0.0 (reported, not gating)",
+      "observed": {
+        "full": 0.0,
+        "ci_95": [
+          0.0,
+          0.0
+        ]
+      },
+      "pass": true,
+      "evidence_refs": "metrics.null_control_N2_full"
+    },
+    "B-STATUS-ONLY": {
+      "type": "strong-null",
+      "expected": "0.0 on all same-status body-only comparisons (200 vs 200); 1.0 on status-varying classic controls",
+      "observed": {
+        "body_drift_AvsC": 0.0,
+        "body_drift_AvsB": 0.0,
+        "null_control_N1": 0.0,
+        "classic_perm": 1.0,
+        "classic_sess": 1.0
+      },
+      "pass": true,
+      "evidence_refs": null
+    },
+    "B-BODY-ONLY": {
+      "type": "positive",
+      "expected": ">0.5 on same-status body-only drift (A vs C, A vs B); 1.0 on classic controls; 0.0 on nulls",
+      "observed": {
+        "body_drift_AvsC": 1.0,
+        "body_drift_AvsB": 1.0,
+        "null_control_N1": 0.0,
+        "classic_perm": 1.0,
+        "classic_sess": 1.0
+      },
+      "pass": true,
+      "evidence_refs": null
+    },
+    "B-HEADERS-ONLY": {
+      "type": "body-correlated-auxiliary",
+      "expected": ">0 on body-only comparisons SOLELY via body-correlated Content-Length (documented, not a failure); 0.0 on nulls",
+      "observed": {
+        "body_drift_AvsC": 1.0,
+        "body_drift_AvsB": 1.0,
+        "null_control_N1": 0.0
+      },
+      "pass": true,
+      "evidence_refs": null
+    },
+    "B-HEADERS-NO-CLEN": {
+      "type": "isolation",
+      "expected": "0.0 on body-only comparisons (no independent header drift)",
+      "observed": {
+        "body_drift_AvsC": 0.0,
+        "body_drift_AvsB": 0.0,
+        "null_control_N1": 0.0
+      },
+      "pass": true,
+      "evidence_refs": null
+    }
+  },
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-RUNTIME-35749360317/run_experiment.py",
+      "sha256": "4d61198ce45c750e15d858c076589ee77a7738e3f7d41396b20727075d0e9c2e",
+      "role": "code"
+    },
+    {
+      "path": "research/experiments/EXP-RUNTIME-35749360317/raw_observations.jsonl",
+      "sha256": "012c725382c2025b674d0db0a66fa8794a98a2c267a1de623835daa02db511d1",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-RUNTIME-35749360317/batch_state_log.jsonl",
+      "sha256": "8ddb71cdf4dec7d77c89c6f5046f8851e48e1f25b558cac9fc5fbe7d93c55e42",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-RUNTIME-35749360317/experiment_result.json",
+      "sha256": "7fc67a8bd7fa6c2d93bb3cb311fdbd3c60404824495b5a822212a070fc2c2360",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-RUNTIME-35749360317/build_packet.py",
+      "sha256": "ba964a3a99ee160953a018a0758880d0647ec3ab3e88257243f77cdba200cca1",
+      "role": "code"
+    },
+    {
+      "path": "research/experiments/EXP-RUNTIME-35749360317/report.md",
+      "sha256": "b87a0b6dd7e719e04f58f6d88f6605841dc0946b6f7a9c96c02742e0aed12a93",
+      "role": "canonical-packet"
+    },
+    {
+      "path": "research/experiments/EXP-RUNTIME-35749360317/provenance.json",
+      "sha256": "8da294f943412b3cc40c88ea01a6974709a064deee7b0d82c5ce5eb2d1cdcdb2",
+      "role": "canonical-packet"
+    }
+  ],
+  "observations": [
+    "300 raw observations: 180x HTTP 200 (body-only A/B/C 60, null A1/A2 40, null C1/C2 40, perm_200 20, sess_200 20), 60x HTTP 403 (perm_403 20, perm403 null 40), 60x HTTP 401 (sess_401 20, sess401 null 40).",
+    "Body SHA-256 per state, single value across its 20 observations and resampled nulls: A d0ca833f843c6d70ec9d6755f52a92dcbfc8b4ab601b871bced09ad027172e34 (31 B), B 67c186f2cee1ccf01f55c80235eb9b1b1d14b073223a807b9ce944405e67999c (70 B), C b46c461cceeefa595c3ac0d706689ed382340b59c20a269a930c786c8389dd32 (117 B).",
+    "403 body constant on all 60x403 observations (387fe73d9abe7e6c32a0eb6113efea98dea609edefe9c3b4c9788fcaaef1603b, 22 B); 401 body constant on all 60x401 observations (9df366cd61d0e8a1bd9c4462d4f032e5317b2708d154047affa816e234518f34, 25 B).",
+    "Content-Length == body_len on all 300 observations; CLEN by state 31 / 70 / 117 (distinct, strictly increasing).",
+    "Non-CLEN filtered headers identical across A/B/C (Cache-Control max-age=3600, ETag W/\"fixed-aaa-111\", Vary Accept-Encoding, Content-Type application/json, Connection close); Set-Cookie absent on all 300 observations.",
+    "Date header varied across observations (excluded, 0 leakage into filtered dicts); Server constant; EXCLUDED_HEADERS unchanged.",
+    "Exactly 1 unique fingerprint per state per source (full/status/body/headers/headers_no_clen): deterministic responses; effective distinct N=1 per state despite nominal N=20.",
+    "null_A1 vs null_A2 (same committed STATE_A, no write between) identical on all five sources; exploratory null_C1 vs null_C2 (same STATE_C) identical; perm403_null_1/2 identical; sess401_null_1/2 identical.",
+    "All 12 admin writes returned HTTP 200 with post-SELECT state matching intent (batch_state_log.jsonl, 27 lines); every observation batch was preceded by a pre-batch state-snapshot verify entry (15).",
+    "sess_401 batch observed only after invalidate_session post-SELECT showed reader_valid_sessions=0; perm_403 batch observed only after set_role post-SELECT showed reader role=viewer."
+  ],
+  "validity_notes": [
+    "Degenerate bootstrap CI: responses are deterministic (1 unique fingerprint per state per source), so CI is [1.0,1.0] or [0.0,0.0]. Per frozen design this is EXPECTED deterministic behavior (prereg \u00a76), NOT inferential precision; effective distinct N=1 is reported alongside nominal N=20.",
+    "Setting bounded to localhost Flask 3.1.3 development server (Werkzeug) on 127.0.0.1:19849, single sequential client, no concurrency, no TLS/HTTP2, no production WSGI (gunicorn/nginx), no CDN. Generalization untested (see unresolved).",
+    "Werkzeug dev server emits constant 'Connection: close'; constant across all observations, so it neither contributes to discrimination nor to the null.",
+    "Body B/C effective lengths are 70/117 bytes for the exact frozen canonical JSON (prereg \u00a74.2 marks them '~52'/'~95 (exact logged)'); frozen C6 strict inequality (31<70<117) and proportionality via CLEN==body_len are satisfied; body A pin exact (31 B, d0ca833f\u2026).",
+    "Line count 300 = 15 batches x 20. Frozen spec null_control (N1, N2 exploratory, N3 same-state 403/401) and decision rule C7/C8 null requirements mandate the full schedule; prereg \u00a75.4/\u00a711 prose nominal 140-180 predates N3; disclosed nominal vs effective per prereg \u00a711 and batch_state_log is consistent.",
+    "First attempt (run 35749360317) failed with EXECUTION_FAILURE exit 75 (retryable=true, fingerprint fbf5825e\u2026) during pre-execution environment checks (failure.json). That is an infrastructure failure, not a negative result; this run executed cleanly.",
+    "Pre-measurement server fix: initial smoke pass showed GET /resource returned a reason-specific 401 body ({\"error\":\"session_invalid\"}) for invalidated sessions, contradicting the frozen prereg S_401 pin (401 body {\"error\":\"unauthorized\"}). The server error mapping was corrected to the frozen constant error bodies before any full measurement; smoke re-passed; no measurement was taken with the non-conforming body.",
+    "Fingerprint algorithm copied verbatim from parent EXP-RUNTIME-35741906498/run_experiment.py (which itself copies EXP-RUNTIME-35697043449) \u2014 compute_fingerprint/jaccard_distance/bootstrap_jaccard_ci. Independent recomputation from raw_observations.jsonl reproduced all 300x5 fingerprints with 0 mismatches.",
+    "Status/body/CLEN identity verified on every observation (not sampled): all body-only+null observations 200; single body SHA per state; CLEN==body_len everywhere. C3/C6 hold by construction and are independently confirmed in raw evidence."
+  ],
+  "unresolved": [
+    "Role-column-driven permission-filtered body (P1 spelling: two tokens, same body_config) is not separately measured; A vs C (body_config variant) realized the permission-level 200 vs 200 comparison per frozen C7(a).",
+    "Production WSGI (gunicorn), nginx, CDN, load balancer, Django/Express/FastAPI middleware body/header behavior untested; localhost Werkzeug only.",
+    "Concurrency, HTTP/2, TLS, multi-client handling untested.",
+    "Non-degenerate bootstrap CI cannot be obtained on this deterministic substrate; body/header nondeterminism (e.g., real CDN) needed for genuine CI.",
+    "Body magnitude gradient beyond 31/70/117 and per-field sensitivity ordering remain uncharacterized: all variants produced ceiling 1.0.",
+    "Distributed SQLite replication / shared-session distributed C-FRESHNESS and C-DELTA-REPAIR remain blocked; this result unblocks localhost synthetic testing for both branches only (as specified in product_consequence_positive)."
+  ]
+}

@@ -1,0 +1,169 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-35749360317",
+  "lane": "runtime",
+  "status": "PASS",
+  "producer_claim_supported": true,
+  "required_fixes": [],
+  "validity_findings": [
+    {
+      "id": "V1_DEGENERATE_CI",
+      "severity": "info",
+      "finding": "All fingerprint sets are deterministic (1 unique value per state per source, effective distinct N=1 per state despite nominal N=20). Bootstrap CIs are degenerate [1.0,1.0] or [0.0,0.0] as expected per prereg section 6. Not inferential precision.",
+      "evidence_refs": ["research/experiments/EXP-RUNTIME-35749360317/result.json:metrics.effective_distinct_n", "research/experiments/EXP-RUNTIME-35749360317/result.json:validity_notes[0]", "research/experiments/EXP-RUNTIME-35749360317/raw_observations.jsonl (300 lines, 1 unique fingerprint per state/source recomputed 0 mismatches)"],
+      "requires_fix": false
+    },
+    {
+      "id": "V2_BOUNDED_SUBSTRATE",
+      "severity": "info",
+      "finding": "Measurement is bounded to localhost Flask 3.1.3 + PyJWT 2.14.0 HS256 + SQLite WAL on Werkzeug 3.1.8 Python 3.12.14 at 127.0.0.1:19849, single sequential client, jitter 50-150ms with no observable effect on deterministic fingerprints, Connection: close constant. No concurrency, TLS/HTTP2, production WSGI (gunicorn/nginx), CDN, load balancer, or distributed SQLite replication tested. Producer correctly discloses this and retains EXPERIMENTAL ceiling (no VALIDATED/PRODUCT_CORE promotion).",
+      "evidence_refs": ["research/experiments/EXP-RUNTIME-35749360317/provenance.json:environment", "research/experiments/EXP-RUNTIME-35749360317/result.json:validity_notes[1]", "research/experiments/EXP-RUNTIME-35749360317/result.json:validity_notes[3]"],
+      "requires_fix": false
+    },
+    {
+      "id": "V3_BODY_LENGTH_APPROXIMATION",
+      "severity": "info",
+      "finding": "Effective body lengths are 31/70/117 bytes (B=70, C=117) not ~52/~95 prose approximations in spec Table 4.2. The frozen spec explicitly marks them '~52'/'~95 (exact logged)' and C6 requires only strict inequality and proportionality via Content-Length==body_len, all of which hold (31<70<117). Body A pin exact (31 B, SHA d0ca833f843c...) recomputed and verified. Not a protocol violation; disclosed.",
+      "evidence_refs": ["research/experiments/EXP-RUNTIME-35749360317/result.json:metrics.body_len_by_state", "research/experiments/EXP-RUNTIME-35749360317/result.json:metrics.content_length_by_state", "research/experiments/EXP-RUNTIME-35749360317/spec.json:positive_control", "research/experiments/EXP-RUNTIME-35749360317/prereg.md:section 4.2"],
+      "requires_fix": false
+    },
+    {
+      "id": "V4_PREMEASUREMENT_SERVER_FIX",
+      "severity": "info",
+      "finding": "Producer corrected server error-body mapping before any full measurement (smoke showed 401 body session_invalid vs frozen pin unauthorized). Correction to frozen constant error bodies (403 forbiden 22B SHA 387fe7..., 401 unauthorized 25B SHA 9df366...) was made before full run, smoke re-passed, no measurement taken with non-conforming body. This is implementation alignment to frozen spec, not post-hoc weakening of decision rule. Disclosed in report.md section 7 and result.json validity_notes[7].",
+      "evidence_refs": ["research/experiments/EXP-RUNTIME-35749360317/report.md:section 7 disclosure 2", "research/experiments/EXP-RUNTIME-35749360317/result.json:validity_notes[7]", "research/experiments/EXP-RUNTIME-35749360317/run_experiment.py:BODY_403/BODY_401"],
+      "requires_fix": false
+    },
+    {
+      "id": "V5_LINE_COUNT_SCHEDULE",
+      "severity": "info",
+      "finding": "Raw line count 300 (15 batches x20) exceeds prereg prose 140-180 but matches frozen spec null_control which mandates N3 same-state 403 resampled and same-state 401 resampled (perm403_null_1/2, sess401_null_1/2) plus exploratory N2. C7/C8 require those nulls. Batch_state_log 27 lines (12 writes +15 pre-batch verifies) is consistent. Disclosed as nominal vs effective N per prereg section 11.",
+      "evidence_refs": ["research/experiments/EXP-RUNTIME-35749360317/spec.json:null_control", "research/experiments/EXP-RUNTIME-35749360317/spec.json:decision_rule C7/C8", "research/experiments/EXP-RUNTIME-35749360317/batch_state_log.jsonl (27 lines)", "research/experiments/EXP-RUNTIME-35749360317/raw_observations.jsonl (300 lines)"],
+      "requires_fix": false
+    },
+    {
+      "id": "V6_EXCLUDED_HEADER_LEAKAGE",
+      "severity": "pass",
+      "finding": "Date header varied across observations and was correctly excluded; Server constant and excluded; X-Request-Id absent. Filtered headers contain only Cache-Control, Connection, Content-Length, Content-Type, ETag, Vary. Verified 0 leakage into fingerprint_filtered dicts on recomputed sample (15 checked, all raw).",
+      "evidence_refs": ["research/experiments/EXP-RUNTIME-35749360317/raw_observations.jsonl (filtered_keys check)", "research/experiments/EXP-RUNTIME-35749360317/run_experiment.py:EXCLUDED_HEADERS"],
+      "requires_fix": false
+    },
+    {
+      "id": "V7_STATUS_BODY_CLEN_IDENTITY_VERIFIED",
+      "severity": "pass",
+      "finding": "Status identity (all body-only and null batches 200 vs 200), body SHA distinct across A/B/C (d0ca83..., 67c186..., b46c46... each 1 value), Content-Length==body_len on all 300 observations, CLEN distinct 31/70/117 strictly increasing, non-CLEN headers identical across A/B/C (Cache-Control max-age=3600, ETag W/fixed-aaa-111, Vary Accept-Encoding, no Set-Cookie), Set-Cookie absent 0/300 on body-only states. Recomputed from raw_observations.jsonl matches producer identity_checks.",
+      "evidence_refs": ["research/experiments/EXP-RUNTIME-35749360317/result.json:metrics.body_sha256_by_state", "research/experiments/EXP-RUNTIME-35749360317/result.json:metrics.non_clen_headers_by_state", "research/experiments/EXP-RUNTIME-35749360317/raw_observations.jsonl (recomputed Jaccards)"],
+      "requires_fix": false
+    },
+    {
+      "id": "V8_BODY_MAGNITUDE_CEILING",
+      "severity": "info",
+      "finding": "Body discrimination tested at only 3 magnitudes (31,70,117 bytes, 1-6 JSON fields). All comparisons hit ceiling 1.0, so no sensitivity gradient or per-field ordering measured. Producer discloses this as unresolved and does not claim graded sensitivity.",
+      "evidence_refs": ["research/experiments/EXP-RUNTIME-35749360317/result.json:unresolved[4]", "research/experiments/EXP-RUNTIME-35749360317/report.md:section 8"],
+      "requires_fix": false
+    }
+  ],
+  "baseline_findings": [
+    {
+      "id": "B-STATUS-ONLY",
+      "finding": "PASS — Strong null holds. discrimination_status_only = 0.0 on same-status body-only comparisons body_A vs body_C and body_A vs body_B (200 vs 200) and on null N1; =1.0 on status-varying classic controls perm_403 vs perm_200 (403 vs 200) and sess_401 vs sess_200 (401 vs 200). Recomputed Jaccard 0.0/0.0/0.0 and 1.0/1.0 matches producer result.json metrics body_drift_AvsC_status, body_drift_AvsB_status, null_control_N1_status, classic_perm_status, classic_sess_status. Proves status confound removed as required by C3.",
+      "evidence_refs": ["research/experiments/EXP-RUNTIME-35749360317/result.json:metrics.body_drift_AvsC_status", "research/experiments/EXP-RUNTIME-35749360317/result.json:metrics.body_drift_AvsB_status", "research/experiments/EXP-RUNTIME-35749360317/result.json:controls.C3_STATUS_ISOLATED"],
+      "pass": true
+    },
+    {
+      "id": "B-BODY-ONLY",
+      "finding": "PASS — Positive baseline carries full signal. discrimination_body_only =1.0 on body_A vs body_C and body_A vs body_B (>0.5 required), 1.0 on classic perm/sess, 0.0 on nulls N1/N2/perm_null/sess_null. Recomputed 1.0 matches producer. Satisfies C2 body signal; as expected body SHA alone discriminates when bodies differ.",
+      "evidence_refs": ["research/experiments/EXP-RUNTIME-35749360317/result.json:metrics.body_drift_AvsC_body", "research/experiments/EXP-RUNTIME-35749360317/result.json:metrics.body_drift_AvsB_body", "research/experiments/EXP-RUNTIME-35749360317/result.json:controls.C2_BODY_ONLY_SIGNAL"],
+      "pass": true
+    },
+    {
+      "id": "B-HEADERS-ONLY",
+      "finding": "PASS — Body-correlated auxiliary. discrimination_headers_only =1.0 on body_A vs body_C and body_A vs body_B SOLELY via Content-Length variation (31 vs 70 vs 117). Documented per frozen C2 as expected, not a failure. 0.0 on null N1. Recomputed 1.0 via Content-Length inclusion and 0.0 on null matches producer.",
+      "evidence_refs": ["research/experiments/EXP-RUNTIME-35749360317/result.json:metrics.body_drift_AvsC_headers", "research/experiments/EXP-RUNTIME-35749360317/result.json:controls.B-HEADERS-ONLY"],
+      "pass": true
+    },
+    {
+      "id": "B-HEADERS-NO-CLEN",
+      "finding": "PASS — Isolation holds. discrimination_headers_no_clen =0.0 on body_A vs body_C and body_A vs body_B and null N1 (filtered headers minus Content-Length identical across A/B/C). Recomputed 0.0 matches producer. Proves no independent header drift; CLEN variation is body-correlated per C6 and frozen measurement_validity item 3.",
+      "evidence_refs": ["research/experiments/EXP-RUNTIME-35749360317/result.json:metrics.body_drift_AvsC_headers_no_clen", "research/experiments/EXP-RUNTIME-35749360317/result.json:controls.B-HEADERS-NO-CLEN", "research/experiments/EXP-RUNTIME-35749360317/raw_observations.jsonl (headers_no_clen_json identical across A/B/C)"],
+      "pass": true
+    },
+    {
+      "id": "C4_FULL_EXCEEDS_STATUS_COMPLEMENT",
+      "finding": "PASS — Non-vacuous complement to parent header-only (EXP-RUNTIME-35741906498 full 1.0 > body/status 0.0). Here full 1.0 > status 0.0 strictly (1.0 > 0.0) on body_A vs body_C. Prior vacuous case (full==body==status==1.0 where bodies and statuses co-vary) does not occur. Recomputed full Jaccard 1.0 vs status 0.0 confirms.",
+      "evidence_refs": ["research/experiments/EXP-RUNTIME-35749360317/result.json:controls.C4_FULL_EXCEEDS_STATUS_NONVACUOUS", "research/experiments/EXP-RUNTIME-35741906498/handoff.json (parent header-only ceiling)"],
+      "pass": true
+    }
+  ],
+  "recomputed_metrics": {
+    "body_drift_AvsC_full": 1.0,
+    "body_drift_AvsC_status": 0.0,
+    "body_drift_AvsC_body": 1.0,
+    "body_drift_AvsC_headers": 1.0,
+    "body_drift_AvsC_headers_no_clen": 0.0,
+    "body_drift_AvsB_full": 1.0,
+    "body_drift_AvsB_status": 0.0,
+    "body_drift_AvsB_body": 1.0,
+    "body_drift_AvsB_headers": 1.0,
+    "body_drift_AvsB_headers_no_clen": 0.0,
+    "null_control_N1_full": 0.0,
+    "null_control_N1_status": 0.0,
+    "null_control_N1_body": 0.0,
+    "null_control_N1_headers": 0.0,
+    "null_control_N1_headers_no_clen": 0.0,
+    "null_control_N2_full": 0.0,
+    "classic_perm_full": 1.0,
+    "classic_perm_status": 1.0,
+    "classic_perm_body": 1.0,
+    "classic_perm_headers": 1.0,
+    "classic_perm_headers_no_clen": 1.0,
+    "classic_sess_full": 1.0,
+    "classic_sess_status": 1.0,
+    "classic_sess_body": 1.0,
+    "classic_sess_headers": 1.0,
+    "classic_sess_headers_no_clen": 1.0,
+    "perm_null_full": 0.0,
+    "sess_null_full": 0.0,
+    "effective_distinct_n_per_state": 1,
+    "raw_line_count": 300,
+    "fingerprint_mismatches": 0,
+    "method": "Recomputed from research/experiments/EXP-RUNTIME-35749360317/raw_observations.jsonl using run_experiment.py compute_fingerprint (SHA256(status||body_bytes||sorted_filtered_headers)) and jaccard_distance; all 300x5 source fingerprints 0 mismatches; all Jaccard distances exactly reproduce producer metrics (tolerance 0.0).",
+    "content_length_by_state": {
+      "body_A": "31",
+      "body_B": "70",
+      "body_C": "117"
+    },
+    "body_len_by_state": {
+      "body_A": 31,
+      "body_B": 70,
+      "body_C": 117
+    },
+    "body_sha_distinct": true,
+    "non_clen_headers_identical_across_A_B_C": true,
+    "clen_equals_body_len_all_obs": true
+  },
+  "claim_ceiling": "HTTP fingerprint substrate hash(status_code || body_bytes || sorted_filtered_standard_headers) with EXCLUDED_HEADERS={Date,Server,X-Request-Id} deterministically discriminates same-status body-only drift (200 vs 200, bodies byte-different via committed SQLite body_config/content_variant write, Content-Length varies 31 vs 70 vs 117 proportional to body_len, non-Content-Length filtered headers identical) on localhost Flask 3.1.3 + PyJWT 2.14.0 HS256 + SQLite WAL (Werkzeug 3.1.8, Python 3.12.14, 127.0.0.1:19849, SEED 44, nominal N=20 per batch effective distinct N=1 deterministic, degenerate bootstrap CI [1.0,1.0]/[0.0,0.0]): full-vector Jaccard 1.0 >0.5, body-only 1.0 >0.5 on A vs C and A vs B, status-only 0.0, headers-no-CLEN 0.0, headers-only 1.0 via body-correlated Content-Length, full strictly exceeds status (1.0 > 0.0 complementary to parent header-only 1.0>0.0). Writable controls perm escalation 403 vs 200 and session invalidation 401 vs 200 achieve >=0.7 (observed 1.0) with nulls FP 0.0 <0.05. Completes localhost C-MEAS-VALID matrix (header-only + same-status body-only + status-varying maximally-distinct + null stability) for this synthetic testbed. Does NOT extend to production WSGI (gunicorn/nginx), CDN, distributed session replication, concurrency, HTTP/2/TLS, or sensitivity ordering (ceiling 1.0). Remains EXPERIMENTAL; not VALIDATED or PRODUCT_CORE.",
+  "evidence_refs": [
+    "research/experiments/EXP-RUNTIME-35749360317/request.json (director mandate, parent_handoff sha 6e8a1eaa...)",
+    "research/experiments/EXP-RUNTIME-35749360317/spec.json (C1-C8 frozen decision rule, EXCLUDED_HEADERS, measurement_validity)",
+    "research/experiments/EXP-RUNTIME-35749360317/prereg.md (section 4 body states, section 6 decision rule, section 8 validity threats)",
+    "research/experiments/EXP-RUNTIME-35749360317/freeze.json (hashes prereg 78a5ec55..., spec eaedd714..., request 622d624e...)",
+    "research/experiments/EXP-RUNTIME-35749360317/result.json (metrics, controls C1-C8 PASS, artifacts, observations 300 lines, validity_notes degenerate CI)",
+    "research/experiments/EXP-RUNTIME-35749360317/report.md (sections 2-7, pre-measurement fix disclosure)",
+    "research/experiments/EXP-RUNTIME-35749360317/provenance.json (env Flask 3.1.3 PyJWT 2.14.0 SQLite 3.45.1, port 19849, SEED 44, artifact SHAs)",
+    "research/experiments/EXP-RUNTIME-35749360317/raw_observations.jsonl (sha256 012c725382c2025b674d0db0a66fa8794a98a2c267a1de623835daa02db511d1, 300 lines, recomputed 0 mismatches)",
+    "research/experiments/EXP-RUNTIME-35749360317/batch_state_log.jsonl (sha256 8ddb71cdf4dec7d77c89c6f5046f8851e48e1f25b558cac9fc5fbe7d93c55e42, 27 lines, 12 writes verified, 15 pre-batch verifies)",
+    "research/experiments/EXP-RUNTIME-35749360317/experiment_result.json (sha256 7fc67a8bd7fa6c2d93bb3cb311fdbd3c60404824495b5a822212a070fc2c2360, derived metrics)",
+    "research/experiments/EXP-RUNTIME-35749360317/run_experiment.py (sha256 4d61198ce45c750e15d858c076589ee77a7738e3f7d41396b20727075d0e9c2e, compute_fingerprint identical to parent EXP-RUNTIME-35741906498)",
+    "research/experiments/EXP-RUNTIME-35741906498/handoff.json (parent header-only EXPERIMENTAL ceiling, sha 6e8a1eaa...)"
+  ],
+  "unresolved": [
+    "Role-column-driven permission-filtered body (two tokens reader vs admin, same body_config) not separately measured; C7(a) realized via body_config variant A vs C per frozen rule — remains untested as distinct mechanism.",
+    "Production middleware generalization (gunicorn, nginx, CDN, load balancer, Django/Express/FastAPI) untested — localhost Werkzeug only.",
+    "Concurrency, HTTP/2, TLS, multi-client, non-deterministic header emission untested.",
+    "Non-degenerate bootstrap CI cannot be obtained on this deterministic substrate; genuine CI requires nondeterministic body/header source (e.g., real CDN).",
+    "Body magnitude gradient beyond 31/70/117 and per-field sensitivity ordering uncharacterized — all variants hit ceiling 1.0, no discrimination ordering.",
+    "Distributed SQLite replication / Redis shared session for distributed C-FRESHNESS and C-DELTA-REPAIR remains blocked; localhost synthetic testing only unblocked for both branches per product_consequence_positive.",
+    "Vary header alone, per-header gradient, header ordering/whitespace/case folding beyond fixed values not tested (held constant)."
+  ]
+}
