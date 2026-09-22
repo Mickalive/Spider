@@ -1,0 +1,596 @@
+{
+  "experiment_id": "EXP-RUNTIME-35741906498",
+  "lane": "runtime",
+  "started_at": "2026-09-22T15:23:53.824017+00:00",
+  "finished_at": "2026-09-22T15:24:12.078899+00:00",
+  "seed": 44,
+  "n_samples_per_batch": 20,
+  "jitter_ms": [
+    50,
+    150
+  ],
+  "bootstrap_b": 1000,
+  "excluded_headers": [
+    "Date",
+    "Server",
+    "X-Request-Id"
+  ],
+  "states": {
+    "A": {
+      "cache_control": "max-age=3600",
+      "etag": "W/\"aaa-111\"",
+      "vary": "Accept-Encoding",
+      "set_cookie": ""
+    },
+    "B": {
+      "cache_control": "max-age=0, must-revalidate",
+      "etag": "W/\"aaa-111\"",
+      "vary": "Accept-Encoding",
+      "set_cookie": ""
+    },
+    "C": {
+      "cache_control": "max-age=3600",
+      "etag": "W/\"bbb-222\"",
+      "vary": "Accept-Encoding",
+      "set_cookie": ""
+    },
+    "D": {
+      "cache_control": "max-age=3600",
+      "etag": "W/\"aaa-111\"",
+      "vary": "Accept-Encoding",
+      "set_cookie": "session=hdrdrift; Path=/; HttpOnly"
+    },
+    "E": {
+      "cache_control": "max-age=0, must-revalidate",
+      "etag": "W/\"bbb-222\"",
+      "vary": "Accept-Encoding, Origin",
+      "set_cookie": "session=hdrdrift; Path=/; HttpOnly"
+    }
+  },
+  "resource_body_sha256": "d0ca833f843c6d70ec9d6755f52a92dcbfc8b4ab601b871bced09ad027172e34",
+  "raw_line_count": 180,
+  "validity": {
+    "checks": {
+      "server_state_committed_before_every_write": true,
+      "header_config_verified_before_every_batch": true,
+      "all_observations_status_200": true,
+      "expected_headers_present_all_observations": true,
+      "body_sha_identical_across_A_to_E": true,
+      "content_length_identical_across_A_to_E": true,
+      "body_len_identical_across_A_to_E": true,
+      "raw_line_count_per_batch_is_20": true,
+      "total_raw_lines": 180,
+      "excluded_headers_unchanged": true,
+      "fingerprint_algorithm_matches_parent": true
+    },
+    "batch_counts": {
+      "A": 20,
+      "B": 20,
+      "C": 20,
+      "D": 20,
+      "E": 20,
+      "null_E1": 20,
+      "null_E2": 20,
+      "null_A1": 20,
+      "null_A2": 20
+    },
+    "critical_all_pass": true,
+    "failed_critical": []
+  },
+  "identity_checks": {
+    "body_sha256_by_state": {
+      "A": [
+        "d0ca833f843c6d70ec9d6755f52a92dcbfc8b4ab601b871bced09ad027172e34"
+      ],
+      "B": [
+        "d0ca833f843c6d70ec9d6755f52a92dcbfc8b4ab601b871bced09ad027172e34"
+      ],
+      "C": [
+        "d0ca833f843c6d70ec9d6755f52a92dcbfc8b4ab601b871bced09ad027172e34"
+      ],
+      "D": [
+        "d0ca833f843c6d70ec9d6755f52a92dcbfc8b4ab601b871bced09ad027172e34"
+      ],
+      "E": [
+        "d0ca833f843c6d70ec9d6755f52a92dcbfc8b4ab601b871bced09ad027172e34"
+      ]
+    },
+    "content_length_by_state": {
+      "A": [
+        "31"
+      ],
+      "B": [
+        "31"
+      ],
+      "C": [
+        "31"
+      ],
+      "D": [
+        "31"
+      ],
+      "E": [
+        "31"
+      ]
+    },
+    "body_len_by_state": {
+      "A": [
+        31
+      ],
+      "B": [
+        31
+      ],
+      "C": [
+        31
+      ],
+      "D": [
+        31
+      ],
+      "E": [
+        31
+      ]
+    },
+    "body_sha_identical_across_A_to_E": true,
+    "content_length_identical_across_A_to_E": true,
+    "body_len_identical_across_A_to_E": true,
+    "distinct_body_sha256_count": 1,
+    "distinct_content_length_count": 1
+  },
+  "metrics": {
+    "header_drift_full": {
+      "discrimination": 1.0,
+      "ci_95_lower": 1.0,
+      "ci_95_upper": 1.0,
+      "set_a_size": 1,
+      "set_b_size": 1,
+      "nominal_n_a": 20,
+      "nominal_n_b": 20,
+      "comparison": "A vs E",
+      "source": "full",
+      "degenerate_ci": true
+    },
+    "header_drift_status": {
+      "discrimination": 0.0,
+      "ci_95_lower": 0.0,
+      "ci_95_upper": 0.0,
+      "set_a_size": 1,
+      "set_b_size": 1,
+      "nominal_n_a": 20,
+      "nominal_n_b": 20,
+      "comparison": "A vs E",
+      "source": "status",
+      "degenerate_ci": true
+    },
+    "header_drift_body": {
+      "discrimination": 0.0,
+      "ci_95_lower": 0.0,
+      "ci_95_upper": 0.0,
+      "set_a_size": 1,
+      "set_b_size": 1,
+      "nominal_n_a": 20,
+      "nominal_n_b": 20,
+      "comparison": "A vs E",
+      "source": "body",
+      "degenerate_ci": true
+    },
+    "header_drift_headers": {
+      "discrimination": 1.0,
+      "ci_95_lower": 1.0,
+      "ci_95_upper": 1.0,
+      "set_a_size": 1,
+      "set_b_size": 1,
+      "nominal_n_a": 20,
+      "nominal_n_b": 20,
+      "comparison": "A vs E",
+      "source": "headers",
+      "degenerate_ci": true
+    },
+    "cache_only_full": {
+      "discrimination": 1.0,
+      "ci_95_lower": 1.0,
+      "ci_95_upper": 1.0,
+      "set_a_size": 1,
+      "set_b_size": 1,
+      "nominal_n_a": 20,
+      "nominal_n_b": 20,
+      "comparison": "A vs B",
+      "source": "full",
+      "degenerate_ci": true
+    },
+    "cache_only_status": {
+      "discrimination": 0.0,
+      "ci_95_lower": 0.0,
+      "ci_95_upper": 0.0,
+      "set_a_size": 1,
+      "set_b_size": 1,
+      "nominal_n_a": 20,
+      "nominal_n_b": 20,
+      "comparison": "A vs B",
+      "source": "status",
+      "degenerate_ci": true
+    },
+    "cache_only_body": {
+      "discrimination": 0.0,
+      "ci_95_lower": 0.0,
+      "ci_95_upper": 0.0,
+      "set_a_size": 1,
+      "set_b_size": 1,
+      "nominal_n_a": 20,
+      "nominal_n_b": 20,
+      "comparison": "A vs B",
+      "source": "body",
+      "degenerate_ci": true
+    },
+    "cache_only_headers": {
+      "discrimination": 1.0,
+      "ci_95_lower": 1.0,
+      "ci_95_upper": 1.0,
+      "set_a_size": 1,
+      "set_b_size": 1,
+      "nominal_n_a": 20,
+      "nominal_n_b": 20,
+      "comparison": "A vs B",
+      "source": "headers",
+      "degenerate_ci": true
+    },
+    "etag_only_full": {
+      "discrimination": 1.0,
+      "ci_95_lower": 1.0,
+      "ci_95_upper": 1.0,
+      "set_a_size": 1,
+      "set_b_size": 1,
+      "nominal_n_a": 20,
+      "nominal_n_b": 20,
+      "comparison": "A vs C",
+      "source": "full",
+      "degenerate_ci": true
+    },
+    "etag_only_status": {
+      "discrimination": 0.0,
+      "ci_95_lower": 0.0,
+      "ci_95_upper": 0.0,
+      "set_a_size": 1,
+      "set_b_size": 1,
+      "nominal_n_a": 20,
+      "nominal_n_b": 20,
+      "comparison": "A vs C",
+      "source": "status",
+      "degenerate_ci": true
+    },
+    "etag_only_body": {
+      "discrimination": 0.0,
+      "ci_95_lower": 0.0,
+      "ci_95_upper": 0.0,
+      "set_a_size": 1,
+      "set_b_size": 1,
+      "nominal_n_a": 20,
+      "nominal_n_b": 20,
+      "comparison": "A vs C",
+      "source": "body",
+      "degenerate_ci": true
+    },
+    "etag_only_headers": {
+      "discrimination": 1.0,
+      "ci_95_lower": 1.0,
+      "ci_95_upper": 1.0,
+      "set_a_size": 1,
+      "set_b_size": 1,
+      "nominal_n_a": 20,
+      "nominal_n_b": 20,
+      "comparison": "A vs C",
+      "source": "headers",
+      "degenerate_ci": true
+    },
+    "cookie_only_full": {
+      "discrimination": 1.0,
+      "ci_95_lower": 1.0,
+      "ci_95_upper": 1.0,
+      "set_a_size": 1,
+      "set_b_size": 1,
+      "nominal_n_a": 20,
+      "nominal_n_b": 20,
+      "comparison": "A vs D",
+      "source": "full",
+      "degenerate_ci": true
+    },
+    "cookie_only_status": {
+      "discrimination": 0.0,
+      "ci_95_lower": 0.0,
+      "ci_95_upper": 0.0,
+      "set_a_size": 1,
+      "set_b_size": 1,
+      "nominal_n_a": 20,
+      "nominal_n_b": 20,
+      "comparison": "A vs D",
+      "source": "status",
+      "degenerate_ci": true
+    },
+    "cookie_only_body": {
+      "discrimination": 0.0,
+      "ci_95_lower": 0.0,
+      "ci_95_upper": 0.0,
+      "set_a_size": 1,
+      "set_b_size": 1,
+      "nominal_n_a": 20,
+      "nominal_n_b": 20,
+      "comparison": "A vs D",
+      "source": "body",
+      "degenerate_ci": true
+    },
+    "cookie_only_headers": {
+      "discrimination": 1.0,
+      "ci_95_lower": 1.0,
+      "ci_95_upper": 1.0,
+      "set_a_size": 1,
+      "set_b_size": 1,
+      "nominal_n_a": 20,
+      "nominal_n_b": 20,
+      "comparison": "A vs D",
+      "source": "headers",
+      "degenerate_ci": true
+    },
+    "null_control_full": {
+      "discrimination": 0.0,
+      "ci_95_lower": 0.0,
+      "ci_95_upper": 0.0,
+      "set_a_size": 1,
+      "set_b_size": 1,
+      "nominal_n_a": 20,
+      "nominal_n_b": 20,
+      "comparison": "null_A1 vs null_A2",
+      "source": "full",
+      "degenerate_ci": true
+    },
+    "null_control_status": {
+      "discrimination": 0.0,
+      "ci_95_lower": 0.0,
+      "ci_95_upper": 0.0,
+      "set_a_size": 1,
+      "set_b_size": 1,
+      "nominal_n_a": 20,
+      "nominal_n_b": 20,
+      "comparison": "null_A1 vs null_A2",
+      "source": "status",
+      "degenerate_ci": true
+    },
+    "null_control_body": {
+      "discrimination": 0.0,
+      "ci_95_lower": 0.0,
+      "ci_95_upper": 0.0,
+      "set_a_size": 1,
+      "set_b_size": 1,
+      "nominal_n_a": 20,
+      "nominal_n_b": 20,
+      "comparison": "null_A1 vs null_A2",
+      "source": "body",
+      "degenerate_ci": true
+    },
+    "null_control_headers": {
+      "discrimination": 0.0,
+      "ci_95_lower": 0.0,
+      "ci_95_upper": 0.0,
+      "set_a_size": 1,
+      "set_b_size": 1,
+      "nominal_n_a": 20,
+      "nominal_n_b": 20,
+      "comparison": "null_A1 vs null_A2",
+      "source": "headers",
+      "degenerate_ci": true
+    },
+    "null_e_exploratory_full": {
+      "discrimination": 0.0,
+      "ci_95_lower": 0.0,
+      "ci_95_upper": 0.0,
+      "set_a_size": 1,
+      "set_b_size": 1,
+      "nominal_n_a": 20,
+      "nominal_n_b": 20,
+      "comparison": "null_E1 vs null_E2",
+      "source": "full",
+      "degenerate_ci": true
+    },
+    "null_e_exploratory_status": {
+      "discrimination": 0.0,
+      "ci_95_lower": 0.0,
+      "ci_95_upper": 0.0,
+      "set_a_size": 1,
+      "set_b_size": 1,
+      "nominal_n_a": 20,
+      "nominal_n_b": 20,
+      "comparison": "null_E1 vs null_E2",
+      "source": "status",
+      "degenerate_ci": true
+    },
+    "null_e_exploratory_body": {
+      "discrimination": 0.0,
+      "ci_95_lower": 0.0,
+      "ci_95_upper": 0.0,
+      "set_a_size": 1,
+      "set_b_size": 1,
+      "nominal_n_a": 20,
+      "nominal_n_b": 20,
+      "comparison": "null_E1 vs null_E2",
+      "source": "body",
+      "degenerate_ci": true
+    },
+    "null_e_exploratory_headers": {
+      "discrimination": 0.0,
+      "ci_95_lower": 0.0,
+      "ci_95_upper": 0.0,
+      "set_a_size": 1,
+      "set_b_size": 1,
+      "nominal_n_a": 20,
+      "nominal_n_b": 20,
+      "comparison": "null_E1 vs null_E2",
+      "source": "headers",
+      "degenerate_ci": true
+    },
+    "effective_distinct_n": {
+      "A": {
+        "full": 1,
+        "status": 1,
+        "body": 1,
+        "headers": 1
+      },
+      "B": {
+        "full": 1,
+        "status": 1,
+        "body": 1,
+        "headers": 1
+      },
+      "C": {
+        "full": 1,
+        "status": 1,
+        "body": 1,
+        "headers": 1
+      },
+      "D": {
+        "full": 1,
+        "status": 1,
+        "body": 1,
+        "headers": 1
+      },
+      "E": {
+        "full": 1,
+        "status": 1,
+        "body": 1,
+        "headers": 1
+      },
+      "null_A1": {
+        "full": 1,
+        "status": 1,
+        "body": 1,
+        "headers": 1
+      },
+      "null_A2": {
+        "full": 1,
+        "status": 1,
+        "body": 1,
+        "headers": 1
+      },
+      "null_E1": {
+        "full": 1,
+        "status": 1,
+        "body": 1,
+        "headers": 1
+      },
+      "null_E2": {
+        "full": 1,
+        "status": 1,
+        "body": 1,
+        "headers": 1
+      }
+    }
+  },
+  "conditions": {
+    "C1_FULL_HEADER_DRIFT": {
+      "expected": "full-vector discrimination > 0.5 on A vs E",
+      "observed": 1.0,
+      "threshold": 0.5,
+      "pass": true,
+      "evidence": "metrics.header_drift_full; identity body/status checks"
+    },
+    "C2_HEADERS_ONLY_SIGNAL": {
+      "expected": "B-HEADERS-ONLY > 0.5 on A vs E and >= 2/3 isolations",
+      "observed": {
+        "header_drift_headers": 1.0,
+        "isolation_headers": {
+          "cache_only": 1.0,
+          "etag_only": 1.0,
+          "cookie_only": 1.0
+        },
+        "isolation_pass_count": 3
+      },
+      "threshold": ">0.5 on A vs E and >=2/3 isolations",
+      "pass": true,
+      "evidence": "metrics.header_drift_headers, cache_only_headers, etag_only_headers, cookie_only_headers"
+    },
+    "C3_BODY_STATUS_ISOLATED": {
+      "expected": "status-only = 0.0 and body-only = 0.0 on A vs E + isolations",
+      "observed": {
+        "header_drift_status": 0.0,
+        "header_drift_body": 0.0,
+        "cache_only_status": 0.0,
+        "cache_only_body": 0.0,
+        "etag_only_status": 0.0,
+        "etag_only_body": 0.0,
+        "cookie_only_status": 0.0,
+        "cookie_only_body": 0.0
+      },
+      "threshold": "= 0.0 (all pairs)",
+      "pass": true,
+      "evidence": "metrics.*_status, metrics.*_body"
+    },
+    "C4_FULL_EXCEEDS_BASELINES_NONVACUOUS": {
+      "expected": "full > max(status-only, body-only) strictly on A vs E",
+      "observed": {
+        "full": 1.0,
+        "status": 0.0,
+        "body": 0.0,
+        "max_baseline": 0.0
+      },
+      "threshold": "strictly greater (1.0 > 0.0 non-vacuous)",
+      "pass": true,
+      "evidence": "metrics.header_drift_full vs header_drift_status/body"
+    },
+    "C5_NULL_NO_FALSE_POSITIVE": {
+      "expected": "null A1 vs A2 full = 0.0, CI contains 0.0, point <= 0.05",
+      "observed": {
+        "full": 0.0,
+        "ci_95": [
+          0.0,
+          0.0
+        ],
+        "status": 0.0,
+        "body": 0.0
+      },
+      "threshold": "= 0.0, CI contains 0.0, <= 0.05",
+      "pass": true,
+      "evidence": "metrics.null_control_full/status/body"
+    },
+    "C6_CONTENT_LENGTH_IDENTITY": {
+      "expected": "Content-Length identical across A/B/C/D/E and body_len equal",
+      "observed": {
+        "content_length_by_state": {
+          "A": [
+            "31"
+          ],
+          "B": [
+            "31"
+          ],
+          "C": [
+            "31"
+          ],
+          "D": [
+            "31"
+          ],
+          "E": [
+            "31"
+          ]
+        },
+        "body_len_by_state": {
+          "A": [
+            31
+          ],
+          "B": [
+            31
+          ],
+          "C": [
+            31
+          ],
+          "D": [
+            31
+          ],
+          "E": [
+            31
+          ]
+        }
+      },
+      "threshold": "single identical value across states",
+      "pass": true,
+      "evidence": "identity_checks (raw Content-Length per observation)"
+    }
+  },
+  "status": "COMPLETE",
+  "decision_rule_outcome": "SUPPORTS",
+  "failing_conditions": []
+}

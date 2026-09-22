@@ -1,0 +1,132 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-35741906498",
+  "lane": "runtime",
+  "github_run_id": "35741906498",
+  "github_run_attempt": 1,
+  "commits": {
+    "request_base_sha": "e606e040dfa1154aa4bae2ae4b456f81fd16781c",
+    "freeze_commit": "9ed7c1a1ef212a3ad93b7c24e9c12b36be78c41c",
+    "execution_base_sha": "d474f13ed0e194ef7228f7f350692e3a4b60f194",
+    "head_sha_at_execution": "d474f13ed0e194ef7228f7f350692e3a4b60f194"
+  },
+  "design_inputs": {
+    "request.json_sha256": "b2a59d9244cf4302722d0504d4523c23c73984fc3f6badbd037400c8b81e7222",
+    "spec.json_sha256": "80e8cef6a256201c8cfb64f296c87c24fcc8085f83f95b96132c96e5ecad7c7c",
+    "prereg.md_sha256": "1143ca059319a5dd083a18fb08116a36a2a6398fad97c3a78787257cf207c3df",
+    "parent_handoff_sha256": "d3144036f4663aabfd22b0fc44386f8d067f3da8cf3ced65b53a400e270d2f43"
+  },
+  "environment": {
+    "python": "3.12.14",
+    "flask": "3.1.3",
+    "pyjwt": "2.14.0",
+    "requests": "2.34.2",
+    "sqlite": "3.45.1",
+    "platform": "Linux-6.17.0-1022-azure-x86_64-with-glibc2.39",
+    "host": "runnervmlun5p",
+    "server_endpoint": "http://127.0.0.1:19848",
+    "db_path": "/tmp/spider_hdrdrift_testbed.db",
+    "db_mode": "SQLite WAL",
+    "jwt_algorithm": "HS256",
+    "jwt_secret_note": "test-only fixed secret; not production material"
+  },
+  "fixtures": {
+    "seed": 44,
+    "n_samples_per_batch": 20,
+    "jitter_ms": [
+      50,
+      150
+    ],
+    "bootstrap_b": 1000,
+    "bootstrap_alpha": 0.05,
+    "excluded_headers": [
+      "Date",
+      "Server",
+      "X-Request-Id"
+    ],
+    "header_states": {
+      "A": {
+        "cache_control": "max-age=3600",
+        "etag": "W/\"aaa-111\"",
+        "vary": "Accept-Encoding",
+        "set_cookie": ""
+      },
+      "B": {
+        "cache_control": "max-age=0, must-revalidate",
+        "etag": "W/\"aaa-111\"",
+        "vary": "Accept-Encoding",
+        "set_cookie": ""
+      },
+      "C": {
+        "cache_control": "max-age=3600",
+        "etag": "W/\"bbb-222\"",
+        "vary": "Accept-Encoding",
+        "set_cookie": ""
+      },
+      "D": {
+        "cache_control": "max-age=3600",
+        "etag": "W/\"aaa-111\"",
+        "vary": "Accept-Encoding",
+        "set_cookie": "session=hdrdrift; Path=/; HttpOnly"
+      },
+      "E": {
+        "cache_control": "max-age=0, must-revalidate",
+        "etag": "W/\"bbb-222\"",
+        "vary": "Accept-Encoding, Origin",
+        "set_cookie": "session=hdrdrift; Path=/; HttpOnly"
+      }
+    },
+    "resource_body_sha256": "d0ca833f843c6d70ec9d6755f52a92dcbfc8b4ab601b871bced09ad027172e34",
+    "batch_sequence": [
+      "write A; batch A; write B; batch B; write C; batch C; write D; batch D; write E; batch E; batch null_E1; batch null_E2; write A; batch null_A1; batch null_A2"
+    ]
+  },
+  "code_paths": [
+    "research/experiments/EXP-RUNTIME-35741906498/run_experiment.py",
+    "research/experiments/EXP-RUNTIME-35741906498/build_packet.py",
+    "research/experiments/EXP-RUNTIME-35697043449/run_experiment.py (parent fingerprint algorithm source)"
+  ],
+  "commands": [
+    "python3 run_experiment.py --smoke   # setup verification only",
+    "python3 run_experiment.py           # full frozen execution",
+    "python3 build_packet.py             # canonical packet emission"
+  ],
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-RUNTIME-35741906498/run_experiment.py",
+      "sha256": "47ff8910c3d9cc95c9a20e223faa5a212be1d11aa73ac43df6fc0142d5b43e87",
+      "role": "code"
+    },
+    {
+      "path": "research/experiments/EXP-RUNTIME-35741906498/raw_observations.jsonl",
+      "sha256": "3883b538c9d8d57d6b0a0eaefb1100cdfd5420b8c1faecbea5972c91a34e2f92",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-RUNTIME-35741906498/batch_state_log.jsonl",
+      "sha256": "1e0cc63152bb74b547c1c13a2e6ba3fee67c83d3792135bd9169534a612eb47b",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-RUNTIME-35741906498/experiment_result.json",
+      "sha256": "23b77d24546daa892cf5148e6658d051bd6de68ed4069ed8256ef9232c2aae7b",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-RUNTIME-35741906498/build_packet.py",
+      "sha256": "822083fb78fa91092f698eac85adb592503d9ccac7c65a56907449881db1bb82",
+      "role": "code"
+    },
+    {
+      "path": "research/experiments/EXP-RUNTIME-35741906498/report.md",
+      "sha256": "e85a267d344dbd34f64af0429ce5e0f32773189efa2e2401e7ee8982fa70fcc3",
+      "role": "canonical-packet"
+    }
+  ],
+  "notes": [
+    "Working tree contained pre-existing factory modifications to .github/ and scripts/validate_repo.py at execution time; those files were not touched by this EXECUTE stage.",
+    "No git commit/push/switch/reset performed by EXECUTE.",
+    "Timing: full run completed in one pass; no retries required.",
+    "result.json is the terminal canonical file of EXECUTE; its own SHA-256 is not self-referenced inside any EXECUTE-produced file (AUDIT/DIRECTOR recompute it from the file content)."
+  ]
+}
