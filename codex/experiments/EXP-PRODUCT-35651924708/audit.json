@@ -1,0 +1,184 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-35651924708",
+  "lane": "product",
+  "status": "BLOCKED",
+  "producer_claim_supported": false,
+  "required_fixes": [
+    "Provision a single LLM API credential (OPENAI_API_KEY with gpt-4o-mini or equivalent per spec measurement_validity[1]) — without it 0/120 task×condition×rep executions can be performed. Producer provenance.json correctly identifies INFRASTRUCTURE_MISSING_CREDENTIAL; validity_notes correctly state BLOCKED is not falsification per EXPERIMENT_PACKET.md. Estimated cost ~120K tokens (~$0.12-$1.20). Re-run frozen harness via reproduction recipe in provenance.json.",
+    "Do not substitute mocks, caching, or simulated LLM responses to bypass credential requirement — frozen spec prereg.md 3 and spec.json measurement_validity[1] require real API calls with recorded prompts, responses, tokens, latency and verification via usage.prompt_tokens+completion_tokens. Any mock would violate frozen design and produce MEASUREMENT_INVALID.",
+    "On retry, record exact model ID, provider, pricing snapshot, and per-execution token breakdown (M-TOKENS, M-TOKEN-BREAKDOWN) to enable end-to-end economics audit mandated by product lane charter; re-verify JSONPlaceholder task verifiability (status/schema/content) per M-SUCCESS definition before LLM loop."
+  ],
+  "validity_findings": [
+    {
+      "finding": "Frozen input integrity preserved",
+      "severity": "info",
+      "detail": "Recomputed SHA256 of frozen inputs matches freeze.json: request.json 1410d3f28eb6c50a6c1cec91b6fba6589470b1e19d1746f57fe4219dbe398e4d, spec.json d15c19b471b1a242d4e9fd00f36cf5c3026190869fef99b2f5edb295f7c0ca8d, prereg.md 9e4c0dc5791ce6d3f638563e510a17764bef1d65425ca1cd7baa3337744187f7. No frozen files modified during execution attempt; report.md integrity table correctly reflects these hashes. design->execute transmission valid.",
+      "evidence_ref": "research/experiments/EXP-PRODUCT-35651924708/freeze.json -> hashes, research/experiments/EXP-PRODUCT-35651924708/request.json, spec.json, prereg.md (recomputed verbatim)"
+    },
+    {
+      "finding": "BLOCKED status correctly applied — infrastructure failure not encoded as falsification",
+      "severity": "info",
+      "detail": "Producer result.json status=BLOCKED outcome=NOT_APPLICABLE with metrics={}, controls={}, artifacts=[] and observations OBS-INFRA-BLOCKER / OBS-DEPENDENCIES-VERIFIED. Validity_notes correctly cite EXPERIMENT_PACKET.md: 'A valid scientific negative is normally status=COMPLETE with outcome=FALSIFIES or MIXED, not an execution failure.' Director mandate in request.json director_mandate.rationale explicitly anticipates this blocker ('infrastructure blocker (no API keys) is real but the experiment design can proceed now'). Producer does not advance, falsify, or weaken C-LLM-INHERIT; audit independently verified 0/120 executions feasible.",
+      "evidence_ref": "research/experiments/EXP-PRODUCT-35651924708/result.json -> status, outcome, observations[OBS-INFRA-BLOCKER], validity_notes[0..3]; research/EXPERIMENT_PACKET.md section 4; research/experiments/EXP-PRODUCT-35651924708/request.json -> director_mandate.rationale"
+    },
+    {
+      "finding": "API key absence independently verified; environment otherwise functional",
+      "severity": "info",
+      "detail": "Independent recomputation via env check: OPENAI_API_KEY length 0, ANTHROPIC_API_KEY 0, GOOGLE_API_KEY 0, OPENROUTER_API_KEY 0, HF_TOKEN 0 — all absent as producer reports. Packages openai 3.16.2, requests 2.34.2, numpy 2.5.3 installed, Python 3.12 linux, JSONPlaceholder GET https://jsonplaceholder.typicode.com/posts/1 returns HTTP 200 with expected JSON (verified via curl HEAD 200, cloudflare, etag W/...). Provenance environment.api_keys_available=[] matches. No alternative credential path overlooked; no simulated LLM fallback attempted (correct per spec).",
+      "evidence_ref": "research/experiments/EXP-PRODUCT-35651924708/result.json -> observations[OBS-INFRA-BLOCKER, OBS-DEPENDENCIES-VERIFIED]; research/experiments/EXP-PRODUCT-35651924708/provenance.json -> environment.api_keys_checked/available, installed_packages; independent env | grep and curl -I verification 2026-09-21T20:43:26Z"
+    },
+    {
+      "finding": "Measurement validity contract respected — no hidden mock or partial measurement",
+      "severity": "info",
+      "detail": "Spec measurement_validity[1] requires real API with recorded prompts/responses/tokens/latency 'no mocks, no caching, no simulated responses'. Producer reports 0 measurements taken, no controls exercised, no baselines run. Audit confirms no partial LLM calls, no artifact with synthetic tokens, no undisclosed mock harness. This preserves RAW_EVIDENCE -> OBSERVATION chain and prevents infrastructure failure being misread as negative result (AGENTS.md evidence distinction).",
+      "evidence_ref": "research/experiments/EXP-PRODUCT-35651924708/spec.json -> measurement_validity[0..7]; research/experiments/EXP-PRODUCT-35651924708/provenance.json -> artifacts_produced=[], commands_executed=[pip install, import openai, env grep]; result.json -> artifacts=[]"
+    },
+    {
+      "finding": "Provenance correctly records failure and reproduction recipe",
+      "severity": "info",
+      "detail": "provenance.json includes github_run_id 35651924708, execution_timestamp, platform linux python 3.x, installed_packages versions matching observations, api_keys_checked list, external_services.jsonplaceholder accessible true, frozen_files with sha256 paths, parent_handoff EXP-PRODUCT-35611617123 sha b052a347..., failure_category INFRASTRUCTURE_MISSING_CREDENTIAL with description covering all five keys, reproduction_recipe 'Set OPENAI_API_KEY ... python3 research/experiments/EXP-PRODUCT-35651924708/run_experiment.py'. No hash mismatch, no missing frozen file.",
+      "evidence_ref": "research/experiments/EXP-PRODUCT-35651924708/provenance.json -> schema_version 1, frozen_files, failure_category, reproduction_recipe"
+    },
+    {
+      "finding": "Target/split/sampling design coherent but externally narrow — if unblocked, environment could express effect within stated ceiling only",
+      "severity": "medium",
+      "detail": "Frozen design: 10 JSONPlaceholder tasks T1-T10 spanning 0/25/50/75/100% novelty by construction (T1 identical, T2-T3 same endpoint different ID, T4-T5 different endpoint same resource, T6-T7 different resource same API, T8-T10 unseen structure/POST/PUT). Split: 6 tasks x3 reps=18 observations per condition in primary 25-75% range, 120 total executions, 5000-sample paired bootstrap two-sided alpha 0.05. Sampling: each task×condition executed independently with fresh LLM context, randomized order, no cross-contamination per spec/prereg 7-8. Representation loss acknowledged: JSONPlaceholder is synthetic REST API with deterministic JSON responses, no DOM, no auth, no multi-step browser interaction; prereg 10.2 notes 'JSONPlaceholder simplicity' and 'REST API only (no DOM)' as ceilings. Cost weighting M-TOTAL-COST = TOKENS+10*BROWSER+5*VERIFY is arbitrary (prereg 10.3 notes sensitivity analysis required). If unblocked, the design could discriminate cost within this synthetic API ceiling at n=18 per condition for medium effects (d>0.5) but cannot support claims about real Web DOM, WebArena, or cross-site transfer without replication.",
+      "evidence_ref": "research/experiments/EXP-PRODUCT-35651924708/spec.json -> measurement_validity[2..3], decision_rule; research/experiments/EXP-PRODUCT-35651924708/prereg.md -> 3.2 task design, 5 metrics (M-TOTAL-COST), 7 sampling, 8.1 primary analysis, 10 validity threats; request.json -> director_mandate question"
+    },
+    {
+      "finding": "No leakage or identifiability issue — but also no test because no execution",
+      "severity": "info",
+      "detail": "Design prevents leakage: fresh LLM context per execution, training T1-T3 for mechanism induction held out from testing T4-T10, tasks from same JSONPlaceholder API but distinct IDs/endpoints. No data carried across conditions. No identifiability alternative can be tested because no executions. Null representation (NC-NO-MECHANISM) and positive control (PC-IDENTICAL) correctly isolated per spec but not exercised.",
+      "evidence_ref": "research/experiments/EXP-PRODUCT-35651924708/spec.json -> positive_control PC-IDENTICAL, null_control NC-NO-MECHANISM; research/experiments/EXP-PRODUCT-35651924708/prereg.md -> 3.3, 6.1, 6.2"
+    },
+    {
+      "finding": "Missing evidence is not a negative result — C-LLM-INHERIT ceiling unchanged",
+      "severity": "high",
+      "detail": "Producer validity_notes[3] correctly states 'This BLOCKED status does NOT advance, falsify, or weaken C-LLM-INHERIT. The claim remains HYPOTHESIS'. Audit confirms: with zero material metrics, no control passes/fails, no baseline comparison, there is no observation to support or reject hypothesis H: 'parameterized mechanism inheritance reduces total workflow cost in 25-75% novelty'. The distinction RAW_EVIDENCE -> OBSERVATION -> DERIVED_MEASUREMENT remains empty; no interpretation can be made. Infrastructure failure must not be read as FALSIFIES for product economics.",
+      "evidence_ref": "research/experiments/EXP-PRODUCT-35651924708/result.json -> metrics={}, controls={}, validity_notes[3], unresolved; codex/claim_state.json -> C-LLM-INHERIT last status HYPOTHESIS bounded to 2-site corpus (EXP-INTEL-35131994346 etc.)"
+    }
+  ],
+  "baseline_findings": [
+    {
+      "baseline_id": "B-COLD",
+      "strength": "strong_on_paper",
+      "expected": "Cold exploration: LLM with no prior knowledge, prompted only with task goal + general Web navigation instructions. Should succeed via exploration at highest cost. If SPIDER cannot beat cold, mechanism inheritance provides no value (spec baselines[0] rationale).",
+      "observed": "Not executed (0/30 executions for B-COLD: 10 tasks x3 reps). No token/browser/verify measurements. Producer reports no baselines run. Audit independently verified 0 executions due to missing API key; no partial data to assess baseline strength empirically.",
+      "passes": false,
+      "issue": "Design baseline is appropriately zero-knowledge and strong for cost comparison, but untested. Strength cannot be validated without real LLM calls. No evidence of prompt adequacy or failure mode on JSONPlaceholder.",
+      "evidence_ref": "research/experiments/EXP-PRODUCT-35651924708/spec.json -> baselines[0] B-COLD; research/experiments/EXP-PRODUCT-35651924708/prereg.md -> 4.1; research/experiments/EXP-PRODUCT-35651924708/result.json -> controls={}, metrics={}"
+    },
+    {
+      "baseline_id": "B-LITERAL",
+      "strength": "strong_on_paper",
+      "expected": "Literal trajectory replay: exact action sequence from prior successful trajectory (e.g., GET https://jsonplaceholder.typicode.com/posts/1 -> verify 200 -> extract body). Represents commoditized exact-workflow replay (TERX/HyperAgent/BrowserBash). Tests whether parameterization adds value over literal replay.",
+      "observed": "Not executed (0/30). No measurement of literal replay cost/success on novel IDs/endpoints. Design expects literal to be optimal at 0% novelty (PC-IDENTICAL) and to fail/overfit at 25-75% novelty.",
+      "passes": false,
+      "issue": "Design baseline correctly contrasts commoditized replay; untested. Whether literal replay with LLM adaptation vs strict replay matters is underspecified in prereg 4.2, but design is adequate for hypothesis.",
+      "evidence_ref": "research/experiments/EXP-PRODUCT-35651924708/spec.json -> baselines[1] B-LITERAL; research/experiments/EXP-PRODUCT-35651924708/prereg.md -> 4.2"
+    },
+    {
+      "baseline_id": "B-RETRIEVAL",
+      "strength": "strong_on_paper",
+      "expected": "Semantic retrieval over trajectories: top-3 similar prior trajectories via cosine similarity over task descriptions, agent must adapt retrieved trajectories to current task. Represents RAG-over-trajectories strongest memory baseline (WebCoach/HMT). Tests mechanism-level vs trajectory-level inheritance.",
+      "observed": "Not executed (0/30). No retrieval latency/cost, no similarity threshold, no adaptation success data. Embedding model not specified in spec (prereg 10.1 notes 'same embedding model' but without identifier).",
+      "passes": false,
+      "issue": "Design baseline is the strongest memory baseline and appropriate strong null for C-LLM-INHERIT, but underspecified embedding implementation and untested retrieval quality on JSONPlaceholder task descriptions (which are highly similar). If unblocked, retrieval may overlap heavily with literal.",
+      "evidence_ref": "research/experiments/EXP-PRODUCT-35651924708/spec.json -> baselines[2] B-RETRIEVAL; research/experiments/EXP-PRODUCT-35651924708/prereg.md -> 4.3, 10.1"
+    },
+    {
+      "baseline_id": "B-SPIDER",
+      "strength": "treatment_not_baseline",
+      "expected": "SPIDER parameterized mechanism inheritance: agent provided with parameterized mechanism (template GET .../posts/${post_id} with parameters {post_id:5}, pre/postconditions, verification). Executes mechanism with bound parameters. Treatment condition for hypothesis.",
+      "observed": "Not executed (0/30). No mechanism induction verification (training on T1-T3) performed, no binding correctness, no cost. Depends on graph lane mechanism induction functional on JSONPlaceholder (spec dependencies, EXP-GRAPH-33528827169 substrate). Prior graph experiments show substrate was BROKEN/COMPETITION-UNSAFE in parts, but audit notes dependency established for synthetic single-parameter case only.",
+      "passes": false,
+      "issue": "Treatment untested. Whether mechanism induction would produce correct template/conditions for JSONPlaceholder is not verified in this run; prior product audits (EXP-PRODUCT-33528829801) show single-parameter common-prefix heuristic works only for narrow synthetic POC, not multi-parameter. Risk that B-SPIDER condition would be mis-parameterized if induction fails, but that would be valid measurement not design flaw.",
+      "evidence_ref": "research/experiments/EXP-PRODUCT-35651924708/spec.json -> baselines[3] B-SPIDER; research/experiments/EXP-PRODUCT-35651924708/prereg.md -> 4.4, 3.3; codex/index.json -> EXP-GRAPH-33528827169 FAIL, EXP-GRAPH-33816735314 COMPETITION-SAFE"
+    },
+    {
+      "baseline_id": "PC-IDENTICAL",
+      "strength": "adequate_design",
+      "expected": "Positive control at 0% novelty (T1 identical to training): all conditions should succeed, literal replay lowest cost, SPIDER ~ literal. Validates measurement infrastructure works and all conditions can execute per spec positive_control.expected_outcome.",
+      "observed": "Not executed. Prereg 6.1 pass criterion 'All 4 conditions succeed on T1' not tested. No validation that harness correctly handles success definition (correct HTTP + schema + required fields).",
+      "passes": false,
+      "issue": "Control correctly designed to validate infrastructure liveness; not exercised due to blocker, so infrastructure validity remains assumed not demonstrated.",
+      "evidence_ref": "research/experiments/EXP-PRODUCT-35651924708/spec.json -> positive_control PC-IDENTICAL; research/experiments/EXP-PRODUCT-35651924708/prereg.md -> 6.1"
+    },
+    {
+      "baseline_id": "NC-NO-MECHANISM",
+      "strength": "adequate_design",
+      "expected": "Null control: unrelated task 'Fetch weather data from openweathermap.org' with no applicable mechanisms in SPIDER registry. SPIDER should abstain or fall back to cold behavior, not hallucinate mechanisms (spec null_control.expected_outcome).",
+      "observed": "Not executed. No hallucination check performed, no abstention measurement.",
+      "passes": false,
+      "issue": "Control correctly designed to test hallucination; not exercised. Prereg 6.2 pass criterion not tested.",
+      "evidence_ref": "research/experiments/EXP-PRODUCT-35651924708/spec.json -> null_control NC-NO-MECHANISM; research/experiments/EXP-PRODUCT-35651924708/prereg.md -> 6.2"
+    }
+  ],
+  "recomputed_metrics": {
+    "frozen_hash_verification": {
+      "producer_value": null,
+      "recomputed_value": "all_match",
+      "detail": "SHA256(request.json)=1410d3f28eb6c50a6c1cec91b6fba6589470b1e19d1746f57fe4219dbe398e4d, spec.json=d15c19b471b1a242d4e9fd00f36cf5c3026190869fef99b2f5edb295f7c0ca8d, prereg.md=9e4c0dc5791ce6d3f638563e510a17764bef1d65425ca1cd7baa3337744187f7 matches freeze.json",
+      "match": true
+    },
+    "api_key_availability": {
+      "producer_value": "0/5 available",
+      "recomputed_value": "0/5 available",
+      "checked": ["OPENAI_API_KEY", "ANTHROPIC_API_KEY", "GOOGLE_API_KEY", "OPENROUTER_API_KEY", "HF_TOKEN"],
+      "match": true
+    },
+    "package_installation": {
+      "producer_value": "openai 3.16.2, requests 2.34.2, numpy 2.5.3",
+      "recomputed_value": "openai 3.16.2 verified via pip show / importlib.metadata, JSONPlaceholder HTTP 200 verified",
+      "match": true
+    },
+    "executions_completed": {
+      "producer_value": "0/120",
+      "recomputed_value": "0/120",
+      "detail": "120 planned = 10 tasks x 4 conditions x 3 reps; 0 executed due to missing credential. No metrics (M-TOKENS, M-BROWSER, M-VERIFY, M-TOTAL-COST, M-SUCCESS, M-LATENCY) produced, consistent with metrics={}",
+      "match": true
+    },
+    "M-TOTAL-COST_primary": {
+      "producer_value": null,
+      "recomputed_value": null,
+      "detail": "Primary metric M-TOTAL-COST = M-TOKENS +10*M-BROWSER +5*M-VERIFY undefined — no data to compute mean per condition or paired bootstrap (5000 samples) vs min(cold,literal,retrieval) at alpha 0.05 in 25-75% novelty range (18 obs per condition). Decision rule not evaluable.",
+      "match": true
+    },
+    "M-SUCCESS_secondary": {
+      "producer_value": null,
+      "recomputed_value": null,
+      "detail": "Secondary metric M-SUCCESS undefined — no success/failure observations for any condition.",
+      "match": true
+    },
+    "controls": {
+      "producer_value": "not exercised",
+      "recomputed_value": "not exercised",
+      "PC-IDENTICAL": "0/4 conditions tested",
+      "NC-NO-MECHANISM": "0/1 null task tested",
+      "match": true
+    }
+  },
+  "claim_ceiling": "No scientific claim ceiling established from this experiment. C-LLM-INHERIT remains HYPOTHESIS bounded to prior 2-site synthetic corpus (no real-LLM evidence after 37+ experiments, per request.json director_mandate). The frozen design is preserved and executable pending API provisioning, but provides zero evidence about whether SPIDER's parameterized mechanism inheritance reduces total workflow cost (tokens+browser+verification) vs cold/literal/retrieval on JSONPlaceholder or any real site. Specifically, no inference is justified about: 25-75% novelty cost reduction, bootstrap significance, success-rate parity, token economics, browser/verification efficiency, or product promotion to EXPERIMENTAL/PRODUCT_CORE. The experiment's contribution is limited to a validated frozen design and a correct BLOCKED diagnostic identifying the smallest unblocking action.",
+  "evidence_refs": [
+    "research/experiments/EXP-PRODUCT-35651924708/request.json -> experiment_id, lane, director_mandate.question/rationale (PIVOT to C-LLM-INHERIT, infrastructure blocker acknowledged)",
+    "research/experiments/EXP-PRODUCT-35651924708/spec.json -> claim_ids=[C-LLM-INHERIT], question, hypothesis, falsifier, baselines B-COLD/B-LITERAL/B-RETRIEVAL/B-SPIDER, positive_control PC-IDENTICAL, null_control NC-NO-MECHANISM, measurement_validity[0..7], decision_rule (5000-sample paired bootstrap alpha 0.05)",
+    "research/experiments/EXP-PRODUCT-35651924708/prereg.md -> task corpus T1-T10 novelty fractions, metrics M-TOKENS/M-BROWSER/M-VERIFY/M-TOTAL-COST/M-SUCCESS, controls 6.1/6.2, sampling 7 (3 reps, 120 total), analysis plan 8.1/8.2",
+    "research/experiments/EXP-PRODUCT-35651924708/freeze.json -> frozen_at 2026-09-21T20:40:04.171154+00:00, hashes prereg 9e4c0dc5..., request 1410d3f2..., spec d15c19b4...",
+    "research/experiments/EXP-PRODUCT-35651924708/result.json -> status BLOCKED, outcome NOT_APPLICABLE, metrics {}, controls {}, artifacts [], observations OBS-INFRA-BLOCKER/OBS-DEPENDENCIES-VERIFIED, validity_notes[0..3], unresolved[0..1]",
+    "research/experiments/EXP-PRODUCT-35651924708/provenance.json -> github_run_id 35651924708, environment platform linux python 3.x, installed_packages openai 3.16.2/requests 2.34.2/numpy 2.5.3, api_keys_checked 5, api_keys_available [], failure_category INFRASTRUCTURE_MISSING_CREDENTIAL, frozen_files hashes, reproduction_recipe",
+    "research/experiments/EXP-PRODUCT-35651924708/report.md -> status BLOCKED table, infrastructure check, Why BLOCKED not FALSIFIED per EXPERIMENT_PACKET.md, smallest unblocking action",
+    "research/EXPERIMENT_PACKET.md -> sections 4 (result.json BLOCKED vs FALSIFIES) and 6 (audit.json shape, preserve identifiers, missing data not negative)",
+    "research/lanes/registry.json -> product lane mission end-to-end economics without freezing research architecture",
+    "codex/claim_state.json -> C-LLM-INHERIT HYPOTHESIS bounded to 2-site corpus, C-PRODUCT-ECON HYPOTHESIS (no token economics without model calls)",
+    "Independent recomputation 2026-09-21T20:43:26Z -> env key lengths 0/5, pip show openai 3.16.2, curl -I https://jsonplaceholder.typicode.com/posts/1 HTTP 200"
+  ],
+  "unresolved": [
+    "Does SPIDER's parameterized mechanism inheritance reduce total workflow cost vs cold/literal/retrieval in the 25-75% novelty range on JSONPlaceholder when driven by a real LLM (gpt-4o-mini or equivalent)? BLOCKED — no data.",
+    "What is actual per-condition mean M-TOTAL-COST, 95% bootstrap CI, p-value, and Cohen's d under the frozen decision rule? Unmeasurable until rerun.",
+    "Does SPIDER maintain success rate >= max baselines in 25-75% range (secondary criterion)? Untested.",
+    "Will the planned verification (HTTP status + schema + required fields) discriminate correctly between conditions, or will trivial REST endpoints produce ceiling effects (all succeed at low cost)? Requires live measurement; JSONPlaceholder simplicity validity threat (prereg 10.2) may produce nondiscriminating results even when unblocked.",
+    "What is the actual transformation from synthetic single-parameter POC (prior EXP-PRODUCT-33528829801) to LLM-driven execution — does distill_parameterized induce correct templates for T1-T3 training tasks, and does kernel resolve correctly bind for T2-T7? Unverified in this run.",
+    "Smallest next action remains: provision LLM API key and re-execute frozen harness; a director must decide whether to retry this exact frozen packet or to redirect product lane if infrastructure remains unavailable."
+  ]
+}
