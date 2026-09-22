@@ -1,0 +1,231 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-35774039080",
+  "lane": "physics",
+  "status": "PASS",
+  "producer_claim_supported": true,
+  "required_fixes": [],
+  "validity_findings": [
+    {
+      "finding_id": "VF-GATE-CORRECT",
+      "category": "measurement_validity",
+      "severity": "none",
+      "observation": "Recomputed relaxed gate matches producer: 5/5 variants NL 85-107 (>=50), strata_total 21-22 with strata_ge3 12-13 (>=5 with >=3), singleton 0.0 (<0.70), leakage_validOnly 0.1769-0.2846 (<0.60), dom_bytes_coverage 0.0 and a11y_coverage 0.0 (<0.80). Q=0.",
+      "evidence_ref": "research/experiments/EXP-PHYSICS-35774039080/gate_table.json:Q=0,datasets[].qualifies=false; research/experiments/EXP-PHYSICS-35774039080/result.json:metrics.per_dataset_gate; audit recompute via audit python recalc confirms identical gate rows",
+      "interpretation": "Producer derived measurement Q==0 is correct. Frozen decision_rule Relaxed_substrate clause (spec.json decision_rule, prereg.md section 13, freeze.json) triggers MEASUREMENT_INVALID substrate_insufficient before H_T/H_B. Producer halt at analysis plan step 1 is contract-compliant."
+    },
+    {
+      "finding_id": "VF-DOM-ABSENCE-VERIFIED",
+      "category": "representation_integrity",
+      "severity": "critical",
+      "observation": "Reused TodoMVC raw artifacts (10 files from EXP-PHYSICS-35209110569) contain only keys {site,session,url_before,url_after,title_before,title_after,action_primitive,action_target,timestamp,error} on every record. No DOM observable keys (dom_bytes, visibleText, innerText, dom_snapshot) and no a11y keys (a11y_tree, ax_tree, accessibility_roles) exist; coverage 0.0 is field absence, not small DOM.",
+      "evidence_ref": "research/experiments/EXP-PHYSICS-35774039080/gate_table.json:raw_record_keys; research/experiments/EXP-PHYSICS-35774039080/result.json:observations[0]; research/experiments/EXP-PHYSICS-35209110569/collect_spa_survey.py recorder schema; research/experiments/EXP-PHYSICS-35209110569/result.json artifacts sha256 88971728... etc 10/10 MATCH verified by audit",
+      "interpretation": "Producer interpretation that substrate_insufficient is due to missing DOM/a11y observables is correct and distinct from falsification. This is not a producer error but a DESIGN feasibility defect: spec.json measurement_validity #1 and this experiment's relaxed gate required dom_bytes>=500 and a11y non-empty >=80%, while the referenced raw files were known before freeze to contain url/title/action only (parent EXP-PHYSICS-35209110569 already recorded 0 title entropy and url/title-only schema). Q==0 was foreseeable at DESIGN time."
+    },
+    {
+      "finding_id": "VF-DESIGN-INFEASIBLE",
+      "category": "design_feasibility",
+      "severity": "high",
+      "observation": "Spec required preserving raw DOM/a11y bytes and passing dom_bytes coverage gate, but reuse source research/experiments/EXP-PHYSICS-35209110569/raw_*.json has no such bytes. Intrusive inspection of 10 raw files at DESIGN would have shown infeasibility. The director mandate's premise 'using existing TodoMVC/BrowserGym trajectories' and 'reuse existing trajectories' was not validated against actual artifact schema before freeze.",
+      "evidence_ref": "research/experiments/EXP-PHYSICS-35774039080/spec.json:measurement_validity[0]; research/experiments/EXP-PHYSICS-35774039080/prereg.md:6.1; research/experiments/EXP-PHYSICS-35209110569/result.json:observations[1-3] title=1 constant; research/experiments/EXP-PHYSICS-35774039080/result.json:validity_notes[1-3]",
+      "interpretation": "Execution correctly refused to substitute Express synthetics or MPAs (frozen spec forbids; producer validity_notes[3] complied). The experiment is therefore an informative MEASUREMENT_INVALID that prevents false negative, but its information gain is limited to exposing the reuse assumption failure, not to testing timescale/barrier hypotheses."
+    },
+    {
+      "finding_id": "VF-LEAKAGE-NORMALIZATION",
+      "category": "leakage_control",
+      "severity": "low",
+      "observation": "Producer computed leakage_validOnly under frozen fragment-preserving normalization (strip query, preserve #/ fragment, lowercase, strip trailing slash): 0.2846 (vanillajs/react/svelte), 0.213 (vue), 0.1769 (angular, 23/37 vs 37/37 under fragment-stripping). Prior EXP-PHYSICS-35209110569 used fragment-stripping and reported 37/37 for angular. Both give NL>=50 and <60% gate pass; difference (~14 transitions on angular) does not change Q.",
+      "evidence_ref": "research/experiments/EXP-PHYSICS-35774039080/execute.py:normalize_url; research/experiments/EXP-PHYSICS-35774039080/result.json:observations[6]; research/experiments/EXP-PHYSICS-35209110569/result.json:metrics angular leakage 0.2846 fragment-stripping",
+      "interpretation": "Leakage control executed exactly per this experiment's frozen definition. Diagnostic gap documented; no hidden leakage inflation; valid inference would use leakageFree as specified. No validity threat to gate outcome."
+    },
+    {
+      "finding_id": "VF-CONTROLS-NOT-RUN",
+      "category": "control_integrity",
+      "severity": "medium",
+      "observation": "All primary controls/baselines recorded NOT_RUN / unknown: PC-METASTABLE, PC-BARRIER, NC-IID, NC-GROUPED-PERM, B-MARKOV-ORDER1/K3, B-SHUFFLE-GROUPED, B-DOM-SIMILARITY, B-RANDOM-DWELL, B-TRAJECTORY-MEMORY; B-SITE-LEAKAGE-DIAGNOSTIC PARTIAL (gate-level leakage only). No permutation, Dirichlet-Multinomial BF, dwell, committor, TF-IDF, dip test executed.",
+      "evidence_ref": "research/experiments/EXP-PHYSICS-35774039080/result.json:controls.*.observed_behavior=NOT_RUN; research/experiments/EXP-PHYSICS-35774039080/report.md:section 5; research/experiments/EXP-PHYSICS-35774039080/execute.py lines 1-17 frozen halt rule",
+      "interpretation": "NOT_RUN is correct per frozen gated execution (prereg 15.1, spec decision_rule). Controls gate primary H_T/H_B only; at Q==0 they are explicitly not required and running them would violate frozen scope. However, pipeline blindness remains unknown for this substrate: positive controls were not validated on this run, so a future retry on DOM-bearing substrate must still demonstrate delta_ACF>=0.12 p<0.005 BF>10 and Var>=0.12 before trusting a negative H_T/H_B. This is not a producer defect but a limitation to preserve in handoff do_not_assume."
+    },
+    {
+      "finding_id": "VF-PROVENANCE-REPRODUCIBILITY",
+      "category": "provenance",
+      "severity": "none",
+      "observation": "Freeze hashes verified before computation: prereg.md 185b7642..., request.json b0e6eeac..., spec.json 8eeebec9... all MATCH freeze.json. 10/10 reused raw sha256 MATCH prior experiment artifacts. Execute uses PYTHONHASHSEED=0, stdlib only, deterministic gate path, byte-identical gate_table.json on rerun. No outcome-bearing H_T/H_B measurement performed. Provenance commands and environment documented.",
+      "evidence_ref": "research/experiments/EXP-PHYSICS-35774039080/provenance.json:frozen_input_hashes_verified MATCH; research/experiments/EXP-PHYSICS-35774039080/gate_table.json:freeze_hash_verification; research/experiments/EXP-PHYSICS-35774039080/execute.py:sha256_file checks",
+      "interpretation": "Provenance and split/sampling integrity valid for gate stage. No split leakage, no action contamination (action_primitive excludes href, per leakage_free_action_sig), trajectory_id resampling not exercised because halt precedes permutation. State S_primary hashing not used for inference; hash truncation loss disclosed."
+    },
+    {
+      "finding_id": "VF-ENVIRONMENT-EXPRESSIBILITY",
+      "category": "external_validity",
+      "severity": "medium",
+      "observation": "Timescale prong H_T is in principle expressible on S_primary=SHA256(norm(url_after)|norm(title_after)) which reduces to hash-fragment URL (TodoMVC title constant, 3-4 hash fragments) even without DOM, but frozen primary condition requires B-DOM-SIMILARITY gap >=0.05 which is incomputable without DOM text. Barrier prong H_B requires x=(URL,DOM_hash) revisits which is incomputable without DOM snapshots. Relaxed gate Q==0 therefore correctly blocks both prongs as written.",
+      "evidence_ref": "research/experiments/EXP-PHYSICS-35774039080/spec.json:hypothesis H_T/H_B; research/experiments/EXP-PHYSICS-35774039080/report.md:section 3 consequences for two prongs",
+      "interpretation": "Producer did not incorrectly claim environment could not express effect (as done in some MPA failures); here correctly noted partial expressibility but frozen rule and mandatory baseline prevent partial URL-only test. Audit confirms correct refusal to perform outcome-bearing URL-only H_T that would violate frozen halt and leave mandatory baseline unresolved."
+    }
+  ],
+  "baseline_findings": [
+    {
+      "baseline_id": "B-MARKOV-ORDER1",
+      "frozen_requirement": "P(S_next|S_t,A_t) MLE on train; analytical ACF lambda_2^k",
+      "observed": "NOT_RUN",
+      "pass": "unknown",
+      "strength_assessment": "Strong null correctly defined but not exercised due Q==0 halt. Would be mandatory for timescale claim to exceed Markov exponential decay.",
+      "evidence_ref": "research/experiments/EXP-PHYSICS-35774039080/result.json:controls.B-MARKOV-ORDER1"
+    },
+    {
+      "baseline_id": "B-MARKOV-K3",
+      "frozen_requirement": "P(S_next|URL_before,H_K=3,A_leakageFree) majority vote; BF order3 vs order1",
+      "observed": "NOT_RUN",
+      "pass": "unknown",
+      "strength_assessment": "Strong history baseline for BF>10 comparison; not exercised.",
+      "evidence_ref": "research/experiments/EXP-PHYSICS-35774039080/result.json:controls.B-MARKOV-K3"
+    },
+    {
+      "baseline_id": "B-SHUFFLE-GROUPED",
+      "frozen_requirement": "trajectory-grouped shuffle of S sequence, 1000 perms seed 42, null_std>0.01 required",
+      "observed": "NOT_RUN",
+      "pass": "unknown",
+      "strength_assessment": "Correct trajectory_id resampling unit per audit REQUIRED_FIX from parent; null_std>0.01 degeneracy check correctly specified but not tested here.",
+      "evidence_ref": "research/experiments/EXP-PHYSICS-35774039080/result.json:controls.B-SHUFFLE-GROUPED"
+    },
+    {
+      "baseline_id": "B-DOM-SIMILARITY",
+      "frozen_requirement": "TF-IDF cosine k=5 over DOM visible_text (R1) and a11y text (R2), fit TRAIN only; timescale must exceed ACF_sim by >=0.05",
+      "observed": "NOT_RUN - substrate lacks DOM text",
+      "pass": "unknown",
+      "strength_assessment": "Mandatory per director mandate; correctly identified as incomputable from url/title-only artifacts. Its absence is substrate insufficiency, not baseline failure. Future retry must fit TF-IDF on TRAIN trajectories only and gap ACF_obs > ACF_sim+0.05.",
+      "evidence_ref": "research/experiments/EXP-PHYSICS-35774039080/result.json:controls.B-DOM-SIMILARITY.reason"
+    },
+    {
+      "baseline_id": "B-RANDOM-DWELL",
+      "frozen_requirement": "i.i.d. draws with same marginal P(S); expected delta_ACF=0",
+      "observed": "NOT_RUN",
+      "pass": "unknown",
+      "strength_assessment": "Bias-floor null; not exercised.",
+      "evidence_ref": "research/experiments/EXP-PHYSICS-35774039080/result.json:controls.B-RANDOM-DWELL"
+    },
+    {
+      "baseline_id": "B-TRAJECTORY-MEMORY",
+      "frozen_requirement": "exact (S_t,A_t)->S_{t+1} memorization from train; memorization ratio",
+      "observed": "NOT_RUN",
+      "pass": "unknown",
+      "strength_assessment": "Ceiling diagnostic; not exercised.",
+      "evidence_ref": "research/experiments/EXP-PHYSICS-35774039080/result.json:controls.B-TRAJECTORY-MEMORY"
+    },
+    {
+      "baseline_id": "B-SITE-LEAKAGE-DIAGNOSTIC",
+      "frozen_requirement": "action_with_href vs leakageFree gap for ACF delta",
+      "observed": "PARTIAL - gate-level leakage_validOnly 0.1769-0.2846; ACF-level gap requires blocked primary stage",
+      "pass": "unknown",
+      "strength_assessment": "Gate-level diagnostic correctly reported; full ACF gap correctly withheld because blocked.",
+      "evidence_ref": "research/experiments/EXP-PHYSICS-35774039080/result.json:controls.B-SITE-LEAKAGE-DIAGNOSTIC"
+    },
+    {
+      "baseline_id": "PC-METASTABLE",
+      "frozen_requirement": "synthetic metastable two-well delta_ACF>=0.12 p_raw<0.005 BF nats>2.3",
+      "observed": "NOT_RUN per frozen Q==0 halt",
+      "pass": "unknown",
+      "strength_assessment": "Positive control would guard pipeline blindness; correctly deferred. Future retry must generate 6-state two-basin chain with p_stay 0.85 p_cross 0.05 latent L persist 15 steps seeds 42 as frozen.",
+      "evidence_ref": "research/experiments/EXP-PHYSICS-35774039080/result.json:controls.PC-METASTABLE"
+    },
+    {
+      "baseline_id": "PC-BARRIER",
+      "frozen_requirement": "synthetic barrier double-well Var(q)>=0.12 grouped p<0.01 dip p<0.05 branched_revisit>=15",
+      "observed": "NOT_RUN per frozen Q==0 halt",
+      "pass": "unknown",
+      "strength_assessment": "Correctly deferred; future retry must validate barrier pipeline before trusting negative.",
+      "evidence_ref": "research/experiments/EXP-PHYSICS-35774039080/result.json:controls.PC-BARRIER"
+    },
+    {
+      "baseline_id": "NC-IID",
+      "frozen_requirement": "i.i.d. synthetic delta_ACF<=0.03 p>0.10 BF nats<0 Var<=0.03",
+      "observed": "NOT_RUN",
+      "pass": "unknown",
+      "strength_assessment": "Null control correctly deferred; degenerate null_std==0 would be MEASUREMENT_INVALID not PASS.",
+      "evidence_ref": "research/experiments/EXP-PHYSICS-35774039080/result.json:controls.NC-IID"
+    },
+    {
+      "baseline_id": "NC-GROUPED-PERM",
+      "frozen_requirement": "trajectory-grouped shuffle ACF null per qualifying dataset |null_mean|<3*null_std p>0.10 null_std>0.01",
+      "observed": "NOT_RUN (no qualifying datasets)",
+      "pass": "unknown",
+      "strength_assessment": "Correctly not computed; at Q==0 degenerate null is not evidence.",
+      "evidence_ref": "research/experiments/EXP-PHYSICS-35774039080/result.json:controls.NC-GROUPED-PERM"
+    }
+  ],
+  "recomputed_metrics": {
+    "Q_qualifying_datasets": {
+      "producer": 0,
+      "recomputed": 0,
+      "match": true,
+      "evidence_ref": "research/experiments/EXP-PHYSICS-35774039080/gate_table.json:Q; audit python independent recalc"
+    },
+    "per_dataset_gate_row": {
+      "producer": {
+        "vanillajs": {"NL": 93, "strata_total": 21, "strata_ge3": 12, "singleton": 0.0, "leakage_validOnly": 0.2846, "dom_coverage": 0.0, "qualifies": false},
+        "react": {"NL": 93, "strata_total": 21, "strata_ge3": 12, "singleton": 0.0, "leakage_validOnly": 0.2846, "dom_coverage": 0.0, "qualifies": false},
+        "vue": {"NL": 85, "strata_total": 21, "strata_ge3": 13, "singleton": 0.0, "leakage_validOnly": 0.213, "dom_coverage": 0.0, "qualifies": false},
+        "angular": {"NL": 107, "strata_total": 22, "strata_ge3": 13, "singleton": 0.0, "leakage_validOnly": 0.1769, "dom_coverage": 0.0, "qualifies": false},
+        "svelte": {"NL": 93, "strata_total": 21, "strata_ge3": 12, "singleton": 0.0, "leakage_validOnly": 0.2846, "dom_coverage": 0.0, "qualifies": false}
+      },
+      "recomputed": {
+        "vanillajs": {"NL": 93, "strata_total": 21, "strata_ge3": 12, "singleton": 0.0, "leakage_validOnly": 0.2846, "dom_coverage": 0.0, "qualifies": false},
+        "react": {"NL": 93, "strata_total": 21, "strata_ge3": 12, "singleton": 0.0, "leakage_validOnly": 0.2846, "dom_coverage": 0.0, "qualifies": false},
+        "vue": {"NL": 85, "strata_total": 21, "strata_ge3": 13, "singleton": 0.0, "leakage_validOnly": 0.213, "dom_coverage": 0.0, "qualifies": false},
+        "angular": {"NL": 107, "strata_total": 22, "strata_ge3": 13, "singleton": 0.0, "leakage_validOnly": 0.1769, "dom_coverage": 0.0, "qualifies": false},
+        "svelte": {"NL": 93, "strata_total": 21, "strata_ge3": 12, "singleton": 0.0, "leakage_validOnly": 0.2846, "dom_coverage": 0.0, "qualifies": false}
+      },
+      "match": true,
+      "method": "audit independent python hash recompute over 10 raw files verified 10/10 sha256 MATCH; fragment-preserving normalize_url as frozen"
+    },
+    "freeze_hash_verification": {
+      "producer": {"prereg.md": true, "request.json": true, "spec.json": true},
+      "recomputed": {"prereg.md": "185b7642c45c803078e39882e7622aa60762055ec6d2295fc10585ca9b2cb21b MATCH", "request.json": "b0e6eeaccd5fa95cd6c403a1555e9176891b0eba2eec67de2a94e6eb026bce2a MATCH", "spec.json": "8eeebec9f069bd6a5247d5f9b85b66e8bf580553a626cf099a5a3ac2638bb5ee MATCH"},
+      "match": true
+    },
+    "raw_hash_verification": {
+      "producer": {"matched": 10, "total": 10},
+      "recomputed": {"matched": 10, "total": 10, "all_sha256_MATCH_EXP-PHYSICS-35209110569_result_json": true},
+      "match": true
+    },
+    "substrate_scan": {
+      "producer": {"research_intel_exists": false, "intel_manifest_exists": false, "browsergym_cache_exists": false, "browsergym_webshop_files": []},
+      "recomputed": {"research_intel_exists": false, "intel_manifest_exists": false, "browsergym_cache_exists": false, "browsergym_webshop_files": []},
+      "match": true
+    },
+    "H_T_and_H_B": {
+      "producer": "NOT_RUN (frozen halt)",
+      "recomputed": "NOT_RUN - audit confirms halt required; no delta_ACF, BF, Var_q, dip computed",
+      "match": true,
+      "note": "No outcome-bearing recomputation feasible without violating frozen halt rule; producer correct to withhold"
+    },
+    "positive_and_null_controls": {
+      "producer": "NOT_RUN unknown",
+      "recomputed": "NOT_RUN unknown - audit confirms deferral correct per spec decision_rule Relaxed_substrate clause precedence",
+      "match": true
+    }
+  },
+  "claim_ceiling": "MEASUREMENT_INVALID substrate_insufficient: zero qualifying datasets under frozen relaxed sufficiency (requires dom_bytes>=500 and a11y non-empty >=80% on reused TodoMVC trajectories that contain no DOM/a11y fields). No evidence for or against C-WEB-DYNAMICS orthogonal timescale separation (delta_ACF>=0.10 p<0.005 BF>10) or barrier/committor bimodality (Var>0.10 p<0.05 dip p<0.05 with >=10 revisits) via R1 visible_text_hash or R2 a11y_tree_hash on TodoMVC/WebShop hash-SPAs. C-WEB-DYNAMICS remains HYPOTHESIS (codex/claim_state.json). No physics mechanical prior (dwell scheduler, barrier map, freshness sentinel) is validated. Bound explicitly to url/title/action-only hash-SPA recordings as tested; no inference to production SPAs with correlated latent regimes or richer visual/computed-style DOM representations. Prior ceilings unchanged: TodoMVC title variation falsified (EXP-PHYSICS-35209110569), URL PMI 0.19 bits on hash fragments (EXP-PHYSICS-35262258744), Bayesian DM BF -10 to -15 nats favoring memory on TodoMVC real (dependency), synthetic controls not tested here.",
+  "evidence_refs": [
+    "research/experiments/EXP-PHYSICS-35774039080/request.json sha256 b0e6eeaccd5fa95cd6c403a1555e9176891b0eba2eec67de2a94e6eb026bce2a director_mandate PIVOT SUPERSEDE",
+    "research/experiments/EXP-PHYSICS-35774039080/spec.json sha256 8eeebec9f069bd6a5247d5f9b85b66e8bf580553a626cf099a5a3ac2638bb5ee decision_rule Relaxed_substrate",
+    "research/experiments/EXP-PHYSICS-35774039080/prereg.md sha256 185b7642c45c803078e39882e7622aa60762055ec6d2295fc10585ca9b2cb21b sections 6.1/13/15.1",
+    "research/experiments/EXP-PHYSICS-35774039080/freeze.json sha256 640ab7b82bf6cf8f07a0d2c0fa73d8fbe00ce4dec0d41dbf85788eac624cc85c hashes MATCH",
+    "research/experiments/EXP-PHYSICS-35774039080/result.json sha256 0ace8b3c248bfd04816e33abc9c22ee8bc2373abd3319a8090af2138fa462918 status MEASUREMENT_INVALID Q==0",
+    "research/experiments/EXP-PHYSICS-35774039080/report.md sha256 d318be7c8f8d0182ea1cfea4c886706bdcff1d99d3c16d54ea13cfb68214aeeb",
+    "research/experiments/EXP-PHYSICS-35774039080/provenance.json sha256 verified; commits f50de84... allocation_base, 1c85139... pre_execute, e9c667e... head",
+    "research/experiments/EXP-PHYSICS-35774039080/gate_table.json sha256 fe0474a07dc275733917dbfe7f6c62475c3e26ae474592f3a475306183f2a591 Q=0 datasets 5",
+    "research/experiments/EXP-PHYSICS-35774039080/execute.py sha256 045496fca659e2a6acdef5c9f3b041c4c88171aeb82858497d93331d25c5d3f1 frozen gate code",
+    "research/experiments/EXP-PHYSICS-35209110569/result.json sha256 b4f20f49... raw artifacts 10/10 MATCH; collect_spa_survey.py sha256 7c0eee3a... recorder url/title/action only",
+    "research/experiments/EXP-PHYSICS-35756224948/handoff.json sha256 40b352d502295ac1d61ffa34f82726e41ece6f14a91868d747d0483d173b12cb parent MEASUREMENT_INVALID Gate0",
+    "codex/claim_state.json C-WEB-DYNAMICS HYPOTHESIS 59 synthetic-dominated events; codex/index.json experiments list"
+  ],
+  "unresolved": [
+    "Whether DOM-bearing trajectories can be obtained without new infra: (a) re-collect TodoMVC variants with visibleText innerText [0:5000] + Accessibility.getFullAXTree [0:5000] and target_sig role/name/testId/aria-label under a new freeze, or (b) intel-supplied BrowserGym/AgentLab WebShop trajectories at research/intel/manifest.json or /tmp/browsergym_cache (currently absent, director dependencies EXP-PHYSICS-35578258358/35651906573/EXP-INTEL-35766523457) — binding prerequisite for barrier prong and B-DOM-SIMILARITY.",
+    "Whether frozen relaxed gate should be re-frozen for URL|title-only state (dropping dom_bytes>=500/a11y coverage) to allow H_T test on existing S_primary sequences, with Director explicitly waiving B-DOM-SIMILARITY for that gate variant — policy decision, not EXECUTE adaptation.",
+    "What delta_ACF(3), BF nats (Dirichlet alpha=1/K K=12), tau_slow/tau_fast, dwell heavy-tail exponent, Var(q), dip p, and B-DOM-SIMILARITY gap would be observed on qualifying DOM-bearing substrate for R1/R2 — entirely unknown; this packet contributes zero bits toward H_T or H_B.",
+    "Whether positive controls (metastable delta_ACF>=0.12 BF>10; barrier Var>=0.12 p<0.01 dip<0.05) and null controls (i.i.d. delta<=0.03 BF<0, null_std>0.01) actually pass on the frozen constructions with this pipeline — untested, must be demonstrated before trusting a future negative.",
+    "Whether angular hash fragment normalization (preserve #/ vs strip) should be standardized across physics freezes — affects NL by 14 transitions on angular only, not Q, but indicates frozen normalization ambiguity that should be resolved pre-freeze for future SPAs.",
+    "Singleton strata and null degeneracy risk on richer DOM-bearing substrate with larger state spaces — remains to be measured; frozen null_std>0.01 gate may again trigger MEASUREMENT_INVALID if hash DOMs remain near-unique."
+  ]
+}
