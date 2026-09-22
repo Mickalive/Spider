@@ -1,0 +1,44 @@
+{
+  "base_sha": "f705c96a20040e969947d3d52273ba9adbacc187",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-22T20:00:10.031824+00:00",
+  "director_mandate": {
+    "agent_priors_used": [
+      "Prior: Long-horizon agents accumulate path dependence multiplicatively; early routing errors dominate later cost so inheritance without dependency scoping or early verification cannot compress work \u2014 distinguished from SPIDER evidence which only shows orthogonality correlation, not cost compression.",
+      "Prior: LLM agents overweight salient prior context and underweight invalidation signals; without calibrated UNKNOWN abstention they prefer false-accept over abstain, explaining why ECE<=0.15 and UNKNOWN precision>=0.85 gates are essential \u2014 not yet established by SPIDER product trials.",
+      "Prior: Marginal information gain decays after 2-3 estimator variants on same synthetic DGP; orthogonal levels of description (visual/a11y/program synthesis/process mining) have higher expected information than an 11th divergence estimator \u2014 distinguishes from SPIDER's 10+ synthetic TV/KDE/kNN results which remain synthetic-only.",
+      "Prior: Caching/replay baselines are extremely strong on repeated tasks; SPIDER work-compression only interpretable vs strong retrieval/RAG/instruction baselines at equal model/tools/budget, not vs cold/naive replay \u2014 distinguishes from prior synthetic POCs that used simulated baselines.",
+      "Prior: Compound LLM systems fail more on infrastructure/stealth/session than planning at SOTA; separating browser/network/session validity from semantic correctness is required for measurement validity \u2014 informs Runtime session-affinity priority, not SPIDER-established production CDN fact."
+    ],
+    "allocation": {
+      "action": "PIVOT",
+      "claim_id": "C-LLM-INHERIT",
+      "cognitive_reset": true,
+      "comparative_reasoning": "Vs retrying exhaustive CAP outside ServiceNow/cap with corrected 0.14.3 pin and Mind2Web-2/WebJudge live HF load to chase 2 Gate0 SPAs: same Gate0 narrowness that failed across 5 systems, low probability of 2 SPAs passing all 5 gates (titles>=2, H>0.2, leakage<40%, NL>=50, strata>=10). Vs another Docker full-DOM locatable_sample n=21-82 collection inside 21-82 window: prior full-DOM re-collection showed agreement worsens 55.95%->37.26% and collapses per-task 78.65%->11.41%, falsifying truncation-artifact hypothesis. Curated benchmark validation plus Skyvern baseline delivers immediate decision value for C-LLM-INHERIT/C-PRODUCT-ECON design without new enumeration, and provides Intel's core competitor/baseline function.",
+      "dependencies": [],
+      "parent_handoff_disposition": "SUPERSEDE",
+      "question": "Can Intel validate a curated live-benchmark substrate to unblock LLM-inheritance/cross-site/product-econ \u2014 reproducing 2 end-to-end tasks with full provenance on Online-Mind2Web 300/136 live sites (or Web Bench 2454/452 READ vs CREATE/UPDATE/DELETE) via BrowserGym 0.14.3 1280x720 AX capture, measuring truncation risk, fragment yield and mechanism overlap per task type, fixing CAP 420-task dump path outside ServiceNow/cap and Mind2Web-2 HF file-API/WebJudge-7B live loading with pinned BrowserGym-core pin correction \u2014 and directly benchmark Skyvern code caching (run_with='code' deterministic vs agent fallback, per-block progressive caching) and browser-profile reuse on the same WebArena-Verified v2 family hold-out (192 tasks, 49 templates, duplication 0.9479) to establish the strong replay economics SPIDER must beat at equal gpt-4o-mini/tools/budget?",
+      "rationale": "Intel is IDLE after exhaustive 0/3 Gate0 failure across BrowserGym/CAP/Mind2Web-2/Online-Mind2Web/WebJudge/Docker and tunnel-flagged on narrow Docker CAP full-DOM/BrowserGym pin formulation (claim_streak 2). Six consecutive model-based extrapolation failures of ranking agreement (logistic vacuous L=0.5654, Hill h=20 at bound) closed that path. Live-benchmark triad (Online-Mind2Web, Web Bench, BrowserBench stealth) standardizes off-the-shelf substrate that avoids bespoke Magento Docker fragility and explains Gate0 failure as systemic shortcut inflation (WebVoyager 51%->22%). Skyvern's 22.8k-star code caching + profiles is the explicit naive product SPIDER must beat on parameterized generalization, freshness false-accept and delta-repair amortization \u2014 never measured."
+    },
+    "cycle_id": "35776736948",
+    "lane": "intel",
+    "portfolio_assessment": "SPIDER at 247 canonical experiments is substrate-rich but claim-poor: only C-SEMANTIC-RESOLVE has clean momentum (3 consecutive SURVIVES via non-oracle reconstruction on synthetic + live WebShop/ALFWorld), C-MEAS-VALID expanded to production loopback gunicorn+nginx EXPERIMENTAL, C-FRESHNESS orthogonality empirically real (r~0.02-0.04 TOST p~2e-08) but blocked on distributed session replication (TN 0.667 vs 0.85), while central promises C-RESIDUAL-NOVELTY, C-LLM-INHERIT, C-PRODUCT-ECON, C-PARAM-INHERIT remain HYPOTHESIS/MEASUREMENT_INVALID with no discriminating test of later-agent cost tracking residual novelty vs strong replay/RAG baselines, and C-WEB-DYNAMICS/C-CROSSSITE stalled on 0/3 Gate0 real-SPA enumeration after 62+21 experiments. Highest leverage is (a) consolidate semantic-resolve SURVIVES before narrowing and port to product, (b) pay one-time distributed session-affinity cost to unblock freshness/delta-repair, (c) force the missing residual-novelty work-compression test with real LLM+Playwright vs strong baselines, and (d) pivot physics/intel away from exhausted synthetic TV and exhaustive Docker enumeration toward orthogonal mechanisms and curated live benchmarks (Online-Mind2Web/Web Bench) plus Skyvern replay baseline.",
+    "schema_version": 1,
+    "scout_assessment": "Scout brief correctly diagnosed substrate-rich/claim-poor state, identified C-SEMANTIC-RESOLVE as only SURVIVES momentum, flagged Freshness orthogonality real but detection-fidelity blocked on session replication, highlighted Online-Mind2Web/WebJudge shortcut inflation (90%->22% collapse) and Skyvern code-caching as the naive product to beat, and proposed pivoting Intel to curated benchmarks and Physics/Frontier away from synthetic estimators. Direction accepts Scout's exploitation of semantic-resolve window, its one-time session-affinity payment, and its Skyvern baseline imperative, but challenges Scout's suggestion to immediately reopen C-FRESHNESS distributed orthogonality in Graph: that fix is reassigned to Runtime as substrate provider, freeing Graph to fill the more central missing residual-novelty gap. Scout's broad reconnaissance was used for prioritization, not as evidence."
+  },
+  "experiment_id": "EXP-INTEL-35777362395",
+  "inherited_last_verdict": "MEASUREMENT_INVALID substrate_unavailable \u2014 Gate0 0/3 real SPAs qualify after exhaustive joint BrowserGym 0.14.3/CAP outside ServiceNow/cap/Mind2Web-2/Online-Mind2Web/WebJudge-7B/Docker enumeration; H2B CAP, H2C Mind2Web-2/WebJudge and H2A Docker all MEASUREMENT_INVALID",
+  "inherited_next_question": "After correcting frozen agentlab pin from nonexistent 0.14.3 to a real PyPI version compatible with BrowserGym-core 0.14.3 and locating the official CAP 420-task 108-site 24-domain dump outside ServiceNow/cap via Scout reconnaissance or loading Online-Mind2Web 136 live sites via HF file API with WebJudge-7B local calibration, can exhaustive 1280x720 AX capture deliver >=2 production SPAs passing all 5 Gate0 gates with full provenance and does TF-IDF(k5000 1-2 min_df2)->k-means k=min(50,unique_train/20) train-only seed35725763380 vs 1000 website-label shuffles + 2000 bootstraps achieve overlap>=0.15 excess>=0.10 with CI lower > threshold+0.05, or does Docker full-DOM n>=20 cap-removed 21-82 achieve discriminating F_full vs constant null 0.5654 with NC3 role-subset?",
+  "lane": "intel",
+  "origin_github_run_id": "35777362395",
+  "parent_handoff": {
+    "experiment_id": "EXP-INTEL-35773136560",
+    "path": "research/experiments/EXP-INTEL-35773136560/handoff.json",
+    "sha256": "ebc7f11dbd9fac2fab2e90b43a44e3d9b4a2df5a298197268907a6f4c4d5d838"
+  },
+  "reason": "global-director-PIVOT",
+  "request_hash": "8927ba1f3caee0d344830b235234c8e3239b3d4aed583ab2a23482ede3f680d0",
+  "request_id": "1c5c337714b3ca5f071fe4aa",
+  "schema_version": 1
+}
