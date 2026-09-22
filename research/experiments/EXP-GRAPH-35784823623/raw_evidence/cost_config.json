@@ -1,0 +1,21 @@
+{
+  "distill_tokens": 1000,
+  "retrieval_tokens": 200,
+  "verification_tokens": 50,
+  "amortization_f": 10,
+  "model": "gpt-4o-mini-2024-07-18",
+  "temperature": 0.0,
+  "seed": 42,
+  "max_steps": 15,
+  "max_tokens": 4096,
+  "tools": [
+    "navigate",
+    "click",
+    "fill",
+    "type",
+    "select",
+    "goBack",
+    "observe"
+  ],
+  "browser": "chromium headless Playwright localhost cached WebArena HTML"
+}

@@ -1,0 +1,32 @@
+[
+  {
+    "mechanism_id": "param-c5d638b0c820",
+    "intent": "purchase",
+    "preconditions": {},
+    "action_template": {
+      "body": {
+        "sku": "A1"
+      },
+      "url": "https://shop.example.com/store/S${resource_id}"
+    },
+    "postconditions": {
+      "ok": true
+    },
+    "parameter_slots": [
+      "resource_id"
+    ],
+    "auth_scope": null,
+    "freshness": {},
+    "applicability_guards": {},
+    "verification_rule": {},
+    "failure_boundary": {},
+    "repair_scope": {},
+    "evidence": [
+      "2c0c00db0d6957df",
+      "c3a6797e316976ad",
+      "383764ece708b429"
+    ],
+    "confidence": 0.9,
+    "invalidated": false
+  }
+]

@@ -1,0 +1,30 @@
+{
+  "attempts": [
+    {
+      "source": "data/webarena_verified_v2.json",
+      "found": false,
+      "path": "/home/runner/work/Spider/Spider/data/webarena_verified_v2.json",
+      "exists": false
+    },
+    {
+      "source": "/tmp/webarena",
+      "found": false,
+      "path": "/tmp/webarena",
+      "exists": false
+    },
+    {
+      "source": "verified CSV https://github.com/web-arena-x/webarena",
+      "found": false,
+      "reason": "network fetch not attempted in offline harness (would require Docker)"
+    }
+  ],
+  "expected": {
+    "tasks": 192,
+    "templates": 49,
+    "families_ge3": 36,
+    "duplication": 0.9479,
+    "exact_copy": 0.0781,
+    "param_task": 0.8958
+  },
+  "verified": false
+}

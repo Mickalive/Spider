@@ -1,0 +1,13 @@
+{
+  "checks": {
+    "distill_parameterized_exists": true,
+    "common_prefix_fix": true,
+    "jaccard_check": true,
+    "field_filter": true,
+    "distinct_slot": true,
+    "confidence_090": true,
+    "no_double_prefix_bug": true
+  },
+  "sha256": "424c7aac1d8f9b88112a22274fa87f99a863697b474d6e5c47dce304c001b875",
+  "path": "/home/runner/work/Spider/Spider/src/spider/kernel.py"
+}
