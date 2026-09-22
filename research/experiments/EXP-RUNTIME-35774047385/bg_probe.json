@@ -1,0 +1,16 @@
+{
+  "probe": "browsergym_agentlab_image",
+  "checked": "2026-09-22T20:19:10.239081+00:00",
+  "images": {
+    "am1n3e/webarena-verified-shopping": "ABSENT",
+    "agentlab": "ABSENT"
+  },
+  "pull_attempt": {
+    "image": "am1n3e/webarena-verified-shopping",
+    "timeout_s": 30,
+    "rc": 124,
+    "note": "rc 0 = pull ok; 124 = timed out; other = registry/auth error"
+  },
+  "classification": "NOT_TESTED",
+  "reason": "IMAGE_UNAVAILABLE: docker image absent and bounded pull did not succeed (rc=124); frozen H4 maps to E4_BG NOT_TESTED, not gating C1-C10_CDN verdict"
+}

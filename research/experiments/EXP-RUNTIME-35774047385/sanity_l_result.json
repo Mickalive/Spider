@@ -1,0 +1,10 @@
+{
+  "l_body_AvsC_full": 1.0,
+  "l_body_AvsC_status": 0.0,
+  "l_hdr_AvsE_full": 1.0,
+  "l_hdr_AvsE_body": 0.0,
+  "sanity_started_at": "2026-09-22T20:18:43.512796+00:00",
+  "sanity_finished_at": "2026-09-22T20:18:53.804342+00:00",
+  "n_per_state": 20,
+  "topology": "L (Werkzeug dev server, threaded)"
+}

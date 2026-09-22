@@ -1,0 +1,12 @@
+{
+  "probe": "cdn_credentials_and_domain",
+  "checked": "2026-09-22T20:19:10.238895+00:00",
+  "env_vars": {
+    "CF_API_TOKEN": "ABSENT",
+    "FASTLY_API_KEY": "ABSENT",
+    "SPIDER_CDN_DOMAIN": "ABSENT"
+  },
+  "workflow_secrets_relevant": ".github/workflows/spider-lane.yml env block provides only LANE, CHAIN_DEPTH, RESUME_EXPERIMENT_ID, DIRECTOR_MANDATE_B64, GH_TOKEN, SPIDER_CONTROL_HELPER; no CDN credential secret is mapped into the runner",
+  "classification": "CDN_UNAVAILABLE",
+  "decision": "frozen spec.json decision_rule: CDN credentials/domain unavailable => MEASUREMENT_INVALID CDN_UNAVAILABLE (NOT falsification); sanity L preserved"
+}
