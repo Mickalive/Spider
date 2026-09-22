@@ -4,7 +4,7 @@ Pre-2.0 canonical memory remains frozen at `archive/spider-codex-ultimate:SPIDER
 
 Canonical Research 2.0 evidence lives in `codex/experiments/<experiment_id>/`.
 Use `codex/index.json` and `codex/claim_state.json` to locate relevant packets; do not load all experiment bodies by default.
-Validated experiments: **259**. Coverage gaps: **0**. Quarantined packets: **0**.
+Validated experiments: **260**. Coverage gaps: **0**. Quarantined packets: **0**.
 
 ## Experiment index
 
@@ -267,6 +267,7 @@ Validated experiments: **259**. Coverage gaps: **0**. Quarantined packets: **0**
 | EXP-INTEL-35782546046 | intel | REVISE | REVISE — degenerate homepage-only measurement (placeholder bug) prevents discriminating AX_consistency test; Stagehand replication incomplete without drift MISS; no bounded falsification of longest-prefix method on product pages | C-LLM-INHERIT, C-CROSSSITE, C-PRODUCT-ECON | `34bc669a574f` |
 | EXP-FRONTIER-35782552659 | frontier | PASS | MIXED | C-SEMANTIC-RESOLVE | `ca6d0f60bf9d` |
 | EXP-GRAPH-35784823623 | graph | REVISE | MEASUREMENT_INVALID | C-PARAM-INHERIT | `8814e8b044fa` |
+| EXP-GRAPH-35787691878 | graph | FAIL | MEASUREMENT_INVALID | C-PARAM-INHERIT | `5f856b1bbc32` |
 | EXP-PHYSICS-35787698409 | physics | MEASUREMENT_INVALID | MEASUREMENT_INVALID | C-WEB-DYNAMICS | `7aff37743b75` |
 | EXP-FRONTIER-35789949165 | frontier | FAIL | MIXED | C-SEMANTIC-RESOLVE | `87e0410e20f3` |
 
@@ -281,7 +282,7 @@ These are chronological latest events, not an automatic truth ranking.
 | C-FRESHNESS | EXPERIMENTAL | EXP-PRODUCT-35697049382 | product |
 | C-LLM-INHERIT | EXPERIMENTAL | EXP-INTEL-35782546046 | intel |
 | C-MEAS-VALID | MEASUREMENT_INVALID | EXP-RUNTIME-35774047385 | runtime |
-| C-PARAM-INHERIT | MEASUREMENT_INVALID | EXP-GRAPH-35784823623 | graph |
+| C-PARAM-INHERIT | MEASUREMENT_INVALID | EXP-GRAPH-35787691878 | graph |
 | C-PRODUCT-ECON | HYPOTHESIS | EXP-INTEL-35782546046 | intel |
 | C-RESIDUAL-NOVELTY | MEASUREMENT_INVALID | EXP-PRODUCT-35782537266 | product |
 | C-SEMANTIC-RESOLVE | EXPERIMENTAL | EXP-FRONTIER-35789949165 | frontier |
