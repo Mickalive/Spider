@@ -37,7 +37,6 @@ class Mechanism:
     failure_boundary: dict[str, Any] = field(default_factory=dict)
     repair_scope: dict[str, Any] = field(default_factory=dict)
     evidence: list[str] = field(default_factory=list)
-    evidence_values: dict[str, list[str]] = field(default_factory=dict)
     confidence: float = 0.0
     invalidated: bool = False
 
