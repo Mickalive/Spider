@@ -4,7 +4,7 @@ Pre-2.0 canonical memory remains frozen at `archive/spider-codex-ultimate:SPIDER
 
 Canonical Research 2.0 evidence lives in `codex/experiments/<experiment_id>/`.
 Use `codex/index.json` and `codex/claim_state.json` to locate relevant packets; do not load all experiment bodies by default.
-Validated experiments: **217**. Coverage gaps: **0**. Quarantined packets: **0**.
+Validated experiments: **218**. Coverage gaps: **0**. Quarantined packets: **0**.
 
 ## Experiment index
 
@@ -227,6 +227,7 @@ Validated experiments: **217**. Coverage gaps: **0**. Quarantined packets: **0**
 | EXP-PHYSICS-35651906573 | physics | REVISE | SURVIVES_CURRENT_TEST — frozen decision rule formally passes all conditions (C1 5/5, C3 5/5, C5 5/5, C6 pass). However, audit REVISE and producer_claim_supported=false constrain the claim ceiling: observed log BF is NEGATIVE (-10.4 to -15.6 nats) on all variants, meaning the memory-only model M0 is favored absolutely at K=12. The C3 'detection' is relative-to-null separation (observed exceeds all 1999 shuffled null samples, p=0.0005 floor), not evidence for action-conditioned dynamics beyond memory. Effective independent replications are 2 (not 5) due to isomorphic variant pairs. The estimator implementation is validated (positive control replication-exact), and the real-action-arrangement is statistically distinguishable from shuffled, but the absolute model comparison favors memory. This does NOT bridge the synthetic→real gap for C-WEB-DYNAMICS; it bridges it for estimator validation on real browser data. | C-WEB-DYNAMICS | `c1901d28658c` |
 | EXP-PRODUCT-35651924708 | product | BLOCKED | BLOCKED | C-LLM-INHERIT | `8a4a4e234519` |
 | EXP-INTEL-35651934683 | intel | REVISE | SURVIVES_CURRENT_TEST — frozen decision rule passes: condition (1) M1>=0.5 satisfied by WebArena shopping (1.0) and VisualWebArena (1.0); condition (2) M2>=0.5 satisfied by WebArena shopping (0.8) and Mind2Web (0.65); condition (3) M3=true satisfied by Mind2Web official 3-way split. However, the claim ceiling is strictly bounded by audit: this is a distributed structural-documentation survey only. No direct dataset inspection performed. Mind2Web M1=0.8182 is inflated from hardcoded instance_count=10 (audit VF1; empirical mean 4.42 gives corrected M1=0.311). M2 values are heuristic estimates from scoring rules, not measured fractions of task instances with variable fields (audit VF2). PC1/NC1 controls are tautological — they test scoring code output, not independent benchmark structure verification (audit VF3). No single benchmark simultaneously provides cross-site structure, parameterization, AND novelty splits (audit VF4). Cross-site mechanism sharing is assumed from documentation, not verified on task samples (audit VF5). Mind2Web novelty-fraction split guarantees instance-level separation but not same-mechanism overlap across train/test (audit VF6). Transformation costs inherited from EXP-INTEL-33925056324, not re-measured (audit VF7). The frozen decision_rule is satisfied; the producer's SUPPORTS outcome is valid under distributed interpretation. But the maximum justified ceiling is: public documentation suggests WebArena shopping (imposed cross-site pairs, 12 stores sharing platform) and Mind2Web (official instance-level splits) provide complementary structural properties that *could* support C-LLM-INHERIT experiment design pending dataset-level verification of mechanism sharing, duplication fraction, and parameterization prevalence. This is not a validated ranked suitability list for SPIDER execution. | C-LLM-INHERIT, C-CROSSSITE, C-RESIDUAL-NOVELTY | `98a79bab85bc` |
+| EXP-RUNTIME-35697043449 | runtime | REVISE | SUPPORTS — all five frozen decision-rule conditions satisfied (C1-C5). Permission escalation discrimination 1.0, session invalidation discrimination 1.0, null control 0.0 with CI containing 0.0, full-vector >= max baseline, null control <= 0.05. However, claim ceiling is narrowed per audit: discrimination is deterministic (1 unique fingerprint per state, degenerate bootstrap CI), C4 is vacuous (full == body == status == 1.0 because status and body change simultaneously), and results are bounded to localhost Flask dev server with maximally-distinct writable controls. C-MEAS-VALID remains EXPERIMENTAL with expanded ceiling. C-FRESHNESS and C-DELTA-REPAIR unblocked for localhost synthetic testing but NOT for distributed production testing. | C-MEAS-VALID | `a1bfd9b8fd07` |
 
 ## Latest recorded claim events
 
@@ -237,7 +238,7 @@ These are chronological latest events, not an automatic truth ranking.
 | C-CROSSSITE | HYPOTHESIS | EXP-INTEL-35651934683 | intel |
 | C-FRESHNESS | EXPERIMENTAL | EXP-GRAPH-35611618323 | graph |
 | C-LLM-INHERIT | EXPERIMENTAL | EXP-INTEL-35651934683 | intel |
-| C-MEAS-VALID | EXPERIMENTAL | EXP-RUNTIME-35611612543 | runtime |
+| C-MEAS-VALID | EXPERIMENTAL | EXP-RUNTIME-35697043449 | runtime |
 | C-PARAM-INHERIT | EXPERIMENTAL | EXP-PRODUCT-35353007958 | product |
 | C-PRODUCT-ECON | REJECTED | EXP-INTEL-35551517470 | intel |
 | C-RESIDUAL-NOVELTY | HYPOTHESIS | EXP-INTEL-35651934683 | intel |

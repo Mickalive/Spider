@@ -1,0 +1,72 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-35697043449",
+  "lane": "runtime",
+  "created_at": "2026-09-22T06:55:36.429032+00:00",
+  "executed_at": "2026-09-22T07:10:39+00:00",
+  "completed_at": "2026-09-22T07:12:14+00:00",
+  "github_run_id": "35697043449",
+  "base_sha": "952347fba386cc838bde14bcf7a8cb03abe0c160",
+  "environment": {
+    "platform": "linux",
+    "python_version": "3.12.14",
+    "flask_version": "3.1.3",
+    "pyjwt_version": "2.14.0",
+    "requests_version": "2.34.2",
+    "sqlite_version": "3.45.0",
+    "host": "127.0.0.1",
+    "port": 19847
+  },
+  "dependencies": [
+    "Flask 3.1.3",
+    "PyJWT 2.14.0 (HS256)",
+    "SQLite WAL-mode (3.45.0)",
+    "requests 2.34.2",
+    "Python 3.12.14"
+  ],
+  "code_paths": {
+    "experiment_script": "research/experiments/EXP-RUNTIME-35697043449/run_experiment.py",
+    "flask_testbed": "inline in run_experiment.py (create_app function)",
+    "endpoints": [
+      "POST /auth/token — JWT token issuance with SQLite session creation",
+      "GET /protected — requires valid JWT + active session, returns role from SQLite",
+      "GET /admin — requires valid JWT + active session + role='admin' from SQLite",
+      "GET /session/status — returns session validity from SQLite"
+    ]
+  },
+  "frozen_inputs": {
+    "request_hash": "e75defa6fc61008eef68963e4c44232be70bcb05ef2f92035be1208ad05a1aec",
+    "spec_hash": "6e2a2acc468e1a8c8c921534c5ada3e91bd647ffcb4d0baafdb050d822f2370c",
+    "prereg_hash": "f0e0cc8d8b3eebaa6e0b4791c6e01796dd190954d84829dd43a2d1f1dcdaea69",
+    "freeze_hash": "see freeze.json"
+  },
+  "artifacts": {
+    "run_experiment.py": {
+      "sha256": "15c18e38238de5d6fd37f319266d7a5933a061be722f5fe71fdd940aaa1340c7",
+      "role": "code"
+    },
+    "raw_observations.jsonl": {
+      "sha256": "f3d5dd98cc5a4dc6c41819bf5f77b180f903b8d86fa02ad1205e01910e5f8d5a",
+      "role": "raw",
+      "lines": 120,
+      "description": "N=20 observations per state × 6 states (no_auth, valid_reader, reader_admin_403, valid_admin_200, session_killed, null_control)"
+    },
+    "experiment_result.json": {
+      "sha256": "d79ad06f75d837555accd8dad9ca34d928269138a717068861af48e0c1a5ba79",
+      "role": "derived",
+      "description": "Complete experiment metrics, conditions, and observation summaries"
+    }
+  },
+  "seed": 44,
+  "jitter_ms": "50-150 uniform",
+  "n_per_state": 20,
+  "total_observations": 120,
+  "bootstrap_n": 1000,
+  "excluded_headers": ["Date", "Server", "X-Request-Id"],
+  "jwt_algorithm": "HS256",
+  "jwt_secret": "test-secret-key-exp-runtime-35697043449",
+  "commands": {
+    "install_deps": "pip install flask pyjwt requests",
+    "run_experiment": "cd research/experiments/EXP-RUNTIME-35697043449 && python3 run_experiment.py"
+  }
+}
