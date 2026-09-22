@@ -1,0 +1,51 @@
+{
+  "family": "add_to_cart",
+  "template": "Add {{sku}} to cart",
+  "pool_a": [
+    {
+      "sku": "SKU-A001"
+    },
+    {
+      "sku": "SKU-A002"
+    },
+    {
+      "sku": "SKU-A003"
+    },
+    {
+      "sku": "SKU-A004"
+    },
+    {
+      "sku": "SKU-A005"
+    },
+    {
+      "sku": "SKU-A006"
+    },
+    {
+      "sku": "SKU-A007"
+    }
+  ],
+  "pool_b": [
+    {
+      "sku": "SKU-B001"
+    },
+    {
+      "sku": "SKU-B002"
+    },
+    {
+      "sku": "SKU-B003"
+    },
+    {
+      "sku": "SKU-B004"
+    },
+    {
+      "sku": "SKU-B005"
+    },
+    {
+      "sku": "SKU-B006"
+    },
+    {
+      "sku": "SKU-B007"
+    }
+  ],
+  "zero_overlap_verified": true
+}
