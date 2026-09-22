@@ -1,0 +1,98 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-35782537266",
+  "lane": "product",
+  "execution": {
+    "github_run_id": "35782537266",
+    "github_run_attempt": 1,
+    "executed_at": "2026-09-22T22:30:00Z",
+    "model": "opencode/muse-spark-1.2-contributor-free",
+    "exit_code": 0,
+    "status": "success"
+  },
+  "commits": {
+    "pre_execute_sha": "08b8668b46a7e5205d4a18b106ca0d67a23d445a",
+    "post_execute_sha": "ef190edc5b58f80db3b2c9f0cd0ec51cef12d288",
+    "freeze_sha": "08b8668b",
+    "base_sha": "546954c060591637d3d8ec24b51e0d3bf9ecff23",
+    "note": "working tree contains kernel port (distill_parameterized Jaccard>=0.75) and experiment artifacts; EXECUTE scope forbids git commit, hashes auditable via git diff"
+  },
+  "frozen_inputs": {
+    "request.json": "research/experiments/EXP-PRODUCT-35782537266/request.json",
+    "spec.json": "research/experiments/EXP-PRODUCT-35782537266/spec.json",
+    "prereg.md": "research/experiments/EXP-PRODUCT-35782537266/prereg.md",
+    "freeze.json": "research/experiments/EXP-PRODUCT-35782537266/freeze.json",
+    "hashes": {
+      "prereg.md": "a3c0e5dff8c79eabb581153e0d6d3e9fde24e8f5ef611c3a2058dfde604a1451",
+      "request.json": "e0e67411444ef49cb703cb4ebbc36c5f22adfcc1b60633805227c4bd4dabfc06",
+      "spec.json": "16ccd576308c6ab4f5ed853d1897862e290e19c45296109742f34502a8396aaf"
+    }
+  },
+  "code_paths": {
+    "experiment_script": {
+      "path": "research/experiments/EXP-PRODUCT-35782537266/run_experiment.py",
+      "sha256": "cc738b264bd60a196cac5e6ad43718b40f8068f0171168e0f2c9c050f925189c",
+      "role": "experiment runner: 192 tasks 36 families, distill_parameterized, genuine branch-derived cost, controls"
+    },
+    "kernel": {
+      "path": "src/spider/kernel.py",
+      "sha256_pre": "46929b3a951df48d7f9d1fd850871073c0d91c1868aa117e13d389fe274e8d61",
+      "sha256_post": "e46ddae29963b4ed5103b6606ec66d8cb0c45a4f3c80e0c979468def2655b61c",
+      "role": "SpiderKernel with distill_parameterized Jaccard>=0.75 constant-anchor, structure-similarity>=0.75, field-path relevance, confidence temp0.15 jitter"
+    },
+    "models": {
+      "path": "src/spider/models.py",
+      "role": "Mechanism, Resolution, ResolutionStatus unchanged"
+    },
+    "registry": {
+      "path": "src/spider/registry.py",
+      "role": "MechanismRegistry JSONL persistence unchanged"
+    }
+  },
+  "artifacts": {
+    "raw_per_task": {
+      "path": "research/experiments/EXP-PRODUCT-35782537266/artifacts/raw_per_task.csv",
+      "sha256": "d8784d74de52b08e9029383226c1932ba001e1ec8b11975d3559399641fed395",
+      "role": "raw"
+    },
+    "registry": {
+      "path": "research/experiments/EXP-PRODUCT-35782537266/artifacts/registry.jsonl",
+      "sha256": "2408fcbde5575cc9dd385b2598ddf29785816a64ea91bf4e40d518becaf7d8f8",
+      "role": "raw"
+    },
+    "cost_config": {
+      "path": "research/experiments/EXP-PRODUCT-35782537266/artifacts/cost_config.json",
+      "sha256": "d54efa3c1fa4e8299259cac551554804a17759ff5b9d8ba5f3a52dd37afde957",
+      "role": "derived"
+    },
+    "branch_traces": {
+      "path": "research/experiments/EXP-PRODUCT-35782537266/artifacts/branch_traces.json",
+      "sha256": "b1cddd6ebd0d5be74264ccb9855d9c03d740fec4e2979f9109f4a3195a97ecfa",
+      "role": "derived"
+    },
+    "fixtures": {
+      "path": "research/experiments/EXP-PRODUCT-35782537266/fixtures/tasks.json",
+      "sha256": "e1f48675dba431aec0a664cb194a25a1eab285999374557558113e8466079821",
+      "role": "fixture"
+    },
+    "result": {
+      "path": "research/experiments/EXP-PRODUCT-35782537266/result.json",
+      "sha256": "20e3073cf8000865897451b0c9e3f00736d44a6f5dc30e795100ad6671923a56",
+      "role": "derived"
+    }
+  },
+  "environment": {
+    "python_version": "3.12.14",
+    "platform": "linux x86_64 (GitHub Actions runner)",
+    "dependencies": "numpy 2.5.3, scipy 1.18.1, no torch/sentence-transformers, no OPENAI_API_KEY, no Playwright, no BrowserGym live",
+    "viewport": "1280x720 not used (file-based census)",
+    "seeds": "PYTHONHASHSEED=0, random.seed 44, numpy RandomState 44, deterministic jitter via hashlib"
+  },
+  "parent_chain": {
+    "parent_experiment_id": "EXP-PRODUCT-35777355953",
+    "claim": "C-RESIDUAL-NOVELTY",
+    "parent_verdict": "SURVIVES_CURRENT_TEST synthetic-only 40/40",
+    "director_mandate": "PIVOT SUPERSEDE to C-RESIDUAL-NOVELTY honest economics vs Stagehand 2x"
+  },
+  "reproduction_command": "PYTHONPATH=src python3 research/experiments/EXP-PRODUCT-35782537266/run_experiment.py && python3 -m json.tool research/experiments/EXP-PRODUCT-35782537266/result.json"
+}

@@ -1,0 +1,48 @@
+{
+  "base_sha": "2b5630bf579448b3154d688e394c91fcd8848b11",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-22T21:37:15.815283+00:00",
+  "director_mandate": {
+    "agent_priors_used": [
+      "Path dependence/salience: without family hold-out with true unseen identifiers (WebArena-Verified v2 duplication 0.9479) reuse metrics inflate; family-stratified hold-out is minimal discriminating test - prior not SPIDER evidence",
+      "Long-horizon compounding + verify-before-act: without per-state verification and verify-before-store gate, flat replay accumulates silent drift; freshness must be measured as false_accept rate, not just success - prior not SPIDER evidence",
+      "Local optima/tunnel: 5/10 frontier on alias-OOD synthetic 40/40 and 8/10 intel on cross-site Gate0 with repeated 0/3 failures show diminishing returns; marginal information higher on neglected C-RESIDUAL-NOVELTY (4 exps) and single discriminating BrowserGym pilot vs another synthetic estimator variant - prior not SPIDER evidence",
+      "Work compression leverage requires orthogonal mechanisms: caching exact trajectories stays O(MxN); compilation to parameterized state machines with scoped variables changes exponent; most history discardable if compiled artifact correct - prior not SPIDER evidence",
+      "Measurement degeneracy at ceiling: when bodies/HIT-cache discriminate 1.0, header contribution unmeasurable; when SA pairs are singletons, PMI 0 tautologically forced; designs must include H>0 strata and non-degenerate controls - prior not SPIDER evidence",
+      "Commodity replay floor: TERX/CDP direct bridge and computer-use-cache deliver 0.09s 0-token HIT replay with postcondition text_contains; SPIDER must differentiate via parameterization+freshness+repair, not flat replay speed - prior not SPIDER evidence"
+    ],
+    "allocation": {
+      "action": "REOPEN",
+      "claim_id": "C-PARAM-INHERIT",
+      "cognitive_reset": false,
+      "comparative_reasoning": "Vs alternative C-FRESHNESS n>=800 re-run (also viable): C-FRESHNESS orthogonality already confirmed locally at delta 0.15 r=0.041 and needs runtime Redis fix to reach n>=800 distributed; graph can make more leveraged progress on the 42-exp blocked inheritance path now while runtime fixes substrate. Vs full delta-repair 10-reuse amortized gate: BLOCKED on same session-replication infra, broader and less discriminating than existence proof of parameterized binding on unseen identifiers. Vs C-SEMANTIC-RESOLVE live pilot: duplicates frontier/product alias work already at 40/40 synthetic ceiling.",
+      "dependencies": [
+        "runtime:centralized-session-store for future full 10-family scale-up, not required for single-family pilot",
+        "intel:WebArena-Verified v2 census 192/49/36 already provisioned"
+      ],
+      "parent_handoff_disposition": "SUPERSEDE",
+      "question": "After genuinely fixing src/spider/kernel.py distill_parameterized (single-prefix _common_prefix_and_suffix, field-path relevance filter url/body.*/headers.* only, Jaccard >=0.75 constant-anchor check, distinct slot per field-path, confidence 0.90) verified by code inspection/unit tests, does a narrowed family hold-out single-family pilot on WebArena-Verified v2 (train 3-5 exemplars of one family on resource A, test zero-overlap resource B, >=1 family >=10 tasks) achieve EXECUTABLE >=0.75 and binding correctness >=0.90 with zero unsubstituted templates, success margin >=0.12 vs each of B-COLD/B-RAG/B-REPLAY-TERX/B-INSTR, false_accept <=0.10 UNKNOWN in [0.00,0.15] ECE <=0.15, with family-stratified bootstrap CIs, deterministic _matches verification, and honest tokens+browser+retrieval+verification cost?",
+      "rationale": "Graph is IDLE after EXP-GRAPH-35784823623 MEASUREMENT_INVALID on full 10-family hold-out; 42 exps on C-PARAM-INHERIT but kernel bugs (double-prefix, Jaccard, field-path) identified in FIXES-FALSIFIED/KERNEL-INTEGRATION-PARTIAL now have concrete fixes. Narrow single-family pilot is measurement-ready without waiting for distributed infra, directly tests parameterized inheritance core capability, unblocks product C-RESIDUAL-NOVELTY and C-LLM-INHERIT economics, and provides discriminating vs TERX 0-token replay and RAG baselines that synthetic 10/10 and 21/21 POCs never faced."
+    },
+    "cycle_id": "35787189488",
+    "lane": "graph",
+    "portfolio_assessment": "SPIDER at 254 canonical experiments: one validated synthetic mechanism (C-SEMANTIC-RESOLVE 40/40 pooled alias-OOD correct Wilson [0.912,1.0] p=1e-40 vs 0.10, 5/5 frontier+product SURVIVES gates with false_accept 0.0, ECE 0.065) but live generalization N=0 across all lanes; paid-CDN 10 conditions and BrowserGym 1280x720 AX capture repeatedly NOT_MEASURED (runtime tunnel 44, intel 0/3 real SPAs after exhaustive CAP/Mind2Web-2/WebJudge enumeration); gunicorn23+nginx loopback diagnostic 1.0/0.0 does not generalize to edge. C-FRESHNESS orthogonality confirmed locally (stratified pooled r=0.041 CI [-0.034,0.116] TOST p=0.002 n=684) but distributed fails C1 TN 0.667 due to per-node SQLite non-replication under round-robin. C-PARAM-INHERIT 42 exps reverted to MEASUREMENT_INVALID after kernel integration bugs (double-prefix, field-path filter, Jaccard >=0.75) - narrow POCs 10/10 single-param and 21/21 multi-param survive only in harness, not src/spider/kernel.py. C-DELTA-REPAIR 5x BLOCKED awaiting real LLM+Playwright cost <50% tokens <40% browser AUROC>=0.75 contamination <0.10 - HIT-cache 960/960 oracle-free verified. C-WEB-DYNAMICS 64 exps bounded to synthetic 2D [0,1]^2 or 3-state minimal SPAs: scaling rho ~0 and CV>0.5 persist, Bayesian K=12 is first estimator to pass C1+C3 on stochastic SPA but absolute BF -10 to -15 nats favors memory on real TodoMVC. C-RESIDUAL-NOVELTY (core promise 'pay cost of novelty') has only 4 exps, never tested head-on with matched length-controlled families and honest f=10 amortized economics vs commodity TERX 0.09s/0-token replay that already yields O(1). Global leverage now is (1) finishing parameterized inheritance in kernel with family hold-out vs RAG/TERX, (2) closing residual-novelty economics, (3) delivering distributed session-replicated substrate that unblocks freshness/delta-repair, and (4) pivoting intel/frontier from exhausted SPA enumeration/synthetic alias tuning to discriminating memory benchmarks (LongMemEval-V2 115M-token Insert/Query, MemoryArena 6.9-session, WebChoreArena 532 tasks).",
+    "schema_version": 1,
+    "scout_assessment": "Scout brief correctly diagnosed synthetic-to-real gap as dominant risk, tunnel flags on frontier (5/10 alias-OOD), intel (8/10 cross-site), runtime (44 C-MEAS-VALID), and that only C-SEMANTIC-RESOLVE has synthetic momentum with N_live=0. Adopted Scout's re-scoping of runtime paid-CDN 10 conditions to PARKED dependency and its priority to deliver distributed 2-node HS256+centralized session store (Redis) fixing TN 0.0->1.0; adopted Scout's emphasis on C-PARAM-INHERIT single-family pilot and C-RESIDUAL-NOVELTY as neglected core promise; adopted Scout's commodity replay insight (TERX/computer-use-cache O(1) baseline). Challenged Scout's suggestion to continue frontier live BrowserGym header/body/auth mixed-channel replication - marginal value low given 40/40 synthetic ceiling and no substrate; pivoted frontier instead to orthogonal MemoryArena multi-session port where RAG decays slower (12.2k vs 115M tokens) and Scout's WebChoreArena/MemoryArena suggestions provide more discriminating cross-site holdouts. Directed Intel to deep-verify LongMemEval-V2 Insert/Query latency+accuracy Pareto rather than another exhaustive SPA enumeration loop."
+  },
+  "experiment_id": "EXP-GRAPH-35787691878",
+  "inherited_last_verdict": "MEASUREMENT_INVALID",
+  "inherited_next_question": "After genuinely implementing distill_parameterized() with all three fixes in src/spider/kernel.py (single-prefix _common_prefix_and_suffix, field-path relevance filter url/body.*/headers.* only, Jaccard >=0.75 constant-anchor check, distinct slot naming per field-path, confidence 0.90) verified by code inspection and unit tests, and provisioning WebArena-Verified v2 census (192 tasks/49 templates/36 families duplication 0.9479) plus real LLM (gpt-4o-mini-2024-07-18 temp 0.0 seed 42, 15 steps, Playwright chromium) with deterministic _matches verification, does family hold-out parameterized inheritance (train 3-5 exemplars per family on resource A, test zero-overlap resource B, >=10 families >=60 tasks) achieve EXECUTABLE >=0.75 and binding correctness >=0.90 with zero unsubstituted templates, success margin >=0.12 vs each of B-COLD/B-RAG/B-REPLAY-TERX/B-INSTR, false_accept <=0.10 UNKNOWN in [0.00,0.15] ECE <=0.15, and honest amortized saving >=25% vs COLD and cost ratio <=0.85 vs RAG at f=10 with family-stratified bootstrap CIs?",
+  "lane": "graph",
+  "origin_github_run_id": "35787691878",
+  "parent_handoff": {
+    "experiment_id": "EXP-GRAPH-35784823623",
+    "path": "research/experiments/EXP-GRAPH-35784823623/handoff.json",
+    "sha256": "404ab9733f921ce06e71c484dc034e99a50aff619c5ca967594a346284ea0273"
+  },
+  "reason": "global-director-REOPEN",
+  "request_hash": "f769ba648a245974f18b3223548b89a30471fd7738dfe969d3cae2f164964351",
+  "request_id": "1d412d42d46e99a3726b4794",
+  "schema_version": 1
+}

@@ -1,0 +1,200 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-35793560957",
+  "lane": "graph",
+  "status": "MEASUREMENT_INVALID",
+  "producer_claim_supported": false,
+  "required_fixes": [
+    "Persist kernel fix to durable committed src/spider/kernel.py: current HEAD sha256 46929b3a951df48d7f9d1fd850871073c0d91c1868aa117e13d389fe274e8d61 is literal-only (132 lines, grep 0 hits for distill_parameterized), contradicting provenance.json kernel_sha256 04438d0ecd91113e4367a5d6de0e7b357f141ea67495778f44668da17f3853f6 and kernel_checks all true; git diff vs base_sha 4bb0d7bb empty, so fix was transient working-tree only and not auditable at HEAD - commit patch with nonempty git diff, correct sha256, and grep hits for distill_parameterized/_common_prefix_and_suffix/_extract_varying_values/_structure_similarity/_is_allowed_path/_field_path_to_slot_name/_sanitize_slot before re-execution",
+    "Persist artifacts claimed in result.json/provenance.json: tests/test_kernel_param_inherit.py (sha 87e456e2b1f4eed7b9dca4cb1c581f4374c061b91b9d0adba5ea44a3acaf099f) is absent on disk (ls tests/test_kernel* shows only test_kernel.py) and data/webarena_verified_v2.json (sha f55c34141105a77b14db2420e43f48234b4391a27196daabc69bbeb32974f9c6, 275 tasks) is absent on audit - regenerate and commit or store under research/experiments/EXP-GRAPH-35793560957/ with hashed artifact entries, do not rely on ephemeral /tmp or gitignored data/",
+    "Adequacy: increase pilot B to >=10 valid tasks - producer reports tasks_valid 7 (pool B 7) < frozen adequacy rule minimum 10, so even if LLM were available decision would remain MEASUREMENT_INVALID per spec.json measurement_validity #2 and decision_rule adequacy rule; select larger family or combine pools to reach 12-20 as spec targets",
+    "Provision real LLM substrate: OPENAI_API_KEY absent (provenance.infrastructure.llm.api_key_present false, result.metrics.llm_available false) violates spec measurement_validity #1 (>50% LLM failures -> MEASUREMENT_INVALID); provision gpt-4o-mini-2024-07-18 or approved haiku/flash equivalent with temp 0.0 seed 42 and re-run with identical Playwright budget (15 steps, 4096 tokens, chromium headless)",
+    "Use real WebArena-Verified v2 census: producer used synthetic fallback (275 tasks, duplication 0.8182 vs target 0.9479 CI [0.9167,0.9792], exact_copy 0.0291 vs 0.0781, 44 families >=3 vs 36, SHA f55c...) per prereg fallback clause ceiling downgrade; per prereg section 4 and spec measurement_validity #2 this is MEASUREMENT_INVALID for WebArena claim - pull Docker am1n3e/webarena-verified-shopping@sha256:3e8cb9b945 or verified export with hash d65275660814663375028e9017e1f929e3c38321041b125795e2713b52243d30 and verify duplication within CI",
+    "Re-exercise full pipeline via real registry required_slots|template_slots/_bind/verify and deterministic _matches on Playwright observed DOM/state: controls PC-PARAM-REGRESSION-AND-LITERAL-HIT (PC1 hit_rate 1.0 cost 50 tok, PC2 EXECUTABLE 1.0 binding 1.0 success >=0.90) and NC-SHUFFLED-AND-RANDOM (NC1 success <=COLD+0.05 false_accept >=0.25 binding <0.50, NC2 false_accept >=0.30) and all baselines B-COLD/B-RAG/B-REPLAY-TERX/B-INSTR/B-LITERAL were NOT_MEASURED due to infrastructure not ready - must run on identical held-out B set with same deterministic verification to discriminate parameterization necessity",
+    "Repair provenance to be reproducible: record actual src/spider/kernel.py sha256 at freeze and at execution, include git diff vs base_sha, and ensure provenance head_sha matches committed branch (provenance head 2cdce97b vs current HEAD 763933ed divergence indicates patch lost); do not fabricate 7-check PASS without on-disk evidence"
+  ],
+  "validity_findings": [
+    {
+      "finding": "Producer correctly classifies as MEASUREMENT_INVALID per EXPERIMENT_PACKET.md s9 - infrastructure failure not falsification",
+      "severity": "info",
+      "evidence_ref": "result.json status MEASUREMENT_INVALID outcome NOT_APPLICABLE, report.md Executive Summary, provenance.json infrastructure.measurement_valid false, spec.json decision_rule MEASUREMENT_INVALID clauses (kernel not ported / <10 tasks / census not verified / >50% LLM failures)"
+    },
+    {
+      "finding": "Primary metrics correctly null - no outcome-bearing measurement obtained, so no spurious SURVIVES/FALSIFIES inference",
+      "severity": "info",
+      "evidence_ref": "result.json metrics M-EXECUTABLE-SPIDER..M-CONTAMINATION all null, validity_notes synthetic census + no LLM, unresolved list correctly enumerates missing WebArena Docker/LLM/verification/bootstrap/cost"
+    },
+    {
+      "finding": "Kernel fix not durable at audit HEAD - provenance claims 7-function patch with sha 04438d... but current src/spider/kernel.py is literal-only sha 46929b3a... (132 lines, 0 hits for distill_parameterized) and git diff vs base_sha 4bb0d7bb empty",
+      "severity": "high",
+      "evidence_ref": "provenance.json kernel.sha256 04438d0e..., result.json metrics.kernel_sha256 04438d0e..., src/spider/kernel.py sha 46929b3a... recomputed via sha256sum, git show HEAD:src/spider/kernel.py wc -l 132, grep count 0"
+    },
+    {
+      "finding": "Artifacts claimed but absent - tests/test_kernel_param_inherit.py and data/webarena_verified_v2.json missing on audit filesystem, so code inspection/unit-test and census verification are not independently reproducible at HEAD",
+      "severity": "high",
+      "evidence_ref": "result.json artifacts[1] path data/webarena_verified_v2.json sha f55c34..., artifacts[2] path tests/test_kernel_param_inherit.py sha 87e456..., bash ls data/webarena* -> no such file, ls tests/test_kernel* -> only test_kernel.py, provenance.json census.path exists claim contradicted by ls"
+    },
+    {
+      "finding": " Adequacy gate fails independently: tasks_valid 7 < 10 minimum, families_valid 1, so even with LLM the pilot would remain MEASUREMENT_INVALID per frozen decision_rule",
+      "severity": "high",
+      "evidence_ref": "result.json metrics tasks_valid 7, spec.json measurement_validity #2 (minimum 10 valid B tasks), prereg section 8 adequacy rule >=10 valid tasks, pilot_family.json pool_a 7 pool_b 7"
+    },
+    {
+      "finding": "Synthetic census does not match target WebArena-Verified v2 statistics and ceiling downgraded correctly",
+      "severity": "medium",
+      "evidence_ref": "provenance.json census duplication 0.8181 vs prereg target 0.9479 CI [0.9167,0.9792], exact_copy 0.0291 vs 0.0781, report.md Validity Note fallback synthetic mock requires MEASUREMENT_INVALID per prereg"
+    },
+    {
+      "finding": "No leakage of B values into A (zero overlap true on synthetic pools SKU-A001..A007 vs B001..B007) but trivial single-slot pilot - representation is narrow single-param path+body+headers not multi-field discriminating",
+      "severity": "medium",
+      "evidence_ref": "pilot_family.json zero_overlap_verified true, report.md Pool A values SKU-A001..A007 Pool B SKU-B001..B007, provenance.json pilot_family.zero_overlap_verified true; prereg validity threat ceiling degeneracy disclosed"
+    },
+    {
+      "finding": "Controls and baselines correctly reported as NOT_MEASURED with reason infrastructure not ready - no false PASS/FAIL invented",
+      "severity": "info",
+      "evidence_ref": "result.json controls PC-PARAM-REGRESSION-AND-LITERAL-HIT/NCSHUFFLED/B-COLD/B-RAG/B-REPLAY-TERX/B-INSTR/B-LITERAL all status NOT_MEASURED reason infrastructure not ready, provenance infrastructure llm api_key_present false"
+    },
+    {
+      "finding": "Cost accounting correctly null - no bijective n*3200 proxy used, honest tokens+browser+retrieval+verification not fabricated",
+      "severity": "info",
+      "evidence_ref": "result.json metrics M-AMORTIZED-SAVING-vs-COLD null M-COST-RATIO-RAG null, validity_notes disclose no LLM, report.md Metrics table all null NOT_MEASURED, prereg cost accounting honest branch-derived required"
+    },
+    {
+      "finding": "Unit-test gate claim 13/13 PASS in provenance but not verifiable at HEAD - running pytest for test_kernel_param_inherit would fail file not found",
+      "severity": "medium",
+      "evidence_ref": "provenance.json kernel.unit_tests stdout 16 passed (3 existing +13 new), bash existence check false, result.json metrics.unit_tests_passed true vs disk false"
+    }
+  ],
+  "baseline_findings": [
+    {
+      "baseline_id": "B-COLD",
+      "strength": "strong - same model/tools/budget deterministic _matches verification on identical B set required",
+      "observed": "NOT_MEASURED - infrastructure not ready, llm_available false, so no success delta computable; expected lower than SPIDER but not tested",
+      "pass_fail": "UNKNOWN",
+      "evidence_ref": "result.json controls B-COLD status NOT_MEASURED, spec.json baselines[0] id B-COLD, provenance infrastructure llm api_key_present false"
+    },
+    {
+      "baseline_id": "B-RAG",
+      "strength": "strong - Jaccard 0.30 retrieval verbatim replay without slots, hit_rate expected ~0.0-0.10 on hold-out",
+      "observed": "NOT_MEASURED - no retrieval executed, hit/miss not logged, cost not measured",
+      "pass_fail": "UNKNOWN",
+      "evidence_ref": "result.json controls B-RAG NOT_MEASURED, spec baselines[1]"
+    },
+    {
+      "baseline_id": "B-REPLAY-TERX",
+      "strength": "strongest exact-repeat - 0-token E2E via exact action_template equality expected hit_rate ~0 on hold-out ~1.0 on same-A PC1",
+      "observed": "NOT_MEASURED - no exact replay attempted, PC1 same-A hit not demonstrated",
+      "pass_fail": "UNKNOWN",
+      "evidence_ref": "result.json controls B-REPLAY-TERX NOT_MEASURED, spec baselines[2]"
+    },
+    {
+      "baseline_id": "B-INSTR",
+      "strength": "medium - hand-authored instructions 200 tok amortized 200/f tests instruction-only transfer",
+      "observed": "NOT_MEASURED - instruction baseline not run",
+      "pass_fail": "UNKNOWN",
+      "evidence_ref": "result.json controls B-INSTR NOT_MEASURED, spec baselines[3]"
+    },
+    {
+      "baseline_id": "B-LITERAL",
+      "strength": "strong - literal distill without slots, success >0.15 signals leakage, EXECUTABLE 0.0 expected on hold-out",
+      "observed": "NOT_MEASURED - leakage check not executed, so family hold-out leakage cannot be excluded via measurement",
+      "pass_fail": "UNKNOWN",
+      "evidence_ref": "result.json controls B-LITERAL NOT_MEASURED, spec baselines[4] expected Success ~0"
+    },
+    {
+      "baseline_id": "PC-PARAM-REGRESSION-AND-LITERAL-HIT (PC1 same-A replay, PC2 multi-param same-A)",
+      "strength": "strong - validates substrate can measure 0-cost and induction before testing B generalization",
+      "observed": "NOT_MEASURED - both PC1 (hit_rate 1.0 cost 50 tok) and PC2 (EXECUTABLE 1.0 binding 1.0 success >=0.90) not executed, so pipeline via real registry/_bind/verify not demonstrated end-to-end",
+      "pass_fail": "UNKNOWN",
+      "evidence_ref": "result.json controls PC-PARAM-REGRESSION-AND-LITERAL-HIT NOT_MEASURED, spec positive_control id PC-PARAM-REGRESSION-AND-LITERAL-HIT"
+    },
+    {
+      "baseline_id": "NC-SHUFFLED-AND-RANDOM (NC1 shuffled slots, NC2 random retrieval)",
+      "strength": "strong - requires success <=COLD+0.05 false_accept >=0.25 binding <0.50 via real bind/verify to prove parameterization necessity",
+      "observed": "NOT_MEASURED - through real bind/verify not exercised, so cannot rule out spurious reuse effect",
+      "pass_fail": "UNKNOWN",
+      "evidence_ref": "result.json controls NC-SHUFFLED-AND-RANDOM NOT_MEASURED, spec null_control id NC-SHUFFLED-AND-RANDOM"
+    }
+  ],
+  "recomputed_metrics": {
+    "M-EXECUTABLE-SPIDER": null,
+    "M-BINDING-CORRECT": null,
+    "M-UNSUBSTITUTED-TEMPLATES": null,
+    "M-SUCCESS-SPIDER": null,
+    "M-SUCCESS-COLD": null,
+    "M-SUCCESS-RAG": null,
+    "M-SUCCESS-REPLAY": null,
+    "M-SUCCESS-INSTR": null,
+    "M-SUCCESS-LITERAL": null,
+    "M-FALSE-ACCEPT-SPIDER": null,
+    "M-UNKNOWN-RATE": null,
+    "M-ECE": null,
+    "M-AMORTIZED-SAVING-vs-COLD": null,
+    "M-COST-RATIO-RAG": null,
+    "M-CONTAMINATION": null,
+    "tasks_valid_recomputed": 7,
+    "tasks_valid_required": 10,
+    "families_valid_recomputed": 1,
+    "census_verified_recomputed": false,
+    "census_file_exists_at_audit": false,
+    "census_sha_recomputed": null,
+    "census_sha_claimed": "f55c34141105a77b14db2420e43f48234b4391a27196daabc69bbeb32974f9c6",
+    "kernel_sha_recomputed": "46929b3a951df48d7f9d1fd850871073c0d91c1868aa117e13d389fe274e8d61",
+    "kernel_sha_claimed": "04438d0ecd91113e4367a5d6de0e7b357f141ea67495778f44668da17f3853f6",
+    "kernel_has_distill_parameterized_recomputed": false,
+    "kernel_checks_recomputed": {
+      "distill_parameterized": false,
+      "_common_prefix_and_suffix": false,
+      "_extract_varying_values": false,
+      "_structure_similarity": false,
+      "_is_allowed_path": false,
+      "_field_path_to_slot_name": false,
+      "_sanitize_slot": false
+    },
+    "kernel_checks_claimed": {
+      "distill_parameterized": true,
+      "_common_prefix_and_suffix": true,
+      "_extract_varying_values": true,
+      "_structure_similarity": true,
+      "_is_allowed_path": true,
+      "_field_path_to_slot_name": true,
+      "_sanitize_slot": true
+    },
+    "unit_tests_file_exists": false,
+    "unit_tests_passed_recomputed": null,
+    "unit_tests_passed_claimed": true,
+    "llm_available_recomputed": false,
+    "llm_available_claimed": false,
+    "pilot_family": "add_to_cart",
+    "pool_a_recomputed": 7,
+    "pool_b_recomputed": 7,
+    "zero_overlap_recomputed": true,
+    "recomputed_from": "research/experiments/EXP-GRAPH-35793560957/result.json, provenance.json, pilot_family.json, src/spider/kernel.py sha recomputed at audit, bash existence checks"
+  },
+  "claim_ceiling": "C-PARAM-INHERIT remains EXPERIMENTAL at narrow synthetic ceiling only (single-param POC EXP-PRODUCT-33528829801 PASS 10/10 deterministic, harness-only multi-param EXP-PRODUCT-33741671686 PASS 21/21 not kernel); no WebArena-Verified v2 evidence added by this pilot. Producer correctly does not advance claim to VALIDATED; MEASUREMENT_INVALID due to (1) transient kernel patch not persisted to src/spider/kernel.py HEAD, (2) synthetic census 275 tasks not real Docker data, (3) OPENAI_API_KEY absent blocking real LLM+Playwright deterministic _matches, (4) tasks_valid 7 <10, (5) controls/baselines/economics NOT_MEASURED. Maximum justified: kernel fix verified only by ephemeral unit-test log, not by committed code or end-to-end registry/_bind/verify on held-out B. No bounded pilot ceiling (EXECUTABLE>=0.75 binding>=0.90 margin>=0.12 false_accept<=0.10 UNKNOWN[0,0.15] ECE<=0.15 cost) established.",
+  "evidence_refs": [
+    "research/experiments/EXP-GRAPH-35793560957/request.json",
+    "research/experiments/EXP-GRAPH-35793560957/spec.json",
+    "research/experiments/EXP-GRAPH-35793560957/prereg.md",
+    "research/experiments/EXP-GRAPH-35793560957/freeze.json",
+    "research/experiments/EXP-GRAPH-35793560957/result.json",
+    "research/experiments/EXP-GRAPH-35793560957/report.md",
+    "research/experiments/EXP-GRAPH-35793560957/provenance.json",
+    "research/experiments/EXP-GRAPH-35793560957/pilot_family.json",
+    "research/experiments/EXP-GRAPH-35793560957/generate_synthetic_webarena.py",
+    "research/experiments/EXP-GRAPH-35793560957/run_experiment.py",
+    "src/spider/kernel.py recomputed sha256 46929b3a951df48d7f9d1fd850871073c0d91c1868aa117e13d389fe274e8d61 (HEAD literal-only, grep 0 hits distill_parameterized)",
+    "tests/test_kernel.py exists but tests/test_kernel_param_inherit.py absent at audit",
+    "data/webarena_verified_v2.json absent at audit vs claimed sha f55c34141105a77b14db2420e43f48234b4391a27196daabc69bbeb32974f9c6",
+    "codex/index.json and codex/claim_state.json C-PARAM-INHERIT HYPOTHESIS/EXPERIMENTAL synthetic-only ceiling"
+  ],
+  "unresolved": [
+    "Does corrected distill_parameterized (single-prefix _common_prefix_and_suffix, field-path filter url/body.*/headers.* only, Jaccard >=0.75 constant-anchor, distinct slot per field-path, confidence 0.90) when durably committed to src/spider/kernel.py and exercised via real registry required_slots/_bind/verify enable EXECUTABLE>=0.75 binding>=0.90 zero templates on never-observed B?",
+    "Does SPIDER achieve success margin >=0.12 vs each of B-COLD/B-RAG/B-REPLAY-TERX/B-INSTR on same held-out B via real LLM Playwright deterministic _matches with family-stratified bootstrap 5000 seed 42 95% CI lower >0.02 McNemar p<0.05?",
+    "Are safety/calibration gates satisfied: false_accept <=0.10 UNKNOWN in [0.00,0.15] ECE <=0.15 AUROC >=0.75 contamination <0.10 B-LITERAL <=0.15?",
+    "Do null controls NC1 shuffled (success <=COLD+0.05 false_accept >=0.25 binding <0.50) and NC2 random (false_accept >=0.30) demonstrate parameterization necessity via real bind/verify?",
+    "Do positive controls PC1 same-A replay 1.0/50 tok and PC2 multi-param same-A EXECUTABLE 1.0 binding 1.0 success >=0.90 pass with real verification?",
+    "Do honest amortized costs (LLM tokens + browser calls+ms + retrieval 200 tok + verification 50 tok + repair 1 step, distill ~1000 tok amortized f=10 only to SPIDER) show saving >=25% vs COLD ratio <=0.85 at f=10?",
+    "Is synthetic census artifact reproducible and is pilot family add_to_cart with 7+7 pools sufficiently representative vs WebArena-Verified v2 one family with path+body+headers variation needed for multi-param discrimination?"
+  ]
+}

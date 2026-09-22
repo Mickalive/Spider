@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-35789942386",
+  "lane": "intel",
+  "decision": "MEASUREMENT_INVALID — placeholder fix verified but AX pattern grammar truncated [:20] generic tokens, drift SHA256 not recomputed, multi-step BrowserGym unavailable; mean 1.0 CI[1.0,1.0] variance 0 p=1.0 degenerate vs shuffle null. No bounded falsification of longest-prefix method.",
+  "claim_updates": [
+    {
+      "claim_id": "C-CROSSSITE",
+      "status": "MEASUREMENT_INVALID",
+      "reason": "No cross-site evidence attempted; single-store WebArena-Verified v2 shopping only. Measurement invalid due to V1 pattern truncation ([:20] generic/tablist/listitem/link:Skip to Content captures only layout, product-specific elements beyond token 20 truncated) and V2 product URL scarcity (only 4/36 families have __SHOPPING__/path product URLs; 6/10 sampled families are homepage-only identical 1430-node AX tautology) yielding AX_consistency 1.0 variance 0 bootstrap CI[1.0,1.0] shuffle p=1.0 degenerate (result.json M-AX-CONSISTENCY, audit V1 critical, V2 critical) and B-RANDOM-AX-SHUFFLE FAIL. Infrastructure precedence (<5 diverse product-page families) forces MEASUREMENT_INVALID substrate_unavailable per frozen decision_rule, not FALSIFIED. Cross-site generalization remains untested."
+    },
+    {
+      "claim_id": "C-LLM-INHERIT",
+      "status": "MEASUREMENT_INVALID",
+      "reason": "Within-store parameterized transfer via longest-prefix without fallback remains unmeasured: placeholder fix get_task_start_url __SHOPPING__/path->base+path correctly loads distinct product pages (families 136,145,196,222 => 8 captures 626-1150 nodes distinct AX hash, provenance placeholder_fix verified) but element-pattern grammar degenerate (V1) makes all 10 families consistency 1.0 zero variance, PC2 FAIL, NC1 p=1.0 FAIL, delta 0.7143 vs prior 0.2857 tautological. Audit recomputed M-AX-CONSISTENCY mean 1.0 CI[1.0,1.0] variance 0 shuffle mean 1.0 p95 1.0 p=1.0 matches producer; per prereg section10 variance=0 with diverse pages would be FALSIFIED-IN-SETTING for this grammar but falsifier infrastructure precedence (<5 path families) triggers MEASUREMENT_INVALID. Also sampling deviation V5 stratified path-first not pure random seed 35725763380. No validation of within-store hold-out."
+    },
+    {
+      "claim_id": "C-PRODUCT-ECON",
+      "status": "MEASUREMENT_INVALID",
+      "reason": "Stagehand selector+relevant-subtree SHA256 verb cache not spec-compliant: V3 drift_miss_rate 0.0 (20/20 HIT despite drift) recomputed false_accept 1.0 contradicting result.json 0.0, hash computed from unmutated page.content() not after mutation, hit_rate 0.948 (92/97) inflated by identical homepage DOMs and synthetic fam_task fallback selectors, speedup 0.0954 inverted (dict-lookup microsecond vs real dispatch) and tokens_saved 1000 hardcoded not measured via tiktoken (audit V3, baseline_findings B-STAGEHAND-VERB FAIL_NOT_COMPLIANT, NC3 FAIL, NC4 NOT_TESTED, PC3 PARTIAL, V4 gate0 multi-step unavailable). B-STAGEHAND-VERB ~2x/~30% Feb2026 baseline NOT delivered. Gate0 relaxed 0/20 strict 0/20 on single-page 0-transition captures is descriptive viewport-only, not evidence against H>0.1 NL>=20 (V4). No economic comparison vs B-RAG-EMBED-FLAT/B-SPIDER-0TOKEN/B-COLD-LLM."
+    }
+  ],
+  "product_action": "HOLD",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "After replacing truncated [:20] element-pattern grammar with full-tree semantic/multi-anchor traversal capturing product-specific subtree, recomputing relevant-subtree SHA256 after DOM mutation and measuring cold vs cached latency/tokens via real Playwright dispatch path, and collecting multi-step Playwright/BrowserGym trajectories (>=50 transitions on >=10 families), can N=20 product-page AX_consistency achieve variance>0 bootstrap CI lower>0.5 shuffle p<0.05 vs prior, and Stagehand N=2 achieve HIT>=0.8 MISS>=0.8 false_accept<0.05 beats NC4 p<0.05 with ~2x/~30%, plus >=1 relaxed Gate0 H>0.1 NL>=20 pass to unblock within-store parameterized transfer?",
+  "reason": "Audit status MEASUREMENT_INVALID, producer_claim_supported false, 8 required_fixes. Recomputed metrics confirm degenerate AX 1.0 [1.0,1.0] variance 0 p=1.0, Stagehand drift false_accept 1.0 not 0.0, speedup inverted, Gate0 0/20 unmeasured multi-step. Placeholder fix verified (research/intel/exp_35789942386_measure.py sha 839aaa5306f9f2374298fff3d29362c3a9bba9b95c9d766b5679356610bade61, 4 path families distinct hashes at 1280x720) but representation loss and substrate scarcity (<5 diverse families, only 4/36 have product URLs) and broken drift injection and BrowserGym webarena-verified-v2 not importable block SURVIVES or bounded FALSIFIED. Per frozen decision_rule infrastructure precedence Gate0 <5 families => MEASUREMENT_INVALID substrate_unavailable, not scientific falsification. Max justified ceiling is substrate liveness and census replication only. Promote false, continue false awaiting narrow repair pulse.",
+  "evidence_refs": [
+    "research/experiments/EXP-INTEL-35789942386/request.json sha e4743a3cdf58024325237fd52b8312260237f6628735596cdd35bf71dd371580",
+    "research/experiments/EXP-INTEL-35789942386/spec.json sha 008b785ca1c2751bbde0d9c4e3083e9b9389534c82e46b13fdce3686fb8e043a",
+    "research/experiments/EXP-INTEL-35789942386/prereg.md sha bbd6f6160734aba5dbc51b67a24c47316fb0919efb9f9c3e43060b87ccb20ac0",
+    "research/experiments/EXP-INTEL-35789942386/freeze.json",
+    "research/experiments/EXP-INTEL-35789942386/result.json",
+    "research/experiments/EXP-INTEL-35789942386/report.md",
+    "research/experiments/EXP-INTEL-35789942386/provenance.json sha 3d4124dbde714a0d",
+    "research/experiments/EXP-INTEL-35789942386/audit.json status MEASUREMENT_INVALID producer_claim_supported false",
+    "research/experiments/EXP-INTEL-35789942386/artifacts/raw/ax_captures.jsonl sha 324313f6e5cb6986c88831994bb9732921a2575fc1826b9e4224ac8795b28a76 20 captures 1280x720 600-2000 nodes",
+    "research/experiments/EXP-INTEL-35789942386/artifacts/derived/ax_consistency.json sha 45b90ef283251380f016ee46f46cbe2b64a5ad0f6513fbf6a1b7028918334f17 mean 1.0 p1.0 variance0",
+    "research/experiments/EXP-INTEL-35789942386/artifacts/derived/stagehand_replication.json sha ba5ae046c8bc8dd60a6dabbedc0c968c49975e406a0b60eabff864032a16e226 hit 0.948 drift_miss 0.0 false_accept 1.0 speedup 0.095",
+    "research/experiments/EXP-INTEL-35789942386/artifacts/derived/gate0_relaxed_table.json sha 50cea72a124141d19fa2d29ebe48a6a77f5d6452be2325d3d7c057fc7e24f1a7 0/20 multi_step false",
+    "research/intel/exp_35789942386_measure.py sha 839aaa5306f9f2374298fff3d29362c3a9bba9b95c9d766b5679356610bade61 get_task_start_url fix verified 4 path families",
+    "research/experiments/EXP-INTEL-35782546046/handoff.json sha 23bebb187082ab0617422aafaf997f5eec6f5da18c0d7908686e50930c911bca parent census 192/36"
+  ]
+}

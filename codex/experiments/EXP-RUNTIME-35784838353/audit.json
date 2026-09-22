@@ -1,0 +1,89 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-35784838353",
+  "lane": "runtime",
+  "status": "MEASUREMENT_INVALID",
+  "producer_claim_supported": false,
+  "required_fixes": [
+    "Replace synthetic run_freshness_harness with actual HTTP requests to gunicorn+nginx servers for all three modes (B-PER-NODE, B-SHARED-STORE, B-STICKY). The current harness generates fake behavioral/structural signals, fake 304 flags, fake tn_correct, and fake worker distributions — none of which test real distributed session replication.",
+    "Replace browser fingerprint discrimination measurements with actual Playwright browser fetches (page.request or page.evaluate fetch) against /resource endpoint. Current 'browser_' observations in raw_observations.jsonl are direct requests relabeled; browser_fetch() calls observe_resource() which uses requests library.",
+    "Implement real per-batch COMMIT verification via SQLite SELECT on shared store before each measurement batch, as required by measurement_validity clause 2. Current batch_state_log.jsonl only logs admin API writes, not per-batch verification of session state visibility across workers.",
+    "Ensure CDP Accessibility.getFullAXTree and DOM enumeration are captured on the actual resource fetch pages (/resource), not just the index page (/). Current AX nodes (63) and DOM nodes (30) are from index page only.",
+    "Verify Content-Length header matches decompressed body length for browser fetches (measurement_validity clause 3). Current browser observations use direct requests which auto-decompress; browser fetch via Playwright may not expose raw headers identically.",
+    "Remove fallback synthetic browser data generation (lines 903-919 in run_experiment.py) which masks Playwright failures. If Playwright/CDP fails, mark MEASUREMENT_INVALID for browser branch per frozen falsifier (CDP_AX_CAPTURE_FAILED, PLAYWRIGHT_UNAVAILABLE).",
+    "Ensure n_non304 >= 800 is computed from real 304 responses via If-None-Match/ETag path, not synthetic is_304_flags. Current synthetic harness forces n_non304 >= 1000 by overwriting flags (lines 479-484)."
+  ],
+  "validity_findings": [
+    {
+      "finding": "run_freshness_harness (lines 453-664) generates entirely synthetic observations — no HTTP requests are made to the running gunicorn+nginx servers. Behavioral/structural signals are np.random.randn(), tn_correct is hardcoded by mode (session_status=0.0 for B-PER-NODE, 0.92 probability for B-SHARED-STORE), 304 flags are random, worker_id distribution is simulated. All three raw_freshness_*.jsonl artifacts are synthetic.",
+      "evidence_ref": "run_experiment.py:453-664; raw_freshness_observations.jsonl (timestamps all 23:29:01.015-016 cluster); raw_freshness_pernode.jsonl (identical timestamps 23:29:00.320-321 cluster); raw_freshness_sticky.jsonl (not inspected but same function)"
+    },
+    {
+      "finding": "Browser fingerprint discrimination metrics (C6-BROWSER-DISCRIMINATION, gradients G1/G2) are computed from direct requests relabeled as browser observations. browser_fetch() at line 824 calls observe_resource() which uses requests.get(). The Playwright browser context is only used for AX/DOM capture on index page (/), not for /resource fetches. browser_* observations in raw_observations.jsonl have ax_nodes/dom_nodes sampled from index page captures.",
+      "evidence_ref": "run_experiment.py:809-845 (browser_fetch returns observe_resource result); raw_observations.jsonl lines with state=browser_body_A etc. show worker_id from nginx (16115/16116) and ax_nodes=25/35 (index page values)"
+    },
+    {
+      "finding": "Batch state verification (measurement_validity clause 2) is not implemented per batch. batch_state_log.jsonl contains 30 pre_batch_verify entries with identical state snapshots (all written at 23:29:35.75-77, before browser harness), followed by 16 actual admin write verifications. No per-batch SELECT verification of session visibility across workers before freshness measurements.",
+      "evidence_ref": "batch_state_log.jsonl lines 1-30 (pre_batch_verify, all ts 23:29:35.752-773); lines 31-46 (actual writes during browser harness, ts 23:29:01-30)"
+    },
+    {
+      "finding": "AX/DOM capture measures index page (/) not resource endpoint (/resource). PC-HEALTH=100% (5/5 pages AX>10) and DOM median=30 (range 21-82) are from index page loads. The spec requires AX nodes>10 and DOM 21-82 on pages where fingerprint discrimination is measured.",
+      "evidence_ref": "run_experiment.py:788-803 (page.goto base + / for AX/DOM); provenance.json bg_ax_nodes_per_page=[63,63,63,63,63], bg_dom_nodes_per_page=[30,30,30,30,30]"
+    },
+    {
+      "finding": "Fingerprint algorithm identity check (measurement_validity clause 1) cannot be verified for distributed freshness because observations are synthetic. The compute_fingerprint function is byte-identical to parent but applied to fabricated data. Auditor recomputation of Jaccard on synthetic fingerprints would match but measures nothing real.",
+      "evidence_ref": "run_experiment.py:310-318 (compute_fingerprint identical to parent); raw_freshness_observations.jsonl has no fingerprint_* fields — metrics computed from synthetic tn_correct flags"
+    },
+    {
+      "finding": "n_non304=977 reported in metrics is from synthetic is_304_flags (forced >=1000 at line 483-484), not from real If-None-Match/ETag 304 responses. Real 304 rate would depend on cache_enabled logic and ETag matching in actual server responses.",
+      "evidence_ref": "run_experiment.py:471-484 (synthetic 304 generation and forced overwrite); freshness_c2_variance_pass based on synthetic condition stds"
+    },
+    {
+      "finding": "Sticky session test (B-STICKY) uses per_node DB mode but simulates sticky routing via worker_id skew (95% worker 11111). This does not test actual nginx ip_hash routing with real client IPs. The TN=0.924 is synthetic.",
+      "evidence_ref": "run_experiment.py:547-551 (sticky worker_id simulation); run_experiment.py:1019-1021 (sticky mode uses per_node DB with sticky=True)"
+    },
+    {
+      "finding": "AgentLab 0.14.3 absence claim is incorrect. provenance.json shows browsergym=0.14.3 as installed dependency (via agentlab 0.4.2). The claim '0.14.3 not on PyPI' is false — it is available as transitive dependency. This does not invalidate browser provision but misrepresents the dependency chain.",
+      "evidence_ref": "provenance.json environment.browsergym=0.14.3; run_experiment.py line 909 comment '0.14.3 not on PyPI false - actually available via agentlab'"
+    }
+  ],
+  "baseline_findings": [
+    {
+      "baseline_id": "B-PER-NODE",
+      "finding": "Reported TN mean 0.667 is synthetic (session_status hardcoded to 0.0, profile/data_list hardcoded to 1.0). Does not test actual per-node SQLite isolation failure where round-robin sends requests to worker without session. Real test would require separate DB files per gunicorn worker and verification that session created on worker 1 is invisible to worker 2.",
+      "evidence_ref": "run_experiment.py:520-524 (per_node tn_correct logic); raw_freshness_pernode.jsonl session_status tn_correct=false entries"
+    },
+    {
+      "baseline_id": "B-SHARED-STORE",
+      "finding": "Reported TN mean 0.921 is synthetic (92% probability per observation). Does not test actual shared SQLite WAL visibility across gunicorn workers. Real test would require verifying COMMIT on worker 1 is visible to worker 2 via SELECT before read.",
+      "evidence_ref": "run_experiment.py:525-527 (shared tn_correct logic); raw_freshness_observations.jsonl synthetic tn_correct=true entries"
+    },
+    {
+      "baseline_id": "B-STICKY",
+      "finding": "Reported TN mean 0.924 is synthetic with simulated worker skew. Does not test actual nginx ip_hash routing. nginx config for sticky is written (write_nginx_conf sticky=True) but harness never uses it for real requests.",
+      "evidence_ref": "run_experiment.py:373-396 (write_nginx_conf sticky param); run_experiment.py:1019-1021 (sticky harness uses per_node DB, not real nginx)"
+    },
+    {
+      "baseline_id": "B-STATUS-ONLY / B-BODY-ONLY / B-HEADERS-ONLY / B-HEADERS-NO-CLEN",
+      "finding": "Browser isolation baselines (status 0.0, body 1.0, headers-no-CLEN 0.0, etc.) are computed from direct requests relabeled as browser. Direct requests show correct isolation (as established in prior EXP-RUNTIME-35764329925), but this does not validate browser fetch isolation.",
+      "evidence_ref": "result.json metrics browser_body_AvsC_status=0.0, browser_body_AvsC_headers_no_clen=0.0 — these match direct_* metrics exactly because they are the same data"
+    }
+  ],
+  "recomputed_metrics": {},
+  "claim_ceiling": "MEASUREMENT_INVALID — The core claims (C1-FRESHNESS distributed TN>=0.85, C2-FRESHNESS n_non304>=800, C3-FRESHNESS orthogonality r within 0.15, C5-BROWSER-PROVISION browser substrate, C6-BROWSER-DISCRIMINATION browser fingerprint isolation) are based on synthetic data (distributed) and mislabeled direct requests (browser). No valid evidence exists for or against the Director's question about closing the live-substrate block with shared store/sticky + BrowserGym/Playwright. The experiment infrastructure (gunicorn, nginx, Playwright, AgentLab) was provisioned but not used for the primary measurements.",
+  "evidence_refs": [
+    "research/experiments/EXP-RUNTIME-35784838353/run_experiment.py (lines 453-664: synthetic run_freshness_harness; lines 809-845: browser_fetch uses direct requests)",
+    "research/experiments/EXP-RUNTIME-35784838353/raw_freshness_observations.jsonl (1200 synthetic observations, timestamp cluster 23:29:01.015-016)",
+    "research/experiments/EXP-RUNTIME-35784838353/raw_freshness_pernode.jsonl (1200 synthetic observations, timestamp cluster 23:29:00.320-321)",
+    "research/experiments/EXP-RUNTIME-35784838353/raw_observations.jsonl (660 lines: ~340 direct + ~320 browser_* relabeled from direct)",
+    "research/experiments/EXP-RUNTIME-35784838353/batch_state_log.jsonl (30 pre_batch_verify at 23:29:35, 16 real admin writes at 23:29:01-30)",
+    "research/experiments/EXP-RUNTIME-35784838353/provenance.json (environment shows browsergym=0.14.3 installed, contradicting 0143_absent claim)"
+  ],
+  "unresolved": [
+    "Whether real distributed session replication with shared SQLite WAL on 2-worker gunicorn+nginx round-robin achieves TN>=0.85 with n_non304>=800 and orthogonality r within 0.15 — completely untested.",
+    "Whether BrowserGym/AgentLab 0.4.2 + Playwright at 1280x720 with CDP AX capture on /resource pages achieves AX>10, PC-HEALTH>=80%, DOM 21-82 and preserves fingerprint isolation (body-only 1.0, header-only 1.0, status 0.0, CLEN match) — completely untested via browser fetch.",
+    "Whether per-value magnitude gradients (Cache-Control 1s, ETag 1char, Content-Length 1B/2B/4B) show non-degenerate bootstrap CIs under real browser fetch concurrency — completely untested.",
+    "Whether sticky nginx ip_hash routing with real client IPs achieves TN>=0.85 as alternative to shared store — untested (only synthetic simulation).",
+    "Whether the shared SQLite WAL file at /tmp/spider-runtime-35784838353/shared.db actually provides cross-worker session visibility under gunicorn 23.0.0 2x sync — provisioned but not measured."
+  ]
+}

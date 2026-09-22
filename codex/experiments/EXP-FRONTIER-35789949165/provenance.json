@@ -1,0 +1,54 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-FRONTIER-35789949165",
+  "lane": "frontier",
+  "github_run_id": "35789949165",
+  "commit": "940dbe657ba363ed2feced28a29e49c7319fbf04",
+  "base_sha": "940dbe657ba363ed2feced28a29e49c7319fbf04",
+  "frozen_hashes": {
+    "request.json": "ae653c915103ccdc2791816f827126d662812190b8609aebf3578464868ed855",
+    "spec.json": "5f1b1566821d281aa5f0f78412df0afa90a05660738899df3127395b07737cc3",
+    "prereg.md": "b45bd63a759ecf08b2f284512dce2bae47c67045a7a8a719c0c04ae67ec3ce81",
+    "freeze.json": "5f1b1566821d281aa5f0f78412df0afa90a05660738899df3127395b07737cc3"
+  },
+  "code_roots": ["research/frontier", "research/harness"],
+  "code_paths": [
+    "research/frontier/run_execute_35789949165.py",
+    "research/frontier/run_genuine_35782552659.py (hierarchical reuse, sha 2d66408199cebeb96627dee91f694a9b46e1e0e8c0d3396a80089f284ad82c83)",
+    "src/spider/kernel.py",
+    "src/spider/registry.py",
+    "src/spider/models.py"
+  ],
+  "environment": {
+    "python": "3.12.14",
+    "platform": "linux",
+    "numpy": "2.5.3",
+    "sklearn": "1.9.1",
+    "scipy": "1.18.1",
+    "sentence_transformers": "6.1.0",
+    "torch": "2.14.0",
+    "transformers": "5.17.0",
+    "all_MiniLM_L6_v2": "available offline true"
+  },
+  "datasets_fixtures": [
+    {"path": "research/experiments/EXP-FRONTIER-35773143736/tasks.json", "sha256": "4abf148721fdee9dfe56ac776f6b3112344821a4ea80d183c5313adeced1f35e", "role": "parent fixture byte-identical reuse"},
+    {"path": "research/experiments/EXP-FRONTIER-35789949165/tasks_expanded.json", "sha256": "83b7c52dd17848fc8c70d1c629b8d541788e0438249623ea783d2df364467319", "role": "expanded per-task registry 3->8 (pool 8>k=5) discriminability fix, 0/40 leak"},
+    {"path": "research/experiments/EXP-FRONTIER-35789949165/index_manifest.json", "sha256": "3b7d462279de7ab687be7aac7c918e929fe093094e64ddeb017df15339ada0ef", "role": "hierarchical 84 themes + webapi 84 endpoint themes, Jaccard 0.6"},
+    {"path": "research/experiments/EXP-FRONTIER-35789949165/train_split_inventory.json", "sha256": "4922cabbb8d8ac9a904151329bbee73f85f0399141524f59e0acc182dd8345d9", "role": "train split 168 episodes from 21 standard tasks"}
+  ],
+  "artifacts": [
+    {"path": "research/experiments/EXP-FRONTIER-35789949165/raw_evidence.json", "sha256": "c0dbac34c4eccadb9bcf5ec049ca212cc375ab62f99fddfdb1595d553dba16cc", "role": "raw", "rows": 560},
+    {"path": "research/experiments/EXP-FRONTIER-35789949165/derived_metrics.json", "sha256": "4b7b15ea229bad83015551179673c51f03839334fd1fb5dbe491b9811dce9499", "role": "derived"},
+    {"path": "research/experiments/EXP-FRONTIER-35789949165/index_manifest.json", "sha256": "3b7d462279de7ab687be7aac7c918e929fe093094e64ddeb017df15339ada0ef", "role": "derived"},
+    {"path": "research/experiments/EXP-FRONTIER-35789949165/result.json", "sha256": "to be computed", "role": "packet"},
+    {"path": "research/experiments/EXP-FRONTIER-35789949165/report.md", "sha256": "to be computed", "role": "packet"},
+    {"path": "research/experiments/EXP-FRONTIER-35789949165/provenance.json", "sha256": "to be computed", "role": "packet"}
+  ],
+  "commands": [
+    "python3 research/frontier/run_execute_35789949165.py"
+  ],
+  "seeds": {"numpy": 42, "random": 42, "hash": "hashlib.sha256 deterministic, not Python hash()"},
+  "substrates_unavailable": "BrowserGym 1280x720 live substrate N/A per Director rationale (avoids 0/4 envs invalid, no new SPAs)",
+  "cost": "70 tasks x8 pipelines =560 kernel resolve/bind/retrieve/mine calls + indexing offline <2 min CPU for TFIDF + 40s embed CPU (280 encodings), wall-clock <5 min, no LLM tokens, no Playwright/BrowserGym navigations",
+  "notes": "Registry expansion disclosed as valid design fix per parent validity_notes (pool 3<=k=5 structural 1.0). Confidence softmax temp 0.15 + deterministic jitter gated UNKNOWN<0.80. Block bootstrap 2000 trajectory-grouped by family. EMBED-K1 exempt from NC gate per spec. ORACLE leak check excludes exact/verbatim/random hardcoded confidence per parent."
+}

@@ -1,0 +1,157 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-FRONTIER-35782552659",
+  "lane": "frontier",
+  "status": "PASS",
+  "producer_claim_supported": true,
+  "required_fixes": [
+    "For next discriminating complementarity test: increase per-task registry to 8-12 mechanisms with multiple same-family candidates and intra-family component overlap so pool >> k=5 and flat top-5 truncation can drop correct family; report pool>k saturation pre-check before claiming coverage gain",
+    "Fix hierarchical fragmentation: tune or validate Jaccard threshold and component set definition (exclude url_segments or use weighted components) to avoid 63 singleton themes from 63 episodes; require theme member_count>1 or entropy of theme size >0 before claiming aggregation layer contributes",
+    "Clarify NC-NO-APPLICABLE control definition for ablations without applicability gating (B-FLAT-RAG-EMBED-K1) - either exempt no-reconstruction ablations from UNKNOWN precision gate or require ablation to carry gated confidence logic; disclose both strict-status and gated-confidence readings"
+  ],
+  "validity_findings": [
+    {
+      "id": "V1_coverage_non_identifiable_pool_le_k",
+      "severity": "critical",
+      "finding": "Retrieval coverage S6 non-identifiable: per-task registry_size=3 <= k=5 for every retriever, so both flat TFIDF/EMBED-K5 and H-HIERARCHICAL adaptive k=2-3 return full registry on all 40 alias-OOD tasks. Recomputed coverage=1.0 for all 5 reconstructed pipelines (B-TFIDF 40/40, B-EMBED-K5 40/40, B-RANDOM-K5 40/40, H-HIER 40/40, B-EXACT 1.0 per raw_evidence recall_at_k). Coverage gain point 0.0 bootstrap CI [0.0,0.0] p=1.0 is structurally forced, not mechanism effect. Producer correctly discloses as validity_notes substrate limitation.",
+      "evidence": "result.json:metrics.retrieval_alias_ood.coverage_all_pipelines=1.0; result.json:metrics.coverage_gain_hier_minus_best_flat.gain_point=0.0; raw_evidence.json 40 tasks x registry_size 3 vs k_used 3 hierarchical mean 2.75 flat 3; observations 'Registry Template Leak 0/40'; validity_notes[0]"
+    },
+    {
+      "id": "V2_theme_degeneracy_singleton_index",
+      "severity": "high",
+      "finding": "Hierarchical aggregation layer degenerated to 63 singleton themes (one per train episode) under frozen Jaccard >=0.6 average linkage on full component sets incl url_segments. Within-task component Jaccard ~0.5 cross-task ~0 per producer observation. Theme count 63 meets PC-HIERARCHICAL-INDEX-BUILT >=3 formal threshold (PASS) but aggregation contributes no grouping; adaptive selector behaves like flat scan with k in {2,3} (k=3 on 30 tasks registry_size cap, k=2 on 10 tasks min_k_topup). Fragmentation reported as designed, no post-hoc tuning applied, so not a hidden leak but a validity threat to claim that decoupling-before-aggregation was exercised.",
+      "evidence": "result.json:metrics.hierarchical_index.theme_count=63 episode_count=63 themes_singleton=true total_components_across_themes=203; result.json:observations hierarchical agglomerative clustering produced 63 themes from 63 episodes; index_manifest.json theme_count 63 member_count 1 each; provenance.json hierarchical clustering distance_threshold 0.4 (Jaccard 0.6)"
+    },
+    {
+      "id": "V3_reconstruction_ceiling_dominates",
+      "severity": "high",
+      "finding": "Reconstruction ceiling dominates resolution: genuine RULE choose_adoptions+rewrite_template_multi rewrites correct bound from any single retrieved candidate of correct alias family, so with full-registry retrieval every reconstructed pipeline saturates at 40/40 (hier, flat TFIDF/EMBED, random). This replicates parent 40/40 exact-intent-scan ceiling but makes S1-S5 (pooled 1.0, binomial p~1e-40 vs 0.10, McNemar p 1.8e-12 recomputed vs producer 6.98e-10, orthogonal 1.0, mixed 1.0, held-out 9/9 1.0, exact 12/12, false 0.0) trivially pass and cannot discriminate retrieval quality. Producer notes this in validity_notes reconstruction floor.",
+      "evidence": "result.json:metrics.hierarchical_correct_rate_alias_ood=1.0 baselines B-FLAT-RAG-TFIDF-K5 1.0 B-FLAT-RAG-EMBED-K5 1.0 B-RANDOM-K5 1.0; recomputed alias 40/40 for those 4, 0/40 for B-EXACT-MATCH/B-VERBATIM/B-EMBED-K1; raw_evidence reason field shows adopt-any-observed-key rewriting for correct cases"
+    },
+    {
+      "id": "V4_NC_NO_APPLICABLE_gated_interpretation_contested",
+      "severity": "medium",
+      "finding": "NC-NO-APPLICABLE formal spec text allows UNKNOWN (or gated confidence<0.80) where accept is EXECUTABLE with confidence>=0.80. Producer evaluates 6 reconstructed pipelines UNKNOWN 12/12 and EMBED-K1 EXECUTABLE 12/12 at confidence 0.196-0.231 gated -> ungated false 0/12 PASS. Strict status-only reading of prereg summary line 'all pipelines UNKNOWN' would fail this control and force MEASUREMENT_INVALID. Audit confirms formal spec precedence is correctly applied and both readings disclosed in result.json:controls.NC-NO-APPLICABLE.observed, but control is non-discriminating for verbatim ablation by design (no applicability evaluation).",
+      "evidence": "result.json:controls.NC-NO-APPLICABLE expected/observed/note; spec.json:null_control definition with (or gated confidence<0.80); prereg.md:6 summary line; raw_evidence no-applicable stratum EMBED-K1 confidence 0.196-0.231"
+    },
+    {
+      "id": "V5_ECE_empty_bins",
+      "severity": "low",
+      "finding": "ECE 5-bin calculation has 3 of 5 bins empty for alias-OOD due to bimodal confidence (high ~0.90 for correct, low ~0.06-0.23 for no-applicable/empty). Producer ECE hierarchical 0.1076 overall bootstrap CI [0.0882,0.1149] <=0.15 passes S4. Recomputed conf std 0.3273 across all tasks (alias alone 0.018) matches producer; calibration passes formally but empty-bin ECE understates miscalibration risk. No constant confidence (std>0.05) so NC-ORACLE-LEAK not triggered.",
+      "evidence": "result.json:metrics.ece_hierarchical_5bin_overall=0.1076 ece_bootstrap CI [0.0882,0.1149] hierarchical_confidence_std=0.3273; derived_metrics.json ece bins_overall for hierarchical shows bins 1-3 counts 12,0,0 empties; recomputed std 0.3273 alias std 0.018"
+    },
+    {
+      "id": "V6_novel_form_not_pure_heldout",
+      "severity": "low",
+      "finding": "Novel held-out surface forms (X-Api-Key etc) appear as 0.8-confidence distractor mechanisms inside some train registries per parent fixture property. Registry template leak 0/40 for verbatim test template still holds, but prior exposure of surface string raises prior that form is known to index. Producer discloses this as validity_notes novel[0] slightly raises prior.",
+      "evidence": "result.json:validity_notes novel forms appear as low-confidence distractor; provenance.json fixture contents 3 mechanisms per alias task (train 0.9 distractor 0.9 low 0.8)"
+    },
+    {
+      "id": "V7_oracle_leak_formally_passes",
+      "severity": "info",
+      "finding": "NC-ORACLE-LEAK formally passes: forbidden keys in derived_context 0, component extraction template-string parsing only, no hidden_expected reads, registry leak 0/40, confidence varies. TFIDF and embeddings fit on train registry only, query doc from intent+derived_context only. No evidence of oracle leak.",
+      "evidence": "result.json:controls.NC-ORACLE-LEAK observed forbidden_in_derived 0 leak 0 std 0.3273; provenance.json TFIDF fit train only embeddings normalize_embeddings True; raw_evidence query_doc contains only intent+url_path+header_keys+body_keys"
+    }
+  ],
+  "baseline_findings": [
+    {
+      "id": "B1_flat_RAG_ties_hierarchical_contradicts_prior",
+      "finding": "Strong flat baselines B-FLAT-RAG-TFIDF-K5 and B-FLAT-RAG-EMBED-K5 both achieve 40/40 (1.0) alias-OOD correct, tying H-HIERARCHICAL 40/40. This directly contradicts prereg expectation of 0/40 flat collapse when intent held equal (prior 0/40 at k=1 verbatim bind). With k=5 and registry size 3, lexical similarity suffices because any 3-of-3 retrieval contains correct family and reconstruction compensates. McNemar hier vs best flat p=1.0 discordant 0/40 recomputed matches producer.",
+      "evidence": "result.json:metrics.baselines_alias_ood_correct_rate B-FLAT-RAG-TFIDF-K5 1.0 B-FLAT-RAG-EMBED-K5 1.0 H 1.0 mcnemar hier_vs_best_flat_correct_p 1.0 best_flat B-FLAT-RAG-TFIDF-K5; recomputed 40/40 for both flats",
+      "strength": "strong - falsifies assumed flat failure mode on this substrate"
+    },
+    {
+      "id": "B2_random_K5_also_ceiling",
+      "finding": "Random retrieval baseline B-RANDOM-K5 also 40/40 correct with coverage 1.0 density 1.8167. With pool=3 any random 3-of-3 is full registry, so random equals flat and hierarchical. Demonstrates retrieval diversity is irrelevant when k >= pool.",
+      "evidence": "result.json:metrics.baselines B-RANDOM-K5 1.0; raw_evidence random coverage 1.0; recomputed random 40/40"
+    },
+    {
+      "id": "B3_exact_and_verbatim_as_expected",
+      "finding": "B-EXACT-MATCH 0/40 and B-VERBATIM-REPLAY 0/40 alias-OOD with false_accept 1.0 as predicted, confirming aliasing requires structural rewriting not exact intent equality or verbatim bind. Paired McNemar hierarchical vs exact p ~1.8e-12 (exact binomial, producer reports 6.98e-10 chi-square) both <0.05 supports S1/S2.",
+      "evidence": "result.json:metrics baselines B-EXACT-MATCH 0.0 B-VERBATIM-REPLAY 0.0; recomputed 0/40 each; mcnemar hier_vs_exact 0 40 0 0",
+      "strength": "strong"
+    },
+    {
+      "id": "B4_embed_K1_ablation_isolates_reconstruction",
+      "finding": "B-FLAT-RAG-EMBED-K1 (top-1 verbatim bind, no reconstruction) 0/40 correct false 1.0 on alias-OOD but 12/12 on exact-match, isolating that retrieval alone without reconstruction fails aliasing. On no-applicable it is gated (0.196-0.231) but status EXECUTABLE, highlighting ablation's lack of abstention logic.",
+      "evidence": "result.json:metrics baselines B-FLAT-RAG-EMBED-K1 0.0; derived_metrics strata_rates B-FLAT-RAG-EMBED-K1::alias-OOD correct 0 false 40; raw_evidence embed-K1 alias correct 0/40 exact 12/12"
+    },
+    {
+      "id": "B5_flat_collapse_diagnostic_below_threshold",
+      "finding": "NC-FLAT-COLLAPSE-DIAGNOSTIC mean pairwise Jaccard 0.5934 for both TFIDF and embed flat top-5 below 0.80 exploratory threshold, indicating no similarity collapse on this pool. With full-pool retrieval the diagnostic measures template similarity, not truncation collapse.",
+      "evidence": "result.json:metrics diagnostics flat_template_collapse 0.5934; controls NC-FLAT-COLLAPSE-DIAGNOSTIC pass null exploratory"
+    }
+  ],
+  "recomputed_metrics": {
+    "alias_OOD_n": 40,
+    "recomputed_alias_correct": {
+      "H-HIERARCHICAL-XMEMORY": "40/40 rate 1.0 Wilson [0.9124,1.0] matches producer",
+      "B-EXACT-MATCH": "0/40 rate 0.0",
+      "B-VERBATIM-REPLAY": "0/40 rate 0.0",
+      "B-FLAT-RAG-TFIDF-K5": "40/40 rate 1.0",
+      "B-FLAT-RAG-EMBED-K5": "40/40 rate 1.0",
+      "B-FLAT-RAG-EMBED-K1": "0/40 rate 0.0",
+      "B-RANDOM-K5": "40/40 rate 1.0"
+    },
+    "recomputed_coverage_alias_OOD": {
+      "all_reconstructed_pipelines": 1.0,
+      "H-HIERARCHICAL": 1.0,
+      "B-FLAT-TFIDF-K5": 1.0,
+      "B-FLAT-EMBED-K5": 1.0,
+      "B-RANDOM-K5": 1.0,
+      "coverage_gain_hier_minus_best_flat_point": 0.0,
+      "bootstrap_CI_producer": "[0.0,0.0] p=1.0 verified structurally"
+    },
+    "recomputed_density_alias_OOD_mean": {
+      "H-HIERARCHICAL": 1.95,
+      "B-FLAT-TFIDF-K5": 1.8166666666666669,
+      "gain_point": 0.1333,
+      "bootstrap_p_producer": 0.3255,
+      "not_significant": true
+    },
+    "recomputed_mcnemar": {
+      "hier_vs_exact_contingency": "a=0 both correct, b=40 hier correct exact wrong, c=0 hier wrong exact correct, d=0 both wrong",
+      "hier_vs_exact_exact_binomial_p_two_sided": 1.82e-12,
+      "producer_reported_hier_vs_exact_p": 6.98e-10,
+      "both_below_0.05": true,
+      "hier_vs_best_flat_discordant": "0/40 both correct 40/40 p=1.0"
+    },
+    "recomputed_binomial_vs_0.10": {
+      "hier_40_of_40_one_sided_p": 1.0e-40,
+      "matches_producer": "hierarchical_binomial_p_vs_0.10 0.0 (underflow)",
+      "significant": true
+    },
+    "recomputed_confidence_std": {
+      "hier_overall_std": 0.3273,
+      "hier_alias_only_std": 0.0182,
+      "producer_hierarchical_confidence_std_across_tasks": 0.3273,
+      "matches": true,
+      "nc_oracle_leak_threshold_0.05_pass": true
+    },
+    "recomputed_exact_match_stratum": "12/12 for all 7 pipelines matches producer",
+    "recomputed_no_applicable_stratum": "6 reconstructed pipelines UNKNOWN 12/12; EMBED-K1 EXECUTABLE 12/12 confidence 0.196-0.231 gated <0.80 ungated false 0/12 matches gated interpretation",
+    "recomputed_empty_registry": "6/6 UNKNOWN for all pipelines",
+    "recomputed_registry_leak": "0/40",
+    "recomputed_forbidden_keys": "0",
+    "recomputed_hierarchical_index": "63 themes 63 episodes singleton true 203 components matches producer manifest sha ef2fa566",
+    "recomputed_k_distribution": "hier k=2 on 10 tasks (min_k_topup) k=3 on 30 tasks (registry_size) mean 2.75 matches producer"
+  },
+  "claim_ceiling": "MAXIMUM JUSTIFIED: On the byte-identical synthetic fixture (40 alias-OOD: 30 orthogonal 3 families x10 +10 mixed header+body+query, 12 exact, 12 no-applicable, 6 empty, per-task registry size 3) hierarchical decoupling-before-aggregation retrieval + genuine reconstruction resolves alias-OOD 40/40 (1.0 Wilson [0.912,1.0] binomial p~1e-40 vs 0.10 McNemar p<0.05 vs B-EXACT-MATCH 0/40) without increasing false_accept (0.0 <=0.15, 1.0 below verbatim), preserving exact-match 12/12 and no-applicable/empty abstention (ECE 0.1076 CI [0.0882,0.1149] <=0.15) and not dominated by flat retrieval. Retrieval complementarity (coverage gain >=0.15, density gain >0 with p<0.05) NOT demonstrated on this substrate: coverage identically 1.0 for all pipelines because pool (3) <= k=5 makes gain structurally 0.0 (bootstrap CI [0,0] p=1.0); hierarchical index fragmented to 63 singleton themes under frozen Jaccard 0.6 so aggregation contributed no grouping. Thus bounded MIXED: resolution not regressing but complementarity advantage not evidenced. No inference to live BrowserGym/WebShop/ALFWorld, production SPA DOM/AX heterogeneity, or pool>>k where flat truncation could occur. Does not falsify hierarchical retrieval in general; does falsify that theme-diversified retrieval beats flat top-5 RAG on this minimal-derived-dict synthetic with k>=pool.",
+  "evidence_refs": [
+    "research/experiments/EXP-FRONTIER-35782552659/result.json sha 3771f0d3fddc7ceb6f5f5bb87780e40fbf0f1a3fb0d0b9c10b62e4d907886223",
+    "research/experiments/EXP-FRONTIER-35782552659/raw_evidence.json sha 4969ae02d35caadf1fd6215cbdd8592c0f984b5cee4835d5d1c3dc1fc8d0e703 (490 rows, 70 tasks x7 pipelines, registry_size 3, recall_at_k 1.0, k_used, confidence)",
+    "research/experiments/EXP-FRONTIER-35782552659/derived_metrics.json sha e7ed8d2a072b75842810bdb1584e33c6a80126ae68b685714d24a75170a99dfe (Wilson CIs, binomial, McNemar, family-blocked bootstrap 2000)",
+    "research/experiments/EXP-FRONTIER-35782552659/index_manifest.json sha ef2fa566357fcafb3cc1810ff905161c7242845f1edf3f3d1f3d88a74ef53203 (63 themes singleton, 63 episodes, 203 components)",
+    "research/experiments/EXP-FRONTIER-35782552659/tasks.json sha 4abf148721fdee9dfe56ac776f6b3112344821a4ea80d183c5313adeced1f35e (identical to parent)",
+    "research/experiments/EXP-FRONTIER-35782552659/train_split_inventory.json sha 5fa218245a0272d6c0c33422a445eaa2f42a86db99e3b3bb3f340c5518fc9bd7",
+    "research/frontier/run_genuine_35782552659.py sha 2d66408199cebeb96627dee91f694a9b46e1e0e8c0d3396a80089f284ad82c83",
+    "research/experiments/EXP-FRONTIER-35782552659/spec.json sha c723181a69b34bd70acee1fa29847f13865e4de8ecbceecd530a02dc02f01266",
+    "research/experiments/EXP-FRONTIER-35782552659/provenance.json sha 98ce651b19538cf159f3c55d3bcaa8fcd11ed92e635bb5e3851556394848d08f"
+  ],
+  "unresolved": [
+    "Whether hierarchical selection yields complementarity when pool actually truncates: requires registry 8-12 mechanisms per task with intra-family overlap >k so flat top-k can drop correct family even when present (producer unresolved[0])",
+    "Whether 63-singleton fragmentation is specific to Jaccard>=0.6 on this family structure (edge weight 0.5 within-task) or general to template-parsed sets; lower threshold not tried post-hoc per freeze discipline",
+    "Whether correct-component-family recall is the right complementarity construct once reconstruction can adopt from any single correct-family candidate; alternative wasted-retrieval or redundancy-penalizing metrics may be more discriminating",
+    "EMBED-K1 status under applicability controls: ablation has no applicability evaluation by frozen definition; decision on exempting no-reconstruction ablations from null control would change strict vs gated classification"
+  ]
+}
