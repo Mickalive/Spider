@@ -1,0 +1,123 @@
+{
+  "M-B-LENGTH-RHO": 0.0,
+  "M-BOOTSTRAP-CI-high-ratio-cold-0": 0.05,
+  "M-BOOTSTRAP-CI-low-ratio-cold-0": 0.05,
+  "M-CORRELATION-NC-SHUFFLE": 0.0,
+  "M-CORRELATION-NC-SHUFFLE-p": 1.0,
+  "M-COST-AMORTIZED-COLD-f1-per-bin": {
+    "0.0": 5000.0,
+    "0.25": 6250.0,
+    "0.5": 5000.0,
+    "0.75": 5000.0,
+    "1.0": 5555.555555555556
+  },
+  "M-COST-AMORTIZED-INSTR-f10-per-bin": {
+    "0.0": 4700.0,
+    "0.25": 4700.0,
+    "0.5": 5222.222222222222,
+    "0.75": 4700.0,
+    "1.0": 4947.368421052632
+  },
+  "M-COST-AMORTIZED-RAG-f10-per-bin": {
+    "0.0": 5502.777777777777,
+    "0.25": 5473.684210526316,
+    "0.5": 6933.333333333333,
+    "0.75": 5777.777777777777,
+    "1.0": 5473.684210526316
+  },
+  "M-COST-AMORTIZED-REPLAY-f10-per-bin": {
+    "0.0": 5227.5,
+    "0.25": 5500.0,
+    "0.5": 5500.0,
+    "0.75": 5500.0,
+    "1.0": 5500.0
+  },
+  "M-COST-AMORTIZED-SPIDER-f1-per-bin": {
+    "0.0": 1250.0,
+    "0.25": 2250.0,
+    "0.5": 3550.0,
+    "0.75": 6200.0,
+    "1.0": 6200.0
+  },
+  "M-COST-AMORTIZED-SPIDER-f10-per-bin": {
+    "0.0": 350.0,
+    "0.25": 1350.0,
+    "0.5": 2650.0,
+    "0.75": 5300.0,
+    "1.0": 5300.0
+  },
+  "M-COST-BROWSER-SPIDER-mean-per-bin": {
+    "0.0": 2.0,
+    "0.25": 10.0,
+    "0.5": 20.4,
+    "0.75": 40.0,
+    "1.0": 40.0
+  },
+  "M-COST-RATIO-SPIDER-COLD-0pct-f1": 0.25,
+  "M-COST-RATIO-SPIDER-COLD-100pct-f1": 1.1159999999999999,
+  "M-COST-RATIO-SPIDER-INSTR-0pct-f10": 0.07446808510638298,
+  "M-COST-RATIO-SPIDER-INSTR-25pct-f10": 0.2872340425531915,
+  "M-COST-RATIO-SPIDER-RAG-0pct-f10": 0.06360424028268552,
+  "M-COST-RATIO-SPIDER-RAG-25pct-f10": 0.24663461538461537,
+  "M-COST-RATIO-SPIDER-REPLAY-0pct-f1": 0.2391200382592061,
+  "M-COST-TOKENS-SPIDER-mean-per-bin": {
+    "0.0": 250.0,
+    "0.25": 1250.0,
+    "0.5": 2550.0,
+    "0.75": 5200.0,
+    "1.0": 5200.0
+  },
+  "M-DISTILL-TOKENS": 1000,
+  "M-FALSE-ACCEPT-NC2": 0.43,
+  "M-FALSE-ACCEPT-SPIDER": 0.0,
+  "M-HIT-RATE-RAG-0pct": 0.0,
+  "M-HIT-RATE-REPLAY-0pct": 1.0,
+  "M-LENGTH-PROPORTIONAL-R2": 0,
+  "M-LENGTH-PROPORTIONAL-RHO": 0.0,
+  "M-N-SPIDER": 100,
+  "M-N-TOTAL-TRIALS": 802,
+  "M-PC1-REUSED-SPIDER-0pct": 1.0,
+  "M-PC1-SUCCESS": 1,
+  "M-PC1-TOKENS-REPLAY-0pct": 50,
+  "M-R2-DELTA": 0.9274852528768978,
+  "M-R2-LENGTH": 0.0,
+  "M-R2-NOVELTY": 0.9274852528768978,
+  "M-REPLAY-BEATS-at-gte25-f10": {
+    "0.25": true,
+    "0.5": true,
+    "0.75": true,
+    "1.0": true
+  },
+  "M-REUSED-ACTIONS-FRACTION-SPIDER-0pct": 1.0,
+  "M-SENSITIVITY-R2-250": 0.9952229299363057,
+  "M-SENSITIVITY-R2-750": 0.9952229299363057,
+  "M-SENSITIVITY-RHO-250": 1.0,
+  "M-SENSITIVITY-RHO-750": 1.0,
+  "M-SLOPE-NOVELTY": 5540.0,
+  "M-SLOPE-NOVELTY-p": 1.4773943064157765e-274,
+  "M-SPEARMAN-RHO": 0.9703414051992281,
+  "M-SPEARMAN-RHO-CI-high": 0.9735272550658246,
+  "M-SPEARMAN-RHO-CI-low": 0.9657749587893667,
+  "M-SPEARMAN-RHO-p": 0.017166666666666667,
+  "M-SUCCESS-COLD-overall": 0.94,
+  "M-SUCCESS-INSTR-overall": 0.97,
+  "M-SUCCESS-RAG-overall": 0.89,
+  "M-SUCCESS-REPLAY-overall": 1.0,
+  "M-SUCCESS-SPIDER-0pct": 1.0,
+  "M-SUCCESS-SPIDER-Wilson-low-0pct": 0.8388698745050667,
+  "M-SUCCESS-SPIDER-overall": 1.0,
+  "M-SUCCESS-SPIDER-per-bin": {
+    "0.0": 1.0,
+    "0.25": 1.0,
+    "0.5": 1.0,
+    "0.75": 1.0,
+    "1.0": 1.0
+  },
+  "M-UNKNOWN-RATE-SPIDER-per-bin": {
+    "0.0": 0.0,
+    "0.25": 0.0,
+    "0.5": 0.0,
+    "0.75": 1.0,
+    "1.0": 1.0
+  }
+}

@@ -1,0 +1,51 @@
+{
+  "B-COLD": {
+    "evidence": "artifacts/raw_per_task.csv (200 B-COLD rows)",
+    "expected": "Cost flat vs novelty ~5000 tokens (full-length), success measured via verification",
+    "id": "B-COLD",
+    "observed": "mean tokens 5000 flat across bins, success 0.94",
+    "pass": true
+  },
+  "B-INSTRUCTIONS": {
+    "evidence": "artifacts/raw_per_task.csv (100 B-INSTRUCTIONS rows)",
+    "expected": "Cost slightly below B-COLD but still ~full length; beaten by SPIDER at low novelty >=15%",
+    "id": "B-INSTRUCTIONS",
+    "observed": "amortized f10 at 0% 4700 vs SPIDER 350 ratio 0.074, at 25% 4700 vs 1350 ratio 0.287",
+    "pass": true
+  },
+  "B-LENGTH-PROPORTIONAL": {
+    "evidence": "artifacts/raw_per_task.csv (100 B-LENGTH-PROPORTIONAL rows)",
+    "expected": "Cost flat vs novelty (rho~0, R2~0), demonstrating falsifier is reachable",
+    "id": "B-LENGTH-PROPORTIONAL",
+    "observed": "rho=0.000, R2=0.000",
+    "pass": true
+  },
+  "B-RAG": {
+    "evidence": "artifacts/raw_per_task.csv (100 B-RAG rows, Jaccard TAU=0.30, hit only when >=75% overlap)",
+    "expected": "At 0% similar to SPIDER; at >=25% worse than SPIDER by >=20%",
+    "id": "B-RAG",
+    "observed": "f10 ratios SPIDER/RAG at 0% 0.064, at 25% 0.247",
+    "pass": true
+  },
+  "B-REPLAY-TERX": {
+    "evidence": "artifacts/raw_per_task.csv; PC1_exact_repeat hit verified",
+    "expected": "Hit 100% at n=0.0 exact repeat (0 tokens + verification), 0% at 100% -> COLD. SPIDER cheaper at >=25%",
+    "id": "B-REPLAY-TERX",
+    "observed": "REPLAY hit at n=0.0 (PC1 verified 50 tokens +1 call), hit_rate=1.0 inside compared set; SPIDER beats REPLAY at >=25%: {0.25: True, 0.5: True, 0.75: True, 1.0: True}",
+    "pass": true
+  },
+  "NC-SHUFFLE-AND-RANDOM": {
+    "evidence": "artifacts/raw_per_task.csv (NC1-SHUFFLE 100 rows, NC2-RANDOM 100 rows)",
+    "expected": "NC1 rho |rho|<0.25 p>=0.05 and success <= COLD; NC2 false_accept >=0.30 or |rho|<0.25",
+    "id": "NC-SHUFFLE-AND-RANDOM",
+    "observed": "NC1 rho 0.000 p 1.000, success 0.43 <= COLD 0.94; NC2 false_accept 0.43 rho 0.000",
+    "pass": true
+  },
+  "PC-PARAM-AND-REPLAY": {
+    "evidence": "artifacts/raw_per_task.csv rows PC1_exact_repeat_REPLAY, PC1_exact_repeat_SPIDER",
+    "expected": "PC1 B-REPLAY at n=0.0 exact repeat =50 tokens (0 LLM +50 verification), PC2 SPIDER at n=0.0 reused >=0.90 via actual pipeline",
+    "id": "PC-PARAM-AND-REPLAY",
+    "observed": "PC1 tokens 50 (expected 50), PC2 reused 1.00 >=0.90, success 1",
+    "pass": true
+  }
+}
