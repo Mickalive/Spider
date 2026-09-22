@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-35741890679",
+  "lane": "graph",
+  "decision": "MEASUREMENT_INVALID",
+  "claim_updates": [
+    {
+      "claim_id": "C-DELTA-REPAIR",
+      "status": "MEASUREMENT_INVALID",
+      "reason": "No probative measurement of C-DELTA-REPAIR obtained. Audit status REVISE, producer_claim_supported=false. Although producer correctly computed frozen gates C1-C3 PASS (PC1 1.0, PC2 0.917 ratio 0.053, byte identity 960/960=1.0, NC1 cost0 NC2 cont0) and reports FALSIFIES on C5/C8 (token ratio 0.613 CI [0.569,0.661] >=0.50 and browser ratio 0.431 CI [0.396,0.469] >=0.40, amortized 4744 > cold 2226 at n=10), audit validity_findings establish SIMULATION_NOT_MEASUREMENT: repair LLM is hardcoded heuristic (execute_delta_repair.py:355-403), token/browser/verification costs are deterministic functions with jitter not real LLM/Playwright, verification AUROC=1.0/precision=1.0 by construction (498-513 perfect separation by instance_id), contamination hardcoded to 2 events (468-474 mean 0.0046 max 0.083) not observed, amortization arithmetic consequence of hardcoded retrieval 320+verify 180+repair 1364, substrate is synthetic gzip strings not real nginx HIT/SWR/SIE/304, perturbations are selector string changes not real a11y tree. Claim ceiling bounded to deterministic simulation parameters only (audit claim_ceiling). No evidence for or against C-DELTA-REPAIR on real LLM/Playwright/nginx/verify; claim remains HYPOTHESIS and untested pending real substrate. Not REJECTED, not VALIDATED (audit not PASS), not PRODUCT_CORE."
+    }
+  ],
+  "product_action": "NO_PROMOTION",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "Does a single-resource local perturbation on a real nginx HIT/SWR/SIE/304 + Flask HS256 localhost substrate admit localized repair with bounded cost (<50% tokens and <40% browser vs cold re-exploration), verification AUROC>=0.75 and precision>=0.80, contamination <0.10 and amortized cost < cold at 10 reuses when measured with a real LLM agent, real Playwright execution and real verify() on actual DOM/response state?",
+  "reason": "Grounded in frozen spec/request/provenance and independent audit. Frozen design targets C-DELTA-REPAIR first measurement (director_mandate PIVOT SUPERSEDE, 0/224 prior) requiring real cost/contamination/amortization with B-COLD, B-VERBATIM (0-token), B-RETRIEVAL-RAG, B-ORACLE and B-RUNTIME-BYTE-IDENTITY baselines, decision_rule C1-C8. Producer result.json COMPLETE FALSIFIES: C1 True (PC1 1.0, PC2 0.917), C2 True (NC1 0, NC2 0, random FA 0.033), C3 True (960/960=1.0), C4 True (pooled TEST 0.944 CI [0.742,0.990] >=0.80, per-family 1.0/0.833/1.0 >=0.70), C5 False (token ratio TEST 0.613 CI 0.569-0.661, browser 0.431 CI 0.396-0.469), C6 True (mean 0.0046 max 0.083 <0.10), C7 True (AUROC 1.0 prec 1.0), C8 False (4744 vs 2226). Audit.json REVISE recomputes all metrics identically but finds all gate inputs and primary metrics are simulation artifacts, not measurements: heuristic not LLM, simulated counts not Playwright, AUROC perfect by construction, contamination hardcoded, amortization parameter-driven, synthetic byte identity. Audit required_fixes list real LLM, real Playwright, real verification, real nginx, adequate per-family TEST n>6, decoupled threshold. Per transmission discipline, simulation parameter falsification (C5/C8 fail FOR THIS SIMULATION) must not be encoded as scientific falsification of C-DELTA-REPAIR; substrate failure yields MEASUREMENT_INVALID. Conservative update: claim not REJECTED, not EXPERIMENTAL/VALIDATED, remains HYPOTHESIS; this packet marked MEASUREMENT_INVALID. continue=false because next step requires substrate repair (real model/browser/nginx/verify) before re-measurement, not immediate chaining.",
+  "evidence_refs": [
+    "research/experiments/EXP-GRAPH-35741890679/request.json (sha256:9e1265779e96b739db5b035acc87955a075e4fccc5e73e347a0de589f6b7762a)",
+    "research/experiments/EXP-GRAPH-35741890679/spec.json (sha256:4f7a26dba474b4cebad60c6694f07a63e9751bf577a0e034b38b1b48a913346f)",
+    "research/experiments/EXP-GRAPH-35741890679/prereg.md (sha256:2f33f0e85fa370b75a2e97804fed9539169d96f7426e7b02487ed37866b1bc42)",
+    "research/experiments/EXP-GRAPH-35741890679/freeze.json (sha256:370880ebf4dc764c14bc0d0850d2626c261abcc574877e445b0d861871dd6a37)",
+    "research/experiments/EXP-GRAPH-35741890679/result.json (metrics M-repair_success_rate_pooled_test 0.944, M-repair_tokens_ratio_vs_cold_test 0.613 CI [0.569,0.661], M-browser_ratio_vs_cold_test 0.431 CI [0.396,0.469], M-verification_auroc_test 1.0, M-contamination_rate_mean 0.0046, M-amortized_cost_tokens_10_test 4744 vs M-cold_cost_tokens 2226, controls C1 True C2 True C3 True C4 True C5 False C6 True C7 True C8 False)",
+    "research/experiments/EXP-GRAPH-35741890679/report.md",
+    "research/experiments/EXP-GRAPH-35741890679/provenance.json",
+    "research/experiments/EXP-GRAPH-35741890679/audit.json (status:REVISE producer_claim_supported:false claim_ceiling:simulation-only validity_findings:SIMULATION_NOT_MEASUREMENT VERIFICATION_AUROC_ARTIFACTUALLY_PERFECT CONTAMINATION_HARDCODED_NOT_MEASURED AMORTIZATION_MATHEMATICAL_CONSEQUENCE SUBSTRATE_SIMULATION_NOT_REAL_NGINX required_fixes: real LLM, real Playwright, real verification, real nginx, adequate n, decoupled threshold)",
+    "research/experiments/EXP-GRAPH-35741890679/raw_evidence/experiment_data.json (sha256:0abae6fc496553348ac2918fecd1d840aee77bdc51720e287e96af54a5ac7784)",
+    "research/experiments/EXP-GRAPH-35741890679/raw_evidence/perturbation_manifest.json (sha256:a2810b359b4fb716832dd120031caa650ebbb0e5d4020742aceab0b2c6fa3407)",
+    "research/graph/delta_repair/execute_delta_repair.py (sha256:15f62b80fe9df25e82a9a7e44b70acf8d5e331fb63b67021b4e6127fabe7d5ab)",
+    "codex/claim_state.json (C-DELTA-REPAIR prior HYPOTHESIS, 0/224 experiments before this packet)",
+    "research/claims/registry.json (C-DELTA-REPAIR owner_lanes graph/runtime/product, next_gate controlled local perturbations with repair cost and contamination bounds)"
+  ]
+}

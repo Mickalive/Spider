@@ -1,17 +1,17 @@
 {
   "lane": "graph",
   "human_paused": false,
-  "active_experiment_id": "EXP-GRAPH-35741890679",
-  "last_experiment_id": "EXP-GRAPH-35611618323",
-  "last_verdict": "FALSIFIES per frozen decision_rule \u2014 C1 behavioral detection mean TN=0.667 < 0.85 threshold. The HS256 symmetric JWT fix resolved token cross-node validation (TP=1.0), but per-node SQLite session store does not replicate sessions across distributed nodes. Round-robin routing sends valid-token requests to a node lacking the originating session_id, causing validate_session()=False and behavioral_delta>0 for valid tokens on /api/session/status (TN=0.0 on that endpoint, 1.0 on the other two). This is a genuine distributed infrastructure limitation (session non-replication), not measurement error. Critically, the frozen correlation gate C3-C7 all PASS: stratified r=-0.038, CI upper=0.029 < 0.15, TOST p=2.0e-08, confound detection |r|=0.912, local regression |r|=0.058. Orthogonality correlation is confirmed on distributed infrastructure; C1 detection fidelity fails for session-dependent endpoints only. Director bounds claim ceiling narrower than frozen rule: C-FRESHNESS orthogonality correlation confirmed on distributed 2-node Flask HS256 with independent session stores; C1 gate fails for session-dependent endpoints under round-robin without session affinity.",
+  "active_experiment_id": null,
+  "last_experiment_id": "EXP-GRAPH-35741890679",
+  "last_verdict": "MEASUREMENT_INVALID",
   "continue_immediately": false,
-  "next_question": "Does C-FRESHNESS achieve CONFIRMED status on distributed infrastructure when session affinity (sticky routing) or shared session store (Redis) is added to resolve the per-node SQLite session non-replication that causes C1 TN=0.0 on /api/session/status?",
+  "next_question": "Does a single-resource local perturbation on a real nginx HIT/SWR/SIE/304 + Flask HS256 localhost substrate admit localized repair with bounded cost (<50% tokens and <40% browser vs cold re-exploration), verification AUROC>=0.75 and precision>=0.80, contamination <0.10 and amortized cost < cold at 10 reuses when measured with a real LLM agent, real Playwright execution and real verify() on actual DOM/response state?",
   "promotion_ready": false,
-  "consecutive_failures": 2,
-  "updated_at": "2026-09-22T15:11:15.790831+00:00",
-  "last_failure_retryable": false,
-  "last_handoff_sha256": "99a45a7aac8041f5ed6c0d94d608e92ac238aee13c7559dc75d57166f95c1528",
-  "same_failure_count": 1,
-  "last_failure_fingerprint": "32fb61131a26107aaf831564",
-  "last_failure_control_revision": "ba7c62af1169347e5cec5d88ef113925e9f7d9f0f65a7854271e5a9a86912b0f"
+  "consecutive_failures": 0,
+  "updated_at": "2026-09-22T15:35:40.286314+00:00",
+  "last_failure_retryable": null,
+  "last_handoff_sha256": "05780454148f98b00addbf3804f13d13eb5f85b234377ab3df6bdc0e3f911c8a",
+  "same_failure_count": 0,
+  "last_failure_fingerprint": null,
+  "last_failure_control_revision": null
 }
