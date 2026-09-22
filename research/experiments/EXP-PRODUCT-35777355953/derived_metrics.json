@@ -1,0 +1,409 @@
+{
+  "alias_OOD": {
+    "product_correct_resolution": 1.0,
+    "product_correct_count": 40,
+    "product_false_accept": 0.0,
+    "product_unknown": 0.0,
+    "product_n": 40,
+    "proxy_correct_resolution": 1.0,
+    "proxy_correct_count": 40,
+    "proxy_n": 40,
+    "wilson_correct_ci": [
+      0.9123754607496077,
+      1.0
+    ],
+    "wilson_false_ci": [
+      0.0,
+      0.08762453925039232
+    ],
+    "exact_match_correct_rate": 0.0,
+    "verbatim_false_accept_rate": 1.0,
+    "tfidf_correct_rate": 0.0,
+    "random_correct_rate": 0.0,
+    "binomial_p_vs_0.10": 1.0000000000000022e-40,
+    "binomial_p_orthogonal_vs_0.10": 1.0000000000000017e-30,
+    "mcnemar_product_vs_exact": {
+      "b": 40,
+      "c": 0,
+      "chi2": 38.025,
+      "p": 6.984393063902417e-10
+    },
+    "mcnemar_fa_product_vs_verbatim": {
+      "b": 0,
+      "c": 40,
+      "chi2": 38.025,
+      "p": 6.984393063902417e-10
+    },
+    "diff_verbatim_minus_product_false_accept": 1.0,
+    "orthogonal_subset": {
+      "n": 30,
+      "correct": 30,
+      "correct_rate": 1.0,
+      "wilson_ci": [
+        0.886482908609522,
+        1.0
+      ]
+    },
+    "mixed_subset": {
+      "n": 10,
+      "correct": 10,
+      "correct_rate": 1.0,
+      "false_accept_rate": 0.0,
+      "wilson_ci": [
+        0.7224598312333834,
+        1.0
+      ]
+    },
+    "per_family_product": {
+      "fam0": {
+        "n": 10,
+        "correct_rate": 1.0
+      },
+      "fam1": {
+        "n": 10,
+        "correct_rate": 1.0
+      },
+      "fam2": {
+        "n": 10,
+        "correct_rate": 1.0
+      },
+      "fam3": {
+        "n": 10,
+        "correct_rate": 1.0
+      },
+      "heldout_9": {
+        "n": 9,
+        "correct_rate": 1.0
+      },
+      "orthogonal_30": {
+        "n": 30,
+        "correct_rate": 1.0
+      },
+      "mixed_10": {
+        "n": 10,
+        "correct_rate": 1.0
+      }
+    },
+    "per_family_proxy": {
+      "fam0": {
+        "n": 10,
+        "correct_rate": 1.0
+      },
+      "fam1": {
+        "n": 10,
+        "correct_rate": 1.0
+      },
+      "fam2": {
+        "n": 10,
+        "correct_rate": 1.0
+      },
+      "fam3": {
+        "n": 10,
+        "correct_rate": 1.0
+      },
+      "heldout_9": {
+        "n": 9,
+        "correct_rate": 1.0
+      },
+      "orthogonal_30": {
+        "n": 30,
+        "correct_rate": 1.0
+      },
+      "mixed_10": {
+        "n": 10,
+        "correct_rate": 1.0
+      }
+    },
+    "per_family_gap": {
+      "fam0": 0.0,
+      "fam1": 0.0,
+      "fam2": 0.0,
+      "fam3": 0.0
+    }
+  },
+  "exact_match": {
+    "product_correct_rate": 1.0,
+    "proxy_correct_rate": 1.0,
+    "baseline_correct_rate": 1.0,
+    "n": 12,
+    "product_wilson_ci": [
+      0.7574992425007574,
+      0.9999999999999998
+    ],
+    "proxy_delta": 0.0
+  },
+  "no_applicable": {
+    "product_unknown_precision": 1.0,
+    "product_false_accept_rate": 0.0,
+    "product_ece_over_all": 0.0652516342187119,
+    "ece_bootstrap_mean": 0.06545731205965896,
+    "ece_bootstrap_ci": [
+      0.05377383772040336,
+      0.07689290365228334
+    ],
+    "bins_product": [
+      {
+        "bin": 0,
+        "count": 18,
+        "acc": 0.0,
+        "avg_conf": 0.0,
+        "edges": [
+          0.0,
+          0.2
+        ]
+      },
+      {
+        "bin": 1,
+        "count": 0,
+        "acc": 0.0,
+        "avg_conf": 0.0,
+        "edges": [
+          0.2,
+          0.4
+        ]
+      },
+      {
+        "bin": 2,
+        "count": 0,
+        "acc": 0.0,
+        "avg_conf": 0.0,
+        "edges": [
+          0.4,
+          0.6000000000000001
+        ]
+      },
+      {
+        "bin": 3,
+        "count": 0,
+        "acc": 0.0,
+        "avg_conf": 0.0,
+        "edges": [
+          0.6000000000000001,
+          0.8
+        ]
+      },
+      {
+        "bin": 4,
+        "count": 52,
+        "acc": 1.0,
+        "avg_conf": 0.9121612616286571,
+        "edges": [
+          0.8,
+          1.0
+        ]
+      }
+    ],
+    "product_confidence_std": 0.4000051211339946,
+    "empty_registry_unknown_rate": 1.0,
+    "nc_no_applicable_pass": true,
+    "nc_empty_pass": true
+  },
+  "controls": {
+    "PC_EXACT_MATCH_pass": true,
+    "PC_BROWSERGYM_HEALTH_pass": false,
+    "live_attempted": 0,
+    "live_healthy": 0,
+    "live_bounded_exploratory": true,
+    "NC_NO_APPLICABLE_pass": true
+  },
+  "live": {
+    "attempted": 0,
+    "healthy": 0,
+    "exploratory_bound": true,
+    "browser_probe": {
+      "browsergym_version": "0.14.3",
+      "webshop_module": "ModuleNotFoundError: No module named 'browsergym.webshop'",
+      "alfworld_module": "ModuleNotFoundError: No module named 'browsergym.alfworld'",
+      "playwright": "import ok",
+      "substrate_probe": [
+        {
+          "url": "data:text/html,<html><body><h1>probe1</h1><input aria-label='q'></body></html>",
+          "loaded": true,
+          "ax_nodes": 8,
+          "viewport": "1280x720",
+          "method": "GET",
+          "healthy": false
+        },
+        {
+          "url": "https://example.com/",
+          "loaded": true,
+          "ax_nodes": 15,
+          "viewport": "1280x720",
+          "method": "GET",
+          "healthy": true
+        }
+      ],
+      "attempted_live_tasks": 0,
+      "note": "live alias-OOD tasks attempted=0: WebShop/ALFWorld task modules unavailable",
+      "substrate_healthy": [
+        false,
+        true
+      ]
+    }
+  },
+  "availability": {
+    "B_RAG_EMBED_available": false,
+    "B_RAG_EMBED_message": "sentence-transformers unavailable: ModuleNotFoundError: No module named 'sentence_transformers'",
+    "B_INSTRUCTION_available": false,
+    "B_INSTRUCTION_message": "no LLM provider API key in environment (OPENAI_API_KEY/ANTHROPIC_API_KEY unset); B-INSTRUCTION requires an instruction-following agent with a model API. Smallest unblock: provide a provider key or an offline model endpoint."
+  },
+  "gates": {
+    "C1": true,
+    "C2": true,
+    "C3": true,
+    "C4": true,
+    "C5": true,
+    "C6": true,
+    "C7": true,
+    "C8": true
+  },
+  "decision_components": {
+    "C1_PC_exact_pass": true,
+    "C1_live_bounded_exploratory": true,
+    "C2_NC_pass": true,
+    "C3_pooled_ge_0.50": true,
+    "C3_binom_p_lt_0.05": true,
+    "C3_mcnemar_p_lt_0.05": true,
+    "C3_orthogonal_ge_0.50": true,
+    "C3_mixed_ge_0.40": true,
+    "C3_per_family_ge_0.50": true,
+    "C3_heldout_ge_0.50": true,
+    "C4_fa_le_0.15": true,
+    "C4_diff_ge_0.15": true,
+    "C4_mcnemar_p_lt_0.05": true,
+    "C5_exact_ge_0.90": true,
+    "C5_proxy_delta": 0.0,
+    "C6_precision_ge_0.85": true,
+    "C6_ece_le_0.15": true,
+    "C6_conf_std_gt_0.05": true,
+    "C7_not_dominated_by_rag": true,
+    "C7_best_rag_correct": 0.0,
+    "C8_pooled_within_0.10": true,
+    "C8_ece_within_0.05": true,
+    "C8_per_family_gap_le_0.10": true,
+    "C8_per_family_gap_max": 0.0
+  },
+  "overall": {
+    "status": "COMPLETE",
+    "outcome": "SUPPORTS",
+    "all_survives": true,
+    "controls_pass": true,
+    "measurement_invalid_reasons": [],
+    "bounded_to": "synthetic pooled 40 (30 orthogonal +10 mixed); live BrowserGym stratum exploratory (WebShop/ALFWorld task modules unavailable in browsergym 0.14.3 on this runner); B-RAG-EMBED and B-INSTRUCTION unavailable with disclosure"
+  },
+  "stability": {
+    "per_seed": {
+      "42": {
+        "n": 40,
+        "P_correct": 40,
+        "Proxy_correct": 40,
+        "Exact_correct": 0,
+        "P_rate": 1.0,
+        "Proxy_rate": 1.0,
+        "Exact_rate": 0.0
+      },
+      "43": {
+        "n": 40,
+        "P_correct": 40,
+        "Proxy_correct": 40,
+        "Exact_correct": 0,
+        "P_rate": 1.0,
+        "Proxy_rate": 1.0,
+        "Exact_rate": 0.0
+      },
+      "44": {
+        "n": 40,
+        "P_correct": 40,
+        "Proxy_correct": 40,
+        "Exact_correct": 0,
+        "P_rate": 1.0,
+        "Proxy_rate": 1.0,
+        "Exact_rate": 0.0
+      }
+    },
+    "P_correct_mean": 1.0,
+    "P_correct_std": 0.0,
+    "P_correct_cv": 0.0,
+    "note": "registry splits = deterministic permutation of each task's mechanism list per seed (content identical, frozen fixtures); reconstruction scoring is order-invariant so CV=0 is the expected deterministic-stability result for the rule port."
+  },
+  "economics": {
+    "B-EXACT-MATCH": {
+      "n": 70,
+      "mean_latency_ms": 0.41990714285714287,
+      "median_latency_ms": 0.3503,
+      "p95_latency_ms": 0.3896,
+      "llm_tokens_per_task": 0,
+      "browser_calls_per_task": 0,
+      "note": "deterministic method: 0 LLM tokens, 0 browser calls; latency is wall-clock incl retrieval+bind",
+      "alias_OOD_correct_rate": 0.0
+    },
+    "B-VERBATIM-REPLAY": {
+      "n": 70,
+      "mean_latency_ms": 0.012915714285714286,
+      "median_latency_ms": 0.01385,
+      "p95_latency_ms": 0.019455,
+      "llm_tokens_per_task": 0,
+      "browser_calls_per_task": 0,
+      "note": "deterministic method: 0 LLM tokens, 0 browser calls; latency is wall-clock incl retrieval+bind",
+      "alias_OOD_correct_rate": 0.0
+    },
+    "B-RAG-TFIDF": {
+      "n": 70,
+      "mean_latency_ms": 2.1287314285714287,
+      "median_latency_ms": 2.0721,
+      "p95_latency_ms": 2.188405,
+      "llm_tokens_per_task": 0,
+      "browser_calls_per_task": 0,
+      "note": "deterministic method: 0 LLM tokens, 0 browser calls; latency is wall-clock incl retrieval+bind",
+      "alias_OOD_correct_rate": 0.0
+    },
+    "B-RANDOM": {
+      "n": 70,
+      "mean_latency_ms": 0.015024285714285712,
+      "median_latency_ms": 0.01715,
+      "p95_latency_ms": 0.0226,
+      "llm_tokens_per_task": 0,
+      "browser_calls_per_task": 0,
+      "note": "deterministic method: 0 LLM tokens, 0 browser calls; latency is wall-clock incl retrieval+bind",
+      "alias_OOD_correct_rate": 0.0
+    },
+    "P-SPIDER-RECONSTRUCT": {
+      "n": 70,
+      "mean_latency_ms": 0.39994714285714283,
+      "median_latency_ms": 0.45255,
+      "p95_latency_ms": 0.508685,
+      "llm_tokens_per_task": 0,
+      "browser_calls_per_task": 0,
+      "note": "deterministic method: 0 LLM tokens, 0 browser calls; latency is wall-clock incl retrieval+bind",
+      "alias_OOD_correct_rate": 1.0,
+      "latency_per_success_ms": 0.39994714285714283
+    },
+    "R-FRONTIER-RULE-PROXY": {
+      "n": 70,
+      "mean_latency_ms": 0.11718142857142858,
+      "median_latency_ms": 0.139,
+      "p95_latency_ms": 0.194985,
+      "llm_tokens_per_task": 0,
+      "browser_calls_per_task": 0,
+      "note": "deterministic method: 0 LLM tokens, 0 browser calls; latency is wall-clock incl retrieval+bind",
+      "alias_OOD_correct_rate": 1.0,
+      "latency_per_success_ms": 0.11718142857142858
+    }
+  },
+  "audit": {
+    "leak": 0,
+    "forbidden_key_reads_kernel_source": [],
+    "kernel_sha256_post": "a57265155603581bb9cb7a00db5349afa52d8af43d208d296564ca60ac2150a1",
+    "kernel_sha256_pre_port": "46929b3a951df48d7f9d1fd850871073c0d91c1868aa117e13d389fe274e8d61",
+    "kernel_changed": true,
+    "proxy_snapshot_sha256": "ba3202f834c95761e67f00b41f8ac095e646e7b7a0d8c1795ad1ddb53e6ab155",
+    "audit_ok": true
+  },
+  "harness_errors": [],
+  "sample_counts": {
+    "alias-OOD": 40,
+    "exact-match": 12,
+    "no-applicable": 12,
+    "empty-registry": 6
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "browsergym_version": "0.14.3",
+  "webshop_module": "ModuleNotFoundError: No module named 'browsergym.webshop'",
+  "alfworld_module": "ModuleNotFoundError: No module named 'browsergym.alfworld'",
+  "playwright": "import ok",
+  "substrate_probe": [
+    {
+      "url": "data:text/html,<html><body><h1>probe1</h1><input aria-label='q'></body></html>",
+      "loaded": true,
+      "ax_nodes": 8,
+      "viewport": "1280x720",
+      "method": "GET",
+      "healthy": false
+    },
+    {
+      "url": "https://example.com/",
+      "loaded": true,
+      "ax_nodes": 15,
+      "viewport": "1280x720",
+      "method": "GET",
+      "healthy": true
+    }
+  ],
+  "attempted_live_tasks": 0,
+  "note": "live alias-OOD tasks attempted=0: WebShop/ALFWorld task modules unavailable",
+  "substrate_healthy": [
+    false,
+    true
+  ]
+}

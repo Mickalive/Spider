@@ -1,0 +1,3849 @@
+{
+  "per_task": [
+    {
+      "task_id": "alias-0-0",
+      "method": "B-EXACT-MATCH",
+      "latency_ms": 0.5503,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "alias-0-0",
+      "method": "B-VERBATIM-REPLAY",
+      "latency_ms": 0.0232,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "alias-0-0",
+      "method": "B-RAG-TFIDF",
+      "latency_ms": 17.7981,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "alias-0-0",
+      "method": "B-RANDOM",
+      "latency_ms": 0.0301,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "alias-0-0",
+      "method": "P-SPIDER-RECONSTRUCT",
+      "latency_ms": 0.6249,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 1,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "alias-0-0",
+      "method": "R-FRONTIER-RULE-PROXY",
+      "latency_ms": 0.2215,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 1,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "alias-0-1",
+      "method": "B-EXACT-MATCH",
+      "latency_ms": 0.7799,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "alias-0-1",
+      "method": "B-VERBATIM-REPLAY",
+      "latency_ms": 0.0196,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "alias-0-1",
+      "method": "B-RAG-TFIDF",
+      "latency_ms": 2.2402,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "alias-0-1",
+      "method": "B-RANDOM",
+      "latency_ms": 0.0235,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "alias-0-1",
+      "method": "P-SPIDER-RECONSTRUCT",
+      "latency_ms": 0.5012,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 1,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "alias-0-1",
+      "method": "R-FRONTIER-RULE-PROXY",
+      "latency_ms": 0.1792,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 1,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "alias-0-2",
+      "method": "B-EXACT-MATCH",
+      "latency_ms": 0.384,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "alias-0-2",
+      "method": "B-VERBATIM-REPLAY",
+      "latency_ms": 0.0186,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "alias-0-2",
+      "method": "B-RAG-TFIDF",
+      "latency_ms": 2.1224,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "alias-0-2",
+      "method": "B-RANDOM",
+      "latency_ms": 0.0204,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "alias-0-2",
+      "method": "P-SPIDER-RECONSTRUCT",
+      "latency_ms": 0.461,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 1,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "alias-0-2",
+      "method": "R-FRONTIER-RULE-PROXY",
+      "latency_ms": 0.1637,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 1,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "alias-0-3",
+      "method": "B-EXACT-MATCH",
+      "latency_ms": 0.3838,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "alias-0-3",
+      "method": "B-VERBATIM-REPLAY",
+      "latency_ms": 0.018,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "alias-0-3",
+      "method": "B-RAG-TFIDF",
+      "latency_ms": 2.0857,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "alias-0-3",
+      "method": "B-RANDOM",
+      "latency_ms": 0.0206,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "alias-0-3",
+      "method": "P-SPIDER-RECONSTRUCT",
+      "latency_ms": 0.4526,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 1,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "alias-0-3",
+      "method": "R-FRONTIER-RULE-PROXY",
+      "latency_ms": 0.1946,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 1,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "alias-0-4",
+      "method": "B-EXACT-MATCH",
+      "latency_ms": 0.3605,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "alias-0-4",
+      "method": "B-VERBATIM-REPLAY",
+      "latency_ms": 0.0183,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "alias-0-4",
+      "method": "B-RAG-TFIDF",
+      "latency_ms": 2.0821,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "alias-0-4",
+      "method": "B-RANDOM",
+      "latency_ms": 0.0219,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "alias-0-4",
+      "method": "P-SPIDER-RECONSTRUCT",
+      "latency_ms": 0.4746,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 1,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "alias-0-4",
+      "method": "R-FRONTIER-RULE-PROXY",
+      "latency_ms": 0.1629,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 1,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "alias-0-5",
+      "method": "B-EXACT-MATCH",
+      "latency_ms": 0.3577,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "alias-0-5",
+      "method": "B-VERBATIM-REPLAY",
+      "latency_ms": 0.0182,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "alias-0-5",
+      "method": "B-RAG-TFIDF",
+      "latency_ms": 2.0683,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "alias-0-5",
+      "method": "B-RANDOM",
+      "latency_ms": 0.0204,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "alias-0-5",
+      "method": "P-SPIDER-RECONSTRUCT",
+      "latency_ms": 0.4872,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 1,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "alias-0-5",
+      "method": "R-FRONTIER-RULE-PROXY",
+      "latency_ms": 0.163,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 1,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "alias-0-6",
+      "method": "B-EXACT-MATCH",
+      "latency_ms": 0.356,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "alias-0-6",
+      "method": "B-VERBATIM-REPLAY",
+      "latency_ms": 0.018,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "alias-0-6",
+      "method": "B-RAG-TFIDF",
+      "latency_ms": 2.1036,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "alias-0-6",
+      "method": "B-RANDOM",
+      "latency_ms": 0.022,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "alias-0-6",
+      "method": "P-SPIDER-RECONSTRUCT",
+      "latency_ms": 0.4534,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 1,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "alias-0-6",
+      "method": "R-FRONTIER-RULE-PROXY",
+      "latency_ms": 0.1605,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 1,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "alias-0-7",
+      "method": "B-EXACT-MATCH",
+      "latency_ms": 0.3752,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "alias-0-7",
+      "method": "B-VERBATIM-REPLAY",
+      "latency_ms": 0.0187,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "alias-0-7",
+      "method": "B-RAG-TFIDF",
+      "latency_ms": 2.0601,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "alias-0-7",
+      "method": "B-RANDOM",
+      "latency_ms": 0.0218,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "alias-0-7",
+      "method": "P-SPIDER-RECONSTRUCT",
+      "latency_ms": 0.4586,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 1,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "alias-0-7",
+      "method": "R-FRONTIER-RULE-PROXY",
+      "latency_ms": 0.1708,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 1,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "alias-0-8",
+      "method": "B-EXACT-MATCH",
+      "latency_ms": 0.3804,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "alias-0-8",
+      "method": "B-VERBATIM-REPLAY",
+      "latency_ms": 0.0181,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "alias-0-8",
+      "method": "B-RAG-TFIDF",
+      "latency_ms": 2.1177,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "alias-0-8",
+      "method": "B-RANDOM",
+      "latency_ms": 0.021,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "alias-0-8",
+      "method": "P-SPIDER-RECONSTRUCT",
+      "latency_ms": 0.4563,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 1,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "alias-0-8",
+      "method": "R-FRONTIER-RULE-PROXY",
+      "latency_ms": 0.1953,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 1,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "alias-0-9",
+      "method": "B-EXACT-MATCH",
+      "latency_ms": 0.3717,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "alias-0-9",
+      "method": "B-VERBATIM-REPLAY",
+      "latency_ms": 0.018,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "alias-0-9",
+      "method": "B-RAG-TFIDF",
+      "latency_ms": 2.0667,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "alias-0-9",
+      "method": "B-RANDOM",
+      "latency_ms": 0.022,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "alias-0-9",
+      "method": "P-SPIDER-RECONSTRUCT",
+      "latency_ms": 0.4785,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 1,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "alias-0-9",
+      "method": "R-FRONTIER-RULE-PROXY",
+      "latency_ms": 0.1636,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 1,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "alias-1-0",
+      "method": "B-EXACT-MATCH",
+      "latency_ms": 0.3641,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "alias-1-0",
+      "method": "B-VERBATIM-REPLAY",
+      "latency_ms": 0.0178,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "alias-1-0",
+      "method": "B-RAG-TFIDF",
+      "latency_ms": 2.053,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "alias-1-0",
+      "method": "B-RANDOM",
+      "latency_ms": 0.02,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "alias-1-0",
+      "method": "P-SPIDER-RECONSTRUCT",
+      "latency_ms": 0.4795,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 1,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "alias-1-0",
+      "method": "R-FRONTIER-RULE-PROXY",
+      "latency_ms": 0.1589,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 1,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "alias-1-1",
+      "method": "B-EXACT-MATCH",
+      "latency_ms": 0.3595,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "alias-1-1",
+      "method": "B-VERBATIM-REPLAY",
+      "latency_ms": 0.0185,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "alias-1-1",
+      "method": "B-RAG-TFIDF",
+      "latency_ms": 2.1096,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "alias-1-1",
+      "method": "B-RANDOM",
+      "latency_ms": 0.0226,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "alias-1-1",
+      "method": "P-SPIDER-RECONSTRUCT",
+      "latency_ms": 0.4525,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 1,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "alias-1-1",
+      "method": "R-FRONTIER-RULE-PROXY",
+      "latency_ms": 0.1583,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 1,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "alias-1-2",
+      "method": "B-EXACT-MATCH",
+      "latency_ms": 0.3765,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "alias-1-2",
+      "method": "B-VERBATIM-REPLAY",
+      "latency_ms": 0.0178,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "alias-1-2",
+      "method": "B-RAG-TFIDF",
+      "latency_ms": 2.0673,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "alias-1-2",
+      "method": "B-RANDOM",
+      "latency_ms": 0.0201,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "alias-1-2",
+      "method": "P-SPIDER-RECONSTRUCT",
+      "latency_ms": 0.4555,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 1,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "alias-1-2",
+      "method": "R-FRONTIER-RULE-PROXY",
+      "latency_ms": 0.1566,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 1,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "alias-1-3",
+      "method": "B-EXACT-MATCH",
+      "latency_ms": 0.3874,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "alias-1-3",
+      "method": "B-VERBATIM-REPLAY",
+      "latency_ms": 0.0179,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "alias-1-3",
+      "method": "B-RAG-TFIDF",
+      "latency_ms": 2.0787,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "alias-1-3",
+      "method": "B-RANDOM",
+      "latency_ms": 0.02,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "alias-1-3",
+      "method": "P-SPIDER-RECONSTRUCT",
+      "latency_ms": 0.4489,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 1,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "alias-1-3",
+      "method": "R-FRONTIER-RULE-PROXY",
+      "latency_ms": 0.1815,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 1,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "alias-1-4",
+      "method": "B-EXACT-MATCH",
+      "latency_ms": 0.3544,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "alias-1-4",
+      "method": "B-VERBATIM-REPLAY",
+      "latency_ms": 0.018,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "alias-1-4",
+      "method": "B-RAG-TFIDF",
+      "latency_ms": 2.085,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "alias-1-4",
+      "method": "B-RANDOM",
+      "latency_ms": 0.0203,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "alias-1-4",
+      "method": "P-SPIDER-RECONSTRUCT",
+      "latency_ms": 0.5263,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 1,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "alias-1-4",
+      "method": "R-FRONTIER-RULE-PROXY",
+      "latency_ms": 0.1655,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 1,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "alias-1-5",
+      "method": "B-EXACT-MATCH",
+      "latency_ms": 0.3616,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "alias-1-5",
+      "method": "B-VERBATIM-REPLAY",
+      "latency_ms": 0.0178,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "alias-1-5",
+      "method": "B-RAG-TFIDF",
+      "latency_ms": 2.0925,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "alias-1-5",
+      "method": "B-RANDOM",
+      "latency_ms": 0.0209,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "alias-1-5",
+      "method": "P-SPIDER-RECONSTRUCT",
+      "latency_ms": 0.4777,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 1,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "alias-1-5",
+      "method": "R-FRONTIER-RULE-PROXY",
+      "latency_ms": 0.1581,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 1,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "alias-1-6",
+      "method": "B-EXACT-MATCH",
+      "latency_ms": 0.357,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "alias-1-6",
+      "method": "B-VERBATIM-REPLAY",
+      "latency_ms": 0.018,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "alias-1-6",
+      "method": "B-RAG-TFIDF",
+      "latency_ms": 2.0721,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "alias-1-6",
+      "method": "B-RANDOM",
+      "latency_ms": 0.0226,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "alias-1-6",
+      "method": "P-SPIDER-RECONSTRUCT",
+      "latency_ms": 0.4503,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 1,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "alias-1-6",
+      "method": "R-FRONTIER-RULE-PROXY",
+      "latency_ms": 0.1601,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 1,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "alias-1-7",
+      "method": "B-EXACT-MATCH",
+      "latency_ms": 0.3767,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "alias-1-7",
+      "method": "B-VERBATIM-REPLAY",
+      "latency_ms": 0.0183,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "alias-1-7",
+      "method": "B-RAG-TFIDF",
+      "latency_ms": 2.0772,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "alias-1-7",
+      "method": "B-RANDOM",
+      "latency_ms": 0.0201,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "alias-1-7",
+      "method": "P-SPIDER-RECONSTRUCT",
+      "latency_ms": 0.4647,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 1,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "alias-1-7",
+      "method": "R-FRONTIER-RULE-PROXY",
+      "latency_ms": 0.1548,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 1,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "alias-1-8",
+      "method": "B-EXACT-MATCH",
+      "latency_ms": 0.3914,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "alias-1-8",
+      "method": "B-VERBATIM-REPLAY",
+      "latency_ms": 0.0179,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "alias-1-8",
+      "method": "B-RAG-TFIDF",
+      "latency_ms": 2.0766,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "alias-1-8",
+      "method": "B-RANDOM",
+      "latency_ms": 0.0201,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "alias-1-8",
+      "method": "P-SPIDER-RECONSTRUCT",
+      "latency_ms": 0.448,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 1,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "alias-1-8",
+      "method": "R-FRONTIER-RULE-PROXY",
+      "latency_ms": 0.1834,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 1,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "alias-1-9",
+      "method": "B-EXACT-MATCH",
+      "latency_ms": 0.3622,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "alias-1-9",
+      "method": "B-VERBATIM-REPLAY",
+      "latency_ms": 0.0183,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "alias-1-9",
+      "method": "B-RAG-TFIDF",
+      "latency_ms": 2.0751,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "alias-1-9",
+      "method": "B-RANDOM",
+      "latency_ms": 0.0199,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "alias-1-9",
+      "method": "P-SPIDER-RECONSTRUCT",
+      "latency_ms": 0.4974,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 1,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "alias-1-9",
+      "method": "R-FRONTIER-RULE-PROXY",
+      "latency_ms": 0.1605,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 1,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "alias-2-0",
+      "method": "B-EXACT-MATCH",
+      "latency_ms": 0.3427,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "alias-2-0",
+      "method": "B-VERBATIM-REPLAY",
+      "latency_ms": 0.0133,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "alias-2-0",
+      "method": "B-RAG-TFIDF",
+      "latency_ms": 2.0576,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "alias-2-0",
+      "method": "B-RANDOM",
+      "latency_ms": 0.0162,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "alias-2-0",
+      "method": "P-SPIDER-RECONSTRUCT",
+      "latency_ms": 0.4807,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 1,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "alias-2-0",
+      "method": "R-FRONTIER-RULE-PROXY",
+      "latency_ms": 0.1406,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 1,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "alias-2-1",
+      "method": "B-EXACT-MATCH",
+      "latency_ms": 0.3537,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "alias-2-1",
+      "method": "B-VERBATIM-REPLAY",
+      "latency_ms": 0.0129,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "alias-2-1",
+      "method": "B-RAG-TFIDF",
+      "latency_ms": 2.0702,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "alias-2-1",
+      "method": "B-RANDOM",
+      "latency_ms": 0.0152,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "alias-2-1",
+      "method": "P-SPIDER-RECONSTRUCT",
+      "latency_ms": 0.4842,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 1,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "alias-2-1",
+      "method": "R-FRONTIER-RULE-PROXY",
+      "latency_ms": 0.1355,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 1,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "alias-2-2",
+      "method": "B-EXACT-MATCH",
+      "latency_ms": 0.3395,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "alias-2-2",
+      "method": "B-VERBATIM-REPLAY",
+      "latency_ms": 0.0127,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "alias-2-2",
+      "method": "B-RAG-TFIDF",
+      "latency_ms": 2.0625,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "alias-2-2",
+      "method": "B-RANDOM",
+      "latency_ms": 0.018,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "alias-2-2",
+      "method": "P-SPIDER-RECONSTRUCT",
+      "latency_ms": 0.4624,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 1,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "alias-2-2",
+      "method": "R-FRONTIER-RULE-PROXY",
+      "latency_ms": 0.1364,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 1,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "alias-2-3",
+      "method": "B-EXACT-MATCH",
+      "latency_ms": 0.3786,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "alias-2-3",
+      "method": "B-VERBATIM-REPLAY",
+      "latency_ms": 0.013,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "alias-2-3",
+      "method": "B-RAG-TFIDF",
+      "latency_ms": 2.0614,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "alias-2-3",
+      "method": "B-RANDOM",
+      "latency_ms": 0.0163,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "alias-2-3",
+      "method": "P-SPIDER-RECONSTRUCT",
+      "latency_ms": 0.4518,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 1,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "alias-2-3",
+      "method": "R-FRONTIER-RULE-PROXY",
+      "latency_ms": 0.1359,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 1,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "alias-2-4",
+      "method": "B-EXACT-MATCH",
+      "latency_ms": 0.3616,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "alias-2-4",
+      "method": "B-VERBATIM-REPLAY",
+      "latency_ms": 0.0131,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "alias-2-4",
+      "method": "B-RAG-TFIDF",
+      "latency_ms": 2.08,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "alias-2-4",
+      "method": "B-RANDOM",
+      "latency_ms": 0.0163,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "alias-2-4",
+      "method": "P-SPIDER-RECONSTRUCT",
+      "latency_ms": 0.4547,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 1,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "alias-2-4",
+      "method": "R-FRONTIER-RULE-PROXY",
+      "latency_ms": 0.1328,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 1,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "alias-2-5",
+      "method": "B-EXACT-MATCH",
+      "latency_ms": 0.3688,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "alias-2-5",
+      "method": "B-VERBATIM-REPLAY",
+      "latency_ms": 0.0129,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "alias-2-5",
+      "method": "B-RAG-TFIDF",
+      "latency_ms": 2.0721,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "alias-2-5",
+      "method": "B-RANDOM",
+      "latency_ms": 0.0159,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "alias-2-5",
+      "method": "P-SPIDER-RECONSTRUCT",
+      "latency_ms": 0.4604,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 1,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "alias-2-5",
+      "method": "R-FRONTIER-RULE-PROXY",
+      "latency_ms": 0.158,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 1,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "alias-2-6",
+      "method": "B-EXACT-MATCH",
+      "latency_ms": 0.3544,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "alias-2-6",
+      "method": "B-VERBATIM-REPLAY",
+      "latency_ms": 0.0129,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "alias-2-6",
+      "method": "B-RAG-TFIDF",
+      "latency_ms": 2.0815,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "alias-2-6",
+      "method": "B-RANDOM",
+      "latency_ms": 0.0159,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "alias-2-6",
+      "method": "P-SPIDER-RECONSTRUCT",
+      "latency_ms": 0.4755,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 1,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "alias-2-6",
+      "method": "R-FRONTIER-RULE-PROXY",
+      "latency_ms": 0.1374,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 1,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "alias-2-7",
+      "method": "B-EXACT-MATCH",
+      "latency_ms": 0.3486,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "alias-2-7",
+      "method": "B-VERBATIM-REPLAY",
+      "latency_ms": 0.0145,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "alias-2-7",
+      "method": "B-RAG-TFIDF",
+      "latency_ms": 2.0864,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "alias-2-7",
+      "method": "B-RANDOM",
+      "latency_ms": 0.0196,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "alias-2-7",
+      "method": "P-SPIDER-RECONSTRUCT",
+      "latency_ms": 0.4846,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 1,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "alias-2-7",
+      "method": "R-FRONTIER-RULE-PROXY",
+      "latency_ms": 0.1537,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 1,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "alias-2-8",
+      "method": "B-EXACT-MATCH",
+      "latency_ms": 0.3474,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "alias-2-8",
+      "method": "B-VERBATIM-REPLAY",
+      "latency_ms": 0.0144,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "alias-2-8",
+      "method": "B-RAG-TFIDF",
+      "latency_ms": 2.1086,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "alias-2-8",
+      "method": "B-RANDOM",
+      "latency_ms": 0.0196,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "alias-2-8",
+      "method": "P-SPIDER-RECONSTRUCT",
+      "latency_ms": 0.4863,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 1,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "alias-2-8",
+      "method": "R-FRONTIER-RULE-PROXY",
+      "latency_ms": 0.1579,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 1,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "alias-2-9",
+      "method": "B-EXACT-MATCH",
+      "latency_ms": 0.3506,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "alias-2-9",
+      "method": "B-VERBATIM-REPLAY",
+      "latency_ms": 0.0146,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "alias-2-9",
+      "method": "B-RAG-TFIDF",
+      "latency_ms": 2.0723,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "alias-2-9",
+      "method": "B-RANDOM",
+      "latency_ms": 0.0184,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "alias-2-9",
+      "method": "P-SPIDER-RECONSTRUCT",
+      "latency_ms": 0.4745,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 1,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "alias-2-9",
+      "method": "R-FRONTIER-RULE-PROXY",
+      "latency_ms": 0.1567,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 1,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "mixed-0",
+      "method": "B-EXACT-MATCH",
+      "latency_ms": 0.3874,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "mixed-0",
+      "method": "B-VERBATIM-REPLAY",
+      "latency_ms": 0.0185,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "mixed-0",
+      "method": "B-RAG-TFIDF",
+      "latency_ms": 2.0925,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "mixed-0",
+      "method": "B-RANDOM",
+      "latency_ms": 0.0206,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "mixed-0",
+      "method": "P-SPIDER-RECONSTRUCT",
+      "latency_ms": 0.481,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 1,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "mixed-0",
+      "method": "R-FRONTIER-RULE-PROXY",
+      "latency_ms": 0.2029,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 1,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "mixed-1",
+      "method": "B-EXACT-MATCH",
+      "latency_ms": 0.3555,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "mixed-1",
+      "method": "B-VERBATIM-REPLAY",
+      "latency_ms": 0.0178,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "mixed-1",
+      "method": "B-RAG-TFIDF",
+      "latency_ms": 2.0826,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "mixed-1",
+      "method": "B-RANDOM",
+      "latency_ms": 0.0201,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "mixed-1",
+      "method": "P-SPIDER-RECONSTRUCT",
+      "latency_ms": 0.5128,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 1,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "mixed-1",
+      "method": "R-FRONTIER-RULE-PROXY",
+      "latency_ms": 0.1779,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 1,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "mixed-2",
+      "method": "B-EXACT-MATCH",
+      "latency_ms": 0.35,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "mixed-2",
+      "method": "B-VERBATIM-REPLAY",
+      "latency_ms": 0.0171,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "mixed-2",
+      "method": "B-RAG-TFIDF",
+      "latency_ms": 2.1251,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "mixed-2",
+      "method": "B-RANDOM",
+      "latency_ms": 0.0194,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "mixed-2",
+      "method": "P-SPIDER-RECONSTRUCT",
+      "latency_ms": 0.5036,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 1,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "mixed-2",
+      "method": "R-FRONTIER-RULE-PROXY",
+      "latency_ms": 0.1752,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 1,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "mixed-3",
+      "method": "B-EXACT-MATCH",
+      "latency_ms": 0.3556,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "mixed-3",
+      "method": "B-VERBATIM-REPLAY",
+      "latency_ms": 0.0172,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "mixed-3",
+      "method": "B-RAG-TFIDF",
+      "latency_ms": 2.0791,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "mixed-3",
+      "method": "B-RANDOM",
+      "latency_ms": 0.0205,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "mixed-3",
+      "method": "P-SPIDER-RECONSTRUCT",
+      "latency_ms": 0.4781,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 1,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "mixed-3",
+      "method": "R-FRONTIER-RULE-PROXY",
+      "latency_ms": 0.1765,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 1,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "mixed-4",
+      "method": "B-EXACT-MATCH",
+      "latency_ms": 0.3829,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "mixed-4",
+      "method": "B-VERBATIM-REPLAY",
+      "latency_ms": 0.0172,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "mixed-4",
+      "method": "B-RAG-TFIDF",
+      "latency_ms": 2.087,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "mixed-4",
+      "method": "B-RANDOM",
+      "latency_ms": 0.0202,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "mixed-4",
+      "method": "P-SPIDER-RECONSTRUCT",
+      "latency_ms": 0.4755,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 1,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "mixed-4",
+      "method": "R-FRONTIER-RULE-PROXY",
+      "latency_ms": 0.178,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 1,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "mixed-5",
+      "method": "B-EXACT-MATCH",
+      "latency_ms": 6.8402,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "mixed-5",
+      "method": "B-VERBATIM-REPLAY",
+      "latency_ms": 0.0228,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "mixed-5",
+      "method": "B-RAG-TFIDF",
+      "latency_ms": 2.2942,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "mixed-5",
+      "method": "B-RANDOM",
+      "latency_ms": 0.0203,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "mixed-5",
+      "method": "P-SPIDER-RECONSTRUCT",
+      "latency_ms": 0.4738,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 1,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "mixed-5",
+      "method": "R-FRONTIER-RULE-PROXY",
+      "latency_ms": 0.1769,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 1,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "mixed-6",
+      "method": "B-EXACT-MATCH",
+      "latency_ms": 0.3824,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "mixed-6",
+      "method": "B-VERBATIM-REPLAY",
+      "latency_ms": 0.0175,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "mixed-6",
+      "method": "B-RAG-TFIDF",
+      "latency_ms": 2.0868,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "mixed-6",
+      "method": "B-RANDOM",
+      "latency_ms": 0.019,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "mixed-6",
+      "method": "P-SPIDER-RECONSTRUCT",
+      "latency_ms": 0.4843,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 1,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "mixed-6",
+      "method": "R-FRONTIER-RULE-PROXY",
+      "latency_ms": 0.2049,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 1,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "mixed-7",
+      "method": "B-EXACT-MATCH",
+      "latency_ms": 0.3587,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "mixed-7",
+      "method": "B-VERBATIM-REPLAY",
+      "latency_ms": 0.0174,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "mixed-7",
+      "method": "B-RAG-TFIDF",
+      "latency_ms": 2.0682,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "mixed-7",
+      "method": "B-RANDOM",
+      "latency_ms": 0.0207,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "mixed-7",
+      "method": "P-SPIDER-RECONSTRUCT",
+      "latency_ms": 0.505,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 1,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "mixed-7",
+      "method": "R-FRONTIER-RULE-PROXY",
+      "latency_ms": 0.1833,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 1,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "mixed-8",
+      "method": "B-EXACT-MATCH",
+      "latency_ms": 0.3536,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "mixed-8",
+      "method": "B-VERBATIM-REPLAY",
+      "latency_ms": 0.0184,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "mixed-8",
+      "method": "B-RAG-TFIDF",
+      "latency_ms": 2.1011,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "mixed-8",
+      "method": "B-RANDOM",
+      "latency_ms": 0.0203,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "mixed-8",
+      "method": "P-SPIDER-RECONSTRUCT",
+      "latency_ms": 0.5117,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 1,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "mixed-8",
+      "method": "R-FRONTIER-RULE-PROXY",
+      "latency_ms": 0.1778,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 1,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "mixed-9",
+      "method": "B-EXACT-MATCH",
+      "latency_ms": 0.3782,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "mixed-9",
+      "method": "B-VERBATIM-REPLAY",
+      "latency_ms": 0.0194,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "mixed-9",
+      "method": "B-RAG-TFIDF",
+      "latency_ms": 2.067,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "mixed-9",
+      "method": "B-RANDOM",
+      "latency_ms": 0.0209,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "mixed-9",
+      "method": "P-SPIDER-RECONSTRUCT",
+      "latency_ms": 0.4937,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 1,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "mixed-9",
+      "method": "R-FRONTIER-RULE-PROXY",
+      "latency_ms": 0.1785,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 1,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "exact-0",
+      "method": "B-EXACT-MATCH",
+      "latency_ms": 0.2971,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "exact-0",
+      "method": "B-VERBATIM-REPLAY",
+      "latency_ms": 0.0126,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "exact-0",
+      "method": "B-RAG-TFIDF",
+      "latency_ms": 2.054,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "exact-0",
+      "method": "B-RANDOM",
+      "latency_ms": 0.0147,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "exact-0",
+      "method": "P-SPIDER-RECONSTRUCT",
+      "latency_ms": 0.3445,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 1,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "exact-0",
+      "method": "R-FRONTIER-RULE-PROXY",
+      "latency_ms": 0.1178,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 1,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "exact-1",
+      "method": "B-EXACT-MATCH",
+      "latency_ms": 0.2887,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "exact-1",
+      "method": "B-VERBATIM-REPLAY",
+      "latency_ms": 0.0127,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "exact-1",
+      "method": "B-RAG-TFIDF",
+      "latency_ms": 2.0384,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "exact-1",
+      "method": "B-RANDOM",
+      "latency_ms": 0.0142,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "exact-1",
+      "method": "P-SPIDER-RECONSTRUCT",
+      "latency_ms": 0.3412,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 1,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "exact-1",
+      "method": "R-FRONTIER-RULE-PROXY",
+      "latency_ms": 0.1149,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 1,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "exact-2",
+      "method": "B-EXACT-MATCH",
+      "latency_ms": 0.2607,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "exact-2",
+      "method": "B-VERBATIM-REPLAY",
+      "latency_ms": 0.0087,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "exact-2",
+      "method": "B-RAG-TFIDF",
+      "latency_ms": 2.0319,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "exact-2",
+      "method": "B-RANDOM",
+      "latency_ms": 0.0326,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "exact-2",
+      "method": "P-SPIDER-RECONSTRUCT",
+      "latency_ms": 0.3386,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 1,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "exact-2",
+      "method": "R-FRONTIER-RULE-PROXY",
+      "latency_ms": 0.0903,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 1,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "exact-3",
+      "method": "B-EXACT-MATCH",
+      "latency_ms": 0.271,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "exact-3",
+      "method": "B-VERBATIM-REPLAY",
+      "latency_ms": 0.0129,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "exact-3",
+      "method": "B-RAG-TFIDF",
+      "latency_ms": 2.048,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "exact-3",
+      "method": "B-RANDOM",
+      "latency_ms": 0.0143,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "exact-3",
+      "method": "P-SPIDER-RECONSTRUCT",
+      "latency_ms": 0.3587,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 1,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "exact-3",
+      "method": "R-FRONTIER-RULE-PROXY",
+      "latency_ms": 0.1115,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 1,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "exact-4",
+      "method": "B-EXACT-MATCH",
+      "latency_ms": 0.2782,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "exact-4",
+      "method": "B-VERBATIM-REPLAY",
+      "latency_ms": 0.0195,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "exact-4",
+      "method": "B-RAG-TFIDF",
+      "latency_ms": 2.0183,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "exact-4",
+      "method": "B-RANDOM",
+      "latency_ms": 0.0149,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "exact-4",
+      "method": "P-SPIDER-RECONSTRUCT",
+      "latency_ms": 0.3598,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 1,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "exact-4",
+      "method": "R-FRONTIER-RULE-PROXY",
+      "latency_ms": 0.1176,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 1,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "exact-5",
+      "method": "B-EXACT-MATCH",
+      "latency_ms": 0.2744,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "exact-5",
+      "method": "B-VERBATIM-REPLAY",
+      "latency_ms": 0.0122,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "exact-5",
+      "method": "B-RAG-TFIDF",
+      "latency_ms": 2.0522,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "exact-5",
+      "method": "B-RANDOM",
+      "latency_ms": 0.0147,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "exact-5",
+      "method": "P-SPIDER-RECONSTRUCT",
+      "latency_ms": 0.3576,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 1,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "exact-5",
+      "method": "R-FRONTIER-RULE-PROXY",
+      "latency_ms": 0.1122,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 1,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "exact-6",
+      "method": "B-EXACT-MATCH",
+      "latency_ms": 0.2637,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "exact-6",
+      "method": "B-VERBATIM-REPLAY",
+      "latency_ms": 0.0107,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "exact-6",
+      "method": "B-RAG-TFIDF",
+      "latency_ms": 2.0476,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "exact-6",
+      "method": "B-RANDOM",
+      "latency_ms": 0.0133,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "exact-6",
+      "method": "P-SPIDER-RECONSTRUCT",
+      "latency_ms": 0.3351,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 1,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "exact-6",
+      "method": "R-FRONTIER-RULE-PROXY",
+      "latency_ms": 0.0919,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 1,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "exact-7",
+      "method": "B-EXACT-MATCH",
+      "latency_ms": 0.2899,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "exact-7",
+      "method": "B-VERBATIM-REPLAY",
+      "latency_ms": 0.0128,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "exact-7",
+      "method": "B-RAG-TFIDF",
+      "latency_ms": 2.0445,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "exact-7",
+      "method": "B-RANDOM",
+      "latency_ms": 0.0158,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "exact-7",
+      "method": "P-SPIDER-RECONSTRUCT",
+      "latency_ms": 0.3459,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 1,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "exact-7",
+      "method": "R-FRONTIER-RULE-PROXY",
+      "latency_ms": 0.1263,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 1,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "exact-8",
+      "method": "B-EXACT-MATCH",
+      "latency_ms": 0.2878,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "exact-8",
+      "method": "B-VERBATIM-REPLAY",
+      "latency_ms": 0.0126,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "exact-8",
+      "method": "B-RAG-TFIDF",
+      "latency_ms": 2.044,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "exact-8",
+      "method": "B-RANDOM",
+      "latency_ms": 0.0152,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "exact-8",
+      "method": "P-SPIDER-RECONSTRUCT",
+      "latency_ms": 0.3353,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 1,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "exact-8",
+      "method": "R-FRONTIER-RULE-PROXY",
+      "latency_ms": 0.1099,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 1,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "exact-9",
+      "method": "B-EXACT-MATCH",
+      "latency_ms": 0.2901,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "exact-9",
+      "method": "B-VERBATIM-REPLAY",
+      "latency_ms": 0.0119,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "exact-9",
+      "method": "B-RAG-TFIDF",
+      "latency_ms": 2.074,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "exact-9",
+      "method": "B-RANDOM",
+      "latency_ms": 0.0144,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "exact-9",
+      "method": "P-SPIDER-RECONSTRUCT",
+      "latency_ms": 0.3359,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 1,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "exact-9",
+      "method": "R-FRONTIER-RULE-PROXY",
+      "latency_ms": 0.1102,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 1,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "exact-10",
+      "method": "B-EXACT-MATCH",
+      "latency_ms": 0.3191,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "exact-10",
+      "method": "B-VERBATIM-REPLAY",
+      "latency_ms": 0.0148,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "exact-10",
+      "method": "B-RAG-TFIDF",
+      "latency_ms": 2.0374,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "exact-10",
+      "method": "B-RANDOM",
+      "latency_ms": 0.0143,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "exact-10",
+      "method": "P-SPIDER-RECONSTRUCT",
+      "latency_ms": 0.3472,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 1,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "exact-10",
+      "method": "R-FRONTIER-RULE-PROXY",
+      "latency_ms": 0.1124,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 1,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "exact-11",
+      "method": "B-EXACT-MATCH",
+      "latency_ms": 0.2763,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "exact-11",
+      "method": "B-VERBATIM-REPLAY",
+      "latency_ms": 0.0123,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "exact-11",
+      "method": "B-RAG-TFIDF",
+      "latency_ms": 2.038,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "exact-11",
+      "method": "B-RANDOM",
+      "latency_ms": 0.0151,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "exact-11",
+      "method": "P-SPIDER-RECONSTRUCT",
+      "latency_ms": 0.3412,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 1,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "exact-11",
+      "method": "R-FRONTIER-RULE-PROXY",
+      "latency_ms": 0.1121,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 1,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "noapp-0",
+      "method": "B-EXACT-MATCH",
+      "latency_ms": 0.3046,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "noapp-0",
+      "method": "B-VERBATIM-REPLAY",
+      "latency_ms": 0.0043,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "noapp-0",
+      "method": "B-RAG-TFIDF",
+      "latency_ms": 2.0507,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "noapp-0",
+      "method": "B-RANDOM",
+      "latency_ms": 0.0036,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "noapp-0",
+      "method": "P-SPIDER-RECONSTRUCT",
+      "latency_ms": 0.3407,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 1,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "noapp-0",
+      "method": "R-FRONTIER-RULE-PROXY",
+      "latency_ms": 0.0114,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 1,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "noapp-1",
+      "method": "B-EXACT-MATCH",
+      "latency_ms": 0.2911,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "noapp-1",
+      "method": "B-VERBATIM-REPLAY",
+      "latency_ms": 0.0039,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "noapp-1",
+      "method": "B-RAG-TFIDF",
+      "latency_ms": 2.0785,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "noapp-1",
+      "method": "B-RANDOM",
+      "latency_ms": 0.0035,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "noapp-1",
+      "method": "P-SPIDER-RECONSTRUCT",
+      "latency_ms": 0.3286,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 1,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "noapp-1",
+      "method": "R-FRONTIER-RULE-PROXY",
+      "latency_ms": 0.0113,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 1,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "noapp-2",
+      "method": "B-EXACT-MATCH",
+      "latency_ms": 0.3163,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "noapp-2",
+      "method": "B-VERBATIM-REPLAY",
+      "latency_ms": 0.0036,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "noapp-2",
+      "method": "B-RAG-TFIDF",
+      "latency_ms": 2.0658,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "noapp-2",
+      "method": "B-RANDOM",
+      "latency_ms": 0.0035,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "noapp-2",
+      "method": "P-SPIDER-RECONSTRUCT",
+      "latency_ms": 0.3067,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 1,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "noapp-2",
+      "method": "R-FRONTIER-RULE-PROXY",
+      "latency_ms": 0.0113,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 1,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "noapp-3",
+      "method": "B-EXACT-MATCH",
+      "latency_ms": 0.3205,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "noapp-3",
+      "method": "B-VERBATIM-REPLAY",
+      "latency_ms": 0.0037,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "noapp-3",
+      "method": "B-RAG-TFIDF",
+      "latency_ms": 2.0804,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "noapp-3",
+      "method": "B-RANDOM",
+      "latency_ms": 0.0033,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "noapp-3",
+      "method": "P-SPIDER-RECONSTRUCT",
+      "latency_ms": 0.3134,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 1,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "noapp-3",
+      "method": "R-FRONTIER-RULE-PROXY",
+      "latency_ms": 0.0106,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 1,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "noapp-4",
+      "method": "B-EXACT-MATCH",
+      "latency_ms": 0.2911,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "noapp-4",
+      "method": "B-VERBATIM-REPLAY",
+      "latency_ms": 0.0037,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "noapp-4",
+      "method": "B-RAG-TFIDF",
+      "latency_ms": 2.0745,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "noapp-4",
+      "method": "B-RANDOM",
+      "latency_ms": 0.0036,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "noapp-4",
+      "method": "P-SPIDER-RECONSTRUCT",
+      "latency_ms": 0.3108,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 1,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "noapp-4",
+      "method": "R-FRONTIER-RULE-PROXY",
+      "latency_ms": 0.011,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 1,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "noapp-5",
+      "method": "B-EXACT-MATCH",
+      "latency_ms": 0.2836,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "noapp-5",
+      "method": "B-VERBATIM-REPLAY",
+      "latency_ms": 0.0036,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "noapp-5",
+      "method": "B-RAG-TFIDF",
+      "latency_ms": 2.0527,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "noapp-5",
+      "method": "B-RANDOM",
+      "latency_ms": 0.0033,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "noapp-5",
+      "method": "P-SPIDER-RECONSTRUCT",
+      "latency_ms": 0.3371,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 1,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "noapp-5",
+      "method": "R-FRONTIER-RULE-PROXY",
+      "latency_ms": 0.0105,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 1,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "noapp-6",
+      "method": "B-EXACT-MATCH",
+      "latency_ms": 0.293,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "noapp-6",
+      "method": "B-VERBATIM-REPLAY",
+      "latency_ms": 0.0037,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "noapp-6",
+      "method": "B-RAG-TFIDF",
+      "latency_ms": 2.0591,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "noapp-6",
+      "method": "B-RANDOM",
+      "latency_ms": 0.0033,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "noapp-6",
+      "method": "P-SPIDER-RECONSTRUCT",
+      "latency_ms": 0.3092,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 1,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "noapp-6",
+      "method": "R-FRONTIER-RULE-PROXY",
+      "latency_ms": 0.0104,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 1,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "noapp-7",
+      "method": "B-EXACT-MATCH",
+      "latency_ms": 0.3263,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "noapp-7",
+      "method": "B-VERBATIM-REPLAY",
+      "latency_ms": 0.0036,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "noapp-7",
+      "method": "B-RAG-TFIDF",
+      "latency_ms": 2.0548,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "noapp-7",
+      "method": "B-RANDOM",
+      "latency_ms": 0.0033,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "noapp-7",
+      "method": "P-SPIDER-RECONSTRUCT",
+      "latency_ms": 0.3098,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 1,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "noapp-7",
+      "method": "R-FRONTIER-RULE-PROXY",
+      "latency_ms": 0.0103,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 1,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "noapp-8",
+      "method": "B-EXACT-MATCH",
+      "latency_ms": 0.2855,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "noapp-8",
+      "method": "B-VERBATIM-REPLAY",
+      "latency_ms": 0.0038,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "noapp-8",
+      "method": "B-RAG-TFIDF",
+      "latency_ms": 2.0845,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "noapp-8",
+      "method": "B-RANDOM",
+      "latency_ms": 0.0035,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "noapp-8",
+      "method": "P-SPIDER-RECONSTRUCT",
+      "latency_ms": 0.3201,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 1,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "noapp-8",
+      "method": "R-FRONTIER-RULE-PROXY",
+      "latency_ms": 0.0106,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 1,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "noapp-9",
+      "method": "B-EXACT-MATCH",
+      "latency_ms": 0.2861,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "noapp-9",
+      "method": "B-VERBATIM-REPLAY",
+      "latency_ms": 0.0036,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "noapp-9",
+      "method": "B-RAG-TFIDF",
+      "latency_ms": 2.0609,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "noapp-9",
+      "method": "B-RANDOM",
+      "latency_ms": 0.0041,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "noapp-9",
+      "method": "P-SPIDER-RECONSTRUCT",
+      "latency_ms": 0.3422,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 1,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "noapp-9",
+      "method": "R-FRONTIER-RULE-PROXY",
+      "latency_ms": 0.0106,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 1,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "noapp-10",
+      "method": "B-EXACT-MATCH",
+      "latency_ms": 0.3012,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "noapp-10",
+      "method": "B-VERBATIM-REPLAY",
+      "latency_ms": 0.0038,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "noapp-10",
+      "method": "B-RAG-TFIDF",
+      "latency_ms": 2.3323,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "noapp-10",
+      "method": "B-RANDOM",
+      "latency_ms": 0.0036,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "noapp-10",
+      "method": "P-SPIDER-RECONSTRUCT",
+      "latency_ms": 0.4029,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 1,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "noapp-10",
+      "method": "R-FRONTIER-RULE-PROXY",
+      "latency_ms": 0.0149,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 1,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "noapp-11",
+      "method": "B-EXACT-MATCH",
+      "latency_ms": 0.3027,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "noapp-11",
+      "method": "B-VERBATIM-REPLAY",
+      "latency_ms": 0.0042,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "noapp-11",
+      "method": "B-RAG-TFIDF",
+      "latency_ms": 2.1066,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "noapp-11",
+      "method": "B-RANDOM",
+      "latency_ms": 0.0033,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "noapp-11",
+      "method": "P-SPIDER-RECONSTRUCT",
+      "latency_ms": 0.341,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 1,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "noapp-11",
+      "method": "R-FRONTIER-RULE-PROXY",
+      "latency_ms": 0.0121,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 1,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "empty-0",
+      "method": "B-EXACT-MATCH",
+      "latency_ms": 0.1496,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "empty-0",
+      "method": "B-VERBATIM-REPLAY",
+      "latency_ms": 0.0035,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "empty-0",
+      "method": "B-RAG-TFIDF",
+      "latency_ms": 0.0028,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "empty-0",
+      "method": "B-RANDOM",
+      "latency_ms": 0.0022,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "empty-0",
+      "method": "P-SPIDER-RECONSTRUCT",
+      "latency_ms": 0.122,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 1,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "empty-0",
+      "method": "R-FRONTIER-RULE-PROXY",
+      "latency_ms": 0.0097,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 1,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "empty-1",
+      "method": "B-EXACT-MATCH",
+      "latency_ms": 0.1161,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "empty-1",
+      "method": "B-VERBATIM-REPLAY",
+      "latency_ms": 0.0031,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "empty-1",
+      "method": "B-RAG-TFIDF",
+      "latency_ms": 0.0024,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "empty-1",
+      "method": "B-RANDOM",
+      "latency_ms": 0.0023,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "empty-1",
+      "method": "P-SPIDER-RECONSTRUCT",
+      "latency_ms": 0.114,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 1,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "empty-1",
+      "method": "R-FRONTIER-RULE-PROXY",
+      "latency_ms": 0.0086,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 1,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "empty-2",
+      "method": "B-EXACT-MATCH",
+      "latency_ms": 0.1145,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "empty-2",
+      "method": "B-VERBATIM-REPLAY",
+      "latency_ms": 0.003,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "empty-2",
+      "method": "B-RAG-TFIDF",
+      "latency_ms": 0.0021,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "empty-2",
+      "method": "B-RANDOM",
+      "latency_ms": 0.0019,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "empty-2",
+      "method": "P-SPIDER-RECONSTRUCT",
+      "latency_ms": 0.1379,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 1,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "empty-2",
+      "method": "R-FRONTIER-RULE-PROXY",
+      "latency_ms": 0.0089,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 1,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "empty-3",
+      "method": "B-EXACT-MATCH",
+      "latency_ms": 0.1123,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "empty-3",
+      "method": "B-VERBATIM-REPLAY",
+      "latency_ms": 0.003,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "empty-3",
+      "method": "B-RAG-TFIDF",
+      "latency_ms": 0.002,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "empty-3",
+      "method": "B-RANDOM",
+      "latency_ms": 0.002,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "empty-3",
+      "method": "P-SPIDER-RECONSTRUCT",
+      "latency_ms": 0.1169,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 1,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "empty-3",
+      "method": "R-FRONTIER-RULE-PROXY",
+      "latency_ms": 0.0081,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 1,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "empty-4",
+      "method": "B-EXACT-MATCH",
+      "latency_ms": 0.1123,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "empty-4",
+      "method": "B-VERBATIM-REPLAY",
+      "latency_ms": 0.0029,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "empty-4",
+      "method": "B-RAG-TFIDF",
+      "latency_ms": 0.0024,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "empty-4",
+      "method": "B-RANDOM",
+      "latency_ms": 0.002,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "empty-4",
+      "method": "P-SPIDER-RECONSTRUCT",
+      "latency_ms": 0.1095,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 1,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "empty-4",
+      "method": "R-FRONTIER-RULE-PROXY",
+      "latency_ms": 0.0078,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 1,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "empty-5",
+      "method": "B-EXACT-MATCH",
+      "latency_ms": 0.109,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "empty-5",
+      "method": "B-VERBATIM-REPLAY",
+      "latency_ms": 0.0028,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "empty-5",
+      "method": "B-RAG-TFIDF",
+      "latency_ms": 0.0022,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "empty-5",
+      "method": "B-RANDOM",
+      "latency_ms": 0.0022,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 0,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "empty-5",
+      "method": "P-SPIDER-RECONSTRUCT",
+      "latency_ms": 0.1088,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 1,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    },
+    {
+      "task_id": "empty-5",
+      "method": "R-FRONTIER-RULE-PROXY",
+      "latency_ms": 0.0079,
+      "retrieval_calls": 1,
+      "reconstruct_calls": 1,
+      "llm_tokens": 0,
+      "browser_calls": 0
+    }
+  ],
+  "by_method": {
+    "B-EXACT-MATCH": {
+      "n": 70,
+      "mean_latency_ms": 0.41990714285714287,
+      "median_latency_ms": 0.3503,
+      "p95_latency_ms": 0.3896,
+      "llm_tokens_per_task": 0,
+      "browser_calls_per_task": 0,
+      "note": "deterministic method: 0 LLM tokens, 0 browser calls; latency is wall-clock incl retrieval+bind",
+      "alias_OOD_correct_rate": 0.0
+    },
+    "B-VERBATIM-REPLAY": {
+      "n": 70,
+      "mean_latency_ms": 0.012915714285714286,
+      "median_latency_ms": 0.01385,
+      "p95_latency_ms": 0.019455,
+      "llm_tokens_per_task": 0,
+      "browser_calls_per_task": 0,
+      "note": "deterministic method: 0 LLM tokens, 0 browser calls; latency is wall-clock incl retrieval+bind",
+      "alias_OOD_correct_rate": 0.0
+    },
+    "B-RAG-TFIDF": {
+      "n": 70,
+      "mean_latency_ms": 2.1287314285714287,
+      "median_latency_ms": 2.0721,
+      "p95_latency_ms": 2.188405,
+      "llm_tokens_per_task": 0,
+      "browser_calls_per_task": 0,
+      "note": "deterministic method: 0 LLM tokens, 0 browser calls; latency is wall-clock incl retrieval+bind",
+      "alias_OOD_correct_rate": 0.0
+    },
+    "B-RANDOM": {
+      "n": 70,
+      "mean_latency_ms": 0.015024285714285712,
+      "median_latency_ms": 0.01715,
+      "p95_latency_ms": 0.0226,
+      "llm_tokens_per_task": 0,
+      "browser_calls_per_task": 0,
+      "note": "deterministic method: 0 LLM tokens, 0 browser calls; latency is wall-clock incl retrieval+bind",
+      "alias_OOD_correct_rate": 0.0
+    },
+    "P-SPIDER-RECONSTRUCT": {
+      "n": 70,
+      "mean_latency_ms": 0.39994714285714283,
+      "median_latency_ms": 0.45255,
+      "p95_latency_ms": 0.508685,
+      "llm_tokens_per_task": 0,
+      "browser_calls_per_task": 0,
+      "note": "deterministic method: 0 LLM tokens, 0 browser calls; latency is wall-clock incl retrieval+bind",
+      "alias_OOD_correct_rate": 1.0,
+      "latency_per_success_ms": 0.39994714285714283
+    },
+    "R-FRONTIER-RULE-PROXY": {
+      "n": 70,
+      "mean_latency_ms": 0.11718142857142858,
+      "median_latency_ms": 0.139,
+      "p95_latency_ms": 0.194985,
+      "llm_tokens_per_task": 0,
+      "browser_calls_per_task": 0,
+      "note": "deterministic method: 0 LLM tokens, 0 browser calls; latency is wall-clock incl retrieval+bind",
+      "alias_OOD_correct_rate": 1.0,
+      "latency_per_success_ms": 0.11718142857142858
+    }
+  },
+  "note": "deterministic methods: 0 LLM tokens, 0 browser calls. B-INSTRUCTION requires an LLM agent (unavailable). Amortized cost = latency/success."
+}
