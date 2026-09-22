@@ -4,7 +4,7 @@ Pre-2.0 canonical memory remains frozen at `archive/spider-codex-ultimate:SPIDER
 
 Canonical Research 2.0 evidence lives in `codex/experiments/<experiment_id>/`.
 Use `codex/index.json` and `codex/claim_state.json` to locate relevant packets; do not load all experiment bodies by default.
-Validated experiments: **249**. Coverage gaps: **0**. Quarantined packets: **0**.
+Validated experiments: **250**. Coverage gaps: **0**. Quarantined packets: **0**.
 
 ## Experiment index
 
@@ -257,6 +257,7 @@ Validated experiments: **249**. Coverage gaps: **0**. Quarantined packets: **0**
 | EXP-FRONTIER-35766532429 | frontier | PASS | SURVIVES_CURRENT_TEST | C-SEMANTIC-RESOLVE | `436d62d23bcb` |
 | EXP-PRODUCT-35773128019 | product | MEASUREMENT_INVALID | MEASUREMENT_INVALID | C-PARAM-INHERIT | `c5b525970f6d` |
 | EXP-INTEL-35773136560 | intel | PASS | MEASUREMENT_INVALID substrate_unavailable — Gate0 0/3 real SPAs qualify after exhaustive joint BrowserGym 0.14.3/CAP outside ServiceNow/cap/Mind2Web-2/Online-Mind2Web/WebJudge-7B/Docker enumeration; H2B CAP, H2C Mind2Web-2/WebJudge and H2A Docker all MEASUREMENT_INVALID | C-WEB-DYNAMICS, C-CROSSSITE | `093292693457` |
+| EXP-FRONTIER-35773143736 | frontier | PASS | SURVIVES_CURRENT_TEST | C-SEMANTIC-RESOLVE | `ba2035d7a214` |
 | EXP-PHYSICS-35774039080 | physics | PASS | MEASUREMENT_INVALID | C-WEB-DYNAMICS | `5fb2e7789407` |
 | EXP-RUNTIME-35774047385 | runtime | MEASUREMENT_INVALID | MEASUREMENT_INVALID — paid-tier CDN (Cloudflare/Fastly HIT/STALE/SWR/SIE/304, Vary/ETag, brotli/chunked) and BrowserGym/AgentLab 1280x720 substrates unavailable; all 10 mandatory CDN conditions C1_CDN-C10_CDN plus gradients G1/G2 and E1-E3 NOT_MEASURED. Diagnostic origin (gunicorn 23.0.0 2x sync 127.0.0.1:19860 -> nginx 1.24.0 127.0.0.1:19851) ready with deterministic 1.0/0.0 but does not generalize to edge. No evidence for or against CDN claim; ceiling remains at prior single-host gunicorn+nginx loopback EXPERIMENTAL, no VALIDATED or PRODUCT_CORE promotion. | C-MEAS-VALID | `aa156486fbdc` |
 
@@ -274,5 +275,5 @@ These are chronological latest events, not an automatic truth ranking.
 | C-PARAM-INHERIT | MEASUREMENT_INVALID | EXP-PRODUCT-35773128019 | product |
 | C-PRODUCT-ECON | REJECTED | EXP-INTEL-35757760689 | intel |
 | C-RESIDUAL-NOVELTY | HYPOTHESIS | EXP-PRODUCT-35741913862 | product |
-| C-SEMANTIC-RESOLVE | EXPERIMENTAL | EXP-FRONTIER-35766532429 | frontier |
+| C-SEMANTIC-RESOLVE | EXPERIMENTAL | EXP-FRONTIER-35773143736 | frontier |
 | C-WEB-DYNAMICS | HYPOTHESIS | EXP-PHYSICS-35774039080 | physics |
