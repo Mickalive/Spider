@@ -1,0 +1,94 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-35761721514",
+  "lane": "graph",
+  "status": "BLOCKED",
+  "github_run_id": "35761721514",
+  "git_commit": "3835093717705577f43a7a7a5ee1531f014017a7",
+  "git_branch": "main",
+  "environment": {
+    "os": "Linux 6.17.0-1022-azure x86_64 with glibc2.39",
+    "python_version": "3.12.14",
+    "nginx_version": "1.24.0 (Ubuntu)",
+    "playwright_version": "not_installed",
+    "openai_sdk_version": "not_installed",
+    "llm_api_key_present": false,
+    "gzip_oracle_free_sanity": true
+  },
+  "frozen_inputs": {
+    "request_json_sha256": "77f7db7ab59be1070ad0c200e07098cf8a53042b77670f2b51a615a613ea729f",
+    "spec_json_sha256": "01c99c559c1ba02fe25fea74bbcd637e2d138579e1f77c7319e1697cd4749af5",
+    "prereg_md_sha256": "59522090d0aa384481fa10e0f4fd79249e521aa9d9163e5e73ab659f519aba45",
+    "freeze_json_sha256": "04c744e8bfacb14f48c4c6c8d68d6b44059ad716c05f3e4d855ac874d1383abb",
+    "verified_at": "2026-09-22T17:40:00.000000+00:00",
+    "hashes_match_freeze": true
+  },
+  "execution": {
+    "started_at": "2026-09-22T17:39:32.053675+00:00",
+    "ended_at": "2026-09-22T17:40:30.000000+00:00",
+    "wall_time_seconds": 3.5,
+    "blocker": "MISSING_LLM_API_KEY",
+    "blocker_category": "infrastructure",
+    "blocker_retryable": true,
+    "blocker_details": "OPENAI_API_KEY environment variable not set. Required for real gpt-4o-mini model calls with token counting per frozen spec measurement_validity #4 and #8. Also openai and playwright SDKs not installed.",
+    "components_ready": {
+      "nginx_binary": true,
+      "python": true,
+      "gzip_stdlib": true
+    },
+    "components_missing": {
+      "llm_api_key": true,
+      "openai_sdk": true,
+      "playwright_sdk": true,
+      "nginx_proxy_cache_configured": false,
+      "flask_backend_deployed": false,
+      "repair_agent_implemented": false
+    }
+  },
+  "artifacts_required_for_retry": [
+    "OPENAI_API_KEY environment variable",
+    "pip install openai playwright and playwright install chromium",
+    "nginx.conf with proxy_cache for HIT/SWR/SIE/304 (reference EXP-RUNTIME-35611612543 substrate)",
+    "Flask 3.1.3 + PyJWT HS256 + SQLite testbed_server.py with perturbation endpoints",
+    "execute_delta_repair_real.py implementing real LLM + Playwright + verify() pipeline",
+    "Perturbation manifest generator (48 instances, 3x2x8, family-stratified TRAIN/TEST split with hashlib.sha256 seeds)",
+    "Independent oracle script for false-accept detection (ground-truth from manifest)"
+  ],
+  "retry_instructions": {
+    "do_not_modify": [
+      "research/experiments/EXP-GRAPH-35761721514/request.json",
+      "research/experiments/EXP-GRAPH-35761721514/spec.json",
+      "research/experiments/EXP-GRAPH-35761721514/prereg.md",
+      "research/experiments/EXP-GRAPH-35761721514/freeze.json"
+    ],
+    "resume_from": "frozen_design",
+    "required_actions": [
+      "Set OPENAI_API_KEY and install openai/playwright SDKs",
+      "Deploy nginx + Flask testbed matching runtime substrate",
+      "Implement real repair pipeline with trajectory-grouped analysis",
+      "Execute 48 instances with TRAIN/TEST split and manifest holdout",
+      "Compute metrics and apply C1-C8 exactly on TEST with Wilson/bootstrap/permutation CIs"
+    ]
+  },
+  "code_paths": {
+    "delta_repair_harness": "research/graph/delta_repair/execute_delta_repair.py",
+    "runtime_substrate_reference": "research/experiments/EXP-RUNTIME-35611612543",
+    "runtime_header_drift_reference": "research/experiments/EXP-RUNTIME-35741906498"
+  },
+  "dependencies": {
+    "runtime_substrate": "EXP-RUNTIME-35611612543 (byte-preserving nginx HIT/SWR/SIE/304 960/960, oracle-free gzip.decompress)",
+    "runtime_header_drift": "EXP-RUNTIME-35741906498 (non-vacuous header-only drift SUPPORTS)",
+    "parent_experiment": "EXP-GRAPH-35757738658 (BLOCKED, same design, MISSING_LLM_API_KEY)",
+    "grandparent_simulation": "EXP-GRAPH-35741890679 (FALSIFIES simulation, audit SIMULATION_NOT_MEASUREMENT, 36 instances, token ratio 0.613)"
+  },
+  "commands_checked": [
+    "env | grep OPENAI_API_KEY (absent)",
+    "nginx -v (1.24.0 Ubuntu)",
+    "python3 --version (3.12.14)",
+    "pip show openai (not found)",
+    "pip show playwright (not found)",
+    "python3 -c 'import gzip; assert gzip.decompress(gzip.compress(b\"test\"))==b\"test\"' (True)",
+    "sha256sum request.json/spec.json/prereg.md/freeze.json (verified match freeze.json hashes)",
+    "git rev-parse HEAD (3835093717705577f43a7a7a5ee1531f014017a7)"
+  ]
+}
