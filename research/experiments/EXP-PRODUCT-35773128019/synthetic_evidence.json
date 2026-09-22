@@ -1,0 +1,160 @@
+{
+  "sku_full_B": {
+    "slots": [
+      "sku",
+      "url"
+    ],
+    "template": {
+      "method": "POST",
+      "url": "https://api.example.com/items/${url}",
+      "body": {
+        "sku": "${sku}"
+      }
+    },
+    "diagnostics": {
+      "mean_jaccard": 1.0,
+      "has_constant_anchor": true,
+      "anchor_path": null,
+      "shared_paths": [
+        "('body', 'sku')",
+        "('url',)"
+      ],
+      "path_values": {
+        "sku": [
+          "A_SKU_00_000",
+          "A_SKU_00_001",
+          "A_SKU_00_002"
+        ],
+        "url": [
+          "https://api.example.com/items/A_SKU_00_000",
+          "https://api.example.com/items/A_SKU_00_001",
+          "https://api.example.com/items/A_SKU_00_002"
+        ]
+      },
+      "structure_scores": {
+        "('body', 'sku')": 1.0,
+        "('url',)": 1.0
+      },
+      "prefix_suffix": {
+        "sku": [
+          "",
+          ""
+        ],
+        "url": [
+          "https://api.example.com/items/",
+          ""
+        ]
+      }
+    },
+    "resolve_params": {
+      "sku": "B_SKU_00_999",
+      "url": "B_SKU_00_999"
+    },
+    "bound_action": {
+      "body": {
+        "sku": "B_SKU_00_999"
+      },
+      "method": "POST",
+      "url": "https://api.example.com/items/B_SKU_00_999"
+    },
+    "status": "ResolutionStatus.EXECUTABLE",
+    "binding_correct": true,
+    "double_prefix_absent": true,
+    "unsubstituted": true
+  },
+  "multi_param": {
+    "slots": [
+      "title",
+      "url",
+      "x_request_id"
+    ],
+    "template": {
+      "method": "POST",
+      "url": "https://api.example.com/posts/${url}",
+      "body": {
+        "title": "${title}"
+      },
+      "headers": {
+        "X-Request-ID": "req-${x_request_id}"
+      }
+    },
+    "diagnostics": {
+      "mean_jaccard": 1.0,
+      "has_constant_anchor": true,
+      "anchor_path": null,
+      "shared_paths": [
+        "('body', 'title')",
+        "('headers', 'X-Request-ID')",
+        "('url',)"
+      ],
+      "path_values": {
+        "x_request_id": [
+          "req-1",
+          "req-2",
+          "req-3"
+        ],
+        "title": [
+          "First",
+          "Second",
+          "Third"
+        ],
+        "url": [
+          "https://api.example.com/posts/A",
+          "https://api.example.com/posts/B",
+          "https://api.example.com/posts/C"
+        ]
+      },
+      "structure_scores": {
+        "('headers', 'X-Request-ID')": 1.0,
+        "('body', 'title')": 1.0,
+        "('url',)": 1.0
+      },
+      "prefix_suffix": {
+        "x_request_id": [
+          "req-",
+          ""
+        ],
+        "title": [
+          "",
+          ""
+        ],
+        "url": [
+          "https://api.example.com/posts/",
+          ""
+        ]
+      }
+    },
+    "bound_action": {
+      "body": {
+        "title": "Fourth"
+      },
+      "headers": {
+        "X-Request-ID": "req-4"
+      },
+      "method": "POST",
+      "url": "https://api.example.com/posts/D"
+    },
+    "status": "ResolutionStatus.EXECUTABLE",
+    "binding_correct": true
+  },
+  "shuffled": {
+    "params": {
+      "url": "D",
+      "title": "4",
+      "x_request_id": "Fourth"
+    },
+    "bound_action": {
+      "body": {
+        "title": "4"
+      },
+      "headers": {
+        "X-Request-ID": "req-Fourth"
+      },
+      "method": "POST",
+      "url": "https://api.example.com/posts/D"
+    },
+    "status": "ResolutionStatus.EXECUTABLE",
+    "binding_correct": false,
+    "expected_failure": true
+  }
+}
