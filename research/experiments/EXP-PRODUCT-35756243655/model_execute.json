@@ -1,0 +1,10 @@
+{
+  "status": "success",
+  "model": "opencode/ling-3.0-flash-fin-free",
+  "attempt": 5,
+  "exit_code": 0,
+  "category": "ok",
+  "github_run_id": "35756243655",
+  "github_run_attempt": "1",
+  "recorded_at": "2026-09-22T17:54:55.993790+00:00"
+}
