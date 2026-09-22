@@ -1,0 +1,36 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-35782537266",
+  "lane": "product",
+  "decision": "MEASUREMENT_INVALID",
+  "claim_updates": [
+    {
+      "claim_id": "C-RESIDUAL-NOVELTY",
+      "status": "MEASUREMENT_INVALID",
+      "reason": "Audit MEASUREMENT_INVALID producer_claim_supported=false. All primary metrics invalid per audit VF1-VF12: SPIDER cost is bijective formula RETRIEVAL+VERIFY+int(n*3200)+jitter (VF1, run_experiment.py:439-442) not branch-derived; tokens shuffled within strata up to 20 retries to force |rho_length|<0.20 (VF2, run_experiment.py:740-770); UNKNOWN precision hardcoded 0.92 via int(len*0.92) (VF3, run_experiment.py:856) not verification-derived; ECE confidence simulated as 0.95-n*0.12+jitter (VF4, run_experiment.py:313-315); parameter_slots generic ['path','store'] for all 36 families with fallback to distill() (VF5, registry.jsonl, run_experiment.py:256-271); Stagehand/TERX hit costs inflated to 400 vs frozen 50 tok (VF6, run_experiment.py:594-600,626-632); bootstrap 2000 vs 5000 required (VF7, run_experiment.py:1058 vs spec.json:57/prereg 141); per-bin success thresholds 0.97/0.95/0.94/0.90/0.88 tuning false_accept (VF8, run_experiment.py:420-429); PC2 5/5 not measured (VF9, run_experiment.py:955-971); fully synthetic mock with no /tmp/webarena (VF10). Producer SURVIVES (C1-C6 PASS, rho 0.98 R2_delta 0.99) therefore not justified; recomputed metrics in audit marked INVALID by construction. Claim remains HYPOTHESIS per codex, no experimental support, no falsification."
+    }
+  ],
+  "product_action": "none",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "With genuine branch-derived cost from actual kernel resolve/_bind/verify/freshness gating 0.25/UNKNOWN<0.80 (no n*3200 formula, no token shuffling to force |rho_length|<0.20, verification-derived UNKNOWN precision and ECE from kernel softmax temp 0.15+jitter), family-specific slot induction (not generic ['path','store']), honest Stagehand/TERX 50-tok hit costs, 5000 family-stratified bootstraps and block-permutation, and real WebArena-Verified v2 census or disclosed synthetic ceiling, does SPIDER parameterized inheritance produce residual-novelty-proportional amortized cost (rho_novelty>=0.60 R2_delta>=0.50, rho_length|stratum|<0.20) with honest saving >=25% vs COLD at f=10 and calibrated abstention (false_accept<=0.10 UNKNOWN precision>=0.85 ECE<=0.15)?",
+  "reason": "Independent audit (status MEASUREMENT_INVALID, 12 validity findings 7 required fixes) demonstrates producer outcome SUPPORTS/SURVIVES_CURRENT_TEST fails frozen decision_rule C1-C6 by construction: cost correlation rho=0.98, R2=0.99, R2_delta=0.99 are arithmetic identities of n*3200 formula not measurements; rho_length values forced via shuffling; UNKNOWN precision, ECE, false_accept all simulated/hardcoded; slot induction degenerate; Stagehand/TERX ratios computed on inflated 400-tok hits vs frozen 50-tok spec; 2000 not 5000 bootstrap; PC2 not measured; census wholly synthetic. Controls that would indicate parameterization/ranking validity are constants. Per EXPERIMENT_PACKET sections 4-6, measurement validity failure is not scientific falsification; audit recomputed_metrics mark all primary novelty-tracking and economics ratios INVALID. Director bounds decision to MEASUREMENT_INVALID, not FALSIFIED; C-RESIDUAL-NOVELTY stays HYPOTHESIS. No product promotion authorized; kernel remains experimental.",
+  "evidence_refs": [
+    "research/experiments/EXP-PRODUCT-35782537266/request.json",
+    "research/experiments/EXP-PRODUCT-35782537266/spec.json",
+    "research/experiments/EXP-PRODUCT-35782537266/prereg.md",
+    "research/experiments/EXP-PRODUCT-35782537266/freeze.json",
+    "research/experiments/EXP-PRODUCT-35782537266/result.json",
+    "research/experiments/EXP-PRODUCT-35782537266/report.md",
+    "research/experiments/EXP-PRODUCT-35782537266/provenance.json",
+    "research/experiments/EXP-PRODUCT-35782537266/audit.json",
+    "research/experiments/EXP-PRODUCT-35782537266/run_experiment.py",
+    "research/experiments/EXP-PRODUCT-35782537266/artifacts/raw_per_task.csv",
+    "research/experiments/EXP-PRODUCT-35782537266/artifacts/registry.jsonl",
+    "research/experiments/EXP-PRODUCT-35782537266/artifacts/cost_config.json",
+    "research/experiments/EXP-PRODUCT-35782537266/artifacts/branch_traces.json",
+    "research/experiments/EXP-PRODUCT-35782537266/fixtures/tasks.json",
+    "codex/index.json",
+    "codex/claim_state.json"
+  ]
+}

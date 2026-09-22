@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-35782546046",
+  "lane": "intel",
+  "decision": "REVISE — degenerate homepage-only measurement (placeholder bug) prevents discriminating AX_consistency test; Stagehand replication incomplete without drift MISS; no bounded falsification of longest-prefix method on product pages",
+  "claim_updates": [
+    {
+      "claim_id": "C-LLM-INHERIT",
+      "status": "EXPERIMENTAL",
+      "reason": "No discriminating evidence for identifiable same-mechanism parameterized transfer within WebArena-Verified v2 shopping via longest-prefix without fallback: 8/10 families yielded identical homepage 'One Stop Market' AX (1430 nodes each, 16/20 valid captures, mean AX_consistency 1.0 CI[1.0,1.0] p=1.0 vs shuffle null mean 1.0 p95 1.0) due to __SHOPPING__/path placeholder bug in get_task_start_url (4/20 ERROR Protocol invalid URL for families 136/222) forcing zero variance (audit V1/V2 critical, validity_findings degenerate zero-variance). Frozen adequate run requires >=10 families with task-specific product/category/cart pages at 1280x720 CDP 600-2000 nodes not met (valid_families 8 <10). Permutation FAIL (p=1.0>=0.05) and delta_vs_prior 0.7143 are arithmetic tautologies from page identity, not parameterized transfer. Prior census-level EXPERIMENTAL ceiling (192 shopping tasks, 49 intent templates, 36 families >=3, duplication 0.9479 CI[0.9167,0.9792], param_task 0.8958) confirmed at 192/36 and unchanged; element-pattern AX transfer remains UNMEASURED pending placeholder fix and re-capture on diverse pages."
+    },
+    {
+      "claim_id": "C-CROSSSITE",
+      "status": "HYPOTHESIS",
+      "reason": "No cross-site evidence attempted or obtained; experiment scoped to single-store WebArena-Verified shopping (One Stop Market, 192 tasks, single container am1n3e/webarena-verified-shopping@sha256:3e8cb9b945). Cross-store mechanism overlap remains vacuously 0 (single store) as established in parent EXP-INTEL-35697055679. Prior exhaustive CAP/Online-Mind2Web joint enumeration 0/3 strict Gate0 remains MEASUREMENT_INVALID per Director SUPERSEDE, not global falsification. Claim remains HYPOTHESIS pending cross-store dataset or verified multi-store holdout."
+    },
+    {
+      "claim_id": "C-PRODUCT-ECON",
+      "status": "HYPOTHESIS",
+      "reason": "Stagehand selector+DOM-hash verb cache (N=2, SHA256, per-project scope, shipped Feb 2026 2x/~30%) not replicated as spec: synthetic selector 'fam{id}_task{id}' not derived from AX/DOM element, dom_hash full-page outerHTML not spec subtree, latency_ms 0.0007-0.019 dict-lookup microsecond not cold LLM vs cached, tokens_saved hardcoded 1000/hit, NC3_STAGEHAND_DOM_DRIFT NOT_TESTED (drift_injected false for all 68 calls) and NC4_STAGEHAND_RANDOM_CACHE NOT_TESTED, so M-STAGEHAND-FALSE-ACCEPT 0.0 tautological and MISS>=0.8 unmeasured; audit baseline_findings B-STAGEHAND-VERB fail, NC3 fail, NC4 not_tested. Hit_rate 0.941 (64/68) and cross-project leakage 0.0 (5 tests) on synthetic keys do not demonstrate discriminating HIT/MISS or speedup/cost. Prior extrapolation REJECTED (logistic L=0.5654 vacuous step-function, 4 points/3 params, zero information beyond n=20) remains CLOSED per EXP-INTEL-35551517470; Stagehand competitive floor vs B-RAG-EMBED-FLAT/B-SPIDER-0TOKEN/B-COLD-LLM remains UNMEASURED."
+    }
+  ],
+  "product_action": "HOLD",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "After fixing __SHOPPING__/path placeholder expansion to capture task-specific product/category/cart pages at 1280x720 CDP Accessibility.getFullAXTree (600-2000 nodes) and re-deriving selector+relevant-subtree SHA256 with N=2, can 10 families x2 diverse-page AX_consistency (longest-prefix without fallback, 2000 bootstrap CI lower>0.5, 1000 shuffle null p<0.05, delta>=0.2 vs prior 0.2857) discriminate vs prior single-family 0.9, and can Stagehand N=2 drift-injected MISS>=0.8 false_accept<0.05 with NC4 random null p<0.05 and measured cold vs cached latency/tokens, plus multi-step BrowserGym rollouts for relaxed Gate0 H>0.1 NL>=20 titles>=1, unblock within-store parameterized transfer and shipped baseline?",
+  "reason": "Audit status REVISE, producer_claim_supported false; all recomputed metrics match producer (M-AX-CONSISTENCY 1.0, M-AX-CI [1.0,1.0], M-AX-SHUFFLE-P 1.0 mean 1.0 p95 1.0, M-STAGEHAND-HITRATE 0.941176 64/68, M-GATE0 0/16) but critical validity findings block SURVIVES or bounded FALSIFIED: placeholder bug blocks task-specific mechanism test (4/20 failures, 6/10 forced homepage), adequate-run threshold violated (8<10 families), zero variance makes shuffle null non-discriminating, Stagehand synthetic selector/hash and missing NC3/NC4 make hit_rate non-comparable to spec, Gate0 on single-page captures descriptively 0 (NL0 strata1). Claim ceilings bounded to substrate liveness only (BrowserGym 0.14.3 + AgentLab 0.4.2 + Playwright 1.44.0 CDP 1280x720, Docker reachable, 192/36 census). No VALIDATED or PRODUCT_CORE; HOLD pending 6 required_fixes.",
+  "evidence_refs": [
+    "research/experiments/EXP-INTEL-35782546046/request.json",
+    "research/experiments/EXP-INTEL-35782546046/spec.json",
+    "research/experiments/EXP-INTEL-35782546046/prereg.md",
+    "research/experiments/EXP-INTEL-35782546046/freeze.json",
+    "research/experiments/EXP-INTEL-35782546046/result.json",
+    "research/experiments/EXP-INTEL-35782546046/report.md",
+    "research/experiments/EXP-INTEL-35782546046/provenance.json",
+    "research/experiments/EXP-INTEL-35782546046/audit.json",
+    "research/experiments/EXP-INTEL-35782546046/artifacts/raw/webarena_census.json:sha256:1923e6fa4e9c6f141be594937d43654ce85e7a9b8bfbc5ebbc963eecd60a2cf3",
+    "research/experiments/EXP-INTEL-35782546046/artifacts/raw/ax_captures.jsonl:sha256:0e022eb884b1b98830ab4f97682a9ded8f41426e52913e5973e3a655d11c9d9c",
+    "research/experiments/EXP-INTEL-35782546046/artifacts/derived/ax_consistency.json:sha256:5be7e631f256dc77ec13f84b4c6180a6fc223f67be7d02a0f5c8d22a7363fe72",
+    "research/experiments/EXP-INTEL-35782546046/artifacts/derived/stagehand_replication.json:sha256:0c0b274f182c7691bda6a00513bdb2a6bb7b22dd22dcb46f3dbfc5ca107f7a89",
+    "research/experiments/EXP-INTEL-35782546046/artifacts/derived/gate0_relaxed_table.json:sha256:091f7303d1968556cdfdaace3add104fd7f652aa73ffa1ab08e565483415991c",
+    "research/intel/exp_35782546046_measure.py:sha256:dc47979e9896dd84116319b1181845e7ab05aba854306098d2b162e8b3ab39c6"
+  ]
+}

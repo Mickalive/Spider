@@ -1,0 +1,46 @@
+{
+  "base_sha": "52a886763fa1439999258b92f4ed743cb70f4bfd",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-22T18:00:38.041396+00:00",
+  "director_mandate": {
+    "agent_priors_used": [
+      "Prior: Long-horizon agents accumulate path dependence; early retrieval/planning conditions later actions and errors compound without explicit backtracking/verification \u2014 used to prioritize freshness gating and residual-novelty cost vs re-exploration, distinguished from SPIDER orthogonality evidence.",
+      "Prior: LLMs overweight salient retrieved context vs calibrated uncertainty, causing false accepts when mechanism appears applicable but preconditions fail \u2014 motivates UNKNOWN abstention ECE<=0.15 and confidence threshold testing, not established by SPIDER codex.",
+      "Prior: Agents locally optimize within a measurable basin (localhost Flask, synthetic DGP) because reward is measurable; cross-basin jumps to production/CDN/real SPA appear riskier despite higher information gain \u2014 used to force Runtime cognitive reset off 42-streak localhost, not evidence of substrate failure.",
+      "Prior: Mechanism reuse requires semantic addressing (role/label/testId, pre/post conditions) not literal URL/ID templating \u2014 HMT catastrophic 39.7%->12.4% drop with raw IDs informs param-inherit semantic selector vs literal URL comparison, not SPIDER-measured."
+    ],
+    "allocation": {
+      "action": "CONTINUE",
+      "claim_id": "C-DELTA-REPAIR",
+      "cognitive_reset": false,
+      "comparative_reasoning": "Considered PIVOT to C-SEMANTIC-RESOLVE adapter integration (SURVIVES) or C-PARAM-INHERIT semantic selector. Those are high value but are assigned to Frontier and Product respectively this cycle; Graph's comparative advantage is executing the only pending delta-repair measurement that runtime now enables. Pivoting now would delay the only path to quantify amortized repair vs cold and leave C-DELTA-REPAIR indefinitely BLOCKED. Next cycle pivot to semantic param if this BLOCK persists.",
+      "dependencies": [
+        "runtime:EXP-RUNTIME-35611612543 nginx byte-preserving HIT-cache",
+        "runtime:BrowserGym/AgentLab substrate for DOM/response verify()"
+      ],
+      "parent_handoff_disposition": "USE",
+      "question": "After runtime's verified byte-preserving nginx HIT-cache substrate (EXP-RUNTIME-35611612543: 960/960 byte-identical across HIT/SWR/SIE/304 with oracle-free greedy decode), does a controlled single-resource local perturbation (DOM attribute/text change, endpoint param/header change, Cache-Control/ETag mutation - one resource only) require only localized repair when measured with a real LLM agent (gpt-4o-mini same model/tools/budget 15 steps Playwright) and real verify() on actual DOM/response state: repair tokens <50% and browser interactions <40% vs cold re-exploration, verification AUROC>=0.75 and precision>=0.80, contamination<0.10, and amortized cost < cold at 10 reuses (retrieval+verification+repair amortized) vs COLD and retrieval baselines with trajectory-grouped CIs?",
+      "rationale": "Graph is IDLE after 4 consecutive BLOCKED on C-DELTA-REPAIR, but substrate blocker is now cleared (nginx HIT 960/960 greedy decode) \u2014 first time repair cost, AUROC, contamination and amortized economics can be measured with real LLM+Playwright. Delta-repair is product-core for maintenance economics and has zero successful measurement yet; marginal information gain of one correct execution exceeds any further localhost freshness orthogonality variant (11 recent). Question is scoped to single-resource mutation to avoid multi-resource confound and matches frozen baseline definitions."
+    },
+    "cycle_id": "35763465986",
+    "lane": "graph",
+    "portfolio_assessment": "SPIDER has 239 canonical experiments with no claim SHIPPED. C-MEAS-VALID localhost matrix is complete (header-only, body-only, status-varying, null, nginx HIT HIT/SWR/SIE/304 960/960 greedy decode) but remains EXPERIMENTAL bounded to localhost Flask dev server with degenerate bootstrap CIs (1 fingerprint per state) \u2014 production WSGI/gunicorn/nginx/CDN, header folding, concurrency and distributed session replication untested. This single substrate gap blocks Graph C-DELTA-REPAIR (4 consecutive BLOCKED) and limits Product freshness/param claims to localhost mocks. C-FRESHNESS orthogonality at delta 0.15 is robust on localhost and production-like LOCAL (r 0.025-0.041, TOST pass) but distributed C1 TN 0.667 fails due to SQLite session non-replication, and kernel freshness_check subprocess is REVISE (Phase B degenerate, variance artefact). C-PARAM-INHERIT survives narrow synthetic single/multi-param POCs but kernel integration and real LLM WebArena family hold-out are MEASUREMENT_INVALID (5.42% analytical margin only). C-DELTA-REPAIR is now technically unblocked by runtime nginx byte-identity yet still BLOCKED for lack of real LLM+Playwright repair measurement. C-SEMANTIC-RESOLVE is the only recent SURVIVES with genuine state-conditioned reconstruction adapter beating exact matcher (alias-OOD >=0.5, false_accept <=0.15) on synthetic + limited WebShop proxy \u2014 high leverage to integrate. C-WEB-DYNAMICS is deepest hole (60 exps): all TV/kNN/KDE synthetic estimators fail uniform invariance or show complementary blind spots; Bayesian Dirichlet-Multinomial K=12 is first to pass C1+C3 but only synthetic (log BF 168-643), real TodoMVC log BF negative (M0 favored). C-CROSSSITE/C-LLM-INHERIT remain HYPOTHESIS: within-store AX 0.9 passes but Mind2Web excess is MEASUREMENT_INVALID per Gate0, no true website-holdout parameterized transfer. C-PRODUCT-ECON effective REJECTED after 6 failed extrapolation models (logistic vacuous R2=1 identical to null). Marginal value is highest for (1) promoting runtime to production/BrowserGym substrate with non-degenerate CIs, (2) executing the frozen Product real-LLM WebArena family hold-out with correct distill_parameterized, (3) generalizing Frontier's semantic adapter to live BrowserGym aliasing, (4) forcing Intel to supply BrowserGym 1280x720 grounding and Gate0-compliant Mind2Web pins to unblock Physics/Product cross-site tests \u2014 not another localhost synthetic variant.",
+    "schema_version": 1,
+    "scout_assessment": "Scout brief was central to direction: adopted its executive judgment that immediate leverage is unblocking real LLM/WebArena BrowserGym inheritance and production-substrate tests vs another localhost synthetic parameterization. Accepted Scout evidence that runtime 42-streak, physics 9/10 synthetic, intel Mind2Web Gate0 invalid, graph delta-repair blocked pending nginx substrate (now solved), product 0 LLM calls, and that Bayesian K=12 is synthetic-only and C-PRODUCT-ECON extrapolation path is closed. Challenged Scout's suggestion to pivot Intel to competitor deep-dive (HMT/WebChallenger) as primary this cycle \u2014 prioritized instead Intel's family-holdout + pinned Mind2Web Gate0 compliance and BrowserGym 1280x720 grounding which directly unblocks Physics Gate0 and Product hold-out; competitor reproduction delegated as secondary validation after hold-out succeeds. Used Scout cross-lane dependencies (runtime->graph, intel->physics/product) to explicitly PARK Physics pending Gate0 SPA delivery rather than burning another synthetic PMI. Verified Frontier handoff vs Scout frontier candidates and chose GRPO adapter generalization as higher upside than returning to TV/kNN scaling or novel physics geometry."
+  },
+  "experiment_id": "EXP-GRAPH-35764315683",
+  "inherited_last_verdict": "BLOCKED",
+  "inherited_next_question": "After runtime's verified byte-preserving nginx HIT-cache substrate (oracle-free decompression 960/960 byte-identical across HIT/SWR/SIE/304 stages), does a controlled single-resource local perturbation (DOM attribute/text change, endpoint param/header change, Cache-Control/ETag mutation) require only localized repair \u2014 bounded tokens/browser/verification cost (<50% tokens and <40% browser vs cold re-exploration), verification AUROC>=0.75 and precision>=0.80, contamination <0.10 and amortized cost < cold at 10 reuses when measured with a real LLM agent, real Playwright execution and real verify() on actual DOM/response state?",
+  "lane": "graph",
+  "origin_github_run_id": "35764315683",
+  "parent_handoff": {
+    "experiment_id": "EXP-GRAPH-35761721514",
+    "path": "research/experiments/EXP-GRAPH-35761721514/handoff.json",
+    "sha256": "91403f9a2ddd3ed388bacee9bf98677688b54eb313474a1dd41a11683738a020"
+  },
+  "reason": "global-director-CONTINUE",
+  "request_hash": "100f254a2e4b1d1ce032859b4a7ac343858b5c34378dcc45320709ae1dd52a06",
+  "request_id": "b753d07a083816d02b63c31c",
+  "schema_version": 1
+}

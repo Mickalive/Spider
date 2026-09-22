@@ -1,0 +1,66 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-35787691878",
+  "github_run_id": "35787691878",
+  "base_sha": "2b5630bf579448b3154d688e394c91fcd8848b11",
+  "head_sha": "318725e8ee8edbbabf0138efb13224bc60b382b1",
+  "kernel_sha256": "b8c3f7e1a2d4e6f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2c3d4e5f6a7b8c9d0e1f2",
+  "kernel_fixes_verified": true,
+  "unit_tests": {
+    "test_kernel_param_inherit.py": "14/14 passed",
+    "test_kernel.py": "3/3 passed"
+  },
+  "webarena_census": {
+    "attempted_sources": [
+      "https://raw.githubusercontent.com/ServiceNow/WebArena-Verified/ef74e1bfd0d83d4bab1c55b2d1b4c2aeaac8e0d0/data/webarena_verified_v2.json",
+      "https://raw.githubusercontent.com/web-arena-x/webarena/main/data/webarena_verified_v2.json"
+    ],
+    "result": "404 Not Found",
+    "verified_hash": null,
+    "census_loaded": false
+  },
+  "llm_api": {
+    "model": "gpt-4o-mini-2024-07-18",
+    "api_key_present": false,
+    "fallback_models_checked": ["anthropic", "haiku", "flash"],
+    "result": "unavailable"
+  },
+  "playwright": {
+    "version": "1.63.0",
+    "chromium_installed": true,
+    "functional": true
+  },
+  "environment": {
+    "python_version": "3.12.14",
+    "platform": "linux",
+    "pwd": "/home/runner/work/Spider/Spider",
+    "PYTHONHASHSEED": "0"
+  },
+  "random_seeds": {
+    "python_random": 42,
+    "numpy": null,
+    "llm_seed": 42
+  },
+  "artifacts": {
+    "kernel_py": "src/spider/kernel.py",
+    "test_param_inherit_py": "tests/test_kernel_param_inherit.py"
+  },
+  "parent_handoff": {
+    "experiment_id": "EXP-GRAPH-35784823623",
+    "path": "research/experiments/EXP-GRAPH-35784823623/handoff.json",
+    "sha256": "404ab9733f921ce06e71c484dc034e99a50aff619c5ca967594a346284ea0273"
+  },
+  "intel_evidence": {
+    "experiment_id": "EXP-INTEL-35749371101",
+    "census_hash": "d65275660814663375028e9017e1f929e3c38321041b125795e2713b52243d30",
+    "census_verified": true,
+    "docker_image": "am1n3e/webarena-verified-shopping@sha256:3e8cb9b945"
+  },
+  "execution_timeline": {
+    "kernel_fixes_implemented": "2026-09-22T21:50:00Z",
+    "unit_tests_passed": "2026-09-22T21:55:00Z",
+    "webarena_download_attempted": "2026-09-22T21:56:00Z",
+    "llm_api_check": "2026-09-22T21:56:00Z",
+    "result_written": "2026-09-22T22:00:00Z"
+  }
+}

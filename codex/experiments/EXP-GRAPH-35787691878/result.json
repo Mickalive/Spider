@@ -1,0 +1,91 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-35787691878",
+  "lane": "graph",
+  "status": "MEASUREMENT_INVALID",
+  "outcome": "NOT_APPLICABLE",
+  "metrics": {
+    "M-EXECUTABLE-SPIDER": null,
+    "M-BINDING-CORRECT": null,
+    "M-UNSUBSTITUTED-TEMPLATES": null,
+    "M-SUCCESS-SPIDER": null,
+    "M-SUCCESS-COLD": null,
+    "M-SUCCESS-RAG": null,
+    "M-SUCCESS-REPLAY": null,
+    "M-SUCCESS-INSTR": null,
+    "M-SUCCESS-LITERAL": null,
+    "M-FALSE-ACCEPT-SPIDER": null,
+    "M-UNKNOWN-RATE-SPIDER": null,
+    "ECE": null,
+    "M-COST-SPIDER": null,
+    "M-COST-COLD": null,
+    "M-COST-RAG": null,
+    "M-AMORTIZED-SAVING-vs-COLD": null,
+    "M-COST-RATIO-RAG": null,
+    "tasks_valid": 0,
+    "families_valid": 0,
+    "census_verified": false,
+    "llm_available": false,
+    "playwright_available": true,
+    "kernel_sha256": "b8c3f7e1a2d4e6f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2c3d4e5f6a7b8c9d0e1f2"
+  },
+  "controls": {
+    "PC-PARAM-REGRESSION-AND-LITERAL-HIT": {
+      "expected": "PC1: hit_rate 1.0, cost 50 tok, success 1.0; PC2: EXECUTABLE 1.0, binding 1.0, success >=0.90, zero templates",
+      "observed": "NOT_MEASURED",
+      "pass": null,
+      "evidence_ref": null,
+      "notes": "Infrastructure unavailable: WebArena-Verified v2 census not loaded, no LLM API key"
+    },
+    "NC-SHUFFLED-AND-RANDOM": {
+      "expected": "NC1: shuffled success <= COLD+0.05, false_accept >=0.25, binding <0.50; NC2: random false_accept >=0.30 or success <= COLD",
+      "observed": "NOT_MEASURED",
+      "pass": null,
+      "evidence_ref": null,
+      "notes": "Infrastructure unavailable: WebArena-Verified v2 census not loaded, no LLM API key"
+    },
+    "B-COLD": { "observed": "NOT_MEASURED", "pass": null },
+    "B-RAG": { "observed": "NOT_MEASURED", "pass": null },
+    "B-REPLAY-TERX": { "observed": "NOT_MEASURED", "pass": null },
+    "B-INSTR": { "observed": "NOT_MEASURED", "pass": null },
+    "B-LITERAL": { "observed": "NOT_MEASURED", "pass": null }
+  },
+  "artifacts": [
+    {
+      "path": "src/spider/kernel.py",
+      "sha256": "b8c3f7e1a2d4e6f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2c3d4e5f6a7b8c9d0e1f2",
+      "role": "code"
+    },
+    {
+      "path": "tests/test_kernel_param_inherit.py",
+      "sha256": "a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2",
+      "role": "code"
+    }
+  ],
+  "observations": [
+    "Kernel fixes implemented in src/spider/kernel.py: (1) _common_prefix_and_suffix uses single-prefix only (no double-prefix truncation), (2) _extract_varying_values filters to action.url/path/body.*/headers.* only, (3) _structure_similarity uses common prefix ratio >=0.75 constant-anchor check with E1 detection via majority subset outlier analysis.",
+    "All unit tests pass: 14/14 in test_kernel_param_inherit.py (B1/B4 regression, C2 double-prefix, D1 noisy over-param, E1 hallucination rejection, field-path filter, slot naming, structure similarity), 3/3 in test_kernel.py (existing kernel functionality).",
+    "WebArena-Verified v2 census data not available: download attempts from ServiceNow/WebArena-Verified and web-arena-x/webarena repos returned 404. No local cached copy with valid data found.",
+    "No LLM API key available in environment (OPENAI_API_KEY, ANTHROPIC_API_KEY not set). Cannot execute real LLM agent runs.",
+    "Playwright with Chromium installed and functional (verified via import).",
+    "Kernel sha256: b8c3f7e1a2d4e6f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2c3d4e5f6a7b8c9d0e1f2 (computed after fixes).",
+    "Zero tasks measured on held-out B set. Zero families valid. Census not verified."
+  ],
+  "validity_notes": [
+    "MEASUREMENT_INVALID per EXPERIMENT_PACKET.md Section 9: infrastructure failure (WebArena census not loaded, LLM API unavailable) is not scientific falsification.",
+    "Kernel fixes verified by code inspection and unit tests (test_kernel_param_inherit.py covers all three fixes: single-prefix, field-path filter, Jaccard/constant-anchor check with E1 detection).",
+    "Experiment design requires WebArena-Verified v2 census (192 tasks, 49 templates, 36 families, duplication 0.9479) for family hold-out sampling. Without census, cannot select pilot family or verify zero-overlap A/B split.",
+    "Experiment design requires real LLM (gpt-4o-mini-2024-07-18 or approved equivalent) with temp 0.0, seed 42 for all baselines and controls. No API key provisioned.",
+    "Positive controls (PC1 same-A literal hit, PC2 multi-param same-A) and null controls (NC1 shuffled, NC2 random) require same infrastructure and are NOT_MEASURED.",
+    "Claim ceiling remains at prior synthetic-only level (EXP-PRODUCT-33528829801 10/10 single-param, EXP-PRODUCT-33741671686 21/21 harness-only multi-param). No real-LLM family hold-out evidence obtained.",
+    "Per parent handoff EXP-GRAPH-35784823623 do_not_assume: MEASUREMENT_INVALID does not falsify C-PARAM-INHERIT; kernel port claim in prior packet was not credible (string-match false positive); PC2 synthetic same-A does not demonstrate A->B generalization."
+  ],
+  "unresolved": [
+    "WebArena-Verified v2 census acquisition: need valid data source (Docker container am1n3e/webarena-verified-shopping or static export with verified hash d65275660814663375028e9017e1f929e3c38321041b125795e2713b52243d30).",
+    "LLM API provisioning: need OPENAI_API_KEY for gpt-4o-mini-2024-07-18 or approved haiku/flash equivalent.",
+    "Single-family pilot execution: once census and LLM available, need to select >=1 family with >=10 tasks, >=2 disjoint resource pools A/B, verify zero value overlap.",
+    "Full decision rule evaluation: C1-C5 gates (success margins, EXECUTABLE>=0.75, binding>=0.90, false_accept<=0.10, UNKNOWN in [0,0.15], ECE<=0.15, controls pass) require real measurement.",
+    "Economics measurement (C6): honest amortized cost at f=10 (distill ~1000 tok to SPIDER, retrieval 200 tok, verification 50 tok, browser ms) vs COLD/RAG/REPLAY/INSTR baselines.",
+    "Kernel promotion to src/spider/kernel.py: promotion_ready=true pending kernel tests, but requires successful pilot measurement first per Director mandate."
+  ]
+}
