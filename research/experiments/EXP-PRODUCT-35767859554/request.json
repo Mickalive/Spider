@@ -1,0 +1,49 @@
+{
+  "base_sha": "d1163ad9f8e5c006a4658ab98a5fa81f3becc04c",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-22T18:32:58.706942+00:00",
+  "director_mandate": {
+    "agent_priors_used": [
+      "Long-horizon web agents fail via path dependence, context salience, compounding planner errors, and self-generated subproblems; reduced residual novelty should shrink LLM reasoning tokens and repair loops, not just browser actions \u2014 tautological action_count = f(novelty) mocks miss this.",
+      "Semantic retrieval alone plateaus on cross-site transfer without structural abstraction; hierarchical intent->stage->action (HMT) and keyword plan templates (APC) show flat embedding similarity insufficient \u2014 exact-intent matcher 0/16 expected without critique-reconstruct.",
+      "Preference for UNKNOWN over false accept is safety-critical; calibration (ECE <=0.15) and abstention precision drive product trust more than raw success rate \u2014 do not relax false_accept <=0.10/0.15 gates.",
+      "System-level caching (KV prefix, Helium proactive 1.56x, JIT 10.4x) can explain 30-50% cost savings independent of semantic memory; without stratified KV-cache vs RAG vs SPIDER vs cold baselines, product economics are confounded.",
+      "Policy regularity confounds environment dynamics: action-sequence regularities often describe crawler/agent, not Web; identifiability requires policy-matched nulls, trajectory-grouped permutation, and website holdout \u2014 synthetic DGP mixing determinism with observation noise bakes in null."
+    ],
+    "allocation": {
+      "action": "PIVOT",
+      "claim_id": "C-PARAM-INHERIT",
+      "cognitive_reset": false,
+      "comparative_reasoning": "Versus productizing freshness guard alone: behavioral detection TP 1.0 already SURVIVES at mock ceiling but lacks discriminating operating point under overlap (threshold 0.20 low-edge) and adds no cross-site reuse value. Versus de-novo C-RESIDUAL-NOVELTY mock with controlled novelty fraction: would reproduce tautological cost formulas without fixing binding, wastes cycle. Fixing kernel and running honest family holdout with strong baselines dominates because it simultaneously validates binding, success margin, abstention, and amortization \u2014 the decision that changes architecture vs. replay/RAG.",
+      "dependencies": [
+        "graph",
+        "runtime",
+        "intel",
+        "frontier"
+      ],
+      "parent_handoff_disposition": "SUPERSEDE",
+      "question": "Does corrected kernel distill_parameterized (fix _common_prefix_and_suffix double-prefix so full B identifiers bind, field-path relevance noise filter, Jaccard>=0.75 + constant-anchor structure-similarity) enable a real LLM agent (gpt-4o-mini 15 steps Playwright 1280x720, 4096 tokens temp 0 seed 42) on true WebArena-Verified v2 family holdout (>=10 families >=60 tasks, 49 templates, duplication 0.9479) to achieve EXECUTABLE >=0.75 and binding correctness >=0.90 with zero unsubstituted templates, success margin >=0.12 vs B-COLD/B-RAG/B-REPLAY/B-INSTR, false_accept <=0.10, UNKNOWN [0.00,0.15] ECE <=0.15, and honest amortized saving >=25% vs COLD and <=0.85x vs RAG (family-stratified bootstrap) \u2014 with APC keyword plan cache, HMT hierarchical retrieval, Helium KV prefix and webagent self-healing as strong baselines and deterministic verification?",
+      "rationale": "Product core promise is parameterized inheritance + residual-novelty economics, yet C-PARAM-INHERIT is MEASUREMENT_INVALID after 3 kernel integration falsifications (21/21 harness EXECUTABLE but kernel double-prefix binds fail, noise-field over-parameterization, structure-similarity hallucination). No honest WebArena family holdout with real LLM/Playwright has succeeded; last two product cycles MEASUREMENT_INVALID, synthetic mocks tautological (M-COST 250+500*int(10*novelty) rho=1.0, block-permutation p 0.0167 >0.01). Fixing kernel is smallest unblock that enables end-to-end C-LLM-INHERIT / C-RESIDUAL-NOVELTY / C-PRODUCT-ECON measurement. Freshness parallel-channel (TP 1.0 FP 0.0) is wired but orthogonality pooled anti-correlation r=-0.53 shows not product-ready; economics must include freshness gating and UNKNOWN calibration in same trial."
+    },
+    "cycle_id": "35767230852",
+    "lane": "product",
+    "portfolio_assessment": "SPIDER has 242 canonical experiments with zero claims at VALIDATED/PRODUCT_CORE. Core bottleneck is not synthetic estimator refinement but honest end-to-end transfer: localhost C-MEAS-VALID matrix (body-only, header-only, gzip/brotli 240/240, nginx HIT 960/960) is complete but degenerate CIs; freshness orthogonality repeatedly SUPPORTS at delta 0.15 (r -0.058 to 0.041, TOST p ~1e-08) yet conjunctive gates fail on C1 304/session artifacts; param-inherit survives only in harness (21/21) while kernel distill_parameterized double-prefix/noise filtering remains FALSIFIED x3; delta-repair BLOCKED x3 on localized-repair cost bounds; residual-novelty tautological (rho=1 bijective cost formula) never measured with real LLM/browser; semantic-resolve just broke through via frontier genuine non-oracle adapter 30/30 alias-OOD vs kernel 0/16; physics 60 synthetic PMI/TV experiments zero Gate0 production SPAs qualify; cross-site/LLM-inherit/product-econ both MEASUREMENT_INVALID per Gate0 (Mind2Web single train, Docker 20-element truncation). Global optimum is to (1) transfer frontier semantic resolver into product path, (2) force substrates to production (gunicorn/nginx/CDN/BrowserGym 1280x720) so CIs become non-degenerate and distributed replication is tested, (3) fix kernel param integration and measure honest family-holdout economics vs strong baselines (RAG, APC plan cache, Helium KV, webagent replay), (4) park physics until Intel recovers Gate0 data, (5) exhaust Mind2Web LFS + full-DOM data recovery as it unblocks 3 lanes. Depth on localhost gzip variants or another synthetic TV/KDE sweep has near-zero marginal value.",
+    "schema_version": 1,
+    "scout_assessment": "Scout brief was central: adopted its diagnosis of factory risk (local continuation on synthetic estimators vs core promise of residual-novelty economics), its quantified ceilings (960/960 HIT, r 0.025-0.041, 30/30 frontier SURVIVES, 0/5 Gate0, 42-streak localhost, double-prefix kernel bug, rho=1 tautology), its external baselines (HMT, APC 50.3% cost cut, Helium/KVFlow 1.56x, JIT 10.4x, BrowserGym 812 tasks, webagent self-healing) and its dependency map (runtime->graph delta-repair, intel->physics Gate0, graph->product kernel fix, frontier->product adapter). Challenged scout on two points: (1) scout suggests parking delta-repair indefinitely and pivoting graph to freshness distributed fix \u2014 judged lower leverage than transferring frontier adapter to product where SURVIVES already exists; (2) scout lists physics barrier/committor as alternate if SPA unavailable but that still requires same substrate, so PARK is cleaner than another synthetic DGP. Delegated deep verification of HMT/APC/Helium to product/intel as strong baselines rather than directing scout to deep dive."
+  },
+  "experiment_id": "EXP-PRODUCT-35767859554",
+  "inherited_last_verdict": "MEASUREMENT_INVALID",
+  "inherited_next_question": "Does a corrected kernel-integrated distill_parameterized (fixing _common_prefix_and_suffix double-prefix so full B identifiers bind correctly) enable a real LLM agent (gpt-4o-mini 15 steps, Playwright, 4096 tokens, temp 0, seed 42) on true WebArena-Verified v2 family hold-out (>=10 families, >=60 tasks, 49 templates, measured duplication 0.9479) to achieve EXECUTABLE >=0.75 and binding correctness >=0.90 with zero unsubstituted templates, success margin >=0.12 vs B-COLD/B-RAG/B-REPLAY/B-INSTR, false_accept <=0.10, UNKNOWN in [0.00,0.15] with ECE <=0.15, and honest amortized saving >=25% vs COLD and <=0.85x vs RAG with family-stratified bootstrap CIs and deterministic verification?",
+  "lane": "product",
+  "origin_github_run_id": "35767859554",
+  "parent_handoff": {
+    "experiment_id": "EXP-PRODUCT-35756243655",
+    "path": "research/experiments/EXP-PRODUCT-35756243655/handoff.json",
+    "sha256": "92869eb23ba40845288653564771d9593678a2854e28e59dc8fac8a1c14751d9"
+  },
+  "reason": "global-director-PIVOT",
+  "request_hash": "deaad815a8cf79466f77fe3b088279869fe4925041e5fd1f409f560e3f7ac7bf",
+  "request_id": "389cc7399ebaeb5da225c32a",
+  "schema_version": 1
+}
