@@ -1,0 +1,12 @@
+{
+  "status": "COMPLETE",
+  "outcome": "MIXED",
+  "webapi_correct_rate": 0.975,
+  "hier_correct_rate": 0.975,
+  "best_flat_correct_rate": 0.975,
+  "webapi_coverage": 1.0,
+  "best_flat_coverage": 1.0,
+  "hier_coverage": 1.0,
+  "ece_webapi": 0.1389441084785943,
+  "ece_hier": 0.1389441084785943
+}
