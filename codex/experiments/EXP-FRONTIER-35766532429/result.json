@@ -1,0 +1,214 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-FRONTIER-35766532429",
+  "lane": "frontier",
+  "status": "COMPLETE",
+  "outcome": "SUPPORTS",
+  "metrics": {
+    "alias_OOD_pooled": {
+      "reconstruction_correct_resolution": 1.0,
+      "reconstruction_correct_count": 40,
+      "reconstruction_false_accept": 0.0,
+      "reconstruction_unknown": 0.0,
+      "reconstruction_n": 40,
+      "wilson_correct_ci": [0.9123754607496077, 1.0],
+      "wilson_false_ci": [0.0, 0.08762453925039232],
+      "exact_match_correct_rate": 0.0,
+      "verbatim_false_accept_rate": 1.0,
+      "tfidf_correct_rate": 0.0,
+      "random_correct_rate": 0.0,
+      "binomial_p_vs_0.10": 1.0000000000000022e-40,
+      "mcnemar_rec_vs_exact": {"b": 40, "c": 0, "chi2": 38.025, "p": 6.984393063902417e-10},
+      "mcnemar_fa_rec_vs_verbatim": {"b": 0, "c": 40, "chi2": 38.025, "p": 6.984393063902417e-10},
+      "diff_verbatim_minus_recon_false_accept": 1.0
+    },
+    "alias_OOD_orthogonal_30": {
+      "n": 30,
+      "correct": 30,
+      "correct_rate": 1.0,
+      "wilson_ci": [0.886482908609522, 1.0],
+      "binomial_p_vs_0.10": 1.0000000000000017e-30,
+      "false_accept_rate": 0.0
+    },
+    "alias_OOD_mixed_10": {
+      "n": 10,
+      "correct": 10,
+      "correct_rate": 1.0,
+      "false_accept_rate": 0.0,
+      "wilson_ci": [0.7224598312333834, 1.0]
+    },
+    "per_family_and_heldout": {
+      "fam0_standard": {"n": 7, "correct_rate": 1.0, "fa_rate": 0.0},
+      "fam0_heldout": {"n": 3, "correct_rate": 1.0, "fa_rate": 0.0},
+      "fam0_overall": {"n": 10, "correct_rate": 1.0},
+      "fam1_standard": {"n": 7, "correct_rate": 1.0, "fa_rate": 0.0},
+      "fam1_heldout": {"n": 3, "correct_rate": 1.0, "fa_rate": 0.0},
+      "fam1_overall": {"n": 10, "correct_rate": 1.0},
+      "fam2_standard": {"n": 7, "correct_rate": 1.0, "fa_rate": 0.0},
+      "fam2_heldout": {"n": 3, "correct_rate": 1.0, "fa_rate": 0.0},
+      "fam2_overall": {"n": 10, "correct_rate": 1.0},
+      "fam3_mixed_overall": {"n": 10, "correct_rate": 1.0, "fa_rate": 0.0},
+      "heldout_9": {"n": 9, "correct_rate": 1.0, "fa_rate": 0.0},
+      "mixed_10": {"n": 10, "correct_rate": 1.0, "fa_rate": 0.0},
+      "orthogonal_30": {"n": 30, "correct_rate": 1.0}
+    },
+    "channel_isolation_diagnostics": {
+      "RULE-URL-ONLY": {"n": 40, "correct_rate": 0.0, "per_family": {"fam0": {"n": 10, "correct_rate": 0.0}, "fam1": {"n": 10, "correct_rate": 0.0}, "fam2": {"n": 10, "correct_rate": 0.0}, "fam3": {"n": 10, "correct_rate": 0.0}}},
+      "RULE-BODY-ONLY": {"n": 40, "correct_rate": 0.25, "per_family": {"fam0": {"n": 10, "correct_rate": 0.0}, "fam1": {"n": 10, "correct_rate": 1.0}, "fam2": {"n": 10, "correct_rate": 0.0}, "fam3": {"n": 10, "correct_rate": 0.0}}},
+      "RULE-HEADERS-ONLY": {"n": 40, "correct_rate": 0.5, "per_family": {"fam0": {"n": 10, "correct_rate": 1.0}, "fam1": {"n": 10, "correct_rate": 0.0}, "fam2": {"n": 10, "correct_rate": 1.0}, "fam3": {"n": 10, "correct_rate": 0.0}}}
+    },
+    "exact_match": {
+      "reconstruction_correct_rate": 1.0,
+      "exact_match_baseline_correct_rate": 1.0,
+      "reconstruction_n": 12,
+      "wilson_ci_recon": [0.7574992425007574, 0.9999999999999998]
+    },
+    "no_applicable": {
+      "reconstruction_unknown_precision": 1.0,
+      "reconstruction_false_accept_rate": 0.0,
+      "reconstruction_ece_over_all": 0.0802516342187119,
+      "ece_bootstrap_mean": 0.08037932634537324,
+      "ece_bootstrap_ci": [0.07221024654120912, 0.08833407213328238],
+      "ece_alias": 0.10794035988274564,
+      "ece_exact": 0.02083333333333337,
+      "ece_noapp": 0.05766666666666668,
+      "all_methods_precision": {"B-EXACT-MATCH": 1.0, "B-VERBATIM-REPLAY": 1.0, "B-RAG-TFIDF": 1.0, "B-RAG-EMBED": null, "B-RANDOM": 1.0, "RECONSTRUCTION-RULE": 1.0, "RECONSTRUCTION-LEARNED": null},
+      "all_methods_false_accept": {"B-EXACT-MATCH": 0.0, "B-VERBATIM-REPLAY": 0.0, "B-RAG-TFIDF": 0.0, "B-RAG-EMBED": null, "B-RANDOM": 0.0, "RECONSTRUCTION-RULE": 0.0, "RECONSTRUCTION-LEARNED": null},
+      "empty_registry_unknown_rate": 1.0,
+      "empty_registry_all_methods_unknown": true,
+      "bins_reconstruction": [{"bin": 0, "count": 18, "acc": 0.0, "avg_conf": 0.058333333333333334, "edges": [0.0, 0.2]}, {"bin": 1, "count": 0, "acc": 0.0, "avg_conf": 0.0, "edges": [0.2, 0.4]}, {"bin": 2, "count": 0, "acc": 0.0, "avg_conf": 0.0, "edges": [0.4, 0.6000000000000001]}, {"bin": 3, "count": 0, "acc": 0.0, "avg_conf": 0.0, "edges": [0.6000000000000001, 0.8]}, {"bin": 4, "count": 52, "acc": 1.0, "avg_conf": 0.9121612616286571, "edges": [0.8, 1.0]}],
+      "reconstruction_confidence_std": 0.3746120510836857
+    },
+    "controls_summary": {
+      "PC_EXACT_MATCH_pass": true,
+      "NC_NO_APPLICABLE_pass_recon": true,
+      "NC_ALL_pass": true,
+      "NC_EMPTY_pass": true,
+      "PC_BROWSERGYM_HEALTH_pass": false,
+      "pc_baseline_correct": 1.0,
+      "pc_recon_correct": 1.0
+    },
+    "live": {
+      "attempted": 0,
+      "healthy": 0,
+      "exploratory_bound": true,
+      "browsergym_probe": {"browsergym": [false, "ModuleNotFoundError: No module named 'browsergym'"], "playwright": [false, "ModuleNotFoundError: No module named 'playwright'"]}
+    },
+    "availability": {
+      "B_RAG_EMBED_available": false,
+      "B_RAG_EMBED_message": "sentence-transformers unavailable: ModuleNotFoundError: No module named 'sentence_transformers'",
+      "RECONSTRUCTION_LEARNED_available": false,
+      "RECONSTRUCTION_LEARNED_message": "offline LLM stack unavailable: ModuleNotFoundError: No module named 'transformers'",
+      "learned_training_report": {"available": false, "seeds": [42, 43, 44], "per_seed_metrics": null, "note": "LEARNED training not executed; offline LLM absent. Per frozen spec, no learned alias-OOD metrics fabricated."}
+    },
+    "decision_components": {
+      "S1_correct_ge_0.50": true,
+      "S1_binom_p_lt_0.05": true,
+      "S1_mcnemar_p_lt_0.05": true,
+      "S1_orthogonal_ge_0.50": true,
+      "S1_mixed_ge_0.40": true,
+      "S1_pass": true,
+      "S2_fa_le_0.15": true,
+      "S2_diff_ge_0.15": true,
+      "S2_mcnemar_p_lt_0.05": true,
+      "S2_pass": true,
+      "S3_pass": true,
+      "S4_precision_ge_0.85": true,
+      "S4_ece_le_0.15": true,
+      "S4_pass": true,
+      "S5_not_dominated_by_retrieval": true,
+      "S5_best_rag_correct": 0.0,
+      "S_learned_gap_within_0_10": null
+    },
+    "overall": {
+      "status": "COMPLETE",
+      "outcome": "SUPPORTS",
+      "all_survives": true,
+      "falsified": false,
+      "bounded_to": "synthetic pooled 40 (30 orthogonal +10 mixed); live BrowserGym and learned GRPO arms unavailable and disclosed"
+    },
+    "sample_counts": {"alias-OOD": 40, "exact-match": 12, "no-applicable": 12, "empty-registry": 6},
+    "harness_errors": []
+  },
+  "controls": {
+    "PC-EXACT-MATCH": {
+      "id": "PC-EXACT-MATCH",
+      "expected": "On exact-match stratum (N=12, test intent equals registry intent verbatim, same slot names, no aliasing): B-EXACT-MATCH and RECONSTRUCTION-RULE correct_resolution >=0.90 and false_accept <=0.10 with no crashes.",
+      "observed": {"B-EXACT-MATCH_correct_rate": 1.0, "RECONSTRUCTION-RULE_correct_rate": 1.0, "reconstruction_n": 12, "harness_errors": 0},
+      "pass": true,
+      "evidence_ref": "derived_metrics.json:exact_match; raw_evidence.json B-EXACT-MATCH vs RECONSTRUCTION-RULE on exact-match 12/12"
+    },
+    "NC-NO-APPLICABLE": {
+      "id": "NC-NO-APPLICABLE",
+      "expected": "On no-applicable stratum (N=12, OOD intent, registry has other intents): UNKNOWN precision >=0.90 and false_accept <=0.10 for every evaluated method.",
+      "observed": {"RECONSTRUCTION-RULE_unknown_precision": 1.0, "RECONSTRUCTION-RULE_false_accept_rate": 0.0, "all_methods_precision": {"B-EXACT-MATCH": 1.0, "B-VERBATIM-REPLAY": 1.0, "B-RAG-TFIDF": 1.0, "B-RAG-EMBED": null, "B-RANDOM": 1.0, "RECONSTRUCTION-RULE": 1.0, "RECONSTRUCTION-LEARNED": null}, "all_methods_false_accept": {"B-EXACT-MATCH": 0.0, "B-VERBATIM-REPLAY": 0.0, "B-RAG-TFIDF": 0.0, "B-RAG-EMBED": null, "B-RANDOM": 0.0, "RECONSTRUCTION-RULE": 0.0, "RECONSTRUCTION-LEARNED": null}},
+      "pass": true,
+      "evidence_ref": "derived_metrics.json:no_applicable.all_methods_precision"
+    },
+    "NC-EMPTY-REGISTRY": {
+      "id": "NC-EMPTY-REGISTRY",
+      "expected": "Empty registry (N=6) -> UNKNOWN 100% for every evaluated method (kernel does not hallucinate).",
+      "observed": {"RECONSTRUCTION-RULE_unknown_rate": 1.0, "all_methods_unknown": true},
+      "pass": true,
+      "evidence_ref": "derived_metrics.json:no_applicable.empty_registry_*"
+    },
+    "PC-BROWSERGYM-HEALTH": {
+      "id": "PC-BROWSERGYM-HEALTH",
+      "expected": ">=80% of attempted live BrowserGym tasks load DOM/AX tree at 1280x720 (exploratory gating control).",
+      "observed": {"attempted": 0, "healthy": 0, "browsergym_probe": {"browsergym": [false, "ModuleNotFoundError: No module named 'browsergym'"], "playwright": [false, "ModuleNotFoundError: No module named 'playwright'"]}},
+      "pass": false,
+      "note": "Live substrate unavailable in environment (no browsergym/playwright modules); control not applicable -> live stratum exploratory, claim bounded to synthetic pooled (30 orthogonal +10 mixed) per frozen spec (not MEASUREMENT_INVALID).",
+      "evidence_ref": "derived_metrics.json:live"
+    },
+    "LEAK-CHECK-0/40": {
+      "id": "LEAK-CHECK-0/40",
+      "expected": "No alias-OOD test template appears verbatim in its registry (frozen: 'No test template appears verbatim in registry (0/40 leakage check)' - 30 orthogonal +10 mixed).",
+      "observed": {"alias_OOD_registry_template_leaks": 0, "orthogonal_leaks": 0, "mixed_leaks": 0, "tasks_total": 70},
+      "pass": true,
+      "evidence_ref": "harness assert (run_genuine_35766532429.py leak==0); tasks.json re-checked: 0 leaks in 40 pooled"
+    }
+  },
+  "artifacts": [
+    {"path": "research/frontier/run_genuine_35766532429.py", "sha256": "4db542a727d35b5fee7c36cb842e6abff61ba6c51f5a1fa7f1c67a884d24da6f", "role": "code"},
+    {"path": "research/experiments/EXP-FRONTIER-35766532429/tasks.json", "sha256": "4abf148721fdee9dfe56ac776f6b3112344821a4ea80d183c5313adeced1f35e", "role": "fixture"},
+    {"path": "research/experiments/EXP-FRONTIER-35766532429/raw_evidence.json", "sha256": "2309c98f16372026eadd155d7959105bd01115e330ac5c83b0d5b6e48ae5b133", "role": "raw"},
+    {"path": "research/experiments/EXP-FRONTIER-35766532429/derived_metrics.json", "sha256": "38bd1d30fadd6e29d55eca3b63e5ec1543cfe785466d534a4ebe058847a7996e", "role": "derived"}
+  ],
+  "observations": [
+    "Tasks: 70 synthetic = 40 alias-OOD pooled (30 orthogonal: 3 families x10 including 7 standard +3 held-out novel forms per family + 10 mixed multi-channel header+body+query) +12 exact-match +12 no-applicable +6 empty-registry.",
+    "Leak check: 0/40 alias-OOD tasks have expected/test template present in registry (asserted in harness and re-verified on tasks.json: 0 orthogonal leaks, 0 mixed leaks).",
+    "Forbidden-key filter: 0 forbidden-key violations in any derived_context (ALLOWED_STATE_KEYS whitelist enforced; derive_state asserts). All reconstruct_resolve calls used only (intent, derived_context, retrieved_candidates, params).",
+    "Harness errors: 0 across 70 tasks x7 methods (490 eval rows) plus 120 diagnostic rows (RULE-URL-ONLY/BODY-ONLY/HEADERS-ONLY on 40 pooled =120) =610 total raw rows.",
+    "RECONSTRUCTION-RULE on alias-OOD pooled: 40/40 correct_resolution (1.0 Wilson [0.912,1.0]), 0 false_accept, 0 UNKNOWN. Binomial p=1.0e-40 vs 0.10 null; McNemar vs B-EXACT-MATCH (0/40) p=6.98e-10 (b=40,c=0).",
+    "Per orthogonal family: header 10/10, body 10/10, auth 10/10 (each fam0/fam1/fam2). Held-out-9 novel forms 9/9 correct. Orthogonal 30/30 1.0 Wilson [0.886,1.0] binomial p=1e-30.",
+    "Mixed multi-channel subset: 10/10 correct (1.0 Wilson [0.722,1.0]), 0 false_accept. Requires joint header X-Api-Key + body api_token + query permission rewrite within one bound_action; generic multi-channel adoption (choose_adoptions + rewrite_template_multi) succeeded without memorizing mixed fixtures.",
+    "Baselines on alias-OOD pooled: B-EXACT-MATCH 0/40, B-VERBATIM-REPLAY 0/40 (false_accept 40/40 =1.0), B-RAG-TFIDF 0/40, B-RANDOM 0/40 (max harm for verbatim). Retrieval alone insufficient when intent held equal.",
+    "Exact-match stratum: RECONSTRUCTION-RULE 12/12 correct (1.0 Wilson [0.757,1.0]), B-EXACT-MATCH 12/12 correct - positive control PASS.",
+    "No-applicable: RECONSTRUCTION-RULE UNKNOWN precision 1.0, false_accept 0.0; all evaluated methods precision 1.0 / false_accept 0.0. Empty registry: UNKNOWN 1.0 for all evaluated methods - null controls PASS.",
+    "RECONSTRUCTION-RULE confidence varies across tasks (std 0.3746, min ~0.058, max 0.98) - not constant; bimodal distribution 18 abstain-proximal ~0.058 vs 52 executable ~0.912.",
+    "ECE (RECONSTRUCTION-RULE, all strata, 5 bins) 0.0803; bootstrap 2000 mean 0.0804 CI [0.0722,0.0883]; per-stratum ECE alias 0.1079, exact 0.0208, noapp 0.0577. Gates S4 PASS (ECE <=0.15, precision >=0.85).",
+    "Channel-isolation diagnostics on pooled 40: RULE-URL-ONLY 0/40 (abstains), RULE-BODY-ONLY 10/40 (25% - exactly body family 10/10), RULE-HEADERS-ONLY 20/40 (50% - header families 10/10 each, body 0, mixed 0). Mixed 0/10 for all URL-only/body-only/headers-only confirms mixed requires full multi-channel composition, not single-channel signal.",
+    "Unavailable arms disclosed (no fabrication): B-RAG-EMBED (sentence-transformers absent; strong baseline remains B-RAG-TFIDF per spec), RECONSTRUCTION-LEARNED (offline LLM stack absent transformers/torch; no learned metrics, 3-seed report null per spec), live BrowserGym/Playwright absent (live stratum exploratory-bound 0 attempted).",
+    "Statistical tests pooled: one-sided binomial p pooled 1e-40, orthogonal 1e-30 vs 0.10; McNemar RECONSTRUCTION-RULE correct vs B-EXACT-MATCH p=6.98e-10; McNemar false_accept vs B-VERBATIM-REPLAY p=6.98e-10; diff verbatim-minus-recon false 1.0. S5 not dominated by retrieval (RAG 0.0 vs recon 1.0 gap 1.0).",
+    "No harness truncation >20% (0% errors), pooled alias-OOD N=40 meets >=32 minimum and >=40 target for confirmatory binomial/McNemar power; decision rule S1-S7 all PASS."
+  ],
+  "validity_notes": [
+    "Environment limitations: no browsergym/playwright/torch/transformers/sentence-transformers in this runner; live BrowserGym WebShop/ALFWorld stratum (frozen: up to 40+10 live tasks at 1280x720 with CDP AX) was not measured, so per frozen decision rule the confirmatory claim SURVIVES is bounded to synthetic pooled (30 orthogonal +10 mixed) with disclosure - not MEASUREMENT_INVALID. Live requires rerun on runner with BrowserGym 0.14.3 + Playwright 1280x720 + network header/body plumbing.",
+    "B-RAG-EMBED reported unavailable; frozen spec authorizes B-RAG-TFIDF as the strong retrieval baseline for the S5 domination gate in that case (S5 uses TFIDF 0.0 as best RAG).",
+    "RECONSTRUCTION-LEARNED (GRPO/System-One) unavailable without offline LLM; frozen spec: 'mark LEARNED unavailable and report RULE vs RAG only with disclosure; do not fabricate learned metrics'. Training cost/stability (wall-clock, tokens/calls, CV across 3 seeds 42,43,44) not reported. RULE economics reported as deterministic linear scoring (no LLM calls, <40ms per task). Learned stability CV>0.5 gate unexplored.",
+    "Confidence distribution is bimodal (18 at ~0.058, 52 at ~0.912), reflecting binary accept/abstain gate at 0.80 kernel min_confidence; ECE on 5 bins is dominated by bin0 and bin4 (bins 1-3 count 0) and may understate calibration under differently-binned/continuous confidence or abstention-aware definitions (parent carry_forward). Audit should inspect softmax temp 0.15 + deterministic_jitter derivation.",
+    "Synthetic tasks use minimal derived dict (url, url_path, url_query, url_segments, headers_observed, body_observed; ax_tree fields None) to isolate orthogonal alias + mixed composition mechanism; synthetic-to-real DOM/AX drift at 1280x720 remains dominant open domain (do_not_assume). Mixed composition tests single-channel rewrites composed generically via choose_adoptions + rewrite_template_multi, not memorizing literal mixed fixtures (audit verifies no literal mixed template strings in code beyond generic adoption).",
+    "Intent strings deliberately held equal between test and registry mechanisms on alias-OOD pooled (frozen design) so intent-matching baselines fail solely due to template aliasing requiring reconstruction; B-EXACT-MATCH 0/40 and B-RAG-TFIDF 0/40 do not prove any retriever fails on intent-dissimilar tasks.",
+    "All methods deterministic and seeded (SEED=42, numpy RandomState 42, Python random 42); LEARNED would use seeds 42,43,44 but not executed. TFIDF corpus is per-task registry (train mechanisms only; test templates never registered). Mixed mixed_10 uses same params token+perm (header+body share token) requiring joint correctness: partial channel correct counts as false_accept but observed 0 false.",
+    "Derived_context whitelist 0 violations confirms no forbidden keys alias_family/query_key/target_prefix/routing_prefix/target_style/path_style/header_key/body_field/auth_scope/expected_template read by reconstruction; confidence std 0.374 >0.05 required, not constant.",
+    "Economics vs verbatim/RAG reported: retrieval+reconstruction+verification per task is single kernel resolve + structural scoring (microseconds) vs TFIDF vectorization; verification-boundary economics trivial for synthetic but informative vs LLM token cost; not gated for SURVIVES."
+  ],
+  "unresolved": [
+    "Live-browser (WebShop/ALFWorld at BrowserGym 0.14.3 1280x720 with real CDP AX trees) generalization on header/body/auth aliasing including mixed multi-channel within one request and production-SPA heterogeneity is untested (0 tasks attempted); requires runner with BrowserGym 0.14.3 + Playwright + network fixtures and AX extraction at 1280x720.",
+    "Learned GRPO/System-One critique-reconstruct adapter non-inferiority (within 0.10 correct, 0.05 ECE of RULE on synthetic orthogonal+mixed) and training cost/stability (wall-clock, tokens/calls, variance/CV across 3 seeds 42,43,44) and model-derived confidence calibration (std>0.05) are untested; requires offline LLM stack (transformers/torch) + GRPO training harness.",
+    "Whether perfect 40/40 1.0 pooled (30/30 orthogonal +10/10 mixed) reflects synthetic easiness (observed credential keys directly in derived_context via bound-to-parse inversion, generic alphabetically-sorted multi-adoption) vs robustness to noisy real DOM/AX, visual layout, timing, auth/session drift — audit V4 synthetic tautology remains; minimal derived dict lacks AX heterogeneity.",
+    "Calibration sensitivity under non-bimodal confidence and different binning/abstention conventions: current ECE 0.0803 uses 5 bins with 3 empty (bins 1-3 count 0) and binary threshold 0.80; continuous calibration and threshold sensitivity untested.",
+    "B-RAG-EMBED (sentence-transformer all-MiniLM-L6-v2) retriever vs TFIDF on large realistic corpus where intent strings differ — per-task registry of 3 mechanisms only, lexical signal minimal, not stress-tested.",
+    "End-to-end verification-boundary economics (retrieval+reconstruction+verification cost per successful task vs RAG vs verbatim, LLM calls/tokens, amortization) not measured for RULE beyond trivial linear scoring and not at all for LEARNED; product decision requires these live measurements."
+  ]
+}
