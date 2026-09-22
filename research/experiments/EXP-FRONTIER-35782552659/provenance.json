@@ -1,0 +1,81 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-FRONTIER-35782552659",
+  "lane": "frontier",
+  "execution_timestamp": "2026-09-22T23:30:00Z",
+  "model": "opencode/big-pickle",
+  "github": {
+    "repo": "Spider/Spider",
+    "base_commit": "986930b9",
+    "freeze_commit": "b957d448",
+    "allocate_commit": "a633c31a",
+    "note": "no git operations performed during EXECUTE; producer artifacts left untracked per lane discipline"
+  },
+  "frozen_inputs": {
+    "request.json": {"sha256": "e1de2994695629b68fa60f476667453ccd5a90beb454ee8920f7fd2b314c7407"},
+    "spec.json": {"sha256": "c723181a69b34bd70acee1fa29847f13865e4de8ecbceecd530a02dc02f01266"},
+    "prereg.md": {"sha256": "745504030faecddae36ff11a1a131f534dce205edec30f164225fcddd0e99677"},
+    "freeze.json": {"sha256": "59549c05b3d16c5f948ea48d3759c6d6d60d824428bc8a62b7af72b7971e0dae"}
+  },
+  "fixture": {
+    "source": "research/experiments/EXP-FRONTIER-35773143736/tasks.json (parent EXP-FRONTIER-35773143736)",
+    "sha256": "4abf148721fdee9dfe56ac776f6b3112344821a4ea80d183c5313adeced1f35e",
+    "verified_identical_at_execution": true,
+    "contents": "70 tasks = 40 alias-OOD (30 orthogonal 3 families + 10 mixed header/body/query) + 12 exact + 12 no-applicable + 6 empty; registry per alias task = 3 mechanisms (train 0.9, distractor alias 0.9, low 0.8), intents held equal, hidden_expected.expected_template never in task registry (leak 0/40)"
+  },
+  "execution_parameters": {
+    "seeds": {"random": 42, "numpy": 42},
+    "pipelines": ["B-EXACT-MATCH", "B-VERBATIM-REPLAY", "B-FLAT-RAG-TFIDF-K5", "B-FLAT-RAG-EMBED-K5", "B-FLAT-RAG-EMBED-K1", "B-RANDOM-K5", "H-HIERARCHICAL-XMEMORY"],
+    "hierarchical": {
+      "clustering": "agglomerative average linkage, metric precomputed Jaccard distance (distance_threshold 0.4 i.e. component-set Jaccard >= 0.6), full component sets incl. url_segments",
+      "theme_scoring": "unit-normalized TFIDF centroid cosine (TFIDF fit train-registry epochs only)",
+      "selection": "adaptive k in [2,5], max 2 mechanisms per theme, expand while softmax entropy > 0.4 OR distinct component-type coverage < 2, min-k top-up, deterministic argmax ties",
+      "query_serialization": "intent + url_path + header_keys + body_keys",
+      "embeddings": "sentence-transformers all-MiniLM-L6-v2, local CPU, normalize_embeddings=True, cached per unique string"
+    },
+    "downstream": "parent genuine RULE copied verbatim from research/frontier/run_genuine_35773143736.py: choose_adoptions + rewrite_template_multi + reconstruct_resolve, softmax temp 0.15, jitter-gated UNKNOWN < 0.80; same for all reconstructed pipelines",
+    "metrics": "Wilson 95% CIs, one-sided binomial vs 0.10, paired McNemar, family-blocked bootstrap 2000 (fam0-3) for coverage/density gains and ECE, ECE 5 confidence bins, confidence std across tasks"
+  },
+  "environment": {
+    "python": "3.12.14",
+    "numpy": "2.5.3",
+    "scipy": "1.18.1",
+    "scikit-learn": "1.9.1",
+    "torch": "2.14.0+cu130",
+    "sentence_transformers": "all-MiniLM-L6-v2 (embeddings_available true)",
+    "substrates_unavailable": "BrowserGym live tasks N/A per Director (no new SPAs); no hosted LLM used"
+  },
+  "artifacts": {
+    "run_experiment_script": {
+      "path": "research/frontier/run_genuine_35782552659.py",
+      "sha256": "2d66408199cebeb96627dee91f694a9b46e1e0e8c0d3396a80089f284ad82c83"
+    },
+    "raw_evidence": {
+      "path": "research/experiments/EXP-FRONTIER-35782552659/raw_evidence.json",
+      "sha256": "4969ae02d35caadf1fd6215cbdd8592c0f984b5cee4835d5d1c3dc1fc8d0e703"
+    },
+    "derived_metrics": {
+      "path": "research/experiments/EXP-FRONTIER-35782552659/derived_metrics.json",
+      "sha256": "e7ed8d2a072b75842810bdb1584e33c6a80126ae68b685714d24a75170a99dfe"
+    },
+    "index_manifest": {
+      "path": "research/experiments/EXP-FRONTIER-35782552659/index_manifest.json",
+      "sha256": "ef2fa566357fcafb3cc1810ff905161c7242845f1edf3f3d1f3d88a74ef53203"
+    },
+    "train_split_inventory": {
+      "path": "research/experiments/EXP-FRONTIER-35782552659/train_split_inventory.json",
+      "sha256": "5fa218245a0272d6c0c33422a445eaa2f42a86db99e3b3bb3f340c5518fc9bd7"
+    },
+    "results": {
+      "result.json": {"path": "research/experiments/EXP-FRONTIER-35782552659/result.json", "sha256": "3771f0d3fddc7ceb6f5f5bb87780e40fbf0f1a3fb0d0b9c10b62e4d907886223"},
+      "report.md": {"path": "research/experiments/EXP-FRONTIER-35782552659/report.md", "sha256": "7223bee4c29c8502c5ddf628e1e915711ce4f57705bee1d609948e68674df965"},
+      "provenance.json": {"path": "research/experiments/EXP-FRONTIER-35782552659/provenance.json", "sha256": "98ce651b19538cf159f3c55d3bcaa8fcd11ed92e635bb5e3851556394848d08f", "note": "self-hash computed at write time; live file differs only by this self-reference entry"}
+    }
+  },
+  "reproduction": {
+    "command": "python3 research/frontier/run_genuine_35782552659.py (from repo root; downloads sentence-transformers weights on first run; deterministic, seed 42)",
+    "outputs": "raw_evidence.json (490 rows), derived_metrics.json, index_manifest.json, train_split_inventory.json, tasks.json (fixture copy, sha-verified)",
+    "rerun_consistency": "two identical executions; post-fix rerun produced byte-identical raw_evidence.json and identical derived metrics (verified sha 4969ae02...)",
+    "note": "harness bugs fixed during EXECUTE before measurement (row-append KeyError from empty-registry early returns missing retrieved_ids; NC-NO-APPLICABLE evaluated with frozen gated-confidence>=0.80 accept semantics per spec null_control); no frozen file modified"
+  }
+}

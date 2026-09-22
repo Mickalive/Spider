@@ -1,0 +1,989 @@
+{
+  "experiment_id": "EXP-FRONTIER-35782552659",
+  "index_kind": "hierarchical episode->component->theme (xMemory-style, static/revisable-disclosed)",
+  "episode_count": 63,
+  "train_registry_episodes": [
+    "alias-0-0::m-0-0-dist",
+    "alias-0-0::m-0-0-low",
+    "alias-0-0::m-0-0-train",
+    "alias-0-1::m-0-1-dist",
+    "alias-0-1::m-0-1-low",
+    "alias-0-1::m-0-1-train",
+    "alias-0-2::m-0-2-dist",
+    "alias-0-2::m-0-2-low",
+    "alias-0-2::m-0-2-train",
+    "alias-0-3::m-0-3-dist",
+    "alias-0-3::m-0-3-low",
+    "alias-0-3::m-0-3-train",
+    "alias-0-4::m-0-4-dist",
+    "alias-0-4::m-0-4-low",
+    "alias-0-4::m-0-4-train",
+    "alias-0-5::m-0-5-dist",
+    "alias-0-5::m-0-5-low",
+    "alias-0-5::m-0-5-train",
+    "alias-0-6::m-0-6-dist",
+    "alias-0-6::m-0-6-low",
+    "alias-0-6::m-0-6-train",
+    "alias-1-0::m-1-0-dist",
+    "alias-1-0::m-1-0-low",
+    "alias-1-0::m-1-0-train",
+    "alias-1-1::m-1-1-dist",
+    "alias-1-1::m-1-1-low",
+    "alias-1-1::m-1-1-train",
+    "alias-1-2::m-1-2-dist",
+    "alias-1-2::m-1-2-low",
+    "alias-1-2::m-1-2-train",
+    "alias-1-3::m-1-3-dist",
+    "alias-1-3::m-1-3-low",
+    "alias-1-3::m-1-3-train",
+    "alias-1-4::m-1-4-dist",
+    "alias-1-4::m-1-4-low",
+    "alias-1-4::m-1-4-train",
+    "alias-1-5::m-1-5-dist",
+    "alias-1-5::m-1-5-low",
+    "alias-1-5::m-1-5-train",
+    "alias-1-6::m-1-6-dist",
+    "alias-1-6::m-1-6-low",
+    "alias-1-6::m-1-6-train",
+    "alias-2-0::m-2-0-dist",
+    "alias-2-0::m-2-0-low",
+    "alias-2-0::m-2-0-train",
+    "alias-2-1::m-2-1-dist",
+    "alias-2-1::m-2-1-low",
+    "alias-2-1::m-2-1-train",
+    "alias-2-2::m-2-2-dist",
+    "alias-2-2::m-2-2-low",
+    "alias-2-2::m-2-2-train",
+    "alias-2-3::m-2-3-dist",
+    "alias-2-3::m-2-3-low",
+    "alias-2-3::m-2-3-train",
+    "alias-2-4::m-2-4-dist",
+    "alias-2-4::m-2-4-low",
+    "alias-2-4::m-2-4-train",
+    "alias-2-5::m-2-5-dist",
+    "alias-2-5::m-2-5-low",
+    "alias-2-5::m-2-5-train",
+    "alias-2-6::m-2-6-dist",
+    "alias-2-6::m-2-6-low",
+    "alias-2-6::m-2-6-train"
+  ],
+  "theme_count": 63,
+  "themes": [
+    {
+      "theme_id": "theme-0",
+      "type": "auth",
+      "members": [
+        "alias-2-6::m-2-6-train"
+      ],
+      "member_count": 1,
+      "component_union": [
+        "auth:read",
+        "qry:scope",
+        "seg:audit",
+        "seg:v3"
+      ],
+      "component_union_count": 4
+    },
+    {
+      "theme_id": "theme-1",
+      "type": "auth",
+      "members": [
+        "alias-2-5::m-2-5-train"
+      ],
+      "member_count": 1,
+      "component_union": [
+        "auth:read",
+        "qry:scope",
+        "seg:api",
+        "seg:reports"
+      ],
+      "component_union_count": 4
+    },
+    {
+      "theme_id": "theme-2",
+      "type": "auth",
+      "members": [
+        "alias-2-6::m-2-6-low"
+      ],
+      "member_count": 1,
+      "component_union": [
+        "auth:read",
+        "qry:permission",
+        "seg:audit",
+        "seg:v3"
+      ],
+      "component_union_count": 4
+    },
+    {
+      "theme_id": "theme-3",
+      "type": "auth",
+      "members": [
+        "alias-2-5::m-2-5-dist"
+      ],
+      "member_count": 1,
+      "component_union": [
+        "qry:adminscope",
+        "seg:api",
+        "seg:reports"
+      ],
+      "component_union_count": 3
+    },
+    {
+      "theme_id": "theme-4",
+      "type": "auth",
+      "members": [
+        "alias-2-4::m-2-4-dist"
+      ],
+      "member_count": 1,
+      "component_union": [
+        "qry:adminscope",
+        "seg:admin",
+        "seg:settings"
+      ],
+      "component_union_count": 3
+    },
+    {
+      "theme_id": "theme-5",
+      "type": "auth",
+      "members": [
+        "alias-2-3::m-2-3-train"
+      ],
+      "member_count": 1,
+      "component_union": [
+        "auth:read",
+        "qry:scope",
+        "seg:orders",
+        "seg:v1"
+      ],
+      "component_union_count": 4
+    },
+    {
+      "theme_id": "theme-6",
+      "type": "auth",
+      "members": [
+        "alias-2-6::m-2-6-dist"
+      ],
+      "member_count": 1,
+      "component_union": [
+        "qry:adminscope",
+        "seg:audit",
+        "seg:v3"
+      ],
+      "component_union_count": 3
+    },
+    {
+      "theme_id": "theme-7",
+      "type": "auth",
+      "members": [
+        "alias-2-0::m-2-0-dist"
+      ],
+      "member_count": 1,
+      "component_union": [
+        "qry:adminscope",
+        "seg:api",
+        "seg:data"
+      ],
+      "component_union_count": 3
+    },
+    {
+      "theme_id": "theme-8",
+      "type": "auth",
+      "members": [
+        "alias-2-4::m-2-4-train"
+      ],
+      "member_count": 1,
+      "component_union": [
+        "auth:read",
+        "qry:scope",
+        "seg:admin",
+        "seg:settings"
+      ],
+      "component_union_count": 4
+    },
+    {
+      "theme_id": "theme-9",
+      "type": "auth",
+      "members": [
+        "alias-2-0::m-2-0-train"
+      ],
+      "member_count": 1,
+      "component_union": [
+        "auth:read",
+        "qry:scope",
+        "seg:api",
+        "seg:data"
+      ],
+      "component_union_count": 4
+    },
+    {
+      "theme_id": "theme-10",
+      "type": "body",
+      "members": [
+        "alias-1-4::m-1-4-train"
+      ],
+      "member_count": 1,
+      "component_union": [
+        "bdy:apikey",
+        "seg:admin",
+        "seg:settings"
+      ],
+      "component_union_count": 3
+    },
+    {
+      "theme_id": "theme-11",
+      "type": "auth",
+      "members": [
+        "alias-2-3::m-2-3-dist"
+      ],
+      "member_count": 1,
+      "component_union": [
+        "qry:adminscope",
+        "seg:orders",
+        "seg:v1"
+      ],
+      "component_union_count": 3
+    },
+    {
+      "theme_id": "theme-12",
+      "type": "auth",
+      "members": [
+        "alias-2-2::m-2-2-dist"
+      ],
+      "member_count": 1,
+      "component_union": [
+        "qry:adminscope",
+        "seg:items",
+        "seg:v2"
+      ],
+      "component_union_count": 3
+    },
+    {
+      "theme_id": "theme-13",
+      "type": "auth",
+      "members": [
+        "alias-2-4::m-2-4-low"
+      ],
+      "member_count": 1,
+      "component_union": [
+        "auth:read",
+        "qry:permission",
+        "seg:admin",
+        "seg:settings"
+      ],
+      "component_union_count": 4
+    },
+    {
+      "theme_id": "theme-14",
+      "type": "auth",
+      "members": [
+        "alias-2-5::m-2-5-low"
+      ],
+      "member_count": 1,
+      "component_union": [
+        "auth:read",
+        "qry:permission",
+        "seg:api",
+        "seg:reports"
+      ],
+      "component_union_count": 4
+    },
+    {
+      "theme_id": "theme-15",
+      "type": "body",
+      "members": [
+        "alias-1-6::m-1-6-train"
+      ],
+      "member_count": 1,
+      "component_union": [
+        "bdy:apikey",
+        "seg:audit",
+        "seg:v3"
+      ],
+      "component_union_count": 3
+    },
+    {
+      "theme_id": "theme-16",
+      "type": "body",
+      "members": [
+        "alias-1-6::m-1-6-low"
+      ],
+      "member_count": 1,
+      "component_union": [
+        "bdy:apitoken",
+        "seg:audit",
+        "seg:v3"
+      ],
+      "component_union_count": 3
+    },
+    {
+      "theme_id": "theme-17",
+      "type": "body",
+      "members": [
+        "alias-1-6::m-1-6-dist"
+      ],
+      "member_count": 1,
+      "component_union": [
+        "bdy:key",
+        "seg:audit",
+        "seg:v3"
+      ],
+      "component_union_count": 3
+    },
+    {
+      "theme_id": "theme-18",
+      "type": "body",
+      "members": [
+        "alias-1-5::m-1-5-train"
+      ],
+      "member_count": 1,
+      "component_union": [
+        "bdy:apikey",
+        "seg:api",
+        "seg:reports"
+      ],
+      "component_union_count": 3
+    },
+    {
+      "theme_id": "theme-19",
+      "type": "body",
+      "members": [
+        "alias-1-5::m-1-5-low"
+      ],
+      "member_count": 1,
+      "component_union": [
+        "bdy:apitoken",
+        "seg:api",
+        "seg:reports"
+      ],
+      "component_union_count": 3
+    },
+    {
+      "theme_id": "theme-20",
+      "type": "body",
+      "members": [
+        "alias-1-4::m-1-4-dist"
+      ],
+      "member_count": 1,
+      "component_union": [
+        "bdy:key",
+        "seg:admin",
+        "seg:settings"
+      ],
+      "component_union_count": 3
+    },
+    {
+      "theme_id": "theme-21",
+      "type": "body",
+      "members": [
+        "alias-1-3::m-1-3-dist"
+      ],
+      "member_count": 1,
+      "component_union": [
+        "bdy:key",
+        "seg:orders",
+        "seg:v1"
+      ],
+      "component_union_count": 3
+    },
+    {
+      "theme_id": "theme-22",
+      "type": "body",
+      "members": [
+        "alias-1-4::m-1-4-low"
+      ],
+      "member_count": 1,
+      "component_union": [
+        "bdy:apitoken",
+        "seg:admin",
+        "seg:settings"
+      ],
+      "component_union_count": 3
+    },
+    {
+      "theme_id": "theme-23",
+      "type": "body",
+      "members": [
+        "alias-1-2::m-1-2-dist"
+      ],
+      "member_count": 1,
+      "component_union": [
+        "bdy:key",
+        "seg:items",
+        "seg:v2"
+      ],
+      "component_union_count": 3
+    },
+    {
+      "theme_id": "theme-24",
+      "type": "body",
+      "members": [
+        "alias-1-3::m-1-3-train"
+      ],
+      "member_count": 1,
+      "component_union": [
+        "bdy:apikey",
+        "seg:orders",
+        "seg:v1"
+      ],
+      "component_union_count": 3
+    },
+    {
+      "theme_id": "theme-25",
+      "type": "body",
+      "members": [
+        "alias-1-3::m-1-3-low"
+      ],
+      "member_count": 1,
+      "component_union": [
+        "bdy:apitoken",
+        "seg:orders",
+        "seg:v1"
+      ],
+      "component_union_count": 3
+    },
+    {
+      "theme_id": "theme-26",
+      "type": "body",
+      "members": [
+        "alias-1-0::m-1-0-dist"
+      ],
+      "member_count": 1,
+      "component_union": [
+        "bdy:key",
+        "seg:api",
+        "seg:data"
+      ],
+      "component_union_count": 3
+    },
+    {
+      "theme_id": "theme-27",
+      "type": "body",
+      "members": [
+        "alias-1-2::m-1-2-train"
+      ],
+      "member_count": 1,
+      "component_union": [
+        "bdy:apikey",
+        "seg:items",
+        "seg:v2"
+      ],
+      "component_union_count": 3
+    },
+    {
+      "theme_id": "theme-28",
+      "type": "auth",
+      "members": [
+        "alias-2-3::m-2-3-low"
+      ],
+      "member_count": 1,
+      "component_union": [
+        "auth:read",
+        "qry:permission",
+        "seg:orders",
+        "seg:v1"
+      ],
+      "component_union_count": 4
+    },
+    {
+      "theme_id": "theme-29",
+      "type": "auth",
+      "members": [
+        "alias-2-2::m-2-2-low"
+      ],
+      "member_count": 1,
+      "component_union": [
+        "auth:read",
+        "qry:permission",
+        "seg:items",
+        "seg:v2"
+      ],
+      "component_union_count": 4
+    },
+    {
+      "theme_id": "theme-30",
+      "type": "auth",
+      "members": [
+        "alias-2-1::m-2-1-low"
+      ],
+      "member_count": 1,
+      "component_union": [
+        "auth:read",
+        "qry:permission",
+        "seg:api",
+        "seg:users"
+      ],
+      "component_union_count": 4
+    },
+    {
+      "theme_id": "theme-31",
+      "type": "body",
+      "members": [
+        "alias-1-1::m-1-1-low"
+      ],
+      "member_count": 1,
+      "component_union": [
+        "bdy:apitoken",
+        "seg:api",
+        "seg:users"
+      ],
+      "component_union_count": 3
+    },
+    {
+      "theme_id": "theme-32",
+      "type": "header",
+      "members": [
+        "alias-0-2::m-0-2-low"
+      ],
+      "member_count": 1,
+      "component_union": [
+        "hdr:xapikey",
+        "seg:items",
+        "seg:v2"
+      ],
+      "component_union_count": 3
+    },
+    {
+      "theme_id": "theme-33",
+      "type": "body",
+      "members": [
+        "alias-1-0::m-1-0-train"
+      ],
+      "member_count": 1,
+      "component_union": [
+        "bdy:apikey",
+        "seg:api",
+        "seg:data"
+      ],
+      "component_union_count": 3
+    },
+    {
+      "theme_id": "theme-34",
+      "type": "body",
+      "members": [
+        "alias-1-0::m-1-0-low"
+      ],
+      "member_count": 1,
+      "component_union": [
+        "bdy:apitoken",
+        "seg:api",
+        "seg:data"
+      ],
+      "component_union_count": 3
+    },
+    {
+      "theme_id": "theme-35",
+      "type": "header",
+      "members": [
+        "alias-0-5::m-0-5-low"
+      ],
+      "member_count": 1,
+      "component_union": [
+        "hdr:xapikey",
+        "seg:api",
+        "seg:reports"
+      ],
+      "component_union_count": 3
+    },
+    {
+      "theme_id": "theme-36",
+      "type": "header",
+      "members": [
+        "alias-0-6::m-0-6-train"
+      ],
+      "member_count": 1,
+      "component_union": [
+        "hdr:apikey",
+        "seg:audit",
+        "seg:v3"
+      ],
+      "component_union_count": 3
+    },
+    {
+      "theme_id": "theme-37",
+      "type": "header",
+      "members": [
+        "alias-0-6::m-0-6-dist"
+      ],
+      "member_count": 1,
+      "component_union": [
+        "hdr:xresettoken",
+        "seg:audit",
+        "seg:v3"
+      ],
+      "component_union_count": 3
+    },
+    {
+      "theme_id": "theme-38",
+      "type": "body",
+      "members": [
+        "alias-1-5::m-1-5-dist"
+      ],
+      "member_count": 1,
+      "component_union": [
+        "bdy:key",
+        "seg:api",
+        "seg:reports"
+      ],
+      "component_union_count": 3
+    },
+    {
+      "theme_id": "theme-39",
+      "type": "header",
+      "members": [
+        "alias-0-5::m-0-5-train"
+      ],
+      "member_count": 1,
+      "component_union": [
+        "hdr:apikey",
+        "seg:api",
+        "seg:reports"
+      ],
+      "component_union_count": 3
+    },
+    {
+      "theme_id": "theme-40",
+      "type": "header",
+      "members": [
+        "alias-0-5::m-0-5-dist"
+      ],
+      "member_count": 1,
+      "component_union": [
+        "hdr:xresettoken",
+        "seg:api",
+        "seg:reports"
+      ],
+      "component_union_count": 3
+    },
+    {
+      "theme_id": "theme-41",
+      "type": "header",
+      "members": [
+        "alias-0-4::m-0-4-low"
+      ],
+      "member_count": 1,
+      "component_union": [
+        "hdr:xapikey",
+        "seg:admin",
+        "seg:settings"
+      ],
+      "component_union_count": 3
+    },
+    {
+      "theme_id": "theme-42",
+      "type": "header",
+      "members": [
+        "alias-0-4::m-0-4-train"
+      ],
+      "member_count": 1,
+      "component_union": [
+        "hdr:apikey",
+        "seg:admin",
+        "seg:settings"
+      ],
+      "component_union_count": 3
+    },
+    {
+      "theme_id": "theme-43",
+      "type": "header",
+      "members": [
+        "alias-0-4::m-0-4-dist"
+      ],
+      "member_count": 1,
+      "component_union": [
+        "hdr:xresettoken",
+        "seg:admin",
+        "seg:settings"
+      ],
+      "component_union_count": 3
+    },
+    {
+      "theme_id": "theme-44",
+      "type": "header",
+      "members": [
+        "alias-0-0::m-0-0-low"
+      ],
+      "member_count": 1,
+      "component_union": [
+        "hdr:xapikey",
+        "seg:api",
+        "seg:data"
+      ],
+      "component_union_count": 3
+    },
+    {
+      "theme_id": "theme-45",
+      "type": "header",
+      "members": [
+        "alias-0-3::m-0-3-train"
+      ],
+      "member_count": 1,
+      "component_union": [
+        "hdr:apikey",
+        "seg:orders",
+        "seg:v1"
+      ],
+      "component_union_count": 3
+    },
+    {
+      "theme_id": "theme-46",
+      "type": "header",
+      "members": [
+        "alias-0-3::m-0-3-dist"
+      ],
+      "member_count": 1,
+      "component_union": [
+        "hdr:xresettoken",
+        "seg:orders",
+        "seg:v1"
+      ],
+      "component_union_count": 3
+    },
+    {
+      "theme_id": "theme-47",
+      "type": "header",
+      "members": [
+        "alias-0-6::m-0-6-low"
+      ],
+      "member_count": 1,
+      "component_union": [
+        "hdr:xapikey",
+        "seg:audit",
+        "seg:v3"
+      ],
+      "component_union_count": 3
+    },
+    {
+      "theme_id": "theme-48",
+      "type": "header",
+      "members": [
+        "alias-0-2::m-0-2-train"
+      ],
+      "member_count": 1,
+      "component_union": [
+        "hdr:apikey",
+        "seg:items",
+        "seg:v2"
+      ],
+      "component_union_count": 3
+    },
+    {
+      "theme_id": "theme-49",
+      "type": "header",
+      "members": [
+        "alias-0-2::m-0-2-dist"
+      ],
+      "member_count": 1,
+      "component_union": [
+        "hdr:xresettoken",
+        "seg:items",
+        "seg:v2"
+      ],
+      "component_union_count": 3
+    },
+    {
+      "theme_id": "theme-50",
+      "type": "body",
+      "members": [
+        "alias-1-1::m-1-1-dist"
+      ],
+      "member_count": 1,
+      "component_union": [
+        "bdy:key",
+        "seg:api",
+        "seg:users"
+      ],
+      "component_union_count": 3
+    },
+    {
+      "theme_id": "theme-51",
+      "type": "header",
+      "members": [
+        "alias-0-1::m-0-1-train"
+      ],
+      "member_count": 1,
+      "component_union": [
+        "hdr:apikey",
+        "seg:api",
+        "seg:users"
+      ],
+      "component_union_count": 3
+    },
+    {
+      "theme_id": "theme-52",
+      "type": "header",
+      "members": [
+        "alias-0-1::m-0-1-dist"
+      ],
+      "member_count": 1,
+      "component_union": [
+        "hdr:xresettoken",
+        "seg:api",
+        "seg:users"
+      ],
+      "component_union_count": 3
+    },
+    {
+      "theme_id": "theme-53",
+      "type": "header",
+      "members": [
+        "alias-0-1::m-0-1-low"
+      ],
+      "member_count": 1,
+      "component_union": [
+        "hdr:xapikey",
+        "seg:api",
+        "seg:users"
+      ],
+      "component_union_count": 3
+    },
+    {
+      "theme_id": "theme-54",
+      "type": "header",
+      "members": [
+        "alias-0-0::m-0-0-train"
+      ],
+      "member_count": 1,
+      "component_union": [
+        "hdr:apikey",
+        "seg:api",
+        "seg:data"
+      ],
+      "component_union_count": 3
+    },
+    {
+      "theme_id": "theme-55",
+      "type": "header",
+      "members": [
+        "alias-0-0::m-0-0-dist"
+      ],
+      "member_count": 1,
+      "component_union": [
+        "hdr:xresettoken",
+        "seg:api",
+        "seg:data"
+      ],
+      "component_union_count": 3
+    },
+    {
+      "theme_id": "theme-56",
+      "type": "header",
+      "members": [
+        "alias-0-3::m-0-3-low"
+      ],
+      "member_count": 1,
+      "component_union": [
+        "hdr:xapikey",
+        "seg:orders",
+        "seg:v1"
+      ],
+      "component_union_count": 3
+    },
+    {
+      "theme_id": "theme-57",
+      "type": "body",
+      "members": [
+        "alias-1-2::m-1-2-low"
+      ],
+      "member_count": 1,
+      "component_union": [
+        "bdy:apitoken",
+        "seg:items",
+        "seg:v2"
+      ],
+      "component_union_count": 3
+    },
+    {
+      "theme_id": "theme-58",
+      "type": "auth",
+      "members": [
+        "alias-2-2::m-2-2-train"
+      ],
+      "member_count": 1,
+      "component_union": [
+        "auth:read",
+        "qry:scope",
+        "seg:items",
+        "seg:v2"
+      ],
+      "component_union_count": 4
+    },
+    {
+      "theme_id": "theme-59",
+      "type": "auth",
+      "members": [
+        "alias-2-1::m-2-1-dist"
+      ],
+      "member_count": 1,
+      "component_union": [
+        "qry:adminscope",
+        "seg:api",
+        "seg:users"
+      ],
+      "component_union_count": 3
+    },
+    {
+      "theme_id": "theme-60",
+      "type": "auth",
+      "members": [
+        "alias-2-1::m-2-1-train"
+      ],
+      "member_count": 1,
+      "component_union": [
+        "auth:read",
+        "qry:scope",
+        "seg:api",
+        "seg:users"
+      ],
+      "component_union_count": 4
+    },
+    {
+      "theme_id": "theme-61",
+      "type": "body",
+      "members": [
+        "alias-1-1::m-1-1-train"
+      ],
+      "member_count": 1,
+      "component_union": [
+        "bdy:apikey",
+        "seg:api",
+        "seg:users"
+      ],
+      "component_union_count": 3
+    },
+    {
+      "theme_id": "theme-62",
+      "type": "auth",
+      "members": [
+        "alias-2-0::m-2-0-low"
+      ],
+      "member_count": 1,
+      "component_union": [
+        "auth:read",
+        "qry:permission",
+        "seg:api",
+        "seg:data"
+      ],
+      "component_union_count": 4
+    }
+  ],
+  "component_extraction": "template-string parsing only (regex ${slot} + '/' '?' '&' ':' splitting); no hidden_expected access",
+  "forbidden_keys_in_manifest": [],
+  "clustering": {
+    "similarity": "Jaccard on full component sets (url_segments+query_keys+header_keys+body_fields+auth_scopes)",
+    "agglomerative_linkage": "average",
+    "distance_threshold": 0.4,
+    "jaccard_threshold": 0.6
+  },
+  "query_serialization": "intent url_path header_keys body_keys",
+  "theme_scoring": "cosine(mean TFIDF member centroid, train-fit vectorizer)",
+  "selection": {
+    "expand_while": "softmax_entropy>0.4 OR distinct_component_type_coverage<2",
+    "adaptive_k_range": [
+      2,
+      5
+    ],
+    "max_per_theme": 2
+  },
+  "episodes_have_forbidden_keys": 0,
+  "manifest_sha256": "e378803642cb80a867788819744624305ced2febb30a035259d0f25dd094c1b5"
+}
