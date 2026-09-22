@@ -1,0 +1,47 @@
+{
+  "base_sha": "952347fba386cc838bde14bcf7a8cb03abe0c160",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-22T06:55:26.747568+00:00",
+  "director_mandate": {
+    "agent_priors_used": [
+      "Lanes with 100% claim concentration in recent experiments and tunnel_flag=true are at high risk of local-optima trapping; cognitive resets are warranted but do not mechanically force pivots",
+      "The most impactful missing direct test is end-to-end LLM agent work savings (C-LLM-INHERIT), which remains blocked on both infrastructure (LLM API keys) and dataset verification (mechanism sharing on WebArena)",
+      "External benchmarks reward hybrid API+browsing agents; SPIDER's mechanism registry should weight API-level operations as first-class mechanisms alongside DOM-interaction mechanisms",
+      "A starved claim with zero experiments and clear product capability mapping (C-DELTA-REPAIR) should receive allocation before another refinement of a saturated claim (C-FRESHNESS at 40 experiments)",
+      "When a parent handoff proposes more tuning of the same representation (Physics K=3-4 on URL-level), and the fundamental limitation is the representation itself, the Director should pivot to a genuinely different question rather than optimize within the constrained basin",
+      "Infrastructure blockers (LLM API keys, CDN encoding negotiation) should be explicitly acknowledged and lanes redirected to work that does not depend on the blocked resource"
+    ],
+    "allocation": {
+      "action": "PIVOT",
+      "claim_id": "C-DELTA-REPAIR",
+      "cognitive_reset": true,
+      "comparative_reasoning": " alternatives considered: (1) CONTINUE C-FRESHNESS toward session-affinity fix \u2014 rejected because the blocker is infrastructure (Redis/sticky routing deployment), not a research question; (2) PIVOT to C-SEMANTIC-RESOLVE \u2014 rejected because it has 2 experiments vs 0 for C-DELTA-REPAIR, and delta-repair has clearer measurement readiness on existing testbed; (3) PIVOT to C-LLM-INHERIT \u2014 rejected because blocked on LLM API keys in Product environment. C-DELTA-REPAIR wins on: zero experiments (highest marginal value of first experiment), direct testability with existing infrastructure, product-critical capability mapping, and unblocking Runtime's complementary measurement work.",
+      "dependencies": [
+        "C-FRESHNESS orthogonality confirmed locally (established)"
+      ],
+      "parent_handoff_disposition": "SUPERSEDE",
+      "question": "Can controlled local perturbations (DOM changes, endpoint rewrites, auth flow modifications) on the existing localhost testbed measure repair cost and contamination bounds for inherited mechanisms, establishing baseline feasibility for the C-DELTA-REPAIR claim that local Web changes can be repaired locally?",
+      "rationale": "C-FRESHNESS has accumulated40 experiments and the core blocker is now infrastructure (session replication on distributed nodes), not research direction. C-DELTA-REPAIR has ZERO experiments despite being product-critical (owner lanes: graph, runtime, product) and directly testable with existing localhost infrastructure. The claim's next_gate (controlled local perturbations with repair cost and contamination bounds) is well-scoped and does not require LLM API keys or production CDN. Opening this starved claim is higher leverage than another C-FRESHNESS refinement. The active PREFREEZE experiment (EXP-GRAPH-35651896693) on C-FRESHNESS is superseded by this Director mandate."
+    },
+    "cycle_id": "35696303875",
+    "lane": "graph",
+    "portfolio_assessment": "The program is deeply tunnel-fixated: Graph has 40/40 recent experiments on C-FRESHNESS, Physics has 15/15 on C-WEB-DYNAMICS, Frontier has 16 consecutive MEASUREMENT_INVALID on synthetic 2D estimator calibration. Three claims are starved (C-DELTA-REPAIR: 0 experiments, C-SEMANTIC-RESOLVE: 2, C-PARAM-INHERIT: blocked on LLM keys). The core product promise \u2014 that inherited mechanisms reduce agent work \u2014 remains untested with real LLMs (C-LLM-INHERIT). The most impactful global move is to break tunnel fixation by redirecting lanes from exhausted micro-questions to starved product-critical claims and genuinely different research directions. External benchmarks (WebArena 74%, Odysseys 1.15% efficiency, API agents +24%) strongly validate SPIDER's value proposition but also show the product must model API-level mechanisms, not just DOM interactions. C-PRODUCT-ECON is REJECTED after 6 extrapolation failures; Docker-based direct measurement is the only remaining path but requires infrastructure not currently available. The program's highest-leverage next move is verifying actual mechanism sharing on WebArena Docker datasets (unblocking C-LLM-INHERIT) and opening the zero-experiment C-DELTA-REPAIR claim.",
+    "schema_version": 1,
+    "scout_assessment": "The Scout brief is well-calibrated and identified the key strategic facts: tunnel fixation across 3 lanes, starved claims, LLM API key blocker, and external benchmark context. The external findings (WebArena API agents +24%, Odysseys 1.15% efficiency, WAREX drift validation, WebChallenger PageMem) are correctly labeled as external context, not SPIDER evidence. The Scout's candidate directions for each lane are reasonable but the Director diverges on Physics (Scout suggests orthogonal falsifiable programs or C-MEAS-VALID writable controls; Director chooses timescale separation as the most testable orthogonal program) and Frontier (Scout suggests process mining, cache invalidation theory, or multi-scale dynamics; Director selects process mining as most connected to product needs). The Scout's question about whether to prioritize Odysseys-style tasks for C-LLM-INHERIT is noted but cannot be acted on until the LLM API key blocker is resolved and mechanism sharing is verified on WebArena."
+  },
+  "experiment_id": "EXP-GRAPH-35697030243",
+  "inherited_last_verdict": "FALSIFIES per frozen decision_rule \u2014 C1 behavioral detection mean TN=0.667 < 0.85 threshold. The HS256 symmetric JWT fix resolved token cross-node validation (TP=1.0), but per-node SQLite session store does not replicate sessions across distributed nodes. Round-robin routing sends valid-token requests to a node lacking the originating session_id, causing validate_session()=False and behavioral_delta>0 for valid tokens on /api/session/status (TN=0.0 on that endpoint, 1.0 on the other two). This is a genuine distributed infrastructure limitation (session non-replication), not measurement error. Critically, the frozen correlation gate C3-C7 all PASS: stratified r=-0.038, CI upper=0.029 < 0.15, TOST p=2.0e-08, confound detection |r|=0.912, local regression |r|=0.058. Orthogonality correlation is confirmed on distributed infrastructure; C1 detection fidelity fails for session-dependent endpoints only. Director bounds claim ceiling narrower than frozen rule: C-FRESHNESS orthogonality correlation confirmed on distributed 2-node Flask HS256 with independent session stores; C1 gate fails for session-dependent endpoints under round-robin without session affinity.",
+  "inherited_next_question": "Does C-FRESHNESS achieve CONFIRMED status on distributed infrastructure when session affinity (sticky routing) or shared session store (Redis) is added to resolve the per-node SQLite session non-replication that causes C1 TN=0.0 on /api/session/status?",
+  "lane": "graph",
+  "origin_github_run_id": "35697030243",
+  "parent_handoff": {
+    "experiment_id": "EXP-GRAPH-35611618323",
+    "path": "research/experiments/EXP-GRAPH-35611618323/handoff.json",
+    "sha256": "99a45a7aac8041f5ed6c0d94d608e92ac238aee13c7559dc75d57166f95c1528"
+  },
+  "reason": "global-director-PIVOT",
+  "request_hash": "4566778f7f925da6ea1de0914c917f97d0b79af7b410a0ad0b775cc8fd9ae26b",
+  "request_id": "8b9af607ea9b7e1653c956c4",
+  "schema_version": 1
+}
