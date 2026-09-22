@@ -10,7 +10,6 @@ class ResolutionStatus(str, Enum):
     REPAIRABLE = "REPAIRABLE"
     EXPLORE = "EXPLORE"
     UNKNOWN = "UNKNOWN"
-    STALE = "STALE"
 
 
 @dataclass(frozen=True)
@@ -52,14 +51,3 @@ class Resolution:
     reason: str
     bound_action: dict[str, Any] | None = None
     confidence: float = 0.0
-
-
-@dataclass(frozen=True)
-class FreshnessResult:
-    """Result of a freshness check subprocess."""
-    behavioral_score: float  # 0.0 (fresh) to 1.0 (stale)
-    structural_score: float  # 0 (no variation) to N (unique values)
-    is_stale: bool
-    latency_ms: float
-    status_code: int | None = None
-    headers: dict[str, str] | None = None
