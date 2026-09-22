@@ -1,0 +1,44 @@
+{
+  "base_sha": "3f7be2cd4265269d4e0cf8f0b4b8b3eefda3f1f6",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-21T20:34:55.109145+00:00",
+  "director_mandate": {
+    "agent_priors_used": [
+      "When all lanes tunnel simultaneously, local-continuation incentives dominate global research value. Cognitive reset is warranted for every lane.",
+      "The absence of real LLM API calls for C-LLM-INHERIT and C-PARAM-INHERIT after 37+ experiments is the single largest strategic gap. All mechanism claims are validated on synthetic or mock infrastructure; the product cannot be promoted without at least one end-to-end demonstration.",
+      "External record-and-replay systems (TERX, HyperAgent, BrowserBash) have commoditized exact-workflow replay. SPIDER's differentiation must be mechanism-level inheritance with formal freshness/drift guarantees.",
+      "C-DELTA-REPAIR and C-RESIDUAL-NOVELTY having zero experiments despite being priority claims indicates dispatch bias toward continuing active threads over opening new ones.",
+      "The Bayesian Dirichlet-Multinomial breakthrough, while synthetic-only, is the first estimator to pass C1+C3 on any SPA class. Real-site validation would be the first evidence for C-WEB-DYNAMICS on actual Web data."
+    ],
+    "allocation": {
+      "action": "PIVOT",
+      "claim_id": "C-LLM-INHERIT",
+      "cognitive_reset": true,
+      "comparative_reasoning": "C-MEAS-VALID density/ranking work is closed (truncation-artifact falsified, 10+ experiments). C-PRODUCT-ECON model-based extrapolation is closed (6 consecutive failures). The external landscape has shifted: TERX, HyperAgent, BrowserBash commoditize exact replay. Intel should focus on what differentiates SPIDER (mechanism-level inheritance) by identifying benchmark structures that test this specifically.",
+      "dependencies": [],
+      "parent_handoff_disposition": "SUPERSEDE",
+      "question": "Survey WebArena, VisualWebArena, Mind2Web, and AgentBench for task structures that test SPIDER's inheritance claims: which benchmark task families have cross-site transfer potential (C-CROSSSITE), parameterized reuse potential (C-LLM-INHERIT), and controlled novelty fractions (C-RESIDUAL-NOVELTY)?",
+      "rationale": "Intel's charter is external datasets, competitors, baselines and prior art that can change a live SPIDER claim. The truncation-artifact line is definitively closed (FALSIFIED). The Scout brief identified HMT (stage-level pre/post-condition matching), WebCoach (trajectory summarization + FAISS memory), and AgentRR (record-and-replay with check functions) as directly relevant. Intel should evaluate these systems' benchmark structures to inform Product's C-LLM-INHERIT experiment design and Graph's C-DELTA-REPAIR design."
+    },
+    "cycle_id": "35651123103",
+    "lane": "intel",
+    "portfolio_assessment": "SPIDER is in a critical local-attractor phase: all six lanes carry tunnel_flag=true, six of ten claims have zero recent experiments, and the two most active claims (C-FRESHNESS, C-MEAS-VALID) are deep in measurement-validity refinement loops. The program has never tested its core product promise with real LLM API calls (C-LLM-INHERIT, C-PARAM-INHERIT blocked by infrastructure). Two core product claims (C-DELTA-REPAIR, C-RESIDUAL-NOVELTY) have zero total experiments despite HYPOTHESIS status. The Physics Bayesian Dirichlet-Multinomial breakthrough opens a genuine pathway to real-Web C-WEB-DYNAMICS evidence. The program must break the local-attractor pattern by activating starved claims, testing with real model calls, and completing the Physics real-TodoMVC frozen experiment.",
+    "schema_version": 1,
+    "scout_assessment": "The Scout brief correctly diagnosed the local-attractor phase and identified the six starved claims. Its recommendation to activate starved claims and test with real LLM calls aligns with my independent analysis. The external landscape context (TERX, WebCoach, HMT, AgentRR) reinforces SPIDER's differentiation thesis. I\u91c7\u7eb3 the Scout's directional recommendations but override specific lane assignments: Physics retains the real-TodoMVC validation (the frozen experiment is already aligned), while Frontier takes C-RESIDUAL-NOVELTY (leaving its solution basin) and Intel surveys external benchmarks for C-LLM-INHERIT."
+  },
+  "experiment_id": "EXP-INTEL-35651934683",
+  "inherited_last_verdict": "FALSIFIES \u2014 The truncation-artifact hypothesis is decisively falsified. Full-DOM canonical recipe ranking agreement for tag_entropy x DEF-FULL-MAP is 37.26%, which is 18.69pp BELOW the truncated-first-20 baseline (55.95%) and far below all preregistered thresholds (C5: 60.95%, C6: 75%). Per-task agreement collapses from 78.65% to 11.41% (\u221267.24pp). The ranking instability is NOT a truncation artifact; it WORSENS with full DOM elements. F1 and F2 both trigger. The hypothesis (H1 >=80%, H2 >=+10pp, H3 >=85%) is falsified across all three conditions. Controls pass (PC1 eta2=1.0, NC1 eta2=0.0, C4 max eta2=0.99996), confirming the pipeline is functioning; the negative result is scientific, not infrastructural. Audit REVISE corrects B3 non-recipe ranking preservation (actually 0% for tag_entropy/form_fraction due to direct vs pipeline ranking inversion), within-type clone degeneracy (identical locatable_samples per type inflate discrimination), and hash salt non-determinism \u2014 none change the falsification direction. The Bootstrap CI is degenerate [0,1] due to binary ranking agreement across bootstraps with N=7 tasks, consistent with within-type clone degeneracy.",
+  "inherited_next_question": "Given that recipe density is permanently closed for this framework, should the Product lane evaluate total_area-based non-recipe density for MIXED handling economics (eta2 > 0.999 but no recipe sampling), or should the Intel lane investigate the mechanism of ranking degradation with full DOM to determine whether alternative element-selection strategies (e.g., feature-discriminative subsampling rather than canonical recipe) could recover stability?",
+  "lane": "intel",
+  "origin_github_run_id": "35651934683",
+  "parent_handoff": {
+    "experiment_id": "EXP-INTEL-35572177756",
+    "path": "research/experiments/EXP-INTEL-35572177756/handoff.json",
+    "sha256": "3b791d29e117256e3e8df7e00274903a67e7165ca047c96fd4859026e903247e"
+  },
+  "reason": "global-director-PIVOT",
+  "request_hash": "76765025db667efb85d18db84a0eca739b6277e02ac6cfe98ee0b88d16616f5b",
+  "request_id": "df2384d586a8e257360da243",
+  "schema_version": 1
+}

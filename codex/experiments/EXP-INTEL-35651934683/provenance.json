@@ -1,0 +1,148 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-35651934683",
+  "lane": "intel",
+  "created_at": "2026-09-21T20:34:55.109145+00:00",
+  "frozen_at": "2026-09-21T20:40:18.311458+00:00",
+  "executed_at": "2026-09-21T21:00:00.000000+00:00",
+  "base_sha": "3f7be2cd4265269d4e0cf8f0b4b8b3eefda3f1f6",
+  "request_hash": "76765025db667efb85d18db84a0eca739b6277e02ac6cfe98ee0b88d16616f5b",
+  "freeze_hash": {
+    "prereg.md": "2487aaca67969bc452df8f86ab2068cfcce3ec5e50aea4c25cb920d42d7ae6af",
+    "request.json": "cfcd41df4428a9c32908ec2982e56384c1d5ac8efc4a2715c013d929b2fa4cdf",
+    "spec.json": "afcccda8dbcf0f78d05733ae1e2fae035aab7bac6cad7044d7e8101a4fc93ee3"
+  },
+  "environment": {
+    "platform": "linux",
+    "python_version": "3.12",
+    "model_id": "opencode/mimo-v2.5-free",
+    "execution_mode": "EXECUTE (frozen design)"
+  },
+  "data_sources": [
+    {
+      "name": "WebArena repository",
+      "url": "https://github.com/web-arena-x/webarena",
+      "access_method": "GitHub API + raw file fetch",
+      "files_read": [
+        "README.md",
+        "config_files/examples/1.json",
+        "config_files/examples/2.json",
+        "config_files/examples/3.json",
+        "config_files/examples/4.json",
+        "scripts/generate_test_data.py"
+      ],
+      "commit_ref": "main branch"
+    },
+    {
+      "name": "WebArena paper",
+      "url": "https://arxiv.org/abs/2307.13854",
+      "access_method": "arxiv HTML",
+      "key_findings": "812 tasks, 6 site types, 12 store instances for shopping"
+    },
+    {
+      "name": "VisualWebArena repository",
+      "url": "https://github.com/web-arena-x/visualwebarena",
+      "access_method": "GitHub raw file fetch",
+      "files_read": ["README.md"],
+      "key_findings": "910 tasks, 3 site types, shares WebArena shopping instances"
+    },
+    {
+      "name": "Mind2Web repository",
+      "url": "https://github.com/OSU-NLP-Group/Mind2Web",
+      "access_method": "GitHub + HuggingFace dataset page",
+      "key_findings": "2350 tasks, 137 websites, 31 domains, official 3-way split"
+    },
+    {
+      "name": "Mind2Web paper",
+      "url": "https://arxiv.org/abs/2306.06070",
+      "access_method": "arxiv HTML",
+      "key_findings": "NeurIPS 2023 Spotlight, cross-task/website/domain splits"
+    },
+    {
+      "name": "AgentBench paper",
+      "url": "https://arxiv.org/abs/2308.03688",
+      "access_method": "arxiv HTML",
+      "key_findings": "ICLR 2024, 8 environments, web component is Mind2Web + WebShop"
+    },
+    {
+      "name": "HMT paper",
+      "url": "https://arxiv.org/abs/2603.07024",
+      "access_method": "arxiv HTML",
+      "key_findings": "Hierarchical Memory Tree, stage-level pre/post-condition matching, tested on WebArena+Mind2Web"
+    },
+    {
+      "name": "WebCoach paper",
+      "url": "https://arxiv.org/abs/2511.12997",
+      "access_method": "arxiv HTML",
+      "key_findings": "Trajectory summarization + FAISS memory, tested on WebVoyager"
+    },
+    {
+      "name": "AgentRR repository",
+      "url": "https://github.com/ip174/agentrr",
+      "access_method": "GitHub",
+      "key_findings": "Deterministic record-and-replay debugger, NOT mechanism transfer"
+    }
+  ],
+  "artifacts": [
+    {
+      "path": "research/intel/benchmark_structure_analysis.py",
+      "sha256": "04aa9b5738c205f64bd34e2e16d0167590a2bddcec1652a4bd300242a2fa03e9",
+      "role": "code",
+      "description": "Analysis script computing M1-M4 metrics for all benchmarks"
+    },
+    {
+      "path": "research/intel/benchmark_analysis_output.json",
+      "sha256": "3ce1a491da302e75e429c4fefacfabf5ca4c34b0c568d6b1b377da311fcbcab2",
+      "role": "derived",
+      "description": "Computed metrics and decision rule output"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-35651934683/result.json",
+      "sha256": "732938831c9349938f0829c5da00c54d6fdd147926a90f26531565c0eaaec3fc",
+      "role": "derived",
+      "description": "Canonical experiment result packet"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-35651934683/report.md",
+      "sha256": "1bbaf6e27f7f3b22cecca34416b2c4aa7caa5c734484d341b3014868a6f092c1",
+      "role": "derived",
+      "description": "Human-readable experiment report"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-35651934683/provenance.json",
+      "sha256": "4e9f538d62e6377190678d33cb7ac7232a013e8b33a0f261ed8819899bab333a",
+      "role": "derived",
+      "description": "This provenance record"
+    }
+  ],
+  "prior_experiment_refs": [
+    {
+      "experiment_id": "EXP-INTEL-33842055594",
+      "relevance": "WebArena Docker compatibility: accessibility tree format is DIRECTLY_USABLE for SPIDER fragment extraction",
+      "key_finding": "WebArena provides 3 observation types (accessibility_tree, html, image); default is accessibility_tree with full DOM structure"
+    },
+    {
+      "experiment_id": "EXP-INTEL-33945226776",
+      "relevance": "WebArena task complexity and fragment yield analysis",
+      "key_finding": "6 site types, shopping/gitlab/shopping_admin recommended for highest element diversity"
+    },
+    {
+      "experiment_id": "EXP-INTEL-33925056324",
+      "relevance": "SPIDER fragment extraction adapter for WebArena (224 LOC, 100% recall on synthetic)",
+      "key_finding": "Adapter handles exact WebArena observation format; transformation cost is LOW"
+    },
+    {
+      "experiment_id": "EXP-INTEL-35572177756",
+      "relevance": "Parent handoff: truncation-artifact falsified, recipe density permanently closed",
+      "key_finding": "SUPERSEDED by Director mandate PIVOT to C-LLM-INHERIT benchmark structure analysis"
+    }
+  ],
+  "reproducibility": {
+    "method": "Structural analysis of public benchmark repositories and papers",
+    "no_docker": true,
+    "no_browser": true,
+    "no_llm_api": true,
+    "dependencies": "stdlib only (json, hashlib, pathlib)",
+    "data_access": "Public GitHub repositories and arxiv papers; no proprietary access needed"
+  }
+}

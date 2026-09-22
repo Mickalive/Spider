@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-35697055679",
+  "lane": "intel",
+  "decision": "MIXED — frozen decision rule triggers MIXED on clause (2): duplication fraction 0.9479 >=0.8. All measurements completed validly (status COMPLETE). Cross-store mechanism overlap is vacuous null (not 0.0) because WebArena-Verified v2 defines exactly one shopping store. Parameterization prevalence 0.8958 and positive control PASS both exceed frozen thresholds. Audit PASS confirms all recomputed metrics match producer (except minor duplication CI discrepancy not threshold-relevant).",
+  "claim_updates": [
+    {
+      "claim_id": "C-LLM-INHERIT",
+      "status": "EXPERIMENTAL",
+      "reason": "No LLM agent inheritance tested (experiment is prerequisite dataset-structure verification only). Within-store prerequisite is validated: 172/192 shopping tasks (0.8958, 95% CI [0.8542,0.9375]) and 41/49 templates (0.8367) have non-empty instantiation_dict, exceeding frozen threshold 0.1 and heuristic M2=0.8, and 5/5 intent-to-element mapping to live AX tree passes. However cross-site prerequisite is falsified for WebArena-Verified v2: exactly one Magento 'One Stop Market' store exists (192 tasks over 49 templates, zero per-store identifiers, single container am1n3e/webarena-verified-shopping@sha256:3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb), so train-on-N-stores / test-on-held-out-stores design is impossible on this dataset. MIXED duplication 0.9479 is parameterized family reuse (91.8% of reuse-family tasks differ in instantiation_dict, exact-copy fraction 0.0781), not vacuous copying, enabling within-store template-family hold-out design. Status remains EXPERIMENTAL (structural prerequisite refined from documentation-level cross-site to measured within-store), bounded to single-store v2."
+    },
+    {
+      "claim_id": "C-CROSSSITE",
+      "status": "HYPOTHESIS",
+      "reason": "No cross-site transfer tested. Frozen cross-store overlap fraction is vacuous null, not 0.0 — WebArena-Verified v2 defines exactly one shopping store (dataset census 187 ('shopping',)+5 ('shopping','reddit'), source config single container, live DB single_store_mode=1), so literal 0.0 would be absent-measurement artifact (audit critical_pass). Documentation-level M1=1.0 (12 store instances from parent EXP-INTEL-35651934683) is falsified as a dataset property for v2; it is a WebArena v1 property not present in v2 (B1 controls.pass=false). Within-store template reuse 39/49 templates (0.7959) and 182/192 tasks (0.9479) shows same-mechanism reuse exists but only within the single store, not across sites. Claim remains HYPOTHESIS — cross-site mechanism transfer untested, candidate testbed for v2 does not exist."
+    }
+  ],
+  "product_action": "none",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "Can within-store template-family hold-out (train on N tasks of a family, test on held-out tasks of the same family) on WebArena-Verified v2 single shopping store provide identifiable same-mechanism parameterized transfer for C-LLM-INHERIT, and does Mind2Web cross-website splits show measurable same-mechanism overlap when inspected at task-sample level?",
+  "reason": "Audit PASS (producer_claim_supported=true, 0 required_fixes). Status COMPLETE with outcome MIXED is correct per packet semantics: valid measurement transaction, not execution failure. Frozen rule SURVIVES requires ALL five clauses; clause (1) is vacuous null (single store, not triggerable as FALSIFIED-IN-SETTING), clause (2) duplication 0.9479 >=0.8 triggers MIXED per frozen definition ('tasks duplicated, inheritance less meaningful'), clauses (3)-(5) pass (parameterization 0.8958 >=0.1, search mechanism PASS on homepage AX 1426 nodes via CDP, infra 0 blocked). Diagnostic decomposition is decisive: only 15/192 (0.0781) are exact copies; 167/182 reuse-family tasks are parameterized variants (audit recomputed exactly). B1_DOC_M1_12_STORES falsified strongly on v2 (single store), B2 heuristic exceeded (0.8958 >0.8), B3/B4 correctly nulled, NC1 correctly nulled under 'if Docker available' guard, bootstrap M3 CI matches exactly. Representation loss bounded to initial-viewport only, no post-navigation cart/checkout. No new LLM or cross-site evidence accumulated beyond infrastructure/dataset correction. Promotion to Product Core not warranted (intel lane, no audited kernel code). Continue=false because next step is Product lane design requiring new frozen experiment, not immediate chaining.",
+  "evidence_refs": [
+    "research/experiments/EXP-INTEL-35697055679/spec.json frozen decision_rule MIXED clause duplication>=0.8",
+    "research/experiments/EXP-INTEL-35697055679/result.json metrics M1_mechanism_overlap_fraction_across_stores=null M2_duplication_fraction_identical_template=0.9479 M2_copy_fraction_identical_template_and_instantiation=0.0781 M3_parameterization_task_fraction=0.8958 M3_parameterization_template_fraction=0.8367 M1_tasklevel_template_reuse_fraction=0.7959 M8_distinct_intent_templates=49 controls",
+    "research/experiments/EXP-INTEL-35697055679/result.json observations WebArena-Verified v2 single shopping store 192 tasks 49 templates no per-store identifiers",
+    "research/experiments/EXP-INTEL-35697055679/result.json validity_notes[0] vacuous M1 not FALSIFIED-IN-SETTING validity_notes[1] duplication is parameterized families",
+    "research/experiments/EXP-INTEL-35697055679/audit.json status PASS producer_claim_supported true claim_ceiling",
+    "research/experiments/EXP-INTEL-35697055679/audit.json validity_findings critical_pass M1 vacuous correctly nulled, moderate M2 decomposition verified, minor bootstrap CI match",
+    "research/experiments/EXP-INTEL-35697055679/audit.json baseline_findings B1 strong_falsification single store B2 measured_exceeds_heuristic",
+    "research/experiments/EXP-INTEL-35697055679/audit.json recomputed_metrics M2 182/192 M3 172/192 M1_tasklevel 39/49",
+    "research/experiments/EXP-INTEL-35697055679/report.md sections 3-6 single-store premise falsified, duplication parameterized reuse, decision-rule application MIXED",
+    "research/experiments/EXP-INTEL-35697055679/provenance.json image_digest sha256:3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb dataset local_sha256 d65275660814663375028e9017e1f929e3c38321041b125795e2713b52243d30",
+    "research/experiments/EXP-INTEL-35697055679/artifacts/raw/webarena-verified.json sha256 d65275660814663375028e9017e1f929e3c38321041b125795e2713b52243d30",
+    "research/experiments/EXP-INTEL-35697055679/artifacts/raw/axtree_task_514.json sha256 598cbbbb30839181b4e299a1e5ca8c3b3ce2a46e8790f3b15bfd5c676d6b9b07",
+    "research/experiments/EXP-INTEL-35697055679/artifacts/derived/measurements.json sha256 4f5c9ac111a1c23b0fe4bf766a03e9bec597dcaa003063b3615b40bd77dff7b8",
+    "research/experiments/EXP-INTEL-35697055679/artifacts/derived/bootstrap_ci.json sha256 954899ecb0a15cae06a1c7f94ab9e108b18ed5a45ea38e17f72497cb90b8f971",
+    "request.json director_mandate PIVOT to C-LLM-INHERIT resolving audit VF5"
+  ]
+}

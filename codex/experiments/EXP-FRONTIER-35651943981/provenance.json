@@ -1,0 +1,82 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-FRONTIER-35651943981",
+  "lane": "frontier",
+  "execution_timestamp": "2026-09-22T12:33:00+00:00",
+  "github_run_id": "35651943981",
+  "github_run_attempt": "2",
+  "pre_execute_sha": "67c80e99db0b60e4ec2c990228ef758e719ae6f8",
+  "base_sha": "3f7be2cd4265269d4e0cf8f0b4b8b3eefda3f1f6",
+  "analyzer_script": "research/experiments/EXP-FRONTIER-35651943981/run_experiment.py",
+  "script_hashes": {
+    "request.json": "482030f631b57e348726e98db9e8bf408d6258d686327fb1ab8fca7b24a602f8",
+    "spec.json": "b9a3e753918f375c42489b7c654770bc04f6bdb4cc1e3efc25ff85b7fd35b204",
+    "prereg.md": "131699afb1b91e53052493dabc42be9753f51ca4a783325b37ad4b5af4887ea2",
+    "freeze.json": "698dae8e68a19ea296df2f54991eb173b282061637583099d08348534090404f",
+    "run_experiment.py": "4e43abb5a3047b534ad69d0bd2a55952597c2f769984d4b2401ed4b4885b2e54",
+    "raw_evidence.json": "aff85131e2c045551cfd32a656e910aab5eed36d6281dcdecf1f82337288d2b3",
+    "derived_metrics.json": "1d0956371a187a97f8fcdd1a10b9e313326ae8172373da4668d666d443f31ede",
+    "result.json": "6a13bac74cdff6b18ccf70cfefb68c670600fc5720f877a379f7b36b3faf1217",
+    "report.md": "c017a104767d838aab7a6ed1a05d97fecb3e40190ded546056a8b59c3bfc5ef0"
+  },
+  "result_hash": "6a13bac74cdff6b18ccf70cfefb68c670600fc5720f877a379f7b36b3faf1217",
+  "report_path": "research/experiments/EXP-FRONTIER-35651943981/report.md",
+  "status": "COMPLETE",
+  "outcome": "FALSIFIES",
+  "claim": "C-RESIDUAL-NOVELTY",
+  "environment": {
+    "python_version": "3.12.14",
+    "numpy_version": "2.5.3",
+    "scipy_version": "1.18.1",
+    "platform": "linux",
+    "model": "muse-spark-1.2-contributor-free"
+  },
+  "frozen_inputs": {
+    "request_hash": "482030f631b57e348726e98db9e8bf408d6258d686327fb1ab8fca7b24a602f8",
+    "spec_hash": "b9a3e753918f375c42489b7c654770bc04f6bdb4cc1e3efc25ff85b7fd35b204",
+    "prereg_hash": "131699afb1b91e53052493dabc42be9753f51ca4a783325b37ad4b5af4887ea2",
+    "freeze_hash": "698dae8e68a19ea296df2f54991eb173b282061637583099d08348534090404f"
+  },
+  "parent_handoff": {
+    "experiment_id": "EXP-FRONTIER-35401996615",
+    "path": "research/experiments/EXP-FRONTIER-35401996615/handoff.json",
+    "sha256": "d2393ea11d4a62073594068c2c4d9fa3bc54666dcb13ac1a1eff1e2af9934f75"
+  },
+  "total_tasks": 150,
+  "total_records": 750,
+  "grid": "5 novelty fractions x 3 task lengths x10 instances x4 conditions x5 reps = 3000 simulated runs (action_count proxy)",
+  "execution_seconds": 2.1,
+  "reproducibility": {
+    "seed": 44,
+    "rng": "random.Random + np.random.RandomState with hash-based rep seeding",
+    "cost_model_deterministic": "known*1.0 + novel*2.8 +0.5 overhead; cold=2.0*length +-0.4; retrieval=cold*(1-0.25*(1-novelty))"
+  },
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-FRONTIER-35651943981/run_experiment.py",
+      "sha256": "4e43abb5a3047b534ad69d0bd2a55952597c2f769984d4b2401ed4b4885b2e54",
+      "role": "code"
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-35651943981/raw_evidence.json",
+      "sha256": "aff85131e2c045551cfd32a656e910aab5eed36d6281dcdecf1f82337288d2b3",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-35651943981/derived_metrics.json",
+      "sha256": "1d0956371a187a97f8fcdd1a10b9e313326ae8172373da4668d666d443f31ede",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-35651943981/result.json",
+      "sha256": "6a13bac74cdff6b18ccf70cfefb68c670600fc5720f877a379f7b36b3faf1217",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-35651943981/report.md",
+      "sha256": "c017a104767d838aab7a6ed1a05d97fecb3e40190ded546056a8b59c3bfc5ef0",
+      "role": "derived"
+    }
+  ],
+  "notes": "Harness emulates distill_parameterized semantics; kernel has only literal distill. No real LLM/browser. Permutation tests 1000 perms per Spearman. All hashes repository-relative."
+}

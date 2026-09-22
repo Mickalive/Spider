@@ -1,0 +1,50 @@
+{
+  "experiment_id": "EXP-PRODUCT-35697049382",
+  "lane": "product",
+  "claim_ids": ["C-FRESHNESS"],
+  "question": "Can the validated behavioral+structural parallel-channel freshness-detection architecture (orthogonality confirmed at delta=0.15 across 6 independent localhost mock experiments, r=0.002-0.046, CI upper 0.06-0.135, all TOST PASS, audit PASS) be wired into the SPIDER kernel (src/spider/kernel.py) as a freshness-check subprocess that runs without new LLM calls, using HTTP requests to the mechanism's target endpoint to detect auth/session/API drift — and does the integration (a) correctly gate resolution of stale mechanisms, (b) preserve the orthogonality property at delta=0.15, (c) add less than 200ms latency overhead per resolution call, and (d) not regress the existing kernel test suite?",
+  "hypothesis": "A freshness_check() subprocess added to SpiderKernel that probes the mechanism's endpoint via HTTP and computes a behavioral_score (token/session/auth drift detection) and a structural_score (ETag/Cache-Control/response-hash drift detection) will: (1) detect expired/invalid tokens with TP >= 0.85 when the mechanism's auth_scope is stale; (2) tolerate structural noise (optional field churn, response-time jitter, field-type normalization) with FP <= 0.10; (3) maintain behavioral-structural orthogonality at delta=0.15 (stratified pooled Pearson r CI upper < 0.15, TOST p_upper < 0.05); (4) gate resolution by returning ResolutionStatus.STALE for mechanisms whose behavioral freshness_score exceeds a calibrated threshold, causing resolve() to return UNKNOWN for stale mechanisms; (5) add < 200ms median latency overhead per resolve() call on localhost; (6) pass all existing kernel tests without modification.",
+  "falsifier": "The integration is FALSIFIED if ANY of: (F1) behavioral drift detection TP < 0.85 on expired-token drift across 3 endpoints (the parallel-channel architecture's validated detection capability is lost during kernel wiring); (F2) structural noise FP > 0.10 on 240 noise-only samples (the architecture's noise tolerance is lost); (F3) behavioral-structural orthogonality breaks: stratified pooled Pearson r CI upper >= 0.15 OR TOST p_upper >= 0.05 at delta=0.15 (the independence property that justifies the parallel-channel architecture is destroyed by kernel integration); (F4) any existing kernel test in tests/test_kernel.py fails after integration (the integration introduces a regression); (F5) median latency overhead >= 200ms per resolve() call (the subprocess is too expensive for production use).",
+  "baselines": [
+    {
+      "id": "B-NO-FRESHNESS",
+      "description": "Current kernel.py resolve() with no freshness checking — the default baseline representing the status quo. Mechanisms are resolved purely by intent match, preconditions, applicability guards, parameter_slots, and confidence. No HTTP probes, no drift detection.",
+      "expected": "resolve() returns EXECUTABLE for any mechanism whose preconditions match, regardless of staleness. All existing tests pass. Zero latency overhead from freshness."
+    },
+    {
+      "id": "B-BEHAVIORAL-ONLY",
+      "description": "Freshness gate using only behavioral_score (token validation failure rate, session state change). Structural signals are not computed. This tests whether behavioral alone is sufficient for kernel gating.",
+      "expected": "TP >= 0.85 on expired tokens, but may have higher FP on structural noise if behavioral signal alone cannot distinguish drift from noise. Orthogonality not applicable (single channel)."
+    },
+    {
+      "id": "B-STRUCTURAL-ONLY",
+      "description": "Freshness gate using only structural_score (ETag/Cache-Control header cardinality, response-body hash). Behavioral signals are not computed. This tests whether structural alone is sufficient.",
+      "expected": "FP <= 0.10 on structural noise (structural channel is noise-tolerant per validated architecture), but TP may be < 0.85 on expired tokens (structural channel does not detect auth drift per validated architecture)."
+    }
+  ],
+  "positive_control": {
+    "id": "PC-EXPIRED-TOKEN",
+    "description": "Mechanism with auth_scope='bearer' stored against a Flask+PyJWT mock endpoint. Token is expired (JWT exp claim in the past). The freshness_check() probe sends an HTTP request with the expired token and receives 401. Behavioral signal should detect the drift (behavioral_score > threshold). Structural signal should be independent (ETag/Cache-Control still present on 401 response body). TP >= 0.85 required.",
+    "implementation": "Reuse the existing EXP-PRODUCT-35445596342 testbed_server.py mock (Flask 3.1.3 + PyJWT HS256 + SQLite WAL + TTL cache). Mechanism stored with auth_scope matching the mock's JWT configuration. Probe target: /api/user/profile endpoint."
+  },
+  "null_control": {
+    "id": "NC-STRUCTURAL-NOISE",
+    "description": "Mechanism with valid (non-expired) token. Structural noise patterns applied: optional_field_addition (add 1-5 unused fields to /api/schema response), description_change (modify descriptive text), response_time_jitter (add 10-100ms uniform delay), field_type_normalization (change field types in schema). FP <= 0.10 required — behavioral signal must not fire on structural noise.",
+    "implementation": "Same testbed_server.py mock with noise injection via query parameters (?noise=optional_field_addition&size=10). 240 noise-only samples (4 noise types x 60 each)."
+  },
+  "measurement_validity": [
+    "1. The freshness_check() subprocess must use real HTTP requests to the mock endpoint (not mocked/deterministic responses) — this tests the actual kernel→HTTP→signal pipeline.",
+    "2. Behavioral and structural signals must be computed from HTTP response attributes (headers, status code, body), not from internal kernel state or mechanism metadata.",
+    "3. The orthogonality measurement must use endpoint-stratified pooled Pearson r on non-304 samples only, matching the validated protocol from EXP-GRAPH-35353011131 and EXP-PRODUCT-35445596342.",
+    "4. Latency measurement must use time.perf_counter() around the freshness_check() call only (not including mock server startup), averaged over 100 resolve() calls.",
+    "5. The existing kernel tests must be run unmodified (tests/test_kernel.py) to verify no regression.",
+    "6. The freshness gate must NOT use LLM calls — the subprocess must be purely HTTP-based signal computation. This is a hard constraint from the Director mandate.",
+    "7. The structural signal must use headers-only extraction (ETag, Cache-Control, request_id entropy) matching the validated protocol. Body-hash structural signal is excluded due to the V1 confound identified in EXP-GRAPH-35445595108.",
+    "8. Token management for the mock must use a single JWT signing key (HS256 shared secret) to avoid the RSA key-sharing confound from EXP-GRAPH-35572179326."
+  ],
+  "decision_rule": "The kernel integration SURVIVES_CURRENT_TEST if ALL of: (C1) behavioral drift detection TP >= 0.85 across all 3 endpoints on expired-token positive control (PC-EXPIRED-TOKEN); (C2) behavioral FP rate <= 0.10 on 240 noise-only samples (NC-STRUCTURAL-NOISE); (C3) at least 2/3 endpoints have behavioral_signal_std > 0.05 AND at least 2/3 have structural_signal_std > 0.05 in the 8 co-occurring conditions; (C4) 95% CI upper bound of endpoint-stratified pooled Pearson r (non-304 samples only) < 0.15 AND TOST p_upper < 0.05 at delta=0.15; (C5) all 3 existing kernel tests in tests/test_kernel.py pass without modification; (C6) median latency overhead per freshness_check() call < 200ms (measured over 100 calls on localhost). The integration is FALSIFIED if ANY condition fails. MEASUREMENT_INVALID if the mock endpoint is unreachable or the testbed construction fails.",
+  "product_consequence_positive": "C-FRESHNESS advances from EXPERIMENTAL toward PRODUCT_CORE. The kernel gains end-to-end freshness detection without LLM calls. Parallel-channel architecture is justified for integration into the shipping kernel at the localhost mock ceiling. Product can proceed to: (a) n>=800 non-304 re-run for delta=0.10 inference; (b) distributed CDN/OAuth validation; (c) broader task corpus integration.",
+  "product_consequence_negative": "C-FRESHNESS remains EXPERIMENTAL. The validated parallel-channel architecture cannot be wired into the kernel without losing its detection/orthogonality properties. Product must either: (a) redesign the freshness gate with a different signal extraction approach; (b) accept that freshness detection requires a standalone subprocess outside the kernel; (c) pivot to alternative freshness mechanisms (e.g., periodic background re-validation).",
+  "estimated_cost": "Low: single GitHub Actions run, ~500 HTTP requests to localhost mock, zero LLM calls, zero external API calls. Estimated wall-clock: < 5 minutes. Infrastructure: Python 3.12, Flask 3.1.3, PyJWT 2.14.0, requests 2.34.2 (all already installed per parent audit).",
+  "expected_information_gain": "High: this is the minimum-cost experiment that resolves the single binding question from the Director mandate — whether the validated C-FRESHNESS architecture can be productized into the kernel. A positive result (SURVIVES) changes a product architecture decision (parallel-channel justified for kernel integration). A negative result (FALSIFIED) identifies the specific integration failure mode and redirects product strategy. Either outcome is decisive for C-FRESHNESS claim advancement."
+}
