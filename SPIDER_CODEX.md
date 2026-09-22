@@ -4,7 +4,7 @@ Pre-2.0 canonical memory remains frozen at `archive/spider-codex-ultimate:SPIDER
 
 Canonical Research 2.0 evidence lives in `codex/experiments/<experiment_id>/`.
 Use `codex/index.json` and `codex/claim_state.json` to locate relevant packets; do not load all experiment bodies by default.
-Validated experiments: **220**. Coverage gaps: **0**. Quarantined packets: **0**.
+Validated experiments: **221**. Coverage gaps: **0**. Quarantined packets: **0**.
 
 ## Experiment index
 
@@ -230,6 +230,7 @@ Validated experiments: **220**. Coverage gaps: **0**. Quarantined packets: **0**
 | EXP-PHYSICS-35697037202 | physics | REVISE | MIXED | C-WEB-DYNAMICS | `55247071f45a` |
 | EXP-RUNTIME-35697043449 | runtime | REVISE | SUPPORTS — all five frozen decision-rule conditions satisfied (C1-C5). Permission escalation discrimination 1.0, session invalidation discrimination 1.0, null control 0.0 with CI containing 0.0, full-vector >= max baseline, null control <= 0.05. However, claim ceiling is narrowed per audit: discrimination is deterministic (1 unique fingerprint per state, degenerate bootstrap CI), C4 is vacuous (full == body == status == 1.0 because status and body change simultaneously), and results are bounded to localhost Flask dev server with maximally-distinct writable controls. C-MEAS-VALID remains EXPERIMENTAL with expanded ceiling. C-FRESHNESS and C-DELTA-REPAIR unblocked for localhost synthetic testing but NOT for distributed production testing. | C-MEAS-VALID | `a1bfd9b8fd07` |
 | EXP-PRODUCT-35697049382 | product | REVISE | REVISE — kernel freshness_check subprocess is wired and detects drift (TP 1.0) with noise tolerance (FP 0.0) at reduced N, but frozen SURVIVES_CURRENT_TEST does not hold per spec: orthogonality NOT demonstrated (Phase B degenerate, producer pooled A+B+C to manufacture variance yielding anti-correlation r=-0.53, one-sided TOST passes but two-sided fails), variance gate C3 artifact, missing parallel-channel baselines, and trivial regression; audit REVISE, producer_claim_supported=false | C-FRESHNESS | `4b66117fcb20` |
+| EXP-INTEL-35697055679 | intel | PASS | MIXED — frozen decision rule triggers MIXED on clause (2): duplication fraction 0.9479 >=0.8. All measurements completed validly (status COMPLETE). Cross-store mechanism overlap is vacuous null (not 0.0) because WebArena-Verified v2 defines exactly one shopping store. Parameterization prevalence 0.8958 and positive control PASS both exceed frozen thresholds. Audit PASS confirms all recomputed metrics match producer (except minor duplication CI discrepancy not threshold-relevant). | C-LLM-INHERIT, C-CROSSSITE | `f95178a51de3` |
 
 ## Latest recorded claim events
 
@@ -237,9 +238,9 @@ These are chronological latest events, not an automatic truth ranking.
 
 | Claim | Status | Experiment | Lane |
 |---|---|---|---|
-| C-CROSSSITE | HYPOTHESIS | EXP-INTEL-35651934683 | intel |
+| C-CROSSSITE | HYPOTHESIS | EXP-INTEL-35697055679 | intel |
 | C-FRESHNESS | EXPERIMENTAL | EXP-PRODUCT-35697049382 | product |
-| C-LLM-INHERIT | EXPERIMENTAL | EXP-INTEL-35651934683 | intel |
+| C-LLM-INHERIT | EXPERIMENTAL | EXP-INTEL-35697055679 | intel |
 | C-MEAS-VALID | EXPERIMENTAL | EXP-RUNTIME-35697043449 | runtime |
 | C-PARAM-INHERIT | EXPERIMENTAL | EXP-PRODUCT-35353007958 | product |
 | C-PRODUCT-ECON | REJECTED | EXP-INTEL-35551517470 | intel |
