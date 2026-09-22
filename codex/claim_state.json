@@ -631,6 +631,16 @@
         "claim_id": "C-WEB-DYNAMICS",
         "status": "HYPOTHESIS",
         "reason": "MEASUREMENT_INVALID per frozen gated decision_rule: G1 positive correlated control fails valid centering (|null_mean| 0.1297 >0.1, null_std 0.0094 <0.01) and G4 primary null degenerate on both R1/R2 (same values), despite BC 0.688 bits p_raw 0.001 p_bonf 0.00799 gap 0.688 over B-DOM-SIMILARITY and B-MARKOV-1. Audit confirms pipeline NOT blind (signal far exceeds 0.30 threshold, Cohen d 73.1) and failure is borderline estimator calibration (bias floor ~0.13 bits at K=12 n~333 per stratum, exceeding tightened threshold from prior Laplace 0.3056 floor; K=24 would give mean 0.074 std 0.0104 passing). G2 independent-noise correctly shows BC -0.005 p 0.865 (|BC|<0.05 p>0.10) replicating prior EXP-PHYSICS-34764605162 falsification 0.004 bits, G3 iid null shows BC 0.0013 p 0.401 (|BC|<=0.03 p>0.10). Independent null_std 0.0046 degenerate due to low DOM diversity (3 variants per state) but not confounded. No evidence for or against C-WEB-DYNAMICS; ceiling remains HYPOTHESIS bounded to locally-hosted 6-state correlated FSM class. Independent audit status MEASUREMENT_INVALID producer_claim_supported false verifies all recomputed metrics."
+      },
+      {
+        "experiment_id": "EXP-PHYSICS-35787698409",
+        "lane": "physics",
+        "created_at": "2026-09-22T21:37:18.163516+00:00",
+        "decision": "MEASUREMENT_INVALID",
+        "source_commit": "7aff37743b7504e9e05ba68fbcdee9512019a91f",
+        "claim_id": "C-WEB-DYNAMICS",
+        "status": "HYPOTHESIS",
+        "reason": "MEASUREMENT_INVALID per frozen gated decision_rule G1+G4: correlated-state Bayesian DM K=24 alpha=1/24 N=1999 (50 traj x40 steps, L per trajectory 959 A/1040 B, 36 hashes |R|/N 0.018, H(S|C) 3.334) shows BC 0.706630 p_raw 0.001 p_bonf 0.00799 gap 0.70663 over B-DOM-SIMILARITY 0.0 and B-MARKOV-1 0.0 on R1 visible_text_hash and R2 a11y_tree_hash (isomorphic), Cohen d 73.05, all magnitude thresholds >> pass, but null_std 0.009673 <=0.01 fails G1 (BC>=0.30 p<0.01 |null_mean|<0.1 pass: BC 0.707>=0.30 p 0.001<0.01 mean 0.0748<0.1) by 0.00033 bits and G4 degenerate on BOTH R1/R2 same std. Recalibration K=12->K=24 fixed mean 0.1297->0.0748 (now passes) but std 0.00941->0.00967 still below floor; independent-noise RECALIBRATED 6 variants (vs parent 3) BC -0.00063 p 0.529 |BC|<0.05 p>0.10 replicates prior falsification (parent -0.0051, EXP-PHYSICS-34764605162 0.004 bits) G2 not triggered but std 0.00649 degenerate; iid BC 0.00162 p 0.393 G3 not triggered; B-DOM-SIMILARITY/TF-IDF k5 TRAIN-only and B-MARKOV-1 MLE TRAIN-only correctly 0.0; audit MEASUREMENT_INVALID producer_claim_supported false recomputes BC 0.78145-0.07482=0.70663 null_mean 0.07482 null_std 0.00967 p_bonf 0.00799 gates G1 false G2 true G3 true G4 true and diagnoses threshold misspecification (perm std is N/strata variance scaling DOWN with N, not K-calibrated bias floor; prediction K=24 std 0.0104 failed). No evidence for or against C-WEB-DYNAMICS; ceiling remains HYPOTHESIS bounded to locally-hosted 6-state SHA256(L||state||variant%3) hash truncation 5k, no inference to production, no product promotion."
       }
     ],
     "C-RESIDUAL-NOVELTY": [
@@ -3184,14 +3194,14 @@
   },
   "latest_event_by_claim": {
     "C-WEB-DYNAMICS": {
-      "experiment_id": "EXP-PHYSICS-35782523165",
+      "experiment_id": "EXP-PHYSICS-35787698409",
       "lane": "physics",
-      "created_at": "2026-09-22T20:47:25.749681+00:00",
+      "created_at": "2026-09-22T21:37:18.163516+00:00",
       "decision": "MEASUREMENT_INVALID",
-      "source_commit": "2a11c97c1ef111ea7a2901b38f60432d98321879",
+      "source_commit": "7aff37743b7504e9e05ba68fbcdee9512019a91f",
       "claim_id": "C-WEB-DYNAMICS",
       "status": "HYPOTHESIS",
-      "reason": "MEASUREMENT_INVALID per frozen gated decision_rule: G1 positive correlated control fails valid centering (|null_mean| 0.1297 >0.1, null_std 0.0094 <0.01) and G4 primary null degenerate on both R1/R2 (same values), despite BC 0.688 bits p_raw 0.001 p_bonf 0.00799 gap 0.688 over B-DOM-SIMILARITY and B-MARKOV-1. Audit confirms pipeline NOT blind (signal far exceeds 0.30 threshold, Cohen d 73.1) and failure is borderline estimator calibration (bias floor ~0.13 bits at K=12 n~333 per stratum, exceeding tightened threshold from prior Laplace 0.3056 floor; K=24 would give mean 0.074 std 0.0104 passing). G2 independent-noise correctly shows BC -0.005 p 0.865 (|BC|<0.05 p>0.10) replicating prior EXP-PHYSICS-34764605162 falsification 0.004 bits, G3 iid null shows BC 0.0013 p 0.401 (|BC|<=0.03 p>0.10). Independent null_std 0.0046 degenerate due to low DOM diversity (3 variants per state) but not confounded. No evidence for or against C-WEB-DYNAMICS; ceiling remains HYPOTHESIS bounded to locally-hosted 6-state correlated FSM class. Independent audit status MEASUREMENT_INVALID producer_claim_supported false verifies all recomputed metrics."
+      "reason": "MEASUREMENT_INVALID per frozen gated decision_rule G1+G4: correlated-state Bayesian DM K=24 alpha=1/24 N=1999 (50 traj x40 steps, L per trajectory 959 A/1040 B, 36 hashes |R|/N 0.018, H(S|C) 3.334) shows BC 0.706630 p_raw 0.001 p_bonf 0.00799 gap 0.70663 over B-DOM-SIMILARITY 0.0 and B-MARKOV-1 0.0 on R1 visible_text_hash and R2 a11y_tree_hash (isomorphic), Cohen d 73.05, all magnitude thresholds >> pass, but null_std 0.009673 <=0.01 fails G1 (BC>=0.30 p<0.01 |null_mean|<0.1 pass: BC 0.707>=0.30 p 0.001<0.01 mean 0.0748<0.1) by 0.00033 bits and G4 degenerate on BOTH R1/R2 same std. Recalibration K=12->K=24 fixed mean 0.1297->0.0748 (now passes) but std 0.00941->0.00967 still below floor; independent-noise RECALIBRATED 6 variants (vs parent 3) BC -0.00063 p 0.529 |BC|<0.05 p>0.10 replicates prior falsification (parent -0.0051, EXP-PHYSICS-34764605162 0.004 bits) G2 not triggered but std 0.00649 degenerate; iid BC 0.00162 p 0.393 G3 not triggered; B-DOM-SIMILARITY/TF-IDF k5 TRAIN-only and B-MARKOV-1 MLE TRAIN-only correctly 0.0; audit MEASUREMENT_INVALID producer_claim_supported false recomputes BC 0.78145-0.07482=0.70663 null_mean 0.07482 null_std 0.00967 p_bonf 0.00799 gates G1 false G2 true G3 true G4 true and diagnoses threshold misspecification (perm std is N/strata variance scaling DOWN with N, not K-calibrated bias floor; prediction K=24 std 0.0104 failed). No evidence for or against C-WEB-DYNAMICS; ceiling remains HYPOTHESIS bounded to locally-hosted 6-state SHA256(L||state||variant%3) hash truncation 5k, no inference to production, no product promotion."
     },
     "C-RESIDUAL-NOVELTY": {
       "experiment_id": "EXP-PRODUCT-35782537266",
