@@ -1,0 +1,64 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-FRONTIER-35752577234",
+  "lane": "frontier",
+  "target_lane": "frontier",
+  "next_question": "Can a learned GRPO/System-One reconstruction adapter trained to critique/reconstruct the retrieved template from (intent, observation-derived state, retrieved_template) with model-derived calibrated confidence generalize beyond the synthetic URL aliasing proof-of-concept (30/30 rule-based) to live-browser WebShop/ALFWorld aliasing and to orthogonal alias families (header-based, body, auth) with real DOM/observation state, while preserving alias-OOD correct >=0.50 (binomial p<0.05 vs 0.10, McNemar p<0.05 vs exact), false_accept <=0.15 (>=0.15 below verbatim), exact-match >=0.90, UNKNOWN precision >=0.85 and ECE <=0.15, and what are training cost, stability and verification-boundary economics vs the rule-based proxy?",
+  "why_next": "This packet provides first valid (non-oracle, audit PASS) proof-of-concept that genuine state-conditioned structural reconstruction (score/slot-count+path-segments+query-key, inversion from observed URL, softmax confidence + jitter gate 0.80) beats exact-matcher (0/30) and verbatim replay (1.0 false) on synthetic alias-OOD with calibrated abstention (30/30, ECE 0.0738), including held-out 9/9 generalization. The synthetic ceiling is perfect (1.0 across all families/ECE bimodal 0.058/0.919) suggesting low task difficulty/tight coupling to synthetic 'val' pattern (audit unresolved V7), and prior MEASUREMENT_INVALID oracle is now repaired. Remaining dominant unknowns per audit/producer are orthogonal: learnability (GRPO/System-One training vs hand-coded rule), and synthetic-to-real gap (0 WebShop/ALFWorld tasks, header/body/auth families untested, minimal derived dict missing DOM/auth). Product consequence positive per spec explicitly requires GRPO + live-browser replication before PRODUCT_CORE and sequences to workflow compilation after resolution; highest marginal information is to test learned calibration and real-Web generalization rather than another synthetic alias tuning. This is director-mandated breadth to starved C-SEMANTIC-RESOLVE after 30+ freshness/PMI TV loops.",
+  "carry_forward": {
+    "established": [
+      "C-SEMANTIC-RESOLVE genuine rule-based reconstruction ceiling EXPERIMENTAL (bounded): alias-OOD 30/30 correct (1.0 Wilson [0.886,1.0] binomial p=1e-30 vs 0.10, McNemar p=1.19e-07 vs B-EXACT-MATCH), false_accept 0.0 (McNemar p=1.19e-07 vs verbatim 1.0 diff 1.0), per-family 10/10 each (query-param 7 standard +3 held-out, path-rewriting 7+3, server-routing 7+3) held-out 9/9 1.0, exact-match 12/12 1.0 (Wilson [0.757,1.0]), no-applicable 12/12 UNKNOWN precision 1.0 false 0, empty 6/6 1.0, ECE 0.0738 (5 bins, bootstrap mean 0.0737 CI [0.066,0.081], bin0 18 acc0.0 avg0.058 bin4 42 acc1.0 avg0.919), S1-S5 all PASS. Audit PASS confirms recomputed metrics exact, PC-EXACT-MATCH/NC-NO-APPLICABLE/NC-EMPTY all PASS. Bounded to synthetic URL template aliasing only, rule-based proxy via structural inversion, minimal derived state (url,method,url_path,url_query,url_segments) from observed URL, confidence via softmax temp 0.15 + deterministic jitter gated UNKNOWN<0.80, deterministic seeds 42.",
+      "Baseline replication bounded: B-EXACT-MATCH 0/30 alias-OOD (1.0 false, replicates prior 0/6 p=0.016 and 0/10), B-VERBATIM-REPLAY 0/30 1.0 false (max negative transfer), B-RAG-TFIDF 0/30, B-RAG-EMBED fallback TFIDF 0/30 (unavailable offline disclosed), B-RANDOM 0/30 — retrieval alone does not resolve template aliasing when intent strings held equal to isolate aliasing; registry leak 0/30 verified, hidden_expected not passed.",
+      "Validity controls PASS with inspectable code: reconstruct_resolve signature (intent, derived_context, retrieved_candidates, params) only observation-derived fields; forbidden keys alias_family/query_key/target_prefix/routing_prefix/target_style/path_style only in hidden_expected; confidence varies (alias 0.91-0.97 exact 0.88-0.95 no-applicable 0.05-0.06) not hardcoded 0.95/0.05; safeguards score floor <0.95->0.99 rarely triggers; TFIDF fit on train registry only; seeds deterministic; WebShop/ALFWorld marked exploratory unavailable (0 tasks).",
+      "Prior narrow ceiling preserved: SpiderKernel.resolve deterministic exact-intent matcher L97/ L112 confidence sort fails alias aliasing in general (combined 0/16 alias, 0/12 status grounding). This packet repairs parent MEASUREMENT_INVALID oracle (EXP-FRONTIER-35741928625 reading alias_family/query_key etc. hardcoding 0.95/ECE 0.055) — oracle is superseded."
+    ],
+    "rejected": [
+      "Bounded rejection: deterministic exact-intent matching (SpiderKernel.resolve L97) and verbatim replay without structural adaptation/rewriting are rejected for alias-OOD template aliasing on tested synthetic three families with equal confidence 0.9, preconditions={} guards={} (0/30 correct, 1.0 false vs 0.0 reconstruction, McNemar p=1.19e-07). Does not globally reject exact matching where intent strings differ or confidence/guards differ.",
+      "Bounded rejection: shallow lexical retrieval (TFIDF, embedding-fallback) followed by verbatim bind does not resolve aliasing on this fixture (0/30) — retrieval strength alone insufficient when intent held equal.",
+      "Bounded rejection: naive replay causes maximal negative-transfer harm (1.0 false_accept) on aliased OOD where reconstruction prevents it — bounded to this synthetic distribution, not broader claim that replay always harms.",
+      "No bounded rejection of reconstruction/adaptation class in general — this valid positive is rule-based proof-of-concept only; prior oracle 1.0 was MEASUREMENT_INVALID not rejection, and current 1.0 does not close broader domain."
+    ],
+    "unknown": [
+      "Whether learned GRPO critique-reconstruct (MemHarness-style) or LLM System-One scoring/budget with calibrated UNKNOWN can match hand-coded 30/30, its training cost, stability, and calibration when confidence is model-derived not rule-derived (audit unresolved, producer unresolved).",
+      "Generalization to real WebShop/ALFWorld live-browser distributions and to alias families beyond three tested (header-based, body, auth, server-routing variations beyond tested) — proxy 0/20 attempted, synthetic-to-real gap dominant (validity_notes, audit).",
+      "Whether perfect 1.0 across all strata/families/held-outs reflects synthetic easiness (parameter values always 'val', static segments predictable, inversion tightly coupled to generation logic) vs true robustness; real-world variance untested (audit V7).",
+      "Calibration definition sensitivity: ECE 0.0738 uses accuracy=is_correct where UNKNOWN=0 with bimodal bins; abstention-aware ECE, different bin counts, or threshold 0.80 sensitivity could shift value; confidence jitter determinism vs stochastic calibration.",
+      "LLM System-One variant (scoring/budget with calibrated UNKNOWN) not tested due to no offline model — exploratory only.",
+      "Product economics of reconstruction layer: verification/repair boundary cost, false_accept vs abstention tradeoff under real alias distribution, and whether retrieval+reconstruction sequencing justifies workflow-compilation (Artic/FlowSearcher) on end-to-end task success."
+    ],
+    "do_not_assume": [
+      "Do not assume 30/30 (1.0, Wilson 0.886-1.0) / 0.0 false_accept / ECE 0.0738 generalizes beyond synthetic URL template aliasing with minimal derived dict to real Web, production SPAs, DOM/auth/session/drift — synthetic-to-real gap is dominant unknown; WebShop proxy 0 tasks.",
+      "Do not assume rule-based proxy validates GRPO/System-One learnability — positive result is structural adaptation benefit, not evidence RL training succeeds or calibrates (spec validity_notes, audit unresolved).",
+      "Do not assume ECE 0.0738 or bootstrap CI [0.066,0.081] proves calibration in real settings with different binning / abstention conventions; bimodal bin structure (18 at 0.058 vs 42 at 0.919) is design choice; threshold 0.80 is kernel min_confidence.",
+      "Do not assume per-family uniform 10/10 and held-out 9/9 demonstrates heterogeneity handling in wild — held-outs are structurally similar variants requiring same segment/query inversion; audit V7 warns synthetic pattern may be tightly coupled to generator.",
+      "Do not assume B-EXACT 0/30 or RAG 0/30 being beaten proves any retriever will fail — intent strings deliberately held equal to isolate template aliasing; lexical retrieval not stress-tested where intent differs.",
+      "Do not assume WebShop/ALFWorld generalization without live-browser replication with real Playwright traces and verification on DOM/response (prereg sec3 exploratory, 0 tasks executed).",
+      "Do not treat current MEASUREMENT_INVALID repair as global VALIDATED for C-SEMANTIC-RESOLVE — status is bounded EXPERIMENTAL rule-based; PRODUCT_CORE requires learned and live-browser gates per spec product_consequence_positive.",
+      "Do not infer cross-site parameterized transfer is unblocked without verification boundary — stale-intent false_accept risk requires calibrated abstention and repair layer even if reconstruction succeeds."
+    ]
+  },
+  "dependencies": [
+    "research/frontier/run_genuine_35752577234.py — genuine reconstruct_resolve (softmax confidence, structural inversion) as validated proxy; for next step replace/adapt with GRPO/System-One training harness",
+    "research/experiments/EXP-FRONTIER-35752577234/tasks.json — registry construction (3 mechs per alias-OOD, 0/30 leak, held-out variations) as fixture template for real alias distributions",
+    "src/spider/kernel.py — exact-matcher baseline L97 m.intent != intent, L112 confidence sort, _bind as B-EXACT-MATCH reference",
+    "Live-browser WebShop/ALFWorld offline fixtures + Playwright harness for exploratory OOD proxy (currently 0 tasks) — required for synthetic-to-real validation",
+    "Offline embedding model all-MiniLM-L6-v2 if B-RAG-EMBED to be re-tested deterministically; otherwise TFIDF with disclosure"
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-FRONTIER-35752577234/request.json",
+    "research/experiments/EXP-FRONTIER-35752577234/spec.json",
+    "research/experiments/EXP-FRONTIER-35752577234/prereg.md",
+    "research/experiments/EXP-FRONTIER-35752577234/freeze.json",
+    "research/experiments/EXP-FRONTIER-35752577234/result.json",
+    "research/experiments/EXP-FRONTIER-35752577234/derived_metrics.json",
+    "research/experiments/EXP-FRONTIER-35752577234/raw_evidence.json",
+    "research/experiments/EXP-FRONTIER-35752577234/tasks.json",
+    "research/experiments/EXP-FRONTIER-35752577234/provenance.json",
+    "research/experiments/EXP-FRONTIER-35752577234/report.md",
+    "research/experiments/EXP-FRONTIER-35752577234/audit.json",
+    "research/frontier/run_genuine_35752577234.py",
+    "research/experiments/EXP-FRONTIER-35741928625/handoff.json",
+    "codex/claim_state.json:C-SEMANTIC-RESOLVE"
+  ],
+  "recommended_action": "Do not promote to Product Core. Next Frontier attack: (1) Train/learn GRPO System-One critique-reconstruct on synthetic alias families measuring training cost/stability and whether model-derived confidence can preserve S1-S4 gates (esp ECE <=0.15) vs rule proxy; (2) Replicate same gates on live-browser WebShop/ALFWorld aliasing with real DOM-derived state (not minimal url dict) and on orthogonal families (header/body/auth) with verification boundary; report correctness/false_accept/ECE with Wilson/McNemar/bootstrap. If learned 30/30 not recovered or calibration fails, pivot to artifact-driven workflow compilation (hierarchical DAG synthesis / program-synthesis repair) which is orthogonal to single-step alias resolution and does not assume cheap template patching. Preserve same baselines (exact, verbatim, TFIDF/embed, random) and PC/NC with calibration gates; do not claim cross-site transfer without live replication."
+}
