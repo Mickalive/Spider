@@ -1,0 +1,83 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-35787698409",
+  "lane": "physics",
+  "status": "MEASUREMENT_INVALID",
+  "outcome": "NOT_APPLICABLE",
+  "execution": {
+    "executed_at": "2026-09-22T22:12:00+00:00",
+    "elapsed_s": 130.82656717300415,
+    "python": "3.12.14",
+    "numpy": "2.5.3",
+    "sklearn": "1.9.1",
+    "git_head": "db7e59eea4d0642e3e03f1b8d74cd4dfbdc66260",
+    "git_head_message": "R2 physics: execution base EXP-PHYSICS-35787698409",
+    "env": "PYTHONHASHSEED=0",
+    "seed": 42,
+    "recalibration": "K=24 alpha=1/24 (parent K=12); independent variants 6/state (parent 3); N=1999; 1000 grouped perms; p_bonf n_tests=8; alpha=0.01",
+    "note": "model_execute.json records one transient pre-run retry (exit_code 1 attempt 4) before this successful run; no measurement semantics affected"
+  },
+  "frozen_inputs": {
+    "request.json": "eeaa8b63c780d6ecd1dbfe2e7621415c0493e4b4af7b1246c330520980c047c7",
+    "spec.json": "8dd815d0cad0becf68fb4492204f4c326e511f2c3072f6e133c0e00077438402",
+    "prereg.md": "4663c261f2dfef8189cc4fc66135c5a4ba4313b1a4d49225aa46c10ad748a01b",
+    "freeze.json": "bd75109eeb4ce73cb599e967781fd38a04e044dad2ccf632791742e26b30a13a",
+    "all_match_freeze": true
+  },
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-PHYSICS-35787698409/raw_transitions_correlated.json",
+      "sha256": "2ffc9e95f8b7c244deee256f4009d95a6b1a53c289795093333e4e55801ab195",
+      "role": "raw",
+      "byte_identical_to_parent": true,
+      "description": "1999 transitions correlated-state SPA 50 traj x40 steps with per-trajectory latent L"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-35787698409/raw_transitions_independent.json",
+      "sha256": "7215be085497462abbd576b12af9710eb7cea862cbd6b750b5702881d3acb517",
+      "role": "raw",
+      "byte_identical_to_parent": false,
+      "description": "1999 transitions independent-noise replication RECALIBRATED 6 variants per state (parent 3); differs by design; parent sha256 4ee10d7067e5000ee4701adece711ce5d9778c8b3fae2ced5b4951339e4bbc71"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-35787698409/raw_transitions_iid.json",
+      "sha256": "ab685d9d21cea93881c8a813d0b7e844fa28229ad7f2d7698484a1e5e1c3c95b",
+      "role": "raw",
+      "byte_identical_to_parent": true,
+      "description": "1999 transitions i.i.d. synthetic null, DOM correlated with phantom L, S_next independent"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-35787698409/raw_results.json",
+      "sha256": "3cee45f4e0946b981e413221b093fd18330ecdc024bd9955face940e65e1c113",
+      "role": "derived",
+      "description": "CMI per representation R1-R4, 1000-perm grouped null distributions (seed 42), baselines, G1-G4 gate table, decision, sensitivity and diagnostics"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-35787698409/execute.py",
+      "sha256": "482e98c49d88b7f994d05cea71813bd181bca7cc9d0131f250c4d6336b73b3f6",
+      "role": "code",
+      "description": "Frozen execution code: Bayesian DM K=24 alpha=1/K, trajectory-grouped permutation, strata C=(URL_before_norm, H_K=3, Action), R1-R4, B-SITE-LEAKAGE, B-TRAJECTORY-MEMORY, S_URLonly, frozen G1-G4 rule"
+    }
+  ],
+  "metrics_source": "research/experiments/EXP-PHYSICS-35787698409/result.json metrics (62 keys, parent-mirrored identifiers + recalibration-specific keys)",
+  "gate_table_source": "research/experiments/EXP-PHYSICS-35787698409/raw_results.json gate_table",
+  "decision": {
+    "status": "MEASUREMENT_INVALID",
+    "outcome": "NOT_APPLICABLE",
+    "verdict": "MEASUREMENT_INVALID pipeline_blind_or_miscalibrated",
+    "reason": "G1 fails (null_std 0.0097<=0.01 by 0.0003 bits; BC 0.707 p 0.0010 mean 0.0748 otherwise pass) and G4 engages (degenerate on both R1/R2); frozen rule => MEASUREMENT_INVALID, NOT a falsification"
+  },
+  "comparison": {
+    "parent_experiment_id": "EXP-PHYSICS-35782523165",
+    "parent_status": "MEASUREMENT_INVALID",
+    "parent_primary_BC_R1_bits": 0.688123972609174,
+    "parent_primary_observed_R1_bits": 0.8178714361746403,
+    "parent_primary_null_mean_R1_bits": 0.12974746356546626,
+    "parent_primary_null_std_R1_bits": 0.009408769387235413,
+    "delta_bc_bits": 0.01850615859826046,
+    "delta_null_mean_bits": -0.05492712615171922,
+    "delta_null_std_bits": 0.0002643396987614103,
+    "note": "Recalibration fixed null centering (mean below 0.1) as parent audit predicted; null std remained below 0.01 (marginally, delta +0.00026)"
+  },
+  "reproducibility": "Re-running execute.py from frozen commit with same env reproduces byte-identical raw_transitions (correlated, iid) and input-intrinsic measurements; only elapsed varies. Verified raw_transitions hashes match parent for correlated/iid."
+}
