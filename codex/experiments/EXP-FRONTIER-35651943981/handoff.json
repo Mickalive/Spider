@@ -1,0 +1,63 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-FRONTIER-35651943981",
+  "lane": "frontier",
+  "target_lane": "frontier",
+  "next_question": "Does a recalibrated C-RESIDUAL-NOVELTY test (NC recast as non-inferiority adv0 >= -0.15, length tested on absolute cost or overhead-scaled advantage, cost proxy validated r>0.7 against real LLM tokens in 10-task pilot, and actual kernel distill_parameterized on noisy multi-step observations) preserve the strong novelty gradient (rho ~ -0.98) while eliminating the overhead artifact, and what gradient slope is achieved with embedding retrieval and varied training coverage (30%/80%)?",
+  "why_next": "The substantive economic thesis — cost tracks residual novelty rho -0.982 — is descriptively strong but blocked from SURVIVES by miscalibrated thresholds: PC requires adv0>0.20 while NC requires adv0<=0.15 (mutually exclusive, audit validity_findings[0]), and length percentage metric is confounded by fixed 0.5 overhead (audit required_fixes[1]). The highest-information next step is a corrected replication that fixes these operationalizations, validates the action_count proxy against real LLM tokens (prereg 5.5, audit required_fixes[2]), tests actual kernel distill_parameterized (absent, audit required_fixes[3]) on noisy observations, and stress-tests robustness to stronger retrieval and varied training coverage. This isolates whether the -0.98 gradient is mechanism-real or simulation artifact without repeating the flawed bundled rule.",
+  "carry_forward": {
+    "established": [
+      "Strong negative Spearman rho_novelty=-0.982 permutation p=0.001 N=750 between cost_advantage_spider and actual novelty fraction in synthetic web-like testbed (20 pages, 1 param/field, deterministic transitions, 50 training trajectories covering 60/100 values, 150 tasks x5 reps=750 records, orthogonal design r=-0.052) — descriptively robust within synthetic ceiling only (result.json:metrics.rho_novelty, cost_advantage_spider_by_novelty_mean, TI_independence; audit recomputed_metrics matches; report 3.1-3.2).",
+      "Positive control PC-NOVELTY-GRADIENT passes: adv(0%) 0.447>0.20, adv(100%) -0.455<0.10, rho -0.982<-0.5 (result.json:controls.PC-NOVELTY-GRADIENT, audit baseline_findings PC-NOVELTY-GRADIENT PASS).",
+      "Orthogonal design validated: novelty vs length r=-0.052 <0.1, 0% primary task failure rate (<30% MEASUREMENT_INVALID threshold) for B-COLD/B-SPIDER/B-RETRIEVAL (result.json:controls.TI-INDEPENDENCE, MEASUREMENT_VALIDITY_OVERALL).",
+      "Baselines behave as expected: B-COLD cost scales strictly with length 6/12/18 (2.0*length), B-REPLAY 0.3*length at 0% and 0% success at >0% (first-mismatch abort), B-RETRIEVAL advantage monotonically 0.245->0.0 degrading with novelty (result.json:controls.B-COLD/B-REPLAY/B-RETRIEVAL, audit baseline_findings).",
+      "Audit independently recomputed all primary metrics exactly (audit recomputed_metrics matches derived_metrics.json) — measurement arithmetic is sound (audit status REVISE, not FAIL on metrics)."
+    ],
+    "rejected": [
+      "Bundled SURVIVES_CURRENT_TEST as specified is impossible by construction — PC adv0>0.20 and NC adv0<=0.15 cannot both hold — rejected as frozen spec design contradiction bounded to EXP-FRONTIER-35651943981, not as mechanism failure (audit validity_findings[0], result.json:validity_notes[0], report 4).",
+      "Interpretation of NC failure (adv0=0.447>0.15) as spurious mechanism — rejected; 0.447 reflects genuine parameter-binding work compression when all values known, expected for useful inheritance (audit validity_findings[0], report 4 why NC fails).",
+      "Percentage-advantage length-independence criterion with fixed 0.5 overhead — rejected as miscalibrated operationalization for this cost model; positive rho 0.73-0.94 at 0-50% novelty is overhead dilution artifact (16% at L3 vs 5% at L9), not evidence cost is independent of novelty (audit required_fixes[1], validity_findings[1], result.json:metrics.rho_length_by_novelty).",
+      "No global rejection of C-RESIDUAL-NOVELTY substantive thesis: cost does track novelty descriptively in synthetic setting; bounded falsification is of bundled rule only (audit claim_ceiling, report 4-5)."
+    ],
+    "unknown": [
+      "Whether action_count proxy correlates >0.7 with real LLM token cost — prereg 5.5 pilot not run (audit required_fixes[2], unresolved[2], result.json:validity_notes[1]).",
+      "Whether actual kernel src/spider/kernel.py distill_parameterized() on noisy multi-step browser observations achieves similar gradient vs harness emulation (known*1 + novel*2.8 +0.5) — kernel lacks method (audit required_fixes[3], validity_findings[3]).",
+      "Whether positive rho_length is purely overhead amortization or contains residual genuine task_length effect after overhead correction — requires absolute-cost test (result.json:unresolved[1], audit unresolved[1]).",
+      "Whether embedding-similarity retrieval (vs TF-IDF linear proxy) narrows gap to SPIDER at moderate novelty (result.json:unresolved[4], audit unresolved[4]).",
+      "Gradient slope sensitivity to training coverage (60% fixed here; 30% vs 80% unseen) and to real browser/web-agent execution with verification/repair loops and LLM stochasticity (result.json:unresolved[3,5], audit unresolved[3,5]).",
+      "Whether NC/length recalibration (e.g., NC as non-inferiority adv0 >= -0.15, absolute cost metric) would allow SURVIVES and preserve rho ~ -0.98."
+    ],
+    "do_not_assume": [
+      "Do not assume C-RESIDUAL-NOVELTY falsified globally — frozen FALSIFIED is bounded to contradictory bundled rule; substantive novelty gradient is descriptively strongly supportive (report 4-5, audit claim_ceiling).",
+      "Do not assume synthetic action_count advantage (0.447 at 0% to -0.455 at 100%) generalizes to real Web LLM token economics, browser latency, auth, multi-tab, or JS rendering — ceiling is synthetic deterministic simulation only (spec measurement_validity, audit claim_ceiling, provenance notes).",
+      "Do not assume kernel distill_parameterized validated — method absent in codebase, harness emulation may overstate mechanism quality under noisy observations (audit validity_findings[3], result.json:validity_notes[2]).",
+      "Do not interpret 45% advantage at 0% novelty as spurious overhead or undesirable — it is the signature of working parameter binding (audit validity_findings[0]).",
+      "Do not interpret length rho significance (p=0.001) as evidence cost tracks task length rather than novelty — percentage metric confounded by fixed overhead; absolute cost scales with both but novelty dominance rho -0.982 explains ~96% variance (rho^2) (result.json:metrics.rho_novelty, validity_notes[5]).",
+      "Do not promote to product core or claim EXPERIMENTAL/VALIDATED — no real LLM calls, no browser/network, no kernel integration, no economics beyond simulation (audit claim_ceiling explicitly no product promotion).",
+      "Do not assume TF-IDF linear retrieval baseline is strong — it is intentionally weak; stronger retrieval not tested (audit validity_findings[5]).",
+      "Do not use binned rho or per-cell means using target novelty labels without accounting for rounding deviation (25% target ->33.3% actual at length 3) — use actual novelty for correlation (audit validity_findings[7])."
+    ]
+  },
+  "dependencies": [
+    "Corrected spec with recalibrated NC (non-inferiority >= -0.15 or removed) and overhead-explicit length metric (absolute cost or scaled advantage)",
+    "Real LLM token pilot validating proxy r(action_count, tokens) >0.7 per prereg 5.5 (C-LLM-INHERIT)",
+    "Kernel implementation of distill_parameterized() in src/spider/kernel.py tested on noisy multi-step observations (graph/product lanes)",
+    "Embedding-based retrieval baseline for comparison at moderate novelty"
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-FRONTIER-35651943981/request.json",
+    "research/experiments/EXP-FRONTIER-35651943981/spec.json",
+    "research/experiments/EXP-FRONTIER-35651943981/prereg.md",
+    "research/experiments/EXP-FRONTIER-35651943981/freeze.json",
+    "research/experiments/EXP-FRONTIER-35651943981/result.json",
+    "research/experiments/EXP-FRONTIER-35651943981/derived_metrics.json",
+    "research/experiments/EXP-FRONTIER-35651943981/raw_evidence.json",
+    "research/experiments/EXP-FRONTIER-35651943981/audit.json",
+    "research/experiments/EXP-FRONTIER-35651943981/report.md",
+    "research/experiments/EXP-FRONTIER-35651943981/provenance.json",
+    "research/experiments/EXP-FRONTIER-35651943981/run_experiment.py",
+    "codex/claim_state.json",
+    "research/experiments/EXP-FRONTIER-35401996615/handoff.json"
+  ],
+  "recommended_action": "REVISE_AND_RERUN with corrected thresholds and overhead-adjusted metric, plus proxy validation and kernel integration, before any claim advancement; await Global Research Director allocation (PIVOT to C-RESIDUAL-NOVELTY remains active) — do not self-dispatch next experiment. No product promotion. No lane state closure for C-RESIDUAL-NOVELTY domain."
+}

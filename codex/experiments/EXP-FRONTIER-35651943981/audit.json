@@ -1,0 +1,134 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-FRONTIER-35651943981",
+  "lane": "frontier",
+  "status": "REVISE",
+  "producer_claim_supported": true,
+  "required_fixes": [
+    "Frozen spec design contradiction: PC-NOVELTY-GRADIENT requires adv(0%) > 0.20 while NC-ZERO-NOVELTY requires adv(0%) <= 0.15 — these are mutually exclusive, making SURVIVES_CURRENT_TEST impossible by construction. Null control threshold of 0.15 is miscalibrated for any useful inheritance mechanism; it should be recalibrated (e.g., adv(0%) >= -0.15 meaning spider not worse than cold by >15%, or removed as spurious-mechanism test since PC already bounds the gradient).",
+    "Length-independence criterion is too strict for any cost model with fixed overhead. The observed positive rho(task_length) at 0%-50% novelty is entirely explained by 0.5 fixed overhead amortization (16% of cost at L=3, 5% at L=9). Fix: model overhead explicitly, test absolute cost difference instead of percentage advantage, or scale overhead with task length.",
+    "Cost proxy validation against real LLM tokens was not performed (prereg section 5.5 requires r > 0.7 pilot with fixed LLM model). This must be completed before any real-LLM claim.",
+    "Kernel distill_parameterized() does not exist in src/spider/kernel.py. The harness emulates pipeline semantics with a calibrated cost model (known*1.0 + novel*2.8 + 0.5 overhead). Real kernel integration must be implemented and tested with noisy multi-step observations before claiming mechanism validity."
+  ],
+  "validity_findings": [
+    "Design contradiction in frozen spec: PC-NOVELTY-GRADIENT (adv(0%) > 0.20) and NC-ZERO-NOVELTY (adv(0%) <= 0.15) cannot both hold. The empirical value 0.447 confirms the mechanism genuinely compresses work when parameters are known — the null threshold of 0.15 is miscalibrated, not a spurious mechanism signal.",
+    "Length-independence failure (significant rho at all 5 novelty levels) is a known artifact of fixed 0.5 overhead amortization: longer tasks dilute overhead fraction, making percentage advantage appear larger. Absolute cost scales with both length and novelty; the dominant driver remains novelty (rho_novelty = -0.982).",
+    "Cost proxy (action_count) is unvalidated against real LLM token counts. No pilot was run to validate r(action_count, tokens) > 0.7 as required by prereg section 5.5. Real-LLM economics not measured; claim ceiling bounded to synthetic proxy.",
+    "Kernel gap: distill_parameterized() absent from src/spider/kernel.py. B-SPIDER-PARAM was emulated in harness with faithful cost model rather than actual kernel code path. Validity bounded to mechanism-inspired simulation, not product kernel integration.",
+    "Synthetic testbed limitations: 20 pages, 1 param/action, deterministic transitions, no auth/latency/JS rendering, no verification/repair loops, 100% success rates for primary conditions. Noise model is small uniform; real agent variance includes LLM stochasticity and browser/network jitter.",
+    "Retrieval baseline intentionally weak (TF-IDF cosine proxy with linear novelty degradation). Embedding-based retrieval could narrow gap to SPIDER at moderate novelty.",
+    "Novelty fraction computed as fraction of parameter values unseen in training (per spec). Training coverage fixed at 60% (60/100 values); different coverage would shift gradient slope.",
+    "Actual novelty fractions deviate from targets due to rounding (e.g., 25% target -> 33.3% actual for length 3). Spearman correlation uses actual novelty, which is correct, but the cell-level means in result.json use target labels."
+  ],
+  "baseline_findings": [
+    {
+      "control_id": "PC-NOVELTY-GRADIENT",
+      "status": "PASS",
+      "finding": "All sub-conditions satisfied: rho_novelty = -0.982 < -0.5 (p=0.001), adv(0%) = 0.447 > 0.20, adv(100%) = -0.455 < 0.10. Strong monotonic novelty gradient confirmed.",
+      "evidence_ref": "result.json:metrics.rho_novelty, metrics.cost_advantage_spider_by_novelty_mean"
+    },
+    {
+      "control_id": "NC-ZERO-NOVELTY",
+      "status": "FAIL",
+      "finding": "adv(0%) = 0.447 > 0.15 threshold. This reflects genuine parameter-binding benefit when all values are known, not a spurious mechanism. The threshold is mutually exclusive with PC-NOVELTY-GRADIENT's >0.20 requirement, making SURVIVES impossible by construction.",
+      "evidence_ref": "result.json:controls.NC-ZERO-NOVELTY, metrics.cost_advantage_spider_by_novelty_mean[0.0]"
+    },
+    {
+      "control_id": "B-COLD",
+      "status": "PASS",
+      "finding": "Cost scales strictly with task length (6.0/12.0/18.0 at L=3/6/9), no novelty trend. Validates cold baseline expectation.",
+      "evidence_ref": "result.json:controls.B-COLD, metrics.cell_table_mean_action_count"
+    },
+    {
+      "control_id": "B-REPLAY",
+      "status": "PASS",
+      "finding": "Exact replay cost ~0.3*len at 0% novelty, 0% success at all >0% novelty (fails at first mismatch). Matches expected behavior.",
+      "evidence_ref": "result.json:controls.B-REPLAY, metrics.replay_success_rate"
+    },
+    {
+      "control_id": "B-RETRIEVAL",
+      "status": "PASS",
+      "finding": "Advantage monotonically decreases 0.245 -> 0.0 with novelty. Partial benefit at low novelty, degrades gracefully, always >= spider at high novelty but worse at low novelty. Matches expected behavior.",
+      "evidence_ref": "result.json:controls.B-RETRIEVAL, metrics.cost_advantage_retrieval_by_novelty_mean"
+    },
+    {
+      "control_id": "B-SPIDER-PARAM",
+      "status": "PASS",
+      "finding": "Strong benefit at low novelty (adv=0.447), degrades to negative at high novelty (adv=-0.455), rho_novelty=-0.982. Behavior matches parameterized binding intuition. Implemented via harness emulation (known*1.0 + novel*2.8 + 0.5 overhead).",
+      "evidence_ref": "result.json:controls.B-SPIDER-PARAM, metrics.cost_advantage_spider_by_novelty_mean"
+    },
+    {
+      "control_id": "TI-INDEPENDENCE",
+      "status": "PASS",
+      "finding": "Pearson r between actual novelty_fraction and task_length = -0.0524 < 0.1 threshold. Orthogonal design validated.",
+      "evidence_ref": "result.json:metrics.TI_independence"
+    },
+    {
+      "control_id": "MEASUREMENT_VALIDITY_OVERALL",
+      "status": "PASS",
+      "finding": "0% task failure for primary conditions (B-COLD, B-SPIDER-PARAM, B-RETRIEVAL) — well below 30% MEASUREMENT_INVALID threshold. Replay failures at >0% novelty are by design, not measurement failure.",
+      "evidence_ref": "result.json:controls.MEASUREMENT_VALIDITY_OVERALL, metrics.task_success_rate"
+    }
+  ],
+  "recomputed_metrics": {
+    "cost_advantage_spider_by_novelty_mean": {
+      "0.0": 0.4470650787793272,
+      "0.25": 0.1832359554948843,
+      "0.5": -0.034697700692105956,
+      "0.75": -0.1904775012442272,
+      "1.0": -0.45525854275725647,
+      "unit": "fraction (cold-spider)/cold",
+      "note": "Matches producer derived_metrics.json adv_by_novelty_mean exactly"
+    },
+    "rho_novelty": {
+      "rho": -0.9815982427289883,
+      "p_one_sided_permutation": 0.001,
+      "p_two_sided_permutation": 0.001,
+      "N": 750,
+      "method": "Spearman correlation between adv_spider and novelty_actual across 750 task-rep instances, 1000 permutations",
+      "note": "Matches producer derived_metrics.json rho_novelty exactly"
+    },
+    "rho_length_by_novelty": {
+      "0.0": {"rho": 0.7282418870508481, "p_two_sided_permutation": 0.001},
+      "0.25": {"rho": 0.8183764344382913, "p_two_sided_permutation": 0.001},
+      "0.5": {"rho": 0.9394358056155684, "p_two_sided_permutation": 0.001},
+      "0.75": {"rho": -0.32772770577275345, "p_two_sided_permutation": 0.001},
+      "1.0": {"rho": 0.4355874570397356, "p_two_sided_permutation": 0.001},
+      "note": "All p=0.001 (significant), failing frozen rule requirement of p >= 0.05 (NOT significant). Positive rho at 0%-50% due to fixed overhead amortization; negative at 75% is smaller effect."
+    },
+    "TI_independence": {
+      "correlation_novelty_task_length": -0.052444266609043416,
+      "threshold": 0.1,
+      "pass": true
+    },
+    "task_success_rate": {
+      "B-COLD": 1.0,
+      "B-SPIDER-PARAM": 1.0,
+      "B-RETRIEVAL": 1.0,
+      "B-REPLAY": {"0.0": 1.0, "0.25": 0.0, "0.5": 0.0, "0.75": 0.0, "1.0": 0.0},
+      "max_cell_failure_primary": 0.0
+    }
+  },
+  "claim_ceiling": "Synthetic web-like testbed only: 20 pages, 1 param/field, deterministic transitions, 50 training trajectories (60% value coverage), action_count cost proxy, harness-emulated distill_parameterized (kernel lacks this method). No real LLM agents, browser interaction, network latency, authentication, multi-tab navigation, JavaScript rendering, or verification/repair loops tested. The core finding — strong negative correlation between cost_advantage and novelty fraction (rho = -0.982) — is descriptively robust within this synthetic setting but does not validate the economic thesis for real web agents. No product promotion authorized. C-RESIDUAL-NOVELTY remains at HYPOTHESIS status per codex/claim_state.json (0 prior experiments).",
+  "evidence_refs": [
+    "research/experiments/EXP-FRONTIER-35651943981/request.json",
+    "research/experiments/EXP-FRONTIER-35651943981/spec.json",
+    "research/experiments/EXP-FRONTIER-35651943981/prereg.md",
+    "research/experiments/EXP-FRONTIER-35651943981/freeze.json",
+    "research/experiments/EXP-FRONTIER-35651943981/result.json",
+    "research/experiments/EXP-FRONTIER-35651943981/report.md",
+    "research/experiments/EXP-FRONTIER-35651943981/provenance.json",
+    "research/experiments/EXP-FRONTIER-35651943981/raw_evidence.json",
+    "research/experiments/EXP-FRONTIER-35651943981/derived_metrics.json",
+    "research/experiments/EXP-FRONTIER-35651943981/run_experiment.py",
+    "codex/claim_state.json (C-RESIDUAL-NOVELTY: no prior events, status HYPOTHESIS)"
+  ],
+  "unresolved": [
+    "Whether the PC/NC threshold contradiction is intentional (testing spurious mechanism) or drafting error; requires Director adjudication before any re-run.",
+    "Whether significant positive rho_length reflects genuine task_length effect or purely fixed-overhead amortization artifact — larger task lengths dilute the 0.5 fixed overhead.",
+    "Whether action_count proxy correlates >0.7 with real LLM token cost (requires C-LLM-INHERIT real model validation per prereg section 5.5).",
+    "Whether distill_parameterized() on real observations from noisy multi-step browser sessions would achieve similar novelty gradient or produce poorer mechanisms under 50-trajectory training budget.",
+    "Whether retrieval baseline with embedding similarity (not TF-IDF) would narrow gap to SPIDER at moderate novelty.",
+    "What cost_advantage distribution would be observed with real browser/web agent execution including verification/repair loops and LLM stochasticity."
+  ]
+}
