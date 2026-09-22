@@ -1,0 +1,70 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-35697055679",
+  "lane": "intel",
+  "github_run_id": "35697055679",
+  "github_run_attempt": "1",
+  "executed_at": "2026-09-22T07:30:00Z",
+  "commits": {
+    "pre_execute_sha": "17d44d22faa59ef4a87c92be59b4ef5c60d671f9",
+    "post_execute_sha": "3965a8cb",
+    "note": "Working tree contains only this experiment's untracked outputs (artifacts/, result.json, report.md, model_execute.json, research/intel/exp_35697055679_measure.py). No git commit/push/switch/reset was performed by EXECUTE. SPIDER_CODEX.md / codex/* modifications and untracked codex experiment dirs belong to other concurrent runs (codex sync step), untouched by EXECUTE. Git log for this packet: 3965a8cb (execution base), 17d44d22 (freeze), 6e8233de (allocate)."
+  },
+  "environment": {
+    "os": "linux",
+    "runner": "GitHub Actions (personal_lab2/intel)",
+    "python": "3.12.14",
+    "playwright": "1.63.0",
+    "docker": "28.0.4 (build b8034c0)",
+    "image": "am1n3e/webarena-verified-shopping:latest",
+    "image_digest": "sha256:3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb",
+    "image_created": "2026-02-02T19:22:53Z",
+    "container_id": "78f4353eb11c2f93c709c7a451a583563207f95cdaaaaf41bb10b84317ba9b54",
+    "container_started": "2026-09-22T07:30:07Z",
+    "site_url": "http://localhost:7770",
+    "arch": "amd64/linux"
+  },
+  "dataset": {
+    "name": "WebArena-Verified v2",
+    "source_repo": "https://github.com/ServiceNow/WebArena-Verified",
+    "file": "assets/dataset/webarena-verified.json",
+    "repo_commit_pin": "ef74e1bfd0d83d4bab1c55b2d1b4c2aeaac8e0d0",
+    "commit_date": "2025-12-05T17:57:41Z",
+    "local_sha256": "d65275660814663375028e9017e1f929e3c38321041b125795e2713b52243d30",
+    "task_count": 812,
+    "shopping_task_count": 192,
+    "cross_checked_files": ["assets/dataset/test.raw.json (812 tasks, 192 shopping)", "assets/dataset/webarna-verfied-hard.json (258 tasks, 61 shopping)"]
+  },
+  "infrastructure_facts_gathered": {
+    "v2_source": "src/webarena_verified/environments/container/config.py maps WebArenaSite.SHOPPING -> single container am1n3e/webarena-verified-shopping, host port 7770",
+    "docker_hub_tag_census": ["latest", "0.1.0"],
+    "docker_images_census": ["am1n3e/webarena-verified-shopping:latest", "ghcr.io/servicenow/webarena-verified:latest (tool venv)"],
+    "store_census_live": "Magento stores: 0=admin, 1=Default Store View; general/single_store_mode/enabled=1; single base URL localhost:7770",
+    "env_ctrl_api": "localhost:8877 endpoints observed: init, start, stop, restart, status (no store-switch endpoint)",
+    "playwright_note": "page.accessibility removed in Playwright 1.63.0 (AttributeError, matches EXP-INTEL-34047713704 live_raw_results); CDP Accessibility.getFullAXTree used instead"
+  },
+  "commands": [
+    "python3 -c \"import json,collections,hashlib; d=json.load(open('research/experiments/EXP-INTEL-35697055679/artifacts/raw/webarena-verified.json')); ...\" (task-level stats: templates, duplication, parameterization, site tuples)",
+    "python3 research/intel/exp_35697055679_measure.py (seed 35697055679; CDP getFullAXTree at 1280x720 initial viewport for tasks [25,434,468,506,514,519,532,654,673,794]; metric computation; positive control probes)",
+    "python3 bootstrap CI script (2000 resamples, seed 35697055679) -> artifacts/derived/bootstrap_ci.json",
+    "sha256sum -> artifacts/derived/raw_manifest.sha256",
+    "docker inspect am1n3e/webarena-verified-shopping:latest / webarena-shopping; docker ps",
+    "curl -sL https://raw.githubusercontent.com/ServiceNow/WebArena-Verified/main/assets/dataset/{webarena-verified.json,test.raw.json,webarna-verfied-hard.json}",
+    "curl -s https://api.github.com/repos/ServiceNow/WebArena-Verified/commits?path=assets/dataset/webarena-verified.json"
+  ],
+  "code": {
+    "path": "research/intel/exp_35697055679_measure.py",
+    "sha256": "82edd5554953b9ef63de6d05fa9226fc63ddd36dc1f35fd2c47696e54c377f81",
+    "scope_note": "Written within intel lane allowed code root (research/lanes/registry.json); no other code modified"
+  },
+  "artifacts_manifest": "research/experiments/EXP-INTEL-35697055679/artifacts/derived/raw_manifest.sha256 (sha256 6dcc98eef28d3a42f9df71c0cc1d8167006db76bf2387c6e63af5a4bcd00c263)",
+  "derived_outputs": {
+    "measurements.json": "sha256 4f5c9ac111a1c23b0fe4bf766a03e9bec597dcaa003063b3615b40bd77dff7b8",
+    "bootstrap_ci.json": "sha256 954899ecb0a15cae06a1c7f94ab9e108b18ed5a45ea38e17f72497cb90b8f971"
+  },
+  "reproduction_notes": [
+    "Requires the am1n3e/webarena-verified-shopping image (digest above) running with WA_ENV_CTRL_EXTERNAL_SITE_URL=http://localhost:7770, port 7770->80.",
+    "Frozen design substrate is WebArena-Verified v2, which contains exactly ONE shopping store; the 12-store premise is a v1 documentation artifact (see result.json observations/validity_notes).",
+    "Extraction is initial-viewport only; no scrolling; no agent execution; no cart/checkout flow completion."
+  ]
+}

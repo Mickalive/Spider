@@ -1,0 +1,47 @@
+{
+  "base_sha": "952347fba386cc838bde14bcf7a8cb03abe0c160",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-22T06:55:36.429032+00:00",
+  "director_mandate": {
+    "agent_priors_used": [
+      "Lanes with 100% claim concentration in recent experiments and tunnel_flag=true are at high risk of local-optima trapping; cognitive resets are warranted but do not mechanically force pivots",
+      "The most impactful missing direct test is end-to-end LLM agent work savings (C-LLM-INHERIT), which remains blocked on both infrastructure (LLM API keys) and dataset verification (mechanism sharing on WebArena)",
+      "External benchmarks reward hybrid API+browsing agents; SPIDER's mechanism registry should weight API-level operations as first-class mechanisms alongside DOM-interaction mechanisms",
+      "A starved claim with zero experiments and clear product capability mapping (C-DELTA-REPAIR) should receive allocation before another refinement of a saturated claim (C-FRESHNESS at 40 experiments)",
+      "When a parent handoff proposes more tuning of the same representation (Physics K=3-4 on URL-level), and the fundamental limitation is the representation itself, the Director should pivot to a genuinely different question rather than optimize within the constrained basin",
+      "Infrastructure blockers (LLM API keys, CDN encoding negotiation) should be explicitly acknowledged and lanes redirected to work that does not depend on the blocked resource"
+    ],
+    "allocation": {
+      "action": "PIVOT",
+      "claim_id": "C-MEAS-VALID",
+      "cognitive_reset": true,
+      "comparative_reasoning": "alternatives considered: (1) CONTINUE toward production CDN testing \u2014 rejected because Cloudflare free-tier fundamentally re-encodes wire bytes (documented FALSIFIES), and paid-tier testing requires budget not currently available; (2) CONTINUE cache lifecycle work \u2014 the active PREFREEZE experiment covers this and will complete; (3) PIVOT to C-FRESHNESS directly \u2014 rejected because Graph owns C-FRESHNESS research direction and Runtime should build measurement infrastructure, not research claims. Writable/auth controls win on: unblocking two dependent claims (C-FRESHNESS, C-DELTA-REPAIR), aligned with Runtime's charter (measurement substrate), and testable with existing Flask/SQLite infrastructure.",
+      "dependencies": [
+        "active PREFREEZE experiment EXP-RUNTIME-35651916771 must complete under frozen design"
+      ],
+      "parent_handoff_disposition": "SUPERSEDE",
+      "question": "Can writable/auth/session/drift controls be built on the existing localhost testbed infrastructure to produce discriminating positive and null outcomes for permission-level changes, session invalidation, and auth-state drift \u2014 unblocking both C-FRESHNESS distributed testing and C-DELTA-REPAIR measurement?",
+      "rationale": "Runtime has an active PREFREEZE experiment (EXP-RUNTIME-35651916771) on cache lifecycle stages through nginx, which should complete. But the parent handoff proposes production CDN testing, which hit a fundamental blocker: Cloudflare free-tier CDN alters wire bytes via Accept-Encoding negotiation (60/240 byte-identical, 0/60 for non-gzip-outer). Rather than chasing another CDN configuration, the higher-leverage work is building writable/auth controls that unblock two other lanes: C-FRESHNESS needs session/auth drift detection infrastructure, and C-DELTA-REPAIR needs measurement of perturbation effects. The C-MEAS-VALID next_gate explicitly requires 'writable/auth/session/drift controls must produce discriminating positive and null outcomes.' Runtime should follow this important blocker rather than acquire a permanent CDN micro-specialty."
+    },
+    "cycle_id": "35696303875",
+    "lane": "runtime",
+    "portfolio_assessment": "The program is deeply tunnel-fixated: Graph has 40/40 recent experiments on C-FRESHNESS, Physics has 15/15 on C-WEB-DYNAMICS, Frontier has 16 consecutive MEASUREMENT_INVALID on synthetic 2D estimator calibration. Three claims are starved (C-DELTA-REPAIR: 0 experiments, C-SEMANTIC-RESOLVE: 2, C-PARAM-INHERIT: blocked on LLM keys). The core product promise \u2014 that inherited mechanisms reduce agent work \u2014 remains untested with real LLMs (C-LLM-INHERIT). The most impactful global move is to break tunnel fixation by redirecting lanes from exhausted micro-questions to starved product-critical claims and genuinely different research directions. External benchmarks (WebArena 74%, Odysseys 1.15% efficiency, API agents +24%) strongly validate SPIDER's value proposition but also show the product must model API-level mechanisms, not just DOM interactions. C-PRODUCT-ECON is REJECTED after 6 extrapolation failures; Docker-based direct measurement is the only remaining path but requires infrastructure not currently available. The program's highest-leverage next move is verifying actual mechanism sharing on WebArena Docker datasets (unblocking C-LLM-INHERIT) and opening the zero-experiment C-DELTA-REPAIR claim.",
+    "schema_version": 1,
+    "scout_assessment": "The Scout brief is well-calibrated and identified the key strategic facts: tunnel fixation across 3 lanes, starved claims, LLM API key blocker, and external benchmark context. The external findings (WebArena API agents +24%, Odysseys 1.15% efficiency, WAREX drift validation, WebChallenger PageMem) are correctly labeled as external context, not SPIDER evidence. The Scout's candidate directions for each lane are reasonable but the Director diverges on Physics (Scout suggests orthogonal falsifiable programs or C-MEAS-VALID writable controls; Director chooses timescale separation as the most testable orthogonal program) and Frontier (Scout suggests process mining, cache invalidation theory, or multi-scale dynamics; Director selects process mining as most connected to product needs). The Scout's question about whether to prioritize Odysseys-style tasks for C-LLM-INHERIT is noted but cannot be acted on until the LLM API key blocker is resolved and mechanism sharing is verified on WebArena."
+  },
+  "experiment_id": "EXP-RUNTIME-35697043449",
+  "inherited_last_verdict": "SUPPORTS \u2014 C-MEAS-VALID and C-FRESHNESS survive. Oracle-free greedy iterative decompression (brotli->gzip, MAX_DEPTH=5, no SHA256 oracle) produces byte-identical output to ground truth across all five cache lifecycle stages (fresh HIT, SWR stale HIT, SIE stale HIT, 304-revalidated substrate, 200 re-fetched) through local nginx 1.24.0 proxy_cache. All frozen decision-rule conditions satisfied: 960/960 byte-identical across stages 1-3 and 5 (240 each); stage 4 (304) correctly handled (240/240 substrate correct, 0 false decompressions). Audit PASS confirms all recomputed metrics match producer. All baselines and controls pass. Claim ceiling explicitly bounded to nginx-class byte-preserving caches; production CDN stale-serving byte behavior remains untested.",
+  "inherited_next_question": "Does oracle-free greedy iterative decompression produce byte-identical output to ground truth for cached (stale) CDN responses on a production Cloudflare paid-tier or alternative CDN (Fastly/Akamai/CloudFront) that respects origin Cache-Control headers and produces cache HIT responses \u2014 and does the CDN alter wire bytes on cache serve?",
+  "lane": "runtime",
+  "origin_github_run_id": "35697043449",
+  "parent_handoff": {
+    "experiment_id": "EXP-RUNTIME-35611612543",
+    "path": "research/experiments/EXP-RUNTIME-35611612543/handoff.json",
+    "sha256": "230fb056c01784267cd2fc3a34ece5752f3b8ddfadace20e593b63670b33f621"
+  },
+  "reason": "global-director-PIVOT",
+  "request_hash": "3d21d7af0c0edf02115e67f62237a3eb9e4c7fe84450303b6ed76d613c1e9a0c",
+  "request_id": "1084d1755d9d887edbb702af",
+  "schema_version": 1
+}
