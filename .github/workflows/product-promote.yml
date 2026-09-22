@@ -8,6 +8,7 @@ on:
 
 permissions:
   contents: write
+  actions: write
 
 concurrency:
   group: spider-main-writer
@@ -128,3 +129,8 @@ jobs:
           git add research/lanes/product/state.json
           git commit -m "R2 product: record promotion $EXP"
           git push origin HEAD:refs/heads/lab2/product
+
+          # Promotion changes both main/product code state and the Product lane
+          # latch. Do not rely on GITHUB_TOKEN push recursion or the next cron.
+          gh workflow run factory-pulse.yml --ref main
+          echo "SPIDER_FACTORY_WAKE_AFTER_PRODUCT_PROMOTION experiment=$EXP"

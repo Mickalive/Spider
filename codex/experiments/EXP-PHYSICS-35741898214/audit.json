@@ -1,0 +1,253 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-35741898214",
+  "lane": "physics",
+  "status": "MEASUREMENT_INVALID",
+  "producer_claim_supported": false,
+  "required_fixes": [
+    "Obtain official Mind2Web test_website and test_domain splits from an alternative source (dataset author backup, HuggingFace revision with 3-way splits, or archived parquet) and record dataset_revision hash; do not fabricate synthetic 60/40 website shuffle (falsifier clause spec.json: MEASUREMENT_INVALID if official splits unavailable). Re-run TF-IDF->kmeans train-only pipeline on train vs official test_website (C1) and test_domain (C2) to obtain valid delta and p vs 1000 website-label shuffles.",
+    "Obtain WebArena-Verified v2 data via alternative substrate (GitHub raw task dumps, Docker image extraction, or census artifact reuse from EXP-INTEL-35697055679/35725763380) to perform family-level holdout (20% families, 5 folds) for C3; do not compute cross-store overlap as 0.0 (spec vacuous null on single store). Document family definitions and verify TF-IDF fitted train-only per fold.",
+    "Recompute full 1000-shuffle null per k (k, k/2, 2k) with per-shuffle refit of TF-IDF+kmeans on shuffled-train only and transform+predict on shuffled-test; report null mean, std, p95, and one-sided p=(1+#{null>=observed})/1001. Current 100-shuffle proxy degenerate (mean 1.0 std 0.0) is not a valid decision null and must be replaced; do not interpret proxy delta.",
+    "Re-enable positive control POS-WITHIN-SAME-WEBSITE (split single large website 50/50) and null control NULL-INDEPENDENT-DOMAINS (travel vs shopping or random tokens) with same train-only code path and 1000-shuffle null; both currently UNKNOWN. Controls must pass frozen thresholds (POS overlap >=0.50 delta>=0.20 p<0.01; NC delta<=0.05 p>0.10) before any C1/C2/C3 verdict is adopted. Also compute B-SITE-LEAKAGE, B-RANDOM-SPLIT, B-LEXICAL-OVERLAP as preregistered."
+  ],
+  "validity_findings": [
+    {
+      "id": "V1_split_integrity_and_substrate_unavailability_correctly_triggers_MEASUREMENT_INVALID",
+      "severity": "critical",
+      "category": "split_integrity",
+      "finding": "Producer MEASUREMENT_INVALID is correctly assigned per frozen spec.json falsifier and prereg Decision Rule: official Mind2Web splits test_website/test_domain unavailable on HF, WebArena-Verified v2 not found. Required substrate for C1/C2/C3 does not exist in execution environment. Status MEASUREMENT_INVALID with outcome NOT_APPLICABLE is the only valid mapping; SURVIVES/FALSIFIED-IN-SETTING/MIXED correctly not taken. This is infrastructure failure, not scientific falsification.",
+      "evidence": "result.json:status MEASUREMENT_INVALID outcome NOT_APPLICABLE metrics.dataset_revision 17ece8eb89862368edc0cc806acee6fca5163474 available_splits [train] n_train_tasks 1009; provenance.json:datasets osunlp/Mind2Web INCOMPLETE, web-arena/web-arena-verified NOT_FOUND 404; spec.json:falsifier MEASUREMENT_INVALID if official splits not available; prereg.md:If HF lacks 3-way splits record MEASUREMENT_INVALID; independent recomputation: load_dataset osunlp/Mind2Web train ok 1009 test_website ValueError Unknown split [train]"
+    },
+    {
+      "id": "V2_degenerate_proxy_null_confirms_environment_cannot_express_effect",
+      "severity": "high",
+      "category": "measurement_validity",
+      "finding": "Proxy website-label shuffle null (100 shuffles) is degenerate: mean 1.0 p95 1.0 std 0.0. This occurs because with only one observed split (train) the k-means assignment inevitably covers all test clusters (overlap=|C_train∩C_test|/|C_test| always 1.0). Demonstrates why official holdout splits are necessary to obtain a non-degenerate null where test may contain novel clusters. Producer correctly interprets this as confirmation that null cannot be estimated without holdout structure, not as evidence delta=0.",
+      "evidence": "result.json:metrics null_overlaps_mean 1.0 null_overlaps_p95 1.0 null_overlaps_std 0.0 n_valid_shuffles 100 note Proxy null degenerate; pipeline_results.json same; validity_notes The proxy website-label shuffle null is degenerate confirming null cannot be properly estimated without official train/test_website/test_domain split structure"
+    },
+    {
+      "id": "V3_target_integrity_clean_text_verified",
+      "severity": "info",
+      "category": "target_integrity",
+      "finding": "Text hygiene for primary metric is correctly implemented and verified: task+action target text only, URL/domain/shop-name regex removed, lowercased, English stopwords via TfidfVectorizer, ngram (1,2). Top 100 TF-IDF features contain no leakage tokens. This preserves spec measurement_validity TARGET INTEGRITY and prevents site-identity mediated overlap inflation.",
+      "evidence": "result.json:metrics tfidf_vocab_size 1655 leakage_tokens_in_top100 []; provenance.json code_paths experiment.py TF-IDF->k-means; spec.json measurement_validity TARGET INTEGRITY; prereg.md Text hygiene; pipeline_results.json leakage_tokens_in_top100 []"
+    },
+    {
+      "id": "V4_k_definition_and_cluster_validity_correct",
+      "severity": "info",
+      "category": "representation_validity",
+      "finding": "k selection follows frozen definition k=min(50, floor(n_unique_train_tasks/20)) = min(50,1009/20)=50, k_half 25 k_double 100 correctly computed. Cluster collapse check passes: 50 clusters, max fraction 0.107 (108/1009) well below 0.40 collapse threshold. TF-IDF vocab 1655, KMeans kmeans++ n_init 10 random_state 42 as prereg. Pipeline operationally validated.",
+      "evidence": "result.json:metrics k 50 k_half 25 k_double 100 n_clusters 50 max_cluster_fraction 0.107 cluster_collapse false; pipeline_results.json cluster_sizes 50 entries max 108 fraction 0.107; spec.json K DEFINITION; prereg.md Clustering"
+    },
+    {
+      "id": "V5_controls_correctly_UNKNOWN_not_falsely_PASS",
+      "severity": "info",
+      "category": "controls",
+      "finding": "All six baselines/controls correctly reported pass_fail UNKNOWN with observed NOT computed and evidence citing lack of holdout splits, rather than fabricating values or declaring PASS/FAIL on proxy data. This preserves RAW->INTERPRETATION discipline and avoids turning missing data into negative result. Positive control POS-WITHIN-SAME-WEBSITE and null control NULL-INDEPENDENT-DOMAINS prerequisites correctly identified as requiring splits.",
+      "evidence": "result.json:controls B-SHUFFLE-WEBSITE UNKNOWN, B-SITE-LEAKAGE UNKNOWN, B-RANDOM-SPLIT UNKNOWN, B-LEXICAL-OVERLAP UNKNOWN, POS-WITHIN-SAME-WEBSITE UNKNOWN, NULL-INDEPENDENT-DOMAINS UNKNOWN; report.md Pipeline Verification"
+    },
+    {
+      "id": "V6_provenance_completeness_and_hash_consistency",
+      "severity": "low",
+      "category": "provenance",
+      "finding": "Provenance correctly records dataset_revision 17ece8eb89862368edc0cc806acee6fca5163474, base_sha e606e040..., pre_execute_sha 41db17cd..., spec/request/prereg/freeze hashes matching freeze.json, environment Python 3.12.14 sklearn 1.9.1 datasets 5.0.1. Artifacts list includes pipeline_results.json sha256 764040..., execution_checkpoint.json, and frozen inputs with correct hashes. Recomputed pipeline_results hash matches. Hf hub unauthenticated noted.",
+      "evidence": "provenance.json datasets[0] revision 17ece8..., available_splits [train], artifact pipeline_results.json sha256 76404006b891b66da65d431b74c9963ed72bfd44aea4264cf44f4295aa8de965; result.json artifacts same hash; freeze.json hashes prereg 9b9bc... spec 695672..."
+    },
+    {
+      "id": "V7_spec_compliance_synthetic_shuffle_correctly_avoided",
+      "severity": "info",
+      "category": "sampling_integrity",
+      "finding": "Producer correctly refused to synthesize 60/40 random website shuffle as substitute for official splits despite prior non-compliant heuristic in EXP-INTEL-35725763380. This preserves prereg falsifier and avoids MEASUREMENT_INVALID->FALSIFIES misclassification. Decision aligns with Director mandate spec-compliant TF-IDF->k-means train-only, 1000 website-label shuffles preserving per-entity counts, and rejection of synthetic splits.",
+      "evidence": "result.json validity_notes MEASUREMENT_INVALID per spec if synthetic 60/40 shuffle rejected per EXP-INTEL-35725763380 REVISE; spec.json measurement_validity SPLIT INTEGRITY official splits do not synthesize 60/40 shuffle; provenance.json status INCOMPLETE not fabricated"
+    }
+  ],
+  "baseline_findings": [
+    {
+      "id": "B1_B-SHUFFLE-WEBSITE",
+      "baseline": "B-SHUFFLE-WEBSITE primary null 1000 website/family label shuffles",
+      "expected": "Null mean 0.30-0.70 p95 ~0.89; observed >p95 delta>=0.10 p<0.05",
+      "observed": "Proxy mean 1.0 p95 1.0 std 0.0 degenerate; official null cannot be computed without test_website/test_domain splits; correctly UNKNOWN",
+      "pass_fail": "UNKNOWN",
+      "evidence_ref": "result.json:controls B-SHUFFLE-WEBSITE observed Null mean=1.0 p95=1.0 degenerate proxy pass_fail UNKNOWN evidence pipeline_results.json Mind2Web only train split; spec.json baselines B-SHUFFLE-WEBSITE",
+      "notes": "Strength invalid if used as decision null; correctly not used. Requires refit TF-IDF+kmeans per shuffle on shuffled-train only."
+    },
+    {
+      "id": "B2_B-SITE-LEAKAGE",
+      "baseline": "B-SITE-LEAKAGE retention of URL/domain tokens",
+      "expected": "Leakage overlap >> clean overlap; clean still > null p95",
+      "observed": "Not computed; top 100 features verified leak-free but no leakage-inflated comparison possible without holdout",
+      "pass_fail": "UNKNOWN",
+      "evidence_ref": "result.json:controls B-SITE-LEAKAGE pass_fail UNKNOWN evidence Top 100 TF-IDF features contain no URL/domain tokens text cleaning verified",
+      "notes": "Diagnostic correctly deferred; text cleaning verified operational."
+    },
+    {
+      "id": "B3_B-RANDOM-SPLIT",
+      "baseline": "B-RANDOM-SPLIT 80/20 task-level ignoring website",
+      "expected": "Random-split overlap 0.75-0.90 upper bound without holdout",
+      "observed": "Not computed requires train/test split distinct from website holdout",
+      "pass_fail": "UNKNOWN",
+      "evidence_ref": "result.json:controls B-RANDOM-SPLIT UNKNOWN evidence Pipeline works but no spec-compliant split available",
+      "notes": "Would be computable on single train but excluded per spec focus on holdout; deferral appropriate."
+    },
+    {
+      "id": "B4_B-LEXICAL-OVERLAP",
+      "baseline": "B-LEXICAL-OVERLAP Jaccard bag-of-words without clustering",
+      "expected": "Jaccard 0.60-0.80",
+      "observed": "Not computed requires holdout sets",
+      "pass_fail": "UNKNOWN",
+      "evidence_ref": "result.json:controls B-LEXICAL-OVERLAP UNKNOWN evidence Text construction pipeline verified",
+      "notes": "Correctly deferred; text pipeline verified but Jaccard not reported."
+    },
+    {
+      "id": "B5_POS-WITHIN-SAME-WEBSITE",
+      "baseline": "POS-WITHIN-SAME-WEBSITE split single website 50/50",
+      "expected": "overlap>=0.50 delta>=0.20 p<0.01 confirms pipeline detects sharing",
+      "observed": "Not computed requires within-website holdout; WebArena family splits not accessible, Mind2Web official splits not available",
+      "pass_fail": "UNKNOWN",
+      "evidence_ref": "result.json:controls POS-WITHIN-SAME-WEBSITE UNKNOWN evidence WebArena-Verified v2 not accessible Mind2Web official family splits not available; spec.json positive_control",
+      "notes": "Critical control for ruling out pipeline bug vs genuine absence; must be computed when splits available. Current UNKNOWN correctly blocks verdict."
+    },
+    {
+      "id": "B6_NULL-INDEPENDENT-DOMAINS",
+      "baseline": "NULL-INDEPENDENT-DOMAINS travel vs shopping independent vocabularies",
+      "expected": "overlap ~ null mean delta ~0.0 p>0.10 confirms no collapse",
+      "observed": "Not computed requires independent-domain data pairs",
+      "pass_fail": "UNKNOWN",
+      "evidence_ref": "result.json:controls NULL-INDEPENDENT-DOMAINS UNKNOWN evidence Not applicable without valid splits; spec.json null_control",
+      "notes": "Collapse check correctly deferred; cluster collapse flag false (0.107 max fraction) partially mitigates but does not replace independent-domain control."
+    }
+  ],
+  "recomputed_metrics": {
+    "dataset": {
+      "producer": "osunlp/Mind2Web",
+      "recomputed": "osunlp/Mind2Web train only",
+      "match": true,
+      "evidence": "provenance.json datasets[0] name osunlp/Mind2Web revision 17ece8eb... n_train_tasks 1009 n_unique_websites 73"
+    },
+    "dataset_revision": {
+      "producer": "17ece8eb89862368edc0cc806acee6fca5163474",
+      "recomputed": "17ece8eb89862368edc0cc806acee6fca5163474",
+      "match": true,
+      "evidence": "independent load_dataset check train ok 1009 test_website Unknown split [train]; provenance.json same revision"
+    },
+    "n_train_tasks": {
+      "producer": 1009,
+      "recomputed": 1009,
+      "match": true,
+      "evidence": "pipeline_results.json n_train_tasks 1009; provenance.json same"
+    },
+    "n_unique_train_tasks": {
+      "producer": 1009,
+      "recomputed": 1009,
+      "match": true,
+      "evidence": "pipeline_results.json n_unique_train_tasks 1009"
+    },
+    "k": {
+      "producer": 50,
+      "recomputed": 50,
+      "match": true,
+      "formula": "min(50,floor(1009/20))=50",
+      "evidence": "spec.json K DEFINITION min(50, floor(n_unique_train_tasks/20))"
+    },
+    "k_half": {
+      "producer": 25,
+      "recomputed": 25,
+      "match": true,
+      "evidence": "pipeline_results.json k_half 25 floor(50/2)"
+    },
+    "k_double": {
+      "producer": 100,
+      "recomputed": 100,
+      "match": true,
+      "evidence": "pipeline_results.json k_double 100 min(100,100) cap"
+    },
+    "tfidf_vocab_size": {
+      "producer": 1655,
+      "recomputed": 1655,
+      "match": true,
+      "evidence": "pipeline_results.json tfidf_vocab_size 1655; provenance TfidfVectorizer max_features 5000 min_df 2 max_df 0.9 ngram (1,2)"
+    },
+    "n_clusters": {
+      "producer": 50,
+      "recomputed": 50,
+      "match": true,
+      "evidence": "pipeline_results.json n_clusters 50"
+    },
+    "max_cluster_fraction": {
+      "producer": 0.107,
+      "recomputed": 0.10703666997026759,
+      "match": true,
+      "tolerance": 0.001,
+      "computation": "max 108 / 1009 total",
+      "evidence": "pipeline_results.json cluster_sizes 16:108 max 108 total 1009; recomputed 108/1009=0.1070 matches producer 0.107"
+    },
+    "cluster_collapse": {
+      "producer": false,
+      "recomputed": false,
+      "match": true,
+      "threshold": ">40% would flag collapse",
+      "evidence": "pipeline_results.json cluster_collapse false max 10.7% <40%"
+    },
+    "leakage_tokens_in_top100": {
+      "producer": [],
+      "recomputed": [],
+      "match": true,
+      "evidence": "result.json metrics leakage_tokens_in_top100 [] pipeline_results same; text cleaning regex https?:// www. domain"
+    },
+    "null_overlaps_mean": {
+      "producer": 1.0,
+      "recomputed": 1.0,
+      "match": true,
+      "note": "Degenerate proxy null 100 shuffles all overlap 1.0; confirms environment cannot express holdout variation",
+      "evidence": "pipeline_results.json null_overlaps_mean 1.0 null_overlaps_std 0.0 n_valid_shuffles 100"
+    },
+    "null_overlaps_p95": {
+      "producer": 1.0,
+      "recomputed": 1.0,
+      "match": true,
+      "evidence": "pipeline_results.json null_overlaps_p95 1.0"
+    },
+    "null_overlaps_std": {
+      "producer": 0.0,
+      "recomputed": 0.0,
+      "match": true,
+      "evidence": "pipeline_results.json null_overlaps_std 0.0"
+    },
+    "n_valid_shuffles": {
+      "producer": 100,
+      "recomputed": 100,
+      "match": true,
+      "note": "Spec requires 1000; only 100 completed as exploratory proxy; missing 900 correctly not extrapolated",
+      "evidence": "pipeline_results.json n_shuffles_requested 1000 n_shuffles_completed 100 note Only 100 shuffles completed"
+    },
+    "cluster_sizes_total_check": {
+      "producer": 1009,
+      "recomputed": 1009,
+      "match": true,
+      "evidence": "sum cluster_sizes values =1009 equals n_train_tasks"
+    }
+  },
+  "claim_ceiling": "No claim about C-CROSSSITE supported or falsified by this experiment. Maximum justified: the TF-IDF->k-means train-only pipeline is operational (k=50 vocab 1655 50 clusters max fraction 10.7% no collapse, clean text leak-free) but MEASUREMENT_INVALID due to substrate unavailability: osunlp/Mind2Web revision 17ece8... provides only train (1009 tasks 73 websites) vs required train/test_website/test_domain; web-arena/web-arena-verified 404. The degenerate proxy null (mean 1.0 p95 1.0) confirms holdout overlap cannot be measured without official splits. Therefore C-CROSSSITE remains HYPOTHESIS with ceiling bounded to census-level parameterized family reuse (WebArena 192 tasks 49 templates duplication 0.9479 per EXP-INTEL-35697055679, Mind2Web 1009/73 vs spec 137/31) and documentation-level structural candidacy (EXP-INTEL-35651934683 inflated M1), not measured transfer. No delta, p, or overlap_observed for C1/C2/C3 is valid; WebArena family holdout unmeasured; Mind2Web delta unknown. Infrastructure failure is not falsification.",
+  "evidence_refs": [
+    "research/experiments/EXP-PHYSICS-35741898214/request.json: director_mandate PIVOT C-CROSSSITE question true website-holdout TF-IDF k-means train-only 1000 shuffles",
+    "research/experiments/EXP-PHYSICS-35741898214/spec.json: claim_ids C-CROSSSITE hypothesis H1 delta>=0.10 falsifier MEASUREMENT_INVALID if official splits unavailable hypothesis k min50",
+    "research/experiments/EXP-PHYSICS-35741898214/prereg.md: H1 operational definitions TF-IDF KMeans train-only overlap definition null 1000 shuffles Decision Rule C1 C2 C3 PC NC SENS",
+    "research/experiments/EXP-PHYSICS-35741898214/freeze.json: frozen_at 2026-09-22T14:44:05 hashes prereg 9b9bc... spec 695672...",
+    "research/experiments/EXP-PHYSICS-35741898214/result.json: status MEASUREMENT_INVALID outcome NOT_APPLICABLE metrics dataset_revision 17ece8... null mean 1.0 controls all UNKNOWN observations 8 validity_notes 7 unresolved 5",
+    "research/experiments/EXP-PHYSICS-35741898214/report.md: Status MEASUREMENT_INVALID dataset unavailability Mind2Web only train 73 websites WebArena 404 pipeline verification table",
+    "research/experiments/EXP-PHYSICS-35741898214/provenance.json: datasets osunlp/Mind2Web INCOMPLETE 73 websites revision 17ece8... web-arena/web-arena-verified NOT_FOUND, code_paths experiment.py, environment sklearn 1.9.1 datasets 5.0.1",
+    "research/experiments/EXP-PHYSICS-35741898214/pipeline_results.json: n_train_tasks 1009 k 50 vocab 1655 50 clusters max fraction 0.107 collapse false leakage [] null mean 1.0 p95 1.0 std 0.0 100 shuffles",
+    "research/experiments/EXP-PHYSICS-35741898214/execution_checkpoint.json: pre_execute_sha 41db17... recorded_at 2026-09-22T14:44:16",
+    "independent verification: python load_dataset osunlp/Mind2Web train 1009 ok test_website ValueError Unknown split [train] recomputed max cluster fraction 0.107",
+    "codex/claim_state.json: C-CROSSSITE HYPOTHESIS after EXP-INTEL-35725763380 REVISE Mind2Web INCONCLUSIVE 73/3 vs spec 137/31 WebArena vacuous single store",
+    "research/lanes/registry.json: physics mission falsification-first Web-dynamical structure operational definitions strong nulls"
+  ],
+  "unresolved": [
+    "Whether official Mind2Web test_website/test_domain splits can be obtained from author-hosted backup, alternative HF revision (pre-2026), or archived parquet to re-run spec-compliant C1/C2 with 1000 website-label shuffles and k/2 2k sensitivity",
+    "Whether WebArena-Verified v2 data can be recovered via GitHub raw dumps or Docker image extraction to perform family-level holdout C3 (20% families 5 folds) rather than vacuous cross-store 0.0",
+    "Whether degenerate null overlap=1.0 would resolve to informative distribution (mean 0.3-0.7 p95 ~0.89) once official holdouts provide test clusters potentially novel vs train ( |C_test| may include clusters not in |C_train| )",
+    "Whether C-CROSSSITE TF-IDF->k-means text proxy is the right mechanism abstraction or requires richer DOM/AX or learned embeddings (per product_consequence_negative) — remains UNKNOWN because primary measurement never executed",
+    "Whether 73 vs spec 137 websites divergence reflects dataset sampling vs spec expectation error; dataset_revision tracking needed to align spec 137/31 with observed 73/3",
+    "What pipeline resource cost is incurred at full 1000-shuffle scale (spec estimates 6000 fits ~1-2h CPU) when run on official splits; only 100 proxy shuffles measured"
+  ]
+}
