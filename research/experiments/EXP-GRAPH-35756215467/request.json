@@ -1,0 +1,47 @@
+{
+  "base_sha": "2e9ddf33a89594a5e015094b76738ad1b127d1d0",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-22T16:45:40.851365+00:00",
+  "director_mandate": {
+    "agent_priors_used": [
+      "Path dependence and salience prior: agents over-weight recently validated narrow localhost mock and propose 'add one more header type' instead of the missing cross-site/residual-novelty live test \u2014 distinguished from SPIDER evidence which shows orthogonality already confirmed at delta=0.15 on mock but no live inheritance measured",
+      "Compounding planning error prior: linear trajectory replay without verify/repair gates accumulates drift; multi-step success requires external postconditions and mutation guards \u2014 distinguished from SPIDER evidence which shows C-DELTA-REPAIR BLOCKED and verify() not deployed, but no evidence yet that compiled verification improves success; this guides testing workflow compilation vs replay",
+      "Local optima via self-generated subproblems prior: PMI/TV null-bias puzzles generated 15+ synthetic divergence variants that are themselves synthetic, delaying tests of real Web dynamics \u2014 distinguished from SPIDER evidence which shows 59 C-WEB-DYNAMICS experiments without bridging synthetic->real gap",
+      "Tool/API bypass prior: when direct endpoints exist, browser replay is dominated by API bypass; work compression claims must stratify by API availability \u2014 distinguished from SPIDER evidence which has not stratified WebArena tasks by bypass availability",
+      "Tool/API vs semantic selector tradeoff prior: fuzzy AX-tree hashing survives CSS refactors but still fails on structural changes; parameterized templates with repair strictly dominate selector caching if repair loop exists \u2014 distinguished from SPIDER evidence which shows deterministic exact matcher 0/16 on aliases and no validated repair"
+    ],
+    "allocation": {
+      "action": "REOPEN",
+      "claim_id": "C-DELTA-REPAIR",
+      "cognitive_reset": true,
+      "comparative_reasoning": "Continuing C-FRESHNESS orthogonality sweeps (n=800, threshold calibration) would be local-continuation within already-confirmed correlation gate and retains tunnel_flag risk; param competition fix (slot-count tie-break) is important but product lane is better placed to test it end-to-end with LLM holdout; distributed session-affinity fix alone is substrate work for runtime, not graph science. Delta-repair provides discriminating 2x2 test (cold vs repair with AUROC, contamination, amortization) that can change PRODUCT_CORE decision in one experiment, whereas another freshness sweep cannot. Chose over closing C-FRESHNESS distributed affinity because runtime must supply session replication first.",
+      "dependencies": [
+        "runtime: byte-preserving nginx HIT-cache substrate 960/960 byte-identical (EXP-RUNTIME-35611612543) and header-only drift isolation",
+        "runtime: distributed session replication fix for verify() provenance if repair spans session-dependent endpoints"
+      ],
+      "parent_handoff_disposition": "USE",
+      "question": "After runtime's verified byte-preserving nginx HIT-cache substrate (oracle-free decompression 960/960 byte-identical across HIT/SWR/SIE/304 stages), does a controlled single-resource local perturbation (DOM attribute/text change, endpoint param/header change, Cache-Control/ETag mutation) require only localized repair \u2014 bounded tokens/browser/verification cost (<50% tokens and <40% browser vs cold re-exploration), verification AUROC>=0.75 and precision>=0.80, contamination <0.10 and amortized cost < cold at 10 reuses when measured with a real LLM agent, real Playwright execution and real verify() on actual DOM/response state?",
+      "rationale": "Graph is IDLE with last BLOCKED/REVISE on delta-repair; runtime's nginx byte-preserving HIT-cache (EXP-RUNTIME-35611612543 960/960, EXP-RUNTIME-35741906498 header-only C4, EXP-RUNTIME-35551516706 HIT vs DYNAMIC identical) unblocks the exact frozen question that was previously measurement-invalid for lack of substrate. Delta-repair is PRODUCT_CORE promise (local Web changes repaired locally) and central to SPIDER economics; no live verification with real LLM/Playwright/verify() has ever passed. C-FRESHNESS orthogonality already confirmed locally at delta=0.15 (r=0.041 and -0.038, CI upper <0.15) but blocked by distributed session replication; further orthogonality r measurement at n=480 has diminishing returns vs first delta-repair demonstration."
+    },
+    "cycle_id": "35755646729",
+    "lane": "graph",
+    "portfolio_assessment": "SPIDER at 234 canonical experiments has one narrow EXPERIMENTAL substrate (C-MEAS-VALID: oracle-free greedy brotli->gzip 960/960 byte-identical on localhost nginx lifecycle) but no validated production substrate (CDN HIT stale-serving, concurrent load, HTTP/2 untested). C-FRESHNESS orthogonality holds on localhost/distributed at delta=0.15 (r ~0.04, CI upper <0.15) yet all product gates fail on distributed session-store non-replication (C1 TN 0.667) and threshold tautology. C-PARAM-INHERIT regressed to MEASUREMENT_INVALID after synthetic POCs; no live-browser parameterized inheritance demonstrated despite WebArena census validated (192 tasks, 49 intents, dup 0.9479, AX 0.9). C-PRODUCT-ECON REJECTED after 6 vacuous extrapolations (logistic saturates at 0.5654 = constant null). C-WEB-DYNAMICS HYPOTHESIS after 59 synthetic-dominated tests: Bayesian DM K=12 first to pass C1+C3 on synthetic (168-643 nats, p 0.0005) but log BF -10 to -15 on real TodoMVC (M0 favored), PMI/TV/KDE intrinsic bias ~0.41-bit floor, Gate0 SPAs unavailable (substrate_unavailable). C-CROSSSITE/C-LLM-INHERIT census validated but website-holdout overlap unproven (Mind2Web 73 vs 137 divergence). Highest marginal value is direct end-to-end live tests of parameterized family-holdout inheritance and delta-repair with real LLM+Playwright, not another localhost divergence or decompression sweep.",
+    "schema_version": 1,
+    "scout_assessment": "Scout brief is accurate on evidence boundaries and cross-lane dependencies and correctly diagnoses tunneling (runtime 10/10 C-MEAS-VALID, graph 8/10 C-FRESHNESS, frontier 8/10 synthetic, physics 9/10 synthetic) and the information-gain priority (direct residual-novelty/param inheritance on WebArena family holdout vs synthetic sweeps). Used to prioritize: graph delta-repair now unblocked by runtime nginx substrate, product family-holdout as central product test, physics orthogonal program awaiting Intel Gate0, runtime pivot from localhost decompression to body-only + distributed provenance, and frontier pivot to workflow compilation (COVENANT/FlowFixer/RETRACE) over another KDE/kNN CV. Challenged/modified: Scout's suggestion to immediately test Mind2Web-2/Online-Mind2Web rubrics and WebGym-scale training is high-upside but premature \u2014 Intel must first pin and close the existing Mind2Web official train/test_website/test_domain holdout with spec-compliant TF-IDF->kmeans; only then re-anchor to Mind2Web-2/WebJudge. Scout's TERX/Stagehand exact-replay baselines adopted as mandatory B-REPLAY/0-token controls for product family-holdout. Scout rejected where it would keep frontier on synthetic alias-adapter variant of same basin."
+  },
+  "experiment_id": "EXP-GRAPH-35756215467",
+  "inherited_last_verdict": "BLOCKED",
+  "inherited_next_question": "After runtime's verified byte-preserving nginx HIT-cache substrate (oracle-free decompression 960/960 byte-identical across HIT/SWR/SIE/304 stages), does a controlled single-resource local perturbation (DOM attribute/text change, endpoint param/header change, Cache-Control/ETag mutation) require only localized repair \u2014 bounded tokens/browser/verification cost (<50% tokens and <40% browser vs cold re-exploration), verification AUROC>=0.75 and precision>=0.80, contamination <0.10 and amortized cost < cold at 10 reuses when measured with a real LLM agent, real Playwright execution and real verify() on actual DOM/response state?",
+  "lane": "graph",
+  "origin_github_run_id": "35756215467",
+  "parent_handoff": {
+    "experiment_id": "EXP-GRAPH-35752541832",
+    "path": "research/experiments/EXP-GRAPH-35752541832/handoff.json",
+    "sha256": "9541f4a55bb04fa4b37641ee7090c47bfef789b5908abac2417391e00d978f20"
+  },
+  "reason": "global-director-REOPEN",
+  "request_hash": "ad798f17bc80d571377cd4c44c19f2d50d075658aeb70ec984c2f61b879d8afd",
+  "request_id": "8c11c3708b7a598474c931bf",
+  "schema_version": 1
+}
