@@ -1,11 +1,11 @@
 {
   "stage": "execute",
   "category": "EXECUTION_FAILURE",
-  "message": "stage exited with code 75",
-  "retryable": true,
-  "fingerprint": "fbf5825ef2ac96580695178f",
-  "recorded_at": "2026-09-22T18:58:16.204671+00:00",
-  "github_run_id": "35767842488",
+  "message": "stage exited with code 76",
+  "retryable": false,
+  "fingerprint": "32fb61131a26107aaf831564",
+  "recorded_at": "2026-09-22T19:52:02.320468+00:00",
+  "github_run_id": "35771048868",
   "github_run_attempt": "1",
   "control_revision": "076dc77b91c1d12ea39cb22825d01d847c1810ff7d44ed432bd5b1813468f5ae"
 }
