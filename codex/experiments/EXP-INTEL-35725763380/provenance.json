@@ -1,0 +1,147 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-35725763380",
+  "lane": "intel",
+  "provenance": {
+    "github_run_id": "35725763380",
+    "base_sha": "ea23ee9e44462c1e9acdbd37920dcd0d53500c24",
+    "request_hash": "dc103d47e75a713fe98026cf600b5f4eb25809c80320d8d24ead1f421d83e",
+    "model_design": {
+      "status": "success",
+      "model": "opencode/muse-spark-1.2-contributor-free",
+      "attempt": 2,
+      "exit_code": 0,
+      "recorded_at": "2026-09-22T12:15:40.951226+00:00"
+    },
+    "model_execute": {
+      "status": "retry",
+      "model": "opencode/big-pickle",
+      "attempt": 5,
+      "exit_code": 76,
+      "category": "output-missing",
+      "recorded_at": "2026-09-22T13:03:15.646462+00:00"
+    },
+    "execution_checkpoint": {
+      "experiment_id": "EXP-INTEL-35725763380",
+      "github_run_id": "35725763380",
+      "pre_execute_sha": "9fe11cdc225f78ee458471899601ff7dd558b684",
+      "recorded_at": "2026-09-22T12:16:07.700356+00:00"
+    },
+    "frozen_inputs": {
+      "request.json": {
+        "sha256": "a7f23b05df38515a4c5c31b007d02b8f04e84d9457e486714f33381a531bdbdc",
+        "path": "research/experiments/EXP-INTEL-35725763380/request.json"
+      },
+      "spec.json": {
+        "sha256": "ac6aee3d041319ce77934eff811ec27737c8524326138d4a2dba90f0af55848e",
+        "path": "research/experiments/EXP-INTEL-35725763380/spec.json"
+      },
+      "prereg.md": {
+        "sha256": "618dfedb19745904ece01cdbcc5dbbc960f8f4a142f5aee44362eb8fca1fc6ee",
+        "path": "research/experiments/EXP-INTEL-35725763380/prereg.md"
+      },
+      "freeze.json": {
+        "sha256": "ac6aee3d041319ce77934eff811ec27737c8524326138d4a2dba90f0af55848e",
+        "path": "research/experiments/EXP-INTEL-35725763380/freeze.json"
+      }
+    },
+    "datasets": [
+      {
+        "name": "WebArena-Verified v2",
+        "path": "research/experiments/EXP-INTEL-35697055679/artifacts/raw/webarena-verified.json",
+        "sha256": "d65275660814663375028e9017e1f929e3c38321041b125795e2713b52243d30",
+        "commit": "ef74e1bfd0d83d4bab1c55b2d1b4c2aeaac8e0d0",
+        "status": "reused",
+        "tasks": 812,
+        "shopping_tasks": 192,
+        "source": "ServiceNow/WebArena-Verified"
+      },
+      {
+        "name": "osunlp/Mind2Web",
+        "path": "HuggingFace (datasets library)",
+        "dataset_id": "osunlp/Mind2Web",
+        "status": "loaded",
+        "tasks": 1009,
+        "websites": 73,
+        "domains": 3,
+        "note": "Spec stated 137 websites/31 domains - divergence documented"
+      }
+    ],
+    "code": [
+      {
+        "path": "research/intel/exp_35725763380_measure.py",
+        "role": "measurement_script",
+        "sha256": "98f92952f8e71b4a28f1beea6bc17c3e1f1504ea5ca98bf4f7292ea8ae64b457",
+        "frozen_seed": 35725763380,
+        "bootstrap_reps": 2000,
+        "shuffle_perms": 1000
+      },
+      {
+        "path": "research/intel/exp_35697055679_measure.py",
+        "role": "parent_measurement_script",
+        "status": "reused_for_reference"
+      },
+      {
+        "path": "research/intel/webarena_adapter.py",
+        "role": "webarena_adapter",
+        "status": "imported"
+      }
+    ],
+    "artifacts": [
+      {
+        "path": "research/experiments/EXP-INTEL-35725763380/artifacts/derived/measurements.json",
+        "sha256": "a24a8535621fe4a7037408a344a09e5e97ade1cec9098f8d720c35aceb30fc9f",
+        "role": "derived",
+        "description": "All metrics, bootstrap CIs, shuffle null distribution, control results"
+      },
+      {
+        "path": "research/experiments/EXP-INTEL-35725763380/artifacts/raw/webarena-verified.json",
+        "sha256": "d65275660814663375028e9017e1f929e3c38321041b125795e2713b52243d30",
+        "role": "raw",
+        "description": "WebArena-Verified v2 dataset (copied from parent)"
+      },
+      {
+        "path": "research/experiments/EXP-INTEL-35697055679/artifacts/raw/webarena-verified.json",
+        "sha256": "d65275660814663375028e9017e1f929e3c38321041b125795e2713b52243d30",
+        "role": "reused_raw",
+        "description": "WebArena-Verified v2 dataset (original parent artifact)"
+      },
+      {
+        "path": "research/experiments/EXP-INTEL-35697055679/artifacts/derived/measurements.json",
+        "role": "reused_derived",
+        "description": "Parent measurements including 10 AX trees and positive control",
+        "sha256": "4f5c9ac111a1c23b0fe4bf766a03e9bec597dcaa003063b3615b40bd77dff7b"
+      },
+      {
+        "path": "research/experiments/EXP-INTEL-35697055679/artifacts/raw/axtree_task_*.json",
+        "role": "reused_axtree",
+        "description": "10 parent AX trees reused as REUSED label (Playwright unavailable)",
+        "tasks": [25, 514, 519, 434, 468, 506, 794, 673, 532, 654]
+      },
+      {
+        "path": "research/experiments/EXP-INTEL-35697055679/artifacts/derived/bootstrap_ci.json",
+        "sha256": "954899ecb0a15cae06a1c7f94ab9e108b18ed5a45ea38e17f72497cb90b8f971",
+        "role": "reused_bootstrap"
+      }
+    ],
+    "environment": {
+      "python_version": "3.12.14",
+      "datasets_version": "5.0.1",
+      "playwright_installed": false,
+      "docker_available": true,
+      "docker_container": "am1n3e/webarena-verified-shopping at localhost:7770",
+      "hf_access": "unauthenticated (rate limited)",
+      "notes": "Playwright not installed; AX trees reused from parent. Docker container running."
+    },
+    "commands": [
+      "python3 research/intel/exp_35725763380_measure.py",
+      "python3 -c 'from datasets import load_dataset; ds = load_dataset(\"osunlp/Mind2Web\")'"
+    ],
+    "parent_handoff": {
+      "experiment_id": "EXP-INTEL-35697055679",
+      "path": "research/experiments/EXP-INTEL-35697055679/handoff.json",
+      "sha256": "fc4bab31654c5ee192a49dac9ca00ea2311a5bc58a1789232e75954399d2b9c8",
+      "disposition": "SUPERSEDED"
+    }
+  }
+}
