@@ -1,10 +1,10 @@
 {
   "status": "success",
-  "model": "opencode/mimo-v2.5-free",
-  "attempt": 1,
+  "model": "opencode/muse-spark-1.2-contributor-free",
+  "attempt": 2,
   "exit_code": 0,
   "category": "ok",
-  "github_run_id": "35651943981",
-  "github_run_attempt": "2",
-  "recorded_at": "2026-09-21T20:49:22.559002+00:00"
+  "github_run_id": "35725770026",
+  "github_run_attempt": "1",
+  "recorded_at": "2026-09-22T12:17:12.564053+00:00"
 }

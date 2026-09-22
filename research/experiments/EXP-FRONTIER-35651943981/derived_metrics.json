@@ -1,0 +1,297 @@
+{
+  "novelty_levels": [
+    0.0,
+    0.25,
+    0.5,
+    0.75,
+    1.0
+  ],
+  "task_lengths": [
+    3,
+    6,
+    9
+  ],
+  "instances_per_cell": 10,
+  "reps": 5,
+  "total_tasks": 150,
+  "total_records": 750,
+  "corr_novelty_length": -0.052444266609043416,
+  "rho_novelty": {
+    "rho": -0.9815982427289883,
+    "p_one": 0.000999000999000999,
+    "p_two": 0.000999000999000999
+  },
+  "rho_length_by_novelty": {
+    "0.0": {
+      "rho": 0.7282418870508481,
+      "p_approx": 4.608010412679933e-26,
+      "p_perm_one": 1.0,
+      "p_perm_two": 0.000999000999000999
+    },
+    "0.25": {
+      "rho": 0.8183764344382913,
+      "p_approx": 1.981753027515583e-37,
+      "p_perm_one": 1.0,
+      "p_perm_two": 0.000999000999000999
+    },
+    "0.5": {
+      "rho": 0.9394358056155684,
+      "p_approx": 1.034627879785235e-70,
+      "p_perm_one": 1.0,
+      "p_perm_two": 0.000999000999000999
+    },
+    "0.75": {
+      "rho": -0.32772770577275345,
+      "p_approx": 4.2418076246531644e-05,
+      "p_perm_one": 0.000999000999000999,
+      "p_perm_two": 0.000999000999000999
+    },
+    "1.0": {
+      "rho": 0.4355874570397356,
+      "p_approx": 2.5336674912271867e-08,
+      "p_perm_one": 1.0,
+      "p_perm_two": 0.000999000999000999
+    }
+  },
+  "adv_by_novelty_mean": {
+    "0.0": 0.4470650787793272,
+    "0.25": 0.1832359554948843,
+    "0.5": -0.034697700692105954,
+    "0.75": -0.1904775012442272,
+    "1.0": -0.45525854275725647
+  },
+  "adv_by_novelty_std": {
+    "0.0": 0.03434568467269613,
+    "0.25": 0.07208422004919963,
+    "0.5": 0.11329008073035726,
+    "0.75": 0.04942863531653136,
+    "1.0": 0.052157494562888866
+  },
+  "cell_table": {
+    "0.0_3": {
+      "n": 50,
+      "mean_cold": 5.992684842742513,
+      "mean_spider": 3.5024142924039903,
+      "mean_retrieval": 4.502757010407029,
+      "mean_adv_spider": 0.41455858090674597,
+      "mean_adv_retrieval": 0.2475260900955366,
+      "success_rate": 1.0
+    },
+    "0.0_6": {
+      "n": 50,
+      "mean_cold": 11.95355023453887,
+      "mean_spider": 6.535458395042209,
+      "mean_retrieval": 8.993130375796133,
+      "mean_adv_spider": 0.45304838813969367,
+      "mean_adv_retrieval": 0.24736009859590458,
+      "success_rate": 1.0
+    },
+    "0.0_9": {
+      "n": 50,
+      "mean_cold": 18.055119590365642,
+      "mean_spider": 9.502726335141025,
+      "mean_retrieval": 13.501133201756756,
+      "mean_adv_spider": 0.4735882672915418,
+      "mean_adv_retrieval": 0.25209320020345866,
+      "success_rate": 1.0
+    },
+    "0.25_3": {
+      "n": 50,
+      "mean_cold": 6.028094407874514,
+      "mean_spider": 5.297654989869521,
+      "mean_retrieval": 4.982823511859616,
+      "mean_adv_spider": 0.11980658929569506,
+      "mean_adv_retrieval": 0.17215766653032702,
+      "success_rate": 1.0
+    },
+    "0.25_6": {
+      "n": 50,
+      "mean_cold": 11.965971868248555,
+      "mean_spider": 10.085703633830876,
+      "mean_retrieval": 9.970181979696765,
+      "mean_adv_spider": 0.15680864277073142,
+      "mean_adv_retrieval": 0.166451281037253,
+      "success_rate": 1.0
+    },
+    "0.25_9": {
+      "n": 50,
+      "mean_cold": 18.01435785157352,
+      "mean_spider": 13.091902508887113,
+      "mean_retrieval": 14.483954182304949,
+      "mean_adv_spider": 0.27309263441822657,
+      "mean_adv_retrieval": 0.19581098662677765,
+      "success_rate": 1.0
+    },
+    "0.5_3": {
+      "n": 50,
+      "mean_cold": 6.000061621361132,
+      "mean_spider": 7.076267847840795,
+      "mean_retrieval": 5.472408290664873,
+      "mean_adv_spider": -0.18144190205532346,
+      "mean_adv_retrieval": 0.08654887793012163,
+      "success_rate": 1.0
+    },
+    "0.5_6": {
+      "n": 50,
+      "mean_cold": 11.993115981030243,
+      "mean_spider": 11.904015856690826,
+      "mean_retrieval": 10.534187549124958,
+      "mean_adv_spider": 0.007078968902856696,
+      "mean_adv_retrieval": 0.12131692279601518,
+      "success_rate": 1.0
+    },
+    "0.5_9": {
+      "n": 50,
+      "mean_cold": 18.018359318484347,
+      "mean_spider": 16.749293045884436,
+      "mean_retrieval": 15.477180944151128,
+      "mean_adv_spider": 0.0702698310761489,
+      "mean_adv_retrieval": 0.1408974835448661,
+      "success_rate": 1.0
+    },
+    "0.75_3": {
+      "n": 50,
+      "mean_cold": 5.984961000946173,
+      "mean_spider": 7.1283079642040965,
+      "mean_retrieval": 5.464186786716307,
+      "mean_adv_spider": -0.19269381237478572,
+      "mean_adv_retrieval": 0.08541086961803111,
+      "success_rate": 1.0
+    },
+    "0.75_6": {
+      "n": 50,
+      "mean_cold": 11.971536796423377,
+      "mean_spider": 13.725929894033175,
+      "mean_retrieval": 11.021149475255422,
+      "mean_adv_spider": -0.14689014057108157,
+      "mean_adv_retrieval": 0.07908049677948806,
+      "success_rate": 1.0
+    },
+    "0.75_9": {
+      "n": 50,
+      "mean_cold": 17.970752423636956,
+      "mean_spider": 22.133486888725653,
+      "mean_retrieval": 16.98977125410237,
+      "mean_adv_spider": -0.2318485507868143,
+      "mean_adv_retrieval": 0.054416209402662376,
+      "success_rate": 1.0
+    },
+    "1.0_3": {
+      "n": 50,
+      "mean_cold": 5.989115349009718,
+      "mean_spider": 8.934881080711405,
+      "mean_retrieval": 5.968977538812364,
+      "mean_adv_spider": -0.4943312240810089,
+      "mean_adv_retrieval": 0.0016782046851450219,
+      "success_rate": 1.0
+    },
+    "1.0_6": {
+      "n": 50,
+      "mean_cold": 11.996631065161544,
+      "mean_spider": 17.287920214341764,
+      "mean_retrieval": 12.0198158598258,
+      "mean_adv_spider": -0.4415802668765521,
+      "mean_adv_retrieval": -0.002176091080881352,
+      "success_rate": 1.0
+    },
+    "1.0_9": {
+      "n": 50,
+      "mean_cold": 17.996611266130692,
+      "mean_spider": 25.728619792730733,
+      "mean_retrieval": 18.018244164367914,
+      "mean_adv_spider": -0.4298641373142086,
+      "mean_adv_retrieval": -0.0013305029634503745,
+      "success_rate": 1.0
+    }
+  },
+  "replay_success_rate": {
+    "0.0": 1.0,
+    "0.25": 0.0,
+    "0.5": 0.0,
+    "0.75": 0.0,
+    "1.0": 0.0
+  },
+  "raw_records": [
+    {
+      "task_id": 1,
+      "novelty_target": 0.0,
+      "novelty_actual": 0.0,
+      "task_length": 3,
+      "rep": 0,
+      "n_novel": 0,
+      "n_known": 3,
+      "cost_cold": 5.689558956737155,
+      "cost_spider": 3.530423165724026,
+      "cost_retrieval": 4.747682460678374,
+      "cost_replay": 0.8999999999999999,
+      "adv_spider": 0.3794908897914557,
+      "adv_retrieval": 0.16554472907666784
+    },
+    {
+      "task_id": 1,
+      "novelty_target": 0.0,
+      "novelty_actual": 0.0,
+      "task_length": 3,
+      "rep": 1,
+      "n_novel": 0,
+      "n_known": 3,
+      "cost_cold": 6.0258662709870245,
+      "cost_spider": 3.7999214097741856,
+      "cost_retrieval": 4.595575518967766,
+      "cost_replay": 0.8999999999999999,
+      "adv_spider": 0.3693983173722562,
+      "adv_retrieval": 0.23735852866595064
+    },
+    {
+      "task_id": 1,
+      "novelty_target": 0.0,
+      "novelty_actual": 0.0,
+      "task_length": 3,
+      "rep": 2,
+      "n_novel": 0,
+      "n_known": 3,
+      "cost_cold": 6.013329005073766,
+      "cost_spider": 3.336698468513344,
+      "cost_retrieval": 4.591197652690722,
+      "cost_replay": 0.8999999999999999,
+      "adv_spider": 0.4451162632714768,
+      "adv_retrieval": 0.23649651485609982
+    },
+    {
+      "task_id": 1,
+      "novelty_target": 0.0,
+      "novelty_actual": 0.0,
+      "task_length": 3,
+      "rep": 3,
+      "n_novel": 0,
+      "n_known": 3,
+      "cost_cold": 5.788818594149042,
+      "cost_spider": 3.6651250297454894,
+      "cost_retrieval": 4.333719671536027,
+      "cost_replay": 0.8999999999999999,
+      "adv_spider": 0.3668613085492164,
+      "adv_retrieval": 0.2513637107377546
+    },
+    {
+      "task_id": 1,
+      "novelty_target": 0.0,
+      "novelty_actual": 0.0,
+      "task_length": 3,
+      "rep": 4,
+      "n_novel": 0,
+      "n_known": 3,
+      "cost_cold": 5.756315559990519,
+      "cost_spider": 3.6857981719457795,
+      "cost_retrieval": 4.673601205047136,
+      "cost_replay": 0.8999999999999999,
+      "adv_spider": 0.3596949066579925,
+      "adv_retrieval": 0.1880915567709366
+    }
+  ],
+  "cost_model": {
+    "exploration_cost_novel": 2.8,
+    "cost_known": 1.0,
+    "overhead_spider": 0.5,
+    "cold_multiplier": 2.0
+  }
+}
