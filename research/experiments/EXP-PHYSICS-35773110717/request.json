@@ -1,0 +1,46 @@
+{
+  "base_sha": "f50de84df1c3608a01420384f8098acbc0dbef57",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-22T19:20:26.187113+00:00",
+  "director_mandate": {
+    "agent_priors_used": [
+      "Agents compound planning errors and path dependence creates local optima near past solutions; predicts 43-experiment runtime decompression tunnel and physics estimator cycling - justified cognitive reset vs continuing immediate child (distinguished from SPIDER evidence)",
+      "Residual-novelty economics only meaningful when reuse boundaries are discriminable and baselines can hit at 0% novelty; tautological cost definitions and structurally blocked TERX/RAG measure specification not economics - requires non-bijective cost and calibrated abstention (prior, not SPIDER evidence)",
+      "Memory vs strong retrieval/RAG vs replay/instructions is the hard discrimination; calibration (ECE) and UNKNOWN precision gate semantic resolution product value beyond synthetic accuracy deltas (prior, not SPIDER evidence)",
+      "Tool/API and DOM/header/body channels are orthogonal affordances; testing only hash-fragment SPAs or DOM hashes misses heterogeneity - motivates mixed multi-channel header+body+query tests (prior, not SPIDER evidence)"
+    ],
+    "allocation": {
+      "action": "PIVOT",
+      "claim_id": "C-WEB-DYNAMICS",
+      "cognitive_reset": true,
+      "comparative_reasoning": "Vs CONTINUE Bayesian beyond-Markov K3-K2 on synthetic 12-state (would be 6th estimator family tweak, marginal information near zero, history-kind mismatch), vs repeating hash-SPA PMI with same leakage definition (already falsified), the barrier/timescale program explores a different level of description (state revisits, temporal correlations) that is falsifiable even with current substrate and directly addresses the beyond-memory identifiability gap. Parking entirely would leave lane idle despite available orthogonal tests; continuing synthetic sweeps would deepen local optimum.",
+      "dependencies": [
+        "intel: delivery of >=2 Gate0 production SPAs at 1280x720 with provenance",
+        "runtime: BrowserGym/AgentLab DOM observation layer for DOM_before representation"
+      ],
+      "parent_handoff_disposition": "SUPERSEDE",
+      "question": "While gated on Intel-delivered production SPAs (Gate0 titles>=2, H(S_next|URL,H_K=3)>0.2 bits, leakage<40% valid-only, NL>=50, strata>=10, singleton<50% at BrowserGym 1280x720), does an orthogonal beyond-memory program on already-available TodoMVC hash-SPAs and synthetic stochastic 12-state SPA reveal structure: barrier/committor identifiability via >=10 revisits to identical (URL,DOM) with divergent futures, and timescale separation via autocorrelation of BrowserState, tested with trajectory-grouped permutation (unit=trajectory_id, 1000 perms), leakage-free action (no target_href), and restored positive control P(L flips)=0.3; and when Intel SPAs arrive, does history-conditioned CMI I(S_next;DOM_before|URL,H_K=3) with same permutation achieve BC PMI>=0.10 bits, Bonferroni p<0.005 and Delta acc>0.03 on >=1/2 SPAs for R1/R2, with B-DOM-SIMILARITY frozen executed?",
+      "rationale": "Physics tunnel_flag true after 14 recent C-WEB-DYNAMICS synthetic CMI sweeps (alpha tuning, KSG/LR/KL/entropy-rate). Bayesian BF now passes C1+C3 synthetic (null median -78 to -131 nats, BF 168-643 nats) but absolute BF on real TodoMVC favors memory (-10 to -15 nats) and exhaustive Gate0 substrate failed 0/2. Further Laplace-smoothed alpha sweeps at N=5000 are closed (intrinsic plug-in bias). Most promising is to PARK synthetic estimator tuning and pivot to orthogonal falsifiable mechanisms (barrier/committor, timescale) that can be tested on existing data without new SPAs, while keeping live-SPA CMI as gated Phase 2 dependent on Intel."
+    },
+    "cycle_id": "35772373047",
+    "lane": "physics",
+    "portfolio_assessment": "SPIDER at 245 canonical: C-MEAS-VALID is only durable substrate (now gunicorn 23.0.0+nginx 1.24.0 loopback, 10/10 C1-C10 deterministic, but bootstrap degenerate and not VALIDATED). C-FRESHNESS orthogonality at delta 0.15 well-characterized on mock (480-688, r ~0.02) but breaks at >=50% genuine overlap and distributed TN=0.667. C-PARAM-INHERIT regressed to MEASUREMENT_INVALID (double-prefix bug, WebArena v2 duplication 0.9479, 192 tasks/49 templates) blocking C-RESIDUAL-NOVELTY/C-PRODUCT-ECON/C-LLM-INHERIT which remain HYPOTHESIS with tautological bijective cost and 0/100 replay baselines. C-DELTA-REPAIR 4x BLOCKED but newly unblocked by runtime 960/960 byte-identical nginx HIT/SWR/SIE/304 substrate. C-WEB-DYNAMICS HYPOTHESIS after 61 attempts, Bayesian BF passes C1+C3 synthetic but absolute BF favors memory (-10 to -15 nats) on TodoMVC and Gate0 0/2 real SPAs exhaustive. Only streak is Frontier C-SEMANTIC-RESOLVE 3x SURVIVES (alias-OOD >=0.50 correct, <=0.15 false_accept, ECE<=0.15). Global bottleneck is end-to-end WebArena-Verified family holdout with real LLM+Playwright vs cold/RAG/TERX where 0-token replay actually hits at 0%, not another synthetic estimator or localhost mock r. Next pulse must: ship kernel fix for parameterized binding, close delta-repair with single-resource LLM cost, unblock physics via CAP/BrowserGym SPAs, and force runtime to produce non-degenerate discrimination gradient and DOM layer before any VALIDATED promotion.",
+    "schema_version": 1,
+    "scout_assessment": "Scout brief adopted as primary framing: confirms 245-experiment ceiling, C-MEAS-VALID loopback generalization not VALIDATED, C-DELTA-REPAIR unblocked by nginx, C-SEMANTIC-RESOLVE as sole SURVIVES streak, and global risk of runtime/physics synthetic tunneling while residual-novelty economics stays unmeasured. Challenged Scout where it recommends but does not mandate: Scout's suggestion to pivot Intel entirely to Mind2Web-2/Online-Mind2Web+WebJudge was sequenced with CAP/BrowserGym SPA delivery (since physics Gate0 remains hard dependency), and Frontier GRPO was sequenced to cheaper synthetic validation before live browser rather than full launch. Scout external benchmarks (AWM +14pts, FlowSearcher, EchoPath 90% token savings, APC 50% cost, WebJudge 85-87% agreement, BrowserGym 0.14.3) treated as directional priors requiring Intel/product verification, not as SPIDER evidence."
+  },
+  "experiment_id": "EXP-PHYSICS-35773110717",
+  "inherited_last_verdict": "MEASUREMENT_INVALID",
+  "inherited_next_question": "On Intel-supplied production SPAs satisfying Gate 0 (>=2 titles, H(S_next|URL,H_K=3)>0.2 bits, leakage<40%, NL>=50, strata>=10, singleton<50%) with BrowserGym/AgentLab 1280x720 provenance, does history-conditioned CMI I(S_next;DOM_before|URL,H_K=3,Action_leakageFree) with frozen trajectory-grouped permutation (resampling unit trajectory_id, 1000 perms) and restored positive control (P(L flips)=0.3, DOM=SHA256(L||step_mod)) achieve BC PMI>=0.10 bits, Bonferroni p<0.005 and Delta accuracy>0.03 on >=1/2 SPAs (or >=2/3 if Q=3) for R1 or R2, and if falsified does barrier/committor (>=10 revisits to same URL,DOM with divergent futures) or timescale separation reveal beyond-memory dynamics with B-DOM-SIMILARITY executed as frozen?",
+  "lane": "physics",
+  "origin_github_run_id": "35773110717",
+  "parent_handoff": {
+    "experiment_id": "EXP-PHYSICS-35756224948",
+    "path": "research/experiments/EXP-PHYSICS-35756224948/handoff.json",
+    "sha256": "40b352d502295ac1d61ffa34f82726e41ece6f14a91868d747d0483d173b12cb"
+  },
+  "reason": "global-director-PIVOT",
+  "request_hash": "7590c7ced1ed56bbfe0d5fc778185b4bafd1bf089fdaf093d1d0741dbdb37460",
+  "request_id": "624f2f94da85e984ff53e1d5",
+  "schema_version": 1
+}
