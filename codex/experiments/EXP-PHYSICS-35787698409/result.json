@@ -1,0 +1,190 @@
+{
+ "schema_version": 1,
+ "experiment_id": "EXP-PHYSICS-35787698409",
+ "lane": "physics",
+ "status": "MEASUREMENT_INVALID",
+ "outcome": "NOT_APPLICABLE",
+ "metrics": {
+  "primary_BC_R1_bits": 0.7066301312074345,
+  "primary_BC_R2_bits": 0.7066301312074345,
+  "primary_observed_R1_bits": 0.7814504686211815,
+  "primary_observed_R2_bits": 0.7814504686211815,
+  "primary_null_mean_R1_bits": 0.07482033741374705,
+  "primary_null_mean_R2_bits": 0.07482033741374705,
+  "primary_null_std_R1_bits": 0.009673109096484044,
+  "primary_null_std_R2_bits": 0.009673109096484044,
+  "primary_p_raw_R1": 0.000999000999000999,
+  "primary_p_raw_R2": 0.000999000999000999,
+  "primary_p_bonf_R1": 0.007992007992007992,
+  "primary_p_bonf_R2": 0.007992007992007992,
+  "primary_cohen_d_R1": 73.05098331458687,
+  "primary_cohen_d_R2": 73.05098331458687,
+  "primary_H_S_given_C_bits": 3.3339485437068914,
+  "primary_n_strata": 24,
+  "primary_total_n": 1999,
+  "primary_gap_R1_over_sim_bits": 0.7066301312074345,
+  "primary_gap_R2_over_sim_bits": 0.7066301312074345,
+  "primary_gap_R1_over_markov1_bits": 0.7066301312074345,
+  "primary_gap_R2_over_markov1_bits": 0.7066301312074345,
+  "independent_BC_R1_bits": -0.0006267723388851398,
+  "independent_BC_R2_bits": -0.0006267723388851398,
+  "independent_p_raw_R1": 0.5294705294705294,
+  "independent_p_raw_R2": 0.5294705294705294,
+  "independent_null_std_R1_bits": 0.0064861000185869,
+  "independent_null_std_R2_bits": 0.0064861000185869,
+  "independent_null_mean_R1_bits": -0.05551119323130842,
+  "independent_null_mean_R2_bits": -0.05551119323130842,
+  "iid_BC_R1_bits": 0.0016177726749195959,
+  "iid_BC_R2_bits": 0.0016177726749195959,
+  "iid_p_raw_R1": 0.3926073926073926,
+  "iid_p_raw_R2": 0.3926073926073926,
+  "iid_null_std_R1_bits": 0.007123968247633958,
+  "iid_null_std_R2_bits": 0.007123968247633958,
+  "baseline_BC_sim_R1_bits": 0.0,
+  "baseline_BC_sim_R2_bits": 0.0,
+  "baseline_BC_markov1_R1_bits": 0.0,
+  "baseline_BC_markov1_R2_bits": 0.0,
+  "baseline_acc_sim_R1": 0.108,
+  "strata_count": 24,
+  "strata_ge3": 24,
+  "singleton_rate": 0.0,
+  "H_S_given_C_corr_bits": 3.3339485437068914,
+  "H_S_given_C_ind_bits": 2.610386669830385,
+  "H_S_given_C_iid_bits": 2.6085502874714237,
+  "MI_DOM_Action_R1_bits": 0.0,
+  "cardinality_R1_over_N": 0.018009004502251125,
+  "dom_bytes_avg": 24.0,
+  "a11y_bytes_avg": 24.0,
+  "primary_null_ci_low_R1_bits": 0.057424529864714934,
+  "primary_null_ci_high_R1_bits": 0.09395346071830113,
+  "independent_observed_R1_bits": -0.05613796557019356,
+  "iid_observed_R1_bits": -0.04061008940078683,
+  "primary_R4_BC_bits": -0.003952717529748368,
+  "primary_R4_p_raw": 0.7362637362637363,
+  "S_URLonly_BC_R1_bits": 0.07935934488153815,
+  "S_URLonly_p_raw_R1": 0.004975124378109453,
+  "site_leakage_BC_leaky_R1_bits": 0.036282985675355456,
+  "site_leakage_BC_free_R1_bits": 0.7066301312074345,
+  "trajectory_memory_test_exact_acc": 0.15166666666666667,
+  "trajectory_memory_n_keys": 24
+ },
+ "controls": {
+  "positive_control_correlated": {
+   "expected": "BC>=0.30 p_raw<0.01 null_std>0.01 |null_mean|<0.1 on R1 or R2",
+   "observed": "R1 BC 0.7066 p_raw 0.0010 p_bonf 0.0080 null_mean 0.0748 null_std 0.0097 d 73.05 H 3.334 n_strata 24 |R|/N 0.018; R2 identical (R1/R2 share same L encoding)",
+   "pass": false,
+   "reason": "BC and p pass decisively (0.707>=0.30, p_raw 0.001<0.01) and null_mean 0.0748<0.1 now passes (K=12->K=24 recalibration fixed parent centering 0.1297), but null_std 0.00967<=0.01 still fails by 0.0003 bits => frozen G1 not satisfied => MEASUREMENT_INVALID. Std shortfall reflects tight trajectory-grouped permutation variance at N=1999/24 strata, not pipeline blindness (BC 0.707>>0.30, d 73).",
+   "evidence_ref": "research/experiments/EXP-PHYSICS-35787698409/raw_results.json correlated.dom_before_R1.cmi"
+  },
+  "null_control_independent_noise": {
+   "expected": "|BC|<0.05 p_raw>0.10 null_std>0.01 |null_mean|<0.1 (confound present if BC>=0.05 p<0.10)",
+   "observed": "R1 BC -0.0006 p_raw 0.529 null_mean -0.0555 null_std 0.0065; R2 identical; H 2.610; RECALIBRATED 6 variants per state (parent had 3)",
+   "pass": false,
+   "reason": "Independence criteria on BC/p pass (|BC| 0.0006<0.05, p 0.529>0.10) replicating parent falsification -0.0051 and prior EXP-PHYSICS-34764605162 0.004 bits; G2 confound NOT triggered. null_std 0.0065<0.01 degenerate documented as representation loss (low DOM diversity per stratum), not a confound.",
+   "evidence_ref": "research/experiments/EXP-PHYSICS-35787698409/raw_results.json independent.dom_before_R1.cmi"
+  },
+  "null_control_iid": {
+   "expected": "BC<=0.03 p_raw>0.10 |null_mean|<0.1 null_std>0.01",
+   "observed": "R1 BC 0.0016 p_raw 0.393 null_std 0.0071 null_mean -0.0422; R2 identical; H 2.609",
+   "pass": true,
+   "reason": "IID null correctly centered and non-significant (BC 0.0016<=0.03, p 0.393>0.10); correlated BC 0.707 is not estimator bias. null_std 0.0071<0.01 noted but G3 miscentering requires BC>0.03, not triggered.",
+   "evidence_ref": "research/experiments/EXP-PHYSICS-35787698409/raw_results.json iid"
+  },
+  "null_control_grouped_permutation_on_primary": {
+   "expected": "null_std>0.01 and |null_mean|<0.1; violation on BOTH R1 and R2 => G4 MEASUREMENT_INVALID",
+   "observed": "R1 null_mean 0.0748 null_std 0.0097; R2 identical; mean passes, std fails narrowly (0.0097<=0.01) on both R1 and R2",
+   "pass": false,
+   "reason": "G4 engaged: primary grouped-permutation null std 0.0097<=0.01 on BOTH R1 and R2 => frozen MEASUREMENT_INVALID. Borderline: std shortfall 0.0003 bits. Mean centering fixed by K=24 (0.0748<0.1 vs parent 0.1297).",
+   "evidence_ref": "research/experiments/EXP-PHYSICS-35787698409/raw_results.json correlated.dom_before_R1.cmi.perm_std"
+  },
+  "baseline_B-DOM-SIMILARITY": {
+   "expected": "BC_sim via TF-IDF cosine k=5 fit TRAIN trajectories 70/30; primary must exceed sim by >=0.05",
+   "observed": "R1 BC_sim 0.0 acc_sim 0.108; R2 BC_sim 0.0; primary BC 0.7066 exceeds sim by 0.7066>=0.05 (would satisfy sig(R) if gates passed)",
+   "pass": true,
+   "reason": "Ordinary DOM similarity carries no predictive info beyond (URL,H_K=3,Action) conditioning while hash-DOM does; gap satisfies director mandate >=0.05.",
+   "evidence_ref": "research/experiments/EXP-PHYSICS-35787698409/raw_results.json correlated.dom_before_R1.sim"
+  },
+  "baseline_B-MARKOV-1": {
+   "expected": "BC_markov1 via MLE P(S_next|URL,Action) fit TRAIN 70/30; primary must exceed by >=0.05",
+   "observed": "R1 BC_markov1 0.0; R2 0.0; primary BC 0.7066 exceeds by 0.7066>=0.05",
+   "pass": true,
+   "reason": "First-order Markov without DOM carries no extra predictive info beyond conditioning; DOM does.",
+   "evidence_ref": "research/experiments/EXP-PHYSICS-35787698409/raw_results.json correlated.dom_before_R1.markov"
+  },
+  "baseline_B-MARKOV-K3": {
+   "expected": "History memory baseline majority vote P(S_next|URL,H_K=3,Action)",
+   "observed": "BC_markovK3 0.0; H(S|C) 3.334; DOM still adds 0.7066",
+   "pass": true,
+   "reason": "History memory alone does not explain DOM predictive information.",
+   "evidence_ref": "research/experiments/EXP-PHYSICS-35787698409/raw_results.json correlated"
+  },
+  "data_quality_strata": {
+   "expected": "strata_count>=5 with >=3 per stratum, singleton<0.70, H>0.3, |R|/N 0.01..0.20, MI(DOM;Action)<0.10",
+   "observed": "strata 24 total, ge3 24, singleton 0.0, H 3.334>0.3, |R|/N 0.018, MI(DOM;Action) 0.0, leakage gap 0.7066-0.0363=0.6703, trajectory-memory test_acc 0.1517 vs chance 0.1667",
+   "pass": true,
+   "reason": "Data quality passes; strata dense (24 strata, avg 83 per stratum); fragment-preserving linkage valid.",
+   "evidence_ref": "research/experiments/EXP-PHYSICS-35787698409/raw_results.json metrics"
+  }
+ },
+ "artifacts": [
+  {
+   "path": "research/experiments/EXP-PHYSICS-35787698409/raw_transitions_correlated.json",
+   "sha256": "2ffc9e95f8b7c244deee256f4009d95a6b1a53c289795093333e4e55801ab195",
+   "role": "raw",
+   "description": "1999 transitions correlated-state SPA 50 traj x40 steps, trajectory_id, step, URL_before, URL_after, title, action_primitive, target_sig, DOM_before_visibleText[0:5000], DOM_before_a11y[0:5000], S_next hash, latent L, variant_mod, dom_bytes. BYTE-IDENTICAL to parent EXP-PHYSICS-35782523165 (replication)."
+  },
+  {
+   "path": "research/experiments/EXP-PHYSICS-35787698409/raw_transitions_independent.json",
+   "sha256": "7215be085497462abbd576b12af9710eb7cea862cbd6b750b5702881d3acb517",
+   "role": "raw",
+   "description": "1999 transitions independent-noise replication RECALIBRATED: 6 variants per state (parent had 3), independent per-step draw, same FSM without L bias. Differs from parent by design."
+  },
+  {
+   "path": "research/experiments/EXP-PHYSICS-35787698409/raw_transitions_iid.json",
+   "sha256": "ab685d9d21cea93881c8a813d0b7e844fa28229ad7f2d7698484a1e5e1c3c95b",
+   "role": "raw",
+   "description": "1999 transitions i.i.d. synthetic null, same marginal P(S), S_next independent per step. BYTE-IDENTICAL to parent."
+  },
+  {
+   "path": "research/experiments/EXP-PHYSICS-35787698409/raw_results.json",
+   "sha256": "3cee45f4e0946b981e413221b093fd18330ecdc024bd9955face940e65e1c113",
+   "role": "derived",
+   "description": "Full CMI results per representation (R1..R4), trajectory-grouped permutation null (1000 perms seed 42), Bayesian DM K=24 alpha=1/24, baselines, baselines, gates G1-G4, decision, sensitivity probes, strata tables."
+  },
+  {
+   "path": "research/experiments/EXP-PHYSICS-35787698409/execute.py",
+   "sha256": "482e98c49d88b7f994d05cea71813bd181bca7cc9d0131f250c4d6336b73b3f6",
+   "role": "code",
+   "description": "Execution code: Bayesian DM K=24 alpha=1/K, trajectory-grouped permutation (trajectory_id resampling, seed 42), strata C=(URL_before_norm, H_K=3 actions, Action), 6 independent variants, R1-R4 representations, B-SITE-LEAKAGE and B-TRAJECTORY-MEMORY diagnostics, S_URLonly sensitivity, frozen G1-G4 decision rule."
+  }
+ ],
+ "observations": [
+  "RECALIBRATION OUTCOME: K=12->K=24 alpha=1/K (mandated because parent audit predicted mean 0.074/std 0.0104 both pass) delivered perm_mean 0.0748 (<0.1 PASS, fixed from parent 0.1297) but perm_std 0.00967 (still <=0.01 FAIL by 0.0003 bits). The predicted std pass margin did not materialize: null std is a permutation-variance property of N=1999/24 strata, not a prior-calibration artifact.",
+  "Correlated primary: N=1999, 50 traj x40 steps, latent L per trajectory (959 A /1040 B), 36 unique DOM hashes (|R|/N 0.018, 6 per state: 2 L x6 varied), dom_bytes avg 24, H(S|C) 3.334>0.3, strata 24 (ge3 24, singleton 0.0), MI(DOM;Action) 0.0 bits, trajectory_id is resampling unit.",
+  "Bayesian DM K=24: observed CMI R1 0.7815 bits, perm_mean 0.0748, perm_std 0.0097, BC 0.7066, p_raw 0.001 (floor 1/1001), p_bonf 0.00799 (<0.01), Cohen d 73.05, null 95% CI [0.0574, 0.0940]. R2 identical (visible_text and a11y both encode L), R3 multi_feature same. R4 numeric-structural null (BC -0.0040 p 0.736).",
+  "Independent-noise replication RECALIBRATED (6 variants/state): BC -0.0006, p_raw 0.529, perm_std 0.0065, perm_mean -0.0555, H 2.610. |BC|<0.05 p>0.10 => replicates prior falsification (parent -0.0051, EXP-PHYSICS-34764605162 0.004 bits) with 6-variant diversity; no independent confound.",
+  "IID null: BC 0.0016, p 0.393, perm_std 0.0071, perm_mean -0.0422. Centered, non-significant => correlated BC 0.707 not estimator bias.",
+  "Baselines on correlated: B-DOM-SIMILARITY BC_sim 0.0 acc 0.108; B-MARKOV-1 0.0; B-MARKOV-K3 0.0; gap BC-max(sim,markov1)=0.7066>=0.05 would satisfy sig(R) on R1/R2 if gates passed.",
+  "Diagnostics (non-gating): B-SITE-LEAKAGE BC_leaky 0.0363 vs BC_free 0.7066 (gap 0.6703) => signal resides in leakage-free DOM content, not href leakage; B-TRAJECTORY-MEMORY test_exact_acc 0.1517 vs chance 0.1667 (1/6) with test coverage 1.0 => trajectory memorization does not explain signal; S_URLonly BC 0.079 p 0.005 => URL-conditioning probe far below full conditioning, no leakage via URL.",
+  "FINAL: G1 fails (null_std 0.0097<=0.01) and G4 engages (degenerate on both R1/R2) => status MEASUREMENT_INVALID, outcome NOT_APPLICABLE, verdict MEASUREMENT_INVALID per frozen rule. NOT falsification; primary claim not adjudicated."
+ ],
+ "validity_notes": [
+  "G1 positive control fails only on null_std>0.01 by 0.0003 bits (0.00967 vs 0.01). null_mean centering (0.0748<0.1) now passes after K=24 recalibration, resolving parent's mean issue. With 1000 grouped perms at N=1999/24 strata the permutation std is structurally tight; it scales DOWN with N, so more data alone will not satisfy std>0.01.",
+  "G4: primary null degenerate on both R1 and R2 solely because null_std<=0.01; triggers MEASUREMENT_INVALID per frozen rule, preventing a false negative/positive. Borderline status of both G1 and G4 driven by the same single quantity (perm_std).",
+  "Independent-noise control null_std 0.0065<0.01 degenerate (6 variants per state still low within-stratum DOM diversity, large n per stratum), but BC/p correctly show independence => G2 not triggered; degeneracy documented as representation loss, not confound.",
+  "Representation loss: DOM_before truncated to 5000 chars visibleText and a11y_tree; hash SHA256 truncated 16 hex, collision negligible; raw observables preserved. R1/R2/R3 isomorphic by construction (all encode L); R4 structural degenerate (BC -0.0040) as expected.",
+  "History H_K=3 operational: strata key C=(URL_before_norm, H_K tuple, Action), H_K = last 3 leakage-free actions; trajectory-grouped permutation preserves per-trajectory DOM frequencies within C; resampling unit trajectory_id seed 42; CI via permutation percentiles, not Gaussian.",
+  "Leakage control: Action leakageFree = primitive:target_sig (never href); href leak diagnostic BC_leaky 0.0363 vs BC_free 0.7066; MI(DOM;Action) 0.0 confirms no tautology action->DOM.",
+  "Split integrity: TF-IDF vocab and Markov counts fit on TRAIN trajectories only (70/30 by trajectory_id); site identity never a feature.",
+  "Sampling integrity: 50 traj x40 steps uniform click; determinism via PYTHONHASHSEED=0 numpy seed 42; Python hash() not used as seed; independent transitions rng_dom=default_rng(seed+12345) integers(0,6), transition rng seed+999 fixed per frozen spec.",
+  "Gate0 not required: locally-hosted Express SPAs substrate_available by construction, no external dataset, avoids prior Q=0 0.0 dom_bytes trap.",
+  "Auditability: raw transitions, hashes, strata, permutation distributions, code and frozen gates recorded; re-executable from frozen commit yields byte-identical raw transitions and identical measurements (input-intrinsic), with only elapsed varying; model_execute.json documents one transient retry before successful run (no semantics affected)."
+ ],
+ "unresolved": [
+  "Whether the frozen null_std>0.01 threshold is well-calibrated for this regime: single borderline quantity (perm_std 0.0097) now decides MEASUREMENT_INVALID vs COMPLETE/SURVIVES while BC 0.707 exceeds null by ~70 stds. A future prereg could relax/adjust the degeneracy definition with justification, or add an orthogonal degeneracy check; the current frozen rule must stand as recorded.",
+  "How to raise permutation null std: since grouped-permutation std decreases with N, options are fewer/longer trajectories, coarser strata, or a different degenerate-null definition; increasing N alone moves std further below 0.01.",
+  "What BC would be observed on true production BrowserGym/WebShop DOM-bearing trajectories with correlated latent regimes (session/permission) outside hash truncation and with richer DOM; this experiment bounded to locally-hosted 6-state FSM class.",
+  "Whether independent-noise control should use even more variants (6 was insufficient to clear null_std>0.01) or per-stratum balanced sampling to raise within-stratum DOM diversity.",
+  "Whether B-TRAJECTORY-MEMORY should be a gating control in future designs (currently diagnostic only; exact-acc 0.152 near chance supports non-memorization)."
+ ]
+}

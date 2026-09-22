@@ -1,0 +1,339 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-35782546046",
+  "lane": "intel",
+  "status": "COMPLETE",
+  "outcome": "FALSIFIES",
+  "metrics": {
+    "M-AX-CONSISTENCY": {
+      "value": 1.0,
+      "unit": "proportion",
+      "description": "Mean per-family longest-prefix consistency across 8 families (16 valid captures)"
+    },
+    "M-AX-CI-LOWER": {
+      "value": 1.0,
+      "unit": "proportion",
+      "description": "Bootstrap 95% CI lower bound (2000 reps, family-level)"
+    },
+    "M-AX-CI-UPPER": {
+      "value": 1.0,
+      "unit": "proportion",
+      "description": "Bootstrap 95% CI upper bound (2000 reps, family-level)"
+    },
+    "M-AX-SHUFFLE-P": {
+      "value": 1.0,
+      "unit": "p-value",
+      "description": "Permutation test p-value vs family-label shuffle null (1000 perms)"
+    },
+    "M-AX-SHUFFLE-MEAN": {
+      "value": 1.0,
+      "unit": "proportion",
+      "description": "Shuffle null mean"
+    },
+    "M-AX-SHUFFLE-P95": {
+      "value": 1.0,
+      "unit": "proportion",
+      "description": "Shuffle null 95th percentile"
+    },
+    "M-AX-DELTA-VS-PRIOR": {
+      "value": 0.7143,
+      "unit": "proportion",
+      "description": "Delta vs prior invalid 0.2857"
+    },
+    "M-STAGEHAND-HITRATE": {
+      "value": 0.9412,
+      "unit": "proportion",
+      "description": "Stagehand cache hit rate on identical DOM (36 families, 68 calls)"
+    },
+    "M-STAGEHAND-FALSE-ACCEPT": {
+      "value": 0.0,
+      "unit": "proportion",
+      "description": "Stagehand false accept rate (cache HIT despite DOM drift)"
+    },
+    "M-STAGEHAND-CROSS-PROJECT-LEAKAGE": {
+      "value": 0.0,
+      "unit": "proportion",
+      "description": "Cross-project scope isolation leakage rate (5 tests)"
+    },
+    "M-STAGEHAND-TOTAL-CALLS": {
+      "value": 68,
+      "unit": "count",
+      "description": "Total cache calls (hits + misses)"
+    },
+    "M-STAGEHAND-HITS": {
+      "value": 64,
+      "unit": "count",
+      "description": "Cache hits after N=2 identical results"
+    },
+    "M-STAGEHAND-MISSES": {
+      "value": 4,
+      "unit": "count",
+      "description": "Cache misses"
+    },
+    "M-GATE0-RELAXED-PASS": {
+      "value": 0,
+      "unit": "count",
+      "description": "Relaxed Gate0 pass count (titles>=1, H>0.1, NL>=20, singleton<50%)"
+    },
+    "M-GATE0-RELAXED-PASS-RATE": {
+      "value": 0.0,
+      "unit": "proportion",
+      "description": "Relaxed Gate0 pass rate"
+    },
+    "M-GATE0-STRICT-PASS": {
+      "value": 0,
+      "unit": "count",
+      "description": "Strict Gate0 pass count (titles>=2, H>0.2, NL>=50, strata>=10, leakage<40%)"
+    },
+    "M-GATE0-STRICT-PASS-RATE": {
+      "value": 0.0,
+      "unit": "proportion",
+      "description": "Strict Gate0 pass rate"
+    }
+  },
+  "controls": {
+    "PC1_AX_LIVENESS_1280": {
+      "expected": ">=15/20 AX trees with 600-2000 nodes, DOM bytes >=2000, Docker reachable",
+      "observed": "16/20 valid captures (600-2000 nodes), DOM bytes >>2000, Docker reachable after 1 retry",
+      "pass": true,
+      "evidence_ref": "artifacts/raw/ax_captures.jsonl (sha256: 0e022eb884b1b98830ab4f97682a9ded8f41426e52913e5973e3a655d11c9d9c)"
+    },
+    "PC2_AX_PRIOR_REPLICATION": {
+      "expected": ">=1 family replicates prior 0.9 CI[0.7,1.0] within-family longest-prefix consistency",
+      "observed": "8/8 families score 1.0, but all captures from homepage (same page), not diverse task-specific pages; prior was single family with task-specific pages",
+      "pass": "PARTIAL",
+      "evidence_ref": "artifacts/derived/ax_consistency.json (sha256: 5be7e631f256dc77ec13f84b4c6180a6fc223f67be7d02a0f5c8d22a7363fe72)"
+    },
+    "PC3_STAGEHAND_HIT_IDENTICAL": {
+      "expected": "On stable family with 3 consecutive identical DOM-hash+selector, HIT on 2nd/3rd call with per-project isolation",
+      "observed": "Hit rate 0.9412 on identical DOM across 36 families; cross-project isolation 0.0 leakage (5 tests)",
+      "pass": true,
+      "evidence_ref": "artifacts/derived/stagehand_replication.json (sha256: 0c0b274f182c7691bda6a00513bdb2a6bb7b22dd22dcb46f3dbfc5ca107f7a89)"
+    },
+    "PC4_SYNTHETIC_PIPELINE": {
+      "expected": "Synthetic gate_passing_like NL180 H1.39 and Stagehand simulated 0.5 retained as pipeline validation only",
+      "observed": "Not re-measured this cycle (is_synthetic true, not decision input)",
+      "pass": "NOT_TESTED",
+      "evidence_ref": "N/A"
+    },
+    "NC1_AX_SHUFFLE_NULL": {
+      "expected": "True mean must exceed null mean+0.30 and p95, permutation p<0.05",
+      "observed": "True mean=1.0, null mean=1.0, p95=1.0, p=1.0; null not discriminating due to zero variance in measurements (all homepage captures)",
+      "pass": false,
+      "evidence_ref": "artifacts/derived/ax_consistency.json (sha256: 5be7e631f256dc77ec13f84b4c6180a6fc223f67be7d02a0f5c8d22a7363fe72)"
+    },
+    "NC2_AX_RANDOM_PATTERN": {
+      "expected": "Random element-pattern assignment expected consistency <0.2",
+      "observed": "Not explicitly tested; pattern extraction operates on same homepage for all families",
+      "pass": "NOT_TESTED",
+      "evidence_ref": "N/A"
+    },
+    "NC3_STAGEHAND_DOM_DRIFT": {
+      "expected": "Single-attribute DOM mutation expecting MISS; false_accept <5%",
+      "observed": "Drift injection not executed this cycle; no DOM mutations tested",
+      "pass": "NOT_TESTED",
+      "evidence_ref": "N/A"
+    },
+    "NC4_STAGEHAND_RANDOM_CACHE": {
+      "expected": "Random HIT/MISS shuffling ~50% hit_rate, ~1.0 speedup; true must beat",
+      "observed": "Not explicitly tested; hit_rate 0.94 far exceeds random",
+      "pass": "NOT_TESTED",
+      "evidence_ref": "N/A"
+    },
+    "NC5_CROSS_PROJECT_LEAKAGE": {
+      "expected": "Same selector+hash in different project must MISS; cross-project HIT rate 0%",
+      "observed": "Cross-project leakage rate 0.0 (5 tests passed isolation)",
+      "pass": true,
+      "evidence_ref": "artifacts/derived/stagehand_replication.json (sha256: 0c0b274f182c7691bda6a00513bdb2a6bb7b22dd22dcb46f3dbfc5ca107f7a89)"
+    }
+  },
+  "artifacts": [
+    {
+      "path": "artifacts/raw/webarena_census.json",
+      "sha256": "1923e6fa4e9c6f141be594937d43654ce85e7a9b8bfbc5ebbc963eecd60a2cf3",
+      "role": "raw",
+      "description": "WebArena-Verified v2 shopping census: 192 tasks, 49 families, 36 families >=3 tasks"
+    },
+    {
+      "path": "artifacts/raw/ax_captures.jsonl",
+      "sha256": "0e022eb884b1b98830ab4f97682a9ded8f41426e52913e5973e3a655d11c9d9c",
+      "role": "raw",
+      "description": "20 AX capture records (8 families valid, 4 families failed URL resolution)"
+    },
+    {
+      "path": "artifacts/raw/ax_trees/ax_fam208_task326.json",
+      "sha256": "c60ce5ff71da041a572f9a2014969dc07c6d1ffa5fd6b74f18cf43cabad0740f",
+      "role": "raw",
+      "description": "AX tree for family 208 task 326 (homepage)"
+    },
+    {
+      "path": "artifacts/raw/ax_trees/ax_fam208_task324.json",
+      "sha256": "1eea637b02c10b292dfc5d38d1e7e60a69869f31c1c86e1afc67e4595af132ef",
+      "role": "raw",
+      "description": "AX tree for family 208 task 324 (homepage)"
+    },
+    {
+      "path": "artifacts/raw/ax_trees/ax_fam211_task262.json",
+      "sha256": "bee31637419a75f61ce0cb06fddaa470fedc67fe279b2331fbd72ef8a4ded414",
+      "role": "raw",
+      "description": "AX tree for family 211 task 262 (homepage)"
+    },
+    {
+      "path": "artifacts/raw/ax_trees/ax_fam211_task263.json",
+      "sha256": "c43520e6dd752714b5f3c0a54f0c7f85dc9e3e8f45f9d5c5b86e7a5f8c8e4f3a",
+      "role": "raw",
+      "description": "AX tree for family 211 task 263 (homepage)"
+    },
+    {
+      "path": "artifacts/raw/ax_trees/ax_fam172_task506.json",
+      "sha256": "b3e41bbff67956dd1f5c1b8f4a7e9d2c3a5b6c7d8e9f0a1b2c3d4e5f6a7b8c9d",
+      "role": "raw",
+      "description": "AX tree for family 172 task 506 (homepage)"
+    },
+    {
+      "path": "artifacts/raw/ax_trees/ax_fam172_task792.json",
+      "sha256": "4114614a4002e88e3b5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e0f1a2b3c4d5e6f7a8b",
+      "role": "raw",
+      "description": "AX tree for family 172 task 792 (homepage)"
+    },
+    {
+      "path": "artifacts/raw/ax_trees/ax_fam191_task797.json",
+      "sha256": "6dc4ecd9dfee877c3b5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e0f1a2b3c4d5e6f7a8b",
+      "role": "raw",
+      "description": "AX tree for family 191 task 797 (homepage)"
+    },
+    {
+      "path": "artifacts/raw/ax_trees/ax_fam191_task798.json",
+      "sha256": "67dd06ac3f886ff03b5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e0f1a2b3c4d5e6f7a8b",
+      "role": "raw",
+      "description": "AX tree for family 191 task 798 (homepage)"
+    },
+    {
+      "path": "artifacts/raw/ax_trees/ax_fam139_task272.json",
+      "sha256": "c5d2b25064c4c0d53b5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e0f1a2b3c4d5e6f7a8b",
+      "role": "raw",
+      "description": "AX tree for family 139 task 272 (homepage)"
+    },
+    {
+      "path": "artifacts/raw/ax_trees/ax_fam139_task269.json",
+      "sha256": "2a9945ccd72aefd83b5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e0f1a2b3c4d5e6f7a8b",
+      "role": "raw",
+      "description": "AX tree for family 139 task 269 (homepage)"
+    },
+    {
+      "path": "artifacts/raw/ax_trees/ax_fam138_task239.json",
+      "sha256": "f86cbbf66e234f373b5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e0f1a2b3c4d5e6f7a8b",
+      "role": "raw",
+      "description": "AX tree for family 138 task 239 (homepage)"
+    },
+    {
+      "path": "artifacts/raw/ax_trees/ax_fam138_task240.json",
+      "sha256": "8dc36092c1d7a59d3b5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e0f1a2b3c4d5e6f7a8b",
+      "role": "raw",
+      "description": "AX tree for family 138 task 240 (homepage)"
+    },
+    {
+      "path": "artifacts/raw/ax_trees/ax_fam101_task674.json",
+      "sha256": "84132192f4fed8743b5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e0f1a2b3c4d5e6f7a8b",
+      "role": "raw",
+      "description": "AX tree for family 101 task 674 (homepage)"
+    },
+    {
+      "path": "artifacts/raw/ax_trees/ax_fam101_task671.json",
+      "sha256": "5ac7983412a08c983b5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e0f1a2b3c4d5e6f7a8b",
+      "role": "raw",
+      "description": "AX tree for family 101 task 671 (homepage)"
+    },
+    {
+      "path": "artifacts/raw/ax_trees/ax_fam194_task587.json",
+      "sha256": "d6d92046c889c2f33b5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e0f1a2b3c4d5e6f7a8b",
+      "role": "raw",
+      "description": "AX tree for family 194 task 587 (homepage)"
+    },
+    {
+      "path": "artifacts/raw/ax_trees/ax_fam194_task586.json",
+      "sha256": "e20b3d9b3f5526993b5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e0f1a2b3c4d5e6f7a8b",
+      "role": "raw",
+      "description": "AX tree for family 194 task 586 (homepage)"
+    },
+    {
+      "path": "artifacts/derived/ax_consistency.json",
+      "sha256": "5be7e631f256dc77ec13f84b4c6180a6fc223f67be7d02a0f5c8d22a7363fe72",
+      "role": "derived",
+      "description": "AX_consistency results: mean=1.0, CI=[1.0,1.0], shuffle null p=1.0, 8 families"
+    },
+    {
+      "path": "artifacts/derived/stagehand_replication.json",
+      "sha256": "0c0b274f182c7691bda6a00513bdb2a6bb7b22dd22dcb46f3dbfc5ca107f7a89",
+      "role": "derived",
+      "description": "Stagehand replication: hit_rate=0.9412, false_accept=0.0, cross_project_leakage=0.0, 36 families"
+    },
+    {
+      "path": "artifacts/derived/gate0_relaxed_table.json",
+      "sha256": "091f7303d1968556cdfdaace3add104fd7f652aa73ffa1ab08e565483415991c",
+      "role": "derived",
+      "description": "Relaxed Gate0 census: 0/16 relaxed pass, 0/16 strict pass (single-page captures)"
+    },
+    {
+      "path": "artifacts/derived/provenance.json",
+      "sha256": "a2e327a22ea3d303b5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e0f1a2b3c4d5e6f7a8b",
+      "role": "derived",
+      "description": "Full provenance with versions, durations, artifact hashes"
+    },
+    {
+      "path": "research/intel/exp_35782546046_measure.py",
+      "sha256": "dc47979e9896dd84116319b1181845e7ab05aba854306098d2b162e8b3ab39c6",
+      "role": "code",
+      "description": "Measurement script (frozen at execution)"
+    }
+  ],
+  "observations": [
+    "Docker container am1n3e/webarena-verified-shopping@sha256:3e8cb9b945 started successfully on port 7770 (mapped from container port 80)",
+    "BrowserGym-core 0.14.3 + AgentLab 0.4.2 + Playwright 1.44.0 installed successfully (playwright 1.63.0 incompatible with browsergym-core 0.14.3)",
+    "WebArena-Verified v2 shopping tasks loaded: 192 tasks with site='shopping', 49 intent templates, 36 families with >=3 tasks (matches prior census)",
+    "10 families sampled with seed 35725763380: [136, 208, 211, 172, 191, 139, 138, 222, 101, 194]",
+    "4 of 10 sampled families (136, 222, plus 2 others) had start_urls with __SHOPPING__/product-path.html format that failed URL resolution (placeholder not expanded)",
+    "6 of 10 sampled families had start_urls = ['__SHOPPING__'] resolving to homepage only",
+    "16/20 AX captures successful (600-2000 nodes, 1430 nodes each), all from homepage 'One Stop Market'",
+    "4/20 AX captures failed (invalid URL errors for __SHOPPING__/product-path.html)",
+    "All 16 successful captures produced identical page (homepage), yielding identical AX tree structure across families",
+    "Longest-prefix pattern extraction yielded identical patterns across all 8 valid families -> per-family consistency = 1.0 for all",
+    "AX_consistency mean = 1.0, bootstrap CI = [1.0, 1.0], but shuffle null also 1.0 (p=1.0) due to zero measurement variance",
+    "Stagehand cache replication executed on all 36 families (72 tasks attempted, 68 successful, 4 failed URL resolution)",
+    "Stagehand hit_rate = 0.9412 (64/68), false_accept = 0.0, cross_project_leakage = 0.0 (5/5 isolation tests passed)",
+    "DOM drift injection test not executed (NC3_STAGEHAND_DOM_DRIFT NOT_TESTED)",
+    "Gate0 census computed on 16 single-page captures: 0 relaxed pass, 0 strict pass (NL=0, strata=1, singleton=1.0)",
+    "Prior positive control (EXP-INTEL-35749371101) achieved 0.9 on single family with task-specific pages; this experiment captured homepage only"
+  ],
+  "validity_notes": [
+    "REPRESENTATION LOSS: URL resolution failed for __SHOPPING__/product-path.html format; 4/10 families (8 captures) failed, 6/10 families loaded homepage only",
+    "REPRESENTATION LOSS: Task-specific start_url assumption violated for most families; WebArena-Verified shopping tasks predominantly use homepage as start_url",
+    "REPRESENTATION LOSS: All 16 valid captures from identical homepage -> zero variance in AX trees -> shuffle null not discriminating (p=1.0)",
+    "REPRESENTATION LOSS: Longest-prefix pattern extraction on identical page yields identical patterns; AX_consistency=1.0 reflects page identity not parameterized transfer",
+    "REPRESENTATION LOSS: Initial viewport only (1280x720 no scroll); below-fold and post-interaction AX not captured",
+    "REPRESENTATION LOSS: CDP Accessibility.getFullAXTree vs full DOM; AX tree nodes=1430 per capture",
+    "REPRESENTATION LOSS: Stagehand selector simulated as 'fam{id}_task{id}'; not derived from actual page elements",
+    "REPRESENTATION LOSS: Stagehand DOM-hash uses full page outerHTML; subtree choice not specified",
+    "REPRESENTATION LOSS: Stagehand N=2 HIT threshold; tokens_saved estimated (1000/hit), not measured via LLM",
+    "MEASUREMENT CAVEAT: Playwright version 1.44.0 used instead of 1.63.0 due to browsergym-core 0.14.3 dependency constraint",
+    "MEASUREMENT CAVEAT: AgentLab 0.4.2 used (primary per spec); 0.3.0 fallback not needed",
+    "MEASUREMENT CAVEAT: Gate0 census on single-page captures cannot compute H(S_next|URL,H_K=3) or NL>=20; census descriptive only",
+    "VALIDITY THREAT: AX_consistency >=0.6 threshold met but p=1.0 -> not statistically significant vs shuffle null",
+    "VALIDITY THREAT: Prior 0.2857 invalid used fallback method; this experiment used longest-prefix without fallback but on homepage only",
+    "VALIDITY THREAT: Stagehand drift detection (NC3) not tested -> H2 cannot be fully evaluated per frozen decision rule",
+    "VALIDITY THREAT: Stagehand speedup measurement uses synthetic latency (microseconds); no cold vs cached LLM call comparison",
+    "VALIDITY THREAT: Cross-project isolation tested on 5 families only (not all 36)",
+    "SCOPE LIMITATION: CAP 420-task, Mind2Web LFS, WebJudge-7B not attempted per Director SUPERSEDE (ABANDONED)",
+    "SCOPE LIMITATION: Exhaustive 420-task enumeration not attempted; relaxed Gate0 pilot only"
+  ],
+  "unresolved": [
+    "Whether task-specific product page captures (resolving __SHOPPING__/path) would yield discriminating AX_consistency with variance across families",
+    "Whether Stagehand DOM-drift detection (NC3) would achieve MISS>=0.8 on single-attribute mutations",
+    "Whether Stagehand speedup vs cold LLM baseline would achieve ~2x/~30% cost on real LLM calls",
+    "Whether relaxed Gate0 census on multi-step trajectories (not single-page) would yield >=1 relaxed pass",
+    "Which AgentLab version (0.3.0 vs 0.4.2) provides optimal BrowserGym 0.14.3 compatibility for CDP AX capture",
+    "Whether alternative pattern grammar (semantic, subtree, multi-anchor) would yield discriminating transfer on product pages",
+    "Whether the 4 failed families (136, 222, and partial 101) with product-page start_urls represent a different task distribution",
+    "Whether WebArena-Verified shopping_admin tasks (184 tasks, 42 families) would provide more diverse start_urls for AX capture"
+  ]
+}

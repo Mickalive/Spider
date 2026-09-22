@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-FRONTIER-35782552659",
+  "lane": "frontier",
+  "decision": "MIXED",
+  "claim_updates": [
+    {
+      "claim_id": "C-SEMANTIC-RESOLVE",
+      "status": "EXPERIMENTAL",
+      "reason": "MIXED per frozen S1-S6: S1-S5 PASS (hierarchical+genuine reconstruction 40/40 pooled 1.0 Wilson [0.912,1.0] binomial p~1e-40 vs 0.10, McNemar p<0.05 vs B-EXACT-MATCH 0/40, orthogonal 1.0, mixed 1.0, held-out 9/9 1.0, false_accept 0.0 <=0.15 and 1.0 below B-VERBATIM-REPLAY 0/40 p<0.05, exact-match 12/12 no regression, no-applicable/empty 12/12+6/6 UNKNOWN precision 1.0, ECE 0.1076 CI [0.0882,0.1149] <=0.15, not dominated) but S6 COMPLEMENTARITY FAILS (coverage gain point 0.0 bootstrap CI [0.0,0.0] p=1.0, density gain 0.133 p=0.325 NS). Audit PASS (producer_claim_supported true) confirms coverage S6 structurally non-identifiable: per-task registry_size 3 <= k=5 (hier adaptive k 2.75) forces coverage identically 1.0 for flat TFIDF-K5, EMBED-K5, RANDOM-K5 and hierarchical, so gain cannot discriminate. Hierarchical index degenerated to 63 singleton themes (one per episode) at frozen Jaccard>=0.6 average linkage (within-task Jaccard ~0.5 cross-task ~0), aggregation contributed no grouping. Thus resolution not regressing but hierarchical complementarity not demonstrated on this substrate; prior 40/40 reconstruction ceiling preserved, not advanced to VALIDATED/PRODUCT_CORE. Bounded to byte-identical synthetic fixture sha 4abf1487 (40 pooled 30 orthogonal +10 mixed, 12 exact, 12 no-applicable, 6 empty), minimal derived dict only, no BrowserGym live (N_live 0)."
+    }
+  ],
+  "product_action": "NO_PROMOTION",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "Does WebAPI endpoint+method+auth-scope mining (tool/API bypass via direct endpoint discovery) provide higher-leverage alias-OOD resolution than hierarchical decoupling-before-aggregation retrieval complementarity on the same validated synthetic orthogonal header/body/auth + mixed multi-channel splits, measured by correct endpoint invocation vs template rewriting with complementarity, calibration (ECE<=0.15, UNKNOWN precision>=0.85) and task-grouped CIs, without requiring BrowserGym 1280x720 live substrate?",
+  "reason": "Grounded in frozen spec decision_rule S1-S6 and independent audit PASS. All PC (PC-EXACT-MATCH 12/12, PC-RETRIEVAL-HEALTH 30/40 hier>=flat 0.75, PC-HIERARCHICAL-INDEX-BUILT 63 themes) and NC (NC-NO-APPLICABLE gated precision 1.0, NC-EMPTY 6/6, NC-ORACLE-LEAK std 0.327>0.05) formally PASS, so not MEASUREMENT_INVALID. S1-S5 satisfy frozen thresholds (pooled 40/40 1.0 Wilson [0.912,1.0], binomial_vs_0.10 p~1e-40, McNemar vs exact p=6.98e-10, orthogonal 30/30, mixed 10/10, held-out 9/9, S2 false 0.0 vs verbatim 1.0 p<0.05, S3 exact 12/12, S4 precision 1.0 ECE 0.1076<=0.15, S5 not dominated tie 1.0 vs best flat). S6 fails both coverage gain >=0.15 (observed 0.0 CI [0,0]) and density gain p<0.05 (0.133 CI [0,0.2667] p=0.325). Audit V1-V3 confirm S6 non-identifiability due to pool<=k (coverage 1.0 structurally) and 63-singleton fragmentation at Jaccard 0.6, and reconstruction ceiling (40/40 for all reconstructed pipelines including RANDOM-K5) makes S1-S5 trivially pass. Bounded MIXED is the correct DIRECTOR bounding: do not promote hierarchical retrieval; keep flat/exact baselines; close hierarchical for these families/compositions pending pool>>k redesign; synthetic-to-real gap remains dominant unknown. EXP codes: hierarchical 40/40 vs flat TFIDF 40/40 vs EMBED 40/40 vs RANDOM 40/40 vs exact 0/40 vs verbatim 0/40 vs EMBED-K1 0/40.",
+  "evidence_refs": [
+    "research/experiments/EXP-FRONTIER-35782552659/spec.json sha c723181a69b34bd70acee1fa29847f13865e4de8ecbceecd530a02dc02f01266 decision_rule S1-S6",
+    "research/experiments/EXP-FRONTIER-35782552659/result.json sha 3771f0d3fddc7ceb6f5f5bb87780e40fbf0f1a3fb0d0b9c10b62e4d907886223 metrics alias_ood_pooled_n 40, coverage_gain 0.0 CI [0,0] p1.0, hierarchical_index theme_count 63 singleton true",
+    "research/experiments/EXP-FRONTIER-35782552659/derived_metrics.json sha e7ed8d2a072b75842810bdb1584e33c6a80126ae68b685714d24a75170a99dfe alias_ood 40/40 hier vs 40/40 flat TFIDF/EMBED, McNemar hier_vs_best_flat p1.0, density 1.95 vs 1.8167 gain 0.133 p0.325",
+    "research/experiments/EXP-FRONTIER-35782552659/audit.json sha PASS producer_claim_supported true recomputed alias 40/40 flat 40/40 coverage 1.0, V1 pool_le_k critical, V2 singleton high, V3 ceiling high, B1 flat ties hier strong",
+    "research/experiments/EXP-FRONTIER-35782552659/raw_evidence.json sha 4969ae02d35caadf1fd6215cbdd8592c0f984b5cee4835d5d1c3dc1fc8d0e703 490 rows 70 tasks x7 pipelines registry_size 3 recall@k 1.0",
+    "research/experiments/EXP-FRONTIER-35782552659/index_manifest.json sha ef2fa566357fcafb3cc1810ff905161c7242845f1edf3f3d88a74ef53203 (alt e378803642cb80a867788819744624305ced2febb30a035259d0f25dd094c1b5) 63 themes singleton 203 components",
+    "research/experiments/EXP-FRONTIER-35782552659/tasks.json sha 4abf148721fdee9dfe56ac776f6b3112344821a4ea80d183c5313adeced1f35e byte-identical parent EXP-FRONTIER-35773143736",
+    "research/experiments/EXP-FRONTIER-35782552659/provenance.json sha 98ce651b19538cf159f3c55d3bcaa8fcd11ed92e635bb5e3851556394848d08f seed 42 TFIDF train-only embed all-MiniLM-L6-v2",
+    "codex/claim_state.json:C-SEMANTIC-RESOLVE EXPERIMENTAL bounded synthetic rule+learned 40/40 ceiling"
+  ]
+}
