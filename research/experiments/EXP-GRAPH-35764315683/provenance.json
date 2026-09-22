@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-35764315683",
+  "lane": "graph",
+  "created_at": "2026-09-22T20:54:49.683850+00:00",
+  "git_commit": "3ea4dc5e4d7446d87bdfa6daa9db6b7feca1e1f0",
+  "artifacts": [
+    {
+      "path": "request.json",
+      "sha256": "13879d1e7d2a8aeaf249f0ea2ee01a09f95f8e609e36dc21f50ca20d6e224488",
+      "role": "fixture"
+    },
+    {
+      "path": "spec.json",
+      "sha256": "0a08f4dff713d4c83c7cf3ba97bf2bc07d945cb0227b08fc27aa89593eea2803",
+      "role": "fixture"
+    },
+    {
+      "path": "prereg.md",
+      "sha256": "3d1bd62d73b1d8585ba2b1c720da80115bff8d3457492a7ffe328636fd44b3a1",
+      "role": "fixture"
+    },
+    {
+      "path": "freeze.json",
+      "sha256": "583b3667aa6584876b3e713447e4a6861c465cf6623a11c2c25e049786b1a522",
+      "role": "fixture"
+    }
+  ],
+  "environment": {
+    "python": "3.12.14 (main, Aug 13 2026, 02:47:42) [GCC 13.3.0]",
+    "platform": "linux",
+    "numpy": "2.5.3",
+    "infrastructure": {
+      "nginx_binary": true,
+      "nginx_version": "nginx version: nginx/1.24.0 (Ubuntu)",
+      "python_version": "3.12.14 (main, Aug 13 2026, 02:47:42) [GCC 13.3.0]",
+      "openai_sdk_installed": true,
+      "playwright_sdk_installed": true,
+      "flask_installed": true,
+      "pyjwt_installed": true,
+      "llm_api_key_present": false,
+      "nginx_proxy_cache_configured": false,
+      "flask_backend_deployed": false,
+      "repair_agent_implemented": false,
+      "playwright_browsers_installed": true
+    }
+  },
+  "commands": [
+    "python3 research/experiments/EXP-GRAPH-35764315683/execute_real.py"
+  ],
+  "notes": "EXP-GRAPH-35764315683 EXECUTE: C-DELTA-REPAIR real substrate measurement BLOCKED by missing OPENAI_API_KEY. Frozen design (spec.json, prereg.md, freeze.json) requires real gpt-4o-mini + Playwright + nginx HIT/SWR/SIE/304 + Flask HS256. 48 instances generated, TRAIN/TEST split 24/24. No measurements executed. Status MEASUREMENT_INVALID per decision_rule C1-C3 failure (infrastructure, not scientific)."
+}
