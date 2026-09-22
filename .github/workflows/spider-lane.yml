@@ -337,7 +337,16 @@ jobs:
           set -euo pipefail
           EXP="${{ steps.prep.outputs.experiment_id }}"
           DIR="research/experiments/$EXP"
-          [[ -f "$DIR/verdict.json" && -f "$DIR/handoff.json" ]] || exit 0
+
+          # A lane that stops before a durable verdict must not go dormant.
+          # This covers ordinary DESIGN/EXECUTE/AUDIT/DIRECTOR failures where
+          # GitHub still executes always() cleanup. Hard runner termination is
+          # still covered by the scheduled Factory Pulse fallback.
+          if [[ ! -f "$DIR/verdict.json" || ! -f "$DIR/handoff.json" ]]; then
+            gh workflow run factory-pulse.yml --ref main
+            echo "SPIDER_FACTORY_WAKE_AFTER_INCOMPLETE lane=$LANE experiment=$EXP"
+            exit 0
+          fi
 
           # Never wake Codex/promotion from an unpushed local verdict. A workflow
           # can have computed a valid packet and still fail durability at checkpoint.
