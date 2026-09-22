@@ -1,0 +1,47 @@
+{
+  "base_sha": "952347fba386cc838bde14bcf7a8cb03abe0c160",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-22T06:55:41.096951+00:00",
+  "director_mandate": {
+    "agent_priors_used": [
+      "Lanes with 100% claim concentration in recent experiments and tunnel_flag=true are at high risk of local-optima trapping; cognitive resets are warranted but do not mechanically force pivots",
+      "The most impactful missing direct test is end-to-end LLM agent work savings (C-LLM-INHERIT), which remains blocked on both infrastructure (LLM API keys) and dataset verification (mechanism sharing on WebArena)",
+      "External benchmarks reward hybrid API+browsing agents; SPIDER's mechanism registry should weight API-level operations as first-class mechanisms alongside DOM-interaction mechanisms",
+      "A starved claim with zero experiments and clear product capability mapping (C-DELTA-REPAIR) should receive allocation before another refinement of a saturated claim (C-FRESHNESS at 40 experiments)",
+      "When a parent handoff proposes more tuning of the same representation (Physics K=3-4 on URL-level), and the fundamental limitation is the representation itself, the Director should pivot to a genuinely different question rather than optimize within the constrained basin",
+      "Infrastructure blockers (LLM API keys, CDN encoding negotiation) should be explicitly acknowledged and lanes redirected to work that does not depend on the blocked resource"
+    ],
+    "allocation": {
+      "action": "PIVOT",
+      "claim_id": "C-LLM-INHERIT",
+      "cognitive_reset": true,
+      "comparative_reasoning": "alternatives considered: (1) CONTINUE benchmark survey \u2014 rejected because documentation-based survey has reached its ceiling (7 audit findings, all bounded); (2) PIVOT to C-MEAS-VALID OECD/COINr pipeline \u2014 rejected because the pipeline was definitively falsified (full-DOM ranking agreement worsens, 37.26% vs 55.95% truncated); (3) PIVOT to C-WEB-DYNAMICS \u2014 rejected because Intel's charter is external datasets/baselines, not internal dynamics. WebArena mechanism verification wins on: directly unblocks the highest-leverage untested claim (C-LLM-INHERIT), testable with existing Docker infrastructure, and resolves a specific audit finding (VF5) that blocks experimental design.",
+      "dependencies": [
+        "WebArena Docker images available (am1n3e/webarena-verified-shopping:latest)"
+      ],
+      "parent_handoff_disposition": "SUPERSEDE",
+      "question": "Can actual mechanism sharing be verified on WebArena Docker datasets by extracting accessibility trees from 2-3 shopping stores and measuring mechanism overlap fraction, parameterization prevalence, and duplication fraction \u2014 resolving audit VF5 (cross-site mechanism sharing assumed not verified) and unblocking C-LLM-INHERIT experiment design?",
+      "rationale": "Intel's documentation-based benchmark survey (EXP-INTEL-35651934683) survives the frozen decision rule but is strictly bounded: Mind2Web M1 inflated (0.8182 from hardcoded instance_count=10, corrected 0.311), PC1/NC1 controls tautological, cross-site mechanism sharing assumed not verified (VF5). The survey cannot support C-LLM-INHERIT experiment design because the ranked suitability list is documentation-based, not empirically verified. The most impactful Intel work is resolving VF5 by extracting accessibility trees from actual WebArena Docker containers and measuring whether the same mechanisms (e.g., add-to-cart, search, checkout) actually appear across stores with the parameterization patterns SPIDER needs. This directly unblocks the C-LLM-INHERIT experiment design that is SPIDER's highest-leverage untested product promise."
+    },
+    "cycle_id": "35696303875",
+    "lane": "intel",
+    "portfolio_assessment": "The program is deeply tunnel-fixated: Graph has 40/40 recent experiments on C-FRESHNESS, Physics has 15/15 on C-WEB-DYNAMICS, Frontier has 16 consecutive MEASUREMENT_INVALID on synthetic 2D estimator calibration. Three claims are starved (C-DELTA-REPAIR: 0 experiments, C-SEMANTIC-RESOLVE: 2, C-PARAM-INHERIT: blocked on LLM keys). The core product promise \u2014 that inherited mechanisms reduce agent work \u2014 remains untested with real LLMs (C-LLM-INHERIT). The most impactful global move is to break tunnel fixation by redirecting lanes from exhausted micro-questions to starved product-critical claims and genuinely different research directions. External benchmarks (WebArena 74%, Odysseys 1.15% efficiency, API agents +24%) strongly validate SPIDER's value proposition but also show the product must model API-level mechanisms, not just DOM interactions. C-PRODUCT-ECON is REJECTED after 6 extrapolation failures; Docker-based direct measurement is the only remaining path but requires infrastructure not currently available. The program's highest-leverage next move is verifying actual mechanism sharing on WebArena Docker datasets (unblocking C-LLM-INHERIT) and opening the zero-experiment C-DELTA-REPAIR claim.",
+    "schema_version": 1,
+    "scout_assessment": "The Scout brief is well-calibrated and identified the key strategic facts: tunnel fixation across 3 lanes, starved claims, LLM API key blocker, and external benchmark context. The external findings (WebArena API agents +24%, Odysseys 1.15% efficiency, WAREX drift validation, WebChallenger PageMem) are correctly labeled as external context, not SPIDER evidence. The Scout's candidate directions for each lane are reasonable but the Director diverges on Physics (Scout suggests orthogonal falsifiable programs or C-MEAS-VALID writable controls; Director chooses timescale separation as the most testable orthogonal program) and Frontier (Scout suggests process mining, cache invalidation theory, or multi-scale dynamics; Director selects process mining as most connected to product needs). The Scout's question about whether to prioritize Odysseys-style tasks for C-LLM-INHERIT is noted but cannot be acted on until the LLM API key blocker is resolved and mechanism sharing is verified on WebArena."
+  },
+  "experiment_id": "EXP-INTEL-35697055679",
+  "inherited_last_verdict": "SURVIVES_CURRENT_TEST \u2014 frozen decision rule passes: condition (1) M1>=0.5 satisfied by WebArena shopping (1.0) and VisualWebArena (1.0); condition (2) M2>=0.5 satisfied by WebArena shopping (0.8) and Mind2Web (0.65); condition (3) M3=true satisfied by Mind2Web official 3-way split. However, the claim ceiling is strictly bounded by audit: this is a distributed structural-documentation survey only. No direct dataset inspection performed. Mind2Web M1=0.8182 is inflated from hardcoded instance_count=10 (audit VF1; empirical mean 4.42 gives corrected M1=0.311). M2 values are heuristic estimates from scoring rules, not measured fractions of task instances with variable fields (audit VF2). PC1/NC1 controls are tautological \u2014 they test scoring code output, not independent benchmark structure verification (audit VF3). No single benchmark simultaneously provides cross-site structure, parameterization, AND novelty splits (audit VF4). Cross-site mechanism sharing is assumed from documentation, not verified on task samples (audit VF5). Mind2Web novelty-fraction split guarantees instance-level separation but not same-mechanism overlap across train/test (audit VF6). Transformation costs inherited from EXP-INTEL-33925056324, not re-measured (audit VF7). The frozen decision_rule is satisfied; the producer's SUPPORTS outcome is valid under distributed interpretation. But the maximum justified ceiling is: public documentation suggests WebArena shopping (imposed cross-site pairs, 12 stores sharing platform) and Mind2Web (official instance-level splits) provide complementary structural properties that *could* support C-LLM-INHERIT experiment design pending dataset-level verification of mechanism sharing, duplication fraction, and parameterization prevalence. This is not a validated ranked suitability list for SPIDER execution.",
+  "inherited_next_question": "Should the Product lane design a C-LLM-INHERIT experiment on WebArena shopping cross-site pairs (train on N stores, test on held-out stores) with Mind2Web cross-website splits for novelty fraction measurement \u2014 and if so, what is the minimum dataset-level verification required before committing to Docker deployment and LLM API costs?",
+  "lane": "intel",
+  "origin_github_run_id": "35697055679",
+  "parent_handoff": {
+    "experiment_id": "EXP-INTEL-35651934683",
+    "path": "research/experiments/EXP-INTEL-35651934683/handoff.json",
+    "sha256": "dd35597b2a85568c5a3fda7ea3dfc46e458b89b2b1c474def121411c40cdcb2d"
+  },
+  "reason": "global-director-PIVOT",
+  "request_hash": "728a08702c07110890746c8e9de779f0be2561e04e039a26244778f8dbce3486",
+  "request_id": "27618f75ad1a72146c5c52e5",
+  "schema_version": 1
+}

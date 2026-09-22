@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-35697049382",
+  "lane": "product",
+  "git_commit": "8f71a6e63baa6d807a2b8bfdce45c02e9b751214",
+  "git_branch": "lab2/product",
+  "python_version": "3.12.14 (main, Aug 13 2026, 02:47:42) [GCC 13.3.0]",
+  "platform": "linux",
+  "dependencies": {
+    "flask": "3.1.3",
+    "pyjwt": "2.14.0",
+    "requests": "2.34.2",
+    "scipy": "1.18.1",
+    "numpy": "2.5.3"
+  },
+  "testbed": {
+    "server": "testbed_server.py",
+    "port": 18928,
+    "base_url": "http://127.0.0.1:18928",
+    "endpoints": [
+      "/api/user/profile",
+      "/api/data/list",
+      "/api/session/status"
+    ],
+    "jwt_algorithm": "HS256",
+    "jwt_secret": "testbed-hs256-shared-secret-exp-product-35697049382"
+  },
+  "artifacts": {
+    "result_json": "/home/runner/work/Spider/Spider/research/experiments/EXP-PRODUCT-35697049382/result.json",
+    "report_md": "/home/runner/work/Spider/Spider/research/experiments/EXP-PRODUCT-35697049382/report.md",
+    "provenance_json": "/home/runner/work/Spider/Spider/research/experiments/EXP-PRODUCT-35697049382/provenance.json",
+    "kernel_py": "/home/runner/work/Spider/Spider/research/src/spider/kernel.py",
+    "models_py": "/home/runner/work/Spider/Spider/research/src/spider/models.py",
+    "testbed_server": "/home/runner/work/Spider/Spider/research/experiments/EXP-PRODUCT-35697049382/testbed_server.py"
+  },
+  "frozen_inputs": {
+    "request_json_hash": "cc735295b9478f0c67a6aa6ad3d0c95e7e5b586afb8ad3f23a5f25d6f9de61d4",
+    "spec_json_hash": "950e9de64583bc75e631974876f275a176607d8f6054e5431ba7916c9e636a94",
+    "prereg_md_hash": "4f8effa4dcd8223da03de460ae662352fe4cf785bad65d0d7845e0aa900477cd"
+  },
+  "reproduction_recipe": {
+    "steps": [
+      "pip install flask pyjwt requests scipy numpy",
+      "pip install -e . (from repo root)",
+      "python research/experiments/EXP-PRODUCT-35697049382/run_experiment.py"
+    ],
+    "estimated_wall_clock_seconds": 120
+  }
+}

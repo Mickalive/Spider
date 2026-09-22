@@ -1,0 +1,71 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-35697049382",
+  "lane": "product",
+  "target_lane": "product",
+  "next_question": "Does the kernel freshness gate at prereg N=20 per cell with a non-degenerate co-occurring design (including no-drift controls or graded drift severity to provide behavioral variance) maintain TP>=0.85, FP<=0.10, two-sided orthogonality |r|<0.15 at delta=0.15, and demonstrate parallel-channel advantage over behavioral-only and structural-only baselines with staleness-gating regression and correct transport-failure handling?",
+  "why_next": "Current kernel wiring proves the HTTP probe pipeline exists and achieves binary drift detection (TP 1.0 on 401/403) with noise tolerance (FP 0.0) at ~1ms localhost, but the frozen orthogonality gate per spec is untestable as designed (Phase B behavioral constant 0.8, r nan) and the producer's combined-pooling workaround creates anti-correlation not orthogonality, leaving the validated parallel-channel architecture (previously confirmed at delta=0.15 on three stochastic mock PASS experiments) unjustified for this kernel wiring; missing single-channel baselines prevent product architecture decision that both channels are needed. The highest-information next step is a prereg-faithful re-run that restores behavioral variance, tests two-sided equivalence, executes the missing baselines inside kernel resolve() gating, and exercises staleness gating and transport failure handling, before any bounded PRODUCT_CORE advance or distributed/CDN validation.",
+  "carry_forward": {
+    "established": [
+      "Kernel freshness_check subprocess is wired into src/spider/kernel.py and uses real HTTP GET to mechanism.freshness.probe_url with Bearer token: behavioral_score 0.8 on 401/403 vs 0.0 on 200 at threshold 0.25, on localhost Flask 3.1.3 + PyJWT 2.14.0 HS256 + SQLite WAL mock at 127.0.0.1:18928 (TESTBED_SECRET testbed-hs256-shared-secret-exp-product-35697049382) — pipeline existence validated",
+      "Drift detection TP=1.0 on 45 samples (3 drift types expired_token/session_invalidation/permission_boundary x3 endpoints x5 per cell) at threshold 0.25, per-endpoint 5/5 each when aggregated; disclosed reduced N vs prereg N=20 per cell (spec required 180 Phase A, 480 Phase B, 240 Phase C)",
+      "Noise tolerance FP=0.0 on 60 noise-only samples (4 noise types optional_field_addition/description_change/response_time_jitter/field_type_normalization x3 endpoints x5) with valid token ->200->behavioral 0.0; deterministic mapping implies FP would remain 0 at prereg N=240 but not measured at that N",
+      "Median latency 0.985ms p95 1.196ms mean 1.018ms over 100 resolve() calls with freshness_check active on localhost, far below 200ms gate, measured via time.perf_counter() around freshness_check only — localhost-only, no registry I/O, no production RTT",
+      "Existing regression 3/3 tests in tests/test_kernel.py pass without modification (returncode 0) — but mechanisms have no probe_url so freshness gate is no-op on that suite",
+      "Structural fingerprint uses accumulated history window=20 per endpoint via md5(etag|cache_control) cardinality, diverging from spec X-Request-Id requirement; testbed adds ETag/Cache-Control/X-Request-Id on all responses including 401/403 and never returns 304 so non-304 filter is moot",
+      "Prior C-FRESHNESS orthogonality at delta=0.15 remains established ONLY from three stochastic localhost mock PASS experiments: EXP-GRAPH-35353011131 (r=0.0463 CI [-0.043,0.135] TOST p_upper0.011 n480), EXP-GRAPH-35389145821 (r=0.0022 CI [-0.087,0.092] TOST p_upper0.0006 n480 with HTTP caching), EXP-PRODUCT-35445596342 (r=-0.0258 CI [-0.115,0.064] TOST p_upper5.6e-05 n480) — this kernel experiment does NOT extend that ceiling"
+    ],
+    "rejected": [
+      "Orthogonality at delta=0.15 demonstrated per frozen spec in this kernel wiring — REJECTED: spec-required Phase B only is degenerate (behavioral constant 0.8 std~1e-16, Pearson nan, bootstrap degenerate); producer combined A+B+C (n=225) to manufacture variance yields r=-0.5346 CI [-0.612,-0.466] which is anti-correlated not orthogonal (two-sided Fisher CI [-0.622,-0.434] outside [-0.15,0.15], p_lower ~1.0, shared variance 28% vs allowed 2.25%) — audit recomputed_metrics C4_spec_PhaseB_only degenerate confirmed",
+      "One-sided TOST CI_upper<0.15 alone sufficient for orthogonality — REJECTED: two-sided equivalence |r|<0.15 requiring both p_upper<0.05 and p_lower<0.05 and CI within [-0.15,0.15] fails decisively for r=-0.53",
+      "Variance gate C3 per spec (8 co-occurring conditions, >=2/3 endpoints std>0.05) satisfied in this wiring — REJECTED: producer 3/3 computed over combined A+B+C via mixing 0 and 0.8 modes; recomputed over spec Phase B only 0/3 beh pass so would FAIL as written",
+      "Parallel-channel (behavioral+structural) justification for kernel productization vs behavioral-only or structural-only — REJECTED/NOT ESTABLISHED: baselines B-BEHAVIORAL-ONLY and B-STRUCTURAL-ONLY from spec baselines not executed inside kernel resolve() gating (result.json controls missing, run_experiment.py no branch)",
+      "Spec-code alignment for structural headers — REJECTED as written: spec measurement_validity #7 requires ETag/Cache-Control/X-Request-Id but kernel.py:165 computes md5(etag|cache_control) only, omitting X-Request-Id (beneficial to avoid degenerate uniqueness but requires spec amendment or code fix)"
+    ],
+    "unknown": [
+      "Whether TP 1.0 at N=5 (15 per endpoint aggregated) replicates at prereg N=20 per cell (60 per endpoint per drift) with Wilson interval and whether graded severity (intermediate expiry, partial permission) remains separable at 0.25 threshold vs binary 0.0/0.8 mock",
+      "Whether orthogonality holds under a non-degenerate Phase B design where behavioral varies (mixing no-drift controls into co-occurring set or continuous severity) and under two-sided equivalence |r|<0.15 at delta=0.15 with adequate power (n>=480 non-304)",
+      "Whether structural signal cardinality (unique etag|cache_control per window 20) carries independent discrimination beyond behavioral 401/403 when bodies vary with auth state; current mock ETag from body hash on error responses confounds body-driven variation",
+      "Whether behavioral-only vs structural-only kernel baselines would show parallel-channel adds value; missing data prevents architecture decision that both channels are needed",
+      "Whether STALE gating via freshness_check should return UNKNOWN or bypass on transport failure vs current is_stale True on RequestException (kernel.py:189-199) which demos STALE 0.5 without server and would gate all mechanisms STALE on network partition",
+      "Whether latency remains <200ms under production network RTT, concurrent probes, probe_url mutation, and registry I/O; localhost 0.99ms is a ceiling check not a performance guarantee per prereg Validity Threat 3",
+      "Whether freshness gate generalizes beyond JWT HS256 bearer to session cookies, OIDC RS256/ES256, API keys, or endpoints without uniform 401/403 mapping; and whether permission_boundary via admin role 403 is the correct permission drift model",
+      "Whether a staleness-gating regression with probe_url mechanisms correctly returns ResolutionStatus.STALE vs EXECUTABLE and preserves behavioral-structural variance requirements"
+    ],
+    "do_not_assume": [
+      "Do not assume C-FRESHNESS orthogonality at delta=0.15 is confirmed in this kernel wiring — pooled r=-0.53 with CI entirely below -0.43 is anti-correlated (28% shared variance), not near-zero; prior mock confirmations r≈0 with CI upper 0.06-0.13 remain the established baseline, not this experiment",
+      "Do not assume C-FRESHNESS is VALIDATED or PRODUCT_CORE — remains EXPERIMENTAL at localhost mock ceiling only (Flask 3.1.3 HS256 localhost, synthetic JWT errors, headers-only structural, no LLM calls as mandated); no production OAuth/OIDC, CDN, DB sessions, browser or network RTT inference",
+      "Do not assume ~1ms median latency generalizes to production — measured only on 127.0.0.1 with kernel reuse, window=20 history, no DB/network, no concurrent load; latency gate is ceiling check per prereg Validity Threat 3",
+      "Do not assume 3/3 kernel test regression proves no regression on freshness path — tests/test_kernel.py mechanisms have no freshness.probe_url so freshness_check returns fresh immediately (kernel.py 109-116) and never exercises STALE gating",
+      "Do not assume TP=1.0/FP=0.0 at N=5 per cell has prereg precision — spec requires N=20 per cell (Phase A 180, Phase B 480, Phase C 240); current N=45/120/60 reduces per-endpoint TP CI width and inflates orthogonality bootstrap variance (5000 resamples on 225)",
+      "Do not assume transport failure equals staleness — current kernel.freshness_check on RequestException returns behavioral 0.5 is_stale True, causing false STALE on unreachable probe (demonstrated without server); spec assumes mock reachable; production needs UNKNOWN or bypass",
+      "Do not assume structural fingerprint md5(etag|cache_control) satisfies spec ETag/Cache-Control/X-Request-Id cardinality — omission of X-Request-Id is intentional to prevent UUID uniqueness degeneracy but is a spec mismatch requiring amendment",
+      "Do not assume parallel-channel architecture is justified for kernel productization vs single-channel — B-BEHAVIORAL-ONLY and B-STRUCTURAL-ONLY not measured; product architecture decision requires that comparison",
+      "Do not assume threshold 0.25 at boundary of bimodal 0.35/0.65 vs 0.05 noise is calibrated discriminating operating point — behavioral scores are discrete 0.0/0.5/0.8 in this mock, perfect separation is tautological from deterministic 401/403 mapping, not graded production drift"
+    ]
+  },
+  "dependencies": [
+    "Prereg-faithful re-run at N=20 per cell (Phase A 180, Phase B 480 non-304, Phase C 240) to restore power and Wilson/bootstrap precision",
+    "Non-degenerate Phase B design that provides behavioral variance per spec C3 (e.g., include no-drift co-occurring controls or continuous drift severity sampling) or replace Pearson/TOST with variance-independent test; do not pool drift-only and noise-only phases",
+    "Execution of frozen baselines B-BEHAVIORAL-ONLY and B-STRUCTURAL-ONLY inside kernel resolve() gating with TP/FP vs parallel-channel reporting",
+    "Spec amendment or code fix for structural fingerprint: include X-Request-Id entropy as stated or amend spec to ETag|Cache-Control only per kernel.py:165",
+    "Staleness-gating regression: at least one test with probe_url verifying STALE vs EXECUTABLE, plus transport-failure handling (UNKNOWN/bypass on RequestException) validation",
+    "Two-sided equivalence amendment for C4: require |r|<0.15 with CI within [-0.15,0.15] and both p_upper<0.05 and p_lower<0.05"
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-PRODUCT-35697049382/request.json sha256 cc735295b9478f0c67a6aa6ad3d0c95e7e5b586afb8ad3f23a5f25d6f9de61d4 frozen_at 2026-09-22T07:09:53.267796+00:00",
+    "research/experiments/EXP-PRODUCT-35697049382/spec.json sha256 950e9de64583bc75e631974876f275a176607d8f6054e5431ba7916c9e636a94",
+    "research/experiments/EXP-PRODUCT-35697049382/prereg.md sha256 4f8effa4dcd8223da03de460ae662352fe4cf785bad65d0d7845e0aa900477cd",
+    "research/experiments/EXP-PRODUCT-35697049382/freeze.json hashes prereg/request/spec",
+    "research/experiments/EXP-PRODUCT-35697049382/result.json status COMPLETE outcome SUPPORTS metrics C1_TP 1.0 C2_FP 0.0 C4_pooled_r -0.534586724462374 CI [-0.611,-0.466] TOST p_upper 3.99e-29 C5 3/3 C6 0.985ms observations n 45/120/60 combined 225 validity_notes[4] combined A+B+C validity_notes[8] N=5",
+    "research/experiments/EXP-PRODUCT-35697049382/report.md SURVIVES_CURRENT_TEST C1-C6 PASS N=5 per condition",
+    "research/experiments/EXP-PRODUCT-35697049382/provenance.json git_commit 8f71a6e63baa6d807a2b8bfdce45c02e9b751214 flask 3.1.3 pyjwt 2.14.0 port 18928",
+    "research/experiments/EXP-PRODUCT-35697049382/audit.json status REVISE producer_claim_supported false required_fixes 9 recomputed_metrics C1_TP 1.0 C2_FP 0.0 C3_spec_PhaseB 0/3 C4_pooled_r -0.534 C4_spec_PhaseB nan degenerate C5 trivial C6 0.985ms claim_ceiling bounded localhost mock orthogonality NOT demonstrated",
+    "research/experiments/EXP-PRODUCT-35697049382/run_experiment.py N_SAMPLES_PER_CONDITION 5 combined pooling lines 256-388",
+    "research/experiments/EXP-PRODUCT-35697049382/testbed_server.py _add_structural_headers ETag Cache-Control X-Request-Id on all 401/403/200 never 304",
+    "src/spider/kernel.py THRESHOLD_BEHAVIORAL 0.25 STRUCTURAL_WINDOW 20 behavioral 0.8 on 401/403 fingerprint md5(etag|cache_control) RequestException->is_stale True 189-199",
+    "tests/test_kernel.py 3 tests without probe_url no-op 10-43",
+    "codex/index.json and codex/claim_state.json C-FRESHNESS prior PASS replications EXP-GRAPH-35353011131 r0.046 CI_upper0.135, EXP-GRAPH-35389145821 r0.002 CI_upper0.092, EXP-PRODUCT-35445596342 r-0.026 CI_upper0.064 delta0.15 n480 audit PASS"
+  ],
+  "recommended_action": "REVISE and re-run at prereg N=20 per cell with non-degenerate Phase B and two-sided |r|<0.15, executing B-BEHAVIORAL-ONLY/B-STRUCTURAL-ONLY baselines inside kernel gating and adding staleness-gating regression plus transport-failure UNKNOWN handling; correct spec-code mismatch for X-Request-Id and re-measure latency under realistic RTT before any bounded PRODUCT_CORE advance. Do not promote; route to Product lane for corrected re-measurement (Director PIVOT mandate remains PIVOT-superseded parent, no LLM dependency). Runtime writable/auth controls dependency satisfied via EXP-RUNTIME-35697043449."
+}
