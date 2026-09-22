@@ -4,7 +4,7 @@ Pre-2.0 canonical memory remains frozen at `archive/spider-codex-ultimate:SPIDER
 
 Canonical Research 2.0 evidence lives in `codex/experiments/<experiment_id>/`.
 Use `codex/index.json` and `codex/claim_state.json` to locate relevant packets; do not load all experiment bodies by default.
-Validated experiments: **233**. Coverage gaps: **0**. Quarantined packets: **0**.
+Validated experiments: **234**. Coverage gaps: **0**. Quarantined packets: **0**.
 
 ## Experiment index
 
@@ -240,6 +240,7 @@ Validated experiments: **233**. Coverage gaps: **0**. Quarantined packets: **0**
 | EXP-INTEL-35741921602 | intel | REVISE | REVISE — WebArena census replicates exactly and live CDP infrastructure verified, but AX_consistency 0.2857 (2/7) is MEASUREMENT_INVALID not valid FALSIFIED-IN-SETTING per audit; Mind2Web axis correctly MEASUREMENT_INVALID per Gate 0; bounded ceiling remains quantitative census only | C-LLM-INHERIT, C-CROSSSITE | `3377d6b4dbca` |
 | EXP-FRONTIER-35741928625 | frontier | MEASUREMENT_INVALID | MEASUREMENT_INVALID | C-SEMANTIC-RESOLVE | `dbc59208079f` |
 | EXP-PHYSICS-35741898214 | physics | MEASUREMENT_INVALID | MEASUREMENT_INVALID | C-CROSSSITE | `e65d1ce16087` |
+| EXP-PHYSICS-35749353065 | physics | REVISE | MEASUREMENT_INVALID | C-WEB-DYNAMICS | `be2cb32a873c` |
 | EXP-INTEL-35749371101 | intel | PASS | MIXED — WebArena within-store PASS (AX 0.9), Mind2Web MEASUREMENT_INVALID per Gate0 | C-CROSSSITE, C-PARAM-INHERIT | `06fb976833b2` |
 | EXP-GRAPH-35752541832 | graph | BLOCKED | BLOCKED | C-DELTA-REPAIR | `2b8d463268ed` |
 | EXP-PRODUCT-35752564139 | product | MEASUREMENT_INVALID | MEASUREMENT_INVALID | C-PARAM-INHERIT | `ea59075c0a92` |
@@ -259,4 +260,4 @@ These are chronological latest events, not an automatic truth ranking.
 | C-PRODUCT-ECON | REJECTED | EXP-INTEL-35551517470 | intel |
 | C-RESIDUAL-NOVELTY | HYPOTHESIS | EXP-PRODUCT-35741913862 | product |
 | C-SEMANTIC-RESOLVE | EXPERIMENTAL | EXP-FRONTIER-35741928625 | frontier |
-| C-WEB-DYNAMICS | EXPERIMENTAL | EXP-PHYSICS-35697037202 | physics |
+| C-WEB-DYNAMICS | HYPOTHESIS | EXP-PHYSICS-35749353065 | physics |

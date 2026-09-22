@@ -571,6 +571,16 @@
         "claim_id": "C-WEB-DYNAMICS",
         "status": "EXPERIMENTAL",
         "reason": "Frozen decision_rule yields MIXED: C1 passes (lag-1 ACF 0.418-0.454 exceeds shuffled-state null at p_corr=0.0025, 5/5 variants), C2 passes (non-uniform ACF decay, variance test p<0.001), but C3 fails (inter-event times unimodal, dip test p=1.0 on all variants, failing the SUPPORTS H1 requirement). Timescale separation as defined in the frozen hypothesis (distinct operational timescales: page-load vs session-step vs cross-session) is NOT detected. However, the experiment does establish lag-1 temporal autocorrelation on TodoMVC hash-SPA state sequences, bounded to scripted 7-step automation cycles on minimal deterministic 3-4-state hash-SPAs. The autocorrelation is fully explainable by first-order Markov dynamics (observed ACF within Markov-1 surrogate range, mean 0.349, 95th 0.547). The positive control fails (synthetic SPA lag-1 ACF = -0.055), C2 ANOVA and C3 dip test implementations are invalid per audit, and the dominant source of temporal structure is the scripted automation cycle, not natural Web dynamics. No evidence accumulated for or against beyond-memory predictive structure, production SPAs, or stochastic transitions. Bounded to: scripted TodoMVC hash-SPAs at 80 NL transitions per variant, 2 effectively independent FSM types, deterministic FSM with near-uniform action pacing."
+      },
+      {
+        "experiment_id": "EXP-PHYSICS-35749353065",
+        "lane": "physics",
+        "created_at": "2026-09-22T15:44:15.089297+00:00",
+        "decision": "MEASUREMENT_INVALID",
+        "source_commit": "be2cb32a873c2b5557838f77da342598b63c9dd1",
+        "claim_id": "C-WEB-DYNAMICS",
+        "status": "HYPOTHESIS",
+        "reason": "Gate 0 substrate_unavailable: 0/5 manifest candidates exist and repo-wide glob research/**/intel_spa_manifest.json returns nothing (audit FINDING-1 verified). 0 SPAs satisfy frozen Gate 0 (>=2 titles, H>0.2 bits, leakage<40%, NL>=50, strata>=10, singleton<50%) so frozen decision_rule maps to MEASUREMENT_INVALID (substrate_unavailable) with outcome NOT_APPLICABLE. C-WEB-DYNAMICS was NOT tested on production SPAs and is NOT falsified; remains HYPOTHESIS. Synthetic controls show qualitative pipeline sensitivity (positive correlated BC PMI 0.8539 item-level / 0.8392 trajectory-grouped, p_raw 0.001, delta 0.4667; negative independent-noise R2 0.0036 p 0.458 replicates parent EXP-PHYSICS-34764605162) but pipeline is NOT validated exactly per frozen design: permutation null was item-level not trajectory-grouped (prereg 9), positive control was outcome-modified to P(flip)=0.0 and DOM=SHA256(L) instead of frozen P=0.3 and SHA256(L||step_mod), result.json misreports accuracies 0.5/0.9667 and CI 0.094/0.153 vs raw artifact 0.5333/1.0 and -0.0229/0.0347, degenerate nulls (R1/R4/corr perm_std ~1.7e-16, R3 0.0) misreported as PASS, and Bonferroni p<0.001 is unreachable at N_PERMS=1000 (min p_bonf 0.012). No evidence accumulated for/against correlated factorization on real SPAs."
       }
     ],
     "C-RESIDUAL-NOVELTY": [
@@ -2894,14 +2904,14 @@
   },
   "latest_event_by_claim": {
     "C-WEB-DYNAMICS": {
-      "experiment_id": "EXP-PHYSICS-35697037202",
+      "experiment_id": "EXP-PHYSICS-35749353065",
       "lane": "physics",
-      "created_at": "2026-09-22T06:55:28.668296+00:00",
-      "decision": "MIXED",
-      "source_commit": "55247071f45a0fbf7dda738cbdc52790abeb674a",
+      "created_at": "2026-09-22T15:44:15.089297+00:00",
+      "decision": "MEASUREMENT_INVALID",
+      "source_commit": "be2cb32a873c2b5557838f77da342598b63c9dd1",
       "claim_id": "C-WEB-DYNAMICS",
-      "status": "EXPERIMENTAL",
-      "reason": "Frozen decision_rule yields MIXED: C1 passes (lag-1 ACF 0.418-0.454 exceeds shuffled-state null at p_corr=0.0025, 5/5 variants), C2 passes (non-uniform ACF decay, variance test p<0.001), but C3 fails (inter-event times unimodal, dip test p=1.0 on all variants, failing the SUPPORTS H1 requirement). Timescale separation as defined in the frozen hypothesis (distinct operational timescales: page-load vs session-step vs cross-session) is NOT detected. However, the experiment does establish lag-1 temporal autocorrelation on TodoMVC hash-SPA state sequences, bounded to scripted 7-step automation cycles on minimal deterministic 3-4-state hash-SPAs. The autocorrelation is fully explainable by first-order Markov dynamics (observed ACF within Markov-1 surrogate range, mean 0.349, 95th 0.547). The positive control fails (synthetic SPA lag-1 ACF = -0.055), C2 ANOVA and C3 dip test implementations are invalid per audit, and the dominant source of temporal structure is the scripted automation cycle, not natural Web dynamics. No evidence accumulated for or against beyond-memory predictive structure, production SPAs, or stochastic transitions. Bounded to: scripted TodoMVC hash-SPAs at 80 NL transitions per variant, 2 effectively independent FSM types, deterministic FSM with near-uniform action pacing."
+      "status": "HYPOTHESIS",
+      "reason": "Gate 0 substrate_unavailable: 0/5 manifest candidates exist and repo-wide glob research/**/intel_spa_manifest.json returns nothing (audit FINDING-1 verified). 0 SPAs satisfy frozen Gate 0 (>=2 titles, H>0.2 bits, leakage<40%, NL>=50, strata>=10, singleton<50%) so frozen decision_rule maps to MEASUREMENT_INVALID (substrate_unavailable) with outcome NOT_APPLICABLE. C-WEB-DYNAMICS was NOT tested on production SPAs and is NOT falsified; remains HYPOTHESIS. Synthetic controls show qualitative pipeline sensitivity (positive correlated BC PMI 0.8539 item-level / 0.8392 trajectory-grouped, p_raw 0.001, delta 0.4667; negative independent-noise R2 0.0036 p 0.458 replicates parent EXP-PHYSICS-34764605162) but pipeline is NOT validated exactly per frozen design: permutation null was item-level not trajectory-grouped (prereg 9), positive control was outcome-modified to P(flip)=0.0 and DOM=SHA256(L) instead of frozen P=0.3 and SHA256(L||step_mod), result.json misreports accuracies 0.5/0.9667 and CI 0.094/0.153 vs raw artifact 0.5333/1.0 and -0.0229/0.0347, degenerate nulls (R1/R4/corr perm_std ~1.7e-16, R3 0.0) misreported as PASS, and Bonferroni p<0.001 is unreachable at N_PERMS=1000 (min p_bonf 0.012). No evidence accumulated for/against correlated factorization on real SPAs."
     },
     "C-RESIDUAL-NOVELTY": {
       "experiment_id": "EXP-PRODUCT-35741913862",
