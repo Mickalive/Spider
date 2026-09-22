@@ -1,0 +1,180 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-35793576245",
+  "lane": "product",
+  "status": "PASS",
+  "producer_claim_supported": false,
+  "required_fixes": [
+    "Future replication must replace deterministic MockEnv (verify always passes, success=1, false_accept=0) with a mock that can emit wrong-bound-action failures to test false_accept and UNKNOWN_precision non-vacuously; current thresholds are satisfied degenerately",
+    "Adjust frozen C4 (|rho_length| per stratum <0.20) — structurally unsatisfiable when cost scales with task length L (family constant 8-14) and branch cost includes per-step terms; either exclude fixed overhead from cost or set threshold compatible with length-varying census",
+    "Adjust frozen C5 honest-saving condition: SPIDER necessarily pays retrieval 200 + distill 100 overhead versus 0/50-token TERX/Stagehand hits, making SPIDER/STAGE <=1.20 and SPIDER/RAG <=0.80 impossible at n=0 under honest accounting; repair cost model or threshold before re-test",
+    "Implement B-RAG-EMBED partial-overlap retrieval (proportional to n) instead of binary hit at n=0 only; current binary fallback understates RAG at n=0.25 and inflates SPIDER advantage at that level",
+    "Use realized_novelty (round_half_up(n*S)/S) as primary x for rho/R2 for S=1 families where labelled 0.25 realizes as 0.0; currently rho tracks assigned fraction, not true slot novelty, disclosed but biases estimate"
+  ],
+  "validity_findings": [
+    {
+      "finding": "Deterministic mock makes verification vacuous: every emitted action carries task identifiers so verify always passes, success=1 for all 1728 rows, false_accept=0 by construction, UNKNOWN_precision uses would-verify counterfactual; calibration thresholds not discriminating",
+      "severity": "major",
+      "evidence": "result.json validity_notes[3] degenerate evaluation caution; artifacts/raw_per_task.csv success column all 1; recomputed SPIDER false_accept 0.0 unknown_precision 1.0 across 192 rows"
+    },
+    {
+      "finding": "C4 residual explanatory power structurally unsatisfiable: cost = retrieval+distill+sum_step(hit 50 / novel 500) scales with L; within each novelty stratum L constant per family but varies across families, so per-stratum Spearman cost vs length is ~1.0 for all systems including B-COLD (recomputed 1.0 at 0.0/0.5/0.75/1.0, 0.366 at 0.25)",
+      "severity": "critical",
+      "evidence": "result.json metrics.criteria.C4 detail rho_length_per_stratum 1.0; validity_notes[5]; recomputed rho_length_per_stratum matches"
+    },
+    {
+      "finding": "C5 work-compression structurally infeasible under frozen constants: SPIDER at n=0 pays 200 retrieval +100 distill; TERX 50 tok and Stagehand 50/L leave floor ~1.4-1.5x; at n>=0.5 SPIDER UNKNOWN -> COLD+300 > COLD fallback, so cannot beat TERX where it falls back to COLD; ratios recomputed SPIDER/STAGE 1.503 95%CI 1.409-1.611, SPIDER/RAG 1.126 CI 1.066-1.190, SPIDER/TERX 1.054 at n>=0.5",
+      "severity": "critical",
+      "evidence": "artifacts/cost_config.json f=10 distill 1000 retrieval 200; result.json metrics.ratios; recomputed ratios match"
+    },
+    {
+      "finding": "Realized novelty granularity mismatch: S=1 families round 0.25*1 to 0, so labelled n=0.25 tasks are true 0 novel slots; similarly S=2 collapse levels; disclosed in validity_notes[7] and fixtures/tasks.json realized_novelty",
+      "severity": "moderate",
+      "evidence": "fixtures/tasks.json realized_novelty 0.0 for family_03 task_0020 labelled 0.25; result.json validity_notes[7]"
+    },
+    {
+      "finding": "Synthetic file-based census ceiling, not production DOM/cross-site: 192/36 structure inherited from EXP-PRODUCT-35782537266, distinct_template_ids 36 vs num_templates 49, single intent shopping_checkout, mock JSX-like steps; correctly disclosed as file-based not Docker/full-DOM",
+      "severity": "major",
+      "evidence": "provenance.json fixture inherited_from EXP-PRODUCT-35782537266 hash e824ab3157cbd299; result.json validity_notes[0]; spec measurement_validity 1"
+    },
+    {
+      "finding": "No bijective cost formula or token shuffling detected: branch-derived cost verified via run_experiment.py (no 250+500*int(10n), no n*3200, no within-strata shuffling per VF2); cost sum of executed branches (retrieval 200, verify 50, hit 50, repair 500, distill 100) honest",
+      "severity": "info",
+      "evidence": "run_experiment.py execute_spider/execute_baseline cost constants; artifacts/branch_traces.json branch_counts; recomputed cost matches"
+    },
+    {
+      "finding": "Family-specific slot induction verified: all 36 mechanisms have family-specific slots ${sku},${store_id},${variant},${category}, none generic ['path','store']; Jaccard structure similarity not re-checked but evidence_values only A-pool values, no B leak",
+      "severity": "info",
+      "evidence": "artifacts/registry.jsonl parameter_slots distinct per family; recomputed no generic; B-value leak check 0intersection"
+    },
+    {
+      "finding": "Leakage check passes: evidence_values and demos contain only A-pool identifiers, B never observed in registry; computation recomputed B set disjoint",
+      "severity": "info",
+      "evidence": "run_experiment.py leakage asserts; recomputed B∩evidence empty"
+    },
+    {
+      "finding": "Statistical implementation substitution: numpy/scipy unavailable, replaced by stdlib random.Random(42) for all sampling/jitter/permutation; seeds enforced PYTHONHASHSEED=0; family-stratified bootstrap 5000 and block-permutation 5000 implemented correctly but pure-stdlib Wilson/HC3/avg-ranks approximations",
+      "severity": "moderate",
+      "evidence": "provenance.json environment numpy unavailable stdlib Random(42); run_experiment.py spearman/ols_r2/wilson/bootstrap functions"
+    },
+    {
+      "finding": "ECE calibration with empty bins: ECE_exec 0.025 with 4/5 empty bins (n=54 EXEC rows), ECE_all 0.133 with 2/5 empty; confidence std 0.405 >0.05 satisfies non-degenerate gate but empty-bin disclosure required and followed",
+      "severity": "moderate",
+      "evidence": "result.json metrics.criteria.C1 detail ece_exec_rows empty_bins [0,1,2,3] ece 0.025; recomputed confidence std 0.405"
+    }
+  ],
+  "baseline_findings": [
+    {
+      "baseline_id": "B-COLD",
+      "finding": "Strong honest upper bound: flat vs novelty (|rho|~0) at ~L*500 cost (5508 at n0); success 1.0; paired on identical 192 splits; correctly used as denominator for f=10 saving",
+      "strength": "strong",
+      "evidence": "result.json metrics.systems B-COLD cost_by_level 5508-5537 recomputed matches"
+    },
+    {
+      "baseline_id": "B-INSTRUCTION",
+      "finding": "Correctly amortized 200/10=20 tok overhead; cost indistinguishable from COLD (~5528), not novelty-proportional; not competitive at any n",
+      "strength": "strong",
+      "evidence": "artifacts/cost_config.json instruction_tokens 200; recomputed B-INSTRUCTION cost_by_level"
+    },
+    {
+      "baseline_id": "B-RAG-EMBED",
+      "finding": "Honest hit at n=0 (795 tok, hit 1.0) vs fallback to COLD at n>=0.25 (5660+); binary threshold understates partial overlap at 0.25 — would be 0.5 novel for S=2 families but RAG implemented as 0 hit; biases C5 at n0.25 in SPIDER favor (SPIDER/RAG 0.67) and against SPIDER at n0 (1.126)",
+      "strength": "moderate",
+      "evidence": "run_experiment.py execute_baseline B-RAG-EMBED level==0.0 only; result.json ratios SPIDER_RAG_n0 1.126 SPIDER_RAG_n025 0.671 recomputed"
+    },
+    {
+      "baseline_id": "B-STAGEHAND-CACHE",
+      "finding": "Shipped DOM-hash cache correctly modeled: 595 tok at n0 hit_rate 1.0 (50/L per step) vs COLD fallback at >0; spec 50 tok hit not 400 (VF6) verified via cost_config; dominates SPIDER at exact repeat floor",
+      "strength": "strong",
+      "evidence": "artifacts/cost_config.json verification 50; recomputed stagehand_hit_rate 1.0 mean_tokens 595.83"
+    },
+    {
+      "baseline_id": "B-TERX-REPLAY",
+      "finding": "0-token exact replay correctly 50 tok verify at n0 hit_rate 1.0, fallback to COLD otherwise; correctly beats SPIDER where SPIDER pays +300 overhead (SPIDER/TERX 1.054 at n>=0.5)",
+      "strength": "strong",
+      "evidence": "recomputed terx_hit_rate 1.0 mean 50.0; ratios SPIDER_TERX_n05 1.054"
+    },
+    {
+      "baseline_id": "B-LENGTH-PROPORTIONAL",
+      "finding": "NC3 null control correct: cost = L*500 independent of novelty yields rho 0.0049 R2 2.3e-05 slope 13.9 proving environment can express flat cost (MIXED falsifiable)",
+      "strength": "strong",
+      "evidence": "result.json controls NC3-LENGTH-PROPORTIONAL rq_novelty 0.00489 recomputed; result.json validity_notes disclosure"
+    },
+    {
+      "baseline_id": "PC-BINDING-AND-EXACT-REPEAT",
+      "finding": "PC1 TERX/Stagehand hit_rate 1.0 at n0 50 tok verify success 1.0 recomputed verified; PC2 SPIDER binding 5/5 per family 1.0 via actual kernel _bind at n0 verified; positive controls PASS, substrate can measure 0-cost case",
+      "strength": "strong",
+      "evidence": "result.json controls PC-BINDING-AND-EXACT-REPEAT observed recomputed terx_hit 1.0 stage 1.0 binding 1.0; artifacts/registry.jsonl 36 mechanisms"
+    },
+    {
+      "baseline_id": "NC-SHUFFLE-RANDOM-LENGTH",
+      "finding": "NC1 shuffled rho 0.313 block-perm p 0.0002 exceeds |rho|<0.25 but below 0.35 invalidation bound — abstention schedule correlates with novelty even after shuffling for single-slot families (identity permutation); NC2 random fails to produce false_accepts (0 vs expected >=0.30) due to vacuous verify; NC3 passes; overall C6 fails as reported",
+      "strength": "weak",
+      "evidence": "result.json controls NC-SHUFFLE observed recomputed NC1 rho 0.313 NC2 false_accept 0; run_experiment.py NC2 forced hit verify_passed via postconditions always true"
+    }
+  ],
+  "recomputed_metrics": {
+    "rho_novelty": 0.6076839793464472,
+    "rho_novelty_block_permutation_p": 0.0001999600079984003,
+    "rho_novelty_bootstrap_ci95": [0.4797908423189953, 0.7171591321670423],
+    "R2_novelty": 0.5092383813252185,
+    "R2_length": 0.10966915855625003,
+    "R2_delta": 0.39956922276896845,
+    "R2_delta_bootstrap_ci95": [0.2118683461280767, 0.5514543246687474],
+    "slope": 4652.357320099256,
+    "slope_robust_se": 943.8672985678184,
+    "slope_p_two_sided": 8.263570887567795e-07,
+    "rho_length_per_stratum": {
+      "0.0": 1.0,
+      "0.25": 0.3664168656320045,
+      "0.5": 1.0,
+      "0.75": 1.0,
+      "1.0": 1.0
+    },
+    "SPIDER_COLD_n0": 0.16263237518910742,
+    "SPIDER_COLD_n1": 1.0546856742229493,
+    "SPIDER_RAG_n0": 1.12565445026178,
+    "SPIDER_RAG_n025": 0.6711211778029446,
+    "SPIDER_STAGEHAND_n0": 1.5034965034965035,
+    "SPIDER_TERX_n025": 0.6957032167175393,
+    "SPIDER_TERX_n05": 1.0545581720680812,
+    "SPIDER_STAGEHAND_bootstrap_ci95": [1.4093959731543624, 1.6111111111111112],
+    "SPIDER_RAG_bootstrap_ci95": [1.0657672849915685, 1.1903881700554528],
+    "SPIDER_COLD_n0_bootstrap_ci95": [0.15190767781441356, 0.17492096944151736],
+    "NC1_rho": 0.31341474648186013,
+    "NC1_p": 0.0001999600079984003,
+    "NC2_rho": 0.0048946025983908625,
+    "NC2_false_accept": 0.0,
+    "NC3_rho": 0.0048946025983908625,
+    "NC3_R2": 2.320629422047915e-05,
+    "C1_success_n0": 1.0,
+    "C1_success_n0_wilson_lower": 0.9035781695514236,
+    "C1_false_accept": 0.0,
+    "C1_unknown_precision": 1.0,
+    "C1_ece_exec": 0.025454877401718035,
+    "C1_ece_all": 0.13299246480035778,
+    "C1_confidence_std": 0.4053800944606679,
+    "PC1_terx_hit_rate": 1.0,
+    "PC1_stagehand_hit_rate": 1.0,
+    "PC2_binding_correctness": 1.0,
+    "recomputed_via": "artifacts/raw_per_task.csv direct Spearman avg-ranks ties, OLS, block-permutation logic as in run_experiment.py; all primary numbers match producer derived_metrics.json within floating error"
+  },
+  "claim_ceiling": "FALSIFIED bounded to file-based synthetic WebArena-Verified v2 census 192 tasks / 36 families / L 8-14 with deterministic proxy cost (retrieval 200+150ms, verify 50+120ms, hit 50, repair 500+2, distill 1000/f=100) via actual src/spider/kernel.py distill_parameterized (Jaccard>=0.75, structure>=0.75, family-specific slots) and softmax temp 0.15+jitter UNKNOWN<0.80. SPIDER does track residual novelty (rho 0.608, p 0.0002, CI 0.48-0.72, slope 4652 p 8e-07) with R2_novelty 0.509, but R2_delta 0.400 <0.50 and per-stratum |rho_length| ~1.0 fail, and honest amortized cost exceeds shipped Stagehand 1.50x and RAG 1.13x at n=0 exact repeat and exceeds TERX COLD fallback 1.05x at n>=0.5. The commercial claim 'pay cost of residual novelty only vs cold/retrieval/Stagehand/TERX' is NOT supported under this kernel/cost model on this census. C-RESIDUAL-NOVELTY remains HYPOTHESIS (bounded FALSIFIED for proxy setting only, not global), not EXPERIMENTAL or PRODUCT_CORE. No promotion; no inference to Docker/full-DOM, real LLM tokens/browser, or production DOM/cross-site. Valid positive: first non-bijective no-shuffling measurement with PC1/PC2 passing, RAG/Stagehand/TERX not starved (hit 1.0 at n=0). Negative/MIXED alternative consistent: correct novelty tracking but constant retrieval+distill overhead dominates saving edges.",
+  "evidence_refs": [
+    "research/experiments/EXP-PRODUCT-35793576245/result.json",
+    "research/experiments/EXP-PRODUCT-35793576245/artifacts/raw_per_task.csv sha256 7d0ead05a7fb1387bace4ec7f208599d85e80cf60ba18af1a69124b32c7a6bfe",
+    "research/experiments/EXP-PRODUCT-35793576245/artifacts/derived_metrics.json sha256 e0639b6d3bb23dd057e490fd6282914403dfc15c2b82c53ea5d9e73ce5bb296c",
+    "research/experiments/EXP-PRODUCT-35793576245/artifacts/registry.jsonl sha256 462236fdef0f8468fe39b3d6a8675f3f96e414cbe8d68eba8d864a1fec1e6889",
+    "research/experiments/EXP-PRODUCT-35793576245/artifacts/cost_config.json sha256 cbb95c44cae0fe79bea3410a42e08f652fe1a90b1f9133bcfb9fef9ff0216d7e",
+    "research/experiments/EXP-PRODUCT-35793576245/artifacts/branch_traces.json sha256 426b633819f58c8ade26c1c0541671000111255742be77e1cc3e119b965df176",
+    "research/experiments/EXP-PRODUCT-35793576245/fixtures/tasks.json sha256 0e153ed8f26f1c3d5a11e3aea282a66d5d240c88c3553f355972d055ebed3d0b",
+    "research/experiments/EXP-PRODUCT-35793576245/run_experiment.py sha256 1dc8a3813ea28a1aa5cb624467d5453b596af94c4697b694aa34d123f13683e5",
+    "src/spider/kernel.py sha256 48786285d51959e68e5418f8f06c8aad3f3705582bdb3bedc1d13b822652c83e"
+  ],
+  "unresolved": [
+    "Whether real LLM (gpt-4o-mini) + Playwright 1280x720 on Docker-hosted WebArena recovers different cost ratios and enables false_accept >0 and non-degenerate UNKNOWN_precision/ECE with real observation failures",
+    "Whether revised cost model excluding fixed retrieval/distill from per-step comparison or amortizing at f=100 changes C5 honest-saving conclusion",
+    "Whether continuous similarity (identifier edit distance) instead of disjoint A/B pools changes UNKNOWN boundary and ECE margin at n=0.25-0.5",
+    "Whether NC1 confounding (shuffled rho 0.313 p 0.0002) reflects single-slot identity-permutation artefact or genuine novelty-difficulty correlation requiring redesign of null control threshold"
+  ]
+}
