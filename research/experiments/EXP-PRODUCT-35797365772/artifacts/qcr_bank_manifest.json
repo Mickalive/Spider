@@ -1,0 +1,7 @@
+{
+ "bank_source": "pools A/B disjoint zero overlap",
+ "family_count": 36,
+ "frozen_bank_hash": "7d941892f27dd0a0",
+ "ranker": "TFIDF Jaccard fallback TAU 0.30 (all-MiniLM-L6-v2 unavailable; disclosed)",
+ "tau": 0.3
+}
