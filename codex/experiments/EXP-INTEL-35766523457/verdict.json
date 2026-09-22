@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-35766523457",
+  "lane": "intel",
+  "decision": "MEASUREMENT_INVALID substrate_unavailable — Gate0 0/2 real SPAs qualify after exhaustive search; H2A and H2B both MEASUREMENT_INVALID",
+  "claim_updates": [
+    {
+      "claim_id": "C-WEB-DYNAMICS",
+      "status": "HYPOTHESIS",
+      "reason": "No production SPA evidence obtained. Gate0 exhaustive enumeration 4 BrowserGym envs x3 retries (12 attempts) + CAP 3 retries x3 HF names + 4 FS paths all BLOCKED (ModuleNotFoundError browsergym/agentlab, DatasetNotFoundError ServiceNow/cap/cap/agentlab/cap, Docker connection refused, playwright not installed). Real candidates browsergym_webarena_real NL0 and cap_production_spa NL0 both qualify false (result.json:metrics.gate0_real_qualifying_spas 0, gate0_exhaustive_envs_attempted 4, gate0_envs_blocked_after_3_retries 4). Per frozen decision_rule Gate0 precedence this is MEASUREMENT_INVALID substrate_unavailable, not FALSIFIED. Synthetic gate_passing_like NL180 H1.39 bits strata12 leak0 titles3 PASS (result.json:metrics.gate0_candidate_details.synthetic_gate_passing_like) demonstrates Gate0 achievable in principle but is pipeline validation only (audit validity_findings). PC3 correlated synthetic BC PMI 0.923 bits p0.0 d37.7 PASS and NC4 independent 0.0 bits PASS validate pipeline sensitivity but no real-SPA CMI tested. Claim ceiling remains prior WebArena single-store + AX 0.9 only. Audit PASS producer_claim_supported false with required_fixes [] confirms infrastructure failure not scientific falsification."
+    },
+    {
+      "claim_id": "C-CROSSSITE",
+      "status": "HYPOTHESIS",
+      "reason": "No decision-valid cross-website holdout obtained. H2B CAP website-holdout real dump unavailable after 3 retries (result.json:metrics.cap_pipeline.real_dump_available false, real_dump_attempts 3, provenance datasets_fixtures.cap_dump NOT_FOUND) so PC4_CAP_SPLIT_INTEGRITY FAIL per audit. Synthetic CAP TF-IDF demo k14 overlap1.0 shuffle mean0.074 p95 0.144 excess0.925 would pass thresholds but is homogeneous synthetic text not production (result.json:metrics.cap_pipeline.synthetic_demo_overlap 1.0, synthetic_demo_excess 0.925, audit claim_ceiling). No train-only TF-IDF->k-means k=min(50,unique/20) with 1000 website-label shuffles seed35725763380 and 2000 bootstraps executed on real website-split; therefore MEASUREMENT_INVALID not FALSIFIED-IN-SETTING at this granularity. Mind2Web LFS declared ABANDONED per Director SUPERSEDE (result.json:metrics.mind2web_lfs.status ABANDONED, audit validity_findings) not re-measured, so no new inference. H2A Docker full-DOM n0<20 BLOCKED (result.json:metrics.docker_full_dom.docker_available false, playwright_installed false, cap_removed_verified true) also MEASUREMENT_INVALID, F_full not computed, NC3 same-cardinality role-subset not executed, constant null 0.5654 vs 80% not tested. Claim ceiling remains WebArena-Verified v2 192/49 duplication0.9479 CI[0.9167,0.9792] families_ge3 36 with AX 0.9 [0.7,1.0] within-store only; no cross-site overlap demonstrated. Audit PASS recomputed_metrics confirm."
+    }
+  ],
+  "product_action": "none",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "After installing BrowserGym/AgentLab+Playwright 1.63.0 and locating the official CAP 420-task 108-site dump outside ServiceNow/cap, can exhaustive 1280x720 AX capture deliver >=2 SPAs passing all 5 Gate0 gates with full provenance and does CAP website-holdout TF-IDF(k5000 1-2 min_df2)->k-means k=min(50,unique/20) train-only seed35725763380 vs 1000 website-label shuffles achieve overlap>=0.15 excess>=0.10 with CI lower > threshold+0.05, or failing that does Docker am1n3e/webarena-verified-shopping full-DOM n>=20 cap-removed locatable 21-82 with NC4 same-cardinality role-subset achieve discriminating F_full CI entirely outside 80%?",
+  "reason": "Grounded in audit PASS (status PASS, producer_claim_supported false, required_fixes [], claim_ceiling no production evidence). Gate0 yields 0 real qualifying SPAs after exhaustive retries (browsergym_census.json sha e53b2f4d..., gate0_table.json sha 9f1de37b...; PC1 FAIL, PC2 FAIL). H2B CAP real unavailable (cap_manifest.json sha 6a106b99..., PC4 FAIL). H2A Docker unavailable with cap removal verified via MEASURE_JS hash b0e0b594 vs parent 085b58c93 (full_dom_locatable_sample.json sha 12e5ed54..., docker_ranking_agreement.json sha 60913458..., NC3 UNKNOWN). PC3 PASS (0.923 bits) and NC4 PASS (0.0) show pipeline valid, so failure is substrate-driven not methodological, mandating MEASUREMENT_INVALID not FALSIFIED per frozen Gate0 precedence. Mind2Web LFS correctly ABANDONED per Director SUPERSEDE. No claim promotion authorized (intel lane, no kernel integration). Physics CMI remains PARKED pending substrate repair; product cross-site remains at single-store census ceiling.",
+  "evidence_refs": [
+    "research/experiments/EXP-INTEL-35766523457/request.json 544bebb4019fedde0d96e98984a205b8ca3a2e5b721bef816b21ef751f666938 director_mandate PIVOT SUPERSEDE",
+    "research/experiments/EXP-INTEL-35766523457/spec.json 776d35a4cbbfac068df8f3882a428ea1fab5ec9f13be91917091e526ec351692 frozen question claim_ids C-WEB-DYNAMICS C-CROSSSITE decision_rule Gate0 precedence",
+    "research/experiments/EXP-INTEL-35766523457/prereg.md 31a5823a954daf96081f8a5ec09580961d075dd43f3bd013f23471ef927f6172 Gate0 5 gates + H2A/H2B plus-either",
+    "research/experiments/EXP-INTEL-35766523457/freeze.json 2026-09-22T18:27:00.747528+00:00",
+    "research/experiments/EXP-INTEL-35766523457/result.json status COMPLETE outcome NOT_APPLICABLE metrics.gate0_real_qualifying_spas 0 metrics.cap_pipeline.real_dump_available false metrics.docker_full_dom.docker_available false metrics.controls_synthetic PC3 0.923 NC4 0.0",
+    "research/experiments/EXP-INTEL-35766523457/audit.json status PASS producer_claim_supported false required_fixes [] recomputed_metrics gate0_real_qualifying_spas 0 cap_real_dump_available false docker_available false pc3_correlated_bc_pmi_bits 0.923 claim_ceiling",
+    "research/experiments/EXP-INTEL-35766523457/report.md sections 2-6 NOT_APPLICABLE MEASUREMENT_INVALID substrate_unavailable",
+    "research/experiments/EXP-INTEL-35766523457/provenance.json browsergym installed false agentlab false playwright false docker available false CAP dump NOT_FOUND seed 35725763380 seed_note modulo 1363249228",
+    "research/experiments/EXP-INTEL-35766523457/artifacts/raw/browsergym_census.json e53b2f4d866b0e8f5616bb1cbb8b40b139693969612c7ba5f69786e2dd1fbd2f 4 envs x3 retries BLOCKED",
+    "research/experiments/EXP-INTEL-35766523457/artifacts/raw/gate0_table.json 9f1de37be724cf30d304d42452f0021431e948edf668909e6477d2cbd6fe9c86 6 candidates real0 synthetic1",
+    "research/experiments/EXP-INTEL-35766523457/artifacts/raw/cap_manifest.json 6a106b99bba820d5410bce40db77dc6eb3a43390d99be6ebf7152bd65607dc8e attempts 12 BLOCKED synthetic 420/108/24",
+    "research/experiments/EXP-INTEL-35766523457/artifacts/raw/axtree_1280x720_sample.json 6aa1b2a40b58724f0428a66c88e236db115f7a201eb6cc271522656659645bbc synthetic 1426 nodes",
+    "research/experiments/EXP-INTEL-35766523457/artifacts/raw/full_dom_locatable_sample.json 12e5ed54c63c5320437a5b91af4d11a3e0e4d5243ab71b607663b2936730ee07 MEASURE_JS b0e0b594 vs parent 085b58c93 cap_present false",
+    "research/experiments/EXP-INTEL-35766523457/artifacts/derived/measurements.json 5a1c70da551832133a5063c7e85b69df17bf5e39703de9082333bd117b4b8cae gate0 + cap synthetic + docker",
+    "research/experiments/EXP-INTEL-35766523457/artifacts/derived/shuffle_null.json d77af94a3f510c038df0b2bc715fc66579b407ba70262f8b4fb4318590391aa4 synthetic demo mean0.074 p95 0.144 excess0.925",
+    "research/experiments/EXP-INTEL-35766523457/artifacts/derived/tfidf_kmeans_meta.json bdb25320f49711cc47c17bb3548eea766bfdd43bb3142142837a8b0bffd85b39 k14 vocab 1ca627 centroids 907940",
+    "research/experiments/EXP-INTEL-35766523457/artifacts/derived/docker_ranking_agreement.json 609134588d0624feeb0032f25cbccdac152fe42aff4db8b63b477d021bedaeba F_full NOT_EXECUTED",
+    "research/experiments/EXP-INTEL-35766523457/artifacts/derived/stagehand_baseline.json d0e3858b6b10eb96c1b240003d281f9deac75ff3c991423f74773fdca06fea2a hit_rate0.5 simulated",
+    "research/intel/exp_35766523457_measure.py 62aba27e89cc75fc05cfc9200433714e35ceb0a57ea9f2a94c4fdf258ed28437 frozen definitions",
+    "research/experiments/EXP-INTEL-35749371101/artifacts/raw/webarena-verified.json d65275660814663375028e9017e1f929e3c38321041b125795e2713b52243d30 812/192/49",
+    "research/experiments/EXP-INTEL-35757760689/handoff.json 5852821f1ab23cbd36617b45f491dc9df8bff4da6a7dc3b16d18282456e072f5 parent INCONCLUSIVE",
+    "codex/index.json + codex/claim_state.json C-WEB-DYNAMICS HYPOTHESIS C-CROSSSITE HYPOTHESIS prior ceiling"
+  ]
+}
