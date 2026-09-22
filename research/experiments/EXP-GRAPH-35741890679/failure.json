@@ -1,0 +1,11 @@
+{
+  "stage": "execute",
+  "category": "EXECUTION_FAILURE",
+  "message": "stage exited with code 76",
+  "retryable": false,
+  "fingerprint": "32fb61131a26107aaf831564",
+  "recorded_at": "2026-09-22T15:06:28.109723+00:00",
+  "github_run_id": "35741890679",
+  "github_run_attempt": "1",
+  "control_revision": "ba7c62af1169347e5cec5d88ef113925e9f7d9f0f65a7854271e5a9a86912b0f"
+}
