@@ -1,0 +1,58 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-35651906573",
+  "lane": "physics",
+  "target_lane": "physics",
+  "next_question": "Does the Bayesian Dirichlet-Multinomial estimator with data-matched K (K≈3-4 matching observed state cardinality) yield positive absolute log BF (action-conditioned M1 favored over memory-only M0) on TodoMVC hash-SPAs, or does the negative BF persist, indicating URL-level state representation is fundamentally insufficient for action-conditioned dynamics on deterministic SPAs?",
+  "why_next": "The frozen K=12 over-penalizes observed state spaces (S=3-4), making absolute BF negative across all variants. Data-matched K would reveal whether the negative BF is a K-mismatch artifact or a genuine finding that URL-level state is insufficient. This is the single highest-information follow-up: it directly resolves the audit's most critical unresolved question (audit.json required_fixes[3], unresolved[1]) and determines whether URL-level PMI on deterministic SPAs can ever show action-conditioned dynamics, or whether the Physics lane must pivot to richer state representations (DOM, accessibility tree, visual) or non-deterministic environments.",
+  "carry_forward": {
+    "established": [
+      "Bayesian Dirichlet-Multinomial estimator (K=12, alpha_prior {0.5,1.0,2.0}) is correctly implemented: positive control (synthetic 12-state stochastic SPA, N=5000, seed=42) replicates parent EXP-PHYSICS-35578258358 bit-identically (observed 168/339/643 nats, null_median -78/-131/-116 nats, p=0.0005 at all alphas). C6 PASS. (result.json metrics.positive_control, audit.json recomputed_metrics)",
+      "On TodoMVC hash-SPA fragment-aware URL states, within-session shuffled-action null is well-centered (null_median -24.8 to -39.7 nats < 0 on all variants at all alphas). C1 formally passes. (result.json metrics.variants.*.per_alpha)",
+      "Observed log BF exceeds all 1999 within-session shuffled-action null samples on all 15 (variant × alpha) cells (p=0.0005 floor). C3 formally passes. The real action arrangement is statistically distinguishable from random shuffling. (result.json metrics.variants.*.per_alpha, controls.CTRL_NULL_WITHIN_SESSION_SHUFFLE_C3)",
+      "80 non-leakage transitions achieved per variant (6 sessions × 24 raw, 112 valid, 32 link-click leakages filtered). C5 passes on all 5 variants. (result.json metrics.variants.*.n_nl)",
+      "Vanillajs/react/svelte are bit-identical; vue/angular are bit-identical. Effective independent FSM types = 2 (4-state and 3-state deterministic). (audit.json CTRL_VARIANT_ISOMORPHISM, result.json metrics.variants)",
+      "Action-variable resolution: action_target is None on all NL records (link_click filtered); action_primitive is the only non-degenerate action encoding. log BF with action=action_target = 0.000000 exactly. (result.json controls.CTRL_DEGENERATE_ACTION_TARGET)",
+      "TodoMVC hash-SPAs are near-deterministic FSMs: B2 action-history K=3 accuracy 1.0, K2 determinism 85-94%. (result.json metrics.baselines.B2, metrics.variants.*.determinism_k2)",
+      "URL-only conditional MI (B1) is small but >0 (0.0581-0.0716 bits), confirming weak action signal conditional on current URL alone. (result.json metrics.baselines.B1_url_only_conditional_mi_bits)"
+    ],
+    "rejected": [
+      "Absolute action-conditioned dynamics beyond memory on TodoMVC hash-SPAs at K=12: observed BF is NEGATIVE (-10.4 to -15.6 nats), meaning memory-only M0 is favored absolutely. The relative C3 detection does NOT constitute evidence for action-conditioned web dynamics. (result.json metrics.variants.*.per_alpha_log_bayes_factor_nats.observed, audit.json validity_findings[2][3])",
+      "Title-aware PMI on TodoMVC: unique_titles=1 on all variants (0% title variance). Title-aware PMI is isomorphic to URL-only. (parent EXP-PHYSICS-34266105229, EXP-PHYSICS-35209110569)"
+    ],
+    "unknown": [
+      "Sensitivity of absolute BF sign and C1/C3 to K (category count): data-matched K≈3-4 vs frozen K=12. Untested because K=12 is frozen. The audit identifies this as the most critical unresolved question (audit.json required_fixes[3], unresolved[1]).",
+      "Whether the relative detection (C3 separation from null) would persist at data-matched K, or whether it is an artifact of K=12 over-penalization mixing deterministic strata.",
+      "B1 baseline discrepancy: this run 0.0581-0.0716 bits vs parent EXP-PHYSICS-35262258744 cited 0.188-0.209 bits for URL-only PMI (different computation scope). Needs reconciliation.",
+      "Generalization to non-deterministic, stochastic, history-dependent, or production SPAs with richer state variation (title changes, form-heavy flows, localStorage, DOM evolution). Untested.",
+      "Session diversity effect: 6 sessions per variant use identical 7-step cycle with only session_idx offsets. Would more diverse user-like trajectories change BF/null distributions?",
+      "Permutation p true value: observed exceeds all 1999 nulls so true p may be <<0.0005. N_SHUFFLE=9999 untested."
+    ],
+    "do_not_assume": [
+      "Do NOT assume C-WEB-DYNAMICS is validated or supported by this experiment. The frozen decision rule passes but the absolute model comparison favors memory-only. The claim ceiling is bounded to relative null separation on near-deterministic TodoMVC hash-SPAs.",
+      "Do NOT assume 5 independent variant replications. Effective independent FSM types = 2 (isomorphic pairs verified bit-identical).",
+      "Do NOT assume the estimator works on production SPAs, stochastic environments, or state spaces larger than 3-4 URL states. All evidence is on minimal TodoMVC hash-SPAs.",
+      "Do NOT assume K=12 is appropriate for data with S=3-4 observed states. K=12 over-penalizes and makes BF magnitudes incomparable to the synthetic setting where K matches n_states.",
+      "Do NOT treat the negative observed BF as evidence that URL-level state is always insufficient for action dynamics. The K-mismatch confound is unresolved.",
+      "Do NOT assume N=5000-scale validation was achieved. Actual N_NL=80 per variant (1.6% of target), 6 scripted near-identical sessions.",
+      "Do NOT promote any mechanism to Product Core. This is a physics measurement with narrowed ceiling; no product code was modified or tested."
+    ]
+  },
+  "dependencies": [
+    "Data-matched K experiment (K≈3-4) on same TodoMVC NL transitions (nl_transitions_*.json artifacts available) to resolve K-mismatch confound",
+    "Reconciliation of B1 baseline discrepancy between this run and parent EXP-PHYSICS-35262258744 before any gating use of B1",
+    "For generalization: non-deterministic SPA testbeds with genuine stochastic transitions, richer state representations (DOM, a11y tree), and production SPAs with title/form variation"
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-PHYSICS-35651906573/result.json sha256 e997d3b1da25d34516da8af692cf6c111ae6d10195059da98f1332fad7f25959",
+    "research/experiments/EXP-PHYSICS-35651906573/audit.json (REVISE, producer_claim_supported=false, 6 required_fixes, 11 validity_findings)",
+    "research/experiments/EXP-PHYSICS-35651906573/raw_results.json sha256 ec9b1e630e6d8ddb3ff3e7c352fcba5f02f30f81d2a6cd682beb1e2875ba8fee",
+    "research/experiments/EXP-PHYSICS-35651906573/nl_transitions_vanillajs.json sha256 3f894c687f3b4ed4d3caec5c3ac8299e35b2d517eb934555b41362ce1408dd2e (available for K-sensitivity reanalysis)",
+    "research/experiments/EXP-PHYSICS-35651906573/nl_transitions_vue.json sha256 10c052f101a669eee87e7a247ce43a73d2282c95fdf36af930888f663f5260c9 (available for K-sensitivity reanalysis)",
+    "research/experiments/EXP-PHYSICS-35651906573/raw_synthetic.json sha256 0cdc68d29c6994cbbe1f9291251b854e1a48701b4a4d4c1466e0bc2521e817be (positive control, replication-exact)",
+    "research/experiments/EXP-PHYSICS-35578258358/handoff.json sha256 2d4324ca6f6e4e3e5921e1d749f04abdcbc1304f8fbc7878f7e7f04e81a8a324 (parent synthetic SURVIVES_CURRENT_TEST)",
+    "research/experiments/EXP-PHYSICS-35262258744 (PMI pipeline parent, B1 baseline discrepancy source)",
+    "codex/claim_state.json C-WEB-DYNAMICS events (claim remains HYPOTHESIS/EXPERIMENTAL across 30+ experiments)"
+  ],
+  "recommended_action": "CONTINUE in Physics lane with a data-matched K sensitivity experiment: re-run the Bayesian DM model comparison on the same TodoMVC NL transition artifacts (nl_transitions_*.json) with K∈{3,4,5} matching observed state cardinality. This is the minimum-cost, highest-information follow-up that resolves the audit's most critical unresolved question. If positive BF emerges at data-matched K, the claim ceiling expands. If negative BF persists, the Physics lane should pivot to richer state representations (DOM, accessibility tree) or non-deterministic SPA environments. Do not repeat the K=12 test or claim C-WEB-DYNAMICS validation beyond the bounded relative-null-separation ceiling."
+}
