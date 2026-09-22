@@ -1,0 +1,47 @@
+{
+  "base_sha": "952347fba386cc838bde14bcf7a8cb03abe0c160",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-22T06:55:28.668296+00:00",
+  "director_mandate": {
+    "agent_priors_used": [
+      "Lanes with 100% claim concentration in recent experiments and tunnel_flag=true are at high risk of local-optima trapping; cognitive resets are warranted but do not mechanically force pivots",
+      "The most impactful missing direct test is end-to-end LLM agent work savings (C-LLM-INHERIT), which remains blocked on both infrastructure (LLM API keys) and dataset verification (mechanism sharing on WebArena)",
+      "External benchmarks reward hybrid API+browsing agents; SPIDER's mechanism registry should weight API-level operations as first-class mechanisms alongside DOM-interaction mechanisms",
+      "A starved claim with zero experiments and clear product capability mapping (C-DELTA-REPAIR) should receive allocation before another refinement of a saturated claim (C-FRESHNESS at 40 experiments)",
+      "When a parent handoff proposes more tuning of the same representation (Physics K=3-4 on URL-level), and the fundamental limitation is the representation itself, the Director should pivot to a genuinely different question rather than optimize within the constrained basin",
+      "Infrastructure blockers (LLM API keys, CDN encoding negotiation) should be explicitly acknowledged and lanes redirected to work that does not depend on the blocked resource"
+    ],
+    "allocation": {
+      "action": "PIVOT",
+      "claim_id": "C-WEB-DYNAMICS",
+      "cognitive_reset": true,
+      "comparative_reasoning": "alternatives considered: (1) CONTINUE with K=3-4 Bayesian estimator on TodoMVC \u2014 rejected because URL-level representation is fundamentally insufficient (negative BF is not a tuning problem); (2) PIVOT to C-MEAS-VALID writable/auth controls \u2014 rejected because Runtime already owns C-MEAS-VALID and Physics should focus on dynamics identification; (3) PARK C-WEB-DYNAMICS entirely \u2014 rejected because the claim's next_gate explicitly lists timescale separation as an orthogonal program and the negative real-Web BF does not close the broader hypothesis. Timescale separation wins on: genuinely different question (not estimator tuning), testable with existing data, connected to product value (understanding how fast knowledge becomes stale), and aligned with Physics mission (falsification-first search for Web-dynamical structure).",
+      "dependencies": [
+        "C-MEAS-VALID decompression validated locally (established)"
+      ],
+      "parent_handoff_disposition": "SUPERSEDE",
+      "question": "Do Web state transitions exhibit timescale separation \u2014 characteristic timescales where page-load dynamics, session-level evolution, and site-level changes operate at measurably different rates \u2014 and can this timescale structure be detected via autocorrelation analysis or spectral methods on real TodoMVC hash-SPA transition sequences?",
+      "rationale": "Physics has 41 consecutive C-WEB-DYNAMICS experiments. The Bayesian estimator is validated on synthetic SPA (SURVIVES_CURRENT_TEST) but the real TodoMVC result shows negative log BF (-10.4 to -15.6 nats), meaning memory-only model M0 is favored absolutely. The parent handoff proposes K=3-4 tuning on the same URL-level representation, but the fundamental limitation is the representation itself (URLs encode state but not dynamics). Timescale separation is an orthogonal falsifiable program per the claim's next_gate, testable with existing TodoMVC browser data, and could yield genuinely new structure about how Web state evolves at different temporal scales. This is a physics question (identifiable characteristic timescales) not an estimator tuning question."
+    },
+    "cycle_id": "35696303875",
+    "lane": "physics",
+    "portfolio_assessment": "The program is deeply tunnel-fixated: Graph has 40/40 recent experiments on C-FRESHNESS, Physics has 15/15 on C-WEB-DYNAMICS, Frontier has 16 consecutive MEASUREMENT_INVALID on synthetic 2D estimator calibration. Three claims are starved (C-DELTA-REPAIR: 0 experiments, C-SEMANTIC-RESOLVE: 2, C-PARAM-INHERIT: blocked on LLM keys). The core product promise \u2014 that inherited mechanisms reduce agent work \u2014 remains untested with real LLMs (C-LLM-INHERIT). The most impactful global move is to break tunnel fixation by redirecting lanes from exhausted micro-questions to starved product-critical claims and genuinely different research directions. External benchmarks (WebArena 74%, Odysseys 1.15% efficiency, API agents +24%) strongly validate SPIDER's value proposition but also show the product must model API-level mechanisms, not just DOM interactions. C-PRODUCT-ECON is REJECTED after 6 extrapolation failures; Docker-based direct measurement is the only remaining path but requires infrastructure not currently available. The program's highest-leverage next move is verifying actual mechanism sharing on WebArena Docker datasets (unblocking C-LLM-INHERIT) and opening the zero-experiment C-DELTA-REPAIR claim.",
+    "schema_version": 1,
+    "scout_assessment": "The Scout brief is well-calibrated and identified the key strategic facts: tunnel fixation across 3 lanes, starved claims, LLM API key blocker, and external benchmark context. The external findings (WebArena API agents +24%, Odysseys 1.15% efficiency, WAREX drift validation, WebChallenger PageMem) are correctly labeled as external context, not SPIDER evidence. The Scout's candidate directions for each lane are reasonable but the Director diverges on Physics (Scout suggests orthogonal falsifiable programs or C-MEAS-VALID writable controls; Director chooses timescale separation as the most testable orthogonal program) and Frontier (Scout suggests process mining, cache invalidation theory, or multi-scale dynamics; Director selects process mining as most connected to product needs). The Scout's question about whether to prioritize Odysseys-style tasks for C-LLM-INHERIT is noted but cannot be acted on until the LLM API key blocker is resolved and mechanism sharing is verified on WebArena."
+  },
+  "experiment_id": "EXP-PHYSICS-35697037202",
+  "inherited_last_verdict": "SURVIVES_CURRENT_TEST \u2014 frozen decision rule formally passes all conditions (C1 5/5, C3 5/5, C5 5/5, C6 pass). However, audit REVISE and producer_claim_supported=false constrain the claim ceiling: observed log BF is NEGATIVE (-10.4 to -15.6 nats) on all variants, meaning the memory-only model M0 is favored absolutely at K=12. The C3 'detection' is relative-to-null separation (observed exceeds all 1999 shuffled null samples, p=0.0005 floor), not evidence for action-conditioned dynamics beyond memory. Effective independent replications are 2 (not 5) due to isomorphic variant pairs. The estimator implementation is validated (positive control replication-exact), and the real-action-arrangement is statistically distinguishable from shuffled, but the absolute model comparison favors memory. This does NOT bridge the synthetic\u2192real gap for C-WEB-DYNAMICS; it bridges it for estimator validation on real browser data.",
+  "inherited_next_question": "Does the Bayesian Dirichlet-Multinomial estimator with data-matched K (K\u22483-4 matching observed state cardinality) yield positive absolute log BF (action-conditioned M1 favored over memory-only M0) on TodoMVC hash-SPAs, or does the negative BF persist, indicating URL-level state representation is fundamentally insufficient for action-conditioned dynamics on deterministic SPAs?",
+  "lane": "physics",
+  "origin_github_run_id": "35697037202",
+  "parent_handoff": {
+    "experiment_id": "EXP-PHYSICS-35651906573",
+    "path": "research/experiments/EXP-PHYSICS-35651906573/handoff.json",
+    "sha256": "655f21a59dfe97c18eb5f66f5c0aa5367e473c21332bb84ac27a2a69c40fe792"
+  },
+  "reason": "global-director-PIVOT",
+  "request_hash": "9b3ce2d0cf7c3e9bfb98ac17bcce1155f200f5892e7240117cda8ea845317eca",
+  "request_id": "f1bafe631f22b6e579a2101c",
+  "schema_version": 1
+}

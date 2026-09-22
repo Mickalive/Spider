@@ -1,0 +1,116 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-35697037202",
+  "lane": "physics",
+  "github_run_id": "35697037202",
+  "github_run_url": null,
+  "base_commit": "207f6239e6f46953bca147b80353b39a62e41eb3",
+  "frozen_commit": "207f6239e6f46953bca147b80353b39a62e41eb3",
+  "execution_commit": "207f6239e6f46953bca147b80353b39a62e41eb3",
+  "python_version": "3.12.14",
+  "dependencies": {
+    "numpy": "2.5.3",
+    "scipy": "1.18.1"
+  },
+  "code_paths": [
+    "/tmp/opencode/analyze_v2.py"
+  ],
+  "frozen_inputs": {
+    "request.json": {
+      "path": "research/experiments/EXP-PHYSICS-35697037202/request.json",
+      "sha256": "47fc0665636bd3cf0e453c6a8252232d30e4bffa8ac53f1be505c10e04f7dd38"
+    },
+    "spec.json": {
+      "path": "research/experiments/EXP-PHYSICS-35697037202/spec.json",
+      "sha256": "de2fee5b55fd1de951b24cd0dabec2221a2dbdc26e412847c6d7ebafc59d6542"
+    },
+    "prereg.md": {
+      "path": "research/experiments/EXP-PHYSICS-35697037202/prereg.md",
+      "sha256": "678dc2e209f69a6542122c457a0534b1a760a270abe83a4d96f05f0f73e310f0"
+    },
+    "freeze.json": {
+      "path": "research/experiments/EXP-PHYSICS-35697037202/freeze.json",
+      "sha256": null
+    }
+  },
+  "input_artifacts": {
+    "nl_transitions_vanillajs.json": {
+      "path": "research/experiments/EXP-PHYSICS-35651906573/nl_transitions_vanillajs.json",
+      "sha256": "3f894c687f3b4ed4d3caec5c3ac8299e35b2d517eb934555b41362ce1408dd2e",
+      "source_experiment": "EXP-PHYSICS-35651906573",
+      "role": "fixture"
+    },
+    "nl_transitions_react.json": {
+      "path": "research/experiments/EXP-PHYSICS-35651906573/nl_transitions_react.json",
+      "sha256": "115b6a63ade5ccb6c53ad5732a920be313305555b38fe4be039e4f4367def133",
+      "source_experiment": "EXP-PHYSICS-35651906573",
+      "role": "fixture"
+    },
+    "nl_transitions_svelte.json": {
+      "path": "research/experiments/EXP-PHYSICS-35651906573/nl_transitions_svelte.json",
+      "sha256": "3ec95119d5842bce2864e9244b00ae39e7593d9eba5dcd13c1022b49dd94b496",
+      "source_experiment": "EXP-PHYSICS-35651906573",
+      "role": "fixture"
+    },
+    "nl_transitions_vue.json": {
+      "path": "research/experiments/EXP-PHYSICS-35651906573/nl_transitions_vue.json",
+      "sha256": "10c052f101a669eee87e7a247ce43a73d2282c95fdf36af930888f663f5260c9",
+      "source_experiment": "EXP-PHYSICS-35651906573",
+      "role": "fixture"
+    },
+    "nl_transitions_angular.json": {
+      "path": "research/experiments/EXP-PHYSICS-35651906573/nl_transitions_angular.json",
+      "sha256": "f27acff699d6157890fb7daab024f96af52be4802829a8cd4809dd7fcc7b2a18",
+      "source_experiment": "EXP-PHYSICS-35651906573",
+      "role": "fixture"
+    },
+    "raw_synthetic.json": {
+      "path": "research/experiments/EXP-PHYSICS-35651906573/raw_synthetic.json",
+      "sha256": "0cdc68d29c6994cbbe1f9291251b854e1a48701b4a4d4c1466e0bc2521e817be",
+      "source_experiment": "EXP-PHYSICS-35651906573",
+      "role": "fixture"
+    }
+  },
+  "output_artifacts": {
+    "result.json": {
+      "path": "research/experiments/EXP-PHYSICS-35697037202/result.json",
+      "sha256": "2941beb8b2587f867ecff9db52da115c049009a66174e045f14e1207c319771d",
+      "role": "derived"
+    },
+    "report.md": {
+      "path": "research/experiments/EXP-PHYSICS-35697037202/report.md",
+      "sha256": "09dc8dab33f0df16771913c2d352c1e220ca8541072f49fd9a3fbd70f803b78b",
+      "role": "derived"
+    },
+    "provenance.json": {
+      "path": "research/experiments/EXP-PHYSICS-35697037202/provenance.json",
+      "sha256": null,
+      "role": "derived"
+    }
+  },
+  "execution_environment": {
+    "platform": "linux",
+    "python_executable": "python3",
+    "working_directory": "/home/runner/work/Spider/Spider",
+    "analysis_script": "/tmp/opencode/analyze_v2.py",
+    "analysis_results": "/tmp/opencode/analysis_results.json",
+    "random_seed": 42,
+    "n_shuffle": 1999,
+    "n_surrogate": 500,
+    "max_lag": 6,
+    "bonferroni_variants": 5
+  },
+  "reproduction_commands": [
+    "pip install numpy scipy",
+    "python3 /tmp/opencode/analyze_v2.py"
+  ],
+  "material_facts": [
+    "Analysis script: /tmp/opencode/analyze_v2.py",
+    "All NL transition data sourced from parent EXP-PHYSICS-35651906573 artifacts",
+    "Positive control uses raw_synthetic.json from parent (12-state stochastic SPA, seed=42, N=5000)",
+    "ACF computed on temporal-order-encoded categorical states (URLs mapped to integers by first appearance)",
+    "Shuffled-state null preserves marginal state distribution, randomizes temporal order within sessions",
+    "Markov-1 surrogate preserves session structure, generates states from fitted first-order transition matrix",
+    "Hartigan's dip test uses N=2000 permutation bootstrap for p-value estimation"
+  ]
+}

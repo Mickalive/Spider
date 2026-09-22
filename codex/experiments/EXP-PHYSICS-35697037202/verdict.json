@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-35697037202",
+  "lane": "physics",
+  "decision": "MIXED",
+  "claim_updates": [
+    {
+      "claim_id": "C-WEB-DYNAMICS",
+      "status": "EXPERIMENTAL",
+      "reason": "Frozen decision_rule yields MIXED: C1 passes (lag-1 ACF 0.418-0.454 exceeds shuffled-state null at p_corr=0.0025, 5/5 variants), C2 passes (non-uniform ACF decay, variance test p<0.001), but C3 fails (inter-event times unimodal, dip test p=1.0 on all variants, failing the SUPPORTS H1 requirement). Timescale separation as defined in the frozen hypothesis (distinct operational timescales: page-load vs session-step vs cross-session) is NOT detected. However, the experiment does establish lag-1 temporal autocorrelation on TodoMVC hash-SPA state sequences, bounded to scripted 7-step automation cycles on minimal deterministic 3-4-state hash-SPAs. The autocorrelation is fully explainable by first-order Markov dynamics (observed ACF within Markov-1 surrogate range, mean 0.349, 95th 0.547). The positive control fails (synthetic SPA lag-1 ACF = -0.055), C2 ANOVA and C3 dip test implementations are invalid per audit, and the dominant source of temporal structure is the scripted automation cycle, not natural Web dynamics. No evidence accumulated for or against beyond-memory predictive structure, production SPAs, or stochastic transitions. Bounded to: scripted TodoMVC hash-SPAs at 80 NL transitions per variant, 2 effectively independent FSM types, deterministic FSM with near-uniform action pacing."
+    }
+  ],
+  "product_action": "NONE",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "Do real user sessions on TodoMVC hash-SPAs with variable pacing, diverse action sequences, and non-scripted interaction patterns exhibit lag-1 temporal autocorrelation detectable by permutation test, or is the autocorrelation entirely an artifact of the scripted 7-step automation cycle?",
+  "reason": "MIXED outcome: C1 and C2 pass (temporal autocorrelation detected, non-uniform decay), C3 fails (no inter-event time multimodality). The observed lag-1 ACF (0.42-0.56) significantly exceeds the shuffled-state null (p_corr=0.0025) on all 5 variants (2 effective FSM types), establishing that TodoMVC hash-SPA state sequences have temporal structure detectable by permutation test. However, the autocorrelation is entirely attributable to the scripted 7-step automation cycle (uniform pacing, fixed hash-fragment transitions), fully explained by first-order Markov dynamics (observed within Markov-1 surrogate range), and inter-event times are unimodal (mean 1.12s, consistent with Playwright automation timing). The positive control fails (synthetic SPA lag-1 ACF = -0.055, pipeline not validated for generic timescale detection). The audit REVISE status with producer_claim_supported=false constrains the claim ceiling. Timescale separation (distinct operational timescales) is not demonstrated. The broader C-WEB-DYNAMICS claim remains untested on real Web data; this experiment characterizes scripted-cycle autocorrelation on minimal deterministic SPAs, not natural Web dynamical structure.",
+  "evidence_refs": [
+    "research/experiments/EXP-PHYSICS-35697037202/spec.json",
+    "research/experiments/EXP-PHYSICS-35697037202/prereg.md",
+    "research/experiments/EXP-PHYSICS-35697037202/freeze.json",
+    "research/experiments/EXP-PHYSICS-35697037202/result.json",
+    "research/experiments/EXP-PHYSICS-35697037202/report.md",
+    "research/experiments/EXP-PHYSICS-35697037202/audit.json",
+    "research/experiments/EXP-PHYSICS-35697037202/provenance.json",
+    "research/experiments/EXP-PHYSICS-35651906573/handoff.json"
+  ]
+}
