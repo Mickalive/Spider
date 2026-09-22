@@ -1,0 +1,36 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-35741913862",
+  "lane": "product",
+  "decision": "REVISE — SURVIVES_CURRENT_TEST fails frozen C2/C3 and PC hit-rate; producer MIXED not justified as confirmatory; C-RESIDUAL-NOVELTY remains HYPOTHESIS at bounded synthetic mock ceiling",
+  "claim_updates": [
+    {
+      "claim_id": "C-RESIDUAL-NOVELTY",
+      "status": "HYPOTHESIS",
+      "reason": "Audit REVISE producer_claim_supported=false (audit.json status REVISE). Recomputed metrics match producer (rho 0.9703, R2 0.927, slope 5540, R2_length 0.0) but frozen decision rule SURVIVES requires ALL C1-C6. C2 fails (SPIDER/COLD 100% 1.116>1.10, SPIDER/REPLAY honest per-hit 25.0>2.0 vs reported 0.239 diluted mean) and C3 fails (block-permutation two-sided p 0.0172 exact 2/120=0.0167 >0.01 threshold) with degenerate bootstrap CI [0.966,0.974] around deterministic means. PC-PARAM-AND-REPLAY fails frozen MEASUREMENT_INVALID clause: main-set B-REPLAY-TERX hit_rate 0.05 (1/20 at 0%) not 1.0, B-RAG hit 0.05 not 1.0, violating spec positive_control expectation hit_rate=1.0 in compared set (VF-PC-HIT-MISREPORT high). SPIDER cost variance 0 at 4/5 bins (250,1250,5200,5200) via hardcoded behavioral_score 0.15<0.25 and confidence 0.70<0.80 UNKNOWN gating makes novelty tracking bijective with gating not emergent verification (VF-SP-DETERMINISTIC-COST high). NC1/NC2 constant 5750 tokens variance 0 do not test mapping/ranking (VF-NC-FLAT). R2_delta 0.927 tautological with L=10 constant. No evidence for WebArena DOM, cross-site transfer, or real LLM economics. Maximum ceiling is descriptive pipeline execution with freshness/UNKNOWN exercised and B-LENGTH falsifier reachable, not confirmatory residual-novelty economics. Remains HYPOTHESIS; no promotion."
+    }
+  ],
+  "product_action": "no_promotion",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "Does a repaired residual-novelty pipeline with 20/20 exact-repeat tasks at n=0.0 (main-set B-REPLAY-TERX hit_rate=1.0 and B-RAG hit_rate≈1.0 via overlap-proportional Jaccard sampling), per-task verification-derived cost variance at all bins without deterministic UNKNOWN gating, and honest per-hit cost accounting (distill 1000/f only SPIDER, per-hit REPLAY 50 tok) show SPIDER cost tracking residual novelty (Spearman rho>=0.60 block-permutation two-sided p<0.01, R2_delta>=0.15) and beating retrievable RAG/REPLAY at low novelty (f=10) on the same L=10 synthetic mock?",
+  "reason": "Producer reported MIXED with C1,C4,C5,C6 PASS and C2/C3 marginal fails (C2 1.116>1.10 at 100%, C3 p 0.0172>0.01 two-sided, audit recomputed rho 0.9703 p 0.0172 exact 0.0167, slope 5540 R2 0.927). Audit REVISE confirms recomputed metrics match producer but identifies high-severity validity flaws that invalidate confirmatory SURVIVES: (1) VF-SP-DETERMINISTIC-COST: SPIDER tokens variance 0 at 4/5 bins [250]x20 [1250]x20 [5200]x20 [5200]x20 via hardcoded freshness/confidence UNKNOWN at n>=0.75 (run_experiment.py 283-313), bootstrap CI degenerate around constants, residual RF1/RF2 bijective flaw; (2) VF-PC-HIT-MISREPORT: M-HIT-RATE-REPLAY-0pct reported 1.0 but recomputed main-set 0.05 (1 hit 50 +19 miss 5500), M-HIT-RATE-RAG 0.0 vs 0.05 via tokens 250, isolated PC row outside compared set replicates parent flaw, triggers frozen MEASUREMENT_INVALID clause hit_rate>=0.90; (3) VF-C2-PER-HIT-VS-MEAN: reported SPIDER/REPLAY 0.239 uses diluted mean 5227.5, honest per-hit 1250/50=25.0 fails C2 >2.0; (4) VF-NC-FLAT: NC1/NC2 5750 flat variance 0 hardcode novel_steps=L, not pipeline-derived verification (RF7 not satisfied); (5) VF-R2-ARTIFICIAL: R2_length 0 guaranteed by L=10 constant so delta=R2_novelty, sensitivity formula not pipeline; (6) VF-SYNTHETIC-CEILING: harness-level distill_parameterized, synthetic Flask mock 12 stores L=10, no WebArena fixtures, token proxy only. Baseline B-COLD flat 5000 valid, B-LENGTH rho 0 valid falsifier, B-INSTRUCTIONS/NC numeric matches but not substantive for RAG/REPLAY starved (BF B-RAG/B-REPLAY fail as strong baselines). C1 correctness (success 1.0 at 0% Wilson low 0.839, false_accept 0.0) and C4 R2 and C5 vs starved baselines numerically pass but do not demonstrate advantage over retrievable retrieval or 0-token replay inside set. Frozen rule requires ALL C1-C6; C2 and C3 fails force not SURVIVES, PC failure forces MEASUREMENT_INVALID per freeze, so MIXED classification is ambiguous and at best descriptive. C-RESIDUAL-NOVELTY therefore remains HYPOTHESIS at bounded synthetic mock ceiling (L=10, token proxy 500 tok/step, 12 stores, 5 A demos, harness MechanismRegistry). No PRODUCT_CORE promotion (audit PASS required, producer_claim_supported false, promote_to_product false).",
+  "evidence_refs": [
+    "research/experiments/EXP-PRODUCT-35741913862/request.json",
+    "research/experiments/EXP-PRODUCT-35741913862/spec.json",
+    "research/experiments/EXP-PRODUCT-35741913862/prereg.md",
+    "research/experiments/EXP-PRODUCT-35741913862/freeze.json",
+    "research/experiments/EXP-PRODUCT-35741913862/result.json",
+    "research/experiments/EXP-PRODUCT-35741913862/report.md",
+    "research/experiments/EXP-PRODUCT-35741913862/provenance.json",
+    "research/experiments/EXP-PRODUCT-35741913862/audit.json",
+    "research/experiments/EXP-PRODUCT-35741913862/artifacts/raw_per_task.csv",
+    "research/experiments/EXP-PRODUCT-35741913862/artifacts/registry.json",
+    "research/experiments/EXP-PRODUCT-35741913862/artifacts/cost_config.json",
+    "research/experiments/EXP-PRODUCT-35741913862/fixtures/tasks.json",
+    "research/experiments/EXP-PRODUCT-35741913862/run_experiment.py",
+    "research/experiments/EXP-PRODUCT-35741913862/compute_metrics.py",
+    "codex/claim_state.json",
+    "codex/index.json"
+  ]
+}
