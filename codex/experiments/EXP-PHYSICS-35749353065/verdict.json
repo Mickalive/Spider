@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-35749353065",
+  "lane": "physics",
+  "decision": "MEASUREMENT_INVALID",
+  "claim_updates": [
+    {
+      "claim_id": "C-WEB-DYNAMICS",
+      "status": "HYPOTHESIS",
+      "reason": "Gate 0 substrate_unavailable: 0/5 manifest candidates exist and repo-wide glob research/**/intel_spa_manifest.json returns nothing (audit FINDING-1 verified). 0 SPAs satisfy frozen Gate 0 (>=2 titles, H>0.2 bits, leakage<40%, NL>=50, strata>=10, singleton<50%) so frozen decision_rule maps to MEASUREMENT_INVALID (substrate_unavailable) with outcome NOT_APPLICABLE. C-WEB-DYNAMICS was NOT tested on production SPAs and is NOT falsified; remains HYPOTHESIS. Synthetic controls show qualitative pipeline sensitivity (positive correlated BC PMI 0.8539 item-level / 0.8392 trajectory-grouped, p_raw 0.001, delta 0.4667; negative independent-noise R2 0.0036 p 0.458 replicates parent EXP-PHYSICS-34764605162) but pipeline is NOT validated exactly per frozen design: permutation null was item-level not trajectory-grouped (prereg 9), positive control was outcome-modified to P(flip)=0.0 and DOM=SHA256(L) instead of frozen P=0.3 and SHA256(L||step_mod), result.json misreports accuracies 0.5/0.9667 and CI 0.094/0.153 vs raw artifact 0.5333/1.0 and -0.0229/0.0347, degenerate nulls (R1/R4/corr perm_std ~1.7e-16, R3 0.0) misreported as PASS, and Bonferroni p<0.001 is unreachable at N_PERMS=1000 (min p_bonf 0.012). No evidence accumulated for/against correlated factorization on real SPAs."
+    }
+  ],
+  "product_action": "none",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "On Intel-supplied production SPAs satisfying Gate 0 (>=2 titles, H(S_next|URL,H_K=3)>0.2 bits, leakage<40%, NL>=50, strata>=10, singleton<50%) with BrowserGym/AgentLab 1280x720 provenance, does history-conditioned CMI I(S_next;DOM_before|URL,H_K=3,Action_leakageFree) with frozen trajectory-grouped permutation (resampling unit trajectory_id, 1000 perms) and restored positive control (P(L flips)=0.3, DOM=SHA256(L||step_mod)) achieve BC PMI>=0.10 bits, Bonferroni p<0.005 and Delta accuracy>0.03 on >=1/2 SPAs (or >=2/3 if Q=3) for R1 or R2, and if falsified does barrier/committor (>=10 revisits to same URL,DOM with divergent futures) or timescale separation reveal beyond-memory dynamics with B-DOM-SIMILARITY executed as frozen?",
+  "reason": "MEASUREMENT_INVALID per frozen spec.json decision_rule Gate 0 clause and prereg 12: qualifying SPAs 0 < required 1, Intel BrowserGym manifest unavailable, verified by audit reproduction (no research/intel/, no EXP-INTEL-35697055679, no trajectory artifacts in working tree or git history). Status NOT_APPLICABLE is not a scientific negative; C-WEB-DYNAMICS claim_ceiling is bounded to substrate_unavailable. Audit REVISE correctly identifies 6 required fixes before a confirmatory claim is possible: (1) trajectory-grouped permutation, (2) restore frozen positive-control branching FSM, (3) align result/report with raw artifact (6703e79ea...), (4) apply degenerate-null rule to independent-noise R1/R3/R4/corr, (5) execute missing baselines B-DOM-SIMILARITY/B-ACTION-FREQ-SHUFFLE/B-TRAJECTORY-MEMORY, (6) reconcile Bonferroni p<0.001 unreachability. Positive control qualitative pass is robust across both permutation schemes (0.8539 vs 0.8392 >0.5), negative R2 replicates 0-bit independent-noise null, but R1/R4/corr degenerate and representation diversity overstated (all 5 encode same latent bit). No product promotion justified; physics must await Intel manifest or explicitly authorize Playwright self-collection per spec Data clause before retry, and next orthogonal pivot (barrier/timescale) remains open per director_mandate if factorization falsifies.",
+  "evidence_refs": [
+    "research/experiments/EXP-PHYSICS-35749353065/request.json (sha256 761ce67751c1dbffd2c413558a18a24f4e5034ce1a078dd831677386ba0face1) director_mandate PIVOT C-WEB-DYNAMICS dependencies Intel manifest",
+    "research/experiments/EXP-PHYSICS-35749353065/spec.json (sha256 67b3911ef6b0da604e98d4ec56ec862ce98dd2897f7474c896015a00ba5742ac) decision_rule Gate 0 <1 SPA -> MEASUREMENT_INVALID",
+    "research/experiments/EXP-PHYSICS-35749353065/prereg.md (sha256 0d36db242ba0895f9433e1e177c4feacd4b3618c27cbfcff6b06c8dbdf95bc83) prereg 5.1/12 substrate gates",
+    "research/experiments/EXP-PHYSICS-35749353065/freeze.json (sha256 4e50bc4698221613d11979c83f572a061857d55b3cebdd2b8b9e222449101438) frozen_at 2026-09-22T15:48:09Z",
+    "research/experiments/EXP-PHYSICS-35749353065/result.json (sha256 9bae1e00b0407745257e27933e4448efbf61268a72b745ed6889f8fa17a70e21) status MEASUREMENT_INVALID outcome NOT_APPLICABLE gate0_qualifying_spas 0 synthetic positive BC 0.8539 delta 0.4667 negative R1 0.0 R2 0.0036",
+    "research/experiments/EXP-PHYSICS-35749353065/audit.json (status REVISE producer_claim_supported false) FINDING-1 Gate 0 CORRECT, FINDING-2 permutation not trajectory-grouped, FINDING-3 outcome-informed positive control P(flip)=0.0, FINDING-4 Bonferroni unreachable, FINDING-5 degenerate null R1/R3/R4, FINDING-6 result/report vs raw artifact mismatch, FINDING-7 representation nominal, claim_ceiling MEASUREMENT_INVALID substrate_unavailable",
+    "research/experiments/EXP-PHYSICS-35749353065/raw_cmi_results.json (sha256 6703e79ea65220b0c8257223c3dd2ef7f8bdc8de9808feef28eb099d7e903fd3) acc_history 0.5333 acc_history_dom 1.0 CI -0.0229/0.0347 BC 0.8539",
+    "research/experiments/EXP-PHYSICS-35749353065/gate0_table.json (sha256 738669795d279bcec904c722ae4738eb74e109970d65152ec4da914dcbb4a89d) NO_SPA_FOUND qualifies false",
+    "research/experiments/EXP-PHYSICS-35749353065/synthetic_positive_control.json (sha256 fa81f2c0a7682ee2f7dcb8c265fbfcec58ae73944d263312cc339e565ec33bef)",
+    "research/experiments/EXP-PHYSICS-35749353065/synthetic_negative_control.json (sha256 6cddb3e6542b40129e0fe2545aa787ed856abb4207987d61977b9d06d5ca8be8)",
+    "research/experiments/EXP-PHYSICS-35749353065/execute.py (sha256 02ad9e289531ab93e5a6121d7712243d3e9cf18ed06c5b5777bc21882fb0c2fd) lines 347-359 item-level shuffle, 78-82 P(flip)=0.0, 128 title URL-only, 692 raw-p clause",
+    "research/experiments/EXP-PHYSICS-35749353065/provenance.json (sha256 4a81e23a0e44f141fd2a79a1b089cd3d48dd61de3f9af9aca67f51b59f0bf642) datasets INCOMPLETE substrate_unavailable",
+    "research/experiments/EXP-PHYSICS-35749353065/execution_checkpoint.json (sha256 787bc85f7b930d23dd91de753e0f5fb18d575c17eead9a6b21e3309e80002c2d) recorded 2026-09-22T15:48:21Z > frozen_at",
+    "codex/claim_state.json C-WEB-DYNAMICS 58 synthetic-only, one SURVIVES_CURRENT_TEST 2D continuous, independent-noise falsification bounded to that model, correlated non-determinism open",
+    "research/lanes/registry.json physics lane mission falsification-first Web-dynamical structure C-WEB-DYNAMICS priority"
+  ]
+}

@@ -1,0 +1,315 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-35757738658",
+  "lane": "graph",
+  "status": "BLOCKED",
+  "producer_claim_supported": false,
+  "required_fixes": [
+    "Provide real LLM API key (OPENAI_API_KEY or equivalent) in execution environment — hard blocker per spec.json measurement_validity #4 and #8: tokens = sum(prompt_tokens+completion_tokens) from real LLM API responses and repair LLM must be real model not heuristic (gpt-4o-mini, temperature 0.0, max 15 steps). Without key, gates C1, C2, C4, C5, C6, C7, C8 cannot be measured. This is retryable infrastructure, not scientific falsification per EXPERIMENT_PACKET.md s9.",
+    "Deploy real nginx 1.2x reverse-proxy with proxy_cache configured for HIT/SWR/SIE/304 stages and Flask 3.1.3 + PyJWT HS256 backend + SQLite fixture matching runtime substrate EXP-RUNTIME-35611612543 and EXP-RUNTIME-35741906498. Record nginx.conf hash, Flask testbed_server.py commit, decompression code hash, nginx --version, Python 3.12.14, Playwright 1.63.0, openai version. Verify >=0.99 SHA256(decompressed_body) identity HIT==SWR==SIE==304 pre-perturbation via oracle-free gzip.decompress on real nginx responses with non-vacuous full>body and full>status discrimination (B-RUNTIME-BYTE-IDENTITY gate C3) per agent prior #5.",
+    "Implement real repair agent pipeline (execute_delta_repair_real.py) with real LLM calls (record model id gpt-4o-mini, temperature, max_tokens, provider, per-call token counts, 15-step budget), real Playwright execution (goto/click/fill/evaluate/fetch with trace logs), and real verify() on actual DOM/response state (selector existence via Playwright evaluate, status/header/body match) with independent oracle for false accepts (ground-truth from perturbation manifest). No hardcoded constants (COLD_TOKENS_BASE 2250, retrieval 320, verify 180, heuristic 1364 removed per spec) and no deterministic instance_id-derived perfect-separation verification scores; threshold calibrated on TRAIN only.",
+    "Execute frozen sampling plan exactly as preregistered: >=48 perturbation instances (3 families F-DOM/F-ENDPOINT/F-CACHE x2 variants x8 seeds) with N>=24 unrelated mechanisms for contamination, family-stratified TRAIN24/TEST24 split (TRAIN seeds 0-3, TEST seeds 4-7 per variant), registry clone isolation, cache purge per instance, perturbation manifest holdout (never in repair prompt), verification operating threshold fit on TRAIN only, trajectory-grouped resampling unit = instance/trajectory block.",
+    "Compute all frozen metrics on TEST only with trajectory-grouped uncertainty and apply frozen decision rule C1-C8 exactly without threshold weakening: M-repair_success_rate Wilson 95% CI pooled+per-family, M-repair_tokens_ratio_vs_cold and M-browser_ratio_vs_cold instance-block bootstrap 2000 resamples 95% CI, M-verification_auroc (DeLong + block-permutation) / M-verification_precision/recall, M-contamination_rate/M-false_accept_rate block-permutation, M-amortized_cost_tokens_10/M-amortized_cost_browser_10 vs M-cold_cost, M-byte_identity_hit_swr_sie_304_sha_match_rate pre/post via real nginx oracle-free decode, M-retrieval_cost_tokens (real), M-replay_success_rate/M-retrieval_success_rate, and gate evaluation C1 PC1=1.0 PC2>=0.90, C2 NC1 cost0 cont0 FA<=5% AUROC 0.4-0.6, C3 >=0.99, C4 >=0.80 pooled >=0.70 per-family, C5 <0.50 tokens <0.40 browser steps<=2, C6 <0.10, C7 AUROC>=0.75 precision>=0.80, C8 amortized < cold. If pooled TEST n<24 report MEASUREMENT_INVALID. Correct provenance freeze_json_sha256 to real hash 8abd55688204d6b094c30feaa34c2aec235725df9f24310ab98bcc2b3160f192."
+  ],
+  "validity_findings": [
+    {
+      "id": "V_BLOCKED_CORRECTLY_CLASSIFIED",
+      "severity": "info",
+      "category": "failure_transmission",
+      "finding": "Producer correctly reports status=BLOCKED outcome=NOT_APPLICABLE with metrics={} and all 15 controls observed=null/pass=null, citing MISSING_LLM_API_KEY as hard blocker. This is infrastructure failure, not scientific falsification, consistent with EXPERIMENT_PACKET.md s9 and AGENTS.md failure discipline. Producer does not invent simulation metrics, does not encode blocker as FALSIFIES or MEASUREMENT_INVALID, and explicitly states operational failure is not falsification in result.json observations and validity_notes and report.md. Audit confirms no hidden outcome-bearing measurement was executed.",
+      "evidence_refs": [
+        "research/experiments/EXP-GRAPH-35757738658/result.json#/status",
+        "research/experiments/EXP-GRAPH-35757738658/result.json#/outcome",
+        "research/experiments/EXP-GRAPH-35757738658/result.json#/metrics",
+        "research/experiments/EXP-GRAPH-35757738658/result.json#/controls",
+        "research/experiments/EXP-GRAPH-35757738658/result.json#/observations",
+        "research/experiments/EXP-GRAPH-35757738658/result.json#/validity_notes",
+        "research/experiments/EXP-GRAPH-35757738658/report.md#Infrastructure Status",
+        "research/experiments/EXP-GRAPH-35757738658/provenance.json#/execution/blocker",
+        "research/EXPERIMENT_PACKET.md#9"
+      ],
+      "observation_vs_interpretation": "Observation: result.json contains empty metrics {} and all controls evidence='NOT_MEASURED: requires real LLM API key'. Interpretation: producer interpretation that no scientific conclusion can be drawn is correct; audit agrees.",
+      "impact": "No claim ceiling change justified; prevents false validation or false falsification of C-DELTA-REPAIR from absent data. Preserves HYPOTHESIS status on real substrate."
+    },
+    {
+      "id": "V_FROZEN_DESIGN_INTEGRITY_PRESERVED",
+      "severity": "info",
+      "category": "transmission_integrity",
+      "finding": "Frozen inputs remain immutable and hash-verified. Computed sha256: request.json f8f5e93e67c4b9ef3d764198c69d8ae4a9989c4c9dd6fdba852f0ca4606bc9d8, spec.json 2657ca935665f17867759544bcbef08386116872247caec0b2a95707ef446304, prereg.md 330247b2acb7abcba979ec9d21a10571472d2ec09bb8c06749e64b99d9c033f0 all match freeze.json hashes. freeze.json itself sha256 8abd55688204d6b094c30feaa34c2aec235725df9f24310ab98bcc2b3160f192. No post-freeze mutation, no simulation fallback, no threshold weakening. Director PIVOT cognitive_reset to C-DELTA-REPAIR with 5 agent priors intact.",
+      "evidence_refs": [
+        "research/experiments/EXP-GRAPH-35757738658/freeze.json",
+        "research/experiments/EXP-GRAPH-35757738658/request.json",
+        "research/experiments/EXP-GRAPH-35757738658/spec.json",
+        "research/experiments/EXP-GRAPH-35757738658/prereg.md",
+        "research/experiments/EXP-GRAPH-35757738658/provenance.json#/frozen_inputs"
+      ],
+      "impact": "Design remains valid for retry without new preregistration; threshold integrity for C1-C8 intact per spec decision_rule and measurement_validity."
+    },
+    {
+      "id": "V_NO_SIMULATION_FALLBACK_RESISTED",
+      "severity": "info",
+      "category": "measurement_validity",
+      "finding": "Producer correctly resisted reusing parent EXP-GRAPH-35741890679 deterministic simulation (hardcoded COLD_TOKENS_BASE 2250, retrieval 320, verify 180, heuristic repair 1364, perfect-separation verification AUROC 1.0 threshold 0.6) despite pressure to produce numbers. Audit confirms spec measurement_validity #4 and #8 forbid hardcoded constants and require real LLM API usage and Playwright traces; any simulated re-run would have been MEASUREMENT_INVALID. Producer validity_notes explicitly note missing LLM prevents satisfaction of measurement_validity #4/#8.",
+      "evidence_refs": [
+        "research/experiments/EXP-GRAPH-35757738658/spec.json#/measurement_validity",
+        "research/experiments/EXP-GRAPH-35757738658/prereg.md#2.5",
+        "research/experiments/EXP-GRAPH-35757738658/result.json#/validity_notes",
+        "research/experiments/EXP-GRAPH-35757738658/report.md#Frozen Design Compliance",
+        "research/experiments/EXP-GRAPH-35741890679/audit.json"
+      ],
+      "observation_vs_interpretation": "Observation: no metrics produced, artifacts=[] . Interpretation that simulation metrics would not satisfy real measurement validity is correct.",
+      "impact": "Preserves falsifiability of C-DELTA-REPAIR on real substrate; prevents conflating simulation falsification (token 0.613>0.50, browser 0.431>0.40, amortized 2.1x fail) with real substrate outcome."
+    },
+    {
+      "id": "V_PROVENANCE_HASH_MISMATCH_MINOR",
+      "severity": "low",
+      "category": "provenance_integrity",
+      "finding": "provenance.json frozen_inputs.freeze_json_sha256 is recorded as 95840e7593e1715e35258e5b7fdcdc359aca22007e0f8e0a8e7ef1c4f404af6a which equals request.json request_hash (cycle 35757738658), not the actual sha256 of freeze.json (8abd55688204d6b094c30feaa34c2aec235725df9f24310ab98bcc2b3160f192 computed on disk). Other frozen_inputs hashes (request, spec, prereg) are correct and hashes_match_freeze incorrectly set true. This is a provenance recording artefact, not a scientific validity threat, but should be corrected to real hash on retry.",
+      "evidence_refs": [
+        "research/experiments/EXP-GRAPH-35757738658/provenance.json#/frozen_inputs/freeze_json_sha256",
+        "research/experiments/EXP-GRAPH-35757738658/provenance.json#/frozen_inputs/hashes_match_freeze",
+        "research/experiments/EXP-GRAPH-35757738658/freeze.json",
+        "research/experiments/EXP-GRAPH-35757738658/request.json#/request_hash"
+      ],
+      "impact": "No effect on BLOCKED determination; fix provenance generation to compute real sha256 of freeze.json file."
+    },
+    {
+      "id": "V_SUBSTRATE_AVAILABILITY_PARTIAL",
+      "severity": "medium",
+      "category": "substrate_validity",
+      "finding": "Provenance correctly reports nginx 1.24.0 available, Playwright 1.63.0 chromium installed, Python 3.12.14, openai SDK 3.17.0 installable, but Flask 3.1.3+PyJWT HS256 backend and nginx proxy_cache HIT/SWR/SIE/304 configuration not deployed. B-RUNTIME-BYTE-IDENTITY (>=0.99 SHA256(decompressed_body) identity across HIT==SWR==SIE==304 pre-perturbation via oracle-free gzip.decompress with non-vacuous full>body full>status) therefore not measured despite being C3 gate. Audit confirms this is downstream of LLM blocker (no value in deploying substrate without repair agent) not independent substrate falsification. No byte-identity evidence exists to claim runtime substrate invalid.",
+      "evidence_refs": [
+        "research/experiments/EXP-GRAPH-35757738658/provenance.json#/environment",
+        "research/experiments/EXP-GRAPH-35757738658/provenance.json#/execution/components_missing",
+        "research/experiments/EXP-GRAPH-35757738658/report.md#Infrastructure Status",
+        "research/experiments/EXP-GRAPH-35757738658/result.json#/controls/B-RUNTIME-BYTE-IDENTITY",
+        "research/experiments/EXP-GRAPH-35757738658/spec.json#/baselines/4"
+      ],
+      "impact": "No inference about real nginx byte identity on this experiment; runtime substrate dependency EXP-RUNTIME-35611612543 remains accepted pending real re-measurement per instance."
+    },
+    {
+      "id": "V_SAMPLING_SPLIT_LEAKAGE_NOT_TESTABLE",
+      "severity": "info",
+      "category": "sampling_and_leakage",
+      "finding": "No sampling executed, so no target/split/leakage violation occurred, but also no evidence that sampling plan can be executed without leakage. Frozen plan requires 48 instances, family-stratified TRAIN24/TEST24 (TRAIN seeds 0-3 TEST 4-7 per variant), perturbation manifest holdout never in repair prompt, threshold calibrated on TRAIN only, registry clone isolation, cache purge per instance, N>=24 unrelated mechanisms, trajectory-grouped block permutation for CIs. Producer reports these as unresolved, not as violated. No prompt logs, raw_evidence/experiment_data.json, or verify() scores exist to audit for leakage; future retry must log repair prompts and threshold fitting split.",
+      "evidence_refs": [
+        "research/experiments/EXP-GRAPH-35757738658/spec.json#/measurement_validity/5",
+        "research/experiments/EXP-GRAPH-35757738658/spec.json#/measurement_validity/6",
+        "research/experiments/EXP-GRAPH-35757738658/result.json#/unresolved",
+        "research/experiments/EXP-GRAPH-35757738658/prereg.md#6",
+        "research/experiments/EXP-GRAPH-35757738658/prereg.md#5"
+      ],
+      "observation_vs_interpretation": "Observation: no evidence to audit. Interpretation: absence of evidence is not evidence of absence of future leakage risk; must be audited on retry via prompt logs.",
+      "impact": "No validity threat from this run; retry must preserve evidence for audit of split integrity and manifest holdout per measurement_validity #3/#5."
+    },
+    {
+      "id": "V_REPRESENTATION_FIDELITY_DESIGN_ONLY",
+      "severity": "info",
+      "category": "representation_validity",
+      "finding": "Spec mandates raw observables preserved: full DOM + accessibility tree subset + response headers + decompressed body bytes + cache status header, no hash-only surrogate, real LLM + real Playwright execution (measurement_validity #8). No representation loss occurred because no representation collected (artifacts=[] ). Design correctly discloses fidelity requirements; producer validity_notes correctly state missing LLM prevents any fidelity assessment. Agent prior guards #1-5 (UNKNOWN abstention, discriminating verification, end-to-end economics, 0-token/RAG, full>body non-vacuous) are design-only.",
+      "evidence_refs": [
+        "research/experiments/EXP-GRAPH-35757738658/spec.json#/measurement_validity/8",
+        "research/experiments/EXP-GRAPH-35757738658/result.json#/validity_notes",
+        "research/experiments/EXP-GRAPH-35757738658/spec.json#/measurement_validity/7"
+      ],
+      "impact": "Nondiscriminating for this run; retry must store raw DOM/a11y/headers/decompressed bytes (not hash-only) and demonstrate non-vacuous full>body>status to avoid MEASUREMENT_INVALID per agent prior #5."
+    }
+  ],
+  "baseline_findings": [
+    {
+      "control_id": "B-COLD-FULL-REEXPLORATION",
+      "type": "baseline",
+      "expected": "Succeeds >=90% at full cost (100%) with real gpt-4o-mini+Playwright 15 steps; repair must be <50% tokens and <40% browser vs this baseline with trajectory-grouped bootstrap CI",
+      "observed": null,
+      "pass": null,
+      "assessment": "Correctly reported as NOT_MEASURED with null pass. No cold cost measured because real LLM API missing. Frozen spec forbids hardcoded COLD_TOKENS_BASE 2250; producer correctly did not fabricate 2250 fallback. Strong baseline required for C5 and C8 gates remains untested.",
+      "evidence_ref": "research/experiments/EXP-GRAPH-35757738658/result.json#/controls/B-COLD-FULL-REEXPLORATION"
+    },
+    {
+      "control_id": "B-VERBATIM-REPLAY",
+      "type": "baseline",
+      "expected": "Near 0% success post-perturbation (<10%; parent simulation 0.028 1/36) proving breaking perturbations; if >10% then non-discriminating instance excluded",
+      "observed": null,
+      "pass": null,
+      "assessment": "Correctly NOT_MEASURED. Requires Playwright execution on post-perturbation target via localhost nginx+Flask. Parent verbatim 0.028 demonstrated breaking in simulation; real-substrate breaking property for single DOM id/class/param/header change remains unknown and must be re-measured to validate perturbation design.",
+      "evidence_ref": "research/experiments/EXP-GRAPH-35757738658/result.json#/controls/B-VERBATIM-REPLAY"
+    },
+    {
+      "control_id": "B-RETRIEVAL-RAG",
+      "type": "baseline",
+      "expected": "Partial success 20-40% (parent simulation 0.333); repair must exceed retrieval by >=30pp with trajectory-grouped block-permutation CI per agent prior #4",
+      "observed": null,
+      "pass": null,
+      "assessment": "Correctly NOT_MEASURED (requires LLM embedding API + Playwright + block-permutation). Strong retrieval baseline distinguishes repair mechanics from semantic retrieval; retrieval cost needed for amortized C8. Untested.",
+      "evidence_ref": "research/experiments/EXP-GRAPH-35757738658/result.json#/controls/B-RETRIEVAL-RAG"
+    },
+    {
+      "control_id": "B-ORACLE-HAND-PATCH",
+      "type": "baseline",
+      "expected": "100% success with 1 browser probe +1 verification (simulation 120 tokens 5.3% cold); autonomous repair should approach within 2x",
+      "observed": null,
+      "pass": null,
+      "assessment": "Correctly NOT_MEASURED. Upper-bound ceiling requires experimenter hand patch executed via Playwright. No evidence to bound optimality of autonomous repair.",
+      "evidence_ref": "research/experiments/EXP-GRAPH-35757738658/result.json#/controls/B-ORACLE-HAND-PATCH"
+    },
+    {
+      "control_id": "B-RUNTIME-BYTE-IDENTITY",
+      "type": "baseline",
+      "expected": ">=0.99 SHA256(decompressed_body) identity HIT==SWR==SIE==304 pre-perturbation via oracle-free gzip.decompress on real nginx 1.24.0; non-vacuous full>body full>status when headers/body vary independently per prior #5",
+      "observed": null,
+      "pass": null,
+      "assessment": "Correctly NOT_MEASURED as C3 measurement-validity gate. Parent synthetic 960/960=1.0 via gzip.decompress on synthetic strings is not probative for real nginx with Content-Encoding/chunked/Vary per prereg do_not_assume. Real nginx available but not configured with proxy_cache; byte identity on real substrate remains dependency EXP-RUNTIME-35611612543 and must be recomputed per instance pre/post.",
+      "evidence_ref": "research/experiments/EXP-GRAPH-35757738658/result.json#/controls/B-RUNTIME-BYTE-IDENTITY"
+    },
+    {
+      "control_id": "PC-LOCALIZED-REPAIR-SUCCEEDS",
+      "type": "positive",
+      "expected": "PC1 100% (unperturbed execute+verify byte identity >=0.99) and PC2 >=90% with token ratio <0.5 vs B-COLD on real gpt-4o-mini pipeline; if fails then MEASUREMENT_INVALID not falsification",
+      "observed": null,
+      "pass": null,
+      "assessment": "Correctly NOT_MEASURED as C1 gate. Requires real LLM+Playwright+verify pipeline with trajectory-grouped scoring. Parent simulation PC1 1.0 PC2 0.917 ratio 0.053 was simulation artefact per prereg do_not_assume. No probative calibration for real pipeline.",
+      "evidence_ref": "research/experiments/EXP-GRAPH-35757738658/result.json#/controls/PC-LOCALIZED-REPAIR-SUCCEEDS"
+    },
+    {
+      "control_id": "NC-ZERO-AND-DISTANT-PERTURBATION",
+      "type": "null",
+      "expected": "NC1 patch tokens 0 contamination 0 byte identity 1.0; NC2 contamination 0; random-patch false_accept <=5% and AUROC 0.4-0.6 trajectory-grouped block-permutation",
+      "observed": null,
+      "pass": null,
+      "assessment": "Correctly NOT_MEASURED as C2 gate. Requires real pipeline with permutation-shuffled random-patch decisions and real verify() scores. Parent null controls passed by construction (hardcoded 0). No calibration evidence exists for real pipeline.",
+      "evidence_ref": "research/experiments/EXP-GRAPH-35757738658/result.json#/controls/NC-ZERO-AND-DISTANT-PERTURBATION"
+    },
+    {
+      "control_id": "C1_PC_GATE",
+      "type": "gate",
+      "expected": "PC1 success=1.0 and PC2 repair success >=0.90 on real gpt-4o-mini pipeline and B-RUNTIME non-vacuous full>body full>status demonstrated",
+      "observed": null,
+      "pass": null,
+      "assessment": "Gate not evaluable; BLOCKED precludes MEASUREMENT_INVALID vs FALSIFIED distinction. Retry must evaluate before primary gates C4-C8.",
+      "evidence_ref": "research/experiments/EXP-GRAPH-35757738658/result.json#/controls/C1_PC_GATE"
+    },
+    {
+      "control_id": "C2_NC_GATE",
+      "type": "gate",
+      "expected": "NC1 patch cost 0 and NC2 contamination=0 and random-patch block-permutation false_accept <=5% with AUROC 0.4-0.6 trajectory-grouped",
+      "observed": null,
+      "pass": null,
+      "assessment": "Gate not evaluable; null pipeline calibration untested. Requires real verify() confidences with block-permutation.",
+      "evidence_ref": "research/experiments/EXP-GRAPH-35757738658/result.json#/controls/C2_NC_GATE"
+    },
+    {
+      "control_id": "C3_BYTE_IDENTITY_GATE",
+      "type": "gate",
+      "expected": "B-RUNTIME-BYTE-IDENTITY pre-perturbation byte identity >=0.99 on real nginx oracle-free decode and mutation detected post-perturbation",
+      "observed": null,
+      "pass": null,
+      "assessment": "Gate not evaluable; substrate not exercised pre/post. Requires per-instance SHA256(decompressed_body) for HIT/SWR/SIE/304.",
+      "evidence_ref": "research/experiments/EXP-GRAPH-35757738658/result.json#/controls/C3_BYTE_IDENTITY_GATE"
+    },
+    {
+      "control_id": "C4_SUCCESS_GATE",
+      "type": "gate",
+      "expected": "M-repair_success_rate >=0.80 pooled AND >=0.70 per family on TEST (Wilson CI reported, trajectory-grouped, n=24 pooled n=8 per family)",
+      "observed": null,
+      "pass": null,
+      "assessment": "Primary hypothesis gate not evaluable; no repair attempts executed on TEST. Parent simulation pooled 0.944 TEST (17/18) but per-family n=6 exploratory Wilson half-width +-0.26.",
+      "evidence_ref": "research/experiments/EXP-GRAPH-35757738658/result.json#/controls/C4_SUCCESS_GATE"
+    },
+    {
+      "control_id": "C5_COST_GATE",
+      "type": "gate",
+      "expected": "mean repair tokens <0.50*B-COLD AND mean browser <0.40*B-COLD AND mean verification steps <=2 on TEST with bootstrap CI of ratio < threshold",
+      "observed": null,
+      "pass": null,
+      "assessment": "Not evaluable; no real token/browser counts from API usage and Playwright traces. Parent simulation token 0.613 CI [0.569,0.661] and browser 0.431 [0.396,0.469] failing thresholds is parameter artefact (hardcoded 1364/2250), not probative of real economics.",
+      "evidence_ref": "research/experiments/EXP-GRAPH-35757738658/result.json#/controls/C5_COST_GATE"
+    },
+    {
+      "control_id": "C6_CONTAMINATION_GATE",
+      "type": "gate",
+      "expected": "M-contamination_rate <0.10 on TEST with N>=24 unrelated mechanisms (fraction invalidated or false_accept via real verify())",
+      "observed": null,
+      "pass": null,
+      "assessment": "Not evaluable; contamination requires real registry + post-repair verify() on actual state. Parent 0.0046 hardcoded to 2 events.",
+      "evidence_ref": "research/experiments/EXP-GRAPH-35757738658/result.json#/controls/C6_CONTAMINATION_GATE"
+    },
+    {
+      "control_id": "C7_VERIFICATION_GATE",
+      "type": "gate",
+      "expected": "M-verification_auroc >=0.75 and M-verification_precision >=0.80 at TRAIN-calibrated threshold on TEST (trajectory-grouped DeLong + block-permutation null 0.4-0.6)",
+      "observed": null,
+      "pass": null,
+      "assessment": "Not evaluable; requires real verify() confidences on TEST with threshold from TRAIN. Parent AUROC 1.0 perfect separation was instance_id-derived deterministic score artefact with random AUROC 0.667 similarly constructed.",
+      "evidence_ref": "research/experiments/EXP-GRAPH-35757738658/result.json#/controls/C7_VERIFICATION_GATE"
+    },
+    {
+      "control_id": "C8_AMORTIZED_GATE",
+      "type": "gate",
+      "expected": "M-amortized_cost_tokens_10 and M-amortized_cost_browser_10 < M-cold_cost on TEST means with trajectory-grouped CI (repair+verification+10*retrieval < cold)",
+      "observed": null,
+      "pass": null,
+      "assessment": "Not evaluable; requires real retrieval cost measurement (not hardcoded 320/180). Parent amortized 4744 vs cold 2226 (2.1x) failing is mathematical consequence of hardcoded constants, not end-to-end economics per prior #3.",
+      "evidence_ref": "research/experiments/EXP-GRAPH-35757738658/result.json#/controls/C8_AMORTIZED_GATE"
+    }
+  ],
+  "recomputed_metrics": {
+    "recompute_attempted": true,
+    "recompute_method": "Verified result.json metrics is empty dict {}, artifacts=[], observations and validity_notes present. Computed sha256 of frozen inputs on disk and compared to freeze.json hashes. Checked provenance environment and git commit 41d4884125d80d440bae98a2419231d0c4c198b3. No per-instance raw_evidence to recompute; no token/browser/verification/contamination numbers to verify. Recompute confirms absence of hidden metrics and correct BLOCKED encoding (not MEASUREMENT_INVALID or FALSIFIES).",
+    "metrics_found": 0,
+    "metrics_recomputed": 0,
+    "controls_found": 15,
+    "controls_with_observation": 0,
+    "artifacts_found": 0,
+    "recompute_match": true,
+    "discrepancies": [],
+    "M-repair_success_rate": null,
+    "M-repair_tokens_mean": null,
+    "M-repair_tokens_ratio_vs_cold": null,
+    "M-browser_interactions_mean": null,
+    "M-browser_ratio_vs_cold": null,
+    "M-verification_steps_mean": null,
+    "M-verification_auroc": null,
+    "M-verification_precision": null,
+    "M-verification_recall": null,
+    "M-contamination_rate": null,
+    "M-false_accept_rate": null,
+    "M-amortized_cost_tokens_10": null,
+    "M-amortized_cost_browser_10": null,
+    "M-cold_cost_tokens": null,
+    "M-cold_cost_browser": null,
+    "M-byte_identity_hit_swr_sie_304_sha_match_rate": null,
+    "M-retrieval_cost_tokens": null,
+    "M-replay_success_rate": null,
+    "M-retrieval_success_rate": null,
+    "M-wall_time_seconds": null,
+    "producer_metrics_empty_correctly": true,
+    "provenance_freeze_hash_mismatch": "provenance.json freeze_json_sha256 95840e7593e1715e35258e5b7fdcdc359aca22007e0f8e0a8e7ef1c4f404af6a equals request_hash not actual freeze.json sha256 8abd55688204d6b094c30feaa34c2aec235725df9f24310ab98bcc2b3160f192 — minor provenance artefact noted in V_PROVENANCE_HASH_MISMATCH_MINOR"
+  },
+  "claim_ceiling": "BLOCKED — No new evidence for C-DELTA-REPAIR. Maximum justified ceiling remains exactly the bounded simulation ceiling from parent EXP-GRAPH-35741890679 (audit REVISE, status MEASUREMENT_INVALID): deterministic heuristic simulation on 36 instances (3 families x2 variants x6 seeds, TRAIN18/TEST18 +24 unrelated +960 synthetic byte bodies) showed pooled repair success 0.833 CI [0.681,0.921] all and 0.944 CI [0.742,0.990] TEST but with hardcoded cost ratios token 0.613 CI [0.569,0.661] failing <0.50 and browser 0.431 CI [0.396,0.469] failing <0.40, verification AUROC 1.0/precision 1.0 artefactual perfect-separation, contamination 0.0046 hardcoded max 0.083, amortized 4744 vs cold 2226 2.1x failing — audit explicitly limited that ceiling to simulation parameters only with do_not_assume that those numbers do not reflect real LLM economics. This experiment adds zero real measurements (metrics {}, all controls null, artifacts []); C-DELTA-REPAIR remains HYPOTHESIS on real nginx HIT-cache localhost substrate with real LLM+Playwright+verify(). Validated core unchanged and narrow: C-MEAS-VALID header-only discrimination on Flask/nginx localhost, C-FRESHNESS orthogonality r~0.002-0.041 TOST PASS on mock/single-node (distributed stratified r=-0.038 CI upper 0.029 but C1 TN=0.667 session non-replication), runtime byte-preserving HIT/SWR/SIE/304 substrate as dependency EXP-RUNTIME-35611612543 not yet re-measured on real nginx under perturbation. No inference to multi-resource radius, cross-page, distributed Redis, production CDN, or product promotion is justified. Requires identical frozen retry with LLM substrate before any HYPOTHESIS->EXPERIMENTAL advance.",
+  "evidence_refs": [
+    "research/experiments/EXP-GRAPH-35757738658/request.json (sha256 f8f5e93e67c4b9ef3d764198c69d8ae4a9989c4c9dd6fdba852f0ca4606bc9d8, director_mandate PIVOT C-DELTA-REPAIR, parent_handoff EXP-GRAPH-35752541832)",
+    "research/experiments/EXP-GRAPH-35757738658/spec.json (sha256 2657ca935665f17867759544bcbef08386116872247caec0b2a95707ef446304, claim_ids C-DELTA-REPAIR, hypothesis, falsifier, 5 baselines, positive_control PC-LOCALIZED-REPAIR-SUCCEEDS, null_control NC-ZERO-AND-DISTANT, measurement_validity 8 fields, decision_rule C1-C8)",
+    "research/experiments/EXP-GRAPH-35757738658/prereg.md (sha256 330247b2acb7abcba979ec9d21a10571472d2ec09bb8c06749e64b99d9c033f0, sections 2.5 do_not_assume, 6 holdout, 8 decision_rule)",
+    "research/experiments/EXP-GRAPH-35757738658/freeze.json (sha256 8abd55688204d6b094c30feaa34c2aec235725df9f24310ab98bcc2b3160f192, frozen_at 2026-09-22T17:03:45.607322+00:00)",
+    "research/experiments/EXP-GRAPH-35757738658/result.json (status BLOCKED outcome NOT_APPLICABLE metrics {} controls 15 null observations 5 validity_notes 7 unresolved 7)",
+    "research/experiments/EXP-GRAPH-35757738658/report.md (BLOCKED infrastructure, Infrastructure Status table, Relationship to Prior Work, Smallest Next Action)",
+    "research/experiments/EXP-GRAPH-35757738658/provenance.json (status BLOCKED, environment nginx 1.24.0 Playwright 1.63.0 openai 3.17.0 llm_api_key_present false, execution blocker MISSING_LLM_API_KEY retryable, frozen_inputs hashes_match_freeze true with noted mismatch, git_commit 41d4884125d80d440bae98a2419231d0c4c198b3)",
+    "research/experiments/EXP-GRAPH-35757738658/execution_checkpoint.json (pre_execute_sha 2e6c60a2c196e7a5e398f6b07cf05be558a27ea0)",
+    "research/experiments/EXP-GRAPH-35752541832/handoff.json (parent BLOCKED handoff, next_question identical, carry_forward established/rejected/unknown/do_not_assume)",
+    "research/experiments/EXP-GRAPH-35741890679/audit.json (status REVISE bounded simulation ceiling token 0.613 browser 0.431, SIMULATION_NOT_MEASUREMENT)",
+    "research/experiments/EXP-GRAPH-35752541832/audit.json (status BLOCKED producer_claim_supported false, recompute_match true)",
+    "research/EXPERIMENT_PACKET.md#7 #8 #9 (verdict/handoff/failure transmission)",
+    "research/lanes/registry.json (graph lane mission and allowed roots)",
+    "codex/index.json and codex/claim_state.json (C-DELTA-REPAIR remains HYPOTHESIS/BLOCKED, 0 valid real measurements)"
+  ],
+  "unresolved": [
+    "Whether a real LLM agent gpt-4o-mini 15-step achieves repair tokens <0.50*B-COLD and browser <0.40*B-COLD with verification steps <=2 on F-DOM/F-ENDPOINT/F-CACHE single-resource perturbations with real token billing and Playwright execution and trajectory-grouped CIs (C5 gate, spec measurement_validity #4)",
+    "Whether real verification on actual DOM/response discriminates correct vs incorrect patch with AUROC>=0.75 and precision>=0.80 at TRAIN-calibrated threshold without perfect-separation artefact and with trajectory-grouped permutation null AUROC 0.4-0.6 (C7/C2 gates, measurement_validity #5)",
+    "Whether contamination <0.10 and random-patch false_accept <5% when measured on real registry with N>=24 unrelated mechanisms via real verify() and block-permutation (C6/C2 gates, measurement_validity #3)",
+    "Whether amortized cost at 10 reuses (repair+verification+10*retrieval) < B-COLD cost holds with real retrieval costs and trajectory-grouped CIs vs hardcoded 320/180 (C8 gate, agent prior #3 end-to-end economics)",
+    "Whether nginx HIT/SWR/SIE/304 byte identity >=0.99 holds on real nginx 1.24.0 with production gzip/chunked/Vary beyond synthetic 960 bodies via oracle-free gzip.decompress and with non-vacuous full>body full>status isolation (C3 gate, dependency EXP-RUNTIME-35611612543, agent prior #5)",
+    "Whether per-family cost heterogeneity exists at adequate TEST n=8 per family (Wilson half-width +-0.26 exploratory; upgrade to 72 instances TEST n=12 half-width +-0.22) and whether 2-3 resource radius, cross-page, distributed Redis, or production CDN change repair economics (prereg adequacy 48 min TRAIN24/TEST24)",
+    "Whether residual-novelty amortization and verification generalize to production DOM where controller/oracle disagree on functional correctness and whether B-VERBATIM (~0% expected) and B-RETRIEVAL-RAG (20-40% expected, +30pp repair) baselines replicate on real substrate with block-permutation sanity (agent prior #4)",
+    "Provenance freeze_json_sha256 placeholder mismatch needs correction to real hash 8abd55688204d6b094c30feaa34c2aec235725df9f24310ab98bcc2b3160f192 on retry — minor artefact not affecting BLOCKED status"
+  ]
+}

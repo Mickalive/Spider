@@ -4,7 +4,7 @@ Pre-2.0 canonical memory remains frozen at `archive/spider-codex-ultimate:SPIDER
 
 Canonical Research 2.0 evidence lives in `codex/experiments/<experiment_id>/`.
 Use `codex/index.json` and `codex/claim_state.json` to locate relevant packets; do not load all experiment bodies by default.
-Validated experiments: **229**. Coverage gaps: **0**. Quarantined packets: **0**.
+Validated experiments: **239**. Coverage gaps: **0**. Quarantined packets: **0**.
 
 ## Experiment index
 
@@ -236,9 +236,19 @@ Validated experiments: **229**. Coverage gaps: **0**. Quarantined packets: **0**
 | EXP-INTEL-35725763380 | intel | REVISE | REVISE — WebArena quantitative census replicates exactly (192 shopping tasks, 49 intent_templates, 36 families >=3 [34 >=4, 33 >=5], duplication 0.9479 95% CI [0.9167,0.9792], exact-copy 0.0781 [0.0417,0.1198], param_task 0.8958 [0.8490,0.9375]) but within-store same-mechanism AX consistency (threshold >=0.6, requires 15 tasks 2-per-family live CDP Accessibility.getFullAXTree at 1280x720 initial viewport) is UNMEASURED (ax_consistency=null, REUSED 10 trees 1-per-family, playwright_installed=false despite docker_available=true) so frozen clause 1 is FALSIFIED-IN-SETTING per spec, not PARTIAL; Mind2Web cross-website overlap measurement is methodologically non-compliant (coarse 33-mechanism heuristic vs frozen TF-IDF->k-means k=min(50,unique_tasks/20) train-only, synthetic 60/40 website shuffle replacing official train/test_website/test_domain splits, shuffle null as label-shuffle with random split_point, 73/3 vs spec 137/31 divergence revision_unknown) so Mind2Web axis is INCONCLUSIVE not falsified; producer MIXED verdict not supported as stated; bounded ceiling is census-level parameterized family reuse only, no LLM inheritance demonstrated | C-LLM-INHERIT, C-CROSSSITE | `4264b65fcf92` |
 | EXP-GRAPH-35741890679 | graph | REVISE | MEASUREMENT_INVALID | C-DELTA-REPAIR | `4011af9167da` |
 | EXP-RUNTIME-35741906498 | runtime | PASS | SUPPORTS — header-only drift discriminated with first non-vacuous C4 (full 1.0 > body/status 0.0, C6 Content-Length isolation holds) on narrow localhost Flask ceiling; C-MEAS-VALID remains EXPERIMENTAL | C-MEAS-VALID | `63ddea9ecb67` |
+| EXP-PRODUCT-35741913862 | product | REVISE | REVISE — SURVIVES_CURRENT_TEST fails frozen C2/C3 and PC hit-rate; producer MIXED not justified as confirmatory; C-RESIDUAL-NOVELTY remains HYPOTHESIS at bounded synthetic mock ceiling | C-RESIDUAL-NOVELTY | `1382bf264b25` |
 | EXP-INTEL-35741921602 | intel | REVISE | REVISE — WebArena census replicates exactly and live CDP infrastructure verified, but AX_consistency 0.2857 (2/7) is MEASUREMENT_INVALID not valid FALSIFIED-IN-SETTING per audit; Mind2Web axis correctly MEASUREMENT_INVALID per Gate 0; bounded ceiling remains quantitative census only | C-LLM-INHERIT, C-CROSSSITE | `3377d6b4dbca` |
 | EXP-FRONTIER-35741928625 | frontier | MEASUREMENT_INVALID | MEASUREMENT_INVALID | C-SEMANTIC-RESOLVE | `dbc59208079f` |
 | EXP-PHYSICS-35741898214 | physics | MEASUREMENT_INVALID | MEASUREMENT_INVALID | C-CROSSSITE | `e65d1ce16087` |
+| EXP-PHYSICS-35749353065 | physics | REVISE | MEASUREMENT_INVALID | C-WEB-DYNAMICS | `be2cb32a873c` |
+| EXP-RUNTIME-35749360317 | runtime | PASS | SUPPORTS — same-status body-only drift discriminated with complementary non-vacuous C4 (full 1.0 > status 0.0, body-only 1.0, Content-Length varies 31/70/117, headers-no-CLEN 0.0) on narrow localhost Flask ceiling; C-MEAS-VALID remains EXPERIMENTAL with localhost matrix complete (header-only + body-only + status-varying + null) | C-MEAS-VALID | `78c73480ffab` |
+| EXP-INTEL-35749371101 | intel | PASS | MIXED — WebArena within-store PASS (AX 0.9), Mind2Web MEASUREMENT_INVALID per Gate0 | C-CROSSSITE, C-PARAM-INHERIT | `06fb976833b2` |
+| EXP-GRAPH-35752541832 | graph | BLOCKED | BLOCKED | C-DELTA-REPAIR | `2b8d463268ed` |
+| EXP-PRODUCT-35752564139 | product | MEASUREMENT_INVALID | MEASUREMENT_INVALID | C-PARAM-INHERIT | `ea59075c0a92` |
+| EXP-FRONTIER-35752577234 | frontier | PASS | SURVIVES_CURRENT_TEST | C-SEMANTIC-RESOLVE | `ddf9ac679c05` |
+| EXP-PHYSICS-35756224948 | physics | REVISE | MEASUREMENT_INVALID | C-WEB-DYNAMICS | `8f3dcf1a9de0` |
+| EXP-GRAPH-35757738658 | graph | BLOCKED | BLOCKED | C-DELTA-REPAIR | `d2c9a28fe830` |
+| EXP-GRAPH-35761721514 | graph | BLOCKED | BLOCKED | C-DELTA-REPAIR | `5dda3f5fd716` |
 
 ## Latest recorded claim events
 
@@ -246,13 +256,13 @@ These are chronological latest events, not an automatic truth ranking.
 
 | Claim | Status | Experiment | Lane |
 |---|---|---|---|
-| C-CROSSSITE | MEASUREMENT_INVALID | EXP-PHYSICS-35741898214 | physics |
-| C-DELTA-REPAIR | MEASUREMENT_INVALID | EXP-GRAPH-35741890679 | graph |
+| C-CROSSSITE | HYPOTHESIS | EXP-INTEL-35749371101 | intel |
+| C-DELTA-REPAIR | BLOCKED | EXP-GRAPH-35761721514 | graph |
 | C-FRESHNESS | EXPERIMENTAL | EXP-PRODUCT-35697049382 | product |
 | C-LLM-INHERIT | EXPERIMENTAL | EXP-INTEL-35741921602 | intel |
-| C-MEAS-VALID | EXPERIMENTAL | EXP-RUNTIME-35741906498 | runtime |
-| C-PARAM-INHERIT | EXPERIMENTAL | EXP-PRODUCT-35353007958 | product |
+| C-MEAS-VALID | EXPERIMENTAL | EXP-RUNTIME-35749360317 | runtime |
+| C-PARAM-INHERIT | MEASUREMENT_INVALID | EXP-PRODUCT-35752564139 | product |
 | C-PRODUCT-ECON | REJECTED | EXP-INTEL-35551517470 | intel |
-| C-RESIDUAL-NOVELTY | MEASUREMENT_INVALID | EXP-PRODUCT-35725756862 | product |
-| C-SEMANTIC-RESOLVE | EXPERIMENTAL | EXP-FRONTIER-35741928625 | frontier |
-| C-WEB-DYNAMICS | EXPERIMENTAL | EXP-PHYSICS-35697037202 | physics |
+| C-RESIDUAL-NOVELTY | HYPOTHESIS | EXP-PRODUCT-35741913862 | product |
+| C-SEMANTIC-RESOLVE | EXPERIMENTAL | EXP-FRONTIER-35752577234 | frontier |
+| C-WEB-DYNAMICS | HYPOTHESIS | EXP-PHYSICS-35756224948 | physics |

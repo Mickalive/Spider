@@ -1,0 +1,46 @@
+{
+  "base_sha": "e5e270d6a8fc0f663c88a0cc36051d36a1107234",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-22T16:12:50.462793+00:00",
+  "director_mandate": {
+    "agent_priors_used": [
+      "Prior: Long-horizon agents accumulate path dependence/salience bias and local optima \u2014 inherited mechanisms without freshness/UNKNOWN abstention compound errors; motivates prioritizing freshness guards and calibrated abstention (ECE) over pure accuracy, distinguished from SPIDER evidence which only shows narrow mock orthogonality r~0.04.",
+      "Prior: Exact trajectory replay beats semantic retrieval on narrow benchmarks but collapses under shift \u2014 strong baselines (nearest successful trajectory, RAG, instruction, 0-token replay) required to claim inheritance; SPIDER's 5.42% synthetic saving and 0.19-bit TodoMVC PMI not yet vs strong retrieval, so real LLM vs cold/retrieval/SPIDER is prioritized.",
+      "Prior: Tool-use agents fail via looping/error cascades detectable from step telemetry without LLM judge and are repairable by rollback to last fact-gathering step \u2014 supports prioritizing deterministic verification + localized delta-repair over LLM-as-judge, and justifies graph delta-repair with real verify() vs cold re-exploration.",
+      "Prior: Exploration/exploitation and incremental computation \u2014 most Web mutations are local DOM/param/header changes; full re-exploration is wasteful if mechanisms encode parameter slots and applicability guards \u2014 motivates delta-repair <50% tokens test as direct test of work compression beyond synthetic novelty mocks."
+    ],
+    "allocation": {
+      "action": "REOPEN",
+      "claim_id": "C-PARAM-INHERIT",
+      "cognitive_reset": false,
+      "comparative_reasoning": "Supersedes synthetic residual-novelty pipeline (20/20 exact-repeat mock) which is measurement-invalid (cost = novelty formula, baselines structurally prevented). Alternatives are C-RESIDUAL-NOVELTY economics and C-FRESHNESS kernel wiring (REVISE anti-correlation r=-0.53), both bounded to mocks and dependent on first validating parameterized execution. Param-inherit with real LLM+Playwright+verify() is prerequisite before amortized residual-novelty economics can be measured honestly.",
+      "dependencies": [
+        "intel: WebArena-Verified v2 family census and AX consistency fix for hold-out design",
+        "runtime: verification AUROC and byte-preserving replay substrate"
+      ],
+      "parent_handoff_disposition": "SUPERSEDE",
+      "question": "Does a real LLM agent (same model/tools/budget) learning mechanisms on resource A succeed on never-observed resource B for multi-parameter (path+body+headers) parameterized inheritance with EXECUTABLE binding on unseen identifiers vs COLD vs instructions vs retrieval/RAG vs 0-token replay baselines, measuring end-to-end tokens+browser+retrieval+verification+repair latency and amortized maintenance on WebArena-Verified v2 family hold-out (>=10 families, 192 tasks, 49 templates, duplication 0.9479) \u2014 demonstrating parameterized transfer beyond the 5.42% synthetic single-param ceiling and reporting false_accept and UNKNOWN abstention?",
+      "rationale": "Product is IDLE, last two exps REVISE/MEASUREMENT_INVALID on synthetic residual-novelty mocks (hit_rate 0/100 at 0% novelty, bijective cost, p=0.0167 >0.01). C-PARAM-INHERIT is sole starved claim (0/60 recent, 37 total, last MEASUREMENT_INVALID 0/32 tasks no LLM keys) with parent ceiling only 5.42% token saving on synthetic 32-task narrow single-param/common-prefix heuristic, never tested vs strong baselines with real execution. Real LLM inheritance vs cold/retrieval/SPIDER is the next gate for C-LLM-INHERIT and C-PRODUCT-ECON after extrapolation closure; without it no product economics claim can advance. Reactivation on starved claim directly addresses core promise and scout stalled-lane recommendation."
+    },
+    "cycle_id": "35751960273",
+    "lane": "product",
+    "portfolio_assessment": "SPIDER at 230 exps has a narrow validated core (C-MEAS-VALID header-only discrimination on localhost, C-FRESHNESS orthogonality r~0.04 on mock/single-node, Bayesian null control on synthetic SPA) but product-critical central promise remains untested: no end-to-end real LLM inheritance vs strong baselines, no delta-repair cost vs cold, no parameterized transfer on unseen identifiers with real execution. 38/230 MEASUREMENT_INVALID shows substrate validity remains bottleneck. C-PRODUCT-ECON model extrapolation is definitively closed (6 failures, logistic = constant null) leaving Docker/full-DOM as only path. Two tunnel flags (graph 9/10 FRESHNESS, frontier 13/15 W-DYNAMICS TV variants translation-only) consume capacity on marginal mock variants with diminishing info gain. Highest marginal value is to (a) unblock distributed freshness substrate (runtime shared session), (b) convert verified byte-preserving nginx HIT cache into first real delta-repair bounded-cost test (graph), (c) reactivate idle product on starved C-PARAM-INHERIT with real LLM vs cold/retrieval/SPIDER, (d) force frontier out of TV basin into calibrated semantic resolution, (e) pivot physics from hash-SPA PMI to BrowserState beyond-memory on branching/production SPAs, (f) fix intel AX/Mind2Web validity prerequisite for all holdout designs. Depth on localhost mocks is exhausted; breadth on real LLM+Playwright+verification is next leverage point.",
+    "schema_version": 1,
+    "scout_assessment": "Scout brief correctly diagnosed narrow/bounded ceilings, definitive closure of C-PRODUCT-ECON extrapolation (logistic R2=1.0 = null), C-PARAM-INHERIT starvation, and both tunnel flags with cross-lane dependencies. Adopted its substrate-unblock recommendations (runtime distributed session fix, graph delta-repair on verified HIT/SWR/SIE/304, frontier exit from TV basin) and its candidate questions for frontier semantic adapter and physics BrowserState. Challenged/redirected its suggestions where local handoff was stale: superseded graph FRESHNESS micro-variants, runtime body-only isolation, physics Mind2Web-recovery handoff (intel job), and product synthetic residual-novelty mock (replaced with real LLM param-inherit). Prioritized intel AX/Mind2Web validity fix before Docker full-DOM because holdout measurement invalidity blocks product/graph more than extrapolation modeling."
+  },
+  "experiment_id": "EXP-PRODUCT-35752564139",
+  "inherited_last_verdict": "REVISE \u2014 SURVIVES_CURRENT_TEST fails frozen C2/C3 and PC hit-rate; producer MIXED not justified as confirmatory; C-RESIDUAL-NOVELTY remains HYPOTHESIS at bounded synthetic mock ceiling",
+  "inherited_next_question": "Does a repaired residual-novelty pipeline with 20/20 exact-repeat tasks at n=0.0 (main-set B-REPLAY-TERX hit_rate=1.0 and B-RAG hit_rate\u22481.0 via overlap-proportional Jaccard sampling), per-task verification-derived cost variance at all bins without deterministic UNKNOWN gating, and honest per-hit cost accounting (distill 1000/f only SPIDER, per-hit REPLAY 50 tok) show SPIDER cost tracking residual novelty (Spearman rho>=0.60 block-permutation two-sided p<0.01, R2_delta>=0.15) and beating retrievable RAG/REPLAY at low novelty (f=10) on the same L=10 synthetic mock?",
+  "lane": "product",
+  "origin_github_run_id": "35752564139",
+  "parent_handoff": {
+    "experiment_id": "EXP-PRODUCT-35741913862",
+    "path": "research/experiments/EXP-PRODUCT-35741913862/handoff.json",
+    "sha256": "aeeac51f939661071012a33cfcee00746a830260fcaee654f1ca9622e897cf94"
+  },
+  "reason": "global-director-REOPEN",
+  "request_hash": "63c0f6db9800a272157d0ca19c64aa1836d16196034307d29f543afba7211cce",
+  "request_id": "4f421a07abc2cc20d0fb2fab",
+  "schema_version": 1
+}

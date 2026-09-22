@@ -1,0 +1,129 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-35749360317",
+  "lane": "runtime",
+  "github_run_id": "35756234169",
+  "github_run_attempt": 1,
+  "commits": {
+    "request_base_sha": "21f749ffe2433ef3711887b35288e7f0216d4821",
+    "freeze_commit": "dbc22b7455719d0bcf63e14ea48ec1cb6d5b4d84",
+    "execution_base_sha": "8998cd0f160f3e5a7b6a81a36551eda8646fa761",
+    "head_sha_at_execution": "8998cd0f160f3e5a7b6a81a36551eda8646fa761",
+    "github_trigger_sha": "2e9ddf33a89594a5e015094b76738ad1b127d1d0"
+  },
+  "design_inputs": {
+    "request.json_sha256": "622d624e32ae4d90e8d905f02d028000d0853105cc4af53d36a2d2677ba5e5bb",
+    "spec.json_sha256": "eaedd7140a27c6362d29b66b15ed7965cade4a50d215e1ee49977de7d7ebc70d",
+    "prereg.md_sha256": "78a5ec55dbce6f07a5ca1d7a11a3a78696cca1ccf865958e97e8e7098a3a893d",
+    "freeze.json_sha256": "f0beaa612587d629a947a93065b51cc10f3856992a4c76a68f49d36c219e8223",
+    "parent_handoff_sha256": "6e8a1eaa717dc59bfcdf4c0d464072ef1db429dffabe7bc2eef0d01ca56f6039"
+  },
+  "environment": {
+    "python": "3.12.14",
+    "flask": "3.1.3",
+    "pyjwt": "2.14.0",
+    "requests": "2.34.2",
+    "sqlite": "3.45.1",
+    "platform": "Linux-6.17.0-1022-azure-x86_64-with-glibc2.39",
+    "host": "runnervmlun5p",
+    "server_endpoint": "http://127.0.0.1:19849",
+    "db_path": "/tmp/spider_bodydrift_testbed.db",
+    "db_mode": "SQLite WAL",
+    "jwt_algorithm": "HS256",
+    "jwt_secret_note": "test-only fixed secret; not production material"
+  },
+  "fixtures": {
+    "seed": 44,
+    "n_samples_per_batch": 20,
+    "jitter_ms": [
+      50,
+      150
+    ],
+    "bootstrap_b": 1000,
+    "bootstrap_alpha": 0.05,
+    "excluded_headers": [
+      "Date",
+      "Server",
+      "X-Request-Id"
+    ],
+    "fixed_header_config": {
+      "cache_control": "max-age=3600",
+      "etag": "W/\"fixed-aaa-111\"",
+      "vary": "Accept-Encoding",
+      "set_cookie": ""
+    },
+    "bodies": {
+      "A": {
+        "len": 31,
+        "sha256": "d0ca833f843c6d70ec9d6755f52a92dcbfc8b4ab601b871bced09ad027172e34"
+      },
+      "B": {
+        "len": 70,
+        "sha256": "67c186f2cee1ccf01f55c80235eb9b1b1d14b073223a807b9ce944405e67999c"
+      },
+      "C": {
+        "len": 117,
+        "sha256": "b46c461cceeefa595c3ac0d706689ed382340b59c20a269a930c786c8389dd32"
+      }
+    },
+    "body_403": {
+      "len": 22,
+      "sha256": "387fe73d9abe7e6c32a0eb6113efea98dea609edefe9c3b4c9788fcaaef1603b"
+    },
+    "body_401": {
+      "len": 25,
+      "sha256": "9df366cd61d0e8a1bd9c4462d4f032e5317b2708d154047affa816e234518f34"
+    },
+    "batch_sequence": [
+      "set_headers -> body_A -> body_B -> body_C -> null_A1 -> null_A2 -> null_C1 -> null_C2 -> perm_403 -> perm_200 -> perm403_null_1 -> perm403_null_2 -> sess_200 -> sess_401 -> sess401_null_1 -> sess401_null_2 (12 writable commits, 15 pre-batch verifies)"
+    ]
+  },
+  "code_paths": [
+    "research/experiments/EXP-RUNTIME-35749360317/run_experiment.py",
+    "research/experiments/EXP-RUNTIME-35749360317/build_packet.py",
+    "research/experiments/EXP-RUNTIME-35741906498/run_experiment.py (parent fingerprint algorithm source)"
+  ],
+  "commands": [
+    "python3 run_experiment.py --smoke   # setup verification only",
+    "python3 run_experiment.py           # full frozen execution",
+    "python3 build_packet.py             # canonical packet emission"
+  ],
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-RUNTIME-35749360317/run_experiment.py",
+      "sha256": "4d61198ce45c750e15d858c076589ee77a7738e3f7d41396b20727075d0e9c2e",
+      "role": "code"
+    },
+    {
+      "path": "research/experiments/EXP-RUNTIME-35749360317/raw_observations.jsonl",
+      "sha256": "012c725382c2025b674d0db0a66fa8794a98a2c267a1de623835daa02db511d1",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-RUNTIME-35749360317/batch_state_log.jsonl",
+      "sha256": "8ddb71cdf4dec7d77c89c6f5046f8851e48e1f25b558cac9fc5fbe7d93c55e42",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-RUNTIME-35749360317/experiment_result.json",
+      "sha256": "7fc67a8bd7fa6c2d93bb3cb311fdbd3c60404824495b5a822212a070fc2c2360",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-RUNTIME-35749360317/build_packet.py",
+      "sha256": "ba964a3a99ee160953a018a0758880d0647ec3ab3e88257243f77cdba200cca1",
+      "role": "code"
+    },
+    {
+      "path": "research/experiments/EXP-RUNTIME-35749360317/report.md",
+      "sha256": "b87a0b6dd7e719e04f58f6d88f6605841dc0946b6f7a9c96c02742e0aed12a93",
+      "role": "canonical-packet"
+    }
+  ],
+  "notes": [
+    "Working tree contained pre-existing factory modifications (SPIDER_CODEX.md, codex/, research/lanes/runtime/state.json etc.) at execution time; none were touched by this EXECUTE stage.",
+    "run_experiment.py and build_packet.py are uncommitted working-tree files; EXECUTE performs no git commit/push/switch/reset by policy.",
+    "Attempt-1 run 35749360317 failed at exit 75 (failure.json, retryable); attempt-4 of an earlier retry run exited 1 transiently (model_execute.json); this run (35756234169, attempt 1) executed cleanly in one pass.",
+    "result.json is the terminal canonical file of EXECUTE; its own SHA-256 is not self-referenced inside any EXECUTE-produced file (AUDIT/DIRECTOR recompute it from the file content)."
+  ]
+}

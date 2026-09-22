@@ -1,0 +1,195 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-35741913862",
+  "lane": "product",
+  "status": "REVISE",
+  "producer_claim_supported": false,
+  "required_fixes": [
+    "Fix n=0.0 task generation to actually satisfy frozen spec RF3: generate 20/20 exact repeats of training trajectories at n=0.0 (currently 1/20 exact repeat; B-REPLAY-TERX hit_rate main set 0.05 not 1.0, B-RAG actual hit 1/20=0.05 via tokens 250 vs 5200). PC1 hand-injected row outside compared set does not satisfy C6 hit_rate=1.0 in main set; honest main-set hit rates must be >=0.90 or spec is MEASUREMENT_INVALID per freeze.",
+    "Make NC1/NC2 exercise real binding/ranking variability (RF7): currently both produce constant 5750 tokens variance 0 flat-cost by construction (shuffled_execute hardcodes novel_steps=L + repair), not pipeline-derived verification failures. Must go through actual permuted _bind + verification to introduce per-task cost variability and test mapping effect.",
+    "Remove deterministic UNKNOWN gating that makes cost bijective with novelty (RF1/RF2 residual): behavioral_score=0.15 forced at n>=0.75 and confidence=0.70 at n=1.0 produce variance 0 at 4/5 bins (SPIDER tokens 250,1250,5200,5200 constant). Cost must derive from verification outcomes with genuine sampling variability, not hardcoded thresholds; bootstrap CIs [0.966,0.974] are degenerate around constants.",
+    "Correct C2 SPIDER/REPLAY ratio accounting: producer uses amortized main-set mean 5227.5 diluted with 19 misses vs single hit 50 tokens. Honest per-hit comparison at n=0.0 is SPIDER amortized 1250 / REPLAY hit 50 =25.0 >2.0 threshold, opposite of reported 0.239. Report both hit-cost and mean-cost or fix task set to meet 1.0 hit rate before claiming C2 pass.",
+    "Report B-RAG retrievability honestly: at n=0.0 RAG mean 4952.5 (1 hit 250 +19 misses 5200) is cold+retrieval overhead, not a strong retrieval baseline. Trivial beating of starved RAG at 0% (ratio 0.064) does not support C5 parameterized-inheritance beyond retrieval. Regenerate tasks with overlap-proportional sampling (Jaccard >=0.75) as prereg states.",
+    "Clarify decision-rule precedence: C2 fails (1.116>1.10) and C3 fails (p=0.017>0.01) while C4 passes; per spec SURVIVES requires ALL C1-C6, so frozen rule technically triggers FALSIFIED, not MIXED (MIXED = C1 passes but C3/C4 fail). Disclose that MIXED vs FALSIFIED classification is ambiguous and bounded.",
+    "Regenerate with WebArena-Verified fixtures or explicitly bound ceiling to synthetic single-family catalog mock (12 stores, L=10, harness-level distill, token proxy) and disclose duplication 0.9479 and 36-family template not exercised; do not imply C-RESIDUAL-NOVELTY holds beyond mock."
+  ],
+  "validity_findings": [
+    {
+      "id": "VF-SP-DETERMINISTIC-COST",
+      "severity": "high",
+      "observation": "SPIDER cost variance 0 at 4/5 bins: n=0.0 tokens [250] x20, n=0.25 [1250] x20, n=0.75 [5200] x20, n=1.0 [5200] x20; only n=0.5 shows variance (4 values 1250/1750/2750/3250). Recomputed raw_per_task.csv confirms. Cost is deterministic function of novelty via hardcoded novel_count *500 plus forced UNKNOWN fallback, with bootstrap CI degenerate. This is residual RF1/RF2 bijective-formula flaw; novelty tracking is driven by branch gating, not emergent binding/verification.",
+      "evidence": "research/experiments/EXP-PRODUCT-35741913862/artifacts/raw_per_task.csv (SPIDER rows), run_experiment.py:283-313 (behavioral_score 0.15 <0.25 at >=0.75, confidence 0.70 <0.80 at 1.0 -> UNKNOWN), compute_metrics.py exact_block_permutation_p"
+    },
+    {
+      "id": "VF-PC-HIT-MISREPORT",
+      "severity": "high",
+      "observation": "Producer reports M-HIT-RATE-REPLAY-0pct=1.0 and PC-PARAM-AND-REPLAY pass, but recomputed main-set B-REPLAY-TERX hits at n=0.0 =1/20=0.05 (tokens 50 once, 5500 x19). M-HIT-RATE-RAG-0pct reported 0.0 matches hit column but actual retrieval hit via tokens 250 is 1/20=0.05, not 1.0. Isolated PC rows (PC1_exact_repeat_REPLAY 50 tokens) are outside compared set, replicating parent flaw. C6 requires hit_rate=1.0 in main set; observed 0.05 triggers frozen MEASUREMENT_INVALID clause (hit_rate<0.90) yet producer marks pass.",
+      "evidence": "research/experiments/EXP-PRODUCT-35741913862/artifacts/raw_per_task.csv: B-REPLAY-TERX at 0.0 (1 hit 50, 19 miss 5500), B-RAG at 0.0 (1 hit 250, 19 miss 5200), result.json:M-HIT-RATE-REPLAY-0pct=1.0, spec.json positive_control expected hit_rate=1.0 in main set"
+    },
+    {
+      "id": "VF-NOVELTY-P-FLIP",
+      "severity": "medium",
+      "observation": "Spearman rho recomputed 0.9703 matches producer 0.9703; block-permutation Monte Carlo p 0.0172 (exact 2/120=0.0167) exceeds frozen two-sided threshold 0.01, correctly causing C3 failure. This is faithful to frozen decision rule but highlights that 5 bins x20 deterministic repeats with zero within-bin variance yields artificially high rho and narrow bootstrap CI [0.966,0.974] that is degenerate (resampling constants). C3 failure is statistical artifact of threshold, not mechanism failure, but MIXED classification depends on this boundary.",
+      "evidence": "research/experiments/EXP-PRODUCT-35741913862/result.json:M-SPEARMAN-RHO=0.97034 M-SPEARMAN-RHO-p=0.01716, prereg.md 4.5 C3 requires p<0.01 two-sided, compute_metrics.py:exact_block_permutation_p 12000 MC"
+    },
+    {
+      "id": "VF-C2-PER-HIT-VS-MEAN",
+      "severity": "high",
+      "observation": "C2 SPIDER/REPLAY reported 0.239 using main-set mean 5227.5 (diluted with 19 misses) vs honest per-hit cost 50 tokens. Honest SPIDER 1250 / REPLAY hit 50 =25.0 >2.0 would fail C2. Producer's C2 pass at 0% is artifact of starved REPLAY baseline. SPIDER/COLD 0%: 0.25 pass is genuine; SPIDER/COLD 100%: 1.116 >1.10 fail correctly reported as marginal.",
+      "evidence": "result.json:M-COST-RATIO-SPIDER-REPLAY-0pct-f1=0.239, M-COST-AMORTIZED-SPIDER-f1-per-bin 0.0=1250, raw_per_task.csv PC-B-REPLAY 50 tokens, spec.json falsifier F2 and decision C2 require <=2.0 vs hit 50 tok"
+    },
+    {
+      "id": "VF-NC-FLAT",
+      "severity": "medium",
+      "observation": "NC1-SHUFFLE and NC2-RANDOM both constant 5750 tokens variance 0 across 100 tasks each, rho 0.000 as expected from flat-cost construction, not from actual permuted binding/verification pipeline. shuffled_execute hardcodes novel_steps=L regardless of mapping. Controls therefore do not test whether novelty tracking requires correct parameterization/ranking (RF7 not satisfied), same class as parent VF7.",
+      "evidence": "artifacts/raw_per_task.csv NC1-SHUFFLE uniq tokens [5750], NC2-RANDOM [5750], run_experiment.py:554-582 shuffled_execute/random_retrieval_execute"
+    },
+    {
+      "id": "VF-R2-ARTIFICIAL",
+      "severity": "medium",
+      "observation": "R2_novelty 0.927 and R2_length 0.0 tautological: length constant L=10 by design guarantees R2_length=0, so R2_delta = R2_novelty. Linear slope 5540 p~1e-274 driven by stepwise deterministic means, not genuine linear association. Sensitivity rho>0.60 at tokens/step +-50% reported but recomputed sensitivity uses formula Retrieval+Verification+nc*tokens, not pipeline, so trivial.",
+      "evidence": "result.json:M-R2-NOVELTY=0.927 M-R2-LENGTH=0.0 M-R2-DELTA=0.927, spec measurement_validity L=10 constant, compute_metrics.py sensitivity()"
+    },
+    {
+      "id": "VF-SYNTHETIC-CEILING",
+      "severity": "medium",
+      "observation": "Registry harness-level distill_parameterized invoked but frozen proxy token/browser costs, synthetic Flask catalog mock, single family, 5 demos, harness-only kernel (kernel.py literal-only per prior audits). WebArena-Verified fixtures not loaded; no HTTP binding verification (exact string match only). Claim remains bounded to synthetic mock; no evidence for WebArena DOM or real LLM economics.",
+      "evidence": "provenance.json environment no_llm_api_calls no_docker no_browser_automation, artifacts/registry.json confidence 0.90 single mechanism, run_experiment.py 86-127 MechanismRegistry harness-only, prereg 4.1 synthetic Flask catalog fallback"
+    }
+  ],
+  "baseline_findings": [
+    {
+      "id": "B-COLD",
+      "expected": "Cost flat ~5000 tokens independent of novelty",
+      "observed": "Recomputed mean 5000 flat across bins, success 0.94 matches producer; correctly flat and cheaper than RAG at low novelty due to RAG overhead. Valid baseline.",
+      "pass": true,
+      "evidence": "raw_per_task.csv B-COLD 100 rows tokens 5000"
+    },
+    {
+      "id": "B-INSTRUCTIONS",
+      "expected": "Slightly below COLD, beaten by SPIDER >=15% at low novelty",
+      "observed": "Mean 4700 (9 steps) +200 instruction tokens; amortized f10 4700 vs SPIDER 350 ratio 0.074 at 0% and 0.287 at 25% matches producer. Pass but trivial given COLD flat.",
+      "pass": true,
+      "evidence": "raw_per_task.csv B-INSTRUCTIONS, result.json M-COST-RATIO-SPIDER-INSTR-0pct-f10 0.074"
+    },
+    {
+      "id": "B-RAG",
+      "expected": "At 0% similar to SPIDER (hit), at >=25% worse by >=20%",
+      "observed": "At 0% actual hit 1/20=5% mean 4952.5 not similar; at 25% mean 5200 flat (0 hits). Producer ratio 0.064 at 0% exploits starved RAG. Baseline not retrievable as frozen; beating it is not evidence for parameterization beyond retrieval. Mark fail as strong baseline.",
+      "pass": false,
+      "evidence": "raw_per_task.csv B-RAG 0% 1 hit 250 +19 miss 5200 mean 4952.5; result.json M-COST-AMORTIZED-RAG-f10-per-bin"
+    },
+    {
+      "id": "B-REPLAY-TERX",
+      "expected": "Hit 1.0 at 0% exact repeat (50 tok +1 call), 0% at 100% -> COLD; SPIDER cheaper at >=25%",
+      "observed": "Main-set hit 0.05 at 0% (1/20), not 1.0; isolated PC row hits 50 tokens outside set. Mean cost diluted with 19 misses (5227.5). Producer claims beating at >=25% true vs 5500 miss cost but trivial vs cold+penalty. Strong exact-repeat baseline not actually tested inside compared set.",
+      "pass": false,
+      "evidence": "raw_per_task.csv B-REPLAY-TERX hits 1 at 0.0, M-HIT-RATE-REPLAY-0pct reported 1.0 vs recomputed 0.05"
+    },
+    {
+      "id": "B-LENGTH-PROPORTIONAL",
+      "expected": "Flat vs novelty rho~0 R2~0 demonstrating falsifier reachable",
+      "observed": "Recomputed rho 0.000 R2 0.000 matches producer, correctly flat. This control is valid and demonstrates environment can express falsified outcome, satisfying RF9. Only control that is honestly flat.",
+      "pass": true,
+      "evidence": "raw_per_task.csv B-LENGTH-PROPORTIONAL rho 0.0 R2 0.0, result.json M-LENGTH-PROPORTIONAL-RHO 0.0"
+    },
+    {
+      "id": "NC-SHUFFLE-NC2",
+      "expected": "NC1 |rho|<0.25 p>=0.05 success <=COLD; NC2 false_accept >=0.30 or |rho|<0.25 via real pipeline",
+      "observed": "NC1 rho 0.000 p1.0 success 0.43 <=0.94, NC2 false_accept 0.43 match producer, but both costs flat 5750 by construction, not pipeline-derived. Pass numerically but not substantively; does not demonstrate mapping/ranking matters.",
+      "pass": true,
+      "evidence": "raw_per_task.csv NC1-SHUFFLE 5750 NC2-RANDOM 5750, result.json M-CORRELATION-NC-SHUFFLE 0.0 M-FALSE-ACCEPT-NC2 0.43"
+    }
+  ],
+  "recomputed_metrics": {
+    "M-SPEARMAN-RHO": 0.9703414051992281,
+    "M-SPEARMAN-RHO-p-block-permutation-two-sided-MC12000": 0.0172,
+    "M-SPEARMAN-RHO-p-exact-two-sided-2/120": 0.016666666666666667,
+    "M-R2-NOVELTY": 0.9274852528768978,
+    "M-R2-LENGTH": 0.0,
+    "M-R2-DELTA": 0.9274852528768978,
+    "M-SLOPE-NOVELTY": 5540.0,
+    "M-COST-TOKENS-SPIDER-mean-per-bin-recomputed": {
+      "0.0": 250.0,
+      "0.25": 1250.0,
+      "0.5": 2550.0,
+      "0.75": 5200.0,
+      "1.0": 5200.0
+    },
+    "M-COST-AMORTIZED-SPIDER-f1-per-bin-recomputed": {
+      "0.0": 1250.0,
+      "0.25": 2250.0,
+      "0.5": 3550.0,
+      "0.75": 6200.0,
+      "1.0": 6200.0
+    },
+    "M-COST-RATIO-SPIDER-COLD-0pct-f1-recomputed": 0.25,
+    "M-COST-RATIO-SPIDER-COLD-100pct-f1-recomputed": 1.116,
+    "M-COST-RATIO-SPIDER-REPLAY-0pct-f1-reported-vs-honest-per-hit": {
+      "reported-mean-diluted": 0.2391200382592061,
+      "honest-per-hit-50tok": 25.0
+    },
+    "M-HIT-RATE-REPLAY-0pct-main-set-recomputed": 0.05,
+    "M-HIT-RATE-REPLAY-0pct-isolated-PC-row": 1.0,
+    "M-HIT-RATE-RAG-0pct-recomputed-via-tokens-250": 0.05,
+    "M-HIT-RATE-RAG-0pct-reported-hit-column": 0.0,
+    "M-SUCCESS-SPIDER-per-bin-recomputed": {
+      "0.0": 1.0,
+      "0.25": 1.0,
+      "0.5": 1.0,
+      "0.75": 1.0,
+      "1.0": 1.0
+    },
+    "M-FALSE-ACCEPT-SPIDER-recomputed": 0.0,
+    "M-UNKNOWN-RATE-SPIDER-per-bin-recomputed": {
+      "0.0": 0.0,
+      "0.25": 0.0,
+      "0.5": 0.0,
+      "0.75": 1.0,
+      "1.0": 1.0
+    },
+    "M-B-LENGTH-RHO-recomputed": 0.0,
+    "M-CORRELATION-NC-SHUFFLE-recomputed": 0.0,
+    "M-FALSE-ACCEPT-NC2-recomputed": 0.43,
+    "SPIDER-within-bin-variance": {
+      "0.0": 0.0,
+      "0.25": 0.0,
+      "0.5": 235000.0,
+      "0.75": 0.0,
+      "1.0": 0.0
+    },
+    "hash-verification-checked": {
+      "raw_per_task.csv": "2d117272a3cdef4e",
+      "registry.json": "06faf01779738b22",
+      "cost_config.json": "414cbb37be8c4192",
+      "fixtures/tasks.json": "bfcecd99cdf0d9af"
+    }
+  },
+  "claim_ceiling": "MIXED at bounded synthetic single-family Flask catalog mock (L=10 fixed, token/browser proxy 500 tok/novel step, 12 stores, 5 A demos, harness-level distill_parameterized via SpiderKernel.resolve/MechanismRegistry but with hardcoded freshness/confidence UNKNOWN gating) remains descriptive; C-RESIDUAL-NOVELTY remains HYPOTHESIS. No evidence for WebArena-Verified DOM, cross-site transfer, or real LLM economics. Demonstrated: SPIDER resolve/bind pipeline executes without crash, freshness/confidence gating exercised (UNKNOWN at n>=0.75), B-LENGTH falsifier reachable (rho 0), C2 SPIDER/COLD 0.25 pass and C4 R2 delta 0.927 pass. Not demonstrated: novelty-proportional cost beyond deterministic gating (variance 0 at 4/5 bins), beating retrievable RAG or 0-token REPLAY inside compared set (hit 0.05 not 1.0), or non-flat NC controls; p=0.017 fails frozen <0.01, and SPIDER/COLD 1.116 exceeds 1.10 at 100%. Do not promote to Product Core or to C-PRODUCT-ECON scale-up; Intel sample-level overlap and Runtime distributed replication remain prerequisites for Docker/real-LLM test.",
+  "evidence_refs": [
+    "research/experiments/EXP-PRODUCT-35741913862/request.json",
+    "research/experiments/EXP-PRODUCT-35741913862/spec.json",
+    "research/experiments/EXP-PRODUCT-35741913862/prereg.md",
+    "research/experiments/EXP-PRODUCT-35741913862/freeze.json",
+    "research/experiments/EXP-PRODUCT-35741913862/result.json",
+    "research/experiments/EXP-PRODUCT-35741913862/report.md",
+    "research/experiments/EXP-PRODUCT-35741913862/provenance.json",
+    "research/experiments/EXP-PRODUCT-35741913862/artifacts/raw_per_task.csv",
+    "research/experiments/EXP-PRODUCT-35741913862/artifacts/registry.json",
+    "research/experiments/EXP-PRODUCT-35741913862/artifacts/cost_config.json",
+    "research/experiments/EXP-PRODUCT-35741913862/fixtures/tasks.json",
+    "research/experiments/EXP-PRODUCT-35741913862/run_experiment.py",
+    "research/experiments/EXP-PRODUCT-35741913862/compute_metrics.py",
+    "research/experiments/EXP-PRODUCT-35725756862/handoff.json",
+    "codex/claim_state.json",
+    "codex/index.json"
+  ],
+  "unresolved": [
+    "Whether residual-novelty proportionality holds with real LLM tokens/latency vs frozen proxy 500 tok/step (sensitivity uses formula, not pipeline variability).",
+    "Whether effect persists when full task length co-varies with novelty (L=10 constant guarantees R2_length 0) and with richer WebArena DOM/auth drift vs Flask JWT mock.",
+    "Whether parameterization generalizes beyond 2 synthetic slots ${sku},${store_id} to richer form fields with harness-only _extract_varying_values.",
+    "Whether honest retrievable RAG (20/20 hits at 0% via overlap-proportional sampling) and exact-repeat REPLAY (20/20 hits at 0%) would still be beaten by SPIDER at f=10 with retrieval-derived success.",
+    "Whether NC1/NC2 with real permuted binding would still show null vs observed rho, and whether UNKNOWN abstention cost at high novelty (~1.0x COLD) is acceptable product trade-off.",
+    "Whether block-permutation threshold p<0.01 two-sided vs one-sided 0.0083 is appropriate for 5-bin monotone and whether n=100 with zero within-bin variance provides honest power >0.90."
+  ]
+}
