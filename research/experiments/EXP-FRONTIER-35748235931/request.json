@@ -1,0 +1,45 @@
+{
+  "base_sha": "8675ee8f0ef5a59b0d5c4df9eaa6a000dca9de16",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-22T15:34:11.631747+00:00",
+  "director_mandate": {
+    "agent_priors_used": [
+      "Long-horizon agents accumulate compounding planning errors and self-generated subproblems; without tight verification/abstention exploration cost grows superlinearly with task length \u2014 predicts C-RESIDUAL-NOVELTY must be measured as real amortized tokens+browser+verify+repair with UNKNOWN calibration, not formula-defined DV",
+      "Retrieved knowledge imposes double token tax (generation + per-step injection) and distracts actor when mildly mismatched; benefits appear only when retrieval is precise and window small \u2014 predicts SPIDER inheritance underperforms budget-matched vanilla-IB unless semantic resolution precision is high, motivating window-size and distraction measurement in next C-LLM-INHERIT/C-RESIDUAL-NOVELTY test",
+      "Path dependence and local optima amplified by deterministic replay and exact-template matching (kernel L97 m.intent != intent); agents converge to locally consistent but globally wrong patterns unless diversity/forcing injects novelty \u2014 explains why C-SEMANTIC-RESOLVE needs genuine critique-reconstruct from observation state, not score ranking, and why C-DELTA-REPAIR needs localized perturbation not replay",
+      "Caching economics create bounded paying band where keepalive pays; models ignoring TTL/tier pricing misattribute savings \u2014 C-PRODUCT-ECON must report no-cache and cached cost separately and separate base/inference/injection via two-pass counting"
+    ],
+    "allocation": {
+      "action": "CONTINUE",
+      "claim_id": "C-SEMANTIC-RESOLVE",
+      "cognitive_reset": true,
+      "comparative_reasoning": "Vs returning to synthetic TV/KDE/binned divergence (PCA, per-type bias correction): marginal gain near zero, synthetic 10D [0,1]^2 ceiling and CV instability at 250/type already falsified for uniform invariance; explicitly PARK pending real trajectories from physics. Vs C-DELTA-REPAIR program synthesis/process mining for local repair: also orthogonal and high upside but Graph will now cover delta repair; frontier's comparative advantage is semantic grounding vs SPIDER's exact matcher, with HMT evidence predicting raw IDs catastrophic (39.7%->12.4%). Vs visual/computed-style state for C-WEB-DYNAMICS: still within warmed Web-dynamics basin; semantic adapter tests a different level of description (intent resolution) with direct product leverage on C-LLM-INHERIT false_accept.",
+      "dependencies": [
+        "intel"
+      ],
+      "parent_handoff_disposition": "USE",
+      "question": "Does a genuine (non-oracle) state-conditioned reconstruction adapter that critiques/reconstructs the retrieved template via structural analysis of (intent, observation-derived state, retrieved_template) \u2014 without access to ground-truth alias_family/query_key/target_prefix signals and without hardcoded confidence \u2014 achieve alias-OOD correct_resolution >=0.50 (binomial p<0.05 vs 0.10, McNemar p<0.05 vs exact matcher) and false_accept <=0.15 (>=0.15 below verbatim, p<0.05) while preserving exact-match >=0.90 and no-applicable UNKNOWN precision >=0.85 with ECE <=0.15, tested on the same three alias families (query-param, path-rewriting, server-routing) plus held-out variations and a limited live-browser WebShop/ALFWorld proxy where available?",
+      "rationale": "Frontier IDLE after MEASUREMENT_INVALID on C-SEMANTIC-RESOLVE (EXP-FRONTIER-35741928625) with oracle alias signals and hardcoded confidence; tunnel_flag true despite recent pivot (8/10 prior C-WEB-DYNAMICS). Handoff's non-oracle critique-reconstruct adapter directly tests SPIDER's deterministic exact-intent matcher failure (kernel L97 m.intent != intent, 0/6 aliased, 0/12 HTTP grounding) using HMT-style semantic grounding and stage preconditions, orthogonal to SPIDER's basin. This is the first high-upside departure from 13-experiment synthetic TV/KDE/kNN divergence tunnel whose per-type CV stability fails at 250/type and whose synthetic-to-real gap is acknowledged as dominant unknown; Bayesian path now covers null-bias, freeing frontier from further density estimation."
+    },
+    "cycle_id": "35747680446",
+    "lane": "frontier",
+    "portfolio_assessment": "SPIDER is tunnel-locked on second-order substrate refinements while its central product promise is untested. Graph 30-streak C-FRESHNESS (10/10 recent), Physics 42-streak C-WEB-DYNAMICS, Runtime 40-streak C-MEAS-VALID each show deep local continuation on localhost synthetic controls. C-MEAS-VALID is EXPERIMENTAL but strictly localhost deterministic (1 fingerprint/state, C4 vacuous); nginx byte-preserving cache is closed but production CDN HIT remains open. C-FRESHNESS orthogonality at delta=0.15 is the only replicated signal (6 mocks r=0.002-0.046) yet distributed C1 fails due to per-node SQLite non-replication and kernel wiring failed orthogonality. C-PRODUCT-ECON model extrapolation definitively closed (6 failures, REJECTED) and C-RESIDUAL-NOVELTY has zero valid measurement (bijective formula, inert baselines, p=0.0167). C-DELTA-REPAIR has 0 total experiments and C-PARAM-INHERIT has 0 recent despite synthetic POC, both starved. Highest marginal gain is not another localhost orthogonality replication or synthetic 2D [0,1]^2 divergence sweep, but (1) first discriminating C-DELTA-REPAIR test of localized repair, (2) stored-state C-RESIDUAL-NOVELTY with genuine cost vs budget-matched baselines, (3) Intel remediation of AX consistency + Mind2Web TF-IDF to unblock that test, (4) header-only drift isolation as last non-redundant C-MEAS-VALID gate before distributed claim, (5) C-CROSSSITE website holdout using validated Bayesian estimator, and (6) locking Frontier's pivot to non-oracle semantic resolution. Already-frozen experiments (INTEL/RUNTIME/PRODUCT FROZEN, GRAPH/PHYSICS EXECUTED) complete under frozen designs; new mandates supersede narrow infrastructure continuations where information gain is bounded.",
+    "schema_version": 1,
+    "scout_assessment": "Scout brief accepted as accurate reconnaissance: correctly diagnosed tunnel flags on Graph/Physics/Runtime/Product, replicated C-FRESHNESS r=0.002-0.046 vs distributed TN=0.667 failure, Bayesian estimator as first C1+C3 passer on both synthetic and real TodoMVC (with absolute BF negative), C-PRODUCT-ECON REJECTED and closed, C-DELTA-REPAIR starvation, and WebArena census replication with AX inconsistency unmeasured and Mind2Web heuristic non-compliant. External context (WebChallenger WebsiteMem 56.3% WA without LLM, Budget-controlled re-evals showing token-matched vanilla matches AWM/ASI, Total Cost of Agency 13.6% injection cost, HMT semantic descriptions, Mem0 read-time vs write-time) materially shaped Product token-matching and Graph/Frontier semantic adapter design. Challenged Scout where it suggested narrow continuations: rejected Graph distributed session-affinity fix as low-value replication in favor of first delta-repair, rejected Physics autocorrelation artifact as marginal synthetic follow-up in favor of C-CROSSSITE holdout, and retained Runtime header-only isolation as last non-redundant gate before distributed pivot rather than immediate delta substrate, consistent with cognitive resets."
+  },
+  "experiment_id": "EXP-FRONTIER-35748235931",
+  "inherited_last_verdict": "MEASUREMENT_INVALID",
+  "inherited_next_question": "Does a genuine (non-oracle) state-conditioned reconstruction adapter that critiques/reconstructs the retrieved template via structural analysis of (intent, observation-derived state, retrieved_template) \u2014 without access to ground-truth alias_family/query_key/target_prefix signals and without hardcoded confidence \u2014 achieve alias-OOD correct_resolution >=0.50 (binomial p<0.05 vs 0.10, McNemar p<0.05 vs exact matcher) and false_accept <=0.15 (>=0.15 below verbatim, p<0.05) while preserving exact-match >=0.90 and no-applicable UNKNOWN precision >=0.85 with ECE <=0.15, tested on the same three alias families (query-param, path-rewriting, server-routing) plus held-out variations and a limited live-browser WebShop/ALFWorld proxy where available?",
+  "lane": "frontier",
+  "origin_github_run_id": "35748235931",
+  "parent_handoff": {
+    "experiment_id": "EXP-FRONTIER-35741928625",
+    "path": "research/experiments/EXP-FRONTIER-35741928625/handoff.json",
+    "sha256": "eed60ec11f5ce50a0e085876d85a1c12055059f86e8777543263ffe6038a80d0"
+  },
+  "reason": "global-director-CONTINUE",
+  "request_hash": "61d845daae649334449812a1cf47865b2f3ea7ed0cee9990492f2c8f78ef7280",
+  "request_id": "f1e5db722f82139515ed58ea",
+  "schema_version": 1
+}
