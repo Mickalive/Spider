@@ -1,0 +1,46 @@
+{
+  "base_sha": "4bb0d7bb18f158587f59a44f00b7a68f8d11c5b4",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-22T22:40:26.629434+00:00",
+  "director_mandate": {
+    "agent_priors_used": [
+      "Prior: Agents overfit to prompt-immediate salience and path dependence (recent exemplars/tool choices dominate) - distinguished from SPIDER evidence; motivates decoupling-before-aggregation retrieval, history-conditioned nulls (B-DOM-SIMILARITY/B-MARKOV-1), and ablating adopt-any-observed-key reconstruction that may inflate alias-OOD correct_resolution spuriously, not presented as Codex-established fact.",
+      "Prior: Long-horizon compounding errors accumulate over 10-15 step BrowserGym rollouts; single early navigation bug (placeholder __SHOPPING__/path -> homepage) invalidates downstream evidence without trajectory-grouped permutation/family-stratified CIs - distinguished from SPIDER evidence; motivates task-specific start_url/category/product/cart navigation and CDP Accessibility.getFullAXTree at locked 1280x720 viewport.",
+      "Prior: Local optima from repeated continuation on same synthetic scaffold (8-state hash SPA, 10D affine DGP, TodoMVC) yields narrow discrimination (CE 0.19 bits =12% max, CV 0.575 marginal, BF -10 nats favoring memory) while appearing to progress - distinguished from SPIDER evidence; motivates cognitive reset away from another correlated-FSM K tweak or alias family toward analytic bias-corrected degeneracy + richer representations and barrier/committor on existing trajectories.",
+      "Prior: Caching vs verification tradeoff: naive selector/URL caching is cheap on template-heavy flows but fails silently under drift; preferring UNKNOWN with calibrated abstention (ECE<=0.15, precision>=0.85, false_accept<=0.10) and AUROC-gated repair avoids false_accept - distinguished from SPIDER evidence; motivates Stagehand selector+DOM-hash HIT/MISS with drift MISS>=0.8 and freshness gating in product economics.",
+      "Prior: Retrieval locality dominates cost (30-55% chunks already seen, 1-2 orders fewer intervening chunks than shuffled) so residual novelty not total task length drives tokens/browser/verification - distinguished from SPIDER evidence; motivates honest branch-derived cost from actual kernel resolve/_bind/verify/freshness gating rather than bijective n*3200 formula or token shuffling to force |rho|."
+    ],
+    "allocation": {
+      "action": "PIVOT",
+      "claim_id": "C-SEMANTIC-RESOLVE",
+      "cognitive_reset": true,
+      "comparative_reasoning": "Versus adding BrowserGym 1280x720 observation noise or residual-novelty verification economics now (product already owns honest residual-novelty economics with kernel gating; duplicating in frontier dilutes focus) and versus continuing alias family variations (synthetic ceiling exhausted, diminishing returns per Scout). Discriminability restoration is falsification-critical and decides whether product should invest in endpoint bypass or retrieval reform.",
+      "dependencies": [
+        "product"
+      ],
+      "parent_handoff_disposition": "USE",
+      "question": "Does disabling the adopt-any-observed-key reconstruction (verbatim bind or correct-family-required rewriting only, no cross-family key adoption) restore discriminability of WebAPI endpoint+method+auth-scope mining vs hierarchical decoupling-before-aggregation (xMemory episode->semantic component->theme, revisable grouping, top-down complementary selection) vs flat top-k RAG (k=5 cosine) on the same validated synthetic orthogonal header/body/auth + mixed multi-channel splits (40 pooled, 30 orthogonal, 10 mixed, 9 held-out) \u2014 measured by correct endpoint invocation vs template rewriting, coverage>=0.15 and evidence density, calibration ECE<=0.15 UNKNOWN precision>=0.85, trajectory-grouped bootstrap CIs without new BrowserGym 1280x720 SPAs?",
+      "rationale": "Frontier tunnel_flag true (7/10 C-SEMANTIC-RESOLVE) with 5 consecutive synthetic SURVIVES then MIXED/FAIL on WebAPI vs hierarchical (EXP-FRONTIER-35789949165) after hierarchical decoupling MIXED; contamination from verbatim adopt-any-key noted in handoff likely inflated alias-OOD correct_resolution (40/40 pooled vs B-VERBATIM false_accept 1.0 gap) and masked endpoint vs retrieval complementarity difference. Disabling reconstruction is cheap ablation on already-validated splits (no new BrowserGym cost) that determines if endpoint mining is genuinely higher-leverage than retrieval diversity or artifact. Avoids another alias family parameterization where information gain diminished."
+    },
+    "cycle_id": "35793060550",
+    "lane": "frontier",
+    "portfolio_assessment": "SPIDER at 260 canonical exps has no PRODUCT_CORE claims; central promise pay-for-residual-novelty via parameterized inheritance remains MEASUREMENT_INVALID/BLOCKED due to correctable measurement bugs (kernel _common_prefix double-prefix + Jaccard + field-path filter, intel homepage-only __SHOPPING__ placeholder AX 0.2857 vs 0.9 single-family pass, product bijective n*3200 formula + zero baseline hits), while synthetic alias-OOD SURVIVES is saturated (5 consecutive synthetic passes) and physics/runtime exhaustive Gate0/CDN searches are stalled (0/2-0/3 SPAs, paid-tier CDN NOT_MEASURED after gunicorn+nginx loopback 960/960 byte-identical ceiling). Highest information gain is to fix discriminating measurement validity on cheap loopback/synthetic scaffolds before chasing expensive substrate: intel diverse-page AX + Stagehand baseline unblocks graph/product within-store holdouts, graph single-family kernel-verified pilot tests real param binding with stratified bootstraps, product honest kernel-gated resolve/verify cost restores falsifiability of residual-novelty economics, physics analytic bias-correction + barrier/committor on existing trajectories avoids another degenerate K=24 hash FSM, runtime BrowserGym 1280x720 DOM/AX + prod-loopback gradients unblocks freshness/delta without external spend. Parking paid-tier CDN and exhaustive 567MB LFS/CAP searches preserves spend for verification-boundary economics that actually change product decisions.",
+    "schema_version": 1,
+    "scout_assessment": "Scout brief correctly identified 260-exp ceiling (synthetic alias SURVIVES only, gunicorn+nginx loopback 960/960 HIT/SWR/SIE/304 but paid-tier CDN NOT_MEASURED, 0/2-0/3 Gate0 SPAs, C-PARAM-INHERIT/RESIDUAL-NOVELTY MEASUREMENT_INVALID, DELTA-REPAIR BLOCKED x4) and flagged tunnel risks (frontier 7/10 SEMANTIC, intel 9/10 CROSSSITE, physics 9/10 WEB-DYNAMICS, runtime 10/10 MEAS-VALID) and cross-lane dependencies. Adopted Scout's linchpin prioritization of intel 10x2 diverse-page AX fix to unblock graph/product, and honest residual-novelty economics over another synthetic alias parameterization, and BrowserGym/DOM layer over paid CDN. Challenged Scout's suggested continuation of correlated-FSM tweaks and exhaustive LFS/CAP search: superseded with barrier/committor/timescale on existing trajectories with analytic DM bias-correction and richer DOM, and parked paid-tier CDN pending resource provisioning, per information-gain and measurement-readiness criteria."
+  },
+  "experiment_id": "EXP-FRONTIER-35793584484",
+  "inherited_last_verdict": "MIXED",
+  "inherited_next_question": "Does disabling the adopt-any-observed-key reconstruction (verbatim bind or correct-family-required rewriting) restore discriminability of WebAPI endpoint vs hierarchical vs flat retrieval complementarity on the same 40 pooled splits, and does live BrowserGym 1280x720 observation noise or residual-novelty-tracked verification economics (pay cost of novelty only vs BrowserUse deterministic caching) provide orthogonal higher leverage for alias-OOD work compression beyond retrieval diversity?",
+  "lane": "frontier",
+  "origin_github_run_id": "35793584484",
+  "parent_handoff": {
+    "experiment_id": "EXP-FRONTIER-35789949165",
+    "path": "research/experiments/EXP-FRONTIER-35789949165/handoff.json",
+    "sha256": "f4e802354c58405d64ab8c68d5cbd142f504c812c556991edd719e0ba564150f"
+  },
+  "reason": "global-director-PIVOT",
+  "request_hash": "548585edef3a5430f16a0d308b432870c42f20e00e87b4a40b33625f6fb3e44b",
+  "request_id": "7c1fe7d1438ce5247255f4b4",
+  "schema_version": 1
+}

@@ -1,0 +1,45 @@
+{
+  "experiment_id": "EXP-FRONTIER-35793584484",
+  "lane": "frontier",
+  "github_run_id": "35793584484",
+  "github_run_attempt": 1,
+  "pre_execute_sha": "0ae2cd82cf662832f6db07d946f5f957006ce1d2",
+  "frozen_at": "2026-09-22T22:44:48.264559+00:00",
+  "executed_at": "2026-09-22T22:52:00+00:00",
+  "model_execute": "opencode/muse-spark-1.2-contributor-free",
+  "model_execute_attempt": 2,
+  "seeds": {"numpy": 42, "python_random": 42, "hash": "hashlib.sha256"},
+  "environment": {
+    "python_version": "3.12.14",
+    "platform": "linux",
+    "packages": ["numpy 2.5.3", "scikit-learn", "scipy", "sentence-transformers 6.1.0 all-MiniLM-L6-v2", "torch 2.14.0"]
+  },
+  "code_roots": ["research/frontier/run_execute_35793584484.py", "research/harness", "src/spider/kernel.py", "src/spider/models.py", "src/spider/registry.py"],
+  "allowed_code_roots": ["research/harness", "research/frontier"],
+  "frozen_inputs": {
+    "request.json": "3947d1e26d7a2c5bae94d06628b4f22e197aea33ca6669a08bfc5deb23dc1672",
+    "spec.json": "66a02b6b703487b28a0dbac9470251f8e39e6c604dd3e68586865d684cdcebe1",
+    "prereg.md": "0690ca931339013362ca9523cc0a523be0b61235701785c3427a91edefaf10aa",
+    "freeze.json": "frozen_at 2026-09-22T22:44:48.264559+00:00"
+  },
+  "fixtures": {
+    "tasks_json": {"path": "research/experiments/EXP-FRONTIER-35773143736/tasks.json", "sha256": "4abf148721fdee9dfe56ac776f6b3112344821a4ea80d183c5313adeced1f35e"},
+    "tasks_expanded_json": {"path": "research/experiments/EXP-FRONTIER-35793584484/tasks_expanded.json", "sha256": "83b7c52dd17848fc8c70d1c629b8d541788e0438249623ea783d2df364467319"},
+    "parent_tasks_expanded": {"path": "research/experiments/EXP-FRONTIER-35789949165/tasks_expanded.json", "sha256": "83b7c52dd17848fc8c70d1c629b8d541788e0438249623ea783d2df364467319"},
+    "index_manifest": {"path": "research/experiments/EXP-FRONTIER-35793584484/index_manifest.json", "sha256": "973ad38247a1b6362ca9389f00efa4b247f51466781b8d40cbd65fc047389878"},
+    "train_split_inventory": {"path": "research/experiments/EXP-FRONTIER-35793584484/train_split_inventory.json", "sha256": "02f2a6ad4152e2ba873cb68c966ffb1c6752b2b5c696e1e6d4b64286e4710288"}
+  },
+  "artifacts": [
+    {"path": "research/experiments/EXP-FRONTIER-35793584484/raw_evidence.json", "sha256": "ada40d737694520a63424feceb9272f802bb8550b9d23e9f45b15784d89090bb", "role": "raw", "rows": 980},
+    {"path": "research/experiments/EXP-FRONTIER-35793584484/derived_metrics.json", "sha256": "d2d215812351d65d4dfa02553a95bd4822a064ac29d8ba9f7d7679e6188cbaea", "role": "derived"},
+    {"path": "research/experiments/EXP-FRONTIER-35793584484/result.json", "sha256": "d9db3d6245e0ea3d19bb08fd0c8786857d03102cf0b9347ea603fccf5949c4b1", "role": "result"},
+    {"path": "research/experiments/EXP-FRONTIER-35793584484/report.md", "sha256": "a28dc85e39d7f6e8472ff309c294a8cdb25df5a39136bd89b69fef95fe237fa3", "role": "report"},
+    {"path": "research/frontier/run_execute_35793584484.py", "sha256": "86f458f935b14b85edd6b8cbbab54e74eae1b0949f9d5493cbd677c3ec1fe68b", "role": "code"}
+  ],
+  "commands": [
+    "python3 research/frontier/run_execute_35793584484.py"
+  ],
+  "determinism": "All RNG via numpy.random.RandomState(seed=42) and Python random.seed(42); deterministic hashing via hashlib.sha256, not Python hash(); TFIDF vectorizer and embedding deterministic normalized; clustering deterministic AgglomerativeClustering distance_threshold 0.4; each task evaluated once per pipeline per rule paired design; block bootstrap 2000 resamples trajectory-grouped by family.",
+  "holdout_integrity": "All alias families and mixed stratum stratified; train never sees test alias form nor mixed composition (0/40 leak pooled, 0/9 held-out, 0/10 mixed); TF-IDF/embedding and hierarchical/WebAPI theme centroids fit on train registry only (21*8=168 episodes); correct-family eligibility uses only template-parsed family vs derived observed family, not hidden_expected; derived_context filtered to allowed keys only.",
+  "notes": "Low substrate-available CPU-only experiment, no Playwright/BrowserGym navigations, no hosted LLM calls, no new SPA fixtures, wall-clock <30s for evaluation plus <2 min for embedding load and clustering."
+}
