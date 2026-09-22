@@ -7,11 +7,11 @@
   "continue_immediately": false,
   "next_question": "After runtime's verified byte-preserving nginx HIT-cache substrate (oracle-free decompression 960/960 byte-identical across HIT/SWR/SIE/304 stages), does a controlled single-resource local perturbation (DOM attribute/text change, endpoint param/header change, Cache-Control/ETag mutation) require only localized repair \u2014 bounded tokens/browser/verification cost (<50% tokens and <40% browser vs cold re-exploration), verification AUROC>=0.75 and precision>=0.80, contamination <0.10 and amortized cost < cold at 10 reuses when measured with a real LLM agent, real Playwright execution and real verify() on actual DOM/response state?",
   "promotion_ready": false,
-  "consecutive_failures": 0,
-  "updated_at": "2026-09-22T18:00:38.041796+00:00",
-  "last_failure_retryable": null,
+  "consecutive_failures": 1,
+  "updated_at": "2026-09-22T18:26:50.831599+00:00",
+  "last_failure_retryable": false,
   "last_handoff_sha256": "91403f9a2ddd3ed388bacee9bf98677688b54eb313474a1dd41a11683738a020",
-  "same_failure_count": 0,
-  "last_failure_fingerprint": null,
-  "last_failure_control_revision": null
+  "same_failure_count": 1,
+  "last_failure_fingerprint": "32fb61131a26107aaf831564",
+  "last_failure_control_revision": "076dc77b91c1d12ea39cb22825d01d847c1810ff7d44ed432bd5b1813468f5ae"
 }
