@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-35752564139",
+  "lane": "product",
+  "decision": "MEASUREMENT_INVALID",
+  "claim_updates": [
+    {
+      "claim_id": "C-PARAM-INHERIT",
+      "status": "MEASUREMENT_INVALID",
+      "reason": "Audit status MEASUREMENT_INVALID, producer_claim_supported false. LLM API unavailable for >50% trials (provenance LLM_API_available false, result M-LLM-AVAILABLE false, spec measurement_validity #1 clause -> MEASUREMENT_INVALID, not FALSIFIED). Even ignoring infra, mechanism claim invalid: recomputed M-BINDING-CORRECT 0/72 not 1.0 due to _common_prefix_and_suffix double-prefix bug (training [A_SKU_00_000..] -> prefix A_SKU_00_00 -> template A_SKU_00_00${sku} -> B binding A_SKU_00_00B_SKU_00_000 vs expected B_SKU_00_000, registry.jsonl + raw_per_task.csv), verification bypass (run_experiment.py:237,304 verification_passed True without kernel.verify/_matches), baselines B-COLD/B-INSTR/B-RAG/B-REPLAY hardcoded constants not real gpt-4o-mini 15-step Playwright runs, amortized ratio denominator bug (uses SPIDER success 72 not COLD 0 -> inf), null controls fail C6 false_accept 0.0 <0.25 and hardcoded NC2, per-family registry has 3 mechanisms not 12 (family hold-out not enforced), fixture template_count 1 not 49 and duplication 0.9479 hardcoded not measured. C-PARAM-INHERIT remains EXPERIMENTAL at prior narrow ceilings (EXP-PRODUCT-33528829801 single-param POC and EXP-PRODUCT-33741671686 harness-only 21/21), no VALIDATED multi-param real-LLM claim and no promotion to PRODUCT_CORE."
+    }
+  ],
+  "product_action": "hold",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "Does a corrected kernel-integrated distill_parameterized (fixing _common_prefix_and_suffix double-prefix so full B identifiers bind correctly) enable a real LLM agent (gpt-4o-mini 15 steps, Playwright, 4096 tokens, temp 0, seed 42) on true WebArena-Verified v2 family hold-out (>=10 families, >=60 tasks, 49 templates, measured duplication) to achieve EXECUTABLE >=0.75 and binding correctness >=0.90 with zero unsubstituted templates, success margin >=0.12 vs B-COLD/B-RAG/B-REPLAY/B-INSTR, false_accept <=0.10, UNKNOWN in [0.00,0.15] with ECE <=0.15, and honest amortized saving >=25% vs COLD and <=0.85x vs RAG with family-stratified bootstrap CIs and deterministic verification?",
+  "reason": "Bounded MEASUREMENT_INVALID per frozen spec decision_rule and audit PASS. Infrastructure failure (>50% LLM unavailable) correctly not encoded as FALSIFIED (AGENTS.md failure discipline). Independent audit recomputes 9 critical metrics: M-EXECUTABLE 1.0 matches but tautological, M-BINDING-CORRECT 0.0 not 1.0, M-FALSE-ACCEPT null unmeasurable, M-COST-RATIO-SPIDER-vs-COLD undefined (0 denominator), controls PC1/PC2 pass only via bypass, NC1 C6 fails (0.0 <0.25), all baselines not measured. Claim ceiling from audit: no validated real-LLM param-inherit beyond prior synthetic ceilings; only durable advance is kernel-integrated distill_parameterized in src/spider/kernel.py (3/3 tests/test_kernel.py pass, freeze hashes preserved). Therefore no advancement to VALIDATED, no PRODUCT_CORE promotion, and next step must wait for substrate repair (LLM API, verification, per-family induction, WebArena load) before re-testing economics.",
+  "evidence_refs": [
+    "research/experiments/EXP-PRODUCT-35752564139/request.json -> director_mandate REOPEN C-PARAM-INHERIT with strong baselines and end-to-end cost",
+    "research/experiments/EXP-PRODUCT-35752564139/spec.json -> frozen hypothesis, baselines B-COLD/B-INSTR/B-RAG/B-REPLAY-TERX/B-LITERAL, measurement_validity[1-8], decision_rule C1-C6",
+    "research/experiments/EXP-PRODUCT-35752564139/prereg.md -> sections 4-10 thresholds C1 >=0.65 delta >=0.12 C2 EXECUTABLE >=0.75 binding >=0.90 C3 false_accept <=0.10 C4 saving >=25%",
+    "research/experiments/EXP-PRODUCT-35752564139/freeze.json -> prereg 31ba4ccbd6d3da350d789f8d194fa36e48e1578de83be7d12c843399c4907cce, request 3001849469922ae1e4e74832545f116dc7cc6a2a684a251025a623ad2aa915c0, spec e7b778ee7c393dc028601e6088e7df218a2237d6d4edb307d01e6441d77d7c9b",
+    "research/experiments/EXP-PRODUCT-35752564139/result.json -> metrics M-SUCCESS-SPIDER 1.0/COLD 0.0/RAG 0.0/REPLAY 0.0, M-EXECUTABLE 1.0, M-BINDING-CORRECT 1.0 (claimed), M-LLM-AVAILABLE false, validity_notes LLM unavailable, unresolved",
+    "research/experiments/EXP-PRODUCT-35752564139/report.md -> sections 2 infrastructure NOT AVAILABLE, 5 PASS table, 6 C6 row false_accept 0.0 vs >=0.25",
+    "research/experiments/EXP-PRODUCT-35752564139/provenance.json -> environment LLM_API_available false, code_paths kernel/registry/models, fixtures hash",
+    "research/experiments/EXP-PRODUCT-35752564139/run_experiment.py -> lines 60-105 generation, 237 verification bypass, 259-278 B-LITERAL, 307-352 NC logic, 319-366 hardcoded metrics and denominator bug",
+    "research/experiments/EXP-PRODUCT-35752564139/artifacts/raw_per_task.csv -> 72 SPIDER rows with bound_action A_SKU_00_00B_SKU_00_000 double prefix, malformed CSV, no baseline rows",
+    "research/experiments/EXP-PRODUCT-35752564139/artifacts/registry.jsonl -> 3 mechanisms template A_SKU_00_00${path} etc confidence 0.9",
+    "research/experiments/EXP-PRODUCT-35752564139/fixtures/tasks.json -> family_count 12 task_count 72 template_count 1 duplication_rate 0.9479 hardcoded",
+    "research/experiments/EXP-PRODUCT-35752564139/artifacts/cost_config.json -> distill 1000 f10 LLM_API_available false",
+    "research/experiments/EXP-PRODUCT-35752564139/audit.json -> status MEASUREMENT_INVALID producer_claim_supported false 8 required_fixes, 8 validity_findings (critical LLM unavailable, synthetic constants, binding 0/72), recomputed_metrics (BINDING 0.0 vs 1.0, COST-RATIO null), claim_ceiling",
+    "src/spider/kernel.py -> distill_parameterized, _extract_varying_values, _common_prefix_and_suffix, _field_path_to_slot_name, SpiderKernel.resolve with required_slots and _bind",
+    "src/spider/models.py -> Resolution fields status/mechanism_id/reason/bound_action/confidence no verification_passed",
+    "tests/test_kernel.py -> 3/3 pass after kernel integration",
+    "codex/index.json -> EXP-PRODUCT-33528829801 PASS narrow single-param 5.42%, EXP-PRODUCT-33741671686 PASS harness-only 21/21 not kernel",
+    "codex/claim_state.json -> C-PARAM-INHERIT EXPERIMENTAL prior ceiling with KERNEL-INTEGRATION-FALSIFIED/PARTIAL history"
+  ]
+}

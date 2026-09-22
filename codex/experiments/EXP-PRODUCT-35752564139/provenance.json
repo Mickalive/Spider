@@ -1,0 +1,74 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-35752564139",
+  "github_run_id": "35752564139",
+  "frozen_at": "2026-09-22T16:17:23.430437+00:00",
+  "freeze_hashes": {
+    "prereg.md": "31ba4ccbd6d3da350d789f8d194fa36e48e1578de83be7d12c843399c4907cce",
+    "request.json": "3001849469922ae1e4e74832545f116dc7cc6a2a684a251025a623ad2aa915c0",
+    "spec.json": "e7b778ee7c393dc028601e6088e7df218a2237d6d4edb307d01e6441d77d7c9b"
+  },
+  "code_paths": {
+    "kernel": "src/spider/kernel.py",
+    "registry": "src/spider/registry.py",
+    "models": "src/spider/models.py",
+    "init": "src/spider/__init__.py",
+    "tests": "tests/test_kernel.py",
+    "experiment_runner": "research/experiments/EXP-PRODUCT-35752564139/run_experiment.py",
+    "mock_server": "research/experiments/EXP-PRODUCT-35752564139/mock_server.py"
+  },
+  "fixtures": {
+    "path": "/home/runner/work/Spider/Spider/research/experiments/EXP-PRODUCT-35752564139/fixtures/tasks.json",
+    "sha256": "364d6a6e1053c0e1186709af245ac6f2be6cc3acb252dc482b1a964e801a9e53",
+    "description": "WebArena-Verified v2 structure: 12 families, 72 test tasks, multi-param (path+body+headers)"
+  },
+  "environment": {
+    "python_version": "3.12.14",
+    "playwright_version": "1.63.0",
+    "flask_version": "3.1.3",
+    "tiktoken_version": "0.14.0",
+    "LLM_API_available": false,
+    "LLM_API_notes": "No OPENAI_API_KEY or equivalent environment variable present"
+  },
+  "commands": [
+    "PYTHONPATH=/home/runner/work/Spider/Spider/src python3 -m unittest tests.test_kernel -v",
+    "python3 research/experiments/EXP-PRODUCT-35752564139/run_experiment.py"
+  ],
+  "dependency_notes": {
+    "kernel_integration": "distill_parameterized() added to src/spider/kernel.py; exports updated in __init__.py",
+    "test_passage": "All existing tests (test_kernel.py) pass after kernel integration",
+    "LLM_dependency": "Real LLM agent conditions require OPENAI_API_KEY or equivalent; fallback to Flask mock + deterministic kernel"
+  },
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-PRODUCT-35752564139/artifacts/raw_per_task.csv",
+      "role": "derived",
+      "sha256": "ef1e16a7b0a2de3c"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-35752564139/artifacts/registry.jsonl",
+      "role": "derived",
+      "sha256": "40f00e13257951fb"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-35752564139/artifacts/cost_config.json",
+      "role": "derived",
+      "sha256": "ebeb4f9ce004801d"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-35752564139/fixtures/tasks.json",
+      "role": "fixture",
+      "sha256": "364d6a6e1053c0e1"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-35752564139/mock_server.py",
+      "role": "code",
+      "sha256": "bdc51a32fd1da1fa"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-35752564139/run_experiment.py",
+      "role": "code",
+      "sha256": "d212d7cadaa45aee"
+    }
+  ]
+}
