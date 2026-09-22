@@ -1,0 +1,7668 @@
+{
+ "dataset_sha256": "d65275660814663375028e9017e1f929e3c38321041b125795e2713b52243d30",
+ "seed": 35697055679,
+ "base_url": "http://localhost:7770",
+ "summary": {
+  "shopping_task_count": 192,
+  "distinct_intent_templates": 49,
+  "tasks_with_template_reuse_ge2": 182,
+  "dup_fraction_identical_template": 0.9479166666666666,
+  "copy_fraction_identical_template_and_instantiation": 0.078125,
+  "param_tasks": 172,
+  "param_task_fraction": 0.8958333333333334,
+  "param_template_fraction": 0.8367346938775511,
+  "site_tuples": {
+   "shopping": 187,
+   "shopping+reddit": 5
+  },
+  "selected_tasks": [
+   25,
+   514,
+   519,
+   434,
+   468,
+   506,
+   794,
+   673,
+   532,
+   654
+  ],
+  "selected_template_families": [
+   "Add a {{product}} to my wish list.",
+   "Add the product on the current page to my wishlist",
+   "Add the product with the lowest per unit price from my open tabs to the shopping cart",
+   "Add {{product}} to my wish list",
+   "Buy the highest rated product from the {{product_category}} category within a budget {{dollar_value}}. Discard any items in your cart if it is not empty.",
+   "Change the delivery address for {{order_selector}} to {{address}}.",
+   "Create a post in the game related discussion forum about {{product}} to report customer reviews with {{rating}} rating from the OneStopShop with the post title \"real user feedback on {{product}}\". Format the post body as a bullet point list in the same order they appear (md format: - \"<review title>\").",
+   "Fill out the contact us form with this refund message for the {{product}} bought {{time}}: \"I need a refund. Order: <order_id>. Amount: <amount>. Reason: It broke after three days of use.\" Leave the filled form ready for review and do not submit it.",
+   "Fill the \"contact us\" form in the site for a refund on the {{product}} I bought, stating that \"it broke after just three days of use\". Also, ensure to include the order number #{{order_id}} and the product SKU. Don\"t submit yet, I will check.",
+   "Get name(s) of reviewer(s) who mention {{description}} for the product on the current page"
+  ]
+ },
+ "extracted": [
+  {
+   "task_id": 25,
+   "intent_template": "Get name(s) of reviewer(s) who mention {{description}} for the product on the current page",
+   "intent": "Get name(s) of reviewer(s) who mention print quality explicitly with a rating of 3 or less stars for the product on the current page",
+   "instantiation_dict": {
+    "description": "print quality explicitly with a rating of 3 or less stars"
+   },
+   "start_url": "http://localhost:7770/epson-workforce-wf-3620-wifi-direct-all-in-one-color-inkjet-printer-copier-scanner-amazon-dash-replenishment-ready.html",
+   "http_status": 200,
+   "title": "Epson WorkForce WF-3620 WiFi Direct All-in-One Color Inkjet Printer, Copier, Scanner, Amazon Dash Replenishment Ready",
+   "final_url": "http://localhost:7770/epson-workforce-wf-3620-wifi-direct-all-in-one-color-inkjet-printer-copier-scanner-amazon-dash-replenishment-ready.html",
+   "ax_node_count": 1150,
+   "interactive_elements": [
+    {
+     "nodeId": "328",
+     "role": "link",
+     "name": "Skip to Content",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "333",
+     "role": "link",
+     "name": "store logo",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "1431",
+     "role": "link",
+     "name": "Home",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "1488",
+     "role": "link",
+     "name": "Add to Wish List",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "1490",
+     "role": "link",
+     "name": "Add to Compare",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "1495",
+     "role": "link",
+     "name": "Skip to the end of the images gallery",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "1532",
+     "role": "link",
+     "name": "Skip to the beginning of the images gallery",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "1537",
+     "role": "tab",
+     "name": "Details",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "1928",
+     "role": "tab",
+     "name": "Reviews (12)",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "2030",
+     "role": "link",
+     "name": "Report All Bugs",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "319",
+     "role": "link",
+     "name": "My Account",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "320",
+     "role": "link",
+     "name": "My Wish List",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "321",
+     "role": "link",
+     "name": "Sign In",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "327",
+     "role": "link",
+     "name": "Create an Account",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "12",
+     "role": "link",
+     "name": "\ue611 My Cart",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "1459",
+     "role": "link",
+     "name": "12\u00a0 Reviews ",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "1462",
+     "role": "link",
+     "name": "Add Your Review",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "48",
+     "role": "button",
+     "name": "Add to Cart",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "1538",
+     "role": "link",
+     "name": "Details",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "1929",
+     "role": "link",
+     "name": "Reviews (12)",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "2013",
+     "role": "button",
+     "name": "Subscribe",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "2017",
+     "role": "link",
+     "name": "Privacy and Cookie Policy",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "2019",
+     "role": "link",
+     "name": "Search Terms",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "2021",
+     "role": "link",
+     "name": "Advanced Search",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "2023",
+     "role": "link",
+     "name": "Orders and Returns",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "2025",
+     "role": "link",
+     "name": "Contact Us",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "375",
+     "role": "menuitem",
+     "name": "\ue622 Beauty & Personal Care",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "18",
+     "role": "menuitem",
+     "name": "\ue622 Sports & Outdoors",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "21",
+     "role": "menuitem",
+     "name": "\ue622 Clothing, Shoes & Jewelry",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "24",
+     "role": "menuitem",
+     "name": "\ue622 Home & Kitchen",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "27",
+     "role": "menuitem",
+     "name": "\ue622 Office Products",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "30",
+     "role": "menuitem",
+     "name": "\ue622 Tools & Home Improvement",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "850",
+     "role": "menuitem",
+     "name": "\ue622 Health & Household",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "33",
+     "role": "menuitem",
+     "name": "\ue622 Patio, Lawn & Garden",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "36",
+     "role": "menuitem",
+     "name": "\ue622 Electronics",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "1098",
+     "role": "menuitem",
+     "name": "\ue622 Cell Phones & Accessories",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "1149",
+     "role": "menuitem",
+     "name": "\ue622 Video Games",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "1198",
+     "role": "menuitem",
+     "name": "\ue622 Grocery & Gourmet Food",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "1479",
+     "role": "spinbutton",
+     "name": "Qty",
+     "props": {
+      "focusable": true,
+      "editable": "plaintext",
+      "settable": true
+     }
+    },
+    {
+     "nodeId": "1503",
+     "role": "button",
+     "name": "Previous",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "1510",
+     "role": "button",
+     "name": "Next",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "1517",
+     "role": "button",
+     "name": "Previous",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "1527",
+     "role": "button",
+     "name": "Next",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "2009",
+     "role": "textbox",
+     "name": "Sign Up for Our Newsletter:",
+     "props": {
+      "focusable": true,
+      "editable": "plaintext",
+      "settable": true,
+      "multiline": false
+     }
+    },
+    {
+     "nodeId": "360",
+     "role": "combobox",
+     "name": "\ue615 Search",
+     "props": {
+      "focusable": true,
+      "editable": "plaintext",
+      "settable": true
+     }
+    },
+    {
+     "nodeId": "16",
+     "role": "button",
+     "name": "Search",
+     "props": {}
+    },
+    {
+     "nodeId": "1521",
+     "role": "button",
+     "name": "Image",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "1524",
+     "role": "button",
+     "name": "Image",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "364",
+     "role": "link",
+     "name": "Advanced Search",
+     "props": {
+      "focusable": true
+     }
+    }
+   ],
+   "raw_tree_path": "research/experiments/EXP-INTEL-35697055679/artifacts/raw/axtree_task_25.json",
+   "raw_tree_sha256": "96ef48a76280cc8bbfe50bb005b2936f0f1d1432c815fdee45cb5940e3334759",
+   "extraction_error": null
+  },
+  {
+   "task_id": 514,
+   "intent_template": "Add a {{product}} to my wish list.",
+   "intent": "Add a white desk to my wish list.",
+   "instantiation_dict": {
+    "product": "white desk"
+   },
+   "start_url": "http://localhost:7770",
+   "http_status": 200,
+   "title": "One Stop Market",
+   "final_url": "http://localhost:7770/",
+   "ax_node_count": 1426,
+   "interactive_elements": [
+    {
+     "nodeId": "2898",
+     "role": "link",
+     "name": "Skip to Content",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "2903",
+     "role": "link",
+     "name": "store logo",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "4521",
+     "role": "link",
+     "name": "Report All Bugs",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "2886",
+     "role": "link",
+     "name": "My Account",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "2888",
+     "role": "link",
+     "name": "My Wish List",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "2890",
+     "role": "link",
+     "name": "Sign In",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "2897",
+     "role": "link",
+     "name": "Create an Account",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "2906",
+     "role": "link",
+     "name": "\ue611 My Cart",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "4038",
+     "role": "link",
+     "name": "Image",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "4077",
+     "role": "link",
+     "name": "Image",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "4116",
+     "role": "link",
+     "name": "Image",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "4155",
+     "role": "link",
+     "name": "Image",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "4194",
+     "role": "link",
+     "name": "Image",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "4233",
+     "role": "link",
+     "name": "Image",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "4261",
+     "role": "link",
+     "name": "Image",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "4300",
+     "role": "link",
+     "name": "Image",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "4339",
+     "role": "link",
+     "name": "Image",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "4367",
+     "role": "link",
+     "name": "Image",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "4406",
+     "role": "link",
+     "name": "Image",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "4434",
+     "role": "link",
+     "name": "Image",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "4504",
+     "role": "button",
+     "name": "Subscribe",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "4508",
+     "role": "link",
+     "name": "Privacy and Cookie Policy",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "4510",
+     "role": "link",
+     "name": "Search Terms",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "4512",
+     "role": "link",
+     "name": "Advanced Search",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "4514",
+     "role": "link",
+     "name": "Orders and Returns",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "4516",
+     "role": "link",
+     "name": "Contact Us",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "2950",
+     "role": "menuitem",
+     "name": "\ue622 Beauty & Personal Care",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "3167",
+     "role": "menuitem",
+     "name": "\ue622 Sports & Outdoors",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "3205",
+     "role": "menuitem",
+     "name": "\ue622 Clothing, Shoes & Jewelry",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "3257",
+     "role": "menuitem",
+     "name": "\ue622 Home & Kitchen",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "3384",
+     "role": "menuitem",
+     "name": "\ue622 Office Products",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "3416",
+     "role": "menuitem",
+     "name": "\ue622 Tools & Home Improvement",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "3435",
+     "role": "menuitem",
+     "name": "\ue622 Health & Household",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "3459",
+     "role": "menuitem",
+     "name": "\ue622 Patio, Lawn & Garden",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "3478",
+     "role": "menuitem",
+     "name": "\ue622 Electronics",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "3687",
+     "role": "menuitem",
+     "name": "\ue622 Cell Phones & Accessories",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "3738",
+     "role": "menuitem",
+     "name": "\ue622 Video Games",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "3787",
+     "role": "menuitem",
+     "name": "\ue622 Grocery & Gourmet Food",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "4045",
+     "role": "link",
+     "name": "Pre-baked Gingerbread House Kit Value Pack, 17 oz., Pack of 2, Total 34 oz.",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "4084",
+     "role": "link",
+     "name": "V8 +Energy, Healthy Energy Drink, Steady Energy from Black and Green Tea, Pomegranate Blueberry, 8 Ounce Can ,Pack of 24",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "4123",
+     "role": "link",
+     "name": "Elmwood Inn Fine Teas, Orange Vanilla Caffeine-free Fruit Infusion, 16-Ounce Pouch",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "4162",
+     "role": "link",
+     "name": "Belle Of The Ball Princess Sprinkle Mix| Wedding Colorful Sprinkles| Cake Cupcake Cookie Sprinkles| Ice cream Candy Sprinkles| Yellow Gold Red Royal Red Rose Icing Flowers Decorating Sprinkles, 8OZ",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "4201",
+     "role": "link",
+     "name": "So Delicious Dairy Free CocoWhip Light, Vegan, Non-GMO Project Verified, 9 oz. Tub",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "4240",
+     "role": "link",
+     "name": "Cheongeun Sweet Potato Starch Powder 500g, 2ea(Sweet Potato 55%, Corn 45%)",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "4268",
+     "role": "link",
+     "name": "Q Mixers Premium Ginger Ale: Real Ingredients & Less Sweet, 6.7 Fl Oz (24 Bottles)",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "4307",
+     "role": "link",
+     "name": "Stove Top Turkey Stuffing Mix (12 oz Boxes, Pack of 2)",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "4346",
+     "role": "link",
+     "name": "Briess DME - Pilsen Light - 1 lb Bag",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "4374",
+     "role": "link",
+     "name": "Tony Chachere's More Spice Creole Seasoning - 14 oz",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "4413",
+     "role": "link",
+     "name": "Lobster Cobbler Pot Pie - Gourmet Frozen Seafood Appetizers (Set of 8 Trays)",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "4441",
+     "role": "link",
+     "name": "Crunchy Rice Rollers - Gluten Free - Vegan - 3.5 oz Individual Packs (4 Packs of 8 Rollers)",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "4482",
+     "role": "link",
+     "name": "Page 2",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "4486",
+     "role": "link",
+     "name": "\ue608 Page Next",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "4500",
+     "role": "textbox",
+     "name": "Sign Up for Our Newsletter:",
+     "props": {
+      "focusable": true,
+      "editable": "plaintext",
+      "settable": true,
+      "multiline": false
+     }
+    },
+    {
+     "nodeId": "2933",
+     "role": "combobox",
+     "name": "\ue615 Search",
+     "props": {
+      "focusable": true,
+      "editable": "plaintext",
+      "settable": true
+     }
+    },
+    {
+     "nodeId": "2940",
+     "role": "button",
+     "name": "Search",
+     "props": {}
+    },
+    {
+     "nodeId": "4055",
+     "role": "link",
+     "name": "1 \u00a0Review",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "4071",
+     "role": "link",
+     "name": "\ue601 Add to Wish List",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "4073",
+     "role": "link",
+     "name": "\ue61f Add to Compare",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "4094",
+     "role": "link",
+     "name": "12 \u00a0Reviews",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "4110",
+     "role": "link",
+     "name": "\ue601 Add to Wish List",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "4112",
+     "role": "link",
+     "name": "\ue61f Add to Compare",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "4133",
+     "role": "link",
+     "name": "4 \u00a0Reviews",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "4149",
+     "role": "link",
+     "name": "\ue601 Add to Wish List",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "4151",
+     "role": "link",
+     "name": "\ue61f Add to Compare",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "4172",
+     "role": "link",
+     "name": "12 \u00a0Reviews",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "4188",
+     "role": "link",
+     "name": "\ue601 Add to Wish List",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "4190",
+     "role": "link",
+     "name": "\ue61f Add to Compare",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "4211",
+     "role": "link",
+     "name": "12 \u00a0Reviews",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "4227",
+     "role": "link",
+     "name": "\ue601 Add to Wish List",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "4229",
+     "role": "link",
+     "name": "\ue61f Add to Compare",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "4255",
+     "role": "link",
+     "name": "\ue601 Add to Wish List",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "4257",
+     "role": "link",
+     "name": "\ue61f Add to Compare",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "4278",
+     "role": "link",
+     "name": "12 \u00a0Reviews",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "4294",
+     "role": "link",
+     "name": "\ue601 Add to Wish List",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "4296",
+     "role": "link",
+     "name": "\ue61f Add to Compare",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "4317",
+     "role": "link",
+     "name": "12 \u00a0Reviews",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "4333",
+     "role": "link",
+     "name": "\ue601 Add to Wish List",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "4335",
+     "role": "link",
+     "name": "\ue61f Add to Compare",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "4361",
+     "role": "link",
+     "name": "\ue601 Add to Wish List",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "4363",
+     "role": "link",
+     "name": "\ue61f Add to Compare",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "4384",
+     "role": "link",
+     "name": "12 \u00a0Reviews",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "4400",
+     "role": "link",
+     "name": "\ue601 Add to Wish List",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "4402",
+     "role": "link",
+     "name": "\ue61f Add to Compare",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "4428",
+     "role": "link",
+     "name": "\ue601 Add to Wish List",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "4430",
+     "role": "link",
+     "name": "\ue61f Add to Compare",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "4451",
+     "role": "link",
+     "name": "12 \u00a0Reviews",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "4467",
+     "role": "link",
+     "name": "\ue601 Add to Wish List",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "4469",
+     "role": "link",
+     "name": "\ue61f Add to Compare",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "2938",
+     "role": "link",
+     "name": "Advanced Search",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "4068",
+     "role": "button",
+     "name": "Add to Cart",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "4107",
+     "role": "button",
+     "name": "Add to Cart",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "4146",
+     "role": "button",
+     "name": "Add to Cart",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "4185",
+     "role": "button",
+     "name": "Add to Cart",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "4224",
+     "role": "button",
+     "name": "Add to Cart",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "4252",
+     "role": "button",
+     "name": "Add to Cart",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "4291",
+     "role": "button",
+     "name": "Add to Cart",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "4330",
+     "role": "button",
+     "name": "Add to Cart",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "4358",
+     "role": "button",
+     "name": "Add to Cart",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "4397",
+     "role": "button",
+     "name": "Add to Cart",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "4425",
+     "role": "button",
+     "name": "Add to Cart",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "4464",
+     "role": "button",
+     "name": "Add to Cart",
+     "props": {
+      "focusable": true
+     }
+    }
+   ],
+   "raw_tree_path": "research/experiments/EXP-INTEL-35697055679/artifacts/raw/axtree_task_514.json",
+   "raw_tree_sha256": "598cbbbb30839181b4e299a1e5ca8c3b3ce2a46e8790f3b15bfd5c676d6b9b07",
+   "extraction_error": null
+  },
+  {
+   "task_id": 519,
+   "intent_template": "Add the product on the current page to my wishlist",
+   "intent": "Add the product on the current page to my wishlist",
+   "instantiation_dict": {},
+   "start_url": "http://localhost:7770/iphone-13-pro-max-case-neon-turtle-iphone-13-pro-max-cases-tempered-glass-back-soft-silicone-tpu-shock-protective-case-for-apple-iphone-13-pro-max.html",
+   "http_status": 200,
+   "title": "iPhone 13 Pro Max Case, Neon Turtle iPhone 13 Pro Max Cases, Tempered Glass Back+Soft Silicone TPU Shock Protective Case for Apple iPhone 13 Pro Max",
+   "final_url": "http://localhost:7770/iphone-13-pro-max-case-neon-turtle-iphone-13-pro-max-cases-tempered-glass-back-soft-silicone-tpu-shock-protective-case-for-apple-iphone-13-pro-max.html",
+   "ax_node_count": 941,
+   "interactive_elements": [
+    {
+     "nodeId": "5393",
+     "role": "link",
+     "name": "Skip to Content",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "5398",
+     "role": "link",
+     "name": "store logo",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "6515",
+     "role": "link",
+     "name": "Home",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "6756",
+     "role": "link",
+     "name": "Add to Wish List",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "6758",
+     "role": "link",
+     "name": "Add to Compare",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "6763",
+     "role": "link",
+     "name": "Skip to the end of the images gallery",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "6799",
+     "role": "link",
+     "name": "Skip to the beginning of the images gallery",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "6804",
+     "role": "tab",
+     "name": "Details",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "6860",
+     "role": "tab",
+     "name": "Reviews (12)",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "6962",
+     "role": "link",
+     "name": "Report All Bugs",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "5381",
+     "role": "link",
+     "name": "My Account",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "5383",
+     "role": "link",
+     "name": "My Wish List",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "5385",
+     "role": "link",
+     "name": "Sign In",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "5392",
+     "role": "link",
+     "name": "Create an Account",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "5401",
+     "role": "link",
+     "name": "\ue611 My Cart",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "6543",
+     "role": "link",
+     "name": "12\u00a0 Reviews ",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "6546",
+     "role": "link",
+     "name": "Add Your Review",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "6751",
+     "role": "button",
+     "name": "Add to Cart",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "6805",
+     "role": "link",
+     "name": "Details",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "6861",
+     "role": "link",
+     "name": "Reviews (12)",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "6945",
+     "role": "button",
+     "name": "Subscribe",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "6949",
+     "role": "link",
+     "name": "Privacy and Cookie Policy",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "6951",
+     "role": "link",
+     "name": "Search Terms",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "6953",
+     "role": "link",
+     "name": "Advanced Search",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "6955",
+     "role": "link",
+     "name": "Orders and Returns",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "6957",
+     "role": "link",
+     "name": "Contact Us",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "5445",
+     "role": "menuitem",
+     "name": "\ue622 Beauty & Personal Care",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "5662",
+     "role": "menuitem",
+     "name": "\ue622 Sports & Outdoors",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "5700",
+     "role": "menuitem",
+     "name": "\ue622 Clothing, Shoes & Jewelry",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "5752",
+     "role": "menuitem",
+     "name": "\ue622 Home & Kitchen",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "5879",
+     "role": "menuitem",
+     "name": "\ue622 Office Products",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "5911",
+     "role": "menuitem",
+     "name": "\ue622 Tools & Home Improvement",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "5930",
+     "role": "menuitem",
+     "name": "\ue622 Health & Household",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "5954",
+     "role": "menuitem",
+     "name": "\ue622 Patio, Lawn & Garden",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "5973",
+     "role": "menuitem",
+     "name": "\ue622 Electronics",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "6182",
+     "role": "menuitem",
+     "name": "\ue622 Cell Phones & Accessories",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "6233",
+     "role": "menuitem",
+     "name": "\ue622 Video Games",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "6282",
+     "role": "menuitem",
+     "name": "\ue622 Grocery & Gourmet Food",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "6745",
+     "role": "spinbutton",
+     "name": "Qty",
+     "props": {
+      "focusable": true,
+      "editable": "plaintext",
+      "settable": true
+     }
+    },
+    {
+     "nodeId": "6771",
+     "role": "button",
+     "name": "Previous",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "6778",
+     "role": "button",
+     "name": "Next",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "6784",
+     "role": "button",
+     "name": "Previous",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "6794",
+     "role": "button",
+     "name": "Next",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "6941",
+     "role": "textbox",
+     "name": "Sign Up for Our Newsletter:",
+     "props": {
+      "focusable": true,
+      "editable": "plaintext",
+      "settable": true,
+      "multiline": false
+     }
+    },
+    {
+     "nodeId": "5428",
+     "role": "combobox",
+     "name": "\ue615 Search",
+     "props": {
+      "focusable": true,
+      "editable": "plaintext",
+      "settable": true
+     }
+    },
+    {
+     "nodeId": "5435",
+     "role": "button",
+     "name": "Search",
+     "props": {}
+    },
+    {
+     "nodeId": "6788",
+     "role": "button",
+     "name": "Image",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "6791",
+     "role": "button",
+     "name": "Image",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "5433",
+     "role": "link",
+     "name": "Advanced Search",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "6568",
+     "role": "radio",
+     "name": "American Flag in Eagle's Eye",
+     "props": {
+      "focusable": true,
+      "checked": "false"
+     }
+    },
+    {
+     "nodeId": "6572",
+     "role": "radio",
+     "name": "American flag Soldier Cross Pen Blank",
+     "props": {
+      "focusable": true,
+      "checked": "false"
+     }
+    },
+    {
+     "nodeId": "6576",
+     "role": "radio",
+     "name": "Black gun with grenade",
+     "props": {
+      "focusable": true,
+      "checked": "false"
+     }
+    },
+    {
+     "nodeId": "6580",
+     "role": "radio",
+     "name": "Blue and pink texture marble",
+     "props": {
+      "focusable": true,
+      "checked": "false"
+     }
+    },
+    {
+     "nodeId": "6584",
+     "role": "radio",
+     "name": "Blue Line Usa Flag",
+     "props": {
+      "focusable": true,
+      "checked": "false"
+     }
+    },
+    {
+     "nodeId": "6588",
+     "role": "radio",
+     "name": "Blue Red flag Dark White Skull",
+     "props": {
+      "focusable": true,
+      "checked": "false"
+     }
+    },
+    {
+     "nodeId": "6592",
+     "role": "radio",
+     "name": "Blue starry fantasy wolf",
+     "props": {
+      "focusable": true,
+      "checked": "false"
+     }
+    },
+    {
+     "nodeId": "6596",
+     "role": "radio",
+     "name": "Camouflage flag",
+     "props": {
+      "focusable": true,
+      "checked": "false"
+     }
+    },
+    {
+     "nodeId": "6600",
+     "role": "radio",
+     "name": "Chemistry art 4K",
+     "props": {
+      "focusable": true,
+      "checked": "false"
+     }
+    },
+    {
+     "nodeId": "6604",
+     "role": "radio",
+     "name": "Cheshire Cat",
+     "props": {
+      "focusable": true,
+      "checked": "false"
+     }
+    },
+    {
+     "nodeId": "6608",
+     "role": "radio",
+     "name": "Colorful and cool DJ dog",
+     "props": {
+      "focusable": true,
+      "checked": "false"
+     }
+    },
+    {
+     "nodeId": "6612",
+     "role": "radio",
+     "name": "Colorful Beautiful Pineapple",
+     "props": {
+      "focusable": true,
+      "checked": "false"
+     }
+    },
+    {
+     "nodeId": "6616",
+     "role": "radio",
+     "name": "Colorful Dragonfly",
+     "props": {
+      "focusable": true,
+      "checked": "false"
+     }
+    },
+    {
+     "nodeId": "6620",
+     "role": "radio",
+     "name": "Colorful Space planet 2",
+     "props": {
+      "focusable": true,
+      "checked": "false"
+     }
+    },
+    {
+     "nodeId": "6624",
+     "role": "radio",
+     "name": "cosmonaut astronaut space suit",
+     "props": {
+      "focusable": true,
+      "checked": "false"
+     }
+    },
+    {
+     "nodeId": "6628",
+     "role": "radio",
+     "name": "Embroidery bee and crown",
+     "props": {
+      "focusable": true,
+      "checked": "false"
+     }
+    },
+    {
+     "nodeId": "6632",
+     "role": "radio",
+     "name": "Five Finger Death Punch Skull",
+     "props": {
+      "focusable": true,
+      "checked": "false"
+     }
+    },
+    {
+     "nodeId": "6636",
+     "role": "radio",
+     "name": "gambar senjata keren",
+     "props": {
+      "focusable": true,
+      "checked": "false"
+     }
+    },
+    {
+     "nodeId": "6640",
+     "role": "radio",
+     "name": "Golden bullet",
+     "props": {
+      "focusable": true,
+      "checked": "false"
+     }
+    },
+    {
+     "nodeId": "6644",
+     "role": "radio",
+     "name": "gun ammunition american flag",
+     "props": {
+      "focusable": true,
+      "checked": "false"
+     }
+    },
+    {
+     "nodeId": "6648",
+     "role": "radio",
+     "name": "gun rose",
+     "props": {
+      "focusable": true,
+      "checked": "false"
+     }
+    },
+    {
+     "nodeId": "6652",
+     "role": "radio",
+     "name": "Halloween Skeletons Men And Girl",
+     "props": {
+      "focusable": true,
+      "checked": "false"
+     }
+    },
+    {
+     "nodeId": "6656",
+     "role": "radio",
+     "name": "king crown the one",
+     "props": {
+      "focusable": true,
+      "checked": "false"
+     }
+    },
+    {
+     "nodeId": "6660",
+     "role": "radio",
+     "name": "Mandala lotus yoga",
+     "props": {
+      "focusable": true,
+      "checked": "false"
+     }
+    },
+    {
+     "nodeId": "6664",
+     "role": "radio",
+     "name": "Moon sky mountain range mandala",
+     "props": {
+      "focusable": true,
+      "checked": "false"
+     }
+    },
+    {
+     "nodeId": "6668",
+     "role": "radio",
+     "name": "Neon Turtle",
+     "props": {
+      "focusable": true,
+      "checked": "false"
+     }
+    },
+    {
+     "nodeId": "6672",
+     "role": "radio",
+     "name": "Purple Fantasy Starlight Wolf",
+     "props": {
+      "focusable": true,
+      "checked": "false"
+     }
+    },
+    {
+     "nodeId": "6676",
+     "role": "radio",
+     "name": "Queen Diamond Crown",
+     "props": {
+      "focusable": true,
+      "checked": "false"
+     }
+    },
+    {
+     "nodeId": "6680",
+     "role": "radio",
+     "name": "Skeleton wormboy art",
+     "props": {
+      "focusable": true,
+      "checked": "false"
+     }
+    },
+    {
+     "nodeId": "6684",
+     "role": "radio",
+     "name": "Sunflower American Flag",
+     "props": {
+      "focusable": true,
+      "checked": "false"
+     }
+    },
+    {
+     "nodeId": "6688",
+     "role": "radio",
+     "name": "Sunflower skull seamless pattern",
+     "props": {
+      "focusable": true,
+      "checked": "false"
+     }
+    },
+    {
+     "nodeId": "6692",
+     "role": "radio",
+     "name": "The Sun Will Rise",
+     "props": {
+      "focusable": true,
+      "checked": "false"
+     }
+    },
+    {
+     "nodeId": "6696",
+     "role": "radio",
+     "name": "Thin red line flag",
+     "props": {
+      "focusable": true,
+      "checked": "false"
+     }
+    },
+    {
+     "nodeId": "6700",
+     "role": "radio",
+     "name": "Unicorn skull with mane",
+     "props": {
+      "focusable": true,
+      "checked": "false"
+     }
+    },
+    {
+     "nodeId": "6704",
+     "role": "radio",
+     "name": "USA astronaut",
+     "props": {
+      "focusable": true,
+      "checked": "false"
+     }
+    },
+    {
+     "nodeId": "6708",
+     "role": "radio",
+     "name": "USA Red Baseball Flag",
+     "props": {
+      "focusable": true,
+      "checked": "false"
+     }
+    },
+    {
+     "nodeId": "6712",
+     "role": "radio",
+     "name": "Yellow baseball American Flag",
+     "props": {
+      "focusable": true,
+      "checked": "false"
+     }
+    },
+    {
+     "nodeId": "6722",
+     "role": "radio",
+     "name": "iPhone 13 Mini(5.4 inch)",
+     "props": {
+      "focusable": true,
+      "checked": "false"
+     }
+    },
+    {
+     "nodeId": "6726",
+     "role": "radio",
+     "name": "iPhone 13 Pro Max(6.7 inch)",
+     "props": {
+      "focusable": true,
+      "checked": "false"
+     }
+    },
+    {
+     "nodeId": "6730",
+     "role": "radio",
+     "name": "iPhone 13 Pro(6.1 inch)",
+     "props": {
+      "focusable": true,
+      "checked": "false"
+     }
+    },
+    {
+     "nodeId": "6734",
+     "role": "radio",
+     "name": "iPhone 13(6.1 inch)",
+     "props": {
+      "focusable": true,
+      "checked": "false"
+     }
+    }
+   ],
+   "raw_tree_path": "research/experiments/EXP-INTEL-35697055679/artifacts/raw/axtree_task_519.json",
+   "raw_tree_sha256": "6163b3ad7151b456ef705bc27c3d1de0940850e82c7f8a7ef7f055f724396b16",
+   "extraction_error": null
+  },
+  {
+   "task_id": 434,
+   "intent_template": "Add the product with the lowest per unit price from my open tabs to the shopping cart",
+   "intent": "Add the product with the lowest per unit price from my open tabs to the shopping cart",
+   "instantiation_dict": {},
+   "start_url": "http://localhost:7770/3-pairs-ruffle-socks-lace-ankle-socks-for-girls-frilly-socks-women-decorative.html",
+   "http_status": 200,
+   "title": "3 Pairs Ruffle Socks Lace Ankle Socks For Girls,Frilly Socks Women Decorative\u2026",
+   "final_url": "http://localhost:7770/3-pairs-ruffle-socks-lace-ankle-socks-for-girls-frilly-socks-women-decorative.html",
+   "ax_node_count": 728,
+   "interactive_elements": [
+    {
+     "nodeId": "7806",
+     "role": "link",
+     "name": "Skip to Content",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "7811",
+     "role": "link",
+     "name": "store logo",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "8928",
+     "role": "link",
+     "name": "Home",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "9035",
+     "role": "link",
+     "name": "Add to Wish List",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "9037",
+     "role": "link",
+     "name": "Add to Compare",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "9042",
+     "role": "link",
+     "name": "Skip to the end of the images gallery",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "9079",
+     "role": "link",
+     "name": "Skip to the beginning of the images gallery",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "9084",
+     "role": "tab",
+     "name": "Details",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "9125",
+     "role": "tab",
+     "name": "Reviews (6)",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "9227",
+     "role": "link",
+     "name": "Report All Bugs",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "7794",
+     "role": "link",
+     "name": "My Account",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "7796",
+     "role": "link",
+     "name": "My Wish List",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "7798",
+     "role": "link",
+     "name": "Sign In",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "7805",
+     "role": "link",
+     "name": "Create an Account",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "7814",
+     "role": "link",
+     "name": "\ue611 My Cart",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "8956",
+     "role": "link",
+     "name": "6\u00a0 Reviews ",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "8959",
+     "role": "link",
+     "name": "Add Your Review",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "9030",
+     "role": "button",
+     "name": "Add to Cart",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "9085",
+     "role": "link",
+     "name": "Details",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "9126",
+     "role": "link",
+     "name": "Reviews (6)",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "9210",
+     "role": "button",
+     "name": "Subscribe",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "9214",
+     "role": "link",
+     "name": "Privacy and Cookie Policy",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "9216",
+     "role": "link",
+     "name": "Search Terms",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "9218",
+     "role": "link",
+     "name": "Advanced Search",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "9220",
+     "role": "link",
+     "name": "Orders and Returns",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "9222",
+     "role": "link",
+     "name": "Contact Us",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "7858",
+     "role": "menuitem",
+     "name": "\ue622 Beauty & Personal Care",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "8075",
+     "role": "menuitem",
+     "name": "\ue622 Sports & Outdoors",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "8113",
+     "role": "menuitem",
+     "name": "\ue622 Clothing, Shoes & Jewelry",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "8165",
+     "role": "menuitem",
+     "name": "\ue622 Home & Kitchen",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "8292",
+     "role": "menuitem",
+     "name": "\ue622 Office Products",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "8324",
+     "role": "menuitem",
+     "name": "\ue622 Tools & Home Improvement",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "8343",
+     "role": "menuitem",
+     "name": "\ue622 Health & Household",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "8367",
+     "role": "menuitem",
+     "name": "\ue622 Patio, Lawn & Garden",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "8386",
+     "role": "menuitem",
+     "name": "\ue622 Electronics",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "8595",
+     "role": "menuitem",
+     "name": "\ue622 Cell Phones & Accessories",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "8646",
+     "role": "menuitem",
+     "name": "\ue622 Video Games",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "8695",
+     "role": "menuitem",
+     "name": "\ue622 Grocery & Gourmet Food",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "9024",
+     "role": "spinbutton",
+     "name": "Qty",
+     "props": {
+      "focusable": true,
+      "editable": "plaintext",
+      "settable": true
+     }
+    },
+    {
+     "nodeId": "9050",
+     "role": "button",
+     "name": "Previous",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "9057",
+     "role": "button",
+     "name": "Next",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "9064",
+     "role": "button",
+     "name": "Previous",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "9074",
+     "role": "button",
+     "name": "Next",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "9206",
+     "role": "textbox",
+     "name": "Sign Up for Our Newsletter:",
+     "props": {
+      "focusable": true,
+      "editable": "plaintext",
+      "settable": true,
+      "multiline": false
+     }
+    },
+    {
+     "nodeId": "7841",
+     "role": "combobox",
+     "name": "\ue615 Search",
+     "props": {
+      "focusable": true,
+      "editable": "plaintext",
+      "settable": true
+     }
+    },
+    {
+     "nodeId": "7848",
+     "role": "button",
+     "name": "Search",
+     "props": {}
+    },
+    {
+     "nodeId": "9068",
+     "role": "button",
+     "name": "Image",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "9071",
+     "role": "button",
+     "name": "Image",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "7846",
+     "role": "link",
+     "name": "Advanced Search",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "8981",
+     "role": "radio",
+     "name": "Black",
+     "props": {
+      "focusable": true,
+      "checked": "false"
+     }
+    },
+    {
+     "nodeId": "8985",
+     "role": "radio",
+     "name": "Chrysanthemum",
+     "props": {
+      "focusable": true,
+      "checked": "false"
+     }
+    },
+    {
+     "nodeId": "8989",
+     "role": "radio",
+     "name": "Dark Blue",
+     "props": {
+      "focusable": true,
+      "checked": "false"
+     }
+    },
+    {
+     "nodeId": "8993",
+     "role": "radio",
+     "name": "Printing",
+     "props": {
+      "focusable": true,
+      "checked": "false"
+     }
+    },
+    {
+     "nodeId": "8997",
+     "role": "radio",
+     "name": "Purple Green Pink",
+     "props": {
+      "focusable": true,
+      "checked": "false"
+     }
+    },
+    {
+     "nodeId": "9001",
+     "role": "radio",
+     "name": "Strawberry",
+     "props": {
+      "focusable": true,
+      "checked": "false"
+     }
+    },
+    {
+     "nodeId": "9005",
+     "role": "radio",
+     "name": "White and Red Rose Flower",
+     "props": {
+      "focusable": true,
+      "checked": "false"
+     }
+    },
+    {
+     "nodeId": "9009",
+     "role": "radio",
+     "name": "White Lace",
+     "props": {
+      "focusable": true,
+      "checked": "false"
+     }
+    },
+    {
+     "nodeId": "9013",
+     "role": "radio",
+     "name": "White Rose",
+     "props": {
+      "focusable": true,
+      "checked": "false"
+     }
+    }
+   ],
+   "raw_tree_path": "research/experiments/EXP-INTEL-35697055679/artifacts/raw/axtree_task_434.json",
+   "raw_tree_sha256": "7ed65acf3452d2009eaedf637bdc930c66ed312d62ee27abd69b987f37ca2d46",
+   "extraction_error": null
+  },
+  {
+   "task_id": 468,
+   "intent_template": "Add {{product}} to my wish list",
+   "intent": "Add DkRgVNY Lace Spcling Lingerie Womens Sexy Hollow Out Underwear Bodysuit One Piece Snap Crotch Clubwear Teddy Bodysuit to my wish list",
+   "instantiation_dict": {
+    "product": "DkRgVNY Lace Spcling Lingerie Womens Sexy Hollow Out Underwear Bodysuit One Piece Snap Crotch Clubwear Teddy Bodysuit"
+   },
+   "start_url": "http://localhost:7770",
+   "http_status": 200,
+   "title": "One Stop Market",
+   "final_url": "http://localhost:7770/",
+   "ax_node_count": 1426,
+   "interactive_elements": [
+    {
+     "nodeId": "9987",
+     "role": "link",
+     "name": "Skip to Content",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "9992",
+     "role": "link",
+     "name": "store logo",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "11610",
+     "role": "link",
+     "name": "Report All Bugs",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "9975",
+     "role": "link",
+     "name": "My Account",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "9977",
+     "role": "link",
+     "name": "My Wish List",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "9979",
+     "role": "link",
+     "name": "Sign In",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "9986",
+     "role": "link",
+     "name": "Create an Account",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "9995",
+     "role": "link",
+     "name": "\ue611 My Cart",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "11127",
+     "role": "link",
+     "name": "Image",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "11166",
+     "role": "link",
+     "name": "Image",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "11205",
+     "role": "link",
+     "name": "Image",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "11244",
+     "role": "link",
+     "name": "Image",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "11283",
+     "role": "link",
+     "name": "Image",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "11322",
+     "role": "link",
+     "name": "Image",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "11350",
+     "role": "link",
+     "name": "Image",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "11389",
+     "role": "link",
+     "name": "Image",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "11428",
+     "role": "link",
+     "name": "Image",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "11456",
+     "role": "link",
+     "name": "Image",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "11495",
+     "role": "link",
+     "name": "Image",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "11523",
+     "role": "link",
+     "name": "Image",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "11593",
+     "role": "button",
+     "name": "Subscribe",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "11597",
+     "role": "link",
+     "name": "Privacy and Cookie Policy",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "11599",
+     "role": "link",
+     "name": "Search Terms",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "11601",
+     "role": "link",
+     "name": "Advanced Search",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "11603",
+     "role": "link",
+     "name": "Orders and Returns",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "11605",
+     "role": "link",
+     "name": "Contact Us",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "10039",
+     "role": "menuitem",
+     "name": "\ue622 Beauty & Personal Care",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "10256",
+     "role": "menuitem",
+     "name": "\ue622 Sports & Outdoors",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "10294",
+     "role": "menuitem",
+     "name": "\ue622 Clothing, Shoes & Jewelry",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "10346",
+     "role": "menuitem",
+     "name": "\ue622 Home & Kitchen",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "10473",
+     "role": "menuitem",
+     "name": "\ue622 Office Products",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "10505",
+     "role": "menuitem",
+     "name": "\ue622 Tools & Home Improvement",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "10524",
+     "role": "menuitem",
+     "name": "\ue622 Health & Household",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "10548",
+     "role": "menuitem",
+     "name": "\ue622 Patio, Lawn & Garden",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "10567",
+     "role": "menuitem",
+     "name": "\ue622 Electronics",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "10776",
+     "role": "menuitem",
+     "name": "\ue622 Cell Phones & Accessories",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "10827",
+     "role": "menuitem",
+     "name": "\ue622 Video Games",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "10876",
+     "role": "menuitem",
+     "name": "\ue622 Grocery & Gourmet Food",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "11134",
+     "role": "link",
+     "name": "Pre-baked Gingerbread House Kit Value Pack, 17 oz., Pack of 2, Total 34 oz.",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "11173",
+     "role": "link",
+     "name": "V8 +Energy, Healthy Energy Drink, Steady Energy from Black and Green Tea, Pomegranate Blueberry, 8 Ounce Can ,Pack of 24",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "11212",
+     "role": "link",
+     "name": "Elmwood Inn Fine Teas, Orange Vanilla Caffeine-free Fruit Infusion, 16-Ounce Pouch",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "11251",
+     "role": "link",
+     "name": "Belle Of The Ball Princess Sprinkle Mix| Wedding Colorful Sprinkles| Cake Cupcake Cookie Sprinkles| Ice cream Candy Sprinkles| Yellow Gold Red Royal Red Rose Icing Flowers Decorating Sprinkles, 8OZ",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "11290",
+     "role": "link",
+     "name": "So Delicious Dairy Free CocoWhip Light, Vegan, Non-GMO Project Verified, 9 oz. Tub",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "11329",
+     "role": "link",
+     "name": "Cheongeun Sweet Potato Starch Powder 500g, 2ea(Sweet Potato 55%, Corn 45%)",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "11357",
+     "role": "link",
+     "name": "Q Mixers Premium Ginger Ale: Real Ingredients & Less Sweet, 6.7 Fl Oz (24 Bottles)",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "11396",
+     "role": "link",
+     "name": "Stove Top Turkey Stuffing Mix (12 oz Boxes, Pack of 2)",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "11435",
+     "role": "link",
+     "name": "Briess DME - Pilsen Light - 1 lb Bag",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "11463",
+     "role": "link",
+     "name": "Tony Chachere's More Spice Creole Seasoning - 14 oz",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "11502",
+     "role": "link",
+     "name": "Lobster Cobbler Pot Pie - Gourmet Frozen Seafood Appetizers (Set of 8 Trays)",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "11530",
+     "role": "link",
+     "name": "Crunchy Rice Rollers - Gluten Free - Vegan - 3.5 oz Individual Packs (4 Packs of 8 Rollers)",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "11571",
+     "role": "link",
+     "name": "Page 2",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "11575",
+     "role": "link",
+     "name": "\ue608 Page Next",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "11589",
+     "role": "textbox",
+     "name": "Sign Up for Our Newsletter:",
+     "props": {
+      "focusable": true,
+      "editable": "plaintext",
+      "settable": true,
+      "multiline": false
+     }
+    },
+    {
+     "nodeId": "10022",
+     "role": "combobox",
+     "name": "\ue615 Search",
+     "props": {
+      "focusable": true,
+      "editable": "plaintext",
+      "settable": true
+     }
+    },
+    {
+     "nodeId": "10029",
+     "role": "button",
+     "name": "Search",
+     "props": {}
+    },
+    {
+     "nodeId": "11144",
+     "role": "link",
+     "name": "1 \u00a0Review",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "11160",
+     "role": "link",
+     "name": "\ue601 Add to Wish List",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "11162",
+     "role": "link",
+     "name": "\ue61f Add to Compare",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "11183",
+     "role": "link",
+     "name": "12 \u00a0Reviews",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "11199",
+     "role": "link",
+     "name": "\ue601 Add to Wish List",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "11201",
+     "role": "link",
+     "name": "\ue61f Add to Compare",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "11222",
+     "role": "link",
+     "name": "4 \u00a0Reviews",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "11238",
+     "role": "link",
+     "name": "\ue601 Add to Wish List",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "11240",
+     "role": "link",
+     "name": "\ue61f Add to Compare",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "11261",
+     "role": "link",
+     "name": "12 \u00a0Reviews",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "11277",
+     "role": "link",
+     "name": "\ue601 Add to Wish List",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "11279",
+     "role": "link",
+     "name": "\ue61f Add to Compare",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "11300",
+     "role": "link",
+     "name": "12 \u00a0Reviews",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "11316",
+     "role": "link",
+     "name": "\ue601 Add to Wish List",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "11318",
+     "role": "link",
+     "name": "\ue61f Add to Compare",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "11344",
+     "role": "link",
+     "name": "\ue601 Add to Wish List",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "11346",
+     "role": "link",
+     "name": "\ue61f Add to Compare",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "11367",
+     "role": "link",
+     "name": "12 \u00a0Reviews",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "11383",
+     "role": "link",
+     "name": "\ue601 Add to Wish List",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "11385",
+     "role": "link",
+     "name": "\ue61f Add to Compare",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "11406",
+     "role": "link",
+     "name": "12 \u00a0Reviews",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "11422",
+     "role": "link",
+     "name": "\ue601 Add to Wish List",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "11424",
+     "role": "link",
+     "name": "\ue61f Add to Compare",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "11450",
+     "role": "link",
+     "name": "\ue601 Add to Wish List",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "11452",
+     "role": "link",
+     "name": "\ue61f Add to Compare",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "11473",
+     "role": "link",
+     "name": "12 \u00a0Reviews",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "11489",
+     "role": "link",
+     "name": "\ue601 Add to Wish List",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "11491",
+     "role": "link",
+     "name": "\ue61f Add to Compare",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "11517",
+     "role": "link",
+     "name": "\ue601 Add to Wish List",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "11519",
+     "role": "link",
+     "name": "\ue61f Add to Compare",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "11540",
+     "role": "link",
+     "name": "12 \u00a0Reviews",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "11556",
+     "role": "link",
+     "name": "\ue601 Add to Wish List",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "11558",
+     "role": "link",
+     "name": "\ue61f Add to Compare",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "10027",
+     "role": "link",
+     "name": "Advanced Search",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "11157",
+     "role": "button",
+     "name": "Add to Cart",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "11196",
+     "role": "button",
+     "name": "Add to Cart",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "11235",
+     "role": "button",
+     "name": "Add to Cart",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "11274",
+     "role": "button",
+     "name": "Add to Cart",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "11313",
+     "role": "button",
+     "name": "Add to Cart",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "11341",
+     "role": "button",
+     "name": "Add to Cart",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "11380",
+     "role": "button",
+     "name": "Add to Cart",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "11419",
+     "role": "button",
+     "name": "Add to Cart",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "11447",
+     "role": "button",
+     "name": "Add to Cart",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "11486",
+     "role": "button",
+     "name": "Add to Cart",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "11514",
+     "role": "button",
+     "name": "Add to Cart",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "11553",
+     "role": "button",
+     "name": "Add to Cart",
+     "props": {
+      "focusable": true
+     }
+    }
+   ],
+   "raw_tree_path": "research/experiments/EXP-INTEL-35697055679/artifacts/raw/axtree_task_468.json",
+   "raw_tree_sha256": "e6468305ab06d4d2bcff5bd1c101438cb486d5f473dd51aae3229244755f3a15",
+   "extraction_error": null
+  },
+  {
+   "task_id": 506,
+   "intent_template": "Buy the highest rated product from the {{product_category}} category within a budget {{dollar_value}}. Discard any items in your cart if it is not empty.",
+   "intent": "Buy the highest rated product from the meat substitute category within a budget between 100 and 200. Discard any items in your cart if it is not empty.",
+   "instantiation_dict": {
+    "product_category": "meat substitute",
+    "dollar_value": "between 100 and 200"
+   },
+   "start_url": "http://localhost:7770",
+   "http_status": 200,
+   "title": "One Stop Market",
+   "final_url": "http://localhost:7770/",
+   "ax_node_count": 1426,
+   "interactive_elements": [
+    {
+     "nodeId": "12451",
+     "role": "link",
+     "name": "Skip to Content",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "12456",
+     "role": "link",
+     "name": "store logo",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "14074",
+     "role": "link",
+     "name": "Report All Bugs",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "12439",
+     "role": "link",
+     "name": "My Account",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "12441",
+     "role": "link",
+     "name": "My Wish List",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "12443",
+     "role": "link",
+     "name": "Sign In",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "12450",
+     "role": "link",
+     "name": "Create an Account",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "12459",
+     "role": "link",
+     "name": "\ue611 My Cart",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "13591",
+     "role": "link",
+     "name": "Image",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "13630",
+     "role": "link",
+     "name": "Image",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "13669",
+     "role": "link",
+     "name": "Image",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "13708",
+     "role": "link",
+     "name": "Image",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "13747",
+     "role": "link",
+     "name": "Image",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "13786",
+     "role": "link",
+     "name": "Image",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "13814",
+     "role": "link",
+     "name": "Image",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "13853",
+     "role": "link",
+     "name": "Image",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "13892",
+     "role": "link",
+     "name": "Image",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "13920",
+     "role": "link",
+     "name": "Image",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "13959",
+     "role": "link",
+     "name": "Image",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "13987",
+     "role": "link",
+     "name": "Image",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "14057",
+     "role": "button",
+     "name": "Subscribe",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "14061",
+     "role": "link",
+     "name": "Privacy and Cookie Policy",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "14063",
+     "role": "link",
+     "name": "Search Terms",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "14065",
+     "role": "link",
+     "name": "Advanced Search",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "14067",
+     "role": "link",
+     "name": "Orders and Returns",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "14069",
+     "role": "link",
+     "name": "Contact Us",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "12503",
+     "role": "menuitem",
+     "name": "\ue622 Beauty & Personal Care",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "12720",
+     "role": "menuitem",
+     "name": "\ue622 Sports & Outdoors",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "12758",
+     "role": "menuitem",
+     "name": "\ue622 Clothing, Shoes & Jewelry",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "12810",
+     "role": "menuitem",
+     "name": "\ue622 Home & Kitchen",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "12937",
+     "role": "menuitem",
+     "name": "\ue622 Office Products",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "12969",
+     "role": "menuitem",
+     "name": "\ue622 Tools & Home Improvement",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "12988",
+     "role": "menuitem",
+     "name": "\ue622 Health & Household",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "13012",
+     "role": "menuitem",
+     "name": "\ue622 Patio, Lawn & Garden",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "13031",
+     "role": "menuitem",
+     "name": "\ue622 Electronics",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "13240",
+     "role": "menuitem",
+     "name": "\ue622 Cell Phones & Accessories",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "13291",
+     "role": "menuitem",
+     "name": "\ue622 Video Games",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "13340",
+     "role": "menuitem",
+     "name": "\ue622 Grocery & Gourmet Food",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "13598",
+     "role": "link",
+     "name": "Pre-baked Gingerbread House Kit Value Pack, 17 oz., Pack of 2, Total 34 oz.",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "13637",
+     "role": "link",
+     "name": "V8 +Energy, Healthy Energy Drink, Steady Energy from Black and Green Tea, Pomegranate Blueberry, 8 Ounce Can ,Pack of 24",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "13676",
+     "role": "link",
+     "name": "Elmwood Inn Fine Teas, Orange Vanilla Caffeine-free Fruit Infusion, 16-Ounce Pouch",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "13715",
+     "role": "link",
+     "name": "Belle Of The Ball Princess Sprinkle Mix| Wedding Colorful Sprinkles| Cake Cupcake Cookie Sprinkles| Ice cream Candy Sprinkles| Yellow Gold Red Royal Red Rose Icing Flowers Decorating Sprinkles, 8OZ",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "13754",
+     "role": "link",
+     "name": "So Delicious Dairy Free CocoWhip Light, Vegan, Non-GMO Project Verified, 9 oz. Tub",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "13793",
+     "role": "link",
+     "name": "Cheongeun Sweet Potato Starch Powder 500g, 2ea(Sweet Potato 55%, Corn 45%)",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "13821",
+     "role": "link",
+     "name": "Q Mixers Premium Ginger Ale: Real Ingredients & Less Sweet, 6.7 Fl Oz (24 Bottles)",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "13860",
+     "role": "link",
+     "name": "Stove Top Turkey Stuffing Mix (12 oz Boxes, Pack of 2)",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "13899",
+     "role": "link",
+     "name": "Briess DME - Pilsen Light - 1 lb Bag",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "13927",
+     "role": "link",
+     "name": "Tony Chachere's More Spice Creole Seasoning - 14 oz",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "13966",
+     "role": "link",
+     "name": "Lobster Cobbler Pot Pie - Gourmet Frozen Seafood Appetizers (Set of 8 Trays)",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "13994",
+     "role": "link",
+     "name": "Crunchy Rice Rollers - Gluten Free - Vegan - 3.5 oz Individual Packs (4 Packs of 8 Rollers)",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "14035",
+     "role": "link",
+     "name": "Page 2",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "14039",
+     "role": "link",
+     "name": "\ue608 Page Next",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "14053",
+     "role": "textbox",
+     "name": "Sign Up for Our Newsletter:",
+     "props": {
+      "focusable": true,
+      "editable": "plaintext",
+      "settable": true,
+      "multiline": false
+     }
+    },
+    {
+     "nodeId": "12486",
+     "role": "combobox",
+     "name": "\ue615 Search",
+     "props": {
+      "focusable": true,
+      "editable": "plaintext",
+      "settable": true
+     }
+    },
+    {
+     "nodeId": "12493",
+     "role": "button",
+     "name": "Search",
+     "props": {}
+    },
+    {
+     "nodeId": "13608",
+     "role": "link",
+     "name": "1 \u00a0Review",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "13624",
+     "role": "link",
+     "name": "\ue601 Add to Wish List",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "13626",
+     "role": "link",
+     "name": "\ue61f Add to Compare",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "13647",
+     "role": "link",
+     "name": "12 \u00a0Reviews",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "13663",
+     "role": "link",
+     "name": "\ue601 Add to Wish List",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "13665",
+     "role": "link",
+     "name": "\ue61f Add to Compare",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "13686",
+     "role": "link",
+     "name": "4 \u00a0Reviews",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "13702",
+     "role": "link",
+     "name": "\ue601 Add to Wish List",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "13704",
+     "role": "link",
+     "name": "\ue61f Add to Compare",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "13725",
+     "role": "link",
+     "name": "12 \u00a0Reviews",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "13741",
+     "role": "link",
+     "name": "\ue601 Add to Wish List",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "13743",
+     "role": "link",
+     "name": "\ue61f Add to Compare",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "13764",
+     "role": "link",
+     "name": "12 \u00a0Reviews",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "13780",
+     "role": "link",
+     "name": "\ue601 Add to Wish List",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "13782",
+     "role": "link",
+     "name": "\ue61f Add to Compare",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "13808",
+     "role": "link",
+     "name": "\ue601 Add to Wish List",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "13810",
+     "role": "link",
+     "name": "\ue61f Add to Compare",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "13831",
+     "role": "link",
+     "name": "12 \u00a0Reviews",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "13847",
+     "role": "link",
+     "name": "\ue601 Add to Wish List",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "13849",
+     "role": "link",
+     "name": "\ue61f Add to Compare",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "13870",
+     "role": "link",
+     "name": "12 \u00a0Reviews",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "13886",
+     "role": "link",
+     "name": "\ue601 Add to Wish List",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "13888",
+     "role": "link",
+     "name": "\ue61f Add to Compare",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "13914",
+     "role": "link",
+     "name": "\ue601 Add to Wish List",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "13916",
+     "role": "link",
+     "name": "\ue61f Add to Compare",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "13937",
+     "role": "link",
+     "name": "12 \u00a0Reviews",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "13953",
+     "role": "link",
+     "name": "\ue601 Add to Wish List",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "13955",
+     "role": "link",
+     "name": "\ue61f Add to Compare",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "13981",
+     "role": "link",
+     "name": "\ue601 Add to Wish List",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "13983",
+     "role": "link",
+     "name": "\ue61f Add to Compare",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "14004",
+     "role": "link",
+     "name": "12 \u00a0Reviews",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "14020",
+     "role": "link",
+     "name": "\ue601 Add to Wish List",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "14022",
+     "role": "link",
+     "name": "\ue61f Add to Compare",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "12491",
+     "role": "link",
+     "name": "Advanced Search",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "13621",
+     "role": "button",
+     "name": "Add to Cart",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "13660",
+     "role": "button",
+     "name": "Add to Cart",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "13699",
+     "role": "button",
+     "name": "Add to Cart",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "13738",
+     "role": "button",
+     "name": "Add to Cart",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "13777",
+     "role": "button",
+     "name": "Add to Cart",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "13805",
+     "role": "button",
+     "name": "Add to Cart",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "13844",
+     "role": "button",
+     "name": "Add to Cart",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "13883",
+     "role": "button",
+     "name": "Add to Cart",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "13911",
+     "role": "button",
+     "name": "Add to Cart",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "13950",
+     "role": "button",
+     "name": "Add to Cart",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "13978",
+     "role": "button",
+     "name": "Add to Cart",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "14017",
+     "role": "button",
+     "name": "Add to Cart",
+     "props": {
+      "focusable": true
+     }
+    }
+   ],
+   "raw_tree_path": "research/experiments/EXP-INTEL-35697055679/artifacts/raw/axtree_task_506.json",
+   "raw_tree_sha256": "4a818f88bfcbec7e72c73e2ccd3824c3311d4eec86f80b38e1cd1619ba720673",
+   "extraction_error": null
+  },
+  {
+   "task_id": 794,
+   "intent_template": "Change the delivery address for {{order_selector}} to {{address}}.",
+   "intent": "Change the delivery address for my most recent non canceled order to 4000 Forbes Ave, Pittsburgh, PA.",
+   "instantiation_dict": {
+    "order_selector": "my most recent non canceled order",
+    "address": "4000 Forbes Ave, Pittsburgh, PA"
+   },
+   "start_url": "http://localhost:7770",
+   "http_status": 200,
+   "title": "One Stop Market",
+   "final_url": "http://localhost:7770/",
+   "ax_node_count": 1426,
+   "interactive_elements": [
+    {
+     "nodeId": "14917",
+     "role": "link",
+     "name": "Skip to Content",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "14922",
+     "role": "link",
+     "name": "store logo",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "16539",
+     "role": "link",
+     "name": "Report All Bugs",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "14905",
+     "role": "link",
+     "name": "My Account",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "14907",
+     "role": "link",
+     "name": "My Wish List",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "14909",
+     "role": "link",
+     "name": "Sign In",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "14916",
+     "role": "link",
+     "name": "Create an Account",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "14925",
+     "role": "link",
+     "name": "\ue611 My Cart",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "16057",
+     "role": "link",
+     "name": "Image",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "16096",
+     "role": "link",
+     "name": "Image",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "16135",
+     "role": "link",
+     "name": "Image",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "16174",
+     "role": "link",
+     "name": "Image",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "16213",
+     "role": "link",
+     "name": "Image",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "16252",
+     "role": "link",
+     "name": "Image",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "16280",
+     "role": "link",
+     "name": "Image",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "16319",
+     "role": "link",
+     "name": "Image",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "16358",
+     "role": "link",
+     "name": "Image",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "16386",
+     "role": "link",
+     "name": "Image",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "16425",
+     "role": "link",
+     "name": "Image",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "16452",
+     "role": "link",
+     "name": "Image",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "16522",
+     "role": "button",
+     "name": "Subscribe",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "16526",
+     "role": "link",
+     "name": "Privacy and Cookie Policy",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "16528",
+     "role": "link",
+     "name": "Search Terms",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "16530",
+     "role": "link",
+     "name": "Advanced Search",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "16532",
+     "role": "link",
+     "name": "Orders and Returns",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "16534",
+     "role": "link",
+     "name": "Contact Us",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "14969",
+     "role": "menuitem",
+     "name": "\ue622 Beauty & Personal Care",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "15186",
+     "role": "menuitem",
+     "name": "\ue622 Sports & Outdoors",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "15224",
+     "role": "menuitem",
+     "name": "\ue622 Clothing, Shoes & Jewelry",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "15276",
+     "role": "menuitem",
+     "name": "\ue622 Home & Kitchen",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "15403",
+     "role": "menuitem",
+     "name": "\ue622 Office Products",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "15435",
+     "role": "menuitem",
+     "name": "\ue622 Tools & Home Improvement",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "15454",
+     "role": "menuitem",
+     "name": "\ue622 Health & Household",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "15478",
+     "role": "menuitem",
+     "name": "\ue622 Patio, Lawn & Garden",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "15497",
+     "role": "menuitem",
+     "name": "\ue622 Electronics",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "15706",
+     "role": "menuitem",
+     "name": "\ue622 Cell Phones & Accessories",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "15757",
+     "role": "menuitem",
+     "name": "\ue622 Video Games",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "15806",
+     "role": "menuitem",
+     "name": "\ue622 Grocery & Gourmet Food",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "16064",
+     "role": "link",
+     "name": "Pre-baked Gingerbread House Kit Value Pack, 17 oz., Pack of 2, Total 34 oz.",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "16103",
+     "role": "link",
+     "name": "V8 +Energy, Healthy Energy Drink, Steady Energy from Black and Green Tea, Pomegranate Blueberry, 8 Ounce Can ,Pack of 24",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "16142",
+     "role": "link",
+     "name": "Elmwood Inn Fine Teas, Orange Vanilla Caffeine-free Fruit Infusion, 16-Ounce Pouch",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "16181",
+     "role": "link",
+     "name": "Belle Of The Ball Princess Sprinkle Mix| Wedding Colorful Sprinkles| Cake Cupcake Cookie Sprinkles| Ice cream Candy Sprinkles| Yellow Gold Red Royal Red Rose Icing Flowers Decorating Sprinkles, 8OZ",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "16220",
+     "role": "link",
+     "name": "So Delicious Dairy Free CocoWhip Light, Vegan, Non-GMO Project Verified, 9 oz. Tub",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "16259",
+     "role": "link",
+     "name": "Cheongeun Sweet Potato Starch Powder 500g, 2ea(Sweet Potato 55%, Corn 45%)",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "16287",
+     "role": "link",
+     "name": "Q Mixers Premium Ginger Ale: Real Ingredients & Less Sweet, 6.7 Fl Oz (24 Bottles)",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "16326",
+     "role": "link",
+     "name": "Stove Top Turkey Stuffing Mix (12 oz Boxes, Pack of 2)",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "16365",
+     "role": "link",
+     "name": "Briess DME - Pilsen Light - 1 lb Bag",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "16393",
+     "role": "link",
+     "name": "Tony Chachere's More Spice Creole Seasoning - 14 oz",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "16432",
+     "role": "link",
+     "name": "Lobster Cobbler Pot Pie - Gourmet Frozen Seafood Appetizers (Set of 8 Trays)",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "16459",
+     "role": "link",
+     "name": "Crunchy Rice Rollers - Gluten Free - Vegan - 3.5 oz Individual Packs (4 Packs of 8 Rollers)",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "16500",
+     "role": "link",
+     "name": "Page 2",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "16504",
+     "role": "link",
+     "name": "\ue608 Page Next",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "16518",
+     "role": "textbox",
+     "name": "Sign Up for Our Newsletter:",
+     "props": {
+      "focusable": true,
+      "editable": "plaintext",
+      "settable": true,
+      "multiline": false
+     }
+    },
+    {
+     "nodeId": "14952",
+     "role": "combobox",
+     "name": "\ue615 Search",
+     "props": {
+      "focusable": true,
+      "editable": "plaintext",
+      "settable": true
+     }
+    },
+    {
+     "nodeId": "14959",
+     "role": "button",
+     "name": "Search",
+     "props": {}
+    },
+    {
+     "nodeId": "16074",
+     "role": "link",
+     "name": "1 \u00a0Review",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "16090",
+     "role": "link",
+     "name": "\ue601 Add to Wish List",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "16092",
+     "role": "link",
+     "name": "\ue61f Add to Compare",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "16113",
+     "role": "link",
+     "name": "12 \u00a0Reviews",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "16129",
+     "role": "link",
+     "name": "\ue601 Add to Wish List",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "16131",
+     "role": "link",
+     "name": "\ue61f Add to Compare",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "16152",
+     "role": "link",
+     "name": "4 \u00a0Reviews",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "16168",
+     "role": "link",
+     "name": "\ue601 Add to Wish List",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "16170",
+     "role": "link",
+     "name": "\ue61f Add to Compare",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "16191",
+     "role": "link",
+     "name": "12 \u00a0Reviews",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "16207",
+     "role": "link",
+     "name": "\ue601 Add to Wish List",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "16209",
+     "role": "link",
+     "name": "\ue61f Add to Compare",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "16230",
+     "role": "link",
+     "name": "12 \u00a0Reviews",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "16246",
+     "role": "link",
+     "name": "\ue601 Add to Wish List",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "16248",
+     "role": "link",
+     "name": "\ue61f Add to Compare",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "16274",
+     "role": "link",
+     "name": "\ue601 Add to Wish List",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "16276",
+     "role": "link",
+     "name": "\ue61f Add to Compare",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "16297",
+     "role": "link",
+     "name": "12 \u00a0Reviews",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "16313",
+     "role": "link",
+     "name": "\ue601 Add to Wish List",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "16315",
+     "role": "link",
+     "name": "\ue61f Add to Compare",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "16336",
+     "role": "link",
+     "name": "12 \u00a0Reviews",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "16352",
+     "role": "link",
+     "name": "\ue601 Add to Wish List",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "16354",
+     "role": "link",
+     "name": "\ue61f Add to Compare",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "16380",
+     "role": "link",
+     "name": "\ue601 Add to Wish List",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "16382",
+     "role": "link",
+     "name": "\ue61f Add to Compare",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "16403",
+     "role": "link",
+     "name": "12 \u00a0Reviews",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "16419",
+     "role": "link",
+     "name": "\ue601 Add to Wish List",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "16421",
+     "role": "link",
+     "name": "\ue61f Add to Compare",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "16447",
+     "role": "link",
+     "name": "\ue601 Add to Wish List",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "14667",
+     "role": "link",
+     "name": "\ue61f Add to Compare",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "16469",
+     "role": "link",
+     "name": "12 \u00a0Reviews",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "16485",
+     "role": "link",
+     "name": "\ue601 Add to Wish List",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "16487",
+     "role": "link",
+     "name": "\ue61f Add to Compare",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "14957",
+     "role": "link",
+     "name": "Advanced Search",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "16087",
+     "role": "button",
+     "name": "Add to Cart",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "16126",
+     "role": "button",
+     "name": "Add to Cart",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "16165",
+     "role": "button",
+     "name": "Add to Cart",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "16204",
+     "role": "button",
+     "name": "Add to Cart",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "16243",
+     "role": "button",
+     "name": "Add to Cart",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "16271",
+     "role": "button",
+     "name": "Add to Cart",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "16310",
+     "role": "button",
+     "name": "Add to Cart",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "16349",
+     "role": "button",
+     "name": "Add to Cart",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "16377",
+     "role": "button",
+     "name": "Add to Cart",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "16416",
+     "role": "button",
+     "name": "Add to Cart",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "16444",
+     "role": "button",
+     "name": "Add to Cart",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "16482",
+     "role": "button",
+     "name": "Add to Cart",
+     "props": {
+      "focusable": true
+     }
+    }
+   ],
+   "raw_tree_path": "research/experiments/EXP-INTEL-35697055679/artifacts/raw/axtree_task_794.json",
+   "raw_tree_sha256": "c09c0aa355ef398c312e14434e9314b208ee68ebf2adf2aa2154ec503cd31781",
+   "extraction_error": null
+  },
+  {
+   "task_id": 673,
+   "intent_template": "Create a post in the game related discussion forum about {{product}} to report customer reviews with {{rating}} rating from the OneStopShop with the post title \"real user feedback on {{product}}\". Format the post body as a bullet point list in the same order they appear (md format: - \"<review title>\").",
+   "intent": "Create a post in the game related discussion forum about Racing Wheel Overdrive for Xbox X to report customer reviews with 1 star rating from the OneStopShop with the post title \"real user feedback on Racing Wheel Overdrive for Xbox X\". Format the post body as a bullet point list in the same order they appear (md format: - \"<review title>\").",
+   "instantiation_dict": {
+    "product": "Racing Wheel Overdrive for Xbox X",
+    "rating": "1 star"
+   },
+   "start_url": "http://localhost:7770",
+   "http_status": 200,
+   "title": "One Stop Market",
+   "final_url": "http://localhost:7770/",
+   "ax_node_count": 1426,
+   "interactive_elements": [
+    {
+     "nodeId": "17379",
+     "role": "link",
+     "name": "Skip to Content",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "17384",
+     "role": "link",
+     "name": "store logo",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "19002",
+     "role": "link",
+     "name": "Report All Bugs",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "17367",
+     "role": "link",
+     "name": "My Account",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "17369",
+     "role": "link",
+     "name": "My Wish List",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "17371",
+     "role": "link",
+     "name": "Sign In",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "17378",
+     "role": "link",
+     "name": "Create an Account",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "17387",
+     "role": "link",
+     "name": "\ue611 My Cart",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "18519",
+     "role": "link",
+     "name": "Image",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "18558",
+     "role": "link",
+     "name": "Image",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "18597",
+     "role": "link",
+     "name": "Image",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "18636",
+     "role": "link",
+     "name": "Image",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "18675",
+     "role": "link",
+     "name": "Image",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "18714",
+     "role": "link",
+     "name": "Image",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "18742",
+     "role": "link",
+     "name": "Image",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "18781",
+     "role": "link",
+     "name": "Image",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "18820",
+     "role": "link",
+     "name": "Image",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "18848",
+     "role": "link",
+     "name": "Image",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "18887",
+     "role": "link",
+     "name": "Image",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "18915",
+     "role": "link",
+     "name": "Image",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "18985",
+     "role": "button",
+     "name": "Subscribe",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "18989",
+     "role": "link",
+     "name": "Privacy and Cookie Policy",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "18991",
+     "role": "link",
+     "name": "Search Terms",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "18993",
+     "role": "link",
+     "name": "Advanced Search",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "18995",
+     "role": "link",
+     "name": "Orders and Returns",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "18997",
+     "role": "link",
+     "name": "Contact Us",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "17431",
+     "role": "menuitem",
+     "name": "\ue622 Beauty & Personal Care",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "17648",
+     "role": "menuitem",
+     "name": "\ue622 Sports & Outdoors",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "17686",
+     "role": "menuitem",
+     "name": "\ue622 Clothing, Shoes & Jewelry",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "17738",
+     "role": "menuitem",
+     "name": "\ue622 Home & Kitchen",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "17865",
+     "role": "menuitem",
+     "name": "\ue622 Office Products",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "17897",
+     "role": "menuitem",
+     "name": "\ue622 Tools & Home Improvement",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "17916",
+     "role": "menuitem",
+     "name": "\ue622 Health & Household",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "17940",
+     "role": "menuitem",
+     "name": "\ue622 Patio, Lawn & Garden",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "17959",
+     "role": "menuitem",
+     "name": "\ue622 Electronics",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "18168",
+     "role": "menuitem",
+     "name": "\ue622 Cell Phones & Accessories",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "18219",
+     "role": "menuitem",
+     "name": "\ue622 Video Games",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "18268",
+     "role": "menuitem",
+     "name": "\ue622 Grocery & Gourmet Food",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "18526",
+     "role": "link",
+     "name": "Pre-baked Gingerbread House Kit Value Pack, 17 oz., Pack of 2, Total 34 oz.",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "18565",
+     "role": "link",
+     "name": "V8 +Energy, Healthy Energy Drink, Steady Energy from Black and Green Tea, Pomegranate Blueberry, 8 Ounce Can ,Pack of 24",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "18604",
+     "role": "link",
+     "name": "Elmwood Inn Fine Teas, Orange Vanilla Caffeine-free Fruit Infusion, 16-Ounce Pouch",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "18643",
+     "role": "link",
+     "name": "Belle Of The Ball Princess Sprinkle Mix| Wedding Colorful Sprinkles| Cake Cupcake Cookie Sprinkles| Ice cream Candy Sprinkles| Yellow Gold Red Royal Red Rose Icing Flowers Decorating Sprinkles, 8OZ",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "18682",
+     "role": "link",
+     "name": "So Delicious Dairy Free CocoWhip Light, Vegan, Non-GMO Project Verified, 9 oz. Tub",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "18721",
+     "role": "link",
+     "name": "Cheongeun Sweet Potato Starch Powder 500g, 2ea(Sweet Potato 55%, Corn 45%)",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "18749",
+     "role": "link",
+     "name": "Q Mixers Premium Ginger Ale: Real Ingredients & Less Sweet, 6.7 Fl Oz (24 Bottles)",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "18788",
+     "role": "link",
+     "name": "Stove Top Turkey Stuffing Mix (12 oz Boxes, Pack of 2)",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "18827",
+     "role": "link",
+     "name": "Briess DME - Pilsen Light - 1 lb Bag",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "18855",
+     "role": "link",
+     "name": "Tony Chachere's More Spice Creole Seasoning - 14 oz",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "18894",
+     "role": "link",
+     "name": "Lobster Cobbler Pot Pie - Gourmet Frozen Seafood Appetizers (Set of 8 Trays)",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "18922",
+     "role": "link",
+     "name": "Crunchy Rice Rollers - Gluten Free - Vegan - 3.5 oz Individual Packs (4 Packs of 8 Rollers)",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "18963",
+     "role": "link",
+     "name": "Page 2",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "18967",
+     "role": "link",
+     "name": "\ue608 Page Next",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "18981",
+     "role": "textbox",
+     "name": "Sign Up for Our Newsletter:",
+     "props": {
+      "focusable": true,
+      "editable": "plaintext",
+      "settable": true,
+      "multiline": false
+     }
+    },
+    {
+     "nodeId": "17414",
+     "role": "combobox",
+     "name": "\ue615 Search",
+     "props": {
+      "focusable": true,
+      "editable": "plaintext",
+      "settable": true
+     }
+    },
+    {
+     "nodeId": "17421",
+     "role": "button",
+     "name": "Search",
+     "props": {}
+    },
+    {
+     "nodeId": "18536",
+     "role": "link",
+     "name": "1 \u00a0Review",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "18552",
+     "role": "link",
+     "name": "\ue601 Add to Wish List",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "18554",
+     "role": "link",
+     "name": "\ue61f Add to Compare",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "18575",
+     "role": "link",
+     "name": "12 \u00a0Reviews",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "18591",
+     "role": "link",
+     "name": "\ue601 Add to Wish List",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "18593",
+     "role": "link",
+     "name": "\ue61f Add to Compare",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "18614",
+     "role": "link",
+     "name": "4 \u00a0Reviews",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "18630",
+     "role": "link",
+     "name": "\ue601 Add to Wish List",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "18632",
+     "role": "link",
+     "name": "\ue61f Add to Compare",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "18653",
+     "role": "link",
+     "name": "12 \u00a0Reviews",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "18669",
+     "role": "link",
+     "name": "\ue601 Add to Wish List",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "18671",
+     "role": "link",
+     "name": "\ue61f Add to Compare",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "18692",
+     "role": "link",
+     "name": "12 \u00a0Reviews",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "18708",
+     "role": "link",
+     "name": "\ue601 Add to Wish List",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "18710",
+     "role": "link",
+     "name": "\ue61f Add to Compare",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "18736",
+     "role": "link",
+     "name": "\ue601 Add to Wish List",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "18738",
+     "role": "link",
+     "name": "\ue61f Add to Compare",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "18759",
+     "role": "link",
+     "name": "12 \u00a0Reviews",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "18775",
+     "role": "link",
+     "name": "\ue601 Add to Wish List",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "18777",
+     "role": "link",
+     "name": "\ue61f Add to Compare",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "18798",
+     "role": "link",
+     "name": "12 \u00a0Reviews",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "18814",
+     "role": "link",
+     "name": "\ue601 Add to Wish List",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "18816",
+     "role": "link",
+     "name": "\ue61f Add to Compare",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "18842",
+     "role": "link",
+     "name": "\ue601 Add to Wish List",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "18844",
+     "role": "link",
+     "name": "\ue61f Add to Compare",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "18865",
+     "role": "link",
+     "name": "12 \u00a0Reviews",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "18881",
+     "role": "link",
+     "name": "\ue601 Add to Wish List",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "18883",
+     "role": "link",
+     "name": "\ue61f Add to Compare",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "18909",
+     "role": "link",
+     "name": "\ue601 Add to Wish List",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "18911",
+     "role": "link",
+     "name": "\ue61f Add to Compare",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "18932",
+     "role": "link",
+     "name": "12 \u00a0Reviews",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "18948",
+     "role": "link",
+     "name": "\ue601 Add to Wish List",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "18950",
+     "role": "link",
+     "name": "\ue61f Add to Compare",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "17419",
+     "role": "link",
+     "name": "Advanced Search",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "18549",
+     "role": "button",
+     "name": "Add to Cart",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "18588",
+     "role": "button",
+     "name": "Add to Cart",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "18627",
+     "role": "button",
+     "name": "Add to Cart",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "18666",
+     "role": "button",
+     "name": "Add to Cart",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "18705",
+     "role": "button",
+     "name": "Add to Cart",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "18733",
+     "role": "button",
+     "name": "Add to Cart",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "18772",
+     "role": "button",
+     "name": "Add to Cart",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "18811",
+     "role": "button",
+     "name": "Add to Cart",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "18839",
+     "role": "button",
+     "name": "Add to Cart",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "18878",
+     "role": "button",
+     "name": "Add to Cart",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "18906",
+     "role": "button",
+     "name": "Add to Cart",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "18945",
+     "role": "button",
+     "name": "Add to Cart",
+     "props": {
+      "focusable": true
+     }
+    }
+   ],
+   "raw_tree_path": "research/experiments/EXP-INTEL-35697055679/artifacts/raw/axtree_task_673.json",
+   "raw_tree_sha256": "e6f6c609468577e34cb3c9c61a1a87cc4287cc048f09fbf58eba4d45fff62a61",
+   "extraction_error": null
+  },
+  {
+   "task_id": 532,
+   "intent_template": "Fill out the contact us form with this refund message for the {{product}} bought {{time}}: \"I need a refund. Order: <order_id>. Amount: <amount>. Reason: It broke after three days of use.\" Leave the filled form ready for review and do not submit it.",
+   "intent": "Fill out the contact us form with this refund message for the PS3 remote controller bought early 2023: \"I need a refund. Order: <order_id>. Amount: <amount>. Reason: It broke after three days of use.\" Leave the filled form ready for review and do not submit it.",
+   "instantiation_dict": {
+    "product": "PS3 remote controller",
+    "time": "early 2023"
+   },
+   "start_url": "http://localhost:7770",
+   "http_status": 200,
+   "title": "One Stop Market",
+   "final_url": "http://localhost:7770/",
+   "ax_node_count": 1426,
+   "interactive_elements": [
+    {
+     "nodeId": "19844",
+     "role": "link",
+     "name": "Skip to Content",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "19849",
+     "role": "link",
+     "name": "store logo",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "21466",
+     "role": "link",
+     "name": "Report All Bugs",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "19832",
+     "role": "link",
+     "name": "My Account",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "19834",
+     "role": "link",
+     "name": "My Wish List",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "19836",
+     "role": "link",
+     "name": "Sign In",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "19843",
+     "role": "link",
+     "name": "Create an Account",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "19852",
+     "role": "link",
+     "name": "\ue611 My Cart",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "20984",
+     "role": "link",
+     "name": "Image",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "21023",
+     "role": "link",
+     "name": "Image",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "21062",
+     "role": "link",
+     "name": "Image",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "21101",
+     "role": "link",
+     "name": "Image",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "21139",
+     "role": "link",
+     "name": "Image",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "21178",
+     "role": "link",
+     "name": "Image",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "21206",
+     "role": "link",
+     "name": "Image",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "21245",
+     "role": "link",
+     "name": "Image",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "21284",
+     "role": "link",
+     "name": "Image",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "21312",
+     "role": "link",
+     "name": "Image",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "21351",
+     "role": "link",
+     "name": "Image",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "21379",
+     "role": "link",
+     "name": "Image",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "21449",
+     "role": "button",
+     "name": "Subscribe",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "21453",
+     "role": "link",
+     "name": "Privacy and Cookie Policy",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "21455",
+     "role": "link",
+     "name": "Search Terms",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "21457",
+     "role": "link",
+     "name": "Advanced Search",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "21459",
+     "role": "link",
+     "name": "Orders and Returns",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "21461",
+     "role": "link",
+     "name": "Contact Us",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "19896",
+     "role": "menuitem",
+     "name": "\ue622 Beauty & Personal Care",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "20113",
+     "role": "menuitem",
+     "name": "\ue622 Sports & Outdoors",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "20151",
+     "role": "menuitem",
+     "name": "\ue622 Clothing, Shoes & Jewelry",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "20203",
+     "role": "menuitem",
+     "name": "\ue622 Home & Kitchen",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "20330",
+     "role": "menuitem",
+     "name": "\ue622 Office Products",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "20362",
+     "role": "menuitem",
+     "name": "\ue622 Tools & Home Improvement",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "20381",
+     "role": "menuitem",
+     "name": "\ue622 Health & Household",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "20405",
+     "role": "menuitem",
+     "name": "\ue622 Patio, Lawn & Garden",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "20424",
+     "role": "menuitem",
+     "name": "\ue622 Electronics",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "20633",
+     "role": "menuitem",
+     "name": "\ue622 Cell Phones & Accessories",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "20684",
+     "role": "menuitem",
+     "name": "\ue622 Video Games",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "20733",
+     "role": "menuitem",
+     "name": "\ue622 Grocery & Gourmet Food",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "20991",
+     "role": "link",
+     "name": "Pre-baked Gingerbread House Kit Value Pack, 17 oz., Pack of 2, Total 34 oz.",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "21030",
+     "role": "link",
+     "name": "V8 +Energy, Healthy Energy Drink, Steady Energy from Black and Green Tea, Pomegranate Blueberry, 8 Ounce Can ,Pack of 24",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "21069",
+     "role": "link",
+     "name": "Elmwood Inn Fine Teas, Orange Vanilla Caffeine-free Fruit Infusion, 16-Ounce Pouch",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "19595",
+     "role": "link",
+     "name": "Belle Of The Ball Princess Sprinkle Mix| Wedding Colorful Sprinkles| Cake Cupcake Cookie Sprinkles| Ice cream Candy Sprinkles| Yellow Gold Red Royal Red Rose Icing Flowers Decorating Sprinkles, 8OZ",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "21146",
+     "role": "link",
+     "name": "So Delicious Dairy Free CocoWhip Light, Vegan, Non-GMO Project Verified, 9 oz. Tub",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "21185",
+     "role": "link",
+     "name": "Cheongeun Sweet Potato Starch Powder 500g, 2ea(Sweet Potato 55%, Corn 45%)",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "21213",
+     "role": "link",
+     "name": "Q Mixers Premium Ginger Ale: Real Ingredients & Less Sweet, 6.7 Fl Oz (24 Bottles)",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "21252",
+     "role": "link",
+     "name": "Stove Top Turkey Stuffing Mix (12 oz Boxes, Pack of 2)",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "21291",
+     "role": "link",
+     "name": "Briess DME - Pilsen Light - 1 lb Bag",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "21319",
+     "role": "link",
+     "name": "Tony Chachere's More Spice Creole Seasoning - 14 oz",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "21358",
+     "role": "link",
+     "name": "Lobster Cobbler Pot Pie - Gourmet Frozen Seafood Appetizers (Set of 8 Trays)",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "21386",
+     "role": "link",
+     "name": "Crunchy Rice Rollers - Gluten Free - Vegan - 3.5 oz Individual Packs (4 Packs of 8 Rollers)",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "21427",
+     "role": "link",
+     "name": "Page 2",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "21431",
+     "role": "link",
+     "name": "\ue608 Page Next",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "21445",
+     "role": "textbox",
+     "name": "Sign Up for Our Newsletter:",
+     "props": {
+      "focusable": true,
+      "editable": "plaintext",
+      "settable": true,
+      "multiline": false
+     }
+    },
+    {
+     "nodeId": "19879",
+     "role": "combobox",
+     "name": "\ue615 Search",
+     "props": {
+      "focusable": true,
+      "editable": "plaintext",
+      "settable": true
+     }
+    },
+    {
+     "nodeId": "19886",
+     "role": "button",
+     "name": "Search",
+     "props": {}
+    },
+    {
+     "nodeId": "21001",
+     "role": "link",
+     "name": "1 \u00a0Review",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "21017",
+     "role": "link",
+     "name": "\ue601 Add to Wish List",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "21019",
+     "role": "link",
+     "name": "\ue61f Add to Compare",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "21040",
+     "role": "link",
+     "name": "12 \u00a0Reviews",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "21056",
+     "role": "link",
+     "name": "\ue601 Add to Wish List",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "21058",
+     "role": "link",
+     "name": "\ue61f Add to Compare",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "21079",
+     "role": "link",
+     "name": "4 \u00a0Reviews",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "21095",
+     "role": "link",
+     "name": "\ue601 Add to Wish List",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "21097",
+     "role": "link",
+     "name": "\ue61f Add to Compare",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "21117",
+     "role": "link",
+     "name": "12 \u00a0Reviews",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "21133",
+     "role": "link",
+     "name": "\ue601 Add to Wish List",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "21135",
+     "role": "link",
+     "name": "\ue61f Add to Compare",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "21156",
+     "role": "link",
+     "name": "12 \u00a0Reviews",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "21172",
+     "role": "link",
+     "name": "\ue601 Add to Wish List",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "21174",
+     "role": "link",
+     "name": "\ue61f Add to Compare",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "21200",
+     "role": "link",
+     "name": "\ue601 Add to Wish List",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "21202",
+     "role": "link",
+     "name": "\ue61f Add to Compare",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "21223",
+     "role": "link",
+     "name": "12 \u00a0Reviews",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "21239",
+     "role": "link",
+     "name": "\ue601 Add to Wish List",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "21241",
+     "role": "link",
+     "name": "\ue61f Add to Compare",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "21262",
+     "role": "link",
+     "name": "12 \u00a0Reviews",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "21278",
+     "role": "link",
+     "name": "\ue601 Add to Wish List",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "21280",
+     "role": "link",
+     "name": "\ue61f Add to Compare",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "21306",
+     "role": "link",
+     "name": "\ue601 Add to Wish List",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "21308",
+     "role": "link",
+     "name": "\ue61f Add to Compare",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "21329",
+     "role": "link",
+     "name": "12 \u00a0Reviews",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "21345",
+     "role": "link",
+     "name": "\ue601 Add to Wish List",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "21347",
+     "role": "link",
+     "name": "\ue61f Add to Compare",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "21373",
+     "role": "link",
+     "name": "\ue601 Add to Wish List",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "21375",
+     "role": "link",
+     "name": "\ue61f Add to Compare",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "21396",
+     "role": "link",
+     "name": "12 \u00a0Reviews",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "21412",
+     "role": "link",
+     "name": "\ue601 Add to Wish List",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "21414",
+     "role": "link",
+     "name": "\ue61f Add to Compare",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "19884",
+     "role": "link",
+     "name": "Advanced Search",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "21014",
+     "role": "button",
+     "name": "Add to Cart",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "21053",
+     "role": "button",
+     "name": "Add to Cart",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "21092",
+     "role": "button",
+     "name": "Add to Cart",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "21130",
+     "role": "button",
+     "name": "Add to Cart",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "21169",
+     "role": "button",
+     "name": "Add to Cart",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "21197",
+     "role": "button",
+     "name": "Add to Cart",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "21236",
+     "role": "button",
+     "name": "Add to Cart",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "21275",
+     "role": "button",
+     "name": "Add to Cart",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "21303",
+     "role": "button",
+     "name": "Add to Cart",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "21342",
+     "role": "button",
+     "name": "Add to Cart",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "21370",
+     "role": "button",
+     "name": "Add to Cart",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "21409",
+     "role": "button",
+     "name": "Add to Cart",
+     "props": {
+      "focusable": true
+     }
+    }
+   ],
+   "raw_tree_path": "research/experiments/EXP-INTEL-35697055679/artifacts/raw/axtree_task_532.json",
+   "raw_tree_sha256": "9bc820d4340e49531fc7033b66eff5cc8b461d654aa9566bb3dc5c0e1dfe9b5f",
+   "extraction_error": null
+  },
+  {
+   "task_id": 654,
+   "intent_template": "Fill the \"contact us\" form in the site for a refund on the {{product}} I bought, stating that \"it broke after just three days of use\". Also, ensure to include the order number #{{order_id}} and the product SKU. Don\"t submit yet, I will check.",
+   "intent": "Fill the \"contact us\" form in the site for a refund on the bluetooth speaker I bought, stating that \"it broke after just three days of use\". Also, ensure to include the order number #161 and the product SKU. Don\"t submit yet, I will check.",
+   "instantiation_dict": {
+    "product": "bluetooth speaker",
+    "order_id": "161"
+   },
+   "start_url": "http://localhost:7770",
+   "http_status": 200,
+   "title": "One Stop Market",
+   "final_url": "http://localhost:7770/",
+   "ax_node_count": 1426,
+   "interactive_elements": [
+    {
+     "nodeId": "22308",
+     "role": "link",
+     "name": "Skip to Content",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "22313",
+     "role": "link",
+     "name": "store logo",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "23930",
+     "role": "link",
+     "name": "Report All Bugs",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "22296",
+     "role": "link",
+     "name": "My Account",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "22298",
+     "role": "link",
+     "name": "My Wish List",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "22300",
+     "role": "link",
+     "name": "Sign In",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "22307",
+     "role": "link",
+     "name": "Create an Account",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "22316",
+     "role": "link",
+     "name": "\ue611 My Cart",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "23448",
+     "role": "link",
+     "name": "Image",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "23487",
+     "role": "link",
+     "name": "Image",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "23526",
+     "role": "link",
+     "name": "Image",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "23565",
+     "role": "link",
+     "name": "Image",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "23604",
+     "role": "link",
+     "name": "Image",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "23643",
+     "role": "link",
+     "name": "Image",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "23671",
+     "role": "link",
+     "name": "Image",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "23710",
+     "role": "link",
+     "name": "Image",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "23749",
+     "role": "link",
+     "name": "Image",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "22059",
+     "role": "link",
+     "name": "Image",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "23815",
+     "role": "link",
+     "name": "Image",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "23843",
+     "role": "link",
+     "name": "Image",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "23913",
+     "role": "button",
+     "name": "Subscribe",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "23917",
+     "role": "link",
+     "name": "Privacy and Cookie Policy",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "23919",
+     "role": "link",
+     "name": "Search Terms",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "23921",
+     "role": "link",
+     "name": "Advanced Search",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "23923",
+     "role": "link",
+     "name": "Orders and Returns",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "23925",
+     "role": "link",
+     "name": "Contact Us",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "22360",
+     "role": "menuitem",
+     "name": "\ue622 Beauty & Personal Care",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "22577",
+     "role": "menuitem",
+     "name": "\ue622 Sports & Outdoors",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "22615",
+     "role": "menuitem",
+     "name": "\ue622 Clothing, Shoes & Jewelry",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "22667",
+     "role": "menuitem",
+     "name": "\ue622 Home & Kitchen",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "22794",
+     "role": "menuitem",
+     "name": "\ue622 Office Products",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "22826",
+     "role": "menuitem",
+     "name": "\ue622 Tools & Home Improvement",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "22845",
+     "role": "menuitem",
+     "name": "\ue622 Health & Household",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "22869",
+     "role": "menuitem",
+     "name": "\ue622 Patio, Lawn & Garden",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "22888",
+     "role": "menuitem",
+     "name": "\ue622 Electronics",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "23097",
+     "role": "menuitem",
+     "name": "\ue622 Cell Phones & Accessories",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "23148",
+     "role": "menuitem",
+     "name": "\ue622 Video Games",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "23197",
+     "role": "menuitem",
+     "name": "\ue622 Grocery & Gourmet Food",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "23455",
+     "role": "link",
+     "name": "Pre-baked Gingerbread House Kit Value Pack, 17 oz., Pack of 2, Total 34 oz.",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "23494",
+     "role": "link",
+     "name": "V8 +Energy, Healthy Energy Drink, Steady Energy from Black and Green Tea, Pomegranate Blueberry, 8 Ounce Can ,Pack of 24",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "23533",
+     "role": "link",
+     "name": "Elmwood Inn Fine Teas, Orange Vanilla Caffeine-free Fruit Infusion, 16-Ounce Pouch",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "23572",
+     "role": "link",
+     "name": "Belle Of The Ball Princess Sprinkle Mix| Wedding Colorful Sprinkles| Cake Cupcake Cookie Sprinkles| Ice cream Candy Sprinkles| Yellow Gold Red Royal Red Rose Icing Flowers Decorating Sprinkles, 8OZ",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "23611",
+     "role": "link",
+     "name": "So Delicious Dairy Free CocoWhip Light, Vegan, Non-GMO Project Verified, 9 oz. Tub",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "23650",
+     "role": "link",
+     "name": "Cheongeun Sweet Potato Starch Powder 500g, 2ea(Sweet Potato 55%, Corn 45%)",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "23678",
+     "role": "link",
+     "name": "Q Mixers Premium Ginger Ale: Real Ingredients & Less Sweet, 6.7 Fl Oz (24 Bottles)",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "23717",
+     "role": "link",
+     "name": "Stove Top Turkey Stuffing Mix (12 oz Boxes, Pack of 2)",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "23756",
+     "role": "link",
+     "name": "Briess DME - Pilsen Light - 1 lb Bag",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "23783",
+     "role": "link",
+     "name": "Tony Chachere's More Spice Creole Seasoning - 14 oz",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "23822",
+     "role": "link",
+     "name": "Lobster Cobbler Pot Pie - Gourmet Frozen Seafood Appetizers (Set of 8 Trays)",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "23850",
+     "role": "link",
+     "name": "Crunchy Rice Rollers - Gluten Free - Vegan - 3.5 oz Individual Packs (4 Packs of 8 Rollers)",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "23891",
+     "role": "link",
+     "name": "Page 2",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "23895",
+     "role": "link",
+     "name": "\ue608 Page Next",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "23909",
+     "role": "textbox",
+     "name": "Sign Up for Our Newsletter:",
+     "props": {
+      "focusable": true,
+      "editable": "plaintext",
+      "settable": true,
+      "multiline": false
+     }
+    },
+    {
+     "nodeId": "22343",
+     "role": "combobox",
+     "name": "\ue615 Search",
+     "props": {
+      "focusable": true,
+      "editable": "plaintext",
+      "settable": true
+     }
+    },
+    {
+     "nodeId": "22350",
+     "role": "button",
+     "name": "Search",
+     "props": {}
+    },
+    {
+     "nodeId": "23465",
+     "role": "link",
+     "name": "1 \u00a0Review",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "23481",
+     "role": "link",
+     "name": "\ue601 Add to Wish List",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "23483",
+     "role": "link",
+     "name": "\ue61f Add to Compare",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "23504",
+     "role": "link",
+     "name": "12 \u00a0Reviews",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "23520",
+     "role": "link",
+     "name": "\ue601 Add to Wish List",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "23522",
+     "role": "link",
+     "name": "\ue61f Add to Compare",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "23543",
+     "role": "link",
+     "name": "4 \u00a0Reviews",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "23559",
+     "role": "link",
+     "name": "\ue601 Add to Wish List",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "23561",
+     "role": "link",
+     "name": "\ue61f Add to Compare",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "23582",
+     "role": "link",
+     "name": "12 \u00a0Reviews",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "23598",
+     "role": "link",
+     "name": "\ue601 Add to Wish List",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "23600",
+     "role": "link",
+     "name": "\ue61f Add to Compare",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "23621",
+     "role": "link",
+     "name": "12 \u00a0Reviews",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "23637",
+     "role": "link",
+     "name": "\ue601 Add to Wish List",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "23639",
+     "role": "link",
+     "name": "\ue61f Add to Compare",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "23665",
+     "role": "link",
+     "name": "\ue601 Add to Wish List",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "23667",
+     "role": "link",
+     "name": "\ue61f Add to Compare",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "23688",
+     "role": "link",
+     "name": "12 \u00a0Reviews",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "23704",
+     "role": "link",
+     "name": "\ue601 Add to Wish List",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "23706",
+     "role": "link",
+     "name": "\ue61f Add to Compare",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "23727",
+     "role": "link",
+     "name": "12 \u00a0Reviews",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "23743",
+     "role": "link",
+     "name": "\ue601 Add to Wish List",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "23745",
+     "role": "link",
+     "name": "\ue61f Add to Compare",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "23771",
+     "role": "link",
+     "name": "\ue601 Add to Wish List",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "23773",
+     "role": "link",
+     "name": "\ue61f Add to Compare",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "23793",
+     "role": "link",
+     "name": "12 \u00a0Reviews",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "23809",
+     "role": "link",
+     "name": "\ue601 Add to Wish List",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "23811",
+     "role": "link",
+     "name": "\ue61f Add to Compare",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "23837",
+     "role": "link",
+     "name": "\ue601 Add to Wish List",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "23839",
+     "role": "link",
+     "name": "\ue61f Add to Compare",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "23860",
+     "role": "link",
+     "name": "12 \u00a0Reviews",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "23876",
+     "role": "link",
+     "name": "\ue601 Add to Wish List",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "23878",
+     "role": "link",
+     "name": "\ue61f Add to Compare",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "22348",
+     "role": "link",
+     "name": "Advanced Search",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "23478",
+     "role": "button",
+     "name": "Add to Cart",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "23517",
+     "role": "button",
+     "name": "Add to Cart",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "23556",
+     "role": "button",
+     "name": "Add to Cart",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "23595",
+     "role": "button",
+     "name": "Add to Cart",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "23634",
+     "role": "button",
+     "name": "Add to Cart",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "23662",
+     "role": "button",
+     "name": "Add to Cart",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "23701",
+     "role": "button",
+     "name": "Add to Cart",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "23740",
+     "role": "button",
+     "name": "Add to Cart",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "23768",
+     "role": "button",
+     "name": "Add to Cart",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "23806",
+     "role": "button",
+     "name": "Add to Cart",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "23834",
+     "role": "button",
+     "name": "Add to Cart",
+     "props": {
+      "focusable": true
+     }
+    },
+    {
+     "nodeId": "23873",
+     "role": "button",
+     "name": "Add to Cart",
+     "props": {
+      "focusable": true
+     }
+    }
+   ],
+   "raw_tree_path": "research/experiments/EXP-INTEL-35697055679/artifacts/raw/axtree_task_654.json",
+   "raw_tree_sha256": "a12f4fea5c27df804368a4194d2da922c38eb4cf881a22aa5d838073eee332d3",
+   "extraction_error": null
+  }
+ ],
+ "positive_control": {
+  "searchbox_present_any_page": true,
+  "search_named_elements": [],
+  "cooccurrence": {
+   "link|skip to content": 10,
+   "link|store logo": 10,
+   "link|home": 3,
+   "link|add to wish list": 3,
+   "link|add to compare": 3,
+   "link|skip to the end of the images gallery": 3,
+   "link|skip to the beginning of the images gallery": 3,
+   "tab|details": 3,
+   "tab|reviews (12)": 2,
+   "link|report all bugs": 10,
+   "link|my account": 10,
+   "link|my wish list": 10,
+   "link|sign in": 10,
+   "link|create an account": 10,
+   "link|\ue611 my cart": 10,
+   "link|12\u00a0 reviews": 2,
+   "link|add your review": 3,
+   "button|add to cart": 87,
+   "link|details": 3,
+   "link|reviews (12)": 2,
+   "button|subscribe": 10,
+   "link|privacy and cookie policy": 10,
+   "link|search terms": 10,
+   "link|advanced search": 20,
+   "link|orders and returns": 10,
+   "link|contact us": 10,
+   "menuitem|\ue622 beauty & personal care": 10,
+   "menuitem|\ue622 sports & outdoors": 10,
+   "menuitem|\ue622 clothing, shoes & jewelry": 10,
+   "menuitem|\ue622 home & kitchen": 10,
+   "menuitem|\ue622 office products": 10,
+   "menuitem|\ue622 tools & home improvement": 10,
+   "menuitem|\ue622 health & household": 10,
+   "menuitem|\ue622 patio, lawn & garden": 10,
+   "menuitem|\ue622 electronics": 10,
+   "menuitem|\ue622 cell phones & accessories": 10,
+   "menuitem|\ue622 video games": 10,
+   "menuitem|\ue622 grocery & gourmet food": 10,
+   "spinbutton|qty": 3,
+   "button|previous": 6,
+   "button|next": 6,
+   "textbox|sign up for our newsletter:": 10,
+   "combobox|\ue615 search": 10,
+   "button|search": 10,
+   "button|image": 6,
+   "link|image": 84,
+   "link|pre-baked gingerbread house kit value pack, 17 oz., pack of 2, total 34 oz.": 7,
+   "link|v8 +energy, healthy energy drink, steady energy from black and green tea, pomegranate blueberry, 8 ounce can ,pack of 24": 7,
+   "link|elmwood inn fine teas, orange vanilla caffeine-free fruit infusion, 16-ounce pouch": 7,
+   "link|belle of the ball princess sprinkle mix| wedding colorful sprinkles| cake cupcake cookie sprinkles| ice cream candy sprinkles| yellow gold red royal red rose icing flowers decorating sprinkles, 8oz": 7,
+   "link|so delicious dairy free cocowhip light, vegan, non-gmo project verified, 9 oz. tub": 7,
+   "link|cheongeun sweet potato starch powder 500g, 2ea(sweet potato 55%, corn 45%)": 7,
+   "link|q mixers premium ginger ale: real ingredients & less sweet, 6.7 fl oz (24 bottles)": 7,
+   "link|stove top turkey stuffing mix (12 oz boxes, pack of 2)": 7,
+   "link|briess dme - pilsen light - 1 lb bag": 7,
+   "link|tony chachere's more spice creole seasoning - 14 oz": 7,
+   "link|lobster cobbler pot pie - gourmet frozen seafood appetizers (set of 8 trays)": 7,
+   "link|crunchy rice rollers - gluten free - vegan - 3.5 oz individual packs (4 packs of 8 rollers)": 7,
+   "link|page 2": 7,
+   "link|\ue608 page next": 7,
+   "link|1 \u00a0review": 7,
+   "link|\ue601 add to wish list": 84,
+   "link|\ue61f add to compare": 84,
+   "link|12 \u00a0reviews": 49,
+   "link|4 \u00a0reviews": 7,
+   "radio|american flag in eagle's eye": 1,
+   "radio|american flag soldier cross pen blank": 1,
+   "radio|black gun with grenade": 1,
+   "radio|blue and pink texture marble": 1,
+   "radio|blue line usa flag": 1,
+   "radio|blue red flag dark white skull": 1,
+   "radio|blue starry fantasy wolf": 1,
+   "radio|camouflage flag": 1,
+   "radio|chemistry art 4k": 1,
+   "radio|cheshire cat": 1,
+   "radio|colorful and cool dj dog": 1,
+   "radio|colorful beautiful pineapple": 1,
+   "radio|colorful dragonfly": 1,
+   "radio|colorful space planet 2": 1,
+   "radio|cosmonaut astronaut space suit": 1,
+   "radio|embroidery bee and crown": 1,
+   "radio|five finger death punch skull": 1,
+   "radio|gambar senjata keren": 1,
+   "radio|golden bullet": 1,
+   "radio|gun ammunition american flag": 1,
+   "radio|gun rose": 1,
+   "radio|halloween skeletons men and girl": 1,
+   "radio|king crown the one": 1,
+   "radio|mandala lotus yoga": 1,
+   "radio|moon sky mountain range mandala": 1,
+   "radio|neon turtle": 1,
+   "radio|purple fantasy starlight wolf": 1,
+   "radio|queen diamond crown": 1,
+   "radio|skeleton wormboy art": 1,
+   "radio|sunflower american flag": 1,
+   "radio|sunflower skull seamless pattern": 1,
+   "radio|the sun will rise": 1,
+   "radio|thin red line flag": 1,
+   "radio|unicorn skull with mane": 1,
+   "radio|usa astronaut": 1,
+   "radio|usa red baseball flag": 1,
+   "radio|yellow baseball american flag": 1,
+   "radio|iphone 13 mini(5.4 inch)": 1,
+   "radio|iphone 13 pro max(6.7 inch)": 1,
+   "radio|iphone 13 pro(6.1 inch)": 1,
+   "radio|iphone 13(6.1 inch)": 1,
+   "tab|reviews (6)": 1,
+   "link|6\u00a0 reviews": 1,
+   "link|reviews (6)": 1,
+   "radio|black": 1,
+   "radio|chrysanthemum": 1,
+   "radio|dark blue": 1,
+   "radio|printing": 1,
+   "radio|purple green pink": 1,
+   "radio|strawberry": 1,
+   "radio|white and red rose flower": 1,
+   "radio|white lace": 1,
+   "radio|white rose": 1
+  }
+ }
+}
