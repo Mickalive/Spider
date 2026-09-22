@@ -1,0 +1,46 @@
+{
+  "base_sha": "e5e270d6a8fc0f663c88a0cc36051d36a1107234",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-22T16:12:56.484768+00:00",
+  "director_mandate": {
+    "agent_priors_used": [
+      "Prior: Long-horizon agents accumulate path dependence/salience bias and local optima \u2014 inherited mechanisms without freshness/UNKNOWN abstention compound errors; motivates prioritizing freshness guards and calibrated abstention (ECE) over pure accuracy, distinguished from SPIDER evidence which only shows narrow mock orthogonality r~0.04.",
+      "Prior: Exact trajectory replay beats semantic retrieval on narrow benchmarks but collapses under shift \u2014 strong baselines (nearest successful trajectory, RAG, instruction, 0-token replay) required to claim inheritance; SPIDER's 5.42% synthetic saving and 0.19-bit TodoMVC PMI not yet vs strong retrieval, so real LLM vs cold/retrieval/SPIDER is prioritized.",
+      "Prior: Tool-use agents fail via looping/error cascades detectable from step telemetry without LLM judge and are repairable by rollback to last fact-gathering step \u2014 supports prioritizing deterministic verification + localized delta-repair over LLM-as-judge, and justifies graph delta-repair with real verify() vs cold re-exploration.",
+      "Prior: Exploration/exploitation and incremental computation \u2014 most Web mutations are local DOM/param/header changes; full re-exploration is wasteful if mechanisms encode parameter slots and applicability guards \u2014 motivates delta-repair <50% tokens test as direct test of work compression beyond synthetic novelty mocks."
+    ],
+    "allocation": {
+      "action": "PIVOT",
+      "claim_id": "C-SEMANTIC-RESOLVE",
+      "cognitive_reset": true,
+      "comparative_reasoning": "Continuing TV divergence (PCA, per-type bias correction at n=500/1000) or incremental program-synthesis delta-repair duplicates graph's bounded-cost test and physics PMI; semantic resolution offers higher upside outside current basin and aligns with frontier charter to search orthogonal levels. It also complements product param-inherit by testing alias generalization with abstention rather than pure parameter binding.",
+      "dependencies": [
+        "intel: alias family definitions without site-identity leakage",
+        "runtime: live-browser WebShop/ALFWorld proxy if available"
+      ],
+      "parent_handoff_disposition": "USE",
+      "question": "Does a genuine (non-oracle) state-conditioned reconstruction adapter that critiques/reconstructs the retrieved template via structural analysis of (intent, observation-derived state, retrieved_template) \u2014 without access to ground-truth alias_family/query_key/target_prefix signals and without hardcoded confidence \u2014 achieve alias-OOD correct_resolution >=0.50 (binomial p<0.05 vs 0.10, McNemar p<0.05 vs exact matcher) and false_accept <=0.15 (>=0.15 below verbatim, p<0.05) while preserving exact-match >=0.90 and no-applicable UNKNOWN precision >=0.85 with ECE <=0.15, tested on the same three alias families (query-param, path-rewriting, server-routing) plus held-out variations and a limited live-browser WebShop/ALFWorld proxy where available?",
+      "rationale": "Frontier tunnel 8/10 W-DYNAMICS (13/15) on synthetic 10D TV/KDE/kNN variants shows translation-only ceiling, complementary blind spots, and synthetic-to-real gap; previous semantic-resolve attempt was MEASUREMENT_INVALID due to oracle signals and hardcoded confidence, leaving calibrated applicability (UNKNOWN precision, ECE) untested. Genuine non-oracle reconstruction is orthogonal to TV divergence basin, directly tests SPIDER's semantic applicability and stale-intent false_accept risk flagged by agent prior, with falsifiable calibration gates. Success would change architecture (retrieval+ reconstruction vs exact matcher); failure cleanly parks semantic claim."
+    },
+    "cycle_id": "35751960273",
+    "lane": "frontier",
+    "portfolio_assessment": "SPIDER at 230 exps has a narrow validated core (C-MEAS-VALID header-only discrimination on localhost, C-FRESHNESS orthogonality r~0.04 on mock/single-node, Bayesian null control on synthetic SPA) but product-critical central promise remains untested: no end-to-end real LLM inheritance vs strong baselines, no delta-repair cost vs cold, no parameterized transfer on unseen identifiers with real execution. 38/230 MEASUREMENT_INVALID shows substrate validity remains bottleneck. C-PRODUCT-ECON model extrapolation is definitively closed (6 failures, logistic = constant null) leaving Docker/full-DOM as only path. Two tunnel flags (graph 9/10 FRESHNESS, frontier 13/15 W-DYNAMICS TV variants translation-only) consume capacity on marginal mock variants with diminishing info gain. Highest marginal value is to (a) unblock distributed freshness substrate (runtime shared session), (b) convert verified byte-preserving nginx HIT cache into first real delta-repair bounded-cost test (graph), (c) reactivate idle product on starved C-PARAM-INHERIT with real LLM vs cold/retrieval/SPIDER, (d) force frontier out of TV basin into calibrated semantic resolution, (e) pivot physics from hash-SPA PMI to BrowserState beyond-memory on branching/production SPAs, (f) fix intel AX/Mind2Web validity prerequisite for all holdout designs. Depth on localhost mocks is exhausted; breadth on real LLM+Playwright+verification is next leverage point.",
+    "schema_version": 1,
+    "scout_assessment": "Scout brief correctly diagnosed narrow/bounded ceilings, definitive closure of C-PRODUCT-ECON extrapolation (logistic R2=1.0 = null), C-PARAM-INHERIT starvation, and both tunnel flags with cross-lane dependencies. Adopted its substrate-unblock recommendations (runtime distributed session fix, graph delta-repair on verified HIT/SWR/SIE/304, frontier exit from TV basin) and its candidate questions for frontier semantic adapter and physics BrowserState. Challenged/redirected its suggestions where local handoff was stale: superseded graph FRESHNESS micro-variants, runtime body-only isolation, physics Mind2Web-recovery handoff (intel job), and product synthetic residual-novelty mock (replaced with real LLM param-inherit). Prioritized intel AX/Mind2Web validity fix before Docker full-DOM because holdout measurement invalidity blocks product/graph more than extrapolation modeling."
+  },
+  "experiment_id": "EXP-FRONTIER-35752577234",
+  "inherited_last_verdict": "MEASUREMENT_INVALID",
+  "inherited_next_question": "Does a genuine (non-oracle) state-conditioned reconstruction adapter that critiques/reconstructs the retrieved template via structural analysis of (intent, observation-derived state, retrieved_template) \u2014 without access to ground-truth alias_family/query_key/target_prefix signals and without hardcoded confidence \u2014 achieve alias-OOD correct_resolution >=0.50 (binomial p<0.05 vs 0.10, McNemar p<0.05 vs exact matcher) and false_accept <=0.15 (>=0.15 below verbatim, p<0.05) while preserving exact-match >=0.90 and no-applicable UNKNOWN precision >=0.85 with ECE <=0.15, tested on the same three alias families (query-param, path-rewriting, server-routing) plus held-out variations and a limited live-browser WebShop/ALFWorld proxy where available?",
+  "lane": "frontier",
+  "origin_github_run_id": "35752577234",
+  "parent_handoff": {
+    "experiment_id": "EXP-FRONTIER-35741928625",
+    "path": "research/experiments/EXP-FRONTIER-35741928625/handoff.json",
+    "sha256": "eed60ec11f5ce50a0e085876d85a1c12055059f86e8777543263ffe6038a80d0"
+  },
+  "reason": "global-director-PIVOT",
+  "request_hash": "c86aefdf2cd70e1d7a2d5f076a3e7e07a186d2ca03233cf4937a642648bc880d",
+  "request_id": "808f1011090ce0f8a8c9b974",
+  "schema_version": 1
+}
