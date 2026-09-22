@@ -1,0 +1,100 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-FRONTIER-35757768022",
+  "lane": "frontier",
+  "github": {
+    "repository": "Spider",
+    "workspace": "/home/runner/work/Spider/Spider",
+    "github_run_id": "35757768022",
+    "github_run_attempt": "1",
+    "github_run_number": 893,
+    "branch_ref_type": "branch"
+  },
+  "commits": {
+    "freeze": "a20606749aaec67b76b852fbdb9dfb9ee31c0501",
+    "baseline_at_execute": "7cd64647 (R2 frontier: execution base EXP-FRONTIER-35757768022)",
+    "pre_execute_sha": "a20606749aaec67b76b852fbdb9dfb9ee31c0501"
+  },
+  "frozen_inputs": {
+    "request.json": "e781f6832208715625c7f23568355ff2496349fc961727566af2da456656fed3",
+    "spec.json": "09abb6acee9785c5cc757b5005344b5b31f496f9dde3792707fd5239bfddb7de",
+    "prereg.md": "fac686520f188ad40547c4524a31a4101b7ec0d5af150a41fec6f5b610081888"
+  },
+  "code_paths": [
+    "research/frontier/run_genuine_35757768022.py",
+    "src/spider/kernel.py",
+    "src/spider/models.py",
+    "src/spider/registry.py"
+  ],
+  "environment": {
+    "python": "3.12.14",
+    "numpy": "2.5.3",
+    "scipy": "1.18.1",
+    "scikit_learn": "1.9.1",
+    "platform": "linux",
+    "seed": 42,
+    "substrates_unavailable": {
+      "sentence_transformers": "ModuleNotFoundError - B-RAG-EMBED unavailable, TFIDF strong baseline per frozen spec",
+      "torch/transformers": "ModuleNotFoundError - RECONSTRUCTION-LEARNED (GRPO/System-One) unavailable; no learned metrics fabricated",
+      "browsergym": "ModuleNotFoundError - live WebShop/ALFWorld stratum exploratory-bound",
+      "playwright": "ModuleNotFoundError - live stratum exploratory-bound"
+    }
+  },
+  "artifacts": [
+    {
+      "path": "research/frontier/run_genuine_35757768022.py",
+      "sha256": "8168cd88dbaeb3ae4b280eba33e88e286389c2f225fd9828017d3377a7437343",
+      "role": "code"
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-35757768022/tasks.json",
+      "sha256": "81c11a8496b419c724941750e614118000f46a763f2f36f63d72a088f208f98d",
+      "role": "fixture"
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-35757768022/raw_evidence.json",
+      "sha256": "525969cf77f82023d0947dc28fee9e4f4c3454ce2323d5057a1156ef7dfd6d01",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-35757768022/derived_metrics.json",
+      "sha256": "4556ef1f596e260f7c891bbe5bcd74184dee0cc524ac57adf51a5d33f9c71316",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-35757768022/result.json",
+      "sha256": "4878333bdd7dbf5e57816b27fad9271a91204787a93f4f82389263a2d336ab4e",
+      "role": "producer-handoff"
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-35757768022/report.md",
+      "sha256": "f100ae91c717aec8094578e239bcf5b39a9d085064f886e0c45c60181d75ab01",
+      "role": "report"
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-35757768022/provenance.json",
+      "sha256": null,
+      "role": "provenance",
+      "note": "own sha256 recorded by downstream consumers (circular if embedded)"
+    }
+  ],
+  "reproduction_commands": [
+    "python3 research/frontier/run_genuine_35757768022.py"
+  ],
+  "measurement_notes": {
+    "sample_counts": {"alias-OOD": 30, "exact-match": 12, "no-applicable": 12, "empty-registry": 6},
+    "raw_rows": 510,
+    "harness_errors": 0,
+    "alias_OOD_registry_template_leak": 0,
+    "forbidden_key_violations_in_derived_context": 0,
+    "prior_execution_bookkeeping": "execution_checkpoint.json (github_run_id 35757768022) and model_execute.json (status=retry, attempt 4, transient) pre-existed and were not modified"
+  },
+  "required_fixes": [
+    "Alias-OOD task generation fixed relative to the first harness draft: test templates were previously rotating over the registered distractor forms (21/30 leak); now 0/30 by construction (documented DOC[2] for standard-7, novel forms for held-out-3). No frozen file was modified."
+  ],
+  "unresolved": [
+    "Live BrowserGym WebShop/ALFWorld replication requires a substrate with browsergym 0.14.3 + playwright at 1280x720.",
+    "Learned GRPO/System-One non-inferiority and training cost/stability require an offline LLM stack.",
+    "Cross-family combined aliasing and production SPA/session drift remain untested."
+  ]
+}
