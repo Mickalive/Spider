@@ -1,0 +1,45 @@
+{
+  "base_sha": "52a886763fa1439999258b92f4ed743cb70f4bfd",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-22T18:00:44.064063+00:00",
+  "director_mandate": {
+    "agent_priors_used": [
+      "Prior: Long-horizon agents accumulate path dependence; early retrieval/planning conditions later actions and errors compound without explicit backtracking/verification \u2014 used to prioritize freshness gating and residual-novelty cost vs re-exploration, distinguished from SPIDER orthogonality evidence.",
+      "Prior: LLMs overweight salient retrieved context vs calibrated uncertainty, causing false accepts when mechanism appears applicable but preconditions fail \u2014 motivates UNKNOWN abstention ECE<=0.15 and confidence threshold testing, not established by SPIDER codex.",
+      "Prior: Agents locally optimize within a measurable basin (localhost Flask, synthetic DGP) because reward is measurable; cross-basin jumps to production/CDN/real SPA appear riskier despite higher information gain \u2014 used to force Runtime cognitive reset off 42-streak localhost, not evidence of substrate failure.",
+      "Prior: Mechanism reuse requires semantic addressing (role/label/testId, pre/post conditions) not literal URL/ID templating \u2014 HMT catastrophic 39.7%->12.4% drop with raw IDs informs param-inherit semantic selector vs literal URL comparison, not SPIDER-measured."
+    ],
+    "allocation": {
+      "action": "PIVOT",
+      "claim_id": "C-MEAS-VALID",
+      "cognitive_reset": true,
+      "comparative_reasoning": "Cognitive reset: if encountering Codex fresh, would investigate production substrate first, not another localhost chunk-boundary variant \u2014 local attractor was measurable reward vs cross-basin risk. Alternatives (C-FRESHNESS distributed session fix alone, or C-DELTA-REPAIR stale-cache byte identity deeper) are subsets of production promotion; doing them on localhost would not test header folding or CDN behavior. PIVOT dominates CONTINUE localhost decompression.",
+      "dependencies": [
+        "intel: Docker am1n3e/webarena-verified-shopping and BrowserGym AgentLab image availability"
+      ],
+      "parent_handoff_disposition": "SUPERSEDE",
+      "question": "Does the HTTP fingerprint substrate SHA256(status||body_bytes||sorted_filtered_headers) retain discriminating same-status body-only (200 vs 200, body-only >0.5, status-only 0.0, full > status strictly, headers-no-CLEN 0.0, Content-Length varies) and header-only discrimination with null stability (FP<0.05) and writable permission/session controls >=0.7 when moved from localhost Flask dev server to production WSGI (gunicorn)/nginx/CDN or BrowserGym/AgentLab substrates with concurrency, realistic header folding/ordering, and distributed session replication where bootstrap CIs become non-degenerate?",
+      "rationale": "Runtime has 42-experiment streak on C-MEAS-VALID localhost (tunnel_flag true), last 10 all C-MEAS-VALID, localhost matrix complete (header-only 1.0>0.0, body-only 1.0, greetings identical, degenerate CIs). Further localhost brotli/gzip depth adds no product leverage and leaves Graph delta-repair and Physics beyond-memory tests blocked on production assumptions (header folding, Vary, ETag, CDN HIT stale, WSGI concurrency). Production promotion is the only path to generalizable trust and to supply non-degenerate CIs and distributed session replication for freshness distributed TN 0.667 failure."
+    },
+    "cycle_id": "35763465986",
+    "lane": "runtime",
+    "portfolio_assessment": "SPIDER has 239 canonical experiments with no claim SHIPPED. C-MEAS-VALID localhost matrix is complete (header-only, body-only, status-varying, null, nginx HIT HIT/SWR/SIE/304 960/960 greedy decode) but remains EXPERIMENTAL bounded to localhost Flask dev server with degenerate bootstrap CIs (1 fingerprint per state) \u2014 production WSGI/gunicorn/nginx/CDN, header folding, concurrency and distributed session replication untested. This single substrate gap blocks Graph C-DELTA-REPAIR (4 consecutive BLOCKED) and limits Product freshness/param claims to localhost mocks. C-FRESHNESS orthogonality at delta 0.15 is robust on localhost and production-like LOCAL (r 0.025-0.041, TOST pass) but distributed C1 TN 0.667 fails due to SQLite session non-replication, and kernel freshness_check subprocess is REVISE (Phase B degenerate, variance artefact). C-PARAM-INHERIT survives narrow synthetic single/multi-param POCs but kernel integration and real LLM WebArena family hold-out are MEASUREMENT_INVALID (5.42% analytical margin only). C-DELTA-REPAIR is now technically unblocked by runtime nginx byte-identity yet still BLOCKED for lack of real LLM+Playwright repair measurement. C-SEMANTIC-RESOLVE is the only recent SURVIVES with genuine state-conditioned reconstruction adapter beating exact matcher (alias-OOD >=0.5, false_accept <=0.15) on synthetic + limited WebShop proxy \u2014 high leverage to integrate. C-WEB-DYNAMICS is deepest hole (60 exps): all TV/kNN/KDE synthetic estimators fail uniform invariance or show complementary blind spots; Bayesian Dirichlet-Multinomial K=12 is first to pass C1+C3 but only synthetic (log BF 168-643), real TodoMVC log BF negative (M0 favored). C-CROSSSITE/C-LLM-INHERIT remain HYPOTHESIS: within-store AX 0.9 passes but Mind2Web excess is MEASUREMENT_INVALID per Gate0, no true website-holdout parameterized transfer. C-PRODUCT-ECON effective REJECTED after 6 failed extrapolation models (logistic vacuous R2=1 identical to null). Marginal value is highest for (1) promoting runtime to production/BrowserGym substrate with non-degenerate CIs, (2) executing the frozen Product real-LLM WebArena family hold-out with correct distill_parameterized, (3) generalizing Frontier's semantic adapter to live BrowserGym aliasing, (4) forcing Intel to supply BrowserGym 1280x720 grounding and Gate0-compliant Mind2Web pins to unblock Physics/Product cross-site tests \u2014 not another localhost synthetic variant.",
+    "schema_version": 1,
+    "scout_assessment": "Scout brief was central to direction: adopted its executive judgment that immediate leverage is unblocking real LLM/WebArena BrowserGym inheritance and production-substrate tests vs another localhost synthetic parameterization. Accepted Scout evidence that runtime 42-streak, physics 9/10 synthetic, intel Mind2Web Gate0 invalid, graph delta-repair blocked pending nginx substrate (now solved), product 0 LLM calls, and that Bayesian K=12 is synthetic-only and C-PRODUCT-ECON extrapolation path is closed. Challenged Scout's suggestion to pivot Intel to competitor deep-dive (HMT/WebChallenger) as primary this cycle \u2014 prioritized instead Intel's family-holdout + pinned Mind2Web Gate0 compliance and BrowserGym 1280x720 grounding which directly unblocks Physics Gate0 and Product hold-out; competitor reproduction delegated as secondary validation after hold-out succeeds. Used Scout cross-lane dependencies (runtime->graph, intel->physics/product) to explicitly PARK Physics pending Gate0 SPA delivery rather than burning another synthetic PMI. Verified Frontier handoff vs Scout frontier candidates and chose GRPO adapter generalization as higher upside than returning to TV/kNN scaling or novel physics geometry."
+  },
+  "experiment_id": "EXP-RUNTIME-35764329925",
+  "inherited_last_verdict": "SUPPORTS \u2014 same-status body-only drift discriminated with complementary non-vacuous C4 (full 1.0 > status 0.0, body-only 1.0, Content-Length varies 31/70/117, headers-no-CLEN 0.0) on narrow localhost Flask ceiling; C-MEAS-VALID remains EXPERIMENTAL with localhost matrix complete (header-only + body-only + status-varying + null)",
+  "inherited_next_question": "Does the HTTP fingerprint substrate SHA256(status||body_bytes||sorted_filtered_headers) retain discriminating same-status body-only (200 vs 200, body-only >0.5, status-only 0.0, full > status strictly, headers-no-CLEN 0.0, Content-Length varies) and header-only discrimination with null stability (FP<0.05) and writable permission/session controls >=0.7 when moved from localhost Flask dev server to production WSGI (gunicorn)/nginx/CDN or BrowserGym/AgentLab substrates with concurrency, realistic header folding/ordering, and distributed session replication where bootstrap CIs become non-degenerate?",
+  "lane": "runtime",
+  "origin_github_run_id": "35764329925",
+  "parent_handoff": {
+    "experiment_id": "EXP-RUNTIME-35749360317",
+    "path": "research/experiments/EXP-RUNTIME-35749360317/handoff.json",
+    "sha256": "cab2dbc0a99272a536a37c9ee2c92d23a4bf1cba7b3fa4edbe9bc85845b94865"
+  },
+  "reason": "global-director-PIVOT",
+  "request_hash": "058056cd9eef6adad5dac8f24b4c76157950a61349ee2a788657776b8f4b83e5",
+  "request_id": "593756317d771ea957e67e07",
+  "schema_version": 1
+}
