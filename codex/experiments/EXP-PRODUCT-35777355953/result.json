@@ -1,0 +1,394 @@
+{
+ "schema_version": 1,
+ "experiment_id": "EXP-PRODUCT-35777355953",
+ "lane": "product",
+ "status": "COMPLETE",
+ "outcome": "SUPPORTS",
+ "metrics": {
+  "P-SPIDER-RECONSTRUCT::alias-OOD::correct_rate": {
+   "value": 1.0,
+   "unit": "ratio",
+   "n": 40,
+   "description": "Product port correct resolution on synthetic alias-OOD pooled (30 orthogonal + 10 mixed)"
+  },
+  "P-SPIDER-RECONSTRUCT::alias-OOD::false_accept_rate": {
+   "value": 0.0,
+   "unit": "ratio",
+   "n": 40,
+   "description": "Product port false-accept (wrong bound executed) on alias-OOD"
+  },
+  "P-SPIDER-RECONSTRUCT::alias-OOD::unknown_rate": {
+   "value": 0.0,
+   "unit": "ratio",
+   "n": 40,
+   "description": "Product port abstention rate on alias-OOD"
+  },
+  "P-SPIDER-RECONSTRUCT::alias-OOD::wilson95_correct": {
+   "value": [
+    0.9123754607496077,
+    1.0
+   ],
+   "unit": "interval",
+   "n": 40,
+   "description": "Wilson 95% CI on product correct rate"
+  },
+  "P-SPIDER-RECONSTRUCT::orthogonal_subset::correct_rate": {
+   "value": 1.0,
+   "unit": "ratio",
+   "n": 30,
+   "description": "Orthogonal (families 0-2) correct rate"
+  },
+  "P-SPIDER-RECONSTRUCT::mixed_subset::correct_rate": {
+   "value": 1.0,
+   "unit": "ratio",
+   "n": 10,
+   "description": "Mixed multi-channel (header+body+query) correct rate"
+  },
+  "P-SPIDER-RECONSTRUCT::heldout_9::correct_rate": {
+   "value": 1.0,
+   "unit": "ratio",
+   "n": 9,
+   "description": "Held-out novel alias forms correct rate"
+  },
+  "P-SPIDER-RECONSTRUCT::per_family": {
+   "value": {
+    "fam0": 1.0,
+    "fam1": 1.0,
+    "fam2": 1.0,
+    "fam3": 1.0
+   },
+   "unit": "ratio",
+   "n": 10,
+   "description": "Per-family correct rates (fam0 header, fam1 body, fam2 auth, fam3 mixed)"
+  },
+  "R-FRONTIER-RULE-PROXY::alias-OOD::correct_rate": {
+   "value": 1.0,
+   "unit": "ratio",
+   "n": 40,
+   "description": "Reference frontier proxy correct resolution on same tasks (C8 parity reference)"
+  },
+  "B-EXACT-MATCH::alias-OOD::correct_rate": {
+   "value": 0.0,
+   "unit": "ratio",
+   "n": 40,
+   "description": "Current kernel exact match without reconstruction"
+  },
+  "B-VERBATIM-REPLAY::alias-OOD::false_accept_rate": {
+   "value": 1.0,
+   "unit": "ratio",
+   "n": 40,
+   "description": "Naive replay false-accept (negative-transfer reference)"
+  },
+  "B-RAG-TFIDF::alias-OOD::correct_rate": {
+   "value": 0.0,
+   "unit": "ratio",
+   "n": 40,
+   "description": "TF-IDF retrieval + verbatim bind"
+  },
+  "B-RANDOM::alias-OOD::correct_rate": {
+   "value": 0.0,
+   "unit": "ratio",
+   "n": 40,
+   "description": "Uniform random among intent-matching eligible mechanisms"
+  },
+  "P-SPIDER-RECONSTRUCT::exact-match::correct_rate": {
+   "value": 1.0,
+   "unit": "ratio",
+   "n": 12,
+   "description": "Product port no-regression check on exact-match stratum (C5)"
+  },
+  "P-SPIDER-RECONSTRUCT::exact-match::false_accept_rate": {
+   "value": 0.0,
+   "unit": "ratio",
+   "n": 12,
+   "description": "Product port false-accept on exact-match stratum (C1/C5)"
+  },
+  "P-SPIDER-RECONSTRUCT::no-applicable::unknown_precision": {
+   "value": 1.0,
+   "unit": "ratio",
+   "n": 12,
+   "description": "UNKNOWN precision on no-applicable stratum (C2/C6)"
+  },
+  "P-SPIDER-RECONSTRUCT::no-applicable::false_accept_rate": {
+   "value": 0.0,
+   "unit": "ratio",
+   "n": 12,
+   "description": "False-accept on no-applicable stratum (C2)"
+  },
+  "P-SPIDER-RECONSTRUCT::empty-registry::unknown_rate": {
+   "value": 1.0,
+   "unit": "ratio",
+   "n": 6,
+   "description": "100% UNKNOWN on empty registry (C2/NC-EMPTY)"
+  },
+  "P-SPIDER-RECONSTRUCT::ECE_all_strata": {
+   "value": 0.0652516342187119,
+   "unit": "ratio",
+   "description": "Expected calibration error over 5 confidence bins, all strata (70 rows); C6 <=0.15"
+  },
+  "R-FRONTIER-RULE-PROXY::ECE_all_strata": {
+   "value": 0.0802516342187119,
+   "unit": "ratio",
+   "description": "Proxy ECE over all strata (recomputed from raw_evidence); product/proxy delta within C8 0.05"
+  },
+  "P-SPIDER-RECONSTRUCT::confidence_std": {
+   "value": 0.4000051211339946,
+   "unit": "ratio",
+   "description": "Std of derived confidence across all strata (S4 requires >0.05, not constant)"
+  },
+  "stats::binomial_p_vs_0.10": {
+   "value": 1.0000000000000022e-40,
+   "unit": "p-value",
+   "n": 40,
+   "description": "One-sided binomial p for 40/40 vs 0.10 null (C3)"
+  },
+  "stats::mcnemar_correct_vs_exact": {
+   "value": 6.984393063902417e-10,
+   "unit": "p-value",
+   "n": 40,
+   "description": "Paired McNemar p (correct) product vs B-EXACT-MATCH (C3)"
+  },
+  "stats::mcnemar_fa_vs_verbatim": {
+   "value": 6.984393063902417e-10,
+   "unit": "p-value",
+   "n": 40,
+   "description": "Paired McNemar p (false_accept) product vs B-VERBATIM-REPLAY (C4)"
+  },
+  "stats::diff_verbatim_minus_product_fa": {
+   "value": 1.0,
+   "unit": "ratio",
+   "description": "Absolute false-accept gap vs verbatim (C4 requires >=0.15)"
+  },
+  "C8::per_family_max_gap": {
+   "value": 0.0,
+   "unit": "ratio",
+   "description": "Largest per-family pooled-correct gap product vs proxy (C8 requires <=0.10)"
+  },
+  "economics::P-SPIDER-RECONSTRUCT::mean_latency_ms": {
+   "value": 0.39994714285714283,
+   "unit": "ms",
+   "n": 70,
+   "description": "Mean wall-clock per task incl retrieval + reconstruction + bind; 0 LLM tokens, 0 browser calls"
+  },
+  "economics::P-SPIDER-RECONSTRUCT::latency_per_success_ms": {
+   "value": 0.39994714285714283,
+   "unit": "ms",
+   "description": "Amortized wall latency per successful alias-OOD task"
+  },
+  "stability::cv_3_seeds": {
+   "value": 0.0,
+   "unit": "ratio",
+   "description": "CV of product pooled correct across registry-order splits seeds 42/43/44"
+  }
+ },
+ "controls": {
+  "PC-EXACT-MATCH": {
+   "expected": "P-SPIDER-RECONSTRUCT and R-FRONTIER-RULE-PROXY correct>=0.90 and false_accept<=0.10 on exact-match 12/12 (B-EXACT-MATCH also reported)",
+   "observed": {
+    "product_correct": 1.0,
+    "product_false_accept": 0.0,
+    "proxy_correct": 1.0,
+    "baseline_correct": 1.0
+   },
+   "pass": true,
+   "evidence": [
+    "derived_metrics.json::exact_match",
+    "raw_evidence.json stratum=exact-match"
+   ]
+  },
+  "PC-BROWSERGYM-HEALTH": {
+   "expected": ">=80% of attempted live BrowserGym WebShop/ALFWorld tasks load DOM/AX at 1280x720 with CDP AX nodes>10; if <20 attempted or health <80%, live is exploratory and claim bounds to synthetic (not MEASUREMENT_INVALID)",
+   "observed": {
+    "live_attempted": 0,
+    "live_healthy": 0,
+    "webshop_module": "ModuleNotFoundError: No module named 'browsergym.webshop'",
+    "alfworld_module": "ModuleNotFoundError: No module named 'browsergym.alfworld'",
+    "substrate_probe": "example.com loaded, CDP AX nodes=15, viewport 1280x720 (see browser_probe.json)"
+   },
+   "pass": false,
+   "note": "Live correctly bounded to exploratory per frozen C1 clause; C1 passes via the exploratory-bound branch. Chromium+CDP AX substrate verified viable.",
+   "evidence": [
+    "browser_probe.json"
+   ]
+  },
+  "NC-NO-APPLICABLE": {
+   "expected": "product UNKNOWN precision>=0.90 and false_accept<=0.10 on 12 no-applicable tasks",
+   "observed": {
+    "unknown_precision": 1.0,
+    "false_accept_rate": 0.0
+   },
+   "pass": true,
+   "evidence": [
+    "derived_metrics.json::no_applicable"
+   ]
+  },
+  "NC-EMPTY-REGISTRY": {
+   "expected": "100% UNKNOWN on 6 empty-registry tasks",
+   "observed": {
+    "unknown_rate": 1.0
+   },
+   "pass": true,
+   "evidence": [
+    "derived_metrics.json::no_applicable"
+   ]
+  },
+  "B-EXACT-MATCH": {
+   "expected": "0/40 correct on alias-OOD (exact intent equality cannot resolve aliasing)",
+   "observed": {
+    "correct_rate": 0.0
+   },
+   "pass": true,
+   "evidence": [
+    "derived_metrics.json::alias_OOD"
+   ]
+  },
+  "B-VERBATIM-REPLAY": {
+   "expected": "1.0 false_accept on alias-OOD (replays wrong channel)",
+   "observed": {
+    "false_accept_rate": 1.0
+   },
+   "pass": true,
+   "evidence": [
+    "derived_metrics.json::alias_OOD"
+   ]
+  },
+  "B-RAG-TFIDF": {
+   "expected": "0/40 on alias-OOD (retrieval alone cannot solve aliasing)",
+   "observed": {
+    "correct_rate": 0.0
+   },
+   "pass": true,
+   "evidence": [
+    "derived_metrics.json::alias_OOD"
+   ]
+  },
+  "B-RAG-EMBED": {
+   "expected": "if unavailable offline deterministically, mark unavailable and use TFIDF with disclosure",
+   "observed": {
+    "available": false,
+    "message": "sentence-transformers unavailable: ModuleNotFoundError: No module named 'sentence_transformers'"
+   },
+   "pass": null,
+   "evidence": [
+    "derived_metrics.json::availability"
+   ]
+  },
+  "B-RANDOM": {
+   "expected": "~chance correct on alias-OOD; not solvable by guessing",
+   "observed": {
+    "correct_rate": 0.0
+   },
+   "pass": true,
+   "evidence": [
+    "derived_metrics.json::alias_OOD"
+   ]
+  },
+  "B-INSTRUCTION": {
+   "expected": "LLM site-instruction baseline (200 tokens amortized f=10); requires LLM agent",
+   "observed": {
+    "available": false,
+    "message": "no LLM provider API key in environment (OPENAI_API_KEY/ANTHROPIC_API_KEY unset); B-INSTRUCTION requires an instruction-following agent with a model API. Smallest unblock: provide a provider key or an offline model endpoint."
+   },
+   "pass": null,
+   "evidence": [
+    "derived_metrics.json::availability"
+   ]
+  },
+  "R-FRONTIER-RULE-PROXY": {
+   "expected": "reference RECONSTRUCTION-RULE parity anchor (audit-PASS 40/40 on frontier)",
+   "observed": {
+    "correct_rate": 1.0,
+    "ece_all_strata": 0.0802516342187119
+   },
+   "pass": true,
+   "evidence": [
+    "derived_metrics.json::alias_OOD",
+    "frontier_proxy.py"
+   ]
+  }
+ },
+ "artifacts": [
+  {
+   "path": "research/experiments/EXP-PRODUCT-35777355953/raw_evidence.json",
+   "sha256": "af1af741b0287bd1637d486e333754901338c0d74065d7bdee26b44dd2f961cf",
+   "role": "raw"
+  },
+  {
+   "path": "research/experiments/EXP-PRODUCT-35777355953/tasks.json",
+   "sha256": "4abf148721fdee9dfe56ac776f6b3112344821a4ea80d183c5313adeced1f35e",
+   "role": "fixture"
+  },
+  {
+   "path": "research/experiments/EXP-PRODUCT-35777355953/derived_metrics.json",
+   "sha256": "fd321428ad3edd745dba7cf59493622bcd71cc864a809f29f322142a7a85c2e1",
+   "role": "derived"
+  },
+  {
+   "path": "research/experiments/EXP-PRODUCT-35777355953/economics.json",
+   "sha256": "3add76ce997226dd22088c31e3b15ab61a9b2e1d79fa0b0e17c398fe80c79c55",
+   "role": "derived"
+  },
+  {
+   "path": "research/experiments/EXP-PRODUCT-35777355953/browser_probe.json",
+   "sha256": "0d1ae76de8c40b41d3cec44674cc2686d029a13b7aec27b672fc3bc37b88bb16",
+   "role": "raw"
+  },
+  {
+   "path": "research/experiments/EXP-PRODUCT-35777355953/frontier_proxy.py",
+   "sha256": "ba3202f834c95761e67f00b41f8ac095e646e7b7a0d8c1795ad1ddb53e6ab155",
+   "role": "code"
+  },
+  {
+   "path": "research/experiments/EXP-PRODUCT-35777355953/run_experiment.py",
+   "sha256": "f4d443a35347dc3359a04efd5dc1424ca13918524c4e4253f27bc3e0aa2294fd",
+   "role": "code"
+  },
+  {
+   "path": "src/spider/kernel.py",
+   "sha256": "a57265155603581bb9cb7a00db5349afa52d8af43d208d296564ca60ac2150a1",
+   "role": "code"
+  },
+  {
+   "path": "tests/test_kernel.py",
+   "sha256": "6e4dfd6bcc8682f87573397ca1f20973ec28a190533417f0d3f187dac69bed38",
+   "role": "code"
+  }
+ ],
+ "observations": [
+  "Product port P-SPIDER-RECONSTRUCT resolved 40/40 synthetic alias-OOD tasks with exact bound equality (correct_rate 1.0), 0 false_accepts, 0 unknowns.",
+  "Orthogonal subset 30/30 (1.0); mixed multi-channel subset 10/10 (1.0); held-out novel forms 9/9 (1.0); each family 10/10 (1.0).",
+  "Reference proxy R-FRONTIER-RULE-PROXY also resolved 40/40 (1.0) on identical tasks; per-family max gap 0.0.",
+  "Baselines on alias-OOD: B-EXACT-MATCH 0/40 correct, B-VERBATIM-REPLAY false_accept 40/40 (1.0), B-RAG-TFIDF 0/40, B-RANDOM 0/40.",
+  "Derived confidence across 70 product rows: std 0.400 (not constant); ECE 0.0653 over 5 bins (bins 1-3 empty); bootstrap 2000 mean 0.0640 CI [0.0538, 0.0769].",
+  "One-sided binomial p=1.00e-40 for 40/40 vs 0.10 null; paired McNemar p=6.98e-10 vs B-EXACT-MATCH (correct) and vs B-VERBATIM-REPLAY (false_accept).",
+  "False-accept gap verbatim minus product = 1.0 (C4 requires >=0.15).",
+  "NC-NO-APPLICABLE: product returned UNKNOWN on 12/12 (precision 1.0, false_accept 0.0); NC-EMPTY-REGISTRY returned UNKNOWN on 6/6 (1.0).",
+  "Exact-match stratum: product 12/12 (1.0), proxy 12/12 (1.0), B-EXACT-MATCH 12/12 (1.0) \u2014 no regression from the port.",
+  "0 harness errors across the task x method matrix (560 calls).",
+  "Leak check 0/40: no alias-OOD expected template appears verbatim in any registry.",
+  "Static audit of src/spider/kernel.py: no literal reads of any FORBIDDEN_KEYS string; kernel sha256 changed a5726515... vs pre-port 46929b3a... (port present).",
+  "BrowserGym 0.14.3 installed; browsergym.webshop and browsergym.alfworld modules are absent (ModuleNotFoundError) so 0 live WebShop/ALFWorld tasks were attempted.",
+  "Chromium substrate probe at 1280x720 with CDP AX: example.com loaded with 15 AX nodes (healthy >10); local data: URL probe had 8 nodes.",
+  "Stability across seeds 42/43/44 (deterministic per-task registry-order splits, identical content): product pooled correct 1.0/1.0/1.0, CV 0.0.",
+  "Deterministic methods consumed 0 LLM tokens and 0 browser calls; P-SPIDER-RECONSTRUCT mean wall latency 0.436 ms/task (70 tasks).",
+  "B-RAG-EMBED unavailable (sentence-transformers/torch not importable); B-INSTRUCTION unavailable (no LLM provider API key)."
+ ],
+ "validity_notes": [
+  "Live WebShop/ALFWorld stratum not measured: both task modules are absent from the browsergym 0.14.3 distribution installed on this runner (ModuleNotFoundError for browsergym.webshop and browsergym.alfworld). Per frozen C1 clause, PC-BROWSERGYM-HEALTH=FAIL correctly bounds the claim to synthetic orthogonal+mixed (not MEASUREMENT_INVALID); chromium+CDP AX substrate verified viable separately.",
+  "B-RAG-EMBED marked unavailable per frozen spec sanction ('if unavailable offline deterministically, mark unavailable and use TFIDF with disclosure'); B-RAG-TFIDF is the strong retrieval baseline used in C7.",
+  "B-INSTRUCTION not run: no LLM provider API key in the runner environment; smallest unblock = provide a provider key or an offline model endpoint. No fabricated instruction metrics.",
+  "Empty-registry abstention confidence differs between product (0.0, kernel default) and proxy (0.05-0.068 intent-hash score); both abstain correctly. This drives the ECE difference 0.0653 (product) vs 0.0803 (proxy), within the frozen C8 0.05 bound; disclosed as a representation difference, not a failure.",
+  "ECE has exactly 3 empty bins (bins 1-3) over all-strata pooled product confidences, as disclosed and permitted by the frozen S4 clause.",
+  "Stability CV=0.0 reflects reconstruction scoring being order-invariant: the '3 independent registry splits' are deterministic per-task permutations of the frozen mechanism lists (content identical). CV non-zero is only expected for order-sensitive baselines (B-EXACT-MATCH tie-breaks, B-VERBATIM-REPLAY, B-RANDOM); exact baseline was 0/40 under every seed.",
+  "Product kernel port exists in the working tree (sha a5726515...) but is not committed: EXECUTE scope rules forbid git commit; git diff HEAD shows the port and tests for AUDIT.",
+  "Dependencies installed in-runner via pip: numpy 2.5.3, scipy 1.18.1, scikit-learn 1.9.1, pytest, playwright 1.44.0, browsergym 0.14.3; playwright chromium downloaded. Reproduce with the printed reproduction command.",
+  "Wall-clock latency is in-process deterministic timing on CI hardware (mean 0.436 ms/task); not a strict browser/network economics measurement."
+ ],
+ "unresolved": [
+  "Live generalization on real WebShop/ALFWorld CDP AX trees (header/body extraction robustness, SPA heterogeneity) unmeasured. Smallest unblock: browsergym 0.14.3 build with webshop/alfworld task modules (or older browsergym with WebShop server infra) to attempt 20+20 live tasks.",
+  "Learned GRPO/System-One 3-seed stability unmeasured (offline LLM stack absent); per frozen spec this does not gate the rule-port SURVIVES decision.",
+  "B-RAG-EMBED head-to-head retrieval comparison with intent+template embeddings.",
+  "B-INSTRUCTION economics (200 tokens amortized f=10) unmeasured (no LLM agent).",
+  "Scale behavior not measured: registry with many mechanisms (>3 per intent) and long-lived deployment freshness/repair boundaries."
+ ]
+}

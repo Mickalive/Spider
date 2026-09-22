@@ -1,0 +1,119 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-35774039080",
+  "lane": "physics",
+  "github_run_id": "35774039080",
+  "github_run_attempt": "1",
+  "model": "opencode/big-pickle (EXECUTE stage)",
+  "commits": {
+    "allocation_base_sha": "f50de84df1c3608a01420384f8098acbc0dbef57",
+    "pre_execute_sha": "1c8513958274e2e10d05d7265b38d20da5882e5f",
+    "execution_head_sha": "e9c667e54edfd7d3ea7d2c1230c38f119b08fa8d",
+    "execution_head_subject": "R2 physics: execution base EXP-PHYSICS-35774039080"
+  },
+  "commands": [
+    "PYTHONHASHSEED=0 python3 research/experiments/EXP-PHYSICS-35774039080/execute.py   # frozen gate stage: freeze-hash verify, raw-hash verify, relaxed substrate gate table, WebShop/BrowserGym scan, halt at Q==0"
+  ],
+  "environment": {
+    "python": "3.12.14 (/opt/hostedtoolcache/Python/3.12.14/x64/bin/python3)",
+    "os": "linux (GitHub Actions runner)",
+    "packages": "stdlib only \u2014 numpy/scipy/sklearn/playwright NOT installed (verified via pip list). Gate path requires stdlib only; primary-stage pipeline would require these packages for any retry on qualifying substrate.",
+    "determinism": "PYTHONHASHSEED=0; gate path uses no RNG; reproducible byte-identical gate_table.json from frozen commit"
+  },
+  "datasets_fixtures": [
+    {
+      "role": "reused raw trajectories (TodoMVC SPA variants, raw + topup)",
+      "source": "research/experiments/EXP-PHYSICS-35209110569/",
+      "verified_against": "EXP-PHYSICS-35209110569 result.json artifacts (raw role), 10/10 sha256 MATCH",
+      "files": [
+        {
+          "path": "research/experiments/EXP-PHYSICS-35209110569/raw_vanillajs.json",
+          "sha256": "8897172862238d5ce5f433090bdfeecbf7b5cb7485f3ccfea4b8887a796979fe"
+        },
+        {
+          "path": "research/experiments/EXP-PHYSICS-35209110569/raw_vanillajs_topup.json",
+          "sha256": "655178f7b98d5e4873ed061ad607dba8dd0c53e62e5d8469cb1686fd2ae2bb49"
+        },
+        {
+          "path": "research/experiments/EXP-PHYSICS-35209110569/raw_react.json",
+          "sha256": "4d0b19e27b3a081fe6c99f3e1e4386d4eccdb00561c84265a8bc9f1f8b644fb1"
+        },
+        {
+          "path": "research/experiments/EXP-PHYSICS-35209110569/raw_react_topup.json",
+          "sha256": "65aef7fe9980c50f72d8b7ba39a5f520b26c1e64101c325dc175442a0d5b3c99"
+        },
+        {
+          "path": "research/experiments/EXP-PHYSICS-35209110569/raw_vue.json",
+          "sha256": "de723933a67bfb6961e621193bc740ee97b6a37047624a9a7fb4a3b0938b4cc4"
+        },
+        {
+          "path": "research/experiments/EXP-PHYSICS-35209110569/raw_vue_topup.json",
+          "sha256": "59d701d8bc3627cc26a4ac8e51bb141a5da18b35dd3fb9bdda1c62169f856443"
+        },
+        {
+          "path": "research/experiments/EXP-PHYSICS-35209110569/raw_angular.json",
+          "sha256": "353489eb28bcbe4e7bb97756b785dfbec167a2950cc57e1636c57b32a1696f24"
+        },
+        {
+          "path": "research/experiments/EXP-PHYSICS-35209110569/raw_angular_topup.json",
+          "sha256": "f26d3767d7e2a789dd3d7e4daf8a4fab0755b07ca19f07eac6b92d51055e3f87"
+        },
+        {
+          "path": "research/experiments/EXP-PHYSICS-35209110569/raw_svelte.json",
+          "sha256": "88e2897a755608123f879772237a6d44cfed546d4f7abbf450dce05244068482"
+        },
+        {
+          "path": "research/experiments/EXP-PHYSICS-35209110569/raw_svelte_topup.json",
+          "sha256": "97893637f64953d0a6725dc5692c653413e605d0f32012e197bb4650b511537f"
+        }
+      ]
+    },
+    {
+      "role": "WebShop/BrowserGym substrate scan",
+      "result": "absent",
+      "checks": [
+        "research/intel/ exists: false",
+        "research/intel/manifest.json exists: false",
+        "/tmp/browsergym_cache exists: false",
+        "files under research/ matching browsergym|webshop|webarena|miniwob: none"
+      ]
+    }
+  ],
+  "frozen_input_hashes_verified": {
+    "prereg.md": "185b7642c45c803078e39882e7622aa60762055ec6d2295fc10585ca9b2cb21b (MATCH freeze.json)",
+    "request.json": "b0e6eeaccd5fa95cd6c403a1555e9176891b0eba2eec67de2a94e6eb026bce2a (MATCH freeze.json)",
+    "spec.json": "8eeebec9f069bd6a5247d5f9b85b66e8bf580553a626cf099a5a3ac2638bb5ee (MATCH freeze.json)",
+    "freeze.json": "640ab7b82bf6cf8f07a0d2c0fa73d8fbe00ce4dec0d41dbf85788eac624cc85c"
+  },
+  "output_artifacts": [
+    {
+      "path": "research/experiments/EXP-PHYSICS-35774039080/execute.py",
+      "sha256": "045496fca659e2a6acdef5c9f3b041c4c88171aeb82858497d93331d25c5d3f1",
+      "role": "code"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-35774039080/gate_table.json",
+      "sha256": "fe0474a07dc275733917dbfe7f6c62475c3e26ae474592f3a475306183f2a591",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-35774039080/result.json",
+      "sha256": "0ace8b3c248bfd04816e33abc9c22ee8bc2373abd3319a8090af2138fa462918",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-35774039080/report.md",
+      "sha256": "d318be7c8f8d0182ea1cfea4c886706bdcff1d99d3c16d54ea13cfb68214aeeb",
+      "role": "derived"
+    }
+  ],
+  "reproduction_notes": "Execute from the frozen commit: PYTHONHASHSEED=0 python3 research/experiments/EXP-PHYSICS-35774039080/execute.py. Reuses raw files listed above (must match recorded sha256). No network, no browser, no LLM calls, no third-party packages required for the gate stage. Outcome: Q=0 => MEASUREMENT_INVALID substrate_insufficient per frozen rule; no H_T/H_B measurement is performed at Q==0 by frozen design.",
+  "evidence_refs": [
+    "research/experiments/EXP-PHYSICS-35774039080/gate_table.json (sha256 fe0474a07dc275733917dbfe7f6c62475c3e26ae474592f3a475306183f2a591)",
+    "research/experiments/EXP-PHYSICS-35774039080/result.json",
+    "research/experiments/EXP-PHYSICS-35774039080/report.md",
+    "research/experiments/EXP-PHYSICS-35209110569/result.json (raw artifact hashes, verified 10/10)",
+    "research/experiments/EXP-PHYSICS-35209110569/collect_spa_survey.py (recorder schema: no DOM/a11y fields)",
+    "research/experiments/EXP-PHYSICS-35756224948/handoff.json (parent: MEASUREMENT_INVALID substrate_unavailable, Gate0; SUPERSEDED by this mandate)"
+  ]
+}

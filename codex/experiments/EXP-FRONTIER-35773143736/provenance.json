@@ -1,0 +1,61 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-FRONTIER-35773143736",
+  "lane": "frontier",
+  "claim_id": "C-SEMANTIC-RESOLVE",
+  "github_run_id": "35773143736",
+  "github_run_attempt": 1,
+  "base_sha": "f50de84df1c3608a01420384f8098acbc0dbef57",
+  "pre_execute_sha": "2b411f4c504d1553dd9295195fbf82690bb58c4e",
+  "request_id": "66583ffa86024f60e6117f63",
+  "request_hash": "c79d75cbc151a70c23373473714df421fb8d02b54b883268b5aaf9a884e30cd5",
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "parent_handoff": {
+    "experiment_id": "EXP-FRONTIER-35766532429",
+    "sha256": "4abf148721fdee9dfe56ac776f6b3112344821a4ea80d183c5313adeced1f35e",
+    "note": "parent fixture tasks.json re-verified byte-identical (fixture_identical_to_parent=True)"
+  },
+  "code": {
+    "run_script": "research/frontier/run_genuine_35773143736.py",
+    "run_script_sha256": "ebb9f4f7e61f75ecebbd94f9aa2e9e7a87c2e30f020697a9771df277e23e752e",
+    "parent_harness": "research/frontier/run_genuine_35766532429.py (task generation, derive_state, candidate_score, choose_adoptions, rewrite_template_multi, reconstruct_resolve, B-* baselines, wilson_ci/binomial/McNemar/ECE-bootstrap 2000 reused verbatim)",
+    "kernel_sources_imports": ["src/spider/kernel.py", "src/spider/models.py", "src/spider/registry.py"]
+  },
+  "environment": {
+    "python": "3.12.14",
+    "numpy": "2.5.3",
+    "torch": "2.14.0+cu130",
+    "torch_cuda_available": false,
+    "torch_device_count": 0,
+    "sentence_transformers_embedder": "all-MiniLM-L6-v2 (B-RAG-EMBED real retrieval arm)",
+    "browsergym": "0.14.3 base importable, version '?', zero registered envs",
+    "browsergym_webshop_alfworld": "absent; pip download returns 'No matching distribution found'",
+    "playwright": "1.44.0 installed; ~/.cache/ms-playwright empty (no browser binaries)"
+  },
+  "data": {
+    "fixture": "research/experiments/EXP-FRONTIER-35773143736/tasks.json (70 tasks: 40 alias-OOD incl 30 orthogonal + 10 mixed, 12 exact-match, 12 no-applicable, 6 empty-registry)",
+    "fixture_sha256": "4abf148721fdee9dfe56ac776f6b3112344821a4ea80d183c5313adeced1f35e",
+    "train_split": "21 standard orthogonal tasks (families 0-2, is_heldout=False); leak asserts heldout=0/9, mixed=0/10",
+    "learned_seeds": [42, 43, 44]
+  },
+  "run": {
+    "command": "python research/frontier/run_genuine_35773143736.py",
+    "execution_mode": "single process, CPU-only",
+    "train_wall_s_per_seed": [8.67, 8.6, 8.5],
+    "harness_errors": 0,
+    "first_run_note": "an earlier run of the same script produced a GRPO gradient bug (zero-effective policy gradient); fixed (per-member log-prob vector + softmax-learned-score confidence) and re-executed. The buggy run is superseded and excluded from evidence."
+  },
+  "artifacts": {
+    "result.json": "research/experiments/EXP-FRONTIER-35773143736/result.json",
+    "report.md": "research/experiments/EXP-FRONTIER-35773143736/report.md",
+    "raw_evidence.json": {"path": "research/experiments/EXP-FRONTIER-35773143736/raw_evidence.json", "sha256": "50f2f6e581d47ec631abdc674a21d41d59256d3a3970e601a65064bedaff547f"},
+    "raw_evidence_learned_seeds.json": {"path": "research/experiments/EXP-FRONTIER-35773143736/raw_evidence_learned_seeds.json", "sha256": "328b8c0f8fc11b93f09f18ad7c09e0dc6e494843af7be7f22696c2add17fa593"},
+    "derived_metrics.json": {"path": "research/experiments/EXP-FRONTIER-35773143736/derived_metrics.json", "sha256": "5efd96aa03311403ed5ef80cc689ce6b798caab75497fa48ef3470067bfb0e62"},
+    "learned_training_report.json": {"path": "research/experiments/EXP-FRONTIER-35773143736/learned_training_report.json", "sha256": "9c278341827e6fc5252c53a79ee339352d28339051c4daed93fbe590ae5db154"},
+    "train_split_inventory.json": {"path": "research/experiments/EXP-FRONTIER-35773143736/train_split_inventory.json", "sha256": "b3b6e1d1aa5484cb203d2cd12b7021378ce1f1379b56a9c37e7e1bca755a9246"},
+    "tasks.json": {"path": "research/experiments/EXP-FRONTIER-35773143736/tasks.json", "sha256": "4abf148721fdee9dfe56ac776f6b3112344821a4ea80d183c5313adeced1f35e"},
+    "frozen_spec": {"path": "research/experiments/EXP-FRONTIER-35773143736/spec.json", "sha256": "932823366304b66dd40224a2df792851d3f711ef4c2e59ff172be56d963d3a85"},
+    "frozen_prereg": {"path": "research/experiments/EXP-FRONTIER-35773143736/prereg.md", "sha256": "2a29544d02e7acab3c015519f3a4b084b169f198dfd39d5165e8341856e70cff"},
+    "frozen_request": {"path": "research/experiments/EXP-FRONTIER-35773143736/request.json", "sha256": "da9dfd8ffa68469c7ac01820d2fd74a7e7f16955c181e42c524a4a2ffb2aafe1"}
+  }
+}
