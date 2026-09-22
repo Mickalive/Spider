@@ -1,0 +1,131 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-35756224948",
+  "lane": "physics",
+  "github_run_id": "35756224948",
+  "origin_github_run_id": "35756224948",
+  "base_sha": "2e9ddf33a89594a5e015094b76738ad1b127d1d0",
+  "pre_execute_sha": "2f9520f2950404b77742045c39f1af1ed94f4dbd",
+  "frozen_sha": "2f9520f2950404b77742045c39f1af1ed94f4dbd",
+  "post_execute_sha": "72be657e4860bff95b5596d96cd0022c0ce8b438",
+  "prereg_sha256": "44ce30352174d31355925fd9d817479f8700288747edf58cbc5133f3e1c6c456",
+  "request_sha256": "31acce57c1b718a70f06bc26417d777e5576e973402227edc3ce17c98121b203",
+  "spec_sha256": "fb5616892559cf4c7843c5c98ba27688ff00f3e25d7de9037fd8ea7c9a54e26d",
+  "freeze_sha256": "9ffd5d4ff375059245f0319b71430bc752cbc28d40f518a29bbb1957e7884133",
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "datasets": [
+    {
+      "name": "Intel production SPA manifest (BrowserGym/AgentLab 1280x720)",
+      "revision": null,
+      "available_splits": [],
+      "required": "intel_spa_manifest.json with provenance (dataset revision hash, capture date, BrowserGym/AgentLab version, 1280x720 viewport), each entry site_id, raw_transitions_path, n_raw, n_NL, leakage_validOnly, unique_titles, title_entropy, H_Snext_given_URL_HK3, singleton_SA_rate",
+      "status": "INCOMPLETE - substrate_unavailable: manifest not found at 5 candidate paths, BrowserGym trajectories not supplied",
+      "gate0_qualifying_spas": 0,
+      "gate0_thresholds": "unique_titles>=2, H>0.2 bits, leakage<40%, NL>=50, strata>=10 singleton<50%",
+      "candidates": [
+        "research/experiments/EXP-PHYSICS-35756224948/intel_spa_manifest.json",
+        "research/intel/intel_spa_manifest.json",
+        "research/intel/manifest.json",
+        "research/experiments/EXP-INTEL-35697055679/intel_spa_manifest.json",
+        "intel_spa_manifest.json"
+      ]
+    },
+    {
+      "name": "Synthetic correlated SPA (positive control)",
+      "revision": "seed 42, 20 trajectories x10 steps NL=200, FSM 3-state branching L persists P(flip)=0.30 exactly, URL hash(step_mod), DOM_before SHA256(L||step_mod), H=0.962 bits, leakage 0%, BC 0.075 p 0.001",
+      "status": "GENERATED - positive control FAILS threshold BC<0.5 due to BSC capacity 0.119, sensitive p 0.001 d 4.92 delta 0.30",
+      "path": "research/experiments/EXP-PHYSICS-35756224948/synthetic_positive_control.json",
+      "sha256": "49ab4ea1144d9dd32e0250c0e81341f1a3260caa8f451e805465f0392668f6e1"
+    },
+    {
+      "name": "Synthetic independent-noise SPA (null control)",
+      "revision": "seed 42+999, same FSM P=0.30 but DOM variant i.i.d. per step independent of L, H=0.986, NL=200, BC -0.0 p 1.0 degenerate std 0",
+      "status": "GENERATED - null BC passes <=0.05 p>0.10 but degenerate std 0 => MEASUREMENT_INVALID for that representation",
+      "path": "research/experiments/EXP-PHYSICS-35756224948/synthetic_negative_control.json",
+      "sha256": "bbbcd3150d86dd9dcfc6caff80b33e082b9b50c0e501d25e6c97d4869d90029f"
+    }
+  ],
+  "code_paths": [
+    {
+      "path": "research/experiments/EXP-PHYSICS-35756224948/execute.py",
+      "sha256": "79cfe181fcd180378efea15935b90c0aca6e5eef947abc955dafc1535d5f5e20",
+      "description": "Frozen spec execution: Gate0 qualification, synthetic correlated/independent-noise FSM generation P=0.30 DOM=SHA256(L||step_mod), history-conditioned CMI Laplace alpha1.0 Miller-Madow, 1000 grouped trajectory_id permutations with block flatten-rechunk, accuracy factorization grouped, baselines B-DOM-SIMILARITY TFIDF cosine k5 fit train only, B-TRAJECTORY-MEMORY, B-ACTION-FREQ-SHUFFLE, B-RANDOM-DOM, leakage diagnostic, barrier exploratory",
+      "status": "executed_successfully"
+    },
+    {
+      "path": "research/physics/substrate.py",
+      "description": "Physics substrate helpers (not used due to Gate0 failure, synthetic path only)",
+      "status": "not_executed_for_production"
+    }
+  ],
+  "environment": {
+    "python_version": "3.12.14",
+    "numpy": "2.5.3",
+    "scikit_learn": "1.9.1",
+    "scipy": "1.18.1",
+    "BrowserGym": "not_used_substrate_unavailable",
+    "AgentLab": "not_used_substrate_unavailable",
+    "playwright": "not_used",
+    "PYTHONHASHSEED": "0",
+    "numpy_seed": 42,
+    "random_seed": 42,
+    "sklearn_random_state": 42,
+    "platform": "linux",
+    "viewport": "1280x720",
+    "N_PERMS": 1000,
+    "LAPLACE_ALPHA": 1.0
+  },
+  "commands": [
+    "pip install numpy scikit-learn scipy",
+    "PYTHONHASHSEED=0 python research/experiments/EXP-PHYSICS-35756224948/execute.py",
+    "sha256sum research/experiments/EXP-PHYSICS-35756224948/gate0_table.json research/experiments/EXP-PHYSICS-35756224948/raw_cmi_results.json research/experiments/EXP-PHYSICS-35756224948/synthetic_positive_control.json research/experiments/EXP-PHYSICS-35756224948/synthetic_negative_control.json",
+    "python -m json.tool research/experiments/EXP-PHYSICS-35756224948/result.json"
+  ],
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-PHYSICS-35756224948/gate0_table.json",
+      "sha256": "5f7cb7e2d4328cce485712e659cc021c6ee8800ad41afe9909627a2ca70380ef",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-35756224948/raw_cmi_results.json",
+      "sha256": "07155ecbe7b2e0ed02f1c74762e06211622cdc944e15bd99d3943f2d370ea2ab",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-35756224948/synthetic_positive_control.json",
+      "sha256": "49ab4ea1144d9dd32e0250c0e81341f1a3260caa8f451e805465f0392668f6e1",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-35756224948/synthetic_negative_control.json",
+      "sha256": "bbbcd3150d86dd9dcfc6caff80b33e082b9b50c0e501d25e6c97d4869d90029f",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-35756224948/result.json",
+      "sha256": "0e12a836f4ed6aa1eba2915bcdf4a03ee4b0e48faa07f75457284cf9e8ddfb43",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-35756224948/report.md",
+      "sha256": "0d91de4aa11157620f38870ebbb36d8368e8cbb1c1b458b35ea4949e1888057d",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-35756224948/execute.py",
+      "sha256": "79cfe181fcd180378efea15935b90c0aca6e5eef947abc955dafc1535d5f5e20",
+      "role": "code"
+    }
+  ],
+  "elapsed_seconds": 42.5,
+  "determinism": "PYTHONHASHSEED=0 numpy 42 sklearn 42, grouped permutation seed 42, byte-identical raw_cmi_results.json aside from elapsed if re-executed",
+  "audit_fixes_applied": [
+    "trajectory-grouped permutation resampling_unit trajectory_id with block flatten-rechunk preserving within-trajectory sequences (fixes FINDING-2 item-level shuffle)",
+    "restored positive control P(L flips)=0.30 and DOM=SHA256(L||step_mod) exactly per frozen (fixes FINDING-3 outcome-modified P=0.0)",
+    "reachable Bonferroni divisor 6 p<0.005 (fixes FINDING-4 unreachable p<0.001 at N=1000)",
+    "executed mandatory B-DOM-SIMILARITY TFIDF cosine k5 fit train only, B-ACTION-FREQ-SHUFFLE, B-TRAJECTORY-MEMORY (fixes missing baselines)",
+    "disclosed result artifact vs report drift and used grouped CI percentiles (fixes FINDING-6)",
+    "documented null degeneracy for hash DOM (fixes FINDING-5)"
+  ]
+}

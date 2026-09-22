@@ -1,0 +1,34 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-35756224948",
+  "lane": "physics",
+  "decision": "MEASUREMENT_INVALID",
+  "claim_updates": [
+    {
+      "claim_id": "C-WEB-DYNAMICS",
+      "status": "HYPOTHESIS",
+      "reason": "MEASUREMENT_INVALID substrate_unavailable: Gate 0 0 qualifying SPAs — intel_spa_manifest.json absent at all 5 candidate paths, no research/intel/ and no BrowserGym/AgentLab 1280x720 trajectories (result.json gate0_qualifying_spas 0, gate0_table.json NO_SPA_FOUND unique_titles 0 H 0.0 NL 0, audit FINDING-GATE0 verified). Secondary pipeline gate infeasible: synthetic correlated control with frozen restored construction P(L flips)=0.30 DOM=SHA256(L||step_mod) yields BC 0.0752 bits (observed 0.07946 perm_mean 0.00423 perm_std 0.01528 p_raw 0.001 p_bonf6 0.00599 d 4.92 delta 0.30 p_delta 0.00999, n=188) which is 63.4% of theoretical channel capacity I(L;L_next)=1-Hb(0.3)=0.1187 bits, so frozen BC>=0.5 gate and primary BC>=0.10 gate are both unreachable as frozen (audit FINDING-POSITIVE-THRESHOLD, FINDING-POWER). Independent-noise null degenerate perm_std 5.6e-17 =0 bias floor 0.3056 bits triggers frozen null_std>0.01 MEASUREMENT_INVALID per spec. Primary hypothesis I(S_next;DOM_before|URL,H_K=3,Action_leakageFree) not tested on production SPAs; no evidence for or against C-WEB-DYNAMICS on real SPAs from this packet. Audit status REVISE producer_claim_supported true; required_fixes are provenance/artifact drift non-gating for verdict. Claim remains HYPOTHESIS."
+    }
+  ],
+  "product_action": "NO_ACTION",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "On Intel-supplied production SPAs satisfying Gate 0 (>=2 titles, H(S_next|URL,H_K=3)>0.2 bits, leakage<40%, NL>=50, strata>=10, singleton<50%) with BrowserGym/AgentLab 1280x720 provenance, does history-conditioned CMI I(S_next;DOM_before|URL,H_K=3,Action_leakageFree) with frozen trajectory-grouped permutation (resampling unit trajectory_id, 1000 perms) and restored positive control (P(L flips)=0.3, DOM=SHA256(L||step_mod)) achieve BC PMI>=0.10 bits, Bonferroni p<0.005 and Delta accuracy>0.03 on >=1/2 SPAs (or >=2/3 if Q=3) for R1 or R2, and if falsified does barrier/committor (>=10 revisits to same URL,DOM with divergent futures) or timescale separation reveal beyond-memory dynamics with B-DOM-SIMILARITY executed as frozen?",
+  "reason": "Director bounds decision to MEASUREMENT_INVALID per frozen spec Gate 0 and pipeline gates. Gate 0 substrate_unavailable is verified and correctly applied (0 qualify => MEASUREMENT_INVALID, do not test H_primary, no C-WEB-DYNAMICS update). Synthetic pipeline demonstrates corrected trajectory-grouped leakage-free CMI detects injected correlated latent regime with high significance (p 0.001 d 4.92 delta 0.30) but magnitude 0.0752 <0.5 and <0.10 due to frozen threshold-construction mismatch (capacity 0.1187 <0.5), so positive path was structurally closed before outcome; independent-noise null degeneracy shows Laplace hash-DOM bias floor risk for production. All other decision thresholds cannot be evaluated on production because substrate absent. No falsification or survival justified. Audit REVISE required_fixes (result-vs-raw accuracy drift 0.483/0.783 vs raw 0.4333/0.7333, barrier 0/3 vs raw 6/6, avg_autocorr builtin hash non-portability, 5/200 transitions committed, isomorphic representations, missing freeze verification) are provenance completeness gaps that do not alter verdict-driving metrics (BC, p, d, delta, Gate0) which match raw exactly. Next step waits for Intel substrate and recalibrated freeze with power analysis.",
+  "evidence_refs": [
+    "research/experiments/EXP-PHYSICS-35756224948/request.json (sha256 31acce57c1b718a70f06bc26417d777e5576e973402227edc3ce17c98121b203)",
+    "research/experiments/EXP-PHYSICS-35756224948/spec.json (sha256 fb5616892559cf4c7843c5c98ba27688ff00f3e25d7de9037fd8ea7c9a54e26d)",
+    "research/experiments/EXP-PHYSICS-35756224948/prereg.md (sha256 44ce30352174d31355925fd9d817479f8700288747edf58cbc5133f3e1c6c456)",
+    "research/experiments/EXP-PHYSICS-35756224948/freeze.json (sha256 9ffd5d4ff375059245f0319b71430bc752cbc28d40f518a29bbb1957e7884133; freeze hashes verified MATCH per audit FINDING-FREEZE-INTEGRITY)",
+    "research/experiments/EXP-PHYSICS-35756224948/result.json (sha256 0e12a836f4ed6aa1eba2915bcdf4a03ee4b0e48faa07f75457284cf9e8ddfb43)",
+    "research/experiments/EXP-PHYSICS-35756224948/raw_cmi_results.json (sha256 07155ecbe7b2e0ed02f1c74762e06211622cdc944e15bd99d3943f2d370ea2ab)",
+    "research/experiments/EXP-PHYSICS-35756224948/gate0_table.json (sha256 5f7cb7e2d4328cce485712e659cc021c6ee8800ad41afe9909627a2ca70380ef)",
+    "research/experiments/EXP-PHYSICS-35756224948/synthetic_positive_control.json (sha256 49ab4ea1144d9dd32e0250c0e81341f1a3260caa8f451e805465f0392668f6e1; 5 of 200 transitions)",
+    "research/experiments/EXP-PHYSICS-35756224948/synthetic_negative_control.json (sha256 bbbcd3150d86dd9dcfc6caff80b33e082b9b50c0e501d25e6c97d4869d90029f; 5 of 200 transitions)",
+    "research/experiments/EXP-PHYSICS-35756224948/execute.py (sha256 79cfe181fcd180378efea15935b90c0aca6e5eef947abc955dafc1535d5f5e20)",
+    "research/experiments/EXP-PHYSICS-35756224948/provenance.json (sha256 claim_registry 3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b)",
+    "research/experiments/EXP-PHYSICS-35756224948/audit.json (status REVISE producer_claim_supported true, recomputed_metrics gate0 0 BC 0.075234 p 0.001 d 4.924 capacity 0.1187091, FINDING-GATE0/POSITIVE-THRESHOLD/POWER/NULL-DEGENERACY/REP-ISOMORPHISM/RESULT-RAW-DRIFT/REPRODUCIBILITY)",
+    "research/experiments/EXP-PHYSICS-35749353065/handoff.json (sha256 516ef1ca6100f77abeeb5e0ff16cdf9ce92a6b9524e56bd2911f1036a38dc6cc; parent MEASUREMENT_INVALID substrate_unavailable)",
+    "codex/claim_state.json (C-WEB-DYNAMICS HYPOTHESIS prior 59 synthetic-dominated events, latest parent MEASUREMENT_INVALID)"
+  ]
+}
