@@ -1,0 +1,146 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-35757760689",
+  "lane": "intel",
+  "status": "REVISE",
+  "producer_claim_supported": false,
+  "required_fixes": [
+    "Relabel the Docker axis per the frozen rule. Frozen PC3_FULL_DOM_ENUMERATION / measurement_validity[3] states: if locatable counts are outside 21-82 (listing 82, detail 32, cart 21 baseline), report MEASUREMENT_INVALID with code hash and cap location ('Failure = Docker axis MEASUREMENT_INVALID'). Observed tightened counts 34-120 (listing 116-120, detail 50, cart 34) and locatable counts 67-177 are ALL outside 21-82, so per frozen rule the Docker axis is MEASUREMENT_INVALID, not COMPLETE/PASS. Producer's 'PASS with disclosure' (result.json pc3_full_dom_enumeration.pass true, controls.PC3.pass true, docker_full_dom.status COMPLETE) is a relabeling of a failed gate; Clause2's prerequisite 'verified counts 21-82 and no cap' is not satisfied, so no Clause2 verdict (INCONCLUSIVE) may be attached to it. Either re-enumerate the 7 tasks with a parent-consistent element universe (parent DEF-FALLBACK-INTERACTIVE scope / total_dom comparable to parent 1136-1712) or re-freeze a new valid count window via new prereg before any decision use.",
+    "Reimplement NC4_RANDOM_ROLE_NULL per the frozen definition. Frozen NC4 (spec null_control; prereg 5.4/5.5): 'random subsets of locatable roles (same cardinality as canonical tightened set) ranking agreement null mean ~0.33-0.50; canonical F_full must exceed null mean by >=0.20 with non-overlapping bootstrap CIs'. The executed code (exp_35757760689_measure.py compute_ranking_agreement null loop) instead draws independent uniform-random 'canonical' and 'weighted' densities per task and measures agreement of two random rankings; it never samples roles from locatable_sample/tightened_sample and never enforces same cardinality, so null_mean=0.4989 is just the expected agreement of random permutations. The claim 'excess 0.2155 >= 0.20' (result.json controls.NC4 'MARGINAL', detail text 'same cardinality random subsets') rests on a non-frozen null. Re-run the true role-subset null or relabel the current one as an exploratory random-ranking simulation and remove decision-relevant wording.",
+    "Correct the packet outcome label. Frozen Clause4 MIXED requires one axis SURVIVES; no axis SURVIVES (Mind2Web Clause1 not executed; Docker Clause2 not applicable per fix 1). Per the packet's own decision_rule, overall outcome must be INCONCLUSIVE with per-axis bounded ceilings (Mind2Web MEASUREMENT_INVALID/BLOCKED, Docker MEASUREMENT_INVALID), not outcome=MIXED (report.md 6 already concedes 'alternatively INCONCLUSIVE overall').",
+    "Complete the frozen Mind2Web search strategy before declaring the axis BLOCKED. Frozen prereg 5.1 requires: 'try spec revision, then recent archived revisions, then alternative dump/parquet if HF single-train persists'. Only default load_dataset with 3 retries was executed. The same pinned HF revision 17ece8eb89862368edc0cc806acee6fca5163474 ships test.zip (567,745,122 bytes, LFS, verified in HF file tree 2026-09-22) and the HF dataset card documents official test splits (cross-task 252, cross-website 177, cross-domain ~912 instances). The official 4-way splits are therefore obtainable without any new revision. Download/validate test.zip (or query archived revisions), census the loaded splits, and if valid run the frozen TF-IDF(max_features 5000, ngram 1-2, min_df 2, stop english)->k-means k=min(50, unique_train_tasks/20) train-only pipeline with 1000 website-label shuffles, 2000 bootstraps and k/2,2k sensitivity. GitHub OSU-NLP-Group/Mind2Web (default branch main) exists but does not host the data in-repo.",
+    "Fix provenance/hash fields in result.json and provenance.json. result.json pc3_full_dom_enumeration.measure_js_hash = 826802ce2414fcc... is the sha256 of the PYTHON SCRIPT (research/intel/exp_35757760689_measure.py), not of MEASURE_JS_FULL; the genuine sha256_str(MEASURE_JS_FULL) = f1851adc59ead3b0c213d8c422cf3157d8535efe926cc926c013773caf4944c3 is already recorded correctly in artifacts/raw/axtree_full_dom_sample.json. result.json pc3_full_dom_enumeration.parent_measure_js_hash is the literal placeholder string 'sha256_str of parent file with cap'; the genuine value 085b58c93be51bc76dc4ad712436500100c077594bd73c1cc1e552b6f68f49a3 (sha256 of parent research/experiments/EXP-INTEL-34718481334/measure_fullpage_yield.py, cap 'if (locatableSample.length < 20) {' verified at its line 89) is in axtree_full_dom_sample.json. Replace placeholder/prose values (also provenance.json code.parent_measure_sha256) with the real hashes; the cap-removal verification itself is genuine and reproducible.",
+    "Resolve the F_full definitional ambiguity in the frozen text before the next run. Prereg 5.2 defines F_full as pairwise ranking preserved 'between truncated n=20 and full-DOM, or between canonical and per-task weighted reference under full-DOM' (two readings). Executor implemented canonical-vs-weighted ('For now, define F_full as canonical vs weighted ranking agreement ... product decision definition' — comment in the executed code) and used it as the primary 80%-threshold test (INCONCLUSIVE, CI straddles). Under the alternative frozen reading (truncated 20/totalDom vs full canonical — the direct test of the truncation hypothesis) F_trunc_vs_full_canonical = 0.1429 CI [0.0952, 0.7143] is entirely below 0.80, which per Clause2 logic would be FALSIFIED-IN-SETTING for the 80% crossing (had the counts prerequisite held). Since the axis is MEASUREMENT_INVALID anyway no verdict changes now, but the prereg must nominate the decision-governing definition.",
+    "Record the measurement script hash in freeze.json at freeze time. Prereg 5.2 / report 4 claim 'file hash frozen at freeze.json time', but freeze.json contains only prereg.md/request.json/spec.json hashes; the script hash 826802ce... appears only in provenance after execution (executed_at 17:17, script mtime 17:10). Commit sequence (c67fd63e freeze -> 3500333c execute) is intact; add the code hash to freeze.json in future executions to back the timing claim."
+  ],
+  "validity_findings": [
+    {
+      "id": "VF1_DOCKER_COUNTS_OUTSIDE_FROZEN_WINDOW",
+      "severity": "HIGH",
+      "finding": "Docker full-DOM enumeration produced tightened counts 34-120 (listing 116-120, detail 50, cart 34) and locatable counts 67-177, all outside the frozen 21-82 window (listing 82, detail 32, cart 21 baseline). Per frozen PC3_FULL_DOM_ENUMERATION and measurement_validity[3] this is 'host measurement invalid' / 'report MEASUREMENT_INVALID with code hash and cap location'. Producer relabeled as PC3 PASS 'with disclosure' (artifacts/raw/full_dom_locatable_sample.json; result.json). Consequently metrics F_full_canonical_vs_weighted=0.7143 and F_trunc_vs_full_canonical=0.1429 are reproducible but were measured on an element population diverging from the parent census universe (total_dom 1445-1989 vs parent 1136-1712; elements_with_bbox 172-636 vs 1070-1564), so they cannot serve as the frozen H2 test of the 80% threshold.",
+      "evidence": ["research/experiments/EXP-INTEL-35757760689/spec.json measurement_validity[3] and positive_control PC3", "research/experiments/EXP-INTEL-35757760689/prereg.md 5.4 and 5.5 PC3", "research/experiments/EXP-INTEL-35757760689/artifacts/raw/full_dom_locatable_sample.json", "research/experiments/EXP-INTEL-35757760689/result.json pc3_full_dom_enumeration"]
+    },
+    {
+      "id": "VF2_NC4_NULL_NOT_FROZEN_IMPLEMENTATION",
+      "severity": "HIGH",
+      "finding": "NC4_RANDOM_ROLE_NULL as executed is not the frozen control. Frozen definition: random subsets of locatable roles with same cardinality as the canonical tightened set, ranking agreement null. Executed code simulates independent uniform random densities per task (rng2.random()*0.05) and returns agreement of two random rankings (null_mean 0.4989, p95 0.7619 = expected values for independent random permutations); no role sampling, no cardinality constraint. result.json controls.NC4 detail ('1000 perms seed 35725763380+1 same cardinality random subsets') does not describe the executed code. 'null_excess' 0.2154 >= 0.20 therefore is not evidence that canonical ranking is discriminating vs the frozen null.",
+      "evidence": ["research/intel/exp_35757760689_measure.py compute_ranking_agreement (null_vals random-density loop, seed SEED+1)", "research/experiments/EXP-INTEL-35757760689/spec.json null_control NC4", "research/experiments/EXP-INTEL-35757760689/artifacts/derived/docker_ranking_agreement.json", "research/experiments/EXP-INTEL-35757760689/result.json controls.NC4"]
+    },
+    {
+      "id": "VF3_OUTCOME_LABEL_CONFLICTS_WITH_CLAUSE4",
+      "severity": "MODERATE",
+      "finding": "status=COMPLETE with outcome=MIXED is not per frozen Clause4, which requires one axis SURVIVES for MIXED. No axis SURVIVES (Clause1 not executed; Clause2 prerequisite failed). Packet's own report.md 6 states 'Not met (no axis SURVIVES)' and 'alternatively INCONCLUSIVE overall'. Correct overall outcome: INCONCLUSIVE (per-axis: Mind2Web MEASUREMENT_INVALID/BLOCKED, Docker MEASUREMENT_INVALID). Label change does not alter claim ceilings but preserves decision-rule discipline.",
+      "evidence": ["research/experiments/EXP-INTEL-35757760689/spec.json decision_rule Clause4", "research/experiments/EXP-INTEL-35757760689/report.md 6", "research/experiments/EXP-INTEL-35757760689/result.json"]
+    },
+    {
+      "id": "VF4_MIND2WEB_SEARCH_STRATEGY_INCOMPLETE",
+      "severity": "MODERATE",
+      "finding": "The frozen 5.1 search strategy ('try spec revision, then recent archived revisions, then alternative dump/parquet if HF single-train persists') was only partially executed: default load_dataset with 3 retries only. The same pinned HF revision 17ece8eb89862368edc0cc806acee6fca5163474 contains test.zip (567,745,122 bytes, LFS, verified via HF repo tree API 2026-09-22; HF dataset card documents test splits cross-task 252, cross-website 177, cross-domain ~912). The official 4-way splits are consequently retrievable without a new revision; the Gate0 'no alternative exists' framing overstates blockage. The axis remains MEASUREMENT_INVALID per frozen Gate0 until the search strategy is exhausted and the failure documented.",
+      "evidence": ["research/experiments/EXP-INTEL-35757760689/prereg.md 5.1", "https://huggingface.co/api/datasets/osunlp/Mind2Web/tree/main (test.zip, data/train, README.md)", "research/experiments/EXP-INTEL-35757760689/artifacts/raw/mind2web_split_census.json", "research/experiments/EXP-INTEL-35757760689/result.json metrics.mind2web"]
+    },
+    {
+      "id": "VF5_F_FULL_DEFINITIONAL_AMBIGUITY_RESOLVED_POST_HOC",
+      "severity": "MODERATE",
+      "finding": "Frozen prereg 5.2 offers two readings of F_full ('preserved between truncated n=20 and full-DOM, or between canonical and per-task weighted reference under full-DOM'). The executed code chose canonical-vs-weighted (its own comment: 'For now, define F_full as canonical vs weighted ranking agreement...'), yielding INCONCLUSIVE (CI [0.4286,1.0] straddles 0.80). The alternative frozen reading (truncated 20/totalDom estimates vs full canonical, F_trunc_vs_full_canonical=0.1429 CI [0.0952,0.7143], entirely <0.80) would be FALSIFIED-IN-SETTING for the 80% crossing under Clause2 logic, conditional on valid counts. The prereg did not nominate the decision-governing reading; the choice materially changes the provisional verdict. Both values are recomputed and reproducible; the axis is MEASUREMENT_INVALID in either case (VF1).",
+      "evidence": ["research/experiments/EXP-INTEL-35757760689/prereg.md 5.2", "research/intel/exp_35757760689_measure.py compute_ranking_agreement", "research/experiments/EXP-INTEL-35757760689/result.json validity_notes 'F_full definition ambiguity'"]
+    },
+    {
+      "id": "VF6_RESULT_JSON_HASH_FIELDS_MISLABELED",
+      "severity": "LOW",
+      "finding": "result.json pc3_full_dom_enumeration.measure_js_hash is the Python script hash (826802ce24f3cc534da1a0b4a60f1dd276999eecefcf0afc7f22d1d591839ce8), not the MEASURE_JS_FULL hash; parent_measure_js_hash is a literal placeholder string. The genuine values (f1851adc59ead3b0c213d8c422cf3157d8535efe926cc926c013773caf4944c3 for MEASURE_JS_FULL; 085b58c93be51bc76dc4ad712436500100c077594bd73c1cc1e552b6f68f49a3 for the parent script) are recorded correctly in artifacts/raw/axtree_full_dom_sample.json and were independently reproduced; parent cap at measure_fullpage_yield.py:89. Cap-removal verification is genuine; reporting fields are inconsistent.",
+      "evidence": ["research/experiments/EXP-INTEL-35757760689/result.json", "research/experiments/EXP-INTEL-35757760689/artifacts/raw/axtree_full_dom_sample.json", "research/experiments/EXP-INTEL-34718481334/measure_fullpage_yield.py:89", "research/experiments/EXP-INTEL-35757760689/provenance.json code.parent_measure_sha256"]
+    },
+    {
+      "id": "VF7_SCRIPT_NOT_FROZEN_IN_FREEZE_JSON",
+      "severity": "LOW",
+      "finding": "freeze.json hashes only prereg.md/request.json/spec.json; the claim (prereg 5.2, report 4) that the measurement script 'file hash frozen at freeze.json time' is unsupported by the packet. Script sha 826802ce... is recorded in provenance only post-run. Commit sequence freeze c67fd63e -> execute 3500333c is intact, so no outcome-dependent edit is evidenced, but the packet cannot substantiate 'frozen before any metric computed' for the code definition of F_full.",
+      "evidence": ["research/experiments/EXP-INTEL-35757760689/freeze.json", "research/experiments/EXP-INTEL-35757760689/provenance.json", "git log: c67fd63e (freeze), 3500333c (execute)"]
+    },
+    {
+      "id": "VF8_RESULT_JSON_TASK_DENSITIES_TRANSCRIPTION",
+      "severity": "LOW",
+      "finding": "result.json metrics.docker_full_dom.tasks[] carries two canonical_density values that do not match tightened_elements/total_dom from the same rows (listing_beauty 0.0599758064516129 vs 119/1984=0.0599798387; detail_camera 0.02829631612988676 vs 50/1767=0.0282965478). artifacts/raw/full_dom_locatable_sample.json densities are internally consistent (mean 0.0414986843001459 matches producer can_mean). Pairwise orderings, F_full, F_trunc_vs_full and all CIs are unaffected; the tasks[] block is a low-precision transcription.",
+      "evidence": ["research/experiments/EXP-INTEL-35757760689/result.json metrics.docker_full_dom.tasks", "research/experiments/EXP-INTEL-35757760689/artifacts/raw/full_dom_locatable_sample.json"]
+    },
+    {
+      "id": "VF9_MIND2WEB_SPEC_DIVERGENCE_FRAMING",
+      "severity": "INFORMATIONAL",
+      "finding": "Spec '137 websites/31 domains' is the whole-corpus (train+test) statistic per the HF dataset card ('over 2,000 open-ended tasks collected from 137 websites spanning 31 domains'); observed 73 websites / 3 domains / 1009 tasks is train-only with a coarse per-task 'domain' field (verified sample: website exploretock, domain Travel, subdomain Restaurant). The recorded divergence is real at the datasets-library level but reflects the release structure (train JSONs + test.zip), not dataset corruption. datasets-server API confirms only config 'default'/split 'train' is exposed via the datasets library.",
+      "evidence": ["https://datasets-server.huggingface.co/splits?dataset=osunlp/Mind2Web", "https://huggingface.co/api/datasets/osunlp/Mind2Web", "research/experiments/EXP-INTEL-35757760689/artifacts/derived/measurements.json _raw_count_sample"]
+    }
+  ],
+  "baseline_findings": [
+    {"id": "B1_DOC_M1_12STORES", "finding": "Handled per frozen rule: single-store confirmed via reused census (d65275660814663375028e9017e1f929e3c38321041b125795e2713b52243d30, 192 shopping tasks, site_tuples 187 (shopping,)+5 (shopping,reddit)); REJECTED as cross-site baseline is correct.", "pass": true},
+    {"id": "B2_DOC_M2_HEURISTIC", "finding": "Disclosure consistent: reused census param_task 172/192=0.8958 CI [0.8490,0.9375], param_template 41/49=0.8367, exact_copy 0.0781 CI [0.0417,0.1198] vs heuristic 0.80; gap quantified, heuristic not used for decision.", "pass": true},
+    {"id": "B3_SPIDER_2SITE", "finding": "Lower-bound disclosure only; 36 families >=3 and 73 Mind2Web train websites exceed 2-site bound, but quality test depends on official splits (untried, VF4).", "pass": true},
+    {"id": "B4_SHUFFLE_NULL", "finding": "Correctly NOT COMPUTED under Gate0; shuffle_null.json documents the omission. Caveat: non-computation is tied to incomplete search strategy (VF4); official splits are obtainable via test.zip, after which NC2/B4 must run.", "pass": null},
+    {"id": "B5_TRUNCATED_FIRST_20", "finding": "F_trunc_vs_full_canonical=0.1429 (recomputed 3/21) correctly demonstrates the truncated-first-20 ordering is anti-correlated with full-DOM canonical ordering; but the primary F_full comparison against 0.5654 (B6) is not decision-valid because the measurement population violates PC3 (VF1). 0.5654 is neither rejected nor confirmed.", "pass": null},
+    {"id": "B6_CONSTANT_NULL_05654", "finding": "Not resolvable from this run: F_full 0.7143 CI [0.4286,1.0] straddles 0.80 and the measurement is invalid per PC3 (VF1). Logistic L=0.5654 vacuous-plateau status unchanged; C-PRODUCT-ECON extrapolation path remains REJECTED and the direct-measurement replacement is not yet achieved.", "pass": null},
+    {"id": "B7_RETRIEVAL_REPLAY_STRONG", "finding": "Disclosure-only, correctly not executed. Fine.", "pass": null},
+    {"id": "PC1_WEB_SEARCH", "finding": "PASS verified: homepage AX node count 1426 (within frozen 627-1426), combobox+button 'Search' and placeholder 'Search entire store here...' present in raw evidence (axtree_full_dom_sample.json, full_dom_locatable_sample.json pc1).", "pass": true},
+    {"id": "PC2_MIND2WEB_RECURRENCE", "finding": "CANNOT_VERIFY is consistent with Gate0 but contingent on VF4: pipeline not executed; recurrence remains untested by this run.", "pass": false},
+    {"id": "PC3_FULL_DOM_ENUMERATION", "finding": "Producer PASS is a relabeling: frozen rule requires MEASUREMENT_INVALID when counts fall outside 21-82 (VF1). Cap-removal sub-check itself passes (JS hash f1851adc..., no 'locatableSample.length < 20' in MEASURE_JS_FULL, sample lengths equal element counts; parent cap verified at measure_fullpage_yield.py:89... hash 085b58c9...).", "pass": false},
+    {"id": "NC1_WIKIPEDIA_NULL", "finding": "NOT_EXERCISED disclosure, consistent (null not 0).", "pass": null},
+    {"id": "NC2_MIND2WEB_SHUFFLE_NULL", "finding": "NOT_COMPUTED_MEASUREMENT_INVALID, consistent with Gate0; same VF4 caveat as B4.", "pass": null},
+    {"id": "NC3_WEB_EXACT_COPY_NULL", "finding": "PASS: exact_copy 0.0781 CI [0.0417,0.1198] < 0.2 (reused census), consistent.", "pass": true},
+    {"id": "NC4_RANDOM_ROLE_NULL", "finding": "Invalid as an implementation of the frozen control (VF2): executed random-density simulation yields null_mean 0.4989 / p95 0.7619 (reproduced exactly with seed 35725763380+1); 'excess 0.2155 >= 0.20' does not test the frozen random-role-subset hypothesis; CIs overlap p95 anyway (stated by producer).", "pass": null},
+    {"id": "NC5_COARSE_33_MECHANISM_NULL", "finding": "Disclosure only, correctly not used for decision. Fine.", "pass": null}
+  ],
+  "recomputed_metrics": {
+    "note": "All recomputations from research/experiments/EXP-INTEL-35757760689/artifacts/raw/full_dom_locatable_sample.json per-task densities using the producer's exact algorithm (pairwise task-pair agreement; bootstrap with replacement over 7 tasks, 21 pairs, ties 0.5; seed 35725763380). All values match producer derived artifacts.",
+    "F_full_canonical_vs_weighted": {"recomputed": 0.7142857142857143, "agreement_pairs": "15/21", "producer": 0.7142857142857143, "match": true},
+    "F_full_ci_lower": {"recomputed": 0.42857142857142855, "producer": 0.42857142857142855, "match": true},
+    "F_full_ci_upper": {"recomputed": 1.0, "producer": 1.0, "match": true},
+    "F_trunc_vs_full_canonical": {"recomputed": 0.14285714285714285, "agreement_pairs": "3/21", "producer": 0.14285714285714285, "match": true},
+    "F_trunc_ci_lower": {"recomputed": 0.09523809523809523, "producer": 0.09523809523809523, "match": true},
+    "F_trunc_ci_upper": {"recomputed": 0.7142857142857143, "producer": 0.7142857142857143, "match": true},
+    "null_mean": {"recomputed": 0.49885714285714283, "producer": 0.49885714285714283, "match": true, "note": "reproduces the executed random-density simulation only; frozen NC4 random-role-subset null was not implemented (VF2)"},
+    "null_p95": {"recomputed": 0.7619047619047619, "producer": 0.7619047619047619, "match": true},
+    "can_mean": {"recomputed": 0.0414986843001459, "producer": 0.0414986843001459, "match": true, "note": "from raw artifact densities; result.json tasks[] transcription of 2 densities is slightly off (VF8) but rankings/metrics unaffected"},
+    "w_mean": {"recomputed": 0.1809574044133612, "producer": 0.1809574044133612, "match": true},
+    "gap_ratio": {"recomputed": 4.360557628877043, "producer": 4.360557628877043, "match": true},
+    "hashes_verified": {
+      "MEASURE_JS_FULL (sha256_str)": "f1851adc59ead3b0c213d8c422cf3157d8535efe926cc926c013773caf4944c3 (matches artifacts/raw/axtree_full_dom_sample.json measure_js_hash)",
+      "parent measure_fullpage_yield.py": "085b58c93be51bc76dc4ad712436500100c077594bd73c1cc1e552b6f68f49a3 (matches artifacts/raw/axtree_full_dom_sample.json parent_measure_js_hash; cap 'if (locatableSample.length < 20) {' at line 89)",
+      "script exp_35757760689_measure.py": "826802ce24f3cc534da1a0b4a60f1dd276999eecefcf0afc7f22d1d591839ce8 (this is the Python script hash; result.json mislabels it as the JS hash, VF6)",
+      "frozen files": "request.json 0f393cfafa046eb6bea925af16b4dcf3eadfc84c6ca4d7f1043b4a16f4ddab72, spec.json 92b22635f495c0bb7968bbe7ee72bbfa214c0483c67b15d1c23b0efb134a9108, prereg.md aa70be4345a4b6953f6fe394534b55a8e1a5b1522303b42a444e39c5b211a808 — all match freeze.json (no post-freeze edits)",
+      "webarena census reuse": "d65275660814663375028e9017e1f929e3c38321041b125795e2713b52243d30 verified on parent artifact"
+    },
+    "deliverables_not_computed": ["Mind2Web overlap/excess/shuffle_null_distribution/param_prevalence/PC2/k_sensitivity (Gate0)", "TF-IDF vocab hash", "k-means centroids hash", "per-task locatable_sample sha256 per prereg 5.6"]
+  },
+  "claim_ceiling": "C-CROSSSITE: unchanged HYPOTHESIS/UNKNOWN. No valid evidence for or against same-mechanism cross-website overlap at the frozen TF-IDF/k-means granularity; website-holdout not unblocked. Ceiling remains WebArena census-only (192/49 duplication 0.9479 CI [0.9167,0.9792], exact_copy 0.0781, param_task 0.8958, param_template 0.8367, families 36/34/33, AX 0.9 within-store) with no LLM benefit demonstrated. The 'BLOCKED' status is softer than claimed: official test splits exist as test.zip in the same pinned HF revision and were not attempted (VF4); the frozen search strategy was incompletely executed. C-PRODUCT-ECON: the REJECTED 6-model extrapolation path (logistic L=0.5654 vacuous, Hill h=20 at bound) remains closed, but the planned direct full-DOM replacement produced no decision-valid evidence: the Docker axis is MEASUREMENT_INVALID per frozen PC3 (VF1). F_full_canonical_vs_weighted=0.7143 CI [0.4286,1.0] and F_trunc_vs_full_canonical=0.1429 CI [0.0952,0.7143] are reproducible exploratory diagnostics on a non-compliant element population; neither 'plateau confirmed at 0.5654' nor 'crossing >=0.80' may be concluded. No product promotion on either claim; do not assume ranking stability or instability at Magento scale from this run.",
+  "evidence_refs": [
+    "research/experiments/EXP-INTEL-35757760689/request.json (0f393cfafa046eb6bea925af16b4dcf3eadfc84c6ca4d7f1043b4a16f4ddab72)",
+    "research/experiments/EXP-INTEL-35757760689/spec.json (92b22635f495c0bb7968bbe7ee72bbfa214c0483c67b15d1c23b0efb134a9108): decision_rule, PC3, NC4, measurement_validity[3]",
+    "research/experiments/EXP-INTEL-35757760689/prereg.md (aa70be4345a4b6953f6fe394534b55a8e1a5b1522303b42a444e39c5b211a808): 5.1 search strategy, 5.2 F_full definition, 5.4/5.5 NC4/PC3",
+    "research/experiments/EXP-INTEL-35757760689/freeze.json (frozen_at 2026-09-22T17:05:09.671617+00:00)",
+    "research/experiments/EXP-INTEL-35757760689/result.json (status COMPLETE, outcome MIXED)",
+    "research/experiments/EXP-INTEL-35757760689/report.md",
+    "research/experiments/EXP-INTEL-35757760689/provenance.json",
+    "research/experiments/EXP-INTEL-35757760689/execution_checkpoint.json (pre_execute_sha c67fd63e0f9355d3760a0741fe0f638a1b113eb5)",
+    "research/experiments/EXP-INTEL-35757760689/artifacts/raw/full_dom_locatable_sample.json (6a492e52c9c081907b2f3f466f36153f5e5d58d942381fada77219114864d69e)",
+    "research/experiments/EXP-INTEL-35757760689/artifacts/raw/axtree_full_dom_sample.json (a584e8b6b707e9484d10d7545ac7cc97ab489f75e81f3a7f1a4b10bcadd2e5d3)",
+    "research/experiments/EXP-INTEL-35757760689/artifacts/raw/mind2web_split_census.json (8e1c27b5e700ec41062ac9c1b325c3a5ed6bf3e6bbe7b0ac55b20d3e38db4214)",
+    "research/experiments/EXP-INTEL-35757760689/artifacts/derived/docker_ranking_agreement.json (a2ae49ec4facab6c423cb3acd0020f3592d152758e319021d63ca8ef8bd496e2)",
+    "research/experiments/EXP-INTEL-35757760689/artifacts/derived/bootstrap_ci.json (4b7436469292686ad9004f4e1df77104e0cd08ff62369ab71a77bbc5b2c51cde)",
+    "research/experiments/EXP-INTEL-35757760689/artifacts/derived/measurements.json (f6344fc5d9a6ad72a0340fc176897e96854651f3b7a0dd5e0a2d7408dcc902ca)",
+    "research/experiments/EXP-INTEL-35757760689/artifacts/derived/shuffle_null.json (5fad303d0e2f405265ae7d9e6be03d0eac4f0a3b4da2fcd198c25a306bee3a14)",
+    "research/experiments/EXP-INTEL-35757760689/artifacts/derived/tfidf_kmeans_meta.json (7c1922ca87181a9b67819589c1070b2f972931711340433a81c4bfc3778a7c1d)",
+    "research/intel/exp_35757760689_measure.py (826802ce24f3cc534da1a0b4a60f1dd276999eecefcf0afc7f22d1d591839ce8)",
+    "research/experiments/EXP-INTEL-34718481334/measure_fullpage_yield.py (085b58c93be51bc76dc4ad712436500100c077594bd73c1cc1e552b6f68f49a3; cap at line 89)",
+    "research/experiments/EXP-INTEL-35749371101/artifacts/raw/webarena-verified.json (d65275660814663375028e9017e1f929e3c38321041b125795e2713b52243d30)",
+    "research/experiments/EXP-INTEL-35749371101/handoff.json (19bb656434e4a81991ba922854c59492a8be456bbf65b27ea3bb74c35944d87e)",
+    "https://datasets-server.huggingface.co/splits?dataset=osunlp/Mind2Web (only config default/split train)",
+    "https://huggingface.co/api/datasets/osunlp/Mind2Web (revision 17ece8eb..., siblings incl. test.zip 567,745,122 bytes and data/train/train_0..10.json) and /tree/main",
+    "https://api.github.com/repos/OSU-NLP-Group/Mind2Web (repo exists, default branch main, no data dir at root)",
+    "codex/claim_state.json latest_event_by_claim: C-CROSSSITE HYPOTHESIS (EXP-INTEL-35749371101), C-PRODUCT-ECON REJECTED (EXP-INTEL-35551517470)"
+  ],
+  "unresolved": [
+    "Whether test.zip (567.7MB, LFS, HF revision 17ece8eb) contains loadable official test_task/test_website/test_domain JSON task lists; not downloaded. Smallest next action: download, census, and if valid run the frozen pipeline, which would supersede the Gate0 BLOCKED status.",
+    "Whether tightened/locatable count exceedance (34-120 vs 21-82) is genuine Magento DOM growth (menuitem expansion, larger totalDom) vs definition/measurement divergence vs parent (DEF-FALLBACK-INTERACTIVE vs role-only a->link DEF-FULL-MAP); resolvable only by re-enumerating with parent-consistent definition on the same page snapshots.",
+    "Which frozen F_full reading governs Clause2: canonical-vs-weighted (INCONCLUSIVE) or truncated-vs-full (FALSIFIED-IN-SETTING for the crossing); frozen prereg 5.2 permits both. Decision-rule defect to fix in the next prereg.",
+    "Whether archived HF revisions of osunlp/Mind2Web expose multi-config/4-way splits (not queried by producer; revisions API not consulted).",
+    "model_execute.json and model_audit.json were present at audit start (model_audit.json recorded 2026-09-22T17:39:00 status retry/category transient/exit_code 1) and absent at audit end; model_design.json (status success, 17:04:49, pre-freeze) remains. No gate verdict was contained in the transient files; not needed for findings.",
+    "Producer's NC4 detail text claims 'same cardinality random subsets' while the code simulates independent random densities; whether the frozen role-subset null would materially differ (likely higher agreement due to shared tightened numerator) is untested."
+  ]
+}

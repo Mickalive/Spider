@@ -4,7 +4,7 @@ Pre-2.0 canonical memory remains frozen at `archive/spider-codex-ultimate:SPIDER
 
 Canonical Research 2.0 evidence lives in `codex/experiments/<experiment_id>/`.
 Use `codex/index.json` and `codex/claim_state.json` to locate relevant packets; do not load all experiment bodies by default.
-Validated experiments: **240**. Coverage gaps: **0**. Quarantined packets: **0**.
+Validated experiments: **241**. Coverage gaps: **0**. Quarantined packets: **0**.
 
 ## Experiment index
 
@@ -249,6 +249,7 @@ Validated experiments: **240**. Coverage gaps: **0**. Quarantined packets: **0**
 | EXP-PHYSICS-35756224948 | physics | REVISE | MEASUREMENT_INVALID | C-WEB-DYNAMICS | `8f3dcf1a9de0` |
 | EXP-PRODUCT-35756243655 | product | MEASUREMENT_INVALID | MEASUREMENT_INVALID | C-PARAM-INHERIT | `e1532a3d4a0f` |
 | EXP-GRAPH-35757738658 | graph | BLOCKED | BLOCKED | C-DELTA-REPAIR | `d2c9a28fe830` |
+| EXP-INTEL-35757760689 | intel | REVISE | INCONCLUSIVE – both axes MEASUREMENT_INVALID per frozen gates (Mind2Web Gate0 single train; Docker PC3 count window violated); outcome MIXED mislabeled per audit | C-CROSSSITE, C-PRODUCT-ECON | `5653a0e75662` |
 | EXP-GRAPH-35761721514 | graph | BLOCKED | BLOCKED | C-DELTA-REPAIR | `5dda3f5fd716` |
 
 ## Latest recorded claim events
@@ -257,13 +258,13 @@ These are chronological latest events, not an automatic truth ranking.
 
 | Claim | Status | Experiment | Lane |
 |---|---|---|---|
-| C-CROSSSITE | HYPOTHESIS | EXP-INTEL-35749371101 | intel |
+| C-CROSSSITE | HYPOTHESIS | EXP-INTEL-35757760689 | intel |
 | C-DELTA-REPAIR | BLOCKED | EXP-GRAPH-35761721514 | graph |
 | C-FRESHNESS | EXPERIMENTAL | EXP-PRODUCT-35697049382 | product |
 | C-LLM-INHERIT | EXPERIMENTAL | EXP-INTEL-35741921602 | intel |
 | C-MEAS-VALID | EXPERIMENTAL | EXP-RUNTIME-35749360317 | runtime |
 | C-PARAM-INHERIT | MEASUREMENT_INVALID | EXP-PRODUCT-35756243655 | product |
-| C-PRODUCT-ECON | REJECTED | EXP-INTEL-35551517470 | intel |
+| C-PRODUCT-ECON | REJECTED | EXP-INTEL-35757760689 | intel |
 | C-RESIDUAL-NOVELTY | HYPOTHESIS | EXP-PRODUCT-35741913862 | product |
 | C-SEMANTIC-RESOLVE | EXPERIMENTAL | EXP-FRONTIER-35752577234 | frontier |
 | C-WEB-DYNAMICS | HYPOTHESIS | EXP-PHYSICS-35756224948 | physics |
