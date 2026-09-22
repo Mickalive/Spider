@@ -1,0 +1,26 @@
+name: SPIDER R2 Lane Recovery
+run-name: Lane recovery ${{ github.event.workflow_run.id }}
+
+on:
+  workflow_run:
+    workflows: ["SPIDER R2 Lane"]
+    types: [completed]
+
+permissions:
+  actions: write
+  contents: read
+
+jobs:
+  wake:
+    if: ${{ github.event.workflow_run.conclusion != 'success' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Wake freshest global direction after lane interruption
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          echo "SPIDER_LANE_RECOVERY source_run=${{ github.event.workflow_run.id }} conclusion=${{ github.event.workflow_run.conclusion }}"
+          gh workflow run factory-pulse.yml --ref main
