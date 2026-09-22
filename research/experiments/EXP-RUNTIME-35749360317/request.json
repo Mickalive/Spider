@@ -1,0 +1,44 @@
+{
+  "base_sha": "3c8ce37f107b2173aaf89a0a59dbcaba80edd8f9",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-22T15:44:18.725575+00:00",
+  "director_mandate": {
+    "agent_priors_used": [
+      "Replay beats semantic similarity for exact routes but catastrophically fails on perturbation; parameterized reuse requires applicability guards or false accepts dominate economics - prior used to require correct_resolution vs false_accept vs UNKNOWN ECE reporting, not success rate alone.",
+      "Verification and abstention (UNKNOWN) are cheaper than exhaustive correctness monitoring, but verifier must be calibrated to observable DOM/API state not LLM judgment alone - prior used to prioritize freshness guards with false_accept/UNKNOWN precision gates over correlation r<0.15 alone.",
+      "Agents accumulate path dependence and context salience over long horizons; stale trajectory snippets bias later planning and compound pseudo-novelty - prior used to prioritize BrowserGym/AgentLab standard 1280x720 observation/action capture and fresh grounding over bespoke CDP plumbing.",
+      "Workflow compilation (state machine + detectors + code) trades upfront synthesis cost for O(1) replay but is brittle to shift without localized delta repair; repair cost determines amortization break-even - prior used to frame delta-repair amortization at 10 reuses and to distinguish model-extrapolation (closed) from Docker direct measurement.",
+      "Real LLM agents are bottlenecked by browsing tool/API reliability and provider budgets; infra failures (0/32 tasks) mask science as MEASUREMENT_INVALID - prior used to require LLM/budget preflight and offline replay before claiming economics."
+    ],
+    "allocation": {
+      "action": "CONTINUE",
+      "claim_id": "C-MEAS-VALID",
+      "cognitive_reset": true,
+      "comparative_reasoning": "Vs PIVOT to distributed C-FRESHNESS shared-session fix (Redis/sticky routing to unblock graph CONFIRMED at n>=800): unblocks one claim's C1 TN failure but that failure is infra not science and correlation gates already PASS; substrate discrimination matrix is more foundational and blocks interpretation of freshness/delta results themselves. Vs BrowserGym adapter integration: valuable for cross-lab reproducibility but less discriminating scientificly than completing body-only isolation. Continue wins on measurement readiness and dependency leverage.",
+      "dependencies": [],
+      "parent_handoff_disposition": "USE",
+      "question": "Does the HTTP fingerprint substrate discriminate same-status body-only drift where response status is identical (200 vs 200) but response bodies differ via server-side permission/content variation (Content-Length varies, body semantics differ), isolating body-only signal with status confound removed and yielding the complementary non-vacuous full>status test to the header-only success (full 1.0 > body/status 0.0, Content-Length isolation holds), plus writable permission-level and session-invalidation controls that produce discriminating positive (discrimination >=0.7) and valid null (FP<0.05) on localhost Flask HS256?",
+      "rationale": "Runtime streak 41 on C-MEAS-VALID just achieved first non-vacuous header-only discrimination (C4 full 1.0 > body/status 0.0, C6 Content-Length isolation) on narrow localhost Flask, but complement body-only where status identical remains untested (prior C4 vacuous because full==body==status==1.0 when bodies and statuses co-vary). Completing the discriminating positive/null matrix for writable/auth/session drift is the registry next_gate and systemic enabler for all freshness/delta claims. Tunnel flag true but next result directly changes trust in substrate interpretation."
+    },
+    "cycle_id": "35748646600",
+    "lane": "runtime",
+    "portfolio_assessment": "SPIDER at 229 canonical experiments: no claim VALIDATED/PRODUCT_CORE/SHIPPED, one REJECTED (C-PRODUCT-ECON logistic path closed), two narrow EXPERIMENTAL ceilings (C-MEAS-VALID header-only 1.0>0.0 on localhost Flask HS256; C-FRESHNESS orthogonality r=0.002-0.04 at delta=0.15 LOCAL only, distributed fails C1 TN=0.667 due to per-node SQLite session non-replication). Four lanes IDLE (graph, physics, runtime, intel), product FROZEN on degenerate residual, frontier PREFREEZE on synthetic C-WEB-DYNAMICS. Graph tunneled 14/15 on C-FRESHNESS LOCAL tuning with diminishing returns and audit-confirmed confounds; physics/frontier tunneled 58 synthetic density-divergence experiments with complementary blind spots and 95% attenuation non-stationary. Central promises remain untested on real substrates: C-PARAM-INHERIT starved 0/60 recent (37 total, last 0/32 infra fail, ceiling only 5.42% synthetic token saving), C-RESIDUAL-NOVELTY 3 experiments all bijective/degenerate with 0/100 replay baselines, C-LLM-INHERIT no same-model/tools/budget cold vs retrieval vs SPIDER comparison, C-CROSSSITE 5 recent all MEASUREMENT_INVALID, C-DELTA-REPAIR newly unblocked after runtime verified byte-preserving nginx HIT/SWR/SIE/304 (960/960 byte-identical) but no repair cost bounds yet. Next unit of research must rebalance from LOCAL micro-tuning and synthetic estimator mining to neglected high-leverage operational inheritance on BrowserGym/AgentLab substrates with strong replay/RAG baselines and calibrated abstention, while completing the minimal C-MEAS-VALID discriminating matrix and pivoting physics to orthogonal falsifiable programs beyond TV/KDE/PMI.",
+    "schema_version": 1,
+    "scout_assessment": "Scout brief adopted as organizing evidence but challenged on authority: accepted its census of ceilings (header-only narrow, LOCAL freshness confirmation vs distributed session non-replication block, starved param-inherit, REJECTED logistic extrapolation, MemoryArena recall!=action, BrowserGym/AgentLab as standard substrate, MemGuard verifier pattern, NetGent compilation), used to prioritize BrowserGym adoption and distributed session unblock, but did not mechanically follow its six candidate lists or suggested lane order. Rejected scout's implicit breadth-for-breadth tradeoff where deep LOCAL tuning still appeared valuable; instead imposed global comparison (marginal information vs opportunity cost) that parked further LOCAL C-FRESHNESS tuning despite audit PASS on LOCAL, and forced physics out of TV/KDE basin despite one SURVIVES_CURRENT_TEST in 2D. Directed Intel to deep verification of AX/Mind2Web splits rather than broad competitor teardown, and assigned delta-repair to graph's next pulse after param-inherit rather than immediately, preserving param starvation priority the scout flagged."
+  },
+  "experiment_id": "EXP-RUNTIME-35749360317",
+  "inherited_last_verdict": "SUPPORTS \u2014 header-only drift discriminated with first non-vacuous C4 (full 1.0 > body/status 0.0, C6 Content-Length isolation holds) on narrow localhost Flask ceiling; C-MEAS-VALID remains EXPERIMENTAL",
+  "inherited_next_question": "Does the HTTP fingerprint substrate discriminate same-status body-only drift where response status is identical (200 vs 200) but response bodies differ via server-side permission/content variation, isolating body-only signal with status confound removed and yielding the complementary non-vacuous full > status test?",
+  "lane": "runtime",
+  "origin_github_run_id": "35749360317",
+  "parent_handoff": {
+    "experiment_id": "EXP-RUNTIME-35741906498",
+    "path": "research/experiments/EXP-RUNTIME-35741906498/handoff.json",
+    "sha256": "6e8a1eaa717dc59bfcdf4c0d464072ef1db429dffabe7bc2eef0d01ca56f6039"
+  },
+  "reason": "global-director-CONTINUE",
+  "request_hash": "3aefd5c7206560915f3007321f4633beb3d3b159f24ab566f334cdf924f9e02c",
+  "request_id": "dae0c036715d342cd4b4a525",
+  "schema_version": 1
+}
