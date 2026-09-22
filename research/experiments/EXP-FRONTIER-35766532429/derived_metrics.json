@@ -1,0 +1,379 @@
+{
+  "alias_OOD": {
+    "reconstruction_correct_resolution": 1.0,
+    "reconstruction_correct_count": 40,
+    "reconstruction_false_accept": 0.0,
+    "reconstruction_unknown": 0.0,
+    "reconstruction_n": 40,
+    "wilson_correct_ci": [
+      0.9123754607496077,
+      1.0
+    ],
+    "wilson_false_ci": [
+      0.0,
+      0.08762453925039232
+    ],
+    "exact_match_correct_rate": 0.0,
+    "verbatim_false_accept_rate": 1.0,
+    "tfidf_correct_rate": 0.0,
+    "random_correct_rate": 0.0,
+    "binomial_p_vs_0.10": 1.0000000000000022e-40,
+    "binomial_p_orthogonal_vs_0.10": 1.0000000000000017e-30,
+    "mcnemar_rec_vs_exact": {
+      "b": 40,
+      "c": 0,
+      "chi2": 38.025,
+      "p": 6.984393063902417e-10
+    },
+    "mcnemar_fa_rec_vs_verbatim": {
+      "b": 0,
+      "c": 40,
+      "chi2": 38.025,
+      "p": 6.984393063902417e-10
+    },
+    "diff_verbatim_minus_recon_false_accept": 1.0,
+    "per_family_and_heldout": {
+      "fam0_standard": {
+        "n": 7,
+        "correct_rate": 1.0,
+        "fa_rate": 0.0
+      },
+      "fam0_heldout": {
+        "n": 3,
+        "correct_rate": 1.0,
+        "fa_rate": 0.0
+      },
+      "fam0_overall": {
+        "n": 10,
+        "correct_rate": 1.0
+      },
+      "fam1_standard": {
+        "n": 7,
+        "correct_rate": 1.0,
+        "fa_rate": 0.0
+      },
+      "fam1_heldout": {
+        "n": 3,
+        "correct_rate": 1.0,
+        "fa_rate": 0.0
+      },
+      "fam1_overall": {
+        "n": 10,
+        "correct_rate": 1.0
+      },
+      "fam2_standard": {
+        "n": 7,
+        "correct_rate": 1.0,
+        "fa_rate": 0.0
+      },
+      "fam2_heldout": {
+        "n": 3,
+        "correct_rate": 1.0,
+        "fa_rate": 0.0
+      },
+      "fam2_overall": {
+        "n": 10,
+        "correct_rate": 1.0
+      },
+      "fam3_standard": {
+        "n": 0,
+        "correct_rate": null,
+        "fa_rate": null
+      },
+      "fam3_heldout": {
+        "n": 0,
+        "correct_rate": null,
+        "fa_rate": null
+      },
+      "fam3_overall": {
+        "n": 10,
+        "correct_rate": 1.0,
+        "fa_rate": 0.0
+      },
+      "heldout_9": {
+        "n": 9,
+        "correct_rate": 1.0,
+        "fa_rate": 0.0
+      },
+      "mixed_10": {
+        "n": 10,
+        "correct_rate": 1.0,
+        "fa_rate": 0.0
+      },
+      "orthogonal_30": {
+        "n": 30,
+        "correct_rate": 1.0
+      }
+    },
+    "channel_isolation_diagnostics": {
+      "RULE-URL-ONLY": {
+        "n": 40,
+        "correct_rate": 0.0,
+        "per_family": {
+          "fam0": {
+            "n": 10,
+            "correct_rate": 0.0
+          },
+          "fam1": {
+            "n": 10,
+            "correct_rate": 0.0
+          },
+          "fam2": {
+            "n": 10,
+            "correct_rate": 0.0
+          },
+          "fam3": {
+            "n": 10,
+            "correct_rate": 0.0
+          }
+        }
+      },
+      "RULE-BODY-ONLY": {
+        "n": 40,
+        "correct_rate": 0.25,
+        "per_family": {
+          "fam0": {
+            "n": 10,
+            "correct_rate": 0.0
+          },
+          "fam1": {
+            "n": 10,
+            "correct_rate": 1.0
+          },
+          "fam2": {
+            "n": 10,
+            "correct_rate": 0.0
+          },
+          "fam3": {
+            "n": 10,
+            "correct_rate": 0.0
+          }
+        }
+      },
+      "RULE-HEADERS-ONLY": {
+        "n": 40,
+        "correct_rate": 0.5,
+        "per_family": {
+          "fam0": {
+            "n": 10,
+            "correct_rate": 1.0
+          },
+          "fam1": {
+            "n": 10,
+            "correct_rate": 0.0
+          },
+          "fam2": {
+            "n": 10,
+            "correct_rate": 1.0
+          },
+          "fam3": {
+            "n": 10,
+            "correct_rate": 0.0
+          }
+        }
+      }
+    },
+    "orthogonal_subset": {
+      "n": 30,
+      "correct": 30,
+      "correct_rate": 1.0,
+      "wilson_ci": [
+        0.886482908609522,
+        1.0
+      ]
+    },
+    "mixed_subset": {
+      "n": 10,
+      "correct": 10,
+      "correct_rate": 1.0,
+      "false_accept_rate": 0.0,
+      "wilson_ci": [
+        0.7224598312333834,
+        1.0
+      ]
+    },
+    "pooled_wilson_mixed": [
+      0.7224598312333834,
+      1.0
+    ]
+  },
+  "exact_match": {
+    "reconstruction_correct_rate": 1.0,
+    "exact_match_baseline_correct_rate": 1.0,
+    "reconstruction_n": 12,
+    "wilson_ci_recon": [
+      0.7574992425007574,
+      0.9999999999999998
+    ]
+  },
+  "no_applicable": {
+    "reconstruction_unknown_precision": 1.0,
+    "reconstruction_false_accept_rate": 0.0,
+    "reconstruction_ece_over_all": 0.0802516342187119,
+    "ece_bootstrap_mean": 0.08037932634537324,
+    "ece_bootstrap_ci": [
+      0.07221024654120912,
+      0.08833407213328238
+    ],
+    "ece_alias": 0.10794035988274564,
+    "ece_exact": 0.02083333333333337,
+    "ece_noapp": 0.05766666666666668,
+    "all_methods_precision": {
+      "B-EXACT-MATCH": 1.0,
+      "B-VERBATIM-REPLAY": 1.0,
+      "B-RAG-TFIDF": 1.0,
+      "B-RAG-EMBED": null,
+      "B-RANDOM": 1.0,
+      "RECONSTRUCTION-RULE": 1.0,
+      "RECONSTRUCTION-LEARNED": null
+    },
+    "all_methods_false_accept": {
+      "B-EXACT-MATCH": 0.0,
+      "B-VERBATIM-REPLAY": 0.0,
+      "B-RAG-TFIDF": 0.0,
+      "B-RAG-EMBED": null,
+      "B-RANDOM": 0.0,
+      "RECONSTRUCTION-RULE": 0.0,
+      "RECONSTRUCTION-LEARNED": null
+    },
+    "empty_registry_unknown_rate": 1.0,
+    "empty_registry_all_methods_unknown": true,
+    "bins_reconstruction": [
+      {
+        "bin": 0,
+        "count": 18,
+        "acc": 0.0,
+        "avg_conf": 0.058333333333333334,
+        "edges": [
+          0.0,
+          0.2
+        ]
+      },
+      {
+        "bin": 1,
+        "count": 0,
+        "acc": 0.0,
+        "avg_conf": 0.0,
+        "edges": [
+          0.2,
+          0.4
+        ]
+      },
+      {
+        "bin": 2,
+        "count": 0,
+        "acc": 0.0,
+        "avg_conf": 0.0,
+        "edges": [
+          0.4,
+          0.6000000000000001
+        ]
+      },
+      {
+        "bin": 3,
+        "count": 0,
+        "acc": 0.0,
+        "avg_conf": 0.0,
+        "edges": [
+          0.6000000000000001,
+          0.8
+        ]
+      },
+      {
+        "bin": 4,
+        "count": 52,
+        "acc": 1.0,
+        "avg_conf": 0.9121612616286571,
+        "edges": [
+          0.8,
+          1.0
+        ]
+      }
+    ],
+    "reconstruction_confidence_std": 0.3746120510836857
+  },
+  "controls": {
+    "PC_EXACT_MATCH_pass": true,
+    "NC_NO_APPLICABLE_pass_recon": true,
+    "NC_ALL_pass": true,
+    "NC_EMPTY_pass": true,
+    "PC_BROWSERGYM_HEALTH_pass": false,
+    "pc_baseline_correct": 1.0,
+    "pc_recon_correct": 1.0
+  },
+  "live": {
+    "attempted": 0,
+    "healthy": 0,
+    "exploratory_bound": true,
+    "browsergym_probe": {
+      "browsergym": [
+        false,
+        "ModuleNotFoundError: No module named 'browsergym'"
+      ],
+      "playwright": [
+        false,
+        "ModuleNotFoundError: No module named 'playwright'"
+      ]
+    }
+  },
+  "availability": {
+    "B_RAG_EMBED_available": false,
+    "B_RAG_EMBED_message": "sentence-transformers unavailable: ModuleNotFoundError: No module named 'sentence_transformers'",
+    "RECONSTRUCTION_LEARNED_available": false,
+    "RECONSTRUCTION_LEARNED_message": "offline LLM stack unavailable: ModuleNotFoundError: No module named 'transformers'",
+    "learned_training_report": {
+      "available": false,
+      "message": "offline LLM stack unavailable: ModuleNotFoundError: No module named 'transformers'",
+      "seeds": [
+        42,
+        43,
+        44
+      ],
+      "per_seed_metrics": null,
+      "note": "LEARNED training not executed; offline LLM absent. Per frozen spec, no learned alias-OOD metrics fabricated. Training cost/stability disclosed as unavailable."
+    },
+    "note": "Per frozen spec: B-RAG-EMBED unavailable -> B-RAG-TFIDF is strong baseline; RECONSTRUCTION-LEARNED (GRPO/System-One) unavailable without offline LLM -> no learned metrics fabricated."
+  },
+  "decision_components": {
+    "S1_correct_ge_0.50": true,
+    "S1_binom_p_lt_0.05": true,
+    "S1_mcnemar_p_lt_0.05": true,
+    "S1_orthogonal_ge_0.50": true,
+    "S1_mixed_ge_0.40": true,
+    "S1_pass": true,
+    "S2_fa_le_0.15": true,
+    "S2_diff_ge_0.15": true,
+    "S2_mcnemar_p_lt_0.05": true,
+    "S2_pass": true,
+    "S3_pass": true,
+    "S4_precision_ge_0.85": true,
+    "S4_ece_le_0.15": true,
+    "S4_pass": true,
+    "S5_not_dominated_by_retrieval": true,
+    "S5_best_rag_correct": 0.0,
+    "S_learned_gap_within_0_10": null
+  },
+  "overall": {
+    "status": "COMPLETE",
+    "outcome": "SUPPORTS",
+    "all_survives": true,
+    "falsified": false,
+    "bounded_to": "synthetic pooled 40 (30 orthogonal +10 mixed); live BrowserGym and learned GRPO arms unavailable and disclosed"
+  },
+  "harness_errors": [],
+  "sample_counts": {
+    "alias-OOD": 40,
+    "exact-match": 12,
+    "no-applicable": 12,
+    "empty-registry": 6
+  },
+  "orthogonal_mixed_breakdown": {
+    "orthogonal_n": 30,
+    "orthogonal_correct": 30,
+    "orthogonal_rate": 1.0,
+    "mixed_n": 10,
+    "mixed_correct": 10,
+    "mixed_rate": 1.0,
+    "mixed_fa_rate": 0.0
+  }
+}

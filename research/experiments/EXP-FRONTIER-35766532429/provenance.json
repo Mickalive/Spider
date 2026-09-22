@@ -1,0 +1,70 @@
+{
+  "experiment_id": "EXP-FRONTIER-35766532429",
+  "lane": "frontier",
+  "schema_version": 1,
+  "github_run_id": "35766532429",
+  "github_run_attempt": 1,
+  "commit": "163b0795ad8601a1acc743d17262fb6b83f43f2e",
+  "base_sha": "d1163ad9f8e5c006a4658ab98a5fa81f3becc04c",
+  "frozen_at": "2026-09-22T18:25:11.643583+00:00",
+  "executed_at": "2026-09-22T18:29:00+00:00",
+  "executor": "muse-spark-1.2-contributor-free (opencode/muse-spark-1.2-contributor-free)",
+  "environment": {
+    "python": "3.12.14 (main, Aug 13 2026, 02:47:42) [GCC 13.3.0]",
+    "numpy": "2.5.3",
+    "scikit_learn": "1.9.1",
+    "scipy": "1.18.1",
+    "transformers": null,
+    "torch": null,
+    "sentence_transformers": null,
+    "browsergym": null,
+    "playwright": null,
+    "viewport": "1280x720 (derived_context placeholder; live stratum not executed)",
+    "seed": 42,
+    "seeds_learned": [42, 43, 44]
+  },
+  "code_paths": [
+    {"path": "research/frontier/run_genuine_35766532429.py", "sha256": "4db542a727d35b5fee7c36cb842e6abff61ba6c51f5a1fa7f1c67a884d24da6f", "role": "code", "description": "genuine reconstruct_resolve RULE with multi-channel adoption (choose_adoptions + rewrite_template_multi), derived_state whitelist, softmax temp 0.15 + deterministic_jitter gated UNKNOWN<0.80"},
+    {"path": "src/spider/kernel.py", "role": "code", "description": "SpiderKernel.resolve L97 exact intent equality, _bind as B-EXACT-MATCH/B-VERBATIM reference"},
+    {"path": "src/spider/registry.py", "role": "code", "description": "MechanismRegistry replace/all"},
+    {"path": "src/spider/models.py", "role": "code", "description": "Mechanism, Resolution, ResolutionStatus"}
+  ],
+  "artifacts": [
+    {"path": "research/experiments/EXP-FRONTIER-35766532429/tasks.json", "sha256": "4abf148721fdee9dfe56ac776f6b3112344821a4ea80d183c5313adeced1f35e", "role": "fixture", "tasks": 70, "alias_OOD_pooled": 40, "orthogonal": 30, "mixed": 10, "exact": 12, "no_applicable": 12, "empty": 6},
+    {"path": "research/experiments/EXP-FRONTIER-35766532429/raw_evidence.json", "sha256": "2309c98f16372026eadd155d7959105bd01115e330ac5c83b0d5b6e48ae5b133", "role": "raw", "rows": 610, "description": "490 eval rows (70 tasks x7 methods) +120 diagnostic rows (40 alias-OOD x3 variants)"},
+    {"path": "research/experiments/EXP-FRONTIER-35766532429/derived_metrics.json", "sha256": "38bd1d30fadd6e29d55eca3b63e5ec1543cfe785466d534a4ebe058847a7996e", "role": "derived", "description": "pooled 40/40, orthogonal 30/30, mixed 10/10, per-family/held-out/mixed, channel isolation, Wilson/McNemar/binomial/bootstrap ECE"},
+    {"path": "research/experiments/EXP-FRONTIER-35766532429/result.json", "role": "derived", "description": "producer handoff with controls, metrics, observations"},
+    {"path": "research/experiments/EXP-FRONTIER-35766532429/report.md", "role": "derived", "description": "human-readable interpretation bounded to synthetic pooled"},
+    {"path": "research/experiments/EXP-FRONTIER-35766532429/provenance.json", "role": "derived", "description": "this file"}
+  ],
+  "datasets": [],
+  "fixtures": {
+    "tasks_json_hash": "4abf148721fdee9dfe56ac776f6b3112344821a4ea80d183c5313adeced1f35e",
+    "registry_leak": 0,
+    "derived_keys_whitelist": ["url", "method", "url_path", "url_query", "url_segments", "headers_observed", "body_observed", "ax_tree_snapshot", "ax_nodes_count", "viewport_observed"],
+    "forbidden_keys": ["alias_family", "query_key", "target_prefix", "routing_prefix", "target_style", "path_style", "header_key", "body_field", "auth_scope", "expected_template", "resource", "train_template", "dist_template"],
+    "leak_check": "0/40 pooled (30 orthogonal +10 mixed) verified in harness and tasks.json",
+    "hidden_expected_separation": "hidden_expected.expected_template/bound not in derived_context; audit inspect reconstruct_resolve signature"
+  },
+  "commands": [
+    "pip install numpy scikit-learn scipy",
+    "python research/frontier/run_genuine_35766532429.py"
+  ],
+  "timing": {
+    "wall_clock_seconds_est": 8,
+    "training_cost": null,
+    "note": "Deterministic rule-based scoring; no LLM calls. Wall-clock <10s for 610 rows; no GRPO training executed due to missing transformers/torch."
+  },
+  "substrates_unavailable": [
+    {"name": "browsergym", "version": "0.14.3 required", "status": "ModuleNotFoundError: No module named 'browsergym'", "impact": "live WebShop/ALFWorld 0 tasks attempted; PC-BROWSERGYM-HEALTH false -> live exploratory bound"},
+    {"name": "playwright", "status": "ModuleNotFoundError: No module named 'playwright'", "impact": "CDP AX tree at 1280x720 not extracted; derived_context ax fields None"},
+    {"name": "transformers/torch", "status": "ModuleNotFoundError: No module named 'transformers'", "impact": "RECONSTRUCTION-LEARNED unavailable; 3-seed GRPO training not executed; metrics null per spec"},
+    {"name": "sentence_transformers", "status": "ModuleNotFoundError: No module named 'sentence_transformers'", "impact": "B-RAG-EMBED unavailable; TFIDF is strong baseline per spec"}
+  ],
+  "determinism": {
+    "seeds": "numpy RandomState 42, random.seed 42; LEARNED would use 42,43,44",
+    "viewport": "1280x720 (frozen spec placeholder, synthetic derived dict without AX)",
+    "bootstrap_resamples": 2000,
+    "hash_algo": "sha256"
+  }
+}
