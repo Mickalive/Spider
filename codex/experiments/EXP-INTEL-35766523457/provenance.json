@@ -1,0 +1,65 @@
+{
+  "experiment_id": "EXP-INTEL-35766523457",
+  "lane": "intel",
+  "github_run_id": "35766523457",
+  "base_sha": "d1163ad9f8e5c006a4658ab98a5fa81f3becc04c",
+  "pre_execute_sha": "2a9c2cdccad7b70025ae10acb323ef6bcaab3074",
+  "post_execute_sha": "51e1083fbb72372acd8a9cd9de17389caeec6ced",
+  "frozen_at": "2026-09-22T18:27:00.747528+00:00",
+  "executed_at": "2026-09-22T18:31:00+00:00",
+  "hashes": {
+    "request.json": "544bebb4019fedde0d96e98984a205b8ca3a2e5b721bef816b21ef751f666938",
+    "spec.json": "776d35a4cbbfac068df8f3882a428ea1fab5ec9f13be91917091e526ec351692",
+    "prereg.md": "31a5823a954daf96081f8a5ec09580961d075dd43f3bd013f23471ef927f6172",
+    "freeze.json": "544bebb4019fedde0d96e98984a205b8ca3a2e5b721bef816b21ef751f666938"
+  },
+  "code_paths": {
+    "measurement_script": "research/intel/exp_35766523457_measure.py",
+    "measurement_script_sha256": "62aba27e89cc75fc05cfc9200433714e35ceb0a57ea9f2a94c4fdf258ed28437",
+    "measurement_script_parent_hash": "085b58c93be51bc76dc4ad712436500100c077594bd73c1cc1e552b6f68f49a3",
+    "measure_js_full_sha256": "b0e0b594e7e99959ebd529d7536958a890305efde92c86735ecf5a463330cdbd",
+    "parent_measure_js_path": "research/experiments/EXP-INTEL-34718481334/measure_fullpage_yield.py",
+    "parent_measure_js_has_cap": true,
+    "cap_present_in_measure_js": false
+  },
+  "datasets_fixtures": {
+    "webarena_verified": {"path": "research/experiments/EXP-INTEL-35749371101/artifacts/raw/webarena-verified.json", "sha256": "d65275660814663375028e9017e1f929e3c38321041b125795e2713b52243d30", "n_tasks": 812, "note": "Reused for pin verification only, not re-extracted"},
+    "cap_dump": {"status": "NOT_FOUND", "attempted_paths": ["data/cap.json", "data/cap_manifest.json", "/tmp/cap.json", "research/intel/cap.json"], "attempted_hf": ["ServiceNow/cap", "cap", "agentlab/cap"], "attempts": 3, "error": "DatasetNotFoundError for all HF names, FS misses", "synthetic_manifest": {"n_tasks": 420, "n_sites": 108, "n_domains": 24, "avg_sites_per_task": 3.0, "avg_actions_per_task": 7.0}},
+    "mind2web_lfs": {"status": "ABANDONED", "reason": "Director SUPERSEDE per comparative reasoning; exhaustive 567.7MB test.zip on HF 17ece8eb not attempted; prior single train 73/3 vs 137/31 carried forward"}
+  },
+  "environment": {
+    "python_version": "3.12.14",
+    "pip_freeze": ["cloudpickle==3.1.2", "joblib==1.6.0", "narwhals==2.26.0", "numpy==2.5.3", "scikit-learn==1.9.1", "scipy==1.18.1", "threadpoolctl==3.7.0", "datasets==5.0.1", "huggingface_hub==1.32.0", "aiohttp==3.14.3", "pyarrow==25.0.1", "pandas==3.0.6"],
+    "browsergym": {"installed": false, "error": "ModuleNotFoundError: No module named 'browsergym'", "pip_show": "WARNING: Package(s) not found: browsergym-core"},
+    "agentlab": {"installed": false, "error": "ModuleNotFoundError: No module named 'agentlab'"},
+    "playwright": {"installed": false, "error": "ModuleNotFoundError: No module named 'playwright'", "version_attempted": "1.63.0"},
+    "docker": {"available": false, "url": "http://localhost:7770", "image": "am1n3e/webarena-verified-shopping@sha256:3e8cb9b945", "digest_attempt": "Error: No such object: am1n3e/webarena-verified-shopping", "error": "URLError: Connection refused after 3 retries"},
+    "viewport": {"width": 1280, "height": 720, "note": "Requested via CDP, not exercised due BrowserGym unavailable; synthetic AX sample uses 1280x720 metadata"},
+    "seed": 35725763380,
+    "seed_note": "KMeans random_state reduced modulo 2^32 to 1363249228 for sklearn compliance; all other samplings use full seed",
+    "bootstrap_reps": 2000,
+    "shuffle_perms": 1000
+  },
+  "artifacts": [
+    {"path": "research/experiments/EXP-INTEL-35766523457/artifacts/raw/browsergym_census.json", "sha256": "e53b2f4d866b0e8f5616bb1cbb8b40b139693969612c7ba5f69786e2dd1fbd2f", "role": "raw", "description": "Per-env census 4 envs x3 retries, webarena pin, pip freeze"},
+    {"path": "research/experiments/EXP-INTEL-35766523457/artifacts/raw/cap_manifest.json", "sha256": "6a106b99bba820d5410bce40db77dc6eb3a43390d99be6ebf7152bd65607dc8e", "role": "raw", "description": "CAP pipeline attempts 3 retries, synthetic 420/108/24 manifest for validation"},
+    {"path": "research/experiments/EXP-INTEL-35766523457/artifacts/raw/gate0_table.json", "sha256": "9f1de37be724cf30d304d42452f0021431e948edf668909e6477d2cbd6fe9c86", "role": "raw", "description": "Per-candidate Gate0 metrics 6 candidates, real 0 qualifying synthetic 1, leakage/H/strata/singleton"},
+    {"path": "research/experiments/EXP-INTEL-35766523457/artifacts/raw/axtree_1280x720_sample.json", "sha256": "6aa1b2a40b58724f0428a66c88e236db115f7a201eb6cc271522656659645bbc", "role": "raw", "description": "Synthetic AX tree 1280x720 provenance format, 1426 nodes, DOM hash"},
+    {"path": "research/experiments/EXP-INTEL-35766523457/artifacts/raw/full_dom_locatable_sample.json", "sha256": "12e5ed54c63c5320437a5b91af4d11a3e0e4d5243ab71b607663b2936730ee07", "role": "raw", "description": "Docker check, MEASURE_JS hash diff, docker digest, cap_present false"},
+    {"path": "research/experiments/EXP-INTEL-35766523457/artifacts/derived/measurements.json", "sha256": "5a1c70da551832133a5063c7e85b69df17bf5e39703de9082333bd117b4b8cae", "role": "derived", "description": "All metrics aggregated, controls_synthetic PC3/NC4, cap/tf-idf/docker"},
+    {"path": "research/experiments/EXP-INTEL-35766523457/artifacts/derived/bootstrap_ci.json", "sha256": "5f5db1a40608655d167cd4d5ac8feda40a7c9bc620cd432ca3a212fc9a25345f", "role": "derived", "description": "Bootstrap 2000 reps seed, gate0/tfidf/F_full CIs, synthetic note"},
+    {"path": "research/experiments/EXP-INTEL-35766523457/artifacts/derived/shuffle_null.json", "sha256": "d77af94a3f510c038df0b2bc715fc66579b407ba70262f8b4fb4318590391aa4", "role": "derived", "description": "Shuffle null 1000 perms seed, synthetic demo overlap 1.0 mean 0.074 p95 0.144"},
+    {"path": "research/experiments/EXP-INTEL-35766523457/artifacts/derived/tfidf_kmeans_meta.json", "sha256": "bdb25320f49711cc47c17bb3548eea766bfdd43bb3142142837a8b0bffd85b39", "role": "derived", "description": "Vectorizer max_features 5000 ngram 1-2 min_df2, k 14 vocab_hash 1ca627..., centroids 907940..."},
+    {"path": "research/experiments/EXP-INTEL-35766523457/artifacts/derived/docker_ranking_agreement.json", "sha256": "609134588d0624feeb0032f25cbccdac152fe42aff4db8b63b477d021bedaeba", "role": "derived", "description": "Ranking agreement NOT_EXECUTED due Docker unavailable"},
+    {"path": "research/experiments/EXP-INTEL-35766523457/artifacts/derived/stagehand_baseline.json", "sha256": "d0e3858b6b10eb96c1b240003d281f9deac75ff3c991423f74773fdca06fea2a", "role": "derived", "description": "Stagehand simulated 20 trajs hit_rate 0.5 latency 532ms tokens 173600"}
+  ],
+  "commands": [
+    "python3 research/intel/exp_35766523457_measure.py",
+    "pip freeze",
+    "pip show browsergym-core",
+    "docker inspect --format '{{.Id}}' am1n3e/webarena-verified-shopping",
+    "curl -I http://localhost:7770/"
+  ],
+  "execution_checkpoint": {"experiment_id": "EXP-INTEL-35766523457", "github_run_id": "35766523457", "pre_execute_sha": "2a9c2cdccad7b70025ae10acb323ef6bcaab3074", "recorded_at": "2026-09-22T18:27:12.511089+00:00", "schema_version": 1},
+  "notes": "All measurement validity threats disclosed in result.json validity_notes; representation loss: TF-IDF field choice, k granularity, BrowserGym task-to-site coarse mapping, full-DOM initial viewport only, canonical p=0.5 model; exhaustive retries recorded with backoff; no LLM calls; reuse prior WebArena census hash for pin verification only"
+}

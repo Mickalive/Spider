@@ -1,0 +1,73 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-35766523457",
+  "lane": "intel",
+  "status": "PASS",
+  "producer_claim_supported": false,
+  "required_fixes": [],
+  "validity_findings": [
+    "Gate0 infrastructure precedence correctly enforced: 0/2 real candidates qualify (both NL=0, substrate BLOCKED). Per frozen decision rule, this is MEASUREMENT_INVALID substrate_unavailable (status COMPLETE outcome NOT_APPLICABLE), not FALSIFIED. Producer correctly does not substitute synthetic for decision.",
+    "Exhaustive retries documented: 12 BrowserGym attempts (4 envs × 3 retries) all ModuleNotFoundError; 12 CAP attempts (3 retries × 3 HF names + FS) all DatasetNotFoundError; 3 Docker retries all URLError connection refused + playwright not installed. Durable errors recorded, not missing data.",
+    "Synthetic_gate_passing_like demonstrates Gate0 thresholds achievable in principle (H=1.39 bits, NL=180, strata=12, leak=0.0, titles=3) but is pipeline validation only. No inference to production SPAs.",
+    "PC1_BROWSERGYM_LIVENESS FAIL: All 4 envs BLOCKED, 0 AX trees captured at 1280x720 from live envs. Prerequisite for H1 not met.",
+    "PC2_TITLES_EXISTENCE FAIL: Real candidates 0/2 have titles/entropy; synthetic PASS but not production.",
+    "PC4_CAP_SPLIT_INTEGRITY FAIL: Real CAP dump unavailable, site multiplicity unverified. H2B correctly MEASUREMENT_INVALID.",
+    "Docker H2A BLOCKED: am1n3e/webarena-verified-shopping@sha256:3e8cb9b945 unavailable, playwright not installed. Cap-removal verified via MEASURE_JS hash diff (b0e0b594... vs parent 085b58c9...), but n>=20 enumeration not executed. F_full=null, NC3 not computed.",
+    "KMeans random_state 35725763380 reduced modulo 2^32 to 1363249228 for sklearn int32 compliance — disclosed as representation loss in validity_notes.",
+    "Stagehand baseline simulated (hit_rate 0.5, 532ms latency, 173600 tokens saved on 20 trajs) due to substrate unavailability. Disclosed as projection only, not decision input.",
+    "Mind2Web LFS 567.7MB test.zip on HF 17ece8eb declared ABANDONED per Director SUPERSEDE — not attempted, prior Gate0 single-train 73/3 vs 137/31 divergence carried forward as rationale."
+  ],
+  "baseline_findings": [
+    "B1_TRUNCATED_FIRST_20 (0.5654) and B2_CONSTANT_NULL_05654 carried forward; Docker not executed so discriminating CI comparison not possible. Cap-removal verified but full-DOM counts 21-82 not observed.",
+    "B3_MIND2WEB_COARSE_033 (0.8139 vs 0.998 excess -0.184) carried forward as rejected invalid-control; synthetic TF-IDF excess 0.925 confirms granularity inflation.",
+    "B5_STAGEHAND_CACHE PASS: simulated hit_rate 0.5, latency 532ms, tokens_saved 173600 disclosed as competitive economics descriptor only.",
+    "B6_SPIDER_2SITE: WebArena census 192/49 families_ge3 36 via reused webarena-verified.json sha256 d6527566... exceeds 2-site bound trivially; quality requires shuffle null.",
+    "B7_RETRIEVAL_RAG_STRONG: Disclosure only, no LLM benefit measured."
+  ],
+  "recomputed_metrics": {
+    "gate0_real_qualifying_spas": 0,
+    "gate0_synthetic_qualifying_demo": 1,
+    "gate0_total_real_candidates": 2,
+    "gate0_exhaustive_envs_attempted": 4,
+    "gate0_envs_blocked_after_3_retries": 4,
+    "cap_real_dump_available": false,
+    "cap_real_dump_attempts": 3,
+    "cap_synthetic_demo_overlap": 1.0,
+    "cap_synthetic_demo_shuffle_mean": 0.07482534767752533,
+    "cap_synthetic_demo_shuffle_p95": 0.144853197576616,
+    "cap_synthetic_demo_excess": 0.9251746523224746,
+    "docker_available": false,
+    "docker_cap_removed_verified": true,
+    "docker_n_tasks_attempted": 0,
+    "docker_n_tasks_required": 20,
+    "pc3_correlated_bc_pmi_bits": 0.923207422194195,
+    "pc3_correlated_pass": true,
+    "nc4_independent_bc_pmi_bits": 0.0,
+    "nc4_independent_pass": true,
+    "stagehand_hit_rate": 0.5,
+    "stagehand_avg_latency_ms": 532.1489850232882,
+    "stagehand_tokens_saved_total": 173600,
+    "mind2web_lfs_status": "ABANDONED"
+  },
+  "claim_ceiling": "No production SPA or CAP evidence obtained; substrate unavailability blocks all decision clauses. Gate0 yields 0 real qualifying SPAs after exhaustive search (4 BrowserGym envs × 3 retries + CAP 3 retries). H2A (full-DOM) and H2B (CAP holdout) both MEASUREMENT_INVALID. Claim ceiling remains at prior WebArena single-store census only (192/49 tasks, duplication 0.9479 CI [0.9167,0.9792], 36 families ≥3, AX_consistency=0.9 bootstrap CI [0.7,1.0]) with no LLM benefit demonstrated. C-WEB-DYNAMICS and C-CROSSSITE remain HYPOTHESIS. Mind2Web LFS remains ABANDONED per Director SUPERSEDE. Physics CMI PARKED pending Intel census delivering ≥2 gate-passing SPAs with 1280×720 AX provenance.",
+  "evidence_refs": [
+    "research/experiments/EXP-INTEL-35766523457/artifacts/raw/gate0_table.json (sha256 9f1de37be724cf30d304d42452f0021431e948edf668909e6477d2cbd6fe9c86)",
+    "research/experiments/EXP-INTEL-35766523457/artifacts/raw/browsergym_census.json (sha256 e53b2f4d866b0e8f5616bb1cbb8b40b139693969612c7ba5f69786e2dd1fbd2f)",
+    "research/experiments/EXP-INTEL-35766523457/artifacts/raw/cap_manifest.json (sha256 6a106b99bba820d5410bce40db77dc6eb3a43390d99be6ebf7152bd65607dc8e)",
+    "research/experiments/EXP-INTEL-35766523457/artifacts/raw/full_dom_locatable_sample.json (sha256 12e5ed54c63c5320437a5b91af4d11a3e0e4d5243ab71b607663b2936730ee07)",
+    "research/experiments/EXP-INTEL-35766523457/artifacts/derived/measurements.json (sha256 5a1c70da551832133a5063c7e85b69df17bf5e39703de9082333bd117b4b8cae)",
+    "research/experiments/EXP-INTEL-35766523457/artifacts/derived/shuffle_null.json (sha256 d77af94a3f510c038df0b2bc715fc66579b407ba70262f8b4fb4318590391aa4)",
+    "research/experiments/EXP-INTEL-35766523457/artifacts/derived/tfidf_kmeans_meta.json (sha256 bdb25320f49711cc47c17bb3548eea766bfdd43bb3142142837a8b0bffd85b39)",
+    "research/experiments/EXP-INTEL-35766523457/artifacts/derived/docker_ranking_agreement.json (sha256 609134588d0624feeb0032f25cbccdac152fe42aff4db8b63b477d021bedaeba)",
+    "research/experiments/EXP-INTEL-35766523457/artifacts/derived/stagehand_baseline.json (sha256 d0e3858b6b10eb96c1b240003d281f9deac75ff3c991423f74773fdca06fea2a)",
+    "research/experiments/EXP-INTEL-35766523457/provenance.json (sha256 per provenance.artifacts)",
+    "research/intel/exp_35766523457_measure.py (sha256 62aba27e89cc75fc05cfc9200433714e35ceb0a57ea9f2a94c4fdf258ed28437)"
+  ],
+  "unresolved": [
+    "Whether any of the 4 BrowserGym envs (WebArena 812 tasks, WebShop, WebLINX 155k, WorkArena) would yield ≥2 gate-passing production SPAs if BrowserGym/AgentLab/Playwright were installed and enumerated at 1280x720 with full AX/CDP capture, given synthetic pipeline shows Gate0 achievable (H=1.39) but prior 60 exps found 0 qualifying on hash-SPAs (TodoMVC titles=1, H=0, leakage=1.0).",
+    "Whether official CAP 420-task 108-site 24-domain dump exists outside attempted HF names (ServiceNow/cap, cap, agentlab/cap) and could provide website-holdout with TF-IDF overlap≥0.15 excess≥0.10 at k=min(50,unique/20) with website-label shuffle null, or whether cross-site task polymorphism requires alternative corpus (WebLINX 155k/Go-Browse 40k). Synthetic demo excess 0.925 suggests pipeline would pass if real data homogeneous but real heterogeneity unknown.",
+    "Whether Docker full-DOM enumeration at full counts 21-82 on n≥20 Magento tasks would yield F_full CI entirely outside 80% vs constant null 0.5654 and discriminating NC3 same-cardinality role-subset excess≥0.20 non-overlapping, given prior truncated F=0.5654 and prior full-DOM 7-task non-compliant counts 67-177 with F=0.714 CI [0.428,1.0] straddling threshold.",
+    "Whether title variation (titles≥2) and branched next-state (H>0.2 with ≥5 per stratum) co-occur on genuine production SPAs at 1280x720 after leakage filtering with NL≥50 strata≥10 singleton<50%, or whether TodoMVC-like hash SPAs remain degenerate (titles constant, 27% link_share leakage) even via BrowserGym live replay.",
+    "Competitive economics of Stagehand DOM-hash verb cache vs SPIDER 0-token replay on gate-passing SPAs (hit_rate/latency/tokens_saved) remains unmeasured on live BrowserGym/CAP SPAs; simulated 0.5 hit_rate 532ms 17360 tokens/hit is projection only."
+  ]
+}
