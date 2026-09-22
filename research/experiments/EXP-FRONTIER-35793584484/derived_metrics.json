@@ -1,0 +1,2103 @@
+{
+  "alias_rates": {
+    "B-EXACT-MATCH::verbatim": {
+      "n": 40,
+      "correct": 0,
+      "false_accept": 40,
+      "unknown": 0,
+      "correct_rate": 0.0,
+      "false_accept_rate": 1.0,
+      "unknown_rate": 0.0,
+      "wilson_correct": [
+        0.0,
+        0.08762453925039232
+      ],
+      "wilson_false": [
+        0.9123754607496077,
+        1.0
+      ]
+    },
+    "B-EXACT-MATCH::correctfamily": {
+      "n": 40,
+      "correct": 0,
+      "false_accept": 40,
+      "unknown": 0,
+      "correct_rate": 0.0,
+      "false_accept_rate": 1.0,
+      "unknown_rate": 0.0,
+      "wilson_correct": [
+        0.0,
+        0.08762453925039232
+      ],
+      "wilson_false": [
+        0.9123754607496077,
+        1.0
+      ]
+    },
+    "B-VERBATIM-REPLAY::verbatim": {
+      "n": 40,
+      "correct": 0,
+      "false_accept": 0,
+      "unknown": 40,
+      "correct_rate": 0.0,
+      "false_accept_rate": 0.0,
+      "unknown_rate": 1.0,
+      "wilson_correct": [
+        0.0,
+        0.08762453925039232
+      ],
+      "wilson_false": [
+        0.0,
+        0.08762453925039232
+      ]
+    },
+    "B-VERBATIM-REPLAY::correctfamily": {
+      "n": 40,
+      "correct": 21,
+      "false_accept": 10,
+      "unknown": 9,
+      "correct_rate": 0.525,
+      "false_accept_rate": 0.25,
+      "unknown_rate": 0.225,
+      "wilson_correct": [
+        0.37497106853929735,
+        0.6706477044981831
+      ],
+      "wilson_false": [
+        0.14186967895549518,
+        0.40194259066970106
+      ]
+    },
+    "B-FLAT-TFIDF-K5-VERBATIM": {
+      "n": 40,
+      "correct": 0,
+      "false_accept": 0,
+      "unknown": 40,
+      "correct_rate": 0.0,
+      "false_accept_rate": 0.0,
+      "unknown_rate": 1.0,
+      "wilson_correct": [
+        0.0,
+        0.08762453925039232
+      ],
+      "wilson_false": [
+        0.0,
+        0.08762453925039232
+      ]
+    },
+    "B-FLAT-TFIDF-K5-CF": {
+      "n": 40,
+      "correct": 21,
+      "false_accept": 10,
+      "unknown": 9,
+      "correct_rate": 0.525,
+      "false_accept_rate": 0.25,
+      "unknown_rate": 0.225,
+      "wilson_correct": [
+        0.37497106853929735,
+        0.6706477044981831
+      ],
+      "wilson_false": [
+        0.14186967895549518,
+        0.40194259066970106
+      ]
+    },
+    "B-FLAT-EMBED-K5-VERBATIM": {
+      "n": 40,
+      "correct": 0,
+      "false_accept": 0,
+      "unknown": 40,
+      "correct_rate": 0.0,
+      "false_accept_rate": 0.0,
+      "unknown_rate": 1.0,
+      "wilson_correct": [
+        0.0,
+        0.08762453925039232
+      ],
+      "wilson_false": [
+        0.0,
+        0.08762453925039232
+      ]
+    },
+    "B-FLAT-EMBED-K5-CF": {
+      "n": 40,
+      "correct": 21,
+      "false_accept": 10,
+      "unknown": 9,
+      "correct_rate": 0.525,
+      "false_accept_rate": 0.25,
+      "unknown_rate": 0.225,
+      "wilson_correct": [
+        0.37497106853929735,
+        0.6706477044981831
+      ],
+      "wilson_false": [
+        0.14186967895549518,
+        0.40194259066970106
+      ]
+    },
+    "B-RANDOM-K5-VERBATIM": {
+      "n": 40,
+      "correct": 0,
+      "false_accept": 0,
+      "unknown": 40,
+      "correct_rate": 0.0,
+      "false_accept_rate": 0.0,
+      "unknown_rate": 1.0,
+      "wilson_correct": [
+        0.0,
+        0.08762453925039232
+      ],
+      "wilson_false": [
+        0.0,
+        0.08762453925039232
+      ]
+    },
+    "B-RANDOM-K5-CF": {
+      "n": 40,
+      "correct": 18,
+      "false_accept": 10,
+      "unknown": 12,
+      "correct_rate": 0.45,
+      "false_accept_rate": 0.25,
+      "unknown_rate": 0.3,
+      "wilson_correct": [
+        0.30705075280944705,
+        0.6017117011155924
+      ],
+      "wilson_false": [
+        0.14186967895549518,
+        0.40194259066970106
+      ]
+    },
+    "H-HIERARCHICAL-VERBATIM": {
+      "n": 40,
+      "correct": 0,
+      "false_accept": 0,
+      "unknown": 40,
+      "correct_rate": 0.0,
+      "false_accept_rate": 0.0,
+      "unknown_rate": 1.0,
+      "wilson_correct": [
+        0.0,
+        0.08762453925039232
+      ],
+      "wilson_false": [
+        0.0,
+        0.08762453925039232
+      ]
+    },
+    "H-HIERARCHICAL-CF": {
+      "n": 40,
+      "correct": 21,
+      "false_accept": 10,
+      "unknown": 9,
+      "correct_rate": 0.525,
+      "false_accept_rate": 0.25,
+      "unknown_rate": 0.225,
+      "wilson_correct": [
+        0.37497106853929735,
+        0.6706477044981831
+      ],
+      "wilson_false": [
+        0.14186967895549518,
+        0.40194259066970106
+      ]
+    },
+    "H-WEBAPI-VERBATIM": {
+      "n": 40,
+      "correct": 0,
+      "false_accept": 0,
+      "unknown": 40,
+      "correct_rate": 0.0,
+      "false_accept_rate": 0.0,
+      "unknown_rate": 1.0,
+      "wilson_correct": [
+        0.0,
+        0.08762453925039232
+      ],
+      "wilson_false": [
+        0.0,
+        0.08762453925039232
+      ]
+    },
+    "H-WEBAPI-CF": {
+      "n": 40,
+      "correct": 21,
+      "false_accept": 10,
+      "unknown": 9,
+      "correct_rate": 0.525,
+      "false_accept_rate": 0.25,
+      "unknown_rate": 0.225,
+      "wilson_correct": [
+        0.37497106853929735,
+        0.6706477044981831
+      ],
+      "wilson_false": [
+        0.14186967895549518,
+        0.40194259066970106
+      ]
+    }
+  },
+  "coverage": {
+    "B-EXACT-MATCH::verbatim": 0.0,
+    "B-EXACT-MATCH::correctfamily": 0.55,
+    "B-VERBATIM-REPLAY::verbatim": 0.0,
+    "B-VERBATIM-REPLAY::correctfamily": 0.55,
+    "B-FLAT-TFIDF-K5-VERBATIM": 0.0,
+    "B-FLAT-TFIDF-K5-CF": 0.55,
+    "B-FLAT-EMBED-K5-VERBATIM": 0.0,
+    "B-FLAT-EMBED-K5-CF": 0.55,
+    "B-RANDOM-K5-VERBATIM": 0.0,
+    "B-RANDOM-K5-CF": 0.55,
+    "H-HIERARCHICAL-VERBATIM": 0.0,
+    "H-HIERARCHICAL-CF": 0.55,
+    "H-WEBAPI-VERBATIM": 0.0,
+    "H-WEBAPI-CF": 0.55
+  },
+  "density": {
+    "B-EXACT-MATCH::verbatim": 1.3375,
+    "B-EXACT-MATCH::correctfamily": 1.3375,
+    "B-VERBATIM-REPLAY::verbatim": 1.3375,
+    "B-VERBATIM-REPLAY::correctfamily": 1.3375,
+    "B-FLAT-TFIDF-K5-VERBATIM": 1.49,
+    "B-FLAT-TFIDF-K5-CF": 1.49,
+    "B-FLAT-EMBED-K5-VERBATIM": 1.44,
+    "B-FLAT-EMBED-K5-CF": 1.44,
+    "B-RANDOM-K5-VERBATIM": 1.6649999999999998,
+    "B-RANDOM-K5-CF": 1.685,
+    "H-HIERARCHICAL-VERBATIM": 1.3850000000000002,
+    "H-HIERARCHICAL-CF": 1.3850000000000002,
+    "H-WEBAPI-VERBATIM": 1.3850000000000002,
+    "H-WEBAPI-CF": 1.3850000000000002
+  },
+  "best_flat": {
+    "coverage_sid": "B-FLAT-TFIDF-K5-CF",
+    "coverage_value": 0.55,
+    "density_sid": "B-FLAT-TFIDF-K5-CF",
+    "density_value": 1.49
+  },
+  "hier_gain": {
+    "observed_gain": 0.0,
+    "ci_low": 0.0,
+    "ci_high": 0.0,
+    "p": 1.0,
+    "gains": null
+  },
+  "webapi_gain": {
+    "observed_gain": 0.0,
+    "ci_low": 0.0,
+    "ci_high": 0.0,
+    "p": 1.0,
+    "gains": null
+  },
+  "hier_density_gain": {
+    "observed_gain": -0.10499999999999976,
+    "ci_low": -0.11499999999999999,
+    "ci_high": -0.09999999999999987,
+    "p": 0.0,
+    "gains": null
+  },
+  "webapi_density_gain": {
+    "observed_gain": -0.10499999999999976,
+    "ci_low": -0.11499999999999999,
+    "ci_high": -0.09999999999999987,
+    "p": 0.0,
+    "gains": null
+  },
+  "ece": {
+    "B-EXACT-MATCH::verbatim": {
+      "ece": 0.9,
+      "bins": [
+        {
+          "bin": 0,
+          "count": 0,
+          "acc": 0.0,
+          "avg_conf": 0.0,
+          "edges": [
+            0.0,
+            0.2
+          ]
+        },
+        {
+          "bin": 1,
+          "count": 0,
+          "acc": 0.0,
+          "avg_conf": 0.0,
+          "edges": [
+            0.2,
+            0.4
+          ]
+        },
+        {
+          "bin": 2,
+          "count": 0,
+          "acc": 0.0,
+          "avg_conf": 0.0,
+          "edges": [
+            0.4,
+            0.6000000000000001
+          ]
+        },
+        {
+          "bin": 3,
+          "count": 0,
+          "acc": 0.0,
+          "avg_conf": 0.0,
+          "edges": [
+            0.6000000000000001,
+            0.8
+          ]
+        },
+        {
+          "bin": 4,
+          "count": 40,
+          "acc": 0.0,
+          "avg_conf": 0.9,
+          "edges": [
+            0.8,
+            1.0
+          ]
+        }
+      ]
+    },
+    "B-EXACT-MATCH::correctfamily": {
+      "ece": 0.9,
+      "bins": [
+        {
+          "bin": 0,
+          "count": 0,
+          "acc": 0.0,
+          "avg_conf": 0.0,
+          "edges": [
+            0.0,
+            0.2
+          ]
+        },
+        {
+          "bin": 1,
+          "count": 0,
+          "acc": 0.0,
+          "avg_conf": 0.0,
+          "edges": [
+            0.2,
+            0.4
+          ]
+        },
+        {
+          "bin": 2,
+          "count": 0,
+          "acc": 0.0,
+          "avg_conf": 0.0,
+          "edges": [
+            0.4,
+            0.6000000000000001
+          ]
+        },
+        {
+          "bin": 3,
+          "count": 0,
+          "acc": 0.0,
+          "avg_conf": 0.0,
+          "edges": [
+            0.6000000000000001,
+            0.8
+          ]
+        },
+        {
+          "bin": 4,
+          "count": 40,
+          "acc": 0.0,
+          "avg_conf": 0.9,
+          "edges": [
+            0.8,
+            1.0
+          ]
+        }
+      ]
+    },
+    "B-VERBATIM-REPLAY::verbatim": {
+      "ece": 0.2937996165647516,
+      "bins": [
+        {
+          "bin": 0,
+          "count": 0,
+          "acc": 0.0,
+          "avg_conf": 0.0,
+          "edges": [
+            0.0,
+            0.2
+          ]
+        },
+        {
+          "bin": 1,
+          "count": 39,
+          "acc": 0.0,
+          "avg_conf": 0.2885265562072061,
+          "edges": [
+            0.2,
+            0.4
+          ]
+        },
+        {
+          "bin": 2,
+          "count": 1,
+          "acc": 0.0,
+          "avg_conf": 0.4994489705090288,
+          "edges": [
+            0.4,
+            0.6000000000000001
+          ]
+        },
+        {
+          "bin": 3,
+          "count": 0,
+          "acc": 0.0,
+          "avg_conf": 0.0,
+          "edges": [
+            0.6000000000000001,
+            0.8
+          ]
+        },
+        {
+          "bin": 4,
+          "count": 0,
+          "acc": 0.0,
+          "avg_conf": 0.0,
+          "edges": [
+            0.8,
+            1.0
+          ]
+        }
+      ]
+    },
+    "B-VERBATIM-REPLAY::correctfamily": {
+      "ece": 0.22353759037231785,
+      "bins": [
+        {
+          "bin": 0,
+          "count": 0,
+          "acc": 0.0,
+          "avg_conf": 0.0,
+          "edges": [
+            0.0,
+            0.2
+          ]
+        },
+        {
+          "bin": 1,
+          "count": 8,
+          "acc": 0.0,
+          "avg_conf": 0.318161250421786,
+          "edges": [
+            0.2,
+            0.4
+          ]
+        },
+        {
+          "bin": 2,
+          "count": 1,
+          "acc": 0.0,
+          "avg_conf": 0.5887570326608361,
+          "edges": [
+            0.4,
+            0.6000000000000001
+          ]
+        },
+        {
+          "bin": 3,
+          "count": 0,
+          "acc": 0.0,
+          "avg_conf": 0.0,
+          "edges": [
+            0.6000000000000001,
+            0.8
+          ]
+        },
+        {
+          "bin": 4,
+          "count": 31,
+          "acc": 0.6774193548387096,
+          "avg_conf": 0.8647566638341158,
+          "edges": [
+            0.8,
+            1.0
+          ]
+        }
+      ]
+    },
+    "B-FLAT-TFIDF-K5-VERBATIM": {
+      "ece": 0.36951680320288294,
+      "bins": [
+        {
+          "bin": 0,
+          "count": 0,
+          "acc": 0.0,
+          "avg_conf": 0.0,
+          "edges": [
+            0.0,
+            0.2
+          ]
+        },
+        {
+          "bin": 1,
+          "count": 39,
+          "acc": 0.0,
+          "avg_conf": 0.36380108617239,
+          "edges": [
+            0.2,
+            0.4
+          ]
+        },
+        {
+          "bin": 2,
+          "count": 1,
+          "acc": 0.0,
+          "avg_conf": 0.5924297673921096,
+          "edges": [
+            0.4,
+            0.6000000000000001
+          ]
+        },
+        {
+          "bin": 3,
+          "count": 0,
+          "acc": 0.0,
+          "avg_conf": 0.0,
+          "edges": [
+            0.6000000000000001,
+            0.8
+          ]
+        },
+        {
+          "bin": 4,
+          "count": 0,
+          "acc": 0.0,
+          "avg_conf": 0.0,
+          "edges": [
+            0.8,
+            1.0
+          ]
+        }
+      ]
+    },
+    "B-FLAT-TFIDF-K5-CF": {
+      "ece": 0.26305318317445314,
+      "bins": [
+        {
+          "bin": 0,
+          "count": 0,
+          "acc": 0.0,
+          "avg_conf": 0.0,
+          "edges": [
+            0.0,
+            0.2
+          ]
+        },
+        {
+          "bin": 1,
+          "count": 5,
+          "acc": 0.0,
+          "avg_conf": 0.3945516331974955,
+          "edges": [
+            0.2,
+            0.4
+          ]
+        },
+        {
+          "bin": 2,
+          "count": 3,
+          "acc": 0.0,
+          "avg_conf": 0.40421829986416213,
+          "edges": [
+            0.4,
+            0.6000000000000001
+          ]
+        },
+        {
+          "bin": 3,
+          "count": 1,
+          "acc": 0.0,
+          "avg_conf": 0.6655669951396832,
+          "edges": [
+            0.6000000000000001,
+            0.8
+          ]
+        },
+        {
+          "bin": 4,
+          "count": 31,
+          "acc": 0.6774193548387096,
+          "avg_conf": 0.8926176537502735,
+          "edges": [
+            0.8,
+            1.0
+          ]
+        }
+      ]
+    },
+    "B-FLAT-EMBED-K5-VERBATIM": {
+      "ece": 0.39235337669731046,
+      "bins": [
+        {
+          "bin": 0,
+          "count": 0,
+          "acc": 0.0,
+          "avg_conf": 0.0,
+          "edges": [
+            0.0,
+            0.2
+          ]
+        },
+        {
+          "bin": 1,
+          "count": 24,
+          "acc": 0.0,
+          "avg_conf": 0.3689086316968117,
+          "edges": [
+            0.2,
+            0.4
+          ]
+        },
+        {
+          "bin": 2,
+          "count": 15,
+          "acc": 0.0,
+          "avg_conf": 0.4155424023010068,
+          "edges": [
+            0.4,
+            0.6000000000000001
+          ]
+        },
+        {
+          "bin": 3,
+          "count": 1,
+          "acc": 0.0,
+          "avg_conf": 0.6071918726538352,
+          "edges": [
+            0.6000000000000001,
+            0.8
+          ]
+        },
+        {
+          "bin": 4,
+          "count": 0,
+          "acc": 0.0,
+          "avg_conf": 0.0,
+          "edges": [
+            0.8,
+            1.0
+          ]
+        }
+      ]
+    },
+    "B-FLAT-EMBED-K5-CF": {
+      "ece": 0.26091619184425835,
+      "bins": [
+        {
+          "bin": 0,
+          "count": 0,
+          "acc": 0.0,
+          "avg_conf": 0.0,
+          "edges": [
+            0.0,
+            0.2
+          ]
+        },
+        {
+          "bin": 1,
+          "count": 7,
+          "acc": 0.0,
+          "avg_conf": 0.37564556415382316,
+          "edges": [
+            0.2,
+            0.4
+          ]
+        },
+        {
+          "bin": 2,
+          "count": 1,
+          "acc": 0.0,
+          "avg_conf": 0.4095516331974955,
+          "edges": [
+            0.4,
+            0.6000000000000001
+          ]
+        },
+        {
+          "bin": 3,
+          "count": 1,
+          "acc": 0.0,
+          "avg_conf": 0.6071918726538352,
+          "edges": [
+            0.6000000000000001,
+            0.8
+          ]
+        },
+        {
+          "bin": 4,
+          "count": 31,
+          "acc": 0.6774193548387096,
+          "avg_conf": 0.8964640393174916,
+          "edges": [
+            0.8,
+            1.0
+          ]
+        }
+      ]
+    },
+    "B-RANDOM-K5-VERBATIM": {
+      "ece": 0.3717237476394424,
+      "bins": [
+        {
+          "bin": 0,
+          "count": 0,
+          "acc": 0.0,
+          "avg_conf": 0.0,
+          "edges": [
+            0.0,
+            0.2
+          ]
+        },
+        {
+          "bin": 1,
+          "count": 33,
+          "acc": 0.0,
+          "avg_conf": 0.3559984091159184,
+          "edges": [
+            0.2,
+            0.4
+          ]
+        },
+        {
+          "bin": 2,
+          "count": 6,
+          "acc": 0.0,
+          "avg_conf": 0.41307958606883427,
+          "edges": [
+            0.4,
+            0.6000000000000001
+          ]
+        },
+        {
+          "bin": 3,
+          "count": 1,
+          "acc": 0.0,
+          "avg_conf": 0.6425248883393841,
+          "edges": [
+            0.6000000000000001,
+            0.8
+          ]
+        },
+        {
+          "bin": 4,
+          "count": 0,
+          "acc": 0.0,
+          "avg_conf": 0.0,
+          "edges": [
+            0.8,
+            1.0
+          ]
+        }
+      ]
+    },
+    "B-RANDOM-K5-CF": {
+      "ece": 0.3159854032225894,
+      "bins": [
+        {
+          "bin": 0,
+          "count": 0,
+          "acc": 0.0,
+          "avg_conf": 0.0,
+          "edges": [
+            0.0,
+            0.2
+          ]
+        },
+        {
+          "bin": 1,
+          "count": 6,
+          "acc": 0.0,
+          "avg_conf": 0.3739945526465444,
+          "edges": [
+            0.2,
+            0.4
+          ]
+        },
+        {
+          "bin": 2,
+          "count": 5,
+          "acc": 0.0,
+          "avg_conf": 0.4993773996906096,
+          "edges": [
+            0.4,
+            0.6000000000000001
+          ]
+        },
+        {
+          "bin": 3,
+          "count": 1,
+          "acc": 0.0,
+          "avg_conf": 0.7103270073713769,
+          "edges": [
+            0.6000000000000001,
+            0.8
+          ]
+        },
+        {
+          "bin": 4,
+          "count": 28,
+          "acc": 0.6428571428571429,
+          "avg_conf": 0.8995798145428531,
+          "edges": [
+            0.8,
+            1.0
+          ]
+        }
+      ]
+    },
+    "H-HIERARCHICAL-VERBATIM": {
+      "ece": 0.38589508056963573,
+      "bins": [
+        {
+          "bin": 0,
+          "count": 0,
+          "acc": 0.0,
+          "avg_conf": 0.0,
+          "edges": [
+            0.0,
+            0.2
+          ]
+        },
+        {
+          "bin": 1,
+          "count": 28,
+          "acc": 0.0,
+          "avg_conf": 0.3647770895719144,
+          "edges": [
+            0.2,
+            0.4
+          ]
+        },
+        {
+          "bin": 2,
+          "count": 11,
+          "acc": 0.0,
+          "avg_conf": 0.41786157173953176,
+          "edges": [
+            0.4,
+            0.6000000000000001
+          ]
+        },
+        {
+          "bin": 3,
+          "count": 1,
+          "acc": 0.0,
+          "avg_conf": 0.6255674256369778,
+          "edges": [
+            0.6000000000000001,
+            0.8
+          ]
+        },
+        {
+          "bin": 4,
+          "count": 0,
+          "acc": 0.0,
+          "avg_conf": 0.0,
+          "edges": [
+            0.8,
+            1.0
+          ]
+        }
+      ]
+    },
+    "H-HIERARCHICAL-CF": {
+      "ece": 0.25694009198769424,
+      "bins": [
+        {
+          "bin": 0,
+          "count": 0,
+          "acc": 0.0,
+          "avg_conf": 0.0,
+          "edges": [
+            0.0,
+            0.2
+          ]
+        },
+        {
+          "bin": 1,
+          "count": 7,
+          "acc": 0.0,
+          "avg_conf": 0.3258881550005235,
+          "edges": [
+            0.2,
+            0.4
+          ]
+        },
+        {
+          "bin": 2,
+          "count": 1,
+          "acc": 0.0,
+          "avg_conf": 0.46645265399660496,
+          "edges": [
+            0.4,
+            0.6000000000000001
+          ]
+        },
+        {
+          "bin": 3,
+          "count": 1,
+          "acc": 0.0,
+          "avg_conf": 0.7103270073713769,
+          "edges": [
+            0.6000000000000001,
+            0.8
+          ]
+        },
+        {
+          "bin": 4,
+          "count": 31,
+          "acc": 0.6774193548387096,
+          "avg_conf": 0.8974066752624555,
+          "edges": [
+            0.8,
+            1.0
+          ]
+        }
+      ]
+    },
+    "H-WEBAPI-VERBATIM": {
+      "ece": 0.38589508056963573,
+      "bins": [
+        {
+          "bin": 0,
+          "count": 0,
+          "acc": 0.0,
+          "avg_conf": 0.0,
+          "edges": [
+            0.0,
+            0.2
+          ]
+        },
+        {
+          "bin": 1,
+          "count": 28,
+          "acc": 0.0,
+          "avg_conf": 0.3647770895719144,
+          "edges": [
+            0.2,
+            0.4
+          ]
+        },
+        {
+          "bin": 2,
+          "count": 11,
+          "acc": 0.0,
+          "avg_conf": 0.41786157173953176,
+          "edges": [
+            0.4,
+            0.6000000000000001
+          ]
+        },
+        {
+          "bin": 3,
+          "count": 1,
+          "acc": 0.0,
+          "avg_conf": 0.6255674256369778,
+          "edges": [
+            0.6000000000000001,
+            0.8
+          ]
+        },
+        {
+          "bin": 4,
+          "count": 0,
+          "acc": 0.0,
+          "avg_conf": 0.0,
+          "edges": [
+            0.8,
+            1.0
+          ]
+        }
+      ]
+    },
+    "H-WEBAPI-CF": {
+      "ece": 0.25694009198769424,
+      "bins": [
+        {
+          "bin": 0,
+          "count": 0,
+          "acc": 0.0,
+          "avg_conf": 0.0,
+          "edges": [
+            0.0,
+            0.2
+          ]
+        },
+        {
+          "bin": 1,
+          "count": 7,
+          "acc": 0.0,
+          "avg_conf": 0.3258881550005235,
+          "edges": [
+            0.2,
+            0.4
+          ]
+        },
+        {
+          "bin": 2,
+          "count": 1,
+          "acc": 0.0,
+          "avg_conf": 0.46645265399660496,
+          "edges": [
+            0.4,
+            0.6000000000000001
+          ]
+        },
+        {
+          "bin": 3,
+          "count": 1,
+          "acc": 0.0,
+          "avg_conf": 0.7103270073713769,
+          "edges": [
+            0.6000000000000001,
+            0.8
+          ]
+        },
+        {
+          "bin": 4,
+          "count": 31,
+          "acc": 0.6774193548387096,
+          "avg_conf": 0.8974066752624555,
+          "edges": [
+            0.8,
+            1.0
+          ]
+        }
+      ]
+    }
+  },
+  "conf_std": {
+    "B-EXACT-MATCH::verbatim": 0.39335293390572923,
+    "B-EXACT-MATCH::correctfamily": 0.39335293390572923,
+    "B-VERBATIM-REPLAY::verbatim": 0.3036616960569229,
+    "B-VERBATIM-REPLAY::correctfamily": 0.37086153196165195,
+    "B-FLAT-TFIDF-K5-VERBATIM": 0.26606440776255846,
+    "B-FLAT-TFIDF-K5-CF": 0.2739997793645733,
+    "B-FLAT-EMBED-K5-VERBATIM": 0.2607589302539514,
+    "B-FLAT-EMBED-K5-CF": 0.27788238895826955,
+    "B-RANDOM-K5-VERBATIM": 0.26668220033826173,
+    "B-RANDOM-K5-CF": 0.27708268040511447,
+    "H-HIERARCHICAL-VERBATIM": 0.26261438261662856,
+    "H-HIERARCHICAL-CF": 0.2841903262237594,
+    "H-WEBAPI-VERBATIM": 0.26261438261662856,
+    "H-WEBAPI-CF": 0.2841903262237594
+  },
+  "mcnemar": {
+    "hier_vs_exact_cf": {
+      "b": 21,
+      "c": 0,
+      "chi2": 19.047619047619047,
+      "p": 1.2749674921042065e-05
+    },
+    "webapi_vs_exact_cf": {
+      "b": 21,
+      "c": 0,
+      "chi2": 19.047619047619047,
+      "p": 1.2749674921042065e-05
+    },
+    "hier_vs_best_flat_cf": {
+      "b": 0,
+      "c": 0,
+      "chi2": 0.0,
+      "p": 1.0
+    },
+    "webapi_vs_best_flat_cf": {
+      "b": 0,
+      "c": 0,
+      "chi2": 0.0,
+      "p": 1.0
+    },
+    "webapi_vs_hier_cf": {
+      "b": 0,
+      "c": 0,
+      "chi2": 0.0,
+      "p": 1.0
+    },
+    "hier_false_vs_verbatim_cf": {
+      "b": 0,
+      "c": 0,
+      "chi2": 0.0,
+      "p": 1.0
+    },
+    "webapi_false_vs_verbatim_cf": {
+      "b": 0,
+      "c": 0,
+      "chi2": 0.0,
+      "p": 1.0
+    }
+  },
+  "derived_rates": {
+    "B-EXACT-MATCH::alias-OOD::verbatim": {
+      "n": 40,
+      "correct": 0,
+      "false_accept": 40,
+      "unknown": 0,
+      "correct_rate": 0.0,
+      "false_accept_rate": 1.0,
+      "unknown_rate": 0.0,
+      "wilson_correct": [
+        0.0,
+        0.08762453925039232
+      ],
+      "wilson_false": [
+        0.9123754607496077,
+        1.0
+      ]
+    },
+    "B-EXACT-MATCH::exact-match::verbatim": {
+      "n": 12,
+      "correct": 12,
+      "false_accept": 0,
+      "unknown": 0,
+      "correct_rate": 1.0,
+      "false_accept_rate": 0.0,
+      "unknown_rate": 0.0,
+      "wilson_correct": [
+        0.7574992425007574,
+        0.9999999999999998
+      ],
+      "wilson_false": [
+        0.0,
+        0.2425007574992425
+      ]
+    },
+    "B-EXACT-MATCH::no-applicable::verbatim": {
+      "n": 12,
+      "correct": 0,
+      "false_accept": 0,
+      "unknown": 12,
+      "correct_rate": 0.0,
+      "false_accept_rate": 0.0,
+      "unknown_rate": 1.0,
+      "wilson_correct": [
+        0.0,
+        0.2425007574992425
+      ],
+      "wilson_false": [
+        0.0,
+        0.2425007574992425
+      ]
+    },
+    "B-EXACT-MATCH::empty-registry::verbatim": {
+      "n": 6,
+      "correct": 0,
+      "false_accept": 0,
+      "unknown": 6,
+      "correct_rate": 0.0,
+      "false_accept_rate": 0.0,
+      "unknown_rate": 1.0,
+      "wilson_correct": [
+        0.0,
+        0.3903430336530645
+      ],
+      "wilson_false": [
+        0.0,
+        0.3903430336530645
+      ]
+    },
+    "B-EXACT-MATCH::alias-OOD::correctfamily": {
+      "n": 40,
+      "correct": 0,
+      "false_accept": 40,
+      "unknown": 0,
+      "correct_rate": 0.0,
+      "false_accept_rate": 1.0,
+      "unknown_rate": 0.0,
+      "wilson_correct": [
+        0.0,
+        0.08762453925039232
+      ],
+      "wilson_false": [
+        0.9123754607496077,
+        1.0
+      ]
+    },
+    "B-EXACT-MATCH::exact-match::correctfamily": {
+      "n": 12,
+      "correct": 12,
+      "false_accept": 0,
+      "unknown": 0,
+      "correct_rate": 1.0,
+      "false_accept_rate": 0.0,
+      "unknown_rate": 0.0,
+      "wilson_correct": [
+        0.7574992425007574,
+        0.9999999999999998
+      ],
+      "wilson_false": [
+        0.0,
+        0.2425007574992425
+      ]
+    },
+    "B-EXACT-MATCH::no-applicable::correctfamily": {
+      "n": 12,
+      "correct": 0,
+      "false_accept": 0,
+      "unknown": 12,
+      "correct_rate": 0.0,
+      "false_accept_rate": 0.0,
+      "unknown_rate": 1.0,
+      "wilson_correct": [
+        0.0,
+        0.2425007574992425
+      ],
+      "wilson_false": [
+        0.0,
+        0.2425007574992425
+      ]
+    },
+    "B-EXACT-MATCH::empty-registry::correctfamily": {
+      "n": 6,
+      "correct": 0,
+      "false_accept": 0,
+      "unknown": 6,
+      "correct_rate": 0.0,
+      "false_accept_rate": 0.0,
+      "unknown_rate": 1.0,
+      "wilson_correct": [
+        0.0,
+        0.3903430336530645
+      ],
+      "wilson_false": [
+        0.0,
+        0.3903430336530645
+      ]
+    },
+    "B-VERBATIM-REPLAY::alias-OOD::verbatim": {
+      "n": 40,
+      "correct": 0,
+      "false_accept": 0,
+      "unknown": 40,
+      "correct_rate": 0.0,
+      "false_accept_rate": 0.0,
+      "unknown_rate": 1.0,
+      "wilson_correct": [
+        0.0,
+        0.08762453925039232
+      ],
+      "wilson_false": [
+        0.0,
+        0.08762453925039232
+      ]
+    },
+    "B-VERBATIM-REPLAY::exact-match::verbatim": {
+      "n": 12,
+      "correct": 12,
+      "false_accept": 0,
+      "unknown": 0,
+      "correct_rate": 1.0,
+      "false_accept_rate": 0.0,
+      "unknown_rate": 0.0,
+      "wilson_correct": [
+        0.7574992425007574,
+        0.9999999999999998
+      ],
+      "wilson_false": [
+        0.0,
+        0.2425007574992425
+      ]
+    },
+    "B-VERBATIM-REPLAY::no-applicable::verbatim": {
+      "n": 12,
+      "correct": 0,
+      "false_accept": 0,
+      "unknown": 12,
+      "correct_rate": 0.0,
+      "false_accept_rate": 0.0,
+      "unknown_rate": 1.0,
+      "wilson_correct": [
+        0.0,
+        0.2425007574992425
+      ],
+      "wilson_false": [
+        0.0,
+        0.2425007574992425
+      ]
+    },
+    "B-VERBATIM-REPLAY::empty-registry::verbatim": {
+      "n": 6,
+      "correct": 0,
+      "false_accept": 0,
+      "unknown": 6,
+      "correct_rate": 0.0,
+      "false_accept_rate": 0.0,
+      "unknown_rate": 1.0,
+      "wilson_correct": [
+        0.0,
+        0.3903430336530645
+      ],
+      "wilson_false": [
+        0.0,
+        0.3903430336530645
+      ]
+    },
+    "B-VERBATIM-REPLAY::alias-OOD::correctfamily": {
+      "n": 40,
+      "correct": 21,
+      "false_accept": 10,
+      "unknown": 9,
+      "correct_rate": 0.525,
+      "false_accept_rate": 0.25,
+      "unknown_rate": 0.225,
+      "wilson_correct": [
+        0.37497106853929735,
+        0.6706477044981831
+      ],
+      "wilson_false": [
+        0.14186967895549518,
+        0.40194259066970106
+      ]
+    },
+    "B-VERBATIM-REPLAY::exact-match::correctfamily": {
+      "n": 12,
+      "correct": 11,
+      "false_accept": 0,
+      "unknown": 1,
+      "correct_rate": 0.9166666666666666,
+      "false_accept_rate": 0.0,
+      "unknown_rate": 0.08333333333333333,
+      "wilson_correct": [
+        0.6461140782014047,
+        0.9851352905492264
+      ],
+      "wilson_false": [
+        0.0,
+        0.2425007574992425
+      ]
+    },
+    "B-VERBATIM-REPLAY::no-applicable::correctfamily": {
+      "n": 12,
+      "correct": 0,
+      "false_accept": 0,
+      "unknown": 12,
+      "correct_rate": 0.0,
+      "false_accept_rate": 0.0,
+      "unknown_rate": 1.0,
+      "wilson_correct": [
+        0.0,
+        0.2425007574992425
+      ],
+      "wilson_false": [
+        0.0,
+        0.2425007574992425
+      ]
+    },
+    "B-VERBATIM-REPLAY::empty-registry::correctfamily": {
+      "n": 6,
+      "correct": 0,
+      "false_accept": 0,
+      "unknown": 6,
+      "correct_rate": 0.0,
+      "false_accept_rate": 0.0,
+      "unknown_rate": 1.0,
+      "wilson_correct": [
+        0.0,
+        0.3903430336530645
+      ],
+      "wilson_false": [
+        0.0,
+        0.3903430336530645
+      ]
+    },
+    "B-FLAT-TFIDF-K5-VERBATIM::alias-OOD": {
+      "n": 40,
+      "correct": 0,
+      "false_accept": 0,
+      "unknown": 40,
+      "correct_rate": 0.0,
+      "false_accept_rate": 0.0,
+      "unknown_rate": 1.0,
+      "wilson_correct": [
+        0.0,
+        0.08762453925039232
+      ],
+      "wilson_false": [
+        0.0,
+        0.08762453925039232
+      ]
+    },
+    "B-FLAT-TFIDF-K5-VERBATIM::exact-match": {
+      "n": 12,
+      "correct": 12,
+      "false_accept": 0,
+      "unknown": 0,
+      "correct_rate": 1.0,
+      "false_accept_rate": 0.0,
+      "unknown_rate": 0.0,
+      "wilson_correct": [
+        0.7574992425007574,
+        0.9999999999999998
+      ],
+      "wilson_false": [
+        0.0,
+        0.2425007574992425
+      ]
+    },
+    "B-FLAT-TFIDF-K5-VERBATIM::no-applicable": {
+      "n": 12,
+      "correct": 0,
+      "false_accept": 0,
+      "unknown": 12,
+      "correct_rate": 0.0,
+      "false_accept_rate": 0.0,
+      "unknown_rate": 1.0,
+      "wilson_correct": [
+        0.0,
+        0.2425007574992425
+      ],
+      "wilson_false": [
+        0.0,
+        0.2425007574992425
+      ]
+    },
+    "B-FLAT-TFIDF-K5-VERBATIM::empty-registry": {
+      "n": 6,
+      "correct": 0,
+      "false_accept": 0,
+      "unknown": 6,
+      "correct_rate": 0.0,
+      "false_accept_rate": 0.0,
+      "unknown_rate": 1.0,
+      "wilson_correct": [
+        0.0,
+        0.3903430336530645
+      ],
+      "wilson_false": [
+        0.0,
+        0.3903430336530645
+      ]
+    },
+    "B-FLAT-TFIDF-K5-CF::alias-OOD": {
+      "n": 40,
+      "correct": 21,
+      "false_accept": 10,
+      "unknown": 9,
+      "correct_rate": 0.525,
+      "false_accept_rate": 0.25,
+      "unknown_rate": 0.225,
+      "wilson_correct": [
+        0.37497106853929735,
+        0.6706477044981831
+      ],
+      "wilson_false": [
+        0.14186967895549518,
+        0.40194259066970106
+      ]
+    },
+    "B-FLAT-TFIDF-K5-CF::exact-match": {
+      "n": 12,
+      "correct": 11,
+      "false_accept": 0,
+      "unknown": 1,
+      "correct_rate": 0.9166666666666666,
+      "false_accept_rate": 0.0,
+      "unknown_rate": 0.08333333333333333,
+      "wilson_correct": [
+        0.6461140782014047,
+        0.9851352905492264
+      ],
+      "wilson_false": [
+        0.0,
+        0.2425007574992425
+      ]
+    },
+    "B-FLAT-TFIDF-K5-CF::no-applicable": {
+      "n": 12,
+      "correct": 0,
+      "false_accept": 0,
+      "unknown": 12,
+      "correct_rate": 0.0,
+      "false_accept_rate": 0.0,
+      "unknown_rate": 1.0,
+      "wilson_correct": [
+        0.0,
+        0.2425007574992425
+      ],
+      "wilson_false": [
+        0.0,
+        0.2425007574992425
+      ]
+    },
+    "B-FLAT-TFIDF-K5-CF::empty-registry": {
+      "n": 6,
+      "correct": 0,
+      "false_accept": 0,
+      "unknown": 6,
+      "correct_rate": 0.0,
+      "false_accept_rate": 0.0,
+      "unknown_rate": 1.0,
+      "wilson_correct": [
+        0.0,
+        0.3903430336530645
+      ],
+      "wilson_false": [
+        0.0,
+        0.3903430336530645
+      ]
+    },
+    "B-FLAT-EMBED-K5-VERBATIM::alias-OOD": {
+      "n": 40,
+      "correct": 0,
+      "false_accept": 0,
+      "unknown": 40,
+      "correct_rate": 0.0,
+      "false_accept_rate": 0.0,
+      "unknown_rate": 1.0,
+      "wilson_correct": [
+        0.0,
+        0.08762453925039232
+      ],
+      "wilson_false": [
+        0.0,
+        0.08762453925039232
+      ]
+    },
+    "B-FLAT-EMBED-K5-VERBATIM::exact-match": {
+      "n": 12,
+      "correct": 12,
+      "false_accept": 0,
+      "unknown": 0,
+      "correct_rate": 1.0,
+      "false_accept_rate": 0.0,
+      "unknown_rate": 0.0,
+      "wilson_correct": [
+        0.7574992425007574,
+        0.9999999999999998
+      ],
+      "wilson_false": [
+        0.0,
+        0.2425007574992425
+      ]
+    },
+    "B-FLAT-EMBED-K5-VERBATIM::no-applicable": {
+      "n": 12,
+      "correct": 0,
+      "false_accept": 0,
+      "unknown": 12,
+      "correct_rate": 0.0,
+      "false_accept_rate": 0.0,
+      "unknown_rate": 1.0,
+      "wilson_correct": [
+        0.0,
+        0.2425007574992425
+      ],
+      "wilson_false": [
+        0.0,
+        0.2425007574992425
+      ]
+    },
+    "B-FLAT-EMBED-K5-VERBATIM::empty-registry": {
+      "n": 6,
+      "correct": 0,
+      "false_accept": 0,
+      "unknown": 6,
+      "correct_rate": 0.0,
+      "false_accept_rate": 0.0,
+      "unknown_rate": 1.0,
+      "wilson_correct": [
+        0.0,
+        0.3903430336530645
+      ],
+      "wilson_false": [
+        0.0,
+        0.3903430336530645
+      ]
+    },
+    "B-FLAT-EMBED-K5-CF::alias-OOD": {
+      "n": 40,
+      "correct": 21,
+      "false_accept": 10,
+      "unknown": 9,
+      "correct_rate": 0.525,
+      "false_accept_rate": 0.25,
+      "unknown_rate": 0.225,
+      "wilson_correct": [
+        0.37497106853929735,
+        0.6706477044981831
+      ],
+      "wilson_false": [
+        0.14186967895549518,
+        0.40194259066970106
+      ]
+    },
+    "B-FLAT-EMBED-K5-CF::exact-match": {
+      "n": 12,
+      "correct": 11,
+      "false_accept": 0,
+      "unknown": 1,
+      "correct_rate": 0.9166666666666666,
+      "false_accept_rate": 0.0,
+      "unknown_rate": 0.08333333333333333,
+      "wilson_correct": [
+        0.6461140782014047,
+        0.9851352905492264
+      ],
+      "wilson_false": [
+        0.0,
+        0.2425007574992425
+      ]
+    },
+    "B-FLAT-EMBED-K5-CF::no-applicable": {
+      "n": 12,
+      "correct": 0,
+      "false_accept": 0,
+      "unknown": 12,
+      "correct_rate": 0.0,
+      "false_accept_rate": 0.0,
+      "unknown_rate": 1.0,
+      "wilson_correct": [
+        0.0,
+        0.2425007574992425
+      ],
+      "wilson_false": [
+        0.0,
+        0.2425007574992425
+      ]
+    },
+    "B-FLAT-EMBED-K5-CF::empty-registry": {
+      "n": 6,
+      "correct": 0,
+      "false_accept": 0,
+      "unknown": 6,
+      "correct_rate": 0.0,
+      "false_accept_rate": 0.0,
+      "unknown_rate": 1.0,
+      "wilson_correct": [
+        0.0,
+        0.3903430336530645
+      ],
+      "wilson_false": [
+        0.0,
+        0.3903430336530645
+      ]
+    },
+    "B-RANDOM-K5-VERBATIM::alias-OOD": {
+      "n": 40,
+      "correct": 0,
+      "false_accept": 0,
+      "unknown": 40,
+      "correct_rate": 0.0,
+      "false_accept_rate": 0.0,
+      "unknown_rate": 1.0,
+      "wilson_correct": [
+        0.0,
+        0.08762453925039232
+      ],
+      "wilson_false": [
+        0.0,
+        0.08762453925039232
+      ]
+    },
+    "B-RANDOM-K5-VERBATIM::exact-match": {
+      "n": 12,
+      "correct": 12,
+      "false_accept": 0,
+      "unknown": 0,
+      "correct_rate": 1.0,
+      "false_accept_rate": 0.0,
+      "unknown_rate": 0.0,
+      "wilson_correct": [
+        0.7574992425007574,
+        0.9999999999999998
+      ],
+      "wilson_false": [
+        0.0,
+        0.2425007574992425
+      ]
+    },
+    "B-RANDOM-K5-VERBATIM::no-applicable": {
+      "n": 12,
+      "correct": 0,
+      "false_accept": 0,
+      "unknown": 12,
+      "correct_rate": 0.0,
+      "false_accept_rate": 0.0,
+      "unknown_rate": 1.0,
+      "wilson_correct": [
+        0.0,
+        0.2425007574992425
+      ],
+      "wilson_false": [
+        0.0,
+        0.2425007574992425
+      ]
+    },
+    "B-RANDOM-K5-VERBATIM::empty-registry": {
+      "n": 6,
+      "correct": 0,
+      "false_accept": 0,
+      "unknown": 6,
+      "correct_rate": 0.0,
+      "false_accept_rate": 0.0,
+      "unknown_rate": 1.0,
+      "wilson_correct": [
+        0.0,
+        0.3903430336530645
+      ],
+      "wilson_false": [
+        0.0,
+        0.3903430336530645
+      ]
+    },
+    "B-RANDOM-K5-CF::alias-OOD": {
+      "n": 40,
+      "correct": 18,
+      "false_accept": 10,
+      "unknown": 12,
+      "correct_rate": 0.45,
+      "false_accept_rate": 0.25,
+      "unknown_rate": 0.3,
+      "wilson_correct": [
+        0.30705075280944705,
+        0.6017117011155924
+      ],
+      "wilson_false": [
+        0.14186967895549518,
+        0.40194259066970106
+      ]
+    },
+    "B-RANDOM-K5-CF::exact-match": {
+      "n": 12,
+      "correct": 11,
+      "false_accept": 0,
+      "unknown": 1,
+      "correct_rate": 0.9166666666666666,
+      "false_accept_rate": 0.0,
+      "unknown_rate": 0.08333333333333333,
+      "wilson_correct": [
+        0.6461140782014047,
+        0.9851352905492264
+      ],
+      "wilson_false": [
+        0.0,
+        0.2425007574992425
+      ]
+    },
+    "B-RANDOM-K5-CF::no-applicable": {
+      "n": 12,
+      "correct": 0,
+      "false_accept": 0,
+      "unknown": 12,
+      "correct_rate": 0.0,
+      "false_accept_rate": 0.0,
+      "unknown_rate": 1.0,
+      "wilson_correct": [
+        0.0,
+        0.2425007574992425
+      ],
+      "wilson_false": [
+        0.0,
+        0.2425007574992425
+      ]
+    },
+    "B-RANDOM-K5-CF::empty-registry": {
+      "n": 6,
+      "correct": 0,
+      "false_accept": 0,
+      "unknown": 6,
+      "correct_rate": 0.0,
+      "false_accept_rate": 0.0,
+      "unknown_rate": 1.0,
+      "wilson_correct": [
+        0.0,
+        0.3903430336530645
+      ],
+      "wilson_false": [
+        0.0,
+        0.3903430336530645
+      ]
+    },
+    "H-HIERARCHICAL-VERBATIM::alias-OOD": {
+      "n": 40,
+      "correct": 0,
+      "false_accept": 0,
+      "unknown": 40,
+      "correct_rate": 0.0,
+      "false_accept_rate": 0.0,
+      "unknown_rate": 1.0,
+      "wilson_correct": [
+        0.0,
+        0.08762453925039232
+      ],
+      "wilson_false": [
+        0.0,
+        0.08762453925039232
+      ]
+    },
+    "H-HIERARCHICAL-VERBATIM::exact-match": {
+      "n": 12,
+      "correct": 12,
+      "false_accept": 0,
+      "unknown": 0,
+      "correct_rate": 1.0,
+      "false_accept_rate": 0.0,
+      "unknown_rate": 0.0,
+      "wilson_correct": [
+        0.7574992425007574,
+        0.9999999999999998
+      ],
+      "wilson_false": [
+        0.0,
+        0.2425007574992425
+      ]
+    },
+    "H-HIERARCHICAL-VERBATIM::no-applicable": {
+      "n": 12,
+      "correct": 0,
+      "false_accept": 0,
+      "unknown": 12,
+      "correct_rate": 0.0,
+      "false_accept_rate": 0.0,
+      "unknown_rate": 1.0,
+      "wilson_correct": [
+        0.0,
+        0.2425007574992425
+      ],
+      "wilson_false": [
+        0.0,
+        0.2425007574992425
+      ]
+    },
+    "H-HIERARCHICAL-VERBATIM::empty-registry": {
+      "n": 6,
+      "correct": 0,
+      "false_accept": 0,
+      "unknown": 6,
+      "correct_rate": 0.0,
+      "false_accept_rate": 0.0,
+      "unknown_rate": 1.0,
+      "wilson_correct": [
+        0.0,
+        0.3903430336530645
+      ],
+      "wilson_false": [
+        0.0,
+        0.3903430336530645
+      ]
+    },
+    "H-HIERARCHICAL-CF::alias-OOD": {
+      "n": 40,
+      "correct": 21,
+      "false_accept": 10,
+      "unknown": 9,
+      "correct_rate": 0.525,
+      "false_accept_rate": 0.25,
+      "unknown_rate": 0.225,
+      "wilson_correct": [
+        0.37497106853929735,
+        0.6706477044981831
+      ],
+      "wilson_false": [
+        0.14186967895549518,
+        0.40194259066970106
+      ]
+    },
+    "H-HIERARCHICAL-CF::exact-match": {
+      "n": 12,
+      "correct": 11,
+      "false_accept": 0,
+      "unknown": 1,
+      "correct_rate": 0.9166666666666666,
+      "false_accept_rate": 0.0,
+      "unknown_rate": 0.08333333333333333,
+      "wilson_correct": [
+        0.6461140782014047,
+        0.9851352905492264
+      ],
+      "wilson_false": [
+        0.0,
+        0.2425007574992425
+      ]
+    },
+    "H-HIERARCHICAL-CF::no-applicable": {
+      "n": 12,
+      "correct": 0,
+      "false_accept": 0,
+      "unknown": 12,
+      "correct_rate": 0.0,
+      "false_accept_rate": 0.0,
+      "unknown_rate": 1.0,
+      "wilson_correct": [
+        0.0,
+        0.2425007574992425
+      ],
+      "wilson_false": [
+        0.0,
+        0.2425007574992425
+      ]
+    },
+    "H-HIERARCHICAL-CF::empty-registry": {
+      "n": 6,
+      "correct": 0,
+      "false_accept": 0,
+      "unknown": 6,
+      "correct_rate": 0.0,
+      "false_accept_rate": 0.0,
+      "unknown_rate": 1.0,
+      "wilson_correct": [
+        0.0,
+        0.3903430336530645
+      ],
+      "wilson_false": [
+        0.0,
+        0.3903430336530645
+      ]
+    },
+    "H-WEBAPI-VERBATIM::alias-OOD": {
+      "n": 40,
+      "correct": 0,
+      "false_accept": 0,
+      "unknown": 40,
+      "correct_rate": 0.0,
+      "false_accept_rate": 0.0,
+      "unknown_rate": 1.0,
+      "wilson_correct": [
+        0.0,
+        0.08762453925039232
+      ],
+      "wilson_false": [
+        0.0,
+        0.08762453925039232
+      ]
+    },
+    "H-WEBAPI-VERBATIM::exact-match": {
+      "n": 12,
+      "correct": 12,
+      "false_accept": 0,
+      "unknown": 0,
+      "correct_rate": 1.0,
+      "false_accept_rate": 0.0,
+      "unknown_rate": 0.0,
+      "wilson_correct": [
+        0.7574992425007574,
+        0.9999999999999998
+      ],
+      "wilson_false": [
+        0.0,
+        0.2425007574992425
+      ]
+    },
+    "H-WEBAPI-VERBATIM::no-applicable": {
+      "n": 12,
+      "correct": 0,
+      "false_accept": 0,
+      "unknown": 12,
+      "correct_rate": 0.0,
+      "false_accept_rate": 0.0,
+      "unknown_rate": 1.0,
+      "wilson_correct": [
+        0.0,
+        0.2425007574992425
+      ],
+      "wilson_false": [
+        0.0,
+        0.2425007574992425
+      ]
+    },
+    "H-WEBAPI-VERBATIM::empty-registry": {
+      "n": 6,
+      "correct": 0,
+      "false_accept": 0,
+      "unknown": 6,
+      "correct_rate": 0.0,
+      "false_accept_rate": 0.0,
+      "unknown_rate": 1.0,
+      "wilson_correct": [
+        0.0,
+        0.3903430336530645
+      ],
+      "wilson_false": [
+        0.0,
+        0.3903430336530645
+      ]
+    },
+    "H-WEBAPI-CF::alias-OOD": {
+      "n": 40,
+      "correct": 21,
+      "false_accept": 10,
+      "unknown": 9,
+      "correct_rate": 0.525,
+      "false_accept_rate": 0.25,
+      "unknown_rate": 0.225,
+      "wilson_correct": [
+        0.37497106853929735,
+        0.6706477044981831
+      ],
+      "wilson_false": [
+        0.14186967895549518,
+        0.40194259066970106
+      ]
+    },
+    "H-WEBAPI-CF::exact-match": {
+      "n": 12,
+      "correct": 11,
+      "false_accept": 0,
+      "unknown": 1,
+      "correct_rate": 0.9166666666666666,
+      "false_accept_rate": 0.0,
+      "unknown_rate": 0.08333333333333333,
+      "wilson_correct": [
+        0.6461140782014047,
+        0.9851352905492264
+      ],
+      "wilson_false": [
+        0.0,
+        0.2425007574992425
+      ]
+    },
+    "H-WEBAPI-CF::no-applicable": {
+      "n": 12,
+      "correct": 0,
+      "false_accept": 0,
+      "unknown": 12,
+      "correct_rate": 0.0,
+      "false_accept_rate": 0.0,
+      "unknown_rate": 1.0,
+      "wilson_correct": [
+        0.0,
+        0.2425007574992425
+      ],
+      "wilson_false": [
+        0.0,
+        0.2425007574992425
+      ]
+    },
+    "H-WEBAPI-CF::empty-registry": {
+      "n": 6,
+      "correct": 0,
+      "false_accept": 0,
+      "unknown": 6,
+      "correct_rate": 0.0,
+      "false_accept_rate": 0.0,
+      "unknown_rate": 1.0,
+      "wilson_correct": [
+        0.0,
+        0.3903430336530645
+      ],
+      "wilson_false": [
+        0.0,
+        0.3903430336530645
+      ]
+    }
+  },
+  "counts": {
+    "alias_OOD": 40,
+    "orthogonal": 30,
+    "mixed": 10,
+    "heldout9": 9,
+    "exact": 12,
+    "noapp": 12,
+    "empty": 6
+  }
+}
