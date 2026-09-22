@@ -1,0 +1,47 @@
+{
+  "base_sha": "e606e040dfa1154aa4bae2ae4b456f81fd16781c",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-22T14:40:29.806886+00:00",
+  "director_mandate": {
+    "agent_priors_used": [
+      "Path dependence and local optima dominate long-horizon agent exploration: early salience compounds planning errors, making verbatim trajectory replay harmful without adaptation (MemHarness reconstruction prior) - distinguishes from SPIDER evidence which has not demonstrated reconstruction benefit.",
+      "Tunneling indicator: >10 consecutive exps on one claim with vacuous/degenerate controls (deterministic fingerprint, bimodal 0.35/0.65 below threshold, Laplace smoothing bias) signals sharply diminishing marginal information gain - used to weight PARK vs CONTINUE.",
+      "LLM agents benefit from memory only with applicability guards and verification/repair boundaries; false accepts and staleness dominate economics, so product economics must measure false_accept, UNKNOWN abstention and repair cost amortized - not token savings alone (SPIDER has shown 5.42% analytical savings only).",
+      "Effective dynamics claims require identifiability and history-conditioned baselines; without state/action history conditioning PMI/TV collapses to destination predictability or tautological action->observation mapping - explains repeated leakage (href==url 78-92%) and guides cross-site holdout design."
+    ],
+    "allocation": {
+      "action": "REOPEN",
+      "claim_id": "C-RESIDUAL-NOVELTY",
+      "cognitive_reset": true,
+      "comparative_reasoning": "vs CONTINUE C-FRESHNESS kernel subprocess (handoff): that subprocess REVISE showed Phase B degenerate pooled r-0.53 anti-correlation manufactured, missing parallel baselines, not ready for product. vs PIVOT to C-DELTA-REPAIR product integration: requires runtime header-only substrate first; residual-novelty directly decides if SPIDER compresses work and informs amortized repair cost. Graph will cover delta-repair substrate; product focuses on end-to-end economics.",
+      "dependencies": [
+        "intel",
+        "runtime",
+        "graph"
+      ],
+      "parent_handoff_disposition": "SUPERSEDE",
+      "question": "Do matched WebArena-Verified families at 0%,25%,50%,75%,100% novelty (train on resource A, test on never-observed B with 36 families >=3, duplication 0.9479) show later-agent cost tracking residual novelty rather than full length when SPIDER parameterized inheritance is implemented as a real resolve/bind pipeline (required_slots, freshness gating 0.25, confidence<0.80 UNKNOWN abstention, verification/repair) measured as tokens+browser+retrieval+verification+repair amortized over frequency vs COLD vs instructions vs retrievable RAG vs TERX 0-token replay that hits at 0% with block-permutation p-values?",
+      "rationale": "C-RESIDUAL-NOVELTY has 0 valid experiments (3 total, last MEASUREMENT_INVALID audit: cost is bijective formula of novelty, inheritance with freshness/UNKNOWN never executed, success/false_accept constants, B-REPLAY-TERX 0/100 even at 0% and B-RAG 1/100 structurally blocked, C3 p0.0167>0.01 fails two-sided). Core product promise 'pay novelty not length' is thus untested; C-PRODUCT-ECON logistic extrapolation definitively closed after 6 failures (R2=1.0 vacuous step k10.75 L0.5654 identical to null). Matched families with strong baselines that can hit and measured (not defined) cost is the first valid test of commercial viability."
+    },
+    "cycle_id": "35741318902",
+    "lane": "product",
+    "portfolio_assessment": "SPIDER at 224 canonical exps is tunnel-trapped: Graph 30-streak and Runtime 40-streak on C-FRESHNESS/C-MEAS-VALID localhost mocks (r~0.002-0.046) with degenerate deterministic fingerprint and vacuous full==body==status, Physics 42-streak and Frontier 9/10 on C-WEB-DYNAMICS synthetic 2D TV/KDE where only translation detectable (rho 1.0 d9.1, scaling -0.12) and Bayesian passes only relative BF (absolute -10 to -15 nats M0 favored). Core product economics unproven: C-PRODUCT-ECON definitively REJECTED (6-model logistic vacuous step k=10.75 R2=1.0 identical to null 0.5654), C-RESIDUAL-NOVELTY 0/3 valid (last MEASUREMENT_INVALID bijective cost, baselines 0/100 blocked, p0.0167>0.01), C-DELTA-REPAIR 0 exps despite being priority for 3 lanes, C-SEMANTIC-RESOLVE MIXED (kernel exact matcher 0/6 alias p0.016, status 0/12), C-CROSSSITE/C-LLM-INHERIT census-only 192 tasks duplication 0.9479 param 0.8958 but AX_consistency null and Mind2Web 33-heuristic non-compliant. Highest marginal information is (1) first delta-repair localized cost test using runtime's verified nginx HIT/SWR/SIE 960/960 byte-identical oracle-free substrate, (2) real residual-novelty economics with measured cost vs strong hit-capable baselines, (3) Intel 7-fix spec-compliant remeasurement to unblock holdout tests, and (4) orthogonal frontier reconstruction vs verbatim replay - not another freshness/PMI replication. Three lanes idle (frontier/product/intel), three PREFREEZE tunneled, so director must supersede local handoffs, park endless freshness/PMI tuning, and reactivate neglected claims.",
+    "schema_version": 1,
+    "scout_assessment": "Scout brief provided decisive synthesis: validated narrow localhost ceilings, 6-model extrapolation closure, tunneling diagnostics (Graph30/Runtime40/Physics42), and explicit cross-lane dependencies (runtime HIT unblocks delta-repair, Intel census blocks LLM-inherit). Adopted scout's candidate directions and stalled-lane reactivation suggestions after Codex verification, but challenged handoffs: rejected Graph distributed session-affinity CONTINUE (correlation already holds r-0.038 despite C1 TN 0.667) and Frontier recalibrated residual-novelty CONTINUE as local-optimum tweaks; redirected Physics from scripted TodoMVC autocorrelation to true website holdout and Frontier to MemHarness/System-One reconstruction as genuinely orthogonal basin exits per charter. Used external context (MemHarness, Jev-Mem, Artic, WebArena-Verified/Online-Mind2Web) only as priors to prioritize mechanisms, not as evidence."
+  },
+  "experiment_id": "EXP-PRODUCT-35741913862",
+  "inherited_last_verdict": "MEASUREMENT_INVALID \u2014 audit MEASUREMENT_INVALID, producer_claim_supported=false. The frozen C-RESIDUAL-NOVELTY SURVIVES_CURRENT_TEST claim is not justified: dependent variable is bijective formula of novelty, parameterized inheritance with freshness gating and UNKNOWN abstention never executed, success/false_accept/unknown are constants, strong baselines structurally prevented from hitting (B-REPLAY-TERX 0/100 including n=0.0, B-RAG 1/100 hits), and frozen C3 p<0.01 fails on exact block-permutation (p=0.0167 two-sided). No empirical claim supported.",
+  "inherited_next_question": "Do matched WebArena-Verified families with controlled novelty fraction (0%,25%,50%,75%,100% unseen B identifiers) show later-agent cost tracking residual novelty when SPIDER parameterized inheritance is implemented as an actual resolve/bind pipeline with required_slots, freshness gating (behavioral_score vs 0.25), confidence<0.80 UNKNOWN abstention, and verification/repair \u2014 introducing genuine behavioral variability so cost is measured not defined \u2014 and compared vs COLD vs RAG (with retrievable trajectories) vs TERX 0-token replay that actually hits at 0% inside the compared set vs instructions, with block-permutation p-values and consistent amortized cost accounting (distill applied only to SPIDER) and controls that exercise real mapping/ranking?",
+  "lane": "product",
+  "origin_github_run_id": "35741913862",
+  "parent_handoff": {
+    "experiment_id": "EXP-PRODUCT-35725756862",
+    "path": "research/experiments/EXP-PRODUCT-35725756862/handoff.json",
+    "sha256": "a360c09794be1afc6f30a68348492ba5c30732e9f39af3c6fc000a64d9ea8fc2"
+  },
+  "reason": "global-director-REOPEN",
+  "request_hash": "937669c2ccbaaf238047edcea34383db76ecc12ddf3ccc7ee7152580a1ba7d2e",
+  "request_id": "cb4a3c6fcacd0bf21e0a6b37",
+  "schema_version": 1
+}
