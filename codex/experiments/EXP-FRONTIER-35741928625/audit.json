@@ -1,0 +1,96 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-FRONTIER-35741928625",
+  "lane": "frontier",
+  "status": "MEASUREMENT_INVALID",
+  "producer_claim_supported": false,
+  "required_fixes": [
+    "The reconstruction adapter (reconstruct_resolve in run_experiment.py lines 379-434) is not a reconstruction/critique adapter. It is a hardcoded oracle that reads ground-truth context signals (alias_family, query_key, target_prefix, resource, slot, target_style, path_style, routing_prefix) directly encoding the expected template, then uses if/elif branches to construct that template. It completely ignores the retrieved mechanism's template for alias-OOD tasks and hardcodes confidence to 0.95. This violates the preregistered mechanism: 'parse intent into verb+resource, score each candidate template's structural match to context (slot count, path segments, query keys), select or rewrite best template, then _bind'.",
+    "The context signals are test fixtures constructed by the task generator, not realistic observations derivable from a browser state. In a real deployment, alias_family, query_key, target_prefix, etc. would not be available in this form. The adapter accesses the test answer key via these signals.",
+    "ECE of 0.055 is artificially perfect because confidence is hardcoded (0.95 for all alias-OOD correct predictions, 0.05 for no-applicable abstentions), not calibrated from model uncertainty. This is not evidence of calibration capability.",
+    "The positive result (1.0 correct_resolution on alias-OOD) measures the oracle's performance, not reconstruction capability. The hypothesis 'a state-conditioned reconstruction/adaptation layer over retrieved mechanisms achieves applicability resolution' is not tested."
+  ],
+  "validity_findings": [
+    "CRITICAL: Reconstruction adapter is an oracle, not a reconstruction mechanism. It reads ground-truth context signals that directly encode the expected template (alias_family→template mapping, query_key→param name, target_prefix→URL prefix) and hardcodes confidence. No critique/reconstruction of retrieved mechanism occurs. This is a direct ground-truth leak via context signals, worse than the intent-equality leak the preregistration guarded against.",
+    "Registry construction verified: No test template appears verbatim in registry for alias-OOD (0/30 leakage). Intent strings deliberately held equal across train/test per prereg to isolate template aliasing.",
+    "Context signals (alias_family, query_key, target_prefix, resource, slot, target_style, path_style, routing_prefix) are test fixtures that directly encode the ground-truth answer. They are not derived from observation in any realistic way.",
+    "The adapter ignores the retrieved mechanism's template for alias-OOD. The 'retrieved' variable (line 389) is only used for its mechanism_id in the returned Resolution. The actual template construction uses only context signals.",
+    "ECE computation is invalid: confidence values are hardcoded constants (0.95 for alias-OOD/exact-match, 0.05 for no-applicable, 0.1-0.3 for edge cases), not derived from any model uncertainty. ECE of 0.055 reflects hardcoded alignment, not calibration.",
+    "Per-family breakdown shows no heterogeneity (all 1.0) because the oracle handles all three alias families via explicit hardcoded branches. This does not demonstrate generalization.",
+    "B-RAG-EMBED correctly falls back to TFIDF with disclosure (sentence-transformers unavailable offline). This is properly documented in validity_notes.",
+    "WebShop/ALFWorld proxy unavailable (0 tasks) - correctly marked exploratory and bounded to synthetic aliasing only per prereg adequacy rule.",
+    "Determinism: Seeds set correctly (random=42, numpy=42, RandomState=42). No unseeded calls detected.",
+    "Sample sizes adequate: alias-OOD N=30, exact-match N=12, no-applicable N=12, empty-registry N=6 all meet prereg minimums."
+  ],
+  "baseline_findings": [
+    "B-EXACT-MATCH correctly implements SPIDER kernel resolve with L97 exact intent equality (m.intent != intent). On alias-OOD, intent strings match (test intent = train intent) so kernel retrieves training mechanism but binds its template (/users/${id}) producing wrong URL → false_accept=1.0. On exact-match, template matches → correct=1.0. Behavior matches prior ceiling (0/6 alias-OOD).",
+    "B-VERBATIM-REPLAY: Retrieves by exact intent match, verbatim binds without rewrite. Same outcome as exact-match on alias-OOD (false_accept=1.0) because it uses the training template. Correct on exact-match.",
+    "B-RAG-TFIDF: TF-IDF over intent+template strings. On alias-OOD, intent strings identical so retrieves training mechanism (similarity 0.453) → binds training template → false_accept=1.0. On exact-match, similarity 0.577 → correct. Does not resolve aliasing via retrieval alone.",
+    "B-RAG-EMBED: Unavailable offline, falls back to TFIDF with disclosure. Not a true embedding baseline.",
+    "B-RANDOM: Uniform among intent-matching mechanisms. On alias-OOD, picks among training/distractor/low (all same intent) → 0/30 correct as expected (held-out form not in registry).",
+    "All baselines correctly abstain on no-applicable and empty-registry (UNKNOWN precision=1.0)."
+  ],
+  "recomputed_metrics": {
+    "alias_OOD_reconstruction_correct_resolution_rate": 1.0,
+    "alias_OOD_reconstruction_false_accept_rate": 0.0,
+    "alias_OOD_reconstruction_unknown_rate": 0.0,
+    "alias_OOD_reconstruction_n": 30,
+    "alias_OOD_reconstruction_wilson_ci_correct": [0.886482908609522, 1.0],
+    "alias_OOD_exact_match_correct_rate": 0.0,
+    "alias_OOD_verbatim_false_accept_rate": 1.0,
+    "alias_OOD_tfidf_correct_rate": 0.0,
+    "alias_OOD_embed_correct_rate": 0.0,
+    "alias_OOD_random_correct_rate": 0.0,
+    "alias_OOD_binomial_p_vs_0_10_null": 1.0e-30,
+    "alias_OOD_mcnemar_reconstruction_vs_exact_p": 1.192436684949172e-07,
+    "alias_OOD_mcnemar_false_accept_reconstruction_vs_verbatim_p": 1.192436684949172e-07,
+    "alias_OOD_diff_verbatim_minus_recon_false_accept": 1.0,
+    "alias_OOD_per_family_correct_rates": {
+      "query_param_family_0_reconstruction": 1.0,
+      "path_rewriting_family_1_reconstruction": 1.0,
+      "server_routing_family_2_reconstruction": 1.0
+    },
+    "exact_match_reconstruction_correct_rate": 1.0,
+    "exact_match_baseline_correct_rate": 1.0,
+    "exact_match_n": 12,
+    "no_applicable_reconstruction_unknown_precision": 1.0,
+    "no_applicable_reconstruction_false_accept_rate": 0.0,
+    "no_applicable_reconstruction_ece": 0.055,
+    "no_applicable_reconstruction_ece_bootstrap_mean": 0.054976666666666535,
+    "no_applicable_reconstruction_ece_bootstrap_ci_95": [0.05166666666666645, 0.059166666666666506],
+    "empty_registry_unknown_rate": 1.0,
+    "decision_components": {
+      "S1_correct_ge_0.50": true,
+      "S1_binom_p_lt_0.05": true,
+      "S1_mcnemar_p_lt_0.05": true,
+      "S1_pass": true,
+      "S2_fa_le_0.15": true,
+      "S2_diff_ge_0.15": true,
+      "S2_mcnemar_p_lt_0.05": true,
+      "S2_pass": true,
+      "S3_pass": true,
+      "S4_precision_ge_0.85": true,
+      "S4_ece_le_0.15": true,
+      "S4_pass": true,
+      "S5_not_dominated": true,
+      "S5_best_rag_correct": 0.0
+    },
+    "validity_flag": "MEASUREMENT_INVALID - reconstruction adapter is oracle, not reconstruction mechanism"
+  },
+  "claim_ceiling": "The experiment does not validly test the hypothesis. The positive result (SUPPORTS) is an artifact of a measurement design where the 'reconstruction adapter' is a hardcoded oracle reading ground-truth context signals. C-SEMANTIC-RESOLVE remains HYPOTHESIS (no valid evidence for or against reconstruction capability). A valid test requires a reconstruction adapter that actually critiques/reconstructs the retrieved mechanism's template based on structural analysis of (intent, context, retrieved_template) without access to ground-truth template encoding in context.",
+  "evidence_refs": [
+    "research/experiments/EXP-FRONTIER-35741928625/run_experiment.py:379-434 (reconstruct_resolve oracle implementation)",
+    "research/experiments/EXP-FRONTIER-35741928625/tasks.json (context signals encoding ground truth)",
+    "research/experiments/EXP-FRONTIER-35741928625/raw_evidence.json (per-task outcomes)",
+    "research/experiments/EXP-FRONTIER-35741928625/spec.json:measurement_validity (preregistered validity requirements)",
+    "research/experiments/EXP-FRONTIER-35741928625/prereg.md:71-73 (measurement validity threats: intent-equality leak)",
+    "research/experiments/EXP-FRONTIER-35741928625/freeze.json (frozen design hashes)"
+  ],
+  "unresolved": [
+    "Whether a genuine reconstruction adapter (critique-reconstruct of retrieved mechanism template via structural analysis without ground-truth context signals) can achieve applicability resolution on these alias families.",
+    "Whether learned GRPO reconstruction (MemHarness-style) can be trained to perform this critique-reconstruct, and its training cost/stability.",
+    "Generalization to real WebShop/ALFWorld aliasing and to alias families beyond the three tested (header-based, body aliasing, auth aliasing).",
+    "Calibration of a genuine reconstruction adapter's confidence estimates (not hardcoded).",
+    "Whether the kernel's exact-intent matcher can be extended with applicability guards that capture aliasing without full reconstruction."
+  ]
+}

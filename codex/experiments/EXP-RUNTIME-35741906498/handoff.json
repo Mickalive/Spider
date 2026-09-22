@@ -1,0 +1,56 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-35741906498",
+  "lane": "runtime",
+  "target_lane": "runtime",
+  "next_question": "Does the HTTP fingerprint substrate discriminate same-status body-only drift where response status is identical (200 vs 200) but response bodies differ via server-side permission/content variation, isolating body-only signal with status confound removed and yielding the complementary non-vacuous full > status test?",
+  "why_next": "Header-only drift now validated (non-vacuous C4 1.0>0.0, Content-Length isolated) closes parent audit V2/V3 for the header branch. The complementary half of V2 remains untested: same-status body-only discrimination (200 with reader vs admin body, status-only 0.0, body-only >0.5, full > status strictly). This isolates the body signal with status confound removed, completes the localhost C-MEAS-VALID control matrix needed for C-FRESHNESS/C-DELTA-REPAIR (content change without status change vs metadata change without content change), and is prerequisite before production header/body scaling. It is orthogonal to repeating header-only variations which showed ceiling 1.0 on all three isolated headers with no sensitivity gradient.",
+  "carry_forward": {
+    "established": [
+      "HTTP fingerprint substrate SHA256(status || body_bytes || sorted_filtered_headers) with EXCLUDED_HEADERS={Date,Server,X-Request-Id} deterministically discriminates header-only server-state changes with Jaccard 1.0 when status is 200 vs 200 and body bytes are byte-identical (JSON {\"data\":\"hello\",\"version\":1} 31 bytes SHA d0ca833f843c6d70ec9d6755f52a92dcbfc8b4ab601b871bced09ad027172e34, Content-Length 31 identical) on localhost Flask 3.1.3 + PyJWT 2.14.0 HS256 + SQLite WAL + Werkzeug 3.1.8 Python 3.12.14 at 127.0.0.1:19848 single sequential client SEED 44 jitter 50-150ms nominal N=20 per state effective distinct N=1 per state per source degenerate CI [1.0,1.0]/[0.0,0.0] (EXP-RUNTIME-35741906498 audit PASS, recomputed 0 mismatches, 180 lines all 200, 15 batch_state_log verified). Claim ceiling audit-certified.",
+      "Header-only discrimination is not body- or Content-Length-correlated: B-STATUS-ONLY 0.0 and B-BODY-ONLY 0.0 on all comparisons (A vs E combined 4 headers, A vs B Cache-Control only max-age=3600 vs max-age=0 must-revalidate, A vs C ETag W/aaa-111 vs W/bbb-222, A vs D Set-Cookie absent vs session=hdrdrift) while B-HEADERS-ONLY 1.0 on A vs E and 3/3 isolations; C6 Content-Length identity holds 31 across A/B/C/D/E. First non-vacuous C4: full 1.0 > max(status 0.0, body 0.0) strictly (prior localhost exps vacuous 1.0>=1.0).",
+      "Per-header isolations each alone sufficient: Cache-Control alone 1.0, ETag alone 1.0, Set-Cookie alone 1.0 on full and headers-only; null controls stable: null_A1 vs null_A2 same STATE_A 0.0 CI [0.0,0.0] and exploratory null_E1 vs null_E2 0.0 on all four sources. Date varies 20 unique values and Server constant correctly excluded with 0 leakage into filtered dicts; header_config SQLite WAL COMMIT verified before each batch.",
+      "Parent established remains: maximally-distinct writable controls permission escalation (403 vs 200+body) and session invalidation (200 vs 401) Jaccard 1.0 deterministic with null 0.0 on localhost Flask (EXP-RUNTIME-35697043449). Combined with header-only plus nginx HIT/SWR/SIE 960/960 byte-identical decompression validation (EXP-RUNTIME-35611612543), substrate now covers body-identical header-different and header-identical body-different branches at localhost synthetic level."
+    ],
+    "rejected": [
+      "Header-only server-state drift is undetectable by the current HTTP fingerprint when bodies and status are identical, or detectable only via body-correlated Content-Length — falsified in this setting: full-vector 1.0 and headers-only 1.0 with Content-Length 31 constant and body SHA identical across A/B/C/D/E rejects this bounded negative (EXP-RUNTIME-35741906498 C1-C6 PASS, audit PASS). Rejection bounded to localhost Flask dev server with writable header_config and filtered headers {Cache-Control, ETag, Set-Cookie, Vary} included; does not reject general failure on other middleware or other header sets.",
+      "Full-vector adds no marginal information beyond body/status baselines on localhost (prior vacuous C4) — falsified for header-only condition where full 1.0 strictly exceeds body 0.0 and status 0.0; remains vacuous for prior maximally-distinct body+status conditions where body alone already 1.0."
+    ],
+    "unknown": [
+      "Does substrate discriminate same-status body-only drift (200 vs 200 with different body content via permission/content variation) with status isolated (status-only 0.0, body-only >0.5, full > status strictly) — parent unresolved[3] still open, targeted by next_question",
+      "Does header-only discrimination hold on production middleware (Django/Express/FastAPI, gunicorn/nginx, CDN, load balancer) with realistic header handling, whitespace/casing/order/multiple Set-Cookie folding — Flask Werkzeug dev server only tested",
+      "Does discrimination hold under concurrency, HTTP/2, TLS, multi-client, or non-deterministic header emission where bootstrap CI becomes non-degenerate and sensitivity ordering emerges (currently all 3 isolated headers 1.0, no gradient)",
+      "Does Vary header alone (Accept-Encoding vs Accept-Encoding, Origin) discriminate when isolated — tested only as part of combined E state, not as single-header isolation",
+      "Does header discrimination generalize to other header values/magnitudes, header ordering variations, or header-value whitespace/case folding beyond the 5 tested filtered header JSONs",
+      "Does distributed or CDN-cached header handling preserve header-only discrimination for C-FRESHNESS/C-DELTA-REPAIR beyond localhost single-node SQLite WAL",
+      "What is the per-header signal strength gradient to inform header-freshness policies when headers vary with smaller or multiple concurrent changes (ceiling 1.0 masks sensitivity differences)"
+    ],
+    "do_not_assume": [
+      "C-MEAS-VALID is VALIDATED or PRODUCT_CORE — audit PASS supports EXPERIMENTAL only; degenerate CI effective N=1, localhost bound, no production inference, promote_to_product false",
+      "Localhost Flask dev server results generalize to production WSGI (gunicorn), nginx, CDN, or distributed SQLite replication — explicitly untested per validity_notes and audit V2",
+      "Bootstrap CI [1.0,1.0] or [0.0,0.0] reflects high sampling precision — CI is degenerate because all 20 fingerprints per state are byte-identical (effective N=1); jitter 50-150ms had no observable effect",
+      "Full-vector always adds marginal value beyond single-field baselines — true only for header-only condition (1.0 > 0.0); prior maximally-distinct conditions remain vacuous where body alone already 1.0, so do not assume full > body generally",
+      "B-HEADERS-ONLY 1.0 proves header signal is non-trivial in all deployments — it is architecturally forced that any included-header change changes hash; test value was isolating from Content-Length/body correlation (C6) and proving status/body 0.0, not circular hash sensitivity (audit V6)",
+      "Header ordering, whitespace, case folding, or multiple Set-Cookie handling is robust — tested only single Set-Cookie value session=hdrdrift and fixed header serialization sort_keys; other foldings untested",
+      "C-FRESHNESS and C-DELTA-REPAIR are unblocked for distributed/production testing — unblocked only for localhost synthetic header-only drift; production freshness/delta-repair remains blocked pending same-status body-only and production middleware tests (audit claim_ceiling, product_consequence_positive)",
+      "Vary header delta and per-header signal gradient characterized — Vary only tested inside combined E, and all three isolations hit ceiling 1.0 so no ordering/policy sensitivity measured"
+    ]
+  },
+  "dependencies": [
+    "Flask 3.1.3 + PyJWT 2.14.0 + SQLite 3.45.0 WAL on localhost 127.0.0.1:19848 Werkzeug 3.1.8 Python 3.12.14 SEED 44",
+    "HTTP fingerprint SHA256(status || body_bytes || sorted_filtered_headers) with EXCLUDED_HEADERS Date, Server, X-Request-Id and metric Jaccard distance 1-|A cap B|/|A cup B| identical to parent EXP-RUNTIME-35697043449/run_experiment.py:compute_fingerprint",
+    "Writable header_config via POST /admin/set_headers with SQLite WAL COMMIT verified by SELECT before each batch (batch_state_log.jsonl)",
+    "Byte-identical body JSON sort_keys fixed SHA d0ca833f843c6d70ec9d6755f52a92dcbfc8b4ab601b871bced09ad027172e34 length 31 Content-Length 31"
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-RUNTIME-35741906498/spec.json sha80e8cef6a256201c8cfb64f296c87c24fcc8085f83f95b96132c96e5ecad7c7c frozen C1-C6",
+    "research/experiments/EXP-RUNTIME-35741906498/prereg.md sha1143ca059319a5dd083a18fb08116a36a2a6398fad97c3a78787257cf207c3df frozen",
+    "research/experiments/EXP-RUNTIME-35741906498/result.json schema_version 1 status COMPLETE outcome SUPPORTS controls C1-C6 all pass B-STATUS-ONLY/B-BODY-ONLY 0.0 B-HEADERS-ONLY 1.0",
+    "research/experiments/EXP-RUNTIME-35741906498/audit.json schema_version 1 status PASS producer_claim_supported true recomputed_metrics matching fingerprint_mismatches 0 claim_ceiling narrow localhost",
+    "research/experiments/EXP-RUNTIME-35741906498/raw_observations.jsonl sha3883b538c9d8d57d6b0a0eaefb1100cdfd5420b8c1faecbea5972c91a34e2f92 180 lines",
+    "research/experiments/EXP-RUNTIME-35741906498/batch_state_log.jsonl sha1e0cc63152bb74b547c1c13a2e6ba3fee67c83d3792135bd9169534a612eb47b 15 entries",
+    "research/experiments/EXP-RUNTIME-35741906498/provenance.json sha7f7d8dbe2395332fec02d0dd8879746fb527f05e16b14e82fb54ce07a9a6bced environment fixtures",
+    "research/experiments/EXP-RUNTIME-35697043449/handoff.json shad3144036f4663aabfd22b0fc44386f8d067f3da8cf3ced65b53a400e270d2f43 parent established/rejected/unknown/do_not_assume inherited"
+  ],
+  "recommended_action": "Execute the complementary same-status body-only drift experiment on the same localhost Flask+SQLite+JWT testbed (keep status 200, vary body via server permission/content state while headers constant) with frozen C1-C6 analogues: full>0.5, body-only>0.5, status-only 0.0, full > status strictly, null 0.0, body-length variation verified not header-correlated. This completes the localhost C-MEAS-VALID control matrix (header-only now PASS, body-only pending) before any production WSGI/nginx/CDN concurrency scaling for C-FRESHNESS/C-DELTA-REPAIR. Do not repeat header-only value variations until body-only gap closed."
+}

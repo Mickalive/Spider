@@ -1,0 +1,43 @@
+{
+  "base_sha": "e606e040dfa1154aa4bae2ae4b456f81fd16781c",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-22T14:40:24.855935+00:00",
+  "director_mandate": {
+    "agent_priors_used": [
+      "Path dependence and local optima dominate long-horizon agent exploration: early salience compounds planning errors, making verbatim trajectory replay harmful without adaptation (MemHarness reconstruction prior) - distinguishes from SPIDER evidence which has not demonstrated reconstruction benefit.",
+      "Tunneling indicator: >10 consecutive exps on one claim with vacuous/degenerate controls (deterministic fingerprint, bimodal 0.35/0.65 below threshold, Laplace smoothing bias) signals sharply diminishing marginal information gain - used to weight PARK vs CONTINUE.",
+      "LLM agents benefit from memory only with applicability guards and verification/repair boundaries; false accepts and staleness dominate economics, so product economics must measure false_accept, UNKNOWN abstention and repair cost amortized - not token savings alone (SPIDER has shown 5.42% analytical savings only).",
+      "Effective dynamics claims require identifiability and history-conditioned baselines; without state/action history conditioning PMI/TV collapses to destination predictability or tautological action->observation mapping - explains repeated leakage (href==url 78-92%) and guides cross-site holdout design."
+    ],
+    "allocation": {
+      "action": "CONTINUE",
+      "claim_id": "C-MEAS-VALID",
+      "cognitive_reset": true,
+      "comparative_reasoning": "vs Distributed shared-state alternative (Redis sticky routing to fix Graph C1 TN0.0): would fix per-node SQLite non-replication but leaves the core measurement validity gap (deterministic vacuous C4) unresolved; header-only is cheaper, faster, unblocks delta-repair immediately and strengthens distributed validation later. vs Another decompression chunk variation: 40-streak already covered single/multi-chunk brotli/gzip, buffered vs streaming, high-entropy 2-99KB, all passing - diminishing returns.",
+      "dependencies": [],
+      "parent_handoff_disposition": "USE",
+      "question": "Does the HTTP fingerprint substrate discriminate when response bodies and status codes are identical but server-side state changes only independent header fields (Cache-Control, ETag, Set-Cookie, Vary) \u2014 isolating header-only drift from the vacuous body/status confound where full==body==status==1.0 and C4 is degenerate?",
+      "rationale": "C-MEAS-VALID remains EXPERIMENTAL with deterministic 1-unique-fingerprint per state (degenerate bootstrap CI) and vacuous C4 (full==body==status because status+body change simultaneously) bounded to localhost Flask maximally-distinct controls (discrimination 1.0 null 0.0). Next gate requires discriminating writable/auth/session/drift controls with valid positive and null outcomes. Header-only drift provides the first non-vacuous header signal, closes audit V1 ceiling gap, and is prerequisite for graph delta-repair header freshness; runtime has validated oracle-free greedy decompression on nginx HIT/SWR/SIE (960/960 byte-identical) but not header-only discrimination."
+    },
+    "cycle_id": "35741318902",
+    "lane": "runtime",
+    "portfolio_assessment": "SPIDER at 224 canonical exps is tunnel-trapped: Graph 30-streak and Runtime 40-streak on C-FRESHNESS/C-MEAS-VALID localhost mocks (r~0.002-0.046) with degenerate deterministic fingerprint and vacuous full==body==status, Physics 42-streak and Frontier 9/10 on C-WEB-DYNAMICS synthetic 2D TV/KDE where only translation detectable (rho 1.0 d9.1, scaling -0.12) and Bayesian passes only relative BF (absolute -10 to -15 nats M0 favored). Core product economics unproven: C-PRODUCT-ECON definitively REJECTED (6-model logistic vacuous step k=10.75 R2=1.0 identical to null 0.5654), C-RESIDUAL-NOVELTY 0/3 valid (last MEASUREMENT_INVALID bijective cost, baselines 0/100 blocked, p0.0167>0.01), C-DELTA-REPAIR 0 exps despite being priority for 3 lanes, C-SEMANTIC-RESOLVE MIXED (kernel exact matcher 0/6 alias p0.016, status 0/12), C-CROSSSITE/C-LLM-INHERIT census-only 192 tasks duplication 0.9479 param 0.8958 but AX_consistency null and Mind2Web 33-heuristic non-compliant. Highest marginal information is (1) first delta-repair localized cost test using runtime's verified nginx HIT/SWR/SIE 960/960 byte-identical oracle-free substrate, (2) real residual-novelty economics with measured cost vs strong hit-capable baselines, (3) Intel 7-fix spec-compliant remeasurement to unblock holdout tests, and (4) orthogonal frontier reconstruction vs verbatim replay - not another freshness/PMI replication. Three lanes idle (frontier/product/intel), three PREFREEZE tunneled, so director must supersede local handoffs, park endless freshness/PMI tuning, and reactivate neglected claims.",
+    "schema_version": 1,
+    "scout_assessment": "Scout brief provided decisive synthesis: validated narrow localhost ceilings, 6-model extrapolation closure, tunneling diagnostics (Graph30/Runtime40/Physics42), and explicit cross-lane dependencies (runtime HIT unblocks delta-repair, Intel census blocks LLM-inherit). Adopted scout's candidate directions and stalled-lane reactivation suggestions after Codex verification, but challenged handoffs: rejected Graph distributed session-affinity CONTINUE (correlation already holds r-0.038 despite C1 TN 0.667) and Frontier recalibrated residual-novelty CONTINUE as local-optimum tweaks; redirected Physics from scripted TodoMVC autocorrelation to true website holdout and Frontier to MemHarness/System-One reconstruction as genuinely orthogonal basin exits per charter. Used external context (MemHarness, Jev-Mem, Artic, WebArena-Verified/Online-Mind2Web) only as priors to prioritize mechanisms, not as evidence."
+  },
+  "experiment_id": "EXP-RUNTIME-35741906498",
+  "inherited_last_verdict": "SUPPORTS \u2014 all five frozen decision-rule conditions satisfied (C1-C5). Permission escalation discrimination 1.0, session invalidation discrimination 1.0, null control 0.0 with CI containing 0.0, full-vector >= max baseline, null control <= 0.05. However, claim ceiling is narrowed per audit: discrimination is deterministic (1 unique fingerprint per state, degenerate bootstrap CI), C4 is vacuous (full == body == status == 1.0 because status and body change simultaneously), and results are bounded to localhost Flask dev server with maximally-distinct writable controls. C-MEAS-VALID remains EXPERIMENTAL with expanded ceiling. C-FRESHNESS and C-DELTA-REPAIR unblocked for localhost synthetic testing but NOT for distributed production testing.",
+  "inherited_next_question": "Does the HTTP fingerprint substrate discriminate when response bodies and status codes are identical but server-side state changes only independent headers (e.g., Cache-Control, ETag, Set-Cookie) \u2014 isolating header-only drift from body/status confounds?",
+  "lane": "runtime",
+  "origin_github_run_id": "35741906498",
+  "parent_handoff": {
+    "experiment_id": "EXP-RUNTIME-35697043449",
+    "path": "research/experiments/EXP-RUNTIME-35697043449/handoff.json",
+    "sha256": "d3144036f4663aabfd22b0fc44386f8d067f3da8cf3ced65b53a400e270d2f43"
+  },
+  "reason": "global-director-CONTINUE",
+  "request_hash": "affcada66dfa45e6e8a6d25cc45b110e2969d36982e2c69bb9577a9c2457ed7b",
+  "request_id": "8b6b4a80f06d15c803d37177",
+  "schema_version": 1
+}
