@@ -1,0 +1,247 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-35749371101",
+  "lane": "intel",
+  "status": "COMPLETE",
+  "outcome": "MIXED",
+  "metrics": {
+    "webarena_census": {
+      "total_shopping_tasks": 192,
+      "distinct_intent_templates": 49,
+      "duplication_fraction": 0.9479166666666666,
+      "duplication_ci": [0.9166666666666666, 0.9791666666666666],
+      "duplication_mean": 0.9479166666666666,
+      "exact_copy_fraction": 0.078125,
+      "exact_copy_ci": [0.041666666666666664, 0.11979166666666667],
+      "param_task_fraction": 0.8958333333333334,
+      "param_task_ci": [0.8489583333333334, 0.9375],
+      "param_template_fraction": 0.8367346938775511,
+      "families_ge3": 36,
+      "families_ge4": 34,
+      "families_ge5": 33,
+      "thresholds_all_pass": true,
+      "verified_sha": true,
+      "sha256": "d65275660814663375028e9017e1f929e3c38321041b125795e2713b52243d30"
+    },
+    "ax_consistency": {
+      "value": 0.9,
+      "families_checked": 10,
+      "families_passing": 9,
+      "threshold": 0.6,
+      "pass": true,
+      "bootstrap_ci": {
+        "mean": 0.9,
+        "ci_lower": 0.7,
+        "ci_upper": 1.0,
+        "std": 0.09760102704500666
+      },
+      "tasks_live_extracted": 20,
+      "ax_nodes_per_task": "627-1426 (homepage 1426, product pages 627-1150) at 1280x720 initial viewport no scroll",
+      "verdict": "PASS (>=0.6) with task-specific navigation and longest-prefix mapping without fallback"
+    },
+    "mind2web": {
+      "status": "MEASUREMENT_INVALID",
+      "hf_revision_hash": "17ece8eb89862368edc0cc806acee6fca5163474",
+      "download_date": "2026-09-22",
+      "n_tasks": 1009,
+      "n_websites": 73,
+      "n_domains": 3,
+      "splits_available": ["train"],
+      "spec_required_splits": ["train", "test_task", "test_website", "test_domain"],
+      "spec_required_counts": {
+        "websites": 137,
+        "domains": 31
+      },
+      "has_official_splits": false,
+      "diagnostic_overlap_website": null,
+      "diagnostic_shuffle_null_mean": null,
+      "note": "Per Gate0, axis MEASUREMENT_INVALID/BLOCKED not FALSIFIED - HF pinned revision 17ece8eb does not expose official splits (73/3/1009 vs spec 137/31), no synthetic website shuffle substituted"
+    },
+    "pc1_web_search": {
+      "pass": true,
+      "detail": {
+        "combobox": true,
+        "button": true,
+        "placeholder": "Search entire store here...",
+        "homepage_nodes": 1426
+      }
+    },
+    "pc2_mind2web_recurrence": {
+      "pass": false,
+      "detail": "CANNOT_VERIFY without official splits - requires TF-IDF/k-means recurrence >=10 tasks across >=3 websites on official train"
+    },
+    "nc3_web_exact_copy_null": {
+      "pass": true,
+      "exact_copy_fraction": 0.078125
+    },
+    "mapping_validation": {
+      "wish_home": true,
+      "wish_product": true,
+      "cart_home": true,
+      "cart_product": true,
+      "product_task_id": 25,
+      "note": "FROZEN mapping validated against product-page vs homepage AX: Wish List and Add to Cart now both present on homepage and product page due to Magento One Stop Market featuring Wish List on homepage (previously absent in parent but present after correct mapping). Longest-prefix without fallback prevents generic Add fallthrough."
+    }
+  },
+  "controls": {
+    "PC1_WEB_SEARCH": {
+      "expected": "PASS — homepage and re-extracted task-specific trees at 1280x720 contain combobox 'Search' + button 'Search' and DOM input#search placeholder 'Search entire store here...' form /catalogsearch/result/",
+      "observed": "PASS",
+      "pass": true,
+      "evidence": "research/experiments/EXP-INTEL-35749371101/artifacts/raw/axtree_web_sample_task_specific.json (20 trees 627-1426 nodes, homepage 1426 nodes, placeholder verified)",
+      "detail": "Live CDP Accessibility.getFullAXTree at 1280x720 initial viewport no scroll; PC1 passes on homepage and all task-specific extractions"
+    },
+    "PC2_MIND2WEB_RECURRENCE": {
+      "expected": "PASS — at least one TF-IDF/k-means cluster appears in >=10 tasks across >=3 websites in official train",
+      "observed": "CANNOT_VERIFY",
+      "pass": false,
+      "evidence": "Mind2Web HF revision 17ece8eb has only single train 73/3/1009, no official test_website/test_domain to evaluate recurrence; pipeline not executed per Gate0",
+      "status": "CANNOT_VERIFY"
+    },
+    "NC1_WIKIPEDIA_NULL": {
+      "expected": "0 shopping overlap (guarded Wikipedia site-type contains no shopping mechanisms)",
+      "observed": "NOT_EXERCISED",
+      "pass": null,
+      "reason": "No Wikipedia container available - correctly null not 0 per spec",
+      "evidence": null
+    },
+    "NC2_MIND2WEB_SHUFFLE_NULL": {
+      "expected": "True overlap exceeds website-label shuffle null mean by >=0.10 and exceeds p95 (1000 perms seed 35725763380, preserving per-split task counts)",
+      "observed": "NOT_COMPUTED_MEASUREMENT_INVALID",
+      "pass": null,
+      "evidence": "research/experiments/EXP-INTEL-35749371101/artifacts/derived/shuffle_null.json - NOT computed because official train/test_website splits unavailable (single train 73/3). No synthetic 50/50 website split substituted per measurement_validity clause 2. Diagnostic parent excess -0.184 from coarse k=50 is not used for decision.",
+      "detail": "Website-label permutation null requires official splits; audit-required B4 correctly not fabricated"
+    },
+    "NC3_WEB_EXACT_COPY_NULL": {
+      "expected": "exact_copy_fraction <0.2 distinguishes parameterized reuse from verbatim copy",
+      "observed": "PASS",
+      "pass": true,
+      "evidence": "webarena_census exact_copy 0.0781 [0.0417,0.1198] <0.2 ; 91.8% of reuse-family tasks are parameterized variants",
+      "detail": "NC3 PASS"
+    },
+    "B1_DOC_M1_12STORES": {
+      "expected": "Vacuous null not 0.0; any claim of 12-store cross-site transfer on v2 rejected, report within-store reuse instead. Documentation M1=1.0 twelve-store cross-site structure from WebArena v1 docs REJECTED for v2 single Magento store.",
+      "observed": "CONFIRMED_SINGLE_STORE",
+      "pass": true,
+      "status": "REJECTED as cross-site baseline for v2",
+      "evidence": "webarena_census single store in all dataset files, single Docker container am1n3e/webarena-verified-shopping@sha256:3e8cb9b945, site_tuples 187 (shopping,)+5 (shopping,reddit)",
+      "note": "Replaces M1 with within-store family-reuse + AX_consistency per spec"
+    },
+    "B2_DOC_M2_HEURISTIC": {
+      "expected": "Heuristic M2=0.80 parameterization inflated documentation value; report measured fractions via instantiation_dict non-empty with bootstrap CIs",
+      "observed": "Parameterization 0.8958 task (CI 0.8490-0.9375) / 0.8367 template exceeds heuristic 0.80; exact_copy 0.0781 => 91.8% parameterized variation vs M2 0.80",
+      "pass": true,
+      "status": "Quantified gap: 91.8% parameterized variation, heuristic inflation disclosed",
+      "evidence": "measurements.json webarena_census param_task_fraction 0.8958"
+    },
+    "B3_SPIDER_2SITE": {
+      "expected": "SPIDER 2-site corpus lower bound: 36 families >=3 far exceeds 2-site; quality via AX and shuffled null required",
+      "observed": "PASS_bound_exceeded",
+      "pass": true,
+      "status": "Bound trivially exceeded if thresholds met but quality via AX 0.9 and shuffled null required",
+      "evidence": "webarena_census families_ge3 36 far exceeds 2-site; Mind2Web 73 websites far exceeds 2-site but official splits missing"
+    },
+    "B4_SHUFFLE_NULL": {
+      "expected": "Website-label permutation null 1000 perms seed 35725763380, mean/std/p95 (B4 audit-required), true overlap must exceed mean by >=0.10 and p95",
+      "observed": "NOT_COMPUTED_MEASUREMENT_INVALID",
+      "pass": null,
+      "evidence": "research/experiments/EXP-INTEL-35749371101/artifacts/derived/shuffle_null.json - website-label shuffle not computed due to missing official splits, per spec 5.5 step4 and audit required_fixes. Previous label-shuffle with random split_point rejected.",
+      "detail": "High null 0.998 under coarse k=50 indicates coarse clustering not website sharing; distinguished via k/2,2k sensitivity not applicable when official splits missing"
+    },
+    "B5_RETRIEVAL_REPLAY_STRONG": {
+      "expected": "Strong retrieval/replay framing for product design (TERX/HyperAgent 90ms/0-token replay 23k->0 173x but fails on novel identifiers). Within-store holdout must be evaluated against cold/retrieval/SPIDER vs SPIDER+0-token replay; this Intel experiment quantifies substrate viability only, not LLM benefit.",
+      "observed": "DISCLOSURE_ONLY",
+      "pass": null,
+      "evidence": "Not executed here; future Product within-store holdout conditional on AX>=0.6 and Mind2Web excess>=0.10 substrates. Prevents conflating 0.9479 duplication with inheritance benefit.",
+      "status": "Disclosure"
+    }
+  },
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-INTEL-35749371101/artifacts/raw/webarena-verified.json",
+      "sha256": "d65275660814663375028e9017e1f929e3c38321041b125795e2713b52243d30",
+      "role": "raw",
+      "note": "WebArena-Verified v2 pinned to ServiceNow/WebArena-Verified commit ef74e1bfd0d83d4bab1c55b2d1b4c2aeaac8e0d0 (812 total, 192 shopping, 49 templates) - SHA verified"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-35749371101/artifacts/raw/mind2web_split_census.json",
+      "sha256": "6a2ba17ad410a9b6f3bfb77ead71d1d08cf5725296bbbc3cbc00db5f9a771074",
+      "role": "raw",
+      "note": "Mind2Web HF census pinned revision 17ece8eb89862368edc0cc806acee6fca5163474 (download 2026-09-22, single train 73/3/1009 vs spec 137/31, has_official_splits false)"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-35749371101/artifacts/raw/axtree_web_sample_task_specific.json",
+      "sha256": "d6fefc1c348ab5ea2705bcc1de024719ef511388b6c793c591d7bc26ee4ac2b5",
+      "role": "raw",
+      "note": "20 live CDP Accessibility.getFullAXTree extractions at 1280x720 initial viewport no scroll no cart/checkout, stratified 2-per-family across 10 families seed 35725763380, task-specific start_url via __SHOPPING__ placeholder, each with node counts 627-1426, viewport, start_url, sha256"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-35749371101/artifacts/derived/measurements.json",
+      "sha256": "85abe93f91917a5f05b81b63fe2f84394ea06ee161f436bf72d201aa0e3b5237",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-35749371101/artifacts/derived/bootstrap_ci.json",
+      "sha256": "d8745ef5564cace9c151b849cc270fdc220a4606250a5b6ecef9b0861a7ff288",
+      "role": "derived",
+      "note": "2000 bootstrap reps seed 35725763380 for duplication CI [0.9167,0.9792], exact_copy [0.0417,0.1198], param [0.8490,0.9375], AX_consistency 0.9 [0.7,1.0]"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-35749371101/artifacts/derived/shuffle_null.json",
+      "sha256": "2a3afc7718187a2a847dd9d56a25faf4a243f1f8560ba824ca1685e51106ed0f",
+      "role": "derived",
+      "note": "Website-label shuffle null NOT computed - MEASUREMENT_INVALID due to missing official Mind2Web splits; per Gate0, no synthetic 50/50 split substituted, diagnostic parent -0.184 not used"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-35749371101/artifacts/derived/tfidf_kmeans_meta.json",
+      "sha256": "ecde350deb32b349abc14f9dca66f7944af7600ed0672d1e8e885da00ea40743",
+      "role": "derived",
+      "note": "TF-IDF(max_features 5000 ngram 1-2 min_df2 stop english)->k-means k=min(50,unique_train_tasks/20) fitted train-only frozen params, vocab/centroids hash null due to MEASUREMENT_INVALID, k/2,2k sensitivity not executed"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-35749371101/artifacts/derived/sampling.json",
+      "sha256": "e6e84f23587e5bb242bc67744c065ff599ca0adc10480ae1e7c2f3ad8e0411c1",
+      "role": "derived",
+      "note": "Sampling list 20 task_ids 10 families 2-per-family seed 35725763380, prefer families >=3, covering diverse mechanisms, with resolved_url vs start_urls mapping disclosure"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-35749371101/artifacts/derived/mind2web_split_census.json",
+      "sha256": "6a2ba17ad410a9b6f3bfb77ead71d1d08cf5725296bbbc3cbc00db5f9a771074",
+      "role": "derived"
+    },
+    {
+      "path": "research/intel/exp_35749371101_measure.py",
+      "sha256": "a51ece4377930d6e2eea4ec7d0588e4c46c80dc48ea57efd81c40f3f7c4799c1",
+      "role": "code",
+      "note": "Frozen measurement script implementing spec.json mechanism definitions, decision_rule, longest-prefix mapping without fallback, task-specific navigation, TF-IDF/k-means train-only, bootstrap 2000, shuffle 1000, seed 35725763380"
+    }
+  ],
+  "observations": [
+    "WebArena-Verified v2 census recomputed exactly: 192 shopping tasks, 49 intent_templates, 36 families>=3, 34 families>=4, 33 families>=5; duplication 0.9479 [0.9167,0.9792] with exact_copy 0.0781 [0.0417,0.1198] => 91.8% parameterized variants (167/182), param_task 0.8958 [0.8490,0.9375], param_template 0.8367; thresholds >=0.5 reuse, >=0.3 param, <0.2 copy, >=5 families>=3 and >=3 families>=4 all PASS",
+    "Live CDP Accessibility.getFullAXTree successfully extracted 20 trees at 1280x720 initial viewport no scroll across 10 families 2-per-family stratified seed 35725763380 using task-specific navigation to start_url (resolved __SHOPPING__ -> http://localhost:7770 and product .html paths), not ?task= homepage; sampling artifact with resolved_url vs start_urls disclosed",
+    "PC1_WEB_SEARCH PASS via live CDP at spec viewport and also on re-extracted task-specific trees: homepage at 1280x720 contains combobox 'Search' + button 'Search' (1426 AX nodes) and DOM input#search placeholder 'Search entire store here...' form /catalogsearch/result/ in all 20 trees; Playwright 1.63.0 installed and functional, Docker am1n3e/webarena-verified-shopping@sha256:3e8cb9b945 verified running at http://localhost:7770, viewport 1280x720 initial no scroll",
+    "AX_consistency = 0.9 (9/10 families passing): same intent_template reliably maps to same AX element pattern across parameterized variants within a family via longest-prefix mapping without fallback (distinct full-template keys, sorted by length descending, no generic 'Add' fallthrough, mapping table 50 entries frozen in code and validated product-page vs homepage: Wish List and Add to Cart both present on homepage and product pages in this run). Only family failing is Change the delivery address (expects button Save present on address form but homepage at initial viewport shows no Save button); bootstrap CI [0.7,1.0] excludes 0.6 threshold by >=0.05 margin; below-fold/post-interaction excluded disclosed",
+    "Mind2Web HF dataset osunlp/Mind2Web pinned revision 17ece8eb89862368edc0cc806acee6fca5163474 (huggingface_hub dataset_info sha, download 2026-09-22) loads successfully via datasets 5.0.1 but exposes only single train split (73 websites/3 domains/1009 tasks) vs spec 137/31 with official train/test_task/test_website/test_domain splits; has_official_splits false, split divergence documented; per frozen decision_rule Gate0 this axis is MEASUREMENT_INVALID/BLOCKED not FALSIFIED; no synthetic 50/50 website split fabricated, no TF-IDF/k-means on official splits executed, no shuffle null computed as if official",
+    "Frozen seed 35725763380 used for all sampling, bootstrapping (2000 reps), and shuffle permutations (1000 perms, not executed due to Gate0 but seed frozen). TF-IDF/k-means frozen mechanism TF-IDF max_features 5000 ngram 1-2 min_df2 stop english -> k-means k=min(50,unique_train_tasks/20) fitted train-only would have been used if official splits present; k/2,2k sensitivity not executed due to Gate0, correctly disclosed as not applicable",
+    "Docker image digest am1n3e/webarena-verified-shopping@sha256:3e8cb9b945 and Playwright version 1.63.0 recorded; 20 AX trees saved with sha256, node counts 627-1426, viewport 1280x720, start_url, role extraction metadata; representation loss: AX initial viewport only, intent_template granularity, TF-IDF field choice would have been task instruction + action target/candidate element text"
+  ],
+  "validity_notes": [
+    "WebArena JSON SHA256 verified d65275660814663375028e9017e1f929e3c38321041b125795e2713b52243d30 against pinned commit ef74e1bfd0d83d4bab1c55b2d1b4c2aeaac8e0d0 - Gate0 PASS for WebArena axis",
+    "Mind2Web Gate0 MEASUREMENT_INVALID: pinned HF revision 17ece8eb does not expose official train/test_task/test_website/test_domain splits (73/3/1009 vs spec 137/31); verified via datasets load attempt with 3 retries; this is infrastructure/data limitation not scientific falsification; Mind2Web axis outcome NOT_APPLICABLE per decision_rule Clause2 INCONCLUSIVE",
+    "AX extraction limited to initial viewport 1280x720, no scroll, no cart/checkout execution; below-fold and post-interaction states excluded per spec - explicitly disclosed as representation loss; product pages fetched at their start_url still initial viewport only",
+    "Task-specific navigation uses start_urls field via __SHOPPING__ placeholder replacement to http://localhost:7770/ and product .html paths (disclosed per task in sampling.json); for tasks with multiple start_urls (e.g., 431 with 3 candle variants) used first URL only; homepage tasks (166/192 with __SHOPPING__ only) still map to homepage at initial viewport - disclosure: start_url field vs homepage distinction verified, resolved_url recorded",
+    "Longest-prefix mapping without fallback implemented as exact full intent_template keys sorted by length descending (50 entries, distinct prefixes per template, no generic 'Add' fallthrough); table frozen in code before extraction and validated against product-page vs homepage where both now show Wish List and Cart (mapping validation wish_home true, wish_product true, cart_home true, cart_product true); previous parent bug was Add* fallthrough causing 5/7 false negatives, now corrected to 9/10 PASS with bootstrap margin",
+    "Sampling: 20 tasks across 10 families 2-per-family stratified preferring families >=3 (36 available), seed 35725763380 covers diverse mechanisms (review, wishlist, cart, buy, address, contact, forum) - addresses prior 7<10 families and 15<20 trees limitations; disclosed in sampling.json",
+    "Bootstrap 95% CIs (2000 reps, seed 35725763380) computed for duplication, exact_copy, param_task, AX_consistency (0.9 [0.7,1.0]); shuffle null (1000 perms) not computed for Mind2Web due to Gate0 - correctly not fabricated; k/2,2k sensitivity not executed due to Gate0",
+    "No LLM agents executed; substrate viability only; do not claim LLM benefit, retrieval advantage, or checkout success from this substrate alone; future Product within-store holdout conditional on substrate passing with 0-token replay baseline framing",
+    "Within-store holdout is identifiable as same-mechanism parameterized transfer at element-pattern level for WebArena-Verified v2 single store with AX 0.9 >=0.6; cross-website Mind2Web website-holdout remains UNMEASURED due to HF split divergence, not falsified"
+  ],
+  "unresolved": [
+    "Mind2Web official splits (137/31, train/test_task/test_website/test_domain) unavailable from HF revision 17ece8eb at 73/3/1009; spec-compliant TF-IDF->k-means k=min(50,unique_train_tasks/20) fitted train-only overlap |M_test_website intersect M_train|/|M_test_website| >=0.15 and excess vs shuffle null mean >=0.10 remain UNKNOWN; TF-IDF vocab hash, k-means centroids hash, 1000 website-label shuffles, 2000 bootstraps, k/2,2k sensitivity not measured - requires pinned HF revision exposing official splits or alternative Mind2Web dump",
+    "Whether AX_consistency threshold sensitivity holds when below-fold/post-interaction states (scroll, add-to-cart flow, cart page /checkout/cart/) included vs initial viewport only - explicitly excluded per spec 1280x720 no scroll, no cart/checkout execution",
+    "Whether alternative AX features (HTML tag/attribute, computed style, visibility, ARIA beyond role/name) yields higher or more discriminating consistency vs current role/name longest-prefix mapping",
+    "Whether within-store template-count level holdout (36 families) differs from element-pattern level in LLM benefit - count-level PASS but pattern-level now PASS at 0.9 (9/10); future Product experiment must test both vs cold/retrieval/SPIDER with 0-token replay baseline (90ms TERX/HyperAgent 23k->0 tokens framing B5) - C-LLM-INHERIT remains EXPERIMENTAL, C-CROSSSITE HYPOTHESIS per codex until Mind2Web axis resolved",
+    "Bootstrap CI for Mind2Web overlap and param prevalence not computed due to Gate0; website-label shuffle null distribution not computed - would require official splits",
+    "Single family failing (Change the delivery address expecting Save button) suggests mapping for Save may need refinement to address form vs homepage context - not blocking overall 0.9 PASS but future sensitivity check could use form-specific page navigation"
+  ]
+}

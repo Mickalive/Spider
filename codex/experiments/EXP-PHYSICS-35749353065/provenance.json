@@ -1,0 +1,116 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-35749353065",
+  "lane": "physics",
+  "github_run_id": "35749353065",
+  "origin_github_run_id": "35749353065",
+  "base_sha": "3c8ce37f107b2173aaf89a0a59dbcaba80edd8f9",
+  "pre_execute_sha": "3a91c349571bb978eb820da5c758a7c75c2efa77",
+  "frozen_sha": "3a91c349571bb978eb820da5c758a7c75c2efa77",
+  "prereg_sha256": "0d36db242ba0895f9433e1e177c4feacd4b3618c27cbfcff6b06c8dbdf95bc83",
+  "request_sha256": "761ce67751c1dbffd2c413558a18a24f4e5034ce1a078dd831677386ba0face1",
+  "spec_sha256": "67b3911ef6b0da604e98d4ec56ec862ce98dd2897f7474c896015a00ba5742ac",
+  "freeze_sha256": "4e50bc4698221613d11979c83f572a061857d55b3cebdd2b8b9e222449101438",
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "datasets": [
+    {
+      "name": "Intel production SPA manifest (BrowserGym/AgentLab 1280x720)",
+      "revision": null,
+      "available_splits": [],
+      "required": "intel_spa_manifest.json with provenance (dataset revision hash, capture date, BrowserGym/AgentLab version, 1280x720 viewport), each entry site_id, raw_transitions_path, n_raw, n_NL, leakage_rate, unique_titles, title_entropy, H_Snext_given_URL_HK3, singleton_SA_rate",
+      "status": "INCOMPLETE - substrate_unavailable: manifest not found at 5 candidate paths, BrowserGym trajectories not supplied",
+      "gate0_qualifying_spas": 0,
+      "gate0_thresholds": "unique_titles>=2, H>0.2 bits, leakage<40%, NL>=50, strata>=10 singleton<50%"
+    },
+    {
+      "name": "Synthetic correlated SPA (positive control)",
+      "revision": "seed 42, 20 trajectories x10 steps NL=200, FSM 3-state branching L persists perfectly, URL hash(step_mod), DOM_before hash(L), leakage 0%, H=0.977",
+      "status": "GENERATED - positive control passes all thresholds",
+      "path": "research/experiments/EXP-PHYSICS-35749353065/synthetic_positive_control.json"
+    },
+    {
+      "name": "Synthetic independent-noise SPA (null control)",
+      "revision": "seed 42+999, same FSM but DOM variant i.i.d. per step independent of L, title_before URL-only, leakage 0%, H=1.0, NL=200",
+      "status": "GENERATED - null control passes (replicates parent EXP-PHYSICS-34764605162)",
+      "path": "research/experiments/EXP-PHYSICS-35749353065/synthetic_negative_control.json"
+    }
+  ],
+  "code_paths": [
+    {
+      "path": "research/experiments/EXP-PHYSICS-35749353065/execute.py",
+      "sha256": "02ad9e289531ab93e5a6121d7712243d3e9cf18ed06c5b5777bc21882fb0c2fd",
+      "description": "Frozen spec execution: Gate0 qualification, synthetic correlated/independent-noise FSM generation, history-conditioned CMI with Laplace alpha=1.0 Miller-Madow, 1000 within-strata grouped permutations, accuracy factorization, baselines, leakage diagnostic",
+      "status": "executed_successfully"
+    },
+    {
+      "path": "research/physics/substrate.py",
+      "description": "Physics substrate helpers (not used due to Gate0 failure, synthetic path only)",
+      "status": "not_executed_for_production"
+    }
+  ],
+  "environment": {
+    "python_version": "3.12.14",
+    "numpy": "2.5.3",
+    "scikit_learn": null,
+    "scipy": null,
+    "BrowserGym": "not_used_substrate_unavailable",
+    "AgentLab": "not_used_substrate_unavailable",
+    "playwright": "not_used",
+    "PYTHONHASHSEED": "0",
+    "numpy_seed": 42,
+    "random_seed": 42,
+    "platform": "linux"
+  },
+  "commands": [
+    "python research/experiments/EXP-PHYSICS-35749353065/execute.py",
+    "sha256sum research/experiments/EXP-PHYSICS-35749353065/gate0_table.json research/experiments/EXP-PHYSICS-35749353065/raw_cmi_results.json",
+    "python -m json.tool research/experiments/EXP-PHYSICS-35749353065/result.json"
+  ],
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-PHYSICS-35749353065/gate0_table.json",
+      "sha256": "738669795d279bcec904c722ae4738eb74e109970d65152ec4da914dcbb4a89d",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-35749353065/raw_cmi_results.json",
+      "sha256": "6703e79ea65220b0c8257223c3dd2ef7f8bdc8de9808feef28eb099d7e903fd3",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-35749353065/synthetic_positive_control.json",
+      "sha256": "fa81f2c0a7682ee2f7dcb8c265fbfcec58ae73944d263312cc339e565ec33bef",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-35749353065/synthetic_negative_control.json",
+      "sha256": "6cddb3e6542b40129e0fe2545aa787ed856abb4207987d61977b9d06d5ca8be8",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-35749353065/execute.py",
+      "sha256": "02ad9e289531ab93e5a6121d7712243d3e9cf18ed06c5b5777bc21882fb0c2fd",
+      "role": "code"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-35749353065/result.json",
+      "sha256": "9bae1e00b0407745257e27933e4448efbf61268a72b745ed6889f8fa17a70e21",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-35749353065/report.md",
+      "sha256": "01e3aad84f3dd0ce780c8577152ad5776123b24eefc61d65f50e9d40c9629697",
+      "role": "derived"
+    }
+  ],
+  "validity_notes": [
+    "Substrate_unavailable is not a scientific negative; synthetic controls validate pipeline would detect correlated non-determinism if present",
+    "Production SPA data required to test factorization hypothesis remains missing per director_mandate dependencies",
+    "No LLM calls, no BrowserGym/Playwright collection (reused Intel trajectories where available, none available)"
+  ],
+  "unresolved": [
+    "Intel production SPA manifest recovery",
+    "Primary factorization measurement on production SPAs",
+    "Barrier/committor and timescale pivot feasibility"
+  ]
+}
