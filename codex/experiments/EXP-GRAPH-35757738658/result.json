@@ -1,0 +1,147 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-35757738658",
+  "lane": "graph",
+  "status": "BLOCKED",
+  "outcome": "NOT_APPLICABLE",
+  "metrics": {},
+  "controls": {
+    "B-COLD-FULL-REEXPLORATION": {
+      "id": "B-COLD-FULL-REEXPLORATION",
+      "description": "Full cold re-exploration: same real LLM agent gpt-4o-mini (temperature 0.0, max 15 steps, same tools: Playwright goto/click/fill/evaluate/fetch, same budget) solves task from scratch with empty registry and no prior trajectory, via Playwright on localhost nginx+Flask HS256.",
+      "expected": "Succeeds >=90% but at full cost (100%). Repair must be <50% tokens and <40% browser on TEST to claim locality. CI via trajectory-grouped bootstrap (2000 resamples by instance).",
+      "observed": null,
+      "pass": null,
+      "evidence": "NOT_MEASURED: requires real LLM API key for token counting and model calls"
+    },
+    "B-VERBATIM-REPLAY": {
+      "id": "B-VERBATIM-REPLAY",
+      "description": "Verbatim mechanism replay without repair (0-token baseline): stored mechanism from pre-perturbation executed unchanged on post-perturbation target via Playwright, no LLM patch.",
+      "expected": "Near 0% success post-perturbation (correctly fails, <10%). If replay succeeds >10%, perturbation non-breaking and instance excluded as non-discriminating.",
+      "observed": null,
+      "pass": null,
+      "evidence": "NOT_MEASURED: requires real Playwright execution on perturbed substrate"
+    },
+    "B-RETRIEVAL-RAG": {
+      "id": "B-RETRIEVAL-RAG",
+      "description": "Semantic retrieval over prior trajectory memory (embedding search + nearest successful trajectory replay) without patch, executed via Playwright.",
+      "expected": "Partial success 20-40% (retrieves correct family but fails on stale locator/header). Repair must exceed retrieval by >=30pp success on TEST with trajectory-grouped CI.",
+      "observed": null,
+      "pass": null,
+      "evidence": "NOT_MEASURED: requires real LLM API key and embedding API"
+    },
+    "B-ORACLE-HAND-PATCH": {
+      "id": "B-ORACLE-HAND-PATCH",
+      "description": "Oracle hand-authored minimal patch (single selector/param/header correction) applied by experimenter, executed and verified via Playwright.",
+      "expected": "100% success with 1 browser probe +1 verification. Provides cost ceiling; measured autonomous repair should approach within 2x tokens/steps.",
+      "observed": null,
+      "pass": null,
+      "evidence": "NOT_MEASURED: requires Playwright execution on real substrate"
+    },
+    "B-RUNTIME-BYTE-IDENTITY": {
+      "id": "B-RUNTIME-BYTE-IDENTITY",
+      "description": "Runtime verified substrate invariant: oracle-free decompression (gzip.decompress without oracle lookup, handling Content-Encoding, chunked, Vary) yields byte-identical decompressed bodies across HIT, SWR, SIE, 304 on unperturbed resources.",
+      "expected": ">=0.99 SHA256(decompressed_body) identity HIT==SWR==SIE==304 pre-perturbation on real nginx. Post-perturbation HIT body for perturbed resource differs, unperturbed remain >=0.99.",
+      "observed": null,
+      "pass": null,
+      "evidence": "NOT_MEASURED: requires nginx + Flask testbed deployment"
+    },
+    "PC-LOCALIZED-REPAIR-SUCCEEDS": {
+      "id": "PC-LOCALIZED-REPAIR-SUCCEEDS",
+      "description": "PC1 unperturbed execution: mechanism resolved and verified on pre-perturbation endpoint with no patch succeeds verify()=true byte identity >=0.99. PC2 known-break single-attribute perturbation with oracle patch: Flask+nginx testbed DOM id #submit-123->#submit-124 and param ?id=->?item= with oracle selector/param update; repair succeeds within 2 browser probes and verification passes cost ratio <0.5 vs B-COLD.",
+      "expected": "PC1 100% success (Wilson CI reported), PC2 >=90% success with token ratio <0.5 vs B-COLD. If either fails, instrumentation broken — triggers MEASUREMENT_INVALID.",
+      "observed": null,
+      "pass": null,
+      "evidence": "NOT_MEASURED: requires real LLM + Playwright + real verify() pipeline"
+    },
+    "NC-ZERO-AND-DISTANT-PERTURBATION": {
+      "id": "NC-ZERO-AND-DISTANT-PERTURBATION",
+      "description": "NC1 zero perturbation (identical pre/post resource): proposed repair pipeline must produce zero patch (repair patch tokens 0, contamination 0, verify no false patch) byte identity 1.0. NC2 distant unrelated perturbation (modify endpoint B while target is endpoint A): repair of A no-op, success unchanged, contamination 0 on B-independent mechanisms.",
+      "expected": "NC1 patch tokens 0 and contamination 0, NC2 contamination 0, random-patch false-accept <=5% and AUROC 0.4-0.6 trajectory-grouped.",
+      "observed": null,
+      "pass": null,
+      "evidence": "NOT_MEASURED: requires real pipeline with trajectory-grouped block-permutation"
+    },
+    "C1_PC_GATE": {
+      "id": "C1",
+      "threshold": "PC1 success=1.0 and PC2 repair success >=0.90 on real gpt-4o-mini pipeline and B-RUNTIME non-vacuous full>body and full>status discrimination demonstrated",
+      "observed": null,
+      "pass": null
+    },
+    "C2_NC_GATE": {
+      "id": "C2",
+      "threshold": "NC1 patch cost 0 and NC2 contamination=0 and random-patch block-permutation false-accept <=5% with AUROC 0.4-0.6 trajectory-grouped",
+      "observed": null,
+      "pass": null
+    },
+    "C3_BYTE_IDENTITY_GATE": {
+      "id": "C3",
+      "threshold": "B-RUNTIME-BYTE-IDENTITY pre-perturbation byte identity >=0.99 on real nginx (oracle-free greedy decode) and mutation detected post-perturbation",
+      "observed": null,
+      "pass": null
+    },
+    "C4_SUCCESS_GATE": {
+      "id": "C4",
+      "threshold": "repair success >=0.80 pooled AND >=0.70 per family on TEST (Wilson CI reported, trajectory-grouped)",
+      "observed": null,
+      "pass": null
+    },
+    "C5_COST_GATE": {
+      "id": "C5",
+      "threshold": "mean repair tokens <0.50*B-COLD AND mean browser <0.40*B-COLD AND mean verification steps <=2 on TEST (bootstrap CI of ratio must be < threshold)",
+      "observed": null,
+      "pass": null
+    },
+    "C6_CONTAMINATION_GATE": {
+      "id": "C6",
+      "threshold": "contamination <0.10 on TEST (N>=24 unrelated, block-permutation)",
+      "observed": null,
+      "pass": null
+    },
+    "C7_VERIFICATION_GATE": {
+      "id": "C7",
+      "threshold": "verification AUROC >=0.75 and precision >=0.80 at TRAIN threshold on TEST (trajectory-grouped)",
+      "observed": null,
+      "pass": null
+    },
+    "C8_AMORTIZED_GATE": {
+      "id": "C8",
+      "threshold": "amortized cost at n_reuses=10 (repair+verification+10*retrieval) < B-COLD cost (both tokens and browser) on TEST means with trajectory-grouped CI",
+      "observed": null,
+      "pass": null
+    }
+  },
+  "artifacts": [],
+  "observations": [
+    "EXPERIMENT BLOCKED: No LLM API key available for real LLM agent execution (gpt-4o-mini required per frozen spec)",
+    "Required infrastructure: OpenAI API key (or equivalent) for real token counting and model calls with gpt-4o-mini",
+    "Required infrastructure: nginx 1.24.0 reverse proxy configuration with proxy_cache for HIT/SWR/SIE/304 stages",
+    "Required infrastructure: Flask 3.1.3 + PyJWT HS256 backend with SQLite fixture",
+    "Required infrastructure: Playwright Chromium for real browser interactions (installed v1.63.0)",
+    "Frozen spec (measurement_validity #4, #8) mandates: real LLM agent with recorded model id, temperature, max_tokens, provider, per-call token counts; real Playwright execution; real verify() on actual DOM/response state",
+    "Without LLM API, cannot measure: repair tokens, cold tokens, retrieval tokens, verification tokens, browser interactions, verification AUROC/precision, contamination on real registry, amortized cost economics",
+    "This is an infrastructure failure, not a scientific negative result. Per EXPERIMENT_PACKET.md §9: 'Operational failure is not scientific falsification.'",
+    "Per AGENTS.md Failure discipline: 'If a required substrate, model, dataset or tool is unavailable, write the exact failure and the smallest next action that could unblock it.'",
+    "Smallest next action: Provide OPENAI_API_KEY environment variable, then resume from frozen design (spec/prereg/freeze immutable)"
+  ],
+  "validity_notes": [
+    "INFRASTRUCTURE_FAILURE: No LLM API key available in execution environment. The frozen spec (measurement_validity #4) mandates 'tokens = sum(prompt_tokens + completion_tokens) from real LLM API responses (record model id gpt-4o-mini, temperature 0.0, max_tokens, provider, per-call token counts, 15-step budget enforcement)'. This cannot be satisfied without an API key.",
+    "The experiment requires a real LLM agent (gpt-4o-mini or equivalent, recorded id) as specified in measurement_validity #8: 'Repair LLM is a real model... not a heuristic; browser interactions are Playwright-executed not counted simulation'.",
+    "nginx 1.24.0 is available on the system (Ubuntu). Flask 3.1.3 and PyJWT 2.x are installable via pip. Playwright 1.63.0 Chromium is installed.",
+    "The missing LLM API is a hard blocker for C1 (PC2 on real pipeline), C2 (NC on real pipeline with block-permutation), C4 (repair success on real LLM), C5 (real token/browser costs with trajectory-grouped bootstrap CIs), C6 (real contamination measurement), C7 (real verification AUROC with TRAIN-calibrated threshold), and C8 (real amortized economics with real retrieval costs).",
+    "Per EXPERIMENT_PACKET.md §9: 'Operational failure is not scientific falsification. A later retry must resume from the last valid checkpoint and must not rewrite frozen scientific inputs.'",
+    "Per AGENTS.md: 'If a required substrate, model, dataset or tool is unavailable, write the exact failure and the smallest next action that could unblock it. Do not weaken a preregistration after seeing outcomes.'",
+    "Frozen inputs remain hash-verified: request.json sha256=f8f5e93e67c4b9ef3d764198c69d8ae4a9989c4c9dd6fdba852f0ca4606bc9d8, spec.json sha256=2657ca935665f17867759544bcbef08386116872247caec0b2a95707ef446304, prereg.md sha256=330247b2acb7abcba979ec9d21a10571472d2ec09bb8c06749e64b99d9c033f0, matching freeze.json hashes. No post-freeze mutation occurred.",
+    "This experiment adds zero real measurements for C-DELTA-REPAIR. Claim ceiling remains bounded by parent simulation ceiling (EXP-GRAPH-35741890679, audit REVISE, SIMULATION_NOT_MEASUREMENT): deterministic heuristic on 36 instances showed pooled repair success 0.833 but token ratio 0.613 CI [0.569,0.661] failing <0.50 and amortized 2.1x cold failing — audit explicitly limited that ceiling to 'simulation only'. C-DELTA-REPAIR remains HYPOTHESIS on real nginx HIT-cache localhost substrate with real LLM+Playwright+verify()."
+  ],
+  "unresolved": [
+    "Obtain LLM API key (OpenAI gpt-4o-mini or equivalent) for real model calls with token counting",
+    "Configure nginx reverse proxy with proxy_cache for HIT/SWR/SIE/304 stages matching runtime validated substrate (EXP-RUNTIME-35611612543)",
+    "Deploy Flask 3.1.3 + PyJWT HS256 backend with perturbation endpoints (F-DOM: DOM attr/text, F-ENDPOINT: param/header, F-CACHE: Cache-Control/ETag)",
+    "Implement real repair agent execute_delta_repair_real.py with real LLM calls (record model/temperature/tokens), real Playwright execution (goto/click/fill/evaluate/fetch with trace logs), and real verify() on actual DOM/response state (selector existence via Playwright evaluate, status/header/body match) with independent oracle for false accepts",
+    "Run 48 perturbation instances (3 families F-DOM/F-ENDPOINT/F-CACHE x2 variants x8 seeds) with N>=24 unrelated mechanisms for contamination",
+    "Execute family-stratified TRAIN24/TEST24 split (TRAIN seeds 0-3, TEST seeds 4-7 per variant), registry clone isolation, cache purge per instance, perturbation manifest holdout (never in repair prompt), verification threshold calibration on TRAIN only",
+    "Compute all metrics and apply frozen decision rule C1-C8 exactly on TEST data with trajectory-grouped uncertainty (Wilson CIs for rates, instance-block bootstrap 2000 resamples for cost ratios, block-permutation for verification/retrieval nulls)",
+    "If C1-C3 PASS and C4-C8 all PASS on TEST: advance C-DELTA-REPAIR HYPOTHESIS->EXPERIMENTAL (VALIDATED candidate) on localhost single-resource. If any C4-C8 fails while C1-C3 PASS: mark bounded FALSIFIED-IN-SETTING for single-resource radius and pivot per product_consequence_negative."
+  ]
+}

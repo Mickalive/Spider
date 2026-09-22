@@ -1,0 +1,34 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-FRONTIER-35752577234",
+  "lane": "frontier",
+  "decision": "SURVIVES_CURRENT_TEST",
+  "claim_updates": [
+    {
+      "claim_id": "C-SEMANTIC-RESOLVE",
+      "status": "EXPERIMENTAL",
+      "reason": "SURVIVES_CURRENT_TEST per frozen decision_rule: all 7 conditions PASS on valid non-oracle measurement. Alias-OOD RECONSTRUCTION 30/30 correct (1.0, Wilson CI [0.886,1.0], binomial p=1e-30 vs 0.10 null, McNemar p=1.19e-07 vs B-EXACT-MATCH 0/30), false_accept 0.0 (diff 1.0 vs B-VERBATIM-REPLAY 1.0, McNemar p=1.19e-07), per-family 10/10 each incl held-out 9/9 (1.0), exact-match 12/12 (1.0, CI [0.757,1.0]), no-applicable UNKNOWN precision 1.0 (12/12, false 0), empty 6/6, ECE 0.0738 (5 bins, bootstrap CI [0.066,0.081]) precision 1.0 >=0.85 and ECE <=0.15, not dominated by RAG (best RAG 0.0 vs 1.0). Controls PC-EXACT-MATCH, NC-NO-APPLICABLE, NC-EMPTY-REGISTRY all PASS. Audit PASS confirms no oracle leak (signature intent,derived_context,candidates,params only url/method/path/query/segments; forbidden keys only in hidden_expected), no hardcoded confidence (softmax temp 0.15 + jitter, varies 0.05-0.97, gated <0.80), registry leak 0/30, held-out genuine structural inversion not table lookup, metrics recomputed exactly. Bounded ceiling: synthetic URL template aliasing on three families (query-param, path-rewriting, server-routing) with minimal derived dict, rule-based proxy only; no live-browser/WebShop/ALFWorld, synthetic-to-real gap remains dominant unknown. Prior MEASUREMENT_INVALID (EXP-FRONTIER-35741928625 oracle 1.0/ECE 0.055) repaired. C-SEMANTIC-RESOLVE advances to EXPERIMENTAL at rule-based proof-of-concept ceiling, not VALIDATED/PRODUCT_CORE until learned GRPO/System-One and live-browser replication."
+    }
+  ],
+  "product_action": "NO_PROMOTION — synthetic proof-of-concept only. Do not promote reconstruction adapter to Product Core. Validated only as rule-based proxy on synthetic alias families; requires learned GRPO/System-One replication with model-derived confidence and live-browser WebShop/ALFWorld validation plus end-to-end verification/repair economics before product decision. Product consequence positive per spec is recommendation to add confidence-gated critique-reconstruct layer after retrieval before execution with verification boundary only after those gates pass.",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "Can a learned GRPO/System-One reconstruction adapter trained to critique/reconstruct the retrieved template from (intent, observation-derived state, retrieved_template) with model-derived calibrated confidence generalize beyond the synthetic URL aliasing proof-of-concept (30/30 rule-based) to live-browser WebShop/ALFWorld aliasing and to orthogonal alias families (header-based, body, auth) with real DOM/observation state, while preserving alias-OOD correct >=0.50 (binomial p<0.05 vs 0.10, McNemar p<0.05 vs exact), false_accept <=0.15 (>=0.15 below verbatim), exact-match >=0.90, UNKNOWN precision >=0.85 and ECE <=0.15, and what are training cost, stability and verification-boundary economics vs the rule-based proxy?",
+  "reason": "Grounded in frozen design (spec.json: measurement_validity forbidding alias_family/query_key/target_prefix/routing_prefix and requiring derived confidence, prereg.md sec4-7 decision_rule S1-S5, freeze.json hashes 5b84d9/8a7c94/cf8bbe), producer evidence (result.json alias_OOD_reconstruction_correct 1.0 30/30 Wilson 0.886-1.0, false 0.0, per-family 1.0 each heldout 9/9, exact 12/12 1.0, no-applicable precision 1.0, ECE 0.0738 bins [18 acc0.0 avg0.058][42 acc1.0 avg0.919], controls PC/NC PASS, observations 30/30/12/12/6, validity_notes synthetic proxy disclosure, unresolved GRPO/live-browser unknowns), and independent audit (audit.json status PASS producer_claim_supported true, validity_findings oracle prohibition satisfied/hardcoded prohibited/leak 0/30/held-out genuine/bimodal ECE disclosed, baseline_findings B-EXACT 0/30 B-VERBATIM 1.0 B-RAG 0/30 all PASS, recomputed_metrics S1-S5 true recomputed alias 1.0 exact 0 verbatim 1.0 heldout 9/9 1.0 ECE 0.0738, claim_ceiling bounded to synthetic URL aliasing rule-based proxy no live-browser synthetic-to-real gap dominant, unresolved perfect-1.0 tight coupling warning). All seven SURVIVES gates S1-S5 plus PC/NC objective thresholds met with strong significance (binomial 1e-30, McNemar 1.19e-07). Controls rule out hallucination/pipeline failure. RAG isolation shows 1.0 vs 0.0 not retrieval artifact. Therefore bounded EXPERIMENTAL advancement is justified, but VALIDATED/PRODUCT_CORE blocked by synthetic ceiling, rule-proxy vs learned gap, and WebShop proxy unavailable (0 tasks). Next question targets highest-information orthogonal gap per director mandate and audit unresolved: learnability and real-Web generalization.",
+  "evidence_refs": [
+    "research/experiments/EXP-FRONTIER-35752577234/request.json",
+    "research/experiments/EXP-FRONTIER-35752577234/spec.json",
+    "research/experiments/EXP-FRONTIER-35752577234/prereg.md",
+    "research/experiments/EXP-FRONTIER-35752577234/freeze.json",
+    "research/experiments/EXP-FRONTIER-35752577234/result.json",
+    "research/experiments/EXP-FRONTIER-35752577234/derived_metrics.json",
+    "research/experiments/EXP-FRONTIER-35752577234/raw_evidence.json",
+    "research/experiments/EXP-FRONTIER-35752577234/tasks.json",
+    "research/experiments/EXP-FRONTIER-35752577234/provenance.json",
+    "research/experiments/EXP-FRONTIER-35752577234/report.md",
+    "research/experiments/EXP-FRONTIER-35752577234/audit.json",
+    "research/frontier/run_genuine_35752577234.py",
+    "codex/claim_state.json:C-SEMANTIC-RESOLVE",
+    "research/experiments/EXP-FRONTIER-35741928625/handoff.json"
+  ]
+}

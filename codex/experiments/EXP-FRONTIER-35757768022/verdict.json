@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-FRONTIER-35757768022",
+  "lane": "frontier",
+  "decision": "SURVIVES_CURRENT_TEST",
+  "claim_updates": [
+    {
+      "claim_id": "C-SEMANTIC-RESOLVE",
+      "status": "EXPERIMENTAL",
+      "reason": "SURVIVES_CURRENT_TEST per frozen decision_rule S1-S5 + PC/NC: genuine rule-based reconstruct_resolve (softmax temp 0.15 + deterministic jitter gated UNKNOWN<0.80, conditioned solely on intent + observation-derived state url/method/url_path/url_query/url_segments/headers_observed/body_observed) achieves alias-OOD 30/30 correct (1.0 Wilson [0.886,1.0] binomial p=1e-30 vs 0.10, McNemar p=1.19e-07 vs B-EXACT-MATCH 0/30), false_accept 0.0 vs verbatim 1.0 gap 1.0 p=1.19e-07, per-family 10/10 each (header ApiKey/X-Reset-Token/Authorization->X-Api-Key/X-Auth-Key/Api-Token, body apiKey/key/token->api_token/authToken/access_key, auth scope/admin_scope/X-Permission->permission/access_scope/X-Scope) including held-out 9/9 novel forms (1.0), exact-match 12/12 1.0, no-applicable UNKNOWN precision 1.0 false 0, empty-registry 1.0, ECE 0.0758 (5 bins, bootstrap 2000 mean 0.0759 CI [0.0666,0.0850]) with S4 precision>=0.85 ECE<=0.15, S5 not dominated (best RAG 0.0 vs 1.0). Controls PC-EXACT-MATCH/NC-NO-APPLICABLE/NC-EMPTY all PASS, leak 0/30, forbidden-key violations 0, confidence std 0.395 (not constant), harness errors 0/510. Audit PASS confirms no oracle leak, no hardcoded confidence, channel isolation non-vacuous (headers-only 20/30, body-only 10/30, url-only 0/30), metrics recomputed exactly. Bounded ceiling: synthetic orthogonal header/body/auth families only with minimal derived dict, rule-based proxy; live BrowserGym 0 tasks (browsergym/playwright ModuleNotFound) and RECONSTRUCTION-LEARNED unavailable (transformers/torch ModuleNotFound) correctly disclosed per frozen spec and do NOT trigger MEASUREMENT_INVALID — claim bounded to synthetic orthogonal. ECE bimodal (18 abstain ~0.058, 42 accept ~0.917, 3 empty bins) limits transfer; synthetic observation tautologically encodes answer (bound then parse back), 1.0 reflects trivial copy of observed credential key via generic adopt-any-observed-key logic, not robustness to real DOM/AX noise. Prior EXPERIMENTAL (EXP-FRONTIER-35752577234 30/30 URL-only) expanded to orthogonal families but remains EXPERIMENTAL, not VALIDATED/PRODUCT_CORE until learned GRPO 3-seed and live-browser replication with economics."
+    }
+  ],
+  "product_action": "NO_PROMOTION — synthetic orthogonal proof-of-concept only. Do not promote reconstruction adapter to Product Core. Supports reconstruction layer after retrieval with confidence-gated UNKNOWN for tested header/body/auth alias families only; requires learned GRPO/System-One 3-seed replication (within 0.10 correct, 0.05 ECE) and live-browser WebShop/ALFWorld at 1280x720 with real CDP AX trees plus end-to-end retrieval+reconstruction+verification economics before product decision.",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "Can a learned GRPO/System-One critique-reconstruct adapter trained only on synthetic orthogonal train split (3 seeds, model-derived calibrated confidence) match the rule-based proxy on synthetic orthogonal header/body/auth alias-OOD (within 0.10 correct, 0.05 ECE) and generalize to live-browser WebShop/ALFWorld at BrowserGym 0.14.3 1280x720 with real CDP AX trees on header/body/auth aliasing including mixed multi-channel (header+body+query) within one request and production-SPA heterogeneity, preserving alias-OOD correct >=0.50 (binomial p<0.05 vs 0.10, McNemar p<0.05 vs exact), false_accept <=0.15 (>=0.15 below verbatim), exact-match >=0.90, UNKNOWN precision >=0.85, ECE <=0.15, with reported training cost/stability and retrieval+reconstruction+verification economics vs rule proxy and vs RAG?",
+  "reason": "Grounded in frozen design (request.json director_mandate REOPEN C-SEMANTIC-RESOLVE with agent priors and comparative reasoning, spec.json hypothesis/falsifier/baselines/decision_rule S1-S7 incl genuine non-oracle measurement_validity forbidding alias_family/query_key/target_prefix/header_key/body_field/auth_scope and requiring derived confidence via softmax+jitter, prereg.md sec4-7 thresholds, freeze.json hashes e781f68/09abb6a/fac6865), producer evidence (result.json alias_OOD 30/30 1.0 Wilson 0.886-1.0 false 0 per-family 10/10 heldout 9/9 exact 12/12 no-applicable precision 1.0 ECE 0.0758 bins 18/42 std 0.395 channel isolation URL 0/30 BODY 10/30 HEADERS 20/30 controls PC/NC PASS, leak 0/30, forbidden 0, live attempted 0 healthy 0 availability disclosure B-RAG-EMBED/LEARNED unavailable, observations 60 tasks 420 eval rows 0 harness errors, validity_notes bimodal/synthetic/minimal dict/intent-held-equal disclosure, unresolved live/learned/mixed-channel), and independent audit (audit.json status PASS producer_claim_supported true required_fixes [], validity_findings V1 oracle prohibition PASS V2 hardcoded confidence PASS std 0.395 V3 leak 0/30 PASS V4 synthetic easiness info tautology disclosure V5 bimodal ECE info V6 controls PASS PC_NC V7 sample adequacy N>=24 V8 live/learned unavailability properly bounded, baseline_findings B1 exact 0/30 verbatim 1.0 bounded B2 TFIDF 0/30 strong baseline B3 channel non-vacuous PASS B4 baseline limitation info, recomputed_metrics exact match producer 30/30 0/30 1e-30 1.19e-07 9/9 12/12 precision 1.0 empty 1.0 ECE 0.0758, claim_ceiling bounded to synthetic orthogonal rule-based header/body/auth with held-out, no live/learned/production-SPA/multi-channel inference). All seven SURVIVES gates S1-S5 plus PC/NC objectively met with strong significance; controls rule out hallucination; RAG isolation shows not retrieval artifact; synthetic tautology and bimodal ECE disclosed as do-not-assume. Therefore bounded EXPERIMENTAL advancement justified, not VALIDATED/PRODUCT_CORE. Next question targets highest-information remaining gaps per audit unresolved and director mandate: learnability and synthetic-to-real gap with mixed-channel and production heterogeneity.",
+  "evidence_refs": [
+    "research/experiments/EXP-FRONTIER-35757768022/request.json",
+    "research/experiments/EXP-FRONTIER-35757768022/spec.json",
+    "research/experiments/EXP-FRONTIER-35757768022/prereg.md",
+    "research/experiments/EXP-FRONTIER-35757768022/freeze.json",
+    "research/experiments/EXP-FRONTIER-35757768022/result.json",
+    "research/experiments/EXP-FRONTIER-35757768022/derived_metrics.json",
+    "research/experiments/EXP-FRONTIER-35757768022/raw_evidence.json",
+    "research/experiments/EXP-FRONTIER-35757768022/tasks.json",
+    "research/experiments/EXP-FRONTIER-35757768022/provenance.json",
+    "research/experiments/EXP-FRONTIER-35757768022/report.md",
+    "research/experiments/EXP-FRONTIER-35757768022/audit.json",
+    "research/frontier/run_genuine_35757768022.py sha 8168cd88dbaeb3ae4b280eba33e88e286389c2f225fd9828017d3377a7437343",
+    "research/experiments/EXP-FRONTIER-35752577234/verdict.json",
+    "research/experiments/EXP-FRONTIER-35752577234/handoff.json",
+    "codex/claim_state.json:C-SEMANTIC-RESOLVE"
+  ]
+}
