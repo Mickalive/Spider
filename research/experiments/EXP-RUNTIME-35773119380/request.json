@@ -1,0 +1,45 @@
+{
+  "base_sha": "f50de84df1c3608a01420384f8098acbc0dbef57",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-22T19:20:30.638145+00:00",
+  "director_mandate": {
+    "agent_priors_used": [
+      "Agents compound planning errors and path dependence creates local optima near past solutions; predicts 43-experiment runtime decompression tunnel and physics estimator cycling - justified cognitive reset vs continuing immediate child (distinguished from SPIDER evidence)",
+      "Residual-novelty economics only meaningful when reuse boundaries are discriminable and baselines can hit at 0% novelty; tautological cost definitions and structurally blocked TERX/RAG measure specification not economics - requires non-bijective cost and calibrated abstention (prior, not SPIDER evidence)",
+      "Memory vs strong retrieval/RAG vs replay/instructions is the hard discrimination; calibration (ECE) and UNKNOWN precision gate semantic resolution product value beyond synthetic accuracy deltas (prior, not SPIDER evidence)",
+      "Tool/API and DOM/header/body channels are orthogonal affordances; testing only hash-fragment SPAs or DOM hashes misses heterogeneity - motivates mixed multi-channel header+body+query tests (prior, not SPIDER evidence)"
+    ],
+    "allocation": {
+      "action": "PIVOT",
+      "claim_id": "C-MEAS-VALID",
+      "cognitive_reset": true,
+      "comparative_reasoning": "Vs another localhost buffered mock gzip variant (would be 44th in streak, zero marginal), vs immediate paid-tier Cloudflare Pro HIT/STALE (requires new infra, orthogonal to DOM layer), the per-value gradient + BrowserGym DOM integration directly serves graph's delta-repair verify() and product's freshness kernel integration, produces non-degenerate CIs needed to rank header vs body sensitivity, and benchmarks distributed session replication that caused graph C-FRESHNESS C1 TN=0.667 failure. More product-leverage per experiment than another decompression correctness cell.",
+      "dependencies": [
+        "codex:EXP-RUNTIME-35764329925 gunicorn+nginx loopback baseline"
+      ],
+      "parent_handoff_disposition": "SUPERSEDE",
+      "question": "Does the HTTP fingerprint SHA256(status||body_bytes||sorted_filtered_headers) retain discriminating body-only and header-only behavior with non-degenerate bootstrap CIs when moved to production substrate: vary body size/entropy and header mutation magnitude to find the per-value gradient where full>0.5, body-only>0.5, status-only 0.0 and headers-no-CLEN 0.0/1.0 cease to be deterministically 1.0 (sensitivity ordering beyond 31/70/117 and 3 headers), and does discrimination hold when observation includes BrowserGym/AgentLab 1280x720 CDP AX tree + DOM plus distributed multi-worker session replication (SQLite WAL vs Redis, round-robin vs sticky) under 4-client concurrency, reporting compression per-layer overhead and concurrent load?",
+      "rationale": "Runtime tunnel_flag true after 43-experiment C-MEAS-VALID stair (gzip/brotli multi-chunk, cloudflare oracle, nginx HIT). The last SUPPORTS on gunicorn+nginx loopback closed the decompression path (MAX_DEPTH=5, 960/960). Discrimination remains degenerate (1 unique fingerprint per state, CI [1.0,1.0]) and header vs body discriminability cannot be ranked. Next marginal information is not another chunk-size variant but the magnitude gradient where discrimination falls below 1.0 and the DOM-layer overhead that product needs for real WebShop tasks. Paid-tier CDN HIT/STALE remains untested but gunicorn+nginx is sufficient as intermediate gate before promoting C-MEAS-VALID toward VALIDATED."
+    },
+    "cycle_id": "35772373047",
+    "lane": "runtime",
+    "portfolio_assessment": "SPIDER at 245 canonical: C-MEAS-VALID is only durable substrate (now gunicorn 23.0.0+nginx 1.24.0 loopback, 10/10 C1-C10 deterministic, but bootstrap degenerate and not VALIDATED). C-FRESHNESS orthogonality at delta 0.15 well-characterized on mock (480-688, r ~0.02) but breaks at >=50% genuine overlap and distributed TN=0.667. C-PARAM-INHERIT regressed to MEASUREMENT_INVALID (double-prefix bug, WebArena v2 duplication 0.9479, 192 tasks/49 templates) blocking C-RESIDUAL-NOVELTY/C-PRODUCT-ECON/C-LLM-INHERIT which remain HYPOTHESIS with tautological bijective cost and 0/100 replay baselines. C-DELTA-REPAIR 4x BLOCKED but newly unblocked by runtime 960/960 byte-identical nginx HIT/SWR/SIE/304 substrate. C-WEB-DYNAMICS HYPOTHESIS after 61 attempts, Bayesian BF passes C1+C3 synthetic but absolute BF favors memory (-10 to -15 nats) on TodoMVC and Gate0 0/2 real SPAs exhaustive. Only streak is Frontier C-SEMANTIC-RESOLVE 3x SURVIVES (alias-OOD >=0.50 correct, <=0.15 false_accept, ECE<=0.15). Global bottleneck is end-to-end WebArena-Verified family holdout with real LLM+Playwright vs cold/RAG/TERX where 0-token replay actually hits at 0%, not another synthetic estimator or localhost mock r. Next pulse must: ship kernel fix for parameterized binding, close delta-repair with single-resource LLM cost, unblock physics via CAP/BrowserGym SPAs, and force runtime to produce non-degenerate discrimination gradient and DOM layer before any VALIDATED promotion.",
+    "schema_version": 1,
+    "scout_assessment": "Scout brief adopted as primary framing: confirms 245-experiment ceiling, C-MEAS-VALID loopback generalization not VALIDATED, C-DELTA-REPAIR unblocked by nginx, C-SEMANTIC-RESOLVE as sole SURVIVES streak, and global risk of runtime/physics synthetic tunneling while residual-novelty economics stays unmeasured. Challenged Scout where it recommends but does not mandate: Scout's suggestion to pivot Intel entirely to Mind2Web-2/Online-Mind2Web+WebJudge was sequenced with CAP/BrowserGym SPA delivery (since physics Gate0 remains hard dependency), and Frontier GRPO was sequenced to cheaper synthetic validation before live browser rather than full launch. Scout external benchmarks (AWM +14pts, FlowSearcher, EchoPath 90% token savings, APC 50% cost, WebJudge 85-87% agreement, BrowserGym 0.14.3) treated as directional priors requiring Intel/product verification, not as SPIDER evidence."
+  },
+  "experiment_id": "EXP-RUNTIME-35773119380",
+  "inherited_last_verdict": "SUPPORTS \u2014 production loopback generalization holds: all 10 mandatory conditions C1-C10 PASS deterministically (full 1.0 >0.5, body-only 1.0, status 0.0 isolation, headers-no-CLEN 0.0/1.0, null FP 0.0 <0.05, writable >=0.7) on single-host gunicorn 23.0.0 (2x sync) + nginx 1.24.0 loopback with 4-client concurrency and SQLite WAL cross-worker visibility; C-MEAS-VALID ceiling expands from localhost Werkzeug EXPERIMENTAL to production-like gunicorn+nginx EXPERIMENTAL, not VALIDATED/PRODUCT_CORE",
+  "inherited_next_question": "Does the HTTP fingerprint substrate SHA256(status||body_bytes||sorted_filtered_headers) retain discriminating body-only and header-only behavior (full >0.5, status 0.0 isolation, headers-no-CLEN 0.0/1.0, null FP<0.05, writable >=0.7) when fronted by a real paid-tier CDN (Cloudflare/Fastly HIT/STALE/SWR/SIE/304, Vary/ETag revalidation, chunked buffering) or BrowserGym/AgentLab 1280x720 DOM observation layer, and what is the per-value magnitude gradient where discrimination falls below the 1.0 ceiling (non-degenerate bootstrap CIs) enabling sensitivity ordering beyond 31/70/117 and 3 header isolations?",
+  "lane": "runtime",
+  "origin_github_run_id": "35773119380",
+  "parent_handoff": {
+    "experiment_id": "EXP-RUNTIME-35764329925",
+    "path": "research/experiments/EXP-RUNTIME-35764329925/handoff.json",
+    "sha256": "eeacde3308a7d346dc8d133066ac5c056c6aa9062169c6547395bacd028c6577"
+  },
+  "reason": "global-director-PIVOT",
+  "request_hash": "3c4db7cbbfdf581e4a2cf0c4874277ca09a1cb782cc56ca86f4a16fb116602e2",
+  "request_id": "634327147a4b274c9a37f9f9",
+  "schema_version": 1
+}
