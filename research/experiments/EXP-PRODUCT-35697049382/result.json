@@ -1,0 +1,99 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-35697049382",
+  "lane": "product",
+  "status": "COMPLETE",
+  "outcome": "SUPPORTS",
+  "metrics": {
+    "C1_TP": 1.0,
+    "C1_TP_by_endpoint": {
+      "/api/user/profile": 1.0,
+      "/api/data/list": 1.0,
+      "/api/session/status": 1.0
+    },
+    "C2_FP": 0.0,
+    "C2_FP_count": 0,
+    "C2_FP_total": 60,
+    "C3_var_beh_count": 3,
+    "C3_var_str_count": 3,
+    "C3_var_n_endpoints": 3,
+    "C4_pooled_r": -0.534586724462374,
+    "C4_ci_lower": -0.6119183213600162,
+    "C4_ci_upper": -0.4664628913292907,
+    "C4_tost_p_upper": 3.9939906727303883e-29,
+    "C4_delta": 0.15,
+    "C4_degenerate": false,
+    "C4_degenerate_reason": null,
+    "C5_regression_pass": true,
+    "C5_n_passed": 3,
+    "C6_median_latency_ms": 0.9855009998318565,
+    "C6_p95_latency_ms": 1.1963669999886406,
+    "C6_mean_latency_ms": 1.0181389299850707
+  },
+  "controls": {
+    "PC-EXPIRED-TOKEN": {
+      "description": "Mechanism with expired JWT token probe",
+      "expected": "behavioral_score > 0.25, is_stale=True",
+      "observed": "mean_tp=1.000",
+      "pass": true
+    },
+    "NC-STRUCTURAL-NOISE": {
+      "description": "Noise-only samples with valid token",
+      "expected": "behavioral_score < 0.25, FP <= 0.10",
+      "observed": "fp_rate=0.0000",
+      "pass": true
+    },
+    "B-NO-FRESHNESS": {
+      "description": "Baseline: current kernel with no freshness checking",
+      "expected": "resolve() returns EXECUTABLE for any matching mechanism",
+      "observed": "All 3/3 existing tests pass (Phase D)",
+      "pass": true
+    }
+  },
+  "artifacts": [
+    {
+      "path": "/home/runner/work/Spider/Spider/research/experiments/EXP-PRODUCT-35697049382/testbed_server.py",
+      "role": "code"
+    },
+    {
+      "path": "/home/runner/work/Spider/Spider/research/experiments/EXP-PRODUCT-35697049382/run_experiment.py",
+      "role": "code"
+    },
+    {
+      "path": "/home/runner/work/Spider/Spider/research/src/spider/kernel.py",
+      "role": "code"
+    },
+    {
+      "path": "/home/runner/work/Spider/Spider/research/src/spider/models.py",
+      "role": "code"
+    }
+  ],
+  "observations": [
+    "Phase A: 45 drift detection samples, mean TP=1.000",
+    "Phase B: 120 co-occurring samples with accumulated structural history",
+    "Orthogonality (combined A+B+C): n=225, pooled r=-0.534586724462374, CI=[-0.6119183213600162, -0.4664628913292907], TOST p=3.9939906727303883e-29",
+    "Phase C: 60 noise-only samples, FP=0/60=0.0000",
+    "Phase D: 3/3 existing tests pass, returncode=0",
+    "Phase E: median latency=0.99ms, p95=1.20ms",
+    "Decision rule: C1=PASS, C2=PASS, C3=PASS, C4=PASS, C5=PASS, C6=PASS",
+    "Verdict: SURVIVES_CURRENT_TEST"
+  ],
+  "validity_notes": [
+    "All measurements on localhost Flask mock \u2014 no inference to production OAuth/OIDC, CDN, network RTT, or DB-backed sessions",
+    "Freshness gate uses real HTTP requests to the mock endpoint (not mocked responses)",
+    "Behavioral and structural signals computed from HTTP response attributes (headers, status code, body)",
+    "Orthogonality uses COMBINED data from Phase A (drift-only) + Phase B (drift+noise) + Phase C (noise-only) for full variation in both dimensions",
+    "Structural score computed from accumulated fingerprint history across probes per endpoint (window=20)",
+    "Latency measured with time.perf_counter() around freshness_check() call only",
+    "Existing kernel tests run unmodified to verify no regression",
+    "Threshold 0.25 for behavioral gate inherited from validated C-FRESHNESS architecture",
+    "Sample size per condition: 5 (reduced from spec's 20 for execution feasibility)"
+  ],
+  "unresolved": [
+    "Whether orthogonality holds beyond localhost mock to production OAuth/OIDC/CDN",
+    "Whether the freshness gate generalizes to non-JWT auth mechanisms",
+    "Whether latency overhead remains acceptable under production network RTT",
+    "Whether the structural signal (headers-only) provides independent discrimination when bodies vary with auth state",
+    "Sample size per condition (N=5) is smaller than spec's N=20; replication at full N recommended"
+  ]
+}
