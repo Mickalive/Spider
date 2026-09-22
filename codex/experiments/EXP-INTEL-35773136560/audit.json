@@ -1,0 +1,134 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-35773136560",
+  "lane": "intel",
+  "status": "PASS",
+  "producer_claim_supported": true,
+  "required_fixes": [
+    "Frozen spec versioning error: agentlab==0.14.3 does not exist on PyPI (available 0.3.0-0.4.2); PC1_BROWSERGYM_LIVENESS_0143 cannot pass regardless of network. Must correct agentlab pin to compatible version before retry.",
+    "CAP 420-task dump exhaustive search at tried HF paths proves non-existence there but not globally; Scout reconnaissance needed for alternate HF namespace (private/gated, different capitalization, direct URL) or alternative acquisition.",
+    "Mind2Web-2/Online-Mind2Web fallback: osunlp/Mind2Web only exposes train split via datasets library; test_website/test_domain splits require either test.zip LFS download (ABANDONED per SUPERSEDE) or Online-Mind2Web.json direct download via non-datasets loader (HF dataset file API).",
+    "WebJudge-7B calibration: model listed on HF (osunlp/WebJudge-7B, 38GB) but not locally loaded; local spot-check on >=20 tasks required for PC6_WEBJUDGE_CALIBRATION.",
+    "Docker + Playwright: am1n3e/webarena-verified-shopping@sha256:3e8cb9b945 not available at localhost:7770; playwright not installed. Both required for H2A Docker full-DOM enumeration."
+  ],
+  "validity_findings": [
+    "Gate0 infrastructure precedence correctly enforced: 0 real SPAs qualifying across exhaustive joint enumeration (BrowserGym 4 envs x3 retries, CAP exhaustive HF search, Docker branch) maps to MEASUREMENT_INVALID substrate_unavailable per frozen decision_rule, not FALSIFIED. Synthetic gate_passing_like passing all 5 gates validates pipeline sensitivity but does not establish production SPA gate-passing.",
+    "Frozen spec versioning error is binding: agentlab==0.14.3 does not exist on PyPI (pip dry-run confirms 'No matching distribution found'), making PC1_BROWSERGYM_LIVENESS_0143 impossible to satisfy even with perfect network. This is a design-time error frozen in spec.json/prereg.md, not an execution failure.",
+    "CAP exhaustive search is genuinely exhaustive: 15 HF dataset load attempts (5 names x3 retries: ServiceNow/cap, cap, agentlab/cap, ServiceNow/CAP, browsergym/cap) all DatasetNotFoundError + HF API list_datasets(search='cap') returning 20 caption datasets (capybara, captions, etc.) proving search coverage + 5 filesystem paths checked. No CAP dump found outside ServiceNow/cap.",
+    "Mind2Web-2 fallback correctly ordered: H2B MEASUREMENT_INVALID triggered H2C attempt. osunlp/Mind2Web found with only train split (1009 rows); no test_website/test_domain splits accessible via datasets library. Online-Mind2Web listed on HF but not loaded. test.zip 567.7MB LFS on 17ece8eb ABANDONED per Director SUPERSEDE (not re-attempted). PC5_MIND2WEB2_SPLIT_INTEGRITY and PC6_WEBJUDGE_CALIBRATION both FAIL => H2C MEASUREMENT_INVALID.",
+    "Docker H2A auxiliary axis correctly NOT blocking: prereg declares H2A optional augmentation; Gate0 SPA census does not depend on it. Docker unavailable after 3 retries (connection refused, image not found, playwright missing) => MEASUREMENT_INVALID for ranking agreement only.",
+    "All synthetic demonstrations correctly marked is_synthetic: true and excluded from decision-valid metrics. gate0_table.json summary explicitly states 'Only real candidates count for Gate0 decision per frozen rule; synthetic candidates are pipeline validation only'. CAP synthetic overlap=1.0 is homogeneous generation artifact (uniform random text) disclosed as not decision-valid.",
+    "Leakage definition correctly implemented: valid-only leakage = count(href && normalized_href==normalized_after) / count(href) per frozen spec. Synthetic link_share=0.27 matches prior census. Real leakage unmeasured due to 0 transitions.",
+    "No post-hoc threshold relaxation: all frozen thresholds applied strictly (titles>=2, H>0.2, leak_validOnly<40%, NL>=50, strata>=10, singleton<50%, overlap>=0.15, excess>=0.10, CI lower > threshold+0.05). No synthetic SPA substituted for real.",
+    "Representation loss disclosed: BrowserGym task-to-site mapping unverified (substrate unavailable); CAP TF-IDF field choice (instruction+action target) and k-means granularity disclosed via synthetic demo; Docker initial viewport only (no scroll) claimed but not measured; WebJudge 85-87% is prior not locally calibrated; Mind2Web site overlap 0 between splits not verified.",
+    "Bootstrap degeneracy acknowledged: synthetic CAP bootstrap CI [1.0,1.0] degenerate at ceiling due to homogeneous synthetic data; disclosed as artifact of generation."
+  ],
+  "baseline_findings": [
+    "B1_TRUNCATED_FIRST_20: REJECTED vacuous baseline (logistic L=0.5654, Hill h=20 at bound) retained; no new full-DOM measurement to discriminate. Status NOT_APPLICABLE (Docker H2A not executed).",
+    "B2_CONSTANT_NULL_05654: Constant null F(n)=0.5654 retained as REJECTED; no F_full measured to test. Status NOT_APPLICABLE.",
+    "B3_MIND2WEB_COARSE_033: Coarse 33-mechanism diagnostic (0.8139 vs 0.998 excess -0.184) correctly retained as REJECTED invalid-control demonstration. Status PASS.",
+    "B4_SHUFFLE_NULL: Website-label shuffle null synthetic demo shows pipeline works (shuffle_mean=0.074, p95=0.143, excess=0.926) but real CAP shuffle not executed (MEASUREMENT_INVALID). Status NOT_APPLICABLE.",
+    "B5_STAGEHAND_CACHE: Simulated hit_rate=0.50, latency=532ms, tokens_saved=173600 on 20 trajectories. Real Stagehand not executed (BrowserGym unavailable). Status PASS (descriptor only).",
+    "B6_SPIDER_2SITE: WebArena-Verified pin reused correctly (812 tasks, 192 shopping, duplication 0.9479). Status PASS.",
+    "B7_RETRIEVAL_RAG_STRONG: Disclosure only, not executed. Status PASS.",
+    "B8_ONLINE_MIND2WEB_136LIVE: Online-Mind2Web HF listed but not loaded; no live-site verification. Status NOT_APPLICABLE.",
+    "B9_WEBJUDGE_7B_CALIBRATION: WebJudge-7B HF listed but not locally calibrated; published 85-87% prior not verified. Status NOT_APPLICABLE.",
+    "PC1_BROWSERGYM_LIVENESS_0143: FAIL - 0/4 envs live after 12 attempts (ModuleNotFoundError browsergym, agentlab 0.14.3 unavailable, playwright not installed). Root cause: frozen spec versioning error (agentlab 0.14.3 does not exist on PyPI). Status FAIL.",
+    "PC2_TITLES_EXISTENCE: FAIL on real substrate (0 titles, no data); synthetic gate_passing_like achieves 3 titles entropy 1.55 PASS. Status FAIL for real.",
+    "PC3_CORRELATED_SYNTHETIC: PASS - BC_PMI 0.923 bits p=0.0 d=37.7 delta=0.923 > 0.5 threshold. Pipeline sensitivity validated. Status PASS.",
+    "PC4_CAP_SPLIT_INTEGRITY: FAIL - CAP dump unavailable after exhaustive search; no manifest to verify avg 3 sites/task 7 actions/task. Synthetic manifest avg 3/7 but not decision-valid. Status FAIL.",
+    "PC5_MIND2WEB2_SPLIT_INTEGRITY: FAIL - only train split (1009 rows) accessible; test_website/test_domain not verified; revision hash unknown. Status FAIL.",
+    "PC6_WEBJUDGE_CALIBRATION: FAIL - WebJudge-7B listed on HF but not locally loaded after 3 retries; no spot-check calibration on >=20 tasks. Status FAIL.",
+    "NC1_LEAKAGE_FILTER_SENSITIVITY: PASS - valid-only leakage reported per candidate (0.0-0.458), link_share 0.27 disclosed. Status PASS.",
+    "NC2_SHUFFLE_NULL_CAP: NOT_APPLICABLE - real CAP shuffle not executed (MEASUREMENT_INVALID); synthetic demo only.",
+    "NC3_RANDOM_ROLE_SUBSET: NOT_APPLICABLE - Docker H2A not executed (Docker unavailable).",
+    "NC4_INDEPENDENT_NOISE_SYNTHETIC: PASS - BC_PMI 0.0 p=1.0 (null_mean equals raw_mi). Pipeline specificity validated. Status PASS.",
+    "NC5_COARSE_DIAGNOSTIC_ONLY: PASS - coarse 33-mechanism retained only as invalid-control demonstration. Status PASS.",
+    "NC6_MIND2WEB2_SHUFFLE_NULL: NOT_APPLICABLE - real Mind2Web-2 shuffle not executed (splits unverified, MEASUREMENT_INVALID).",
+    "NC7_WEBJUDGE_RANDOM: NOT_APPLICABLE - WebJudge not calibrated; random null 0.5 required excess 0.20 not tested."
+  ],
+  "recomputed_metrics": {
+    "H1_SPA_CENSUS_real_qualifying": {
+      "value": 0,
+      "unit": "count",
+      "note": "Confirmed: 3 real candidates all BLOCKED with 0 raw transitions; 1 synthetic qualifying excluded per frozen rule"
+    },
+    "H1_Gate0_synthetic_gate_passing_like": {
+      "unique_titles": 3,
+      "title_entropy_bits": 1.552864805202529,
+      "H_S_next_given_URL_HK3_bits": 1.3906555425297311,
+      "leakage_validOnly": 0.0,
+      "NL": 180,
+      "strata_count_ge2": 12,
+      "strata_count_ge5": 12,
+      "singleton_rate": 0.0,
+      "qualifies": true,
+      "note": "Recomputed from frozen seed 35725763380; all 5 Gate0 thresholds PASS on synthetic DGP"
+    },
+    "H2B_CAP_synthetic_overlap": {
+      "value": 1.0,
+      "ci_lower": 1.0,
+      "ci_upper": 1.0,
+      "shuffle_mean": 0.07395745780998507,
+      "shuffle_std": 0.044471912042338795,
+      "shuffle_p95": 0.14257725041824187,
+      "excess": 0.9260425421900149,
+      "k": 15,
+      "k_half": 7,
+      "k_double": 30,
+      "note": "Recomputed: homogeneous synthetic artifact (uniform random text inflates overlap to 1.0); not decision-valid"
+    },
+    "PC3_CORRELATED_SYNTHETIC": {
+      "bc_pmi_bits": 0.923207422194195,
+      "raw_mi": 0.9853295105956242,
+      "null_mean": 0.06212208840142914,
+      "null_std": 0.024477007565749328,
+      "p": 0.0,
+      "d": 37.71733206006926,
+      "delta": 0.923207422194195,
+      "threshold_bc": 0.5,
+      "pass": true,
+      "note": "Recomputed from frozen seed; pipeline sensitivity validated"
+    },
+    "NC4_INDEPENDENT_NOISE_SYNTHETIC": {
+      "bc_pmi_bits": 0.0,
+      "raw_mi": 0.9413295051475957,
+      "null_mean": 0.9413295051475957,
+      "p": 1.0,
+      "pass": true,
+      "note": "Recomputed from frozen seed; pipeline specificity validated"
+    },
+    "H3_STAGEHAND_baseline": {
+      "hit_rate": 0.5,
+      "hits": 10,
+      "n_trajs": 20,
+      "avg_latency_ms": 532.1489850232882,
+      "tokens_saved_total": 173600,
+      "tokens_saved_per_hit": 17360.0,
+      "note": "Simulated DOM-hash verb cache; real Stagehand not executed due to substrate unavailable"
+    }
+  },
+  "claim_ceiling": "Exhaustive joint enumeration at pinned BrowserGym 0.14.3/Playwright 1.63.0 found 0 qualifying production SPAs (MEASUREMENT_INVALID substrate_unavailable); CAP website-holdout MEASUREMENT_INVALID (dump unavailable outside ServiceNow/cap after exhaustive HF search); Mind2Web-2/Online-Mind2Web fallback MEASUREMENT_INVALID (test_website/test_domain splits unverified, WebJudge-7B uncalibrated); Docker full-DOM MEASUREMENT_INVALID (unavailable). No scientific falsification of C-WEB-DYNAMICS or C-CROSSSITE; both claims remain HYPOTHESIS gated on substrate availability. The synthetic gate_passing_like passing all 5 Gate0 thresholds demonstrates the measurement pipeline is not blind (PC3 PASS), but does not establish that production SPAs satisfying Gate0 exist. The frozen spec versioning error (agentlab==0.14.3 nonexistent on PyPI) is a design-time binding constraint that alone forces MEASUREMENT_INVALID regardless of infrastructure.",
+  "evidence_refs": [
+    "research/experiments/EXP-INTEL-35773136560/artifacts/raw/browsergym_census.json (sha256:8a98eafb95d577297aa000714191e7c289b0c623b78ba645e742e40fe09505fb)",
+    "research/experiments/EXP-INTEL-35773136560/artifacts/raw/gate0_table.json (sha256:d57151856e5f65fb3632105b874fb7448d55b858a1daea41a27a24360efc44fe)",
+    "research/experiments/EXP-INTEL-35773136560/artifacts/raw/cap_manifest.json (sha256:87a7081465d404793b66dd72e815b1c0cc359781993f2a18d094008c6dddcf80)",
+    "research/experiments/EXP-INTEL-35773136560/artifacts/raw/mind2web2_manifest.json (sha256:00411b3db403e3f0fb8c4f114b84ab0764ba25e3f4d214dd3d2a6cc17be1a509)",
+    "research/experiments/EXP-INTEL-35773136560/artifacts/raw/full_dom_locatable_sample.json (sha256:12e5ed54c63c5320437a5b91af4d11a3e0e4d5243ab71b607663b2936730ee07)",
+    "research/experiments/EXP-INTEL-35773136560/artifacts/derived/tfidf_kmeans_meta.json (sha256:fe60b10309b226e0df58add768c111c2cf2f538cdc7ab25bb05c10fa1830a1bb)",
+    "research/experiments/EXP-INTEL-35773136560/artifacts/derived/shuffle_null.json (sha256:f5ca3208435976ae9151cfa30ee5abc27d22604691daab1f343d1ad1182a94e9)",
+    "research/experiments/EXP-INTEL-35773136560/artifacts/derived/mind2web2_tfidf_meta.json (sha256:0729a449165d313073dd35cf7d4f5210607826b1939f5253458374dc1bf86c19)",
+    "research/experiments/EXP-INTEL-35773136560/artifacts/derived/webjudge_calibration.json (sha256:2e8f0245e66364cea7aba6f2af2df094ca9e64c0bdccd57bbf01edbb11f45df1)",
+    "research/experiments/EXP-INTEL-35773136560/artifacts/derived/measurements.json (sha256:1491a5443751b8d02e4f166631db491cf0ff30d94a4299a08302e554b1858b95)",
+    "research/experiments/EXP-INTEL-35773136560/provenance.json"
+  ],
+  "unresolved": [
+    "Whether any of 4 BrowserGym envs at corrected agentlab version (compatible with browsergym-core 0.14.3) at 1280x720 would yield >=2 gate-passing production SPAs if live AX capture succeeded, given synthetic shows jointly achievable but prior 61 experiments found 0 qualifying.",
+    "Whether official CAP 420-task 108-site 24-domain dump exists outside ServiceNow/cap at a different HF path not in exhaustive list (e.g., private/gated repo, different capitalization, direct URL) and would verify avg 3 sites/task 7 actions/task.",
+    "Whether osunlp/Mind2Web test_website/test_domain splits in test.zip (567MB LFS ABANDONED per SUPERSEDE) would yield TF-IDF/k-means overlap>=0.15 excess>=0.10 if LFS were retrieved — declared ABANDONED, not re-attempted.",
+    "Whether osunlp/Online-Mind2Web 136 live sites (HF listed but not loaded via datasets library) would provide spec-compliant holdout with WebJudge-7B 85-87% calibration if loaded via alternative loader (HF dataset file API direct download).",
+    "Whether Docker am1n3e/webarena-verified-shopping full-DOM 21-82 cap-removed enumeration would achieve F_full CI outside 80% vs constant null 0.5654 with NC3 role-subset excess>=0.20.",
+    "Which agentlab version actually provides BrowserGym 0.14.3 compatibility (since 0.14.3 does not exist on PyPI) — version pin in spec appears misspecified, needs upstream correction.",
+    "Whether WebJudge-7B local calibration would achieve 85-87% agreement band on >=20 tasks if model were downloaded (38GB) and executed."
+  ]
+}

@@ -4,7 +4,7 @@ Pre-2.0 canonical memory remains frozen at `archive/spider-codex-ultimate:SPIDER
 
 Canonical Research 2.0 evidence lives in `codex/experiments/<experiment_id>/`.
 Use `codex/index.json` and `codex/claim_state.json` to locate relevant packets; do not load all experiment bodies by default.
-Validated experiments: **239**. Coverage gaps: **0**. Quarantined packets: **0**.
+Validated experiments: **252**. Coverage gaps: **0**. Quarantined packets: **0**.
 
 ## Experiment index
 
@@ -247,8 +247,21 @@ Validated experiments: **239**. Coverage gaps: **0**. Quarantined packets: **0**
 | EXP-PRODUCT-35752564139 | product | MEASUREMENT_INVALID | MEASUREMENT_INVALID | C-PARAM-INHERIT | `ea59075c0a92` |
 | EXP-FRONTIER-35752577234 | frontier | PASS | SURVIVES_CURRENT_TEST | C-SEMANTIC-RESOLVE | `ddf9ac679c05` |
 | EXP-PHYSICS-35756224948 | physics | REVISE | MEASUREMENT_INVALID | C-WEB-DYNAMICS | `8f3dcf1a9de0` |
+| EXP-PRODUCT-35756243655 | product | MEASUREMENT_INVALID | MEASUREMENT_INVALID | C-PARAM-INHERIT | `e1532a3d4a0f` |
 | EXP-GRAPH-35757738658 | graph | BLOCKED | BLOCKED | C-DELTA-REPAIR | `d2c9a28fe830` |
+| EXP-INTEL-35757760689 | intel | REVISE | INCONCLUSIVE – both axes MEASUREMENT_INVALID per frozen gates (Mind2Web Gate0 single train; Docker PC3 count window violated); outcome MIXED mislabeled per audit | C-CROSSSITE, C-PRODUCT-ECON | `5653a0e75662` |
+| EXP-FRONTIER-35757768022 | frontier | PASS | SURVIVES_CURRENT_TEST | C-SEMANTIC-RESOLVE | `0a8d4c0cb7ef` |
 | EXP-GRAPH-35761721514 | graph | BLOCKED | BLOCKED | C-DELTA-REPAIR | `5dda3f5fd716` |
+| EXP-GRAPH-35764315683 | graph | BLOCKED | BLOCKED | C-DELTA-REPAIR | `683944f62ade` |
+| EXP-RUNTIME-35764329925 | runtime | PASS | SUPPORTS — production loopback generalization holds: all 10 mandatory conditions C1-C10 PASS deterministically (full 1.0 >0.5, body-only 1.0, status 0.0 isolation, headers-no-CLEN 0.0/1.0, null FP 0.0 <0.05, writable >=0.7) on single-host gunicorn 23.0.0 (2x sync) + nginx 1.24.0 loopback with 4-client concurrency and SQLite WAL cross-worker visibility; C-MEAS-VALID ceiling expands from localhost Werkzeug EXPERIMENTAL to production-like gunicorn+nginx EXPERIMENTAL, not VALIDATED/PRODUCT_CORE | C-MEAS-VALID | `64931bcca520` |
+| EXP-INTEL-35766523457 | intel | PASS | MEASUREMENT_INVALID substrate_unavailable — Gate0 0/2 real SPAs qualify after exhaustive search; H2A and H2B both MEASUREMENT_INVALID | C-WEB-DYNAMICS, C-CROSSSITE | `7d9ba0ad4682` |
+| EXP-FRONTIER-35766532429 | frontier | PASS | SURVIVES_CURRENT_TEST | C-SEMANTIC-RESOLVE | `436d62d23bcb` |
+| EXP-PRODUCT-35773128019 | product | MEASUREMENT_INVALID | MEASUREMENT_INVALID | C-PARAM-INHERIT | `c5b525970f6d` |
+| EXP-INTEL-35773136560 | intel | PASS | MEASUREMENT_INVALID substrate_unavailable — Gate0 0/3 real SPAs qualify after exhaustive joint BrowserGym 0.14.3/CAP outside ServiceNow/cap/Mind2Web-2/Online-Mind2Web/WebJudge-7B/Docker enumeration; H2B CAP, H2C Mind2Web-2/WebJudge and H2A Docker all MEASUREMENT_INVALID | C-WEB-DYNAMICS, C-CROSSSITE | `093292693457` |
+| EXP-FRONTIER-35773143736 | frontier | PASS | SURVIVES_CURRENT_TEST | C-SEMANTIC-RESOLVE | `ba2035d7a214` |
+| EXP-PHYSICS-35774039080 | physics | PASS | MEASUREMENT_INVALID | C-WEB-DYNAMICS | `5fb2e7789407` |
+| EXP-RUNTIME-35774047385 | runtime | MEASUREMENT_INVALID | MEASUREMENT_INVALID — paid-tier CDN (Cloudflare/Fastly HIT/STALE/SWR/SIE/304, Vary/ETag, brotli/chunked) and BrowserGym/AgentLab 1280x720 substrates unavailable; all 10 mandatory CDN conditions C1_CDN-C10_CDN plus gradients G1/G2 and E1-E3 NOT_MEASURED. Diagnostic origin (gunicorn 23.0.0 2x sync 127.0.0.1:19860 -> nginx 1.24.0 127.0.0.1:19851) ready with deterministic 1.0/0.0 but does not generalize to edge. No evidence for or against CDN claim; ceiling remains at prior single-host gunicorn+nginx loopback EXPERIMENTAL, no VALIDATED or PRODUCT_CORE promotion. | C-MEAS-VALID | `aa156486fbdc` |
+| EXP-PRODUCT-35777355953 | product | PASS | SURVIVES_CURRENT_TEST — product kernel port SURVIVES synthetic-only ceiling: 40/40 pooled alias-OOD correct (Wilson [0.912,1.0], binomial p=1e-40 vs 0.10, McNemar p=6.98e-10 vs B-EXACT-MATCH 0/40), orthogonal 30/30 and mixed 10/10 and held-out 9/9 and per-family 10/10 each with false_accept 0.0 (gap 1.0 vs B-VERBATIM-REPLAY 1.0, McNemar p=6.98e-10), exact-match 12/12 no regression, no-applicable UNKNOWN precision 1.0 FA 0.0, empty-registry 6/6 UNKNOWN, ECE 0.065 (5 bins, 3 empty disclosed) within 0.05 of frontier proxy 0.080, confidence std 0.400, parity gap 0.0, controls C1-C8 all PASS; PC-BROWSERGYM-HEALTH 0/0 correctly bounds live to exploratory per frozen C1, audit PASS | C-SEMANTIC-RESOLVE | `768d9dbef3ca` |
 
 ## Latest recorded claim events
 
@@ -256,13 +269,13 @@ These are chronological latest events, not an automatic truth ranking.
 
 | Claim | Status | Experiment | Lane |
 |---|---|---|---|
-| C-CROSSSITE | HYPOTHESIS | EXP-INTEL-35749371101 | intel |
-| C-DELTA-REPAIR | BLOCKED | EXP-GRAPH-35761721514 | graph |
+| C-CROSSSITE | HYPOTHESIS | EXP-INTEL-35773136560 | intel |
+| C-DELTA-REPAIR | BLOCKED | EXP-GRAPH-35764315683 | graph |
 | C-FRESHNESS | EXPERIMENTAL | EXP-PRODUCT-35697049382 | product |
 | C-LLM-INHERIT | EXPERIMENTAL | EXP-INTEL-35741921602 | intel |
-| C-MEAS-VALID | EXPERIMENTAL | EXP-RUNTIME-35749360317 | runtime |
-| C-PARAM-INHERIT | MEASUREMENT_INVALID | EXP-PRODUCT-35752564139 | product |
-| C-PRODUCT-ECON | REJECTED | EXP-INTEL-35551517470 | intel |
+| C-MEAS-VALID | MEASUREMENT_INVALID | EXP-RUNTIME-35774047385 | runtime |
+| C-PARAM-INHERIT | MEASUREMENT_INVALID | EXP-PRODUCT-35773128019 | product |
+| C-PRODUCT-ECON | REJECTED | EXP-INTEL-35757760689 | intel |
 | C-RESIDUAL-NOVELTY | HYPOTHESIS | EXP-PRODUCT-35741913862 | product |
-| C-SEMANTIC-RESOLVE | EXPERIMENTAL | EXP-FRONTIER-35752577234 | frontier |
-| C-WEB-DYNAMICS | HYPOTHESIS | EXP-PHYSICS-35756224948 | physics |
+| C-SEMANTIC-RESOLVE | EXPERIMENTAL | EXP-PRODUCT-35777355953 | product |
+| C-WEB-DYNAMICS | HYPOTHESIS | EXP-PHYSICS-35774039080 | physics |

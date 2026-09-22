@@ -1,0 +1,151 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-35756243655",
+  "lane": "product",
+  "github_run_id": "35756243655",
+  "github_run_attempt": "1",
+  "recorded_at": "2026-09-22T17:53:07.372448+00:00",
+  "model": "opencode/big-pickle",
+  "category": "infrastructure-failure",
+  "pre_execute_sha": "325f6c14cd976e0512c9d30e2dd186201fc8155e",
+  "freeze_sha": {
+    "prereg.md": "40f1240b7aa94ca092b98625b6d3ab9bde843fa06717bac8a1624918aecdaac0",
+    "request.json": "6eb39e0f005c30b317c87cf0a9b3a4e85a8f54e8ecffc861a00c83bba2a94455",
+    "spec.json": "f1e7729ce50335a66de374e71fee46bea39cd54305d38c610099cd371c4e1d59"
+  },
+  "code_artifacts": {
+    "src/spider/kernel.py": {
+      "sha256": "46929b3a951df48d7f9d1fd850871073c0d91c1868aa117e13d389fe274e8d61",
+      "lines": 132,
+      "note": "Base SpiderKernel class only. MISSING: distill_parameterized, _common_prefix_and_suffix, _extract_varying_values, _field_path_to_slot_name"
+    },
+    "src/spider/models.py": {
+      "sha256": "338aaf4d7ba0e31f7a5fe8a47abdbb2ea52d9c1c4ef0ce014f2b809b9a2a9b78"
+    },
+    "src/spider/registry.py": {
+      "sha256": "51fb440d3827f21cccb5f77ad17dc0e76ccdbc2d52d7b05044cd821bb8a9322c"
+    },
+    "tests/test_kernel.py": {
+      "sha256": "ff9c1561c4169d306fba56d52442546a3bbfdab11d3ab56c51d7369309e9c0b6",
+      "note": "3/3 tests pass on base kernel (test_unknown_is_default, test_parameterized_mechanism_binds_only_when_guarded, test_invalidation_forces_abstention)"
+    }
+  },
+  "data_artifacts": {
+    "webarena_raw": {
+      "path": "/tmp/opencode/webarena-verified.json",
+      "task_count": 812,
+      "template_count": 190,
+      "site_family_count": 12,
+      "note": "Raw data, NOT Intel-validated v2 family-stratified. Missing measured duplication 0.9479, AX 0.9 mapping, 49-template structure, family A/B disjoint pools"
+    },
+    "webarena_raw_2": {
+      "path": "/tmp/opencode/webarena-verified-2.json",
+      "task_count": 812,
+      "note": "Same raw data, second copy"
+    }
+  },
+  "infrastructure": {
+    "openai_api_key": "NOT_AVAILABLE",
+    "openai_package_version": "3.17.0",
+    "nginx": {
+      "path": "/usr/sbin/nginx",
+      "status": "inactive (dead)",
+      "systemctl_status": "disabled; preset: enabled"
+    },
+    "playwright": {
+      "version": "1.63.0",
+      "cli_path": "/opt/hostedtoolcache/Python/3.12.14/x64/bin/playwright",
+      "browsers_configured": false,
+      "note": "playwright list returns error; no browsers configured"
+    },
+    "python_version": "3.12.14",
+    "previous_execution_attempts": {
+      "count": 4,
+      "model": "opencode/big-pickle",
+      "exit_code": 124,
+      "category": "transient",
+      "note": "All attempts timed out (exit_code 124)"
+    }
+  },
+  "parent_handoff": {
+    "experiment_id": "EXP-PRODUCT-35752564139",
+    "path": "research/experiments/EXP-PRODUCT-35752564139/handoff.json",
+    "sha256": "9c2e7b2ca2e5fc61809a6a7cb532e1fcb36e3befd1607daaef24364d877a6b10",
+    "status": "MEASUREMENT_INVALID",
+    "reasons": ["LLM API unavailable", "double-prefix binding bug (verification bypass)", "synthetic mock only", "hardcoded baselines"]
+  },
+  "prior_evidence_refs": {
+    "EXP-PRODUCT-33528829801": {
+      "audit_status": "PASS",
+      "ceiling": "narrow synthetic single-param POC (10 single-char identifiers, 5.42% token saving)",
+      "note": "Only validated ceiling for C-PARAM-INHERIT prior to this experiment"
+    },
+    "EXP-PRODUCT-33741671686": {
+      "audit_status": "PASS",
+      "ceiling": "harness-only 21/21 EXECUTABLE 21/21 binding correct 0 unsubstituted templates",
+      "note": "Not kernel-integrated, deterministic synthetic, no LLM"
+    },
+    "EXP-PRODUCT-33974562602": {
+      "audit_status": "PASS",
+      "decision": "KERNEL-INTEGRATION-FALSIFIED",
+      "note": "Prior kernel integration attempt failed on noisy/browser observations"
+    },
+    "EXP-PRODUCT-33993747223": {
+      "audit_status": "PASS",
+      "decision": "FIXES-FALSIFIED",
+      "note": "Three algorithmic fixes still failed on realistic inputs"
+    },
+    "EXP-PRODUCT-34015741916": {
+      "audit_status": "FAIL",
+      "decision": "KERNEL-INTEGRATION-PARTIAL",
+      "note": "9/10 pass but C2 double-prefix dead code"
+    },
+    "EXP-INTEL-35749371101": {
+      "audit_status": "PASS",
+      "note": "WebArena-Verified v2 census: 192 tasks, 49 templates, duplication 0.9479, AX 0.9 on 20 CDP trees"
+    }
+  },
+  "dependencies_status": {
+    "intel_webarena_v2": {
+      "required": true,
+      "status": "PARTIAL",
+      "note": "Raw data found (812 tasks) but not Intel-validated v2 family-stratified with measured duplication 0.9479 and AX 0.9"
+    },
+    "runtime_nginx_hit_cache": {
+      "required": true,
+      "status": "NOT_AVAILABLE",
+      "note": "nginx installed but inactive; no HIT/SWR/SIE/304 discrimination"
+    },
+    "graph_committed_kernel_fix": {
+      "required": true,
+      "status": "NOT_COMMITTED",
+      "note": "distill_parameterized and _common_prefix_and_suffix fix absent from src/spider/kernel.py"
+    },
+    "llm_api": {
+      "required": true,
+      "status": "NOT_AVAILABLE",
+      "note": "No OPENAI_API_KEY; 4 timeout attempts; >50% failures → MEASUREMENT_INVALID per spec"
+    }
+  },
+  "commands_executed": [
+    "grep -rn 'distill_parameterized' /home/runner/work/Spider/Spider/src/ → NOT FOUND",
+    "grep -rn '_common_prefix_and_suffix' /home/runner/work/Spider/Spider/src/ → NOT FOUND",
+    "grep -n 'def ' /home/runner/work/Spider/Spider/src/spider/kernel.py → 6 methods (distill, resolve, verify, invalidate, observe, __init__)",
+    "env | grep -i openai → No OPENAI env vars",
+    "systemctl status nginx → inactive (dead)",
+    "playwright list → error (no browsers configured)",
+    "find /tmp/webarena* /home/runner/work/Spider/Spider/data/webarena* → /tmp/opencode/webarena-verified.json (812 tasks)",
+    "python3 -c 'import openai' → OK (package installed)",
+    "python3 -c 'from src.spider.kernel import SpiderKernel' → OK",
+    "python3 -m pytest tests/test_kernel.py → 3/3 pass",
+    "git log --oneline -5 → 7039d456 R2 product: execution base EXP-PRODUCT-35756243655; 325f6c14 freeze; 0004525d allocate"
+  ],
+  "validity_claims": [
+    "This is MEASUREMENT_INVALID per frozen spec decision_rule, NOT scientific FALSIFICATION",
+    "No outcome-bearing measurements were performed",
+    "No LLM agent runs, no Playwright executions, no binding success readouts",
+    "Per AGENTS.md failure discipline: 'infrastructure failure is not a scientific negative'",
+    "Per EXPERIMENT_PACKET.md §9: 'Operational failure is not scientific falsification'",
+    "Prior parent handoff (EXP-PRODUCT-35752564139) also MEASUREMENT_INVALID for same LLM API reason"
+  ]
+}

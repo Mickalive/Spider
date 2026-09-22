@@ -1,0 +1,171 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-35764329925",
+  "lane": "runtime",
+  "github_run_id": "35764329925",
+  "github_run_attempt": "1",
+  "base_sha": "40d20c6c645c3c464d4eaf7f9ffe184bbca57342",
+  "freeze_sha": "f17f26536f0310ce4f38b0e3b7363e6ff55ac7b3",
+  "executed_at": "2026-09-22T18:45:45Z",
+  "finished_at": "2026-09-22T18:46:08Z",
+  "environment": {
+    "python_version": "3.12.14",
+    "platform": "Linux-6.17.0-1022-azure-x86_64-with-glibc2.39",
+    "flask": "3.1.3",
+    "pyjwt": "2.14.0",
+    "werkzeug": "3.1.8",
+    "gunicorn": "23.0.0",
+    "requests": "2.34.2",
+    "nginx": "1.24.0 (Ubuntu)",
+    "sqlite": "3.45.1 WAL mode",
+    "docker": "28.0.4 (BrowserGym images unavailable)"
+  },
+  "topology": {
+    "primary_P": "gunicorn 2x sync workers 127.0.0.1:19860 -> nginx reverse proxy listen 127.0.0.1:19851 (proxy_pass upstream; proxy_http_version 1.1; proxy_set_header Connection ''; proxy_buffering off)",
+    "sanity_L": "Werkzeug dev server threaded, 127.0.0.1:19870 (free-discovered)",
+    "nginx_conf": "/tmp/spider-runtime-35764329925/nginx/nginx.conf",
+    "ports": {
+      "gunicorn": 19860,
+      "nginx": 19851,
+      "werkzeug_L": 19870
+    }
+  },
+  "run_parameters": {
+    "seed": 44,
+    "n_samples_per_batch": 20,
+    "bootstrap_b": 1000,
+    "bootstrap_alpha": 0.05,
+    "jitter_ms": [
+      50,
+      150
+    ],
+    "concurrency": 4,
+    "states": [
+      "prod_body_A/B/C",
+      "prod_hdr_A/E",
+      "prod_iso_cc/etag/sc",
+      "prod_null_body_A1/A2",
+      "prod_null_hdr_A1/A2",
+      "prod_perm_403/200",
+      "prod_perm403_null_1/2",
+      "prod_sess_200/401",
+      "prod_sess401_null_1/2",
+      "seq_body_A/B/C",
+      "seq_hdr_A/E",
+      "prod_hdr_E_foldkeys/foldpad",
+      "l_body_A/C",
+      "l_hdr_E"
+    ],
+    "batch_state_log_entries": 70,
+    "raw_observations": 600
+  },
+  "fingerprint_algorithm": {
+    "definition": "SHA-256(status || repr(body_bytes) || json.dumps(filtered_headers, sort_keys=True)) with '||'.join",
+    "excluded_headers": [
+      "Date",
+      "Server",
+      "X-Request-Id"
+    ],
+    "client_side_filter_out": [
+      "date",
+      "server",
+      "x-request-id",
+      "x-worker-pid"
+    ],
+    "identical_to_parent": "EXP-RUNTIME-35749360317/run_experiment.py compute_fingerprint (byte-identical function; client-side key lowercasing per frozen spec)",
+    "bodies": {
+      "A": {
+        "len": 31,
+        "sha256": "d0ca833f843c6d70ec9d6755f52a92dcbfc8b4ab601b871bced09ad027172e34"
+      },
+      "B": {
+        "len": 70,
+        "sha256": "67c186f2cee1ccf01f55c80235eb9b1b1d14b073223a807b9ce944405e67999c"
+      },
+      "C": {
+        "len": 117,
+        "sha256": "b46c461cceeefa595c3ac0d706689ed382340b59c20a269a930c786c8389dd32"
+      },
+      "403": {
+        "len": 22,
+        "sha256_prefix": "387fe7"
+      },
+      "401": {
+        "len": 25,
+        "sha256_prefix": "9df36"
+      }
+    }
+  },
+  "command": "python3 research/experiments/EXP-RUNTIME-35764329925/run_experiment.py (full frozen execution); smoke: ... --smoke; independent recompute: python3 recompute_audit.py (0 fingerprint + 0 metric mismatches)",
+  "artifacts": {
+    "run_experiment.py": {
+      "path": "research/experiments/EXP-RUNTIME-35764329925/run_experiment.py",
+      "sha256": "4f56d2a23d919a3540f5f8db56307676ce1114de0b5a297d8668f0da77693b28",
+      "role": "code"
+    },
+    "recompute_audit.py": {
+      "path": "research/experiments/EXP-RUNTIME-35764329925/recompute_audit.py",
+      "sha256": "d80676bc4ac185c4d2d2abfd6609bce834810b1422d377c8aafe3266b7c413c5",
+      "role": "code"
+    },
+    "raw_observations.jsonl": {
+      "path": "research/experiments/EXP-RUNTIME-35764329925/raw_observations.jsonl",
+      "sha256": "49f0e78cc75c184b5eaa33f3d01e5ebefbbe6c5d73d3edcd0988817f2e3fb531",
+      "role": "raw",
+      "lines": 600
+    },
+    "batch_state_log.jsonl": {
+      "path": "research/experiments/EXP-RUNTIME-35764329925/batch_state_log.jsonl",
+      "sha256": "3d2e09113f856923845fe5738a61bb170a3686220009f3c51aa4448907a618d4",
+      "role": "raw",
+      "entries": 70
+    },
+    "experiment_result.json": {
+      "path": "research/experiments/EXP-RUNTIME-35764329925/experiment_result.json",
+      "sha256": "9cdc6cc4e4c07d7b7da6b5f56e4c9a06fecf261f7b0ffff43e679466e3f19469",
+      "role": "derived"
+    },
+    "sanity_l_result.json": {
+      "path": "research/experiments/EXP-RUNTIME-35764329925/sanity_l_result.json",
+      "sha256": "68b5ad158a59b8418af44dfdb0c81c474c016f4affdc0758a61447ffbf2cfbaf",
+      "role": "derived"
+    },
+    "result.json": {
+      "path": "research/experiments/EXP-RUNTIME-35764329925/result.json",
+      "sha256": "432fa0694588227da736708663804d2d3d10a5b7a24a3d20023143da377ebbc0",
+      "role": "packet"
+    },
+    "report.md": {
+      "path": "research/experiments/EXP-RUNTIME-35764329925/report.md",
+      "sha256": "38affed2efecf1228ee0211efb5408a429d65b7e50a5ea42d67db8c41365b71a",
+      "role": "packet"
+    },
+    "freeze.json": {
+      "path": "research/experiments/EXP-RUNTIME-35764329925/freeze.json",
+      "sha256": "7f507477a2f6a5fb50ba232fb3bc62ca839a161d1563b3534a49fbf19208e77b",
+      "role": "frozen"
+    }
+  },
+  "frozen_inputs": {
+    "request.json": "595df126c4d1e21ebc06d49298499cda80cadf74ec2ef776b93567ae831efd98",
+    "spec.json": "1963cacf6a777c5dc5f1302c6e46a46519e464d7794a25d6b7301bd13d47874e",
+    "prereg.md": "a53213b9eccb2ba7eec9ece73d254f1535ca2d878c9e22dd38d6e743f405fb34"
+  },
+  "worker_pids": {
+    "prod_seq": [
+      "46041",
+      "46042"
+    ],
+    "sanity_L": [
+      "45962"
+    ]
+  },
+  "execution_log": [
+    "18:45:45Z topology L sanity replicates (full AvsC 1.0, status AvsC 0.0, full AvsE 1.0, body AvsE 0.0)",
+    "18:45:52Z gunicorn up (2 workers), nginx up, production tokens issued",
+    "18:45:53-18:46:05Z 27 production batches x20 (concurrency 4 for 21 batches, sequential for 6 baseline/fold batches)",
+    "18:46:08Z experiment_result.json written: status=COMPLETE outcome=SUPPORTS; critical_all_pass=True",
+    "18:47Z independent recompute_audit.py: 0 fingerprint mismatches (600), 0 metric mismatches (85 comparisons)"
+  ],
+  "notes": "First execution attempt of this phase completed all batches and evidence writes but crashed in derivation code (validity_summary metrics key alias KeyError); bug fixed and canonical re-run completed cleanly. BrowserGym/AgentLab docker images unavailable -> E4 NOT_TESTED."
+}

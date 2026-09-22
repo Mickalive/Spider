@@ -1,0 +1,112 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-35777355953",
+  "lane": "product",
+  "execution": {
+    "github_run_id": "35777355953",
+    "github_run_attempt": 1,
+    "executed_at": "2026-09-22T20:05:13Z (checkpoint); execution run completed after kernel port",
+    "model": "opencode/big-pickle",
+    "exit_code": 0,
+    "status": "success"
+  },
+  "commits": {
+    "pre_execute_sha": "f3ccb78db3ad7c0a3a4ef984d1725e34184632e3",
+    "post_execute_sha": "3efa366315b9a1a93c197e8d9dd72bb64dd28c5c",
+    "freeze_sha": "f3ccb78d",
+    "base_sha": "3efa3663",
+    "note": "working tree additionally contains the kernel port, tests and experiment artifacts; EXECUTE scope rules forbid git commit, so the port is delivered uncommitted with exact hashes (git diff HEAD auditable)"
+  },
+  "frozen_inputs": {
+    "request.json": "research/experiments/EXP-PRODUCT-35777355953/request.json",
+    "spec.json": "research/experiments/EXP-PRODUCT-35777355953/spec.json",
+    "prereg.md": "research/experiments/EXP-PRODUCT-35777355953/prereg.md",
+    "freeze.json": "research/experiments/EXP-PRODUCT-35777355953/freeze.json",
+    "hashes": {
+      "prereg.md": "d1e790aadfdf8ea867eae620308e8c7b591529569f69761def3732d646e65ec4",
+      "request.json": "625cfc0d0782e4cd83999fef7a426cb0dffaf0758dccb208f8832bb8ca323407",
+      "spec.json": "2239c4c4967b67a67619d47e81c57a2f536f6867ff0c3e4314f7d82d15656683"
+    }
+  },
+  "code_paths": {
+    "experiment_script": {
+      "path": "research/experiments/EXP-PRODUCT-35777355953/run_experiment.py",
+      "sha256": "f4d443a35347dc3359a04efd5dc1424ca13918524c4e4253f27bc3e0aa2294fd",
+      "role": "experiment runner: frozen 70-task fixtures, 8 methods, controls, gates C1-C8, economics, seed-CV, browser probe"
+    },
+    "frontier_proxy": {
+      "path": "research/experiments/EXP-PRODUCT-35777355953/frontier_proxy.py",
+      "sha256": "ba3202f834c95761e67f00b41f8ac095e646e7b7a0d8c1795ad1ddb53e6ab155",
+      "role": "R-FRONTIER-RULE-PROXY: verbatim snapshot (lines 28-441) of the audit-referenced Frontier harness sha256 4db542a727d35b5fee7c36cb842e6abff61ba6c51f5a1fa7f1c67a884d24da6f"
+    },
+    "kernel": {
+      "path": "src/spider/kernel.py",
+      "sha256_post": "a57265155603581bb9cb7a00db5349afa52d8af43d208d296564ca60ac2150a1",
+      "sha256_pre_port": "46929b3a951df48d7f9d1fd850871073c0d91c1868aa117e13d389fe274e8d61",
+      "role": "SpiderKernel with reconstruction adapter ported into resolve(reconstruct=True); reads only ALLOWED_STATE_KEYS; pure-stdlib"
+    },
+    "kernel_tests": {
+      "path": "tests/test_kernel.py",
+      "sha256": "6e4dfd6bcc8682f87573397ca1f20973ec28a190533417f0d3f187dac69bed38",
+      "role": "regression tests for the reconstruction port (10 tests pass)"
+    },
+    "models": {
+      "path": "src/spider/models.py",
+      "role": "Mechanism, Resolution, ResolutionStatus (unchanged)"
+    },
+    "registry": {
+      "path": "src/spider/registry.py",
+      "role": "MechanismRegistry JSONL persistence (unchanged)"
+    }
+  },
+  "artifacts": {
+    "raw_evidence": {
+      "path": "research/experiments/EXP-PRODUCT-35777355953/raw_evidence.json",
+      "sha256": "af1af741b0287bd1637d486e333754901338c0d74065d7bdee26b44dd2f961cf",
+      "role": "raw"
+    },
+    "tasks_fixture": {
+      "path": "research/experiments/EXP-PRODUCT-35777355953/tasks.json",
+      "sha256": "4abf148721fdee9dfe56ac776f6b3112344821a4ea80d183c5313adeced1f35e",
+      "role": "fixture"
+    },
+    "derived_metrics": {
+      "path": "research/experiments/EXP-PRODUCT-35777355953/derived_metrics.json",
+      "sha256": "bb01b2ac02f143982997c67216217c010a5e8c580de03fdcf1f795faee8788dc",
+      "role": "derived"
+    },
+    "economics": {
+      "path": "research/experiments/EXP-PRODUCT-35777355953/economics.json",
+      "sha256": "025f546181391eb3eca47bd1187285291276b05d6d1275d4f222e5cf1f659461",
+      "role": "derived"
+    },
+    "browser_probe": {
+      "path": "research/experiments/EXP-PRODUCT-35777355953/browser_probe.json",
+      "sha256": "c695a8f252dc87ea9394cdc3412816c7cc448cddc130677d5f0c30740652672d",
+      "role": "raw"
+    },
+    "result": {
+      "path": "research/experiments/EXP-PRODUCT-35777355953/result.json",
+      "sha256": "ed55a4bd53714561d64d3fc6137904b3e26eb07dd1c43da6e3ba3d53d764f1a8",
+      "role": "derived"
+    },
+    "report": {
+      "path": "research/experiments/EXP-PRODUCT-35777355953/report.md",
+      "sha256": "5dfc6f555082e24193044a2ae120ab2153190426610678b53d4777fb229f4ad0",
+      "role": "derived"
+    }
+  },
+  "environment": {
+    "python_version": "3.12.14",
+    "platform": "linux x86_64 (GitHub Actions runner)",
+    "dependencies": "numpy 2.5.3, scipy 1.18.1, scikit-learn 1.9.1, pytest (installed in-runner); playwright 1.44.0 + chromium (installed in-runner); browsergym 0.14.3 (pre-installed; webshop/alfworld task modules absent); sentence-transformers/torch NOT installed; OPENAI_API_KEY/ANTHROPIC_API_KEY unset",
+    "viewport": "1280x720 for browser probe"
+  },
+  "parent_chain": {
+    "parent_experiment_id": "EXP-FRONTIER-35766532429",
+    "parent_evidence": "codex/experiments/EXP-FRONTIER-35766532429/ (audit PASS; reference harness sha 4db542a727...)",
+    "claim": "C-SEMANTIC-RESOLVE",
+    "parent_verdict": "SURVIVES_CURRENT_TEST at frontier level (40/40 synthetic)"
+  },
+  "reproduction_command": "python3 research/experiments/EXP-PRODUCT-35777355953/run_experiment.py && python3 -m pytest tests/ -q"
+}

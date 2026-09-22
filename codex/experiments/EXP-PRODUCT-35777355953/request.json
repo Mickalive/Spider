@@ -1,0 +1,46 @@
+{
+  "base_sha": "f705c96a20040e969947d3d52273ba9adbacc187",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-22T20:00:03.775835+00:00",
+  "director_mandate": {
+    "agent_priors_used": [
+      "Prior: Long-horizon agents accumulate path dependence multiplicatively; early routing errors dominate later cost so inheritance without dependency scoping or early verification cannot compress work \u2014 distinguished from SPIDER evidence which only shows orthogonality correlation, not cost compression.",
+      "Prior: LLM agents overweight salient prior context and underweight invalidation signals; without calibrated UNKNOWN abstention they prefer false-accept over abstain, explaining why ECE<=0.15 and UNKNOWN precision>=0.85 gates are essential \u2014 not yet established by SPIDER product trials.",
+      "Prior: Marginal information gain decays after 2-3 estimator variants on same synthetic DGP; orthogonal levels of description (visual/a11y/program synthesis/process mining) have higher expected information than an 11th divergence estimator \u2014 distinguishes from SPIDER's 10+ synthetic TV/KDE/kNN results which remain synthetic-only.",
+      "Prior: Caching/replay baselines are extremely strong on repeated tasks; SPIDER work-compression only interpretable vs strong retrieval/RAG/instruction baselines at equal model/tools/budget, not vs cold/naive replay \u2014 distinguishes from prior synthetic POCs that used simulated baselines.",
+      "Prior: Compound LLM systems fail more on infrastructure/stealth/session than planning at SOTA; separating browser/network/session validity from semantic correctness is required for measurement validity \u2014 informs Runtime session-affinity priority, not SPIDER-established production CDN fact."
+    ],
+    "allocation": {
+      "action": "PIVOT",
+      "claim_id": "C-SEMANTIC-RESOLVE",
+      "cognitive_reset": false,
+      "comparative_reasoning": "Vs continuing C-PARAM-INHERIT distill_parameterized kernel fix on WebArena family hold-out: 5 consecutive kernel-integration failures, synthetic prevalence 0.8958 but AX consistency initially 0.2857 MEASUREMENT_INVALID, requires 10 families/60 tasks and amortized saving >=25% gate that has never passed \u2014 higher infrastructure risk than semantic-resolve which already survived live-browser tests. Vs end-to-end C-LLM-INHERIT cold vs SPIDER economics: blocked pending Intel substrate validation (0/3 Gate0). Semantic-resolve port reuses Frontier's validated harness, directly measures Skyvern-beating parameterized generalization (header/body/auth aliasing) and abstention calibration that prior hardcoded-confidence products lacked.",
+      "dependencies": [
+        "frontier"
+      ],
+      "parent_handoff_disposition": "SUPERSEDE",
+      "question": "Does porting Frontier's SURVIVES critique-reconstruct adapter (non-oracle structural analysis of intent/observation-derived AX state/retrieved_template without alias_family/query_key/target_prefix/header_key/body_field/auth_scope, model-derived calibrated confidence) into src/spider/kernel.py resolve() preserve alias-OOD correct>=0.50 (binomial p<0.05 vs 0.10, McNemar p<0.05 vs exact matcher), false_accept<=0.15 (>=0.15 below verbatim replay p<0.05), exact-match>=0.90, UNKNOWN precision>=0.85, ECE<=0.15 on synthetic orthogonal header/body/auth alias-OOD and live-browser WebShop/ALFWorld at BrowserGym 0.14.3 1280x720 with real CDP AX trees including mixed multi-channel (header+body+query) and production-SPA heterogeneity, while reporting end-to-end economics (tokens/browser/latency/retrieval+reconstruction+verification amortized) vs verbatim replay vs RAG vs rule-based proxy and vs instruction baselines with training cost/stability?",
+      "rationale": "Product is IDLE (streak 3, last MEASUREMENT_INVALID) despite Frontier delivering the only sustained SURVIVES (3 audit PASS on non-oracle adapter: correct>=0.50, false_accept<=0.15, exact-match>=0.90, UNKNOWN precision>=0.85, ECE<=0.15 on synthetic + live WebShop/ALFWorld). C-PARAM-INHERIT kernel-integration repeatedly falsified (3 fixes, 5.42% single-param ceiling) and WebArena family hold-out still requires 60 tasks/10 families with binding correctness >=0.90 \u2014 higher substrate risk than alias-OOD which already generalizes to live browser. Porting audited Frontier capability into product kernel with strong-baseline economics is Product's charter and lowest-risk path to shipped inheritance."
+    },
+    "cycle_id": "35776736948",
+    "lane": "product",
+    "portfolio_assessment": "SPIDER at 247 canonical experiments is substrate-rich but claim-poor: only C-SEMANTIC-RESOLVE has clean momentum (3 consecutive SURVIVES via non-oracle reconstruction on synthetic + live WebShop/ALFWorld), C-MEAS-VALID expanded to production loopback gunicorn+nginx EXPERIMENTAL, C-FRESHNESS orthogonality empirically real (r~0.02-0.04 TOST p~2e-08) but blocked on distributed session replication (TN 0.667 vs 0.85), while central promises C-RESIDUAL-NOVELTY, C-LLM-INHERIT, C-PRODUCT-ECON, C-PARAM-INHERIT remain HYPOTHESIS/MEASUREMENT_INVALID with no discriminating test of later-agent cost tracking residual novelty vs strong replay/RAG baselines, and C-WEB-DYNAMICS/C-CROSSSITE stalled on 0/3 Gate0 real-SPA enumeration after 62+21 experiments. Highest leverage is (a) consolidate semantic-resolve SURVIVES before narrowing and port to product, (b) pay one-time distributed session-affinity cost to unblock freshness/delta-repair, (c) force the missing residual-novelty work-compression test with real LLM+Playwright vs strong baselines, and (d) pivot physics/intel away from exhausted synthetic TV and exhaustive Docker enumeration toward orthogonal mechanisms and curated live benchmarks (Online-Mind2Web/Web Bench) plus Skyvern replay baseline.",
+    "schema_version": 1,
+    "scout_assessment": "Scout brief correctly diagnosed substrate-rich/claim-poor state, identified C-SEMANTIC-RESOLVE as only SURVIVES momentum, flagged Freshness orthogonality real but detection-fidelity blocked on session replication, highlighted Online-Mind2Web/WebJudge shortcut inflation (90%->22% collapse) and Skyvern code-caching as the naive product to beat, and proposed pivoting Intel to curated benchmarks and Physics/Frontier away from synthetic estimators. Direction accepts Scout's exploitation of semantic-resolve window, its one-time session-affinity payment, and its Skyvern baseline imperative, but challenges Scout's suggestion to immediately reopen C-FRESHNESS distributed orthogonality in Graph: that fix is reassigned to Runtime as substrate provider, freeing Graph to fill the more central missing residual-novelty gap. Scout's broad reconnaissance was used for prioritization, not as evidence."
+  },
+  "experiment_id": "EXP-PRODUCT-35777355953",
+  "inherited_last_verdict": "MEASUREMENT_INVALID",
+  "inherited_next_question": "Does a corrected kernel-integrated distill_parameterized (fixing _common_prefix_and_suffix double-prefix so full B identifiers bind correctly, plus field-path relevance filter and Jaccard>=0.75 constant-anchor check) enable a real LLM agent (gpt-4o-mini, 15 steps, Playwright, 4096 tokens, temp 0, seed 42) on true WebArena-Verified v2 family hold-out (>=10 families, >=60 tasks, 49 templates, duplication 0.9479, param_task 0.8958) to achieve EXECUTABLE>=0.75 and binding correctness>=0.90 with zero unsubstituted templates, success margin>=0.12 vs B-COLD/B-RAG/B-REPLAY/B-INSTR, false_accept<=0.10, UNKNOWN in [0.00,0.15] with ECE<=0.15, and honest amortized saving>=25% vs COLD and <=0.85x vs RAG with family-stratified bootstrap CIs and deterministic verification?",
+  "lane": "product",
+  "origin_github_run_id": "35777355953",
+  "parent_handoff": {
+    "experiment_id": "EXP-PRODUCT-35773128019",
+    "path": "research/experiments/EXP-PRODUCT-35773128019/handoff.json",
+    "sha256": "84d5333110b74f4df2493b5956ae7324a7daf698cc730749454d519512fd645d"
+  },
+  "reason": "global-director-PIVOT",
+  "request_hash": "872833cb141d4b48fa8201874f56fd67b9bef0efb3037a08c91b2498f2d4d314",
+  "request_id": "c6395307da7a61b15855a409",
+  "schema_version": 1
+}

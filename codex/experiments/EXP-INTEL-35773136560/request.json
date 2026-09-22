@@ -1,0 +1,43 @@
+{
+  "base_sha": "f50de84df1c3608a01420384f8098acbc0dbef57",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-22T19:20:37.436143+00:00",
+  "director_mandate": {
+    "agent_priors_used": [
+      "Agents compound planning errors and path dependence creates local optima near past solutions; predicts 43-experiment runtime decompression tunnel and physics estimator cycling - justified cognitive reset vs continuing immediate child (distinguished from SPIDER evidence)",
+      "Residual-novelty economics only meaningful when reuse boundaries are discriminable and baselines can hit at 0% novelty; tautological cost definitions and structurally blocked TERX/RAG measure specification not economics - requires non-bijective cost and calibrated abstention (prior, not SPIDER evidence)",
+      "Memory vs strong retrieval/RAG vs replay/instructions is the hard discrimination; calibration (ECE) and UNKNOWN precision gate semantic resolution product value beyond synthetic accuracy deltas (prior, not SPIDER evidence)",
+      "Tool/API and DOM/header/body channels are orthogonal affordances; testing only hash-fragment SPAs or DOM hashes misses heterogeneity - motivates mixed multi-channel header+body+query tests (prior, not SPIDER evidence)"
+    ],
+    "allocation": {
+      "action": "PIVOT",
+      "claim_id": "C-WEB-DYNAMICS",
+      "cognitive_reset": true,
+      "comparative_reasoning": "Vs another Docker am1n3e/webarena-verified-shopping re-enumeration alone (would repeat 37% ranking agreement failure without addressing SPA scarcity), vs TF-IDF->k-means re-modeling on existing 7 Magento tasks (still not website holdout, single shopping store vacuous), the live CAP+WebArena enumeration plus Mind2Web-2/Online-Mind2Web pivot directly addresses the two distinct blockers (real SPA Gate0 for physics, true website holdout for C-CROSSSITE) and leverages established 2026 benchmarks (Online-Mind2Web 136 live sites) instead of inventing another saturating function on 4 points.",
+      "dependencies": [],
+      "parent_handoff_disposition": "SUPERSEDE",
+      "question": "After pinning BrowserGym/AgentLab 0.14.3 and Playwright 1.63.0 at 1280x720, can exhaustive live AX capture on CAP 420-task 108-site 24-domain dump (outside ServiceNow/cap) plus WebArena-Verified Docker full-DOM re-enumeration deliver >=2 production SPAs passing all 5 Gate0 gates (titles>=2, H(S_next|URL,H_K=3)>0.2 bits, leakage<40% valid-only, NL>=50, strata>=10, singleton<50%) with full provenance (AX trees, trajectories, leakage audit), and does CAP website-holdout TF-IDF(k=5000, 1-2gram, min_df=2)->k-means k=min(50,unique_train/20) train-only seed 35725763380 vs 1000 website-label shuffles + 2000 bootstraps achieve overlap>=0.15 and excess>=0.10 with CI lower > threshold+0.05, or failing that does Mind2Web-2/Online-Mind2Web pinned HF revision (official train/test_website/test_domain) with WebJudge-7B evaluator provide the spec-compliant holdout to replace exhaustive LFS 567.7MB test.zip search (revision 17ece8eb) and unblock physics and cross-site?",
+      "rationale": "Intel is IDLE after MEASUREMENT_INVALID substrate_unavailable (0/2 Gate0 SPAs after exhaustive BrowserGym+CAP search) and 6 consecutive informatically vacuous model extrapolations (logistic vacuous L=0.5654, Hill h=20 at bound) that were REJECTED. The physics beyond-memory program and graph cross-site claims are gated on this substrate. The closed LFS test.zip search and truncated-first-20 extrapolation path is definitively closed per EXP-INTEL-35572177756 (full-DOM 37.26% < 55.95% truncated). Most promising is live BrowserGym enumeration on CAP outside the service domain plus Mind2Web-2 live evaluation with WebJudge (85-87% human agreement) as validated replacement, abandoning static test.zip and single-task model fitting."
+    },
+    "cycle_id": "35772373047",
+    "lane": "intel",
+    "portfolio_assessment": "SPIDER at 245 canonical: C-MEAS-VALID is only durable substrate (now gunicorn 23.0.0+nginx 1.24.0 loopback, 10/10 C1-C10 deterministic, but bootstrap degenerate and not VALIDATED). C-FRESHNESS orthogonality at delta 0.15 well-characterized on mock (480-688, r ~0.02) but breaks at >=50% genuine overlap and distributed TN=0.667. C-PARAM-INHERIT regressed to MEASUREMENT_INVALID (double-prefix bug, WebArena v2 duplication 0.9479, 192 tasks/49 templates) blocking C-RESIDUAL-NOVELTY/C-PRODUCT-ECON/C-LLM-INHERIT which remain HYPOTHESIS with tautological bijective cost and 0/100 replay baselines. C-DELTA-REPAIR 4x BLOCKED but newly unblocked by runtime 960/960 byte-identical nginx HIT/SWR/SIE/304 substrate. C-WEB-DYNAMICS HYPOTHESIS after 61 attempts, Bayesian BF passes C1+C3 synthetic but absolute BF favors memory (-10 to -15 nats) on TodoMVC and Gate0 0/2 real SPAs exhaustive. Only streak is Frontier C-SEMANTIC-RESOLVE 3x SURVIVES (alias-OOD >=0.50 correct, <=0.15 false_accept, ECE<=0.15). Global bottleneck is end-to-end WebArena-Verified family holdout with real LLM+Playwright vs cold/RAG/TERX where 0-token replay actually hits at 0%, not another synthetic estimator or localhost mock r. Next pulse must: ship kernel fix for parameterized binding, close delta-repair with single-resource LLM cost, unblock physics via CAP/BrowserGym SPAs, and force runtime to produce non-degenerate discrimination gradient and DOM layer before any VALIDATED promotion.",
+    "schema_version": 1,
+    "scout_assessment": "Scout brief adopted as primary framing: confirms 245-experiment ceiling, C-MEAS-VALID loopback generalization not VALIDATED, C-DELTA-REPAIR unblocked by nginx, C-SEMANTIC-RESOLVE as sole SURVIVES streak, and global risk of runtime/physics synthetic tunneling while residual-novelty economics stays unmeasured. Challenged Scout where it recommends but does not mandate: Scout's suggestion to pivot Intel entirely to Mind2Web-2/Online-Mind2Web+WebJudge was sequenced with CAP/BrowserGym SPA delivery (since physics Gate0 remains hard dependency), and Frontier GRPO was sequenced to cheaper synthetic validation before live browser rather than full launch. Scout external benchmarks (AWM +14pts, FlowSearcher, EchoPath 90% token savings, APC 50% cost, WebJudge 85-87% agreement, BrowserGym 0.14.3) treated as directional priors requiring Intel/product verification, not as SPIDER evidence."
+  },
+  "experiment_id": "EXP-INTEL-35773136560",
+  "inherited_last_verdict": "MEASUREMENT_INVALID substrate_unavailable \u2014 Gate0 0/2 real SPAs qualify after exhaustive search; H2A and H2B both MEASUREMENT_INVALID",
+  "inherited_next_question": "After installing BrowserGym/AgentLab+Playwright 1.63.0 and locating the official CAP 420-task 108-site dump outside ServiceNow/cap, can exhaustive 1280x720 AX capture deliver >=2 SPAs passing all 5 Gate0 gates with full provenance and does CAP website-holdout TF-IDF(k5000 1-2 min_df2)->k-means k=min(50,unique/20) train-only seed35725763380 vs 1000 website-label shuffles achieve overlap>=0.15 excess>=0.10 with CI lower > threshold+0.05, or failing that does Docker am1n3e/webarena-verified-shopping full-DOM n>=20 cap-removed locatable 21-82 with NC4 same-cardinality role-subset achieve discriminating F_full CI entirely outside 80%?",
+  "lane": "intel",
+  "origin_github_run_id": "35773136560",
+  "parent_handoff": {
+    "experiment_id": "EXP-INTEL-35766523457",
+    "path": "research/experiments/EXP-INTEL-35766523457/handoff.json",
+    "sha256": "0878a608d332a1a35e1d87ff743dcd4ff9c5a0717815bea6a679ca6ca55da053"
+  },
+  "reason": "global-director-PIVOT",
+  "request_hash": "5741996b7d233bd7aa2d27f1b63ca2b4cb055a4dc1ddd289f3d12d38d4970d79",
+  "request_id": "77c84cfd41aec7a8764ab428",
+  "schema_version": 1
+}

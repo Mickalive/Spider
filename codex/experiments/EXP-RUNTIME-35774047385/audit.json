@@ -1,0 +1,216 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-35774047385",
+  "lane": "runtime",
+  "status": "MEASUREMENT_INVALID",
+  "producer_claim_supported": false,
+  "required_fixes": [
+    "Provision paid-tier CDN substrate before rerun: add SPIDER_CDN_DOMAIN plus CF_API_TOKEN or FASTLY_API_KEY to .github/workflows/spider-lane.yml env block (currently only LANE, CHAIN_DEPTH, RESUME_EXPERIMENT_ID, DIRECTOR_MANDATE_B64, GH_TOKEN, SPIDER_CONTROL_HELPER are mapped) and ensure DNS origin -> 127.0.0.1:19851 purge API reachable; then rerun frozen experiment as-is (gunicorn 23.0.0 2x sync 127.0.0.1:19860 -> nginx 1.24.0 127.0.0.1:19851 -> Cloudflare/Fastly edge with /resource Cache Rule max-age 60 Vary Accept-Encoding ETag revalidation brotli on, /admin BYPASS). This unblocks C1_CDN-C10_CDN, G1, G2, E1-E3 on paid edge per spec decision_rule.",
+    "Make BrowserGym/AgentLab 1280x720 observation layer available for conditional H4/E4_BG: provide runner with Docker registry access and pre-pull am1n3e/webarena-verified-shopping or ghcr.io/servicenow/BrowserGym (2GB) or cache image; then rerun. Without this, E4_BG remains NOT_TESTED IMAGE_UNAVAILABLE per frozen spec (does not gate CDN verdict but blocks BrowserGym claim).",
+    "No code fix required for fingerprint/metrics: diagnostic loopback origin is ready (780 raw lines, identity checks critical_all_pass true). Re-running frozen run_experiment.py unchanged will populate P_CDN and P_BG artifact paths once substrates are available."
+  ],
+  "validity_findings": [
+    {
+      "id": "V1_CDN_UNAVAILABLE_CORRECTLY_CLASSIFIED",
+      "severity": "info",
+      "finding": "Producer correctly classifies paid-CDN primary (P_CDN) as MEASUREMENT_INVALID CDN_UNAVAILABLE, not falsification. cdn_probe.json shows CF_API_TOKEN ABSENT, FASTLY_API_KEY ABSENT, SPIDER_CDN_DOMAIN ABSENT and workflow env block provides no CDN secret. Frozen spec decision_rule and prereg section 8 threat 1 explicitly map this substrate absence to MEASUREMENT_INVALID (NOT FALSIFIED-IN-SETTING). All 10 mandatory controls C1_CDN-C10_CDN recorded as pass=unknown observed NOT_MEASURED with reason CDN_UNAVAILABLE and evidence_refs to cdn_probe.json. This preserves transmission invariant that infrastructure failure is not encoded as scientific falsification.",
+      "evidence": "research/experiments/EXP-RUNTIME-35774047385/cdn_probe.json sha256 f808d6a1dd99c82122d2646918a7f1697e6d6e0a4b382d7bf6f1e638723544cb; research/experiments/EXP-RUNTIME-35774047385/result.json controls C1_CDN_FULL_BODY_DRIFT through C10_CDN_CLEN_IDENTITY_HEADER_ONLY all pass unknown; report.md MEASUREMENT_INVALID CDN_UNAVAILABLE",
+      "affects_claim": true
+    },
+    {
+      "id": "V2_BROWSERGYM_NOT_TESTED_CORRECT",
+      "severity": "info",
+      "finding": "BrowserGym conditional correctly marked E4_BG NOT_TESTED IMAGE_UNAVAILABLE, not gating CDN verdict. bg_probe.json shows both am1n3e/webarena-verified-shopping and agentlab images ABSENT, bounded pull attempt timed out rc 124. Frozen spec measurement_validity item 5 and falsifier explicitly state IMAGE_UNAVAILABLE does NOT falsify CDN claim and marks BG NOT_TESTED. Producer report and result.json respect this.",
+      "evidence": "research/experiments/EXP-RUNTIME-35774047385/bg_probe.json sha256 a66834afc8acf96b20813d5e0a0c70f285b5b991606109de6b1b82ed8572edbb; result.json validity_notes/unresolved; provenance.json docker 28.0.4",
+      "affects_claim": false
+    },
+    {
+      "id": "V3_FINGERPRINT_RECOMPUTATION_ZERO_MISMATCH",
+      "severity": "info",
+      "finding": "Independent recomputation of fingerprints from raw_observations.jsonl using frozen algorithm compute_fingerprint (status||repr(body_bytes)||json.dumps(headers,sort_keys=True) hashed with || separator, byte-identical to EXP-RUNTIME-35764329925) yields 0 mismatches across sampled observations (780 lines x 5 sources = 3900 hashes checked via audit bash: full/status/body/headers/headers_no_clen all match). Confirms measurement_validity item 1 (algorithm identity) and provenance code SHA 9dd101240ec58eb1653f288a68ea7af8a981231ffc3b8b67e45b4166897bec61. Jaccard distances recomputed for loopback diagnostic sample (lb_body_A vs C full 1.0, status 0.0, body 1.0, headers 1.0, headers_no_clen 0.0; lh_hdr A vs E full 1.0 body 0.0 status 0.0) match producer metrics within 1e-12; CI degenerate [1.0,1.0]/[0.0,0.0] correctly declared.",
+      "evidence": "research/experiments/EXP-RUNTIME-35774047385/raw_observations.jsonl sha256 c057702c3133898ac1620a47d584421ed272ea7670ded18f0fe57dcdf7432f05 (780 lines per batch_counts); research/experiments/EXP-RUNTIME-35774047385/run_experiment.py sha256 9dd101240ec58eb1653f288a68ea7af8a981231ffc3b8b67e45b4166897bec61; provenance.json fingerprint_algorithm identical_to_parent; audit recomputation bash 0 mismatches",
+      "affects_claim": false
+    },
+    {
+      "id": "V4_RAW_COUNTS_AND_IDENTITY_CHECKS_PASS_ON_AVAILABLE_SUBSTRATE",
+      "severity": "info",
+      "finding": "Available substrate is diagnostic gunicorn 2x sync 127.0.0.1:19860 -> nginx 127.0.0.1:19851 loopback (origin of P_CDN), not paid edge. Raw counts 780 match batch_counts: 100 sanity L (5 states x20) + 680 diagnostic (34 states x20). Batch_state_log 88 entries (49 writes + 39 pre-batch verifies) all match_expected true. Identity checks all critical_all_pass true: status 200 on all body/header-only observations, 403/401 distinct on classic, body SHA distinct across A/d0ca833f vs B/67c186f vs C/b46c461c vs gradients A1/72f28c vs A2/2667be vs A3/d79643, Content-Length distinct and == body_len on all observations (31/70/117 and 32/33/35 gradients), non-CLEN headers identical across A/B/C (Cache-Control max-age=3600, ETag W/\"fixed-aaa-111\", Vary Accept-Encoding constant), header-only body 31B identical and CLEN 31 identical, worker_ids distinct 54282/54283 with per-state distribution 8-12 each and classic perm 21/19 sess 23/17 confirming round-robin and WAL visibility ~0.007ms. Validity checks do not prove CDN behavior.",
+      "evidence": "research/experiments/EXP-RUNTIME-35774047385/experiment_result.json validity.checks all true, identity_checks batch_counts, worker_distribution (54282/54283), write_visibility_ms; batch_state_log.jsonl sha256 aafc6571eebc0c8820761c8eaa325555ce79c18265cce4064b1c0a2ddd0a19b6",
+      "affects_claim": false
+    },
+    {
+      "id": "V5_DIAGNOSTIC_VS_CDN_SEPARATION",
+      "severity": "info",
+      "finding": "Producer correctly separates loopback diagnostic evidence (controls C1_LB-C10_LB pass true diagnostic_only) from missing CDN evidence (C1_CDN-C10_CDN unknown). Metrics object prefixes lb_ / seq_ / sanity_l_ and experiment_result topology diagnostic-run-on-available-substrate make clear these are origin readiness diagnostics, not paid-edge observations. Report explicitly states loopback diagnostic success cannot be read as CDN evidence and CDN conditions are NOT_MEASURED. No silent promotion of diagnostic 1.0/0.0 to CDN claim. This satisfies inter-agent transmission discipline (RAW->OBSERVATION distinct from INTERPRETATION).",
+      "evidence": "research/experiments/EXP-RUNTIME-35774047385/result.json metrics body_drift_AvsC_full etc comparison lb_body_A vs lb_body_C; controls C1_LB-C10_LB diagnostic_only true vs C1_CDN-C10_CDN unknown; report.md interpretation; experiment_result.json topology",
+      "affects_claim": true
+    },
+    {
+      "id": "V6_DEGENERATE_CI_CORRECTLY_DISCLOSED",
+      "severity": "low",
+      "finding": "All reported bootstrap 95% CIs B=1000 are degenerate [1.0,1.0] or [0.0,0.0] width 0.0 with effective_distinct_n 1 per state (set size 1) and degenerate_ci true, as disclosed. This reflects deterministic fingerprints per state on low-variance loopback origin, not statistical precision. Producer correctly labels degenerate and does not claim non-degenerate sensitivity ordering. Director mandate required per-value magnitude gradients and non-degenerate CIs to enable sensitivity ordering beyond ceiling; on available substrate all gradients (1B/2B/4B body and CC/ETag/SC/Vary header) remain at ceiling 1.0 degenerate, so ordering remains unknown — correctly listed as unresolved, not as failure.",
+      "evidence": "research/experiments/EXP-RUNTIME-35774047385/result.json metrics all ci_width 0.0 degenerate true effective_distinct_n 1-2; experiment_result.json per_state_fingerprint_set_sizes all full/status/body/headers 1",
+      "affects_claim": false
+    },
+    {
+      "id": "V7_METRIC_NAMING_AND_CONTROL_IDENTITY_DRIFT",
+      "severity": "low",
+      "finding": "Frozen spec required CDN metric stable names like cdn_body_AvsC_full and control IDs C1_CDN-C10_CDN/G1/G2/E1-E4_BG. Producer result.json uses diagnostic prefixes body_drift_AvsC_, header_iso_*, null_body_, classic_perm_ etc for available substrate and reserves C1_CDN etc for unknown. While diagnostic names diverge from spec's cdn_ prefix, this is a consequence of substrate absence and the diagnostic_only labeling makes mapping explicit; audit recomputation uses producer identifiers rather than renaming them. No material renaming of disputed CDN controls occurred. Future rerun should emit cdn_ prefixed metrics when edge is reached for direct comparability.",
+      "evidence": "research/experiments/EXP-RUNTIME-35774047385/spec.json decision_rule C1_CDN-C10_CDN; result.json controls and metrics naming",
+      "affects_claim": false
+    },
+    {
+      "id": "V8_NO_LEAKAGE_CIRCULARITY_DETECTED_ON_AVAILABLE_EVIDENCE",
+      "severity": "info",
+      "finding": "No target/split leakage, representation loss, or control bypass detected in diagnostic substrate: frozen algorithm used same sorted_filtered_headers with EXCLUDED {Date,Server,X-Request-Id} plus disclosed Age/CF-RAY/CF-Cache-Status/X-Worker-Pid exclusions; bodies decompressed (no CDN brotli/gzip in this run); Content-Length isolation validated; null FP 0.0 <0.05 and writable >=0.7 thresholds not applied to CDN (correctly unknown). No outcome-bearing measurement was fabricated for unavailable substrates.",
+      "evidence": "provenance.json excluded_headers and client_side_filter_out; raw_observations.jsonl headers_filtered_json consistent; result.json validity_checks excluded_headers_unchanged true",
+      "affects_claim": false
+    }
+  ],
+  "baseline_findings": [
+    {
+      "id": "B-STATUS-ONLY",
+      "expected": "0.0 on all same-status 200 vs 200 body-only and header-only comparisons via CDN/BrowserGym (proves status confound removed); 1.0 on 403 vs 200 and 401 vs 200 classic",
+      "observed": "CDN/BG NOT_MEASURED (substrate unavailable) -> verdict UNKNOWN on frozen CDN expectation. On available loopback diagnostic, recomputed and producer: body_drift_AvsC_status 0.0, body_drift_AvsB_status 0.0, header_drift_AvsE_status 0.0, all iso status 0.0, null status 0.0; classic_perm_status 1.0, classic_sess_status 1.0. Diagnostic PASS but does not validate CDN/BG.",
+      "verdict": "UNKNOWN",
+      "strength": "strong",
+      "evidence": "result.json C3_CDN unknown vs C3_LB pass; metrics body_drift_AvsC_status 0.0; experiment_result.json identity_checks"
+    },
+    {
+      "id": "B-BODY-ONLY",
+      "expected": "1.0 on AvsC/AvsB where bodies differ via CDN/BG, 0.0 on header-only AvsE where bodies identical and on body-null",
+      "observed": "CDN/BG NOT_MEASURED -> UNKNOWN. Diagnostic: body_drift_AvsC_body 1.0, AvsB_body 1.0, gradients 1B/2B/4B all 1.0; header_drift_AvsE_body 0.0; null_body_body 0.0. Matches expectation for origin but not edge decompression.",
+      "verdict": "UNKNOWN",
+      "strength": "strong",
+      "evidence": "result.json C2_CDN unknown vs C2_LB pass; metrics body_grad_1B_body 1.0 etc"
+    },
+    {
+      "id": "B-HEADERS-ONLY",
+      "expected": "1.0 on body-only via CLEN correlation and 1.0 on header-only via CC/ETag/SC/Vary via CDN/BG, 0.0 on null",
+      "observed": "CDN/BG NOT_MEASURED -> UNKNOWN. Diagnostic: body_drift_AvsC_headers 1.0 (solely CLEN), header_drift_AvsE_headers 1.0, per-iso headers all 1.0, null headers 0.0. Documented complement holds on origin.",
+      "verdict": "UNKNOWN",
+      "strength": "strong",
+      "evidence": "result.json metrics body_drift_AvsC_headers 1.0 vs headers_no_clen 0.0; header_iso_*_headers 1.0"
+    },
+    {
+      "id": "B-HEADERS-NO-CLEN",
+      "expected": "0.0 on body-only AvsC/AvsB (no independent header drift) and 1.0 on header-only AvsE + per-header isolations via CDN/BG",
+      "observed": "CDN/BG NOT_MEASURED -> UNKNOWN. Diagnostic: body_drift_AvsC_headers_no_clen 0.0, body_drift_AvsB_headers_no_clen 0.0, all body grads 0.0; header_drift_AvsE_headers_no_clen 1.0, CC_small/large 1.0, ETag_small/large 1.0, SC_small/large 1.0, Vary_small 1.0. Isolation holds on origin; edge header folding/ordering not exercised.",
+      "verdict": "UNKNOWN",
+      "strength": "strong",
+      "evidence": "result.json metrics header_drift_AvsE_headers_no_clen 1.0 etc; C2_LB/C9 diagnostic"
+    }
+  ],
+  "recomputed_metrics": {
+    "fingerprint_mismatches_full": {
+      "producer": 0,
+      "recomputed": 0,
+      "match": true,
+      "total_checked": 780,
+      "note": "All 780 raw observations recomputed via compute_fingerprint(full) using repr(body_bytes) + sorted json headers; 0 mismatches"
+    },
+    "body_drift_AvsC_full": {
+      "producer": 1.0,
+      "recomputed": 1.0,
+      "match": true,
+      "ci_95_recomputed": [
+        1.0,
+        1.0
+      ],
+      "comparison": "lb_body_A vs lb_body_C diagnostic",
+      "degenerate": true,
+      "evidence": "raw_observations 20+20 lb_body sets"
+    },
+    "body_drift_AvsC_status": {
+      "producer": 0.0,
+      "recomputed": 0.0,
+      "match": true
+    },
+    "body_drift_AvsC_body": {
+      "producer": 1.0,
+      "recomputed": 1.0,
+      "match": true
+    },
+    "body_drift_AvsC_headers_no_clen": {
+      "producer": 0.0,
+      "recomputed": 0.0,
+      "match": true,
+      "note": "Confirms no independent header drift on body-only diagnostic"
+    },
+    "header_drift_AvsE_full": {
+      "producer": 1.0,
+      "recomputed": 1.0,
+      "match": true,
+      "comparison": "lb_hdr_A vs lb_hdr_E"
+    },
+    "header_drift_AvsE_body": {
+      "producer": 0.0,
+      "recomputed": 0.0,
+      "match": true
+    },
+    "header_drift_AvsE_headers_no_clen": {
+      "producer": 1.0,
+      "recomputed": 1.0,
+      "match": true
+    },
+    "header_iso_Vary_small_full": {
+      "producer": 1.0,
+      "recomputed": 1.0,
+      "match": true
+    },
+    "null_body_full": {
+      "producer": 0.0,
+      "recomputed": 0.0,
+      "match": true,
+      "ci_contains_0": true,
+      "fp_lt_0_05": true
+    },
+    "classic_perm_full": {
+      "producer": 1.0,
+      "recomputed": 1.0,
+      "match": true,
+      "threshold": ">=0.7"
+    },
+    "classic_sess_full": {
+      "producer": 1.0,
+      "recomputed": 1.0,
+      "match": true,
+      "threshold": ">=0.7"
+    },
+    "fold_E2_keys_full": {
+      "producer": 0.0,
+      "recomputed": 0.0,
+      "match": true,
+      "note": "Lowercase/sorted key normalization holds on diagnostic origin"
+    },
+    "cdn_metrics_all": {
+      "producer": "NOT_MEASURED",
+      "recomputed": null,
+      "match": null,
+      "note": "No CDN/BG observations exist to recompute; cdn_probe confirms absence, so null is correct and not a mismatch"
+    }
+  },
+  "claim_ceiling": "C-MEAS-VALID ceiling remains at prior EXPERIMENTAL bound: single-host gunicorn 23.0.0 2x sync 127.0.0.1:19860 + nginx 1.24.0 127.0.0.1:19851 loopback (proxy_http_version 1.1, proxy_buffering off) with deterministic discrimination (body-only full 1.0 >0.5 body 1.0 status 0.0 headers-no-CLEN 0.0 CLEN 31/70/117 varying ==body_len; header-only full 1.0 >0.5 headers-only 1.0 status 0.0 body 0.0 headers-no-CLEN 1.0; writable permission 403 vs 200 and session 401 vs 200 >=0.7; null FP 0.0 <0.05) for bodies 31B/70B/117B plus gradients 32B/33B/35B and header values CC/ETag/SC/Vary as tested, under 4-client concurrency, SQLite WAL, filtered headers {Cache-Control,ETag,Set-Cookie,Vary,Content-Type,Content-Length,Connection} minus Date/Server/X-Request-Id. Does NOT expand to paid-tier CDN (Cloudflare/Fastly HIT/STALE/SWR/SIE/304 Vary/ETag revalidation chunked/brotli header folding) nor to BrowserGym/AgentLab 1280x720 HTTP/DOM layer; no sensitivity ordering beyond ceiling established (all CIs degenerate width 0 effective N=1). No VALIDATED or PRODUCT_CORE promotion warranted.",
+  "evidence_refs": [
+    "research/experiments/EXP-RUNTIME-35774047385/request.json sha fe4325b787197eca9e080c6de32c836435e1e079c187f01f8c80c46ec92bcc47 (director mandate CONTINUE C-MEAS-VALID paid-CDN/BrowserGym question)",
+    "research/experiments/EXP-RUNTIME-35774047385/spec.json sha 688e2b62c09097117d01e2dc7620a6bb73325182790919d89cdb88eb18b21376 (frozen decision_rule C1_CDN-C10_CDN MEASUREMENT_INVALID on CDN_UNAVAILABLE)",
+    "research/experiments/EXP-RUNTIME-35774047385/prereg.md sha 065ccfc3c837987ca955ee915168d4541089d74200605899f664a9a35ed676a9 (H1-H5, validity threats, scope boundaries)",
+    "research/experiments/EXP-RUNTIME-35774047385/freeze.json",
+    "research/experiments/EXP-RUNTIME-35774047385/result.json (MEASUREMENT_INVALID NOT_APPLICABLE, controls C1_CDN-C10_CDN unknown, C1_LB-C10_LB diagnostic_only pass, metrics degenerate)",
+    "research/experiments/EXP-RUNTIME-35774047385/report.md (interpretation: CDN_UNAVAILABLE not falsification, diagnostic battery)",
+    "research/experiments/EXP-RUNTIME-35774047385/provenance.json sha a9a76ce509ba0f91f387e0df78dcbb856e5f7c93 base f50de84 code run_experiment.py 9dd101240ec58eb1653f288a68ea7af8a981231ffc3b8b67e45b4166897bec61",
+    "research/experiments/EXP-RUNTIME-35774047385/raw_observations.jsonl sha c057702c3133898ac1620a47d584421ed272ea7670ded18f0fe57dcdf7432f05 780 lines",
+    "research/experiments/EXP-RUNTIME-35774047385/batch_state_log.jsonl sha aafc6571eebc0c8820761c8eaa325555ce79c18265cce4064b1c0a2ddd0a19b6 88 entries",
+    "research/experiments/EXP-RUNTIME-35774047385/cdn_probe.json sha f808d6a1dd99c82122d2646918a7f1697e6d6e0a4b382d7bf6f1e638723544cb CDN_UNAVAILABLE",
+    "research/experiments/EXP-RUNTIME-35774047385/bg_probe.json sha a66834afc8acf96b20813d5e0a0c70f285b5b991606109de6b1b82ed8572edbb IMAGE_UNAVAILABLE",
+    "research/experiments/EXP-RUNTIME-35774047385/experiment_result.json sha 043d594de25ce998780d2f5407100ece741db59b5ce8d004b480724240ceb888 validity identity_checks",
+    "research/experiments/EXP-RUNTIME-35764329925/handoff.json sha eeacde3308a7d346dc8d133066ac5c056c6aa9062169c6547395bacd028c6577 (parent ceiling: gunicorn+nginx loopback EXPERIMENTAL, tunnel_flag true)"
+  ],
+  "unresolved": [
+    "Paid-tier CDN edge generalization (Cloudflare/Fastly HIT/STALE/SWR/SIE/304, Vary/ETag revalidation, brotli/gzip decompression, chunked buffering, header folding/ordering/whitespace, multi-Set-Cookie coalescing across PoPs) remains NOT_TESTED; C1_CDN-C10_CDN all NOT_MEASURED.",
+    "BrowserGym/AgentLab 1280x720 Playwright HTTP/DOM observation layer capture remains NOT_TESTED (E4_BG IMAGE_UNAVAILABLE).",
+    "Per-value magnitude gradients and non-degenerate bootstrap CIs required for sensitivity ordering (body 1B/2B/4B/39B/86B and header CC_small/large ETag_small/large SC_small/large Vary_small) remain at degenerate ceiling 1.0 width 0 on available substrate; ordering of most fragile vs robust delta unknown.",
+    "Full STALE/SWR/SIE/304 lifecycle beyond single HIT, TLS/HTTP2/QUIC termination beyond plain http loopback, multi-host Redis/cluster distributed visibility beyond 2-worker WAL, and header values beyond tested Cache-Control/ETag/Set-Cookie/Vary remain untested per scope.",
+    "Claim ceiling promotion to VALIDATED or PRODUCT_CORE blocked until paid-CDN with non-degenerate CI and HIT/BYPASS lifecycle is measured; Graph C-DELTA-REPAIR and Physics beyond-memory tests remain blocked on CDN trust."
+  ]
+}

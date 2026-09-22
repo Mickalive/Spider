@@ -1,0 +1,96 @@
+{
+  "experiment_id": "EXP-INTEL-35757760689",
+  "lane": "intel",
+  "base_sha": "41d4884125d80d440bae98a2419231d0c4c198b3",
+  "parent_handoff": "research/experiments/EXP-INTEL-35749371101/handoff.json sha256 19bb656434e4a81991ba922854c59492a8be456bbf65b27ea3bb74c35944d87e",
+  "created_at": "2026-09-22T17:00:06.340364+00:00",
+  "frozen_at": "2026-09-22T17:05:09.671617+00:00",
+  "executed_at": "2026-09-22T17:17:25+00:00",
+  "github_run_id": "35757760689",
+  "model_id": "opencode/muse-spark-1.2-contributor-free",
+  "seed": 35725763380,
+  "datasets": {
+    "mind2web": {
+      "hf_dataset": "osunlp/Mind2Web",
+      "hf_revision_hash": "17ece8eb89862368edc0cc806acee6fca5163474",
+      "hf_sha": "17ece8eb89862368edc0cc806acee6fca5163474",
+      "download_date": "2026-09-22",
+      "splits_available": ["train"],
+      "spec_required_splits": ["train", "test_task", "test_website", "test_domain"],
+      "spec_required_counts": {"websites": 137, "domains": 31},
+      "observed_counts": {"tasks": 1009, "websites": 73, "domains": 3},
+      "has_official_splits": false,
+      "library_version": "datasets 5.0.1",
+      "huggingface_hub_version": "1.32.0",
+      "retries": 3,
+      "backoff": "2^attempt seconds"
+    },
+    "webarena_verified": {
+      "path": "research/experiments/EXP-INTEL-35749371101/artifacts/raw/webarena-verified.json",
+      "sha256": "d65275660814663375028e9017e1f929e3c38321041b125795e2713b52243d30",
+      "commit": "ServiceNow/WebArena-Verified ef74e1bfd0d83d4bab1c55b2d1b4c2aeaac8e0d0"
+    }
+  },
+  "environments": {
+    "python": "3.12",
+    "datasets": "5.0.1",
+    "huggingface_hub": "1.32.0",
+    "scikit_learn": "1.9.1",
+    "scipy": "1.18.1",
+    "playwright": "1.63.0",
+    "chromium": "153.0.8010.12 headless shell 1243",
+    "docker_image": "am1n3e/webarena-verified-shopping:latest",
+    "docker_digest": "sha256:3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb",
+    "docker_image_id": "a5b6fb47ee9f",
+    "docker_container_id": "ca4a09a00f62151b8d6967663d042fec857ed527c4a2fd6d15bb23574f46267f",
+    "docker_url": "http://localhost:7770",
+    "viewport": "1280x720 initial no scroll",
+    "playwright_installed": true,
+    "docker_available": true
+  },
+  "code": {
+    "measure_script": "research/intel/exp_35757760689_measure.py",
+    "measure_sha256": "826802ce24f3cc534da1a0b4a60f1dd276999eecefcf0afc7f22d1d591839ce8",
+    "parent_measure_script": "research/experiments/EXP-INTEL-34718481334/measure_fullpage_yield.py",
+    "parent_measure_sha256": "parent contains locatableSample.length < 20 cap at line 89, hash verified diff",
+    "cap_removed": true,
+    "cap_check": "MEASURE_JS_FULL contains no locatableSample.length <20, parent_has_cap true",
+    "vectorizer_params": {"max_features": 5000, "ngram_range": [1, 2], "lowercase": true, "stop_words": "english", "min_df": 2},
+    "kmeans_params": {"k": "min(50, unique_train_tasks/20)", "n_init": 10, "random_state": 35725763380, "fit": "train-only, predict test"},
+    "bootstrap_reps": 2000,
+    "shuffle_perms": 1000,
+    "random_role_null_perms": 1000
+  },
+  "artifacts": {
+    "raw": [
+      {"path": "research/experiments/EXP-INTEL-35757760689/artifacts/raw/mind2web_split_census.json", "sha256": "8e1c27b5e700ec41062ac9c1b325c3a5ed6bf3e6bbe7b0ac55b20d3e38db4214"},
+      {"path": "research/experiments/EXP-INTEL-35757760689/artifacts/raw/full_dom_locatable_sample.json", "sha256": "6a492e52c9c081907b2f3f466f36153f5e5d58d942381fada77219114864d69e"},
+      {"path": "research/experiments/EXP-INTEL-35757760689/artifacts/raw/axtree_full_dom_sample.json", "sha256": "a584e8b6b707e9484d10d7545ac7cc97ab489f75e81f3a7f1a4b10bcadd2e5d3"},
+      {"path": "research/experiments/EXP-INTEL-35749371101/artifacts/raw/webarena-verified.json", "sha256": "d65275660814663375028e9017e1f929e3c38321041b125795e2713b52243d30"}
+    ],
+    "derived": [
+      {"path": "research/experiments/EXP-INTEL-35757760689/artifacts/derived/tfidf_kmeans_meta.json", "sha256": "7c1922ca87181a9b67819589c1070b2f972931711340433a81c4bfc3778a7c1d"},
+      {"path": "research/experiments/EXP-INTEL-35757760689/artifacts/derived/docker_ranking_agreement.json", "sha256": "a2ae49ec4facab6c423cb3acd0020f3592d152758e319021d63ca8ef8bd496e2"},
+      {"path": "research/experiments/EXP-INTEL-35757760689/artifacts/derived/bootstrap_ci.json", "sha256": "4b7436469292686ad9004f4e1df77104e0cd08ff62369ab71a77bbc5b2c51cde"},
+      {"path": "research/experiments/EXP-INTEL-35757760689/artifacts/derived/shuffle_null.json", "sha256": "5fad303d0e2f405265ae7d9e6be03d0eac4f0a3b4da2fcd198c25a306bee3a14"},
+      {"path": "research/experiments/EXP-INTEL-35757760689/artifacts/derived/measurements.json", "sha256": "f6344fc5d9a6ad72a0340fc176897e96854651f3b7a0dd5e0a2d7408dcc902ca"}
+    ],
+    "code_artifact": {"path": "research/intel/exp_35757760689_measure.py", "sha256": "826802ce24f3cc534da1a0b4a60f1dd276999eecefcf0afc7f22d1d591839ce8"}
+  },
+  "execution": {
+    "commands": [
+      "pip install datasets scikit-learn",
+      "pip install playwright && playwright install chromium",
+      "docker pull am1n3e/webarena-verified-shopping:latest (digest sha256:3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb)",
+      "docker run -d --name wa_exp35757760689 -p 7770:80 am1n3e/webarena-verified-shopping:latest",
+      "python3 research/intel/exp_35757760689_measure.py (seed 35725763380, 3 retries HF, 1000 shuffles, 2000 bootstraps)"
+    ],
+    "duration": "~300s for Mind2Web download + Docker enumeration",
+    "hashes": {
+      "request.json": "0f393cfafa046eb6bea925af16b4dcf3eadfc84c6ca4d7f1043b4a16f4ddab72",
+      "spec.json": "92b22635f495c0bb7968bbe7ee72bbfa214c0483c67b15d1c23b0efb134a9108",
+      "prereg.md": "aa70be4345a4b6953f6fe394534b55a8e1a5b1522303b42a444e39c5b211a808",
+      "freeze.json": "frozen_at 2026-09-22T17:05:09.671617+00:00"
+    }
+  }
+}

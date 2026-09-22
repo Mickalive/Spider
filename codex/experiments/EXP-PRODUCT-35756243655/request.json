@@ -1,0 +1,48 @@
+{
+  "base_sha": "2e9ddf33a89594a5e015094b76738ad1b127d1d0",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-22T16:45:59.633435+00:00",
+  "director_mandate": {
+    "agent_priors_used": [
+      "Path dependence and salience prior: agents over-weight recently validated narrow localhost mock and propose 'add one more header type' instead of the missing cross-site/residual-novelty live test \u2014 distinguished from SPIDER evidence which shows orthogonality already confirmed at delta=0.15 on mock but no live inheritance measured",
+      "Compounding planning error prior: linear trajectory replay without verify/repair gates accumulates drift; multi-step success requires external postconditions and mutation guards \u2014 distinguished from SPIDER evidence which shows C-DELTA-REPAIR BLOCKED and verify() not deployed, but no evidence yet that compiled verification improves success; this guides testing workflow compilation vs replay",
+      "Local optima via self-generated subproblems prior: PMI/TV null-bias puzzles generated 15+ synthetic divergence variants that are themselves synthetic, delaying tests of real Web dynamics \u2014 distinguished from SPIDER evidence which shows 59 C-WEB-DYNAMICS experiments without bridging synthetic->real gap",
+      "Tool/API bypass prior: when direct endpoints exist, browser replay is dominated by API bypass; work compression claims must stratify by API availability \u2014 distinguished from SPIDER evidence which has not stratified WebArena tasks by bypass availability",
+      "Tool/API vs semantic selector tradeoff prior: fuzzy AX-tree hashing survives CSS refactors but still fails on structural changes; parameterized templates with repair strictly dominate selector caching if repair loop exists \u2014 distinguished from SPIDER evidence which shows deterministic exact matcher 0/16 on aliases and no validated repair"
+    ],
+    "allocation": {
+      "action": "REOPEN",
+      "claim_id": "C-PARAM-INHERIT",
+      "cognitive_reset": false,
+      "comparative_reasoning": "Continuing C-FRESHNESS co-occurring noise sweeps (overlap, threshold tautology) is important but remains localhost mock without live LLM calls (4th consecutive product experiment with zero LLM calls) and cannot change commercial viability; residual-novelty economics and semantic resolve both depend on param inheritance succeeding first; freshness-gated execute requires calibrated overlapping distribution which presumes inheritance works. Prioritized param holdout because it simultaneously tests C-PARAM-INHERIT, informs C-RESIDUAL-NOVELTY (novelty fraction) and C-PRODUCT-ECON (amortized saving) in one design, whereas isolated freshness threshold work would leave inheritance unproven.",
+      "dependencies": [
+        "intel: WebArena-Verified v2 family stratification (>=10 families, 49 templates) and AX 0.9 longest-prefix mapping",
+        "runtime: nginx HIT-cache provenance for verify() on actual DOM/response state",
+        "graph: committed kernel fix for _common_prefix_and_suffix double-prefix (not monkey-patched)"
+      ],
+      "parent_handoff_disposition": "USE",
+      "question": "Does a corrected kernel-integrated distill_parameterized (fixing _common_prefix_and_suffix double-prefix so full B identifiers bind correctly) enable a real LLM agent (gpt-4o-mini 15 steps, Playwright, 4096 tokens, temp 0, seed 42) on true WebArena-Verified v2 family hold-out (>=10 families, >=60 tasks, 49 templates, measured duplication 0.9479) to achieve EXECUTABLE >=0.75 and binding correctness >=0.90 with zero unsubstituted templates, success margin >=0.12 vs B-COLD/B-RAG/B-REPLAY/B-INSTR, false_accept <=0.10, UNKNOWN in [0.00,0.15] with ECE <=0.15, and honest amortized saving >=25% vs COLD and <=0.85x vs RAG with family-stratified bootstrap CIs and deterministic verification?",
+      "rationale": "Product is IDLE, last MEASUREMENT_INVALID on C-PARAM-INHERIT (double-prefix bind user-${url}, varying-value noise filtering) after synthetic MULTI-PARAM-SURVIVES (2-3 slots, C-PARAM-INHERIT POC) but repeated kernel-integration falsifications on noisy/browser observations. No live-browser inheritance has been demonstrated, yet WebArena census is validated (AX 0.9 on 20 CDP trees at 1280x720, param_task 0.8958). Product economics (C-PRODUCT-ECON REJECTED, token savings 5.42% analytically fragile, 6 model extrapolations closed) can only be settled by honest end-to-end measurement with strong baselines including TERX-equivalent 0-token CDP replay and API-bypass stratification. This is the missing direct test of SPIDER's central promise and determines PRODUCT_CORE."
+    },
+    "cycle_id": "35755646729",
+    "lane": "product",
+    "portfolio_assessment": "SPIDER at 234 canonical experiments has one narrow EXPERIMENTAL substrate (C-MEAS-VALID: oracle-free greedy brotli->gzip 960/960 byte-identical on localhost nginx lifecycle) but no validated production substrate (CDN HIT stale-serving, concurrent load, HTTP/2 untested). C-FRESHNESS orthogonality holds on localhost/distributed at delta=0.15 (r ~0.04, CI upper <0.15) yet all product gates fail on distributed session-store non-replication (C1 TN 0.667) and threshold tautology. C-PARAM-INHERIT regressed to MEASUREMENT_INVALID after synthetic POCs; no live-browser parameterized inheritance demonstrated despite WebArena census validated (192 tasks, 49 intents, dup 0.9479, AX 0.9). C-PRODUCT-ECON REJECTED after 6 vacuous extrapolations (logistic saturates at 0.5654 = constant null). C-WEB-DYNAMICS HYPOTHESIS after 59 synthetic-dominated tests: Bayesian DM K=12 first to pass C1+C3 on synthetic (168-643 nats, p 0.0005) but log BF -10 to -15 on real TodoMVC (M0 favored), PMI/TV/KDE intrinsic bias ~0.41-bit floor, Gate0 SPAs unavailable (substrate_unavailable). C-CROSSSITE/C-LLM-INHERIT census validated but website-holdout overlap unproven (Mind2Web 73 vs 137 divergence). Highest marginal value is direct end-to-end live tests of parameterized family-holdout inheritance and delta-repair with real LLM+Playwright, not another localhost divergence or decompression sweep.",
+    "schema_version": 1,
+    "scout_assessment": "Scout brief is accurate on evidence boundaries and cross-lane dependencies and correctly diagnoses tunneling (runtime 10/10 C-MEAS-VALID, graph 8/10 C-FRESHNESS, frontier 8/10 synthetic, physics 9/10 synthetic) and the information-gain priority (direct residual-novelty/param inheritance on WebArena family holdout vs synthetic sweeps). Used to prioritize: graph delta-repair now unblocked by runtime nginx substrate, product family-holdout as central product test, physics orthogonal program awaiting Intel Gate0, runtime pivot from localhost decompression to body-only + distributed provenance, and frontier pivot to workflow compilation (COVENANT/FlowFixer/RETRACE) over another KDE/kNN CV. Challenged/modified: Scout's suggestion to immediately test Mind2Web-2/Online-Mind2Web rubrics and WebGym-scale training is high-upside but premature \u2014 Intel must first pin and close the existing Mind2Web official train/test_website/test_domain holdout with spec-compliant TF-IDF->kmeans; only then re-anchor to Mind2Web-2/WebJudge. Scout's TERX/Stagehand exact-replay baselines adopted as mandatory B-REPLAY/0-token controls for product family-holdout. Scout rejected where it would keep frontier on synthetic alias-adapter variant of same basin."
+  },
+  "experiment_id": "EXP-PRODUCT-35756243655",
+  "inherited_last_verdict": "MEASUREMENT_INVALID",
+  "inherited_next_question": "Does a corrected kernel-integrated distill_parameterized (fixing _common_prefix_and_suffix double-prefix so full B identifiers bind correctly) enable a real LLM agent (gpt-4o-mini 15 steps, Playwright, 4096 tokens, temp 0, seed 42) on true WebArena-Verified v2 family hold-out (>=10 families, >=60 tasks, 49 templates, measured duplication) to achieve EXECUTABLE >=0.75 and binding correctness >=0.90 with zero unsubstituted templates, success margin >=0.12 vs B-COLD/B-RAG/B-REPLAY/B-INSTR, false_accept <=0.10, UNKNOWN in [0.00,0.15] with ECE <=0.15, and honest amortized saving >=25% vs COLD and <=0.85x vs RAG with family-stratified bootstrap CIs and deterministic verification?",
+  "lane": "product",
+  "origin_github_run_id": "35756243655",
+  "parent_handoff": {
+    "experiment_id": "EXP-PRODUCT-35752564139",
+    "path": "research/experiments/EXP-PRODUCT-35752564139/handoff.json",
+    "sha256": "9c2e7b2ca2e5fc61809a6a7cb532e1fcb36e3befd1607daaef24364d877a6b10"
+  },
+  "reason": "global-director-REOPEN",
+  "request_hash": "72098af145aac5d019e028207159ef8abd051d3da0e4e0571719d98af1820338",
+  "request_id": "dad9037d97f7ef7618156a40",
+  "schema_version": 1
+}
