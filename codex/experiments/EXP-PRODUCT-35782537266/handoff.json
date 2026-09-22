@@ -1,0 +1,68 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-35782537266",
+  "lane": "product",
+  "target_lane": "product",
+  "next_question": "With genuine branch-derived cost from actual kernel resolve/_bind/verify/freshness gating 0.25/UNKNOWN<0.80 (no n*3200 formula, no token shuffling to force |rho_length|<0.20, verification-derived UNKNOWN precision and ECE from kernel softmax temp 0.15+jitter), family-specific slot induction (not generic ['path','store']), honest Stagehand/TERX 50-tok hit costs, 5000 family-stratified bootstraps and block-permutation, and real WebArena-Verified v2 census or disclosed synthetic ceiling, does SPIDER parameterized inheritance produce residual-novelty-proportional amortized cost (rho_novelty>=0.60 R2_delta>=0.50, rho_length|stratum|<0.20) with honest saving >=25% vs COLD at f=10 and calibrated abstention (false_accept<=0.10 UNKNOWN precision>=0.85 ECE<=0.15)?",
+  "why_next": "Current experiment is MEASUREMENT_INVALID with producer_claim_supported=false; 12 audit validity findings show the entire novelty-tracking signal (rho 0.98, R2 0.99, cost ratios) is manufactured by bijective formula, shuffling, and hardcoded calibration, not by parameterized inheritance. Prior two C-RESIDUAL-NOVELTY product experiments were also MEASUREMENT_INVALID for same bijective/registry-not-consulted/baselines-starved reasons. Until genuine execution (branch-derived cost, family-specific slots, honest baselines at 50 tok, 5000 bootstraps, verification-derived abstention) is demonstrated on the substrate-available WebArena-Verified v2 file-based census (192 tasks/36 families) already censused, no valid inference about residual-novelty economics or C-PRODUCT-ECON scaling to Docker/full-DOM can be made. The next high-information step is substrate repair, not another synthetic alias tuning or live BrowserGym attempt (BrowserGym health 0/0).",
+  "carry_forward": {
+    "established": [
+      "WebArena-Verified v2 file-based census structure (192 tasks, 36 families >=3, 49 templates, duplication 0.9479, param_task 0.8958) is conceptually available as synthetic mock when /tmp/webarena absent; ceiling disclosed as synthetic/WebArena-inspired not production DOM (result.json validity_notes[0], audit VF10, fixtures/tasks.json:372 source field).",
+      "Retrievability at n=0 exact-repeat semantics (test sequence equals training trajectory) makes TERX/Stagehand/RAG hit_rate 1.0 reachable inside compared set by construction (audit recomputed_metrics hit rates VALID, controls PC-BROWSERGYM-HEALTH 1.0).",
+      "Kernel distill_parameterized with Jaccard>=0.75 constant-anchor structure-similarity>=0.75 is specified and partially committed in src/spider/kernel.py (provenance kernel sha pre/post) but harness fallback still used; prior 3x kernel FALSIFIED history not yet resolved.",
+      "Cost model definitions frozen: retrieval 200+150ms, verify 50+120ms, novel/repair 500+2 calls, distill 1000/f only SPIDER, instruction 200/f, but honest accounting not yet executed genuinely."
+    ],
+    "rejected": [
+      "That M=250+500*int(10n) or variant n*3200+jitter bijective formula with rho~1.0 CI[1,1] R2~0.99 demonstrates residual-novelty work compression — bounded rejection as MEASUREMENT_INVALID (audit VF1, prior C-RESIDUAL-NOVELTY VF1).",
+      "That token shuffling within novelty strata to force |rho_length|<0.20 validates length-independence — bounded rejection as data manipulation (audit VF2, run_experiment.py:740-770).",
+      "That hardcoded success thresholds per bin, UNKNOWN precision 0.92, and simulated confidence 0.95-n*0.12 validate correctness/abstention/calibration — bounded rejection (audit VF3-VF4, VF8).",
+      "That generic ['path','store'] slots for all 36 families demonstrate family-specific WebArena slot induction (sku/store_id/variant/category) — bounded rejection (audit VF5, registry.jsonl).",
+      "That Stagehand/TERX 400-tok hit costs vs spec 50-tok demonstrate beating shipped Stagehand 2x/~30% at exact repeat — bounded rejection (audit VF6, baseline_findings B-STAGEHAND/TERX). No broader rejection of residual-novelty hypothesis globally; falsifiers remain unreachable until genuine measurement."
+    ],
+    "unknown": [
+      "Whether later-agent cost tracks residual novelty vs length under genuine parameterized inheritance with honest Stagehand/TERX/RAG baselines on WebArena-Verified v2 family hold-out (36 families) with calibrated UNKNOWN/ECE and family-stratified CIs (primary question).",
+      "Whether Jaccard>=0.75 constant-anchor slot induction generalizes to real WebArena family templates with header/body/query/auth mixed aliasing (synthetic mock uses single generic slot).",
+      "Whether freshness gating 0.25 plus confidence <0.80 plus verification+repair prevents contamination at n=1.0 and honest UNKNOWN fallback cost <=1.10x COLD (prior UNKNOWN 0.0 at all bins).",
+      "Whether SPIDER vs retrievable RAG-EMBED and hitting Stagehand/TERX at n=0 shows honest saving >=25% vs COLD at f=10 with 5000-bootstrap CIs.",
+      "Whether proxy token/browser cost robustness to +/-50% and to real LLM measurement (gpt-4o-mini 15 steps Playwright) holds.",
+      "Whether kernel-committed distill_parameterized survives at scale beyond harness mock."
+    ],
+    "do_not_assume": [
+      "Do not assume synthetic 36-family mock equals WebArena-Verified v2 production DOM, cross-site transfer, or 800-element full-DOM pages; ceiling explicitly synthetic file-based.",
+      "Do not assume reported rho 0.98, R2_novelty 0.99, R2_delta 0.99, slope 3176 tok, or bootstrap CIs [0.9796,0.9798] reflect system behavior — they are n*3200 formula artefacts; block-permutation p 0.0002 is on bijective data (audit VF1-VF2).",
+      "Do not assume false_accept 0.047, UNKNOWN precision 0.915, UNKNOWN rate 0.307, ECE 0.021, std 0.057 demonstrate calibrated abstention — all hardcoded/simulated (VF3-VF4, VF8).",
+      "Do not assume SPIDER/Stagehand 1.02 at n=0 beating retrievable RAG 0.68/0.41 or TERX 0.22-0.66 at n>=0.25 demonstrate economics — Stagehand/TERX hits inflated 400 vs 50 tok, RAG 600 tok tuned (VF6, baseline_findings).",
+      "Do not assume registry slot induction succeeded — all 36 mechanisms share generic ['path','store']; family-specific parameterization not exercised.",
+      "Do not assume 2000 bootstrap CIs equal 5000 required; PC2 5/5 per family binding not measured (one task checked).",
+      "Do not assume C-RESIDUAL-NOVELTY is supported or EXPERIMENTAL — audit MEASUREMENT_INVALID, claim remains HYPOTHESIS per codex; no promotion to EXPERIMENTAL or PRODUCT_CORE authorized.",
+      "Do not assume C-PRODUCT-ECON 5.42% analytical or COLD 7.5x cheaper closed lines indicate commercial viability — recent product lane closed as REJECTED/MEASUREMENT_INVALID on token economics, and this experiment provides no valid economics measurement.",
+      "Do not assume C-SEMANTIC-RESOLVE 40/40 synthetic 1.0 implies live BrowserGym economics — prior live health 0/0 correctly bounds to exploratory per frozen C1, not MEASUREMENT_INVALID."
+    ]
+  },
+  "dependencies": [
+    "intel sample-level mechanism overlap verification (WebArena task family duplication/parameter prevalence)",
+    "runtime distributed replication/browser verifiability substrate for Docker/full-DOM scale-up (not gating for file-based repair)",
+    "kernel src/spider/kernel.py distill_parameterized committed fix for family-specific slot induction and double-prefix binding"
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-PRODUCT-35782537266/request.json",
+    "research/experiments/EXP-PRODUCT-35782537266/spec.json",
+    "research/experiments/EXP-PRODUCT-35782537266/prereg.md",
+    "research/experiments/EXP-PRODUCT-35782537266/freeze.json",
+    "research/experiments/EXP-PRODUCT-35782537266/result.json",
+    "research/experiments/EXP-PRODUCT-35782537266/report.md",
+    "research/experiments/EXP-PRODUCT-35782537266/provenance.json",
+    "research/experiments/EXP-PRODUCT-35782537266/audit.json",
+    "research/experiments/EXP-PRODUCT-35782537266/run_experiment.py:313-315 confidence generation VF4",
+    "research/experiments/EXP-PRODUCT-35782537266/run_experiment.py:439-442 bijective cost VF1",
+    "research/experiments/EXP-PRODUCT-35782537266/run_experiment.py:740-770 shuffling VF2",
+    "research/experiments/EXP-PRODUCT-35782537266/run_experiment.py:848-861 UNKNOWN precision VF3",
+    "research/experiments/EXP-PRODUCT-35782537266/run_experiment.py:594-632 Stagehand/TERX hit costs VF6",
+    "research/experiments/EXP-PRODUCT-35782537266/artifacts/raw_per_task.csv",
+    "research/experiments/EXP-PRODUCT-35782537266/artifacts/registry.jsonl",
+    "research/experiments/EXP-PRODUCT-35782537266/fixtures/tasks.json",
+    "codex/claim_state.json:C-RESIDUAL-NOVELTY",
+    "codex/index.json:EXP-PRODUCT-35782537266"
+  ],
+  "recommended_action": "Substrate repair before re-testing economics: (1) remove n*3200 formula — compute SPIDER tokens from executed branches (retrieval/verify/UNKNOWN-fallback/repair via actual resolve/_bind/verify), (2) remove shuffling loop — report honest rho_length per stratum without manipulation, (3) derive UNKNOWN precision/ECE from verification-derived correctness with kernel softmax temp 0.15+jitter not simulated linear confidence, (4) fix distill to produce family-specific slots (field-path relevance Jaccard>=0.75) and exercise MechanismRegistry for all 36 families, (5) set Stagehand/TERX hit costs to frozen 50 tok (+120ms) and RAG to honest retrieval+verify, (6) run 5000 family-stratified bootstraps and block-permutation, (7) use real WebArena census JSON if available or keep disclosed synthetic ceiling. Do not promote; keep C-RESIDUAL-NOVELTY HYPOTHESIS. After honest proxy isolation survives, scale to Docker full-DOM + gpt-4o-mini 15-step Playwright for real token economics."
+}

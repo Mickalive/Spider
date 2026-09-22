@@ -1,0 +1,48 @@
+{
+  "base_sha": "2b5630bf579448b3154d688e394c91fcd8848b11",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-22T21:37:18.163516+00:00",
+  "director_mandate": {
+    "agent_priors_used": [
+      "Path dependence/salience: without family hold-out with true unseen identifiers (WebArena-Verified v2 duplication 0.9479) reuse metrics inflate; family-stratified hold-out is minimal discriminating test - prior not SPIDER evidence",
+      "Long-horizon compounding + verify-before-act: without per-state verification and verify-before-store gate, flat replay accumulates silent drift; freshness must be measured as false_accept rate, not just success - prior not SPIDER evidence",
+      "Local optima/tunnel: 5/10 frontier on alias-OOD synthetic 40/40 and 8/10 intel on cross-site Gate0 with repeated 0/3 failures show diminishing returns; marginal information higher on neglected C-RESIDUAL-NOVELTY (4 exps) and single discriminating BrowserGym pilot vs another synthetic estimator variant - prior not SPIDER evidence",
+      "Work compression leverage requires orthogonal mechanisms: caching exact trajectories stays O(MxN); compilation to parameterized state machines with scoped variables changes exponent; most history discardable if compiled artifact correct - prior not SPIDER evidence",
+      "Measurement degeneracy at ceiling: when bodies/HIT-cache discriminate 1.0, header contribution unmeasurable; when SA pairs are singletons, PMI 0 tautologically forced; designs must include H>0 strata and non-degenerate controls - prior not SPIDER evidence",
+      "Commodity replay floor: TERX/CDP direct bridge and computer-use-cache deliver 0.09s 0-token HIT replay with postcondition text_contains; SPIDER must differentiate via parameterization+freshness+repair, not flat replay speed - prior not SPIDER evidence"
+    ],
+    "allocation": {
+      "action": "REOPEN",
+      "claim_id": "C-WEB-DYNAMICS",
+      "cognitive_reset": true,
+      "comparative_reasoning": "Vs another synthetic TV/KDE/kNN density-divergence variant: 9/10 recent frontier attempts showed persistent scaling failure, rotation blind spots, and CV>0.5 at 250/type; marginal information near zero. Vs production SPA CMI with trajectory-grouped permutation: blocked by Gate0 0/2-0/3 failures on titles/entropy/leakage. Vs supporting runtime BrowserGym capture harness: useful but physics charter prioritizes falsifiable dynamics test; harness work belongs to runtime lane. Correlated FSM provides discriminating positive vs independent-noise null on same substrate.",
+      "dependencies": [
+        "runtime:local correlated FSM harness already provisioned, no new Gate0 SPA required",
+        "intel:Gate0 SPA enumeration result bounds claim ceiling to synthetic correlated state"
+      ],
+      "parent_handoff_disposition": "USE",
+      "question": "On locally-hosted 6-state correlated FSM construction (L per trajectory 50x40 steps, basin bias 0.70/0.30, DOM_before SHA256(L||state||variant%3) 36 hashes |R|/N 0.018, independent-noise control falsified at BC 0.004 bits), with Bayesian Dirichlet-Multinomial recalibrated to K=24 (alpha=1/K) or N~4000 and trajectory-grouped permutation 1000 perms seed 42, does trajectory-grouped CMI achieve valid null centering (|null_mean|<0.1 null_std>0.01) with BC>0.05 p_bonf<0.01 and gap >=0.05 over B-DOM-SIMILARITY and B-MARKOV-1 on R1 visible_text_hash or R2 a11y_tree_hash while independent-noise replication remains BC~0 (|BC|<0.05 p>0.10 null_std>0.01), without requiring new Gate0 production SPAs?",
+      "rationale": "Physics is IDLE with tunnel_flag true after 14 recent C-WEB-DYNAMICS MEASUREMENT_INVALID/FALSIFIED bounded to synthetic 2D or minimal SPAs; Gate0 exhaustive enumeration 0/3 real SPAs (EXP-INTEL-35773136560) closes production-SPA PMI path for now. Bayesian K=12 is first estimator to pass C1+C3 on stochastic SPA (EXP-PHYSICS-35578258358 SURVIVES) but absolute BF negative on real TodoMVC; correlated non-determinism where DOM_before correlates with latent state is the only falsifiable beyond-memory program that does not require new Gate0 SPAs, and independent per-step noise was already falsified (0.004 bits). This converts borderline 0.688-bit signal into confirmatory test."
+    },
+    "cycle_id": "35787189488",
+    "lane": "physics",
+    "portfolio_assessment": "SPIDER at 254 canonical experiments: one validated synthetic mechanism (C-SEMANTIC-RESOLVE 40/40 pooled alias-OOD correct Wilson [0.912,1.0] p=1e-40 vs 0.10, 5/5 frontier+product SURVIVES gates with false_accept 0.0, ECE 0.065) but live generalization N=0 across all lanes; paid-CDN 10 conditions and BrowserGym 1280x720 AX capture repeatedly NOT_MEASURED (runtime tunnel 44, intel 0/3 real SPAs after exhaustive CAP/Mind2Web-2/WebJudge enumeration); gunicorn23+nginx loopback diagnostic 1.0/0.0 does not generalize to edge. C-FRESHNESS orthogonality confirmed locally (stratified pooled r=0.041 CI [-0.034,0.116] TOST p=0.002 n=684) but distributed fails C1 TN 0.667 due to per-node SQLite non-replication under round-robin. C-PARAM-INHERIT 42 exps reverted to MEASUREMENT_INVALID after kernel integration bugs (double-prefix, field-path filter, Jaccard >=0.75) - narrow POCs 10/10 single-param and 21/21 multi-param survive only in harness, not src/spider/kernel.py. C-DELTA-REPAIR 5x BLOCKED awaiting real LLM+Playwright cost <50% tokens <40% browser AUROC>=0.75 contamination <0.10 - HIT-cache 960/960 oracle-free verified. C-WEB-DYNAMICS 64 exps bounded to synthetic 2D [0,1]^2 or 3-state minimal SPAs: scaling rho ~0 and CV>0.5 persist, Bayesian K=12 is first estimator to pass C1+C3 on stochastic SPA but absolute BF -10 to -15 nats favors memory on real TodoMVC. C-RESIDUAL-NOVELTY (core promise 'pay cost of novelty') has only 4 exps, never tested head-on with matched length-controlled families and honest f=10 amortized economics vs commodity TERX 0.09s/0-token replay that already yields O(1). Global leverage now is (1) finishing parameterized inheritance in kernel with family hold-out vs RAG/TERX, (2) closing residual-novelty economics, (3) delivering distributed session-replicated substrate that unblocks freshness/delta-repair, and (4) pivoting intel/frontier from exhausted SPA enumeration/synthetic alias tuning to discriminating memory benchmarks (LongMemEval-V2 115M-token Insert/Query, MemoryArena 6.9-session, WebChoreArena 532 tasks).",
+    "schema_version": 1,
+    "scout_assessment": "Scout brief correctly diagnosed synthetic-to-real gap as dominant risk, tunnel flags on frontier (5/10 alias-OOD), intel (8/10 cross-site), runtime (44 C-MEAS-VALID), and that only C-SEMANTIC-RESOLVE has synthetic momentum with N_live=0. Adopted Scout's re-scoping of runtime paid-CDN 10 conditions to PARKED dependency and its priority to deliver distributed 2-node HS256+centralized session store (Redis) fixing TN 0.0->1.0; adopted Scout's emphasis on C-PARAM-INHERIT single-family pilot and C-RESIDUAL-NOVELTY as neglected core promise; adopted Scout's commodity replay insight (TERX/computer-use-cache O(1) baseline). Challenged Scout's suggestion to continue frontier live BrowserGym header/body/auth mixed-channel replication - marginal value low given 40/40 synthetic ceiling and no substrate; pivoted frontier instead to orthogonal MemoryArena multi-session port where RAG decays slower (12.2k vs 115M tokens) and Scout's WebChoreArena/MemoryArena suggestions provide more discriminating cross-site holdouts. Directed Intel to deep-verify LongMemEval-V2 Insert/Query latency+accuracy Pareto rather than another exhaustive SPA enumeration loop."
+  },
+  "experiment_id": "EXP-PHYSICS-35787698409",
+  "inherited_last_verdict": "MEASUREMENT_INVALID",
+  "inherited_next_question": "With Bayesian Dirichlet-Multinomial recalibrated to K=24 (alpha=1/K) or N\u22484000 on the same locally-hosted 6-state correlated FSM construction (L per trajectory 50x40 steps, basin bias 0.70/0.30, DOM_before SHA256(L||state||variant%3) 36 hashes |R|/N 0.018, trajectory-grouped permutation 1000 perms seed 42), does trajectory-grouped CMI achieve valid null centering (|null_mean|<0.1 null_std>0.01) with BC>0.05 p_bonf<0.01 and gap >=0.05 over B-DOM-SIMILARITY and B-MARKOV-1 on R1 visible_text_hash or R2 a11y_tree_hash while independent-noise replication remains BC~0 (|BC|<0.05 p>0.10 null_std>0.01), thereby converting the present borderline 0.688-bit signal into a confirmatory SURVIVES/FALSIFIED on this substrate without requiring new Gate0 production SPAs?",
+  "lane": "physics",
+  "origin_github_run_id": "35787698409",
+  "parent_handoff": {
+    "experiment_id": "EXP-PHYSICS-35782523165",
+    "path": "research/experiments/EXP-PHYSICS-35782523165/handoff.json",
+    "sha256": "247a634df0c252fe90e8d153f71084540ced3d54df527553e8a02061c4146d7f"
+  },
+  "reason": "global-director-REOPEN",
+  "request_hash": "407e80ea20846b46daf93a8d53b98986ebcfaf97b7627eec94811c93d48e9028",
+  "request_id": "f5b14923905c078ee22c1429",
+  "schema_version": 1
+}

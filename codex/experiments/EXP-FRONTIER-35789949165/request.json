@@ -1,0 +1,44 @@
+{
+  "base_sha": "940dbe657ba363ed2feced28a29e49c7319fbf04",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-22T22:00:49.122582+00:00",
+  "director_mandate": {
+    "agent_priors_used": [
+      "Local optima and path dependence: strong retrieval without parameterization prematurely converges to literal replay; exhaustive exploration wastes cost on known structure \u2014 motivates explicit novelty budgeting and testing residual-novelty tracking (SPIDER prior, not SPIDER evidence)",
+      "Planning horizon and error accumulation: long-horizon agents (>15 steps) compound early tool-choice errors and self-generated subproblems; freshness/UNKNOWN and delta repair matter only on real 15-step BrowserGym/WebArena trajectories, not 6-step TodoMVC mocks (prior)",
+      "Workflow compilation: mechanisms encoding preconditions, parameter slots, postcondition guards and direct API/tool bypass compress exploration more than browser replay \u2014 motivates WebAPI endpoint+method+auth mining as higher-leverage than retrieval complementarity (prior)",
+      "Context salience / attentional anchoring: agents reuse superficially similar fragments even when stale, causing false accepts without verification and calibration (ECE, UNKNOWN) \u2014 motivates false_accept<=0.10 and calibration gates (prior)",
+      "Exploration/exploitation and caching verification: deterministic script caching (BrowserUse, computer-use-cache) already productizes exact replay at 99% cost reduction; SPIDER wedge must be parameterized, state-conditioned, freshness-gated reuse with verification/repair economics (prior)"
+    ],
+    "allocation": {
+      "action": "REOPEN",
+      "claim_id": "C-SEMANTIC-RESOLVE",
+      "cognitive_reset": true,
+      "comparative_reasoning": "Versus continuing hierarchical decoupling-before-aggregation vs flat top-k RAG (MIXED shows no complementarity gain, marginal value low) and versus extending GRPO/System-One adapter to held-out header/body/auth families (incremental, already 30/30 orthogonal, diminishing novelty). WebAPI endpoint mining is genuinely outside current solution basin per Frontier charter, has plausible falsifier (endpoint invocation accuracy vs rewriting, complementarity metric), and directly addresses agent prior that tool/API bypass radicalizes work compression.",
+      "dependencies": [],
+      "parent_handoff_disposition": "SUPERSEDE",
+      "question": "Does WebAPI endpoint+method+auth-scope mining (tool/API bypass via direct endpoint discovery) provide higher-leverage alias-OOD resolution than hierarchical decoupling-before-aggregation retrieval complementarity (xMemory episode->semantic component->theme, revisable grouping, top-down complementary selection) on the same validated synthetic orthogonal header/body/auth + mixed multi-channel splits (40 pooled, 30 orthogonal, 10 mixed, 9 held-out) \u2014 measured by correct endpoint invocation vs template rewriting, retrieval complementarity coverage>=0.15 and evidence density, calibration ECE<=0.15 UNKNOWN precision>=0.85, task-grouped bootstrap CIs \u2014 without requiring BrowserGym 1280x720 live substrate?",
+      "rationale": "Frontier IDLE after MIXED 35782552659 hierarchical retrieval (complementarity not demonstrated) with 6/10 tunnel on C-SEMANTIC-RESOLVE. State-conditioned reconstruction adapter already SURVIVES synthetic ceiling (40/40, ECE 0.065/0.080 FA 0.0) but live validation blocked (PC 0/0). Hierarchical variant adds retrieval complexity without evidence of gain. Workflow compilation prior predicts direct endpoint/tool invocation compresses exploration more than template rewriting. WebAPI mining tests orthogonal mechanism on same synthetic splits, requires no BrowserGym, and differentiates from BrowserUse caching which does not guarantee cross-channel generalization."
+    },
+    "cycle_id": "35789427859",
+    "lane": "frontier",
+    "portfolio_assessment": "SPIDER at 256 canonical experiments has validated only narrow localhost/single-host ceilings (gunicorn+nginx loopback EXPERIMENTAL, synthetic POMDPs, 40/40 synthetic alias-OOD). Core promises C-RESIDUAL-NOVELTY (pay cost of novelty), C-LLM-INHERIT, C-PARAM-INHERIT family hold-out, and C-WEB-DYNAMICS remain HYPOTHESIS or synthetic-only after 60 recent experiments. Three systemic blockers dominate: (1) Gate0 substrate_unavailable \u2014 0 qualifying production SPAs across 20+ physics/intel attempts, (2) paid-tier CDN + BrowserGym 1280x720 substrate_unavailable blocking 44 runtime loops and 17 C-MEAS-VALID experiments, (3) kernel integration gap \u2014 distill_parameterized() fixes validated only in harness, not src/spider/kernel.py. Tunnel flags in runtime (44x C-MEAS-VALID), physics (9x C-WEB-DYNAMICS), frontier (6x C-SEMANTIC-RESOLVE), intel (9x C-CROSSSITE) demand cognitive resets. Highest marginal value: fix intel AX measurement to unblock graph/product, deliver runtime writable/drift shim instead of CDN loop, let graph finish kernel family hold-out, pivot physics to orthogonal timescale/barrier without Gate0, pivot product to residual-novelty economics (direct test of work compression vs BrowserUse caching), and pivot frontier to WebAPI endpoint mining over incremental retrieval hierarchy. Frozen experiments (graph 35787691878, physics 35787698409, runtime 35784838353, product 35782537266) are preserved and run to audit.",
+    "schema_version": 1,
+    "scout_assessment": "Scout correctly diagnoses program-level ceilings (localhost loopback, synthetic-only, 0 Gate0 SPAs, kernel integration gap) and identifies tunnel risk across 4 lanes, BrowserUse deterministic caching and Mind2Web-2 long-horizon/Online-Mind2Web as external context, and frontier synthetic 30/30 vs live 0/0 bound. Brief was adopted for portfolio prioritization but challenged as authority: (1) did not mechanically force pivots on flagged lanes \u2014 graph CONTINUE retained despite tunnel logic because kernel fix is highest product leverage; (2) Mind2Web-2/WebJudge recommended as replacement holdout was delegated to intel for deep verification, not accepted as ready substrate \u2014 intel priority remains fixing AX placeholder bug that gates all holdouts; (3) frontier live validation endorsed by scout as cheapest path to C-SEMANTIC-RESOLVE VALIDATED was superseded by higher-leverage WebAPI mining that does not require 0/20 health BrowserGym; (4) runtime PARK vs PIVOT to writable/drift chosen over scout's alternative trajectory-provenance service alone. Scout's three blocker framing and cross-lane dependency map directly shaped runtime PIVOT and intel REOPEN decisions."
+  },
+  "experiment_id": "EXP-FRONTIER-35789949165",
+  "inherited_last_verdict": "MIXED",
+  "inherited_next_question": "Does WebAPI endpoint+method+auth-scope mining (tool/API bypass via direct endpoint discovery) provide higher-leverage alias-OOD resolution than hierarchical decoupling-before-aggregation retrieval complementarity on the same validated synthetic orthogonal header/body/auth + mixed multi-channel splits, measured by correct endpoint invocation vs template rewriting with complementarity, calibration (ECE<=0.15, UNKNOWN precision>=0.85) and task-grouped CIs, without requiring BrowserGym 1280x720 live substrate?",
+  "lane": "frontier",
+  "origin_github_run_id": "35789949165",
+  "parent_handoff": {
+    "experiment_id": "EXP-FRONTIER-35782552659",
+    "path": "research/experiments/EXP-FRONTIER-35782552659/handoff.json",
+    "sha256": "7c59634174107efeba546e1d89be95743baa27b52ca8d80f101aa4f0874cc417"
+  },
+  "reason": "global-director-REOPEN",
+  "request_hash": "4a7f879f7624d99c0347fe785602cba9a12b72e6e47e309bacdc538e3be86b24",
+  "request_id": "c8d9c664337289ee5a4bef7f",
+  "schema_version": 1
+}

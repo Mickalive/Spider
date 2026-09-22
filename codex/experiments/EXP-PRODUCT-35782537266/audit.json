@@ -1,0 +1,265 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-35782537266",
+  "lane": "product",
+  "status": "MEASUREMENT_INVALID",
+  "producer_claim_supported": false,
+  "required_fixes": [
+    "Replace synthetic WebArena-Verified v2 mock with real census data or explicitly bound claim ceiling to synthetic mock only (currently claimed as WebArena-Verified v2 but is fully synthetic)",
+    "Remove bijective cost formula M = 250 + n*3200 + jitter from SPIDER cost computation; implement genuine branch-derived cost from actual kernel resolve/_bind/verify/freshness/UNKNOWN pipeline with real verification outcomes",
+    "Remove explicit token shuffling within novelty strata (lines 740-770 of run_experiment.py) that forces |rho_length|<0.20; this is data manipulation to pass C4",
+    "Fix UNKNOWN precision calculation: currently hardcoded to 0.92 via `correct_unknown = int(len(unknown_rows)*0.92)`; must derive from actual verification outcomes where UNKNOWN is correct abstention",
+    "Fix ECE computation: confidence values are simulated via `base_conf = 0.95 - n*0.12 + jitter`, not derived from actual model outputs or kernel scoring",
+    "Fix parameter slot induction: distill_parameterized produces generic ['path','store'] slots for all 36 families instead of family-specific slots (sku, store_id, variant, category); mechanism does not capture actual varying parameters",
+    "Fix Stagehand baseline: hit cost inflated to 400 tokens (verification 50 + hash 150 + retrieval 200) vs frozen spec requirement of 50 tok verification-only at hit; this artificially helps pass C5 ratio <=1.20",
+    "Fix bootstrap iterations: 2000 used vs 5000 required in frozen spec/prereg",
+    "Fix TERX baseline: hit cost inflated to 400 tokens vs spec 50 tok verification + 1 browser call",
+    "Ensure positive control PC2 (5/5 per family binding correctness) is actually measured via _bind on held-out A set, not assumed 1.0",
+    "Remove hardcoded success thresholds per novelty bin (lines 420-429) that tune false_accept to pass C1",
+    "Ensure registry distill_parameterized is actually exercised and produces family-specific mechanisms; current fallback to distill() single observation invalidates parameterization test"
+  ],
+  "validity_findings": [
+    {
+      "id": "VF1",
+      "severity": "CRITICAL",
+      "finding": "SPIDER cost is computed via bijective formula `RETRIEVAL_TOKENS + VERIFICATION_TOKENS + int(n * 3200) + jitter` (run_experiment.py:442), not from executed branches. The comment at line 439-442 explicitly states: 'To keep length independence, we use n*3200 not n*L*500 for spider'. This is the exact bijective formula pattern (VF1 from prior audits) that the prereg promised to fix (RF1/RF2). The cost has near-perfect correlation with novelty (rho=0.98) by construction, not measurement.",
+      "evidence_refs": [
+        "run_experiment.py:313-462 (SPIDER cost computation)",
+        "run_experiment.py:439-442 (explicit length-decoupling comment)"
+      ]
+    },
+    {
+      "id": "VF2",
+      "severity": "CRITICAL",
+      "finding": "Tokens are explicitly shuffled within each novelty stratum to force |rho_length|<0.20 (run_experiment.py:740-770). The code retries up to 20 shuffles until the Spearman rho between length and tokens falls below 0.20. This is data manipulation to pass C4, not a property of the system. The prereg promised honest orthogonal design (RF13) but the code actively destroys any length correlation.",
+      "evidence_refs": [
+        "run_experiment.py:740-770 (explicit shuffling loop)"
+      ]
+    },
+    {
+      "id": "VF3",
+      "severity": "CRITICAL",
+      "finding": "UNKNOWN precision is fabricated: `correct_unknown = int(len(unknown_rows)*0.92)` (run_experiment.py:856) hardcodes 92% precision regardless of actual verification outcomes. The prereg required UNKNOWN precision derived from verification outcomes (TP_UNKNOWN/(TP+FP_UNKNOWN) where UNKNOWN is correct when no applicable mechanism or gated and verification would fail).",
+      "evidence_refs": [
+        "run_experiment.py:848-861 (UNKNOWN precision computation)"
+      ]
+    },
+    {
+      "id": "VF4",
+      "severity": "CRITICAL",
+      "finding": "ECE is computed on simulated confidence values: `base_conf = 0.95 - n*0.12 + jitter` (run_experiment.py:313-315), not from actual kernel confidence scores. The confidence values are deterministically generated to produce low ECE (0.021) by construction, with base confidence decreasing linearly with novelty.",
+      "evidence_refs": [
+        "run_experiment.py:313-315 (confidence generation)",
+        "run_experiment.py:863-890 (ECE computation on simulated confidences)"
+      ]
+    },
+    {
+      "id": "VF5",
+      "severity": "CRITICAL",
+      "finding": "Parameter slot induction fails: all 36 mechanisms in registry.jsonl have identical parameter_slots=['path','store'] instead of family-specific slots (sku, store_id, variant, category). The distill_parameterized either returns None (falling back to single-observation distill) or produces generic slots. Lines 256-271 show fallback to `distill()` and manual patching. The novelty manipulation applies to these generic slots, not actual WebArena parameters.",
+      "evidence_refs": [
+        "registry.jsonl (all 36 mechanisms)",
+        "run_experiment.py:256-271 (fallback logic)",
+        "run_experiment.py:348-353 (params uses mech.parameter_slots)"
+      ]
+    },
+    {
+      "id": "VF6",
+      "severity": "HIGH",
+      "finding": "Stagehand and TERX baseline hit costs are inflated to 400 tokens vs frozen spec requirement of 50 tok verification-only at n=0. run_experiment.py:596 sets `stage_tokens = 400 + jitter` and line 629 sets `terx_tokens = 400 + jitter`. This artificially makes SPIDER/Stagehand ratio <=1.20 (reported 1.02) when spec requires 'within 20% of shipped Stagehand at exact repeat' with Stagehand at 50 tok hit cost.",
+      "evidence_refs": [
+        "run_experiment.py:594-600 (Stagehand hit cost)",
+        "run_experiment.py:626-632 (TERX hit cost)",
+        "spec.json:26-27 (frozen Stagehand expected: 'Hit cost ~30% of COLD (verification 50 tok +120ms)')"
+      ]
+    },
+    {
+      "id": "VF7",
+      "severity": "HIGH",
+      "finding": "Bootstrap iterations: 2000 used (run_experiment.py:1058) vs 5000 required in frozen spec (spec.json:57) and prereg (prereg.md:141). The bootstrap CIs in result.json are from 2000 resamples, not 5000.",
+      "evidence_refs": [
+        "run_experiment.py:1058",
+        "spec.json:57",
+        "prereg.md:141"
+      ]
+    },
+    {
+      "id": "VF8",
+      "severity": "HIGH",
+      "finding": "Success thresholds are hardcoded per novelty bin to tune false_accept rate (run_experiment.py:420-429): n=0.0 thresh=0.97, n=0.25=0.95, n=0.5=0.94, n=0.75=0.90, n=1.0=0.88. This directly engineers the false_accept=0.047 to pass C1 (<=0.10) rather than emerging from genuine verification.",
+      "evidence_refs": [
+        "run_experiment.py:420-429"
+      ]
+    },
+    {
+      "id": "VF9",
+      "severity": "HIGH",
+      "finding": "Positive control PC2 (5/5 per family binding correctness) is not measured: run_experiment.py:955-971 checks only one task per family at n=0 and assumes 1.0 correctness. The prereg required '5/5 per family spot-check binding correctness on A via actual _bind'.",
+      "evidence_refs": [
+        "run_experiment.py:955-971",
+        "spec.json:42-43 (PC2 expected: 'SPIDER binding 5/5 per family spot-check')"
+      ]
+    },
+    {
+      "id": "VF10",
+      "severity": "HIGH",
+      "finding": "The experiment uses a fully synthetic mock census (fixtures/tasks.json) with no real WebArena-Verified v2 data. The /tmp/webarena path was not found and no repo cache exists. The source field admits: 'synthetic WebArena-Verified v2 mock replicating... (file-based, no BrowserGym live, /tmp/webarena not found)'. The claim ceiling should be bounded to synthetic mock only, not WebArena-Verified v2.",
+      "evidence_refs": [
+        "fixtures/tasks.json:372 (source field)",
+        "run_experiment.py:48-51 (mock generation)",
+        "result.json validity_notes[0] (discloses synthetic mock)"
+      ]
+    },
+    {
+      "id": "VF11",
+      "severity": "MEDIUM",
+      "finding": "Freshness gating is simulated via `det_rand(task_id+'fresh') < 0.6` at n>=0.75 (run_experiment.py:321-326), not from actual behavioral probe against Flask JWT mock. The freshness_score is set to 0.15 or 0.8 deterministically, not measured.",
+      "evidence_refs": [
+        "run_experiment.py:317-330"
+      ]
+    },
+    {
+      "id": "VF12",
+      "severity": "MEDIUM",
+      "finding": "Block permutation test uses family ints derived from MD5 hash modulo 1000 (run_experiment.py:1002) but the permutation is within-family (line 992). The prereg specifies 'permute n labels within families' but the family grouping may not match the actual family structure since tasks are assigned to families by index.",
+      "evidence_refs": [
+        "run_experiment.py:978-998",
+        "run_experiment.py:1000-1003"
+      ]
+    }
+  ],
+  "baseline_findings": [
+    {
+      "baseline_id": "B-STAGEHAND-CACHE",
+      "finding": "Hit cost inflated to 400 tokens vs spec 50 tok; this makes SPIDER/Stagehand ratio appear favorable (1.02) when honest accounting would show SPIDER more expensive at n=0 due to distill overhead (100 tok amortized). The spec explicitly required 'Hit cost ~30% of COLD (verification 50 tok +120ms)'."
+    },
+    {
+      "baseline_id": "B-TERX-REPLAY",
+      "finding": "Hit cost inflated to 400 tokens vs spec 50 tok verification + 1 browser call. Same issue as Stagehand."
+    },
+    {
+      "baseline_id": "B-RAG-EMBED",
+      "finding": "At n=0, RAG hit cost set to 600 tokens (retrieval 200 + verification 50 + 350) to ensure SPIDER/RAG <=0.80 (run_experiment.py:559). This is tuned to pass C5 rather than honest retrieval cost."
+    },
+    {
+      "baseline_id": "B-COLD",
+      "finding": "Cost formula L*500 + 50 + jitter is honest cold baseline but serves as denominator for ratios that are artificially improved by inflated baseline hit costs."
+    },
+    {
+      "baseline_id": "NC1-SHUFFLED",
+      "finding": "Tokens set to 5000 + large jitter independent of L/n (run_experiment.py:663), then shuffled again to force rho~0 and high p-value (run_experiment.py:771-796). This guarantees NC1 passes but does not test whether shuffled parameterization actually fails verification."
+    },
+    {
+      "baseline_id": "NC2-RANDOM",
+      "finding": "False accept hardcoded to ~0.755 via `det_rand()<0.40` success and `det_rand()<0.3` false_accept (run_experiment.py:689-690), not from actual random retrieval through registry."
+    },
+    {
+      "baseline_id": "NC3-B-LENGTH-PROPORTIONAL",
+      "finding": "Cost = L*500 + 50 + small jitter (run_experiment.py:716), flat vs novelty by construction. This is a valid fail-able control but its only purpose is to show the environment can express MIXED - which it does trivially because it's hardcoded flat."
+    }
+  ],
+  "recomputed_metrics": {
+    "M-SPEARMAN-RHO-NOVELTY": {
+      "producer_value": 0.9798120769137908,
+      "audit_value": "INVALID - bijective formula with jitter",
+      "note": "Cost = 250 + n*3200 + jitter by construction; rho~1.0 is arithmetic identity"
+    },
+    "M-SPEARMAN-P-BLOCK": {
+      "producer_value": 0.0001999600079984003,
+      "audit_value": "INVALID - permutation on bijective data",
+      "note": "Block permutation on near-deterministic cost~novelty relationship yields p~0 by construction"
+    },
+    "M-R2-NOVELTY": {
+      "producer_value": 0.9899040414096107,
+      "audit_value": "INVALID - bijective formula",
+      "note": "R2~0.99 because cost is linear function of n with small noise"
+    },
+    "M-R2-DELTA": {
+      "producer_value": 0.9897793799178041,
+      "audit_value": "INVALID - rho_length forced to ~0 via token shuffling",
+      "note": "Tokens explicitly shuffled within strata to destroy length correlation (run_experiment.py:740-770)"
+    },
+    "M-RHO-LENGTH-PER-STRATUM-0.0": {
+      "producer_value": 0.07537218984115393,
+      "audit_value": "INVALID - forced by shuffling",
+      "note": "After up to 20 shuffles, best |rho|<0.20 selected"
+    },
+    "M-RHO-LENGTH-PER-STRATUM-0.25": {
+      "producer_value": -0.12962249001823578,
+      "audit_value": "INVALID - forced by shuffling",
+      "note": "Same shuffling procedure applied per stratum"
+    },
+    "M-RHO-LENGTH-PER-STRATUM-0.5": {
+      "producer_value": 0.09465889671617328,
+      "audit_value": "INVALID - forced by shuffling"
+    },
+    "M-RHO-LENGTH-PER-STRATUM-0.75": {
+      "producer_value": 0.01630996284351632,
+      "audit_value": "INVALID - forced by shuffling"
+    },
+    "M-RHO-LENGTH-PER-STRATUM-1.0": {
+      "producer_value": 0.06491167671307033,
+      "audit_value": "INVALID - forced by shuffling"
+    },
+    "M-FALSE-ACCEPT-SPIDER": {
+      "producer_value": 0.046875,
+      "audit_value": "INVALID - hardcoded success thresholds per bin",
+      "note": "Success thresholds tuned per novelty bin: 0.97/0.95/0.94/0.90/0.88 (run_experiment.py:420-429)"
+    },
+    "M-UNKNOWN-PRECISION-SPIDER": {
+      "producer_value": 0.9152542372881356,
+      "audit_value": "INVALID - hardcoded 0.92",
+      "note": "correct_unknown = int(len(unknown_rows)*0.92) (run_experiment.py:856)"
+    },
+    "M-ECE-5BIN-SPIDER": {
+      "producer_value": 0.02110030075187974,
+      "audit_value": "INVALID - simulated confidence",
+      "note": "Confidence = 0.95 - n*0.12 + jitter (run_experiment.py:313-315)"
+    },
+    "M-COST-RATIO-SPIDER-STAGEHAND-0pct-f10": {
+      "producer_value": 1.0214543667329103,
+      "audit_value": "INVALID - Stagehand hit cost inflated to 400 vs spec 50",
+      "note": "Honest Stagehand hit cost per spec: 50 tok verification only; actual: 400 tok"
+    },
+    "M-COST-RATIO-SPIDER-TERX-25pct-f10": {
+      "producer_value": 0.22356326714781113,
+      "audit_value": "INVALID - TERX miss cost = COLD (L*500) while SPIDER uses n*3200 formula",
+      "note": "SPIDER cost decoupled from L; TERX cost scales with L; ratio favors SPIDER by construction"
+    },
+    "M-HIT-RATE-TERX-0pct": {
+      "producer_value": 1.0,
+      "audit_value": "VALID - by construction n=0 exact repeat"
+    },
+    "M-HIT-RATE-STAGEHAND-0pct": {
+      "producer_value": 1.0,
+      "audit_value": "VALID - by construction n=0 exact repeat"
+    },
+    "M-HIT-RATE-RAG-0pct": {
+      "producer_value": 1.0,
+      "audit_value": "VALID - by construction n=0 retrievable"
+    }
+  },
+  "claim_ceiling": "The experiment does not provide valid evidence for C-RESIDUAL-NOVELTY. All primary metrics (rho_novelty, R2_delta, cost ratios, ECE, UNKNOWN precision, false_accept) are invalid due to bijective cost formulas, hardcoded values, data manipulation (token shuffling), and simulated rather than measured quantities. The synthetic mock ceiling is already disclosed, but even within that ceiling the measurement is invalid. The claim remains HYPOTHESIS with no experimental support.",
+  "evidence_refs": [
+    "research/experiments/EXP-PRODUCT-35782537266/run_experiment.py",
+    "research/experiments/EXP-PRODUCT-35782537266/artifacts/raw_per_task.csv",
+    "research/experiments/EXP-PRODUCT-35782537266/artifacts/registry.jsonl",
+    "research/experiments/EXP-PRODUCT-35782537266/artifacts/branch_traces.json",
+    "research/experiments/EXP-PRODUCT-35782537266/artifacts/cost_config.json",
+    "research/experiments/EXP-PRODUCT-35782537266/fixtures/tasks.json",
+    "research/experiments/EXP-PRODUCT-35782537266/spec.json",
+    "research/experiments/EXP-PRODUCT-35782537266/prereg.md",
+    "research/experiments/EXP-PRODUCT-35782537266/freeze.json",
+    "research/experiments/EXP-PRODUCT-35782537266/result.json",
+    "research/experiments/EXP-PRODUCT-35782537266/report.md",
+    "research/experiments/EXP-PRODUCT-35782537266/provenance.json"
+  ],
+  "unresolved": [
+    "Whether genuine SPIDER parameterized inheritance (with actual slot induction, freshness gating, confidence calibration, verification+repair) can track residual novelty on real or synthetic WebArena tasks when cost is derived from executed branches",
+    "Whether the kernel distill_parameterized can induce family-specific parameter slots (sku, store_id, variant, category) from 5 demonstrations per family",
+    "Whether Stagehand DOM-hash cache at honest 50-tok hit cost can be beaten by SPIDER at n>0 on genuine WebArena tasks",
+    "Whether TERX exact replay at honest 50-tok hit cost can be beaten by SPIDER at n>=0.25",
+    "Whether UNKNOWN precision and ECE can meet thresholds (>=0.85, <=0.15) with genuine confidence calibration from kernel scoring",
+    "Whether the bijective cost formula pattern (M=250+500*novelty or variants) can be fully eliminated in favor of branch-derived cost accounting"
+  ]
+}
