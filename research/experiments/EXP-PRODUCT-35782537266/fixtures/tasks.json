@@ -1,0 +1,2871 @@
+{
+  "duplication": 0.9479,
+  "families": [
+    {
+      "family_id": "family_00",
+      "family_idx": 0,
+      "length": 8,
+      "slots": [
+        "sku",
+        "store_id"
+      ],
+      "template_id": "template_00"
+    },
+    {
+      "family_id": "family_01",
+      "family_idx": 1,
+      "length": 9,
+      "slots": [
+        "sku",
+        "variant"
+      ],
+      "template_id": "template_01"
+    },
+    {
+      "family_id": "family_02",
+      "family_idx": 2,
+      "length": 10,
+      "slots": [
+        "sku",
+        "store_id",
+        "category"
+      ],
+      "template_id": "template_02"
+    },
+    {
+      "family_id": "family_03",
+      "family_idx": 3,
+      "length": 11,
+      "slots": [
+        "sku"
+      ],
+      "template_id": "template_03"
+    },
+    {
+      "family_id": "family_04",
+      "family_idx": 4,
+      "length": 12,
+      "slots": [
+        "sku",
+        "store_id"
+      ],
+      "template_id": "template_04"
+    },
+    {
+      "family_id": "family_05",
+      "family_idx": 5,
+      "length": 13,
+      "slots": [
+        "sku",
+        "variant"
+      ],
+      "template_id": "template_05"
+    },
+    {
+      "family_id": "family_06",
+      "family_idx": 6,
+      "length": 14,
+      "slots": [
+        "sku",
+        "store_id",
+        "category"
+      ],
+      "template_id": "template_06"
+    },
+    {
+      "family_id": "family_07",
+      "family_idx": 7,
+      "length": 8,
+      "slots": [
+        "sku"
+      ],
+      "template_id": "template_07"
+    },
+    {
+      "family_id": "family_08",
+      "family_idx": 8,
+      "length": 9,
+      "slots": [
+        "sku",
+        "store_id"
+      ],
+      "template_id": "template_08"
+    },
+    {
+      "family_id": "family_09",
+      "family_idx": 9,
+      "length": 10,
+      "slots": [
+        "sku",
+        "variant"
+      ],
+      "template_id": "template_09"
+    },
+    {
+      "family_id": "family_10",
+      "family_idx": 10,
+      "length": 11,
+      "slots": [
+        "sku",
+        "store_id",
+        "category"
+      ],
+      "template_id": "template_10"
+    },
+    {
+      "family_id": "family_11",
+      "family_idx": 11,
+      "length": 12,
+      "slots": [
+        "sku"
+      ],
+      "template_id": "template_11"
+    },
+    {
+      "family_id": "family_12",
+      "family_idx": 12,
+      "length": 13,
+      "slots": [
+        "sku",
+        "store_id"
+      ],
+      "template_id": "template_12"
+    },
+    {
+      "family_id": "family_13",
+      "family_idx": 13,
+      "length": 14,
+      "slots": [
+        "sku",
+        "variant"
+      ],
+      "template_id": "template_13"
+    },
+    {
+      "family_id": "family_14",
+      "family_idx": 14,
+      "length": 8,
+      "slots": [
+        "sku",
+        "store_id",
+        "category"
+      ],
+      "template_id": "template_14"
+    },
+    {
+      "family_id": "family_15",
+      "family_idx": 15,
+      "length": 9,
+      "slots": [
+        "sku"
+      ],
+      "template_id": "template_15"
+    },
+    {
+      "family_id": "family_16",
+      "family_idx": 16,
+      "length": 10,
+      "slots": [
+        "sku",
+        "store_id"
+      ],
+      "template_id": "template_16"
+    },
+    {
+      "family_id": "family_17",
+      "family_idx": 17,
+      "length": 11,
+      "slots": [
+        "sku",
+        "variant"
+      ],
+      "template_id": "template_17"
+    },
+    {
+      "family_id": "family_18",
+      "family_idx": 18,
+      "length": 12,
+      "slots": [
+        "sku",
+        "store_id",
+        "category"
+      ],
+      "template_id": "template_18"
+    },
+    {
+      "family_id": "family_19",
+      "family_idx": 19,
+      "length": 13,
+      "slots": [
+        "sku"
+      ],
+      "template_id": "template_19"
+    },
+    {
+      "family_id": "family_20",
+      "family_idx": 20,
+      "length": 14,
+      "slots": [
+        "sku",
+        "store_id"
+      ],
+      "template_id": "template_20"
+    },
+    {
+      "family_id": "family_21",
+      "family_idx": 21,
+      "length": 8,
+      "slots": [
+        "sku",
+        "variant"
+      ],
+      "template_id": "template_21"
+    },
+    {
+      "family_id": "family_22",
+      "family_idx": 22,
+      "length": 9,
+      "slots": [
+        "sku",
+        "store_id",
+        "category"
+      ],
+      "template_id": "template_22"
+    },
+    {
+      "family_id": "family_23",
+      "family_idx": 23,
+      "length": 10,
+      "slots": [
+        "sku"
+      ],
+      "template_id": "template_23"
+    },
+    {
+      "family_id": "family_24",
+      "family_idx": 24,
+      "length": 11,
+      "slots": [
+        "sku",
+        "store_id"
+      ],
+      "template_id": "template_24"
+    },
+    {
+      "family_id": "family_25",
+      "family_idx": 25,
+      "length": 12,
+      "slots": [
+        "sku",
+        "variant"
+      ],
+      "template_id": "template_25"
+    },
+    {
+      "family_id": "family_26",
+      "family_idx": 26,
+      "length": 13,
+      "slots": [
+        "sku",
+        "store_id",
+        "category"
+      ],
+      "template_id": "template_26"
+    },
+    {
+      "family_id": "family_27",
+      "family_idx": 27,
+      "length": 14,
+      "slots": [
+        "sku"
+      ],
+      "template_id": "template_27"
+    },
+    {
+      "family_id": "family_28",
+      "family_idx": 28,
+      "length": 8,
+      "slots": [
+        "sku",
+        "store_id"
+      ],
+      "template_id": "template_28"
+    },
+    {
+      "family_id": "family_29",
+      "family_idx": 29,
+      "length": 9,
+      "slots": [
+        "sku",
+        "variant"
+      ],
+      "template_id": "template_29"
+    },
+    {
+      "family_id": "family_30",
+      "family_idx": 30,
+      "length": 10,
+      "slots": [
+        "sku",
+        "store_id",
+        "category"
+      ],
+      "template_id": "template_30"
+    },
+    {
+      "family_id": "family_31",
+      "family_idx": 31,
+      "length": 11,
+      "slots": [
+        "sku"
+      ],
+      "template_id": "template_31"
+    },
+    {
+      "family_id": "family_32",
+      "family_idx": 32,
+      "length": 12,
+      "slots": [
+        "sku",
+        "store_id"
+      ],
+      "template_id": "template_32"
+    },
+    {
+      "family_id": "family_33",
+      "family_idx": 33,
+      "length": 13,
+      "slots": [
+        "sku",
+        "variant"
+      ],
+      "template_id": "template_33"
+    },
+    {
+      "family_id": "family_34",
+      "family_idx": 34,
+      "length": 14,
+      "slots": [
+        "sku",
+        "store_id",
+        "category"
+      ],
+      "template_id": "template_34"
+    },
+    {
+      "family_id": "family_35",
+      "family_idx": 35,
+      "length": 8,
+      "slots": [
+        "sku"
+      ],
+      "template_id": "template_35"
+    }
+  ],
+  "families_ge3": 36,
+  "hash": "e824ab3157cbd299",
+  "num_families": 36,
+  "num_tasks": 192,
+  "num_templates": 49,
+  "param_task": 0.8958,
+  "param_template": 0.8367,
+  "source": "synthetic WebArena-Verified v2 mock replicating 36 families >=3, 49 templates, duplication 0.9479 param_task 0.8958 (file-based, no BrowserGym live, /tmp/webarena not found)",
+  "tasks": [
+    {
+      "family_id": "family_00",
+      "family_idx": 0,
+      "length": 8,
+      "novelty_fraction": 0.5,
+      "slots": [
+        "sku",
+        "store_id"
+      ],
+      "task_id": "task_0000",
+      "task_idx_in_family": 0,
+      "template_id": "template_00"
+    },
+    {
+      "family_id": "family_00",
+      "family_idx": 0,
+      "length": 8,
+      "novelty_fraction": 0.25,
+      "slots": [
+        "sku",
+        "store_id"
+      ],
+      "task_id": "task_0001",
+      "task_idx_in_family": 1,
+      "template_id": "template_00"
+    },
+    {
+      "family_id": "family_00",
+      "family_idx": 0,
+      "length": 8,
+      "novelty_fraction": 1.0,
+      "slots": [
+        "sku",
+        "store_id"
+      ],
+      "task_id": "task_0002",
+      "task_idx_in_family": 2,
+      "template_id": "template_00"
+    },
+    {
+      "family_id": "family_00",
+      "family_idx": 0,
+      "length": 8,
+      "novelty_fraction": 0.0,
+      "slots": [
+        "sku",
+        "store_id"
+      ],
+      "task_id": "task_0003",
+      "task_idx_in_family": 3,
+      "template_id": "template_00"
+    },
+    {
+      "family_id": "family_00",
+      "family_idx": 0,
+      "length": 8,
+      "novelty_fraction": 0.75,
+      "slots": [
+        "sku",
+        "store_id"
+      ],
+      "task_id": "task_0004",
+      "task_idx_in_family": 4,
+      "template_id": "template_00"
+    },
+    {
+      "family_id": "family_00",
+      "family_idx": 0,
+      "length": 8,
+      "novelty_fraction": 0.0,
+      "slots": [
+        "sku",
+        "store_id"
+      ],
+      "task_id": "task_0005",
+      "task_idx_in_family": 5,
+      "template_id": "template_00"
+    },
+    {
+      "family_id": "family_01",
+      "family_idx": 1,
+      "length": 9,
+      "novelty_fraction": 1.0,
+      "slots": [
+        "sku",
+        "variant"
+      ],
+      "task_id": "task_0006",
+      "task_idx_in_family": 0,
+      "template_id": "template_01"
+    },
+    {
+      "family_id": "family_01",
+      "family_idx": 1,
+      "length": 9,
+      "novelty_fraction": 0.75,
+      "slots": [
+        "sku",
+        "variant"
+      ],
+      "task_id": "task_0007",
+      "task_idx_in_family": 1,
+      "template_id": "template_01"
+    },
+    {
+      "family_id": "family_01",
+      "family_idx": 1,
+      "length": 9,
+      "novelty_fraction": 0.5,
+      "slots": [
+        "sku",
+        "variant"
+      ],
+      "task_id": "task_0008",
+      "task_idx_in_family": 2,
+      "template_id": "template_01"
+    },
+    {
+      "family_id": "family_01",
+      "family_idx": 1,
+      "length": 9,
+      "novelty_fraction": 0.25,
+      "slots": [
+        "sku",
+        "variant"
+      ],
+      "task_id": "task_0009",
+      "task_idx_in_family": 3,
+      "template_id": "template_01"
+    },
+    {
+      "family_id": "family_01",
+      "family_idx": 1,
+      "length": 9,
+      "novelty_fraction": 0.25,
+      "slots": [
+        "sku",
+        "variant"
+      ],
+      "task_id": "task_0010",
+      "task_idx_in_family": 4,
+      "template_id": "template_01"
+    },
+    {
+      "family_id": "family_01",
+      "family_idx": 1,
+      "length": 9,
+      "novelty_fraction": 0.0,
+      "slots": [
+        "sku",
+        "variant"
+      ],
+      "task_id": "task_0011",
+      "task_idx_in_family": 5,
+      "template_id": "template_01"
+    },
+    {
+      "family_id": "family_02",
+      "family_idx": 2,
+      "length": 10,
+      "novelty_fraction": 1.0,
+      "slots": [
+        "sku",
+        "store_id",
+        "category"
+      ],
+      "task_id": "task_0012",
+      "task_idx_in_family": 0,
+      "template_id": "template_02"
+    },
+    {
+      "family_id": "family_02",
+      "family_idx": 2,
+      "length": 10,
+      "novelty_fraction": 0.5,
+      "slots": [
+        "sku",
+        "store_id",
+        "category"
+      ],
+      "task_id": "task_0013",
+      "task_idx_in_family": 1,
+      "template_id": "template_02"
+    },
+    {
+      "family_id": "family_02",
+      "family_idx": 2,
+      "length": 10,
+      "novelty_fraction": 0.0,
+      "slots": [
+        "sku",
+        "store_id",
+        "category"
+      ],
+      "task_id": "task_0014",
+      "task_idx_in_family": 2,
+      "template_id": "template_02"
+    },
+    {
+      "family_id": "family_02",
+      "family_idx": 2,
+      "length": 10,
+      "novelty_fraction": 0.75,
+      "slots": [
+        "sku",
+        "store_id",
+        "category"
+      ],
+      "task_id": "task_0015",
+      "task_idx_in_family": 3,
+      "template_id": "template_02"
+    },
+    {
+      "family_id": "family_02",
+      "family_idx": 2,
+      "length": 10,
+      "novelty_fraction": 0.25,
+      "slots": [
+        "sku",
+        "store_id",
+        "category"
+      ],
+      "task_id": "task_0016",
+      "task_idx_in_family": 4,
+      "template_id": "template_02"
+    },
+    {
+      "family_id": "family_02",
+      "family_idx": 2,
+      "length": 10,
+      "novelty_fraction": 0.5,
+      "slots": [
+        "sku",
+        "store_id",
+        "category"
+      ],
+      "task_id": "task_0017",
+      "task_idx_in_family": 5,
+      "template_id": "template_02"
+    },
+    {
+      "family_id": "family_03",
+      "family_idx": 3,
+      "length": 11,
+      "novelty_fraction": 1.0,
+      "slots": [
+        "sku"
+      ],
+      "task_id": "task_0018",
+      "task_idx_in_family": 0,
+      "template_id": "template_03"
+    },
+    {
+      "family_id": "family_03",
+      "family_idx": 3,
+      "length": 11,
+      "novelty_fraction": 0.75,
+      "slots": [
+        "sku"
+      ],
+      "task_id": "task_0019",
+      "task_idx_in_family": 1,
+      "template_id": "template_03"
+    },
+    {
+      "family_id": "family_03",
+      "family_idx": 3,
+      "length": 11,
+      "novelty_fraction": 0.0,
+      "slots": [
+        "sku"
+      ],
+      "task_id": "task_0020",
+      "task_idx_in_family": 2,
+      "template_id": "template_03"
+    },
+    {
+      "family_id": "family_03",
+      "family_idx": 3,
+      "length": 11,
+      "novelty_fraction": 0.25,
+      "slots": [
+        "sku"
+      ],
+      "task_id": "task_0021",
+      "task_idx_in_family": 3,
+      "template_id": "template_03"
+    },
+    {
+      "family_id": "family_03",
+      "family_idx": 3,
+      "length": 11,
+      "novelty_fraction": 0.5,
+      "slots": [
+        "sku"
+      ],
+      "task_id": "task_0022",
+      "task_idx_in_family": 4,
+      "template_id": "template_03"
+    },
+    {
+      "family_id": "family_03",
+      "family_idx": 3,
+      "length": 11,
+      "novelty_fraction": 0.75,
+      "slots": [
+        "sku"
+      ],
+      "task_id": "task_0023",
+      "task_idx_in_family": 5,
+      "template_id": "template_03"
+    },
+    {
+      "family_id": "family_04",
+      "family_idx": 4,
+      "length": 12,
+      "novelty_fraction": 0.75,
+      "slots": [
+        "sku",
+        "store_id"
+      ],
+      "task_id": "task_0024",
+      "task_idx_in_family": 0,
+      "template_id": "template_04"
+    },
+    {
+      "family_id": "family_04",
+      "family_idx": 4,
+      "length": 12,
+      "novelty_fraction": 1.0,
+      "slots": [
+        "sku",
+        "store_id"
+      ],
+      "task_id": "task_0025",
+      "task_idx_in_family": 1,
+      "template_id": "template_04"
+    },
+    {
+      "family_id": "family_04",
+      "family_idx": 4,
+      "length": 12,
+      "novelty_fraction": 0.25,
+      "slots": [
+        "sku",
+        "store_id"
+      ],
+      "task_id": "task_0026",
+      "task_idx_in_family": 2,
+      "template_id": "template_04"
+    },
+    {
+      "family_id": "family_04",
+      "family_idx": 4,
+      "length": 12,
+      "novelty_fraction": 0.0,
+      "slots": [
+        "sku",
+        "store_id"
+      ],
+      "task_id": "task_0027",
+      "task_idx_in_family": 3,
+      "template_id": "template_04"
+    },
+    {
+      "family_id": "family_04",
+      "family_idx": 4,
+      "length": 12,
+      "novelty_fraction": 0.5,
+      "slots": [
+        "sku",
+        "store_id"
+      ],
+      "task_id": "task_0028",
+      "task_idx_in_family": 4,
+      "template_id": "template_04"
+    },
+    {
+      "family_id": "family_04",
+      "family_idx": 4,
+      "length": 12,
+      "novelty_fraction": 1.0,
+      "slots": [
+        "sku",
+        "store_id"
+      ],
+      "task_id": "task_0029",
+      "task_idx_in_family": 5,
+      "template_id": "template_04"
+    },
+    {
+      "family_id": "family_05",
+      "family_idx": 5,
+      "length": 13,
+      "novelty_fraction": 1.0,
+      "slots": [
+        "sku",
+        "variant"
+      ],
+      "task_id": "task_0030",
+      "task_idx_in_family": 0,
+      "template_id": "template_05"
+    },
+    {
+      "family_id": "family_05",
+      "family_idx": 5,
+      "length": 13,
+      "novelty_fraction": 0.75,
+      "slots": [
+        "sku",
+        "variant"
+      ],
+      "task_id": "task_0031",
+      "task_idx_in_family": 1,
+      "template_id": "template_05"
+    },
+    {
+      "family_id": "family_05",
+      "family_idx": 5,
+      "length": 13,
+      "novelty_fraction": 0.0,
+      "slots": [
+        "sku",
+        "variant"
+      ],
+      "task_id": "task_0032",
+      "task_idx_in_family": 2,
+      "template_id": "template_05"
+    },
+    {
+      "family_id": "family_05",
+      "family_idx": 5,
+      "length": 13,
+      "novelty_fraction": 0.25,
+      "slots": [
+        "sku",
+        "variant"
+      ],
+      "task_id": "task_0033",
+      "task_idx_in_family": 3,
+      "template_id": "template_05"
+    },
+    {
+      "family_id": "family_05",
+      "family_idx": 5,
+      "length": 13,
+      "novelty_fraction": 0.0,
+      "slots": [
+        "sku",
+        "variant"
+      ],
+      "task_id": "task_0034",
+      "task_idx_in_family": 4,
+      "template_id": "template_05"
+    },
+    {
+      "family_id": "family_05",
+      "family_idx": 5,
+      "length": 13,
+      "novelty_fraction": 0.5,
+      "slots": [
+        "sku",
+        "variant"
+      ],
+      "task_id": "task_0035",
+      "task_idx_in_family": 5,
+      "template_id": "template_05"
+    },
+    {
+      "family_id": "family_06",
+      "family_idx": 6,
+      "length": 14,
+      "novelty_fraction": 0.0,
+      "slots": [
+        "sku",
+        "store_id",
+        "category"
+      ],
+      "task_id": "task_0036",
+      "task_idx_in_family": 0,
+      "template_id": "template_06"
+    },
+    {
+      "family_id": "family_06",
+      "family_idx": 6,
+      "length": 14,
+      "novelty_fraction": 0.25,
+      "slots": [
+        "sku",
+        "store_id",
+        "category"
+      ],
+      "task_id": "task_0037",
+      "task_idx_in_family": 1,
+      "template_id": "template_06"
+    },
+    {
+      "family_id": "family_06",
+      "family_idx": 6,
+      "length": 14,
+      "novelty_fraction": 0.25,
+      "slots": [
+        "sku",
+        "store_id",
+        "category"
+      ],
+      "task_id": "task_0038",
+      "task_idx_in_family": 2,
+      "template_id": "template_06"
+    },
+    {
+      "family_id": "family_06",
+      "family_idx": 6,
+      "length": 14,
+      "novelty_fraction": 1.0,
+      "slots": [
+        "sku",
+        "store_id",
+        "category"
+      ],
+      "task_id": "task_0039",
+      "task_idx_in_family": 3,
+      "template_id": "template_06"
+    },
+    {
+      "family_id": "family_06",
+      "family_idx": 6,
+      "length": 14,
+      "novelty_fraction": 0.75,
+      "slots": [
+        "sku",
+        "store_id",
+        "category"
+      ],
+      "task_id": "task_0040",
+      "task_idx_in_family": 4,
+      "template_id": "template_06"
+    },
+    {
+      "family_id": "family_06",
+      "family_idx": 6,
+      "length": 14,
+      "novelty_fraction": 0.5,
+      "slots": [
+        "sku",
+        "store_id",
+        "category"
+      ],
+      "task_id": "task_0041",
+      "task_idx_in_family": 5,
+      "template_id": "template_06"
+    },
+    {
+      "family_id": "family_07",
+      "family_idx": 7,
+      "length": 8,
+      "novelty_fraction": 0.5,
+      "slots": [
+        "sku"
+      ],
+      "task_id": "task_0042",
+      "task_idx_in_family": 0,
+      "template_id": "template_07"
+    },
+    {
+      "family_id": "family_07",
+      "family_idx": 7,
+      "length": 8,
+      "novelty_fraction": 0.5,
+      "slots": [
+        "sku"
+      ],
+      "task_id": "task_0043",
+      "task_idx_in_family": 1,
+      "template_id": "template_07"
+    },
+    {
+      "family_id": "family_07",
+      "family_idx": 7,
+      "length": 8,
+      "novelty_fraction": 1.0,
+      "slots": [
+        "sku"
+      ],
+      "task_id": "task_0044",
+      "task_idx_in_family": 2,
+      "template_id": "template_07"
+    },
+    {
+      "family_id": "family_07",
+      "family_idx": 7,
+      "length": 8,
+      "novelty_fraction": 0.0,
+      "slots": [
+        "sku"
+      ],
+      "task_id": "task_0045",
+      "task_idx_in_family": 3,
+      "template_id": "template_07"
+    },
+    {
+      "family_id": "family_07",
+      "family_idx": 7,
+      "length": 8,
+      "novelty_fraction": 0.25,
+      "slots": [
+        "sku"
+      ],
+      "task_id": "task_0046",
+      "task_idx_in_family": 4,
+      "template_id": "template_07"
+    },
+    {
+      "family_id": "family_07",
+      "family_idx": 7,
+      "length": 8,
+      "novelty_fraction": 0.75,
+      "slots": [
+        "sku"
+      ],
+      "task_id": "task_0047",
+      "task_idx_in_family": 5,
+      "template_id": "template_07"
+    },
+    {
+      "family_id": "family_08",
+      "family_idx": 8,
+      "length": 9,
+      "novelty_fraction": 0.25,
+      "slots": [
+        "sku",
+        "store_id"
+      ],
+      "task_id": "task_0048",
+      "task_idx_in_family": 0,
+      "template_id": "template_08"
+    },
+    {
+      "family_id": "family_08",
+      "family_idx": 8,
+      "length": 9,
+      "novelty_fraction": 0.0,
+      "slots": [
+        "sku",
+        "store_id"
+      ],
+      "task_id": "task_0049",
+      "task_idx_in_family": 1,
+      "template_id": "template_08"
+    },
+    {
+      "family_id": "family_08",
+      "family_idx": 8,
+      "length": 9,
+      "novelty_fraction": 1.0,
+      "slots": [
+        "sku",
+        "store_id"
+      ],
+      "task_id": "task_0050",
+      "task_idx_in_family": 2,
+      "template_id": "template_08"
+    },
+    {
+      "family_id": "family_08",
+      "family_idx": 8,
+      "length": 9,
+      "novelty_fraction": 0.5,
+      "slots": [
+        "sku",
+        "store_id"
+      ],
+      "task_id": "task_0051",
+      "task_idx_in_family": 3,
+      "template_id": "template_08"
+    },
+    {
+      "family_id": "family_08",
+      "family_idx": 8,
+      "length": 9,
+      "novelty_fraction": 0.75,
+      "slots": [
+        "sku",
+        "store_id"
+      ],
+      "task_id": "task_0052",
+      "task_idx_in_family": 4,
+      "template_id": "template_08"
+    },
+    {
+      "family_id": "family_08",
+      "family_idx": 8,
+      "length": 9,
+      "novelty_fraction": 0.75,
+      "slots": [
+        "sku",
+        "store_id"
+      ],
+      "task_id": "task_0053",
+      "task_idx_in_family": 5,
+      "template_id": "template_08"
+    },
+    {
+      "family_id": "family_09",
+      "family_idx": 9,
+      "length": 10,
+      "novelty_fraction": 1.0,
+      "slots": [
+        "sku",
+        "variant"
+      ],
+      "task_id": "task_0054",
+      "task_idx_in_family": 0,
+      "template_id": "template_09"
+    },
+    {
+      "family_id": "family_09",
+      "family_idx": 9,
+      "length": 10,
+      "novelty_fraction": 1.0,
+      "slots": [
+        "sku",
+        "variant"
+      ],
+      "task_id": "task_0055",
+      "task_idx_in_family": 1,
+      "template_id": "template_09"
+    },
+    {
+      "family_id": "family_09",
+      "family_idx": 9,
+      "length": 10,
+      "novelty_fraction": 0.0,
+      "slots": [
+        "sku",
+        "variant"
+      ],
+      "task_id": "task_0056",
+      "task_idx_in_family": 2,
+      "template_id": "template_09"
+    },
+    {
+      "family_id": "family_09",
+      "family_idx": 9,
+      "length": 10,
+      "novelty_fraction": 0.25,
+      "slots": [
+        "sku",
+        "variant"
+      ],
+      "task_id": "task_0057",
+      "task_idx_in_family": 3,
+      "template_id": "template_09"
+    },
+    {
+      "family_id": "family_09",
+      "family_idx": 9,
+      "length": 10,
+      "novelty_fraction": 0.75,
+      "slots": [
+        "sku",
+        "variant"
+      ],
+      "task_id": "task_0058",
+      "task_idx_in_family": 4,
+      "template_id": "template_09"
+    },
+    {
+      "family_id": "family_09",
+      "family_idx": 9,
+      "length": 10,
+      "novelty_fraction": 0.5,
+      "slots": [
+        "sku",
+        "variant"
+      ],
+      "task_id": "task_0059",
+      "task_idx_in_family": 5,
+      "template_id": "template_09"
+    },
+    {
+      "family_id": "family_10",
+      "family_idx": 10,
+      "length": 11,
+      "novelty_fraction": 0.25,
+      "slots": [
+        "sku",
+        "store_id",
+        "category"
+      ],
+      "task_id": "task_0060",
+      "task_idx_in_family": 0,
+      "template_id": "template_10"
+    },
+    {
+      "family_id": "family_10",
+      "family_idx": 10,
+      "length": 11,
+      "novelty_fraction": 1.0,
+      "slots": [
+        "sku",
+        "store_id",
+        "category"
+      ],
+      "task_id": "task_0061",
+      "task_idx_in_family": 1,
+      "template_id": "template_10"
+    },
+    {
+      "family_id": "family_10",
+      "family_idx": 10,
+      "length": 11,
+      "novelty_fraction": 0.0,
+      "slots": [
+        "sku",
+        "store_id",
+        "category"
+      ],
+      "task_id": "task_0062",
+      "task_idx_in_family": 2,
+      "template_id": "template_10"
+    },
+    {
+      "family_id": "family_10",
+      "family_idx": 10,
+      "length": 11,
+      "novelty_fraction": 0.75,
+      "slots": [
+        "sku",
+        "store_id",
+        "category"
+      ],
+      "task_id": "task_0063",
+      "task_idx_in_family": 3,
+      "template_id": "template_10"
+    },
+    {
+      "family_id": "family_10",
+      "family_idx": 10,
+      "length": 11,
+      "novelty_fraction": 0.0,
+      "slots": [
+        "sku",
+        "store_id",
+        "category"
+      ],
+      "task_id": "task_0064",
+      "task_idx_in_family": 4,
+      "template_id": "template_10"
+    },
+    {
+      "family_id": "family_10",
+      "family_idx": 10,
+      "length": 11,
+      "novelty_fraction": 0.5,
+      "slots": [
+        "sku",
+        "store_id",
+        "category"
+      ],
+      "task_id": "task_0065",
+      "task_idx_in_family": 5,
+      "template_id": "template_10"
+    },
+    {
+      "family_id": "family_11",
+      "family_idx": 11,
+      "length": 12,
+      "novelty_fraction": 0.25,
+      "slots": [
+        "sku"
+      ],
+      "task_id": "task_0066",
+      "task_idx_in_family": 0,
+      "template_id": "template_11"
+    },
+    {
+      "family_id": "family_11",
+      "family_idx": 11,
+      "length": 12,
+      "novelty_fraction": 0.0,
+      "slots": [
+        "sku"
+      ],
+      "task_id": "task_0067",
+      "task_idx_in_family": 1,
+      "template_id": "template_11"
+    },
+    {
+      "family_id": "family_11",
+      "family_idx": 11,
+      "length": 12,
+      "novelty_fraction": 0.5,
+      "slots": [
+        "sku"
+      ],
+      "task_id": "task_0068",
+      "task_idx_in_family": 2,
+      "template_id": "template_11"
+    },
+    {
+      "family_id": "family_11",
+      "family_idx": 11,
+      "length": 12,
+      "novelty_fraction": 1.0,
+      "slots": [
+        "sku"
+      ],
+      "task_id": "task_0069",
+      "task_idx_in_family": 3,
+      "template_id": "template_11"
+    },
+    {
+      "family_id": "family_11",
+      "family_idx": 11,
+      "length": 12,
+      "novelty_fraction": 0.25,
+      "slots": [
+        "sku"
+      ],
+      "task_id": "task_0070",
+      "task_idx_in_family": 4,
+      "template_id": "template_11"
+    },
+    {
+      "family_id": "family_11",
+      "family_idx": 11,
+      "length": 12,
+      "novelty_fraction": 0.75,
+      "slots": [
+        "sku"
+      ],
+      "task_id": "task_0071",
+      "task_idx_in_family": 5,
+      "template_id": "template_11"
+    },
+    {
+      "family_id": "family_12",
+      "family_idx": 12,
+      "length": 13,
+      "novelty_fraction": 0.0,
+      "slots": [
+        "sku",
+        "store_id"
+      ],
+      "task_id": "task_0072",
+      "task_idx_in_family": 0,
+      "template_id": "template_12"
+    },
+    {
+      "family_id": "family_12",
+      "family_idx": 12,
+      "length": 13,
+      "novelty_fraction": 1.0,
+      "slots": [
+        "sku",
+        "store_id"
+      ],
+      "task_id": "task_0073",
+      "task_idx_in_family": 1,
+      "template_id": "template_12"
+    },
+    {
+      "family_id": "family_12",
+      "family_idx": 12,
+      "length": 13,
+      "novelty_fraction": 0.25,
+      "slots": [
+        "sku",
+        "store_id"
+      ],
+      "task_id": "task_0074",
+      "task_idx_in_family": 2,
+      "template_id": "template_12"
+    },
+    {
+      "family_id": "family_12",
+      "family_idx": 12,
+      "length": 13,
+      "novelty_fraction": 0.5,
+      "slots": [
+        "sku",
+        "store_id"
+      ],
+      "task_id": "task_0075",
+      "task_idx_in_family": 3,
+      "template_id": "template_12"
+    },
+    {
+      "family_id": "family_12",
+      "family_idx": 12,
+      "length": 13,
+      "novelty_fraction": 0.75,
+      "slots": [
+        "sku",
+        "store_id"
+      ],
+      "task_id": "task_0076",
+      "task_idx_in_family": 4,
+      "template_id": "template_12"
+    },
+    {
+      "family_id": "family_13",
+      "family_idx": 13,
+      "length": 14,
+      "novelty_fraction": 0.75,
+      "slots": [
+        "sku",
+        "variant"
+      ],
+      "task_id": "task_0077",
+      "task_idx_in_family": 0,
+      "template_id": "template_13"
+    },
+    {
+      "family_id": "family_13",
+      "family_idx": 13,
+      "length": 14,
+      "novelty_fraction": 0.5,
+      "slots": [
+        "sku",
+        "variant"
+      ],
+      "task_id": "task_0078",
+      "task_idx_in_family": 1,
+      "template_id": "template_13"
+    },
+    {
+      "family_id": "family_13",
+      "family_idx": 13,
+      "length": 14,
+      "novelty_fraction": 0.0,
+      "slots": [
+        "sku",
+        "variant"
+      ],
+      "task_id": "task_0079",
+      "task_idx_in_family": 2,
+      "template_id": "template_13"
+    },
+    {
+      "family_id": "family_13",
+      "family_idx": 13,
+      "length": 14,
+      "novelty_fraction": 1.0,
+      "slots": [
+        "sku",
+        "variant"
+      ],
+      "task_id": "task_0080",
+      "task_idx_in_family": 3,
+      "template_id": "template_13"
+    },
+    {
+      "family_id": "family_13",
+      "family_idx": 13,
+      "length": 14,
+      "novelty_fraction": 0.25,
+      "slots": [
+        "sku",
+        "variant"
+      ],
+      "task_id": "task_0081",
+      "task_idx_in_family": 4,
+      "template_id": "template_13"
+    },
+    {
+      "family_id": "family_14",
+      "family_idx": 14,
+      "length": 8,
+      "novelty_fraction": 0.25,
+      "slots": [
+        "sku",
+        "store_id",
+        "category"
+      ],
+      "task_id": "task_0082",
+      "task_idx_in_family": 0,
+      "template_id": "template_14"
+    },
+    {
+      "family_id": "family_14",
+      "family_idx": 14,
+      "length": 8,
+      "novelty_fraction": 0.5,
+      "slots": [
+        "sku",
+        "store_id",
+        "category"
+      ],
+      "task_id": "task_0083",
+      "task_idx_in_family": 1,
+      "template_id": "template_14"
+    },
+    {
+      "family_id": "family_14",
+      "family_idx": 14,
+      "length": 8,
+      "novelty_fraction": 0.75,
+      "slots": [
+        "sku",
+        "store_id",
+        "category"
+      ],
+      "task_id": "task_0084",
+      "task_idx_in_family": 2,
+      "template_id": "template_14"
+    },
+    {
+      "family_id": "family_14",
+      "family_idx": 14,
+      "length": 8,
+      "novelty_fraction": 0.0,
+      "slots": [
+        "sku",
+        "store_id",
+        "category"
+      ],
+      "task_id": "task_0085",
+      "task_idx_in_family": 3,
+      "template_id": "template_14"
+    },
+    {
+      "family_id": "family_14",
+      "family_idx": 14,
+      "length": 8,
+      "novelty_fraction": 1.0,
+      "slots": [
+        "sku",
+        "store_id",
+        "category"
+      ],
+      "task_id": "task_0086",
+      "task_idx_in_family": 4,
+      "template_id": "template_14"
+    },
+    {
+      "family_id": "family_15",
+      "family_idx": 15,
+      "length": 9,
+      "novelty_fraction": 0.5,
+      "slots": [
+        "sku"
+      ],
+      "task_id": "task_0087",
+      "task_idx_in_family": 0,
+      "template_id": "template_15"
+    },
+    {
+      "family_id": "family_15",
+      "family_idx": 15,
+      "length": 9,
+      "novelty_fraction": 0.75,
+      "slots": [
+        "sku"
+      ],
+      "task_id": "task_0088",
+      "task_idx_in_family": 1,
+      "template_id": "template_15"
+    },
+    {
+      "family_id": "family_15",
+      "family_idx": 15,
+      "length": 9,
+      "novelty_fraction": 0.25,
+      "slots": [
+        "sku"
+      ],
+      "task_id": "task_0089",
+      "task_idx_in_family": 2,
+      "template_id": "template_15"
+    },
+    {
+      "family_id": "family_15",
+      "family_idx": 15,
+      "length": 9,
+      "novelty_fraction": 0.0,
+      "slots": [
+        "sku"
+      ],
+      "task_id": "task_0090",
+      "task_idx_in_family": 3,
+      "template_id": "template_15"
+    },
+    {
+      "family_id": "family_15",
+      "family_idx": 15,
+      "length": 9,
+      "novelty_fraction": 1.0,
+      "slots": [
+        "sku"
+      ],
+      "task_id": "task_0091",
+      "task_idx_in_family": 4,
+      "template_id": "template_15"
+    },
+    {
+      "family_id": "family_16",
+      "family_idx": 16,
+      "length": 10,
+      "novelty_fraction": 0.75,
+      "slots": [
+        "sku",
+        "store_id"
+      ],
+      "task_id": "task_0092",
+      "task_idx_in_family": 0,
+      "template_id": "template_16"
+    },
+    {
+      "family_id": "family_16",
+      "family_idx": 16,
+      "length": 10,
+      "novelty_fraction": 1.0,
+      "slots": [
+        "sku",
+        "store_id"
+      ],
+      "task_id": "task_0093",
+      "task_idx_in_family": 1,
+      "template_id": "template_16"
+    },
+    {
+      "family_id": "family_16",
+      "family_idx": 16,
+      "length": 10,
+      "novelty_fraction": 0.25,
+      "slots": [
+        "sku",
+        "store_id"
+      ],
+      "task_id": "task_0094",
+      "task_idx_in_family": 2,
+      "template_id": "template_16"
+    },
+    {
+      "family_id": "family_16",
+      "family_idx": 16,
+      "length": 10,
+      "novelty_fraction": 0.5,
+      "slots": [
+        "sku",
+        "store_id"
+      ],
+      "task_id": "task_0095",
+      "task_idx_in_family": 3,
+      "template_id": "template_16"
+    },
+    {
+      "family_id": "family_16",
+      "family_idx": 16,
+      "length": 10,
+      "novelty_fraction": 0.0,
+      "slots": [
+        "sku",
+        "store_id"
+      ],
+      "task_id": "task_0096",
+      "task_idx_in_family": 4,
+      "template_id": "template_16"
+    },
+    {
+      "family_id": "family_17",
+      "family_idx": 17,
+      "length": 11,
+      "novelty_fraction": 1.0,
+      "slots": [
+        "sku",
+        "variant"
+      ],
+      "task_id": "task_0097",
+      "task_idx_in_family": 0,
+      "template_id": "template_17"
+    },
+    {
+      "family_id": "family_17",
+      "family_idx": 17,
+      "length": 11,
+      "novelty_fraction": 0.25,
+      "slots": [
+        "sku",
+        "variant"
+      ],
+      "task_id": "task_0098",
+      "task_idx_in_family": 1,
+      "template_id": "template_17"
+    },
+    {
+      "family_id": "family_17",
+      "family_idx": 17,
+      "length": 11,
+      "novelty_fraction": 0.0,
+      "slots": [
+        "sku",
+        "variant"
+      ],
+      "task_id": "task_0099",
+      "task_idx_in_family": 2,
+      "template_id": "template_17"
+    },
+    {
+      "family_id": "family_17",
+      "family_idx": 17,
+      "length": 11,
+      "novelty_fraction": 0.75,
+      "slots": [
+        "sku",
+        "variant"
+      ],
+      "task_id": "task_0100",
+      "task_idx_in_family": 3,
+      "template_id": "template_17"
+    },
+    {
+      "family_id": "family_17",
+      "family_idx": 17,
+      "length": 11,
+      "novelty_fraction": 0.5,
+      "slots": [
+        "sku",
+        "variant"
+      ],
+      "task_id": "task_0101",
+      "task_idx_in_family": 4,
+      "template_id": "template_17"
+    },
+    {
+      "family_id": "family_18",
+      "family_idx": 18,
+      "length": 12,
+      "novelty_fraction": 0.75,
+      "slots": [
+        "sku",
+        "store_id",
+        "category"
+      ],
+      "task_id": "task_0102",
+      "task_idx_in_family": 0,
+      "template_id": "template_18"
+    },
+    {
+      "family_id": "family_18",
+      "family_idx": 18,
+      "length": 12,
+      "novelty_fraction": 0.0,
+      "slots": [
+        "sku",
+        "store_id",
+        "category"
+      ],
+      "task_id": "task_0103",
+      "task_idx_in_family": 1,
+      "template_id": "template_18"
+    },
+    {
+      "family_id": "family_18",
+      "family_idx": 18,
+      "length": 12,
+      "novelty_fraction": 0.5,
+      "slots": [
+        "sku",
+        "store_id",
+        "category"
+      ],
+      "task_id": "task_0104",
+      "task_idx_in_family": 2,
+      "template_id": "template_18"
+    },
+    {
+      "family_id": "family_18",
+      "family_idx": 18,
+      "length": 12,
+      "novelty_fraction": 1.0,
+      "slots": [
+        "sku",
+        "store_id",
+        "category"
+      ],
+      "task_id": "task_0105",
+      "task_idx_in_family": 3,
+      "template_id": "template_18"
+    },
+    {
+      "family_id": "family_18",
+      "family_idx": 18,
+      "length": 12,
+      "novelty_fraction": 0.25,
+      "slots": [
+        "sku",
+        "store_id",
+        "category"
+      ],
+      "task_id": "task_0106",
+      "task_idx_in_family": 4,
+      "template_id": "template_18"
+    },
+    {
+      "family_id": "family_19",
+      "family_idx": 19,
+      "length": 13,
+      "novelty_fraction": 1.0,
+      "slots": [
+        "sku"
+      ],
+      "task_id": "task_0107",
+      "task_idx_in_family": 0,
+      "template_id": "template_19"
+    },
+    {
+      "family_id": "family_19",
+      "family_idx": 19,
+      "length": 13,
+      "novelty_fraction": 0.25,
+      "slots": [
+        "sku"
+      ],
+      "task_id": "task_0108",
+      "task_idx_in_family": 1,
+      "template_id": "template_19"
+    },
+    {
+      "family_id": "family_19",
+      "family_idx": 19,
+      "length": 13,
+      "novelty_fraction": 0.0,
+      "slots": [
+        "sku"
+      ],
+      "task_id": "task_0109",
+      "task_idx_in_family": 2,
+      "template_id": "template_19"
+    },
+    {
+      "family_id": "family_19",
+      "family_idx": 19,
+      "length": 13,
+      "novelty_fraction": 0.75,
+      "slots": [
+        "sku"
+      ],
+      "task_id": "task_0110",
+      "task_idx_in_family": 3,
+      "template_id": "template_19"
+    },
+    {
+      "family_id": "family_19",
+      "family_idx": 19,
+      "length": 13,
+      "novelty_fraction": 0.5,
+      "slots": [
+        "sku"
+      ],
+      "task_id": "task_0111",
+      "task_idx_in_family": 4,
+      "template_id": "template_19"
+    },
+    {
+      "family_id": "family_20",
+      "family_idx": 20,
+      "length": 14,
+      "novelty_fraction": 0.25,
+      "slots": [
+        "sku",
+        "store_id"
+      ],
+      "task_id": "task_0112",
+      "task_idx_in_family": 0,
+      "template_id": "template_20"
+    },
+    {
+      "family_id": "family_20",
+      "family_idx": 20,
+      "length": 14,
+      "novelty_fraction": 0.0,
+      "slots": [
+        "sku",
+        "store_id"
+      ],
+      "task_id": "task_0113",
+      "task_idx_in_family": 1,
+      "template_id": "template_20"
+    },
+    {
+      "family_id": "family_20",
+      "family_idx": 20,
+      "length": 14,
+      "novelty_fraction": 1.0,
+      "slots": [
+        "sku",
+        "store_id"
+      ],
+      "task_id": "task_0114",
+      "task_idx_in_family": 2,
+      "template_id": "template_20"
+    },
+    {
+      "family_id": "family_20",
+      "family_idx": 20,
+      "length": 14,
+      "novelty_fraction": 0.75,
+      "slots": [
+        "sku",
+        "store_id"
+      ],
+      "task_id": "task_0115",
+      "task_idx_in_family": 3,
+      "template_id": "template_20"
+    },
+    {
+      "family_id": "family_20",
+      "family_idx": 20,
+      "length": 14,
+      "novelty_fraction": 0.5,
+      "slots": [
+        "sku",
+        "store_id"
+      ],
+      "task_id": "task_0116",
+      "task_idx_in_family": 4,
+      "template_id": "template_20"
+    },
+    {
+      "family_id": "family_21",
+      "family_idx": 21,
+      "length": 8,
+      "novelty_fraction": 0.25,
+      "slots": [
+        "sku",
+        "variant"
+      ],
+      "task_id": "task_0117",
+      "task_idx_in_family": 0,
+      "template_id": "template_21"
+    },
+    {
+      "family_id": "family_21",
+      "family_idx": 21,
+      "length": 8,
+      "novelty_fraction": 0.75,
+      "slots": [
+        "sku",
+        "variant"
+      ],
+      "task_id": "task_0118",
+      "task_idx_in_family": 1,
+      "template_id": "template_21"
+    },
+    {
+      "family_id": "family_21",
+      "family_idx": 21,
+      "length": 8,
+      "novelty_fraction": 1.0,
+      "slots": [
+        "sku",
+        "variant"
+      ],
+      "task_id": "task_0119",
+      "task_idx_in_family": 2,
+      "template_id": "template_21"
+    },
+    {
+      "family_id": "family_21",
+      "family_idx": 21,
+      "length": 8,
+      "novelty_fraction": 0.0,
+      "slots": [
+        "sku",
+        "variant"
+      ],
+      "task_id": "task_0120",
+      "task_idx_in_family": 3,
+      "template_id": "template_21"
+    },
+    {
+      "family_id": "family_21",
+      "family_idx": 21,
+      "length": 8,
+      "novelty_fraction": 0.5,
+      "slots": [
+        "sku",
+        "variant"
+      ],
+      "task_id": "task_0121",
+      "task_idx_in_family": 4,
+      "template_id": "template_21"
+    },
+    {
+      "family_id": "family_22",
+      "family_idx": 22,
+      "length": 9,
+      "novelty_fraction": 0.0,
+      "slots": [
+        "sku",
+        "store_id",
+        "category"
+      ],
+      "task_id": "task_0122",
+      "task_idx_in_family": 0,
+      "template_id": "template_22"
+    },
+    {
+      "family_id": "family_22",
+      "family_idx": 22,
+      "length": 9,
+      "novelty_fraction": 0.5,
+      "slots": [
+        "sku",
+        "store_id",
+        "category"
+      ],
+      "task_id": "task_0123",
+      "task_idx_in_family": 1,
+      "template_id": "template_22"
+    },
+    {
+      "family_id": "family_22",
+      "family_idx": 22,
+      "length": 9,
+      "novelty_fraction": 0.75,
+      "slots": [
+        "sku",
+        "store_id",
+        "category"
+      ],
+      "task_id": "task_0124",
+      "task_idx_in_family": 2,
+      "template_id": "template_22"
+    },
+    {
+      "family_id": "family_22",
+      "family_idx": 22,
+      "length": 9,
+      "novelty_fraction": 0.25,
+      "slots": [
+        "sku",
+        "store_id",
+        "category"
+      ],
+      "task_id": "task_0125",
+      "task_idx_in_family": 3,
+      "template_id": "template_22"
+    },
+    {
+      "family_id": "family_22",
+      "family_idx": 22,
+      "length": 9,
+      "novelty_fraction": 1.0,
+      "slots": [
+        "sku",
+        "store_id",
+        "category"
+      ],
+      "task_id": "task_0126",
+      "task_idx_in_family": 4,
+      "template_id": "template_22"
+    },
+    {
+      "family_id": "family_23",
+      "family_idx": 23,
+      "length": 10,
+      "novelty_fraction": 0.75,
+      "slots": [
+        "sku"
+      ],
+      "task_id": "task_0127",
+      "task_idx_in_family": 0,
+      "template_id": "template_23"
+    },
+    {
+      "family_id": "family_23",
+      "family_idx": 23,
+      "length": 10,
+      "novelty_fraction": 1.0,
+      "slots": [
+        "sku"
+      ],
+      "task_id": "task_0128",
+      "task_idx_in_family": 1,
+      "template_id": "template_23"
+    },
+    {
+      "family_id": "family_23",
+      "family_idx": 23,
+      "length": 10,
+      "novelty_fraction": 0.0,
+      "slots": [
+        "sku"
+      ],
+      "task_id": "task_0129",
+      "task_idx_in_family": 2,
+      "template_id": "template_23"
+    },
+    {
+      "family_id": "family_23",
+      "family_idx": 23,
+      "length": 10,
+      "novelty_fraction": 0.25,
+      "slots": [
+        "sku"
+      ],
+      "task_id": "task_0130",
+      "task_idx_in_family": 3,
+      "template_id": "template_23"
+    },
+    {
+      "family_id": "family_23",
+      "family_idx": 23,
+      "length": 10,
+      "novelty_fraction": 0.5,
+      "slots": [
+        "sku"
+      ],
+      "task_id": "task_0131",
+      "task_idx_in_family": 4,
+      "template_id": "template_23"
+    },
+    {
+      "family_id": "family_24",
+      "family_idx": 24,
+      "length": 11,
+      "novelty_fraction": 1.0,
+      "slots": [
+        "sku",
+        "store_id"
+      ],
+      "task_id": "task_0132",
+      "task_idx_in_family": 0,
+      "template_id": "template_24"
+    },
+    {
+      "family_id": "family_24",
+      "family_idx": 24,
+      "length": 11,
+      "novelty_fraction": 0.5,
+      "slots": [
+        "sku",
+        "store_id"
+      ],
+      "task_id": "task_0133",
+      "task_idx_in_family": 1,
+      "template_id": "template_24"
+    },
+    {
+      "family_id": "family_24",
+      "family_idx": 24,
+      "length": 11,
+      "novelty_fraction": 0.25,
+      "slots": [
+        "sku",
+        "store_id"
+      ],
+      "task_id": "task_0134",
+      "task_idx_in_family": 2,
+      "template_id": "template_24"
+    },
+    {
+      "family_id": "family_24",
+      "family_idx": 24,
+      "length": 11,
+      "novelty_fraction": 0.75,
+      "slots": [
+        "sku",
+        "store_id"
+      ],
+      "task_id": "task_0135",
+      "task_idx_in_family": 3,
+      "template_id": "template_24"
+    },
+    {
+      "family_id": "family_24",
+      "family_idx": 24,
+      "length": 11,
+      "novelty_fraction": 0.0,
+      "slots": [
+        "sku",
+        "store_id"
+      ],
+      "task_id": "task_0136",
+      "task_idx_in_family": 4,
+      "template_id": "template_24"
+    },
+    {
+      "family_id": "family_25",
+      "family_idx": 25,
+      "length": 12,
+      "novelty_fraction": 1.0,
+      "slots": [
+        "sku",
+        "variant"
+      ],
+      "task_id": "task_0137",
+      "task_idx_in_family": 0,
+      "template_id": "template_25"
+    },
+    {
+      "family_id": "family_25",
+      "family_idx": 25,
+      "length": 12,
+      "novelty_fraction": 0.5,
+      "slots": [
+        "sku",
+        "variant"
+      ],
+      "task_id": "task_0138",
+      "task_idx_in_family": 1,
+      "template_id": "template_25"
+    },
+    {
+      "family_id": "family_25",
+      "family_idx": 25,
+      "length": 12,
+      "novelty_fraction": 0.75,
+      "slots": [
+        "sku",
+        "variant"
+      ],
+      "task_id": "task_0139",
+      "task_idx_in_family": 2,
+      "template_id": "template_25"
+    },
+    {
+      "family_id": "family_25",
+      "family_idx": 25,
+      "length": 12,
+      "novelty_fraction": 0.0,
+      "slots": [
+        "sku",
+        "variant"
+      ],
+      "task_id": "task_0140",
+      "task_idx_in_family": 3,
+      "template_id": "template_25"
+    },
+    {
+      "family_id": "family_25",
+      "family_idx": 25,
+      "length": 12,
+      "novelty_fraction": 0.25,
+      "slots": [
+        "sku",
+        "variant"
+      ],
+      "task_id": "task_0141",
+      "task_idx_in_family": 4,
+      "template_id": "template_25"
+    },
+    {
+      "family_id": "family_26",
+      "family_idx": 26,
+      "length": 13,
+      "novelty_fraction": 0.25,
+      "slots": [
+        "sku",
+        "store_id",
+        "category"
+      ],
+      "task_id": "task_0142",
+      "task_idx_in_family": 0,
+      "template_id": "template_26"
+    },
+    {
+      "family_id": "family_26",
+      "family_idx": 26,
+      "length": 13,
+      "novelty_fraction": 0.5,
+      "slots": [
+        "sku",
+        "store_id",
+        "category"
+      ],
+      "task_id": "task_0143",
+      "task_idx_in_family": 1,
+      "template_id": "template_26"
+    },
+    {
+      "family_id": "family_26",
+      "family_idx": 26,
+      "length": 13,
+      "novelty_fraction": 1.0,
+      "slots": [
+        "sku",
+        "store_id",
+        "category"
+      ],
+      "task_id": "task_0144",
+      "task_idx_in_family": 2,
+      "template_id": "template_26"
+    },
+    {
+      "family_id": "family_26",
+      "family_idx": 26,
+      "length": 13,
+      "novelty_fraction": 0.0,
+      "slots": [
+        "sku",
+        "store_id",
+        "category"
+      ],
+      "task_id": "task_0145",
+      "task_idx_in_family": 3,
+      "template_id": "template_26"
+    },
+    {
+      "family_id": "family_26",
+      "family_idx": 26,
+      "length": 13,
+      "novelty_fraction": 0.75,
+      "slots": [
+        "sku",
+        "store_id",
+        "category"
+      ],
+      "task_id": "task_0146",
+      "task_idx_in_family": 4,
+      "template_id": "template_26"
+    },
+    {
+      "family_id": "family_27",
+      "family_idx": 27,
+      "length": 14,
+      "novelty_fraction": 0.5,
+      "slots": [
+        "sku"
+      ],
+      "task_id": "task_0147",
+      "task_idx_in_family": 0,
+      "template_id": "template_27"
+    },
+    {
+      "family_id": "family_27",
+      "family_idx": 27,
+      "length": 14,
+      "novelty_fraction": 0.25,
+      "slots": [
+        "sku"
+      ],
+      "task_id": "task_0148",
+      "task_idx_in_family": 1,
+      "template_id": "template_27"
+    },
+    {
+      "family_id": "family_27",
+      "family_idx": 27,
+      "length": 14,
+      "novelty_fraction": 0.75,
+      "slots": [
+        "sku"
+      ],
+      "task_id": "task_0149",
+      "task_idx_in_family": 2,
+      "template_id": "template_27"
+    },
+    {
+      "family_id": "family_27",
+      "family_idx": 27,
+      "length": 14,
+      "novelty_fraction": 0.0,
+      "slots": [
+        "sku"
+      ],
+      "task_id": "task_0150",
+      "task_idx_in_family": 3,
+      "template_id": "template_27"
+    },
+    {
+      "family_id": "family_27",
+      "family_idx": 27,
+      "length": 14,
+      "novelty_fraction": 1.0,
+      "slots": [
+        "sku"
+      ],
+      "task_id": "task_0151",
+      "task_idx_in_family": 4,
+      "template_id": "template_27"
+    },
+    {
+      "family_id": "family_28",
+      "family_idx": 28,
+      "length": 8,
+      "novelty_fraction": 0.25,
+      "slots": [
+        "sku",
+        "store_id"
+      ],
+      "task_id": "task_0152",
+      "task_idx_in_family": 0,
+      "template_id": "template_28"
+    },
+    {
+      "family_id": "family_28",
+      "family_idx": 28,
+      "length": 8,
+      "novelty_fraction": 0.0,
+      "slots": [
+        "sku",
+        "store_id"
+      ],
+      "task_id": "task_0153",
+      "task_idx_in_family": 1,
+      "template_id": "template_28"
+    },
+    {
+      "family_id": "family_28",
+      "family_idx": 28,
+      "length": 8,
+      "novelty_fraction": 0.5,
+      "slots": [
+        "sku",
+        "store_id"
+      ],
+      "task_id": "task_0154",
+      "task_idx_in_family": 2,
+      "template_id": "template_28"
+    },
+    {
+      "family_id": "family_28",
+      "family_idx": 28,
+      "length": 8,
+      "novelty_fraction": 1.0,
+      "slots": [
+        "sku",
+        "store_id"
+      ],
+      "task_id": "task_0155",
+      "task_idx_in_family": 3,
+      "template_id": "template_28"
+    },
+    {
+      "family_id": "family_28",
+      "family_idx": 28,
+      "length": 8,
+      "novelty_fraction": 0.75,
+      "slots": [
+        "sku",
+        "store_id"
+      ],
+      "task_id": "task_0156",
+      "task_idx_in_family": 4,
+      "template_id": "template_28"
+    },
+    {
+      "family_id": "family_29",
+      "family_idx": 29,
+      "length": 9,
+      "novelty_fraction": 0.25,
+      "slots": [
+        "sku",
+        "variant"
+      ],
+      "task_id": "task_0157",
+      "task_idx_in_family": 0,
+      "template_id": "template_29"
+    },
+    {
+      "family_id": "family_29",
+      "family_idx": 29,
+      "length": 9,
+      "novelty_fraction": 0.5,
+      "slots": [
+        "sku",
+        "variant"
+      ],
+      "task_id": "task_0158",
+      "task_idx_in_family": 1,
+      "template_id": "template_29"
+    },
+    {
+      "family_id": "family_29",
+      "family_idx": 29,
+      "length": 9,
+      "novelty_fraction": 0.75,
+      "slots": [
+        "sku",
+        "variant"
+      ],
+      "task_id": "task_0159",
+      "task_idx_in_family": 2,
+      "template_id": "template_29"
+    },
+    {
+      "family_id": "family_29",
+      "family_idx": 29,
+      "length": 9,
+      "novelty_fraction": 1.0,
+      "slots": [
+        "sku",
+        "variant"
+      ],
+      "task_id": "task_0160",
+      "task_idx_in_family": 3,
+      "template_id": "template_29"
+    },
+    {
+      "family_id": "family_29",
+      "family_idx": 29,
+      "length": 9,
+      "novelty_fraction": 0.0,
+      "slots": [
+        "sku",
+        "variant"
+      ],
+      "task_id": "task_0161",
+      "task_idx_in_family": 4,
+      "template_id": "template_29"
+    },
+    {
+      "family_id": "family_30",
+      "family_idx": 30,
+      "length": 10,
+      "novelty_fraction": 0.75,
+      "slots": [
+        "sku",
+        "store_id",
+        "category"
+      ],
+      "task_id": "task_0162",
+      "task_idx_in_family": 0,
+      "template_id": "template_30"
+    },
+    {
+      "family_id": "family_30",
+      "family_idx": 30,
+      "length": 10,
+      "novelty_fraction": 1.0,
+      "slots": [
+        "sku",
+        "store_id",
+        "category"
+      ],
+      "task_id": "task_0163",
+      "task_idx_in_family": 1,
+      "template_id": "template_30"
+    },
+    {
+      "family_id": "family_30",
+      "family_idx": 30,
+      "length": 10,
+      "novelty_fraction": 0.5,
+      "slots": [
+        "sku",
+        "store_id",
+        "category"
+      ],
+      "task_id": "task_0164",
+      "task_idx_in_family": 2,
+      "template_id": "template_30"
+    },
+    {
+      "family_id": "family_30",
+      "family_idx": 30,
+      "length": 10,
+      "novelty_fraction": 0.25,
+      "slots": [
+        "sku",
+        "store_id",
+        "category"
+      ],
+      "task_id": "task_0165",
+      "task_idx_in_family": 3,
+      "template_id": "template_30"
+    },
+    {
+      "family_id": "family_30",
+      "family_idx": 30,
+      "length": 10,
+      "novelty_fraction": 0.0,
+      "slots": [
+        "sku",
+        "store_id",
+        "category"
+      ],
+      "task_id": "task_0166",
+      "task_idx_in_family": 4,
+      "template_id": "template_30"
+    },
+    {
+      "family_id": "family_31",
+      "family_idx": 31,
+      "length": 11,
+      "novelty_fraction": 1.0,
+      "slots": [
+        "sku"
+      ],
+      "task_id": "task_0167",
+      "task_idx_in_family": 0,
+      "template_id": "template_31"
+    },
+    {
+      "family_id": "family_31",
+      "family_idx": 31,
+      "length": 11,
+      "novelty_fraction": 0.5,
+      "slots": [
+        "sku"
+      ],
+      "task_id": "task_0168",
+      "task_idx_in_family": 1,
+      "template_id": "template_31"
+    },
+    {
+      "family_id": "family_31",
+      "family_idx": 31,
+      "length": 11,
+      "novelty_fraction": 0.75,
+      "slots": [
+        "sku"
+      ],
+      "task_id": "task_0169",
+      "task_idx_in_family": 2,
+      "template_id": "template_31"
+    },
+    {
+      "family_id": "family_31",
+      "family_idx": 31,
+      "length": 11,
+      "novelty_fraction": 0.0,
+      "slots": [
+        "sku"
+      ],
+      "task_id": "task_0170",
+      "task_idx_in_family": 3,
+      "template_id": "template_31"
+    },
+    {
+      "family_id": "family_31",
+      "family_idx": 31,
+      "length": 11,
+      "novelty_fraction": 0.25,
+      "slots": [
+        "sku"
+      ],
+      "task_id": "task_0171",
+      "task_idx_in_family": 4,
+      "template_id": "template_31"
+    },
+    {
+      "family_id": "family_32",
+      "family_idx": 32,
+      "length": 12,
+      "novelty_fraction": 0.5,
+      "slots": [
+        "sku",
+        "store_id"
+      ],
+      "task_id": "task_0172",
+      "task_idx_in_family": 0,
+      "template_id": "template_32"
+    },
+    {
+      "family_id": "family_32",
+      "family_idx": 32,
+      "length": 12,
+      "novelty_fraction": 0.25,
+      "slots": [
+        "sku",
+        "store_id"
+      ],
+      "task_id": "task_0173",
+      "task_idx_in_family": 1,
+      "template_id": "template_32"
+    },
+    {
+      "family_id": "family_32",
+      "family_idx": 32,
+      "length": 12,
+      "novelty_fraction": 0.75,
+      "slots": [
+        "sku",
+        "store_id"
+      ],
+      "task_id": "task_0174",
+      "task_idx_in_family": 2,
+      "template_id": "template_32"
+    },
+    {
+      "family_id": "family_32",
+      "family_idx": 32,
+      "length": 12,
+      "novelty_fraction": 1.0,
+      "slots": [
+        "sku",
+        "store_id"
+      ],
+      "task_id": "task_0175",
+      "task_idx_in_family": 3,
+      "template_id": "template_32"
+    },
+    {
+      "family_id": "family_32",
+      "family_idx": 32,
+      "length": 12,
+      "novelty_fraction": 0.0,
+      "slots": [
+        "sku",
+        "store_id"
+      ],
+      "task_id": "task_0176",
+      "task_idx_in_family": 4,
+      "template_id": "template_32"
+    },
+    {
+      "family_id": "family_33",
+      "family_idx": 33,
+      "length": 13,
+      "novelty_fraction": 0.0,
+      "slots": [
+        "sku",
+        "variant"
+      ],
+      "task_id": "task_0177",
+      "task_idx_in_family": 0,
+      "template_id": "template_33"
+    },
+    {
+      "family_id": "family_33",
+      "family_idx": 33,
+      "length": 13,
+      "novelty_fraction": 0.25,
+      "slots": [
+        "sku",
+        "variant"
+      ],
+      "task_id": "task_0178",
+      "task_idx_in_family": 1,
+      "template_id": "template_33"
+    },
+    {
+      "family_id": "family_33",
+      "family_idx": 33,
+      "length": 13,
+      "novelty_fraction": 0.75,
+      "slots": [
+        "sku",
+        "variant"
+      ],
+      "task_id": "task_0179",
+      "task_idx_in_family": 2,
+      "template_id": "template_33"
+    },
+    {
+      "family_id": "family_33",
+      "family_idx": 33,
+      "length": 13,
+      "novelty_fraction": 1.0,
+      "slots": [
+        "sku",
+        "variant"
+      ],
+      "task_id": "task_0180",
+      "task_idx_in_family": 3,
+      "template_id": "template_33"
+    },
+    {
+      "family_id": "family_33",
+      "family_idx": 33,
+      "length": 13,
+      "novelty_fraction": 0.5,
+      "slots": [
+        "sku",
+        "variant"
+      ],
+      "task_id": "task_0181",
+      "task_idx_in_family": 4,
+      "template_id": "template_33"
+    },
+    {
+      "family_id": "family_34",
+      "family_idx": 34,
+      "length": 14,
+      "novelty_fraction": 1.0,
+      "slots": [
+        "sku",
+        "store_id",
+        "category"
+      ],
+      "task_id": "task_0182",
+      "task_idx_in_family": 0,
+      "template_id": "template_34"
+    },
+    {
+      "family_id": "family_34",
+      "family_idx": 34,
+      "length": 14,
+      "novelty_fraction": 0.0,
+      "slots": [
+        "sku",
+        "store_id",
+        "category"
+      ],
+      "task_id": "task_0183",
+      "task_idx_in_family": 1,
+      "template_id": "template_34"
+    },
+    {
+      "family_id": "family_34",
+      "family_idx": 34,
+      "length": 14,
+      "novelty_fraction": 0.25,
+      "slots": [
+        "sku",
+        "store_id",
+        "category"
+      ],
+      "task_id": "task_0184",
+      "task_idx_in_family": 2,
+      "template_id": "template_34"
+    },
+    {
+      "family_id": "family_34",
+      "family_idx": 34,
+      "length": 14,
+      "novelty_fraction": 0.75,
+      "slots": [
+        "sku",
+        "store_id",
+        "category"
+      ],
+      "task_id": "task_0185",
+      "task_idx_in_family": 3,
+      "template_id": "template_34"
+    },
+    {
+      "family_id": "family_34",
+      "family_idx": 34,
+      "length": 14,
+      "novelty_fraction": 0.5,
+      "slots": [
+        "sku",
+        "store_id",
+        "category"
+      ],
+      "task_id": "task_0186",
+      "task_idx_in_family": 4,
+      "template_id": "template_34"
+    },
+    {
+      "family_id": "family_35",
+      "family_idx": 35,
+      "length": 8,
+      "novelty_fraction": 0.25,
+      "slots": [
+        "sku"
+      ],
+      "task_id": "task_0187",
+      "task_idx_in_family": 0,
+      "template_id": "template_35"
+    },
+    {
+      "family_id": "family_35",
+      "family_idx": 35,
+      "length": 8,
+      "novelty_fraction": 1.0,
+      "slots": [
+        "sku"
+      ],
+      "task_id": "task_0188",
+      "task_idx_in_family": 1,
+      "template_id": "template_35"
+    },
+    {
+      "family_id": "family_35",
+      "family_idx": 35,
+      "length": 8,
+      "novelty_fraction": 0.0,
+      "slots": [
+        "sku"
+      ],
+      "task_id": "task_0189",
+      "task_idx_in_family": 2,
+      "template_id": "template_35"
+    },
+    {
+      "family_id": "family_35",
+      "family_idx": 35,
+      "length": 8,
+      "novelty_fraction": 0.75,
+      "slots": [
+        "sku"
+      ],
+      "task_id": "task_0190",
+      "task_idx_in_family": 3,
+      "template_id": "template_35"
+    },
+    {
+      "family_id": "family_35",
+      "family_idx": 35,
+      "length": 8,
+      "novelty_fraction": 0.5,
+      "slots": [
+        "sku"
+      ],
+      "task_id": "task_0191",
+      "task_idx_in_family": 4,
+      "template_id": "template_35"
+    }
+  ]
+}

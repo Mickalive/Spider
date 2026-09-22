@@ -1,0 +1,16 @@
+{
+  "retrieval_tokens": 200,
+  "retrieval_ms": 150,
+  "verification_tokens": 50,
+  "verification_ms": 120,
+  "novel_step_tokens": 500,
+  "novel_step_browser_calls": 2,
+  "repair_tokens": 500,
+  "repair_calls": 2,
+  "distill_tokens": 1000,
+  "instruction_tokens": 200,
+  "f": 10,
+  "min_confidence": 0.8,
+  "freshness_threshold": 0.25,
+  "seed": 44
+}

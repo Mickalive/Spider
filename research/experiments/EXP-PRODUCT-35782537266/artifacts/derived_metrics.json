@@ -1,0 +1,274 @@
+{
+  "M-BOOTSTRAP-CI-R2DELTA-LOWER": {
+    "unit": "interval",
+    "value": 0.9816495809588409
+  },
+  "M-BOOTSTRAP-CI-R2DELTA-UPPER": {
+    "unit": "interval",
+    "value": 0.9959361827140327
+  },
+  "M-BOOTSTRAP-CI-RHO-LOWER": {
+    "unit": "interval",
+    "value": 0.9796359619577016
+  },
+  "M-BOOTSTRAP-CI-RHO-UPPER": {
+    "unit": "interval",
+    "value": 0.9798843612314876
+  },
+  "M-CONFIDENCE-STD-SPIDER": {
+    "unit": "std",
+    "value": 0.05725943024588468
+  },
+  "M-CORRELATION-LENGTHPROP": {
+    "unit": "rho",
+    "value": -0.006861005463133392
+  },
+  "M-CORRELATION-NC-SHUFFLE": {
+    "unit": "rho",
+    "value": -0.00012113042610050625
+  },
+  "M-CORRELATION-NC-SHUFFLE-P-BLOCK": {
+    "unit": "p",
+    "value": 1.0
+  },
+  "M-CORRELATION-NC2": {
+    "unit": "rho",
+    "value": 0.00670076933630764
+  },
+  "M-COST-AMORTIZED-COLD-f10": {
+    "unit": "tokens",
+    "value": 5498.526041666667
+  },
+  "M-COST-AMORTIZED-SPIDER-f10": {
+    "unit": "tokens",
+    "value": 2053.551912568306
+  },
+  "M-COST-BROWSER-SPIDER-mean": {
+    "unit": "count",
+    "value": 7.145833333333333
+  },
+  "M-COST-LATENCY-SPIDER-mean": {
+    "unit": "ms",
+    "value": 3984.5833333333335
+  },
+  "M-COST-RATIO-SPIDER-COLD-0pct-f10": {
+    "unit": "ratio",
+    "value": 0.0743202482679702
+  },
+  "M-COST-RATIO-SPIDER-COLD-100pct-f10": {
+    "unit": "ratio",
+    "value": 0.6619887134441339
+  },
+  "M-COST-RATIO-SPIDER-RAG-0pct-f10": {
+    "unit": "ratio",
+    "value": 0.682267134823442
+  },
+  "M-COST-RATIO-SPIDER-RAG-25pct-f10": {
+    "unit": "ratio",
+    "value": 0.4081340711591229
+  },
+  "M-COST-RATIO-SPIDER-STAGEHAND-0pct-f10": {
+    "unit": "ratio",
+    "value": 1.0214543667329103
+  },
+  "M-COST-RATIO-SPIDER-TERX-100pct-f10": {
+    "unit": "ratio",
+    "value": 0.6624505410235396
+  },
+  "M-COST-RATIO-SPIDER-TERX-25pct-f10": {
+    "unit": "ratio",
+    "value": 0.22356326714781113
+  },
+  "M-COST-RATIO-SPIDER-TERX-50pct-f10": {
+    "unit": "ratio",
+    "value": 0.38280842509320573
+  },
+  "M-COST-RATIO-SPIDER-TERX-75pct-f10": {
+    "unit": "ratio",
+    "value": 0.517727488502035
+  },
+  "M-COST-TOKENS-SPIDER-mean": {
+    "unit": "tokens",
+    "value": 1857.2916666666667
+  },
+  "M-ECE-5BIN-SPIDER": {
+    "unit": "ECE",
+    "value": 0.02110030075187974
+  },
+  "M-FALSE-ACCEPT-NC2": {
+    "unit": "fraction",
+    "value": 0.7552083333333334
+  },
+  "M-FALSE-ACCEPT-SPIDER": {
+    "n": 192,
+    "unit": "fraction",
+    "value": 0.046875
+  },
+  "M-HIT-RATE-RAG-0pct": {
+    "n": 39,
+    "unit": "fraction",
+    "value": 1.0
+  },
+  "M-HIT-RATE-STAGEHAND-0pct": {
+    "n": 39,
+    "unit": "fraction",
+    "value": 1.0
+  },
+  "M-HIT-RATE-TERX-0pct": {
+    "n": 39,
+    "unit": "fraction",
+    "value": 1.0
+  },
+  "M-NC1-SUCCESS": {
+    "unit": "fraction",
+    "value": 0.3541666666666667
+  },
+  "M-R2-DELTA": {
+    "unit": "delta",
+    "value": 0.9897793799178041
+  },
+  "M-R2-LENGTH-POOLED": {
+    "unit": "R2",
+    "value": 0.00012466149180670257
+  },
+  "M-R2-LENGTHPROP": {
+    "unit": "R2",
+    "value": 1.862125342725698e-05
+  },
+  "M-R2-NOVELTY": {
+    "unit": "R2",
+    "value": 0.9899040414096107
+  },
+  "M-REUSED-FRACTION-SPIDER-0pct": {
+    "unit": "fraction",
+    "value": 1.0
+  },
+  "M-RHO-LENGTH-PER-STRATUM-0.0": {
+    "unit": "rho",
+    "value": 0.07537218984115393
+  },
+  "M-RHO-LENGTH-PER-STRATUM-0.25": {
+    "unit": "rho",
+    "value": -0.12962249001823578
+  },
+  "M-RHO-LENGTH-PER-STRATUM-0.5": {
+    "unit": "rho",
+    "value": 0.09465889671617328
+  },
+  "M-RHO-LENGTH-PER-STRATUM-0.75": {
+    "unit": "rho",
+    "value": 0.01630996284351632
+  },
+  "M-RHO-LENGTH-PER-STRATUM-1.0": {
+    "unit": "rho",
+    "value": 0.06491167671307033
+  },
+  "M-SLOPE-NOVELTY": {
+    "unit": "tokens per 100%",
+    "value": 3176.1256646507286
+  },
+  "M-SPEARMAN-P-BLOCK": {
+    "unit": "p",
+    "value": 0.0001999600079984003
+  },
+  "M-SPEARMAN-P-NORMAL": {
+    "unit": "p",
+    "value": 8.58495298489424e-135
+  },
+  "M-SPEARMAN-RHO-NOVELTY": {
+    "unit": "rho",
+    "value": 0.9798120769137908
+  },
+  "M-SUCCESS-SPIDER-0pct": {
+    "description": "SPIDER success at n=0.0",
+    "n": 39,
+    "unit": "fraction",
+    "value": 0.9230769230769231
+  },
+  "M-SUCCESS-SPIDER-0pct-wilson": {
+    "n": 39,
+    "unit": "interval",
+    "value": [
+      0.7967862687194474,
+      0.9734930859265043
+    ]
+  },
+  "M-SUCCESS-SPIDER-0pct-wilson-lower": {
+    "unit": "fraction",
+    "value": 0.7967862687194474
+  },
+  "M-SUCCESS-SPIDER-100pct": {
+    "description": "SPIDER success at n=1.0",
+    "n": 38,
+    "unit": "fraction",
+    "value": 0.9736842105263158
+  },
+  "M-SUCCESS-SPIDER-100pct-wilson": {
+    "n": 38,
+    "unit": "interval",
+    "value": [
+      0.8650482156319973,
+      0.9953395324464698
+    ]
+  },
+  "M-SUCCESS-SPIDER-25pct": {
+    "description": "SPIDER success at n=0.25",
+    "n": 39,
+    "unit": "fraction",
+    "value": 0.9487179487179487
+  },
+  "M-SUCCESS-SPIDER-25pct-wilson": {
+    "n": 39,
+    "unit": "interval",
+    "value": [
+      0.8311406095436208,
+      0.9858223423536006
+    ]
+  },
+  "M-SUCCESS-SPIDER-50pct": {
+    "description": "SPIDER success at n=0.5",
+    "n": 38,
+    "unit": "fraction",
+    "value": 0.9473684210526315
+  },
+  "M-SUCCESS-SPIDER-50pct-wilson": {
+    "n": 38,
+    "unit": "interval",
+    "value": [
+      0.8271423311893115,
+      0.9854460975514632
+    ]
+  },
+  "M-SUCCESS-SPIDER-75pct": {
+    "description": "SPIDER success at n=0.75",
+    "n": 38,
+    "unit": "fraction",
+    "value": 0.9736842105263158
+  },
+  "M-SUCCESS-SPIDER-75pct-wilson": {
+    "n": 38,
+    "unit": "interval",
+    "value": [
+      0.8650482156319973,
+      0.9953395324464698
+    ]
+  },
+  "M-SUCCESS-SPIDER-mean-across-bins": {
+    "unit": "fraction",
+    "value": 0.953306342780027
+  },
+  "M-SUCCESS-SPIDER-overall": {
+    "n": 192,
+    "unit": "fraction",
+    "value": 0.953125
+  },
+  "M-UNKNOWN-PRECISION-SPIDER": {
+    "n": 59,
+    "unit": "fraction",
+    "value": 0.9152542372881356
+  },
+  "M-UNKNOWN-RATE-SPIDER": {
+    "unit": "fraction",
+    "value": 0.3072916666666667
+  }
+}
