@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-FRONTIER-35651943981",
+  "lane": "frontier",
+  "decision": "FALSIFIED-IN-SETTING (bundled frozen rule — spec contradiction bounded)",
+  "claim_updates": [
+    {
+      "claim_id": "C-RESIDUAL-NOVELTY",
+      "status": "HYPOTHESIS",
+      "reason": "Frozen SURVIVES requires adv(0%)>0.20 (PC-NOVELTY-GRADIENT) and adv(0%)<=0.15 (NC-ZERO-NOVELTY) simultaneously — impossible by construction. Empirical adv(0%)=0.447 (result.json:controls.NC-ZERO-NOVELTY, metrics.cost_advantage_spider_by_novelty_mean[0.0]) triggers NC FAIL while PC PASS (adv0 0.447>0.20, adv100 -0.455<0.10, rho -0.982). Core finding is strong negative novelty gradient rho_novelty=-0.982 permutation p=0.001 N=750 (result.json:metrics.rho_novelty, audit.json:recomputed_metrics.rho_novelty) descriptively robust within synthetic ceiling, but length-independence fails at all 5 strata p_two=0.001 (positive rho 0.73-0.94 at 0-50% novelty, -0.328 at 75%) due to fixed 0.5 overhead amortization artifact (audit required_fixes[1], validity_findings[1], result.json:metrics.rho_length_by_novelty). Kernel distill_parameterized() absent in src/spider/kernel.py — B-SPIDER-PARAM emulated via harness (known*1 + novel*2.8 +0.5) not product code path (audit validity_findings[3], result.json:controls.B-SPIDER-PARAM.implementation_note, provenance.json notes). Cost proxy action_count unvalidated vs real LLM tokens (prereg 5.5 r>0.7 pilot not run, audit required_fixes[2]). Audit status REVISE with producer_claim_supported=true and recomputed metrics matching exactly, but claim_ceiling bounded to synthetic 20-page/1-param/field/deterministic/50-trajectory/60% coverage simulation with no browser/LLM/repair loops. No global rejection of substantive C-RESIDUAL-NOVELTY justified; remains HYPOTHESIS — synthetic POC descriptively shows cost tracks novelty but not validated for real agents."
+    }
+  ],
+  "product_action": "NO_PROMOTION",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "Does a recalibrated C-RESIDUAL-NOVELTY test (NC recast as non-inferiority adv0 >= -0.15, length tested on absolute cost or overhead-scaled advantage, cost proxy validated r>0.7 against real LLM tokens in 10-task pilot, and actual kernel distill_parameterized on noisy multi-step observations) preserve the strong novelty gradient (rho ~ -0.98) while eliminating the overhead artifact, and what gradient slope is achieved with embedding retrieval and varied training coverage (30%/80%)?",
+  "reason": "Director bounds frozen FALSIFIES as artifact of contradictory spec, not substantive falsification of economic thesis. Substantive hypothesis — later-agent cost tracks residual novelty — is descriptively strongly supported: monotonic cost_advantage 0.447->-0.455 across 5 novelties, rho_novelty -0.982 p=0.001 exceeds -0.5 threshold, PC passes, TI independence r=-0.052 validated, 0% primary failure well below 30% MEASUREMENT_INVALID threshold. However two frozen clauses fail: NC threshold mutually exclusive with PC (design contradiction making SURVIVES impossible) and length-independence percentage metric confounded by fixed 0.5 overhead dilution (positive rho at low novelty is artifact, only 75% shows negative significant triggering falsifier clause b). Audit REVISE PASS confirms all recomputed metrics match producer exactly but flags four required fixes before claim can advance. Claim ceiling remains synthetic simulation only, harness emulation not kernel, proxy unvalidated. Therefore no VALIDATED/EXPERIMENTAL promotion; C-RESIDUAL-NOVELTY stays HYPOTHESIS. Product promotion not authorized: synthetic-only, emulated mechanism, no real-LLM economics. Next high-information step is corrected replication with valid controls and real-token grounding before any advancement toward EXPERIMENTAL; immediate chaining deferred (continue=false) pending Global Research Director pulse.",
+  "evidence_refs": [
+    "research/experiments/EXP-FRONTIER-35651943981/request.json",
+    "research/experiments/EXP-FRONTIER-35651943981/spec.json",
+    "research/experiments/EXP-FRONTIER-35651943981/prereg.md",
+    "research/experiments/EXP-FRONTIER-35651943981/freeze.json",
+    "research/experiments/EXP-FRONTIER-35651943981/result.json",
+    "research/experiments/EXP-FRONTIER-35651943981/derived_metrics.json",
+    "research/experiments/EXP-FRONTIER-35651943981/raw_evidence.json",
+    "research/experiments/EXP-FRONTIER-35651943981/report.md",
+    "research/experiments/EXP-FRONTIER-35651943981/provenance.json",
+    "research/experiments/EXP-FRONTIER-35651943981/run_experiment.py",
+    "research/experiments/EXP-FRONTIER-35651943981/audit.json",
+    "codex/claim_state.json",
+    "research/experiments/EXP-FRONTIER-35401996615/handoff.json"
+  ]
+}

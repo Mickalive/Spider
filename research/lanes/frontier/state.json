@@ -1,17 +1,17 @@
 {
   "lane": "frontier",
   "human_paused": false,
-  "active_experiment_id": "EXP-FRONTIER-35651943981",
-  "last_experiment_id": "EXP-FRONTIER-35401996615",
-  "last_verdict": "MEASUREMENT_INVALID",
+  "active_experiment_id": null,
+  "last_experiment_id": "EXP-FRONTIER-35651943981",
+  "last_verdict": "FALSIFIED-IN-SETTING (bundled frozen rule \u2014 spec contradiction bounded)",
   "continue_immediately": false,
-  "next_question": "Can the parent DGP and estimator calibration be recovered from EXP-FRONTIER-34913743596 (KDE CV 0.5745, kNN CV 0.7550 at 250/type) such that a spec-compliant re-run achieves pipeline validation within 5% at 250/type \u2014 enabling a valid sample-size scaling test at 500-1000/type?",
+  "next_question": "Does a recalibrated C-RESIDUAL-NOVELTY test (NC recast as non-inferiority adv0 >= -0.15, length tested on absolute cost or overhead-scaled advantage, cost proxy validated r>0.7 against real LLM tokens in 10-task pilot, and actual kernel distill_parameterized on noisy multi-step observations) preserve the strong novelty gradient (rho ~ -0.98) while eliminating the overhead artifact, and what gradient slope is achieved with embedding retrieval and varied training coverage (30%/80%)?",
   "promotion_ready": false,
-  "consecutive_failures": 1,
-  "updated_at": "2026-09-22T12:12:55.647558+00:00",
-  "last_failure_retryable": false,
-  "last_handoff_sha256": "d2393ea11d4a62073594068c2c4d9fa3bc54666dcb13ac1a1eff1e2af9934f75",
-  "same_failure_count": 1,
-  "last_failure_fingerprint": "28c25234d08a5d010dc55dd8",
-  "last_failure_control_revision": "ef5e3057ac7ef422e1383cb1f36e5cd91112f3a3da9f3c75198a0455bbaf28ae"
+  "consecutive_failures": 0,
+  "updated_at": "2026-09-22T12:45:16.245507+00:00",
+  "last_failure_retryable": null,
+  "last_handoff_sha256": "544d16b599b04dc013b129b5cdf2207bab710dbabad141a0bc11434ef258a20e",
+  "same_failure_count": 0,
+  "last_failure_fingerprint": null,
+  "last_failure_control_revision": null
 }
