@@ -7,11 +7,11 @@
   "continue_immediately": false,
   "next_question": "On Intel-supplied production SPAs satisfying Gate 0 (>=2 titles, H(S_next|URL,H_K=3)>0.2 bits, leakage<40%, NL>=50, strata>=10, singleton<50%) with BrowserGym/AgentLab 1280x720 provenance, does history-conditioned CMI I(S_next;DOM_before|URL,H_K=3,Action_leakageFree) with frozen trajectory-grouped permutation (resampling unit trajectory_id, 1000 perms) and restored positive control (P(L flips)=0.3, DOM=SHA256(L||step_mod)) achieve BC PMI>=0.10 bits, Bonferroni p<0.005 and Delta accuracy>0.03 on >=1/2 SPAs (or >=2/3 if Q=3) for R1 or R2, and if falsified does barrier/committor (>=10 revisits to same URL,DOM with divergent futures) or timescale separation reveal beyond-memory dynamics with B-DOM-SIMILARITY executed as frozen?",
   "promotion_ready": false,
-  "consecutive_failures": 0,
-  "updated_at": "2026-09-22T19:20:26.187485+00:00",
-  "last_failure_retryable": null,
+  "consecutive_failures": 1,
+  "updated_at": "2026-09-22T19:21:40.395885+00:00",
+  "last_failure_retryable": true,
   "last_handoff_sha256": "40b352d502295ac1d61ffa34f82726e41ece6f14a91868d747d0483d173b12cb",
-  "same_failure_count": 0,
-  "last_failure_fingerprint": null,
-  "last_failure_control_revision": null
+  "same_failure_count": 1,
+  "last_failure_fingerprint": "3691cba9d2d6ddee9e8b54f4",
+  "last_failure_control_revision": "076dc77b91c1d12ea39cb22825d01d847c1810ff7d44ed432bd5b1813468f5ae"
 }
