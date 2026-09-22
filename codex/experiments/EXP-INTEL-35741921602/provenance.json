@@ -1,0 +1,131 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-35741921602",
+  "lane": "intel",
+  "github_run_id": "35741921602",
+  "github_run_attempt": "1",
+  "recorded_at": "2026-09-22T15:30:00+00:00",
+  "parent_experiment_id": "EXP-INTEL-35725763380",
+  "parent_handoff_sha": "1ff31f803ffec5c110dff97720771c995f1f451a9d340d55de530b20b2d367d0",
+  "parent_handoff_verdict": "REVISE",
+  "request_hash": "22ecc3bd9ecf9c47abb99d0297318aa07c4e14341bbcbc530a71e138754ff857",
+  "freeze_sha": "e606e040dfa1154aa4bae2ae4b456f81fd16781c",
+  "commits": {
+    "base_sha": "e606e040dfa1154aa4bae2ae4b456f81fd16781c",
+    "chain_depth": 0
+  },
+  "datasets": {
+    "webarena_verified": {
+      "source": "research/experiments/EXP-INTEL-35725763380/artifacts/raw/webarena-verified.json",
+      "sha256": "d65275660814663375028e9017e1f929e3c38321041b125795e2713b52243d30",
+      "commit": "ef74e1bfd0d83d4bab1c55b2d1b4c2aeaac8e0d0",
+      "task_count": 812,
+      "shopping_count": 192,
+      "template_count": 49,
+      "verified_sha": true
+    },
+    "mind2web": {
+      "source": "osunlp/Mind2Web via HuggingFace datasets library",
+      "revision": "unknown",
+      "download_date": "2026-09-22",
+      "splits_available": ["train"],
+      "n_tasks": 1009,
+      "n_websites": 73,
+      "n_domains": 3,
+      "spec_required_splits": ["train", "test_task", "test_website", "test_domain"],
+      "spec_required_counts": {"train": 137, "test_website": null, "test_domain": null},
+      "divergence": "HF exposes single train split (73/3/1009) vs spec 137/31 with official splits",
+      "status": "MEASUREMENT_INVALID"
+    }
+  },
+  "environments": {
+    "playwright": {
+      "version": "1.63.0",
+      "installed": true,
+      "cdp_method": "Accessibility.getFullAXTree",
+      "viewport": "1280x720"
+    },
+    "docker": {
+      "available": true,
+      "container": "am1n3e/webarena-verified-shopping@sha256:3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb",
+      "url": "http://localhost:7770",
+      "container_names": ["wa_exp3574", "webarena-test"],
+      "port": 7770
+    },
+    "python": "3.12.14",
+    "datasets_library": "available",
+    "sklearn": "available"
+  },
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-INTEL-35741921602/artifacts/raw/webarena-verified.json",
+      "sha256": "d65275660814663375028e9017e1f929e3c38321041b125795e2713b52243d30",
+      "role": "raw",
+      "source": "REUSED from EXP-INTEL-35725763380",
+      "note": "SHA256 verified against pinned commit ef74e1bfd0d83d4bab1c55b2d1b4c2aeaac8e0d0"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-35741921602/artifacts/raw/axtree_web_sample_live.json",
+      "sha256": "f6245e8fc77579cb26525a80de434f784a7e907e7970386517619b7165ae4ff3",
+      "role": "raw",
+      "note": "15 live CDP Accessibility.getFullAXTree extractions at 1280x720 initial viewport; 1426 nodes each; 8 families 2-per-family; seed 35725763380"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-35741921602/artifacts/derived/measurements.json",
+      "sha256": "f4b6e236aa2e9924a37257eb86dedbba8918571845aa7a8ff68357afffbe7a59",
+      "role": "derived",
+      "note": "All metrics: census, bootstrap CIs, AX consistency, Mind2Web diagnostic, decision rule"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-35741921602/artifacts/derived/shuffle_null.json",
+      "sha256": "c2482cbb3ece503f9f56866d33cef12f39247386bda8a9f27db384b280e0e80e",
+      "role": "derived",
+      "note": "1000 website-label permutation nulls, seed 35725763380; diagnostic only"
+    },
+    {
+      "path": "research/intel/exp_35741921602_measure.py",
+      "sha256": "562422941a086e3eb46578179ededb3daca3415c1f28885fc1e80fae314fa6cd",
+      "role": "code",
+      "note": "Frozen measurement script; implements spec.json mechanism definitions and decision_rule"
+    }
+  ],
+  "parameters": {
+    "seed": 35725763380,
+    "bootstrap_reps": 2000,
+    "shuffle_perms": 1000,
+    "ax_viewport_width": 1280,
+    "ax_viewport_height": 720,
+    "ax_tasks_extracted": 15,
+    "ax_families_checked": 7,
+    "ax_tasks_per_family": 2,
+    "mind2web_k_means": 50,
+    "tfidf_max_features": 5000,
+    "tfidf_ngram_range": "(1,2)",
+    "tfidf_min_df": 2
+  },
+  "code_paths": {
+    "measurement_script": "research/intel/exp_35741921602_measure.py",
+    "parent_measurement_script": "research/intel/exp_35725763380_measure.py",
+    "webarena_adapter": "research/intel/webarena_adapter.py",
+    "live_measurement": "research/intel/live_measurement.py",
+    "allowed_code_roots": ["research/intel"]
+  },
+  "execution_notes": {
+    "model_execute": {
+      "previous_attempt": "retry, exit_code 76, category output-missing, attempt 5",
+      "current_attempt": "SUCCESS",
+      "fixes_applied": [
+        "Changed aria_snapshot() to CDP Accessibility.getFullAXTree via new_cdp_session()",
+        "Added wait_for_load_state('networkidle') before CDP extraction",
+        "Fixed _count_ax_nodes to handle CDP list format",
+        "Fixed _collect_role_names to handle list input and CDP nested role/name dicts",
+        "Fixed sample_webarena_tasks_live to ensure 2-per-family sampling",
+        "Fixed KMeans random_state to SEED % (2**31)",
+        "Fixed JSON tuple key serialization in site_tuples",
+        "Fixed cdp_session.detach() instead of close()"
+      ]
+    },
+    "playwright_fix": "Previous attempt used page.aria_snapshot() which returns a string; CDP Accessibility.getFullAXTree returns {'nodes': [...]} with 1426 nodes per task",
+    "sampling_note": "8 families reached first (families with >=3 tasks); spec requires >=10 families with 2-per-family. This is a sampling limitation disclosed in validity_notes."
+  }
+}

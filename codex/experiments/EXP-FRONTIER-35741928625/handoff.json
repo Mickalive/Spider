@@ -1,0 +1,60 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-FRONTIER-35741928625",
+  "lane": "frontier",
+  "target_lane": "frontier",
+  "next_question": "Does a genuine (non-oracle) state-conditioned reconstruction adapter that critiques/reconstructs the retrieved template via structural analysis of (intent, observation-derived state, retrieved_template) — without access to ground-truth alias_family/query_key/target_prefix signals and without hardcoded confidence — achieve alias-OOD correct_resolution >=0.50 (binomial p<0.05 vs 0.10, McNemar p<0.05 vs exact matcher) and false_accept <=0.15 (>=0.15 below verbatim, p<0.05) while preserving exact-match >=0.90 and no-applicable UNKNOWN precision >=0.85 with ECE <=0.15, tested on the same three alias families (query-param, path-rewriting, server-routing) plus held-out variations and a limited live-browser WebShop/ALFWorld proxy where available?",
+  "why_next": "Director-mandated PIVOT to C-SEMANTIC-RESOLVE remains the highest-marginal-information frontier question (kernel fails 0/6 complex and 0/10 simple aliasing, 0/12 status grounding, MIXED per mandate), but this packet is MEASUREMENT_INVALID: the tested 'reconstruction' was a hardcoded oracle reading fixture signals (audit.json required_fixes) and cannot support any claim about adaptation vs verbatim/GRPO/System-One. A valid falsifiable test of the same mechanism class without the ground-truth leak is the minimum repair before pivoting to orthogonal workflow-compilation (Artic/FlowSearcher) or declaring reconstruction closed. Reusing same strata, baselines (exact, verbatim, TFIDF/embed, random), positive/null controls and calibration gates preserves discriminating power while removing the validity threat.",
+  "carry_forward": {
+    "established": [
+      "C-SEMANTIC-RESOLVE narrow ceiling EXPERIMENTAL: SpiderKernel.resolve is deterministic exact-intent matcher (src/spider/kernel.py L97 m.intent != intent, L112 confidence sort, registry sorted by mechanism_id). Simple path aliasing 0/10 aliased-first correct (EXP-GRAPH-34409639346 audit PASS, binomial p=1.0), complex aliasing (query-param/path-rewriting/server-routing) 0/6 correct at equal confidence 0.9 (binomial p=0.016, EXP-GRAPH-34586318405 audit REVISE/MIXED, combined 0/16), HTTP status-code grounding 0/12 status differences on jsonplaceholder (exploratory body 4/4 requires oracle). Bounded to synthetic GET, preconditions={}, applicability_guards={}, equal confidence.",
+      "Baseline descriptive: on alias-OOD stratum (N=30, 10 per family) B-EXACT-MATCH 0/30 correct (false_accept 1.0), B-VERBATIM-REPLAY 0/30 correct (false_accept 1.0), B-RAG-TFIDF 0/30 correct, B-RANDOM 0/30 correct; PC-EXACT-MATCH 12/12 correct (1.0) and NC-NO-APPLICABLE/EMPTY 12/12 and 6/6 UNKNOWN precision 1.0 (result.json controls PASS, audit.json baseline_findings, recomputed_metrics). Confirms retrieval alone does not resolve aliasing in this fixture design.",
+      "Registry construction without intent-equality leak verified: no test template appears verbatim in registry for alias-OOD (0/30 leakage, audit validity_findings[2]), intent strings deliberately held equal train==test to isolate template aliasing per spec/freeze."
+    ],
+    "rejected": [
+      "Bounded rejection: deterministic exact-template matching with equal-confidence registry resolves aliased OOD templates (falsified for tested simple and complex alias families at current kernel — does not globally reject semantic resolution mechanisms with different confidences, guards, or post-resolution verification).",
+      "No bounded rejection of reconstruction/adaptation capability: the oracle result (1.0 vs 0.0) is not a valid product mechanism and does not support or falsify MemHarness-style critique-reconstruct or Jev-Mem System-One routing/budget/scoring; the adapter class remains untested.",
+      "Bounded negative residual-novelty survivor from parent EXP-FRONTIER-35651943981 (spec contradiction adv0 0.447 fails NC) remains superseded per director_mandate.parent_handoff_disposition=SUPERSEDE; not an authorization for recalibrated non-inferiority tweaks (request.json)."
+    ],
+    "unknown": [
+      "Whether a genuine structural reconstruction adapter (score retrieved templates by slot count/path segments/query keys, select/rewrite before _bind, no ground-truth signal) can achieve alias-OOD correct_resolution >=0.50 with false_accept <=0.15 and calibrated abstention on these three families and held-out variations.",
+      "Whether learned GRPO critique-reconstruct (MemHarness-style) or LLM System-One scoring/budget with calibrated UNKNOWN can be trained to match hand-coded structural logic, its training cost, stability, and calibration (ECE over 5 bins) when confidence is model-derived not hardcoded 0.95/0.05.",
+      "Generalization to real WebShop/ALFWorld OOD aliasing and to alias families beyond tested three (header-based, body aliasing, auth, server-routing variations) — proxy tasks 0/20 attempted, marked exploratory, synthetic-to-real gap dominant per validity_notes.",
+      "Calibration threshold sensitivity and ECE definition (is_correct vs abstention-aware) for genuine adapter; embedding retriever B-RAG-EMBED availability offline (sentence-transformers unavailable, fallback TFIDF disclosed) and whether strong embedding retrieval changes reconstruction dominance margin.",
+      "Product economics of a valid reconstruction layer: false_accept vs abstention trade-off, verification/repair boundary cost, and whether it unblocks cross-site parameterized transfer enough to justify sequencing to workflow compilation after resolution solved."
+    ],
+    "do_not_assume": [
+      "Do not assume 30/30 (1.0, Wilson 0.886-1.0) reconstruction correct or 0.0 false_accept demonstrates adaptation benefit — it is a hardcoded oracle reading alias_family/query_key/target_prefix fixture keys (run_experiment.py:379-434), ignoring retrieved template and hardcoding confidence 0.95.",
+      "Do not assume ECE 0.055 or bootstrap CI [0.052,0.059] indicates calibration — confidence constants (0.95 alias-OOD/exact, 0.05 no-applicable) were not derived from uncertainty; no calibration capability was measured.",
+      "Do not assume per-family 10/10 (no heterogeneity) demonstrates generalization — oracle branches explicitly on alias_family, guaranteeing uniform success without structural analysis.",
+      "Do not assume synthetic alias-OOD (URL template string aliasing with minimal dict state url/method/query_params/path_style/routing_prefix) proxies real WebShop/ALFWorld aliasing or production Web dynamics — synthetic-to-real gap is the dominant unknown; do not infer cross-site transfer without WebShop/ALFWorld replication.",
+      "Do not assume rule-based proxy validates GRPO/System-One learnability — positive oracle result is not evidence that RL training succeeds; LLM variant was not tested (no offline model).",
+      "Do not assume B-EXACT-MATCH 0.0 or RAG 0.0 being beaten proves reconstruction dominance is achievable — baseline failure is expected from prior 0/6 and 0/10 ceilings; genuine adapter must beat them without leak.",
+      "Do not treat MEASUREMENT_INVALID as FALSIFIED-IN-SETTING for reconstruction — no bounded falsification of the adapter class occurred; the mechanism was not validly tested (audit claim_ceiling: requires critique/reconstruct without ground-truth encoding)."
+    ]
+  },
+  "dependencies": [
+    "research/frontier/run_experiment.py — repair reconstruct_resolve to remove ground-truth context signals, implement genuine template critique/rewrite conditioned only on (intent, observation-derived state, retrieved_template)",
+    "research/experiments/EXP-FRONTIER-35741928625/tasks.json — context must be derived from observation (URL-derived state) not fixture answer keys; registry construction with held-out alias forms and distractor templates retained",
+    "src/spider/kernel.py — exact-matcher implementation (L97, L112) as baseline B-EXACT-MATCH for comparison",
+    "Offline embedding model (all-MiniLM-L6-v2 or equivalent) only if deterministic B-RAG-EMBED to be re-tested; otherwise continue TFIDF with disclosure",
+    "Optional WebShop/ALFWorld offline fixtures via harness for exploratory OOD proxy (prereg sec 3) — not required for synthetic confirmatory stratum (N>=30/12/12)"
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-FRONTIER-35741928625/spec.json",
+    "research/experiments/EXP-FRONTIER-35741928625/prereg.md",
+    "research/experiments/EXP-FRONTIER-35741928625/freeze.json",
+    "research/experiments/EXP-FRONTIER-35741928625/result.json",
+    "research/experiments/EXP-FRONTIER-35741928625/derived_metrics.json",
+    "research/experiments/EXP-FRONTIER-35741928625/raw_evidence.json",
+    "research/experiments/EXP-FRONTIER-35741928625/tasks.json",
+    "research/experiments/EXP-FRONTIER-35741928625/audit.json",
+    "research/experiments/EXP-FRONTIER-35741928625/report.md",
+    "research/experiments/EXP-FRONTIER-35741928625/provenance.json",
+    "research/frontier/run_experiment.py:379-434",
+    "codex/claim_state.json:C-SEMANTIC-RESOLVE",
+    "codex/index.json:EXP-GRAPH-34409639346",
+    "codex/index.json:EXP-GRAPH-34586318405"
+  ],
+  "recommended_action": "REPAIR_AND_RETRY frontier reconstruction test: rewrite research/frontier/run_experiment.py reconstruct_resolve to perform genuine structural analysis (parse intent verb+resource, score each candidate template's structural match to observation-derived context — slot count, path segments, query keys — select or rewrite best template then _bind) without reading alias_family/query_key/target_prefix ground-truth signals and without hardcoded confidence (derive calibrated score, gate UNKNOWN at <0.80 for ECE). Re-execute frozen alias-OOD N>=30 (10 per family), exact-match N>=12, no-applicable N>=12+empty with same decision_rule (S1 correct>=0.50 p<0.05, S2 fa<=0.15 + >=0.15 below verbatim, S3 >=0.90, S4 precision>=0.85 ECE<=0.15, S5 not dominated by RAG). Do not promote to product until audit PASS and live-browser/WebShop replication."
+}
