@@ -1,0 +1,73 @@
+{
+  "experiment_id": "EXP-FRONTIER-35741928625",
+  "lane": "frontier",
+  "schema_version": 1,
+  "provenance": {
+    "github_run_id": "35741928625",
+    "base_sha": "e606e040dfa1154aa4bae2ae4b456f81fd16781c",
+    "executed_commit": "8092abfaeaebed23cb3ae2c5fd3d3f208cd24ca9",
+    "freeze_hashes": {
+      "prereg.md": "5849a8b9f62dd5c76079ee309cd9d4272b2085c42e9fc12c77415b508b48ce9c",
+      "request.json": "07113a78c28423b79a471c26b8e34388c4fbee5f3e4c099d35e819bc6bfb78a8",
+      "spec.json": "26557ab069544bbf06449e6c9bb72ffe477cc1c8eb3514621a497447fbb46d2e"
+    },
+    "code_roots": ["research/frontier", "src/spider"],
+    "code_paths": [
+      "research/frontier/run_experiment.py",
+      "src/spider/kernel.py",
+      "src/spider/models.py",
+      "src/spider/registry.py"
+    ],
+    "artifacts": [
+      {
+        "path": "research/experiments/EXP-FRONTIER-35741928625/raw_evidence.json",
+        "sha256": "43d47dc4776151d6b0a778b7b2582a47a695a91ef8e153c6368caf022b8aa74f",
+        "role": "raw"
+      },
+      {
+        "path": "research/experiments/EXP-FRONTIER-35741928625/derived_metrics.json",
+        "sha256": "89c3703365bd0b188ea4e58e7f167cb8fdee02c228ed3f2c66ab12d023f8cbd1",
+        "role": "derived"
+      },
+      {
+        "path": "research/experiments/EXP-FRONTIER-35741928625/tasks.json",
+        "sha256": "84647ac99b8f7e046a4f14403ff004a7c02e718f22244bbaf813115ac8541c6e",
+        "role": "fixture"
+      },
+      {
+        "path": "research/frontier/run_experiment.py",
+        "sha256": "78143fed54a344f0093487be391e22fddbd9dae0ea04606fa33603c3867a0f46",
+        "role": "code"
+      }
+    ],
+    "environment": {
+      "python_version": "3.11",
+      "platform": "linux",
+      "packages": {
+        "numpy": "installed",
+        "scipy": "installed",
+        "scikit-learn": "installed",
+        "sentence-transformers": "unavailable_offline"
+      },
+      "seeds": {
+        "python_random": 42,
+        "numpy_random": 42,
+        "numpy_RandomState": 42
+      }
+    },
+    "datasets": {
+      "synthetic_alias_ood": "generated 30 tasks (3 families x10) with deterministic templates",
+      "exact_match": "12 tasks",
+      "no_applicable": "12 tasks",
+      "empty_registry": "6 tasks",
+      "webshop": "not_accessible_offline_marked_exploratory",
+      "alfworld": "not_accessible_offline_marked_exploratory"
+    },
+    "commands": [
+      "pip install numpy scipy scikit-learn -q",
+      "python research/frontier/run_experiment.py"
+    ],
+    "execution_time_approx": "<10 min CPU, 300 kernel resolve+bind calls plus TFIDF retrieval, no paid model calls",
+    "determinism_notes": "All RNG via numpy.random.RandomState(seed=42) and random.seed(42); no unseeded np.random; sklearn TFIDF deterministic; embedding fallback disclosed; block bootstrap 500 resamples over tasks"
+  }
+}

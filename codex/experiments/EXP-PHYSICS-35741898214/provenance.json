@@ -1,0 +1,94 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-35741898214",
+  "lane": "physics",
+  "github_run_id": "35741898214",
+  "origin_github_run_id": "35741898214",
+  "base_sha": "e606e040dfa1154aa4bae2ae4b456f81fd16781c",
+  "pre_execute_sha": "41db17cde023a320046ffd182727ab402c7f4ab0",
+  "frozen_sha": "41db17cde023a320046ffd182727ab402c7f4ab0",
+  "prereg_sha256": "9b9bc1e75f2486e621aeb73a8fdb5076abd71d8073a8151b025a93b68b10c481",
+  "request_sha256": "9c6577fe266aba35b4176b5bbab2070c6ecd3e29501c25fa0694cc0a7347444a",
+  "spec_sha256": "695672699fc301ff84cadcaa9f5c4aa3c52b9e9bf75c18bd73ec8bc36b36cb25",
+  "freeze_sha256": "149a8a3a52eabdbfd4f1652f80fb5143013aa14fdf8346ccb10d3962ccdab88e",
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "datasets": [
+    {
+      "name": "osunlp/Mind2Web",
+      "revision": "17ece8eb89862368edc0cc806acee6fca5163474",
+      "available_splits": [
+        "train"
+      ],
+      "required_splits": [
+        "train",
+        "test_website",
+        "test_domain"
+      ],
+      "n_train_tasks": 1009,
+      "n_unique_websites": 73,
+      "access_method": "HuggingFace load_dataset",
+      "status": "INCOMPLETE - official splits unavailable"
+    },
+    {
+      "name": "web-arena/web-arena-verified",
+      "revision": null,
+      "available_splits": [],
+      "required_splits": [
+        "family_holdout"
+      ],
+      "n_tasks_expected": 192,
+      "n_templates_expected": 49,
+      "n_families_expected": 36,
+      "access_method": "HuggingFace/GitHub",
+      "status": "NOT_FOUND - repo returns 404"
+    }
+  ],
+  "code_paths": [
+    {
+      "path": "research/experiments/EXP-PHYSICS-35741898214/experiment.py",
+      "description": "TF-IDF->k-means overlap experiment pipeline",
+      "status": "written_and_partially_executed"
+    }
+  ],
+  "environment": {
+    "python_version": "3.12.14",
+    "scikit_learn": "1.9.1",
+    "datasets": "5.0.1",
+    "numpy": "2.5.3",
+    "pandas": "3.0.6",
+    "scipy": "1.18.1",
+    "hf_hub_unauthenticated": true
+  },
+  "commands": [
+    "python3 -c \"from datasets import load_dataset; ds = load_dataset('osunlp/Mind2Web')\"",
+    "python3 -c \"from sklearn.feature_extraction.text import TfidfVectorizer; from sklearn.cluster import KMeans; ...\"",
+    "Load Mind2Web HF dataset revision 17ece8eb89862368edc0cc806acee6fca5163474"
+  ],
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-PHYSICS-35741898214/pipeline_results.json",
+      "sha256": "76404006b891b66da65d431b74c9963ed72bfd44aea4264cf44f4295aa8de965",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-35741898214/result.json",
+      "sha256": "eadc72ea357526a8076e59b7d210b8700d53603c08b78eb5727f6ce0cfa3500d",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-35741898214/report.md",
+      "sha256": "74f2a8fe1023e19499e2710c09b64c5ffc4fa0a065a475a298aba5096e5d2aaf",
+      "role": "derived"
+    }
+  ],
+  "validity_notes": [
+    "Infrastructure failure (dataset unavailability) is not a scientific negative",
+    "Pipeline construction and verification completed successfully",
+    "Measurement invalidity is due to substrate unavailability, not execution failure"
+  ],
+  "unresolved": [
+    "Official Mind2Web test_website/test_domain splits may be obtainable from dataset author",
+    "WebArena-Verified v2 data may be accessible via Docker images or alternative repositories",
+    "The 73/3 vs spec 137/31 divergence for Mind2Web remains unresolved"
+  ]
+}

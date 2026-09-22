@@ -1,0 +1,68 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-35741890679",
+  "lane": "graph",
+  "created_at": "2026-09-22T15:15:56.317146+00:00",
+  "git_commit": "a040190d9139f2d2a9839a4ce6e35023d8ad4c1f",
+  "artifacts": [
+    {
+      "path": "raw_evidence/experiment_data.json",
+      "sha256": "0abae6fc496553348ac2918fecd1d840aee77bdc51720e287e96af54a5ac7784",
+      "role": "raw"
+    },
+    {
+      "path": "raw_evidence/metrics.json",
+      "sha256": "e6b59c9222da959cfe729fb22c4147cecd01a7b2226a66399e05157e1164eacb",
+      "role": "derived"
+    },
+    {
+      "path": "raw_evidence/byte_identity.json",
+      "sha256": "767e563844498ab900b6f6c8e1ac55a9dada0141211d9fd79b676bacea82b5e1",
+      "role": "raw"
+    },
+    {
+      "path": "raw_evidence/perturbation_manifest.json",
+      "sha256": "a2810b359b4fb716832dd120031caa650ebbb0e5d4020742aceab0b2c6fa3407",
+      "role": "raw"
+    },
+    {
+      "path": "raw_evidence/repair_results.json",
+      "sha256": "3e4a46a4fbadf48f15338d3dee222b9f865c19af3abde3132d476843d2fe2f94",
+      "role": "derived"
+    },
+    {
+      "path": "research/graph/delta_repair/execute_delta_repair.py",
+      "sha256": "15f62b80fe9df25e82a9a7e44b70acf8d5e331fb63b67021b4e6127fabe7d5ab",
+      "role": "code"
+    },
+    {
+      "path": "request.json",
+      "sha256": "9e1265779e96b739db5b035acc87955a075e4fccc5e73e347a0de589f6b7762a",
+      "role": "fixture"
+    },
+    {
+      "path": "spec.json",
+      "sha256": "4f7a26dba474b4cebad60c6694f07a63e9751bf577a0e034b38b1b48a913346f",
+      "role": "fixture"
+    },
+    {
+      "path": "prereg.md",
+      "sha256": "2f33f0e85fa370b75a2e97804fed9539169d96f7426e7b02487ed37866b1bc42",
+      "role": "fixture"
+    },
+    {
+      "path": "freeze.json",
+      "sha256": "370880ebf4dc764c14bc0d0850d2626c261abcc574877e445b0d861871dd6a37",
+      "role": "fixture"
+    }
+  ],
+  "environment": {
+    "python": "3.12.14 (main, Aug 13 2026, 02:47:42) [GCC 13.3.0]",
+    "platform": "linux",
+    "numpy": "2.5.3"
+  },
+  "commands": [
+    "python3 research/graph/delta_repair/execute_delta_repair.py"
+  ],
+  "notes": "EXP-GRAPH-35741890679 EXECUTE: C-DELTA-REPAIR single-resource local perturbation repair with 36 instances, byte identity 960/960, TRAIN/TEST split 18/18, simulated heuristic repair vs cold/retrieval/oracle baselines, verification AUROC on TEST holdout"
+}
