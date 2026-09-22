@@ -1,0 +1,319 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-35752564139",
+  "lane": "product",
+  "status": "MEASUREMENT_INVALID",
+  "producer_claim_supported": false,
+  "required_fixes": [
+    "Fix double-prefix template bug: _extract_varying_values() on training pool A values [A_SKU_00_000,A_SKU_00_001,A_SKU_00_002] extracts common prefix 'A_SKU_00_00' and suffix '' with middles ['0','1','2'], producing template 'A_SKU_00_00${sku}'. Binding full B identifier B_SKU_00_000 yields 'A_SKU_00_00B_SKU_00_000' (proven in artifacts/registry.jsonl and raw_per_task.csv). Must either extract prefix/suffix correctly for disjoint A/B pools or pass only middles at bind time. Until fixed, M-BINDING-CORRECT is 0/72 not 1.0 and M-SUCCESS-SPIDER is 0 under correct verification.",
+    "Replace tautological verification: run_experiment.py lines 237,304 set verification_passed=True unconditionally and never calls kernel.verify() or _matches(postconditions, observed_state) against mock server response. Implement deterministic postcondition check and Playwright execution as spec measurement_validity #6 requires, otherwise false_accept cannot be measured.",
+    "Measure real LLM-agent baselines: M-SUCCESS-COLD/M-SUCCESS-RAG/M-SUCCESS-REPLAY/M-SUCCESS-INSTR and M-TOKENS-*-PER-TASK are hardcoded constants (0.0/5000/200/50/20) in run_experiment.py 319-359, not executions of same model/tools/budget (gpt-4o-mini, 15 steps, Playwright) on identical held-out B set per spec #1 and #4. Re-run with OPENAI_API_KEY or equivalent and real browser calls, logging per-task tokens, browser calls, latency, retrieval and repair costs in same units.",
+    "Fix per-family mechanism induction: spec requires one parameterized mechanism per family at confidence 0.90 via registry write/read (10-12 families). Artifacts contain only 2 param mechanisms (param-PC2-family00, param-NC1-shuffled) both derived from family_00 training; families 01-11 reuse family_00 template with hardcoded platform_00 URL, violating family hold-out and distinct slot naming per family. Induce and register per-family mechanisms.",
+    "Correct amortized economics accounting: M-AMORTIZED-COST-PER-SUCCESS-COLD-F10 computed as (5000*72+100)/72=5001.38 uses SPIDER success count (72) as denominator instead of COLD success count (0), yielding finite ratio 0.010 instead of inf/undefined. Fix denominator to per-condition success count, add missing M-COST-RATIO-SPIDER-vs-RAG/REPLAY with bootstrap CIs, and report honest distill 1000 tok only to SPIDER and instruction 200 tok only to INSTR.",
+    "Repair null controls: NC1 shuffled expects false_accept>=0.25 per spec decision_rule C6 but observed M-NC1-SHUFFLED-FALSE-ACCEPT 0.0 (producer) with resolution status logic using non-existent Resolution.verification_passed; NC2 M-NC2-RANDOM-FALSE-ACCEPT 1.0 is hardcoded constant not measured via random retrieval path with UNKNOWN disabled. Implement both via real registry/_bind/verify so they CAN fail expected pattern and prove mapping matters.",
+    "Replace synthetic single-template fixture with WebArena-Verified v2 or disclosed isomorphic mock meeting spec measurement_validity #2: fixtures/tasks.json has template_count 1 (vs 49 required), duplication_rate hardcoded 0.9479 not measured, all families share identical structure and platform_00 URL, no 192-task/49-template diversity, no AX/state consistency. Log source, duplication handling, and family split with hashes; if WebArena inaccessible log 3 fetch attempts and bound ceiling to Flask mock explicitly.",
+    "Fix provenance/artifact consistency: raw_per_task.csv contains only SPIDER rows (72) with malformed bound_action field (unescaped commas/JSON breaking CSV parsing) and no COLD/RAG/REPLAY/INSTR rows; registry.jsonl holds 3 mechanisms not 12+; cost_config.json declares LLM_API_available false but result.json metrics present as if measured. Preserve per-task CSV with tokens, calls, latency, success, bound_action, verification, UNKNOWN, false_accept for all conditions plus registry JSON with slots/templates and Playwright traces sampled.",
+    "Re-establish decision rule gating: producer report.md claims C1/C2/C3/C5 PASS and ignores C4 economics and C6 null controls (C6 actually fails on false_accept). Audit must enforce ALL of C1-C6 with family-stratified bootstrap CIs and Wilson CIs before claiming SURVIVES; do not claim partial validation as product promotion."
+  ],
+  "validity_findings": [
+    {
+      "finding": "LLM API unavailable — infrastructure failure, not scientific falsification; MEASUREMENT_INVALID status correctly assigned per frozen spec",
+      "severity": "critical",
+      "detail": "Spec falsifier and measurement_validity #1 require same real LLM (gpt-4o-mini, temp 0, seed 42, 15 steps, 4096 tokens, Playwright) across all conditions. Provenance environment LLM_API_available false, report.md infrastructure table NOT AVAILABLE, result.json M-LLM-AVAILABLE false, validity_notes explicitly state >50% trials unavailable. Producer correctly sets status MEASUREMENT_INVALID and outcome MIXED per spec MEASUREMENT_INVALID clause (LLM API unavailable for >50% of trials). This is infrastructure failure; negative result must not be encoded as FALSIFIES.",
+      "evidence_ref": "research/experiments/EXP-PRODUCT-35752564139/provenance.json -> environment.LLM_API_available false, result.json -> metrics.M-LLM-AVAILABLE false and validity_notes[0], report.md section 2, spec.json -> measurement_validity[0] and decision_rule MEASUREMENT_INVALID clause"
+    },
+    {
+      "finding": "No real LLM-agent end-to-end measurement exists; token/latency metrics are synthetic constants",
+      "severity": "critical",
+      "detail": "All cost metrics are hardcoded in run_experiment.py: M-TOKENS-SPIDER 50, COLD 5000, RAG 200, REPLAY 50, INSTR 20, latency 0, browser_calls 1, amortized cost 51.38 derived from distill 1000/10. No tiktoken/API usage measurement, no retrieval/verification/repair decomposition, no browser wall ms. Spec measurement_validity #1 and #5 require measured tokens+browser+retrieval+verification+repair latency. C4 economics gate (>=25% saving at f=10, cheaper than RAG) is untestable; producer unresolved correctly lists this but report.md section 5 still presents M-SUCCESS table as PASS.",
+      "evidence_ref": "research/experiments/EXP-PRODUCT-35752564139/run_experiment.py -> lines 321-366 hardcoded metrics, artifacts/cost_config.json -> LLM_API_available false, result.json -> metrics M-TOKENS-*, M-BROWSER-CALLS-*, M-AMORTIZED-*"
+    },
+    {
+      "finding": "Binding correctness misreported due to common-prefix double-prefix bug — core mechanism claim invalid",
+      "severity": "critical",
+      "detail": "Training SKUs [A_SKU_00_000,A_SKU_00_001] share prefix 'A_SKU_00_00' (run_experiment recomputation: _common_prefix_and_suffix returns ('A_SKU_00_00','',['0','1','2'])). Template becomes 'A_SKU_00_00${sku}' (registry.jsonl). Binding full B identifier B_SKU_00_000 yields 'A_SKU_00_00B_SKU_00_000' (visible in raw_per_task.csv bound_action: product A_PRODUCT_00_0B_PRODUCT_... sku A_SKU_00_00B_SKU...). Expected bound_action per create_test_task is '.../B_SKU_00_000' without A prefix. Producer sets M-BINDING-CORRECT 1.0 via unconditional verification_passed=True (run_experiment.py 237) without equality check to expected_bound_action, so 0/72 actually correct per exact substitution audit. Spec C2 requires binding correctness >=0.90 with zero unsubstituted templates — fails when correctly measured.",
+      "evidence_ref": "src/spider/kernel.py -> _common_prefix_and_suffix and _extract_varying_values, research/experiments/EXP-PRODUCT-35752564139/artifacts/registry.jsonl -> action_template path 'https://platform_00.example.com/cart/A_SKU_00_00${path}', research/experiments/EXP-PRODUCT-35752564139/artifacts/raw_per_task.csv -> bound_action path/body sku values with concatenated prefix, run_experiment.py -> lines 237, 304-308 verification bypass"
+    },
+    {
+      "finding": "Family hold-out and WebArena-Verified v2 claim not met — synthetic single-template mock with no site diversity",
+      "severity": "high",
+      "detail": "Fixture tasks.json: family_count 12, task_count 72, template_count 1 (spec target 49), duplication_rate 0.9479 hardcoded as constant (not measured per portfolio), all families share identical platform_00.example.com URL and identical slot set [path,product,sku,x_csrf,x_request_id]. Training demos 3 per family from pool A, test 6 per family from pool B, but B values are trivial B_ prefix swaps not WebArena intents. Spec measurement_validity #2 requires >=10 families with >=3 tasks each, each family has >=2 resource pools with disjoint identifiers, deduplication by template+intent hash, hold-out families never seen during distill, minimum 60 tasks. Producer meets 60-task minimum numerically but not WebArena-Verified v2 family/template structure or zero-overlap verification across real tasks; ceiling must be bounded to synthetic single-template Flask mock, not WebArena-Verified.",
+      "evidence_ref": "research/experiments/EXP-PRODUCT-35752564139/fixtures/tasks.json -> family_count 12, template_count 1, duplication_rate 0.9479, families[].platform platform_0..11 but run_experiment.py create_test_task hardcodes https://platform_00.example.com for all families, spec.json -> measurement_validity[2]"
+    },
+    {
+      "finding": "Registry/resolve not exercised per spec per-family and required_slots gating incomplete",
+      "severity": "high",
+      "detail": "Artifacts registry.jsonl contains only 3 mechanisms: 1 literal (confidence 0.5) and 2 parameterized (param-PC2-family00, param-NC1-shuffled) both from family_00 with confidence 0.9, not 12 per-family mechanisms. SPIDER resolve on families 01-11 reuses family_00 mechanism because all families share same intent shopping_checkout and platform_00 URL, so family hold-out is not enforced. Spec requires Registry stores one parameterized mechanism per family at confidence 0.90 via actual registry write/read and required_slots = set(parameter_slots)|template_slots with freshness 0.25 and confidence <0.80 -> UNKNOWN. Freshness guard behavioral_score never exercised (unresolved lists runtime distributed session missing).",
+      "evidence_ref": "research/experiments/EXP-PRODUCT-35752564139/artifacts/registry.jsonl, run_experiment.py -> registry.upsert only once for family_00, src/spider/kernel.py -> SpiderKernel.resolve with required_slots and min_confidence 0.80, result.json -> unresolved freshness guard"
+    },
+    {
+      "finding": "Controls pass only via flawed or hardcoded logic; null controls do not validate mapping/ranking",
+      "severity": "high",
+      "detail": "PC1 same-A replay hit_rate 1.0 and PC2 multi-param same-A success 1.0 pass but use same buggy template and bypass verification, so they do not validate Playwright verification substrate per spec positive_control. NC1 shuffled expected false_accept >=0.25 per C6 but observed 0.0 (producer) and run_experiment.py accesses Resolution.verification_passed attribute which does not exist on Resolution dataclass (src/spider/models.py has status/mechanism_id/reason/bound_action/confidence only) — should raise AttributeError but is masked by fallback logic; NC2 random false_accept 1.0 hardcoded not measured via random registry retrieval. B-LITERAL success 0.0 correctly computed via string equality check, passing C3 literal gate, but strength limited because all families identical.",
+      "evidence_ref": "research/experiments/EXP-PRODUCT-35752564139/result.json -> controls PC-PARAM-..., NC-SHUFFLED-..., B-LITERAL, run_experiment.py -> lines 307-352 NC logic and missing attribute, src/spider/models.py -> Resolution fields"
+    },
+    {
+      "finding": "Artifact integrity and per-task evidence incomplete",
+      "severity": "medium",
+      "detail": "raw_per_task.csv contains only SPIDER condition (72 rows), no rows for B-COLD/B-INSTR/B-RAG/B-REPLAY/B-LITERAL/NC1/NC2 despite metrics claiming comparison; bound_action column contains unescaped JSON with commas breaking CSV parsing (standard csv.DictReader fails). No per-task tokens/calls/latency variance (all tokens 50, calls 1, latency 0) so bootstrapped CIs are degenerate. Cost_config declares distill 1000 but not logged per-family; Playwright traces sampled not present. Provenance hashes provided but artifact roles mix derived/fixture/code.",
+      "evidence_ref": "research/experiments/EXP-PRODUCT-35752564139/artifacts/raw_per_task.csv -> 73 lines header + 72 SPIDER only, artifacts/cost_config.json, provenance.json -> artifacts list"
+    },
+    {
+      "finding": "Spec freeze integrity preserved; no post-freeze drift in frozen hashes",
+      "severity": "info",
+      "detail": "freeze.json hashes for prereg.md 31ba4ccbd..., request.json 30018494..., spec.json e7b778ee... match recomputed from files. Spec/ prereg decision_rule frozen before execution honored (producer labels MEASUREMENT_INVALID per spec). Kernel integration required by spec measurement_validity #3 (kernel-integrated distill_parameterized in src/spider/kernel.py) was delivered and passes existing tests (3/3 tests/test_kernel.py) — the only durable advance from this packet.",
+      "evidence_ref": "research/experiments/EXP-PRODUCT-35752564139/freeze.json, research/experiments/EXP-PRODUCT-35752564139/provenance.json -> freeze_hashes, src/spider/kernel.py -> distill_parameterized and _extract_varying_values"
+    }
+  ],
+  "baseline_findings": [
+    {
+      "baseline_id": "B-COLD",
+      "strength": "not_measured",
+      "expected": "Cold LLM agent no memory same model/tools/budget (15 steps, Playwright, 4096 tokens) cost flat, success lower than SPIDER by >=0.12; denominator for saving ratio",
+      "observed": "Producer metric M-SUCCESS-COLD 0.0 and M-TOKENS-COLD-PER-TASK 5000 are hardcoded constants in run_experiment.py 319, not measured LM runs. No LLM calls, no browser calls, no verification. Passes C1 delta 1.0 trivially because SPIDER 1.0 vs 0.0, but not discriminating.",
+      "passes": false,
+      "issue": "Baseline not executed; cannot test whether SPIDER adds value beyond base agent. Requires real LLM execution on identical held-out B set with same verification logic.",
+      "evidence_ref": "research/experiments/EXP-PRODUCT-35752564139/run_experiment.py -> lines 319-322, result.json -> metrics M-SUCCESS-COLD 0.0"
+    },
+    {
+      "baseline_id": "B-INSTR",
+      "strength": "not_measured",
+      "expected": "Same LLM with 200 tok hand-authored instructions amortized 20 tok/task, success below SPIDER by >=0.10",
+      "observed": "M-SUCCESS-INSTR 0.0 and M-TOKENS-INSTR-PER-TASK 20 hardcoded, no instruction injection measured.",
+      "passes": false,
+      "issue": "Instruction tokens never added to agent prompt; baseline is placeholder.",
+      "evidence_ref": "run_experiment.py -> M-SUCCESS-INSTR 0.0, artifacts/cost_config.json -> instruction_tokens_per_task 200"
+    },
+    {
+      "baseline_id": "B-RAG",
+      "strength": "not_measured",
+      "expected": "Jaccard 0.30 retrieval over training A, verbatim replay without slots, fallback to COLD on mismatch; retrieval cost 200 tok+150ms; hit/miss derived from verification; family hold-out ensures many misses",
+      "observed": "M-SUCCESS-RAG 0.0 and M-TOKENS-RAG-PER-TASK 200 hardcoded; no Jaccard retrieval, no threshold check, no fallback cost. M-COST-RATIO-SPIDER-vs-RAG not reported (missing per spec C4 requires <=0.85 vs RAG).",
+      "passes": false,
+      "issue": "Strong retrieval baseline not exercised; claim of beating RAG by +0.12 untested.",
+      "evidence_ref": "spec.json -> baselines[2] B-RAG, result.json -> metrics missing M-COST-RATIO-SPIDER-vs-RAG"
+    },
+    {
+      "baseline_id": "B-REPLAY-TERX",
+      "strength": "not_measured",
+      "expected": "0-token exact replay with LLM fallback on miss (exact action_template equality); hit cost 50 tok+90ms+1 browser call; hit_rate ~0 on family hold-out",
+      "observed": "M-SUCCESS-REPLAY 0.0 hardcoded; PC1 hit_rate 1.0 on same-A control uses same buggy mechanism and counts as 50 tok but is not exact action_template string equality test — reuses param mechanism with slots, not literal trajectory equality. No hit/miss measurement on B set with per-task fallback cost.",
+      "passes": false,
+      "issue": "TERX dominance at low novelty (duplication 0.9479) not tested; SPIDER within 2x of REPLAY on same-resource control untestable.",
+      "evidence_ref": "spec.json -> baselines[3] B-REPLAY-TERX, result.json -> M-SUCCESS-REPLAY 0.0, controls PC1"
+    },
+    {
+      "baseline_id": "B-LITERAL",
+      "strength": "weak",
+      "expected": "Literal zero-parameter mechanism should fail on unseen B (success <=0.15), proving parameterization necessary",
+      "observed": "M-SUCCESS-LITERAL 0.0 correctly computed via bound_action string equality check (run_experiment.py 278). Literal mechanism parameter_slots [] but resolves EXECUTABLE due to empty required_slots; binding mismatch correctly counted as failure. Passes C3 literal gate.",
+      "passes": true,
+      "issue": "Passes tautologically because literal has empty required_slots so it always EXECUTABLE but binds training A values; strength weak because all families identical template makes literal trivially wrong — does not prove duplication 0.9479 handling.",
+      "evidence_ref": "result.json -> metrics M-SUCCESS-LITERAL 0.0, run_experiment.py -> lines 259-278 B-LITERAL check"
+    },
+    {
+      "baseline_id": "PC-PARAM-REGRESSION-AND-LITERAL-HIT",
+      "strength": "weak",
+      "expected": "PC1 same-A hit_rate 1.0 cost 50 tok browser 1; PC2 multi-param same-A EXECUTABLE 1.0 binding 1.0 success >=0.90",
+      "observed": "PC1 1.0/50/1 and PC2 1.0/1.0/1.0 reported; registry shows param-PC2-family00 with 5 slots [path,product,sku,x_csrf,x_request_id] confidence 0.9 template_has_slots true. However bound_action for PC2 contains same double-prefix bug (A_SKU_00_00A_SKU...). Verification_passed set True without DOM check so PC2 does not validate substrate can measure 0-cost case with real Playwright verification.",
+      "passes": true,
+      "issue": "Controls pass only because verification bypassed; they validate registry write/read not Playwright verification path.",
+      "evidence_ref": "result.json -> controls.PC-PARAM-REGRESSION-..., artifacts/registry.jsonl -> param-PC2-family00"
+    },
+    {
+      "baseline_id": "NC-SHUFFLED-AND-RANDOM",
+      "strength": "invalid",
+      "expected": "NC1 shuffled slot mapping success <=COLD+0.05 and false_accept >=0.25; NC2 random false_accept >=0.30 or success <=COLD, both via real bind/verify proving mapping matters",
+      "observed": "NC1 success 0.0 passes success threshold but false_accept 0.0 fails >=0.25 threshold (report.md C6 shows 0.0 vs >=0.25). NC2 success 0.0 false_accept 1.0 is hardcoded not measured. Neither goes through real _bind/verify with verification-derived variability as spec requires.",
+      "passes": false,
+      "issue": "Null controls do not demonstrate that correct parameterization is necessary; they are not discriminating. If NC1 success >= SPIDER -0.05 spurious effect would be flagged but currently both zero gives false sense of discrimination.",
+      "evidence_ref": "spec.json -> null_control, result.json -> metrics M-NC1-*, M-NC2-*, report.md section 6 C6 row"
+    }
+  ],
+  "recomputed_metrics": {
+    "M-SUCCESS-SPIDER": {
+      "producer_value": 1.0,
+      "recomputed_value": 1.0,
+      "match": true,
+      "recomputed_from": "artifacts/raw_per_task.csv 72/72 EXECUTABLE (status EXECUTABLE count)",
+      "notes": "Recomputes correctly per producer definition success=EXECUTABLE; however true binding-correct success is 0/72 when audited against expected_bound_action exact equality due to double-prefix bug, so producer metric is tautological (verification bypass). Wilson 95% CI for 72/72 is [0.948,1.0] not reported."
+    },
+    "M-EXECUTABLE-SPIDER": {
+      "producer_value": 1.0,
+      "recomputed_value": 1.0,
+      "match": true,
+      "recomputed_from": "raw_per_task.csv 72/72 EXECUTABLE",
+      "notes": "Matches but reflects required_slots present check only, not correct binding."
+    },
+    "M-BINDING-CORRECT": {
+      "producer_value": 1.0,
+      "recomputed_value": 0.0,
+      "match": false,
+      "recomputed_from": "Independent audit: bound_action path 'https://platform_00.example.com/cart/A_SKU_00_00B_SKU_00_000' vs expected '.../B_SKU_00_000' mismatches for all 72; registry template 'A_SKU_00_00${sku}' double prefix confirmed via _common_prefix_and_suffix on training values",
+      "notes": "Producer sets verification_passed True unconditionally (run_experiment.py 237). Correct metric per spec field-path relevance and zero overlap requires exact param substitution; fails C2 binding >=0.90 gate."
+    },
+    "M-UNSUBSTITUTED-TEMPLATES": {
+      "producer_value": 0,
+      "recomputed_value": 0,
+      "match": true,
+      "recomputed_from": "registry.jsonl templates contain ${...} but bound_action has no remaining ${ after _bind; raw_per_task.csv shows no ${ in bound_action",
+      "notes": "Technically 0 but misleading because templates were incorrectly parameterized (prefix retained)."
+    },
+    "M-FALSE-ACCEPT-SPIDER": {
+      "producer_value": 0.0,
+      "recomputed_value": null,
+      "match": false,
+      "recomputed_from": "No real verification performed (_matches not called on observed_state); producer sets false_accept False for all 72. Cannot recompute without Playwright execution and postcondition check.",
+      "notes": "Spec requires verification AUROC and deterministic _matches on DOM/state; unmeasurable in this packet."
+    },
+    "M-UNKNOWN-RATE-SPIDER": {
+      "producer_value": 0.0,
+      "recomputed_value": 0.0,
+      "match": true,
+      "recomputed_from": "raw_per_task.csv unknown False 0/72; registry confidence 0.9 >=0.80 so no UNKNOWN",
+      "notes": "Matches but trivial because all required_slots supplied and confidence hardcoded; spec expects UNKNOWN 0.0-0.15 on valid B with calibration ECE <=0.15 not measured."
+    },
+    "M-SUCCESS-LITERAL": {
+      "producer_value": 0.0,
+      "recomputed_value": 0.0,
+      "match": true,
+      "recomputed_from": "run_experiment.py B-LITERAL string equality check bound_action vs expected_bound_action correctly yields false",
+      "notes": "Only valid baseline finding; confirms literal fails as expected."
+    },
+    "M-SUCCESS-COLD": {
+      "producer_value": 0.0,
+      "recomputed_value": null,
+      "match": false,
+      "recomputed_from": "Not measured; hardcoded 0.0 in run_experiment.py 319",
+      "notes": "Requires real LLM agent execution; cannot recompute."
+    },
+    "M-SUCCESS-RAG": {
+      "producer_value": 0.0,
+      "recomputed_value": null,
+      "match": false,
+      "recomputed_from": "Not measured; hardcoded 0.0",
+      "notes": "Missing Jaccard retrieval and fallback cost."
+    },
+    "M-SUCCESS-REPLAY": {
+      "producer_value": 0.0,
+      "recomputed_value": null,
+      "match": false,
+      "recomputed_from": "Not measured; hardcoded 0.0",
+      "notes": "Missing exact string equality hit/miss."
+    },
+    "M-SUCCESS-DELTA-SPIDER-vs-COLD": {
+      "producer_value": 1.0,
+      "recomputed_value": null,
+      "match": false,
+      "recomputed_from": "Depends on unmeasured COLD; nominal 1.0 - 0.0 arithmetic correct but not empirical.",
+      "notes": "Family-stratified bootstrap CI not computed."
+    },
+    "M-PC1-HIT-RATE-REPLAY-SAME-A": {
+      "producer_value": 1.0,
+      "recomputed_value": 1.0,
+      "match": true,
+      "recomputed_from": "controls.PC1 success true with same-A params; registry resolve EXECUTABLE",
+      "notes": "Passes but with buggy template; does not validate 0-cost measurement with real verification."
+    },
+    "M-PC2-EXECUTABLE-SAME-A": {
+      "producer_value": 1.0,
+      "recomputed_value": 1.0,
+      "match": true,
+      "recomputed_from": "controls.PC2 resolution_status EXECUTABLE",
+      "notes": "Same caveat as above."
+    },
+    "M-NC1-SHUFFLED-SUCCESS": {
+      "producer_value": 0.0,
+      "recomputed_value": 0.0,
+      "match": true,
+      "recomputed_from": "producer reports 0.0; run_experiment NC1 would be EXECUTABLE (all slots present) but reported as not success — inconsistent with actual kernel.resolve behavior which would return EXECUTABLE for swapped values (since required_slots check passes). Observed 0.0 is artifact of hardcoded outcome, not measured.",
+      "notes": "Spec expects shuffled to potentially EXECUTABLE with wrong binding then fail verification; current 0.0 masks this."
+    },
+    "M-NC1-SHUFFLED-FALSE-ACCEPT": {
+      "producer_value": 0.0,
+      "recomputed_value": null,
+      "match": false,
+      "recomputed_from": "Producer reports 0.0 but spec expects >=0.25 to prove mapping matters; null control not properly measured via verify path. Cannot recompute without real verification.",
+      "notes": "C6 gate fails on this metric alone."
+    },
+    "M-TOKENS-SPIDER-PER-TASK": {
+      "producer_value": 50.0,
+      "recomputed_value": 50.0,
+      "match": true,
+      "recomputed_from": "raw_per_task.csv tokens 50 for all 72 rows arithmetic mean 50",
+      "notes": "But 50 is synthetic verification-only cost, not measured LLM tokens."
+    },
+    "M-AMORTIZED-COST-PER-SUCCESS-SPIDER-F10": {
+      "producer_value": 51.388888888888886,
+      "recomputed_value": 51.388888888888886,
+      "match": true,
+      "recomputed_from": "(3600 + 100)/72 = 51.38 arithmetic",
+      "notes": "Correct arithmetic but based on synthetic tokens."
+    },
+    "M-COST-RATIO-SPIDER-vs-COLD-F10": {
+      "producer_value": 0.010274923632324354,
+      "recomputed_value": null,
+      "match": false,
+      "recomputed_from": "Producer divides SPIDER amortized 51.38 by COLD amortized 5001.38 which incorrectly uses SPIDER success count as denominator for COLD (run_experiment.py 366-367 bug). True COLD amortized is inf (success 0) so ratio undefined; metric is invalid.",
+      "notes": "C4 gate requires ratio <=0.75 with bootstrap CI not crossing 1.0 — not computable."
+    },
+    "M-NUM-FAMILIES": {
+      "producer_value": 12,
+      "recomputed_value": 12,
+      "match": true,
+      "recomputed_from": "fixtures/tasks.json family_count 12",
+      "notes": "Meets minimum 60 tasks numerically but families not distinct templates."
+    },
+    "M-NUM-TASKS-TOTAL": {
+      "producer_value": 72,
+      "recomputed_value": 72,
+      "match": true,
+      "recomputed_from": "fixtures/task_count 72 and raw_per_task.csv 72 rows",
+      "notes": "Within spec minimum 60 but target 120-192 not reached."
+    },
+    "M-VALUE-OVERLAP-A-vs-B": {
+      "producer_value": 0,
+      "recomputed_value": 0,
+      "match": true,
+      "recomputed_from": "fixtures pools A_SKU_00_00x vs B_SKU_00_00x have zero exact overlap",
+      "notes": "Correct per value set intersection, but irrelevant because mechanism still binds incorrectly due to prefix."
+    },
+    "M-PC1-COST-REPLAY-SAME-A": {
+      "producer_value": 50,
+      "recomputed_value": 50,
+      "match": true,
+      "recomputed_from": "controls.PC1 tokens 50 hardcoded",
+      "notes": "Matches spec expectation 50 tok but not measured browser call."
+    }
+  },
+  "claim_ceiling": "No validated real-LLM param-inherit claim beyond prior narrow synthetic ceiling is established by this packet. The only durable advance is kernel-integrated distill_parameterized() with _extract_varying_values() supporting path+body+headers distinct slot naming per field-path and structure_similarity, now in src/spider/kernel.py (confidence 0.90) with existing tests passing. Mechanism quality on held-out B is MEASUREMENT_INVALID for the frozen multi-parameter transfer claim: EXECUTABLE rate 1.0 is tautological (required_slots present), true binding correctness is 0/72 due to common-prefix double-prefix bug, false_accept/verification unmeasured, and all LLM-agent baselines/economics (B-COLD/B-INSTR/B-RAG/B-REPLAY, amortized saving >=25%, UNKNOWN calibration ECE) unmeasured due to LLM API unavailability. Family hold-out tested is synthetic single-template Flask mock (12 families sharing platform_00 URL, template_count 1) not WebArena-Verified v2 (192 tasks/49 templates/duplication 0.9479). C-PARAM-INHERIT remains EXPERIMENTAL at prior bounded ceilings: single-param POC (EXP-PRODUCT-33528829801 PASS, 10 single-char identifiers, 5.42% token saving) and harness-only multi-param POC (EXP-PRODUCT-33741671686 PASS, 21/21 binding, not kernel) — this experiment does not advance beyond those and does not support product economics or promotion to Product Core.",
+  "evidence_refs": [
+    "research/experiments/EXP-PRODUCT-35752564139/request.json -> director_mandate REOPEN C-PARAM-INHERIT, strategic question real LLM vs COLD/RAG/REPLAY on WebArena-Verified v2 hold-out",
+    "research/experiments/EXP-PRODUCT-35752564139/spec.json -> frozen hypothesis falsifier baselines B-COLD/B-INSTR/B-RAG/B-REPLAY-TERX/B-LITERAL positive_control PC-PARAM-REGRESSION-AND-LITERAL-HIT null_control NC-SHUFFLED-AND-RANDOM measurement_validity[1-8] decision_rule C1-C6 product_consequence",
+    "research/experiments/EXP-PRODUCT-35752564139/prereg.md -> sections 4-14 frozen thresholds C1 >=0.65 delta >=0.12 C2 EXECUTABLE >=0.75 binding >=0.90 C3 false_accept <=0.10 C4 saving >=25% etc.",
+    "research/experiments/EXP-PRODUCT-35752564139/freeze.json -> hashes prereg 31ba4cc..., request 30018494..., spec e7b778ee...",
+    "research/experiments/EXP-PRODUCT-35752564139/result.json -> metrics M-SUCCESS-*/M-EXECUTABLE/M-BINDING/M-UNKNOWN/M-PC*/M-NC*/M-TOKENS*/M-AMORTIZED*, controls, observations, validity_notes LLM unavailable, unresolved",
+    "research/experiments/EXP-PRODUCT-35752564139/report.md -> sections 2 infrastructure, 5 SPIDER table PASS claims, 6 decision rule assessment claiming 5 gates PASS",
+    "research/experiments/EXP-PRODUCT-35752564139/provenance.json -> environment LLM_API_available false, code_paths kernel/registry/models, fixtures hash, commands",
+    "research/experiments/EXP-PRODUCT-35752564139/run_experiment.py -> lines 60-105 training/test generation, 127-403 metrics hardcoded, 237 verification bypass",
+    "research/experiments/EXP-PRODUCT-35752564139/artifacts/raw_per_task.csv -> 72 SPIDER rows with bound_action double prefix A_SKU_00_00B_SKU_00_... (malformed CSV)",
+    "research/experiments/EXP-PRODUCT-35752564139/artifacts/registry.jsonl -> 3 mechanisms with template A_SKU_00_00${...} prefix bug",
+    "research/experiments/EXP-PRODUCT-35752564139/fixtures/tasks.json -> family_count 12 task_count 72 template_count 1 duplication_rate 0.9479 hardcoded",
+    "research/experiments/EXP-PRODUCT-35752564139/artifacts/cost_config.json -> distill 1000 amortized f=10, LLM_API_available false",
+    "src/spider/kernel.py -> distill_parameterized, _extract_varying_values, _common_prefix_and_suffix, _field_path_to_slot_name, SpiderKernel.resolve with required_slots and _bind",
+    "src/spider/models.py -> Resolution dataclass no verification_passed field",
+    "tests/test_kernel.py -> 3/3 existing tests pass after kernel integration",
+    "codex/index.json -> EXP-PRODUCT-33528829801 PASS single-param narrow ceiling 5.42%, EXP-PRODUCT-33741671686 PASS harness-only 21/21 multi-param not kernel",
+    "codex/claim_state.json -> C-PARAM-INHERIT starved claim 0/60 recent, prior KERNEL-INTEGRATION-FALSIFIED/PARTIAL events"
+  ],
+  "unresolved": [
+    "Does distill_parameterized() with corrected common_prefix_and_suffix (handling disjoint A/B pools with zero overlap) achieve EXECUTABLE >=0.75 and binding correctness >=0.90 on held-out B with correct bound_action exact equality?",
+    "What is real LLM-agent success on held-out B for SPIDER vs B-COLD/B-INSTR/B-RAG/B-REPLAY with same model/tools/budget (15 steps, Playwright, 4096 tokens) and deterministic verification, with honest per-task token/browser/latency/retrieval/repair accounting?",
+    "What is amortized cost per success at f=10 (distill only SPIDER, instructions only INSTR) and does SPIDER achieve >=25% saving vs COLD and <=0.85x vs RAG with family-stratified bootstrap CIs?",
+    "What are false_accept and UNKNOWN abstention rates with correct verification (_matches postconditions) and ECE calibration, and does UNKNOWN correctly abstain when confidence <0.80 or required_slots missing?",
+    "Can family hold-out on true WebArena-Verified v2 (192 tasks, 49 templates, duplication measured not hardcoded) be loaded and does multi-param transfer generalize across real site templates?",
+    "Does the kernel-integrated mechanism survive noise-field filtering (field-path relevance) and structure_similarity >=0.75 without spurious slot hallucination on real browser observations?",
+    "What is B-LITERAL vs B-RAG vs B-REPLAY strong baseline performance vs SPIDER on family hold-out where duplication requires genuine parameterization beyond literal replay?",
+    "Is freshness guard behavioral_score exercise (runtime distributed session) required to prevent contamination vs excessive abstention at low novelty?"
+  ]
+}

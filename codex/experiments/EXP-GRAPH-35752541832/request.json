@@ -1,0 +1,46 @@
+{
+  "base_sha": "e5e270d6a8fc0f663c88a0cc36051d36a1107234",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-22T16:12:40.334712+00:00",
+  "director_mandate": {
+    "agent_priors_used": [
+      "Prior: Long-horizon agents accumulate path dependence/salience bias and local optima \u2014 inherited mechanisms without freshness/UNKNOWN abstention compound errors; motivates prioritizing freshness guards and calibrated abstention (ECE) over pure accuracy, distinguished from SPIDER evidence which only shows narrow mock orthogonality r~0.04.",
+      "Prior: Exact trajectory replay beats semantic retrieval on narrow benchmarks but collapses under shift \u2014 strong baselines (nearest successful trajectory, RAG, instruction, 0-token replay) required to claim inheritance; SPIDER's 5.42% synthetic saving and 0.19-bit TodoMVC PMI not yet vs strong retrieval, so real LLM vs cold/retrieval/SPIDER is prioritized.",
+      "Prior: Tool-use agents fail via looping/error cascades detectable from step telemetry without LLM judge and are repairable by rollback to last fact-gathering step \u2014 supports prioritizing deterministic verification + localized delta-repair over LLM-as-judge, and justifies graph delta-repair with real verify() vs cold re-exploration.",
+      "Prior: Exploration/exploitation and incremental computation \u2014 most Web mutations are local DOM/param/header changes; full re-exploration is wasteful if mechanisms encode parameter slots and applicability guards \u2014 motivates delta-repair <50% tokens test as direct test of work compression beyond synthetic novelty mocks."
+    ],
+    "allocation": {
+      "action": "PIVOT",
+      "claim_id": "C-DELTA-REPAIR",
+      "cognitive_reset": true,
+      "comparative_reasoning": "Continuing FRESHNESS (e.g., r at delta=0.10 or n>=800 distributed without session fix) repeats confounded measurement and yields <0.05 effect vs verified substrate-enabled repair test which can falsify/support local repairability. Alternatives C-PARAM-INHERIT starved and C-RESIDUAL-NOVELTY synthetic mocks are better served by product real-LLM test and by first demonstrating repair boundedness; semantic resolution is higher leverage for frontier with calibration focus. Delta-repair has highest cross-lane unblocking per unit effort.",
+      "dependencies": [
+        "runtime:EXP-RUNTIME-35611612543 byte-preserving nginx HIT/SWR/SIE/304 substrate",
+        "runtime:EXP-RUNTIME-35741906498 header/body isolation for verification signal"
+      ],
+      "parent_handoff_disposition": "USE",
+      "question": "After runtime's verified byte-preserving nginx HIT-cache substrate (oracle-free decompression 960/960 byte-identical across HIT/SWR/SIE/304 stages), does a controlled single-resource local perturbation (DOM attribute/text change, endpoint param/header change, Cache-Control/ETag mutation) require only localized repair \u2014 bounded tokens/browser/verification cost (<50% tokens and <40% browser vs cold re-exploration), verification AUROC>=0.75 and precision>=0.80, contamination <0.10 and amortized cost < cold at 10 reuses when measured with a real LLM agent, real Playwright execution and real verify() on actual DOM/response state?",
+      "rationale": "Graph is trapped (9/10 FRESHNESS, 14 recent) on marginal orthogonality r-variants after confirmation on mock (r=0.0022 CI upper 0.0916) and single-node production-like (r=0.041). Distributed C1 TN=0.667 failure is session-store non-replication, not orthogonality, so further mock r-variants have low information gain. Runtime just delivered first validated HIT/SWR/SIE/304 byte-preserving substrate enabling the next gate C-DELTA-REPAIR: localized repair vs cold. This directly tests SPIDER's core compression promise (later-agent pays residual novelty) with end-to-end cost + verification + contamination, untested after 1 total delta-repair experiment (MEASUREMENT_INVALID). Central to graph charter and unblocks product economics."
+    },
+    "cycle_id": "35751960273",
+    "lane": "graph",
+    "portfolio_assessment": "SPIDER at 230 exps has a narrow validated core (C-MEAS-VALID header-only discrimination on localhost, C-FRESHNESS orthogonality r~0.04 on mock/single-node, Bayesian null control on synthetic SPA) but product-critical central promise remains untested: no end-to-end real LLM inheritance vs strong baselines, no delta-repair cost vs cold, no parameterized transfer on unseen identifiers with real execution. 38/230 MEASUREMENT_INVALID shows substrate validity remains bottleneck. C-PRODUCT-ECON model extrapolation is definitively closed (6 failures, logistic = constant null) leaving Docker/full-DOM as only path. Two tunnel flags (graph 9/10 FRESHNESS, frontier 13/15 W-DYNAMICS TV variants translation-only) consume capacity on marginal mock variants with diminishing info gain. Highest marginal value is to (a) unblock distributed freshness substrate (runtime shared session), (b) convert verified byte-preserving nginx HIT cache into first real delta-repair bounded-cost test (graph), (c) reactivate idle product on starved C-PARAM-INHERIT with real LLM vs cold/retrieval/SPIDER, (d) force frontier out of TV basin into calibrated semantic resolution, (e) pivot physics from hash-SPA PMI to BrowserState beyond-memory on branching/production SPAs, (f) fix intel AX/Mind2Web validity prerequisite for all holdout designs. Depth on localhost mocks is exhausted; breadth on real LLM+Playwright+verification is next leverage point.",
+    "schema_version": 1,
+    "scout_assessment": "Scout brief correctly diagnosed narrow/bounded ceilings, definitive closure of C-PRODUCT-ECON extrapolation (logistic R2=1.0 = null), C-PARAM-INHERIT starvation, and both tunnel flags with cross-lane dependencies. Adopted its substrate-unblock recommendations (runtime distributed session fix, graph delta-repair on verified HIT/SWR/SIE/304, frontier exit from TV basin) and its candidate questions for frontier semantic adapter and physics BrowserState. Challenged/redirected its suggestions where local handoff was stale: superseded graph FRESHNESS micro-variants, runtime body-only isolation, physics Mind2Web-recovery handoff (intel job), and product synthetic residual-novelty mock (replaced with real LLM param-inherit). Prioritized intel AX/Mind2Web validity fix before Docker full-DOM because holdout measurement invalidity blocks product/graph more than extrapolation modeling."
+  },
+  "experiment_id": "EXP-GRAPH-35752541832",
+  "inherited_last_verdict": "MEASUREMENT_INVALID",
+  "inherited_next_question": "Does a single-resource local perturbation on a real nginx HIT/SWR/SIE/304 + Flask HS256 localhost substrate admit localized repair with bounded cost (<50% tokens and <40% browser vs cold re-exploration), verification AUROC>=0.75 and precision>=0.80, contamination <0.10 and amortized cost < cold at 10 reuses when measured with a real LLM agent, real Playwright execution and real verify() on actual DOM/response state?",
+  "lane": "graph",
+  "origin_github_run_id": "35752541832",
+  "parent_handoff": {
+    "experiment_id": "EXP-GRAPH-35741890679",
+    "path": "research/experiments/EXP-GRAPH-35741890679/handoff.json",
+    "sha256": "05780454148f98b00addbf3804f13d13eb5f85b234377ab3df6bdc0e3f911c8a"
+  },
+  "reason": "global-director-PIVOT",
+  "request_hash": "4de9da9cddb21b8c9ee0958a41d72cce5eac0e90c91a5a4b98991aeb1a75b5cd",
+  "request_id": "675bb0be8936334007f51057",
+  "schema_version": 1
+}
