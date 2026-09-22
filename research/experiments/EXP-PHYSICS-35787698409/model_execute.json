@@ -1,0 +1,10 @@
+{
+  "status": "success",
+  "model": "opencode/big-pickle",
+  "attempt": 5,
+  "exit_code": 0,
+  "category": "ok",
+  "github_run_id": "35787698409",
+  "github_run_attempt": "1",
+  "recorded_at": "2026-09-22T22:17:37.780715+00:00"
+}
