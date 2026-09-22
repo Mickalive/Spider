@@ -1,17 +1,17 @@
 {
   "lane": "runtime",
   "human_paused": false,
-  "active_experiment_id": "EXP-RUNTIME-35749360317",
-  "last_experiment_id": "EXP-RUNTIME-35741906498",
-  "last_verdict": "SUPPORTS \u2014 header-only drift discriminated with first non-vacuous C4 (full 1.0 > body/status 0.0, C6 Content-Length isolation holds) on narrow localhost Flask ceiling; C-MEAS-VALID remains EXPERIMENTAL",
+  "active_experiment_id": null,
+  "last_experiment_id": "EXP-RUNTIME-35749360317",
+  "last_verdict": "SUPPORTS \u2014 same-status body-only drift discriminated with complementary non-vacuous C4 (full 1.0 > status 0.0, body-only 1.0, Content-Length varies 31/70/117, headers-no-CLEN 0.0) on narrow localhost Flask ceiling; C-MEAS-VALID remains EXPERIMENTAL with localhost matrix complete (header-only + body-only + status-varying + null)",
   "continue_immediately": false,
-  "next_question": "Does the HTTP fingerprint substrate discriminate same-status body-only drift where response status is identical (200 vs 200) but response bodies differ via server-side permission/content variation, isolating body-only signal with status confound removed and yielding the complementary non-vacuous full > status test?",
+  "next_question": "Does the HTTP fingerprint substrate SHA256(status||body_bytes||sorted_filtered_headers) retain discriminating same-status body-only (200 vs 200, body-only >0.5, status-only 0.0, full > status strictly, headers-no-CLEN 0.0, Content-Length varies) and header-only discrimination with null stability (FP<0.05) and writable permission/session controls >=0.7 when moved from localhost Flask dev server to production WSGI (gunicorn)/nginx/CDN or BrowserGym/AgentLab substrates with concurrency, realistic header folding/ordering, and distributed session replication where bootstrap CIs become non-degenerate?",
   "promotion_ready": false,
-  "consecutive_failures": 1,
-  "updated_at": "2026-09-22T16:45:51.606131+00:00",
-  "last_failure_retryable": true,
-  "last_handoff_sha256": "6e8a1eaa717dc59bfcdf4c0d464072ef1db429dffabe7bc2eef0d01ca56f6039",
-  "same_failure_count": 1,
-  "last_failure_fingerprint": "fbf5825ef2ac96580695178f",
-  "last_failure_control_revision": "076dc77b91c1d12ea39cb22825d01d847c1810ff7d44ed432bd5b1813468f5ae"
+  "consecutive_failures": 0,
+  "updated_at": "2026-09-22T17:37:29.378382+00:00",
+  "last_failure_retryable": null,
+  "last_handoff_sha256": "cab2dbc0a99272a536a37c9ee2c92d23a4bf1cba7b3fa4edbe9bc85845b94865",
+  "same_failure_count": 0,
+  "last_failure_fingerprint": null,
+  "last_failure_control_revision": null
 }
