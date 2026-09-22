@@ -1,0 +1,14 @@
+{
+  "docker_available": false,
+  "playwright_installed": false,
+  "cap_present": false,
+  "measure_js_hash": "b0e0b594e7e99959ebd529d7536958a890305efde92c86735ecf5a463330cdbd",
+  "parent_measure_js_hash": "085b58c93be51bc76dc4ad712436500100c077594bd73c1cc1e552b6f68f49a3",
+  "parent_has_cap": true,
+  "measurements": [],
+  "status": "BLOCKED",
+  "error": "Docker not available at http://localhost:7770: Attempt 3: URLError:<urlopen error [Errno 111] Connection refused>",
+  "docker_attempt_error": "Attempt 3: URLError:<urlopen error [Errno 111] Connection refused>",
+  "docker_digest": "Error: No such object: am1n3e/webarena-verified-shopping",
+  "playwright_error": "ModuleNotFoundError:No module named 'playwright'"
+}

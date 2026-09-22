@@ -1,0 +1,11 @@
+{
+  "n_trajs": 20,
+  "hits": 10,
+  "hit_rate": 0.5,
+  "avg_latency_ms": 532.1489850232882,
+  "cold_tokens_per_task": 23000,
+  "cached_tokens_per_task": 0,
+  "tokens_saved_total": 173600,
+  "tokens_saved_per_hit": 17360.0,
+  "note": "Simulated Stagehand DOM-hash verb cache (guarded verb API) vs BrowserBash 23k->0 tokens 173x"
+}

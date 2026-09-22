@@ -1,0 +1,27 @@
+{
+  "viewport": {
+    "width": 1280,
+    "height": 720
+  },
+  "capture_date": "2026-09-22T18:31:22+00:00",
+  "playwright_version": "NOT_INSTALLED",
+  "cdp_version": "NOT_AVAILABLE",
+  "browsergym_version": "BLOCKED",
+  "candidate_id": "synthetic_gate_passing_like",
+  "node_count": 1426,
+  "nodes_sample": [
+    {
+      "role": "combobox",
+      "name": "Search entire store here...",
+      "value": ""
+    },
+    {
+      "role": "button",
+      "name": "Search",
+      "value": ""
+    }
+  ],
+  "dom_bytes_sha256": "5be8790e8abd97a38ff67eefebc2bc3321a1d72d60d8139aa4c27a28284f2d03",
+  "ax_tree_sha256": "8ed391c8072e282334a4733aef03b68430f0f77cfa884302aefd090b4424055c",
+  "note": "Synthetic AX tree demonstrates provenance format; no real 1280x720 capture succeeded because BrowserGym unavailable"
+}

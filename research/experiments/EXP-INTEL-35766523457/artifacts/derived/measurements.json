@@ -1,0 +1,458 @@
+{
+  "experiment_id": "EXP-INTEL-35766523457",
+  "seed": 35725763380,
+  "browsergym_census": {
+    "WebArena": {
+      "env": "WebArena",
+      "attempts": [
+        {
+          "attempt": 1,
+          "error": "ModuleNotFoundError: No module named 'browsergym'"
+        },
+        {
+          "attempt": 2,
+          "error": "ModuleNotFoundError: No module named 'browsergym'"
+        },
+        {
+          "attempt": 3,
+          "error": "ModuleNotFoundError: No module named 'browsergym'"
+        }
+      ],
+      "status": "BLOCKED",
+      "error": "ModuleNotFoundError: No module named 'browsergym'",
+      "pip_show": "WARNING: Package(s) not found: browsergym-core\n",
+      "agentlab_error": "ModuleNotFoundError:No module named 'agentlab'"
+    },
+    "WebShop": {
+      "env": "WebShop",
+      "attempts": [
+        {
+          "attempt": 1,
+          "error": "ModuleNotFoundError: No module named 'browsergym'"
+        },
+        {
+          "attempt": 2,
+          "error": "ModuleNotFoundError: No module named 'browsergym'"
+        },
+        {
+          "attempt": 3,
+          "error": "ModuleNotFoundError: No module named 'browsergym'"
+        }
+      ],
+      "status": "BLOCKED",
+      "error": "ModuleNotFoundError: No module named 'browsergym'",
+      "pip_show": "WARNING: Package(s) not found: browsergym-core\n",
+      "agentlab_error": "ModuleNotFoundError:No module named 'agentlab'"
+    },
+    "WebLINX": {
+      "env": "WebLINX",
+      "attempts": [
+        {
+          "attempt": 1,
+          "error": "ModuleNotFoundError: No module named 'browsergym'"
+        },
+        {
+          "attempt": 2,
+          "error": "ModuleNotFoundError: No module named 'browsergym'"
+        },
+        {
+          "attempt": 3,
+          "error": "ModuleNotFoundError: No module named 'browsergym'"
+        }
+      ],
+      "status": "BLOCKED",
+      "error": "ModuleNotFoundError: No module named 'browsergym'",
+      "pip_show": "WARNING: Package(s) not found: browsergym-core\n",
+      "agentlab_error": "ModuleNotFoundError:No module named 'agentlab'"
+    },
+    "WorkArena": {
+      "env": "WorkArena",
+      "attempts": [
+        {
+          "attempt": 1,
+          "error": "ModuleNotFoundError: No module named 'browsergym'"
+        },
+        {
+          "attempt": 2,
+          "error": "ModuleNotFoundError: No module named 'browsergym'"
+        },
+        {
+          "attempt": 3,
+          "error": "ModuleNotFoundError: No module named 'browsergym'"
+        }
+      ],
+      "status": "BLOCKED",
+      "error": "ModuleNotFoundError: No module named 'browsergym'",
+      "pip_show": "WARNING: Package(s) not found: browsergym-core\n",
+      "agentlab_error": "ModuleNotFoundError:No module named 'agentlab'"
+    },
+    "_webarena_pin": {
+      "exists": true,
+      "n_tasks": 812,
+      "sha256": "d65275660814663375028e9017e1f929e3c38321041b125795e2713b52243d30",
+      "note": "Reused for pin verification"
+    },
+    "_pip_freeze": "aiohappyeyeballs==2.7.1\naiohttp==3.14.3\naiosignal==1.4.0\nanyio==4.15.1\nattrs==26.1.0\ncertifi==2026.7.22\ncharset-normalizer==3.5.1\nclick==8.5.0\ncloudpickle==3.1.2\ndatasets==5.0.1\ndill==0.4.1\nfilelock==4.0.1\nfrozenlist==1.8.0\nfsspec==2026.6.0\nh11==0.16.0\nhf-xet==1.6.0\nhttpcore==1.0.9\nhttpx==0.28.1\nhuggingface_hub==1.32.0\nidna==3.20\njoblib==1.6.0\nmultidict==6.9.1\nmultiprocess==0.70.19\nnarwhals==2.26.0\nnumpy==2.5.3\npackaging==26.3\npandas==3.0.6\npropcache==0.5.4\npyarrow==25.0.1\npython-dateutil==2.9.0.post0\nPyYAML==6.0.3\nrequests==2.34.2\nscikit-learn==1.9.1\nscipy==1.18.1\nsix==1.17.0\nthreadpoolctl==3.7.0\ntqdm==4.70.1\ntyping_extensions==4.16.0\nurllib3==2.8.0\nxxhash==4.0.1\nyarl==1.25.1\n"
+  },
+  "gate0_table": {
+    "candidates": [
+      {
+        "candidate_id": "synthetic_high_leakage_55",
+        "is_synthetic": true,
+        "n_raw": 220,
+        "metrics": {
+          "n_raw": 220,
+          "total_with_href": 59,
+          "leak_validOnly": 0.4576271186440678,
+          "leak_total": 0.12272727272727273,
+          "link_share": 0.2681818181818182,
+          "NL": 193,
+          "unique_titles": 5,
+          "title_entropy": 2.3139455741665813,
+          "H": null,
+          "strata_count_ge5": 0,
+          "strata_count": 13,
+          "singleton_rate": 0.0051813471502590676,
+          "singleton_count": 1,
+          "has_H_valid": false
+        },
+        "qualifies": false,
+        "reason": "H undefined (no stratum >=5); leak 0.458>=0.40"
+      },
+      {
+        "candidate_id": "synthetic_no_title",
+        "is_synthetic": true,
+        "n_raw": 250,
+        "metrics": {
+          "n_raw": 250,
+          "total_with_href": 54,
+          "leak_validOnly": 0.1111111111111111,
+          "leak_total": 0.024,
+          "link_share": 0.216,
+          "NL": 244,
+          "unique_titles": 1,
+          "title_entropy": -0.0,
+          "H": null,
+          "strata_count_ge5": 0,
+          "strata_count": 24,
+          "singleton_rate": 0.004098360655737705,
+          "singleton_count": 1,
+          "has_H_valid": false
+        },
+        "qualifies": false,
+        "reason": "titles 1<2; H undefined (no stratum >=5)"
+      },
+      {
+        "candidate_id": "synthetic_constant_S_next",
+        "is_synthetic": true,
+        "n_raw": 200,
+        "metrics": {
+          "n_raw": 200,
+          "total_with_href": 0,
+          "leak_validOnly": 0.0,
+          "leak_total": 0.0,
+          "link_share": 0.0,
+          "NL": 200,
+          "unique_titles": 2,
+          "title_entropy": 1.0,
+          "H": 0.0,
+          "strata_count_ge5": 1,
+          "strata_count": 1,
+          "singleton_rate": 0.0,
+          "singleton_count": 0,
+          "has_H_valid": true
+        },
+        "qualifies": false,
+        "reason": "H 0.000<=0.2; strata 1<10"
+      },
+      {
+        "candidate_id": "synthetic_gate_passing_like",
+        "is_synthetic": true,
+        "n_raw": 180,
+        "metrics": {
+          "n_raw": 180,
+          "total_with_href": 59,
+          "leak_validOnly": 0.0,
+          "leak_total": 0.0,
+          "link_share": 0.3277777777777778,
+          "NL": 180,
+          "unique_titles": 3,
+          "title_entropy": 1.552864805202529,
+          "H": 1.3906555425297311,
+          "strata_count_ge5": 12,
+          "strata_count": 12,
+          "singleton_rate": 0.0,
+          "singleton_count": 0,
+          "has_H_valid": true
+        },
+        "qualifies": true,
+        "reason": "PASS all 5"
+      },
+      {
+        "candidate_id": "browsergym_webarena_real",
+        "is_synthetic": false,
+        "n_raw": 0,
+        "metrics": {
+          "n_raw": 0,
+          "NL": 0,
+          "unique_titles": 0,
+          "H": null,
+          "leak_validOnly": 0,
+          "strata_count": 0,
+          "singleton_rate": 1.0
+        },
+        "qualifies": false,
+        "reason": "BrowserGym env unavailable after 3 retries, no transitions captured (browsergym_census BLOCKED)"
+      },
+      {
+        "candidate_id": "cap_production_spa",
+        "is_synthetic": false,
+        "n_raw": 0,
+        "metrics": {
+          "n_raw": 0,
+          "NL": 0,
+          "unique_titles": 0,
+          "H": null,
+          "leak_validOnly": 0,
+          "strata_count": 0,
+          "singleton_rate": 1.0
+        },
+        "qualifies": false,
+        "reason": "CAP dump unavailable, no live BrowserGym/AgentLab replay captured"
+      }
+    ],
+    "summary": {
+      "total_candidates": 6,
+      "real_qualifying": 0,
+      "synthetic_qualifying": 1,
+      "note": "Only real candidates count for Gate0 decision per frozen rule; synthetic candidates are pipeline validation only"
+    }
+  },
+  "cap_manifest": {
+    "status": "BLOCKED",
+    "attempts": [
+      {
+        "attempt": 1,
+        "hf_try": "ServiceNow/cap",
+        "error": "DatasetNotFoundError:Dataset 'ServiceNow/cap' doesn't exist on the Hub or cannot be accessed."
+      },
+      {
+        "attempt": 1,
+        "hf_try": "cap",
+        "error": "DatasetNotFoundError:Dataset 'cap' doesn't exist on the Hub or cannot be accessed."
+      },
+      {
+        "attempt": 1,
+        "hf_try": "agentlab/cap",
+        "error": "DatasetNotFoundError:Dataset 'agentlab/cap' doesn't exist on the Hub or cannot be accessed."
+      },
+      {
+        "attempt": 1,
+        "error": "Exception:No CAP dump found on FS nor HF"
+      },
+      {
+        "attempt": 2,
+        "hf_try": "ServiceNow/cap",
+        "error": "DatasetNotFoundError:Dataset 'ServiceNow/cap' doesn't exist on the Hub or cannot be accessed."
+      },
+      {
+        "attempt": 2,
+        "hf_try": "cap",
+        "error": "DatasetNotFoundError:Dataset 'cap' doesn't exist on the Hub or cannot be accessed."
+      },
+      {
+        "attempt": 2,
+        "hf_try": "agentlab/cap",
+        "error": "DatasetNotFoundError:Dataset 'agentlab/cap' doesn't exist on the Hub or cannot be accessed."
+      },
+      {
+        "attempt": 2,
+        "error": "Exception:No CAP dump found on FS nor HF"
+      },
+      {
+        "attempt": 3,
+        "hf_try": "ServiceNow/cap",
+        "error": "DatasetNotFoundError:Dataset 'ServiceNow/cap' doesn't exist on the Hub or cannot be accessed."
+      },
+      {
+        "attempt": 3,
+        "hf_try": "cap",
+        "error": "DatasetNotFoundError:Dataset 'cap' doesn't exist on the Hub or cannot be accessed."
+      },
+      {
+        "attempt": 3,
+        "hf_try": "agentlab/cap",
+        "error": "DatasetNotFoundError:Dataset 'agentlab/cap' doesn't exist on the Hub or cannot be accessed."
+      },
+      {
+        "attempt": 3,
+        "error": "Exception:No CAP dump found on FS nor HF"
+      }
+    ],
+    "cap_present": false,
+    "manifest": null,
+    "error": "Exception:No CAP dump found on FS nor HF",
+    "synthetic_manifest": {
+      "n_tasks": 420,
+      "n_sites": 108,
+      "n_domains": 24,
+      "avg_sites_per_task": 3.0,
+      "avg_actions_per_task": 7.0,
+      "tasks_sample": [
+        {
+          "task_id": 0,
+          "sites": [
+            "site_45",
+            "site_38",
+            "site_26"
+          ],
+          "domains": [
+            "domain_21",
+            "domain_14",
+            "domain_2"
+          ],
+          "actions": [
+            {
+              "target_text": "action_206 element 34",
+              "site": "site_45"
+            },
+            {
+              "target_text": "action_413 element 28",
+              "site": "site_45"
+            },
+            {
+              "target_text": "action_486 element 2",
+              "site": "site_26"
+            },
+            {
+              "target_text": "action_135 element 18",
+              "site": "site_26"
+            },
+            {
+              "target_text": "action_446 element 49",
+              "site": "site_38"
+            },
+            {
+              "target_text": "action_430 element 49",
+              "site": "site_45"
+            },
+            {
+              "target_text": "action_19 element 35",
+              "site": "site_38"
+            }
+          ],
+          "instruction": "Task instruction 0 search and purchase"
+        },
+        {
+          "task_id": 1,
+          "sites": [
+            "site_66",
+            "site_16",
+            "site_77"
+          ],
+          "domains": [
+            "domain_18",
+            "domain_16",
+            "domain_5"
+          ],
+          "actions": [
+            {
+              "target_text": "action_296 element 50",
+              "site": "site_66"
+            },
+            {
+              "target_text": "action_75 element 6",
+              "site": "site_77"
+            },
+            {
+              "target_text": "action_443 element 8",
+              "site": "site_16"
+            },
+            {
+              "target_text": "action_243 element 6",
+              "site": "site_66"
+            },
+            {
+              "target_text": "action_484 element 44",
+              "site": "site_66"
+            },
+            {
+              "target_text": "action_218 element 38",
+              "site": "site_77"
+            },
+            {
+              "target_text": "action_253 element 44",
+              "site": "site_16"
+            }
+          ],
+          "instruction": "Task instruction 1 search and purchase"
+        }
+      ]
+    },
+    "note": "Real CAP dump unavailable; synthetic manifest generated for pipeline validation only, marked MEASUREMENT_INVALID for decision"
+  },
+  "tfidf_kmeans": {
+    "status": "SYNTHETIC_DEMO",
+    "reason": "CAP real dump unavailable, synthetic pipeline validation only",
+    "k": 14,
+    "k_half": 7,
+    "k_double": 28,
+    "overlap": 1.0,
+    "ci_lower": 1.0,
+    "ci_upper": 1.0,
+    "shuffle_mean": 0.07482534767752533,
+    "shuffle_std": 0.04421978234773677,
+    "shuffle_p95": 0.144853197576616,
+    "excess": 0.9251746523224746,
+    "vocab_hash": "1ca627d6bdfbc69731da43da8bba1da4c95cebdb4395e5fe7850ce134b26856d",
+    "centroids_hash": "907940d1d668d0d1dc15da728ec84ae2848f1c19f20a0d3eb44df7cb3176e971",
+    "n_train_tasks": 283,
+    "n_held_tasks": 137,
+    "n_unique_train": 283,
+    "train_sites": 73,
+    "held_sites": 32,
+    "is_synthetic": true,
+    "note": "Synthetic CAP run demonstrates pipeline but cannot satisfy PC4_CAP_SPLIT_INTEGRITY for decision; real H2B => MEASUREMENT_INVALID"
+  },
+  "docker": {
+    "docker_available": false,
+    "playwright_installed": false,
+    "cap_present": false,
+    "measure_js_hash": "b0e0b594e7e99959ebd529d7536958a890305efde92c86735ecf5a463330cdbd",
+    "parent_measure_js_hash": "085b58c93be51bc76dc4ad712436500100c077594bd73c1cc1e552b6f68f49a3",
+    "parent_has_cap": true,
+    "measurements": [],
+    "status": "BLOCKED",
+    "error": "Docker not available at http://localhost:7770: Attempt 3: URLError:<urlopen error [Errno 111] Connection refused>",
+    "docker_attempt_error": "Attempt 3: URLError:<urlopen error [Errno 111] Connection refused>",
+    "docker_digest": "Error: No such object: am1n3e/webarena-verified-shopping",
+    "playwright_error": "ModuleNotFoundError:No module named 'playwright'"
+  },
+  "ranking": {
+    "status": "NOT_EXECUTED",
+    "reason": "Docker unavailable, n>=20 enumeration not executed"
+  },
+  "controls_synthetic": {
+    "PC3_CORRELATED_SYNTHETIC": {
+      "raw_mi": 0.9853295105956242,
+      "null_mean": 0.06212208840142914,
+      "null_std": 0.024477007565749328,
+      "bc_pmi": 0.923207422194195,
+      "p": 0.0,
+      "d": 37.71733206006926,
+      "delta": 0.923207422194195,
+      "n": 200
+    },
+    "NC4_INDEPENDENT_NOISE_SYNTHETIC": {
+      "raw_mi": 0.9413295051475957,
+      "null_mean": 0.9413295051475957,
+      "null_std": 0.0,
+      "bc_pmi": 0.0,
+      "p": 1.0,
+      "d": 0.0,
+      "delta": 0.0,
+      "n": 200
+    }
+  },
+  "timestamp": "2026-09-22T18:31:29+00:00"
+}

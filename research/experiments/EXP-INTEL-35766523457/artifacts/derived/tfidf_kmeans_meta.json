@@ -1,0 +1,201 @@
+{
+  "vectorizer_params": {
+    "max_features": 5000,
+    "ngram_range": [
+      1,
+      2
+    ],
+    "min_df": 2,
+    "stop_words": "english",
+    "lowercase": true
+  },
+  "seed": 35725763380,
+  "cap_result": {
+    "status": "BLOCKED",
+    "attempts": [
+      {
+        "attempt": 1,
+        "hf_try": "ServiceNow/cap",
+        "error": "DatasetNotFoundError:Dataset 'ServiceNow/cap' doesn't exist on the Hub or cannot be accessed."
+      },
+      {
+        "attempt": 1,
+        "hf_try": "cap",
+        "error": "DatasetNotFoundError:Dataset 'cap' doesn't exist on the Hub or cannot be accessed."
+      },
+      {
+        "attempt": 1,
+        "hf_try": "agentlab/cap",
+        "error": "DatasetNotFoundError:Dataset 'agentlab/cap' doesn't exist on the Hub or cannot be accessed."
+      },
+      {
+        "attempt": 1,
+        "error": "Exception:No CAP dump found on FS nor HF"
+      },
+      {
+        "attempt": 2,
+        "hf_try": "ServiceNow/cap",
+        "error": "DatasetNotFoundError:Dataset 'ServiceNow/cap' doesn't exist on the Hub or cannot be accessed."
+      },
+      {
+        "attempt": 2,
+        "hf_try": "cap",
+        "error": "DatasetNotFoundError:Dataset 'cap' doesn't exist on the Hub or cannot be accessed."
+      },
+      {
+        "attempt": 2,
+        "hf_try": "agentlab/cap",
+        "error": "DatasetNotFoundError:Dataset 'agentlab/cap' doesn't exist on the Hub or cannot be accessed."
+      },
+      {
+        "attempt": 2,
+        "error": "Exception:No CAP dump found on FS nor HF"
+      },
+      {
+        "attempt": 3,
+        "hf_try": "ServiceNow/cap",
+        "error": "DatasetNotFoundError:Dataset 'ServiceNow/cap' doesn't exist on the Hub or cannot be accessed."
+      },
+      {
+        "attempt": 3,
+        "hf_try": "cap",
+        "error": "DatasetNotFoundError:Dataset 'cap' doesn't exist on the Hub or cannot be accessed."
+      },
+      {
+        "attempt": 3,
+        "hf_try": "agentlab/cap",
+        "error": "DatasetNotFoundError:Dataset 'agentlab/cap' doesn't exist on the Hub or cannot be accessed."
+      },
+      {
+        "attempt": 3,
+        "error": "Exception:No CAP dump found on FS nor HF"
+      }
+    ],
+    "cap_present": false,
+    "manifest": null,
+    "error": "Exception:No CAP dump found on FS nor HF",
+    "synthetic_manifest": {
+      "n_tasks": 420,
+      "n_sites": 108,
+      "n_domains": 24,
+      "avg_sites_per_task": 3.0,
+      "avg_actions_per_task": 7.0,
+      "tasks_sample": [
+        {
+          "task_id": 0,
+          "sites": [
+            "site_45",
+            "site_38",
+            "site_26"
+          ],
+          "domains": [
+            "domain_21",
+            "domain_14",
+            "domain_2"
+          ],
+          "actions": [
+            {
+              "target_text": "action_206 element 34",
+              "site": "site_45"
+            },
+            {
+              "target_text": "action_413 element 28",
+              "site": "site_45"
+            },
+            {
+              "target_text": "action_486 element 2",
+              "site": "site_26"
+            },
+            {
+              "target_text": "action_135 element 18",
+              "site": "site_26"
+            },
+            {
+              "target_text": "action_446 element 49",
+              "site": "site_38"
+            },
+            {
+              "target_text": "action_430 element 49",
+              "site": "site_45"
+            },
+            {
+              "target_text": "action_19 element 35",
+              "site": "site_38"
+            }
+          ],
+          "instruction": "Task instruction 0 search and purchase"
+        },
+        {
+          "task_id": 1,
+          "sites": [
+            "site_66",
+            "site_16",
+            "site_77"
+          ],
+          "domains": [
+            "domain_18",
+            "domain_16",
+            "domain_5"
+          ],
+          "actions": [
+            {
+              "target_text": "action_296 element 50",
+              "site": "site_66"
+            },
+            {
+              "target_text": "action_75 element 6",
+              "site": "site_77"
+            },
+            {
+              "target_text": "action_443 element 8",
+              "site": "site_16"
+            },
+            {
+              "target_text": "action_243 element 6",
+              "site": "site_66"
+            },
+            {
+              "target_text": "action_484 element 44",
+              "site": "site_66"
+            },
+            {
+              "target_text": "action_218 element 38",
+              "site": "site_77"
+            },
+            {
+              "target_text": "action_253 element 44",
+              "site": "site_16"
+            }
+          ],
+          "instruction": "Task instruction 1 search and purchase"
+        }
+      ]
+    },
+    "note": "Real CAP dump unavailable; synthetic manifest generated for pipeline validation only, marked MEASUREMENT_INVALID for decision"
+  },
+  "tfidf_result": {
+    "status": "SYNTHETIC_DEMO",
+    "reason": "CAP real dump unavailable, synthetic pipeline validation only",
+    "k": 14,
+    "k_half": 7,
+    "k_double": 28,
+    "overlap": 1.0,
+    "ci_lower": 1.0,
+    "ci_upper": 1.0,
+    "shuffle_mean": 0.07482534767752533,
+    "shuffle_std": 0.04421978234773677,
+    "shuffle_p95": 0.144853197576616,
+    "excess": 0.9251746523224746,
+    "vocab_hash": "1ca627d6bdfbc69731da43da8bba1da4c95cebdb4395e5fe7850ce134b26856d",
+    "centroids_hash": "907940d1d668d0d1dc15da728ec84ae2848f1c19f20a0d3eb44df7cb3176e971",
+    "n_train_tasks": 283,
+    "n_held_tasks": 137,
+    "n_unique_train": 283,
+    "train_sites": 73,
+    "held_sites": 32,
+    "is_synthetic": true,
+    "note": "Synthetic CAP run demonstrates pipeline but cannot satisfy PC4_CAP_SPLIT_INTEGRITY for decision; real H2B => MEASUREMENT_INVALID"
+  },
+  "k_computation": "k=min(50,unique_train_tasks/20) fitted train-only n_init10 random_state 35725763380",
+  "note": "Synthetic demo; real CAP unavailable => H2B MEASUREMENT_INVALID"
+}

@@ -1,0 +1,28 @@
+{
+  "shuffle_null": {
+    "status": "SYNTHETIC_DEMO",
+    "reason": "CAP real dump unavailable, synthetic pipeline validation only",
+    "k": 14,
+    "k_half": 7,
+    "k_double": 28,
+    "overlap": 1.0,
+    "ci_lower": 1.0,
+    "ci_upper": 1.0,
+    "shuffle_mean": 0.07482534767752533,
+    "shuffle_std": 0.04421978234773677,
+    "shuffle_p95": 0.144853197576616,
+    "excess": 0.9251746523224746,
+    "vocab_hash": "1ca627d6bdfbc69731da43da8bba1da4c95cebdb4395e5fe7850ce134b26856d",
+    "centroids_hash": "907940d1d668d0d1dc15da728ec84ae2848f1c19f20a0d3eb44df7cb3176e971",
+    "n_train_tasks": 283,
+    "n_held_tasks": 137,
+    "n_unique_train": 283,
+    "train_sites": 73,
+    "held_sites": 32,
+    "is_synthetic": true,
+    "note": "Synthetic CAP run demonstrates pipeline but cannot satisfy PC4_CAP_SPLIT_INTEGRITY for decision; real H2B => MEASUREMENT_INVALID"
+  },
+  "seed": 35725763380,
+  "perms": 1000,
+  "note": "Website-label shuffle null; synthetic demo only due to CAP unavailable"
+}

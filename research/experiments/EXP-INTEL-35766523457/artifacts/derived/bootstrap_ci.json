@@ -1,0 +1,166 @@
+{
+  "bootstrap_reps": 2000,
+  "seed": 35725763380,
+  "F_full": {
+    "status": "NOT_EXECUTED",
+    "reason": "Docker unavailable, n>=20 enumeration not executed"
+  },
+  "gate0_candidate": {
+    "candidates": [
+      {
+        "candidate_id": "synthetic_high_leakage_55",
+        "is_synthetic": true,
+        "n_raw": 220,
+        "metrics": {
+          "n_raw": 220,
+          "total_with_href": 59,
+          "leak_validOnly": 0.4576271186440678,
+          "leak_total": 0.12272727272727273,
+          "link_share": 0.2681818181818182,
+          "NL": 193,
+          "unique_titles": 5,
+          "title_entropy": 2.3139455741665813,
+          "H": null,
+          "strata_count_ge5": 0,
+          "strata_count": 13,
+          "singleton_rate": 0.0051813471502590676,
+          "singleton_count": 1,
+          "has_H_valid": false
+        },
+        "qualifies": false,
+        "reason": "H undefined (no stratum >=5); leak 0.458>=0.40"
+      },
+      {
+        "candidate_id": "synthetic_no_title",
+        "is_synthetic": true,
+        "n_raw": 250,
+        "metrics": {
+          "n_raw": 250,
+          "total_with_href": 54,
+          "leak_validOnly": 0.1111111111111111,
+          "leak_total": 0.024,
+          "link_share": 0.216,
+          "NL": 244,
+          "unique_titles": 1,
+          "title_entropy": -0.0,
+          "H": null,
+          "strata_count_ge5": 0,
+          "strata_count": 24,
+          "singleton_rate": 0.004098360655737705,
+          "singleton_count": 1,
+          "has_H_valid": false
+        },
+        "qualifies": false,
+        "reason": "titles 1<2; H undefined (no stratum >=5)"
+      },
+      {
+        "candidate_id": "synthetic_constant_S_next",
+        "is_synthetic": true,
+        "n_raw": 200,
+        "metrics": {
+          "n_raw": 200,
+          "total_with_href": 0,
+          "leak_validOnly": 0.0,
+          "leak_total": 0.0,
+          "link_share": 0.0,
+          "NL": 200,
+          "unique_titles": 2,
+          "title_entropy": 1.0,
+          "H": 0.0,
+          "strata_count_ge5": 1,
+          "strata_count": 1,
+          "singleton_rate": 0.0,
+          "singleton_count": 0,
+          "has_H_valid": true
+        },
+        "qualifies": false,
+        "reason": "H 0.000<=0.2; strata 1<10"
+      },
+      {
+        "candidate_id": "synthetic_gate_passing_like",
+        "is_synthetic": true,
+        "n_raw": 180,
+        "metrics": {
+          "n_raw": 180,
+          "total_with_href": 59,
+          "leak_validOnly": 0.0,
+          "leak_total": 0.0,
+          "link_share": 0.3277777777777778,
+          "NL": 180,
+          "unique_titles": 3,
+          "title_entropy": 1.552864805202529,
+          "H": 1.3906555425297311,
+          "strata_count_ge5": 12,
+          "strata_count": 12,
+          "singleton_rate": 0.0,
+          "singleton_count": 0,
+          "has_H_valid": true
+        },
+        "qualifies": true,
+        "reason": "PASS all 5"
+      },
+      {
+        "candidate_id": "browsergym_webarena_real",
+        "is_synthetic": false,
+        "n_raw": 0,
+        "metrics": {
+          "n_raw": 0,
+          "NL": 0,
+          "unique_titles": 0,
+          "H": null,
+          "leak_validOnly": 0,
+          "strata_count": 0,
+          "singleton_rate": 1.0
+        },
+        "qualifies": false,
+        "reason": "BrowserGym env unavailable after 3 retries, no transitions captured (browsergym_census BLOCKED)"
+      },
+      {
+        "candidate_id": "cap_production_spa",
+        "is_synthetic": false,
+        "n_raw": 0,
+        "metrics": {
+          "n_raw": 0,
+          "NL": 0,
+          "unique_titles": 0,
+          "H": null,
+          "leak_validOnly": 0,
+          "strata_count": 0,
+          "singleton_rate": 1.0
+        },
+        "qualifies": false,
+        "reason": "CAP dump unavailable, no live BrowserGym/AgentLab replay captured"
+      }
+    ],
+    "summary": {
+      "total_candidates": 6,
+      "real_qualifying": 0,
+      "synthetic_qualifying": 1,
+      "note": "Only real candidates count for Gate0 decision per frozen rule; synthetic candidates are pipeline validation only"
+    }
+  },
+  "tfidf": {
+    "status": "SYNTHETIC_DEMO",
+    "reason": "CAP real dump unavailable, synthetic pipeline validation only",
+    "k": 14,
+    "k_half": 7,
+    "k_double": 28,
+    "overlap": 1.0,
+    "ci_lower": 1.0,
+    "ci_upper": 1.0,
+    "shuffle_mean": 0.07482534767752533,
+    "shuffle_std": 0.04421978234773677,
+    "shuffle_p95": 0.144853197576616,
+    "excess": 0.9251746523224746,
+    "vocab_hash": "1ca627d6bdfbc69731da43da8bba1da4c95cebdb4395e5fe7850ce134b26856d",
+    "centroids_hash": "907940d1d668d0d1dc15da728ec84ae2848f1c19f20a0d3eb44df7cb3176e971",
+    "n_train_tasks": 283,
+    "n_held_tasks": 137,
+    "n_unique_train": 283,
+    "train_sites": 73,
+    "held_sites": 32,
+    "is_synthetic": true,
+    "note": "Synthetic CAP run demonstrates pipeline but cannot satisfy PC4_CAP_SPLIT_INTEGRITY for decision; real H2B => MEASUREMENT_INVALID"
+  },
+  "note": "Bootstrap CIs for gate fractions, overlap, F_full; synthetic demo where substrate unavailable"
+}

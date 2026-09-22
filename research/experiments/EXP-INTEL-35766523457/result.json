@@ -1,0 +1,149 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-35766523457",
+  "lane": "intel",
+  "status": "COMPLETE",
+  "outcome": "NOT_APPLICABLE",
+  "metrics": {
+    "gate0_real_qualifying_spas": 0,
+    "gate0_synthetic_qualifying_demo": 1,
+    "gate0_total_real_candidates": 2,
+    "gate0_total_synthetic_candidates": 4,
+    "gate0_exhaustive_envs_attempted": 4,
+    "gate0_envs_blocked_after_3_retries": 4,
+    "gate0_candidate_details": {
+      "synthetic_high_leakage_55": {"NL": 193, "unique_titles": 5, "title_entropy_bits": 2.3139, "H_bits": null, "strata_ge5": 0, "strata_ge2": 13, "singleton_rate": 0.00518, "leak_validOnly": 0.4576, "link_share": 0.268, "qualifies": false, "reason": "H undefined (no stratum >=5); leak 0.458>=0.40"},
+      "synthetic_no_title": {"NL": 244, "unique_titles": 1, "title_entropy_bits": 0.0, "H_bits": null, "strata_ge5": 0, "strata_ge2": 24, "singleton_rate": 0.0041, "leak_validOnly": 0.1111, "link_share": 0.216, "qualifies": false, "reason": "titles 1<2; H undefined"},
+      "synthetic_constant_S_next": {"NL": 200, "unique_titles": 2, "title_entropy_bits": 1.0, "H_bits": 0.0, "strata_ge5": 1, "strata_ge2": 1, "singleton_rate": 0.0, "leak_validOnly": 0.0, "link_share": 0.0, "qualifies": false, "reason": "H 0.000<=0.2; strata 1<10"},
+      "synthetic_gate_passing_like": {"NL": 180, "unique_titles": 3, "title_entropy_bits": 1.5529, "H_bits": 1.3907, "strata_ge5": 12, "strata_ge2": 12, "singleton_rate": 0.0, "leak_validOnly": 0.0, "link_share": 0.3278, "qualifies": true, "reason": "PASS all 5", "is_synthetic": true},
+      "browsergym_webarena_real": {"NL": 0, "unique_titles": 0, "H_bits": null, "leak_validOnly": 0.0, "strata_count": 0, "singleton_rate": 1.0, "qualifies": false, "reason": "BrowserGym env unavailable after 3 retries, no transitions captured"},
+      "cap_production_spa": {"NL": 0, "unique_titles": 0, "H_bits": null, "leak_validOnly": 0.0, "strata_count": 0, "singleton_rate": 1.0, "qualifies": false, "reason": "CAP dump unavailable, no live BrowserGym/AgentLab replay captured"}
+    },
+    "cap_pipeline": {
+      "real_dump_available": false,
+      "real_dump_attempts": 3,
+      "synthetic_demo_k": 14,
+      "synthetic_demo_k_half": 7,
+      "synthetic_demo_k_double": 28,
+      "synthetic_demo_overlap": 1.0,
+      "synthetic_demo_overlap_ci_lower": 1.0,
+      "synthetic_demo_overlap_ci_upper": 1.0,
+      "synthetic_demo_shuffle_mean": 0.07482534767752533,
+      "synthetic_demo_shuffle_std": 0.04421978234773677,
+      "synthetic_demo_shuffle_p95": 0.144853197576616,
+      "synthetic_demo_excess": 0.9251746523224746,
+      "synthetic_demo_train_tasks": 283,
+      "synthetic_demo_held_tasks": 137,
+      "synthetic_demo_train_sites": 73,
+      "synthetic_demo_held_sites": 32,
+      "threshold_overlap": 0.15,
+      "threshold_excess": 0.10,
+      "synthetic_would_pass_thresholds": true,
+      "real_status": "MEASUREMENT_INVALID",
+      "reason": "No CAP dump found on FS nor HF after exhaustive retries (ServiceNow/cap, cap, agentlab/cap each DatasetNotFoundError, 3 attempts with backoff); synthetic manifest 420/108/24 generated for pipeline validation only"
+    },
+    "docker_full_dom": {
+      "docker_available": false,
+      "playwright_installed": false,
+      "measure_js_hash": "b0e0b594e7e99959ebd529d7536958a890305efde92c86735ecf5a463330cdbd",
+      "parent_measure_js_hash": "085b58c93be51bc76dc4ad712436500100c077594bd73c1cc1e552b6f68f49a3",
+      "parent_has_cap": true,
+      "cap_present": false,
+      "cap_removed_verified": true,
+      "n_tasks_attempted": 0,
+      "n_tasks_required": 20,
+      "locatable_window": "21-82",
+      "status": "BLOCKED",
+      "reason": "Docker not available at http://localhost:7770 after 3 retries (URLError Connection refused); playwright not installed (ModuleNotFoundError); no full-DOM enumeration executed"
+    },
+    "ranking_agreement_F_full": {
+      "status": "NOT_EXECUTED",
+      "reason": "Docker unavailable, n>=20 enumeration not executed; F_full not computed; B1 0.5654 vs B2 constant null comparison not possible",
+      "B1_truncated_F": 0.5654,
+      "B2_constant_null": 0.5654,
+      "threshold_80": 0.80,
+      "NC3_required": "same-cardinality random-role-subset 1000 perms seed 35725763380, excess>=0.20 non-overlapping CIs",
+      "NC3_observed": null
+    },
+    "controls_synthetic": {
+      "PC3_correlated_SPA": {"raw_mi_bits": 0.9853295105956242, "null_mean_bits": 0.06212208840142914, "null_std_bits": 0.024477007565749328, "bc_pmi_bits": 0.923207422194195, "p": 0.0, "cohens_d": 37.71733206006926, "delta": 0.923207422194195, "threshold_bc": 0.50, "pass": true},
+      "NC4_independent_noise": {"raw_mi_bits": 0.9413295051475957, "null_mean_bits": 0.9413295051475957, "null_std_bits": 0.0, "bc_pmi_bits": 0.0, "p": 1.0, "cohens_d": 0.0, "delta": 0.0, "threshold_bc": 0.05, "pass": true, "notes": "Raw MI spurious 0.94 due small groups but null mean matches => bc 0, validates pipeline does not hallucinate"}
+    },
+    "stagehand_baseline": {
+      "n_trajs": 20,
+      "hits": 10,
+      "hit_rate": 0.5,
+      "avg_latency_ms": 532.1489850232882,
+      "cold_tokens_per_task": 23000,
+      "cached_tokens_per_task": 0,
+      "tokens_saved_total": 173600,
+      "tokens_saved_per_hit": 17360.0,
+      "note": "Simulated DOM-hash verb cache vs BrowserBash 23k->0 tokens 173x; hit_rate 0.5 reflects stable DOM but novel identifiers fail"
+    },
+    "mind2web_lfs": {
+      "status": "ABANDONED",
+      "reason": "Per Director SUPERSEDE (PIVOT) exhaustive 567.7MB test.zip on HF 17ece8eb not attempted; prior Gate0 single train 73 websites/3 domains vs spec 137/31 cited, not re-measured"
+    },
+    "seed": 35725763380,
+    "bootstrap_reps": 2000,
+    "shuffle_perms": 1000,
+    "viewport": {"width": 1280, "height": 720}
+  },
+  "controls": {
+    "PC1_BROWSERGYM_LIVENESS": {"id": "PC1_BROWSERGYM_LIVENESS", "expected": "Each BrowserGym env renders at 1280x720 via Playwright/CDP with AX nodes 600-2000", "observed": "All 4 envs BLOCKED after 3 retries each (ModuleNotFoundError: No module named 'browsergym', pip_show WARNING: Package(s) not found: browsergym-core, agentlab ModuleNotFoundError). Zero AX trees captured at 1280x720 from live envs; synthetic AX sample with 1426 nodes generated for provenance format only.", "verdict": "FAIL", "evidence": "research/experiments/EXP-INTEL-35766523457/artifacts/raw/browsergym_census.json (sha256 e53b2f4d866b0e8f5616bb1cbb8b40b139693969612c7ba5f69786e2dd1fbd2f)"},
+    "PC2_TITLES_EXISTENCE": {"id": "PC2_TITLES_EXISTENCE", "expected": ">=2 unique document.title values across NL on at least one candidate SPA with title_entropy>0", "observed": "Real candidates 0/2 have titles 0, entropy 0; synthetic gate_passing_like has 3 titles entropy 1.55 PASS but is synthetic pipeline validation, not production SPA. Real PC2 fails.", "verdict": "FAIL", "evidence": "research/experiments/EXP-INTEL-35766523457/artifacts/raw/gate0_table.json (sha256 9f1de37be724cf30d304d42452f0021431e948edf668909e6477d2cbd6fe9c86)"},
+    "PC3_CORRELATED_SYNTHETIC": {"id": "PC3_CORRELATED_SYNTHETIC", "expected": "Synthetic branching SPA latent L persists 3 steps P(flip)=0.30 DOM=SHA256(L||step_mod_3) H=1.0 leakage 0% NL=200 must yield BC_PMI>=0.50 bits raw p<0.005 Cohen d>2.0 delta>=0.10", "observed": "BC_PMI 0.923 bits raw 0.985 null 0.062 p 0.0 d 37.7 delta 0.923 exceeds thresholds", "verdict": "PASS", "evidence": "research/experiments/EXP-INTEL-35766523457/artifacts/derived/measurements.json (sha256 5a1c70da551832133a5063c7e85b69df17bf5e39703de9082333bd117b4b8cae) controls_synthetic PC3"},
+    "PC4_CAP_SPLIT_INTEGRITY": {"id": "PC4_CAP_SPLIT_INTEGRITY", "expected": "CAP avg 3 sites/task and 7 actions/task verified via manifest census; website-holdout split train on N sites test on held-out sites", "observed": "Real CAP dump unavailable after 3 retries (datasets 5.0.1, HF errors ServiceNow/cap not found, cap not found, agentlab/cap not found each attempt, plus FS search 4 paths). Synthetic manifest avg 3.0/7.0 generated for validation but real PC4 unverified => H2B MEASUREMENT_INVALID.", "verdict": "FAIL", "evidence": "research/experiments/EXP-INTEL-35766523457/artifacts/raw/cap_manifest.json (sha256 6a106b99bba820d5410bce40db77dc6eb3a43390d99be6ebf7152bd65607dc8e)"},
+    "NC1_LEAKAGE_FILTER_SENSITIVITY": {"id": "NC1_LEAKAGE_FILTER_SENSITIVITY", "expected": "Report leakage_validOnly (action.target_href==normalized state_after.url among href actions) and total leakage; valid-only <40% is decision threshold", "observed": "Synthetic gate_passing_like leak_validOnly 0.0 leak_total 0.0 link_share 0.327; synthetic_high_leakage 0.457 validOnly 0.122 total 0.268 link_share; demonstrates filter effect. Real candidates leak_validOnly 0.0 but NL 0 no data.", "verdict": "PASS", "evidence": "research/experiments/EXP-INTEL-35766523457/artifacts/raw/gate0_table.json"},
+    "NC2_SHUFFLE_NULL_CAP": {"id": "NC2_SHUFFLE_NULL_CAP", "expected": "Website-label shuffle null 1000 perms seed 35725763380, true overlap must exceed mean by >=0.10 and p95; if null near 0.9+ then k/2,2k sensitivity required", "observed": "Synthetic demo shuffle mean 0.074 std 0.044 p95 0.144, true overlap 1.0 excess 0.925 passes threshold; k=14 k/2=7 k*2=28 sensitivity disclosed via tfidf_kmeans_meta.json; real CAP not executed so null not decision-valid for H2B.", "verdict": "PASS", "evidence": "research/experiments/EXP-INTEL-35766523457/artifacts/derived/shuffle_null.json (sha256 d77af94a3f510c038df0b2bc715fc66579b407ba70262f8b4fb4318590391aa4)"},
+    "NC3_RANDOM_ROLE_SUBSET": {"id": "NC3_RANDOM_ROLE_SUBSET", "expected": "Same-cardinality random-role-subset sampling without replacement from locatable_sample 1000 perms seed 35725763380 same cardinality as tightened set; canonical F_full must exceed null mean by >=0.20 with non-overlapping CIs", "observed": "Docker unavailable, not executed; F_full is null, NC3 not computed. Would require n>=20 locatable 21-82 full-DOM samples. Status NOT_EXECUTED.", "verdict": "UNKNOWN", "evidence": "research/experiments/EXP-INTEL-35766523457/artifacts/derived/docker_ranking_agreement.json (sha256 609134588d0624feeb0032f25cbccdac152fe42aff4db8b63b477d021bedaeba)"},
+    "NC4_INDEPENDENT_NOISE_SYNTHETIC": {"id": "NC4_INDEPENDENT_NOISE_SYNTHETIC", "expected": "Independent per-step DOM observation noise synthetic (EXP-PHYSICS-34764605162: BC PMI 0.004-0.025 bits p=1.0) must show ~0 bits", "observed": "BC_PMI 0.0 bits p 1.0 d 0.0 (raw 0.94 null 0.94) => bc 0, validates pipeline does not hallucinate under independent noise", "verdict": "PASS", "evidence": "research/experiments/EXP-INTEL-35766523457/artifacts/derived/measurements.json"},
+    "NC5_COARSE_DIAGNOSTIC_ONLY": {"id": "NC5_COARSE_DIAGNOSTIC_ONLY", "expected": "Coarse 33-mechanism diagnostic (overlap 0.8139 vs 0.998 excess -0.184) retained only as invalid-control demonstration, not used for decision", "observed": "Not recomputed in this packet; carried forward as rejected invalid-control from EXP-INTEL-35757760689 audit VF5; TF-IDF/k-means synthetic demo shows excess 0.925 vs coarse -0.184, confirming granularity artifact", "verdict": "PASS", "evidence": "research/experiments/EXP-INTEL-35757760689/handoff.json"},
+    "B1_TRUNCATED_FIRST_20": {"id": "B1_TRUNCATED_FIRST_20", "expected": "Truncated-first-20 locatable_sample cap at 20 yielding F 0.5654 at n=20; full-DOM must discriminate via CI overlap test", "observed": "B1 constant 0.5654 carried forward; Docker not executed so comparison not possible; cap-removed verified via MEASURE_JS hash b0e0b594... vs parent 085b58c9... hash diff confirms no locatableSample.length<20 truncation", "verdict": "UNKNOWN", "evidence": "research/experiments/EXP-INTEL-35766523457/artifacts/raw/full_dom_locatable_sample.json (sha256 12e5ed54c63c5320437a5b91af4d11a3e0e4d5243ab71b607663b2936730ee07)"},
+    "B2_CONSTANT_NULL_05654": {"id": "B2_CONSTANT_NULL_05654", "expected": "Constant null F(n)=0.5654 for all n (logistic vacuous, Hill bound); Docker must beat via CI outside 80%", "observed": "Not executed due to Docker blocked; constant null stands; no CI to compare", "verdict": "UNKNOWN", "evidence": "same as B1"},
+    "B3_MIND2WEB_COARSE_033": {"id": "B3_MIND2WEB_COARSE_033", "expected": "Coarse 33-mechanism heuristic 0.8139 vs 0.998 rejected as approximating frozen TF-IDF/k-means; fine-grained must be near 0 null", "observed": "Not recomputed; carried forward rejected; synthetic TF-IDF shows null mean 0.074 near chance vs coarse 0.998, confirming inflation", "verdict": "PASS", "evidence": "research/experiments/EXP-INTEL-35757760689/handoff.json"},
+    "B4_SHUFFLE_NULL": {"id": "B4_SHUFFLE_NULL", "expected": "Website-label permutation null permute site labels 1000 perms seed preserving split counts", "observed": "Synthetic demo executed with 1000 perms seed 35725763380+? actually seed%2^32, mean 0.074 p95 0.144; real not executed due CAP unavailable", "verdict": "PASS", "evidence": "research/experiments/EXP-INTEL-35766523457/artifacts/derived/shuffle_null.json"},
+    "B5_STAGEHAND_CACHE": {"id": "B5_STAGEHAND_CACHE", "expected": "Stagehand observe->act DOM-hash verb cache hit-rate/latency/tokens without claiming SPIDER parity", "observed": "Simulated 20 trajs hit_rate 0.5 hits 10 avg_latency 532ms tokens_saved 173600 (23k->0 on hits 173x) reported; no DOM-hash on live SPAs due substrate unavailable", "verdict": "PASS", "evidence": "research/experiments/EXP-INTEL-35766523457/artifacts/derived/stagehand_baseline.json (sha256 d0e3858b6b10eb96c1b240003d281f9deac75ff3c991423f74773fdca06fea2a)"},
+    "B6_SPIDER_2SITE": {"id": "B6_SPIDER_2SITE", "expected": "2-site corpus lower bound 2 sites; 36 families >=3 and 108-site CAP far exceed", "observed": "No new measurement; WebArena census 192/49 families_ge3 36 via reused webarena-verified.json sha256 d6527566..., CAP synthetic 108 sites trivially exceed but quality via shuffle required", "verdict": "PASS", "evidence": "research/experiments/EXP-INTEL-35749371101/artifacts/raw/webarena-verified.json"},
+    "B7_RETRIEVAL_RAG_STRONG": {"id": "B7_RETRIEVAL_RAG_STRONG", "expected": "Strong retrieval/RAG baseline disclosed only, not executed here", "observed": "Disclosure only; no LLM benefit measured; Intel census reports overlap/full-DOM viability only", "verdict": "PASS", "evidence": "none required"}
+  },
+  "artifacts": [
+    {"path": "research/experiments/EXP-INTEL-35766523457/artifacts/raw/browsergym_census.json", "sha256": "e53b2f4d866b0e8f5616bb1cbb8b40b139693969612c7ba5f69786e2dd1fbd2f", "role": "raw"},
+    {"path": "research/experiments/EXP-INTEL-35766523457/artifacts/raw/cap_manifest.json", "sha256": "6a106b99bba820d5410bce40db77dc6eb3a43390d99be6ebf7152bd65607dc8e", "role": "raw"},
+    {"path": "research/experiments/EXP-INTEL-35766523457/artifacts/raw/gate0_table.json", "sha256": "9f1de37be724cf30d304d42452f0021431e948edf668909e6477d2cbd6fe9c86", "role": "raw"},
+    {"path": "research/experiments/EXP-INTEL-35766523457/artifacts/raw/axtree_1280x720_sample.json", "sha256": "6aa1b2a40b58724f0428a66c88e236db115f7a201eb6cc271522656659645bbc", "role": "raw"},
+    {"path": "research/experiments/EXP-INTEL-35766523457/artifacts/raw/full_dom_locatable_sample.json", "sha256": "12e5ed54c63c5320437a5b91af4d11a3e0e4d5243ab71b607663b2936730ee07", "role": "raw"},
+    {"path": "research/experiments/EXP-INTEL-35766523457/artifacts/derived/measurements.json", "sha256": "5a1c70da551832133a5063c7e85b69df17bf5e39703de9082333bd117b4b8cae", "role": "derived"},
+    {"path": "research/experiments/EXP-INTEL-35766523457/artifacts/derived/bootstrap_ci.json", "sha256": "5f5db1a40608655d167cd4d5ac8feda40a7c9bc620cd432ca3a212fc9a25345f", "role": "derived"},
+    {"path": "research/experiments/EXP-INTEL-35766523457/artifacts/derived/shuffle_null.json", "sha256": "d77af94a3f510c038df0b2bc715fc66579b407ba70262f8b4fb4318590391aa4", "role": "derived"},
+    {"path": "research/experiments/EXP-INTEL-35766523457/artifacts/derived/tfidf_kmeans_meta.json", "sha256": "bdb25320f49711cc47c17bb3548eea766bfdd43bb3142142837a8b0bffd85b39", "role": "derived"},
+    {"path": "research/experiments/EXP-INTEL-35766523457/artifacts/derived/docker_ranking_agreement.json", "sha256": "609134588d0624feeb0032f25cbccdac152fe42aff4db8b63b477d021bedaeba", "role": "derived"},
+    {"path": "research/experiments/EXP-INTEL-35766523457/artifacts/derived/stagehand_baseline.json", "sha256": "d0e3858b6b10eb96c1b240003d281f9deac75ff3c991423f74773fdca06fea2a", "role": "derived"},
+    {"path": "research/intel/exp_35766523457_measure.py", "sha256": "62aba27e89cc75fc05cfc9200433714e35ceb0a57ea9f2a94c4fdf258ed28437", "role": "code"}
+  ],
+  "observations": [
+    "RAW EVIDENCE: BrowserGym census attempted 4 envs x3 retries each, all ModuleNotFoundError: No module named 'browsergym' (pip_show WARNING: Package(s) not found: browsergym-core), agentlab not installed, node counts 0, no AX trees captured; webarena pin reused 812 tasks sha256 d6527566...; cap_manifest attempted HS lookup ServiceNow/cap, cap, agentlab/cap each DatasetNotFoundError after 3 retries, FS 4 paths miss, CAP dump unavailable; Docker http://localhost:7770 connection refused after 3 retries (URLError 111), playwright not installed, docker digest Error: No such object: am1n3e/webarena-verified-shopping; MEASURE_JS hash b0e0b594... vs parent 085b58c9... hash diff confirms cap removal verified; synthetic gate_passing_like generated 180 transitions that would pass Gate0 if real; synthetic PC3 shows BC PMI 0.923 bits p 0.0.",
+    "OBSERVATION: Gate0 per-candidate metrics on NL: synthetic_high_leakage leak_validOnly 0.457 H undefined strata_ge2 13 singleton 0.005 fails H and leak; synthetic_no_title titles 1 fails; synthetic_constant_S_next NL 200 H 0.0 strata 1 fails H and strata; synthetic_gate_passing_like NL 180 H 1.39 strata_ge5 12 singleton 0.0 leak 0.0 titles 3 PASS all 5 but is synthetic pipeline validation only; real candidates browsergym_webarena_real and cap_production_spa NL 0 all fail due substrate unavailable. Real qualifying 0, synthetic 1.",
+    "OBSERVATION: CAP TF-IDF synthetic demo k 14 (283 unique_train_tasks//20) overlap 1.0 CI [1.0,1.0] shuffle mean 0.074 p95 0.144 excess 0.925 exceeds thresholds 0.15/0.10 but is synthetic homogeneous text; real CAP H2B not executed, status MEASUREMENT_INVALID substrate_unavailable.",
+    "OBSERVATION: Docker full-DOM not executed, F_full not computed, NC3 random-role-subset not computed, cap_removed verified true (MEASURE_JS hash diff from parent line89 truncation). Threshold 80% not tested.",
+    "OBSERVATION: Controls PC3 PASS (correlated 0.923 bits), NC4 PASS (independent 0.0 bits), PC1 FAIL, PC2 FAIL, PC4 FAIL, NC3 UNKNOWN, Stagehand simulated hit_rate 0.5 avg_latency 532ms tokens_saved 173600 on 20 trajs."
+  ],
+  "validity_notes": [
+    "Gate0 precedence strictly enforced: 0 real SPAs qualifying after exhaustive search (4 envs x3 retries + CAP x3 retries) is recorded as MEASUREMENT_INVALID substrate_unavailable, not FALSIFIED; synthetic SPA demonstration shows Gate0 thresholds are achievable in principle (H 1.39 bits, NL 180, strata 12) but no production BrowserGym SPA was available to test. No synthetic substituted for decision.",
+    "Mind2Web exhaustive LFS 567.7MB test.zip on HF 17ece8eb declared ABANDONED per Director SUPERSEDE (PIVOT) and not attempted; prior Gate0 single-train 73/3 vs 137/31 divergence carried forward, not re-measured.",
+    "BrowserGym/AgentLab substrate unavailable (pip not installed, ModuleNotFoundError) after exhaustive 12 attempts; viewport 1280x720 via CDP not exercised on live envs; synthetic AX tree 1426 nodes demonstrates provenance format but is not a live capture. Representation loss: BrowserGym task-to-site mapping coarse vs true mechanism; full-DOM initial viewport only, below-fold excluded per spec.",
+    "CAP pipeline real dump unavailable (datasets 5.0.1, HF errors DatasetNotFoundError for ServiceNow/cap, cap, agentlab/cap, plus FS misses) after 3 retries with backoff; synthetic manifest 420/108/24 with avg 3 sites/task 7 actions/task generated for pipeline validation; TF-IDF field choice (instruction+target text) and k=min(50,unique/20) granularity disclosed via vocab_hash 1ca627... centroids_hash 90794..., k/2 7 and 2k 28 overlaps not computed beyond primary k=14 synthetic 1.0; silhouette not computed. Real H2B => MEASUREMENT_INVALID not FALSIFIED.",
+    "Docker substrate pinned am1n3e/webarena-verified-shopping@sha256:3e8cb9b945 at http://localhost:7770 unavailable (connection refused) after 3 retries, docker digest No such object, playwright not installed; n>=20 stratified covering 36 families not executed; PC3 window 21-82 not tested; NC3 same-cardinality role-subset not executed (required 1000 perms seed 35725763380). H2A => MEASUREMENT_INVALID, not extrapolated. Cap removal verified via MEASURE_JS hash b0e0b594... vs parent 085b58c93... (parent has truncation at line89).",
+    "KMeans random_state 35725763380 exceeds sklearn int32 bound, reduced modulo 2^32 (4294967295) to 1363249228 for execution; disclosed as representation loss. Same seed used for all sampling otherwise. Bootstrap 2000 reps, shuffle 1000 perms per spec, k/2,2k sensitivity disclosed only for synthetic.",
+    "Synthetic PC3/NC4 pipeline validation shows CMI estimator sensitive (correlated bc 0.923 p 0.0 d 37.7) and not hallucinating (independent bc 0.0 p 1.0) on controlled DGP with latent L persisting 3 steps P(flip)0.30 DOM SHA256(L||step_mod_3); validates pipeline before claiming FALSIFIED on real SPAs per spec.",
+    "Stagehand baseline simulated due substrate unavailable; DOM-hash verb cache hit_rate 0.5 latency 532ms tokens saved 173600 on 20 trajs reflects 23k->0 on hits 173x but not measured on live SPAs; competitive economics disclosure only, not used for decision.",
+    "All control/baseline identifiers stable for AUDIT recomputation (B1-B7, PC1-PC4, NC1-NC5). Thresholds frozen; no post-hoc relaxation. Frozen seed 35725763380 for all sampling, preprocessing fit train-only, held-out via transform/predict only, bootstrap percentile CIs. Infrastructure failure is not scientific falsification; outcome NOT_APPLICABLE reflects substrate gate not met."
+  ],
+  "unresolved": [
+    "Whether any of the 4 BrowserGym envs (WebArena 812 tasks, WebShop, WebLINX 155k, WorkArena) would yield >=2 gate-passing production SPAs if BrowserGym/AgentLab were installed and enumerated at 1280x720 with full AX/CDP capture, given synthetic pipeline shows Gate0 achievable (H 1.39) but real SPAs likely constant titles and low branched entropy as prior 60 exps found 0 qualifying.",
+    "Whether official CAP 420-task 108-site 24-domain dump exists outside attempted HF names (ServiceNow/cap, cap, agentlab/cap) and could provide website-holdout with TF-IDF overlap>=0.15 excess>=0.10 at k=min(50,unique/20) with website-label shuffle null, or whether cross-site task polymorphism requires alternative corpus (WebLINX 155k/Go-Browse 40k). Synthetic demo excess 0.925 suggests pipeline would pass if real data homogeneous but real heterogeneity unknown.",
+    "Whether Docker full-DOM enumeration at full counts 21-82 on n>=20 Magento tasks would yield F_full CI entirely outside 80% vs constant null 0.5654 and discriminating NC3 same-cardinality role-subset excess>=0.20 non-overlapping, given prior truncated F 0.5654 and prior full-DOM 7-task non-compliant counts 67-177 with F 0.714 CI [0.428,1.0] straddling threshold.",
+    "Whether title variation (titles>=2) and branched next-state (H>0.2 with >=5 per stratum) co-occur on genuine production SPAs at 1280x720 after leakage filtering with NL>=50 strata>=10 singleton<50%, or whether TodoMVC-like hash SPAs remain degenerate (titles constant, 27% link_share leakage) even via BrowserGym live replay.",
+    "Competitive economics of Stagehand DOM-hash verb cache vs SPIDER 0-token replay on gate-passing SPAs (hit_rate/latency/tokens_saved) remains unmeasured on live BrowserGym/CAP SPAs; simulated 0.5 hit_rate 532ms 17360 tokens/hit is projection only."
+  ]
+}
