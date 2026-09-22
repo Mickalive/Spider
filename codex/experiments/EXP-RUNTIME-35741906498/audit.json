@@ -1,0 +1,206 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-35741906498",
+  "lane": "runtime",
+  "status": "PASS",
+  "producer_claim_supported": true,
+  "required_fixes": [],
+  "validity_findings": [
+    {
+      "id": "V1_DEGENERATE_CI_DISCLOSED",
+      "severity": "low",
+      "finding": "All Jaccard bootstrap CIs are degenerate [1.0,1.0] or [0.0,0.0] with effective distinct N=1 per state per source despite nominal N=20. This is expected deterministic behavior on localhost Flask/Werkzeug with fixed json.dumps(sort_keys=True) body and committed header_config. Producer correctly flags degenerate_ci=true and reports effective_distinct_n alongside nominal_n in result.json:metrics.* and validity_notes. Not measurement invalidity per frozen spec prereg section 6; disclosed as existential existence proof not inferential precision.",
+      "evidence_ref": "result.json:metrics.header_drift_full.degenerate_ci=true; metrics.effective_distinct_n all 1; raw_observations.jsonl sha3883b538 180 lines 1 unique fingerprint per state per source (recomputed); experiment_result.json:metrics.*.degenerate_ci"
+    },
+    {
+      "id": "V2_LOCALHOST_BOUND_CORRECTLY_DISCLOSED",
+      "severity": "low",
+      "finding": "Testbed is Flask 3.1.3 Werkzeug dev server on 127.0.0.1:19848 single sequential client, SQLite WAL, no concurrency, no TLS/HTTP2, no production WSGI/nginx/CDN. Producer bounds claim to localhost synthetic and explicitly states C-MEAS-VALID remains EXPERIMENTAL, not VALIDATED, and distributed/production testing remains blocked. Provenance correctly records Flask 3.1.3 PyJWT 2.14.0 Python 3.12.14.",
+      "evidence_ref": "provenance.json:environment.server_endpoint http://127.0.0.1:19848 flask 3.1.3; report.md section 6 bounding; result.json:validity_notes[1]"
+    },
+    {
+      "id": "V3_HEADER_ISOLATION_VERIFIED",
+      "severity": "info",
+      "finding": "Per-header isolations are correctly isolated: A vs B Cache-Control only (max-age=3600 vs max-age=0 must-revalidate, ETag/Vary/Set-Cookie constant), A vs C ETag only (W/aaa-111 vs W/bbb-222), A vs D Set-Cookie only (absent vs session=hdrdrift). Verified via recomputation of 5 unique filtered header JSONs across 180 lines; no cross-header contamination.",
+      "evidence_ref": "raw_observations.jsonl recomputed 5 unique headers_filtered_json; provenance.json:fixtures.header_states; experiment_result.json:identity_checks"
+    },
+    {
+      "id": "V4_EXCLUDED_HEADER_LEAKAGE_ABSENT",
+      "severity": "info",
+      "finding": "Date varies (20 unique) and Server constant correctly excluded from fingerprint (EXCLUDED_HEADERS Date/Server/X-Request-Id). Recomputed 0 leakage into filtered dicts per line; Date in raw but not filtered verified.",
+      "evidence_ref": "raw_observations.jsonl line 1 headers_raw_json contains Date/Server, headers_filtered_json excludes them; provenance.json:fixtures.excluded_headers; result.json:observations[5]"
+    },
+    {
+      "id": "V5_HEADER_COMMIT_INTEGRITY",
+      "severity": "info",
+      "finding": "Every POST /admin/set_headers write verified by SQLite SELECT before next batch (15 batch_state_log entries, all match_expected=true). Null controls A1 vs A2 and E1 vs E2 sampled with no write between batches (pre_batch_verify matches committed state). No header-not-committed threat.",
+      "evidence_ref": "batch_state_log.jsonl sha1e0cc631 15 lines all match_expected true; run_experiment.py:do_write commits before 200"
+    },
+    {
+      "id": "V6_TAUTOLOGICAL_HASH_SENSITIVITY_ACKNOWLEDGED",
+      "severity": "low",
+      "finding": "Full fingerprint includes sorted_filtered_headers by construction, so any change in included headers necessarily changes hash (1.0 discrimination is architecturally forced when headers differ). This is the intended test of header inclusion vs Content-Length correlation, not a circularity flaw. Value is in demonstrating header change is not via Content-Length/body correlation (C6) and that body/status are isolated (C3/B-* nulls). No overclaim beyond localhost existence.",
+      "evidence_ref": "run_experiment.py:compute_fingerprint hash(status+body_bytes+sorted_filtered_headers); result.json:metrics.content_length_by_state all 31; spec.md:baselines B-HEADERS-ONLY positive"
+    }
+  ],
+  "baseline_findings": [
+    {
+      "id": "B-STATUS-ONLY",
+      "verdict": "PASS",
+      "expected": "0.0 on all header-only comparisons (status 200 vs 200)",
+      "observed": 0.0,
+      "detail": "Recomputed 0.0 on A vs E, A vs B, A vs C, A vs D, null_A1 vs null_A2, null_E1 vs null_E2. Strong null proves status not the signal; isolation valid.",
+      "evidence_ref": "recomputed_metrics.header_drift_status.discrimination=0.0; cache_only_status=0.0; etag_only_status=0.0; cookie_only_status=0.0; null_control_status=0.0"
+    },
+    {
+      "id": "B-BODY-ONLY",
+      "verdict": "PASS",
+      "expected": "0.0 on all header-only comparisons (body SHA identical)",
+      "observed": 0.0,
+      "detail": "Recomputed 0.0 on all comparisons. Body SHA d0ca833f843c6d70ec9d6755f52a92dcbfc8b4ab601b871bced09ad027172e34 identical across A/B/C/D/E and all null batches; Content-Length 31 identical. Strong null proves body not the signal.",
+      "evidence_ref": "recomputed_metrics.header_drift_body=0.0; cache_only_body=0.0; etag_only_body=0.0; cookie_only_body=0.0; result.json:metrics.body_sha256_across_A_E"
+    },
+    {
+      "id": "B-HEADERS-ONLY",
+      "verdict": "PASS",
+      "expected": ">0.5 on A vs E and >=2/3 isolations",
+      "observed": 1.0,
+      "detail": "Recomputed 1.0 on A vs E primary and 3/3 isolations (Cache-Control, ETag, Set-Cookie each alone 1.0). Positive baseline carries full signal; header drift independently discriminative. Null remains 0.0.",
+      "evidence_ref": "recomputed_metrics.header_drift_headers=1.0; cache_only_headers=1.0; etag_only_headers=1.0; cookie_only_headers=1.0; null_control_headers=0.0"
+    },
+    {
+      "id": "C4_NONVACUOUS_STRICT_GT",
+      "verdict": "PASS",
+      "expected": "full > max(status,body) strictly on A vs E (non-vacuous)",
+      "observed": "full 1.0 > max(0.0,0.0) 0.0",
+      "detail": "First non-vacuous C4 for C-MEAS-VALID: prior localhost experiments had full==body==status==1.0 vacuous equality. Here full 1.0 strictly exceeds both baselines 0.0 (1.0 > 0.0). Producer correctly uses strict > not >=.",
+      "evidence_ref": "result.json:controls.C4_FULL_EXCEEDS_BASELINES_NONVACUOUS pass true; recomputed_metrics header_drift_full vs header_drift_status/body"
+    }
+  ],
+  "recomputed_metrics": {
+    "header_drift_full": {
+      "discrimination": 1.0,
+      "ci_95": [1.0, 1.0],
+      "set_a_unique": 1,
+      "set_b_unique": 1,
+      "nominal_n": [20, 20],
+      "degenerate": true,
+      "comparison": "A vs E"
+    },
+    "header_drift_status": {
+      "discrimination": 0.0,
+      "ci_95": [0.0, 0.0],
+      "set_a_unique": 1,
+      "set_b_unique": 1
+    },
+    "header_drift_body": {
+      "discrimination": 0.0,
+      "ci_95": [0.0, 0.0],
+      "set_a_unique": 1,
+      "set_b_unique": 1
+    },
+    "header_drift_headers": {
+      "discrimination": 1.0,
+      "ci_95": [1.0, 1.0],
+      "set_a_unique": 1,
+      "set_b_unique": 1
+    },
+    "cache_only_full": {
+      "discrimination": 1.0,
+      "ci_95": [1.0, 1.0],
+      "comparison": "A vs B Cache-Control only"
+    },
+    "cache_only_status": {
+      "discrimination": 0.0
+    },
+    "cache_only_body": {
+      "discrimination": 0.0
+    },
+    "cache_only_headers": {
+      "discrimination": 1.0
+    },
+    "etag_only_full": {
+      "discrimination": 1.0,
+      "comparison": "A vs C ETag only"
+    },
+    "etag_only_status": {
+      "discrimination": 0.0
+    },
+    "etag_only_body": {
+      "discrimination": 0.0
+    },
+    "etag_only_headers": {
+      "discrimination": 1.0
+    },
+    "cookie_only_full": {
+      "discrimination": 1.0,
+      "comparison": "A vs D Set-Cookie only"
+    },
+    "cookie_only_status": {
+      "discrimination": 0.0
+    },
+    "cookie_only_body": {
+      "discrimination": 0.0
+    },
+    "cookie_only_headers": {
+      "discrimination": 1.0
+    },
+    "null_control_full": {
+      "discrimination": 0.0,
+      "ci_95": [0.0, 0.0],
+      "comparison": "null_A1 vs null_A2 same STATE_A"
+    },
+    "null_control_status": {
+      "discrimination": 0.0
+    },
+    "null_control_body": {
+      "discrimination": 0.0
+    },
+    "null_control_headers": {
+      "discrimination": 0.0
+    },
+    "null_e_exploratory_full": {
+      "discrimination": 0.0,
+      "comparison": "null_E1 vs null_E2 same STATE_E exploratory"
+    },
+    "content_length_identity": {
+      "A": "31",
+      "B": "31",
+      "C": "31",
+      "D": "31",
+      "E": "31",
+      "body_len": 31,
+      "body_sha256": "d0ca833f843c6d70ec9d6755f52a92dcbfc8b4ab601b871bced09ad027172e34",
+      "pass": true
+    },
+    "fingerprint_mismatches": 0,
+    "raw_line_count": 180,
+    "batch_state_log_entries": 15,
+    "all_status_200": true,
+    "jaccard_formula": "1 - |A cap B|/|A cup B| over fingerprint sets",
+    "recomputation_method": "independent python recompute from raw_observations.jsonl using hashlib.sha256||sorted_filtered_headers matching run_experiment.py:compute_fingerprint"
+  },
+  "claim_ceiling": "HTTP fingerprint substrate SHA256(status || body_bytes || sorted_filtered_headers) with EXCLUDED_HEADERS={Date,Server,X-Request-Id} discriminates header-only server-state changes (Cache-Control, ETag, Set-Cookie, Vary) with deterministic Jaccard 1.0 when status is 200 vs 200, body bytes are byte-identical (JSON {\"data\":\"hello\",\"version\":1} 31 bytes SHA d0ca833f843c6d70ec9d6755f52a92dcbfc8b4ab601b871bced09ad027172e34, Content-Length 31 identical), on localhost Flask 3.1.3 + PyJWT 2.14.0 HS256 + SQLite WAL + Werkzeug 3.1.8 Python 3.12.14 at 127.0.0.1:19848, single sequential client, jitter 50-150ms, SEED 44, nominal N=20 per state but effective distinct N=1 per state per source (degenerate bootstrap CI [1.0,1.0]/[0.0,0.0] not inferential), via writable header_config updated by POST /admin/set_headers with SQLite WAL COMMIT verified before each batch. Full-vector 1.0 > max(status-only 0.0, body-only 0.0) non-vacuous first C4; headers-only baseline 1.0 on A vs E and 3/3 isolations; null control 0.0. Does NOT extend to production WSGI/nginx/CDN/caching layers, concurrent load, TLS/HTTP2, browser DOM, multi-client, or natural header nondeterminism. C-MEAS-VALID remains EXPERIMENTAL; C-FRESHNESS/C-DELTA-REPAIR unblocked only for localhost synthetic testing with header-only drift, not for distributed production.",
+  "evidence_refs": [
+    "research/experiments/EXP-RUNTIME-35741906498/raw_observations.jsonl sha3883b538c9d8d57d6b0a0eaefb1100cdfd5420b8c1faecbea5972c91a34e2f92 180 lines",
+    "research/experiments/EXP-RUNTIME-35741906498/batch_state_log.jsonl sha1e0cc63152bb74b547c1c13a2e6ba3fee67c83d3792135bd9169534a612eb47b 15 entries",
+    "research/experiments/EXP-RUNTIME-35741906498/experiment_result.json sha23b77d24546daa892cf5148e6658d051bd6de68ed4069ed8256ef9232c2aae7b derived metrics/conditions",
+    "research/experiments/EXP-RUNTIME-35741906498/run_experiment.py sha47ff8910c3d9cc95c9a20e223faa5a212be1d11aa73ac43df6fc0142d5b43e87 code fingerprint identical to parent",
+    "research/experiments/EXP-RUNTIME-35697043449/run_experiment.py parent fingerprint source",
+    "research/experiments/EXP-RUNTIME-35741906498/result.json schema_version 1 status COMPLETE outcome SUPPORTS controls C1-C6 + baselines B-* all pass",
+    "research/experiments/EXP-RUNTIME-35741906498/provenance.json sha7f7d8dbe2395332fec02d0dd8879746fb527f05e16b14e82fb54ce07a9a6bced",
+    "research/experiments/EXP-RUNTIME-35741906498/spec.json sha80e8cef6a256201c8cfb64f296c87c24fcc8085f83f95b96132c96e5ecad7c7c frozen decision rule C1-C6",
+    "research/experiments/EXP-RUNTIME-35741906498/prereg.md sha1143ca059319a5dd083a18fb08116a36a2a6398fad97c3a78787257cf207c3df frozen",
+    "research/experiments/EXP-RUNTIME-35741906498/freeze.json sha request/spec/prereg hashes"
+  ],
+  "unresolved": [
+    "Same-status body-only permission change (200 vs 200 with different body) remains untested (parent unresolved[3], still listed in result.json:unresolved)",
+    "Production middleware header behavior (Django/Express/FastAPI, gunicorn, nginx, CDN, load-balancer) untested - Flask Werkzeug dev server only",
+    "Concurrency, HTTP/2, TLS, multi-client header handling untested",
+    "Non-degenerate bootstrap CI cannot be obtained on deterministic substrate; header nondeterminism (e.g., CDN edge) needed for genuine inferential CI and sensitivity estimation",
+    "Per-header signal strength gradient unmeasured: all three isolated headers (Cache-Control, ETag, Set-Cookie) produced identical 1.0, so ordering/policy sensitivity for header freshness design remains unknown",
+    "Vary header delta (Accept-Encoding vs Accept-Encoding, Origin) only tested as part of combined E state, not as single-header isolation; discriminability of Vary alone is inferred but not isolated",
+    "Distributed/production freshness and delta-repair testing remains blocked pending production header handling validation",
+    "Effective distinct N=1 means no estimate of robustness to header-value variation magnitude, ordering, whitespace, case folding, or multiple Set-Cookie folding beyond single value tested"
+  ]
+}
