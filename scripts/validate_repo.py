@@ -136,6 +136,7 @@ def main():
     require("--diff-filter=A" in promote, "Product promotion must pin the original verdict creation commit")
     require("post-finalization Product packet mutation" in promote, "Product promotion must reject mutated finalized packets")
     require("git apply --reverse --check" in promote and "SPIDER_PRODUCT_ALREADY_PROMOTED" in promote, "Product promotion must be idempotent across latch-write failures")
+    require("actions: write" in promote and "SPIDER_FACTORY_WAKE_AFTER_PRODUCT_PROMOTION" in promote and "gh workflow run factory-pulse.yml" in promote, "Product promotion must explicitly wake global direction after clearing the promotion latch")
 
     codex = text("scripts/sync_codex.py")
     require("post-finalization mutation detected" in codex and "quarantine.json" in codex, "Codex sync lacks packet integrity quarantine")
