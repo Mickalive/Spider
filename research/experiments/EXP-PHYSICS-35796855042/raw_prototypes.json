@@ -1,0 +1,1082 @@
+{
+  "('A', 0, 0)": {
+    "visual_raw": "{\"x\": 100, \"y\": 180, \"w\": 120, \"h\": 28, \"count\": 6, \"depth\": 3, \"density\": 0.3}",
+    "computed_style_raw": "{\"color\": \"rgb(255, 0, 0)\", \"backgroundColor\": \"rgb(255, 255, 255)\", \"visibility\": \"visible\", \"display\": \"block\", \"opacity\": \"1\"}",
+    "bbox": {
+      "x": 100,
+      "y": 180,
+      "width": 120,
+      "height": 28
+    },
+    "computed_style": {
+      "color": "rgb(255, 0, 0)",
+      "backgroundColor": "rgb(255, 255, 255)",
+      "visibility": "visible",
+      "display": "block",
+      "opacity": "1"
+    },
+    "a11y_serial": "[{\"nodeId\": \"1\", \"ignored\": false, \"role\": {\"type\": \"internalRole\", \"value\": \"RootWebArea\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 144}, \"name\": {\"type\": \"computedString\", \"value\": \"\", \"sources\": [{\"type\": \"relatedElement\", \"attribute\": \"aria-labelledby\"}, {\"type\": \"attribute\", \"attribute\": \"aria-label\"}, {\"type\": \"attribute\", \"attribute\": \"aria-label\", \"superseded\": true}, {\"type\": \"relatedElement\", \"nativeSource\": \"title\"}]}, \"properties\": [{\"name\": \"focusable\", \"value\": {\"type\": \"booleanOrUndefined\", \"value\": true}}, {\"name\": \"focused\", \"value\": {\"type\": \"booleanOrUndefined\", \"value\": true}}, {\"name\": \"url\", \"value\": {\"type\": \"string\", \"value\": \"about:blank\"}}], \"childIds\": [\"2\"], \"backendDOMNodeId\": 1, \"frameId\": \"2945389098F6BC4619B514D2FA71CD8F\"}, {\"nodeId\": \"2\", \"ignored\": true, \"ignoredReasons\": [{\"name\": \"uninteresting\", \"value\": {\"type\": \"boolean\", \"value\": true}}], \"role\": {\"type\": \"role\", \"value\": \"none\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 0}, \"parentId\": \"1\", \"childIds\": [\"5\"], \"backendDOMNodeId\": 2}, {\"nodeId\": \"5\", \"ignored\": true, \"ignoredReasons\": [{\"name\": \"uninteresting\", \"value\": {\"type\": \"boolean\", \"value\": true}}], \"role\": {\"type\": \"role\", \"value\": \"none\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 0}, \"parentId\": \"2\", \"childIds\": [\"6\"], \"backendDOMNodeId\": 5}, {\"nodeId\": \"6\", \"ignored\": false, \"role\": {\"type\": \"role\", \"value\": \"generic\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 88}, \"name\": {\"type\": \"computedString\", \"value\": \"\", \"sources\": [{\"type\": \"relatedElement\", \"attribute\": \"aria-labelledby\"}, {\"type\": \"attribute\", \"attribute\": \"aria-label\"}]}, \"properties\": [], \"parentId\": \"5\", \"childIds\": [\"7\", \"10\"], \"backendDOMNodeId\": 6}, {\"nodeId\": \"7\", \"ignored\": false, \"role\": {\"type\": \"role\", \"value\": \"button\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 9}, \"name\": {\"type\": \"computedString\", \"value\": \"action state 0 variant 0\", \"sources\": [{\"type\": \"relatedElement\", \"attribute\": \"aria-labelledby\"}, {\"type\": \"attribute\", \"value\": {\"type\": \"computedString\", \"value\": \"action state 0 variant 0\"}, \"attribute\": \"aria-label\", \"attributeValue\": {\"type\": \"string\", \"value\": \"action state 0 variant 0\"}}, {\"type\": \"relatedElement\", \"superseded\": true, \"nativeSource\": \"label\"}, {\"type\": \"contents\", \"value\": {\"type\": \"computedString\", \"value\": \"Action 0 A0\"}, \"superseded\": true}, {\"type\": \"attribute\", \"attribute\": \"title\", \"superseded\": true}]}, \"properties\": [{\"name\": \"invalid\", \"value\": {\"type\": \"token\", \"value\": \"false\"}}, {\"name\": \"focusable\", \"value\": {\"type\": \"booleanOrUndefined\", \"value\": true}}], \"parentId\": \"6\", \"childIds\": [\"9\"], \"backendDOMNodeId\": 7}]",
+    "a11y_bytes": 3967,
+    "dom_bytes": 390,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "dom_visual": "VB_10_18_24_6",
+    "dom_computed_style": "CS_red_rgb(255_1",
+    "dom_event_seq_base": "click",
+    "ax_cluster": "AX_a41b_0_0",
+    "ax_bytes_len": 2661,
+    "html": "<html><head><style>body{margin:0;padding:0} #btn{position:absolute; left:100px; top:180px; width:120px; height:28px; color:rgb(255, 0, 0); background:rgb(255,255,255); display:block; visibility:visible; opacity:1.0; border:1px solid black;}</style></head><body><div id=\"root\"><button id=\"btn\" aria-label=\"action state 0 variant 0\">Action 0 A0</button><span>state0</span></div></body></html>"
+  },
+  "('A', 0, 1)": {
+    "visual_raw": "{\"x\": 112, \"y\": 180, \"w\": 124, \"h\": 28, \"count\": 7, \"depth\": 3, \"density\": 0.4}",
+    "computed_style_raw": "{\"color\": \"rgb(255, 0, 0)\", \"backgroundColor\": \"rgb(240, 240, 240)\", \"visibility\": \"visible\", \"display\": \"block\", \"opacity\": \"1\"}",
+    "bbox": {
+      "x": 112,
+      "y": 180,
+      "width": 124,
+      "height": 28
+    },
+    "computed_style": {
+      "color": "rgb(255, 0, 0)",
+      "backgroundColor": "rgb(240, 240, 240)",
+      "visibility": "visible",
+      "display": "block",
+      "opacity": "1"
+    },
+    "a11y_serial": "[{\"nodeId\": \"1\", \"ignored\": false, \"role\": {\"type\": \"internalRole\", \"value\": \"RootWebArea\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 144}, \"name\": {\"type\": \"computedString\", \"value\": \"\", \"sources\": [{\"type\": \"relatedElement\", \"attribute\": \"aria-labelledby\"}, {\"type\": \"attribute\", \"attribute\": \"aria-label\"}, {\"type\": \"attribute\", \"attribute\": \"aria-label\", \"superseded\": true}, {\"type\": \"relatedElement\", \"nativeSource\": \"title\"}]}, \"properties\": [{\"name\": \"focusable\", \"value\": {\"type\": \"booleanOrUndefined\", \"value\": true}}, {\"name\": \"focused\", \"value\": {\"type\": \"booleanOrUndefined\", \"value\": true}}, {\"name\": \"url\", \"value\": {\"type\": \"string\", \"value\": \"about:blank\"}}], \"childIds\": [\"12\"], \"backendDOMNodeId\": 1, \"frameId\": \"2945389098F6BC4619B514D2FA71CD8F\"}, {\"nodeId\": \"12\", \"ignored\": true, \"ignoredReasons\": [{\"name\": \"uninteresting\", \"value\": {\"type\": \"boolean\", \"value\": true}}], \"role\": {\"type\": \"role\", \"value\": \"none\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 0}, \"parentId\": \"1\", \"childIds\": [\"15\"], \"backendDOMNodeId\": 12}, {\"nodeId\": \"15\", \"ignored\": true, \"ignoredReasons\": [{\"name\": \"uninteresting\", \"value\": {\"type\": \"boolean\", \"value\": true}}], \"role\": {\"type\": \"role\", \"value\": \"none\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 0}, \"parentId\": \"12\", \"childIds\": [\"16\"], \"backendDOMNodeId\": 15}, {\"nodeId\": \"16\", \"ignored\": false, \"role\": {\"type\": \"role\", \"value\": \"generic\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 88}, \"name\": {\"type\": \"computedString\", \"value\": \"\", \"sources\": [{\"type\": \"relatedElement\", \"attribute\": \"aria-labelledby\"}, {\"type\": \"attribute\", \"attribute\": \"aria-label\"}]}, \"properties\": [], \"parentId\": \"15\", \"childIds\": [\"17\", \"19\"], \"backendDOMNodeId\": 16}, {\"nodeId\": \"17\", \"ignored\": false, \"role\": {\"type\": \"role\", \"value\": \"button\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 9}, \"name\": {\"type\": \"computedString\", \"value\": \"action state 0 variant 1\", \"sources\": [{\"type\": \"relatedElement\", \"attribute\": \"aria-labelledby\"}, {\"type\": \"attribute\", \"value\": {\"type\": \"computedString\", \"value\": \"action state 0 variant 1\"}, \"attribute\": \"aria-label\", \"attributeValue\": {\"type\": \"string\", \"value\": \"action state 0 variant 1\"}}, {\"type\": \"relatedElement\", \"superseded\": true, \"nativeSource\": \"label\"}, {\"type\": \"contents\", \"value\": {\"type\": \"computedString\", \"value\": \"Action 0 A1\"}, \"superseded\": true}, {\"type\": \"attribute\", \"attribute\": \"title\", \"superseded\": true}]}, \"properties\": [{\"name\": \"invalid\", \"value\": {\"type\": \"token\", \"value\": \"false\"}}, {\"name\": \"focusable\", \"value\": {\"type\": \"booleanOrUndefined\", \"value\": true}}], \"parentId\": \"16\", \"childIds\": [\"20\"], \"backendDOMNodeId\": 17}]",
+    "a11y_bytes": 3988,
+    "dom_bytes": 390,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "dom_visual": "VB_11_18_24_7",
+    "dom_computed_style": "CS_red_rgb(240_1",
+    "dom_event_seq_base": "click",
+    "ax_cluster": "AX_9bff_0_1",
+    "ax_bytes_len": 2677,
+    "html": "<html><head><style>body{margin:0;padding:0} #btn{position:absolute; left:112px; top:180px; width:124px; height:28px; color:rgb(255, 0, 0); background:rgb(240,240,240); display:block; visibility:visible; opacity:1.0; border:1px solid black;}</style></head><body><div id=\"root\"><button id=\"btn\" aria-label=\"action state 0 variant 1\">Action 0 A1</button><span>state0</span></div></body></html>"
+  },
+  "('A', 0, 2)": {
+    "visual_raw": "{\"x\": 124, \"y\": 180, \"w\": 128, \"h\": 28, \"count\": 8, \"depth\": 3, \"density\": 0.5}",
+    "computed_style_raw": "{\"color\": \"rgb(255, 0, 0)\", \"backgroundColor\": \"rgb(240, 240, 240)\", \"visibility\": \"visible\", \"display\": \"block\", \"opacity\": \"1\"}",
+    "bbox": {
+      "x": 124,
+      "y": 180,
+      "width": 128,
+      "height": 28
+    },
+    "computed_style": {
+      "color": "rgb(255, 0, 0)",
+      "backgroundColor": "rgb(240, 240, 240)",
+      "visibility": "visible",
+      "display": "block",
+      "opacity": "1"
+    },
+    "a11y_serial": "[{\"nodeId\": \"1\", \"ignored\": false, \"role\": {\"type\": \"internalRole\", \"value\": \"RootWebArea\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 144}, \"name\": {\"type\": \"computedString\", \"value\": \"\", \"sources\": [{\"type\": \"relatedElement\", \"attribute\": \"aria-labelledby\"}, {\"type\": \"attribute\", \"attribute\": \"aria-label\"}, {\"type\": \"attribute\", \"attribute\": \"aria-label\", \"superseded\": true}, {\"type\": \"relatedElement\", \"nativeSource\": \"title\"}]}, \"properties\": [{\"name\": \"focusable\", \"value\": {\"type\": \"booleanOrUndefined\", \"value\": true}}, {\"name\": \"focused\", \"value\": {\"type\": \"booleanOrUndefined\", \"value\": true}}, {\"name\": \"url\", \"value\": {\"type\": \"string\", \"value\": \"about:blank\"}}], \"childIds\": [\"22\"], \"backendDOMNodeId\": 1, \"frameId\": \"2945389098F6BC4619B514D2FA71CD8F\"}, {\"nodeId\": \"22\", \"ignored\": true, \"ignoredReasons\": [{\"name\": \"uninteresting\", \"value\": {\"type\": \"boolean\", \"value\": true}}], \"role\": {\"type\": \"role\", \"value\": \"none\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 0}, \"parentId\": \"1\", \"childIds\": [\"25\"], \"backendDOMNodeId\": 22}, {\"nodeId\": \"25\", \"ignored\": true, \"ignoredReasons\": [{\"name\": \"uninteresting\", \"value\": {\"type\": \"boolean\", \"value\": true}}], \"role\": {\"type\": \"role\", \"value\": \"none\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 0}, \"parentId\": \"22\", \"childIds\": [\"26\"], \"backendDOMNodeId\": 25}, {\"nodeId\": \"26\", \"ignored\": false, \"role\": {\"type\": \"role\", \"value\": \"generic\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 88}, \"name\": {\"type\": \"computedString\", \"value\": \"\", \"sources\": [{\"type\": \"relatedElement\", \"attribute\": \"aria-labelledby\"}, {\"type\": \"attribute\", \"attribute\": \"aria-label\"}]}, \"properties\": [], \"parentId\": \"25\", \"childIds\": [\"27\", \"29\"], \"backendDOMNodeId\": 26}, {\"nodeId\": \"27\", \"ignored\": false, \"role\": {\"type\": \"role\", \"value\": \"button\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 9}, \"name\": {\"type\": \"computedString\", \"value\": \"action state 0 variant 2\", \"sources\": [{\"type\": \"relatedElement\", \"attribute\": \"aria-labelledby\"}, {\"type\": \"attribute\", \"value\": {\"type\": \"computedString\", \"value\": \"action state 0 variant 2\"}, \"attribute\": \"aria-label\", \"attributeValue\": {\"type\": \"string\", \"value\": \"action state 0 variant 2\"}}, {\"type\": \"relatedElement\", \"superseded\": true, \"nativeSource\": \"label\"}, {\"type\": \"contents\", \"value\": {\"type\": \"computedString\", \"value\": \"Action 0 A2\"}, \"superseded\": true}, {\"type\": \"attribute\", \"attribute\": \"title\", \"superseded\": true}]}, \"properties\": [{\"name\": \"invalid\", \"value\": {\"type\": \"token\", \"value\": \"false\"}}, {\"name\": \"focusable\", \"value\": {\"type\": \"booleanOrUndefined\", \"value\": true}}], \"parentId\": \"26\", \"childIds\": [\"30\"], \"backendDOMNodeId\": 27}]",
+    "a11y_bytes": 3988,
+    "dom_bytes": 390,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "dom_visual": "VB_12_18_25_8",
+    "dom_computed_style": "CS_red_rgb(240_1",
+    "dom_event_seq_base": "click",
+    "ax_cluster": "AX_45cc_0_2",
+    "ax_bytes_len": 2677,
+    "html": "<html><head><style>body{margin:0;padding:0} #btn{position:absolute; left:124px; top:180px; width:128px; height:28px; color:rgb(255, 0, 0); background:rgb(240,240,240); display:block; visibility:visible; opacity:1.0; border:1px solid black;}</style></head><body><div id=\"root\"><button id=\"btn\" aria-label=\"action state 0 variant 2\">Action 0 A2</button><span>state0</span></div></body></html>"
+  },
+  "('B', 0, 0)": {
+    "visual_raw": "{\"x\": 150, \"y\": 180, \"w\": 132, \"h\": 28, \"count\": 9, \"depth\": 3, \"density\": 0.3}",
+    "computed_style_raw": "{\"color\": \"rgb(0, 0, 255)\", \"backgroundColor\": \"rgb(255, 255, 255)\", \"visibility\": \"visible\", \"display\": \"block\", \"opacity\": \"1\"}",
+    "bbox": {
+      "x": 150,
+      "y": 180,
+      "width": 132,
+      "height": 28
+    },
+    "computed_style": {
+      "color": "rgb(0, 0, 255)",
+      "backgroundColor": "rgb(255, 255, 255)",
+      "visibility": "visible",
+      "display": "block",
+      "opacity": "1"
+    },
+    "a11y_serial": "[{\"nodeId\": \"1\", \"ignored\": false, \"role\": {\"type\": \"internalRole\", \"value\": \"RootWebArea\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 144}, \"name\": {\"type\": \"computedString\", \"value\": \"\", \"sources\": [{\"type\": \"relatedElement\", \"attribute\": \"aria-labelledby\"}, {\"type\": \"attribute\", \"attribute\": \"aria-label\"}, {\"type\": \"attribute\", \"attribute\": \"aria-label\", \"superseded\": true}, {\"type\": \"relatedElement\", \"nativeSource\": \"title\"}]}, \"properties\": [{\"name\": \"focusable\", \"value\": {\"type\": \"booleanOrUndefined\", \"value\": true}}, {\"name\": \"focused\", \"value\": {\"type\": \"booleanOrUndefined\", \"value\": true}}, {\"name\": \"url\", \"value\": {\"type\": \"string\", \"value\": \"about:blank\"}}], \"childIds\": [\"32\"], \"backendDOMNodeId\": 1, \"frameId\": \"2945389098F6BC4619B514D2FA71CD8F\"}, {\"nodeId\": \"32\", \"ignored\": true, \"ignoredReasons\": [{\"name\": \"uninteresting\", \"value\": {\"type\": \"boolean\", \"value\": true}}], \"role\": {\"type\": \"role\", \"value\": \"none\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 0}, \"parentId\": \"1\", \"childIds\": [\"35\"], \"backendDOMNodeId\": 32}, {\"nodeId\": \"35\", \"ignored\": true, \"ignoredReasons\": [{\"name\": \"uninteresting\", \"value\": {\"type\": \"boolean\", \"value\": true}}], \"role\": {\"type\": \"role\", \"value\": \"none\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 0}, \"parentId\": \"32\", \"childIds\": [\"36\"], \"backendDOMNodeId\": 35}, {\"nodeId\": \"36\", \"ignored\": false, \"role\": {\"type\": \"role\", \"value\": \"generic\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 88}, \"name\": {\"type\": \"computedString\", \"value\": \"\", \"sources\": [{\"type\": \"relatedElement\", \"attribute\": \"aria-labelledby\"}, {\"type\": \"attribute\", \"attribute\": \"aria-label\"}]}, \"properties\": [], \"parentId\": \"35\", \"childIds\": [\"37\", \"39\"], \"backendDOMNodeId\": 36}, {\"nodeId\": \"37\", \"ignored\": false, \"role\": {\"type\": \"role\", \"value\": \"button\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 9}, \"name\": {\"type\": \"computedString\", \"value\": \"action state 0 variant 3\", \"sources\": [{\"type\": \"relatedElement\", \"attribute\": \"aria-labelledby\"}, {\"type\": \"attribute\", \"value\": {\"type\": \"computedString\", \"value\": \"action state 0 variant 3\"}, \"attribute\": \"aria-label\", \"attributeValue\": {\"type\": \"string\", \"value\": \"action state 0 variant 3\"}}, {\"type\": \"relatedElement\", \"superseded\": true, \"nativeSource\": \"label\"}, {\"type\": \"contents\", \"value\": {\"type\": \"computedString\", \"value\": \"Action 0 B0\"}, \"superseded\": true}, {\"type\": \"attribute\", \"attribute\": \"title\", \"superseded\": true}]}, \"properties\": [{\"name\": \"invalid\", \"value\": {\"type\": \"token\", \"value\": \"false\"}}, {\"name\": \"focusable\", \"value\": {\"type\": \"booleanOrUndefined\", \"value\": true}}], \"parentId\": \"36\", \"childIds\": [\"40\"], \"backendDOMNodeId\": 37}]",
+    "a11y_bytes": 3988,
+    "dom_bytes": 390,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "dom_visual": "VB_15_18_26_9",
+    "dom_computed_style": "CS_blue_rgb(255_1",
+    "dom_event_seq_base": "click",
+    "ax_cluster": "AX_7934_0_3",
+    "ax_bytes_len": 2677,
+    "html": "<html><head><style>body{margin:0;padding:0} #btn{position:absolute; left:150px; top:180px; width:132px; height:28px; color:rgb(0, 0, 255); background:rgb(255,255,255); display:block; visibility:visible; opacity:1.0; border:1px solid black;}</style></head><body><div id=\"root\"><button id=\"btn\" aria-label=\"action state 0 variant 3\">Action 0 B0</button><span>state0</span></div></body></html>"
+  },
+  "('B', 0, 1)": {
+    "visual_raw": "{\"x\": 162, \"y\": 180, \"w\": 136, \"h\": 28, \"count\": 10, \"depth\": 3, \"density\": 0.4}",
+    "computed_style_raw": "{\"color\": \"rgb(0, 0, 255)\", \"backgroundColor\": \"rgb(240, 240, 240)\", \"visibility\": \"visible\", \"display\": \"block\", \"opacity\": \"1\"}",
+    "bbox": {
+      "x": 162,
+      "y": 180,
+      "width": 136,
+      "height": 28
+    },
+    "computed_style": {
+      "color": "rgb(0, 0, 255)",
+      "backgroundColor": "rgb(240, 240, 240)",
+      "visibility": "visible",
+      "display": "block",
+      "opacity": "1"
+    },
+    "a11y_serial": "[{\"nodeId\": \"1\", \"ignored\": false, \"role\": {\"type\": \"internalRole\", \"value\": \"RootWebArea\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 144}, \"name\": {\"type\": \"computedString\", \"value\": \"\", \"sources\": [{\"type\": \"relatedElement\", \"attribute\": \"aria-labelledby\"}, {\"type\": \"attribute\", \"attribute\": \"aria-label\"}, {\"type\": \"attribute\", \"attribute\": \"aria-label\", \"superseded\": true}, {\"type\": \"relatedElement\", \"nativeSource\": \"title\"}]}, \"properties\": [{\"name\": \"focusable\", \"value\": {\"type\": \"booleanOrUndefined\", \"value\": true}}, {\"name\": \"focused\", \"value\": {\"type\": \"booleanOrUndefined\", \"value\": true}}, {\"name\": \"url\", \"value\": {\"type\": \"string\", \"value\": \"about:blank\"}}], \"childIds\": [\"42\"], \"backendDOMNodeId\": 1, \"frameId\": \"2945389098F6BC4619B514D2FA71CD8F\"}, {\"nodeId\": \"42\", \"ignored\": true, \"ignoredReasons\": [{\"name\": \"uninteresting\", \"value\": {\"type\": \"boolean\", \"value\": true}}], \"role\": {\"type\": \"role\", \"value\": \"none\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 0}, \"parentId\": \"1\", \"childIds\": [\"45\"], \"backendDOMNodeId\": 42}, {\"nodeId\": \"45\", \"ignored\": true, \"ignoredReasons\": [{\"name\": \"uninteresting\", \"value\": {\"type\": \"boolean\", \"value\": true}}], \"role\": {\"type\": \"role\", \"value\": \"none\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 0}, \"parentId\": \"42\", \"childIds\": [\"46\"], \"backendDOMNodeId\": 45}, {\"nodeId\": \"46\", \"ignored\": false, \"role\": {\"type\": \"role\", \"value\": \"generic\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 88}, \"name\": {\"type\": \"computedString\", \"value\": \"\", \"sources\": [{\"type\": \"relatedElement\", \"attribute\": \"aria-labelledby\"}, {\"type\": \"attribute\", \"attribute\": \"aria-label\"}]}, \"properties\": [], \"parentId\": \"45\", \"childIds\": [\"47\", \"49\"], \"backendDOMNodeId\": 46}, {\"nodeId\": \"47\", \"ignored\": false, \"role\": {\"type\": \"role\", \"value\": \"button\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 9}, \"name\": {\"type\": \"computedString\", \"value\": \"action state 0 variant 4\", \"sources\": [{\"type\": \"relatedElement\", \"attribute\": \"aria-labelledby\"}, {\"type\": \"attribute\", \"value\": {\"type\": \"computedString\", \"value\": \"action state 0 variant 4\"}, \"attribute\": \"aria-label\", \"attributeValue\": {\"type\": \"string\", \"value\": \"action state 0 variant 4\"}}, {\"type\": \"relatedElement\", \"superseded\": true, \"nativeSource\": \"label\"}, {\"type\": \"contents\", \"value\": {\"type\": \"computedString\", \"value\": \"Action 0 B1\"}, \"superseded\": true}, {\"type\": \"attribute\", \"attribute\": \"title\", \"superseded\": true}]}, \"properties\": [{\"name\": \"invalid\", \"value\": {\"type\": \"token\", \"value\": \"false\"}}, {\"name\": \"focusable\", \"value\": {\"type\": \"booleanOrUndefined\", \"value\": true}}], \"parentId\": \"46\", \"childIds\": [\"50\"], \"backendDOMNodeId\": 47}]",
+    "a11y_bytes": 3988,
+    "dom_bytes": 390,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "dom_visual": "VB_16_18_27_10",
+    "dom_computed_style": "CS_blue_rgb(240_1",
+    "dom_event_seq_base": "click",
+    "ax_cluster": "AX_7299_0_0",
+    "ax_bytes_len": 2677,
+    "html": "<html><head><style>body{margin:0;padding:0} #btn{position:absolute; left:162px; top:180px; width:136px; height:28px; color:rgb(0, 0, 255); background:rgb(240,240,240); display:block; visibility:visible; opacity:1.0; border:1px solid black;}</style></head><body><div id=\"root\"><button id=\"btn\" aria-label=\"action state 0 variant 4\">Action 0 B1</button><span>state0</span></div></body></html>"
+  },
+  "('B', 0, 2)": {
+    "visual_raw": "{\"x\": 174, \"y\": 180, \"w\": 140, \"h\": 28, \"count\": 11, \"depth\": 3, \"density\": 0.5}",
+    "computed_style_raw": "{\"color\": \"rgb(0, 0, 255)\", \"backgroundColor\": \"rgb(240, 240, 240)\", \"visibility\": \"visible\", \"display\": \"block\", \"opacity\": \"1\"}",
+    "bbox": {
+      "x": 174,
+      "y": 180,
+      "width": 140,
+      "height": 28
+    },
+    "computed_style": {
+      "color": "rgb(0, 0, 255)",
+      "backgroundColor": "rgb(240, 240, 240)",
+      "visibility": "visible",
+      "display": "block",
+      "opacity": "1"
+    },
+    "a11y_serial": "[{\"nodeId\": \"1\", \"ignored\": false, \"role\": {\"type\": \"internalRole\", \"value\": \"RootWebArea\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 144}, \"name\": {\"type\": \"computedString\", \"value\": \"\", \"sources\": [{\"type\": \"relatedElement\", \"attribute\": \"aria-labelledby\"}, {\"type\": \"attribute\", \"attribute\": \"aria-label\"}, {\"type\": \"attribute\", \"attribute\": \"aria-label\", \"superseded\": true}, {\"type\": \"relatedElement\", \"nativeSource\": \"title\"}]}, \"properties\": [{\"name\": \"focusable\", \"value\": {\"type\": \"booleanOrUndefined\", \"value\": true}}, {\"name\": \"focused\", \"value\": {\"type\": \"booleanOrUndefined\", \"value\": true}}, {\"name\": \"url\", \"value\": {\"type\": \"string\", \"value\": \"about:blank\"}}], \"childIds\": [\"52\"], \"backendDOMNodeId\": 1, \"frameId\": \"2945389098F6BC4619B514D2FA71CD8F\"}, {\"nodeId\": \"52\", \"ignored\": true, \"ignoredReasons\": [{\"name\": \"uninteresting\", \"value\": {\"type\": \"boolean\", \"value\": true}}], \"role\": {\"type\": \"role\", \"value\": \"none\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 0}, \"parentId\": \"1\", \"childIds\": [\"55\"], \"backendDOMNodeId\": 52}, {\"nodeId\": \"55\", \"ignored\": true, \"ignoredReasons\": [{\"name\": \"uninteresting\", \"value\": {\"type\": \"boolean\", \"value\": true}}], \"role\": {\"type\": \"role\", \"value\": \"none\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 0}, \"parentId\": \"52\", \"childIds\": [\"56\"], \"backendDOMNodeId\": 55}, {\"nodeId\": \"56\", \"ignored\": false, \"role\": {\"type\": \"role\", \"value\": \"generic\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 88}, \"name\": {\"type\": \"computedString\", \"value\": \"\", \"sources\": [{\"type\": \"relatedElement\", \"attribute\": \"aria-labelledby\"}, {\"type\": \"attribute\", \"attribute\": \"aria-label\"}]}, \"properties\": [], \"parentId\": \"55\", \"childIds\": [\"57\", \"59\"], \"backendDOMNodeId\": 56}, {\"nodeId\": \"57\", \"ignored\": false, \"role\": {\"type\": \"role\", \"value\": \"button\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 9}, \"name\": {\"type\": \"computedString\", \"value\": \"action state 0 variant 5\", \"sources\": [{\"type\": \"relatedElement\", \"attribute\": \"aria-labelledby\"}, {\"type\": \"attribute\", \"value\": {\"type\": \"computedString\", \"value\": \"action state 0 variant 5\"}, \"attribute\": \"aria-label\", \"attributeValue\": {\"type\": \"string\", \"value\": \"action state 0 variant 5\"}}, {\"type\": \"relatedElement\", \"superseded\": true, \"nativeSource\": \"label\"}, {\"type\": \"contents\", \"value\": {\"type\": \"computedString\", \"value\": \"Action 0 B2\"}, \"superseded\": true}, {\"type\": \"attribute\", \"attribute\": \"title\", \"superseded\": true}]}, \"properties\": [{\"name\": \"invalid\", \"value\": {\"type\": \"token\", \"value\": \"false\"}}, {\"name\": \"focusable\", \"value\": {\"type\": \"booleanOrUndefined\", \"value\": true}}], \"parentId\": \"56\", \"childIds\": [\"60\"], \"backendDOMNodeId\": 57}]",
+    "a11y_bytes": 3988,
+    "dom_bytes": 390,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "dom_visual": "VB_17_18_28_11",
+    "dom_computed_style": "CS_blue_rgb(240_1",
+    "dom_event_seq_base": "click",
+    "ax_cluster": "AX_7f8d_0_1",
+    "ax_bytes_len": 2677,
+    "html": "<html><head><style>body{margin:0;padding:0} #btn{position:absolute; left:174px; top:180px; width:140px; height:28px; color:rgb(0, 0, 255); background:rgb(240,240,240); display:block; visibility:visible; opacity:1.0; border:1px solid black;}</style></head><body><div id=\"root\"><button id=\"btn\" aria-label=\"action state 0 variant 5\">Action 0 B2</button><span>state0</span></div></body></html>"
+  },
+  "('A', 1, 0)": {
+    "visual_raw": "{\"x\": 100, \"y\": 190, \"w\": 120, \"h\": 28, \"count\": 6, \"depth\": 3, \"density\": 0.3}",
+    "computed_style_raw": "{\"color\": \"rgb(255, 0, 0)\", \"backgroundColor\": \"rgb(255, 255, 255)\", \"visibility\": \"visible\", \"display\": \"block\", \"opacity\": \"1\"}",
+    "bbox": {
+      "x": 100,
+      "y": 190,
+      "width": 120,
+      "height": 28
+    },
+    "computed_style": {
+      "color": "rgb(255, 0, 0)",
+      "backgroundColor": "rgb(255, 255, 255)",
+      "visibility": "visible",
+      "display": "block",
+      "opacity": "1"
+    },
+    "a11y_serial": "[{\"nodeId\": \"1\", \"ignored\": false, \"role\": {\"type\": \"internalRole\", \"value\": \"RootWebArea\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 144}, \"name\": {\"type\": \"computedString\", \"value\": \"\", \"sources\": [{\"type\": \"relatedElement\", \"attribute\": \"aria-labelledby\"}, {\"type\": \"attribute\", \"attribute\": \"aria-label\"}, {\"type\": \"attribute\", \"attribute\": \"aria-label\", \"superseded\": true}, {\"type\": \"relatedElement\", \"nativeSource\": \"title\"}]}, \"properties\": [{\"name\": \"focusable\", \"value\": {\"type\": \"booleanOrUndefined\", \"value\": true}}, {\"name\": \"focused\", \"value\": {\"type\": \"booleanOrUndefined\", \"value\": true}}, {\"name\": \"url\", \"value\": {\"type\": \"string\", \"value\": \"about:blank\"}}], \"childIds\": [\"62\"], \"backendDOMNodeId\": 1, \"frameId\": \"2945389098F6BC4619B514D2FA71CD8F\"}, {\"nodeId\": \"62\", \"ignored\": true, \"ignoredReasons\": [{\"name\": \"uninteresting\", \"value\": {\"type\": \"boolean\", \"value\": true}}], \"role\": {\"type\": \"role\", \"value\": \"none\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 0}, \"parentId\": \"1\", \"childIds\": [\"65\"], \"backendDOMNodeId\": 62}, {\"nodeId\": \"65\", \"ignored\": true, \"ignoredReasons\": [{\"name\": \"uninteresting\", \"value\": {\"type\": \"boolean\", \"value\": true}}], \"role\": {\"type\": \"role\", \"value\": \"none\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 0}, \"parentId\": \"62\", \"childIds\": [\"66\"], \"backendDOMNodeId\": 65}, {\"nodeId\": \"66\", \"ignored\": false, \"role\": {\"type\": \"role\", \"value\": \"generic\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 88}, \"name\": {\"type\": \"computedString\", \"value\": \"\", \"sources\": [{\"type\": \"relatedElement\", \"attribute\": \"aria-labelledby\"}, {\"type\": \"attribute\", \"attribute\": \"aria-label\"}]}, \"properties\": [], \"parentId\": \"65\", \"childIds\": [\"67\", \"69\"], \"backendDOMNodeId\": 66}, {\"nodeId\": \"67\", \"ignored\": false, \"role\": {\"type\": \"role\", \"value\": \"button\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 9}, \"name\": {\"type\": \"computedString\", \"value\": \"action state 1 variant 0\", \"sources\": [{\"type\": \"relatedElement\", \"attribute\": \"aria-labelledby\"}, {\"type\": \"attribute\", \"value\": {\"type\": \"computedString\", \"value\": \"action state 1 variant 0\"}, \"attribute\": \"aria-label\", \"attributeValue\": {\"type\": \"string\", \"value\": \"action state 1 variant 0\"}}, {\"type\": \"relatedElement\", \"superseded\": true, \"nativeSource\": \"label\"}, {\"type\": \"contents\", \"value\": {\"type\": \"computedString\", \"value\": \"Action 1 A0\"}, \"superseded\": true}, {\"type\": \"attribute\", \"attribute\": \"title\", \"superseded\": true}]}, \"properties\": [{\"name\": \"invalid\", \"value\": {\"type\": \"token\", \"value\": \"false\"}}, {\"name\": \"focusable\", \"value\": {\"type\": \"booleanOrUndefined\", \"value\": true}}], \"parentId\": \"66\", \"childIds\": [\"70\"], \"backendDOMNodeId\": 67}]",
+    "a11y_bytes": 3988,
+    "dom_bytes": 390,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "dom_visual": "VB_10_19_24_6",
+    "dom_computed_style": "CS_red_rgb(255_1",
+    "dom_event_seq_base": "click",
+    "ax_cluster": "AX_2fab_1_0",
+    "ax_bytes_len": 2677,
+    "html": "<html><head><style>body{margin:0;padding:0} #btn{position:absolute; left:100px; top:190px; width:120px; height:28px; color:rgb(255, 0, 0); background:rgb(255,255,255); display:block; visibility:visible; opacity:1.0; border:1px solid black;}</style></head><body><div id=\"root\"><button id=\"btn\" aria-label=\"action state 1 variant 0\">Action 1 A0</button><span>state1</span></div></body></html>"
+  },
+  "('A', 1, 1)": {
+    "visual_raw": "{\"x\": 112, \"y\": 190, \"w\": 124, \"h\": 28, \"count\": 7, \"depth\": 3, \"density\": 0.4}",
+    "computed_style_raw": "{\"color\": \"rgb(255, 0, 0)\", \"backgroundColor\": \"rgb(240, 240, 240)\", \"visibility\": \"visible\", \"display\": \"block\", \"opacity\": \"1\"}",
+    "bbox": {
+      "x": 112,
+      "y": 190,
+      "width": 124,
+      "height": 28
+    },
+    "computed_style": {
+      "color": "rgb(255, 0, 0)",
+      "backgroundColor": "rgb(240, 240, 240)",
+      "visibility": "visible",
+      "display": "block",
+      "opacity": "1"
+    },
+    "a11y_serial": "[{\"nodeId\": \"1\", \"ignored\": false, \"role\": {\"type\": \"internalRole\", \"value\": \"RootWebArea\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 144}, \"name\": {\"type\": \"computedString\", \"value\": \"\", \"sources\": [{\"type\": \"relatedElement\", \"attribute\": \"aria-labelledby\"}, {\"type\": \"attribute\", \"attribute\": \"aria-label\"}, {\"type\": \"attribute\", \"attribute\": \"aria-label\", \"superseded\": true}, {\"type\": \"relatedElement\", \"nativeSource\": \"title\"}]}, \"properties\": [{\"name\": \"focusable\", \"value\": {\"type\": \"booleanOrUndefined\", \"value\": true}}, {\"name\": \"focused\", \"value\": {\"type\": \"booleanOrUndefined\", \"value\": true}}, {\"name\": \"url\", \"value\": {\"type\": \"string\", \"value\": \"about:blank\"}}], \"childIds\": [\"72\"], \"backendDOMNodeId\": 1, \"frameId\": \"2945389098F6BC4619B514D2FA71CD8F\"}, {\"nodeId\": \"72\", \"ignored\": true, \"ignoredReasons\": [{\"name\": \"uninteresting\", \"value\": {\"type\": \"boolean\", \"value\": true}}], \"role\": {\"type\": \"role\", \"value\": \"none\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 0}, \"parentId\": \"1\", \"childIds\": [\"75\"], \"backendDOMNodeId\": 72}, {\"nodeId\": \"75\", \"ignored\": true, \"ignoredReasons\": [{\"name\": \"uninteresting\", \"value\": {\"type\": \"boolean\", \"value\": true}}], \"role\": {\"type\": \"role\", \"value\": \"none\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 0}, \"parentId\": \"72\", \"childIds\": [\"76\"], \"backendDOMNodeId\": 75}, {\"nodeId\": \"76\", \"ignored\": false, \"role\": {\"type\": \"role\", \"value\": \"generic\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 88}, \"name\": {\"type\": \"computedString\", \"value\": \"\", \"sources\": [{\"type\": \"relatedElement\", \"attribute\": \"aria-labelledby\"}, {\"type\": \"attribute\", \"attribute\": \"aria-label\"}]}, \"properties\": [], \"parentId\": \"75\", \"childIds\": [\"77\", \"79\"], \"backendDOMNodeId\": 76}, {\"nodeId\": \"77\", \"ignored\": false, \"role\": {\"type\": \"role\", \"value\": \"button\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 9}, \"name\": {\"type\": \"computedString\", \"value\": \"action state 1 variant 1\", \"sources\": [{\"type\": \"relatedElement\", \"attribute\": \"aria-labelledby\"}, {\"type\": \"attribute\", \"value\": {\"type\": \"computedString\", \"value\": \"action state 1 variant 1\"}, \"attribute\": \"aria-label\", \"attributeValue\": {\"type\": \"string\", \"value\": \"action state 1 variant 1\"}}, {\"type\": \"relatedElement\", \"superseded\": true, \"nativeSource\": \"label\"}, {\"type\": \"contents\", \"value\": {\"type\": \"computedString\", \"value\": \"Action 1 A1\"}, \"superseded\": true}, {\"type\": \"attribute\", \"attribute\": \"title\", \"superseded\": true}]}, \"properties\": [{\"name\": \"invalid\", \"value\": {\"type\": \"token\", \"value\": \"false\"}}, {\"name\": \"focusable\", \"value\": {\"type\": \"booleanOrUndefined\", \"value\": true}}], \"parentId\": \"76\", \"childIds\": [\"80\"], \"backendDOMNodeId\": 77}]",
+    "a11y_bytes": 3988,
+    "dom_bytes": 390,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "dom_visual": "VB_11_19_24_7",
+    "dom_computed_style": "CS_red_rgb(240_1",
+    "dom_event_seq_base": "click",
+    "ax_cluster": "AX_520f_1_1",
+    "ax_bytes_len": 2677,
+    "html": "<html><head><style>body{margin:0;padding:0} #btn{position:absolute; left:112px; top:190px; width:124px; height:28px; color:rgb(255, 0, 0); background:rgb(240,240,240); display:block; visibility:visible; opacity:1.0; border:1px solid black;}</style></head><body><div id=\"root\"><button id=\"btn\" aria-label=\"action state 1 variant 1\">Action 1 A1</button><span>state1</span></div></body></html>"
+  },
+  "('A', 1, 2)": {
+    "visual_raw": "{\"x\": 124, \"y\": 190, \"w\": 128, \"h\": 28, \"count\": 8, \"depth\": 3, \"density\": 0.5}",
+    "computed_style_raw": "{\"color\": \"rgb(255, 0, 0)\", \"backgroundColor\": \"rgb(240, 240, 240)\", \"visibility\": \"visible\", \"display\": \"block\", \"opacity\": \"1\"}",
+    "bbox": {
+      "x": 124,
+      "y": 190,
+      "width": 128,
+      "height": 28
+    },
+    "computed_style": {
+      "color": "rgb(255, 0, 0)",
+      "backgroundColor": "rgb(240, 240, 240)",
+      "visibility": "visible",
+      "display": "block",
+      "opacity": "1"
+    },
+    "a11y_serial": "[{\"nodeId\": \"1\", \"ignored\": false, \"role\": {\"type\": \"internalRole\", \"value\": \"RootWebArea\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 144}, \"name\": {\"type\": \"computedString\", \"value\": \"\", \"sources\": [{\"type\": \"relatedElement\", \"attribute\": \"aria-labelledby\"}, {\"type\": \"attribute\", \"attribute\": \"aria-label\"}, {\"type\": \"attribute\", \"attribute\": \"aria-label\", \"superseded\": true}, {\"type\": \"relatedElement\", \"nativeSource\": \"title\"}]}, \"properties\": [{\"name\": \"focusable\", \"value\": {\"type\": \"booleanOrUndefined\", \"value\": true}}, {\"name\": \"focused\", \"value\": {\"type\": \"booleanOrUndefined\", \"value\": true}}, {\"name\": \"url\", \"value\": {\"type\": \"string\", \"value\": \"about:blank\"}}], \"childIds\": [\"82\"], \"backendDOMNodeId\": 1, \"frameId\": \"2945389098F6BC4619B514D2FA71CD8F\"}, {\"nodeId\": \"82\", \"ignored\": true, \"ignoredReasons\": [{\"name\": \"uninteresting\", \"value\": {\"type\": \"boolean\", \"value\": true}}], \"role\": {\"type\": \"role\", \"value\": \"none\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 0}, \"parentId\": \"1\", \"childIds\": [\"85\"], \"backendDOMNodeId\": 82}, {\"nodeId\": \"85\", \"ignored\": true, \"ignoredReasons\": [{\"name\": \"uninteresting\", \"value\": {\"type\": \"boolean\", \"value\": true}}], \"role\": {\"type\": \"role\", \"value\": \"none\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 0}, \"parentId\": \"82\", \"childIds\": [\"86\"], \"backendDOMNodeId\": 85}, {\"nodeId\": \"86\", \"ignored\": false, \"role\": {\"type\": \"role\", \"value\": \"generic\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 88}, \"name\": {\"type\": \"computedString\", \"value\": \"\", \"sources\": [{\"type\": \"relatedElement\", \"attribute\": \"aria-labelledby\"}, {\"type\": \"attribute\", \"attribute\": \"aria-label\"}]}, \"properties\": [], \"parentId\": \"85\", \"childIds\": [\"87\", \"89\"], \"backendDOMNodeId\": 86}, {\"nodeId\": \"87\", \"ignored\": false, \"role\": {\"type\": \"role\", \"value\": \"button\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 9}, \"name\": {\"type\": \"computedString\", \"value\": \"action state 1 variant 2\", \"sources\": [{\"type\": \"relatedElement\", \"attribute\": \"aria-labelledby\"}, {\"type\": \"attribute\", \"value\": {\"type\": \"computedString\", \"value\": \"action state 1 variant 2\"}, \"attribute\": \"aria-label\", \"attributeValue\": {\"type\": \"string\", \"value\": \"action state 1 variant 2\"}}, {\"type\": \"relatedElement\", \"superseded\": true, \"nativeSource\": \"label\"}, {\"type\": \"contents\", \"value\": {\"type\": \"computedString\", \"value\": \"Action 1 A2\"}, \"superseded\": true}, {\"type\": \"attribute\", \"attribute\": \"title\", \"superseded\": true}]}, \"properties\": [{\"name\": \"invalid\", \"value\": {\"type\": \"token\", \"value\": \"false\"}}, {\"name\": \"focusable\", \"value\": {\"type\": \"booleanOrUndefined\", \"value\": true}}], \"parentId\": \"86\", \"childIds\": [\"90\"], \"backendDOMNodeId\": 87}]",
+    "a11y_bytes": 3988,
+    "dom_bytes": 390,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "dom_visual": "VB_12_19_25_8",
+    "dom_computed_style": "CS_red_rgb(240_1",
+    "dom_event_seq_base": "click",
+    "ax_cluster": "AX_e03f_1_2",
+    "ax_bytes_len": 2677,
+    "html": "<html><head><style>body{margin:0;padding:0} #btn{position:absolute; left:124px; top:190px; width:128px; height:28px; color:rgb(255, 0, 0); background:rgb(240,240,240); display:block; visibility:visible; opacity:1.0; border:1px solid black;}</style></head><body><div id=\"root\"><button id=\"btn\" aria-label=\"action state 1 variant 2\">Action 1 A2</button><span>state1</span></div></body></html>"
+  },
+  "('B', 1, 0)": {
+    "visual_raw": "{\"x\": 150, \"y\": 190, \"w\": 132, \"h\": 28, \"count\": 9, \"depth\": 3, \"density\": 0.3}",
+    "computed_style_raw": "{\"color\": \"rgb(0, 0, 255)\", \"backgroundColor\": \"rgb(255, 255, 255)\", \"visibility\": \"visible\", \"display\": \"block\", \"opacity\": \"1\"}",
+    "bbox": {
+      "x": 150,
+      "y": 190,
+      "width": 132,
+      "height": 28
+    },
+    "computed_style": {
+      "color": "rgb(0, 0, 255)",
+      "backgroundColor": "rgb(255, 255, 255)",
+      "visibility": "visible",
+      "display": "block",
+      "opacity": "1"
+    },
+    "a11y_serial": "[{\"nodeId\": \"1\", \"ignored\": false, \"role\": {\"type\": \"internalRole\", \"value\": \"RootWebArea\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 144}, \"name\": {\"type\": \"computedString\", \"value\": \"\", \"sources\": [{\"type\": \"relatedElement\", \"attribute\": \"aria-labelledby\"}, {\"type\": \"attribute\", \"attribute\": \"aria-label\"}, {\"type\": \"attribute\", \"attribute\": \"aria-label\", \"superseded\": true}, {\"type\": \"relatedElement\", \"nativeSource\": \"title\"}]}, \"properties\": [{\"name\": \"focusable\", \"value\": {\"type\": \"booleanOrUndefined\", \"value\": true}}, {\"name\": \"focused\", \"value\": {\"type\": \"booleanOrUndefined\", \"value\": true}}, {\"name\": \"url\", \"value\": {\"type\": \"string\", \"value\": \"about:blank\"}}], \"childIds\": [\"92\"], \"backendDOMNodeId\": 1, \"frameId\": \"2945389098F6BC4619B514D2FA71CD8F\"}, {\"nodeId\": \"92\", \"ignored\": true, \"ignoredReasons\": [{\"name\": \"uninteresting\", \"value\": {\"type\": \"boolean\", \"value\": true}}], \"role\": {\"type\": \"role\", \"value\": \"none\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 0}, \"parentId\": \"1\", \"childIds\": [\"95\"], \"backendDOMNodeId\": 92}, {\"nodeId\": \"95\", \"ignored\": true, \"ignoredReasons\": [{\"name\": \"uninteresting\", \"value\": {\"type\": \"boolean\", \"value\": true}}], \"role\": {\"type\": \"role\", \"value\": \"none\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 0}, \"parentId\": \"92\", \"childIds\": [\"96\"], \"backendDOMNodeId\": 95}, {\"nodeId\": \"96\", \"ignored\": false, \"role\": {\"type\": \"role\", \"value\": \"generic\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 88}, \"name\": {\"type\": \"computedString\", \"value\": \"\", \"sources\": [{\"type\": \"relatedElement\", \"attribute\": \"aria-labelledby\"}, {\"type\": \"attribute\", \"attribute\": \"aria-label\"}]}, \"properties\": [], \"parentId\": \"95\", \"childIds\": [\"97\", \"99\"], \"backendDOMNodeId\": 96}, {\"nodeId\": \"97\", \"ignored\": false, \"role\": {\"type\": \"role\", \"value\": \"button\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 9}, \"name\": {\"type\": \"computedString\", \"value\": \"action state 1 variant 3\", \"sources\": [{\"type\": \"relatedElement\", \"attribute\": \"aria-labelledby\"}, {\"type\": \"attribute\", \"value\": {\"type\": \"computedString\", \"value\": \"action state 1 variant 3\"}, \"attribute\": \"aria-label\", \"attributeValue\": {\"type\": \"string\", \"value\": \"action state 1 variant 3\"}}, {\"type\": \"relatedElement\", \"superseded\": true, \"nativeSource\": \"label\"}, {\"type\": \"contents\", \"value\": {\"type\": \"computedString\", \"value\": \"Action 1 B0\"}, \"superseded\": true}, {\"type\": \"attribute\", \"attribute\": \"title\", \"superseded\": true}]}, \"properties\": [{\"name\": \"invalid\", \"value\": {\"type\": \"token\", \"value\": \"false\"}}, {\"name\": \"focusable\", \"value\": {\"type\": \"booleanOrUndefined\", \"value\": true}}], \"parentId\": \"96\", \"childIds\": [\"100\"], \"backendDOMNodeId\": 97}]",
+    "a11y_bytes": 3992,
+    "dom_bytes": 390,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "dom_visual": "VB_15_19_26_9",
+    "dom_computed_style": "CS_blue_rgb(255_1",
+    "dom_event_seq_base": "click",
+    "ax_cluster": "AX_8bf5_1_3",
+    "ax_bytes_len": 2678,
+    "html": "<html><head><style>body{margin:0;padding:0} #btn{position:absolute; left:150px; top:190px; width:132px; height:28px; color:rgb(0, 0, 255); background:rgb(255,255,255); display:block; visibility:visible; opacity:1.0; border:1px solid black;}</style></head><body><div id=\"root\"><button id=\"btn\" aria-label=\"action state 1 variant 3\">Action 1 B0</button><span>state1</span></div></body></html>"
+  },
+  "('B', 1, 1)": {
+    "visual_raw": "{\"x\": 162, \"y\": 190, \"w\": 136, \"h\": 28, \"count\": 10, \"depth\": 3, \"density\": 0.4}",
+    "computed_style_raw": "{\"color\": \"rgb(0, 0, 255)\", \"backgroundColor\": \"rgb(240, 240, 240)\", \"visibility\": \"visible\", \"display\": \"block\", \"opacity\": \"1\"}",
+    "bbox": {
+      "x": 162,
+      "y": 190,
+      "width": 136,
+      "height": 28
+    },
+    "computed_style": {
+      "color": "rgb(0, 0, 255)",
+      "backgroundColor": "rgb(240, 240, 240)",
+      "visibility": "visible",
+      "display": "block",
+      "opacity": "1"
+    },
+    "a11y_serial": "[{\"nodeId\": \"1\", \"ignored\": false, \"role\": {\"type\": \"internalRole\", \"value\": \"RootWebArea\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 144}, \"name\": {\"type\": \"computedString\", \"value\": \"\", \"sources\": [{\"type\": \"relatedElement\", \"attribute\": \"aria-labelledby\"}, {\"type\": \"attribute\", \"attribute\": \"aria-label\"}, {\"type\": \"attribute\", \"attribute\": \"aria-label\", \"superseded\": true}, {\"type\": \"relatedElement\", \"nativeSource\": \"title\"}]}, \"properties\": [{\"name\": \"focusable\", \"value\": {\"type\": \"booleanOrUndefined\", \"value\": true}}, {\"name\": \"focused\", \"value\": {\"type\": \"booleanOrUndefined\", \"value\": true}}, {\"name\": \"url\", \"value\": {\"type\": \"string\", \"value\": \"about:blank\"}}], \"childIds\": [\"102\"], \"backendDOMNodeId\": 1, \"frameId\": \"2945389098F6BC4619B514D2FA71CD8F\"}, {\"nodeId\": \"102\", \"ignored\": true, \"ignoredReasons\": [{\"name\": \"uninteresting\", \"value\": {\"type\": \"boolean\", \"value\": true}}], \"role\": {\"type\": \"role\", \"value\": \"none\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 0}, \"parentId\": \"1\", \"childIds\": [\"105\"], \"backendDOMNodeId\": 102}, {\"nodeId\": \"105\", \"ignored\": true, \"ignoredReasons\": [{\"name\": \"uninteresting\", \"value\": {\"type\": \"boolean\", \"value\": true}}], \"role\": {\"type\": \"role\", \"value\": \"none\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 0}, \"parentId\": \"102\", \"childIds\": [\"106\"], \"backendDOMNodeId\": 105}, {\"nodeId\": \"106\", \"ignored\": false, \"role\": {\"type\": \"role\", \"value\": \"generic\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 88}, \"name\": {\"type\": \"computedString\", \"value\": \"\", \"sources\": [{\"type\": \"relatedElement\", \"attribute\": \"aria-labelledby\"}, {\"type\": \"attribute\", \"attribute\": \"aria-label\"}]}, \"properties\": [], \"parentId\": \"105\", \"childIds\": [\"107\", \"109\"], \"backendDOMNodeId\": 106}, {\"nodeId\": \"107\", \"ignored\": false, \"role\": {\"type\": \"role\", \"value\": \"button\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 9}, \"name\": {\"type\": \"computedString\", \"value\": \"action state 1 variant 4\", \"sources\": [{\"type\": \"relatedElement\", \"attribute\": \"aria-labelledby\"}, {\"type\": \"attribute\", \"value\": {\"type\": \"computedString\", \"value\": \"action state 1 variant 4\"}, \"attribute\": \"aria-label\", \"attributeValue\": {\"type\": \"string\", \"value\": \"action state 1 variant 4\"}}, {\"type\": \"relatedElement\", \"superseded\": true, \"nativeSource\": \"label\"}, {\"type\": \"contents\", \"value\": {\"type\": \"computedString\", \"value\": \"Action 1 B1\"}, \"superseded\": true}, {\"type\": \"attribute\", \"attribute\": \"title\", \"superseded\": true}]}, \"properties\": [{\"name\": \"invalid\", \"value\": {\"type\": \"token\", \"value\": \"false\"}}, {\"name\": \"focusable\", \"value\": {\"type\": \"booleanOrUndefined\", \"value\": true}}], \"parentId\": \"106\", \"childIds\": [\"110\"], \"backendDOMNodeId\": 107}]",
+    "a11y_bytes": 4013,
+    "dom_bytes": 390,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "dom_visual": "VB_16_19_27_10",
+    "dom_computed_style": "CS_blue_rgb(240_1",
+    "dom_event_seq_base": "click",
+    "ax_cluster": "AX_4d63_1_0",
+    "ax_bytes_len": 2694,
+    "html": "<html><head><style>body{margin:0;padding:0} #btn{position:absolute; left:162px; top:190px; width:136px; height:28px; color:rgb(0, 0, 255); background:rgb(240,240,240); display:block; visibility:visible; opacity:1.0; border:1px solid black;}</style></head><body><div id=\"root\"><button id=\"btn\" aria-label=\"action state 1 variant 4\">Action 1 B1</button><span>state1</span></div></body></html>"
+  },
+  "('B', 1, 2)": {
+    "visual_raw": "{\"x\": 174, \"y\": 190, \"w\": 140, \"h\": 28, \"count\": 11, \"depth\": 3, \"density\": 0.5}",
+    "computed_style_raw": "{\"color\": \"rgb(0, 0, 255)\", \"backgroundColor\": \"rgb(240, 240, 240)\", \"visibility\": \"visible\", \"display\": \"block\", \"opacity\": \"1\"}",
+    "bbox": {
+      "x": 174,
+      "y": 190,
+      "width": 140,
+      "height": 28
+    },
+    "computed_style": {
+      "color": "rgb(0, 0, 255)",
+      "backgroundColor": "rgb(240, 240, 240)",
+      "visibility": "visible",
+      "display": "block",
+      "opacity": "1"
+    },
+    "a11y_serial": "[{\"nodeId\": \"1\", \"ignored\": false, \"role\": {\"type\": \"internalRole\", \"value\": \"RootWebArea\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 144}, \"name\": {\"type\": \"computedString\", \"value\": \"\", \"sources\": [{\"type\": \"relatedElement\", \"attribute\": \"aria-labelledby\"}, {\"type\": \"attribute\", \"attribute\": \"aria-label\"}, {\"type\": \"attribute\", \"attribute\": \"aria-label\", \"superseded\": true}, {\"type\": \"relatedElement\", \"nativeSource\": \"title\"}]}, \"properties\": [{\"name\": \"focusable\", \"value\": {\"type\": \"booleanOrUndefined\", \"value\": true}}, {\"name\": \"focused\", \"value\": {\"type\": \"booleanOrUndefined\", \"value\": true}}, {\"name\": \"url\", \"value\": {\"type\": \"string\", \"value\": \"about:blank\"}}], \"childIds\": [\"112\"], \"backendDOMNodeId\": 1, \"frameId\": \"2945389098F6BC4619B514D2FA71CD8F\"}, {\"nodeId\": \"112\", \"ignored\": true, \"ignoredReasons\": [{\"name\": \"uninteresting\", \"value\": {\"type\": \"boolean\", \"value\": true}}], \"role\": {\"type\": \"role\", \"value\": \"none\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 0}, \"parentId\": \"1\", \"childIds\": [\"115\"], \"backendDOMNodeId\": 112}, {\"nodeId\": \"115\", \"ignored\": true, \"ignoredReasons\": [{\"name\": \"uninteresting\", \"value\": {\"type\": \"boolean\", \"value\": true}}], \"role\": {\"type\": \"role\", \"value\": \"none\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 0}, \"parentId\": \"112\", \"childIds\": [\"116\"], \"backendDOMNodeId\": 115}, {\"nodeId\": \"116\", \"ignored\": false, \"role\": {\"type\": \"role\", \"value\": \"generic\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 88}, \"name\": {\"type\": \"computedString\", \"value\": \"\", \"sources\": [{\"type\": \"relatedElement\", \"attribute\": \"aria-labelledby\"}, {\"type\": \"attribute\", \"attribute\": \"aria-label\"}]}, \"properties\": [], \"parentId\": \"115\", \"childIds\": [\"117\", \"119\"], \"backendDOMNodeId\": 116}, {\"nodeId\": \"117\", \"ignored\": false, \"role\": {\"type\": \"role\", \"value\": \"button\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 9}, \"name\": {\"type\": \"computedString\", \"value\": \"action state 1 variant 5\", \"sources\": [{\"type\": \"relatedElement\", \"attribute\": \"aria-labelledby\"}, {\"type\": \"attribute\", \"value\": {\"type\": \"computedString\", \"value\": \"action state 1 variant 5\"}, \"attribute\": \"aria-label\", \"attributeValue\": {\"type\": \"string\", \"value\": \"action state 1 variant 5\"}}, {\"type\": \"relatedElement\", \"superseded\": true, \"nativeSource\": \"label\"}, {\"type\": \"contents\", \"value\": {\"type\": \"computedString\", \"value\": \"Action 1 B2\"}, \"superseded\": true}, {\"type\": \"attribute\", \"attribute\": \"title\", \"superseded\": true}]}, \"properties\": [{\"name\": \"invalid\", \"value\": {\"type\": \"token\", \"value\": \"false\"}}, {\"name\": \"focusable\", \"value\": {\"type\": \"booleanOrUndefined\", \"value\": true}}], \"parentId\": \"116\", \"childIds\": [\"120\"], \"backendDOMNodeId\": 117}]",
+    "a11y_bytes": 4013,
+    "dom_bytes": 390,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "dom_visual": "VB_17_19_28_11",
+    "dom_computed_style": "CS_blue_rgb(240_1",
+    "dom_event_seq_base": "click",
+    "ax_cluster": "AX_29d4_1_1",
+    "ax_bytes_len": 2694,
+    "html": "<html><head><style>body{margin:0;padding:0} #btn{position:absolute; left:174px; top:190px; width:140px; height:28px; color:rgb(0, 0, 255); background:rgb(240,240,240); display:block; visibility:visible; opacity:1.0; border:1px solid black;}</style></head><body><div id=\"root\"><button id=\"btn\" aria-label=\"action state 1 variant 5\">Action 1 B2</button><span>state1</span></div></body></html>"
+  },
+  "('A', 2, 0)": {
+    "visual_raw": "{\"x\": 100, \"y\": 200, \"w\": 120, \"h\": 28, \"count\": 6, \"depth\": 3, \"density\": 0.3}",
+    "computed_style_raw": "{\"color\": \"rgb(255, 0, 0)\", \"backgroundColor\": \"rgb(255, 255, 255)\", \"visibility\": \"visible\", \"display\": \"block\", \"opacity\": \"1\"}",
+    "bbox": {
+      "x": 100,
+      "y": 200,
+      "width": 120,
+      "height": 28
+    },
+    "computed_style": {
+      "color": "rgb(255, 0, 0)",
+      "backgroundColor": "rgb(255, 255, 255)",
+      "visibility": "visible",
+      "display": "block",
+      "opacity": "1"
+    },
+    "a11y_serial": "[{\"nodeId\": \"1\", \"ignored\": false, \"role\": {\"type\": \"internalRole\", \"value\": \"RootWebArea\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 144}, \"name\": {\"type\": \"computedString\", \"value\": \"\", \"sources\": [{\"type\": \"relatedElement\", \"attribute\": \"aria-labelledby\"}, {\"type\": \"attribute\", \"attribute\": \"aria-label\"}, {\"type\": \"attribute\", \"attribute\": \"aria-label\", \"superseded\": true}, {\"type\": \"relatedElement\", \"nativeSource\": \"title\"}]}, \"properties\": [{\"name\": \"focusable\", \"value\": {\"type\": \"booleanOrUndefined\", \"value\": true}}, {\"name\": \"focused\", \"value\": {\"type\": \"booleanOrUndefined\", \"value\": true}}, {\"name\": \"url\", \"value\": {\"type\": \"string\", \"value\": \"about:blank\"}}], \"childIds\": [\"122\"], \"backendDOMNodeId\": 1, \"frameId\": \"2945389098F6BC4619B514D2FA71CD8F\"}, {\"nodeId\": \"122\", \"ignored\": true, \"ignoredReasons\": [{\"name\": \"uninteresting\", \"value\": {\"type\": \"boolean\", \"value\": true}}], \"role\": {\"type\": \"role\", \"value\": \"none\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 0}, \"parentId\": \"1\", \"childIds\": [\"125\"], \"backendDOMNodeId\": 122}, {\"nodeId\": \"125\", \"ignored\": true, \"ignoredReasons\": [{\"name\": \"uninteresting\", \"value\": {\"type\": \"boolean\", \"value\": true}}], \"role\": {\"type\": \"role\", \"value\": \"none\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 0}, \"parentId\": \"122\", \"childIds\": [\"126\"], \"backendDOMNodeId\": 125}, {\"nodeId\": \"126\", \"ignored\": false, \"role\": {\"type\": \"role\", \"value\": \"generic\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 88}, \"name\": {\"type\": \"computedString\", \"value\": \"\", \"sources\": [{\"type\": \"relatedElement\", \"attribute\": \"aria-labelledby\"}, {\"type\": \"attribute\", \"attribute\": \"aria-label\"}]}, \"properties\": [], \"parentId\": \"125\", \"childIds\": [\"127\", \"129\"], \"backendDOMNodeId\": 126}, {\"nodeId\": \"127\", \"ignored\": false, \"role\": {\"type\": \"role\", \"value\": \"button\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 9}, \"name\": {\"type\": \"computedString\", \"value\": \"action state 2 variant 0\", \"sources\": [{\"type\": \"relatedElement\", \"attribute\": \"aria-labelledby\"}, {\"type\": \"attribute\", \"value\": {\"type\": \"computedString\", \"value\": \"action state 2 variant 0\"}, \"attribute\": \"aria-label\", \"attributeValue\": {\"type\": \"string\", \"value\": \"action state 2 variant 0\"}}, {\"type\": \"relatedElement\", \"superseded\": true, \"nativeSource\": \"label\"}, {\"type\": \"contents\", \"value\": {\"type\": \"computedString\", \"value\": \"Action 2 A0\"}, \"superseded\": true}, {\"type\": \"attribute\", \"attribute\": \"title\", \"superseded\": true}]}, \"properties\": [{\"name\": \"invalid\", \"value\": {\"type\": \"token\", \"value\": \"false\"}}, {\"name\": \"focusable\", \"value\": {\"type\": \"booleanOrUndefined\", \"value\": true}}], \"parentId\": \"126\", \"childIds\": [\"130\"], \"backendDOMNodeId\": 127}]",
+    "a11y_bytes": 4013,
+    "dom_bytes": 390,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "dom_visual": "VB_10_20_24_6",
+    "dom_computed_style": "CS_red_rgb(255_1",
+    "dom_event_seq_base": "click",
+    "ax_cluster": "AX_685b_2_0",
+    "ax_bytes_len": 2694,
+    "html": "<html><head><style>body{margin:0;padding:0} #btn{position:absolute; left:100px; top:200px; width:120px; height:28px; color:rgb(255, 0, 0); background:rgb(255,255,255); display:block; visibility:visible; opacity:1.0; border:1px solid black;}</style></head><body><div id=\"root\"><button id=\"btn\" aria-label=\"action state 2 variant 0\">Action 2 A0</button><span>state2</span></div></body></html>"
+  },
+  "('A', 2, 1)": {
+    "visual_raw": "{\"x\": 112, \"y\": 200, \"w\": 124, \"h\": 28, \"count\": 7, \"depth\": 3, \"density\": 0.4}",
+    "computed_style_raw": "{\"color\": \"rgb(255, 0, 0)\", \"backgroundColor\": \"rgb(240, 240, 240)\", \"visibility\": \"visible\", \"display\": \"block\", \"opacity\": \"1\"}",
+    "bbox": {
+      "x": 112,
+      "y": 200,
+      "width": 124,
+      "height": 28
+    },
+    "computed_style": {
+      "color": "rgb(255, 0, 0)",
+      "backgroundColor": "rgb(240, 240, 240)",
+      "visibility": "visible",
+      "display": "block",
+      "opacity": "1"
+    },
+    "a11y_serial": "[{\"nodeId\": \"1\", \"ignored\": false, \"role\": {\"type\": \"internalRole\", \"value\": \"RootWebArea\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 144}, \"name\": {\"type\": \"computedString\", \"value\": \"\", \"sources\": [{\"type\": \"relatedElement\", \"attribute\": \"aria-labelledby\"}, {\"type\": \"attribute\", \"attribute\": \"aria-label\"}, {\"type\": \"attribute\", \"attribute\": \"aria-label\", \"superseded\": true}, {\"type\": \"relatedElement\", \"nativeSource\": \"title\"}]}, \"properties\": [{\"name\": \"focusable\", \"value\": {\"type\": \"booleanOrUndefined\", \"value\": true}}, {\"name\": \"focused\", \"value\": {\"type\": \"booleanOrUndefined\", \"value\": true}}, {\"name\": \"url\", \"value\": {\"type\": \"string\", \"value\": \"about:blank\"}}], \"childIds\": [\"132\"], \"backendDOMNodeId\": 1, \"frameId\": \"2945389098F6BC4619B514D2FA71CD8F\"}, {\"nodeId\": \"132\", \"ignored\": true, \"ignoredReasons\": [{\"name\": \"uninteresting\", \"value\": {\"type\": \"boolean\", \"value\": true}}], \"role\": {\"type\": \"role\", \"value\": \"none\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 0}, \"parentId\": \"1\", \"childIds\": [\"135\"], \"backendDOMNodeId\": 132}, {\"nodeId\": \"135\", \"ignored\": true, \"ignoredReasons\": [{\"name\": \"uninteresting\", \"value\": {\"type\": \"boolean\", \"value\": true}}], \"role\": {\"type\": \"role\", \"value\": \"none\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 0}, \"parentId\": \"132\", \"childIds\": [\"136\"], \"backendDOMNodeId\": 135}, {\"nodeId\": \"136\", \"ignored\": false, \"role\": {\"type\": \"role\", \"value\": \"generic\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 88}, \"name\": {\"type\": \"computedString\", \"value\": \"\", \"sources\": [{\"type\": \"relatedElement\", \"attribute\": \"aria-labelledby\"}, {\"type\": \"attribute\", \"attribute\": \"aria-label\"}]}, \"properties\": [], \"parentId\": \"135\", \"childIds\": [\"137\", \"139\"], \"backendDOMNodeId\": 136}, {\"nodeId\": \"137\", \"ignored\": false, \"role\": {\"type\": \"role\", \"value\": \"button\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 9}, \"name\": {\"type\": \"computedString\", \"value\": \"action state 2 variant 1\", \"sources\": [{\"type\": \"relatedElement\", \"attribute\": \"aria-labelledby\"}, {\"type\": \"attribute\", \"value\": {\"type\": \"computedString\", \"value\": \"action state 2 variant 1\"}, \"attribute\": \"aria-label\", \"attributeValue\": {\"type\": \"string\", \"value\": \"action state 2 variant 1\"}}, {\"type\": \"relatedElement\", \"superseded\": true, \"nativeSource\": \"label\"}, {\"type\": \"contents\", \"value\": {\"type\": \"computedString\", \"value\": \"Action 2 A1\"}, \"superseded\": true}, {\"type\": \"attribute\", \"attribute\": \"title\", \"superseded\": true}]}, \"properties\": [{\"name\": \"invalid\", \"value\": {\"type\": \"token\", \"value\": \"false\"}}, {\"name\": \"focusable\", \"value\": {\"type\": \"booleanOrUndefined\", \"value\": true}}], \"parentId\": \"136\", \"childIds\": [\"140\"], \"backendDOMNodeId\": 137}]",
+    "a11y_bytes": 4013,
+    "dom_bytes": 390,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "dom_visual": "VB_11_20_24_7",
+    "dom_computed_style": "CS_red_rgb(240_1",
+    "dom_event_seq_base": "click",
+    "ax_cluster": "AX_e548_2_1",
+    "ax_bytes_len": 2694,
+    "html": "<html><head><style>body{margin:0;padding:0} #btn{position:absolute; left:112px; top:200px; width:124px; height:28px; color:rgb(255, 0, 0); background:rgb(240,240,240); display:block; visibility:visible; opacity:1.0; border:1px solid black;}</style></head><body><div id=\"root\"><button id=\"btn\" aria-label=\"action state 2 variant 1\">Action 2 A1</button><span>state2</span></div></body></html>"
+  },
+  "('A', 2, 2)": {
+    "visual_raw": "{\"x\": 124, \"y\": 200, \"w\": 128, \"h\": 28, \"count\": 8, \"depth\": 3, \"density\": 0.5}",
+    "computed_style_raw": "{\"color\": \"rgb(255, 0, 0)\", \"backgroundColor\": \"rgb(240, 240, 240)\", \"visibility\": \"visible\", \"display\": \"block\", \"opacity\": \"1\"}",
+    "bbox": {
+      "x": 124,
+      "y": 200,
+      "width": 128,
+      "height": 28
+    },
+    "computed_style": {
+      "color": "rgb(255, 0, 0)",
+      "backgroundColor": "rgb(240, 240, 240)",
+      "visibility": "visible",
+      "display": "block",
+      "opacity": "1"
+    },
+    "a11y_serial": "[{\"nodeId\": \"1\", \"ignored\": false, \"role\": {\"type\": \"internalRole\", \"value\": \"RootWebArea\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 144}, \"name\": {\"type\": \"computedString\", \"value\": \"\", \"sources\": [{\"type\": \"relatedElement\", \"attribute\": \"aria-labelledby\"}, {\"type\": \"attribute\", \"attribute\": \"aria-label\"}, {\"type\": \"attribute\", \"attribute\": \"aria-label\", \"superseded\": true}, {\"type\": \"relatedElement\", \"nativeSource\": \"title\"}]}, \"properties\": [{\"name\": \"focusable\", \"value\": {\"type\": \"booleanOrUndefined\", \"value\": true}}, {\"name\": \"focused\", \"value\": {\"type\": \"booleanOrUndefined\", \"value\": true}}, {\"name\": \"url\", \"value\": {\"type\": \"string\", \"value\": \"about:blank\"}}], \"childIds\": [\"142\"], \"backendDOMNodeId\": 1, \"frameId\": \"2945389098F6BC4619B514D2FA71CD8F\"}, {\"nodeId\": \"142\", \"ignored\": true, \"ignoredReasons\": [{\"name\": \"uninteresting\", \"value\": {\"type\": \"boolean\", \"value\": true}}], \"role\": {\"type\": \"role\", \"value\": \"none\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 0}, \"parentId\": \"1\", \"childIds\": [\"145\"], \"backendDOMNodeId\": 142}, {\"nodeId\": \"145\", \"ignored\": true, \"ignoredReasons\": [{\"name\": \"uninteresting\", \"value\": {\"type\": \"boolean\", \"value\": true}}], \"role\": {\"type\": \"role\", \"value\": \"none\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 0}, \"parentId\": \"142\", \"childIds\": [\"146\"], \"backendDOMNodeId\": 145}, {\"nodeId\": \"146\", \"ignored\": false, \"role\": {\"type\": \"role\", \"value\": \"generic\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 88}, \"name\": {\"type\": \"computedString\", \"value\": \"\", \"sources\": [{\"type\": \"relatedElement\", \"attribute\": \"aria-labelledby\"}, {\"type\": \"attribute\", \"attribute\": \"aria-label\"}]}, \"properties\": [], \"parentId\": \"145\", \"childIds\": [\"147\", \"149\"], \"backendDOMNodeId\": 146}, {\"nodeId\": \"147\", \"ignored\": false, \"role\": {\"type\": \"role\", \"value\": \"button\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 9}, \"name\": {\"type\": \"computedString\", \"value\": \"action state 2 variant 2\", \"sources\": [{\"type\": \"relatedElement\", \"attribute\": \"aria-labelledby\"}, {\"type\": \"attribute\", \"value\": {\"type\": \"computedString\", \"value\": \"action state 2 variant 2\"}, \"attribute\": \"aria-label\", \"attributeValue\": {\"type\": \"string\", \"value\": \"action state 2 variant 2\"}}, {\"type\": \"relatedElement\", \"superseded\": true, \"nativeSource\": \"label\"}, {\"type\": \"contents\", \"value\": {\"type\": \"computedString\", \"value\": \"Action 2 A2\"}, \"superseded\": true}, {\"type\": \"attribute\", \"attribute\": \"title\", \"superseded\": true}]}, \"properties\": [{\"name\": \"invalid\", \"value\": {\"type\": \"token\", \"value\": \"false\"}}, {\"name\": \"focusable\", \"value\": {\"type\": \"booleanOrUndefined\", \"value\": true}}], \"parentId\": \"146\", \"childIds\": [\"150\"], \"backendDOMNodeId\": 147}]",
+    "a11y_bytes": 4013,
+    "dom_bytes": 390,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "dom_visual": "VB_12_20_25_8",
+    "dom_computed_style": "CS_red_rgb(240_1",
+    "dom_event_seq_base": "click",
+    "ax_cluster": "AX_b825_2_2",
+    "ax_bytes_len": 2694,
+    "html": "<html><head><style>body{margin:0;padding:0} #btn{position:absolute; left:124px; top:200px; width:128px; height:28px; color:rgb(255, 0, 0); background:rgb(240,240,240); display:block; visibility:visible; opacity:1.0; border:1px solid black;}</style></head><body><div id=\"root\"><button id=\"btn\" aria-label=\"action state 2 variant 2\">Action 2 A2</button><span>state2</span></div></body></html>"
+  },
+  "('B', 2, 0)": {
+    "visual_raw": "{\"x\": 150, \"y\": 200, \"w\": 132, \"h\": 28, \"count\": 9, \"depth\": 3, \"density\": 0.3}",
+    "computed_style_raw": "{\"color\": \"rgb(0, 0, 255)\", \"backgroundColor\": \"rgb(255, 255, 255)\", \"visibility\": \"visible\", \"display\": \"block\", \"opacity\": \"1\"}",
+    "bbox": {
+      "x": 150,
+      "y": 200,
+      "width": 132,
+      "height": 28
+    },
+    "computed_style": {
+      "color": "rgb(0, 0, 255)",
+      "backgroundColor": "rgb(255, 255, 255)",
+      "visibility": "visible",
+      "display": "block",
+      "opacity": "1"
+    },
+    "a11y_serial": "[{\"nodeId\": \"1\", \"ignored\": false, \"role\": {\"type\": \"internalRole\", \"value\": \"RootWebArea\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 144}, \"name\": {\"type\": \"computedString\", \"value\": \"\", \"sources\": [{\"type\": \"relatedElement\", \"attribute\": \"aria-labelledby\"}, {\"type\": \"attribute\", \"attribute\": \"aria-label\"}, {\"type\": \"attribute\", \"attribute\": \"aria-label\", \"superseded\": true}, {\"type\": \"relatedElement\", \"nativeSource\": \"title\"}]}, \"properties\": [{\"name\": \"focusable\", \"value\": {\"type\": \"booleanOrUndefined\", \"value\": true}}, {\"name\": \"focused\", \"value\": {\"type\": \"booleanOrUndefined\", \"value\": true}}, {\"name\": \"url\", \"value\": {\"type\": \"string\", \"value\": \"about:blank\"}}], \"childIds\": [\"152\"], \"backendDOMNodeId\": 1, \"frameId\": \"2945389098F6BC4619B514D2FA71CD8F\"}, {\"nodeId\": \"152\", \"ignored\": true, \"ignoredReasons\": [{\"name\": \"uninteresting\", \"value\": {\"type\": \"boolean\", \"value\": true}}], \"role\": {\"type\": \"role\", \"value\": \"none\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 0}, \"parentId\": \"1\", \"childIds\": [\"155\"], \"backendDOMNodeId\": 152}, {\"nodeId\": \"155\", \"ignored\": true, \"ignoredReasons\": [{\"name\": \"uninteresting\", \"value\": {\"type\": \"boolean\", \"value\": true}}], \"role\": {\"type\": \"role\", \"value\": \"none\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 0}, \"parentId\": \"152\", \"childIds\": [\"156\"], \"backendDOMNodeId\": 155}, {\"nodeId\": \"156\", \"ignored\": false, \"role\": {\"type\": \"role\", \"value\": \"generic\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 88}, \"name\": {\"type\": \"computedString\", \"value\": \"\", \"sources\": [{\"type\": \"relatedElement\", \"attribute\": \"aria-labelledby\"}, {\"type\": \"attribute\", \"attribute\": \"aria-label\"}]}, \"properties\": [], \"parentId\": \"155\", \"childIds\": [\"157\", \"159\"], \"backendDOMNodeId\": 156}, {\"nodeId\": \"157\", \"ignored\": false, \"role\": {\"type\": \"role\", \"value\": \"button\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 9}, \"name\": {\"type\": \"computedString\", \"value\": \"action state 2 variant 3\", \"sources\": [{\"type\": \"relatedElement\", \"attribute\": \"aria-labelledby\"}, {\"type\": \"attribute\", \"value\": {\"type\": \"computedString\", \"value\": \"action state 2 variant 3\"}, \"attribute\": \"aria-label\", \"attributeValue\": {\"type\": \"string\", \"value\": \"action state 2 variant 3\"}}, {\"type\": \"relatedElement\", \"superseded\": true, \"nativeSource\": \"label\"}, {\"type\": \"contents\", \"value\": {\"type\": \"computedString\", \"value\": \"Action 2 B0\"}, \"superseded\": true}, {\"type\": \"attribute\", \"attribute\": \"title\", \"superseded\": true}]}, \"properties\": [{\"name\": \"invalid\", \"value\": {\"type\": \"token\", \"value\": \"false\"}}, {\"name\": \"focusable\", \"value\": {\"type\": \"booleanOrUndefined\", \"value\": true}}], \"parentId\": \"156\", \"childIds\": [\"160\"], \"backendDOMNodeId\": 157}]",
+    "a11y_bytes": 4013,
+    "dom_bytes": 390,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "dom_visual": "VB_15_20_26_9",
+    "dom_computed_style": "CS_blue_rgb(255_1",
+    "dom_event_seq_base": "click",
+    "ax_cluster": "AX_9e70_2_3",
+    "ax_bytes_len": 2694,
+    "html": "<html><head><style>body{margin:0;padding:0} #btn{position:absolute; left:150px; top:200px; width:132px; height:28px; color:rgb(0, 0, 255); background:rgb(255,255,255); display:block; visibility:visible; opacity:1.0; border:1px solid black;}</style></head><body><div id=\"root\"><button id=\"btn\" aria-label=\"action state 2 variant 3\">Action 2 B0</button><span>state2</span></div></body></html>"
+  },
+  "('B', 2, 1)": {
+    "visual_raw": "{\"x\": 162, \"y\": 200, \"w\": 136, \"h\": 28, \"count\": 10, \"depth\": 3, \"density\": 0.4}",
+    "computed_style_raw": "{\"color\": \"rgb(0, 0, 255)\", \"backgroundColor\": \"rgb(240, 240, 240)\", \"visibility\": \"visible\", \"display\": \"block\", \"opacity\": \"1\"}",
+    "bbox": {
+      "x": 162,
+      "y": 200,
+      "width": 136,
+      "height": 28
+    },
+    "computed_style": {
+      "color": "rgb(0, 0, 255)",
+      "backgroundColor": "rgb(240, 240, 240)",
+      "visibility": "visible",
+      "display": "block",
+      "opacity": "1"
+    },
+    "a11y_serial": "[{\"nodeId\": \"1\", \"ignored\": false, \"role\": {\"type\": \"internalRole\", \"value\": \"RootWebArea\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 144}, \"name\": {\"type\": \"computedString\", \"value\": \"\", \"sources\": [{\"type\": \"relatedElement\", \"attribute\": \"aria-labelledby\"}, {\"type\": \"attribute\", \"attribute\": \"aria-label\"}, {\"type\": \"attribute\", \"attribute\": \"aria-label\", \"superseded\": true}, {\"type\": \"relatedElement\", \"nativeSource\": \"title\"}]}, \"properties\": [{\"name\": \"focusable\", \"value\": {\"type\": \"booleanOrUndefined\", \"value\": true}}, {\"name\": \"focused\", \"value\": {\"type\": \"booleanOrUndefined\", \"value\": true}}, {\"name\": \"url\", \"value\": {\"type\": \"string\", \"value\": \"about:blank\"}}], \"childIds\": [\"162\"], \"backendDOMNodeId\": 1, \"frameId\": \"2945389098F6BC4619B514D2FA71CD8F\"}, {\"nodeId\": \"162\", \"ignored\": true, \"ignoredReasons\": [{\"name\": \"uninteresting\", \"value\": {\"type\": \"boolean\", \"value\": true}}], \"role\": {\"type\": \"role\", \"value\": \"none\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 0}, \"parentId\": \"1\", \"childIds\": [\"165\"], \"backendDOMNodeId\": 162}, {\"nodeId\": \"165\", \"ignored\": true, \"ignoredReasons\": [{\"name\": \"uninteresting\", \"value\": {\"type\": \"boolean\", \"value\": true}}], \"role\": {\"type\": \"role\", \"value\": \"none\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 0}, \"parentId\": \"162\", \"childIds\": [\"166\"], \"backendDOMNodeId\": 165}, {\"nodeId\": \"166\", \"ignored\": false, \"role\": {\"type\": \"role\", \"value\": \"generic\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 88}, \"name\": {\"type\": \"computedString\", \"value\": \"\", \"sources\": [{\"type\": \"relatedElement\", \"attribute\": \"aria-labelledby\"}, {\"type\": \"attribute\", \"attribute\": \"aria-label\"}]}, \"properties\": [], \"parentId\": \"165\", \"childIds\": [\"167\", \"169\"], \"backendDOMNodeId\": 166}, {\"nodeId\": \"167\", \"ignored\": false, \"role\": {\"type\": \"role\", \"value\": \"button\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 9}, \"name\": {\"type\": \"computedString\", \"value\": \"action state 2 variant 4\", \"sources\": [{\"type\": \"relatedElement\", \"attribute\": \"aria-labelledby\"}, {\"type\": \"attribute\", \"value\": {\"type\": \"computedString\", \"value\": \"action state 2 variant 4\"}, \"attribute\": \"aria-label\", \"attributeValue\": {\"type\": \"string\", \"value\": \"action state 2 variant 4\"}}, {\"type\": \"relatedElement\", \"superseded\": true, \"nativeSource\": \"label\"}, {\"type\": \"contents\", \"value\": {\"type\": \"computedString\", \"value\": \"Action 2 B1\"}, \"superseded\": true}, {\"type\": \"attribute\", \"attribute\": \"title\", \"superseded\": true}]}, \"properties\": [{\"name\": \"invalid\", \"value\": {\"type\": \"token\", \"value\": \"false\"}}, {\"name\": \"focusable\", \"value\": {\"type\": \"booleanOrUndefined\", \"value\": true}}], \"parentId\": \"166\", \"childIds\": [\"170\"], \"backendDOMNodeId\": 167}]",
+    "a11y_bytes": 4013,
+    "dom_bytes": 390,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "dom_visual": "VB_16_20_27_10",
+    "dom_computed_style": "CS_blue_rgb(240_1",
+    "dom_event_seq_base": "click",
+    "ax_cluster": "AX_887a_2_0",
+    "ax_bytes_len": 2694,
+    "html": "<html><head><style>body{margin:0;padding:0} #btn{position:absolute; left:162px; top:200px; width:136px; height:28px; color:rgb(0, 0, 255); background:rgb(240,240,240); display:block; visibility:visible; opacity:1.0; border:1px solid black;}</style></head><body><div id=\"root\"><button id=\"btn\" aria-label=\"action state 2 variant 4\">Action 2 B1</button><span>state2</span></div></body></html>"
+  },
+  "('B', 2, 2)": {
+    "visual_raw": "{\"x\": 174, \"y\": 200, \"w\": 140, \"h\": 28, \"count\": 11, \"depth\": 3, \"density\": 0.5}",
+    "computed_style_raw": "{\"color\": \"rgb(0, 0, 255)\", \"backgroundColor\": \"rgb(240, 240, 240)\", \"visibility\": \"visible\", \"display\": \"block\", \"opacity\": \"1\"}",
+    "bbox": {
+      "x": 174,
+      "y": 200,
+      "width": 140,
+      "height": 28
+    },
+    "computed_style": {
+      "color": "rgb(0, 0, 255)",
+      "backgroundColor": "rgb(240, 240, 240)",
+      "visibility": "visible",
+      "display": "block",
+      "opacity": "1"
+    },
+    "a11y_serial": "[{\"nodeId\": \"1\", \"ignored\": false, \"role\": {\"type\": \"internalRole\", \"value\": \"RootWebArea\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 144}, \"name\": {\"type\": \"computedString\", \"value\": \"\", \"sources\": [{\"type\": \"relatedElement\", \"attribute\": \"aria-labelledby\"}, {\"type\": \"attribute\", \"attribute\": \"aria-label\"}, {\"type\": \"attribute\", \"attribute\": \"aria-label\", \"superseded\": true}, {\"type\": \"relatedElement\", \"nativeSource\": \"title\"}]}, \"properties\": [{\"name\": \"focusable\", \"value\": {\"type\": \"booleanOrUndefined\", \"value\": true}}, {\"name\": \"focused\", \"value\": {\"type\": \"booleanOrUndefined\", \"value\": true}}, {\"name\": \"url\", \"value\": {\"type\": \"string\", \"value\": \"about:blank\"}}], \"childIds\": [\"172\"], \"backendDOMNodeId\": 1, \"frameId\": \"2945389098F6BC4619B514D2FA71CD8F\"}, {\"nodeId\": \"172\", \"ignored\": true, \"ignoredReasons\": [{\"name\": \"uninteresting\", \"value\": {\"type\": \"boolean\", \"value\": true}}], \"role\": {\"type\": \"role\", \"value\": \"none\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 0}, \"parentId\": \"1\", \"childIds\": [\"175\"], \"backendDOMNodeId\": 172}, {\"nodeId\": \"175\", \"ignored\": true, \"ignoredReasons\": [{\"name\": \"uninteresting\", \"value\": {\"type\": \"boolean\", \"value\": true}}], \"role\": {\"type\": \"role\", \"value\": \"none\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 0}, \"parentId\": \"172\", \"childIds\": [\"176\"], \"backendDOMNodeId\": 175}, {\"nodeId\": \"176\", \"ignored\": false, \"role\": {\"type\": \"role\", \"value\": \"generic\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 88}, \"name\": {\"type\": \"computedString\", \"value\": \"\", \"sources\": [{\"type\": \"relatedElement\", \"attribute\": \"aria-labelledby\"}, {\"type\": \"attribute\", \"attribute\": \"aria-label\"}]}, \"properties\": [], \"parentId\": \"175\", \"childIds\": [\"177\", \"179\"], \"backendDOMNodeId\": 176}, {\"nodeId\": \"177\", \"ignored\": false, \"role\": {\"type\": \"role\", \"value\": \"button\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 9}, \"name\": {\"type\": \"computedString\", \"value\": \"action state 2 variant 5\", \"sources\": [{\"type\": \"relatedElement\", \"attribute\": \"aria-labelledby\"}, {\"type\": \"attribute\", \"value\": {\"type\": \"computedString\", \"value\": \"action state 2 variant 5\"}, \"attribute\": \"aria-label\", \"attributeValue\": {\"type\": \"string\", \"value\": \"action state 2 variant 5\"}}, {\"type\": \"relatedElement\", \"superseded\": true, \"nativeSource\": \"label\"}, {\"type\": \"contents\", \"value\": {\"type\": \"computedString\", \"value\": \"Action 2 B2\"}, \"superseded\": true}, {\"type\": \"attribute\", \"attribute\": \"title\", \"superseded\": true}]}, \"properties\": [{\"name\": \"invalid\", \"value\": {\"type\": \"token\", \"value\": \"false\"}}, {\"name\": \"focusable\", \"value\": {\"type\": \"booleanOrUndefined\", \"value\": true}}], \"parentId\": \"176\", \"childIds\": [\"180\"], \"backendDOMNodeId\": 177}]",
+    "a11y_bytes": 4013,
+    "dom_bytes": 390,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "dom_visual": "VB_17_20_28_11",
+    "dom_computed_style": "CS_blue_rgb(240_1",
+    "dom_event_seq_base": "click",
+    "ax_cluster": "AX_ee82_2_1",
+    "ax_bytes_len": 2694,
+    "html": "<html><head><style>body{margin:0;padding:0} #btn{position:absolute; left:174px; top:200px; width:140px; height:28px; color:rgb(0, 0, 255); background:rgb(240,240,240); display:block; visibility:visible; opacity:1.0; border:1px solid black;}</style></head><body><div id=\"root\"><button id=\"btn\" aria-label=\"action state 2 variant 5\">Action 2 B2</button><span>state2</span></div></body></html>"
+  },
+  "('A', 3, 0)": {
+    "visual_raw": "{\"x\": 100, \"y\": 210, \"w\": 120, \"h\": 28, \"count\": 6, \"depth\": 3, \"density\": 0.3}",
+    "computed_style_raw": "{\"color\": \"rgb(255, 0, 0)\", \"backgroundColor\": \"rgb(255, 255, 255)\", \"visibility\": \"visible\", \"display\": \"block\", \"opacity\": \"0.9\"}",
+    "bbox": {
+      "x": 100,
+      "y": 210,
+      "width": 120,
+      "height": 28
+    },
+    "computed_style": {
+      "color": "rgb(255, 0, 0)",
+      "backgroundColor": "rgb(255, 255, 255)",
+      "visibility": "visible",
+      "display": "block",
+      "opacity": "0.9"
+    },
+    "a11y_serial": "[{\"nodeId\": \"1\", \"ignored\": false, \"role\": {\"type\": \"internalRole\", \"value\": \"RootWebArea\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 144}, \"name\": {\"type\": \"computedString\", \"value\": \"\", \"sources\": [{\"type\": \"relatedElement\", \"attribute\": \"aria-labelledby\"}, {\"type\": \"attribute\", \"attribute\": \"aria-label\"}, {\"type\": \"attribute\", \"attribute\": \"aria-label\", \"superseded\": true}, {\"type\": \"relatedElement\", \"nativeSource\": \"title\"}]}, \"properties\": [{\"name\": \"focusable\", \"value\": {\"type\": \"booleanOrUndefined\", \"value\": true}}, {\"name\": \"focused\", \"value\": {\"type\": \"booleanOrUndefined\", \"value\": true}}, {\"name\": \"url\", \"value\": {\"type\": \"string\", \"value\": \"about:blank\"}}], \"childIds\": [\"182\"], \"backendDOMNodeId\": 1, \"frameId\": \"2945389098F6BC4619B514D2FA71CD8F\"}, {\"nodeId\": \"182\", \"ignored\": true, \"ignoredReasons\": [{\"name\": \"uninteresting\", \"value\": {\"type\": \"boolean\", \"value\": true}}], \"role\": {\"type\": \"role\", \"value\": \"none\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 0}, \"parentId\": \"1\", \"childIds\": [\"185\"], \"backendDOMNodeId\": 182}, {\"nodeId\": \"185\", \"ignored\": true, \"ignoredReasons\": [{\"name\": \"uninteresting\", \"value\": {\"type\": \"boolean\", \"value\": true}}], \"role\": {\"type\": \"role\", \"value\": \"none\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 0}, \"parentId\": \"182\", \"childIds\": [\"186\"], \"backendDOMNodeId\": 185}, {\"nodeId\": \"186\", \"ignored\": false, \"role\": {\"type\": \"role\", \"value\": \"generic\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 88}, \"name\": {\"type\": \"computedString\", \"value\": \"\", \"sources\": [{\"type\": \"relatedElement\", \"attribute\": \"aria-labelledby\"}, {\"type\": \"attribute\", \"attribute\": \"aria-label\"}]}, \"properties\": [], \"parentId\": \"185\", \"childIds\": [\"187\", \"189\"], \"backendDOMNodeId\": 186}, {\"nodeId\": \"187\", \"ignored\": false, \"role\": {\"type\": \"role\", \"value\": \"button\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 9}, \"name\": {\"type\": \"computedString\", \"value\": \"action state 3 variant 0\", \"sources\": [{\"type\": \"relatedElement\", \"attribute\": \"aria-labelledby\"}, {\"type\": \"attribute\", \"value\": {\"type\": \"computedString\", \"value\": \"action state 3 variant 0\"}, \"attribute\": \"aria-label\", \"attributeValue\": {\"type\": \"string\", \"value\": \"action state 3 variant 0\"}}, {\"type\": \"relatedElement\", \"superseded\": true, \"nativeSource\": \"label\"}, {\"type\": \"contents\", \"value\": {\"type\": \"computedString\", \"value\": \"Action 3 A0\"}, \"superseded\": true}, {\"type\": \"attribute\", \"attribute\": \"title\", \"superseded\": true}]}, \"properties\": [{\"name\": \"invalid\", \"value\": {\"type\": \"token\", \"value\": \"false\"}}, {\"name\": \"focusable\", \"value\": {\"type\": \"booleanOrUndefined\", \"value\": true}}], \"parentId\": \"186\", \"childIds\": [\"190\"], \"backendDOMNodeId\": 187}]",
+    "a11y_bytes": 4013,
+    "dom_bytes": 390,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "dom_visual": "VB_10_21_24_6",
+    "dom_computed_style": "CS_red_rgb(255_0.9",
+    "dom_event_seq_base": "click",
+    "ax_cluster": "AX_d55a_3_0",
+    "ax_bytes_len": 2694,
+    "html": "<html><head><style>body{margin:0;padding:0} #btn{position:absolute; left:100px; top:210px; width:120px; height:28px; color:rgb(255, 0, 0); background:rgb(255,255,255); display:block; visibility:visible; opacity:0.9; border:1px solid black;}</style></head><body><div id=\"root\"><button id=\"btn\" aria-label=\"action state 3 variant 0\">Action 3 A0</button><span>state3</span></div></body></html>"
+  },
+  "('A', 3, 1)": {
+    "visual_raw": "{\"x\": 112, \"y\": 210, \"w\": 124, \"h\": 28, \"count\": 7, \"depth\": 3, \"density\": 0.4}",
+    "computed_style_raw": "{\"color\": \"rgb(255, 0, 0)\", \"backgroundColor\": \"rgb(240, 240, 240)\", \"visibility\": \"visible\", \"display\": \"block\", \"opacity\": \"0.9\"}",
+    "bbox": {
+      "x": 112,
+      "y": 210,
+      "width": 124,
+      "height": 28
+    },
+    "computed_style": {
+      "color": "rgb(255, 0, 0)",
+      "backgroundColor": "rgb(240, 240, 240)",
+      "visibility": "visible",
+      "display": "block",
+      "opacity": "0.9"
+    },
+    "a11y_serial": "[{\"nodeId\": \"1\", \"ignored\": false, \"role\": {\"type\": \"internalRole\", \"value\": \"RootWebArea\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 144}, \"name\": {\"type\": \"computedString\", \"value\": \"\", \"sources\": [{\"type\": \"relatedElement\", \"attribute\": \"aria-labelledby\"}, {\"type\": \"attribute\", \"attribute\": \"aria-label\"}, {\"type\": \"attribute\", \"attribute\": \"aria-label\", \"superseded\": true}, {\"type\": \"relatedElement\", \"nativeSource\": \"title\"}]}, \"properties\": [{\"name\": \"focusable\", \"value\": {\"type\": \"booleanOrUndefined\", \"value\": true}}, {\"name\": \"focused\", \"value\": {\"type\": \"booleanOrUndefined\", \"value\": true}}, {\"name\": \"url\", \"value\": {\"type\": \"string\", \"value\": \"about:blank\"}}], \"childIds\": [\"192\"], \"backendDOMNodeId\": 1, \"frameId\": \"2945389098F6BC4619B514D2FA71CD8F\"}, {\"nodeId\": \"192\", \"ignored\": true, \"ignoredReasons\": [{\"name\": \"uninteresting\", \"value\": {\"type\": \"boolean\", \"value\": true}}], \"role\": {\"type\": \"role\", \"value\": \"none\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 0}, \"parentId\": \"1\", \"childIds\": [\"195\"], \"backendDOMNodeId\": 192}, {\"nodeId\": \"195\", \"ignored\": true, \"ignoredReasons\": [{\"name\": \"uninteresting\", \"value\": {\"type\": \"boolean\", \"value\": true}}], \"role\": {\"type\": \"role\", \"value\": \"none\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 0}, \"parentId\": \"192\", \"childIds\": [\"196\"], \"backendDOMNodeId\": 195}, {\"nodeId\": \"196\", \"ignored\": false, \"role\": {\"type\": \"role\", \"value\": \"generic\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 88}, \"name\": {\"type\": \"computedString\", \"value\": \"\", \"sources\": [{\"type\": \"relatedElement\", \"attribute\": \"aria-labelledby\"}, {\"type\": \"attribute\", \"attribute\": \"aria-label\"}]}, \"properties\": [], \"parentId\": \"195\", \"childIds\": [\"197\", \"199\"], \"backendDOMNodeId\": 196}, {\"nodeId\": \"197\", \"ignored\": false, \"role\": {\"type\": \"role\", \"value\": \"button\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 9}, \"name\": {\"type\": \"computedString\", \"value\": \"action state 3 variant 1\", \"sources\": [{\"type\": \"relatedElement\", \"attribute\": \"aria-labelledby\"}, {\"type\": \"attribute\", \"value\": {\"type\": \"computedString\", \"value\": \"action state 3 variant 1\"}, \"attribute\": \"aria-label\", \"attributeValue\": {\"type\": \"string\", \"value\": \"action state 3 variant 1\"}}, {\"type\": \"relatedElement\", \"superseded\": true, \"nativeSource\": \"label\"}, {\"type\": \"contents\", \"value\": {\"type\": \"computedString\", \"value\": \"Action 3 A1\"}, \"superseded\": true}, {\"type\": \"attribute\", \"attribute\": \"title\", \"superseded\": true}]}, \"properties\": [{\"name\": \"invalid\", \"value\": {\"type\": \"token\", \"value\": \"false\"}}, {\"name\": \"focusable\", \"value\": {\"type\": \"booleanOrUndefined\", \"value\": true}}], \"parentId\": \"196\", \"childIds\": [\"200\"], \"backendDOMNodeId\": 197}]",
+    "a11y_bytes": 4013,
+    "dom_bytes": 390,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "dom_visual": "VB_11_21_24_7",
+    "dom_computed_style": "CS_red_rgb(240_0.9",
+    "dom_event_seq_base": "click",
+    "ax_cluster": "AX_8cb1_3_1",
+    "ax_bytes_len": 2694,
+    "html": "<html><head><style>body{margin:0;padding:0} #btn{position:absolute; left:112px; top:210px; width:124px; height:28px; color:rgb(255, 0, 0); background:rgb(240,240,240); display:block; visibility:visible; opacity:0.9; border:1px solid black;}</style></head><body><div id=\"root\"><button id=\"btn\" aria-label=\"action state 3 variant 1\">Action 3 A1</button><span>state3</span></div></body></html>"
+  },
+  "('A', 3, 2)": {
+    "visual_raw": "{\"x\": 124, \"y\": 210, \"w\": 128, \"h\": 28, \"count\": 8, \"depth\": 3, \"density\": 0.5}",
+    "computed_style_raw": "{\"color\": \"rgb(255, 0, 0)\", \"backgroundColor\": \"rgb(240, 240, 240)\", \"visibility\": \"visible\", \"display\": \"block\", \"opacity\": \"0.9\"}",
+    "bbox": {
+      "x": 124,
+      "y": 210,
+      "width": 128,
+      "height": 28
+    },
+    "computed_style": {
+      "color": "rgb(255, 0, 0)",
+      "backgroundColor": "rgb(240, 240, 240)",
+      "visibility": "visible",
+      "display": "block",
+      "opacity": "0.9"
+    },
+    "a11y_serial": "[{\"nodeId\": \"1\", \"ignored\": false, \"role\": {\"type\": \"internalRole\", \"value\": \"RootWebArea\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 144}, \"name\": {\"type\": \"computedString\", \"value\": \"\", \"sources\": [{\"type\": \"relatedElement\", \"attribute\": \"aria-labelledby\"}, {\"type\": \"attribute\", \"attribute\": \"aria-label\"}, {\"type\": \"attribute\", \"attribute\": \"aria-label\", \"superseded\": true}, {\"type\": \"relatedElement\", \"nativeSource\": \"title\"}]}, \"properties\": [{\"name\": \"focusable\", \"value\": {\"type\": \"booleanOrUndefined\", \"value\": true}}, {\"name\": \"focused\", \"value\": {\"type\": \"booleanOrUndefined\", \"value\": true}}, {\"name\": \"url\", \"value\": {\"type\": \"string\", \"value\": \"about:blank\"}}], \"childIds\": [\"202\"], \"backendDOMNodeId\": 1, \"frameId\": \"2945389098F6BC4619B514D2FA71CD8F\"}, {\"nodeId\": \"202\", \"ignored\": true, \"ignoredReasons\": [{\"name\": \"uninteresting\", \"value\": {\"type\": \"boolean\", \"value\": true}}], \"role\": {\"type\": \"role\", \"value\": \"none\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 0}, \"parentId\": \"1\", \"childIds\": [\"205\"], \"backendDOMNodeId\": 202}, {\"nodeId\": \"205\", \"ignored\": true, \"ignoredReasons\": [{\"name\": \"uninteresting\", \"value\": {\"type\": \"boolean\", \"value\": true}}], \"role\": {\"type\": \"role\", \"value\": \"none\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 0}, \"parentId\": \"202\", \"childIds\": [\"206\"], \"backendDOMNodeId\": 205}, {\"nodeId\": \"206\", \"ignored\": false, \"role\": {\"type\": \"role\", \"value\": \"generic\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 88}, \"name\": {\"type\": \"computedString\", \"value\": \"\", \"sources\": [{\"type\": \"relatedElement\", \"attribute\": \"aria-labelledby\"}, {\"type\": \"attribute\", \"attribute\": \"aria-label\"}]}, \"properties\": [], \"parentId\": \"205\", \"childIds\": [\"207\", \"209\"], \"backendDOMNodeId\": 206}, {\"nodeId\": \"207\", \"ignored\": false, \"role\": {\"type\": \"role\", \"value\": \"button\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 9}, \"name\": {\"type\": \"computedString\", \"value\": \"action state 3 variant 2\", \"sources\": [{\"type\": \"relatedElement\", \"attribute\": \"aria-labelledby\"}, {\"type\": \"attribute\", \"value\": {\"type\": \"computedString\", \"value\": \"action state 3 variant 2\"}, \"attribute\": \"aria-label\", \"attributeValue\": {\"type\": \"string\", \"value\": \"action state 3 variant 2\"}}, {\"type\": \"relatedElement\", \"superseded\": true, \"nativeSource\": \"label\"}, {\"type\": \"contents\", \"value\": {\"type\": \"computedString\", \"value\": \"Action 3 A2\"}, \"superseded\": true}, {\"type\": \"attribute\", \"attribute\": \"title\", \"superseded\": true}]}, \"properties\": [{\"name\": \"invalid\", \"value\": {\"type\": \"token\", \"value\": \"false\"}}, {\"name\": \"focusable\", \"value\": {\"type\": \"booleanOrUndefined\", \"value\": true}}], \"parentId\": \"206\", \"childIds\": [\"210\"], \"backendDOMNodeId\": 207}]",
+    "a11y_bytes": 4013,
+    "dom_bytes": 390,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "dom_visual": "VB_12_21_25_8",
+    "dom_computed_style": "CS_red_rgb(240_0.9",
+    "dom_event_seq_base": "click",
+    "ax_cluster": "AX_0674_3_2",
+    "ax_bytes_len": 2694,
+    "html": "<html><head><style>body{margin:0;padding:0} #btn{position:absolute; left:124px; top:210px; width:128px; height:28px; color:rgb(255, 0, 0); background:rgb(240,240,240); display:block; visibility:visible; opacity:0.9; border:1px solid black;}</style></head><body><div id=\"root\"><button id=\"btn\" aria-label=\"action state 3 variant 2\">Action 3 A2</button><span>state3</span></div></body></html>"
+  },
+  "('B', 3, 0)": {
+    "visual_raw": "{\"x\": 150, \"y\": 210, \"w\": 132, \"h\": 28, \"count\": 9, \"depth\": 3, \"density\": 0.3}",
+    "computed_style_raw": "{\"color\": \"rgb(0, 0, 255)\", \"backgroundColor\": \"rgb(255, 255, 255)\", \"visibility\": \"visible\", \"display\": \"block\", \"opacity\": \"0.9\"}",
+    "bbox": {
+      "x": 150,
+      "y": 210,
+      "width": 132,
+      "height": 28
+    },
+    "computed_style": {
+      "color": "rgb(0, 0, 255)",
+      "backgroundColor": "rgb(255, 255, 255)",
+      "visibility": "visible",
+      "display": "block",
+      "opacity": "0.9"
+    },
+    "a11y_serial": "[{\"nodeId\": \"1\", \"ignored\": false, \"role\": {\"type\": \"internalRole\", \"value\": \"RootWebArea\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 144}, \"name\": {\"type\": \"computedString\", \"value\": \"\", \"sources\": [{\"type\": \"relatedElement\", \"attribute\": \"aria-labelledby\"}, {\"type\": \"attribute\", \"attribute\": \"aria-label\"}, {\"type\": \"attribute\", \"attribute\": \"aria-label\", \"superseded\": true}, {\"type\": \"relatedElement\", \"nativeSource\": \"title\"}]}, \"properties\": [{\"name\": \"focusable\", \"value\": {\"type\": \"booleanOrUndefined\", \"value\": true}}, {\"name\": \"focused\", \"value\": {\"type\": \"booleanOrUndefined\", \"value\": true}}, {\"name\": \"url\", \"value\": {\"type\": \"string\", \"value\": \"about:blank\"}}], \"childIds\": [\"212\"], \"backendDOMNodeId\": 1, \"frameId\": \"2945389098F6BC4619B514D2FA71CD8F\"}, {\"nodeId\": \"212\", \"ignored\": true, \"ignoredReasons\": [{\"name\": \"uninteresting\", \"value\": {\"type\": \"boolean\", \"value\": true}}], \"role\": {\"type\": \"role\", \"value\": \"none\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 0}, \"parentId\": \"1\", \"childIds\": [\"215\"], \"backendDOMNodeId\": 212}, {\"nodeId\": \"215\", \"ignored\": true, \"ignoredReasons\": [{\"name\": \"uninteresting\", \"value\": {\"type\": \"boolean\", \"value\": true}}], \"role\": {\"type\": \"role\", \"value\": \"none\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 0}, \"parentId\": \"212\", \"childIds\": [\"216\"], \"backendDOMNodeId\": 215}, {\"nodeId\": \"216\", \"ignored\": false, \"role\": {\"type\": \"role\", \"value\": \"generic\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 88}, \"name\": {\"type\": \"computedString\", \"value\": \"\", \"sources\": [{\"type\": \"relatedElement\", \"attribute\": \"aria-labelledby\"}, {\"type\": \"attribute\", \"attribute\": \"aria-label\"}]}, \"properties\": [], \"parentId\": \"215\", \"childIds\": [\"217\", \"219\"], \"backendDOMNodeId\": 216}, {\"nodeId\": \"217\", \"ignored\": false, \"role\": {\"type\": \"role\", \"value\": \"button\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 9}, \"name\": {\"type\": \"computedString\", \"value\": \"action state 3 variant 3\", \"sources\": [{\"type\": \"relatedElement\", \"attribute\": \"aria-labelledby\"}, {\"type\": \"attribute\", \"value\": {\"type\": \"computedString\", \"value\": \"action state 3 variant 3\"}, \"attribute\": \"aria-label\", \"attributeValue\": {\"type\": \"string\", \"value\": \"action state 3 variant 3\"}}, {\"type\": \"relatedElement\", \"superseded\": true, \"nativeSource\": \"label\"}, {\"type\": \"contents\", \"value\": {\"type\": \"computedString\", \"value\": \"Action 3 B0\"}, \"superseded\": true}, {\"type\": \"attribute\", \"attribute\": \"title\", \"superseded\": true}]}, \"properties\": [{\"name\": \"invalid\", \"value\": {\"type\": \"token\", \"value\": \"false\"}}, {\"name\": \"focusable\", \"value\": {\"type\": \"booleanOrUndefined\", \"value\": true}}], \"parentId\": \"216\", \"childIds\": [\"220\"], \"backendDOMNodeId\": 217}]",
+    "a11y_bytes": 4013,
+    "dom_bytes": 390,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "dom_visual": "VB_15_21_26_9",
+    "dom_computed_style": "CS_blue_rgb(255_0.9",
+    "dom_event_seq_base": "click",
+    "ax_cluster": "AX_2f92_3_3",
+    "ax_bytes_len": 2694,
+    "html": "<html><head><style>body{margin:0;padding:0} #btn{position:absolute; left:150px; top:210px; width:132px; height:28px; color:rgb(0, 0, 255); background:rgb(255,255,255); display:block; visibility:visible; opacity:0.9; border:1px solid black;}</style></head><body><div id=\"root\"><button id=\"btn\" aria-label=\"action state 3 variant 3\">Action 3 B0</button><span>state3</span></div></body></html>"
+  },
+  "('B', 3, 1)": {
+    "visual_raw": "{\"x\": 162, \"y\": 210, \"w\": 136, \"h\": 28, \"count\": 10, \"depth\": 3, \"density\": 0.4}",
+    "computed_style_raw": "{\"color\": \"rgb(0, 0, 255)\", \"backgroundColor\": \"rgb(240, 240, 240)\", \"visibility\": \"visible\", \"display\": \"block\", \"opacity\": \"0.9\"}",
+    "bbox": {
+      "x": 162,
+      "y": 210,
+      "width": 136,
+      "height": 28
+    },
+    "computed_style": {
+      "color": "rgb(0, 0, 255)",
+      "backgroundColor": "rgb(240, 240, 240)",
+      "visibility": "visible",
+      "display": "block",
+      "opacity": "0.9"
+    },
+    "a11y_serial": "[{\"nodeId\": \"1\", \"ignored\": false, \"role\": {\"type\": \"internalRole\", \"value\": \"RootWebArea\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 144}, \"name\": {\"type\": \"computedString\", \"value\": \"\", \"sources\": [{\"type\": \"relatedElement\", \"attribute\": \"aria-labelledby\"}, {\"type\": \"attribute\", \"attribute\": \"aria-label\"}, {\"type\": \"attribute\", \"attribute\": \"aria-label\", \"superseded\": true}, {\"type\": \"relatedElement\", \"nativeSource\": \"title\"}]}, \"properties\": [{\"name\": \"focusable\", \"value\": {\"type\": \"booleanOrUndefined\", \"value\": true}}, {\"name\": \"focused\", \"value\": {\"type\": \"booleanOrUndefined\", \"value\": true}}, {\"name\": \"url\", \"value\": {\"type\": \"string\", \"value\": \"about:blank\"}}], \"childIds\": [\"222\"], \"backendDOMNodeId\": 1, \"frameId\": \"2945389098F6BC4619B514D2FA71CD8F\"}, {\"nodeId\": \"222\", \"ignored\": true, \"ignoredReasons\": [{\"name\": \"uninteresting\", \"value\": {\"type\": \"boolean\", \"value\": true}}], \"role\": {\"type\": \"role\", \"value\": \"none\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 0}, \"parentId\": \"1\", \"childIds\": [\"225\"], \"backendDOMNodeId\": 222}, {\"nodeId\": \"225\", \"ignored\": true, \"ignoredReasons\": [{\"name\": \"uninteresting\", \"value\": {\"type\": \"boolean\", \"value\": true}}], \"role\": {\"type\": \"role\", \"value\": \"none\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 0}, \"parentId\": \"222\", \"childIds\": [\"226\"], \"backendDOMNodeId\": 225}, {\"nodeId\": \"226\", \"ignored\": false, \"role\": {\"type\": \"role\", \"value\": \"generic\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 88}, \"name\": {\"type\": \"computedString\", \"value\": \"\", \"sources\": [{\"type\": \"relatedElement\", \"attribute\": \"aria-labelledby\"}, {\"type\": \"attribute\", \"attribute\": \"aria-label\"}]}, \"properties\": [], \"parentId\": \"225\", \"childIds\": [\"227\", \"229\"], \"backendDOMNodeId\": 226}, {\"nodeId\": \"227\", \"ignored\": false, \"role\": {\"type\": \"role\", \"value\": \"button\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 9}, \"name\": {\"type\": \"computedString\", \"value\": \"action state 3 variant 4\", \"sources\": [{\"type\": \"relatedElement\", \"attribute\": \"aria-labelledby\"}, {\"type\": \"attribute\", \"value\": {\"type\": \"computedString\", \"value\": \"action state 3 variant 4\"}, \"attribute\": \"aria-label\", \"attributeValue\": {\"type\": \"string\", \"value\": \"action state 3 variant 4\"}}, {\"type\": \"relatedElement\", \"superseded\": true, \"nativeSource\": \"label\"}, {\"type\": \"contents\", \"value\": {\"type\": \"computedString\", \"value\": \"Action 3 B1\"}, \"superseded\": true}, {\"type\": \"attribute\", \"attribute\": \"title\", \"superseded\": true}]}, \"properties\": [{\"name\": \"invalid\", \"value\": {\"type\": \"token\", \"value\": \"false\"}}, {\"name\": \"focusable\", \"value\": {\"type\": \"booleanOrUndefined\", \"value\": true}}], \"parentId\": \"226\", \"childIds\": [\"230\"], \"backendDOMNodeId\": 227}]",
+    "a11y_bytes": 4013,
+    "dom_bytes": 390,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "dom_visual": "VB_16_21_27_10",
+    "dom_computed_style": "CS_blue_rgb(240_0.9",
+    "dom_event_seq_base": "click",
+    "ax_cluster": "AX_cc7e_3_0",
+    "ax_bytes_len": 2694,
+    "html": "<html><head><style>body{margin:0;padding:0} #btn{position:absolute; left:162px; top:210px; width:136px; height:28px; color:rgb(0, 0, 255); background:rgb(240,240,240); display:block; visibility:visible; opacity:0.9; border:1px solid black;}</style></head><body><div id=\"root\"><button id=\"btn\" aria-label=\"action state 3 variant 4\">Action 3 B1</button><span>state3</span></div></body></html>"
+  },
+  "('B', 3, 2)": {
+    "visual_raw": "{\"x\": 174, \"y\": 210, \"w\": 140, \"h\": 28, \"count\": 11, \"depth\": 3, \"density\": 0.5}",
+    "computed_style_raw": "{\"color\": \"rgb(0, 0, 255)\", \"backgroundColor\": \"rgb(240, 240, 240)\", \"visibility\": \"visible\", \"display\": \"block\", \"opacity\": \"0.9\"}",
+    "bbox": {
+      "x": 174,
+      "y": 210,
+      "width": 140,
+      "height": 28
+    },
+    "computed_style": {
+      "color": "rgb(0, 0, 255)",
+      "backgroundColor": "rgb(240, 240, 240)",
+      "visibility": "visible",
+      "display": "block",
+      "opacity": "0.9"
+    },
+    "a11y_serial": "[{\"nodeId\": \"1\", \"ignored\": false, \"role\": {\"type\": \"internalRole\", \"value\": \"RootWebArea\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 144}, \"name\": {\"type\": \"computedString\", \"value\": \"\", \"sources\": [{\"type\": \"relatedElement\", \"attribute\": \"aria-labelledby\"}, {\"type\": \"attribute\", \"attribute\": \"aria-label\"}, {\"type\": \"attribute\", \"attribute\": \"aria-label\", \"superseded\": true}, {\"type\": \"relatedElement\", \"nativeSource\": \"title\"}]}, \"properties\": [{\"name\": \"focusable\", \"value\": {\"type\": \"booleanOrUndefined\", \"value\": true}}, {\"name\": \"focused\", \"value\": {\"type\": \"booleanOrUndefined\", \"value\": true}}, {\"name\": \"url\", \"value\": {\"type\": \"string\", \"value\": \"about:blank\"}}], \"childIds\": [\"232\"], \"backendDOMNodeId\": 1, \"frameId\": \"2945389098F6BC4619B514D2FA71CD8F\"}, {\"nodeId\": \"232\", \"ignored\": true, \"ignoredReasons\": [{\"name\": \"uninteresting\", \"value\": {\"type\": \"boolean\", \"value\": true}}], \"role\": {\"type\": \"role\", \"value\": \"none\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 0}, \"parentId\": \"1\", \"childIds\": [\"235\"], \"backendDOMNodeId\": 232}, {\"nodeId\": \"235\", \"ignored\": true, \"ignoredReasons\": [{\"name\": \"uninteresting\", \"value\": {\"type\": \"boolean\", \"value\": true}}], \"role\": {\"type\": \"role\", \"value\": \"none\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 0}, \"parentId\": \"232\", \"childIds\": [\"236\"], \"backendDOMNodeId\": 235}, {\"nodeId\": \"236\", \"ignored\": false, \"role\": {\"type\": \"role\", \"value\": \"generic\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 88}, \"name\": {\"type\": \"computedString\", \"value\": \"\", \"sources\": [{\"type\": \"relatedElement\", \"attribute\": \"aria-labelledby\"}, {\"type\": \"attribute\", \"attribute\": \"aria-label\"}]}, \"properties\": [], \"parentId\": \"235\", \"childIds\": [\"237\", \"239\"], \"backendDOMNodeId\": 236}, {\"nodeId\": \"237\", \"ignored\": false, \"role\": {\"type\": \"role\", \"value\": \"button\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 9}, \"name\": {\"type\": \"computedString\", \"value\": \"action state 3 variant 5\", \"sources\": [{\"type\": \"relatedElement\", \"attribute\": \"aria-labelledby\"}, {\"type\": \"attribute\", \"value\": {\"type\": \"computedString\", \"value\": \"action state 3 variant 5\"}, \"attribute\": \"aria-label\", \"attributeValue\": {\"type\": \"string\", \"value\": \"action state 3 variant 5\"}}, {\"type\": \"relatedElement\", \"superseded\": true, \"nativeSource\": \"label\"}, {\"type\": \"contents\", \"value\": {\"type\": \"computedString\", \"value\": \"Action 3 B2\"}, \"superseded\": true}, {\"type\": \"attribute\", \"attribute\": \"title\", \"superseded\": true}]}, \"properties\": [{\"name\": \"invalid\", \"value\": {\"type\": \"token\", \"value\": \"false\"}}, {\"name\": \"focusable\", \"value\": {\"type\": \"booleanOrUndefined\", \"value\": true}}], \"parentId\": \"236\", \"childIds\": [\"240\"], \"backendDOMNodeId\": 237}]",
+    "a11y_bytes": 4013,
+    "dom_bytes": 390,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "dom_visual": "VB_17_21_28_11",
+    "dom_computed_style": "CS_blue_rgb(240_0.9",
+    "dom_event_seq_base": "click",
+    "ax_cluster": "AX_0328_3_1",
+    "ax_bytes_len": 2694,
+    "html": "<html><head><style>body{margin:0;padding:0} #btn{position:absolute; left:174px; top:210px; width:140px; height:28px; color:rgb(0, 0, 255); background:rgb(240,240,240); display:block; visibility:visible; opacity:0.9; border:1px solid black;}</style></head><body><div id=\"root\"><button id=\"btn\" aria-label=\"action state 3 variant 5\">Action 3 B2</button><span>state3</span></div></body></html>"
+  },
+  "('A', 4, 0)": {
+    "visual_raw": "{\"x\": 100, \"y\": 220, \"w\": 120, \"h\": 28, \"count\": 6, \"depth\": 3, \"density\": 0.3}",
+    "computed_style_raw": "{\"color\": \"rgb(255, 0, 0)\", \"backgroundColor\": \"rgb(255, 255, 255)\", \"visibility\": \"visible\", \"display\": \"block\", \"opacity\": \"0.9\"}",
+    "bbox": {
+      "x": 100,
+      "y": 220,
+      "width": 120,
+      "height": 28
+    },
+    "computed_style": {
+      "color": "rgb(255, 0, 0)",
+      "backgroundColor": "rgb(255, 255, 255)",
+      "visibility": "visible",
+      "display": "block",
+      "opacity": "0.9"
+    },
+    "a11y_serial": "[{\"nodeId\": \"1\", \"ignored\": false, \"role\": {\"type\": \"internalRole\", \"value\": \"RootWebArea\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 144}, \"name\": {\"type\": \"computedString\", \"value\": \"\", \"sources\": [{\"type\": \"relatedElement\", \"attribute\": \"aria-labelledby\"}, {\"type\": \"attribute\", \"attribute\": \"aria-label\"}, {\"type\": \"attribute\", \"attribute\": \"aria-label\", \"superseded\": true}, {\"type\": \"relatedElement\", \"nativeSource\": \"title\"}]}, \"properties\": [{\"name\": \"focusable\", \"value\": {\"type\": \"booleanOrUndefined\", \"value\": true}}, {\"name\": \"focused\", \"value\": {\"type\": \"booleanOrUndefined\", \"value\": true}}, {\"name\": \"url\", \"value\": {\"type\": \"string\", \"value\": \"about:blank\"}}], \"childIds\": [\"242\"], \"backendDOMNodeId\": 1, \"frameId\": \"2945389098F6BC4619B514D2FA71CD8F\"}, {\"nodeId\": \"242\", \"ignored\": true, \"ignoredReasons\": [{\"name\": \"uninteresting\", \"value\": {\"type\": \"boolean\", \"value\": true}}], \"role\": {\"type\": \"role\", \"value\": \"none\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 0}, \"parentId\": \"1\", \"childIds\": [\"245\"], \"backendDOMNodeId\": 242}, {\"nodeId\": \"245\", \"ignored\": true, \"ignoredReasons\": [{\"name\": \"uninteresting\", \"value\": {\"type\": \"boolean\", \"value\": true}}], \"role\": {\"type\": \"role\", \"value\": \"none\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 0}, \"parentId\": \"242\", \"childIds\": [\"246\"], \"backendDOMNodeId\": 245}, {\"nodeId\": \"246\", \"ignored\": false, \"role\": {\"type\": \"role\", \"value\": \"generic\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 88}, \"name\": {\"type\": \"computedString\", \"value\": \"\", \"sources\": [{\"type\": \"relatedElement\", \"attribute\": \"aria-labelledby\"}, {\"type\": \"attribute\", \"attribute\": \"aria-label\"}]}, \"properties\": [], \"parentId\": \"245\", \"childIds\": [\"247\", \"249\"], \"backendDOMNodeId\": 246}, {\"nodeId\": \"247\", \"ignored\": false, \"role\": {\"type\": \"role\", \"value\": \"button\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 9}, \"name\": {\"type\": \"computedString\", \"value\": \"action state 4 variant 0\", \"sources\": [{\"type\": \"relatedElement\", \"attribute\": \"aria-labelledby\"}, {\"type\": \"attribute\", \"value\": {\"type\": \"computedString\", \"value\": \"action state 4 variant 0\"}, \"attribute\": \"aria-label\", \"attributeValue\": {\"type\": \"string\", \"value\": \"action state 4 variant 0\"}}, {\"type\": \"relatedElement\", \"superseded\": true, \"nativeSource\": \"label\"}, {\"type\": \"contents\", \"value\": {\"type\": \"computedString\", \"value\": \"Action 4 A0\"}, \"superseded\": true}, {\"type\": \"attribute\", \"attribute\": \"title\", \"superseded\": true}]}, \"properties\": [{\"name\": \"invalid\", \"value\": {\"type\": \"token\", \"value\": \"false\"}}, {\"name\": \"focusable\", \"value\": {\"type\": \"booleanOrUndefined\", \"value\": true}}], \"parentId\": \"246\", \"childIds\": [\"250\"], \"backendDOMNodeId\": 247}]",
+    "a11y_bytes": 4013,
+    "dom_bytes": 390,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "dom_visual": "VB_10_22_24_6",
+    "dom_computed_style": "CS_red_rgb(255_0.9",
+    "dom_event_seq_base": "click",
+    "ax_cluster": "AX_2119_4_0",
+    "ax_bytes_len": 2694,
+    "html": "<html><head><style>body{margin:0;padding:0} #btn{position:absolute; left:100px; top:220px; width:120px; height:28px; color:rgb(255, 0, 0); background:rgb(255,255,255); display:block; visibility:visible; opacity:0.9; border:1px solid black;}</style></head><body><div id=\"root\"><button id=\"btn\" aria-label=\"action state 4 variant 0\">Action 4 A0</button><span>state4</span></div></body></html>"
+  },
+  "('A', 4, 1)": {
+    "visual_raw": "{\"x\": 112, \"y\": 220, \"w\": 124, \"h\": 28, \"count\": 7, \"depth\": 3, \"density\": 0.4}",
+    "computed_style_raw": "{\"color\": \"rgb(255, 0, 0)\", \"backgroundColor\": \"rgb(240, 240, 240)\", \"visibility\": \"visible\", \"display\": \"block\", \"opacity\": \"0.9\"}",
+    "bbox": {
+      "x": 112,
+      "y": 220,
+      "width": 124,
+      "height": 28
+    },
+    "computed_style": {
+      "color": "rgb(255, 0, 0)",
+      "backgroundColor": "rgb(240, 240, 240)",
+      "visibility": "visible",
+      "display": "block",
+      "opacity": "0.9"
+    },
+    "a11y_serial": "[{\"nodeId\": \"1\", \"ignored\": false, \"role\": {\"type\": \"internalRole\", \"value\": \"RootWebArea\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 144}, \"name\": {\"type\": \"computedString\", \"value\": \"\", \"sources\": [{\"type\": \"relatedElement\", \"attribute\": \"aria-labelledby\"}, {\"type\": \"attribute\", \"attribute\": \"aria-label\"}, {\"type\": \"attribute\", \"attribute\": \"aria-label\", \"superseded\": true}, {\"type\": \"relatedElement\", \"nativeSource\": \"title\"}]}, \"properties\": [{\"name\": \"focusable\", \"value\": {\"type\": \"booleanOrUndefined\", \"value\": true}}, {\"name\": \"focused\", \"value\": {\"type\": \"booleanOrUndefined\", \"value\": true}}, {\"name\": \"url\", \"value\": {\"type\": \"string\", \"value\": \"about:blank\"}}], \"childIds\": [\"252\"], \"backendDOMNodeId\": 1, \"frameId\": \"2945389098F6BC4619B514D2FA71CD8F\"}, {\"nodeId\": \"252\", \"ignored\": true, \"ignoredReasons\": [{\"name\": \"uninteresting\", \"value\": {\"type\": \"boolean\", \"value\": true}}], \"role\": {\"type\": \"role\", \"value\": \"none\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 0}, \"parentId\": \"1\", \"childIds\": [\"255\"], \"backendDOMNodeId\": 252}, {\"nodeId\": \"255\", \"ignored\": true, \"ignoredReasons\": [{\"name\": \"uninteresting\", \"value\": {\"type\": \"boolean\", \"value\": true}}], \"role\": {\"type\": \"role\", \"value\": \"none\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 0}, \"parentId\": \"252\", \"childIds\": [\"256\"], \"backendDOMNodeId\": 255}, {\"nodeId\": \"256\", \"ignored\": false, \"role\": {\"type\": \"role\", \"value\": \"generic\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 88}, \"name\": {\"type\": \"computedString\", \"value\": \"\", \"sources\": [{\"type\": \"relatedElement\", \"attribute\": \"aria-labelledby\"}, {\"type\": \"attribute\", \"attribute\": \"aria-label\"}]}, \"properties\": [], \"parentId\": \"255\", \"childIds\": [\"257\", \"259\"], \"backendDOMNodeId\": 256}, {\"nodeId\": \"257\", \"ignored\": false, \"role\": {\"type\": \"role\", \"value\": \"button\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 9}, \"name\": {\"type\": \"computedString\", \"value\": \"action state 4 variant 1\", \"sources\": [{\"type\": \"relatedElement\", \"attribute\": \"aria-labelledby\"}, {\"type\": \"attribute\", \"value\": {\"type\": \"computedString\", \"value\": \"action state 4 variant 1\"}, \"attribute\": \"aria-label\", \"attributeValue\": {\"type\": \"string\", \"value\": \"action state 4 variant 1\"}}, {\"type\": \"relatedElement\", \"superseded\": true, \"nativeSource\": \"label\"}, {\"type\": \"contents\", \"value\": {\"type\": \"computedString\", \"value\": \"Action 4 A1\"}, \"superseded\": true}, {\"type\": \"attribute\", \"attribute\": \"title\", \"superseded\": true}]}, \"properties\": [{\"name\": \"invalid\", \"value\": {\"type\": \"token\", \"value\": \"false\"}}, {\"name\": \"focusable\", \"value\": {\"type\": \"booleanOrUndefined\", \"value\": true}}], \"parentId\": \"256\", \"childIds\": [\"260\"], \"backendDOMNodeId\": 257}]",
+    "a11y_bytes": 4013,
+    "dom_bytes": 390,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "dom_visual": "VB_11_22_24_7",
+    "dom_computed_style": "CS_red_rgb(240_0.9",
+    "dom_event_seq_base": "click",
+    "ax_cluster": "AX_f43f_4_1",
+    "ax_bytes_len": 2694,
+    "html": "<html><head><style>body{margin:0;padding:0} #btn{position:absolute; left:112px; top:220px; width:124px; height:28px; color:rgb(255, 0, 0); background:rgb(240,240,240); display:block; visibility:visible; opacity:0.9; border:1px solid black;}</style></head><body><div id=\"root\"><button id=\"btn\" aria-label=\"action state 4 variant 1\">Action 4 A1</button><span>state4</span></div></body></html>"
+  },
+  "('A', 4, 2)": {
+    "visual_raw": "{\"x\": 124, \"y\": 220, \"w\": 128, \"h\": 28, \"count\": 8, \"depth\": 3, \"density\": 0.5}",
+    "computed_style_raw": "{\"color\": \"rgb(255, 0, 0)\", \"backgroundColor\": \"rgb(240, 240, 240)\", \"visibility\": \"visible\", \"display\": \"block\", \"opacity\": \"0.9\"}",
+    "bbox": {
+      "x": 124,
+      "y": 220,
+      "width": 128,
+      "height": 28
+    },
+    "computed_style": {
+      "color": "rgb(255, 0, 0)",
+      "backgroundColor": "rgb(240, 240, 240)",
+      "visibility": "visible",
+      "display": "block",
+      "opacity": "0.9"
+    },
+    "a11y_serial": "[{\"nodeId\": \"1\", \"ignored\": false, \"role\": {\"type\": \"internalRole\", \"value\": \"RootWebArea\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 144}, \"name\": {\"type\": \"computedString\", \"value\": \"\", \"sources\": [{\"type\": \"relatedElement\", \"attribute\": \"aria-labelledby\"}, {\"type\": \"attribute\", \"attribute\": \"aria-label\"}, {\"type\": \"attribute\", \"attribute\": \"aria-label\", \"superseded\": true}, {\"type\": \"relatedElement\", \"nativeSource\": \"title\"}]}, \"properties\": [{\"name\": \"focusable\", \"value\": {\"type\": \"booleanOrUndefined\", \"value\": true}}, {\"name\": \"focused\", \"value\": {\"type\": \"booleanOrUndefined\", \"value\": true}}, {\"name\": \"url\", \"value\": {\"type\": \"string\", \"value\": \"about:blank\"}}], \"childIds\": [\"262\"], \"backendDOMNodeId\": 1, \"frameId\": \"2945389098F6BC4619B514D2FA71CD8F\"}, {\"nodeId\": \"262\", \"ignored\": true, \"ignoredReasons\": [{\"name\": \"uninteresting\", \"value\": {\"type\": \"boolean\", \"value\": true}}], \"role\": {\"type\": \"role\", \"value\": \"none\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 0}, \"parentId\": \"1\", \"childIds\": [\"265\"], \"backendDOMNodeId\": 262}, {\"nodeId\": \"265\", \"ignored\": true, \"ignoredReasons\": [{\"name\": \"uninteresting\", \"value\": {\"type\": \"boolean\", \"value\": true}}], \"role\": {\"type\": \"role\", \"value\": \"none\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 0}, \"parentId\": \"262\", \"childIds\": [\"266\"], \"backendDOMNodeId\": 265}, {\"nodeId\": \"266\", \"ignored\": false, \"role\": {\"type\": \"role\", \"value\": \"generic\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 88}, \"name\": {\"type\": \"computedString\", \"value\": \"\", \"sources\": [{\"type\": \"relatedElement\", \"attribute\": \"aria-labelledby\"}, {\"type\": \"attribute\", \"attribute\": \"aria-label\"}]}, \"properties\": [], \"parentId\": \"265\", \"childIds\": [\"267\", \"269\"], \"backendDOMNodeId\": 266}, {\"nodeId\": \"267\", \"ignored\": false, \"role\": {\"type\": \"role\", \"value\": \"button\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 9}, \"name\": {\"type\": \"computedString\", \"value\": \"action state 4 variant 2\", \"sources\": [{\"type\": \"relatedElement\", \"attribute\": \"aria-labelledby\"}, {\"type\": \"attribute\", \"value\": {\"type\": \"computedString\", \"value\": \"action state 4 variant 2\"}, \"attribute\": \"aria-label\", \"attributeValue\": {\"type\": \"string\", \"value\": \"action state 4 variant 2\"}}, {\"type\": \"relatedElement\", \"superseded\": true, \"nativeSource\": \"label\"}, {\"type\": \"contents\", \"value\": {\"type\": \"computedString\", \"value\": \"Action 4 A2\"}, \"superseded\": true}, {\"type\": \"attribute\", \"attribute\": \"title\", \"superseded\": true}]}, \"properties\": [{\"name\": \"invalid\", \"value\": {\"type\": \"token\", \"value\": \"false\"}}, {\"name\": \"focusable\", \"value\": {\"type\": \"booleanOrUndefined\", \"value\": true}}], \"parentId\": \"266\", \"childIds\": [\"270\"], \"backendDOMNodeId\": 267}]",
+    "a11y_bytes": 4013,
+    "dom_bytes": 390,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "dom_visual": "VB_12_22_25_8",
+    "dom_computed_style": "CS_red_rgb(240_0.9",
+    "dom_event_seq_base": "click",
+    "ax_cluster": "AX_dad4_4_2",
+    "ax_bytes_len": 2694,
+    "html": "<html><head><style>body{margin:0;padding:0} #btn{position:absolute; left:124px; top:220px; width:128px; height:28px; color:rgb(255, 0, 0); background:rgb(240,240,240); display:block; visibility:visible; opacity:0.9; border:1px solid black;}</style></head><body><div id=\"root\"><button id=\"btn\" aria-label=\"action state 4 variant 2\">Action 4 A2</button><span>state4</span></div></body></html>"
+  },
+  "('B', 4, 0)": {
+    "visual_raw": "{\"x\": 150, \"y\": 220, \"w\": 132, \"h\": 28, \"count\": 9, \"depth\": 3, \"density\": 0.3}",
+    "computed_style_raw": "{\"color\": \"rgb(0, 0, 255)\", \"backgroundColor\": \"rgb(255, 255, 255)\", \"visibility\": \"visible\", \"display\": \"block\", \"opacity\": \"0.9\"}",
+    "bbox": {
+      "x": 150,
+      "y": 220,
+      "width": 132,
+      "height": 28
+    },
+    "computed_style": {
+      "color": "rgb(0, 0, 255)",
+      "backgroundColor": "rgb(255, 255, 255)",
+      "visibility": "visible",
+      "display": "block",
+      "opacity": "0.9"
+    },
+    "a11y_serial": "[{\"nodeId\": \"1\", \"ignored\": false, \"role\": {\"type\": \"internalRole\", \"value\": \"RootWebArea\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 144}, \"name\": {\"type\": \"computedString\", \"value\": \"\", \"sources\": [{\"type\": \"relatedElement\", \"attribute\": \"aria-labelledby\"}, {\"type\": \"attribute\", \"attribute\": \"aria-label\"}, {\"type\": \"attribute\", \"attribute\": \"aria-label\", \"superseded\": true}, {\"type\": \"relatedElement\", \"nativeSource\": \"title\"}]}, \"properties\": [{\"name\": \"focusable\", \"value\": {\"type\": \"booleanOrUndefined\", \"value\": true}}, {\"name\": \"focused\", \"value\": {\"type\": \"booleanOrUndefined\", \"value\": true}}, {\"name\": \"url\", \"value\": {\"type\": \"string\", \"value\": \"about:blank\"}}], \"childIds\": [\"272\"], \"backendDOMNodeId\": 1, \"frameId\": \"2945389098F6BC4619B514D2FA71CD8F\"}, {\"nodeId\": \"272\", \"ignored\": true, \"ignoredReasons\": [{\"name\": \"uninteresting\", \"value\": {\"type\": \"boolean\", \"value\": true}}], \"role\": {\"type\": \"role\", \"value\": \"none\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 0}, \"parentId\": \"1\", \"childIds\": [\"275\"], \"backendDOMNodeId\": 272}, {\"nodeId\": \"275\", \"ignored\": true, \"ignoredReasons\": [{\"name\": \"uninteresting\", \"value\": {\"type\": \"boolean\", \"value\": true}}], \"role\": {\"type\": \"role\", \"value\": \"none\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 0}, \"parentId\": \"272\", \"childIds\": [\"276\"], \"backendDOMNodeId\": 275}, {\"nodeId\": \"276\", \"ignored\": false, \"role\": {\"type\": \"role\", \"value\": \"generic\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 88}, \"name\": {\"type\": \"computedString\", \"value\": \"\", \"sources\": [{\"type\": \"relatedElement\", \"attribute\": \"aria-labelledby\"}, {\"type\": \"attribute\", \"attribute\": \"aria-label\"}]}, \"properties\": [], \"parentId\": \"275\", \"childIds\": [\"277\", \"279\"], \"backendDOMNodeId\": 276}, {\"nodeId\": \"277\", \"ignored\": false, \"role\": {\"type\": \"role\", \"value\": \"button\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 9}, \"name\": {\"type\": \"computedString\", \"value\": \"action state 4 variant 3\", \"sources\": [{\"type\": \"relatedElement\", \"attribute\": \"aria-labelledby\"}, {\"type\": \"attribute\", \"value\": {\"type\": \"computedString\", \"value\": \"action state 4 variant 3\"}, \"attribute\": \"aria-label\", \"attributeValue\": {\"type\": \"string\", \"value\": \"action state 4 variant 3\"}}, {\"type\": \"relatedElement\", \"superseded\": true, \"nativeSource\": \"label\"}, {\"type\": \"contents\", \"value\": {\"type\": \"computedString\", \"value\": \"Action 4 B0\"}, \"superseded\": true}, {\"type\": \"attribute\", \"attribute\": \"title\", \"superseded\": true}]}, \"properties\": [{\"name\": \"invalid\", \"value\": {\"type\": \"token\", \"value\": \"false\"}}, {\"name\": \"focusable\", \"value\": {\"type\": \"booleanOrUndefined\", \"value\": true}}], \"parentId\": \"276\", \"childIds\": [\"280\"], \"backendDOMNodeId\": 277}]",
+    "a11y_bytes": 4013,
+    "dom_bytes": 390,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "dom_visual": "VB_15_22_26_9",
+    "dom_computed_style": "CS_blue_rgb(255_0.9",
+    "dom_event_seq_base": "click",
+    "ax_cluster": "AX_61f2_4_3",
+    "ax_bytes_len": 2694,
+    "html": "<html><head><style>body{margin:0;padding:0} #btn{position:absolute; left:150px; top:220px; width:132px; height:28px; color:rgb(0, 0, 255); background:rgb(255,255,255); display:block; visibility:visible; opacity:0.9; border:1px solid black;}</style></head><body><div id=\"root\"><button id=\"btn\" aria-label=\"action state 4 variant 3\">Action 4 B0</button><span>state4</span></div></body></html>"
+  },
+  "('B', 4, 1)": {
+    "visual_raw": "{\"x\": 162, \"y\": 220, \"w\": 136, \"h\": 28, \"count\": 10, \"depth\": 3, \"density\": 0.4}",
+    "computed_style_raw": "{\"color\": \"rgb(0, 0, 255)\", \"backgroundColor\": \"rgb(240, 240, 240)\", \"visibility\": \"visible\", \"display\": \"block\", \"opacity\": \"0.9\"}",
+    "bbox": {
+      "x": 162,
+      "y": 220,
+      "width": 136,
+      "height": 28
+    },
+    "computed_style": {
+      "color": "rgb(0, 0, 255)",
+      "backgroundColor": "rgb(240, 240, 240)",
+      "visibility": "visible",
+      "display": "block",
+      "opacity": "0.9"
+    },
+    "a11y_serial": "[{\"nodeId\": \"1\", \"ignored\": false, \"role\": {\"type\": \"internalRole\", \"value\": \"RootWebArea\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 144}, \"name\": {\"type\": \"computedString\", \"value\": \"\", \"sources\": [{\"type\": \"relatedElement\", \"attribute\": \"aria-labelledby\"}, {\"type\": \"attribute\", \"attribute\": \"aria-label\"}, {\"type\": \"attribute\", \"attribute\": \"aria-label\", \"superseded\": true}, {\"type\": \"relatedElement\", \"nativeSource\": \"title\"}]}, \"properties\": [{\"name\": \"focusable\", \"value\": {\"type\": \"booleanOrUndefined\", \"value\": true}}, {\"name\": \"focused\", \"value\": {\"type\": \"booleanOrUndefined\", \"value\": true}}, {\"name\": \"url\", \"value\": {\"type\": \"string\", \"value\": \"about:blank\"}}], \"childIds\": [\"282\"], \"backendDOMNodeId\": 1, \"frameId\": \"2945389098F6BC4619B514D2FA71CD8F\"}, {\"nodeId\": \"282\", \"ignored\": true, \"ignoredReasons\": [{\"name\": \"uninteresting\", \"value\": {\"type\": \"boolean\", \"value\": true}}], \"role\": {\"type\": \"role\", \"value\": \"none\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 0}, \"parentId\": \"1\", \"childIds\": [\"285\"], \"backendDOMNodeId\": 282}, {\"nodeId\": \"285\", \"ignored\": true, \"ignoredReasons\": [{\"name\": \"uninteresting\", \"value\": {\"type\": \"boolean\", \"value\": true}}], \"role\": {\"type\": \"role\", \"value\": \"none\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 0}, \"parentId\": \"282\", \"childIds\": [\"286\"], \"backendDOMNodeId\": 285}, {\"nodeId\": \"286\", \"ignored\": false, \"role\": {\"type\": \"role\", \"value\": \"generic\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 88}, \"name\": {\"type\": \"computedString\", \"value\": \"\", \"sources\": [{\"type\": \"relatedElement\", \"attribute\": \"aria-labelledby\"}, {\"type\": \"attribute\", \"attribute\": \"aria-label\"}]}, \"properties\": [], \"parentId\": \"285\", \"childIds\": [\"287\", \"289\"], \"backendDOMNodeId\": 286}, {\"nodeId\": \"287\", \"ignored\": false, \"role\": {\"type\": \"role\", \"value\": \"button\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 9}, \"name\": {\"type\": \"computedString\", \"value\": \"action state 4 variant 4\", \"sources\": [{\"type\": \"relatedElement\", \"attribute\": \"aria-labelledby\"}, {\"type\": \"attribute\", \"value\": {\"type\": \"computedString\", \"value\": \"action state 4 variant 4\"}, \"attribute\": \"aria-label\", \"attributeValue\": {\"type\": \"string\", \"value\": \"action state 4 variant 4\"}}, {\"type\": \"relatedElement\", \"superseded\": true, \"nativeSource\": \"label\"}, {\"type\": \"contents\", \"value\": {\"type\": \"computedString\", \"value\": \"Action 4 B1\"}, \"superseded\": true}, {\"type\": \"attribute\", \"attribute\": \"title\", \"superseded\": true}]}, \"properties\": [{\"name\": \"invalid\", \"value\": {\"type\": \"token\", \"value\": \"false\"}}, {\"name\": \"focusable\", \"value\": {\"type\": \"booleanOrUndefined\", \"value\": true}}], \"parentId\": \"286\", \"childIds\": [\"290\"], \"backendDOMNodeId\": 287}]",
+    "a11y_bytes": 4013,
+    "dom_bytes": 390,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "dom_visual": "VB_16_22_27_10",
+    "dom_computed_style": "CS_blue_rgb(240_0.9",
+    "dom_event_seq_base": "click",
+    "ax_cluster": "AX_71e4_4_0",
+    "ax_bytes_len": 2694,
+    "html": "<html><head><style>body{margin:0;padding:0} #btn{position:absolute; left:162px; top:220px; width:136px; height:28px; color:rgb(0, 0, 255); background:rgb(240,240,240); display:block; visibility:visible; opacity:0.9; border:1px solid black;}</style></head><body><div id=\"root\"><button id=\"btn\" aria-label=\"action state 4 variant 4\">Action 4 B1</button><span>state4</span></div></body></html>"
+  },
+  "('B', 4, 2)": {
+    "visual_raw": "{\"x\": 174, \"y\": 220, \"w\": 140, \"h\": 28, \"count\": 11, \"depth\": 3, \"density\": 0.5}",
+    "computed_style_raw": "{\"color\": \"rgb(0, 0, 255)\", \"backgroundColor\": \"rgb(240, 240, 240)\", \"visibility\": \"visible\", \"display\": \"block\", \"opacity\": \"0.9\"}",
+    "bbox": {
+      "x": 174,
+      "y": 220,
+      "width": 140,
+      "height": 28
+    },
+    "computed_style": {
+      "color": "rgb(0, 0, 255)",
+      "backgroundColor": "rgb(240, 240, 240)",
+      "visibility": "visible",
+      "display": "block",
+      "opacity": "0.9"
+    },
+    "a11y_serial": "[{\"nodeId\": \"1\", \"ignored\": false, \"role\": {\"type\": \"internalRole\", \"value\": \"RootWebArea\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 144}, \"name\": {\"type\": \"computedString\", \"value\": \"\", \"sources\": [{\"type\": \"relatedElement\", \"attribute\": \"aria-labelledby\"}, {\"type\": \"attribute\", \"attribute\": \"aria-label\"}, {\"type\": \"attribute\", \"attribute\": \"aria-label\", \"superseded\": true}, {\"type\": \"relatedElement\", \"nativeSource\": \"title\"}]}, \"properties\": [{\"name\": \"focusable\", \"value\": {\"type\": \"booleanOrUndefined\", \"value\": true}}, {\"name\": \"focused\", \"value\": {\"type\": \"booleanOrUndefined\", \"value\": true}}, {\"name\": \"url\", \"value\": {\"type\": \"string\", \"value\": \"about:blank\"}}], \"childIds\": [\"292\"], \"backendDOMNodeId\": 1, \"frameId\": \"2945389098F6BC4619B514D2FA71CD8F\"}, {\"nodeId\": \"292\", \"ignored\": true, \"ignoredReasons\": [{\"name\": \"uninteresting\", \"value\": {\"type\": \"boolean\", \"value\": true}}], \"role\": {\"type\": \"role\", \"value\": \"none\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 0}, \"parentId\": \"1\", \"childIds\": [\"295\"], \"backendDOMNodeId\": 292}, {\"nodeId\": \"295\", \"ignored\": true, \"ignoredReasons\": [{\"name\": \"uninteresting\", \"value\": {\"type\": \"boolean\", \"value\": true}}], \"role\": {\"type\": \"role\", \"value\": \"none\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 0}, \"parentId\": \"292\", \"childIds\": [\"296\"], \"backendDOMNodeId\": 295}, {\"nodeId\": \"296\", \"ignored\": false, \"role\": {\"type\": \"role\", \"value\": \"generic\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 88}, \"name\": {\"type\": \"computedString\", \"value\": \"\", \"sources\": [{\"type\": \"relatedElement\", \"attribute\": \"aria-labelledby\"}, {\"type\": \"attribute\", \"attribute\": \"aria-label\"}]}, \"properties\": [], \"parentId\": \"295\", \"childIds\": [\"297\", \"299\"], \"backendDOMNodeId\": 296}, {\"nodeId\": \"297\", \"ignored\": false, \"role\": {\"type\": \"role\", \"value\": \"button\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 9}, \"name\": {\"type\": \"computedString\", \"value\": \"action state 4 variant 5\", \"sources\": [{\"type\": \"relatedElement\", \"attribute\": \"aria-labelledby\"}, {\"type\": \"attribute\", \"value\": {\"type\": \"computedString\", \"value\": \"action state 4 variant 5\"}, \"attribute\": \"aria-label\", \"attributeValue\": {\"type\": \"string\", \"value\": \"action state 4 variant 5\"}}, {\"type\": \"relatedElement\", \"superseded\": true, \"nativeSource\": \"label\"}, {\"type\": \"contents\", \"value\": {\"type\": \"computedString\", \"value\": \"Action 4 B2\"}, \"superseded\": true}, {\"type\": \"attribute\", \"attribute\": \"title\", \"superseded\": true}]}, \"properties\": [{\"name\": \"invalid\", \"value\": {\"type\": \"token\", \"value\": \"false\"}}, {\"name\": \"focusable\", \"value\": {\"type\": \"booleanOrUndefined\", \"value\": true}}], \"parentId\": \"296\", \"childIds\": [\"300\"], \"backendDOMNodeId\": 297}]",
+    "a11y_bytes": 4013,
+    "dom_bytes": 390,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "dom_visual": "VB_17_22_28_11",
+    "dom_computed_style": "CS_blue_rgb(240_0.9",
+    "dom_event_seq_base": "click",
+    "ax_cluster": "AX_db60_4_1",
+    "ax_bytes_len": 2694,
+    "html": "<html><head><style>body{margin:0;padding:0} #btn{position:absolute; left:174px; top:220px; width:140px; height:28px; color:rgb(0, 0, 255); background:rgb(240,240,240); display:block; visibility:visible; opacity:0.9; border:1px solid black;}</style></head><body><div id=\"root\"><button id=\"btn\" aria-label=\"action state 4 variant 5\">Action 4 B2</button><span>state4</span></div></body></html>"
+  },
+  "('A', 5, 0)": {
+    "visual_raw": "{\"x\": 100, \"y\": 230, \"w\": 120, \"h\": 28, \"count\": 6, \"depth\": 3, \"density\": 0.3}",
+    "computed_style_raw": "{\"color\": \"rgb(255, 0, 0)\", \"backgroundColor\": \"rgb(255, 255, 255)\", \"visibility\": \"visible\", \"display\": \"block\", \"opacity\": \"0.9\"}",
+    "bbox": {
+      "x": 100,
+      "y": 230,
+      "width": 120,
+      "height": 28
+    },
+    "computed_style": {
+      "color": "rgb(255, 0, 0)",
+      "backgroundColor": "rgb(255, 255, 255)",
+      "visibility": "visible",
+      "display": "block",
+      "opacity": "0.9"
+    },
+    "a11y_serial": "[{\"nodeId\": \"1\", \"ignored\": false, \"role\": {\"type\": \"internalRole\", \"value\": \"RootWebArea\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 144}, \"name\": {\"type\": \"computedString\", \"value\": \"\", \"sources\": [{\"type\": \"relatedElement\", \"attribute\": \"aria-labelledby\"}, {\"type\": \"attribute\", \"attribute\": \"aria-label\"}, {\"type\": \"attribute\", \"attribute\": \"aria-label\", \"superseded\": true}, {\"type\": \"relatedElement\", \"nativeSource\": \"title\"}]}, \"properties\": [{\"name\": \"focusable\", \"value\": {\"type\": \"booleanOrUndefined\", \"value\": true}}, {\"name\": \"focused\", \"value\": {\"type\": \"booleanOrUndefined\", \"value\": true}}, {\"name\": \"url\", \"value\": {\"type\": \"string\", \"value\": \"about:blank\"}}], \"childIds\": [\"302\"], \"backendDOMNodeId\": 1, \"frameId\": \"2945389098F6BC4619B514D2FA71CD8F\"}, {\"nodeId\": \"302\", \"ignored\": true, \"ignoredReasons\": [{\"name\": \"uninteresting\", \"value\": {\"type\": \"boolean\", \"value\": true}}], \"role\": {\"type\": \"role\", \"value\": \"none\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 0}, \"parentId\": \"1\", \"childIds\": [\"305\"], \"backendDOMNodeId\": 302}, {\"nodeId\": \"305\", \"ignored\": true, \"ignoredReasons\": [{\"name\": \"uninteresting\", \"value\": {\"type\": \"boolean\", \"value\": true}}], \"role\": {\"type\": \"role\", \"value\": \"none\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 0}, \"parentId\": \"302\", \"childIds\": [\"306\"], \"backendDOMNodeId\": 305}, {\"nodeId\": \"306\", \"ignored\": false, \"role\": {\"type\": \"role\", \"value\": \"generic\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 88}, \"name\": {\"type\": \"computedString\", \"value\": \"\", \"sources\": [{\"type\": \"relatedElement\", \"attribute\": \"aria-labelledby\"}, {\"type\": \"attribute\", \"attribute\": \"aria-label\"}]}, \"properties\": [], \"parentId\": \"305\", \"childIds\": [\"307\", \"309\"], \"backendDOMNodeId\": 306}, {\"nodeId\": \"307\", \"ignored\": false, \"role\": {\"type\": \"role\", \"value\": \"button\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 9}, \"name\": {\"type\": \"computedString\", \"value\": \"action state 5 variant 0\", \"sources\": [{\"type\": \"relatedElement\", \"attribute\": \"aria-labelledby\"}, {\"type\": \"attribute\", \"value\": {\"type\": \"computedString\", \"value\": \"action state 5 variant 0\"}, \"attribute\": \"aria-label\", \"attributeValue\": {\"type\": \"string\", \"value\": \"action state 5 variant 0\"}}, {\"type\": \"relatedElement\", \"superseded\": true, \"nativeSource\": \"label\"}, {\"type\": \"contents\", \"value\": {\"type\": \"computedString\", \"value\": \"Action 5 A0\"}, \"superseded\": true}, {\"type\": \"attribute\", \"attribute\": \"title\", \"superseded\": true}]}, \"properties\": [{\"name\": \"invalid\", \"value\": {\"type\": \"token\", \"value\": \"false\"}}, {\"name\": \"focusable\", \"value\": {\"type\": \"booleanOrUndefined\", \"value\": true}}], \"parentId\": \"306\", \"childIds\": [\"310\"], \"backendDOMNodeId\": 307}]",
+    "a11y_bytes": 4013,
+    "dom_bytes": 390,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "dom_visual": "VB_10_23_24_6",
+    "dom_computed_style": "CS_red_rgb(255_0.9",
+    "dom_event_seq_base": "click",
+    "ax_cluster": "AX_5645_5_0",
+    "ax_bytes_len": 2694,
+    "html": "<html><head><style>body{margin:0;padding:0} #btn{position:absolute; left:100px; top:230px; width:120px; height:28px; color:rgb(255, 0, 0); background:rgb(255,255,255); display:block; visibility:visible; opacity:0.9; border:1px solid black;}</style></head><body><div id=\"root\"><button id=\"btn\" aria-label=\"action state 5 variant 0\">Action 5 A0</button><span>state5</span></div></body></html>"
+  },
+  "('A', 5, 1)": {
+    "visual_raw": "{\"x\": 112, \"y\": 230, \"w\": 124, \"h\": 28, \"count\": 7, \"depth\": 3, \"density\": 0.4}",
+    "computed_style_raw": "{\"color\": \"rgb(255, 0, 0)\", \"backgroundColor\": \"rgb(240, 240, 240)\", \"visibility\": \"visible\", \"display\": \"block\", \"opacity\": \"0.9\"}",
+    "bbox": {
+      "x": 112,
+      "y": 230,
+      "width": 124,
+      "height": 28
+    },
+    "computed_style": {
+      "color": "rgb(255, 0, 0)",
+      "backgroundColor": "rgb(240, 240, 240)",
+      "visibility": "visible",
+      "display": "block",
+      "opacity": "0.9"
+    },
+    "a11y_serial": "[{\"nodeId\": \"1\", \"ignored\": false, \"role\": {\"type\": \"internalRole\", \"value\": \"RootWebArea\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 144}, \"name\": {\"type\": \"computedString\", \"value\": \"\", \"sources\": [{\"type\": \"relatedElement\", \"attribute\": \"aria-labelledby\"}, {\"type\": \"attribute\", \"attribute\": \"aria-label\"}, {\"type\": \"attribute\", \"attribute\": \"aria-label\", \"superseded\": true}, {\"type\": \"relatedElement\", \"nativeSource\": \"title\"}]}, \"properties\": [{\"name\": \"focusable\", \"value\": {\"type\": \"booleanOrUndefined\", \"value\": true}}, {\"name\": \"focused\", \"value\": {\"type\": \"booleanOrUndefined\", \"value\": true}}, {\"name\": \"url\", \"value\": {\"type\": \"string\", \"value\": \"about:blank\"}}], \"childIds\": [\"312\"], \"backendDOMNodeId\": 1, \"frameId\": \"2945389098F6BC4619B514D2FA71CD8F\"}, {\"nodeId\": \"312\", \"ignored\": true, \"ignoredReasons\": [{\"name\": \"uninteresting\", \"value\": {\"type\": \"boolean\", \"value\": true}}], \"role\": {\"type\": \"role\", \"value\": \"none\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 0}, \"parentId\": \"1\", \"childIds\": [\"315\"], \"backendDOMNodeId\": 312}, {\"nodeId\": \"315\", \"ignored\": true, \"ignoredReasons\": [{\"name\": \"uninteresting\", \"value\": {\"type\": \"boolean\", \"value\": true}}], \"role\": {\"type\": \"role\", \"value\": \"none\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 0}, \"parentId\": \"312\", \"childIds\": [\"316\"], \"backendDOMNodeId\": 315}, {\"nodeId\": \"316\", \"ignored\": false, \"role\": {\"type\": \"role\", \"value\": \"generic\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 88}, \"name\": {\"type\": \"computedString\", \"value\": \"\", \"sources\": [{\"type\": \"relatedElement\", \"attribute\": \"aria-labelledby\"}, {\"type\": \"attribute\", \"attribute\": \"aria-label\"}]}, \"properties\": [], \"parentId\": \"315\", \"childIds\": [\"317\", \"319\"], \"backendDOMNodeId\": 316}, {\"nodeId\": \"317\", \"ignored\": false, \"role\": {\"type\": \"role\", \"value\": \"button\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 9}, \"name\": {\"type\": \"computedString\", \"value\": \"action state 5 variant 1\", \"sources\": [{\"type\": \"relatedElement\", \"attribute\": \"aria-labelledby\"}, {\"type\": \"attribute\", \"value\": {\"type\": \"computedString\", \"value\": \"action state 5 variant 1\"}, \"attribute\": \"aria-label\", \"attributeValue\": {\"type\": \"string\", \"value\": \"action state 5 variant 1\"}}, {\"type\": \"relatedElement\", \"superseded\": true, \"nativeSource\": \"label\"}, {\"type\": \"contents\", \"value\": {\"type\": \"computedString\", \"value\": \"Action 5 A1\"}, \"superseded\": true}, {\"type\": \"attribute\", \"attribute\": \"title\", \"superseded\": true}]}, \"properties\": [{\"name\": \"invalid\", \"value\": {\"type\": \"token\", \"value\": \"false\"}}, {\"name\": \"focusable\", \"value\": {\"type\": \"booleanOrUndefined\", \"value\": true}}], \"parentId\": \"316\", \"childIds\": [\"320\"], \"backendDOMNodeId\": 317}]",
+    "a11y_bytes": 4013,
+    "dom_bytes": 390,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "dom_visual": "VB_11_23_24_7",
+    "dom_computed_style": "CS_red_rgb(240_0.9",
+    "dom_event_seq_base": "click",
+    "ax_cluster": "AX_dc40_5_1",
+    "ax_bytes_len": 2694,
+    "html": "<html><head><style>body{margin:0;padding:0} #btn{position:absolute; left:112px; top:230px; width:124px; height:28px; color:rgb(255, 0, 0); background:rgb(240,240,240); display:block; visibility:visible; opacity:0.9; border:1px solid black;}</style></head><body><div id=\"root\"><button id=\"btn\" aria-label=\"action state 5 variant 1\">Action 5 A1</button><span>state5</span></div></body></html>"
+  },
+  "('A', 5, 2)": {
+    "visual_raw": "{\"x\": 124, \"y\": 230, \"w\": 128, \"h\": 28, \"count\": 8, \"depth\": 3, \"density\": 0.5}",
+    "computed_style_raw": "{\"color\": \"rgb(255, 0, 0)\", \"backgroundColor\": \"rgb(240, 240, 240)\", \"visibility\": \"visible\", \"display\": \"block\", \"opacity\": \"0.9\"}",
+    "bbox": {
+      "x": 124,
+      "y": 230,
+      "width": 128,
+      "height": 28
+    },
+    "computed_style": {
+      "color": "rgb(255, 0, 0)",
+      "backgroundColor": "rgb(240, 240, 240)",
+      "visibility": "visible",
+      "display": "block",
+      "opacity": "0.9"
+    },
+    "a11y_serial": "[{\"nodeId\": \"1\", \"ignored\": false, \"role\": {\"type\": \"internalRole\", \"value\": \"RootWebArea\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 144}, \"name\": {\"type\": \"computedString\", \"value\": \"\", \"sources\": [{\"type\": \"relatedElement\", \"attribute\": \"aria-labelledby\"}, {\"type\": \"attribute\", \"attribute\": \"aria-label\"}, {\"type\": \"attribute\", \"attribute\": \"aria-label\", \"superseded\": true}, {\"type\": \"relatedElement\", \"nativeSource\": \"title\"}]}, \"properties\": [{\"name\": \"focusable\", \"value\": {\"type\": \"booleanOrUndefined\", \"value\": true}}, {\"name\": \"focused\", \"value\": {\"type\": \"booleanOrUndefined\", \"value\": true}}, {\"name\": \"url\", \"value\": {\"type\": \"string\", \"value\": \"about:blank\"}}], \"childIds\": [\"322\"], \"backendDOMNodeId\": 1, \"frameId\": \"2945389098F6BC4619B514D2FA71CD8F\"}, {\"nodeId\": \"322\", \"ignored\": true, \"ignoredReasons\": [{\"name\": \"uninteresting\", \"value\": {\"type\": \"boolean\", \"value\": true}}], \"role\": {\"type\": \"role\", \"value\": \"none\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 0}, \"parentId\": \"1\", \"childIds\": [\"325\"], \"backendDOMNodeId\": 322}, {\"nodeId\": \"325\", \"ignored\": true, \"ignoredReasons\": [{\"name\": \"uninteresting\", \"value\": {\"type\": \"boolean\", \"value\": true}}], \"role\": {\"type\": \"role\", \"value\": \"none\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 0}, \"parentId\": \"322\", \"childIds\": [\"326\"], \"backendDOMNodeId\": 325}, {\"nodeId\": \"326\", \"ignored\": false, \"role\": {\"type\": \"role\", \"value\": \"generic\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 88}, \"name\": {\"type\": \"computedString\", \"value\": \"\", \"sources\": [{\"type\": \"relatedElement\", \"attribute\": \"aria-labelledby\"}, {\"type\": \"attribute\", \"attribute\": \"aria-label\"}]}, \"properties\": [], \"parentId\": \"325\", \"childIds\": [\"327\", \"329\"], \"backendDOMNodeId\": 326}, {\"nodeId\": \"327\", \"ignored\": false, \"role\": {\"type\": \"role\", \"value\": \"button\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 9}, \"name\": {\"type\": \"computedString\", \"value\": \"action state 5 variant 2\", \"sources\": [{\"type\": \"relatedElement\", \"attribute\": \"aria-labelledby\"}, {\"type\": \"attribute\", \"value\": {\"type\": \"computedString\", \"value\": \"action state 5 variant 2\"}, \"attribute\": \"aria-label\", \"attributeValue\": {\"type\": \"string\", \"value\": \"action state 5 variant 2\"}}, {\"type\": \"relatedElement\", \"superseded\": true, \"nativeSource\": \"label\"}, {\"type\": \"contents\", \"value\": {\"type\": \"computedString\", \"value\": \"Action 5 A2\"}, \"superseded\": true}, {\"type\": \"attribute\", \"attribute\": \"title\", \"superseded\": true}]}, \"properties\": [{\"name\": \"invalid\", \"value\": {\"type\": \"token\", \"value\": \"false\"}}, {\"name\": \"focusable\", \"value\": {\"type\": \"booleanOrUndefined\", \"value\": true}}], \"parentId\": \"326\", \"childIds\": [\"330\"], \"backendDOMNodeId\": 327}]",
+    "a11y_bytes": 4013,
+    "dom_bytes": 390,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "dom_visual": "VB_12_23_25_8",
+    "dom_computed_style": "CS_red_rgb(240_0.9",
+    "dom_event_seq_base": "click",
+    "ax_cluster": "AX_62ab_5_2",
+    "ax_bytes_len": 2694,
+    "html": "<html><head><style>body{margin:0;padding:0} #btn{position:absolute; left:124px; top:230px; width:128px; height:28px; color:rgb(255, 0, 0); background:rgb(240,240,240); display:block; visibility:visible; opacity:0.9; border:1px solid black;}</style></head><body><div id=\"root\"><button id=\"btn\" aria-label=\"action state 5 variant 2\">Action 5 A2</button><span>state5</span></div></body></html>"
+  },
+  "('B', 5, 0)": {
+    "visual_raw": "{\"x\": 150, \"y\": 230, \"w\": 132, \"h\": 28, \"count\": 9, \"depth\": 3, \"density\": 0.3}",
+    "computed_style_raw": "{\"color\": \"rgb(0, 0, 255)\", \"backgroundColor\": \"rgb(255, 255, 255)\", \"visibility\": \"visible\", \"display\": \"block\", \"opacity\": \"0.9\"}",
+    "bbox": {
+      "x": 150,
+      "y": 230,
+      "width": 132,
+      "height": 28
+    },
+    "computed_style": {
+      "color": "rgb(0, 0, 255)",
+      "backgroundColor": "rgb(255, 255, 255)",
+      "visibility": "visible",
+      "display": "block",
+      "opacity": "0.9"
+    },
+    "a11y_serial": "[{\"nodeId\": \"1\", \"ignored\": false, \"role\": {\"type\": \"internalRole\", \"value\": \"RootWebArea\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 144}, \"name\": {\"type\": \"computedString\", \"value\": \"\", \"sources\": [{\"type\": \"relatedElement\", \"attribute\": \"aria-labelledby\"}, {\"type\": \"attribute\", \"attribute\": \"aria-label\"}, {\"type\": \"attribute\", \"attribute\": \"aria-label\", \"superseded\": true}, {\"type\": \"relatedElement\", \"nativeSource\": \"title\"}]}, \"properties\": [{\"name\": \"focusable\", \"value\": {\"type\": \"booleanOrUndefined\", \"value\": true}}, {\"name\": \"focused\", \"value\": {\"type\": \"booleanOrUndefined\", \"value\": true}}, {\"name\": \"url\", \"value\": {\"type\": \"string\", \"value\": \"about:blank\"}}], \"childIds\": [\"332\"], \"backendDOMNodeId\": 1, \"frameId\": \"2945389098F6BC4619B514D2FA71CD8F\"}, {\"nodeId\": \"332\", \"ignored\": true, \"ignoredReasons\": [{\"name\": \"uninteresting\", \"value\": {\"type\": \"boolean\", \"value\": true}}], \"role\": {\"type\": \"role\", \"value\": \"none\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 0}, \"parentId\": \"1\", \"childIds\": [\"335\"], \"backendDOMNodeId\": 332}, {\"nodeId\": \"335\", \"ignored\": true, \"ignoredReasons\": [{\"name\": \"uninteresting\", \"value\": {\"type\": \"boolean\", \"value\": true}}], \"role\": {\"type\": \"role\", \"value\": \"none\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 0}, \"parentId\": \"332\", \"childIds\": [\"336\"], \"backendDOMNodeId\": 335}, {\"nodeId\": \"336\", \"ignored\": false, \"role\": {\"type\": \"role\", \"value\": \"generic\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 88}, \"name\": {\"type\": \"computedString\", \"value\": \"\", \"sources\": [{\"type\": \"relatedElement\", \"attribute\": \"aria-labelledby\"}, {\"type\": \"attribute\", \"attribute\": \"aria-label\"}]}, \"properties\": [], \"parentId\": \"335\", \"childIds\": [\"337\", \"339\"], \"backendDOMNodeId\": 336}, {\"nodeId\": \"337\", \"ignored\": false, \"role\": {\"type\": \"role\", \"value\": \"button\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 9}, \"name\": {\"type\": \"computedString\", \"value\": \"action state 5 variant 3\", \"sources\": [{\"type\": \"relatedElement\", \"attribute\": \"aria-labelledby\"}, {\"type\": \"attribute\", \"value\": {\"type\": \"computedString\", \"value\": \"action state 5 variant 3\"}, \"attribute\": \"aria-label\", \"attributeValue\": {\"type\": \"string\", \"value\": \"action state 5 variant 3\"}}, {\"type\": \"relatedElement\", \"superseded\": true, \"nativeSource\": \"label\"}, {\"type\": \"contents\", \"value\": {\"type\": \"computedString\", \"value\": \"Action 5 B0\"}, \"superseded\": true}, {\"type\": \"attribute\", \"attribute\": \"title\", \"superseded\": true}]}, \"properties\": [{\"name\": \"invalid\", \"value\": {\"type\": \"token\", \"value\": \"false\"}}, {\"name\": \"focusable\", \"value\": {\"type\": \"booleanOrUndefined\", \"value\": true}}], \"parentId\": \"336\", \"childIds\": [\"340\"], \"backendDOMNodeId\": 337}]",
+    "a11y_bytes": 4013,
+    "dom_bytes": 390,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "dom_visual": "VB_15_23_26_9",
+    "dom_computed_style": "CS_blue_rgb(255_0.9",
+    "dom_event_seq_base": "click",
+    "ax_cluster": "AX_7802_5_3",
+    "ax_bytes_len": 2694,
+    "html": "<html><head><style>body{margin:0;padding:0} #btn{position:absolute; left:150px; top:230px; width:132px; height:28px; color:rgb(0, 0, 255); background:rgb(255,255,255); display:block; visibility:visible; opacity:0.9; border:1px solid black;}</style></head><body><div id=\"root\"><button id=\"btn\" aria-label=\"action state 5 variant 3\">Action 5 B0</button><span>state5</span></div></body></html>"
+  },
+  "('B', 5, 1)": {
+    "visual_raw": "{\"x\": 162, \"y\": 230, \"w\": 136, \"h\": 28, \"count\": 10, \"depth\": 3, \"density\": 0.4}",
+    "computed_style_raw": "{\"color\": \"rgb(0, 0, 255)\", \"backgroundColor\": \"rgb(240, 240, 240)\", \"visibility\": \"visible\", \"display\": \"block\", \"opacity\": \"0.9\"}",
+    "bbox": {
+      "x": 162,
+      "y": 230,
+      "width": 136,
+      "height": 28
+    },
+    "computed_style": {
+      "color": "rgb(0, 0, 255)",
+      "backgroundColor": "rgb(240, 240, 240)",
+      "visibility": "visible",
+      "display": "block",
+      "opacity": "0.9"
+    },
+    "a11y_serial": "[{\"nodeId\": \"1\", \"ignored\": false, \"role\": {\"type\": \"internalRole\", \"value\": \"RootWebArea\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 144}, \"name\": {\"type\": \"computedString\", \"value\": \"\", \"sources\": [{\"type\": \"relatedElement\", \"attribute\": \"aria-labelledby\"}, {\"type\": \"attribute\", \"attribute\": \"aria-label\"}, {\"type\": \"attribute\", \"attribute\": \"aria-label\", \"superseded\": true}, {\"type\": \"relatedElement\", \"nativeSource\": \"title\"}]}, \"properties\": [{\"name\": \"focusable\", \"value\": {\"type\": \"booleanOrUndefined\", \"value\": true}}, {\"name\": \"focused\", \"value\": {\"type\": \"booleanOrUndefined\", \"value\": true}}, {\"name\": \"url\", \"value\": {\"type\": \"string\", \"value\": \"about:blank\"}}], \"childIds\": [\"342\"], \"backendDOMNodeId\": 1, \"frameId\": \"2945389098F6BC4619B514D2FA71CD8F\"}, {\"nodeId\": \"342\", \"ignored\": true, \"ignoredReasons\": [{\"name\": \"uninteresting\", \"value\": {\"type\": \"boolean\", \"value\": true}}], \"role\": {\"type\": \"role\", \"value\": \"none\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 0}, \"parentId\": \"1\", \"childIds\": [\"345\"], \"backendDOMNodeId\": 342}, {\"nodeId\": \"345\", \"ignored\": true, \"ignoredReasons\": [{\"name\": \"uninteresting\", \"value\": {\"type\": \"boolean\", \"value\": true}}], \"role\": {\"type\": \"role\", \"value\": \"none\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 0}, \"parentId\": \"342\", \"childIds\": [\"346\"], \"backendDOMNodeId\": 345}, {\"nodeId\": \"346\", \"ignored\": false, \"role\": {\"type\": \"role\", \"value\": \"generic\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 88}, \"name\": {\"type\": \"computedString\", \"value\": \"\", \"sources\": [{\"type\": \"relatedElement\", \"attribute\": \"aria-labelledby\"}, {\"type\": \"attribute\", \"attribute\": \"aria-label\"}]}, \"properties\": [], \"parentId\": \"345\", \"childIds\": [\"347\", \"349\"], \"backendDOMNodeId\": 346}, {\"nodeId\": \"347\", \"ignored\": false, \"role\": {\"type\": \"role\", \"value\": \"button\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 9}, \"name\": {\"type\": \"computedString\", \"value\": \"action state 5 variant 4\", \"sources\": [{\"type\": \"relatedElement\", \"attribute\": \"aria-labelledby\"}, {\"type\": \"attribute\", \"value\": {\"type\": \"computedString\", \"value\": \"action state 5 variant 4\"}, \"attribute\": \"aria-label\", \"attributeValue\": {\"type\": \"string\", \"value\": \"action state 5 variant 4\"}}, {\"type\": \"relatedElement\", \"superseded\": true, \"nativeSource\": \"label\"}, {\"type\": \"contents\", \"value\": {\"type\": \"computedString\", \"value\": \"Action 5 B1\"}, \"superseded\": true}, {\"type\": \"attribute\", \"attribute\": \"title\", \"superseded\": true}]}, \"properties\": [{\"name\": \"invalid\", \"value\": {\"type\": \"token\", \"value\": \"false\"}}, {\"name\": \"focusable\", \"value\": {\"type\": \"booleanOrUndefined\", \"value\": true}}], \"parentId\": \"346\", \"childIds\": [\"350\"], \"backendDOMNodeId\": 347}]",
+    "a11y_bytes": 4013,
+    "dom_bytes": 390,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "dom_visual": "VB_16_23_27_10",
+    "dom_computed_style": "CS_blue_rgb(240_0.9",
+    "dom_event_seq_base": "click",
+    "ax_cluster": "AX_b9f1_5_0",
+    "ax_bytes_len": 2694,
+    "html": "<html><head><style>body{margin:0;padding:0} #btn{position:absolute; left:162px; top:230px; width:136px; height:28px; color:rgb(0, 0, 255); background:rgb(240,240,240); display:block; visibility:visible; opacity:0.9; border:1px solid black;}</style></head><body><div id=\"root\"><button id=\"btn\" aria-label=\"action state 5 variant 4\">Action 5 B1</button><span>state5</span></div></body></html>"
+  },
+  "('B', 5, 2)": {
+    "visual_raw": "{\"x\": 174, \"y\": 230, \"w\": 140, \"h\": 28, \"count\": 11, \"depth\": 3, \"density\": 0.5}",
+    "computed_style_raw": "{\"color\": \"rgb(0, 0, 255)\", \"backgroundColor\": \"rgb(240, 240, 240)\", \"visibility\": \"visible\", \"display\": \"block\", \"opacity\": \"0.9\"}",
+    "bbox": {
+      "x": 174,
+      "y": 230,
+      "width": 140,
+      "height": 28
+    },
+    "computed_style": {
+      "color": "rgb(0, 0, 255)",
+      "backgroundColor": "rgb(240, 240, 240)",
+      "visibility": "visible",
+      "display": "block",
+      "opacity": "0.9"
+    },
+    "a11y_serial": "[{\"nodeId\": \"1\", \"ignored\": false, \"role\": {\"type\": \"internalRole\", \"value\": \"RootWebArea\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 144}, \"name\": {\"type\": \"computedString\", \"value\": \"\", \"sources\": [{\"type\": \"relatedElement\", \"attribute\": \"aria-labelledby\"}, {\"type\": \"attribute\", \"attribute\": \"aria-label\"}, {\"type\": \"attribute\", \"attribute\": \"aria-label\", \"superseded\": true}, {\"type\": \"relatedElement\", \"nativeSource\": \"title\"}]}, \"properties\": [{\"name\": \"focusable\", \"value\": {\"type\": \"booleanOrUndefined\", \"value\": true}}, {\"name\": \"focused\", \"value\": {\"type\": \"booleanOrUndefined\", \"value\": true}}, {\"name\": \"url\", \"value\": {\"type\": \"string\", \"value\": \"about:blank\"}}], \"childIds\": [\"352\"], \"backendDOMNodeId\": 1, \"frameId\": \"2945389098F6BC4619B514D2FA71CD8F\"}, {\"nodeId\": \"352\", \"ignored\": true, \"ignoredReasons\": [{\"name\": \"uninteresting\", \"value\": {\"type\": \"boolean\", \"value\": true}}], \"role\": {\"type\": \"role\", \"value\": \"none\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 0}, \"parentId\": \"1\", \"childIds\": [\"355\"], \"backendDOMNodeId\": 352}, {\"nodeId\": \"355\", \"ignored\": true, \"ignoredReasons\": [{\"name\": \"uninteresting\", \"value\": {\"type\": \"boolean\", \"value\": true}}], \"role\": {\"type\": \"role\", \"value\": \"none\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 0}, \"parentId\": \"352\", \"childIds\": [\"356\"], \"backendDOMNodeId\": 355}, {\"nodeId\": \"356\", \"ignored\": false, \"role\": {\"type\": \"role\", \"value\": \"generic\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 88}, \"name\": {\"type\": \"computedString\", \"value\": \"\", \"sources\": [{\"type\": \"relatedElement\", \"attribute\": \"aria-labelledby\"}, {\"type\": \"attribute\", \"attribute\": \"aria-label\"}]}, \"properties\": [], \"parentId\": \"355\", \"childIds\": [\"357\", \"359\"], \"backendDOMNodeId\": 356}, {\"nodeId\": \"357\", \"ignored\": false, \"role\": {\"type\": \"role\", \"value\": \"button\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 9}, \"name\": {\"type\": \"computedString\", \"value\": \"action state 5 variant 5\", \"sources\": [{\"type\": \"relatedElement\", \"attribute\": \"aria-labelledby\"}, {\"type\": \"attribute\", \"value\": {\"type\": \"computedString\", \"value\": \"action state 5 variant 5\"}, \"attribute\": \"aria-label\", \"attributeValue\": {\"type\": \"string\", \"value\": \"action state 5 variant 5\"}}, {\"type\": \"relatedElement\", \"superseded\": true, \"nativeSource\": \"label\"}, {\"type\": \"contents\", \"value\": {\"type\": \"computedString\", \"value\": \"Action 5 B2\"}, \"superseded\": true}, {\"type\": \"attribute\", \"attribute\": \"title\", \"superseded\": true}]}, \"properties\": [{\"name\": \"invalid\", \"value\": {\"type\": \"token\", \"value\": \"false\"}}, {\"name\": \"focusable\", \"value\": {\"type\": \"booleanOrUndefined\", \"value\": true}}], \"parentId\": \"356\", \"childIds\": [\"360\"], \"backendDOMNodeId\": 357}]",
+    "a11y_bytes": 4013,
+    "dom_bytes": 390,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "dom_visual": "VB_17_23_28_11",
+    "dom_computed_style": "CS_blue_rgb(240_0.9",
+    "dom_event_seq_base": "click",
+    "ax_cluster": "AX_3a19_5_1",
+    "ax_bytes_len": 2694,
+    "html": "<html><head><style>body{margin:0;padding:0} #btn{position:absolute; left:174px; top:230px; width:140px; height:28px; color:rgb(0, 0, 255); background:rgb(240,240,240); display:block; visibility:visible; opacity:0.9; border:1px solid black;}</style></head><body><div id=\"root\"><button id=\"btn\" aria-label=\"action state 5 variant 5\">Action 5 B2</button><span>state5</span></div></body></html>"
+  }
+}
