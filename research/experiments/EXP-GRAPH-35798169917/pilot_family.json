@@ -1,0 +1,570 @@
+{
+  "pilot_family": "add_to_cart",
+  "pool_a": [
+    {
+      "task_id": "task_0000",
+      "intent": "add_to_cart",
+      "intent_template": "Add {{sku}} to cart",
+      "instantiation_dict": {
+        "sku": "SKU-A001"
+      },
+      "param_values": {
+        "sku": "SKU-A001"
+      },
+      "action": {
+        "method": "POST",
+        "url": "https://shop.example.com/product/sku-a001",
+        "headers": {
+          "Content-Type": "application/json",
+          "X-Csrf-Token": "CSRF-SKU-A001"
+        },
+        "body": {
+          "sku": "SKU-A001",
+          "qty": "1"
+        }
+      },
+      "postconditions": {
+        "ok": true,
+        "url": "https://shop.example.com/product/sku-a001"
+      },
+      "resource_pool": "A"
+    },
+    {
+      "task_id": "task_0001",
+      "intent": "add_to_cart",
+      "intent_template": "Add {{sku}} to cart",
+      "instantiation_dict": {
+        "sku": "SKU-A002"
+      },
+      "param_values": {
+        "sku": "SKU-A002"
+      },
+      "action": {
+        "method": "POST",
+        "url": "https://shop.example.com/product/sku-a002",
+        "headers": {
+          "Content-Type": "application/json",
+          "X-Csrf-Token": "CSRF-SKU-A002"
+        },
+        "body": {
+          "sku": "SKU-A002",
+          "qty": "1"
+        }
+      },
+      "postconditions": {
+        "ok": true,
+        "url": "https://shop.example.com/product/sku-a002"
+      },
+      "resource_pool": "A"
+    },
+    {
+      "task_id": "task_0002",
+      "intent": "add_to_cart",
+      "intent_template": "Add {{sku}} to cart",
+      "instantiation_dict": {
+        "sku": "SKU-A003"
+      },
+      "param_values": {
+        "sku": "SKU-A003"
+      },
+      "action": {
+        "method": "POST",
+        "url": "https://shop.example.com/product/sku-a003",
+        "headers": {
+          "Content-Type": "application/json",
+          "X-Csrf-Token": "CSRF-SKU-A003"
+        },
+        "body": {
+          "sku": "SKU-A003",
+          "qty": "1"
+        }
+      },
+      "postconditions": {
+        "ok": true,
+        "url": "https://shop.example.com/product/sku-a003"
+      },
+      "resource_pool": "A"
+    },
+    {
+      "task_id": "task_0003",
+      "intent": "add_to_cart",
+      "intent_template": "Add {{sku}} to cart",
+      "instantiation_dict": {
+        "sku": "SKU-A004"
+      },
+      "param_values": {
+        "sku": "SKU-A004"
+      },
+      "action": {
+        "method": "POST",
+        "url": "https://shop.example.com/product/sku-a004",
+        "headers": {
+          "Content-Type": "application/json",
+          "X-Csrf-Token": "CSRF-SKU-A004"
+        },
+        "body": {
+          "sku": "SKU-A004",
+          "qty": "1"
+        }
+      },
+      "postconditions": {
+        "ok": true,
+        "url": "https://shop.example.com/product/sku-a004"
+      },
+      "resource_pool": "A"
+    },
+    {
+      "task_id": "task_0004",
+      "intent": "add_to_cart",
+      "intent_template": "Add {{sku}} to cart",
+      "instantiation_dict": {
+        "sku": "SKU-A005"
+      },
+      "param_values": {
+        "sku": "SKU-A005"
+      },
+      "action": {
+        "method": "POST",
+        "url": "https://shop.example.com/product/sku-a005",
+        "headers": {
+          "Content-Type": "application/json",
+          "X-Csrf-Token": "CSRF-SKU-A005"
+        },
+        "body": {
+          "sku": "SKU-A005",
+          "qty": "1"
+        }
+      },
+      "postconditions": {
+        "ok": true,
+        "url": "https://shop.example.com/product/sku-a005"
+      },
+      "resource_pool": "A"
+    },
+    {
+      "task_id": "task_0005",
+      "intent": "add_to_cart",
+      "intent_template": "Add {{sku}} to cart",
+      "instantiation_dict": {
+        "sku": "SKU-A006"
+      },
+      "param_values": {
+        "sku": "SKU-A006"
+      },
+      "action": {
+        "method": "POST",
+        "url": "https://shop.example.com/product/sku-a006",
+        "headers": {
+          "Content-Type": "application/json",
+          "X-Csrf-Token": "CSRF-SKU-A006"
+        },
+        "body": {
+          "sku": "SKU-A006",
+          "qty": "1"
+        }
+      },
+      "postconditions": {
+        "ok": true,
+        "url": "https://shop.example.com/product/sku-a006"
+      },
+      "resource_pool": "A"
+    },
+    {
+      "task_id": "task_0006",
+      "intent": "add_to_cart",
+      "intent_template": "Add {{sku}} to cart",
+      "instantiation_dict": {
+        "sku": "SKU-A007"
+      },
+      "param_values": {
+        "sku": "SKU-A007"
+      },
+      "action": {
+        "method": "POST",
+        "url": "https://shop.example.com/product/sku-a007",
+        "headers": {
+          "Content-Type": "application/json",
+          "X-Csrf-Token": "CSRF-SKU-A007"
+        },
+        "body": {
+          "sku": "SKU-A007",
+          "qty": "1"
+        }
+      },
+      "postconditions": {
+        "ok": true,
+        "url": "https://shop.example.com/product/sku-a007"
+      },
+      "resource_pool": "A"
+    },
+    {
+      "task_id": "task_0007",
+      "intent": "add_to_cart",
+      "intent_template": "Add {{sku}} to cart",
+      "instantiation_dict": {
+        "sku": "SKU-A008"
+      },
+      "param_values": {
+        "sku": "SKU-A008"
+      },
+      "action": {
+        "method": "POST",
+        "url": "https://shop.example.com/product/sku-a008",
+        "headers": {
+          "Content-Type": "application/json",
+          "X-Csrf-Token": "CSRF-SKU-A008"
+        },
+        "body": {
+          "sku": "SKU-A008",
+          "qty": "1"
+        }
+      },
+      "postconditions": {
+        "ok": true,
+        "url": "https://shop.example.com/product/sku-a008"
+      },
+      "resource_pool": "A"
+    },
+    {
+      "task_id": "task_0008",
+      "intent": "add_to_cart",
+      "intent_template": "Add {{sku}} to cart",
+      "instantiation_dict": {
+        "sku": "SKU-A009"
+      },
+      "param_values": {
+        "sku": "SKU-A009"
+      },
+      "action": {
+        "method": "POST",
+        "url": "https://shop.example.com/product/sku-a009",
+        "headers": {
+          "Content-Type": "application/json",
+          "X-Csrf-Token": "CSRF-SKU-A009"
+        },
+        "body": {
+          "sku": "SKU-A009",
+          "qty": "1"
+        }
+      },
+      "postconditions": {
+        "ok": true,
+        "url": "https://shop.example.com/product/sku-a009"
+      },
+      "resource_pool": "A"
+    },
+    {
+      "task_id": "task_0009",
+      "intent": "add_to_cart",
+      "intent_template": "Add {{sku}} to cart",
+      "instantiation_dict": {
+        "sku": "SKU-A010"
+      },
+      "param_values": {
+        "sku": "SKU-A010"
+      },
+      "action": {
+        "method": "POST",
+        "url": "https://shop.example.com/product/sku-a010",
+        "headers": {
+          "Content-Type": "application/json",
+          "X-Csrf-Token": "CSRF-SKU-A010"
+        },
+        "body": {
+          "sku": "SKU-A010",
+          "qty": "1"
+        }
+      },
+      "postconditions": {
+        "ok": true,
+        "url": "https://shop.example.com/product/sku-a010"
+      },
+      "resource_pool": "A"
+    }
+  ],
+  "pool_b": [
+    {
+      "task_id": "task_0010",
+      "intent": "add_to_cart",
+      "intent_template": "Add {{sku}} to cart",
+      "instantiation_dict": {
+        "sku": "SKU-B001"
+      },
+      "param_values": {
+        "sku": "SKU-B001"
+      },
+      "action": {
+        "method": "POST",
+        "url": "https://shop.example.com/product/sku-b001",
+        "headers": {
+          "Content-Type": "application/json",
+          "X-Csrf-Token": "CSRF-SKU-B001"
+        },
+        "body": {
+          "sku": "SKU-B001",
+          "qty": "1"
+        }
+      },
+      "postconditions": {
+        "ok": true,
+        "url": "https://shop.example.com/product/sku-b001"
+      },
+      "resource_pool": "B"
+    },
+    {
+      "task_id": "task_0011",
+      "intent": "add_to_cart",
+      "intent_template": "Add {{sku}} to cart",
+      "instantiation_dict": {
+        "sku": "SKU-B002"
+      },
+      "param_values": {
+        "sku": "SKU-B002"
+      },
+      "action": {
+        "method": "POST",
+        "url": "https://shop.example.com/product/sku-b002",
+        "headers": {
+          "Content-Type": "application/json",
+          "X-Csrf-Token": "CSRF-SKU-B002"
+        },
+        "body": {
+          "sku": "SKU-B002",
+          "qty": "1"
+        }
+      },
+      "postconditions": {
+        "ok": true,
+        "url": "https://shop.example.com/product/sku-b002"
+      },
+      "resource_pool": "B"
+    },
+    {
+      "task_id": "task_0012",
+      "intent": "add_to_cart",
+      "intent_template": "Add {{sku}} to cart",
+      "instantiation_dict": {
+        "sku": "SKU-B003"
+      },
+      "param_values": {
+        "sku": "SKU-B003"
+      },
+      "action": {
+        "method": "POST",
+        "url": "https://shop.example.com/product/sku-b003",
+        "headers": {
+          "Content-Type": "application/json",
+          "X-Csrf-Token": "CSRF-SKU-B003"
+        },
+        "body": {
+          "sku": "SKU-B003",
+          "qty": "1"
+        }
+      },
+      "postconditions": {
+        "ok": true,
+        "url": "https://shop.example.com/product/sku-b003"
+      },
+      "resource_pool": "B"
+    },
+    {
+      "task_id": "task_0013",
+      "intent": "add_to_cart",
+      "intent_template": "Add {{sku}} to cart",
+      "instantiation_dict": {
+        "sku": "SKU-B004"
+      },
+      "param_values": {
+        "sku": "SKU-B004"
+      },
+      "action": {
+        "method": "POST",
+        "url": "https://shop.example.com/product/sku-b004",
+        "headers": {
+          "Content-Type": "application/json",
+          "X-Csrf-Token": "CSRF-SKU-B004"
+        },
+        "body": {
+          "sku": "SKU-B004",
+          "qty": "1"
+        }
+      },
+      "postconditions": {
+        "ok": true,
+        "url": "https://shop.example.com/product/sku-b004"
+      },
+      "resource_pool": "B"
+    },
+    {
+      "task_id": "task_0014",
+      "intent": "add_to_cart",
+      "intent_template": "Add {{sku}} to cart",
+      "instantiation_dict": {
+        "sku": "SKU-B005"
+      },
+      "param_values": {
+        "sku": "SKU-B005"
+      },
+      "action": {
+        "method": "POST",
+        "url": "https://shop.example.com/product/sku-b005",
+        "headers": {
+          "Content-Type": "application/json",
+          "X-Csrf-Token": "CSRF-SKU-B005"
+        },
+        "body": {
+          "sku": "SKU-B005",
+          "qty": "1"
+        }
+      },
+      "postconditions": {
+        "ok": true,
+        "url": "https://shop.example.com/product/sku-b005"
+      },
+      "resource_pool": "B"
+    },
+    {
+      "task_id": "task_0015",
+      "intent": "add_to_cart",
+      "intent_template": "Add {{sku}} to cart",
+      "instantiation_dict": {
+        "sku": "SKU-B006"
+      },
+      "param_values": {
+        "sku": "SKU-B006"
+      },
+      "action": {
+        "method": "POST",
+        "url": "https://shop.example.com/product/sku-b006",
+        "headers": {
+          "Content-Type": "application/json",
+          "X-Csrf-Token": "CSRF-SKU-B006"
+        },
+        "body": {
+          "sku": "SKU-B006",
+          "qty": "1"
+        }
+      },
+      "postconditions": {
+        "ok": true,
+        "url": "https://shop.example.com/product/sku-b006"
+      },
+      "resource_pool": "B"
+    },
+    {
+      "task_id": "task_0016",
+      "intent": "add_to_cart",
+      "intent_template": "Add {{sku}} to cart",
+      "instantiation_dict": {
+        "sku": "SKU-B007"
+      },
+      "param_values": {
+        "sku": "SKU-B007"
+      },
+      "action": {
+        "method": "POST",
+        "url": "https://shop.example.com/product/sku-b007",
+        "headers": {
+          "Content-Type": "application/json",
+          "X-Csrf-Token": "CSRF-SKU-B007"
+        },
+        "body": {
+          "sku": "SKU-B007",
+          "qty": "1"
+        }
+      },
+      "postconditions": {
+        "ok": true,
+        "url": "https://shop.example.com/product/sku-b007"
+      },
+      "resource_pool": "B"
+    },
+    {
+      "task_id": "task_0017",
+      "intent": "add_to_cart",
+      "intent_template": "Add {{sku}} to cart",
+      "instantiation_dict": {
+        "sku": "SKU-B008"
+      },
+      "param_values": {
+        "sku": "SKU-B008"
+      },
+      "action": {
+        "method": "POST",
+        "url": "https://shop.example.com/product/sku-b008",
+        "headers": {
+          "Content-Type": "application/json",
+          "X-Csrf-Token": "CSRF-SKU-B008"
+        },
+        "body": {
+          "sku": "SKU-B008",
+          "qty": "1"
+        }
+      },
+      "postconditions": {
+        "ok": true,
+        "url": "https://shop.example.com/product/sku-b008"
+      },
+      "resource_pool": "B"
+    },
+    {
+      "task_id": "task_0018",
+      "intent": "add_to_cart",
+      "intent_template": "Add {{sku}} to cart",
+      "instantiation_dict": {
+        "sku": "SKU-B009"
+      },
+      "param_values": {
+        "sku": "SKU-B009"
+      },
+      "action": {
+        "method": "POST",
+        "url": "https://shop.example.com/product/sku-b009",
+        "headers": {
+          "Content-Type": "application/json",
+          "X-Csrf-Token": "CSRF-SKU-B009"
+        },
+        "body": {
+          "sku": "SKU-B009",
+          "qty": "1"
+        }
+      },
+      "postconditions": {
+        "ok": true,
+        "url": "https://shop.example.com/product/sku-b009"
+      },
+      "resource_pool": "B"
+    },
+    {
+      "task_id": "task_0019",
+      "intent": "add_to_cart",
+      "intent_template": "Add {{sku}} to cart",
+      "instantiation_dict": {
+        "sku": "SKU-B010"
+      },
+      "param_values": {
+        "sku": "SKU-B010"
+      },
+      "action": {
+        "method": "POST",
+        "url": "https://shop.example.com/product/sku-b010",
+        "headers": {
+          "Content-Type": "application/json",
+          "X-Csrf-Token": "CSRF-SKU-B010"
+        },
+        "body": {
+          "sku": "SKU-B010",
+          "qty": "1"
+        }
+      },
+      "postconditions": {
+        "ok": true,
+        "url": "https://shop.example.com/product/sku-b010"
+      },
+      "resource_pool": "B"
+    }
+  ],
+  "zero_overlap_verified": true,
+  "pool_a_size": 10,
+  "pool_b_size": 10
+}

@@ -1,0 +1,16 @@
+{
+  "checks": {
+    "distill_parameterized": true,
+    "_common_prefix_and_suffix": true,
+    "_extract_varying_values": true,
+    "_structure_similarity": true,
+    "_is_allowed_path": true,
+    "_field_path_to_slot_name": true,
+    "_sanitize_slot": true,
+    "confidence_090": true,
+    "single_prefix_comment": true,
+    "jaccard_thresh": true
+  },
+  "sha256": "3c61f9fc251668237a58e986c3348e1bf1057e38824a0e1b9ea1e2426a1c938a",
+  "path": "/home/runner/work/Spider/Spider/src/spider/kernel.py"
+}

@@ -1,0 +1,6476 @@
+[
+  {
+    "task_id": "task_0000",
+    "intent": "add_to_cart",
+    "intent_template": "Add {{sku}} to cart",
+    "instantiation_dict": {
+      "sku": "SKU-A001"
+    },
+    "param_values": {
+      "sku": "SKU-A001"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/product/sku-a001",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-SKU-A001"
+      },
+      "body": {
+        "sku": "SKU-A001",
+        "qty": "1"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/product/sku-a001"
+    },
+    "resource_pool": "A"
+  },
+  {
+    "task_id": "task_0001",
+    "intent": "add_to_cart",
+    "intent_template": "Add {{sku}} to cart",
+    "instantiation_dict": {
+      "sku": "SKU-A002"
+    },
+    "param_values": {
+      "sku": "SKU-A002"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/product/sku-a002",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-SKU-A002"
+      },
+      "body": {
+        "sku": "SKU-A002",
+        "qty": "1"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/product/sku-a002"
+    },
+    "resource_pool": "A"
+  },
+  {
+    "task_id": "task_0002",
+    "intent": "add_to_cart",
+    "intent_template": "Add {{sku}} to cart",
+    "instantiation_dict": {
+      "sku": "SKU-A003"
+    },
+    "param_values": {
+      "sku": "SKU-A003"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/product/sku-a003",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-SKU-A003"
+      },
+      "body": {
+        "sku": "SKU-A003",
+        "qty": "1"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/product/sku-a003"
+    },
+    "resource_pool": "A"
+  },
+  {
+    "task_id": "task_0003",
+    "intent": "add_to_cart",
+    "intent_template": "Add {{sku}} to cart",
+    "instantiation_dict": {
+      "sku": "SKU-A004"
+    },
+    "param_values": {
+      "sku": "SKU-A004"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/product/sku-a004",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-SKU-A004"
+      },
+      "body": {
+        "sku": "SKU-A004",
+        "qty": "1"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/product/sku-a004"
+    },
+    "resource_pool": "A"
+  },
+  {
+    "task_id": "task_0004",
+    "intent": "add_to_cart",
+    "intent_template": "Add {{sku}} to cart",
+    "instantiation_dict": {
+      "sku": "SKU-A005"
+    },
+    "param_values": {
+      "sku": "SKU-A005"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/product/sku-a005",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-SKU-A005"
+      },
+      "body": {
+        "sku": "SKU-A005",
+        "qty": "1"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/product/sku-a005"
+    },
+    "resource_pool": "A"
+  },
+  {
+    "task_id": "task_0005",
+    "intent": "add_to_cart",
+    "intent_template": "Add {{sku}} to cart",
+    "instantiation_dict": {
+      "sku": "SKU-A006"
+    },
+    "param_values": {
+      "sku": "SKU-A006"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/product/sku-a006",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-SKU-A006"
+      },
+      "body": {
+        "sku": "SKU-A006",
+        "qty": "1"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/product/sku-a006"
+    },
+    "resource_pool": "A"
+  },
+  {
+    "task_id": "task_0006",
+    "intent": "add_to_cart",
+    "intent_template": "Add {{sku}} to cart",
+    "instantiation_dict": {
+      "sku": "SKU-A007"
+    },
+    "param_values": {
+      "sku": "SKU-A007"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/product/sku-a007",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-SKU-A007"
+      },
+      "body": {
+        "sku": "SKU-A007",
+        "qty": "1"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/product/sku-a007"
+    },
+    "resource_pool": "A"
+  },
+  {
+    "task_id": "task_0007",
+    "intent": "add_to_cart",
+    "intent_template": "Add {{sku}} to cart",
+    "instantiation_dict": {
+      "sku": "SKU-A008"
+    },
+    "param_values": {
+      "sku": "SKU-A008"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/product/sku-a008",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-SKU-A008"
+      },
+      "body": {
+        "sku": "SKU-A008",
+        "qty": "1"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/product/sku-a008"
+    },
+    "resource_pool": "A"
+  },
+  {
+    "task_id": "task_0008",
+    "intent": "add_to_cart",
+    "intent_template": "Add {{sku}} to cart",
+    "instantiation_dict": {
+      "sku": "SKU-A009"
+    },
+    "param_values": {
+      "sku": "SKU-A009"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/product/sku-a009",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-SKU-A009"
+      },
+      "body": {
+        "sku": "SKU-A009",
+        "qty": "1"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/product/sku-a009"
+    },
+    "resource_pool": "A"
+  },
+  {
+    "task_id": "task_0009",
+    "intent": "add_to_cart",
+    "intent_template": "Add {{sku}} to cart",
+    "instantiation_dict": {
+      "sku": "SKU-A010"
+    },
+    "param_values": {
+      "sku": "SKU-A010"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/product/sku-a010",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-SKU-A010"
+      },
+      "body": {
+        "sku": "SKU-A010",
+        "qty": "1"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/product/sku-a010"
+    },
+    "resource_pool": "A"
+  },
+  {
+    "task_id": "task_0010",
+    "intent": "add_to_cart",
+    "intent_template": "Add {{sku}} to cart",
+    "instantiation_dict": {
+      "sku": "SKU-B001"
+    },
+    "param_values": {
+      "sku": "SKU-B001"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/product/sku-b001",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-SKU-B001"
+      },
+      "body": {
+        "sku": "SKU-B001",
+        "qty": "1"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/product/sku-b001"
+    },
+    "resource_pool": "B"
+  },
+  {
+    "task_id": "task_0011",
+    "intent": "add_to_cart",
+    "intent_template": "Add {{sku}} to cart",
+    "instantiation_dict": {
+      "sku": "SKU-B002"
+    },
+    "param_values": {
+      "sku": "SKU-B002"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/product/sku-b002",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-SKU-B002"
+      },
+      "body": {
+        "sku": "SKU-B002",
+        "qty": "1"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/product/sku-b002"
+    },
+    "resource_pool": "B"
+  },
+  {
+    "task_id": "task_0012",
+    "intent": "add_to_cart",
+    "intent_template": "Add {{sku}} to cart",
+    "instantiation_dict": {
+      "sku": "SKU-B003"
+    },
+    "param_values": {
+      "sku": "SKU-B003"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/product/sku-b003",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-SKU-B003"
+      },
+      "body": {
+        "sku": "SKU-B003",
+        "qty": "1"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/product/sku-b003"
+    },
+    "resource_pool": "B"
+  },
+  {
+    "task_id": "task_0013",
+    "intent": "add_to_cart",
+    "intent_template": "Add {{sku}} to cart",
+    "instantiation_dict": {
+      "sku": "SKU-B004"
+    },
+    "param_values": {
+      "sku": "SKU-B004"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/product/sku-b004",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-SKU-B004"
+      },
+      "body": {
+        "sku": "SKU-B004",
+        "qty": "1"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/product/sku-b004"
+    },
+    "resource_pool": "B"
+  },
+  {
+    "task_id": "task_0014",
+    "intent": "add_to_cart",
+    "intent_template": "Add {{sku}} to cart",
+    "instantiation_dict": {
+      "sku": "SKU-B005"
+    },
+    "param_values": {
+      "sku": "SKU-B005"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/product/sku-b005",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-SKU-B005"
+      },
+      "body": {
+        "sku": "SKU-B005",
+        "qty": "1"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/product/sku-b005"
+    },
+    "resource_pool": "B"
+  },
+  {
+    "task_id": "task_0015",
+    "intent": "add_to_cart",
+    "intent_template": "Add {{sku}} to cart",
+    "instantiation_dict": {
+      "sku": "SKU-B006"
+    },
+    "param_values": {
+      "sku": "SKU-B006"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/product/sku-b006",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-SKU-B006"
+      },
+      "body": {
+        "sku": "SKU-B006",
+        "qty": "1"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/product/sku-b006"
+    },
+    "resource_pool": "B"
+  },
+  {
+    "task_id": "task_0016",
+    "intent": "add_to_cart",
+    "intent_template": "Add {{sku}} to cart",
+    "instantiation_dict": {
+      "sku": "SKU-B007"
+    },
+    "param_values": {
+      "sku": "SKU-B007"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/product/sku-b007",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-SKU-B007"
+      },
+      "body": {
+        "sku": "SKU-B007",
+        "qty": "1"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/product/sku-b007"
+    },
+    "resource_pool": "B"
+  },
+  {
+    "task_id": "task_0017",
+    "intent": "add_to_cart",
+    "intent_template": "Add {{sku}} to cart",
+    "instantiation_dict": {
+      "sku": "SKU-B008"
+    },
+    "param_values": {
+      "sku": "SKU-B008"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/product/sku-b008",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-SKU-B008"
+      },
+      "body": {
+        "sku": "SKU-B008",
+        "qty": "1"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/product/sku-b008"
+    },
+    "resource_pool": "B"
+  },
+  {
+    "task_id": "task_0018",
+    "intent": "add_to_cart",
+    "intent_template": "Add {{sku}} to cart",
+    "instantiation_dict": {
+      "sku": "SKU-B009"
+    },
+    "param_values": {
+      "sku": "SKU-B009"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/product/sku-b009",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-SKU-B009"
+      },
+      "body": {
+        "sku": "SKU-B009",
+        "qty": "1"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/product/sku-b009"
+    },
+    "resource_pool": "B"
+  },
+  {
+    "task_id": "task_0019",
+    "intent": "add_to_cart",
+    "intent_template": "Add {{sku}} to cart",
+    "instantiation_dict": {
+      "sku": "SKU-B010"
+    },
+    "param_values": {
+      "sku": "SKU-B010"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/product/sku-b010",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-SKU-B010"
+      },
+      "body": {
+        "sku": "SKU-B010",
+        "qty": "1"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/product/sku-b010"
+    },
+    "resource_pool": "B"
+  },
+  {
+    "task_id": "task_0020",
+    "intent": "Add",
+    "intent_template": "Add {{product}} to wishlist",
+    "instantiation_dict": {
+      "product": "PROD-01-000"
+    },
+    "param_values": {
+      "product": "PROD-01-000"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/01/prod-01-000",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-PROD-01-000"
+      },
+      "body": {
+        "product": "PROD-01-000"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/01/prod-01-000"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0021",
+    "intent": "Add",
+    "intent_template": "Add {{product}} to wishlist",
+    "instantiation_dict": {
+      "product": "PROD-01-001"
+    },
+    "param_values": {
+      "product": "PROD-01-001"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/01/prod-01-001",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-PROD-01-001"
+      },
+      "body": {
+        "product": "PROD-01-001"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/01/prod-01-001"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0022",
+    "intent": "Add",
+    "intent_template": "Add {{product}} to wishlist",
+    "instantiation_dict": {
+      "product": "PROD-01-002"
+    },
+    "param_values": {
+      "product": "PROD-01-002"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/01/prod-01-002",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-PROD-01-002"
+      },
+      "body": {
+        "product": "PROD-01-002"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/01/prod-01-002"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0023",
+    "intent": "Add",
+    "intent_template": "Add {{product}} to wishlist",
+    "instantiation_dict": {
+      "product": "PROD-01-003"
+    },
+    "param_values": {
+      "product": "PROD-01-003"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/01/prod-01-003",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-PROD-01-003"
+      },
+      "body": {
+        "product": "PROD-01-003"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/01/prod-01-003"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0024",
+    "intent": "Add",
+    "intent_template": "Add {{product}} to wishlist",
+    "instantiation_dict": {
+      "product": "PROD-01-004"
+    },
+    "param_values": {
+      "product": "PROD-01-004"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/01/prod-01-004",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-PROD-01-004"
+      },
+      "body": {
+        "product": "PROD-01-004"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/01/prod-01-004"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0025",
+    "intent": "Add",
+    "intent_template": "Add {{product}} to wishlist",
+    "instantiation_dict": {
+      "product": "PROD-01-005"
+    },
+    "param_values": {
+      "product": "PROD-01-005"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/01/prod-01-005",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-PROD-01-005"
+      },
+      "body": {
+        "product": "PROD-01-005"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/01/prod-01-005"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0026",
+    "intent": "Add",
+    "intent_template": "Add {{product}} to wishlist",
+    "instantiation_dict": {
+      "product": "PROD-01-006"
+    },
+    "param_values": {
+      "product": "PROD-01-006"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/01/prod-01-006",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-PROD-01-006"
+      },
+      "body": {
+        "product": "PROD-01-006"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/01/prod-01-006"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0027",
+    "intent": "Add",
+    "intent_template": "Add {{product}} to wishlist",
+    "instantiation_dict": {
+      "product": "PROD-01-007"
+    },
+    "param_values": {
+      "product": "PROD-01-007"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/01/prod-01-007",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-PROD-01-007"
+      },
+      "body": {
+        "product": "PROD-01-007"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/01/prod-01-007"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0028",
+    "intent": "Add",
+    "intent_template": "Add {{product}} to wishlist",
+    "instantiation_dict": {
+      "product": "PROD-01-008"
+    },
+    "param_values": {
+      "product": "PROD-01-008"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/01/prod-01-008",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-PROD-01-008"
+      },
+      "body": {
+        "product": "PROD-01-008"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/01/prod-01-008"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0029",
+    "intent": "Add",
+    "intent_template": "Add {{product}} to wishlist",
+    "instantiation_dict": {
+      "product": "PROD-01-009"
+    },
+    "param_values": {
+      "product": "PROD-01-009"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/01/prod-01-009",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-PROD-01-009"
+      },
+      "body": {
+        "product": "PROD-01-009"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/01/prod-01-009"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0030",
+    "intent": "Add",
+    "intent_template": "Add {{product}} to wishlist",
+    "instantiation_dict": {
+      "product": "PROD-01-010"
+    },
+    "param_values": {
+      "product": "PROD-01-010"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/01/prod-01-010",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-PROD-01-010"
+      },
+      "body": {
+        "product": "PROD-01-010"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/01/prod-01-010"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0031",
+    "intent": "Add",
+    "intent_template": "Add {{product}} to wishlist",
+    "instantiation_dict": {
+      "product": "PROD-01-011"
+    },
+    "param_values": {
+      "product": "PROD-01-011"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/01/prod-01-011",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-PROD-01-011"
+      },
+      "body": {
+        "product": "PROD-01-011"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/01/prod-01-011"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0032",
+    "intent": "View",
+    "intent_template": "View product {{product_id}}",
+    "instantiation_dict": {
+      "product_id": "PID-02-000"
+    },
+    "param_values": {
+      "product_id": "PID-02-000"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/product/pid-02-000",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-PID-02-000"
+      },
+      "body": {
+        "product_id": "PID-02-000"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/product/pid-02-000"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0033",
+    "intent": "View",
+    "intent_template": "View product {{product_id}}",
+    "instantiation_dict": {
+      "product_id": "PID-02-001"
+    },
+    "param_values": {
+      "product_id": "PID-02-001"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/product/pid-02-001",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-PID-02-001"
+      },
+      "body": {
+        "product_id": "PID-02-001"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/product/pid-02-001"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0034",
+    "intent": "View",
+    "intent_template": "View product {{product_id}}",
+    "instantiation_dict": {
+      "product_id": "PID-02-002"
+    },
+    "param_values": {
+      "product_id": "PID-02-002"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/product/pid-02-002",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-PID-02-002"
+      },
+      "body": {
+        "product_id": "PID-02-002"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/product/pid-02-002"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0035",
+    "intent": "View",
+    "intent_template": "View product {{product_id}}",
+    "instantiation_dict": {
+      "product_id": "PID-02-003"
+    },
+    "param_values": {
+      "product_id": "PID-02-003"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/product/pid-02-003",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-PID-02-003"
+      },
+      "body": {
+        "product_id": "PID-02-003"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/product/pid-02-003"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0036",
+    "intent": "View",
+    "intent_template": "View product {{product_id}}",
+    "instantiation_dict": {
+      "product_id": "PID-02-004"
+    },
+    "param_values": {
+      "product_id": "PID-02-004"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/product/pid-02-004",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-PID-02-004"
+      },
+      "body": {
+        "product_id": "PID-02-004"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/product/pid-02-004"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0037",
+    "intent": "View",
+    "intent_template": "View product {{product_id}}",
+    "instantiation_dict": {
+      "product_id": "PID-02-005"
+    },
+    "param_values": {
+      "product_id": "PID-02-005"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/product/pid-02-005",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-PID-02-005"
+      },
+      "body": {
+        "product_id": "PID-02-005"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/product/pid-02-005"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0038",
+    "intent": "View",
+    "intent_template": "View product {{product_id}}",
+    "instantiation_dict": {
+      "product_id": "PID-02-006"
+    },
+    "param_values": {
+      "product_id": "PID-02-006"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/product/pid-02-006",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-PID-02-006"
+      },
+      "body": {
+        "product_id": "PID-02-006"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/product/pid-02-006"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0039",
+    "intent": "View",
+    "intent_template": "View product {{product_id}}",
+    "instantiation_dict": {
+      "product_id": "PID-02-007"
+    },
+    "param_values": {
+      "product_id": "PID-02-007"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/product/pid-02-007",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-PID-02-007"
+      },
+      "body": {
+        "product_id": "PID-02-007"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/product/pid-02-007"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0040",
+    "intent": "View",
+    "intent_template": "View product {{product_id}}",
+    "instantiation_dict": {
+      "product_id": "PID-02-008"
+    },
+    "param_values": {
+      "product_id": "PID-02-008"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/product/pid-02-008",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-PID-02-008"
+      },
+      "body": {
+        "product_id": "PID-02-008"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/product/pid-02-008"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0041",
+    "intent": "View",
+    "intent_template": "View product {{product_id}}",
+    "instantiation_dict": {
+      "product_id": "PID-02-009"
+    },
+    "param_values": {
+      "product_id": "PID-02-009"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/product/pid-02-009",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-PID-02-009"
+      },
+      "body": {
+        "product_id": "PID-02-009"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/product/pid-02-009"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0042",
+    "intent": "View",
+    "intent_template": "View product {{product_id}}",
+    "instantiation_dict": {
+      "product_id": "PID-02-010"
+    },
+    "param_values": {
+      "product_id": "PID-02-010"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/product/pid-02-010",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-PID-02-010"
+      },
+      "body": {
+        "product_id": "PID-02-010"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/product/pid-02-010"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0043",
+    "intent": "Search",
+    "intent_template": "Search for {{query}}",
+    "instantiation_dict": {
+      "query": "QUERY-03-000"
+    },
+    "param_values": {
+      "query": "QUERY-03-000"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/03/query-03-000",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-QUERY-03-000"
+      },
+      "body": {
+        "query": "QUERY-03-000"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/03/query-03-000"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0044",
+    "intent": "Search",
+    "intent_template": "Search for {{query}}",
+    "instantiation_dict": {
+      "query": "QUERY-03-001"
+    },
+    "param_values": {
+      "query": "QUERY-03-001"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/03/query-03-001",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-QUERY-03-001"
+      },
+      "body": {
+        "query": "QUERY-03-001"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/03/query-03-001"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0045",
+    "intent": "Search",
+    "intent_template": "Search for {{query}}",
+    "instantiation_dict": {
+      "query": "QUERY-03-002"
+    },
+    "param_values": {
+      "query": "QUERY-03-002"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/03/query-03-002",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-QUERY-03-002"
+      },
+      "body": {
+        "query": "QUERY-03-002"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/03/query-03-002"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0046",
+    "intent": "Search",
+    "intent_template": "Search for {{query}}",
+    "instantiation_dict": {
+      "query": "QUERY-03-003"
+    },
+    "param_values": {
+      "query": "QUERY-03-003"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/03/query-03-003",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-QUERY-03-003"
+      },
+      "body": {
+        "query": "QUERY-03-003"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/03/query-03-003"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0047",
+    "intent": "Search",
+    "intent_template": "Search for {{query}}",
+    "instantiation_dict": {
+      "query": "QUERY-03-004"
+    },
+    "param_values": {
+      "query": "QUERY-03-004"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/03/query-03-004",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-QUERY-03-004"
+      },
+      "body": {
+        "query": "QUERY-03-004"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/03/query-03-004"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0048",
+    "intent": "Search",
+    "intent_template": "Search for {{query}}",
+    "instantiation_dict": {
+      "query": "QUERY-03-005"
+    },
+    "param_values": {
+      "query": "QUERY-03-005"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/03/query-03-005",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-QUERY-03-005"
+      },
+      "body": {
+        "query": "QUERY-03-005"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/03/query-03-005"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0049",
+    "intent": "Search",
+    "intent_template": "Search for {{query}}",
+    "instantiation_dict": {
+      "query": "QUERY-03-006"
+    },
+    "param_values": {
+      "query": "QUERY-03-006"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/03/query-03-006",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-QUERY-03-006"
+      },
+      "body": {
+        "query": "QUERY-03-006"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/03/query-03-006"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0050",
+    "intent": "Search",
+    "intent_template": "Search for {{query}}",
+    "instantiation_dict": {
+      "query": "QUERY-03-007"
+    },
+    "param_values": {
+      "query": "QUERY-03-007"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/03/query-03-007",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-QUERY-03-007"
+      },
+      "body": {
+        "query": "QUERY-03-007"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/03/query-03-007"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0051",
+    "intent": "Search",
+    "intent_template": "Search for {{query}}",
+    "instantiation_dict": {
+      "query": "QUERY-03-008"
+    },
+    "param_values": {
+      "query": "QUERY-03-008"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/03/query-03-008",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-QUERY-03-008"
+      },
+      "body": {
+        "query": "QUERY-03-008"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/03/query-03-008"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0052",
+    "intent": "Search",
+    "intent_template": "Search for {{query}}",
+    "instantiation_dict": {
+      "query": "QUERY-03-009"
+    },
+    "param_values": {
+      "query": "QUERY-03-009"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/03/query-03-009",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-QUERY-03-009"
+      },
+      "body": {
+        "query": "QUERY-03-009"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/03/query-03-009"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0053",
+    "intent": "Filter",
+    "intent_template": "Filter products by {{price_range}}",
+    "instantiation_dict": {
+      "price_range": "PRICE-04-000"
+    },
+    "param_values": {
+      "price_range": "PRICE-04-000"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/04/price-04-000",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-PRICE-04-000"
+      },
+      "body": {
+        "price_range": "PRICE-04-000"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/04/price-04-000"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0054",
+    "intent": "Filter",
+    "intent_template": "Filter products by {{price_range}}",
+    "instantiation_dict": {
+      "price_range": "PRICE-04-001"
+    },
+    "param_values": {
+      "price_range": "PRICE-04-001"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/04/price-04-001",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-PRICE-04-001"
+      },
+      "body": {
+        "price_range": "PRICE-04-001"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/04/price-04-001"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0055",
+    "intent": "Filter",
+    "intent_template": "Filter products by {{price_range}}",
+    "instantiation_dict": {
+      "price_range": "PRICE-04-002"
+    },
+    "param_values": {
+      "price_range": "PRICE-04-002"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/04/price-04-002",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-PRICE-04-002"
+      },
+      "body": {
+        "price_range": "PRICE-04-002"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/04/price-04-002"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0056",
+    "intent": "Filter",
+    "intent_template": "Filter products by {{price_range}}",
+    "instantiation_dict": {
+      "price_range": "PRICE-04-003"
+    },
+    "param_values": {
+      "price_range": "PRICE-04-003"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/04/price-04-003",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-PRICE-04-003"
+      },
+      "body": {
+        "price_range": "PRICE-04-003"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/04/price-04-003"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0057",
+    "intent": "Filter",
+    "intent_template": "Filter products by {{price_range}}",
+    "instantiation_dict": {
+      "price_range": "PRICE-04-004"
+    },
+    "param_values": {
+      "price_range": "PRICE-04-004"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/04/price-04-004",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-PRICE-04-004"
+      },
+      "body": {
+        "price_range": "PRICE-04-004"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/04/price-04-004"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0058",
+    "intent": "Filter",
+    "intent_template": "Filter products by {{price_range}}",
+    "instantiation_dict": {
+      "price_range": "PRICE-04-005"
+    },
+    "param_values": {
+      "price_range": "PRICE-04-005"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/04/price-04-005",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-PRICE-04-005"
+      },
+      "body": {
+        "price_range": "PRICE-04-005"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/04/price-04-005"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0059",
+    "intent": "Filter",
+    "intent_template": "Filter products by {{price_range}}",
+    "instantiation_dict": {
+      "price_range": "PRICE-04-006"
+    },
+    "param_values": {
+      "price_range": "PRICE-04-006"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/04/price-04-006",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-PRICE-04-006"
+      },
+      "body": {
+        "price_range": "PRICE-04-006"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/04/price-04-006"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0060",
+    "intent": "Filter",
+    "intent_template": "Filter products by {{price_range}}",
+    "instantiation_dict": {
+      "price_range": "PRICE-04-007"
+    },
+    "param_values": {
+      "price_range": "PRICE-04-007"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/04/price-04-007",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-PRICE-04-007"
+      },
+      "body": {
+        "price_range": "PRICE-04-007"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/04/price-04-007"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0061",
+    "intent": "Filter",
+    "intent_template": "Filter products by {{category}}",
+    "instantiation_dict": {
+      "category": "CAT-05-000"
+    },
+    "param_values": {
+      "category": "CAT-05-000"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/05/cat-05-000",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-CAT-05-000"
+      },
+      "body": {
+        "category": "CAT-05-000"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/05/cat-05-000"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0062",
+    "intent": "Filter",
+    "intent_template": "Filter products by {{category}}",
+    "instantiation_dict": {
+      "category": "CAT-05-001"
+    },
+    "param_values": {
+      "category": "CAT-05-001"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/05/cat-05-001",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-CAT-05-001"
+      },
+      "body": {
+        "category": "CAT-05-001"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/05/cat-05-001"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0063",
+    "intent": "Filter",
+    "intent_template": "Filter products by {{category}}",
+    "instantiation_dict": {
+      "category": "CAT-05-002"
+    },
+    "param_values": {
+      "category": "CAT-05-002"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/05/cat-05-002",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-CAT-05-002"
+      },
+      "body": {
+        "category": "CAT-05-002"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/05/cat-05-002"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0064",
+    "intent": "Filter",
+    "intent_template": "Filter products by {{category}}",
+    "instantiation_dict": {
+      "category": "CAT-05-003"
+    },
+    "param_values": {
+      "category": "CAT-05-003"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/05/cat-05-003",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-CAT-05-003"
+      },
+      "body": {
+        "category": "CAT-05-003"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/05/cat-05-003"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0065",
+    "intent": "Filter",
+    "intent_template": "Filter products by {{category}}",
+    "instantiation_dict": {
+      "category": "CAT-05-004"
+    },
+    "param_values": {
+      "category": "CAT-05-004"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/05/cat-05-004",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-CAT-05-004"
+      },
+      "body": {
+        "category": "CAT-05-004"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/05/cat-05-004"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0066",
+    "intent": "Filter",
+    "intent_template": "Filter products by {{category}}",
+    "instantiation_dict": {
+      "category": "CAT-05-005"
+    },
+    "param_values": {
+      "category": "CAT-05-005"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/05/cat-05-005",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-CAT-05-005"
+      },
+      "body": {
+        "category": "CAT-05-005"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/05/cat-05-005"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0067",
+    "intent": "Filter",
+    "intent_template": "Filter products by {{category}}",
+    "instantiation_dict": {
+      "category": "CAT-05-006"
+    },
+    "param_values": {
+      "category": "CAT-05-006"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/05/cat-05-006",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-CAT-05-006"
+      },
+      "body": {
+        "category": "CAT-05-006"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/05/cat-05-006"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0068",
+    "intent": "Filter",
+    "intent_template": "Filter products by {{category}}",
+    "instantiation_dict": {
+      "category": "CAT-05-007"
+    },
+    "param_values": {
+      "category": "CAT-05-007"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/05/cat-05-007",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-CAT-05-007"
+      },
+      "body": {
+        "category": "CAT-05-007"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/05/cat-05-007"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0069",
+    "intent": "Sort",
+    "intent_template": "Sort products by {{sort_option}}",
+    "instantiation_dict": {
+      "sort_option": "SORT-06-000"
+    },
+    "param_values": {
+      "sort_option": "SORT-06-000"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/06/sort-06-000",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-SORT-06-000"
+      },
+      "body": {
+        "sort_option": "SORT-06-000"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/06/sort-06-000"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0070",
+    "intent": "Sort",
+    "intent_template": "Sort products by {{sort_option}}",
+    "instantiation_dict": {
+      "sort_option": "SORT-06-001"
+    },
+    "param_values": {
+      "sort_option": "SORT-06-001"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/06/sort-06-001",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-SORT-06-001"
+      },
+      "body": {
+        "sort_option": "SORT-06-001"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/06/sort-06-001"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0071",
+    "intent": "Sort",
+    "intent_template": "Sort products by {{sort_option}}",
+    "instantiation_dict": {
+      "sort_option": "SORT-06-002"
+    },
+    "param_values": {
+      "sort_option": "SORT-06-002"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/06/sort-06-002",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-SORT-06-002"
+      },
+      "body": {
+        "sort_option": "SORT-06-002"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/06/sort-06-002"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0072",
+    "intent": "Sort",
+    "intent_template": "Sort products by {{sort_option}}",
+    "instantiation_dict": {
+      "sort_option": "SORT-06-003"
+    },
+    "param_values": {
+      "sort_option": "SORT-06-003"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/06/sort-06-003",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-SORT-06-003"
+      },
+      "body": {
+        "sort_option": "SORT-06-003"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/06/sort-06-003"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0073",
+    "intent": "Sort",
+    "intent_template": "Sort products by {{sort_option}}",
+    "instantiation_dict": {
+      "sort_option": "SORT-06-004"
+    },
+    "param_values": {
+      "sort_option": "SORT-06-004"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/06/sort-06-004",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-SORT-06-004"
+      },
+      "body": {
+        "sort_option": "SORT-06-004"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/06/sort-06-004"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0074",
+    "intent": "Sort",
+    "intent_template": "Sort products by {{sort_option}}",
+    "instantiation_dict": {
+      "sort_option": "SORT-06-005"
+    },
+    "param_values": {
+      "sort_option": "SORT-06-005"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/06/sort-06-005",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-SORT-06-005"
+      },
+      "body": {
+        "sort_option": "SORT-06-005"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/06/sort-06-005"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0075",
+    "intent": "Sort",
+    "intent_template": "Sort products by {{sort_option}}",
+    "instantiation_dict": {
+      "sort_option": "SORT-06-006"
+    },
+    "param_values": {
+      "sort_option": "SORT-06-006"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/06/sort-06-006",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-SORT-06-006"
+      },
+      "body": {
+        "sort_option": "SORT-06-006"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/06/sort-06-006"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0076",
+    "intent": "Change",
+    "intent_template": "Change quantity to {{qty}}",
+    "instantiation_dict": {
+      "qty": "QTY-07-000"
+    },
+    "param_values": {
+      "qty": "QTY-07-000"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/07/qty-07-000",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-QTY-07-000"
+      },
+      "body": {
+        "qty": "QTY-07-000"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/07/qty-07-000"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0077",
+    "intent": "Change",
+    "intent_template": "Change quantity to {{qty}}",
+    "instantiation_dict": {
+      "qty": "QTY-07-001"
+    },
+    "param_values": {
+      "qty": "QTY-07-001"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/07/qty-07-001",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-QTY-07-001"
+      },
+      "body": {
+        "qty": "QTY-07-001"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/07/qty-07-001"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0078",
+    "intent": "Change",
+    "intent_template": "Change quantity to {{qty}}",
+    "instantiation_dict": {
+      "qty": "QTY-07-002"
+    },
+    "param_values": {
+      "qty": "QTY-07-002"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/07/qty-07-002",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-QTY-07-002"
+      },
+      "body": {
+        "qty": "QTY-07-002"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/07/qty-07-002"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0079",
+    "intent": "Change",
+    "intent_template": "Change quantity to {{qty}}",
+    "instantiation_dict": {
+      "qty": "QTY-07-003"
+    },
+    "param_values": {
+      "qty": "QTY-07-003"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/07/qty-07-003",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-QTY-07-003"
+      },
+      "body": {
+        "qty": "QTY-07-003"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/07/qty-07-003"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0080",
+    "intent": "Change",
+    "intent_template": "Change quantity to {{qty}}",
+    "instantiation_dict": {
+      "qty": "QTY-07-004"
+    },
+    "param_values": {
+      "qty": "QTY-07-004"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/07/qty-07-004",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-QTY-07-004"
+      },
+      "body": {
+        "qty": "QTY-07-004"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/07/qty-07-004"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0081",
+    "intent": "Change",
+    "intent_template": "Change quantity to {{qty}}",
+    "instantiation_dict": {
+      "qty": "QTY-07-005"
+    },
+    "param_values": {
+      "qty": "QTY-07-005"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/07/qty-07-005",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-QTY-07-005"
+      },
+      "body": {
+        "qty": "QTY-07-005"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/07/qty-07-005"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0082",
+    "intent": "Change",
+    "intent_template": "Change quantity to {{qty}}",
+    "instantiation_dict": {
+      "qty": "QTY-07-006"
+    },
+    "param_values": {
+      "qty": "QTY-07-006"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/07/qty-07-006",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-QTY-07-006"
+      },
+      "body": {
+        "qty": "QTY-07-006"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/07/qty-07-006"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0083",
+    "intent": "Remove",
+    "intent_template": "Remove {{sku}} from cart",
+    "instantiation_dict": {
+      "sku": "SKU-08-000"
+    },
+    "param_values": {
+      "sku": "SKU-08-000"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/product/sku-08-000",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-SKU-08-000"
+      },
+      "body": {
+        "sku": "SKU-08-000",
+        "qty": "1"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/product/sku-08-000"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0084",
+    "intent": "Remove",
+    "intent_template": "Remove {{sku}} from cart",
+    "instantiation_dict": {
+      "sku": "SKU-08-001"
+    },
+    "param_values": {
+      "sku": "SKU-08-001"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/product/sku-08-001",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-SKU-08-001"
+      },
+      "body": {
+        "sku": "SKU-08-001",
+        "qty": "1"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/product/sku-08-001"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0085",
+    "intent": "Remove",
+    "intent_template": "Remove {{sku}} from cart",
+    "instantiation_dict": {
+      "sku": "SKU-08-002"
+    },
+    "param_values": {
+      "sku": "SKU-08-002"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/product/sku-08-002",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-SKU-08-002"
+      },
+      "body": {
+        "sku": "SKU-08-002",
+        "qty": "1"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/product/sku-08-002"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0086",
+    "intent": "Remove",
+    "intent_template": "Remove {{sku}} from cart",
+    "instantiation_dict": {
+      "sku": "SKU-08-003"
+    },
+    "param_values": {
+      "sku": "SKU-08-003"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/product/sku-08-003",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-SKU-08-003"
+      },
+      "body": {
+        "sku": "SKU-08-003",
+        "qty": "1"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/product/sku-08-003"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0087",
+    "intent": "Remove",
+    "intent_template": "Remove {{sku}} from cart",
+    "instantiation_dict": {
+      "sku": "SKU-08-004"
+    },
+    "param_values": {
+      "sku": "SKU-08-004"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/product/sku-08-004",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-SKU-08-004"
+      },
+      "body": {
+        "sku": "SKU-08-004",
+        "qty": "1"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/product/sku-08-004"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0088",
+    "intent": "Remove",
+    "intent_template": "Remove {{sku}} from cart",
+    "instantiation_dict": {
+      "sku": "SKU-08-005"
+    },
+    "param_values": {
+      "sku": "SKU-08-005"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/product/sku-08-005",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-SKU-08-005"
+      },
+      "body": {
+        "sku": "SKU-08-005",
+        "qty": "1"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/product/sku-08-005"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0089",
+    "intent": "Update",
+    "intent_template": "Update cart with {{sku}}",
+    "instantiation_dict": {
+      "sku": "SKU-09-000"
+    },
+    "param_values": {
+      "sku": "SKU-09-000"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/product/sku-09-000",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-SKU-09-000"
+      },
+      "body": {
+        "sku": "SKU-09-000",
+        "qty": "1"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/product/sku-09-000"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0090",
+    "intent": "Update",
+    "intent_template": "Update cart with {{sku}}",
+    "instantiation_dict": {
+      "sku": "SKU-09-001"
+    },
+    "param_values": {
+      "sku": "SKU-09-001"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/product/sku-09-001",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-SKU-09-001"
+      },
+      "body": {
+        "sku": "SKU-09-001",
+        "qty": "1"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/product/sku-09-001"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0091",
+    "intent": "Update",
+    "intent_template": "Update cart with {{sku}}",
+    "instantiation_dict": {
+      "sku": "SKU-09-002"
+    },
+    "param_values": {
+      "sku": "SKU-09-002"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/product/sku-09-002",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-SKU-09-002"
+      },
+      "body": {
+        "sku": "SKU-09-002",
+        "qty": "1"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/product/sku-09-002"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0092",
+    "intent": "Update",
+    "intent_template": "Update cart with {{sku}}",
+    "instantiation_dict": {
+      "sku": "SKU-09-003"
+    },
+    "param_values": {
+      "sku": "SKU-09-003"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/product/sku-09-003",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-SKU-09-003"
+      },
+      "body": {
+        "sku": "SKU-09-003",
+        "qty": "1"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/product/sku-09-003"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0093",
+    "intent": "Update",
+    "intent_template": "Update cart with {{sku}}",
+    "instantiation_dict": {
+      "sku": "SKU-09-004"
+    },
+    "param_values": {
+      "sku": "SKU-09-004"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/product/sku-09-004",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-SKU-09-004"
+      },
+      "body": {
+        "sku": "SKU-09-004",
+        "qty": "1"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/product/sku-09-004"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0094",
+    "intent": "Update",
+    "intent_template": "Update cart with {{sku}}",
+    "instantiation_dict": {
+      "sku": "SKU-09-005"
+    },
+    "param_values": {
+      "sku": "SKU-09-005"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/product/sku-09-005",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-SKU-09-005"
+      },
+      "body": {
+        "sku": "SKU-09-005",
+        "qty": "1"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/product/sku-09-005"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0095",
+    "intent": "Proceed",
+    "intent_template": "Proceed to checkout with {{address_id}}",
+    "instantiation_dict": {
+      "address_id": "ADDR-10-000"
+    },
+    "param_values": {
+      "address_id": "ADDR-10-000"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/10/addr-10-000",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-ADDR-10-000"
+      },
+      "body": {
+        "address_id": "ADDR-10-000"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/10/addr-10-000"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0096",
+    "intent": "Proceed",
+    "intent_template": "Proceed to checkout with {{address_id}}",
+    "instantiation_dict": {
+      "address_id": "ADDR-10-001"
+    },
+    "param_values": {
+      "address_id": "ADDR-10-001"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/10/addr-10-001",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-ADDR-10-001"
+      },
+      "body": {
+        "address_id": "ADDR-10-001"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/10/addr-10-001"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0097",
+    "intent": "Proceed",
+    "intent_template": "Proceed to checkout with {{address_id}}",
+    "instantiation_dict": {
+      "address_id": "ADDR-10-002"
+    },
+    "param_values": {
+      "address_id": "ADDR-10-002"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/10/addr-10-002",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-ADDR-10-002"
+      },
+      "body": {
+        "address_id": "ADDR-10-002"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/10/addr-10-002"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0098",
+    "intent": "Proceed",
+    "intent_template": "Proceed to checkout with {{address_id}}",
+    "instantiation_dict": {
+      "address_id": "ADDR-10-003"
+    },
+    "param_values": {
+      "address_id": "ADDR-10-003"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/10/addr-10-003",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-ADDR-10-003"
+      },
+      "body": {
+        "address_id": "ADDR-10-003"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/10/addr-10-003"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0099",
+    "intent": "Proceed",
+    "intent_template": "Proceed to checkout with {{address_id}}",
+    "instantiation_dict": {
+      "address_id": "ADDR-10-004"
+    },
+    "param_values": {
+      "address_id": "ADDR-10-004"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/10/addr-10-004",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-ADDR-10-004"
+      },
+      "body": {
+        "address_id": "ADDR-10-004"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/10/addr-10-004"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0100",
+    "intent": "Proceed",
+    "intent_template": "Proceed to checkout with {{address_id}}",
+    "instantiation_dict": {
+      "address_id": "ADDR-10-005"
+    },
+    "param_values": {
+      "address_id": "ADDR-10-005"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/10/addr-10-005",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-ADDR-10-005"
+      },
+      "body": {
+        "address_id": "ADDR-10-005"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/10/addr-10-005"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0101",
+    "intent": "Enter",
+    "intent_template": "Enter shipping address {{address_id}}",
+    "instantiation_dict": {
+      "address_id": "ADDR-11-000"
+    },
+    "param_values": {
+      "address_id": "ADDR-11-000"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/11/addr-11-000",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-ADDR-11-000"
+      },
+      "body": {
+        "address_id": "ADDR-11-000"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/11/addr-11-000"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0102",
+    "intent": "Enter",
+    "intent_template": "Enter shipping address {{address_id}}",
+    "instantiation_dict": {
+      "address_id": "ADDR-11-001"
+    },
+    "param_values": {
+      "address_id": "ADDR-11-001"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/11/addr-11-001",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-ADDR-11-001"
+      },
+      "body": {
+        "address_id": "ADDR-11-001"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/11/addr-11-001"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0103",
+    "intent": "Enter",
+    "intent_template": "Enter shipping address {{address_id}}",
+    "instantiation_dict": {
+      "address_id": "ADDR-11-002"
+    },
+    "param_values": {
+      "address_id": "ADDR-11-002"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/11/addr-11-002",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-ADDR-11-002"
+      },
+      "body": {
+        "address_id": "ADDR-11-002"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/11/addr-11-002"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0104",
+    "intent": "Enter",
+    "intent_template": "Enter shipping address {{address_id}}",
+    "instantiation_dict": {
+      "address_id": "ADDR-11-003"
+    },
+    "param_values": {
+      "address_id": "ADDR-11-003"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/11/addr-11-003",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-ADDR-11-003"
+      },
+      "body": {
+        "address_id": "ADDR-11-003"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/11/addr-11-003"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0105",
+    "intent": "Enter",
+    "intent_template": "Enter shipping address {{address_id}}",
+    "instantiation_dict": {
+      "address_id": "ADDR-11-004"
+    },
+    "param_values": {
+      "address_id": "ADDR-11-004"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/11/addr-11-004",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-ADDR-11-004"
+      },
+      "body": {
+        "address_id": "ADDR-11-004"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/11/addr-11-004"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0106",
+    "intent": "Enter",
+    "intent_template": "Enter shipping address {{address_id}}",
+    "instantiation_dict": {
+      "address_id": "ADDR-11-005"
+    },
+    "param_values": {
+      "address_id": "ADDR-11-005"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/11/addr-11-005",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-ADDR-11-005"
+      },
+      "body": {
+        "address_id": "ADDR-11-005"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/11/addr-11-005"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0107",
+    "intent": "Enter",
+    "intent_template": "Enter payment method {{payment_id}}",
+    "instantiation_dict": {
+      "payment_id": "PAY-12-000"
+    },
+    "param_values": {
+      "payment_id": "PAY-12-000"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/12/pay-12-000",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-PAY-12-000"
+      },
+      "body": {
+        "payment_id": "PAY-12-000"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/12/pay-12-000"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0108",
+    "intent": "Enter",
+    "intent_template": "Enter payment method {{payment_id}}",
+    "instantiation_dict": {
+      "payment_id": "PAY-12-001"
+    },
+    "param_values": {
+      "payment_id": "PAY-12-001"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/12/pay-12-001",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-PAY-12-001"
+      },
+      "body": {
+        "payment_id": "PAY-12-001"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/12/pay-12-001"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0109",
+    "intent": "Enter",
+    "intent_template": "Enter payment method {{payment_id}}",
+    "instantiation_dict": {
+      "payment_id": "PAY-12-002"
+    },
+    "param_values": {
+      "payment_id": "PAY-12-002"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/12/pay-12-002",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-PAY-12-002"
+      },
+      "body": {
+        "payment_id": "PAY-12-002"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/12/pay-12-002"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0110",
+    "intent": "Enter",
+    "intent_template": "Enter payment method {{payment_id}}",
+    "instantiation_dict": {
+      "payment_id": "PAY-12-003"
+    },
+    "param_values": {
+      "payment_id": "PAY-12-003"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/12/pay-12-003",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-PAY-12-003"
+      },
+      "body": {
+        "payment_id": "PAY-12-003"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/12/pay-12-003"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0111",
+    "intent": "Enter",
+    "intent_template": "Enter payment method {{payment_id}}",
+    "instantiation_dict": {
+      "payment_id": "PAY-12-004"
+    },
+    "param_values": {
+      "payment_id": "PAY-12-004"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/12/pay-12-004",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-PAY-12-004"
+      },
+      "body": {
+        "payment_id": "PAY-12-004"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/12/pay-12-004"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0112",
+    "intent": "Enter",
+    "intent_template": "Enter payment method {{payment_id}}",
+    "instantiation_dict": {
+      "payment_id": "PAY-12-005"
+    },
+    "param_values": {
+      "payment_id": "PAY-12-005"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/12/pay-12-005",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-PAY-12-005"
+      },
+      "body": {
+        "payment_id": "PAY-12-005"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/12/pay-12-005"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0113",
+    "intent": "Place",
+    "intent_template": "Place order with {{order_id}}",
+    "instantiation_dict": {
+      "order_id": "ORD-13-000"
+    },
+    "param_values": {
+      "order_id": "ORD-13-000"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/13/ord-13-000",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-ORD-13-000"
+      },
+      "body": {
+        "order_id": "ORD-13-000"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/13/ord-13-000"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0114",
+    "intent": "Place",
+    "intent_template": "Place order with {{order_id}}",
+    "instantiation_dict": {
+      "order_id": "ORD-13-001"
+    },
+    "param_values": {
+      "order_id": "ORD-13-001"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/13/ord-13-001",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-ORD-13-001"
+      },
+      "body": {
+        "order_id": "ORD-13-001"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/13/ord-13-001"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0115",
+    "intent": "Place",
+    "intent_template": "Place order with {{order_id}}",
+    "instantiation_dict": {
+      "order_id": "ORD-13-002"
+    },
+    "param_values": {
+      "order_id": "ORD-13-002"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/13/ord-13-002",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-ORD-13-002"
+      },
+      "body": {
+        "order_id": "ORD-13-002"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/13/ord-13-002"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0116",
+    "intent": "Place",
+    "intent_template": "Place order with {{order_id}}",
+    "instantiation_dict": {
+      "order_id": "ORD-13-003"
+    },
+    "param_values": {
+      "order_id": "ORD-13-003"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/13/ord-13-003",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-ORD-13-003"
+      },
+      "body": {
+        "order_id": "ORD-13-003"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/13/ord-13-003"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0117",
+    "intent": "Place",
+    "intent_template": "Place order with {{order_id}}",
+    "instantiation_dict": {
+      "order_id": "ORD-13-004"
+    },
+    "param_values": {
+      "order_id": "ORD-13-004"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/13/ord-13-004",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-ORD-13-004"
+      },
+      "body": {
+        "order_id": "ORD-13-004"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/13/ord-13-004"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0118",
+    "intent": "Place",
+    "intent_template": "Place order with {{order_id}}",
+    "instantiation_dict": {
+      "order_id": "ORD-13-005"
+    },
+    "param_values": {
+      "order_id": "ORD-13-005"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/13/ord-13-005",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-ORD-13-005"
+      },
+      "body": {
+        "order_id": "ORD-13-005"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/13/ord-13-005"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0119",
+    "intent": "View",
+    "intent_template": "View order {{order_id}}",
+    "instantiation_dict": {
+      "order_id": "ORD-14-000"
+    },
+    "param_values": {
+      "order_id": "ORD-14-000"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/14/ord-14-000",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-ORD-14-000"
+      },
+      "body": {
+        "order_id": "ORD-14-000"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/14/ord-14-000"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0120",
+    "intent": "View",
+    "intent_template": "View order {{order_id}}",
+    "instantiation_dict": {
+      "order_id": "ORD-14-001"
+    },
+    "param_values": {
+      "order_id": "ORD-14-001"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/14/ord-14-001",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-ORD-14-001"
+      },
+      "body": {
+        "order_id": "ORD-14-001"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/14/ord-14-001"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0121",
+    "intent": "View",
+    "intent_template": "View order {{order_id}}",
+    "instantiation_dict": {
+      "order_id": "ORD-14-002"
+    },
+    "param_values": {
+      "order_id": "ORD-14-002"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/14/ord-14-002",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-ORD-14-002"
+      },
+      "body": {
+        "order_id": "ORD-14-002"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/14/ord-14-002"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0122",
+    "intent": "View",
+    "intent_template": "View order {{order_id}}",
+    "instantiation_dict": {
+      "order_id": "ORD-14-003"
+    },
+    "param_values": {
+      "order_id": "ORD-14-003"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/14/ord-14-003",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-ORD-14-003"
+      },
+      "body": {
+        "order_id": "ORD-14-003"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/14/ord-14-003"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0123",
+    "intent": "View",
+    "intent_template": "View order {{order_id}}",
+    "instantiation_dict": {
+      "order_id": "ORD-14-004"
+    },
+    "param_values": {
+      "order_id": "ORD-14-004"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/14/ord-14-004",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-ORD-14-004"
+      },
+      "body": {
+        "order_id": "ORD-14-004"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/14/ord-14-004"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0124",
+    "intent": "Track",
+    "intent_template": "Track order {{order_id}}",
+    "instantiation_dict": {
+      "order_id": "ORD-15-000"
+    },
+    "param_values": {
+      "order_id": "ORD-15-000"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/15/ord-15-000",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-ORD-15-000"
+      },
+      "body": {
+        "order_id": "ORD-15-000"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/15/ord-15-000"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0125",
+    "intent": "Track",
+    "intent_template": "Track order {{order_id}}",
+    "instantiation_dict": {
+      "order_id": "ORD-15-001"
+    },
+    "param_values": {
+      "order_id": "ORD-15-001"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/15/ord-15-001",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-ORD-15-001"
+      },
+      "body": {
+        "order_id": "ORD-15-001"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/15/ord-15-001"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0126",
+    "intent": "Track",
+    "intent_template": "Track order {{order_id}}",
+    "instantiation_dict": {
+      "order_id": "ORD-15-002"
+    },
+    "param_values": {
+      "order_id": "ORD-15-002"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/15/ord-15-002",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-ORD-15-002"
+      },
+      "body": {
+        "order_id": "ORD-15-002"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/15/ord-15-002"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0127",
+    "intent": "Track",
+    "intent_template": "Track order {{order_id}}",
+    "instantiation_dict": {
+      "order_id": "ORD-15-003"
+    },
+    "param_values": {
+      "order_id": "ORD-15-003"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/15/ord-15-003",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-ORD-15-003"
+      },
+      "body": {
+        "order_id": "ORD-15-003"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/15/ord-15-003"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0128",
+    "intent": "Track",
+    "intent_template": "Track order {{order_id}}",
+    "instantiation_dict": {
+      "order_id": "ORD-15-004"
+    },
+    "param_values": {
+      "order_id": "ORD-15-004"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/15/ord-15-004",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-ORD-15-004"
+      },
+      "body": {
+        "order_id": "ORD-15-004"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/15/ord-15-004"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0129",
+    "intent": "Cancel",
+    "intent_template": "Cancel order {{order_id}}",
+    "instantiation_dict": {
+      "order_id": "ORD-16-000"
+    },
+    "param_values": {
+      "order_id": "ORD-16-000"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/16/ord-16-000",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-ORD-16-000"
+      },
+      "body": {
+        "order_id": "ORD-16-000"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/16/ord-16-000"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0130",
+    "intent": "Cancel",
+    "intent_template": "Cancel order {{order_id}}",
+    "instantiation_dict": {
+      "order_id": "ORD-16-001"
+    },
+    "param_values": {
+      "order_id": "ORD-16-001"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/16/ord-16-001",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-ORD-16-001"
+      },
+      "body": {
+        "order_id": "ORD-16-001"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/16/ord-16-001"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0131",
+    "intent": "Cancel",
+    "intent_template": "Cancel order {{order_id}}",
+    "instantiation_dict": {
+      "order_id": "ORD-16-002"
+    },
+    "param_values": {
+      "order_id": "ORD-16-002"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/16/ord-16-002",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-ORD-16-002"
+      },
+      "body": {
+        "order_id": "ORD-16-002"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/16/ord-16-002"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0132",
+    "intent": "Cancel",
+    "intent_template": "Cancel order {{order_id}}",
+    "instantiation_dict": {
+      "order_id": "ORD-16-003"
+    },
+    "param_values": {
+      "order_id": "ORD-16-003"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/16/ord-16-003",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-ORD-16-003"
+      },
+      "body": {
+        "order_id": "ORD-16-003"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/16/ord-16-003"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0133",
+    "intent": "Cancel",
+    "intent_template": "Cancel order {{order_id}}",
+    "instantiation_dict": {
+      "order_id": "ORD-16-004"
+    },
+    "param_values": {
+      "order_id": "ORD-16-004"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/16/ord-16-004",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-ORD-16-004"
+      },
+      "body": {
+        "order_id": "ORD-16-004"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/16/ord-16-004"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0134",
+    "intent": "Return",
+    "intent_template": "Return item {{sku}}",
+    "instantiation_dict": {
+      "sku": "SKU-17-000"
+    },
+    "param_values": {
+      "sku": "SKU-17-000"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/product/sku-17-000",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-SKU-17-000"
+      },
+      "body": {
+        "sku": "SKU-17-000",
+        "qty": "1"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/product/sku-17-000"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0135",
+    "intent": "Return",
+    "intent_template": "Return item {{sku}}",
+    "instantiation_dict": {
+      "sku": "SKU-17-001"
+    },
+    "param_values": {
+      "sku": "SKU-17-001"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/product/sku-17-001",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-SKU-17-001"
+      },
+      "body": {
+        "sku": "SKU-17-001",
+        "qty": "1"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/product/sku-17-001"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0136",
+    "intent": "Return",
+    "intent_template": "Return item {{sku}}",
+    "instantiation_dict": {
+      "sku": "SKU-17-002"
+    },
+    "param_values": {
+      "sku": "SKU-17-002"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/product/sku-17-002",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-SKU-17-002"
+      },
+      "body": {
+        "sku": "SKU-17-002",
+        "qty": "1"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/product/sku-17-002"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0137",
+    "intent": "Return",
+    "intent_template": "Return item {{sku}}",
+    "instantiation_dict": {
+      "sku": "SKU-17-003"
+    },
+    "param_values": {
+      "sku": "SKU-17-003"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/product/sku-17-003",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-SKU-17-003"
+      },
+      "body": {
+        "sku": "SKU-17-003",
+        "qty": "1"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/product/sku-17-003"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0138",
+    "intent": "Return",
+    "intent_template": "Return item {{sku}}",
+    "instantiation_dict": {
+      "sku": "SKU-17-004"
+    },
+    "param_values": {
+      "sku": "SKU-17-004"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/product/sku-17-004",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-SKU-17-004"
+      },
+      "body": {
+        "sku": "SKU-17-004",
+        "qty": "1"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/product/sku-17-004"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0139",
+    "intent": "Write",
+    "intent_template": "Write review for {{product_id}}",
+    "instantiation_dict": {
+      "product_id": "PID-18-000"
+    },
+    "param_values": {
+      "product_id": "PID-18-000"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/product/pid-18-000",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-PID-18-000"
+      },
+      "body": {
+        "product_id": "PID-18-000"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/product/pid-18-000"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0140",
+    "intent": "Write",
+    "intent_template": "Write review for {{product_id}}",
+    "instantiation_dict": {
+      "product_id": "PID-18-001"
+    },
+    "param_values": {
+      "product_id": "PID-18-001"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/product/pid-18-001",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-PID-18-001"
+      },
+      "body": {
+        "product_id": "PID-18-001"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/product/pid-18-001"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0141",
+    "intent": "Write",
+    "intent_template": "Write review for {{product_id}}",
+    "instantiation_dict": {
+      "product_id": "PID-18-002"
+    },
+    "param_values": {
+      "product_id": "PID-18-002"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/product/pid-18-002",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-PID-18-002"
+      },
+      "body": {
+        "product_id": "PID-18-002"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/product/pid-18-002"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0142",
+    "intent": "Write",
+    "intent_template": "Write review for {{product_id}}",
+    "instantiation_dict": {
+      "product_id": "PID-18-003"
+    },
+    "param_values": {
+      "product_id": "PID-18-003"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/product/pid-18-003",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-PID-18-003"
+      },
+      "body": {
+        "product_id": "PID-18-003"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/product/pid-18-003"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0143",
+    "intent": "Write",
+    "intent_template": "Write review for {{product_id}}",
+    "instantiation_dict": {
+      "product_id": "PID-18-004"
+    },
+    "param_values": {
+      "product_id": "PID-18-004"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/product/pid-18-004",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-PID-18-004"
+      },
+      "body": {
+        "product_id": "PID-18-004"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/product/pid-18-004"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0144",
+    "intent": "Rate",
+    "intent_template": "Rate product {{product_id}}",
+    "instantiation_dict": {
+      "product_id": "PID-19-000"
+    },
+    "param_values": {
+      "product_id": "PID-19-000"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/product/pid-19-000",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-PID-19-000"
+      },
+      "body": {
+        "product_id": "PID-19-000"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/product/pid-19-000"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0145",
+    "intent": "Rate",
+    "intent_template": "Rate product {{product_id}}",
+    "instantiation_dict": {
+      "product_id": "PID-19-001"
+    },
+    "param_values": {
+      "product_id": "PID-19-001"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/product/pid-19-001",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-PID-19-001"
+      },
+      "body": {
+        "product_id": "PID-19-001"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/product/pid-19-001"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0146",
+    "intent": "Rate",
+    "intent_template": "Rate product {{product_id}}",
+    "instantiation_dict": {
+      "product_id": "PID-19-002"
+    },
+    "param_values": {
+      "product_id": "PID-19-002"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/product/pid-19-002",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-PID-19-002"
+      },
+      "body": {
+        "product_id": "PID-19-002"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/product/pid-19-002"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0147",
+    "intent": "Rate",
+    "intent_template": "Rate product {{product_id}}",
+    "instantiation_dict": {
+      "product_id": "PID-19-003"
+    },
+    "param_values": {
+      "product_id": "PID-19-003"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/product/pid-19-003",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-PID-19-003"
+      },
+      "body": {
+        "product_id": "PID-19-003"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/product/pid-19-003"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0148",
+    "intent": "Rate",
+    "intent_template": "Rate product {{product_id}}",
+    "instantiation_dict": {
+      "product_id": "PID-19-004"
+    },
+    "param_values": {
+      "product_id": "PID-19-004"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/product/pid-19-004",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-PID-19-004"
+      },
+      "body": {
+        "product_id": "PID-19-004"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/product/pid-19-004"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0149",
+    "intent": "Ask",
+    "intent_template": "Ask question about {{product_id}}",
+    "instantiation_dict": {
+      "product_id": "PID-20-000"
+    },
+    "param_values": {
+      "product_id": "PID-20-000"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/product/pid-20-000",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-PID-20-000"
+      },
+      "body": {
+        "product_id": "PID-20-000"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/product/pid-20-000"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0150",
+    "intent": "Ask",
+    "intent_template": "Ask question about {{product_id}}",
+    "instantiation_dict": {
+      "product_id": "PID-20-001"
+    },
+    "param_values": {
+      "product_id": "PID-20-001"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/product/pid-20-001",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-PID-20-001"
+      },
+      "body": {
+        "product_id": "PID-20-001"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/product/pid-20-001"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0151",
+    "intent": "Ask",
+    "intent_template": "Ask question about {{product_id}}",
+    "instantiation_dict": {
+      "product_id": "PID-20-002"
+    },
+    "param_values": {
+      "product_id": "PID-20-002"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/product/pid-20-002",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-PID-20-002"
+      },
+      "body": {
+        "product_id": "PID-20-002"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/product/pid-20-002"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0152",
+    "intent": "Ask",
+    "intent_template": "Ask question about {{product_id}}",
+    "instantiation_dict": {
+      "product_id": "PID-20-003"
+    },
+    "param_values": {
+      "product_id": "PID-20-003"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/product/pid-20-003",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-PID-20-003"
+      },
+      "body": {
+        "product_id": "PID-20-003"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/product/pid-20-003"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0153",
+    "intent": "Ask",
+    "intent_template": "Ask question about {{product_id}}",
+    "instantiation_dict": {
+      "product_id": "PID-20-004"
+    },
+    "param_values": {
+      "product_id": "PID-20-004"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/product/pid-20-004",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-PID-20-004"
+      },
+      "body": {
+        "product_id": "PID-20-004"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/product/pid-20-004"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0154",
+    "intent": "View",
+    "intent_template": "View reviews for {{product_id}}",
+    "instantiation_dict": {
+      "product_id": "PID-21-000"
+    },
+    "param_values": {
+      "product_id": "PID-21-000"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/product/pid-21-000",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-PID-21-000"
+      },
+      "body": {
+        "product_id": "PID-21-000"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/product/pid-21-000"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0155",
+    "intent": "View",
+    "intent_template": "View reviews for {{product_id}}",
+    "instantiation_dict": {
+      "product_id": "PID-21-001"
+    },
+    "param_values": {
+      "product_id": "PID-21-001"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/product/pid-21-001",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-PID-21-001"
+      },
+      "body": {
+        "product_id": "PID-21-001"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/product/pid-21-001"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0156",
+    "intent": "View",
+    "intent_template": "View reviews for {{product_id}}",
+    "instantiation_dict": {
+      "product_id": "PID-21-002"
+    },
+    "param_values": {
+      "product_id": "PID-21-002"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/product/pid-21-002",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-PID-21-002"
+      },
+      "body": {
+        "product_id": "PID-21-002"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/product/pid-21-002"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0157",
+    "intent": "View",
+    "intent_template": "View reviews for {{product_id}}",
+    "instantiation_dict": {
+      "product_id": "PID-21-003"
+    },
+    "param_values": {
+      "product_id": "PID-21-003"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/product/pid-21-003",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-PID-21-003"
+      },
+      "body": {
+        "product_id": "PID-21-003"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/product/pid-21-003"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0158",
+    "intent": "View",
+    "intent_template": "View reviews for {{product_id}}",
+    "instantiation_dict": {
+      "product_id": "PID-21-004"
+    },
+    "param_values": {
+      "product_id": "PID-21-004"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/product/pid-21-004",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-PID-21-004"
+      },
+      "body": {
+        "product_id": "PID-21-004"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/product/pid-21-004"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0159",
+    "intent": "Compare",
+    "intent_template": "Compare {{product_a}} with {{product_b}}",
+    "instantiation_dict": {
+      "product_a": "PRODA-22-000",
+      "product_b": "PRODB-22-000"
+    },
+    "param_values": {
+      "product_a": "PRODA-22-000",
+      "product_b": "PRODB-22-000"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/22/proda-22-000",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-PRODA-22-000"
+      },
+      "body": {
+        "product_a": "PRODA-22-000",
+        "product_b": "PRODB-22-000"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/22/proda-22-000"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0160",
+    "intent": "Compare",
+    "intent_template": "Compare {{product_a}} with {{product_b}}",
+    "instantiation_dict": {
+      "product_a": "PRODA-22-001",
+      "product_b": "PRODB-22-001"
+    },
+    "param_values": {
+      "product_a": "PRODA-22-001",
+      "product_b": "PRODB-22-001"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/22/proda-22-001",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-PRODA-22-001"
+      },
+      "body": {
+        "product_a": "PRODA-22-001",
+        "product_b": "PRODB-22-001"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/22/proda-22-001"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0161",
+    "intent": "Compare",
+    "intent_template": "Compare {{product_a}} with {{product_b}}",
+    "instantiation_dict": {
+      "product_a": "PRODA-22-002",
+      "product_b": "PRODB-22-002"
+    },
+    "param_values": {
+      "product_a": "PRODA-22-002",
+      "product_b": "PRODB-22-002"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/22/proda-22-002",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-PRODA-22-002"
+      },
+      "body": {
+        "product_a": "PRODA-22-002",
+        "product_b": "PRODB-22-002"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/22/proda-22-002"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0162",
+    "intent": "Compare",
+    "intent_template": "Compare {{product_a}} with {{product_b}}",
+    "instantiation_dict": {
+      "product_a": "PRODA-22-003",
+      "product_b": "PRODB-22-003"
+    },
+    "param_values": {
+      "product_a": "PRODA-22-003",
+      "product_b": "PRODB-22-003"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/22/proda-22-003",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-PRODA-22-003"
+      },
+      "body": {
+        "product_a": "PRODA-22-003",
+        "product_b": "PRODB-22-003"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/22/proda-22-003"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0163",
+    "intent": "Compare",
+    "intent_template": "Compare {{product_a}} with {{product_b}}",
+    "instantiation_dict": {
+      "product_a": "PRODA-22-004",
+      "product_b": "PRODB-22-004"
+    },
+    "param_values": {
+      "product_a": "PRODA-22-004",
+      "product_b": "PRODB-22-004"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/22/proda-22-004",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-PRODA-22-004"
+      },
+      "body": {
+        "product_a": "PRODA-22-004",
+        "product_b": "PRODB-22-004"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/22/proda-22-004"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0164",
+    "intent": "Share",
+    "intent_template": "Share product {{product_id}}",
+    "instantiation_dict": {
+      "product_id": "PID-23-000"
+    },
+    "param_values": {
+      "product_id": "PID-23-000"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/product/pid-23-000",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-PID-23-000"
+      },
+      "body": {
+        "product_id": "PID-23-000"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/product/pid-23-000"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0165",
+    "intent": "Share",
+    "intent_template": "Share product {{product_id}}",
+    "instantiation_dict": {
+      "product_id": "PID-23-001"
+    },
+    "param_values": {
+      "product_id": "PID-23-001"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/product/pid-23-001",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-PID-23-001"
+      },
+      "body": {
+        "product_id": "PID-23-001"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/product/pid-23-001"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0166",
+    "intent": "Share",
+    "intent_template": "Share product {{product_id}}",
+    "instantiation_dict": {
+      "product_id": "PID-23-002"
+    },
+    "param_values": {
+      "product_id": "PID-23-002"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/product/pid-23-002",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-PID-23-002"
+      },
+      "body": {
+        "product_id": "PID-23-002"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/product/pid-23-002"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0167",
+    "intent": "Share",
+    "intent_template": "Share product {{product_id}}",
+    "instantiation_dict": {
+      "product_id": "PID-23-003"
+    },
+    "param_values": {
+      "product_id": "PID-23-003"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/product/pid-23-003",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-PID-23-003"
+      },
+      "body": {
+        "product_id": "PID-23-003"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/product/pid-23-003"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0168",
+    "intent": "Share",
+    "intent_template": "Share product {{product_id}}",
+    "instantiation_dict": {
+      "product_id": "PID-23-004"
+    },
+    "param_values": {
+      "product_id": "PID-23-004"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/product/pid-23-004",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-PID-23-004"
+      },
+      "body": {
+        "product_id": "PID-23-004"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/product/pid-23-004"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0169",
+    "intent": "Save",
+    "intent_template": "Save {{product_id}} for later",
+    "instantiation_dict": {
+      "product_id": "PID-24-000"
+    },
+    "param_values": {
+      "product_id": "PID-24-000"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/product/pid-24-000",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-PID-24-000"
+      },
+      "body": {
+        "product_id": "PID-24-000"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/product/pid-24-000"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0170",
+    "intent": "Save",
+    "intent_template": "Save {{product_id}} for later",
+    "instantiation_dict": {
+      "product_id": "PID-24-001"
+    },
+    "param_values": {
+      "product_id": "PID-24-001"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/product/pid-24-001",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-PID-24-001"
+      },
+      "body": {
+        "product_id": "PID-24-001"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/product/pid-24-001"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0171",
+    "intent": "Save",
+    "intent_template": "Save {{product_id}} for later",
+    "instantiation_dict": {
+      "product_id": "PID-24-002"
+    },
+    "param_values": {
+      "product_id": "PID-24-002"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/product/pid-24-002",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-PID-24-002"
+      },
+      "body": {
+        "product_id": "PID-24-002"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/product/pid-24-002"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0172",
+    "intent": "Save",
+    "intent_template": "Save {{product_id}} for later",
+    "instantiation_dict": {
+      "product_id": "PID-24-003"
+    },
+    "param_values": {
+      "product_id": "PID-24-003"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/product/pid-24-003",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-PID-24-003"
+      },
+      "body": {
+        "product_id": "PID-24-003"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/product/pid-24-003"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0173",
+    "intent": "Save",
+    "intent_template": "Save {{product_id}} for later",
+    "instantiation_dict": {
+      "product_id": "PID-24-004"
+    },
+    "param_values": {
+      "product_id": "PID-24-004"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/product/pid-24-004",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-PID-24-004"
+      },
+      "body": {
+        "product_id": "PID-24-004"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/product/pid-24-004"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0174",
+    "intent": "View",
+    "intent_template": "View saved items {{list_id}}",
+    "instantiation_dict": {
+      "list_id": "LIST-25-000"
+    },
+    "param_values": {
+      "list_id": "LIST-25-000"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/25/list-25-000",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-LIST-25-000"
+      },
+      "body": {
+        "list_id": "LIST-25-000"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/25/list-25-000"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0175",
+    "intent": "View",
+    "intent_template": "View saved items {{list_id}}",
+    "instantiation_dict": {
+      "list_id": "LIST-25-001"
+    },
+    "param_values": {
+      "list_id": "LIST-25-001"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/25/list-25-001",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-LIST-25-001"
+      },
+      "body": {
+        "list_id": "LIST-25-001"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/25/list-25-001"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0176",
+    "intent": "View",
+    "intent_template": "View saved items {{list_id}}",
+    "instantiation_dict": {
+      "list_id": "LIST-25-002"
+    },
+    "param_values": {
+      "list_id": "LIST-25-002"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/25/list-25-002",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-LIST-25-002"
+      },
+      "body": {
+        "list_id": "LIST-25-002"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/25/list-25-002"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0177",
+    "intent": "View",
+    "intent_template": "View saved items {{list_id}}",
+    "instantiation_dict": {
+      "list_id": "LIST-25-003"
+    },
+    "param_values": {
+      "list_id": "LIST-25-003"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/25/list-25-003",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-LIST-25-003"
+      },
+      "body": {
+        "list_id": "LIST-25-003"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/25/list-25-003"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0178",
+    "intent": "View",
+    "intent_template": "View saved items {{list_id}}",
+    "instantiation_dict": {
+      "list_id": "LIST-25-004"
+    },
+    "param_values": {
+      "list_id": "LIST-25-004"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/25/list-25-004",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-LIST-25-004"
+      },
+      "body": {
+        "list_id": "LIST-25-004"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/25/list-25-004"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0179",
+    "intent": "Apply",
+    "intent_template": "Apply coupon {{coupon_code}}",
+    "instantiation_dict": {
+      "coupon_code": "CPN-26-000"
+    },
+    "param_values": {
+      "coupon_code": "CPN-26-000"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/26/cpn-26-000",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-CPN-26-000"
+      },
+      "body": {
+        "coupon_code": "CPN-26-000"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/26/cpn-26-000"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0180",
+    "intent": "Apply",
+    "intent_template": "Apply coupon {{coupon_code}}",
+    "instantiation_dict": {
+      "coupon_code": "CPN-26-001"
+    },
+    "param_values": {
+      "coupon_code": "CPN-26-001"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/26/cpn-26-001",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-CPN-26-001"
+      },
+      "body": {
+        "coupon_code": "CPN-26-001"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/26/cpn-26-001"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0181",
+    "intent": "Apply",
+    "intent_template": "Apply coupon {{coupon_code}}",
+    "instantiation_dict": {
+      "coupon_code": "CPN-26-002"
+    },
+    "param_values": {
+      "coupon_code": "CPN-26-002"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/26/cpn-26-002",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-CPN-26-002"
+      },
+      "body": {
+        "coupon_code": "CPN-26-002"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/26/cpn-26-002"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0182",
+    "intent": "Apply",
+    "intent_template": "Apply coupon {{coupon_code}}",
+    "instantiation_dict": {
+      "coupon_code": "CPN-26-003"
+    },
+    "param_values": {
+      "coupon_code": "CPN-26-003"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/26/cpn-26-003",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-CPN-26-003"
+      },
+      "body": {
+        "coupon_code": "CPN-26-003"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/26/cpn-26-003"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0183",
+    "intent": "Apply",
+    "intent_template": "Apply coupon {{coupon_code}}",
+    "instantiation_dict": {
+      "coupon_code": "CPN-26-004"
+    },
+    "param_values": {
+      "coupon_code": "CPN-26-004"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/26/cpn-26-004",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-CPN-26-004"
+      },
+      "body": {
+        "coupon_code": "CPN-26-004"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/26/cpn-26-004"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0184",
+    "intent": "Remove",
+    "intent_template": "Remove coupon {{coupon_code}}",
+    "instantiation_dict": {
+      "coupon_code": "CPN-27-000"
+    },
+    "param_values": {
+      "coupon_code": "CPN-27-000"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/27/cpn-27-000",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-CPN-27-000"
+      },
+      "body": {
+        "coupon_code": "CPN-27-000"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/27/cpn-27-000"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0185",
+    "intent": "Remove",
+    "intent_template": "Remove coupon {{coupon_code}}",
+    "instantiation_dict": {
+      "coupon_code": "CPN-27-001"
+    },
+    "param_values": {
+      "coupon_code": "CPN-27-001"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/27/cpn-27-001",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-CPN-27-001"
+      },
+      "body": {
+        "coupon_code": "CPN-27-001"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/27/cpn-27-001"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0186",
+    "intent": "Remove",
+    "intent_template": "Remove coupon {{coupon_code}}",
+    "instantiation_dict": {
+      "coupon_code": "CPN-27-002"
+    },
+    "param_values": {
+      "coupon_code": "CPN-27-002"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/27/cpn-27-002",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-CPN-27-002"
+      },
+      "body": {
+        "coupon_code": "CPN-27-002"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/27/cpn-27-002"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0187",
+    "intent": "Remove",
+    "intent_template": "Remove coupon {{coupon_code}}",
+    "instantiation_dict": {
+      "coupon_code": "CPN-27-003"
+    },
+    "param_values": {
+      "coupon_code": "CPN-27-003"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/27/cpn-27-003",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-CPN-27-003"
+      },
+      "body": {
+        "coupon_code": "CPN-27-003"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/27/cpn-27-003"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0188",
+    "intent": "Remove",
+    "intent_template": "Remove coupon {{coupon_code}}",
+    "instantiation_dict": {
+      "coupon_code": "CPN-27-004"
+    },
+    "param_values": {
+      "coupon_code": "CPN-27-004"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/27/cpn-27-004",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-CPN-27-004"
+      },
+      "body": {
+        "coupon_code": "CPN-27-004"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/27/cpn-27-004"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0189",
+    "intent": "Change",
+    "intent_template": "Change delivery address to {{address_id}}",
+    "instantiation_dict": {
+      "address_id": "ADDR-28-000"
+    },
+    "param_values": {
+      "address_id": "ADDR-28-000"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/28/addr-28-000",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-ADDR-28-000"
+      },
+      "body": {
+        "address_id": "ADDR-28-000"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/28/addr-28-000"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0190",
+    "intent": "Change",
+    "intent_template": "Change delivery address to {{address_id}}",
+    "instantiation_dict": {
+      "address_id": "ADDR-28-001"
+    },
+    "param_values": {
+      "address_id": "ADDR-28-001"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/28/addr-28-001",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-ADDR-28-001"
+      },
+      "body": {
+        "address_id": "ADDR-28-001"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/28/addr-28-001"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0191",
+    "intent": "Change",
+    "intent_template": "Change delivery address to {{address_id}}",
+    "instantiation_dict": {
+      "address_id": "ADDR-28-002"
+    },
+    "param_values": {
+      "address_id": "ADDR-28-002"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/28/addr-28-002",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-ADDR-28-002"
+      },
+      "body": {
+        "address_id": "ADDR-28-002"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/28/addr-28-002"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0192",
+    "intent": "Change",
+    "intent_template": "Change delivery address to {{address_id}}",
+    "instantiation_dict": {
+      "address_id": "ADDR-28-003"
+    },
+    "param_values": {
+      "address_id": "ADDR-28-003"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/28/addr-28-003",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-ADDR-28-003"
+      },
+      "body": {
+        "address_id": "ADDR-28-003"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/28/addr-28-003"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0193",
+    "intent": "Change",
+    "intent_template": "Change delivery address to {{address_id}}",
+    "instantiation_dict": {
+      "address_id": "ADDR-28-004"
+    },
+    "param_values": {
+      "address_id": "ADDR-28-004"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/28/addr-28-004",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-ADDR-28-004"
+      },
+      "body": {
+        "address_id": "ADDR-28-004"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/28/addr-28-004"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0194",
+    "intent": "Add",
+    "intent_template": "Add new address {{address_id}}",
+    "instantiation_dict": {
+      "address_id": "ADDR-29-000"
+    },
+    "param_values": {
+      "address_id": "ADDR-29-000"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/29/addr-29-000",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-ADDR-29-000"
+      },
+      "body": {
+        "address_id": "ADDR-29-000"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/29/addr-29-000"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0195",
+    "intent": "Add",
+    "intent_template": "Add new address {{address_id}}",
+    "instantiation_dict": {
+      "address_id": "ADDR-29-001"
+    },
+    "param_values": {
+      "address_id": "ADDR-29-001"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/29/addr-29-001",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-ADDR-29-001"
+      },
+      "body": {
+        "address_id": "ADDR-29-001"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/29/addr-29-001"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0196",
+    "intent": "Add",
+    "intent_template": "Add new address {{address_id}}",
+    "instantiation_dict": {
+      "address_id": "ADDR-29-002"
+    },
+    "param_values": {
+      "address_id": "ADDR-29-002"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/29/addr-29-002",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-ADDR-29-002"
+      },
+      "body": {
+        "address_id": "ADDR-29-002"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/29/addr-29-002"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0197",
+    "intent": "Add",
+    "intent_template": "Add new address {{address_id}}",
+    "instantiation_dict": {
+      "address_id": "ADDR-29-003"
+    },
+    "param_values": {
+      "address_id": "ADDR-29-003"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/29/addr-29-003",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-ADDR-29-003"
+      },
+      "body": {
+        "address_id": "ADDR-29-003"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/29/addr-29-003"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0198",
+    "intent": "Add",
+    "intent_template": "Add new address {{address_id}}",
+    "instantiation_dict": {
+      "address_id": "ADDR-29-004"
+    },
+    "param_values": {
+      "address_id": "ADDR-29-004"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/29/addr-29-004",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-ADDR-29-004"
+      },
+      "body": {
+        "address_id": "ADDR-29-004"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/29/addr-29-004"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0199",
+    "intent": "Edit",
+    "intent_template": "Edit profile {{field}}",
+    "instantiation_dict": {
+      "field": "FIELD-30-000"
+    },
+    "param_values": {
+      "field": "FIELD-30-000"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/30/field-30-000",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-FIELD-30-000"
+      },
+      "body": {
+        "field": "FIELD-30-000"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/30/field-30-000"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0200",
+    "intent": "Edit",
+    "intent_template": "Edit profile {{field}}",
+    "instantiation_dict": {
+      "field": "FIELD-30-001"
+    },
+    "param_values": {
+      "field": "FIELD-30-001"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/30/field-30-001",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-FIELD-30-001"
+      },
+      "body": {
+        "field": "FIELD-30-001"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/30/field-30-001"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0201",
+    "intent": "Edit",
+    "intent_template": "Edit profile {{field}}",
+    "instantiation_dict": {
+      "field": "FIELD-30-002"
+    },
+    "param_values": {
+      "field": "FIELD-30-002"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/30/field-30-002",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-FIELD-30-002"
+      },
+      "body": {
+        "field": "FIELD-30-002"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/30/field-30-002"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0202",
+    "intent": "Edit",
+    "intent_template": "Edit profile {{field}}",
+    "instantiation_dict": {
+      "field": "FIELD-30-003"
+    },
+    "param_values": {
+      "field": "FIELD-30-003"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/30/field-30-003",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-FIELD-30-003"
+      },
+      "body": {
+        "field": "FIELD-30-003"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/30/field-30-003"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0203",
+    "intent": "Edit",
+    "intent_template": "Edit profile {{field}}",
+    "instantiation_dict": {
+      "field": "FIELD-30-004"
+    },
+    "param_values": {
+      "field": "FIELD-30-004"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/30/field-30-004",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-FIELD-30-004"
+      },
+      "body": {
+        "field": "FIELD-30-004"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/30/field-30-004"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0204",
+    "intent": "Change",
+    "intent_template": "Change password",
+    "instantiation_dict": {},
+    "param_values": {},
+    "action": {
+      "method": "GET",
+      "url": "https://shop.example.com/31/static",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "body": {}
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/31/static"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0205",
+    "intent": "Change",
+    "intent_template": "Change password",
+    "instantiation_dict": {},
+    "param_values": {},
+    "action": {
+      "method": "GET",
+      "url": "https://shop.example.com/31/static",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "body": {}
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/31/static"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0206",
+    "intent": "Logout",
+    "intent_template": "Logout",
+    "instantiation_dict": {},
+    "param_values": {},
+    "action": {
+      "method": "GET",
+      "url": "https://shop.example.com/32/static",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "body": {}
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/32/static"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0207",
+    "intent": "Logout",
+    "intent_template": "Logout",
+    "instantiation_dict": {},
+    "param_values": {},
+    "action": {
+      "method": "GET",
+      "url": "https://shop.example.com/32/static",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "body": {}
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/32/static"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0208",
+    "intent": "Login",
+    "intent_template": "Login with {{username}}",
+    "instantiation_dict": {
+      "username": "USER-33-000"
+    },
+    "param_values": {
+      "username": "USER-33-000"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/33/user-33-000",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-USER-33-000"
+      },
+      "body": {
+        "username": "USER-33-000"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/33/user-33-000"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0209",
+    "intent": "Login",
+    "intent_template": "Login with {{username}}",
+    "instantiation_dict": {
+      "username": "USER-33-001"
+    },
+    "param_values": {
+      "username": "USER-33-001"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/33/user-33-001",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-USER-33-001"
+      },
+      "body": {
+        "username": "USER-33-001"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/33/user-33-001"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0210",
+    "intent": "Register",
+    "intent_template": "Register with {{email}}",
+    "instantiation_dict": {
+      "email": "EMAIL-34-000"
+    },
+    "param_values": {
+      "email": "EMAIL-34-000"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/34/email-34-000",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-EMAIL-34-000"
+      },
+      "body": {
+        "email": "EMAIL-34-000"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/34/email-34-000"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0211",
+    "intent": "Register",
+    "intent_template": "Register with {{email}}",
+    "instantiation_dict": {
+      "email": "EMAIL-34-001"
+    },
+    "param_values": {
+      "email": "EMAIL-34-001"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/34/email-34-001",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-EMAIL-34-001"
+      },
+      "body": {
+        "email": "EMAIL-34-001"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/34/email-34-001"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0212",
+    "intent": "Forgot",
+    "intent_template": "Forgot password for {{email}}",
+    "instantiation_dict": {
+      "email": "EMAIL-35-000"
+    },
+    "param_values": {
+      "email": "EMAIL-35-000"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/35/email-35-000",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-EMAIL-35-000"
+      },
+      "body": {
+        "email": "EMAIL-35-000"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/35/email-35-000"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0213",
+    "intent": "Forgot",
+    "intent_template": "Forgot password for {{email}}",
+    "instantiation_dict": {
+      "email": "EMAIL-35-001"
+    },
+    "param_values": {
+      "email": "EMAIL-35-001"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/35/email-35-001",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-EMAIL-35-001"
+      },
+      "body": {
+        "email": "EMAIL-35-001"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/35/email-35-001"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0214",
+    "intent": "Reset",
+    "intent_template": "Reset password with {{token}}",
+    "instantiation_dict": {
+      "token": "TOKEN-36-000"
+    },
+    "param_values": {
+      "token": "TOKEN-36-000"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/36/token-36-000",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-TOKEN-36-000"
+      },
+      "body": {
+        "token": "TOKEN-36-000"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/36/token-36-000"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0215",
+    "intent": "Reset",
+    "intent_template": "Reset password with {{token}}",
+    "instantiation_dict": {
+      "token": "TOKEN-36-001"
+    },
+    "param_values": {
+      "token": "TOKEN-36-001"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/36/token-36-001",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-TOKEN-36-001"
+      },
+      "body": {
+        "token": "TOKEN-36-001"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/36/token-36-001"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0216",
+    "intent": "View",
+    "intent_template": "View account {{section}}",
+    "instantiation_dict": {
+      "section": "SECT-37-000"
+    },
+    "param_values": {
+      "section": "SECT-37-000"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/37/sect-37-000",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-SECT-37-000"
+      },
+      "body": {
+        "section": "SECT-37-000"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/37/sect-37-000"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0217",
+    "intent": "View",
+    "intent_template": "View account {{section}}",
+    "instantiation_dict": {
+      "section": "SECT-37-001"
+    },
+    "param_values": {
+      "section": "SECT-37-001"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/37/sect-37-001",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-SECT-37-001"
+      },
+      "body": {
+        "section": "SECT-37-001"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/37/sect-37-001"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0218",
+    "intent": "Edit",
+    "intent_template": "Edit account {{field}}",
+    "instantiation_dict": {
+      "field": "FIELD-38-000"
+    },
+    "param_values": {
+      "field": "FIELD-38-000"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/38/field-38-000",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-FIELD-38-000"
+      },
+      "body": {
+        "field": "FIELD-38-000"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/38/field-38-000"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0219",
+    "intent": "Edit",
+    "intent_template": "Edit account {{field}}",
+    "instantiation_dict": {
+      "field": "FIELD-38-001"
+    },
+    "param_values": {
+      "field": "FIELD-38-001"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/38/field-38-001",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-FIELD-38-001"
+      },
+      "body": {
+        "field": "FIELD-38-001"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/38/field-38-001"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0220",
+    "intent": "Delete",
+    "intent_template": "Delete account",
+    "instantiation_dict": {},
+    "param_values": {},
+    "action": {
+      "method": "GET",
+      "url": "https://shop.example.com/39/static",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "body": {}
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/39/static"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0221",
+    "intent": "Delete",
+    "intent_template": "Delete account",
+    "instantiation_dict": {},
+    "param_values": {},
+    "action": {
+      "method": "GET",
+      "url": "https://shop.example.com/39/static",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "body": {}
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/39/static"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0222",
+    "intent": "Contact",
+    "intent_template": "Contact support about {{topic}}",
+    "instantiation_dict": {
+      "topic": "TOPIC-40-000"
+    },
+    "param_values": {
+      "topic": "TOPIC-40-000"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/40/topic-40-000",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-TOPIC-40-000"
+      },
+      "body": {
+        "topic": "TOPIC-40-000"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/40/topic-40-000"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0223",
+    "intent": "Contact",
+    "intent_template": "Contact support about {{topic}}",
+    "instantiation_dict": {
+      "topic": "TOPIC-40-001"
+    },
+    "param_values": {
+      "topic": "TOPIC-40-001"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/40/topic-40-001",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-TOPIC-40-001"
+      },
+      "body": {
+        "topic": "TOPIC-40-001"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/40/topic-40-001"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0224",
+    "intent": "View",
+    "intent_template": "View FAQ {{category}}",
+    "instantiation_dict": {
+      "category": "CAT-41-000"
+    },
+    "param_values": {
+      "category": "CAT-41-000"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/41/cat-41-000",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-CAT-41-000"
+      },
+      "body": {
+        "category": "CAT-41-000"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/41/cat-41-000"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0225",
+    "intent": "View",
+    "intent_template": "View FAQ {{category}}",
+    "instantiation_dict": {
+      "category": "CAT-41-001"
+    },
+    "param_values": {
+      "category": "CAT-41-001"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/41/cat-41-001",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-CAT-41-001"
+      },
+      "body": {
+        "category": "CAT-41-001"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/41/cat-41-001"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0226",
+    "intent": "Subscribe",
+    "intent_template": "Subscribe to newsletter with {{email}}",
+    "instantiation_dict": {
+      "email": "EMAIL-42-000"
+    },
+    "param_values": {
+      "email": "EMAIL-42-000"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/42/email-42-000",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-EMAIL-42-000"
+      },
+      "body": {
+        "email": "EMAIL-42-000"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/42/email-42-000"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0227",
+    "intent": "Subscribe",
+    "intent_template": "Subscribe to newsletter with {{email}}",
+    "instantiation_dict": {
+      "email": "EMAIL-42-001"
+    },
+    "param_values": {
+      "email": "EMAIL-42-001"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/42/email-42-001",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-EMAIL-42-001"
+      },
+      "body": {
+        "email": "EMAIL-42-001"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/42/email-42-001"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0228",
+    "intent": "Unsubscribe",
+    "intent_template": "Unsubscribe from newsletter",
+    "instantiation_dict": {},
+    "param_values": {},
+    "action": {
+      "method": "GET",
+      "url": "https://shop.example.com/43/static",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "body": {}
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/43/static"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0229",
+    "intent": "Unsubscribe",
+    "intent_template": "Unsubscribe from newsletter",
+    "instantiation_dict": {},
+    "param_values": {},
+    "action": {
+      "method": "GET",
+      "url": "https://shop.example.com/43/static",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "body": {}
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/43/static"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0230",
+    "intent": "View",
+    "intent_template": "View homepage",
+    "instantiation_dict": {},
+    "param_values": {},
+    "action": {
+      "method": "GET",
+      "url": "https://shop.example.com/44/static",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "body": {}
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/44/static"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0231",
+    "intent": "View",
+    "intent_template": "View homepage",
+    "instantiation_dict": {},
+    "param_values": {},
+    "action": {
+      "method": "GET",
+      "url": "https://shop.example.com/44/static",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "body": {}
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/44/static"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0232",
+    "intent": "View",
+    "intent_template": "View category {{category}}",
+    "instantiation_dict": {
+      "category": "CAT-45-000"
+    },
+    "param_values": {
+      "category": "CAT-45-000"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/45/cat-45-000",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-CAT-45-000"
+      },
+      "body": {
+        "category": "CAT-45-000"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/45/cat-45-000"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0233",
+    "intent": "View",
+    "intent_template": "View category {{category}}",
+    "instantiation_dict": {
+      "category": "CAT-45-001"
+    },
+    "param_values": {
+      "category": "CAT-45-001"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/45/cat-45-001",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-CAT-45-001"
+      },
+      "body": {
+        "category": "CAT-45-001"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/45/cat-45-001"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0234",
+    "intent": "View",
+    "intent_template": "View brand {{brand}}",
+    "instantiation_dict": {
+      "brand": "BRAND-46-000"
+    },
+    "param_values": {
+      "brand": "BRAND-46-000"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/46/brand-46-000",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-BRAND-46-000"
+      },
+      "body": {
+        "brand": "BRAND-46-000"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/46/brand-46-000"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0235",
+    "intent": "View",
+    "intent_template": "View brand {{brand}}",
+    "instantiation_dict": {
+      "brand": "BRAND-46-001"
+    },
+    "param_values": {
+      "brand": "BRAND-46-001"
+    },
+    "action": {
+      "method": "POST",
+      "url": "https://shop.example.com/46/brand-46-001",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "CSRF-BRAND-46-001"
+      },
+      "body": {
+        "brand": "BRAND-46-001"
+      }
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/46/brand-46-001"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0236",
+    "intent": "View",
+    "intent_template": "View sale page",
+    "instantiation_dict": {},
+    "param_values": {},
+    "action": {
+      "method": "GET",
+      "url": "https://shop.example.com/47/static",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "body": {}
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/47/static"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0237",
+    "intent": "View",
+    "intent_template": "View sale page",
+    "instantiation_dict": {},
+    "param_values": {},
+    "action": {
+      "method": "GET",
+      "url": "https://shop.example.com/47/static",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "body": {}
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/47/static"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0238",
+    "intent": "View",
+    "intent_template": "View new arrivals",
+    "instantiation_dict": {},
+    "param_values": {},
+    "action": {
+      "method": "GET",
+      "url": "https://shop.example.com/48/static",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "body": {}
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/48/static"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0239",
+    "intent": "View",
+    "intent_template": "View new arrivals",
+    "instantiation_dict": {},
+    "param_values": {},
+    "action": {
+      "method": "GET",
+      "url": "https://shop.example.com/48/static",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "body": {}
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/48/static"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0240",
+    "intent": "View",
+    "intent_template": "View bestsellers",
+    "instantiation_dict": {},
+    "param_values": {},
+    "action": {
+      "method": "GET",
+      "url": "https://shop.example.com/49/static",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "body": {}
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/49/static"
+    },
+    "resource_pool": "N/A"
+  },
+  {
+    "task_id": "task_0241",
+    "intent": "View",
+    "intent_template": "View bestsellers",
+    "instantiation_dict": {},
+    "param_values": {},
+    "action": {
+      "method": "GET",
+      "url": "https://shop.example.com/49/static",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "body": {}
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/49/static"
+    },
+    "resource_pool": "N/A"
+  }
+]

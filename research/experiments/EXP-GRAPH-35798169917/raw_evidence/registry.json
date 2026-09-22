@@ -1,0 +1,76 @@
+[
+  {
+    "mechanism_id": "param-pilot_family",
+    "intent": "add_to_cart",
+    "preconditions": {},
+    "action_template": {
+      "body": {
+        "sku": "${sku}"
+      },
+      "headers": {
+        "X-Csrf-Token": "${x_csrf_token}"
+      },
+      "url": "${resource_id}"
+    },
+    "postconditions": {
+      "ok": true
+    },
+    "parameter_slots": [
+      "resource_id",
+      "sku",
+      "x_csrf_token"
+    ],
+    "auth_scope": null,
+    "freshness": {
+      "behavioral_score": 0.8,
+      "probe_url": "file://mock/pilot_family"
+    },
+    "applicability_guards": {},
+    "verification_rule": {
+      "induction": {
+        "induced_slots": [
+          "resource_id",
+          "sku",
+          "x_csrf_token"
+        ],
+        "pairwise_structure_jaccard": 1.0,
+        "structure_similarity": 1.0,
+        "varying_field_paths": [
+          "body.sku",
+          "headers.X-Csrf-Token",
+          "url"
+        ]
+      },
+      "postconditions_check": "exact"
+    },
+    "failure_boundary": {},
+    "repair_scope": {
+      "alternatives_from": "evidence_values",
+      "max_retries": 1
+    },
+    "evidence": [
+      "9951663e24c6ff16",
+      "c9833c0a6be12585",
+      "f3a21f2646e7a692"
+    ],
+    "evidence_values": {
+      "resource_id": [
+        "https://shop.example.com/product/sku-a001",
+        "https://shop.example.com/product/sku-a002",
+        "https://shop.example.com/product/sku-a003"
+      ],
+      "sku": [
+        "SKU-A001",
+        "SKU-A002",
+        "SKU-A003"
+      ],
+      "x_csrf_token": [
+        "tokA",
+        "tokB",
+        "tokC"
+      ]
+    },
+    "confidence": 0.9,
+    "invalidated": false
+  }
+]
