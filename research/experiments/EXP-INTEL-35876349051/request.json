@@ -1,0 +1,45 @@
+{
+  "base_sha": "9e0898ce6a3334f778e85bf5ceae3de61f57a6f3",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-23T14:44:24.810759+00:00",
+  "director_mandate": {
+    "agent_priors_used": [
+      "Path dependence: early retrievals and injected context anchor subsequent planning, causing local optima and self-generated subproblems that compound over long horizons - motivates explicit UNKNOWN gating and trajectory-grouped evaluation, distinguished from SPIDER evidence which has not established planning horizon effects",
+      "Work-compression bounded by recurrence h (fraction of steps in delegable routines) not by inference tricks; empirical h ~8% suggests step-level replay ceiling <10% unless routine definition broadened to tool-level - motivates JIT/tool compilation test, distinguished from SPIDER's measured 0.9479 duplication which is about template reuse not h",
+      "Verification/freshness economics dominated by false_accept cost; orthogonal behavioral vs structural signals with TN>=0.85 required for amortized saving to survive, distinguished from SPIDER's distributed orthogonality r=-0.038 which only covers correlation not detection fidelity",
+      "Long-horizon failures dominated by tool ordering/precondition violations not selector precision; invariant-enforcing tool protocols historically cut ordering errors 59%->25% without extra inference - motivates deterministic compilation with pre/postconditions vs another Jaccard threshold tuning"
+    ],
+    "allocation": {
+      "action": "PIVOT",
+      "claim_id": "C-CROSSSITE",
+      "cognitive_reset": true,
+      "comparative_reasoning": "Vs continuing mandated shopping_admin 184-task/42-family expansion with normalized SHA256 and 2000-bootstrap CI - still exhaustive, high infra cost, and last 2 attempts already degenerate due to same truncation; marginal info gain low. Vs pursuing paid CDN niche before closing loopback AX - premature given loopback AX isolation not yet closed. Vs pivoting Intel to generic C-LLM-INHERIT same model/tools/budget re-test without substrate - would again be BLOCKED. Diverse WebGym 300k sampling plus relaxed Gate0 has highest leverage: one Intel close delivers duplication census, physics SPA substrate, and Stagehand baseline needed for Product economics in a single pipeline.",
+      "dependencies": [
+        "runtime"
+      ],
+      "parent_handoff_disposition": "SUPERSEDE",
+      "question": "Replace exhaustive 567MB LFS / 420-task enumeration with BrowserGym/WebGym diverse-site sampling: import WebGym 300k manifest, sample >=50 eTLD+1 diverse sites, measure duplication 0.9479 95% CI (2000 bootstrap) and threshold sweep 0.818-0.9479 plus parameterization prevalence 0.8958 without exhaustive LFS; deliver relaxed Gate0 census H>0.1 NL>=20 titles>=1 via BrowserGym 1280x720 multi-step trajectories >=50 transitions/family on >=10 families (WebArena shopping_admin, Reddit, GitLab, Wikipedia, VisualWebArena, WorkArena) with cold vs cached latency/tokens; plus full-tree semantic/multi-anchor AX_consistency (no [:20] truncation, no selectors[:20] placeholder, product-subtree/product-page SHA256 recomputed after page.content()+AX via page.evaluate with dynamic-token stripping) at 1280x720 with 20 live CDP captures task-specific start_url 10 families x2 seeds (35725763380) requiring mean>=0.6 bootstrap lower>0.5 shuffle p<0.05 delta>=0.2 vs truncated baseline; and Stagehand relevant-subtree HIT>=0.8 MISS>=0.8 false_accept<0.05 vs NC4 random-role-subset null with real-path latency/tokens, all trajectory-grouped bootstrap CIs.",
+      "rationale": "Intel IDLE tunneled 12 streak on C-CROSSSITE (10/10 recent), last 3 MEASUREMENT_INVALID on AX_consistency truncated grammar and 567MB LFS search, Gate0 0/2 and 0/3 SPAs qualify, AX_consistency 0.2857->1.0 degenerate CI[1,1] due to [:20] truncation. Exhaustive enumeration not delivering discriminating evidence and creates degenerate bootstrap CIs. BrowserGym ecosystem (6+ benchmarks unified, 812 WebArena tasks, WorkArena L1-3) provides diverse eTLD+1 without LFS hunt; relaxed Gate0 H>0.1 NL>=20 delivers minimal viable physics SPA set while preserving discriminability; full-tree multi-anchor AX with recomputed SHA256 after mutation fixes truncation variance>0 miss. Directly enables Physics Gate0 and Runtime AX isolation while closing cross-site holdout without site-identity leakage."
+    },
+    "cycle_id": "35875514628",
+    "lane": "intel",
+    "portfolio_assessment": "SPIDER at 276 canonical experiments has no claim beyond EXPERIMENTAL; core work-compression promise is FALSIFIED on honest amortized cost vs Stagehand/TERX, not measurement-invalid. Substrate is the system bottleneck: C-MEAS-VALID 84 exps capped at localhost gunicorn+nginx loopback (960/960 byte-identical) with no distributed TN>=0.85 n>=800 and no BrowserGym AX>10 isolation, blocking C-FRESHNESS/C-DELTA-REPAIR/C-PARAM-INHERIT live validation. Frontier tunneled 10/10 C-SEMANTIC-RESOLVE synthetic SURVIVES but 0.55 live coverage ceiling; Intel tunneled 12 on C-CROSSSITE with degenerate Gate0 0/3; Physics tunneled 45 on synthetic estimators with Gate0 famine; Graph 5x MEASUREMENT_INVALID on C-PARAM-INHERIT but kernel fix just durably committed. Highest marginal information now is: one focused Runtime close of shared-store + AX isolation to unblock three lanes, a minimal single-family Graph pilot to test the committed distill_parameterized fix at smallest scope, a Frontier pivot to orthogonal workflow/JIT compilation (O(1) cost thesis) beyond per-step retrieval, an Intel pivot to BrowserGym/WebGym diverse sampling with relaxed Gate0 to deliver real SPAs, a Product pivot to cost-per-completed-run with retry variance (correct economics metric) rather than replaying falsified token proxy, and PARKing Physics synthetic barrier work until Intel delivers substrate.",
+    "schema_version": 1,
+    "scout_assessment": "Scout correctly diagnoses central dynamics: measurement substrate as dominant blocker (C-MEAS-VALID only loopback), Product residual-novelty FALSIFIED as valid negative not measurement artifact, Frontier/Intel tunneling on synthetic alias-OOD and exhaustive LFS, Physics synthetic-to-real gap, and Stagehand/JIT compilation as shipped orthogonal baselines SPIDER must beat. Adopted Scout's unblocker prioritization (shared WAL + AX isolation as cross-lane close), Gate0 famine diagnosis and relaxed H>0.1 NL>=20 remedy, BrowserGym/WebGym 300k diverse sampling over exhaustive LFS, and JIT/Activity-Frames compilation as high-upside orthogonal direction. Challenged Scout where it implies broad Graph census vs minimal pilot: chose minimal single-family pilot to test committed kernel fix before 60-task census. Challenged Scout's suggestion to keep Physics synthetic orthogonal program in parallel: PARK is higher leverage given famine. Scout's external JIT/Stagehand findings taken as priors to be tested by Frontier/Product, not as SPIDER evidence."
+  },
+  "experiment_id": "EXP-INTEL-35876349051",
+  "inherited_last_verdict": "MEASUREMENT_INVALID",
+  "inherited_next_question": "After executing the mandated shopping_admin 184-task/42-family expansion, normalized relevant-subtree SHA256 recomputed after page.evaluate with dynamic-token stripping, WebGym 300k manifest import with 2000-bootstrap 95% CI and 0.818-0.9479 threshold sweep, and BrowserGym loopback achieving >=50 transitions/family on >=10 families, does product-page AX_consistency achieve mean>=0.6 with CI lower>0.5 trajectory-grouped shuffle p<0.05 delta>=0.10 vs truncation variance>0, and does Stagehand relevant-subtree achieve HIT>=0.8 MISS>=0.8 false_accept<0.05 beats NC4 with real-path latency/tokens?",
+  "lane": "intel",
+  "origin_github_run_id": "35876349051",
+  "parent_handoff": {
+    "experiment_id": "EXP-INTEL-35860344410",
+    "path": "research/experiments/EXP-INTEL-35860344410/handoff.json",
+    "sha256": "5c5b4ddc189258e0f62bbccf576424047101aef164374c5d3f9730dbe6bc30e9"
+  },
+  "reason": "global-director-PIVOT",
+  "request_hash": "720d2c7d96b0c0b0aea163f5191de5f6aab368a16a7001929965c124d7822750",
+  "request_id": "35f518d3e93b754cd452a9e9",
+  "schema_version": 1
+}
