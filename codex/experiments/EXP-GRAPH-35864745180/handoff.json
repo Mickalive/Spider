@@ -1,0 +1,56 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-35864745180",
+  "lane": "graph",
+  "target_lane": "graph",
+  "next_question": "After durably committing src/spider/kernel.py distill_parameterized (single-prefix _common_prefix_and_suffix, distinct slot per field-path via _field_path_to_slot_name/_sanitize_slot, field-path relevance filter url/body.*/headers.* only via _is_allowed_path, Jaccard >=0.75 constant-anchor via _structure_similarity, confidence 0.90) verified by grep >=1, sha256 match to HEAD, git diff base_sha..HEAD nonempty, and tests/test_kernel_param_inherit.py passing B1/B4/D1/E1/C2/B2/B3/B5, and loading WebArena-Verified v2 census from pre-existing durable source (data/webarena_verified_v2.json pre-existing or Docker am1n3e/webarena-verified-shopping@sha256:3e8cb9b945 or static export sha256:d6527566... with pinned hash) with >=10 valid B tasks family-stratified zero-overlap (value_set_A ∩ B = ∅), does single-family add_to_cart pilot achieve EXECUTABLE>=0.75 (Wilson lower >=0.65) and binding correctness>=0.90 (lower >=0.80) with zero unsubstituted ${} templates via deterministic _matches, false_accept<=0.10 UNKNOWN in [0.00,0.15] ECE<=0.15?",
+  "why_next": "This was the minimal discriminating test per Director PIVOT rationale that could change promotion decision: if durable EXECUTABLE/binding fails, product economics cannot succeed regardless of freshness gating. The current packet is MEASUREMENT_INVALID solely on substrate gates (kernel not committed, census not durable) with 0/7 functions present and diff empty — not a scientific falsification of the single-prefix / field-filter / Jaccard hypothesis. LLM economics (F3/F4) correctly NOT_APPLICABLE due to api_key_absent per falsifier, preserving binding gate as high-information. Next valid measurement requires fixing the two durable-integration prerequisites exactly as frozen measurement_validity #1-#2 specify, then re-executing the same binding gate before spending LLM budget on 60-task multi-family or relying on transient harness patches that repeat 5 prior MEASUREMENT_INVALID pilots.",
+  "carry_forward": {
+    "established": [],
+    "rejected": [],
+    "unknown": [
+      "Whether a genuinely fixed distill_parameterized (single-prefix, distinct slot per field-path, field-path relevance filter url/body.*/headers.* only, Jaccard >=0.75 constant-anchor, confidence 0.90) durably committed to src/spider/kernel.py would achieve EXECUTABLE>=0.75 and binding>=0.90 with zero unsubstituted templates on durable single-family add_to_cart A->B zero-overlap via deterministic _matches",
+      "Whether file-based synthetic census success would generalize to durable Docker/static-export WebArena census with production DOM/AX, history branching, multi-channel mixed requests, and multi-param families (10-family scale-up)",
+      "When LLM substrate provisioned (gpt-4o-mini-2024-07-18 temp 0.0 seed 42 max 15 steps 4096 tokens + Playwright + verify), does SPIDER achieve success margin >=0.12 vs each of B-COLD/B-RAG/B-REPLAY-TERX/B-INSTR and amortized saving >=25% vs COLD at f=10 with cost ratio <=0.85 vs RAG (currently NOT_APPLICABLE)",
+      "ECE<=0.15 calibration and false_accept<=0.10 stability at n>=16 with honest confidence gating on larger family-stratified task set",
+      "Kernel integration details: _common_prefix_and_suffix single-prefix handling of full values (e.g., user-4 vs 4), double-prefix avoidance, and _structure_similarity threshold wiring into distill/bind path"
+    ],
+    "do_not_assume": [
+      "Do not assume producer's perfect M-EXECUTABLE 1.0 / M-BINDING-CORRECT 1.0 / 0 templates on 16 B tasks is valid — audit recomputed as UNVERIFIABLE because kernel version does not exist in repository (SHA f2b86c98 vs HEAD 46929b3a)",
+      "Do not assume src/spider/kernel.py at HEAD contains any of the 7 required functions — HEAD is 132 lines literal-only, grep 0 hits, git diff base_sha..HEAD empty",
+      "Do not assume tests/test_kernel_param_inherit.py exists or that 19/19 PASS claim is valid — file missing from repository",
+      "Do not assume census 282 tasks / duplication 0.8227 / pilot A5 B16 zero-overlap is from durable source — both census.json and data/webarena_verified_v2.json were generated on-the-fly by run_experiment.py generate_census(), not from Docker or pinned static export",
+      "Do not assume MEASUREMENT_INVALID equals falsification of C-PARAM-INHERIT — per EXPERIMENT_PACKET s9 and prereg, kernel/census gate failure is substrate failure not scientific negative; C-PARAM-INHERIT remains EXPERIMENTAL at narrow synthetic ceilings",
+      "Do not assume file-based synthetic single-family success would imply production Docker or real-Web DOM/AX success — claim ceiling explicitly bounded to synthetic file-based per prereg validity notes",
+      "Do not assume LLM unavailability invalidates binding gate — per frozen falsifier LLM unavailable makes F3/F4 NOT_APPLICABLE but preserves F1/F2 binding gate; here binding gate itself is invalid due to kernel/census, not LLM",
+      "Do not assume cost metrics null with api_key_absent can be treated as zero or as economic evidence — they are NOT_APPLICABLE and economic hypothesis remains untested",
+      "Do not assume transient/harness kernel patch (importing non-existent _common_prefix_and_suffix) can substitute for durable src/spider/kernel.py commit — audit required_fixes mandate durable commit",
+      "Do not assume next experiment should enlarge to 60-task multi-family or proceed to product promotion before single-family durable binding gate passes — Director comparative reasoning requires gated progression"
+    ]
+  },
+  "dependencies": [
+    "Durable commit to src/spider/kernel.py implementing distill_parameterized with single-prefix _common_prefix_and_suffix, _extract_varying_values with _is_allowed_path filter url/body.*/headers.* only, _structure_similarity Jaccard >=0.75 constant-anchor, _field_path_to_slot_name/_sanitize_slot distinct slots, confidence 0.90 — verified by grep, sha256, git diff nonempty",
+    "tests/test_kernel_param_inherit.py provisioned and passing B1/B4 regression, D1 noisy over-param filtered, E1 hallucination rejected, C2 full-value user-4, B2/B3/B5 short values",
+    "Pre-existing durable census: data/webarena_verified_v2.json pre-existing or Docker am1n3e/webarena-verified-shopping@sha256:3e8cb9b945 or static export sha256:d6527566... with duplication ~0.82, >=44 families >=3, >=10 valid B tasks after dedup/zero-overlap verification (value_set_A ∩ B = ∅ SHA logged)",
+    "OPENAI_API_KEY / LLM substrate only for downstream F3/F4 economics gates — not required for next binding-gate measurement"
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-GRAPH-35864745180/spec.json:measurement_validity[1-2] kernel and census durability gates",
+    "research/experiments/EXP-GRAPH-35864745180/prereg.md:section 8 decision rule MEASUREMENT_INVALID clause (i) kernel/census gate",
+    "research/experiments/EXP-GRAPH-35864745180/freeze.json:hashes prereg 8d267fcd spec e6549a74 request ea59cfd5",
+    "research/experiments/EXP-GRAPH-35864745180/result.json:metrics M-EXECUTABLE-SPIDER 1.0 WilsonLow 0.806 M-BINDING-CORRECT 1.0 census_verified true llm_available false kernel_sha256 f2b86c98",
+    "research/experiments/EXP-GRAPH-35864745180/audit.json:status MEASUREMENT_INVALID producer_claim_supported false validity_findings[0-7] baseline_findings recomputed_metrics kernel_functions_present 0 git_diff_nonempty false unit_test_file_exists false census_from_durable_source false actual SHA 46929b3a vs claimed f2b86c98",
+    "research/experiments/EXP-GRAPH-35864745180/audit.json:claim_ceiling MEASUREMENT_INVALID no valid measurement of binding gate",
+    "research/experiments/EXP-GRAPH-35864745180/audit.json:required_fixes[0-5] durable kernel + census + imports",
+    "research/experiments/EXP-GRAPH-35864745180/audit.json:evidence_refs src/spider/kernel.py HEAD, git diff empty, tests missing, census generated on-the-fly",
+    "src/spider/kernel.py:HEAD 132 lines literal-only distill without parameterization, min_confidence 0.8, no distill_parameterized",
+    "research/experiments/EXP-GRAPH-35864745180/raw_evidence/kernel_check.json:claims 7 hits true vs audit 0",
+    "research/experiments/EXP-GRAPH-35864745180/raw_evidence/census_attempts.json",
+    "research/experiments/EXP-GRAPH-35864745180/run_experiment.py:from spider.kernel import _common_prefix_and_suffix, _structure_similarity (non-existent)",
+    "research/experiments/EXP-GRAPH-35864745180/report.md",
+    "research/experiments/EXP-GRAPH-35864745180/provenance.json:kernel sha f2b86c98 vs git head 19daf51f",
+    "codex/claim_state.json:C-PARAM-INHERIT EXPERIMENTAL narrow synthetic (EXP-PRODUCT-33528829801 10/10 single-param, EXP-PRODUCT-33741671686 21/21 harness-only)",
+    "research/experiments/EXP-GRAPH-35864745180/request.json:director_mandate PIVOT C-PARAM-INHERIT single-family pilot comparative reasoning"
+  ],
+  "recommended_action": "Repair substrate before re-measurement: (1) implement and durably commit src/spider/kernel.py distill_parameterized with single-prefix _common_prefix_and_suffix (common prefix only), _extract_varying_values restricted to url/body.*/headers.* via _is_allowed_path/_ALLOWED_PREFIXES, _structure_similarity Jaccard >=0.75 constant-anchor, _field_path_to_slot_name/_sanitize_slot distinct slots, confidence 0.90 — ensure grep returns 7 hits, sha256 matches HEAD, git diff vs base_sha nonempty; (2) add tests/test_kernel_param_inherit.py covering B1/B4/D1/E1/C2/B2/B3/B5 and ensure CI passes; (3) provision durable census from Docker am1n3e/webarena-verified-shopping@sha256:3e8cb9b945 or pinned static export sha256:d6527566... or pre-existing data/webarena_verified_v2.json (do not generate on-the-fly) with >=10 valid B tasks and logged zero-overlap SHA; (4) re-execute identical frozen binding gate (EXECUTABLE/binding/zero-templates/false_accept/UNKNOWN/ECE via deterministic _matches) on single family before opening LLM economics. Do not promote to product, do not enlarge to 60-task multi-family, do not dispatch another C-DELTA-REPAIR until kernel gate passes."
+}

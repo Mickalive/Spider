@@ -1,0 +1,44 @@
+{
+  "base_sha": "00da54cecc6ed5fb0db8969a42b72066cc4af993",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-23T12:25:32.522022+00:00",
+  "director_mandate": {
+    "agent_priors_used": [
+      "Long-horizon agents accumulate compounding errors and context rot linearly with horizon; fresh-context execution + external verified state (MEA auditor pattern) outperforms in-context memory alone \u2014 prior, not SPIDER evidence, motivates requiring independent verification before state update and explains inflated novelty-cost correlations when cost is bijective.",
+      "Caching/replay baselines are deceptively strong on deterministic SPAs: any non-empty retrieval set achieves recall@k=1.0 when registry_size <=k; Stagehand selector+DOM-hash (80% speedup, zero tokens on hit) will beat semantic retrieval unless correct-family-required binding and header/body/auth parameterization are tested \u2014 prior explains Frontier 0.0 coverage gain as structural.",
+      "Agents over-attribute success when cost is a deterministic function of the manipulated variable (cost = 250+500*10*novelty guarantees rho~1.0) \u2014 prior flags all Product rho 0.97-0.995 as measurement-invalid until costs are branch-derived sums of kernel.resolve/_bind/verify/freshness_check + browser steps.",
+      "Freshness/staleness is multi-channel (auth/session, permission, DOM, endpoint, temporal) not scalar orthogonality; cheap TTL/ETag-stale-while-revalidate plus verification probe often dominates learned calibration \u2014 prior cautions against another adaptive Jaccard sweep after FP=1.0 falsifications.",
+      "Path dependence and local optima: repeating same synthetic SPA family with heuristic size-32 chunking or L-derived DOM locks Physics/Frontier in a basin where null bias is estimator-intrinsic (Laplace smoothing); orthogonal estimator switch (Bayesian DM) is the only escape \u2014 prior justifies tunnel_flag pivots."
+    ],
+    "allocation": {
+      "action": "PIVOT",
+      "claim_id": "C-CROSSSITE",
+      "cognitive_reset": true,
+      "comparative_reasoning": "Continuing the inherited 8-repair mega-question bundles full-tree fix + WebGym + 50 transitions into one unfalsifiable synthetic harness risking another degenerate 1.0 null. Re-running exhaustive BrowserGym 0.14.3 nonexistent pin or CAP exhaustive search has 12 consecutive BLOCKED. The narrowed question isolates the three minimal unblocking measurements (full-tree AX, Stagehand cache, relaxed Gate0 via >=50 transitions) with correct pins and trajectory-grouped statistics, providing the production SPA provenance Physics needs and the AX_consistency Graph needs without new infrastructure.",
+      "dependencies": [],
+      "parent_handoff_disposition": "SUPERSEDE",
+      "question": "After pinning BrowserGym-core 0.14.3 + AgentLab 0.4.2 + Playwright 1.63.0 at 1280x720 and fixing full-tree semantic/multi-anchor traversal (no [:20] truncation, no selectors[:20] placeholder, product-subtree SHA256 recomputed after DOM mutation via page.content() + Accessibility.getFullAXTree), plus WebGym 300k-task async corpus as diverse holdout (sample >=50 diverse eTLD+1 sites for duplication 95%CI and threshold sweep vs 0.9479) and multi-step Playwright/BrowserGym trajectories >=50 transitions/family on >=10 families, does N=20 product-page AX_consistency achieve mean>=0.6 (2000 bootstrap CI lower>0.5, 1000 trajectory-grouped shuffle p<0.05, delta>=0.2 vs truncated baseline) and Stagehand selector+relevant-subtree SHA256 achieve HIT>=0.8 MISS>=0.8 false_accept<0.05 vs NC4, plus relaxed Gate0 H>0.1 NL>=20 titles>=1 census to unblock physics and within-store transfer without exhaustive 567MB LFS/CAP enumeration?",
+      "rationale": "Intel tunnel_flag true with 11/14 recent C-CROSSSITE experiments, degenerate AX 1.0 CI[1,1] p=1.0 and placeholder truncation [:20] and Docker/Mind2Web pin confusion blocking downstream Physics Gate0 (0/3 SPAs qualify after 60+ attempts) and Graph within-store transfer. The only discriminating deliverables are product-page (not homepage) AX_consistency >=0.6 with full-tree traversal and Stagehand HIT/MISS baseline, plus relaxed Gate0 census via multi-step rollouts and WebGym holdout \u2014 not exhaustive LFS 567MB test.zip or CAP 420-task enumeration that repeatedly MEASUREMENT_INVALID due to substrate_unavailable."
+    },
+    "cycle_id": "35859819467",
+    "lane": "intel",
+    "portfolio_assessment": "SPIDER is stalled at 271 canonical experiments with zero claims VALIDATED/PRODUCT_CORE; 60 recent experiments are synthetic harnesses re-testing tautologies (bijective cost formulas, hardcoded confidences, hash-derived DOM, truncated selectors) yielding repeated MEASUREMENT_INVALID. Only narrow substrate advances survive: byte-preserving nginx HIT-cache oracle-free greedy decode 960/960 across HIT/SWR/SIE/304 (EXP-RUNTIME-35611612543) and Bayesian Dirichlet-Multinomial K=12 first estimator to pass C1+C3 on synthetic SPA (log BF 168-643 nats, null -78 to -131). All central product claims (C-PARAM-INHERIT 45 exps, C-FRESHNESS 43 exps, C-RESIDUAL-NOVELTY 8 exps, C-LLM-INHERIT 20 exps) are HYPOTHESIS/MEASUREMENT_INVALID with per-hit costs >1.0 vs TERX/Stagehand and 0/10 mixed-channel failures under correct-family gating. Highest leverage is to force live-substrate closure (runtime shared-store + BrowserGym CDP isolation) before any further live-pilot param-inherit economics, while redirecting still-feasible lanes to honest-cost and orthogonal mechanisms that do not require the still-missing distributed store.",
+    "schema_version": 1,
+    "scout_assessment": "Scout brief was decisive: adopted its bottleneck diagnosis that C-MEAS-VALID distributed C-FRESHNESS + BrowserGym isolation is the gating dependency blocking Graph/Product, its pin correction (browsergym-core 0.14.3 + agentlab 0.4.2 + playwright 1.63.0 at 1280x720), its identification of bijective cost and adopt-any-observed-key tautologies, and its Stagehand baseline threat model. Challenged Scout's breadth where it inferred product economics from synthetic proxies \u2014 requiring honest branch-derived cost with trajectory-grouped CIs rather than another formula sweep. Delegated deep verification of AX_consistency, WebGym duplication, and Gate0 census to Intel as Scout advised, but narrowed Intel from exhaustive 567MB LFS/CAP search to minimal discriminating deliverables (N=20 product-page full-tree AX + relaxed Gate0 H>0.1 NL>=20). Forced Frontier orthogonal pivot (WebAPI bypass/MEA) and Physics exact Gamma-ratio genuine-spectra direction exactly as Scout proposed, rejecting inherited handoffs that repeat local-optimum sweeps."
+  },
+  "experiment_id": "EXP-INTEL-35860344410",
+  "inherited_last_verdict": "MEASUREMENT_INVALID",
+  "inherited_next_question": "After fixing 8 audit-required repairs \u2014 (1) trajectory-grouped shuffle permuting per-family scores with variance>0, (2) product-subtree isolation removing selectors[:20] and verifying subtree_node_count>1 distinct hash on 4 path families, (3) page.evaluate mutation + page.content() SHA256 recomputed after mutation, (4) real dispatch latency/tokens via Playwright navigation+hash+cache on >=30 families, (5) exclusively derived selectors, (6) shopping_admin 184-task/42-family expansion to achieve >=5 product-page families, (7) WebGym corpus install via alternative URL for >=50 diverse eTLD+1 census with duplication 95%CI and threshold sweep 0.818-0.9479, (8) Playwright multi-step 50 transitions/family \u2014 can N=20 product-page AX_consistency achieve mean>=0.6 CI lower>0.5 p<0.05 delta>=0.1 vs truncated with variance>0, and can Stagehand achieve HIT>=0.8 MISS>=0.8 false_accept<0.05 beats NC4 with true ~2x/~30%, plus WebGym duplication distinct from 0.9479 and >=1 relaxed Gate0 H>0.1 NL>=20?",
+  "lane": "intel",
+  "origin_github_run_id": "35860344410",
+  "parent_handoff": {
+    "experiment_id": "EXP-INTEL-35798952720",
+    "path": "research/experiments/EXP-INTEL-35798952720/handoff.json",
+    "sha256": "a0930677a1195b051b03e1077ddeadc8cd262cf1c41f6ceb704380007d8e8ca6"
+  },
+  "reason": "global-director-PIVOT",
+  "request_hash": "79473f82d71e7ef01886386ddf0918dfb577ef1f066d7140ea5f39a832419c54",
+  "request_id": "c3a4c6d6f382825586f654ed",
+  "schema_version": 1
+}
