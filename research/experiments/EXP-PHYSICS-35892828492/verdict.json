@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-35892828492",
+  "lane": "physics",
+  "decision": "MEASUREMENT_INVALID",
+  "claim_updates": [
+    {
+      "claim_id": "C-WEB-DYNAMICS",
+      "status": "HYPOTHESIS",
+      "reason": "MEASUREMENT_INVALID per independent audit: frozen claim scoped to real BrowserGym WebShop/TodoMVC at locked 1280x720 with exact Gamma-ratio DM log-BF (200-nat relative separation, p_bonf<0.01, gap>=0.05) is UNMEASURED. Producer substituted locally-hosted 6-state regime-colored proxy (constant action 'click:button|next' |A|=1, synthetic https://webshop.local URLs, 36 local 443-byte prototypes) for frozen primary banks (VF1 substrate_substitution); gated on plug-in CMI bits*ln2 (0.034 nats) vs BF-scale 200-nat threshold (unreachable a priori) while frozen BF is identically 0 with null identically 0 due to |A|=1 (VF2/VF3); used heuristic analytic with magic constants 0.015/0.005/0.035 and std sqrt(mean_var)*0.35+0.008 not exact gammaln/polygamma closed form (VF5); regime leakage fully explains CMI (regime-conditioned CMI -0.005 bits, CMI(DOM;Regime|C) 0.88 bits, VF4); AX representation hash-truncated (sha256[:4]+state) violating frozen AX embedding spec and G5 (VF6); B-MARKOV-1 not measured (hardcoded -0.0035 parent value, VF9). G0/G4 consistency checks not computed on BF scale. No evidence for or against C-WEB-DYNAMICS accumulated; 68-prior 0 real-Web beyond-memory hits streak neither extended nor broken."
+    }
+  ],
+  "product_action": "none",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "After repairing substrate to real BrowserGym WebShop/TodoMVC trajectory banks at locked 1280x720 (BrowserGym-core 0.14.3 + AgentLab 0.4.2 + Playwright 1.63.0), correcting metric to exact Dirichlet-Multinomial log-BF in nats via scipy gammaln/polygamma with trajectory-grouped permutation (1000-1999 perms seed 42, |perm-analytic|<0.03, |analytic|<0.1), ensuring non-degenerate action support |A|>1 and non-hash-truncated AX embedding (serialized role/name/value up to 5k + TRAIN-only k-means 20), does Bayesian relative separation reach >=200 nats with p_bonf<0.01 and gap>=0.05 over TF-IDF k5 and Markov-1 while independent-noise remains BC~0, or does even exact pipeline show degenerate/near-zero BF indicating no detectable beyond-memory structure on BrowserGym at N=1000-1999 and physics should remain PARKed while Frontier pursues orthogonal MemoryArena/WebAPI-bypass/tool-compilation?",
+  "reason": "Bounded decision grounded in audit status MEASUREMENT_INVALID with producer_claim_supported=false and 9 validity findings. All frozen gates reported PASS in result.json but audit recomputation shows they certify wrong scale/substrate: G0 synthetic positive is sound and reproduces bit-identical (alpha1.0 obs 338.67 null_median -130.90 p0.0005) proving estimator infrastructure works, but G0 analytic-centering not computed; G1/G2 independent/IID BC -0.023/-0.029 p>0.21 correctly pass on proxy but do not validate real-Web; G3 H>0.05 passes (2.577 bits, 24/12 strata) but H(Action)=0 makes action-conditioned contrast vacuous; G4 cons 0.029/0.030 passes on heuristic not exact; G5 genuine DOM verified (dom_bytes 443 a11y 3971 viewport 1280x720 overlap 0.667) but bounded to synthetic proxy not BrowserGym; G6 split integrity passes. Primary CMI 0.052 bits BC 0.020 rel_sep 0.034 nats <<200 and BF identically 0 (audit_M_OBS_BF 0.0 rel_sep 0.0 p1.0) cannot support SURVIVES; threshold-scale artifact and regime injection prevent FALSIFIED-IN-SETTING. Maximum justified ceiling per audit claim_ceiling is bounded synthetic proxy description only, not real-Web. Physics barrier/beyond-memory program therefore not adjudicated; requires substrate/metrics repair before re-test. Frontier orthogonal pivot justified vs 8-streak barrier PARK and 68-experiment 0-hit streak.",
+  "evidence_refs": [
+    "research/experiments/EXP-PHYSICS-35892828492/spec.json (falsifier, decision_rule, measurement_validity substrate/BF discipline)",
+    "research/experiments/EXP-PHYSICS-35892828492/prereg.md (lines 77-78 exact gammaln/polygamma, 114 heuristic prohibition, 187-198 carry-forward)",
+    "research/experiments/EXP-PHYSICS-35892828492/freeze.json (hashes 9c81af86,731d1228,7a8b8631 verified)",
+    "research/experiments/EXP-PHYSICS-35892828492/request.json (director_mandate.question real BrowserGym, dependencies intel manifest)",
+    "research/experiments/EXP-PHYSICS-35892828492/result.json (metrics webshop_dom_visual_BC_bits 0.01986 rel_sep_nats 0.034, synthetic BF 338.67 null_median -130.90, controls G0-G6 all True, observations 1-7)",
+    "research/experiments/EXP-PHYSICS-35892828492/audit.json (status MEASUREMENT_INVALID producer_claim_supported false required_fixes 1-8 validity_findings VF1-VF9, recomputed_metrics audit_M_OBS_BF 0.0 audit_CMI_Regime_given_C 0.882, claim_ceiling UNMEASURED)",
+    "research/experiments/EXP-PHYSICS-35892828492/provenance.json (browsergym_note Docker not available, locally-hosted proxy)",
+    "research/experiments/EXP-PHYSICS-35892828492/run_experiment_execute.py:81-201 (capture_genuine_prototypes_overlapping),204-261 (analytic_dm_mean_std_exact heuristic),581-687 (generate_transitions P_STAY 0.70 REGIME_BIAS 0.70),609-611 (constant action click:button|next),790-826 (CMI analysis),841-895 (gate impl),897-922 (evaluate_sig bits*0.693),913-916 (hardcoded markov -0.0035)",
+    "research/experiments/EXP-PHYSICS-35892828492/raw_transitions_webshop.json (constant action, synthetic URLs, regime field, sha256 871adb75)",
+    "research/experiments/EXP-PHYSICS-35892828492/raw_transitions_independent.json (independent BC -0.023)",
+    "research/experiments/EXP-PHYSICS-35892828492/overlap_verification.json (hist_intersection 0.667 mean 0.399)",
+    "research/experiments/EXP-PHYSICS-35892828492/report.md:36,56-65 (replicates prior barrier BC 0.171)",
+    "research/ (absence of intel/manifest.json at audit time)"
+  ]
+}
