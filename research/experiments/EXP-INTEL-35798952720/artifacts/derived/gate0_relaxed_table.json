@@ -1,0 +1,350 @@
+{
+ "experiment_id": "EXP-INTEL-35798952720",
+ "phase": 4,
+ "seed": 35725763380,
+ "start_ts": 1790125207.9757586,
+ "n_trans_target": 55,
+ "rollout": "Playwright fallback (browsergym.webarena.env unimportable)",
+ "sampled_families": [
+  191,
+  180,
+  162,
+  197,
+  153,
+  213,
+  163,
+  137,
+  136,
+  222
+ ],
+ "relaxed_pass_count": 0,
+ "strict_pass_count": 0,
+ "multi_step_count": 10,
+ "relaxed_pass_ci": [
+  0.0,
+  0.0,
+  0.0
+ ],
+ "strict_pass_ci": [
+  0.0,
+  0.0,
+  0.0
+ ],
+ "relaxed_pass_ids": [],
+ "strict_pass_ids": [],
+ "per_family": [
+  {
+   "family_id": "191",
+   "transitions": 110,
+   "multi_step": true,
+   "unique_titles": 4,
+   "title_entropy": 1.5687,
+   "h_next_given_url": 0.2226,
+   "h_used_n": 108,
+   "nl_count": 3,
+   "strata_count": 3,
+   "singleton_sa_rate": 0.2857,
+   "leakage_valid_only": 0.4286,
+   "relaxed_pass": false,
+   "strict_pass": false,
+   "task_detail": {
+    "task_797": {
+     "url": "http://localhost:7770",
+     "expanded": false,
+     "transitions": 55,
+     "error": null
+    },
+    "task_795": {
+     "url": "http://localhost:7770",
+     "expanded": false,
+     "transitions": 55,
+     "error": null
+    }
+   }
+  },
+  {
+   "family_id": "180",
+   "transitions": 110,
+   "multi_step": true,
+   "unique_titles": 4,
+   "title_entropy": 1.5687,
+   "h_next_given_url": 0.2226,
+   "h_used_n": 108,
+   "nl_count": 3,
+   "strata_count": 3,
+   "singleton_sa_rate": 0.2857,
+   "leakage_valid_only": 0.4286,
+   "relaxed_pass": false,
+   "strict_pass": false,
+   "task_detail": {
+    "task_301": {
+     "url": "http://localhost:7770",
+     "expanded": false,
+     "transitions": 55,
+     "error": null
+    },
+    "task_299": {
+     "url": "http://localhost:7770",
+     "expanded": false,
+     "transitions": 55,
+     "error": null
+    }
+   }
+  },
+  {
+   "family_id": "162",
+   "transitions": 110,
+   "multi_step": true,
+   "unique_titles": 4,
+   "title_entropy": 1.5687,
+   "h_next_given_url": 0.2226,
+   "h_used_n": 108,
+   "nl_count": 3,
+   "strata_count": 3,
+   "singleton_sa_rate": 0.2857,
+   "leakage_valid_only": 0.4286,
+   "relaxed_pass": false,
+   "strict_pass": false,
+   "task_detail": {
+    "task_144": {
+     "url": "http://localhost:7770",
+     "expanded": false,
+     "transitions": 55,
+     "error": null
+    },
+    "task_142": {
+     "url": "http://localhost:7770",
+     "expanded": false,
+     "transitions": 55,
+     "error": null
+    }
+   }
+  },
+  {
+   "family_id": "197",
+   "transitions": 110,
+   "multi_step": true,
+   "unique_titles": 4,
+   "title_entropy": 1.5687,
+   "h_next_given_url": 0.2226,
+   "h_used_n": 108,
+   "nl_count": 3,
+   "strata_count": 3,
+   "singleton_sa_rate": 0.2857,
+   "leakage_valid_only": 0.4286,
+   "relaxed_pass": false,
+   "strict_pass": false,
+   "task_detail": {
+    "task_50": {
+     "url": "http://localhost:7770",
+     "expanded": false,
+     "transitions": 55,
+     "error": null
+    },
+    "task_48": {
+     "url": "http://localhost:7770",
+     "expanded": false,
+     "transitions": 55,
+     "error": null
+    }
+   }
+  },
+  {
+   "family_id": "153",
+   "transitions": 110,
+   "multi_step": true,
+   "unique_titles": 4,
+   "title_entropy": 1.5687,
+   "h_next_given_url": 0.2226,
+   "h_used_n": 108,
+   "nl_count": 3,
+   "strata_count": 3,
+   "singleton_sa_rate": 0.2857,
+   "leakage_valid_only": 0.4286,
+   "relaxed_pass": false,
+   "strict_pass": false,
+   "task_detail": {
+    "task_656": {
+     "url": "http://localhost:7770",
+     "expanded": false,
+     "transitions": 55,
+     "error": null
+    },
+    "task_654": {
+     "url": "http://localhost:7770",
+     "expanded": false,
+     "transitions": 55,
+     "error": null
+    }
+   }
+  },
+  {
+   "family_id": "213",
+   "transitions": 110,
+   "multi_step": true,
+   "unique_titles": 4,
+   "title_entropy": 1.5687,
+   "h_next_given_url": 0.2226,
+   "h_used_n": 108,
+   "nl_count": 3,
+   "strata_count": 3,
+   "singleton_sa_rate": 0.2857,
+   "leakage_valid_only": 0.4286,
+   "relaxed_pass": false,
+   "strict_pass": false,
+   "task_detail": {
+    "task_234": {
+     "url": "http://localhost:7770",
+     "expanded": false,
+     "transitions": 55,
+     "error": null
+    },
+    "task_232": {
+     "url": "http://localhost:7770",
+     "expanded": false,
+     "transitions": 55,
+     "error": null
+    }
+   }
+  },
+  {
+   "family_id": "163",
+   "transitions": 110,
+   "multi_step": true,
+   "unique_titles": 4,
+   "title_entropy": 1.5687,
+   "h_next_given_url": 0.2226,
+   "h_used_n": 108,
+   "nl_count": 3,
+   "strata_count": 3,
+   "singleton_sa_rate": 0.2857,
+   "leakage_valid_only": 0.4286,
+   "relaxed_pass": false,
+   "strict_pass": false,
+   "task_detail": {
+    "task_692": {
+     "url": "http://localhost:7770",
+     "expanded": false,
+     "transitions": 55,
+     "error": null
+    },
+    "task_690": {
+     "url": "http://localhost:7770",
+     "expanded": false,
+     "transitions": 55,
+     "error": null
+    }
+   }
+  },
+  {
+   "family_id": "137",
+   "transitions": 110,
+   "multi_step": true,
+   "unique_titles": 4,
+   "title_entropy": 1.5687,
+   "h_next_given_url": 0.2226,
+   "h_used_n": 108,
+   "nl_count": 3,
+   "strata_count": 3,
+   "singleton_sa_rate": 0.2857,
+   "leakage_valid_only": 0.4286,
+   "relaxed_pass": false,
+   "strict_pass": false,
+   "task_detail": {
+    "task_354": {
+     "url": "http://localhost:7770",
+     "expanded": false,
+     "transitions": 55,
+     "error": null
+    },
+    "task_352": {
+     "url": "http://localhost:7770",
+     "expanded": false,
+     "transitions": 55,
+     "error": null
+    }
+   }
+  },
+  {
+   "family_id": "136",
+   "transitions": 110,
+   "multi_step": true,
+   "unique_titles": 5,
+   "title_entropy": 1.5508,
+   "h_next_given_url": 0.1245,
+   "h_used_n": 104,
+   "nl_count": 3,
+   "strata_count": 3,
+   "singleton_sa_rate": 0.4444,
+   "leakage_valid_only": 0.6667,
+   "relaxed_pass": false,
+   "strict_pass": false,
+   "task_detail": {
+    "task_166": {
+     "url": "http://localhost:7770/sensodyne-repair-protect-whitening-toothpaste-with-fluoride-3-4-oz-pack-of-3.html",
+     "expanded": true,
+     "transitions": 55,
+     "error": null
+    },
+    "task_164": {
+     "url": "http://localhost:7770/mineralogie-all-natural-lip-gloss-ruby-rose.html",
+     "expanded": true,
+     "transitions": 55,
+     "error": null
+    }
+   }
+  },
+  {
+   "family_id": "222",
+   "transitions": 110,
+   "multi_step": true,
+   "unique_titles": 5,
+   "title_entropy": 1.5508,
+   "h_next_given_url": 0.1245,
+   "h_used_n": 104,
+   "nl_count": 3,
+   "strata_count": 3,
+   "singleton_sa_rate": 0.4444,
+   "leakage_valid_only": 0.6667,
+   "relaxed_pass": false,
+   "strict_pass": false,
+   "task_detail": {
+    "task_25": {
+     "url": "http://localhost:7770/epson-workforce-wf-3620-wifi-direct-all-in-one-color-inkjet-printer-copier-scanner-amazon-dash-replenishment-ready.html",
+     "expanded": true,
+     "transitions": 55,
+     "error": null
+    },
+    "task_21": {
+     "url": "http://localhost:7770/6s-wireless-headphones-over-ear-noise-canceling-hi-fi-bass-foldable-stereo-wireless-kid-headsets-earbuds-with-built-in-mic-micro-sd-tf-fm-for-iphone-samsung-ipad-pc-black-gold.html",
+     "expanded": true,
+     "transitions": 55,
+     "error": null
+    }
+   }
+  }
+ ],
+ "general_ledgers_available": {
+  "191": 110,
+  "180": 110,
+  "162": 110,
+  "197": 110,
+  "153": 110,
+  "213": 110,
+  "163": 110,
+  "137": 110,
+  "136": 110,
+  "222": 110
+ },
+ "controls": {
+  "H4-GATE0-RELAXED": {
+   "definition": "titles>=1 & H(S_next|URL)>0.1 & NL(strata>=5)>=20 & singleton<50%",
+   "note": "single-page NL=0 is unmeasured not falsification"
+  },
+  "H4-GATE0-STRICT": {
+   "definition": "titles>=2 & H>0.2 & NL>=50 & strata>=10 & leakage_validOnly<40%"
+  }
+ },
+ "end_ts": 1790126143.5479412,
+ "elapsed_s": 935
+}

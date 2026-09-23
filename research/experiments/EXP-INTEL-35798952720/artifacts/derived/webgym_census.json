@@ -1,0 +1,10 @@
+{
+  "available": false,
+  "site_count": 0,
+  "dup_prevalence": 0.0,
+  "status": "MEASUREMENT_INVALID corpus_unavailable",
+  "threshold_sweep_range": 0.0,
+  "ci_lower": 0.0,
+  "ci_upper": 0.0,
+  "note": "WebGym 300k corpus not installed; cannot compute diverse-site census"
+}
