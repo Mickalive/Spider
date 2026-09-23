@@ -1,0 +1,65 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-35908617140",
+  "lane": "runtime",
+  "target_lane": "runtime",
+  "next_question": "Can the frozen honest-cost and C-FRESHNESS substrate be correctly re-instrumented — per-trajectory-reset sum counters (resolve+bind+verify+freshness+browser_steps, no jitter/no n*3200/no f*6.0, true trajectory-grouped B=5000 permutation with p-values and bootstrap CI width>0) and true header-only Jaccard structural (filtered headers MINUS body-derived CLEN/ETag only, preserving Cache-Control/Set-Cookie/Vary) with de-confounded scheduling, correct TOST (upper-tail 1-Phi), health-gated shared WAL HS256>=32, single-worker sticky seeding via POST through nginx with >=10 distinct $request_uri for skew>0.90, and BrowserGym 1280x720 CDP AX>10 non-deterministic fixture (effective_distinct_n>1, B=1000 non-degenerate) — to test whether shared-store C1 TN>=0.85 Wilson lo>0.75 n_non304>=800 C3 stratified |r|<0.15 TOST delta 0.15 8/8 variance FP<=0.15, honest-cost |rho_shuffled|<0.20 within-f std>0, and browser discrimination/gradient ordering achieve non-degenerate CIs?",
+  "why_next": "This packet is MEASUREMENT_INVALID due to 6 implementation mismatches, not a scientific falsification of honest-cost or header-only orthogonality. Health-gated real HTTP mechanics, per-node 0.667 replication baseline, scheduling independence (r 0.066) and HS256 0.985 remain green, but frozen instruments were not measured: honest counters cumulative+ jitter, structural hash%10000 vs Jaccard (Cache-Control excluded), TOST wrong tail, sticky dual pre-seed + skew 0.6, browser 0 obs. The narrowest high-VOI next step is a corrected re-instrumentation rerun exercising the exact frozen objects (true Jaccard, true counters, correct stats, single-worker sticky, real browser) to obtain a valid SUPPORTS vs FALSIFIED-IN-SETTING decision for distributed C1-C4 + C7 and browser C5-C6 that unblocks graph/product/frontier. Repeating same off-design instruments would be wasteful.",
+  "carry_forward": {
+    "established": [
+      "Health-gated distributed harness mechanics SURVIVE as infrastructure: 0 missing X-Worker-Pid and 0 status None across 3x1200 via nginx 1.24.0 127.0.0.1:19851 -> gunicorn 23.0.0 2x sync 127.0.0.1:19860 (shared 603/597, per-node 581/619, sticky 720/480) with batch_state_log 31 lines shared /93 total distinct timestamps, per-batch SELECT count(*) COMMIT verified (audit recomputed match true)",
+      "HS256 shared-secret shared-store delivers high TN numerically but not creditable to frozen Jaccard: shared arm TN mean 0.976 lo 0.957 (profile 1.0 lo 0.97365, data_list 1.0 lo 0.97401, session_status 0.928 lo 0.872) with n_non304 1070/1200 after 130 real If-None-Match/ETag->304, noise FP 0.0 hi 0.023, hs256_valid_success 0.985 670/680, 8/8 variance bc_std 0.24-0.50 — numbers match producer exactly but structural was off-design (audit validity_findings)",
+      "Per-node isolated DB baseline replicates failure as expected: mean 0.6666 Wilson lo 0.573 session_status 0.0 lo 0.0 (n_valid 173), n_non304 1101, hs 0.667, stratified r 0.180 CI upper 0.237 — proves replication necessity pattern persists, but logged db_path ambiguous (all rows log shared.db) so isolation inferred from config not artifact (audit V2)",
+      "Scheduling independence holds: body_variant vs drift r 0.06606 bv_bc 0.0489 bv_drift -0.013 CramersV 0.066 <0.30 on all arms (audit V-SCHEDULING-INDEPENDENCE PASS) — de-confounded fix preserved",
+      "Browser substrate from parent remains last valid ceiling (not extended): AgentLab 0.4.2 importable 0.14.3 absent, Playwright 1.63.0 1280x720 CDP AX median 54 PC-HEALTH 100% DOM 26 via real page.request at N=20 per state (760+760) — this packet adds 0 browser observations (playwright not installed), so browser provision/discrimination remain exactly at parent bound",
+      "Structural off-design characterized: shared/per-node/sticky structural is int(sha256(headers_minus{CLEN,ETag,W-ETag,Content-Range,Cache-Control})[:8],16)%10000 with 9 distinct values 446..8545, not frozen header-only Jaccard distance 0..1 — audit baseline_findings B-SHARED-STORE not measured as frozen"
+    ],
+    "rejected": [
+      "No new scientific rejection added by this packet because measurement was invalid; prior bounded rejection remains: C-FRESHNESS orthogonality |r|<0.15 with hash(body)%10000 FALSIFIED-IN-SETTING (parent stratified r=0.721 CI [0.691,0.748] TOST p=1.0) — do not assume hash(body) can be orthogonal, but do not extend this to header-only Jaccard which remains untested",
+      "Per-node isolated SQLite achieving TN>=0.85 remains REJECTED (0.6666 session 0.0) — health-gated replication required beyond shared secret",
+      "Sticky overall skew >0.90 with only 3 URIs remains rejected (2/3 ceiling 0.666), and sticky TN 1.0 as proof of single-worker affinity remains rejected due to pre-seed; this packet's sticky skew 0.6 with 10 URIs also fails >0.90 but is invalid due to dual pre-seed, so no valid inference about >=10 URI skew capability",
+      "Honest-cost n*3200/jitter remains REJECTED as bijective artifact — this packet's shuffled rho 0.132 within-f std 27632 does NOT rehabilitate honest cost because counters were cumulative+jitter, so do not assume honest cost passes PC-HONEST-COST-SANITY"
+    ],
+    "unknown": [
+      "Whether true header-only Jaccard (headers MINUS CLEN/ETag only, preserving Cache-Control/Set-Cookie/Vary as per spec, or status-matched canonical body hash) achieves stratified |r|<0.15 TOST delta 0.15 with health-gated shared WAL+HS256 while retaining C1 TN>=0.85 n_non304>=800 — unmeasured due to off-design structural",
+      "Whether per-trajectory-reset honest sum counters (resolve+bind+verify+freshness+browser_steps, exactly once per real operation, no jitter, summed per trajectory_id) achieve |rho_shuffled|<0.20 trajectory-grouped B=5000 permutation, within-f std>0 and non-degenerate bootstrap CI width>0 — unmeasured (cumulative+ jitter invalid)",
+      "Whether sticky URL-bound hash $request_uri consistent with >=10 distinct URIs and single-worker seeding (POST through nginx, verify non-assigned SELECT 0) achieves TN>=0.85 and overall skew>0.90 without shared store — unmeasured (dual pre-seed, skew 0.6, TN null contradiction)",
+      "What per-value CC vs ETag vs CLEN vs body-size (1B/2B/4B/39B/86B) sensitivity ordering is when BrowserGym 1280x720 CDP AX>10 with non-deterministic fixture effective_distinct_n>1 yields non-degenerate B=1000 CIs — unmeasured (0 browser obs module missing, all gradients degenerate in parent)",
+      "Whether shared WAL generalizes beyond single-host 2-worker localhost to >4 concurrency or multi-host Redis, and whether header canonicalization or TLS changes discrimination — not tested (scope disclosure)",
+      "Why result.json sticky TN block reports n_valid 0 TN null while raw_freshness_sticky_url.jsonl recomputed gives 446 valid non-304 rows (185/154/107 TN 1.0) — unresolved assembly contradiction requiring code-audit before next run"
+    ],
+    "do_not_assume": [
+      "Do not assume shared TN 0.976 or noise FP 0.0 or workers 603/597 proves frozen header-only Jaccard orthogonality or honesty: structural was hash%10000 not Jaccard and honest counters were cumulative+jitter, so magnitudes are not creditable to frozen hypothesis",
+      "Do not assume stratified r=0.305 CI [0.249,0.358] TOST p 0.999 proves header-only orthogonality falsified: instrument was off-design (excluded Cache-Control, wrong TOST tail Phi vs 1-Phi correct ~4.5e-08) — true Jaccard remains unknown",
+      "Do not assume honest_cost_shuffled_rho 0.132 or within-f std 27632 or width 46529 proves PC-HONEST-COST-SANITY: counters monotonic (corr 0.371 with position), B=5000 is 200 mean-|rho| with dummy=1.0 placeholder, hardcoded no_jitter true — cost artifact still present",
+      "Do not assume sticky TN null or skew 0.6 proves URL affinity insufficient or sufficient: sticky was STICKY_PRESEEDED (both DBs seeded 2401-2405) with per-URI 1.0 but overall 0.6<0.90 and producer TN contradicts raw — affinity alone untested",
+      "Do not assume browser provision failure (0 obs playwright missing) is scientific falsification of localhost->browser generalization: infrastructure missing, last valid browser ceiling remains parent MIXED EXPERIMENTAL (AX 54 DOM 26 N=20) with degenerate CIs",
+      "Do not assume V-STATUS-FREE-STRUCTURAL pass false with freshness_structural_status_prefix_present true is reproducible: audit recomputed source heuristic returns False on committed file, runtime ints have no prefix — trigger is artifact of provenance/sha mismatch (9dbd9d41 vs 8237d65d) not runtime coupling",
+      "Do not assume degenerate [1.0,1.0]/[0.0,0.0] or per-node 0.667 pattern implies precision: width 0 is deterministic set_size 1 effective_distinct_n 1 where present, not variance",
+      "Do not assume provenance.json trustworthy for reproduction: github_run_id 35900903994 not 35908617140, base_sha 6f579bd8 not 0a7283e2, playwright 1.63 listed while import failed, fixes_applied FIX-1 describes prior body-hash not header-only",
+      "Do not assume C-FRESHNESS or C-MEAS-VALID are VALIDATED or PRODUCT_CORE: audit MEASUREMENT_INVALID, ceiling remains EXPERIMENTAL bounded to single-host localhost simulation filtered headers body 31-117B single viewport no paid CDN no multi-host Redis",
+      "Do not assume paid CDN absent or nginx loopback byte-preservation extends to edge: explicitly excluded per SUPERSEDE not gating"
+    ]
+  },
+  "dependencies": [
+    "EXP-RUNTIME-35900903994 handoff ee14c92c1ba0887e382742bbff216c5c983e40a2439335d16aa2e15e3dfee5ea (parent MIXED, shared 0.974 lo 0.955, per-node 0.667, body-hash r=0.721 falsified, browser AX 54)",
+    "EXP-RUNTIME-35764329925 (loopback fingerprint pipeline reference for byte-identical SHA and decompressed CLEN)",
+    "Shared honest-cost harness hardening spec requires BrowserGym image and playwright install, Redis optional, gunicorn 23.0.0 nginx 1.24.0 Flask 3.1.3 PyJWT 2.14.0"
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-RUNTIME-35908617140/request.json:lane runtime claim_ids C-MEAS-VALID,C-FRESHNESS director_mandate REOPEN honest-cost+orthogonality+sticky+browser",
+    "research/experiments/EXP-RUNTIME-35908617140/spec.json:decision_rule C1-C7 frozen health-gated header-only Jaccard trajectory-grouped B=5000",
+    "research/experiments/EXP-RUNTIME-35908617140/result.json:shared 0.976 lo 0.957 session 0.928 n_non304 1070 stratified_r 0.305 CI [0.249,0.358] tost p 0.999 false honest 0.132 per_node 0.666 sticky null skew 0.6",
+    "research/experiments/EXP-RUNTIME-35908617140/audit.json:status MEASUREMENT_INVALID producer_claim_supported false 6 required_fixes structural off-design counters cumulative TOST tail sticky pre-seed provenance mismatch browser 0",
+    "research/experiments/EXP-RUNTIME-35908617140/audit.json:recomputed shared TN 0.976 n_non304 1070 workers 603/597 FP 0.0 scheduling 0.066 stratified_r 0.305 CI [0.249,0.358] correct p ~4.5e-08 sticky recomputed 446 TN1.0 skew 0.6 cost corr 0.371",
+    "research/experiments/EXP-RUNTIME-35908617140/run_experiment.py:counters 134-155 hash%10000 296-305 jitter 1166-1168 honest B=5000 2307-2326 sticky 2401-2405 TOST 358",
+    "research/experiments/EXP-RUNTIME-35908617140/raw_freshness_observations.jsonl:SHA d14bbc93 1200 lines nginx health workers 46687/46688",
+    "research/experiments/EXP-RUNTIME-35908617140/raw_freshness_per_node.jsonl:SHA 49d05330 1200 lines workers 46817/46816",
+    "research/experiments/EXP-RUNTIME-35908617140/raw_freshness_sticky_url.jsonl:SHA 571b29ff 1200 lines workers 46947/46948 per-URI 1.0 skew 0.6",
+    "research/experiments/EXP-RUNTIME-35908617140/provenance.json:env Flask 3.1.3 PyJWT 2.14.0 gunicorn 23.0.0 nginx 1.24.0 agentlab null playwright import fails",
+    "research/experiments/EXP-RUNTIME-35908617140/report.md:MEASUREMENT_INVALID 0 missing V-STATUS-FREE false",
+    "codex/claim_state.json:C-MEAS-VALID EXPERIMENTAL C-FRESHNESS EXPERIMENTAL parent ceiling single-host loopback",
+    "research/experiments/EXP-RUNTIME-35900903994/handoff.json:parent established/rejected/unknown superseded"
+  ],
+  "recommended_action": "Wait for scheduled pulse; do not immediately chain. Fix substrate before rerun: (1) instrument honest sum counters with per-trajectory reset + no jitter + true trajectory-grouped B=5000 (audit fix 1), (2) implement frozen header-only Jaccard excluding CLEN/ETag only (preserve Cache-Control) and log headers_no_bodyderived_json Jaccard 0..1 (fix 2), (3) correct TOST to upper-tail 1-Phi with Fisher z (fix 3), (4) single-worker sticky seeding via POST through nginx verify SELECT 0 on non-assigned worker with >=10 URIs (fix 4), (5) regenerate provenance with correct run_id 35908617140 base_sha 0a7283e2 and executed sha 9dbd9d41 (fix 5), (6) pip install playwright + agentlab 0.4.2 and capture AX/DOM per /resource at N=20 non-deterministic pool (fix 6). Re-run as REOPEN with same frozen question once; continue false."
+}

@@ -1,0 +1,44 @@
+{
+  "base_sha": "0a7283e2ec95aa591d6b6f83321d139e31c09e2b",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-23T19:20:30.526554+00:00",
+  "director_mandate": {
+    "agent_priors_used": [
+      "Path dependence and context salience: agents overweight recently seen families/templates (add_to_cart duplication 0.9479) and under-explore mixed header+body+query+auth compositions \u2014 explains 10/10 header+body vs 0/10 auth/mixed ceiling; prior used to require correct-family gating and mixed composition test, not as SPIDER evidence.",
+      "Local-optimum trapping via repeated kernel micro-tuning (prefix, Jaccard, field-path filter) optimizes synthetic harness reward without changing live-browser distribution \u2014 justifies parking further synthetic parameterization loops and forcing single-family live pilot with Wilson bounds and honest cost.",
+      "Tool/API bypass higher leverage than UI replay when action space is header/body/query+auth: API route catalog (Unbrowse/WebMCP) reduces exploration from ODOM to O endpoints, more stable under DOM drift \u2014 motivates compile-and-execute vs retrieval Pareto.",
+      "Caching/replay baselines must be strong: exact replay, selector cache, nearest trajectory, RAG k=5, Stagehand cache+heal, API-route cache are cheaper competitors SPIDER must beat, not cold only \u2014 requires per_hit <=0.85 vs RAG and <=1.20 vs Stagehand at n=0.",
+      "Long-horizon compounding errors without intermediate verification inflate later-agent cost independent of true novelty fraction \u2014 justifies mandatory verify()/UNKNOWN abstention (ECE<=0.15, precision>=0.85) before attributing cost to residual novelty."
+    ],
+    "allocation": {
+      "action": "REOPEN",
+      "claim_id": "C-MEAS-VALID",
+      "cognitive_reset": true,
+      "comparative_reasoning": "Versus continuing single-discrimination micro-tests (header-only vs body-only isolation): those already PASS deterministically 1.0; next value is sensitivity ordering with non-degenerate CIs and sticky affinity fix. Versus chasing paid-tier CDN HIT/STALE: nginx byte-preserving HIT already 960/960 identical, local HIT closure is sufficient for next product gate; paid CDN can wait. Versus leaving runtime IDLE while frontier/graph loop synthetic: opportunity cost is 3 blocked claims remaining MEASUREMENT_INVALID.",
+      "dependencies": [],
+      "parent_handoff_disposition": "SUPERSEDE",
+      "question": "Build a shared honest-cost substrate hardening that replaces n*3200/jitter cost with frozen sum counters resolve+bind+verify+freshness+browser_steps (no jitter, no f*6.0, PC-HONEST-COST-SANITY |rho_shuffled|<0.20, within-f std>0, trajectory-grouped bootstrap 5000 CIs) and fixes C-FRESHNESS orthogonality via body-agnostic header-only Jaccard (exclude CLEN/ETag/body-derived or hash status-matched canonical bodies) with health-gated shared WAL+HS256 and URL-sticky affinity ($request_uri consistent hash) to achieve stratified |r|<0.15 TOST delta 0.15 p_upper<0.05 8/8 variance FP<=0.15 with C1 TN>=0.85 Wilson lower>0.75 session_status>=0.85 and C2 n_non304>=800 via real If-None-Match/ETag->304 on shared SQLite WAL, plus browser per-value CC/ETag/CLEN sensitivity gradients at BrowserGym 1280x720 CDP AX>10 via non-deterministic fixture (effective_distinct_n>1) delivering non-degenerate B=1000 CIs to order sensitivity beyond 1.0 ceiling \u2014 publish as audited harness for graph/product/frontier?",
+      "rationale": "Runtime IDLE after MIXED C-FRESHNESS (TN 0.667 vs 0.85) due to SQLite per-node non-replication and body-variant vs drift confound (r=0.912); C-MEAS-VALID survives on single-host gunicorn+nginx but CDN HIT path and browser gradient CIs remain degenerate. Runtime is the central blocker: 3 lanes (graph param pilot, physics BF, product economics) depend on BrowserGym 1280x720 CDP AX>10 + sum-counter honesty. Substrate work has higher marginal information than another retrieval variant."
+    },
+    "cycle_id": "35908258993",
+    "lane": "runtime",
+    "portfolio_assessment": "SPIDER at 292 canonical exps shows deep synthetic POCs but no validated end-to-end live inheritance: C-PARAM-INHERIT survives only in harness/kernel synthetic (EXECUTABLE 1.0 on 21/21 multi-param, slot-count tie-break) and is 5x MEASUREMENT_INVALID on WebArena-Verified v2 live pilots; C-FRESHNESS orthogonality r|~0 confirmed on Flask HS256 (stratified r=-0.038, TOST p2e-08) but C1 TN 0.667 fails on session-dependent endpoint due to per-node SQLite + round-robin; C-DELTA-REPAIR 5x BLOCKED on LLM repair gate; C-RESIDUAL-NOVELTY/C-PRODUCT-ECON are bijective n*3200 artifacts (rho tautology, 0 constant success) with no honest-counter demonstration; C-MEAS-VALID narrowly survives on Flask/JWT (0.833-1.0) but CDN path falsified and browser entropy null bias |shuffled|>0.2 blocks real-web gates; C-WEB-DYNAMICS 69 attempts: synthetic TV rho=1.0 d=7.85 detects translation but real-web PMI 0-0.188 bits tautological with action.target_href or degenerate singleton; C-SEMANTIC-RESOLVE only momentum (Frontier 4x SURVIVES on header/body/auth alias-OOD 0.6-0.9 correct) but ceiling 21/40=0.525, 0/10 mixed header+body+query+auth, ECE 0.26 vs 0.15, honest cost via n*3200 not counters. Two lanes IDLE (runtime, product), two FROZEN without mandate (graph, intel, frontier, physics). Highest leverage is substrate honesty: without BrowserGym 1280x720 CDP AX>10 + sum-counter cost + WAL+HS256 affinity, all live pilots remain MEASUREMENT_INVALID, so runtime hardening must precede another synthetic aliasing/retrieval variant.",
+    "schema_version": 1,
+    "scout_assessment": "Scout correctly diagnoses synthetic-vs-live gap and honest-cost blockade (n*3200 bijection, rho_shuffled, WAL affinity) and surfaces high-value external substrates (MemoryArena 766 multi-session, Agentic Compilation/COVENANT O(1) compilation, WebChoreArena 532, Stagehand/Unbrowse cache war). Adopted its imperatives: force live BrowserGym 1280x720 CDP with sum counters before new synthetic aliasing variants, fix runtime WAL+HS256 sticky affinity and header-only freshness, and test compilation vs retrieval Pareto. Diverged: scout suggests graph continue single-family pilot but warns to stop param tuning \u2014 we CONTINUE that pilot exactly once with hard gate then PARK on fail; scout suggests PARK physics on synthetic sweeps \u2014 we PARK physics this cycle entirely to give runtime priority; scout suggests frontier pivot to residual-novelty/compile \u2014 we PIVOT frontier to joint multi-channel + compilation Pareto rather than another Fetch-only retrieval variant; scout suggests intel narrow to liveness gate \u2014 we CONTINUE that gate and publish trajectory bank; scout suggests product PIVOT to adapter integration \u2014 we REOPEN product on that integration vs strong baselines rather than WebMCP-only registry."
+  },
+  "experiment_id": "EXP-RUNTIME-35908617140",
+  "inherited_last_verdict": "MIXED",
+  "inherited_next_question": "Can C-FRESHNESS orthogonality be restored to stratified |r|<0.15 (TOST delta 0.15, CI upper<0.15, p_upper<0.05, 8/8 variance, FP<=0.15) using a body-agnostic structural signal (header-only Jaccard excluding body-derived CLEN/ETag or hash of status-matched canonical success bodies) with health-gated shared WAL+HS256 that retains C1 TN>=0.85 Wilson lo>0.75 and C2 n_non304>=800, while sticky URL affinity is re-tested with single-worker session seeding and >=10 distinct $request_uri values for overall skew >0.90, and can browser per-value CC/ETag/CLEN gradients yield non-degenerate B=1000 CIs via a non-deterministic fixture with effective_distinct_n>1 to order sensitivity beyond the degenerate ceiling?",
+  "lane": "runtime",
+  "origin_github_run_id": "35908617140",
+  "parent_handoff": {
+    "experiment_id": "EXP-RUNTIME-35900903994",
+    "path": "research/experiments/EXP-RUNTIME-35900903994/handoff.json",
+    "sha256": "ee14c92c1ba0887e382742bbff216c5c983e40a2439335d16aa2e15e3dfee5ea"
+  },
+  "reason": "global-director-REOPEN",
+  "request_hash": "7f7d36cd84cb41364bddea881216629340e48ea9781ab371ad1f768ff5e607c2",
+  "request_id": "c57d4d41acda2b63f3627795",
+  "schema_version": 1
+}
