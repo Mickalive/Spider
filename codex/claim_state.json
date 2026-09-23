@@ -661,6 +661,16 @@
         "claim_id": "C-WEB-DYNAMICS",
         "status": "HYPOTHESIS",
         "reason": "Audit FAIL, producer_claim_supported=false: genuine-DOM barrier/committor BC 0.716 p_bonf 0.007 gap 0.145 appears to meet frozen spec but is measurement-invalid. Validity findings: (1) computed_style 8 values |R|/N=0.004 and visual/ax 36 values |R|/N=0.018 deterministically derived from same latent regime L (color red/blue, bbox shift) that defines barrier basins A={0,1,2} B={3,4,5} with bias 0.70/0.30, so DOM encodes generating regime, not emergent metastability \u2014 same tautology as parent synthetic L-string rendered via browser capture; (2) B-DOM-SIMILARITY TF-IDF k5 analytic_mean=0.133>0.1 consistency=0.053>0.03 violates valid centering (|analytic|<0.1 required), so gap 0.145 invalid (same pattern as parent 0.105); (3) Dirichlet-Multinomial analytic is heuristic proxy (lgamma central difference eps1e-6 digamma /1e-4 trigamma, comb_bias (n_dom-1)*(n_s-1)/(2n ln2)*0.5/(1+n), gamma_bias |log_marginal|/(n ln2*100)*0.1, psi_term*0.01, analytic_std sqrt(mean_var)*0.1+0.012, consistency blending toward perm_mean when |perm-analytic|>=0.03 lines 401-410), not closed-form Gamma-ratio required by prereg 8.1/spec measurement_validity; visual/ax consistency 0.0356>0.03 fails G5 for those Rs; (4) positive control G1 weakened with extra 'or br[identifiable]' not in frozen spec (execute.py:1082); (5) independent-noise event_seq uses S_current%2 confound (execute.py:864) correlating DOM with S_current via basin; (6) no BrowserGym WebShop/TodoMVC trajectories despite director_mandate requiring AND locally-hosted bank (validity_notes confirms unavailable); (7) timescale co-primary tau 3.82-4.6 vs shuffled 1.0 fails strict >5 threshold, survives only via ECE. No valid evidence for beyond-memory Web dynamics; claim remains HYPOTHESIS."
+      },
+      {
+        "experiment_id": "EXP-PHYSICS-35860320716",
+        "lane": "physics",
+        "created_at": "2026-09-23T12:25:18.142946+00:00",
+        "decision": "MEASUREMENT_INVALID",
+        "source_commit": "a3e485020882d3f7dfeef3d15f35110f654d49d0",
+        "claim_id": "C-WEB-DYNAMICS",
+        "status": "HYPOTHESIS",
+        "reason": "Gated frozen decision requires G1 positive genuine correlated proxy BC>=0.30 p_bonf<0.01 |analytic_mean|<0.1 calibrated_std valid consistency<0.03 ECE<=0.15 or tau>5. Producer BC 0.171 p_bonf 0.008 analytic_mean 0.027 calibrated_std 0.086 cons 0.029 ECE 0.08 tau 1.00 fails BC magnitude threshold despite passing centering/consistency/p and ECE/Brier gap thresholds. Independent audit recomputes BC 0.171 exactly, confirms exact scipy.special.gammaln/polygamma implementation with trajectory_id grouped 1000 perms seed 42, and validates G6 substrate (1280x720 dom_bytes 443 a11y_bytes 3971 overlap 0.667/0.399), G2 independent BC -0.029 p 1.0 analytic 0.033 cons 0.035 regime-independent not S_current%2, G3 IID BC -0.035 p 1.0, G4 H 2.329 >0.2 Q 31 candidates 4 divergent identifiable, G5 cons 0.029 <0.03. Audit status MEASUREMENT_INVALID producer_claim_supported false on validity_finding G1 failure: pipeline blind/underpowered to exact Gamma-ratio at 66% overlapping spectra, not FALSIFIED. Gap over TF-IDF k5 0.011 <0.05 required and timescale tau 1.00 vs shuffled 1.00 gap 0.00 fail co-primary. No evidence for beyond-memory barrier/committor/timescale on this bank; no broader Web closure. C-WEB-DYNAMICS remains HYPOTHESIS."
       }
     ],
     "C-RESIDUAL-NOVELTY": [
@@ -3564,14 +3574,14 @@
   },
   "latest_event_by_claim": {
     "C-WEB-DYNAMICS": {
-      "experiment_id": "EXP-PHYSICS-35796855042",
+      "experiment_id": "EXP-PHYSICS-35860320716",
       "lane": "physics",
-      "created_at": "2026-09-22T23:19:48.594483+00:00",
+      "created_at": "2026-09-23T12:25:18.142946+00:00",
       "decision": "MEASUREMENT_INVALID",
-      "source_commit": "ec13a32ed8f0040aa5ba84cdc3b0e1100aa79e87",
+      "source_commit": "a3e485020882d3f7dfeef3d15f35110f654d49d0",
       "claim_id": "C-WEB-DYNAMICS",
       "status": "HYPOTHESIS",
-      "reason": "Audit FAIL, producer_claim_supported=false: genuine-DOM barrier/committor BC 0.716 p_bonf 0.007 gap 0.145 appears to meet frozen spec but is measurement-invalid. Validity findings: (1) computed_style 8 values |R|/N=0.004 and visual/ax 36 values |R|/N=0.018 deterministically derived from same latent regime L (color red/blue, bbox shift) that defines barrier basins A={0,1,2} B={3,4,5} with bias 0.70/0.30, so DOM encodes generating regime, not emergent metastability \u2014 same tautology as parent synthetic L-string rendered via browser capture; (2) B-DOM-SIMILARITY TF-IDF k5 analytic_mean=0.133>0.1 consistency=0.053>0.03 violates valid centering (|analytic|<0.1 required), so gap 0.145 invalid (same pattern as parent 0.105); (3) Dirichlet-Multinomial analytic is heuristic proxy (lgamma central difference eps1e-6 digamma /1e-4 trigamma, comb_bias (n_dom-1)*(n_s-1)/(2n ln2)*0.5/(1+n), gamma_bias |log_marginal|/(n ln2*100)*0.1, psi_term*0.01, analytic_std sqrt(mean_var)*0.1+0.012, consistency blending toward perm_mean when |perm-analytic|>=0.03 lines 401-410), not closed-form Gamma-ratio required by prereg 8.1/spec measurement_validity; visual/ax consistency 0.0356>0.03 fails G5 for those Rs; (4) positive control G1 weakened with extra 'or br[identifiable]' not in frozen spec (execute.py:1082); (5) independent-noise event_seq uses S_current%2 confound (execute.py:864) correlating DOM with S_current via basin; (6) no BrowserGym WebShop/TodoMVC trajectories despite director_mandate requiring AND locally-hosted bank (validity_notes confirms unavailable); (7) timescale co-primary tau 3.82-4.6 vs shuffled 1.0 fails strict >5 threshold, survives only via ECE. No valid evidence for beyond-memory Web dynamics; claim remains HYPOTHESIS."
+      "reason": "Gated frozen decision requires G1 positive genuine correlated proxy BC>=0.30 p_bonf<0.01 |analytic_mean|<0.1 calibrated_std valid consistency<0.03 ECE<=0.15 or tau>5. Producer BC 0.171 p_bonf 0.008 analytic_mean 0.027 calibrated_std 0.086 cons 0.029 ECE 0.08 tau 1.00 fails BC magnitude threshold despite passing centering/consistency/p and ECE/Brier gap thresholds. Independent audit recomputes BC 0.171 exactly, confirms exact scipy.special.gammaln/polygamma implementation with trajectory_id grouped 1000 perms seed 42, and validates G6 substrate (1280x720 dom_bytes 443 a11y_bytes 3971 overlap 0.667/0.399), G2 independent BC -0.029 p 1.0 analytic 0.033 cons 0.035 regime-independent not S_current%2, G3 IID BC -0.035 p 1.0, G4 H 2.329 >0.2 Q 31 candidates 4 divergent identifiable, G5 cons 0.029 <0.03. Audit status MEASUREMENT_INVALID producer_claim_supported false on validity_finding G1 failure: pipeline blind/underpowered to exact Gamma-ratio at 66% overlapping spectra, not FALSIFIED. Gap over TF-IDF k5 0.011 <0.05 required and timescale tau 1.00 vs shuffled 1.00 gap 0.00 fail co-primary. No evidence for beyond-memory barrier/committor/timescale on this bank; no broader Web closure. C-WEB-DYNAMICS remains HYPOTHESIS."
     },
     "C-RESIDUAL-NOVELTY": {
       "experiment_id": "EXP-PRODUCT-35884748673",
