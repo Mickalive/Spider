@@ -1,0 +1,24 @@
+[
+  {
+    "source": "data/webarena_verified_v2.json",
+    "found": true,
+    "path": "data/webarena_verified_v2.json",
+    "sha256": "b151568633875ab6909e98d3cb421e6ca986ee3011648eef9865954610b22b75",
+    "tasks": 277,
+    "templates": 49,
+    "duplication": 0.8231046931407943,
+    "families_ge3": 43
+  },
+  {
+    "source": "research/experiments/EXP-GRAPH-35918640311/census.json",
+    "found": true,
+    "path": "research/experiments/EXP-GRAPH-35918640311/census.json",
+    "sha256": "b151568633875ab6909e98d3cb421e6ca986ee3011648eef9865954610b22b75",
+    "tasks": 277
+  },
+  {
+    "source": "Docker am1n3e/webarena-verified-shopping@sha256:3e8cb9b945",
+    "found": false,
+    "reason": "not pulled, using file-based synthetic durable census per spec"
+  }
+]

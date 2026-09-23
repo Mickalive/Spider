@@ -1,0 +1,23 @@
+{
+  "executable_rate": 1.0,
+  "binding_rate": 1.0,
+  "wil_exec_low": 0.8063865817272801,
+  "wil_exec_high": 1.0,
+  "b_low": 0.8063865817272801,
+  "b_high": 1.0,
+  "ece": 0.09999999999999976,
+  "unknown_rate": 0.0,
+  "false_accept_rate": 0.0,
+  "b_literal_executable_rate": 0.0,
+  "pc2_exec_rate": 1.0,
+  "pc2_bind_rate": 1.0,
+  "shuffled_binding_rate": 0.0,
+  "exec_low_b": 1.0,
+  "exec_high_b": 1.0,
+  "bind_low_b": 1.0,
+  "bind_high_b": 1.0,
+  "n": 16,
+  "census_sha": "b151568633875ab6909e98d3cb421e6ca986ee3011648eef9865954610b22b75",
+  "exp_census_sha": "b151568633875ab6909e98d3cb421e6ca986ee3011648eef9865954610b22b75",
+  "kernel_sha": "66d78fb6939bad612d8efd8c0952a2e7687003de782200617ea926ed6a4805a6"
+}

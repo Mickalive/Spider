@@ -1,0 +1,43 @@
+[
+  {
+    "mechanism_id": "param-2af80ac9a678",
+    "intent": "add_to_cart",
+    "preconditions": {},
+    "action_template": {
+      "body": {
+        "qty": "1",
+        "sku": "${sku}"
+      },
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Csrf-Token": "${x_csrf_token}"
+      },
+      "method": "POST",
+      "url": "${resource_id}"
+    },
+    "postconditions": {
+      "ok": true,
+      "url": "https://shop.example.com/product/sku-a001"
+    },
+    "parameter_slots": [
+      "resource_id",
+      "sku",
+      "x_csrf_token"
+    ],
+    "auth_scope": null,
+    "freshness": {},
+    "applicability_guards": {},
+    "verification_rule": {},
+    "failure_boundary": {},
+    "repair_scope": {},
+    "evidence": [
+      "e627788a0e0dbc7a",
+      "04fc104b0949ffeb",
+      "7e762700ad24f990",
+      "a87347d8498b0190",
+      "6f9fe743362facde"
+    ],
+    "confidence": 0.9,
+    "invalidated": false
+  }
+]
