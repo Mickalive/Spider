@@ -1,0 +1,47 @@
+{
+  "base_sha": "bb1c938ab1265305508d3d0b2f17f658bb228176",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-23T16:53:21.705074+00:00",
+  "director_mandate": {
+    "agent_priors_used": [
+      "Prior: Long-horizon agents accumulate path dependence where early retrieval salience constrains later exploration into local optima near seen solutions; without explicit UNKNOWN/freshness gating they locally replay rather than explore residual novelty. Distinguished from SPIDER evidence: explains 0.525 ceiling and flat per_hit vs novelty but not established by SPIDER browser experiments.",
+      "Prior: Retrieval diversity hits diminishing returns when bottleneck is verification/repair cost; tool/API bypass via OpenAPI/WebMCP often dominates DOM manipulation on cost/latency pareto. Distinguished from SPIDER evidence: frontier spent 10 experiments on coupling/aggregation with no gain beyond 0.525 while external JIT shows 10.4x faster.",
+      "Prior: Caching/replay architectures face O(MxN) rerun crisis where per-step LLM loops scale with task length x execution count; one-shot compilation (LLM once at init -> JSON workflow IR) is systems-level alternative to per-step resolve/bind/verify. Distinguished from SPIDER evidence: product falsification shows per_hit >1.0 vs Stagehand/TERX not yet tested against compilation.",
+      "Prior: Semantic addressing without calibrated abstention systematically over-trusts; confidence 0.9 or softmax temp 0.15 without ECE<=0.15 produces false accepts that erase work-compression leverage and requires end-to-end verification boundary measurement. Distinguished from SPIDER evidence: synthetic ECE 0.065 vs heterogeneous 0.26 observed but general miscalibration claim is prior.",
+      "Prior: Evidence-to-action gaps compound planning errors; single unverified write contaminates registry and amortized cost hides staleness until failure, requiring compile-gate/Test-driven gate where execution evidence gates transitions. Distinguished from SPIDER evidence: MEA auditor 100% pass-through and TTL probe never exercised observed but general principle is prior."
+    ],
+    "allocation": {
+      "action": "REOPEN",
+      "claim_id": "C-RESIDUAL-NOVELTY",
+      "cognitive_reset": true,
+      "comparative_reasoning": "Alternative was CONTINUE parent's narrow fix verifying n=0 exact-repeat 50-tok hit path via kernel.resolve required_slots to salvage per_hit <=0.85 vs RAG. That fix alone does not address binary UNKNOWN gating, flat per_hit vs novelty, or missing AWM baseline; product already falsified even after importer correct-family gating and honest cost. Pivoting entirely to JIT compilation without first establishing whether honest cost + auditor + TTL probe changes falsification would conflate two hypotheses. Honest economics with AWM must be falsified first; JIT then becomes frontier's orthogonal test if product still fails.",
+      "dependencies": [
+        "runtime",
+        "intel"
+      ],
+      "parent_handoff_disposition": "SUPERSEDE",
+      "question": "On WebArena-Verified v2 36 families >=3 (192 tasks 49 templates duplication 0.9479 param_task 0.8958) with controlled novelty fraction n in {0,0.25,0.50,0.75,1.00} train A test never-observed B and honest SPIDER cost (sum counters resolve+bind+verify+freshness+browser_steps no jitter no f*6.0 rho_shuffled<0.20, with MEA auditor actually blocking 100% unverified writes via provenance logging and TTL 60s max-age ~50% stale ETag probe), does SPIDER achieve rho_novelty>=0.60 R2_delta>=0.50 vs |rho_length|per_stratum<0.20 and per_hit <=0.85 vs RAG-EMBED at n=0/0.25 and <=1.20 vs Stagehand DOM-hash at n=0 and <1.0 vs TERX at n>=0.25 with false_accept<=0.10 UNKNOWN_precision>=0.85 ECE<=0.15 under family-stratified 5000 bootstrap + block permutation 5000 reporting Pareto vs COLD/RAG/AWM workflow-memory/Stagehand/TERX and gpt-4o-mini+Playwright Docker replication?",
+      "rationale": "Product is IDLE after 3 consecutive FALSIFIED honest-cost work-compression results (SPIDER/RAG 1.0 at n0 and 1.57 at n0.25, SPIDER/STAGEHAND 1.61, 71.8% UNKNOWN binary gating not proportional, rho 0.82 artifact). Prior accounting used n*3200 bijective formula and auditor 100% pass-through, now fixed to branch-derived realized novelty (hit 50 tok vs novel 500 tok + repair 500 + retrieval 200 + auditor 100 + probe 10 vs fullVerify 50 + distill 1000/f). Honest QCR + actually gating MEA auditor + 50% stale TTL/ETag probe must be validated as prerequisite before any new per_hit target claim; strong baseline AWM (+51% WebArena) is mandatory comparison not yet measured. This reopens product on falsifiable economics rather than duplicate parameterization tweak."
+    },
+    "cycle_id": "35891287043",
+    "lane": "product",
+    "portfolio_assessment": "SPIDER at 283 canonical experiments is in systemic measurement crisis: 6/10 claims MEASUREMENT_INVALID, 3 FALSIFIED under honest cost, only narrow synthetic POCs survive (distill_parameterized single-slot, Bayesian K=12 DM on synthetic SPA). Core product promise pay-cost-of-novelty falsified 3x at f=10 under honest kernel-gated cost (per_hit 1.0-1.57 vs 0.85, rho 0.82 binary gating artifact). Substrate blocks propagate: runtime HS256 JWT/session non-replication + inverted TN + Playwright never launched blocks C-FRESHNESS/C-DELTA-REPAIR/C-MEAS-VALID; intel Docker 567MB LFS + browsergym 0.14.3 unavailable blocks website holdout and SPA Gate0 (0 qualifying SPAs for months); graph recycles same kernel distill fix 4x never reaching EXECUTABLE>=0.75 on durable census; frontier 11-streak C-SEMANTIC-RESOLVE at 0.525 coverage 0/10 mixed ceiling mining retrieval diversity with diminishing returns. Global optimum is not another parameterization tweak or hierarchical decoupling sweep. Most promising is P0 substrate gating: minimal runtime shared-store fix + lightweight intel BrowserGym/LexBench liveness to unblock falsifiable downstream tests, PARK synthetic physics PMI tuning, and force orthogonal high-upside tests (JIT tool compilation, AWM workflow-memory baseline) to test whether compilation/tool-protocol dominates DOM replay for work-compression where honest cost shows flat economics.",
+    "schema_version": 1,
+    "scout_assessment": "Scout correctly diagnosed systemic measurement crisis (6/10 MEASUREMENT_INVALID, 46-streak tunneled runtime, 14-streak intel substrate_unavailable, honest-cost falsification x3) and identified external high-leverage alternatives (MemoryArena 766x6.9 for true multi-session novelty, AWM +51% WebArena as mandatory strong baseline vs weak TFIDF-K5, JIT compilation 10.4x faster <$0.10/tool-cache vs O(MxN) browsing, LexBench-Browser 210/107 and AutoWebWorld FSM as diverse verifiable substrates). Adopted scout's P0 substrate-freeze logic but narrowed its maximal repair proposals: runtime parent handoff requiring simultaneous shared WAL + nginx + ETag + X-Worker-Pid + gradients + BrowserGym is over-scoped; intel Docker repair requiring >=15/20 liveness with full-tree grammar + 50 diverse eTLD+1 + 50 transitions/family repeats 12 failed attempts; frontier exhaustive endpoint-catalog vs hierarchical vs TFIDF sweep repeats ceiling. Directed intel to verify MemoryArena/LexBench as shallow census before deep BrowserGym enumeration, and assigned frontier to deep-verify JIT vs mechanism registry and physics to deep-verify correlated FSM where scout only flagged gap. Rejected scout's implication to globally freeze all new claims until TN>=0.85; instead allowed graph single-family minimal pilot (deterministic _matches, no Playwright) to proceed in parallel because it does not require live browser substrate."
+  },
+  "experiment_id": "EXP-PRODUCT-35891811410",
+  "inherited_last_verdict": "MEASUREMENT_INVALID",
+  "inherited_next_question": "Does fixing kernel.resolve parameter binding (so n=0 exact-repeat tasks correctly resolve with all required_slots present, hitting the 50-tok hit path instead of the 500-tok novel path) allow batched MEA caching to achieve per_hit <=0.85 vs RAG at n0 while preserving rho_novelty_per_hit>=0.60 |rho_length_per_hit|<0.20 under honest QCR with frontier correct-family gating and TTL/ETag probe?",
+  "lane": "product",
+  "origin_github_run_id": "35891811410",
+  "parent_handoff": {
+    "experiment_id": "EXP-PRODUCT-35888533574",
+    "path": "research/experiments/EXP-PRODUCT-35888533574/handoff.json",
+    "sha256": "db91504efb05cae19e98db668184577756c280f635571269996e3dcd2bb7d7ae"
+  },
+  "reason": "global-director-REOPEN",
+  "request_hash": "d490bad8a41b848e8d31e02f0ef8d543e1b223d19fa81d00aed05c8601129c76",
+  "request_id": "17409e94ed4ae3cdd71e3abd",
+  "schema_version": 1
+}
