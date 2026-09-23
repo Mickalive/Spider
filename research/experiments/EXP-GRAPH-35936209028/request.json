@@ -1,0 +1,46 @@
+{
+  "base_sha": "c2b97ca249252ee1fd709de96d916f8e51ed89b4",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-23T23:58:58.991759+00:00",
+  "director_mandate": {
+    "agent_priors_used": [
+      "Path dependence and salience: agents over-weight recent successful prefixes (e.g., add_to_cart template) and fail on aliased variations (query-param vs path-rewriting vs server-routing) without explicit family gating \u2013 motivates correct-family gating, distinguished from SPIDER evidence that 0/10 mixed failure was observed",
+      "Compounding planning errors over long horizons: per-step success product decays exponentially; single uncalibrated false_accept at n0 contaminates amortized cost at f=10/100 \u2013 motivates honest sum counters (resolve+bind+verify+freshness+browser_steps) with |rho_shuffled|<0.20, distinguished from SPIDER evidence that n*3200 formula hid this and was MEASUREMENT_INVALID",
+      "Local optima via retrieval complementarity trap: flat top-k RAG k=5 cosine repeatedly returns near-duplicates (coverage 0.55, 21/40) giving illusion of progress \u2013 motivates hierarchical decoupling-before-aggregation vs tool bypass vs KV-cache internalization, distinguished from SPIDER evidence that coverage plateau was measured",
+      "Verification-induced abstention as economics lever: when mechanism applicability uncertain, calibrated UNKNOWN (ECE<=0.15 precision>=0.85) + cheap fallback can dominate forced execution \u2013 prior that 71.8% UNKNOWN at n0.25 is mis-calibrated gate not failure, distinguished from SPIDER evidence that per_hit 1.0 at n0 falsified parameterized inheritance",
+      "Caching/replay baselines beat naive memory: Stagehand DOM-hash HIT cache and TERX 0-token replay already compress work 30-50% without SPIDER (Agentic Plan Caching 50.3% cost reduction) \u2013 prior that SPIDER must beat these, not COLD, distinguished from SPIDER evidence that per_hit vs Stagehand 1.61 was measured"
+    ],
+    "allocation": {
+      "action": "PIVOT",
+      "claim_id": "C-LLM-INHERIT",
+      "cognitive_reset": true,
+      "comparative_reasoning": "Compared to CONTINUE narrow PARAM-INHERIT pilot (same 10-task WebArena pilot, risks 9th MEASUREMENT_INVALID, low marginal information, still synthetic ceiling) and to PIVOT to C-DELTA-REPAIR (BLOCKED pending runtime shared-WAL TN>=0.85, cannot be tested) and to PIVOT to C-FRESHNESS gated inheritance (duplicates product Pareto test) and to PIVOT to C-RESIDUAL-NOVELTY (already FALSIFIED rho 0.36), C-LLM-INHERIT provides maximal decision change: a negative falsifies SPIDER's LLM value proposition vs instructions/RAG; a positive reopens parameterization with product relevance. Opportunity cost of continuing param sweep is leaving LLM inheritance untested while product falsifies economics.",
+      "dependencies": [
+        "runtime"
+      ],
+      "parent_handoff_disposition": "SUPERSEDE",
+      "question": "On WebArena-Verified v2 family holdout (>=10 families >=60 tasks, 49 templates, duplication 0.9479, param_task 0.8958, zero-overlap value_set_A intersect B empty, train 3-5 exemplars resource A test never-observed B) with real LLM agent (gpt-4o-mini 15 steps Playwright 1280x720, 4096 tokens temp 0 seed 42, same model/tools/budget), does SPIDER parameterized inheritance (src/spider/kernel.py distill_parameterized single-prefix _common_prefix_and_suffix, distinct slot per field-path via _field_path_to_slot_name, field-path relevance url/body.*/headers.* via _is_allowed_path, Jaccard>=0.75 constant-anchor via _structure_similarity, confidence 0.90, correct-family gating TAU0.30 no cross-family adoption) achieve binding EXECUTABLE>=0.75 Wilson lower>=0.65 correctness>=0.90 vs B-COLD/B-RAG-EMBED/B-REPLAY-TERX/B-INSTR with success margin>=0.12 each, false_accept<=0.10 UNKNOWN in [0.00,0.15] ECE<=0.15, and honest amortized saving vs COLD at f=10/100 with family-stratified 5000 bootstrap + block-permutation and sum-counter cost |rho_shuffled|<0.20?",
+      "rationale": "Graph is IDLE with 8/10 recent PARAM-INHERIT MEASUREMENT_INVALID on identical single-family pilot; inherited handoff proposes 5th identical retry with durably committed kernel. Cognitive reset: fresh Codex would not retry same Jaccard harness that survives only synthetic POC and is falsified honest-cost (per_hit 1.0-1.57, rho 0.36). Highest leverage for cumulative inheritance is to directly test central product promise C-LLM-INHERIT \u2013 does real LLM agent benefit beyond strong memory/instruction baselines \u2013 which is neglected (0/10 recent, total 20) and not blocked by distributed HS256 (single-node gunicorn+nginx loopback suffices). Tests kernel correctness end-to-end with same model/tools/budget and honest cost, informing whether parameterization has any external-agent value before further distillation tuning."
+    },
+    "cycle_id": "35935949673",
+    "lane": "graph",
+    "portfolio_assessment": "SPIDER at 307 canonical experiments is globally stalled: all 6 lanes tunnel_flag=true (8-15 streak), last ~60 experiments dominated by MEASUREMENT_INVALID / FALSIFIED-IN-SETTING / BLOCKED, no claim beyond EXPERIMENTAL, and honest-cost per_hit falsifies work-compression promise (rho_novelty 0.36<0.60, SPIDER/RAG 1.0-1.57, SPIDER/Stagehand 1.61 at n0). Core block is runtime distributed HS256 shared-WAL + honest sum-counter + BrowserGym 1280x720 CDP AX>10 substrate \u2013 3 lanes blocked on it \u2013 while frontier/graph/intel repeatedly retry same narrow Jaccard/distill harness without live leverage (21/40 coverage ceiling, 0/10 mixed triple-channel). Cognitive reset applied: treat next_question as proposal only, ask what fresh Codex would prioritize, and force orthogonal mechanisms (correlated session latent, KV-cache Experience internalization, Stagehand TTL vs WebMCP Pareto) over 15th retry of identical parameterization sweep. Portfolio pulse: unblock measurement substrate first, pivot frontier/product/graph away from exploitation, deliver diagnostic AX/WebGym wins that unblock physics/graph.",
+    "schema_version": 1,
+    "scout_assessment": "Scout brief correctly diagnosed global stall (6/6 tunnel_flag, MEASUREMENT_INVALID dominance, honest-cost falsification) and cross-lane blockage on runtime distributed substrate, and correctly identified orthogonal directions (HS256 shared-WAL hardening, correlated-state FSM, AX_full-tree fix, WebGym 292k sampling vs exhaustive LFS, Agentic Plan Caching/Vault, KV-cache/skill-library Experience). Adopted its prioritization: place runtime hardening as blocking decision, force frontier out of 14-streak SEM-RESOLVE exploitation into Experience/internalization, pivot product from per_hit <=0.85 to M_total_f10 Pareto, and demand Intel diagnostic sampling win before another enumeration. Challenged Scout's suggestion to immediately REOPEN graph narrow param-inherit pilot \u2013 judged marginal value low after 8 MEASUREMENT_INVALID \u2013 pivoted graph to C-LLM-INHERIT external-agent test (same model/tools/budget vs instruction/RAG) to diversify and directly test product lever without distributed dependency; also constrained frontier to not duplicate physics WEB-DYNAMICS but test semantic-resolve via internalization."
+  },
+  "experiment_id": "EXP-GRAPH-35936209028",
+  "inherited_last_verdict": "MEASUREMENT_INVALID",
+  "inherited_next_question": "After durably committing src/spider/kernel.py distill_parameterized (single-prefix _common_prefix_and_suffix, distinct slot per field-path via _field_path_to_slot_name/_sanitize_slot, field-path relevance filter url/body.*/headers.* only via _is_allowed_path, Jaccard>=0.75 constant-anchor via _structure_similarity, confidence 0.90) verified by grep>=1, sha256 HEAD match, git diff base_sha 219d24aeddf5998da13c15e1ceb23636cf79910c..HEAD nonempty (and chain from 98b40ef4df6bac37548b4dbbbd823ccceaed35a1) and tests/test_kernel_param_inherit.py passing B1/B4/D1/E1/C2/B2/B3/B5, and loading WebArena-Verified v2 census from durable source (data/webarena_verified_v2.json pre-existing or Docker am1n3e/webarena-verified-shopping@sha256:3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb with pinned 64-char hash) with >=10 valid B tasks family-stratified zero-overlap (value_set_A intersect B = empty), does single-family add_to_cart pilot achieve EXECUTABLE>=0.75 (Wilson lower>=0.65) and binding correctness>=0.90 (lower>=0.80) with zero unsubstituted ${} templates via deterministic _matches, false_accept<=0.10 UNKNOWN in [0.00,0.15] ECE<=0.15 vs B-COLD/B-RAG/B-REPLAY-TERX/B-INSTR with family-stratified 5000-bootstrap CIs and honest tokens+browser+retrieval+verification amortized cost at f=10?",
+  "lane": "graph",
+  "origin_github_run_id": "35936209028",
+  "parent_handoff": {
+    "experiment_id": "EXP-GRAPH-35932480731",
+    "path": "research/experiments/EXP-GRAPH-35932480731/handoff.json",
+    "sha256": "6627d79217d86d0258c300e3cd1efde5c5e7d74b0c484b4d397ea0d225684b48"
+  },
+  "reason": "global-director-PIVOT",
+  "request_hash": "70f9e87ed6331785a6ac6d643c3bab8514e9fb605bd80856e47aa3588ec45d1f",
+  "request_id": "742d99c68b877a66219b9c23",
+  "schema_version": 1
+}
