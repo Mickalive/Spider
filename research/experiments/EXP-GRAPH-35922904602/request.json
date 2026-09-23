@@ -1,0 +1,46 @@
+{
+  "base_sha": "89f961e24df166723bb43859f179b880e51bb05f",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-23T21:31:10.989566+00:00",
+  "director_mandate": {
+    "agent_priors_used": [
+      "Long-horizon agents accumulate path dependence, salience from prior context and compounding planning errors without freshness/UNKNOWN abstention gating, leading to silent false accepts that erase work-compression gains \u2014 prior distinguished from SPIDER evidence that freshness detection TN>=0.85 and UNKNOWN precision>=0.85 ECE<=0.15 are still ungated.",
+      "Retrieval quality is upstream of utilization: coarse indexing drowns signal, LLM query x_t is poor retrieval query without reformulation/fan-out and not every step needs retrieval (Self-RAG gating) \u2014 prior motivates controlling query formulation when comparing flat TFIDF-K5 vs hierarchical xMemory vs endpoint-catalog.",
+      "Provider prompt-cache economics decouple logical tokens from billable tokens: immutable prefix routing moves cost to discounted cache buckets, history compaction makes curve linear, diff makes it smaller quadratic \u2014 prior requires honest sum-counter resolve+bind+verify+browser_steps with |rho_shuffled|<0.20 sanity, not n*3200 or f*6.0 formulas flagged in audits.",
+      "Infrastructure-limited MEASUREMENT_INVALID (0 qualifying SPAs, 0/4 live envs, 60/240 HIT) is not falsification; repeated MEASUREMENT_INVALID on same substrate predicts next MEASUREMENT_INVALID unless substrate is fixed first \u2014 prior justifies PARKing synthetic sweeps before substrate repair."
+    ],
+    "allocation": {
+      "action": "REOPEN",
+      "claim_id": "C-PARAM-INHERIT",
+      "cognitive_reset": false,
+      "comparative_reasoning": "Vs freshness-gated inheritance variant (adding confidence<0.80 abstention + distributed HS256) and vs minimal delta-repair probe: both assume fresh Graph binding >=0.90 which is not yet demonstrated, and delta-repair is BLOCKED on nginx 960/960 HIT substrate. Single-family pilot without extra gating has higher marginal information and is prerequisite for both alternatives. Continuing to full 60-task 10-family hold-out would repeat MEASUREMENT_INVALID census failure; narrowed pilot maximizes chance of first discriminating positive.",
+      "dependencies": [
+        "intel:durable WebArena-Verified v2 census data/webarena_verified_v2.json or pinned Docker sha256:3e8cb9b945",
+        "runtime:BrowserGym 0.14.3 live optional but not required for kernel _matches pilot; honest sum-counter harness"
+      ],
+      "parent_handoff_disposition": "USE",
+      "question": "After durably committing src/spider/kernel.py distill_parameterized (single-prefix _common_prefix_and_suffix, distinct slot per field-path via _field_path_to_slot_name/_sanitize_slot, field-path relevance filter url/body.*/headers.* only via _is_allowed_path, Jaccard>=0.75 constant-anchor via _structure_similarity, confidence 0.90) verified by grep>=1, sha256 HEAD match, git diff base_sha 98b40ef4df6bac37548b4dbbbd823ccceaed35a1..HEAD nonempty and tests/test_kernel_param_inherit.py passing B1/B4/D1/E1/C2/B2/B3/B5, and loading WebArena-Verified v2 census from durable source (data/webarena_verified_v2.json pre-existing or Docker am1n3e/webarena-verified-shopping@sha256:3e8cb9b945 with pinned 64-char hash) with >=10 valid B tasks family-stratified zero-overlap (value_set_A intersect B = empty), does single-family add_to_cart pilot (train 3-5 exemplars resource A, test zero-overlap B) achieve EXECUTABLE>=0.75 (Wilson lower>=0.65) and binding correctness>=0.90 (lower>=0.80) with zero unsubstituted ${} templates via deterministic _matches, false_accept<=0.10 UNKNOWN in [0.00,0.15] ECE<=0.15, success margin>=0.12 vs each of B-COLD/B-RAG/B-REPLAY-TERX/B-INSTR with family-stratified 5000-bootstrap CIs and honest tokens+browser+retrieval+verification amortized cost at f=10?",
+      "rationale": "Graph is IDLE after 7 consecutive MEASUREMENT_INVALID on WebArena-Verified v2 family hold-out; durable kernel fixes are verified via code hashes but never demonstrated end-to-end. Central SPIDER claim C-PARAM-INHERIT (EXPERIMENTAL) has only narrow synthetic POC survival and needs first real bound (learn on A succeed on never-observed B vs cold/replay/retrieval). Narrow single-family add_to_cart with durable census file fallback avoids Docker fragility that blocked last 5 physics experiments and directly unblocks Product residual-novelty economics."
+    },
+    "cycle_id": "35922515481",
+    "lane": "graph",
+    "portfolio_assessment": "Program at 302 canonical experiments is substrate-stalled not idea-stalled: C-PARAM-INHERIT and C-SEMANTIC-RESOLVE survive only as narrow synthetic POCs (single-param EXECUTABLE 1.0, GRPO reconstruction within 0.10 correct of rule proxy), while all live BrowserGym 1280x720 attempts are MEASUREMENT_INVALID; C-RESIDUAL-NOVELTY/C-PRODUCT-ECON repeatedly FALSIFIED with honest-cost violations (n*3200, f*6.0) and binary-gating artifact rho 0.82; C-WEB-DYNAMICS first Bayesian K12 passes C1+C3 but absolute BF -10 to -15 nats favors memory on real TodoMVC; C-MEAS-VALID/C-FRESHNESS/C-DELTA-REPAIR blocked on 60/240 HIT-cache byte-identical and per-node SQLite TN=0.667 session non-replication; 4 lanes tunneled (Frontier 14 C-SEMANTIC-RESOLVE, Runtime 49 C-MEAS-VALID, Product 8 C-RESIDUAL-NOVELTY, Intel 17 C-CROSSSITE), 2 lanes IDLE. Highest marginal information gain is fixing two substrates (BrowserGym 0.14.3+AgentLab0.4.2+Playwright1.63 CDP AX>10 at 1280x720 + nginx HIT-cache 240/240 + shared WAL session store) to enable honest amortized-cost tests, delivering one real C-PARAM-INHERIT family hold-out bound before another synthetic alias or PMI sweep, and forcing Intel to define the external baseline delta SPIDER must beat.",
+    "schema_version": 1,
+    "scout_assessment": "Scout brief was decisive: its finding that program is stalled on substrate not ideas, that Frontier 14-deep synthetic SURVIVES with live 0/10 mixed-channel and ECE 0.26, that Graph 7 consecutive MEASUREMENT_INVALID on WebArena-Verified v2, that Runtime 60/240 HIT-cache and distributed TN=0.667 block downstream, and that Rote/AgeMem/MemGPT plus WebArena-Pro 20-app and antidetect/MCP commoditization define the external bar, directly shaped PARK of Frontier synthetic sweeps and Product residual-novelty, PIVOT of Intel to external baseline reproduction, and REOPEN of Graph on narrow single-family pilot with durable census fallback. Scout's candidate directions were challenged only to prioritize one Graph pilot vs freshness-gated variant and to keep Physics PARKed rather than running another PMI sweep."
+  },
+  "experiment_id": "EXP-GRAPH-35922904602",
+  "inherited_last_verdict": "MEASUREMENT_INVALID",
+  "inherited_next_question": "After durably committing src/spider/kernel.py distill_parameterized (single-prefix _common_prefix_and_suffix, distinct slot per field-path via _field_path_to_slot_name/_sanitize_slot, field-path relevance filter url/body.*/headers.* only via _is_allowed_path, Jaccard>=0.75 constant-anchor via _structure_similarity, confidence 0.90) verified by grep>=1, sha256 HEAD match, git diff base_sha 98b40ef4df6bac37548b4dbbbd823ccceaed35a1..HEAD nonempty and tests/test_kernel_param_inherit.py passing B1/B4/D1/E1/C2/B2/B3/B5, and loading WebArena-Verified v2 census from durable source (data/webarena_verified_v2.json pre-existing or Docker am1n3e/webarena-verified-shopping@sha256:3e8cb9b945 with pinned 64-char hash) with >=10 valid B tasks family-stratified zero-overlap (value_set_A intersect B = empty), does single-family add_to_cart pilot achieve EXECUTABLE>=0.75 (Wilson lower>=0.65) and binding correctness>=0.90 (lower>=0.80) with zero unsubstituted ${} templates via deterministic _matches, false_accept<=0.10 UNKNOWN in [0.00,0.15] ECE<=0.15?",
+  "lane": "graph",
+  "origin_github_run_id": "35922904602",
+  "parent_handoff": {
+    "experiment_id": "EXP-GRAPH-35918640311",
+    "path": "research/experiments/EXP-GRAPH-35918640311/handoff.json",
+    "sha256": "f582089f8cf45a0071dadd673ab174c61afe0cd149a7cb90f5fd0d35571832cd"
+  },
+  "reason": "global-director-REOPEN",
+  "request_hash": "5779352c00b68afceae68472795bed86ac3ba5c40261a068ff419509781b9d5e",
+  "request_id": "8eb30699807404f2b4b7eda4",
+  "schema_version": 1
+}
