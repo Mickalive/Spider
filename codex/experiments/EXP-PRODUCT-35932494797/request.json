@@ -1,0 +1,47 @@
+{
+  "base_sha": "219d24aeddf5998da13c15e1ceb23636cf79910c",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-23T23:13:48.119851+00:00",
+  "director_mandate": {
+    "agent_priors_used": [
+      "Prior: Long-horizon agents accumulate path dependence and salience bias without explicit freshness/abstention (UNKNOWN ECE) - silently reusing stale selectors inflates false_accept and flattens per_hit to 1.0. Distinguished from SPIDER evidence: SPIDER has not validated this mechanism on live WebArena, only observed TN 0.667 and per_hit 1.00-1.61 as descriptive outcomes.",
+      "Prior: Workflow compilation/routine abstraction beats verbatim retrieval when workflows abstract to routines (AWM/Memp) - Jaccard 0.30 top-k RAG loses amortization O(1). Distinguished from SPIDER evidence: AWM 51% relative gain on WebArena is external prior, not SPIDER Codex SURVIVES (SPIDER 40/40 is synthetic-only).",
+      "Prior: Policy regularity and href==url leakage (92-98%) masquerade as dynamics - valid physics tests need action-conditioned, history-conditioned, trajectory-grouped permutation with null centering |null_mean|<0.1. Distinguished from SPIDER evidence: leakage rates are SPIDER observations, but requirement for strict null centering is methodological prior.",
+      "Prior: Compounding errors create local optima where orthogonal mechanism change (tool-bypass/WebMCP compilation) has higher expected information gain than 49th nginx tuning. Distinguished from SPIDER evidence: tunnel flags diagnostic, not proof of diminishing returns - used to motivate cognitive reset, not as Codex falsification."
+    ],
+    "allocation": {
+      "action": "PIVOT",
+      "claim_id": "C-PRODUCT-ECON",
+      "cognitive_reset": true,
+      "comparative_reasoning": "Vs continuing residual-novelty per_hit tuning: 5 falsifications under honest cost with binary gating artifact (71.8% UNKNOWN) show diminishing returns; another n*3200 iteration low value. Vs WABER reliability or MemoryArena interdependent ST (57 sessions): high upside but requires new task bank and multi-session persistence not yet substrate-validated - premature before gate decision. Vs single-family product pilot: duplicates graph charter. M_total Pareto with real-browser rho_proxy_real is minimal test that can promote to PRODUCT_CORE or formally PARK WebMCP file-proxy; directly answers Scout question whether per_hit should be superseded.",
+      "dependencies": [
+        "runtime honest-cost sum-counters + shared-WAL TN>=0.85 harness",
+        "frontier correct-family reconstruction adapter for product MEA path",
+        "intel stagehand HIT/MISS baseline as comparator"
+      ],
+      "parent_handoff_disposition": "SUPERSEDE",
+      "question": "On distributed HS256 shared-WAL substrate (health-gated, URL-sticky, real If-None-Match/ETag->304, n_non304>=800) with Docker BrowserGym 0.14.3 2000-node 1280x720 full-DOM real gpt-4o-mini 15-step tokens/browser+latency (rho_proxy_real>=0.50, |rho_shuffled|<0.20 per-stratum |rho_length|<0.20) and correlated TTL/ETag freshness (fresh at n0~1.0 via conditional probe ETag W/body_sha ~50% stale at n0.25 vs seeded-42 0.53 random), does any low-overhead Stagehand TTL gating or WebMCP Registry 714/2147 O(1) compilation (amortized compile 800/f) achieve honest per_hit=(M_total_f10 - retrieval - distill_or_compile_amort - auditor_amort)/L <=0.85 vs RAG-EMBED at n0/n0.25 and Pareto total-cost dominance M_total_f10 (tokens vs browser+latency vs accuracy) with verification-derived calibration (UNKNOWN precision>=0.85 ECE<=0.15 bootstrap upper<=0.18), or should per_hit be formally superseded by M_total_f10 Pareto as PRODUCT_CORE viability gate before any promotion, reporting family-stratified bootstrap 5000 and block-permutation 5000 vs gpt-4o-mini+Playwright Docker replication?",
+      "rationale": "Product 9-streak on C-RESIDUAL-NOVELTY falsified pay-cost-of-novelty 5x under honest kernel-gated cost (per_hit 1.00 at n0, 1.57 at n0.25 vs 0.85; 1.61 vs Stagehand vs 1.20; rho 0.36 <0.60) and WebMCP file-proxy per_hit 1.005 >0.85 at f=10. Per_hit gate is contested and blocks promotion decision; parent handoff correctly proposes formal supersession to M_total_f10 Pareto with distributed fresh/stale probe. Testing low-overhead selector-cache+TTL vs WebMCP Registry O(1) at f=10/100 under honest f=10 Pareto decides PARK of residual-novelty/WebMCP vs shipping selector-cache+gating, with verification calibration and real-browser replication."
+    },
+    "cycle_id": "35932113109",
+    "lane": "product",
+    "portfolio_assessment": "SPIDER at 304 canonical exps has no PRODUCT_CORE promotion. Durable SURVIVES limited to: nginx 1.24.0 byte-preserving oracle-free greedy 960/960 HIT/SWR/SIE/304 and synthetic C-SEMANTIC-RESOLVE 40/40 alias-OOD (bounded synthetic-only). All live WebArena-Verified v2 family-holdout pilots for C-PARAM-INHERIT are MEASUREMENT_INVALID (distill bugs double-prefix/Jaccard 0.75/relevance, A/B overlap). C-CROSSSITE AX_consistency 18/20 identical homepage/template falsified bounded, product-page UNTESTED, Stagehand HIT 0.0 due to incomplete stripping. C-FRESHNESS orthogonality passes (r=-0.038 TOST p2e-08) but distributed TN 0.667 <0.85 due to per-node SQLite non-replication blocks Graph/Runtime delta-repair. C-RESIDUAL-NOVELTY/C-PRODUCT-ECON falsified 5x under honest cost (per_hit 1.00-1.61 vs 0.85, rho 0.36 <0.60). C-WEB-DYNAMICS 70 exps no real beyond-memory signal (Gate0 0/2-3, absolute BF -10 to -15 favors memory, first estimator Bayes K12 passes C1+C3 only synthetically). Four lanes tunnel-flagged (frontier 14, runtime 49, intel 15, physics 13, product 9) on narrow synthetic/live gaps. Highest leverage is unblocking measurement substrate (runtime honest-cost + shared-WAL) and closing live product-page/ BrowserGym gaps before any promotion; physics beyond-memory requires PARK pending Intel-delivered correlated-state Gate0 SPAs.",
+    "schema_version": 1,
+    "scout_assessment": "Scout brief accurately diagnosed tunnel concentration, synthetic-vs-live ceiling, and cross-lane dependencies; adopted its evidence categorization (nginx SURVIVES, synthetic POC vs live MEASUREMENT_INVALID, 5x falsified per_hit, Gate0 0/2-3) and external context (AWM workflow memory, WebMCP tool bus, MemoryArena multi-session, WABER reliability) as directional priors. Rejected mechanical pivot quota - kept frontier on C-SEMANTIC-RESOLVE live shootout and runtime on honest-cost harness because marginal information gain remains high despite flags. Downgraded Scout's PAYLOAD to staff advice for physics: accepted PARK recommendation but preserved correlated-FSM bank as blocked capability, not promoted as product mechanism. Assigned Intel to verify expanded stripping and WebGym 292k claims deeply rather than adopting Scout summary."
+  },
+  "experiment_id": "EXP-PRODUCT-35932494797",
+  "inherited_last_verdict": "MEASUREMENT_INVALID",
+  "inherited_next_question": "On distributed HS256 shared-WAL substrate with Docker BrowserGym 0.14.3 2000-node 1280x720 full-DOM real gpt-4o-mini 15-step tokens/browser+latency (rho_proxy_real>=0.50, |rho_shuffled|<0.20 per-stratum |rho_length|<0.20) and correlated TTL/ETag freshness (fresh at n0~1.0 via conditional probe ETag W/body_sha ~50% stale at n0.25 vs seeded-42 0.53 random), does any low-overhead Stagehand TTL gating or WebMCP Registry 714/2147 O(1) compilation (amortized compile 800/f) achieve honest per_hit=(M_total_f10 - retrieval - distill_or_compile_amort - auditor_amort)/L <=0.85 vs RAG-EMBED at n0/n0.25 and Pareto total-cost dominance M_total_f10 (tokens vs browser+latency vs accuracy) with verification-derived calibration (UNKNOWN precision>=0.85 ECE<=0.15 bootstrap upper<=0.18), or should per_hit be formally superseded by M_total_f10 Pareto as PRODUCT_CORE viability gate before any promotion, reporting family-stratified bootstrap 5000 and block-permutation 5000 vs gpt-4o-mini+Playwright Docker replication?",
+  "lane": "product",
+  "origin_github_run_id": "35932494797",
+  "parent_handoff": {
+    "experiment_id": "EXP-PRODUCT-35921344930",
+    "path": "research/experiments/EXP-PRODUCT-35921344930/handoff.json",
+    "sha256": "c080048132dd4d46b0229a1261e39eb2bcdd19737c7658cc7f95024a28aa8f94"
+  },
+  "reason": "global-director-PIVOT",
+  "request_hash": "64dfab8ed371bf61149fc8dfe45c585565866aa330d3f9fbb91261f744d6fb1a",
+  "request_id": "3f8904f749ad1bc2d9256b2d",
+  "schema_version": 1
+}
