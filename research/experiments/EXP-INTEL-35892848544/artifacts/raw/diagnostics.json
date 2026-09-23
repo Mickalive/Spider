@@ -1,0 +1,193 @@
+{
+  "registry_resolution": {
+    "attempts": [
+      {
+        "attempt": 1,
+        "url": "https://hub.docker.com/v2/repositories/am1n3e/webarena-verified-shopping/tags?page_size=5",
+        "status": 200,
+        "error": null,
+        "resolved_digest": "sha256:3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb",
+        "response_preview": "{\"count\":2,\"next\":null,\"previous\":null,\"results\":[{\"creator\":9806697,\"id\":1062210625,\"images\":[{\"architecture\":\"amd64\",\"features\":\"\",\"variant\":null,\"digest\":\"sha256:3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb\",\"os\":\"linux\",\"os_features\":\"\",\"os_version\":null,\"size\":5421321813,\"status\":\"active\",\"last_pulled\":\"2026-09-23T16:43:43.123310651Z\",\"last_pushed\":\"2026-02-02T18:23:14.63464585Z\"}],\"last_updated\":\"2026-02-02T18:23:19.810286Z\",\"last_updater\":9806697,\"last_updater_username\":\"am1n3e\",\"name\":\"latest\",\"repository\":29932355,\"full_size\":5421321813,\"v2\":true,\"tag_status\":\"active\",\"tag_last_pulled\":\"2026-09-23T16:43:43.123310651Z\",\"tag_last_pushed\":\"2026-02-02T18:23:19.810286Z\",\"media_type\":\"application/vnd.docker.container.image.v1+json\",\"content_type\":\"image\",\"digest\":\"sha256:3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb\"},{\"creator\":9806697,\"id\":1062210546,\"images\":[{\"architecture\":\"amd64\",\"features\":\"\",\"variant\":null,\"digest\":\"sha256:3e8cb9b945ea9"
+      }
+    ],
+    "full_digest": "sha256:3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb",
+    "api_url": "https://hub.docker.com/v2/repositories/am1n3e/webarena-verified-shopping/tags?page_size=5",
+    "truncated_digest": "sha256:3e8cb9b945",
+    "is_valid_64": true
+  },
+  "resolved_image": "am1n3e/webarena-verified-shopping@sha256:3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb",
+  "resolved_digest": "sha256:3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb",
+  "truncated_digest_valid": false,
+  "docker_reachable": {
+    "reachable": false,
+    "attempt": 3,
+    "error": "URLError: <urlopen error [Errno 111] Connection refused>"
+  },
+  "docker_pull_full": {
+    "cmd": "docker pull am1n3e/webarena-verified-shopping@sha256:3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb",
+    "returncode": -1,
+    "stdout": "",
+    "stderr": "TimeoutExpired: Command '['docker', 'pull', 'am1n3e/webarena-verified-shopping@sha256:3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb']' timed out after 90 seconds",
+    "success": false
+  },
+  "docker_pull_truncated": {
+    "cmd": "docker pull am1n3e/webarena-verified-shopping@sha256:3e8cb9b945",
+    "returncode": 1,
+    "stdout": "",
+    "stderr": "invalid reference format\n",
+    "success": false
+  },
+  "docker_pull_alt": {
+    "cmd": "docker pull am1n3e/webarena-verified-shopping",
+    "returncode": -1,
+    "stdout": "",
+    "stderr": "TimeoutExpired: Command '['docker', 'pull', 'am1n3e/webarena-verified-shopping']' timed out after 30 seconds",
+    "success": false
+  },
+  "docker_run": {
+    "cmd": "docker run -d -p 7770:7770 am1n3e/webarena-verified-shopping@sha256:3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb",
+    "returncode": -1,
+    "stdout": "",
+    "stderr": "TimeoutExpired: Command '['docker', 'run', '-d', '-p', '7770:7770', 'am1n3e/webarena-verified-shopping@sha256:3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb']' timed out after 15 seconds",
+    "success": false
+  },
+  "docker_ps": {
+    "cmd": "docker ps -a",
+    "returncode": 0,
+    "stdout": "CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES\n",
+    "stderr": "",
+    "success": true
+  },
+  "docker_images": {
+    "cmd": "docker images --digests",
+    "returncode": 0,
+    "stdout": "REPOSITORY                                   TAG       DIGEST                                                                    IMAGE ID       CREATED       SIZE\nghcr.io/github/gh-aw-firewall/agent          latest    sha256:f7df036c86575527b61f3f7df91c4412349a12b2a74988d929eafa2999230c98   bd7acdea5936   2 weeks ago   569MB\nghcr.io/github/gh-aw-firewall/api-proxy      latest    sha256:6f95e2234dd9bd6333a8ff28ccea7ecf0204acd4a09108723844dbd2bf6268c5   9d8f8fbebb48   2 weeks ago   231MB\nghcr.io/github/gh-aw-mcpg                    latest    sha256:85b940556a8faa4e1fdbef124bfd75f2c4ebd855a10b88a1c3b6f3e97f6f1a53   5f22df3c4a88   2 weeks ago   181MB\nghcr.io/dependabot/dependabot-updater-core   latest    sha256:2fba19978e4b0b2a9829597be4a15fb1fe19878b241e97a9b4d1317692940c45   5c1f9f1da87f   2 weeks ago   826MB\nghcr.io/github/github-mcp-server             latest    sha256:46cdbbd810faf6f7aed1745ea04057443f5cb9fcadc15c7308add18cf9a83e33   3e165e25be8d   2 weeks ago   46.8MB\nghcr.io/github/gh-aw-firewall/squid          latest    sha256:2ce8df3abf3e9b76e9c0cf5863da41f1ab3f89b20ad14b988806ab89e7bf2cd5   ebc9c9e5ccbd   5 weeks ago   43.1MB\n",
+    "stderr": "",
+    "success": true
+  },
+  "skopeo_inspect": {
+    "cmd": "skopeo inspect docker://am1n3e/webarena-verified-shopping@sha256:3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb",
+    "returncode": 0,
+    "stdout": "{\n    \"Name\": \"docker.io/am1n3e/webarena-verified-shopping\",\n    \"Digest\": \"sha256:3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb\",\n    \"RepoTags\": [\n        \"0.1.0\",\n        \"latest\"\n    ],\n    \"Created\": \"2026-02-02T19:22:53.392305819+01:00\",\n    \"DockerVersion\": \"\",\n    \"Labels\": null,\n    \"Architecture\": \"amd64\",\n    \"Os\": \"linux\",\n    \"Layers\": [\n        \"sha256:c65b6d59765c287e6f6d5baf71dc3c6ae9c812c9b3a8b4beb392625402b72ae8\",\n        \"sha256:e7aabb51d2b1ffd9874e37c82fb1291932395bb1b8505176affae5f9d5de9805\",\n        \"sha256:4f4fb700ef54461cfa02571ae0db9a0dc1e0cdb5577484a6d75e68dc38e8acc1\",\n        \"sha256:b055823521cbe3f1a91a9c437de6ab9237b6bddb4fe6c9e2ea619e1df929d8a4\",\n        \"sha256:eb7578cf2e0d0635fa529bcb26f6512abbb45b1838e39aa4a23b3d4afc020f5a\",\n        \"sha256:673a2d1870a6353c16f4f19a243b5c77d0793168036ad2757d92ad6a9500a4ef\",\n        \"sha256:11937473430db8672b46a19359c3cd08639271782449876e568ee5d6c00f4acd\",\n        \"sha256:de55a3f5673d6a39d5a36000ed28f6dd93e79c58c9aa419b5fa764ecbb3c6e59\"\n    ],\n    \"LayersData\": [\n        {\n            \"MIMEType\": \"application/vnd.docker.image.rootfs.diff.tar.gzip\",\n            \"Digest\": \"sha256:c65b6d59765c287e6f6d5baf71dc3c6ae9c812c9b3a8b4beb392625402b72ae8\",\n            \"Size\": 4843404242,\n            \"Annotations\": null\n        },\n        {\n            \"MIMEType\": \"application/vnd.docker.image.rootfs.diff.tar.gzip\",\n            \"Digest\": \"sha256:e7aabb51d2b1ffd9874e37c82fb1291932395bb1b8505176affae5f9d5de9805\",\n            \"Size\": 577890649,\n            \"Annotations\": null\n        },\n        {\n            \"MIMEType\": \"application/vnd.docker.image.rootfs.diff.tar.gzip\",\n            \"Digest\": \"sha256:4f4fb700ef54461cfa02571ae0db9a0dc1e0cdb5577484a6d75e68dc38e8acc1\",\n            \"Size\": 32,\n            \"Annotations\": null\n        },\n        {\n            \"MIMEType\": \"application/vnd.docker.image.rootfs.diff.tar.gzip\",\n            \"Digest\": \"sha256:b055823521cbe3f1a91a9c437de6ab9237b6bddb4fe6c9e2ea619e1df929d8a4\",\n            \"Size\": 25119,\n            \"Annotations\": null\n        },\n        {\n            \"MIMEType\": \"application/vnd.docker.image.rootfs.diff.tar.gzip\",\n            \"Digest\": \"sha256:eb7578cf2e0d0635fa529bcb26f6512abbb45b1838e39aa4a23b3d4afc020f5a\",\n            \"Size\": 328,\n            \"Annotations\": null\n        },\n        {\n            \"MIMEType\": \"application/vnd.docker.image.rootfs.diff.tar.gzip\",\n            \"Digest\": \"sha256:673a2d1870a6353c16f4f19a243b5c77d0793168036ad2757d92ad6a9500a4ef\",\n            \"Size\": 369,\n            \"Annotations\": null\n        },\n        {\n            \"MIMEType\": \"application/vnd.docker.image.rootfs.diff.tar.gzip\",\n            \"Digest\": \"sha256:11937473430db8672b46a19359c3cd08639271782449876e568ee5d6c00f4acd\",\n            \"Size\": 366,\n            \"Annotations\": null\n        },\n        {\n            \"MIMEType\": \"application/vnd.docker.image.rootfs.diff.tar.gzip\",\n            \"Digest\": \"sha256:de55a3f5673d6a39d5a36000ed28f6dd93e79c58c9aa419b5fa764ecbb3c6e59\",\n            \"Size\": 708,\n            \"Annotations\": null\n        }\n    ],\n    \"Env\": [\n        \"BUILD_BASE_URL=http://localhost:65365/\",\n        \"BUILD_TIMEOUT=300\",\n        \"BUILD_DRY_RUN=false\",\n        \"BUILD_ENV_CTRL_SRC=/build-env-ctrl\",\n        \"WA_ENV_CTRL_ROOT=/opt\",\n        \"WA_ENV_CTRL_TYPE=shopping\",\n        \"PATH=/usr/share/java/elasticsearch/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin\",\n        \"PHPIZE_DEPS=autoconf \\t\\tdpkg-dev dpkg \\t\\tfile \\t\\tg++ \\t\\tgcc \\t\\tlibc-dev \\t\\tmake \\t\\tpkgconf \\t\\tre2c\",\n        \"PHP_INI_DIR=/usr/local/etc/php\",\n        \"PHP_CFLAGS=-fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64\",\n        \"PHP_CPPFLAGS=-fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64\",\n        \"PHP_LDFLAGS=-Wl,-O1 -pie\",\n        \"GPG_KEYS=528995BFEDFBA7191D46839EF9BA0ADA31CBD89E 39B641343D8C104B2B146DC3F9C39DC0B9698544 F1F692238FBC1666E5A5CCD4199F9DFEF6FFBAFD\",",
+    "stderr": "",
+    "success": true
+  },
+  "pip_list": {
+    "cmd": "/opt/hostedtoolcache/Python/3.12.14/x64/bin/python3 -m pip list",
+    "returncode": 0,
+    "output_preview": "Package Version\n------- -------\npip     26.2.1\n",
+    "sha256": "bc751d3e417bb9ab202566f411a75268ac7f4ce2212283e8becab471aa0cebd0",
+    "stdout_len": 47
+  },
+  "pip_freeze": {
+    "cmd": "/opt/hostedtoolcache/Python/3.12.14/x64/bin/python3 -m pip freeze",
+    "returncode": 0,
+    "output_preview": "",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stdout_len": 0
+  },
+  "pip_version": {
+    "cmd": "/opt/hostedtoolcache/Python/3.12.14/x64/bin/python3 -m pip --version",
+    "returncode": 0,
+    "stdout": "pip 26.2.1 from /opt/hostedtoolcache/Python/3.12.14/x64/lib/python3.12/site-packages/pip (python 3.12)\n",
+    "stderr": "",
+    "success": true
+  },
+  "playwright_check": {
+    "available": false,
+    "version": null,
+    "error": "No module named 'playwright'"
+  },
+  "playwright_version_check": {
+    "cmd": "playwright --version",
+    "returncode": -1,
+    "stdout": "",
+    "stderr": "FileNotFoundError: [Errno 2] No such file or directory: 'playwright'",
+    "success": false
+  },
+  "pip_install_dry_browsergym": {
+    "cmd": "/opt/hostedtoolcache/Python/3.12.14/x64/bin/python3 -m pip install browsergym-core==0.14.3 --dry-run",
+    "returncode": 0,
+    "stdout": "Collecting browsergym-core==0.14.3\n  Using cached browsergym_core-0.14.3-py3-none-any.whl.metadata (1.2 kB)\nCollecting beautifulsoup4>=4.12 (from browsergym-core==0.14.3)\n  Using cached beautifulsoup4-4.15.0-py3-none-any.whl.metadata (3.8 kB)\nCollecting gymnasium>=0.27 (from browsergym-core==0.14.3)\n  Using cached gymnasium-1.3.0-py3-none-any.whl.metadata (10 kB)\nCollecting lxml<6.0.0,>=4.9 (from browsergym-core==0.14.3)\n  Using cached lxml-5.4.0-cp312-cp312-manylinux_2_28_x86_64.whl.metadata (3.5 kB)\nCollecting mcp>=1.6.0 (from mcp[cli]>=1.6.0->browsergym-core==0.14.3)\n  Using cached mcp-2.2.0-py3-none-any.whl.metadata (7.8 kB)\nCollecting numpy>=1.14 (from browsergym-core==0.14.3)\n  Using cached numpy-2.5.3-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl.metadata (6.6 kB)\nCollecting pillow>=10.1 (from browsergym-core==0.14.3)\n  Using cached pillow-12.3.0-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl.metadata (9.1 kB)\nCollecting playwright==1.44 (from browsergym-core==0.14.3)\n  Using cached playwright-1.44.0-py3-none-manylinux1_x86_64.whl.metadata (3.5 kB)\nCollecting pyparsing>=3 (from browsergym-core==0.14.3)\n  Using cached pyparsing-3.3.3-py3-none-any.whl.metadata (5.9 kB)\nCollecting greenlet==3.0.3 (from playwright==1.44->browsergym-core==0.14.3)\n  Using cached greenlet-3.0.3-cp312-cp312-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl.metadata (3.8 kB)\nCollecting pyee==11.1.0 (from playwright==1.44->browsergym-core==0.14.3)\n  Using cached pyee-11.1.0-py3-none-any.whl.metadata (2.8 kB)\nCollecting typing-extensions (from pyee==11.1.0->playwright==1.44->browsergym-core==0.14.3)\n  Using cached typing_extensions-4.16.0-py3-none-any.whl.metadata (3.3 kB)\nCollecting soupsieve>=1.6.1 (from beautifulsoup4>=4.12->browsergym-core==0.14.3)\n  Using cached soupsieve-2.9.2-py3-none-any.whl.metadata (4.6 kB)\nCollecting cloudpickle>=1.2.0 (from gymnasium>=0.27->browsergym-core==0.14.3)\n  Using cached cloudpickle-3.1.2-py3-none-any.whl.metadata (7.1 kB)\nCollecting farama-notifications>=0.0.1 (from gymnasium>=0.27->browsergym-core==0.14.3)\n  Using cached farama_notifications-0.0.6-py3-none-any.whl.metadata (729 bytes)\nCollecting anyio>=4.9 (from mcp>=1.6.0->mcp[cli]>=1.6.0->browsergym-core==0.14.3)\n  Using cached anyio-4.15.1-py3-none-any.whl.metadata (4.7 kB)\nCollecting httpx2>=2.5.0 (from mcp>=1.6.0->mcp[cli]>=1.6.0->browsergym-core==0.14.3)\n  Using cached httpx2-2.13.1-py3-none-any.whl.metadata (9.8 kB)\nCollecting jsonschema>=4.20.0 (from mcp>=1.6.0->mcp[cli]>=1.6.0->browsergym-core==0.14.3)\n  Using cached jsonschema-4.26.0-py3-none-any.whl.metadata (7.6 kB)\nCollecting mcp-types==2.2.0 (from mcp>=1.6.0->mcp[cli]>=1.6.0->browsergym-core==0.14.3)\n  Using cached mcp_types-2.2.0-py3-none-any.whl.metadata (1.9 kB)\nCollecting opentelemetry-api>=1.28.0 (from mcp>=1.6.0->mcp[cli]>=1.6.0->browsergym-core==0.14.3)\n  Using cached opentelemetry_api-1.44.0-py3-none-any.whl.metadata (1.4 kB)\nCollecting pydantic>=2.12.0 (from mcp>=1.6.0->mcp[cli]>=1.6.0->browsergym-core==0.14.3)\n  Downloading pydantic-2.13.5-py3-none-any.whl.metadata (110 kB)\nCollecting pyjwt>=2.10.1 (from pyjwt[crypto]>=2.10.1->mcp>=1.6.0->mcp[cli]>=1.6.0->browsergym-core==0.14.3)\n  Downloading pyjwt-2.15.0-py3-none-any.whl.metadata (3.5 kB)\nCollecting python-multipart>=0.0.9 (from mcp>=1.6.0->mcp[cli]>=1.6.0->browsergym-core==0.14.3)\n  Downloading python_multipart-0.0.32-py3-none-any.whl.metadata (2.1 kB)\nCollecting sse-starlette>=3.0.0 (from mcp>=1.6.0->mcp[cli]>=1.6.0->browsergym-core==0.14.3)\n  Downloading sse_starlette-3.4.11-py3-none-any.whl.metadata (15 kB)\nCollecting starlette>=0.27 (from mcp>=1.6.0->mcp[cli]>=1.6.0->browsergym-core==0.14.3)\n  Downloading starlette-1.7.0-py3-none-any.whl.metadata (6.6 kB)\nCollecting typing-inspection>=0.4.1 (from mcp>=1.6.0->mcp[cli]>=1.6.0->browsergym-core==0.14.3)\n  Downloading typing_inspection-0.4.4-py3-none-any.whl.metadata (2.6 kB)\nCollecting uvicorn>=0.31.1 (from mcp>=1.6.0->mcp[cli]>=1.6.0->browsergym-core==0.14",
+    "stderr": "",
+    "success": true
+  },
+  "pip_install_dry_playwright": {
+    "cmd": "/opt/hostedtoolcache/Python/3.12.14/x64/bin/python3 -m pip install playwright==1.63.0 --dry-run",
+    "returncode": 0,
+    "stdout": "Collecting playwright==1.63.0\n  Using cached playwright-1.63.0-py3-none-manylinux1_x86_64.whl.metadata (3.3 kB)\nCollecting pyee<14,>=13 (from playwright==1.63.0)\n  Using cached pyee-13.0.1-py3-none-any.whl.metadata (3.0 kB)\nCollecting greenlet<4.0.0,>=3.1.1 (from playwright==1.63.0)\n  Using cached greenlet-3.5.6-cp312-cp312-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl.metadata (3.8 kB)\nCollecting typing-extensions (from pyee<14,>=13->playwright==1.63.0)\n  Using cached typing_extensions-4.16.0-py3-none-any.whl.metadata (3.3 kB)\nWould install greenlet-3.5.6 playwright-1.63.0 pyee-13.0.1 typing_extensions-4.16.0\n",
+    "stderr": "",
+    "success": true
+  },
+  "pip_install_dry_agentlab": {
+    "cmd": "/opt/hostedtoolcache/Python/3.12.14/x64/bin/python3 -m pip install agentlab==0.4.2 --dry-run",
+    "returncode": -1,
+    "stdout": "",
+    "stderr": "TimeoutExpired: Command '['/opt/hostedtoolcache/Python/3.12.14/x64/bin/python3', '-m', 'pip', 'install', 'agentlab==0.4.2', '--dry-run']' timed out after 15 seconds",
+    "success": false
+  },
+  "browsergym_checks": {
+    "browsergym": {
+      "available": false,
+      "version": null,
+      "error": "No module named 'browsergym_core'"
+    },
+    "browsergym_core": {
+      "available": false,
+      "version": null,
+      "error": "No module named 'browsergym'"
+    }
+  },
+  "agentlab_check": {
+    "available": false,
+    "version": null,
+    "error": "No module named 'agentlab'"
+  },
+  "webgym_check": {
+    "available": false,
+    "version": null,
+    "error": "No module named 'webgym'"
+  },
+  "webgym_download": {
+    "attempts": [
+      {
+        "attempt": 1,
+        "url": "https://huggingface.co/datasets/WebGym/WebGym/resolve/main/manifest.json",
+        "status": 401,
+        "error": "HTTPError: HTTP Error 401: Unauthorized",
+        "sha256": null,
+        "bytes": 0
+      },
+      {
+        "attempt": 2,
+        "url": "https://raw.githubusercontent.com/ServiceNow/WebGym/main/data/manifest.json",
+        "status": 404,
+        "error": "HTTPError: HTTP Error 404: Not Found",
+        "sha256": null,
+        "bytes": 0
+      }
+    ],
+    "manifest_sha256": null,
+    "manifest_preview": null
+  },
+  "tiktoken_check": {
+    "available": false,
+    "version": null,
+    "error": "No module named 'tiktoken'"
+  },
+  "grammar_recomputed": {
+    "path": "research/intel/grammar_fulltree_358885.py",
+    "sha256": "f2b5e3bb0fe5cab452f24d3d1ed18205813ae207de579870b1a16f5f156d542a",
+    "dynamic_token_regexes": [
+      "csrf[_-]?token",
+      "session[_-]?id",
+      "_token",
+      "timestamp",
+      "nonce",
+      "csrf value",
+      "sessionId",
+      "\\b\\d{13}\\b",
+      "\\b[a-f0-9]{32,}\\b"
+    ]
+  }
+}

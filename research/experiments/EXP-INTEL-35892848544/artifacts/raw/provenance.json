@@ -1,0 +1,94 @@
+{
+  "experiment_id": "EXP-INTEL-35892848544",
+  "docker_reachable": false,
+  "docker_retry_count": 3,
+  "docker_url": "http://localhost:7770",
+  "docker_last_error": "URLError: <urlopen error [Errno 111] Connection refused>",
+  "docker_image_full": "am1n3e/webarena-verified-shopping@sha256:3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb",
+  "docker_digest_full": "sha256:3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb",
+  "docker_digest_truncated": "am1n3e/webarena-verified-shopping@sha256:3e8cb9b945",
+  "registry_resolution": {
+    "attempts": [
+      {
+        "attempt": 1,
+        "url": "https://hub.docker.com/v2/repositories/am1n3e/webarena-verified-shopping/tags?page_size=5",
+        "status": 200,
+        "error": null,
+        "resolved_digest": "sha256:3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb",
+        "response_preview": "{\"count\":2,\"next\":null,\"previous\":null,\"results\":[{\"creator\":9806697,\"id\":1062210625,\"images\":[{\"architecture\":\"amd64\",\"features\":\"\",\"variant\":null,\"digest\":\"sha256:3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb\",\"os\":\"linux\",\"os_features\":\"\",\"os_version\":null,\"size\":5421321813,\"status\":\"active\",\"last_pulled\":\"2026-09-23T16:43:43.123310651Z\",\"last_pushed\":\"2026-02-02T18:23:14.63464585Z\"}],\"last_updated\":\"2026-02-02T18:23:19.810286Z\",\"last_updater\":9806697,\"last_updater_username\":\"am1n3e\",\"name\":\"latest\",\"repository\":29932355,\"full_size\":5421321813,\"v2\":true,\"tag_status\":\"active\",\"tag_last_pulled\":\"2026-09-23T16:43:43.123310651Z\",\"tag_last_pushed\":\"2026-02-02T18:23:19.810286Z\",\"media_type\":\"application/vnd.docker.container.image.v1+json\",\"content_type\":\"image\",\"digest\":\"sha256:3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb\"},{\"creator\":9806697,\"id\":1062210546,\"images\":[{\"architecture\":\"amd64\",\"features\":\"\",\"variant\":null,\"digest\":\"sha256:3e8cb9b945ea9"
+      }
+    ],
+    "full_digest": "sha256:3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb",
+    "api_url": "https://hub.docker.com/v2/repositories/am1n3e/webarena-verified-shopping/tags?page_size=5",
+    "truncated_digest": "sha256:3e8cb9b945",
+    "is_valid_64": true
+  },
+  "docker_pull_full": {
+    "cmd": "docker pull am1n3e/webarena-verified-shopping@sha256:3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb",
+    "returncode": -1,
+    "stdout": "",
+    "stderr": "TimeoutExpired: Command '['docker', 'pull', 'am1n3e/webarena-verified-shopping@sha256:3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb']' timed out after 90 seconds",
+    "success": false
+  },
+  "docker_run": {
+    "cmd": "docker run -d -p 7770:7770 am1n3e/webarena-verified-shopping@sha256:3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb",
+    "returncode": -1,
+    "stdout": "",
+    "stderr": "TimeoutExpired: Command '['docker', 'run', '-d', '-p', '7770:7770', 'am1n3e/webarena-verified-shopping@sha256:3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb']' timed out after 15 seconds",
+    "success": false
+  },
+  "playwright_available": false,
+  "playwright_version": null,
+  "playwright_installed": false,
+  "playwright_pinned": "1.63.0",
+  "browsergym_available": false,
+  "browsergym_version": null,
+  "browsergym_pinned": "0.14.3",
+  "agentlab_available": false,
+  "agentlab_version": null,
+  "agentlab_pinned": "0.4.2",
+  "webgym_available": false,
+  "webgym_version": null,
+  "webgym_download_attempts": [
+    {
+      "attempt": 1,
+      "url": "https://huggingface.co/datasets/WebGym/WebGym/resolve/main/manifest.json",
+      "status": 401,
+      "error": "HTTPError: HTTP Error 401: Unauthorized",
+      "sha256": null,
+      "bytes": 0
+    },
+    {
+      "attempt": 2,
+      "url": "https://raw.githubusercontent.com/ServiceNow/WebGym/main/data/manifest.json",
+      "status": 404,
+      "error": "HTTPError: HTTP Error 404: Not Found",
+      "sha256": null,
+      "bytes": 0
+    }
+  ],
+  "webgym_manifest_sha256": null,
+  "tiktoken_available": false,
+  "tiktoken_version": null,
+  "viewport": {
+    "width": 1280,
+    "height": 720
+  },
+  "seed": 35725763380,
+  "pip_list_sha256": "bc751d3e417bb9ab202566f411a75268ac7f4ce2212283e8becab471aa0cebd0",
+  "pip_freeze_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "grammar_code_hash": "f2b5e3bb0fe5cab452f24d3d1ed18205813ae207de579870b1a16f5f156d542a",
+  "grammar_source": "research/intel/grammar_fulltree_358885.py",
+  "dynamic_token_regexes": [
+    "csrf[_-]?token",
+    "session[_-]?id",
+    "_token",
+    "timestamp",
+    "nonce",
+    "csrf value",
+    "sessionId",
+    "\\b\\d{13}\\b",
+    "\\b[a-f0-9]{32,}\\b"
+  ],
+  "sampled_families_derivation": "random.Random(35725763380).sample(sorted(families_ge3),10) = [191, 180, 162, 197, 153, 213, 163, 137, 136, 222]"
+}
