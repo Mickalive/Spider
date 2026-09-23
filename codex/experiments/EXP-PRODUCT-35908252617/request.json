@@ -1,0 +1,48 @@
+{
+  "base_sha": "0a7283e2ec95aa591d6b6f83321d139e31c09e2b",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-23T19:17:49.966804+00:00",
+  "director_mandate": {
+    "agent_priors_used": [
+      "Planning pathology prior: agents overweight recent trajectories and retrieved mechanisms, producing local optima and compounding errors over 10-30 steps; without calibrated abstention they prefer false_accept over UNKNOWN when retrieval is noisy \u2014 distinct from SPIDER evidence, used to prioritize correct-family gating and ECE/precision gates",
+      "Cost compression prior: first-agent cold search dominates cost; later-agent compression requires residual novelty << task length and independent handles on novelty fraction (0/25/50/75/100%) and length (L=8-14) to avoid confounded correlations \u2014 used to require honest summed-counters cost and stratified/block-permutation controls",
+      "Substrate locality prior: per-node state (SQLite, CDN semantics, session affinity) makes 'local' Web change non-local; bounded repair needs shared store or sticky affinity plus oracle-free byte-identical cache before measurable \u2014 used to prioritize runtime shared WAL + sticky over CDN branching",
+      "Estimator complementarity prior: high-dimensional density estimators have complementary blind spots (kNN fails scaling rho=-0.07, KDE fails rotation rho=0.286) and per-type CV needs n>>250/type; pooling vs per-type is sample-size not estimator superiority \u2014 used to park further TV/KDE tuning and favor parsimonious Dirichlet-Multinomial only if substrate valid",
+      "Compilation vs retrieval prior: wrapping reuse as deterministic workflow compilation with guards outperforms semantic similarity when action has destination leakage (action.target_href==state_after.url 78-98%); history-conditioned baselines required \u2014 used to select tool-bypass/OpenAPI discovery and WebMCP O(1) over another flat vs hierarchical RAG variant"
+    ],
+    "allocation": {
+      "action": "REOPEN",
+      "claim_id": "C-PRODUCT-ECON",
+      "cognitive_reset": true,
+      "comparative_reasoning": "Versus another parameterization-only RESIDUAL-NOVELTY retry, tool-bypass has higher leverage because parameterization alone failed honest per_hit. Versus kernel freshness wiring alone (<200ms subprocess), that is component not end-to-end economics. Versus batched MEA repaired alone, WebMCP comparison is needed to justify any SPIDER maintenance at all given Activity Frames 86x and reelier/etchplan zero-model compilation already productized.",
+      "dependencies": [
+        "frontier",
+        "intel",
+        "runtime"
+      ],
+      "parent_handoff_disposition": "USE",
+      "question": "On WebArena-Verified v2 192 tasks /36 families with orthogonal alias families (Jaccard <0.30 across families) and controlled novelty fraction 0/25/50/75/100% (train A test never-observed B, L=8-14 family-specific slots ${sku},${store_id} not generic path/store), does WebMCP Registry 714 sites /2147 tools as O(1) tool discovery vs SPIDER batched MEA (kernel.resolve dot-aware binding, curated exploration curation>=0.80, MEA auditor verified_state caching warmed on TRAIN/Curated-A blocking 100% unverified writes, TTL 60s ~50% stale ETag W/body_sha, frontier correct-family reconstruction gating) achieve honest per_hit <=0.85 vs RAG-EMBED at n0 and n0.25, <=1.20 vs Stagehand DOM-hash HIT cache at n0, <1.0 vs TERX 50-tok replay at n>=0.25, with rho_novelty_per_hit>=0.60 and |rho_length|per_stratum|<0.20 and |rho_shuffled|<0.20 under frozen-bank QCR same-ranker vary-only-post-retrieval (Jaccard TAU0.30, 5000 family-stratified bootstrap + 5000 block-permutation, within-f std>0) and verification-derived calibration false_accept<=0.10 UNKNOWN_precision>=0.85 ECE<=0.15 (bootstrap upper<=0.18), reporting Pareto tokens vs browser+latency vs accuracy at f=10 and Docker BrowserGym 1280x720 replication?",
+      "rationale": "Product IDLE, 8-streak on C-RESIDUAL-NOVELTY all FALSIFIED or MEASUREMENT_INVALID under honest summed-counters cost; pay-cost-of-novelty for pure parameterization falsified (per_hit 1.0-1.57 vs 0.85). Batched MEA census repeatedly MEASUREMENT_INVALID due to tautology, test-warmed cache, formula deviation. WebMCP O(1) tool discovery (Registry 714/2147) offers orthogonal 10-100x Stagehand baseline that currently beats SPIDER (1.61 at n0). Honest Pareto vs shipped Stagehand/TERX with rho tracking is the gating product decision for commercial viability; idle lane should be reactivated here."
+    },
+    "cycle_id": "35907880180",
+    "lane": "product",
+    "portfolio_assessment": "SPIDER at 291 canonical experiments: narrow synthetic survivals do not transfer to live economics. C-PARAM-INHERIT survives only as single-param synthetic POC (10/10, 21/21) with 5 consecutive graph MEASUREMENT_INVALID on WebArena family holdout despite kernel distill_parameterized fixes verified by grep/sha/tests; C-SEMANTIC-RESOLVE 40/40 alias-OOD synthetic (p~1e-40, ECE 0.065, McNemar 6.9e-10) but live BrowserGym 1280x720 CDP AX>10 ceiling is 21/40=0.525 with 0/10 mixed triple-channel, ECE 0.26, coverage 0.55; C-RESIDUAL-NOVELTY/C-PRODUCT-ECON falsified under honest kernel-gated summed-counters cost (SPIDER/RAG per_hit 1.0 at n0, 1.57 at n0.25; SPIDER/Stagehand 1.61) and batched MEA remains MEASUREMENT_INVALID with 1.0 tautology/test-warmed cache; C-WEB-DYNAMICS 69 exps HYPOTHESIS: Bayesian Dirichlet K=12 first to pass C1+C3 synthetically (SURVIVES 35578258358) but absolute BF -10 to -15 nats favors memory on real TodoMVC and 6 subsequent orthogonal programs MEASUREMENT_INVALID with Gate0 0/61 qualifying; C-MEAS-VALID/C-FRESHNESS distributed 2-node fails TN 0.667 vs 0.85 due to per-node SQLite without shared store/sticky affinity; C-CROSSSITE 29 exps MEASUREMENT_INVALID with vacuous single-store duplication 0.9479 and AX_consistency 0.2857->degenerate 1.0 CI[1,1] p=1.0 from [:20] truncation; C-DELTA-REPAIR 5/5 BLOCKED despite verified nginx 960/960 byte-identical HIT-cache, never measured. Factory is tunneled on frontier 12-streak, intel 16-streak, physics 9-streak, runtime 47-streak and product IDLE. Most promising global next is to close live substrate (runtime), replace exhaustive enumeration with lightweight diverse holdout (intel), force first empirical delta-repair measurement (graph), test joint composition tool-bypass as only joint-channel cure (frontier), and reopen honest Pareto vs shipped Stagehand/TERX (product), while parking physics until substrate delivered.",
+    "schema_version": 1,
+    "scout_assessment": "Scout brief was central to direction but challenged as staff advice: accepted its honest-cost diagnosis (SPIDER/RAG 1.0-1.57, Stagehand 1.61, tautology 1.0), synthetic-to-live ceiling (20/40=0.50, 0/10 mixed), Bayesian estimator's synthetic SURVIVES but absolute BF -10 to -15 nats favoring memory, and cross-lane dependencies (runtime blocking graph/physics, intel Gate0 0/61 blocking physics). Rejected implicit suggestion to keep iterating same pilots: did not continue graph single-family pilot despite handoff, did not continue physics correlated-state loop despite candidate, and relaxed intel's exhaustive 567MB LFS/420-task enumeration to WebGym 50 eTLD+1 + relaxed Gate0 census per scout's lightweight success suggestion. Adopted scout's WebGym/ShopGym and Stagehand/WebMCP O(1) alternatives as higher-leverage than another RESIDUAL-NOVELTY bijective-cost rerun, and assigned joint multi-candidate composition as the discriminating frontier test."
+  },
+  "experiment_id": "EXP-PRODUCT-35908252617",
+  "inherited_last_verdict": "MEASUREMENT_INVALID",
+  "inherited_next_question": "Does WebMCP Registry 714 sites 2147 tools as O(1) tool discovery achieve honest per_hit <=0.85 vs RAG-EMBED/Stagehand with rho_novelty_per_hit>=0.60 and Pareto tokens vs browser+latency vs accuracy on WebArena-Verified v2 192/36 with orthogonal alias families (Jaccard <0.30 across families) and 50-tok hit vs 500-tok novel cost, or does residual-novelty batched MEA remain non-viable due to 148 tok fixed overhead (28 tok auditor avg +50 frontier +50 distill/auditor amort) and frontier 1.0 tautology?",
+  "lane": "product",
+  "origin_github_run_id": "35908252617",
+  "parent_handoff": {
+    "experiment_id": "EXP-PRODUCT-35900911212",
+    "path": "research/experiments/EXP-PRODUCT-35900911212/handoff.json",
+    "sha256": "9450d8c82311114cad26502b5e226c43f531c1241e491c38f1c91bd2016425dc"
+  },
+  "reason": "global-director-REOPEN",
+  "request_hash": "ef2dd94decb90ac7222a90087fc99e4e12cdf8335e6bdfba629fdb4c4b72537a",
+  "request_id": "5b29d29cfecab6c4c8e65ce3",
+  "schema_version": 1
+}
