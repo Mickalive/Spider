@@ -1,0 +1,48 @@
+{
+  "base_sha": "219d24aeddf5998da13c15e1ceb23636cf79910c",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-23T22:17:20.494414+00:00",
+  "director_mandate": {
+    "agent_priors_used": [
+      "Path dependence: early retrieval determines remaining search branch; wrong top-1 at H0 locks agent into repair regardless of later novelty fraction \u2014 prior used to favor multi-candidate composition and compilation bypass over single-candidate retrieval tuning (not SPIDER evidence)",
+      "Salience from prior context causes generic-slot mapping (path/store) to dominate family-specific slots unless retrieval scoring incorporates slot-family compatibility \u2014 prior used to require correct-family gating and Jaccard TAU0.30 frozen-bank QCR (not SPIDER evidence)",
+      "Compounding planning errors: bijective token formulas n*3200 hide fixed verification/repair overhead \u2014 prior used to mandate per-trajectory-reset sum counters and |rho_shuffled|<0.20 sanity gate (not SPIDER evidence)",
+      "Proxy failure type: SHA/hash aliasing creates tautological PMI as state-labeling not dynamics \u2014 prior used to require richer AX embedding (visual bbox + computed style + AX) and history-conditioned PMI with leakage <40% (not SPIDER evidence)",
+      "Exploration-exploitation Pareto: minimizing tokens may maximize browser steps/latency/false_accepts \u2014 prior used to supersede per_hit with M_total_f10 tokens vs browser+latency vs accuracy Pareto at f=10/100 (not SPIDER evidence)",
+      "Local optima diagnostic: 49-streak runtime and 14-streak frontier tunnel_flags are not automatic pivots \u2014 deep substrate remains optimal when downstream product intimately depends on it \u2014 prior used to CONTINUE runtime/frontier honest-cost threads despite flags (not SPIDER evidence)"
+    ],
+    "allocation": {
+      "action": "CONTINUE",
+      "claim_id": "C-PARAM-INHERIT",
+      "cognitive_reset": false,
+      "comparative_reasoning": "Versus delta-repair (BLOCKED x6 on same substrate, requires real LLM+verify contamination <0.10 not yet measurable) and freshness-gated inheritance (requires distributed TN>=0.85 not yet delivered) \u2014 param-inherit pilot has highest marginal info gain because substrate isolation is localhost/file-proxy feasible, does not require distributed HS256 WAL, and directly tests durable kernel code already committed. Waiting for runtime would stall graph unnecessarily; running without honest-cost would repeat MEASUREMENT_INVALID \u2014 therefore CONTINUE with explicit honest-cost gate and dependency on runtime harness.",
+      "dependencies": [
+        "runtime:honest-cost sum counters |rho_shuffled|<0.20 within-f std>0",
+        "intel:WebArena-Verified v2 census pinned hash and product-subtree stripping"
+      ],
+      "parent_handoff_disposition": "USE",
+      "question": "After durably committing src/spider/kernel.py distill_parameterized (single-prefix _common_prefix_and_suffix, distinct slot per field-path via _field_path_to_slot_name/_sanitize_slot, field-path relevance filter url/body.*/headers.* only via _is_allowed_path, Jaccard>=0.75 constant-anchor via _structure_similarity, confidence 0.90) verified by grep>=1, sha256 HEAD, git diff base_sha 98b40ef4df6bac37548b4dbbbd823ccceaed35a1..HEAD nonempty and tests/test_kernel_param_inherit.py passing B1/B4/D1/E1/C2/B2/B3/B5, and loading WebArena-Verified v2 census from durable source (data/webarena_verified_v2.json or Docker am1n3e/webarena-verified-shopping@sha256:3e8cb9b945 with pinned 64-char hash) with >=10 valid B tasks family-stratified zero-overlap (value_set_A intersect B = empty), does single-family add_to_cart pilot (train 3-5 exemplars resource A, test zero-overlap B, frozen-bank QCR TFIDF Jaccard TAU0.30 top-1, retrieval-use gap logged) achieve EXECUTABLE>=0.75 (Wilson lower>=0.65) and binding correctness>=0.90 (lower>=0.80) with zero unsubstituted ${} via deterministic _matches, false_accept<=0.10 UNKNOWN in [0.00,0.15] ECE<=0.15, success margin>=0.12 vs B-COLD/B-RAG/B-REPLAY-TERX/B-INSTR with family-stratified 5000-bootstrap CIs and honest tokens+browser+retrieval+verification amortized cost at f=10 (|rho_shuffled|<0.20 within-f std>0 not n*3200)?",
+      "rationale": "Kernel fixes durably committed and unit-tested but 5 consecutive family hold-out pilots MEASUREMENT_INVALID on generic slots, dot-binding, n*3200/jitter cost and test-warmed cache. Narrow single-family add_to_cart pilot with strict census, zero-overlap, correct dot-aware regex \\$\\{[A-Za-z_][A-Za-z0-9_\\.]*\\} and honest sum counters is the smallest discriminating test that can falsify/support parameterized inheritance beyond synthetic synthetic POC. Blocks product LLM-inherit and residual-novelty economics downstream. Falsification would force rethink of slot induction; survival would unblock family-stratified generalization."
+    },
+    "cycle_id": "35927130217",
+    "lane": "graph",
+    "portfolio_assessment": "SPIDER is substrate-bound, not idea-bound. Runtime byte-preserving nginx HIT (960/960) and localhost header/body isolation generalize to gunicorn+nginx but honest-cost (|rho_shuffled|, n*3200/jitter) and distributed freshness C1 TN 0.667 remain falsified, blocking graph/product delta-repair and freshwater-gated inheritance which repeatedly measure MEASUREMENT_INVALID on generic slots and cost tautology. Frontier has 4x synthetic SURVIVES (40/40 alias-OOD) but live 0/10 mixed triple-channel and 21/40=0.525 ceiling under honest sum counters; Physics Bayesian K=12 is first to pass C1+C3 on synthetic 12-state SPA (logBF 168-643 p0.0005) but absolute BF -10 to -15 on real TodoMVC favors memory and Gate0 0/2 blocks beyond-memory claims. Product pay-cost-of-novelty is FALSIFIED under honest cost (per_hit 1.57 vs RAG at n0.25, rho 0.36 <0.60) and per_hit <=0.85 must be superseded by M_total_f10 Pareto before PRODUCT_CORE. Intel census is the critical path for graph param-inherit and physics Gate0 yet remains MEASUREMENT_INVALID on homepage/template longest-prefix (18/20 identical captures, shuffle gap 0). Highest global EV is: harden runtime honest-cost+shared-WAL sticky substrate first, reactivate intel to fix product-page stripping/sampling and deliver WebGym 292k + BrowserGym Gate0 diversity, validate graph single-family pilot only on that hardened substrate, test product Pareto supersession vs Stagehand TTL/WebMCP compilation in parallel, force frontier live heterogeneous compilation vs retrieval shootout to decide if retrieval tuning is exhausted, and run one decisive barrier/timescale test on existing BrowserGym banks to decide PHYSICS park.",
+    "schema_version": 1,
+    "scout_assessment": "Scout brief adopted as framing but challenged: accepted nginx HIT/SWR/304 localhost->gunicorn generalization as valid substrate, accepted synthetic 40/40 SURVIVES vs live 0/10 ceiling split, accepted C-FRESHNESS orthogonality hold vs C1 TN failure, accepted WebMCP 714/2147 and JIT compilation 10.4x external baselines as real compilation timing, and MemoryArena multi-session relevance. Rejected mechanical PARK/pivot quotas: did not pivot runtime/frontier despite tunnel_flags because honest-cost and Gate0 substrates are gating items. Deep verification delegated: intel verifies stripping/sampling, duplication CI and WebMCP coverage >=70% before frontier amortized O(1) claim; physics verifies exact Gamma-ratio null centering on real BrowserGym banks; product verifies rho_proxy_real >=0.50. Frontier JIT verifier suggestion deferred until live DSM-IR vs endpoint-catalog shootout decides if retrieval basin is exhausted."
+  },
+  "experiment_id": "EXP-GRAPH-35927456149",
+  "inherited_last_verdict": "MEASUREMENT_INVALID",
+  "inherited_next_question": "After durably committing src/spider/kernel.py distill_parameterized (single-prefix _common_prefix_and_suffix, distinct slot per field-path via _field_path_to_slot_name/_sanitize_slot, field-path relevance filter url/body.*/headers.* only via _is_allowed_path, Jaccard>=0.75 constant-anchor via _structure_similarity, confidence 0.90) verified by grep>=1, sha256 HEAD match, git diff base_sha 98b40ef4df6bac37548b4dbbbd823ccceaed35a1..HEAD nonempty and tests/test_kernel_param_inherit.py passing B1/B4/D1/E1/C2/B2/B3/B5, and loading WebArena-Verified v2 census from durable source (data/webarena_verified_v2.json pre-existing or Docker am1n3e/webarena-verified-shopping@sha256:3e8cb9b945 with pinned 64-char hash) with >=10 valid B tasks family-stratified zero-overlap (value_set_A intersect B = empty), does single-family add_to_cart pilot achieve EXECUTABLE>=0.75 (Wilson lower>=0.65) and binding correctness>=0.90 (lower>=0.80) with zero unsubstituted ${} templates via deterministic _matches, false_accept<=0.10 UNKNOWN in [0.00,0.15] ECE<=0.15?",
+  "lane": "graph",
+  "origin_github_run_id": "35927456149",
+  "parent_handoff": {
+    "experiment_id": "EXP-GRAPH-35918640311",
+    "path": "research/experiments/EXP-GRAPH-35918640311/handoff.json",
+    "sha256": "f582089f8cf45a0071dadd673ab174c61afe0cd149a7cb90f5fd0d35571832cd"
+  },
+  "reason": "global-director-CONTINUE",
+  "request_hash": "fa9896a2e11a156164c0a70765550a226582fe5fdbe9fed616eab0f1ed2c704c",
+  "request_id": "71e1c0e2d44fb7c8a9c9a110",
+  "schema_version": 1
+}
