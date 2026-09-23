@@ -1,0 +1,97 @@
+{
+  "experiment_id": "EXP-INTEL-35927482134",
+  "ax_consistency": {
+    "pair_scores": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "category_details": [
+      {
+        "category": "Kitchen Furniture",
+        "n_pages": 2,
+        "n_pairs": 1,
+        "mean_score": 0.0
+      },
+      {
+        "category": "Hair Loss Products",
+        "n_pages": 2,
+        "n_pairs": 1,
+        "mean_score": 0.0
+      },
+      {
+        "category": "DVD Players & Recorders",
+        "n_pages": 2,
+        "n_pairs": 1,
+        "mean_score": 0.0
+      },
+      {
+        "category": "Men's",
+        "n_pages": 2,
+        "n_pairs": 1,
+        "mean_score": 0.0
+      },
+      {
+        "category": "Snack Gifts",
+        "n_pages": 2,
+        "n_pairs": 1,
+        "mean_score": 0.0
+      },
+      {
+        "category": "Breakfast Foods",
+        "n_pages": 2,
+        "n_pairs": 1,
+        "mean_score": 0.0
+      },
+      {
+        "category": "Oral Pain Relief",
+        "n_pages": 2,
+        "n_pairs": 1,
+        "mean_score": 0.0
+      },
+      {
+        "category": "Automobile Accessories",
+        "n_pages": 2,
+        "n_pairs": 1,
+        "mean_score": 0.0
+      },
+      {
+        "category": "Accent Furniture",
+        "n_pages": 2,
+        "n_pairs": 1,
+        "mean_score": 0.0
+      },
+      {
+        "category": "Vehicle Electronics Accessories",
+        "n_pages": 2,
+        "n_pairs": 1,
+        "mean_score": 0.0
+      }
+    ],
+    "mean": 0.0,
+    "ci_lower": 0.0,
+    "ci_upper": 0.0,
+    "std": 0.0,
+    "variance_pop": 0.0,
+    "n_pairs": 10,
+    "n_categories": 10
+  },
+  "shuffle_null": {
+    "true_mean": 0.0,
+    "null_mean": 0.0,
+    "null_std": 0.0,
+    "null_p95": 0.0,
+    "p_value": 1.0,
+    "gap": 0.0
+  },
+  "truncated_mean": 1.0,
+  "grammar_hash": "74ab5a2b59e7a57beedb516999f1da0cb7f3bc5a055beac08d0d98949d6b8ec4",
+  "n_valid_captures": 21
+}

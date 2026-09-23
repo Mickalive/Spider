@@ -1,0 +1,29 @@
+{
+  "experiment_id": "EXP-INTEL-35927482134",
+  "stagehand_results": [
+    {
+      "stable_on_identical": false,
+      "hash_changed_on_mutation": true
+    },
+    {
+      "stable_on_identical": false,
+      "hash_changed_on_mutation": true
+    },
+    {
+      "stable_on_identical": false,
+      "hash_changed_on_mutation": true
+    },
+    {
+      "stable_on_identical": false,
+      "hash_changed_on_mutation": true
+    },
+    {
+      "stable_on_identical": false,
+      "hash_changed_on_mutation": true
+    }
+  ],
+  "hash_stable": 0.0,
+  "hash_changed": 1.0,
+  "grammar_hash": "74ab5a2b59e7a57beedb516999f1da0cb7f3bc5a055beac08d0d98949d6b8ec4",
+  "expanded_stripping": true
+}

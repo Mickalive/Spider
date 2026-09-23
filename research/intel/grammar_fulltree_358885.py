@@ -29,12 +29,24 @@ DYNAMIC_TOKEN_COMPILED = [re.compile(p, re.IGNORECASE) for p in DYNAMIC_TOKEN_RE
 SEMANTIC_ANCHORS = ["heading", "price", "add-to-cart", "add_to_cart", "main", "contentinfo", "product", "heading[", "button"]
 
 def strip_dynamic_tokens(html: str) -> str:
-    """Normalize outerHTML by stripping dynamic tokens before SHA256."""
+    """Normalize outerHTML by stripping dynamic tokens before SHA256.
+    Includes 9 base regexes plus expanded Magento form_key/uenc/store/session/timestamp/nonce HTML-attribute stripping.
+    """
     normalized = html
     for pat in DYNAMIC_TOKEN_COMPILED:
         normalized = pat.sub("__STRIPPED__", normalized)
-    # Also strip common Magento dynamic fragments
-    normalized = re.sub(r'form_key[^"]*', '__STRIPPED__', normalized)
+    # Also strip common Magento dynamic fragments (expanded per spec CRITICAL FIX)
+    # form_key, uenc, store, session, timestamp, nonce as HTML attributes
+    magento_patterns = [
+        r'form_key[^"]*',
+        r'uenc[^"]*',
+        r'store[^"]*',
+        r'session[^"]*',
+        r'timestamp[^"]*',
+        r'nonce[^"]*',
+    ]
+    for pat in magento_patterns:
+        normalized = re.sub(pat, '__STRIPPED__', normalized)
     return normalized
 
 def sha256_normalized_subtree(outer_html: str) -> str:
