@@ -1,0 +1,72 @@
+{
+  "experiment_id": "EXP-INTEL-35888540685",
+  "docker_reachable": false,
+  "docker_retry_count": 3,
+  "docker_url": "http://localhost:7770",
+  "docker_last_error": "URLError: <urlopen error [Errno 111] Connection refused>",
+  "docker_image": "am1n3e/webarena-verified-shopping@sha256:3e8cb9b945",
+  "docker_digest": "sha256:3e8cb9b945",
+  "docker_pull": {
+    "cmd": "docker pull am1n3e/webarena-verified-shopping@sha256:3e8cb9b945",
+    "returncode": 1,
+    "stdout": "",
+    "stderr": "invalid reference format\n",
+    "success": false
+  },
+  "docker_run": {
+    "cmd": "docker run -d -p 7770:7770 am1n3e/webarena-verified-shopping@sha256:3e8cb9b945",
+    "returncode": 125,
+    "stdout": "",
+    "stderr": "docker: invalid reference format\n\nRun 'docker run --help' for more information\n",
+    "success": false
+  },
+  "playwright_available": false,
+  "playwright_version": null,
+  "playwright_installed": false,
+  "browsergym_available": false,
+  "browsergym_version": null,
+  "webgym_available": false,
+  "webgym_version": null,
+  "webgym_download_attempts": [
+    {
+      "attempt": 1,
+      "url": "https://huggingface.co/datasets/WebGym/WebGym/resolve/main/manifest.json",
+      "status": 401,
+      "error": "HTTPError: HTTP Error 401: Unauthorized",
+      "sha256": null,
+      "bytes": 0
+    },
+    {
+      "attempt": 2,
+      "url": "https://raw.githubusercontent.com/ServiceNow/WebGym/main/data/manifest.json",
+      "status": 404,
+      "error": "HTTPError: HTTP Error 404: Not Found",
+      "sha256": null,
+      "bytes": 0
+    }
+  ],
+  "webgym_manifest_sha256": null,
+  "tiktoken_available": false,
+  "tiktoken_version": null,
+  "viewport": {
+    "width": 1280,
+    "height": 720
+  },
+  "seed": 35725763380,
+  "pip_list_sha256": "bc751d3e417bb9ab202566f411a75268ac7f4ce2212283e8becab471aa0cebd0",
+  "pip_freeze_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "grammar_code_hash": "f2b5e3bb0fe5cab452f24d3d1ed18205813ae207de579870b1a16f5f156d542a",
+  "grammar_source": "research/intel/grammar_fulltree_358885.py",
+  "dynamic_token_regexes": [
+    "csrf[_-]?token",
+    "session[_-]?id",
+    "_token",
+    "timestamp",
+    "nonce",
+    "csrf value",
+    "sessionId",
+    "\\b\\d{13}\\b",
+    "\\b[a-f0-9]{32,}\\b"
+  ],
+  "sampled_families_derivation": "random.Random(35725763380).sample(sorted([families_ge3_sorted]),10) = [191, 180, 162, 197, 153, 213, 163, 137, 136, 222]"
+}

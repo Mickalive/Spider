@@ -1,0 +1,136 @@
+{
+  "docker_reachable": {
+    "reachable": false,
+    "attempt": 3,
+    "error": "URLError: <urlopen error [Errno 111] Connection refused>"
+  },
+  "docker_pull": {
+    "cmd": "docker pull am1n3e/webarena-verified-shopping@sha256:3e8cb9b945",
+    "returncode": 1,
+    "stdout": "",
+    "stderr": "invalid reference format\n",
+    "success": false
+  },
+  "docker_pull_alt": {
+    "cmd": "docker pull am1n3e/webarena-verified-shopping",
+    "returncode": -1,
+    "stdout": "",
+    "stderr": "TimeoutExpired: Command '['docker', 'pull', 'am1n3e/webarena-verified-shopping']' timed out after 30 seconds",
+    "success": false
+  },
+  "docker_run": {
+    "cmd": "docker run -d -p 7770:7770 am1n3e/webarena-verified-shopping@sha256:3e8cb9b945",
+    "returncode": 125,
+    "stdout": "",
+    "stderr": "docker: invalid reference format\n\nRun 'docker run --help' for more information\n",
+    "success": false
+  },
+  "docker_ps": {
+    "cmd": "docker ps -a",
+    "returncode": 0,
+    "stdout": "CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES\n",
+    "stderr": "",
+    "success": true
+  },
+  "docker_images": {
+    "cmd": "docker images --digests",
+    "returncode": 0,
+    "stdout": "REPOSITORY                                   TAG       DIGEST                                                                    IMAGE ID       CREATED       SIZE\nghcr.io/github/gh-aw-firewall/agent          latest    sha256:f7df036c86575527b61f3f7df91c4412349a12b2a74988d929eafa2999230c98   bd7acdea5936   2 weeks ago   569MB\nghcr.io/github/gh-aw-firewall/api-proxy      latest    sha256:6f95e2234dd9bd6333a8ff28ccea7ecf0204acd4a09108723844dbd2bf6268c5   9d8f8fbebb48   2 weeks ago   231MB\nghcr.io/github/gh-aw-mcpg                    latest    sha256:85b940556a8faa4e1fdbef124bfd75f2c4ebd855a10b88a1c3b6f3e97f6f1a53   5f22df3c4a88   2 weeks ago   181MB\nghcr.io/dependabot/dependabot-updater-core   latest    sha256:2fba19978e4b0b2a9829597be4a15fb1fe19878b241e97a9b4d1317692940c45   5c1f9f1da87f   2 weeks ago   826MB\nghcr.io/github/github-mcp-server             latest    sha256:46cdbbd810faf6f7aed1745ea04057443f5cb9fcadc15c7308add18cf9a83e33   3e165e25be8d   2 weeks ago   46.8MB\nghcr.io/github/gh-aw-firewall/squid          latest    sha256:2ce8df3abf3e9b76e9c0cf5863da41f1ab3f89b20ad14b988806ab89e7bf2cd5   ebc9c9e5ccbd   5 weeks ago   43.1MB\n",
+    "stderr": "",
+    "success": true
+  },
+  "pip_list": {
+    "cmd": "/opt/hostedtoolcache/Python/3.12.14/x64/bin/python3 -m pip list",
+    "returncode": 0,
+    "output_preview": "Package Version\n------- -------\npip     26.2.1\n",
+    "sha256": "bc751d3e417bb9ab202566f411a75268ac7f4ce2212283e8becab471aa0cebd0",
+    "stdout_len": 47
+  },
+  "pip_freeze": {
+    "cmd": "/opt/hostedtoolcache/Python/3.12.14/x64/bin/python3 -m pip freeze",
+    "returncode": 0,
+    "output_preview": "",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stdout_len": 0
+  },
+  "pip_version": {
+    "cmd": "/opt/hostedtoolcache/Python/3.12.14/x64/bin/python3 -m pip --version",
+    "returncode": 0,
+    "stdout": "pip 26.2.1 from /opt/hostedtoolcache/Python/3.12.14/x64/lib/python3.12/site-packages/pip (python 3.12)\n",
+    "stderr": "",
+    "success": true
+  },
+  "playwright_check": {
+    "available": false,
+    "version": null,
+    "error": "No module named 'playwright'"
+  },
+  "playwright_version_check": {
+    "cmd": "playwright --version",
+    "returncode": -1,
+    "stdout": "",
+    "stderr": "FileNotFoundError: [Errno 2] No such file or directory: 'playwright'",
+    "success": false
+  },
+  "pip_install_dry": {
+    "cmd": "/opt/hostedtoolcache/Python/3.12.14/x64/bin/python3 -m pip install playwright==1.63.0 --dry-run",
+    "returncode": 0,
+    "stdout": "Collecting playwright==1.63.0\n  Using cached playwright-1.63.0-py3-none-manylinux1_x86_64.whl.metadata (3.3 kB)\nCollecting pyee<14,>=13 (from playwright==1.63.0)\n  Using cached pyee-13.0.1-py3-none-any.whl.metadata (3.0 kB)\nCollecting greenlet<4.0.0,>=3.1.1 (from playwright==1.63.0)\n  Using cached greenlet-3.5.6-cp312-cp312-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl.metadata (3.8 kB)\nCollecting typing-extensions (from pyee<14,>=13->playwright==1.63.0)\n  Using cached typing_extensions-4.16.0-py3-none-any.whl.metadata (3.3 kB)\nWould install greenlet-3.5.6 playwright-1.63.0 pyee-13.0.1 typing_extensions-4.16.0\n",
+    "stderr": "",
+    "success": true
+  },
+  "browsergym_checks": {
+    "browsergym": {
+      "available": false,
+      "version": null,
+      "error": "No module named 'browsergym_core'"
+    },
+    "browsergym_core": {
+      "available": false,
+      "version": null,
+      "error": "No module named 'browsergym'"
+    }
+  },
+  "webgym_check": {
+    "available": false,
+    "version": null,
+    "error": "No module named 'webgym'"
+  },
+  "webgym_download": {
+    "attempts": [
+      {
+        "attempt": 1,
+        "url": "https://huggingface.co/datasets/WebGym/WebGym/resolve/main/manifest.json",
+        "status": 401,
+        "error": "HTTPError: HTTP Error 401: Unauthorized",
+        "sha256": null,
+        "bytes": 0
+      },
+      {
+        "attempt": 2,
+        "url": "https://raw.githubusercontent.com/ServiceNow/WebGym/main/data/manifest.json",
+        "status": 404,
+        "error": "HTTPError: HTTP Error 404: Not Found",
+        "sha256": null,
+        "bytes": 0
+      }
+    ],
+    "manifest_sha256": null,
+    "manifest_preview": null
+  },
+  "grammar_recomputed": {
+    "path": "research/intel/grammar_fulltree_358885.py",
+    "sha256": "f2b5e3bb0fe5cab452f24d3d1ed18205813ae207de579870b1a16f5f156d542a",
+    "dynamic_token_regexes": [
+      "csrf[_-]?token",
+      "session[_-]?id",
+      "_token",
+      "timestamp",
+      "nonce",
+      "csrf value",
+      "sessionId",
+      "\\b\\d{13}\\b",
+      "\\b[a-f0-9]{32,}\\b"
+    ]
+  }
+}
