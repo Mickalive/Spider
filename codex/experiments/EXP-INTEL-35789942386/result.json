@@ -1,0 +1,162 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-35789942386",
+  "lane": "intel",
+  "status": "COMPLETE",
+  "outcome": "MIXED",
+  "metrics": {
+    "M-AX-CONSISTENCY": {
+      "mean": 1.0,
+      "ci_lower": 1.0,
+      "ci_upper": 1.0,
+      "per_family_variance": 0.0,
+      "shuffle_null_mean": 1.0,
+      "shuffle_null_p95": 1.0,
+      "shuffle_p_value": 1.0,
+      "delta_vs_prior_0.2857": 0.7143,
+      "shuffle_p_significant": false,
+      "status": "MEASUREMENT_INVALID",
+      "reason": "All 10 families have consistency=1.0 with zero variance and shuffle p=1.0. Element-pattern extraction captures only common layout tokens (first 20 tokens: generic, tablist, tabpanel, listitem, link:Skip to Content, link:store logo) and does not distinguish product-specific elements. Both tasks within each family produce identical 20-token prefixes regardless of whether they navigate to homepage or different product pages."
+    },
+    "M-STAGEHAND-HITRATE": 0.9485,
+    "M-STAGEHAND-MISSRATE": 0.0485,
+    "M-STAGEHAND-DRIFT-MISS-RATE": 0.0,
+    "M-STAGEHAND-FALSE-ACCEPT": 0.0,
+    "M-STAGEHAND-CROSS-PROJECT-LEAKAGE": 0.0,
+    "M-STAGEHAND-SPEEDUP": 0.0954,
+    "M-STAGEHAND-TOKENS-SAVED": 1000,
+    "M-STAGEHAND-FAMILIES-ATTEMPTED": 36,
+    "M-STAGEHAND-STATUS": "MEASUREMENT_INVALID",
+    "M-STAGEHAND-REASON": "Drift injection failed: HTML mutation did not change SHA256 hash (mutation too subtle or applied before hash computation). Speedup=0.0954x is inverted (cached slower than cold) because dict-lookup measurement does not reflect real dispatch path latency. Hit rate 0.95 is inflated by identical DOM hashes for homepage families.",
+    "M-GATE0-RELAXED-PASS": 0,
+    "M-GATE0-STRICT-PASS": 0,
+    "M-GATE0-RELAXED-PASS-RATE": 0.0,
+    "M-GATE0-STRICT-PASS-RATE": 0.0,
+    "M-GATE0-MULTI-STEP-AVAILABLE": false,
+    "M-GATE0-STATUS": "MEASUREMENT_INVALID",
+    "M-GATE0-REASON": "BrowserGym webarena-verified-v2 environment not importable; single-page AX captures cannot compute H(S_next|URL,H_K=3), NL count, or strata count. 0/20 relax passes on single-page captures is descriptive viewport-only census, not evidence for/against relaxed Gate0 feasibility."
+  },
+  "controls": {
+    "B-STAGEHAND-VERB": {
+      "expected": "HIT>=0.8, MISS>=0.8, false_accept<0.05, beats NC4 random, ~2x latency, ~30% tokens",
+      "observed": "HIT=0.95, MISS=0.05, false_accept=0.0, cross_project_leakage=0.0, speedup=0.0954x (inverted), drift MISS=0.0",
+      "pass_fail": "PARTIAL — hit rate passes but drift MISS and speedup fail; not spec-compliant replication of shipped Stagehand Feb 2026 baseline",
+      "evidence": "artifacts/derived/stagehand_replication.json sha256:ba5ae046c8bc8dd6"
+    },
+    "B-RAG-EMBED-FLAT": {
+      "expected": "Retrieval hit comparable to Stagehand but false_accept >10% without DOM-hash guard",
+      "observed": "Not executed as separate baseline; descriptive comparison from Stagehand hit_rate=0.95 shows flat RAG would have similar recall but no DOM-hash guard",
+      "pass_fail": "Descriptive only",
+      "evidence": "spec.json baselines B-RAG-EMBED-FLAT"
+    },
+    "B-SPIDER-0TOKEN": {
+      "expected": "0 tokens/cached task vs Stagehand cached tokens; SPIDER beats Stagehand only if parameterization generalizes beyond exact cache",
+      "observed": "Not directly executed; SPIDER 0-token replay would have 0 token cost on HIT but 0% success on novel params without parameterization",
+      "pass_fail": "Descriptive only",
+      "evidence": "spec.json baselines B-SPIDER-0TOKEN"
+    },
+    "B-RANDOM-AX-SHUFFLE": {
+      "expected": "True AX_consistency must exceed shuffle null mean+0.30 and p95, permutation p<0.05",
+      "observed": "Shuffle null mean=1.0, p95=1.0, p=1.0 — shuffle null equals true value because all families have consistency=1.0",
+      "pass_fail": "FAIL — permutation p=1.0 not <0.05; cannot discriminate true from null",
+      "evidence": "artifacts/derived/ax_consistency.json sha256:45b90ef283251380"
+    },
+    "B-COLD-LLM": {
+      "expected": "Cold token/latency upper bound; Stagehand/SPIDER must beat cold with false_accept penalty included",
+      "observed": "Not executed as LLM inference; estimated from Stagehand cold path median_latency_ms (see stagehand_replication.json)",
+      "pass_fail": "Descriptive only",
+      "evidence": "spec.json baselines B-COLD-LLM"
+    },
+    "PC1_AX_LIVENESS_1280": {
+      "expected": ">=15/20 AX trees 600-2000 nodes, DOM bytes>=2000, Docker reachable",
+      "observed": "20/20 valid captures (600-2000 nodes), DOM bytes>>2000, Docker reachable after 1 retry",
+      "pass_fail": "PASS",
+      "evidence": "artifacts/raw/ax_captures.jsonl sha256:324313f6e5cb6986"
+    },
+    "PC2_AX_PRIOR_REPLICATION": {
+      "expected": ">=1 family replicates prior 0.9 CI[0.7,1.0] longest-prefix but now on diverse product pages with variance>0",
+      "observed": "All 4 product families (145, 196, 136, 222) have consistency=1.0 — same as prior homepage tautology. Variance=0 because element-pattern grammar captures only common layout. Prior 0.9 single-family not distinguishable from diverse-page mean of 1.0.",
+      "pass_fail": "FAIL — variance=0, CI width=0, not discriminating vs prior homepage tautology",
+      "evidence": "artifacts/derived/ax_consistency.json"
+    },
+    "PC3_STAGEHAND_HIT_IDENTICAL": {
+      "expected": "On stable family with 3 consecutive identical relevant-subtree hash+normalized selector, HIT on 2nd/3rd call with per-project isolation",
+      "observed": "Hit rate=0.95 on 36 families, cross-project leakage=0.0 (5/5 isolation tests pass). However, N=2 HIT threshold met but drift MISS=0.0 means cache cannot distinguish drifted DOM.",
+      "pass_fail": "PARTIAL — HIT and isolation pass, but drift discrimination fails",
+      "evidence": "artifacts/derived/stagehand_replication.json"
+    },
+    "PC4_SYNTHETIC_PIPELINE": {
+      "expected": "Synthetic validation retained but is_synthetic true, not decision input",
+      "observed": "Not applicable this cycle; all measurements are live Docker/CDP",
+      "pass_fail": "N/A",
+      "evidence": "spec.json positive_controls PC4"
+    },
+    "NC1_AX_SHUFFLE_NULL": {
+      "expected": "True mean must exceed null mean+0.30 and p95, permutation p<0.05",
+      "observed": "Null mean=1.0, p95=1.0, p=1.0 — true does not exceed null (they are identical)",
+      "pass_fail": "FAIL — degenerate null (all families consistency=1.0)",
+      "evidence": "artifacts/derived/ax_consistency.json"
+    },
+    "NC2_AX_RANDOM_PATTERN": {
+      "expected": "Random element-pattern from different family expected consistency <0.2",
+      "observed": "Not separately measured; all families have identical pattern prefixes, so random assignment would also yield consistency=1.0",
+      "pass_fail": "FAIL — pattern grammar lacks family-specific differentiation",
+      "evidence": "spec.json null_controls NC2"
+    },
+    "NC3_STAGEHAND_DOM_DRIFT": {
+      "expected": "Single-attribute DOM mutation expecting MISS; false_accept <0.05 and MISS>=0.8",
+      "observed": "Drift miss rate=0.0 (all drift tests reported HIT). HTML mutation 'class=product' -> 'class=product-drifted' did not change SHA256 hash because the mutation was applied to the raw HTML string but the hash was computed from the full page content which may not contain the exact class string, or the mutation was applied to a copy not hashed.",
+      "pass_fail": "FAIL — drift injection mechanism broken",
+      "evidence": "artifacts/derived/stagehand_replication.json drift_results"
+    },
+    "NC4_STAGEHAND_RANDOM_CACHE": {
+      "expected": "Random HIT/MISS shuffling ~50% hit_rate ~1.0 speedup; true must beat random p<0.05",
+      "observed": "Not separately executed; NC4 random null not computed because hit_rate=0.95 is inflated by identical homepage DOMs",
+      "pass_fail": "NOT_TESTED — inflated hit rate prevents meaningful NC4 comparison",
+      "evidence": "spec.json null_controls NC4"
+    },
+    "NC5_CROSS_PROJECT_LEAKAGE": {
+      "expected": "Same key different project must MISS, cross-project HIT rate 0%",
+      "observed": "Cross-project leakage=0.0 (0/5 cross-project HIT)",
+      "pass_fail": "PASS",
+      "evidence": "artifacts/derived/stagehand_replication.json"
+    }
+  },
+  "artifacts": [
+    {"path": "research/experiments/EXP-INTEL-35789942386/artifacts/raw/ax_captures.jsonl", "sha256": "324313f6e5cb6986", "role": "raw"},
+    {"path": "research/experiments/EXP-INTEL-35789942386/artifacts/derived/ax_consistency.json", "sha256": "45b90ef283251380", "role": "derived"},
+    {"path": "research/experiments/EXP-INTEL-35789942386/artifacts/derived/stagehand_replication.json", "sha256": "ba5ae046c8bc8dd6", "role": "derived"},
+    {"path": "research/experiments/EXP-INTEL-35789942386/artifacts/derived/gate0_relaxed_table.json", "sha256": "50cea72a124141d1", "role": "derived"},
+    {"path": "research/experiments/EXP-INTEL-35789942386/artifacts/raw/provenance.json", "sha256": "3d4124dbde714a0d", "role": "raw"},
+    {"path": "research/intel/exp_35789942386_measure.py", "sha256": "placeholder_fix_expanded", "role": "code"},
+    {"path": "research/experiments/EXP-INTEL-35789942386/artifacts/raw/ax_trees/", "sha256": "multiple_tree_files", "role": "raw"}
+  ],
+  "observations": [
+    "RAW: Docker am1n3e/webarena-verified-shopping@sha256:3e8cb9b945 running at http://localhost:7770, browsergym-core 0.14.3 + agentlab 0.4.2 + Playwright 1.44.0 installed, CDP Accessibility.getFullAXTree functional at 1280x720",
+    "RAW: Placeholder fix applied: get_task_start_url now expands __SHOPPING__/path -> http://localhost:7770/<path> (base+path). Product URLs load correctly (717, 716, 668, 626, 1150, 702 AX nodes), all within 600-2000 range",
+    "RAW: 4 families (136, 145, 196, 222) have __SHOPPING__/path product URLs; 32 families only have __SHOPPING__ (homepage) tasks. Sampled 4 path + 6 homepage = 10 families, 20 captures",
+    "RAW: All 20 captures valid (600-2000 nodes), DOM bytes >>2000. Product pages load with distinct AX trees (different node counts and hashes), but element-pattern extraction produces identical 20-token prefixes for both tasks within each family",
+    "RAW: Element-pattern grammar captures only common layout elements (generic:unnamed, tablist:unnamed, tabpanel:unnamed, listitem:unnamed, link:Skip to Content, link:store logo) in first 20 tokens. Product-specific elements are truncated beyond position 20",
+    "RAW: Stagehand cache on 36 families: hit_rate=0.95, but drift_miss_rate=0.0 (drift injection broken), speedup=0.0954x (inverted), cross_project_leakage=0.0",
+    "RAW: BrowserGym webarena-verified-v2 environment not importable; multi-step trajectory collection failed; Gate0 census reduced to single-page descriptive only",
+    "RAW: All homepage-only families (6/10) navigate to identical http://localhost:7770 → identical AX tree → consistency=1.0 tautology",
+    "RAW: Product families (4/10) have distinct product pages but element-pattern grammar does not differentiate them beyond first 20 layout tokens"
+  ],
+  "validity_notes": [
+    "CRITICAL: Element-pattern extraction (extract_element_pattern) uses first 20 tokens and only captures common layout elements. Product-specific elements are truncated. This causes all families to have consistency=1.0 regardless of page diversity, making the shuffle null degenerate (p=1.0). The placeholder fix works (product pages load), but the pattern grammar is insufficient for discrimination.",
+    "Stagehand drift injection failed because HTML mutation did not change SHA256 hash. The mutation 'class=product' -> 'class=product-drifted' was applied to the raw HTML but the hash was computed from page.content() which may not contain the mutated string, or the mutation was applied incorrectly.",
+    "Speedup measurement inverted (0.0954x) because cached latency (dict lookup ~10μs) was compared against cold path that includes Playwright navigation overhead, not just dispatch overhead. The real dispatch path (playwright navigation + DOM hash compute + cache lookup) was not measured for the speedup calculation.",
+    "BrowserGym webarena-verified-v2 not importable in current environment; multi-step Gate0 census is MEASUREMENT_INVALID. Single-page captures cannot compute H, NL, or strata metrics.",
+    "Playwright 1.44.0 installed (not 1.63.0 spec). This is the documented fallback per spec.json measurement_validity #3. pip freeze hash recorded in provenance.",
+    "Representation loss: longest-prefix only (no semantic/subtree/multi-anchor), first-20-token truncation in pattern extraction, initial viewport no scroll for AX captures plus single-page for Gate0, CDP AX vs full DOM, DOM-hash relevant-subtree outerHTML choice (normalized), N=2 HIT threshold, Playwright 1.44.0 fallback."
+  ],
+  "unresolved": [
+    "The element-pattern grammar must be improved to capture product-specific elements beyond the first 20 tokens (e.g., using full AX tree traversal, semantic subtree matching, or multi-anchor patterns) before AX_consistency can discriminate product pages from homepage",
+    "Stagehand drift injection mechanism must be fixed to correctly mutate DOM and recompute SHA256 hash before cache lookup, ensuring HIT on identical DOM and MISS on drifted DOM",
+    "Speedup measurement must use real dispatch path (playwright navigation + DOM hash compute + cache lookup) not just dict-lookup timing, with cold vs cached latency measured on the same code path",
+    "BrowserGym webarena-verified-v2 environment must be made importable for multi-step Gate0 census; alternatively, Playwright-based multi-step trajectory collection must be implemented",
+    "Only 4 of 36 families have product URLs. To get 10+ families with diverse product pages, the task data source must be expanded or alternative product URL extraction methods must be used",
+    "Whether alternative pattern grammars (semantic, subtree, multi-anchor) or shopping_admin 184 tasks 42 families would provide sufficient diversity for discriminating AX_consistency remains untested",
+    "AgentLab 0.4.2 vs 0.3.2 fidelity difference on CDP AX capture fidelity not tested"
+  ]
+}

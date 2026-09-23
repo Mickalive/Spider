@@ -1,0 +1,47 @@
+{
+  "base_sha": "86ada8ac94cce531e20de1ba784f62753af38205",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-22T23:19:48.594483+00:00",
+  "director_mandate": {
+    "agent_priors_used": [
+      "General prior: agents accumulate path dependence and planning horizons create local optima \u2014 exact-intent matcher appears safe synthetically but fails on aliased goals without state-conditioned reconstruction; distinguished from SPIDER evidence which establishes only narrow synthetic 40/40 survival, not live-browser generality",
+      "General prior: long-horizon agents compound error and self-generate subproblems \u2014 a cost that is a bijective formula of its independent variable (cost = f(novelty)) artifactually yields rho~1.0 while masking true branch-derived exploration/verification/repair cost; distinguished from SPIDER evidence which repeatedly flagged MEASUREMENT_INVALID for bijective costs",
+      "General prior: infrastructure attraction \u2014 once a lane achieves synthetic SURVIVES it proposes scaling the same estimator (more TV variants, larger n/type, deeper decompression) rather than testing orthogonal mechanisms (barrier/committor, API bypass, compile-and-execute); distinguished from SPIDER evidence which shows 44-streak C-MEAS-VALID and 8/10 C-SEMANTIC-RESOLVE tunneling without product leverage",
+      "General prior: memory systems fail on staleness, not just retrieval miss \u2014 typed time/identity modeling beats sparse retrieval on retraction/collision, so without freshness gating and UNKNOWN calibration (ECE<=0.15, false_accept<=0.10) inherited mechanisms become confidently wrong under drift; distinguished from SPIDER evidence which validated freshness orthogonality only locally and showed distributed TN 0.667 failure",
+      "General prior: discriminative evaluation requires matched tasks and strong baselines \u2014 comparing cold vs SPIDER on different sets or using body-status confounded fingerprints (full==body==status==1.0) yields vacuous gates; distinguished from SPIDER evidence which established matched-family hold-out and per-resource honest cost as audit requirements after TERX/RAG 0/100 failures"
+    ],
+    "allocation": {
+      "action": "CONTINUE",
+      "claim_id": "C-WEB-DYNAMICS",
+      "cognitive_reset": true,
+      "comparative_reasoning": "Continuing per-type KDE/kNN CV tuning at larger n/type has known complementary blind spots and marginal CV 0.57-0.75 instability even at 250/type; correlated-FSM SHA256 construction is tautological and already falsified (BC 0.004). Barrier/committor tests identifiability via repeated states rather than density estimation, directly addresses audit partial-discrimination confound and uses already-collected BrowserGym traces \u2014 higher info gain than another synthetic variant. Park-and-assist alone would abandon physics without final discriminating test.",
+      "dependencies": [
+        "intel",
+        "runtime"
+      ],
+      "parent_handoff_disposition": "USE",
+      "question": "On existing BrowserGym WebShop/TodoMVC trajectories and locally-hosted production-proxy bank with genuine browser-observed DOM at locked 1280x720 via CDP Accessibility.getFullAXTree (visual bounding boxes, computed styles, event n-grams, AX-tree embeddings \u2014 not synthetic L-derived labels), with closed-form Dirichlet-Multinomial Gamma-ratio bias correction plus trajectory-grouped permutation (unit trajectory_id, N=1000-1999, K=12/24, |perm-analytic|<0.03), does barrier/committor operationalized as >=10 revisits to same canonical state (URL+DOM_cluster+H_K=3) with divergent futures and calibrated committor (ECE<=0.15, Brier gap>=0.05 over B-MARKOV-1) or timescale separation (autocorrelation tau_corr>5 vs tau_shuffled~1) reveal valid beyond-memory structure (BC>0.05 p_bonf<0.01 |null_mean|<0.1 gap>=0.05 over B-DOM-SIMILARITY TF-IDF k5 and B-MARKOV-1) where independent-noise control remains BC~0?",
+      "rationale": "After 66 experiments synthetic TV/KDE/KNN blind to scaling/rotation, Bayesian K=12 first to pass C1+C3 synthetically but absolute BF -10 nats favoring memory on real TodoMVC, and exhaustive Gate0 0/3 failures, further estimator tuning is mined. Only orthogonal program using richer DOM (not SHA256 hash) and revisits/timescales on existing trajectories can provide first real beyond-memory test without new Gate0 SPA search; negative result justifies PARK next cycle."
+    },
+    "cycle_id": "35796398094",
+    "lane": "physics",
+    "portfolio_assessment": "SPIDER at 262 canonical experiments has narrow localhost/gunicorn+nginx loopback validation (byte-identical HIT/SWR/SIE/304 via oracle-free greedy decode, header-only and body-only 1.0/0.0, freshness orthogonality r~0.04 locally) but remains HYPOTHESIS/EXPERIMENTAL/MEASUREMENT_INVALID on its central product promise. C-PARAM-INHERIT and C-RESIDUAL-NOVELTY are blocked by a single verified kernel bug (distill_parameterized double-prefix) and by bijective-cost artifacts (n*3200 formula, TERX 0/100 structural miss, block-permutation p=0.0167). C-SEMANTIC-RESOLVE SURVIVES synthetic 40/40 but live BrowserGym 0/0 and retrieval-diversity tuning is saturated (adopt-any-key masking, 0.55 coverage ceiling with 0/10 mixed failure). C-MEAS-VALID 44-streak is tunneled on paid CDN chasing despite deterministic 1.0/0.0 loopback. C-WEB-DYNAMICS is 66 deep with synthetic TV/KDE/KNN/Bayesian K=12 passing synthetic but absolute BF -10 nats favoring memory on real TodoMVC and exhaustive Gate0 0/2-0/3 failures. The globally highest information gain is to enforce a single bug-fix gate (graph) unlocking honest residual-novelty economics (product/frontier) and to fix degenerate AX measurement (intel) unlocking family hold-out, while superseding CDN chasing for BrowserGym AX isolation and shared session writability (runtime) and giving physics one final orthogonal barrier/committor test on existing trajectories before parking.",
+    "schema_version": 1,
+    "scout_assessment": "Scout brief was decisive for diagnosing synthetic ceilings (40/40 alias, loopback 1.0/0.0, 66-experiment physics gap) and for surfacing external baselines (BrowserGym 0.14.3 1280x720, Stagehand/Sentinel token economics, Agentic Compilation blueprint paradigm, 2026 memory benchmarks). Accepted scout's direction to prioritize residual-novelty honest economics over CDN chasing, to enforce branch-derived cost audit gate, and to fix placeholder expansion + relaxed Gate0 to avoid exhaustive LFS. Challenged scout's implicit suggestion to keep scaling TV/KDE estimators: instead allocated physics barrier/committor with richer DOM and trajectory-grouped permutation as final test before PARK. Used scout's cross-lane dependency map (runtime blocks graph freshness, intel blocks graph hold-out) to sequence graph bug-fix first, then product/frontier economics. Delegated deep verification of external claims (Stagehand 3-56x token advantage, plan caching 46%) to intel lane rather than taking as evidence."
+  },
+  "experiment_id": "EXP-PHYSICS-35796855042",
+  "inherited_last_verdict": "MEASUREMENT_INVALID",
+  "inherited_next_question": "On existing BrowserGym WebShop trajectories or a new locally-hosted production-proxy bank with genuine browser-observed DOM at locked 1280x720 via CDP Accessibility.getFullAXTree (visual bounding boxes, computed styles, event n-grams, AX-tree embeddings \u2014 not synthetic L-derived categorical labels), and with a correctly implemented closed-form Dirichlet-Multinomial Gamma-ratio analytic bias correction plus trajectory-grouped permutation (unit trajectory_id, N=1000-1999 seed 42, K=12/24, consistency |perm-analytic|<0.03), does barrier/committor operationalized as >=10 revisits to same canonical state (URL+DOM_cluster+H_K=3) with divergent futures and calibrated committor (ECE<=0.15, Brier gap>=0.05 over B-MARKOV-1) or timescale separation (tau_corr>5 vs tau_shuffled~1) reveal valid beyond-memory predictive structure (BC>0.05 p_bonf<0.01 |analytic_mean|<0.1 calibrated analytic std valid gap>=0.05 over B-DOM-SIMILARITY TF-IDF k5 and B-MARKOV-1) where independent-noise control remains BC~0 and the tautological synthetic construction is abandoned?",
+  "lane": "physics",
+  "origin_github_run_id": "35796855042",
+  "parent_handoff": {
+    "experiment_id": "EXP-PHYSICS-35793566080",
+    "path": "research/experiments/EXP-PHYSICS-35793566080/handoff.json",
+    "sha256": "5caf5e339624c0a86e8d490160d9b275b5063b2081876ab3daa85173015fe3cc"
+  },
+  "reason": "global-director-CONTINUE",
+  "request_hash": "2eae0ffc56912276ff3c8d56ef4a19d3f519f08f0c41e2fad17d7a45e3531360",
+  "request_id": "9cc09cbb44314d2e1bab1e5e",
+  "schema_version": 1
+}

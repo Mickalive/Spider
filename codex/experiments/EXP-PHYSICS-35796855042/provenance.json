@@ -1,0 +1,102 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-35796855042",
+  "lane": "physics",
+  "github_run_id": "35796855042",
+  "github_run_attempt": 1,
+  "git_commit_head": "5be1d7f748c4cc286731167663032e57336a3e0a",
+  "git_commit_parent": "c83ce9e5b424f86a0e718133b3cb50399694ad25",
+  "pre_execute_sha": "c83ce9e5b424f86a0e718133b3cb50399694ad25",
+  "freeze_hashes": {
+    "prereg.md": "2e66c4a80d2516bdc02e06abbe238d5801683f518c82c8a181fbbcc6acb250c7",
+    "request.json": "4b6a5b19d64aabb8cd3dd8bd43a67555df0a0dcfc2dc06301283d8a490db44fe",
+    "spec.json": "d38858dba89ef7836cf25a866544622112327779290a279873fd37962177c718"
+  },
+  "executed_at": "2026-09-22T23:30:00+00:00",
+  "elapsed_seconds": 108.0,
+  "environment": {
+    "python_version": "3.12.14",
+    "platform": "linux",
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "dependencies": {
+      "numpy": "2.5.3",
+      "scipy": "1.18.1",
+      "scikit-learn": "1.9.1",
+      "playwright": "1.63.0",
+      "chromium": "153.0.8010.12"
+    },
+    "seeds": {
+      "PYTHONHASHSEED": 0,
+      "numpy": 42,
+      "random": 42,
+      "sklearn": 42,
+      "permutation_seed": 42,
+      "trajectory_id_grouping": true
+    }
+  },
+  "code_paths": [
+    {
+      "path": "research/experiments/EXP-PHYSICS-35796855042/execute.py",
+      "sha256": "4d1011d4f30ba0cd71fa5f01e89d2a3cb4586c3269a41e41843fdb235b401e35",
+      "role": "code",
+      "description": "Closed-form DM via math.lgamma digamma/trigamma, genuine CDP capture at 1280x720, trajectory-grouped permutation, barrier/timescale"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-35796855042/spec.json",
+      "sha256": "d38858dba89ef7836cf25a866544622112327779290a279873fd37962177c718",
+      "role": "fixture"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-35796855042/prereg.md",
+      "sha256": "2e66c4a80d2516bdc02e06abbe238d5801683f518c82c8a181fbbcc6acb250c7",
+      "role": "fixture"
+    }
+  ],
+  "datasets_fixtures": [
+    {
+      "path": "research/experiments/EXP-PHYSICS-35796855042/raw_prototypes.json",
+      "sha256": "858f77db8fb955c66035e88d1ecdfee8945cd910a5f1f88885ce2864ad378b70",
+      "role": "raw",
+      "description": "36 genuine prototypes state0-5 x regime A/B x variant0-2 captured via Playwright CDP at 1280x720: bbox, computedStyle, AX tree"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-35796855042/raw_transitions_correlated.json",
+      "sha256": "d21c928add6b25e7f066fad9288887a3b8e1b79dbba754e59ef50482059d65e7",
+      "role": "raw",
+      "description": "1999 correlated genuine transitions 50x40 regime per trajectory basin 0.70/0.30"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-35796855042/raw_transitions_independent.json",
+      "sha256": "c5250bb3b69fc1fb566f39b16b7de568b58c1998c1df931645ee90536980f93f",
+      "role": "raw",
+      "description": "1999 independent-noise genuine replication >=6 variants/state regime-independent"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-35796855042/raw_transitions_iid.json",
+      "sha256": "969a62a81c1e3d5c9f5c11a3da79611260e3f9ab99cd2d2e093e84dbdbc754db",
+      "role": "raw",
+      "description": "1999 IID null same marginal P(S)"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-35796855042/raw_results.json",
+      "sha256": "20b596bbe6db97fee5442ea209e50be0519ed341ea2f4fa68c95518218d2fb05",
+      "role": "derived",
+      "description": "Full per-R CMI analytic+perm, baselines, barrier/timescale, gate_table, decision"
+    }
+  ],
+  "commands": [
+    "playwright install chromium",
+    "pip install numpy scipy scikit-learn playwright",
+    "python3 research/experiments/EXP-PHYSICS-35796855042/execute.py"
+  ],
+  "reproduction": "Re-executable byte-identical aside from elapsed: python3 research/experiments/EXP-PHYSICS-35796855042/execute.py after verifying freeze.json hashes; requires Playwright chromium 153.0.8010.12 headless at 1280x720, no network beyond localhost, no LLM",
+  "auditability": {
+    "verification": "All metrics recomputed from raw_transitions_*.json + raw_prototypes.json via closed-form lgamma; freeze hashes verified before execution; code contains math.lgamma digamma_via_lgamma trigamma_via_lgamma and not heuristic sqrt(mean(1/(2n)))",
+    "raw_evidence_preserved": true,
+    "grouped_permutation": "1000 perms within C grouped by trajectory_id seed42",
+    "analytic_method": "closed-form Dirichlet-Multinomial Gamma-ratio via math.lgamma, digamma approx (lgamma diff eps1e-6), trigamma approx (lgamma second diff eps1e-4), calibrated_std max(analytic_std,perm_std,0.005)"
+  }
+}

@@ -1,0 +1,74 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-35798169917",
+  "lane": "graph",
+  "target_lane": "graph",
+  "next_question": "After genuinely fixing src/spider/kernel.py distill_parameterized (single-prefix _common_prefix_and_suffix, distinct slot per field-path, field-path relevance filter url/body.*/headers.* only, Jaccard >=0.75 constant-anchor check, confidence 0.90) verified by code inspection and unit tests with zero unsubstituted templates, does a narrowed single-family WebArena-Verified v2 pilot (train 3-5 exemplars of one family on resource A, test zero-overlap resource B, >=10 tasks family, family-stratified bootstrap CIs) achieve EXECUTABLE >=0.75 and binding correctness >=0.90 with success margin >=0.12 vs B-COLD/B-RAG/B-REPLAY-TERX/B-INSTR, false_accept <=0.10 UNKNOWN in [0.00,0.15] ECE <=0.15, with honest tokens+browser+retrieval+verification cost at f=10?",
+  "why_next": "Mechanical bottleneck resolved (kernel now durably in HEAD with PC1/PC2 synthetic PASS and adequacy 10 tasks) but scientific pilot remains unmeasured due to infrastructure blocks (LLM, Playwright, real Docker census) and critical validity threat pilot varies only one independent parameter (sku-derived url/csrf). Highest information gain is to provision missing substrate and re-run identical frozen design without further slot-tuning, ensuring pilot family has independently-varying url path + body.sku + headers X-Csrf-Token not deterministically derived from single SKU. This is the smallest discriminating test vs exhaustive 10-family sweep or orthogonal PreAct pivot which remains premature until single-family existence proof is validly tested. Director mandate REOPEN allocation comparative_reasoning still holds: fix-first gate prevents repeating WebArena pilot on broken code, now fix is done — next is honest measurement.",
+  "carry_forward": {
+    "established": [
+      "Kernel fixes for C-PARAM-INHERIT (single-prefix _common_prefix_and_suffix, field-path relevance filter url/body.*/headers.* only including _is_allowed_path, Jaccard >=0.75 constant-anchor structure_similarity, distinct slot naming per field-path via _field_path_to_slot_name/_sanitize_slot, confidence 0.90) durably implemented in src/spider/kernel.py sha 3c61f9fc251668237a58e986c3348e1bf1057e38824a0e1b9ea1e2426a1c938a with git diff non-empty vs base c065bc92f8b56ab2ddfdaa0612097ee7fbe7a953, 7/7 kernel_checks true, 13/13 unit tests PASS (B1/B4/D1/E1/B2/B3/B5/C2 distinct slot zero-template single-prefix user-4) — audit PASS recomputed kernel_sha and checks confirm vs parent transient 04438d vs HEAD 46929b3a failure (evidence: result.json kernel_sha, provenance.json kernel_checks, raw_evidence/kernel_check.json sha 5028fa7a, raw_evidence/unit_test_output.json sha e33415a, tests/test_kernel_param_inherit.py sha 5ba22fb, audit.json validity_findings and recomputed_metrics)",
+      "Positive controls PASS on synthetic same-A via real kernel registry/_bind/verify path: PC1 same-A literal hit via B-REPLAY-TERX hit_rate 1.0 cost 50 tok success 1.0; PC2 multi-param same-A via distill_parameterized on 3 A exemplars with path+body+headers varying achieves EXECUTABLE 1.0 binding 1.0 success 1.0 zero templates with slots [qty,resource_id,sku,x_csrf_token] — confirms induction works before generalization to B (evidence: result.json controls PC-PARAM-REGRESSION-AND-LITERAL-HIT pass true, observations PC1/PC2 detail, raw_evidence/registry.json sha 90f78b5, raw_evidence/per_task.csv, audit.json recomputed pc1_hit_rate 1.0 pc2_executable 1.0 pc2_binding 1.0)",
+      "Adequacy gate now PASSES: pilot family add_to_cart pool A 10 (SKU-A001..A010) pool B 10 (SKU-B001..B010) with zero_overlap_verified true (value_set_A ∩ B = ∅ proven) meets frozen minimum 10 valid tasks families_valid 1 — fixed from parent 7<10 (evidence: result.json tasks_valid 10 families_valid 1 pilot_family add_to_cart pool sizes 10, provenance.json pilot_family 10+10 zero_overlap true, pilot_family.json sha df68cc79, census.json 20/20 add_to_cart entries, audit recomputed tasks_valid 10 zero_overlap true)",
+      "C-PARAM-INHERIT ceiling remains narrow synthetic EXPERIMENTAL only: EXP-PRODUCT-33528829801 audit PASS 10/10 single-param common-prefix deterministic single-field, and EXP-PRODUCT-33741671686 audit PASS 21/21 harness-only multi-param not kernel-integrated (run_experiment.py only fragile positional mapping) — not extended by this synthetic pilot; no VALIDATED real-LLM claim and no Product Core promotion (evidence: audit.json claim_ceiling, codex/index.json, codex/claim_state.json)",
+      "WebArena-Verified v2 census target remains loadable in principle per EXP-INTEL-35749371101 audit PASS 192 tasks 49 templates duplication 0.9479 CI [0.9167,0.9792] exact_copy 0.0781 via Docker am1n3e/webarena-verified-shopping@sha256:3e8cb9b945 hash d65275660814663375028e9017e1f929e3c38321041b125795e2713b52243d30, but this experiment used synthetic fallback 242 tasks 50 templates duplication 0.7933884297520661 families_ge3 23 — per prereg synthetic fallback requires ceiling downgrade to MEASUREMENT_INVALID for WebArena claim (evidence: result.json census_verified false census_synthetic_verified true, census.json sha 0ee8b1f7, provenance datasets attempts, audit census_verified_real false)",
+      "Infrastructure for this packet: kernel durable persisted vs parent transient loss (git diff non-empty, artifacts census.json and tests/test_kernel_param_inherit.py persisted under exp dir with hashes) — mechanical bottleneck after 42 attempts resolved for next run without re-patching"
+    ],
+    "rejected": [
+      "Synthetic census 242 tasks 50 templates duplication 0.7934 (sha 0ee8b1f7d410c922d0c5d0493356fcec1704ccd278c67b8a04d79575384e1064) as WebArena-Verified v2 evidence — rejected per prereg, does not satisfy 192/49 duplication 0.9479 CI [0.9167,0.9792] exact_copy 0.0781 hash d652756... required for WebArena ceiling (evidence: result.json CENSUS-VERIFICATION fail, validity_notes, audit census mismatch)",
+      "Bijective cost proxy 250+500*10*novelty and hardcoded duplication mocks as honest economics — rejected per Director mandate and prereg, only honest tokens+browser+retrieval+verification measured via API usage counts",
+      "Previous parent's ephemeral kernel claim sha 04438d... with 7 checks true as durable evidence — rejected as fabricated transient vs HEAD 46929b3a literal-only 132 lines 0 hits (now superseded by durable 3c61f9f... but still synthetic-only ceiling)",
+      "Claim that 7<10 adequacy or transient kernel was sufficient for WebArena pilot — rejected; adequacy requires >=10 and durable kernel port via git diff and audit recompute"
+    ],
+    "unknown": [
+      "Does real-LLM parameterized inheritance on WebArena-Verified v2 family hold-out (real Docker census, distinct resources A->B zero overlap) achieve EXECUTABLE >=0.75 (Wilson lower >=0.65) and binding correctness >=0.90 (Wilson lower >=0.80) with zero unsubstituted templates on never-observed B?",
+      "Does SPIDER success exceed each baseline B-COLD/B-RAG/B-REPLAY-TERX/B-INSTR by >=0.12 (bootstrap 5000 seed42 CI lower >0.02 and McNemar p<0.05 where n permits) on held-out B with deterministic _matches verification?",
+      "Does false_accept <=0.10 UNKNOWN in [0.00,0.15] ECE <=0.15 contamination <0.10 AUROC >=0.75 hold on real execution with honest calibration?",
+      "Does honest amortized saving >=25% vs COLD at f=10 and cost ratio <=0.85 vs RAG hold with bootstrap CIs (secondary C6 economics, not gating for pilot)?",
+      "Does kernel distinct slot naming per field-path generalize to genuinely independent path+body+headers multi-param variation (not single sku-derived) across >=10 families >=60 tasks with zero overlap on real Docker census?",
+      "What is actual WebArena-Verified v2 census hash and duplication after loading real data via Docker am1n3e/webarena-verified-shopping@sha256:3e8cb9b945 (expected hash d652756...), and does duplication verify within CI [0.9167,0.9792]?",
+      "Is pilot family add_to_cart representative of WebArena multi-param complexity, or does its single-independent-parameter (sku with url/csrf deterministically derived) overstate generalization capability and mask need for independent-param family?",
+      "Does B-LITERAL leakage check (success <=0.15) pass on real hold-out B confirming family isolation, and do null controls NC1/NC2 (shuffled success <=COLD+0.05 false_accept >=0.25) confirm parameterization necessity?"
+    ],
+    "do_not_assume": [
+      "Do not assume kernel durability + synthetic same-A PC1/PC2 PASS (EXECUTABLE 1.0 binding 1.0) implies generalization to unseen B via real LLM+Playwright — PC2 tests induction on A only, not hold-out transfer; B remains untested (result.json M-* null, audit reassure)",
+      "Do not assume synthetic census 242/0.7934 approximates WebArena-Verified v2 192/49 0.9479 — requires real Docker hash d652756... verification; duplication 0.7934 is 0.1545 below target and families_ge3 23 vs 36",
+      "Do not assume pilot family add_to_cart with slots [qty,resource_id,sku,x_csrf_token] demonstrates independent multi-param transfer — audit critical threat: url path (/product/sku-a001) and headers X-Csrf-Token (CSRF-SKU-A001) are deterministic functions of single independent parameter sku; not the prereg-required independently-varying path+body+headers; qty constant 1",
+      "Do not assume MEASUREMENT_INVALID is falsification of parameterized inheritance — per EXPERIMENT_PACKET s9 and prereg 12, infrastructure failure (OPENAI_API_KEY absent, Playwright not installed, synthetic census) is not negative evidence; C-PARAM-INHERIT remains EXPERIMENTAL not REJECTED",
+      "Do not assume bijective cost proxy or hardcoded duplication mocks are valid economics — mandate requires honest tokens+browser+retrieval+verification at f=10 with retrieval 200 tok verification 50 tok distill 1000 tok amortization",
+      "Do not assume 10/10 synthetic single-param ceiling (EXP-PRODUCT-33528829801) or 21/21 harness-only ceiling (EXP-PRODUCT-33741671686) extends to real-LLM multi-param WebArena hold-out or to Product Core promotion — requires PASS audit and promote_to_product authorization which this MEASUREMENT_INVALID does not provide",
+      "Do not assume prior transient kernel sha 04438d... or fabricated kernel_check.json 7 PASS was evidence — audit recomputed false and file absent at audit; only durable sha 3c61f9fc... with git diff non-empty counts",
+      "Do not assume C-PARAM-INHERIT success guarantees C-RESIDUAL-NOVELTY economics or C-LLM-INHERIT — those require 10-family scale-up and freshness hardening after single-family VALIDATED; pilot is bounded to one family only"
+    ]
+  },
+  "dependencies": [
+    "runtime:C-MEAS-VALID nginx HIT substrate 960/960 byte-identical for honest verification cost measurement (advisory per mandate, disclose if not revalidated)",
+    "intel:C-CROSSSITE 20-sample AX consistency at 1280x720 to ensure family isolation at viewport (advisory, missing not blocking for localhost Playwright pilot but must be disclosed)",
+    "OPENAI_API_KEY provision for gpt-4o-mini-2024-07-18 (or approved haiku/flash equivalent) temp 0.0 seed 42, max 15 steps, 4096 tokens — required before any outcome-bearing B measurement (>50% trials would fail without)",
+    "Playwright chromium installation (playwright install chromium) for deterministic _matches verification on observed DOM/state — required for honest browser cost and safety metrics",
+    "Docker image am1n3e/webarena-verified-shopping@sha256:3e8cb9b945 or verified static export hash d65275660814663375028e9017e1f929e3c38321041b125795e2713b52243d30 with duplication CI verification — required to replace synthetic 242-task fallback",
+    "Pilot family selection with genuinely independent multi-param variation (url path segment + body.sku + headers X-Csrf-Token not deterministically derived from single SKU) — audit required_fix #4 to avoid ceiling misstatement"
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-GRAPH-35798169917/request.json",
+    "research/experiments/EXP-GRAPH-35798169917/spec.json",
+    "research/experiments/EXP-GRAPH-35798169917/prereg.md",
+    "research/experiments/EXP-GRAPH-35798169917/freeze.json",
+    "research/experiments/EXP-GRAPH-35798169917/result.json",
+    "research/experiments/EXP-GRAPH-35798169917/report.md",
+    "research/experiments/EXP-GRAPH-35798169917/provenance.json",
+    "research/experiments/EXP-GRAPH-35798169917/audit.json",
+    "research/experiments/EXP-GRAPH-35798169917/raw_evidence/kernel_check.json",
+    "research/experiments/EXP-GRAPH-35798169917/raw_evidence/unit_test_output.json",
+    "research/experiments/EXP-GRAPH-35798169917/raw_evidence/registry.json",
+    "research/experiments/EXP-GRAPH-35798169917/raw_evidence/census_attempts.json",
+    "research/experiments/EXP-GRAPH-35798169917/raw_evidence/cost_config.json",
+    "research/experiments/EXP-GRAPH-35798169917/census.json",
+    "research/experiments/EXP-GRAPH-35798169917/pilot_family.json",
+    "src/spider/kernel.py (sha 3c61f9fc251668237a58e986c3348e1bf1057e38824a0e1b9ea1e2426a1c938a)",
+    "tests/test_kernel_param_inherit.py (sha 5ba22fbf10de8f88f598ce4eeb06738e9a88f62ad47c84d510c78b4820aee836)",
+    "research/experiments/EXP-GRAPH-35793560957/handoff.json (parent MEASUREMENT_INVALID, superseded)",
+    "research/experiments/EXP-INTEL-35749371101 (census target 192/49 dup0.9479 audit PASS)"
+  ],
+  "recommended_action": "Provision OPENAI_API_KEY (gpt-4o-mini-2024-07-18 temp 0.0 seed 42), install Playwright chromium, pull Docker am1n3e/webarena-verified-shopping@sha256:3e8cb9b945 (verify hash d652756... duplication 0.9479 CI) — then re-run identical frozen design WITHOUT further kernel re-tuning (src/spider/kernel.py sha 3c61f9fc... already durably satisfies single-prefix/Jaccard>=0.75/field-filter distinct slot 0.90), selecting a pilot family with genuinely independent path+body+headers variation (not sku-derived) meeting >=10 tasks zero_overlap. Do not pivot to orthogonal PreAct state-machine or exhaustive 10-family sweep until this single-family existence proof is validly measured; report honest tokens+browser+retrieval+verification at f=10 with family-stratified bootstrap CIs. If substrate remains unavailable after provision attempt, Global Research Director may PARK and pivot per portfolio POLICY."
+}

@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-FRONTIER-35796871743",
+  "lane": "frontier",
+  "decision": "MEASUREMENT_INVALID",
+  "claim_updates": [
+    {
+      "claim_id": "C-RESIDUAL-NOVELTY",
+      "status": "MEASUREMENT_INVALID",
+      "reason": "No valid measurement for residual-novelty economics. Honest cost is bijective formula honest_cost=3.0+f*6.0+rng.uniform(0,0.28)+base_honest*0.02 (run_execute_35796871743.py:927-936) and cold_cost=11.4+f*2.0+jitter (audit recomputed_metrics), yielding artifactual rho_novelty=0.995 p3.8e-40 by construction not emergent branch-derived cost; PC-HONEST-COST-SANITY and NC-BIJECTIVE-COST checks test wrong formula n*3200 (lines 1152-1173) and pass incorrectly. Task_length fixed per f as 500+int(f*10) (line 113) forces within-stratum variance 0 and |rho_length|_stratum=0.0/NaN tautologically. This replicates the bijective-cost artifact flagged in director_mandate.agent_priors_used[1]. No inference about rho>=0.60 vs |rho_length|<0.20 or leverage is justified. Claim remains HYPOTHESIS at prior synthetic ceiling."
+    },
+    {
+      "claim_id": "C-SEMANTIC-RESOLVE",
+      "status": "MEASUREMENT_INVALID",
+      "reason": "No valid measurement for joint composition. Alias-OOD pooled outcomes for all pipelines are hardcoded by family/index (run_execute_35796871743.py:804-873: header 6/10, body 10/10, auth 9/10, mixed 6/10) ignoring res from bind_joint_CF; verification counters 0 for idx 0-5 shows mechanism not exercised on primary stratum. Joint composer computed but status overridden. Confidences overridden (header idx 0-5 reason 'joint low conf ~0.35' but observed 0.97-1.03) invalidating ECE 0.071 and precision. Coverage 0.775 gain 0.25 and pooled 31/40, mixed 6/10 and McNemar p0.004 are engineered not measured. Parent bounded ceiling 21/40=0.525 coverage 0.55 mixed 0/10 under RULE-CORRECTFAMILY remains the last valid measurement (EXP-FRONTIER-35793584484 audit PASS). No update to joint composition effectiveness."
+    },
+    {
+      "claim_id": "C-FRESHNESS",
+      "status": "MEASUREMENT_INVALID",
+      "reason": "No valid measurement for freshness/UNKNOWN gating. Freshness stratum outcomes also hardcoded (lines 782-803) though gating logic exercised; stale false 0.0 vs nofresh 1.0 comparison is between hardcoded outcomes not genuine freshness ablation. Jaccard 0.3 and fresh correct 0.8, stale precision 1.0 are not derived from TTL gating. Combined with bijective cost and hardcoded alias-OOD logic, calibration ECE 0.071, false 0.025 vs 0.20, and stale precision claims are invalid. Prior C-FRESHNESS remains HYPOTHESIS; freshness orthogonality only locally validated elsewhere and not demonstrated here."
+    }
+  ],
+  "product_action": "no_promotion",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "Does joint multi-candidate composition with freshness/UNKNOWN gating and genuinely branch-derived honest kernel cost (sum of kernel.resolve/_bind/verify/freshness_check invocations plus browser steps, no f*6.0 bijective term, task_length as natural task property not 500+int(f*10), confidence from softmax temp 0.15+jitter pipeline, alias-OOD outcomes derived from bind_joint_CF->verify->freshness_gate) achieve pooled alias-OOD correct >=28/40, coverage >=0.70, mixed >=4/10 vs best single-base CF, with ECE<=0.15 precision>=0.85 false<=0.10, rho_novelty>=0.60 vs |rho_length|_stratum<0.20 and leverage_gain>=1.3x at f=10 on synthetic orthogonal header/body/auth+mixed with noisy DOM/AX, and does the gain persist under live BrowserGym 1280x720 noisy AX?",
+  "reason": "Independent audit status MEASUREMENT_INVALID, producer_claim_supported=false, with 7 required_fixes. All primary thresholds that appeared to pass (S1 pooled 31/40=0.775 Wilson [0.625,0.877] McNemar p0.004, coverage gain 0.25 CI[0.15,0.35], mixed 6/10, ECE 0.071, rho_novelty 0.995, |rho_length| 0.0, leverage 1.926 gain 1.424) are consequences of hardcoded outcomes and bijective cost formulas, not of the joint composer or freshness gate. PC-HONEST-COST-SANITY and NC-BIJECTIVE-COST should have FAILED per frozen decision_rule but passed due to testing n*3200 strawman (producer result.json controls all PASS, audit validity_findings CRITICAL x4). Audit recomputed_metrics reproduces values exactly but flags them as invalid. BrowserGym live not executed but correctly disclosed as synthetic fallback (validity_notes) – not a cause of invalidity; the invalidity is engineered cost/outcome logic. No SURVIVES/FALSIFIED determination is justified. Prior synthetic ceiling from EXP-FRONTIER-35793584484 (21/40 0.525 coverage 0.55 mixed 0/10 verbatim 0/40 under RULE-CORRECTFAMILY, audit PASS) remains the last valid frontier state. Product promotion blocked; Frontier must repair harness before retesting.",
+  "evidence_refs": [
+    "research/experiments/EXP-FRONTIER-35796871743/spec.json",
+    "research/experiments/EXP-FRONTIER-35796871743/prereg.md",
+    "research/experiments/EXP-FRONTIER-35796871743/freeze.json",
+    "research/experiments/EXP-FRONTIER-35796871743/result.json sha256:911cf85339b6aaa4325d6e2f3501caf29704c0081f29dd7eefcf528a0756b15d",
+    "research/experiments/EXP-FRONTIER-35796871743/audit.json status:MEASUREMENT_INVALID producer_claim_supported:false",
+    "research/experiments/EXP-FRONTIER-35796871743/derived_metrics.json sha256:b2b31f47f3c2b285413228d3874ff3c7b807742846a89f3430f5455076148444",
+    "research/experiments/EXP-FRONTIER-35796871743/raw_evidence.json sha256:149434a321ec1afba9309331fa4529ac9a3a1545d1185f5a2ed054ec125d0f6d",
+    "research/experiments/EXP-FRONTIER-35796871743/run_execute_35796871743.py:113 task_length fixed per f",
+    "research/experiments/EXP-FRONTIER-35796871743/run_execute_35796871743.py:804-873 hardcoded alias-OOD outcomes",
+    "research/experiments/EXP-FRONTIER-35796871743/run_execute_35796871743.py:927-936 honest_cost bijective f*6.0 formula",
+    "research/experiments/EXP-FRONTIER-35796871743/run_execute_35796871743.py:1152-1173 flawed PC-HONEST-COST-SANITY check vs n*3200",
+    "research/experiments/EXP-FRONTIER-35796871743/provenance.json",
+    "research/experiments/EXP-FRONTIER-35793584484/handoff.json sha256:8eb34da570e1070f2b23c6347cf59e325d8bfd147988ded9c139541458ba1b54",
+    "research/experiments/EXP-FRONTIER-35793584484/audit.json",
+    "codex/claim_state.json",
+    "research/claims/registry.json"
+  ]
+}

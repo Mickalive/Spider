@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-35797365772",
+  "lane": "product",
+  "decision": "FALSIFIED",
+  "claim_updates": [
+    {
+      "claim_id": "C-RESIDUAL-NOVELTY",
+      "status": "HYPOTHESIS",
+      "reason": "Bounded FALSIFIED on WebArena-Verified v2 proxy file-based census 192 tasks /36 families /49 templates /L 8-14 with genuine src/spider/kernel.py distill_parameterized (Jaccard>=0.75 constant-anchor, structure-similarity>=0.75, field-path relevance) and behavioral freshness 0.25 + UNKNOWN<0.80. Controls PC1 hit_rate 1.0 STAGEHAND/TERX at n0 50 tok, PC2 binding 1.0 via _bind, PC3 NC2 false_accept 0.3125 in [0.10,0.60] PASS per result.json:controls and audit.json:recomputed_metrics. C3 rho_novelty_per_hit 0.8199 CI[0.749,0.876] p0.00020 and C4 R2_delta 0.751 per_hit |rho_length|<0.002 per stratum technically PASS but audit finds scientifically vacuous: SPIDER UNKNOWN rate 71.9% (138/192) falls back to COLD at n>0, per_hit 50 at n0, 319.7 at n=0.25, 500 at n>=0.5 equals COLD, so rho/R2 reflect binary gating step not proportional parameterization. C5 fails frozen rule: SPIDER/RAG per_hit 1.0 at n0 >0.85 and 1.573 at n0.25 >0.85, SPIDER/TERX per_hit 1.0 at n>=0.5 not <1.0 (result.json:criteria.C5, audit:recomputed_metrics.ratios_per_hit). C5 total passes (SPIDER/COLD 0.163 at n0) but per_hit parity fails, triggering FALSIFIED per spec falsifier F5. Audit status REVISE producer_claim_supported false, so no promotion to EXPERIMENTAL. Bounded falsification only for this freshness 0.25/QCR/proxy setting; global C-RESIDUAL-NOVELTY remains HYPOTHESIS, not globally REJECTED."
+    },
+    {
+      "claim_id": "C-PRODUCT-ECON",
+      "status": "HYPOTHESIS",
+      "reason": "Bounded FALSIFIED with same evidence as C-RESIDUAL-NOVELTY: honest amortized saving >=25% vs COLD holds on M_total_f10 (0.163 at n0, CI[0.152,0.175]) and f100 (0.146) per result.json:metrics.ratios and audit:recomputed_metrics, but per_hit economics vs shipped baselines under QCR fails (SPIDER/RAG >0.85 at n0 and n0.25, SPIDER/TERX not <1.0 at n>=0.25) because SPIDER abstains via freshness gating while RAG shows proportional scaling (50->203->341) proving environment can express proportional cost. Mean success 1.0 false_accept 0 UNKNOWN_precision 1.0 ECE_exec 0.025 on EXEC n=54 with 4/5 empty bins are vacuous via COLD fallback (audit required_fix5). No end-to-end Pareto tokens/browser/latency beyond deterministic proxy; gpt-4o-mini+Playwright Docker replication not executed (provenance environment numpy unavailable, validity_notes[5]). C-PRODUCT-ECON remains HYPOTHESIS bounded; no EXPERIMENTAL or PRODUCT_CORE promotion."
+    },
+    {
+      "claim_id": "C-LLM-INHERIT",
+      "status": "HYPOTHESIS",
+      "reason": "Bounded FALSIFIED same setting: QCR frozen bank TFIDF Jaccard TAU 0.30 same ranker for all systems shows RAG-EMBED proportional retrievability at n0.25 while SPIDER parameterized binding is gated to UNKNOWN, so post-retrieval parameterized inheritance advantage (SPIDER/RAG <=0.85) not demonstrated under QCR. Audit finds RAG per_hit 203 < SPIDER 320 at n0.25, SPIDER does not beat retrievable RAG or TERX at partial novelty. No real LLM selection accuracy or real LLM cost measured. C-LLM-INHERIT remains HYPOTHESIS bounded; no evidence for cross-site LLM inheritance transfer on this census."
+    }
+  ],
+  "product_action": "no_promotion",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "Does relaxing behavioral freshness gating from 0.25 to a higher (0.50) or slot-aware threshold enable SPIDER parameterized inheritance to execute at partial novelty (n=0.25) and achieve per_hit cost <=0.85x RAG-EMBED and <1.0x TERX with false_accept<=0.10 and UNKNOWN_precision>=0.85/ECE<=0.15 under QCR with non-vacuous mock on the 192/36 file-based census before scaling to gpt-4o-mini+Playwright Docker replication?",
+  "reason": "Producer COMPLETE FALSIFIES with C1 true C2 true C3 true C4 true C5 per_hit false C6 true; audit REVISE recomputes all primary metrics exactly (rho 0.8199 CI [0.749,0.876] p0.0002, R2_delta 0.751, per_hit SPIDER 50/319.7/500 vs RAG 50/203/340, SPIDER/RAG 1.0/1.57) but finds high UNKNOWN 71.9% makes C3/C4 technically pass yet scientifically vacuous binary gating, C5 per_hit parity/advantage vs shipped Stagehand/TERX/RAG fails, NC1 hardcoded COLD, UNKNOWN_precision vacuous via fallback. Positive controls prove substrate can measure 50-tok hits and non-vacuous mock can fail (PC3 0.3125) but SUT never exercises wrong-bound path. Audit claim_ceiling bounds outcome to FALSIFIED for proxy file-based census with freshness 0.25/QCR/proxy cost model, not globally closed, no VALIDATED/PRODUCT_CORE: audit not PASS, branded economics remain unmeasured on real LLM/Docker/full-DOM, so verdict is bounded FALSIFIED with next question targeting gating artifact.",
+  "evidence_refs": [
+    "research/experiments/EXP-PRODUCT-35797365772/result.json",
+    "research/experiments/EXP-PRODUCT-35797365772/audit.json",
+    "research/experiments/EXP-PRODUCT-35797365772/spec.json",
+    "research/experiments/EXP-PRODUCT-35797365772/prereg.md",
+    "research/experiments/EXP-PRODUCT-35797365772/freeze.json",
+    "research/experiments/EXP-PRODUCT-35797365772/provenance.json",
+    "research/experiments/EXP-PRODUCT-35797365772/artifacts/raw_per_task.csv",
+    "research/experiments/EXP-PRODUCT-35797365772/artifacts/derived_metrics.json",
+    "research/experiments/EXP-PRODUCT-35797365772/artifacts/cost_config.json",
+    "research/experiments/EXP-PRODUCT-35797365772/artifacts/qcr_bank_manifest.json",
+    "research/experiments/EXP-PRODUCT-35797365772/artifacts/registry.jsonl",
+    "research/experiments/EXP-PRODUCT-35797365772/run_experiment.py"
+  ]
+}

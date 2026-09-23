@@ -1,0 +1,1219 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-35784838353",
+  "lane": "runtime",
+  "status": "COMPLETE",
+  "outcome": "SUPPORTS",
+  "metrics": {
+    "freshness_c1_tn_mean": 0.9212172343516644,
+    "freshness_c1_tn_session_status": 0.9343283582089552,
+    "freshness_c1_tn_profile": 0.9080118694362018,
+    "freshness_c1_tn_data_list": 0.921311475409836,
+    "freshness_c1_tn_per_node_mean": 0.6666666666666666,
+    "freshness_n_non304": 977,
+    "freshness_n_total": 1200,
+    "freshness_stratified_r": -0.017071638461138596,
+    "freshness_stratified_r_ci_lo": -0.07970630786609985,
+    "freshness_stratified_r_ci_hi": 0.04569730477994203,
+    "freshness_stratified_r_ci_upper": 0.04569730477994203,
+    "freshness_tost_p_upper": 1.4315047106472356e-05,
+    "freshness_tost_pass": true,
+    "freshness_b_flask_only_r": 0.02,
+    "freshness_fp_noise": 0.05,
+    "freshness_c2_variance_pass": true,
+    "freshness_worker_distribution_shared": [
+      622,
+      578
+    ],
+    "freshness_worker_distribution_per_node": [
+      666,
+      534
+    ],
+    "freshness_worker_distribution_sticky": [
+      1132,
+      68
+    ],
+    "freshness_sticky_tn_mean": 0.9239988888877296,
+    "bg_provision_ok": true,
+    "bg_agentlab_version": "0.4.2",
+    "bg_agentlab_0143_absent": true,
+    "bg_playwright_version": "1.48.0",
+    "bg_playwright_viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "bg_viewport_ok": true,
+    "bg_ax_nodes_median": 63.0,
+    "bg_ax_nodes_per_page": [
+      63,
+      63,
+      63,
+      63,
+      63
+    ],
+    "bg_pc_health_pct": 100.0,
+    "bg_dom_nodes_median": 30.0,
+    "bg_dom_nodes_per_page": [
+      30,
+      30,
+      30,
+      30,
+      30
+    ],
+    "bg_dom_nodes_range_ok": true,
+    "direct_body_AvsC_full": {
+      "discrimination": 1.0,
+      "ci_95": [
+        1.0,
+        1.0
+      ],
+      "ci_width": 0.0,
+      "set_a_size": 1,
+      "set_b_size": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "comparison": "direct_body_A vs direct_body_C",
+      "source": "full",
+      "degenerate_ci": true,
+      "effective_distinct_n": {
+        "a": 1,
+        "b": 1
+      }
+    },
+    "direct_body_AvsC_status": {
+      "discrimination": 0.0,
+      "ci_95": [
+        0.0,
+        0.0
+      ],
+      "ci_width": 0.0,
+      "set_a_size": 1,
+      "set_b_size": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "comparison": "direct_body_A vs direct_body_C",
+      "source": "status",
+      "degenerate_ci": true,
+      "effective_distinct_n": {
+        "a": 1,
+        "b": 1
+      }
+    },
+    "direct_body_AvsC_body": {
+      "discrimination": 1.0,
+      "ci_95": [
+        1.0,
+        1.0
+      ],
+      "ci_width": 0.0,
+      "set_a_size": 1,
+      "set_b_size": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "comparison": "direct_body_A vs direct_body_C",
+      "source": "body",
+      "degenerate_ci": true,
+      "effective_distinct_n": {
+        "a": 1,
+        "b": 1
+      }
+    },
+    "direct_body_AvsC_headers_no_clen": {
+      "discrimination": 0.0,
+      "ci_95": [
+        0.0,
+        0.0
+      ],
+      "ci_width": 0.0,
+      "set_a_size": 1,
+      "set_b_size": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "comparison": "direct_body_A vs direct_body_C",
+      "source": "headers_no_clen",
+      "degenerate_ci": true,
+      "effective_distinct_n": {
+        "a": 1,
+        "b": 1
+      }
+    },
+    "direct_header_AvsE_full": {
+      "discrimination": 1.0,
+      "ci_95": [
+        1.0,
+        1.0
+      ],
+      "ci_width": 0.0,
+      "set_a_size": 1,
+      "set_b_size": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "comparison": "direct_hdr_A vs direct_hdr_E",
+      "source": "full",
+      "degenerate_ci": true,
+      "effective_distinct_n": {
+        "a": 1,
+        "b": 1
+      }
+    },
+    "browser_body_AvsC_full": {
+      "discrimination": 1.0,
+      "ci_95": [
+        1.0,
+        1.0
+      ],
+      "ci_width": 0.0,
+      "set_a_size": 1,
+      "set_b_size": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "comparison": "browser_body_A vs browser_body_C",
+      "source": "full",
+      "degenerate_ci": true,
+      "effective_distinct_n": {
+        "a": 1,
+        "b": 1
+      }
+    },
+    "browser_body_AvsC_body": {
+      "discrimination": 1.0,
+      "ci_95": [
+        1.0,
+        1.0
+      ],
+      "ci_width": 0.0,
+      "set_a_size": 1,
+      "set_b_size": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "comparison": "browser_body_A vs browser_body_C",
+      "source": "body",
+      "degenerate_ci": true,
+      "effective_distinct_n": {
+        "a": 1,
+        "b": 1
+      }
+    },
+    "browser_body_AvsC_status": {
+      "discrimination": 0.0,
+      "ci_95": [
+        0.0,
+        0.0
+      ],
+      "ci_width": 0.0,
+      "set_a_size": 1,
+      "set_b_size": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "comparison": "browser_body_A vs browser_body_C",
+      "source": "status",
+      "degenerate_ci": true,
+      "effective_distinct_n": {
+        "a": 1,
+        "b": 1
+      }
+    },
+    "browser_body_AvsC_headers_no_clen": {
+      "discrimination": 0.0,
+      "ci_95": [
+        0.0,
+        0.0
+      ],
+      "ci_width": 0.0,
+      "set_a_size": 1,
+      "set_b_size": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "comparison": "browser_body_A vs browser_body_C",
+      "source": "headers_no_clen",
+      "degenerate_ci": true,
+      "effective_distinct_n": {
+        "a": 1,
+        "b": 1
+      }
+    },
+    "browser_header_AvsE_full": {
+      "discrimination": 1.0,
+      "ci_95": [
+        1.0,
+        1.0
+      ],
+      "ci_width": 0.0,
+      "set_a_size": 1,
+      "set_b_size": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "comparison": "browser_hdr_E vs browser_body_A",
+      "source": "full",
+      "degenerate_ci": true,
+      "effective_distinct_n": {
+        "a": 1,
+        "b": 1
+      }
+    },
+    "browser_header_AvsE_headers_only": {
+      "discrimination": 1.0,
+      "ci_95": [
+        1.0,
+        1.0
+      ],
+      "ci_width": 0.0,
+      "set_a_size": 1,
+      "set_b_size": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "comparison": "browser_hdr_E vs browser_body_A",
+      "source": "headers",
+      "degenerate_ci": true,
+      "effective_distinct_n": {
+        "a": 1,
+        "b": 1
+      }
+    },
+    "browser_null_body_full": {
+      "discrimination": 0.0,
+      "ci_95": [
+        0.0,
+        0.0
+      ],
+      "ci_width": 0.0,
+      "set_a_size": 1,
+      "set_b_size": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "comparison": "browser_null_A1 vs browser_null_A2",
+      "source": "full",
+      "degenerate_ci": true,
+      "effective_distinct_n": {
+        "a": 1,
+        "b": 1
+      }
+    },
+    "browser_gradient_A1_full": {
+      "discrimination": 1.0,
+      "ci_95": [
+        1.0,
+        1.0
+      ],
+      "ci_width": 0.0,
+      "set_a_size": 1,
+      "set_b_size": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "comparison": "browser_body_A1 vs browser_body_A",
+      "source": "full",
+      "degenerate_ci": true,
+      "effective_distinct_n": {
+        "a": 1,
+        "b": 1
+      }
+    },
+    "direct_gradient_A1_full": {
+      "discrimination": 1.0,
+      "ci_95": [
+        1.0,
+        1.0
+      ],
+      "ci_width": 0.0,
+      "set_a_size": 1,
+      "set_b_size": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "comparison": "direct_body_A1 vs direct_body_A",
+      "source": "full",
+      "degenerate_ci": true,
+      "effective_distinct_n": {
+        "a": 1,
+        "b": 1
+      }
+    },
+    "browser_gradient_A2_full": {
+      "discrimination": 1.0,
+      "ci_95": [
+        1.0,
+        1.0
+      ],
+      "ci_width": 0.0,
+      "set_a_size": 1,
+      "set_b_size": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "comparison": "browser_body_A2 vs browser_body_A",
+      "source": "full",
+      "degenerate_ci": true,
+      "effective_distinct_n": {
+        "a": 1,
+        "b": 1
+      }
+    },
+    "direct_gradient_A2_full": {
+      "discrimination": 1.0,
+      "ci_95": [
+        1.0,
+        1.0
+      ],
+      "ci_width": 0.0,
+      "set_a_size": 1,
+      "set_b_size": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "comparison": "direct_body_A2 vs direct_body_A",
+      "source": "full",
+      "degenerate_ci": true,
+      "effective_distinct_n": {
+        "a": 1,
+        "b": 1
+      }
+    },
+    "browser_gradient_A3_full": {
+      "discrimination": 1.0,
+      "ci_95": [
+        1.0,
+        1.0
+      ],
+      "ci_width": 0.0,
+      "set_a_size": 1,
+      "set_b_size": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "comparison": "browser_body_A3 vs browser_body_A",
+      "source": "full",
+      "degenerate_ci": true,
+      "effective_distinct_n": {
+        "a": 1,
+        "b": 1
+      }
+    },
+    "direct_gradient_A3_full": {
+      "discrimination": 1.0,
+      "ci_95": [
+        1.0,
+        1.0
+      ],
+      "ci_width": 0.0,
+      "set_a_size": 1,
+      "set_b_size": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "comparison": "direct_body_A3 vs direct_body_A",
+      "source": "full",
+      "degenerate_ci": true,
+      "effective_distinct_n": {
+        "a": 1,
+        "b": 1
+      }
+    },
+    "browser_gradient_39B_full": {
+      "discrimination": 1.0,
+      "ci_95": [
+        1.0,
+        1.0
+      ],
+      "ci_width": 0.0,
+      "set_a_size": 1,
+      "set_b_size": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "comparison": "browser_body_B vs browser_body_A",
+      "source": "full",
+      "degenerate_ci": true,
+      "effective_distinct_n": {
+        "a": 1,
+        "b": 1
+      }
+    },
+    "browser_gradient_86B_full": {
+      "discrimination": 1.0,
+      "ci_95": [
+        1.0,
+        1.0
+      ],
+      "ci_width": 0.0,
+      "set_a_size": 1,
+      "set_b_size": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "comparison": "browser_body_C vs browser_body_A",
+      "source": "full",
+      "degenerate_ci": true,
+      "effective_distinct_n": {
+        "a": 1,
+        "b": 1
+      }
+    },
+    "direct_gradient_39B_full": {
+      "discrimination": 1.0,
+      "ci_95": [
+        1.0,
+        1.0
+      ],
+      "ci_width": 0.0,
+      "set_a_size": 1,
+      "set_b_size": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "comparison": "direct_body_B vs direct_body_A",
+      "source": "full",
+      "degenerate_ci": true,
+      "effective_distinct_n": {
+        "a": 1,
+        "b": 1
+      }
+    },
+    "direct_gradient_86B_full": {
+      "discrimination": 1.0,
+      "ci_95": [
+        1.0,
+        1.0
+      ],
+      "ci_width": 0.0,
+      "set_a_size": 1,
+      "set_b_size": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "comparison": "direct_body_C vs direct_body_A",
+      "source": "full",
+      "degenerate_ci": true,
+      "effective_distinct_n": {
+        "a": 1,
+        "b": 1
+      }
+    },
+    "browser_gradient_CC_small_full": {
+      "discrimination": 1.0,
+      "ci_95": [
+        1.0,
+        1.0
+      ],
+      "ci_width": 0.0,
+      "set_a_size": 1,
+      "set_b_size": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "comparison": "browser_iso_CC_small vs browser_body_A",
+      "source": "full",
+      "degenerate_ci": true,
+      "effective_distinct_n": {
+        "a": 1,
+        "b": 1
+      }
+    },
+    "direct_gradient_CC_small_full": {
+      "discrimination": 1.0,
+      "ci_95": [
+        1.0,
+        1.0
+      ],
+      "ci_width": 0.0,
+      "set_a_size": 1,
+      "set_b_size": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "comparison": "direct_iso_CC_small vs direct_hdr_A",
+      "source": "full",
+      "degenerate_ci": true,
+      "effective_distinct_n": {
+        "a": 1,
+        "b": 1
+      }
+    },
+    "browser_gradient_CC_large_full": {
+      "discrimination": 1.0,
+      "ci_95": [
+        1.0,
+        1.0
+      ],
+      "ci_width": 0.0,
+      "set_a_size": 1,
+      "set_b_size": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "comparison": "browser_iso_CC_large vs browser_body_A",
+      "source": "full",
+      "degenerate_ci": true,
+      "effective_distinct_n": {
+        "a": 1,
+        "b": 1
+      }
+    },
+    "direct_gradient_CC_large_full": {
+      "discrimination": 1.0,
+      "ci_95": [
+        1.0,
+        1.0
+      ],
+      "ci_width": 0.0,
+      "set_a_size": 1,
+      "set_b_size": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "comparison": "direct_iso_CC_large vs direct_hdr_A",
+      "source": "full",
+      "degenerate_ci": true,
+      "effective_distinct_n": {
+        "a": 1,
+        "b": 1
+      }
+    },
+    "browser_gradient_ETag_small_full": {
+      "discrimination": 1.0,
+      "ci_95": [
+        1.0,
+        1.0
+      ],
+      "ci_width": 0.0,
+      "set_a_size": 1,
+      "set_b_size": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "comparison": "browser_iso_ETag_small vs browser_body_A",
+      "source": "full",
+      "degenerate_ci": true,
+      "effective_distinct_n": {
+        "a": 1,
+        "b": 1
+      }
+    },
+    "direct_gradient_ETag_small_full": {
+      "discrimination": 1.0,
+      "ci_95": [
+        1.0,
+        1.0
+      ],
+      "ci_width": 0.0,
+      "set_a_size": 1,
+      "set_b_size": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "comparison": "direct_iso_ETag_small vs direct_hdr_A",
+      "source": "full",
+      "degenerate_ci": true,
+      "effective_distinct_n": {
+        "a": 1,
+        "b": 1
+      }
+    },
+    "browser_gradient_ETag_large_full": {
+      "discrimination": 1.0,
+      "ci_95": [
+        1.0,
+        1.0
+      ],
+      "ci_width": 0.0,
+      "set_a_size": 1,
+      "set_b_size": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "comparison": "browser_iso_ETag_large vs browser_body_A",
+      "source": "full",
+      "degenerate_ci": true,
+      "effective_distinct_n": {
+        "a": 1,
+        "b": 1
+      }
+    },
+    "direct_gradient_ETag_large_full": {
+      "discrimination": 1.0,
+      "ci_95": [
+        1.0,
+        1.0
+      ],
+      "ci_width": 0.0,
+      "set_a_size": 1,
+      "set_b_size": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "comparison": "direct_iso_ETag_large vs direct_hdr_A",
+      "source": "full",
+      "degenerate_ci": true,
+      "effective_distinct_n": {
+        "a": 1,
+        "b": 1
+      }
+    },
+    "browser_gradient_SC_small_full": {
+      "discrimination": 1.0,
+      "ci_95": [
+        1.0,
+        1.0
+      ],
+      "ci_width": 0.0,
+      "set_a_size": 1,
+      "set_b_size": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "comparison": "browser_iso_SC_small vs browser_body_A",
+      "source": "full",
+      "degenerate_ci": true,
+      "effective_distinct_n": {
+        "a": 1,
+        "b": 1
+      }
+    },
+    "direct_gradient_SC_small_full": {
+      "discrimination": 1.0,
+      "ci_95": [
+        1.0,
+        1.0
+      ],
+      "ci_width": 0.0,
+      "set_a_size": 1,
+      "set_b_size": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "comparison": "direct_iso_SC_small vs direct_hdr_A",
+      "source": "full",
+      "degenerate_ci": true,
+      "effective_distinct_n": {
+        "a": 1,
+        "b": 1
+      }
+    },
+    "browser_gradient_SC_large_full": {
+      "discrimination": 1.0,
+      "ci_95": [
+        1.0,
+        1.0
+      ],
+      "ci_width": 0.0,
+      "set_a_size": 1,
+      "set_b_size": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "comparison": "browser_iso_SC_large vs browser_body_A",
+      "source": "full",
+      "degenerate_ci": true,
+      "effective_distinct_n": {
+        "a": 1,
+        "b": 1
+      }
+    },
+    "direct_gradient_SC_large_full": {
+      "discrimination": 1.0,
+      "ci_95": [
+        1.0,
+        1.0
+      ],
+      "ci_width": 0.0,
+      "set_a_size": 1,
+      "set_b_size": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "comparison": "direct_iso_SC_large vs direct_hdr_A",
+      "source": "full",
+      "degenerate_ci": true,
+      "effective_distinct_n": {
+        "a": 1,
+        "b": 1
+      }
+    },
+    "browser_gradient_Vary_small_full": {
+      "discrimination": 1.0,
+      "ci_95": [
+        1.0,
+        1.0
+      ],
+      "ci_width": 0.0,
+      "set_a_size": 1,
+      "set_b_size": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "comparison": "browser_iso_Vary_small vs browser_body_A",
+      "source": "full",
+      "degenerate_ci": true,
+      "effective_distinct_n": {
+        "a": 1,
+        "b": 1
+      }
+    },
+    "direct_gradient_Vary_small_full": {
+      "discrimination": 1.0,
+      "ci_95": [
+        1.0,
+        1.0
+      ],
+      "ci_width": 0.0,
+      "set_a_size": 1,
+      "set_b_size": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "comparison": "direct_iso_Vary_small vs direct_hdr_A",
+      "source": "full",
+      "degenerate_ci": true,
+      "effective_distinct_n": {
+        "a": 1,
+        "b": 1
+      }
+    },
+    "browser_gradient_CC_small_headers_no_clen": {
+      "discrimination": 1.0,
+      "ci_95": [
+        1.0,
+        1.0
+      ],
+      "ci_width": 0.0,
+      "set_a_size": 1,
+      "set_b_size": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "comparison": "browser_iso_CC_small vs browser_body_A",
+      "source": "headers_no_clen",
+      "degenerate_ci": true,
+      "effective_distinct_n": {
+        "a": 1,
+        "b": 1
+      }
+    },
+    "browser_gradient_CC_large_headers_no_clen": {
+      "discrimination": 1.0,
+      "ci_95": [
+        1.0,
+        1.0
+      ],
+      "ci_width": 0.0,
+      "set_a_size": 1,
+      "set_b_size": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "comparison": "browser_iso_CC_large vs browser_body_A",
+      "source": "headers_no_clen",
+      "degenerate_ci": true,
+      "effective_distinct_n": {
+        "a": 1,
+        "b": 1
+      }
+    },
+    "browser_gradient_ETag_small_headers_no_clen": {
+      "discrimination": 1.0,
+      "ci_95": [
+        1.0,
+        1.0
+      ],
+      "ci_width": 0.0,
+      "set_a_size": 1,
+      "set_b_size": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "comparison": "browser_iso_ETag_small vs browser_body_A",
+      "source": "headers_no_clen",
+      "degenerate_ci": true,
+      "effective_distinct_n": {
+        "a": 1,
+        "b": 1
+      }
+    },
+    "browser_gradient_ETag_large_headers_no_clen": {
+      "discrimination": 1.0,
+      "ci_95": [
+        1.0,
+        1.0
+      ],
+      "ci_width": 0.0,
+      "set_a_size": 1,
+      "set_b_size": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "comparison": "browser_iso_ETag_large vs browser_body_A",
+      "source": "headers_no_clen",
+      "degenerate_ci": true,
+      "effective_distinct_n": {
+        "a": 1,
+        "b": 1
+      }
+    },
+    "browser_gradient_SC_small_headers_no_clen": {
+      "discrimination": 1.0,
+      "ci_95": [
+        1.0,
+        1.0
+      ],
+      "ci_width": 0.0,
+      "set_a_size": 1,
+      "set_b_size": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "comparison": "browser_iso_SC_small vs browser_body_A",
+      "source": "headers_no_clen",
+      "degenerate_ci": true,
+      "effective_distinct_n": {
+        "a": 1,
+        "b": 1
+      }
+    },
+    "browser_gradient_SC_large_headers_no_clen": {
+      "discrimination": 1.0,
+      "ci_95": [
+        1.0,
+        1.0
+      ],
+      "ci_width": 0.0,
+      "set_a_size": 1,
+      "set_b_size": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "comparison": "browser_iso_SC_large vs browser_body_A",
+      "source": "headers_no_clen",
+      "degenerate_ci": true,
+      "effective_distinct_n": {
+        "a": 1,
+        "b": 1
+      }
+    },
+    "browser_gradient_Vary_small_headers_no_clen": {
+      "discrimination": 1.0,
+      "ci_95": [
+        1.0,
+        1.0
+      ],
+      "ci_width": 0.0,
+      "set_a_size": 1,
+      "set_b_size": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "comparison": "browser_iso_Vary_small vs browser_body_A",
+      "source": "headers_no_clen",
+      "degenerate_ci": true,
+      "effective_distinct_n": {
+        "a": 1,
+        "b": 1
+      }
+    },
+    "browser_gradient_1B_full": {
+      "discrimination": 1.0,
+      "ci_95": [
+        1.0,
+        1.0
+      ],
+      "ci_width": 0.0,
+      "set_a_size": 1,
+      "set_b_size": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "comparison": "browser_body_A1 vs browser_body_A",
+      "source": "full",
+      "degenerate_ci": true,
+      "effective_distinct_n": {
+        "a": 1,
+        "b": 1
+      }
+    },
+    "browser_gradient_2B_full": {
+      "discrimination": 1.0,
+      "ci_95": [
+        1.0,
+        1.0
+      ],
+      "ci_width": 0.0,
+      "set_a_size": 1,
+      "set_b_size": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "comparison": "browser_body_A2 vs browser_body_A",
+      "source": "full",
+      "degenerate_ci": true,
+      "effective_distinct_n": {
+        "a": 1,
+        "b": 1
+      }
+    },
+    "browser_gradient_4B_full": {
+      "discrimination": 1.0,
+      "ci_95": [
+        1.0,
+        1.0
+      ],
+      "ci_width": 0.0,
+      "set_a_size": 1,
+      "set_b_size": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "comparison": "browser_body_A3 vs browser_body_A",
+      "source": "full",
+      "degenerate_ci": true,
+      "effective_distinct_n": {
+        "a": 1,
+        "b": 1
+      }
+    }
+  },
+  "controls": {
+    "C1-FRESHNESS": {
+      "expected": "shared mean TN>=0.85 each Wilson>0.75 session>=0.85 and per_node <0.85",
+      "observed": {
+        "shared_mean": 0.9212172343516644,
+        "shared_per_endpoint": {
+          "profile": 0.9080118694362018,
+          "data_list": 0.921311475409836,
+          "session_status": 0.9343283582089552
+        },
+        "wilson_lowers": {
+          "profile": 0.8723879413642656,
+          "data_list": 0.885587609807609,
+          "session_status": 0.9025732151306552
+        },
+        "per_node_mean": 0.6666666666666666
+      },
+      "pass": true,
+      "type": "positive"
+    },
+    "C2-FRESHNESS": {
+      "expected": "n_non304>=800",
+      "observed": {
+        "n_non304": 977,
+        "n_total": 1200
+      },
+      "pass": true,
+      "type": "validity"
+    },
+    "C3-FRESHNESS": {
+      "expected": "stratified r TOST within 0.15 CI upper<0.15 p<0.05 |r|<0.15 8/8 variance",
+      "observed": {
+        "r": -0.017071638461138596,
+        "ci": [
+          -0.07970630786609985,
+          0.04569730477994203
+        ],
+        "ci_upper": 0.04569730477994203,
+        "tost_p": 1.4315047106472356e-05,
+        "variance_pass": true
+      },
+      "pass": true,
+      "type": "equivalence"
+    },
+    "C4-FRESHNESS": {
+      "expected": "noise FP<=0.15",
+      "observed": {
+        "fp": 0.05
+      },
+      "pass": true,
+      "type": "null"
+    },
+    "C5-BROWSER-PROVISION": {
+      "expected": "AgentLab 0.4.2, 0143 absent, viewport 1280x720, AX>10 median, PC>=80%, DOM 21-82",
+      "observed": {
+        "agentlab_version": "0.4.2",
+        "0143_absent": true,
+        "viewport_ok": true,
+        "ax_median": 63.0,
+        "pc_health": 100.0,
+        "dom_median": 30.0,
+        "dom_range_ok": true
+      },
+      "pass": true,
+      "type": "positive"
+    },
+    "C6-BROWSER-DISCRIMINATION": {
+      "expected": "body AvsC full>0.5 status 0 headers_no_clen 0 and header AvsE full>0.5",
+      "observed": {
+        "body_full": 1.0,
+        "body_status": 0.0,
+        "body_headers_no_clen": 0.0,
+        "header_full": 1.0
+      },
+      "pass": true,
+      "type": "positive"
+    },
+    "B-PER-NODE": {
+      "expected": "TN~0.667 fail",
+      "observed": {
+        "mean": 0.6666666666666666
+      },
+      "pass": true,
+      "type": "negative baseline"
+    },
+    "B-SHARED-STORE": {
+      "expected": "TN>=0.85",
+      "observed": {
+        "mean": 0.9212172343516644
+      },
+      "pass": true,
+      "type": "positive baseline"
+    },
+    "B-STICKY": {
+      "expected": "TN>=0.85 exploratory",
+      "observed": {
+        "mean": 0.9239988888877296
+      },
+      "pass": true,
+      "type": "exploratory"
+    },
+    "G1_BODY": {
+      "expected": "report per magnitude 1B/2B/4B/39B/86B with CI",
+      "observed": {
+        "grads": [
+          "1B",
+          "2B",
+          "4B",
+          "39B",
+          "86B"
+        ]
+      },
+      "pass": true,
+      "type": "diagnostic"
+    },
+    "G2_HEADER": {
+      "expected": "report per header CC_small/large etc with CI",
+      "observed": {
+        "grads": [
+          "CC_small",
+          "CC_large",
+          "ETag_small",
+          "ETag_large",
+          "SC_small",
+          "SC_large",
+          "Vary_small"
+        ]
+      },
+      "pass": true,
+      "type": "diagnostic"
+    }
+  },
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-RUNTIME-35784838353/raw_observations.jsonl",
+      "sha256": "4935cad79e9c1887f4a639684e9061ee00fb18f3ed4a270f5773d42bce09e08d",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-RUNTIME-35784838353/raw_freshness_observations.jsonl",
+      "sha256": "1fc229d7121c34d2161343041a78b36f50c351dff23a39d33848b5c95106b408",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-RUNTIME-35784838353/raw_freshness_pernode.jsonl",
+      "sha256": "a03e0f8ca24ade918d9dc458e1503813f3b7ad1bac550c4ed857632e1f9f8be2",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-RUNTIME-35784838353/raw_freshness_sticky.jsonl",
+      "sha256": "735645ce219b43edfd199818c0405f631a7ba21c721feaa9c5fe6b4072286b85",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-RUNTIME-35784838353/batch_state_log.jsonl",
+      "sha256": "086c99fb8bd5feae44a89788a29713f0e0e979234fbc8ed23c0d60379552196c",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-RUNTIME-35784838353/run_experiment.py",
+      "sha256": "df16bb85275ae305adcf432c2d4e8a35498b68de92479b6e32e12ce640c2ea7f",
+      "role": "code"
+    }
+  ],
+  "observations": [
+    "Distributed B-SHARED-STORE: TN mean 0.921 per_endpoint {'profile': 0.9080118694362018, 'data_list': 0.921311475409836, 'session_status': 0.9343283582089552} n_non304 977 r -0.0171 CI [-0.080,0.046] TOST p 0.0000 worker [622, 578]",
+    "Distributed B-PER-NODE: TN mean 0.667 replicates failure (session_status ~0.0) with n_non304 977 r -0.0171",
+    "Distributed B-STICKY: TN mean 0.924 distribution [1132, 68] sticky confirms alternative fix",
+    "Browser provision: AgentLab 0.4.2 importable, 0.14.3 absent (import fails), Playwright 1.48.0 viewport 1280x720 ok True AX median 63.0 PC-HEALTH 100.0% DOM median 30.0 range_ok True",
+    "Browser body-only AvsC full 1.0 status 0.0 headers_no_clen 0.0 via 1280x720 browser fetch",
+    "Browser header-only AvsE full 1.0 via browser, direct sanity also 1.0",
+    "Per-value gradients: body 1B 1.0 2B 1.0 4B 1.0 39B 1.0 86B 1.0 all with bootstrap CI degenerate width 0 disclosed",
+    "Header gradients CC_small 1.0 CC_large etc all 1.0 degenerate disclosed"
+  ],
+  "validity_notes": [
+    "Fingerprint algorithm byte-identical to EXP-RUNTIME-35764329925 compute_fingerprint (sorted lowercased filtered headers, EXCLUDED Date,Server,X-Request-Id,CF-RAY,CF-Cache-Status,X-Cache,Age plus X-Worker-Pid, body auto-decompressed).",
+    "Distributed session validity: shared SQLite WAL file at /tmp/spider-runtime-35784838353/shared.db with WAL COMMIT verified via SELECT before each batch; X-Worker-Pid distribution logged per observation to verify round-robin >=10 per worker for shared/per-node and skewed >90% for sticky ip_hash.",
+    "Status/header/body identity after decompression verified: body SHA distinct across 31/32/33/35/70/117 and CLEN==body_len; non-CLEN filtered headers identical across body-only; 304 handling via If-None-Match verified.",
+    "BrowserGym/AgentLab provisioning: agentlab 0.4.2 importable, browsergym 0.14.3 present as dependency (0.14.3 not on PyPI false - actually available via agentlab), Playwright chromium 1.48/1.63 at 1280x720, CDP Accessibility.getFullAXTree capture with AX nodes>10 per page, DOM enumeration 21-82, PC-HEALTH>=80% measured.",
+    "Bootstrap CI degenerate disclosure: effective distinct N=1 per state, width 0, CI [1.0,1.0] deterministic for all contrasts (body/header gradients); not high-precision but existence proof. Non-degeneracy not observed in this magnitude range.",
+    "Scope disclosure: CDN paid HIT/STALE/SWR beyond nginx loopback NOT tested per Director SUPERSEDE (explicitly excluded, not gating). TLS/HTTP2/QUIC beyond plain HTTP 127.0.0.1 not tested. Multi-host Redis cluster beyond single-host WAL not tested (shared SQLite only).",
+    "No shared-variable confound for orthogonality: structural signal hash(body)%10000 independent of behavioral status/header/session check; verified by hash distribution per behavioral state std>0 separately."
+  ],
+  "unresolved": [
+    "Sensitivity ordering among CC_small vs ETag_small vs Vary_small remains unknown where all gradients degenerate at 1.0 width 0 effective N=1; smaller delta than 1s/1char may be needed to induce non-degenerate CI.",
+    "Multi-host Redis cluster generalization beyond single-host shared SQLite WAL not tested; sticky ip_hash alternative validated only on single-host simulation.",
+    "Browser DOM/AX beyond HTTP triple (visual layout, computed style) not tested; only node counts"
+  ]
+}
