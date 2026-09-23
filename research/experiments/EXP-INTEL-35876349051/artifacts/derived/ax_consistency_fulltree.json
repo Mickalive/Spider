@@ -1,0 +1,51 @@
+{
+  "mean": null,
+  "ci_lower": null,
+  "ci_upper": null,
+  "per_family": {
+    "191": null,
+    "180": null,
+    "162": null,
+    "197": null,
+    "153": null,
+    "213": null,
+    "163": null,
+    "137": null,
+    "136": null,
+    "222": null
+  },
+  "per_family_truncated": {
+    "191": null,
+    "180": null,
+    "162": null,
+    "197": null,
+    "153": null,
+    "213": null,
+    "163": null,
+    "137": null,
+    "136": null,
+    "222": null
+  },
+  "truncated_mean": null,
+  "delta_vs_truncated": null,
+  "shuffle_null": null,
+  "variance_nonzero": null,
+  "valid_families": 0,
+  "valid_captures": 0,
+  "product_families": 0,
+  "product_captures": 0,
+  "grammar_type": "full-tree semantic/multi-anchor no truncation + dynamic-token stripping",
+  "dynamic_token_regexes": [
+    "csrf[_-]?token[\"\\']?\\s*[:=]\\s*[\"\\']?[a-zA-Z0-9_-]{10,}[\"\\']?",
+    "session[_-]?id[\"\\']?\\s*[:=]\\s*[\"\\']?[a-zA-Z0-9_-]{10,}[\"\\']?",
+    "_token[\"\\']?\\s*[:=]\\s*[\"\\']?[a-zA-Z0-9_-]{10,}[\"\\']?",
+    "timestamp[\"\\']?\\s*[:=]\\s*[\"\\']?\\d{10,13}[\"\\']?",
+    "nonce[\"\\']?\\s*[:=]\\s*[\"\\']?[a-zA-Z0-9_-]{10,}[\"\\']?",
+    "csrf[^\"\\']{0,30}value=\"[^\"]+\"",
+    "sessionId[^\"\\']*",
+    "\\b\\d{13}\\b",
+    "\\b[a-f0-9]{32,}\\b"
+  ],
+  "grammar_code_hash": "8d4b7cb8b543c10912f5d4325ccee0e5ae839f64c534a354f5ac8e7b1a364a45",
+  "placeholder_expansion": "get_task_start_url expands __SHOPPING__/path -> base+path verified"
+}

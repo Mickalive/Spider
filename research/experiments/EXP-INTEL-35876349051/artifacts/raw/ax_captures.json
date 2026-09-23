@@ -1,0 +1,422 @@
+[
+  {
+    "family_id": "191",
+    "task_id": 794,
+    "start_url": "http://localhost:7770",
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "ax_tree_hash": "UNAVAILABLE_SUBSTRATE",
+    "node_count": 0,
+    "dom_bytes": 0,
+    "dom_bytes_hash_stripped": "UNAVAILABLE",
+    "subtree_hash": "UNAVAILABLE",
+    "subtree_node_count": 0,
+    "ax_json_path": "",
+    "url": "",
+    "title": "",
+    "placeholder_expanded": false,
+    "is_product_page": false,
+    "error": "Docker not reachable or Playwright not installed after 3 retries"
+  },
+  {
+    "family_id": "191",
+    "task_id": 795,
+    "start_url": "http://localhost:7770",
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "ax_tree_hash": "UNAVAILABLE_SUBSTRATE",
+    "node_count": 0,
+    "dom_bytes": 0,
+    "dom_bytes_hash_stripped": "UNAVAILABLE",
+    "subtree_hash": "UNAVAILABLE",
+    "subtree_node_count": 0,
+    "ax_json_path": "",
+    "url": "",
+    "title": "",
+    "placeholder_expanded": false,
+    "is_product_page": false,
+    "error": "Docker not reachable or Playwright not installed after 3 retries"
+  },
+  {
+    "family_id": "180",
+    "task_id": 301,
+    "start_url": "http://localhost:7770",
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "ax_tree_hash": "UNAVAILABLE_SUBSTRATE",
+    "node_count": 0,
+    "dom_bytes": 0,
+    "dom_bytes_hash_stripped": "UNAVAILABLE",
+    "subtree_hash": "UNAVAILABLE",
+    "subtree_node_count": 0,
+    "ax_json_path": "",
+    "url": "",
+    "title": "",
+    "placeholder_expanded": false,
+    "is_product_page": false,
+    "error": "Docker not reachable or Playwright not installed after 3 retries"
+  },
+  {
+    "family_id": "180",
+    "task_id": 302,
+    "start_url": "http://localhost:7770",
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "ax_tree_hash": "UNAVAILABLE_SUBSTRATE",
+    "node_count": 0,
+    "dom_bytes": 0,
+    "dom_bytes_hash_stripped": "UNAVAILABLE",
+    "subtree_hash": "UNAVAILABLE",
+    "subtree_node_count": 0,
+    "ax_json_path": "",
+    "url": "",
+    "title": "",
+    "placeholder_expanded": false,
+    "is_product_page": false,
+    "error": "Docker not reachable or Playwright not installed after 3 retries"
+  },
+  {
+    "family_id": "162",
+    "task_id": 144,
+    "start_url": "http://localhost:7770",
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "ax_tree_hash": "UNAVAILABLE_SUBSTRATE",
+    "node_count": 0,
+    "dom_bytes": 0,
+    "dom_bytes_hash_stripped": "UNAVAILABLE",
+    "subtree_hash": "UNAVAILABLE",
+    "subtree_node_count": 0,
+    "ax_json_path": "",
+    "url": "",
+    "title": "",
+    "placeholder_expanded": false,
+    "is_product_page": false,
+    "error": "Docker not reachable or Playwright not installed after 3 retries"
+  },
+  {
+    "family_id": "162",
+    "task_id": 141,
+    "start_url": "http://localhost:7770",
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "ax_tree_hash": "UNAVAILABLE_SUBSTRATE",
+    "node_count": 0,
+    "dom_bytes": 0,
+    "dom_bytes_hash_stripped": "UNAVAILABLE",
+    "subtree_hash": "UNAVAILABLE",
+    "subtree_node_count": 0,
+    "ax_json_path": "",
+    "url": "",
+    "title": "",
+    "placeholder_expanded": false,
+    "is_product_page": false,
+    "error": "Docker not reachable or Playwright not installed after 3 retries"
+  },
+  {
+    "family_id": "197",
+    "task_id": 51,
+    "start_url": "http://localhost:7770",
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "ax_tree_hash": "UNAVAILABLE_SUBSTRATE",
+    "node_count": 0,
+    "dom_bytes": 0,
+    "dom_bytes_hash_stripped": "UNAVAILABLE",
+    "subtree_hash": "UNAVAILABLE",
+    "subtree_node_count": 0,
+    "ax_json_path": "",
+    "url": "",
+    "title": "",
+    "placeholder_expanded": false,
+    "is_product_page": false,
+    "error": "Docker not reachable or Playwright not installed after 3 retries"
+  },
+  {
+    "family_id": "197",
+    "task_id": 50,
+    "start_url": "http://localhost:7770",
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "ax_tree_hash": "UNAVAILABLE_SUBSTRATE",
+    "node_count": 0,
+    "dom_bytes": 0,
+    "dom_bytes_hash_stripped": "UNAVAILABLE",
+    "subtree_hash": "UNAVAILABLE",
+    "subtree_node_count": 0,
+    "ax_json_path": "",
+    "url": "",
+    "title": "",
+    "placeholder_expanded": false,
+    "is_product_page": false,
+    "error": "Docker not reachable or Playwright not installed after 3 retries"
+  },
+  {
+    "family_id": "153",
+    "task_id": 654,
+    "start_url": "http://localhost:7770",
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "ax_tree_hash": "UNAVAILABLE_SUBSTRATE",
+    "node_count": 0,
+    "dom_bytes": 0,
+    "dom_bytes_hash_stripped": "UNAVAILABLE",
+    "subtree_hash": "UNAVAILABLE",
+    "subtree_node_count": 0,
+    "ax_json_path": "",
+    "url": "",
+    "title": "",
+    "placeholder_expanded": false,
+    "is_product_page": false,
+    "error": "Docker not reachable or Playwright not installed after 3 retries"
+  },
+  {
+    "family_id": "153",
+    "task_id": 657,
+    "start_url": "http://localhost:7770",
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "ax_tree_hash": "UNAVAILABLE_SUBSTRATE",
+    "node_count": 0,
+    "dom_bytes": 0,
+    "dom_bytes_hash_stripped": "UNAVAILABLE",
+    "subtree_hash": "UNAVAILABLE",
+    "subtree_node_count": 0,
+    "ax_json_path": "",
+    "url": "",
+    "title": "",
+    "placeholder_expanded": false,
+    "is_product_page": false,
+    "error": "Docker not reachable or Playwright not installed after 3 retries"
+  },
+  {
+    "family_id": "213",
+    "task_id": 235,
+    "start_url": "http://localhost:7770",
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "ax_tree_hash": "UNAVAILABLE_SUBSTRATE",
+    "node_count": 0,
+    "dom_bytes": 0,
+    "dom_bytes_hash_stripped": "UNAVAILABLE",
+    "subtree_hash": "UNAVAILABLE",
+    "subtree_node_count": 0,
+    "ax_json_path": "",
+    "url": "",
+    "title": "",
+    "placeholder_expanded": false,
+    "is_product_page": false,
+    "error": "Docker not reachable or Playwright not installed after 3 retries"
+  },
+  {
+    "family_id": "213",
+    "task_id": 232,
+    "start_url": "http://localhost:7770",
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "ax_tree_hash": "UNAVAILABLE_SUBSTRATE",
+    "node_count": 0,
+    "dom_bytes": 0,
+    "dom_bytes_hash_stripped": "UNAVAILABLE",
+    "subtree_hash": "UNAVAILABLE",
+    "subtree_node_count": 0,
+    "ax_json_path": "",
+    "url": "",
+    "title": "",
+    "placeholder_expanded": false,
+    "is_product_page": false,
+    "error": "Docker not reachable or Playwright not installed after 3 retries"
+  },
+  {
+    "family_id": "163",
+    "task_id": 690,
+    "start_url": "http://localhost:7770",
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "ax_tree_hash": "UNAVAILABLE_SUBSTRATE",
+    "node_count": 0,
+    "dom_bytes": 0,
+    "dom_bytes_hash_stripped": "UNAVAILABLE",
+    "subtree_hash": "UNAVAILABLE",
+    "subtree_node_count": 0,
+    "ax_json_path": "",
+    "url": "",
+    "title": "",
+    "placeholder_expanded": false,
+    "is_product_page": false,
+    "error": "Docker not reachable or Playwright not installed after 3 retries"
+  },
+  {
+    "family_id": "163",
+    "task_id": 692,
+    "start_url": "http://localhost:7770",
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "ax_tree_hash": "UNAVAILABLE_SUBSTRATE",
+    "node_count": 0,
+    "dom_bytes": 0,
+    "dom_bytes_hash_stripped": "UNAVAILABLE",
+    "subtree_hash": "UNAVAILABLE",
+    "subtree_node_count": 0,
+    "ax_json_path": "",
+    "url": "",
+    "title": "",
+    "placeholder_expanded": false,
+    "is_product_page": false,
+    "error": "Docker not reachable or Playwright not installed after 3 retries"
+  },
+  {
+    "family_id": "137",
+    "task_id": 355,
+    "start_url": "http://localhost:7770",
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "ax_tree_hash": "UNAVAILABLE_SUBSTRATE",
+    "node_count": 0,
+    "dom_bytes": 0,
+    "dom_bytes_hash_stripped": "UNAVAILABLE",
+    "subtree_hash": "UNAVAILABLE",
+    "subtree_node_count": 0,
+    "ax_json_path": "",
+    "url": "",
+    "title": "",
+    "placeholder_expanded": false,
+    "is_product_page": false,
+    "error": "Docker not reachable or Playwright not installed after 3 retries"
+  },
+  {
+    "family_id": "137",
+    "task_id": 354,
+    "start_url": "http://localhost:7770",
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "ax_tree_hash": "UNAVAILABLE_SUBSTRATE",
+    "node_count": 0,
+    "dom_bytes": 0,
+    "dom_bytes_hash_stripped": "UNAVAILABLE",
+    "subtree_hash": "UNAVAILABLE",
+    "subtree_node_count": 0,
+    "ax_json_path": "",
+    "url": "",
+    "title": "",
+    "placeholder_expanded": false,
+    "is_product_page": false,
+    "error": "Docker not reachable or Playwright not installed after 3 retries"
+  },
+  {
+    "family_id": "136",
+    "task_id": 167,
+    "start_url": "http://localhost:7770/photosmart-plus-b209-clr-inkjetfb-p-s-c-usb-wrls-1.html",
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "ax_tree_hash": "UNAVAILABLE_SUBSTRATE",
+    "node_count": 0,
+    "dom_bytes": 0,
+    "dom_bytes_hash_stripped": "UNAVAILABLE",
+    "subtree_hash": "UNAVAILABLE",
+    "subtree_node_count": 0,
+    "ax_json_path": "",
+    "url": "",
+    "title": "",
+    "placeholder_expanded": true,
+    "is_product_page": false,
+    "error": "Docker not reachable or Playwright not installed after 3 retries"
+  },
+  {
+    "family_id": "136",
+    "task_id": 163,
+    "start_url": "http://localhost:7770/ostent-16gb-memory-card-stick-storage-for-sony-ps-vita-psv1000-2000-pch-z081-z161-z321-z641.html",
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "ax_tree_hash": "UNAVAILABLE_SUBSTRATE",
+    "node_count": 0,
+    "dom_bytes": 0,
+    "dom_bytes_hash_stripped": "UNAVAILABLE",
+    "subtree_hash": "UNAVAILABLE",
+    "subtree_node_count": 0,
+    "ax_json_path": "",
+    "url": "",
+    "title": "",
+    "placeholder_expanded": true,
+    "is_product_page": false,
+    "error": "Docker not reachable or Playwright not installed after 3 retries"
+  },
+  {
+    "family_id": "222",
+    "task_id": 24,
+    "start_url": "http://localhost:7770/haflinger-men-s-wool-felt-open-back-slippers-beige-550-peat-us-7.html",
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "ax_tree_hash": "UNAVAILABLE_SUBSTRATE",
+    "node_count": 0,
+    "dom_bytes": 0,
+    "dom_bytes_hash_stripped": "UNAVAILABLE",
+    "subtree_hash": "UNAVAILABLE",
+    "subtree_node_count": 0,
+    "ax_json_path": "",
+    "url": "",
+    "title": "",
+    "placeholder_expanded": true,
+    "is_product_page": false,
+    "error": "Docker not reachable or Playwright not installed after 3 retries"
+  },
+  {
+    "family_id": "222",
+    "task_id": 25,
+    "start_url": "http://localhost:7770/epson-workforce-wf-3620-wifi-direct-all-in-one-color-inkjet-printer-copier-scanner-amazon-dash-replenishment-ready.html",
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "ax_tree_hash": "UNAVAILABLE_SUBSTRATE",
+    "node_count": 0,
+    "dom_bytes": 0,
+    "dom_bytes_hash_stripped": "UNAVAILABLE",
+    "subtree_hash": "UNAVAILABLE",
+    "subtree_node_count": 0,
+    "ax_json_path": "",
+    "url": "",
+    "title": "",
+    "placeholder_expanded": true,
+    "is_product_page": false,
+    "error": "Docker not reachable or Playwright not installed after 3 retries"
+  }
+]

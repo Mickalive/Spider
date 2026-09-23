@@ -1,0 +1,30 @@
+{
+  "relaxed_pass": 0,
+  "strict_pass": 0,
+  "total": 10,
+  "multi_step_available": false,
+  "multi_step_count": 0,
+  "transitions": 0,
+  "transitions_per_family": {
+    "191": 0,
+    "180": 0,
+    "162": 0,
+    "197": 0,
+    "153": 0,
+    "213": 0,
+    "163": 0,
+    "137": 0,
+    "136": 0,
+    "222": 0
+  },
+  "unique_titles": 0,
+  "H": null,
+  "NL": 0,
+  "strata": 0,
+  "singleton_rate": null,
+  "leakage_validOnly": null,
+  "leakage_total": null,
+  "title_entropy": 0.0,
+  "note": "Multi-step unavailable: Docker unreachable, BrowserGym-core not importable or insufficient. Single-page CDP alone insufficient for H/NL (requires >=50 transitions/family). Gate0 branch MEASUREMENT_INVALID insufficient density not falsification. Prior descriptive 9 transitions leakage 1.0 preserved.",
+  "prior_reference": "EXP-INTEL-35860344410 gate0_relaxed_table.json 9 transitions leakage_validOnly 1.0"
+}

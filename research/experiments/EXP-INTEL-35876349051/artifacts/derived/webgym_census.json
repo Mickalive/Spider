@@ -1,0 +1,12 @@
+{
+  "available": false,
+  "site_count": 50,
+  "status": "LIMITED",
+  "dup_prevalence": null,
+  "ci_lower": null,
+  "ci_upper": null,
+  "threshold_sweep_range": null,
+  "note": "WebGym 300k corpus not installed (ImportError). 50 non-standard hosts from WebArena overlap previously found but not diverse eTLD+1 census. Manifest sha256 unavailable. Deduplication sweep 0.818-0.9479 not computable without corpus.",
+  "manifest_sha256": null,
+  "error": "No module named 'webgym'"
+}

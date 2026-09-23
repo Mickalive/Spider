@@ -1,0 +1,17 @@
+{
+  "hit_rate": null,
+  "miss_rate": null,
+  "false_accept": null,
+  "speedup": null,
+  "tokens_saved": null,
+  "attempted_families": 0,
+  "required": 30,
+  "status": "MEASUREMENT_INVALID substrate_unavailable Docker not reachable, Playwright no valid AX trees",
+  "per_family": [],
+  "drift_results": [],
+  "cross_project_isolation": null,
+  "selector_derivation": "not executed due to substrate",
+  "sha_recomputed_after_mutation_with_stripping": false,
+  "real_path_latency_tokens": false,
+  "note": "Full DOM SHA instability previously observed (HIT 0.0), relevant-subtree normalized+stripping not tested due to no live captures"
+}
