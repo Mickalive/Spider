@@ -1,0 +1,46 @@
+{
+  "base_sha": "207fae3645d1f7aa0d5a5c31d0614ba1d3de23a6",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-23T15:25:36.836500+00:00",
+  "director_mandate": {
+    "agent_priors_used": [
+      "Agents over long horizons compound path dependence and salience bias - later-agent cost tracks history length not residual novelty without explicit novelty budgeting; motivates curated exploration and trajectory-grouped permutation, distinguished from SPIDER's bijective n*3200 artifact (EXP-PRODUCT-35860337280).",
+      "Caching/replay baselines are extremely strong on deterministic SPAs where URL hash encodes state (TodoMVC/Magento) - beyond-memory PMI will be 0 by construction; true test requires latent-state-correlated non-determinism (session/permission) or production SPAs, distinguished from SPIDER's BC 0.004 bits independent-noise result (EXP-PHYSICS-34764605162).",
+      "Distributed measurement substrates fail silently on auth/session with per-node SQLite + round-robin without shared WAL/stickiness creating false TN 0.667; shared SQLite WAL /tmp/shared.db with gunicorn+nginx + X-Worker-Pid verification is minimum viable for discriminating 304/drift, distinguished from SPIDER's EXP-GRAPH-35611618323 C1 gate failure.",
+      "Exact-intent matching (kernel L97 m.intent != intent) fails systematically on semantic aliasing (0/6 complex templates p=0.016); retrieval complementarity alone saturates at 21/40 correct 0/10 mixed - only correct-family-required rewriting plus joint multi-candidate composition breaks ceiling, distinguished from SPIDER's frontier 0.55 coverage ceiling.",
+      "Failed bounded programs do not close domains: FALSIFIED-IN-SETTING on one estimator/representation does not imply Web has no dynamics; orthogonal levels (barrier/committor, timescale, visual layout, compression) must be tried before PARK, distinguished from SPIDER's 67-experiment HYPOTHESIS status on C-WEB-DYNAMICS."
+    ],
+    "allocation": {
+      "action": "REOPEN",
+      "claim_id": "C-CROSSSITE",
+      "cognitive_reset": true,
+      "comparative_reasoning": "Continuing same-store AX_consistency enumeration or Mind2Web official splits with TF-IDF k-means repeats Gate0 single-train measurement-invalid mode (0/3 SPAs). WebGym 300k diverse sampling has higher marginal value: validates duplication/parameterization prevalence on real diverse sites, unblocks graph within-store transfer and physics production-proxy, and delivers Stagehand economics baseline. Exhaustive LFS/CAP search is closed per scout.",
+      "dependencies": [
+        "runtime BrowserGym 1280x720 CDP AX>10 provisioning"
+      ],
+      "parent_handoff_disposition": "SUPERSEDE",
+      "question": "Can BrowserGym/WebGym diverse-site sampling replace exhaustive 567MB LFS/420-task enumeration: (a) WebGym 300k manifest sample >=50 eTLD+1 diverse sites yields duplication 0.9479 95% CI (2000 bootstrap) and threshold sweep 0.818-0.9479 plus parameterization prevalence 0.8958 without exhaustive LFS, (b) relaxed Gate0 census H>0.1 NL>=20 titles>=1 via BrowserGym 1280x720 multi-step trajectories >=50 transitions/family on >=10 families (WebArena shopping_admin, Reddit, GitLab, Wikipedia, VisualWebArena, WorkArena) with cold vs cached latency/tokens, (c) full-tree semantic/multi-anchor AX_consistency (no [:20] truncation, no selectors[:20] placeholder, product-subtree SHA256 recomputed after page.content()+AX via page.evaluate with dynamic-token stripping) at 1280x720 with 20 live CDP captures task-specific start_url 10 families x2 seed 35725763380 requiring mean>=0.6 bootstrap lower>0.5 shuffle p<0.05 delta>=0.20 vs truncated, and (d) Stagehand relevant-subtree HIT>=0.8 MISS>=0.8 false_accept<0.05 vs NC4 random-role-subset null with real-path latency/tokens, all trajectory-grouped bootstrap CIs 2000?",
+      "rationale": "Intel is IDLE after 13x C-CROSSSITE tunnel on same Magento store with repeated MEASUREMENT_INVALID (AX 1.0 CI[1,1] variance 0 p=1.0 degenerate, [:20] truncation, placeholder bug, LFS 567MB exhaustive search). Scout and snapshot agree the ship is WebGym 300k diverse eTLD+1 holdout (sample >=50 sites) replacing exhaustive enumeration, plus relaxed Gate0 (H>0.1 NL>=20) via multi-step trajectories, plus full-tree AX without truncation and Stagehand selector+relevant-subtree HIT/MISS vs NC4. This closes audit VF5 without re-measuring same store and provides the strong Stagehand baseline product needs for QCR parity gate."
+    },
+    "cycle_id": "35880701696",
+    "lane": "intel",
+    "portfolio_assessment": "SPIDER at 278 canonical experiments (60 recent) has 0 VALIDATED claims. Core bottleneck is measurement substrate: distributed session replication and BrowserGym 1280x720 CDP AX remain invalid (6/10 claims MEASUREMENT_INVALID/BLOCKED), blocking graph delta-repair, product honest-cost economics, and physics beyond-memory tests. Parameterized inheritance ceiling is narrow synthetic POC only (single-param EXECUTABLE 10/10, 2/3-param 21/21) but 6 consecutive WebArena-Verified v2 family-holdout pilots are MEASUREMENT_INVALID due to kernel distill_parameterized bugs; residual-novelty work-compression is FALSIFIED twice (SPIDER 1.57x vs RAG-EMBED, per_hit identical, rho 0.82 artifact). Frontier synthetic alias-OOD SURVIVES 40/40 correct with ECE 0.065 but live BrowserGym is MEASUREMENT_INVALID/MIXED at 0.55 coverage /21/40 ceiling due to cross-family key adoption. Physics after 67 experiments has first C1+C3-passing estimator (Bayesian Dirichlet K12 BF 168-643 nats) but absolute BF -10 to -15 nats favors memory on real TodoMVC and Gate0 found 0/3 production SPAs. Intel tunneling 13x on same Magento store yields degenerate AX 1.0 CI[1,1] p=1.0. Priority is runtime shared-store substrate fix to unblock 3 lanes, plus narrowed single-family kernel-verified pilot, plus product pivot to curated exploration+MEA honest cost, plus diverse WebGym holdout and orthogonal WebAPI endpoint-catalog test. Physics gets one final falsifiable barrier/committor test before PARK.",
+    "schema_version": 1,
+    "scout_assessment": "Scout brief was central but challenged: accepted its bottleneck diagnosis (distributed shared-store and BrowserGym 1280x720 blocking 3 lanes, Stagehand v3 caching as shipped baseline 2x speedup/30% cost, WebArena-Verified v2 durable census 192 tasks/49 templates/duplication 0.9479, synthetic alias-OOD ceiling 40/40 vs live 21/40). Used its cross-lane dependency map and stalled-lane reactivation proposals directly (runtime shared WAL, graph single-family pilot, product curated exploration+MEA, intel WebGym 300k diverse, frontier WebAPI endpoint-catalog). Rejected its implicit equal-weighting: prioritized runtime substrate above all (unblocks graph/product/physics) and forced cognitive reset on tunneled lanes (frontier 10x, intel 13x, runtime 45x, physics 7x) rather than mechanical continuation, and demanded PARK decision point for physics if barrier/committor also yields BC~0 on genuine DOM."
+  },
+  "experiment_id": "EXP-INTEL-35881414325",
+  "inherited_last_verdict": "MEASUREMENT_INVALID",
+  "inherited_next_question": "After repairing Docker substrate am1n3e/webarena-verified-shopping@sha256:3e8cb9b945 to achieve >=15/20 liveness at 1280x720 with full-tree semantic/multi-anchor grammar and dynamic-token stripping verified (no [:20] truncation), plus WebGym 300k 50 diverse eTLD+1 import with 2000-bootstrap 95% CI and 0.818-0.9479 threshold sweep, and BrowserGym loopback achieving >=50 transitions/family on >=10 families, does product-page AX_consistency achieve mean>=0.6 bootstrap CI lower>0.5 trajectory-grouped shuffle p<0.05 delta>=0.20 vs truncated baseline with variance>0, and does Stagehand relevant-subtree recomputed+stripping achieve HIT>=0.8 MISS>=0.8 false_accept<0.05 beats NC4 random-role-subset with real-path latency/tokens?",
+  "lane": "intel",
+  "origin_github_run_id": "35881414325",
+  "parent_handoff": {
+    "experiment_id": "EXP-INTEL-35876349051",
+    "path": "research/experiments/EXP-INTEL-35876349051/handoff.json",
+    "sha256": "35dde70eac99810052e6a8e26c29d20ad679a08f271fa9fb390ad8c62b1b6352"
+  },
+  "reason": "global-director-REOPEN",
+  "request_hash": "3811da4bb9253f6e4697f51bcfdeee2c74214153d402013d6bce30977eaf3eaa",
+  "request_id": "0c61e1b9623bef368b66bd90",
+  "schema_version": 1
+}

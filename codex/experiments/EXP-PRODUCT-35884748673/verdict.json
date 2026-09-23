@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-35884748673",
+  "lane": "product",
+  "decision": "FALSIFIED",
+  "claim_updates": [
+    {
+      "claim_id": "C-RESIDUAL-NOVELTY",
+      "status": "HYPOTHESIS",
+      "reason": "Audit PASS (producer_claim_supported=false but recomputed metrics match exactly) confirms VALID measurement apparatus: PC1-PC4 all PASS (PC1 TERX/Stage hitRate 1.0 at n0 36 tasks per_hit 54.75 tok; PC2 binding 5/5 per family 1.0 via src/spider/kernel.py _bind and auditor blocks 100% unverified writes 45/45 blocked 147 pass with provenance chain; PC3 probe discrimination accuracy 1.0 >=0.90 latency_saving 0.375 >=0.30 probeFalseAccept 0.0 <0.05 with ~50% stale 96/192 exercising ETag mismatch ttl_valid_rate 0.5625; PC4 NC2 false_accept 0.119 in [0.10,0.60] non-vacuous MockEnv p=0.15). Frozen C3 fails solely on P-SPIDER-MEA vs B-RAG-EMBED per_hit 1.143081 at n0 >0.85 threshold (target <=0.85); 6/7 per_hit ratios PASS (vs RAG n0.25 0.298 <=0.85, vs Stage n0 1.143 <=1.20, vs TERX 0.122-0.124 <1.0 at n0.25/0.50/0.75/1.00). Per_hit flat rho_novelty_per_hit -0.028 block_p 0.506 bootstrap CI [-0.196,0.140] because frontier adapter char-bigram Jaccard TAU0.30 hits 1.0 at all n (192/36 synthetic A/B pools yield Jaccard >=0.7 by construction) converting all novel steps to 50-tok reconstructed hits; constant overhead 220 tok fixed (auditor_fetch 100 + distill 100 + auditor 10 + frontier 50 - probe saving 40) dominates at n0 (50+220/L =62.58 vs RAG 54.75). C1 calibration PASS (success_n0 1.0 Wilson lower 0.904, mean 1.0, false_accept 0.0 <=0.10, UNKNOWN_precision 1.0 >=0.85, ECE_exec 0.018 <=0.15 std 0.408) but with 3-4 empty bins. NC1-NC3 PASS (rho 0, R2 0). Bounded falsification: curated+MEA+TTL+frontier pivot as implemented does NOT achieve pay-cost-of-novelty at n0 vs retrievable RAG on this file-based synthetic census. C-RESIDUAL-NOVELTY remains globally HYPOTHESIS per codex (last valid FALSIFIED 35860337280), not EXPERIMENTAL/PRODUCT_CORE. No promotion."
+    },
+    {
+      "claim_id": "C-PRODUCT-ECON",
+      "status": "HYPOTHESIS",
+      "reason": "Same valid measurement (PC1-PC4 PASS, honest branch-derived cost f=10 per_hit=(M_total_f10 - retrieval - distill - auditor)/L, no bijective n*3200, retrieval-use gap 45/192 frontier gap 45/147 logged, crossFamilyAdoption 0). End-to-end economics fail Director REOPEN gate: per_hit vs shipped baselines under QCR frozen bank TFIDF Jaccard TAU0.30 same ranker does not achieve viable parity at n0 (1.143 >0.85 vs RAG where baseline honestly retrievable 54.7 at n0, 208 at n0.25). Work compression C5 total passes (SPIDER/COLD 0.188) but per_hit parity fails, and rho -0.028 proves no proportional novelty tracking (probe decoupled from novelty). Audit claim_ceiling FALSIFIES bounded to proxy file-based mock (fixtures/tasks.json sha f43e3850, qcr_bank_manifest sha 1310cf7d, registry 36 mechanisms, cost_config honest 50-tok hits, Docker docker_available false, gunicorn+nginx simulated map seeded 42, numpy/sklearn unavailable). No Pareto real-cost correlation rho_proxy_real measured. C-PRODUCT-ECON remains HYPOTHESIS bounded; no amortization f>10 or richer DOM tested; promote_to_product false."
+    }
+  ],
+  "product_action": "DO_NOT_PROMOTE",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "Does reducing MEA auditor fixed overhead via batched verified_state caching or amortization at f=100 (distill 10 tok + auditor 1 tok) or probe-aware routing that keeps probe fresh at n0, while preserving 100% auditor block rate and frontier correct-family gating 0 cross-family adoption, achieve per_hit <=0.85 vs RAG-EMBED at n0 and preserve <1.0 vs TERX at n>=0.25 under honest QCR with orthogonal alias families or on Docker full-DOM 2000-node BrowserGym 1280x720 with real gpt-4o-mini tokens/browser+latency?",
+  "reason": "Independent audit PASS validates measurement apparatus (PC1-PC4 all PASS, recomputed per_hit ratios 1.143081 n0 /0.298 n0.25 /1.143 Stage n0 /0.122 TERX n0.25 etc match producer exactly, NC1-NC3 PASS, calibration non-vacuous std 0.408). Frozen decision rule C3 decisively fails on single ratio SPIDER/RAG at n0 1.143 >0.85 where baselines honestly retrievable under QCR (RAG 54.7 at n0 vs SPIDER 62.58, CIs not overlapping). Root cause audit confirms MEA fixed overhead 220 tok (100 fetch +100 distill amort +10 auditor +50 frontier -40 saving) /L dominates at n0; at n>=0.25 frontier synthetic 1.0 reconstruction (char-bigram on similar A/B values) flips ratio to 0.298 but this is fixture artifact not residual-novelty proportional compression (rho -0.028 flat). All governance invariants PASS (auditor 1.0, probe 1.0 accuracy 0.375 saving, crossFamily 0, curatedDelta 0.354). Valid negative per precedence C2 PASS but C3 any threshold fails -> FALSIFIED, not MEASUREMENT_INVALID. Bounded rejection for this governed-memory+TTL+frontier pivot at f=10 on file-based proxy only; global C-RESIDUAL-NOVELTY/C-PRODUCT-ECON remain HYPOTHESIS not REJECTED globally. No PRODUCT_CORE promotion (product lane but audit PASS with FALSIFIED). Immediate continue false: next step should wait for substrate/or orthogonal design (f=100/cache/Docker) not repeat f=10 file mock.",
+  "evidence_refs": [
+    "research/experiments/EXP-PRODUCT-35884748673/request.json sha256 65e23171c2c6057203cc711b23ea602a34a3752b3672ab8e41d38ff554f97cc2",
+    "research/experiments/EXP-PRODUCT-35884748673/spec.json sha256 66174204425db1882ebd1a5105e7d8cdef98fd283b91bcd361a1a5c66536d518",
+    "research/experiments/EXP-PRODUCT-35884748673/prereg.md sha256 0caeb51b259576f47b74fdf242ba437b4f7e8729bbb284876c67b09b75acc444",
+    "research/experiments/EXP-PRODUCT-35884748673/freeze.json sha256 prereg/spec/request hashed before result",
+    "research/experiments/EXP-PRODUCT-35884748673/result.json sha256 53f493d749a3517fc2456d5b1b5367c89d1f199ae922fea096ee1e18510d06ff metrics.ratios per_hit SPIDER_MEA_RAG_n0 1.1430811144918007 n025 0.29810655053546437 Stage n0 1.143081 TERX n025 0.12285258844133569 controls PC1 hitRate 1.0 PC2 blockRate 1.0 PC3 accuracy 1.0 saving 0.375 falseAccept 0.0 decision FALSIFIES C3 pass false",
+    "research/experiments/EXP-PRODUCT-35884748673/audit.json status PASS producer_claim_supported false recomputed_metrics SPIDER_MEA_RAG_per_hit_n0 1.1430811144918007 n025 0.29810655053546437 probe_hit_rate_n0 0.5 auditing validity_findings PASS C3 fails MEA overhead dominates frontier 1.0 artifact claim_ceiling FALSIFIES",
+    "research/experiments/EXP-PRODUCT-35884748673/provenance.json docker_available false cost_model honest_branch_derived f=10 retrieval 200 probe 10 fullVerify 50 hit 50 novel 500 distill 1000 auditor 100 frontier 50 per_hit_formula (M_total_f10 - retrieval - distill - auditor)/L frontier tau 0.30 crossFamily 0 hitRate 1.0",
+    "research/experiments/EXP-PRODUCT-35884748673/report.md outcome FALSIFIES per_hit flat rho -0.028 p 0.506 frontier 100% artifact",
+    "research/experiments/EXP-PRODUCT-35884748673/artifacts/raw_per_task.csv sha256 53f493d749a3517fc2456d5b1b5367c89d1f199ae922fea096ee1e18510d06ff 192x9=1728 rows",
+    "research/experiments/EXP-PRODUCT-35884748673/artifacts/derived_metrics.json sha256 81d85987018a746ca5cbd3f8ee19eb610d817f976481d7a14d559e587abc1cea",
+    "research/experiments/EXP-PRODUCT-35884748673/artifacts/probe_traces.json sha256 02e8d5bd1f4c0230ad0a0c6657b9026c29f0c3941a922979b4fe6afd4c923b53 stale 96/192",
+    "research/experiments/EXP-PRODUCT-35884748673/artifacts/frontier_adapter_traces.json sha256 4a1649286a4600b9d0bd55590d0ee4726fd82edafd34667f02a2be0620fdea93 crossFamily 0 hit 192/192",
+    "research/experiments/EXP-PRODUCT-35884748673/artifacts/cost_config.json sha256 8592e9589a19b15d80a229d07192d218fddec6a4861df2f5489982bc1cf89367 honest 50-tok hits f=10",
+    "research/experiments/EXP-PRODUCT-35884748673/artifacts/qcr_bank_manifest.json sha256 1310cf7d13d93d95f46da502476fa79cfdb3d00daccd6ecf1afcf7ee5d6ab45c TAU0.30",
+    "research/experiments/EXP-PRODUCT-35884748673/artifacts/registry.jsonl sha256 fdf21c5982a9e43c398a99ac7654d1d3c908e6cec77c4302210a5eb2e13a2c8b 36 mechanisms distinct",
+    "codex/claim_state.json C-RESIDUAL-NOVELTY last HYPOTHESIS EXP-PRODUCT-35877009175 MEASUREMENT_INVALID C-PRODUCT-ECON HYPOTHESIS"
+  ]
+}
