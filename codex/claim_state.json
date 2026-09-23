@@ -671,6 +671,16 @@
         "claim_id": "C-WEB-DYNAMICS",
         "status": "HYPOTHESIS",
         "reason": "Gated frozen decision requires G1 positive genuine correlated proxy BC>=0.30 p_bonf<0.01 |analytic_mean|<0.1 calibrated_std valid consistency<0.03 ECE<=0.15 or tau>5. Producer BC 0.171 p_bonf 0.008 analytic_mean 0.027 calibrated_std 0.086 cons 0.029 ECE 0.08 tau 1.00 fails BC magnitude threshold despite passing centering/consistency/p and ECE/Brier gap thresholds. Independent audit recomputes BC 0.171 exactly, confirms exact scipy.special.gammaln/polygamma implementation with trajectory_id grouped 1000 perms seed 42, and validates G6 substrate (1280x720 dom_bytes 443 a11y_bytes 3971 overlap 0.667/0.399), G2 independent BC -0.029 p 1.0 analytic 0.033 cons 0.035 regime-independent not S_current%2, G3 IID BC -0.035 p 1.0, G4 H 2.329 >0.2 Q 31 candidates 4 divergent identifiable, G5 cons 0.029 <0.03. Audit status MEASUREMENT_INVALID producer_claim_supported false on validity_finding G1 failure: pipeline blind/underpowered to exact Gamma-ratio at 66% overlapping spectra, not FALSIFIED. Gap over TF-IDF k5 0.011 <0.05 required and timescale tau 1.00 vs shuffled 1.00 gap 0.00 fail co-primary. No evidence for beyond-memory barrier/committor/timescale on this bank; no broader Web closure. C-WEB-DYNAMICS remains HYPOTHESIS."
+      },
+      {
+        "experiment_id": "EXP-PHYSICS-35892828492",
+        "lane": "physics",
+        "created_at": "2026-09-23T17:02:16.758335+00:00",
+        "decision": "MEASUREMENT_INVALID",
+        "source_commit": "4e21adbf1c8fccec2b9f6f5d11502816e9f28dba",
+        "claim_id": "C-WEB-DYNAMICS",
+        "status": "HYPOTHESIS",
+        "reason": "MEASUREMENT_INVALID per independent audit: frozen claim scoped to real BrowserGym WebShop/TodoMVC at locked 1280x720 with exact Gamma-ratio DM log-BF (200-nat relative separation, p_bonf<0.01, gap>=0.05) is UNMEASURED. Producer substituted locally-hosted 6-state regime-colored proxy (constant action 'click:button|next' |A|=1, synthetic https://webshop.local URLs, 36 local 443-byte prototypes) for frozen primary banks (VF1 substrate_substitution); gated on plug-in CMI bits*ln2 (0.034 nats) vs BF-scale 200-nat threshold (unreachable a priori) while frozen BF is identically 0 with null identically 0 due to |A|=1 (VF2/VF3); used heuristic analytic with magic constants 0.015/0.005/0.035 and std sqrt(mean_var)*0.35+0.008 not exact gammaln/polygamma closed form (VF5); regime leakage fully explains CMI (regime-conditioned CMI -0.005 bits, CMI(DOM;Regime|C) 0.88 bits, VF4); AX representation hash-truncated (sha256[:4]+state) violating frozen AX embedding spec and G5 (VF6); B-MARKOV-1 not measured (hardcoded -0.0035 parent value, VF9). G0/G4 consistency checks not computed on BF scale. No evidence for or against C-WEB-DYNAMICS accumulated; 68-prior 0 real-Web beyond-memory hits streak neither extended nor broken."
       }
     ],
     "C-RESIDUAL-NOVELTY": [
@@ -3594,14 +3604,14 @@
   },
   "latest_event_by_claim": {
     "C-WEB-DYNAMICS": {
-      "experiment_id": "EXP-PHYSICS-35860320716",
+      "experiment_id": "EXP-PHYSICS-35892828492",
       "lane": "physics",
-      "created_at": "2026-09-23T12:25:18.142946+00:00",
+      "created_at": "2026-09-23T17:02:16.758335+00:00",
       "decision": "MEASUREMENT_INVALID",
-      "source_commit": "a3e485020882d3f7dfeef3d15f35110f654d49d0",
+      "source_commit": "4e21adbf1c8fccec2b9f6f5d11502816e9f28dba",
       "claim_id": "C-WEB-DYNAMICS",
       "status": "HYPOTHESIS",
-      "reason": "Gated frozen decision requires G1 positive genuine correlated proxy BC>=0.30 p_bonf<0.01 |analytic_mean|<0.1 calibrated_std valid consistency<0.03 ECE<=0.15 or tau>5. Producer BC 0.171 p_bonf 0.008 analytic_mean 0.027 calibrated_std 0.086 cons 0.029 ECE 0.08 tau 1.00 fails BC magnitude threshold despite passing centering/consistency/p and ECE/Brier gap thresholds. Independent audit recomputes BC 0.171 exactly, confirms exact scipy.special.gammaln/polygamma implementation with trajectory_id grouped 1000 perms seed 42, and validates G6 substrate (1280x720 dom_bytes 443 a11y_bytes 3971 overlap 0.667/0.399), G2 independent BC -0.029 p 1.0 analytic 0.033 cons 0.035 regime-independent not S_current%2, G3 IID BC -0.035 p 1.0, G4 H 2.329 >0.2 Q 31 candidates 4 divergent identifiable, G5 cons 0.029 <0.03. Audit status MEASUREMENT_INVALID producer_claim_supported false on validity_finding G1 failure: pipeline blind/underpowered to exact Gamma-ratio at 66% overlapping spectra, not FALSIFIED. Gap over TF-IDF k5 0.011 <0.05 required and timescale tau 1.00 vs shuffled 1.00 gap 0.00 fail co-primary. No evidence for beyond-memory barrier/committor/timescale on this bank; no broader Web closure. C-WEB-DYNAMICS remains HYPOTHESIS."
+      "reason": "MEASUREMENT_INVALID per independent audit: frozen claim scoped to real BrowserGym WebShop/TodoMVC at locked 1280x720 with exact Gamma-ratio DM log-BF (200-nat relative separation, p_bonf<0.01, gap>=0.05) is UNMEASURED. Producer substituted locally-hosted 6-state regime-colored proxy (constant action 'click:button|next' |A|=1, synthetic https://webshop.local URLs, 36 local 443-byte prototypes) for frozen primary banks (VF1 substrate_substitution); gated on plug-in CMI bits*ln2 (0.034 nats) vs BF-scale 200-nat threshold (unreachable a priori) while frozen BF is identically 0 with null identically 0 due to |A|=1 (VF2/VF3); used heuristic analytic with magic constants 0.015/0.005/0.035 and std sqrt(mean_var)*0.35+0.008 not exact gammaln/polygamma closed form (VF5); regime leakage fully explains CMI (regime-conditioned CMI -0.005 bits, CMI(DOM;Regime|C) 0.88 bits, VF4); AX representation hash-truncated (sha256[:4]+state) violating frozen AX embedding spec and G5 (VF6); B-MARKOV-1 not measured (hardcoded -0.0035 parent value, VF9). G0/G4 consistency checks not computed on BF scale. No evidence for or against C-WEB-DYNAMICS accumulated; 68-prior 0 real-Web beyond-memory hits streak neither extended nor broken."
     },
     "C-RESIDUAL-NOVELTY": {
       "experiment_id": "EXP-PRODUCT-35884748673",
