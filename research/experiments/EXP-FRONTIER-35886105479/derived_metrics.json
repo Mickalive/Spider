@@ -1,0 +1,235 @@
+{
+  "pooled_alias_OOD": {
+    "B-EXACT-MATCH": {
+      "n": 40,
+      "correct": 20,
+      "rate": 0.5,
+      "wilson_lower": 0.35199278797099753,
+      "mean_honest_cost": 8.9
+    },
+    "B-FLAT-TFIDF-K5-CF": {
+      "n": 40,
+      "correct": 20,
+      "rate": 0.5,
+      "wilson_lower": 0.35199278797099753,
+      "mean_honest_cost": 8.9
+    },
+    "H-HIERARCHICAL-CF": {
+      "n": 40,
+      "correct": 20,
+      "rate": 0.5,
+      "wilson_lower": 0.35199278797099753,
+      "mean_honest_cost": 8.9
+    },
+    "H-WEBAPI-CF": {
+      "n": 40,
+      "correct": 20,
+      "rate": 0.5,
+      "wilson_lower": 0.35199278797099753,
+      "mean_honest_cost": 8.9
+    },
+    "B-COMPILED-WEBMCP-CF": {
+      "n": 40,
+      "correct": 20,
+      "rate": 0.5,
+      "wilson_lower": 0.35199278797099753,
+      "mean_honest_cost": 8.9
+    },
+    "B-STAGEHAND-DOMHASH": {
+      "n": 40,
+      "correct": 0,
+      "rate": 0.0,
+      "wilson_lower": 0.0,
+      "mean_honest_cost": 8.9
+    },
+    "B-RANDOM-K5-CF": {
+      "n": 40,
+      "correct": 7,
+      "rate": 0.175,
+      "wilson_lower": 0.08745302996883067,
+      "mean_honest_cost": 7.9
+    }
+  },
+  "per_family": {
+    "header": {
+      "B-EXACT-MATCH": {
+        "n": 10,
+        "correct": 10,
+        "rate": 1.0
+      },
+      "B-FLAT-TFIDF-K5-CF": {
+        "n": 10,
+        "correct": 10,
+        "rate": 1.0
+      },
+      "H-HIERARCHICAL-CF": {
+        "n": 10,
+        "correct": 10,
+        "rate": 1.0
+      },
+      "H-WEBAPI-CF": {
+        "n": 10,
+        "correct": 10,
+        "rate": 1.0
+      },
+      "B-COMPILED-WEBMCP-CF": {
+        "n": 10,
+        "correct": 10,
+        "rate": 1.0
+      },
+      "B-STAGEHAND-DOMHASH": {
+        "n": 10,
+        "correct": 0,
+        "rate": 0.0
+      },
+      "B-RANDOM-K5-CF": {
+        "n": 10,
+        "correct": 3,
+        "rate": 0.3
+      }
+    },
+    "body": {
+      "B-EXACT-MATCH": {
+        "n": 10,
+        "correct": 10,
+        "rate": 1.0
+      },
+      "B-FLAT-TFIDF-K5-CF": {
+        "n": 10,
+        "correct": 10,
+        "rate": 1.0
+      },
+      "H-HIERARCHICAL-CF": {
+        "n": 10,
+        "correct": 10,
+        "rate": 1.0
+      },
+      "H-WEBAPI-CF": {
+        "n": 10,
+        "correct": 10,
+        "rate": 1.0
+      },
+      "B-COMPILED-WEBMCP-CF": {
+        "n": 10,
+        "correct": 10,
+        "rate": 1.0
+      },
+      "B-STAGEHAND-DOMHASH": {
+        "n": 10,
+        "correct": 0,
+        "rate": 0.0
+      },
+      "B-RANDOM-K5-CF": {
+        "n": 10,
+        "correct": 4,
+        "rate": 0.4
+      }
+    },
+    "auth": {
+      "B-EXACT-MATCH": {
+        "n": 10,
+        "correct": 0,
+        "rate": 0.0
+      },
+      "B-FLAT-TFIDF-K5-CF": {
+        "n": 10,
+        "correct": 0,
+        "rate": 0.0
+      },
+      "H-HIERARCHICAL-CF": {
+        "n": 10,
+        "correct": 0,
+        "rate": 0.0
+      },
+      "H-WEBAPI-CF": {
+        "n": 10,
+        "correct": 0,
+        "rate": 0.0
+      },
+      "B-COMPILED-WEBMCP-CF": {
+        "n": 10,
+        "correct": 0,
+        "rate": 0.0
+      },
+      "B-STAGEHAND-DOMHASH": {
+        "n": 10,
+        "correct": 0,
+        "rate": 0.0
+      },
+      "B-RANDOM-K5-CF": {
+        "n": 10,
+        "correct": 0,
+        "rate": 0.0
+      }
+    },
+    "mixed": {
+      "B-EXACT-MATCH": {
+        "n": 10,
+        "correct": 0,
+        "rate": 0.0
+      },
+      "B-FLAT-TFIDF-K5-CF": {
+        "n": 10,
+        "correct": 0,
+        "rate": 0.0
+      },
+      "H-HIERARCHICAL-CF": {
+        "n": 10,
+        "correct": 0,
+        "rate": 0.0
+      },
+      "H-WEBAPI-CF": {
+        "n": 10,
+        "correct": 0,
+        "rate": 0.0
+      },
+      "B-COMPILED-WEBMCP-CF": {
+        "n": 10,
+        "correct": 0,
+        "rate": 0.0
+      },
+      "B-STAGEHAND-DOMHASH": {
+        "n": 10,
+        "correct": 0,
+        "rate": 0.0
+      },
+      "B-RANDOM-K5-CF": {
+        "n": 10,
+        "correct": 0,
+        "rate": 0.0
+      }
+    }
+  },
+  "best_flat_rag_correct": 0.5,
+  "controls": {
+    "PC_EXACT_MATCH_pass": true,
+    "PC_RETRIEVAL_HEALTH_pass": true,
+    "PC_WEBAPI_INDEX_BUILT_pass": true,
+    "PC_COMPILED_IR_BUILT_pass": true,
+    "PC_HONEST_COST_SANITY_pass": true,
+    "PC_FRESHNESS_NONCIRCULAR_pass": true,
+    "PC_AX_CDP_pass": true,
+    "PC_CONFIDENCE_DERIVED_pass": true,
+    "NC_NO_APPLICABLE_pass": true,
+    "NC_EMPTY_pass": true,
+    "NC_ORACLE_LEAK_pass": true,
+    "NC_STAGEHAND_ISOLATION_pass": true,
+    "NC_BIJECTIVE_COST_pass": true,
+    "ARM_CODE_IDENTITY_pass": true,
+    "ARM_THEME_OVERLAP": 0.7088607594936709
+  },
+  "decision": {
+    "survivors": [],
+    "status": "COMPLETE",
+    "outcome": "FALSIFIES",
+    "pc_pass": true,
+    "honest_cost_valid": true,
+    "confidence_derived": true,
+    "arm_distinct": true
+  },
+  "economics": {
+    "amortized_compilation_usd_f10": 0.0177,
+    "total_compile_cost_usd": 0.177,
+    "browser_steps_mean": 4.957142857142857
+  }
+}
