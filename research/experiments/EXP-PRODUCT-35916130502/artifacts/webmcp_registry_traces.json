@@ -1,0 +1,962 @@
+[
+ {
+  "task_id": "task_0000",
+  "toolHit": 1,
+  "site_id": "shop00.example.com"
+ },
+ {
+  "task_id": "task_0001",
+  "toolHit": 1,
+  "site_id": "shop00.example.com"
+ },
+ {
+  "task_id": "task_0002",
+  "toolHit": 1,
+  "site_id": "shop00.example.com"
+ },
+ {
+  "task_id": "task_0003",
+  "toolHit": 1,
+  "site_id": "shop00.example.com"
+ },
+ {
+  "task_id": "task_0004",
+  "toolHit": 1,
+  "site_id": "shop00.example.com"
+ },
+ {
+  "task_id": "task_0005",
+  "toolHit": 1,
+  "site_id": "shop00.example.com"
+ },
+ {
+  "task_id": "task_0006",
+  "toolHit": 1,
+  "site_id": "shop01.example.com"
+ },
+ {
+  "task_id": "task_0007",
+  "toolHit": 1,
+  "site_id": "shop01.example.com"
+ },
+ {
+  "task_id": "task_0008",
+  "toolHit": 1,
+  "site_id": "shop01.example.com"
+ },
+ {
+  "task_id": "task_0009",
+  "toolHit": 1,
+  "site_id": "shop01.example.com"
+ },
+ {
+  "task_id": "task_0010",
+  "toolHit": 1,
+  "site_id": "shop01.example.com"
+ },
+ {
+  "task_id": "task_0011",
+  "toolHit": 1,
+  "site_id": "shop01.example.com"
+ },
+ {
+  "task_id": "task_0012",
+  "toolHit": 1,
+  "site_id": "shop02.example.com"
+ },
+ {
+  "task_id": "task_0013",
+  "toolHit": 1,
+  "site_id": "shop02.example.com"
+ },
+ {
+  "task_id": "task_0014",
+  "toolHit": 1,
+  "site_id": "shop02.example.com"
+ },
+ {
+  "task_id": "task_0015",
+  "toolHit": 1,
+  "site_id": "shop02.example.com"
+ },
+ {
+  "task_id": "task_0016",
+  "toolHit": 1,
+  "site_id": "shop02.example.com"
+ },
+ {
+  "task_id": "task_0017",
+  "toolHit": 1,
+  "site_id": "shop02.example.com"
+ },
+ {
+  "task_id": "task_0018",
+  "toolHit": 1,
+  "site_id": "shop03.example.com"
+ },
+ {
+  "task_id": "task_0019",
+  "toolHit": 1,
+  "site_id": "shop03.example.com"
+ },
+ {
+  "task_id": "task_0020",
+  "toolHit": 1,
+  "site_id": "shop03.example.com"
+ },
+ {
+  "task_id": "task_0021",
+  "toolHit": 1,
+  "site_id": "shop03.example.com"
+ },
+ {
+  "task_id": "task_0022",
+  "toolHit": 1,
+  "site_id": "shop03.example.com"
+ },
+ {
+  "task_id": "task_0023",
+  "toolHit": 1,
+  "site_id": "shop03.example.com"
+ },
+ {
+  "task_id": "task_0024",
+  "toolHit": 1,
+  "site_id": "shop04.example.com"
+ },
+ {
+  "task_id": "task_0025",
+  "toolHit": 1,
+  "site_id": "shop04.example.com"
+ },
+ {
+  "task_id": "task_0026",
+  "toolHit": 1,
+  "site_id": "shop04.example.com"
+ },
+ {
+  "task_id": "task_0027",
+  "toolHit": 1,
+  "site_id": "shop04.example.com"
+ },
+ {
+  "task_id": "task_0028",
+  "toolHit": 1,
+  "site_id": "shop04.example.com"
+ },
+ {
+  "task_id": "task_0029",
+  "toolHit": 1,
+  "site_id": "shop04.example.com"
+ },
+ {
+  "task_id": "task_0030",
+  "toolHit": 1,
+  "site_id": "shop05.example.com"
+ },
+ {
+  "task_id": "task_0031",
+  "toolHit": 1,
+  "site_id": "shop05.example.com"
+ },
+ {
+  "task_id": "task_0032",
+  "toolHit": 1,
+  "site_id": "shop05.example.com"
+ },
+ {
+  "task_id": "task_0033",
+  "toolHit": 1,
+  "site_id": "shop05.example.com"
+ },
+ {
+  "task_id": "task_0034",
+  "toolHit": 1,
+  "site_id": "shop05.example.com"
+ },
+ {
+  "task_id": "task_0035",
+  "toolHit": 1,
+  "site_id": "shop05.example.com"
+ },
+ {
+  "task_id": "task_0036",
+  "toolHit": 1,
+  "site_id": "shop06.example.com"
+ },
+ {
+  "task_id": "task_0037",
+  "toolHit": 1,
+  "site_id": "shop06.example.com"
+ },
+ {
+  "task_id": "task_0038",
+  "toolHit": 1,
+  "site_id": "shop06.example.com"
+ },
+ {
+  "task_id": "task_0039",
+  "toolHit": 1,
+  "site_id": "shop06.example.com"
+ },
+ {
+  "task_id": "task_0040",
+  "toolHit": 1,
+  "site_id": "shop06.example.com"
+ },
+ {
+  "task_id": "task_0041",
+  "toolHit": 1,
+  "site_id": "shop06.example.com"
+ },
+ {
+  "task_id": "task_0042",
+  "toolHit": 1,
+  "site_id": "shop07.example.com"
+ },
+ {
+  "task_id": "task_0043",
+  "toolHit": 1,
+  "site_id": "shop07.example.com"
+ },
+ {
+  "task_id": "task_0044",
+  "toolHit": 1,
+  "site_id": "shop07.example.com"
+ },
+ {
+  "task_id": "task_0045",
+  "toolHit": 1,
+  "site_id": "shop07.example.com"
+ },
+ {
+  "task_id": "task_0046",
+  "toolHit": 1,
+  "site_id": "shop07.example.com"
+ },
+ {
+  "task_id": "task_0047",
+  "toolHit": 1,
+  "site_id": "shop07.example.com"
+ },
+ {
+  "task_id": "task_0048",
+  "toolHit": 1,
+  "site_id": "shop08.example.com"
+ },
+ {
+  "task_id": "task_0049",
+  "toolHit": 1,
+  "site_id": "shop08.example.com"
+ },
+ {
+  "task_id": "task_0050",
+  "toolHit": 1,
+  "site_id": "shop08.example.com"
+ },
+ {
+  "task_id": "task_0051",
+  "toolHit": 1,
+  "site_id": "shop08.example.com"
+ },
+ {
+  "task_id": "task_0052",
+  "toolHit": 1,
+  "site_id": "shop08.example.com"
+ },
+ {
+  "task_id": "task_0053",
+  "toolHit": 1,
+  "site_id": "shop08.example.com"
+ },
+ {
+  "task_id": "task_0054",
+  "toolHit": 1,
+  "site_id": "shop09.example.com"
+ },
+ {
+  "task_id": "task_0055",
+  "toolHit": 1,
+  "site_id": "shop09.example.com"
+ },
+ {
+  "task_id": "task_0056",
+  "toolHit": 1,
+  "site_id": "shop09.example.com"
+ },
+ {
+  "task_id": "task_0057",
+  "toolHit": 1,
+  "site_id": "shop09.example.com"
+ },
+ {
+  "task_id": "task_0058",
+  "toolHit": 1,
+  "site_id": "shop09.example.com"
+ },
+ {
+  "task_id": "task_0059",
+  "toolHit": 1,
+  "site_id": "shop09.example.com"
+ },
+ {
+  "task_id": "task_0060",
+  "toolHit": 1,
+  "site_id": "shop10.example.com"
+ },
+ {
+  "task_id": "task_0061",
+  "toolHit": 1,
+  "site_id": "shop10.example.com"
+ },
+ {
+  "task_id": "task_0062",
+  "toolHit": 1,
+  "site_id": "shop10.example.com"
+ },
+ {
+  "task_id": "task_0063",
+  "toolHit": 1,
+  "site_id": "shop10.example.com"
+ },
+ {
+  "task_id": "task_0064",
+  "toolHit": 1,
+  "site_id": "shop10.example.com"
+ },
+ {
+  "task_id": "task_0065",
+  "toolHit": 1,
+  "site_id": "shop10.example.com"
+ },
+ {
+  "task_id": "task_0066",
+  "toolHit": 1,
+  "site_id": "shop11.example.com"
+ },
+ {
+  "task_id": "task_0067",
+  "toolHit": 1,
+  "site_id": "shop11.example.com"
+ },
+ {
+  "task_id": "task_0068",
+  "toolHit": 1,
+  "site_id": "shop11.example.com"
+ },
+ {
+  "task_id": "task_0069",
+  "toolHit": 1,
+  "site_id": "shop11.example.com"
+ },
+ {
+  "task_id": "task_0070",
+  "toolHit": 1,
+  "site_id": "shop11.example.com"
+ },
+ {
+  "task_id": "task_0071",
+  "toolHit": 1,
+  "site_id": "shop11.example.com"
+ },
+ {
+  "task_id": "task_0072",
+  "toolHit": 1,
+  "site_id": "shop12.example.com"
+ },
+ {
+  "task_id": "task_0073",
+  "toolHit": 1,
+  "site_id": "shop12.example.com"
+ },
+ {
+  "task_id": "task_0074",
+  "toolHit": 1,
+  "site_id": "shop12.example.com"
+ },
+ {
+  "task_id": "task_0075",
+  "toolHit": 1,
+  "site_id": "shop12.example.com"
+ },
+ {
+  "task_id": "task_0076",
+  "toolHit": 1,
+  "site_id": "shop12.example.com"
+ },
+ {
+  "task_id": "task_0077",
+  "toolHit": 1,
+  "site_id": "shop13.example.com"
+ },
+ {
+  "task_id": "task_0078",
+  "toolHit": 1,
+  "site_id": "shop13.example.com"
+ },
+ {
+  "task_id": "task_0079",
+  "toolHit": 1,
+  "site_id": "shop13.example.com"
+ },
+ {
+  "task_id": "task_0080",
+  "toolHit": 1,
+  "site_id": "shop13.example.com"
+ },
+ {
+  "task_id": "task_0081",
+  "toolHit": 1,
+  "site_id": "shop13.example.com"
+ },
+ {
+  "task_id": "task_0082",
+  "toolHit": 1,
+  "site_id": "shop14.example.com"
+ },
+ {
+  "task_id": "task_0083",
+  "toolHit": 1,
+  "site_id": "shop14.example.com"
+ },
+ {
+  "task_id": "task_0084",
+  "toolHit": 1,
+  "site_id": "shop14.example.com"
+ },
+ {
+  "task_id": "task_0085",
+  "toolHit": 1,
+  "site_id": "shop14.example.com"
+ },
+ {
+  "task_id": "task_0086",
+  "toolHit": 1,
+  "site_id": "shop14.example.com"
+ },
+ {
+  "task_id": "task_0087",
+  "toolHit": 1,
+  "site_id": "shop15.example.com"
+ },
+ {
+  "task_id": "task_0088",
+  "toolHit": 1,
+  "site_id": "shop15.example.com"
+ },
+ {
+  "task_id": "task_0089",
+  "toolHit": 1,
+  "site_id": "shop15.example.com"
+ },
+ {
+  "task_id": "task_0090",
+  "toolHit": 1,
+  "site_id": "shop15.example.com"
+ },
+ {
+  "task_id": "task_0091",
+  "toolHit": 1,
+  "site_id": "shop15.example.com"
+ },
+ {
+  "task_id": "task_0092",
+  "toolHit": 1,
+  "site_id": "shop16.example.com"
+ },
+ {
+  "task_id": "task_0093",
+  "toolHit": 1,
+  "site_id": "shop16.example.com"
+ },
+ {
+  "task_id": "task_0094",
+  "toolHit": 1,
+  "site_id": "shop16.example.com"
+ },
+ {
+  "task_id": "task_0095",
+  "toolHit": 1,
+  "site_id": "shop16.example.com"
+ },
+ {
+  "task_id": "task_0096",
+  "toolHit": 1,
+  "site_id": "shop16.example.com"
+ },
+ {
+  "task_id": "task_0097",
+  "toolHit": 1,
+  "site_id": "shop17.example.com"
+ },
+ {
+  "task_id": "task_0098",
+  "toolHit": 1,
+  "site_id": "shop17.example.com"
+ },
+ {
+  "task_id": "task_0099",
+  "toolHit": 1,
+  "site_id": "shop17.example.com"
+ },
+ {
+  "task_id": "task_0100",
+  "toolHit": 1,
+  "site_id": "shop17.example.com"
+ },
+ {
+  "task_id": "task_0101",
+  "toolHit": 1,
+  "site_id": "shop17.example.com"
+ },
+ {
+  "task_id": "task_0102",
+  "toolHit": 1,
+  "site_id": "shop18.example.com"
+ },
+ {
+  "task_id": "task_0103",
+  "toolHit": 1,
+  "site_id": "shop18.example.com"
+ },
+ {
+  "task_id": "task_0104",
+  "toolHit": 1,
+  "site_id": "shop18.example.com"
+ },
+ {
+  "task_id": "task_0105",
+  "toolHit": 1,
+  "site_id": "shop18.example.com"
+ },
+ {
+  "task_id": "task_0106",
+  "toolHit": 1,
+  "site_id": "shop18.example.com"
+ },
+ {
+  "task_id": "task_0107",
+  "toolHit": 1,
+  "site_id": "shop19.example.com"
+ },
+ {
+  "task_id": "task_0108",
+  "toolHit": 1,
+  "site_id": "shop19.example.com"
+ },
+ {
+  "task_id": "task_0109",
+  "toolHit": 1,
+  "site_id": "shop19.example.com"
+ },
+ {
+  "task_id": "task_0110",
+  "toolHit": 1,
+  "site_id": "shop19.example.com"
+ },
+ {
+  "task_id": "task_0111",
+  "toolHit": 1,
+  "site_id": "shop19.example.com"
+ },
+ {
+  "task_id": "task_0112",
+  "toolHit": 1,
+  "site_id": "shop20.example.com"
+ },
+ {
+  "task_id": "task_0113",
+  "toolHit": 1,
+  "site_id": "shop20.example.com"
+ },
+ {
+  "task_id": "task_0114",
+  "toolHit": 1,
+  "site_id": "shop20.example.com"
+ },
+ {
+  "task_id": "task_0115",
+  "toolHit": 1,
+  "site_id": "shop20.example.com"
+ },
+ {
+  "task_id": "task_0116",
+  "toolHit": 1,
+  "site_id": "shop20.example.com"
+ },
+ {
+  "task_id": "task_0117",
+  "toolHit": 1,
+  "site_id": "shop21.example.com"
+ },
+ {
+  "task_id": "task_0118",
+  "toolHit": 1,
+  "site_id": "shop21.example.com"
+ },
+ {
+  "task_id": "task_0119",
+  "toolHit": 1,
+  "site_id": "shop21.example.com"
+ },
+ {
+  "task_id": "task_0120",
+  "toolHit": 1,
+  "site_id": "shop21.example.com"
+ },
+ {
+  "task_id": "task_0121",
+  "toolHit": 1,
+  "site_id": "shop21.example.com"
+ },
+ {
+  "task_id": "task_0122",
+  "toolHit": 1,
+  "site_id": "shop22.example.com"
+ },
+ {
+  "task_id": "task_0123",
+  "toolHit": 1,
+  "site_id": "shop22.example.com"
+ },
+ {
+  "task_id": "task_0124",
+  "toolHit": 1,
+  "site_id": "shop22.example.com"
+ },
+ {
+  "task_id": "task_0125",
+  "toolHit": 1,
+  "site_id": "shop22.example.com"
+ },
+ {
+  "task_id": "task_0126",
+  "toolHit": 1,
+  "site_id": "shop22.example.com"
+ },
+ {
+  "task_id": "task_0127",
+  "toolHit": 1,
+  "site_id": "shop23.example.com"
+ },
+ {
+  "task_id": "task_0128",
+  "toolHit": 1,
+  "site_id": "shop23.example.com"
+ },
+ {
+  "task_id": "task_0129",
+  "toolHit": 1,
+  "site_id": "shop23.example.com"
+ },
+ {
+  "task_id": "task_0130",
+  "toolHit": 1,
+  "site_id": "shop23.example.com"
+ },
+ {
+  "task_id": "task_0131",
+  "toolHit": 1,
+  "site_id": "shop23.example.com"
+ },
+ {
+  "task_id": "task_0132",
+  "toolHit": 1,
+  "site_id": "shop24.example.com"
+ },
+ {
+  "task_id": "task_0133",
+  "toolHit": 1,
+  "site_id": "shop24.example.com"
+ },
+ {
+  "task_id": "task_0134",
+  "toolHit": 1,
+  "site_id": "shop24.example.com"
+ },
+ {
+  "task_id": "task_0135",
+  "toolHit": 1,
+  "site_id": "shop24.example.com"
+ },
+ {
+  "task_id": "task_0136",
+  "toolHit": 1,
+  "site_id": "shop24.example.com"
+ },
+ {
+  "task_id": "task_0137",
+  "toolHit": 1,
+  "site_id": "shop25.example.com"
+ },
+ {
+  "task_id": "task_0138",
+  "toolHit": 1,
+  "site_id": "shop25.example.com"
+ },
+ {
+  "task_id": "task_0139",
+  "toolHit": 1,
+  "site_id": "shop25.example.com"
+ },
+ {
+  "task_id": "task_0140",
+  "toolHit": 1,
+  "site_id": "shop25.example.com"
+ },
+ {
+  "task_id": "task_0141",
+  "toolHit": 1,
+  "site_id": "shop25.example.com"
+ },
+ {
+  "task_id": "task_0142",
+  "toolHit": 1,
+  "site_id": "shop26.example.com"
+ },
+ {
+  "task_id": "task_0143",
+  "toolHit": 1,
+  "site_id": "shop26.example.com"
+ },
+ {
+  "task_id": "task_0144",
+  "toolHit": 1,
+  "site_id": "shop26.example.com"
+ },
+ {
+  "task_id": "task_0145",
+  "toolHit": 1,
+  "site_id": "shop26.example.com"
+ },
+ {
+  "task_id": "task_0146",
+  "toolHit": 1,
+  "site_id": "shop26.example.com"
+ },
+ {
+  "task_id": "task_0147",
+  "toolHit": 1,
+  "site_id": "shop27.example.com"
+ },
+ {
+  "task_id": "task_0148",
+  "toolHit": 1,
+  "site_id": "shop27.example.com"
+ },
+ {
+  "task_id": "task_0149",
+  "toolHit": 1,
+  "site_id": "shop27.example.com"
+ },
+ {
+  "task_id": "task_0150",
+  "toolHit": 1,
+  "site_id": "shop27.example.com"
+ },
+ {
+  "task_id": "task_0151",
+  "toolHit": 1,
+  "site_id": "shop27.example.com"
+ },
+ {
+  "task_id": "task_0152",
+  "toolHit": 1,
+  "site_id": "shop28.example.com"
+ },
+ {
+  "task_id": "task_0153",
+  "toolHit": 1,
+  "site_id": "shop28.example.com"
+ },
+ {
+  "task_id": "task_0154",
+  "toolHit": 1,
+  "site_id": "shop28.example.com"
+ },
+ {
+  "task_id": "task_0155",
+  "toolHit": 1,
+  "site_id": "shop28.example.com"
+ },
+ {
+  "task_id": "task_0156",
+  "toolHit": 1,
+  "site_id": "shop28.example.com"
+ },
+ {
+  "task_id": "task_0157",
+  "toolHit": 1,
+  "site_id": "shop29.example.com"
+ },
+ {
+  "task_id": "task_0158",
+  "toolHit": 1,
+  "site_id": "shop29.example.com"
+ },
+ {
+  "task_id": "task_0159",
+  "toolHit": 1,
+  "site_id": "shop29.example.com"
+ },
+ {
+  "task_id": "task_0160",
+  "toolHit": 1,
+  "site_id": "shop29.example.com"
+ },
+ {
+  "task_id": "task_0161",
+  "toolHit": 1,
+  "site_id": "shop29.example.com"
+ },
+ {
+  "task_id": "task_0162",
+  "toolHit": 1,
+  "site_id": "shop30.example.com"
+ },
+ {
+  "task_id": "task_0163",
+  "toolHit": 1,
+  "site_id": "shop30.example.com"
+ },
+ {
+  "task_id": "task_0164",
+  "toolHit": 1,
+  "site_id": "shop30.example.com"
+ },
+ {
+  "task_id": "task_0165",
+  "toolHit": 1,
+  "site_id": "shop30.example.com"
+ },
+ {
+  "task_id": "task_0166",
+  "toolHit": 1,
+  "site_id": "shop30.example.com"
+ },
+ {
+  "task_id": "task_0167",
+  "toolHit": 1,
+  "site_id": "shop31.example.com"
+ },
+ {
+  "task_id": "task_0168",
+  "toolHit": 1,
+  "site_id": "shop31.example.com"
+ },
+ {
+  "task_id": "task_0169",
+  "toolHit": 1,
+  "site_id": "shop31.example.com"
+ },
+ {
+  "task_id": "task_0170",
+  "toolHit": 1,
+  "site_id": "shop31.example.com"
+ },
+ {
+  "task_id": "task_0171",
+  "toolHit": 1,
+  "site_id": "shop31.example.com"
+ },
+ {
+  "task_id": "task_0172",
+  "toolHit": 1,
+  "site_id": "shop32.example.com"
+ },
+ {
+  "task_id": "task_0173",
+  "toolHit": 1,
+  "site_id": "shop32.example.com"
+ },
+ {
+  "task_id": "task_0174",
+  "toolHit": 1,
+  "site_id": "shop32.example.com"
+ },
+ {
+  "task_id": "task_0175",
+  "toolHit": 1,
+  "site_id": "shop32.example.com"
+ },
+ {
+  "task_id": "task_0176",
+  "toolHit": 1,
+  "site_id": "shop32.example.com"
+ },
+ {
+  "task_id": "task_0177",
+  "toolHit": 1,
+  "site_id": "shop33.example.com"
+ },
+ {
+  "task_id": "task_0178",
+  "toolHit": 1,
+  "site_id": "shop33.example.com"
+ },
+ {
+  "task_id": "task_0179",
+  "toolHit": 1,
+  "site_id": "shop33.example.com"
+ },
+ {
+  "task_id": "task_0180",
+  "toolHit": 1,
+  "site_id": "shop33.example.com"
+ },
+ {
+  "task_id": "task_0181",
+  "toolHit": 1,
+  "site_id": "shop33.example.com"
+ },
+ {
+  "task_id": "task_0182",
+  "toolHit": 1,
+  "site_id": "shop34.example.com"
+ },
+ {
+  "task_id": "task_0183",
+  "toolHit": 1,
+  "site_id": "shop34.example.com"
+ },
+ {
+  "task_id": "task_0184",
+  "toolHit": 1,
+  "site_id": "shop34.example.com"
+ },
+ {
+  "task_id": "task_0185",
+  "toolHit": 1,
+  "site_id": "shop34.example.com"
+ },
+ {
+  "task_id": "task_0186",
+  "toolHit": 1,
+  "site_id": "shop34.example.com"
+ },
+ {
+  "task_id": "task_0187",
+  "toolHit": 1,
+  "site_id": "shop35.example.com"
+ },
+ {
+  "task_id": "task_0188",
+  "toolHit": 1,
+  "site_id": "shop35.example.com"
+ },
+ {
+  "task_id": "task_0189",
+  "toolHit": 1,
+  "site_id": "shop35.example.com"
+ },
+ {
+  "task_id": "task_0190",
+  "toolHit": 1,
+  "site_id": "shop35.example.com"
+ },
+ {
+  "task_id": "task_0191",
+  "toolHit": 1,
+  "site_id": "shop35.example.com"
+ }
+]
