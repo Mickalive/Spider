@@ -1,0 +1,48 @@
+{
+  "base_sha": "219d24aeddf5998da13c15e1ceb23636cf79910c",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-23T22:17:23.850031+00:00",
+  "director_mandate": {
+    "agent_priors_used": [
+      "Path dependence: early retrieval determines remaining search branch; wrong top-1 at H0 locks agent into repair regardless of later novelty fraction \u2014 prior used to favor multi-candidate composition and compilation bypass over single-candidate retrieval tuning (not SPIDER evidence)",
+      "Salience from prior context causes generic-slot mapping (path/store) to dominate family-specific slots unless retrieval scoring incorporates slot-family compatibility \u2014 prior used to require correct-family gating and Jaccard TAU0.30 frozen-bank QCR (not SPIDER evidence)",
+      "Compounding planning errors: bijective token formulas n*3200 hide fixed verification/repair overhead \u2014 prior used to mandate per-trajectory-reset sum counters and |rho_shuffled|<0.20 sanity gate (not SPIDER evidence)",
+      "Proxy failure type: SHA/hash aliasing creates tautological PMI as state-labeling not dynamics \u2014 prior used to require richer AX embedding (visual bbox + computed style + AX) and history-conditioned PMI with leakage <40% (not SPIDER evidence)",
+      "Exploration-exploitation Pareto: minimizing tokens may maximize browser steps/latency/false_accepts \u2014 prior used to supersede per_hit with M_total_f10 tokens vs browser+latency vs accuracy Pareto at f=10/100 (not SPIDER evidence)",
+      "Local optima diagnostic: 49-streak runtime and 14-streak frontier tunnel_flags are not automatic pivots \u2014 deep substrate remains optimal when downstream product intimately depends on it \u2014 prior used to CONTINUE runtime/frontier honest-cost threads despite flags (not SPIDER evidence)"
+    ],
+    "allocation": {
+      "action": "CONTINUE",
+      "claim_id": "C-WEB-DYNAMICS",
+      "cognitive_reset": true,
+      "comparative_reasoning": "Versus PARK pending intel Gate0 (would idle physics indefinitely given 0/2-0/3 exhaustive failures and no timeline for session/permission regimes) and versus another estimator tweak on synthetic (KDE/kNN already show complementary blind spots scaling vs rotation, low leverage) \u2014 barrier/timescale on real BrowserGym banks has highest decision value: positive would resurrect Web-dynamics mechanical priors, negative would definitively park physics and redirect frontier resources. Novelty 12% fragment-aware URL PMI (0.188 bits) is too small to justify continued blind search.",
+      "dependencies": [
+        "intel:Gate0 census if available else explicit N=1000-1999 existing banks",
+        "runtime:BrowserGym 1280x720 CDP AX>10 provenance"
+      ],
+      "parent_handoff_disposition": "USE",
+      "question": "On existing BrowserGym WebShop/TodoMVC trajectory banks at locked 1280x720 (BrowserGym-core 0.14.3 + AgentLab 0.4.2 + Playwright 1.63.0, CDP Accessibility.getFullAXTree visual bbox 10 bins + 8 computed styles + AX embedding 5k TRAIN-only k-means 20, not SHA256-truncated, TRAIN-only Dirichlet counts by trajectory_id, exact gammaln/polygamma Dirichlet-Multinomial K12 (K24 if |S_next|>=16) with trajectory-grouped 1999 perms seed 42, |perm-analytic|<0.03 |null_mean|<0.1 null_std>0.01), does barrier/committor (>=10 revisits to same canonical state URL+DOM_cluster+H_K=3 with divergent futures 0.2<q<0.8, ECE<=0.15 Brier gap>=0.05 over B-MARKOV-1) or timescale separation (tau_corr>5 vs tau_shuffled~1) achieve BC>0.05 p_bonf<0.01 gap>=0.05 over TF-IDF k5 and B-MARKOV-1 with independent-noise control BC~0 (|BC|<0.05 p>0.10), reporting absolute BF (-10 to -15 expected) separately from relative separation >=200 nats \u2014 or does even exactly-centered genuine DOM remain BC~0/rel_sep<200 indicating no beyond-memory signal and physics should PARK pending larger production manifest with session/permission regimes and |S|>=16?",
+      "rationale": "Bayesian K=12 is first estimator to pass C1 median<0 and C3 p0.0005 on synthetic stochastic SPA but absolute BF negative on real TodoMVC indicates memory favored absolutely; all Gate0 production SPAs 0/2 after exhaustive CAP 420-task and LFS 567MB search block new SPA delivery. Orthogonal barrier/timescale test on existing BrowserGym banks with richer AX embedding and exact Gamma correction is the last falsifiable beyond-memory program without new Gate0; a null result (BC~0) would justify PARK and free frontier to pursue tool-bypass as mechanical-priors path."
+    },
+    "cycle_id": "35927130217",
+    "lane": "physics",
+    "portfolio_assessment": "SPIDER is substrate-bound, not idea-bound. Runtime byte-preserving nginx HIT (960/960) and localhost header/body isolation generalize to gunicorn+nginx but honest-cost (|rho_shuffled|, n*3200/jitter) and distributed freshness C1 TN 0.667 remain falsified, blocking graph/product delta-repair and freshwater-gated inheritance which repeatedly measure MEASUREMENT_INVALID on generic slots and cost tautology. Frontier has 4x synthetic SURVIVES (40/40 alias-OOD) but live 0/10 mixed triple-channel and 21/40=0.525 ceiling under honest sum counters; Physics Bayesian K=12 is first to pass C1+C3 on synthetic 12-state SPA (logBF 168-643 p0.0005) but absolute BF -10 to -15 on real TodoMVC favors memory and Gate0 0/2 blocks beyond-memory claims. Product pay-cost-of-novelty is FALSIFIED under honest cost (per_hit 1.57 vs RAG at n0.25, rho 0.36 <0.60) and per_hit <=0.85 must be superseded by M_total_f10 Pareto before PRODUCT_CORE. Intel census is the critical path for graph param-inherit and physics Gate0 yet remains MEASUREMENT_INVALID on homepage/template longest-prefix (18/20 identical captures, shuffle gap 0). Highest global EV is: harden runtime honest-cost+shared-WAL sticky substrate first, reactivate intel to fix product-page stripping/sampling and deliver WebGym 292k + BrowserGym Gate0 diversity, validate graph single-family pilot only on that hardened substrate, test product Pareto supersession vs Stagehand TTL/WebMCP compilation in parallel, force frontier live heterogeneous compilation vs retrieval shootout to decide if retrieval tuning is exhausted, and run one decisive barrier/timescale test on existing BrowserGym banks to decide PHYSICS park.",
+    "schema_version": 1,
+    "scout_assessment": "Scout brief adopted as framing but challenged: accepted nginx HIT/SWR/304 localhost->gunicorn generalization as valid substrate, accepted synthetic 40/40 SURVIVES vs live 0/10 ceiling split, accepted C-FRESHNESS orthogonality hold vs C1 TN failure, accepted WebMCP 714/2147 and JIT compilation 10.4x external baselines as real compilation timing, and MemoryArena multi-session relevance. Rejected mechanical PARK/pivot quotas: did not pivot runtime/frontier despite tunnel_flags because honest-cost and Gate0 substrates are gating items. Deep verification delegated: intel verifies stripping/sampling, duplication CI and WebMCP coverage >=70% before frontier amortized O(1) claim; physics verifies exact Gamma-ratio null centering on real BrowserGym banks; product verifies rho_proxy_real >=0.50. Frontier JIT verifier suggestion deferred until live DSM-IR vs endpoint-catalog shootout decides if retrieval basin is exhausted."
+  },
+  "experiment_id": "EXP-PHYSICS-35927464703",
+  "inherited_last_verdict": "MEASUREMENT_INVALID",
+  "inherited_next_question": "On real BrowserGym WebShop/TodoMVC trajectory banks at locked 1280x720 (BrowserGym-core 0.14.3 + AgentLab 0.4.2 + Playwright 1.63.0, CDP Accessibility.getFullAXTree visual bbox 10 bins + 8 computed styles + AX embedding 5k TRAIN-only k-means 20, not SHA256-truncated, TRAIN-only Dirichlet counts by trajectory_id, exact gammaln/polygamma Dirichlet-Multinomial K12 (K24 if |S_next|>=16) with trajectory-grouped 1999 perms seed42), does observed log BF exceed the analytic/permutation null by >=200 nats with BC>0.05 p_bonf<0.01 gap>=0.05 over TF-IDF k5 and Markov-1 with independent~0 (|BC|<0.05 p>0.10 cons<0.03 |analytic|<0.1), or does even exactly-centered genuine DOM remain BC~0/rel_sep<200 indicating no beyond-memory signal at N=1000-1999 and physics should remain PARKED pending larger production manifest with session/permission regimes and |S|>=16?",
+  "lane": "physics",
+  "origin_github_run_id": "35927464703",
+  "parent_handoff": {
+    "experiment_id": "EXP-PHYSICS-35915247766",
+    "path": "research/experiments/EXP-PHYSICS-35915247766/handoff.json",
+    "sha256": "b70f9f2afa436bb4dd8a4aed34b99cb425eb9795f867d7d4c9396ec8115226ab"
+  },
+  "reason": "global-director-CONTINUE",
+  "request_hash": "34170b5272b7d8a0eaf902a2d353dc3920bfd821ab129eee7b8d9699ce8dea24",
+  "request_id": "fdb60b676dfec7ef0edb23a0",
+  "schema_version": 1
+}
