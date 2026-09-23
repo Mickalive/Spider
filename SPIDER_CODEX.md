@@ -4,7 +4,7 @@ Pre-2.0 canonical memory remains frozen at `archive/spider-codex-ultimate:SPIDER
 
 Canonical Research 2.0 evidence lives in `codex/experiments/<experiment_id>/`.
 Use `codex/index.json` and `codex/claim_state.json` to locate relevant packets; do not load all experiment bodies by default.
-Validated experiments: **294**. Coverage gaps: **0**. Quarantined packets: **1**.
+Validated experiments: **295**. Coverage gaps: **0**. Quarantined packets: **1**.
 
 ## Experiment index
 
@@ -302,6 +302,7 @@ Validated experiments: **294**. Coverage gaps: **0**. Quarantined packets: **1**
 | EXP-INTEL-35892848544 | intel | PASS | MEASUREMENT_INVALID | C-CROSSSITE | `304f93e3453e` |
 | EXP-RUNTIME-35900903994 | runtime | FAIL | MIXED | C-FRESHNESS, C-MEAS-VALID | `b724984c5b62` |
 | EXP-PRODUCT-35900911212 | product | MEASUREMENT_INVALID | MEASUREMENT_INVALID | C-RESIDUAL-NOVELTY, C-PRODUCT-ECON | `07558b5a5f27` |
+| EXP-PHYSICS-35903177055 | physics | MEASUREMENT_INVALID | MEASUREMENT_INVALID | C-WEB-DYNAMICS | `ca7844a8770d` |
 | EXP-PRODUCT-35908252617 | product | PASS | FALSIFIED | C-PRODUCT-ECON, C-RESIDUAL-NOVELTY | `2dfc94a81a07` |
 | EXP-RUNTIME-35908617140 | runtime | MEASUREMENT_INVALID | MEASUREMENT_INVALID | C-MEAS-VALID, C-FRESHNESS | `341575ac9261` |
 
@@ -320,7 +321,7 @@ These are chronological latest events, not an automatic truth ranking.
 | C-PRODUCT-ECON | REJECTED | EXP-PRODUCT-35908252617 | product |
 | C-RESIDUAL-NOVELTY | REJECTED | EXP-PRODUCT-35908252617 | product |
 | C-SEMANTIC-RESOLVE | EXPERIMENTAL | EXP-FRONTIER-35886105479 | frontier |
-| C-WEB-DYNAMICS | HYPOTHESIS | EXP-PHYSICS-35892828492 | physics |
+| C-WEB-DYNAMICS | HYPOTHESIS | EXP-PHYSICS-35903177055 | physics |
 
 ## Integrity accounting
 

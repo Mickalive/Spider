@@ -1,0 +1,67 @@
+{
+  "experiment_id": "EXP-PHYSICS-35903177055",
+  "lane": "physics",
+  "created_at": "2026-09-23T20:00:38Z",
+  "request_hash": "2b4827d4fe19c61d79e21f85ee80642eb0648d706e6a5a73e6037d6338055dff",
+  "freeze_hash_prereg": "f271c6fd84678b72d4927404dcf38b7b85e2b3b19a005af3f471efed6ac4eb1f",
+  "freeze_hash_request": "e999b40aa025188ba07b9f26e5c29fb36abfb05e61585198f43bb6e1828eeda8",
+  "freeze_hash_spec": "af0296d1e87e8f61d97cc63d54cbfb9208a18dc5ad1b07cfede11bdf82dffb83",
+  "execution_sha": "79bb71801c56efe88eccaaf79e56ea6f5a26a54ae25a1ee22b59bfede7495f28",
+  "code_paths": [
+    "research/experiments/EXP-PHYSICS-35903177055/execute_35903177055.py"
+  ],
+  "environment": {
+    "python": "3.12.14 (main, Aug 13 2026, 02:47:42) [GCC 13.3.0]",
+    "numpy": "2.5.3",
+    "scipy": "1.18.1",
+    "playwright": "1.63.0",
+    "browsergym_core": "0.14.3",
+    "sklearn": "checking"
+  },
+  "datasets": [
+    "locally-hosted 6-state genuine overlapping DOM at 1280x720 via CDP (50x40 N=1999 per bank)",
+    "independent-noise genuine overlapping replication (regime-independent, not S_current%2)",
+    "IID null (same marginal P(S) independent)"
+  ],
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-PHYSICS-35903177055/raw_prototypes.json",
+      "sha256": "1504ad279108429cab1c6a8be86b611bb2eff45355d4776351986a064c867d28",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-35903177055/raw_transitions_correlated.json",
+      "sha256": "9ae749290e9a8997ffd201885e6f964c0bf5be0088b7d4ded559dbe3702d2e06",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-35903177055/raw_transitions_independent.json",
+      "sha256": "4f191be1f84a6543c58127eff230334f87a71662b159bb40a3b1f34218c871c3",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-35903177055/raw_transitions_iid.json",
+      "sha256": "28bd730b9a20ba60adce32dc641fe7f48ccc0fd81e6e24c0b1b4165607bca64d",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-35903177055/overlap_verification.json",
+      "sha256": "caa558637e3f4a8b61939effa3342da06dca04a283af2e7c2fbfded5e379fac6",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-35903177055/raw_results.json",
+      "sha256": "4ae4430dbf55150943a124a84dac2b0dbba778d656234892764f897c5c74edd4",
+      "role": "derived"
+    }
+  ],
+  "hashes": {
+    "result.json": "c962fd7b6d0adf4d56b3fd9ee456066547d9ffe1fc9f368f85270a5bc457ac3d",
+    "report.md": "a3e0e9aca2d12a5b8a153ac3b0bfd24a6bc5eee951ceac9ec9d8ce7691f58754",
+    "raw_results.json": "4ae4430dbf55150943a124a84dac2b0dbba778d656234892764f897c5c74edd4",
+    "raw_prototypes.json": "1504ad279108429cab1c6a8be86b611bb2eff45355d4776351986a064c867d28"
+  },
+  "gammaln_polygamma_verification": "execute_35903177055.py contains scipy.special.gammaln and polygamma(0)/polygamma(1) and does NOT contain heuristic sqrt(mean(1/(2n)))*0.1",
+  "browsergym_reuse": "research/intel/manifest.json verified MISSING; browsergym.envs API incompatible with v0.14.3; locally-hosted genuine proxy used as mandated fallback per spec measurement_validity",
+  "trajectory_grouping": "trajectory_id unit, 1000 perms seed 42, |perm-analytic|<0.03 guard"
+}

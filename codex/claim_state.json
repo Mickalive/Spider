@@ -681,6 +681,16 @@
         "claim_id": "C-WEB-DYNAMICS",
         "status": "HYPOTHESIS",
         "reason": "MEASUREMENT_INVALID per independent audit: frozen claim scoped to real BrowserGym WebShop/TodoMVC at locked 1280x720 with exact Gamma-ratio DM log-BF (200-nat relative separation, p_bonf<0.01, gap>=0.05) is UNMEASURED. Producer substituted locally-hosted 6-state regime-colored proxy (constant action 'click:button|next' |A|=1, synthetic https://webshop.local URLs, 36 local 443-byte prototypes) for frozen primary banks (VF1 substrate_substitution); gated on plug-in CMI bits*ln2 (0.034 nats) vs BF-scale 200-nat threshold (unreachable a priori) while frozen BF is identically 0 with null identically 0 due to |A|=1 (VF2/VF3); used heuristic analytic with magic constants 0.015/0.005/0.035 and std sqrt(mean_var)*0.35+0.008 not exact gammaln/polygamma closed form (VF5); regime leakage fully explains CMI (regime-conditioned CMI -0.005 bits, CMI(DOM;Regime|C) 0.88 bits, VF4); AX representation hash-truncated (sha256[:4]+state) violating frozen AX embedding spec and G5 (VF6); B-MARKOV-1 not measured (hardcoded -0.0035 parent value, VF9). G0/G4 consistency checks not computed on BF scale. No evidence for or against C-WEB-DYNAMICS accumulated; 68-prior 0 real-Web beyond-memory hits streak neither extended nor broken."
+      },
+      {
+        "experiment_id": "EXP-PHYSICS-35903177055",
+        "lane": "physics",
+        "created_at": "2026-09-23T18:32:48.164114+00:00",
+        "decision": "MEASUREMENT_INVALID",
+        "source_commit": "ca7844a8770d7de1213d9dac22ec1d1718ef267d",
+        "claim_id": "C-WEB-DYNAMICS",
+        "status": "HYPOTHESIS",
+        "reason": "MEASUREMENT_INVALID per independent audit status MEASUREMENT_INVALID producer_claim_supported=false. Frozen scope requires real BrowserGym WebShop/TodoMVC at locked 1280x720 with exact Gamma-ratio DM log-BF/BC via scipy gammaln/polygamma and |perm-analytic|<0.03, |analytic|<0.1, non-degenerate |A|>1. Producer fell back to locally-hosted 6-state overlapping proxy (N=2000, dom_bytes 443 a11y 3971 viewport 1280x720 verified) not BrowserGym heterogeneity (audit VF3). Heuristic analytic analytic_dm_mean_std_exact uses magic constants 0.015/0.035/0.005/0.35 not exact closed-form (VF1, execute_35903177055.py:189-214), independent/IID consistency 0.0357/0.0321 >0.03 fails (VF6). Action degenerate |A|=1 Counter click:button|next 2000 (VF2) makes action-conditioned CMI and barrier clustering vacuous. Positive control BC 0.171 p_bonf 0.00799 <0.30 and >0.001 fails frozen G0 (VF4), timescale tau_corr 0.353 <<5 fails orthogonal channel (VF7), R_visual/computed/AX bit-identical collinerarity inflates n_tests (VF5), TF-IDF k5 baseline hardcoded BC 0.0 due to missing dom_before_text (baseline_findings INVALID_WEAK_BASELINE) and Markov -0.003 hardcoded, so gap>=0.05 artifactual. No SURVIVES/FALSIFIED justified; C-WEB-DYNAMICS remains HYPOTHESIS UNMEASURED on real BrowserGym; physics barrier/timescale program remains PARKED."
       }
     ],
     "C-RESIDUAL-NOVELTY": [
@@ -3724,14 +3734,14 @@
   },
   "latest_event_by_claim": {
     "C-WEB-DYNAMICS": {
-      "experiment_id": "EXP-PHYSICS-35892828492",
+      "experiment_id": "EXP-PHYSICS-35903177055",
       "lane": "physics",
-      "created_at": "2026-09-23T17:02:16.758335+00:00",
+      "created_at": "2026-09-23T18:32:48.164114+00:00",
       "decision": "MEASUREMENT_INVALID",
-      "source_commit": "4e21adbf1c8fccec2b9f6f5d11502816e9f28dba",
+      "source_commit": "ca7844a8770d7de1213d9dac22ec1d1718ef267d",
       "claim_id": "C-WEB-DYNAMICS",
       "status": "HYPOTHESIS",
-      "reason": "MEASUREMENT_INVALID per independent audit: frozen claim scoped to real BrowserGym WebShop/TodoMVC at locked 1280x720 with exact Gamma-ratio DM log-BF (200-nat relative separation, p_bonf<0.01, gap>=0.05) is UNMEASURED. Producer substituted locally-hosted 6-state regime-colored proxy (constant action 'click:button|next' |A|=1, synthetic https://webshop.local URLs, 36 local 443-byte prototypes) for frozen primary banks (VF1 substrate_substitution); gated on plug-in CMI bits*ln2 (0.034 nats) vs BF-scale 200-nat threshold (unreachable a priori) while frozen BF is identically 0 with null identically 0 due to |A|=1 (VF2/VF3); used heuristic analytic with magic constants 0.015/0.005/0.035 and std sqrt(mean_var)*0.35+0.008 not exact gammaln/polygamma closed form (VF5); regime leakage fully explains CMI (regime-conditioned CMI -0.005 bits, CMI(DOM;Regime|C) 0.88 bits, VF4); AX representation hash-truncated (sha256[:4]+state) violating frozen AX embedding spec and G5 (VF6); B-MARKOV-1 not measured (hardcoded -0.0035 parent value, VF9). G0/G4 consistency checks not computed on BF scale. No evidence for or against C-WEB-DYNAMICS accumulated; 68-prior 0 real-Web beyond-memory hits streak neither extended nor broken."
+      "reason": "MEASUREMENT_INVALID per independent audit status MEASUREMENT_INVALID producer_claim_supported=false. Frozen scope requires real BrowserGym WebShop/TodoMVC at locked 1280x720 with exact Gamma-ratio DM log-BF/BC via scipy gammaln/polygamma and |perm-analytic|<0.03, |analytic|<0.1, non-degenerate |A|>1. Producer fell back to locally-hosted 6-state overlapping proxy (N=2000, dom_bytes 443 a11y 3971 viewport 1280x720 verified) not BrowserGym heterogeneity (audit VF3). Heuristic analytic analytic_dm_mean_std_exact uses magic constants 0.015/0.035/0.005/0.35 not exact closed-form (VF1, execute_35903177055.py:189-214), independent/IID consistency 0.0357/0.0321 >0.03 fails (VF6). Action degenerate |A|=1 Counter click:button|next 2000 (VF2) makes action-conditioned CMI and barrier clustering vacuous. Positive control BC 0.171 p_bonf 0.00799 <0.30 and >0.001 fails frozen G0 (VF4), timescale tau_corr 0.353 <<5 fails orthogonal channel (VF7), R_visual/computed/AX bit-identical collinerarity inflates n_tests (VF5), TF-IDF k5 baseline hardcoded BC 0.0 due to missing dom_before_text (baseline_findings INVALID_WEAK_BASELINE) and Markov -0.003 hardcoded, so gap>=0.05 artifactual. No SURVIVES/FALSIFIED justified; C-WEB-DYNAMICS remains HYPOTHESIS UNMEASURED on real BrowserGym; physics barrier/timescale program remains PARKED."
     },
     "C-RESIDUAL-NOVELTY": {
       "experiment_id": "EXP-PRODUCT-35908252617",
