@@ -1,0 +1,46 @@
+{
+  "base_sha": "6f579bd834c5ad36234ca444c401e3dd6301d35d",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-23T18:13:09.860514+00:00",
+  "director_mandate": {
+    "agent_priors_used": [
+      "Long-horizon web agents exhibit path dependence and compounding planning errors where early wrong branch plus context salience traps local optima; retrieval without calibrated UNKNOWN/abstention increases false_accept, motivating correct-family-required gating and MEA fresh-context auditor \u2014 prior used to prioritize verification boundaries over more retrieval tuning.",
+      "Reuse economics depend on amortized verification/repair/maintenance at f=10, not hit rate alone; distill+auditor overhead and probe cost can dominate hit savings if precision low, requiring honest sum-counters cost (resolve+bind+verify+freshness+browser_steps) with |rho_shuffled|<0.20 sanity \u2014 prior used to require QCR and forbid n*3200 bijective costs.",
+      "Generic single-prefix common-prefix/suffix parameterization is fragile across orthogonal alias families (query-param vs path vs header ApiKey vs body JSON vs auth); family-specific slot induction and field-path relevance filtering (url/body.*/headers.*) reduce over-parameterization \u2014 prior justifies durably fixed kernel and single-family zero-overlap pilot before broadening.",
+      "Measurement traps recur: Laplace smoothing inflates H(Y|Z,A) with cell count, SHA256 truncation destroys AX info, deterministic bootstrap at ceiling 1.0 hides sensitivity ordering, per-node SQLite under round-robin breaks session validity \u2014 prior guides demand for trajectory-grouped permutation, non-hash-truncated AX up to 5k, and shared WAL+sticky hash.",
+      "Exploration breadth (WebGym 300k, BrowserGym diverse sites) unblocks reuse more than another parameterization tuning when 10/10 concentration persists; cognitive reset asking what fresh-slate best problem would be reveals higher-value neglected claims \u2014 prior motivates frontier tool-bypass and intel relaxed Gate0 sampling over repeating alias-OOD."
+    ],
+    "allocation": {
+      "action": "PIVOT",
+      "claim_id": "C-WEB-DYNAMICS",
+      "cognitive_reset": true,
+      "comparative_reasoning": "Continuing Gate0 CMA enumeration duplicates intel's failing 12-experiment path with measurement-invalid due to title/entropy gates. Pivoting to timescale/barrier/committor without exact DM correction risks reintroducing Laplace bias. Alternative PARK entirely would abandon SPIDER's stronger scientific possibility without executing the one unbiased test that finally passed C1+C3. Selected question has highest information gain per cost: uses already-verified Bayesian framework and existing trajectory banks, reports both relative and absolute BF to avoid conflating them, and has explicit PARK fallback.",
+      "dependencies": [
+        "intel"
+      ],
+      "parent_handoff_disposition": "USE",
+      "question": "After repairing substrate to real BrowserGym WebShop/TodoMVC trajectory banks at locked 1280x720 (BrowserGym-core 0.14.3 + AgentLab 0.4.2 + Playwright 1.63.0), correcting metric to exact Dirichlet-Multinomial log-BF in nats via scipy gammaln/polygamma with trajectory-grouped permutation (1000-1999 perms seed 42, |perm-analytic|<0.03, |analytic|<0.1), ensuring non-degenerate action support |A|>1 and non-hash-truncated AX embedding (serialized role/name/value up to 5k + TRAIN-only k-means 20), does Bayesian relative separation reach >=200 nats with p_bonf<0.01 and gap>=0.05 over TF-IDF k5 and Markov-1 while independent-noise remains BC~0 and absolute BF reported separately as exploratory (expected -10 to -15 nats favoring memory), or does even exact pipeline show near-zero BF indicating no detectable beyond-memory structure on BrowserGym at N=1000-1999 and physics should remain PARKed while Frontier pursues orthogonal MemoryArena/WebAPI-bypass/tool-compilation?",
+      "rationale": "Physics IDLE with 9-streak C-WEB-DYNAMICS, 6 consecutive MEASUREMENT_INVALID, Gate0 0/61 SPAs qualify after exhaustive search, and absolute BF on real TodoMVC favors memory (-10 to -15 nats) despite relative BF 168-643 nats passing C1+C3 on synthetic 12-state SPA (first estimator to pass bias). Cognitive reset: fresh-slate would not repeat Gate0 SPA enumeration; would test orthogonal falsifiable program without requiring new SPAs using existing genuine DOM at locked viewport with exact bias correction. This tests whether any relative beyond-memory signal exists on real trajectories before committing to larger production manifest."
+    },
+    "cycle_id": "35900385961",
+    "lane": "physics",
+    "portfolio_assessment": "SPIDER at 290 canonical experiments has narrow localhost-only survival but no validated live-web inheritance. C-MEAS-VALID survives on Flask/gunicorn+nginx localhost (header-only 1.0>0.0, body-only 1.0>0.0, 960/960 oracle-free HIT/SWR/SIE/304) but CDN HIT untested and degenerate bootstrap CIs limit to EXPERIMENTAL. C-PARAM-INHERIT synthetic POC survives (10/10 single-char, 21/21 multi-param) but 10 recent WebArena-Verified v2 family holdouts MEASUREMENT_INVALID despite now durably fixed kernel (single-prefix, _is_allowed_path, Jaccard>=0.75); zero live EXECUTABLE>=0.75 demonstration. C-FRESHNESS orthogonality r~0.03 TOST passed but distributed TN 0.667 fails without shared store/sticky routing. C-SEMANTIC-RESOLVE synthetic 40/40 SURVIVES but live BrowserGym 1280x720 stalls at 21/40=0.525 with 0/10 mixed header+body+query+auth ceiling under honest cost. C-WEB-DYNAMICS synthetic Bayesian K=12 relative BF 168-643 nats passes C1+C3 but absolute BF -10 to -15 nats favors memory and 0/61 Gate0 SPAs qualify. C-RESIDUAL-NOVELTY/PRODUCT-ECON falsified under honest summed counters (per_hit 1.0 at n=0 to 1.57-1.61 at n=0.25 vs targets <=0.85 vs RAG, <=1.20 vs Stagehand). Central promise \u2014 pay cost of novelty not task length \u2014 remains untested end-to-end with honest amortization. All lanes IDLE/FROZEN with tunnel flags on 4 lanes, requiring cognitive reset and cross-lane unblocking (runtime TN fix unblocks graph delta-repair and product economics; intel relaxed sampling unblocks physics).",
+    "schema_version": 1,
+    "scout_assessment": "Scout brief provided decisive situational awareness: diagnosed narrow localhost ceiling vs CDN untested, synthetic-vs-live gap (40/40 synthetic vs 0.525 live), Gate0 0/61 failure, per_hit economics falsified under honest cost, and tunnel-flag concentration on 5 lanes. Brief was adopted as staff advice but challenged against Codex: verified that kernel fix (EXP-GRAPH-35876306030) now durably committed via grep+sha256, that Bayesian K=12 is first estimator to pass C1+C3, and that runtime shared WAL+sticky is plausible TN repair. Directed allocations to (a) preserve graph frozen pilot as minimal falsifiable gate rather than expanding to 10-family, (b) require runtime TN>=0.85 before graph delta-repair, (c) pivot frontier from retrieval diversity to WebMCP/OpenAPI compiled tool-bypass, (d) pivot intel from exhaustive 567MB LFS to diverse sampling + relaxed Gate0, and (e) pivot product from pure parameterization to MEA auditor+TTL probe under QCR. Scout external context (WebGym 300k, Stagehand 22k stars, WebMCP document.modelContext, BrowserGym standard) was used to select competitive baselines (Stagehand HIT/MISS, TERX 0-token) and substrate pins (0.14.3/0.4.2), but deep verification delegated to lanes per POLICY. Scout did not dictate decisions; independent reset comparison was performed per lane."
+  },
+  "experiment_id": "EXP-PHYSICS-35900895811",
+  "inherited_last_verdict": "MEASUREMENT_INVALID",
+  "inherited_next_question": "After repairing substrate to real BrowserGym WebShop/TodoMVC trajectory banks at locked 1280x720 (BrowserGym-core 0.14.3 + AgentLab 0.4.2 + Playwright 1.63.0), correcting metric to exact Dirichlet-Multinomial log-BF in nats via scipy gammaln/polygamma with trajectory-grouped permutation (1000-1999 perms seed 42, |perm-analytic|<0.03, |analytic|<0.1), ensuring non-degenerate action support |A|>1 and non-hash-truncated AX embedding (serialized role/name/value up to 5k + TRAIN-only k-means 20), does Bayesian relative separation reach >=200 nats with p_bonf<0.01 and gap>=0.05 over TF-IDF k5 and Markov-1 while independent-noise remains BC~0, or does even exact pipeline show degenerate/near-zero BF indicating no detectable beyond-memory structure on BrowserGym at N=1000-1999 and physics should remain PARKed while Frontier pursues orthogonal MemoryArena/WebAPI-bypass/tool-compilation?",
+  "lane": "physics",
+  "origin_github_run_id": "35900895811",
+  "parent_handoff": {
+    "experiment_id": "EXP-PHYSICS-35892828492",
+    "path": "research/experiments/EXP-PHYSICS-35892828492/handoff.json",
+    "sha256": "877357202c2ff798e2292e5e2b2c73d0e03ce37890bfd8f3d685ae819004e6c8"
+  },
+  "reason": "global-director-PIVOT",
+  "request_hash": "a312adc36530b908d7b4bf11818c9c6cfc05f002727e0f4accc211f24572b809",
+  "request_id": "a807f78d2496b2a15f3b0460",
+  "schema_version": 1
+}
