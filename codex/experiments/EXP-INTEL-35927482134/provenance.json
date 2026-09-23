@@ -1,0 +1,167 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-35927482134",
+  "github_run_id": "35927482134",
+  "recorded_at": "2026-09-23T23:35:00+00:00",
+  "grammar_code_hash": "74ab5a2b59e7a57beedb516999f1da0cb7f3bc5a055beac08d0d98949d6b8ec4",
+  "grammar_file_sha256": "74ab5a2b59e7a57beedb516999f1da0cb7f3bc5a055beac08d0d98949d6b8ec4",
+  "base_sha": "219d24aeddf5998da13c15e1ceb23636cf79910c",
+  "frozen_seed": 35725763380,
+  "docker_digest": "sha256:3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb",
+  "browsergym_version": "0.14.3",
+  "agentlab_version": "0.4.2",
+  "playwright_version": "1.63.0",
+  "tiktoken_version": "0.14.0",
+  "viewport": {
+    "width": 1280,
+    "height": 720
+  },
+  "n_valid_captures": 21,
+  "measurements": {
+    "ax_consistency": {
+      "pair_scores": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "category_details": [
+        {
+          "category": "Kitchen Furniture",
+          "n_pages": 2,
+          "n_pairs": 1,
+          "mean_score": 0.0
+        },
+        {
+          "category": "Hair Loss Products",
+          "n_pages": 2,
+          "n_pairs": 1,
+          "mean_score": 0.0
+        },
+        {
+          "category": "DVD Players & Recorders",
+          "n_pages": 2,
+          "n_pairs": 1,
+          "mean_score": 0.0
+        },
+        {
+          "category": "Men's",
+          "n_pages": 2,
+          "n_pairs": 1,
+          "mean_score": 0.0
+        },
+        {
+          "category": "Snack Gifts",
+          "n_pages": 2,
+          "n_pairs": 1,
+          "mean_score": 0.0
+        },
+        {
+          "category": "Breakfast Foods",
+          "n_pages": 2,
+          "n_pairs": 1,
+          "mean_score": 0.0
+        },
+        {
+          "category": "Oral Pain Relief",
+          "n_pages": 2,
+          "n_pairs": 1,
+          "mean_score": 0.0
+        },
+        {
+          "category": "Automobile Accessories",
+          "n_pages": 2,
+          "n_pairs": 1,
+          "mean_score": 0.0
+        },
+        {
+          "category": "Accent Furniture",
+          "n_pages": 2,
+          "n_pairs": 1,
+          "mean_score": 0.0
+        },
+        {
+          "category": "Vehicle Electronics Accessories",
+          "n_pages": 2,
+          "n_pairs": 1,
+          "mean_score": 0.0
+        }
+      ],
+      "mean": 0.0,
+      "ci_lower": 0.0,
+      "ci_upper": 0.0,
+      "std": 0.0,
+      "variance_pop": 0.0,
+      "n_pairs": 10,
+      "n_categories": 10
+    },
+    "shuffle_null": {
+      "true_mean": 0.0,
+      "null_mean": 0.0,
+      "null_std": 0.0,
+      "null_p95": 0.0,
+      "p_value": 1.0,
+      "gap": 0.0
+    },
+    "stagehand": [
+      {
+        "stable_on_identical": false,
+        "hash_changed_on_mutation": true
+      },
+      {
+        "stable_on_identical": false,
+        "hash_changed_on_mutation": true
+      },
+      {
+        "stable_on_identical": false,
+        "hash_changed_on_mutation": true
+      },
+      {
+        "stable_on_identical": false,
+        "hash_changed_on_mutation": true
+      },
+      {
+        "stable_on_identical": false,
+        "hash_changed_on_mutation": true
+      }
+    ]
+  },
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-INTEL-35927482134/result.json",
+      "sha256": "3e734a24159193c953f9bbc0b28b05cb45843bd2ffe12c193cc4dd5dbab2eb6b",
+      "role": "result"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-35927482134/artifacts/derived/ax_consistency_fulltree.json",
+      "sha256": "ac8f0af2b106a877452e3202efd9c673f4bd77e0ba7d9fb01cac10e54b3f7049",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-35927482134/artifacts/derived/stagehand_replication_recomputed.json",
+      "sha256": "45953f288ad35c7adef65f68c7e68f58e07b0f3f93481a8f30a12118411f6ba3",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-35927482134/artifacts/derived/webgym_census.json",
+      "sha256": "e4a084cab3be4a24bef1533574257217babcd886fd1f64b732b46db42693df39",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-35927482134/artifacts/derived/gate0_relaxed_table.json",
+      "sha256": "fd87eace76ef587a53cbda2a49a3e517e4643268581b6b9c8d2af4fe6d960373",
+      "role": "derived"
+    }
+  ],
+  "validity_notes": [],
+  "unresolved": [
+    "WebGym 292k: HF_TOKEN required; 0/50 sites reached",
+    "BrowserGym multi-step: API mismatch"
+  ]
+}

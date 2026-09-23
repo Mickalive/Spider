@@ -1,0 +1,87 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-35932494797",
+  "lane": "product",
+  "stage": "EXECUTE",
+  "actor": {
+    "channel": "opencode",
+    "model_id": "opencode/muse-spark-1.2-contributor-free",
+    "role": "product lane EXECUTE"
+  },
+  "run": {
+    "github_run_id": "35932494797",
+    "attempt": 1,
+    "started_at": "2026-09-23T23:13:48+00:00",
+    "completed_at": "2026-09-23T23:18:00+00:00",
+    "exit": "MEASUREMENT_INVALID (frozen gate, retryable)",
+    "prior_model_runs_context": "model_execute.json attempt 2 status retry exit_code 1 category transient (previous EXECUTE sweep produced no packet outputs; this EXECUTE produces MEASUREMENT_INVALID packet)"
+  },
+  "frozen_inputs": {
+    "request.json": "203baed2d0384475486714bd31b8808f7ebb4c674ec6218ae2aeb7d48af0f9d6",
+    "spec.json": "744308141960d698dd830f20b079a7f866c33bab4c57c19e66d9e6991128b674",
+    "prereg.md": "999448f6fc9bc77529a272f823670b6c44a54562672a945aee0b44ac61f1289e",
+    "freeze.json": "545289bd2c15e73270ba992bea1613b7af37f7d16affa36fc90ec25db3e02a9e",
+    "immutability_check": "sha256sum re-verified during EXECUTE; request/spec/prereg byte-identical to freeze.json recorded hashes (OBS-15)",
+    "execution_checkpoint.pre_execute_sha": "5275db3d078276ecb48efbf23957147c8d17731a",
+    "base_sha": "219d24aeddf5998da13c15e1ceb23636cf79910c",
+    "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b"
+  },
+  "environment": {
+    "repo_head": "ed1e96abf082069de0c59adae4bf061275fb0a37 R2 product: execution base EXP-PRODUCT-35932494797",
+    "platform": "linux (github actions runner) 3.12.14",
+    "python": "3.12.14 (GCC 13.3.0)",
+    "pip": "26.2.1 (no third-party scientific packages present)",
+    "sqlite3_lib": "3.45.1 (module importable, not used for economics per frozen prohibition)",
+    "docker": "daemon reachable; Engine 28.0.4; 0 containers; images: ghcr.io/github/gh-aw-firewall/{agent,api-proxy,squid}, ghcr.io/github/gh-aw-mcpg, ghcr.io/dependabot/dependabot-updater-core, ghcr.io/github/github-mcp-server (no browsergym/agentlab/webarena image per OBS-2)",
+    "nginx": "/usr/sbin/nginx binary present version 1.24.0 (no upstream gunicorn workers, no experiment config)",
+    "pyjwt": "absent (No module named 'jwt', required 2.14.0)",
+    "gunicorn": "absent (not found, required 23.0.0 2x workers)",
+    "numpy": "absent",
+    "scipy": "absent",
+    "sklearn": "absent",
+    "pandas": "absent",
+    "browsergym": "python package absent (required 0.14.3)",
+    "playwright": "absent (required 1.63.0)",
+    "network_egress": "not independently verified; no pip install attempted (substrate absence is provisioning fact, not transient network error)",
+    "llm_keys": "GH_TOKEN only; no OPENAI_API_KEY / GPT4O_MINI_KEY / OPENAI_KEY (OBS-12)"
+  },
+  "substrate_audit": {
+    "finding": "PRIMARY DEPENDENCY UNAVAILABLE -> MEASUREMENT_INVALID",
+    "raw_evidence_artifact": "artifacts/substrate_audit.json",
+    "raw_evidence_sha256": "130530eeb395227a96e102cd40596c88f58517e60de212cd70de24ac6c3d618a",
+    "observations": "OBS-1..OBS-18 (command + raw + derived)"
+  },
+  "code_changes_made": {
+    "scope": "product lane allowed_code_roots only (src/, tests/, sdk/, pyproject.toml) - only src/spider/kernel.py touched",
+    "src/spider/kernel.py": {
+      "change": "_PARAMETER regex re-applied to dot-aware form r\"\\$\\{([A-Za-z_][A-Za-z0-9_\\.]*)\\}\" (frozen-design PC2 binding fix, required before any retry)",
+      "sha256_before": "46929b3a951df48d7f9d1fd850871073c0d91c1868aa117e13d389fe274e8d61",
+      "sha256_after": "d926279d5ee14a044a2f13b8abc09202df9f5adb9e86feaadeb61818a15f4038",
+      "git_diff": "1 insertion, 1 deletion at line 12",
+      "notes": "sha d926279d matches prior verified patched hash family (EXP-PRODUCT-35921344930 provenance); manual verification: _template_slots extracts dotted a.b correctly, _bind handles dot slots, kernel.resolve EXECUTABLE for host/sku and a.b",
+      "test_result": "PYTHONPATH=src python3 -m unittest tests.test_kernel -v -> 3/3 OK (OBS-14)"
+    },
+    "tests/test_kernel.py": {
+      "change": "none (hash ff9c1561 unchanged from HEAD)",
+      "sha256": "ff9c1561c4169d306fba56d52442546a3bbfdab11d3ab56c51d7369309e9c0b6"
+    }
+  },
+  "outputs_written": [
+    "research/experiments/EXP-PRODUCT-35932494797/artifacts/substrate_audit.json",
+    "research/experiments/EXP-PRODUCT-35932494797/failure.json",
+    "research/experiments/EXP-PRODUCT-35932494797/result.json",
+    "research/experiments/EXP-PRODUCT-35932494797/report.md",
+    "research/experiments/EXP-PRODUCT-35932494797/provenance.json"
+  ],
+  "integrity_actions_taken": [
+    "no git commit / push / switch / reset performed (per workflow prompt)",
+    "no constitutional or shared files touched (AGENTS.md, SPIDER_MASTER_PROMPT.md, SPIDER_ARCHITECTURE_RESEARCH2.md, research/EXPERIMENT_PACKET.md, codex/, .github/, .opencode/ untouched except allowed src/)",
+    "frozen inputs verified byte-identical to freeze.json hashes (OBS-15); no outcome-bearing measurement run before freeze; no frozen threshold mutated after seeing OBS",
+    "no bijective n*3200 fallback, no file-proxy isolated SQLite economics run, no bootstrap/permutation fabricated, no claim status modified (no verdict.json written by EXECUTE)",
+    "RAW EVIDENCE preserved separately from OBSERVATIONS -> DERIVED MEASUREMENTS -> INTERPRETATION per AGENTS.md"
+  ],
+  "handoff_to": {
+    "runtime_lane_hardening": "binding smallest next action in failure.json and result.json validity_notes: shared SQLite WAL HS256 sticky nginx + honest sum counters + BrowserGym 2000-node 1280x720 fixture at /tmp/spider-runtime/shared.db (WAL, per-batch SELECT, HS256 PyJWT 2.14.0, 2x gunicorn 23.0.0 + nginx 1.24.0, health-gated URL-sticky real If-None-Match/ETag W/body_sha 200 vs 304 n_non304>=800) validated 960/960 oracle-free TN>=0.85, plus BrowserGym 0.14.3 CDP AX 2000-node 1280x720 Playwright 1.63.0 + gpt-4o-mini key, plus numpy/scipy/sklearn/pandas for bootstrap 5000",
+    "retry_predicate": "same frozen transaction (hashes request 203baed2 spec 7443081 prereg 999448f freeze 545289b), no re-design, no new mandate; requires substrate + gpt-4o-mini + scientific stack; if still unavailable, keep PARK per parent and pivot product to ST-WebAgentBench CuP or Intel product-page sampling per Director comparative reasoning"
+  }
+}
