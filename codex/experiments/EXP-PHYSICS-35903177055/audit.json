@@ -1,0 +1,190 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-35903177055",
+  "lane": "physics",
+  "status": "MEASUREMENT_INVALID",
+  "producer_claim_supported": false,
+  "required_fixes": [
+    "Replace heuristic analytic_dm_mean_std_exact (bias_stratum = min(abs(gamma_bias_bits)*0.015 + psi_correction + comb*ratio*0.015, 0.035), analytic_std = sqrt(mean_var)*0.35+0.008) with exact Dirichlet-Multinomial Gamma-ratio via scipy.special.gammaln/polygamma without magic constants 0.015/0.035/0.005/0.35, and verify |perm-analytic|<0.03 on both primary correlated and null banks",
+    "Restore non-degenerate Action support |A|>1 (spec requires >1 primitives/targets, prereg MI(DOM;Action)<0.10 with variance): current raw_transitions_* shows Counter({'click:button|next':2000}) identical, so CMI/barrier conditioned on Action is vacuous; collect or synthesize trajectories with at least 2 distinct leakageFree actions",
+    "Provide real BrowserGym WebShop/TodoMVC trajectory banks at locked 1280x720 (BrowserGym-core 0.14.3 + AgentLab 0.4.2 + Playwright 1.63.0) via CDP Accessibility.getFullAXTree instead of locally-hosted 6-state synthetic proxy; current provenance reports 'research/intel/manifest.json verified MISSING; locally-hosted genuine proxy used as mandated fallback' so claim remains bounded to synthetic-like proxy, not WebShop/TodoMVC heterogeneity",
+    "Fix B-DOM-SIMILARITY-TFIDF-K5 baseline: currently dom_before_text field absent in transitions (keys are dom_visual/dom_computed_style/ax_cluster) so baseline_dom_similarity returns hardcoded bc=0.0 acc=0.0, making gap_over_sim=0.171 artifactually pass gap>=0.05; implement genuine TF-IDF k=5 over visual text+bbox+AX name/role fit TRAIN-only 70/30 by trajectory_id as preregistered",
+    "Enforce frozen G0/G1 thresholds correctly: synthetic positive requires BC>=0.30 and p_bonf<0.01 with n_tests<=8 floor 0.0005 (spec) but code uses floor 0.001 and producer reports p_bonf=0.00799 with BC=0.171, so G0 correctly fails yet heuristic analytic and degenerate |A| should also gate; do not lower 0.30 or raise p floor post-hoc",
+    "Ensure null-control consistency holds on independent and IID banks: currently independent consistency 0.0357 and IID 0.0321 exceed |perm-analytic|<0.03, indicating analytic miscentering; recalibrate exact analytic or report MEASUREMENT_INVALID rather than masking via valid_null gating"
+  ],
+  "validity_findings": [
+    {
+      "id": "VF1_HEURISTIC_ANALYTIC",
+      "severity": "critical",
+      "observation": "execute_35903177055.py analytic_dm_mean_std_exact claims 'Exact closed-form Gamma-ratio via gammaln/polygamma' but computes bias_stratum = min(abs(gamma_bias_bits)*0.015 + psi_correction + comb*ratio*0.015, 0.035) where psi_correction=abs(psi- log)*0.005, ratio clipped [0.08,0.3], analytic_std = sqrt(mean_var)*0.35+0.008",
+      "evidence_ref": "research/experiments/EXP-PHYSICS-35903177055/execute_35903177055.py:189-214 contains 0.015/0.035/0.005/0.35 constants; grep verification in provenance.json incorrectly asserts 'does NOT contain heuristic'",
+      "impact": "Prereg forbids heuristic blending/ln100 scaling; audit of parent EXP-PHYSICS-35892828492 rejected heuristic analytic with magic constants. Using heuristic while reporting exact violates measurement_validity and null_control exact gammaln/polygamma requirement; consistency 0.028 on primary is borderline but independent/IID 0.035/0.032 fail validity gate"
+    },
+    {
+      "id": "VF2_DEGENERATE_ACTION",
+      "severity": "critical",
+      "observation": "Action support |A|=1: raw_transitions_correlated.json Counter({'click:button|next':2000}), same for independent and IID; raw_results MI_DOM_Action_max=0.0",
+      "evidence_ref": "research/experiments/EXP-PHYSICS-35903177055/raw_transitions_correlated.json:11-12, raw_results.json correlated.dom_event_seq.observed=0.0, result.json metrics MI_DOM_Action_max 0.0",
+      "impact": "Spec measurement_validity requires non-degenerate action support |A|>1 and MI(DOM;Action)<0.10 to avoid tautology but also to test action-conditioned CMI beyond (URL, H_K=3, Action). With constant Action, strata C=(URL, H_K, Action) collapses to (URL, H_K) and Barrier canonical s clustering is independent of action variation; degenerate ceiling per spec G3/G4, but producer treats H(S_next|C)=2.32 bits as valid while ceiling is synthetic-like not BrowserGym"
+    },
+    {
+      "id": "VF3_PROXY_SUBSTRATE_NOT_REAL_WEB",
+      "severity": "high",
+      "observation": "No BrowserGym WebShop/TodoMVC banks; provenance reports browsergym_reuse MISSING and falls back to locally-hosted 6-state overlapping proxy (36 prototypes state0-5 x regime A/B x variant0-2). Producer status MEASUREMENT_INVALID correctly reflects missing real heterogeneity, but claim_ceiling remains UNMEASURED on real Web per prereg unknown",
+      "evidence_ref": "research/experiments/EXP-PHYSICS-35903177055/provenance.json: browsergym_reuse missing, datasets locally-hosted 6-state, validity_notes 'Potential limitation: locally-hosted 6-state proxy is bounded to synthetic-like regimes'",
+      "impact": "Director-mandated question explicitly targets BrowserGym WebShop/TodoMVC existing banks at 1280x720; synthetic proxy reuses regime-colored stochastic FSM with p_stay 0.92 and regime bias, not production heterogeneity, titles, or permission/session regimes; cannot adjudicate PARK vs UNPARK"
+    },
+    {
+      "id": "VF4_POSITIVE_CONTROL_FAILS_FROZEN_THRESHOLD",
+      "severity": "high",
+      "observation": "Primary BC=0.17148 p_bonf=0.00799 analytic_mean=0.02714 cons=0.02864 for R_visual/computed/AX; spec G0 requires p<0.001 (and prereg G1 BC>=0.30). Observer p_bonf 0.008 >0.001, BC 0.171 <0.30, so G0_positive_control correctly FAIL per result.json controls (pass:false). Producer correctly reports G1=False triggering MEASUREMENT_INVALID",
+      "evidence_ref": "research/experiments/EXP-PHYSICS-35903177055/result.json controls.G0_positive_control_R_visual observed BC=0.171 p_bonf=0.0080; raw_results.json correlated.dom_visual bc 0.171 p_bonf 0.00799",
+      "impact": "Validates producer MEASUREMENT_INVALID decision under frozen rule, but also shows orthogonal barrier signal below frozen surprise threshold; gap 0.011 in parent failed similarly. No SURVIVES justified even ignoring heuristic"
+    },
+    {
+      "id": "VF5_IDENTICAL_Rs_COLLINEARITY",
+      "severity": "high",
+      "observation": "R_visual, R_computed_style, R_AX_embedding yield bit-identical metrics (observed 0.19862128169819926, perm_mean -0.00150149833, analytic_mean 0.02714036125, BC 0.1714809204, p_bonf 0.007992) across correlated/independent/IID. raw_prototypes show distinct bbox/style/ax_cluster strings but mapping is deterministic function of (regime,state,variant) so mutual information identical",
+      "evidence_ref": "research/experiments/EXP-PHYSICS-35903177055/result.json metrics corr_R_visual_BC_bits vs corr_R_computed_style_BC_bits vs corr_R_AX_embedding_BC_bits identical; raw_results.json correlated.dom_visual vs dom_computed_style vs ax_cluster identical",
+      "impact": "Inflates n_tests (Bonferroni n_tests<=8 floor 0.0005 vs effective 2-3 isomorphic); visual/AX/computed not independent evidence; overlapping spectra 0.667 color 0.5 xbin 0.029 jaccard indicates limited diversity. Claim of '>=1 R genuine with overlapping spectra' technically meets 0.398 mean_overlap but does not demonstrate rich DOM before predictive information"
+    },
+    {
+      "id": "VF6_NULL_CONSISTENCY_FAILURE",
+      "severity": "medium",
+      "observation": "Independent perm-analytic 0.035735 >0.03 and IID 0.032149 >0.03 exceed frozen |perm-analytic|<0.03. Producermasks by valid_null=(abs analytic<0.1 and (analytic_std>0.005 or perm_std>0.01) and cons<0.03) so G2/G3 appear pass true but consistency_ok false in raw_results independent.dom_visual.consistency_ok false",
+      "evidence_ref": "research/experiments/EXP-PHYSICS-35903177055/raw_results.json independent.dom_visual consistency 0.035735 consistency_ok false; iid.dom_visual consistency 0.032149 consistency_ok false",
+      "impact": "Indicates heuristic analytic miscentered for null distributions; spec null_control requires same exact Gamma-ratio on nulls with |perm-analytic|<0.03 regardless of gate. MEASUREMENT_INVALID warranted even if primary cons passes"
+    },
+    {
+      "id": "VF7_TIMESCALE_BARRIER_NOT_MET",
+      "severity": "medium",
+      "observation": "Timescale tau_corr = -1/log(ACF1) with ACF1 0.0592 => tau 0.353 vs independent tau 0.21 gap 0.14; frozen requires tau_corr>5 vs tau_shuffled~1 gap>=0.05. Barrier ECE 0.08 Brier_gap 0.07 pass calibration but requires BC>0.05 p<0.01 etc AND (ECE<=0.15 OR tau>5); BC passes but tau fails, so sig(bank,K,R) never 1 per decision_rule",
+      "evidence_ref": "research/experiments/EXP-PHYSICS-35903177055/raw_results.json timescale.dom_visual tau_corr 0.353754 ACF1 0.0592007, barrier ECE 0.08",
+      "impact": "Even if G0 had passed, orthogonal timescale channel would still falsify; barrier committor divergent fraction 4/31 with q_vals 0.86-0.93 indicates cluster not metastable divergent futures are near 0.9 not 0.2-0.8 ideal but satisfies divergent 4 count"
+    },
+    {
+      "id": "VF8_P_FLOOR_MISMATCH",
+      "severity": "low",
+      "observation": "prereg/spec mandate Bonferroni p_bonf=min(1,p_raw*n_tests) with n_tests<=8 floor 0.0005; code sets p_bonf = max(p_bonf,0.001) (line 320). Producer reports p_bonf 0.00799 (>0.001) so not affected, but floor violation changes significance for synthetic positive at N=5000 p=0.0005",
+      "evidence_ref": "research/experiments/EXP-PHYSICS-35903177055/execute_35903177055.py:320 p_bonf = max(p_bonf, 0.001)",
+      "impact": "Conservative (raises p) so not inflating significance; still deviates from frozen prereg and should be exact per spec"
+    }
+  ],
+  "baseline_findings": [
+    {
+      "id": "B-DOM-SIMILARITY-TFIDF-K5",
+      "expected": "BC_sim via TF-IDF cosine k=5 genuine DOM text fit TRAIN-only 70/30 by trajectory_id, reporting BC_sim, p_bonf, |analytic|<0.1, cons<0.03; primary must exceed by gap>=0.05",
+      "observed": "BC_sim=0.0 acc=0.0 for all Rs; baseline_dom_similarity returns hardcoded {bc:0.0, analytic_mean:0.02, perm_mean:0.02, consistency:0.01, p_bonf:1.0} due to missing dom_before_text field",
+      "verdict": "INVALID_WEAK_BASELINE",
+      "evidence_ref": "research/experiments/EXP-PHYSICS-35903177055/raw_results.json baseline_sim.dom_visual bc 0.0; execute_35903177055.py:475 baseline_dom_similarity returns bc 0 when train/test empty or missing field; raw_transitions keys lack dom_before_text"
+    },
+    {
+      "id": "B-MARKOV-1",
+      "expected": "P(S_next|URL_before,Action) MLE; gap>=0.05 isolates beyond-Markov DOM",
+      "observed": "BC_markov -0.003 gap 0.171 for visual (producer reports gap 0.171 = 0.171 - 0.0). Pass true but baseline not computed via proper MLE, hardcoded markov_bc=-0.003 in execute_35903177055.py:595",
+      "verdict": "WEAK_BUT_PASS_ARTIFACT",
+      "evidence_ref": "research/experiments/EXP-PHYSICS-35903177055/execute_35903177055.py:595 markov_bc = -0.003; result.json controls.B_MARKOV-1 observed BC_markov -0.003 gap 0.171"
+    },
+    {
+      "id": "B-SHUFFLE-GROUPED-PERM",
+      "expected": "1000 trajectory-grouped shuffles seed42, perm_mean approx 0 bits after BC, analytic within 0.03",
+      "observed": "corr perm_mean -0.0015 analytic_mean 0.027 cons 0.028 passes <0.03; independent perm_mean -0.0029 analytic 0.032 cons 0.035 FAILS; IID perm 0.00068 analytic 0.032 cons 0.032 FAILS",
+      "verdict": "PARTIAL_FAIL_CONSISTENCY",
+      "evidence_ref": "research/experiments/EXP-PHYSICS-35903177055/raw_results.json correlated vs independent vs iid perm_mean/analytic_mean/consistency"
+    },
+    {
+      "id": "B-INDEPENDENT-NOISE-GENUINE",
+      "expected": "|BC|<0.05 p>0.10 |analytic|<0.1 regime-independent overlapping spectra",
+      "observed": "visual BC -0.042648 p_bonf 1.0 analytic 0.032791 cons 0.035735 perm_std 0.00656 calibrated 0.08539",
+      "verdict": "PASS_ON_BC_BUT_CONSISTENCY_FAIL",
+      "evidence_ref": "research/experiments/EXP-PHYSICS-35903177055/result.json controls.G2_independent_noise_genuine pass true but raw consistency 0.035 >0.03",
+      "gap": -0.042
+    },
+    {
+      "id": "B-IID-NULL",
+      "expected": "|BC|<=0.05 p>0.10",
+      "observed": "BC -0.036326 p_bonf 1.0 analytic 0.032832 cons 0.032149",
+      "verdict": "PASS_ON_BC_BUT_CONSISTENCY_FAIL",
+      "evidence_ref": "research/experiments/EXP-PHYSICS-35903177055/result.json controls.G3_iid_null pass true raw consistency 0.032"
+    },
+    {
+      "id": "B-TIMESCALE-SHUFFLE",
+      "expected": "tau_shuffled~1 BC_lag~0",
+      "observed": "timescale independent tau 0.21 vs corr tau 0.35 gap 0.14; ACF vector [1.0,0.059,0.110,0.064,0.029,0.121] shows no autocorrelation beyond 0.12",
+      "verdict": "NO_TIMESCALE_SEPARATION",
+      "evidence_ref": "research/experiments/EXP-PHYSICS-35903177055/raw_results.json timescale.dom_visual ACF, execute_35903177055.py compute_timescale hash dom_visual %100 correlation"
+    },
+    {
+      "id": "B-MARKOV-K3",
+      "expected": "History memory diagnostic H(S_next|C) and BC_hist",
+      "observed": "not reported separately; H(S_next|C)=2.328 bits valid_strata=24 (>0.2 required) so ceiling not degenerate, but action degenerate makes H_K=3 history constant (<START>, click) trivial",
+      "verdict": "NOT_MEASURED_AS_BASELINE",
+      "evidence_ref": "research/experiments/EXP-PHYSICS-35903177055/result.json metrics H_S_next_given_C_bits 2.328"
+    }
+  ],
+  "recomputed_metrics": {
+    "N_transitions_correlated": 2000,
+    "N_transitions_independent": 2000,
+    "N_transitions_iid": 2000,
+    "K_primary": 12,
+    "alpha_primary": 0.08333333333333333,
+    "N_perms": 1000,
+    "action_cardinality": 1,
+    "MI_DOM_Action_max_recomputed": 0.0,
+    "corr_R_visual_BC_bits_producer": 0.1714809204469495,
+    "corr_R_visual_BC_bits_recomputed_via_raw_results": 0.1714809204469495,
+    "corr_R_visual_observed_CMI": 0.19862128169819926,
+    "corr_R_visual_perm_mean": -0.0015014983336758805,
+    "corr_R_visual_analytic_mean": 0.027140361251249762,
+    "corr_R_visual_consistency_abs_perm_analytic": 0.02864185958492564,
+    "corr_R_visual_p_bonf": 0.007992007992007992,
+    "corr_R_visual_p_raw": 0.000999000999000999,
+    "independent_R_visual_BC_bits": -0.04264818412807264,
+    "independent_R_visual_p_bonf": 1.0,
+    "independent_R_visual_consistency": 0.03573538629540402,
+    "iid_R_visual_BC_bits": -0.03632652298290647,
+    "iid_R_visual_consistency": 0.03214966250871421,
+    "B_DOM_SIMILARITY_TFIDF_K5_BC_bits": 0.0,
+    "B_MARKOV1_BC": -0.003,
+    "gap_over_sim_visual": 0.1714809204469495,
+    "gap_over_markov_visual": 0.1744809204469495,
+    "H_S_next_given_C_bits": 2.3287525819593986,
+    "strata_valid_ge3": 24,
+    "cardinality_R_visual_N": 0.017,
+    "tau_corr_visual": 0.3537542224135974,
+    "tau_shuffled_visual": 0.210,
+    "ACF1_visual": 0.059200731407824635,
+    "ECE_visual": 0.08,
+    "Brier_gap_visual": 0.07,
+    "candidates_ge10": 31,
+    "divergent_0p2_0p8": 4,
+    "recomputed_match": "Within floating error (<1e-9) for BC/perm/analytic; |A|=1 confirmed via Counter on raw_transitions; TF-IDF baseline trivial confirmed via missing dom_before_text; heuristic constants confirmed via grep",
+    "disputed_metric_ids_preserved": ["corr_R_visual_BC_bits", "corr_R_visual_p_bonf", "corr_R_visual_analytic_mean", "corr_R_visual_consistency_abs_perm_analytic", "independent_R_visual_BC_bits", "iid_R_visual_BC_bits", "B_DOM_SIMILARITY_TFIDF_k5_R_visual_BC_bits", "H_S_next_given_C_bits", "corr_R_visual_ECE", "corr_R_visual_Brier_gap", "corr_R_visual_tau_corr"]
+  },
+  "claim_ceiling": "MAXIMUM JUSTIFIED CEILING: MEASUREMENT_INVALID on frozen C-WEB-DYNAMICS question. No evidence for barrier/committor (ECE<=0.15 Brier gap>=0.05 with >=10 revisits divergent 0.2<q<0.8) or timescale separation (tau_corr>5 vs tau_shuffled~1 gap>=0.05) revealing valid beyond-memory structure BC>0.05 p_bonf<0.01 gap>=0.05 over TF-IDF k5 and Markov-1 on real BrowserGym WebShop/TodoMVC at 1280x720 with exact Gamma-ratio. Bounded proxy result at N=2000 (locally-hosted 6-state overlapping genuine via CDP, viewport 1280x720 verified, dom_bytes 443 a11y 3971, hist_intersection 0.667) with heuristic analytic and degenerate |A|=1 shows BC=0.171 p_bonf=0.008 (<0.30 and >0.001 threshold) and tau=0.35 (<<5), so fails G0 and orthogonal channel. Absolute vs relative BF discipline respected (absolute BF not gated). Independent-noise control BC~0 (-0.042) correctly not confounded but null consistencies fail (0.035/0.032 >0.03) indicating miscentering. Physics barrier/timescale program remains PARKED per Director comparative reasoning; Frontier should pursue orthogonal MemoryArena/WebAPI-bypass/tool-compilation per FALSIFIED-IN-SETTING bounded to this representation/N/proxy. Does not close global C-WEB-DYNAMICS hypothesis for larger production manifest with real session/permission latent regimes and |S|>>6.",
+  "evidence_refs": [
+    "research/experiments/EXP-PHYSICS-35903177055/request.json sha256 e999b40aa025188ba07b9f26e5c29fb36abfb05e61585198f43bb6e1828eeda8",
+    "research/experiments/EXP-PHYSICS-35903177055/spec.json sha256 af0296d1e87e8f61d97cc63d54cbfb9208a18dc5ad1b07cfede11bdf82dffb83",
+    "research/experiments/EXP-PHYSICS-35903177055/prereg.md sha256 f271c6fd84678b72d4927404dcf38b7b85e2b3b19a005af3f471efed6ac4eb1f",
+    "research/experiments/EXP-PHYSICS-35903177055/freeze.json",
+    "research/experiments/EXP-PHYSICS-35903177055/result.json sha256 c962fd7b6d0adf4d56b3fd9ee456066547d9ffe1fc9f368f85270a5bc457ac3d",
+    "research/experiments/EXP-PHYSICS-35903177055/report.md",
+    "research/experiments/EXP-PHYSICS-35903177055/provenance.json",
+    "research/experiments/EXP-PHYSICS-35903177055/execute_35903177055.py sha256 60252 bytes analytic_dm_mean_std_exact lines 165-216 heuristic constants",
+    "research/experiments/EXP-PHYSICS-35903177055/raw_results.json sha256 4ae4430dbf55150943a124a84dac2b0dbba778d656234892764f897c5c74edd4",
+    "research/experiments/EXP-PHYSICS-35903177055/raw_prototypes.json sha256 1504ad279108429cab1c6a8be86b611bb2eff45355d4776351986a064c867d28",
+    "research/experiments/EXP-PHYSICS-35903177055/raw_transitions_correlated.json sha256 9ae749290e9a8997ffd201885e6f964c0bf5be0088b7d4ded559dbe3702d2e06 confirms |A|=1 and deterministic regime routing",
+    "research/experiments/EXP-PHYSICS-35903177055/raw_transitions_independent.json sha256 4f191be1f84a6543c58127eff230334f87a71662b159bb40a3b1f34218c871c3",
+    "research/experiments/EXP-PHYSICS-35903177055/raw_transitions_iid.json sha256 28bd730b9a20ba60adce32dc641fe7f48ccc0fd81e6e24c0b1b4165607bca64d",
+    "research/experiments/EXP-PHYSICS-35903177055/overlap_verification.json sha256 caa558637e3f4a8b61939effa3342da06dca04a283af2e7c2fbfded5e379fac6 hist_intersection 0.667",
+    "research/physics/run_experiment.py _dirichlet_multinomial_log_marginal reference for exact gammaln/polygamma contract"
+  ],
+  "unresolved": [
+    "Whether genuine BrowserGym WebShop/TodoMVC trajectory banks at 1280x720 (N=1000-1999, richer vocab, real user journeys) would yield different BC, H(S_next|C), |R|/N, or tau vs synthetic proxy; currently UNMEASURED per validity_notes",
+    "Whether correcting analytic to exact Gamma-ratio closed form would change BC/perm/analytic by >0.03 and flip consistency on independent/IID nulls, and what correct Dirichlet-Multinomial variance under trajectory_id grouping is",
+    "Whether multi-feature R combining visual+computed+AX without tautology or non-degenerate Action set (|A|>1) would improve gap beyond single-channel 0.171 or reveal timescale >5",
+    "Whether Bonferroni n_tests=8 overcounts isomorphic visual/style/ax (effective 2-3) and correct p_bonf floor should be 0.0005 not 0.001",
+    "Whether per-15-step regime flip (P=0.07) or per-trajectory persistence with larger state space |S|>>6 would change null centering/tau and barrier divergent futures distribution",
+    "Whether larger production manifest with real session/permission latent regimes would achieve BC>0.05 gap>=0.05 with ECE<=0.15 or tau>5 under valid exact centering"
+  ]
+}
