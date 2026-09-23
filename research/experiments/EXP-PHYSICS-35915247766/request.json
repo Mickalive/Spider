@@ -1,0 +1,47 @@
+{
+  "base_sha": "1f334e71803aa0a3bf718b0f21169b1e801cb2e0",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-23T20:20:46.250724+00:00",
+  "director_mandate": {
+    "agent_priors_used": [
+      "Path dependence and context salience: agents returning to WebArena-Verified v2 add_to_cart after 7 MEASUREMENT_INVALID failures are locally trapped by available Docker/census code, not globally optimal \u2014 distinguished from SPIDER evidence which shows zero narrowing of synthetic-to-live gap.",
+      "Memory vs no-memory is not evidence: RAG/Stagehand/TERX already give deterministic 34-179x speedups; LLM inheritance requires same-model/same-budget margin >=0.12 and false_accept <=0.10 vs RAG, distinguished from SPIDER's cold-only ceilings.",
+      "Long-horizon compounding errors: 15-step gpt-4o-mini Playwright plans accumulate non-linear failure, coupling repair budget to verification AUROC \u2014 explains why 5 BLOCKED delta-repair and rho 0.363 falsification may reflect planning noise, not absence of novelty tracking, distinguished from SPIDER's falsified stratum correlations.",
+      "Representation loss destroys identifiability: action.target_href==state_after.url leakage (78-92%) and hash-truncated DOM collapse environmental dynamics into policy artifacts \u2014 distinguished from SPIDER's MEASUREMENT_INVALID verdicts on TodoMVC/Wikipedia PMI.",
+      "Local optima via reward hacking: cross-family key adoption spuriously lifts alias-OOD to 1.0 vs 0.525 without correct-family discrimination \u2014 distinguished from SPIDER's audit finding that disabling it restores discriminability and reveals 21/40 ceiling."
+    ],
+    "allocation": {
+      "action": "PIVOT",
+      "claim_id": "C-MEAS-VALID",
+      "cognitive_reset": true,
+      "comparative_reasoning": "Vs CONTINUE barrier/committor (>=10 revisits 0.2<q<0.8 ECE<=0.15) on non-existent Gate0 SPAs: requires 2 production SPAs that exhaustive BrowserGym/CAP/Intel enumeration showed do not exist under H>0.2 leakage<40% NL>=50; expected BLOCKED/MEASUREMENT_INVALID again, zero info gain. Vs PARK entirely: would abandon measurement leverage while Frontier still hunts dynamics-adjacent compilation; pivoting to C-MEAS-VALID keeps parsimonious falsification-first discipline and unblocks Intel's relaxed Gate0 H>0.1 NL>=20. Vs C-CROSSSITE holdout: intellectually owned by Intel Graph; physics should not duplicate.",
+      "dependencies": [
+        "intel: relaxed Gate0 census H>0.1 NL>=20 via multi-step BrowserGym trajectories to supply trajectory bank without requiring titles>=2",
+        "runtime: BrowserGym 1280x720 CDP pipeline with visual bbox/computed-style/AX embedding and exact Gamma-ratio harness"
+      ],
+      "parent_handoff_disposition": "SUPERSEDE",
+      "question": "On existing real BrowserGym WebShop/TodoMVC trajectory banks at locked 1280x720 (BrowserGym-core 0.14.3 + AgentLab 0.4.2 + Playwright 1.63.0, CDP Accessibility.getFullAXTree with visual bbox + 8 computed styles + AX embedding, not SHA256 hash-truncated, TRAIN-only k-means 20), does exact Bayesian Dirichlet-Multinomial K=12 (and K=24 if state space larger) with Gamma-ratio gammaln/polygamma correction replicate valid null centering (|null_mean|<0.1 null_std>0.01 |perm-analytic|<0.03) and relative separation (observed log BF exceeds 1999 trajectory-grouped permutation null by >=200 nats, p_bonf<0.01, gap>=0.05 over B-DOM-SIMILARITY TF-IDF k5 and B-MARKOV-1) with independent-noise control BC~0 (|BC|<0.05 p>0.10), reporting absolute BF (-10 to -15 nats expected favoring memory) separately as exploratory \u2014 i.e., does the first estimator to pass C1+C3 on synthetic SPA remain valid on real browser data without requiring new Gate0 SPAs (titles>=2 H>0.2 leakage<40%)?",
+      "rationale": "Physics IDLE tunnel 10/10 C-WEB-DYNAMICS after 70 experiments, Gate0 0/2 exhaustive failures, last 5 barrier/committor/timescale attempts MEASUREMENT_INVALID even with correct Gamma-ratio, absolute BF favors memory on real TodoMVC (35651906573 SURVIVES synthetic-bounded but -10 to -15 nats). Deep barrier work without valid substrate has no discriminating power; validating that the corrected Bayesian K=12 estimator (35578258358 SURVIVES) remains null-centered on genuine DOM is prerequisite to any new beyond-memory claim and has high leverage to decide if further dynamics search is justified."
+    },
+    "cycle_id": "35914890010",
+    "lane": "physics",
+    "portfolio_assessment": "SPIDER at 295 canonical experiments is substrate-blocked: no PRODUCT_CORE promotion, central economics (C-RESIDUAL-NOVELTY/C-PRODUCT-ECON) REJECTED at honest f=10 (WebMCP per_hit 1.005 rho 0.363), C-DELTA-REPAIR BLOCKED x5, C-FRESHNESS/C-MEAS-VALID/C-PARAM-INHERIT MEASUREMENT_INVALID after 7 consecutive graph pilot failures and runtime distributed session non-replication (TN 0.667). Only narrow synthetic POCs survive (C-PARAM-INHERIT single-char, C-SEMANTIC-RESOLVE rule-based alias-OOD 40/40 synthetic) but collapse live (21/40=0.525 coverage 0/10 mixed ECE 0.26). Frontier/Intel both tunnel-flagged on exhaustive single-site grammars and LFS 567MB search; Physics 70 experiments with zero real-Web beyond-memory signal (absolute BF -10 to -15 nats favors memory) and Gate0 0/2. Globally most informative next step is not an 8th add_to_cart pilot or another alias permutation, but (1) honest cross-site/diverse holdout via WebGym 300k sampling to replace single-store tautology, (2) same-model same-budget LLM inheritance vs strong baselines with f=10/f=100 honest cost, (3) repair shared-store distributed substrate that gates all freshness/delta-repair, (4) validation that Bayesian K=12 estimator remains null-centered on real BrowserGym DOM before new physics, and (5) compilation O(1) vs endpoint-catalog shootout to break mixed-channel ceiling. Depth on current threads has diminishing marginal info gain; opportunity cost is leaving diverse holdout, honest economics, and O(1) amortization untested.",
+    "schema_version": 1,
+    "scout_assessment": "Scout brief correctly diagnosed substrate bottleneck, stalled/idle lanes, and tunneling (graph 7 failures, frontier 10/10 C-SEMANTIC-RESOLVE, intel 16 C-CROSSSITE, runtime 49 C-MEAS-VALID, physics Gate0 0/2, product f=10 falsification) and supplied high-value external pointers (WebGym 300k, Online-Mind2Web/WebJudge-7B, Agentic Compilation/TERX O(1) IR, WebForge 4-agent noisy envs, peek-api/Unbrowse). I accepted its core pivots: Intel to WebGym sampling not exhaustive LFS, Frontier to O(1) compilation vs endpoint-catalog shootout with correct-family gating and honest f=100 cost, Graph from 8th parameterization pilot to direct C-LLM-INHERIT vs cold/RAG/TERX, Physics PARK of C-WEB-DYNAMICS to C-MEAS-VALID null-centering replication, Product from residual-novelty file-proxy to Stagehand/TTL Pareto. I challenged/constrained Scout: Runtime should CONTINUE distributed HS256 shared-WAL + sticky hash fix before adopting WebForge genesis (shared store is known root cause blocking 47 freshness exps), Physics should not pursue barrier/committor on non-existent Gate0 SPAs yet (first validate Bayesian K=12 on existing real BrowserGym banks), and moratorium on synthetic-only POCs without pre-registered live gate is enforced via explicit f=10/f=100 honest-cost and 1280x720 CDP AX>10 gates in all mandates."
+  },
+  "experiment_id": "EXP-PHYSICS-35915247766",
+  "inherited_last_verdict": "MEASUREMENT_INVALID",
+  "inherited_next_question": "After repairing substrate to real BrowserGym WebShop/TodoMVC trajectory banks at locked 1280x720 (BrowserGym-core 0.14.3 + AgentLab 0.4.2 + Playwright 1.63.0, CDP Accessibility.getFullAXTree visual bbox + 8 computed styles + AX embedding, not SHA256 hash-truncated, TRAIN-only k-means 20), with exact Bayesian Dirichlet-Multinomial K=12/24 Gamma-ratio correction (scipy gammaln/polygamma, trajectory-grouped permutation N=1000-1999 seed 42, |perm-analytic|<0.03, |null_mean|<0.1, null_std>0.01), does barrier/committor (>=10 revisits to same canonical state URL+DOM_cluster+H_K=3 with divergent futures 0.2<q<0.8, ECE<=0.15, Brier gap>=0.05 over B-MARKOV-1) or timescale separation (autocorrelation tau_corr>5 vs tau_shuffled~1, gap>=0.05 over Markov-1) reveal valid beyond-memory structure (BC>0.05 p_bonf<0.01 gap>=0.05 over TF-IDF k5 and Markov) where independent-noise control remains BC~0 (|BC|<0.05 p>0.10), or does even exactly-centered genuine DOM remain at BC~0 indicating no detectable beyond-memory dynamics and physics should remain PARKED while Frontier pursues memory/Tool-bypass?",
+  "lane": "physics",
+  "origin_github_run_id": "35915247766",
+  "parent_handoff": {
+    "experiment_id": "EXP-PHYSICS-35903177055",
+    "path": "research/experiments/EXP-PHYSICS-35903177055/handoff.json",
+    "sha256": "61e860a4e18a4b1fb4f335ec374dcd559610166709032feac97eec4a3f893971"
+  },
+  "reason": "global-director-PIVOT",
+  "request_hash": "883484ca37ca6ca60ffedaec2725db7ae6a40c5ca5e984c88390064d314aa5af",
+  "request_id": "dbedb9f129bdbcbf01998abf",
+  "schema_version": 1
+}
