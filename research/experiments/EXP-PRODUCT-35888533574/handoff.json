@@ -3,55 +3,69 @@
   "experiment_id": "EXP-PRODUCT-35888533574",
   "lane": "product",
   "target_lane": "product",
-  "next_question": "Does fixing kernel.resolve parameter binding (so n=0 exact-repeat tasks correctly resolve with all required slots present, hitting the 50-tok hit path instead of the 500-tok novel path) allow batched MEA caching to achieve per_hit <=0.85 vs RAG at n0 while preserving rho_novelty>=0.60 |rho_length|<0.20 under honest QCR with frontier correct-family gating and TTL/ETag probe?",
-  "why_next": "This experiment's MEASUREMENT_INVALID+FALSIFIES outcome is dominated by a single root cause: kernel.resolve parameter binding mismatch at n=0 causes exact-repeat tasks to fall into the 500-tok novel/repair path instead of the 50-tok hit path, yielding per_hit ~9.35x RAG. The batched MEA cache infrastructure itself works correctly (cacheHitRate 0.81, effectiveFetchAvg 27 tok, TTL/ETag probe accuracy 1.0, auditor blockRate 1.0, frontier cross-family 0, NC1/NC2/NC3 all PASS). Fixing the resolve binding is the smallest high-information next step that can change the claim/product decision.",
+  "next_question": "Does fixing kernel.resolve parameter binding (so n=0 exact-repeat tasks correctly resolve with all required_slots present, hitting the 50-tok hit path instead of the 500-tok novel path) allow batched MEA caching to achieve per_hit <=0.85 vs RAG at n0 while preserving rho_novelty_per_hit>=0.60 |rho_length_per_hit|<0.20 under honest QCR with frontier correct-family gating and TTL/ETag probe?",
+  "why_next": "AUDIT MEASUREMENT_INVALID is driven by single root cause VF-PC2-BINDING-CRITICAL: confidence 0.5 < min_confidence 0.8 blocks EXECUTABLE even when required_slots satisfied, plus template literal body without placeholders, so all 36 n0 exact-repeat tasks execute novel 500-tok path yielding per_hit 512 vs RAG 54 ratio 9.35 and degenerate calibration (confidence_std 0.0125, ECE n=0). Batched cache (0.8125 hitRate, 26.9 tok avg), probe (accuracy 1.0, saving 39.8%, falseAccept 0), frontier gating (crossFamily 0), auditor blockRate 1.0 on both miss/hit, honest cost accounting, and discriminating null controls all PASS. Fixing binding is the smallest high-information delta that can change per_hit and rho gates; without it any further mechanism work repeats MEASUREMENT_INVALID.",
   "carry_forward": {
     "established": [
-      "Batched MEA auditor caching infrastructure works: per-family cache with TTL 60s achieves cacheHitRate ~0.81, effectiveFetchAvg ~27 tok (target was ~28 tok), confirmed via cache_traces.json and effectiveFetchAvg metric",
-      "TTL/ETag probe discrimination works: accuracy 1.0, latency saving 39.8%, probeFalseAccept 0.0, with ~50% fresh vs ~50% stale exercising ETag mismatch, confirmed via probe_traces.json",
-      "Frontier correct-family reconstruction with gating works: hitRate_correct_family 1.0, crossFamilyAdoption 0, confirmed via frontier_adapter_traces.json",
-      "Auditor governance works: auditorBlockRate 1.0 on unverified writes on BOTH cache-miss AND cache-hit paths, provenance hash chain logged with cacheHit flag",
-      "Null controls non-degenerate: NC1 rho=0 p=1.0, NC2 false_accept=0.16 in [0.10,0.60], NC3 |rho|<0.25 R2<0.15, NC4 curatedDelta=0.354 proving curation+auditor causal; C6 PASS",
-      "Honest kernel-gated branch-derived cost accounting confirmed: no bijective formula, per_hit=(M_total_f10 - retrieval - distill_amort - auditor_amort)/L with batched auditor_fetch_batched included"
+      "Batched MEA auditor caching infrastructure works as specified on file proxy: per-family TTL60s cacheHitRate 0.8125 (156/192) effectiveFetchAvg 26.875 tok (target ~28), provenance hash chain with cacheHit flag logged, recomputed identical audit; evidence artifacts/cache_traces.json sha 712c61571c and branch_traces.json",
+      "TTL/ETag probe discrimination works on deterministic map seeded 42 (~50% stale exercising ETag mismatch): accuracy 1.0 >=0.90, latency saving 39.8% >=30%, probeFalseAccept 0.0 <0.05, ttl_valid 0.593, n_stale 90/192; evidence probe_traces.json sha 17585827b41c and result.json PC3",
+      "Frontier correct-family reconstruction gating works: hitRate_correct_family 1.0 (192/192) crossFamilyAdoption 0, Jaccard TAU0.30 in-family only, retrieval-use gap logged 192/0; evidence frontier_adapter_traces.json sha 554797fe75",
+      "Auditor governance works: auditorBlockRate 1.0 (38 blocked 154 passed) on BOTH cache-miss and cache-hit paths,fresh-context 25k truncation, provenance logged; evidence result.json PC2 and audit VF-BATCHED-CACHE-SUCCESS",
+      "Honest kernel-gated branch-derived cost accounting verified: no bijective n*3200 or 250+500*int(10n), per_task sums retrieval 200 + auditor_batched 10/100 + probe 10/30 vs full 50/120 + hit 50 vs novel 500+repair 500 + distill 1000/10 + auditor 100/10 + frontier 50, per_hit=(M_total-retrieval-distill-auditor)/L; evidence provenance.json honest_branch_derived true and audit VF-COST-ACCOUNTING-HONEST",
+      "Strong baselines correctly implemented and not starved under QCR frozen-bank TFIDF Jaccard TAU0.30 same ranker 36 families: B-RAG per_hit 54.7 n0 ->504.7 n1, B-STAGEHAND hitRate 1.0 n0 per_hit 54.7 else ~504.7 honest 50 tok, B-TERX hitRate 1.0 n0 per_hit 54.7 honest 50 tok, B-COLD flat 504.7; evidence audit BF-* and raw_per_task.csv",
+      "Null controls discriminating and non-vacuous: NC1 rho 0.0 p1.0 success 0.177 unknown 0.822, NC2 false_accept 0.161 in [0.10,0.60] proving MockEnv p0.15 can fail, NC3 R2 0 rho 0, NC4 curatedDelta 0.354 ablation false_accept 0.354; evidence result.json NC-MEA-BATCHED-SHUFFLE pass true and audit BF-NC-CONTROLS-DISCRIMINATING"
     ],
     "rejected": [
-      "Batched MEA caching at f=10 with current resolve binding does NOT achieve per_hit <=0.85 vs B-RAG-EMBED at n0 (9.35x) or n0.25 (2.42x) on 192/36 file-based synthetic census; bounded REJECTED for this specific resolve_binding + cost_model + census combination",
-      "Per_hit economics still dominated by novel/repair 500-tok path at n=0 even with batched cache; the 148 tok fixed overhead reduction (220→148 tok) is insufficient when n0 tasks incorrectly enter novel path",
-      "Frontier 100% hitRate at n=1.0 by construction (char-bigram Jaccard A/B pools share bigrams) masks the true economics; rho_novelty_per_hit = -0.447 strongly negative (cost anti-tracks novelty)",
-      "Confidence calibration (softmax temp0.15+jitter std>0.05, ECE 5-bin) fails because at n=1.0 all tasks correctly abstain as UNKNOWN, collapsing confidence distribution — confidence_std 0.0125 < 0.05 threshold"
+      "Batched MEA caching at f=10 with current kernel.resolve binding does NOT achieve per_hit <=0.85 vs B-RAG-EMBED at n0 (observed 9.35) or n0.25 (2.42) nor <=1.20 vs B-STAGEHAND at n0 (9.35) on this 192/36 file-based synthetic census with honest QCR; bounded rejection to this specific resolve_binding + confidence 0.5 + literal-template + census combination only, not global C-RESIDUAL-NOVELTY - audit MEASUREMENT_INVALID precedence prevents global FALSIFIED",
+      "Fixed overhead reduction 220->148 tok via batched effectiveFetch 26.9 tok is insufficient when SUT never enters 50-tok hit path at n0; per_hit ~512 dominated by novel path not governance overhead",
+      "Confidence calibration as measured (softmax temp0.15+jitter std 0.0125, UNKNOWN_precision 0.198) does NOT meet C1 but is downstream of MEASUREMENT_INVALID degeneracy (all 192 P-SPIDER rows UNKNOWN due to PC2 bug, EXEC n=0), not evidence of calibrated abstention",
+      "Frontier 100% hitRate at n=1.0 by construction (char-bigram Jaccard A-SKU-00-0 vs B-SKU-00-0 >=0.7) masks true economics; rho_novelty_per_hit -0.447 CI [-0.582,-0.296] is artifact not valid novelty tracking - rejected as artifact on this pool"
     ],
     "unknown": [
-      "Whether fixing kernel.resolve parameter binding (ensuring all required_slots present in resolve_params at n=0) allows exact-repeat tasks to correctly hit the 50-tok path, reducing per_hit to target levels",
-      "Whether per_hit ratios improve to <=0.85 vs RAG at n0 and n0.25 once n=0 tasks correctly enter the 50-tok hit path via proper parameter binding",
-      "Whether rho_novelty_per_hit becomes >=0.60 with proper hit-path economics (cost tracking novelty via novel/repair 500-tok steps when frontier misses)",
-      "Whether the MEASUREMENT_INVALID trigger (confidence_std < 0.05) resolves once confidence distribution has proper spread from mixed hit/novel/unknown outcomes",
-      "Whether frontier adapter with orthogonal alias families (header/body/auth not char-bigram A/B) achieves realistic hitRate <1.0 enabling genuine rho_novelty tracking",
-      "Whether TTL/ETag probe state correlates with task novelty on real CDN (deterministic map seeded 42 decouples probe from novelty)"
+      "Whether fixing kernel.resolve confidence (promote to >=0.80 after verified curation or lower min_confidence) and template parameterization (induce ${body.sku} placeholders via _template_slots consistent with _bind) and preconditions (family+intent only) restores binding_correctness 5/5 per family and executable_rate_n0 1.0 at n0, reducing per_hit to ~50-70 and achieving ratio <=0.85 vs RAG at n0/n0.25 while preserving batched cache 0.81 hitRate",
+      "Whether rho_novelty_per_hit becomes >=0.60 with |rho_length_per_hit|<0.20 once hit path is reachable and frontier hitRate <1.0 at high novelty enables selective 50-tok reconstruction vs 500-tok repair",
+      "Whether frontier adapter with orthogonal alias families (header/body/auth disjoint tokens, Jaccard <0.30 across families) yields realistic hitRate 0.3-0.6 at n=1.0 instead of 1.0 tautology",
+      "Whether TTL/ETag probe state correlated with novelty on real CDN (n0 ~1.0 fresh, n1 ~0.0 fresh) preserves 39.8% saving while contributing to novelty tracking vs random 0.53 fresh at n0 from seeded map",
+      "Whether confidence calibration achieves std>0.05 and UNKNOWN_precision>=0.85 ECE<=0.15 with mixed EXEC (n0 hits) and UNKNOWN (auditor rejects at n=1.0) outcomes once SUT leaves all-UNKNOWN mode",
+      "Whether honest proxy per_hit at f=10 (and exploratory f=100) correlates with real gpt-4o-mini+Playwright Docker 1280x720 2000-node BrowserGym tokens/browser_calls/latency (rho_proxy_real unmeasured, docker_available false)",
+      "Whether curated 5 demos/family delta >0.10 and frontier delta persist on production heterogeneous postconditions beyond synthetic mock (current curatedDelta 0.354 on proxy)",
+      "Whether richer DOM/QCR post-retrieval (all-MiniLM, 2000-node CDP AX tree hash) changes retrieval-use gap (192/192) and per_hit parity vs Stagehand 80% speedup"
     ],
     "do_not_assume": [
-      "Do not assume batched cache infrastructure is broken — it works (cacheHitRate 0.81, effectiveFetch 27 tok). The root cause is resolve parameter binding, not caching",
-      "Do not assume per_hit 9.35x proves batched caching is ineffective — n=0 tasks are incorrectly entering the 500-tok novel path due to parameter binding mismatch",
-      "Do not assume rho_novelty = -0.447 proves cost anti-tracks novelty in general — the frontier 100% hit artifact and incorrect n0 binding confound this measurement",
-      "Do not assume MEASUREMENT_INVALID means the entire approach is invalid — C6 null controls PASS and infrastructure components (probe, auditor, frontier, cache) all work correctly",
-      "Do not assume file-based synthetic results transfer to Docker/BrowserGym/real LLM economics; ceiling explicitly bounded to file mock",
-      "Do not assume per_hit beats TERX at n>=0.25 (0.997-0.999) proves economic viability — this is driven by frontier 100% hit artifact not governance alone",
-      "Do not assume confidence_std 0.0125 is a calibration failure of the softmax mechanism — it reflects the all-or-nothing abstention pattern at n=1.0, not miscalibrated confidence scores"
+      "Do not assume batched cache infrastructure is broken - it passes spec (0.8125 hitRate, 26.9 tok avg, blockRate 1.0) - root cause is kernel.resolve confidence 0.5 <0.8 and literal action_template without slots",
+      "Do not assume per_hit 9.35x vs RAG proves batched caching ineffective - n0 tasks incorrectly entered 500-tok novel path due to binding mismatch, not cache overhead",
+      "Do not assume rho_novelty -0.447 proves cost anti-tracks novelty - frontier 100% hit artifact and invalid n0 binding confound measurement; pooled R2 0.333 vs R2_length 0.102 not valid",
+      "Do not assume MEASUREMENT_INVALID equals global FALSIFIED of C-RESIDUAL-NOVELTY/C-PRODUCT-ECON - this packet is MEASUREMENT_INVALID bounded to file proxy; claims remain HYPOTHESIS globally per codex, not REJECTED/EXPERIMENTAL/PRODUCT_CORE",
+      "Do not assume probe hitRate 0.531 at n0 or saving 39.8% validates CDN freshness gating - deterministic map seeded 42 is independent of novelty, expected fresh at n0 is ~1.0 on real CDN",
+      "Do not assume frontier 1.0 hitRate and crossFamily 0 proves reconstruction transfers - A/B pools share char-bigrams by construction Jaccard >=0.7 yielding tautological hit; orthogonal families required",
+      "Do not assume per_hit beats TERX 0.997-0.999 at n>=0.25 proves viability - driven by frontier 100% hit converting novel to 50 tok, not governance alone",
+      "Do not assume confidence_std 0.0125 is softmax miscalibration - reflects all-UNKNOWN collapse (192/192 UNKNOWN, EXEC n=0) not miscalibrated scores; ECE_all 0.783 4/5 bins empty",
+      "Do not assume file-based synthetic 192/36 census transfers to Docker full-DOM 2000-node BrowserGym 1280x720 or real gpt-4o-mini economics; ceiling explicitly bounded to proxy file mock synthetic, not production DOM/cross-site/latency",
+      "Do not assume next experiment can proceed without fixing registry generation - induce_registry_curated must write template placeholders ${body.*} etc via distill_parameterized _template_slots consistent with _bind and set confidence >=0.80"
     ]
   },
   "dependencies": [
-    "src/spider/kernel.py resolve() parameter binding fix: ensure resolve_params contains all required_slots (set(m.parameter_slots) | _template_slots(m.action_template)) with correct key forms for n=0 exact-repeat tasks",
-    "frontier validated state-conditioned reconstruction adapter (EXP-FRON-35793584484) with correct-family gating — already verified working, needs orthogonal alias families",
+    "src/spider/kernel.py fix: resolve confidence gate (promote distill confidence to >=0.80 or lower min_confidence), template slot induction (${body.sku},${store_id} etc) via _template_slots, preconditions generalization to family+intent",
+    "src/spider/kernel.py _bind and distill_parameterized verification via 5/5 per family binding spot-check at n0 on Curated-A",
+    "frontier validated state-conditioned reconstruction adapter EXP-FRON-35793584484 with orthogonal alias families for realistic hitRate",
     "intel Stagehand HIT/MISS replication and WebGym diverse holdout for real-DOM validation",
-    "runtime shared-store freshness probe if TTL/ETag required for real CDN",
-    "Docker full-DOM 2000-node BrowserGym 1280x720 + real gpt-4o-mini tokens/browser_calls for exploratory replication"
+    "runtime shared-store freshness probe if TTL/ETag required for real CDN (gunicorn+nginx loopback ETag W/body_sha max-age 60)",
+    "Docker full-DOM 2000-node BrowserGym 1280x720 + real gpt-4o-mini tokens/browser_calls for exploratory rho_proxy_real Pareto"
   ],
   "evidence_refs": [
-    "research/experiments/EXP-PRODUCT-35888533574/result.json",
-    "research/experiments/EXP-PRODUCT-35888533574/artifacts/derived_metrics.json",
-    "research/experiments/EXP-PRODUCT-35888533574/artifacts/raw_per_task.csv",
-    "research/experiments/EXP-PRODUCT-35888533574/artifacts/cache_traces.json",
-    "research/experiments/EXP-PRODUCT-35888533574/artifacts/probe_traces.json",
-    "research/experiments/EXP-PRODUCT-35888533574/artifacts/frontier_adapter_traces.json"
+    "research/experiments/EXP-PRODUCT-35888533574/spec.json sha e5f85b205e4ff4fa5e77817d9e7c6ef89561ac4601406a9545172dba63e145d",
+    "research/experiments/EXP-PRODUCT-35888533574/prereg.md sha 080b983430a04b64969bf1b57d4e091aa9422a87e9015b3af76fd8dfaf308c49",
+    "research/experiments/EXP-PRODUCT-35888533574/freeze.json",
+    "research/experiments/EXP-PRODUCT-35888533574/result.json sha d24df359",
+    "research/experiments/EXP-PRODUCT-35888533574/audit.json status MEASUREMENT_INVALID",
+    "research/experiments/EXP-PRODUCT-35888533574/artifacts/raw_per_task.csv sha 2bc05ae31189",
+    "research/experiments/EXP-PRODUCT-35888533574/artifacts/registry.jsonl sha 153bda3a356a 36 mechanisms confidence 0.5",
+    "research/experiments/EXP-PRODUCT-35888533574/artifacts/cache_traces.json sha 712c61571c",
+    "research/experiments/EXP-PRODUCT-35888533574/artifacts/probe_traces.json sha 17585827b41c",
+    "research/experiments/EXP-PRODUCT-35888533574/artifacts/frontier_adapter_traces.json sha 554797fe75",
+    "research/experiments/EXP-PRODUCT-35888533574/artifacts/derived_metrics.json sha d5dbde5dd2df",
+    "research/experiments/EXP-PRODUCT-35888533574/provenance.json docker_available false",
+    "src/spider/kernel.py:93-123"
   ],
-  "recommended_action": "Fix kernel.resolve parameter binding (ensure all required_slots present in resolve_params) and re-run EXP-PRODUCT-35888533574. This is the smallest high-information delta that can change the claim/product decision. If n=0 tasks correctly hit the 50-tok path, batched MEA caching should achieve per_hit <=0.85 vs RAG at n0. If it still fails, the batched caching approach is genuinely insufficient and product should pivot to Stagehand caching/probe-only freshness or frontier adapter improvements."
+  "recommended_action": "Fix kernel.resolve binding: set distill confidence >=0.80 after verified curation (or lower registry min_confidence to 0.5), induce action_template placeholders via distill_parameterized _template_slots consistent with _bind, generalize preconditions to family+intent. Re-run same 192/36 census with honest f=10 branch-derived cost, QCR frozen-bank, batched cache, probe, frontier gating. If per_hit at n0 then still >0.85 vs RAG, batched pivot is genuinely insufficient - pivot to Stagehand cache/probe-only freshness or orthogonal frontier improvements. Do not promote MEA-batched harness until Docker full-DOM 2000-node BrowserGym 1280x720 Pareto with rho_proxy_real is measured."
 }

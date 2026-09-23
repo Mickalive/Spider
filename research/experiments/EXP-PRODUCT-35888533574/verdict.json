@@ -2,23 +2,37 @@
   "schema_version": 1,
   "experiment_id": "EXP-PRODUCT-35888533574",
   "lane": "product",
-  "decision": "MEASUREMENT_INVALID → FALSIFIES per_hit targets bounded to file-based mock",
+  "decision": "MEASUREMENT_INVALID",
   "claim_updates": [
     {
       "claim_id": "C-RESIDUAL-NOVELTY",
-      "registry_valid_status": "HYPOTHESIS",
-      "reason": "Batched MEA auditor caching (cacheHitRate ~0.81, effectiveFetchAvg ~27 tok) and TTL/ETag probe (accuracy 1.0, saving 39.8%, falseAccept 0) and frontier correct-family gating (crossFamilyAdoption 0, hitRate 1.0) and auditor governance (blockRate 1.0 on unverified writes both miss and hit paths) all PASS per PC2/C4. However C1 correctness+calibration FAILS (confidence_std 0.0125 < 0.05, unknown_precision 0.198 < 0.85) because at n=1.0 all tasks correctly abstain as UNKNOWN (auditor blocks 100% unverified writes, frontier misses), collapsing confidence distribution. Per_hit targets NOT achieved: SPIDER/RAG n0 ratio 9.35 >> 0.85 FAIL, n025 2.42 >> 0.85 FAIL; Stagehand n0 9.35 >> 1.20 FAIL. Per_hit beats TERX at all n>=0.25 (<1.0) but this is driven by frontier 1.0 hit artifact not governance. rho_novelty_per_hit = -0.447 (p=0.0002) strongly negative — cost anti-tracks novelty; |rho_length| per stratum expected negative (-0.75 to -0.85) from fixed overhead artifact. NC1/NC2/NC3 all PASS (rho=0, false_accept=0.16 in range, |rho|<0.25). C6 PASS. Verdict: MEASUREMENT_INVALID triggered by C1 (confidence calibration) with FALSIFIES per_hit economics; batched cache does NOT salvage the governed-memory pivot on this file-based synthetic census."
+      "status": "MEASUREMENT_INVALID",
+      "reason": "MEASUREMENT_INVALID per frozen decision_rule precedence (C2 gate): PC2 binding_correctness_n0=0.0 executable_rate_n0=0.0 on 36 n0 tasks via src/spider/kernel.py resolve (confidence 0.5 < min_confidence 0.8 blocks EXECUTABLE, action_template literal body {} no template slots) forces all SPIDER tasks into 500-tok novel path yielding per_hit 512.13 at n0 vs RAG 54.74 ratio 9.35 >>0.85 FAIL (recomputed identical audit). C1 also fails calibration (confidence_std 0.0125 <0.05, unknown_precision 0.198 <0.85, ECE_all 0.783 4/5 bins empty n=192, ECE_exec n=0 degenerate) downstream of same bug. Batched MEA cache (cacheHitRate 0.8125 effectiveFetch 26.875 tok), TTL/ETag probe (accuracy 1.0 saving 39.8% falseAccept 0), frontier gating (crossFamily 0 hitRate 1.0), auditor blockRate 1.0 on both miss/hit all PASS but per_hit and rho_novelty=-0.447 CI [-0.582,-0.296] uninterpretable due to invalid positive control. No valid inference for pay-novelty-not-length; claim remains HYPOTHESIS globally."
     },
     {
       "claim_id": "C-PRODUCT-ECON",
-      "registry_valid_status": "HYPOTHESIS",
-      "reason": "Batched MEA caching reduces effective auditor_fetch from 100 tok to ~27 tok avg (savings ~73 tok/task) as designed, but fixed overhead (distill 100 + frontier 50 + probe ~30 + novel/repair 500) still dominates at n0 yielding per_hit ~512 vs RAG ~54.75 (9.35x). Product economics NOT validated; Stagehand 80% speedup / 30% cost saving remains dominant at exact repeat; RAG proportionally retrievable at n0.25 remains strong baseline where SPIDER fails. C-PRODUCT-ECON remains HYPOTHESIS; no commercial viability evidence from this run."
+      "status": "MEASUREMENT_INVALID",
+      "reason": "Same MEASUREMENT_INVALID as C-RESIDUAL-NOVELTY: honest kernel-gated f=10 cost accounting is valid (no bijective formula, per_hit=(M_total-retrieval-distill-auditor)/L) and batched cache reduces auditor_fetch 100->26.9 tok as designed, but SUT never enters 50-tok hit path at n0 due to PC2 binding failure, so SPIDER/RAG 9.35 at n0, 2.42 at n0.25, SPIDER/Stage 9.35 at n0 all far above thresholds. SPIDER/TERX <1.0 at n>=0.25 is frontier 1.0 hit artifact not governance. Product economics unmeasured on this proxy; no commercial viability evidence; remains HYPOTHESIS. No promotion."
     }
   ],
-  "product_action": "Bounded REJECTED for MEA-batched+TTL+frontier proxy setting only (file-based mock 192/36). Do NOT claim pay-cost-of-novelty via this batched harness on this setting. C-RESIDUAL-NOVELTY/C-PRODUCT-ECON remain HYPOTHESIS globally. Prioritize: (1) fix resolve/parameter binding so n=0 exact-repeats correctly hit 50 tok path (root cause of 9.35x ratio), (2) richer DOM/QCR post-retrieval with real BrowserGym 2000-node CDP AX + gpt-4o-mini tokens/browser_calls, (3) frontier adapter with orthogonal alias families to collapse 100% hit artifact, (4) probe/TT L state correlated with novelty not random, (5) confidence calibration via softmax temp0.15+jitter std>0.05 with 5-bin ECE non-degenerate. No PRODUCT_CORE promotion; no further mechanism refinement on this cost model without fixing the n0 binding failure.",
+  "product_action": "no_promotion",
   "promote_to_product": false,
   "continue": false,
-  "next_question": "Does fixing kernel.resolve parameter binding (so n=0 exact-repeat tasks correctly resolve with all required slots present, hitting the 50-tok hit path instead of the 500-tok novel path) allow batched MEA caching to achieve per_hit <=0.85 vs RAG at n0 while preserving rho_novelty>=0.60 |rho_length|<0.20 under honest QCR with frontier correct-family gating and TTL/ETag probe?",
-  "reason": "C1 fails (confidence_std 0.0125 < 0.05, unknown_precision 0.198 < 0.85) because at n=1.0 all tasks correctly abstain as UNKNOWN; C3 fails (SPIDER/RAG per_hit 9.35 at n0 >> 0.85) because n=0 exact-repeat tasks fall into novel/repair path instead of 50-tok hit path due to parameter binding mismatch; C6 passes (null controls non-degenerate). The batched cache infrastructure works (cacheHitRate 0.81, effectiveFetch 27 tok) but per_hit economics fail because the hit path is not reached. Root cause is resolve parameter binding, not batched caching.",
-  "evidence_refs": ["research/experiments/EXP-PRODUCT-35888533574/result.json", "research/experiments/EXP-PRODUCT-35888533574/artifacts/derived_metrics.json", "research/experiments/EXP-PRODUCT-35888533574/artifacts/raw_per_task.csv"]
+  "next_question": "Does fixing kernel.resolve parameter binding (so n=0 exact-repeat tasks correctly resolve with all required_slots present, hitting the 50-tok hit path instead of the 500-tok novel path) allow batched MEA caching to achieve per_hit <=0.85 vs RAG at n0 while preserving rho_novelty_per_hit>=0.60 |rho_length_per_hit|<0.20 under honest QCR with frontier correct-family gating and TTL/ETag probe?",
+  "reason": "AUDIT MEASUREMENT_INVALID (status MEASUREMENT_INVALID, producer_claim_supported false) recomputes all metrics exactly: PC2 fails critical (binding_correctness_n0 0.0, executable_rate_n0 0.0 on 36 n0 tasks, registry 36 mechanisms confidence 0.5 <0.8 per src/spider/kernel.py:93-123), C1 fails calibration (confidence_std 0.0125, unknown_precision 0.198, ECE degenerate). Batched MEA cache, TTL/ETag probe, frontier correct-family gating, auditor governance, and null controls all PASS per audit VF-BATCHED-CACHE-SUCCESS, VF-PROBE-DECOUPLED-MINOR, VF-COST-ACCOUNTING-HONEST, BF-* strong baselines. Per audit required_fixes, per_hit ratios (9.35 at n0) and rho -0.447 are uninterpretable until confidence/precondition/template-slot fixes restore EXECUTABLE path. Because positive controls fail, decision is MEASUREMENT_INVALID per prereg precedence, not FALSIFIED. Bounded ceiling is file-based synthetic 192/36 proxy only; rho_proxy_real unmeasured, Docker full-DOM 1280x720 not executed.",
+  "evidence_refs": [
+    "research/experiments/EXP-PRODUCT-35888533574/spec.json sha e5f85b205e4ff4fa5e77817d9e7c6ef89561ac4601406a9545172dba63e145d",
+    "research/experiments/EXP-PRODUCT-35888533574/prereg.md sha 080b983430a04b64969bf1b57d4e091aa9422a87e9015b3af76fd8dfaf308c49",
+    "research/experiments/EXP-PRODUCT-35888533574/freeze.json",
+    "research/experiments/EXP-PRODUCT-35888533574/result.json",
+    "research/experiments/EXP-PRODUCT-35888533574/audit.json status MEASUREMENT_INVALID producer_claim_supported false",
+    "research/experiments/EXP-PRODUCT-35888533574/report.md",
+    "research/experiments/EXP-PRODUCT-35888533574/artifacts/raw_per_task.csv sha 2bc05ae31189",
+    "research/experiments/EXP-PRODUCT-35888533574/artifacts/registry.jsonl sha 153bda3a356a",
+    "research/experiments/EXP-PRODUCT-35888533574/artifacts/cache_traces.json sha 712c61571c cacheHitRate 0.8125 effectiveFetchAvg 26.875",
+    "research/experiments/EXP-PRODUCT-35888533574/artifacts/probe_traces.json sha 17585827b41c probeAccuracy 1.0 saving 0.398",
+    "research/experiments/EXP-PRODUCT-35888533574/artifacts/frontier_adapter_traces.json sha 554797fe75 frontierCross 0 hitRate 1.0",
+    "research/experiments/EXP-PRODUCT-35888533574/provenance.json kernel.py sha 46929b3a951df docker_available false",
+    "src/spider/kernel.py:93-123 resolve confidence gate"
+  ]
 }
