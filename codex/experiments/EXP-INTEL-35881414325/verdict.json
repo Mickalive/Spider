@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-35881414325",
+  "lane": "intel",
+  "decision": "MEASUREMENT_INVALID",
+  "claim_updates": [
+    {
+      "claim_id": "C-CROSSSITE",
+      "status": "MEASUREMENT_INVALID",
+      "reason": "Frozen infrastructure precedence (spec.json decision_rule ordered evaluation, prereg s9) triggers MEASUREMENT_INVALID: adequacy gate requires >=5 product-page families (<10 valid AX trees 600-2000 nodes at 1280x720). Observed 0/20 valid captures (M_AX_VALID_CAPTURES=0, M_AX_PRODUCT_FAMILY_COUNT=0, node_count 0, dom_bytes 0) after 3 HTTP probes to am1n3e/webarena-verified-shopping@sha256:3e8cb9b945 at http://localhost:7770 (URLError [Errno 111] Connection refused) per result.json metrics M_AX_PC1_LIVENESS_DETAIL and controls PC1_LIVENESS_1280 FAIL. Full-tree semantic/multi-anchor grammar without [:20] truncation + 9 dynamic-token regexes (grammar_code_hash 8d4b7cb8b543c10912f5d4325ccee0e5ae839f64c534a354f5ac8e7b1a364a45, placeholder __SHOPPING__/path expansion verified, dynamic stripping frozen) is code-audited but not exercised live per audit validity_findings[4] hardcoded constant unverifiable in tree. Audit PASS confirms producer_claim_supported=true, recomputed metrics null correctly (M_AX_CONSISTENCY_MEAN null, CI [null,null], shuffle p null, delta_vs_truncated null, variance null), trajectory-grouped 2000 bootstrap/1000 shuffle correctly not executed avoiding degenerate CI[1,1] p=1.0 per validity_findings[2], sampling 10 families [191,180,162,197,153,213,163,137,136,222] x2 distinct tasks with path families 136/222 verified. H2 Stagehand 0/36 families <30 required HIT/MISS null, recomputed SHA after page.content()+AX with stripping not exercised; H3 WebGym 0/50 sites ImportError No module named webgym threshold sweep null PC4 FAIL; H4 Gate0 0 transitions vs >=50/family MULTI-STEP not attempted. Prior 20/20 live proof EXP-INTEL-35860344410 (668-1426 nodes, DOM 196958-251734 bytes, variance 0.16) proves substrate can be live; this 0/20 is transient environment not site impossibility. No SURVIVES or FALSIFIED-IN-SETTING ceiling justified; C-CROSSSITE remains HYPOTHESIS single-store vacuous."
+    }
+  ],
+  "product_action": "NO_PROMOTION",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "After repairing Docker substrate am1n3e/webarena-verified-shopping@sha256:3e8cb9b945 to achieve >=15/20 liveness at 1280x720 with full-tree semantic/multi-anchor grammar and dynamic-token stripping verified (no [:20] truncation), plus WebGym 300k 50 diverse eTLD+1 import with 2000-bootstrap 95% CI and 0.818-0.9479 threshold sweep, and BrowserGym loopback achieving >=50 transitions/family on >=10 families, does product-page AX_consistency achieve mean>=0.6 bootstrap CI lower>0.5 trajectory-grouped shuffle p<0.05 delta>=0.20 vs truncated baseline with variance>0, and does Stagehand relevant-subtree recomputed+stripping achieve HIT>=0.8 MISS>=0.8 false_accept<0.05 beats NC4 random-role-subset with real-path latency/tokens?",
+  "reason": "Independent audit PASS recomputed all producer metrics exactly (verified_capture_count_from_raw 20/20 UNAVAILABLE_SUBSTRATE, M_AX_VALID_CAPTURES 0, M_AX_PC1_LIVENESS_PASS false, M_AX_CONSISTENCY_MEAN null, M_STAGEHAND_HIT_RATE null, M_WEBGYM_SITES_FOUND 0, M_GATE0_TRANSITIONS 0, M_H1..H4_STATUS MEASUREMENT_INVALID) and confirms validity_findings 9 items and baseline_findings. Frozen decision_rule precedence forces COMPLETE outcome NOT_APPLICABLE with H1..H4 MEASUREMENT_INVALID substrate_unavailable, not falsification. Producer correctly returned null not degenerate binary 8x1.0+2x0.0 nor 0.2857, avoided tautological CI[1,1] p=1.0, preserved deterministic seed 35725763380 and placeholder expansion, disclosed representation loss, and correctly ABANDONED CAP 567MB LFS/420-task per Director SUPERSEDE not falsified. Evidence gaps flagged in required_fixes (probe-only Docker check not docker pull/run, conceptual WebGym 2-attempts, hardcoded grammar hash 8d4b unverifiable in tree, stale provenance self-hash 132af476 vs actual 75fb17a3, empty pip freeze sha256 e3b0c442=sha256('')) are documentation gaps that do not change classification because binding failure is Docker Connection refused after 3 probes and recomputed null metrics match. Prior live proof from EXP-INTEL-35860344410 and audit validity_findings[1] establish repairability. No PRODUCT_CORE promotion: C-CROSSSITE stays HYPOTHESIS, WebGym diversity>depth, Stagehand ~2x/~30% floor, and Gate0 relaxed H>0.1 all remain unknown pending runtime BrowserGym 1280x720 CDP AX>10 provisioning dependency.",
+  "evidence_refs": [
+    "research/experiments/EXP-INTEL-35881414325/request.json:d7a76dddc68b7d24e6940645b05888c6b3eabde8b8ca372266e7e75b69c3fe46",
+    "research/experiments/EXP-INTEL-35881414325/spec.json:2e62fa2b819c484092adc9a41c0459ed58fd0e342654e00dd7d1dde616aefd78",
+    "research/experiments/EXP-INTEL-35881414325/prereg.md:8e4cf899803e7edc9ecd66789c34e6dbd839b182cadaf1d697ee1cedb0cdabac",
+    "research/experiments/EXP-INTEL-35881414325/freeze.json",
+    "research/experiments/EXP-INTEL-35881414325/result.json: metrics M_AX_VALID_CAPTURES=0 M_AX_PC1_LIVENESS_DETAIL Connection refused, controls PC1_LIVENESS_1280 FAIL PC4_WEBGYM_IMPORT_VALID FAIL, M_H1..H4_STATUS MEASUREMENT_INVALID, validity_notes infrastructure precedence not falsification",
+    "research/experiments/EXP-INTEL-35881414325/report.md",
+    "research/experiments/EXP-INTEL-35881414325/provenance.json:75fb17a3beeb201f8faf322ef20f876334d9ff848c25341f98ff910c7d579820",
+    "research/experiments/EXP-INTEL-35881414325/audit.json:PASS producer_claim_supported=true recomputed_metrics M_AX_VALID_CAPTURES 0 verified_capture_count_from_raw 20 UNAVAILABLE, claim_ceiling MEASUREMENT_INVALID substrate_unavailable for H1..H4, validity_findings[1] degeneracy avoided [4] grammar hash unverifiable [7] empty pip freeze",
+    "research/experiments/EXP-INTEL-35881414325/artifacts/raw/ax_captures.jsonl:65c3381c0ebb5e8cc10a99e1f4b590ac219d7faafac46acb8826113d301fc604 (20 UNAVAILABLE_SUBSTRATE node_count 0 dom_bytes 0)",
+    "research/experiments/EXP-INTEL-35881414325/artifacts/derived/ax_consistency_fulltree.json:d11e80309e3e00abd5f1e749eefb25a8d29486975178298136965989890b6672 (mean null CI null shuffle null delta null)",
+    "research/experiments/EXP-INTEL-35881414325/artifacts/derived/stagehand_replication_recomputed.json:ccd1f0aecb4e6a4fbe23035bc100a7da940df5e65b9e03582becabacfbe8bb00 (0/36 families attempted)",
+    "research/experiments/EXP-INTEL-35881414325/artifacts/derived/webgym_census.json:d04f023ef1dc73d5706d9227591dbfae122465313a1585a44dadd1d9d4860137 (0 sites UNAVAILABLE)",
+    "research/experiments/EXP-INTEL-35881414325/artifacts/derived/gate0_relaxed_table.json:f2d42749b05734ad2b46dd298a60035d77a143129d04a2bcf3e0143a8e4051f2 (0 transitions)",
+    "research/intel/exp_35881414325_measure.py:5b3286d5bc924695a7fbba561362a84682cb85362d4c4f71bdfbf0e007cdca7e (hardcoded GRAMMAR_CODE_HASH line 29 and sampled_families, probe-only Docker check)",
+    "research/experiments/EXP-INTEL-35860344410/result.json: prior 20/20 live proof M_AX_VALID_CAPTURES 20 M_AX_PC1_LIVENESS 20/20 variance 0.16 668-1426 nodes",
+    "research/experiments/EXP-INTEL-35876349051/handoff.json:35dde70eac99810052e6a8e26c29d20ad679a08f271fa9fb390ad8c62b1b6352 (parent carry-forward preserved per prereg s10)",
+    "codex/claim_state.json: C-CROSSSITE HYPOTHESIS 26 events no VALIDATED, this packet MEASUREMENT_INVALID adds no promotion"
+  ]
+}
