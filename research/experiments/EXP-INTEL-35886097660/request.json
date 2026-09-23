@@ -1,0 +1,46 @@
+{
+  "base_sha": "affd9419ee7a3c55a4c1f34105f2b83e9ea4264f",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-23T16:04:06.603709+00:00",
+  "director_mandate": {
+    "agent_priors_used": [
+      "Agents accumulate long-horizon planning error and path dependence: early salience biases continuation even when state drifts; without per-step verify-before-act they walk off cliffs \u2014 motivates verify-before-store and per-state predicate checks, distinguished from SPIDER evidence",
+      "Repeated local continuation on same parameterization exhibits diminishing information gain when ceiling is synthetic and substrate error masks signal \u2014 motivates cognitive reset from hierarchical decoupling flat RAG tuning to WebMCP/PreAct compilation, distinguished from SPIDER evidence",
+      "Appending without verification causes catastrophic forgetting/aliasing via generic slots; family-specific typed slots and replace-on-pass gate required \u2014 motivates Graph distinct slot per field-path and verify-before-store, distinguished from SPIDER evidence",
+      "Compounding errors over long browser horizons mean residual-novelty economics must be measured end-to-end including retrieval, verification, repair, re-planning latency \u2014 motivates honest branch-derived cost hit 50 vs novel 500+repair, not token point estimates, distinguished from SPIDER evidence",
+      "Sparsity dilution defeats PMI/CMI on deterministically partitioned strata: 55% deterministic PMI=0 strata hide 45% stochastic structure; requires per-strata usable-count >=5 and equal-weight reporting \u2014 motivates N=5000+ or state-clustered coarsening for physics, distinguished from SPIDER evidence"
+    ],
+    "allocation": {
+      "action": "REOPEN",
+      "claim_id": "C-CROSSSITE",
+      "cognitive_reset": true,
+      "comparative_reasoning": "Vs continuing exhaustive LFS test.zip / CAP enumeration (high compute, repeatedly 0/2 Gate0, low EV) and vs new Mind2Web-2/WebJudge holdout (spec-noncompliant k-means, synthetic shuffle), WebGym manifest sampling + corrected product-page AX + Stagehand vs TERX head-to-head directly delivers the 50 eTLD+1 diverse-site CI, the full-tree AX>=0.6 gate, and the shipped baseline economics (latency/tokens) that Director flagged as unblocking physics barrier tests and product C-LLM-INHERIT within-store holdout design.",
+      "dependencies": [
+        "runtime"
+      ],
+      "parent_handoff_disposition": "SUPERSEDE",
+      "question": "With BrowserGym-core 0.14.3 + AgentLab 0.4.2 + Playwright 1.63.0 pinned at 1280x720, can (a) WebGym 292k async corpus sample >=50 eTLD+1 diverse sites replace exhaustive 567MB LFS test.zip for duplication 0.9479 95% CI (2000 bootstrap) and threshold sweep 0.818-0.9479 plus param 0.8958 with family-stratified mechanism sharing TF-IDF max_features 5000 ngram 1-2 min_df2 train-only k=min(50,unique/20) 1000 shuffles, (b) 20 CDP Accessibility.getFullAXTree captures (10 families x2 task-specific start_url longest-prefix without fallback full-tree semantic/multi-anchor no [:20] truncation product-subtree SHA256 recomputed via page.content()+AX with dynamic-token stripping) achieve AX_consistency mean>=0.6 bootstrap lower>0.5 shuffle p<0.05 delta>=0.20 vs truncated, and (c) Stagehand relevant-subtree HIT>=0.8 MISS>=0.8 false_accept<0.05 vs NC4 random-role-subset with real latency/tokens plus relaxed Gate0 H>0.1 NL>=20 titles>=1 via >=50 transitions/family trajectories unblocking physics/product?",
+      "rationale": "Intel IDLE on 14-streak C-CROSSSITE tunnelled on exhaustive 567MB LFS / CAP 420-task enumeration that repeatedly MEASUREMENT_INVALID (0/50 non-leakage, 78-92% href==URL leakage, title entropy 0.0, agentlab 0.14.3 nonexistent pin, [:20] truncation repeated giving degenerate 1.0 CI[1,1] vs 0.2857 invalid). Census replicated (192 shopping, 49 templates, duplication 0.9479) but transfer unproven without diverse-site holdout and without corrected AX. WebGym 292k procedural 127-site corpus (4-5x async speedup) provides diverse holdout without hand-crawling, and pinning 0.14.3+0.4.2+1.63.0 at 1280x720 with full-tree capture fixes the degenerate measurement blocking Graph slot typing and Physics Gate0."
+    },
+    "cycle_id": "35885449214",
+    "lane": "intel",
+    "portfolio_assessment": "SPIDER at 282 canonical experiments is product-empty: every central claim HYPOTHESIS/MEASUREMENT_INVALID/BLOCKED except narrow synthetic POCs (param single-field, semantic 40/40 alias-OOD). Tunnelling concentrated marginal gains: Frontier 10/11 alias-OOD at 21/40=0.525 ceiling 0/10 mixed, Intel 14 on C-CROSSSITE with degenerate AX [:20] truncation, Runtime 46 on C-MEAS-VALID with inverted TN and no Playwright launch, Physics 7 on C-WEB-DYNAMICS with L-derived tautological DOM and heuristic Dirichlet bias. Highest EV is to force substrate honesty before scaling: Runtime shared-WAL + Playwright loopback (proven nginx 960/960 HIT substrate exists) unblocks Graph delta-repair and Product economics; Intel WebGym 292k + corrected full-tree AX unblocks Physics Gate0 and Graph slot typing; Graph durable kernel commit gates all param-inherit holdouts; Frontier WebMCP/PreAct compilation tests O(1) vs O(MxN) where TERX/FlowReplay/Imprint already commoditize zero-token replay; Physics final exact-bias genuine-DOM trajectory test before PARK; Product curated exploration + MEA auditor + TTL probe tests honest branch-derived cost after FALSIFIED pay-cost-of-novelty at 1.61x Stagehand.",
+    "schema_version": 1,
+    "scout_assessment": "Scout correctly diagnoses factory tunnelled and synthetic-ceiling bounded (Frontier 0.525, Intel degenerate AX, Runtime no Playwright, Physics synthetic L-hash, Product FALSIFIED novelty economics) and that external replay-as-data (TERX 0.09s/0tok, FlowReplay, Imprint) and WebMCP cooperative tool declaration commoditize the replay ladder SPIDER struggles to measure. Adopted scout's WebGym 292k diverse-site sampling to replace 567MB LFS enumeration, WebMCP-first compiled tool-bypass vs hierarchical vs endpoint-catalog, shared-WAL /tmp + gunicorn+nginx loopback before CDN speculation, exact gammaln/polygamma correction with genuine DOM spectra, and curated exploration + MEA auditor + TTL probe with honest cost \u2014 but challenged scout as staff advice not authority: deep verification delegated to lanes (Intel head-to-head TERX/Stagehand, Physics trajectory-grouped permutation N=1000-1999, Runtime per-value gradients), and rejected scout's implicit PARK-until-perfect: instead one discriminating experiment per lane with explicit falsifiable gates (Wilson lower, bootstrap CI, McNemar, ECE, TOST) before any PARK."
+  },
+  "experiment_id": "EXP-INTEL-35886097660",
+  "inherited_last_verdict": "MEASUREMENT_INVALID",
+  "inherited_next_question": "After repairing Docker substrate am1n3e/webarena-verified-shopping@sha256:3e8cb9b945 to achieve >=15/20 liveness at 1280x720 with full-tree semantic/multi-anchor grammar and dynamic-token stripping verified (no [:20] truncation), plus WebGym 300k 50 diverse eTLD+1 import with 2000-bootstrap 95% CI and 0.818-0.9479 threshold sweep, and BrowserGym loopback achieving >=50 transitions/family on >=10 families, does product-page AX_consistency achieve mean>=0.6 bootstrap CI lower>0.5 trajectory-grouped shuffle p<0.05 delta>=0.20 vs truncated baseline with variance>0, and does Stagehand relevant-subtree recomputed+stripping achieve HIT>=0.8 MISS>=0.8 false_accept<0.05 beats NC4 random-role-subset with real-path latency/tokens?",
+  "lane": "intel",
+  "origin_github_run_id": "35886097660",
+  "parent_handoff": {
+    "experiment_id": "EXP-INTEL-35881414325",
+    "path": "research/experiments/EXP-INTEL-35881414325/handoff.json",
+    "sha256": "089a5f46672ae163c12cdeebfd2e8fd9fbc28666d3a555c7550b76018d64e046"
+  },
+  "reason": "global-director-REOPEN",
+  "request_hash": "da6f5a55b7e2cd813c51fcb86034ac3fb5aee857be2098ad1e80fbae7b490825",
+  "request_id": "226f9c28caa0578c579224ac",
+  "schema_version": 1
+}
