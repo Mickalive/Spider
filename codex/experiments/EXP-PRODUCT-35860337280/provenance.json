@@ -1,0 +1,58 @@
+{
+  "artifacts": {
+    "branch_traces.json": "aa5ebdcd831ff48ee17e822eb03409bfc5f6984d980dd1d635d351fe20a5af55",
+    "cost_config.json": "7df5283ec14179779e7e0d3ec690baacbc02b158eabd006b557adcb468cb92fa",
+    "derived_metrics.json": "29ee970ace29c72d15108182de9313e1182ee7d3ef475a2b547eb947a7604dfa",
+    "qcr_bank_manifest.json": "db3edb92049aafe2bb92e8ddd8e9c266304a90bbb6b495c4e6f202cf92522aec",
+    "raw_per_task.csv": "847ca72687aa813cd20eeb1527dc217e202bf15c0b935ac31473f3d18949c228",
+    "registry.jsonl": "462236fdef0f8468fe39b3d6a8675f3f96e414cbe8d68eba8d864a1fec1e6889",
+    "result.json": "d4c93b52b097258b17cab8d83159b32bf9bb947e475e41aef1592e01198f8760"
+  },
+  "code_hashes": {
+    "kernel.py": "04ca13d070a62e21032624efd67f92f2d15ec1c712346919a842bb1d566f2182",
+    "models.py": "23ef7f750e6bb7776c648316956cb8be95576271ca479f632de934d6eef22177",
+    "registry.py": "51fb440d3827f21cccb5f77ad17dc0e76ccdbc2d52d7b05044cd821bb8a9322c",
+    "run_experiment.py": "12650fa4cddebbf9c94c238d5f324d6e935760bb425bba629c0668ba566a67cc"
+  },
+  "commands": [
+    "PYTHONHASHSEED=0 PYTHONPATH=src python3 research/experiments/EXP-PRODUCT-35860337280/run_experiment.py"
+  ],
+  "determinism": "single run; per-hit isolation; QCR frozen bank same ranker; family-stratified bootstrap 5000 + block-permutation 5000",
+  "director_mandate": "PIVOT C-RESIDUAL-NOVELTY honest-cost gate; parent_handoff SUPERSEDED; genuine branch-derived cost required",
+  "environment": {
+    "numpy": "unavailable",
+    "pandas": "unavailable",
+    "python": "3.12.14",
+    "scipy": "unavailable",
+    "sentence_transformers": "unavailable",
+    "sklearn": "unavailable"
+  },
+  "experiment_id": "EXP-PRODUCT-35860337280",
+  "external_verified_state": "MEA auditor pattern per director prior",
+  "fixture": {
+    "inherited_from": "research/experiments/EXP-PRODUCT-35797365772/fixtures/tasks.json",
+    "inherited_sha256": "f9537168",
+    "path": "fixtures/tasks.json",
+    "sha256": "99e5d46bde2578414ccdada265e88957ee7f72338e6ab0e84f05e4ee9454d358"
+  },
+  "fresh_context_execution": true,
+  "frozen_input_hashes": {
+    "freeze.json": "60fd2d359f04a54b7b2b2b4bd020627460c76c6f43d2b76a250143e374ec051b",
+    "prereg.md": "466b70d4eb276cdbf923285c476348f8cfb4cea31c7971a001a44d5ea013826d",
+    "request.json": "50e83a21186348d1efda5503504c87c283e8e14cfce57d14306f70fcd1942eef",
+    "spec.json": "60fd2d359f04a54b7b2b2b4bd020627460c76c6f43d2b76a250143e374ec051b"
+  },
+  "git": {
+    "head": "29d4f8cb9fc369cf4a0d926c8fbc22e3d15f8306",
+    "short": "29d4f8cb"
+  },
+  "github_run_id": "35860337280",
+  "lane": "product",
+  "schema_version": 1,
+  "seeds": {
+    "PYTHONHASHSEED": "0",
+    "random_seed": 42,
+    "wrong_bound_p": 0.15
+  },
+  "stage": "EXECUTE"
+}
