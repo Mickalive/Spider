@@ -1,0 +1,1346 @@
+[
+ {
+  "task_id": "task_0000",
+  "frontierHit": 1,
+  "frontierCrossFamilyAdoption": 0,
+  "frontier_jaccard": 1.0,
+  "family_id": "family_00"
+ },
+ {
+  "task_id": "task_0001",
+  "frontierHit": 1,
+  "frontierCrossFamilyAdoption": 0,
+  "frontier_jaccard": 1.0,
+  "family_id": "family_00"
+ },
+ {
+  "task_id": "task_0002",
+  "frontierHit": 1,
+  "frontierCrossFamilyAdoption": 0,
+  "frontier_jaccard": 1.0,
+  "family_id": "family_00"
+ },
+ {
+  "task_id": "task_0003",
+  "frontierHit": 1,
+  "frontierCrossFamilyAdoption": 0,
+  "frontier_jaccard": 0.8666666666666667,
+  "family_id": "family_00"
+ },
+ {
+  "task_id": "task_0004",
+  "frontierHit": 1,
+  "frontierCrossFamilyAdoption": 0,
+  "frontier_jaccard": 0.8,
+  "family_id": "family_00"
+ },
+ {
+  "task_id": "task_0005",
+  "frontierHit": 1,
+  "frontierCrossFamilyAdoption": 0,
+  "frontier_jaccard": 0.8888888888888888,
+  "family_id": "family_00"
+ },
+ {
+  "task_id": "task_0006",
+  "frontierHit": 1,
+  "frontierCrossFamilyAdoption": 0,
+  "frontier_jaccard": 1.0,
+  "family_id": "family_01"
+ },
+ {
+  "task_id": "task_0007",
+  "frontierHit": 1,
+  "frontierCrossFamilyAdoption": 0,
+  "frontier_jaccard": 1.0,
+  "family_id": "family_01"
+ },
+ {
+  "task_id": "task_0008",
+  "frontierHit": 1,
+  "frontierCrossFamilyAdoption": 0,
+  "frontier_jaccard": 0.8571428571428571,
+  "family_id": "family_01"
+ },
+ {
+  "task_id": "task_0009",
+  "frontierHit": 1,
+  "frontierCrossFamilyAdoption": 0,
+  "frontier_jaccard": 0.8571428571428571,
+  "family_id": "family_01"
+ },
+ {
+  "task_id": "task_0010",
+  "frontierHit": 1,
+  "frontierCrossFamilyAdoption": 0,
+  "frontier_jaccard": 1.0,
+  "family_id": "family_01"
+ },
+ {
+  "task_id": "task_0011",
+  "frontierHit": 1,
+  "frontierCrossFamilyAdoption": 0,
+  "frontier_jaccard": 0.9230769230769231,
+  "family_id": "family_01"
+ },
+ {
+  "task_id": "task_0012",
+  "frontierHit": 1,
+  "frontierCrossFamilyAdoption": 0,
+  "frontier_jaccard": 1.0,
+  "family_id": "family_02"
+ },
+ {
+  "task_id": "task_0013",
+  "frontierHit": 1,
+  "frontierCrossFamilyAdoption": 0,
+  "frontier_jaccard": 1.0,
+  "family_id": "family_02"
+ },
+ {
+  "task_id": "task_0014",
+  "frontierHit": 1,
+  "frontierCrossFamilyAdoption": 0,
+  "frontier_jaccard": 0.8666666666666667,
+  "family_id": "family_02"
+ },
+ {
+  "task_id": "task_0015",
+  "frontierHit": 1,
+  "frontierCrossFamilyAdoption": 0,
+  "frontier_jaccard": 1.0,
+  "family_id": "family_02"
+ },
+ {
+  "task_id": "task_0016",
+  "frontierHit": 1,
+  "frontierCrossFamilyAdoption": 0,
+  "frontier_jaccard": 1.0,
+  "family_id": "family_02"
+ },
+ {
+  "task_id": "task_0017",
+  "frontierHit": 1,
+  "frontierCrossFamilyAdoption": 0,
+  "frontier_jaccard": 0.8888888888888888,
+  "family_id": "family_02"
+ },
+ {
+  "task_id": "task_0018",
+  "frontierHit": 1,
+  "frontierCrossFamilyAdoption": 0,
+  "frontier_jaccard": 1.0,
+  "family_id": "family_03"
+ },
+ {
+  "task_id": "task_0019",
+  "frontierHit": 1,
+  "frontierCrossFamilyAdoption": 0,
+  "frontier_jaccard": 0.8,
+  "family_id": "family_03"
+ },
+ {
+  "task_id": "task_0020",
+  "frontierHit": 1,
+  "frontierCrossFamilyAdoption": 0,
+  "frontier_jaccard": 1.0,
+  "family_id": "family_03"
+ },
+ {
+  "task_id": "task_0021",
+  "frontierHit": 1,
+  "frontierCrossFamilyAdoption": 0,
+  "frontier_jaccard": 0.8,
+  "family_id": "family_03"
+ },
+ {
+  "task_id": "task_0022",
+  "frontierHit": 1,
+  "frontierCrossFamilyAdoption": 0,
+  "frontier_jaccard": 0.8,
+  "family_id": "family_03"
+ },
+ {
+  "task_id": "task_0023",
+  "frontierHit": 1,
+  "frontierCrossFamilyAdoption": 0,
+  "frontier_jaccard": 0.7,
+  "family_id": "family_03"
+ },
+ {
+  "task_id": "task_0024",
+  "frontierHit": 1,
+  "frontierCrossFamilyAdoption": 0,
+  "frontier_jaccard": 1.0,
+  "family_id": "family_04"
+ },
+ {
+  "task_id": "task_0025",
+  "frontierHit": 1,
+  "frontierCrossFamilyAdoption": 0,
+  "frontier_jaccard": 1.0,
+  "family_id": "family_04"
+ },
+ {
+  "task_id": "task_0026",
+  "frontierHit": 1,
+  "frontierCrossFamilyAdoption": 0,
+  "frontier_jaccard": 1.0,
+  "family_id": "family_04"
+ },
+ {
+  "task_id": "task_0027",
+  "frontierHit": 1,
+  "frontierCrossFamilyAdoption": 0,
+  "frontier_jaccard": 0.8666666666666667,
+  "family_id": "family_04"
+ },
+ {
+  "task_id": "task_0028",
+  "frontierHit": 1,
+  "frontierCrossFamilyAdoption": 0,
+  "frontier_jaccard": 0.8,
+  "family_id": "family_04"
+ },
+ {
+  "task_id": "task_0029",
+  "frontierHit": 1,
+  "frontierCrossFamilyAdoption": 0,
+  "frontier_jaccard": 0.8888888888888888,
+  "family_id": "family_04"
+ },
+ {
+  "task_id": "task_0030",
+  "frontierHit": 1,
+  "frontierCrossFamilyAdoption": 0,
+  "frontier_jaccard": 1.0,
+  "family_id": "family_05"
+ },
+ {
+  "task_id": "task_0031",
+  "frontierHit": 1,
+  "frontierCrossFamilyAdoption": 0,
+  "frontier_jaccard": 1.0,
+  "family_id": "family_05"
+ },
+ {
+  "task_id": "task_0032",
+  "frontierHit": 1,
+  "frontierCrossFamilyAdoption": 0,
+  "frontier_jaccard": 0.8571428571428571,
+  "family_id": "family_05"
+ },
+ {
+  "task_id": "task_0033",
+  "frontierHit": 1,
+  "frontierCrossFamilyAdoption": 0,
+  "frontier_jaccard": 0.8571428571428571,
+  "family_id": "family_05"
+ },
+ {
+  "task_id": "task_0034",
+  "frontierHit": 1,
+  "frontierCrossFamilyAdoption": 0,
+  "frontier_jaccard": 1.0,
+  "family_id": "family_05"
+ },
+ {
+  "task_id": "task_0035",
+  "frontierHit": 1,
+  "frontierCrossFamilyAdoption": 0,
+  "frontier_jaccard": 0.9230769230769231,
+  "family_id": "family_05"
+ },
+ {
+  "task_id": "task_0036",
+  "frontierHit": 1,
+  "frontierCrossFamilyAdoption": 0,
+  "frontier_jaccard": 1.0,
+  "family_id": "family_06"
+ },
+ {
+  "task_id": "task_0037",
+  "frontierHit": 1,
+  "frontierCrossFamilyAdoption": 0,
+  "frontier_jaccard": 1.0,
+  "family_id": "family_06"
+ },
+ {
+  "task_id": "task_0038",
+  "frontierHit": 1,
+  "frontierCrossFamilyAdoption": 0,
+  "frontier_jaccard": 0.8666666666666667,
+  "family_id": "family_06"
+ },
+ {
+  "task_id": "task_0039",
+  "frontierHit": 1,
+  "frontierCrossFamilyAdoption": 0,
+  "frontier_jaccard": 1.0,
+  "family_id": "family_06"
+ },
+ {
+  "task_id": "task_0040",
+  "frontierHit": 1,
+  "frontierCrossFamilyAdoption": 0,
+  "frontier_jaccard": 1.0,
+  "family_id": "family_06"
+ },
+ {
+  "task_id": "task_0041",
+  "frontierHit": 1,
+  "frontierCrossFamilyAdoption": 0,
+  "frontier_jaccard": 0.9285714285714286,
+  "family_id": "family_06"
+ },
+ {
+  "task_id": "task_0042",
+  "frontierHit": 1,
+  "frontierCrossFamilyAdoption": 0,
+  "frontier_jaccard": 1.0,
+  "family_id": "family_07"
+ },
+ {
+  "task_id": "task_0043",
+  "frontierHit": 1,
+  "frontierCrossFamilyAdoption": 0,
+  "frontier_jaccard": 0.8,
+  "family_id": "family_07"
+ },
+ {
+  "task_id": "task_0044",
+  "frontierHit": 1,
+  "frontierCrossFamilyAdoption": 0,
+  "frontier_jaccard": 1.0,
+  "family_id": "family_07"
+ },
+ {
+  "task_id": "task_0045",
+  "frontierHit": 1,
+  "frontierCrossFamilyAdoption": 0,
+  "frontier_jaccard": 0.8,
+  "family_id": "family_07"
+ },
+ {
+  "task_id": "task_0046",
+  "frontierHit": 1,
+  "frontierCrossFamilyAdoption": 0,
+  "frontier_jaccard": 0.8,
+  "family_id": "family_07"
+ },
+ {
+  "task_id": "task_0047",
+  "frontierHit": 1,
+  "frontierCrossFamilyAdoption": 0,
+  "frontier_jaccard": 0.7,
+  "family_id": "family_07"
+ },
+ {
+  "task_id": "task_0048",
+  "frontierHit": 1,
+  "frontierCrossFamilyAdoption": 0,
+  "frontier_jaccard": 1.0,
+  "family_id": "family_08"
+ },
+ {
+  "task_id": "task_0049",
+  "frontierHit": 1,
+  "frontierCrossFamilyAdoption": 0,
+  "frontier_jaccard": 1.0,
+  "family_id": "family_08"
+ },
+ {
+  "task_id": "task_0050",
+  "frontierHit": 1,
+  "frontierCrossFamilyAdoption": 0,
+  "frontier_jaccard": 1.0,
+  "family_id": "family_08"
+ },
+ {
+  "task_id": "task_0051",
+  "frontierHit": 1,
+  "frontierCrossFamilyAdoption": 0,
+  "frontier_jaccard": 0.8666666666666667,
+  "family_id": "family_08"
+ },
+ {
+  "task_id": "task_0052",
+  "frontierHit": 1,
+  "frontierCrossFamilyAdoption": 0,
+  "frontier_jaccard": 0.8,
+  "family_id": "family_08"
+ },
+ {
+  "task_id": "task_0053",
+  "frontierHit": 1,
+  "frontierCrossFamilyAdoption": 0,
+  "frontier_jaccard": 0.8888888888888888,
+  "family_id": "family_08"
+ },
+ {
+  "task_id": "task_0054",
+  "frontierHit": 1,
+  "frontierCrossFamilyAdoption": 0,
+  "frontier_jaccard": 1.0,
+  "family_id": "family_09"
+ },
+ {
+  "task_id": "task_0055",
+  "frontierHit": 1,
+  "frontierCrossFamilyAdoption": 0,
+  "frontier_jaccard": 1.0,
+  "family_id": "family_09"
+ },
+ {
+  "task_id": "task_0056",
+  "frontierHit": 1,
+  "frontierCrossFamilyAdoption": 0,
+  "frontier_jaccard": 0.8571428571428571,
+  "family_id": "family_09"
+ },
+ {
+  "task_id": "task_0057",
+  "frontierHit": 1,
+  "frontierCrossFamilyAdoption": 0,
+  "frontier_jaccard": 0.8571428571428571,
+  "family_id": "family_09"
+ },
+ {
+  "task_id": "task_0058",
+  "frontierHit": 1,
+  "frontierCrossFamilyAdoption": 0,
+  "frontier_jaccard": 1.0,
+  "family_id": "family_09"
+ },
+ {
+  "task_id": "task_0059",
+  "frontierHit": 1,
+  "frontierCrossFamilyAdoption": 0,
+  "frontier_jaccard": 0.9230769230769231,
+  "family_id": "family_09"
+ },
+ {
+  "task_id": "task_0060",
+  "frontierHit": 1,
+  "frontierCrossFamilyAdoption": 0,
+  "frontier_jaccard": 1.0,
+  "family_id": "family_10"
+ },
+ {
+  "task_id": "task_0061",
+  "frontierHit": 1,
+  "frontierCrossFamilyAdoption": 0,
+  "frontier_jaccard": 1.0,
+  "family_id": "family_10"
+ },
+ {
+  "task_id": "task_0062",
+  "frontierHit": 1,
+  "frontierCrossFamilyAdoption": 0,
+  "frontier_jaccard": 0.8666666666666667,
+  "family_id": "family_10"
+ },
+ {
+  "task_id": "task_0063",
+  "frontierHit": 1,
+  "frontierCrossFamilyAdoption": 0,
+  "frontier_jaccard": 1.0,
+  "family_id": "family_10"
+ },
+ {
+  "task_id": "task_0064",
+  "frontierHit": 1,
+  "frontierCrossFamilyAdoption": 0,
+  "frontier_jaccard": 1.0,
+  "family_id": "family_10"
+ },
+ {
+  "task_id": "task_0065",
+  "frontierHit": 1,
+  "frontierCrossFamilyAdoption": 0,
+  "frontier_jaccard": 0.9285714285714286,
+  "family_id": "family_10"
+ },
+ {
+  "task_id": "task_0066",
+  "frontierHit": 1,
+  "frontierCrossFamilyAdoption": 0,
+  "frontier_jaccard": 1.0,
+  "family_id": "family_11"
+ },
+ {
+  "task_id": "task_0067",
+  "frontierHit": 1,
+  "frontierCrossFamilyAdoption": 0,
+  "frontier_jaccard": 0.7777777777777778,
+  "family_id": "family_11"
+ },
+ {
+  "task_id": "task_0068",
+  "frontierHit": 1,
+  "frontierCrossFamilyAdoption": 0,
+  "frontier_jaccard": 1.0,
+  "family_id": "family_11"
+ },
+ {
+  "task_id": "task_0069",
+  "frontierHit": 1,
+  "frontierCrossFamilyAdoption": 0,
+  "frontier_jaccard": 0.8,
+  "family_id": "family_11"
+ },
+ {
+  "task_id": "task_0070",
+  "frontierHit": 1,
+  "frontierCrossFamilyAdoption": 0,
+  "frontier_jaccard": 0.8,
+  "family_id": "family_11"
+ },
+ {
+  "task_id": "task_0071",
+  "frontierHit": 1,
+  "frontierCrossFamilyAdoption": 0,
+  "frontier_jaccard": 0.7,
+  "family_id": "family_11"
+ },
+ {
+  "task_id": "task_0072",
+  "frontierHit": 1,
+  "frontierCrossFamilyAdoption": 0,
+  "frontier_jaccard": 1.0,
+  "family_id": "family_12"
+ },
+ {
+  "task_id": "task_0073",
+  "frontierHit": 1,
+  "frontierCrossFamilyAdoption": 0,
+  "frontier_jaccard": 1.0,
+  "family_id": "family_12"
+ },
+ {
+  "task_id": "task_0074",
+  "frontierHit": 1,
+  "frontierCrossFamilyAdoption": 0,
+  "frontier_jaccard": 1.0,
+  "family_id": "family_12"
+ },
+ {
+  "task_id": "task_0075",
+  "frontierHit": 1,
+  "frontierCrossFamilyAdoption": 0,
+  "frontier_jaccard": 0.8666666666666667,
+  "family_id": "family_12"
+ },
+ {
+  "task_id": "task_0076",
+  "frontierHit": 1,
+  "frontierCrossFamilyAdoption": 0,
+  "frontier_jaccard": 0.8,
+  "family_id": "family_12"
+ },
+ {
+  "task_id": "task_0077",
+  "frontierHit": 1,
+  "frontierCrossFamilyAdoption": 0,
+  "frontier_jaccard": 1.0,
+  "family_id": "family_13"
+ },
+ {
+  "task_id": "task_0078",
+  "frontierHit": 1,
+  "frontierCrossFamilyAdoption": 0,
+  "frontier_jaccard": 1.0,
+  "family_id": "family_13"
+ },
+ {
+  "task_id": "task_0079",
+  "frontierHit": 1,
+  "frontierCrossFamilyAdoption": 0,
+  "frontier_jaccard": 0.8571428571428571,
+  "family_id": "family_13"
+ },
+ {
+  "task_id": "task_0080",
+  "frontierHit": 1,
+  "frontierCrossFamilyAdoption": 0,
+  "frontier_jaccard": 0.8571428571428571,
+  "family_id": "family_13"
+ },
+ {
+  "task_id": "task_0081",
+  "frontierHit": 1,
+  "frontierCrossFamilyAdoption": 0,
+  "frontier_jaccard": 1.0,
+  "family_id": "family_13"
+ },
+ {
+  "task_id": "task_0082",
+  "frontierHit": 1,
+  "frontierCrossFamilyAdoption": 0,
+  "frontier_jaccard": 1.0,
+  "family_id": "family_14"
+ },
+ {
+  "task_id": "task_0083",
+  "frontierHit": 1,
+  "frontierCrossFamilyAdoption": 0,
+  "frontier_jaccard": 1.0,
+  "family_id": "family_14"
+ },
+ {
+  "task_id": "task_0084",
+  "frontierHit": 1,
+  "frontierCrossFamilyAdoption": 0,
+  "frontier_jaccard": 0.8666666666666667,
+  "family_id": "family_14"
+ },
+ {
+  "task_id": "task_0085",
+  "frontierHit": 1,
+  "frontierCrossFamilyAdoption": 0,
+  "frontier_jaccard": 1.0,
+  "family_id": "family_14"
+ },
+ {
+  "task_id": "task_0086",
+  "frontierHit": 1,
+  "frontierCrossFamilyAdoption": 0,
+  "frontier_jaccard": 1.0,
+  "family_id": "family_14"
+ },
+ {
+  "task_id": "task_0087",
+  "frontierHit": 1,
+  "frontierCrossFamilyAdoption": 0,
+  "frontier_jaccard": 1.0,
+  "family_id": "family_15"
+ },
+ {
+  "task_id": "task_0088",
+  "frontierHit": 1,
+  "frontierCrossFamilyAdoption": 0,
+  "frontier_jaccard": 0.7777777777777778,
+  "family_id": "family_15"
+ },
+ {
+  "task_id": "task_0089",
+  "frontierHit": 1,
+  "frontierCrossFamilyAdoption": 0,
+  "frontier_jaccard": 1.0,
+  "family_id": "family_15"
+ },
+ {
+  "task_id": "task_0090",
+  "frontierHit": 1,
+  "frontierCrossFamilyAdoption": 0,
+  "frontier_jaccard": 0.8,
+  "family_id": "family_15"
+ },
+ {
+  "task_id": "task_0091",
+  "frontierHit": 1,
+  "frontierCrossFamilyAdoption": 0,
+  "frontier_jaccard": 0.8,
+  "family_id": "family_15"
+ },
+ {
+  "task_id": "task_0092",
+  "frontierHit": 1,
+  "frontierCrossFamilyAdoption": 0,
+  "frontier_jaccard": 1.0,
+  "family_id": "family_16"
+ },
+ {
+  "task_id": "task_0093",
+  "frontierHit": 1,
+  "frontierCrossFamilyAdoption": 0,
+  "frontier_jaccard": 1.0,
+  "family_id": "family_16"
+ },
+ {
+  "task_id": "task_0094",
+  "frontierHit": 1,
+  "frontierCrossFamilyAdoption": 0,
+  "frontier_jaccard": 1.0,
+  "family_id": "family_16"
+ },
+ {
+  "task_id": "task_0095",
+  "frontierHit": 1,
+  "frontierCrossFamilyAdoption": 0,
+  "frontier_jaccard": 0.8666666666666667,
+  "family_id": "family_16"
+ },
+ {
+  "task_id": "task_0096",
+  "frontierHit": 1,
+  "frontierCrossFamilyAdoption": 0,
+  "frontier_jaccard": 0.8,
+  "family_id": "family_16"
+ },
+ {
+  "task_id": "task_0097",
+  "frontierHit": 1,
+  "frontierCrossFamilyAdoption": 0,
+  "frontier_jaccard": 1.0,
+  "family_id": "family_17"
+ },
+ {
+  "task_id": "task_0098",
+  "frontierHit": 1,
+  "frontierCrossFamilyAdoption": 0,
+  "frontier_jaccard": 1.0,
+  "family_id": "family_17"
+ },
+ {
+  "task_id": "task_0099",
+  "frontierHit": 1,
+  "frontierCrossFamilyAdoption": 0,
+  "frontier_jaccard": 0.8571428571428571,
+  "family_id": "family_17"
+ },
+ {
+  "task_id": "task_0100",
+  "frontierHit": 1,
+  "frontierCrossFamilyAdoption": 0,
+  "frontier_jaccard": 0.8571428571428571,
+  "family_id": "family_17"
+ },
+ {
+  "task_id": "task_0101",
+  "frontierHit": 1,
+  "frontierCrossFamilyAdoption": 0,
+  "frontier_jaccard": 1.0,
+  "family_id": "family_17"
+ },
+ {
+  "task_id": "task_0102",
+  "frontierHit": 1,
+  "frontierCrossFamilyAdoption": 0,
+  "frontier_jaccard": 1.0,
+  "family_id": "family_18"
+ },
+ {
+  "task_id": "task_0103",
+  "frontierHit": 1,
+  "frontierCrossFamilyAdoption": 0,
+  "frontier_jaccard": 1.0,
+  "family_id": "family_18"
+ },
+ {
+  "task_id": "task_0104",
+  "frontierHit": 1,
+  "frontierCrossFamilyAdoption": 0,
+  "frontier_jaccard": 0.8666666666666667,
+  "family_id": "family_18"
+ },
+ {
+  "task_id": "task_0105",
+  "frontierHit": 1,
+  "frontierCrossFamilyAdoption": 0,
+  "frontier_jaccard": 1.0,
+  "family_id": "family_18"
+ },
+ {
+  "task_id": "task_0106",
+  "frontierHit": 1,
+  "frontierCrossFamilyAdoption": 0,
+  "frontier_jaccard": 1.0,
+  "family_id": "family_18"
+ },
+ {
+  "task_id": "task_0107",
+  "frontierHit": 1,
+  "frontierCrossFamilyAdoption": 0,
+  "frontier_jaccard": 1.0,
+  "family_id": "family_19"
+ },
+ {
+  "task_id": "task_0108",
+  "frontierHit": 1,
+  "frontierCrossFamilyAdoption": 0,
+  "frontier_jaccard": 0.7777777777777778,
+  "family_id": "family_19"
+ },
+ {
+  "task_id": "task_0109",
+  "frontierHit": 1,
+  "frontierCrossFamilyAdoption": 0,
+  "frontier_jaccard": 1.0,
+  "family_id": "family_19"
+ },
+ {
+  "task_id": "task_0110",
+  "frontierHit": 1,
+  "frontierCrossFamilyAdoption": 0,
+  "frontier_jaccard": 0.8,
+  "family_id": "family_19"
+ },
+ {
+  "task_id": "task_0111",
+  "frontierHit": 1,
+  "frontierCrossFamilyAdoption": 0,
+  "frontier_jaccard": 0.8,
+  "family_id": "family_19"
+ },
+ {
+  "task_id": "task_0112",
+  "frontierHit": 1,
+  "frontierCrossFamilyAdoption": 0,
+  "frontier_jaccard": 1.0,
+  "family_id": "family_20"
+ },
+ {
+  "task_id": "task_0113",
+  "frontierHit": 1,
+  "frontierCrossFamilyAdoption": 0,
+  "frontier_jaccard": 1.0,
+  "family_id": "family_20"
+ },
+ {
+  "task_id": "task_0114",
+  "frontierHit": 1,
+  "frontierCrossFamilyAdoption": 0,
+  "frontier_jaccard": 1.0,
+  "family_id": "family_20"
+ },
+ {
+  "task_id": "task_0115",
+  "frontierHit": 1,
+  "frontierCrossFamilyAdoption": 0,
+  "frontier_jaccard": 0.8666666666666667,
+  "family_id": "family_20"
+ },
+ {
+  "task_id": "task_0116",
+  "frontierHit": 1,
+  "frontierCrossFamilyAdoption": 0,
+  "frontier_jaccard": 0.8,
+  "family_id": "family_20"
+ },
+ {
+  "task_id": "task_0117",
+  "frontierHit": 1,
+  "frontierCrossFamilyAdoption": 0,
+  "frontier_jaccard": 1.0,
+  "family_id": "family_21"
+ },
+ {
+  "task_id": "task_0118",
+  "frontierHit": 1,
+  "frontierCrossFamilyAdoption": 0,
+  "frontier_jaccard": 1.0,
+  "family_id": "family_21"
+ },
+ {
+  "task_id": "task_0119",
+  "frontierHit": 1,
+  "frontierCrossFamilyAdoption": 0,
+  "frontier_jaccard": 0.8571428571428571,
+  "family_id": "family_21"
+ },
+ {
+  "task_id": "task_0120",
+  "frontierHit": 1,
+  "frontierCrossFamilyAdoption": 0,
+  "frontier_jaccard": 0.8571428571428571,
+  "family_id": "family_21"
+ },
+ {
+  "task_id": "task_0121",
+  "frontierHit": 1,
+  "frontierCrossFamilyAdoption": 0,
+  "frontier_jaccard": 1.0,
+  "family_id": "family_21"
+ },
+ {
+  "task_id": "task_0122",
+  "frontierHit": 1,
+  "frontierCrossFamilyAdoption": 0,
+  "frontier_jaccard": 1.0,
+  "family_id": "family_22"
+ },
+ {
+  "task_id": "task_0123",
+  "frontierHit": 1,
+  "frontierCrossFamilyAdoption": 0,
+  "frontier_jaccard": 1.0,
+  "family_id": "family_22"
+ },
+ {
+  "task_id": "task_0124",
+  "frontierHit": 1,
+  "frontierCrossFamilyAdoption": 0,
+  "frontier_jaccard": 0.8666666666666667,
+  "family_id": "family_22"
+ },
+ {
+  "task_id": "task_0125",
+  "frontierHit": 1,
+  "frontierCrossFamilyAdoption": 0,
+  "frontier_jaccard": 1.0,
+  "family_id": "family_22"
+ },
+ {
+  "task_id": "task_0126",
+  "frontierHit": 1,
+  "frontierCrossFamilyAdoption": 0,
+  "frontier_jaccard": 1.0,
+  "family_id": "family_22"
+ },
+ {
+  "task_id": "task_0127",
+  "frontierHit": 1,
+  "frontierCrossFamilyAdoption": 0,
+  "frontier_jaccard": 1.0,
+  "family_id": "family_23"
+ },
+ {
+  "task_id": "task_0128",
+  "frontierHit": 1,
+  "frontierCrossFamilyAdoption": 0,
+  "frontier_jaccard": 0.8,
+  "family_id": "family_23"
+ },
+ {
+  "task_id": "task_0129",
+  "frontierHit": 1,
+  "frontierCrossFamilyAdoption": 0,
+  "frontier_jaccard": 1.0,
+  "family_id": "family_23"
+ },
+ {
+  "task_id": "task_0130",
+  "frontierHit": 1,
+  "frontierCrossFamilyAdoption": 0,
+  "frontier_jaccard": 0.8,
+  "family_id": "family_23"
+ },
+ {
+  "task_id": "task_0131",
+  "frontierHit": 1,
+  "frontierCrossFamilyAdoption": 0,
+  "frontier_jaccard": 0.8,
+  "family_id": "family_23"
+ },
+ {
+  "task_id": "task_0132",
+  "frontierHit": 1,
+  "frontierCrossFamilyAdoption": 0,
+  "frontier_jaccard": 1.0,
+  "family_id": "family_24"
+ },
+ {
+  "task_id": "task_0133",
+  "frontierHit": 1,
+  "frontierCrossFamilyAdoption": 0,
+  "frontier_jaccard": 1.0,
+  "family_id": "family_24"
+ },
+ {
+  "task_id": "task_0134",
+  "frontierHit": 1,
+  "frontierCrossFamilyAdoption": 0,
+  "frontier_jaccard": 1.0,
+  "family_id": "family_24"
+ },
+ {
+  "task_id": "task_0135",
+  "frontierHit": 1,
+  "frontierCrossFamilyAdoption": 0,
+  "frontier_jaccard": 0.8666666666666667,
+  "family_id": "family_24"
+ },
+ {
+  "task_id": "task_0136",
+  "frontierHit": 1,
+  "frontierCrossFamilyAdoption": 0,
+  "frontier_jaccard": 0.8,
+  "family_id": "family_24"
+ },
+ {
+  "task_id": "task_0137",
+  "frontierHit": 1,
+  "frontierCrossFamilyAdoption": 0,
+  "frontier_jaccard": 1.0,
+  "family_id": "family_25"
+ },
+ {
+  "task_id": "task_0138",
+  "frontierHit": 1,
+  "frontierCrossFamilyAdoption": 0,
+  "frontier_jaccard": 1.0,
+  "family_id": "family_25"
+ },
+ {
+  "task_id": "task_0139",
+  "frontierHit": 1,
+  "frontierCrossFamilyAdoption": 0,
+  "frontier_jaccard": 0.8571428571428571,
+  "family_id": "family_25"
+ },
+ {
+  "task_id": "task_0140",
+  "frontierHit": 1,
+  "frontierCrossFamilyAdoption": 0,
+  "frontier_jaccard": 0.8571428571428571,
+  "family_id": "family_25"
+ },
+ {
+  "task_id": "task_0141",
+  "frontierHit": 1,
+  "frontierCrossFamilyAdoption": 0,
+  "frontier_jaccard": 1.0,
+  "family_id": "family_25"
+ },
+ {
+  "task_id": "task_0142",
+  "frontierHit": 1,
+  "frontierCrossFamilyAdoption": 0,
+  "frontier_jaccard": 1.0,
+  "family_id": "family_26"
+ },
+ {
+  "task_id": "task_0143",
+  "frontierHit": 1,
+  "frontierCrossFamilyAdoption": 0,
+  "frontier_jaccard": 1.0,
+  "family_id": "family_26"
+ },
+ {
+  "task_id": "task_0144",
+  "frontierHit": 1,
+  "frontierCrossFamilyAdoption": 0,
+  "frontier_jaccard": 0.8666666666666667,
+  "family_id": "family_26"
+ },
+ {
+  "task_id": "task_0145",
+  "frontierHit": 1,
+  "frontierCrossFamilyAdoption": 0,
+  "frontier_jaccard": 1.0,
+  "family_id": "family_26"
+ },
+ {
+  "task_id": "task_0146",
+  "frontierHit": 1,
+  "frontierCrossFamilyAdoption": 0,
+  "frontier_jaccard": 1.0,
+  "family_id": "family_26"
+ },
+ {
+  "task_id": "task_0147",
+  "frontierHit": 1,
+  "frontierCrossFamilyAdoption": 0,
+  "frontier_jaccard": 1.0,
+  "family_id": "family_27"
+ },
+ {
+  "task_id": "task_0148",
+  "frontierHit": 1,
+  "frontierCrossFamilyAdoption": 0,
+  "frontier_jaccard": 0.8,
+  "family_id": "family_27"
+ },
+ {
+  "task_id": "task_0149",
+  "frontierHit": 1,
+  "frontierCrossFamilyAdoption": 0,
+  "frontier_jaccard": 1.0,
+  "family_id": "family_27"
+ },
+ {
+  "task_id": "task_0150",
+  "frontierHit": 1,
+  "frontierCrossFamilyAdoption": 0,
+  "frontier_jaccard": 0.8,
+  "family_id": "family_27"
+ },
+ {
+  "task_id": "task_0151",
+  "frontierHit": 1,
+  "frontierCrossFamilyAdoption": 0,
+  "frontier_jaccard": 0.8,
+  "family_id": "family_27"
+ },
+ {
+  "task_id": "task_0152",
+  "frontierHit": 1,
+  "frontierCrossFamilyAdoption": 0,
+  "frontier_jaccard": 1.0,
+  "family_id": "family_28"
+ },
+ {
+  "task_id": "task_0153",
+  "frontierHit": 1,
+  "frontierCrossFamilyAdoption": 0,
+  "frontier_jaccard": 1.0,
+  "family_id": "family_28"
+ },
+ {
+  "task_id": "task_0154",
+  "frontierHit": 1,
+  "frontierCrossFamilyAdoption": 0,
+  "frontier_jaccard": 1.0,
+  "family_id": "family_28"
+ },
+ {
+  "task_id": "task_0155",
+  "frontierHit": 1,
+  "frontierCrossFamilyAdoption": 0,
+  "frontier_jaccard": 0.8666666666666667,
+  "family_id": "family_28"
+ },
+ {
+  "task_id": "task_0156",
+  "frontierHit": 1,
+  "frontierCrossFamilyAdoption": 0,
+  "frontier_jaccard": 0.8,
+  "family_id": "family_28"
+ },
+ {
+  "task_id": "task_0157",
+  "frontierHit": 1,
+  "frontierCrossFamilyAdoption": 0,
+  "frontier_jaccard": 1.0,
+  "family_id": "family_29"
+ },
+ {
+  "task_id": "task_0158",
+  "frontierHit": 1,
+  "frontierCrossFamilyAdoption": 0,
+  "frontier_jaccard": 1.0,
+  "family_id": "family_29"
+ },
+ {
+  "task_id": "task_0159",
+  "frontierHit": 1,
+  "frontierCrossFamilyAdoption": 0,
+  "frontier_jaccard": 0.8571428571428571,
+  "family_id": "family_29"
+ },
+ {
+  "task_id": "task_0160",
+  "frontierHit": 1,
+  "frontierCrossFamilyAdoption": 0,
+  "frontier_jaccard": 0.8571428571428571,
+  "family_id": "family_29"
+ },
+ {
+  "task_id": "task_0161",
+  "frontierHit": 1,
+  "frontierCrossFamilyAdoption": 0,
+  "frontier_jaccard": 1.0,
+  "family_id": "family_29"
+ },
+ {
+  "task_id": "task_0162",
+  "frontierHit": 1,
+  "frontierCrossFamilyAdoption": 0,
+  "frontier_jaccard": 1.0,
+  "family_id": "family_30"
+ },
+ {
+  "task_id": "task_0163",
+  "frontierHit": 1,
+  "frontierCrossFamilyAdoption": 0,
+  "frontier_jaccard": 1.0,
+  "family_id": "family_30"
+ },
+ {
+  "task_id": "task_0164",
+  "frontierHit": 1,
+  "frontierCrossFamilyAdoption": 0,
+  "frontier_jaccard": 0.8666666666666667,
+  "family_id": "family_30"
+ },
+ {
+  "task_id": "task_0165",
+  "frontierHit": 1,
+  "frontierCrossFamilyAdoption": 0,
+  "frontier_jaccard": 1.0,
+  "family_id": "family_30"
+ },
+ {
+  "task_id": "task_0166",
+  "frontierHit": 1,
+  "frontierCrossFamilyAdoption": 0,
+  "frontier_jaccard": 1.0,
+  "family_id": "family_30"
+ },
+ {
+  "task_id": "task_0167",
+  "frontierHit": 1,
+  "frontierCrossFamilyAdoption": 0,
+  "frontier_jaccard": 1.0,
+  "family_id": "family_31"
+ },
+ {
+  "task_id": "task_0168",
+  "frontierHit": 1,
+  "frontierCrossFamilyAdoption": 0,
+  "frontier_jaccard": 0.8,
+  "family_id": "family_31"
+ },
+ {
+  "task_id": "task_0169",
+  "frontierHit": 1,
+  "frontierCrossFamilyAdoption": 0,
+  "frontier_jaccard": 1.0,
+  "family_id": "family_31"
+ },
+ {
+  "task_id": "task_0170",
+  "frontierHit": 1,
+  "frontierCrossFamilyAdoption": 0,
+  "frontier_jaccard": 0.7777777777777778,
+  "family_id": "family_31"
+ },
+ {
+  "task_id": "task_0171",
+  "frontierHit": 1,
+  "frontierCrossFamilyAdoption": 0,
+  "frontier_jaccard": 0.8,
+  "family_id": "family_31"
+ },
+ {
+  "task_id": "task_0172",
+  "frontierHit": 1,
+  "frontierCrossFamilyAdoption": 0,
+  "frontier_jaccard": 1.0,
+  "family_id": "family_32"
+ },
+ {
+  "task_id": "task_0173",
+  "frontierHit": 1,
+  "frontierCrossFamilyAdoption": 0,
+  "frontier_jaccard": 1.0,
+  "family_id": "family_32"
+ },
+ {
+  "task_id": "task_0174",
+  "frontierHit": 1,
+  "frontierCrossFamilyAdoption": 0,
+  "frontier_jaccard": 1.0,
+  "family_id": "family_32"
+ },
+ {
+  "task_id": "task_0175",
+  "frontierHit": 1,
+  "frontierCrossFamilyAdoption": 0,
+  "frontier_jaccard": 0.8666666666666667,
+  "family_id": "family_32"
+ },
+ {
+  "task_id": "task_0176",
+  "frontierHit": 1,
+  "frontierCrossFamilyAdoption": 0,
+  "frontier_jaccard": 0.8,
+  "family_id": "family_32"
+ },
+ {
+  "task_id": "task_0177",
+  "frontierHit": 1,
+  "frontierCrossFamilyAdoption": 0,
+  "frontier_jaccard": 1.0,
+  "family_id": "family_33"
+ },
+ {
+  "task_id": "task_0178",
+  "frontierHit": 1,
+  "frontierCrossFamilyAdoption": 0,
+  "frontier_jaccard": 1.0,
+  "family_id": "family_33"
+ },
+ {
+  "task_id": "task_0179",
+  "frontierHit": 1,
+  "frontierCrossFamilyAdoption": 0,
+  "frontier_jaccard": 0.8461538461538461,
+  "family_id": "family_33"
+ },
+ {
+  "task_id": "task_0180",
+  "frontierHit": 1,
+  "frontierCrossFamilyAdoption": 0,
+  "frontier_jaccard": 0.8571428571428571,
+  "family_id": "family_33"
+ },
+ {
+  "task_id": "task_0181",
+  "frontierHit": 1,
+  "frontierCrossFamilyAdoption": 0,
+  "frontier_jaccard": 1.0,
+  "family_id": "family_33"
+ },
+ {
+  "task_id": "task_0182",
+  "frontierHit": 1,
+  "frontierCrossFamilyAdoption": 0,
+  "frontier_jaccard": 1.0,
+  "family_id": "family_34"
+ },
+ {
+  "task_id": "task_0183",
+  "frontierHit": 1,
+  "frontierCrossFamilyAdoption": 0,
+  "frontier_jaccard": 1.0,
+  "family_id": "family_34"
+ },
+ {
+  "task_id": "task_0184",
+  "frontierHit": 1,
+  "frontierCrossFamilyAdoption": 0,
+  "frontier_jaccard": 0.8666666666666667,
+  "family_id": "family_34"
+ },
+ {
+  "task_id": "task_0185",
+  "frontierHit": 1,
+  "frontierCrossFamilyAdoption": 0,
+  "frontier_jaccard": 1.0,
+  "family_id": "family_34"
+ },
+ {
+  "task_id": "task_0186",
+  "frontierHit": 1,
+  "frontierCrossFamilyAdoption": 0,
+  "frontier_jaccard": 1.0,
+  "family_id": "family_34"
+ },
+ {
+  "task_id": "task_0187",
+  "frontierHit": 1,
+  "frontierCrossFamilyAdoption": 0,
+  "frontier_jaccard": 1.0,
+  "family_id": "family_35"
+ },
+ {
+  "task_id": "task_0188",
+  "frontierHit": 1,
+  "frontierCrossFamilyAdoption": 0,
+  "frontier_jaccard": 0.8,
+  "family_id": "family_35"
+ },
+ {
+  "task_id": "task_0189",
+  "frontierHit": 1,
+  "frontierCrossFamilyAdoption": 0,
+  "frontier_jaccard": 1.0,
+  "family_id": "family_35"
+ },
+ {
+  "task_id": "task_0190",
+  "frontierHit": 1,
+  "frontierCrossFamilyAdoption": 0,
+  "frontier_jaccard": 0.7777777777777778,
+  "family_id": "family_35"
+ },
+ {
+  "task_id": "task_0191",
+  "frontierHit": 1,
+  "frontierCrossFamilyAdoption": 0,
+  "frontier_jaccard": 0.8,
+  "family_id": "family_35"
+ }
+]
