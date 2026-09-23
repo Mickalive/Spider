@@ -1,0 +1,32 @@
+{
+  "experiment_id": "EXP-INTEL-35860344410",
+  "overall_mean": 0.8,
+  "n_families": 10,
+  "bootstrap_ci": [
+    0.5,
+    1.0
+  ],
+  "bootstrap_mean": 0.79875,
+  "shuffle_mean": 0.8,
+  "shuffle_p95": 0.8,
+  "shuffle_p": 1.0,
+  "per_family_variance": 0.16,
+  "per_family_consistency": {
+    "101": 1.0,
+    "136": 0.0,
+    "137": 1.0,
+    "138": 1.0,
+    "139": 1.0,
+    "145": 0.0,
+    "147": 1.0,
+    "153": 1.0,
+    "154": 1.0,
+    "155": 1.0
+  },
+  "truncated_mean": 0.8,
+  "delta_vs_truncated": 0.0,
+  "valid_captures": 20,
+  "total_captures": 20,
+  "product_captures": 4,
+  "seed": 35725763380
+}

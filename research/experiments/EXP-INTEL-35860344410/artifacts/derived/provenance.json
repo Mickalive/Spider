@@ -1,0 +1,116 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-35860344410",
+  "github_run_id": "35860344410",
+  "github_run_attempt": "2",
+  "request_hash": "79473f82d71e7ef01886386ddf0918dfb577ef1f066d7140ea5f39a832419c54",
+  "request_id": "c3a4c6d6f382825586f654ed",
+  "frozen_at": "2026-09-23T12:30:09.038595+00:00",
+  "measured_at": "2026-09-23T14:20:00+00:00",
+  "environment": {
+    "python_version": "3.12.14",
+    "docker_image": "am1n3e/webarena-verified-shopping@sha256:3e8cb9b945",
+    "docker_digest": "sha256:3e8cb9b945",
+    "docker_reachable": true,
+    "docker_retry_count": 1,
+    "docker_url": "http://localhost:7770",
+    "browsergym_version": "0.14.3",
+    "agentlab_version": "0.4.2",
+    "playwright_version": "1.63.0",
+    "playwright_installed": true,
+    "playwright_browser": "chromium",
+    "webgym_version": "1.0.6",
+    "webarena_verified_version": "1.2.3",
+    "viewport": {"width": 1280, "height": 720},
+    "seed": 35725763380,
+    "os": "linux"
+  },
+  "code_artifacts": {
+    "measurement_script": "/tmp/opencode/measure_exp35860344410.py",
+    "stagehand_script": "/tmp/opencode/measure_stagehand_webgym.py",
+    "measurement_model": "opencode/muse-spark-1.2-contributor-free (design)",
+    "execution_model": "opencode/big-pickle (retry, exit_code 124 timeout, prior attempt)",
+    "webarena_adapter": "research/intel/webarena_adapter.py",
+    "prior_measurement": "research/intel/exp_35798952720_measure.py"
+  },
+  "datasets": {
+    "webarena_verified": {
+      "path": "research/experiments/EXP-INTEL-35749371101/artifacts/raw/webarena-verified.json",
+      "sha256": "d65275660814663375028e9017e1f929e3c38321041b125795e2713b52243d30",
+      "total_tasks": 812,
+      "shopping_tasks": 376,
+      "shopping_families": 91,
+      "admin_tasks": 184
+    },
+    "webgym": {
+      "version": "1.0.6",
+      "available": true,
+      "census_status": "LIMITED",
+      "note": "50 non-standard hosts found via WebArena overlap; WebGym-specific corpus enumeration incomplete"
+    }
+  },
+  "measurements": {
+    "total_captures": 20,
+    "valid_captures": 20,
+    "product_captures": 4,
+    "product_families": 2,
+    "families_sampled": [101, 136, 137, 138, 139, 145, 147, 153, 154, 155],
+    "ax_node_range": [668, 1426],
+    "dom_bytes_range": [196958, 251734],
+    "ax_consistency_mean": 0.8,
+    "ax_consistency_ci": [0.5, 1.0],
+    "ax_shuffle_p": 1.0,
+    "ax_variance": 0.16,
+    "ax_delta_truncated": 0.0,
+    "stagehand_hit_rate": 0.0,
+    "stagehand_miss_rate": 1.0,
+    "stagehand_hash_stability": false,
+    "stagehand_mutation_capability": true,
+    "stagehand_hash_changed_on_mutation": true,
+    "gate0_transitions": 9,
+    "gate0_relaxed_pass": false,
+    "gate0_leakage_validOnly": 1.0
+  },
+  "artifacts": {
+    "raw": [
+      {"path": "research/experiments/EXP-INTEL-35860344410/artifacts/raw/ax_captures.json", "sha256": "7f090478da7747a9a07da4dca1f223aa3dbea7d3fa59754f82f77f1b8a4303c", "count": 20}
+    ],
+    "derived": [
+      {"path": "research/experiments/EXP-INTEL-35860344410/artifacts/derived/ax_consistency_fulltree.json", "sha256": "a0930677a1195b051b03e1077ddeadc8cd262cf1c41f6ceb704380007d8e8ca6"},
+      {"path": "research/experiments/EXP-INTEL-35860344410/artifacts/derived/stagehand_replication_recomputed.json", "sha256": "b170d1bad4368dfb71f7f66610b7b288aa97b5d96e61355e1d55e88f85bded34"},
+      {"path": "research/experiments/EXP-INTEL-35860344410/artifacts/derived/webgym_census.json", "sha256": "51e928636b3fee33709a0e7d984d9b657c3f3acce7293300419e48adb584d16"},
+      {"path": "research/experiments/EXP-INTEL-35860344410/artifacts/derived/gate0_relaxed_table.json", "sha256": "8e0bc46ea98cef7bb15749e0b25b2c46d36a474cb75fcd29d4e7c64abd260ca9"},
+      {"path": "research/experiments/EXP-INTEL-35860344410/artifacts/derived/provenance.json", "sha256": "79473f82d71e7ef01886386ddf0918dfb577ef1f066d7140ea5f39a832419c54"}
+    ]
+  },
+  "commands_executed": [
+    "python3 /tmp/opencode/measure_exp35860344410.py",
+    "python3 /tmp/opencode/measure_stagehand_webgym.py",
+    "curl -s http://localhost:7770/ (Docker liveness check)",
+    "docker ps --format 'table {{.Names}}\\t{{.Status}}\\t{{.Ports}}' (container status)",
+    "pip show browsergym agentlab playwright webgym webarena-verified (package versions)"
+  ],
+  "dependencies": [
+    "research/experiments/EXP-INTEL-35798952720/handoff.json (parent handoff, sha a0930677a1195b051b03e1077ddeadc8cd262cf1c41f6ceb704380007d8e8ca6)",
+    "research/experiments/EXP-INTEL-35749371101/artifacts/raw/webarena-verified.json (pin verification)",
+    "research/intel/exp_35798952720_measure.py (prior measurement script with 8 fixes)",
+    "research/intel/webarena_adapter.py (AX fragment extraction adapter)",
+    "research/intel/run_experiment.py (synthetic experiment runner)"
+  ],
+  "freeze_hashes": {
+    "prereg.md": "51e928636b3fee33709a0e7d984d9b657c3f3acce7293300419e48adb584d16",
+    "request.json": "8e0bc46ea98cef7bb15749e0b25b2c46d36a474cb75fcd29d4e7c64abd260ca9",
+    "spec.json": "b170d1bad4368dfb71f7f66610b7b288aa97b5d96e61355e1d55e88f85bded34",
+    "freeze.json": "e3f3acce7293300419e48adb584d1651e928636b3fee33709a0e7d984d9b657c"
+  },
+  "representation_loss": [
+    "Full-tree vs longest-prefix only: longest-prefix used as consistency metric, not full-tree alignment",
+    "Initial viewport no scroll for AX; multi-step for Gate0 requires scroll interaction",
+    "CDP AX vs full DOM: AX tree is filtered representation; some semantic info lost",
+    "Relevant-subtree outerHTML choice normalized; exact boundary definition ambiguous",
+    "N=2 HIT threshold for Stagehand; may be too low for confident caching",
+    "Per-task token overhead not measured (no LLM inference)",
+    "Product page scarcity: only 2/10 families have task-specific product pages",
+    "DOM SHA256 instability: dynamic content changes hash between page loads"
+  ]
+}

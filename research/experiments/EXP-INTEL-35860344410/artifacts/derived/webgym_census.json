@@ -1,0 +1,16 @@
+{
+  "experiment_id": "EXP-INTEL-35860344410",
+  "webgym_available": true,
+  "webgym_version": "1.0.6",
+  "webgym_site_count": 50,
+  "diverse_sites_target": 50,
+  "diverse_sites_achieved": 0,
+  "manifest_sha256": null,
+  "duplication_prevalence": null,
+  "duplication_ci": null,
+  "threshold_sweep_range": null,
+  "site_entropy": null,
+  "status": "LIMITED",
+  "note": "WebGym available but diverse eTLD+1 census requires WebGym-specific corpus (not WebArena). Found 50 non-standard hosts, 190 families.",
+  "webgym_family_count": 190
+}

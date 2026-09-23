@@ -1,0 +1,20 @@
+{
+  "experiment_id": "EXP-INTEL-35860344410",
+  "method": "Playwright multi-step navigation",
+  "families_tested": [],
+  "transitions_per_family": [],
+  "relaxed_pass_count": 0,
+  "strict_pass_count": 0,
+  "total_transitions": 9,
+  "nl_per_family": [],
+  "status": "ATTEMPTED",
+  "note": "Multi-step trajectory collection attempted via direct Playwright navigation",
+  "sample_transitions": 9,
+  "leakage_validOnly": 1.0,
+  "leakage_total": 1.0,
+  "unique_titles": 9,
+  "title_entropy": 1.0,
+  "relaxed_pass": false,
+  "strict_pass": false,
+  "navigate_back_to_same": 0.0
+}
