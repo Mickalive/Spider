@@ -1,0 +1,84 @@
+{
+  "experiment_id": "EXP-FRONTIER-35915275774",
+  "kind": "fetch_webmcp_discovery",
+  "base_url": "http://127.0.0.1:35395",
+  "real_http": true,
+  "trace": [
+    {
+      "kind": "fetch_openapi_spec",
+      "url": "http://127.0.0.1:35395/openapi.json",
+      "ok": true,
+      "status": 200,
+      "bytes": 1350,
+      "latency_s": 0.0129,
+      "error": null,
+      "spec_sha256": "7796ba3b025966f65476dc6b3cf650df7c84e2a349386ba335c1854135b12b02",
+      "paths_parsed": [
+        "/admin/settings",
+        "/api/data",
+        "/api/reports",
+        "/api/users",
+        "/api/v2/data",
+        "/api/v3/data",
+        "/random/alias0/data",
+        "/random/alias1/data",
+        "/random/alias2/data",
+        "/random/alias3/data",
+        "/v1/orders",
+        "/v2/audit",
+        "/v2/items",
+        "/v3/audit"
+      ],
+      "components_parsed": [
+        "BodyAlias",
+        "HeaderAlias",
+        "QueryAlias"
+      ]
+    },
+    {
+      "kind": "hateoas_root",
+      "url": "http://127.0.0.1:35395/",
+      "ok": true,
+      "status": 200,
+      "bytes": 241,
+      "latency_s": 0.0005,
+      "error": null
+    },
+    {
+      "kind": "hateoas_link",
+      "rel": "self",
+      "href": "http://127.0.0.1:35395/api/data",
+      "ok": true,
+      "status": 200,
+      "bytes": 33,
+      "latency_s": 0.0004,
+      "error": null
+    },
+    {
+      "kind": "hateoas_link",
+      "rel": "related",
+      "href": "http://127.0.0.1:35395/api/users",
+      "ok": true,
+      "status": 200,
+      "bytes": 34,
+      "latency_s": 0.0003,
+      "error": null
+    },
+    {
+      "kind": "hateoas_link",
+      "rel": "related",
+      "href": "http://127.0.0.1:35395/api/reports",
+      "ok": true,
+      "status": 200,
+      "bytes": 36,
+      "latency_s": 0.0003,
+      "error": null
+    }
+  ],
+  "spec_fetched": true,
+  "spec_bytes": 1350,
+  "hateoas_links_followed": 3,
+  "hateoas_links_attempted": 3,
+  "code_path": "urllib.request real HTTP to 127.0.0.1 ephemeral port + json parse",
+  "manifest_sha256": "f0daeacccb9d7a569ba10a60d448e895097a6849ab4b7b4865203d27a9edb517"
+}
