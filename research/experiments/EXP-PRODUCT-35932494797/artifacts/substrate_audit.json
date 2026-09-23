@@ -1,0 +1,126 @@
+{
+  "experiment_id": "EXP-PRODUCT-35932494797",
+  "created_at": "2026-09-23T23:18:00+00:00",
+  "observations": [
+    {
+      "id": "OBS-1",
+      "command": "docker ps",
+      "raw": "CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES"
+    },
+    {
+      "id": "OBS-2",
+      "command": "docker images",
+      "raw": "REPOSITORY                                   TAG       IMAGE ID       CREATED       SIZE\nghcr.io/github/gh-aw-firewall/agent          latest    bd7acdea5936   2 weeks ago   569MB\nghcr.io/github/gh-aw-firewall/api-proxy      latest    9d8f8fbebb48   2 weeks ago   231MB\nghcr.io/github/gh-aw-mcpg                    latest    5f22df3c4a88   2 weeks ago   181MB\nghcr.io/dependabot/dependabot-updater-core   latest    5c1f9f1da87f   2 weeks ago   826MB\nghcr.io/github/github-mcp-server             latest    3e165e25be8d   2 weeks ago   46.8MB\nghcr.io/github/gh-aw-firewall/squid          latest    ebc9c9e5ccbd   6 weeks ago   43.1MB"
+    },
+    {
+      "id": "OBS-3-spider-runtime",
+      "command": "ls /tmp/spider-runtime/shared.db",
+      "raw": "path=/tmp/spider-runtime/shared.db exists=False"
+    },
+    {
+      "id": "OBS-3-spider-runtime-35932494797",
+      "command": "ls /tmp/spider-runtime-35932494797/shared.db",
+      "raw": "path=/tmp/spider-runtime-35932494797/shared.db exists=False"
+    },
+    {
+      "id": "OBS-4",
+      "command": "find /tmp -name shared.db",
+      "raw": "find: \u2018/tmp/snap-private-tmp\u2019: Permission denied\nfind: \u2018/tmp/systemd-private-9a7fa347e19648c59980188729cba83f-systemd-logind.service-eHOmhG\u2019: Permission denied\nfind: \u2018/tmp/systemd-private-9a7fa347e19648c59980188729cba83f-haveged.service-jRchaz\u2019: Permission denied\nfind: \u2018/tmp/systemd-private-9a7fa347e19648c59980188729cba83f-ModemManager.service-MzUXOP\u2019: Permission denied\nfind: \u2018/tmp/systemd-private-9a7fa347e19648c59980188729cba83f-polkit.service-uynRRH\u2019: Permission denied\nfind: \u2018/tmp/systemd-private-9a7fa347e19648c59980188729cba83f-chrony.service-3SBhBo\u2019: Permission denied\nfind: \u2018/tmp/systemd-private-9a7fa347e19648c59980188729cba83f-systemd-resolved.service-zYHl3I\u2019: Permission denied\nexit:0"
+    },
+    {
+      "id": "OBS-5",
+      "command": "python -c 'import jwt'",
+      "raw": "PyJWT import fails: No module named 'jwt'"
+    },
+    {
+      "id": "OBS-6",
+      "command": "gunicorn --version",
+      "raw": "/bin/sh: 1: gunicorn: not found\nWARNING: Package(s) not found: gunicorn"
+    },
+    {
+      "id": "OBS-7",
+      "command": "nginx -v",
+      "raw": "nginx version: nginx/1.24.0 (Ubuntu)\nnginx version: nginx/1.24.0 (Ubuntu)\nbuilt with OpenSSL 3.0.13 30 Jan 2024\nTLS SNI support enabled\nconfigure arguments: --with-cc-opt='-g -O2 -fno-omit-frame-pointer -mno-omit-leaf-frame-pointer -ffile-prefix-map=/build/nginx-HCDuKl/nginx-1.24.0=. -flto=auto -ffat-lto-objects -fstack-protector-strong -fstack-clash-protection -Wformat -Werror=format-security -fcf-protection -fdebug-prefix-map=/build/nginx-HCDuKl/nginx-1.24.0=/usr/src/nginx-1.24.0-2ubuntu7.17 -fPIC -Wdate-time -D_FORTIFY_SOURCE=3' --with-ld-opt='-Wl,-Bsymbolic-functions -flto=auto -ffat-lto-objects -Wl,-z,relro -Wl,-z,now -fPIC' --prefix=/usr/share/nginx --conf-path=/etc/nginx/nginx.conf --http-log-path=/var/log/nginx/access.log --error-log-path=stderr --lock-path=/var/lock/nginx.lock --pid-path=/run/nginx.pid --modules-path=/usr/lib/nginx/modules --http-client-body-temp-path=/var/lib/nginx/body --http-fastcgi-temp-path=/var/lib/nginx/fastcgi --http-proxy-temp-path=/var/lib/nginx/proxy --http-scgi-temp-path=/var/lib/nginx/scgi --http-uwsgi-temp-path=/var/lib/nginx/uwsgi --with-compat --with-debug --with-pcre-jit --with-http_ssl_module --with-http_stub_status_module --with-http_realip_module --with-http_auth_request_module --with-http_v2_module --with-http_dav_module --with-http_slice_module --with-threads --with-http_addition_module --with-http_flv_module --with-http_gunzip_module --with-http_gzip_static_module --with-http_mp4_module --with-http_random_index_module --with-http_secure_link_module --with-http_sub_module --with-mail_ssl_module --with-stream_ssl_module --with-stream_ssl_preread_module --with-stream_realip_module --with-http_geoip_module=dynamic --with-http_image_filter_module=dynamic --with-http_perl_module=dynamic --with-http_xslt_module=dynamic --with-mail=dynamic --with-stream=dynamic --with-stream_geoip_module=dynamic\n/usr/sbin/nginx\n-rwxr-xr-x 1 root root 1314168 Aug 19 16:57 /usr/sbin/nginx"
+    },
+    {
+      "id": "OBS-8",
+      "command": "python -c 'import numpy'",
+      "raw": "numpy import fails: No module named 'numpy'"
+    },
+    {
+      "id": "OBS-9-scipy",
+      "command": "python -c 'import scipy'",
+      "raw": "scipy import fails: No module named 'scipy'"
+    },
+    {
+      "id": "OBS-9-sklearn",
+      "command": "python -c 'import sklearn'",
+      "raw": "sklearn import fails: No module named 'sklearn'"
+    },
+    {
+      "id": "OBS-9-pandas",
+      "command": "python -c 'import pandas'",
+      "raw": "pandas import fails: No module named 'pandas'"
+    },
+    {
+      "id": "OBS-10",
+      "command": "python -c 'import browsergym'",
+      "raw": "browsergym import fails: No module named 'browsergym'"
+    },
+    {
+      "id": "OBS-11",
+      "command": "python -c 'import playwright'",
+      "raw": "playwright import fails: No module named 'playwright'"
+    },
+    {
+      "id": "OBS-12",
+      "command": "env | grep -i openai",
+      "raw": "OPENAI_API_KEY present=False len=0 checked OPENAI_API_KEY/GPT4O_MINI_KEY/OPENAI_KEY env"
+    },
+    {
+      "id": "OBS-13",
+      "command": "sha256sum src/spider/kernel.py",
+      "raw": "kernel sha256=d926279d5ee14a044a2f13b8abc09202df9f5adb9e86feaadeb61818a15f4038 line=_PARAMETER = re.compile(r\"\\$\\{([A-Za-z_][A-Za-z0-9_\\.]*)\\}\")"
+    },
+    {
+      "id": "OBS-14",
+      "command": "PYTHONPATH=src python3 -m unittest tests.test_kernel -v",
+      "raw": "test_invalidation_forces_abstention (tests.test_kernel.KernelTests.test_invalidation_forces_abstention) ... ok\ntest_parameterized_mechanism_binds_only_when_guarded (tests.test_kernel.KernelTests.test_parameterized_mechanism_binds_only_when_guarded) ... ok\ntest_unknown_is_default (tests.test_kernel.KernelTests.test_unknown_is_default) ... ok\n\n----------------------------------------------------------------------\nRan 3 tests in 0.002s\n\nOK"
+    },
+    {
+      "id": "OBS-15-request.json",
+      "command": "sha256sum research/experiments/EXP-PRODUCT-35932494797/request.json",
+      "raw": "research/experiments/EXP-PRODUCT-35932494797/request.json sha256=203baed2d0384475486714bd31b8808f7ebb4c674ec6218ae2aeb7d48af0f9d6"
+    },
+    {
+      "id": "OBS-15-spec.json",
+      "command": "sha256sum research/experiments/EXP-PRODUCT-35932494797/spec.json",
+      "raw": "research/experiments/EXP-PRODUCT-35932494797/spec.json sha256=744308141960d698dd830f20b079a7f866c33bab4c57c19e66d9e6991128b674"
+    },
+    {
+      "id": "OBS-15-prereg.md",
+      "command": "sha256sum research/experiments/EXP-PRODUCT-35932494797/prereg.md",
+      "raw": "research/experiments/EXP-PRODUCT-35932494797/prereg.md sha256=999448f6fc9bc77529a272f823670b6c44a54562672a945aee0b44ac61f1289e"
+    },
+    {
+      "id": "OBS-15-freeze.json",
+      "command": "sha256sum research/experiments/EXP-PRODUCT-35932494797/freeze.json",
+      "raw": "research/experiments/EXP-PRODUCT-35932494797/freeze.json sha256=545289bd2c15e73270ba992bea1613b7af37f7d16affa36fc90ec25db3e02a9e"
+    },
+    {
+      "id": "OBS-16",
+      "command": "cat /etc/nginx/nginx.conf; ss -tlnp",
+      "raw": "user www-data;\nworker_processes auto;\npid /run/nginx.pid;\nerror_log /var/log/nginx/error.log;\ninclude /etc/nginx/modules-enabled/*.conf;\n\nevents {\n\tworker_connections 768;\n\t# multi_accept on;\n}\n\nhttp {\n\n\t##\n\t# Basic Settings\n\t##\n\n\tsendfile on;\n\ttcp_nopush on;\n\ttypes_hash_max_size 2048;\n\t# server_tokens off;\n\n\t# server_names_hash_bucket_size 64;\n\t# server_name_in_redirect off;\n\n\tinclude /etc/nginx/mime.types;\n\tdefault_type application/octet-stream;\n\n\t##\n\t# SSL Settings\n---\nState  Recv-Q Send-Q Local Address:Port Peer Address:PortProcess\nLISTEN 0      4096      127.0.0.54:53        0.0.0.0:*          \nLISTEN 0      4096   127.0.0.53%lo:53        0.0.0.0:*          \nLISTEN 0      4096         0.0.0.0:22        0.0.0.0:*          \nLISTEN 0      4096            [::]:22           [::]:*"
+    },
+    {
+      "id": "OBS-17",
+      "command": "python3 --version; pip list",
+      "raw": "Python 3.12.14\nPackage Version\n------- -------\npip     26.2.1"
+    },
+    {
+      "id": "OBS-18",
+      "command": "git rev-parse HEAD",
+      "raw": "ed1e96abf082069de0c59adae4bf061275fb0a37\n src/spider/kernel.py | 2 +-\n 1 file changed, 1 insertion(+), 1 deletion(-)"
+    }
+  ]
+}
