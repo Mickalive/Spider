@@ -1,0 +1,207 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-35888533574",
+  "lane": "product",
+  "status": "MEASUREMENT_INVALID",
+  "producer_claim_supported": false,
+  "required_fixes": [
+    "Fix SpiderKernel mechanism confidence: distill() sets confidence=0.5 < min_confidence=0.8 so kernel.resolve() never returns EXECUTABLE (returns EXPLORE) even when required_slots are satisfied; observed executable_rate_n0=0.0 on all 36 n0 tasks despite 36 mechanisms in registry.jsonl. Promote confidence to >=0.80 after verified curation or lower registry min_confidence to 0.5 and re-measure per_hit with honest branch-derived cost; current per_hit 512 vs RAG 54.7 at n0 is dominated by novel 500tok path, not governance overhead.",
+    "Fix registry action_template parameterization: induce_registry_curated() manually sets parameter_slots but leaves action_template as literal GET / with empty body (evidence_values carries slots, template carries none); required_slots therefore equals only parameter_slots but confidence gate still blocks. Ensure distill_parameterized induces template slots ${body.sku} etc via _template_slots and that induce step writes template placeholders consistent with src/spider/kernel.py _bind/__template_slots; otherwise PC2 binding_correctness cannot be 5/5 even after confidence fix.",
+    "Fix preconditions over-specificity: mechanisms carry preconditions {family: family_XX, authenticated: true, step_index: 0} from single observation; context in fresh_context_resolve uses step_index 0 for all tasks, which happens to match, but length 8-14 family-specific L is not represented and any step_index !=0 would mismatch. Generalize preconditions to family+intent only or log applicability guard and ensure family-stratified evaluation matches spec PC2 5/5 per family via actual _bind.",
+    "Fix calibration degeneracy before grading C1: softmax temp0.15+jitter yields confidence_std 0.0125 <0.05 threshold and unknown_precision 0.198 <0.85, ECE_exec n=0 (all EXEC rows UNKNOWN), ECE_all with 4/5 bins empty (1,2,3,4) and ece 0.783 — verification-derived but collapsed because at n=1.0 all tasks abstain as UNKNOWN (auditor blocks) and at n0 all abstain due to bug above, yielding confidence distribution ~0.01-0.05 binary. Require mixed hit/novel/unknown outcomes with std>0.05 and 5-bin ECE on EXEC rows n~100 before C1 can pass; do not inflate unknown_precision by counting all UNKNOWN as correct without would-verify failure discrimination (PC4 p=0.15 still non-vacuous but SUT unknown_rate 1.0 vs COLD 0.0 indicates vacuity via bug).",
+    "Fix frontier synthetic artifact before rho gate: frontier correct-family hitRate 1.0 (192/192) with char-bigram Jaccard TAU0.30 on A/B pools sharing bigrams (A-SKU-00-0 vs B-SKU-00-0 Jaccard >=0.7) forces every novel slot to reconstruct at 50tok, masking true 500tok repair cost and inverting rho to -0.447 [-0.582,-0.296] p=0.0002 instead of >=0.60. Replace pools with orthogonal alias families (header/body/auth disjoint tokens) or log orthogonal family split where hitRate 0.3-0.6 at n=1.0 and re-test rho_novelty_per_hit with block-permutation.",
+    "Correlate TLS/ETag probe state with novelty before product claim: deterministic TTL map seeded 42 assigns ttl_created uniform [0,120] vs current_time [0,200] independent of realized_n, yielding probe_hitRate 0.531 at n0 (102/192 hits, ttl_valid 0.593) vs expected ~1.0 fresh for exact-repeat. Measure probe on CDN-like fixture where n0 tasks are ~100% fresh and n1 tasks are ~0% fresh exercising ETag mismatch correlated with holdout, and re-report probe_accuracy/latencySaving/probeFalseAccept with per-step cacheHit/ttlValid/etagMatched flags.",
+    "Disclose ceiling remains file-based synthetic 192/36/49 proxy (fixtures/tasks.json sha f43e38503952, registry 36 mechanisms, qcr_bank_manifest TFIDF TAU0.30) with deterministic branch-derived cost sums, no Docker full-DOM 2000-node BrowserGym 1280x720 nor real gpt-4o-mini tokens/browser+latency; rho_proxy_real not measured. Do not claim commercial viability until Docker replication reports Pareto (accuracy vs tokens vs browser+latency) with correlation."
+  ],
+  "validity_findings": [
+    {
+      "id": "VF-PC2-BINDING-CRITICAL",
+      "severity": "critical",
+      "finding": "PC2 binding_correctness_n0 =0.0 (auditor reported 0.0, pass false) with executable_rate_n0=0.0 on 36 n0 tasks; spec requires 5/5 per family 1.0 via actual src/spider/kernel.py _bind. Mechanism confidence 0.5 < min_confidence 0.8 causes kernel.resolve to return EXPLORE not EXECUTABLE even when required_slots satisfied; action_template body {} carries no template slots so execution never enters hit 50tok path, forcing all SPIDER tasks into novel 500tok path.",
+      "evidence_refs": ["research/experiments/EXP-PRODUCT-35888533574/result.json:controls.PC-MEA-BATCHED-TTL-CACHE.observed.PC2.binding_correctness_n0=0.0", "research/experiments/EXP-PRODUCT-35888533574/result.json:controls.PC-MEA-BATCHED-TTL-CACHE.observed.PC2.executable_rate_n0=0.0", "research/experiments/EXP-PRODUCT-35888533574/artifacts/registry.jsonl sha 153bda3a356a (36 mechanisms confidence 0.5)", "research/experiments/EXP-PRODUCT-35888533574/artifacts/raw_per_task.csv: P-SPIDER-MEA-BATCHED cacheHit 156/192 but hit flag 0 for reused_steps at n0", "src/spider/kernel.py:93-123 resolve required_slots + confidence gate"],
+      "blocks_claim": true
+    },
+    {
+      "id": "VF-C1-CALIBRATION-CRITICAL",
+      "severity": "critical",
+      "finding": "C1 fails: confidence_std 0.0125 <0.05, unknown_precision 0.1979 <0.85, ECE_all 0.783 with 4/5 bins empty [1,2,3,4] n=192, ECE_exec 0.0 with 5/5 bins empty n=0. All 192 P-SPIDER rows have unknown=1, success=1, false_accept=0, confidence 0.01-0.047, yielding degenerate calibration. Spec requires derived UNKNOWN_precision>=0.85 and ECE<=0.15 with std>0.05 on verification-derived rows (MockEnv wrong_bound p=0.15 + auditor/probe/frontier UNKNOWN). Degeneracy is consequence of VF-PC2 (no EXEC rows) and correct auditor block at n=1.0, not proof of calibrated abstention.",
+      "evidence_refs": ["research/experiments/EXP-PRODUCT-35888533574/result.json:metrics.decision.criteria.C1.detail.confidence_std=0.0125", "research/experiments/EXP-PRODUCT-35888533574/result.json:metrics.decision.criteria.C1.detail.unknown_precision=0.1979", "research/experiments/EXP-PRODUCT-35888533574/result.json:metrics.decision.criteria.C1.detail.ece_all_rows", "research/experiments/EXP-PRODUCT-35888533574/artifacts/raw_per_task.csv: P-SPIDER confidence column", "research/experiments/EXP-PRODUCT-35888533574/artifacts/derived_metrics.json:primary.confidence_std"],
+      "blocks_claim": true
+    },
+    {
+      "id": "VF-RHO-INVERSION-MAJOR",
+      "severity": "major",
+      "finding": "Primary rho_novelty_per_hit -0.447 CI [-0.582,-0.296] p=0.0002 (recomputed identical) with strong negative slope -6.02 (robust SE 0.72) opposite to hypothesis rho>=0.60. R2_novelty 0.333 > R2_length 0.102 but per_hit flat ~503-512 across n while RAG scales 54->504. Negative rho is not residual-novelty tracking but artifact of frontier 100% hit masking repair cost plus fixed overhead 148/L yielding negative rho_length per stratum -0.46 to -0.85 on M_per_hit.",
+      "evidence_refs": ["research/experiments/EXP-PRODUCT-35888533574/result.json:metrics.primary.rho_novelty_per_hit=-0.4465", "research/experiments/EXP-PRODUCT-35888533574/result.json:metrics.primary.bootstrap_rho_ci95", "research/experiments/EXP-PRODUCT-35888533574/artifacts/raw_per_task.csv: per_hit_by_level P-SPIDER 512/503/504/503/503 vs B-RAG", "research/experiments/EXP-PRODUCT-35888533574/artifacts/derived_metrics.json:primary.ols"],
+      "blocks_claim": true
+    },
+    {
+      "id": "VF-FRONTIER-ARTIFACT-MAJOR",
+      "severity": "major",
+      "finding": "FrontierHit correct-family 1.0 (192/192) with crossFamilyAdoption 0 passes gating check, but hitRate 1.0 at n=1.0 is by construction: A/B pools share char-bigram Jaccard >=0.7 (e.g., A-SKU-00-0 vs B-SKU-00-0) so Jaccard>=0.30 always fires, converting every novel 500tok to 50tok reconstruction. Retrieval_use_gap 192/192 and frontier_use_gap 192/0 logged but both gaps indicate tautological hit. This inflates SPIDER/TERX <1.0 at n>=0.25 (0.997-0.999) while SPIDER/RAG at n0 remains 9.35.",
+      "evidence_refs": ["research/experiments/EXP-PRODUCT-35888533574/result.json:metrics.primary.frontier_hit_rate_correct_family=1.0", "research/experiments/EXP-PRODUCT-35888533574/artifacts/frontier_adapter_traces.json", "research/experiments/EXP-PRODUCT-35888533574/run_experiment.py:FrontierAdapter tau=0.30 jaccard_tokens bigrams", "research/experiments/EXP-PRODUCT-35888533574/artifacts/raw_per_task.csv: frontierHit 1 for all P-SPIDER"],
+      "blocks_claim": true
+    },
+    {
+      "id": "VF-PROBE-DECOUPLED-MINOR",
+      "severity": "minor",
+      "finding": "TTL/ETag probe accuracy 1.0, latencySaving 0.398 >=0.30, probeFalseAccept 0.0 <0.05 correctly measured on ~50% stale fixture (n_stale 90, probe_hitRate 0.531, ttl_valid 0.593) exercising ETag mismatch. However deterministic map seeded 42 decouples freshness from novelty: at n0 exact-repeat expected fresh ~1.0 but observed 0.53, so probe saving does not correlate with residual novelty. Probe infrastructure works but does not demonstrate CDN freshness gating.",
+      "evidence_refs": ["research/experiments/EXP-PRODUCT-35888533574/result.json:controls.PC-MEA-BATCHED-TTL-CACHE.observed.PC3.probe_accuracy=1.0", "research/experiments/EXP-PRODUCT-35888533574/artifacts/probe_traces.json sha 17585827b41c", "research/experiments/EXP-PRODUCT-35888533574/provenance.json:ttl_probe ttl_created [0,120] current [0,200] max_age 60"],
+      "blocks_claim": false
+    },
+    {
+      "id": "VF-BATCHED-CACHE-SUCCESS",
+      "severity": "minor",
+      "finding": "Batched MEA cache correctly implemented: per-family TTL 60s cacheHitRate 0.8125 (156/192 hits), effectiveFetchAvg 26.875 tok (~28 target), auditor_block_rate 1.0 on both miss and hit paths (38 blocked 154 passed), provenance hash chain with cacheHit flag logged. This is the only SUT component that passes spec thresholds without artifact; cost reduction 100->27tok is honest per-step sum including hit/miss branch.",
+      "evidence_refs": ["research/experiments/EXP-PRODUCT-35888533574/result.json:metrics.primary.cacheHitRate=0.8125", "research/experiments/EXP-PRODUCT-35888533574/artifacts/cache_traces.json sha 712c61571c", "research/experiments/EXP-PRODUCT-35888533574/artifacts/branch_traces.json"],
+      "blocks_claim": false
+    },
+    {
+      "id": "VF-SYNTHETIC-CEILING-DISCLOSURE",
+      "severity": "major",
+      "finding": "Census is synthetic file-based proxy replicating 36/49 192-task WebArena structure via parent fixtures/tasks.json f43e3850; not Docker full-DOM 2000-node BrowserGym 1280x720 CDP AX tree nor real gpt-4o-mini tokens/browser calls. Provenance correctly discloses docker_available false, gunicorn+nginx simulated map, numpy/sklearn unavailable, qcr_bank_manifest TFIDF TAU0.30. Claim ceiling must be bounded to proxy; no rho_proxy_real measured.",
+      "evidence_refs": ["research/experiments/EXP-PRODUCT-35888533574/provenance.json:docker_available=false", "research/experiments/EXP-PRODUCT-35888533574/result.json:validity_notes[0]", "research/experiments/EXP-PRODUCT-35888533574/artifacts/qcr_bank_manifest.json sha 1289453d58"],
+      "blocks_claim": true
+    },
+    {
+      "id": "VF-COST-ACCOUNTING-HONEST",
+      "severity": "minor",
+      "finding": "Honest kernel-gated branch-derived cost verified: no bijective n*3200 or 250+500*int(10n) formula; per_task cost sums retrieval 200 + auditor_batched 10/100 + probe 10/30 vs full 50/120 + hit 50 vs novel 500+repair 500 + distill 1000/10 + auditor 100/10 + frontier 50; per_hit=(M_total - retrieval - distill - auditor - frontierHit)/L correctly excludes fixed overhead. Producer and auditor recomputation matches.",
+      "evidence_refs": ["research/experiments/EXP-PRODUCT-35888533574/provenance.json:cost_model honest_branch_derived true", "research/experiments/EXP-PRODUCT-35888533574/run_experiment.py:execute_spider_mea_batched per_hit calc", "research/experiments/EXP-PRODUCT-35888533574/artifacts/raw_per_task.csv: tokens 4510 vs per_hit 518.75 with frontier 50 excluded"],
+      "blocks_claim": false
+    }
+  ],
+  "baseline_findings": [
+    {
+      "id": "BF-B-RAG-EMBED-HONEST",
+      "baseline": "B-RAG-EMBED",
+      "finding": "Correctly implements QCR frozen-bank same-ranker TFIDF Jaccard TAU0.30 top-1 verbatim bind with proportional retrieval: hitRate depends on Jaccard, costs retrieval 200tok+150ms, hit 50tok vs novel 500tok, per_hit 54.7 at n0, 208 at n0.25, 345 at n0.5, 458 at n0.75, 504.7 at n1. Not starved: same 192 splits, same frozen bank 36 families, retrieval-use gap logged. Recomputed per_hit matches producer within 1e-9. Adequate strong baseline.",
+      "evidence_refs": ["research/experiments/EXP-PRODUCT-35888533574/artifacts/raw_per_task.csv: B-RAG retrieval_hit vs qcr_jaccard", "research/experiments/EXP-PRODUCT-35888533574/artifacts/qcr_bank_manifest.json", "research/experiments/EXP-PRODUCT-35888533574/result.json:metrics.ratios.per_hit_by_level.B-RAG-EMBED"],
+      "strength": "strong",
+      "starved": false
+    },
+    {
+      "id": "BF-B-STAGEHAND-CACHE-HONEST",
+      "baseline": "B-STAGEHAND-CACHE",
+      "finding": "Correctly implements Stagehand DOM-hash serverCache: hit iff n=0 exact repeat (36/36), else COLD, hit cost 50tok+120ms +1 call (not 400). Observed stage_hit_rate 1.0 at n0, per_hit 54.7479 at n0 else ~504.7. Recomputed matches. Represents shipped 30% cost / 2x speedup baseline per Director priors.",
+      "evidence_refs": ["research/experiments/EXP-PRODUCT-35888533574/result.json:controls.PC-MEA-BATCHED-TTL-CACHE.observed.PC1.stage_hit_rate=1.0", "research/experiments/EXP-PRODUCT-35888533574/artifacts/raw_per_task.csv: B-STAGEHAND per_hit_by_level"],
+      "strength": "strong",
+      "starved": false
+    },
+    {
+      "id": "BF-B-TERX-REPLAY-HONEST",
+      "baseline": "B-TERX-REPLAY",
+      "finding": "Correctly implements TERX 0-token replay: hit iff test identifier sequence equals training trajectory at n=0 (36/36), else fallback COLD, verify cost 50tok honest (not 400). Observed terx_hit_rate 1.0 at n0 per_hit 54.7479 else ~504.7. Recomputed matches. Baseline not artificially weakened.",
+      "evidence_refs": ["research/experiments/EXP-PRODUCT-35888533574/result.json:controls.PC-MEA-BATCHED-TTL-CACHE.observed.PC1.terx_hit_rate=1.0", "research/experiments/EXP-PRODUCT-35888533574/run_experiment.py:execute_baseline B-TERX"],
+      "strength": "strong",
+      "starved": false
+    },
+    {
+      "id": "BF-B-COLD-DENOMINATOR",
+      "baseline": "B-COLD",
+      "finding": "Cold start correctly flat vs novelty: per_hit 504.7 across all n (|rho|~0), tokens ~5497, 22.79 browser calls, no retrieval/probe/auditor/frontier, serving as valid denominator for saving ratios SPIDER/COLD 1.07-1.08 (no saving).",
+      "evidence_refs": ["research/experiments/EXP-PRODUCT-35888533574/artifacts/raw_per_task.csv: B-COLD per_hit_by_level", "research/experiments/EXP-PRODUCT-35888533574/result.json:metrics.ratios.total"],
+      "strength": "strong",
+      "starved": false
+    },
+    {
+      "id": "BF-NC-CONTROLS-DISCRIMINATING",
+      "baseline": "NC-MEA-BATCHED-SHUFFLE",
+      "finding": "Null controls are discriminating and non-vacuous: NC1 rho 0.0 p=1.0 success 0.177 unknown 0.822, NC2 false_accept 0.161 in [0.10,0.60] proving MockEnv wrong_bound p=0.15 can fail, NC3 R2 0 rho 0 length-proportional control, NC4 curatedDelta 0.354 and ablation false_accept 0.354 proving curation+auditor causal. All pass thresholds, confirming environment can express FALSIFIED/MIXED.",
+      "evidence_refs": ["research/experiments/EXP-PRODUCT-35888533574/result.json:controls.NC-MEA-BATCHED-SHUFFLE.observed", "research/experiments/EXP-PRODUCT-35888533574/artifacts/raw_per_task.csv: NC1-SHUFFLED NC2-RANDOM"],
+      "strength": "strong",
+      "starved": false
+    }
+  ],
+  "recomputed_metrics": {
+    "SPIDER_MEA_RAG_per_hit_n0": 9.35442438714637,
+    "SPIDER_MEA_RAG_per_hit_n025": 2.4200708584760595,
+    "SPIDER_MEA_STAGE_per_hit_n0": 9.35442438714637,
+    "SPIDER_MEA_TERX_per_hit_n025": 0.9973345726257681,
+    "SPIDER_MEA_TERX_per_hit_n05": 0.9991979536848828,
+    "SPIDER_MEA_TERX_per_hit_n075": 0.9974956345681806,
+    "SPIDER_MEA_TERX_per_hit_n100": 0.9982287118630103,
+    "per_hit_by_level_P_SPIDER_MEA_BATCHED": {
+      "0.0": 512.1355835522502,
+      "0.25": 503.4467825621672,
+      "0.5": 504.347165654858,
+      "0.75": 503.4550549165934,
+      "1.0": 503.87228298766763
+    },
+    "per_hit_by_level_B_RAG_EMBED": {
+      "0.0": 54.74795266461933,
+      "0.25": 208.02976937592322,
+      "0.5": 345.37768855076547,
+      "0.75": 458.010668106822,
+      "1.0": 504.76636967021585
+    },
+    "rho_novelty_per_hit": -0.4465355651918174,
+    "rho_novelty_per_hit_bootstrap_ci95": [-0.5819203255191957, -0.2955696522722809],
+    "rho_novelty_per_hit_block_permutation_p": 0.00019996,
+    "rho_length_per_hit_pooled_recomputed": -0.43530789606738357,
+    "rho_length_per_hit_per_stratum": {
+      "0.0": -0.8581299717439714,
+      "0.25": -0.46126149366937713,
+      "0.5": -0.7401790583269622,
+      "0.75": -0.7666771416834811,
+      "1.0": -0.5408444720529291
+    },
+    "R2_delta_per_hit": 0.23159377729357222,
+    "R2_novelty": 0.33377044733400973,
+    "R2_length": 0.10217667004043751,
+    "cacheHitRate": 0.8125,
+    "effectiveFetchAvg_tok": 26.875,
+    "probe_hit_rate": 0.53125,
+    "probe_accuracy": 1.0,
+    "probe_false_accept": 0.0,
+    "probe_latency_saving_measured": 0.3984375,
+    "probe_ttl_valid_rate": 0.59375,
+    "frontier_hit_rate_correct_family": 1.0,
+    "frontier_cross_family_adoption": 0,
+    "auditor_block_rate": 1.0,
+    "auditor_block_count": 38,
+    "auditor_pass_count": 154,
+    "binding_correctness_n0_recomputed": 0.0,
+    "executable_rate_n0_recomputed": 0.0,
+    "success_P_SPIDER_all": 1.0,
+    "unknown_rate_P_SPIDER": 1.0,
+    "false_accept_P_SPIDER": 0.0,
+    "unknown_precision_P_SPIDER": 0.19791666666666666,
+    "confidence_std_P_SPIDER": 0.012524798275086,
+    "ece_all_rows": {"ece": 0.783559375, "empty_bins": [1,2,3,4], "n": 192},
+    "ece_exec_rows": {"ece": 0.0, "empty_bins": [0,1,2,3,4], "n": 0},
+    "stage_hit_rate_n0": 1.0,
+    "terx_hit_rate_n0": 1.0,
+    "recomputed_from": "artifacts/raw_per_task.csv sha 2bc05ae31189 and artifacts/registry.jsonl sha 153bda3a"
+  },
+  "claim_ceiling": "MEASUREMENT_INVALID bounded to file-based synthetic WebArena-Verified v2 192/36 proxy with honest kernel-gated f=10 cost: NO claim of C-RESIDUAL-NOVELTY per_hit <=0.85 vs RAG at n0/n0.25 or <=1.20 vs Stagehand at n0 or <1.0 vs TERX with rho>=0.60 is supported (observed SPIDER/RAG 9.35 at n0, 2.42 at n0.25, rho -0.447). Maximum justified ceiling: batched MEA verified_state caching per-family TTL60s works as specified (cacheHit 0.8125 effectiveFetch 26.9tok auditor block 1.0 on both paths provenance logged) and TTL/ETag probe discriminates fresh vs stale with accuracy 1.0 saving 39.8% falseAccept 0 with ~50% stale exercising ETag mismatch, and frontier correct-family gating shows 0 cross-family adoption, and null controls are discriminating (NC2 false_accept 0.161) and curated delta 0.354 demonstrates curation causal. Product economics remains FALSIFIED on this census due to SUT never entering hit path (executable 0.0). C-RESIDUAL-NOVELTY and C-PRODUCT-ECON remain HYPOTHESIS globally; do not promote MEA-batched harness.",
+  "evidence_refs": [
+    "research/experiments/EXP-PRODUCT-35888533574/request.json sha 2190b970",
+    "research/experiments/EXP-PRODUCT-35888533574/spec.json sha e5f85b20",
+    "research/experiments/EXP-PRODUCT-35888533574/prereg.md sha 080b983430",
+    "research/experiments/EXP-PRODUCT-35888533574/freeze.json sha 0fed...",
+    "research/experiments/EXP-PRODUCT-35888533574/result.json sha d24df359",
+    "research/experiments/EXP-PRODUCT-35888533574/artifacts/raw_per_task.csv sha 2bc05ae31189",
+    "research/experiments/EXP-PRODUCT-35888533574/artifacts/branch_traces.json sha c0064afa48",
+    "research/experiments/EXP-PRODUCT-35888533574/artifacts/probe_traces.json sha 17585827b41c",
+    "research/experiments/EXP-PRODUCT-35888533574/artifacts/frontier_adapter_traces.json sha 554797fe75db",
+    "research/experiments/EXP-PRODUCT-35888533574/artifacts/cache_traces.json sha 712c61571c",
+    "research/experiments/EXP-PRODUCT-35888533574/artifacts/registry.jsonl sha 153bda3a356a",
+    "research/experiments/EXP-PRODUCT-35888533574/artifacts/derived_metrics.json sha d5dbde5dd2df",
+    "research/experiments/EXP-PRODUCT-35888533574/artifacts/cost_config.json sha 0d9fe522c4c5",
+    "research/experiments/EXP-PRODUCT-35888533574/artifacts/qcr_bank_manifest.json sha 1289453d5841",
+    "research/experiments/EXP-PRODUCT-35888533574/provenance.json",
+    "research/experiments/EXP-PRODUCT-35888533574/report.md",
+    "src/spider/kernel.py sha 46929b3a951df",
+    "codex/claim_state.json C-RESIDUAL-NOVELTY HYPOTHESIS"
+  ],
+  "unresolved": [
+    "Whether fixing kernel.resolve confidence/precondition bug to allow executable_rate_n0 1.0 would reduce SPIDER per_hit at n0 from 512 to ~50-70 and achieve ratio <=0.85 vs RAG (target per spec) while preserving batched cache 0.81 hitRate and probe 0.39 saving, and restore rho to >=0.60.",
+    "Whether frontier adapter with orthogonal alias families (disjoint header/body/auth token vocabularies, Jaccard <0.30 across families) yields hitRate 0.3-0.6 at n1 instead of 1.0, enabling genuine selective reconstruction and honest rho_length <0.20 vs current -0.43 to -0.85 per stratum.",
+    "Whether TTL/ETag probe state correlated with task novelty on real CDN (n0 ~1.0 fresh, n1 ~0.0 fresh) preserves 30% latency saving while contributing to per_hit novelty tracking vs current random 0.53 fresh at n0.",
+    "Whether confidence calibration can achieve std>0.05 and UNKNOWN_precision>=0.85 with mixed EXEC (n0 hits) and UNKNOWN (auditor rejects) outcomes once SUT leaves degenerate all-UNKNOWN mode; current std 0.0125 reflects all-UNKNOWN collapse not softmax miscalibration.",
+    "Whether honest amortized proxy costs at f=10 (and exploratory f=100) correlate with real gpt-4o-mini+Playwright Docker 1280x720 tokens/browser_calls/latency and preserve Pareto dominance vs COLD/RAG/Stagehand/TERX on 2000-node full-DOM (rho_proxy_real unmeasured, docker_available false).",
+    "Whether curated 5 demos/family filtered by verified_state still gives delta >0.10 over uncurated on production tasks with heterogeneous postconditions beyond synthetic mock (current curatedDelta 0.354 on proxy).",
+    "Whether richer DOM/QCR post-retrieval (all-MiniLM embeddings, 2000-node CDP AX tree hash) changes retrieval-use gap (192/192 tautological) and per_hit parity vs Stagehand 80% speedup on real sites."
+  ]
+}
