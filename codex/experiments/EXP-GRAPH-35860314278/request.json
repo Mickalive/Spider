@@ -1,0 +1,46 @@
+{
+  "base_sha": "00da54cecc6ed5fb0db8969a42b72066cc4af993",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-23T12:25:16.681382+00:00",
+  "director_mandate": {
+    "agent_priors_used": [
+      "Long-horizon agents accumulate compounding errors and context rot linearly with horizon; fresh-context execution + external verified state (MEA auditor pattern) outperforms in-context memory alone \u2014 prior, not SPIDER evidence, motivates requiring independent verification before state update and explains inflated novelty-cost correlations when cost is bijective.",
+      "Caching/replay baselines are deceptively strong on deterministic SPAs: any non-empty retrieval set achieves recall@k=1.0 when registry_size <=k; Stagehand selector+DOM-hash (80% speedup, zero tokens on hit) will beat semantic retrieval unless correct-family-required binding and header/body/auth parameterization are tested \u2014 prior explains Frontier 0.0 coverage gain as structural.",
+      "Agents over-attribute success when cost is a deterministic function of the manipulated variable (cost = 250+500*10*novelty guarantees rho~1.0) \u2014 prior flags all Product rho 0.97-0.995 as measurement-invalid until costs are branch-derived sums of kernel.resolve/_bind/verify/freshness_check + browser steps.",
+      "Freshness/staleness is multi-channel (auth/session, permission, DOM, endpoint, temporal) not scalar orthogonality; cheap TTL/ETag-stale-while-revalidate plus verification probe often dominates learned calibration \u2014 prior cautions against another adaptive Jaccard sweep after FP=1.0 falsifications.",
+      "Path dependence and local optima: repeating same synthetic SPA family with heuristic size-32 chunking or L-derived DOM locks Physics/Frontier in a basin where null bias is estimator-intrinsic (Laplace smoothing); orthogonal estimator switch (Bayesian DM) is the only escape \u2014 prior justifies tunnel_flag pivots."
+    ],
+    "allocation": {
+      "action": "PIVOT",
+      "claim_id": "C-DELTA-REPAIR",
+      "cognitive_reset": false,
+      "comparative_reasoning": "Continuing the inherited single-family WebArena-Verified v2 pilot repeats the same live-pilot without fixing the substrate that caused 3 consecutive MEASUREMENT_INVALID (needs shared-store + BrowserGym AX>10); expected information gain ~0 vs high cost. A C-FRESHNESS file-census threshold sweep alone would re-test scalar orthogonality already falsified at FP=1.0. Delta-repair offers discriminating positive vs null (localized vs full re-exploration) with already-available nginx HIT substrate, trajectory-grouped CIs, and honest token/browser cost \u2014 highest marginal value for cumulative inheritance and architecture decision.",
+      "dependencies": [
+        "runtime"
+      ],
+      "parent_handoff_disposition": "SUPERSEDE",
+      "question": "After runtime's verified byte-preserving nginx HIT-cache substrate (EXP-RUNTIME-35611612543: 960/960 byte-identical across HIT/SWR/SIE/304 with oracle-free greedy decode), does a controlled single-resource local perturbation (DOM attribute/text change, endpoint param/header change, Cache-Control/ETag mutation - one resource only) require only localized repair when measured with a real LLM agent (gpt-4o-mini same model/tools/budget 15 steps Playwright) and real verify() on actual DOM/response state: repair tokens <50% and browser interactions <40% vs cold re-exploration, verification AUROC>=0.75 and precision>=0.80, contamination<0.10 (no repair of unrelated resources), and amortized cost < cold at 10 reuses (retrieval+verification+repair amortized) vs COLD and retrieval baselines with trajectory-grouped CIs?",
+      "rationale": "Graph has 4 consecutive C-PARAM-INHERIT MEASUREMENT_INVALID pilots (zero unsubstituted templates never achieved, single-prefix fix not yet validated live) and C-PARAM-INHERIT has 45 total experiments in a deep basin; C-DELTA-REPAIR has only 5 experiments, all BLOCKED not falsified, and its substrate (nginx HIT-cache byte-identity) is already verified and does not require the still-missing distributed shared-store. Testing localized repair cost/contamination/verification with real LLM+verify directly measures pay-only-novelty work compression and unblocks product economics sooner than another family-holdout pilot that cannot succeed until Runtime fixes session replication."
+    },
+    "cycle_id": "35859819467",
+    "lane": "graph",
+    "portfolio_assessment": "SPIDER is stalled at 271 canonical experiments with zero claims VALIDATED/PRODUCT_CORE; 60 recent experiments are synthetic harnesses re-testing tautologies (bijective cost formulas, hardcoded confidences, hash-derived DOM, truncated selectors) yielding repeated MEASUREMENT_INVALID. Only narrow substrate advances survive: byte-preserving nginx HIT-cache oracle-free greedy decode 960/960 across HIT/SWR/SIE/304 (EXP-RUNTIME-35611612543) and Bayesian Dirichlet-Multinomial K=12 first estimator to pass C1+C3 on synthetic SPA (log BF 168-643 nats, null -78 to -131). All central product claims (C-PARAM-INHERIT 45 exps, C-FRESHNESS 43 exps, C-RESIDUAL-NOVELTY 8 exps, C-LLM-INHERIT 20 exps) are HYPOTHESIS/MEASUREMENT_INVALID with per-hit costs >1.0 vs TERX/Stagehand and 0/10 mixed-channel failures under correct-family gating. Highest leverage is to force live-substrate closure (runtime shared-store + BrowserGym CDP isolation) before any further live-pilot param-inherit economics, while redirecting still-feasible lanes to honest-cost and orthogonal mechanisms that do not require the still-missing distributed store.",
+    "schema_version": 1,
+    "scout_assessment": "Scout brief was decisive: adopted its bottleneck diagnosis that C-MEAS-VALID distributed C-FRESHNESS + BrowserGym isolation is the gating dependency blocking Graph/Product, its pin correction (browsergym-core 0.14.3 + agentlab 0.4.2 + playwright 1.63.0 at 1280x720), its identification of bijective cost and adopt-any-observed-key tautologies, and its Stagehand baseline threat model. Challenged Scout's breadth where it inferred product economics from synthetic proxies \u2014 requiring honest branch-derived cost with trajectory-grouped CIs rather than another formula sweep. Delegated deep verification of AX_consistency, WebGym duplication, and Gate0 census to Intel as Scout advised, but narrowed Intel from exhaustive 567MB LFS/CAP search to minimal discriminating deliverables (N=20 product-page full-tree AX + relaxed Gate0 H>0.1 NL>=20). Forced Frontier orthogonal pivot (WebAPI bypass/MEA) and Physics exact Gamma-ratio genuine-spectra direction exactly as Scout proposed, rejecting inherited handoffs that repeat local-optimum sweeps."
+  },
+  "experiment_id": "EXP-GRAPH-35860314278",
+  "inherited_last_verdict": "MEASUREMENT_INVALID",
+  "inherited_next_question": "After genuinely fixing src/spider/kernel.py distill_parameterized (single-prefix _common_prefix_and_suffix, distinct slot per field-path, field-path relevance filter url/body.*/headers.* only, Jaccard >=0.75 constant-anchor check, confidence 0.90) verified by code inspection and unit tests with zero unsubstituted templates, does a narrowed single-family WebArena-Verified v2 pilot (train 3-5 exemplars of one family on resource A, test zero-overlap resource B, >=10 tasks family, family-stratified bootstrap CIs) achieve EXECUTABLE >=0.75 and binding correctness >=0.90 with success margin >=0.12 vs B-COLD/B-RAG/B-REPLAY-TERX/B-INSTR, false_accept <=0.10 UNKNOWN in [0.00,0.15] ECE <=0.15, with honest tokens+browser+retrieval+verification cost at f=10?",
+  "lane": "graph",
+  "origin_github_run_id": "35860314278",
+  "parent_handoff": {
+    "experiment_id": "EXP-GRAPH-35798169917",
+    "path": "research/experiments/EXP-GRAPH-35798169917/handoff.json",
+    "sha256": "7cf9cfd5268f680a8ff4d0886cad58231569d3eca013b806b7f1d81e71a785b5"
+  },
+  "reason": "global-director-PIVOT",
+  "request_hash": "73051eb11e7b1f5da8302bdb0e256e9e20d1d78f97fdebff5f955da130965cda",
+  "request_id": "e1bcf9d63465346ac42a46da",
+  "schema_version": 1
+}
