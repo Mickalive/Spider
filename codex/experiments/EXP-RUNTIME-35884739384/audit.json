@@ -1,0 +1,171 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-35884739384",
+  "lane": "runtime",
+  "status": "REVISE",
+  "producer_claim_supported": true,
+  "required_fixes": [
+    "Remove shared-variable confound from structural signal before any VALIDATED claim: structural_signal must not include status (run_experiment.py:261 f\"{status}|{body_variant}|\") per measurement_validity clause 8; current inclusion leaks behavioral status into structural hash and biases stratified r; recomputation without status shows r=+0.62 (worse), so C3 failure is robust but future orthogonality tests must use status-free structural (hash(body) only) and document body_variant cycling confound",
+    "Execute B-STICKY as URL-bound hash $request_uri consistent per Director mandate/REOPEN question, not hash $remote_addr consistent (run_experiment.py write_nginx_conf sticky branch); single-IP ip_hash collapses to 1200/1200 on one worker (result.json sticky_worker_distribution 65764:1200) and masks affinity vs replication isolation; sticky must be re-tested with real URL distribution and without mirroring sessions to both DBs if testing affinity alone",
+    "Eliminate start-up connection-refused race: shared arm shows 17/1200 observations with status None and missing X-Worker-Pid (raw_freshness_shared.jsonl sample_idx 4,5 HTTPConnectionPool Max retries) before nginx health fully ready; gate distributed harness start on successful /health via nginx and retry failed samples or report effective n after exclusion",
+    "Restore per-value gradient sample size to prereg N=20 per state: browser gradients currently n_a=3-4 (result.json browser_gradient_* n_a 3/4) vs frozen N=20 nominal; raw_observations.jsonl 396 lines (198 browser +198 direct) vs 520 nominal understates power for non-degenerate CI ordering; increase to 20 before claiming sensitivity ordering"
+  ],
+  "validity_findings": [
+    {
+      "id": "V1_FRESHNESS_TN_RECOMPUTED_MATCH",
+      "severity": "info",
+      "finding": "Shared-store TN recomputation matches producer: shared mean 0.9860 (Wilson lo 0.969) with session_status 0.958 (lo 0.911) and profile/data_list 1.0; per-node mean 0.6667 session_status 0.0 replicates failure; sticky mean 0.960 session_status 0.880. Correct formula P(bc<=0.05|valid) with Wilson CI used (not inverted). n_non304 shared 1052/1183, per_node 1107/1200, sticky 1068/1200 all >=800 after real If-None-Match/ETag 304 (131/93/132 real 304s). HS256 valid success shared 0.991 (665/671) and sticky 0.973 pass >=0.90 gate; per_node 0.667 expected failure due to missing session replication not HS256 bug.",
+      "evidence": "research/experiments/EXP-RUNTIME-35884739384/raw_freshness_shared.jsonl 1200 lines endpoints 400 each, recomputed valid TN 139/139 142/142 137/143; raw_freshness_per_node.jsonl; raw_freshness_sticky.jsonl; result.json shared_freshness_c1_tn_* matches recomputed within 1e-12; batch_state_log_shared.jsonl 31 lines distinct timestamps >=27",
+      "affects_claim": false
+    },
+    {
+      "id": "V2_ROUND_ROBIN_VERIFIED_WITH_MINOR_MISSING",
+      "severity": "low",
+      "finding": "X-Worker-Pid distribution verifies real nginx round-robin for primary arms: shared 588/595 (2 workers) and per_node 597/603 each >=10 per worker; 17/1200 shared observations lack worker_id due to connection-refused before nginx ready (status None). Missing fraction 1.4% does not undermine power (n_non304 1052 still >=800) but indicates harness started sampling before wait_http fully stable.",
+      "evidence": "raw_freshness_shared.jsonl workers {'65443':588,'65439':595,'None':17}; raw_freshness_per_node.jsonl {'65641':597,'65642':603}; run_experiment.py wait_http and batch_size 45 with jitter 50-150ms; provenance ports gunicorn 19860 nginx 19851",
+      "affects_claim": false
+    },
+    {
+      "id": "V3_COMMIT_VERIFICATION_PASS",
+      "severity": "info",
+      "finding": "Per-batch SELECT commitment verification passes: batch_state_log_shared/per_node/sticky each 31 lines (warmup 3 + 27 batches + final) with distinct timestamps 50ms apart and session_count/session_valid_count logged via both direct DB SELECT and /admin/state HTTP; per-observation db_path correctly points to shared.db for shared arm and mirrored worker DBs for sticky.",
+      "evidence": "batch_state_log_shared.jsonl sha 81692043 31 lines timestamp 2026-09-23T18:01:00-18:01:14; batch_state_log_per_node.jsonl 31 lines; batch_state_log_sticky.jsonl 31 lines; run_experiment.py ensure_schema and session_snapshot per batch",
+      "affects_claim": false
+    },
+    {
+      "id": "V4_ORTHOGONALITY_FALSIFIED_NOT_INVALID",
+      "severity": "high",
+      "finding": "Stratified orthogonality correctly fails: recomputed shared stratified r=-0.3579 CI [-0.409,-0.303] upper -0.303 <0.15 but pooled |r|=0.357 >0.15 and per-endpoint r profile -0.47 data_list -0.39 session_status -0.19, TOST p_upper 0.0 but condition abs(r)<delta fails so tost_pass false. Per_node r=-0.28 and sticky r=-0.33 also fail. 8/8 variance pass (bc_std>0 struct_std>0) and noise FP 0.0 (shared) but pooled correlation indicates behavioral and structural co-vary across harness body_variant cycle, violating delta=0.15. This is valid falsification-in-setting, not hardcoded TOST; producer correctly reports MIXED.",
+      "evidence": "result.json shared_freshness_stratified_r -0.357882 ci_lo -0.409 ci_hi -0.303 tost_pass false; recomputed pearson per endpoint via raw_freshness_shared.jsonl matches within 1e-12; run_experiment.py stratified_r_tost Fisher-z pooling with delta 0.15",
+      "affects_claim": true
+    },
+    {
+      "id": "V5_STRUCTURAL_STATUS_CONFOND",
+      "severity": "medium",
+      "finding": "Structural signal includes status prefix f\"{status}|{body_variant}|\"+body (run_experiment.py:264) violating measurement_validity clause 8 no shared-variable confound (structural must be body-only, behavioral status-only). Bias tested: status-free structural r becomes +0.62 pooled (profile +0.62 data_list +0.49 session +0.92), even more non-orthogonal, so violation does not rescue C3 but inflates correlation magnitude and sign; future tests must remove status from structural and de-confound body_variant cycling from drift.",
+      "evidence": "run_experiment.py:261-265 structural_signal; recomputation with body_sha-only r=+0.625 vs original -0.355; prereg 8 measurement_validity clause requiring no overlapping hash composition",
+      "affects_claim": true
+    },
+    {
+      "id": "V6_STICKY_MISCONFIGURATION",
+      "severity": "medium",
+      "finding": "Sticky arm uses hash $remote_addr consistent (ip_hash) not hash $request_uri consistent (URL-bound) required by Director mandate REOPEN question. With single client IP, all 1200 sticky samples pin to one worker 65764:1200 (100% skew). Passage of TN>=0.85 on sticky is due to replicate_session_to_workers=True mirroring sessions to both DBs, not to affinity alone; isolated-affinity effect is untested. B-PER-NODE baseline correctly shows replication without shared store fails (TN 0.667).",
+      "evidence": "run_experiment.py write_nginx_conf sticky branch hash $remote_addr consistent; result.json sticky_freshness_worker_distribution {'65764':1200}; sticky_freshness_tn_mean 0.960; per_node TN 0.666; provenance db_paths sticky_a/b",
+      "affects_claim": true
+    },
+    {
+      "id": "V7_BROWSER_PROVISION_VALID_DEGENERATE_CEILING",
+      "severity": "low",
+      "finding": "Browser provision valid: AgentLab 0.4.2 importable, 0.14.3 absent as expected, Playwright 1.63.0 chromium at 1280x720 viewport verified per observation, CDP AX median 54 on /resource pages PC-HEALTH 100% (>=80) DOM median 26 range 26 within 21-82. Fingerprint discrimination preserved via real page.request: body AvsC full 1.0 status 0 headers-no-CLEN 0 and header AvsE full 1.0 body 0 CLEN 31==31 for both browser and direct arms, nulls 0.0 CI contains 0. X-Worker-Pid present on browser fetches (65889/65888). All CIs degenerate [1.0,1.0]/[0.0,0.0] width 0 effective distinct N=1 per state disclosed, not high precision; per-value gradients (1B/2B/4B/39B/86B CC/ETag/SC/Vary) all 1.0 degenerate, so sensitivity ordering remains untested beyond ceiling. Sample size 396 (198 browser +198 direct) with gradient n=3-4 underpowers ordering.",
+      "evidence": "raw_observations.jsonl 396 lines fetch_method browser_page_request 198 direct 198 body_len 31/32/33/35/70/117 CLEN==body_len 0 mismatches; ax_dom_pages.jsonl 10 pages ax_nodes 54 dom_nodes 26 viewport 1280x720; result.json bg_* and browser_body/header metrics all degenerate true width 0 effective_distinct_n 1",
+      "affects_claim": false
+    }
+  ],
+  "baseline_findings": [
+    {
+      "id": "B-PER-NODE",
+      "expected": "Mean TN ~0.667 (<0.85) with session_status 0.0 via real nginx round-robin isolated DB, same HS256 secret, proving replication failure not algorithm; X-Worker-Pid >=10 per worker; real 304 exercised",
+      "observed": "Mean 0.6667 session_status 0.0 profile/data_list 1.0 via 1107 non-304 real HTTP; hs_rate 0.667 (454/680) reflects session_status invalid due to missing sessions not HS256 bug; workers 597/603 balanced; variance 8/8. Replicates prior distributed failure as negative baseline.",
+      "verdict": "PASS",
+      "strength": "strong",
+      "evidence": "raw_freshness_per_node.jsonl 1200 lines; result.json per_node_freshness_c1_tn_*; recomputed TN 0/173 session_status"
+    },
+    {
+      "id": "B-SHARED-STORE",
+      "expected": "TN>=0.85 (Wilson lo>0.75 session_status>=0.85) n_non304>=800 stratified r TOST within 0.15 X-Worker-Pid >=10 per worker 8/8 variance FP<=0.15 via shared WAL at /tmp/spider-runtime-35860330078/shared.db with HS256 shared-secret",
+      "observed": "TN 0.986 mean lo 0.969 session_status 0.958 lo 0.911 passes C1; n_non304 1052 passes C2; variance 8/8 FP 0.0 passes C4; r -0.357 fails C3 TOST (abs>0.15); workers 588/595 pass routing; batch log 31 lines. Primary intervention restores detection but fails orthogonality.",
+      "verdict": "PARTIAL",
+      "strength": "strong",
+      "evidence": "raw_freshness_shared.jsonl; result.json shared_freshness_*; batch_state_log_shared.jsonl; recomputed r -0.3579 CI [-0.409,-0.303]"
+    },
+    {
+      "id": "B-STICKY",
+      "expected": "TN>=0.85 exploratory via URL-bound hash $request_uri consistent sticky affinity (>90% skew) with HS256 shared-secret and real HTTP; distribution skewed; reported separately from shared-store",
+      "observed": "TN 0.960 mean session_status 0.880 passes threshold but via ip_hash (hash $remote_addr) pinning 1200/1200 to one worker and with replicate_session_to_workers=True (sessions mirrored to both DBs); affinity alone not isolated; still demonstrates alternative path when sessions replicated.",
+      "verdict": "PASS_WEAK",
+      "strength": "weak",
+      "evidence": "raw_freshness_sticky.jsonl worker 65764:1200; result.json sticky_freshness_*; run_experiment.py write_nginx_conf sticky"
+    },
+    {
+      "id": "B-STATUS-ONLY",
+      "expected": "0.0 on 200 vs 200 body-only and header-only via direct and browser (proves status confound removed)",
+      "observed": "All body AvsC and header AvsE status-only 0.0 with CI [0.0,0.0] degenerate both browser and direct arms (20 vs 20 and 4 vs 4 samples).",
+      "verdict": "PASS",
+      "strength": "strong",
+      "evidence": "result.json browser_body_AvsC_status 0.0 direct_body_AvsC_status 0.0 browser_header_AvsE_status 0.0 direct_header_AvsE_status 0.0"
+    },
+    {
+      "id": "B-BODY-ONLY",
+      "expected": "1.0 deterministically on body-only AvsC (31B vs117B) AvsB (70B vs31B) and gradients 1B/2B/4B via direct and browser decompressed bodies, 0.0 on header-only AvsE",
+      "observed": "Body-only 1.0 on AvsC/AvsB/gradients and 0.0 on header AvsE for both browser and direct; matches body_len and sha pins d0ca833f 70B 67c186f2 117B b46c461c.",
+      "verdict": "PASS",
+      "strength": "strong",
+      "evidence": "result.json browser_body_AvsC_body 1.0 browser_header_AvsE_body 0.0; raw_observations body_sha256"
+    },
+    {
+      "id": "B-HEADERS-ONLY",
+      "expected": "1.0 via CLEN body-only (31 vs 32/33/35/70/117) with headers-no-CLEN 0.0, header-only 1.0 via CC/ETag/SC/Vary with bodies 31B identical; real browser fetches",
+      "observed": "Headers-only 1.0 on both body AvsC (via CLEN) and header AvsE (independent) for browser and direct; complements headers-no-CLEN isolation.",
+      "verdict": "PASS",
+      "strength": "strong",
+      "evidence": "result.json browser_body_AvsC_headers 1.0 browser_body_AvsC_headers_no_clen 0.0 browser_header_AvsE_headers 1.0"
+    },
+    {
+      "id": "B-HEADERS-NO-CLEN",
+      "expected": "0.0 on body-only AvsC/AvsB/gradients, 1.0 on header-only AvsE and per-header isolations CC_small/large ETag_small/large SC_small/large Vary_small via browser and direct",
+      "observed": "0.0 on all body-only and gradients via headers-no-CLEN, 1.0 on header AvsE and all isolations CC_small 1.0 ETag_small 1.0 etc both arms; isolates independent header signal for gradient ordering.",
+      "verdict": "PASS",
+      "strength": "strong",
+      "evidence": "result.json browser_header_AvsE_headers_no_clen 1.0 browser_body_AvsC_headers_no_clen 0.0 plus 7 isolation gradients each 1.0"
+    }
+  ],
+  "recomputed_metrics": {
+    "shared_freshness_c1_tn_mean": {"producer": 0.9860139860139859, "recomputed": 0.9860139860139859, "match": true, "evidence": "raw_freshness_shared.jsonl valid 139+142+143=424 k_fresh 418"},
+    "shared_freshness_c1_tn_session_status": {"producer": 0.958041958041958, "recomputed": 0.958041958041958, "match": true},
+    "shared_freshness_n_non304": {"producer": 1052, "recomputed": 1052, "match": true},
+    "shared_freshness_stratified_r": {"producer": -0.3578821698593959, "recomputed": -0.3578821698593959, "match": true, "ci_lo": -0.4096115812631628, "ci_hi": -0.3038586515972343, "tost_pass": false},
+    "shared_freshness_pooled_r": {"producer": -0.355372675068521, "recomputed": -0.355372675068521, "match": true},
+    "shared_freshness_hs256_valid_success_rate": {"producer": 0.9910581222056631, "recomputed": 0.9910581222056631, "match": true},
+    "shared_freshness_worker_distribution": {"producer": {"65439": 595, "65443": 588}, "recomputed": {"65439": 595, "65443": 588}, "missing": 17},
+    "per_node_freshness_c1_tn_mean": {"producer": 0.6666666666666666, "recomputed": 0.6666666666666666, "match": true},
+    "per_node_freshness_c1_tn_session_status": {"producer": 0.0, "recomputed": 0.0, "match": true},
+    "per_node_freshness_n_non304": {"producer": 1107, "recomputed": 1107, "match": true},
+    "per_node_freshness_stratified_r": {"producer": -0.28003415638731627, "recomputed": -0.28003415638731627, "match": true},
+    "sticky_freshness_c1_tn_mean": {"producer": 0.9602649006622516, "recomputed": 0.9602649006622516, "match": true},
+    "sticky_freshness_worker_distribution": {"producer": {"65764": 1200}, "recomputed": {"65764": 1200}, "match": true},
+    "bg_provision_ok": {"producer": true, "recomputed": true},
+    "bg_agentlab_version": {"producer": "0.4.2", "recomputed": "0.4.2"},
+    "bg_playwright_viewport": {"producer": {"width": 1280, "height": 720}, "recomputed": {"width": 1280, "height": 720}},
+    "bg_ax_nodes_median": {"producer": 54.0, "recomputed": 54.0},
+    "bg_pc_health_pct": {"producer": 100.0, "recomputed": 100.0},
+    "bg_dom_nodes_median": {"producer": 26.0, "recomputed": 26.0},
+    "browser_body_AvsC_full": {"producer": 1.0, "recomputed": 1.0, "ci": [1.0, 1.0], "degenerate": true, "effective_distinct_n": 1},
+    "browser_header_AvsE_full": {"producer": 1.0, "recomputed": 1.0, "ci": [1.0, 1.0], "degenerate": true},
+    "browser_null_body_full": {"producer": 0.0, "recomputed": 0.0, "ci": [0.0, 0.0]},
+    "batch_state_log_lines": {"producer": 31, "recomputed": 31, "distinct_timestamps": 31}
+  },
+  "claim_ceiling": "MIXED valid measurement: C-MEAS-VALID browser substrate PROVISIONED at single-host gunicorn 23.0.0 2x sync + nginx 1.24.0 loopback EXPERIMENTAL (AgentLab 0.4.2 + Playwright 1280x720, AX median 54 PC-HEALTH 100% DOM 26 on /resource, fingerprint isolation body 1.0 status 0 headers-no-CLEN 0 and header 1.0 body 0 CLEN 31==31 via real browser fetches, degenerate ceiling). C-FRESHNESS shared-store HS256 PARTIALLY SUPPORTED at same single-host loopback EXPERIMENTAL for detection (C1 TN 0.986 mean Wilson lo 0.969 session_status 0.958 lo 0.911, C2 n_non304 1052 >=800, HS256 0.991, X-Worker-Pid round-robin >=10) vs per-node baseline 0.666 fails as expected; but C3 orthogonality FALSIFIED-IN-SETTING (stratified |r|=0.357 >0.15, CI upper -0.303 fails |r|<0.15, pooled -0.355) and sticky URL-bound affinity NOT_TESTED as-specified (ip_hash pin 1200/1200 with mirrored sessions). No VALIDATED or PRODUCT_CORE; no paid CDN, no multi-host Redis, no non-degenerate CC/ETag/CLEN sensitivity ordering (all gradients 1.0 degenerate effective N=1) beyond ceiling.",
+  "evidence_refs": [
+    "research/experiments/EXP-RUNTIME-35884739384/request.json",
+    "research/experiments/EXP-RUNTIME-35884739384/spec.json",
+    "research/experiments/EXP-RUNTIME-35884739384/prereg.md",
+    "research/experiments/EXP-RUNTIME-35884739384/freeze.json",
+    "research/experiments/EXP-RUNTIME-35884739384/result.json",
+    "research/experiments/EXP-RUNTIME-35884739384/report.md",
+    "research/experiments/EXP-RUNTIME-35884739384/provenance.json",
+    "research/experiments/EXP-RUNTIME-35884739384/run_experiment.py sha 89d174104a2b79227e13d186f63b1b4f0eee9622603da11df24ace50b7defea7",
+    "research/experiments/EXP-RUNTIME-35884739384/raw_freshness_shared.jsonl sha 126784977c11ac90a805473465adb01143d10c55ba5e89d0aa04455b006356c7",
+    "research/experiments/EXP-RUNTIME-35884739384/raw_freshness_per_node.jsonl sha 2b5904fb710f05372a1f8276a575986e1505d333bcb2712ac9ba7942a66145c7",
+    "research/experiments/EXP-RUNTIME-35884739384/raw_freshness_sticky.jsonl sha 437cc1840f8deadf9bfe66f049f737827df55c9972c726b391b53eebfd3fe302",
+    "research/experiments/EXP-RUNTIME-35884739384/batch_state_log_shared.jsonl sha 81692043bb185526855c35f21fad24cc51b572345b6f8e933ef4dad7134cb5b0",
+    "research/experiments/EXP-RUNTIME-35884739384/raw_observations.jsonl sha 7177ba1242f7061c48661446ccbc731f42d657c3e2ada38441a23e672ce0203c",
+    "research/experiments/EXP-RUNTIME-35884739384/ax_dom_pages.jsonl sha 7eefd0a66c857ed6961b9c287cbe1f031aae9113b43a23b1f6592b8858f6cc39"
+  ],
+  "unresolved": [
+    "Whether C-FRESHNESS orthogonality can be restored to |r|<0.15 with status-free structural and de-confounded body_variant vs drift scheduling; current harness body_variant cycle correlates with auth drift yielding |r| 0.35-0.62",
+    "Whether URL-bound sticky (hash $request_uri consistent) alone without session mirroring achieves TN>=0.85; current sticky result confounds affinity with replication to both DBs",
+    "What per-value CC/ETag/CLEN sensitivity ordering is when CIs become non-degenerate; all body (1B/2B/4B/39B/86B) and header (CC_small/large ETag_small/large SC/Vary) gradients are degenerate [1.0,1.0]/[0.0,0.0] effective N=1 so ordering unknown",
+    "Whether shared SQLite WAL at /tmp/spider-runtime-35860330078/shared.db generalizes to multi-host Redis cluster or tolerates concurrent writes beyond 4-concurrency localhost",
+    "Whether 17 missing worker_ids during nginx startup affects tail power; re-run with health gate would confirm 1200/1200 valid"
+  ]
+}

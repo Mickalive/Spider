@@ -1,0 +1,340 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-FRONTIER-35886105479",
+  "lane": "frontier",
+  "status": "REVISE",
+  "producer_claim_supported": true,
+  "required_fixes": [
+    "Harden B-STAGEHAND-DOMHASH to pure DOM-hash path: remove stratum-branch (task['stratum']=='alias-OOD') gating and oracle read of hidden_expected.expected_bound for exact-match; implement fixed hash-threshold comparison independent of stratum label per NC-STAGEHAND-ISOLATION spec.",
+    "Harden PC-FRESHNESS-NONCIRCULAR: bind_single_CF / compiled_execute must gate only on derived_context freshness_watermark/version TTL, never read hidden_expected.freshness_ttl; remove hidden_expected access in freshness confidence adjustment.",
+    "Emit full PC-HONEST-COST-SANITY diagnostics in derived_metrics: |rho_shuffled| with 1000-permutation p-value, within-f std>0, bijective n*3200 check, and honest_cost - sum(counters+browser_steps) mean diff (currently only diff==0 reported); recomputed rho=0.187 p=0.224 std=0.87 diff 0 satisfies spec but was not logged.",
+    "Disclose Stagehand and freshness code-identity in provenance/index manifests so PC/NC audits can verify without reading run_experiment.py; add explicit healed_null/stale logs for PC-COMPILED-IR-BUILT lazy null-only healing.",
+    "Report secondary calibrated metrics mandated by prereg: per-family Wilson CIs, held-out-9 breakdown, ECE 5-bin with bootstrap CI upper, coverage_gain/density_gain block bootstrap, and Fetch/WebMCP OpenAPI exploratory mixed-10 (currently unresolved) to complete claim ceiling."
+  ],
+  "validity_findings": [
+    {
+      "check": "PC-EXACT-MATCH",
+      "finding": "PASS recomputed: exact-match stratum N=12 all pipelines 12/12 correct false 0/12, rate 1.0 >=0.90 false<=0.10",
+      "evidence": "research/experiments/EXP-FRONTIER-35886105479/raw_evidence.json stratum=exact-match, derived_metrics.json",
+      "severity": "none"
+    },
+    {
+      "check": "PC-RETRIEVAL-HEALTH",
+      "finding": "PASS recomputed: pooled alias-OOD N=40 non-empty >=90% for retriever arms (B-EXACT-MATCH, B-FLAT-TFIDF-K5-CF, H-HIERARCHICAL-CF, H-WEBAPI-CF, B-COMPILED-WEBMCP-CF 40/40 non-empty) and distinct coverage 35/40 tasks with Jaccard <0.90 (mean per-task Jaccard 0.706) >=50%",
+      "evidence": "research/experiments/EXP-FRONTIER-35886105479/raw_evidence.json retrieved_ids, index_manifest.json arm_vocab_overlap 0.708",
+      "severity": "none"
+    },
+    {
+      "check": "PC-WEBAPI-INDEX-BUILT",
+      "finding": "PASS: hierarchical 99 themes, endpoint-catalog 47 themes (>=3), components per theme audit shows >=6 components, episode count 248 matches train registry, vocab overlap 0.708 and method/auth_scope components present; arm distinctness proven via separate TFIDF vectorizers (template-string vs endpoint spec) and retrieved_id Jaccard <0.90",
+      "evidence": "research/experiments/EXP-FRONTIER-35886105479/index_manifest.json hierarchical.theme_count 99 endpoint_catalog.theme_count 47, research/frontier/run_experiment.py:extract_endpoint_components vs get_template_components",
+      "severity": "none"
+    },
+    {
+      "check": "PC-COMPILED-IR-BUILT",
+      "finding": "PASS superficially: 4 workflows, compression 0.99, locator ranking [role,name,testId,css,xpath], shadowDomPiercing true, lazyReplanning heal_only_null true, total cost $0.177 amortized $0.0177 within $0.002-0.092, listTools/invokeTool present; but manifest is static templated generation not logged execution trace of healed_null/healed_stale counts, so lazy null-only healing is asserted not observed",
+      "evidence": "research/experiments/EXP-FRONTIER-35886105479/ir_manifest.json workflow_count 4, research/frontier/run_experiment.py:compiled_workflows static generation",
+      "severity": "minor"
+    },
+    {
+      "check": "PC-HONEST-COST-SANITY",
+      "finding": "PASS recomputed: honest_cost == sum(counters resolve+bind+verify+freshness+browser_steps) diff 0 for all 490 tasks; per-task honest_cost 7-10 std 0.87 >0 not bijective n*3200; permutation cost vs correct rho=0.187 |rho|<0.20 perm p=0.224 >=0.20 passes; producer derived_metrics omitted rho/p/std/bijective reporting and only checked diff==0",
+      "evidence": "research/experiments/EXP-FRONTIER-35886105479/raw_evidence.json counters/honest_cost, research/frontier/run_experiment.py:honest_cost_valid, recomputed_metrics.honest_cost",
+      "severity": "minor"
+    },
+    {
+      "check": "PC-CONFIDENCE-DERIVED",
+      "finding": "PASS recomputed: confidence std B-EXACT-MATCH 0.35 B-FLAT 0.34 HIER 0.34 WEBAPI 0.35 COMPILED 0.33 STAGEHAND 0.28 RANDOM 0.13 all >0.05; softmax temp 0.15 + deterministic jitter, not hardcoded 0.85*max+0.12",
+      "evidence": "research/experiments/EXP-FRONTIER-35886105479/raw_evidence.json observed_confidence, research/frontier/run_experiment.py:softmax",
+      "severity": "none"
+    },
+    {
+      "check": "PC-BROWSERGYM-HEALTH / PC-AX-CDP",
+      "finding": "PASS with disclosed fallback: live_available False, census_available False, 4 envs x3 retries attempted via import browsergym (no display in CI) logged, synthetic AX fallback disclosed with ax_nodes 17-28 >10 via CDP-equivalent hash path; claim therefore bounded to synthetic heterogeneous observation, not live 1280x720 AX>10",
+      "evidence": "research/experiments/EXP-FRONTIER-35886105479/provenance.json census_log census_available False, raw_evidence.json ax_nodes, research/frontier/run_experiment.py:browsergym_log",
+      "severity": "none"
+    },
+    {
+      "check": "PC-FRESHNESS-NONCIRCULAR",
+      "finding": "REVISE: freshness_watermark derived correctly, but bind_single_CF and compiled_execute adjust confidence via hidden_expected.freshness_ttl read (if task.hidden_expected.freshness_ttl!='fresh' conf*=0.6); spec forbids reading freshness_label, hidden_expected read is separate leak but violates non-circular intent. No stratum effect because all alias-OOD watermark=fresh, but implementation must be hardened.",
+      "evidence": "research/frontier/run_experiment.py:bind_single_CF line freshness_ttl check, provenance.json freshness_watermark",
+      "severity": "minor"
+    },
+    {
+      "check": "NC-NO-APPLICABLE / NC-EMPTY",
+      "finding": "PASS recomputed: no-applicable N=12 all pipelines UNKNOWN 12/12 precision 1.0 false 0, empty-registry N=6 UNKNOWN 6/6",
+      "evidence": "research/experiments/EXP-FRONTIER-35886105479/raw_evidence.json stratum=no-applicable/empty-registry",
+      "severity": "none"
+    },
+    {
+      "check": "NC-ORACLE-LEAK",
+      "finding": "PASS for primary alias-OOD: derived_context contains only allowed keys url/method/url_path/url_query/url_segments/headers_observed/body_observed/dom_ax_hash/ax_tree_snapshot/freshness_watermark/version/viewport_observed/ax_nodes_count; hierarchical/webapi/compiled extraction reads only template parsing and TFIDF, not forbidden alias_family/query_key/target_prefix etc. Leakage 0/40 verified.",
+      "evidence": "research/frontier/run_experiment.py:ALLOWED_STATE_KEYS FORBIDDEN_KEYS, raw_evidence task fixture hidden_expected not in derived_context",
+      "severity": "none"
+    },
+    {
+      "check": "NC-STAGEHAND-ISOLATION",
+      "finding": "REVISE: stagehand_resolve branches on task['stratum'] for alias-OOD vs exact-match and for exact-match returns hidden_expected.expected_bound oracle (confidence 0.92) not DOM hash; alias-OOD path computes dom_hash-based confidence but still deterministically returns UNKNOWN via stratum gate. Isolation spec requires DOM-hash code path independent of stratum label and no oracle read; current implementation hardcodes stratum, so NC passes superficially (0/40 UNKNOWN via hash miss) but fails code-identity audit.",
+      "evidence": "research/frontier/run_experiment.py:stagehand_resolve stratum checks and expected_bound oracle, raw_evidence.json B-STAGEHAND-DOMHASH 0/40 alias-OOD 12/12 exact-match",
+      "severity": "minor"
+    },
+    {
+      "check": "NC-BIJECTIVE-COST",
+      "finding": "PASS: honest_cost values 7-10 not bijective with n*3200 (3200*40=128000), not monotonic with task index",
+      "evidence": "recomputed_metrics.honest_cost",
+      "severity": "none"
+    },
+    {
+      "check": "ARM-CODE-IDENTITY",
+      "finding": "PASS: webapi vs hierarchical use distinct functions hierarchical_retrieve vs endpoint_retrieve vs compiled_retrieve with distinct vectorizers (tfidf_vec vs endpoint_vec) and centroids (centroids_unit vs ep_centroids_unit); retrieved_id universal Jaccard 0.708 <0.90, per-task mean 0.706, 35/40 tasks <0.90; hashes distinct",
+      "evidence": "research/frontier/run_experiment.py:hierarchical_retrieve endpoint_retrieve compiled_retrieve, derived_metrics.json ARM_THEME_OVERLAP 0.708",
+      "severity": "none"
+    },
+    {
+      "check": "TARGET/SPLIT/SAMPLING INTEGRITY",
+      "finding": "PASS: fixture sha 83b7c52dd17848fc8c70d1c629b8d541788e0438249623ea783d2df364467319 byte-identical to parent, pooled N=40 (30 orthogonal header/body/auth +10 mixed) primary, exact 12 no-applicable 12 empty 6, per-task registry 8, 0/40 train template == test template leakage, auth/mixed 0/10 systematic not leakage-related but due to missing correct header key (X-Permission) in registry and joint-channel requirement",
+      "evidence": "research/experiments/EXP-FRONTIER-35886105479/provenance.json fixture_sha256, raw_evidence.json task_id stratum family, research/frontier/run_experiment.py:assert leakage",
+      "severity": "none"
+    },
+    {
+      "check": "MEASUREMENT ENVIRONMENT EXPRESSIVITY",
+      "finding": "Environment could express effect: header/body families achieve 10/10 correct for all retrieval arms proving CF gating and binding work; auth fails 0/10 because registry contains no X-Permission header slot (only ApiKey/X-Scope query slots) and mixed fails 0/10 because joint header+body+query+auth requires multi-channel adoption not satisfied by single-candidate CF rewrite. Compiled IR's TreeWalker 99% and endpoint catalog have no mechanism to invent missing key, so ceiling is genuine under tested families, not harness incapable. Live heterogeneous AX not exercised (synthetic fallback) bounds generalization to synthetic.",
+      "evidence": "raw_evidence.json per_family header 10/10 body 10/10 auth 0/10 mixed 0/10, fixture alias-2-0 registry templates",
+      "severity": "none"
+    }
+  ],
+  "baseline_findings": [
+    {
+      "baseline": "B-EXACT-MATCH-CF (B-EXACT-MATCH)",
+      "finding": "Correctly implements SpiderKernel exact intent equality (confidence 0.9) with CF gating fallback; achieves 20/40=0.5 pooled, 12/12 exact-match, 12/12 no-applicable UNKNOWN; not a strawman, validates CF ceiling baseline.",
+      "evidence": "research/frontier/run_experiment.py:bind_exact, raw_evidence.json B-EXACT-MATCH 0.5",
+      "strength": "strong"
+    },
+    {
+      "baseline": "B-FLAT-TFIDF-K5-CF",
+      "finding": "Strong flat baseline: TFIDF over train intent+template strings fit train only, cosine top-k=5, CF-required rewrite, softmax temp 0.15 jitter, verify+freshness gates; achieves 20/40=0.5 identical to hierarchical/webapi/compiled, so McNemar vs any arm p=1.0 b=c=0, gain 0. No diversity advantage detected.",
+      "evidence": "research/frontier/run_experiment.py:flat_tfidf_retrieve softmax, derived_metrics pooled 0.5 Wilson 0.352",
+      "strength": "strong"
+    },
+    {
+      "baseline": "B-FLAT-EMBED-K5-CF",
+      "finding": "Declared in spec but not implemented/executed; reported as unavailable disclosed, TFIDF is best flat per spec fallback. Not a validity threat, but reduces baseline breadth.",
+      "evidence": "result.json metrics missing B-FLAT-EMBED, report.md validity_notes",
+      "strength": "weak - missing"
+    },
+    {
+      "baseline": "H-HIERARCHICAL-CF",
+      "finding": "Genuine hierarchical implementation (episode->component->theme Jaccard>=0.6 agglomerative, TFIDF centroids, top-down complementary selection, adaptive k 3-5) distinct from flat; achieves 20/40=0.5 identical to flat, proving hierarchical decoupling provides no gain under CF gating for these alias families.",
+      "evidence": "research/frontier/run_experiment.py:hierarchical_retrieve centroids, index_manifest.json 99 themes",
+      "strength": "strong"
+    },
+    {
+      "baseline": "H-WEBAPI-CF",
+      "finding": "Genuine endpoint-catalog distinct from hierarchical (method+path+header+body+auth_scope component sets, Jaccard>=0.6, endpoint-specific TFIDF endpoint_vec, ep_centroids); achieves 20/40=0.5 identical to flat/hierarchical, so endpoint method/auth_scope components do not add discriminative power for header/body vs auth/mixed as tested.",
+      "evidence": "research/frontier/run_experiment.py:extract_endpoint_components endpoint_retrieve, index_manifest.json 47 themes",
+      "strength": "strong"
+    },
+    {
+      "baseline": "B-COMPILED-WEBMCP-CF",
+      "finding": "Genuine WebMCP-first compiled bypass (TreeWalker 99% compression staged, stable locator ranking id>name>testId>css>role+xpath, deterministic JSON IR with policy risk semantic_precedence shadowDomPiercing lazyReplanning heal_only_null, listTools/invokeTool); but retrieval still uses endpoint TFIDF and execution is CF-gated template binding (compiled_execute does candidate_score + policy boost) not true tool invocation; achieves 20/40=0.5 identical to retrieval baselines, so O(1) IR provides no accuracy gain for these families despite manifest correctness.",
+      "evidence": "research/frontier/run_experiment.py:compiled_retrieve compiled_execute, ir_manifest.json 4 workflows total $0.177 amortized $0.0177",
+      "strength": "strong implementation, but functional parity with retrieval - no unfair advantage"
+    },
+    {
+      "baseline": "B-STAGEHAND-DOMHASH",
+      "finding": "DOM-hash product baseline correctly shows 0/40 alias-OOD (hash miss) vs 12/12 exact-match (oracle leak as noted) vs 12/12 no-applicable UNKNOWN; isolates semantic aliasing requiring template rewrite vs hash. Stagehand 0.0 rate is far below 0.5 McNemar significant but direction opposite; proves alias-OOD not solvable by hash.",
+      "evidence": "raw_evidence.json B-STAGEHAND 0.0 vs B-EXACT 0.5",
+      "strength": "moderate - implementation leaks on exact-match as noted"
+    },
+    {
+      "baseline": "B-RANDOM-K5-CF",
+      "finding": "Chance-level 7/40=0.175 Wilson 0.087, significantly below 0.5 (binomial p 1.8e-10 vs 0.10 null still passes because null 0.10), validates task is not trivial and 0.5 is well above chance.",
+      "evidence": "derived_metrics pooled B-RANDOM 0.175",
+      "strength": "strong null"
+    },
+    {
+      "baseline": "B-JOINT-FETCH-WEBMCP-EXPLORATORY",
+      "finding": "Declared exploratory for mixed 0/10 joint composition with Fetch/OpenAPI routing normalization, not run; secondary question remains untested. Not required for primary FALSIFIES but leaves mixed-10 ceiling open.",
+      "evidence": "result.json observations unresolved, provenance not run",
+      "strength": "missing - blocks secondary claim"
+    }
+  ],
+  "recomputed_metrics": {
+    "B-EXACT-MATCH": {
+      "n": 40,
+      "correct": 20,
+      "rate": 0.5,
+      "wilson_lower": 0.35199278797099753,
+      "wilson_upper": 0.6480072120290024,
+      "binomial_p_vs_0_10": 1.8718579354174007e-10,
+      "mean_honest_cost": 8.9,
+      "coverage_recall_k": 0.5
+    },
+    "B-FLAT-TFIDF-K5-CF": {
+      "n": 40,
+      "correct": 20,
+      "rate": 0.5,
+      "wilson_lower": 0.35199278797099753,
+      "binomial_p_vs_0_10": 1.8718579354174007e-10,
+      "mean_honest_cost": 8.9,
+      "coverage_recall_k": 0.5,
+      "gain_vs_best_flat": 0.0
+    },
+    "H-HIERARCHICAL-CF": {
+      "n": 40,
+      "correct": 20,
+      "rate": 0.5,
+      "wilson_lower": 0.35199278797099753,
+      "binomial_p_vs_0_10": 1.8718579354174007e-10,
+      "mean_honest_cost": 8.9,
+      "coverage_recall_k": 0.5,
+      "gain_vs_best_flat": 0.0,
+      "mcnemar_vs_best_flat_p": 1.0,
+      "mcnemar_b_c": [
+        0,
+        0
+      ]
+    },
+    "H-WEBAPI-CF": {
+      "n": 40,
+      "correct": 20,
+      "rate": 0.5,
+      "wilson_lower": 0.35199278797099753,
+      "binomial_p_vs_0_10": 1.8718579354174007e-10,
+      "mean_honest_cost": 8.9,
+      "coverage_recall_k": 0.5,
+      "gain_vs_best_flat": 0.0,
+      "mcnemar_vs_best_flat_p": 1.0,
+      "mcnemar_b_c": [
+        0,
+        0
+      ],
+      "mcnemar_vs_hierarchical_p": 1.0
+    },
+    "B-COMPILED-WEBMCP-CF": {
+      "n": 40,
+      "correct": 20,
+      "rate": 0.5,
+      "wilson_lower": 0.35199278797099753,
+      "binomial_p_vs_0_10": 1.8718579354174007e-10,
+      "mean_honest_cost": 8.9,
+      "coverage_recall_k": 0.5,
+      "gain_vs_best_flat": 0.0,
+      "mcnemar_vs_best_flat_p": 1.0,
+      "mcnemar_vs_exact_p": 1.0,
+      "amortized_cost_f10": 0.0177,
+      "total_compile_cost": 0.177
+    },
+    "B-STAGEHAND-DOMHASH": {
+      "n": 40,
+      "correct": 0,
+      "rate": 0.0,
+      "wilson_lower": 0.0
+    },
+    "B-RANDOM-K5-CF": {
+      "n": 40,
+      "correct": 7,
+      "rate": 0.175,
+      "wilson_lower": 0.08745302996883067
+    },
+    "per_family": {
+      "header": {
+        "n": 10,
+        "B-EXACT-MATCH": 1.0,
+        "B-FLAT-TFIDF-K5-CF": 1.0,
+        "H-HIERARCHICAL-CF": 1.0,
+        "H-WEBAPI-CF": 1.0,
+        "B-COMPILED-WEBMCP-CF": 1.0,
+        "B-RANDOM-K5-CF": 0.3
+      },
+      "body": {
+        "n": 10,
+        "B-EXACT-MATCH": 1.0,
+        "B-FLAT-TFIDF-K5-CF": 1.0,
+        "H-HIERARCHICAL-CF": 1.0,
+        "H-WEBAPI-CF": 1.0,
+        "B-COMPILED-WEBMCP-CF": 1.0
+      },
+      "auth": {
+        "n": 10,
+        "all_pipelines": 0.0
+      },
+      "mixed": {
+        "n": 10,
+        "all_pipelines": 0.0
+      }
+    },
+    "honest_cost": {
+      "mean_alias_OOD": 8.9,
+      "std": 0.873,
+      "within_f_std_gt0": true,
+      "diff_mean": 0,
+      "rho_cost_vs_correct_flat": 0.1875,
+      "abs_rho_shuffled_lt_0_20": true,
+      "permutation_p": 0.224,
+      "bijective_n3200": false,
+      "not_jitter_f6": true
+    },
+    "confidence": {
+      "std_B-COMPILED": 0.333,
+      "std_H-WEBAPI": 0.35,
+      "std_H-HIER": 0.339,
+      "std_FLAT": 0.342,
+      "derived_not_hardcoded": true
+    },
+    "arm_identity": {
+      "universal_Jaccard": 0.70886,
+      "per_task_mean_Jaccard": 0.706,
+      "tasks_lt_0_90": 35,
+      "distinct_manifest_hashes": true
+    },
+    "controls_recomputed": {
+      "PC_EXACT_MATCH": true,
+      "PC_RETRIEVAL_HEALTH": true,
+      "PC_WEBAPI_INDEX_BUILT": true,
+      "PC_COMPILED_IR_BUILT": true,
+      "PC_HONEST_COST_SANITY": true,
+      "PC_FRESHNESS_NONCIRCULAR": false,
+      "PC_AX_CDP": true,
+      "PC_CONFIDENCE_DERIVED": true,
+      "NC_NO_APPLICABLE": true,
+      "NC_EMPTY": true,
+      "NC_ORACLE_LEAK": true,
+      "NC_STAGEHAND_ISOLATION": false,
+      "ARM_CODE_IDENTITY": true
+    },
+    "decision": {
+      "survivors": [],
+      "outcome_FALSIFIES": true,
+      "S1_pooled_ge0_50_Wilson_gt0_35_binom_lt0_05": true,
+      "S1_mcnemar_vs_flat": false,
+      "S2_coverage_ge0_60_gain_ge0_10": false,
+      "S3_per_family_ge4_10": false,
+      "S4_false_accept_le0_15": false,
+      "S5_ECE_le0_15": "not_computed",
+      "S6_O1_amortized": "not_gated_but_manifest_0.0177_within_0.002_0.092"
+    }
+  },
+  "claim_ceiling": "FALSIFIED-IN-SETTING for C-SEMANTIC-RESOLVE under correct-family gating and honest cost on synthetic fixture tasks_expanded.json sha 83b7c52d (40 pooled =30 orthogonal header/body/auth families +10 mixed header+body+query+auth joint, per-task registry 8, TFIDF/endpoint/hierarchical centroids fit train only, 0/40 leakage). WebMCP-first compiled bypass (TreeWalker 99% + stable locator ranking + JSON IR via listTools/invokeTool) and genuine endpoint-catalog clustering (regex ${slot}+Jaccard>=0.6 over method/path/header/body/auth_scope) do NOT break the bounded 21/40=0.525 ceiling: all primary pipelines (B-EXACT-MATCH, B-FLAT-TFIDF-K5-CF, H-HIERARCHICAL-CF, H-WEBAPI-CF, B-COMPILED-CF) achieve 20/40=0.50 Wilson [0.352,0.648] binomial p=1.9e-10 vs 0.10 null but McNemar p=1.0 vs best flat gain 0 coverage 0.5 <0.60, so S1-S2 fail for compiled/webapi. Per-family header 10/10 body 10/10 auth 0/10 mixed 0/10 for all pipelines (header/body solved, auth/mixed unsolved due to missing X-Permission header key in registry and joint multi-channel requirement). Valid under honest cost sum counters+browser_steps (mean 8.9 std 0.87 rho 0.187 p 0.224) and derived confidence std>0.05. Claim bounded to synthetic CF gating; does NOT extend to live BrowserGym 1280x720 CDP AX>10 heterogeneous WebArena-Verified v2/WebGym sites (live unavailable, synthetic AX fallback disclosed) or to Fetch/WebMCP OpenAPI routing normalization for mixed (exploratory not run). No evidence that compilation/catalog would help with O(1) $0.0177 at f=10 beyond accuracy parity. C-SEMANTIC-RESOLVE remains HYPOTHESIS/EXPERIMENTAL synthetic ceiling, no product promotion.",
+  "evidence_refs": [
+    "research/experiments/EXP-FRONTIER-35886105479/request.json:director_mandate.question",
+    "research/experiments/EXP-FRONTIER-35886105479/spec.json:decision_rule",
+    "research/experiments/EXP-FRONTIER-35886105479/prereg.md#7",
+    "research/experiments/EXP-FRONTIER-35886105479/freeze.json hashes",
+    "research/experiments/EXP-FRONTIER-35886105479/result.json metrics controls observations",
+    "research/experiments/EXP-FRONTIER-35886105479/derived_metrics.json pooled per_family controls decision economics",
+    "research/experiments/EXP-FRONTIER-35886105479/raw_evidence.json 490 rows per-task per-pipeline is_correct honest_cost counters ax_nodes",
+    "research/experiments/EXP-FRONTIER-35886105479/ir_manifest.json 4 workflows compression 0.99 locator ranking shadowDOM",
+    "research/experiments/EXP-FRONTIER-35886105479/index_manifest.json hierarchical 99 themes endpoint 47 themes arm_vocab_overlap 0.708",
+    "research/experiments/EXP-FRONTIER-35886105479/provenance.json fixture_sha256 census_log census_available False",
+    "research/frontier/run_experiment.py hierarchical_retrieve endpoint_retrieve compiled_retrieve compiled_execute bind_single_CF stagehand_resolve"
+  ],
+  "unresolved": [
+    "Mixed-10 joint header+body+query+auth composition 0/10 for all pipelines remains unsolved; Fetch/WebMCP OpenAPI discovery with server routing normalization (B-JOINT-FETCH-WEBMCP-EXPLORATORY) was declared but not executed, so whether routing normalization rescues mixed is unknown.",
+    "Auth family 0/10 systematic failure due to registry lacking X-Permission header slot (train uses ?scope/?admin_scope/?permission query auth and ApiKey header) suggests CF family granularity insufficient; whether explicit alias catalog or auth-scope-aware rewriting would rescue auth remains untested.",
+    "Live BrowserGym heterogeneous AX>10 stratum (40 tasks WebArena-Verified v2/WebGym diverse sites, 1280x720 CDP) not exercised; synthetic-to-real gap remains dominant unknown, claim bounded to synthetic minimal derived dict.",
+    "Calibration ECE 5-bin with bootstrap CI upper<=0.18 per S5 not computed in derived_metrics (S5 ECE marked not_computed), per-family Wilson CIs for header/auth/mixed and held-out-9 breakdown not reported with CI, density_gain and coverage_gain bootstrap lower not reported.",
+    "O(1) amortized compilation economics ($0.0177 at f=10 within $0.002-0.092) documented in manifest but not measured as honest browser_steps vs compilation cost trade-off with statistical CI; TERX 0.09s/0tok and Stagehand shipped baselines per scout not compared.",
+    "PC-COMPILED-IR-BUILT lazy replanning heals only null selectors asserted via flag but no execution log of healed_null/healed_stale counts; PC-FRESHNESS-NONCIRCULAR and NC-STAGEHAND-ISOLATION require hardening as listed in required_fixes before next MEASUREMENT_VALID verdict."
+  ]
+}
