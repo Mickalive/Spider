@@ -1,0 +1,169 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-35903200136",
+  "lane": "intel",
+  "status": "COMPLETE",
+  "outcome": "MIXED",
+  "metrics": {
+    "M_AX_CONSISTENCY_MEAN": 0.9,
+    "M_AX_VALID_CAPTURES": 20,
+    "M_AX_PRODUCT_FAMILY_COUNT": 10,
+    "M_AX_BOOTSTRAP_CI_LOWER": 1.0,
+    "M_AX_BOOTSTRAP_CI_UPPER": 1.0,
+    "M_AX_SHUFFLE_P": 1.0,
+    "M_AX_SHUFFLE_MEAN": 1.0,
+    "M_AX_SHUFFLE_STD": 0.0,
+    "M_AX_PER_FAMILY_VARIANCE": 0.0,
+    "M_AX_DELTA_TRUNCATED": null,
+    "M_AX_GRAMMAR_CODE_HASH": "f2b5e3bb0fe5cab452f24d3d1ed18205813ae207de579870b1a16f5f156d542a",
+    "M_STAGEHAND_N_FAMILIES_ATTEMPTED": 36,
+    "M_STAGEHAND_HIT_RATE": 0.0,
+    "M_STAGEHAND_MISS_RATE": 1.0,
+    "M_STAGEHAND_FALSE_ACCEPT_RATE": 0.0,
+    "M_WEBGYM_SITES_FOUND": 0,
+    "M_GATE0_TRANSITIONS": 0,
+    "M_REGISTRY_FULL_DIGEST": "sha256:3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb",
+    "M_DOCKER_REACHABLE": true,
+    "M_H1_STATUS": "FALSIFIED-IN-SETTING",
+    "M_H2_STATUS": "FALSIFIED-IN-SETTING",
+    "M_H3_STATUS": "MEASUREMENT_INVALID",
+    "M_H4_STATUS": "MEASUREMENT_INVALID"
+  },
+  "controls": {
+    "B-STAGEHAND-VERB": {
+      "expected": "HIT>=0.8 identical, MISS>=0.8 drift, false_accept<0.05",
+      "observed": "HIT=0.0000, MISS=1.0000, false_accept=0.0000",
+      "pass_fail": "FAIL",
+      "evidence": "derived/stagehand_replication_recomputed.json"
+    },
+    "B-RANDOM-AX-SHUFFLE": {
+      "expected": "True mean must exceed shuffle mean+0.20, p<0.05",
+      "observed": "shuffle_mean=1.0000, p=1.0000, variance=0.0 (degenerate)",
+      "pass_fail": "FAIL",
+      "evidence": "derived/ax_consistency_fulltree.json"
+    },
+    "B-TRUNCATED-20": {
+      "expected": "Full-tree mean must exceed truncated mean by >=0.20",
+      "observed": "M_AX_DELTA_TRUNCATED not measured separately; full-tree patterns degenerate",
+      "pass_fail": "UNKNOWN"
+    },
+    "B-WEBGYM-HARDCODED-09479": {
+      "expected": "WebGym 50 diverse-site duplication CI should not overlap 0.9479",
+      "observed": "WebGym 401/404 after 2 genuine attempts - 0 sites found",
+      "pass_fail": "UNKNOWN",
+      "evidence": "derived/webgym_census.json"
+    },
+    "PC1_LIVENESS_1280": {
+      "expected": ">=15/20 captures 600-2000 nodes at 1280x720",
+      "observed": "20/20 valid captures (1430 nodes each for template pages, 864/668 for product variants)",
+      "pass_fail": "PASS",
+      "evidence": "raw/ax_captures.jsonl"
+    },
+    "PC2_AX_PRIOR_PRODUCT": {
+      "expected": ">=1 family discriminates vs degenerate homepage 1.0 with variance>0",
+      "observed": "Family 6 has variance>0 (0.0 vs 1.0 consistency), but overall variance=0",
+      "pass_fail": "FAIL",
+      "evidence": "derived/ax_consistency_fulltree.json"
+    },
+    "PC3_STAGEHAND_HIT_RECOMPUTED_DYNAMIC": {
+      "expected": "HIT>=0.8 on recomputed+stripping",
+      "observed": "hit_rate=0.000 (SHA changes on every access - dynamic tokens not fully stripped)",
+      "pass_fail": "FAIL",
+      "evidence": "derived/stagehand_replication_recomputed.json"
+    },
+    "PC4_WEBGYM_IMPORT_VALID": {
+      "expected": ">=50 diverse eTLD+1 hosts",
+      "observed": "0 sites (401/404 after 2 genuine attempts)",
+      "pass_fail": "FAIL",
+      "evidence": "derived/webgym_census.json"
+    },
+    "NC1_AX_SHUFFLE_TRAJECTORY_GROUPED": {
+      "expected": "p<0.05 and mean+0.20 gap; std 0 => FAIL",
+      "observed": "p=1.0000, shuffle_mean=1.0000, std=0.0 (degenerate - FAIL)",
+      "pass_fail": "FAIL",
+      "evidence": "derived/ax_consistency_fulltree.json"
+    },
+    "NC5_CROSS_PROJECT_LEAKAGE": {
+      "expected": "Cross-project same key must MISS 0%",
+      "observed": "Per-project isolation enforced in Stagehand replication",
+      "pass_fail": "PASS",
+      "evidence": "derived/stagehand_replication_recomputed.json"
+    }
+  },
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-INTEL-35903200136/artifacts/raw/ax_captures.jsonl",
+      "sha256": "5a002cc82c2829c6327e4911325aa6ac1ee824d65e6b0f9889f05d795ee3dc9f",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-35903200136/artifacts/derived/ax_consistency_fulltree.json",
+      "sha256": "6288cce9684b401e154c30057822895ef5c1e21c3d403b519d6df99d716f2582",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-35903200136/artifacts/derived/stagehand_replication_recomputed.json",
+      "sha256": "50dd5cd1ff8f5b09e05cb49974bbaae70badd17f8a2647dc1ec93a8c6c37ec32",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-35903200136/artifacts/derived/webgym_census.json",
+      "sha256": "8ed6611f8b5f3630fe42326d3e477a8bf24af131288ef4d80347bfdf8125e49b",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-35903200136/artifacts/derived/gate0_relaxed_table.json",
+      "sha256": "73d3496cbbf5ea04567f41545a0948b7cd949c265415b44821dc0ecac6180788",
+      "role": "derived"
+    },
+    {
+      "path": "research/intel/grammar_fulltree_358885.py",
+      "sha256": "f2b5e3bb0fe5cab452f24d3d1ed18205813ae207de579870b1a16f5f156d542a",
+      "role": "code"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-35903200136/result.json",
+      "sha256": "65921319942a1960b49092aa03e84bcd3dc575d8ecf97f1f7a96da862e28c061",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-35903200136/provenance.json",
+      "sha256": "placeholder_prov_excl_self",
+      "role": "derived"
+    }
+  ],
+  "observations": [
+    "Docker container am1n3e/webarena-verified-shopping@sha256:3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb is LIVE on port 7770 (HTTP 200, container hardcORE_northcutt)",
+    "CDP Accessibility.getFullAXTree returns 1235+ nodes on homepage, DOM bytes ~199828",
+    "Playwright chromium launches successfully at 1280x720 viewport",
+    "Grammar file hash recomputed: f2b5e3bb0fe5cab452f24d3d1ed18205813ae207de579870b1a16f5f156d542a (no [:20] truncation in execution code)",
+    "ALL 20 CDP captures valid (600-2000 nodes) - substrate adequacy PASSED",
+    "M_AX_CONSISTENCY_MEAN=0.9000 but variance=0.0000 (DEGENERATE - all product pages share same Magento template)",
+    "Bootstrap CI=[1.0,1.0] degenerate, shuffle p=1.0000 (degenerate - no discrimination between products)",
+    "Stagehand HIT=0.000, MISS=1.000 - SHA256 changes on every page.access due to unstripped dynamic tokens",
+    "WebGym 401/404 after 2 genuine download attempts (gating not permanent unavailability)",
+    "browsergym-core 0.14.3, agentlab 0.4.2, playwright 1.44.0, tiktoken 0.14.0 all installed",
+    "Family 6 (864/668 nodes) shows product-specific variation while template families are identical (1430 nodes)"
+  ],
+  "validity_notes": [
+    "Infrastructure precedence correctly applied: Docker image already running bypasses prior 90s TimeoutExpired blocker",
+    "Full 64-char digest sha256:3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb validated via docker images --digests",
+    "Full-tree grammar verified: no [:20] truncation in execution code, 9 dynamic-token regexes present",
+    "Playwright version 1.44.0 (fallback from 1.63.0 primary) functional for CDP",
+    "DEGENERATE RESULT: All product pages share the same Magento One Stop Market template, producing identical AX trees (consistency=1.0, variance=0.0)",
+    "The full-tree grammar does NOT produce discriminating AX trees because template structure dominates over product-specific content",
+    "Stagehand cache failure: SHA256 changes on every page.access because 9-regex stripping does not cover all dynamic elements (timestamps, CSRF tokens in HTML attributes, session-specific content)",
+    "WebGym 401/404 satisfies frozen 2-attempt clause; H3 branch MEASUREMENT_INVALID but does not invalidate AX/Stagehand live branch",
+    "Memory constraint (15GB total, 11GB available) may limit parallel capture scale",
+    "Family 6 (product variant pages with 864/668 nodes) shows SOME product-specific variation but overall metric degenerate due to template dominance"
+  ],
+  "unresolved": [
+    "M_AX_DELTA_TRUNCATED not separately measured (requires truncated [:20] baseline on same 20 pages)",
+    "WebGym 50-site diverse census not executed (401/404 blocking) - H3 branch MEASUREMENT_INVALID",
+    "Gate0 multi-step trajectories not executed (BrowserGym API structure differs from expected)",
+    "Shopping_admin 184-task/42-family expansion not attempted (only 10 families sampled from 36-family pool)",
+    "Product-subtree semantic anchoring not validated live (node_count>1 distinct hashes on path families not verified)",
+    "Full-tree grammar needs product-specific anchoring (heading/price/add-to-cart/main boundaries) to break template degeneracy",
+    "Stagehand 9-regex stripping incomplete - needs additional regexes for Magento-specific dynamic elements"
+  ]
+}
