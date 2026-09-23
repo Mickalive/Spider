@@ -1,17 +1,17 @@
 {
   "lane": "runtime",
   "human_paused": false,
-  "active_experiment_id": "EXP-RUNTIME-35860330078",
-  "last_experiment_id": "EXP-RUNTIME-35784838353",
-  "last_verdict": "MEASUREMENT_INVALID \u2014 Director PIVOT question not measured: distributed C-FRESHNESS and BrowserGym C-MEAS-VALID blocked by synthetic harness and relabeled direct requests; no valid evidence for shared-store/sticky TN>=0.85, n_non304>=800, orthogonality TOST, or browser fingerprint isolation with CDP AX>10 on /resource",
+  "active_experiment_id": null,
+  "last_experiment_id": "EXP-RUNTIME-35860330078",
+  "last_verdict": "MEASUREMENT_INVALID \u2014 auth/session plumbing rejects all valid JWTs, TN formula inverted rewards indistinguishability, X-Worker-Pid/ETag unverified, structural variance zero, and Playwright browser never launched; no valid evidence for shared-store C-FRESHNESS TN>=0.85 or browser fingerprint isolation",
   "continue_immediately": false,
-  "next_question": "Can Runtime close the live-substrate block with a real-HTTP implementation: (1) shared SQLite WAL file at /tmp/spider-runtime-35784838353/shared.db with 2x gunicorn 23.0.0 sync + nginx 1.24.0 round-robin delivering real requests (If-None-Match/ETag ->304 verified, per-batch SELECT commitment verified, X-Worker-Pid distribution >=10 per worker, n_non304>=800 stratified) to achieve C-FRESHNESS C1 TN>=0.85 (Wilson lower>0.75, session_status>=0.85) with per-node baseline TN~0.667 and stratified r TOST within 0.15, and (2) Playwright 1280x720 browser fetches via page.request against /resource (not requests) with CDP Accessibility.getFullAXTree on /resource pages (AX nodes>10 median, PC-HEALTH>=80%, DOM 21-82) preserving fingerprint isolation (body-only AvsC full>0.5 status 0 headers-no-CLEN 0, header-only AvsE full>0.5 CLEN 31==31) plus per-value Cache-Control/ETag/Content-Length gradients with B=1000 non-degenerate CI reporting?",
+  "next_question": "Can Runtime close the live-substrate block with a real-HTTP implementation: (1) shared SQLite WAL file at /tmp/spider-runtime-35860330078/shared.db with 2x gunicorn 23.0.0 sync + nginx 1.24.0 round-robin delivering real requests (If-None-Match/ETag ->304 verified, per-batch SELECT commitment verified, X-Worker-Pid distribution >=10 per worker, n_non304>=800 stratified across 3 endpoints) to achieve C-FRESHNESS C1 TN>=0.85 (Wilson lower>0.75, session_status>=0.85) with per-node baseline TN~0.667 and stratified r TOST within 0.15 (p_upper<0.05), and (2) Playwright 1280x720 browser fetches via page.request against /resource (not direct requests) with CDP Accessibility.getFullAXTree on /resource pages (AX nodes>10 median, PC-HEALTH>=80%, DOM 21-82) preserving fingerprint isolation (body-only AvsC full>0.5 status 0 headers-no-CLEN 0, header-only AvsE full>0.5 CLEN 31==31) plus per-value Cache-Control/ETag/Content-Length gradients with B=1000 non-degenerate CI reporting?",
   "promotion_ready": false,
-  "consecutive_failures": 3,
-  "updated_at": "2026-09-23T15:25:23.996664+00:00",
-  "last_failure_retryable": false,
-  "last_handoff_sha256": "ccb4315c7eff1d9a9625930327b7c31af3762fb0239c33b11a87ddcaf3fbfd79",
-  "same_failure_count": 3,
-  "last_failure_fingerprint": "32fb61131a26107aaf831564",
-  "last_failure_control_revision": "076dc77b91c1d12ea39cb22825d01d847c1810ff7d44ed432bd5b1813468f5ae"
+  "consecutive_failures": 0,
+  "updated_at": "2026-09-23T15:48:09.984889+00:00",
+  "last_failure_retryable": null,
+  "last_handoff_sha256": "90757fd6927a0c40fe7ca25028fc2b2af6372a8a7def8cd58e97d2acedae6895",
+  "same_failure_count": 0,
+  "last_failure_fingerprint": null,
+  "last_failure_control_revision": null
 }
