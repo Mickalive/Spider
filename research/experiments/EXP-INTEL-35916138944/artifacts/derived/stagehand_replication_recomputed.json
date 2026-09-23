@@ -1,0 +1,263 @@
+{
+  "n_families_attempted": 36,
+  "hit_count": 0,
+  "miss_count": 36,
+  "false_accept_count": 0,
+  "hit_rate": 0.0,
+  "miss_rate": 1.0,
+  "false_accept_rate": 0.0,
+  "family_results": [
+    {
+      "family_key": "(('shopping',), 'Add {{product}} to my wish list')",
+      "before_hash": "b5aeb7b523f213db",
+      "after_hash": "2fb297eb7d38b43c",
+      "hash_changed_on_mutation": true,
+      "node_count": 1430
+    },
+    {
+      "family_key": "(('shopping',), 'Go to the page showing {{product_category}}",
+      "before_hash": "916488cc1e9232e9",
+      "after_hash": "bb1c9baa9f4cd02a",
+      "hash_changed_on_mutation": true,
+      "node_count": 1430
+    },
+    {
+      "family_key": "(('shopping',), 'Open the {{category}} category page to brow",
+      "before_hash": "a551623045f374e6",
+      "after_hash": "c745922e8449c1fc",
+      "hash_changed_on_mutation": true,
+      "node_count": 1430
+    },
+    {
+      "family_key": "(('shopping',), 'Buy the highest rated product from the {{pr",
+      "before_hash": "decc591b8ccbaf01",
+      "after_hash": "c2dd32627ad01a93",
+      "hash_changed_on_mutation": true,
+      "node_count": 1430
+    },
+    {
+      "family_key": "(('shopping',), 'Get all review titles with 2 stars or below",
+      "before_hash": "15652eeb59a381f3",
+      "after_hash": "b9b6f170abdd3245",
+      "hash_changed_on_mutation": true,
+      "node_count": 864
+    },
+    {
+      "family_key": "(('shopping_admin',), 'Add {{option_spec}} to {{base_setting",
+      "before_hash": "98b63164ada2ac87",
+      "after_hash": "1cc591e0a83039df",
+      "hash_changed_on_mutation": true,
+      "node_count": 1430
+    },
+    {
+      "family_key": "(('shopping_admin',), 'Get title and rating for all reviews ",
+      "before_hash": "bc1b97c5b8c3517e",
+      "after_hash": "466b5f01150a2cb8",
+      "hash_changed_on_mutation": true,
+      "node_count": 1430
+    },
+    {
+      "family_key": "(('shopping_admin',), 'Get customer email(s) who {{order_cri",
+      "before_hash": "41f961fd53f67ce4",
+      "after_hash": "0b81be28e3af30ed",
+      "hash_changed_on_mutation": true,
+      "node_count": 1430
+    },
+    {
+      "family_key": "(('shopping',), 'Get the {{info}} for order number {{order_n",
+      "before_hash": "2e7ff65628f806f0",
+      "after_hash": "ef8bf94909bfe23c",
+      "hash_changed_on_mutation": true,
+      "node_count": 1430
+    },
+    {
+      "family_key": "(('shopping_admin',), 'Give me the {{Attribute}} of the prod",
+      "before_hash": "723d5868dc2b315c",
+      "after_hash": "0b3627fbe48fa1c2",
+      "hash_changed_on_mutation": true,
+      "node_count": 1430
+    },
+    {
+      "family_key": "(('shopping_admin',), '{{payment_query}}. {{retrieved_data_f",
+      "before_hash": "41eb475f85528f74",
+      "after_hash": "17788650897b0b04",
+      "hash_changed_on_mutation": true,
+      "node_count": 1430
+    },
+    {
+      "family_key": "(('shopping_admin',), '{{arrival_phrase}}, {{update_phrase}}",
+      "before_hash": "e6e95f6849267166",
+      "after_hash": "4203e12b508d1aaf",
+      "hash_changed_on_mutation": true,
+      "node_count": 1430
+    },
+    {
+      "family_key": "(('shopping_admin',), 'Modify the address of order #{{order_",
+      "before_hash": "08924916d9e082ae",
+      "after_hash": "2e6d0010da026e1b",
+      "hash_changed_on_mutation": true,
+      "node_count": 1430
+    },
+    {
+      "family_key": "(('shopping_admin',), 'Notify {{name}} in their most recent ",
+      "before_hash": "f9bf3c36d636cf6e",
+      "after_hash": "33afd2f10f77bbf4",
+      "hash_changed_on_mutation": true,
+      "node_count": 1430
+    },
+    {
+      "family_key": "(('shopping',), 'Pull up the page with all \"{{product}}\" lis",
+      "before_hash": "839ac50a40ca0ba1",
+      "after_hash": "e358cca9ddae49e9",
+      "hash_changed_on_mutation": true,
+      "node_count": 1430
+    },
+    {
+      "family_key": "(('shopping',), 'Rate my recently purchased {{product}} with",
+      "before_hash": "c8829df8d8bfefd8",
+      "after_hash": "22afb393843921d2",
+      "hash_changed_on_mutation": true,
+      "node_count": 1430
+    },
+    {
+      "family_key": "(('shopping_admin',), 'Update order #{{order}} with the {{se",
+      "before_hash": "b2361a7f0b87a724",
+      "after_hash": "ecceb90bf3ca1f82",
+      "hash_changed_on_mutation": true,
+      "node_count": 1430
+    },
+    {
+      "family_key": "(('shopping',), 'View the product page for the least expensi",
+      "before_hash": "b01c41299f7431e3",
+      "after_hash": "9f087430b7451c1c",
+      "hash_changed_on_mutation": true,
+      "node_count": 1430
+    },
+    {
+      "family_key": "(('shopping',), 'Fill out the contact us form with this refu",
+      "before_hash": "868a4dfcade690b8",
+      "after_hash": "4a148ff95a39c1f5",
+      "hash_changed_on_mutation": true,
+      "node_count": 1430
+    },
+    {
+      "family_key": "(('shopping_admin',), 'Return the customer nickname(s) who g",
+      "before_hash": "fb5c1a0dd5d49cdb",
+      "after_hash": "7706a37d6aa8c26f",
+      "hash_changed_on_mutation": true,
+      "node_count": 1430
+    },
+    {
+      "family_key": "(('shopping',), 'Get name(s) of reviewer(s) who mention {{de",
+      "before_hash": "3c8c764f137a1440",
+      "after_hash": "631c507b4656509e",
+      "hash_changed_on_mutation": true,
+      "node_count": 717
+    },
+    {
+      "family_key": "(('shopping',), 'Return the total amount I spent on shopping",
+      "before_hash": "0e701fb7c1fd841f",
+      "after_hash": "4dc706388ff39b91",
+      "hash_changed_on_mutation": true,
+      "node_count": 1430
+    },
+    {
+      "family_key": "(('shopping_admin',), 'Go to the list of orders that are {{s",
+      "before_hash": "00711cb8a4672ca1",
+      "after_hash": "2adc2cbdee451fd0",
+      "hash_changed_on_mutation": true,
+      "node_count": 1430
+    },
+    {
+      "family_key": "(('shopping',), 'How much refund should I expect from my ord",
+      "before_hash": "fbd670054dbf384a",
+      "after_hash": "39f3bb8f6487c9d9",
+      "hash_changed_on_mutation": true,
+      "node_count": 1430
+    },
+    {
+      "family_key": "(('shopping',), 'Fill the \"contact us\" form in the site for ",
+      "before_hash": "d6d82a069d8f96df",
+      "after_hash": "c88916d06128e8f3",
+      "hash_changed_on_mutation": true,
+      "node_count": 1430
+    },
+    {
+      "family_key": "(('shopping_admin',), '{{action}} the price of {{config}} by",
+      "before_hash": "1dbf87ac8e98a9f5",
+      "after_hash": "1d9c029fd4ee5042",
+      "hash_changed_on_mutation": true,
+      "node_count": 1430
+    },
+    {
+      "family_key": "(('shopping_admin',), 'How many reviews did our shop receive",
+      "before_hash": "ae243401eab1a79e",
+      "after_hash": "fe4c03854a6ef90d",
+      "hash_changed_on_mutation": true,
+      "node_count": 1430
+    },
+    {
+      "family_key": "(('shopping_admin',), 'Get the monthly count of completed or",
+      "before_hash": "829d6f4327d0aa14",
+      "after_hash": "62d3cee1951c2628",
+      "hash_changed_on_mutation": true,
+      "node_count": 1430
+    },
+    {
+      "family_key": "(('shopping_admin',), 'Create a new marketing price rule cal",
+      "before_hash": "3762d8fcc9270dc3",
+      "after_hash": "b69b8625fbd6bbcf",
+      "hash_changed_on_mutation": true,
+      "node_count": 1430
+    },
+    {
+      "family_key": "(('shopping_admin',), 'Get the total number of {{status}} re",
+      "before_hash": "5a966346d9c55a8a",
+      "after_hash": "0b8ab4683df6f799",
+      "hash_changed_on_mutation": true,
+      "node_count": 1430
+    },
+    {
+      "family_key": "(('shopping_admin',), 'Update the product description of {{p",
+      "before_hash": "8402526ecb156b53",
+      "after_hash": "557280a52e6b4938",
+      "hash_changed_on_mutation": true,
+      "node_count": 1430
+    },
+    {
+      "family_key": "(('shopping_admin',), 'Cancel order {{id}}')",
+      "before_hash": "a9a9553eaab87124",
+      "after_hash": "ad63c7ebb8b1f57a",
+      "hash_changed_on_mutation": true,
+      "node_count": 1430
+    },
+    {
+      "family_key": "(('shopping',), 'What is the price range for products from {",
+      "before_hash": "1039316886af6554",
+      "after_hash": "d50f270c531a2fc1",
+      "hash_changed_on_mutation": true,
+      "node_count": 1430
+    },
+    {
+      "family_key": "(('shopping',), 'Add the product on the current page to my w",
+      "before_hash": "c3d6af984197035e",
+      "after_hash": "23dff8ac1622bf57",
+      "hash_changed_on_mutation": true,
+      "node_count": 688
+    },
+    {
+      "family_key": "(('shopping',), 'I previously ordered {{product}} {{time}} a",
+      "before_hash": "8df070cb05b2d13a",
+      "after_hash": "a200c0e417c66390",
+      "hash_changed_on_mutation": true,
+      "node_count": 1430
+    },
+    {
+      "family_key": "(('shopping_admin',), 'Get the top {{n}} search term(s) in m",
+      "before_hash": "a879c8f6263f829a",
+      "after_hash": "0d9e0ae94aa1d1cf",
+      "hash_changed_on_mutation": true,
+      "node_count": 1430
+    }
+  ]
+}

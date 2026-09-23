@@ -1,0 +1,8 @@
+{
+  "relaxed_pass_count": 0,
+  "strict_pass_count": 0,
+  "families_tested": 0,
+  "transitions_per_family": 0,
+  "note": "BrowserGym available; multi-step rollout needs additional API configuration",
+  "browsergym_available": true
+}

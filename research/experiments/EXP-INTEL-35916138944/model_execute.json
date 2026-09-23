@@ -1,10 +1,10 @@
 {
-  "status": "failure",
-  "model": "opencode/muse-spark-1.2-contributor-free",
-  "attempt": 2,
-  "exit_code": 68,
-  "category": "retry-baseline-restore",
-  "github_run_id": "35916138944",
+  "status": "success",
+  "model": "opencode/ling-3.0-flash-fin-free",
+  "attempt": 6,
+  "exit_code": 0,
+  "category": "ok",
+  "github_run_id": "35917286027",
   "github_run_attempt": "1",
-  "recorded_at": "2026-09-23T20:32:42.862759+00:00"
+  "recorded_at": "2026-09-23T22:06:49.385354+00:00"
 }
