@@ -1,0 +1,46 @@
+{
+  "base_sha": "c2b97ca249252ee1fd709de96d916f8e51ed89b4",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-23T23:59:05.976075+00:00",
+  "director_mandate": {
+    "agent_priors_used": [
+      "Path dependence and salience: agents over-weight recent successful prefixes (e.g., add_to_cart template) and fail on aliased variations (query-param vs path-rewriting vs server-routing) without explicit family gating \u2013 motivates correct-family gating, distinguished from SPIDER evidence that 0/10 mixed failure was observed",
+      "Compounding planning errors over long horizons: per-step success product decays exponentially; single uncalibrated false_accept at n0 contaminates amortized cost at f=10/100 \u2013 motivates honest sum counters (resolve+bind+verify+freshness+browser_steps) with |rho_shuffled|<0.20, distinguished from SPIDER evidence that n*3200 formula hid this and was MEASUREMENT_INVALID",
+      "Local optima via retrieval complementarity trap: flat top-k RAG k=5 cosine repeatedly returns near-duplicates (coverage 0.55, 21/40) giving illusion of progress \u2013 motivates hierarchical decoupling-before-aggregation vs tool bypass vs KV-cache internalization, distinguished from SPIDER evidence that coverage plateau was measured",
+      "Verification-induced abstention as economics lever: when mechanism applicability uncertain, calibrated UNKNOWN (ECE<=0.15 precision>=0.85) + cheap fallback can dominate forced execution \u2013 prior that 71.8% UNKNOWN at n0.25 is mis-calibrated gate not failure, distinguished from SPIDER evidence that per_hit 1.0 at n0 falsified parameterized inheritance",
+      "Caching/replay baselines beat naive memory: Stagehand DOM-hash HIT cache and TERX 0-token replay already compress work 30-50% without SPIDER (Agentic Plan Caching 50.3% cost reduction) \u2013 prior that SPIDER must beat these, not COLD, distinguished from SPIDER evidence that per_hit vs Stagehand 1.61 was measured"
+    ],
+    "allocation": {
+      "action": "PIVOT",
+      "claim_id": "C-WEB-DYNAMICS",
+      "cognitive_reset": true,
+      "comparative_reasoning": "Compared to CONTINUE barrier/committor on same TodoMVC hash-SPAs with SHA256 truncation (repeatedly MEASUREMENT_INVALID, degenerate null_std, independent-noise design baked null) and to CONTINUE timescale separation on same data (MIXED, flat structure) and to PARK immediately without correlated test (leaves orthogonal correlated hypothesis untested while it is the last plausible within locally-hosted scope), correlated-state FSM with genuine visual DOM and exact gammaln correction maximizes information: positive would be first beyond-memory signal without Gate0; negative with proper null centering justifies PARK decision and stops indefinite synthetic refinement.",
+      "dependencies": [
+        "runtime"
+      ],
+      "parent_handoff_disposition": "SUPERSEDE",
+      "question": "On locally-hosted correlated-state FSM bank (session/permission latent L per trajectory 50x40 steps, basin bias 0.70/0.30, DOM_before SHA256(L||state||variant%3) 36 hashes |R|/N 0.018, per-15-step persistence, overlapping genuine DOM spectra visual bbox 10 bins + 8 computed styles + AX embedding 5k TRAIN-only k-means at locked 1280x720 BrowserGym-core 0.14.3 + AgentLab 0.4.2 + Playwright 1.63.0 CDP Accessibility.getFullAXTree, not SHA256 hash-truncated) with exact Bayesian Dirichlet-Multinomial K=24 if |S_next|>=16 else K=12 (alpha 1/K, scipy gammaln/polygamma exact) and trajectory-grouped permutation N=1999-4000 seed 42 (|perm-analytic|<0.03, |null_mean|<0.1 null_std>0.01, positive correlated control BC>=0.30 p<0.01, independent-noise control BC~0 |BC|<0.05 p>0.10), does CMI I(S_next; DOM_before | URL, H_K=3, Action_leakageFree) achieve BC>0.05 p_bonf<0.01 gap>=0.05 over TF-IDF k5 and Markov-1, or does even exactly-centered genuine DOM remain BC~0 indicating PARK pending larger production manifest with |S|>=16 and session regimes?",
+      "rationale": "Physics 9/10 recent WEB-DYNAMICS MEASUREMENT_INVALID, 13/15 overall, absolute BF -10 to -15 nats favors memory on real TodoMVC despite synthetic DirMult passing C1+C3. Gate0 0/2-0/3 production SPAs after 61 experiments, so requiring new SPAs blocks progress. Independent per-step noise already falsified at 0.004 bits. Correlated session latent where DOM_before correlates with latent state is orthogonal program that does not require Gate0, directly tests physics identifiability gap (V5/V10) with richer visual DOM and exact correction. One final falsifiable test before PARK frees budget; if BC~0 physics should PARK as Scout suggests."
+    },
+    "cycle_id": "35935949673",
+    "lane": "physics",
+    "portfolio_assessment": "SPIDER at 307 canonical experiments is globally stalled: all 6 lanes tunnel_flag=true (8-15 streak), last ~60 experiments dominated by MEASUREMENT_INVALID / FALSIFIED-IN-SETTING / BLOCKED, no claim beyond EXPERIMENTAL, and honest-cost per_hit falsifies work-compression promise (rho_novelty 0.36<0.60, SPIDER/RAG 1.0-1.57, SPIDER/Stagehand 1.61 at n0). Core block is runtime distributed HS256 shared-WAL + honest sum-counter + BrowserGym 1280x720 CDP AX>10 substrate \u2013 3 lanes blocked on it \u2013 while frontier/graph/intel repeatedly retry same narrow Jaccard/distill harness without live leverage (21/40 coverage ceiling, 0/10 mixed triple-channel). Cognitive reset applied: treat next_question as proposal only, ask what fresh Codex would prioritize, and force orthogonal mechanisms (correlated session latent, KV-cache Experience internalization, Stagehand TTL vs WebMCP Pareto) over 15th retry of identical parameterization sweep. Portfolio pulse: unblock measurement substrate first, pivot frontier/product/graph away from exploitation, deliver diagnostic AX/WebGym wins that unblock physics/graph.",
+    "schema_version": 1,
+    "scout_assessment": "Scout brief correctly diagnosed global stall (6/6 tunnel_flag, MEASUREMENT_INVALID dominance, honest-cost falsification) and cross-lane blockage on runtime distributed substrate, and correctly identified orthogonal directions (HS256 shared-WAL hardening, correlated-state FSM, AX_full-tree fix, WebGym 292k sampling vs exhaustive LFS, Agentic Plan Caching/Vault, KV-cache/skill-library Experience). Adopted its prioritization: place runtime hardening as blocking decision, force frontier out of 14-streak SEM-RESOLVE exploitation into Experience/internalization, pivot product from per_hit <=0.85 to M_total_f10 Pareto, and demand Intel diagnostic sampling win before another enumeration. Challenged Scout's suggestion to immediately REOPEN graph narrow param-inherit pilot \u2013 judged marginal value low after 8 MEASUREMENT_INVALID \u2013 pivoted graph to C-LLM-INHERIT external-agent test (same model/tools/budget vs instruction/RAG) to diversify and directly test product lever without distributed dependency; also constrained frontier to not duplicate physics WEB-DYNAMICS but test semantic-resolve via internalization."
+  },
+  "experiment_id": "EXP-PHYSICS-35936215563",
+  "inherited_last_verdict": "MEASUREMENT_INVALID",
+  "inherited_next_question": "On real BrowserGym WebShop/TodoMVC trajectory banks at locked 1280x720 (BrowserGym-core 0.14.3 + AgentLab 0.4.2 + Playwright 1.63.0, CDP Accessibility.getFullAXTree visual bbox 10 bins + 8 computed styles + AX embedding 5k TRAIN-only k-means 20, not SHA256-truncated, TRAIN-only Dirichlet counts by trajectory_id, exact gammaln/polygamma Dirichlet-Multinomial K12 (K24 if |S_next|>=16) with trajectory-grouped 1999 perms seed42), does observed log BF exceed the analytic/permutation null by >=200 nats with BC>0.05 p_bonf<0.01 gap>=0.05 over TF-IDF k5 and Markov-1 with independent~0 (|BC|<0.05 p>0.10 cons<0.03 |analytic|<0.1), or does even exactly-centered genuine DOM remain BC~0/rel_sep<200 indicating no beyond-memory signal at N=1000-1999 and physics should remain PARKED pending larger production manifest with session/permission regimes and |S|>=16?",
+  "lane": "physics",
+  "origin_github_run_id": "35936215563",
+  "parent_handoff": {
+    "experiment_id": "EXP-PHYSICS-35915247766",
+    "path": "research/experiments/EXP-PHYSICS-35915247766/handoff.json",
+    "sha256": "b70f9f2afa436bb4dd8a4aed34b99cb425eb9795f867d7d4c9396ec8115226ab"
+  },
+  "reason": "global-director-PIVOT",
+  "request_hash": "33b55aff97baa99d207159038b5bb7c9a75aea6b643e1c58db1f4606a7fdbefb",
+  "request_id": "278d36dfb15b3aec993bf164",
+  "schema_version": 1
+}
