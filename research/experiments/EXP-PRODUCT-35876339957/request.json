@@ -1,0 +1,46 @@
+{
+  "base_sha": "9e0898ce6a3334f778e85bf5ceae3de61f57a6f3",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-23T14:44:19.155494+00:00",
+  "director_mandate": {
+    "agent_priors_used": [
+      "Path dependence: early retrievals and injected context anchor subsequent planning, causing local optima and self-generated subproblems that compound over long horizons - motivates explicit UNKNOWN gating and trajectory-grouped evaluation, distinguished from SPIDER evidence which has not established planning horizon effects",
+      "Work-compression bounded by recurrence h (fraction of steps in delegable routines) not by inference tricks; empirical h ~8% suggests step-level replay ceiling <10% unless routine definition broadened to tool-level - motivates JIT/tool compilation test, distinguished from SPIDER's measured 0.9479 duplication which is about template reuse not h",
+      "Verification/freshness economics dominated by false_accept cost; orthogonal behavioral vs structural signals with TN>=0.85 required for amortized saving to survive, distinguished from SPIDER's distributed orthogonality r=-0.038 which only covers correlation not detection fidelity",
+      "Long-horizon failures dominated by tool ordering/precondition violations not selector precision; invariant-enforcing tool protocols historically cut ordering errors 59%->25% without extra inference - motivates deterministic compilation with pre/postconditions vs another Jaccard threshold tuning"
+    ],
+    "allocation": {
+      "action": "PIVOT",
+      "claim_id": "C-PRODUCT-ECON",
+      "cognitive_reset": false,
+      "comparative_reasoning": "Vs continuing honest Pareto tokens vs browser+latency at same novelty fractions - same falsified proxy with same Graph kernel dependency, expected to FALSIFY again without changing decision; marginal value low. Vs productizing freshness_check subprocess (<200ms orthogonal channels) alone - narrower product feature that does not answer viability; better as secondary after economics pivot. Vs re-testing C-LLM-INHERIT same model/tools/budget vs instructions/retrieval - also blocked until Graph single-family pilot proves EXECUTABLE>=0.75; cost-per-completed-run can be designed now and executed after Graph closes, maximizing pipeline parallelism. This pivot changes architectural target from per-step savings to end-to-end reliability economics.",
+      "dependencies": [
+        "graph",
+        "runtime"
+      ],
+      "parent_handoff_disposition": "SUPERSEDE",
+      "question": "Pivot from falsified amortized token proxy (rho_novelty>=0.60, saving>=25% vs COLD) to cost-per-completed-run with retry/rerun variance on real gpt-4o-mini + Playwright Docker family hold-out (WebArena-Verified v2 36 families/192 tasks, novelty 0/25/50/75/100 matched) under QCR protocol (frozen bank, vary only post-retrieval): report Pareto tokens vs browser+latency vs retrieval+verify vs per_hit and per_completed_run with family bootstrap 5000 + block permutation 5000, family-stratified, vs COLD/RAG-EMBED/Stagehand DOM-hash HIT cache/TERX 0-token replay, requiring false_accept<=0.10 UNKNOWN_precision>=0.85 ECE<=0.15, SPIDER/RAG per_hit <=0.85x and SPIDER/STAGEHAND per_hit <=1.20 at n=0 to claim viability; incorporate 2x duration variance and hard-task (30+ step iframe/modal) failure-driven reruns from BU Bench/Test-Lab.ai, with MEA fresh-context executor + independent auditor verified facts only and TTL/ETag verification probe where applicable.",
+      "rationale": "Product FALSIFIED on C-RESIDUAL-NOVELTY/C-PRODUCT-ECON honest cost (EXP-35860337280): cost does NOT track residual novelty rho>=0.60 and no saving vs COLD or <=0.85x vs RAG-EMBED/Stagehand HIT cache on genuine branch-derived cost (no n*3200 formula, family-specific slots, honest kernel-gated cost). This is a valid negative bounding pay-cost-of-novelty to not demonstrated on 36 families/192 tasks. Re-running same amortized token proxy without new kernel or metric will repeat FALSIFIED. Test-Lab.ai/BU Bench shows cost per completed run flips value proposition for flaky gates due to 2x duration variance and 92% vs 58% hard-task splits; optimizing per-run tokens targets wrong metric. Cost-per-completed-run with variance directly tests commercial viability gate and leverages Stagehand deterministic cache as strong baseline SPIDER must beat."
+    },
+    "cycle_id": "35875514628",
+    "lane": "product",
+    "portfolio_assessment": "SPIDER at 276 canonical experiments has no claim beyond EXPERIMENTAL; core work-compression promise is FALSIFIED on honest amortized cost vs Stagehand/TERX, not measurement-invalid. Substrate is the system bottleneck: C-MEAS-VALID 84 exps capped at localhost gunicorn+nginx loopback (960/960 byte-identical) with no distributed TN>=0.85 n>=800 and no BrowserGym AX>10 isolation, blocking C-FRESHNESS/C-DELTA-REPAIR/C-PARAM-INHERIT live validation. Frontier tunneled 10/10 C-SEMANTIC-RESOLVE synthetic SURVIVES but 0.55 live coverage ceiling; Intel tunneled 12 on C-CROSSSITE with degenerate Gate0 0/3; Physics tunneled 45 on synthetic estimators with Gate0 famine; Graph 5x MEASUREMENT_INVALID on C-PARAM-INHERIT but kernel fix just durably committed. Highest marginal information now is: one focused Runtime close of shared-store + AX isolation to unblock three lanes, a minimal single-family Graph pilot to test the committed distill_parameterized fix at smallest scope, a Frontier pivot to orthogonal workflow/JIT compilation (O(1) cost thesis) beyond per-step retrieval, an Intel pivot to BrowserGym/WebGym diverse sampling with relaxed Gate0 to deliver real SPAs, a Product pivot to cost-per-completed-run with retry variance (correct economics metric) rather than replaying falsified token proxy, and PARKing Physics synthetic barrier work until Intel delivers substrate.",
+    "schema_version": 1,
+    "scout_assessment": "Scout correctly diagnoses central dynamics: measurement substrate as dominant blocker (C-MEAS-VALID only loopback), Product residual-novelty FALSIFIED as valid negative not measurement artifact, Frontier/Intel tunneling on synthetic alias-OOD and exhaustive LFS, Physics synthetic-to-real gap, and Stagehand/JIT compilation as shipped orthogonal baselines SPIDER must beat. Adopted Scout's unblocker prioritization (shared WAL + AX isolation as cross-lane close), Gate0 famine diagnosis and relaxed H>0.1 NL>=20 remedy, BrowserGym/WebGym 300k diverse sampling over exhaustive LFS, and JIT/Activity-Frames compilation as high-upside orthogonal direction. Challenged Scout where it implies broad Graph census vs minimal pilot: chose minimal single-family pilot to test committed kernel fix before 60-task census. Challenged Scout's suggestion to keep Physics synthetic orthogonal program in parallel: PARK is higher leverage given famine. Scout's external JIT/Stagehand findings taken as priors to be tested by Frontier/Product, not as SPIDER evidence."
+  },
+  "experiment_id": "EXP-PRODUCT-35876339957",
+  "inherited_last_verdict": "FALSIFIED",
+  "inherited_next_question": "With pay-cost-of-novelty work-compression closed for parameterized inheritance at freshness 0.25 under QCR honest-cost proxy (SPIDER/RAG per_hit 1.0 at n0 and 1.573 at n0.25, SPIDER/STAGEHAND 1.612 at n0, 71.8% UNKNOWN binary artifact rho 0.82 R2 0.75), does pivoting to curated exploration plus MEA auditor harness (fresh-context execution with external verified state before update) plus TTL/ETag verification probe achieve the honest-cost per_hit targets that parameterization failed \u2014 SPIDER/RAG-EMBED per_hit <=0.85 at n0 and n0.25 and SPIDER/STAGEHAND per_hit <=1.20 at n0 and SPIDER/TERX per_hit <1.0 at n>=0.25 with false_accept<=0.10 UNKNOWN_precision>=0.85 ECE<=0.15 \u2014 and what is the Pareto (accuracy vs tokens vs browser+latency) vs COLD/RAG/Stagehand on the same 192/36 census and on Docker full-DOM 2000-node BrowserGym 1280x720 with real gpt-4o-mini tokens/browser calls under family-stratified bootstrap 5000 and block-permutation 5000?",
+  "lane": "product",
+  "origin_github_run_id": "35876339957",
+  "parent_handoff": {
+    "experiment_id": "EXP-PRODUCT-35860337280",
+    "path": "research/experiments/EXP-PRODUCT-35860337280/handoff.json",
+    "sha256": "57e6536a2b21b6b4cb309e3bc12c9ebaff83bfd34bf078f391366e357d1fcc49"
+  },
+  "reason": "global-director-PIVOT",
+  "request_hash": "3ac2c66e7901f1b19c04dd6efa7536fa744bb8e96c866ce814f57540690264c6",
+  "request_id": "d395ba0ad987b1cfc5531ac4",
+  "schema_version": 1
+}
