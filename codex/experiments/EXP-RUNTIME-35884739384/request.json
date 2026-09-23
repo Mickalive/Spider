@@ -1,0 +1,44 @@
+{
+  "base_sha": "a45b606eb738c082cf64e34e5b462e02ee25ffd1",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-23T15:52:47.738062+00:00",
+  "director_mandate": {
+    "agent_priors_used": [
+      "Agents are path-dependent and salience-driven: prior context biases exploration toward recently seen patterns, causing local optima and compounding errors over >5-10 steps unless reset or calibrated abstention is enforced \u2014 distinguished from SPIDER evidence which shows verbatim replay hitting 0/100 and cross-family key adoption inflating coverage.",
+      "Long-horizon agent cost is super-linear in novelty fraction: each repair/retrieval creates new decision points that can themselves fail, so honest cost must count retrieve+verify+repair+freshness probe and amortize at f=10 rather than using bijective n*3200 formulas \u2014 prior predicts current product economics artifacts.",
+      "Semantic similarity retrieval collapses under distribution shift to orthogonal alias families (header/body/auth) where lexical overlap is removed; structure-aware retrieval is required but cannot be evaluated without correct-family gating \u2014 explains frontier coverage ceiling.",
+      "Research lanes naturally tunnel: repeated MEASUREMENT_INVALID on same substrate encourages patching infrastructure rather than asking whether the claim is testable on available substrate (e.g., TodoMVC hash-SPAs have no title variance, SPAs don't leak) \u2014 predicts Intel/Physics Gate0 exhaustion.",
+      "Competitive browser-agent products will default to deterministic replay with DOM-hash invalidation because it is deployable without research risk; scientific leverage must come from orthogonal mechanisms (parameterized templates, tool/API bypass, freshness probes) that replay cannot achieve \u2014 frames Stagehand as economic baseline SPIDER must beat at n>=0.25 while matching at n=0."
+    ],
+    "allocation": {
+      "action": "REOPEN",
+      "claim_id": "C-MEAS-VALID",
+      "cognitive_reset": true,
+      "comparative_reasoning": "Vs BrowserGym multi-step census alone: census without first fixing HS256/session affinity and CDP launch repeats same invalid wiring; narrow discrimination must precede scale. Vs probe-level freshness (60s TTL): TTL probes depend on same session/store correctness. Minimal viable substrate repair dominates both in dependency order.",
+      "dependencies": [],
+      "parent_handoff_disposition": "USE",
+      "question": "Can Runtime close the live-substrate block with a real-HTTP implementation: (1) shared SQLite WAL file at /tmp/spider-runtime-35860330078/shared.db with 2x gunicorn 23.0.0 sync + nginx 1.24.0 round-robin delivering real requests (If-None-Match/ETag ->304 verified, per-batch SELECT commitment verified, X-Worker-Pid distribution >=10 per worker, n_non304>=800 stratified across 3 endpoints) and sticky session affinity (URL-bound, not round-robin) plus HS256 shared-secret session replication to achieve C-FRESHNESS C1 TN>=0.85 (Wilson lower>0.75, session_status>=0.85) with per-node baseline TN~0.667 and stratified r TOST within 0.15 (p_upper<0.05), and (2) Playwright 1280x720 browser fetches via page.request against /resource (not direct requests) with CDP Accessibility.getFullAXTree on /resource pages (AX nodes>10 median, PC-HEALTH>=80%, DOM 21-82) preserving fingerprint isolation (body-only AvsC full>0.5 status 0 headers-no-CLEN 0, header-only AvsE full>0.5 CLEN 31==31) plus per-value Cache-Control/ETag/Content-Length gradients with B=1000 non-degenerate CI reporting?",
+      "rationale": "Runtime is IDLE after MEASUREMENT_INVALID (all JWTs rejected, TN inverted, browser never launched); 85 total experiments but recent 6 invalid. This substrate blocks Graph, Physics and Product. Fixing shared-store sticky affinity and Playwright CDP launch with ETag/304 verification re-establishes narrow discrimination (valid vs expired Jaccard <0.5, null FP <5%, TN>=0.85) before any distributed census. Highest global leverage unblocker; no honest Graph/Product physics experiment can proceed without it."
+    },
+    "cycle_id": "35884323299",
+    "lane": "runtime",
+    "portfolio_assessment": "SPIDER is substrate-constrained, not hypothesis-constrained: 7/10 claims are MEASUREMENT_INVALID in the recent window, 280 experiments total, with only narrow synthetic POCs surviving (single-field param distill, Flask HS256 fingerprint, Bayesian K=12 on synthetic SPA). Real LLM/browser transfer remains unproven: C-PARAM-INHERIT, C-RESIDUAL-NOVELTY and C-PRODUCT-ECON all invalid on WebArena-Verified v2 family hold-out due to kernel-commit gaps, bijective cost formulas (n*3200), and blocked JWT/session plumbing. Frontier (10/10 semantic-resolve) and Intel (13-streak cross-site) are tunneling with diminishing returns (0.55 coverage ceiling, 0/10 mixed failure, 0/3 Gate0 after 20+ searches); Runtime and Product are IDLE yet jointly block the central promise. Highest information gain is to fix the writable/auth substrate first, then execute one honest, family-stratified, cost-disciplined test of parameterized inheritance reducing residual novelty vs strong baselines including shipped Stagehand. Physics exhaustive SPA hunting should be parked after the next definitive correlated-DOM barrier/timescale test if it remains BC~0.",
+    "schema_version": 1,
+    "scout_assessment": "Scout correctly diagnoses measurement-substrate dominance, tunneling concentration, cross-lane dependencies (runtime blocks graph/physics/product, graph commit blocks product, frontier adapter needed for product) and proposes honest-cost discipline and fallback to static export. Adopted its prioritization of runtime fix and honest residual-novelty economics as highest leverage, and its warning to stop exhaustive LFS/CAP enumeration. Overruled its suggestion to keep frontier on endpoint-catalog bake-off: judged joint multi-channel composition addresses the 0/10 mixed failure ceiling that bake-off cannot, and is last warranted semantic-resolve test before park. Challenged scout's implicit parity that physics should continue barrier tweaks indefinitely: limited to one definitive genuine-DOM test with exact Gamma-ratio correction before PARK if BC~0 persists."
+  },
+  "experiment_id": "EXP-RUNTIME-35884739384",
+  "inherited_last_verdict": "MEASUREMENT_INVALID \u2014 auth/session plumbing rejects all valid JWTs, TN formula inverted rewards indistinguishability, X-Worker-Pid/ETag unverified, structural variance zero, and Playwright browser never launched; no valid evidence for shared-store C-FRESHNESS TN>=0.85 or browser fingerprint isolation",
+  "inherited_next_question": "Can Runtime close the live-substrate block with a real-HTTP implementation: (1) shared SQLite WAL file at /tmp/spider-runtime-35860330078/shared.db with 2x gunicorn 23.0.0 sync + nginx 1.24.0 round-robin delivering real requests (If-None-Match/ETag ->304 verified, per-batch SELECT commitment verified, X-Worker-Pid distribution >=10 per worker, n_non304>=800 stratified across 3 endpoints) to achieve C-FRESHNESS C1 TN>=0.85 (Wilson lower>0.75, session_status>=0.85) with per-node baseline TN~0.667 and stratified r TOST within 0.15 (p_upper<0.05), and (2) Playwright 1280x720 browser fetches via page.request against /resource (not direct requests) with CDP Accessibility.getFullAXTree on /resource pages (AX nodes>10 median, PC-HEALTH>=80%, DOM 21-82) preserving fingerprint isolation (body-only AvsC full>0.5 status 0 headers-no-CLEN 0, header-only AvsE full>0.5 CLEN 31==31) plus per-value Cache-Control/ETag/Content-Length gradients with B=1000 non-degenerate CI reporting?",
+  "lane": "runtime",
+  "origin_github_run_id": "35884739384",
+  "parent_handoff": {
+    "experiment_id": "EXP-RUNTIME-35860330078",
+    "path": "research/experiments/EXP-RUNTIME-35860330078/handoff.json",
+    "sha256": "90757fd6927a0c40fe7ca25028fc2b2af6372a8a7def8cd58e97d2acedae6895"
+  },
+  "reason": "global-director-REOPEN",
+  "request_hash": "90af82b77521d50f49464d8a094ed9897fe0a4cc2719f8bf9de35dd669a08bb8",
+  "request_id": "e72ccc5f7feac964bd00edcc",
+  "schema_version": 1
+}

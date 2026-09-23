@@ -1,0 +1,95 @@
+{
+ "code_hashes": {
+  "kernel.py": "86057bae82d0c6341c0bcb37b91f7b0c656297341daabe7dd4cd195955bdc231",
+  "models.py": "4fd649db3030219af1216fdb566b8f890c77e50f56d91ea60a9fbbeb117a2e27",
+  "registry.py": "51fb440d3827f21cccb5f77ad17dc0e76ccdbc2d52d7b05044cd821bb8a9322c",
+  "run_experiment.py": "fe504610970679ad3d877319b3676412efd5c2d38a671a74cfaccc705216b18a"
+ },
+ "cost_config_hash": "8592e9589a19b15d80a229d07192d218fddec6a4861df2f5489982bc1cf89367",
+ "cost_model": {
+  "auditor": 100,
+  "auditor_distill": 100,
+  "distill": 1000,
+  "f": 10,
+  "frontier": 50,
+  "fullverify": 50,
+  "hit": 50,
+  "honest_branch_derived": true,
+  "no_bijective_formula": true,
+  "novel": 500,
+  "per_hit_formula": "(M_total_f10 - retrieval - distill_amort - auditor_amort)/L",
+  "probe": 10,
+  "repair": 500,
+  "retrieval": 200
+ },
+ "csv_hash": "53f493d749a3517fc2456d5b1b5367c89d1f199ae922fea096ee1e18510d06ff",
+ "curated_hash": "8deee9396c545bb4405b1f382059e3a863191799af11e7e441b764aab692d6e1",
+ "docker_available": false,
+ "docker_replication": "not executed file-based primary gate; bound ceiling to file-based mock synthetic",
+ "environment": {
+  "browsergym": "not executed",
+  "frontier_adapter": "state-conditioned reconstruction TAU0.30 correct-family gating",
+  "gunicorn_nginx": "simulated deterministic map seeded 42 disclosed",
+  "numpy": "unavailable disclosed file-based mock",
+  "platform": "linux",
+  "playwright": "not executed file-based primary",
+  "python": "3.12.14 (main, Aug 13 2026, 02:47:42) [GCC 13.3.0]",
+  "qcr_ranker": "TFIDF Jaccard fallback TAU0.30",
+  "sklearn": "unavailable disclosed"
+ },
+ "experiment_id": "EXP-PRODUCT-35884748673",
+ "fixture_hash": "f43e38503952a53ce5272817cbed93ecc6b17b0730d98ddeff6bf00631f03e10",
+ "frontier_adapter": {
+  "correct_family_gating": true,
+  "cross_family_adoption": 0,
+  "hit_rate_correct_family": 1.0,
+  "reconstruction_cost": 50,
+  "tau": 0.3
+ },
+ "frontier_hash": "4a1649286a4600b9d0bd55590d0ee4726fd82edafd34667f02a2be0620fdea93",
+ "git_head": "fc46a46f72d1229afb00f269178c414551272bea",
+ "git_short": "fc46a46f",
+ "lane": "product",
+ "mea_auditor": {
+  "auditor_ms": 80,
+  "auditor_tokens": 100,
+  "block_rate": 1.0,
+  "context_limit": 25000,
+  "external_verified_state_fetch": true,
+  "fresh_context": true,
+  "governance_gate": "blocks 100% unverified writes",
+  "provenance_graph": "hash chain logged per task"
+ },
+ "metrics_hash": "81d85987018a746ca5cbd3f8ee19eb610d817f976481d7a14d559e587abc1cea",
+ "probe_hash": "02e8d5bd1f4c0230ad0a0c6657b9026c29f0c3941a922979b4fe6afd4c923b53",
+ "qcr_manifest_hash": "1310cf7d13d93d95f46da502476fa79cfdb3d00daccd6ecf1afcf7ee5d6ab45c",
+ "registry_hash": "fdf21c5982a9e43c398a99ac7654d1d3c908e6cec77c4302210a5eb2e13a2c8b",
+ "run_id": "35884748673",
+ "seeds": {
+  "PYTHONHASHSEED": "0",
+  "frontier_seed": 42,
+  "probe_seed": 42,
+  "random_seed": 42
+ },
+ "seeds_detail": {
+  "PYTHONHASHSEED": 0,
+  "jitter": "uniform [-0.05,0.05]",
+  "numpy_seed": 42,
+  "random_seed": 42,
+  "softmax_temp": 0.15,
+  "wrong_bound_p": 0.15
+ },
+ "traces_hash": "0a219a261997ae5fd0a27b4223b16b8c98fb9c2da8f969fc760e435477cc4766",
+ "ttl_probe": {
+  "accuracy": 1.0,
+  "current_time_distribution": "[0,200]",
+  "expected_stale": "~50% fresh vs ~50% stale exercising ETag mismatch",
+  "false_accept": 0.0,
+  "full_verify_cost": "50 tok+120ms",
+  "max_age": 60,
+  "probe_cost": "10 tok+30ms",
+  "saving": 0.375,
+  "ttl_created_distribution": "[0,120]",
+  "ttl_seconds": 60
+ }
+}

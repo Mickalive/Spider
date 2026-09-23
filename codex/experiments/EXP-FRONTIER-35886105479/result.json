@@ -1,0 +1,135 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-FRONTIER-35886105479",
+  "lane": "frontier",
+  "status": "COMPLETE",
+  "outcome": "FALSIFIES",
+  "metrics": {
+    "B-EXACT-MATCH": {
+      "n": 40,
+      "correct": 20,
+      "rate": 0.5,
+      "wilson_lower": 0.35199278797099753,
+      "mean_honest_cost": 8.9
+    },
+    "B-FLAT-TFIDF-K5-CF": {
+      "n": 40,
+      "correct": 20,
+      "rate": 0.5,
+      "wilson_lower": 0.35199278797099753,
+      "mean_honest_cost": 8.9
+    },
+    "H-HIERARCHICAL-CF": {
+      "n": 40,
+      "correct": 20,
+      "rate": 0.5,
+      "wilson_lower": 0.35199278797099753,
+      "mean_honest_cost": 8.9
+    },
+    "H-WEBAPI-CF": {
+      "n": 40,
+      "correct": 20,
+      "rate": 0.5,
+      "wilson_lower": 0.35199278797099753,
+      "mean_honest_cost": 8.9
+    },
+    "B-COMPILED-WEBMCP-CF": {
+      "n": 40,
+      "correct": 20,
+      "rate": 0.5,
+      "wilson_lower": 0.35199278797099753,
+      "mean_honest_cost": 8.9
+    },
+    "B-STAGEHAND-DOMHASH": {
+      "n": 40,
+      "correct": 0,
+      "rate": 0.0,
+      "wilson_lower": 0.0,
+      "mean_honest_cost": 8.9
+    },
+    "B-RANDOM-K5-CF": {
+      "n": 40,
+      "correct": 7,
+      "rate": 0.175,
+      "wilson_lower": 0.08745302996883067,
+      "mean_honest_cost": 7.9
+    }
+  },
+  "controls": {
+    "PC_EXACT_MATCH_pass": true,
+    "PC_RETRIEVAL_HEALTH_pass": true,
+    "PC_WEBAPI_INDEX_BUILT_pass": true,
+    "PC_COMPILED_IR_BUILT_pass": true,
+    "PC_HONEST_COST_SANITY_pass": true,
+    "PC_FRESHNESS_NONCIRCULAR_pass": true,
+    "PC_AX_CDP_pass": true,
+    "PC_CONFIDENCE_DERIVED_pass": true,
+    "NC_NO_APPLICABLE_pass": true,
+    "NC_EMPTY_pass": true,
+    "NC_ORACLE_LEAK_pass": true,
+    "NC_STAGEHAND_ISOLATION_pass": true,
+    "NC_BIJECTIVE_COST_pass": true,
+    "ARM_CODE_IDENTITY_pass": true,
+    "ARM_THEME_OVERLAP": 0.7088607594936709
+  },
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-FRONTIER-35886105479/raw_evidence.json",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-35886105479/derived_metrics.json",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-35886105479/ir_manifest.json",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-35886105479/index_manifest.json",
+      "role": "derived"
+    },
+    {
+      "path": "research/frontier/run_experiment.py",
+      "role": "code"
+    }
+  ],
+  "observations": [
+    "All pipelines (compiled, endpoint-catalog, hierarchical, flat TFIDF) produce pooled correct-family rate 0.500 on alias-OOD N=40",
+    "B-EXACT-MATCH matches flat TFIDF at 0.500, confirming CF gating produces same ceiling",
+    "B-COMPILED-WEBMCP-CF produces identical 0.500 rate to flat TFIDF - compiled bypass does not break ceiling",
+    "B-HIERARCHICAL-CF and B-WEBAPI-CF also produce 0.500 - endpoint-catalog does not break ceiling",
+    "B-STAGEHAND-DOMHASH produces 0.000 (DOM hash misses alias-OOD)",
+    "B-RANDOM-K5-CF produces 0.175 (near chance)",
+    "PC_EXACT_MATCH passes (exact-match 12/12 correct for all pipelines)",
+    "PC_HONEST_COST_SANITY passes (honest_cost == sum counters+browser_steps, no jitter)",
+    "PC_CONFIDENCE_DERIVED passes (softmax-derived confidence, std>0.05)",
+    "PC_COMPILED_IR_BUILT passes (>=4 workflows, TreeWalker 99%, locator ranking, shadow-DOM)",
+    "PC_WEBAPI_INDEX_BUILT passes (>=3 endpoint themes, >=6 components, arm distinctness proven)",
+    "NC_NO_APPLICABLE and NC_EMPTY pass (UNKNOWN precision >=0.90, empty 100%)",
+    "ARM_CODE_IDENTITY passes (webapi != hierarchical, overlap <0.90)",
+    "All PC/NC controls pass; status COMPLETE with outcome FALSIFIES"
+  ],
+  "validity_notes": [
+    "Synthetic fixture sha 83b7c52d byte-identical to parent for comparability",
+    "Live BrowserGym substrate unavailable (no display in CI); census 4 envs x3 retries disclosed; synthetic AX with ax_nodes_count>10 used as disclosed fallback",
+    "Honest cost computed as sum counters+browser_steps exactly (no jitter, no f*6.0); permutation sanity passes",
+    "Confidence derived from softmax(temp=0.15), not hardcoded 0.85*max+0.12",
+    "Freshness uses TTL/version watermark, not freshness_label read",
+    "Stagehand uses DOM-hash code path, not stratum hardcode",
+    "Endpoint-catalog genuinely distinct from hierarchical (component vocab overlap <0.90, method/auth_scope components present)",
+    "CF gating applied uniformly; fallback to all candidates when CF filters empty",
+    "Template binding uses safe_bind with Bearer prefix normalization for comparison",
+    "All pipeline arms produce identical 0.500 on alias-OOD - suggests CF gating equalizes retrieval quality for these families",
+    "S6 economics not fully evaluated as S1-S5 survival gates not met; compiled amortized cost documented in ir_manifest"
+  ],
+  "unresolved": [
+    "All pipelines produce identical 0.500 rate on alias-OOD - why does retrieval diversity not differentiate? May indicate CF gating masks retrieval differences",
+    "Mixed-10 per-family breakdown not yet analyzed in detail",
+    "Per-stratum ECE and calibration not computed in derived_metrics",
+    "Live BrowserGym heterogeneous AX not tested (substrate unavailable); claim bounded to synthetic",
+    "Fetch/WebMCP OpenAPI exploratory not run (S3 mixed<4/10 condition not triggered for final decision)",
+    "O(1) amortized compilation economics ($0.002-0.092) not empirically measured beyond manifest documentation",
+    "TERX/Stagehand shipped baselines not compared (scout reference, not implemented)"
+  ]
+}

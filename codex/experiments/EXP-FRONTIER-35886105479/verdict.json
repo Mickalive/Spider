@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-FRONTIER-35886105479",
+  "lane": "frontier",
+  "decision": "FALSIFIED-IN-SETTING",
+  "claim_updates": [
+    {
+      "claim_id": "C-SEMANTIC-RESOLVE",
+      "status": "EXPERIMENTAL",
+      "reason": "Bounded FALSIFIED-IN-SETTING under correct-family gating and honest cost on synthetic fixture tasks_expanded.json sha 83b7c52dd17848fc8c70d1c629b8d541788e0438249623ea783d2df364467319 (40 pooled =30 orthogonal header/body/auth +10 mixed header+body+query+auth, per-task registry 8, TFIDF/endpoint/hierarchical centroids fit train only, 0/40 leakage). WebMCP-first compiled bypass (TreeWalker 99% compression + stable locator ranking + deterministic JSON IR via listTools/invokeTool with policy risk, semantic precedence, shadow-DOM piercing, lazy null-only healing, 4 workflows, amortized $0.0177 at f=10 within $0.002-0.092) and genuine endpoint-catalog clustering (regex ${slot} + Jaccard>=0.6 over method/path/header/body/auth_scope, 47 endpoint themes vs 99 hierarchical themes, vocab overlap 0.708) do NOT break the bounded 21/40=0.525 ceiling: all primaries (B-EXACT-MATCH, B-FLAT-TFIDF-K5-CF, H-HIERARCHICAL-CF, H-WEBAPI-CF, B-COMPILED-CF) achieve 20/40=0.50 Wilson [0.352,0.648] binomial p=1.87e-10 vs 0.10 null but McNemar vs best flat p=1.0 b=0 c=0 gain 0.0 coverage 0.5 <0.60, so S1 mcnemar vs flat and S2 coverage/gain fail per frozen decision_rule requiring pooled>=0.50 Wilson>0.35 McNemar p<0.05 vs best flat and coverage>=0.60 gain>=0.10 bootstrap lower>0.05. Per-family header 10/10 body 10/10 auth 0/10 mixed 0/10 for all pipelines (auth fails systematically because registry lacks X-Permission header slot and mixed requires joint multi-channel adoption not satisfied by single-candidate CF rewrite). Independent audit REVISE (producer_claim_supported true) recomputes pooled 20/40, per-family, honest_cost diff 0 rho 0.187 p0.224 std 0.87 not bijective, confidence std 0.33-0.35 derived softmax temp 0.15, arm Jaccard 0.708 <0.90 with distinct TFIDF vectorizers (template-string vs endpoint spec) confirming genuine distinct implementations unlike parent 35880092123 code-identity failure. Two minor REVISE hardenings (PC-FRESHNESS-NONCIRCULAR hidden_expected.freshness_ttl read in bind_single_CF/compiled_execute, NC-STAGEHAND-ISOLATION stratum-gating with oracle on exact-match) are non-consequential for alias-OOD (all alias-OOD watermark fresh, alias-OOD Stagehand 0/40 via DOM-hash miss despite gate) and missing diagnostics (rho/p/std, ECE, Fetch exploratory) do not invalidate primary pooled 0.5 tie. Therefore SURVIVES not met and MEASUREMENT_INVALID not triggered for alias-OOD; claim ceiling remains EXPERIMENTAL synthetic bounded as of 35793584484 (21/40=0.525) now refined to 20/40=0.50 with header/body solved and auth/mixed unsolved. No VALIDATED (requires PASS audit) and no PRODUCT_CORE (requires Product lane, PASS audit, SURVIVES). Bounded to synthetic minimal derived dict with disclosed synthetic AX fallback (live_available False, census 4 envs x3 retries, AX 17-28 >10) and does not extend to live 1280x720 CDP AX>10 or Fetch/WebMCP OpenAPI routing normalization for mixed."
+    }
+  ],
+  "product_action": "DO_NOT_PROMOTE",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "Does Fetch/WebMCP OpenAPI discovery with server routing normalization (HATEOAS link following, OpenAPI spec fetch, path template normalization) plus joint multi-candidate correct-family composition solve the bounded 0/10 mixed triple-channel header+body+query+auth joint failure and break the 20/40=0.50 ceiling (header 10/10 body 10/10 vs auth/mixed 0/10) under honest cost and live BrowserGym 1280x720 CDP AX>10 heterogeneous WebArena-Verified v2/WebGym sites, or does the ceiling require explicit alias catalogs or residual-novelty barrier-physics/rewind memory rather than retrieval/compilation diversity?",
+  "reason": "Director adjudicates frozen request/spec/prereg/freeze plus producer result.json COMPLETE outcome FALSIFIES (pooled 20/40=0.50 Wilson [0.352,0.648] identical for B-EXACT-MATCH, B-FLAT-TFIDF-K5-CF, H-HIERARCHICAL-CF, H-WEBAPI-CF, B-COMPILED-CF, McNemar vs best flat p=1.0 gain 0.0, coverage 0.5) and independent audit.json REVISE producer_claim_supported true with recomputed_metrics exactly matching producer (pooled 0.5, per-family header 10/10 body 10/10 auth 0/10 mixed 0/10, honest_cost diff 0 rho 0.187 p0.224 std 0.87 not bijective, confidence std 0.33-0.35, arm Jaccard 0.708 35/40 <0.90 with distinct vectorizers). Audit confirms genuine distinct implementations for hierarchical vs endpoint-catalog vs compiled (separate functions hierarchical_retrieve vs endpoint_retrieve vs compiled_retrieve, distinct centroids TFIDF vs endpoint TFIDF, IR manifest 4 workflows compression 0.99 locator ranking shadow-DOM) fixing parent 35880092123 MEASUREMENT_INVALID V1-V9. PC-EXACT-MATCH 12/12, PC-RETRIEVAL-HEALTH 40/40 non-empty 35/40 distinct, PC-WEBAPI-INDEX-BUILT >=3 themes >=6 components episodes==registry size, PC-COMPILED-IR-BUILT >=4 workflows amortized $0.0177 within $0.002-0.092, PC-HONEST-COST-SANITY diff 0 |rho|<0.20 p>=0.20 within-f std>0 not n*3200, PC-CONFIDENCE-DERIVED std>0.05 not 0.85*max+0.12, PC-AX-CDP synthetic fallback disclosed live_available False, NC-NO-APPLICABLE 12/12 UNKNOWN precision 1.0, NC-EMPTY 6/6, NC-ORACLE-LEAK 0 forbidden keys, NC-BIJECTIVE-COST PASS all hold; two minor REVISE findings (freshness hidden_expected read, Stagehand stratum/oracle on exact) are hardening debt not primary invalid per audit severity minor and lack of stratum effect. Per frozen decision_rule requiring S1 pooled>=0.50 Wilson>0.35 McNemar vs best flat p<0.05 and S2 coverage>=0.60 gain>=0.10 bootstrap lower>0.05 and S3 header>=4/10 mixed>=4/10 and S4 false<=0.15 and S5 ECE<=0.15 upper<=0.18 and S6 O(1) economics, SURVIVES requires all S1-S6; here S1 mcnemar fails, S2 fails, S3 fails (mixed 0/10 header 10/10), S4/S5 notComputed, so FALSIFIED-IN-SETTING is only justified bounded ceiling. Frontier lane cannot promote (requires Product lane PASS). Synthetic-to-real gap remains 0 live tasks, no Fetch exploratory, so next high-information question must be materially orthogonal (routing normalization/joint composition/live hetero AX) per Frontier charter rather than repeat retrieval Jaccard/entropy tuning at same 0.5 tie.",
+  "evidence_refs": [
+    "research/experiments/EXP-FRONTIER-35886105479/request.json",
+    "research/experiments/EXP-FRONTIER-35886105479/spec.json",
+    "research/experiments/EXP-FRONTIER-35886105479/prereg.md",
+    "research/experiments/EXP-FRONTIER-35886105479/freeze.json",
+    "research/experiments/EXP-FRONTIER-35886105479/result.json",
+    "research/experiments/EXP-FRONTIER-35886105479/audit.json",
+    "research/experiments/EXP-FRONTIER-35886105479/report.md",
+    "research/experiments/EXP-FRONTIER-35886105479/derived_metrics.json",
+    "research/experiments/EXP-FRONTIER-35886105479/raw_evidence.json",
+    "research/experiments/EXP-FRONTIER-35886105479/ir_manifest.json",
+    "research/experiments/EXP-FRONTIER-35886105479/index_manifest.json",
+    "research/experiments/EXP-FRONTIER-35886105479/provenance.json",
+    "research/experiments/EXP-FRONTIER-35886105479/train_split_inventory.json",
+    "research/frontier/run_experiment.py",
+    "research/experiments/EXP-FRONTIER-35880092123/handoff.json",
+    "codex/claim_state.json:C-SEMANTIC-RESOLVE",
+    "codex/index.json"
+  ]
+}
