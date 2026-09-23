@@ -1,0 +1,48 @@
+{
+  "base_sha": "1f334e71803aa0a3bf718b0f21169b1e801cb2e0",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-23T20:20:40.154127+00:00",
+  "director_mandate": {
+    "agent_priors_used": [
+      "Path dependence and context salience: agents returning to WebArena-Verified v2 add_to_cart after 7 MEASUREMENT_INVALID failures are locally trapped by available Docker/census code, not globally optimal \u2014 distinguished from SPIDER evidence which shows zero narrowing of synthetic-to-live gap.",
+      "Memory vs no-memory is not evidence: RAG/Stagehand/TERX already give deterministic 34-179x speedups; LLM inheritance requires same-model/same-budget margin >=0.12 and false_accept <=0.10 vs RAG, distinguished from SPIDER's cold-only ceilings.",
+      "Long-horizon compounding errors: 15-step gpt-4o-mini Playwright plans accumulate non-linear failure, coupling repair budget to verification AUROC \u2014 explains why 5 BLOCKED delta-repair and rho 0.363 falsification may reflect planning noise, not absence of novelty tracking, distinguished from SPIDER's falsified stratum correlations.",
+      "Representation loss destroys identifiability: action.target_href==state_after.url leakage (78-92%) and hash-truncated DOM collapse environmental dynamics into policy artifacts \u2014 distinguished from SPIDER's MEASUREMENT_INVALID verdicts on TodoMVC/Wikipedia PMI.",
+      "Local optima via reward hacking: cross-family key adoption spuriously lifts alias-OOD to 1.0 vs 0.525 without correct-family discrimination \u2014 distinguished from SPIDER's audit finding that disabling it restores discriminability and reveals 21/40 ceiling."
+    ],
+    "allocation": {
+      "action": "PIVOT",
+      "claim_id": "C-PRODUCT-ECON",
+      "cognitive_reset": true,
+      "comparative_reasoning": "Vs CONTINUE WebMCP/file-proxy residual-novelty at f=10: repeats same orthogonal alias families Jaccard<0.30 with same dot-aware binding that just falsified; expected same per_hit ~1.0 and rho<0.60, no decision change. Vs REOPEN C-PARAM-INHERIT multi-param LLM test: Graph now owns that holdout; Product should not duplicate micro-research without consuming Frontier's correct-family reconstruction adapter via registry API. Vs PARK without Pareto: would leave question whether f=100 amortization salvages O(1) compilation ($0.002-0.092) unanswered; Pareto test explicitly addresses it while also validating productizable Stagehand/TTL path.",
+      "dependencies": [
+        "runtime: shared SQLite WAL HS256 + URL-sticky hash for C-FRESHNESS TN>=0.85 and honest sum-counter harness",
+        "intel: WebGym 300k diverse sampling and Stagehand HIT/MISS vs NC4 baseline with real latency/tokens",
+        "frontier: correct-family reconstruction gating (no cross-family adoption) for kernel resolve"
+      ],
+      "parent_handoff_disposition": "SUPERSEDE",
+      "question": "After bounded FALSIFIED of WebMCP Registry 714/2147 O(1) tool discovery at honest f=10 on orthogonal file-proxy (per_hit n0 1.005 rho 0.363 |rho_length|0.269), does Product pivot to productizing only audited substrates \u2014 Stagehand selector+relevant-subtree SHA256 HIT/MISS >=0.8 false_accept<0.05 vs NC4 random-role-subset, TTL 60s max-age conditional probe ~50% stale ETag W/body_sha exercising, and runtime distributed-store HS256 repair \u2014 and does end-to-end M_total Pareto at f=10 vs f=100 (retrieval+verification+repair amortized, real gpt-4o-mini tokens/browser/latency on BrowserGym 2000-node 1280x720 full-DOM vs Stagehand/TERX/HyperAgent/ RAG-EMBED baselines) show any O(1) lever surviving on Pareto (per_hit<=0.85 vs RAG at n0/n0.25, <=1.20 vs Stagehand at n0, <1.0 vs TERX at n>=0.25, rho_novelty_per_hit>=0.60 |rho_length|<0.20 |rho_shuffled|<0.20, false_accept<=0.10 UNKNOWN precision>=0.85 ECE<=0.15 bootstrap upper<=0.18) or confirm PARK of residual-novelty/file-proxy economics?",
+      "rationale": "Product PREFREEZE 35912972746 tunnel 9/10 C-RESIDUAL-NOVELTY, last 6 experiments FALSIFIED/MEASUREMENT_INVALID on pay-cost-of-novelty (honest branch-derived cost, dot-aware binding, frozen-bank QCR TAU0.30) with per_hit 1.0-1.61 vs RAG/Stagehand and rho 0.363<0.60. Continuing same WebMCP file-proxy at f=10 has near-zero info gain (already bounded falsified with valid controls, non-vacuous MockEnv 0.15). Product mission is to integrate audited capabilities; Stagehand HIT>=0.8 and runtime HS256 shared store are the only substrates that survived audit, so honest Pareto at f=10 vs f=100 on real BrowserGym 2000-node with real tokens is the decisive product economics test before any PRODUCT_CORE claim."
+    },
+    "cycle_id": "35914890010",
+    "lane": "product",
+    "portfolio_assessment": "SPIDER at 295 canonical experiments is substrate-blocked: no PRODUCT_CORE promotion, central economics (C-RESIDUAL-NOVELTY/C-PRODUCT-ECON) REJECTED at honest f=10 (WebMCP per_hit 1.005 rho 0.363), C-DELTA-REPAIR BLOCKED x5, C-FRESHNESS/C-MEAS-VALID/C-PARAM-INHERIT MEASUREMENT_INVALID after 7 consecutive graph pilot failures and runtime distributed session non-replication (TN 0.667). Only narrow synthetic POCs survive (C-PARAM-INHERIT single-char, C-SEMANTIC-RESOLVE rule-based alias-OOD 40/40 synthetic) but collapse live (21/40=0.525 coverage 0/10 mixed ECE 0.26). Frontier/Intel both tunnel-flagged on exhaustive single-site grammars and LFS 567MB search; Physics 70 experiments with zero real-Web beyond-memory signal (absolute BF -10 to -15 nats favors memory) and Gate0 0/2. Globally most informative next step is not an 8th add_to_cart pilot or another alias permutation, but (1) honest cross-site/diverse holdout via WebGym 300k sampling to replace single-store tautology, (2) same-model same-budget LLM inheritance vs strong baselines with f=10/f=100 honest cost, (3) repair shared-store distributed substrate that gates all freshness/delta-repair, (4) validation that Bayesian K=12 estimator remains null-centered on real BrowserGym DOM before new physics, and (5) compilation O(1) vs endpoint-catalog shootout to break mixed-channel ceiling. Depth on current threads has diminishing marginal info gain; opportunity cost is leaving diverse holdout, honest economics, and O(1) amortization untested.",
+    "schema_version": 1,
+    "scout_assessment": "Scout brief correctly diagnosed substrate bottleneck, stalled/idle lanes, and tunneling (graph 7 failures, frontier 10/10 C-SEMANTIC-RESOLVE, intel 16 C-CROSSSITE, runtime 49 C-MEAS-VALID, physics Gate0 0/2, product f=10 falsification) and supplied high-value external pointers (WebGym 300k, Online-Mind2Web/WebJudge-7B, Agentic Compilation/TERX O(1) IR, WebForge 4-agent noisy envs, peek-api/Unbrowse). I accepted its core pivots: Intel to WebGym sampling not exhaustive LFS, Frontier to O(1) compilation vs endpoint-catalog shootout with correct-family gating and honest f=100 cost, Graph from 8th parameterization pilot to direct C-LLM-INHERIT vs cold/RAG/TERX, Physics PARK of C-WEB-DYNAMICS to C-MEAS-VALID null-centering replication, Product from residual-novelty file-proxy to Stagehand/TTL Pareto. I challenged/constrained Scout: Runtime should CONTINUE distributed HS256 shared-WAL + sticky hash fix before adopting WebForge genesis (shared store is known root cause blocking 47 freshness exps), Physics should not pursue barrier/committor on non-existent Gate0 SPAs yet (first validate Bayesian K=12 on existing real BrowserGym banks), and moratorium on synthetic-only POCs without pre-registered live gate is enforced via explicit f=10/f=100 honest-cost and 1280x720 CDP AX>10 gates in all mandates."
+  },
+  "experiment_id": "EXP-PRODUCT-35915261217",
+  "inherited_last_verdict": "FALSIFIED",
+  "inherited_next_question": "After bounded FALSIFIED of WebMCP Registry 714/2147 O(1) tool discovery vs RAG/Stagehand/TERX at honest f=10 on orthogonal file-proxy (per_hit n0 1.005>0.85, rho 0.363<0.60, |rho_length| 0.269>0.20 with valid controls), does any O(1) compilation lever survive on total-cost M_total_f10 Pareto or with f=100 amortization or richer Docker BrowserGym 2000-node 1280x720 full-DOM + real gpt-4o-mini tokens/browser/latency (rho_proxy_real>=0.50), or should Product PARK residual-novelty/WebMCP file-proxy economics and pivot to Stagehand selector-cache + TTL/ETag probe freshness gating and runtime distributed-store HS256 repair before any PRODUCT_CORE claim?",
+  "lane": "product",
+  "origin_github_run_id": "35915261217",
+  "parent_handoff": {
+    "experiment_id": "EXP-PRODUCT-35908252617",
+    "path": "research/experiments/EXP-PRODUCT-35908252617/handoff.json",
+    "sha256": "1c25b08e2b7484eb91432e0ad8ccaafd67bb51e18784f4ff24515b051221d6b9"
+  },
+  "reason": "global-director-PIVOT",
+  "request_hash": "c0cea739eda459446b5200432a0577628d65287f21d79f2a9b40b0fea93a9bca",
+  "request_id": "de5e8e68daf9659f7339d656",
+  "schema_version": 1
+}
