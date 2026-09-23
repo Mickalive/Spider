@@ -4,7 +4,7 @@ Pre-2.0 canonical memory remains frozen at `archive/spider-codex-ultimate:SPIDER
 
 Canonical Research 2.0 evidence lives in `codex/experiments/<experiment_id>/`.
 Use `codex/index.json` and `codex/claim_state.json` to locate relevant packets; do not load all experiment bodies by default.
-Validated experiments: **302**. Coverage gaps: **0**. Quarantined packets: **1**.
+Validated experiments: **304**. Coverage gaps: **0**. Quarantined packets: **1**.
 
 ## Experiment index
 
@@ -311,7 +311,9 @@ Validated experiments: **302**. Coverage gaps: **0**. Quarantined packets: **1**
 | EXP-FRONTIER-35915275774 | frontier | MEASUREMENT_INVALID | MEASUREMENT_INVALID | C-SEMANTIC-RESOLVE | `87097c6574b8` |
 | EXP-PHYSICS-35915247766 | physics | MEASUREMENT_INVALID | MEASUREMENT_INVALID | C-MEAS-VALID | `b0fe80109943` |
 | EXP-PRODUCT-35916130502 | product | PASS | FALSIFIED | C-PRODUCT-ECON, C-RESIDUAL-NOVELTY, C-FRESHNESS | `0c7e03d30d5d` |
+| EXP-INTEL-35916138944 | intel | REVISE | REVISE — No SURVIVES; audit REVISE producer_claim_supported=false. H1/H2 remain bounded FALSIFIED-IN-SETTING on Magento homepage/template only (18/20 identical 1430-node captures, recomputed CI [0.7,1.0] not [1.0,1.0], shuffle_mean 0.9 not 1.0, variance pop 0.09/sample 0.10, shuffle p=1.0 gap 0.0, delta_vs_truncated null); product-page within-store transfer UNTESTED (1/10 families with 2 product pages, adequacy gate <5 families) → MEASUREMENT_INVALID for H1 product hypothesis; Stagehand HIT 0.0 due to incomplete expanded stripping (grammar f2b5e3bb only form_key, missing uenc/store/session/timestamp/nonce, hash_changed_on_every access 36/36 before_hash!=after_hash) → H2 FALSIFIED bounded to unstable exact-cache, MISS 1.0/false_accept 0.0 vacuous; H3 WebGym 0/50 (401/404 after 2 genuine attempts) and H4 Gate0 0 transitions (BrowserGym API mismatch) correctly MEASUREMENT_INVALID per frozen 2-attempt infrastructure precedence; Docker 64-char digest sha256:3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb and 20/20 AX liveness at 1280x720 remain valid. C-CROSSSITE stays HYPOTHESIS. | C-CROSSSITE | `d9d990f43b66` |
 | EXP-GRAPH-35918640311 | graph | MEASUREMENT_INVALID | MEASUREMENT_INVALID | C-PARAM-INHERIT | `710ce77cd200` |
+| EXP-PRODUCT-35921344930 | product | PASS | MEASUREMENT_INVALID | C-PRODUCT-ECON, C-RESIDUAL-NOVELTY, C-FRESHNESS | `683cb58372ca` |
 
 ## Latest recorded claim events
 
@@ -319,14 +321,14 @@ These are chronological latest events, not an automatic truth ranking.
 
 | Claim | Status | Experiment | Lane |
 |---|---|---|---|
-| C-CROSSSITE | HYPOTHESIS | EXP-INTEL-35903200136 | intel |
+| C-CROSSSITE | HYPOTHESIS | EXP-INTEL-35916138944 | intel |
 | C-DELTA-REPAIR | BLOCKED | EXP-GRAPH-35860314278 | graph |
-| C-FRESHNESS | HYPOTHESIS | EXP-PRODUCT-35916130502 | product |
+| C-FRESHNESS | HYPOTHESIS | EXP-PRODUCT-35921344930 | product |
 | C-LLM-INHERIT | HYPOTHESIS | EXP-PRODUCT-35797365772 | product |
 | C-MEAS-VALID | MEASUREMENT_INVALID | EXP-PHYSICS-35915247766 | physics |
 | C-PARAM-INHERIT | MEASUREMENT_INVALID | EXP-GRAPH-35918640311 | graph |
-| C-PRODUCT-ECON | REJECTED | EXP-PRODUCT-35916130502 | product |
-| C-RESIDUAL-NOVELTY | REJECTED | EXP-PRODUCT-35916130502 | product |
+| C-PRODUCT-ECON | HYPOTHESIS | EXP-PRODUCT-35921344930 | product |
+| C-RESIDUAL-NOVELTY | HYPOTHESIS | EXP-PRODUCT-35921344930 | product |
 | C-SEMANTIC-RESOLVE | EXPERIMENTAL | EXP-FRONTIER-35915275774 | frontier |
 | C-WEB-DYNAMICS | HYPOTHESIS | EXP-PHYSICS-35903177055 | physics |
 
