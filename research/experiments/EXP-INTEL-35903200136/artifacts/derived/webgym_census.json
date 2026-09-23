@@ -1,0 +1,22 @@
+{
+  "attempts": [
+    {
+      "attempt": 1,
+      "url": "https://huggingface.co/datasets/WebGym/WebGym/resolve/main/manifest.json",
+      "status": null,
+      "error": "HTTPError: HTTP Error 401: Unauthorized",
+      "sha256": null,
+      "bytes": 0
+    },
+    {
+      "attempt": 2,
+      "url": "https://raw.githubusercontent.com/ServiceNow/WebGym/main/data/manifest.json",
+      "status": null,
+      "error": "HTTPError: HTTP Error 404: Not Found",
+      "sha256": null,
+      "bytes": 0
+    }
+  ],
+  "manifest_sha256": null,
+  "manifest_preview": null
+}

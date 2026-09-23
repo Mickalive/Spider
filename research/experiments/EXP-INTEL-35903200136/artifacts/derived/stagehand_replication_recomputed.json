@@ -1,0 +1,95 @@
+{
+  "n_families_attempted": 36,
+  "hit_count": 0,
+  "miss_count": 36,
+  "false_accept_count": 0,
+  "hit_rate": 0.0,
+  "miss_rate": 1.0,
+  "false_accept_rate": 0.0,
+  "family_results": [
+    {
+      "family_key": "(('shopping',), 'Return the date I last ordered my {{descrip",
+      "before_hash": "8289f9f4888ae407",
+      "after_hash": "890aceec98605d21",
+      "hash_changed_on_mutation": true,
+      "node_count": 1430,
+      "pattern_length": 1430
+    },
+    {
+      "family_key": "(('shopping',), 'View the product page for the least expensi",
+      "before_hash": "c99b9ade1e64ad23",
+      "after_hash": "0cee81976e0bbe1e",
+      "hash_changed_on_mutation": true,
+      "node_count": 1430,
+      "pattern_length": 1430
+    },
+    {
+      "family_key": "(('shopping_admin',), 'Get the customer name and email with ",
+      "before_hash": "e0d5cdc0cf5ada24",
+      "after_hash": "b4ea5b861c122a44",
+      "hash_changed_on_mutation": true,
+      "node_count": 1430,
+      "pattern_length": 1430
+    },
+    {
+      "family_key": "(('shopping',), 'Summarize customer reviews for {{product}}.",
+      "before_hash": "a01b554eaca9538a",
+      "after_hash": "2ece4461ed19d714",
+      "hash_changed_on_mutation": true,
+      "node_count": 1430,
+      "pattern_length": 1430
+    },
+    {
+      "family_key": "(('shopping',), 'Add a {{product}} to my wish list.')",
+      "before_hash": "958b3f6894e8af46",
+      "after_hash": "90c66289b11be25a",
+      "hash_changed_on_mutation": true,
+      "node_count": 1430,
+      "pattern_length": 1430
+    },
+    {
+      "family_key": "(('shopping_admin',), 'Get the top 3 search terms that match",
+      "before_hash": "e1f677589beacc5c",
+      "after_hash": "9d571d78c66f827a",
+      "hash_changed_on_mutation": true,
+      "node_count": 1430,
+      "pattern_length": 1430
+    },
+    {
+      "family_key": "(('shopping',), 'Add the product with the lowest per unit pr",
+      "before_hash": "b987692f06bd49c0",
+      "after_hash": "1eb932200a6bf5f2",
+      "hash_changed_on_mutation": true,
+      "node_count": 727,
+      "pattern_length": 727
+    },
+    {
+      "family_key": "(('shopping_admin',), 'Get the monthly count of completed or",
+      "before_hash": "cba16d23d72fbe2a",
+      "after_hash": "04b6d34d5e92f077",
+      "hash_changed_on_mutation": true,
+      "node_count": 1430,
+      "pattern_length": 1430
+    },
+    {
+      "family_key": "(('shopping_admin',), 'Get customer email(s) who {{order_cri",
+      "before_hash": "bf709997f30ab034",
+      "after_hash": "3a8d9d5c8fd3080a",
+      "hash_changed_on_mutation": true,
+      "node_count": 1430,
+      "pattern_length": 1430
+    },
+    {
+      "family_key": "(('reddit', 'shopping'), 'Create a post in the game related ",
+      "before_hash": "95f0263cccd53415",
+      "after_hash": "21f39ff086c3460d",
+      "hash_changed_on_mutation": true,
+      "node_count": 1430,
+      "pattern_length": 1430
+    }
+  ],
+  "h1": "HIT<0.8",
+  "h2": "MISS>=0.8",
+  "h3": "FALSE_ACCEPT<0.05",
+  "degeneracy_note": "SHA256 changes on every page.access; 9-regex stripping does not cover all Magento dynamic elements (timestamps, CSRF tokens in HTML attributes)"
+}

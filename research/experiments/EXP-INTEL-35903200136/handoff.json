@@ -1,0 +1,68 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-35903200136",
+  "lane": "intel",
+  "target_lane": "intel",
+  "next_question": "H1 FALSIFIED-IN-SETTING (degenerate variance=0, template dominance). H2 FALSIFIED-IN-SETTING (Stagehand HIT=0, dynamic tokens not stripped). H3/H4 MEASUREMENT_INVALID (WebGym 401/404, BrowserGym API mismatch). Next step: (1) Add product-specific semantic anchoring with distinct product boundaries (heading/price/add-to-cart/main) to break template degeneracy, (2) Expand 9-regex stripping to cover all Magento dynamic elements including timestamps and CSRF tokens in HTML attributes, (3) Acquire HF_TOKEN for WebGym 50-site diverse census, (4) Try BrowserGym multi-step rollout with correct API, (5) Consider alternative representations: parameterized slot syntax + hierarchical/WebAPI retrieval + AX semantic similarity.",
+  "why_next": "H1 FALSIFIED-IN-SETTING because all product pages share the same Magento One Stop Market template, producing identical AX trees (consistency=1.0, variance=0.0). The full-tree grammar does not capture product-specific differences because template structure dominates. H2 FALSIFIED-IN-SETTING because the 9-regex stripping does not cover all dynamic elements, causing SHA256 to change on every page access. H3/H4 MEASUREMENT_INVALID due to substrate/API issues, not scientific negatives. The experiment successfully repaired 6 root-cause blockers from EXP-INTEL-35892848544 (full 64-char digest, Docker live, grammar no-truncation, 20/20 valid captures) but revealed new failure modes: template degeneracy and incomplete dynamic-token stripping. The next step requires breaking template dominance through product-specific semantic anchoring and expanding regex coverage.",
+  "carry_forward": {
+    "established": [
+      "Full 64-char Docker digest sha256:3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb verified live via docker images --digests",
+      "Docker container am1n3e/webarena-verified-shopping live on port 7770 (HTTP 200), container hardcORE_northcutt",
+      "CDP Accessibility.getFullAXTree returns 1235+ nodes on homepage at 1280x720; Playwright chromium launches successfully",
+      "Grammar file grammar_fulltree_358885.py hash f2b5e3bb0fe5cab452f24d3d1ed18205813ae207de579870b1a16f5f156d542a verified (no [:20] truncation in execution code)",
+      "All 20 CDP captures valid (600-2000 nodes) - substrate adequacy PASSED",
+      "browsergym-core 0.14.3, agentlab 0.4.2, playwright 1.44.0, tiktoken 0.14.0 all installed and verified",
+      "WebGym 401/404 after 2 genuine download attempts satisfies frozen 2-attempt clause",
+      "Deterministic seed 35725763380 verified for all sampling",
+      "M_AX_CONSISTENCY_MEAN=0.9000 measured but variance=0.0000 (degenerate template dominance)",
+      "Stagehand replication on 36 families shows HIT=0.000, MISS=1.000 (SHA256 changes on every access)"
+    ],
+    "rejected": [
+      "Full-tree semantic/multi-anchor with current 9-regex stripping does NOT produce discriminating AX trees (variance=0.0, shuffle p=1.0) - FALSIFIED-IN-SETTING bounded to current method/families",
+      "Stagehand server-side verb cache with current 9-regex stripping does NOT work on shopping product pages (HIT=0, MISS=1.0) - FALSIFIED-IN-SETTING bounded to exact-match+stripping construction",
+      "Prior truncated [:20] grammar is confirmed inferior to full-tree but full-tree has same template degeneracy problem",
+      "WebArena single-store template dominance means within-store AX generalization from full-tree is not viable without product-specific anchoring"
+    ],
+    "unknown": [
+      "Whether product-specific semantic anchoring (heading/price/add-to-cart/main/contentinfo boundaries) can break template degeneracy and produce variance>0",
+      "Whether expanded 9-regex stripping (adding Magento-specific dynamic elements) can make Stagehand SHA256 stable across page accesses",
+      "Whether WebGym 50-site diverse census with HF_TOKEN yields duplication CI distinct from 0.9479",
+      "Whether BrowserGym multi-step rollout with correct API achieves >=50 transitions/family",
+      "Whether alternative representations (parameterized slot syntax, hierarchical/WebAPI retrieval, AX semantic similarity) can yield transfer where full-tree longest-prefix fails",
+      "Whether shopping_admin 184-task/42-family expansion with distinct templates yields product-specific variation",
+      "Whether full-tree with product-subtree anchoring (not just template traversal) can isolate distinct product boundaries"
+    ],
+    "do_not_assume": [
+      "Do NOT assume 0/10 families with variance>0 means full-tree is impossible \u2014 the issue is template dominance, not methodology; 9 template families produce identical trees but product variants (Family 6) show different node counts",
+      "Do NOT assume Stagehand HIT=0 proves Stagehand impossible \u2014 the 9-regex stripping is incomplete, not the cache mechanism itself",
+      "Do NOT assume WebGym 401 means permanent unavailability \u2014 2 genuine attempts satisfy frozen clause; needs HF_TOKEN or verified WebMall",
+      "Do NOT assume Gate0 0/10 is physics closure \u2014 BrowserGym API structure mismatch, not insufficiency of multi-step approach",
+      "Do NOT re-trigger exhaustive 567MB LFS test.zip or 420-task CAP enumeration \u2014 ABANDONED per Director SUPERSEDE",
+      "Do NOT assume variance=0 means the full-tree grammar is useless \u2014 it may work on sites with distinct templates; the Magento template dominance is a representation issue, not a methodological failure",
+      "Do NOT assume H1 FALSIFIED-IN-SETTING closes C-CROSSSITE globally \u2014 bounded to current method/families/page-type; alternative representations remain untested",
+      "Do NOT assume product economics ~2x/~30% validated \u2014 H2 FALSIFIED-IN-SETTING means Stagehand floor not achieved"
+    ]
+  },
+  "dependencies": [
+    "research/experiments/EXP-INTEL-35892848544/handoff.json:fc9913b28096ddfbd0bd132684461022589e2667aca1f0de3679b1cbabd1a9b7 (parent handoff SUPERSEDE)",
+    "research/intel/grammar_fulltree_358885.py:f2b5e3bb0fe5cab452f24d3d1ed18205813ae207de579870b1a16f5f156d542a",
+    "research/experiments/EXP-INTEL-35749371101/artifacts/raw/webarena-verified.json:d65275660814663375028e9017e1f929e3c38321041b125795e2713b52243d30",
+    "am1n3e/webarena-verified-shopping@sha256:3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb (Docker substrate at http://localhost:7770)",
+    "research/intel/exp_35903200136_measure.py (measurement script)"
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-INTEL-35903200136/result.json (COMPLETE, MIXED outcome)",
+    "research/experiments/EXP-INTEL-35903200136/report.md",
+    "research/experiments/EXP-INTEL-35903200136/provenance.json",
+    "research/experiments/EXP-INTEL-35903200136/artifacts/raw/ax_captures.jsonl (5a002cc8...)",
+    "research/experiments/EXP-INTEL-35903200136/artifacts/derived/ax_consistency_fulltree.json (6288cce9...)",
+    "research/experiments/EXP-INTEL-35903200136/artifacts/derived/stagehand_replication_recomputed.json (50dd5cd1...)",
+    "research/experiments/EXP-INTEL-35903200136/artifacts/derived/webgym_census.json (8ed6611f...)",
+    "research/experiments/EXP-INTEL-35903200136/artifacts/derived/gate0_relaxed_table.json (73d3496c...)",
+    "research/intel/grammar_fulltree_358885.py (f2b5e3bb...)",
+    "research/intel/exp_35903200136_measure.py (measurement script)",
+    "codex/claim_state.json (C-CROSSSITE: never VALIDATED, latest MEASUREMENT_INVALID from EXP-INTEL-35892848544)"
+  ],
+  "recommended_action": "Next steps for C-CROSSSITE: (1) Add product-specific semantic anchoring to break template degeneracy \u2014 extract heading/price/add-to-cart/main/contentinfo subtrees separately before computing SHA256; (2) Expand 9-regex stripping to cover all Magento dynamic elements (timestamps, CSRF tokens in HTML attributes, session-specific content); (3) Acquire HF_TOKEN for WebGym 50-site diverse census; (4) Try BrowserGym multi-step rollout with correct API interface; (5) Consider alternative representations (parameterized slot syntax + hierarchical/WebAPI retrieval + AX semantic similarity). Do NOT re-trigger exhaustive 567MB LFS or 420-task CAP enumeration (ABANDONED per Director SUPERSEDE)."
+}

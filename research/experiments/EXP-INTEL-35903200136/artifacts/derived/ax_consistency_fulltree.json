@@ -1,0 +1,32 @@
+{
+  "M_AX_CONSISTENCY_MEAN": 0.9,
+  "family_scores": [
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    0.0
+  ],
+  "bootstrap_95_ci": [
+    1.0,
+    1.0
+  ],
+  "bootstrap_95_ci_lower": 1.0,
+  "shuffle_mean": 1.0,
+  "shuffle_std": 0.0,
+  "shuffle_p": 1.0,
+  "variance": 0.0,
+  "n_families": 10,
+  "M_AX_DELTA_TRUNCATED": null,
+  "grammar_code_hash": "f2b5e3bb0fe5cab452f24d3d1ed18205813ae207de579870b1a16f5f156d542a",
+  "docker_digest": "sha256:3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb",
+  "docker_reachable": true,
+  "valid_captures": 20,
+  "degenerate": true,
+  "degeneracy_note": "All product pages share same Magento template; full-tree patterns identical (consistency=1.0); variance=0.0"
+}
