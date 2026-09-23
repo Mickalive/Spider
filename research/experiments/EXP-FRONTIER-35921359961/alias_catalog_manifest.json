@@ -1,0 +1,259 @@
+{
+  "experiment_id": "EXP-FRONTIER-35921359961",
+  "kind": "alias_catalog",
+  "built_from": [
+    "train_registry_variant_inventory",
+    "train_observed_keys",
+    "openapi_spec_enums"
+  ],
+  "mapping_count": 37,
+  "families_covered": [
+    "auth",
+    "body",
+    "header",
+    "path",
+    "query"
+  ],
+  "mappings": [
+    {
+      "family": "auth",
+      "variant_norm": "adminscope",
+      "canonical": "admin_scope"
+    },
+    {
+      "family": "auth",
+      "variant_norm": "permission",
+      "canonical": "permission"
+    },
+    {
+      "family": "auth",
+      "variant_norm": "scope",
+      "canonical": "scope"
+    },
+    {
+      "family": "body",
+      "variant_norm": "apikey",
+      "canonical": "apiKey"
+    },
+    {
+      "family": "body",
+      "variant_norm": "key",
+      "canonical": "apiKey"
+    },
+    {
+      "family": "body",
+      "variant_norm": "keyalt",
+      "canonical": "apiKey"
+    },
+    {
+      "family": "body",
+      "variant_norm": "token",
+      "canonical": "api_token"
+    },
+    {
+      "family": "header",
+      "variant_norm": "apikey",
+      "canonical": "ApiKey"
+    },
+    {
+      "family": "header",
+      "variant_norm": "authorization",
+      "canonical": "Authorization"
+    },
+    {
+      "family": "header",
+      "variant_norm": "xcustomheader",
+      "canonical": "ApiKey"
+    },
+    {
+      "family": "header",
+      "variant_norm": "xpermission",
+      "canonical": "X-Permission"
+    },
+    {
+      "family": "header",
+      "variant_norm": "xresettoken",
+      "canonical": "ApiKey"
+    },
+    {
+      "family": "header",
+      "variant_norm": "xscope",
+      "canonical": "X-Scope"
+    },
+    {
+      "family": "path",
+      "variant_norm": "randomalias00token",
+      "canonical": "/random/alias-0-0/${token}"
+    },
+    {
+      "family": "path",
+      "variant_norm": "randomalias01token",
+      "canonical": "/random/alias-0-1/${token}"
+    },
+    {
+      "family": "path",
+      "variant_norm": "randomalias02token",
+      "canonical": "/random/alias-0-2/${token}"
+    },
+    {
+      "family": "path",
+      "variant_norm": "randomalias03token",
+      "canonical": "/random/alias-0-3/${token}"
+    },
+    {
+      "family": "path",
+      "variant_norm": "randomalias04token",
+      "canonical": "/random/alias-0-4/${token}"
+    },
+    {
+      "family": "path",
+      "variant_norm": "randomalias05token",
+      "canonical": "/random/alias-0-5/${token}"
+    },
+    {
+      "family": "path",
+      "variant_norm": "randomalias06token",
+      "canonical": "/random/alias-0-6/${token}"
+    },
+    {
+      "family": "path",
+      "variant_norm": "randomalias10token",
+      "canonical": "/random/alias-1-0/${token}"
+    },
+    {
+      "family": "path",
+      "variant_norm": "randomalias11token",
+      "canonical": "/random/alias-1-1/${token}"
+    },
+    {
+      "family": "path",
+      "variant_norm": "randomalias12token",
+      "canonical": "/random/alias-1-2/${token}"
+    },
+    {
+      "family": "path",
+      "variant_norm": "randomalias13token",
+      "canonical": "/random/alias-1-3/${token}"
+    },
+    {
+      "family": "path",
+      "variant_norm": "randomalias14token",
+      "canonical": "/random/alias-1-4/${token}"
+    },
+    {
+      "family": "path",
+      "variant_norm": "randomalias15token",
+      "canonical": "/random/alias-1-5/${token}"
+    },
+    {
+      "family": "path",
+      "variant_norm": "randomalias16token",
+      "canonical": "/random/alias-1-6/${token}"
+    },
+    {
+      "family": "path",
+      "variant_norm": "randomalias20perm",
+      "canonical": "/random/alias-2-0/${perm}"
+    },
+    {
+      "family": "path",
+      "variant_norm": "randomalias21perm",
+      "canonical": "/random/alias-2-1/${perm}"
+    },
+    {
+      "family": "path",
+      "variant_norm": "randomalias22perm",
+      "canonical": "/random/alias-2-2/${perm}"
+    },
+    {
+      "family": "path",
+      "variant_norm": "randomalias23perm",
+      "canonical": "/random/alias-2-3/${perm}"
+    },
+    {
+      "family": "path",
+      "variant_norm": "randomalias24perm",
+      "canonical": "/random/alias-2-4/${perm}"
+    },
+    {
+      "family": "path",
+      "variant_norm": "randomalias25perm",
+      "canonical": "/random/alias-2-5/${perm}"
+    },
+    {
+      "family": "path",
+      "variant_norm": "randomalias26perm",
+      "canonical": "/random/alias-2-6/${perm}"
+    },
+    {
+      "family": "query",
+      "variant_norm": "adminscope",
+      "canonical": "admin_scope"
+    },
+    {
+      "family": "query",
+      "variant_norm": "permission",
+      "canonical": "permission"
+    },
+    {
+      "family": "query",
+      "variant_norm": "scope",
+      "canonical": "scope"
+    }
+  ],
+  "train_hit_rate": 1.0,
+  "train_hits": 21,
+  "train_total": 21,
+  "variant_sets": {
+    "header": [
+      "ApiKey",
+      "Authorization",
+      "X-Custom-Header",
+      "X-Permission",
+      "X-Reset-Token",
+      "X-Scope"
+    ],
+    "body": [
+      "apiKey",
+      "key",
+      "key_alt",
+      "token"
+    ],
+    "query": [
+      "admin_scope",
+      "permission",
+      "scope"
+    ],
+    "auth": [
+      "admin_scope",
+      "permission",
+      "scope"
+    ],
+    "path": [
+      "/random/alias-0-0/${token}",
+      "/random/alias-0-1/${token}",
+      "/random/alias-0-2/${token}",
+      "/random/alias-0-3/${token}",
+      "/random/alias-0-4/${token}",
+      "/random/alias-0-5/${token}",
+      "/random/alias-0-6/${token}",
+      "/random/alias-1-0/${token}",
+      "/random/alias-1-1/${token}",
+      "/random/alias-1-2/${token}",
+      "/random/alias-1-3/${token}",
+      "/random/alias-1-4/${token}",
+      "/random/alias-1-5/${token}",
+      "/random/alias-1-6/${token}",
+      "/random/alias-2-0/${perm}",
+      "/random/alias-2-1/${perm}",
+      "/random/alias-2-2/${perm}",
+      "/random/alias-2-3/${perm}",
+      "/random/alias-2-4/${perm}",
+      "/random/alias-2-5/${perm}",
+      "/random/alias-2-6/${perm}"
+    ]
+  },
+  "hidden_expected_read": false,
+  "code_path": "collect_variant_inventory(train only) + openapi enums",
+  "manifest_sha256": "80a8ebe33e4beb684b3aefa5dfa66bfecef53045ac04d8d9d0fb04ffac1d14bb"
+}

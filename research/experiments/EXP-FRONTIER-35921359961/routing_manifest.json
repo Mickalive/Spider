@@ -1,0 +1,277 @@
+{
+  "experiment_id": "EXP-FRONTIER-35921359961",
+  "kind": "routing_normalization",
+  "pairs": [
+    {
+      "before": "/api/data",
+      "after": "/api/data",
+      "source": "regex_slot_version_collapse"
+    },
+    {
+      "before": "/random/alias-0-0/${token}",
+      "after": "/random/alias-0-0/${token}",
+      "source": "regex_slot_version_collapse"
+    },
+    {
+      "before": "/api/users",
+      "after": "/api/users",
+      "source": "regex_slot_version_collapse"
+    },
+    {
+      "before": "/random/alias-0-1/${token}",
+      "after": "/random/alias-0-1/${token}",
+      "source": "regex_slot_version_collapse"
+    },
+    {
+      "before": "/v2/items",
+      "after": "/items",
+      "source": "regex_slot_version_collapse"
+    },
+    {
+      "before": "/random/alias-0-2/${token}",
+      "after": "/random/alias-0-2/${token}",
+      "source": "regex_slot_version_collapse"
+    },
+    {
+      "before": "/v1/orders",
+      "after": "/orders",
+      "source": "regex_slot_version_collapse"
+    },
+    {
+      "before": "/random/alias-0-3/${token}",
+      "after": "/random/alias-0-3/${token}",
+      "source": "regex_slot_version_collapse"
+    },
+    {
+      "before": "/admin/settings",
+      "after": "/admin/settings",
+      "source": "regex_slot_version_collapse"
+    },
+    {
+      "before": "/random/alias-0-4/${token}",
+      "after": "/random/alias-0-4/${token}",
+      "source": "regex_slot_version_collapse"
+    },
+    {
+      "before": "/api/reports",
+      "after": "/api/reports",
+      "source": "regex_slot_version_collapse"
+    },
+    {
+      "before": "/random/alias-0-5/${token}",
+      "after": "/random/alias-0-5/${token}",
+      "source": "regex_slot_version_collapse"
+    },
+    {
+      "before": "/v3/audit",
+      "after": "/audit",
+      "source": "regex_slot_version_collapse"
+    },
+    {
+      "before": "/random/alias-0-6/${token}",
+      "after": "/random/alias-0-6/${token}",
+      "source": "regex_slot_version_collapse"
+    },
+    {
+      "before": "/random/alias-0-7/${token}",
+      "after": "/random/alias-0-7/${token}",
+      "source": "regex_slot_version_collapse"
+    },
+    {
+      "before": "/api/v2/data",
+      "after": "/api/data",
+      "source": "regex_slot_version_collapse"
+    },
+    {
+      "before": "/random/alias-0-8/${token}",
+      "after": "/random/alias-0-8/${token}",
+      "source": "regex_slot_version_collapse"
+    },
+    {
+      "before": "/api/v3/data",
+      "after": "/api/data",
+      "source": "regex_slot_version_collapse"
+    },
+    {
+      "before": "/random/alias-0-9/${token}",
+      "after": "/random/alias-0-9/${token}",
+      "source": "regex_slot_version_collapse"
+    },
+    {
+      "before": "/random/alias-1-0/${token}",
+      "after": "/random/alias-1-0/${token}",
+      "source": "regex_slot_version_collapse"
+    },
+    {
+      "before": "/random/alias-1-1/${token}",
+      "after": "/random/alias-1-1/${token}",
+      "source": "regex_slot_version_collapse"
+    },
+    {
+      "before": "/random/alias-1-2/${token}",
+      "after": "/random/alias-1-2/${token}",
+      "source": "regex_slot_version_collapse"
+    },
+    {
+      "before": "/random/alias-1-3/${token}",
+      "after": "/random/alias-1-3/${token}",
+      "source": "regex_slot_version_collapse"
+    },
+    {
+      "before": "/random/alias-1-4/${token}",
+      "after": "/random/alias-1-4/${token}",
+      "source": "regex_slot_version_collapse"
+    },
+    {
+      "before": "/random/alias-1-5/${token}",
+      "after": "/random/alias-1-5/${token}",
+      "source": "regex_slot_version_collapse"
+    },
+    {
+      "before": "/random/alias-1-6/${token}",
+      "after": "/random/alias-1-6/${token}",
+      "source": "regex_slot_version_collapse"
+    },
+    {
+      "before": "/random/alias-1-7/${token}",
+      "after": "/random/alias-1-7/${token}",
+      "source": "regex_slot_version_collapse"
+    },
+    {
+      "before": "/random/alias-1-8/${token}",
+      "after": "/random/alias-1-8/${token}",
+      "source": "regex_slot_version_collapse"
+    },
+    {
+      "before": "/random/alias-1-9/${token}",
+      "after": "/random/alias-1-9/${token}",
+      "source": "regex_slot_version_collapse"
+    },
+    {
+      "before": "/random/alias-2-0/${perm}",
+      "after": "/random/alias-2-0/${perm}",
+      "source": "regex_slot_version_collapse"
+    },
+    {
+      "before": "/random/alias-2-1/${perm}",
+      "after": "/random/alias-2-1/${perm}",
+      "source": "regex_slot_version_collapse"
+    },
+    {
+      "before": "/random/alias-2-2/${perm}",
+      "after": "/random/alias-2-2/${perm}",
+      "source": "regex_slot_version_collapse"
+    },
+    {
+      "before": "/random/alias-2-3/${perm}",
+      "after": "/random/alias-2-3/${perm}",
+      "source": "regex_slot_version_collapse"
+    },
+    {
+      "before": "/random/alias-2-4/${perm}",
+      "after": "/random/alias-2-4/${perm}",
+      "source": "regex_slot_version_collapse"
+    },
+    {
+      "before": "/random/alias-2-5/${perm}",
+      "after": "/random/alias-2-5/${perm}",
+      "source": "regex_slot_version_collapse"
+    },
+    {
+      "before": "/random/alias-2-6/${perm}",
+      "after": "/random/alias-2-6/${perm}",
+      "source": "regex_slot_version_collapse"
+    },
+    {
+      "before": "/random/alias-2-7/${perm}",
+      "after": "/random/alias-2-7/${perm}",
+      "source": "regex_slot_version_collapse"
+    },
+    {
+      "before": "/random/alias-2-8/${perm}",
+      "after": "/random/alias-2-8/${perm}",
+      "source": "regex_slot_version_collapse"
+    },
+    {
+      "before": "/random/alias-2-9/${perm}",
+      "after": "/random/alias-2-9/${perm}",
+      "source": "regex_slot_version_collapse"
+    },
+    {
+      "before": "/random/mixed-0/${token}",
+      "after": "/random/mixed-0/${token}",
+      "source": "regex_slot_version_collapse"
+    },
+    {
+      "before": "/random/mixed-1/${token}",
+      "after": "/random/mixed-1/${token}",
+      "source": "regex_slot_version_collapse"
+    },
+    {
+      "before": "/random/mixed-2/${token}",
+      "after": "/random/mixed-2/${token}",
+      "source": "regex_slot_version_collapse"
+    },
+    {
+      "before": "/random/mixed-3/${token}",
+      "after": "/random/mixed-3/${token}",
+      "source": "regex_slot_version_collapse"
+    },
+    {
+      "before": "/random/mixed-4/${token}",
+      "after": "/random/mixed-4/${token}",
+      "source": "regex_slot_version_collapse"
+    },
+    {
+      "before": "/random/mixed-5/${token}",
+      "after": "/random/mixed-5/${token}",
+      "source": "regex_slot_version_collapse"
+    },
+    {
+      "before": "/random/mixed-6/${token}",
+      "after": "/random/mixed-6/${token}",
+      "source": "regex_slot_version_collapse"
+    },
+    {
+      "before": "/random/mixed-7/${token}",
+      "after": "/random/mixed-7/${token}",
+      "source": "regex_slot_version_collapse"
+    },
+    {
+      "before": "/random/mixed-8/${token}",
+      "after": "/random/mixed-8/${token}",
+      "source": "regex_slot_version_collapse"
+    },
+    {
+      "before": "/v2/audit",
+      "after": "/audit",
+      "source": "regex_slot_version_collapse"
+    },
+    {
+      "before": "/random/mixed-9/${token}",
+      "after": "/random/mixed-9/${token}",
+      "source": "regex_slot_version_collapse"
+    }
+  ],
+  "pair_count": 58,
+  "distinct_before": 57,
+  "openapi_path_templates": {
+    "/random/alias0/data": "/random/alias0/data",
+    "/random/alias1/data": "/random/alias1/data",
+    "/random/alias2/data": "/random/alias2/data",
+    "/random/alias3/data": "/random/alias3/data",
+    "/api/data": "/api/data",
+    "/api/users": "/api/users",
+    "/v2/items": "/items",
+    "/v1/orders": "/orders",
+    "/admin/settings": "/admin/settings",
+    "/api/reports": "/api/reports",
+    "/v3/audit": "/audit",
+    "/api/v2/data": "/api/data",
+    "/api/v3/data": "/api/data",
+    "/v2/audit": "/audit"
+  },
+  "regex_rule": "version collapse /vN/ + trailing slash + ${slot} preserved",
+  "code_path": "routing_normalize_path / routing_normalize_observed",
+  "manifest_sha256": "20f496413570bc2e398cb6d22715f9eed9e10ba3ed1fea614181a94b30257af1"
+}

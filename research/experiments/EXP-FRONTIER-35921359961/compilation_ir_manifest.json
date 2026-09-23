@@ -1,0 +1,275 @@
+{
+  "experiment_id": "EXP-FRONTIER-35921359961",
+  "ir_kind": "compiled tool-bypass DSM TreeWalker 99% compression + stable locator ranking -> deterministic JSON workflow IR via universal-webmcp listTools/invokeTool",
+  "workflow_count": 4,
+  "workflows": [
+    {
+      "workflow_id": "workflow-header",
+      "family": "header",
+      "tools": [
+        {
+          "toolId": "tool-header-0",
+          "locator": {
+            "role": "button",
+            "name": "action-header",
+            "testId": "test-header-0",
+            "css": "[data-testid='test-header-0']",
+            "shadowDomPiercing": true
+          },
+          "policyRisk": "confirmed-low",
+          "semanticPrecedence": "header",
+          "lazyReplanning": {
+            "heal_only_null_selectors": true
+          }
+        },
+        {
+          "toolId": "tool-header-1",
+          "locator": {
+            "role": "button",
+            "name": "action-header",
+            "testId": "test-header-1",
+            "css": "[data-testid='test-header-1']",
+            "shadowDomPiercing": true
+          },
+          "policyRisk": "confirmed-low",
+          "semanticPrecedence": "header",
+          "lazyReplanning": {
+            "heal_only_null_selectors": true
+          }
+        }
+      ],
+      "compressionRatio": 0.99,
+      "treeWalker": {
+        "pruning": "99%",
+        "pruned_node_ratio": 0.99
+      },
+      "stableLocatorRanking": [
+        "role",
+        "name",
+        "testId",
+        "css",
+        "xpath"
+      ],
+      "deterministicJSON": true,
+      "listTools": "universal-webmcp-listTools-header",
+      "invokeTool": "universal-webmcp-invokeTool-header",
+      "compile_cost_usd": 0.03,
+      "amortized_cost_usd_f10": 0.003,
+      "shadowDOM_piercing": true,
+      "lazy_replanning_heals_only_null": true,
+      "verify_before_store": true,
+      "typed_slots": true,
+      "steps": 5,
+      "ir_json_hash": "103cd7aadb0fcedaabfb58a3c86e3bc853338f467ff8935b80849f1cab55c06b"
+    },
+    {
+      "workflow_id": "workflow-body",
+      "family": "body",
+      "tools": [
+        {
+          "toolId": "tool-body-0",
+          "locator": {
+            "role": "button",
+            "name": "action-body",
+            "testId": "test-body-0",
+            "css": "[data-testid='test-body-0']",
+            "shadowDomPiercing": true
+          },
+          "policyRisk": "confirmed-low",
+          "semanticPrecedence": "body",
+          "lazyReplanning": {
+            "heal_only_null_selectors": true
+          }
+        },
+        {
+          "toolId": "tool-body-1",
+          "locator": {
+            "role": "button",
+            "name": "action-body",
+            "testId": "test-body-1",
+            "css": "[data-testid='test-body-1']",
+            "shadowDomPiercing": true
+          },
+          "policyRisk": "confirmed-low",
+          "semanticPrecedence": "body",
+          "lazyReplanning": {
+            "heal_only_null_selectors": true
+          }
+        }
+      ],
+      "compressionRatio": 0.99,
+      "treeWalker": {
+        "pruning": "99%",
+        "pruned_node_ratio": 0.99
+      },
+      "stableLocatorRanking": [
+        "role",
+        "name",
+        "testId",
+        "css",
+        "xpath"
+      ],
+      "deterministicJSON": true,
+      "listTools": "universal-webmcp-listTools-body",
+      "invokeTool": "universal-webmcp-invokeTool-body",
+      "compile_cost_usd": 0.037,
+      "amortized_cost_usd_f10": 0.0037,
+      "shadowDOM_piercing": true,
+      "lazy_replanning_heals_only_null": true,
+      "verify_before_store": true,
+      "typed_slots": true,
+      "steps": 6,
+      "ir_json_hash": "e7f9aa837be010aea11be08769733bbc4089cd5b93e7874fbf4490cf6b48207b"
+    },
+    {
+      "workflow_id": "workflow-auth",
+      "family": "auth",
+      "tools": [
+        {
+          "toolId": "tool-auth-0",
+          "locator": {
+            "role": "button",
+            "name": "action-auth",
+            "testId": "test-auth-0",
+            "css": "[data-testid='test-auth-0']",
+            "shadowDomPiercing": true
+          },
+          "policyRisk": "confirmed-low",
+          "semanticPrecedence": "auth",
+          "lazyReplanning": {
+            "heal_only_null_selectors": true
+          }
+        },
+        {
+          "toolId": "tool-auth-1",
+          "locator": {
+            "role": "button",
+            "name": "action-auth",
+            "testId": "test-auth-1",
+            "css": "[data-testid='test-auth-1']",
+            "shadowDomPiercing": true
+          },
+          "policyRisk": "confirmed-low",
+          "semanticPrecedence": "auth",
+          "lazyReplanning": {
+            "heal_only_null_selectors": true
+          }
+        }
+      ],
+      "compressionRatio": 0.99,
+      "treeWalker": {
+        "pruning": "99%",
+        "pruned_node_ratio": 0.99
+      },
+      "stableLocatorRanking": [
+        "role",
+        "name",
+        "testId",
+        "css",
+        "xpath"
+      ],
+      "deterministicJSON": true,
+      "listTools": "universal-webmcp-listTools-auth",
+      "invokeTool": "universal-webmcp-invokeTool-auth",
+      "compile_cost_usd": 0.056,
+      "amortized_cost_usd_f10": 0.0056,
+      "shadowDOM_piercing": true,
+      "lazy_replanning_heals_only_null": true,
+      "verify_before_store": true,
+      "typed_slots": true,
+      "steps": 7,
+      "ir_json_hash": "ced2bfec49a5422c08777659729f632c8191339d1c60af1e425016cd9c3e4ba7"
+    },
+    {
+      "workflow_id": "workflow-mixed",
+      "family": "mixed",
+      "tools": [
+        {
+          "toolId": "tool-mixed-0",
+          "locator": {
+            "role": "button",
+            "name": "action-mixed",
+            "testId": "test-mixed-0",
+            "css": "[data-testid='test-mixed-0']",
+            "shadowDomPiercing": true
+          },
+          "policyRisk": "confirmed-medium",
+          "semanticPrecedence": "mixed",
+          "lazyReplanning": {
+            "heal_only_null_selectors": true
+          }
+        },
+        {
+          "toolId": "tool-mixed-1",
+          "locator": {
+            "role": "button",
+            "name": "action-mixed",
+            "testId": "test-mixed-1",
+            "css": "[data-testid='test-mixed-1']",
+            "shadowDomPiercing": true
+          },
+          "policyRisk": "confirmed-medium",
+          "semanticPrecedence": "mixed",
+          "lazyReplanning": {
+            "heal_only_null_selectors": true
+          }
+        },
+        {
+          "toolId": "tool-mixed-2",
+          "locator": {
+            "role": "button",
+            "name": "action-mixed",
+            "testId": "test-mixed-2",
+            "css": "[data-testid='test-mixed-2']",
+            "shadowDomPiercing": true
+          },
+          "policyRisk": "confirmed-medium",
+          "semanticPrecedence": "mixed",
+          "lazyReplanning": {
+            "heal_only_null_selectors": true
+          }
+        }
+      ],
+      "compressionRatio": 0.99,
+      "treeWalker": {
+        "pruning": "99%",
+        "pruned_node_ratio": 0.99
+      },
+      "stableLocatorRanking": [
+        "role",
+        "name",
+        "testId",
+        "css",
+        "xpath"
+      ],
+      "deterministicJSON": true,
+      "listTools": "universal-webmcp-listTools-mixed",
+      "invokeTool": "universal-webmcp-invokeTool-mixed",
+      "compile_cost_usd": 0.054,
+      "amortized_cost_usd_f10": 0.0054,
+      "shadowDOM_piercing": true,
+      "lazy_replanning_heals_only_null": true,
+      "verify_before_store": true,
+      "typed_slots": true,
+      "steps": 8,
+      "ir_json_hash": "e6a3cb7bdb4b33ac4a873a09f8ccedfd31a7e213c859749c2b3ced9319be6278"
+    }
+  ],
+  "total_compile_cost_usd": 0.177,
+  "amortized_compile_cost_usd_f10": 0.0177,
+  "per_task_amortized_cost_usd": 0.000443,
+  "treeWalker_compression_99": true,
+  "stable_locator_ranking_listed": true,
+  "shadow_DOM_piercing": true,
+  "lazy_replanning_null_only": true,
+  "listTools_invokeTool_present": true,
+  "policy_risk_present": true,
+  "semantic_precedence_present": true,
+  "ir_hashes": [
+    "103cd7aadb0fcedaabfb58a3c86e3bc853338f467ff8935b80849f1cab55c06b",
+    "e7f9aa837be010aea11be08769733bbc4089cd5b93e7874fbf4490cf6b48207b",
+    "ced2bfec49a5422c08777659729f632c8191339d1c60af1e425016cd9c3e4ba7",
+    "e6a3cb7bdb4b33ac4a873a09f8ccedfd31a7e213c859749c2b3ced9319be6278"
+  ],
+  "manifest_sha256": "8cbe826a349de262b64de5e73231312b824e75db0770e4dcb7668856de6ac087"
+}

@@ -1,0 +1,464 @@
+{
+  "pooled": {
+    "B-EXACT-MATCH": {
+      "n": 40,
+      "correct": 20,
+      "rate": 0.5,
+      "wilson": [
+        0.35199278797099753,
+        0.6480072120290025
+      ],
+      "binom_p": 1.8718579354174017e-10,
+      "wilson_lower": 0.35199278797099753,
+      "wilson_upper": 0.6480072120290025
+    },
+    "B-FLAT-TFIDF-K5-CF": {
+      "n": 40,
+      "correct": 20,
+      "rate": 0.5,
+      "wilson": [
+        0.35199278797099753,
+        0.6480072120290025
+      ],
+      "binom_p": 1.8718579354174017e-10,
+      "wilson_lower": 0.35199278797099753,
+      "wilson_upper": 0.6480072120290025
+    },
+    "H-HIERARCHICAL-CF": {
+      "n": 40,
+      "correct": 20,
+      "rate": 0.5,
+      "wilson": [
+        0.35199278797099753,
+        0.6480072120290025
+      ],
+      "binom_p": 1.8718579354174017e-10,
+      "wilson_lower": 0.35199278797099753,
+      "wilson_upper": 0.6480072120290025
+    },
+    "B-COMPILED-DSM": {
+      "n": 40,
+      "correct": 20,
+      "rate": 0.5,
+      "wilson": [
+        0.35199278797099753,
+        0.6480072120290025
+      ],
+      "binom_p": 1.8718579354174017e-10,
+      "wilson_lower": 0.35199278797099753,
+      "wilson_upper": 0.6480072120290025
+    },
+    "B-ENDPOINT-CATALOG": {
+      "n": 40,
+      "correct": 20,
+      "rate": 0.5,
+      "wilson": [
+        0.35199278797099753,
+        0.6480072120290025
+      ],
+      "binom_p": 1.8718579354174017e-10,
+      "wilson_lower": 0.35199278797099753,
+      "wilson_upper": 0.6480072120290025
+    },
+    "B-JOINT-FETCH": {
+      "n": 40,
+      "correct": 40,
+      "rate": 1.0,
+      "wilson": [
+        0.9123754607496077,
+        0.9123754607496077
+      ],
+      "binom_p": 1.0000000000000022e-40,
+      "wilson_lower": 0.9123754607496077,
+      "wilson_upper": 0.9123754607496077
+    },
+    "B-RANDOM-K5-CF": {
+      "n": 40,
+      "correct": 7,
+      "rate": 0.175,
+      "wilson": [
+        0.08745302996883067,
+        0.3195029205439244
+      ],
+      "binom_p": 0.09951642396555122,
+      "wilson_lower": 0.08745302996883067,
+      "wilson_upper": 0.3195029205439244
+    },
+    "B-STAGEHAND-DOMHASH": {
+      "n": 40,
+      "correct": 0,
+      "rate": 0.0,
+      "wilson": [
+        0.0,
+        0.08762453925039232
+      ],
+      "binom_p": 1.0,
+      "wilson_lower": 0.0,
+      "wilson_upper": 0.08762453925039232
+    }
+  },
+  "coverage": {
+    "B-EXACT-MATCH": 0.5,
+    "B-FLAT-TFIDF-K5-CF": 0.5,
+    "H-HIERARCHICAL-CF": 0.5,
+    "B-COMPILED-DSM": 0.5,
+    "B-ENDPOINT-CATALOG": 0.5,
+    "B-JOINT-FETCH": 1.0,
+    "B-RANDOM-K5-CF": 0.0,
+    "B-STAGEHAND-DOMHASH": 0.0
+  },
+  "per_family": {
+    "B-EXACT-MATCH::family0": {
+      "n": 10,
+      "correct": 10,
+      "rate": 1.0,
+      "wilson": [
+        0.7224598312333834,
+        0.7224598312333834
+      ]
+    },
+    "B-FLAT-TFIDF-K5-CF::family0": {
+      "n": 10,
+      "correct": 10,
+      "rate": 1.0,
+      "wilson": [
+        0.7224598312333834,
+        0.7224598312333834
+      ]
+    },
+    "H-HIERARCHICAL-CF::family0": {
+      "n": 10,
+      "correct": 10,
+      "rate": 1.0,
+      "wilson": [
+        0.7224598312333834,
+        0.7224598312333834
+      ]
+    },
+    "B-COMPILED-DSM::family0": {
+      "n": 10,
+      "correct": 10,
+      "rate": 1.0,
+      "wilson": [
+        0.7224598312333834,
+        0.7224598312333834
+      ]
+    },
+    "B-ENDPOINT-CATALOG::family0": {
+      "n": 10,
+      "correct": 10,
+      "rate": 1.0,
+      "wilson": [
+        0.7224598312333834,
+        0.7224598312333834
+      ]
+    },
+    "B-JOINT-FETCH::family0": {
+      "n": 10,
+      "correct": 10,
+      "rate": 1.0,
+      "wilson": [
+        0.7224598312333834,
+        0.7224598312333834
+      ]
+    },
+    "B-RANDOM-K5-CF::family0": {
+      "n": 10,
+      "correct": 3,
+      "rate": 0.3,
+      "wilson": [
+        0.10778928748621182,
+        0.6032267800204347
+      ]
+    },
+    "B-STAGEHAND-DOMHASH::family0": {
+      "n": 10,
+      "correct": 0,
+      "rate": 0.0,
+      "wilson": [
+        0.0,
+        0.2775401687666165
+      ]
+    },
+    "B-EXACT-MATCH::family1": {
+      "n": 10,
+      "correct": 10,
+      "rate": 1.0,
+      "wilson": [
+        0.7224598312333834,
+        0.7224598312333834
+      ]
+    },
+    "B-FLAT-TFIDF-K5-CF::family1": {
+      "n": 10,
+      "correct": 10,
+      "rate": 1.0,
+      "wilson": [
+        0.7224598312333834,
+        0.7224598312333834
+      ]
+    },
+    "H-HIERARCHICAL-CF::family1": {
+      "n": 10,
+      "correct": 10,
+      "rate": 1.0,
+      "wilson": [
+        0.7224598312333834,
+        0.7224598312333834
+      ]
+    },
+    "B-COMPILED-DSM::family1": {
+      "n": 10,
+      "correct": 10,
+      "rate": 1.0,
+      "wilson": [
+        0.7224598312333834,
+        0.7224598312333834
+      ]
+    },
+    "B-ENDPOINT-CATALOG::family1": {
+      "n": 10,
+      "correct": 10,
+      "rate": 1.0,
+      "wilson": [
+        0.7224598312333834,
+        0.7224598312333834
+      ]
+    },
+    "B-JOINT-FETCH::family1": {
+      "n": 10,
+      "correct": 10,
+      "rate": 1.0,
+      "wilson": [
+        0.7224598312333834,
+        0.7224598312333834
+      ]
+    },
+    "B-RANDOM-K5-CF::family1": {
+      "n": 10,
+      "correct": 4,
+      "rate": 0.4,
+      "wilson": [
+        0.16817758120350967,
+        0.6873304525498135
+      ]
+    },
+    "B-STAGEHAND-DOMHASH::family1": {
+      "n": 10,
+      "correct": 0,
+      "rate": 0.0,
+      "wilson": [
+        0.0,
+        0.2775401687666165
+      ]
+    },
+    "B-EXACT-MATCH::family2": {
+      "n": 10,
+      "correct": 0,
+      "rate": 0.0,
+      "wilson": [
+        0.0,
+        0.2775401687666165
+      ]
+    },
+    "B-FLAT-TFIDF-K5-CF::family2": {
+      "n": 10,
+      "correct": 0,
+      "rate": 0.0,
+      "wilson": [
+        0.0,
+        0.2775401687666165
+      ]
+    },
+    "H-HIERARCHICAL-CF::family2": {
+      "n": 10,
+      "correct": 0,
+      "rate": 0.0,
+      "wilson": [
+        0.0,
+        0.2775401687666165
+      ]
+    },
+    "B-COMPILED-DSM::family2": {
+      "n": 10,
+      "correct": 0,
+      "rate": 0.0,
+      "wilson": [
+        0.0,
+        0.2775401687666165
+      ]
+    },
+    "B-ENDPOINT-CATALOG::family2": {
+      "n": 10,
+      "correct": 0,
+      "rate": 0.0,
+      "wilson": [
+        0.0,
+        0.2775401687666165
+      ]
+    },
+    "B-JOINT-FETCH::family2": {
+      "n": 10,
+      "correct": 10,
+      "rate": 1.0,
+      "wilson": [
+        0.7224598312333834,
+        0.7224598312333834
+      ]
+    },
+    "B-RANDOM-K5-CF::family2": {
+      "n": 10,
+      "correct": 0,
+      "rate": 0.0,
+      "wilson": [
+        0.0,
+        0.2775401687666165
+      ]
+    },
+    "B-STAGEHAND-DOMHASH::family2": {
+      "n": 10,
+      "correct": 0,
+      "rate": 0.0,
+      "wilson": [
+        0.0,
+        0.2775401687666165
+      ]
+    },
+    "B-EXACT-MATCH::family3": {
+      "n": 10,
+      "correct": 0,
+      "rate": 0.0,
+      "wilson": [
+        0.0,
+        0.2775401687666165
+      ]
+    },
+    "B-FLAT-TFIDF-K5-CF::family3": {
+      "n": 10,
+      "correct": 0,
+      "rate": 0.0,
+      "wilson": [
+        0.0,
+        0.2775401687666165
+      ]
+    },
+    "H-HIERARCHICAL-CF::family3": {
+      "n": 10,
+      "correct": 0,
+      "rate": 0.0,
+      "wilson": [
+        0.0,
+        0.2775401687666165
+      ]
+    },
+    "B-COMPILED-DSM::family3": {
+      "n": 10,
+      "correct": 0,
+      "rate": 0.0,
+      "wilson": [
+        0.0,
+        0.2775401687666165
+      ]
+    },
+    "B-ENDPOINT-CATALOG::family3": {
+      "n": 10,
+      "correct": 0,
+      "rate": 0.0,
+      "wilson": [
+        0.0,
+        0.2775401687666165
+      ]
+    },
+    "B-JOINT-FETCH::family3": {
+      "n": 10,
+      "correct": 10,
+      "rate": 1.0,
+      "wilson": [
+        0.7224598312333834,
+        0.7224598312333834
+      ]
+    },
+    "B-RANDOM-K5-CF::family3": {
+      "n": 10,
+      "correct": 0,
+      "rate": 0.0,
+      "wilson": [
+        0.0,
+        0.2775401687666165
+      ]
+    },
+    "B-STAGEHAND-DOMHASH::family3": {
+      "n": 10,
+      "correct": 0,
+      "rate": 0.0,
+      "wilson": [
+        0.0,
+        0.2775401687666165
+      ]
+    }
+  },
+  "eces": {
+    "B-EXACT-MATCH": 0.23714285714285707,
+    "B-FLAT-TFIDF-K5-CF": 0.22575714285714285,
+    "H-HIERARCHICAL-CF": 0.22575714285714285,
+    "B-COMPILED-DSM": 0.21920000000000006,
+    "B-ENDPOINT-CATALOG": 0.22575714285714285,
+    "B-JOINT-FETCH": 0.10992857142857142,
+    "B-RANDOM-K5-CF": 0.07733515385400841,
+    "B-STAGEHAND-DOMHASH": 0.1699285714285714
+  },
+  "perm_rhos": {
+    "B-EXACT-MATCH": "0.1716,p=0.3137",
+    "B-FLAT-TFIDF-K5-CF": "0.1639,p=0.3177",
+    "H-HIERARCHICAL-CF": "0.2304,p=0.1758",
+    "B-COMPILED-DSM": "0.1833,p=0.2537",
+    "B-ENDPOINT-CATALOG": "0.0900,p=0.5854",
+    "B-JOINT-FETCH": "0.0000,p=1.0000",
+    "B-RANDOM-K5-CF": "0.2004,p=0.2158",
+    "B-STAGEHAND-DOMHASH": "0.0000,p=1.0000"
+  },
+  "within_f_std": {
+    "B-EXACT-MATCH": 1.0428326807307104,
+    "B-FLAT-TFIDF-K5-CF": 1.0198039027185568,
+    "H-HIERARCHICAL-CF": 1.1,
+    "B-COMPILED-DSM": 1.1508149286483904,
+    "B-ENDPOINT-CATALOG": 1.2757350822173072,
+    "B-JOINT-FETCH": 2.568559907808264,
+    "B-RANDOM-K5-CF": 1.1079259903080168,
+    "B-STAGEHAND-DOMHASH": 1.2285662375305615
+  },
+  "conf_std": {
+    "B-EXACT-MATCH": 0.34964705236064814,
+    "B-FLAT-TFIDF-K5-CF": 0.3450682874964234,
+    "H-HIERARCHICAL-CF": 0.3450682874964234,
+    "B-COMPILED-DSM": 0.3421115802510005,
+    "B-ENDPOINT-CATALOG": 0.3450682874964234,
+    "B-JOINT-FETCH": 0.34663072176367776,
+    "B-RANDOM-K5-CF": 0.13545469074877517,
+    "B-STAGEHAND-DOMHASH": 0.28055543488019674
+  },
+  "controls": {
+    "PC-EXACT-MATCH": true,
+    "PC-COMPILATION-DSM-BUILT": true,
+    "PC-ENDPOINT-CATALOG-BUILT": true,
+    "PC-HIERARCHICAL-BUILT": true,
+    "PC-FLAT-HEALTH": true,
+    "PC-OPENAPI-COVERAGE": true,
+    "PC-ROUTING-DIFF": true,
+    "PC-BROWSERGYM-HEALTH": false,
+    "PC-HONEST-COST-SANITY": false,
+    "PC-CONFIDENCE-DERIVED": true,
+    "PC-FRESHNESS-NONCIRCULAR": true,
+    "PC-AX-CDP": true,
+    "NC-NO-APPLICABLE": true,
+    "NC-EMPTY": true,
+    "NC-ORACLE-LEAK": true,
+    "NC-STAGEHAND-ISOLATION": true,
+    "NC-BIJECTIVE-COST": true
+  },
+  "browsing_mean": 4.9,
+  "amortized_f10": 0.0177,
+  "economics_pass": true,
+  "routing_pairs_diff": 14,
+  "spec_prefix_covered": 40
+}
