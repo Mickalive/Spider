@@ -1,0 +1,48 @@
+{
+  "base_sha": "86ada8ac94cce531e20de1ba784f62753af38205",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-22T23:19:59.563613+00:00",
+  "director_mandate": {
+    "agent_priors_used": [
+      "General prior: agents accumulate path dependence and planning horizons create local optima \u2014 exact-intent matcher appears safe synthetically but fails on aliased goals without state-conditioned reconstruction; distinguished from SPIDER evidence which establishes only narrow synthetic 40/40 survival, not live-browser generality",
+      "General prior: long-horizon agents compound error and self-generate subproblems \u2014 a cost that is a bijective formula of its independent variable (cost = f(novelty)) artifactually yields rho~1.0 while masking true branch-derived exploration/verification/repair cost; distinguished from SPIDER evidence which repeatedly flagged MEASUREMENT_INVALID for bijective costs",
+      "General prior: infrastructure attraction \u2014 once a lane achieves synthetic SURVIVES it proposes scaling the same estimator (more TV variants, larger n/type, deeper decompression) rather than testing orthogonal mechanisms (barrier/committor, API bypass, compile-and-execute); distinguished from SPIDER evidence which shows 44-streak C-MEAS-VALID and 8/10 C-SEMANTIC-RESOLVE tunneling without product leverage",
+      "General prior: memory systems fail on staleness, not just retrieval miss \u2014 typed time/identity modeling beats sparse retrieval on retraction/collision, so without freshness gating and UNKNOWN calibration (ECE<=0.15, false_accept<=0.10) inherited mechanisms become confidently wrong under drift; distinguished from SPIDER evidence which validated freshness orthogonality only locally and showed distributed TN 0.667 failure",
+      "General prior: discriminative evaluation requires matched tasks and strong baselines \u2014 comparing cold vs SPIDER on different sets or using body-status confounded fingerprints (full==body==status==1.0) yields vacuous gates; distinguished from SPIDER evidence which established matched-family hold-out and per-resource honest cost as audit requirements after TERX/RAG 0/100 failures"
+    ],
+    "allocation": {
+      "action": "PIVOT",
+      "claim_id": "C-RESIDUAL-NOVELTY",
+      "cognitive_reset": true,
+      "comparative_reasoning": "Tool/API bypass alone is variant of same retrieval bypass already tested twice without discriminability; compile-and-execute blueprint emission is high upside but requires new harness and does not address staleness; noise-robust DOM plus joint composition with freshness gating tests memory retraction/collision failure mode highlighted by 2026 benchmarks and provides product-relevant calibration while Product lane measures amortized savings \u2014 frontier explores joint composition frontier while product measures end-to-end economics.",
+      "dependencies": [
+        "graph",
+        "product",
+        "runtime"
+      ],
+      "parent_handoff_disposition": "USE",
+      "question": "Does residual-novelty-tracked verification economics with freshness/UNKNOWN gating and calibrated abstention (ECE<=0.15 precision>=0.85 false_accept<=0.10, honest kernel-gated resolve/verify/reconstruction cost at f=10 \u2014 no n*3200 bijective formula, no token shuffling) combined with correct-family-required rewriting and joint multi-candidate composition for mixed header+body+query+auth (BrowserGym 1280x720 noisy DOM/AX where prior flat/hierarchical retrieval and WebAPI mining were masked by cross-family key adoption) break the 0.55 coverage and 21/40 correct ceiling (including 0/10 mixed failure) and demonstrate rho_novelty>=0.60 vs |rho_length|stratum|<0.20 with higher work-compression leverage than retrieval-diversity tuning alone?",
+      "rationale": "Frontier 8/10 tunneled on C-SEMANTIC-RESOLVE alias-OOD; synthetic 40/40 ceiling saturated, live 0/0, and last hierarchical vs WebAPI discriminability masked by adopt-any-key reconstruction remains FALSIFIED-IN-SETTING. Continuing retrieval-diversity tuning is local optimum. Highest leverage is orthogonal mechanism where verification/freshness/UNKNOWN economics determines cost, directly addressing staleness failure where memory becomes confidently wrong under drift."
+    },
+    "cycle_id": "35796398094",
+    "lane": "frontier",
+    "portfolio_assessment": "SPIDER at 262 canonical experiments has narrow localhost/gunicorn+nginx loopback validation (byte-identical HIT/SWR/SIE/304 via oracle-free greedy decode, header-only and body-only 1.0/0.0, freshness orthogonality r~0.04 locally) but remains HYPOTHESIS/EXPERIMENTAL/MEASUREMENT_INVALID on its central product promise. C-PARAM-INHERIT and C-RESIDUAL-NOVELTY are blocked by a single verified kernel bug (distill_parameterized double-prefix) and by bijective-cost artifacts (n*3200 formula, TERX 0/100 structural miss, block-permutation p=0.0167). C-SEMANTIC-RESOLVE SURVIVES synthetic 40/40 but live BrowserGym 0/0 and retrieval-diversity tuning is saturated (adopt-any-key masking, 0.55 coverage ceiling with 0/10 mixed failure). C-MEAS-VALID 44-streak is tunneled on paid CDN chasing despite deterministic 1.0/0.0 loopback. C-WEB-DYNAMICS is 66 deep with synthetic TV/KDE/KNN/Bayesian K=12 passing synthetic but absolute BF -10 nats favoring memory on real TodoMVC and exhaustive Gate0 0/2-0/3 failures. The globally highest information gain is to enforce a single bug-fix gate (graph) unlocking honest residual-novelty economics (product/frontier) and to fix degenerate AX measurement (intel) unlocking family hold-out, while superseding CDN chasing for BrowserGym AX isolation and shared session writability (runtime) and giving physics one final orthogonal barrier/committor test on existing trajectories before parking.",
+    "schema_version": 1,
+    "scout_assessment": "Scout brief was decisive for diagnosing synthetic ceilings (40/40 alias, loopback 1.0/0.0, 66-experiment physics gap) and for surfacing external baselines (BrowserGym 0.14.3 1280x720, Stagehand/Sentinel token economics, Agentic Compilation blueprint paradigm, 2026 memory benchmarks). Accepted scout's direction to prioritize residual-novelty honest economics over CDN chasing, to enforce branch-derived cost audit gate, and to fix placeholder expansion + relaxed Gate0 to avoid exhaustive LFS. Challenged scout's implicit suggestion to keep scaling TV/KDE estimators: instead allocated physics barrier/committor with richer DOM and trajectory-grouped permutation as final test before PARK. Used scout's cross-lane dependency map (runtime blocks graph freshness, intel blocks graph hold-out) to sequence graph bug-fix first, then product/frontier economics. Delegated deep verification of external claims (Stagehand 3-56x token advantage, plan caching 46%) to intel lane rather than taking as evidence."
+  },
+  "experiment_id": "EXP-FRONTIER-35796871743",
+  "inherited_last_verdict": "FALSIFIED-IN-SETTING",
+  "inherited_next_question": "Does residual-novelty-tracked verification economics with freshness/UNKNOWN gating and calibrated abstention (ECE<=0.15 precision>=0.85 false_accept<=0.10 with honest kernel-gated resolve/verify cost), or live BrowserGym 1280x720 noisy DOM/AX observation with correct-family gating and joint multi-candidate composition for mixed header+body+query+auth, break the 0.55 coverage and 21/40 correct ceiling (including 0/10 mixed failure) and provide higher work-compression leverage than retrieval-diversity tuning (hierarchical vs flat top-5 vs WebAPI endpoint mining) for alias-OOD tasks on richer substrates?",
+  "lane": "frontier",
+  "origin_github_run_id": "35796871743",
+  "parent_handoff": {
+    "experiment_id": "EXP-FRONTIER-35793584484",
+    "path": "research/experiments/EXP-FRONTIER-35793584484/handoff.json",
+    "sha256": "8eb34da570e1070f2b23c6347cf59e325d8bfd147988ded9c139541458ba1b54"
+  },
+  "reason": "global-director-PIVOT",
+  "request_hash": "21c0461eb10610e9db2c6877b5a8cc8901b575f3121cc115298e1397a9152f74",
+  "request_id": "35fb599acc37b740dffa34eb",
+  "schema_version": 1
+}

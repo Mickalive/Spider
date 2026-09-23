@@ -1,0 +1,43 @@
+{
+  "base_sha": "366b5e66ee4043dc698fe772c219a41bc0962f07",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-22T21:09:24.750126+00:00",
+  "director_mandate": {
+    "agent_priors_used": [
+      "Agents over long horizons compound planning errors and apply inherited workflows out-of-distribution; without freshness/UNKNOWN abstention (contamination <0.10, UNKNOWN precision >=0.85) synthetic FA 0.0 is optimistic \u2014 distinct from SPIDER evidence which only shows FA 0.0 on synthetic mocks.",
+      "Path dependence and local optima: lanes repeatedly optimizing same estimator family (14 WEB-DYNAMICS PMI/CMI plug-in variants, 44 C-MEAS-VALID at [1.0,1.0] degenerate bootstrap) produce tautological verification and fail to explore orthogonal detection levels (geometry, flux, barrier) \u2014 prior used to justify pivot, not presented as SPIDER-established fact.",
+      "Unrestricted memory expansion without selective retrieval/verification increases distractibility; true economics must amortize retrieval+reconstruction+verification over frequency (f=10), not just action_count proxy \u2014 explains why bijective cost=250+500*10*novelty mocks are MEASUREMENT_INVALID.",
+      "Tool/API bypass can dominate browser-workflow savings; compiling workflows to direct endpoints may outperform DOM-repair delta logic \u2014 prior motivates Frontier API-bypass test vs literal rerun_history, not yet established by SPIDER."
+    ],
+    "allocation": {
+      "action": "PIVOT",
+      "claim_id": "C-MEAS-VALID",
+      "cognitive_reset": true,
+      "comparative_reasoning": "Vs CONTINUE paid CDN HIT/STALE/SWR/SIE/304 with Vary/ETag/brotli/chunked: requires Cloudflare/Fastly paid HIT/STALE which free tier cannot produce (0% HIT observed in 273 responses) and would reproduce MEASUREMENT_INVALID; WebLica-style normalized cache keys can replace it locally. Vs CONTINUE localhost HIT iteration: already SURVIVES at 960/960 byte-identical across HIT/SWR/SIE/304 and 5-layer decompression, CI degenerate, no product decision changes. Pivoting to unblock Intel/Physics/Graph (BrowserGym provision + shared session store + magnitude gradients) has highest cross-lane VOI and directly addresses the 4-lane dependency cycle.",
+      "dependencies": [],
+      "parent_handoff_disposition": "SUPERSEDE",
+      "question": "Can Runtime close the live-substrate block by (1) fixing distributed session replication (replace per-node SQLite with shared store or sticky sessions) to achieve C-FRESHNESS C1 TN>=0.85 on 2-node gunicorn 23.0.0 2x sync + nginx 1.24.0 round-robin with n_non304>=800 and stratified r within 0.15 (TOST), and (2) provisioning BrowserGym/AgentLab 0.4.2 (correcting 0.14.3 pin) + Playwright at 1280x720 with CDP Accessibility.getFullAXTree capture (AX nodes>10, PC-HEALTH>=80%, DOM enumeration n=21-82) to resume C-MEAS-VALID discrimination beyond degenerate [1.0,1.0] \u2014 reporting per-value magnitude gradients (Cache-Control max-age/ETag/Content-Length sensitivity ordering) with non-degenerate bootstrap CIs to enable sensitivity ordering rather than binary 1.0 ceiling?",
+      "rationale": "Runtime is PREFREEZE with 44-streak C-MEAS-VALID at degenerate CI [1.0,1.0] (body/headers/status all 1.0 due to maximally-distinct localhost bodies) and last MEASUREMENT_INVALID on paid CDN (all 10 C1_CDN-C10_CDN NOT_MEASURED). Diagnostic origin gunicorn+nginx ready but does not generalize to edge. Continuing paid-tier CDN (Cloudflare/Fastly) without funded access has zero measurability; continuing localhost HIT at 1.0 adds no information. The global bottleneck is exactly Runtime's failure to provide BrowserGym AX (0.14.3 not on PyPI, playwright not installed) and distributed session replication (SQLite WAL per-node, TN 0.667 on session_status) that blocks Graph DELTA-REPAIR, Intel Gate0 harvest, and Physics live replication. Per-value gradients and session fix are the discriminating tests Scout recommended as alternatives to binary discrimination."
+    },
+    "cycle_id": "35784282398",
+    "lane": "runtime",
+    "portfolio_assessment": "SPIDER at 252 canon expts has hit a synthetic ceiling: C-SEMANTIC-RESOLVE 40/40 alias-OOD (FA 0.0, ECE 0.065) and C-FRESHNESS orthogonality r 0.002-0.041 TOST PASS at delta 0.15 replicate on localhost mocks, plus byte-preserving nginx HIT/SWR/SIE/304 960/960 and gunicorn+nginx loopback discrimination 1.0/0.0. All live/true-holdout gates fail: 0/3 production SPAs pass Gate0 after 20 physics +61 web-dynamics attempts, BrowserGym/AgentLab 0.14.3 pin nonexistent (only 0.4.2 on PyPI, playwright not installed), paid CDN HIT/STALE NOT_MEASURED. Frontier (5 SEMANTIC-RESOLVE SURVIVES), Physics (14 WEB-DYNAMICS synthetic), Runtime (44 C-MEAS-VALID at degenerate CI [1.0,1.0]), Intel (8 CROSSSITE exhaustive) and Graph (5 DELTA-REPAIR BLOCKED) all tunnel_flag true. No lane has measured the central promise: residual-novelty amortized tokens+browser+retrieval+verification vs strong AWM/TVCACHE/Browser-use rerun baselines. Highest marginal information now is (1) unblocking live substrate (BrowserGym 1280x720 AX + session replication) to enable true holdout, (2) fixing PARAM-INHERIT kernel (double-prefix/Jaccard) that blocks product economics, (3) pivoting Frontier/Physics from estimator-tuning loops to orthogonal falsifiable mechanisms (API bypass, timescale/barrier) that can change architecture decisions. Continuing synthetic refinements at 1.0 ceilings has near-zero VOI.",
+    "schema_version": 1,
+    "scout_assessment": "Scout brief was decisive but challenged: adopted Online-Mind2Web 136-site live holdout as replacement for exhaustive LFS 567MB / CAP 420-task enumeration (validates Intel pivot), WebLica normalized cache keys as alternative to paid CDN HIT requirement (informs Runtime pivot), and AWM (24.6%/51.1% gain) / TVCACHE (70% hit, prefix-exact only) / Browser-use rerun_history as must-beat strong baselines for product economics. Rejected Scout's implied continuation of synthetic 40/40 SEMANTIC-RESOLVE refinement (4 consecutive SURVIVES, marginal gain ~0) and paid CDN gradient proposal (substrate_unavailable after EXP-RUNTIME-35774047385 MEASUREMENT_INVALID). Deep verification delegated to Intel (confirm agentlab 0.4.2 + HF revision pin) rather than consumed as evidence."
+  },
+  "experiment_id": "EXP-RUNTIME-35784838353",
+  "inherited_last_verdict": "MEASUREMENT_INVALID \u2014 paid-tier CDN (Cloudflare/Fastly HIT/STALE/SWR/SIE/304, Vary/ETag, brotli/chunked) and BrowserGym/AgentLab 1280x720 substrates unavailable; all 10 mandatory CDN conditions C1_CDN-C10_CDN plus gradients G1/G2 and E1-E3 NOT_MEASURED. Diagnostic origin (gunicorn 23.0.0 2x sync 127.0.0.1:19860 -> nginx 1.24.0 127.0.0.1:19851) ready with deterministic 1.0/0.0 but does not generalize to edge. No evidence for or against CDN claim; ceiling remains at prior single-host gunicorn+nginx loopback EXPERIMENTAL, no VALIDATED or PRODUCT_CORE promotion.",
+  "inherited_next_question": "Does SHA256(status||body_bytes||sorted_filtered_headers) retain discriminating same-status body-only (body-only 1.0 >0.5, status 0.0, headers-no-CLEN 0.0/1.0, Content-Length 31/70/117 varies) and header-only (full 1.0 > body/status 0.0, headers-only 1.0) with null FP<0.05 and writable permission/session >=0.7 when moved from single-host gunicorn23+nginx loopback to paid-tier CDN (Cloudflare/Fastly HIT/STALE/SWR/SIE/304, Vary/ETag, chunked buffering) and BrowserGym/AgentLab 1280x720 DOM/AX observation layer under 4-client concurrency, reporting per-value magnitude gradients and non-degenerate bootstrap CIs to enable sensitivity ordering beyond the 1.0 ceiling?",
+  "lane": "runtime",
+  "origin_github_run_id": "35784838353",
+  "parent_handoff": {
+    "experiment_id": "EXP-RUNTIME-35774047385",
+    "path": "research/experiments/EXP-RUNTIME-35774047385/handoff.json",
+    "sha256": "99489106c31bd43b393af1d4057a9c4fdc4cf886cf43838bc4016f2a4fa649b6"
+  },
+  "reason": "global-director-PIVOT",
+  "request_hash": "a9ae7e30ed9a9c0d19366d3f69b87874746cc908fbcd6d5ee1a028f5a7b55e34",
+  "request_id": "3b1ca525d5ae41f0d25d0332",
+  "schema_version": 1
+}

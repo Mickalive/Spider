@@ -1,0 +1,204 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-35798169917",
+  "lane": "graph",
+  "github_run_id": "35798169917",
+  "github_run_attempt": 1,
+  "base_sha": "c065bc92f8b56ab2ddfdaa0612097ee7fbe7a953",
+  "commit": "b540064e1e3da30501424547386ead31cd05195f",
+  "environment": {
+    "platform": "Linux-6.17.0-1022-azure-x86_64-with-glibc2.39",
+    "python_version": "3.12.14",
+    "kernel_sha256": "3c61f9fc251668237a58e986c3348e1bf1057e38824a0e1b9ea1e2426a1c938a",
+    "openai_key_present": false,
+    "playwright_available": false,
+    "playwright_version": "not installed",
+    "seed": 42,
+    "pythonhashseed": "0"
+  },
+  "datasets": {
+    "webarena_verified_v2": {
+      "attempts": [
+        {
+          "source": "research/experiments/EXP-GRAPH-35798169917/census.json",
+          "found": true,
+          "path": "/home/runner/work/Spider/Spider/research/experiments/EXP-GRAPH-35798169917/census.json",
+          "sha256": "0ee8b1f7d410c922d0c5d0493356fcec1704ccd278c67b8a04d79575384e1064",
+          "tasks": 242,
+          "templates": 50,
+          "duplication": 0.7933884297520661,
+          "families_ge3": 23
+        },
+        {
+          "source": "data/webarena_verified_v2.json",
+          "found": false,
+          "path": "/home/runner/work/Spider/Spider/data/webarena_verified_v2.json"
+        },
+        {
+          "source": "Docker am1n3e/webarena-verified-shopping@sha256:3e8cb9b945",
+          "found": false,
+          "reason": "not pulled in offline harness"
+        }
+      ],
+      "census_path": "/home/runner/work/Spider/Spider/research/experiments/EXP-GRAPH-35798169917/census.json",
+      "census_sha256": "0ee8b1f7d410c922d0c5d0493356fcec1704ccd278c67b8a04d79575384e1064",
+      "tasks": 242,
+      "templates": 50,
+      "duplication": 0.7933884297520661,
+      "families_ge3": 23,
+      "verified_real": false,
+      "expected_real_hash": "d65275660814663375028e9017e1f929e3c38321041b125795e2713b52243d30",
+      "expected_docker": "am1n3e/webarena-verified-shopping@sha256:3e8cb9b945"
+    },
+    "pilot_family": {
+      "family": "add_to_cart",
+      "pool_a_size": 10,
+      "pool_b_size": 10,
+      "zero_overlap_verified": true,
+      "pool_a_values": [
+        "SKU-A001",
+        "SKU-A002",
+        "SKU-A003",
+        "SKU-A004",
+        "SKU-A005",
+        "SKU-A006",
+        "SKU-A007",
+        "SKU-A008",
+        "SKU-A009",
+        "SKU-A010"
+      ],
+      "pool_b_values": [
+        "SKU-B001",
+        "SKU-B002",
+        "SKU-B003",
+        "SKU-B004",
+        "SKU-B005",
+        "SKU-B006",
+        "SKU-B007",
+        "SKU-B008",
+        "SKU-B009",
+        "SKU-B010"
+      ]
+    }
+  },
+  "code_paths": {
+    "src/spider/kernel.py": "3c61f9fc251668237a58e986c3348e1bf1057e38824a0e1b9ea1e2426a1c938a",
+    "src/spider/models.py": "23ef7f750e6bb7776c648316956cb8be95576271ca479f632de934d6eef22177",
+    "src/spider/registry.py": "51fb440d3827f21cccb5f77ad17dc0e76ccdbc2d52d7b05044cd821bb8a9322c",
+    "tests/test_kernel_param_inherit.py": "5ba22fbf10de8f88f598ce4eeb06738e9a88f62ad47c84d510c78b4820aee836",
+    "research/experiments/EXP-GRAPH-35798169917/run_experiment.py": "232f16a74f84f0d1da3225495c7baad11a5c98342da08cef4bb52d56ba7727dd",
+    "research/experiments/EXP-GRAPH-35798169917/census.json": "0ee8b1f7d410c922d0c5d0493356fcec1704ccd278c67b8a04d79575384e1064"
+  },
+  "parameters": {
+    "distill_tokens": 1000,
+    "retrieval_tokens": 200,
+    "verification_tokens": 50,
+    "amortization_f": 10,
+    "model": "gpt-4o-mini-2024-07-18",
+    "temperature": 0.0,
+    "seed": 42,
+    "max_steps": 15,
+    "max_tokens": 4096,
+    "tools": [
+      "navigate",
+      "click",
+      "fill",
+      "type",
+      "select",
+      "goBack",
+      "observe"
+    ],
+    "browser": "chromium headless Playwright"
+  },
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-GRAPH-35798169917/raw_evidence/per_task.csv",
+      "sha256": "b96a39cf74d29371d0193afa695ae9ce4dd20a1529c55d7fcb54ea803f3cb9fb",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-35798169917/raw_evidence/registry.json",
+      "sha256": "90f78b522cd1a83d71105c727e3455c4c901840a00b179a392939910c460aee1",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-35798169917/raw_evidence/cost_config.json",
+      "sha256": "0049777e730b445fb85672f7afab8d084d9e8cf41b6c3ea03168080ed8debc17",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-35798169917/raw_evidence/census_attempts.json",
+      "sha256": "975ab3ae2bdb09d10ca5b5a1ffc0e4cd423909ee64da9d8e6822f2c6ad8c225c",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-35798169917/raw_evidence/kernel_check.json",
+      "sha256": "5028fa7a4dd13df1e95104c800256f44cdf4190acc38d4ffcbbe814fb62c1690",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-35798169917/raw_evidence/unit_test_output.json",
+      "sha256": "e33415a8d7070b193b85171c903a0e0af8144606dc1a2bfbf9dfa388daf066c5",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-35798169917/census.json",
+      "sha256": "0ee8b1f7d410c922d0c5d0493356fcec1704ccd278c67b8a04d79575384e1064",
+      "role": "raw"
+    },
+    {
+      "path": "src/spider/kernel.py",
+      "sha256": "3c61f9fc251668237a58e986c3348e1bf1057e38824a0e1b9ea1e2426a1c938a",
+      "role": "code"
+    },
+    {
+      "path": "src/spider/models.py",
+      "sha256": "23ef7f750e6bb7776c648316956cb8be95576271ca479f632de934d6eef22177",
+      "role": "code"
+    },
+    {
+      "path": "tests/test_kernel_param_inherit.py",
+      "sha256": "5ba22fbf10de8f88f598ce4eeb06738e9a88f62ad47c84d510c78b4820aee836",
+      "role": "code"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-35798169917/run_experiment.py",
+      "sha256": "232f16a74f84f0d1da3225495c7baad11a5c98342da08cef4bb52d56ba7727dd",
+      "role": "code"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-35798169917/pilot_family.json",
+      "sha256": "df68cc79bf8b67e9734bfeb99fcc6b8b860f4ec706a13c498713b09961b51555",
+      "role": "raw"
+    }
+  ],
+  "kernel_checks": {
+    "distill_parameterized": true,
+    "_common_prefix_and_suffix": true,
+    "_extract_varying_values": true,
+    "_structure_similarity": true,
+    "_is_allowed_path": true,
+    "_field_path_to_slot_name": true,
+    "_sanitize_slot": true,
+    "confidence_090": true,
+    "single_prefix_comment": true,
+    "jaccard_thresh": true
+  },
+  "unit_tests": {
+    "returncode": 0,
+    "stdout": "",
+    "stderr": "test_B1_single_param_body_sku (tests.test_kernel_param_inherit.KernelParamInheritTests.test_B1_single_param_body_sku) ... ok\ntest_B2_short_values (tests.test_kernel_param_inherit.KernelParamInheritTests.test_B2_short_values) ... ok\ntest_B3_short_url (tests.test_kernel_param_inherit.KernelParamInheritTests.test_B3_short_url) ... ok\ntest_B4_distinct_slot_per_field_path (tests.test_kernel_param_inherit.KernelParamInheritTests.test_B4_distinct_slot_per_field_path) ... ok\ntest_B5_mixed_short (tests.test_kernel_param_inherit.KernelParamInheritTests.test_B5_mixed_short) ... ok\ntest_C2_user4_full_value_single_prefix (tests.test_kernel_param_inherit.KernelParamInheritTests.test_C2_user4_full_value_single_prefix) ... ok\ntest_D1_noisy_over_param_filtered (tests.test_kernel_param_inherit.KernelParamInheritTests.test_D1_noisy_over_param_filtered) ... ok\ntest_E1_hallucination_rejected_low_jaccard (tests.test_kernel_param_inherit.KernelParamInheritTests.test_E1_hallucination_rejected_low_jaccard) ... ok\ntest_distinct_slot_per_field_path_rejected_if_collision (tests.test_kernel_param_inherit.KernelParamInheritTests.test_distinct_slot_per_field_path_rejected_if_collision) ... ok\ntest_field_path_filter (tests.test_kernel_param_inherit.KernelParamInheritTests.test_field_path_filter) ... ok\ntest_jaccard_threshold (tests.test_kernel_param_inherit.KernelParamInheritTests.test_jaccard_threshold) ... ok\ntest_sanitize_and_field_mapping (tests.test_kernel_param_inherit.KernelParamInheritTests.test_sanitize_and_field_mapping) ... ok\ntest_zero_unsubstituted_templates (tests.test_kernel_param_inherit.KernelParamInheritTests.test_zero_unsubstituted_templates) ... ok\n\n----------------------------------------------------------------------\nRan 13 tests in 0.003s\n\nOK\n",
+    "passed": true
+  },
+  "controls": {
+    "pc1_hit_rate": 1.0,
+    "pc1_cost": 50,
+    "pc1_success": 1.0,
+    "pc2_executable": 1.0,
+    "pc2_binding": 1.0,
+    "pc2_success": 1.0,
+    "pc2_detail": "slots=['qty', 'resource_id', 'sku', 'x_csrf_token'] template_keys=['url', 'body', 'headers'] evidence_values={'resource_id': ['https://shop.example.com/store/S1/item/I1', 'https://shop.example.com/store/S2/item/I2', 'https://shop.example.com/store/S3/item/I3'], 'sku': ['A1', 'A2', 'A3'], 'qty': ['2', '3', '4'], 'x_csrf_token': ['tokA', 'tokB', 'tokC']}"
+  },
+  "duration_seconds": 0,
+  "recorded_at": "2026-09-22T23:43:39.320837+00:00"
+}

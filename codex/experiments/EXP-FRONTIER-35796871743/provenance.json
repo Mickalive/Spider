@@ -1,0 +1,96 @@
+{
+  "experiment_id": "EXP-FRONTIER-35796871743",
+  "lane": "frontier",
+  "created_at": "2026-09-22T23:41:02.344311+00:00",
+  "base_sha": "86ada8ac94cce531e20de1ba784f62753af38205",
+  "freeze_hashes": {
+    "prereg.md": "c47dc4980f0e5a17f4e077014a10f061f5bae76d0737acae59252605353605d3",
+    "request.json": "221ae9969371123ef62e2c112f4da599db3e9d271acae033457a433decf4e4a5",
+    "spec.json": "3ca6b8ec61ebf8096c6ec043325fd16a38157b7951b126f4d1ea34fd5cddfd5a"
+  },
+  "request_hash": "21c0461eb10610e9db2c6877b5a8cc8901b575f3121cc115298e1397a9152f74",
+  "origin_github_run_id": "35796871743",
+  "execution_github_run_id": null,
+  "relevant_commits": [
+    {
+      "commit": "011cec950c8fae1b1a7d89397cdfb20f6c6a4206",
+      "message": "R2 frontier: execution base"
+    },
+    {
+      "commit": "060d7499",
+      "message": "R2 frontier: freeze"
+    },
+    {
+      "commit": "86ada8ac94cce531e20de1ba784f62753af38205",
+      "message": "codex sync"
+    }
+  ],
+  "code_paths": [
+    "research/frontier/run_execute_35796871743.py",
+    "src/spider/kernel.py",
+    "src/spider/models.py",
+    "src/spider/registry.py"
+  ],
+  "code_hashes": {
+    "run_execute_35796871743.py": "f3d167e398919a6f3fb9b8e3a6e08fed93ffef3dd90452ae828fdd4b33aba1a3",
+    "kernel.py": "46929b3a951df48d7f9d1fd850871073c0d91c1868aa117e13d389fe274e8d61"
+  },
+  "datasets_fixtures": [
+    {
+      "path": "research/experiments/EXP-FRONTIER-35793584484/tasks_expanded.json",
+      "sha256": "83b7c52dd17848fc8c70d1c629b8d541788e0438249623ea783d2df364467319",
+      "role": "parent_fixture"
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-35796871743/tasks_expanded.json",
+      "sha256": "83b7c52dd17848fc8c70d1c629b8d541788e0438249623ea783d2df364467319",
+      "role": "fixture_copy"
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-35796871743/index_manifest.json",
+      "sha256": "ee670fc97bea0ee4caba644e1dcefb4d3336c1ef46d14e4ffc09973c23f2fb23",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-35796871743/train_split_inventory.json",
+      "sha256": "33d953b178647233c6c76fe91366b57c0c628f8f4e26147bd5fe06d9cd207108",
+      "role": "derived"
+    }
+  ],
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-FRONTIER-35796871743/raw_evidence.json",
+      "sha256": "149434a321ec1afba9309331fa4529ac9a3a1545d1185f5a2ed054ec125d0f6d",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-35796871743/derived_metrics.json",
+      "sha256": "b2b31f47f3c2b285413228d3874ff3c7b807742846a89f3430f5455076148444",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-35796871743/result.json",
+      "sha256": "911cf85339b6aaa4325d6e2f3501caf29704c0081f29dd7eefcf528a0756b15d",
+      "role": "derived"
+    }
+  ],
+  "environment": {
+    "python": "Python 3.12.14",
+    "numpy": "2.5.3",
+    "sklearn": "1.9.1",
+    "scipy": "1.18.1",
+    "viewport": "1280x720 (synthetic fallback, BrowserGym live not executed)",
+    "dom_ax_method": "Accessibility.getFullAXTree at 1280x720 (synthetic deterministic perturbation fallback disclosed)",
+    "seeds": {
+      "numpy": 42,
+      "random": 42,
+      "hash": "sha256"
+    },
+    "f_levels": 10,
+    "pipelines": 11,
+    "browser_gym_live": false,
+    "synthetic_fallback_disclosed": true
+  },
+  "determinism": "All RNG via numpy.random.RandomState(42) + random.seed(42), deterministic hashing via hashlib.sha256, deterministic viewport 1280x720 locked, CDP same path for synthetic fallback. Block bootstrap 2000 trajectory-grouped by family.",
+  "honest_cost_accounting": "increment counters on each kernel.resolve, _bind, verify, freshness_check, plus browser_steps_if_live; audited as branch-derived, not n*3200 bijective, shuffled |rho|<0.20"
+}
