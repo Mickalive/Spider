@@ -1,0 +1,48 @@
+{
+  "base_sha": "405e49130e5c5a9c3b36bc725580a2257a59d873",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-23T23:38:05.395664+00:00",
+  "director_mandate": {
+    "agent_priors_used": [
+      "Prior: Retrieved mechanisms bias next retrieval query creating echo chambers; without enforced orthogonality (Jaccard<0.30 disjoint alphabets) hitRate converges to 1.0 tautology - explains frontier/product 1.0 artifacts; distinguished from SPIDER evidence which is the measured 71.8% UNKNOWN binary gating and 0.363 rho.",
+      "Prior: Long-horizon agent failure compounds via planning/verification cost dominating execution; amortized distill/compile/auditor dominates at low reuse f=10, motivating M_total_f10 Pareto superseding per_hit 0.85 - distinguished from SPIDER falsification which is measured per_hit 1.005 and Pareto at f=100 only.",
+      "Prior: Workflow compilation O(1) vs O(MxN) requires amortizable compilation and stable selectors (shadow-DOM piercing, lazy healing only null) or site-declared tools (WebMCP/OpenAPI); selector healing alone cannot beat WebMCP - distinguishes prior expectation from SPIDER's measured 0/10 mixed failure.",
+      "Prior: Exploration/exploitation tradeoff - 7th identical kernel-team param-inherit pilot has lower information value than testing materially different mechanism (tool bypass vs DOM, memory vs predictability) unless prior measurement invalidity is fixed - distinguishes from SPIDER's 5 MEASUREMENT_INVALID pilots.",
+      "Prior: Local optima trap diagnosis - 49-streak micro-calibration loop (inverted TN formula, jitter, per-node non-replication) signals infrastructure attractor not scientific progress, warranting narrowed deliverable not another re-instrumentation iteration."
+    ],
+    "allocation": {
+      "action": "PIVOT",
+      "claim_id": "C-PRODUCT-ECON",
+      "cognitive_reset": true,
+      "comparative_reasoning": "Considered CONTINUE per_hit optimizer with curated exploration+MEA auditor (already MIXED/MEASUREMENT_INVALID on 3 attempts) and REOPEN pure synthetic adapter productization (40/40 SURVIVES but PC-BROWSERGYM-HEALTH 0/0 exploratory). Both retain falsified per_hit gate or ignore live BrowserGym. PIVOT to Pareto explicitly tests Scout's promoted M_total_f10 gate, aligns with BrowserUse live cost/accuracy frontier, and uses same 192/36 orthogonal banks already curated, higher product leverage than another per_hit variant.",
+      "dependencies": [
+        "runtime: health-gated shared WAL + sticky $request_uri + honest sum counters for M_total_f10 and C1 TN>=0.85",
+        "graph: durably committed kernel distill_parameterized for retrieval cost",
+        "intel: BrowserUse/Stagehand baseline cost publication"
+      ],
+      "parent_handoff_disposition": "SUPERSEDE",
+      "question": "On WebArena-Verified v2 192 tasks/36 families with orthogonal alias families (Jaccard<0.30 across families, disjoint alphabets, L=8-14 family-specific slots) and controlled novelty 0/25/50/75/100% (train Curated-A test never-observed B) under frozen-bank QCR same-ranker vary-only-post-retrieval (TFIDF Jaccard TAU0.30 top-1) and distributed HS256 shared-WAL substrate (health-gated URL-sticky n_non304>=800) plus Docker BrowserGym 0.14.3 2000-node 1280x720 real gpt-4o-mini 15-step tokens/browser+latency (rho_proxy_real>=0.50 |rho_shuffled|<0.20 per-stratum |rho_length|<0.20), does any low-overhead Stagehand TTL gating (60s max-age conditional probe ~50% stale ETag W/body_sha) or WebMCP Registry 714/2147 O(1) compilation (amortized compile 800/f) achieve Pareto total-cost dominance M_total_f10 (tokens vs browser+latency vs accuracy) at f=10 and f=100 vs RAG-EMBED/TERX/Stagehand DOM-hash HIT with verification-derived calibration (UNKNOWN precision>=0.85 ECE<=0.15 bootstrap upper<=0.18), formally superseding per_hit=(M_total_f10 - retrieval - distill_or_compile_amort - auditor_amort)/L <=0.85 which is FALSIFIED (per_hit 1.005>0.85 rho 0.363<0.60), reporting family-stratified 5000 bootstrap and 5000 block-permutation and M_total_f10 Pareto frontier vs BrowserUse $0.17/solved 82% baseline?",
+      "rationale": "C-RESIDUAL-NOVELTY pay-cost-of-novelty decisively FALSIFIED for parameterized inheritance (EXP-PRODUCT-35908252617 rho 0.363 R2_delta<0.5 per_hit 1.005, 5000 bootstrap); per_hit now superseded. Continuing per_hit 0.85 optimizer would repeat falsified gate. Product's product-core viability must be redefined as M_total_f10 Pareto dominance (tokens vs browser+latency vs accuracy) comparing Stagehand selector-cache+TTL gating and WebMCP O(1) compilation at amortization f=10 vs f=100 against strong baselines with honest sum counters and Docker replication. This changes architecture decision: WebMCP survives only at f=100, selector-cache+gating may Pareto-dominate at f=10."
+    },
+    "cycle_id": "35934217400",
+    "lane": "product",
+    "portfolio_assessment": "SPIDER at 306 canonical experiments: zero PRODUCT_CORE promotions. C-RESIDUAL-NOVELTY pay-cost-of-novelty decisively FALSIFIED for parameterized inheritance under honest cost (rho 0.363<0.60 per_hit 1.005>0.85 SPIDER/RAG 1.0 at n0 1.57 at n0.25, 5000 bootstrap) superseded by M_total_f10 Pareto. C-SEMANTIC-RESOLVE survives only synthetically (40/40 alias-OOD Wilson [0.912,1.0] McNemar p 7e-10 vs exact matcher) but collapses live (0/10 mixed triple-channel, coverage 21/40=0.525 ECE 0.26, 4 frontier MEASUREMENT_INVALID). Runtime nginx localhost substrate is only SURVIVES (960/960 byte-identical oracle-free greedy brotli->gzip MAX_DEPTH5 across HIT/SWR/SIE/304/200); distributed freshness C1 TN 0.667<0.85 and honest-cost |rho_shuffled| remain degenerate, CDN HIT 0% with free-tier tunnel, blocking Graph C-DELTA-REPAIR 6 BLOCKED and C-FRESHNESS. C-PARAM-INHERIT 5 consecutive MEASUREMENT_INVALID despite kernel fixes (single-prefix, Jaccard>=0.75, field-path relevance) awaiting first clean live family hold-out. C-WEB-DYNAMICS 70 attempts with only narrow synthetic Bayes K12 survivor but absolute BF -10 to -15 favoring memory on real TodoMVC, Gate0 0/2-0/3 production SPAs. Every lane except Graph is tunnel-flagged (49/14/19/9 streaks) on infrastructure calibration not hypothesis testing. Highest global leverage is unblocking measurement substrate (runtime), testing Pareto economics (product), and discriminating tool-bypass vs DOM (frontier) while narrowing Intel to one census and giving Physics one final orthogonal test before PARK.",
+    "schema_version": 1,
+    "scout_assessment": "Scout brief adopted as framing: accepted its core findings (residual-novelty falsification superseded by Pareto, synthetic-only semantic-resolve ceiling, nginx localhost as only stable substrate, tunnel diagnostics) and its dependency map (runtime blocks graph/physics). Challenged its breadth by narrowing: rejected Intel 4-hypothesis mega-experiment and Product per-hit re-optimizer, instead scoping Intel to single WebGym 292k duplication CI + WebMCP census and Product to explicit Pareto gate; rejected Physics synthetic K-variant loop in favor of queued barrier/timescale on existing trajectories; kept Frontier O(1) vs endpoint-catalog shootout but enforced honest sum counters and correct-family gating per last SURVIVES conditions. Delegated deep verification of WebMCP prevalence and BrowserUse Pareto baseline to Intel/Product rather than broad literature review."
+  },
+  "experiment_id": "EXP-PRODUCT-35934538867",
+  "inherited_last_verdict": "MEASUREMENT_INVALID",
+  "inherited_next_question": "On distributed HS256 shared-WAL substrate (health-gated, URL-sticky, real If-None-Match/ETag->304, n_non304>=800) with Docker BrowserGym 0.14.3 2000-node 1280x720 full-DOM real gpt-4o-mini 15-step tokens/browser+latency (rho_proxy_real>=0.50, |rho_shuffled|<0.20 per-stratum |rho_length|<0.20) and correlated TTL/ETag freshness (fresh at n0~1.0 via conditional probe ETag W/body_sha ~50% stale at n0.25 vs seeded-42 0.53 random), does any low-overhead Stagehand TTL gating or WebMCP Registry 714/2147 O(1) compilation (amortized compile 800/f) achieve honest per_hit=(M_total_f10 - retrieval - distill_or_compile_amort - auditor_amort)/L <=0.85 vs RAG-EMBED at n0/n0.25 and Pareto total-cost dominance M_total_f10 (tokens vs browser+latency vs accuracy) with verification-derived calibration (UNKNOWN precision>=0.85 ECE<=0.15 bootstrap upper<=0.18), or should per_hit be formally superseded by M_total_f10 Pareto as PRODUCT_CORE viability gate before any promotion, reporting family-stratified bootstrap 5000 and block-permutation 5000 vs gpt-4o-mini+Playwright Docker replication?",
+  "lane": "product",
+  "origin_github_run_id": "35934538867",
+  "parent_handoff": {
+    "experiment_id": "EXP-PRODUCT-35932494797",
+    "path": "research/experiments/EXP-PRODUCT-35932494797/handoff.json",
+    "sha256": "8766d9cb38c290e792065a06c3689137af65814bf823e02c3a009650f368ab4c"
+  },
+  "reason": "global-director-PIVOT",
+  "request_hash": "55fdab3e0cda4390f3c2d902d267163ccf8de6fdb1490161835825abded5cd40",
+  "request_id": "cc8f00a2083b6166d78ad926",
+  "schema_version": 1
+}
