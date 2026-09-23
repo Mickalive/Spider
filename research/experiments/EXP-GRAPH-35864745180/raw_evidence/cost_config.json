@@ -1,0 +1,8 @@
+{
+  "distill_tokens": 1000,
+  "retrieval_tokens": 200,
+  "verification_tokens": 50,
+  "instruction_tokens": 200,
+  "amortization_f": 10,
+  "llm_available": false
+}

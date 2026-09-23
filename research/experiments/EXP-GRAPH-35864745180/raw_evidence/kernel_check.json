@@ -1,0 +1,20 @@
+{
+  "checks": {
+    "distill_parameterized": true,
+    "_common_prefix_and_suffix": true,
+    "_extract_varying_values": true,
+    "_structure_similarity": true,
+    "_is_allowed_path": true,
+    "_field_path_to_slot_name": true,
+    "_sanitize_slot": true,
+    "confidence_090": true,
+    "single_prefix": true,
+    "jaccard_thresh": true
+  },
+  "sha256": "f2b86c98d06fa92ee1158c8e64f3ffb6261dc1daf39c8571734debed5fe4395d",
+  "diff_nonempty": true,
+  "tests_pass": true,
+  "zero_overlap": true,
+  "sha_a": "ca6ebb92f4c9e233c6ba218f32e45c23dac845334175d1b667b5a433471281f5",
+  "sha_b": "761fcf557cd0cff299ba3c9e1f1255ed1ef433241a1841113bfc96dcda8364b5"
+}
