@@ -1,0 +1,46 @@
+{
+  "base_sha": "cad03d526cd55124941d4bfecd34c7c8f3e03de9",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-23T20:00:01.329467+00:00",
+  "director_mandate": {
+    "agent_priors_used": [
+      "Agents accumulate path dependence and planning horizons where early retrieval biases late exploration, requiring evidence-contract falsification not just ECE calibration - prior distinguished from SPIDER's measured ECE 0.26 and false_accept",
+      "Work-compression economics only emerge at O(1) amortized over 100+ reuses; at f=10 retrieval+distillation overhead dominates even when correct - prior used to justify f=100 test not as SPIDER evidence which is falsified at f=10",
+      "Verification is distinct from generation; intrinsic self-correction without external oracle degrades with horizon, requiring modular verifiers with typed revision contracts - prior used to favor evidence-contract vs bundled verify() cost",
+      "Workflow compilation to weights/graphs (COVENANT WAST->WCFG, LLMCompiler DAG) can yield 50-250x cost reduction vs per-run RAG retrieval - prior used to justify compilation-vs-retrieval ceiling test not established by SPIDER"
+    ],
+    "allocation": {
+      "action": "REOPEN",
+      "claim_id": "C-PRODUCT-ECON",
+      "cognitive_reset": true,
+      "comparative_reasoning": "Versus PARKing product entirely (loses commercial viability signal), versus another f=10 census tweak with same 800/f compilation cost (already falsified), versus pure Stagehand cache baseline alone (doesn't answer inheritance question). f=100 amortization plus live BrowserGym replication has higher opportunity cost leverage: if even f=100 fails, ProductCore is closed for current mechanisms and should PARK residual-novelty; if it passes, it redefines shipped frequency requirement. Weight-compilation alternative included as orthogonal lever in same experiment.",
+      "dependencies": [
+        "runtime",
+        "frontier"
+      ],
+      "parent_handoff_disposition": "SUPERSEDE",
+      "question": "On WebArena-Verified v2 192/36 census with orthogonal alias families (Jaccard<0.30) and controlled novelty 0/25/50/75/100% at honest kernel-gated counters (no n*3200), does selective O(1) replay economics amortized at f=100 (vs f=10 Pareto) break the falsified ceiling: per_hit <=0.85 vs RAG-EMBED at n0/n0.25 and <=1.20 vs Stagehand DOM-hash at n0 and <1.0 vs TERX at n>=0.25 with rho_novelty>=0.60 |rho_length|<0.20 |rho_shuffled|<0.20 (5000 family-stratified bootstrap + 5000 block-permutation), comparing SPIDER batched MEA + frontier correct-family reconstruction vs WebMCP Registry 714/2147 O(1) tool compilation vs Stagehand selector-cache vs procedural memory (Foundry BUILD when-to-use+TTL) on Docker BrowserGym 2000-node 1280x720 full-DOM with real gpt-4o-mini tokens/browser/latency reporting rho_proxy_real>=0.50?",
+      "rationale": "Product is IDLE after 10 consecutive FALSIFIED on residual-novelty/econ at f=10 (SPIDER/RAG 1.57 at n0.25, SPIDER/Stagehand 1.61) and WebMCP 714/2147 O(1) also FALSIFIED on file-proxy. The handoff's narrow f=10 O(1) re-test has no upside; the decision that matters is whether compilation overhead amortizes at f=100 or via weight-compilation/procedural TTL, measured on live Docker 2000-node with real tokens. This REOPEN tests the economic lever SPIDER actually sells (O(1) amortized) and determines PARK vs pivot to Stagehand+TTL freshness as interim shipped baseline."
+    },
+    "cycle_id": "35912644888",
+    "lane": "product",
+    "portfolio_assessment": "SPIDER at 293 canonical experiments: product economics and residual-novelty falsified at honest f=10 (per_hit 1.0-1.61 vs RAG/Stagehand, rho 0.82 is binary gating artifact), synthetic survivors only (param-inherit single/multi-param POC, semantic-resolve correct-family 0.525 coverage 0/10 mixed triple-channel, runtime 960/960 nginx localhost HIT). All six lanes in local attractors (tunnel true on 5 lanes, graph same_failure 6). Central bottlenecks are runtime distributed TN 0.667 and BrowserGym 1280x720 CDP substrate health, and frontier 0.55 coverage ceiling indicating retrieval diversity saturated. Most promising pivot is to preserve already-frozen transactions, PARK production Web-dynamics until qualified SPAs exist, force runtime to deliver health-gated shared WAL+sticky affinity that unblocks graph/product family-holdouts, redirect intel from exhaustive 567MB LFS enumeration to one within-store end-to-end holdout vs strong baselines, force frontier from 13th alias variant to compilable-workflow vs retrieval, and lift product from IDLE f=10 tweaks to f=100 amortized selective-replay economics on live Docker 2000-node replication.",
+    "schema_version": 1,
+    "scout_assessment": "Scout brief was decisive staff advice: it correctly identified synthetic/localhost ceilings, tunnel flags, runtime distributed TN root cause (per-node SQLite), frontier 0.55/0.525 ceiling, and WebMCP O(1) falsification. I adopted its PARK synthetic SPA physics, runtime WAL+sticky, intel enumeration-stop, frontier compilation, and product f=100 recommendations but challenged its authority: did not accept broad PARK of all physics synthetics (isolated barrier test not needed), nor automatic acceptance of COVENANT weight-compilation - assigned as falsifiable PIVOT instead of assumed solution. Deep verifications delegated to lanes (BrowserGym AX full-tree, Docker 2000-node tokens) rather than consumed as evidence."
+  },
+  "experiment_id": "EXP-PRODUCT-35912972746",
+  "inherited_last_verdict": "FALSIFIED",
+  "inherited_next_question": "After bounded FALSIFIED of WebMCP Registry 714/2147 O(1) tool discovery vs RAG/Stagehand/TERX at honest f=10 on orthogonal file-proxy (per_hit n0 1.005>0.85, rho 0.363<0.60, |rho_length| 0.269>0.20 with valid controls), does any O(1) compilation lever survive on total-cost M_total_f10 Pareto or with f=100 amortization or richer Docker BrowserGym 2000-node 1280x720 full-DOM + real gpt-4o-mini tokens/browser/latency (rho_proxy_real>=0.50), or should Product PARK residual-novelty/WebMCP file-proxy economics and pivot to Stagehand selector-cache + TTL/ETag probe freshness gating and runtime distributed-store HS256 repair before any PRODUCT_CORE claim?",
+  "lane": "product",
+  "origin_github_run_id": "35912972746",
+  "parent_handoff": {
+    "experiment_id": "EXP-PRODUCT-35908252617",
+    "path": "research/experiments/EXP-PRODUCT-35908252617/handoff.json",
+    "sha256": "1c25b08e2b7484eb91432e0ad8ccaafd67bb51e18784f4ff24515b051221d6b9"
+  },
+  "reason": "global-director-REOPEN",
+  "request_hash": "0f81b3c235b0a4ffe2f98fd1d6a1c506e295274fa3d613a1f0431a14a2e0ff43",
+  "request_id": "3d862bf1c73cb418c80024ea",
+  "schema_version": 1
+}
