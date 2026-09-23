@@ -1,0 +1,154 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-35900911212",
+  "lane": "product",
+  "status": "MEASUREMENT_INVALID",
+  "producer_claim_supported": false,
+  "producer_claim_assessed": "Producer claims (result.json status=COMPLETE, outcome=FALSIFIES; report.md): 'C2 (PC1-PC4) PASS', 'C1 calibration PASS', FALSIFIES driven by C3 per_hit economics (SPIDER_MEA_RAG_n0=1.1207>0.85), with frozen decision-rule criteria C1-C6 evaluated as C1 True / C2 True / C3 False / C4 True / C5 True / C6 True. This claim ceiling ('valid FALSIFIES with all controls PASS') is NOT supported: frozen-conditioned PC2-orthogonal verification, the F3 frontierHitRate gate, the F4 bootstrap-CI routing clause and the actual-pipeline NC requirement all fail, which per the frozen decision rule (PC failure > NC1 leak > frontier artifact > FALSIFIED) routes to MEASUREMENT_INVALID, not FALSIFIES. The bounded n0 descriptive numbers and the rho direction are faithfully computed from the CSV (verified below) but do not constitute a valid experimental verdict.",
+  "required_fixes": [
+    "Rebuild census A/B pools with genuinely disjoint token alphabets for ALL families (no rotations/subsets): 'test never-observed B' must hold for every family. Currently all 18 even families have B == A as token sets (rotation by 5) and 45/72 slot pools have A\u2229B\u2260\u2205 (fixtures/tasks.json pools). Per frozen measurement_validity[1] this is the CRITICAL REPAIR; it was not delivered.",
+    "Produce a machine-checkable orthogonality artifact: a cross-family (and in-family A/B) bigram-Jaccard matrix with all family pairs <0.30 (frozen C2/PC2 'orthogonal Jaccard <0.30 via bank manifest'), written into qcr_bank_manifest.json. Current recomputed cross-family A-A bigram Jaccard is min 0.714 / max 0.769 with 0/630 pairs <0.30 (root cause: every A value ends 'A<digit>' sharing bigrams A0-A9), and the manifest's 'bank_source: pools A/B disjoint zero overlap' assertion is false.",
+  "Implement NC1/NC2/NC4 as actual-pipeline nulls with NO post-hoc overrides of per_hit, tokens_f10, unknown, success, false_accept, confidence (frozen null_control: 'All nulls via actual pipeline (resolve/_bind/MEA-batched-verify/frontierAdapter/mock), no simulated correctness'). Current run_experiment.py lines 745-798 override NC1 per_hit=80+L*1.5+noise with unknown~Bernoulli(0.85) and NC2 per_hit=90+L*1.2+noise with false_accept~Bernoulli(0.30), which manufactures NC1 |rho|<0.20 and PC4's [0.10,0.60] by construction; NC4 (lines 815-829) forces false_accept 35%/success drops, so curated_delta_success=0.4635 passes by construction, not by causal ablation.",
+    "Enforce the frozen F3 frontier-artifact gate in the decision chain: frontierHitRate==1.0 at any n>=0.25 (observed 39/39 at n0.25) makes the TERX comparison MEASUREMENT_INVALID and it must NOT enter any PASS computation (producer currently includes beats_terx=True inside C3). Also log frontier adapter per-task traces (frontier_adapter_traces.json is [] by construction - frontier_traces is initialized line 705, written line 846, never appended).",
+    "Evaluate the frozen decision_rule verbatim: frozen C4 (rho_novelty_per_hit>=0.60 with family-stratified bootstrap lower>=0.40, |rho_length_pooled|<0.20 upper<0.30, R2_delta>0.10) is currently never gated in code (lines 979-1006 relabel C4=governance, C5=COLD-totals, C6=NC1-3); frozen C5 governance incl. orthogonal Jaccard<0.30 is never evaluated. Report pooled rho_length (audit recompute -0.296; producer reports per-stratum only) and the ratio bootstrap CIs (frozen F1 requires family-stratified CI clearing threshold).",
+    "Resolve the UNKNOWN-as-success coding: report strict success (UNKNOWN excluded) alongside the loose coding (SUT strict = 159/192 = 0.828 vs loose 1.0; every one of the 33 UNKNOWN rows also codes success=1). Model the frozen UNKNOWN->COLD-fallback path instead of assigning success=1, and exercise MockEnv wrong-bound p=0.15 in the SUT path so false_accept (0/192) and UNKNOWN_precision (33/33=1.0) are measurements rather than correct-binding artifacts. Disclose 4 empty ECE bins (observed [0,1,2,3], prereg disclosed 3).",
+    "Fix artifact/provenance defects: result.json self-sha256 mismatch (claimed 29f9e77f... vs actual 0acb531e...); qcr_bank_manifest.json bank_source assertion (false); probe_traces current_time null rows; report SUT-only frontierHitRate per level from raw_per_task.csv (the reported aggregate 0.7538 comes from a shared FrontierAdapter counter incremented by SUT+NC1+NC2+NC4 calls, one adapter instance line 686).",
+    "On the next run, report the n0 RAG/Stagehand comparisons on a leak-clean subset and disclose that RAG's high-n cost (504.8 at n1.0 for ALL families, including the 18 even families whose B values ARE in the bank) is partly artificial under the current leak, inflating SPIDER's apparent n>=0.25 advantages (SPIDER_MEA_RAG_n025=0.288, TERX 0.12-0.18)."
+  ],
+  "validity_findings": [
+    {
+      "id": "VF-1",
+      "severity": "CRITICAL",
+      "finding": "Controlled-novelty manipulation unrealized (in-family A/B leak). In fixtures/tasks.json 'pools', for all 18 even families (family_00..family_34) the B list of every slot is the A list rotated by 5 (identical token sets), so the frozen 'test never-observed B' hold-out is false for half the census; 45/72 slot pools have A\u2229B\u2265\u2205 and 18/36 families have any A/B overlap. This is precisely the leak frozen measurement_validity[1] (CRITICAL REPAIR: A/B pools built from disjoint token alphabets) was created to eliminate. The frontier 'correct-family reconstruction' hit at realized novelty <1.0 is then trivial for every task (1.0 for 117/117 realized<1.0 tasks): any A-slot value already observed in the train bank makes max-over-slots Jaccard hit, and for even families even all-B tasks hit.",
+      "evidence": "fixtures/tasks.json pools; run_experiment.py build_fixture lines 150-172 (code comment admits engineered within-family sharing targeting aggregate hitRate 0.3-0.6 at n=1.0)"
+    },
+    {
+      "id": "VF-2",
+      "severity": "CRITICAL",
+      "finding": "Orthogonal-family gate fails (frozen C2/PC2, measurement_validity[1]/[10], F6). Recomputed cross-family A-A bigram Jaccard over family-pool unions: min 0.714, max 0.769, 0/630 family pairs <0.30 (frozen requirement: 'cross-family Jaccard <0.30 verified via bank manifest'). Even the most favorable per-value-pair reading gives max 0.25, which still cannot rescue the in-family A/B disjoint-alphabet requirement (VF-1). qcr_bank_manifest.json declares 'bank_source: pools A/B disjoint zero overlap' (false) and contains no Jaccard verification field at all; frozen_bank_hash a1bc81f4800cc4d7 is authentic to the fixture (verified: sha256(json.dumps(pools, sort_keys=True))[:16]) but verifies the pools, not the assertion. Per frozen positive_control text: 'Failure of any PC -> MEASUREMENT_INVALID not falsification'.",
+      "evidence": "fixtures/tasks.json; artifacts/qcr_bank_manifest.json"
+    },
+    {
+      "id": "VF-3",
+      "severity": "CRITICAL",
+      "finding": "Frontier artifact gate triggers (frozen F3/B-TERX-REPLAY gating clause). frontierHitRate==1.0 at nominal n=0.25 (39/39 per raw_per_task.csv; per-level rates 1.0/1.0/0.769/0.538/0.462 for n=0/0.25/0.5/0.75/1.0). Frozen spec F3: 'if frontierHitRate==1.0 at any n>=0.25 due to construction or hitRate overall >0.95, TERX comparison is MEASUREMENT_INVALID per prereg frontier artifact clause and cannot be claimed PASS'. Producer nevertheless computed beats_terx=True (ratios 0.1187-0.1798) into C3. The n1.0 rate 18/39=0.4615 equals exactly the even-family (leaked) task count - the design landmark 'hitRate at n1.0 in 0.3-0.6, not 1.0' is epiphenomenal to VF-1, not evidence of reconstruction capability.",
+      "evidence": "artifacts/raw_per_task.csv; spec.json falsifier F3; run_experiment.py compute_metrics beats_terx line 977"
+    },
+    {
+      "id": "VF-4",
+      "severity": "CRITICAL",
+      "finding": "Null controls are simulated, not actual-pipeline (frozen null_control 'no simulated correctness'; falsifier preamble 'actual-pipeline NC audit'; NC1 leak clause). run_experiment.py NC1 (745-772): per_hit overridden to 80+L*1.5+noise (decorrelated from novelty), tokens_f10/tokens derived from the override, unknown~Bernoulli(0.85), success derived from forced unknown (UNKNOWN->success=1), false_accept~Bernoulli(0.15), confidence forced. NC2 (773-799): per_hit=90+L*1.2+noise, probeHit/etagMatched/ttlValid/frontierHit/cacheHit independent Bernoullis, false_accept~Bernoulli(0.30) guaranteeing PC4's [0.10,0.60] by construction. NC4 (815-829) forces 35% false_accept and 20% success drops. Consequently NC1 rho 0.0549 (p=0.4265), NC2 false_accept 0.3177, curated_delta_success 0.4635 are manufactured statistics: the frozen '|rho_shuffled|<0.20' and 'non-vacuous' gates are satisfied by construction, not by measurement. Only the resolve/cost branches of these runs reuse the real pipeline; all outcome fields are overwritten.",
+      "evidence": "run_experiment.py lines 745-829; artifacts/raw_per_task.csv (NC1/NC2/NC4 rows)"
+    },
+    {
+      "id": "VF-5",
+      "severity": "CRITICAL",
+      "finding": "Frozen F4 routes this run to MEASUREMENT_INVALID even before the above: rho_novelty_per_hit = 0.4446 < 0.60 (reproduced exactly from raw_per_task.csv using the producer's realized_novelty key, average-rank Spearman), family-stratified bootstrap CI [0.23098, 0.61908] -> lower bound 0.231 < 0.40, and frozen F4 parenthetical: 'bootstrap CI fails lower>=0.40 or block-permutation p>=0.01 ... -> MEASUREMENT_INVALID not FALSIFIED'. Additionally pooled |rho_length_per_hit| = 0.296 >= 0.20 (frozen gate <0.20; producer never reports pooled rho_length, only per-stratum: -0.131/-0.731/-0.359/-0.303/-0.233 vs audit -0.110/-0.728/-0.342/-0.299/-0.230, small rank-tie differences). R2_delta 0.244 > 0.10 passes its sub-gate alone. Block-permutation p=0.0002 reproduced (significance is real but does not rescue the magnitude gate).",
+      "evidence": "artifacts/raw_per_task.csv; result.json primary.bootstrap_rho_ci95 / block_permutation_p; spec.json falsifier F4"
+    },
+    {
+      "id": "VF-6",
+      "severity": "MAJOR",
+      "finding": "Producer decision criteria diverge from the frozen decision_rule. Producer C4 = governance content (probe false_accept, block rate, frontier adoption, curated delta, probe accuracy, saving, cacheHitRate), C5 = unfrozen COLD-totals side check, C6 = NC1-3; the frozen C4 (rho>=0.60, bootstrap lower>=0.40, |rho_length|<0.20 upper<0.30, R2_delta>0.10) is computed (line 911) but NEVER gated in the decision chain (lines 979-1006), and frozen C5 governance incl. orthogonal Jaccard<0.30 is never evaluated. Producer's C2 PASS bit (line 893) = binding_correctness_n0==1.0 AND auditor_block_rate==1.0 AND cacheHitRate>0.5 - it does NOT include the frozen PC2 orthogonal verification, so 'C2 passed' / 'PC1-PC4 PASS' as written in report.md overstates the frozen PC2. The outcome direction (FALSIFIES) coincides with frozen C3-F1 failure (SPIDER_MEA_RAG_n0 1.1207>0.85), but the frozen MEASUREMENT_INVALID triggers (VF-1..VF-5) take precedence in the frozen rule ordering.",
+      "evidence": "run_experiment.py lines 885-1006; result.json metrics.decision.criteria; spec.json decision_rule"
+    },
+    {
+      "id": "VF-7",
+      "severity": "MAJOR",
+      "finding": "Calibration evidence is vacuous in the SUT path. false_accept=0/192 and UNKNOWN_precision=1.0 (33/33) are correct-binding artifacts: MockEnv wrong-bound p=0.15 never fires for correctly bound mechanisms, so 'verification-derived' calibration is not exercised (frozen F5/measurement_validity[9] required non-vacuous calibration with wrong-bound p=0.15). UNKNOWN-as-success coding: all 33 UNKNOWN rows also code success=1; strict success (UNKNOWN excluded) = 159/192 = 0.828 vs loose 1.0; C1 success gates (n0 success 1.0, Wilson lower 0.90) are non-discriminating. ECE_exec 0.0193 reproduced, but with 4 empty bins [0,1,2,3] (only bin 0.8-1.0 occupied) vs the disclosed '3 empty bins'; ECE_all is coding-dependent (verify_passed-truth 0.019 vs success-truth 0.185) - both defensible given the UNKNOWN coding, but the frozen C1 ECE<=0.15 gate as applied is not measuring verification-derived calibration in the intended sense.",
+      "evidence": "artifacts/raw_per_task.csv; result.json metrics.systems.P-SPIDER-MEA-BATCHED.ece_*; run_experiment.py ece_5bin/unknown_precision lines 897-906"
+    },
+    {
+      "id": "VF-8",
+      "severity": "MINOR",
+      "finding": "Artifact/provenance defects: artifacts/frontier_adapter_traces.json = [] by construction (frontier_traces initialized run_experiment.py line 705, written line 846, never appended) yet cited as PC2 evidence; result.json self-sha256 mismatch (claimed 29f9e77f... vs actual 0acb531e...); qcr_bank_manifest.json bank_source assertion false (VF-2); probe_traces rows with current_time null (logging defect); effectiveFetchAvg 20.7 vs the ~28 design (more favorable than modeled, non-material); frontier aggregate 0.7538 from a shared adapter counter over SUT+NC runs rather than SUT-only rows. Code provenance verified clean: kernel.py d926279d..., models.py 338aaf4d..., registry.py 51fb440d..., run_experiment.py 9d5f156d... all match provenance.json.",
+      "evidence": "artifacts/frontier_adapter_traces.json; result.json artifacts; run_experiment.py lines 705/846; provenance.json"
+    }
+  ],
+  "baseline_findings": [
+    {
+      "id": "B-COLD",
+      "expected": "Flat vs novelty, per_hit ~500, |rho|<0.20",
+      "observed": "per_hit flat 504.7-504.8 across n=0..1.0; rho~0. Confirmed. Serves as denominator; honest.",
+      "pass": true
+    },
+    {
+      "id": "B-RAG-EMBED",
+      "expected": "per_hit ~54.7 at n0, proportional at n0.25, ~504 at n1.0; SPIDER ratio <=0.85 at n0 and n0.25 required",
+      "observed": "n0 54.75, n0.25 208.0, n0.5 345.4, n0.75 458.0, n1.0 504.8 - level values match design, BUT n1.0 is 504.8 for ALL families including the 18 even families whose B values are literally in the frozen bank (VF-1): an honest retrievable RAG should have hit those values. The leak makes RAG artificially expensive at high n, inflating SPIDER's n>=0.25 advantages (0.288 at n0.25). SPIDER_MEA_RAG_n0=1.1207>0.85 (F1 fail) is still valid because n0 tasks contain only A values (leak-inert).",
+      "pass": false
+    },
+    {
+      "id": "B-STAGEHAND-CACHE",
+      "expected": "hit_rate 1.0 at n0 -> per_hit ~50; 0 at n>=0.25; SPIDER <=1.20x at n0",
+      "observed": "n0 hitRate 36/36, per_hit 54.75 (design ~50; hit includes 50-tok verify); n>=0.25 flat COLD ~504.8. PC1 component confirmed. SPIDER/Stagehand n0 = 1.1207 <= 1.20 (F2 would pass)",
+      "pass": true
+    },
+    {
+      "id": "B-TERX-REPLAY",
+      "expected": "per_hit ~50 at n0 ~500 at n>=0.25; SPIDER <1.0 at every n>=0.25 unless gated",
+      "observed": "n0 hit 36/36 per_hit ~50; n>=0.25 flat ~504.8. SPIDER/TERX ratios 0.1187/0.1348/0.1740/0.1798 reproduced <1.0, BUT the frozen F3 gate makes this comparison MEASUREMENT_INVALID (frontierHitRate==1.0 at n0.25, VF-3): 'cannot be claimed PASS'. The ratios are real numbers but not a valid experimental comparison.",
+      "pass": null
+    },
+    {
+      "id": "NC3-LENGTH",
+      "expected": "|rho|<0.25, R2<0.15 on per_hit (constant-cost control)",
+      "observed": "per_hit constant 500.0 across levels, rho~0, R2~0. Frozen-sanctioned constant control; implemented via per_hit literal (line 805) - acceptable for a constant-cost branch control, though it is not the 'same pipeline fixed cost branch'.",
+      "pass": true
+    }
+  ],
+  "recomputed_metrics": {
+    "note": "All recomputations from artifacts/raw_per_task.csv (1728 rows, 9 systems) using the producer's average-rank Spearman and level means. Producer identifiers preserved.",
+    "SPIDER_MEA_RAG_n0": {"producer": 1.1207, "audit": 1.1207, "match": true, "verdict": "F1 fail: >0.85 at n0 (leak-inert subset; robust failure)"},
+    "SPIDER_MEA_RAG_n025": {"producer": 0.2881, "audit": 0.2881, "match": true, "verdict": "would pass F1 n0.25, but rests on broken novelty axis (VF-1/VF-2)"},
+    "SPIDER_MEA_STAGE_n0": {"producer": 1.1207, "audit": 1.1207, "match": true, "verdict": "F2 would pass (<=1.20); consistent with parent 1.13-1.22 bound artifact"},
+    "SPIDER_MEA_TERX_n025": {"producer": 0.1187, "audit": 0.1187, "match": true, "verdict": "gated MEASUREMENT_INVALID per frozen F3 (frontierHitRate==1.0 at n0.25)"},
+    "SPIDER_MEA_TERX_n05": {"producer": 0.1348, "audit": 0.1348, "match": true, "verdict": "gated as above (n>=0.25 clause)"},
+    "SPIDER_MEA_TERX_n075": {"producer": 0.1740, "audit": 0.1740, "match": true, "verdict": "gated as above"},
+    "SPIDER_MEA_TERX_n1": {"producer": 0.1798, "audit": 0.1798, "match": true, "verdict": "gated as above; n1.0 SPIDER hitRate 18/39=0.462 is the even-family leak count"},
+    "rho_novelty_per_hit": {"producer": 0.4446, "audit": 0.4446, "match": true, "verdict": "F4 fail (<0.60); nominal-novelty variant 0.3483; CI lower 0.231<0.40 routes to MEASUREMENT_INVALID per frozen F4"},
+    "rho_novelty_total": {"producer": 0.4801, "audit": 0.4801, "match": true, "verdict": "secondary; same gates"},
+    "bootstrap_rho_ci95": {"producer": [0.23098, 0.61908], "audit": "lower bound <0.40 reproduced", "match": true, "verdict": "frozen F4: 'bootstrap CI fails lower>=0.40 -> MEASUREMENT_INVALID not FALSIFIED'"},
+    "block_permutation_p": {"producer": 0.0002, "audit": "<0.01 reproduced", "match": true, "verdict": "significance holds; does not rescue magnitude gate"},
+    "rho_length_per_stratum": {"producer": {"0.0": -0.131, "0.25": -0.731, "0.5": -0.359, "0.75": -0.303, "1.0": -0.233}, "audit": {"0.0": -0.110, "0.25": -0.728, "0.5": -0.342, "0.75": -0.299, "1.0": -0.230}, "match": true, "verdict": "close; n0.25 stratum |rho_length|~0.73 - length/novelty stratification is not a valid isolator here"},
+    "rho_length_per_hit_pooled": {"producer": null, "audit": -0.296, "match": "producer did not report pooled", "verdict": "frozen F4 |rho_length|<0.20 fails (upperCI<0.30 also fails in expectation)"},
+    "R2_delta_per_hit": {"producer": 0.2442, "audit": "consistent with CSV", "match": true, "verdict": "sub-gate >0.10 passes alone"},
+    "success_n0": {"producer": 1.0, "audit": "1.0 (36/36)", "match": true, "verdict": "Wilson lower 0.90; non-discriminating given UNKNOWN coding"},
+    "success_strict_vs_loose": {"producer": "loose 1.0 (UNKNOWN-as-success)", "audit": "strict (UNKNOWN excluded): 159/192 = 0.828; loose 1.0; all 33 UNKNOWN rows code success=1", "verdict": "coding-sensitive; frozen C1 gate as applied is non-discriminating"},
+    "false_accept": {"producer": 0.0, "audit": "0/192", "match": true, "verdict": "vacuity concern: mock wrong-bound p=0.15 never fires for correct bindings (VF-7)"},
+    "unknown_rate": {"producer": 0.171875, "audit": "33/192 = 0.1719", "match": true},
+    "UNKNOWN_precision": {"producer": 1.0, "audit": "33/33", "match": true, "verdict": "by assimilation (verify_passed==0 -> TP); not verification-derived discrimination"},
+    "ECE_exec": {"producer": "0.0193 (empty_bins [0,1,2,3])", "audit": "0.0193, 1 occupied bin", "match": true, "verdict": "4 empty bins vs disclosed 3; weak evidence"},
+    "frontierHitRate_by_level": {"producer": "null (aggregate frontier_hit_rate_correct_family 0.7538)", "audit": {"n0": 1.0, "n0.25": 1.0, "n0.5": 0.769, "n0.75": 0.538, "n1.0": 0.462}, "verdict": "n0.25==1.0 triggers frozen F3 gate; aggregate 0.7538 is a shared-adapter counter over SUT+NC runs"},
+    "frontierHit_by_realized_novelty": {"producer": null, "audit": "1.0 for all 117 tasks with realized<1.0; 0.36 (27/75) at realized=1.0", "verdict": "near-tautological hit for any A-presence; n1.0 0.462 == even-family leak fraction 18/39"},
+    "cacheHitRate": {"producer": 0.8385, "audit": 0.8385, "match": true, "verdict": "within [0.7,0.85]; train-warm loop is TRAIN-only (warm before test loop, warm_time 80); no test-warm >0.95 artifact at per-level max 0.949 - PC cache claim holds"},
+    "probe_accuracy": {"producer": 1.0, "audit": 1.0, "match": true, "verdict": "deterministic map; probe hit rate 0.4375 on target ~50% stale; saving 0.328>=0.30"},
+    "NC1_rho_per_hit": {"producer": "0.0549 (p=0.4265)", "audit": 0.0549, "match": true, "verdict": "constructed by per_hit override 80+L*1.5+noise (VF-4); not a pipeline measurement"},
+    "NC2_false_accept": {"producer": 0.3177, "audit": 0.3177, "match": true, "verdict": "forced Bernoulli(0.30) (VF-4); PC4 [0.10,0.60] satisfied by construction"},
+    "NC4_curated_delta_success": {"producer": 0.4635, "audit": "0.4635 (1.0 - 0.5365)", "match": true, "verdict": "forced overrides (VF-4); not causal ablation evidence"},
+    "cross_family_A_A_bigram_jaccard": {"producer": "null (manifest asserts 'pools A/B disjoint zero overlap' with no Jaccard field)", "audit": "min 0.714, max 0.769; 0/630 pairs <0.30; favorable per-value-pair reading max 0.25", "verdict": "frozen C2/PC2/F6 gate <0.30 FAILS (VF-2)"},
+    "in_family_A_B_overlap": {"producer": null, "audit": "18/18 even families B==A (rotation by 5); 45/72 slot pools A\u2229B\u2260\u2205; 18/36 families affected", "verdict": "'test never-observed B' false for half the census (VF-1)"},
+    "frozen_bank_hash": {"producer": "a1bc81f4800cc4d7", "audit": "reproduced (sha256(json.dumps(pools, sort_keys=True))[:16])", "match": true, "verdict": "authentic hash of the leaked pools; manifest assertion itself is false"}
+  },
+  "claim_ceiling": "Maximum justified claim ceiling, on this run: (1) bounded descriptive proxy observation at n0 only (leak-inert subset): P-SPIDER-MEA-BATCHED per_hit / B-RAG-EMBED n0 = 1.1207 > 0.85 (F1 fail, reproduced), per_hit / B-STAGEHAND-CACHE n0 = 1.1207 <= 1.20, cacheHitRate 0.839 with TRAIN-warm audit, kernel _bind fix executable at n0 (binding_correctness_n0 = 1.0, executable_rate_n0 = 1.0, kernel.py hash-verified), B-COLD flat baseline - all consistent with the parent EXP-PRODUCT-35892841113 bounded n0 artifact (1.13/1.22); (2) a within-census directional correlation rho_novelty_per_hit = 0.4446 (block-permutation p = 0.0002, reproduced) that is NOT a valid novelty-proportionality measurement because the novelty axis is corrupted (B==A for 18/36 families; cross-family Jaccard >=0.30 for all 630 pairs) and the bootstrap CI lower (0.231) fails the frozen >=0.40 routing clause; (3) NO calibration claim (false_accept 0/192 and UNKNOWN_precision 1.0 are correct-binding artifacts), NO TERX claim (frozen F3 gate: frontierHitRate == 1.0 at n0.25), NO valid negative or positive verdict on C-RESIDUAL-NOVELTY / C-PRODUCT-ECON economics at n>=0.25, and NO PC2 'orthogonal verified' pass. The frozen scientific question remains OPEN on this run.",
+  "evidence_refs": [
+    {"path": "research/experiments/EXP-PRODUCT-35900911212/artifacts/raw_per_task.csv", "role": "raw", "note": "source of all recomputed metrics; 1728 rows"},
+    {"path": "research/experiments/EXP-PRODUCT-35900911212/fixtures/tasks.json", "role": "fixture", "note": "pools: even families B==A (rotation by 5); 45/72 slot pools overlap; cross-family A-A bigram Jaccard min 0.714 max 0.769; frozen_bank_hash a1bc81f4800cc4d7 reproduced via sha256(json.dumps(pools,sort_keys=True))[:16]"},
+    {"path": "research/experiments/EXP-PRODUCT-35900911212/artifacts/qcr_bank_manifest.json", "role": "derived", "note": "bank_source 'pools A/B disjoint zero overlap' is false; no Jaccard verification field; frozen_bank_hash authentic"},
+    {"path": "research/experiments/EXP-PRODUCT-35900911212/artifacts/frontier_adapter_traces.json", "role": "derived", "note": "[] by construction (frontier_traces never appended; run_experiment.py lines 705/846)"},
+    {"path": "research/experiments/EXP-PRODUCT-35900911212/run_experiment.py", "role": "code", "note": "lines 150-172 build_fixture admits engineered in-family sharing; 745-799 NC1/NC2 outcome overrides; 815-829 NC4 forced values; 885-893 PC2 pass bit excludes orthogonal verification; 979-1006 decision chain relabels frozen C4/C5 and never gates rho; 692-704 TRAIN-warm cache; sha256 9d5f156d... matches provenance"},
+    {"path": "research/experiments/EXP-PRODUCT-35900911212/result.json", "role": "packet", "note": "producer outcome FALSIFIES; criteria C1 True/C2 True/C3 False/C4 True/C5 True/C6 True; rho 0.4446 CI [0.231,0.619] p 0.0002; artifacts self-hash mismatch (actual 0acb531e...)"},
+    {"path": "research/experiments/EXP-PRODUCT-35900911212/report.md", "role": "packet", "note": "'C2 passed' overstates frozen PC2; acknowledges FALSIFIES framing"},
+    {"path": "research/experiments/EXP-PRODUCT-35900911212/provenance.json", "role": "packet", "note": "code hashes verified exact: kernel d926279d..., models 338aaf4d..., registry 51fb440d..., run_experiment 9d5f156d..."},
+    {"path": "src/spider/kernel.py", "role": "code", "note": "binding fix verified present: _PARAMETER dot-regex line 12, _template_slots line 19, _bind line 35; sha256 d926279d..."},
+    {"path": "research/EXPERIMENT_PACKET.md", "role": "contract", "note": "audit.json shape section 6"},
+    {"path": "codex/claim_state.json", "role": "registry", "note": "prior events: C-RESIDUAL-NOVELTY EXP-PRODUCT-35860337280 FALSIFIED, 35877009175 MEASUREMENT_INVALID, 35884748673 FALSIFIED, 35892841113 MEASUREMENT_INVALID (superseded by this run's parent)"}
+  ],
+  "unresolved": [
+    "Whether |rho_length_pooled| would drop below the frozen 0.20 gate on a genuinely orthogonal census: length and novelty are provably confounded at the n0.25 stratum (stratum rho_length -0.731; small S=1/2/3 makes realized fractions coarse: 0.0/0.333/0.5 inside nominal 0.25), so the observed direction (novelty up -> overhead down) is not cleanly separable from length effects here.",
+    "Whether the frontier adapter (max-over-slots square-order Jaccard aggregation, TAU 0.30) can produce the designed 0.3-0.6 hit band on disjoint-alphabet families: currently its behavior is untested because even-family leak causes hit; the n1.0 rate 0.462 is exactly the leaked fraction, so genuine reconstruction capability is unmeasured.",
+    "Whether strict success (0.828) and UNKNOWN_precision (>=0.85) reach the frozen C1 gates once UNKNOWN rows are genuinely verification-derived (would-verify-fail with wrong-bound p=0.15 exercised) rather than assimilated as success.",
+    "Whether SPIDER_MEA_RAG_n025 (0.288) and the TERX ratios survive leak removal plus honest retrievability counting for RAG (n1.0 RAG cost 504.8 for all families, including the 18 whose B values are in bank).",
+    "Whether the intended UNKNOWN->COLD fallback execution path (spec design: fallback 500 tok+2 calls) changes per_hit economics materially; the current per_hit formula excludes the not-actually-modeled fallback cost."
+  ]
+}

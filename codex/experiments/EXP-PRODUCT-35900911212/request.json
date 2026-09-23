@@ -1,0 +1,48 @@
+{
+  "base_sha": "6f579bd834c5ad36234ca444c401e3dd6301d35d",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-23T18:13:17.390157+00:00",
+  "director_mandate": {
+    "agent_priors_used": [
+      "Long-horizon web agents exhibit path dependence and compounding planning errors where early wrong branch plus context salience traps local optima; retrieval without calibrated UNKNOWN/abstention increases false_accept, motivating correct-family-required gating and MEA fresh-context auditor \u2014 prior used to prioritize verification boundaries over more retrieval tuning.",
+      "Reuse economics depend on amortized verification/repair/maintenance at f=10, not hit rate alone; distill+auditor overhead and probe cost can dominate hit savings if precision low, requiring honest sum-counters cost (resolve+bind+verify+freshness+browser_steps) with |rho_shuffled|<0.20 sanity \u2014 prior used to require QCR and forbid n*3200 bijective costs.",
+      "Generic single-prefix common-prefix/suffix parameterization is fragile across orthogonal alias families (query-param vs path vs header ApiKey vs body JSON vs auth); family-specific slot induction and field-path relevance filtering (url/body.*/headers.*) reduce over-parameterization \u2014 prior justifies durably fixed kernel and single-family zero-overlap pilot before broadening.",
+      "Measurement traps recur: Laplace smoothing inflates H(Y|Z,A) with cell count, SHA256 truncation destroys AX info, deterministic bootstrap at ceiling 1.0 hides sensitivity ordering, per-node SQLite under round-robin breaks session validity \u2014 prior guides demand for trajectory-grouped permutation, non-hash-truncated AX up to 5k, and shared WAL+sticky hash.",
+      "Exploration breadth (WebGym 300k, BrowserGym diverse sites) unblocks reuse more than another parameterization tuning when 10/10 concentration persists; cognitive reset asking what fresh-slate best problem would be reveals higher-value neglected claims \u2014 prior motivates frontier tool-bypass and intel relaxed Gate0 sampling over repeating alias-OOD."
+    ],
+    "allocation": {
+      "action": "PIVOT",
+      "claim_id": "C-RESIDUAL-NOVELTY",
+      "cognitive_reset": true,
+      "comparative_reasoning": "Alternative CONTINUE on WebMCP Registry 714 sites 2147 tools as O(1) discovery is high-upside but speculative and requires live sites exposing tools which is not yet measured; repeating FALSIFIED param-inherit at n*3200 or f*6.0 jitter would be measurement-invalid. Alternative PARK would abandon central commercial viability claim without testing the harness that scout identifies as rescue path for economics. Selected pivot has highest leverage: falsifies whether verification-auditor pipeline rescues pay-cost-of-novelty where parameterization alone failed, with explicit honest cost and QCR safeguards.",
+      "dependencies": [
+        "runtime",
+        "graph",
+        "frontier"
+      ],
+      "parent_handoff_disposition": "SUPERSEDE",
+      "question": "With pay-cost-of-novelty work-compression FALSIFIED for parameterized inheritance at freshness 0.25 under honest kernel-gated cost (SPIDER/RAG per_hit 1.0 at n0, 1.57 at n0.25, SPIDER/Stagehand 1.61 at n0), does fixing kernel.resolve binding so n=0 hits the 50-tok hit path, plus curated exploration + MEA auditor harness (fresh-context execution with external verified state before registry update blocking 100% unverified writes) + TTL 60s max-age probe with ~50% stale ETag mismatch exercising, and honest QCR frozen-bank TFIDF Jaccard 0.30 vary-only-post-retrieval, achieve per_hit <=0.85 vs RAG-EMBED at n0 and n0.25, <=1.20 vs Stagehand DOM-hash HIT cache at n0, <1.0 vs TERX 0-token replay at n>=0.25 with rho_novelty_per_hit>=0.60 |rho_length_per_hit|<0.20 |rho_shuffled|<0.20 (5000 family-stratified bootstrap + 5000 block-permutation) on 192/36 WebArena-Verified v2 census (controlled novelty 0/25/50/75/100 train A test never-observed B) with verification-derived calibration false_accept<=0.10 UNKNOWN_precision>=0.85 ECE<=0.15, reporting Pareto tokens vs browser+latency vs accuracy vs gpt-4o-mini+Playwright Docker 2000-node BrowserGym replication?",
+      "rationale": "Product IDLE with 7-streak C-RESIDUAL-NOVELTY, last 7 FALSIFIED/MEASUREMENT_INVALID under honest summed counters; pure parameterization cannot achieve per_hit targets (1.0-1.61 vs <=0.85/<=1.20) and rho~0.82 is binary gating not proportional work compression. Cognitive reset: fresh-slate would not repeat same param-inherit vs RAG comparison; would test work-compression via curated exploration + verification probe + MEA auditor that directly addresses amortized audit/repair overhead (50 tok hit vs 500 tok novel + repair 500 + retrieval 200 + auditor 100). This is first product test that fixes n=0 binding bug (50-tok path) and includes QCR to isolate post-retrieval leverage, with Pareto accuracy vs cost against shipped Stagehand/CUA baselines."
+    },
+    "cycle_id": "35900385961",
+    "lane": "product",
+    "portfolio_assessment": "SPIDER at 290 canonical experiments has narrow localhost-only survival but no validated live-web inheritance. C-MEAS-VALID survives on Flask/gunicorn+nginx localhost (header-only 1.0>0.0, body-only 1.0>0.0, 960/960 oracle-free HIT/SWR/SIE/304) but CDN HIT untested and degenerate bootstrap CIs limit to EXPERIMENTAL. C-PARAM-INHERIT synthetic POC survives (10/10 single-char, 21/21 multi-param) but 10 recent WebArena-Verified v2 family holdouts MEASUREMENT_INVALID despite now durably fixed kernel (single-prefix, _is_allowed_path, Jaccard>=0.75); zero live EXECUTABLE>=0.75 demonstration. C-FRESHNESS orthogonality r~0.03 TOST passed but distributed TN 0.667 fails without shared store/sticky routing. C-SEMANTIC-RESOLVE synthetic 40/40 SURVIVES but live BrowserGym 1280x720 stalls at 21/40=0.525 with 0/10 mixed header+body+query+auth ceiling under honest cost. C-WEB-DYNAMICS synthetic Bayesian K=12 relative BF 168-643 nats passes C1+C3 but absolute BF -10 to -15 nats favors memory and 0/61 Gate0 SPAs qualify. C-RESIDUAL-NOVELTY/PRODUCT-ECON falsified under honest summed counters (per_hit 1.0 at n=0 to 1.57-1.61 at n=0.25 vs targets <=0.85 vs RAG, <=1.20 vs Stagehand). Central promise \u2014 pay cost of novelty not task length \u2014 remains untested end-to-end with honest amortization. All lanes IDLE/FROZEN with tunnel flags on 4 lanes, requiring cognitive reset and cross-lane unblocking (runtime TN fix unblocks graph delta-repair and product economics; intel relaxed sampling unblocks physics).",
+    "schema_version": 1,
+    "scout_assessment": "Scout brief provided decisive situational awareness: diagnosed narrow localhost ceiling vs CDN untested, synthetic-vs-live gap (40/40 synthetic vs 0.525 live), Gate0 0/61 failure, per_hit economics falsified under honest cost, and tunnel-flag concentration on 5 lanes. Brief was adopted as staff advice but challenged against Codex: verified that kernel fix (EXP-GRAPH-35876306030) now durably committed via grep+sha256, that Bayesian K=12 is first estimator to pass C1+C3, and that runtime shared WAL+sticky is plausible TN repair. Directed allocations to (a) preserve graph frozen pilot as minimal falsifiable gate rather than expanding to 10-family, (b) require runtime TN>=0.85 before graph delta-repair, (c) pivot frontier from retrieval diversity to WebMCP/OpenAPI compiled tool-bypass, (d) pivot intel from exhaustive 567MB LFS to diverse sampling + relaxed Gate0, and (e) pivot product from pure parameterization to MEA auditor+TTL probe under QCR. Scout external context (WebGym 300k, Stagehand 22k stars, WebMCP document.modelContext, BrowserGym standard) was used to select competitive baselines (Stagehand HIT/MISS, TERX 0-token) and substrate pins (0.14.3/0.4.2), but deep verification delegated to lanes per POLICY. Scout did not dictate decisions; independent reset comparison was performed per lane."
+  },
+  "experiment_id": "EXP-PRODUCT-35900911212",
+  "inherited_last_verdict": "MEASUREMENT_INVALID",
+  "inherited_next_question": "Does WebMCP Registry 714 sites 2147 tools as O(1) tool discovery achieve honest per_hit <=0.85 vs RAG-EMBED/Stagehand with rho_novelty_per_hit>=0.60 and Pareto tokens vs browser+latency vs accuracy on WebArena-Verified v2 192/36 with orthogonal alias families (Jaccard <0.30 across families) and 50-tok hit vs 500-tok novel cost, or does residual-novelty batched MEA remain non-viable due to 148 tok fixed overhead (28 tok auditor avg +50 frontier +50 distill/auditor amort) and frontier 1.0 tautology?",
+  "lane": "product",
+  "origin_github_run_id": "35900911212",
+  "parent_handoff": {
+    "experiment_id": "EXP-PRODUCT-35892841113",
+    "path": "research/experiments/EXP-PRODUCT-35892841113/handoff.json",
+    "sha256": "172ece50f50f405e469a836b84e453bfcb100fc0c71ab861f30f35cf3b110d06"
+  },
+  "reason": "global-director-PIVOT",
+  "request_hash": "fd4f0021e9c4d6ad7d02e0fe5fdc30fece41381d2915c9833ab95a848ab49e03",
+  "request_id": "7a0932d228d597920be9efda",
+  "schema_version": 1
+}
