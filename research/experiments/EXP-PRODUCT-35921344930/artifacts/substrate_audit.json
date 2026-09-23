@@ -1,0 +1,137 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-35921344930",
+  "lane": "product",
+  "role": "raw",
+  "recorded_at": "2026-09-23T22:05:00+00:00",
+  "purpose": "RAW EVIDENCE substrate audit for the frozen PRIMARY DEPENDENCY gate (Director dependencies: 'runtime:shared SQLite WAL HS256 sticky nginx + honest sum counters + BrowserGym 1280x720 fixture'). Every entry below is a direct environment observation (command + result), not an interpretation.",
+  "observations": [
+    {
+      "id": "OBS-1",
+      "check": "docker daemon reachable",
+      "command": "docker ps",
+      "result": "daemon reachable; 0 running containers",
+      "value": "available"
+    },
+    {
+      "id": "OBS-2",
+      "check": "BrowserGym / AgentLab / WebArena Docker image present",
+      "command": "docker images",
+      "result": "images: ghcr.io/github/gh-aw-firewall/agent, ghcr.io/github/gh-aw-firewall/api-proxy, ghcr.io/github/gh-aw-mcpg, ghcr.io/dependabot/dependabot-updater-core, ghcr.io/github/github-mcp-server, ghcr.io/github/gh-aw-firewall/squid. NO browsergym/agentlab/webarena image.",
+      "value": "absent"
+    },
+    {
+      "id": "OBS-3",
+      "check": "shared SQLite WAL substrate at canonical runtime path (/tmp/spider-runtime-35860330078/shared.db)",
+      "command": "ls -la /tmp/spider-runtime-35860330078/",
+      "result": "directory does not exist",
+      "value": "absent"
+    },
+    {
+      "id": "OBS-4",
+      "check": "shared SQLite WAL substrate at canonical path (/tmp/spider-runtime/shared.db)",
+      "command": "ls -la /tmp/spider-runtime/; find / -name shared.db",
+      "result": "directory does not exist; no shared.db anywhere on filesystem",
+      "value": "absent"
+    },
+    {
+      "id": "OBS-5",
+      "check": "PyJWT 2.14.0 (HS256 shared-secret signing)",
+      "command": "python3 -c 'import jwt'",
+      "result": "ImportError - PyJWT not installed",
+      "value": "absent"
+    },
+    {
+      "id": "OBS-6",
+      "check": "gunicorn 23.0.0 (2x workers)",
+      "command": "which gunicorn",
+      "result": "not found - gunicorn not installed",
+      "value": "absent"
+    },
+    {
+      "id": "OBS-7",
+      "check": "nginx 1.24.0 (sticky hash loopback)",
+      "command": "which nginx",
+      "result": "/usr/sbin/nginx present (binary only; no product experiment deployed upstream)",
+      "value": "present-binary-only"
+    },
+    {
+      "id": "OBS-8",
+      "check": "numpy (family-stratified bootstrap 5000 / block-permutation 5000 statistics)",
+      "command": "python3 -c 'import numpy'",
+      "result": "ImportError - numpy not installed",
+      "value": "absent"
+    },
+    {
+      "id": "OBS-9",
+      "check": "scipy / sklearn / pandas (statistics + TFIDF Jaccard ranker)",
+      "command": "python3 -c 'import scipy; import sklearn; import pandas'",
+      "result": "ImportError - none installed",
+      "value": "absent"
+    },
+    {
+      "id": "OBS-10",
+      "check": "browsergym 0.14.3 python package (CDP AX 2000-node 1280x720)",
+      "command": "python3 -c 'import browsergym'",
+      "result": "ImportError - browsergym not installed",
+      "value": "absent"
+    },
+    {
+      "id": "OBS-11",
+      "check": "playwright 1.63.0",
+      "command": "python3 -c 'import playwright'",
+      "result": "ImportError - playwright not installed",
+      "value": "absent"
+    },
+    {
+      "id": "OBS-12",
+      "check": "gpt-4o-mini API key for real 15-step token measurement",
+      "command": "env | grep -iE 'openai|api_key|gpt'",
+      "result": "no OpenAI/gpt key present; only GH_TOKEN (GitHub Actions token, not an LLM key)",
+      "value": "absent"
+    },
+    {
+      "id": "OBS-13",
+      "check": "http fixture census /tmp/webarena",
+      "command": "ls /tmp/webarena",
+      "result": "does not exist (repo-cached parent fixtures exist under research/experiments/EXP-PRODUCT-35916130502/fixtures/tasks.json but census loading is downstream of the substrate gate)",
+      "value": "absent-at-canonical-path"
+    },
+    {
+      "id": "OBS-14",
+      "check": "runtime lane hardening artifacts in repo",
+      "command": "ls research/runtime; ls substrates",
+      "result": "neither research/runtime nor substrates/ directory exists in repo; no hardened shared-WAL fixture committed",
+      "value": "absent"
+    },
+    {
+      "id": "OBS-15",
+      "check": "python runtime",
+      "command": "python3 --version; python3 -m pip list",
+      "result": "Python 3.12.14; only pip 26.2.1 installed (no numpy/scipy/sklearn/pandas/PyJWT)",
+      "value": "3.12.14"
+    },
+    {
+      "id": "OBS-16",
+      "check": "sqlite3 module (available but no shared.db to open)",
+      "command": "python3 -c 'import sqlite3; print(sqlite3.sqlite_version)'",
+      "result": "sqlite3 module OK, lib version 3.45.1; no WAL database file exists to validate per-batch SELECT / TN >= 0.85",
+      "value": "present"
+    },
+    {
+      "id": "OBS-17",
+      "check": "repo HEAD",
+      "command": "git log --oneline -1",
+      "result": "87ff4234 R2 product: execution base EXP-PRODUCT-35921344930",
+      "value": "87ff4234"
+    },
+    {
+      "id": "OBS-18",
+      "check": "kernel binding fix state at start of EXECUTE",
+      "command": "grep _PARAMETER src/spider/kernel.py",
+      "result": "r\"\\$\\{([A-Za-z_][A-Za-z0-9_]*)\\}\" (dot-missing baseline as flagged in frozen prereg); re-applied to dot-aware r\"\\$\\{[A-Za-z_][A-Za-z0-9_\\.]*\\}\" during this EXECUTE; patched sha256 d926279d5ee14a044a2f13b8abc09202df9f5adb9e86feaadeb61818a15f4038",
+      "value": "patched-d926279d"
+    }
+  ],
+  "conclusion_scope": "These are environment facts only. Interpretation (frozen gate consequence) lives in result.json/report.md per EXPERIMENT_PACKET.md RAW OBSERVATION vs DERIVED MEASUREMENT separation."
+}
