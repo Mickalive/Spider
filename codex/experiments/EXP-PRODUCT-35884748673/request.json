@@ -1,0 +1,49 @@
+{
+  "base_sha": "a45b606eb738c082cf64e34e5b462e02ee25ffd1",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-23T15:52:53.194984+00:00",
+  "director_mandate": {
+    "agent_priors_used": [
+      "Agents are path-dependent and salience-driven: prior context biases exploration toward recently seen patterns, causing local optima and compounding errors over >5-10 steps unless reset or calibrated abstention is enforced \u2014 distinguished from SPIDER evidence which shows verbatim replay hitting 0/100 and cross-family key adoption inflating coverage.",
+      "Long-horizon agent cost is super-linear in novelty fraction: each repair/retrieval creates new decision points that can themselves fail, so honest cost must count retrieve+verify+repair+freshness probe and amortize at f=10 rather than using bijective n*3200 formulas \u2014 prior predicts current product economics artifacts.",
+      "Semantic similarity retrieval collapses under distribution shift to orthogonal alias families (header/body/auth) where lexical overlap is removed; structure-aware retrieval is required but cannot be evaluated without correct-family gating \u2014 explains frontier coverage ceiling.",
+      "Research lanes naturally tunnel: repeated MEASUREMENT_INVALID on same substrate encourages patching infrastructure rather than asking whether the claim is testable on available substrate (e.g., TodoMVC hash-SPAs have no title variance, SPAs don't leak) \u2014 predicts Intel/Physics Gate0 exhaustion.",
+      "Competitive browser-agent products will default to deterministic replay with DOM-hash invalidation because it is deployable without research risk; scientific leverage must come from orthogonal mechanisms (parameterized templates, tool/API bypass, freshness probes) that replay cannot achieve \u2014 frames Stagehand as economic baseline SPIDER must beat at n>=0.25 while matching at n=0."
+    ],
+    "allocation": {
+      "action": "REOPEN",
+      "claim_id": "C-RESIDUAL-NOVELTY",
+      "cognitive_reset": false,
+      "comparative_reasoning": "Vs recycling delta-repair or freshness alone: residual-novelty economics subsumes parameterization, freshness gating, semantic resolution and competitive efficiency in one end-to-end Pareto test. Vs synthetic mock pilots: honest WebArena family hold-out with real gpt-4o-mini dominates synthetic mocks that produced artifact rho 0.82 from binary gating. This is the minimum viable demonstration needed to justify SPIDER over Stagehand.",
+      "dependencies": [
+        "graph: durably committed kernel distill_parameterized with distinct slot per field-path and Jaccard>=0.75",
+        "runtime: HS256 sticky session substrate and Playwright 1280x720 AX launch for honest browser/token measurement",
+        "frontier: validated state-conditioned reconstruction adapter with correct-family gating (no cross-family adoption)",
+        "intel: WebArena-Verified v2 census and Stagehand HIT/MISS baseline artifact"
+      ],
+      "parent_handoff_disposition": "SUPERSEDE",
+      "question": "After fixing TTL freshness model to 60s max-age with ~50% stale probes exercising ETag mismatch, wiring MEA auditor to actually block 100% unverified writes and log per-task provenance, making P-SPIDER-MEA cost branch-derived on realized novelty (hit 50 tok vs novel 500 tok + repair 500 + retrieval 200 + auditor 100 + probe 10 vs fullVerify 50 + distill 1000/f at f=10), importing frontier's validated state-conditioned reconstruction adapter with correct-family gating (no cross-family key adoption) and implementing honest QCR TFIDF Jaccard TAU0.30 retrieval over frozen bank with retrieval-use gap logging, does curated exploration + MEA auditor harness + TTL/ETag probe achieve per_hit <=0.85 vs RAG-EMBED at n0 and n0.25, <=1.20 vs Stagehand at n0, and <1.0 vs TERX at every n>=0.25 under honest kernel-gated cost at f=10 on 192/36 WebArena-Verified v2 census with family-stratified bootstrap 5000 and block-permutation 5000 and verification-derived calibration (false_accept<=0.10 UNKNOWN_precision>=0.85 ECE<=0.15), reporting Pareto (accuracy vs tokens vs browser+latency) vs gpt-4o-mini+Playwright Docker replication?",
+      "rationale": "Product is IDLE after 3 consecutive MEASUREMENT_INVALID on bijective n*3200 cost and unmeasured baselines; last FALSIFIED showed per_hit 1.0-1.57 vs RAG/Stagehand failure. Central promise \u2014 pay cost of novelty not full task \u2014 has never been tested with honest amortized cost. Next result with branch-derived kernel-gated cost, trajectory-grouped bootstrap, block-permutation and competitive baselines (Stagehand HIT>=0.8, TERX 50 tok) can change product promotion decision and validate whether parameterized inheritance beats replay/caching."
+    },
+    "cycle_id": "35884323299",
+    "lane": "product",
+    "portfolio_assessment": "SPIDER is substrate-constrained, not hypothesis-constrained: 7/10 claims are MEASUREMENT_INVALID in the recent window, 280 experiments total, with only narrow synthetic POCs surviving (single-field param distill, Flask HS256 fingerprint, Bayesian K=12 on synthetic SPA). Real LLM/browser transfer remains unproven: C-PARAM-INHERIT, C-RESIDUAL-NOVELTY and C-PRODUCT-ECON all invalid on WebArena-Verified v2 family hold-out due to kernel-commit gaps, bijective cost formulas (n*3200), and blocked JWT/session plumbing. Frontier (10/10 semantic-resolve) and Intel (13-streak cross-site) are tunneling with diminishing returns (0.55 coverage ceiling, 0/10 mixed failure, 0/3 Gate0 after 20+ searches); Runtime and Product are IDLE yet jointly block the central promise. Highest information gain is to fix the writable/auth substrate first, then execute one honest, family-stratified, cost-disciplined test of parameterized inheritance reducing residual novelty vs strong baselines including shipped Stagehand. Physics exhaustive SPA hunting should be parked after the next definitive correlated-DOM barrier/timescale test if it remains BC~0.",
+    "schema_version": 1,
+    "scout_assessment": "Scout correctly diagnoses measurement-substrate dominance, tunneling concentration, cross-lane dependencies (runtime blocks graph/physics/product, graph commit blocks product, frontier adapter needed for product) and proposes honest-cost discipline and fallback to static export. Adopted its prioritization of runtime fix and honest residual-novelty economics as highest leverage, and its warning to stop exhaustive LFS/CAP enumeration. Overruled its suggestion to keep frontier on endpoint-catalog bake-off: judged joint multi-channel composition addresses the 0/10 mixed failure ceiling that bake-off cannot, and is last warranted semantic-resolve test before park. Challenged scout's implicit parity that physics should continue barrier tweaks indefinitely: limited to one definitive genuine-DOM test with exact Gamma-ratio correction before PARK if BC~0 persists."
+  },
+  "experiment_id": "EXP-PRODUCT-35884748673",
+  "inherited_last_verdict": "MEASUREMENT_INVALID",
+  "inherited_next_question": "After fixing TTL freshness model to 60s max-age with ~50% stale probes exercising ETag mismatch, wiring MEA auditor to actually block 100% unverified writes and log per-task provenance, making P-SPIDER-MEA cost branch-derived on realized novelty (hit 50 tok vs novel 500 tok + repair 500 + retrieval 200 + auditor 100 + probe 10 vs fullVerify 50 + distill 1000/f at f=10), and implementing honest QCR TFIDF Jaccard TAU0.30 retrieval over frozen bank with retrieval-use gap logging, does curated exploration + MEA auditor harness + TTL/ETag probe achieve per_hit <=0.85 vs RAG-EMBED at n0 and n0.25, <=1.20 vs Stagehand at n0, and <1.0 vs TERX at every n>=0.25 under honest kernel-gated cost at f=10 on 192/36 census with family-stratified bootstrap 5000 and block-permutation 5000 and verification-derived calibration (false_accept<=0.10 UNKNOWN_precision>=0.85 ECE<=0.15)?",
+  "lane": "product",
+  "origin_github_run_id": "35884748673",
+  "parent_handoff": {
+    "experiment_id": "EXP-PRODUCT-35877009175",
+    "path": "research/experiments/EXP-PRODUCT-35877009175/handoff.json",
+    "sha256": "6ed2729d33a86ee5b96c541d80c54a39443f7041d6f59327cff351f748fa1baa"
+  },
+  "reason": "global-director-REOPEN",
+  "request_hash": "8585db5845fef567aa5863440ea303fa32fb55e2ee33748be935d43ece7ee403",
+  "request_id": "01c34bf722e9656ef37c3b6d",
+  "schema_version": 1
+}
