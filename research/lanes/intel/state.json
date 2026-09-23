@@ -7,11 +7,11 @@
   "continue_immediately": false,
   "next_question": "With proper product-page sampling (10/10 families via task-specific __SHOPPING__/path expansion and shopping_admin 184/42 fallback, product-subtree isolation heading/price/add-to-cart/main at 1280x720) plus expanded dynamic-token normalization beyond 9 regex (form_key/uenc/store/session/Magento attributes) stabilizing relevant-subtree SHA, does full-tree AX_consistency achieve variance>0 p<0.05 delta>=0.20 vs truncated [:20] vs trajectory-grouped shuffle, does Stagehand recomputed+stabilized achieve HIT>=0.8 MISS>=0.8 false_accept<0.05 beating NC4 with real-path latency/tokens, and can WebGym 50 diverse eTLD+1 duplication CI + sweep 0.818-0.9479 and BrowserGym multi-step >=50 transitions/family on >=10 families close H3/H4 under pinned 64-char digest sha256:3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb + BrowserGym-core 0.14.3/AgentLab 0.4.2/Playwright 1.63.0 with alternative representations (parameterized slots, AX similarity) if longest-prefix still fails?",
   "promotion_ready": false,
-  "consecutive_failures": 0,
-  "updated_at": "2026-09-23T20:28:47.405877+00:00",
-  "last_failure_retryable": null,
+  "consecutive_failures": 1,
+  "updated_at": "2026-09-23T20:32:43.258451+00:00",
+  "last_failure_retryable": false,
   "last_handoff_sha256": "77d51f20b5f9bff3a25c528f08ae0e22ab8ce5f20b3daa79daa8fb1dc41c05ba",
-  "same_failure_count": 0,
-  "last_failure_fingerprint": null,
-  "last_failure_control_revision": null
+  "same_failure_count": 1,
+  "last_failure_fingerprint": "64ea0f48419d337e70908066",
+  "last_failure_control_revision": "076dc77b91c1d12ea39cb22825d01d847c1810ff7d44ed432bd5b1813468f5ae"
 }
