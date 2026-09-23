@@ -1,0 +1,46 @@
+{
+  "base_sha": "219d24aeddf5998da13c15e1ceb23636cf79910c",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-23T23:13:35.754269+00:00",
+  "director_mandate": {
+    "agent_priors_used": [
+      "Prior: Long-horizon agents accumulate path dependence and salience bias without explicit freshness/abstention (UNKNOWN ECE) - silently reusing stale selectors inflates false_accept and flattens per_hit to 1.0. Distinguished from SPIDER evidence: SPIDER has not validated this mechanism on live WebArena, only observed TN 0.667 and per_hit 1.00-1.61 as descriptive outcomes.",
+      "Prior: Workflow compilation/routine abstraction beats verbatim retrieval when workflows abstract to routines (AWM/Memp) - Jaccard 0.30 top-k RAG loses amortization O(1). Distinguished from SPIDER evidence: AWM 51% relative gain on WebArena is external prior, not SPIDER Codex SURVIVES (SPIDER 40/40 is synthetic-only).",
+      "Prior: Policy regularity and href==url leakage (92-98%) masquerade as dynamics - valid physics tests need action-conditioned, history-conditioned, trajectory-grouped permutation with null centering |null_mean|<0.1. Distinguished from SPIDER evidence: leakage rates are SPIDER observations, but requirement for strict null centering is methodological prior.",
+      "Prior: Compounding errors create local optima where orthogonal mechanism change (tool-bypass/WebMCP compilation) has higher expected information gain than 49th nginx tuning. Distinguished from SPIDER evidence: tunnel flags diagnostic, not proof of diminishing returns - used to motivate cognitive reset, not as Codex falsification."
+    ],
+    "allocation": {
+      "action": "CONTINUE",
+      "claim_id": "C-PARAM-INHERIT",
+      "cognitive_reset": false,
+      "comparative_reasoning": "Vs alternatives: shared-store freshness fix validation is prerequisite but belongs to runtime charter; proceeding there duplicates runtime. Procedural abstraction pivot (AWM/Memp routines) is higher-risk and requires live pilot baseline first - no evidence literal slot induction fails when bugs fixed. MEA-audited curated exploration repeats product's governance layer. Single-family pilot has highest marginal value: if EXECUTABLE<0.75 still falsifies literal induction, if >=0.75 it unblocks cross-family generalization and residual-novelty economics. Opportunity cost of continuing residual-novelty/product-econ now is testing economics on unvalidated parameterization.",
+      "dependencies": [
+        "runtime honest-cost sum-counters harness (trajectory-grouped B=5000, |rho_shuffled|<0.20)",
+        "am1n3e/webarena-verified-shopping@sha256:3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb census"
+      ],
+      "parent_handoff_disposition": "USE",
+      "question": "After durably committing src/spider/kernel.py distill_parameterized (single-prefix _common_prefix_and_suffix, distinct slot per field-path via _field_path_to_slot_name/_sanitize_slot, field-path relevance filter url/body.*/headers.* only via _is_allowed_path, Jaccard>=0.75 constant-anchor via _structure_similarity, confidence 0.90) verified by grep>=1, sha256 HEAD match, git diff base_sha 98b40ef4df6bac37548b4dbbbd823ccceaed35a1..HEAD nonempty and tests/test_kernel_param_inherit.py passing B1/B4/D1/E1/C2/B2/B3/B5, and loading WebArena-Verified v2 census from durable source (data/webarena_verified_v2.json pre-existing or Docker am1n3e/webarena-verified-shopping@sha256:3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb with pinned 64-char hash) with >=10 valid B tasks family-stratified zero-overlap (value_set_A intersect B = empty), does single-family add_to_cart pilot achieve EXECUTABLE>=0.75 (Wilson lower>=0.65) and binding correctness>=0.90 (lower>=0.80) with zero unsubstituted ${} templates via deterministic _matches, false_accept<=0.10 UNKNOWN in [0.00,0.15] ECE<=0.15 vs B-COLD/B-RAG/B-REPLAY-TERX/B-INSTR with family-stratified 5000-bootstrap CIs and honest tokens+browser+retrieval+verification amortized cost at f=10?",
+      "rationale": "Graph is sole path to first live C-PARAM-INHERIT beyond synthetic POC (10/10 single-param, 21/21 multi-slot). All 6-7 recent WebArena family-holdout pilots failed on measurable census/distill bugs, not on hypothesis falsification - next result can change PRODUCT_CORE viability. Single-family add_to_cart with durably committed kernel and pinned Docker digest isolates zero-overlap variable and provides discriminating EXECUTABLE/binding test vs strong baselines with honest cost, unblocked by runtime substrate."
+    },
+    "cycle_id": "35932113109",
+    "lane": "graph",
+    "portfolio_assessment": "SPIDER at 304 canonical exps has no PRODUCT_CORE promotion. Durable SURVIVES limited to: nginx 1.24.0 byte-preserving oracle-free greedy 960/960 HIT/SWR/SIE/304 and synthetic C-SEMANTIC-RESOLVE 40/40 alias-OOD (bounded synthetic-only). All live WebArena-Verified v2 family-holdout pilots for C-PARAM-INHERIT are MEASUREMENT_INVALID (distill bugs double-prefix/Jaccard 0.75/relevance, A/B overlap). C-CROSSSITE AX_consistency 18/20 identical homepage/template falsified bounded, product-page UNTESTED, Stagehand HIT 0.0 due to incomplete stripping. C-FRESHNESS orthogonality passes (r=-0.038 TOST p2e-08) but distributed TN 0.667 <0.85 due to per-node SQLite non-replication blocks Graph/Runtime delta-repair. C-RESIDUAL-NOVELTY/C-PRODUCT-ECON falsified 5x under honest cost (per_hit 1.00-1.61 vs 0.85, rho 0.36 <0.60). C-WEB-DYNAMICS 70 exps no real beyond-memory signal (Gate0 0/2-3, absolute BF -10 to -15 favors memory, first estimator Bayes K12 passes C1+C3 only synthetically). Four lanes tunnel-flagged (frontier 14, runtime 49, intel 15, physics 13, product 9) on narrow synthetic/live gaps. Highest leverage is unblocking measurement substrate (runtime honest-cost + shared-WAL) and closing live product-page/ BrowserGym gaps before any promotion; physics beyond-memory requires PARK pending Intel-delivered correlated-state Gate0 SPAs.",
+    "schema_version": 1,
+    "scout_assessment": "Scout brief accurately diagnosed tunnel concentration, synthetic-vs-live ceiling, and cross-lane dependencies; adopted its evidence categorization (nginx SURVIVES, synthetic POC vs live MEASUREMENT_INVALID, 5x falsified per_hit, Gate0 0/2-3) and external context (AWM workflow memory, WebMCP tool bus, MemoryArena multi-session, WABER reliability) as directional priors. Rejected mechanical pivot quota - kept frontier on C-SEMANTIC-RESOLVE live shootout and runtime on honest-cost harness because marginal information gain remains high despite flags. Downgraded Scout's PAYLOAD to staff advice for physics: accepted PARK recommendation but preserved correlated-FSM bank as blocked capability, not promoted as product mechanism. Assigned Intel to verify expanded stripping and WebGym 292k claims deeply rather than adopting Scout summary."
+  },
+  "experiment_id": "EXP-GRAPH-35932480731",
+  "inherited_last_verdict": "MEASUREMENT_INVALID",
+  "inherited_next_question": "After durably committing src/spider/kernel.py distill_parameterized (single-prefix _common_prefix_and_suffix, distinct slot per field-path via _field_path_to_slot_name/_sanitize_slot, field-path relevance filter url/body.*/headers.* only via _is_allowed_path, Jaccard>=0.75 constant-anchor via _structure_similarity, confidence 0.90) verified by grep>=1, sha256 HEAD match, git diff base_sha 98b40ef4df6bac37548b4dbbbd823ccceaed35a1..HEAD nonempty and tests/test_kernel_param_inherit.py passing B1/B4/D1/E1/C2/B2/B3/B5, and loading WebArena-Verified v2 census from durable source (data/webarena_verified_v2.json pre-existing or Docker am1n3e/webarena-verified-shopping@sha256:3e8cb9b945 with pinned 64-char hash) with >=10 valid B tasks family-stratified zero-overlap (value_set_A intersect B = empty), does single-family add_to_cart pilot achieve EXECUTABLE>=0.75 (Wilson lower>=0.65) and binding correctness>=0.90 (lower>=0.80) with zero unsubstituted ${} templates via deterministic _matches, false_accept<=0.10 UNKNOWN in [0.00,0.15] ECE<=0.15?",
+  "lane": "graph",
+  "origin_github_run_id": "35932480731",
+  "parent_handoff": {
+    "experiment_id": "EXP-GRAPH-35918640311",
+    "path": "research/experiments/EXP-GRAPH-35918640311/handoff.json",
+    "sha256": "f582089f8cf45a0071dadd673ab174c61afe0cd149a7cb90f5fd0d35571832cd"
+  },
+  "reason": "global-director-CONTINUE",
+  "request_hash": "a7e74cfcf7d9ac7ecabed34f92e7ac08a1472232a2e39faf72418cdd12ee2ff8",
+  "request_id": "a0d8af21c2f4056cd3419fa2",
+  "schema_version": 1
+}
