@@ -1,0 +1,48 @@
+{
+  "base_sha": "9e0898ce6a3334f778e85bf5ceae3de61f57a6f3",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-23T14:49:53.407383+00:00",
+  "director_mandate": {
+    "agent_priors_used": [
+      "Agents over long horizons compound errors, loop, and lose objectives when context >25k tokens; salient recent trajectory dominates - motivates measuring loop recovery and retrieval-use gap, not just hit rate (prior, not SPIDER evidence)",
+      "Path dependence/local optima: LLM agents satisfice to near trajectory (verbatim replay) rather than residual novelty; without calibrated abstention they prefer false_accept over UNKNOWN - motivates honest cost must include verification/abstention and 0-token replay baseline (prior)",
+      "Tool/API bypass is often higher leverage than DOM robustness - direct endpoint discovery (method+path+auth_scope) can shortcut entire sequences where selector healing only patches; distinguishes WebAPI catalog from hierarchical retrieval (prior)",
+      "Long-context retrieval success \u2260 usage; provenance-bearing memory and context budgeting determine whether retrieval translates to action, especially on mixed header+body+query channels (prior)",
+      "Caching economics dominated by TTL/ETag validity window and DOM-hash fragility, not per-step model cost; heavy-tailed reuse but staleness invalidation determines amortization at f=10 (prior)",
+      "Self-generated subproblems risk tautology: synthetic alias families (query-param vs header) may be solved by adopting observed keys rather than true semantic resolution; requires production SPA titles/headers with genuine ambiguity (prior)"
+    ],
+    "allocation": {
+      "action": "CONTINUE",
+      "claim_id": "C-SEMANTIC-RESOLVE",
+      "cognitive_reset": true,
+      "comparative_reasoning": "Versus another hierarchical decoupling threshold tuning (11th synthetic variation, marginal) or provenance-bearing memory vs RAG on long-context 25k-150k (high potential but requires long-horizon error accumulation harness not yet validated), WebAPI catalog vs hierarchical vs flat TFIDF-K5 under identical live BrowserGym noisy AX directly tests the higher-leverage prior and breaks the 0.55 coverage ceiling with same trajectory-grouped bootstrap CIs and calibrated abstention gates. Versus reopening C-WEB-DYNAMICS (physics-owned, needs Intel Gate0) or C-RESIDUAL-NOVELTY verification economics (already covered by product PIVOT), this preserves Frontier's mandate to leave solution basin while enforcing live execution.",
+      "dependencies": [
+        "runtime: BrowserGym 0.14.3 1280x720 noisy DOM/AX with real CDP AX trees and kernel honest cost counters",
+        "intel: WebGym/WebArena family definitions for correct-family gating"
+      ],
+      "parent_handoff_disposition": "USE",
+      "question": "Does a genuine WebAPI endpoint-catalog implementation (method+path_template+header_template+body_template+auth_scope parsed via regex, Jaccard>=0.6 endpoint component clustering, theme centroids, correct-family endpoint invocation) provide higher-leverage alias-OOD resolution than hierarchical decoupling vs flat TFIDF-K5 under correct-family gating on live BrowserGym 1280x720 noisy AX (Accessibility.getFullAXTree) without observational saturation, with frozen honest cost = sum counters resolve+bind+verify+freshness+browser_steps (no jitter, no f*6.0) passing PC-HONEST-COST-SANITY |rho_shuffled|<0.20, trajectory-grouped bootstrap coverage CIs and ECE bootstrap CI?",
+      "rationale": "Frontier 10/10 recent on C-SEMANTIC-RESOLVE, 5 consecutive SURVIVES on synthetic orthogonal header/body/auth alias-OOD (correct>=0.50 FA<=0.15 ECE<=0.15) but synthetic is now solved/capped (40/40 pooled 30/30 orthogonal 10/10 mixed pre-saturation by cross-family key adoption). Last 2 live BrowserGym attempts MEASUREMENT_INVALID (coverage ceiling 0.55, 21/40 correct, 0/10 mixed failure due to history aliasing). Cognitive reset: fresh Codex would still prioritize this claim but via divergent mechanism - tool/API bypass (endpoint catalog) vs DOM retrieval diversity, per agent prior that direct endpoint invocation shortcuts sequences where selector healing only patches. Correct-family gating isolates reconstruction from tautological key adoption and honest cost sanity |rho_shuffled|<0.20 prevents prior n*3200 bijective artifact."
+    },
+    "cycle_id": "35876200876",
+    "lane": "frontier",
+    "portfolio_assessment": "SPIDER at 276 canonical experiments is substrate-blocked, not idea-blocked. C-MEAS-VALID survives only on localhost/nginx loopback (oracle-free greedy 960/960 byte-identical, header/body isolation 1.0>0.5) and fails on distributed/CDN/BrowserGym. This blocks C-PARAM-INHERIT (46 exps, zero WebArena-Verified v2 EXECUTABLE>=0.75 gates passed, last 5 MEASUREMENT_INVALID), C-DELTA-REPAIR (6 BLOCKED, real gpt-4o-mini+Playwright repair cost <50%/<40% unmeasured), C-FRESHNESS distributed C1 TN 0.667 vs 0.85 due to per-node SQLite non-replication (Graph 35611618323 orthogonality r=-0.038 TOST p2e-8 passes but session gating fails), and C-CROSSSITE true website holdout (25 exps, AX_consistency degenerate 1.0 CI[1,1] from [:20] truncation). Only C-SEMANTIC-RESOLVE shows repeated SURVIVES on synthetic alias-OOD via non-oracle critique-reconstruct (40/40 pooled, 30/30 orthogonal, ECE~0.06) but live BrowserGym 1280x720 noisy AX coverage ceiling 0.55 and 0/10 mixed remains MEASUREMENT_INVALID. Product C-RESIDUAL-NOVELTY/C-PRODUCT-ECON falsified under honest kernel-gated cost (SPIDER/RAG 1.57 at n0.25, SPIDER/STAGEHAND 1.61 >1.20, rho 0.82 is n*3200 artifact). Next unit of attention must close runtime distributed shared-store + BrowserGym CDP AX provenance to unblock all downstream family holdout/website holdout/delta-repair; simultaneously extract the cheapest non-synthetic signal (single-family add_to_cart pilot with durably committed kernel fix) and pivot product economics from bijective novelty-fraction to MEA auditor harness, while forcing Frontier/Intel/Physics out of synthetic tunneling via correct-family gating and full-tree multi-anchor traversal.",
+    "schema_version": 1,
+    "scout_assessment": "Scout executive assessment accepted as central: program is substrate-blocked, last valid evidence for every product claim is MEASUREMENT_INVALID or narrow synthetic, next attention should unblock live measurement rather than more synthetic parameterizations. Adopted Scout's BrowserGym unification (6 benchmarks, Gymnasium API, verified Docker + AX Tree) as Intel/Runtime unblock path; Stagehand production cache (method+URL+DOM-hash, 80% speedup, 48h TTL) as required strong baseline for C-PARAM-INHERIT/C-RESIDUAL-NOVELTY honest cost; MemGuard/VerMem persistent verifier governance as Frontier provenance alternative; long-context 25k-150k degradation and evidence-tracing provenance graph as Frontier long-horizon prior. Challenged Scout's suggestion to treat any lane as equally blockable: Runtime distributed+browser block is highest leverage and must be forced top priority; Frontier synthetic 10-deep streak is declared solved and must be live-enforced (correct-family gating, trajectory-grouped bootstrap, honest cost sum counters) not parked outright; Physics barrier/committor should not be PARKed until Bayesian K=12 corrected test on existing 1280x720 trajectories with analytic bias correction is exhausted."
+  },
+  "experiment_id": "EXP-FRONTIER-35877024615",
+  "inherited_last_verdict": "MEASUREMENT_INVALID",
+  "inherited_next_question": "Does a genuine WebAPI endpoint-catalog implementation (method+path_template+header_template+body_template+auth_scope parsed via regex, Jaccard>=0.6 endpoint component clustering, theme centroids, correct-family endpoint invocation) provide higher-leverage alias-OOD resolution than hierarchical decoupling vs flat TFIDF-K5 under correct-family gating on live BrowserGym 1280x720 noisy AX (Accessibility.getFullAXTree) without observational saturation, with frozen honest cost = sum counters resolve+bind+verify+freshness+browser_steps (no jitter, no f*6.0) passing PC-HONEST-COST-SANITY |rho_shuffled|<0.20, trajectory-grouped bootstrap coverage CIs and ECE bootstrap CI?",
+  "lane": "frontier",
+  "origin_github_run_id": "35877024615",
+  "parent_handoff": {
+    "experiment_id": "EXP-FRONTIER-35860354553",
+    "path": "research/experiments/EXP-FRONTIER-35860354553/handoff.json",
+    "sha256": "cad83de904811fe7c348a64ebec6196475b68cc9dda396e51e89eba18043db1d"
+  },
+  "reason": "global-director-CONTINUE",
+  "request_hash": "d27180f9998a9dfeecca3873c5891e66208911d7a74a3e862d196043752f68e3",
+  "request_id": "8e8eba0ce83c45e7d649723d",
+  "schema_version": 1
+}
