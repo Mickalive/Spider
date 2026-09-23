@@ -1,0 +1,15 @@
+{
+ "auditor_amort": "100/f f=10 only SUT",
+ "bank_source": "pools A/B disjoint zero overlap",
+ "branch_derived": true,
+ "cost_model": "sum_of_executed_branches_with_probe_auditor",
+ "curated_exploration": "5 demos/family verified_state filtered",
+ "distill_amort": "1000/f f=10 only SPIDER",
+ "family_count": 36,
+ "frozen_bank_hash": "c0cb5c0bd1c1e3eb",
+ "hit_costs": "50tok Stagehand/TERX honest",
+ "no_bijective_formula": true,
+ "probe_10tok_vs_fullverify_50tok": "TTL/ETag SWR",
+ "ranker": "TFIDF Jaccard fallback TAU 0.30 (all-MiniLM-L6-v2 unavailable; disclosed)",
+ "tau": 0.3
+}
