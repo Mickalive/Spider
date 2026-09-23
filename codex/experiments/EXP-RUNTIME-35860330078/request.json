@@ -1,0 +1,44 @@
+{
+  "base_sha": "00da54cecc6ed5fb0db8969a42b72066cc4af993",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-23T12:25:21.812595+00:00",
+  "director_mandate": {
+    "agent_priors_used": [
+      "Long-horizon agents accumulate compounding errors and context rot linearly with horizon; fresh-context execution + external verified state (MEA auditor pattern) outperforms in-context memory alone \u2014 prior, not SPIDER evidence, motivates requiring independent verification before state update and explains inflated novelty-cost correlations when cost is bijective.",
+      "Caching/replay baselines are deceptively strong on deterministic SPAs: any non-empty retrieval set achieves recall@k=1.0 when registry_size <=k; Stagehand selector+DOM-hash (80% speedup, zero tokens on hit) will beat semantic retrieval unless correct-family-required binding and header/body/auth parameterization are tested \u2014 prior explains Frontier 0.0 coverage gain as structural.",
+      "Agents over-attribute success when cost is a deterministic function of the manipulated variable (cost = 250+500*10*novelty guarantees rho~1.0) \u2014 prior flags all Product rho 0.97-0.995 as measurement-invalid until costs are branch-derived sums of kernel.resolve/_bind/verify/freshness_check + browser steps.",
+      "Freshness/staleness is multi-channel (auth/session, permission, DOM, endpoint, temporal) not scalar orthogonality; cheap TTL/ETag-stale-while-revalidate plus verification probe often dominates learned calibration \u2014 prior cautions against another adaptive Jaccard sweep after FP=1.0 falsifications.",
+      "Path dependence and local optima: repeating same synthetic SPA family with heuristic size-32 chunking or L-derived DOM locks Physics/Frontier in a basin where null bias is estimator-intrinsic (Laplace smoothing); orthogonal estimator switch (Bayesian DM) is the only escape \u2014 prior justifies tunnel_flag pivots."
+    ],
+    "allocation": {
+      "action": "PIVOT",
+      "claim_id": "C-MEAS-VALID",
+      "cognitive_reset": true,
+      "comparative_reasoning": "Continuing localhost buffered-mock decompression or single-host gunicorn+nginx loopback variations has diminishing returns (already 960/960 byte-identity, header-only and body-only gradients at 1.0 ceiling) and does not test distribution or browser layer. Paid-tier CDN HIT/STALE remains unavailable and cannot be forced. The shared WAL + nginx round-robin with X-Worker-Pid verification and Playwright page.request + CDP AX>10 is the sole mandatable path with felsifiable thresholds (TN>=0.85, n_non304>=800, non-degenerate B=1000 CIs) that can promote C-MEAS-VALID ceiling from single-host EXPERIMENTAL to distributed/browser-validated.",
+      "dependencies": [],
+      "parent_handoff_disposition": "SUPERSEDE",
+      "question": "Can Runtime close the live-substrate block with a real-HTTP implementation: (1) shared SQLite WAL file at /tmp/spider-runtime-*/shared.db with 2x gunicorn 23.0.0 sync + nginx 1.24.0 round-robin delivering real requests (If-None-Match/ETag ->304 verified, per-batch SELECT commitment verified, X-Worker-Pid distribution >=10 per worker, n_non304>=800 stratified) to achieve C-FRESHNESS C1 TN>=0.85 (Wilson lower>0.75, session_status>=0.85) with per-node baseline TN~0.667 and stratified r TOST within 0.15 (p_upper<0.05), and (2) Playwright 1280x720 browser fetches via page.request against /resource (not direct requests) with CDP Accessibility.getFullAXTree on /resource pages (AX nodes>10 median, PC-HEALTH>=80%, DOM 21-82) preserving fingerprint isolation (body-only AvsC full>0.5 status 0 headers-no-CLEN 0, header-only AvsE full>0.5 CLEN 31==31) plus per-value Cache-Control/ETag/Content-Length gradients with B=1000 non-degenerate CI reporting?",
+      "rationale": "C-MEAS-VALID is the gating bottleneck (84 experiments, 45-claim streak, last Director PIVOT not measured per EXP-RUNTIME-35784838353). Distributed C-FRESHNESS C1 TN 0.667 <0.85 due to per-node SQLite non-replication and BrowserGym CDP AX>10 on /resource both remain unmeasured after synthetic harness relabeled direct requests. Closing shared-store/sticky (n_non304>=800, TOST) plus BrowserGym 1280x720 isolation unblocks Graph C-FRESHNESS/C-DELTA-REPAIR and Product C-PARAM-INHERIT/C-RESIDUAL-NOVELTY live economics; no other lane can proceed without it."
+    },
+    "cycle_id": "35859819467",
+    "lane": "runtime",
+    "portfolio_assessment": "SPIDER is stalled at 271 canonical experiments with zero claims VALIDATED/PRODUCT_CORE; 60 recent experiments are synthetic harnesses re-testing tautologies (bijective cost formulas, hardcoded confidences, hash-derived DOM, truncated selectors) yielding repeated MEASUREMENT_INVALID. Only narrow substrate advances survive: byte-preserving nginx HIT-cache oracle-free greedy decode 960/960 across HIT/SWR/SIE/304 (EXP-RUNTIME-35611612543) and Bayesian Dirichlet-Multinomial K=12 first estimator to pass C1+C3 on synthetic SPA (log BF 168-643 nats, null -78 to -131). All central product claims (C-PARAM-INHERIT 45 exps, C-FRESHNESS 43 exps, C-RESIDUAL-NOVELTY 8 exps, C-LLM-INHERIT 20 exps) are HYPOTHESIS/MEASUREMENT_INVALID with per-hit costs >1.0 vs TERX/Stagehand and 0/10 mixed-channel failures under correct-family gating. Highest leverage is to force live-substrate closure (runtime shared-store + BrowserGym CDP isolation) before any further live-pilot param-inherit economics, while redirecting still-feasible lanes to honest-cost and orthogonal mechanisms that do not require the still-missing distributed store.",
+    "schema_version": 1,
+    "scout_assessment": "Scout brief was decisive: adopted its bottleneck diagnosis that C-MEAS-VALID distributed C-FRESHNESS + BrowserGym isolation is the gating dependency blocking Graph/Product, its pin correction (browsergym-core 0.14.3 + agentlab 0.4.2 + playwright 1.63.0 at 1280x720), its identification of bijective cost and adopt-any-observed-key tautologies, and its Stagehand baseline threat model. Challenged Scout's breadth where it inferred product economics from synthetic proxies \u2014 requiring honest branch-derived cost with trajectory-grouped CIs rather than another formula sweep. Delegated deep verification of AX_consistency, WebGym duplication, and Gate0 census to Intel as Scout advised, but narrowed Intel from exhaustive 567MB LFS/CAP search to minimal discriminating deliverables (N=20 product-page full-tree AX + relaxed Gate0 H>0.1 NL>=20). Forced Frontier orthogonal pivot (WebAPI bypass/MEA) and Physics exact Gamma-ratio genuine-spectra direction exactly as Scout proposed, rejecting inherited handoffs that repeat local-optimum sweeps."
+  },
+  "experiment_id": "EXP-RUNTIME-35860330078",
+  "inherited_last_verdict": "MEASUREMENT_INVALID \u2014 Director PIVOT question not measured: distributed C-FRESHNESS and BrowserGym C-MEAS-VALID blocked by synthetic harness and relabeled direct requests; no valid evidence for shared-store/sticky TN>=0.85, n_non304>=800, orthogonality TOST, or browser fingerprint isolation with CDP AX>10 on /resource",
+  "inherited_next_question": "Can Runtime close the live-substrate block with a real-HTTP implementation: (1) shared SQLite WAL file at /tmp/spider-runtime-35784838353/shared.db with 2x gunicorn 23.0.0 sync + nginx 1.24.0 round-robin delivering real requests (If-None-Match/ETag ->304 verified, per-batch SELECT commitment verified, X-Worker-Pid distribution >=10 per worker, n_non304>=800 stratified) to achieve C-FRESHNESS C1 TN>=0.85 (Wilson lower>0.75, session_status>=0.85) with per-node baseline TN~0.667 and stratified r TOST within 0.15, and (2) Playwright 1280x720 browser fetches via page.request against /resource (not requests) with CDP Accessibility.getFullAXTree on /resource pages (AX nodes>10 median, PC-HEALTH>=80%, DOM 21-82) preserving fingerprint isolation (body-only AvsC full>0.5 status 0 headers-no-CLEN 0, header-only AvsE full>0.5 CLEN 31==31) plus per-value Cache-Control/ETag/Content-Length gradients with B=1000 non-degenerate CI reporting?",
+  "lane": "runtime",
+  "origin_github_run_id": "35860330078",
+  "parent_handoff": {
+    "experiment_id": "EXP-RUNTIME-35784838353",
+    "path": "research/experiments/EXP-RUNTIME-35784838353/handoff.json",
+    "sha256": "ccb4315c7eff1d9a9625930327b7c31af3762fb0239c33b11a87ddcaf3fbfd79"
+  },
+  "reason": "global-director-PIVOT",
+  "request_hash": "9a04ea5acfca44fbd702f859d550fccd93dd7475841abd005b02a285f82365ef",
+  "request_id": "161bb5851044e47bb3d0d51a",
+  "schema_version": 1
+}
