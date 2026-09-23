@@ -1,0 +1,250 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-35881414325",
+  "lane": "intel",
+  "github_run_id": "35881414325",
+  "github_run_attempt": "1",
+  "request_hash": "3811da4bb9253f6e4697f51bcfdeee2c74214153d402013d6bce30977eaf3eaa",
+  "request_id": "0c61e1b9623bef368b66bd90",
+  "frozen_at": "2026-09-23T15:29:01.394382+00:00",
+  "measured_at": "2026-09-23T15:32:09+00:00",
+  "commit": "5fb8a9379abae85c83974f89341b58fd80660371",
+  "base_sha": "207fae3645d1f7aa0d5a5c31d0614ba1d3de23a6",
+  "environment": {
+    "python_version": "3.12.14",
+    "os": "linux",
+    "docker_image": "am1n3e/webarena-verified-shopping@sha256:3e8cb9b945",
+    "docker_digest": "sha256:3e8cb9b945",
+    "docker_reachable": false,
+    "docker_retry_count": 3,
+    "docker_url": "http://localhost:7770",
+    "docker_last_error": "URLError: <urlopen error [Errno 111] Connection refused>",
+    "playwright_version": "1.63.0",
+    "playwright_installed": false,
+    "playwright_browser": "chromium",
+    "playwright_install_verified": false,
+    "browsergym_version": "0.14.3",
+    "browsergym_core_available": false,
+    "agentlab_version": null,
+    "agentlab_available": false,
+    "webgym_version": null,
+    "webgym_available": false,
+    "tiktoken_version": null,
+    "tiktoken_available": false,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "seed": 35725763380
+  },
+  "code_artifacts": {
+    "measurement_script": "research/intel/exp_35881414325_measure.py",
+    "measurement_script_sha256": "5b3286d5bc924695a7fbba561362a84682cb85362d4c4f71bdfbf0e007cdca7e",
+    "grammar_code_hash": "8d4b7cb8b543c10912f5d4325ccee0e5ae839f64c534a354f5ac8e7b1a364a45",
+    "dynamic_token_regexes": [
+      "csrf[_-]?token",
+      "session[_-]?id",
+      "_token",
+      "timestamp",
+      "nonce",
+      "csrf value",
+      "sessionId",
+      "\\b\\d{13}\\b",
+      "\\b[a-f0-9]{32,}\\b"
+    ],
+    "placeholder_expansion_function": "get_task_start_url expands __SHOPPING__/path -> base_url+path_part, code verified",
+    "webarena_adapter": "research/intel/webarena_adapter.py",
+    "prior_measurement_reference": "research/intel/exp_35798952720_measure.py",
+    "execution_model": "muse-spark-1.2-contributor-free"
+  },
+  "datasets": {
+    "webarena_verified": {
+      "path": "research/experiments/EXP-INTEL-35749371101/artifacts/raw/webarena-verified.json",
+      "sha256": "d65275660814663375028e9017e1f929e3c38321041b125795e2713b52243d30",
+      "total_tasks": 812,
+      "shopping_tasks": 192,
+      "shopping_families_ge3": 36,
+      "shopping_families_ge4": 34,
+      "shopping_families_ge5": 33,
+      "admin_tasks": 184,
+      "admin_families": 42,
+      "path_families": 4,
+      "homepage_families": 32
+    },
+    "webarena_families_sampled": [
+      191,
+      180,
+      162,
+      197,
+      153,
+      213,
+      163,
+      137,
+      136,
+      222
+    ],
+    "stagehand_families": [
+      101,
+      136,
+      137,
+      138,
+      139,
+      145,
+      147,
+      153,
+      154,
+      155,
+      156,
+      159,
+      160,
+      162,
+      163,
+      165,
+      169,
+      171,
+      172,
+      180,
+      186,
+      189,
+      191,
+      194,
+      196,
+      197,
+      204,
+      206,
+      207,
+      208,
+      211,
+      212,
+      213,
+      214,
+      222,
+      370
+    ],
+    "webgym": {
+      "version": null,
+      "available": false,
+      "census_status": "UNAVAILABLE",
+      "error": "No module named 'webgym'",
+      "manifest_sha256": null,
+      "note": "WebGym 300k corpus not installed; 50 diverse eTLD+1 not computable"
+    }
+  },
+  "measurements": {
+    "total_captures_attempted": 20,
+    "valid_captures": 0,
+    "product_captures": 0,
+    "product_families": 0,
+    "families_sampled": [
+      191,
+      180,
+      162,
+      197,
+      153,
+      213,
+      163,
+      137,
+      136,
+      222
+    ],
+    "ax_node_range": null,
+    "dom_bytes_range": null,
+    "ax_consistency_mean": null,
+    "ax_consistency_ci": [
+      null,
+      null
+    ],
+    "ax_shuffle_p": null,
+    "ax_variance": null,
+    "ax_delta_truncated": null,
+    "ax_delta_vs_prior_02857": null,
+    "stagehand_hit_rate": null,
+    "stagehand_miss_rate": null,
+    "stagehand_hash_stability": null,
+    "stagehand_mutation_capability": null,
+    "stagehand_hash_changed_on_mutation": null,
+    "stagehand_cross_project_leakage": null,
+    "gate0_transitions": 0,
+    "gate0_transitions_required_per_family": 50,
+    "gate0_families_with_50": 0,
+    "gate0_relaxed_pass": 0,
+    "gate0_strict_pass": 0,
+    "gate0_H": null,
+    "gate0_NL": 0,
+    "gate0_leakage_validOnly": null,
+    "pip_freeze_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "grammar_code_hash": "8d4b7cb8b543c10912f5d4325ccee0e5ae839f64c534a354f5ac8e7b1a364a45"
+  },
+  "artifacts": {
+    "raw": [
+      {
+        "path": "research/experiments/EXP-INTEL-35881414325/artifacts/raw/ax_captures.jsonl",
+        "count": 20,
+        "sha256": "65c3381c0ebb5e8cc10a99e1f4b590ac219d7faafac46acb8826113d301fc604"
+      },
+      {
+        "path": "research/experiments/EXP-INTEL-35881414325/artifacts/raw/ax_captures.json",
+        "count": 20,
+        "sha256": "887d39e3cf8fe299d9a9fc0ddcf07df480d5e126b3c74ab2625620f0e9f46e0b"
+      },
+      {
+        "path": "research/experiments/EXP-INTEL-35881414325/artifacts/raw/provenance.json",
+        "sha256": "648b4efd1a3a5cf365392d8e9de54e627dc6a323e1f475198eab88718e13893b"
+      }
+    ],
+    "derived": [
+      {
+        "path": "research/experiments/EXP-INTEL-35881414325/artifacts/derived/ax_consistency_fulltree.json",
+        "sha256": "d11e80309e3e00abd5f1e749eefb25a8d29486975178298136965989890b6672"
+      },
+      {
+        "path": "research/experiments/EXP-INTEL-35881414325/artifacts/derived/stagehand_replication_recomputed.json",
+        "sha256": "ccd1f0aecb4e6a4fbe23035bc100a7da940df5e65b9e03582becabacfbe8bb00"
+      },
+      {
+        "path": "research/experiments/EXP-INTEL-35881414325/artifacts/derived/webgym_census.json",
+        "sha256": "d04f023ef1dc73d5706d9227591dbfae122465313a1585a44dadd1d9d4860137"
+      },
+      {
+        "path": "research/experiments/EXP-INTEL-35881414325/artifacts/derived/gate0_relaxed_table.json",
+        "sha256": "f2d42749b05734ad2b46dd298a60035d77a143129d04a2bcf3e0143a8e4051f2"
+      },
+      {
+        "path": "research/experiments/EXP-INTEL-35881414325/artifacts/derived/provenance.json",
+        "sha256": "132af476db0e90ef7e2826254c38e026f7d7f410772825fcda57c818201a7318"
+      },
+      {
+        "path": "research/experiments/EXP-INTEL-35881414325/provenance.json",
+        "sha256": "132af476db0e90ef7e2826254c38e026f7d7f410772825fcda57c818201a7318"
+      }
+    ]
+  },
+  "dependencies": [
+    "research/experiments/EXP-INTEL-35860344410/handoff.json:5c5b4ddc189258e0f62bbccf576424047101aef164374c5d3f9730dbe6bc30e9 (parent handoff SUPERSEDE inheritance)",
+    "research/experiments/EXP-INTEL-35749371101/artifacts/raw/webarena-verified.json:d65275660814663375028e9017e1f929e3c38321041b125795e2713b52243d30 (WebArena pin 192 tasks 36 families)",
+    "am1n3e/webarena-verified-shopping@sha256:3e8cb9b945 (Docker substrate at http://localhost:7770, 1280x720 CDP, not reachable this run)",
+    "browsergym-core 0.14.3 + playwright 1.63.0 + tiktoken 0.14.0 at 1280x720 (pins per Director mandate, pip freeze recorded)",
+    "WebGym 300k-task async corpus (requires manifest sha256, diverse eTLD+1 stratified sample, not available)",
+    "seed 35725763380 deterministic for family/task/WebGym sampling, 2000 bootstrap, 1000 trajectory-grouped shuffles (frozen, not exercised due to 0 captures)"
+  ],
+  "freeze_hashes": {
+    "prereg.md": "8e4cf899803e7edc9ecd66789c34e6dbd839b182cadaf1d697ee1cedb0cdabac",
+    "request.json": "d7a76dddc68b7d24e6940645b05888c6b3eabde8b8ca372266e7e75b69c3fe46",
+    "spec.json": "2e62fa2b819c484092adc9a41c0459ed58fd0e342654e00dd7d1dde616aefd78"
+  },
+  "representation_loss": [
+    "Full-tree vs longest-prefix only: longest-prefix used as consistency metric, product-subtree SHA stripped not exercised",
+    "Initial viewport no scroll for AX; multi-step for Gate0 requires scroll/click interaction not collected",
+    "CDP AX vs full DOM: AX tree is filtered representation (600-2000 nodes required)",
+    "Relevant-subtree outerHTML choice normalized with dynamic-token stripping 9 regexes",
+    "N=2 HIT threshold for Stagehand cache",
+    "Product page scarcity not assessed due to substrate failure (0/20)",
+    "DOM SHA256 instability with dynamic tokens not measured this run due to 0 captures, but prior 0.0 HIT documented",
+    "Docker unreachable is transient env failure, not deterministic site property"
+  ],
+  "commands": [
+    "pip install playwright==1.63.0 browsergym-core==0.14.3 tiktoken (pip freeze recorded)",
+    "python3 research/intel/exp_35881414325_measure.py (measurement script with 3 Docker retries, placeholder expansion, full-tree grammar hash 8d4b, dynamic-token stripping, WebGym import check, Gate0 multi-step check)",
+    "sha256sum artifacts/raw/* artifacts/derived/* provenance.json"
+  ]
+}

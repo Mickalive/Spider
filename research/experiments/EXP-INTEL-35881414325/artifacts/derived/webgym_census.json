@@ -1,0 +1,28 @@
+{
+  "experiment_id": "EXP-INTEL-35881414325",
+  "webgym_version": null,
+  "webgym_available": false,
+  "status": "UNAVAILABLE",
+  "error": "No module named 'webgym'",
+  "manifest_sha256": null,
+  "n_sites_found": 0,
+  "n_sites_required": 50,
+  "duplication_prevalence": null,
+  "duplication_ci_lower": null,
+  "duplication_ci_upper": null,
+  "duplication_ci_bootstrap_2000": null,
+  "threshold_sweep_range": null,
+  "threshold_sweep_detail": null,
+  "param_prevalence": null,
+  "site_entropy": null,
+  "hardcoded_comparison": {
+    "hardcoded_dup_09479": 0.9479,
+    "hardcoded_ci": [
+      0.9167,
+      0.9792
+    ],
+    "note": "WebArena-Verified v2 192 shopping tasks pin d65275660814663375028e9017e1f929e3c38321041b125795e2713b52243d30"
+  },
+  "status_detail": "WebGym 300k not importable after pip freeze check; 2 download attempts conceptually, manifest not fetched",
+  "is_synthetic": false
+}

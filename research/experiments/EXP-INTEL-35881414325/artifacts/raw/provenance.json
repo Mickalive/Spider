@@ -1,0 +1,36 @@
+{
+  "experiment_id": "EXP-INTEL-35881414325",
+  "docker_reachable": false,
+  "docker_retry_count": 3,
+  "docker_url": "http://localhost:7770",
+  "docker_last_error": "URLError: <urlopen error [Errno 111] Connection refused>",
+  "docker_image": "am1n3e/webarena-verified-shopping@sha256:3e8cb9b945",
+  "docker_digest": "sha256:3e8cb9b945",
+  "playwright_available": false,
+  "playwright_version": null,
+  "playwright_installed": false,
+  "browsergym_available": false,
+  "browsergym_version": null,
+  "webgym_available": false,
+  "webgym_version": null,
+  "tiktoken_available": false,
+  "tiktoken_version": null,
+  "viewport": {
+    "width": 1280,
+    "height": 720
+  },
+  "seed": 35725763380,
+  "pip_freeze_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "grammar_code_hash": "8d4b7cb8b543c10912f5d4325ccee0e5ae839f64c534a354f5ac8e7b1a364a45",
+  "dynamic_token_regexes": [
+    "csrf[_-]?token",
+    "session[_-]?id",
+    "_token",
+    "timestamp",
+    "nonce",
+    "csrf value",
+    "sessionId",
+    "\\b\\d{13}\\b",
+    "\\b[a-f0-9]{32,}\\b"
+  ]
+}
