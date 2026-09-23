@@ -4,7 +4,7 @@ Pre-2.0 canonical memory remains frozen at `archive/spider-codex-ultimate:SPIDER
 
 Canonical Research 2.0 evidence lives in `codex/experiments/<experiment_id>/`.
 Use `codex/index.json` and `codex/claim_state.json` to locate relevant packets; do not load all experiment bodies by default.
-Validated experiments: **283**. Coverage gaps: **0**. Quarantined packets: **0**.
+Validated experiments: **283**. Coverage gaps: **0**. Quarantined packets: **1**.
 
 ## Experiment index
 
@@ -310,3 +310,7 @@ These are chronological latest events, not an automatic truth ranking.
 | C-RESIDUAL-NOVELTY | HYPOTHESIS | EXP-PRODUCT-35884748673 | product |
 | C-SEMANTIC-RESOLVE | MEASUREMENT_INVALID | EXP-FRONTIER-35880092123 | frontier |
 | C-WEB-DYNAMICS | HYPOTHESIS | EXP-PHYSICS-35796855042 | physics |
+
+## Integrity accounting
+
+See `codex/coverage_gaps.json` and `codex/quarantine.json`; incomplete or invalid finalized packets are never silently ingested.
