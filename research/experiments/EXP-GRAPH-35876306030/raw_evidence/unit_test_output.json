@@ -1,0 +1,5 @@
+{
+  "stdout": "",
+  "stderr": "/opt/hostedtoolcache/Python/3.12.14/x64/bin/python: No module named pytest\n",
+  "returncode": 1
+}

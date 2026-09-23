@@ -1,0 +1,8 @@
+{
+  "f": 10,
+  "distill_tok": 1000,
+  "retrieval_tok": 200,
+  "verification_tok": 50,
+  "instruction_tok": 200,
+  "note": "LLM unavailable, no live cost measured"
+}

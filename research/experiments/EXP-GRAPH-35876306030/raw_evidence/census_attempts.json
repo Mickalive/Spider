@@ -1,0 +1,22 @@
+{
+  "candidates": {
+    "data/webarena_verified_v2.json": {
+      "exists": false,
+      "sha256": null,
+      "size": 0
+    },
+    "research/experiments/EXP-GRAPH-35876306030/census.json": {
+      "exists": false,
+      "sha256": null,
+      "size": 0
+    }
+  },
+  "docker_image": "am1n3e/webarena-verified-shopping@sha256:3e8cb9b945",
+  "docker_check": {
+    "stdout": "ghcr.io/github/gh-aw-firewall/agent:latest\nghcr.io/github/gh-aw-firewall/api-proxy:latest\nghcr.io/github/gh-aw-mcpg:latest\nghcr.io/dependabot/dependabot-updater-core:latest\nghcr.io/github/github-mcp-server:latest\nghcr.io/github/gh-aw-firewall/squid:latest",
+    "stderr": "",
+    "returncode": 0
+  },
+  "durable_source_satisfied": false,
+  "note": "No durable WebArena-Verified v2 census found; file-based synthetic census not durably provisioned"
+}

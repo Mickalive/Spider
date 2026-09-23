@@ -1,0 +1,15 @@
+{
+  "has_distill_parameterized": false,
+  "kernel_methods": [
+    "distill",
+    "invalidate",
+    "observe",
+    "resolve",
+    "verify"
+  ],
+  "call_attempt": "missing_attribute_error",
+  "error": "SpiderKernel has no attribute distill_parameterized",
+  "_matches_exists": true,
+  "_matches_self_test": true,
+  "_template_slots_test": true
+}

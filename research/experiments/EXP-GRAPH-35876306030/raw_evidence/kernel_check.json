@@ -1,0 +1,26 @@
+{
+  "path": "src/spider/kernel.py",
+  "exists": true,
+  "sha256": "46929b3a951df48d7f9d1fd850871073c0d91c1868aa117e13d389fe274e8d61",
+  "head_sha": "07a90be2367c320e6a74b14019b87714a358ca7a",
+  "base_sha": "9e0898ce6a3334f778e85bf5ceae3de61f57a6f3",
+  "grep": {
+    "distill_parameterized": 0,
+    "_common_prefix_and_suffix": 0,
+    "_extract_varying_values": 0,
+    "_structure_similarity": 0,
+    "_is_allowed_path": 0,
+    "_ALLOWED_PREFIXES": 0,
+    "_field_path_to_slot_name": 0,
+    "_sanitize_slot": 0,
+    "confidence_090": 0,
+    "single_prefix": 0,
+    "jaccard_075": 0
+  },
+  "grep_all_ge1": false,
+  "diff_nonempty": false,
+  "diff_stat": "",
+  "diff_content_prefix": "",
+  "test_exists": false,
+  "test_sha": null
+}
