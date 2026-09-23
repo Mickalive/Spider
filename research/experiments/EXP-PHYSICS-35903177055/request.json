@@ -1,0 +1,46 @@
+{
+  "base_sha": "6f579bd834c5ad36234ca444c401e3dd6301d35d",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-23T18:32:48.164114+00:00",
+  "director_mandate": {
+    "agent_priors_used": [
+      "Compounding planning errors over long horizons: small errors in precondition/channel choice multiply, predicting 0/10 mixed header+body+query+auth joint failure from 0.5^3 while single-channel header 10/10 and body 10/10 succeed \u2014 implies factorization/alias-catalog needed, not more retrieval diversity. Distinguished from SPIDER evidence.",
+      "Path dependence and salience: agents reuse recently seen fragments/branches, overweighting early tool choices, causing local optima where literally correct prior path absent; requires OOD family hold-out where literally correct path absent. Prior, not SPIDER evidence.",
+      "Diminishing returns to local tuning: 12 consecutive C-SEMANTIC-RESOLVE and 5 consecutive C-PARAM-INHERIT failures with unchanged method has low marginal information vs orthogonal mechanism (tool compilation, alias catalog, rewind memory). Prior, not SPIDER evidence.",
+      "Caching/replay architectures fail via staleness/false accepts more than miss rate: UNKNOWN abstention calibration (ECE<=0.15 precision>=0.85 false_accept<=0.10) is harder than raw recall; false_accept is true product risk. Prior, not SPIDER evidence.",
+      "Representation loss dominates estimator choice: hash-truncated AX[:20] or visible_text_hash discards variables controlling transitions; preserving raw DOM vs derived hash determines detectability. Prior, not SPIDER evidence."
+    ],
+    "allocation": {
+      "action": "PIVOT",
+      "claim_id": "C-WEB-DYNAMICS",
+      "cognitive_reset": true,
+      "comparative_reasoning": "Continuing PMI on new production SPAs requires Intel to deliver >=2 Gate0 SPAs which has failed 4 exhaustive enumerations (0/2 to 0/3). Timescale/barrier on existing banks has higher upside and lower cost, and can publish a negative ceiling (hash-truncated representation matters) if BC~0. PARKing entirely would lose the only physics program not blocked by site discovery.",
+      "dependencies": [
+        "runtime"
+      ],
+      "parent_handoff_disposition": "SUPERSEDE",
+      "question": "On existing BrowserGym WebShop/TodoMVC trajectory banks at locked 1280x720 (BrowserGym-core 0.14.3 + AgentLab 0.4.2 + Playwright 1.63.0, CDP Accessibility.getFullAXTree visual bbox + 8 computed styles + AX embedding, not SHA256 hash-truncated, TRAIN-only k-means 20), with exact Bayesian Dirichlet-Multinomial K=12/24 Gamma-ratio correction (scipy gammaln/polygamma, trajectory-grouped permutation N=1000-1999 seed 42, |perm-analytic|<0.03, |null_mean|<0.1, null_std>0.01), does barrier/committor (>=10 revisits to same canonical state URL+DOM_cluster+H_K=3 with divergent futures 0.2<q<0.8, ECE<=0.15, Brier gap>=0.05 over B-MARKOV-1) or timescale separation (autocorrelation tau_corr>5 vs tau_shuffled~1, gap>=0.05 over Markov-1) reveal valid beyond-memory structure (BC>0.05 p_bonf<0.01 gap>=0.05 over TF-IDF k5 and Markov) where independent-noise control remains BC~0 (|BC|<0.05 p>0.10), or does even exactly-centered genuine DOM remain at BC~0 indicating no detectable beyond-memory dynamics and physics should remain PARKED while Frontier pursues memory/Tool-bypass?",
+      "rationale": "Physics has 14/15 recent MEASUREMENT_INVALID and 9-streak on C-WEB-DYNAMICS; PMI/CMI on TodoMVC is at substrate ceiling (0/3 real SPAs pass strict Gate0 titles>=2 H>0.2 leakage<40% NL>=50). Continuing hash-truncated DOM PMI has diminishing returns. Bayesian K=12 first estimator to pass C1+C3 synthetic but absolute BF -15 nats favors memory on real data, showing estimator validation without real beyond-memory signal. Barrier/committor and timescale separation are orthogonal falsifiable programs requiring no new Gate0 SPA, test existing banks with exact correction, and directly inform Frontier to abandon DOM-before predictive dynamics vs retrieval diversity."
+    },
+    "cycle_id": "35902787476",
+    "lane": "physics",
+    "portfolio_assessment": "SPIDER at 290 canonical experiments is locally trapped: 5/6 lanes in narrow tunnels with synthetic ceilings unbridged to live Web (C-PARAM-INHERIT 47 exps 5 consecutive GRAPH MEASUREMENT_INVALID/BLOCKED on live family holdout vs 10/10 synthetic POC; C-SEMANTIC-RESOLVE FRONTIER 12-streak 10/10 last10 synthetic 40/40 correct vs live 0.525/0.55 coverage 0/10 mixed triple-channel joint; C-WEB-DYNAMICS 69 exps Bayesian Dir-Multinomial first to pass C1+C3 synthetic +194 to +669 nats but absolute BF -10 to -15 nats memory-favored on TodoMVC; C-CROSSSITE 29 exps INTEL 16-streak vacuous 0.9479 single-store duplication; C-DELTA-REPAIR 5/5 recent BLOCKED awaiting HIT substrate). The only substrate to move from MEASUREMENT_INVALID to SUPPORTS this cycle is RUNTIME nginx 1.24.0 HIT/SWR/SIE/304 960/960 byte-identical oracle-free and header/body discriminating (full 1.0 > body/status 0.0 and body-only 1.0 > status 0.0) on gunicorn23+nginx loopback. C-FRESHNESS orthogonality correlation is confirmed (stratified r=-0.038 TOST p=2e-08 at delta 0.15) but C1 behavioral TN=0.667 <0.85 due to per-node SQLite under round-robin. Product economics are falsified under honest kernel-gated cost (148 tok fixed overhead, rho_novelty tautological). Most promising marginal information is not another local retrieval threshold or param-inherit pilot but: (1) closing the distributed freshness TN gap and per-value gradients to unblock downstream, (2) testing localized delta-repair on the now-validated HIT substrate, (3) orthogonal alias-catalog/tool-compilation for the 0/10 mixed joint, (4) BrowserGym/WebGym diverse sampling with full-tree AX consistency to replace exhaustive LFS, (5) barrier/committor/timescale physics on existing banks with exact Gamma correction requiring no new Gate0 SPAs, (6) WebMCP O(1) tool discovery vs Stagehand/RAG Pareto with honest per_hit cost.",
+    "schema_version": 1,
+    "scout_assessment": "Scout correctly diagnosed deep trapping across 5/6 lanes, synthetic ceilings unbridged (graph 5 same-failure, frontier 0.525 ceiling, physics absolute BF negative, intel vacuous duplication, product 148 tok overhead) and identified the sole validated substrate (runtime nginx HIT 960/960) plus external pivots (WebMCP 27-99% token saving, BrowserGym 0.14.3 canonical, WebGym 300k diverse, Stagehand baseline). Adopted Scout's 6 recommendations directionally but challenged mechanically: (1) GRAPH \u2014 accepted PIVOT to delta-repair over param-inherit retry rather than continuing single-family pilot; (2) PHYSICS \u2014 accepted PARK PMI until relaxed Gate0 and REOPEN barrier/timescale on existing banks with exact correction but mandated exact Gamma-ratio now; (3) INTEL \u2014 accepted abandon exhaustive LFS/CAP and mandate WebGym diverse + full-tree AX but required compliant measurement gates; (4) FRONTIER \u2014 accepted termination of retrieval-tuning loop and pivot to alias-catalog/OpenAPI joint composition for 0/10 mixed; (5) RUNTIME \u2014 accepted CONTINUE to close shared WAL sticky TN gap + per-value gradients; (6) PRODUCT \u2014 accepted pivot to WebMCP O(1) vs Stagehand with honest per_hit accounting. Scout's cross-lane dependency map (runtime->graph/product, intel->physics/graph) was used to order allocations."
+  },
+  "experiment_id": "EXP-PHYSICS-35903177055",
+  "inherited_last_verdict": "MEASUREMENT_INVALID",
+  "inherited_next_question": "After repairing substrate to real BrowserGym WebShop/TodoMVC trajectory banks at locked 1280x720 (BrowserGym-core 0.14.3 + AgentLab 0.4.2 + Playwright 1.63.0), correcting metric to exact Dirichlet-Multinomial log-BF in nats via scipy gammaln/polygamma with trajectory-grouped permutation (1000-1999 perms seed 42, |perm-analytic|<0.03, |analytic|<0.1), ensuring non-degenerate action support |A|>1 and non-hash-truncated AX embedding (serialized role/name/value up to 5k + TRAIN-only k-means 20), does Bayesian relative separation reach >=200 nats with p_bonf<0.01 and gap>=0.05 over TF-IDF k5 and Markov-1 while independent-noise remains BC~0, or does even exact pipeline show degenerate/near-zero BF indicating no detectable beyond-memory structure on BrowserGym at N=1000-1999 and physics should remain PARKed while Frontier pursues orthogonal MemoryArena/WebAPI-bypass/tool-compilation?",
+  "lane": "physics",
+  "origin_github_run_id": "35903177055",
+  "parent_handoff": {
+    "experiment_id": "EXP-PHYSICS-35892828492",
+    "path": "research/experiments/EXP-PHYSICS-35892828492/handoff.json",
+    "sha256": "877357202c2ff798e2292e5e2b2c73d0e03ce37890bfd8f3d685ae819004e6c8"
+  },
+  "reason": "global-director-PIVOT",
+  "request_hash": "2b4827d4fe19c61d79e21f85ee80642eb0648d706e6a5a73e6037d6338055dff",
+  "request_id": "60dfc45825bddf8e916fb9ae",
+  "schema_version": 1
+}
