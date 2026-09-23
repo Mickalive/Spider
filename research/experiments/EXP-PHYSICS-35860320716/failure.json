@@ -1,11 +1,11 @@
 {
   "stage": "execute",
-  "category": "VALIDATION_FAILURE",
-  "message": "invalid result outcome: MEASUREMENT_INVALID",
+  "category": "EXECUTION_FAILURE",
+  "message": "stage exited with code 76",
   "retryable": false,
-  "fingerprint": "571093cfed539e7e6e855500",
-  "recorded_at": "2026-09-23T14:37:00.893361+00:00",
-  "github_run_id": "35860320716",
+  "fingerprint": "32fb61131a26107aaf831564",
+  "recorded_at": "2026-09-23T16:20:15.551936+00:00",
+  "github_run_id": "35876318641",
   "github_run_attempt": "1",
   "control_revision": "076dc77b91c1d12ea39cb22825d01d847c1810ff7d44ed432bd5b1813468f5ae"
 }
