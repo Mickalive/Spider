@@ -1,0 +1,13 @@
+{
+  "ANTHROPIC_API_KEY_present": false,
+  "OPENAI_API_KEY_present": false,
+  "branch": "lab2/graph",
+  "docker_server": "28.0.4",
+  "experiment_id": "EXP-GRAPH-35932480731",
+  "frozen_base_sha": "219d24aeddf5998da13c15e1ceb23636cf79910c",
+  "git_status_short": " M SPIDER_CODEX.md\n M codex/claim_state.json\n M codex/index.json\n?? codex/experiments/EXP-INTEL-35927482134/\n?? codex/experiments/EXP-PRODUCT-35932494797/\n?? research/experiments/EXP-GRAPH-35932480731/model_execute.json\n?? research/experiments/EXP-GRAPH-35932480731/raw_evidence/\n",
+  "head_sha": "0133f3bf70c4babd85f8d8c3eff92429e9f960c6",
+  "legacy_base_sha": "98b40ef4df6bac37548b4dbbbd823ccceaed35a1",
+  "pytest": "pytest 9.1.1",
+  "python": "Python 3.12.14"
+}

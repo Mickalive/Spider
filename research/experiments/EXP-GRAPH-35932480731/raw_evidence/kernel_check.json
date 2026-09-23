@@ -1,0 +1,59 @@
+{
+  "base_sha_frozen": "219d24aeddf5998da13c15e1ceb23636cf79910c",
+  "branch": "lab2/graph",
+  "checked_at_sha": "0133f3bf70c4babd85f8d8c3eff92429e9f960c6",
+  "experiment_id": "EXP-GRAPH-35932480731",
+  "gate_kernel_durable": false,
+  "git_diff_lines_base_to_head_kernel": 0,
+  "git_diff_lines_legacy_to_head_kernel": 0,
+  "kernel_lines": "132",
+  "kernel_path": "src/spider/kernel.py",
+  "kernel_sha256": "46929b3a951df48d7f9d1fd850871073c0d91c1868aa117e13d389fe274e8d61",
+  "legacy_base_sha": "98b40ef4df6bac37548b4dbbbd823ccceaed35a1",
+  "raw_commands": [
+    {
+      "_ALLOWED_PREFIXES": 0,
+      "_common_prefix_and_suffix": 0,
+      "_extract_varying_values": 0,
+      "_field_path_to_slot_name": 0,
+      "_is_allowed_path": 0,
+      "_sanitize_slot": 0,
+      "_structure_similarity": 0,
+      "distill_parameterized": 0
+    },
+    {
+      "cmd": "wc -l src/spider/kernel.py",
+      "exit": 0,
+      "stderr": "",
+      "stdout": "132 src/spider/kernel.py\n"
+    },
+    {
+      "cmd": "sha256sum src/spider/kernel.py",
+      "exit": 0,
+      "stderr": "",
+      "stdout": "46929b3a951df48d7f9d1fd850871073c0d91c1868aa117e13d389fe274e8d61  src/spider/kernel.py\n"
+    },
+    {
+      "cmd": "git diff 219d24aeddf5998da13c15e1ceb23636cf79910c..HEAD -- src/spider/kernel.py | wc -l",
+      "exit": 0,
+      "stderr": "",
+      "stdout": "0\n"
+    },
+    {
+      "cmd": "git diff 98b40ef4df6bac37548b4dbbbd823ccceaed35a1..HEAD -- src/spider/kernel.py | wc -l",
+      "exit": 0,
+      "stderr": "",
+      "stdout": "0\n"
+    }
+  ],
+  "symbol_grep_counts": {
+    "_ALLOWED_PREFIXES": 0,
+    "_common_prefix_and_suffix": 0,
+    "_extract_varying_values": 0,
+    "_field_path_to_slot_name": 0,
+    "_is_allowed_path": 0,
+    "_sanitize_slot": 0,
+    "_structure_similarity": 0,
+    "distill_parameterized": 0
+  }
+}

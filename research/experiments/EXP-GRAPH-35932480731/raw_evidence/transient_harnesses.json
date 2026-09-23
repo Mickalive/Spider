@@ -1,0 +1,54 @@
+{
+  "EXP-GRAPH-35784823623": {
+    "path": "research/experiments/EXP-GRAPH-35784823623/run_experiment.py",
+    "symbol_counts": {
+      "_ALLOWED_PREFIXES": "1",
+      "_common_prefix_and_suffix": "2",
+      "_extract_varying_values": "0",
+      "_field_path_to_slot_name": "0",
+      "_is_allowed_path": "1",
+      "_sanitize_slot": "1",
+      "_structure_similarity": "1",
+      "distill_parameterized": "11"
+    }
+  },
+  "EXP-GRAPH-35793560957": {
+    "path": "research/experiments/EXP-GRAPH-35793560957/run_experiment.py",
+    "symbol_counts": {
+      "_ALLOWED_PREFIXES": "0",
+      "_common_prefix_and_suffix": "4",
+      "_extract_varying_values": "2",
+      "_field_path_to_slot_name": "2",
+      "_is_allowed_path": "2",
+      "_sanitize_slot": "2",
+      "_structure_similarity": "2",
+      "distill_parameterized": "5"
+    }
+  },
+  "EXP-GRAPH-35798169917": {
+    "path": "research/experiments/EXP-GRAPH-35798169917/run_experiment.py",
+    "symbol_counts": {
+      "_ALLOWED_PREFIXES": "0",
+      "_common_prefix_and_suffix": "3",
+      "_extract_varying_values": "2",
+      "_field_path_to_slot_name": "2",
+      "_is_allowed_path": "2",
+      "_sanitize_slot": "2",
+      "_structure_similarity": "2",
+      "distill_parameterized": "8"
+    }
+  },
+  "EXP-GRAPH-35864745180": {
+    "path": "research/experiments/EXP-GRAPH-35864745180/run_experiment.py",
+    "symbol_counts": {
+      "_ALLOWED_PREFIXES": "0",
+      "_common_prefix_and_suffix": "6",
+      "_extract_varying_values": "4",
+      "_field_path_to_slot_name": "5",
+      "_is_allowed_path": "5",
+      "_sanitize_slot": "5",
+      "_structure_similarity": "6",
+      "distill_parameterized": "11"
+    }
+  }
+}

@@ -1,0 +1,121 @@
+{
+  "artifacts": [
+    {
+      "note": "sha256 computed at packaging",
+      "path": "research/experiments/EXP-GRAPH-35932480731/result.json",
+      "sha256": "fbb61efb14c8e118a7706209bc4e0dbc9c87b421d83612235bfc374f60bfb509"
+    },
+    {
+      "note": "sha256 computed at packaging",
+      "path": "research/experiments/EXP-GRAPH-35932480731/report.md",
+      "sha256": "ef1c7122369b9fd5ac775f22b8abdb2cff3f7b03a4b1b04726280ff5982fdc78"
+    },
+    {
+      "note": "sha256 computed at packaging",
+      "path": "research/experiments/EXP-GRAPH-35932480731/provenance.json",
+      "sha256": "148f6bd3371f4591df295b6fdb563a13075a79afce2567176bbdc400b9a43012"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-35932480731/raw_evidence/kernel_check.json",
+      "role": "raw",
+      "sha256": "b75e0742be720b639ab6e2cd4334fed614de816e5001f971842e5850e5382ff4"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-35932480731/raw_evidence/census_check.json",
+      "role": "raw",
+      "sha256": "ed327d6921f70384e6b09556d43611359df99cb02a0b5f2d2566614875848278"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-35932480731/raw_evidence/unit_tests_check.json",
+      "role": "raw",
+      "sha256": "c0459dc650bbbf3bad5b99c5cd8909637f4e571ed708301755c6e9aaf8d599f5"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-35932480731/raw_evidence/environment.json",
+      "role": "raw",
+      "sha256": "4d21480dc25f3e6d4605a10140104d4fae2d56a28eef9b797610085ecd89c257"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-35932480731/raw_evidence/refs_check.json",
+      "role": "raw",
+      "sha256": "d0d8c9ce0053a87a70a84def30cdecdb8c17c6e4053999d275da28bc747e2463"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-35932480731/raw_evidence/transient_harnesses.json",
+      "role": "raw",
+      "sha256": "4f6b1ad15b1404942b706e61762990fea1a2357f27ecdcd7904984fe952434d1"
+    }
+  ],
+  "code_paths_checked": {
+    "research/harness": "directory does not exist on this branch (runtime honest-cost harness dependency not present; N/A without LLM).",
+    "src/spider/kernel.py": "132 lines literal-only; sha256 46929b3a951df48d7f9d1fd850871073c0d91c1868aa117e13d389fe274e8d61; 0/8 required symbol greps; git diff 219d24ae..HEAD = 0 lines. NOT modified by EXECUTE.",
+    "tests/test_kernel.py": "existing literal-kernel tests; 3 passed with PYTHONPATH=src; fail collection without PYTHONPATH (ModuleNotFoundError: No module named 'spider').",
+    "tests/test_kernel_param_inherit.py": "absent."
+  },
+  "commands": [
+    "git rev-parse HEAD; git rev-parse --abbrev-ref HEAD",
+    "git diff 219d24aeddf5998da13c15e1ceb23636cf79910c..HEAD -- src/spider/kernel.py | wc -l   (0)",
+    "git diff 98b40ef4df6bac37548b4dbbbd823ccceaed35a1..HEAD -- src/spider/kernel.py | wc -l   (0)",
+    "grep -c <symbol> src/spider/kernel.py for each of 8 symbols   (all 0)",
+    "sha256sum src/spider/kernel.py   (46929b3a951df48d7f9d1fd850871073c0d91c1868aa117e13d389fe274e8d61)",
+    "python -m pytest tests/test_kernel.py -q   (collection error without PYTHONPATH)",
+    "PYTHONPATH=src python -m pytest tests/test_kernel.py -q   (3 passed)",
+    "docker images --digests; docker run --rm --entrypoint sh am1n3e/webarena-verified-shopping@sha256:3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb -c 'echo IMAGE_OK; ls /'  (timeout 110s, exit 124)",
+    "git grep -c distill_parameterized {origin/lab2/product,origin/main,HEAD} -- src/spider/kernel.py  (0 on all refs)",
+    "git ls-tree -r --name-only {origin/lab2/product,origin/main,HEAD} -- tests/ data/  (no test_kernel_param_inherit.py, no data/ entries)",
+    "sha256sum request.json spec.json prereg.md freeze.json  (match freeze.json hashes; frozen inputs immutable)"
+  ],
+  "datasets": {
+    "docker_probe": {
+      "pull_status": "pull completes but image not persisted in docker images (grep count 0)",
+      "run_status": "docker run --entrypoint sh <image> -c 'echo IMAGE_OK; ls /' timed out at 110s (exit 124); stderr shows fresh registry pull on each invocation"
+    },
+    "webarena_verified_v2": {
+      "note": "data/webarena_verified_v2.json does not exist; data/ directory does not exist; no static export found on HEAD/origin-main/origin-lab2-product.",
+      "pinned_docker_digest": "am1n3e/webarena-verified-shopping@sha256:3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb",
+      "status": "absent"
+    }
+  },
+  "environment": {
+    "ANTHROPIC_API_KEY": null,
+    "OPENAI_API_KEY": null,
+    "docker_server": "28.0.4",
+    "note": "OPENAI/ANTHROPIC keys absent -> LLM branch (F3/F4, B-COLD/B-RAG/B-REPLAY-TERX/B-INSTR, economics) NOT_APPLICABLE per frozen falsifier; binding gate F1/F2 primary but invalid here due to kernel/census gate failures.",
+    "os": "linux (GitHub Actions runner)",
+    "pytest": "pytest 9.1.1",
+    "python": "Python 3.12.14"
+  },
+  "execution": {
+    "model": "opencode/big-pickle",
+    "outcome": "NOT_APPLICABLE",
+    "recorded_at": "2026-09-23T23:39:00Z",
+    "stage": "EXECUTE",
+    "status": "MEASUREMENT_INVALID"
+  },
+  "experiment_id": "EXP-GRAPH-35932480731",
+  "git": {
+    "branch": "lab2/graph",
+    "freeze_commit_sha": "bce1497246fe3c6d691f2abcf42711378d324a92",
+    "frozen_base_sha": "219d24aeddf5998da13c15e1ceb23636cf79910c",
+    "head_message": "R2 graph: execution base EXP-GRAPH-35932480731",
+    "head_sha": "0133f3bf70c4babd85f8d8c3eff92429e9f960c6",
+    "legacy_base_sha": "98b40ef4df6bac37548b4dbbbd823ccceaed35a1",
+    "parent_experiment": "EXP-GRAPH-35918640311"
+  },
+  "github_run_attempt": "1",
+  "github_run_id": "35932480731",
+  "immutability_check": {
+    "all_match_freeze_json": true,
+    "freeze.json_sha256": "70093c1d89af5a5b995e69573191e61960f8e636a1726e6ee1116603de3b14a7",
+    "prereg.md_sha256": "f817c612171dab7d2a17156f973b6b0ed7d58dc35fdfe71dc40ad3806e29a6c8",
+    "request.json_sha256": "04baf4148c4417333b8cb643eace0499a0dc6a91c5e8ec4a286abfebfb2f9e23",
+    "spec.json_sha256": "f4807665afded6e1bb5c79b14f87f8bde27ae65bc0595c904b6a0625b2e26e44"
+  },
+  "lane": "graph",
+  "notes": [
+    "EXECUTE did not modify frozen inputs, src/, tests/, or any other lane's files. Only files written: research/experiments/EXP-GRAPH-35932480731/result.json, report.md, provenance.json, raw_evidence/*.",
+    "No outcome-bearing B measurement was performed because frozen gate 1 (kernel durability) and gate 2 (census durability) failed before measurement (prereg section 5.1).",
+    "No git commit/push/switch/reset was performed."
+  ],
+  "schema_version": 1
+}

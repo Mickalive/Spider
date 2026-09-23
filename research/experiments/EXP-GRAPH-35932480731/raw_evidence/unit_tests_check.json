@@ -1,0 +1,20 @@
+{
+  "experiment_id": "EXP-GRAPH-35932480731",
+  "pytest_with_pythonpath_src": {
+    "cmd": "PYTHONPATH=src python -m pytest tests/test_kernel.py -q 2>&1 | tail -3",
+    "exit": 0,
+    "stderr": "",
+    "stdout": "...                                                                      [100%]\n3 passed in 0.02s\n"
+  },
+  "pytest_without_pythonpath": {
+    "cmd": "python -m pytest tests/test_kernel.py -q 2>&1 | tail -3",
+    "exit": 0,
+    "stderr": "",
+    "stdout": "ERROR tests/test_kernel.py\n!!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!\n1 error in 0.11s\n"
+  },
+  "test_kernel_param_inherit_exists": false,
+  "tests_dir_listing": [
+    "__pycache__",
+    "test_kernel.py"
+  ]
+}

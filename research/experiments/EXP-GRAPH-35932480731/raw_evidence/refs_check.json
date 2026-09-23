@@ -1,0 +1,17 @@
+{
+  "HEAD": {
+    "data_tree": "",
+    "kernel_grep": "",
+    "tests_tree": "tests/test_kernel.py\n"
+  },
+  "origin/lab2/product": {
+    "data_tree": "",
+    "kernel_grep": "",
+    "tests_tree": "tests/test_kernel.py\n"
+  },
+  "origin/main": {
+    "data_tree": "",
+    "kernel_grep": "",
+    "tests_tree": "tests/test_kernel.py\n"
+  }
+}

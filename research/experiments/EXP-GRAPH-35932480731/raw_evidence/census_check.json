@@ -1,0 +1,10 @@
+{
+  "data_dir_exists": false,
+  "docker_probe": "0",
+  "docker_run_probe_exit": 124,
+  "docker_run_probe_stderr_tail": "e7aabb51d2b1: Download complete\nc65b6d59765c: Verifying Checksum\nc65b6d59765c: Download complete\n",
+  "experiment_id": "EXP-GRAPH-35932480731",
+  "note": "docker run --entrypoint sh <pinned image> sh -c 'echo IMAGE_OK; ls /' timed out at 110s (EXIT=124); image not persisted in docker images after pull; every docker run re-pulled from registry.",
+  "pinned_docker_digest": "am1n3e/webarena-verified-shopping@sha256:3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb",
+  "webarena_verified_v2_exists": false
+}
