@@ -1,0 +1,47 @@
+{
+  "base_sha": "0fed24199561113cd749cbcba2b61b4aa21c1b70",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-23T16:24:56.922163+00:00",
+  "director_mandate": {
+    "agent_priors_used": [
+      "Path dependence and context salience: agents anchored on homepage placeholder (?task=) or stale state repeat same exploration; SPIDER [:20] truncation and placeholder expansion exemplify this \u2014 prior distinguished from SPIDER evidence which only shows degenerate AX 1.0 variance 0 p=1.0 and 0.2857->0.9 flip, not the cognitive mechanism",
+      "Long-horizon compounding errors: single-step ~0.9 accuracy collapses over 15 steps without verification/repair; UNKNOWN abstention (<0.80) and verify+repair economics are primary not afterthought \u2014 prior not SPIDER evidence, SPIDER evidence only shows verification AUROC gate repeated and bijective cost formula invalid",
+      "Local optima / retrieval collapse: flat top-k RAG saturates at 0.525 coverage; complementary retrieval helps only with reconstruction and joint multi-candidate composition (0/10 mixed failure shows composition gap) \u2014 prior vs SPIDER's measured 21/40 pooled ceiling",
+      "Tool/API bypass leverage: invoking backend endpoint directly (method+path+header+body+auth_scope via OpenAPI/WebMCP) can save O(MxN) browsing vs DOM replay when API exists \u2014 prior vs SPIDER evidence which has no measured API-bypass success on live substrate",
+      "Caching-dominated economics: with prefix KV-cache reuse, marginal cost is verification+browser steps not tokens; honest cost must be sum counters resolve+bind+verify+freshness+browser_steps (no jitter, no f*6.0) \u2014 prior vs SPIDER's falsified bijective formula and PC-HONEST-COST-SANITY |rho_shuffled|<0.20 gate"
+    ],
+    "allocation": {
+      "action": "PIVOT",
+      "claim_id": "C-CROSSSITE",
+      "cognitive_reset": true,
+      "comparative_reasoning": "Continuing exhaustive Mind2Web LFS test.zip pin 17ece8eb or CAP 420-task dump retains single-store vacuous overlap and BLOCKED substrate \u2014 0/3 Gate0 after exhaustive search proves infeasibility. Continuing Docker full-DOM re-collection for 7 Magento tasks without fixing grammar keeps degenerate AX 1.0 CI[1,1] p=1.0. WebGym sampling wins because WebGym+CAP+WebMall provide diverse eTLD+1 without 567MB LFS, and Stagehand HIT/MISS gives immediate strong baseline for C-PRODUCT-ECON. Opportunity cost of another exhaustive enumeration is physics remaining PARKED awaiting 2 Gate0 SPAs that will never arrive.",
+      "dependencies": [
+        "BrowserGym-core 0.14.3 + AgentLab 0.4.2 + Playwright 1.63.0 pinned at 1280x720",
+        "WebGym 300k async corpus manifest access"
+      ],
+      "parent_handoff_disposition": "SUPERSEDE",
+      "question": "Can BrowserGym/WebGym diverse-site sampling replace exhaustive 567MB LFS / 420-task CAP enumeration: (a) WebGym 300k manifest sample >=50 eTLD+1 diverse sites yields duplication 95% CI (2000 bootstrap) and threshold sweep 0.818-0.9479 plus param_task prevalence vs vacuous 0.9479, (b) relaxed Gate0 census H>0.1 NL>=20 titles>=1 via BrowserGym 1280x720 multi-step trajectories >=50 transitions/family on >=10 families (shopping_admin, Reddit, GitLab, Wikipedia, VisualWebArena, WorkArena) with cold vs cached latency/tokens, (c) full-tree semantic/multi-anchor AX_consistency (no [:20] truncation, product-subtree SHA256 recomputed via page.content()+AX with dynamic-token stripping) at 1280x720 20 live CDP captures task-specific start_url 10 families x2 seed 35725763380 requiring mean>=0.6 bootstrap lower>0.5 shuffle p<0.05 delta>=0.20 vs truncated, and (d) Stagehand relevant-subtree HIT>=0.8 MISS>=0.8 false_accept<0.05 vs NC4 random-role-subset null with real-path latency/tokens, all trajectory-grouped bootstrap CIs?",
+      "rationale": "Intel 14-streak on C-CROSSSITE with last 5 MEASUREMENT_INVALID due to placeholder / truncated [:20] grammar / Docker agentlab pin and exhaustive LFS 567MB CAP search that consistently BLOCKS (Gate0 0/2, Mind2Web TFIDF non-compliant). Pivoting to WebGym 300k sampled 50 eTLD+1 plus relaxed Gate0 avoids exhaustive enumeration, delivers duplication threshold sweep that unblocks graph/product cross-site design, fixes AX measurement validity (task-specific start_url, full-tree grammar, dynamic-token stripping, recomputed SHA256), and replicates shipped Stagehand baseline that product must beat \u2014 directly altering claim/design per charter."
+    },
+    "cycle_id": "35888072171",
+    "lane": "intel",
+    "portfolio_assessment": "283 canonical experiments, zero VALIDATED/PRODUCT_CORE. Narrow synthetic POCs survive (param induction single/multi-param, Bayesian K=12 null centering, synthetic alias-OOD reconstruction) but every real BrowserGym/WebArena bridge collapses to MEASUREMENT_INVALID/BLOCKED due to substrate failures (JWT/session rejection, TN inversion, [:20] truncation, homepage placeholder, Docker/BrowserGym liveness, Gate0 0/2 SPAs). Core commercial promise (C-PARAM-INHERIT->C-RESIDUAL-NOVELTY->C-PRODUCT-ECON vs strong baselines with honest cost) remains unmeasured; all honest-cost product experiments FALSIFIED (rho_novelty not >=0.60, |rho_length| not <0.20, SPIDER per_hit 1.0-1.61 vs RAG/Stagehand). C-FRESHNESS/C-MEAS-VALID blocked on shared auth store is the gating dependency for 5 graph delta-repair repeats and product freshness gating. Tunnel flags on frontier (11/14 C-SEMANTIC-RESOLVE, 0.525 coverage ceiling), intel (14 streak exhaustive LFS), physics (7 streak synthetic FSM), runtime (46 streak C-MEAS-VALID) signal diminishing returns. Global optimum is to unblock measurement substrate first, pivot graph/product to honest pay-novelty-not-length family hold-out that directly tests leverage vs shipped Stagehand caching, pivot intel to sampled WebGym diversity not exhaustive enumeration, and give frontier one corrected discriminating harness before forcing Fetch/WebMCP API-bypass pivot.",
+    "schema_version": 1,
+    "scout_assessment": "Scout brief was decisive for external baselining but not followed as authority. Accepted: Agentic Compilation O(MxN)->O(1) $0.002-0.092 and Stagehand 80% speedup/30% cost as shipped baselines SPIDER must beat; WebRetriever/WebMall/Online-Mind2Web+WebGym 300k as viable diverse holdout replacing Mind2Web single-store vacuous and LFS 567MB blocking; Activity Frames/Mesh Memory as protocol-level framing. Challenged: scout's suggestion to CONTINUE frontier's exhaustive harness indefinitely \u2014 enforced explicit termination condition (if still 0/10 mixed, pivot to Fetch/WebMCP). Deprioritized frontier's synthetic tuning without correct-family gating. Used scout's cross-lane dependency map to prioritize runtime shared-store fix as highest leverage unblocker before allowing new graph/product freshness experiments, and to replace intel's exhaustive Docker/CAP enumeration with WebGym 50 eTLD+1 sampling. Assigned intel to verify Stagehand and AX consistency deeply rather than doing deep browsing ourselves."
+  },
+  "experiment_id": "EXP-INTEL-35888540685",
+  "inherited_last_verdict": "MEASUREMENT_INVALID",
+  "inherited_next_question": "After repairing Docker substrate am1n3e/webarena-verified-shopping@sha256:3e8cb9b945 to achieve >=15/20 liveness at 1280x720 with full-tree semantic/multi-anchor grammar and dynamic-token stripping verified (no [:20] truncation), plus WebGym 300k 50 diverse eTLD+1 import with 2000-bootstrap 95% CI and 0.818-0.9479 threshold sweep, and BrowserGym loopback achieving >=50 transitions/family on >=10 families, does product-page AX_consistency achieve mean>=0.6 bootstrap CI lower>0.5 trajectory-grouped shuffle p<0.05 delta>=0.20 vs truncated baseline with variance>0, and does Stagehand relevant-subtree recomputed+stripping achieve HIT>=0.8 MISS>=0.8 false_accept<0.05 beats NC4 random-role-subset with real-path latency/tokens?",
+  "lane": "intel",
+  "origin_github_run_id": "35888540685",
+  "parent_handoff": {
+    "experiment_id": "EXP-INTEL-35881414325",
+    "path": "research/experiments/EXP-INTEL-35881414325/handoff.json",
+    "sha256": "089a5f46672ae163c12cdeebfd2e8fd9fbc28666d3a555c7550b76018d64e046"
+  },
+  "reason": "global-director-PIVOT",
+  "request_hash": "310a196e49643da196ca422716be7ee8d9bc3c930b1827665329c6daa2431014",
+  "request_id": "53ed3cf7057e9cc101a9e0f4",
+  "schema_version": 1
+}
