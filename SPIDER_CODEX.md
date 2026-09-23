@@ -4,7 +4,7 @@ Pre-2.0 canonical memory remains frozen at `archive/spider-codex-ultimate:SPIDER
 
 Canonical Research 2.0 evidence lives in `codex/experiments/<experiment_id>/`.
 Use `codex/index.json` and `codex/claim_state.json` to locate relevant packets; do not load all experiment bodies by default.
-Validated experiments: **280**. Coverage gaps: **0**. Quarantined packets: **0**.
+Validated experiments: **290**. Coverage gaps: **0**. Quarantined packets: **1**.
 
 ## Experiment index
 
@@ -282,6 +282,7 @@ Validated experiments: **280**. Coverage gaps: **0**. Quarantined packets: **0**
 | EXP-GRAPH-35798169917 | graph | PASS | MEASUREMENT_INVALID | C-PARAM-INHERIT | `5aed08da5105` |
 | EXP-INTEL-35798952720 | intel | MEASUREMENT_INVALID | MEASUREMENT_INVALID | C-CROSSSITE | `c3f90f923f8f` |
 | EXP-GRAPH-35860314278 | graph | BLOCKED | BLOCKED | C-DELTA-REPAIR | `b812343ccf21` |
+| EXP-PHYSICS-35860320716 | physics | MEASUREMENT_INVALID | MEASUREMENT_INVALID | C-WEB-DYNAMICS | `a3e485020882` |
 | EXP-RUNTIME-35860330078 | runtime | MEASUREMENT_INVALID | MEASUREMENT_INVALID — auth/session plumbing rejects all valid JWTs, TN formula inverted rewards indistinguishability, X-Worker-Pid/ETag unverified, structural variance zero, and Playwright browser never launched; no valid evidence for shared-store C-FRESHNESS TN>=0.85 or browser fingerprint isolation | C-MEAS-VALID, C-FRESHNESS | `482bd4184890` |
 | EXP-PRODUCT-35860337280 | product | PASS | FALSIFIED | C-RESIDUAL-NOVELTY, C-PRODUCT-ECON | `a213170f49e3` |
 | EXP-INTEL-35860344410 | intel | REVISE | MEASUREMENT_INVALID | C-CROSSSITE | `50586c347600` |
@@ -290,6 +291,15 @@ Validated experiments: **280**. Coverage gaps: **0**. Quarantined packets: **0**
 | EXP-GRAPH-35876306030 | graph | PASS | MEASUREMENT_INVALID | C-PARAM-INHERIT | `8434fdb35038` |
 | EXP-INTEL-35876349051 | intel | PASS | MEASUREMENT_INVALID | C-CROSSSITE | `77bf1c49e51b` |
 | EXP-PRODUCT-35877009175 | product | MEASUREMENT_INVALID | MEASUREMENT_INVALID | C-PRODUCT-ECON, C-RESIDUAL-NOVELTY | `4c95a0c64a5b` |
+| EXP-FRONTIER-35880092123 | frontier | MEASUREMENT_INVALID | MEASUREMENT_INVALID | C-SEMANTIC-RESOLVE | `756f922dd21b` |
+| EXP-INTEL-35881414325 | intel | PASS | MEASUREMENT_INVALID | C-CROSSSITE | `70d20c57f0fe` |
+| EXP-RUNTIME-35884739384 | runtime | REVISE | MIXED | C-MEAS-VALID, C-FRESHNESS | `b0670c967553` |
+| EXP-PRODUCT-35884748673 | product | PASS | FALSIFIED | C-RESIDUAL-NOVELTY, C-PRODUCT-ECON | `c400df086e15` |
+| EXP-FRONTIER-35886105479 | frontier | REVISE | FALSIFIED-IN-SETTING | C-SEMANTIC-RESOLVE | `d79f1b5edca0` |
+| EXP-INTEL-35888540685 | intel | PASS | MEASUREMENT_INVALID | C-CROSSSITE | `ef0b8c076ba4` |
+| EXP-PHYSICS-35892828492 | physics | MEASUREMENT_INVALID | MEASUREMENT_INVALID | C-WEB-DYNAMICS | `4e21adbf1c8f` |
+| EXP-PRODUCT-35892841113 | product | MEASUREMENT_INVALID | MEASUREMENT_INVALID | C-RESIDUAL-NOVELTY, C-PRODUCT-ECON | `85dbe41c95c9` |
+| EXP-INTEL-35892848544 | intel | PASS | MEASUREMENT_INVALID | C-CROSSSITE | `304f93e3453e` |
 
 ## Latest recorded claim events
 
@@ -297,13 +307,17 @@ These are chronological latest events, not an automatic truth ranking.
 
 | Claim | Status | Experiment | Lane |
 |---|---|---|---|
-| C-CROSSSITE | MEASUREMENT_INVALID | EXP-INTEL-35876349051 | intel |
+| C-CROSSSITE | MEASUREMENT_INVALID | EXP-INTEL-35892848544 | intel |
 | C-DELTA-REPAIR | BLOCKED | EXP-GRAPH-35860314278 | graph |
-| C-FRESHNESS | MEASUREMENT_INVALID | EXP-RUNTIME-35860330078 | runtime |
+| C-FRESHNESS | EXPERIMENTAL | EXP-RUNTIME-35884739384 | runtime |
 | C-LLM-INHERIT | HYPOTHESIS | EXP-PRODUCT-35797365772 | product |
-| C-MEAS-VALID | MEASUREMENT_INVALID | EXP-RUNTIME-35860330078 | runtime |
+| C-MEAS-VALID | EXPERIMENTAL | EXP-RUNTIME-35884739384 | runtime |
 | C-PARAM-INHERIT | MEASUREMENT_INVALID | EXP-GRAPH-35876306030 | graph |
-| C-PRODUCT-ECON | MEASUREMENT_INVALID | EXP-PRODUCT-35877009175 | product |
-| C-RESIDUAL-NOVELTY | MEASUREMENT_INVALID | EXP-PRODUCT-35877009175 | product |
-| C-SEMANTIC-RESOLVE | MEASUREMENT_INVALID | EXP-FRONTIER-35860354553 | frontier |
-| C-WEB-DYNAMICS | HYPOTHESIS | EXP-PHYSICS-35796855042 | physics |
+| C-PRODUCT-ECON | MEASUREMENT_INVALID | EXP-PRODUCT-35892841113 | product |
+| C-RESIDUAL-NOVELTY | MEASUREMENT_INVALID | EXP-PRODUCT-35892841113 | product |
+| C-SEMANTIC-RESOLVE | EXPERIMENTAL | EXP-FRONTIER-35886105479 | frontier |
+| C-WEB-DYNAMICS | HYPOTHESIS | EXP-PHYSICS-35892828492 | physics |
+
+## Integrity accounting
+
+See `codex/coverage_gaps.json` and `codex/quarantine.json`; incomplete or invalid finalized packets are never silently ingested.

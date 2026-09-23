@@ -1,0 +1,258 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-35881414325",
+  "lane": "intel",
+  "status": "COMPLETE",
+  "outcome": "NOT_APPLICABLE",
+  "metrics": {
+    "M_AX_CONSISTENCY_MEAN": null,
+    "M_AX_N_FAMILIES": 10,
+    "M_AX_N_CAPTURES_ATTEMPTED": 20,
+    "M_AX_VALID_CAPTURES": 0,
+    "M_AX_PRODUCT_FAMILY_COUNT": 0,
+    "M_AX_PRODUCT_CAPTURE_COUNT": 0,
+    "M_AX_BOOTSTRAP_CI_LOWER": null,
+    "M_AX_BOOTSTRAP_CI_UPPER": null,
+    "M_AX_SHUFFLE_P": null,
+    "M_AX_SHUFFLE_MEAN": null,
+    "M_AX_SHUFFLE_STD": null,
+    "M_AX_SHUFFLE_P95": null,
+    "M_AX_PER_FAMILY_VARIANCE": null,
+    "M_AX_DELTA_TRUNCATED": null,
+    "M_AX_DELTA_VS_PRIOR_02857": null,
+    "M_AX_PC1_LIVENESS_PASS": false,
+    "M_AX_PC1_LIVENESS_DETAIL": "0/20 valid AX trees (node counts 0, DOM bytes 0) after 3 Docker retries; Docker am1n3e/webarena-verified-shopping@sha256:3e8cb9b945 not reachable at http://localhost:7770 (URLError: [Errno 111] Connection refused)",
+    "M_AX_GRAMMAR_CODE_HASH": "8d4b7cb8b543c10912f5d4325ccee0e5ae839f64c534a354f5ac8e7b1a364a45",
+    "M_AX_DYNAMIC_TOKEN_REGEXES": ["csrf[_-]?token", "session[_-]?id", "_token", "timestamp", "nonce", "csrf value", "sessionId", "\\b\\d{13}\\b", "\\b[a-f0-9]{32,}\\b"],
+    "M_AX_PLACEHOLDER_EXPANSION_VERIFIED": true,
+    "M_AX_VIEWPORT": "1280x720",
+    "M_STAGEHAND_HIT_RATE": null,
+    "M_STAGEHAND_MISS_RATE": null,
+    "M_STAGEHAND_FALSE_ACCEPT": null,
+    "M_STAGEHAND_N_FAMILIES_ATTEMPTED": 0,
+    "M_STAGEHAND_N_FAMILIES_REQUIRED": 30,
+    "M_STAGEHAND_MUTATION_HASH_CHANGED": null,
+    "M_STAGEHAND_SELECTOR_DERIVATION_POSSIBLE": null,
+    "M_STAGEHAND_PER_PROJECT_ISOLATION": null,
+    "M_STAGEHAND_SPEEDUP": null,
+    "M_STAGEHAND_TOKENS_SAVED": null,
+    "M_STAGEHAND_LATENCY_COLD_MS": null,
+    "M_STAGEHAND_LATENCY_CACHED_MS": null,
+    "M_WEBGYM_SITES_FOUND": 0,
+    "M_WEBGYM_STATUS": "UNAVAILABLE",
+    "M_WEBGYM_DUP_PREVALENCE": null,
+    "M_WEBGYM_DUP_CI_LOWER": null,
+    "M_WEBGYM_DUP_CI_UPPER": null,
+    "M_WEBGYM_THRESHOLD_SWEEP_RANGE": null,
+    "M_WEBGYM_PARAM_PREVALENCE": null,
+    "M_WEBGYM_SITE_ENTROPY": null,
+    "M_WEBGYM_MANIFEST_SHA256": null,
+    "M_WEBGYM_HARDCODED_DUP_09479": 0.9479,
+    "M_WEBGYM_HARDCODED_CI": [0.9167, 0.9792],
+    "M_GATE0_TRANSITIONS": 0,
+    "M_GATE0_TRANSITIONS_REQUIRED_PER_FAMILY": 50,
+    "M_GATE0_FAMILIES_WITH_50": 0,
+    "M_GATE0_RELAXED_PASS_COUNT": 0,
+    "M_GATE0_STRICT_PASS_COUNT": 0,
+    "M_GATE0_H": null,
+    "M_GATE0_NL": 0,
+    "M_GATE0_STRATA": 0,
+    "M_GATE0_LEAKAGE_VALIDONLY": null,
+    "M_GATE0_UNIQUE_TITLES": 0,
+    "M_GATE0_TITLE_ENTROPY": null,
+    "M_GATE0_SINGLETON_RATE": null,
+    "M_H1_STATUS": "MEASUREMENT_INVALID",
+    "M_H2_STATUS": "MEASUREMENT_INVALID",
+    "M_H3_STATUS": "MEASUREMENT_INVALID",
+    "M_H4_STATUS": "MEASUREMENT_INVALID"
+  },
+  "controls": {
+    "B-STAGEHAND-VERB": {
+      "expected": "HIT>=0.8 identical DOM, MISS>=0.8 single-attribute drifted DOM, false_accept<0.05, beats NC4 p<0.05, cold vs cached real-path latency/tokens ~2x/~30% when derived selectors only",
+      "observed": "Not executed: Docker unreachable after 3 retries, 0/20 valid AX trees, no live Playwright captures for Stagehand cache. HIT/MISS/false_accept/speedup not measurable. Hash recomputation with dynamic-token stripping infrastructure frozen but not exercised on live pages. 0 synthetic fam_task fallback.",
+      "pass_fail": "MEASUREMENT_INVALID",
+      "evidence": "research/experiments/EXP-INTEL-35881414325/artifacts/derived/stagehand_replication_recomputed.json:ccd1f0aecb4e6a4fbe23035bc100a7da940df5e65b9e03582becabacfbe8bb00, research/experiments/EXP-INTEL-35881414325/artifacts/raw/ax_captures.jsonl:65c3381c0ebb5e8cc10a99e1f4b590ac219d7faafac46acb8826113d301fc604"
+    },
+    "B-RANDOM-AX-SHUFFLE": {
+      "expected": "True mean must exceed shuffle mean+0.20 and p95, permutation p<0.05 ((1+count perm>=true)/(1+1000)); degenerate std 0 p=1.0 = FAIL",
+      "observed": "Not computed: 0 valid captures, no per-family scores to shuffle. Trajectory-grouped shuffle 1000 perms seed 35725763380 not executable. No degenerate CI[1,1] produced because no scores exist (null, not degenerate).",
+      "pass_fail": "MEASUREMENT_INVALID",
+      "evidence": "research/experiments/EXP-INTEL-35881414325/artifacts/derived/ax_consistency_fulltree.json:d11e80309e3e00abd5f1e749eefb25a8d29486975178298136965989890b6672"
+    },
+    "B-TRUNCATED-20": {
+      "expected": "Full-tree mean must exceed truncated mean by >=0.20 per current mandate (updated from 0.10) to claim fix matters; prior 0.2857 invalid fallback rejected vacuous predictor",
+      "observed": "Not computed: full-tree grammar implemented and verified (code hash 8d4b7cb8b543c109) with no [:20] truncation, but no live pages to compare. Delta vs truncated null (not 0.0). Truncation fix correctness verified by code audit (no [:20] slice, selectors[:20] absent).",
+      "pass_fail": "MEASUREMENT_INVALID",
+      "evidence": "research/experiments/EXP-INTEL-35881414325/artifacts/derived/ax_consistency_fulltree.json:d11e80309e3e00abd5f1e749eefb25a8d29486975178298136965989890b6672, research/experiments/EXP-INTEL-35881414325/artifacts/raw/provenance.json:648b4efd1a3a5cf365392d8e9de54e627dc6a323e1f475198eab88718e13893b"
+    },
+    "B-WEBGYM-HARDCODED-09479": {
+      "expected": "WebGym >=50 diverse-site duplication 95%CI should not overlap 0.9479 CI[0.9167,0.9792] (192 tasks 49 templates 36 families >=3) if diversity effect holds; sweep range >=0.05 across 0.818-0.9479 indicates threshold sensitivity",
+      "observed": "WebGym 300k corpus not installed (No module named 'webgym' after pip freeze). 0 diverse eTLD+1 sites computable. Hardcoded 0.9479 CI preserved from prior pin d65275660814663375028e9017e1f929e3c38321041b125795e2713b52243d30. Threshold sweep not computable without manifest.",
+      "pass_fail": "MEASUREMENT_INVALID",
+      "evidence": "research/experiments/EXP-INTEL-35881414325/artifacts/derived/webgym_census.json:d04f023ef1dc73d5706d9227591dbfae122465313a1585a44dadd1d9d4860137, research/experiments/EXP-INTEL-35881414325/artifacts/derived/provenance.json:75fb17a3beeb201f8faf322ef20f876334d9ff848c25341f98ff910c7d579820"
+    },
+    "B-COLD-LLM": {
+      "expected": "Cold latency/tokens upper bound; SPIDER/Stagehand must beat cold with false_accept penalty to claim PRODUCT_ECON; per-hit vs fixed at f=100 separated",
+      "observed": "Not measured: no LLM inference used for AX/Gate0/WebGym (per spec cost). Stagehand cold/cached real-path latency/tokens not measurable without live captures and Stagehand server; tiktoken not available in this env but prior 0.14.0 proven installed.",
+      "pass_fail": "NOT_MEASURED",
+      "evidence": "research/experiments/EXP-INTEL-35881414325/artifacts/derived/stagehand_replication_recomputed.json:ccd1f0aecb4e6a4fbe23035bc100a7da940df5e65b9e03582becabacfbe8bb00"
+    },
+    "B-CONSTANT-NULL-05654": {
+      "expected": "Not used for decision; disclosed to prevent reuse of F(n)=0.5654 as plateau predictor; constant 0.5654 from truncated-first-20 full-DOM experiment REJECTED",
+      "observed": "Not used for decision; disclosed only. No 0.5654 extrapolation applied.",
+      "pass_fail": "NOT_APPLICABLE",
+      "evidence": "research/experiments/EXP-INTEL-35881414325/artifacts/derived/ax_consistency_fulltree.json:d11e80309e3e00abd5f1e749eefb25a8d29486975178298136965989890b6672"
+    },
+    "PC1_LIVENESS_1280": {
+      "expected": ">=15/20 captures yield AX trees 600-2000 nodes DOM bytes>=2000 locatable>=5 and URL/title/action_target logs; Docker am1n3e/webarena-verified-shopping@sha256:3e8cb9b945 at http://localhost:7770 reachable within 3 retries",
+      "observed": "FAIL: 0/20 captures valid (all UNAVAILABLE_SUBSTRATE, node_count 0, dom_bytes 0). Docker not reachable after 3 retries (URLError [Errno 111] Connection refused). Playwright not installed in this env, BrowserGym-core not available, but CDP Accessibility.getFullAXTree not exercised due to Docker failure. Viewport 1280x720 frozen but not validated live.",
+      "pass_fail": "FAIL",
+      "evidence": "research/experiments/EXP-INTEL-35881414325/artifacts/raw/ax_captures.jsonl:65c3381c0ebb5e8cc10a99e1f4b590ac219d7faafac46acb8826113d301fc604, research/experiments/EXP-INTEL-35881414325/artifacts/raw/provenance.json:648b4efd1a3a5cf365392d8e9de54e627dc6a323e1f475198eab88718e13893b"
+    },
+    "PC2_AX_PRIOR_PRODUCT": {
+      "expected": ">=1 of 10 families discriminates vs degenerate homepage tautology 1.0 with variance>0 on product pages proving not degenerate",
+      "observed": "Not testable: 0 valid captures, no per-family scores. Variance check null (not 0). Degenerate homepage tautology 1.0 [1,1] p=1.0 from prior experiment not reproduced here (no scores). Full-tree grammar with product-specific subtree (heading/price/add-to-cart/main) implemented code hash 8d4b but not exercised on live product pages.",
+      "pass_fail": "MEASUREMENT_INVALID",
+      "evidence": "research/experiments/EXP-INTEL-35881414325/artifacts/derived/ax_consistency_fulltree.json:d11e80309e3e00abd5f1e749eefb25a8d29486975178298136965989890b6672"
+    },
+    "PC3_STAGEHAND_HIT_RECOMPUTED_DYNAMIC": {
+      "expected": "On stable family with 3 consecutive identical relevant-subtree SHA256 recomputed after page.content()+AX with dynamic-token stripping + normalized selector, cache HIT on 2nd/3rd with per-project isolation (cross-project MISS 0%)",
+      "observed": "Not executed: Docker unreachable, 0 families attempted (required >=30). Recomputed SHA256 after mutation via page.content()+AX with dynamic-token stripping (9 regexes) frozen but not exercised. Per-project isolation logic frozen (key includes project_id) verified via prior experiment's 5 tests 0% leakage, but not re-measured here.",
+      "pass_fail": "MEASUREMENT_INVALID",
+      "evidence": "research/experiments/EXP-INTEL-35881414325/artifacts/derived/stagehand_replication_recomputed.json:ccd1f0aecb4e6a4fbe23035bc100a7da940df5e65b9e03582becabacfbe8bb00, research/experiments/EXP-INTEL-35881414325/artifacts/raw/provenance.json:648b4efd1a3a5cf365392d8e9de54e627dc6a323e1f475198eab88718e13893b"
+    },
+    "PC4_WEBGYM_IMPORT_VALID": {
+      "expected": "WebGym 300k corpus import succeeds, parses >=50 diverse eTLD+1 hosts, manifest sha256 present, dedup sweep 0.818-0.9479 computable",
+      "observed": "FAIL: WebGym not importable (No module named 'webgym'). 0 diverse sites parsed, manifest sha256 null, dedup sweep not computable. Prior WebGym v1.0.6 LIMITED 50 non-standard hosts from overlap noted but not verified as diverse eTLD+1 distinct from hardcoded 0.9479.",
+      "pass_fail": "FAIL",
+      "evidence": "research/experiments/EXP-INTEL-35881414325/artifacts/derived/webgym_census.json:d04f023ef1dc73d5706d9227591dbfae122465313a1585a44dadd1d9d4860137"
+    },
+    "PC5_SYNTHETIC_PIPELINE": {
+      "expected": "Synthetic gate_passing NL180 H1.39 and Stagehand 0.5 retained as pipeline validation only (is_synthetic true), not decision",
+      "observed": "Not executed as separate synthetic pipeline; measurement script validated via dry-run of sampling logic (10 families sampled deterministically seed 35725763380, 36 families listed). is_synthetic false for live branch, true for diagnostic only.",
+      "pass_fail": "NOT_MEASURED",
+      "evidence": "research/experiments/EXP-INTEL-35881414325/artifacts/derived/provenance.json:75fb17a3beeb201f8faf322ef20f876334d9ff848c25341f98ff910c7d579820"
+    },
+    "NC1_AX_SHUFFLE_TRAJECTORY_GROUPED": {
+      "expected": "Permute per-family full-tree scores 1000 perms seed 35725763380 recomputing mean; require p<0.05 and mean+0.20 gap; std 0 => FAIL",
+      "observed": "Not computed: 0 valid scores, trajectory-grouped permutation not executable. Required 1000 perms seed 35725763380 frozen but not run. No degenerate p=1.0 produced (null vs 1.0).",
+      "pass_fail": "MEASUREMENT_INVALID",
+      "evidence": "research/experiments/EXP-INTEL-35881414325/artifacts/derived/ax_consistency_fulltree.json:d11e80309e3e00abd5f1e749eefb25a8d29486975178298136965989890b6672"
+    },
+    "NC2_RANDOM_PATTERN": {
+      "expected": "Random full-tree pattern assignment (sample selector from different family) expected <0.2",
+      "observed": "Not computed: no patterns to randomize due to 0 valid captures.",
+      "pass_fail": "MEASUREMENT_INVALID",
+      "evidence": "research/experiments/EXP-INTEL-35881414325/artifacts/derived/ax_consistency_fulltree.json:d11e80309e3e00abd5f1e749eefb25a8d29486975178298136965989890b6672"
+    },
+    "NC3_DOM_DRIFT_RECOMPUTED_DYNAMIC": {
+      "expected": "Inject single-attribute mutation via page.evaluate on >=20 families and recompute SHA256 AFTER via page.content()+AX with dynamic-token stripping (strip CSRF/session/timestamp); expect MISS, false_accept<5% MISS>=0.8; verify mutated hash != original per family (artifact before_hash vs after_hash)",
+      "observed": "Not executed: Docker unreachable, 0 families drift-tested. Recompute-after-mutation with stripping logic frozen (page.evaluate mutation + page.content() + Accessibility.getFullAXTree recompute + 9 regexes strip) verified by code audit hash 8d4b, but no live before_hash/after_hash artifact.",
+      "pass_fail": "MEASUREMENT_INVALID",
+      "evidence": "research/experiments/EXP-INTEL-35881414325/artifacts/derived/stagehand_replication_recomputed.json:ccd1f0aecb4e6a4fbe23035bc100a7da940df5e65b9e03582becabacfbe8bb00"
+    },
+    "NC4_RANDOM_CACHE_ROLE_SUBSET": {
+      "expected": "Shuffle HIT/MISS labels 1000 perms (random-role-subset null) expected ~50% speedup ~1.0; true Stagehand must beat p<0.05",
+      "observed": "Not computed: no HIT/MISS labels to shuffle (0 families). 1000 perms seed 35725763380 frozen but not run.",
+      "pass_fail": "MEASUREMENT_INVALID",
+      "evidence": "research/experiments/EXP-INTEL-35881414325/artifacts/derived/stagehand_replication_recomputed.json:ccd1f0aecb4e6a4fbe23035bc100a7da940df5e65b9e03582becabacfbe8bb00"
+    },
+    "NC5_CROSS_PROJECT_LEAKAGE": {
+      "expected": "Same selector+hash different project namespace must MISS 0% HIT",
+      "observed": "Not re-measured: logic frozen (key = (project_id, selector, dom_hash_stripped)) enforced per prior 5 tests 0% leakage (EXP-INTEL-35860344410 NC5 PASS). Not re-executed due to 0 families.",
+      "pass_fail": "NOT_MEASURED",
+      "evidence": "research/experiments/EXP-INTEL-35881414325/artifacts/derived/stagehand_replication_recomputed.json:ccd1f0aecb4e6a4fbe23035bc100a7da940df5e65b9e03582becabacfbe8bb00"
+    },
+    "NC6_WEBGYM_SHUFFLE": {
+      "expected": "Shuffle site labels 1000 perms trajectory-grouped for duplication; true duplication must exceed shuffled p<0.05 and threshold sensitivity >0.05",
+      "observed": "Not computed: WebGym corpus unavailable, no site labels to shuffle.",
+      "pass_fail": "MEASUREMENT_INVALID",
+      "evidence": "research/experiments/EXP-INTEL-35881414325/artifacts/derived/webgym_census.json:d04f023ef1dc73d5706d9227591dbfae122465313a1585a44dadd1d9d4860137"
+    }
+  },
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-INTEL-35881414325/artifacts/raw/ax_captures.jsonl",
+      "sha256": "65c3381c0ebb5e8cc10a99e1f4b590ac219d7faafac46acb8826113d301fc604",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-35881414325/artifacts/raw/ax_captures.json",
+      "sha256": "887d39e3cf8fe299d9a9fc0ddcf07df480d5e126b3c74ab2625620f0e9f46e0b",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-35881414325/artifacts/raw/provenance.json",
+      "sha256": "648b4efd1a3a5cf365392d8e9de54e627dc6a323e1f475198eab88718e13893b",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-35881414325/artifacts/derived/ax_consistency_fulltree.json",
+      "sha256": "d11e80309e3e00abd5f1e749eefb25a8d29486975178298136965989890b6672",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-35881414325/artifacts/derived/stagehand_replication_recomputed.json",
+      "sha256": "ccd1f0aecb4e6a4fbe23035bc100a7da940df5e65b9e03582becabacfbe8bb00",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-35881414325/artifacts/derived/webgym_census.json",
+      "sha256": "d04f023ef1dc73d5706d9227591dbfae122465313a1585a44dadd1d9d4860137",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-35881414325/artifacts/derived/gate0_relaxed_table.json",
+      "sha256": "f2d42749b05734ad2b46dd298a60035d77a143129d04a2bcf3e0143a8e4051f2",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-35881414325/artifacts/derived/provenance.json",
+      "sha256": "75fb17a3beeb201f8faf322ef20f876334d9ff848c25341f98ff910c7d579820",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-35881414325/provenance.json",
+      "sha256": "75fb17a3beeb201f8faf322ef20f876334d9ff848c25341f98ff910c7d579820",
+      "role": "derived"
+    },
+    {
+      "path": "research/intel/exp_35881414325_measure.py",
+      "sha256": "5b3286d5bc924695a7fbba561362a84682cb85362d4c4f71bdfbf0e007cdca7e",
+      "role": "code"
+    }
+  ],
+  "observations": [
+    "RAW EVIDENCE: Docker am1n3e/webarena-verified-shopping@sha256:3e8cb9b945 not reachable after 3 retries at http://localhost:7770 (URLError [Errno 111] Connection refused, each retry 5s timeout). Playwright not installed (No module named 'playwright'), BrowserGym-core not available, tiktoken not available in this env (prior env had playwright 1.63.0, browsergym-core 0.14.3, tiktoken 0.14.0). WebGym not importable (No module named 'webgym'). Provenance docker_reachable false retry 3, viewport 1280x720 not validated live.",
+    "RAW EVIDENCE: 20 AX capture attempts (10 families [191,180,162,197,153,213,163,137,136,222] x2 tasks via get_task_start_url __SHOPPING__/path expansion still verified) all returned UNAVAILABLE_SUBSTRATE with node_count 0 dom_bytes 0, placeholder __SHOPPING__/path -> http://localhost:7770/path expansion verified per artifact, but no CDP Accessibility.getFullAXTree trees obtained (0 in 600-2000 valid range). Full-tree semantic/multi-anchor grammar code hash 8d4b7cb8b543c10912f5d4325ccee0e5ae839f64c534a354f5ac8e7b1a364a45 verified no [:20] truncation, dynamic-token stripping 9 regexes frozen before capture, relevant-subtree SHA recompute-after-mutation logic audited but not exercised.",
+    "RAW EVIDENCE: valid_captures 0/20, product_captures 0 (product_families 0) vs required >=10 valid AX trees (>=5 families) for H1 adequacy gate. Sampling deterministically used frozen seed 35725763380: 36 families >=3 sorted, sampled 10 without replacement includes path families 136 and 222 (2 path families) demonstrating sampling not root cause. WebArena-Verified v2 census preserved 192 shopping tasks 49 templates duplication 0.9479 pin d65275660814663375028e9017e1f929e3c38321041b125795e2713b52243d30.",
+    "DERIVED MEASUREMENT: H1_AX_FULLTREE cannot be computed: mean null, CI [null,null], shuffle p null, delta_vs_truncated null, variance null (not degenerate [1,1] nor 0.0). Infrastructure precedence triggers MEASUREMENT_INVALID substrate_unavailable, not falsification. Adequacy gate fails.",
+    "RAW EVIDENCE: Stagehand recomputed+stripping replication not executed: 0/36 families attempted (required >=30 HIT, >=20 drift, >=5 cross-project). No live page.content() recomputation, no before_hash/after_hash artifact, no selector derivation on live AX trees (prior 20/20 feasibility at 1426 nodes not re-measured). Per-project isolation logic frozen but not validated live; no synthetic fam_task fallback (0).",
+    "RAW EVIDENCE: WebGym 300k diverse holdout import attempted (ImportError No module named 'webgym' after pip freeze shows no webgym package): site_count 0, status UNAVAILABLE, dup_prevalence null, CI null, threshold sweep 0.818-0.9479 range null, manifest sha256 null. Prior WebArena-Verified v2 census 192 shopping tasks 49 templates 36 families duplication 0.9479 CI[0.9167,0.9792] param 0.8958 preserved as reference pin d65275660814663375028e9017e1f929e3c38321041b125795e2713b52243d30.",
+    "RAW EVIDENCE: Gate0 multi-step trajectories not collected: 0 transitions vs >=50 required per family on 10 families. BrowserGym-core not available and Docker unreachable prevented Playwright fallback rollout; single-page descriptive fallback would be 0 families. Relaxed H>0.1 NL>=20 titles>=1 singleton<50% 0/10, strict H>0.2 NL>=50 0/10. Insufficient density -> MEASUREMENT_INVALID branch, not physics closure.",
+    "DERIVED MEASUREMENT: H2_STAGEHAND_RECOMPUTED_DYNAMIC MEASUREMENT_INVALID (0/30 < required). H3_WEBGYM_DIVERSE MEASUREMENT_INVALID (0/50 sites). H4_GATE0_RELAXED MEASUREMENT_INVALID (0/5 families 50 transitions). Overall outcome NOT_APPLICABLE per frozen infrastructure precedence (H1 <5 families). No CAP 567MB LFS or 420-task exhaustive enumeration attempted per Director SUPERSEDE ABANDONED.",
+    "VALIDITY: Frozen seed 35725763380 used for 10-family sampling, task selection within family (2 distinct via per-family RNG SEED+fam_id), bootstrap/shuffle seeds not exercised due to no scores; trajectory-grouped bootstrap/permutation protocol frozen but not executed. No post-hoc seed change. All artifact paths sha256 hashed.",
+    "VALIDITY: No LLM inference used for AX/Gate0/WebGym per cost estimate; tokens via tiktoken not exercised due to no live captures."
+  ],
+  "validity_notes": [
+    "Infrastructure failure is NOT scientific falsification: valid_captures 0/20 with Docker Connection refused after 3 retries (URLError [Errno 111]) is substrate_unavailable per falsifier infrastructure precedence clause. No scientific claim about within-store AX generalization can be made from this run. Previous experiment EXP-INTEL-35860344410 achieved 20/20 valid captures on same image at 1280x720, proving substrate can be live with proper Docker pull / startup; failure here is transient env (no Docker daemon bound to 7770, playwright/browsergym not installed), not evidence of impossibility.",
+    "Full-tree vs truncation delta not measurable: full-tree grammar verified without [:20] truncation (code audit 8d4b, no selectors[:20] placeholder) and dynamic-token stripping 9 regexes frozen, but no live pages to compute delta_vs_truncated >=0.20 vs prior degenerate 0.0. This run does not produce delta 0.0 degenerate; it produces null (unmeasured).",
+    "Degenerate CI[1,1] p=1.0 not reproduced: prior degenerate was due to binary 8x1.0 homepage vs 2x0.0 product with heap. This run avoids degenerate by returning null rather than binary. Trajectory-grouped 2000 bootstrap and 1000 shuffle not executed due to no scores, preventing tautological p=1.0.",
+    "Stagehand HIT 0.0 previously due to full-DOM SHA instability (dynamic CSRF/session/timestamp producing 9fb422deea4d vs a5a64375c876 on reload). Recomputed relevant-subtree normalized outerHTML + stripping was frozen fix (page.content()+AX after page.evaluate mutation) but not tested here due to 0 valid captures. Cannot claim Stagehand falsified; remaining gap is isolated to product page live replication on >=30 families.",
+    "WebGym 300k branch unmeasured: No manifest, no threshold sweep 0.818-0.9479. Previous LIMITED 50 non-standard hosts from overlap noted as not diverse eTLD+1; same caveat applies. Diversity>depth hypothesis untested, not falsified.",
+    "Gate0 insufficiency is MEASUREMENT_INVALID insufficient density (0 transitions vs 50/family), not physics closure of H>0.1 condition. Single-page CDP alone acknowledged insufficient per prereg; multi-step required. BrowserGym-core not available in this env but Docker is root cause; prior env had BrowserGym-core 0.14.3 installed proving import not bottleneck when Docker live.",
+    "Sampling integrity: 10 families deterministic from 36 via seed 35725763380 without replacement includes path families 136 and 222 (2/10). If Docker were reachable, expansion to shopping_admin 184-task/42-family not yet needed but could be attempted if product scarcity persisted; per spec expand if <5 product-page families achievable with 36.",
+    "Representation loss disclosed: full-tree vs longest-prefix only, initial viewport no scroll for AX plus multi-step for Gate0, CDP AX vs full DOM, relevant-subtree outerHTML choice normalized with dynamic stripping, N=2 HIT threshold, per-task token overhead. Not exercised but bounded.",
+    "CAP/LFS exhaustive enumeration ABANDONED per Director SUPERSEDE not attempted; 0/10 strict Gate0 remains MEASUREMENT_INVALID not global falsification per prereg 12.",
+    "Environment degradation vs prior: this env has playwright not installed and browsergym-core not available vs prior env had playwright 1.63.0 and browsergym-core 0.14.3 installed but Docker still unreachable. Failure mode identical (Connection refused) so infrastructure precedence still applies regardless of python package availability; repair requires docker pull + run -p 7770:7770 + pip install playwright browsergym-core."
+  ],
+  "unresolved": [
+    "H1 full-tree semantic/multi-anchor AX_consistency mean>=0.6 CI lower>0.5 p<0.05 delta>=0.20 vs truncated variance>0 on shopping product pages at 1280x720 with dynamic-token stripping remains unknown; requires Docker substrate live and 20 captures (10 families x2 product/category pages via get_task_start_url __SHOPPING__/path expansion) with 600-2000 nodes each and product-subtree distinct hashes on path families 136,145,196,222.",
+    "H2 Stagehand relevant-subtree normalized SHA256 + stripping HIT>=0.8 MISS>=0.8 false_accept<0.05 beats NC4 vs random-role-subset with real-path latency/tokens ~2x/~30% derived selectors only remains unknown; requires >=30/36 families with recomputed SHA after page.evaluate mutation + stripping, drift injection >=20 families, cross-project >=5.",
+    "H3 WebGym 300k manifest 50 diverse eTLD+1 sites duplication prevalence 2000 bootstrap 95% CI distinct from 0.9479 CI[0.9167,0.9792] and threshold sweep range >=0.05 remains unknown; requires WebGym corpus import (2 attempts) and dedup sweep 0.818-0.9479.",
+    "H4 relaxed Gate0 census H>0.1 NL>=20 titles>=1 singleton<50% via 50 transitions/family on >=10 families (WebArena shopping_admin, Reddit, GitLab, Wikipedia, VisualWebArena, WorkArena) at 1280x720 remains unknown; requires BrowserGym 0.14.3 or Playwright fallback multi-step rollout.",
+    "Shopping_admin 184-task/42-family expansion whether it yields >=5 product-page families with variance>0 not tested due to Docker failure; remains open.",
+    "Product-subtree semantic anchoring failure mode (subtree_node_count=1 prior) whether heading-to-product boundary distinct enough on Magento template not tested live; code hash 8d4b persisted but subtree isolation on path families not validated.",
+    "Whether alternative representations (slot syntax, hierarchical/WebAPI retrieval, AX semantic similarity vs token longest-prefix) could yield discriminating transfer where longest-prefix failed remains bounded excluded, not closed."
+  ]
+}

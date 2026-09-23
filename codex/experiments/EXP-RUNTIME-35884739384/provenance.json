@@ -1,0 +1,110 @@
+{
+  "experiment_id": "EXP-RUNTIME-35884739384",
+  "github_run_id": 35884739384,
+  "base_sha": "a45b606eb738c082cf64e34e5b462e02ee25ffd1",
+  "git_sha": "4600b5d9f469f3e00c5a2a9b7eb960e9a4b4d817",
+  "env": {
+    "python": "3.12.14 (main, Aug 13 2026, 02:47:42) [GCC 13.3.0]",
+    "flask": "3.1.3",
+    "pyjwt": "2.14.0",
+    "gunicorn": "23.0.0",
+    "werkzeug": "3.1.8",
+    "nginx": "1.24.0",
+    "playwright": "1.63.0",
+    "agentlab": "0.4.2",
+    "requests": "2.34.2",
+    "sqlite3": "3.45.1"
+  },
+  "ports": {
+    "gunicorn_a": 19860,
+    "gunicorn_b": 19861,
+    "nginx": 19851
+  },
+  "seed": 44,
+  "jitter_ms": [
+    50,
+    150
+  ],
+  "excluded_headers": [
+    "Age",
+    "CF-Cache-Status",
+    "CF-RAY",
+    "Date",
+    "Server",
+    "X-Cache",
+    "X-Request-Id"
+  ],
+  "filter_out_keys": [
+    "age",
+    "cf-cache-status",
+    "cf-ray",
+    "date",
+    "server",
+    "x-cache",
+    "x-request-id",
+    "x-worker-pid"
+  ],
+  "body_states": {
+    "A": {
+      "len": 31,
+      "sha256": "d0ca833f843c6d70ec9d6755f52a92dcbfc8b4ab601b871bced09ad027172e34"
+    },
+    "A1": {
+      "len": 32,
+      "sha256": "72f28c5c2b8fe28314392298accd9a9e44747e45b4ad497d63839332cef24f26"
+    },
+    "A2": {
+      "len": 33,
+      "sha256": "2667bef51a10d006c22eb01972648a7c989bf7b4f786e4551be7b186c0f5e72b"
+    },
+    "A3": {
+      "len": 35,
+      "sha256": "d79643f246bd4a4ff18dab702de41940d11d2f72863424143ba8a121c396decf"
+    },
+    "B": {
+      "len": 70,
+      "sha256": "67c186f2cee1ccf01f55c80235eb9b1b1d14b073223a807b9ce944405e67999c"
+    },
+    "C": {
+      "len": 117,
+      "sha256": "b46c461cceeefa595c3ac0d706689ed382340b59c20a269a930c786c8389dd32"
+    }
+  },
+  "header_states": [
+    "BASE",
+    "E",
+    "CC_small",
+    "CC_large",
+    "ETag_small",
+    "ETag_large",
+    "SC_small",
+    "SC_large",
+    "Vary_small"
+  ],
+  "hs256_secret_sha256": "6acd252368299ba5c45ed33a5d22b08e6dc2a8e534d0d94d2f1d524eea4a2874",
+  "db_paths": {
+    "shared": "/tmp/spider-runtime-35860330078/shared.db",
+    "per_node_a": "/tmp/spider-pernode-19860.db",
+    "per_node_b": "/tmp/spider-pernode-19861.db",
+    "sticky_a": "/tmp/spider-sticky-19860.db",
+    "sticky_b": "/tmp/spider-sticky-19861.db"
+  },
+  "run_experiment_sha256": "89d174104a2b79227e13d186f63b1b4f0eee9622603da11df24ace50b7defea7",
+  "frozen_hashes": {
+    "request.json": "7dd9e95fd74131c5fdd6f25dfe29619d41e256e22a1bc497c7c74d984bef2ae8",
+    "spec.json": "fd1530e456fef0bc4c36b058e0794da2c7abe612d5c2c23444707fcacb0a0f59",
+    "prereg.md": "f40d772d04c4101d48a6bd1f43baeefb0d368c33bffe3329d8e63af9b60dbe31",
+    "freeze.json": "0ce8a5936950a5d730d93aabae857fcff95f90ae7133536e04ab122c8aa96896"
+  },
+  "artifacts": {
+    "/home/runner/work/Spider/Spider/research/experiments/EXP-RUNTIME-35884739384/raw_freshness_shared.jsonl": "126784977c11ac90a805473465adb01143d10c55ba5e89d0aa04455b006356c7",
+    "/home/runner/work/Spider/Spider/research/experiments/EXP-RUNTIME-35884739384/batch_state_log_shared.jsonl": "81692043bb185526855c35f21fad24cc51b572345b6f8e933ef4dad7134cb5b0",
+    "/home/runner/work/Spider/Spider/research/experiments/EXP-RUNTIME-35884739384/raw_freshness_per_node.jsonl": "2b5904fb710f05372a1f8276a575986e1505d333bcb2712ac9ba7942a66145c7",
+    "/home/runner/work/Spider/Spider/research/experiments/EXP-RUNTIME-35884739384/batch_state_log_per_node.jsonl": "ace6d5dadea6a3a68f1124f647a14bba175ff8f64620276264f37e63553a777c",
+    "/home/runner/work/Spider/Spider/research/experiments/EXP-RUNTIME-35884739384/raw_freshness_sticky.jsonl": "437cc1840f8deadf9bfe66f049f737827df55c9972c726b391b53eebfd3fe302",
+    "/home/runner/work/Spider/Spider/research/experiments/EXP-RUNTIME-35884739384/batch_state_log_sticky.jsonl": "bbe79491844b452c0becdb87eb24de1b9cb9dab6312c19ea577ee5069cb8ef9f",
+    "/home/runner/work/Spider/Spider/research/experiments/EXP-RUNTIME-35884739384/raw_observations.jsonl": "7177ba1242f7061c48661446ccbc731f42d657c3e2ada38441a23e672ce0203c",
+    "/home/runner/work/Spider/Spider/research/experiments/EXP-RUNTIME-35884739384/ax_dom_pages.jsonl": "7eefd0a66c857ed6961b9c287cbe1f031aae9113b43a23b1f6592b8858f6cc39"
+  },
+  "created_at": "2026-09-23T18:02:17.564826+00:00"
+}
