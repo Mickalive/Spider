@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-35921344930",
+  "lane": "product",
+  "decision": "MEASUREMENT_INVALID",
+  "claim_updates": [
+    {
+      "claim_id": "C-PRODUCT-ECON",
+      "status": "HYPOTHESIS",
+      "reason": "No discriminating measurement performed: distributed HS256 shared-WAL substrate (/tmp/spider-runtime-35860330078/shared.db WAL per-batch SELECT), Docker BrowserGym 0.14.3 2000-node 1280x720 full-DOM, and gpt-4o-mini token/browser+latency (rho_proxy_real) are all absent per 18 raw observations (substrate_audit.json OBS-1..OBS-18 sha 277a7502). Per frozen spec measurement_validity[3][5], prereg sections 4/7, and decision_rule precedence, this is MEASUREMENT_INVALID not FALSIFIED. All primary metrics remain explicit null (per_hit ratios, rho_proxy_real, M_total_f10, success_n0, UNKNOWN_precision, ECE) not zero; audit PASS (V1) independently recomputed absence and confirms producer correctly left metrics null and honored prohibition on file-proxy fallback. Bounded ceiling remains parent EXP-PRODUCT-35916130502 (StagehandTTL per_hit 1.045 CI[1.034,1.056]>0.85 at n0 fails gate, rho 0.472<0.60) on file-proxy 192/36 orthogonal alias families; no evidence for/against distributed correlated freshness added. Product discipline: UNKNOWN remains valid, no promotion without rho_proxy_real>=0.50 and distributed TN>=0.85."
+    },
+    {
+      "claim_id": "C-RESIDUAL-NOVELTY",
+      "status": "HYPOTHESIS",
+      "reason": "Residual-novelty tracking unmeasured: rho_novelty_per_hit_STAGEHANDTTL and WEBMCP null because honest sum counters require shared WAL per-batch SELECT andBrowserGym full-DOM; numpy/scipy/sklearn absent prevents family-stratified bootstrap 5000/block-permutation 5000. Controls NC1-NC4 correctly status unknown (|rho_shuffled|, |rho_length| unmeasurable). Audit V8 confirms environment incapable of expressing effect (M_per_hit=(M_total - retrieval/tool_lookup - distill/compile - auditor)/L undefined). Remains HYPOTHESIS pending distributed correlated substrate; parent bounded REJECTED (rho 0.472<0.60, |rho_length| 0.306>0.20) stays file-proxy only."
+    },
+    {
+      "claim_id": "C-FRESHNESS",
+      "status": "HYPOTHESIS",
+      "reason": "Correlated TTL/ETag freshness gating unmeasured: fresh_at_n0_rate (~1.0 via HEAD If-None-Match ETag W/body_sha) and stale_at_n0.25_rate (~50% stale 304) null; required correlated probe saving>=30% accuracy>=0.90 falseAccept<0.05 vs seeded-42 random 0.53 decoupled null not executed (NC3 unknown). Distributed WAL TN>=0.85 vs per-node 0.667 contrast not computable. PC2 kernel dot-regex fix is the only outcome that succeeded (sha d926279d 5/5 tests), but does not satisfy freshness gate. Remains HYPOTHESIS pending real conditional probe on nginx 1.24.0 + gunicorn 23.0.0 shared secret HS256 PyJWT 2.14.0."
+    }
+  ],
+  "product_action": "none",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "On distributed HS256 shared-WAL substrate with Docker BrowserGym 0.14.3 2000-node 1280x720 full-DOM real gpt-4o-mini 15-step tokens/browser+latency (rho_proxy_real>=0.50, |rho_shuffled|<0.20 per-stratum |rho_length|<0.20) and correlated TTL/ETag freshness (fresh at n0~1.0 via conditional probe ETag W/body_sha ~50% stale at n0.25 vs seeded-42 0.53 random), does any low-overhead Stagehand TTL gating or WebMCP Registry 714/2147 O(1) compilation (amortized compile 800/f) achieve honest per_hit=(M_total_f10 - retrieval - distill_or_compile_amort - auditor_amort)/L <=0.85 vs RAG-EMBED at n0/n0.25 and Pareto total-cost dominance M_total_f10 (tokens vs browser+latency vs accuracy) with verification-derived calibration (UNKNOWN precision>=0.85 ECE<=0.15 bootstrap upper<=0.18), or should per_hit be formally superseded by M_total_f10 Pareto as PRODUCT_CORE viability gate before any promotion, reporting family-stratified bootstrap 5000 and block-permutation 5000 vs gpt-4o-mini+Playwright Docker replication?",
+  "reason": "Frozen PRIMARY DEPENDENCY gate unsatisfied: 18 independent raw observations confirm distributed HS256 shared-WAL (shared.db absent anywhere, PyJWT absent, gunicorn absent, nginx binary-only), Docker BrowserGym 0.14.3 CDP AX 2000-node 1280x720 absent (0 browsergym images, browsergym/playwright absent), gpt-4o-mini key absent, numpy/scipy/sklearn/pandas absent so bootstrap 5000/block-permutation 5000 uncomputable (result.json diagnostics docker true image false, shared_db false, pyjwt false, gunicorn false, nginx binary-only, numpy false, gpt key false). Per frozen spec decision_rule and prereg 7 precedence 'if distributed substrate or rho_proxy_real unavailable -> MEASUREMENT_INVALID not FALSIFIED' and frozen prohibition on file-proxy fallback for economics, EXECUTE correctly performed no outcome-bearing economics measurement (all primary metrics explicit null not zero, validity_notes[0][1]). PC2 instrument prep alone succeeded (kernel _PARAMETER dot-regex r'\\$\\{[A-Za-z_][A-Za-z0-9_\\.]*\\}' sha d926279d5ee14a044a2f13b8abc09202df9f5adb9e86feaadeb61818a15f4038 5/5 tests, audit V3 verified) but does not satisfy substrate gate; all outcome-bearing controls correctly unknown (audit V6 low severity labeling risk only). Audit status PASS, producer_claim_supported false, recomputed_metrics primary all null confirms no fabrication and no bijective n*3200 artifact (audit V4). Claim ceiling remains parent bounded falsification on file-proxy only (audit claim_ceiling: Stagehand 1.045>0.85 rho 0.472<0.60 WebMCP 1.032>0.85 Pareto 897 vs 3703 hidden by per_hit excluding retrieval/tool_lookup). No C-PRODUCT-ECON/C-RESIDUAL-NOVELTY/C-FRESHNESS status change justified; economics vs Pareto supersession remains OPEN pending runtime hardening.",
+  "evidence_refs": [
+    "research/experiments/EXP-PRODUCT-35921344930/request.json sha c3bfbb9a1553298b83b83b8cde4adb7a6b768f9c7ad1301b8c6e883f61614caf",
+    "research/experiments/EXP-PRODUCT-35921344930/spec.json sha 119615e7cdd153a8e9843a5016d36db97da6ba9f5f361ebd2024a6f792c397e7",
+    "research/experiments/EXP-PRODUCT-35921344930/prereg.md sha 90d40e336c2493fdc16ea037ca5c835255bb699a6d83a1eb1289fcc8a6c82fd0",
+    "research/experiments/EXP-PRODUCT-35921344930/freeze.json sha 45822152ffea8401a929077a19240df04a4383695474e86013eb7cfc309ac588",
+    "research/experiments/EXP-PRODUCT-35921344930/result.json sha f4bdd296ae141e3bde21bc996706e7182a65daf2dfa9f2d2808c92ad2b93c5ea status MEASUREMENT_INVALID outcome INCONCLUSIVE metrics.primary all null controls PC2 pass others unknown",
+    "research/experiments/EXP-PRODUCT-35921344930/artifacts/substrate_audit.json sha 277a7502a49cdd56362fa0ca8f5290412759cec9ddb2ae8fa9af8969d069b5c0 OBS-1..OBS-18",
+    "research/experiments/EXP-PRODUCT-35921344930/report.md sha 9a53c0b1db442dfe32b55815824baf059d21554354b2107adb8901b18dc69f22",
+    "research/experiments/EXP-PRODUCT-35921344930/provenance.json sha 9a5b53d4489a68276afb64f0145f9274934b39a0388f52b2286291fa8e7be73f head 87ff4234 kernel dot-fix 1 insertion 5/5 unittest",
+    "research/experiments/EXP-PRODUCT-35921344930/audit.json status PASS producer_claim_supported false required_fixes 5 validity_findings V1-V8 baseline_findings all not_evaluable recomputed_metrics primary null frozen_hashes_verified",
+    "src/spider/kernel.py sha d926279d5ee14a044a2f13b8abc09202df9f5adb9e86feaadeb61818a15f4038",
+    "tests/test_kernel.py sha 5eadf14ebdbcd2ec9f8d875bb357033275b37bacefda4f51b4d9a4584562575d 5/5 pass PYTHONPATH=src",
+    "research/experiments/EXP-PRODUCT-35916130502/result.json parent FALSIFIES per_hit ratio_stagehand_rag_n0 1.0449 CI[1.034,1.056] rho 0.472",
+    "research/experiments/EXP-PRODUCT-35916130502/audit.json status PASS claim_ceiling bounded to 192/36 file-proxy f=10 QCR TAU0.30 seeded-42 ~50% stale",
+    "research/experiments/EXP-PRODUCT-35916130502/handoff.json sha cd2babdb9e6389c528059b761c22954ac78acf6494fe8d3d3f19a3a6d44e693f established orth Jaccard 0.0 kernel d926279d Pareto 897 vs 3703",
+    "research/claims/registry.json sha 3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b C-PRODUCT-ECON HYPOTHESIS C-RESIDUAL-NOVELTY HYPOTHESIS C-FRESHNESS HYPOTHESIS",
+    "codex/index.json no PRODUCT_CORE promotion 301 experiments zero promoted C-PRODUCT-ECON remains HYPOTHESIS"
+  ]
+}

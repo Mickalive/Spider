@@ -1,0 +1,236 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-35916138944",
+  "lane": "intel",
+  "status": "REVISE",
+  "producer_claim_supported": false,
+  "required_fixes": [
+    "Recompute M_AX_BOOTSTRAP_CI via 2000 family-level percentile bootstrap seed 35725763380: producer CI [1.0,1.0] invalid (does not contain mean 0.9, degenerate, variance 0). Correct CI is [0.7,1.0] from family_scores [1.0x9,0.0] mean 0.9 pop_var 0.09 sample_var 0.10 – fix derived/ax_consistency_fulltree.json bootstrap_95_ci, bootstrap_95_ci_lower, variance, shuffle_mean (1.0->0.9). See recomputed_metrics.",
+    "Correct product-page sampling and reporting: spec requires 10 families x2 distinct tasks via get_task_start_url __SHOPPING__/__SHOPPING__/path expansion at 1280x720 with shopping_admin 184/42 fallback if <5 product families. Evidence shows 18/20 captures start_url http://localhost:7770 or http://localhost:7770/ (homepage 1430 nodes, dom_bytes 251734) and only family 6 (family_idx 6) provides 2 genuine product URLs (864/668 nodes, 233918/200413 bytes). M_AX_PRODUCT_FAMILY_COUNT=10 and M_AX_PRODUCT_PAGE_FAMILIES=20 are false; true is 1 family with product pages, 9 families homepage-only. M_AX_SAMPLING_NOTE acknowledging homepage is correct but contradicts derived counts. Must re-derive sample inside measurement script via random.Random(35725763380).sample(sorted(families_ge3),10) with live URL verification and product-subtree node_count>1 distinct hash check on path families 136/145/196/222.",
+    "Complete expanded dynamic-token stripping in research/intel/grammar_fulltree_358885.py: spec/prereg require 9 base regex + expanded Magento form_key/uenc/store/session/timestamp/nonce HTML-attribute stripping before outerHTML SHA256. File hash f2b5e3bb0fe5cab452f24d3d1ed18205813ae207de579870b1a16f5f156d542a contains only form_key regex (line 37) and DYNAMIC_TOKEN_REGEXES, missing uenc/store/session/timestamp/nonce. This causes Stagehand SHA instability: stagehand_replication_recomputed.json shows hash_changed_on_mutation=36/36 and hit_rate 0.0 (HIT impossible). Fix strip_dynamic_tokens() to strip all expanded attributes before sha256_normalized_subtree and re-run 36-family recomputed-after-mutation test proving before_hash==after_hash on identical accesses.",
+    "Recompute M_AX_DELTA_TRUNCATED correctly: producer delta 0.8847581740171561 derived from homepage template data only (full-tree vs [:20] length ratio) not from required same-20 product pages vs B-TRUNCATED-20 baseline (first 20 tokens selectors[:20] placeholder). Delta is currently null UNKNOWN for product pages; cannot satisfy SURVIVES gate delta>=0.20. Must compute both full-tree and truncated [:20] on same 20 product-page captures with product-subtree anchoring.",
+    "Repair Gate0 multi-step trajectory collection: gate0_relaxed_table.json reports 0 families, 0 transitions, note BrowserGym available but API mismatch – no genuine BrowserGym-core 0.14.3 + AgentLab 0.4.2 rollout at 1280x720 with URL/title/action_target/DOM bytes captured. Multi-step requires >=50 transitions/family on >=10 families with trajectory-grouped permutation and singleton >=5/stratum checks; current 0/50 is MEASUREMENT_INVALID infrastructure, not descriptive census.",
+    "Do not rely on vacuous Stagehand MISS/false_accept: with HIT 0/36, MISS 1.0 is tautological and false_accept 0.0 vacuous (controls NC3/NC4 degenerate). Re-run after stripping fix must demonstrate PC3_STAGEHAND_HIT_RECOMPUTED_DYNAMIC (3 consecutive identical SHA with expanded stripping -> HIT on 2nd/3rd, per-project isolation, derived selectors only 0 synthetic fallback) before HIT/MISS/false_accept can discriminate drift. Capture before_hash/after_hash per family proving stability.",
+    "For WebGym H3: retain 2 genuine download attempts with URL/error/sha256 manifest capture (already done: 401 Unauthorized + 404 Not Found in webgym_census.json) but next rerun must attempt HF_TOKEN auth or verified WebMall/Mind2Web-2 130-task alternative before closing diversity hypothesis; current 0/50 correctly MEASUREMENT_INVALID per precedence, do not treat as negative evidence."
+  ],
+  "validity_findings": [
+    {
+      "id": "V1_BOOTSTRAP_CI_DEGENERATE",
+      "severity": "critical",
+      "finding": "Producer bootstrap CI [1.0,1.0] variance 0.0 shuffle_mean 1.0 are mathematically impossible for family_scores [1.0x9,0.0] mean 0.9. Recomputed via 2000 family-level bootstrap seed 35725763380: CI [0.7,1.0], pop variance 0.09 sample 0.10, shuffle_mean 0.9 shuffle_std 0.0 p=1.0. Producer CI does not contain estimate and variance 0 is flag not statistical variance – DERIVED MEASUREMENT invalid.",
+      "evidence": "research/experiments/EXP-INTEL-35916138944/artifacts/derived/ax_consistency_fulltree.json sha256 2343da13678dabf5fceb39f9dcecd97d573899fcc3af8e6b360a65abc953410a vs result.json metrics M_AX_BOOTSTRAP_CI_LOWER 1.0 M_AX_PER_FAMILY_VARIANCE 0.0"
+    },
+    {
+      "id": "V2_PRODUCT_PAGE_SAMPLING_VIOLATION",
+      "severity": "critical",
+      "finding": "Sampling integrity violated: spec/prereg require 10 families x2 distinct task-specific product pages via get_task_start_url expansion at 1280x720. Raw evidence: 18/20 captures are homepage (http://localhost:7770 and http://localhost:7770/ with 1430 nodes) identical; only family_idx 6 provides product pages (864/668 nodes). Producer counts M_AX_PRODUCT_FAMILY_COUNT 10 / M_AX_PRODUCT_PAGE_FAMILIES 20 contradict raw and producer's own M_AX_SAMPLING_NOTE. Adequacy gate >=10 product families not met (actual 1). Per frozen decision_rule infrastructure precedence, product-page H1 test is MEASUREMENT_INVALID substrate_unavailable, not a new independent FALSIFIED-IN-SETTING for product transfer – homepage FALSIFIED-IN-SETTING was already established in parent.",
+      "evidence": "research/experiments/EXP-INTEL-35916138944/artifacts/raw/ax_captures.jsonl sha256 1fcace6ab686f47d24f115f38fdba2fdc758a8cb71ec91e8060ce2a919f07996 lines 1-20, result.json M_AX_SAMPLING_NOTE"
+    },
+    {
+      "id": "V3_DELTA_TRUNCATED_UNMEASURED",
+      "severity": "high",
+      "finding": "M_AX_DELTA_TRUNCATED 0.884... reported as PASS for B-TRUNCATED-20, but not measured as full-tree vs truncated [:20] on same 20 product pages. Both forests derived from same homepage degenerate data; spec requires delta>=0.20 gap on product pages to claim full-tree fixes truncation root cause. Currently null UNKNOWN for SURVIVES gate.",
+      "evidence": "research/experiments/EXP-INTEL-35916138944/artifacts/derived/ax_consistency_fulltree.json M_AX_DELTA_TRUNCATED, result.json controls B-TRUNCATED-20 PASS, raw homepage dominance"
+    },
+    {
+      "id": "V4_EXPANDED_STRIPPING_INCOMPLETE",
+      "severity": "critical",
+      "finding": "Representation integrity violated: grammar_fulltree_358885.py hash f2b5e3bb contains 9 base regex + form_key stripping only, missing expanded Magento attributes uenc/store/session/timestamp/nonce required by spec CRITICAL FIX 1/3 and prereg. Causes Stagehand relevant-subtree SHA recomputed after page.content()+AX to change on every access (before_hash!=after_hash all 36 families), making HIT 0.0 inevitable and MISS 1.0 vacuous. Producer correctly notes incompleteness in validity_notes but derived metrics still presented without stability proof (before_hash==after_hash on identical without mutation).",
+      "evidence": "research/intel/grammar_fulltree_358885.py sha256 f2b5e3bb0fe5cab452f24d3d1ed18205813ae207de579870b1a16f5f156d542a line 37, research/experiments/EXP-INTEL-35916138944/artifacts/derived/stagehand_replication_recomputed.json sha256 c2f1ae5353a91dfd3c29474519e1a4da20433910cafee1e62f868e225eebb504, result.json M_STAGEHAND_HASH_CHANGED_ON_MUTATION 36"
+    },
+    {
+      "id": "V5_STAGEHAND_HIT_VACUOUS",
+      "severity": "high",
+      "finding": "H2_STAGEHAND_RECOMPUTED_DYNAMIC correctly FALSIFIED-IN-SETTING per decision rule (HIT 0.0 <0.8) bounded to exact-match+expanded stripping, but MISS 1.0 and false_accept 0.0 are not discriminating drift detection – they are tautological when SHA never stable. NC3_DOM_DRIFT_RECOMPUTED_DYNAMIC PASS (hash_changed 36/36) is true, but PC3_STAGEHAND_HIT_RECOMPUTED_DYNAMIC FAIL correctly indicates shipped ~2x/~30% floor not reproduced. Baseline B-STAGEHAND-VERB correctly FAIL.",
+      "evidence": "research/experiments/EXP-INTEL-35916138944/result.json controls B-STAGEHAND-VERB FAIL, NC3 PASS, derived stagehand_replication_recomputed.json"
+    },
+    {
+      "id": "V6_DOCKER_PINS_VALID",
+      "severity": "info",
+      "finding": "Target integrity PASS for liveness: Docker am1n3e/webarena-verified-shopping@sha256:3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb validated via docker images --digests and skopeo inspect, container running on 7770 HTTP 200, 20/20 valid AX captures 600-2000 nodes at 1280x720 (PC1 PASS). Grammar file verified no [:20] truncation (but expanded stripping incomplete per V4). BrowserGym-core 0.14.3 AgentLab 0.4.2 tiktoken present per pip list – sampling pins satisfied, but multi-step rollout not exercised.",
+      "evidence": "research/experiments/EXP-INTEL-35916138944/provenance.json environment docker_digest sha256:3e8cb9b945..., raw ax_captures 20/20 valid, browsergym_core_version 0.14.3 agentlab 0.4.2 playwright 1.44.0"
+    },
+    {
+      "id": "V7_WEBGYM_GATE0_MEASUREMENT_INVALID_CORRECT",
+      "severity": "info",
+      "finding": "H3_WEBGYM_DIVERSE and H4_GATE0_RELAXED correctly classified MEASUREMENT_INVALID per frozen 2-attempt infrastructure precedence and multi-step density requirement, not permanent unavailability or negative evidence. WebGym 401/404 after 2 genuine attempts captured (webgym_census.json); Gate0 0 transitions due to BrowserGym API mismatch not 50/family. This does NOT invalidate AX/Stagehand branch (spec branch isolation).",
+      "evidence": "research/experiments/EXP-INTEL-35916138944/artifacts/derived/webgym_census.json sha256 8ed6611f8b5f3630fe42326d3e477a8bf24af131288ef4d80347bfdf8125e49b, gate0_relaxed_table.json sha256 6f3f4a5819de656927df14aadc1fb5d564f45c141c43c4d9235f4d88085eab57, provenance.json datasets webgym_292k available false"
+    },
+    {
+      "id": "V8_PROVENANCE_LEAKAGE_CONTROLS",
+      "severity": "info",
+      "finding": "Provenance preserved: request/spec/prereg/freeze hashes match frozen inputs; grammar_code_hash f2b5e3bb recomputed live not hardcoded; seed 35725763380 used deterministically; Docker digest 64-char validated; per-project isolation NC5 PASS (cross-project MISS 0% enforced); trajectory-grouped bootstrap/shuffle correctly not executed on empty WebGym/Gate0 avoiding degenerate CI[1,1] p=1.0 on those branches – but incorrectly reported degenerate CI on AX branch.",
+      "evidence": "research/experiments/EXP-INTEL-35916138944/provenance.json, spec.json decision_rule trajectory-grouped permutation"
+    }
+  ],
+  "baseline_findings": [
+    {
+      "id": "B-STAGEHAND-VERB",
+      "expected": "HIT>=0.8 identical, MISS>=0.8 drift, false_accept<0.05, beats NC4 p<0.05",
+      "observed": "HIT 0.0, MISS 1.0 (vacuous), false_accept 0.0 (vacuous), NC4 not computable because HIT never occurs",
+      "verdict": "FAIL",
+      "note": "Recomputes correctly; failure due to SHA instability (V4) not discriminating drift. Producer FAIL correct but root cause is incomplete stripping, not proof exact-cache cannot work on product pages."
+    },
+    {
+      "id": "B-RANDOM-AX-SHUFFLE",
+      "expected": "true mean > shuffle mean+0.20, p<0.05",
+      "observed": "true mean 0.9, shuffle mean 0.9 (recomputed), gap -0.1 +0.20 not met, p=1.0",
+      "verdict": "FAIL",
+      "note": "Producer reports shuffle_mean 1.0 vs recomputed 0.9; both fail gap and p gates. Failure driven by homepage degenerate template dominance (9x 1.0 scores) – not test of product-page discrimination."
+    },
+    {
+      "id": "B-TRUNCATED-20",
+      "expected": "Full-tree mean exceeds truncated mean by >=0.20 to claim fix matters; prior 0.2857 invalid fallback rejected",
+      "observed": "Producer delta 0.8847 PASS but not measured on product pages (V3)",
+      "verdict": "MEASUREMENT_INVALID",
+      "note": "PASS in result.json is invalid – both full-tree and truncated computed on same homepage data, not product subtree SHA comparison. Correct status UNKNOWN until 20 product pages measured."
+    },
+    {
+      "id": "B-WEBGYM-HARDCODED-09479",
+      "expected": "WebGym >=50 diverse-site duplication CI should not overlap shopping single-store 0.9479 CI[0.9167,0.9792]; sweep range >=0.05",
+      "observed": "0 sites (401/404 after 2 genuine attempts)",
+      "verdict": "UNKNOWN",
+      "note": "Correctly MEASUREMENT_INVALID branch; producer UNKNOWN correct. No evidence for or against diversity effect."
+    },
+    {
+      "id": "B-COLD-LLM",
+      "expected": "Cold LLM latency/tokens upper bound via Stagehand cold path",
+      "observed": "Not reported – Stagehand cold vs cached latency/tokens not measured (HIT never occurs, no real-path speedup)",
+      "verdict": "NOT_MEASURED",
+      "note": "Honest economics requires cold vs cached real Playwright latency/tokens ~2x/~30% with sum counters; not available due to HIT 0.0."
+    },
+    {
+      "id": "B-MIND2WEB2-JUDGE",
+      "expected": "Mind2Web-2 130-task diverse holdout alternative",
+      "observed": "Not found at expected paths",
+      "verdict": "UNKNOWN",
+      "note": "Correctly unresolved per validity_notes."
+    },
+    {
+      "id": "B-WEBMCP-TOOL-PREV",
+      "expected": "WebMCP tool registration prevalence f=10 vs f=100",
+      "observed": "Not executed",
+      "verdict": "NOT_MEASURED",
+      "note": "Prevalence scan not performed; informs frontier compilation bet remains UNKNOWN."
+    },
+    {
+      "id": "B-CONSTANT-NULL-05654",
+      "expected": "Not used for decision; disclosed to prevent reuse of 0.5654",
+      "observed": "Correctly disclosed only",
+      "verdict": "INFO",
+      "note": "No decision use – correctly handled."
+    },
+    {
+      "id": "PC1_LIVENESS_1280",
+      "expected": ">=15/20 captures 600-2000 nodes DOM>=2000 at 1280x720 with 64-char digest",
+      "observed": "20/20 valid, digest sha256:3e8cb9b945ea... reachable",
+      "verdict": "PASS",
+      "note": "Adequacy for CDP capture achieved, but liveness does not imply product-page sampling success."
+    },
+    {
+      "id": "PC3_STAGEHAND_HIT_RECOMPUTED_DYNAMIC",
+      "expected": "3 consecutive identical SHA + normalized selector -> HIT on 2nd/3rd with per-project isolation",
+      "observed": "hit_rate 0.0",
+      "verdict": "FAIL",
+      "note": "Correct FAIL; stability not achieved due to stripping incompleteness."
+    },
+    {
+      "id": "NC1_AX_SHUFFLE_TRAJECTORY_GROUPED",
+      "expected": "p<0.05 and mean+0.20 gap; std 0 => FAIL",
+      "observed": "p=1.0 gap -0.1 std 0.0",
+      "verdict": "FAIL",
+      "note": "Producer FAIL correct; recomputed p=1.0 mean 0.9 confirms."
+    },
+    {
+      "id": "NC3_DOM_DRIFT_RECOMPUTED_DYNAMIC",
+      "expected": "SHA changes after single-attribute mutation, MISS>=0.8 false_accept<0.05, verify hash_changed",
+      "observed": "hash_changed 36/36 true, but also changes without mutation",
+      "verdict": "PASS_BUT_VACUOUS",
+      "note": "Hash does change after mutation, but also on every stable access – drift detection not discriminating."
+    },
+    {
+      "id": "NC5_CROSS_PROJECT_LEAKAGE",
+      "expected": "Cross-project same key must MISS 0%",
+      "observed": "Per-project isolation enforced",
+      "verdict": "PASS",
+      "note": "Isolation holds; not informative while HIT 0.0."
+    }
+  ],
+  "recomputed_metrics": {
+    "M_AX_CONSISTENCY_MEAN": 0.9,
+    "M_AX_CONSISTENCY_MEAN_producer": 0.9,
+    "M_AX_CONSISTENCY_MEAN_recomputed": 0.9,
+    "M_AX_VALID_CAPTURES": 20,
+    "M_AX_VALID_CAPTURES_recomputed": 20,
+    "M_AX_BOOTSTRAP_CI_producer": [1.0, 1.0],
+    "M_AX_BOOTSTRAP_CI_recomputed": [0.7, 1.0],
+    "M_AX_BOOTSTRAP_CI_LOWER_producer": 1.0,
+    "M_AX_BOOTSTRAP_CI_LOWER_recomputed": 0.7,
+    "M_AX_BOOTSTRAP_CI_UPPER_producer": 1.0,
+    "M_AX_BOOTSTRAP_CI_UPPER_recomputed": 1.0,
+    "M_AX_SHUFFLE_P_producer": 1.0,
+    "M_AX_SHUFFLE_P_recomputed": 1.0,
+    "M_AX_SHUFFLE_MEAN_producer": 1.0,
+    "M_AX_SHUFFLE_MEAN_recomputed": 0.9,
+    "M_AX_SHUFFLE_STD_producer": 0.0,
+    "M_AX_SHUFFLE_STD_recomputed": 0.0,
+    "M_AX_PER_FAMILY_VARIANCE_producer": 0.0,
+    "M_AX_PER_FAMILY_VARIANCE_recomputed_pop": 0.09,
+    "M_AX_PER_FAMILY_VARIANCE_recomputed_sample": 0.1,
+    "M_AX_DELTA_TRUNCATED_producer": 0.8847581740171561,
+    "M_AX_DELTA_TRUNCATED_recomputed": null,
+    "M_AX_DELTA_TRUNCATED_note": "Producer value from homepage template length ratio, not product-page full-tree vs truncated [:20] comparison; correct value null UNKNOWN pending product-page measurement",
+    "M_AX_PRODUCT_FAMILY_COUNT_producer": 10,
+    "M_AX_PRODUCT_FAMILY_COUNT_recomputed": 1,
+    "M_AX_PRODUCT_PAGE_FAMILIES_producer": 20,
+    "M_AX_PRODUCT_PAGE_FAMILIES_recomputed": 2,
+    "M_AX_PRODUCT_PAGE_FAMILIES_families_with_product_url": 1,
+    "M_AX_GRAMMAR_CODE_HASH": "f2b5e3bb0fe5cab452f24d3d1ed18205813ae207de579870b1a16f5f156d542a",
+    "M_AX_GRAMMAR_CODE_HASH_recomputed": "f2b5e3bb0fe5cab452f24d3d1ed18205813ae207de579870b1a16f5f156d542a",
+    "M_AX_GRAMMAR_EXPANDED_STRIPPING_COMPLETE": false,
+    "M_STAGEHAND_N_FAMILIES_ATTEMPTED": 36,
+    "M_STAGEHAND_HIT_RATE_producer": 0.0,
+    "M_STAGEHAND_HIT_RATE_recomputed": 0.0,
+    "M_STAGEHAND_MISS_RATE_producer": 1.0,
+    "M_STAGEHAND_MISS_RATE_recomputed": 1.0,
+    "M_STAGEHAND_FALSE_ACCEPT_RATE": 0.0,
+    "M_STAGEHAND_HASH_CHANGED_ON_MUTATION": 36,
+    "M_STAGEHAND_HASH_STABLE_ON_IDENTICAL_without_mutation": 0,
+    "M_WEBGYM_SITES_FOUND": 0,
+    "M_GATE0_TRANSITIONS": 0,
+    "M_REGISTRY_FULL_DIGEST": "sha256:3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb",
+    "M_DOCKER_REACHABLE": true,
+    "M_H1_STATUS_producer": "FALSIFIED-IN-SETTING",
+    "M_H1_STATUS_recomputed": "MEASUREMENT_INVALID_for_product_page_hypothesis_FALSIFIED-IN-SETTING_for_homepage_bounded",
+    "M_H2_STATUS_producer": "FALSIFIED-IN-SETTING",
+    "M_H2_STATUS_recomputed": "FALSIFIED-IN-SETTING_bounded_to_unstable_SHA_exact-cache",
+    "M_H3_STATUS": "MEASUREMENT_INVALID",
+    "M_H4_STATUS": "MEASUREMENT_INVALID"
+  },
+  "claim_ceiling": "No SURVIVES for C-CROSSSITE. Maximum justified: (1) Full-tree semantic/multi-anchor longest_prefix_without_fallback + 9-regex stripping remains FALSIFIED-IN-SETTING bounded to Magento One Stop Market homepage/template at 1280x720 (9/10 families 1.0, 1/10 family 0.0, mean 0.9, bootstrap lower 0.7 not >0.5 if degenerate, shuffle p=1.0 gap 0.0 <0.20, variance pop 0.09) – degenerate template dominance, already established in parent. Product-page within-store transfer remains UNTESTED (only 1/10 families with 2 product pages, 18/20 homepage) – cannot support or falsify with this method. (2) Stagehand exact normalized-selector + relevant-subtree SHA256 with 9+form_key stripping remains FALSIFIED-IN-SETTING bounded to this Magento template (HIT 0.0 <0.8, hash unstable on every access) – shipped ~2x/~30% floor not reproduced; requires expanded uenc/store/session/timestamp/nonce stripping and stability proof before retest. (3) WebGym 292k diverse-site duplication CI/sweep vs vacuous 0.9479 CI[0.9167,0.9792] and (4) Gate0 relaxed H>0.1 NL>=20 titles>=1 multi-step census remain MEASUREMENT_INVALID (0 sites, 0 transitions) after 2 genuine 401/404 attempts and API mismatch – correctly classified, no evidence for or against diversity or physics pilot. (5) No cross-site holdout evidence (requires >=50 diverse eTLD+1 hosts) and no honest product economics (cold vs cached latency/tokens) demonstrated. C-CROSSSITE stays HYPOTHESIS single-store vacuous; does NOT close orthogonal representations (parameterized slot syntax, hierarchical/WebAPI retrieval, AX semantic similarity) or WebMCP f=100 compilation leverage.",
+  "evidence_refs": [
+    "research/experiments/EXP-INTEL-35916138944/request.json",
+    "research/experiments/EXP-INTEL-35916138944/spec.json",
+    "research/experiments/EXP-INTEL-35916138944/prereg.md",
+    "research/experiments/EXP-INTEL-35916138944/freeze.json",
+    "research/experiments/EXP-INTEL-35916138944/result.json",
+    "research/experiments/EXP-INTEL-35916138944/report.md",
+    "research/experiments/EXP-INTEL-35916138944/provenance.json",
+    "research/experiments/EXP-INTEL-35916138944/artifacts/raw/ax_captures.jsonl sha256 1fcace6ab686f47d24f115f38fdba2fdc758a8cb71ec91e8060ce2a919f07996",
+    "research/experiments/EXP-INTEL-35916138944/artifacts/derived/ax_consistency_fulltree.json sha256 2343da13678dabf5fceb39f9dcecd97d573899fcc3af8e6b360a65abc953410a",
+    "research/experiments/EXP-INTEL-35916138944/artifacts/derived/stagehand_replication_recomputed.json sha256 c2f1ae5353a91dfd3c29474519e1a4da20433910cafee1e62f868e225eebb504",
+    "research/experiments/EXP-INTEL-35916138944/artifacts/derived/webgym_census.json sha256 8ed6611f8b5f3630fe42326d3e477a8bf24af131288ef4d80347bfdf8125e49b",
+    "research/experiments/EXP-INTEL-35916138944/artifacts/derived/gate0_relaxed_table.json sha256 6f3f4a5819de656927df14aadc1fb5d564f45c141c43c4d9235f4d88085eab57",
+    "research/intel/grammar_fulltree_358885.py sha256 f2b5e3bb0fe5cab452f24d3d1ed18205813ae207de579870b1a16f5f156d542a",
+    "research/experiments/EXP-INTEL-35903200136/handoff.json sha256 77d51f20b5f9bff3a25c528f08ae0e22ab8ce5f20b3daa79daa8fb1dc41c05ba (parent bounded rejections)"
+  ],
+  "unresolved": [
+    "Does proper product-page sampling (10/10 families via verified get_task_start_url __SHOPPING__/path expansion + shopping_admin 184/42 fallback, product-subtree isolation heading/price/add-to-cart/main/contentinfo with node_count>1 distinct SHA on path families 136/145/196/222 at 1280x720) yield M_AX_CONSISTENCY_MEAN>=0.6 bootstrap lower>0.5 shuffle p<0.05 gap>=0.20 delta>=0.20 variance>0 – requires rerun with fixed grammar and URL verification.",
+    "Does expanded dynamic-token normalization including uenc/store/session/timestamp/nonce HTML-attribute stripping stabilize relevant-subtree SHA to achieve Stagehand HIT>=0.8 MISS>=0.8 false_accept<0.05 vs NC4 with real-path latency/tokens ~2x/~30% on 36 families derived selectors only – requires grammar fix and stability proof.",
+    "M_AX_DELTA_TRUNCATED on same 20 product pages vs true [:20] truncated baseline – currently null UNKNOWN, required for SURVIVES delta>=0.20 gate.",
+    "WebGym 292k >=50 diverse eTLD+1 duplication 95% CI (2000 family bootstrap) and threshold sweep 0.818-0.9479 range plus param prevalence vs vacuous 0.9479, and Mind2Web-2 130-task Agent-as-Judge alternative – remains 0/50 after 2 genuine 401/404; requires HF_TOKEN or verified alternative.",
+    "Gate0 relaxed H>0.1 NL>=20 titles>=1 singleton<50% and strict H>0.2 NL>=50 strata>=10 leakage_validOnly<40% with BrowserGym multi-step >=50 transitions/family on >=10 families (shopping_admin, Reddit, GitLab, Wikipedia, VisualWebArena, WorkArena) trajectory-grouped – remains 0 transitions.",
+    "WebMCP tool registration prevalence across top WebGym sites at honest f=10 vs f=100 – not measured.",
+    "Whether orthogonal representations where longest-prefix fails (parameterized slot syntax, hierarchical/WebAPI retrieval, AX semantic similarity) yield within-store or cross-site transfer – bounded falsification does not close."
+  ]
+}
