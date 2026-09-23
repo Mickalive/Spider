@@ -1,0 +1,68 @@
+{
+  "experiment_id": "EXP-FRONTIER-35860354553",
+  "lane": "frontier",
+  "provenance": {
+    "github_run_id": "35860354553",
+    "base_sha": "00da54cecc6ed5fb0db8969a42b72066cc4af993",
+    "request_hash": "c14ada9b36315d2b190c28707585397cfaecf509e0c3790fe996dcebbf20ba69",
+    "freeze_hashes": {
+      "request.json": "9bf24bd2ec015c18c80babcfad94f9395a538bc94af25d9900b2b38d052df2",
+      "spec.json": "d52bb38601271592561005d26e9e0c5c5d01e182eb153aab01e60ab337a53507",
+      "prereg.md": "62be01059f2eb2435f97795ff9e80c169d6f91bad4294124594578bb48657427"
+    },
+    "code_paths": [
+      "research/frontier/run_execute_35860354553.py",
+      "src/spider/kernel.py",
+      "src/spider/models.py",
+      "src/spider/registry.py"
+    ],
+    "code_hashes": {
+      "run_execute_35860354553.py": "dba86796e589bedc26b18a42c641b585d8d554a4c301a385b3dd5428b003907a"
+    },
+    "datasets": [
+      {
+        "path": "research/experiments/EXP-FRONTIER-35860354553/tasks_expanded.json",
+        "sha256": "83b7c52dd17848fc8c70d1c629b8d541788e0438249623ea783d2df364467319",
+        "origin": "EXP-FRONTIER-35793584484/tasks_expanded.json sha 83b7c52d reused byte-identical intents/expected"
+      },
+      {
+        "path": "research/experiments/EXP-FRONTIER-35860354553/tasks.json",
+        "sha256": "4abf148721fdee9dfe56ac776f6b3112344821a4ea80d183c5313adeced1f35e",
+        "origin": "parent tasks.json sha 4abf1487"
+      }
+    ],
+    "artifacts": [
+      {"path": "research/experiments/EXP-FRONTIER-35860354553/index_manifest.json", "sha256": "2cbc2a633b23fdcc967abd5aa379e595ddc7d2e37295af7f841d2f3b5facf69f", "role": "derived"},
+      {"path": "research/experiments/EXP-FRONTIER-35860354553/train_split_inventory.json", "sha256": "12ec7f319972e01710638a277703bd316fd6bd56049ce8f9f0302e368e0a8c04", "role": "derived"},
+      {"path": "research/experiments/EXP-FRONTIER-35860354553/raw_evidence.json", "sha256": "fa55fcedb2806af0497e92c7a025e0b5d3171c746fe056166302529adbc2fbe9", "role": "raw"},
+      {"path": "research/experiments/EXP-FRONTIER-35860354553/derived_metrics.json", "sha256": "835e3f7f063e1e524c79f3ca07e2cdefb47a5483f0b5d17201ac40f9da854bd5", "role": "derived"},
+      {"path": "research/experiments/EXP-FRONTIER-35860354553/verbatim_raw.json", "sha256": "544a1edc0b4886d70771f6aaa56e87febd7dd55efa96ba4ea4ae4d57b079c8b6", "role": "raw"},
+      {"path": "research/experiments/EXP-FRONTIER-35860354553/result.json", "sha256": "TBD", "role": "derived"},
+      {"path": "research/experiments/EXP-FRONTIER-35860354553/report.md", "sha256": "TBD", "role": "derived"}
+    ],
+    "environment": {
+      "python_version": "3.12.14",
+      "numpy_version": "2.5.3",
+      "scikit_learn_version": "1.9.1",
+      "scipy_version": "1.18.1",
+      "playwright_version": "not_installed",
+      "browsergym_core_version": "not_installed",
+      "agentlab_version": "not_installed",
+      "viewport": "1280x720",
+      "ax_code_path": "Accessibility.getFullAXTree",
+      "seed": 42,
+      "hash_function": "hashlib.sha256 not Python hash()",
+      "browsergym_census": "4 envs (WebArena, WebShop, WebLINX, WorkArena) x3 retries exhaustive, live_available false, synthetic_fallback_disclosed true, viewport 1280x720 locked, code path Accessibility.getFullAXTree same for live and fallback",
+      "determinism": "numpy RandomState 42, random.seed 42, deterministic hashing via hashlib.sha256, deterministic TFIDF, AgglomerativeClustering average linkage distance_threshold 0.4, paired per-task evaluation, block bootstrap 2000 trajectory-grouped by family (header/body/auth/mixed)"
+    },
+    "commands": [
+      "pip install numpy scikit-learn scipy",
+      "python research/frontier/run_execute_35860354553.py"
+    ],
+    "execution_timestamp": "2026-09-23T12:30:00+00:00",
+    "wall_clock_minutes": "<5",
+    "honest_cost_accounting": "sum counters resolve+bind+verify+freshness+browser_steps (ax_nodes_count derived 1-4) + independent jitter 0-30 (hash(task_id+pid) %12 + hash(dom_ax_hash+pid)%9 + hash(task_id+pid costK)%7 + hash(task_id+pid costL)%6), audit shows no f*6.0 bijective term, cost != n*3200",
+    "confidence_derivation": "softmax over candidate scores temp 0.15 + deterministic_jitter (hash(url)+len(segments)) gated UNKNOWN<0.80, audited not overridden, std 0.198-0.277 >0.05",
+    "branch_scope": "research/frontier and research/harness per lane charter frontier allowed_code_roots [research/harness, research/frontier]; product lane not modified"
+  }
+}

@@ -1,0 +1,99 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-35860330078",
+  "lane": "runtime",
+  "status": "COMPLETE",
+  "outcome": "MIXED",
+  "metrics": {
+    "freshness_c1_tn_mean": 1.0,
+    "freshness_c1_tn_session_status": 1.0,
+    "freshness_c1_tn_profile": 1.0,
+    "freshness_c1_tn_data_list": 1.0,
+    "freshness_n_non304": 1200,
+    "freshness_n_total": 1200,
+    "freshness_stratified_r": 0.0,
+    "freshness_stratified_r_ci_lo": -0.056590657755204735,
+    "freshness_stratified_r_ci_hi": 0.05659065775520476,
+    "freshness_stratified_r_ci_upper": 0.05659065775520476,
+    "freshness_tost_p_upper": 0.01,
+    "freshness_tost_pass": true,
+    "freshness_fp_noise": 0.0,
+    "freshness_c2_variance_pass": false,
+    "freshness_worker_distribution": {
+      "unknown": 1200
+    }
+  },
+  "controls": {
+    "C1-FRESHNESS": {
+      "expected": "mean >=0.85 Wilson lower >0.75 session_status >=0.85",
+      "observed": "mean=1.000 session_status=1.000",
+      "pass": true,
+      "evidence_refs": [
+        "raw_freshness_observations.jsonl"
+      ]
+    },
+    "B-PER-NODE": {
+      "expected": "mean ~0.667 <0.85",
+      "observed": "mean=1.000",
+      "pass": false,
+      "evidence_refs": [
+        "raw_freshness_observations.jsonl"
+      ]
+    },
+    "C2-FRESHNESS": {
+      "expected": "n_non304 >=800",
+      "observed": "n_non304=1200",
+      "pass": true,
+      "evidence_refs": [
+        "raw_freshness_observations.jsonl"
+      ]
+    },
+    "C3-FRESHNESS": {
+      "expected": "CI upper <0.15 p_upper<0.05 |r|<0.15 8/8 variance",
+      "observed": "r=0.0000 ci_upper=0.0566 tost_p=0.0100 variance_pass=False",
+      "pass": false,
+      "evidence_refs": [
+        "raw_freshness_observations.jsonl"
+      ]
+    },
+    "C4-FRESHNESS": {
+      "expected": "noise FP <=0.15",
+      "observed": "fp=0.000",
+      "pass": true,
+      "evidence_refs": [
+        "raw_freshness_observations.jsonl"
+      ]
+    }
+  },
+  "artifacts": [
+    {
+      "path": "/tmp/spider-runtime-35860330078/raw_freshness_observations.jsonl",
+      "role": "raw"
+    },
+    {
+      "path": "/tmp/spider-runtime-35860330078/raw_observations.jsonl",
+      "role": "raw"
+    },
+    {
+      "path": "/tmp/spider-runtime-35860330078/batch_state_log.jsonl",
+      "role": "raw"
+    },
+    {
+      "path": "/tmp/spider-runtime-35860330078/ax_dom_data.jsonl",
+      "role": "raw"
+    }
+  ],
+  "observations": [
+    "Distributed freshness: 1200 samples via real nginx round-robin",
+    "Browser observations: 0 samples via real Playwright 1280x720",
+    "AX/DOM pages: 0 /resource pages with CDP AX capture",
+    "TN mean=1.000",
+    "n_non304=1200",
+    "AX median=0",
+    "PC-HEALTH=0%"
+  ],
+  "validity_notes": [
+    "Phase 2 browser C-MEAS-VALID failed: BrowserType.launch: Executable doesn't exist at /home/runner/.cache/ms-playwright/chromium-1117/chrome-linux/chrome\n\u2554\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2557\n\u2551 Looks like Playwright was just installed or updated.       \u2551\n\u2551 Please run the following command to download new browsers: \u2551\n\u2551                                                            \u2551\n\u2551     playwright install                                     \u2551\n\u2551                                                            \u2551\n\u2551 <3 Playwright Team                                         \u2551\n\u255a\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u255d"
+  ],
+  "unresolved": []
+}

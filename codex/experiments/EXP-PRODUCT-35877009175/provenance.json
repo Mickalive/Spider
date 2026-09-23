@@ -1,0 +1,60 @@
+{
+  "artifacts": {
+    "branch_traces.json": "99423aef30aaa77c41fa8ce571689fde8289648ae29ea51179173c3f6c78c628",
+    "cost_config.json": "54677d16cf4f9ce31a480b474062539952f0335b2a2ba5bb6ba918df5289b3ac",
+    "derived_metrics.json": "8d7cab0a538f65901746208e85e54a9a01085b7f55adf05a5642d40f716426e1",
+    "probe_traces.json": "3a55290807e04cead7aac5908eb2873e3f72ddfebf28edd765005d9faefcadab",
+    "qcr_bank_manifest.json": "04d0fa5d96e85aa45737c082525198771d60e1849cc6d7d52ae98dbcee8872e8",
+    "raw_per_task.csv": "1c97757144975131eba6916fd61d038ed2ac5d4af5d557cbc6f3991098c2a032",
+    "registry.jsonl": "55dd86cdebfe6e06fd7bfd1d3f56dd1a9bb151b183fef73e69e667ac18671f0b",
+    "result.json": "6fd41cf1d70d786098c0fc7ff4915090c49986d427daded9e950b61fee400c7f"
+  },
+  "code_hashes": {
+    "kernel.py": "d190d948c8143c59d65cf18a2f272147378ee2987cbc1a17eaf503976dfb1289",
+    "models.py": "23ef7f750e6bb7776c648316956cb8be95576271ca479f632de934d6eef22177",
+    "registry.py": "51fb440d3827f21cccb5f77ad17dc0e76ccdbc2d52d7b05044cd821bb8a9322c",
+    "run_experiment.py": "fafa0f4410f8c06a6e56e520cc7e0192964d1bd167016ed742d92d9705e82c7f"
+  },
+  "commands": [
+    "PYTHONHASHSEED=0 PYTHONPATH=src python3 research/experiments/EXP-PRODUCT-35877009175/run_experiment.py"
+  ],
+  "determinism": "single run; per-hit isolation with auditor/probe amortization; QCR frozen bank same ranker; family-stratified bootstrap 5000 + block-permutation 5000",
+  "director_mandate": "PIVOT C-PRODUCT-ECON curated exploration + MEA auditor harness + TTL/ETag probe; parent_handoff USE; genuine branch-derived cost required",
+  "environment": {
+    "numpy": "unavailable",
+    "pandas": "unavailable",
+    "python": "3.12.14",
+    "scipy": "unavailable",
+    "sentence_transformers": "unavailable",
+    "sklearn": "unavailable"
+  },
+  "experiment_id": "EXP-PRODUCT-35877009175",
+  "external_verified_state": "MEA auditor fetches verified_state hash before registry update (100 tok+80ms)",
+  "fixture": {
+    "inherited_from": "research/experiments/EXP-PRODUCT-35860337280/fixtures/tasks.json",
+    "inherited_sha256": "99e5d46bde2578414ccdada265e88957ee7f72338e6ab0e84f05e4ee9454d358",
+    "path": "fixtures/tasks.json",
+    "sha256": "6d4caafdb900620932598f933d698d5c482c93ef2ecbbf7809cb29bbd6d4611a"
+  },
+  "fresh_context_execution": true,
+  "frozen_input_hashes": {
+    "freeze.json": "60fd2d359f04a54b7b2b2b4bd020627460c76c6f43d2b76a250143e374ec051b",
+    "prereg.md": "25284d8e100cb71fea2e2e2686e01c4aa9f09a4dd8a0a6c0a1d62931388916b6",
+    "request.json": "7f8df686914d8d186414f54a56e83c7943538f84deaf3f5699cb35df0f04e9c0",
+    "spec.json": "51b68f2d9fac4a5f601c852dc264b6934a0ed4bd7ae048e8a464a6c436158ab0"
+  },
+  "git": {
+    "head": "4a7bacd217fb535285c7a78d8d16755891b3a675",
+    "short": "4a7bacd2"
+  },
+  "github_run_id": "35877009175",
+  "lane": "product",
+  "schema_version": 1,
+  "seeds": {
+    "PYTHONHASHSEED": "0",
+    "random_seed": 42,
+    "wrong_bound_p": 0.15
+  },
+  "stage": "EXECUTE",
+  "ttl_etag_probe": "10 tok+30ms conditional HEAD with If-None-Match ETag, fallback to 50 tok+120ms full verify"
+}

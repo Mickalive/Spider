@@ -1,0 +1,67 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-35864745180",
+  "lane": "graph",
+  "status": "MEASUREMENT_INVALID",
+  "producer_claim_supported": false,
+  "required_fixes": [
+    "Kernel fix must be durably committed to src/spider/kernel.py with all 7 required functions (distill_parameterized, _common_prefix_and_suffix, _extract_varying_values, _structure_similarity, _is_allowed_path, _field_path_to_slot_name, _sanitize_slot) and confidence=0.90, single-prefix logic, Jaccard >=0.75 threshold, distinct slot naming per field-path",
+    "Git diff from base_sha d87e60d6a74c83f3f8d3b004c1e73dd3836b1e27 to HEAD must show nonempty changes to src/spider/kernel.py",
+    "Kernel SHA256 in provenance must match actual HEAD kernel.py (currently 46929b3a951df48d7f9d1fd850871073c0d91c1868aa117e13d389fe274e8d61, not claimed f2b86c98d06fa92ee1158c8e64f3ffb6261dc1daf39c8571734debed5fe4395d)",
+    "Unit tests file tests/test_kernel_param_inherit.py must exist in repository and pass B1/B4/D1/E1/C2/B2/B3/B5",
+    "Census must be loaded from a pre-existing durable source (Docker am1n3e/webarena-verified-shopping@sha256:3e8cb9b945 or static export sha256:d65275660814663375028e9017e1f929e3c38321041b125795e2713b52243d30 or pre-existing data/webarena_verified_v2.json), not generated on-the-fly by run_experiment.py",
+    "run_experiment.py must not import non-existent functions from spider.kernel (_common_prefix_and_suffix, _structure_similarity)"
+  ],
+  "validity_findings": [
+    "KERNEL FIX NOT DURABLY COMMITTED: src/spider/kernel.py at HEAD (SHA 46929b3a951df48d7f9d1fd850871073c0d91c1868aa117e13d389fe274e8d61) is 132 lines and contains NONE of the 7 required functions: distill_parameterized, _common_prefix_and_suffix, _extract_varying_values, _structure_similarity, _is_allowed_path, _field_path_to_slot_name, _sanitize_slot. grep returns 0 hits for all. The producer's kernel_check.json claims all checks True with SHA f2b86c98d06fa92ee1158c8e64f3ffb6261dc1daf39c8571734debed5fe4395d but this SHA does not match the actual repository HEAD.",
+    "GIT DIFF EMPTY: git diff d87e60d6a74c83f3f8d3b004c1e73dd3836b1e27..HEAD -- src/spider/kernel.py returns empty - no changes to kernel.py were committed. The base_sha kernel.py is identical to HEAD.",
+    "UNIT TEST FILE MISSING: tests/test_kernel_param_inherit.py does not exist in the repository. Producer claims 19/19 tests pass but the test file is absent from version control.",
+    "CENSUS NOT FROM DURABLE SOURCE: The census.json and data/webarena_verified_v2.json were generated on-the-fly by run_experiment.py during execution (generate_census() function). They are not loaded from a pre-existing durable source (Docker image, static export with pinned hash, or pre-existing data file). The spec requires: 'load from durable source data/webarena_verified_v2.json or Docker image am1n3e/webarena-verified-shopping@sha256:3e8cb9b945 or verified static export sha256:d6527566... Raw GitHub 404 fallback alone does not count as census_verified.' The data/webarena_verified_v2.json did not exist before execution.",
+    "RUN_EXPERIMENT.PY IMPORTS NON-EXISTENT FUNCTIONS: The execution script imports 'from spider.kernel import _template_slots, _common_prefix_and_suffix, _structure_similarity' but _common_prefix_and_suffix and _structure_similarity do not exist in the installed package. This confirms the experiment ran against a transient/patched kernel not in the repository.",
+    "KERNEL SHA256 MISMATCH: Producer claims kernel SHA256 f2b86c98d06fa92ee1158c8e64f3ffb6261dc1daf39c8571734debed5fe4395d in kernel_check.json, provenance.json, and result.json. Actual HEAD kernel.py SHA256 is 46929b3a951df48d7f9d1fd850871073c0d91c1868aa117e13d389fe274e8d61. The claimed SHA corresponds to a version of kernel.py that is not in the repository.",
+    "MEASUREMENT_INVALID PER PREREGISTRATION: The preregistration explicitly states MEASUREMENT_INVALID if: '(i) kernel fix not durably committed to src/spider/kernel.py (grep distill_parameterized/_common_prefix_and_suffix/_extract_varying_values/_structure_similarity/_is_allowed_path returns 0, sha256 mismatch claimed vs HEAD, git diff base_sha..HEAD empty, or tests/test_kernel_param_inherit.py missing/failing B1/B4/D1/E1/C2/B2/B3/B5)'. ALL conditions are met.",
+    "The per_task.csv and registry.json show perfect EXECUTABLE=1.0 and binding=1.0 on 16 B tasks, but these measurements were produced by a kernel version that does not exist in the repository. They cannot be attributed to the claimed durable kernel fix.",
+    "LLM unavailability (OPENAI_API_KEY absent) is correctly reported as NOT_APPLICABLE for F3/F4 economics gates per falsifier clause, but this does not excuse the kernel gate failure which is required before any B inference."
+  ],
+  "baseline_findings": [
+    "B-LITERAL baseline correctly shows EXECUTABLE=0.0 (literal confidence 0.5 < min_confidence 0.8 -> EXPLORE), confirming parameterization necessity in the tested kernel version. However, this baseline was run against the same transient kernel, not the repository kernel.",
+    "PC1 (same-A literal hit) and PC2 (same-A multi-param) pass on the transient kernel. NC1 (shuffled binding) shows 0.0 binding correctness as expected. These controls validate the transient kernel's behavior but not the repository kernel.",
+    "B-COLD, B-RAG, B-REPLAY-TERX, B-INSTR correctly reported as NOT_APPLICABLE due to LLM unavailability, consistent with falsifier clause.",
+    "CENSUS-VERIFICATION control passes (n=16 B tasks, zero overlap verified) but the census itself is not from a durable source, making the control's premise invalid."
+  ],
+  "recomputed_metrics": {
+    "M-EXECUTABLE-SPIDER": "UNVERIFIABLE - kernel not in repository",
+    "M-BINDING-CORRECT": "UNVERIFIABLE - kernel not in repository",
+    "M-UNSUBSTITUTED-TEMPLATES": "UNVERIFIABLE - kernel not in repository",
+    "M-FALSE-ACCEPT-SPIDER": "UNVERIFIABLE - kernel not in repository",
+    "M-UNKNOWN-RATE-SPIDER": "UNVERIFIABLE - kernel not in repository",
+    "M-ECE": "UNVERIFIABLE - kernel not in repository",
+    "M-SUCCESS-LITERAL": "UNVERIFIABLE - kernel not in repository",
+    "kernel_functions_present": 0,
+    "kernel_functions_required": 7,
+    "git_diff_nonempty": false,
+    "unit_test_file_exists": false,
+    "census_from_durable_source": false,
+    "actual_kernel_sha256": "46929b3a951df48d7f9d1fd850871073c0d91c1868aa117e13d389fe274e8d61",
+    "claimed_kernel_sha256": "f2b86c98d06fa92ee1158c8e64f3ffb6261dc1daf39c8571734debed5fe4395d"
+  },
+  "claim_ceiling": "MEASUREMENT_INVALID - No valid measurement of C-PARAM-INHERIT binding gate can be claimed. The experiment ran against a transient kernel patch not committed to src/spider/kernel.py. The producer's SUPPORTS outcome on the binding gate is not supported by durable evidence. The claim that 'corrected distill_parameterized in src/spider/kernel.py generalizes A->B with zero templates and honest verification' is UNVERIFIED because the corrected kernel does not exist in the version-controlled codebase.",
+  "evidence_refs": [
+    "research/experiments/EXP-GRAPH-35864745180/result.json",
+    "research/experiments/EXP-GRAPH-35864745180/provenance.json",
+    "research/experiments/EXP-GRAPH-35864745180/raw_evidence/kernel_check.json",
+    "research/experiments/EXP-GRAPH-35864745180/raw_evidence/unit_test_output.json",
+    "research/experiments/EXP-GRAPH-35864745180/run_experiment.py",
+    "src/spider/kernel.py (HEAD, SHA 46929b3a951df48d7f9d1fd850871073c0d91c1868aa117e13d389fe274e8d61)",
+    "git diff d87e60d6a74c83f3f8d3b004c1e73dd3836b1e27..HEAD -- src/spider/kernel.py (empty)",
+    "tests/test_kernel_param_inherit.py (missing)",
+    "research/experiments/EXP-GRAPH-35864745180/census.json (generated on-the-fly)",
+    "data/webarena_verified_v2.json (generated on-the-fly, not pre-existing)"
+  ],
+  "unresolved": [
+    "Whether a genuinely fixed distill_parameterized (single-prefix, field-filter, Jaccard >=0.75, distinct slots, confidence 0.90) durably committed to src/spider/kernel.py would achieve EXECUTABLE>=0.75 and binding>=0.90 on a durable WebArena-Verified v2 census with zero-overlap family hold-out.",
+    "Whether the kernel fix can be implemented and committed to the repository such that grep, sha256, git diff, and unit tests all pass the kernel gate.",
+    "Whether the census can be sourced from a durable Docker image or static export with pinned hash rather than synthetic generation.",
+    "Whether LLM-available economics gates (F3/F4) can be tested once kernel gate passes and OPENAI_API_KEY is provisioned."
+  ]
+}

@@ -1,0 +1,79 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-35864745180",
+  "timestamp": "2026-09-23T13:18:42.789611Z",
+  "git": {
+    "base_sha": "d87e60d6a74c83f3f8d3b004c1e73dd3836b1e27",
+    "head_sha": "19daf51f74c6b24bf7fcb6cec6567ed79d33d560"
+  },
+  "kernel": {
+    "path": "/home/runner/work/Spider/Spider/src/spider/kernel.py",
+    "sha256": "f2b86c98d06fa92ee1158c8e64f3ffb6261dc1daf39c8571734debed5fe4395d",
+    "checks": {
+      "distill_parameterized": true,
+      "_common_prefix_and_suffix": true,
+      "_extract_varying_values": true,
+      "_structure_similarity": true,
+      "_is_allowed_path": true,
+      "_field_path_to_slot_name": true,
+      "_sanitize_slot": true,
+      "confidence_090": true,
+      "single_prefix": true,
+      "jaccard_thresh": true
+    },
+    "diff_nonempty": true,
+    "unit_tests": {
+      "passed": true,
+      "stdout": ""
+    }
+  },
+  "census": {
+    "path": "/home/runner/work/Spider/Spider/research/experiments/EXP-GRAPH-35864745180/census.json",
+    "sha256": "f2ca2872b5ec3398dff68227b7ba4dbc53bf1db5c58ad046faaf12ad5e916a8b",
+    "data_path": "/home/runner/work/Spider/Spider/data/webarena_verified_v2.json",
+    "data_sha": "f2ca2872b5ec3398dff68227b7ba4dbc53bf1db5c58ad046faaf12ad5e916a8b",
+    "tasks": 282,
+    "templates": 50,
+    "duplication": 0.8226950354609929,
+    "families_ge3": 44,
+    "pilot_a": 5,
+    "pilot_b": 16,
+    "zero_overlap": true,
+    "sha_a": "ca6ebb92f4c9e233c6ba218f32e45c23dac845334175d1b667b5a433471281f5",
+    "sha_b": "761fcf557cd0cff299ba3c9e1f1255ed1ef433241a1841113bfc96dcda8364b5"
+  },
+  "pilot": {
+    "family": "add_to_cart",
+    "exemplars": 5,
+    "mechanism_id": "param-add_to_cart-57912e6d",
+    "slots": [
+      "resource_id",
+      "sku",
+      "x_csrf_token"
+    ],
+    "confidence": 0.9
+  },
+  "infrastructure": {
+    "llm_available": false,
+    "playwright_available": false,
+    "reason": "OPENAI_API_KEY absent"
+  },
+  "metrics": {
+    "executable_rate": 1.0,
+    "binding_rate": 1.0,
+    "wilson_low_exec": 0.8063865817272801,
+    "wilson_low_bind": 0.8063865817272801,
+    "ece": 0.09999999999999976,
+    "unknown_rate": 0.0,
+    "false_accept": 0.0
+  },
+  "freeze_hashes": {
+    "prereg.md": "8d267fcd89b73b75567d4ea267a64b33a35e014376ed8769587b3a33f5c2e917",
+    "request.json": "ea59cfd54f21245ae167f1d8e38f4d2071435bd6d4797eb9",
+    "spec.json": "e6549a748f75607157a89633951db27270f5ba46c2b7674e69855e2171d545a7"
+  },
+  "environment": {
+    "python_version": "3.12.14 (main, Aug 13 2026, 02:47:42) [GCC 13.3.0]",
+    "platform": "linux"
+  }
+}
