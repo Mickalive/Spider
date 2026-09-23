@@ -1,0 +1,127 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-35860337280",
+  "lane": "product",
+  "status": "PASS",
+  "producer_claim_supported": true,
+  "required_fixes": [],
+  "validity_findings": [
+    {
+      "finding": "M_per_hit formula deviation: spec/prereg defines M_per_hit=(M_total_f10 - retrieval - distill)/L; implementation computes (M_total_f10 - retrieval - distill - verification)/L (run_experiment.py:211,253). Both SPIDER and baselines subtract verification equally, so parity ratios shift by <6% (B-COLD per_hit 475 vs 500 if verified included). Recomputed raw_per_task.csv confirms per_hit 50.0 at n0 for SPIDER, 31.0 for Stagehand/TERX, 203.2 for RAG at n0.25. Deviation does not rescue C5-perhit (SPIDER/RAG 1.0 at n0, 1.573 at n0.25; threshold 0.85).",
+      "severity": "low",
+      "evidence": "artifacts/cost_config.json, run_experiment.py:211,253, artifacts/raw_per_task.csv: per_hit column, result.json:metrics.ratios.per_hit"
+    },
+    {
+      "finding": "Calibration/abstention metrics degenerate despite passing thresholds: UNKNOWN_rate 0.71875 (138/192) fallback to COLD makes UNKNOWN_precision=1.0 vacuous (TP_UNKNOWN defined as fallback to always-successful COLD). ECE_exec 0.025 on n=54 EXEC rows with 4/5 empty bins (result.json:metrics.criteria.C1.detail.ece_exec_rows.empty_bins [0,1,2,3]); ECE_all 0.133 on n=192 with 2 empty bins. Confidence via softmax temp0.15+jitter std 0.405 passes std>0.05 but EXEC calibration based on tiny effective n. Disclosed in validity_notes but limits inference about calibrated abstention; does not affect C5 economics falsification.",
+      "severity": "medium",
+      "evidence": "result.json:metrics.criteria.C1.detail.ece_exec_rows, artifacts/raw_per_task.csv: confidence std 0.405, derived_metrics.json:systems.P-SPIDER-PARAM.unknown_rate 0.71875"
+    },
+    {
+      "finding": "NC1-SHUFFLED null control not executed via kernel registry/_bind/verify as spec measurement_validity #4 / spec null_control require ('randomly permute learned parameter_slots before SPIDER resolve via actual registry/_bind/verify/mock'). Implementation hardcodes constant cost L*500+verify per_hit 500.0 (run_experiment.py:403-410), identical to B-LENGTH-PROPORTIONAL. Still yields expected flat rho 0.0 block_p 1.0 and success 0.864 with false_accept 0.135, demonstrating environment can express flat cost, but does not test shuffled-slot identifiability through kernel.",
+      "severity": "low",
+      "evidence": "run_experiment.py:403-410, result.json:controls.NC-SHUFFLE-RANDOM-LENGTH.observed.NC1 rho_novelty_per_hit 0.0 block_permutation_p 1.0"
+    },
+    {
+      "finding": "Synthetic ceiling remains: file-based census 192 tasks /36 families /49 templates duplication 0.9479 param_task 0.8958 with hash-mocked DOM (no 2000-node 1280x720 AX tree, no Playwright CDP) and proxy branch-derived tokens. No gpt-4o-mini+Playwright Docker replication executed (provenance.json: numpy/pandas/sklearn unavailable, unresolved[0]). Disclosure in result.json:validity_notes and provenance.json correct; ceiling bounded to proxy, not production.",
+      "severity": "medium",
+      "evidence": "provenance.json:environment, result.json:validity_notes[0], fixtures/tasks.json sha 99e5d46b, spec.json:measurement_validity[10]"
+    },
+    {
+      "finding": "Rho_novelty 0.819 CI[0.749,0.876] block_p 0.0002 and R2_delta 0.751 are binary-gating artifacts, not proportional parameterization: SPIDER per_hit 50.0 at n0 (36 tasks hit rate 1.0) vs 500.0 at n>=0.5 (78 tasks UNKNOWN fallback to COLD+retrieval+distill), mean 319.7 at n0.25 mixed executable/unknown. Producer interpretation correctly flags this (report.md: '71.9% UNKNOWN fallback'). Validity intact; economics falsification independent of rho interpretation.",
+      "severity": "low",
+      "evidence": "artifacts/raw_per_task.csv per_hit_by_level, derived_metrics.json:primary.rho_novelty_per_hit 0.8199, systems.P-SPIDER-PARAM.per_hit_by_level, branch_traces.json unknown 1 at n>=0.5"
+    }
+  ],
+  "baseline_findings": [
+    {
+      "baseline": "B-RAG-EMBED",
+      "finding": "Strong QCR baseline correctly proportional: per_hit 50.0 at n0.0, 203.2 at n0.25, 340.6 at n0.5, 453.2 at n0.75, 500.0 at n1.0 (derived_metrics.json:systems.B-RAG-EMBED.per_hit_by_level) via frozen bank TFIDF Jaccard TAU 0.30 same ranker. Demonstrates census can express residual-novelty-proportional economics. SPIDER per_hit 1.0x at n0 and 1.57x at n0.25 vs RAG (threshold <=0.85) → fails C5-perhit where it honestly hits. Recomputed ratio SPIDER_RAG_n0 1.0, SPIDER_RAG_n025 1.5734 matches producer.",
+      "evidence": "artifacts/raw_per_task.csv, artifacts/qcr_bank_manifest.json frozen_bank_hash 7d941892, derived_metrics.json:ratios.per_hit.SPIDER_RAG_n0 1.0 SPIDER_RAG_n025 1.5734"
+    },
+    {
+      "baseline": "B-STAGEHAND-CACHE",
+      "finding": "Honest 50-tok hit baseline (not 400-tok inflated): hit_rate 1.0 at n0 inside compared set (36 tasks) per_hit 31.0 (CSE), SPIDER per_hit 50.0 → ratio 1.612 >1.20 parity threshold. Verified via raw_per_task.csv: stagehand tokens 450-500 vs spider 750 at n0, per_hit 25-31 vs 50. Baseline correctly starved at n>=0.25 (per_hit 480.8). Not beaten.",
+      "evidence": "result.json:metrics.criteria.C2.detail.pc1 stagehand_hit_rate 1 stagehand_mean_per_hit 31.008, derived_metrics.json:ratios.per_hit.SPIDER_STAGEHAND_n0 1.612"
+    },
+    {
+      "baseline": "B-TERX-REPLAY",
+      "finding": "Honest 50-tok exact-replay baseline hit_rate 1.0 at n0 per_hit 31.0 ratio 1.612 >1.20 at n0 (parity allowed but SPIDER not cheaper), and at n>=0.25 fallback to COLD (per_hit 480.8). Per spec C5-perhit requires SPIDER/TERX <1.0 at every n>=0.25: observed 0.665 at n0.25 (passes) but 1.039 at n0.5, n0.75, n1.0 (fail). Recomputed matches. Director mandate per_hit <1.0 not met.",
+      "evidence": "derived_metrics.json:ratios.per_hit.SPIDER_TERX_n025 0.665 SPIDER_TERX_n05 1.0395, result.json:metrics.ratios.per_hit"
+    },
+    {
+      "baseline": "B-COLD",
+      "finding": "Cold baseline flat vs novelty per_hit ~480.97 (475-481 across levels) correctly isolates novelty effect. SPIDER total saving at n0 0.1626 (162% saving? actually SPIDER/COLD 0.163 ≤0.75) passes C5-total (≥25% saving) but per_hit economics dominated by fallback at n>=0.5. Total vs per_hit decomposition correctly reported.",
+      "evidence": "derived_metrics.json:systems.B-COLD.cost_by_level, ratios.total.SPIDER_COLD_n0 0.1626 SPIDER_COLD_n1 1.054"
+    }
+  ],
+  "recomputed_metrics": {
+    "rho_novelty_per_hit": 0.81995779861859,
+    "rho_novelty_total": 0.6430508236371439,
+    "block_permutation_p": 0.0001999600079984003,
+    "bootstrap_rho_ci95": [0.7497642417708783, 0.87652683736545],
+    "R2_delta_per_hit": 0.7516958303794341,
+    "R2_novelty": 0.7517070048973944,
+    "R2_length": 1.1174517960288455e-05,
+    "rho_length_per_stratum": {
+      "0.0": 0.0,
+      "0.25": -0.001457910354843427,
+      "0.5": 0.0,
+      "0.75": 0.0,
+      "1.0": 0.0
+    },
+    "ratios_per_hit": {
+      "SPIDER_RAG_n0": 1.0,
+      "SPIDER_RAG_n025": 1.573404401300637,
+      "SPIDER_STAGEHAND_n0": 1.61247725396999,
+      "SPIDER_TERX_n025": 0.6650461989781309,
+      "SPIDER_TERX_n05": 1.0395183299681852,
+      "SPIDER_TERX_n075": 1.0392336118339371,
+      "SPIDER_TERX_n1": 1.0396425663696782,
+      "SPIDER_COLD_n0": 0.10394833416131152
+    },
+    "ratios_total": {
+      "SPIDER_COLD_n0": 0.16263237518910742,
+      "SPIDER_COLD_n1": 1.0546856742229493,
+      "SPIDER_RAG_n0": 1.12565445026178,
+      "SPIDER_RAG_n025": 1.5488761108207005,
+      "SPIDER_STAGEHAND_n0": 1.5034965034965035
+    },
+    "controls": {
+      "PC1_hit_rate_n0": 1.0,
+      "PC1_stagehand_mean_per_hit": 31.008189341522677,
+      "PC2_binding_correctness_n0": 1.0,
+      "PC3_nc2_false_accept": 0.125,
+      "NC1_rho_per_hit": 0.0,
+      "NC1_block_p": 1.0,
+      "NC2_rho": -0.05566313954151985,
+      "NC2_false_accept": 0.125
+    },
+    "unknown_rate_spider": 0.71875,
+    "ece_exec": 0.025454877401718035,
+    "ece_exec_empty_bins": [0, 1, 2, 3],
+    "ece_all": 0.13299246480035778,
+    "confidence_std": 0.4053800944606679
+  },
+  "claim_ceiling": "FALSIFIED_IN_SETTING for C-RESIDUAL-NOVELTY/C-PRODUCT-ECON on the tested WebArena-Verified v2 proxy census (192 tasks/36 families/49 templates) with genuine branch-derived cost (retrieval 200/verify 50/hit 50/novel 500/repair 500/distill 1000 f=10), family-specific slots via distill_parameterized Jaccard>=0.75, fresh 0.25 UNKNOWN<0.80, QCR frozen bank TFIDF TAU 0.30 same ranker, honest 50-tok Stagehand/TERX hits, non-vacuous mock p=0.15. C1-C4 pass (rho 0.82 p 0.0002 R2_delta 0.75 |rho_length|<0.20) but C5-perhit fails (SPIDER/RAG 1.0 at n0 >0.85, 1.57 at n0.25 >0.85; SPIDER/Stagehand 1.61 at n0 >1.20; SPIDER/TERX >=1.03 at n>=0.5 not <1.0). Novely tracking is binary UNKNOWN gating (71.8% fallback) not step-level parameterization. No support for pay-cost-of-novelty or >=25% honest saving vs COLD beyond n0 total saving 0.16. Bounded hypothesis remains HYPOTHESIS globally; no PRODUCT_CORE promotion. Valid negative per Director comparative reasoning: per_hit <=0.85x RAG closure definitive for this kernel/cost/QCR; pivot to Stagehand cache / freshness-delta / curated exploration + MEA auditor harness required before Docker/full-DOM re-test.",
+  "evidence_refs": [
+    "research/experiments/EXP-PRODUCT-35860337280/result.json",
+    "research/experiments/EXP-PRODUCT-35860337280/artifacts/derived_metrics.json",
+    "research/experiments/EXP-PRODUCT-35860337280/artifacts/raw_per_task.csv sha 847ca72687aa813cd20eeb1527dc217e202bf15c0b935ac31473f3d18949c228",
+    "research/experiments/EXP-PRODUCT-35860337280/artifacts/registry.jsonl sha 462236fdef0f8468fe39b3d6a8675f3f96e414cbe8d68eba8d864a1fec1e6889",
+    "research/experiments/EXP-PRODUCT-35860337280/artifacts/cost_config.json sha 7df5283ec14179779e7e0d3ec690baacbc02b158eabd006b557adcb468cb92fa",
+    "research/experiments/EXP-PRODUCT-35860337280/artifacts/qcr_bank_manifest.json sha db3edb92049aafe2bb92e8ddd8e9c266304a90bbb6b495c4e6f202cf92522aec",
+    "research/experiments/EXP-PRODUCT-35860337280/artifacts/branch_traces.json sha aa5ebdcd831ff48ee17e822eb03409bfc5f6984d980dd1d635d351fe20a5af55",
+    "research/experiments/EXP-PRODUCT-35860337280/run_experiment.py sha 12650fa4cddebbf9c94c238d5f324d6e935760bb425bba629c0668ba566a67cc",
+    "research/experiments/EXP-PRODUCT-35860337280/provenance.json",
+    "research/experiments/EXP-PRODUCT-35860337280/spec.json",
+    "research/experiments/EXP-PRODUCT-35860337280/prereg.md",
+    "research/experiments/EXP-PRODUCT-35860337280/freeze.json"
+  ],
+  "unresolved": [
+    "Proxy vs Docker correlation rho_proxy_real and Pareto tokens/browser/latency with real gpt-4o-mini+Playwright not executed (validity_notes synthetic ceiling).",
+    "Per_hit formula excluding verification (6.25 tok/step) neutrality for absolute cost comparisons not sensitivity-tested (recompute with verification included shifts ratios ~5%).",
+    "UNKNOWN_precision 1.0 vacuity and ECE 4/5 empty bins calibration: whether non-vacuous abstention can be achieved at n>0 without 72% fallback (requires kernel Jaccard/freshness tuning).",
+    "Transfer beyond 2-slot families to richer 3+ slot or cross-site DOM parameterizations (registry shows 36 distinct mechanisms but all within same synthetic family structure).",
+    "Whether amortization f=100 would salvage economics vs mandated f=10 (producer reports f=10 only per Director; f=100 exploratory not run)."
+  ]
+}
