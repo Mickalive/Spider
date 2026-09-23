@@ -1,0 +1,257 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-35918640311",
+  "lane": "graph",
+  "created_at": "2026-09-23T20:57:20.688297+00:00",
+  "git": {
+    "base_sha": "98b40ef4df6bac37548b4dbbbd823ccceaed35a1",
+    "head_sha": "7dc6bd2773c0f388476b2eb1477c9fda11c54030",
+    "kernel_sha256": "66d78fb6939bad612d8efd8c0952a2e7687003de782200617ea926ed6a4805a6",
+    "kernel_path": "src/spider/kernel.py",
+    "diff_base_head_nonempty": true,
+    "diff_command": "git diff 98b40ef4df6bac37548b4dbbbd823ccceaed35a1..HEAD -- src/spider/kernel.py"
+  },
+  "census": {
+    "data_path": "data/webarena_verified_v2.json",
+    "data_sha256": "b151568633875ab6909e98d3cb421e6ca986ee3011648eef9865954610b22b75",
+    "census_path": "research/experiments/EXP-GRAPH-35918640311/census.json",
+    "census_sha256": "b151568633875ab6909e98d3cb421e6ca986ee3011648eef9865954610b22b75",
+    "tasks": 277,
+    "templates": 49,
+    "duplication": 0.8231046931407943,
+    "families_ge3": 43,
+    "pilot_family": "add_to_cart",
+    "pool_a": 5,
+    "pool_b": 16,
+    "zero_overlap": true,
+    "zero_overlap_sha_a": "ca6ebb92f4c9e233c6ba218f32e45c23dac845334175d1b667b5a433471281f5",
+    "zero_overlap_sha_b": "761fcf557cd0cff299ba3c9e1f1255ed1ef433241a1841113bfc96dcda8364b5"
+  },
+  "kernel": {
+    "path": "src/spider/kernel.py",
+    "sha256": "66d78fb6939bad612d8efd8c0952a2e7687003de782200617ea926ed6a4805a6",
+    "checks": {
+      "distill_parameterized": true,
+      "_common_prefix_and_suffix": true,
+      "_extract_varying_values": true,
+      "_structure_similarity": true,
+      "_is_allowed_path": true,
+      "_field_path_to_slot_name": true,
+      "_sanitize_slot": true,
+      "confidence_090": true,
+      "single_prefix": true,
+      "jaccard_thresh": true
+    },
+    "grep_hits": {
+      "distill_parameterized": 2,
+      "_common_prefix_and_suffix": 4,
+      "_extract_varying_values": 2,
+      "_structure_similarity": 4,
+      "_is_allowed_path": 5,
+      "_field_path_to_slot_name": 4,
+      "_sanitize_slot": 6
+    },
+    "confidence": 0.9,
+    "jaccard_threshold": 0.75,
+    "allowed_prefixes": [
+      "url",
+      "path",
+      "body.",
+      "headers."
+    ],
+    "single_prefix": true
+  },
+  "tests": {
+    "path": "tests/test_kernel_param_inherit.py",
+    "sha256": "3f316e1b3ec586eb2555031442c7f94d857d0e45bc86f27eaa1b9c5c595e4008",
+    "result": "14/14 PASS",
+    "command": "PYTHONPATH=src python -m unittest tests.test_kernel_param_inherit -v",
+    "required_tests": [
+      "B1",
+      "B4",
+      "D1",
+      "E1",
+      "C2",
+      "B2",
+      "B3",
+      "B5"
+    ]
+  },
+  "pilot": {
+    "family": "add_to_cart",
+    "exemplars": 5,
+    "mechanism_id": "param-2af80ac9a678",
+    "slots": [
+      "resource_id",
+      "sku",
+      "x_csrf_token"
+    ],
+    "template": {
+      "url": "${resource_id}",
+      "body.sku": "${sku}",
+      "headers.X-Csrf-Token": "${x_csrf_token}"
+    },
+    "confidence": 0.9,
+    "registry_path": "research/experiments/EXP-GRAPH-35918640311/raw_evidence/registry.json"
+  },
+  "metrics": {
+    "M-EXECUTABLE-SPIDER": 1.0,
+    "M-EXECUTABLE-SPIDER-WilsonLow": 0.8063865817272801,
+    "M-EXECUTABLE-SPIDER-WilsonHigh": 1.0,
+    "M-BINDING-CORRECT": 1.0,
+    "M-BINDING-CORRECT-WilsonLow": 0.8063865817272801,
+    "M-BINDING-CORRECT-WilsonHigh": 1.0,
+    "M-UNSUBSTITUTED-TEMPLATES": 0,
+    "M-FALSE-ACCEPT-SPIDER": 0.0,
+    "M-FALSE-ACCEPT-WilsonHigh": 0.19361341827271994,
+    "M-UNKNOWN-RATE-SPIDER": 0.0,
+    "M-ECE": 0.09999999999999976,
+    "M-SUCCESS-LITERAL": 0.0,
+    "M-SUCCESS-SPIDER": null,
+    "M-SUCCESS-COLD": null,
+    "M-SUCCESS-RAG": null,
+    "M-SUCCESS-REPLAY": null,
+    "M-SUCCESS-INSTR": null,
+    "M-BINDING-CONTROL-PC2": 1.0,
+    "M-PC1-HIT-RATE": 1.0,
+    "M-AMORTIZED-SAVING-vs-COLD": null,
+    "M-COST-RATIO-vs-RAG": null,
+    "M-TOKENS-SPIDER": null,
+    "M-BROWSER-CALLS-SPIDER": null,
+    "M-LATENCY-MS-SPIDER": null,
+    "tasks_valid": 16,
+    "families_valid": 1,
+    "census_verified": true,
+    "census_synthetic_verified": true,
+    "census_tasks": 277,
+    "census_templates": 49,
+    "census_duplication": 0.8231046931407943,
+    "families_ge3": 43,
+    "pilot_family": "add_to_cart",
+    "pool_a_size": 5,
+    "pool_b_size": 16,
+    "zero_overlap_verified": true,
+    "zero_overlap_sha_a": "ca6ebb92f4c9e233c6ba218f32e45c23dac845334175d1b667b5a433471281f5",
+    "zero_overlap_sha_b": "761fcf557cd0cff299ba3c9e1f1255ed1ef433241a1841113bfc96dcda8364b5",
+    "llm_available": false,
+    "llm_reason": "api_key_absent",
+    "kernel_sha256": "66d78fb6939bad612d8efd8c0952a2e7687003de782200617ea926ed6a4805a6",
+    "kernel_head_sha": "7dc6bd2773c0f388476b2eb1477c9fda11c54030",
+    "kernel_base_sha": "98b40ef4df6bac37548b4dbbbd823ccceaed35a1",
+    "kernel_diff_nonempty": true,
+    "kernel_checks": {
+      "distill_parameterized": true,
+      "_common_prefix_and_suffix": true,
+      "_extract_varying_values": true,
+      "_structure_similarity": true,
+      "_is_allowed_path": true,
+      "_field_path_to_slot_name": true,
+      "_sanitize_slot": true,
+      "confidence_090": true,
+      "single_prefix": true,
+      "jaccard_thresh": true
+    },
+    "unit_tests_passed": true,
+    "PC1-HIT-RATE": 1.0,
+    "PC1-COST-TOKENS": 50,
+    "PC2-EXECUTABLE": 1.0,
+    "PC2-BINDING": 1.0,
+    "NC1-SHUFFLED-BINDING": 0.0,
+    "B-LITERAL-EXECUTABLE": 0.0,
+    "bootstrap-executable-low": 1.0,
+    "bootstrap-executable-high": 1.0,
+    "bootstrap-binding-low": 1.0,
+    "bootstrap-binding-high": 1.0,
+    "confidence_threshold": 0.9,
+    "min_confidence": 0.8,
+    "jaccard_threshold": 0.75,
+    "structure_similarity": "Jaccard",
+    "field_filter": "url/body.*/headers.*"
+  },
+  "environment": {
+    "python": "3.12.14 (main, Aug 13 2026, 02:47:42) [GCC 13.3.0]",
+    "platform": "linux",
+    "llm_available": false,
+    "llm_reason": "OPENAI_API_KEY absent",
+    "playwright_available": false,
+    "seeds": {
+      "PYTHONHASHSEED": 0,
+      "random": 42,
+      "bootstrap": 42,
+      "llm": 42
+    },
+    "honest_cost": "tokens+browser+retrieval+verification amortized at f=10 null due api_key_absent",
+    "verification": "deterministic _matches on oracle next_state postconditions",
+    "file_based": true
+  },
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-GRAPH-35918640311/census.json",
+      "sha256": "b151568633875ab6909e98d3cb421e6ca986ee3011648eef9865954610b22b75",
+      "role": "raw"
+    },
+    {
+      "path": "data/webarena_verified_v2.json",
+      "sha256": "b151568633875ab6909e98d3cb421e6ca986ee3011648eef9865954610b22b75",
+      "role": "raw"
+    },
+    {
+      "path": "src/spider/kernel.py",
+      "sha256": "66d78fb6939bad612d8efd8c0952a2e7687003de782200617ea926ed6a4805a6",
+      "role": "code"
+    },
+    {
+      "path": "tests/test_kernel_param_inherit.py",
+      "sha256": "3f316e1b3ec586eb2555031442c7f94d857d0e45bc86f27eaa1b9c5c595e4008",
+      "role": "code"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-35918640311/raw_evidence/per_task.csv",
+      "sha256": "6014dc7992defb2ac318e7e4ac78ad070cb65130ad7ae1f71bac748f58a2e9a1",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-35918640311/raw_evidence/registry.json",
+      "sha256": "111f3dcdbe95e5ced7cc2e1f41dba00ca11b09796283dbcef31023d343d6c802",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-35918640311/raw_evidence/cost_config.json",
+      "sha256": "ef013d62e528aaa07fc21537d8cf1a037fb0cbcd0d87e9272ca4a588ba282362",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-35918640311/raw_evidence/census_attempts.json",
+      "sha256": "9d0d6d51002dd8a9149954bd117b5eebfe981d49ddca1b4455afb38aa2d97ec9",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-35918640311/raw_evidence/kernel_check.json",
+      "sha256": "e0f0b764fc0c044656d2e8ec97d0f9bc0c93eb04e3328ea796573fb9fe6c5fb0",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-35918640311/raw_evidence/unit_test_output.json",
+      "sha256": "aaa2d92d217cb90f0cbdf1de69010067eb5c3c931054f9b844a99b572f3fd689",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-35918640311/raw_evidence/metrics.json",
+      "sha256": "4367d027be72bf96d7730045899f5c180a9e896c7a3924df973142adeb372240",
+      "role": "derived"
+    }
+  ],
+  "commands": [
+    "PYTHONPATH=src python -m unittest tests.test_kernel_param_inherit -v",
+    "python /tmp/run_pilot.py (distill_parameterized 5 A -> B 16 via deterministic _matches Wilson 95% CI bootstrap 5000 seed 42)",
+    "git diff 98b40ef4df6bac37548b4dbbbd823ccceaed35a1..HEAD -- src/spider/kernel.py",
+    "sha256sum src/spider/kernel.py data/webarena_verified_v2.json"
+  ],
+  "frozen_inputs": {
+    "request.json": "6cb7651ec96adfe5a7051d97bce43b601abd7d2273f707acd19eccafbc025247",
+    "spec.json": "2b00511c9b9628dec236ac63660bf67703aa6f7af3f3aabc1adb1f6aba23a34d",
+    "prereg.md": "df1acd619a57ef5f8aa5b2a6c81b3014eac779a95cefe22fd8e43c984ae70e3c",
+    "freeze.json": "99b330641bb77627a5f58185e2f79187438d7cae29cf155a2d69b4cb6ddb4296"
+  },
+  "notes": "EXP-GRAPH-35918640311 EXECUTE COMPLETE SUPPORTS: binding gate SURVIVES_CURRENT_TEST (EXECUTABLE 1.0 Wilson 0.806 binding 1.0 Wilson 0.806 zero templates, false_accept 0.0 unknown 0.0 ECE 0.10 B-LITERAL 0.0 PC1/PC2 PASS NC1 0.0). LLM-dependent C4 NOT_APPLICABLE per falsifier preserves binding gate per Director mandate. First durable proof corrected distill_parameterized (single-prefix, field-filter Jaccard distinct slots conf 0.90) generalizes A->B on file-based census 5\u219216 zero-overlap. Single-family file-based ceiling only; economics requires LLM."
+}
