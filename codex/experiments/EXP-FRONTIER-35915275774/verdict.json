@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-FRONTIER-35915275774",
+  "lane": "frontier",
+  "decision": "MEASUREMENT_INVALID",
+  "claim_updates": [
+    {
+      "claim_id": "C-SEMANTIC-RESOLVE",
+      "status": "EXPERIMENTAL",
+      "reason": "MEASUREMENT_INVALID per frozen falsifier: PC-BROWSERGYM-HEALTH FAIL (live_available false, census 4 envs x3 retries all ModuleNotFoundError browsergym/playwright/agentlab not installed, synthetic fallback fixture sha 83b7c52d only) and PC-HONEST-COST-SANITY FAIL (permutation |rho_shuffled| 0.230 for H-HIERARCHICAL-CF exceeds 0.20 threshold p=0.176, audit required_fixes). PC-OPENAPI-COVERAGE and PC-ROUTING-DIFF pass only on synthetic /random/alias* paths (14 paths, 40/40 prefix, 14/58 pairs differ via version-collapse) not on live WebArena-Verified v2/WebGym 300k task paths per Director mandate. All single-candidate correct-family pipelines identical 20/40=0.500 Wilson [0.352,0.648] per-family header 10/10 body 10/10 auth 0/10 mixed 0/10 ECE 0.22-0.24 (B-EXACT-MATCH, B-FLAT-TFIDF-K5-CF, H-HIERARCHICAL-CF, B-COMPILED-DSM, B-ENDPOINT-CATALOG) with McNemar p=1.0 vs each other, replicating bounded 21/40=0.525 synthetic ceiling. Joint exploratory B-JOINT-FETCH 40/40=1.0 Wilson [0.912,0.912] mixed 10/10 replicates prior EXP-FRONTIER-35903208514 synthetic joint 40/40 but remains synthetic-only, not validated live. Audit MEASUREMENT_INVALID producer_claim_supported false recomputes all pooled/per-family/ECE/honest_cost exactly. No confirmatory live inference justified; synthetic EXPERIMENTAL ceiling preserved, no VALIDATED or PRODUCT_CORE."
+    }
+  ],
+  "product_action": "HOLD",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "After repairing live BrowserGym 1280x720 CDP Accessibility.getFullAXTree substrate (playwright, browsergym-core, agentlab >=0.3) and frozen honest-cost sum-counter harness, does the genuine O(1) compiled DSM-IR vs genuine endpoint-catalog Jaccard>=0.6 shootout break the bounded 20/40=0.50 single-candidate ceiling on a live heterogeneous WebArena-Verified v2 / WebGym 300k sample where OpenAPI spec covers >=70% task paths and routing normalization differs before/after on >=20% task-relevant paths, under correct-family gating and honest cost (|rho_shuffled|<0.20, within-f std>0, not n*3200), and does joint Fetch/WebMCP + routing normalization + complementary 2-3 candidate composition rescue mixed triple-channel header+body+query+auth from 0/10 to >=4/10 with ECE<=0.15 and amortized O(1) $0.002-0.092 at f=10/100?",
+  "reason": "Independent audit MEASUREMENT_INVALID confirms frozen decision_rule triggers on two PC failures regardless of pooled metrics. PC-BROWSERGYM-HEALTH fails: synthetic fallback only, census 4 envs x3 retries all failed, no CDP AX>10 live data, so Director binding question on live hetero sample where spec covers paths and routing differs was not tested (validity_findings[1], provenance census_log). PC-HONEST-COST-SANITY fails marginally: H-HIERARCHICAL-CF perm |rho|=0.230 p=0.176 exceeds 0.20 threshold (within-f std 1.02 passes, not bijective). PC-OPENAPI-COVERAGE and PC-ROUTING-DIFF threshold passes are synthetic-path artifacts not live task-path verified per audit V3-V4. Phenotype 20/40=0.50 for all single pipelines vs 40/40 joint is exact replica of prior synthetic bounded ceiling 21/40=0.525 and 40/40 joint (EXP-FRONTIER-35903208514, EXP-FRONTIER-35886105479) — no new live discrimination. Audit recomputed_metrics match producer (pooled 0.5/1.0, per-family, ECE, honest_cost, McNemar p=1.0) and resolves honest_cost diff 0 but rho exceedance. Claim ceiling bounded to synthetic orthogonal header/body/auth+mixed minimal derived dict, no live BrowserGym heterogeneity, no promotion. Next step requires substrate repair and genuine live spec/routing validation before any SURVIVES/FALSIFIED determination for compilation-IR or endpoint-catalog leverage; immediate chaining would repeat synthetic fallback. Synthesis distinguishes RAW EVIDENCE (synthetic 20/40 and 40/40 counts) from INTERPRETATION (no live leverage) to AUDIT FINDING (MEASUREMENT_INVALID) to DECISION (HOLD, EXPERIMENTAL preserved).",
+  "evidence_refs": [
+    "research/experiments/EXP-FRONTIER-35915275774/spec.json",
+    "research/experiments/EXP-FRONTIER-35915275774/prereg.md",
+    "research/experiments/EXP-FRONTIER-35915275774/freeze.json",
+    "research/experiments/EXP-FRONTIER-35915275774/result.json",
+    "research/experiments/EXP-FRONTIER-35915275774/raw_evidence.json",
+    "research/experiments/EXP-FRONTIER-35915275774/derived_metrics.json",
+    "research/experiments/EXP-FRONTIER-35915275774/audit.json",
+    "research/experiments/EXP-FRONTIER-35915275774/provenance.json",
+    "research/experiments/EXP-FRONTIER-35915275774/compilation_ir_manifest.json",
+    "research/experiments/EXP-FRONTIER-35915275774/endpoint_catalog_manifest.json",
+    "research/experiments/EXP-FRONTIER-35915275774/hierarchical_manifest.json",
+    "research/experiments/EXP-FRONTIER-35915275774/routing_manifest.json",
+    "research/experiments/EXP-FRONTIER-35915275774/fetch_manifest.json",
+    "research/experiments/EXP-FRONTIER-35915275774/joint_manifest.json",
+    "research/experiments/EXP-FRONTIER-35903208514/handoff.json",
+    "codex/claim_state.json",
+    "codex/index.json"
+  ]
+}

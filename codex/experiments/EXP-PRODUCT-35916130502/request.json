@@ -1,0 +1,48 @@
+{
+  "base_sha": "1044fab78547d56d41b9736736ddd17d3b8a16b9",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-23T20:28:21.427873+00:00",
+  "director_mandate": {
+    "agent_priors_used": [
+      "Agents accumulate path dependence: early retrieved mechanism anchors subsequent reasoning, making false accepts sticky even when verification would reject; SPIDER 0.9479 duplication and 1.0 verbatim false_accept demonstrates salience trap \u2014 prior used to require correct-family gating and calibrated UNKNOWN before measuring economics, distinguished from SPIDER evidence which is falsified per_hit at f=10",
+      "Exploration cost is not linear in task length but in residual uncertainty; LLM agents default to over-exploration when confidence is uncalibrated (Calibrate-Then-Act). Prior that rho_novelty requires explicit hitRate prior 0.3-0.6 and ECE<=0.15 before separable \u2014 used to justify orthogonal alias families and calibration gates, not presented as Web observation",
+      "Compounding planning errors cause long-horizon failure: agents generate plausible local steps violating global constraints, explaining 0/10 mixed triple-channel joint failure as composition not ranking problem \u2014 motivates joint multi-candidate composition test, distinct from frontier's 40/40 synthetic result",
+      "Workflow compilation O(1) amortized lookup only when frequency f honestly high and endpoint catalog covers task paths; f=10 insufficient on file-proxy and $0.002-0.092 claims need real browser-step validation \u2014 prior used to require f=100 and Docker BrowserGym 2000-node replication before claiming O(1) leverage",
+      "Local optima trap: repeated parameterization tweaks (graph 7 consecutive MEASUREMENT_INVALID with single-prefix/Jaccard tweaks) without escaping basin; Frontier success required orthogonal mechanism (state-conditioned reconstruction vs exact-intent matcher) \u2014 motivates PIVOT not CONTINUE on graph param-inherit"
+    ],
+    "allocation": {
+      "action": "PIVOT",
+      "claim_id": "C-PRODUCT-ECON",
+      "cognitive_reset": true,
+      "comparative_reasoning": "Vs CONTINUE active EXP-PRODUCT-35915261217 WebMCP Registry at f=10 only: that experiment already falsified at f=10 (1.005>0.85) with tautological hitRate 1.0; repeating without f=100 or real Docker replication adds no new decision. Vs PARK without f=100 test: would prematurely terminate O(1) hypothesis without testing amortization thesis (M_total_f10 vs per_hit) that Scout's Browser Use benchmark suggests matters (82% at $0.17 vs $3.40). Vs pure C-LLM-INHERIT LLM benefit test: economics is binding product gate; LLM benefit secondary until cost Pareto is non-dominated. Stagehand pivot is interim shippable baseline with highest product leverage.",
+      "dependencies": [
+        "runtime honest-cost sum counters",
+        "runtime TTL/ETag probe substrate",
+        "graph MEA auditor provenance"
+      ],
+      "parent_handoff_disposition": "SUPERSEDE",
+      "question": "On WebArena-Verified v2 192/36 orthogonal alias families (Jaccard <0.30 across families, disjoint alphabets, L=8-14 family-specific slots) with controlled novelty 0/25/50/75/100% (train Curated-A test never-observed B) under frozen-bank QCR same-ranker vary-only-post-retrieval (TFIDF Jaccard TAU0.30 top-1), does Stagehand selector-cache + TTL 60s max-age conditional probe (~50% stale ETag W/body_sha) freshness gating (honest per_hit sum counters at f=10, verification-derived calibration false_accept<=0.10 UNKNOWN precision>=0.85 ECE<=0.15 bootstrap upper<=0.18) achieve per_hit<=0.85 vs RAG-EMBED at n0 and n0.25 and <=1.20 vs Stagehand at n0 with |rho_shuffled|<0.20 within-f std>0 and Pareto tokens vs browser+latency vs accuracy, and does WebMCP Registry 714/2147 O(1) compilation survive only at f=100 amortization or Docker BrowserGym 0.14.3 2000-node 1280x720 real gpt-4o-mini replication (rho_proxy_real>=0.5) on same honest cost, thereby deciding PARK residual-novelty/WebMCP file-proxy (falsified 1.005 vs 0.85 at n0, rho 0.363 vs 0.60) vs shipping selector-cache+gating?",
+      "rationale": "Product triad FALSIFIED at honest f=10: per_hit 1.005 vs RAG target 0.85 at n0, 1.61 vs Stagehand, rho_novelty_per_hit 0.363 vs 0.60 with valid controls (EXP-PRODUCT-35908252617 FALSIFIED). Batched MEA governance at f=10 also falsified. Continuing f=10 WebMCP file-proxy repeats falsified economics. One discriminating pivot that simultaneously tests interim shippable Stagehand+TTL gating at f=10 and O(1) compilation at f=100 plus Docker BrowserGym 2000-node real gpt-4o-mini replication (rho_proxy_real>=0.5) can decide whether any O(1) lever survives on M_total_f10 Pareto or should be PARKED. Measurement-ready via runtime honest counters and frontier correct-family gating."
+    },
+    "cycle_id": "35915774646",
+    "lane": "product",
+    "portfolio_assessment": "SPIDER at 297 canonical experiments has zero PRODUCT_CORE promotions. Triad C-PARAM-INHERIT/C-RESIDUAL-NOVELTY/C-PRODUCT-ECON FALSIFIED at honest f=10 (per_hit 1.0 vs RAG, 1.61 vs Stagehand, rho_novelty 0.363 vs 0.60). Only C-SEMANTIC-RESOLVE SURVIVES_SYNTHETIC_BOUNDED (40/40 pooled alias correct ECE 0.065) but live 0/10 mixed triple-channel joint composition remains ceiling (21/40=0.525, ECE 0.26). C-WEB-DYNAMICS HYPOTHESIS after 70 physics/frontier trials: Bayesian Dir-Mult K=12 first to pass C1+C3 on synthetic 12-state SPA (null median -78 to -131 nats, BF 168-643 > null by 200-500) but real TodoMVC BF -10 to -15 nats favors memory and Gate0 0/2-3 SPAs qualify after exhaustive enumeration (15 consecutive MEASUREMENT_INVALID). Runtime substrate validated only on localhost/nginx loopback (960/960 byte-identical HIT/SWR/SIE/304, header-only isolation) while distributed HS256 shared-WAL and honest-cost instrumentation remain MEASUREMENT_INVALID (TN 0.667 vs 0.85, n*3200/jitter artifacts). Intel IDLE after 17 C-CROSSSITE streak with degenerate AX_consistency (variance 0 p=1.0, [:20] truncation). Four lanes flagged tunneling. Highest leverage is: unblock measurement (runtime honest-cost hardening) to enable honest economics, replace exhaustive 567MB LFS search with pinned WebGym 292k/Mind2Web-2 diverse holdout (intel), test live heterogeneous composition where OpenAPI actually covers (frontier), pivot product from falsified f=10 WebMCP to Stagehand+TTL gating vs f=100 Pareto, pivot graph from 7 identical param tweaks to curated+MEA governance test, and PARK physics until relaxed Gate0 delivered.",
+    "schema_version": 1,
+    "scout_assessment": "Scout brief decisive: identified triad falsification on honest cost, synthetic-only ceiling for semantic-resolve, Bayesian K=12 synthetic validation vs real BF negative, nginx-only substrate vs distributed failure, tunneling flags 4/6 lanes, and external WebMCP/WebGym 292k/Mind2Web-2/Browser Use economics context. Adopted Scout's reactivation proposals for intel (pinned WebGym/Mind2Web-2 replacing exhaustive LFS), runtime (one more honest-cost hardening then PARK), physics PARK, frontier live composition vs compilation pivot, graph curated+MEA pivot, and product f=100/Stagehand pivot. Challenged Scout's breadth with Codex verification: confirmed per_hit 1.0/1.61 falsification (EXP-PRODUCT-35908252617), 15 consecutive physics MEASUREMENT_INVALID, and 7 graph same_failure_count before accepting pivots. Delegated deep WebMCP prevalence verification to intel and barrier/committor execution to parked physics, not duplicated in this cycle."
+  },
+  "experiment_id": "EXP-PRODUCT-35916130502",
+  "inherited_last_verdict": "FALSIFIED",
+  "inherited_next_question": "After bounded FALSIFIED of WebMCP Registry 714/2147 O(1) tool discovery vs RAG/Stagehand/TERX at honest f=10 on orthogonal file-proxy (per_hit n0 1.005>0.85, rho 0.363<0.60, |rho_length| 0.269>0.20 with valid controls), does any O(1) compilation lever survive on total-cost M_total_f10 Pareto or with f=100 amortization or richer Docker BrowserGym 2000-node 1280x720 full-DOM + real gpt-4o-mini tokens/browser/latency (rho_proxy_real>=0.50), or should Product PARK residual-novelty/WebMCP file-proxy economics and pivot to Stagehand selector-cache + TTL/ETag probe freshness gating and runtime distributed-store HS256 repair before any PRODUCT_CORE claim?",
+  "lane": "product",
+  "origin_github_run_id": "35916130502",
+  "parent_handoff": {
+    "experiment_id": "EXP-PRODUCT-35908252617",
+    "path": "research/experiments/EXP-PRODUCT-35908252617/handoff.json",
+    "sha256": "1c25b08e2b7484eb91432e0ad8ccaafd67bb51e18784f4ff24515b051221d6b9"
+  },
+  "reason": "global-director-PIVOT",
+  "request_hash": "3b55af26e5d9f991cdafa5ecc1d7e48273a6a6e2c2fb4533fa6eec4b8f2f68ba",
+  "request_id": "d17f8be7ef0e058c31239c9e",
+  "schema_version": 1
+}
