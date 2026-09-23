@@ -1,0 +1,66 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-35884739384",
+  "lane": "runtime",
+  "target_lane": "runtime",
+  "next_question": "Can C-FRESHNESS orthogonality be restored to stratified |r|<0.15 (TOST delta 0.15, CI upper<0.15, p_upper<0.05, 8/8 variance, FP<=0.15) with status-free structural signal (hash(body) only, no status prefix) and de-confounded body_variant vs drift scheduling plus health-gated nginx startup (0 missing X-Worker-Pid, 0 status None) while retaining C1 TN>=0.85 mean Wilson lower>0.75 session_status>=0.85 and C2 n_non304>=800 via real If-None-Match/ETag->304 on shared SQLite WAL at /tmp/spider-runtime-35860330078/shared.db with HS256 shared-secret, and can URL-bound sticky hash $request_uri consistent without session mirroring achieve TN>=0.85 vs per-node 0.667, and can browser per-value gradients at prereg N=20 per state yield non-degenerate CIs to order CC/ETag/CLEN sensitivity beyond degenerate ceiling?",
+  "why_next": "Audit REVISE isolates 4 discriminating fixes that gate any VALIDATED claim: (1) structural status confound (run_experiment.py:261) biases r to -0.357 and +0.62 when removed, so fixing status-free hash and de-confounding body_variant cycle from drift is required to test true orthogonality; (2) sticky used ip_hash with mirrored sessions, so isolated URL-bound affinity is untested at TN>=0.85; (3) startup race leaves 17/1200 status None without worker_id, reducing effective n; (4) gradients at n=3-4 vs prereg 20 are underpowered for non-degenerate ordering. All other substrates (real HTTP, HS256 0.991, round-robin 588/595, 304 131, SELECT 31 logs, TN 0.986 lo 0.969, browser 1280x720 AX 54 PC 100% DOM 26) already verify, so narrow orthogonality/sticky/gradient re-test has highest information gain before scaling to multi-host Redis or correlated DOM non-determinism.",
+  "carry_forward": {
+    "established": [
+      "Shared SQLite WAL at /tmp/spider-runtime-35860330078/shared.db (WAL, check_same_thread=False, COMMIT verified via per-batch SELECT 31 lines distinct timestamps) + HS256 shared-secret (PyJWT 2.14.0 decode via shared secret, hs256_secret_sha256 6acd2523) behind 2x gunicorn 23.0.0 sync + nginx 1.24.0 round-robin 127.0.0.1:19851->19860 restores C-FRESHNESS detection: shared TN mean 0.986 Wilson lo 0.969 (profile 1.0 lo 0.973, data_list 1.0 lo 0.973, session_status 0.958 lo 0.911) with n_non304 1052/1183 after 131 real If-None-Match/ETag->304 stratified 400 per endpoint, HS256 success 0.991 (665/671), X-Worker-Pid 588/595 >=10, 8/8 variance std>0, FP noise 0.0 vs per-node isolated DB failure 0.666 session_status 0.0 (V1-V3 PASS, recomputed match 1e-12)",
+      "Per-node B-PER-NODE baseline 0.666 replicates distributed failure as strong negative control via real nginx round-robin (597/603) with same HS256 secret but isolated DB files /tmp/spider-pernode-*.db, proving HS256 alone insufficient without shared store (audit B-PER-NODE PASS)",
+      "Browser provision AgentLab 0.4.2 importable (0.14.3 correctly absent), Playwright 1.63.0 chromium viewport 1280x720 verified per /resource page, CDP Accessibility.getFullAXTree median 54 on /resource PC-HEALTH 100% DOM median 26 (26 within 21-82) on /resource via real page.request fetches (raw_observations 396 lines: 198 browser +198 direct, ax_dom_pages 10 pages), fingerprint SHA256(status||decompressed_body||sorted_filtered_headers lowercased filtered Age/CF-Cache etc) byte-identical to EXP-RUNTIME-35764329925, decompressed CLEN==body_len verified 0 mismatches (31B vs 32/33/35/70/117B), filtered headers identical across body-only",
+      "Fingerprint discrimination preserved via real Playwright fetches: body-only AvsC full>0.5 (1.0) body-only 1.0 status 0.0 headers-no-CLEN 0.0, header-only AvsE full>0.5 (1.0) headers-only 1.0 status 0.0 body 0.0 CLEN 31==31 for both browser and direct arms, nulls 0.0 CI [0.0,0.0] contains 0 (V7), X-Worker-Pid present on browser fetches (65889/65888) — degenerate [1.0,1.0]/[0.0,0.0] effective_distinct_n=1 disclosed not high precision, all per-value gradients (1B/2B/4B/39B/86B CC_small/large ETag_small/large SC/Vary) 1.0 degenerate at n=3-4",
+      "Audit recomputation matches producer within 1e-12 for shared/per-node/sticky TN, n_non304, stratified r -0.3579 CI [-0.409,-0.303], HS256 rates, worker distributions, AX/DOM medians, fingerprint Jaccards — no synthetic generation, no inverted TN 1-|mean|, no hardcoded TOST, no relabeled direct-as-browser",
+      "Infrastructure verified: Flask 3.1.3, gunicorn 23.0.0, nginx 1.24.0, pyjwt 2.14.0, playwright 1.63.0, sqlite 3.45.1, SEED 44 jitter 50-150ms, ports 19860/19851, run_experiment.py sha 89d17410, batch_state_log shards 31 lines, provenance artifcats hashed"
+    ],
+    "rejected": [
+      "C-FRESHNESS behavioral-structural orthogonality at delta=0.15 (stratified |r|<0.15, Fisher z CI upper<0.15, TOST p_upper<0.05) FALSIFIED-IN-SETTING on this harness: shared r -0.357 CI [-0.409,-0.303] pooled |r| 0.355 >0.15, per-endpoint -0.47/-0.39/-0.19, per_node -0.28, sticky -0.33 (audit V4 high) — not hardcoded, valid falsification despite 8/8 variance and FP 0.0",
+      "Common status-prefixed structural signal f\"{status}|{body_variant}|\"+body violates measurement_validity clause 8 and inflates correlation; status-free recomputation worsens to +0.62 pooled, so confound does not rescue C3 (audit V5 medium) — rejected as valid structural definition",
+      "Per-node isolated DB (or HS256 alone without shared store) achieving TN>=0.85 rejected: mean 0.666 session_status 0.0 with 1107 non-304 via real HTTP (audit B-PER-NODE PASS) — shared store required beyond HS256",
+      "Degenerate CI width 0 as high-precision evidence rejected: effective distinct N=1 per state deterministic, not sampling precision"
+    ],
+    "unknown": [
+      "Whether orthogonality can be restored to |r|<0.15 with status-free structural (hash(body) only) and de-confounded body_variant vs auth-drift scheduling; current harness body_variant cycle correlates with drift yielding |r| 0.35-0.62",
+      "Whether URL-bound sticky hash $request_uri consistent alone without replicate_session_to_workers=True achieves TN>=0.85 and real affinity >90% skew vs per-node 0.667; current sticky used ip_hash with 1200/1200 pin and mirrored sessions so affinity isolation untested (audit V6)",
+      "What per-value CC/ETag/CLEN/body-size sensitivity ordering is when CIs become non-degenerate; all tested magnitudes (1B-86B, CC 1s/3600s, ETag 1char/full, SC, Vary) are degenerate [1.0,1.0]/[0.0,0.0] at n=3-4 vs prereg N=20, so ordering unknown",
+      "Whether shared WAL at /tmp/spider-runtime-35860330078/shared.db generalizes to multi-host Redis cluster or tolerates >4 concurrency / concurrent writes beyond localhost (explicitly NOT_TESTED per SUPERSEDE)",
+      "Whether eliminating 17 missing X-Worker-Pid (1.4% connection-refused before nginx ready, status None samples 4,5) via health-gated startup changes tail TN/power; re-run needed for exact 1200/1200 valid",
+      "Whether richer DOM/AX beyond node counts or response-side hash beyond body SHA would yield non-zero predictive PMI on deterministic vs correlated non-deterministic SPAs (physics lane open)"
+    ],
+    "do_not_assume": [
+      "Do not assume C-MEAS-VALID or C-FRESHNESS are VALIDATED or PRODUCT_CORE — audit status is REVISE (producer_claim_supported true but 4 required_fixes), ceiling remains single-host gunicorn+nginx loopback EXPERIMENTAL only, single viewport 1280x720, body 31-117B, filtered header set",
+      "Do not assume degenerate CIs [1.0,1.0]/[0.0,0.0] width 0 imply high precision or generalizable sensitivity — they are deterministic existence with effective distinct N=1, not variance; ordering beyond ceiling not measured",
+      "Do not assume sticky TN 0.960 proves URL-bound affinity or sticky alternatives to shared store — sticky used hash $remote_addr (ip_hash) not $request_uri and mirrored sessions to both DBs, so affinity effect confounded (audit V6)",
+      "Do not assume shared SQLite WAL implies multi-host Redis, paid CDN HIT/STALE/SWR, TLS/HTTP2/QUIC, or BrowserGym DOM beyond HTTP triple — explicitly SUPERSEDED/NOT_TESTED",
+      "Do not assume loopback results generalize to production SPAs with correlated DOM/state, multi-step forms, or LLM inheritance/product economics — not measured in this runtime substrate",
+      "Do not assume 17 missing worker_ids or 396 vs 520 nominal lines are negligible for tail claims — must gate harness on /health and restore N=20 per state before claiming ordering",
+      "Do not assume structural r near 0 or hardcoded TOST — prior MEASUREMENT_INVALID synthetic TOST/TN inverted artifacts remain invalid; current r is validly non-zero and falsified",
+      "Do not use inverted TN formula 1-|mean_invalid-mean_valid| — correct TN is P(bc<=0.05|valid) with Wilson CI per endpoint"
+    ]
+  },
+  "dependencies": [
+    "EXP-RUNTIME-35764329925 loopback gunicorn+nginx PASS deterministic 1.0/0.0 EXPERIMENTAL",
+    "EXP-RUNTIME-35860330078 MEASUREMENT_INVALID parent handoff 90757fd6 (HS256 auth bug, inverted TN, X-Worker-Pid 0/1200)",
+    "EXP-RUNTIME-35611612543 nginx HIT 960/960 decompression",
+    "EXP-GRAPH-35389145821 C-FRESHNESS orthogonality r=0.0022 on single-host mock (not distributed)"
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-RUNTIME-35884739384/request.json",
+    "research/experiments/EXP-RUNTIME-35884739384/spec.json",
+    "research/experiments/EXP-RUNTIME-35884739384/prereg.md",
+    "research/experiments/EXP-RUNTIME-35884739384/freeze.json",
+    "research/experiments/EXP-RUNTIME-35884739384/result.json",
+    "research/experiments/EXP-RUNTIME-35884739384/report.md",
+    "research/experiments/EXP-RUNTIME-35884739384/provenance.json",
+    "research/experiments/EXP-RUNTIME-35884739384/audit.json",
+    "research/experiments/EXP-RUNTIME-35884739384/run_experiment.py sha 89d174104a2b79227e13d186f63b1b4f0eee9622603da11df24ace50b7defea7",
+    "research/experiments/EXP-RUNTIME-35884739384/raw_freshness_shared.jsonl sha 126784977c11ac90a805473465adb01143d10c55ba5e89d0aa04455b006356c7",
+    "research/experiments/EXP-RUNTIME-35884739384/raw_freshness_per_node.jsonl sha 2b5904fb710f05372a1f8276a575986e1505d333bcb2712ac9ba7942a66145c7",
+    "research/experiments/EXP-RUNTIME-35884739384/raw_freshness_sticky.jsonl sha 437cc1840f8deadf9bfe66f049f737827df55c9972c726b391b53eebfd3fe302",
+    "research/experiments/EXP-RUNTIME-35884739384/batch_state_log_shared.jsonl sha 81692043bb185526855c35f21fad24cc51b572345b6f8e933ef4dad7134cb5b0",
+    "research/experiments/EXP-RUNTIME-35884739384/raw_observations.jsonl sha 7177ba1242f7061c48661446ccbc731f42d657c3e2ada38441a23e672ce0203c",
+    "research/experiments/EXP-RUNTIME-35884739384/ax_dom_pages.jsonl sha 7eefd0a66c857ed6961b9c287cbe1f031aae9113b43a23b1f6592b8858f6cc39"
+  ],
+  "recommended_action": "Repair and re-test narrow orthogonality/sticky/gradient gates on same 2-worker gunicorn+nginx substrate before promotion: (1) remove status prefix from structural signal and de-confound body_variant cycling from auth drift scheduling, recompute stratified r/TOST with Fisher z; (2) re-execute B-STICKY as hash $request_uri consistent without replicate_session_to_workers to isolate affinity vs replication; (3) gate distributed harness on nginx /health to achieve 0 status None and 1200/1200 X-Worker-Pid; (4) restore browser gradients to prereg N=20 per state (520 nominal lines) with B=1000 non-degenerate CI reporting to obtain sensitivity ordering. Park multi-host Redis and correlated DOM dynamics until these REVISE gates pass; do not promote to VALIDATED/PRODUCT_CORE on REVISE."
+}
