@@ -1,0 +1,187 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-35860314278",
+  "lane": "graph",
+  "status": "BLOCKED",
+  "outcome": "NOT_APPLICABLE",
+  "metrics": {},
+  "controls": {
+    "B-COLD-FULL-REEXPLORATION": {
+      "id": "B-COLD-FULL-REEXPLORATION",
+      "description": "Full cold re-exploration baseline",
+      "expected": "Succeeds >=90% at full cost (baseline 100%)",
+      "observed": null,
+      "pass": null,
+      "evidence": "NOT_MEASURED"
+    },
+    "B-VERBATIM-REPLAY": {
+      "id": "B-VERBATIM-REPLAY",
+      "description": "Verbatim replay without repair",
+      "expected": "Near 0% success post-perturbation",
+      "observed": null,
+      "pass": null,
+      "evidence": "NOT_MEASURED"
+    },
+    "B-RETRIEVAL-RAG": {
+      "id": "B-RETRIEVAL-RAG",
+      "description": "Semantic retrieval without patch",
+      "expected": "20-40% success, repair should exceed by >=30pp",
+      "observed": null,
+      "pass": null,
+      "evidence": "NOT_MEASURED"
+    },
+    "B-ORACLE-HAND-PATCH": {
+      "id": "B-ORACLE-HAND-PATCH",
+      "description": "Oracle hand-authored minimal patch",
+      "expected": "100% success with 1 probe +1 verify, within 2x",
+      "observed": null,
+      "pass": null,
+      "evidence": "NOT_MEASURED"
+    },
+    "B-BYTE-IDENTITY": {
+      "id": "B-BYTE-IDENTITY",
+      "description": "Runtime substrate invariant: 960/960 byte-identical decompressed bodies across HIT/SWR/SIE/304",
+      "expected": ">=0.99 byte identity pre-perturbation (allow 1% tooling jitter)",
+      "observed": null,
+      "pass": null,
+      "evidence": "NOT_MEASURED"
+    },
+    "PC-LOCALIZED-REPAIR-SUCCEEDS": {
+      "id": "PC-LOCALIZED-REPAIR-SUCCEEDS",
+      "description": "PC1 unperturbed success 1.0 byte identity 1.0; PC2 known-break with oracle patch >=90% success cost ratio <0.50",
+      "expected": "PC1 1.0, PC2 >=0.90 cost ratio <0.50",
+      "observed": null,
+      "pass": null,
+      "evidence": "NOT_MEASURED"
+    },
+    "NC-ZERO-AND-DISTANT": {
+      "id": "NC-ZERO-AND-DISTANT",
+      "description": "NC1 zero perturbation cost 0 contamination 0 byte identity 1.0; NC2 distant unrelated perturbation no-op contamination 0; random-patch AUROC 0.45-0.55",
+      "expected": "NC1 cost 0, NC2 contamination 0, random-patch false-accept <=5% AUROC ~0.5",
+      "observed": null,
+      "pass": null,
+      "evidence": "NOT_MEASURED"
+    },
+    "C1_PC_GATE": {
+      "id": "C1",
+      "threshold": "PC1 success==1.0 (3/3) and PC2 success >=0.90 (Wilson lower >=0.70) with cost ratio <0.50 vs B-COLD",
+      "observed": null,
+      "pass": null,
+      "evidence": "NOT_MEASURED"
+    },
+    "C2_NC_GATE": {
+      "id": "C2",
+      "threshold": "NC1 cost==0 and NC2 contamination==0 and random-patch false-accept <=0.05 with AUROC 0.45-0.55",
+      "observed": null,
+      "pass": null,
+      "evidence": "NOT_MEASURED"
+    },
+    "C3_BYTE_IDENTITY_GATE": {
+      "id": "C3",
+      "threshold": "B-BYTE-IDENTITY pre-perturbation byte identity >=0.99 and post-perturbation perturbed resource differs while unperturbed remain >=0.99",
+      "observed": null,
+      "pass": null,
+      "evidence": "NOT_MEASURED"
+    },
+    "C4_SUCCESS_GATE": {
+      "id": "C4",
+      "threshold": "repair success rate >=0.80 pooled (Wilson lower >=0.65) AND >=0.70 per family (Wilson lower >=0.50) on TEST",
+      "observed": null,
+      "pass": null,
+      "evidence": "NOT_MEASURED"
+    },
+    "C5_COST_GATE": {
+      "id": "C5",
+      "threshold": "mean repair tokens <0.50 * mean B-COLD tokens (bootstrap 95% upper <0.50) AND mean browser interactions <0.40 * B-COLD (bootstrap upper <0.40) AND mean verification steps <=2.0 on TEST",
+      "observed": null,
+      "pass": null,
+      "evidence": "NOT_MEASURED"
+    },
+    "C6_CONTAMINATION_GATE": {
+      "id": "C6",
+      "threshold": "contamination <0.10 (Wilson upper <0.15)",
+      "observed": null,
+      "pass": null,
+      "evidence": "NOT_MEASURED"
+    },
+    "C7_VERIFICATION_GATE": {
+      "id": "C7",
+      "threshold": "verification AUROC >=0.75 (bootstrap lower >=0.65) AND precision at operating threshold >=0.80 (bootstrap lower >=0.70)",
+      "observed": null,
+      "pass": null,
+      "evidence": "NOT_MEASURED"
+    },
+    "C8_AMORTIZED_GATE": {
+      "id": "C8",
+      "threshold": "amortized per-use cost at 10 reuses (repair+verify+10*retrieval)/10 < mean B-COLD cost for both tokens and browser (bootstrap 95% upper <1.0) on TEST",
+      "observed": null,
+      "pass": null,
+      "evidence": "NOT_MEASURED"
+    }
+  },
+  "artifacts": [
+    {
+      "path": "raw_evidence/infrastructure_check.json",
+      "sha256": "4b061a2c16e5465dde710c56e79fe5d2a261020132e5b9d981175e9ffbd13a5d",
+      "role": "raw"
+    },
+    {
+      "path": "raw_evidence/infrastructure_failure.json",
+      "sha256": "4f9664abcfb59af245de6e9614e1a90a3101b708d9ea7624064d4ede0efcff61",
+      "role": "raw"
+    },
+    {
+      "path": "result.json",
+      "sha256": "b30b0a08392ceb461eb5f005949bd6c10deb57abfac745ddd844ad6b0c1cbf6d",
+      "role": "derived"
+    },
+    {
+      "path": "report.md",
+      "sha256": "ccfc6a179089a608073c1e2097d9eeb5ac743537b936eeffd1f7134df4169c36",
+      "role": "derived"
+    },
+    {
+      "path": "provenance.json",
+      "sha256": "32c0e89add6747b81681677485eaa82c5eee895d444cc4012960dd30b1b6f57a",
+      "role": "derived"
+    }
+  ],
+  "observations": [
+    "Infrastructure check executed: OPENAI_API_KEY absent in environment",
+    "openai Python package not installed (pip list shows only pip)",
+    "playwright Python package not installed",
+    "nginx binary available (1.24.0) but proxy_cache HIT/SWR/SIE/304 not configured in nginx.conf",
+    "Flask HS256 testbed backend not deployed",
+    "Real LLM+Playwright+verify repair agent (execute_delta_repair_real.py) not implemented",
+    "src/spider/kernel.py exists but cannot be imported (missing dependencies)",
+    "Zero LLM API calls made, zero Playwright traces generated, zero verify() signals obtained",
+    "All frozen gates C1-C8 unevaluable on real substrate",
+    "Frozen design (spec.json, prereg.md, freeze.json) preserved intact per EXPERIMENT_PACKET.md transmission invariants",
+    "Simulation fallback correctly resisted per prereg §8/§13 and spec measurement_validity #4/#8"
+  ],
+  "validity_notes": [
+    "Per EXPERIMENT_PACKET.md §9 and AGENTS.md failure discipline: infrastructure failure (missing OPENAI_API_KEY, openai package, playwright, nginx proxy_cache, Flask backend, repair agent) is MEASUREMENT_INVALID/BLOCKED, not scientific falsification of C-DELTA-REPAIR.",
+    "This BLOCKED status carries zero scientific evidence for or against the C-DELTA-REPAIR hypothesis on real substrate. Claim ceiling remains unchanged from prior bounded simulation (EXP-GRAPH-35741890679, audit REVISE: SIMULATION_NOT_MEASUREMENT).",
+    "Director mandate PIVOT to C-DELTA-REPAIR with real substrate (EXP-RUNTIME-35611612543 dependency) was honored in frozen design; infrastructure failure correctly classified per EXPERIMENT_PACKET.md s9.",
+    "Prior 4 C-DELTA-REPAIR experiments: EXP-GRAPH-35741890679 (SIMULATION, FALSIFIES C5/C8), EXP-GRAPH-35752541832 (BLOCKED), EXP-GRAPH-35761721514 (BLOCKED), EXP-GRAPH-35798169917 (C-PARAM-INHERIT). This is 5th attempt, 3rd BLOCKED on infrastructure.",
+    "Frozen inputs (request.json, spec.json, prereg.md, freeze.json) hash-verified immutable; no post-freeze mutation, no simulation fallback, no threshold weakening.",
+    "Adequacy requirements (n>=30 instances, n>=10 per family, N>=24 unrelated mechanisms) cannot be assessed without real measurements.",
+    "Determinism requirements (hashlib.sha256 seeds, OpenAI seed 42, trajectory-grouped bootstrap) cannot be executed without substrate.",
+    "Byte-identity recomputation on real nginx with Content-Encoding/chunked/Vary cannot be performed without deployed testbed.",
+    "Representation fidelity: no raw DOM/a11y/headers/decompressed bytes captured because real pipeline not executed.",
+    "This packet preserves stable experiment_id, lane, claim_ids (C-DELTA-REPAIR), control identifiers, and evidence paths for AUDIT reuse per EXPERIMENT_PACKET.md."
+  ],
+  "unresolved": [
+    "Provision OPENAI_API_KEY in execution environment for gpt-4o-mini-2024-07-18",
+    "Install openai>=1.0.0 and playwright>=1.40.0 packages",
+    "Run 'playwright install chromium' for browser binary",
+    "Deploy nginx reverse-proxy with proxy_cache HIT/SWR/SIE/304 configuration (Cache-Control max-age, stale-while-revalidate, stale-if-error) on localhost",
+    "Deploy Flask 3.1.3 + PyJWT 2.13.0 HS256 testbed backend with endpoints matching perturbation families (DOM, endpoint param/header, cache headers)",
+    "Implement execute_delta_repair_real.py with real LLM agent loop (observe→plan→act→verify), real Playwright execution, real verify() on actual DOM/response state",
+    "Record nginx.conf hash, Flask testbed_server.py commit, decompression code hash, nginx/Playwright/Python/OpenAI model versions in provenance",
+    "Execute 48 instances (3 families x 2 variants x 8 seeds) with TRAIN24/TEST24 stratified split and manifest holdout per frozen spec",
+    "Log repair prompts and threshold fitting split for audit of leakage (TRAIN-only threshold calibration)",
+    "Store raw DOM/a11y/headers/decompressed bytes (not hash-only) for representation fidelity",
+    "Compute Wilson/bootstrap CIs and apply C1-C8 exactly on TEST per frozen decision_rule"
+  ]
+}
