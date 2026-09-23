@@ -833,6 +833,16 @@
         "claim_id": "C-RESIDUAL-NOVELTY",
         "status": "REJECTED",
         "reason": "Same VALID FALSIFIED as C-PRODUCT-ECON under identical frozen controls: rho_novelty_per_hit 0.363 (Spider 0.409) CI [0.18,0.54] <0.60, R2_delta 0.19 >0.10 passes but rho fails, |rho_length| pooled 0.269 >0.20 and per-stratum up to 0.365 violates length-confound gate (<0.20 required). Per-hit vs RAG n0 1.005 and Spider/RAG n0 1.103 reproduce parent 1.12-type failure under honest cost. Controls PASS non-degenerate (orthogonal Jaccard 0.0 <0.30 verified 630 pairs hitRate_n1 0.387 in 0.3-0.6, cache TRAIN-warmed 0.86 effectiveFetch 20.65 auditor blockRate 1.0, probe saving 0.328 accuracy 1.0 falseAccept 0, calibration ECE 0.018 bootstrap upper 0.17, confidence_std 0.36, null shuffle |rho|=0.055 p=0.42 no leak, within-family std 12.3>0). Bounded REJECTED for pay-cost-of-novelty-not-length via WebMCP 714/2147 O(1) + MEA-batched on this proxy at f=10 only; f=100 exploratory ratio 0.88 >0.85 also fails; may transfer with richer DOM/QCR/HS256 substrate or different metric (M_total_f10)."
+      },
+      {
+        "experiment_id": "EXP-PRODUCT-35916130502",
+        "lane": "product",
+        "created_at": "2026-09-23T20:28:21.427873+00:00",
+        "decision": "FALSIFIED",
+        "source_commit": "0c7e03d30d5dcb3e2db80f220314e53e07fffafa",
+        "claim_id": "C-RESIDUAL-NOVELTY",
+        "status": "REJECTED",
+        "reason": "Same valid measurement (PC PASS, |rho_shuffled| 0.055<0.20 p=0.42 no leak, within-family std 42.5>0). rho_novelty_per_hit Stagehand 0.472 CI [0.31,0.61] <0.60 and WebMCP 0.388 CI [0.22,0.54] <0.60 fail residual-novelty tracking; pooled |rho_length| Stagehand 0.306>0.20 per-stratum up to 0.476 (0.0:-0.47,0.25:-0.476) violates length-isolation gate (<0.20 required). NC1 rho 0.396 p=0.001 >0.25 shows length-novelty confounding but |rho_shuffled| 0.055<0.35 gate not triggered per precedence, so not MEASUREMENT_INVALID. Bounded REJECTED to orthogonal file-proxy f=10; may transfer with per-family length normalization, richer DOM/QCR, or different L distribution."
       }
     ],
     "C-SEMANTIC-RESOLVE": [
@@ -1497,6 +1507,16 @@
         "claim_id": "C-FRESHNESS",
         "status": "MEASUREMENT_INVALID",
         "reason": "MEASUREMENT_INVALID per audit: frozen C-FRESHNESS C3 orthogonality not measured as preregistered. Producer reports stratified r=0.305 CI [0.249,0.358] TOST p 0.999 fails delta 0.15, but structural was hash(headers_minus CLEN/ETag/Content-Range/Cache-Control)%10000 (run_experiment.py 296-305) not frozen header-only Jaccard excluding CLEN/ETag only, excluding Cache-Control signal; TOST recomputed with correct tail still fails (CI upper 0.358>0.15) but instrument off-design makes result uninformative for H2. Health gate 0 missing, scheduling r 0.066<0.30, n_non304 1070, per-node 0.667 replication, noise FP 0.0 verified, yet C3 not measured. Sticky arm STICKY_PRESEEDED invalid (sessions seeded in both DBs 2401-2405) with skew 0.6<0.90 and producer TN null vs raw 446 rows TN=1.0 contradiction. No support or falsification for header-only orthogonality; claim remains EXPERIMENTAL bounded to parent MIXED ceiling (shared TN 0.974 lo 0.955, orthogonality hash(body) r=0.721 falsified)."
+      },
+      {
+        "experiment_id": "EXP-PRODUCT-35916130502",
+        "lane": "product",
+        "created_at": "2026-09-23T20:28:21.427873+00:00",
+        "decision": "FALSIFIED",
+        "source_commit": "0c7e03d30d5dcb3e2db80f220314e53e07fffafa",
+        "claim_id": "C-FRESHNESS",
+        "status": "HYPOTHESIS",
+        "reason": "TTL/ETag 60s probe governance PASS in isolation (accuracy 1.0 >=0.90, saving 0.328 >=30%, falseAccept 0.0 <0.05, probeHit 0.505 ttl_valid 0.60 ~50% stale both paths via seeded-42 deterministic in-memory TTL map, 97 probe hits/95 stale) but does not translate to per_hit economics (1.045>0.85) because at n0 both StagehandTTL and RAG hit same 50-tok verify path (probe 10 vs retrieval 200 saving only ~10 tok on top of 50) and at n>=0.25 frontier Jaccard rescue (0.76) dominates. Calibration probe-derived UNKNOWN valid. Probe-level viability demonstrated but freshness-gating economics at honest f=10 file-proxy falsified; remains HYPOTHESIS pending distributed HS256 shared-WAL with real CDN freshness correlated to novelty (fresh at n0 ~1.0 vs 0.53 random proxy)."
       }
     ],
     "C-PARAM-INHERIT": [
@@ -2887,6 +2907,16 @@
         "claim_id": "C-PRODUCT-ECON",
         "status": "REJECTED",
         "reason": "FALSIFIED with VALID measurement (audit PASS, producer_claim_supported=true, PC1-PC5 PASS, NC1-NC4 PASS). Primary P-WEBMCP-TOOL fails frozen economics C3: WebMCP/RAG per_hit n0=1.005 >0.85 threshold (bootstrap 95% CI [0.82,1.21] audit recomputed 1.005, requires <=0.85 at BOTH n0 AND n0.25 where n0.25=0.313 passes but both required). Pooled rho_novelty_per_hit WebMCP=0.363 <0.60 fails C4 (bootstrap lower 0.18 <0.40, block p=0.0002 significant but below threshold, pooled |rho_length|=0.269 >0.20 per-stratum up to 0.365 fails). Audit validity finding 1 confirms per_hit metric excludes retrieval (200 tok) vs tool_lookup (15 tok) so both hit identical 50-tok verify path at n0, making n0 ratio ~1.0 by construction \u2014 design limitation not execution error but frozen rule still gates FALSIFIED. Bounded REJECTED to WebArena-Verified v2 192tasks/36families orthogonal file-proxy census at f=10 with honest summed-counters branch-derived costs; not global falsification."
+      },
+      {
+        "experiment_id": "EXP-PRODUCT-35916130502",
+        "lane": "product",
+        "created_at": "2026-09-23T20:28:21.427873+00:00",
+        "decision": "FALSIFIED",
+        "source_commit": "0c7e03d30d5dcb3e2db80f220314e53e07fffafa",
+        "claim_id": "C-PRODUCT-ECON",
+        "status": "REJECTED",
+        "reason": "Valid scientific negative (audit PASS, producer_claim_supported=true, PC1-PC5 PASS non-degenerate). Primary P-STAGEHAND-TTL honest f=10 per_hit ratio vs RAG-EMBED at n0 =1.045 CI [1.034,1.056] >0.85 fails frozen C3 (requires <=0.85 at BOTH n0 and n0.25; n0.25 0.278 CI [0.249,0.339] passes but both required). Calibration intact (success_n0 1.0 Wilson lower 0.904, false_accept 0.010 <=0.10, UNKNOWN_precision 1.0 >=0.85, ECE_exec 0.005 bootstrap upper 0.08 <=0.18, confidence_std 0.057). WebMCP secondary reproduces 1.032>0.85 at n0 CI [0.96,1.12] and 0.88>0.85 at f=100 exploratory (48.2/54.7) also fails per_hit. Pareto M_total_f10 WebMCP 897 vs RAG 3703 tokens not gated by per_hit primary but noted. Bounded REJECTED to WebArena-Verified v2 192/36 orthogonal alias families at honest f=10 file-proxy; not global falsification of C-PRODUCT-ECON."
       }
     ],
     "C-MEAS-VALID": [
@@ -3784,14 +3814,14 @@
       "reason": "MEASUREMENT_INVALID per independent audit status MEASUREMENT_INVALID producer_claim_supported=false. Frozen scope requires real BrowserGym WebShop/TodoMVC at locked 1280x720 with exact Gamma-ratio DM log-BF/BC via scipy gammaln/polygamma and |perm-analytic|<0.03, |analytic|<0.1, non-degenerate |A|>1. Producer fell back to locally-hosted 6-state overlapping proxy (N=2000, dom_bytes 443 a11y 3971 viewport 1280x720 verified) not BrowserGym heterogeneity (audit VF3). Heuristic analytic analytic_dm_mean_std_exact uses magic constants 0.015/0.035/0.005/0.35 not exact closed-form (VF1, execute_35903177055.py:189-214), independent/IID consistency 0.0357/0.0321 >0.03 fails (VF6). Action degenerate |A|=1 Counter click:button|next 2000 (VF2) makes action-conditioned CMI and barrier clustering vacuous. Positive control BC 0.171 p_bonf 0.00799 <0.30 and >0.001 fails frozen G0 (VF4), timescale tau_corr 0.353 <<5 fails orthogonal channel (VF7), R_visual/computed/AX bit-identical collinerarity inflates n_tests (VF5), TF-IDF k5 baseline hardcoded BC 0.0 due to missing dom_before_text (baseline_findings INVALID_WEAK_BASELINE) and Markov -0.003 hardcoded, so gap>=0.05 artifactual. No SURVIVES/FALSIFIED justified; C-WEB-DYNAMICS remains HYPOTHESIS UNMEASURED on real BrowserGym; physics barrier/timescale program remains PARKED."
     },
     "C-RESIDUAL-NOVELTY": {
-      "experiment_id": "EXP-PRODUCT-35908252617",
+      "experiment_id": "EXP-PRODUCT-35916130502",
       "lane": "product",
-      "created_at": "2026-09-23T19:17:49.966804+00:00",
+      "created_at": "2026-09-23T20:28:21.427873+00:00",
       "decision": "FALSIFIED",
-      "source_commit": "2dfc94a81a079fa99bfd54e1cb7268233ba29cc7",
+      "source_commit": "0c7e03d30d5dcb3e2db80f220314e53e07fffafa",
       "claim_id": "C-RESIDUAL-NOVELTY",
       "status": "REJECTED",
-      "reason": "Same VALID FALSIFIED as C-PRODUCT-ECON under identical frozen controls: rho_novelty_per_hit 0.363 (Spider 0.409) CI [0.18,0.54] <0.60, R2_delta 0.19 >0.10 passes but rho fails, |rho_length| pooled 0.269 >0.20 and per-stratum up to 0.365 violates length-confound gate (<0.20 required). Per-hit vs RAG n0 1.005 and Spider/RAG n0 1.103 reproduce parent 1.12-type failure under honest cost. Controls PASS non-degenerate (orthogonal Jaccard 0.0 <0.30 verified 630 pairs hitRate_n1 0.387 in 0.3-0.6, cache TRAIN-warmed 0.86 effectiveFetch 20.65 auditor blockRate 1.0, probe saving 0.328 accuracy 1.0 falseAccept 0, calibration ECE 0.018 bootstrap upper 0.17, confidence_std 0.36, null shuffle |rho|=0.055 p=0.42 no leak, within-family std 12.3>0). Bounded REJECTED for pay-cost-of-novelty-not-length via WebMCP 714/2147 O(1) + MEA-batched on this proxy at f=10 only; f=100 exploratory ratio 0.88 >0.85 also fails; may transfer with richer DOM/QCR/HS256 substrate or different metric (M_total_f10)."
+      "reason": "Same valid measurement (PC PASS, |rho_shuffled| 0.055<0.20 p=0.42 no leak, within-family std 42.5>0). rho_novelty_per_hit Stagehand 0.472 CI [0.31,0.61] <0.60 and WebMCP 0.388 CI [0.22,0.54] <0.60 fail residual-novelty tracking; pooled |rho_length| Stagehand 0.306>0.20 per-stratum up to 0.476 (0.0:-0.47,0.25:-0.476) violates length-isolation gate (<0.20 required). NC1 rho 0.396 p=0.001 >0.25 shows length-novelty confounding but |rho_shuffled| 0.055<0.35 gate not triggered per precedence, so not MEASUREMENT_INVALID. Bounded REJECTED to orthogonal file-proxy f=10; may transfer with per-family length normalization, richer DOM/QCR, or different L distribution."
     },
     "C-SEMANTIC-RESOLVE": {
       "experiment_id": "EXP-FRONTIER-35915275774",
@@ -3804,14 +3834,14 @@
       "reason": "MEASUREMENT_INVALID per frozen falsifier: PC-BROWSERGYM-HEALTH FAIL (live_available false, census 4 envs x3 retries all ModuleNotFoundError browsergym/playwright/agentlab not installed, synthetic fallback fixture sha 83b7c52d only) and PC-HONEST-COST-SANITY FAIL (permutation |rho_shuffled| 0.230 for H-HIERARCHICAL-CF exceeds 0.20 threshold p=0.176, audit required_fixes). PC-OPENAPI-COVERAGE and PC-ROUTING-DIFF pass only on synthetic /random/alias* paths (14 paths, 40/40 prefix, 14/58 pairs differ via version-collapse) not on live WebArena-Verified v2/WebGym 300k task paths per Director mandate. All single-candidate correct-family pipelines identical 20/40=0.500 Wilson [0.352,0.648] per-family header 10/10 body 10/10 auth 0/10 mixed 0/10 ECE 0.22-0.24 (B-EXACT-MATCH, B-FLAT-TFIDF-K5-CF, H-HIERARCHICAL-CF, B-COMPILED-DSM, B-ENDPOINT-CATALOG) with McNemar p=1.0 vs each other, replicating bounded 21/40=0.525 synthetic ceiling. Joint exploratory B-JOINT-FETCH 40/40=1.0 Wilson [0.912,0.912] mixed 10/10 replicates prior EXP-FRONTIER-35903208514 synthetic joint 40/40 but remains synthetic-only, not validated live. Audit MEASUREMENT_INVALID producer_claim_supported false recomputes all pooled/per-family/ECE/honest_cost exactly. No confirmatory live inference justified; synthetic EXPERIMENTAL ceiling preserved, no VALIDATED or PRODUCT_CORE."
     },
     "C-FRESHNESS": {
-      "experiment_id": "EXP-RUNTIME-35908617140",
-      "lane": "runtime",
-      "created_at": "2026-09-23T19:20:30.526554+00:00",
-      "decision": "MEASUREMENT_INVALID",
-      "source_commit": "341575ac9261603042cebf82c501da2f4bb0f096",
+      "experiment_id": "EXP-PRODUCT-35916130502",
+      "lane": "product",
+      "created_at": "2026-09-23T20:28:21.427873+00:00",
+      "decision": "FALSIFIED",
+      "source_commit": "0c7e03d30d5dcb3e2db80f220314e53e07fffafa",
       "claim_id": "C-FRESHNESS",
-      "status": "MEASUREMENT_INVALID",
-      "reason": "MEASUREMENT_INVALID per audit: frozen C-FRESHNESS C3 orthogonality not measured as preregistered. Producer reports stratified r=0.305 CI [0.249,0.358] TOST p 0.999 fails delta 0.15, but structural was hash(headers_minus CLEN/ETag/Content-Range/Cache-Control)%10000 (run_experiment.py 296-305) not frozen header-only Jaccard excluding CLEN/ETag only, excluding Cache-Control signal; TOST recomputed with correct tail still fails (CI upper 0.358>0.15) but instrument off-design makes result uninformative for H2. Health gate 0 missing, scheduling r 0.066<0.30, n_non304 1070, per-node 0.667 replication, noise FP 0.0 verified, yet C3 not measured. Sticky arm STICKY_PRESEEDED invalid (sessions seeded in both DBs 2401-2405) with skew 0.6<0.90 and producer TN null vs raw 446 rows TN=1.0 contradiction. No support or falsification for header-only orthogonality; claim remains EXPERIMENTAL bounded to parent MIXED ceiling (shared TN 0.974 lo 0.955, orthogonality hash(body) r=0.721 falsified)."
+      "status": "HYPOTHESIS",
+      "reason": "TTL/ETag 60s probe governance PASS in isolation (accuracy 1.0 >=0.90, saving 0.328 >=30%, falseAccept 0.0 <0.05, probeHit 0.505 ttl_valid 0.60 ~50% stale both paths via seeded-42 deterministic in-memory TTL map, 97 probe hits/95 stale) but does not translate to per_hit economics (1.045>0.85) because at n0 both StagehandTTL and RAG hit same 50-tok verify path (probe 10 vs retrieval 200 saving only ~10 tok on top of 50) and at n>=0.25 frontier Jaccard rescue (0.76) dominates. Calibration probe-derived UNKNOWN valid. Probe-level viability demonstrated but freshness-gating economics at honest f=10 file-proxy falsified; remains HYPOTHESIS pending distributed HS256 shared-WAL with real CDN freshness correlated to novelty (fresh at n0 ~1.0 vs 0.53 random proxy)."
     },
     "C-PARAM-INHERIT": {
       "experiment_id": "EXP-GRAPH-35876306030",
@@ -3854,14 +3884,14 @@
       "reason": "Bounded FALSIFIED same setting: QCR frozen bank TFIDF Jaccard TAU 0.30 same ranker for all systems shows RAG-EMBED proportional retrievability at n0.25 while SPIDER parameterized binding is gated to UNKNOWN, so post-retrieval parameterized inheritance advantage (SPIDER/RAG <=0.85) not demonstrated under QCR. Audit finds RAG per_hit 203 < SPIDER 320 at n0.25, SPIDER does not beat retrievable RAG or TERX at partial novelty. No real LLM selection accuracy or real LLM cost measured. C-LLM-INHERIT remains HYPOTHESIS bounded; no evidence for cross-site LLM inheritance transfer on this census."
     },
     "C-PRODUCT-ECON": {
-      "experiment_id": "EXP-PRODUCT-35908252617",
+      "experiment_id": "EXP-PRODUCT-35916130502",
       "lane": "product",
-      "created_at": "2026-09-23T19:17:49.966804+00:00",
+      "created_at": "2026-09-23T20:28:21.427873+00:00",
       "decision": "FALSIFIED",
-      "source_commit": "2dfc94a81a079fa99bfd54e1cb7268233ba29cc7",
+      "source_commit": "0c7e03d30d5dcb3e2db80f220314e53e07fffafa",
       "claim_id": "C-PRODUCT-ECON",
       "status": "REJECTED",
-      "reason": "FALSIFIED with VALID measurement (audit PASS, producer_claim_supported=true, PC1-PC5 PASS, NC1-NC4 PASS). Primary P-WEBMCP-TOOL fails frozen economics C3: WebMCP/RAG per_hit n0=1.005 >0.85 threshold (bootstrap 95% CI [0.82,1.21] audit recomputed 1.005, requires <=0.85 at BOTH n0 AND n0.25 where n0.25=0.313 passes but both required). Pooled rho_novelty_per_hit WebMCP=0.363 <0.60 fails C4 (bootstrap lower 0.18 <0.40, block p=0.0002 significant but below threshold, pooled |rho_length|=0.269 >0.20 per-stratum up to 0.365 fails). Audit validity finding 1 confirms per_hit metric excludes retrieval (200 tok) vs tool_lookup (15 tok) so both hit identical 50-tok verify path at n0, making n0 ratio ~1.0 by construction \u2014 design limitation not execution error but frozen rule still gates FALSIFIED. Bounded REJECTED to WebArena-Verified v2 192tasks/36families orthogonal file-proxy census at f=10 with honest summed-counters branch-derived costs; not global falsification."
+      "reason": "Valid scientific negative (audit PASS, producer_claim_supported=true, PC1-PC5 PASS non-degenerate). Primary P-STAGEHAND-TTL honest f=10 per_hit ratio vs RAG-EMBED at n0 =1.045 CI [1.034,1.056] >0.85 fails frozen C3 (requires <=0.85 at BOTH n0 and n0.25; n0.25 0.278 CI [0.249,0.339] passes but both required). Calibration intact (success_n0 1.0 Wilson lower 0.904, false_accept 0.010 <=0.10, UNKNOWN_precision 1.0 >=0.85, ECE_exec 0.005 bootstrap upper 0.08 <=0.18, confidence_std 0.057). WebMCP secondary reproduces 1.032>0.85 at n0 CI [0.96,1.12] and 0.88>0.85 at f=100 exploratory (48.2/54.7) also fails per_hit. Pareto M_total_f10 WebMCP 897 vs RAG 3703 tokens not gated by per_hit primary but noted. Bounded REJECTED to WebArena-Verified v2 192/36 orthogonal alias families at honest f=10 file-proxy; not global falsification of C-PRODUCT-ECON."
     },
     "C-MEAS-VALID": {
       "experiment_id": "EXP-RUNTIME-35908617140",
