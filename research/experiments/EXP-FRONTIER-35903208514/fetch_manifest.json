@@ -1,0 +1,80 @@
+{
+  "experiment_id": "EXP-FRONTIER-35903208514",
+  "kind": "fetch_webmcp_discovery",
+  "base_url": "http://127.0.0.1:42611",
+  "real_http": true,
+  "trace": [
+    {
+      "kind": "fetch_openapi_spec",
+      "url": "http://127.0.0.1:42611/openapi.json",
+      "ok": true,
+      "status": 200,
+      "bytes": 1183,
+      "latency_s": 0.02,
+      "error": null,
+      "spec_sha256": "f161338393e1892a31a5e11e50323de5e69ef0dedb93cc9aaeb74469f1baaf1a",
+      "paths_parsed": [
+        "/admin/settings",
+        "/api/data",
+        "/api/reports",
+        "/api/users",
+        "/api/v2/data",
+        "/api/v3/data",
+        "/v1/orders",
+        "/v2/audit",
+        "/v2/items",
+        "/v3/audit"
+      ],
+      "components_parsed": [
+        "BodyAlias",
+        "HeaderAlias",
+        "QueryAlias"
+      ]
+    },
+    {
+      "kind": "hateoas_root",
+      "url": "http://127.0.0.1:42611/",
+      "ok": true,
+      "status": 200,
+      "bytes": 241,
+      "latency_s": 0.0007,
+      "error": null
+    },
+    {
+      "kind": "hateoas_link",
+      "rel": "self",
+      "href": "http://127.0.0.1:42611/api/data",
+      "ok": true,
+      "status": 200,
+      "bytes": 33,
+      "latency_s": 0.0007,
+      "error": null
+    },
+    {
+      "kind": "hateoas_link",
+      "rel": "related",
+      "href": "http://127.0.0.1:42611/api/users",
+      "ok": true,
+      "status": 200,
+      "bytes": 34,
+      "latency_s": 0.0006,
+      "error": null
+    },
+    {
+      "kind": "hateoas_link",
+      "rel": "related",
+      "href": "http://127.0.0.1:42611/api/reports",
+      "ok": true,
+      "status": 200,
+      "bytes": 36,
+      "latency_s": 0.0006,
+      "error": null
+    }
+  ],
+  "spec_fetched": true,
+  "spec_bytes": 1183,
+  "hateoas_links_followed": 3,
+  "hateoas_links_attempted": 3,
+  "code_path": "urllib.request real HTTP to 127.0.0.1 ephemeral port + json parse",
+  "manifest_sha256": "13707ee20e08ad11e442ca7441b5b90773925132775627e84767c581c788c217"
+}
