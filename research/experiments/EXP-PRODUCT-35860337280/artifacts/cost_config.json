@@ -1,0 +1,20 @@
+{
+ "distill_tokens": 1000,
+ "exec_hit_ms": 120,
+ "exec_novel_ms": 1000,
+ "f": 10,
+ "freshness_threshold": 0.25,
+ "hit_calls": 1,
+ "hit_tokens": 50,
+ "min_confidence": 0.8,
+ "novel_step_browser_calls": 2,
+ "novel_step_tokens": 500,
+ "ranker": "TFIDF Jaccard fallback TAU 0.30 (all-MiniLM-L6-v2 unavailable; disclosed)",
+ "repair_calls": 2,
+ "repair_tokens": 500,
+ "retrieval_ms": 150,
+ "retrieval_tokens": 200,
+ "seed": 42,
+ "verification_ms": 120,
+ "verification_tokens": 50
+}

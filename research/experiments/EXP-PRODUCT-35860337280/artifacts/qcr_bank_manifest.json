@@ -1,0 +1,12 @@
+{
+ "bank_source": "pools A/B disjoint zero overlap",
+ "branch_derived": true,
+ "cost_model": "sum_of_executed_branches",
+ "distill_amort": "1000/f f=10 only SPIDER",
+ "family_count": 36,
+ "frozen_bank_hash": "7d941892f27dd0a0",
+ "hit_costs": "50tok Stagehand/TERX honest",
+ "no_bijective_formula": true,
+ "ranker": "TFIDF Jaccard fallback TAU 0.30 (all-MiniLM-L6-v2 unavailable; disclosed)",
+ "tau": 0.3
+}
