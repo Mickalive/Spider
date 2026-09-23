@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-35888533574",
+  "lane": "product",
+  "decision": "MEASUREMENT_INVALID → FALSIFIES per_hit targets bounded to file-based mock",
+  "claim_updates": [
+    {
+      "claim_id": "C-RESIDUAL-NOVELTY",
+      "registry_valid_status": "HYPOTHESIS",
+      "reason": "Batched MEA auditor caching (cacheHitRate ~0.81, effectiveFetchAvg ~27 tok) and TTL/ETag probe (accuracy 1.0, saving 39.8%, falseAccept 0) and frontier correct-family gating (crossFamilyAdoption 0, hitRate 1.0) and auditor governance (blockRate 1.0 on unverified writes both miss and hit paths) all PASS per PC2/C4. However C1 correctness+calibration FAILS (confidence_std 0.0125 < 0.05, unknown_precision 0.198 < 0.85) because at n=1.0 all tasks correctly abstain as UNKNOWN (auditor blocks 100% unverified writes, frontier misses), collapsing confidence distribution. Per_hit targets NOT achieved: SPIDER/RAG n0 ratio 9.35 >> 0.85 FAIL, n025 2.42 >> 0.85 FAIL; Stagehand n0 9.35 >> 1.20 FAIL. Per_hit beats TERX at all n>=0.25 (<1.0) but this is driven by frontier 1.0 hit artifact not governance. rho_novelty_per_hit = -0.447 (p=0.0002) strongly negative — cost anti-tracks novelty; |rho_length| per stratum expected negative (-0.75 to -0.85) from fixed overhead artifact. NC1/NC2/NC3 all PASS (rho=0, false_accept=0.16 in range, |rho|<0.25). C6 PASS. Verdict: MEASUREMENT_INVALID triggered by C1 (confidence calibration) with FALSIFIES per_hit economics; batched cache does NOT salvage the governed-memory pivot on this file-based synthetic census."
+    },
+    {
+      "claim_id": "C-PRODUCT-ECON",
+      "registry_valid_status": "HYPOTHESIS",
+      "reason": "Batched MEA caching reduces effective auditor_fetch from 100 tok to ~27 tok avg (savings ~73 tok/task) as designed, but fixed overhead (distill 100 + frontier 50 + probe ~30 + novel/repair 500) still dominates at n0 yielding per_hit ~512 vs RAG ~54.75 (9.35x). Product economics NOT validated; Stagehand 80% speedup / 30% cost saving remains dominant at exact repeat; RAG proportionally retrievable at n0.25 remains strong baseline where SPIDER fails. C-PRODUCT-ECON remains HYPOTHESIS; no commercial viability evidence from this run."
+    }
+  ],
+  "product_action": "Bounded REJECTED for MEA-batched+TTL+frontier proxy setting only (file-based mock 192/36). Do NOT claim pay-cost-of-novelty via this batched harness on this setting. C-RESIDUAL-NOVELTY/C-PRODUCT-ECON remain HYPOTHESIS globally. Prioritize: (1) fix resolve/parameter binding so n=0 exact-repeats correctly hit 50 tok path (root cause of 9.35x ratio), (2) richer DOM/QCR post-retrieval with real BrowserGym 2000-node CDP AX + gpt-4o-mini tokens/browser_calls, (3) frontier adapter with orthogonal alias families to collapse 100% hit artifact, (4) probe/TT L state correlated with novelty not random, (5) confidence calibration via softmax temp0.15+jitter std>0.05 with 5-bin ECE non-degenerate. No PRODUCT_CORE promotion; no further mechanism refinement on this cost model without fixing the n0 binding failure.",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "Does fixing kernel.resolve parameter binding (so n=0 exact-repeat tasks correctly resolve with all required slots present, hitting the 50-tok hit path instead of the 500-tok novel path) allow batched MEA caching to achieve per_hit <=0.85 vs RAG at n0 while preserving rho_novelty>=0.60 |rho_length|<0.20 under honest QCR with frontier correct-family gating and TTL/ETag probe?",
+  "reason": "C1 fails (confidence_std 0.0125 < 0.05, unknown_precision 0.198 < 0.85) because at n=1.0 all tasks correctly abstain as UNKNOWN; C3 fails (SPIDER/RAG per_hit 9.35 at n0 >> 0.85) because n=0 exact-repeat tasks fall into novel/repair path instead of 50-tok hit path due to parameter binding mismatch; C6 passes (null controls non-degenerate). The batched cache infrastructure works (cacheHitRate 0.81, effectiveFetch 27 tok) but per_hit economics fail because the hit path is not reached. Root cause is resolve parameter binding, not batched caching.",
+  "evidence_refs": ["research/experiments/EXP-PRODUCT-35888533574/result.json", "research/experiments/EXP-PRODUCT-35888533574/artifacts/derived_metrics.json", "research/experiments/EXP-PRODUCT-35888533574/artifacts/raw_per_task.csv"]
+}

@@ -1,0 +1,101 @@
+{
+ "cache_hash": "712c61571ccc33f19b490c1209f3da93e13c89d0a204509066d27a6d79844c0d",
+ "code_hashes": {
+  "kernel.py": "46929b3a951df48d7f9d1fd850871073c0d91c1868aa117e13d389fe274e8d61",
+  "models.py": "338aaf4d7ba0e31f7a5fe8a47abdbb2ea52d9c1c4ef0ce014f2b809b9a2a9b78",
+  "registry.py": "51fb440d3827f21cccb5f77ad17dc0e76ccdbc2d52d7b05044cd821bb8a9322c",
+  "run_experiment.py": "c108f8fd6b421b20134e65bda8085f502c9d4ec0128dc1a18d21b3c659a03c12"
+ },
+ "cost_config_hash": "0d9fe522c4c5658f22aab0ce614331af70af673f06719aea5a2febf94add9f9b",
+ "cost_model": {
+  "auditor_batched": "10 tok hit/100 tok miss effective~28tok avg",
+  "auditor_distill": 100,
+  "batched_cache_saving_reflected_in_per_hit": true,
+  "distill": 1000,
+  "f": 10,
+  "frontier": 50,
+  "fullverify": 50,
+  "hit": 50,
+  "honest_branch_derived": true,
+  "no_bijective_formula": true,
+  "novel": 500,
+  "per_hit_formula": "(M_total_f10 - retrieval - distill_amort - auditor_amort)/L",
+  "probe": 10,
+  "repair": 500,
+  "retrieval": 200
+ },
+ "csv_hash": "2bc05ae31189aaf903ed82627661bdabcc4ebe1a9d16a6a4d6f2101fd516f652",
+ "curated_hash": "41d1ee3b1f3b707c2444f57a7727f120b68c1b9fabeb67c2948f6ac990d6e035",
+ "docker_available": false,
+ "docker_replication": "not executed file-based primary gate; bound ceiling to file-based mock synthetic",
+ "environment": {
+  "browsergym": "not executed",
+  "frontier_adapter": "state-conditioned reconstruction TAU0.30 correct-family gating",
+  "gunicorn_nginx": "simulated deterministic map seeded 42 disclosed",
+  "numpy": "unavailable disclosed file-based mock",
+  "platform": "linux",
+  "playwright": "not executed file-based primary",
+  "python": "3.12.14 (main, Aug 13 2026, 02:47:42) [GCC 13.3.0]",
+  "qcr_ranker": "TFIDF Jaccard fallback TAU0.30",
+  "sklearn": "unavailable disclosed"
+ },
+ "experiment_id": "EXP-PRODUCT-35888533574",
+ "fixture_hash": "f43e38503952a53ce5272817cbed93ecc6b17b0730d98ddeff6bf00631f03e10",
+ "frontier_adapter": {
+  "correct_family_gating": true,
+  "cross_family_adoption": 0,
+  "hit_rate_correct_family": 1.0,
+  "reconstruction_cost": 50,
+  "tau": 0.3
+ },
+ "frontier_hash": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+ "git_head": "0c8047bed7efc3ecdbc0784cd489ccdd7a2e0e20",
+ "git_short": "0c8047be",
+ "lane": "product",
+ "mea_auditor": {
+  "auditor_ms_hit": 15,
+  "auditor_ms_miss": 80,
+  "auditor_tokens_hit": 10,
+  "auditor_tokens_miss": 100,
+  "block_rate": 1.0,
+  "cacheHitRate": 0.8125,
+  "cache_ttl": 60,
+  "effectiveFetchAvg": 26.875,
+  "external_verified_state_fetch": true,
+  "fresh_context": true,
+  "governance_gate": "blocks 100% unverified writes on BOTH cache-miss and cache-hit paths",
+  "provenance_graph": "hash chain logged per task with cacheHit flag"
+ },
+ "metrics_hash": "d5dbde5dd2dfc7396c729709cb3333a90a1276de258a981fd28475576b2bf0ff",
+ "probe_hash": "17585827b41c945eeeb2ad2311c9e56fca3f887da4c648e057d07f8170e12d71",
+ "qcr_manifest_hash": "1289453d5841a32cd53fb003075deec4948ba076fe4ed2d6985e48eeead4ab53",
+ "registry_hash": "153bda3a356a58acf93144d2f06fe880f49331622e5b537230f0e2356a50d871",
+ "run_id": "35888533574",
+ "seeds": {
+  "PYTHONHASHSEED": "0",
+  "frontier_seed": 42,
+  "probe_seed": 42,
+  "random_seed": 42
+ },
+ "seeds_detail": {
+  "PYTHONHASHSEED": 0,
+  "jitter": "uniform [-0.05,0.05]",
+  "numpy_seed": 42,
+  "random_seed": 42,
+  "softmax_temp": 0.15,
+  "wrong_bound_p": 0.15
+ },
+ "traces_hash": "c0064afa4854b70431ddb25e319081167c908adce9282d0e22489a6238272ec7",
+ "ttl_probe": {
+  "accuracy": 1.0,
+  "current_time_distribution": "[0,200]",
+  "expected_stale": "~50% fresh vs ~50% stale exercising ETag mismatch",
+  "false_accept": 0.0,
+  "full_verify_cost": "50 tok+120ms",
+  "max_age": 60,
+  "probe_cost": "10 tok+30ms",
+  "saving": 0.3984375,
+  "ttl_created_distribution": "[0,120]",
+  "ttl_seconds": 60
+ }
+}

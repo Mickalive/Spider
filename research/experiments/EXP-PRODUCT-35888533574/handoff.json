@@ -1,0 +1,57 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-35888533574",
+  "lane": "product",
+  "target_lane": "product",
+  "next_question": "Does fixing kernel.resolve parameter binding (so n=0 exact-repeat tasks correctly resolve with all required slots present, hitting the 50-tok hit path instead of the 500-tok novel path) allow batched MEA caching to achieve per_hit <=0.85 vs RAG at n0 while preserving rho_novelty>=0.60 |rho_length|<0.20 under honest QCR with frontier correct-family gating and TTL/ETag probe?",
+  "why_next": "This experiment's MEASUREMENT_INVALID+FALSIFIES outcome is dominated by a single root cause: kernel.resolve parameter binding mismatch at n=0 causes exact-repeat tasks to fall into the 500-tok novel/repair path instead of the 50-tok hit path, yielding per_hit ~9.35x RAG. The batched MEA cache infrastructure itself works correctly (cacheHitRate 0.81, effectiveFetchAvg 27 tok, TTL/ETag probe accuracy 1.0, auditor blockRate 1.0, frontier cross-family 0, NC1/NC2/NC3 all PASS). Fixing the resolve binding is the smallest high-information next step that can change the claim/product decision.",
+  "carry_forward": {
+    "established": [
+      "Batched MEA auditor caching infrastructure works: per-family cache with TTL 60s achieves cacheHitRate ~0.81, effectiveFetchAvg ~27 tok (target was ~28 tok), confirmed via cache_traces.json and effectiveFetchAvg metric",
+      "TTL/ETag probe discrimination works: accuracy 1.0, latency saving 39.8%, probeFalseAccept 0.0, with ~50% fresh vs ~50% stale exercising ETag mismatch, confirmed via probe_traces.json",
+      "Frontier correct-family reconstruction with gating works: hitRate_correct_family 1.0, crossFamilyAdoption 0, confirmed via frontier_adapter_traces.json",
+      "Auditor governance works: auditorBlockRate 1.0 on unverified writes on BOTH cache-miss AND cache-hit paths, provenance hash chain logged with cacheHit flag",
+      "Null controls non-degenerate: NC1 rho=0 p=1.0, NC2 false_accept=0.16 in [0.10,0.60], NC3 |rho|<0.25 R2<0.15, NC4 curatedDelta=0.354 proving curation+auditor causal; C6 PASS",
+      "Honest kernel-gated branch-derived cost accounting confirmed: no bijective formula, per_hit=(M_total_f10 - retrieval - distill_amort - auditor_amort)/L with batched auditor_fetch_batched included"
+    ],
+    "rejected": [
+      "Batched MEA caching at f=10 with current resolve binding does NOT achieve per_hit <=0.85 vs B-RAG-EMBED at n0 (9.35x) or n0.25 (2.42x) on 192/36 file-based synthetic census; bounded REJECTED for this specific resolve_binding + cost_model + census combination",
+      "Per_hit economics still dominated by novel/repair 500-tok path at n=0 even with batched cache; the 148 tok fixed overhead reduction (220→148 tok) is insufficient when n0 tasks incorrectly enter novel path",
+      "Frontier 100% hitRate at n=1.0 by construction (char-bigram Jaccard A/B pools share bigrams) masks the true economics; rho_novelty_per_hit = -0.447 strongly negative (cost anti-tracks novelty)",
+      "Confidence calibration (softmax temp0.15+jitter std>0.05, ECE 5-bin) fails because at n=1.0 all tasks correctly abstain as UNKNOWN, collapsing confidence distribution — confidence_std 0.0125 < 0.05 threshold"
+    ],
+    "unknown": [
+      "Whether fixing kernel.resolve parameter binding (ensuring all required_slots present in resolve_params at n=0) allows exact-repeat tasks to correctly hit the 50-tok path, reducing per_hit to target levels",
+      "Whether per_hit ratios improve to <=0.85 vs RAG at n0 and n0.25 once n=0 tasks correctly enter the 50-tok hit path via proper parameter binding",
+      "Whether rho_novelty_per_hit becomes >=0.60 with proper hit-path economics (cost tracking novelty via novel/repair 500-tok steps when frontier misses)",
+      "Whether the MEASUREMENT_INVALID trigger (confidence_std < 0.05) resolves once confidence distribution has proper spread from mixed hit/novel/unknown outcomes",
+      "Whether frontier adapter with orthogonal alias families (header/body/auth not char-bigram A/B) achieves realistic hitRate <1.0 enabling genuine rho_novelty tracking",
+      "Whether TTL/ETag probe state correlates with task novelty on real CDN (deterministic map seeded 42 decouples probe from novelty)"
+    ],
+    "do_not_assume": [
+      "Do not assume batched cache infrastructure is broken — it works (cacheHitRate 0.81, effectiveFetch 27 tok). The root cause is resolve parameter binding, not caching",
+      "Do not assume per_hit 9.35x proves batched caching is ineffective — n=0 tasks are incorrectly entering the 500-tok novel path due to parameter binding mismatch",
+      "Do not assume rho_novelty = -0.447 proves cost anti-tracks novelty in general — the frontier 100% hit artifact and incorrect n0 binding confound this measurement",
+      "Do not assume MEASUREMENT_INVALID means the entire approach is invalid — C6 null controls PASS and infrastructure components (probe, auditor, frontier, cache) all work correctly",
+      "Do not assume file-based synthetic results transfer to Docker/BrowserGym/real LLM economics; ceiling explicitly bounded to file mock",
+      "Do not assume per_hit beats TERX at n>=0.25 (0.997-0.999) proves economic viability — this is driven by frontier 100% hit artifact not governance alone",
+      "Do not assume confidence_std 0.0125 is a calibration failure of the softmax mechanism — it reflects the all-or-nothing abstention pattern at n=1.0, not miscalibrated confidence scores"
+    ]
+  },
+  "dependencies": [
+    "src/spider/kernel.py resolve() parameter binding fix: ensure resolve_params contains all required_slots (set(m.parameter_slots) | _template_slots(m.action_template)) with correct key forms for n=0 exact-repeat tasks",
+    "frontier validated state-conditioned reconstruction adapter (EXP-FRON-35793584484) with correct-family gating — already verified working, needs orthogonal alias families",
+    "intel Stagehand HIT/MISS replication and WebGym diverse holdout for real-DOM validation",
+    "runtime shared-store freshness probe if TTL/ETag required for real CDN",
+    "Docker full-DOM 2000-node BrowserGym 1280x720 + real gpt-4o-mini tokens/browser_calls for exploratory replication"
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-PRODUCT-35888533574/result.json",
+    "research/experiments/EXP-PRODUCT-35888533574/artifacts/derived_metrics.json",
+    "research/experiments/EXP-PRODUCT-35888533574/artifacts/raw_per_task.csv",
+    "research/experiments/EXP-PRODUCT-35888533574/artifacts/cache_traces.json",
+    "research/experiments/EXP-PRODUCT-35888533574/artifacts/probe_traces.json",
+    "research/experiments/EXP-PRODUCT-35888533574/artifacts/frontier_adapter_traces.json"
+  ],
+  "recommended_action": "Fix kernel.resolve parameter binding (ensure all required_slots present in resolve_params) and re-run EXP-PRODUCT-35888533574. This is the smallest high-information delta that can change the claim/product decision. If n=0 tasks correctly hit the 50-tok path, batched MEA caching should achieve per_hit <=0.85 vs RAG at n0. If it still fails, the batched caching approach is genuinely insufficient and product should pivot to Stagehand caching/probe-only freshness or frontier adapter improvements."
+}

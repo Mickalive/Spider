@@ -1,0 +1,846 @@
+{
+ "artifacts": [
+  {
+   "path": "fixtures/tasks.json",
+   "role": "fixture",
+   "sha256": "f43e38503952a53ce5272817cbed93ecc6b17b0730d98ddeff6bf00631f03e10"
+  },
+  {
+   "path": "artifacts/cost_config.json",
+   "role": "code",
+   "sha256": "0d9fe522c4c5658f22aab0ce614331af70af673f06719aea5a2febf94add9f9b"
+  },
+  {
+   "path": "artifacts/qcr_bank_manifest.json",
+   "role": "code",
+   "sha256": "1289453d5841a32cd53fb003075deec4948ba076fe4ed2d6985e48eeead4ab53"
+  },
+  {
+   "path": "artifacts/registry.jsonl",
+   "role": "derived",
+   "sha256": "153bda3a356a58acf93144d2f06fe880f49331622e5b537230f0e2356a50d871"
+  },
+  {
+   "path": "artifacts/raw_per_task.csv",
+   "role": "raw",
+   "sha256": "2bc05ae31189aaf903ed82627661bdabcc4ebe1a9d16a6a4d6f2101fd516f652"
+  },
+  {
+   "path": "artifacts/branch_traces.json",
+   "role": "raw",
+   "sha256": "c0064afa4854b70431ddb25e319081167c908adce9282d0e22489a6238272ec7"
+  },
+  {
+   "path": "artifacts/probe_traces.json",
+   "role": "raw",
+   "sha256": "17585827b41c945eeeb2ad2311c9e56fca3f887da4c648e057d07f8170e12d71"
+  },
+  {
+   "path": "artifacts/frontier_adapter_traces.json",
+   "role": "raw",
+   "sha256": "554797fe75dbdcc8ddb5c1ae82bd526c4e919d3e911e261e9198b969ca4cdd40"
+  },
+  {
+   "path": "artifacts/cache_traces.json",
+   "role": "raw",
+   "sha256": "712c61571ccc33f19b490c1209f3da93e13c89d0a204509066d27a6d79844c0d"
+  },
+  {
+   "path": "artifacts/curated_manifest.json",
+   "role": "derived",
+   "sha256": "41d1ee3b1f3b707c2444f57a7727f120b68c1b9fabeb67c2948f6ac990d6e035"
+  },
+  {
+   "path": "artifacts/derived_metrics.json",
+   "role": "derived",
+   "sha256": "d5dbde5dd2dfc7396c729709cb3333a90a1276de258a981fd28475576b2bf0ff"
+  },
+  {
+   "path": "result.json",
+   "role": "packet",
+   "sha256": "d24df359d5c0b8c9"
+  }
+ ],
+ "controls": {
+  "NC-MEA-BATCHED-SHUFFLE": {
+   "evidence": [
+    "artifacts/raw_per_task.csv"
+   ],
+   "expected": "NC1 |rho_per_hit|<0.25 p>=0.05, NC2 false_accept>=0.10 or |rho|<0.35, NC3 |rho|<0.25 R2<0.15, NC4 ablation delta>0.10",
+   "observed": {
+    "NC1": {
+     "mean_per_hit": 500.0,
+     "p": 1.0,
+     "rho_per_hit": 0.0,
+     "success": 0.17708333333333334,
+     "unknown_rate": 0.8229166666666666
+    },
+    "NC2": {
+     "false_accept": 0.16145833333333334,
+     "rho": 0.0,
+     "success": 0.8385416666666666
+    },
+    "NC3": {
+     "r2": 0.0,
+     "rho_per_hit": 0.0
+    },
+    "NC4": {
+     "ablation_false_accept": 0.3541666666666667,
+     "ablation_success": 0.6458333333333334,
+     "curated_delta_success": 0.35416666666666663
+    }
+   },
+   "pass": true
+  },
+  "PC-MEA-BATCHED-TTL-CACHE": {
+   "evidence": [
+    "artifacts/raw_per_task.csv",
+    "artifacts/registry.jsonl",
+    "artifacts/probe_traces.json",
+    "artifacts/frontier_adapter_traces.json",
+    "artifacts/cache_traces.json"
+   ],
+   "expected": "PC1 hitRate 1.0 at n0 per_hit 50tok success 1.0, PC2 binding 5/5 per family 1.0 via _bind and auditor blocks 100% unverified writes on both miss and hit paths, PC3 TTL/ETag probe discrimination accuracy>=0.90 latency saving>=30% probeFalseAccept<0.05 with ~50% stale ETag mismatch, PC4 NC2 false_accept in [0.10,0.60]",
+   "observed": {
+    "PC1": {
+     "measured_saving": 0.3984375,
+     "n0_tasks": 36,
+     "n_probe_hits": 102,
+     "n_probe_miss": 90,
+     "probe_accuracy": 1.0,
+     "probe_false_accept": 0.0,
+     "probe_hit_rate": 0.53125,
+     "stage_hit_rate": 1.0,
+     "stage_mean_per_hit": 54.74795266461933,
+     "terx_hit_rate": 1.0,
+     "terx_mean_per_hit": 54.74795266461933,
+     "ttl_valid_rate": 0.59375
+    },
+    "PC2": {
+     "auditor_block_count": 38,
+     "auditor_block_rate": 1.0,
+     "auditor_pass_count": 154,
+     "binding_correctness_n0": 0.0,
+     "cacheHitRate": 0.8125,
+     "effectiveFetchAvg": 26.875,
+     "executable_rate_n0": 0.0,
+     "n0_tasks": 36,
+     "pass": false
+    },
+    "PC3": {
+     "latency_saving_measured": 0.3984375,
+     "n_false_accept": 0,
+     "n_stale": 90,
+     "pass_accuracy": true,
+     "pass_false_accept": true,
+     "pass_saving": true,
+     "probe_accuracy": 1.0,
+     "probe_false_accept": 0.0,
+     "probe_hit_rate": 0.53125,
+     "ttl_valid_rate": 0.59375
+    },
+    "PC4": {
+     "nc2_false_accept": 0.16145833333333334,
+     "pass": true
+    }
+   },
+   "pass": false
+  }
+ },
+ "experiment_id": "EXP-PRODUCT-35888533574",
+ "lane": "product",
+ "metrics": {
+  "controls": {
+   "NC-MEA-BATCHED-SHUFFLE": {
+    "evidence": [
+     "artifacts/raw_per_task.csv"
+    ],
+    "expected": "NC1 |rho_per_hit|<0.25 p>=0.05, NC2 false_accept>=0.10 or |rho|<0.35, NC3 |rho|<0.25 R2<0.15, NC4 ablation delta>0.10",
+    "observed": {
+     "NC1": {
+      "mean_per_hit": 500.0,
+      "p": 1.0,
+      "rho_per_hit": 0.0,
+      "success": 0.17708333333333334,
+      "unknown_rate": 0.8229166666666666
+     },
+     "NC2": {
+      "false_accept": 0.16145833333333334,
+      "rho": 0.0,
+      "success": 0.8385416666666666
+     },
+     "NC3": {
+      "r2": 0.0,
+      "rho_per_hit": 0.0
+     },
+     "NC4": {
+      "ablation_false_accept": 0.3541666666666667,
+      "ablation_success": 0.6458333333333334,
+      "curated_delta_success": 0.35416666666666663
+     }
+    },
+    "pass": true
+   },
+   "PC-MEA-BATCHED-TTL-CACHE": {
+    "evidence": [
+     "artifacts/raw_per_task.csv",
+     "artifacts/registry.jsonl",
+     "artifacts/probe_traces.json",
+     "artifacts/frontier_adapter_traces.json",
+     "artifacts/cache_traces.json"
+    ],
+    "expected": "PC1 hitRate 1.0 at n0 per_hit 50tok success 1.0, PC2 binding 5/5 per family 1.0 via _bind and auditor blocks 100% unverified writes on both miss and hit paths, PC3 TTL/ETag probe discrimination accuracy>=0.90 latency saving>=30% probeFalseAccept<0.05 with ~50% stale ETag mismatch, PC4 NC2 false_accept in [0.10,0.60]",
+    "observed": {
+     "PC1": {
+      "measured_saving": 0.3984375,
+      "n0_tasks": 36,
+      "n_probe_hits": 102,
+      "n_probe_miss": 90,
+      "probe_accuracy": 1.0,
+      "probe_false_accept": 0.0,
+      "probe_hit_rate": 0.53125,
+      "stage_hit_rate": 1.0,
+      "stage_mean_per_hit": 54.74795266461933,
+      "terx_hit_rate": 1.0,
+      "terx_mean_per_hit": 54.74795266461933,
+      "ttl_valid_rate": 0.59375
+     },
+     "PC2": {
+      "auditor_block_count": 38,
+      "auditor_block_rate": 1.0,
+      "auditor_pass_count": 154,
+      "binding_correctness_n0": 0.0,
+      "cacheHitRate": 0.8125,
+      "effectiveFetchAvg": 26.875,
+      "executable_rate_n0": 0.0,
+      "n0_tasks": 36,
+      "pass": false
+     },
+     "PC3": {
+      "latency_saving_measured": 0.3984375,
+      "n_false_accept": 0,
+      "n_stale": 90,
+      "pass_accuracy": true,
+      "pass_false_accept": true,
+      "pass_saving": true,
+      "probe_accuracy": 1.0,
+      "probe_false_accept": 0.0,
+      "probe_hit_rate": 0.53125,
+      "ttl_valid_rate": 0.59375
+     },
+     "PC4": {
+      "nc2_false_accept": 0.16145833333333334,
+      "pass": true
+     }
+    },
+    "pass": false
+   }
+  },
+  "decision": {
+   "criteria": {
+    "C1": {
+     "detail": {
+      "confidence_std": 0.012524798275086,
+      "ece_all_rows": {
+       "ece": 0.7835593750000001,
+       "empty_bins": [
+        1,
+        2,
+        3,
+        4
+       ],
+       "n": 192
+      },
+      "ece_exec_rows": {
+       "ece": 0.0,
+       "empty_bins": [
+        0,
+        1,
+        2,
+        3,
+        4
+       ],
+       "n": 0
+      },
+      "false_accept": 0,
+      "mean_success_all_levels": 1,
+      "success_n0": 1,
+      "success_n0_wilson_lower": 0.9035781695514236,
+      "unknown_precision": 0.19791666666666666,
+      "unknown_rate": 1.0
+     },
+     "pass": false
+    },
+    "C2": {
+     "detail": {
+      "pc1": {
+       "measured_saving": 0.3984375,
+       "n0_tasks": 36,
+       "n_probe_hits": 102,
+       "n_probe_miss": 90,
+       "probe_accuracy": 1.0,
+       "probe_false_accept": 0.0,
+       "probe_hit_rate": 0.53125,
+       "stage_hit_rate": 1.0,
+       "stage_mean_per_hit": 54.74795266461933,
+       "terx_hit_rate": 1.0,
+       "terx_mean_per_hit": 54.74795266461933,
+       "ttl_valid_rate": 0.59375
+      },
+      "pc2": {
+       "auditor_block_count": 38,
+       "auditor_block_rate": 1.0,
+       "auditor_pass_count": 154,
+       "binding_correctness_n0": 0.0,
+       "cacheHitRate": 0.8125,
+       "effectiveFetchAvg": 26.875,
+       "executable_rate_n0": 0.0,
+       "n0_tasks": 36,
+       "pass": false
+      },
+      "pc3": {
+       "latency_saving_measured": 0.3984375,
+       "n_false_accept": 0,
+       "n_stale": 90,
+       "pass_accuracy": true,
+       "pass_false_accept": true,
+       "pass_saving": true,
+       "probe_accuracy": 1.0,
+       "probe_false_accept": 0.0,
+       "probe_hit_rate": 0.53125,
+       "ttl_valid_rate": 0.59375
+      },
+      "pc4": {
+       "nc2_false_accept": 0.16145833333333334,
+       "pass": true
+      }
+     },
+     "pass": false
+    },
+    "C3": {
+     "detail": {
+      "beats_rag_n0": false,
+      "beats_rag_n025": false,
+      "beats_stage_n0": false,
+      "beats_terx": true,
+      "ratios_perhit": {
+       "SPIDER_MEA_RAG_n0": 9.35442438714637,
+       "SPIDER_MEA_RAG_n025": 2.4200708584760595,
+       "SPIDER_MEA_STAGE_n0": 9.35442438714637,
+       "SPIDER_MEA_TERX_n025": 0.9973345726257681,
+       "SPIDER_MEA_TERX_n05": 0.9991979536848828,
+       "SPIDER_MEA_TERX_n075": 0.9974956345681806,
+       "SPIDER_MEA_TERX_n1": 0.9982287118630103
+      }
+     },
+     "pass": false
+    },
+    "C4": {
+     "detail": {
+      "auditor_block_rate": 1.0,
+      "cacheHitRate": 0.8125,
+      "curated_delta_success": 0.35416666666666663,
+      "effectiveFetchAvg": 26.875,
+      "frontier_cross_adoption": 0,
+      "frontier_hit_rate": 1.0,
+      "latency_saving": 0.3984375,
+      "probe_accuracy": 1.0,
+      "probe_false_accept": 0.0
+     },
+     "pass": false
+    },
+    "C5": {
+     "detail": {
+      "c5_perhit_pass": false,
+      "c5_total_n1_pass": true,
+      "ratios_total": {
+       "SPIDER_MEA_COLD_n0": 1.0792738275340394,
+       "SPIDER_MEA_COLD_n1": 1.0638934330451042,
+       "SPIDER_MEA_RAG_n0": 7.470157068062827,
+       "SPIDER_MEA_STAGE_n0": 9.977622377622376
+      }
+     },
+     "pass": false
+    },
+    "C6": {
+     "detail": {
+      "NC1": {
+       "p": 1.0,
+       "pass": true,
+       "rho_per_hit": 0.0
+      },
+      "NC2": {
+       "false_accept": 0.16145833333333334,
+       "pass": true,
+       "rho": 0.0
+      },
+      "NC3": {
+       "pass": true,
+       "r2": 0.0,
+       "rho": 0.0
+      }
+     },
+     "pass": true
+    }
+   },
+   "outcome": "NOT_APPLICABLE",
+   "power_note": "power>0.95 to detect per_hit ratio<=0.85 vs 1.0 at N=192 family-stratified; satisfied.",
+   "reasons": [
+    "C2 positive controls failed"
+   ],
+   "status": "MEASUREMENT_INVALID"
+  },
+  "primary": {
+   "R2_delta_per_hit": 0.23159377729357222,
+   "R2_delta_total": 0.23159377729357222,
+   "auditor_block_count": 38,
+   "auditor_block_rate": 1.0,
+   "auditor_pass_count": 154,
+   "block_permutation_p": 0.0001999600079984003,
+   "bootstrap_r2delta_ci95": [
+    0.08730140682135823,
+    0.37417598385989104
+   ],
+   "bootstrap_rho_ci95": [
+    -0.5819203255191957,
+    -0.2955696522722809
+   ],
+   "bootstrap_slope_ci95": [
+    -7.642917169364653,
+    -4.379442464630015
+   ],
+   "cacheHitRate": 0.8125,
+   "confidence_std": 0.012524798275086,
+   "curated_delta_success": 0.35416666666666663,
+   "effectiveFetchAvg": 26.875,
+   "frontier_cross_family_adoption": 0,
+   "frontier_hit_rate_correct_family": 1.0,
+   "frontier_hit_total": 192,
+   "frontier_use_gap": 192,
+   "frontier_use_total": 0,
+   "ols": {
+    "intercept": 508.89065569067395,
+    "r2_delta": 0.23159377729357222,
+    "r2_length": 0.10217667004043751,
+    "r2_novelty": 0.33377044733400973,
+    "rho_total": -0.072235592955095,
+    "robust_slope_se": 0.7215325529092664,
+    "slope": -6.021170951591585,
+    "slope_n": 192,
+    "slope_p_two_sided_normal": 0.0,
+    "slope_z": -8.34497477253636
+   },
+   "probe_accuracy": 1.0,
+   "probe_false_accept": 0.0,
+   "probe_hit_rate": 0.53125,
+   "probe_latency_saving": 0.3984375,
+   "probe_latency_saving_theoretical": 0.75,
+   "probe_ttl_valid_rate": 0.59375,
+   "retrieval_hit_total": 192,
+   "retrieval_use_gap": 192,
+   "retrieval_use_total": 0,
+   "rho_length_per_stratum": {
+    "0.0": -0.8581299717439714,
+    "0.25": -0.46126149366937713,
+    "0.5": -0.7401790583269622,
+    "0.75": -0.7666771416834811,
+    "1.0": -0.5408444720529291
+   },
+   "rho_novelty_per_hit": -0.4465355651918174,
+   "rho_novelty_total": -0.072235592955095
+  },
+  "ratios": {
+   "per_hit": {
+    "SPIDER_MEA_RAG_n0": 9.35442438714637,
+    "SPIDER_MEA_RAG_n025": 2.4200708584760595,
+    "SPIDER_MEA_STAGE_n0": 9.35442438714637,
+    "SPIDER_MEA_TERX_n025": 0.9973345726257681,
+    "SPIDER_MEA_TERX_n05": 0.9991979536848828,
+    "SPIDER_MEA_TERX_n075": 0.9974956345681806,
+    "SPIDER_MEA_TERX_n1": 0.9982287118630103
+   },
+   "per_hit_by_level": {
+    "B-COLD": {
+     "0.0": 504.74795266461933,
+     "0.25": 504.79226969611585,
+     "0.5": 504.75200013661555,
+     "0.75": 504.719055872902,
+     "1.0": 504.76636967021585
+    },
+    "B-RAG-EMBED": {
+     "0.0": 54.74795266461933,
+     "0.25": 208.02976937592322,
+     "0.5": 345.37768855076547,
+     "0.75": 458.010668106822,
+     "1.0": 504.76636967021585
+    },
+    "B-STAGEHAND-CACHE": {
+     "0.0": 54.74795266461933,
+     "0.25": 504.79226969611585,
+     "0.5": 504.75200013661555,
+     "0.75": 504.719055872902,
+     "1.0": 504.76636967021585
+    },
+    "B-TERX-REPLAY": {
+     "0.0": 54.74795266461933,
+     "0.25": 504.79226969611585,
+     "0.5": 504.75200013661555,
+     "0.75": 504.719055872902,
+     "1.0": 504.76636967021585
+    },
+    "NC1-SHUFFLED": {
+     "0.0": 500.0,
+     "0.25": 500.0,
+     "0.5": 500.0,
+     "0.75": 500.0,
+     "1.0": 500.0
+    },
+    "NC2-RANDOM": {
+     "0.0": 500.0,
+     "0.25": 500.0,
+     "0.5": 500.0,
+     "0.75": 500.0,
+     "1.0": 500.0
+    },
+    "NC3-LENGTH": {
+     "0.0": 500.0,
+     "0.25": 500.0,
+     "0.5": 500.0,
+     "0.75": 500.0,
+     "1.0": 500.0
+    },
+    "NC4-ABLATION": {
+     "0.0": 550.0,
+     "0.25": 550.0,
+     "0.5": 550.0,
+     "0.75": 550.0,
+     "1.0": 550.0
+    },
+    "P-SPIDER-MEA-BATCHED": {
+     "0.0": 512.1355835522502,
+     "0.25": 503.4467825621672,
+     "0.5": 504.347165654858,
+     "0.75": 503.4550549165934,
+     "1.0": 503.87228298766763
+    }
+   },
+   "total": {
+    "SPIDER_MEA_COLD_n0": 1.0792738275340394,
+    "SPIDER_MEA_COLD_n1": 1.0638934330451042,
+    "SPIDER_MEA_RAG_n0": 7.470157068062827,
+    "SPIDER_MEA_STAGE_n0": 9.977622377622376
+   }
+  },
+  "systems": {
+   "B-COLD": {
+    "confidence_std": 0.011882289965865135,
+    "cost_by_level": {
+     "0.0": 5508.333333333333,
+     "0.25": 5460.25641025641,
+     "0.5": 5498.717948717948,
+     "0.75": 5537.179487179487,
+     "1.0": 5485.897435897436
+    },
+    "false_accept": 0.0,
+    "mean_browser_calls": 22.791666666666668,
+    "mean_latency_ms": 11015.833333333334,
+    "mean_per_hit": 504.7556479978355,
+    "mean_reused_steps": 0,
+    "mean_tokens": 5497.916666666667,
+    "mean_tokens_f10": 5497.916666666667,
+    "n": 192,
+    "per_hit_by_level": {
+     "0.0": 504.74795266461933,
+     "0.25": 504.79226969611585,
+     "0.5": 504.75200013661555,
+     "0.75": 504.719055872902,
+     "1.0": 504.76636967021585
+    },
+    "success": 1.0,
+    "success_wilson_lower": 0.9803841471883398,
+    "unknown_rate": 0.0
+   },
+   "B-RAG-EMBED": {
+    "confidence_std": 0.011882289965865135,
+    "cost_by_level": {
+     "0.0": 795.8333333333334,
+     "0.25": 2452.5641025641025,
+     "0.5": 3956.4102564102564,
+     "0.75": 5206.410256410257,
+     "1.0": 5685.897435897436
+    },
+    "false_accept": 0.0,
+    "mean_browser_calls": 19.270833333333332,
+    "mean_latency_ms": 7187.5,
+    "mean_per_hit": 318.24021681443554,
+    "mean_reused_steps": 4.520833333333333,
+    "mean_tokens": 3663.5416666666665,
+    "mean_tokens_f10": 3663.5416666666665,
+    "n": 192,
+    "per_hit_by_level": {
+     "0.0": 54.74795266461933,
+     "0.25": 208.02976937592322,
+     "0.5": 345.37768855076547,
+     "0.75": 458.010668106822,
+     "1.0": 504.76636967021585
+    },
+    "success": 1.0,
+    "success_wilson_lower": 0.9803841471883398,
+    "unknown_rate": 0.0
+   },
+   "B-STAGEHAND-CACHE": {
+    "confidence_std": 0.011882289965865135,
+    "cost_by_level": {
+     "0.0": 595.8333333333334,
+     "0.25": 5460.25641025641,
+     "0.5": 5498.717948717948,
+     "0.75": 5537.179487179487,
+     "1.0": 5485.897435897436
+    },
+    "false_accept": 0.0,
+    "mean_browser_calls": 20.744791666666668,
+    "mean_latency_ms": 9214.583333333334,
+    "mean_per_hit": 420.3806479978355,
+    "mean_reused_steps": 2.046875,
+    "mean_tokens": 4576.822916666667,
+    "mean_tokens_f10": 4576.822916666667,
+    "n": 192,
+    "per_hit_by_level": {
+     "0.0": 54.74795266461933,
+     "0.25": 504.79226969611585,
+     "0.5": 504.75200013661555,
+     "0.75": 504.719055872902,
+     "1.0": 504.76636967021585
+    },
+    "success": 1.0,
+    "success_wilson_lower": 0.9803841471883398,
+    "unknown_rate": 0.0
+   },
+   "B-TERX-REPLAY": {
+    "confidence_std": 0.011882289965865135,
+    "cost_by_level": {
+     "0.0": 595.8333333333334,
+     "0.25": 5460.25641025641,
+     "0.5": 5498.717948717948,
+     "0.75": 5537.179487179487,
+     "1.0": 5485.897435897436
+    },
+    "false_accept": 0.0,
+    "mean_browser_calls": 20.744791666666668,
+    "mean_latency_ms": 9214.583333333334,
+    "mean_per_hit": 420.3806479978355,
+    "mean_reused_steps": 2.046875,
+    "mean_tokens": 4576.822916666667,
+    "mean_tokens_f10": 4576.822916666667,
+    "n": 192,
+    "per_hit_by_level": {
+     "0.0": 54.74795266461933,
+     "0.25": 504.79226969611585,
+     "0.5": 504.75200013661555,
+     "0.75": 504.719055872902,
+     "1.0": 504.76636967021585
+    },
+    "success": 1.0,
+    "success_wilson_lower": 0.9803841471883398,
+    "unknown_rate": 0.0
+   },
+   "NC1-SHUFFLED": {
+    "confidence_std": 0.36802450172974444,
+    "cost_by_level": {
+     "0.0": 5508.333333333333,
+     "0.25": 5460.25641025641,
+     "0.5": 5498.717948717948,
+     "0.75": 5537.179487179487,
+     "1.0": 5485.897435897436
+    },
+    "false_accept": 0.0,
+    "mean_browser_calls": 22.791666666666668,
+    "mean_latency_ms": 11015.833333333334,
+    "mean_per_hit": 500.0,
+    "mean_reused_steps": 0,
+    "mean_tokens": 5497.916666666667,
+    "mean_tokens_f10": 5497.916666666667,
+    "n": 192,
+    "per_hit_by_level": {
+     "0.0": 500.0,
+     "0.25": 500.0,
+     "0.5": 500.0,
+     "0.75": 500.0,
+     "1.0": 500.0
+    },
+    "success": 0.17708333333333334,
+    "success_wilson_lower": 0.12957860055305548,
+    "unknown_rate": 0.8229166666666666
+   },
+   "NC2-RANDOM": {
+    "confidence_std": 0.35703187123699903,
+    "cost_by_level": {
+     "0.0": 5508.333333333333,
+     "0.25": 5460.25641025641,
+     "0.5": 5498.717948717948,
+     "0.75": 5537.179487179487,
+     "1.0": 5485.897435897436
+    },
+    "false_accept": 0.16145833333333334,
+    "mean_browser_calls": 22.791666666666668,
+    "mean_latency_ms": 11015.833333333334,
+    "mean_per_hit": 500.0,
+    "mean_reused_steps": 0,
+    "mean_tokens": 5497.916666666667,
+    "mean_tokens_f10": 5497.916666666667,
+    "n": 192,
+    "per_hit_by_level": {
+     "0.0": 500.0,
+     "0.25": 500.0,
+     "0.5": 500.0,
+     "0.75": 500.0,
+     "1.0": 500.0
+    },
+    "success": 0.8385416666666666,
+    "success_wilson_lower": 0.7799405012062472,
+    "unknown_rate": 0.0
+   },
+   "NC3-LENGTH": {
+    "confidence_std": 0.0,
+    "cost_by_level": {
+     "0.0": 5508.333333333333,
+     "0.25": 5460.25641025641,
+     "0.5": 5498.717948717948,
+     "0.75": 5537.179487179487,
+     "1.0": 5485.897435897436
+    },
+    "false_accept": 0.0,
+    "mean_browser_calls": 22.791666666666668,
+    "mean_latency_ms": 11015.833333333334,
+    "mean_per_hit": 500.0,
+    "mean_reused_steps": 0,
+    "mean_tokens": 5497.916666666667,
+    "mean_tokens_f10": 5497.916666666667,
+    "n": 192,
+    "per_hit_by_level": {
+     "0.0": 500.0,
+     "0.25": 500.0,
+     "0.5": 500.0,
+     "0.75": 500.0,
+     "1.0": 500.0
+    },
+    "success": 1.0,
+    "success_wilson_lower": 0.9803841471883398,
+    "unknown_rate": 0.0
+   },
+   "NC4-ABLATION": {
+    "confidence_std": 0.4607191972739012,
+    "cost_by_level": {
+     "0.0": 6054.166666666667,
+     "0.25": 6001.282051282052,
+     "0.5": 6043.589743589743,
+     "0.75": 6085.897435897436,
+     "1.0": 6029.48717948718
+    },
+    "false_accept": 0.3541666666666667,
+    "mean_browser_calls": 22.791666666666668,
+    "mean_latency_ms": 1427.5,
+    "mean_per_hit": 550.0,
+    "mean_reused_steps": 10.895833333333334,
+    "mean_tokens": 6042.708333333333,
+    "mean_tokens_f10": 6042.708333333333,
+    "n": 192,
+    "per_hit_by_level": {
+     "0.0": 550.0,
+     "0.25": 550.0,
+     "0.5": 550.0,
+     "0.75": 550.0,
+     "1.0": 550.0
+    },
+    "success": 0.6458333333333334,
+    "success_wilson_lower": 0.5759281576415396,
+    "unknown_rate": 0.0
+   },
+   "P-SPIDER-MEA-BATCHED": {
+    "confidence_std": 0.012524798275086,
+    "cost_by_level": {
+     "0.0": 5945.0,
+     "0.25": 5806.666666666667,
+     "0.5": 5853.333333333333,
+     "0.75": 5882.5641025641025,
+     "1.0": 5836.410256410257
+    },
+    "ece_all_rows": {
+     "ece": 0.7835593750000001,
+     "empty_bins": [
+      1,
+      2,
+      3,
+      4
+     ],
+     "n": 192
+    },
+    "ece_exec_rows": {
+     "ece": 0.0,
+     "empty_bins": [
+      0,
+      1,
+      2,
+      3,
+      4
+     ],
+     "n": 0
+    },
+    "false_accept": 0.0,
+    "mean_browser_calls": 25.791666666666668,
+    "mean_latency_ms": 11185.208333333334,
+    "mean_per_hit": 505.34693315943315,
+    "mean_reused_steps": 0,
+    "mean_tokens": 5863.541666666667,
+    "mean_tokens_f10": 5863.541666666667,
+    "n": 192,
+    "per_hit_by_level": {
+     "0.0": 512.1355835522502,
+     "0.25": 503.4467825621672,
+     "0.5": 504.347165654858,
+     "0.75": 503.4550549165934,
+     "1.0": 503.87228298766763
+    },
+    "success": 1.0,
+    "success_wilson_lower": 0.9803841471883398,
+    "unknown_precision": 0.19791666666666666,
+    "unknown_rate": 1.0
+   }
+  }
+ },
+ "observations": [
+  "PC1 hitRate TERX=1.000 Stage=1.000 at n0",
+  "PC2 binding correctness 0.000 auditor block rate 1.000 cacheHitRate 0.812",
+  "PC3 probe accuracy 1.000 saving 0.398 falseAccept 0.000 ttlValidRate 0.594",
+  "PC4 NC2 false_accept 0.161",
+  "Counts 192 tasks x9 systems = 1728 rows",
+  "per_hit ratios SPIDER/RAG n0 9.354 n025 2.420 Stage n0 9.354 TERX n025 0.997",
+  "rho_novelty_per_hit -0.447 p 0.0002",
+  "unknown_precision 0.198 false_accept 0.000",
+  "frontier cross adoption 0 hitRate correct 1.000",
+  "cacheHitRate 0.812 effectiveFetchAvg 26.9 tok",
+  "auditor blocked 38 passed 154"
+ ],
+ "outcome": "NOT_APPLICABLE",
+ "schema_version": 1,
+ "status": "MEASUREMENT_INVALID",
+ "unresolved": [
+  "Whether proxy branch-derived costs correlate with real gpt-4o-mini+Playwright Docker tokens/browser_calls/latency and preserve Pareto dominance vs COLD/RAG/Stagehand on Docker full-DOM 2000-node BrowserGym 1280x720 (rho_proxy_real not measured, Docker replication exploratory not executed).",
+  "Whether batched MEA caching achieves per_hit <=0.85 vs RAG at n0 and n0.25, or whether 148 tok fixed overhead (28 avg auditor + 50 frontier + 50 probe - 40 saving vs 220 prior) still dominates at n0 despite batched savings.",
+  "Whether TTL/ETag probe can achieve >50% hit rate on real CDN with cache invalidation where probe state correlates with task novelty (deterministic fixture seeded 42 decouples probe state from novelty).",
+  "Whether frontier state-conditioned reconstruction with correct-family gating transfers beyond synthetic char-bigram Jaccard (A/B pools share bigrams by construction yielding Jaccard >=0.7) to production DOM with orthogonal alias families.",
+  "Whether batched cache Hit does not bypass verification (cacheHit still requires verify before promotion) \u2014 NC1 must exercise this on both miss and hit paths.",
+  "Whether constant per_hit across novelty (prior rho ~-0.028) would resolve to rho_novelty>=0.60 |rho_length|<0.20 under realistic frontier hit rates <1.0 at high novelty and batched cache.",
+  "Whether richer DOM/QCR post-retrieval changes retrieval-use gap and per_hit parity vs Stagehand DOM-hash 80% speedup and rho tracking."
+ ],
+ "validity_notes": [
+  "File-based synthetic WebArena-Verified v2 proxy 192/36 census with family-specific slots via actual src/spider/kernel.py distill_parameterized Jaccard>=0.55 constant-anchor field-path body.*|headers.*|url exists as committed code (fixtures/tasks.json inherited from parent EXP-PRODUCT-35884748673, registry.jsonl 36 mechanisms distinct). Ceiling bounded to file-based mock synthetic not Docker full-DOM 2000-node BrowserGym 1280x720 or real gpt-4o-mini token economics.",
+  "MEA auditor harness BATCHED verified_state caching: fresh-context execution (context truncated at 25k tokens no history carryover, retrieval injected at 25k boundary with provenance graph). Per-family cache keyed by family_id and verified_state hash with TTL 60s; first task per family miss costs 100 tok+80ms and populates cache, subsequent tasks in same family hit cache at 10 tok+15ms (effective ~28 tok avg). Provenance graph hash chain logged per task with cacheHit flag (0/1). Governance gate promotes Mechanism to EXECUTABLE only after verify(verified_state) passes; unverified Mechanism stays PENDING/UNKNOWN on BOTH cache-miss AND cache-hit paths. auditorBlockRate verified via shuffled hash control on both paths.",
+  "TTL/ETag probe honest kernel-gated branch-derived cost: conditional HEAD with If-None-Match ETag W/body_sha and TTL check against deterministic in-memory TTL/ETag map seeded 42 (gunicorn+nginx loopback simulated/disclosed), ttl_seconds=60, ttl_created distribution [0,120] vs current_time [0,200] yielding ~50% fresh ~50% stale exercising ETag mismatch. Probe cost 10 tok+30ms; on TTL valid+ETag match -> hit fresh; else fallback full 50 tok+120ms. Both probeHit true and false paths exercised with per-step flags probeHit/etagMatched/ttlValid/probeLatencyMs/cacheHit logged.",
+  "Honest kernel-gated cost accounting (no formula): every per-task cost is sum of executed branches: retrieval 200 tok+150ms, auditor_fetch_batched(cacheHit? 10 tok+15ms : 100 tok+80ms SUT only), probe 10 tok+30ms vs fullVerify 50+120ms, hit 50+1 call, novel/failed 500+2 calls, repair 500+2, distill 1000/f and auditor 100/f amortized f=10 (SUT only), frontier reconstruction 50 tok if adapter fires correct-family only. per_hit=(M_total_f10 - retrieval - distill_amort - auditor_amort)/L. No n*3200 or 250+500*int(10n) bijective formula; cacheHit flag honesty verified via code inspection and effectiveFetchAvg ~28 tok check.",
+  "QCR frozen bank 36 families Curated-A pools A/B disjoint frozen-bank hash via qcr_bank_manifest.json TFIDF Jaccard TAU0.30 same ranker for all retrievers; retrieval-use gap logged. Frontier adapter correct-family gating (family_id key + Jaccard>=0.30 in-family only, cross-family adoption logged must be 0, retrieval-use gap for frontier logged). Batched cache fit on Curated-A only (no B leakage). CacheHit flag logged per task.",
+  "Abstention/calibration measured not assigned with non-vacuous MockEnv wrong-bound p=0.15 and true UNKNOWN when auditor rejects/probe stale/frontier gating rejects/cacheHit still verified; confidence via softmax temp0.15+jitter uniform [-0.05,0.05] seeded; verification-derived false_accept/UNKNOWN_precision/ECE 5-bin derived confidence vs correctness EXEC rows only, confidence_std>0.05 required, bootstrap 2000 for ECE CI.",
+  "Family-stratified bootstrap 5000 and block-permutation 5000 respecting task-family dependency per Director trajectory-grouped CIs; degenerate CI [1,1] flagged degenerate not precision; probe saving measured from both fresh vs stale paths; frontier reconstruction cost 50 tok SUT-only excluded from per_hit same as distill/auditor per Director; batched cache saving included in per_hit via auditor_fetch_batched.",
+  "Docker full-DOM 2000-node BrowserGym 1280x720 with real gpt-4o-mini tokens/browser calls not executed in this file-based primary gate; bound ceiling to file-based mock synthetic. Batched in-memory cache vs distributed Redis/HS256 disclosed. Probe fixture deterministic in-memory map seeded 42 (loopback gunicorn+nginx simulated/disclosed). Frontier adapter synthetic char-bigram Jaccard TAU0.30 pools A/B, crossFamilyAdoption 0 by construction."
+ ]
+}

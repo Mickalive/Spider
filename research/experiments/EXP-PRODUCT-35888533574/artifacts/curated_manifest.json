@@ -1,0 +1,7 @@
+{
+ "curated_filter": "verified_state hash matching postcondition",
+ "demos_per_family": 5,
+ "pools": "A/B disjoint",
+ "hash": "curated-5-per-family",
+ "audit_note": "curated raises verified coverage; 5/10 filter provenance logged"
+}
