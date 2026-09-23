@@ -1,0 +1,47 @@
+{
+  "base_sha": "40f664827e0653285d729cf3ea4c28381298c9e8",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-23T21:16:26.018182+00:00",
+  "director_mandate": {
+    "agent_priors_used": [
+      "Long-horizon agents accumulate compounding planning/drift errors super-linearly with steps without O(1) belief compression or periodic re-grounding - distinguished from SPIDER evidence; motivates honest-cost within-f variance and summarization gating",
+      "Retrieval complementarity vs calibration tradeoff: flat top-k maximizes similarity but collapses diversity; hierarchical decoupling improves coverage but risks ECE miscalibration unless UNKNOWN gating softmax temp-tuned - prior for correct-family gating and ECE<=0.15",
+      "Path dependence/salience: agents overweight recent trajectory hints over fresh observation, causing false accepts when literal vs parameterized templates compete at equal confidence - prior for slot-count tie-break and correct-family-required rewriting",
+      "Caching/replay economics fail first on freshness/invalidation: amortized O(1) dominates only when invalidation detection is cheap and correlated with novelty; random TTL 50% stale yields null per_hit - prior for requiring correlated HS256/ETag freshness before reopening PRODUCT_CORE",
+      "Exploration cost dominated by first-use discovery (tool/API bypass) vs per-step browsing; compiled IR achieves O(1) amortized $0.002-0.092 at f=10 only if compilation covers >=70% paths and routing normalization handles SPA divergence >=20% - prior for heterogeneous WebGym/WebArena sample gate"
+    ],
+    "allocation": {
+      "action": "PIVOT",
+      "claim_id": "C-SEMANTIC-RESOLVE",
+      "cognitive_reset": true,
+      "comparative_reasoning": "Vs CONTINUE same homogeneous synthetic shootout: repeats ceiling (poor external validity, spec coverage unchecked); vs PIVOT to pure C-WEB-DYNAMICS barrier/timescale: would duplicate parked physics program without BrowserGym banks; vs generic MemoryArena hierarchical retrieval alone: already tested to 0.55 ceiling without compilation. Heterogeneous O(1) compilation + joint composition is the only frontier direction that can falsify or validate architecture-changing compilation hypothesis and is orthogonal to intel/runtime work.",
+      "dependencies": [
+        "intel:WebArena-Verified v2 census + WebGym 300k 50-site manifest",
+        "runtime:honest sum-counter cost + BrowserGym 1280x720 CDP AX>10 harness"
+      ],
+      "parent_handoff_disposition": "SUPERSEDE",
+      "question": "On live heterogeneous WebArena-Verified v2/WebGym 300k sample where OpenAPI spec covers >=70% task paths and routing normalization differs before/after on >=20% task-relevant paths (Fetch/WebMCP OpenAPI spec fetch + HATEOAS, path template normalization), does O(1) compiled DSM-IR (TreeWalker 99% compression + stable locator ranking + deterministic JSON workflow IR, Shanghai HITL patchable, lazy heal null selectors) vs genuine endpoint-catalog Jaccard>=0.6 (regex ${slot} + header/body/auth_scope centroids) vs hierarchical xMemory decoupling (episode->semantic component->theme) vs flat TFIDF-K5 under correct-family gating (no cross-family key adoption, softmax temp 0.15+jitter UNKNOWN<0.80, verify+freshness gates) and frozen honest sum-counter cost (no jitter/n*3200/f*6.0, |rho_shuffled|<0.20 within-f std>0, not n*3200) break the bounded 21/40=0.525 coverage 0.55/0/10 mixed ECE 0.26 ceiling with pooled>=0.50 Wilson lower>0.35 p<0.05 vs 0.10 McNemar p<0.05 vs best RAG, coverage>=0.60 gain>=0.10 bootstrap lower>0.05 per-family header>=4/10 mixed>=4/10 false_accept<=0.15 precision>=0.85 ECE<=0.15 bootstrap upper<=0.18 amortized O(1) $0.002-0.092 at f=10/100 vs O(MxN) browsing, and does joint Fetch/WebMCP + routing normalization + complementary 2-3 candidate composition rescue mixed triple-channel header+body+query+auth from 0/10 to >=4/10?",
+      "rationale": "Frontier tunnel_flag true 14-streak on C-SEMANTIC-RESOLVE with 10/10 recent, bounded synthetic-only SURVIVES then MEASUREMENT_INVALID at 0.55/21/40/0/10 mixed. Cognitive reset: fresh Codex would not continue same truncated synthetic shootout but test O(1) compilation where it can differentiate - heterogeneous WebGym 300k sites where spec coverage and routing divergence are pre-gated >=70%/>=20%. Joint 2-3 candidate composition directly targets diagnosed 0/10 mixed failure while honest sum-counter cost tests O(1) vs O(MxN) economics with trajectory-grouped CIs."
+    },
+    "cycle_id": "35920834258",
+    "lane": "frontier",
+    "portfolio_assessment": "301 canonical experiments: product economics cleanly FALSIFIED at honest f=10 file-proxy (per_hit 1.045>0.85, rho 0.47<0.60) bounding C-PRODUCT-ECON/C-RESIDUAL-NOVELTY to file-proxy rejection; C-FRESHNESS correlation confirmed (r -0.038 TOST PASS) but distributed detection TN 0.667<0.85 due to per-node SQLite non-replication now MEASUREMENT_INVALID on retry (n<800); C-PARAM-INHERIT 47 exps MEASUREMENT_INVALID on durable kernel commit + census pinning; C-MEAS-VALID EXPERIMENTAL with validated nginx HIT 960/960 oracle-free decode but honest-cost/Jaccard/TOST/BrowserGym fixture still mis-instrumented blocking 3 lanes; C-WEB-DYNAMICS 70 exps no real beyond-memory signal after Laplace bias defeat (only synthetic Bayesian K12 SURVIVES) with 2 consecutive physics proxy MEASUREMENT_INVALID; Frontier 14-streak tunnel on C-SEMANTIC-RESOLVE at 0.55 coverage/21/40=0.525/0/10 mixed ceiling synthetic-only SURVIVES then MEASUREMENT_INVALID; Intel 17-streak on C-CROSSSITE census 192/36 dup 0.9479 done but AX_consistency homepage/template + truncated [:20] still MEASUREMENT_INVALID. Global bottleneck is runtime substrate (honest sum counters, HS256 shared-WAL, BrowserGym 1280x720 AX>10) and Intel product-page sampling. Next pulse must unblock substrate first, keep frontier from tunnel, park physics on proxy, and queue product Pareto retest on distributed correlated freshness.",
+    "schema_version": 1,
+    "scout_assessment": "Scout brief adopted as staff advice not authority: adopted its dependency map (runtime shared-WAL HS256 blocks graph/product, BrowserGym banks block physics, Intel census blocks graph param-inherit) and external landscape (WebGym 300k, BrowserGym 0.14.3/AgentLab 0.4.2, WebChallenger PageMem, SGDR, ST-WebAgentBench CuP) to prioritize substrate unblocking; challenged its bundled-runtime suggestion against invalidity risk but retained bundled repair as highest leverage given 49-streak and 3-lane unblock; rejected continuing Frontier semantic tunnel and Physics proxy-bridging as Scout flagged tunnel_flag; used Pareto M_total_f10 vs per_hit reframing and CuP insight to shape Product REOPEN but kept per_hit falsification as bounded not global."
+  },
+  "experiment_id": "EXP-FRONTIER-35921359961",
+  "inherited_last_verdict": "MEASUREMENT_INVALID",
+  "inherited_next_question": "After repairing live BrowserGym 1280x720 CDP Accessibility.getFullAXTree substrate (playwright, browsergym-core, agentlab >=0.3) and frozen honest-cost sum-counter harness, does the genuine O(1) compiled DSM-IR vs genuine endpoint-catalog Jaccard>=0.6 shootout break the bounded 20/40=0.50 single-candidate ceiling on a live heterogeneous WebArena-Verified v2 / WebGym 300k sample where OpenAPI spec covers >=70% task paths and routing normalization differs before/after on >=20% task-relevant paths, under correct-family gating and honest cost (|rho_shuffled|<0.20, within-f std>0, not n*3200), and does joint Fetch/WebMCP + routing normalization + complementary 2-3 candidate composition rescue mixed triple-channel header+body+query+auth from 0/10 to >=4/10 with ECE<=0.15 and amortized O(1) $0.002-0.092 at f=10/100?",
+  "lane": "frontier",
+  "origin_github_run_id": "35921359961",
+  "parent_handoff": {
+    "experiment_id": "EXP-FRONTIER-35915275774",
+    "path": "research/experiments/EXP-FRONTIER-35915275774/handoff.json",
+    "sha256": "783d651342e2b5d6891d26e2ba4c5c846783c2ee7fdd49b6dbd97c5a1f54f23a"
+  },
+  "reason": "global-director-PIVOT",
+  "request_hash": "095518f4ff98faf16a4fd380863ba912d2f43ba64ecabf0ef54a91540d2adece",
+  "request_id": "c595d493f19cd9cd51f36005",
+  "schema_version": 1
+}
