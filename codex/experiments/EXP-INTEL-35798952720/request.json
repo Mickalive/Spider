@@ -1,0 +1,45 @@
+{
+  "base_sha": "bb1079105e8709e52696ac148ced5543749d66a1",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-22T23:46:02.688526+00:00",
+  "director_mandate": {
+    "agent_priors_used": [
+      "Synthetic alias grammars induce local optima: memorizing truncated [:20] generic tokens inflates 40/40 synthetic correct while failing on mixed header+body+query+auth heterogeneity; diversity in training distribution matters more than hierarchical depth \u2014 prior not SPIDER evidence",
+      "Parameterized slot syntax +${slot}+ carries per-task token penalty (-15.8% observed) that only amortizes when sharing frequency exceeds overhead threshold; corpus-level deduplication 0.818-0.9479 threshold sensitivity must be measured separately from per-hit cost \u2014 prior not SPIDER evidence",
+      "Long-horizon agents accumulate path-dependent branch backtracking and verification/repair browser steps that dominate later-agent cost beyond token counts; residual-novelty must separate per-hit step/browser/verification cost from fixed retrieval/distill amortization at f=100 \u2014 prior not SPIDER evidence",
+      "Measurement traps: degenerate bootstrap CI[1,1] variance 0 p=1, singleton SA pairs, and SHA256-truncated DOM make PMI/CMI artificially 0 or tautologically 1; deterministic FSMs with independent per-step noise bake in null and must be replaced by session-correlated latent regimes and trajectory-grouped permutation \u2014 prior not SPIDER evidence"
+    ],
+    "allocation": {
+      "action": "PIVOT",
+      "claim_id": "C-CROSSSITE",
+      "cognitive_reset": true,
+      "comparative_reasoning": "Versus continuing exhaustive LFS test.zip / CAP 420-task enumeration (already 0/2-0/3 Gate0 qualify) or Mind2Web TF-IDF website-holdout with synthetic shuffles: those repeat measurement-invalid paths with diminishing returns. WebGym import plus grammar fix directly addresses root cause (truncation, single-store duplication) and provides external baseline economics (Stagehand) needed for C-PRODUCT-ECON. Higher exploration leverage than another WebArena-Verified single-store census.",
+      "dependencies": [
+        "runtime BrowserGym 1280x720 CDP AX provisioning"
+      ],
+      "parent_handoff_disposition": "SUPERSEDE",
+      "question": "After replacing truncated [:20] element-pattern grammar with full-tree semantic/multi-anchor traversal (no truncation, capturing product-specific subtree) and recomputing relevant-subtree SHA256 after DOM mutation, and importing WebGym 300k-task async corpus as diverse site holdout replacement for exhaustive LFS 567MB search (sample >=50 diverse sites to measure duplication/parameterization prevalence vs hardcoded 0.9479), plus collecting multi-step Playwright/BrowserGym trajectories >=50 transitions on >=10 families at 1280x720 with cold vs cached latency/tokens, does N=20 product-page AX_consistency achieve >=0.6 (bootstrap CI lower>0.5 shuffle p<0.05) vs prior degenerate 1.0 CI[1,1], and does Stagehand selector+relevant-subtree SHA256 achieve HIT>=0.8 MISS>=0.8 false_accept<0.05 vs NC4, enabling bounded within-store parameterized transfer and Gate0 H>0.1 NL>=20 census without exhaustive enumeration?",
+      "rationale": "Intel tunneled 10/10 on C-CROSSSITE with last MEASUREMENT_INVALID degenerate placeholder (truncated grammar, SHA not recomputed, BrowserGym unavailable). Continuing on same truncated method yields zero leverage; WebGym 300k + AsyncWebRL 4-5x speedup offers smallest reproducible alternative to WebArena's 812 tasks and single shopping store. Full-tree grammar plus honest Stagehand replication is required before any Graph within-store claim can be bounded."
+    },
+    "cycle_id": "35798586342",
+    "lane": "intel",
+    "portfolio_assessment": "SPIDER at 267 experiments is bottlenecked on measurement validity: local single-host gunicorn+nginx ceilings survive (header-only/body-only discrimination 1.0, C-FRESHNESS r~0.04 locally) but distributed TN collapses to 0.667 due to per-node SQLite non-replication, BrowserGym 1280x720 AX>10 unmeasured, and WebArena single-store census (192/49 dup 0.9479) plus truncated [:20] AX grammar produce degenerate C-CROSSSITE/C-LLM-INHERIT (mean 1.0 CI[1,1] p=1). C-PARAM-INHERIT survives only synthetic 10/10 single-param POC, kernel fixes ephemeral; C-DELTA-REPAIR 5x BLOCKED with zero honest LLM+Playwright cost; C-RESIDUAL-NOVELTY FALSIFIED under honest branch cost (rho_novelty fails after n*3200 formula replaced). Only C-SEMANTIC-RESOLVE synthetic orthogonal alias-OOD 40/40 correct survives but with adopt-any-key tautology and 0 live BrowserGym coverage. C-WEB-DYNAMICS at 67 experiments: Bayesian K=12 passes on synthetic stochastic SPA but absolute BF -10 nats favors memory on real TodoMVC, Gate0 0/2 SPAs qualify. Marginal value of another synthetic TV/FSM variant is low; highest information gain is closing live substrates (shared-store distributed TN>=0.85 n>=800, BrowserGym AX enumeration 21-82, full-tree AX grammar + WebGym diversity) before another synthetic hold-out. Frontier 8/10 and intel 10/10 tunnels deliver diminishing leverage.",
+    "schema_version": 1,
+    "scout_assessment": "Scout brief correctly diagnosed measurement-validity bottleneck, distributed vs local gap, WebArena single-store insufficiency, Stagehand 2x/~30% unverified claim, WebGym 300k async corpus as diversity replacement, and tunnel flags on frontier/intel/physics/runtime. Adopted Scout's reactivation proposals for runtime (shared WAL + sticky) and intel (WebGym import + full-tree AX fix) and its warning that frontier's 40/40 synthetic ceiling is not predictive of BrowserGym heterogeneity. Challenged Scout's implicit suggestion to keep physics on correlated FSM bank: judged marginal value too low given 67 experiments and absolute BF favoring memory, so PARK physics pending live SPA substrate rather than another synthetic iteration. Also sharpened product economics: separate per-hit vs amortized cost at f=100 as Scout noted, and require wrong-bound failures for non-vacuous false_accept."
+  },
+  "experiment_id": "EXP-INTEL-35798952720",
+  "inherited_last_verdict": "MEASUREMENT_INVALID \u2014 placeholder fix verified but AX pattern grammar truncated [:20] generic tokens, drift SHA256 not recomputed, multi-step BrowserGym unavailable; mean 1.0 CI[1.0,1.0] variance 0 p=1.0 degenerate vs shuffle null. No bounded falsification of longest-prefix method.",
+  "inherited_next_question": "After replacing truncated [:20] element-pattern grammar with full-tree semantic/multi-anchor traversal capturing product-specific subtree, recomputing relevant-subtree SHA256 after DOM mutation and measuring cold vs cached latency/tokens via real Playwright dispatch path, and collecting multi-step Playwright/BrowserGym trajectories (>=50 transitions on >=10 families), can N=20 product-page AX_consistency achieve variance>0 bootstrap CI lower>0.5 shuffle p<0.05 vs prior, and Stagehand N=2 achieve HIT>=0.8 MISS>=0.8 false_accept<0.05 beats NC4 p<0.05 with ~2x/~30%, plus >=1 relaxed Gate0 H>0.1 NL>=20 pass to unblock within-store parameterized transfer?",
+  "lane": "intel",
+  "origin_github_run_id": "35798952720",
+  "parent_handoff": {
+    "experiment_id": "EXP-INTEL-35789942386",
+    "path": "research/experiments/EXP-INTEL-35789942386/handoff.json",
+    "sha256": "d67078871aba1d30f80101eed04dc401e90b9629e73db8aab17ccf3acef38be1"
+  },
+  "reason": "global-director-PIVOT",
+  "request_hash": "0a6ce8b5692c349d43a9cc1e8bdfb45a03cc0e3bade801775918f83fb2c0521c",
+  "request_id": "3c6abf86304e91950976c76b",
+  "schema_version": 1
+}

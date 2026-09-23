@@ -1,0 +1,55 @@
+{
+  "artifacts": {
+    "branch_traces.json": "486557bc6fb7eded3a940d104f978810838b3f8519d85019d53ff7d099c66735",
+    "cost_config.json": "b6333b9f5670c5bfdad89f06bdacf5ff4a3635fa04b6107430ee84a4b54cbd41",
+    "derived_metrics.json": "13e12be4471eb8f8a2d4df09e851f31e8f2ad3855089dfb3f7e86a787b940d47",
+    "qcr_bank_manifest.json": "dc384908e996f7a3932b6cc157b0bcc8f360fe853de74c047b1f7d40038db052",
+    "raw_per_task.csv": "7669216f9738d529098802beb071f7960875ed46d3effde712edc57e75a7c03e",
+    "registry.jsonl": "462236fdef0f8468fe39b3d6a8675f3f96e414cbe8d68eba8d864a1fec1e6889",
+    "result.json": "59d565359cb36b074d29fed8524833306dd9ec532130b7f0cd8202e0f9454d1e"
+  },
+  "code_hashes": {
+    "kernel.py": "04ca13d070a62e21032624efd67f92f2d15ec1c712346919a842bb1d566f2182",
+    "models.py": "23ef7f750e6bb7776c648316956cb8be95576271ca479f632de934d6eef22177",
+    "registry.py": "51fb440d3827f21cccb5f77ad17dc0e76ccdbc2d52d7b05044cd821bb8a9322c",
+    "run_experiment.py": "8c31f21b470bf47fe6f4a1a5945512760edf7a9508cde59c471b94dbe3454c9b"
+  },
+  "commands": [
+    "PYTHONHASHSEED=0 PYTHONPATH=src python3 research/experiments/EXP-PRODUCT-35797365772/run_experiment.py"
+  ],
+  "determinism": "single run; per_hit isolation; QCR frozen bank",
+  "environment": {
+    "numpy": "unavailable",
+    "pandas": "unavailable",
+    "python": "3.12.14",
+    "scipy": "unavailable",
+    "sentence_transformers": "unavailable",
+    "sklearn": "unavailable"
+  },
+  "experiment_id": "EXP-PRODUCT-35797365772",
+  "fixture": {
+    "inherited_from": "research/experiments/EXP-PRODUCT-35782537266/fixtures/tasks.json",
+    "inherited_sha256": "e824ab3157cbd299",
+    "path": "fixtures/tasks.json",
+    "sha256": "f953716805e2c4784097477df7aec5f5891674cb0482c60b50fe74ac9a80d136"
+  },
+  "frozen_input_hashes": {
+    "freeze.json": "4220282dda6e5ba08b8e8ddbf8b498876be0b9194e9f000a966a6d195bf9c60d",
+    "prereg.md": "888a2131a797cd6e9d24ec00626d1dea366fb44c03c4821fdd7d96de5a298144",
+    "request.json": "a094deee55331930e681556621512a83e56e9bfb3febb6e38b0edaa763794245",
+    "spec.json": "e46af455f54a5a04aaab3b69092514f861648371ba0d68ad3630ee26734b04cd"
+  },
+  "git": {
+    "head": "e572a347607df6a7e84f78d48f4507433ad04714",
+    "short": "e572a347"
+  },
+  "github_run_id": "35797365772",
+  "lane": "product",
+  "schema_version": 1,
+  "seeds": {
+    "PYTHONHASHSEED": "0",
+    "random_seed": 42,
+    "wrong_bound_p": 0.15
+  },
+  "stage": "EXECUTE"
+}
