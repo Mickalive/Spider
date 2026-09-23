@@ -1,0 +1,122 @@
+{
+  "experiment_id": "EXP-RUNTIME-35908617140",
+  "github_run_id": 35900903994,
+  "base_sha": "6f579bd834c5ad36234ca444c401e3dd6301d35d",
+  "git_sha": "894dd008a737b9dd211743b8852403dbb9c3b4fa",
+  "env": {
+    "python": "3.12.14 (main, Aug 13 2026, 02:47:42) [GCC 13.3.0]",
+    "flask": "3.1.3",
+    "pyjwt": "2.14.0",
+    "gunicorn": "23.0.0",
+    "werkzeug": "3.1.8",
+    "nginx": "1.24.0",
+    "playwright": "1.63.0",
+    "agentlab": null,
+    "requests": "2.34.2",
+    "sqlite3": "3.45.1"
+  },
+  "ports": {
+    "gunicorn_a": 19860,
+    "gunicorn_b": 19861,
+    "nginx": 19851
+  },
+  "seed": 44,
+  "jitter_ms": [
+    50,
+    150
+  ],
+  "excluded_headers": [
+    "Age",
+    "CF-Cache-Status",
+    "CF-RAY",
+    "Date",
+    "Server",
+    "X-Cache",
+    "X-Request-Id"
+  ],
+  "filter_out_keys": [
+    "age",
+    "cf-cache-status",
+    "cf-ray",
+    "date",
+    "server",
+    "x-cache",
+    "x-request-id",
+    "x-worker-pid"
+  ],
+  "body_states": {
+    "A": {
+      "len": 31,
+      "sha256": "d0ca833f843c6d70ec9d6755f52a92dcbfc8b4ab601b871bced09ad027172e34"
+    },
+    "A1": {
+      "len": 32,
+      "sha256": "72f28c5c2b8fe28314392298accd9a9e44747e45b4ad497d63839332cef24f26"
+    },
+    "A2": {
+      "len": 33,
+      "sha256": "2667bef51a10d006c22eb01972648a7c989bf7b4f786e4551be7b186c0f5e72b"
+    },
+    "A3": {
+      "len": 35,
+      "sha256": "d79643f246bd4a4ff18dab702de41940d11d2f72863424143ba8a121c396decf"
+    },
+    "B": {
+      "len": 70,
+      "sha256": "67c186f2cee1ccf01f55c80235eb9b1b1d14b073223a807b9ce944405e67999c"
+    },
+    "C": {
+      "len": 117,
+      "sha256": "b46c461cceeefa595c3ac0d706689ed382340b59c20a269a930c786c8389dd32"
+    }
+  },
+  "header_states": [
+    "BASE",
+    "E",
+    "CC_small",
+    "CC_large",
+    "ETag_small",
+    "ETag_large",
+    "SC_small",
+    "SC_large",
+    "Vary_small"
+  ],
+  "hs256_secret_sha256": "17910bd439fa891822cbf9d0a24b4cf6ee623f9b3fbfde049e3b6b94c526937b",
+  "db_paths": {
+    "shared": "/tmp/spider-runtime-35908617140/shared.db",
+    "per_node_a": "/tmp/spider-pernode-19860.db",
+    "per_node_b": "/tmp/spider-pernode-19861.db",
+    "sticky_url_a": "/tmp/spider-sticky-19860.db",
+    "sticky_url_b": "/tmp/spider-sticky-19861.db"
+  },
+  "fixes_applied": {
+    "FIX-1_status_free_structural": "hash(body) only; no status prefix",
+    "FIX-2_deconfounded_scheduling": "body_variant random.choice independent of drift, seed logged",
+    "FIX-3_health_gate": "GET /health via nginx 200+X-Worker-Pid, 5 consecutive, <=30s; retry samples",
+    "FIX-4_sticky_url_bound": "hash $request_uri consistent; replicate_session_to_workers=False",
+    "FIX-5_browser_N20": "all gradients/nulls/comparisons at N=20 per state"
+  },
+  "scheduling_seed": 44,
+  "health_gate_status": "enforced in start_nginx/health_gate",
+  "nginx_upstream_modes": {
+    "rr": "default round-robin",
+    "sticky_url": "hash $request_uri consistent"
+  },
+  "run_experiment_sha256": "8237d65d9cf5d80f06f09af4a5080f363a705d11f89c2413afe7b6fa34a17eb5",
+  "frozen_hashes": {
+    "request.json": "df5ba65815e333aaaf9b860a8b72265302f12c3c653ba714a8fbb35183c01827",
+    "spec.json": "938127f0cb14baf9c1f5332f1d38fd7cf78b929ca73af1e2492164752e311495",
+    "prereg.md": "0f21487f2131f3eaa00e3d3aaf4acbe6eedd3813b6a0bab5f9d1ff48aee4d0d0",
+    "freeze.json": "f0a44781d7668ed6d940939d400235888101ce0c0a33624d61c1f3b1cc22b682"
+  },
+  "artifacts": {
+    "/home/runner/work/Spider/Spider/research/experiments/EXP-RUNTIME-35908617140/raw_freshness_observations.jsonl": "d14bbc93ae4ca13eb01d2b9f838cd0d8a79b9a525c638208519c8a05c7a58a56",
+    "/home/runner/work/Spider/Spider/research/experiments/EXP-RUNTIME-35908617140/batch_state_log_shared.jsonl": "a4ec5e46ea1f61aa025c5f9bb97b102c796b8b90bcca6b4c4453d9baed00839a",
+    "/home/runner/work/Spider/Spider/research/experiments/EXP-RUNTIME-35908617140/raw_freshness_per_node.jsonl": "49d05330550fdb129211993eabf37aa72efd735596912bdd3e7684c8e879c999",
+    "/home/runner/work/Spider/Spider/research/experiments/EXP-RUNTIME-35908617140/batch_state_log_per_node.jsonl": "bb6efa8f83c45202e34ab97279c2995c0e024613bacf27794b87c1d8d010d33b",
+    "/home/runner/work/Spider/Spider/research/experiments/EXP-RUNTIME-35908617140/raw_freshness_sticky_url.jsonl": "571b29ffdd5f9ea3bfe42bfcdbd3c9393c8697c90f21dba9e5add63f5cedf90a",
+    "/home/runner/work/Spider/Spider/research/experiments/EXP-RUNTIME-35908617140/batch_state_log_sticky.jsonl": "858e8c7ef2a99b4af459d968edea79df7951d4b19525fcace6471a3fff12bf22",
+    "/home/runner/work/Spider/Spider/research/experiments/EXP-RUNTIME-35908617140/batch_state_log.jsonl": "58bc2a413565fecb57a86fe42fcd1458a731ab65a0bd8a91307735a64040ee9f"
+  },
+  "created_at": "2026-09-23T19:27:45.736032+00:00"
+}

@@ -1,0 +1,652 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-35908617140",
+  "lane": "runtime",
+  "status": "MEASUREMENT_INVALID",
+  "outcome": "INCONCLUSIVE",
+  "metrics": {
+    "shared_arm": "B-SHARED-STORE",
+    "shared_freshness_c1_tn_mean": 0.9760191846522782,
+    "shared_freshness_c1_tn_wilson_lo": 0.9572344551948803,
+    "shared_freshness_c1_tn_wilson_hi": 0.9871701921154553,
+    "shared_freshness_c1_tn_session_status": 0.9280575539568345,
+    "shared_freshness_c1_tn_session_status_wilson_lo": 0.872634451365165,
+    "shared_freshness_c1_tn_profile": 1.0,
+    "shared_freshness_c1_tn_profile_wilson_lo": 0.9736590931531194,
+    "shared_freshness_c1_tn_data_list": 1.0,
+    "shared_freshness_c1_tn_data_list_wilson_lo": 0.974015432733412,
+    "shared_freshness_c1_tn_per_endpoint": {
+      "profile": {
+        "n_valid": 142,
+        "k_fresh": 142,
+        "tn": 1.0,
+        "wilson_lo": 0.9736590931531194,
+        "wilson_hi": 0.9999999999999999
+      },
+      "data_list": {
+        "n_valid": 144,
+        "k_fresh": 144,
+        "tn": 1.0,
+        "wilson_lo": 0.974015432733412,
+        "wilson_hi": 0.9999999999999999
+      },
+      "session_status": {
+        "n_valid": 139,
+        "k_fresh": 129,
+        "tn": 0.9280575539568345,
+        "wilson_lo": 0.872634451365165,
+        "wilson_hi": 0.9604561888964954
+      }
+    },
+    "shared_freshness_n_non304": 1070,
+    "shared_freshness_n_total": 1200,
+    "shared_freshness_n_304": 130,
+    "shared_freshness_stratified_r": 0.30519061924728863,
+    "shared_freshness_stratified_r_ci_lo": 0.24967003113908687,
+    "shared_freshness_stratified_r_ci_hi": 0.3587111785080778,
+    "shared_freshness_stratified_r_ci_upper": 0.3587111785080778,
+    "shared_freshness_tost_p_upper": 0.999999954791466,
+    "shared_freshness_tost_pass": false,
+    "shared_freshness_pooled_r": 0.3103181262072663,
+    "shared_freshness_c2_variance_pass_count": 8,
+    "shared_freshness_c2_variance_total": 8,
+    "shared_freshness_c2_variance_detail": {
+      "permission_boundary|cache=0": {
+        "n": 130,
+        "bc_std": 0.25,
+        "struct_std": 1809.0237216202045,
+        "pass": true
+      },
+      "permission_boundary|cache=1": {
+        "n": 105,
+        "bc_std": 0.24281045302822785,
+        "struct_std": 1569.9723351838497,
+        "pass": true
+      },
+      "session_invalidation|cache=0": {
+        "n": 130,
+        "bc_std": 0.35326038471400106,
+        "struct_std": 2101.5170051979344,
+        "pass": true
+      },
+      "session_invalidation|cache=1": {
+        "n": 93,
+        "bc_std": 0.43144951930621245,
+        "struct_std": 2121.7923857436645,
+        "pass": true
+      },
+      "signing_key_rotation|cache=0": {
+        "n": 130,
+        "bc_std": 0.5,
+        "struct_std": 2025.1516762393744,
+        "pass": true
+      },
+      "signing_key_rotation|cache=1": {
+        "n": 107,
+        "bc_std": 0.4883121673874068,
+        "struct_std": 1603.777458348591,
+        "pass": true
+      },
+      "token_expiry|cache=0": {
+        "n": 130,
+        "bc_std": 0.5,
+        "struct_std": 1714.8548835217696,
+        "pass": true
+      },
+      "token_expiry|cache=1": {
+        "n": 107,
+        "bc_std": 0.4883121673874068,
+        "struct_std": 1597.419214901088,
+        "pass": true
+      }
+    },
+    "shared_freshness_fp_noise": 0.0,
+    "shared_freshness_fp_noise_wilson_hi": 0.023447036650032713,
+    "shared_freshness_fp_noise_n": 160,
+    "shared_freshness_worker_distribution": {
+      "46687": 603,
+      "46688": 597
+    },
+    "shared_freshness_n_missing_worker": 0,
+    "shared_freshness_n_status_none": 0,
+    "shared_freshness_scheduling_confound_r": 0.06607246909900887,
+    "shared_freshness_scheduling_confound_r_bv_bc": 0.04894286460702039,
+    "shared_freshness_scheduling_confound_r_bv_drift": -0.013444435384314158,
+    "shared_freshness_scheduling_cramers_v": 0.06607246909900887,
+    "shared_freshness_hs256_valid_success_rate": 0.9852941176470589,
+    "shared_freshness_hs256_valid_ok": 670,
+    "shared_freshness_hs256_valid_n": 680,
+    "shared_freshness_valid_vs_invalid_bc_means": {
+      "valid": 0.019230769230769232,
+      "noise": 0.0,
+      "expired": 1.0,
+      "permission_boundary": 0.5,
+      "signing_key_rotation": 1.0,
+      "session_invalidation": 0.24615384615384617
+    },
+    "honest_cost_shuffled_rho": 0.1326309345876499,
+    "honest_cost_shuffled_rho_max": 0.41617537301278185,
+    "honest_cost_within_f_std": {
+      "0.0": 45999.58131070325,
+      "0.5": 27632.53763081428,
+      "1.0": 45144.93466357431
+    },
+    "honest_cost_within_f_std_min": 27632.53763081428,
+    "honest_cost_trajectory_count": 36,
+    "honest_cost_b5000_width_dummy": 1.0,
+    "honest_cost_b5000_width": 46529.48242280319,
+    "honest_cost_no_jitter_verified": true,
+    "honest_cost_no_n3200_verified": true,
+    "honest_cost_no_f6_verified": true,
+    "per_node_arm": "B-PER-NODE",
+    "per_node_freshness_c1_tn_mean": 0.6666666666666666,
+    "per_node_freshness_c1_tn_wilson_lo": 0.5734479943403982,
+    "per_node_freshness_c1_tn_wilson_hi": 0.6624414486459972,
+    "per_node_freshness_c1_tn_session_status": 0.0,
+    "per_node_freshness_c1_tn_session_status_wilson_lo": 0.0,
+    "per_node_freshness_c1_tn_profile": 1.0,
+    "per_node_freshness_c1_tn_profile_wilson_lo": 0.9731058739190823,
+    "per_node_freshness_c1_tn_data_list": 1.0,
+    "per_node_freshness_c1_tn_data_list_wilson_lo": 0.9736590931531194,
+    "per_node_freshness_c1_tn_per_endpoint": {
+      "profile": {
+        "n_valid": 139,
+        "k_fresh": 139,
+        "tn": 1.0,
+        "wilson_lo": 0.9731058739190823,
+        "wilson_hi": 1.0
+      },
+      "data_list": {
+        "n_valid": 142,
+        "k_fresh": 142,
+        "tn": 1.0,
+        "wilson_lo": 0.9736590931531194,
+        "wilson_hi": 0.9999999999999999
+      },
+      "session_status": {
+        "n_valid": 173,
+        "k_fresh": 0,
+        "tn": 0.0,
+        "wilson_lo": 0.0,
+        "wilson_hi": 0.021723395400177335
+      }
+    },
+    "per_node_freshness_n_non304": 1101,
+    "per_node_freshness_n_total": 1200,
+    "per_node_freshness_n_304": 99,
+    "per_node_freshness_stratified_r": 0.1806259477743653,
+    "per_node_freshness_stratified_r_ci_lo": 0.12269604962225657,
+    "per_node_freshness_stratified_r_ci_hi": 0.23732918032477632,
+    "per_node_freshness_stratified_r_ci_upper": 0.23732918032477632,
+    "per_node_freshness_tost_p_upper": 0.8509636087493915,
+    "per_node_freshness_tost_pass": false,
+    "per_node_freshness_pooled_r": 0.35742015750170764,
+    "per_node_freshness_c2_variance_pass_count": 8,
+    "per_node_freshness_c2_variance_total": 8,
+    "per_node_freshness_c2_variance_detail": {
+      "permission_boundary|cache=0": {
+        "n": 130,
+        "bc_std": 0.3442039095666212,
+        "struct_std": 1352.0108894558136,
+        "pass": true
+      },
+      "permission_boundary|cache=1": {
+        "n": 107,
+        "bc_std": 0.31325842545970783,
+        "struct_std": 1084.2213834752622,
+        "pass": true
+      },
+      "session_invalidation|cache=0": {
+        "n": 130,
+        "bc_std": 0.4704901133345547,
+        "struct_std": 2097.535117534374,
+        "pass": true
+      },
+      "session_invalidation|cache=1": {
+        "n": 98,
+        "bc_std": 0.49623740472603384,
+        "struct_std": 1810.3523773609868,
+        "pass": true
+      },
+      "signing_key_rotation|cache=0": {
+        "n": 130,
+        "bc_std": 0.4704901133345547,
+        "struct_std": 1506.4553541421892,
+        "pass": true
+      },
+      "signing_key_rotation|cache=1": {
+        "n": 118,
+        "bc_std": 0.4401071922914842,
+        "struct_std": 1372.496691899864,
+        "pass": true
+      },
+      "token_expiry|cache=0": {
+        "n": 130,
+        "bc_std": 0.4704901133345547,
+        "struct_std": 1528.4873185275069,
+        "pass": true
+      },
+      "token_expiry|cache=1": {
+        "n": 115,
+        "bc_std": 0.4342605561455225,
+        "struct_std": 1394.5766780104498,
+        "pass": true
+      }
+    },
+    "per_node_freshness_fp_noise": 0.33125,
+    "per_node_freshness_fp_noise_wilson_hi": 0.4073851020290825,
+    "per_node_freshness_fp_noise_n": 160,
+    "per_node_freshness_worker_distribution": {
+      "46817": 581,
+      "46816": 619
+    },
+    "per_node_freshness_n_missing_worker": 0,
+    "per_node_freshness_n_status_none": 0,
+    "per_node_freshness_scheduling_confound_r": 0.069978329276442,
+    "per_node_freshness_scheduling_confound_r_bv_bc": -0.003577518963342576,
+    "per_node_freshness_scheduling_confound_r_bv_drift": -0.014682088172798908,
+    "per_node_freshness_scheduling_cramers_v": 0.069978329276442,
+    "per_node_freshness_hs256_valid_success_rate": 0.6676470588235294,
+    "per_node_freshness_hs256_valid_ok": 454,
+    "per_node_freshness_hs256_valid_n": 680,
+    "per_node_freshness_valid_vs_invalid_bc_means": {
+      "valid": 0.3326923076923077,
+      "noise": 0.33125,
+      "expired": 1.0,
+      "permission_boundary": 0.5,
+      "signing_key_rotation": 1.0,
+      "session_invalidation": 0.33076923076923076
+    },
+    "sticky_arm": "B-STICKY-URL",
+    "sticky_freshness_c1_tn_mean": null,
+    "sticky_freshness_c1_tn_wilson_lo": null,
+    "sticky_freshness_c1_tn_wilson_hi": null,
+    "sticky_freshness_c1_tn_session_status": null,
+    "sticky_freshness_c1_tn_session_status_wilson_lo": null,
+    "sticky_freshness_c1_tn_profile": null,
+    "sticky_freshness_c1_tn_profile_wilson_lo": null,
+    "sticky_freshness_c1_tn_data_list": null,
+    "sticky_freshness_c1_tn_data_list_wilson_lo": null,
+    "sticky_freshness_c1_tn_per_endpoint": {
+      "profile": {
+        "n_valid": 0,
+        "k_fresh": 0,
+        "tn": null,
+        "wilson_lo": null,
+        "wilson_hi": null
+      },
+      "data_list": {
+        "n_valid": 0,
+        "k_fresh": 0,
+        "tn": null,
+        "wilson_lo": null,
+        "wilson_hi": null
+      },
+      "session_status": {
+        "n_valid": 0,
+        "k_fresh": 0,
+        "tn": null,
+        "wilson_lo": null,
+        "wilson_hi": null
+      }
+    },
+    "sticky_freshness_n_non304": 1071,
+    "sticky_freshness_n_total": 1200,
+    "sticky_freshness_n_304": 129,
+    "sticky_freshness_stratified_r": 0.26214739954238064,
+    "sticky_freshness_stratified_r_ci_lo": 0.2053087398978939,
+    "sticky_freshness_stratified_r_ci_hi": 0.31722366059067225,
+    "sticky_freshness_stratified_r_ci_upper": 0.31722366059067225,
+    "sticky_freshness_tost_p_upper": 0.9999337364459282,
+    "sticky_freshness_tost_pass": false,
+    "sticky_freshness_pooled_r": 0.26175974563771576,
+    "sticky_freshness_c2_variance_pass_count": 6,
+    "sticky_freshness_c2_variance_total": 8,
+    "sticky_freshness_c2_variance_detail": {
+      "permission_boundary|cache=0": {
+        "n": 130,
+        "bc_std": 0.25,
+        "struct_std": 1677.0895671762319,
+        "pass": true
+      },
+      "permission_boundary|cache=1": {
+        "n": 110,
+        "bc_std": 0.24583304150890836,
+        "struct_std": 1617.0635093862052,
+        "pass": true
+      },
+      "session_invalidation|cache=0": {
+        "n": 130,
+        "bc_std": 0.0,
+        "struct_std": 2077.491204689476,
+        "pass": false
+      },
+      "session_invalidation|cache=1": {
+        "n": 81,
+        "bc_std": 0.0,
+        "struct_std": 2511.2240506546796,
+        "pass": false
+      },
+      "signing_key_rotation|cache=0": {
+        "n": 130,
+        "bc_std": 0.5,
+        "struct_std": 2099.2843132247426,
+        "pass": true
+      },
+      "signing_key_rotation|cache=1": {
+        "n": 112,
+        "bc_std": 0.49350048590840995,
+        "struct_std": 1416.6871078425975,
+        "pass": true
+      },
+      "token_expiry|cache=0": {
+        "n": 130,
+        "bc_std": 0.5,
+        "struct_std": 1707.3957654688113,
+        "pass": true
+      },
+      "token_expiry|cache=1": {
+        "n": 115,
+        "bc_std": 0.4957284456952774,
+        "struct_std": 1531.3367318996263,
+        "pass": true
+      }
+    },
+    "sticky_freshness_fp_noise": 0.0,
+    "sticky_freshness_fp_noise_wilson_hi": 0.023447036650032713,
+    "sticky_freshness_fp_noise_n": 160,
+    "sticky_freshness_worker_distribution": {
+      "46947": 720,
+      "46948": 480
+    },
+    "sticky_freshness_n_missing_worker": 0,
+    "sticky_freshness_n_status_none": 0,
+    "sticky_freshness_scheduling_confound_r": 0.06757278614481949,
+    "sticky_freshness_scheduling_confound_r_bv_bc": -0.06642648823963734,
+    "sticky_freshness_scheduling_confound_r_bv_drift": 0.04043344958818418,
+    "sticky_freshness_scheduling_cramers_v": 0.06757278614481949,
+    "sticky_freshness_hs256_valid_success_rate": 1.0,
+    "sticky_freshness_hs256_valid_ok": 680,
+    "sticky_freshness_hs256_valid_n": 680,
+    "sticky_freshness_valid_vs_invalid_bc_means": {
+      "valid": 0.0,
+      "noise": 0.0,
+      "expired": 1.0,
+      "permission_boundary": 0.5,
+      "signing_key_rotation": 1.0,
+      "session_invalidation": 0.0
+    },
+    "sticky_freshness_c1_tn_sticky_url_skew": 0.6,
+    "sticky_sticky_url_per_uri_affinity": {
+      "/api/session/status?u=3": 1.0,
+      "/api/profile?u=2": 1.0,
+      "/api/profile?u=1": 1.0,
+      "/api/profile?u=3": 1.0,
+      "/api/session/status?u=2": 1.0,
+      "/api/data_list?u=3": 1.0,
+      "/api/session/status?u=1": 1.0,
+      "/api/data_list?u=1": 1.0,
+      "/api/data_list?u=2": 1.0,
+      "/api/profile?u=4": 1.0
+    },
+    "sticky_sticky_url_min_uri_affinity": 1.0,
+    "freshness_c1_tn_sticky_url_mean": null,
+    "freshness_c1_tn_sticky_url_skew": 0.6,
+    "freshness_batch_state_log_len": 31,
+    "freshness_batch_state_log_combined_len": 93,
+    "freshness_batch_state_log_distinct_ts": 93,
+    "freshness_structural_status_prefix_present": true,
+    "arm": "B-SHARED-STORE",
+    "freshness_c1_tn_mean": 0.9760191846522782,
+    "freshness_c1_tn_wilson_lo": 0.9572344551948803,
+    "freshness_c1_tn_wilson_hi": 0.9871701921154553,
+    "freshness_c1_tn_session_status": 0.9280575539568345,
+    "freshness_c1_tn_session_status_wilson_lo": 0.872634451365165,
+    "freshness_c1_tn_profile": 1.0,
+    "freshness_c1_tn_profile_wilson_lo": 0.9736590931531194,
+    "freshness_c1_tn_data_list": 1.0,
+    "freshness_c1_tn_data_list_wilson_lo": 0.974015432733412,
+    "freshness_c1_tn_per_endpoint": {
+      "profile": {
+        "n_valid": 142,
+        "k_fresh": 142,
+        "tn": 1.0,
+        "wilson_lo": 0.9736590931531194,
+        "wilson_hi": 0.9999999999999999
+      },
+      "data_list": {
+        "n_valid": 144,
+        "k_fresh": 144,
+        "tn": 1.0,
+        "wilson_lo": 0.974015432733412,
+        "wilson_hi": 0.9999999999999999
+      },
+      "session_status": {
+        "n_valid": 139,
+        "k_fresh": 129,
+        "tn": 0.9280575539568345,
+        "wilson_lo": 0.872634451365165,
+        "wilson_hi": 0.9604561888964954
+      }
+    },
+    "freshness_n_non304": 1070,
+    "freshness_n_total": 1200,
+    "freshness_n_304": 130,
+    "freshness_stratified_r": 0.30519061924728863,
+    "freshness_stratified_r_ci_lo": 0.24967003113908687,
+    "freshness_stratified_r_ci_hi": 0.3587111785080778,
+    "freshness_stratified_r_ci_upper": 0.3587111785080778,
+    "freshness_tost_p_upper": 0.999999954791466,
+    "freshness_tost_pass": false,
+    "freshness_pooled_r": 0.3103181262072663,
+    "freshness_c2_variance_pass_count": 8,
+    "freshness_c2_variance_total": 8,
+    "freshness_c2_variance_detail": {
+      "permission_boundary|cache=0": {
+        "n": 130,
+        "bc_std": 0.25,
+        "struct_std": 1809.0237216202045,
+        "pass": true
+      },
+      "permission_boundary|cache=1": {
+        "n": 105,
+        "bc_std": 0.24281045302822785,
+        "struct_std": 1569.9723351838497,
+        "pass": true
+      },
+      "session_invalidation|cache=0": {
+        "n": 130,
+        "bc_std": 0.35326038471400106,
+        "struct_std": 2101.5170051979344,
+        "pass": true
+      },
+      "session_invalidation|cache=1": {
+        "n": 93,
+        "bc_std": 0.43144951930621245,
+        "struct_std": 2121.7923857436645,
+        "pass": true
+      },
+      "signing_key_rotation|cache=0": {
+        "n": 130,
+        "bc_std": 0.5,
+        "struct_std": 2025.1516762393744,
+        "pass": true
+      },
+      "signing_key_rotation|cache=1": {
+        "n": 107,
+        "bc_std": 0.4883121673874068,
+        "struct_std": 1603.777458348591,
+        "pass": true
+      },
+      "token_expiry|cache=0": {
+        "n": 130,
+        "bc_std": 0.5,
+        "struct_std": 1714.8548835217696,
+        "pass": true
+      },
+      "token_expiry|cache=1": {
+        "n": 107,
+        "bc_std": 0.4883121673874068,
+        "struct_std": 1597.419214901088,
+        "pass": true
+      }
+    },
+    "freshness_fp_noise": 0.0,
+    "freshness_fp_noise_wilson_hi": 0.023447036650032713,
+    "freshness_fp_noise_n": 160,
+    "freshness_worker_distribution": {
+      "46687": 603,
+      "46688": 597
+    },
+    "freshness_n_missing_worker": 0,
+    "freshness_n_status_none": 0,
+    "freshness_scheduling_confound_r": 0.06607246909900887,
+    "freshness_scheduling_confound_r_bv_bc": 0.04894286460702039,
+    "freshness_scheduling_confound_r_bv_drift": -0.013444435384314158,
+    "freshness_scheduling_cramers_v": 0.06607246909900887,
+    "freshness_hs256_valid_success_rate": 0.9852941176470589,
+    "freshness_hs256_valid_ok": 670,
+    "freshness_hs256_valid_n": 680,
+    "freshness_valid_vs_invalid_bc_means": {
+      "valid": 0.019230769230769232,
+      "noise": 0.0,
+      "expired": 1.0,
+      "permission_boundary": 0.5,
+      "signing_key_rotation": 1.0,
+      "session_invalidation": 0.24615384615384617
+    }
+  },
+  "controls": {
+    "C1-FRESHNESS": {
+      "expected": "shared mean TN>=0.85 Wilson lo>0.75 session_status>=0.85 hs256_valid_success_rate>=0.90; per-node mean TN<0.85 (~0.667)",
+      "observed": "shared_mean=0.9760191846522782, shared_wilson_lo=0.9572344551948803, session_status=0.9280575539568345, hs256_rate=0.9852941176470589, per_node_mean=0.6666666666666666, per_node_session_status=0.0, sticky_mean=None",
+      "pass": true,
+      "evidence_refs": [
+        "raw_freshness_observations.jsonl",
+        "raw_freshness_per_node.jsonl",
+        "raw_freshness_sticky_url.jsonl"
+      ]
+    },
+    "C2-FRESHNESS": {
+      "expected": "n_non304>=800 after real 304 exclusion; X-Worker-Pid >=10/worker; batch_state_log >=27",
+      "observed": "n_non304=1070, n_304=130, workers={'46687': 603, '46688': 597}, worker_min=597, batch_log_len=31",
+      "pass": true,
+      "evidence_refs": [
+        "raw_freshness_observations.jsonl",
+        "batch_state_log.jsonl"
+      ]
+    },
+    "C3-FRESHNESS": {
+      "expected": "stratified |r|<0.15 CI upper<0.15 p_upper<0.05; 8/8 variance std>0",
+      "observed": "r=0.30519061924728863, ci_upper=0.3587111785080778, p_upper=0.999999954791466, tost_pass=False, variance=8/8",
+      "pass": false,
+      "evidence_refs": [
+        "raw_freshness_observations.jsonl"
+      ]
+    },
+    "C4-FRESHNESS": {
+      "expected": "noise FP <=0.15 (Wilson)",
+      "observed": "fp=0.0, wilson_hi=0.023447036650032713, n=160",
+      "pass": true,
+      "evidence_refs": [
+        "raw_freshness_observations.jsonl"
+      ]
+    },
+    "B-SHARED-STORE": {
+      "expected": "primary fix: shared WAL + HS256 -> TN>=0.85",
+      "observed": "tn_mean=0.9760191846522782, n_non304=1070",
+      "pass": true,
+      "evidence_refs": [
+        "raw_freshness_observations.jsonl"
+      ]
+    },
+    "B-PER-NODE": {
+      "expected": "negative baseline: TN~0.667 session_status 0.0 <0.85",
+      "observed": "tn_mean=0.6666666666666666, session_status=0.0",
+      "pass": true,
+      "evidence_refs": [
+        "raw_freshness_per_node.jsonl"
+      ]
+    },
+    "B-STICKY-URL": {
+      "expected": "E4_STICKY_URL: URL-bound hash $request_uri consistent WITHOUT session mirroring -> mean TN>=0.85 AND overall worker skew>0.90; per-URI affinity >0.90",
+      "observed": "tn_mean=None, workers={'46947': 720, '46948': 480}, per_uri_affinity={'/api/session/status?u=3': 1.0, '/api/profile?u=2': 1.0, '/api/profile?u=1': 1.0, '/api/profile?u=3': 1.0, '/api/session/status?u=2': 1.0, '/api/data_list?u=3': 1.0, '/api/session/status?u=1': 1.0, '/api/data_list?u=1': 1.0, '/api/data_list?u=2': 1.0, '/api/profile?u=4': 1.0}, overall_skew=0.6",
+      "pass": false,
+      "evidence_refs": [
+        "raw_freshness_sticky_url.jsonl"
+      ]
+    },
+    "V-HEALTH-GATE": {
+      "expected": "0 missing X-Worker-Pid and 0 status None across all samples (FIX-3)",
+      "observed": "shared_missing_worker=0, shared_status_none=0",
+      "pass": true,
+      "evidence_refs": [
+        "raw_freshness_observations.jsonl"
+      ]
+    },
+    "V-SCHEDULING-INDEPENDENCE": {
+      "expected": "scheduling_confound_r |r|<0.30 (body_variant vs drift/bc) (FIX-2)",
+      "observed": "conound_r=0.06607246909900887, r_bv_bc=0.04894286460702039, r_bv_drift=-0.013444435384314158, cramers_v=0.06607246909900887",
+      "pass": true,
+      "evidence_refs": [
+        "raw_freshness_observations.jsonl"
+      ]
+    },
+    "V-STATUS-FREE-STRUCTURAL": {
+      "expected": "structural = hash(body) only; no status prefix (FIX-1)",
+      "observed": "structural_status_prefix_present=True",
+      "pass": false,
+      "evidence_refs": [
+        "run_experiment.py"
+      ]
+    }
+  },
+  "artifacts": [
+    {
+      "path": "/home/runner/work/Spider/Spider/research/experiments/EXP-RUNTIME-35908617140/raw_freshness_observations.jsonl",
+      "role": "raw"
+    },
+    {
+      "path": "/home/runner/work/Spider/Spider/research/experiments/EXP-RUNTIME-35908617140/batch_state_log_shared.jsonl",
+      "role": "raw"
+    },
+    {
+      "path": "/home/runner/work/Spider/Spider/research/experiments/EXP-RUNTIME-35908617140/raw_freshness_per_node.jsonl",
+      "role": "raw"
+    },
+    {
+      "path": "/home/runner/work/Spider/Spider/research/experiments/EXP-RUNTIME-35908617140/batch_state_log_per_node.jsonl",
+      "role": "raw"
+    },
+    {
+      "path": "/home/runner/work/Spider/Spider/research/experiments/EXP-RUNTIME-35908617140/raw_freshness_sticky_url.jsonl",
+      "role": "raw"
+    },
+    {
+      "path": "/home/runner/work/Spider/Spider/research/experiments/EXP-RUNTIME-35908617140/batch_state_log_sticky.jsonl",
+      "role": "raw"
+    },
+    {
+      "path": "/home/runner/work/Spider/Spider/research/experiments/EXP-RUNTIME-35908617140/batch_state_log.jsonl",
+      "role": "raw"
+    }
+  ],
+  "observations": [
+    "Shared-store arm: 1200 samples via real nginx round-robin + HS256",
+    "Per-node arm: 1200 samples (isolated DBs)",
+    "Sticky-URL arm: 1200 samples (hash $request_uri consistent, no session mirroring)",
+    "Browser arm: 0 observations via Playwright page.request + page.goto CDP",
+    "AX/DOM pages: 0 /resource pages",
+    "Shared TN mean=0.9760191846522782",
+    "Per-node TN mean=0.6666666666666666",
+    "n_non304 shared=1070",
+    "AX median=None",
+    "PC-HEALTH=None"
+  ],
+  "validity_notes": [
+    "Unexpected browser failure: Traceback (most recent call last):\n  File \"/home/runner/work/Spider/Spider/research/experiments/EXP-RUNTIME-35908617140/run_experiment.py\", line 2494, in main\n    browser_obs, ax_pages, provision = run_browser_harness(\n                                       ^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/Spider/Spider/research/experiments/EXP-RUNTIME-35908617140/run_experiment.py\", line 1590, in run_browser_harness\n    from playwright.sync_api import sync_playwright\nModuleNotFoundError: No module named 'playwright'\n",
+    "Measurement invalidity triggers: STATUS_PREFIX_STILL_PRESENT",
+    "Infrastructure errors: BROWSER_UNEXPECTED: No module named 'playwright'"
+  ],
+  "unresolved": []
+}
