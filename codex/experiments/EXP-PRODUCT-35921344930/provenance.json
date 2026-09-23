@@ -1,0 +1,78 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-35921344930",
+  "lane": "product",
+  "stage": "EXECUTE",
+  "actor": {
+    "channel": "opencode",
+    "model_id": "opencode/big-pickle",
+    "role": "product lane EXECUTE"
+  },
+  "run": {
+    "github_run_id": "35921344930",
+    "attempt": 1,
+    "started_at": "2026-09-23T22:02:00+00:00",
+    "completed_at": "2026-09-23T22:10:00+00:00",
+    "exit": "MEASUREMENT_INVALID (frozen gate, retryable)",
+    "prior_model_runs_context": "model_execute.json: status retry, attempt 3, exit_code 76, category output-missing (previous EXECUTE sweeps produced no packet outputs)"
+  },
+  "frozen_inputs": {
+    "request.json": "c3bfbb9a1553298b83b83b8cde4adb7a6b768f9c7ad1301b8c6e883f61614caf",
+    "spec.json": "119615e7cdd153a8e9843a5016d36db97da6ba9f5f361ebd2024a6f792c397e7",
+    "prereg.md": "90d40e336c2493fdc16ea037ca5c835255bb699a6d83a1eb1289fcc8a6c82fd0",
+    "freeze.json": "45822152ffea8401a929077a19240df04a4383695474e86013eb7cfc309ac588",
+    "immutability_check": "sha256sum re-verified during EXECUTE; request/spec/prereg byte-identical to freeze.json recorded hashes",
+    "execution_checkpoint.pre_execute_sha": "5305859b0baf280d5c66d4bd2c42129b01b468b1",
+    "base_sha": "40f664827e0653285d729cf3ea4c28381298c9e8",
+    "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b"
+  },
+  "environment": {
+    "repo_head": "87ff4234 R2 product: execution base EXP-PRODUCT-35921344930",
+    "platform": "linux (github actions runner)",
+    "python": "3.12.14",
+    "pip": "26.2.1 (no third-party scientific packages present)",
+    "sqlite3_lib": "3.45.1 (module importable)",
+    "docker": "daemon reachable; Engine 28.0.4; 0 containers; images: ghcr.io/github/gh-aw-firewall/{agent,api-proxy,squid}, ghcr.io/github/gh-aw-mcpg, ghcr.io/dependabot/dependabot-updater-core, ghcr.io/github/github-mcp-server (no browsergym/agentlab/webarena)",
+    "nginx": "/usr/sbin/nginx binary present (no upstream deployed)",
+    "network_egress": "not independently verified; no pip install performed (substrate absence is a provisioning fact, not a transient network error class)",
+    "llm_keys": "GH_TOKEN only; no OpenAI/gpt key"
+  },
+  "substrate_audit": {
+    "finding": "PRIMARY DEPENDENCY UNAVAILABLE",
+    "raw_evidence_artifact": "artifacts/substrate_audit.json",
+    "raw_evidence_sha256": "277a7502a49cdd56362fa0ca8f5290412759cec9ddb2ae8fa9af8969d069b5c0",
+    "observations": "OBS-1..OBS-18 (command + result)"
+  },
+  "code_changes_made": {
+    "scope": "product lane allowed_code_roots only (src/, tests/)",
+    "src/spider/kernel.py": {
+      "change": "_PARAMETER regex re-applied to dot-aware form r\"\\$\\{([A-Za-z_][A-Za-z0-9_\\.]*)\\}\" (frozen-design PC2 binding fix)",
+      "sha256_after": "d926279d5ee14a044a2f13b8abc09202df9f5adb9e86feaadeb61818a15f4038",
+      "git_diff": "1 insertion, 1 deletion",
+      "notes": "prefix d926279d matches pre-2.0 verified patched hash family (parent experiment)"
+    },
+    "tests/test_kernel.py": {
+      "change": "added test_dotted_parameter_slot_binds_fully and test_plain_identifier_slot_still_binds",
+      "sha256_after": "5eadf14ebdbcd2ec9f8d875bb357033275b37bacefda4f51b4d9a4584562575d",
+      "git_diff": "46 insertions",
+      "test_result": "python3 -m unittest discover -s tests -v -> 5/5 OK (PYTHONPATH=src)"
+    }
+  },
+  "outputs_written": [
+    "research/experiments/EXP-PRODUCT-35921344930/artifacts/substrate_audit.json",
+    "research/experiments/EXP-PRODUCT-35921344930/failure.json",
+    "research/experiments/EXP-PRODUCT-35921344930/result.json",
+    "research/experiments/EXP-PRODUCT-35921344930/report.md",
+    "research/experiments/EXP-PRODUCT-35921344930/provenance.json"
+  ],
+  "integrity_actions_taken": [
+    "no git commit / push / switch / reset performed",
+    "no constitutional or shared files touched (AGENTS.md, SPIDER_*, codex/, .github/, .opencode/ untouched)",
+    "frozen inputs verified byte-identical to freeze.json hashes",
+    "no outcome-bearing measurement run; no claim statuses modified (no verdict.json written by EXECUTE)"
+  ],
+  "handoff_to": {
+    "runtime_lane_hardening": "binding smallest next action - shared SQLite WAL HS256 sticky nginx + honest sum counters + BrowserGym 1280x720 fixture (see failure.json)",
+    "retry_predicate": "same frozen transaction (hashes above), no re-design, no new mandate; requires substrate + gpt-4o-mini + numpy stack"
+  }
+}
