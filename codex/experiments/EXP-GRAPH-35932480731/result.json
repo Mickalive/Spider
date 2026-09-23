@@ -1,0 +1,164 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-35932480731",
+  "lane": "graph",
+  "status": "MEASUREMENT_INVALID",
+  "outcome": "NOT_APPLICABLE",
+  "metrics": {
+    "M-EXECUTABLE-SPIDER": null,
+    "M-BINDING-CORRECT": null,
+    "M-UNSUBSTITUTED-TEMPLATES": null,
+    "M-FALSE-ACCEPT-SPIDER": null,
+    "M-UNKNOWN-RATE-SPIDER": null,
+    "M-ECE": null,
+    "M-SUCCESS-LITERAL": null,
+    "M-PC1-HIT-RATE": null,
+    "M-BINDING-CONTROL-PC2": null,
+    "M-SUCCESS-SPIDER": null,
+    "M-SUCCESS-COLD": null,
+    "M-SUCCESS-RAG": null,
+    "M-SUCCESS-REPLAY": null,
+    "M-SUCCESS-INSTR": null,
+    "M-SUCCESS-MARGIN-vs-COLD": null,
+    "M-SUCCESS-MARGIN-vs-RAG": null,
+    "M-SUCCESS-MARGIN-vs-REPLAY": null,
+    "M-SUCCESS-MARGIN-vs-INSTR": null,
+    "M-AMORTIZED-SAVING-vs-COLD": null,
+    "M-COST-RATIO-vs-RAG": null,
+    "M-TOKENS": null,
+    "M-BROWSER": null,
+    "M-LATENCY": null,
+    "M-RHO-SHUFFLED": null
+  },
+  "controls": {
+    "GATE-KERNEL-DURABILITY": {
+      "id": "GATE-KERNEL-DURABILITY",
+      "expected": "PASS: src/spider/kernel.py contains distill_parameterized, _common_prefix_and_suffix (single-prefix), _extract_varying_values (field-path filtered), _structure_similarity (Jaccard>=0.75), _is_allowed_path/_ALLOWED_PREFIXES, _field_path_to_slot_name, _sanitize_slot with grep>=1 each; sha256 matches claimed provenance hash and matches HEAD; git diff base_sha 219d24ae..HEAD nonempty for that file. Any failure -> MEASUREMENT_INVALID before outcome measurement (spec measurement_validity #1, prereg section 5.1).",
+      "observed": "FAIL: all 8 symbol greps = 0; kernel is 132 lines literal-only, sha256 46929b3a951df48d7f9d1fd850871073c0d91c1868aa117e13d389fe274e8d61 (byte-identical to the kernel independently audited MEASUREMENT_INVALID in EXP-GRAPH-35918640311 at HEAD 7dc6bd27); git diff 219d24ae..HEAD -- src/spider/kernel.py = 0 lines; git diff 98b40ef4..HEAD = 0 lines.",
+      "pass_fail": "FAIL",
+      "evidence_refs": ["research/experiments/EXP-GRAPH-35932480731/raw_evidence/kernel_check.json", "src/spider/kernel.py"]
+    },
+    "GATE-UNIT-TESTS-PARAM-INHERIT": {
+      "id": "GATE-UNIT-TESTS-PARAM-INHERIT",
+      "expected": "PASS: tests/test_kernel_param_inherit.py exists and passes B1/B4 regression, D1 noisy over-param filtered, E1 hallucination rejected, C2 full-value user-4 preserved, B2/B3/B5 short values.",
+      "observed": "FAIL: tests/test_kernel_param_inherit.py does not exist (tests/ contains only test_kernel.py and __pycache__). Informational: existing literal-kernel tests tests/test_kernel.py pass 3/3 with PYTHONPATH=src (repo literal kernel machinery healthy); without PYTHONPATH tests fail collection (ModuleNotFoundError: No module named 'spider'), i.e. package is not installed, tests require the src path.",
+      "pass_fail": "FAIL",
+      "evidence_refs": ["research/experiments/EXP-GRAPH-35932480731/raw_evidence/unit_tests_check.json"]
+    },
+    "GATE-CENSUS-DURABLE": {
+      "id": "GATE-CENSUS-DURABLE",
+      "expected": "PASS: WebArena-Verified v2 single-family census from durable source with pinned 64-char hash: data/webarena_verified_v2.json pre-existing OR Docker am1n3e/webarena-verified-shopping@sha256:3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb OR verified static export; >=10 valid B tasks family-stratified zero-overlap (value_set_A intersect B = empty).",
+      "observed": "FAIL: data/ directory does not exist; data/webarena_verified_v2.json absent; no static export found on any ref. Docker daemon present (server 28.0.4) but pinned image is not durably usable in this environment: image absent from docker images after pull (grep count 0), every docker run re-pulls from registry and the probe container (entrypoint sh, 'echo IMAGE_OK; ls /') timed out at 110s (exit 124). No census file, no zero-overlap verification possible.",
+      "pass_fail": "FAIL",
+      "evidence_refs": ["research/experiments/EXP-GRAPH-35932480731/raw_evidence/census_check.json", "research/experiments/EXP-GRAPH-35932480731/raw_evidence/refs_check.json"]
+    },
+    "GATE-LLM-SUBSTRATE": {
+      "id": "GATE-LLM-SUBSTRATE",
+      "expected": "gpt-4o-mini-2024-07-18 or approved haiku/flash, temp 0.0, seed 42, max 15 steps, 4096 tokens, Playwright chromium headless for F3/F4 (success margin + economics).",
+      "observed": "OPENAI_API_KEY absent and ANTHROPIC_API_KEY absent -> LLM branch unavailable. Per frozen falsifier and decision rule, LLM unavailability makes C4/F3/F4 NOT_APPLICABLE (not zero) and preserves the F1/F2 binding gate as primary; however the binding gate itself is invalid here due to kernel/census failures (see GATE-KERNEL-DURABILITY, GATE-CENSUS-DURABLE), not due to LLM absence.",
+      "pass_fail": "NOT_APPLICABLE",
+      "evidence_refs": ["research/experiments/EXP-GRAPH-35932480731/raw_evidence/environment.json"]
+    },
+    "PC-PARAM-REGRESSION-AND-LITERAL-HIT": {
+      "id": "PC-PARAM-REGRESSION-AND-LITERAL-HIT",
+      "expected": "PC1 same-A literal hit_rate 1.0, cost 50 tok, success 1.0; PC2 same-A multi-param EXECUTABLE 1.0, binding 1.0, zero templates, success >=0.90 (or binding 1.0 alone if LLM unavailable).",
+      "observed": "NOT_RUN: prerequisite gates (kernel durability, unit tests, census) failed before any outcome-bearing measurement; prereg section 5.1 forbids B inference (and thus control/baseline measurement) until gate 1 passes. Absence is not a value.",
+      "pass_fail": "unknown",
+      "evidence_refs": [] 
+    },
+    "NC-SHUFFLED-AND-RANDOM": {
+      "id": "NC-SHUFFLED-AND-RANDOM",
+      "expected": "NC1 shuffled slot mapping binding <0.50, success <= B-COLD+0.05, false_accept >=0.25, |rho_shuffled|<0.20; NC2 random retrieval false_accept >=0.30 or success <= B-COLD.",
+      "observed": "NOT_RUN: prerequisite gates failed before any outcome-bearing measurement. Absence is not a value.",
+      "pass_fail": "unknown",
+      "evidence_refs": []
+    },
+    "B-LITERAL": {
+      "id": "B-LITERAL",
+      "expected": "EXECUTABLE ~0.0 on held-out B (parameterization necessity; success <=0.15 also gates S-SAFETY/leakage).",
+      "observed": "NOT_RUN: prerequisite gates failed before any outcome-bearing measurement. Absence is not a value; B-LITERAL success <=0.15 remains untested in this run.",
+      "pass_fail": "unknown",
+      "evidence_refs": []
+    },
+    "B-COLD": {
+      "id": "B-COLD",
+      "expected": "Success lower than SPIDER on held-out B; cost flat vs novelty (LLM-available branch only).",
+      "observed": "NOT_APPLICABLE: LLM substrate absent (api_key_absent per frozen semantics) AND kernel/census gates failed; never measured.",
+      "pass_fail": "NOT_APPLICABLE",
+      "evidence_refs": ["research/experiments/EXP-GRAPH-35932480731/raw_evidence/environment.json"]
+    },
+    "B-RAG": {
+      "id": "B-RAG",
+      "expected": "Hit_rate ~0.05-0.10 on held-out B; overall success << SPIDER without parameterization (LLM-available branch only).",
+      "observed": "NOT_APPLICABLE: LLM substrate absent AND kernel/census gates failed; never measured.",
+      "pass_fail": "NOT_APPLICABLE",
+      "evidence_refs": ["research/experiments/EXP-GRAPH-35932480731/raw_evidence/environment.json"]
+    },
+    "B-REPLAY-TERX": {
+      "id": "B-REPLAY-TERX",
+      "expected": "Hit_rate ~0.0 on held-out B by design (B never observed) -> cost = COLD (LLM-available branch only).",
+      "observed": "NOT_APPLICABLE: LLM substrate absent AND kernel/census gates failed; never measured.",
+      "pass_fail": "NOT_APPLICABLE",
+      "evidence_refs": ["research/experiments/EXP-GRAPH-35932480731/raw_evidence/environment.json"]
+    },
+    "B-INSTR": {
+      "id": "B-INSTR",
+      "expected": "Cost slightly below COLD but above SPIDER; success below SPIDER on multi-param families (LLM-available branch only).",
+      "observed": "NOT_APPLICABLE: LLM substrate absent AND kernel/census gates failed; never measured.",
+      "pass_fail": "NOT_APPLICABLE",
+      "evidence_refs": ["research/experiments/EXP-GRAPH-35932480731/raw_evidence/environment.json"]
+    },
+    "CHECK-EXISTING-LITERAL-TESTS": {
+      "id": "CHECK-EXISTING-LITERAL-TESTS",
+      "expected": "Informational substrate probe (not a frozen control): existing literal-kernel tests should pass, localizing the failure to the C-PARAM-INHERIT machinery rather than the whole repository.",
+      "observed": "PYTHONPATH=src python -m pytest tests/test_kernel.py -> 3 passed. Literal kernel (distill/resolve/verify/invalidate/_matches/_bind/_template_slots) is functional; the missing machinery is exclusively parameterized induction (distill_parameterized and its 7 helpers) plus the durable census.",
+      "pass_fail": "PASS",
+      "evidence_refs": ["research/experiments/EXP-GRAPH-35932480731/raw_evidence/unit_tests_check.json"]
+    }
+  },
+  "artifacts": [
+    {"path": "research/experiments/EXP-GRAPH-35932480731/raw_evidence/kernel_check.json", "sha256": "b75e0742be720b639ab6e2cd4334fed614de816e5001f971842e5850e5382ff4", "role": "raw"},
+    {"path": "research/experiments/EXP-GRAPH-35932480731/raw_evidence/census_check.json", "sha256": "ed327d6921f70384e6b09556d43611359df99cb02a0b5f2d2566614875848278", "role": "raw"},
+    {"path": "research/experiments/EXP-GRAPH-35932480731/raw_evidence/unit_tests_check.json", "sha256": "c0459dc650bbbf3bad5b99c5cd8909637f4e571ed708301755c6e9aaf8d599f5", "role": "raw"},
+    {"path": "research/experiments/EXP-GRAPH-35932480731/raw_evidence/environment.json", "sha256": "4d21480dc25f3e6d4605a10140104d4fae2d56a28eef9b797610085ecd89c257", "role": "raw"},
+    {"path": "research/experiments/EXP-GRAPH-35932480731/raw_evidence/refs_check.json", "sha256": "d0d8c9ce0053a87a70a84def30cdecdb8c17c6e4053999d275da28bc747e2463", "role": "raw"},
+    {"path": "research/experiments/EXP-GRAPH-35932480731/raw_evidence/transient_harnesses.json", "sha256": "4f6b1ad15b1404942b706e61762990fea1a2357f27ecdcd7904984fe952434d1", "role": "raw"},
+    {"path": "research/experiments/EXP-GRAPH-35932480731/request.json", "sha256": "04baf4148c4417333b8cb643eace0499a0dc6a91c5e8ec4a286abfebfb2f9e23", "role": "frozen"},
+    {"path": "research/experiments/EXP-GRAPH-35932480731/spec.json", "sha256": "f4807665afded6e1bb5c79b14f87f8bde27ae65bc0595c904b6a0625b2e26e44", "role": "frozen"},
+    {"path": "research/experiments/EXP-GRAPH-35932480731/prereg.md", "sha256": "f817c612171dab7d2a17156f973b6b0ed7d58dc35fdfe71dc40ad3806e29a6c8", "role": "frozen"},
+    {"path": "research/experiments/EXP-GRAPH-35932480731/freeze.json", "sha256": "70093c1d89af5a5b995e69573191e61960f8e636a1726e6ee1116603de3b14a7", "role": "frozen"}
+  ],
+  "observations": [
+    "HEAD is 0133f3bf70c4babd85f8d8c3eff92429e9f960c6 (commit message 'R2 graph: execution base EXP-GRAPH-35932480731'); branch lab2/graph. Pre-execute checkpoint recorded sha bce1497246fe3c6d691f2abcf42711378d324a92 (freeze commit).",
+    "src/spider/kernel.py is 132 lines with sha256 46929b3a951df48d7f9d1fd850871073c0d91c1868aa117e13d389fe274e8d61; this sha is byte-identical to the kernel that the independent audit of EXP-GRAPH-35918640311 found at HEAD 7dc6bd27 (132 lines literal-only, 0/7 required functions).",
+    "grep -c returns 0 for each of the 8 required symbol strings in src/spider/kernel.py: distill_parameterized, _common_prefix_and_suffix, _extract_varying_values, _structure_similarity, _is_allowed_path, _ALLOWED_PREFIXES, _field_path_to_slot_name, _sanitize_slot.",
+    "git diff 219d24aeddf5998da13c15e1ceb23636cf79910c..HEAD -- src/spider/kernel.py produces 0 lines; git diff 98b40ef4df6bac37548b4dbbbd823ccceaed35a1..HEAD produces 0 lines.",
+    "tests/test_kernel_param_inherit.py does not exist; tests/ contains only test_kernel.py and __pycache__.",
+    "PYTHONPATH=src python -m pytest tests/test_kernel.py -q -> 3 passed. Without PYTHONPATH the same test errors at collection with ModuleNotFoundError: No module named 'spider' (package not installed; tests need src on path).",
+    "data/ directory does not exist; data/webarena_verified_v2.json does not exist; git ls-tree on HEAD, origin/main and origin/lab2/product shows no data/ tree entries and no tests/test_kernel_param_inherit.py.",
+    "Docker CLI available with server 28.0.4. docker images --digests shows no am1n3e image. docker run --rm --entrypoint sh am1n3e/webarena-verified-shopping@sha256:3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb -c 'echo IMAGE_OK; ls /' timed out at 110s (exit 124); stderr shows the image being re-pulled from the registry on every invocation.",
+    "OPENAI_API_KEY is absent and ANTHROPIC_API_KEY is absent in the execution environment.",
+    "distill_parameterized exists only in 4 transient harness copies under research/experiments/{EXP-GRAPH-35784823623,EXP-GRAPH-35864745180,EXP-GRAPH-35793560957,EXP-GRAPH-35798169917}/run_experiment.py; those copies are incomplete relative to the frozen spec (e.g. _ALLOWED_PREFIXES count 0 in 3 of 4, _field_path_to_slot_name count 0 in 1 of 4) and none is a durable commit to src/spider/kernel.py.",
+    "No ref (HEAD, origin/main, origin/lab2/product) contains distill_parameterized in src/spider/kernel.py, tests/test_kernel_param_inherit.py, or any data/ tree entry.",
+    "Frozen-input hash cross-check: sha256(request.json)=04baf414..., sha256(spec.json)=f4807665..., sha256(prereg.md)=f817c612... match freeze.json exactly; frozen inputs were not mutated."
+  ],
+  "validity_notes": [
+    "MEASUREMENT_INVALID per frozen decision_rule clause (i): kernel not durably committed — grep 0 for all 8 required symbols in src/spider/kernel.py, sha256 46929b3a identical to the parent-invalid kernel, git diff 219d24ae..HEAD for that file empty, tests/test_kernel_param_inherit.py missing. Frozen measurement_validity #1 and prereg section 5.1 make this a gate failure that terminates the experiment BEFORE any outcome-bearing B measurement.",
+    "MEASUREMENT_INVALID per frozen decision_rule clause (ii): census not durably provisioned — data/webarena_verified_v2.json absent, data/ absent, Docker pinned image not durably usable in this environment (image not persisted after pull; container probe timed out at 110s), no verified static export; >=10 valid zero-overlap B tasks could not be constructed or verified.",
+    "Consequently zero outcome-bearing measurements were performed on held-out B. All primary metrics (M-EXECUTABLE-SPIDER, M-BINDING-CORRECT, M-UNSUBSTITUTED-TEMPLATES, M-FALSE-ACCEPT-SPIDER, M-UNKNOWN-RATE-SPIDER, M-ECE, M-SUCCESS-LITERAL, controls PC1/PC2/NC1/NC2) are encoded as null / NOT_RUN. These must NOT be read as zeros, pass values, or any scientific result; the absence is an explicit not-measured due to frozen substrate gates.",
+    "LLM absence (api_key_absent) makes C4/F3/F4 (success margin vs B-COLD/B-RAG/B-REPLAY-TERX/B-INSTR and amortized economics with trajectory-grouped B=5000 bootstrap and |rho_shuffled|<0.20) NOT_APPLICABLE per the frozen falsifier, which preserves the F1/F2 binding gate as primary. Here the binding gate itself is invalid for kernel/census reasons, not for LLM reasons.",
+    "|rho_shuffled| and the runtime honest-cost sum-counters harness (trajectory-grouped B=5000) are not applicable: cost metrics are only measured in the LLM-available branch per frozen design; research/harness does not exist on this branch. Their absence is NOT evidence about cost economics.",
+    "This is substrate/infrastructure failure, not scientific falsification of C-PARAM-INHERIT (EXPERIMENT_PACKET section 9; AGENTS.md failure discipline). The claim remains EXPERIMENTAL at the narrow synthetic ceilings previously accepted (EXP-PRODUCT-33528829801 10/10 single-param; EXP-PRODUCT-33741671686 21/21 harness-only). No claim status change is justified.",
+    "Representation loss: none beyond the frozen design — no data were collected, so there is no raw state/action evidence to preserve for this run beyond the gate diagnostics in raw_evidence/.",
+    "Adequacy/power gates (>=10 valid B, Wilson half-width ~0.22, power ~0.45 for 0.12 delta at n=14) are not evaluated because the census adequacy gate is uncheckable without a durable census.",
+    "Environment quirk recorded for reproducibility: python -m pytest without PYTHONPATH=src fails collection (ModuleNotFoundError: No module named 'spider'); the repo's own tests require src on the path (uninstalled package).",
+    "Existing literal-kernel tests pass 3/3 with PYTHONPATH=src, localizing the C-PARAM-INHERIT gap to the parameterized induction machinery (distill_parameterized + 7 helpers) and the durable census, not to the whole repository substrate."
+  ],
+  "unresolved": [
+    "Whether a genuinely fixed distill_parameterized (single-prefix _common_prefix_and_suffix, distinct slot per field-path via _field_path_to_slot_name/_sanitize_slot, field-path relevance filter url/body.*/headers.* via _is_allowed_path, Jaccard>=0.75 constant-anchor via _structure_similarity, confidence 0.90) durably committed to src/spider/kernel.py achieves EXECUTABLE>=0.75 (Wilson lower>=0.65) and binding>=0.90 (lower>=0.80) on held-out zero-overlap B — untested; requires the durable commit first.",
+    "Whether the pinned Docker image am1n3e/webarena-verified-shopping@sha256:3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb can be made a durable usable census source in this CI environment (pull persistence, runnable container within time budget) or whether a static export sha256 must be pinned instead.",
+    "Whether the four transient run_experiment.py copies (EXP-GRAPH-35784823623/35864745180/35793560957/35798169917) contain the intended fixed logic that a durable src commit should port; they differ in completeness, and none is authoritative or durably committed.",
+    "LLM economics gates (success margin >=0.12 vs each of B-COLD/B-RAG/B-REPLAY-TERX/B-INSTR, M-AMORTIZED-SAVING-vs-COLD >=25% at f=10, M-COST-RATIO-vs-RAG <=0.85, |rho_shuffled|<0.20) remain untestable without an API key and the runtime honest-cost harness.",
+    "No outcome-bearing B measurement exists for this packet; any future claim about EXECUTABLE/binding on a valid substrate requires a new run after the durability gates are repaired, not a reinterpretation of these null values."
+  ]
+}
