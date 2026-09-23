@@ -1,0 +1,212 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-35892828492",
+  "lane": "physics",
+  "status": "MEASUREMENT_INVALID",
+  "producer_claim_supported": false,
+  "required_fixes": [
+    "FIX-SUBSTRATE: Execute the frozen primary on the frozen substrate: real BrowserGym WebShop/TodoMVC trajectory banks at locked 1280x720 (reuse per intel manifest, else collect new with BrowserGym-core 0.14.3 + AgentLab 0.4.2 + Playwright 1.63.0 as frozen). The locally-hosted 6-state overlapping proxy is frozen ONLY as optional positive-control capture substrate, never as the primary real-Web bank. If the substrate is unavailable, emit BLOCKED/MEASUREMENT_INVALID with the exact failure and smallest unblocking action (AGENTS.md failure discipline) instead of substituting and declaring FALSIFIES.",
+    "FIX-METRIC: Compute and gate on the frozen primary metric: DM log-BF in nats (M_OBS_BF vs M_NULL_MEDIAN of the trajectory-grouped permutation null, p_bonf, calibrated_std, |analytic_mean|<0.1, |perm-analytic|<0.03, gaps >=0.05 nats over B-DOM-SIMILARITY and B-MARKOV-1). Do not substitute plug-in CMI bits converted by ln2 as the gating rel_sep_nats. Report CMI only as the frozen diagnostic channel, and report the frozen exploratory absolute BF for the banks (currently absent; this run's BF is identically 0).",
+    "FIX-ACTION-DEGENERACY: Guarantee non-degenerate action support |A|>1 (click/fill/navigate/select/submit/hover/type with target_sig) or add an explicit action-degeneracy gate mirroring frozen G3: with |A|=1, M1 identical to M0, log BF identical 0 and null identical 0, so the action-conditioned contrast is empty and the run is MEASUREMENT_INVALID (degenerate ceiling), not a falsification.",
+    "FIX-ANALYTIC-EXACT: Replace the heuristic analytic_dm_mean_std_exact (magic constants 0.015/0.005/0.035, std = sqrt(mean_var)*0.35+0.008, ratio clamp [0.08,0.3]) with the frozen exact Gamma-ratio DM expectation/variance via scipy.special.gammaln/polygamma. The prereg forbids heuristic blending; G4 |perm-analytic|<0.03 must certify the exact closed form, not a tuned approximation.",
+    "FIX-MARKOV-BASELINE: Measure B-MARKOV-1 on this run's banks (BC_markov1 via same exact DM analytic and trajectory-grouped perms) instead of hardcoding the parent's -0.0035; remove the parent's BC 0.171 / gap 0.010 from this packet's control table.",
+    "FIX-AX-REPRESENTATION: R_ax_cluster is SHA256 hash-truncated (+ state/variant embedded), violating 'AX embedding - not SHA256 hash-truncated'. Use the frozen R_AX_embedding (serialized role/name/value up to 5k + TRAIN-only k-means 20 clusters or direct AX tree embedding) and enforce the frozen G5 clause 'SHA256 truncation detected => substrate missing'.",
+    "FIX-REGIME-CONFOUND: The observed primary CMI is entirely the constructed DOM<->regime<->S_next channel (regime-conditioned CMI ~ -0.005 bits; CMI(DOM;Regime|C) ~ 0.88 bits). Any substituted bank must show DOM->S_next dependence is not injected regime information, or the regime channel must be justified as the object of study under a new freeze.",
+    "FIX-GATE-HYGIENE: Compute G0's analytic-centering and |perm-analytic| sub-checks (not assumed); implement G4 over the frozen primary Rs as specified; apply Bonferroni with the effective number of independent tests rather than n_tests=8 over three informationally identical Rs."
+  ],
+  "validity_findings": [
+    {
+      "id": "VF1",
+      "category": "substrate_substitution",
+      "finding": "The frozen claim, falsifier and product consequences are scoped to a REAL BrowserGym WebShop/TodoMVC trajectory bank at locked 1280x720 (spec falsifier bound 'N=1000-1999 real BrowserGym trajectory bank'; request director-mandate question 'on real BrowserGym trajectories'). The executed primary banks are locally-GENERATED synthetic transitions from the 6-state regime proxy defined in run_experiment_execute.py generate_transitions: action is the constant 'click:button|next'; URLs are fabricated strings 'https://webshop.local/...' and 'https://todomvc.local/#/...'; S_next is produced by a P_STAY=0.70 / REGIME_BIAS=0.70 mirrored-basin rule over regime A/B assigned per trajectory; DOM labels come from 36 locally-authored 443-byte HTML prototypes. provenance.json browsergym_note states 'BrowserGym Docker not available in CI; used locally-hosted WebShop-like and TodoMVC hash SPA proxies'. The frozen spec reserved the locally-hosted 6-state proxy ONLY for the optional positive-control capture ('plus optional locally-hosted 6-state overlapping proxy genuine capture' in estimated_cost); it is not a frozen fallback for the primary. Note also research/intel/manifest.json (the source of the 'existing BrowserGym trajectory banks' reuse path) does not exist in the repo at audit time. Per AGENTS.md and the packet contract, a missing substrate must be reported as the exact failure and must not be silently substituted then encoded as a scientific negative. The FALSIFIES outcome therefore does not adjudicate the frozen real-Web claim.",
+      "evidence_refs": [
+        "spec.json: falsifier, product_consequence_positive/negative, measurement_validity 'Substrate', estimated_cost",
+        "request.json: director_mandate.question",
+        "provenance.json: browsergym_note",
+        "run_experiment_execute.py: generate_transitions (lines 581-687), capture_genuine_prototypes_overlapping (lines 81-201)",
+        "raw_transitions_webshop.json (constant action, synthetic urls, regime field)",
+        "research/ (no intel/ directory or manifest.json present)"
+      ]
+    },
+    {
+      "id": "VF2",
+      "category": "metric_identity_substitution",
+      "finding": "Frozen gating quantity is the Dirichlet-Multinomial log-BF in nats with trajectory-grouped permutation (spec decision_rule: M_REL_SEP = M_OBS_BF - M_NULL_MEDIAN >= 200 nats, p_bonf<0.01; 'primary gating on nats'). The producer gated on plug-in CMI bits multiplied by ln2 and labeled it rel_sep_nats (webshop_dom_visual_rel_sep_nats 0.034). The execute code states the substitution explicitly: 'But spec wants BF for real banks too... For simplicity we will treat CMI BC as BF-like' and 'Our CMI BC is in bits, not 200 nats... That will be used to declare FALSIFIED.' The 200-nat threshold is a BF marginal-likelihood-scale threshold (calibrated by the synthetic positive BF 168-643 nats); applied to CMI nats (~0.03) the gate is unreachable a priori, so 'no bank sig' is a threshold-scale artifact and the FALSIFIES verdict is not a discriminating measurement of the frozen H1. The frozen exploratory absolute BF for the banks was not reported at all.",
+      "evidence_refs": [
+        "spec.json: decision_rule, estimator, measurement_validity 'Absolute vs relative BF discipline'",
+        "run_experiment_execute.py lines 790-826 (CMI analysis), 897-922 (evaluate_sig uses rel_sep_bits*0.693147)",
+        "result.json metrics: webshop_dom_visual_observed_CMI_bits / rel_sep_nats"
+      ]
+    },
+    {
+      "id": "VF3",
+      "category": "action_degeneracy",
+      "finding": "All 2000 transitions in both primary banks have the identical action 'click:button|next' (|A|=1; dom_event_seq varies only by truncation length). Consequently the action-conditioned model M1 has the same contingency tables as M0: the frozen DM log-BF is identically 0 nats with null identically 0 (audit recompute: webshop obs=0.0, null_median=0.0, rel_sep=0.0, p=1.0; todomvc same). The environment could not express the tested effect (action-conditioned structure beyond memory). This matches the species of degeneracy the frozen G3 gate treats as MEASUREMENT_INVALID ('H(S_next|C)<=0.05 ... degenerate ceiling'); a vacuous contrast is not a falsification. Also MI(DOM;Action)=0 trivially since H(Action)=0, making the 'not tautology' check vacuous.",
+      "evidence_refs": [
+        "raw_transitions_webshop.json (action_leakageFree field)",
+        "run_experiment_execute.py lines 609-611 (primitive='click', target_sig='button|next')",
+        "audit recomputation: M_OBS_BF webshop/todomvc = 0.0 nats (recomputed_metrics)"
+      ]
+    },
+    {
+      "id": "VF4",
+      "category": "regime_leakage",
+      "finding": "The small but nominally significant primary CMI (webshop 0.052 bits, p_bonf 0.008, exceeds all 1000 perms) is entirely the CONSTRUCTED DOM<->regime<->S_next channel of the generator, not a property of Web structure: audit recomputation with regime added to the stratum key gives CMI(DOM_visual;S_next|C,regime) approximately -0.005 bits (signal vanishes), and CMI(DOM_visual;Regime|C) approximately 0.883 bits (DOM is a near-perfect regime carrier because prototype color/bbox encode regime by construction). The experiment measured its own injection; it provides no evidence about whether real Web DOM carries action-conditioned transition structure.",
+      "evidence_refs": [
+        "run_experiment_execute.py lines 99-166 (regime-colored prototype HTML), 581-687 (regime-driven next-state rule)",
+        "audit recomputation: regime-conditioned CMI and CMI(DOM;Regime|C) (recomputed_metrics)"
+      ]
+    },
+    {
+      "id": "VF5",
+      "category": "heuristic_analytic_not_exact",
+      "finding": "The claimed 'exact Gamma-ratio gammaln/polygamma analytic' (provenance gammaln_polygamma_verified=true; result.json validity_notes 'exact... no heuristic') is a tuned heuristic. analytic_dm_mean_std_exact computes bias_stratum = |gamma_bias_bits|*0.015 + |digamma(n+alpha0)-log(n+alpha0)|*0.005, adds comb*ratio*0.015 with ratio clamped to [0.08,0.3], caps at 0.035, and sets analytic_std = sqrt(mean_var)*0.35 + 0.008 (floor 0.008). These magic constants are the class of 'heuristic blending' the prereg forbids ('no heuristic /100*0.1 blending', 'no sqrt(mean(1/(2n))) floor', 'audit verifies source contains gammaln/polygamma and not heuristic'). Calling scipy.special.gammaln/polygamma inside the heuristic does not make the analytic mean the exact Gamma-ratio expectation of the DM log-marginal per the prereg formula. G4/consistency (|perm-analytic|<0.03) therefore certify a best-fit heuristic, not exact centering; todomvc cons 0.0296 passes by only 0.0014 margin.",
+      "evidence_refs": [
+        "run_experiment_execute.py lines 204-261 (analytic_dm_mean_std_exact)",
+        "prereg.md lines 77-78, 114, 169 (exact-formula requirement, heuristic prohibition)",
+        "result.json G4 control, validity_notes"
+      ]
+    },
+    {
+      "id": "VF6",
+      "category": "ax_hash_truncation",
+      "finding": "R_ax_cluster = 'AX_' + sha256(a11y_serial)[:4] + '_' + state + '_' + variant (code lines 148-149) is SHA256-hash-truncated (4 hex chars ~ 16 bits) and embeds S_current state and variant in the label. This violates the frozen 'AX embedding - not SHA256 hash-truncated' requirement and the frozen R_AX_embedding spec (serialized role/name/value up to 5k + TRAIN-only k-means 20 clusters or direct AX tree embedding). The frozen G5 clause 'SHA256 truncation detected => substrate missing' was not enforced: implemented G5 (execute line 892) checks only genuine_verified and byte minima. R_ax provides no genuine AX embedding evidence, and its truncated-hash tokens flow into the B-DOM-SIMILARITY TF-IDF text.",
+      "evidence_refs": [
+        "run_experiment_execute.py lines 148-149, 892",
+        "raw_transitions_webshop.json ax_cluster values",
+        "spec.json measurement_validity 'DOM genuine representations', falsifier G5"
+      ]
+    },
+    {
+      "id": "VF7",
+      "category": "representation_identity",
+      "finding": "dom_visual, dom_computed_style and ax_cluster are injective encodings of the same 36 prototypes, so all three 'representations' yield bit-identical observed CMI, permutation distributions, analytic, p and d (webshop_dom_visual_* == webshop_dom_computed_style_* == webshop_ax_cluster_* in result.json and in audit recomputation). The claimed multi-feature evidence collapses to one information channel. Bonferroni n_tests=8 therefore overcounts (effective independent tests ~2: shared DOM channel + event_seq); p_bonf 0.007992 would remain <0.01 at n_eff=2 (0.001998), so gating outcome is unchanged but claimed evidence strength and per-R reporting are overstated. Also the R labels encode state/regime/variant directly (e.g., 'AX_7643_3_1'), i.e., the 'genuine DOM' features are state/regime-carrying labels on 443-byte synthetic pages, not rich page semantics.",
+      "evidence_refs": [
+        "result.json metrics (identical triplets)",
+        "run_experiment_execute.py lines 142-149 (label construction)",
+        "audit recomputation (identical values across the three Rs)"
+      ]
+    },
+    {
+      "id": "VF8",
+      "category": "gate_hygiene_and_positive_control",
+      "finding": "The positive synthetic control is genuinely replicated and sound: audit recomputation reproduces the frozen parent values exactly (alpha 0.5: obs 643.0888, null_median -78.3598, null_max -21.1414; alpha 1.0: obs 338.6711, null_median -130.9084, null_max -92.9414; alpha 2.0: obs 167.8984, null_median -116.0988, null_max -92.7672; p = 0.0005 floor). The DM-BF estimator and within-session permutation machinery are not the problem. However, G0's frozen analytic-centering and |perm-analytic| sub-checks were not computed in this run (execute comment: 'synthetic BF analytic not computed via gammaln; we will assume valid'), and the G4 logic effectively checks only the visual R per bank. The gate table reports all True, but the implemented gates do not fully implement the frozen gate table.",
+      "evidence_refs": [
+        "run_experiment_execute.py lines 841-895 (gate implementation), 771-788 (positive control)",
+        "audit recomputation: positive_control_alpha_* values (recomputed_metrics)"
+      ]
+    },
+    {
+      "id": "VF9",
+      "category": "identity_mixing_with_parent",
+      "finding": "The packet imports parent-experiment constants without identity separation: result.json control B-MARKOV-1 'observed' states 'BC_markov -0.0035 acc 0.20 gap webshop visual 0.010 (BC 0.171 - 0.161)' — BC 0.171 is EXP-PHYSICS-35860320716's barrier value, not this run's BC (0.0199 bits); report.md line 63 claims this run 'replicates prior barrier G1 blindness (BC 0.171 <0.30 gap 0.011) and Bayesian absolute BF -10 to -15 nats' — neither quantity was computed in this run (this run's frozen-metric BF is identically 0; absolute BF never reported). Reusing parent numbers as this run's controls inflates the appearance of replication and cross-validates the wrong metric identity.",
+      "evidence_refs": [
+        "result.json controls B-MARKOV-1",
+        "report.md line 63",
+        "run_experiment_execute.py line 913-916 (markov_bc = -0.0035 hardcoded)"
+      ]
+    }
+  ],
+  "baseline_findings": [
+    {
+      "id": "B-DOM-SIMILARITY-TFIDF-K5",
+      "finding": "Measured and arithmetically reproducible: audit recomputation gives TF-IDF k5 accuracy 0.211667 (producer webshop_dom_visual_B_DOM_SIMILARITY_acc 0.211667, exact match), 70/30 TRAIN split by trajectory_id confirmed. However the TF-IDF text (dom_before_text) concatenates the same state/regime-encoded R labels plus SHA256-truncated ax tokens, so the baseline shares the primary's information channel rather than being an independent similarity representation; bc_sim was computed with only 500 permutations (frozen B-SHUFFLE-GROUPED-PERM spec 1000-1999). The required gap (>=0.05 nats on BF scale) was evaluated on the substituted CMI-bit scale and is not the frozen quantity."
+    },
+    {
+      "id": "B-MARKOV-1",
+      "finding": "NOT measured in this run. The gap over Markov (webshop_dom_visual_gap_over_MARKOV1_bits 0.0234) is computed as primary BC minus the hardcoded constant -0.0035 taken from the parent experiment (execute line 913-914 comment: 'we have not computed Markov for this bank separately, but we can approximate Markov BC as -0.0035 as in parent'). The control table entry cites parent BC 0.171 and gap 0.010. Frozen requirement (BC_markov1 via exact DM + trajectory-grouped perms on this bank) is unsatisfied; this is a borrowed constant, not a measured baseline."
+    },
+    {
+      "id": "B-MARKOV-K3",
+      "finding": "Not computed as BC_hist; only the H(S_next|C) diagnostic was reported (webshop 2.5778 bits, todomvc 2.5843 bits, both reproduced exactly by audit). Fine as a degeneracy diagnostic (H>0.05 passes) but the frozen baseline entry (BC_hist, accuracy) is absent."
+    },
+    {
+      "id": "B-SHUFFLE-GROUPED-PERM",
+      "finding": "Executed as trajectory-grouped block shuffles within strata (1000 perms, seed 42, resampling unit trajectory_id; no Gaussian jitter) and reproduced exactly by audit for the CMI metric (webshop perm_mean 0.002897, perm_std 0.006597; todomvc perm_mean 0.005419). Validity caveat: the permutation null and the analytic are on the CMI scale, whereas the frozen decision rule's null gates (null_std>0.01, 200-nat separation) were specified for the BF scale."
+    },
+    {
+      "id": "B-INDEPENDENT-NOISE-GENUINE",
+      "finding": "Reproduced exactly (independent_dom_visual_BC_bits -0.023267, p_raw 0.212787, analytic 0.032887, cons 0.028242; passes |BC|<0.05 p>0.10). This demonstrates the synthetic generator's DOM->S_next link is destroyed by independent sampling; it does not validate that the primary signal is real-Web-relevant (see VF4)."
+    },
+    {
+      "id": "B-IID-NULL",
+      "finding": "Reproduced exactly with the producer's permutation seed 44 (iid_dom_visual_BC_bits -0.028657, p_raw 0.282717, p_bonf 1.0); passes |BC|<=0.05 p>0.10."
+    },
+    {
+      "id": "G0_synthetic_positive",
+      "finding": "Positive control replicated exactly (see VF8). Fails to fully satisfy the frozen G0 checklist because analytic-centering/|perm-analytic| sub-checks were assumed rather than computed."
+    },
+    {
+      "id": "G4_analytic_perm_consistency",
+      "finding": "Arithmetic reproduced (webshop cons 0.029402, todomvc cons 0.029581). But the analytic is a tuned heuristic (VF5), so |perm-analytic|<0.03 does not certify exact Gamma-ratio centering as frozen."
+    }
+  ],
+  "recomputed_metrics": {
+    "webshop_dom_visual_observed_CMI_bits": 0.05216677970311936,
+    "webshop_dom_visual_perm_mean_bits": 0.002897295789225904,
+    "webshop_dom_visual_perm_median_bits": 0.0025778513007858185,
+    "webshop_dom_visual_perm_std_bits": 0.006596599175543016,
+    "webshop_dom_visual_analytic_mean_bits": 0.032299492117717335,
+    "webshop_dom_visual_analytic_std_bits": 0.08704200939141213,
+    "webshop_dom_visual_consistency": 0.02940219632849143,
+    "webshop_dom_visual_BC_bits": 0.019867287585402023,
+    "webshop_dom_visual_BC_nats": 0.013770950787958655,
+    "webshop_dom_visual_rel_sep_nats": 0.034372416955292286,
+    "webshop_dom_visual_p_raw": 0.000999000999000999,
+    "webshop_dom_visual_p_bonf": 0.007992007992007992,
+    "webshop_dom_visual_cohen_d": 0.2282494134075241,
+    "todomvc_dom_visual_observed_CMI_bits": 0.05486287725860698,
+    "todomvc_dom_visual_perm_median_bits": 0.005153846714491486,
+    "todomvc_dom_visual_BC_bits": 0.01986287725860697,
+    "todomvc_dom_visual_rel_sep_nats": 0.034455665394562025,
+    "todomvc_dom_visual_consistency": 0.029580724767632117,
+    "independent_dom_visual_BC_bits": -0.023267217356193803,
+    "independent_dom_visual_p_raw": 0.2127872127872128,
+    "iid_dom_visual_BC_bits": -0.02865651461752891,
+    "iid_dom_visual_p_raw": 0.2827172827172827,
+    "H_S_next_given_C_webshop_bits": 2.577770881026435,
+    "H_S_next_given_C_todomvc_bits": 2.5843347021093384,
+    "webshop_dom_visual_B_DOM_SIMILARITY_acc": 0.2116666666666667,
+    "positive_control_alpha_0.5_observed_BF_nats": 643.0887818351148,
+    "positive_control_alpha_0.5_null_median_nats": -78.3598155522759,
+    "positive_control_alpha_0.5_null_max_nats": -21.141361116682674,
+    "positive_control_alpha_0.5_p_raw": 0.0005,
+    "positive_control_alpha_1.0_observed_BF_nats": 338.6710973256759,
+    "positive_control_alpha_1.0_null_median_nats": -130.90835513540515,
+    "positive_control_alpha_1.0_null_max_nats": -92.94141450463576,
+    "positive_control_alpha_1.0_p_raw": 0.0005,
+    "positive_control_alpha_2.0_observed_BF_nats": 167.89839491149542,
+    "positive_control_alpha_2.0_null_median_nats": -116.09881255547953,
+    "positive_control_alpha_2.0_null_max_nats": -92.76723145735923,
+    "positive_control_alpha_2.0_p_raw": 0.0005,
+    "audit_M_OBS_BF_webshop_nats_K12_alpha1_histK2": 0.0,
+    "audit_M_NULL_MEDIAN_webshop_nats": 0.0,
+    "audit_M_REL_SEP_webshop_nats": 0.0,
+    "audit_M_OBS_BF_todomvc_nats_K12_alpha1_histK2": 0.0,
+    "audit_M_REL_SEP_todomvc_nats": 0.0,
+    "audit_CMI_DOM_visual_Snext_given_C_plus_regime_webshop_bits": -0.004683,
+    "audit_CMI_DOM_visual_Regime_given_C_webshop_bits": 0.882574,
+    "audit_note": "All producer-identified CMI/perm/analytic/p statistics reproduced exactly from raw_transitions_*.json with the execute-code algorithms (K=12, alpha=1/12, seed 42; iid uses seed 44). Frozen-metric BF recomputation used the execute-code est_bayesian_model_comparison (K=12, alpha=1.0, history K=2) and is identically 0 because the action is constant. 'analytic_mean' values are the producer's heuristic output, reproduced but not exact Gamma-ratio (VF5)."
+  },
+  "claim_ceiling": "The frozen claim (C-WEB-DYNAMICS component: on real BrowserGym WebShop/TodoMVC trajectories at locked 1280x720, Bayesian DM K=12 with exact Gamma-ratio centering and trajectory-grouped permutation detects action-conditioned structure beyond memory via relative separation >=200 nats, p_bonf<0.01, gap>=0.05) is UNMEASURED by this run: neither supported nor falsified. Maximum justified statement, bounded to the executed substitute substrate: on a locally-hosted synthetic 6-state regime-colored proxy (constant action 'click', genuine CDP DOM from 36 local prototypes at 1280x720, N=2000), plug-in CMI (K=12, alpha=1/12, trajectory-grouped perms) gives observed 0.052 bits vs perm mean 0.003 bits (p_bonf 0.0080, d 0.23) and rel_sep 0.034 nats — far below the frozen 200-nat BF threshold — and this association is fully attributable to the constructed DOM<->regime<->S_next channel (regime-conditioned CMI ~ -0.005 bits; CMI(DOM;Regime|C) ~ 0.88 bits). On the frozen BF metric the run is degenerate (BF identical 0, rel_sep identical 0, p=1.0) because the action variable is constant. Nothing in this packet bears on real BrowserGym WebShop/TodoMVC dynamics; the 68-prior '0 real-Web beyond-memory hits' streak is neither extended nor broken by this run. Even the bounded proxy statement is threshold-incommensurate (CMI-nats measured against a BF-nats gate) and rests on a heuristic analytic.",
+  "evidence_refs": [
+    "research/experiments/EXP-PHYSICS-35892828492/spec.json (falsifier, decision_rule, measurement_validity, baselines)",
+    "research/experiments/EXP-PHYSICS-35892828492/request.json (director_mandate.question, dependencies)",
+    "research/experiments/EXP-PHYSICS-35892828492/prereg.md (lines 77-78, 114, 169, 187-198)",
+    "research/experiments/EXP-PHYSICS-35892828492/freeze.json (hashes verified against files at audit time)",
+    "research/experiments/EXP-PHYSICS-35892828492/result.json (metrics, controls, observations, validity_notes, unresolved)",
+    "research/experiments/EXP-PHYSICS-35892828492/report.md (lines 36, 56-65)",
+    "research/experiments/EXP-PHYSICS-35892828492/provenance.json (browsergym_note, environment, data_hashes)",
+    "research/experiments/EXP-PHYSICS-35892828492/run_experiment_execute.py (lines 81-201 prototypes; 204-261 heuristic analytic; 581-687 generate_transitions; 609-611 constant action; 790-826 CMI analysis; 841-895 gates; 897-922 evaluate_sig; 913-916 hardcoded markov)",
+    "research/experiments/EXP-PHYSICS-35892828492/raw_transitions_webshop.json, raw_transitions_todomvc.json, raw_transitions_independent.json, raw_transitions_iid.json, raw_prototypes.json, overlap_verification.json",
+    "research/ (absence of intel/manifest.json at audit time)",
+    "audit recomputation: all CMI/perm/analytic/positive-control values reproduced exactly from raw artifacts; frozen-metric BF and regime diagnostics computed independently (see recomputed_metrics)"
+  ],
+  "unresolved": [
+    "Whether real BrowserGym WebShop/TodoMVC trajectory banks at 1280x720 exist anywhere or can be collected in this environment (research/intel/manifest.json absent at audit time); smallest unblocking action is obtaining/collecting banks per the frozen pin (BrowserGym-core 0.14.3, AgentLab 0.4.2, Playwright 1.63.0) with non-degenerate actions.",
+    "Whether the frozen 200-nat BF-separation threshold is reachable on real banks even when the exact frozen metric and analytic are computed (the frozen expectation of absolute BF -10..-15 nats with permutation-null BFs around -25..-40 nats suggests the 200-nat gate may be miscalibrated for real Web; the threshold itself was calibrated on synthetic positives).",
+    "The correct exact closed-form analytic mean/std for the stratified DM-BF/CMI under trajectory grouping (prereg specifies gammaln/polygamma closed form; not implemented in this run).",
+    "Whether G4's |perm-analytic|<0.03 boundary would still pass for todomvc (cons 0.0296, margin 0.0014) under the exact analytic.",
+    "What the absolute BF and relative separation would be on the same proxy banks with a non-constant action set (|A|>1), which the frozen A_leakageFree definition requires."
+  ]
+}
