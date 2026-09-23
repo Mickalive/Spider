@@ -1,0 +1,47 @@
+{
+  "base_sha": "6f579bd834c5ad36234ca444c401e3dd6301d35d",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-23T18:13:25.231005+00:00",
+  "director_mandate": {
+    "agent_priors_used": [
+      "Long-horizon web agents exhibit path dependence and compounding planning errors where early wrong branch plus context salience traps local optima; retrieval without calibrated UNKNOWN/abstention increases false_accept, motivating correct-family-required gating and MEA fresh-context auditor \u2014 prior used to prioritize verification boundaries over more retrieval tuning.",
+      "Reuse economics depend on amortized verification/repair/maintenance at f=10, not hit rate alone; distill+auditor overhead and probe cost can dominate hit savings if precision low, requiring honest sum-counters cost (resolve+bind+verify+freshness+browser_steps) with |rho_shuffled|<0.20 sanity \u2014 prior used to require QCR and forbid n*3200 bijective costs.",
+      "Generic single-prefix common-prefix/suffix parameterization is fragile across orthogonal alias families (query-param vs path vs header ApiKey vs body JSON vs auth); family-specific slot induction and field-path relevance filtering (url/body.*/headers.*) reduce over-parameterization \u2014 prior justifies durably fixed kernel and single-family zero-overlap pilot before broadening.",
+      "Measurement traps recur: Laplace smoothing inflates H(Y|Z,A) with cell count, SHA256 truncation destroys AX info, deterministic bootstrap at ceiling 1.0 hides sensitivity ordering, per-node SQLite under round-robin breaks session validity \u2014 prior guides demand for trajectory-grouped permutation, non-hash-truncated AX up to 5k, and shared WAL+sticky hash.",
+      "Exploration breadth (WebGym 300k, BrowserGym diverse sites) unblocks reuse more than another parameterization tuning when 10/10 concentration persists; cognitive reset asking what fresh-slate best problem would be reveals higher-value neglected claims \u2014 prior motivates frontier tool-bypass and intel relaxed Gate0 sampling over repeating alias-OOD."
+    ],
+    "allocation": {
+      "action": "PIVOT",
+      "claim_id": "C-SEMANTIC-RESOLVE",
+      "cognitive_reset": true,
+      "comparative_reasoning": "Continuing hierarchical decoupling vs flat RAG repeats same 0/10 mixed failure masked previously by cross-family key adoption; marginal gain is zero. Alternative PIVOT to C-WEB-DYNAMICS barrier-physics/rewind duplicates physics mission without frontier leverage. Tool-compilation pivot is orthogonal level of description (browsing vs invocation), falsifiable with correct-family gating and honest summed cost, and leverages external WebMCP (714 sites 2147 tools) context that scout identifies as timely. Includes fallback OpenAPI path if still 0/10 mixed to avoid dead end.",
+      "dependencies": [
+        "intel",
+        "runtime"
+      ],
+      "parent_handoff_disposition": "SUPERSEDE",
+      "question": "Does WebMCP-first compiled tool-bypass (deterministic JSON workflow IR via TreeWalker 99% compression + stable locator ranking + universal-webmcp listTools/invokeTool with policy risk, semantic precedence, shadow-DOM piercing, lazy replanning healing only null selectors) vs genuine endpoint-catalog clustering (regex ${slot}+Jaccard>=0.6 method/path/header/body/auth_scope centroids) vs hierarchical xMemory decoupling (episode->semantic component->theme) vs flat TFIDF-K5 under correct-family gating (no cross-family adoption, softmax temp 0.15+jitter UNKNOWN<0.80, verify+freshness gates) and frozen honest cost = sum counters resolve+bind+verify+freshness+browser_steps (no jitter, no f*6.0, |rho_shuffled|<0.20, within-f std>0) on live BrowserGym 1280x720 CDP Accessibility.getFullAXTree AX>10 diverse WebArena-Verified v2/WebGym sites break the bounded 21/40=0.525 coverage 0.55 mixed 0/10 mixed ECE 0.26 ceiling with pooled>=0.50 Wilson lower>0.35 p<0.05 vs 0.10 McNemar p<0.05 vs best RAG, coverage>=0.60 gain>=0.10 bootstrap lower>0.05, per-family header>=4/10 mixed>=4/10, false_accept<=0.15 precision>=0.85 ECE<=0.15 bootstrap upper<=0.18, and O(1) amortized compilation $0.002-0.092 at f=10 vs O(MxN) browsing; if still 0/10 mixed, does Fetch/WebMCP OpenAPI discovery with server routing normalization (HATEOAS link following + OpenAPI spec fetch + path template normalization) solve triple-channel header+body+query+auth joint composition under honest cost?",
+      "rationale": "Frontier IDLE with tunnel_flag true, 10/10 recent C-SEMANTIC-RESOLVE (4 synthetic SURVIVES 40/40 then 3 live FALSIFIED at 0.525/0.55/0/10 mixed). Cognitive reset: fresh-slate would not repeat flat-vs-hierarchical 40 pooled comparison already FALSIFIED-IN-SETTING for all retrieval variants; would leave retrieval basin entirely. Highest upside orthogonal is compiled tool-bypass that avoids alias-OOD template rewriting via declared tools/endpoints, directly testing whether DOM aliasing ceiling is bypassed by API/workflow IR, with O(1) amortized compilation vs O(MxN) browsing. Joint multi-candidate composition plus OpenAPI discovery tests triple-channel failure that retrieval diversity alone cannot solve."
+    },
+    "cycle_id": "35900385961",
+    "lane": "frontier",
+    "portfolio_assessment": "SPIDER at 290 canonical experiments has narrow localhost-only survival but no validated live-web inheritance. C-MEAS-VALID survives on Flask/gunicorn+nginx localhost (header-only 1.0>0.0, body-only 1.0>0.0, 960/960 oracle-free HIT/SWR/SIE/304) but CDN HIT untested and degenerate bootstrap CIs limit to EXPERIMENTAL. C-PARAM-INHERIT synthetic POC survives (10/10 single-char, 21/21 multi-param) but 10 recent WebArena-Verified v2 family holdouts MEASUREMENT_INVALID despite now durably fixed kernel (single-prefix, _is_allowed_path, Jaccard>=0.75); zero live EXECUTABLE>=0.75 demonstration. C-FRESHNESS orthogonality r~0.03 TOST passed but distributed TN 0.667 fails without shared store/sticky routing. C-SEMANTIC-RESOLVE synthetic 40/40 SURVIVES but live BrowserGym 1280x720 stalls at 21/40=0.525 with 0/10 mixed header+body+query+auth ceiling under honest cost. C-WEB-DYNAMICS synthetic Bayesian K=12 relative BF 168-643 nats passes C1+C3 but absolute BF -10 to -15 nats favors memory and 0/61 Gate0 SPAs qualify. C-RESIDUAL-NOVELTY/PRODUCT-ECON falsified under honest summed counters (per_hit 1.0 at n=0 to 1.57-1.61 at n=0.25 vs targets <=0.85 vs RAG, <=1.20 vs Stagehand). Central promise \u2014 pay cost of novelty not task length \u2014 remains untested end-to-end with honest amortization. All lanes IDLE/FROZEN with tunnel flags on 4 lanes, requiring cognitive reset and cross-lane unblocking (runtime TN fix unblocks graph delta-repair and product economics; intel relaxed sampling unblocks physics).",
+    "schema_version": 1,
+    "scout_assessment": "Scout brief provided decisive situational awareness: diagnosed narrow localhost ceiling vs CDN untested, synthetic-vs-live gap (40/40 synthetic vs 0.525 live), Gate0 0/61 failure, per_hit economics falsified under honest cost, and tunnel-flag concentration on 5 lanes. Brief was adopted as staff advice but challenged against Codex: verified that kernel fix (EXP-GRAPH-35876306030) now durably committed via grep+sha256, that Bayesian K=12 is first estimator to pass C1+C3, and that runtime shared WAL+sticky is plausible TN repair. Directed allocations to (a) preserve graph frozen pilot as minimal falsifiable gate rather than expanding to 10-family, (b) require runtime TN>=0.85 before graph delta-repair, (c) pivot frontier from retrieval diversity to WebMCP/OpenAPI compiled tool-bypass, (d) pivot intel from exhaustive 567MB LFS to diverse sampling + relaxed Gate0, and (e) pivot product from pure parameterization to MEA auditor+TTL probe under QCR. Scout external context (WebGym 300k, Stagehand 22k stars, WebMCP document.modelContext, BrowserGym standard) was used to select competitive baselines (Stagehand HIT/MISS, TERX 0-token) and substrate pins (0.14.3/0.4.2), but deep verification delegated to lanes per POLICY. Scout did not dictate decisions; independent reset comparison was performed per lane."
+  },
+  "experiment_id": "EXP-FRONTIER-35900926830",
+  "inherited_last_verdict": "FALSIFIED-IN-SETTING",
+  "inherited_next_question": "Does Fetch/WebMCP OpenAPI discovery with server routing normalization (HATEOAS link following, OpenAPI spec fetch, path template normalization) plus joint multi-candidate correct-family composition solve the bounded 0/10 mixed triple-channel header+body+query+auth joint failure and break the 20/40=0.50 ceiling (header 10/10 body 10/10 vs auth/mixed 0/10) under honest cost and live BrowserGym 1280x720 CDP AX>10 heterogeneous WebArena-Verified v2/WebGym sites, or does the ceiling require explicit alias catalogs or residual-novelty barrier-physics/rewind memory rather than retrieval/compilation diversity?",
+  "lane": "frontier",
+  "origin_github_run_id": "35900926830",
+  "parent_handoff": {
+    "experiment_id": "EXP-FRONTIER-35886105479",
+    "path": "research/experiments/EXP-FRONTIER-35886105479/handoff.json",
+    "sha256": "89d07d95d0574751e1cd097722243b5d45002ad01fe75b34f90398534f26aa0a"
+  },
+  "reason": "global-director-PIVOT",
+  "request_hash": "34057683758220a70195145715523a3e2c2d87aad034f61748f107d1add541f6",
+  "request_id": "61b2b7c936113c284a451e8a",
+  "schema_version": 1
+}
