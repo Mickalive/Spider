@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-35864745180",
+  "lane": "graph",
+  "decision": "MEASUREMENT_INVALID",
+  "claim_updates": [
+    {
+      "claim_id": "C-PARAM-INHERIT",
+      "status": "MEASUREMENT_INVALID",
+      "reason": "Prereg C1-C5 binding gate measurement invalid per frozen measurement_validity #1 and #2. Audit independently verified: src/spider/kernel.py at HEAD SHA 46929b3a951df48d7f9d1fd850871073c0d91c1868aa117e13d389fe274e8d61 is 132 lines with 0/7 required functions (distill_parameterized, _common_prefix_and_suffix, _extract_varying_values, _structure_similarity, _is_allowed_path, _field_path_to_slot_name, _sanitize_slot); git diff base_sha d87e60d6a74c83f3f8d3b004c1e73dd3836b1e27..HEAD empty; tests/test_kernel_param_inherit.py missing; claimed SHA f2b86c98d06fa92ee1158c8e64f3ffb6261dc1daf39c8571734debed5fe4395d mismatches HEAD; run_experiment.py imports non-existent _common_prefix_and_suffix/_structure_similarity confirming transient patch. Census census.json/data/webarena_verified_v2.json generated on-the-fly via generate_census() not loaded from durable source (Docker am1n3e/webarena-verified-shopping@sha256:3e8cb9b945 or static export sha256:d6527566...). Per falsifier, kernel gate failure makes all B-measurements unverifiable; producer perfect EXECUTABLE 1.0 [0.806,1.0] / binding 1.0 on 16 B tasks cannot be attributed to durable kernel. No evidence for or against C-PARAM-INHERIT A->B generalization accumulated; prior EXPERIMENTAL narrow synthetic ceiling unchanged."
+    }
+  ],
+  "product_action": "NONE — no promotion; kernel fix not durably committed and census not from durable source. C-PARAM-INHERIT remains EXPERIMENTAL at narrow synthetic single/multi-param POC ceilings (EXP-PRODUCT-33528829801, EXP-PRODUCT-33741671686). Promotion blocked until kernel gate passes with 7 functions, confidence 0.90, single-prefix, Jaccard >=0.75, distinct slots, plus durable census.",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "After durably committing src/spider/kernel.py distill_parameterized (single-prefix _common_prefix_and_suffix, distinct slot per field-path via _field_path_to_slot_name/_sanitize_slot, field-path relevance filter url/body.*/headers.* only via _is_allowed_path, Jaccard >=0.75 constant-anchor via _structure_similarity, confidence 0.90) verified by grep >=1, sha256 match to HEAD, git diff base_sha..HEAD nonempty, and tests/test_kernel_param_inherit.py passing B1/B4/D1/E1/C2/B2/B3/B5, and loading WebArena-Verified v2 census from pre-existing durable source (data/webarena_verified_v2.json pre-existing or Docker am1n3e/webarena-verified-shopping@sha256:3e8cb9b945 or static export sha256:d6527566... with pinned hash) with >=10 valid B tasks family-stratified zero-overlap (value_set_A ∩ B = ∅), does single-family add_to_cart pilot achieve EXECUTABLE>=0.75 (Wilson lower >=0.65) and binding correctness>=0.90 (lower >=0.80) with zero unsubstituted ${} templates via deterministic _matches, false_accept<=0.10 UNKNOWN in [0.00,0.15] ECE<=0.15?",
+  "reason": "Producer reported COMPLETE SUPPORTS with perfect binding gate but audit status MEASUREMENT_INVALID with producer_claim_supported=false. Independent audit recomputed_metrics all UNVERIFIABLE and documented 6 required_fixes that exactly match prereg MEASUREMENT_INVALID clause (i). Evidence refs show kernel at HEAD lacks all 7 functions, census generated on-the-fly, unit tests absent, imports fail, SHA mismatch. Under EXPERIMENT_PACKET s9 infrastructure/substrate failure is not scientific falsification. C-PARAM-INHERIT cannot advance to VALIDATED; also not rejected — prior EXPERIMENTAL ceiling preserved. High-information next step is substrate repair and re-execution of same discriminating binding gate before any LLM economics or 60-task scale-up.",
+  "evidence_refs": [
+    "research/experiments/EXP-GRAPH-35864745180/spec.json",
+    "research/experiments/EXP-GRAPH-35864745180/prereg.md",
+    "research/experiments/EXP-GRAPH-35864745180/freeze.json",
+    "research/experiments/EXP-GRAPH-35864745180/request.json",
+    "research/experiments/EXP-GRAPH-35864745180/result.json:status=COMPLETE outcome=SUPPORTS metrics.M-EXECUTABLE-SPIDER=1.0 metrics.M-BINDING-CORRECT=1.0",
+    "research/experiments/EXP-GRAPH-35864745180/audit.json:status=MEASUREMENT_INVALID producer_claim_supported=false recomputed_metrics.kernel_functions_present=0 git_diff_nonempty=false unit_test_file_exists=false census_from_durable_source=false",
+    "research/experiments/EXP-GRAPH-35864745180/audit.json:validity_findings[0-6] KERNEL FIX NOT DURABLY COMMITTED, GIT DIFF EMPTY, UNIT TEST FILE MISSING, CENSUS NOT FROM DURABLE SOURCE, SHA mismatch 46929b3a vs f2b86c98",
+    "research/experiments/EXP-GRAPH-35864745180/provenance.json:kernel.sha256=f2b86c98d06fa92ee1158c8e64f3ffb6261dc1daf39c8571734debed5fe4395d vs HEAD src/spider/kernel.py SHA 46929b3a951df48d7f9d1fd850871073c0d91c1868aa117e13d389fe274e8d61",
+    "src/spider/kernel.py (HEAD 132 lines, no distill_parameterized)",
+    "research/experiments/EXP-GRAPH-35864745180/raw_evidence/kernel_check.json",
+    "research/experiments/EXP-GRAPH-35864745180/raw_evidence/unit_test_output.json",
+    "research/experiments/EXP-GRAPH-35864745180/run_experiment.py:imports _common_prefix_and_suffix, _structure_similarity non-existent",
+    "research/experiments/EXP-GRAPH-35864745180/census.json (generated on-the-fly)",
+    "codex/claim_state.json:C-PARAM-INHERIT prior status EXPERIMENTAL (EXP-PRODUCT-33528829801, EXP-PRODUCT-33741671686 narrow synthetic)",
+    "research/experiments/EXP-GRAPH-35864745180/report.md"
+  ]
+}

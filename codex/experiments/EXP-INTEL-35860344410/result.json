@@ -1,0 +1,156 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-35860344410",
+  "lane": "intel",
+  "status": "COMPLETE",
+  "outcome": "MIXED",
+  "metrics": {
+    "M_AX_CONSISTENCY_MEAN": 0.8,
+    "M_AX_N_FAMILIES": 10,
+    "M_AX_N_CAPTURES": 20,
+    "M_AX_VALID_CAPTURES": 20,
+    "M_AX_PRODUCT_FAMILY_COUNT": 2,
+    "M_AX_PRODUCT_CAPTURE_COUNT": 4,
+    "M_AX_BOOTSTRAP_CI_LOWER": 0.5,
+    "M_AX_BOOTSTRAP_CI_UPPER": 1.0,
+    "M_AX_SHUFFLE_P": 1.0,
+    "M_AX_PER_FAMILY_VARIANCE": 0.16,
+    "M_AX_DELTA_TRUNCATED": 0.0,
+    "M_AX_PC1_LIVENESS": "20/20 (600-2000 nodes, dom>=2000 bytes)",
+    "M_STAGEHAND_HIT_RATE": 0.0,
+    "M_STAGEHAND_MISS_RATE": 1.0,
+    "M_STAGEHAND_MUTATION_CAPABILITY": true,
+    "M_STAGEHAND_HASH_CHANGED_ON_MUTATION": true,
+    "M_STAGEHAND_N_FAMILIES_ATTEMPTED": 10,
+    "M_STAGEHAND_IDENTICAL_DOM_FAMILIES": 0,
+    "M_STAGEHAND_DIFFERENT_DOM_FAMILIES": 10,
+    "M_STAGEHAND_SELECTOR_DERIVATION_POSSIBLE": true,
+    "M_STAGEHAND_AX_NODE_COUNT": 1426,
+    "M_WEBGYM_SITES_FOUND": 50,
+    "M_WEBGYM_STATUS": "LIMITED",
+    "M_GATE0_TRANSITIONS": 9,
+    "M_GATE0_RELAXED_PASS": false,
+    "M_GATE0_LEAKAGE_VALIDONLY": 1.0,
+    "M_GATE0_UNIQUE_TITLES": 9
+  },
+  "controls": {
+    "B-STAGEHAND-VERB": {
+      "expected": "HIT>=0.8 identical DOM, MISS>=0.8 single-attribute drifted DOM, false_accept<0.05, beats NC4 p<0.05, ~2x/~30% speedup with derived selectors",
+      "observed": "Cannot measure HIT rate: full DOM SHA256 changes between page loads even for identical URLs (dynamic content). HIT=0.0, MISS=1.0. Mutation capability verified (hash changes on page.evaluate). Selector derivation possible (1426 AX nodes). Speedup/latency/tokens not measurable without Stagehand server. No synthetic fallback used.",
+      "pass_fail": "MEASUREMENT_INVALID",
+      "evidence": "artifacts/derived/stagehand_replication_recomputed.json"
+    },
+    "B-RANDOM-AX-SHUFFLE": {
+      "expected": "True mean must exceed shuffle mean+0.20 and p95, permutation p<0.05; degenerate std 0 p=1.0 = FAIL",
+      "observed": "Shuffle mean=0.8000 (identical to true mean), p=1.0 (degenerate). All 8 non-product families score 1.0, 2 product families score 0.0. Shuffling identical binary scores produces identical mean.",
+      "pass_fail": "FAIL",
+      "evidence": "artifacts/derived/ax_consistency_fulltree.json"
+    },
+    "B-TRUNCATED-20": {
+      "expected": "Full-tree mean must exceed truncated mean by >=0.10",
+      "observed": "Full-tree mean=0.8, truncated mean=0.8, delta=0.0. Homepage pages have short patterns where [:20] truncation is equivalent to full-tree.",
+      "pass_fail": "FAIL",
+      "evidence": "artifacts/derived/ax_consistency_fulltree.json"
+    },
+    "B-WEBGYM-HARDCODED-09479": {
+      "expected": "WebGym >=50 diverse-site duplication 95%CI should not overlap 0.9479 CI if diversity effect holds",
+      "observed": "WebGym package installed (v1.0.6) but diverse eTLD+1 census incomplete. Found 50 non-standard hosts from WebArena overlap but cannot confirm as WebGym corpus. Status: LIMITED.",
+      "pass_fail": "MEASUREMENT_INVALID",
+      "evidence": "artifacts/derived/webgym_census.json"
+    },
+    "B-COLD-LLM": {
+      "expected": "Cold latency/tokens upper bound; Stagehand must beat cold with false_accept penalty",
+      "observed": "Not measured - no LLM inference used for AX/Gate0/WebGym measurements. Stagehand cold/cached latency/tokens not measurable without Stagehand server.",
+      "pass_fail": "NOT_MEASURED",
+      "evidence": "artifacts/derived/stagehand_replication_recomputed.json"
+    },
+    "PC1_LIVENESS_1280": {
+      "expected": ">=15/20 captures yield AX trees 600-2000 nodes, DOM bytes>=2000, Docker reachable within 3 retries",
+      "observed": "20/20 captures valid (node_count 668-1426, dom_bytes 196958-251734). Docker reachable on 1st retry. All captures at 1280x720 viewport with CDP Accessibility.getFullAXTree.",
+      "pass_fail": "PASS",
+      "evidence": "artifacts/raw/ax_captures.json"
+    },
+    "PC2_AX_PRIOR_PRODUCT": {
+      "expected": ">=1 of 10 families discriminates vs prior homepage tautology 1.0 with variance>0 on product pages",
+      "observed": "Families 136 and 145 (2 product families) score 0.0 consistency (different products), while 8 non-product families score 1.0 (identical homepage). Variance=0.16>0 but driven by binary 0/1 pattern, not meaningful product discrimination.",
+      "pass_fail": "PARTIAL",
+      "evidence": "artifacts/derived/ax_consistency_fulltree.json"
+    },
+    "PC3_STAGEHAND_HIT_RECOMPUTED": {
+      "expected": "3 consecutive identical subtree SHA + selector -> HIT on 2nd/3rd with per-project isolation",
+      "observed": "Cannot achieve HIT: full DOM SHA256 changes between page loads even for identical URLs. Hash changes on page.evaluate mutation confirmed. Per-project isolation structurally sound (key includes project_id).",
+      "pass_fail": "MEASUREMENT_INVALID",
+      "evidence": "artifacts/derived/stagehand_replication_recomputed.json"
+    },
+    "PC4_WEBGYM_IMPORT_VALID": {
+      "expected": "WebGym import parses >=50 sites, sweep computable",
+      "observed": "WebGym v1.0.6 installed, 50 non-standard hosts found from WebArena overlap. Cannot confirm WebGym-specific corpus enumeration or deduplication sweep.",
+      "pass_fail": "MEASUREMENT_INVALID",
+      "evidence": "artifacts/derived/webgym_census.json"
+    },
+    "NC1_AX_SHUFFLE_TRAJECTORY_GROUPED": {
+      "expected": "Permute per-family scores 1000 perms, true mean must exceed null mean+0.20 p95 p<0.05; std 0 = FAIL",
+      "observed": "Shuffle mean=0.8000 (identical to true mean due to binary 0/1 scores), p=1.0. FAIL: degenerate shuffle.",
+      "pass_fail": "FAIL",
+      "evidence": "artifacts/derived/ax_consistency_fulltree.json"
+    },
+    "NC3_DOM_DRIFT_RECOMPUTED": {
+      "expected": "Inject single-attribute mutation via page.evaluate + recompute SHA256 AFTER via page.content(); expect MISS, false_accept<5%, verify hash change",
+      "observed": "page.evaluate mutation works and hash changes (before_hash != after_hash). SHA recomputation after mutation verified. Cannot test MISS rate or false_accept without Stagehand server and drift evaluation on 30+ families.",
+      "pass_fail": "PARTIAL",
+      "evidence": "artifacts/derived/stagehand_replication_recomputed.json"
+    },
+    "NC5_CROSS_PROJECT_LEAKAGE": {
+      "expected": "Same selector+hash in different project namespace must MISS 0% HIT",
+      "observed": "Cross-project isolation structurally enforced (key includes project_id). 5 cross-project tests: 0 leakage detected.",
+      "pass_fail": "PASS",
+      "evidence": "artifacts/derived/stagehand_replication_recomputed.json"
+    },
+    "NC6_WEBGYM_SHUFFLE": {
+      "expected": "Shuffle site labels across WebGym tasks 1000 perms; true duplication must exceed shuffled p<0.05 and threshold sensitivity >0.05",
+      "observed": "Not computed - WebGym census incomplete.",
+      "pass_fail": "NOT_MEASURED",
+      "evidence": "artifacts/derived/webgym_census.json"
+    }
+  },
+  "artifacts": [
+    {"path": "research/experiments/EXP-INTEL-35860344410/artifacts/raw/ax_captures.json", "sha256": "9990b66d2bd5f4d4d76807da481db05bc5e4d33bd5cbd7171a4cbc2902da0e43", "role": "raw"},
+    {"path": "research/experiments/EXP-INTEL-35860344410/artifacts/derived/ax_consistency_fulltree.json", "sha256": "11955f37a88fa350ee87450e1a0e434ab9197e8f74edf24599f363edb201ba96", "role": "derived"},
+    {"path": "research/experiments/EXP-INTEL-35860344410/artifacts/derived/stagehand_replication_recomputed.json", "sha256": "b92665672fe1f6f5984898d1960cb666d986a87f4f2f3a85c736c46d73cff6e6", "role": "derived"},
+    {"path": "research/experiments/EXP-INTEL-35860344410/artifacts/derived/webgym_census.json", "sha256": "7406839967d9d96f0f49a2a5de87249dfaed7eaf733a0de28f495d885a4dbf4b", "role": "derived"},
+    {"path": "research/experiments/EXP-INTEL-35860344410/artifacts/derived/gate0_relaxed_table.json", "sha256": "fc6a41dd909cb4ff72ebb9dfeed5abb2766b96af804655f57ac1f01a3c0b2078", "role": "derived"},
+    {"path": "research/experiments/EXP-INTEL-35860344410/artifacts/derived/provenance.json", "sha256": "cf876c0e0f3fea899c9c88b86ad46e12eadd2129837d01f158868296445a1824", "role": "derived"}
+  ],
+  "observations": [
+    "Substrate LIVE: Docker am1n3e/webarena-verified-shopping@sha256:3e8cb9b945 reachable on 1st retry, Playwright 1.63.0 functional, CDP Accessibility.getFullAXTree yields 668-1426 nodes, DOM bytes 196958-251734, all at 1280x720 viewport",
+    "Product page scarcity persists: only 4/20 captures (2/10 families: 136, 145) navigate to task-specific product pages; 16/20 (8/10 families) navigate to identical 'One Stop Market' homepage with 1426 nodes and 251KB DOM",
+    "Full-tree semantic/multi-anchor traversal without [:20] truncation implemented and verified via code hash; product-subtree isolation attempted but subtree_node_count=1 for product families (heading-to-product boundary not distinct enough)",
+    "AX_consistency mean=0.8000 with binary scoring: 8 non-product families score 1.0 (identical homepage), 2 product families score 0.0 (different products). Shuffle p=1.0 (degenerate binary scores), bootstrap CI lower=0.5 (not strictly >0.5), delta vs truncated=0.0",
+    "Full-tree provides NO improvement over [:20] truncation for homepage pages because truncated-first-20 tokens already capture the entire short homepage pattern. Delta=0.0 confirms the truncation bug affects the pattern length, not the semantic content",
+    "Stagehand SHA256 full-DOM cache KEY FAILURE: each page load generates different DOM SHA256 even for identical URLs (dynamic CSRF tokens, timestamps). HIT rate=0.0 across all 10 families. page.evaluate mutation DOES change hash (verified), but same-page re-access never reproduces hash. Full DOM SHA256 is fundamentally unsuitable as cache key on dynamic web pages",
+    "Selector derivation from AX tree possible (1426 nodes, role+name+CSS path). No synthetic fam_task fallback used; all selectors derived exclusively from AX+DOM attributes",
+    "WebGym v1.0.6 installed, 50 non-standard hosts found via WebArena task overlap, but diverse eTLD+1 census incomplete; cannot confirm 50 distinct eTLD+1 sites or deduplication threshold sweep 0.818-0.9479",
+    "Gate0 multi-step: only 9 transitions collected (vs >=50 required). All action.target_href == state_after.url (leakage_validOnly=1.0). No title diversity beyond URL-level. Relaxed Gate0 H>0.1 NL>=20 NOT achieved",
+    "Fresh seed 35725763380 used deterministically for all sampling. Docker digest, viewport, and provenance hashes recorded"
+  ],
+  "validity_notes": [
+    "Infrastructure succeeded: Docker substrate, Playwright, CDP AX tree capture all functional. NOT an infrastructure failure - the substrate is live and producing valid AX trees",
+    "Product page scarcity is the primary validity threat: only 2/10 families have task-specific product pages. The Director-mandated shopping_admin 184-task/42-family expansion was not implemented in this run, leaving the <5 product family threshold unmet",
+    "Shuffle degeneracy (p=1.0) is caused by binary 0/1 scoring pattern, not by code bug. The trajectory-grouped permutation is implemented correctly but produces degenerate results because 8/10 families have identical scores",
+    "DOM SHA256 instability between page loads is a substrate-level finding: dynamic content (CSRF tokens, session IDs, timestamps) changes the hash even for identical URLs. This invalidates SHA256-based caching as a Stagehand cache key unless normalized content is used",
+    "Full-tree vs truncated delta=0.0 because homepage patterns are short (<20 tokens). The [:20] truncation bug only manifests for long patterns; for short homepage patterns, truncation is irrelevant",
+    "Stagehand HIT/MISS/false_accept/latency/tokens could not be measured without the actual Stagehand server. The replication test measures cache key behavior (DOM hash stability) but cannot test the full Stagehand verb cache",
+    "Gate0 multi-step trajectories insufficient (9 vs 50 required) due to link-dominated navigation on the shopping site. action.target_href == state_after.url leakage is structural (same-origin navigation), not a measurement error",
+    "No LLM inference used for any measurement. Cost is limited to Docker pull, Playwright navigation, and CDP AX extraction",
+    "All artifact paths and hashes preserved. Frozen seed 35725763380 used throughout. No post-hoc seed changes"
+  ],
+  "unresolved": [
+    "Stagehand HIT>=0.8, MISS>=0.8, false_accept<0.05, speedup~2x/~30% cannot be confirmed without Stagehand server deployment and real dispatch path measurement",
+    "WebGym 50 diverse eTLD+1 census with duplication 95%CI and threshold sweep 0.818-0.9479 not completed; requires WebGym-specific corpus enumeration beyond WebArena overlap",
+    "Shopping_admin 184-task/42-family expansion not implemented; product page scarcity (2/10 < 5) remains unresolved",
+    "Playwright multi-step >=50 transitions/family on >=10 families not achieved; Gate0 relaxed census unmeasured",
+    "Product-subtree isolation cannot demonstrate subtree_node_count>1 distinct hashes because heading-to-product boundary is not clearly distinct in the AX tree",
+    "Real dispatch latency/tokens (Playwright navigation+hash+cache lookup, tiktoken/provider) not measurable without Stagehand server",
+    "Whether normalized/static content SHA256 (vs full DOM) could serve as stable cache key on dynamic pages remains open"
+  ]
+}
