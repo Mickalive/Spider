@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-35860337280",
+  "lane": "product",
+  "decision": "FALSIFIED",
+  "claim_updates": [
+    {
+      "claim_id": "C-RESIDUAL-NOVELTY",
+      "status": "HYPOTHESIS",
+      "reason": "Bounded FALSIFIED_IN_SETTING on WebArena-Verified v2 proxy census 192 tasks/36 families/49 templates/L 8-14 with genuine branch-derived cost (retrieval 200+verify 50+hit 50/novel 500/repair 500/distill 1000 f=10) and family-specific slots via src/spider/kernel.py distill_parameterized Jaccard>=0.75 constant-anchor field-path relevance, behavioral freshness 0.25 UNKNOWN<0.80. Audit PASS producer_claim_supported true recomputes all primary metrics exactly: rho_novelty_per_hit 0.8199 bootstrap CI [0.749,0.876] block-permutation p=0.00020 slope 432.29 p<0.01, R2_novelty 0.751 R2_delta 0.751 |rho_length| per stratum 0.0 to -0.001 (<0.20) so C1-C4,C6 PASS, PC1 hit_rate 1.0 STAGEHAND/TERX per_hit 31.0 at n0 (36 tasks) PC2 binding correctness 1.0 via _bind PC3 NC2 false_accept 0.125 in [0.10,0.60] non-vacuous MockEnv p=0.15. However C5-perhit fails frozen rule: SPIDER/RAG per_hit 1.0 at n0 (>0.85) and 1.573 at n0.25 (>0.85), SPIDER/STAGEHAND per_hit 1.612 at n0 (>1.20), SPIDER/TERX 0.665 at n0.25 passes but 1.039 at n>=0.5 not <1.0 (result.json:metrics.criteria.C5, audit.json:recomputed_metrics.ratios_per_hit). Audit validity_findings correctly note rho/R2 are binary-gating artifacts: SPIDER UNKNOWN 0.71875 (138/192) per_hit 50.0 at n0, 319.7 at n0.25, 500.0 at n>=0.5 equals COLD, so high rho reflects binary UNKNOWN fallback not proportional parameterization, and ECE_exec 0.025 on n=54 with 4/5 empty bins vacuous. Bounded falsification only for this freshness 0.25/QCR/f=10 proxy setting; global C-RESIDUAL-NOVELTY remains HYPOTHESIS, not globally REJECTED, no EXPERIMENTAL promotion per Director comparative reasoning closure."
+    },
+    {
+      "claim_id": "C-PRODUCT-ECON",
+      "status": "HYPOTHESIS",
+      "reason": "Bounded FALSIFIED same evidence as C-RESIDUAL-NOVELTY: honest economics per Director honest-cost gate fail. C5-total passes SPIDER/COLD M_total_f10 0.1626 at n0 (>=25% saving, audit recomputed) and 1.054 at n1 via UNKNOWN, but C5-perhit fails vs shipped baselines under QCR frozen bank TFIDF Jaccard TAU0.30 same ranker: RAG per_hit 50.0 at n0, 203.2 at n0.25, 340.6 at n0.5 demonstrates proportional scaling while SPIDER per_hit 50.0/319.7/500 does not beat retrievable RAG at n0.25 (1.57x) nor Stagehand parity at n0 (1.61x). Mean success 1.0 false_accept 0 UNKNOWN_precision 1.0 ECE_exec 0.025 vacuous via 71.8% fallback to always-success COLD (audit validity_findings medium). No Docker full-DOM 2000-node 1280x720 or real gpt-4o-mini Playwright token/browser/latency measured (provenance numpy unavailable, validity_notes synthetic ceiling). C-PRODUCT-ECON remains HYPOTHESIS bounded; no EXPERIMENTAL or PRODUCT_CORE, product_action no_promotion."
+    }
+  ],
+  "product_action": "no_promotion",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "With pay-cost-of-novelty work-compression closed for parameterized inheritance at freshness 0.25 under QCR honest-cost proxy (SPIDER/RAG per_hit 1.0 at n0 and 1.573 at n0.25, SPIDER/STAGEHAND 1.612 at n0, 71.8% UNKNOWN binary artifact rho 0.82 R2 0.75), does pivoting to curated exploration plus MEA auditor harness (fresh-context execution with external verified state before update) plus TTL/ETag verification probe achieve the honest-cost per_hit targets that parameterization failed — SPIDER/RAG-EMBED per_hit <=0.85 at n0 and n0.25 and SPIDER/STAGEHAND per_hit <=1.20 at n0 and SPIDER/TERX per_hit <1.0 at n>=0.25 with false_accept<=0.10 UNKNOWN_precision>=0.85 ECE<=0.15 — and what is the Pareto (accuracy vs tokens vs browser+latency) vs COLD/RAG/Stagehand on the same 192/36 census and on Docker full-DOM 2000-node BrowserGym 1280x720 with real gpt-4o-mini tokens/browser calls under family-stratified bootstrap 5000 and block-permutation 5000?",
+  "reason": "Producer COMPLETE FALSIFIES correctly executes 1536 trials via actual kernel resolve/_bind/verify with genuine branch-derived cost and family-specific slots, no bijective n*3200, honest 50-tok Stagehand/TERX hits, QCR frozen bank TFIDF TAU0.30 same ranker, non-vacuous MockEnv p=0.15; audit PASS confirms all recomputed metrics match producer (rho 0.8199 CI[0.749,0.876] p0.0002 R2_delta 0.751 |rho_length|<0.002 per stratum, per_hit ratios SPIDER/RAG 1.0 at n0 1.573 at n0.25 SPIDER/TERX 0.665 at n0.25 1.039 at n>=0.5) and identifies only low/medium validity issues that do not rescue C5 (M_per_hit formula excludes verification <6% shift, NC1 hardcoded still valid flat control, synthetic ceiling disclosed). C1 correctness/calibration, C2 positive controls (PC1 hit_rate 1.0 PC2 binding 1.0 PC3 NC2 0.125), C3 novelty tracking and C4 R2_delta per_hit technically PASS but scientifically vacuous due to 71.8% UNKNOWN fallback making per_hit binary (50 vs 500) not step-level parameterization, while proportional RAG proves environment can express proportional cost and SPIDER fails where baselines honestly hit under QCR. Per Director mandate PIVOT/SUPERSEDE and comparative reasoning, failing per_hit <=0.85x RAG even with rho>=0.60 definitively closes current work-compression claim for this kernel/cost model/QCR at f=10 and forces pivot to curated exploration + auditor harness and runtime substrate, not another threshold sweep. Verdict is bounded FALSIFIED, HYPOTHESIS globally, no promotion.",
+  "evidence_refs": [
+    "research/experiments/EXP-PRODUCT-35860337280/result.json",
+    "research/experiments/EXP-PRODUCT-35860337280/audit.json",
+    "research/experiments/EXP-PRODUCT-35860337280/spec.json",
+    "research/experiments/EXP-PRODUCT-35860337280/prereg.md",
+    "research/experiments/EXP-PRODUCT-35860337280/freeze.json",
+    "research/experiments/EXP-PRODUCT-35860337280/provenance.json",
+    "research/experiments/EXP-PRODUCT-35860337280/report.md",
+    "research/experiments/EXP-PRODUCT-35860337280/artifacts/raw_per_task.csv sha 847ca72687aa813cd20eeb1527dc217e202bf15c0b935ac31473f3d18949c228",
+    "research/experiments/EXP-PRODUCT-35860337280/artifacts/derived_metrics.json sha 29ee970ace29c72d15108182de9313e1182ee7d3ef475a2b547eb947a7604dfa",
+    "research/experiments/EXP-PRODUCT-35860337280/artifacts/cost_config.json sha 7df5283ec14179779e7e0d3ec690baacbc02b158eabd006b557adcb468cb92fa",
+    "research/experiments/EXP-PRODUCT-35860337280/artifacts/qcr_bank_manifest.json sha db3edb92049aafe2bb92e8ddd8e9c266304a90bbb6b495c4e6f202cf92522aec",
+    "research/experiments/EXP-PRODUCT-35860337280/artifacts/registry.jsonl sha 462236fdef0f8468fe39b3d6a8675f3f96e414cbe8d68eba8d864a1fec1e6889",
+    "research/experiments/EXP-PRODUCT-35860337280/artifacts/branch_traces.json sha aa5ebdcd831ff48ee17e822eb03409bfc5f6984d980dd1d635d351fe20a5af55",
+    "research/experiments/EXP-PRODUCT-35860337280/run_experiment.py sha 12650fa4cddebbf9c94c238d5f324d6e935760bb425bba629c0668ba566a67cc",
+    "research/experiments/EXP-PRODUCT-35797365772/handoff.json sha b6c17690150c03a6da98ffb610d23613bb17f44b29f98a8e31a0b8edbb70c2b3"
+  ]
+}

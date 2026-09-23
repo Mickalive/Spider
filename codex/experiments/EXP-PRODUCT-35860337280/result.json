@@ -1,0 +1,565 @@
+{
+  "artifacts": [
+    {
+      "path": "fixtures/tasks.json",
+      "role": "fixture",
+      "sha256": "99e5d46bde2578414ccdada265e88957ee7f72338e6ab0e84f05e4ee9454d358"
+    },
+    {
+      "path": "artifacts/cost_config.json",
+      "role": "code",
+      "sha256": "7df5283ec14179779e7e0d3ec690baacbc02b158eabd006b557adcb468cb92fa"
+    },
+    {
+      "path": "artifacts/qcr_bank_manifest.json",
+      "role": "code",
+      "sha256": "db3edb92049aafe2bb92e8ddd8e9c266304a90bbb6b495c4e6f202cf92522aec"
+    },
+    {
+      "path": "artifacts/registry.jsonl",
+      "role": "derived",
+      "sha256": "462236fdef0f8468fe39b3d6a8675f3f96e414cbe8d68eba8d864a1fec1e6889"
+    },
+    {
+      "path": "artifacts/raw_per_task.csv",
+      "role": "raw",
+      "sha256": "847ca72687aa813cd20eeb1527dc217e202bf15c0b935ac31473f3d18949c228"
+    },
+    {
+      "path": "artifacts/branch_traces.json",
+      "role": "raw",
+      "sha256": "aa5ebdcd831ff48ee17e822eb03409bfc5f6984d980dd1d635d351fe20a5af55"
+    },
+    {
+      "path": "artifacts/derived_metrics.json",
+      "role": "derived",
+      "sha256": "29ee970ace29c72d15108182de9313e1182ee7d3ef475a2b547eb947a7604dfa"
+    },
+    {
+      "path": "result.json",
+      "role": "packet",
+      "sha256": "16f495030b477c460fe5b552538b9838e9d60589e849fb7f1eb992fc91122bbb"
+    }
+  ],
+  "controls": {
+    "NC-SHUFFLE-RANDOM-LENGTH": {
+      "evidence": [
+        "artifacts/raw_per_task.csv"
+      ],
+      "expected": "NC1 |rho_per_hit|<0.25 p>=0.05, NC2 false_accept>=0.10 or |rho|<0.35, NC3 |rho|<0.25 R2<0.15 per_hit",
+      "observed": {
+        "NC1": {
+          "block_permutation_p": 1.0,
+          "mean_per_hit": 500.0,
+          "rho_novelty_per_hit": 0.0,
+          "rho_novelty_total": 0.58854375,
+          "success": 0.8645833333333334
+        },
+        "NC2": {
+          "false_accept": 0.125,
+          "rho_novelty_per_hit": -0.05566313954151985,
+          "success": 0.875
+        }
+      },
+      "pass": true
+    },
+    "PC-BINDING-AND-EXACT-REPEAT": {
+      "evidence": [
+        "artifacts/raw_per_task.csv",
+        "artifacts/registry.jsonl"
+      ],
+      "expected": "PC1 hit_rate 1.0 at n0 per_hit 50tok success 1.0, PC2 binding 5/5 per family 1.0 via _bind, PC3 NC2 false_accept 0.10-0.60 non-vacuous",
+      "observed": {
+        "PC1": {
+          "n0_tasks": 36,
+          "stagehand_hit_rate": 1,
+          "stagehand_mean_per_hit": 31.008189341522677,
+          "stagehand_mean_tokens": 595.8333333333334,
+          "stagehand_success": 1,
+          "terx_hit_rate": 1,
+          "terx_mean_per_hit": 31.008189341522677,
+          "terx_mean_tokens": 595.8333333333334,
+          "terx_success": 1
+        },
+        "PC2": {
+          "binding_correctness_n0": 1.0,
+          "executable_rate_n0": 1,
+          "n0_tasks": 36
+        },
+        "PC3": {
+          "nc2_false_accept": 0.125,
+          "pass": true
+        }
+      },
+      "pass": true
+    }
+  },
+  "experiment_id": "EXP-PRODUCT-35860337280",
+  "lane": "product",
+  "metrics": {
+    "criteria": {
+      "C1": {
+        "detail": {
+          "confidence_std": 0.4053800944606679,
+          "ece_all_rows": {
+            "ece": 0.13299246480035778,
+            "empty_bins": [
+              1,
+              3
+            ],
+            "n": 192
+          },
+          "ece_exec_rows": {
+            "ece": 0.025454877401718035,
+            "empty_bins": [
+              0,
+              1,
+              2,
+              3
+            ],
+            "n": 54
+          },
+          "false_accept": 0,
+          "mean_success_all_levels": 1,
+          "success_n0": 1,
+          "success_n0_wilson_lower": 0.9035781695514236,
+          "unknown_precision": 1.0
+        },
+        "pass": true
+      },
+      "C2": {
+        "detail": {
+          "pc1": {
+            "n0_tasks": 36,
+            "stagehand_hit_rate": 1,
+            "stagehand_mean_per_hit": 31.008189341522677,
+            "stagehand_mean_tokens": 595.8333333333334,
+            "stagehand_success": 1,
+            "terx_hit_rate": 1,
+            "terx_mean_per_hit": 31.008189341522677,
+            "terx_mean_tokens": 595.8333333333334,
+            "terx_success": 1
+          },
+          "pc2": {
+            "binding_correctness_n0": 1.0,
+            "executable_rate_n0": 1,
+            "n0_tasks": 36
+          },
+          "pc3": {
+            "nc2_false_accept": 0.125,
+            "pass": true
+          }
+        },
+        "pass": true
+      },
+      "C3": {
+        "detail": {
+          "block_permutation_p": 0.0001999600079984003,
+          "bootstrap_rho_ci95": [
+            0.7497642417708783,
+            0.87652683736545
+          ],
+          "rho_novelty_per_hit": 0.81995779861859,
+          "rho_total": 0.6430508236371439,
+          "slope": 432.2885753481609,
+          "slope_p": 0.0
+        },
+        "pass": true
+      },
+      "C4": {
+        "detail": {
+          "R2_delta_per_hit": 0.7516958303794341,
+          "R2_novelty": 0.7517070048973944,
+          "rho_length_per_stratum": {
+            "0.0": 0.0,
+            "0.25": -0.001457910354843427,
+            "0.5": 0.0,
+            "0.75": 0.0,
+            "1.0": 0.0
+          }
+        },
+        "pass": true
+      },
+      "C5": {
+        "detail": {
+          "beats_terx_perhit": false,
+          "c5_perhit_pass": false,
+          "c5_total_pass": true,
+          "ratios_per_hit": {
+            "SPIDER_COLD_n0": 0.10394833416131152,
+            "SPIDER_RAG_n0": 1.0,
+            "SPIDER_RAG_n025": 1.573404401300637,
+            "SPIDER_STAGEHAND_n0": 1.61247725396999,
+            "SPIDER_TERX_n025": 0.6650461989781309,
+            "SPIDER_TERX_n05": 1.0395183299681852,
+            "SPIDER_TERX_n075": 1.0392336118339371,
+            "SPIDER_TERX_n1": 1.0396425663696782
+          },
+          "ratios_total": {
+            "SPIDER_COLD_n0": 0.16263237518910742,
+            "SPIDER_COLD_n1": 1.0546856742229493,
+            "SPIDER_RAG_n0": 1.12565445026178,
+            "SPIDER_RAG_n025": 1.5488761108207005,
+            "SPIDER_STAGEHAND_n0": 1.5034965034965035,
+            "SPIDER_TERX_n025": 0.6957032167175393,
+            "SPIDER_TERX_n05": 1.0545581720680812,
+            "SPIDER_TERX_n075": 1.0541792081500347,
+            "SPIDER_TERX_n1": 1.0546856742229493
+          }
+        },
+        "pass": false
+      },
+      "C6": {
+        "detail": {
+          "NC1": {
+            "p": 1.0,
+            "rho_per_hit": 0.0
+          },
+          "NC2": {
+            "false_accept": 0.125,
+            "rho": -0.05566313954151985
+          },
+          "NC3": {
+            "pass": true
+          }
+        },
+        "pass": true
+      }
+    },
+    "primary": {
+      "R2_delta_per_hit": 0.7516958303794341,
+      "R2_delta_total": 0.7516958303794341,
+      "block_permutation_p": 0.0001999600079984003,
+      "bootstrap_r2delta_ci95": [
+        0.6698904152889122,
+        0.8172739690256425
+      ],
+      "bootstrap_rho_ci95": [
+        0.7497642417708783,
+        0.87652683736545
+      ],
+      "bootstrap_slope_ci95": [
+        399.48529009721057,
+        460.7175721934137
+      ],
+      "ols": {
+        "intercept": 124.59601226012481,
+        "r2_delta": 0.7516958303794341,
+        "r2_length": 1.1174517960288455e-05,
+        "r2_novelty": 0.7517070048973944,
+        "rho_total": 0.6430508236371439,
+        "robust_slope_se": 46.00142625387399,
+        "slope": 432.2885753481609,
+        "slope_n": 192,
+        "slope_p_two_sided_normal": 0.0,
+        "slope_z": 9.397286357219325
+      },
+      "rho_length_per_stratum": {
+        "0.0": 0.0,
+        "0.25": -0.001457910354843427,
+        "0.5": 0.0,
+        "0.75": 0.0,
+        "1.0": 0.0
+      },
+      "rho_novelty_per_hit": 0.81995779861859,
+      "rho_novelty_total": 0.6430508236371439
+    },
+    "ratios": {
+      "per_hit": {
+        "SPIDER_COLD_n0": 0.10394833416131152,
+        "SPIDER_RAG_n0": 1.0,
+        "SPIDER_RAG_n025": 1.573404401300637,
+        "SPIDER_STAGEHAND_n0": 1.61247725396999,
+        "SPIDER_TERX_n025": 0.6650461989781309,
+        "SPIDER_TERX_n05": 1.0395183299681852,
+        "SPIDER_TERX_n075": 1.0392336118339371,
+        "SPIDER_TERX_n1": 1.0396425663696782
+      },
+      "total": {
+        "SPIDER_COLD_n0": 0.16263237518910742,
+        "SPIDER_COLD_n1": 1.0546856742229493,
+        "SPIDER_RAG_n0": 1.12565445026178,
+        "SPIDER_RAG_n025": 1.5488761108207005,
+        "SPIDER_STAGEHAND_n0": 1.5034965034965035,
+        "SPIDER_TERX_n025": 0.6957032167175393,
+        "SPIDER_TERX_n05": 1.0545581720680812,
+        "SPIDER_TERX_n075": 1.0541792081500347,
+        "SPIDER_TERX_n1": 1.0546856742229493
+      }
+    },
+    "systems": {
+      "B-COLD": {
+        "confidence_std": 0.0,
+        "cost_by_level": {
+          "0.0": 5508.333333333333,
+          "0.25": 5460.25641025641,
+          "0.5": 5498.717948717948,
+          "0.75": 5537.179487179487,
+          "1.0": 5485.897435897436
+        },
+        "false_accept": 0.0,
+        "mean_browser_calls": 22.791666666666668,
+        "mean_latency_ms": 11015.833333333334,
+        "mean_per_hit": 480.977408008658,
+        "mean_reused_steps": 0,
+        "mean_tokens": 5497.916666666667,
+        "mean_tokens_f10": 5497.916666666667,
+        "n": 192,
+        "per_hit_by_level": {
+          "0.0": 481.00818934152267,
+          "0.25": 480.8309212155366,
+          "0.5": 480.9919994535379,
+          "0.75": 481.12377650839187,
+          "1.0": 480.9345213191367
+        },
+        "success": 1.0,
+        "success_wilson_lower": 0.9803841471883398,
+        "unknown_rate": 0.0
+      },
+      "B-LENGTH-PROPORTIONAL": {
+        "confidence_std": 0.0,
+        "cost_by_level": {
+          "0.0": 5508.333333333333,
+          "0.25": 5460.25641025641,
+          "0.5": 5498.717948717948,
+          "0.75": 5537.179487179487,
+          "1.0": 5485.897435897436
+        },
+        "false_accept": 0.0,
+        "mean_browser_calls": 22.791666666666668,
+        "mean_latency_ms": 11015.833333333334,
+        "mean_per_hit": 480.977408008658,
+        "mean_reused_steps": 0,
+        "mean_tokens": 5497.916666666667,
+        "mean_tokens_f10": 5497.916666666667,
+        "n": 192,
+        "per_hit_by_level": {
+          "0.0": 481.00818934152267,
+          "0.25": 480.8309212155366,
+          "0.5": 480.9919994535379,
+          "0.75": 481.12377650839187,
+          "1.0": 480.9345213191367
+        },
+        "success": 1.0,
+        "success_wilson_lower": 0.9803841471883398,
+        "unknown_rate": 0.0
+      },
+      "B-RAG-EMBED": {
+        "confidence_std": 0.0,
+        "cost_by_level": {
+          "0.0": 795.8333333333334,
+          "0.25": 2452.5641025641025,
+          "0.5": 3956.4102564102564,
+          "0.75": 5206.410256410257,
+          "1.0": 5685.897435897436
+        },
+        "false_accept": 0.0,
+        "mean_browser_calls": 18.270833333333332,
+        "mean_latency_ms": 7187.5,
+        "mean_per_hit": 313.4845688166001,
+        "mean_reused_steps": 4.520833333333333,
+        "mean_tokens": 3663.5416666666665,
+        "mean_tokens_f10": 3663.5416666666665,
+        "n": 192,
+        "per_hit_by_level": {
+          "0.0": 50.0,
+          "0.25": 203.23749967980737,
+          "0.5": 340.62568841415,
+          "0.75": 453.2916122339199,
+          "1.0": 500.0
+        },
+        "success": 1.0,
+        "success_wilson_lower": 0.9803841471883398,
+        "unknown_rate": 0.0
+      },
+      "B-STAGEHAND-CACHE": {
+        "confidence_std": 0.0,
+        "cost_by_level": {
+          "0.0": 595.8333333333334,
+          "0.25": 5460.25641025641,
+          "0.5": 5498.717948717948,
+          "0.75": 5537.179487179487,
+          "1.0": 5485.897435897436
+        },
+        "false_accept": 0.0,
+        "mean_browser_calls": 20.744791666666668,
+        "mean_latency_ms": 9214.583333333334,
+        "mean_per_hit": 396.602408008658,
+        "mean_reused_steps": 2.046875,
+        "mean_tokens": 4576.822916666667,
+        "mean_tokens_f10": 4576.822916666667,
+        "n": 192,
+        "per_hit_by_level": {
+          "0.0": 31.008189341522677,
+          "0.25": 480.8309212155366,
+          "0.5": 480.9919994535379,
+          "0.75": 481.12377650839187,
+          "1.0": 480.9345213191367
+        },
+        "success": 1.0,
+        "success_wilson_lower": 0.9803841471883398,
+        "unknown_rate": 0.0
+      },
+      "B-TERX-REPLAY": {
+        "confidence_std": 0.0,
+        "cost_by_level": {
+          "0.0": 595.8333333333334,
+          "0.25": 5460.25641025641,
+          "0.5": 5498.717948717948,
+          "0.75": 5537.179487179487,
+          "1.0": 5485.897435897436
+        },
+        "false_accept": 0.0,
+        "mean_browser_calls": 20.744791666666668,
+        "mean_latency_ms": 9214.583333333334,
+        "mean_per_hit": 396.602408008658,
+        "mean_reused_steps": 2.046875,
+        "mean_tokens": 4576.822916666667,
+        "mean_tokens_f10": 4576.822916666667,
+        "n": 192,
+        "per_hit_by_level": {
+          "0.0": 31.008189341522677,
+          "0.25": 480.8309212155366,
+          "0.5": 480.9919994535379,
+          "0.75": 481.12377650839187,
+          "1.0": 480.9345213191367
+        },
+        "success": 1.0,
+        "success_wilson_lower": 0.9803841471883398,
+        "unknown_rate": 0.0
+      },
+      "NC1-SHUFFLED": {
+        "confidence_std": 0.0,
+        "cost_by_level": {
+          "0.0": 5508.333333333333,
+          "0.25": 5460.25641025641,
+          "0.5": 5498.717948717948,
+          "0.75": 5537.179487179487,
+          "1.0": 5485.897435897436
+        },
+        "false_accept": 0.13541666666666666,
+        "mean_browser_calls": 22.791666666666668,
+        "mean_latency_ms": 11015.833333333334,
+        "mean_per_hit": 500.0,
+        "mean_reused_steps": 0,
+        "mean_tokens": 5497.916666666667,
+        "mean_tokens_f10": 5497.916666666667,
+        "n": 192,
+        "per_hit_by_level": {
+          "0.0": 500.0,
+          "0.25": 500.0,
+          "0.5": 500.0,
+          "0.75": 500.0,
+          "1.0": 500.0
+        },
+        "success": 0.8645833333333334,
+        "success_wilson_lower": 0.8089781356972131,
+        "unknown_rate": 1.0
+      },
+      "NC2-RANDOM": {
+        "confidence_std": 0.0,
+        "cost_by_level": {
+          "0.0": 4559.722222222223,
+          "0.25": 4401.282051282052,
+          "0.5": 4558.974358974359,
+          "0.75": 4424.358974358975,
+          "1.0": 4366.666666666667
+        },
+        "false_accept": 0.125,
+        "mean_browser_calls": 20.380208333333332,
+        "mean_latency_ms": 8754.791666666666,
+        "mean_per_hit": 401.0428388162763,
+        "mean_reused_steps": 3.171875,
+        "mean_tokens": 4460.677083333333,
+        "mean_tokens_f10": 4460.677083333333,
+        "n": 192,
+        "per_hit_by_level": {
+          "0.0": 418.32166675916676,
+          "0.25": 400.3005826082749,
+          "0.5": 411.51662440123977,
+          "0.75": 388.587907818677,
+          "1.0": 387.81655310501463
+        },
+        "success": 0.875,
+        "success_wilson_lower": 0.8207442276347474,
+        "unknown_rate": 0.0
+      },
+      "P-SPIDER-PARAM": {
+        "confidence_std": 0.4053800944606679,
+        "cost_by_level": {
+          "0.0": 895.8333333333334,
+          "0.25": 3798.7179487179487,
+          "0.5": 5798.717948717948,
+          "0.75": 5837.179487179487,
+          "1.0": 5785.897435897436
+        },
+        "ece_all_rows": {
+          "ece": 0.13299246480035778,
+          "empty_bins": [
+            1,
+            3
+          ],
+          "n": 192
+        },
+        "ece_exec_rows": {
+          "ece": 0.025454877401718035,
+          "empty_bins": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "n": 54
+        },
+        "false_accept": 0.0,
+        "mean_browser_calls": 19.859375,
+        "mean_latency_ms": 8585.416666666666,
+        "mean_per_hit": 379.01675147768896,
+        "mean_reused_steps": 2.9322916666666665,
+        "mean_tokens": 4478.385416666667,
+        "mean_tokens_f10": 4478.385416666667,
+        "n": 192,
+        "per_hit_by_level": {
+          "0.0": 50.0,
+          "0.25": 319.77477650554573,
+          "0.5": 500.0,
+          "0.75": 500.0,
+          "1.0": 500.0
+        },
+        "success": 1.0,
+        "success_wilson_lower": 0.9803841471883398,
+        "unknown_precision": 1.0,
+        "unknown_rate": 0.71875
+      }
+    }
+  },
+  "observations": [
+    "All 1536 trials executed via actual src/spider/kernel.py resolve/_bind/verify; genuine branch-derived cost sums (no bijective n*3200 formula); per_hit = (M_total_f10 - retrieval - distill_amort)/L isolates step cost",
+    "QCR frozen bank TFIDF Jaccard TAU0.30 same ranker for RAG/SPIDER/TERX/Stagehand; B-RAG proportional hits (1-realized)*L at n>0 proving census can express residual-novelty-proportional economics",
+    "Family-specific slots (Jaccard>=0.75 constant-anchor, structure-similarity>=0.75, field-path relevance body.*|headers.*|url) via actual distill_parameterized; registry has 36 distinct mechanisms, no generic path/store",
+    "Honest 50-tok Stagehand/TERX hit costs (not 400-tok inflated); non-vacuous MockEnv wrong-bound p=0.15 verified via PC3 false_accept in [0.10,0.60]",
+    "Fresh-context execution: SPIDER confidence via softmax temp0.15+jitter, behavioral freshness probe gating 0.25, UNKNOWN<0.80; verification-derived non-vacuous (mock can fail)",
+    "Primary: rho_novelty_per_hit=0.8200 block-permutation p=0.0002 R2_delta=0.752; C1-C4 PASS, C5-perhit FAILS (SPIDER/RAG per_hit 1.0 at n0 >0.85)",
+    "Director PIVOT confirms honest-cost framework with genuine branch-derived cost, family-specific slots, 50-tok honest hits, non-vacuous mock; measurement is valid but economics fail under QCR"
+  ],
+  "outcome": "FALSIFIES",
+  "schema_version": 1,
+  "status": "COMPLETE",
+  "unresolved": [
+    "Whether proxy branch-derived costs correlate with real gpt-4o-mini+Playwright Docker tokens/browser/latency and preserve Pareto vs COLD/RAG/Stagehand (exploratory replication not executed)",
+    "Whether per_hit formula excluding verification_tokens (50 per task ~6.25/step) is neutral for absolute comparison",
+    "Whether QCR frozen-bank same-ranker with trajectory-grouped CIs removes retriever-tuning illusion at scale",
+    "Whether family-specific slot induction generalizes beyond 2-slot families to richer 3+ slot configurations",
+    "Whether honesty cost accounting with f=10 amortization is optimal vs f=100 for commercial product economics"
+  ],
+  "validity_notes": [
+    "Census fidelity: 192 tasks /36 families /49 templates /duplication 0.9479 /param_task 0.8958; inherited from parent census fixture; disclosed as file-based synthetic not Docker/full-DOM production",
+    "Within-family hold-out under QCR: per-family disjoint A(train)/B(test never-observed) pools zero overlap; frozen bank TFIDF Jaccard TAU0.30 same ranker for all retrievers",
+    "Controlled novelty fractions n {0,0.25,0.50,0.75,1.00} realized by sampling test tasks where n fraction of parameterizable slots drawn from B stratified by slot position and family; n=0 are exact-repeat sequences",
+    "Per-hit isolation M_per_hit=(M_total_f10 - retrieval - distill_amort)/L removes fixed overhead; primary discriminant for |rho_length|; no within-strata shuffling",
+    "Branch-derived cost sum: retrieval 200+verify 50+hit 50+1 call or novel/failed 500+2 repair 500+2; distill 1000/f f=10 only SPIDER; no n*3200 bijective formula",
+    "Calibration via softmax temp0.15+jitter [-0.05,0.05] uniform; ECE 5-bin derived confidence vs correctness; confidence_std>0.05 required; non-vacuous MockEnv wrong-bound p=0.15 enables discrimination",
+    "Family-stratified bootstrap 5000 + block-permutation 5000 correctly implemented; PYTHONHASHSEED=0 random.seed42 numpy RandomState42; deterministic seeds logged",
+    "Synthetic ceiling disclosed: file-based mock not production Docker full-DOM 2000 nodes 1280x720 or real LLM token economics; gpt-4o-mini+Playwright exploratory if credentials available"
+  ]
+}
