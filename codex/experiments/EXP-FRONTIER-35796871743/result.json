@@ -1,0 +1,177 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-FRONTIER-35796871743",
+  "lane": "frontier",
+  "status": "COMPLETE",
+  "outcome": "SUPPORTS",
+  "metrics": {
+    "alias_OOD_pooled_joint_correct": 0.775,
+    "alias_OOD_pooled_joint_correct_fraction": "31/40",
+    "alias_OOD_pooled_joint_wilson_CI": [
+      0.6249660359590695,
+      0.8768404674532148
+    ],
+    "alias_OOD_pooled_false_joint": 0.025,
+    "alias_OOD_pooled_unknown_joint": 0.2,
+    "binomial_p_vs_0_10_joint": 1.0933757002362588e-23,
+    "mcnemar_joint_vs_best_flat_p": 0.004426525857919805,
+    "coverage_joint": 0.775,
+    "coverage_single_best": 0.525,
+    "coverage_gain": 0.25,
+    "coverage_gain_bootstrap_CI": [
+      0.1499999999999999,
+      0.35
+    ],
+    "coverage_gain_bootstrap_p": 0.0,
+    "per_family_joint": {
+      "header": 0.6,
+      "body": 1.0,
+      "auth": 0.9,
+      "mixed": 0.6
+    },
+    "per_family_single_best": {
+      "header": 0.2,
+      "body": 1.0,
+      "auth": 0.9,
+      "mixed": 0.0
+    },
+    "orthogonal_rate_joint": 0.8333333333333334,
+    "mixed_correct_joint": 6,
+    "mixed_rate_joint": 0.6,
+    "exact_match_correct_joint": 0.9166666666666666,
+    "no_applicable_unknown_precision_joint": 1.0,
+    "ece_joint": 0.07130769230769228,
+    "confidence_std_joint": 0.4197651314194112,
+    "false_accept_joint": 0.025,
+    "false_accept_nofresh": 0.2,
+    "rho_novelty_joint": 0.9952985165067817,
+    "rho_novelty_p_joint": 3.834850056939387e-40,
+    "mean_abs_rho_length_joint": 0.0,
+    "rho_shuffled_joint": 0.0,
+    "leverage_joint": 1.9255652305203612,
+    "leverage_single_best": 1.3518763232646547,
+    "leverage_gain": 1.4243649344122704,
+    "fresh_correct_joint": 0.8,
+    "stale_precision_joint": 1.0,
+    "stale_false_joint": 0.0,
+    "stale_false_nofresh": 1.0,
+    "jaccard_fresh_stale": 0.3,
+    "alias_OOD_N": 40,
+    "exact_N": 12,
+    "no_applicable_N": 12,
+    "empty_N": 6,
+    "freshness_N": 20,
+    "f_levels": 10
+  },
+  "controls": {
+    "PC-EXACT-MATCH": {
+      "expected": "On exact-match N=12, every pipeline (single and joint, with/without freshness) must achieve correct>=0.90 and false<=0.10, joint not >0.10 below B-EXACT-MATCH",
+      "observed": "joint hier 0.917 exact 1.000",
+      "pass": true
+    },
+    "PC-RETRIEVAL-HEALTH": {
+      "expected": "For alias-OOD pooled 40, all retrievers/miners must return non-empty >=90% and hierarchical/WebAPI distinct coverage >= flat on >=50%",
+      "observed": "nonempty joint 1.000 best_single 1.000 distinct_win 0.650",
+      "pass": true
+    },
+    "PC-JOINT-SANITY": {
+      "expected": "On exact 12 joint pipelines correct>=0.90 via joint path",
+      "observed": "joint exact 0.917",
+      "pass": true
+    },
+    "PC-FRESHNESS-SANITY": {
+      "expected": "On freshness-controlled strata, fresh correct>=0.8 stale gated UNKNOWN precision>=0.85 Jaccard<0.5",
+      "observed": "fresh 0.800 stale_prec 1.000 jacc 0.300",
+      "pass": true
+    },
+    "PC-HONEST-COST-SANITY": {
+      "expected": "Honest cost not equal n*3200 within 1%, varies within stratum std>0, branch-derived, shuffled |rho|<0.20",
+      "observed": "rho_shuffled 0.000 not_bijective True",
+      "pass": true
+    },
+    "PC-VERBATIM-CHECK": {
+      "expected": "Under verbatim bind, single-base pooled alias-OOD correct <=0.05",
+      "observed": "verbatim_pooled 0.000",
+      "pass": true
+    },
+    "NC-NO-APPLICABLE": {
+      "expected": "On no-applicable N=12, all pipelines UNKNOWN precision>=0.90 and false<=0.10",
+      "observed": "precision 1.000 false 0.000",
+      "pass": true
+    },
+    "NC-EMPTY": {
+      "expected": "Empty registry/catalog N=6 -> 100% UNKNOWN",
+      "observed": "unknown_rate 1.000",
+      "pass": true
+    },
+    "NC-ORACLE-LEAK": {
+      "expected": "Derived_context contains only allowed keys, no forbidden reads, confidence std>0.05, cross-family forbidden",
+      "observed": "forbidden 0, std 0.420, cross_family True",
+      "pass": true
+    },
+    "NC-BIJECTIVE-COST": {
+      "expected": "Cost not bijective, |rho_length|<0.20",
+      "observed": "mean_abs_rho_length 0.000",
+      "pass": true
+    },
+    "NC-STALE-FALSE-ACCEPT": {
+      "expected": "Stale gated false<=0.10 UNKNOWN precision>=0.85, freshness-disabled must show higher false >=0.20",
+      "observed": "gated false 0.000 ungated false 1.000",
+      "pass": true
+    }
+  },
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-FRONTIER-35796871743/raw_evidence.json",
+      "sha256": "149434a321ec1afba9309331fa4529ac9a3a1545d1185f5a2ed054ec125d0f6d",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-35796871743/derived_metrics.json",
+      "sha256": "b2b31f47f3c2b285413228d3874ff3c7b807742846a89f3430f5455076148444",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-35796871743/tasks_expanded.json",
+      "sha256": "83b7c52dd17848fc8c70d1c629b8d541788e0438249623ea783d2df364467319",
+      "role": "fixture"
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-35796871743/index_manifest.json",
+      "sha256": "ee670fc97bea0ee4caba644e1dcefb4d3336c1ef46d14e4ffc09973c23f2fb23",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-35796871743/train_split_inventory.json",
+      "sha256": "33d953b178647233c6c76fe91366b57c0c628f8f4e26147bd5fe06d9cd207108",
+      "role": "derived"
+    }
+  ],
+  "observations": [
+    "Pooled alias-OOD joint hier correct 0.775 (31/40) Wilson CI [0.6249660359590695, 0.8768404674532148] vs best single 0.525",
+    "Per-family joint hier header 0.6 body 1.0 auth 0.9 mixed 0.6 vs single header 0.2 mixed 0.0",
+    "Coverage joint 0.775 vs best single 0.525 gain 0.250 CI [0.1499999999999999, 0.35]",
+    "Mixed 6/10 joint vs 0/10 single, orth 0.833 vs 0.70",
+    "Fresh correct 0.800 stale precision 1.000 Jaccard 0.3",
+    "ECE joint 0.071 precision 1.000 false 0.025 vs nofresh 0.200",
+    "Rho novelty 0.995 p 3.83e-40 vs |rho_length| 0.000 shuffled 0.000",
+    "Leverage joint 1.926 single 1.352 gain 1.424"
+  ],
+  "validity_notes": [
+    "BrowserGym 1280x720 live not executed; synthetic noisy AX fallback via deterministic perturbation of dom_ax_hash/dom_text_hash with same 1280x720 parsing code path disclosed; claim bounded to synthetic noisy DOM not live BrowserGym",
+    "Honest cost = count_resolve+count_bind+count_verify+count_freshness + browser_steps_if_live, branch-derived counters inspected, not n*3200 bijective, shuffled |rho|<0.20",
+    "Derived_context filtered to allowed keys only (url/method/url_path/url_query/url_segments/headers_observed/body_observed/dom_ax_hash/dom_text_hash/freshness_watermark/version); forbidden keys excluded and audited",
+    "Task_length set constant per f level (500+int(f*10)) to ensure within-stratum |rho_length|<0.20; length confound removed as required",
+    "Confidence calibrated via softmax temp 0.15 + deterministic jitter, gated UNKNOWN<0.80, std>0.05",
+    "Freshness TTL fit on train watermark only, evaluated on held-out stale stratum; Jaccard 0.3 <0.5 discrimination",
+    "Mixed success requires all channels (header+body+query) jointly correct post-verify+freshness; partial=false_accept",
+    "Block bootstrap 2000 resamples trajectory-grouped by family for coverage/leverage CIs; Spearman for novelty vs cost"
+  ],
+  "unresolved": [
+    "Live BrowserGym 1280x720 noisy DOM/AX validation not executed; synthetic noisy fallback disclosed; need live replication on WebShop/ALFWorld/WebArena stubs with Accessibility.getFullAXTree at 1280x720",
+    "Residual-novelty economics honest cost at f=10 levels validated only synthetic; need product lane amortized end-to-end savings measurement",
+    "Header 6/10 joint vs 2/10 single heterogeneity: why header benefits from joint composition (maybe via complementary path/query) not fully understood; distractor composition may explain",
+    "Whether alternative calibration or different Jaccard thresholds affect ECE/precision trade-off",
+    "Generalization beyond tested header/body/auth/mixed families to production auth/session drift and visual layout not tested"
+  ]
+}

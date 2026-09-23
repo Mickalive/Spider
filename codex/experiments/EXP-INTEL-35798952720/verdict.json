@@ -1,0 +1,34 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-35798952720",
+  "lane": "intel",
+  "decision": "MEASUREMENT_INVALID",
+  "claim_updates": [
+    {
+      "claim_id": "C-CROSSSITE",
+      "status": "MEASUREMENT_INVALID",
+      "reason": "H1/H2/H3 all MEASUREMENT_INVALID per frozen decision_rule infrastructure precedence, not falsified. H1 fails adequate-run threshold: only 2/10 sampled families (136,222) and 4/36 overall have __SHOPPING__/path product URLs (audit V1 critical, product_page_families=2 valid_families=10), despite 20/20 CDP AX captures 626-1430 nodes at 1280x720 (PC1 PASS). Full-tree grammar removes [:20] in extract_fulltree_pattern but product-subtree isolation fails: subtree_node_count=1 hash='' for all 20 captures and derive_normalized_selector still truncates selectors[:20] (audit V2 high), delta_vs_truncated=0.0 mean 0.8 CI[0.5,1.0] homepage-dominated (8x1 homepage, 2x0 product). Shuffle null degenerate tautology std=0 p=1.0 due to family-order shuffle without score permutation (audit V3 critical, measure.py:553-562) + 8/10 identical scores, so NC1 FAIL. H2 fails <30 families (20 attempted, drift 10 <20) and drift injection invalid: string replace class=\"product\" not present in Magento HTML, hash not via page.evaluate, false_accept 1.0 MISS 0.0 (audit V4 critical, V6 high: 33/40 fallback famXXX selectors), speedup 0.44x inverted sub-ms dict artifact not real dispatch (V5 high). H3 fails corpus_unavailable: webgym ImportError site_count 0 (V8). Gate0 0/10 even with 110 transitions/family (NL=3 strata=3 H0.12-0.22) insufficient density (V9). No cross-site evidence, no within-store family hold-out validated; C-CROSSSITE remains single-store HYPOTHESIS-equivalent MEASUREMENT_INVALID."
+    }
+  ],
+  "product_action": "HOLD",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "After fixing 8 audit-required repairs — (1) trajectory-grouped shuffle permuting per-family scores with variance>0, (2) product-subtree isolation removing selectors[:20] and verifying subtree_node_count>1 distinct hash on 4 path families, (3) page.evaluate mutation + page.content() SHA256 recomputed after mutation, (4) real dispatch latency/tokens via Playwright navigation+hash+cache on >=30 families, (5) exclusively derived selectors, (6) shopping_admin 184-task/42-family expansion to achieve >=5 product-page families, (7) WebGym corpus install via alternative URL for >=50 diverse eTLD+1 census with duplication 95%CI and threshold sweep 0.818-0.9479, (8) Playwright multi-step 50 transitions/family — can N=20 product-page AX_consistency achieve mean>=0.6 CI lower>0.5 p<0.05 delta>=0.1 vs truncated with variance>0, and can Stagehand achieve HIT>=0.8 MISS>=0.8 false_accept<0.05 beats NC4 with true ~2x/~30%, plus WebGym duplication distinct from 0.9479 and >=1 relaxed Gate0 H>0.1 NL>=20?",
+  "reason": "Audit status MEASUREMENT_INVALID, producer_claim_supported false, 8 required_fixes, claim_ceiling bounds to substrate description only. Recomputed metrics confirm: AX mean 0.8 CI[0.5,1.0] equals truncated mean 0.8 delta 0.0 product families both score 0, shuffle p=1.0 std 0 tautology, Hit 0.943 but drift 0.0 false_accept 1.0 with 33 fallback selectors speedup 0.44x inverted, WebGym null, Gate0 NL3. Placeholder fix verified but product URL scarcity (4/36) and audit V1-V9 bugs (shuffle code, subtree empty, drift injection absent, fallback selectors, <30 families, corpus missing, strata density) block SURVIVES or bounded FALSIFIED. Per frozen infrastructure precedence (<5 product families) => MEASUREMENT_INVALID substrate_unavailable, not scientific falsification. Max justified is Docker liveness + census replication; no within-store parameterized transfer, no Stagehand baseline replication, no diverse-site or Gate0 census. No promotion.",
+  "evidence_refs": [
+    "research/experiments/EXP-INTEL-35798952720/spec.json:claim_ids [C-CROSSSITE] hypothesis H1_AX_FULLTREE decision_rule infrastructure precedence",
+    "research/experiments/EXP-INTEL-35798952720/request.json:director_mandate PIVOT C-CROSSSITE question cognitive_reset SUPERSEDE",
+    "research/experiments/EXP-INTEL-35798952720/prereg.md sha e9aba99d55ccebf90d4de5a0081fe78ea263e9c8891b9d36bb170a21be36c1df",
+    "research/experiments/EXP-INTEL-35798952720/freeze.json sha 6ebd2a12427d06a71dbba3a893e6d5e8023addf99167ea08777bdfaeca44d45f",
+    "research/experiments/EXP-INTEL-35798952720/result.json:metrics M-AX-CONSISTENCY mean 0.8 CI[0.5,1.0] shuffle p1.0 delta_vs_truncated 0.0 product_page_families 2 homepage_families 8; controls B-RANDOM-AX-SHUFFLE FAIL NC1 FAIL NC3 FAIL B-WEBGYM-HARDCODED-09479 MEASUREMENT_INVALID",
+    "research/experiments/EXP-INTEL-35798952720/audit.json:status MEASUREMENT_INVALID producer_claim_supported false required_fixes 8 validity_findings V1-V9 claim_ceiling no C-CROSSSITE claim beyond substrate description recomputed_metrics per_family 8x1 2x0 shuffle_std 0 drift_miss 0.0 false_accept 1.0 speedup 0.444",
+    "research/experiments/EXP-INTEL-35798952720/artifacts/raw/ax_captures.jsonl:20 captures 626-1430 nodes 4 product 16 homepage subtree_node_count 1 hash ''",
+    "research/experiments/EXP-INTEL-35798952720/artifacts/derived/ax_consistency_fulltree.json:per_family 8x1 2x0 mean 0.8 shuffle_std 0.0 p1.0 delta_vs_truncated 0.0 truncated_mean 0.8",
+    "research/experiments/EXP-INTEL-35798952720/artifacts/derived/stagehand_replication_recomputed.json:hit_rate 0.943 hits 50 misses 3 drift_miss 0.0 false_accept 1.0 families_attempted 20 fallback_selectors 33 speedup 0.444 median_cold 0.00095 median_cached 0.00214",
+    "research/experiments/EXP-INTEL-35798952720/artifacts/derived/webgym_census.json:available false site_count 0",
+    "research/experiments/EXP-INTEL-35798952720/artifacts/derived/gate0_relaxed_table.json:relaxed_pass 0 strict 0 multi_step 110 transitions per_family NL 3 strata 3 H 0.12-0.22",
+    "research/intel/exp_35798952720_measure.py sha c5060732c3b975d38c862a9446f9d8a3098566460a91fca71786669f54c68a05: full-tree grammar, longest_common_prefix, derive_normalized_selector[:20], StagehandCacheRecomputed, shuffle/drift/speedup code audit V3-V6",
+    "research/experiments/EXP-INTEL-35798952720/provenance.json:docker am1n3e/webarena-verified-shopping@sha256:3e8cb9b945 BrowserGym-core 0.14.3 import fails AgentLab 0.4.2 Playwright 1.44.0 seed 35725763380",
+    "research/experiments/EXP-INTEL-35749371101/artifacts/raw/webarena-verified.json sha d65275660814663375028e9017e1f929e3c38321041b125795e2713b52243d30:192 shopping tasks 36 families ge3 path_families [136,145,196,222] duplication 0.9479"
+  ]
+}

@@ -1,0 +1,64 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-35797365772",
+  "lane": "product",
+  "target_lane": "product",
+  "next_question": "Does relaxing behavioral freshness gating from 0.25 to a higher (0.50) or slot-aware threshold enable SPIDER parameterized inheritance to execute at partial novelty (n=0.25) and achieve per_hit cost <=0.85x RAG-EMBED and <1.0x TERX with false_accept<=0.10 and UNKNOWN_precision>=0.85/ECE<=0.15 under QCR with non-vacuous mock on the 192/36 file-based census before scaling to gpt-4o-mini+Playwright Docker replication?",
+  "why_next": "Audit identifies single dominant blocker: freshness gating threshold 0.25 causes 71.9% UNKNOWN fallback to COLD at any partial novelty (realized_novelty>0.25 pushes behavioral_score 0.8 gating), making SPIDER per_hit equal COLD (500) at n>=0.5 and more expensive than RAG (320 vs 203 at n0.25). High rho 0.82 and R2 0.75 are artifacts of this binary gating, not proportional cost tracking. RAG proves environment CAN express proportional scaling. Fixing gating is the highest-information, cheapest falsifier before investing in expensive gpt-4o-mini+Playwright Docker full-DOM replication; it directly tests audit unresolved 1-2 and requires only kernel threshold change and re-measurement on same file-based census with same QCR bank and non-vacuous mock calibration checks.",
+  "carry_forward": {
+    "established": [
+      "WebArena-Verified v2 proxy file-based census 192 tasks /36 families /49 templates /duplication 0.9479 /param_task 0.8958 /L 8-14 family-specific slots ${sku},${store_id},${variant},${category} via actual src/spider/kernel.py distill_parameterized Jaccard>=0.75 constant-anchor structure-similarity>=0.75 field-path relevance exists as committed code (artifacts/registry.jsonl 36 mechanisms distinct, fixtures/tasks.json sha f9537168, provenance.json code_hashes kernel 04ca13d0)",
+      "Positive controls PASS via genuine kernel resolve/_bind/verify with non-vacuous MockEnv p=0.15: PC1 B-TERX and B-STAGEHAND hit_rate 1.0 at n0 per_hit 50 tok success 1.0 (n=36), PC2 SPIDER binding_correctness 1.0 at n0 via _bind (36/36), PC3 NC2 forced wrong-bound false_accept 0.3125 in [0.10,0.60] proving mock can fail (result.json:controls, audit.json:recomputed_metrics, validity_findings[5])",
+      "C3/C4 technically PASS on per_hit isolated metric M_per_hit=(M_total_f10 - retrieval - distill)/L: rho_novelty_per_hit 0.8199 CI[0.749,0.876] block-permutation p0.0002 slope 432.29 p<1e-9, R2_delta_per_hit 0.751 R2_novelty 0.751, |rho_length| per stratum 0.0 to -0.001 (all <0.20) via honest branch-derived cost sums no bijective formula no shuffling (result.json:metrics.primary, audit.json:recomputed_metrics, validity_findings[5] stdlib 5000 bootstrap/permutation seeds PYTHONHASHSEED0/42)",
+      "RAG-EMBED under QCR frozen bank TFIDF Jaccard TAU0.30 same ranker demonstrates proportional cost scaling: per_hit 50 at n0, 203 at n0.25, 340.6 at n0.5, 453 at n0.75, 500 at n1 (result.json:metrics.systems B-RAG-EMBED, audit.json:baseline_findings) proving census can express residual-novelty-proportional economics",
+      "Family-stratified bootstrap 5000 and block-permutation 5000 correctly implemented in stdlib Random42, deterministic, no numpy/scipy degeneracy beyond disclosed [1,1] not present (audit validity_findings[5], result validity_notes[1])"
+    ],
+    "rejected": [
+      "SPIDER parameterized inheritance with frozen behavioral freshness gating 0.25 does NOT achieve per_hit parity/advantage to shipped baselines under QCR on this proxy census: SPIDER/RAG per_hit 1.0 at n0 (>0.85) and 1.573 at n0.25 (>0.85), SPIDER/TERX per_hit 1.0 at n>=0.5 not <1.0, SPIDER/STAGEHAND per_hit 1.0 at n0 passes parity but SPIDER more expensive per_hit than RAG at partial novelty (audit required_fixes 2-3, recomputed ratios_per_hit, result.json:criteria.C5 pass false)",
+      "SPIDER per_hit novelty tracking and R2_delta are not proportional pay-for-novelty: 71.9% UNKNOWN means SPIDER mean per_hit = COLD 500 at n>=0.5 and 319.7 vs RAG 203 at n0.25, rho 0.82 and R2 0.75 reflect binary gating step (hit at n0 vs UNKNOWN fallback) not step-level parameterization (audit validity_findings 1-3, recomputed SPIDER_per_hit_by_novelty, SPIDER_unknown_rate 0.71875)",
+      "Per_hit isolation alone does not rescue product economics: C5 total saving >=25% vs COLD holds (0.163 at n0, 0.146 at f100) but C5-perhit still fails shipped baseline advantage where baselines honestly hit under QCR; Stagehand/TERX binary at n0 only, RAG proportional retrievable at n0.25 is the stronger baseline (audit baseline_findings, result.json:criteria.C5)",
+      "UNKNOWN_precision 1.0 and ECE_exec 0.025 on EXEC n=54 with 4/5 empty bins are not validated abstention/calibration: UNKNOWN falls back to COLD which always succeeds, and SPIDER never exercises wrong-bound path at n>0 so non-vacuous mock is only tested on null controls (audit required_fix5, validity_findings 4)"
+    ],
+    "unknown": [
+      "Whether relaxing freshness threshold from 0.25 to 0.50 or slot-aware gating would enable parameterized binding at partial novelty without increasing false_accept beyond 0.10 (audit unresolved 1)",
+      "Whether SPIDER would maintain UNKNOWN_precision>=0.85 ECE<=0.15 and false_accept<=0.10 if it actually executed at n>0 with non-vacuous wrong-bound rate 0.15 discriminating calibration (audit unresolved 2, required_fix5)",
+      "Whether proxy branch-derived costs correlate with real gpt-4o-mini+Playwright Docker tokens/browser/latency and preserve Pareto vs COLD/RAG/Stagehand (audit unresolved 3, validity_notes[5] not executed)",
+      "Whether continuous similarity novelty vs disjoint A/B pool zero-overlap changes UNKNOWN boundary and ECE (audit unresolved 4)",
+      "Whether per_hit metric should include verification_tokens (50 per task, currently excluded, ~6.25/step at L=8) for fairer absolute comparison (audit unresolved 5, required_fix6)",
+      "Whether NC1 shuffled-slot control re-implemented as actual kernel execution through shuffled parameter_slots (not hardcoded COLD fallback) would reveal novelty-difficulty confounding currently masked (audit unresolved 6, required_fix4)"
+    ],
+    "do_not_assume": [
+      "Do not assume rho_novelty 0.82 / R2_delta 0.75 / slope 432 demonstrate proportional residual-novelty cost tracking; they are driven by binary freshness gating (UNKNOWN fallback to COLD) not parameterized step reuse (audit validity_findings 1-2, SPIDER_per_hit 50/319/500 vs COLD 500)",
+      "Do not assume C4 per_hit |rho_length|<0.20 success validates product economics; C5 per_hit vs shipped RAG/TERX still fails under QCR with proportional RAG retrievable at n0.25 (audit baseline_findings, required_fixes 2-3)",
+      "Do not assume success 1.0 / false_accept 0 / UNKNOWN_precision 1.0 / ECE 0.025 at n0 indicate calibrated abstention; SPIDER mean success 1.0 with 71.9% UNKNOWN fallback to always-success COLD makes precision vacuous and EXEC ECE based on n=54 with 4/5 empty bins, mock non-vacuously only on null controls (audit required_fix5, validity_findings 4, result.json:criteria.C1 detail)",
+      "Do not assume NC1 shuffled control validates absence of novelty-difficulty confounding; NC1 per_hit is hardcoded constant 500 COLD fallback by construction run_experiment.py lines 421-433, cannot detect confounding (audit required_fix4)",
+      "Do not assume file-based synthetic census 192/36 with stdlib no-BrowserGym/no-Docker/no-LLM ceiling transfers to production WebArena Docker full-DOM 2000 nodes 1280x720 or cross-site or 800-element full-DOM or real LLM token economics (validity_notes[0], provenance environment numpy unavailable, synthetic ceiling disclosed)",
+      "Do not assume per_hit formula excluding verification_tokens is neutral; it removes uniform 6.25/step at L=8 from all systems per audit required_fix6, disclose when comparing absolute values",
+      "Do not assume audit REVISE is PASS; producer_claim_supported false bars VALIDATED/PRODUCT_CORE promotion and EXPERIMENTAL advancement until required_fixes 1-6 addressed; decision is bounded FALSIFIED not MEASUREMENT_INVALID (PC1/PC2/PC3 pass) and not global rejection of pay-for-novelty promise",
+      "Do not assume total-cost saving at f10 (0.163) alone proves commercial viability; Pareto tokens/browser/latency/retrieval/verification not dominated until per_hit baseline parity achieved and Docker replication confirms correlation rho_proxy_real"
+    ]
+  },
+  "dependencies": [
+    "src/spider/kernel.py distill_parameterized _bind freshness gating implementation (opportunity to relax threshold to 0.50 or slot-aware)",
+    "research/experiments/EXP-PRODUCT-35797365772/artifacts/qcr_bank_manifest.json frozen bank TFIDF Jaccard TAU0.30 (reuse for QCR same-ranker re-test)",
+    "WebArena-Verified v2 file-based census fixtures/tasks.json (192/36) or /tmp/webarena Docker 1280x720 CDP AX tree hash if scaling to real replication",
+    "Non-vacuous MockEnv p=0.15 wrong-bound execution branch (must be exercised by SUT at n>0 to test false_accept/UNKNOWN_precision discriminatingly)"
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-PRODUCT-35797365772/result.json",
+    "research/experiments/EXP-PRODUCT-35797365772/audit.json",
+    "research/experiments/EXP-PRODUCT-35797365772/spec.json",
+    "research/experiments/EXP-PRODUCT-35797365772/prereg.md",
+    "research/experiments/EXP-PRODUCT-35797365772/freeze.json",
+    "research/experiments/EXP-PRODUCT-35797365772/provenance.json",
+    "research/experiments/EXP-PRODUCT-35797365772/report.md",
+    "research/experiments/EXP-PRODUCT-35797365772/artifacts/raw_per_task.csv",
+    "research/experiments/EXP-PRODUCT-35797365772/artifacts/derived_metrics.json",
+    "research/experiments/EXP-PRODUCT-35797365772/artifacts/cost_config.json",
+    "research/experiments/EXP-PRODUCT-35797365772/artifacts/registry.jsonl",
+    "research/experiments/EXP-PRODUCT-35797365772/artifacts/branch_traces.json",
+    "research/experiments/EXP-PRODUCT-35797365772/artifacts/qcr_bank_manifest.json",
+    "research/experiments/EXP-PRODUCT-35797365772/run_experiment.py"
+  ],
+  "recommended_action": "Do not promote to PRODUCT_CORE or EXPERIMENTAL; keep C-RESIDUAL-NOVELTY/C-PRODUCT-ECON/C-LLM-INHERIT at HYPOTHESIS globally. Fix freshness gating (raise threshold to 0.50 or implement slot-aware/per-slot confidence) and re-implement NC1 as actual kernel shuffled execution to properly test confounding, then re-run same file-based QCR census with per_hit parity checks vs RAG/TERX and non-vacuous calibration validation before investing in gpt-4o-mini+Playwright Docker full-DOM replication and Pareto reporting. If gating relaxation fails to achieve per_hit <=0.85x RAG at n0.25 with false_accept<=0.10, close this kernel/cost-model path and pivot product lane to Stagehand caching + freshness/delta-repair orthogonal lever."
+}

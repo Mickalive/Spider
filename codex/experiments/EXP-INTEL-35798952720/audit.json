@@ -1,0 +1,319 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-35798952720",
+  "lane": "intel",
+  "status": "MEASUREMENT_INVALID",
+  "producer_claim_supported": false,
+  "required_fixes": [
+    "Fix NC1/B-RANDOM-AX-SHUFFLE permutation implementation: current code shuffles family order but recomputes mean over same score set, yielding tautological std=0 p=1.0 invariantly (research/intel/exp_35798952720_measure.py:553-562). Must implement trajectory-grouped label permutation that actually permutes per-family scores or per-task assignments, with 1000 perms seed 35725763380 and verification that shuffled null variance>0.",
+    "Fix product-page substrate scarcity for H1: WebArena-Verified v2 shopping contains only 4/36 families with __SHOPPING__/path product URLs (136,145,196,222) per webarena-verified.json sha d65275660814663375028e9017e1f929e3c38321041b125795e2713b52243d30; deterministic seed 35725763380 sampled only 2 product families (136,222). Achieve >=5 product-page families by expanding source to shopping_admin 184 tasks 42 families or alternative start_url extraction; document expanded sampling and verify placeholder expansion before capture.",
+    "Fix full-tree multi-anchor product-subtree extraction: subtree_node_count=1 and subtree_hash='' for all 20 captures (artifacts/raw/ax_captures.jsonl) proves anchors heading/price/add-to-cart/main not isolating product-specific subtree; longest-prefix still operates on full generic layout. Verify subtree node counts and distinct hashes on 4 product families before computing AX_consistency, and remove [:20] truncation remaining in derive_normalized_selector (line 286 selectors[:20]).",
+    "Fix Stagehand selector derivation and drift injection: 33/40 per_family selectors are fallback famXXX_taskXXX because ax_path missing for non-AX families (artifacts/derived/stagehand_replication_recomputed.json), violating CRITICAL FIX 3 exclusive derived requirement. Require derived normalized selector for all attempted families. Replace string replace 'class=\"product\"' drift (not present in rendered Magento homepage HTML) with DOM mutation via page.evaluate on visible element + SHA256 recomputed from page.content() AFTER mutation; verify mutated hash != original before MISS test, and test >=20 families.",
+    "Fix Stagehand latency/tokens measurement: current cold 0.00095ms / cached 0.0021ms are Python dict-assignment granularity, not real dispatch path (playwright navigation + relevant-subtree outerHTML hash + cache lookup) required by spec measurement_validity #3. Instrument real path with navigation + tiktoken/provider token counts per hit, report median over >=30 families.",
+    "Fix Stagehand sample size and thresholds: 20 families attempted <30 required for H2 validity (decision_rule H2 MEASUREMENT_INVALID threshold). Attempt >=30/36 families with recomputed SHA and per-project isolation verified per family.",
+    "Fix WebGym import: webgym corpus ImportError (pip show webgym empty) blocks H3 census. Install corpus via documented URL/sha, parse >=50 diverse eTLD+1 sites, compute duplication prevalence 95% CI and threshold sweep 0.818-0.9479 with trajectory-grouped site-label shuffle null.",
+    "Fix Gate0 census exploitation: multi-step rollout achieves 110 transitions/family but NL=3 strata=3 H=0.12-0.22 < relaxed thresholds (NL>=20 strata>=10). If BrowserGym remains unimportable, document Playwright fallback provenance and ensure transitions cover distinct action.target_href vs state_after.url strata with >=5 per stratum for valid H/NL computation."
+  ],
+  "validity_findings": [
+    {
+      "id": "V1_PRODUCT_PAGE_SCARCITY",
+      "severity": "CRITICAL",
+      "category": "substrate_unavailable",
+      "finding": "H1 primary decision rule requires >=5 families with task-specific product pages (placeholder expanded). Only 2/10 sampled families (136,222) and 4/36 overall have __SHOPPING__/path URLs. Producer correctly flags MEASUREMENT_INVALID substrate_unavailable, but mean 0.8 and delta_vs_prior 0.5143 are not discriminating product-page transfer.",
+      "evidence": "artifacts/raw/ax_captures.jsonl: product_captures=4 (families 136,222), homepage_families=8; research/experiments/EXP-INTEL-35749371101/artifacts/raw/webarena-verified.json path_families [136,145,196,222]; result.json validity_notes[0]; spec.json decision_rule infrastructure precedence",
+      "producer_observation": "valid_families=10 valid_captures=20 product_page_families=2 homepage_families=8",
+      "audit_recomputation": "Confirmed 4/36 path families (11.1%); sampling without replacement seed 35725763380 yields 2 product families, expected hypergeometric mean 1.11, not a sampling bug. H1=MEASUREMENT_INVALID per frozen rule, not FALSIFIED."
+    },
+    {
+      "id": "V2_FULLTREE_SUBTREE_NOT_ISOLATED",
+      "severity": "HIGH",
+      "category": "representation_loss",
+      "finding": "Full-tree grammar removes [:20] truncation for AX pattern but multi-anchor subtree extraction fails: subtree_node_count=1 and subtree_hash='' for all 20 captures, so product-specific subtree not isolated. derive_normalized_selector still truncates to [:20] selectors, violating no-truncation guarantee. Delta vs truncated =0.0 confirms no improvement because 8 homepage identical trees dominate.",
+      "evidence": "artifacts/raw/ax_captures.jsonl all entries subtree_node_count 1; research/intel/exp_35798952720_measure.py:286 selectors[:20] and 506 truncated_pattern[:20]; artifacts/derived/ax_consistency_fulltree.json delta_vs_truncated 0.0 truncated_mean 0.8",
+      "producer_observation": "grammar_type full-tree semantic/multi-anchor (no [:20] truncation) verified by code hash",
+      "audit_recomputation": "Recomputed per_family scores 8x1 (homepage) 2x0 (product) mean 0.8 for both full-tree and truncated; product families score 0 indicates full-tree does NOT improve product-page consistency."
+    },
+    {
+      "id": "V3_SHUFFLE_NULL_DEGENERATE_TAUTOLOGY",
+      "severity": "CRITICAL",
+      "category": "measurement_invalid",
+      "finding": "NC1 shuffle null implementation is tautological: for each perm it shuffles family order then computes perm_mean = sum(scores[shuffled[i]])/len, which equals true mean identically (sum over same set). Hence std=0.0 p95=0.8 p=1.0 invariantly regardless of true variance. Trajectory-grouped permutation required but not реализован. Producer reports degenerate p=1.0 correctly but does not flag code bug.",
+      "evidence": "research/intel/exp_35798952720_measure.py:553-562; artifacts/derived/ax_consistency_fulltree.json shuffle_null std 0.0 p_value 1.0; result.json controls NC1_AX_SHUFFLE_NULL FAIL degenerate",
+      "producer_observation": "True mean=0.8 equals shuffle mean=0.8 p=1.0 std 0.0 homepage-dominated",
+      "audit_recomputation": "Recomputed 1000 perms with same code yields mean 0.8 std 0.0 p 1.0 exactly; correct permutation should permute scores/labels yielding variance>0. Bootstrap CI [0.5,1.0] also degenerate due to 8/10 identical scores."
+    },
+    {
+      "id": "V4_STAGEHAND_DRIFT_INJECTION_INVALID",
+      "severity": "CRITICAL",
+      "category": "control_invalid",
+      "finding": "NC3 drift MISS test uses mutated_html = dom_html.replace('class=\"product\"','class=\"product-drifted\"') which does not occur in actual Magento homepage HTML (homepage contains no class product). Mutated hash equals original hash, so cache HIT is tautological, yielding drift_miss_rate 0.0 false_accept 1.0. Mutation not injected via page.evaluate nor verified to change DOM before SHA recomputation.",
+      "evidence": "research/intel/exp_35798952720_measure.py:686; artifacts/derived/stagehand_replication_recomputed.json drift_results all drift_hit true, drift_miss_rate 0.0 false_accept_rate 1.0; result.json NC3_STAGEHAND_DOM_DRIFT_RECOMPUTED FAIL dom mutation target not found",
+      "producer_observation": "Stagehand drift miss_rate 0.0 false_accept 1.0 due to mutation target not found",
+      "audit_recomputation": "Verified 10/10 drift_hit true with injected string absent; no DOM mutation applied to live page, SHA recomputed from string replace not from page.content() after evaluate."
+    },
+    {
+      "id": "V5_STAGEHAND_SPEEDUP_INVERTED_ARTIFACT",
+      "severity": "HIGH",
+      "category": "measurement_invalid",
+      "finding": "Speedup 0.44x inverted (cached slower than cold) because latency measured is Python dict assignment (0.00095ms cold vs 0.00214ms cached) not real dispatch path (playwright navigation + DOM hash compute + cache lookup + tiktoken). Sub-millisecond timing at granularity limit produces artifact, not Stagehand economics.",
+      "evidence": "research/intel/exp_35798952720_measure.py:621-630 cold/cached timing around cache.get/set; artifacts/derived/stagehand_replication_recomputed.json median_cold_latency_ms 0.00095 median_cached_latency_ms 0.00214 speedup 0.444; result.json B-STAGEHAND-VERB and NC4 FAIL speedup 0.44x",
+      "producer_observation": "speedup 0.44x inverted due to dict lookup overhead vs simple assignment",
+      "audit_recomputation": "Confirmed latencies sub-millisecond, cached > cold in 40/40 entries; tokens_saved 2501699 uses tiktoken estimate but not per-hit real path."
+    },
+    {
+      "id": "V6_STAGEHAND_SELECTOR_FALLBACK_INVALID",
+      "severity": "HIGH",
+      "category": "control_invalid",
+      "finding": "33 of 40 Stagehand per_family entries use synthetic fallback selector famXXX_taskXXX because ax_path missing for families not in ax_captures (stagehand attempted 20 families but AX trees only for 10 sampled). Spec requires exclusively derived normalized selector from AX node role+name+CSS path, no fam_task fallback. Only 7 entries have derived long RootWebArea selectors.",
+      "evidence": "artifacts/derived/stagehand_replication_recomputed.json per_family selectors: 33 start with fam, 7 with RootWebArea; research/intel/exp_35798952720_measure.py:614-616 fallback selector = f\"fam{fam_id}_task{task_id}\"; spec.json measurement_validity CRITICAL FIX 3 selector derived from AX+DOM not synthetic",
+      "producer_observation": "Normalized selector derived from AX node role+name+CSS path (no fam_task fallback) per result controls",
+      "audit_recomputation": "Counted 33 fallback vs 7 derived; hit_rate 0.943 includes fallback keys, inflating HIT vs shipped Stagehand spec."
+    },
+    {
+      "id": "V7_STAGEHAND_SAMPLE_SIZE_BELOW_THRESHOLD",
+      "severity": "HIGH",
+      "category": "adequacy",
+      "finding": "Stagehand attempted 20 families <30 required for H2 validity (decision_rule: IF <30 then MEASUREMENT_INVALID) and drift tests 10 <20 required. Cross-project isolation tested on 3 families but reported leakage 0.0 trivial because keys include project_id. H2 correctly MEASUREMENT_INVALID per rule, not FALSIFIED.",
+      "evidence": "artifacts/derived/stagehand_replication_recomputed.json families_attempted 20 drift_tests 10; provenance.json measurement_summary stagehand_families_attempted 20; spec.json decision_rule H2 MEASUREMENT_INVALID threshold",
+      "producer_observation": "H2 MEASUREMENT_INVALID <30 families attempted + drift MISS failed",
+      "audit_recomputation": "Confirmed thresholds not met; HIT 0.943 on identical partly due to homepage identical DOMs, not discriminating product-page variance."
+    },
+    {
+      "id": "V8_WEBGYM_CORPUS_UNAVAILABLE",
+      "severity": "HIGH",
+      "category": "substrate_unavailable",
+      "finding": "WebGym 300k corpus ImportError (pip show webgym empty, import webgym fails). H3 duplication prevalence 95% CI and threshold sweep 0.818-0.9479 uncomputable. Producer correctly flags MEASUREMENT_INVALID corpus_unavailable, not falsification of diversity hypothesis.",
+      "evidence": "provenance.json packages webgym NOT INSTALLED; artifacts/derived/webgym_census.json available false site_count 0; result.json metrics M-WEBGYM-DUP-PREVALENCE null; result.json controls B-WEBGYM-HARDCODED-09479 MEASUREMENT_INVALID",
+      "producer_observation": "WebGym corpus NOT installed; H3 MEASUREMENT_INVALID",
+      "audit_recomputation": "Confirmed import failure; no diverse-site census computed, B-WEBGYM-HARDCODED-09479 0.9479 CI[0.9167,0.9792] comparison impossible."
+    },
+    {
+      "id": "V9_GATE0_RELAXED_ZERO_DESCRIPTIVE",
+      "severity": "MEDIUM",
+      "category": "scope_boundary",
+      "finding": "Gate0 multi-step rollout actually achieved 110 transitions per family (55 per task x2) with Playwright fallback, but NL=3 strata=3 H=0.12-0.22 singleton 28-44% leakage 42-66% yields 0/10 relaxed_pass (requires NL>=20) and 0/10 strict_pass. Single-page NL=0 unmeasured not falsification, but with multi-step still no Gate0 pass. Indicates TodoMVC-like hash-SPA not discriminating on this substrate at current transition density.",
+      "evidence": "artifacts/derived/gate0_relaxed_table.json relaxed_pass_count 0 strict 0 per_family NL 3 strata 3 H 0.1245-0.2226; result.json M-GATE0-RELAXED-PASS 0 M-GATE0-STRICT-PASS 0; provenance representation_loss multi-step 5 vs spec >=50 now superseded by 110 artifact",
+      "producer_observation": "Gate0 relaxed 0/10, multi-step 110 transitions but NL 3 insufficient for H>0.1 NL>=20",
+      "audit_recomputation": "Recomputed NL strata from artifact; relaxed requires >=5 per stratum and NL>=20, fails on all families. Not evidence against physics, just unmeasured on this substrate."
+    }
+  ],
+  "baseline_findings": [
+    {
+      "id": "B-STAGEHAND-VERB",
+      "expected": "HIT>=0.8 on identical DOM, MISS>=0.8 on drift recomputed, false_accept<0.05, speedup~2x ~30% token saving, beats NC4 p<0.05",
+      "observed": "hit_rate 0.9434 passes, drift_miss 0.0 fail, false_accept 1.0 fail, speedup 0.44x inverted fail, random null not beaten",
+      "verdict": "FAIL",
+      "evidence": "artifacts/derived/stagehand_replication_recomputed.json hit_rate 0.943 drift_miss 0.0 speedup 0.44; result.json controls B-STAGEHAND-VERB FAIL",
+      "audit_note": "HIT inflated by homepage identical DOMs and fallback selectors; MISS invalid due to V4 injection miss; speedup artifact V5. No Stagehand 2x/~30% replication on this substrate."
+    },
+    {
+      "id": "B-RANDOM-AX-SHUFFLE",
+      "expected": "True mean must exceed shuffle mean+0.30 and p95, permutation p<0.05 trajectory-grouped",
+      "observed": "True 0.8 equals shuffle mean 0.8 p=1.0 std 0.0 degenerate tautology",
+      "verdict": "FAIL",
+      "evidence": "artifacts/derived/ax_consistency_fulltree.json mean 0.8 shuffle_null mean 0.8 p 1.0; V3 code bug",
+      "audit_note": "Degeneracy is methodological (shuffle bug + 8 homepage identical scores) not evidence for/against full-tree discrimination. Full-tree Δ vs truncated 0.0 indicates no improvement in this sample."
+    },
+    {
+      "id": "B-CONSTANT-NULL-05654",
+      "expected": "Disclosed only, not used for decision; REJECTED vacuous F(n)=0.5654",
+      "observed": "Correctly not reused; full-tree grammar replaces truncated-first-20",
+      "verdict": "PASS",
+      "evidence": "result.json controls B-CONSTANT-NULL-05654 N/A; spec baselines disclosed",
+      "audit_note": "Producer correctly retains as non-decision baseline, compliant."
+    },
+    {
+      "id": "B-COLD-LLM",
+      "expected": "Cold latency/tokens upper bound; Stagehand/SPIDER must beat cold with false_accept penalty",
+      "observed": "Cold latency 0.00095ms < cached 0.0021ms inverted; tokens cold avg 62599 tokens_saved 2501699 per_hit exaggerated by tiktoken full DOM",
+      "verdict": "FAIL_MEASUREMENT",
+      "evidence": "artifacts/derived/stagehand_replication_recomputed.json median latencies; result.json B-COLD-LLM N/A inverted",
+      "audit_note": "Inverted due to V5 granularity; cannot assess PRODUCT_ECON per-hit vs amortized at f=100."
+    },
+    {
+      "id": "B-WEBGYM-HARDCODED-09479",
+      "expected": "WebGym >=50 diverse sites duplication 95% CI should not overlap 0.9479 [0.9167,0.9792] if diversity matters",
+      "observed": "WebGym unavailable, no computation",
+      "verdict": "MEASUREMENT_INVALID",
+      "evidence": "artifacts/derived/webgym_census.json available false; result.json B-WEBGYM-HARDCODED-09479 MEASUREMENT_INVALID",
+      "audit_note": "Infrastructure block, not falsification. Single-store duplication 0.9479 remains uncompared."
+    },
+    {
+      "id": "B-WEBGYM-TFIDF",
+      "expected": "WebGym 300k diverse corpus + full-tree grammar + trajectory-grouped permutation should outperform synthetic shuffle",
+      "observed": "Not computed due to WebGym unavailable and NC1 shuffle degenerate",
+      "verdict": "MEASUREMENT_INVALID",
+      "evidence": "webgym_census.json note corpus not installed; V8",
+      "audit_note": "Cannot compare Mind2Web TF-IDF website-holdout vs WebGym diversity without corpus."
+    },
+    {
+      "id": "PC1_AX_LIVENESS_1280",
+      "expected": ">=15/20 AX trees 600-2000 nodes, DOM bytes>=2000, Docker reachable after 3 retries",
+      "observed": "20/20 captures 626-1430 nodes, Docker am1n3e/webarena-verified-shopping@sha256:3e8cb9b945 reachable after 1 retry at 1280x720",
+      "verdict": "PASS",
+      "evidence": "artifacts/raw/ax_captures.jsonl 20 entries node counts 626-1430; provenance.json docker running; result.json PC1 PASS",
+      "audit_note": "Liveness valid; viewport and CDP Accessibility.getFullAXTree functional per spec."
+    },
+    {
+      "id": "PC3_STAGEHAND_HIT_IDENTICAL_RECOMPUTED",
+      "expected": "3 consecutive identical relevant-subtree SHA256 recomputed after mutation, HIT on 2nd/3rd with per-project isolation 0%",
+      "observed": "SHA recomputed after mutation verified (code), HIT 0.943 but drift MISS invalid, cross-project 0% on 3 families",
+      "verdict": "PARTIAL",
+      "evidence": "result.json PC3 PARTIAL; artifacts/derived/stagehand_replication_recomputed.json cross_project_leakage 0.0",
+      "audit_note": "Isolation trivially passes because key includes project_id; HIT path uses recomputed hash correctly but selector fallback weakens."
+    },
+    {
+      "id": "NC1_AX_SHUFFLE_NULL",
+      "expected": "True mean > null mean+0.30 permutation p<0.05",
+      "observed": "True 0.8 = null 0.8 p 1.0 degenerate",
+      "verdict": "FAIL",
+      "evidence": "V3",
+      "audit_note": "Null not discriminating due to code bug and homepage dominance; cannot claim full-tree discrimination."
+    },
+    {
+      "id": "NC3_STAGEHAND_DOM_DRIFT_RECOMPUTED",
+      "expected": "MISS on single-attribute drifted relevant subtree recomputed after mutation, false_accept<0.05 MISS>=0.8",
+      "observed": "MISS 0.0 false_accept 1.0 mutation target absent",
+      "verdict": "FAIL",
+      "evidence": "V4",
+      "audit_note": "Control measures injection failure, not cache discrimination; redo with page.evaluate mutation on visible node."
+    },
+    {
+      "id": "NC4_STAGEHAND_RANDOM_CACHE",
+      "expected": "True hit/miss must beat random shuffling ~50% speedup ~1.0 p<0.05",
+      "observed": "True speedup 0.44x worse than random 1.0, hit_rate not tested vs random null (1000 perms not computed)",
+      "verdict": "FAIL",
+      "evidence": "result.json NC4 FAIL speedup 0.44x; no NC4 permutation p reported in artifacts",
+      "audit_note": "Random null perms 1000 not found in artifacts; speedup inversion prevents beating null."
+    },
+    {
+      "id": "NC5_CROSS_PROJECT_LEAKAGE",
+      "expected": "Same selector+hash in different project namespace must MISS 0% HIT",
+      "observed": "cross_project_hits 0 leakage 0.0 on 3 families",
+      "verdict": "PASS",
+      "evidence": "artifacts/derived/stagehand_replication_recomputed.json cross_project_leakage_rate 0.0; result.json NC5 PASS",
+      "audit_note": "Passes vacuously as cache key includes project_id; not discriminating beyond spec."
+    }
+  ],
+  "recomputed_metrics": {
+    "M-AX-CONSISTENCY": {
+      "producer_mean": 0.8,
+      "recomputed_mean": 0.8,
+      "recomputed_ci_lower": 0.5,
+      "recomputed_ci_upper": 1.0,
+      "per_family_scores": {
+        "191": 1,
+        "180": 1,
+        "162": 1,
+        "197": 1,
+        "153": 1,
+        "213": 1,
+        "163": 1,
+        "137": 1,
+        "136": 0,
+        "222": 0
+      },
+      "product_page_families_scores": "136=0 222=0 (both product-page families FAIL), homepage families 8=1",
+      "recomputed_bootstrap_2000": "CI [0.5,1.0] matches producer (family-level resampling)",
+      "delta_vs_prior_0.2857": 0.5143,
+      "delta_vs_truncated": 0.0,
+      "truncated_mean": 0.8,
+      "note": "Mean dominated by 8 homepage identical AX trees (1430 nodes); product pages (626-1150 nodes) both score 0, indicating full-tree grammar does NOT yield consistency on product pages in this sample. Producer per_family_variance_nonzero true but variance driven by product vs homepage split, not within product discrimination."
+    },
+    "M-AX-SHUFFLE-NULL": {
+      "producer_shuffle_mean": 0.8,
+      "recomputed_shuffle_mean": 0.8,
+      "producer_shuffle_std": 0.0,
+      "recomputed_shuffle_std": 0.0,
+      "producer_p": 1.0,
+      "recomputed_p": 1.0,
+      "recomputed_p95": 0.8,
+      "valid": false,
+      "reason": "Tautological permutation (V3): shuffling family order without permuting scores yields identical mean every perm; null variance 0 invariantly, so p=1.0 is measurement artifact not evidence of no discrimination. Trajectory-grouped permutation not implemented."
+    },
+    "M-STAGEHAND-HITRATE": {
+      "producer": 0.9434,
+      "recomputed": 0.9433962264150944,
+      "hits": 50,
+      "misses": 3,
+      "total_calls": 53,
+      "families_attempted": 20,
+      "fallback_selectors": 33,
+      "derived_selectors": 7,
+      "note": "Recomputed matches producer; hit_rate inflated by homepage identical DOMs and 33 fallback selectors. Real derived-selector hit_rate on 7 families not separately reported."
+    },
+    "M-STAGEHAND-MISSRATE": {
+      "producer_drift_miss": 0.0,
+      "recomputed_drift_miss": 0.0,
+      "drift_tests": 10,
+      "producer_false_accept": 1.0,
+      "recomputed_false_accept": 1.0,
+      "note": "Drift injection target class product not present, so miss_rate measures injection miss (V4), not cache discrimination. False_accept 1.0 is tautological."
+    },
+    "M-STAGEHAND-SPEEDUP": {
+      "producer": 0.4444,
+      "recomputed": 0.4444444444444444,
+      "median_cold_ms": 0.00095367431640625,
+      "median_cached_ms": 0.0021457672119140625,
+      "valid": false,
+      "reason": "Sub-millisecond Python timing artifact (V5), not real dispatch path. Cold < cached due to granularity, not performance."
+    },
+    "M-STAGEHAND-TOKENS-SAVED": {
+      "producer": 2501699,
+      "recomputed": 2501699,
+      "avg_tokens_cold": 62599.725,
+      "note": "Tiktoken cl100k_base estimate on full DOM+selector; not provider-verified per-hit economics at f=100."
+    },
+    "M-WEBGYM-DUP-PREVALENCE": {
+      "producer": null,
+      "recomputed": null,
+      "available": false,
+      "site_count": 0,
+      "status": "MEASUREMENT_INVALID corpus_unavailable"
+    },
+    "M-GATE0-RELAXED-PASS": {
+      "producer": 0,
+      "recomputed": 0,
+      "total": 10,
+      "multi_step_transitions_per_family": 110,
+      "recomputed_per_family": "NL=3 strata=3 H=0.12-0.22 on all 10 families, fails NL>=20 threshold for relaxed Gate0 H>0.1",
+      "note": "Gate0 artifact shows 110 transitions (55 per task) not 5 as in report summary; producer report underestimates rollout but still 0/10 relaxed due to singleton/strata density, not transition count."
+    },
+    "M-GATE0-STRICT-PASS": {
+      "producer": 0,
+      "recomputed": 0,
+      "total": 10
+    },
+    "CONTROL_COVERAGE": {
+      "PC1": "PASS 20/20",
+      "PC3": "PARTIAL HIT recomputed but MISS invalid",
+      "NC1": "FAIL degenerate",
+      "NC3": "FAIL injection invalid",
+      "NC4": "FAIL speedup inverted, no perm p",
+      "NC5": "PASS 0 leakage"
+    }
+  },
+  "claim_ceiling": "No C-CROSSSITE claim supported beyond substrate description. Maximum justified: WebArena-Verified v2 shopping contains 4/36 families (136,145,196,222) with task-specific product URLs; deterministic seed sampled 2 product families yielding 20 CDP AX captures 626-1430 nodes at 1280x720 with full-tree traversal (no [:20] truncation) but product-subtree isolation not demonstrated (subtree hash empty, Δ vs truncated 0.0). AX_consistency mean 0.8 CI[0.5,1.0] is homepage-dominated (8 homepage families score 1, 2 product families score 0) with degenerate shuffle null std 0 p=1.0 tautology, CI lower not >0.5, permutation p not <0.05, so no discriminating within-store parameterized transfer demonstrated on product pages. Stagehand selector+relevant-subtree SHA256 recomputed after mutation achieves HIT 0.94 on identical but MISS 0.0 false_accept 1.0 due to invalid drift injection target and 33/40 fallback selectors, speedup 0.44x inverted artifact, <30 families attempted, so no HIT>=0.8/MISS>=0.8/false_accept<0.05 bound. WebGym 300k diverse-site duplication and threshold sweep unmeasured. Gate0 relaxed/strict 0/10 even with 110 transitions/family (NL=3 strata=3) unblocks no physics correlated-state pilot. C-CROSSSITE remains HYPOTHESIS (single Magento store), C-LLM-INHERIT/C-PRODUCT-ECON remain HYPOTHESIS, no within-store family holdout validated, no product promotion justified.",
+  "evidence_refs": [
+    "research/experiments/EXP-INTEL-35798952720/spec.json:claim_ids [C-CROSSSITE] hypothesis H1_AX_FULLTREE decision_rule infrastructure precedence",
+    "research/experiments/EXP-INTEL-35798952720/request.json:director_mandate PIVOT question and agent_priors_used truncation/WebGym/BrowserGym warnings",
+    "research/experiments/EXP-INTEL-35798952720/result.json:metrics M-AX-CONSISTENCY 0.8 CI[0.5,1.0] shuffle p 1.0 delta_vs_truncated 0.0; controls B-RANDOM-AX-SHUFFLE FAIL NC1 FAIL NC3 FAIL B-WEBGYM-HARDCODED-09479 MEASUREMENT_INVALID",
+    "research/experiments/EXP-INTEL-35798952720/artifacts/raw/ax_captures.jsonl:20 captures sha 823a793465a5409a 4 product_pages 16 homepage subtree_node_count 1",
+    "research/experiments/EXP-INTEL-35798952720/artifacts/derived/ax_consistency_fulltree.json:per_family 8x1 2x0 mean 0.8 shuffle std 0 p 1.0 delta_vs_truncated 0.0",
+    "research/experiments/EXP-INTEL-35798952720/artifacts/derived/stagehand_replication_recomputed.json:hit_rate 0.943 hits 50 misses 3 drift_miss 0.0 false_accept 1.0 families_attempted 20 speedup 0.44 33 fallback selectors",
+    "research/experiments/EXP-INTEL-35798952720/artifacts/derived/gate0_relaxed_table.json:relaxed_pass 0 strict 0 multi_step 110 transitions NL 3 strata 3 H 0.12-0.22",
+    "research/experiments/EXP-INTEL-35798952720/artifacts/derived/webgym_census.json:available false site_count 0",
+    "research/intel/exp_35798952720_measure.py:extract_fulltree_pattern, longest_common_prefix, derive_normalized_selector[:20], StagehandCacheRecomputed, shuffle/ drift/speedup implementation",
+    "research/experiments/EXP-INTEL-35798952720/provenance.json:docker am1n3e/webarena-verified-shopping@sha256:3e8cb9b945 BrowserGym-core 0.14.3 import fails AgentLab 0.4.2 Playwright 1.44.0 seed 35725763380",
+    "research/experiments/EXP-INTEL-35749371101/artifacts/raw/webarena-verified.json:sha d65275660814663375028e9017e1f929e3c38321041b125795e2713b52243d30 192 shopping tasks 36 families ge3 path_families [136,145,196,222]"
+  ],
+  "unresolved": [
+    "Whether fixing shuffle permutation to properly permute per-family scores with trajectory-grouped permutation would yield p<0.05 for full-tree AX_consistency if product-page sample were >=5 families (currently degenerate due to code bug and homepage dominance).",
+    "Whether expanding product URL source to shopping_admin 184 tasks 42 families or alternative extraction can achieve >=5 product-page families and whether those pages yield distinct AX_consistency with proper product-subtree isolation (current subtree_hash empty).",
+    "Whether alternative DOM mutation (text/attribute add on visible element via page.evaluate + page.content() SHA recomputed) yields MISS>=0.8 false_accept<0.05 for Stagehand on shopping product pages.",
+    "Whether derived-selector-only Stagehand HIT>=0.8 holds when excluding 33 fallback selectors and using real dispatch path latency/tokens (navigation+hash+cache) on >=30 families.",
+    "Whether WebGym 300k corpus installation yields duplication prevalence distinct from hardcoded 0.9479 CI[0.9167,0.9792] and threshold sweep range >=0.05 at 0.818-0.9479.",
+    "Whether Gate0 relaxed H>0.1 NL>=20 achievable with enriched action diversity or larger per-stratum counts to increase NL beyond 3 on this Magento substrate (currently 110 transitions insufficient strata density).",
+    "Whether Playwright 1.63.0 vs 1.44.0 and BrowserGym-core 0.14.3 import fix materially change CDP node counts (>600-2000) or Gate0 transition viability."
+  ]
+}

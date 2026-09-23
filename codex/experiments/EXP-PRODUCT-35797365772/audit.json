@@ -1,0 +1,114 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-35797365772",
+  "lane": "product",
+  "status": "REVISE",
+  "producer_claim_supported": false,
+  "required_fixes": [
+    "The high UNKNOWN rate (71.9%) for P-SPIDER-PARAM at n>0 means SPIDER falls back to COLD instead of demonstrating parameterized inheritance. The claimed rho_novelty=0.82 reflects a binary gating threshold (freshness 0.25), not proportional cost tracking. Fix: either relax gating to enable parameterized binding at partial novelty, or acknowledge the mechanism only works at n=0 (exact repeat).",
+    "SPIDER/RAG per_hit ratio at n=0 is 1.0 (not <=0.85) and at n=0.25 is 1.57 (not <=0.85). SPIDER does not beat RAG on per_hit cost at any novelty level. The C5-perhit parity/advantage claims are not met.",
+    "SPIDER/TERX per_hit ratio at n>=0.25 is 1.0 (not <1.0) because both fall back to COLD. The claim that SPIDER beats TERX at partial novelty via parameterization is falsified.",
+    "NC1-SHUFFLED control is hardcoded to constant per_hit=500 (COLD fallback) by construction (run_experiment.py lines 421-433). It cannot detect novelty-difficulty confounding. A proper null control should execute the actual pipeline with shuffled slots and measure resulting rho.",
+    "unknown_precision=1.0 for SPIDER is vacuous: UNKNOWN falls back to COLD which always succeeds (success=1.0). The metric measures fallback correctness, not abstention calibration. UNKNOWN_precision should be computed on cases where UNKNOWN was correct (no applicable mechanism) vs incorrect (mechanism existed but gated).",
+    "The per_hit formula excludes verification_tokens (50 per task) from step cost. This is a design choice but should be disclosed as it affects absolute per_hit values. For L=8, this removes 6.25 tokens/step from all systems uniformly."
+  ],
+  "validity_findings": [
+    "CRITICAL: SPIDER UNKNOWN rate = 71.9% (138/192 tasks). At n=0.25 (realized=0.5 for 2-slot families), freshness gating triggers UNKNOWN because behavioral_score=0.8 but ANY B-pool slot pushes realized_novelty > 0.25 threshold. SPIDER does not attempt parameterized binding at n>0 - it falls back to COLD. The rho_novelty=0.82 is driven by the step-function jump at the gating boundary, not by residual-novelty-proportional cost scaling.",
+    "The per_hit metric at n>0 for SPIDER equals COLD per_hit (500) because all steps are novel. There is no 'residual novelty' proportional cost - it is a binary hit (n=0) vs miss (n>0). R2_delta=0.75 similarly reflects this binary structure.",
+    "RAG-EMBED under QCR shows proportional hits at n=0.25 (mean per_hit=203 vs SPIDER 320), meaning RAG retrieves partial overlap while SPIDER abstains entirely. SPIDER is MORE expensive per_hit than RAG at partial novelty.",
+    "TERX and Stagehand at n>=0.25 also fall back to COLD (per_hit=500). SPIDER does not achieve per_hit < TERX at n>=0.25 as required by C5-perhit.",
+    "The positive control PC3 (non-vacuous mock) passes because NC2 forced-execute yields false_accept=0.3125. However, SPIDER itself never exercises the wrong-bound path because it never executes at n>0. The non-vacuous mock is only tested on null controls, not on the SUT.",
+    "Family-stratified bootstrap (5000) and block-permutation (5000) are correctly implemented in stdlib. No numpy/scipy dependency. Seeds are deterministic (PYTHONHASHSEED=0, random.seed(42))."
+  ],
+  "baseline_findings": [
+    "B-COLD: Constant per_hit=500 across all n, as expected. Total cost flat vs novelty (rho~-0.008). This is the correct null for total cost.",
+    "B-RAG-EMBED: Shows proportional cost scaling with realized novelty (per_hit: 50 at n=0, 203 at n=0.25, 341 at n=0.5, 453 at n=0.75, 500 at n=1.0). This is the strongest baseline and demonstrates the environment CAN express proportional cost tracking. SPIDER fails to match this.",
+    "B-STAGEHAND-CACHE and B-TERX-REPLAY: Binary hit at n=0 (per_hit=50), miss to COLD at n>0 (per_hit=500). These are exact-repeat caches, not parameterized inheritance. They correctly serve as parity baselines at n=0 only.",
+    "B-INSTRUCTION: Constant per_hit=500 + small amortized instruction cost. Correctly flat vs novelty.",
+    "B-LENGTH-PROPORTIONAL (NC3): Constant per_hit=500, rho=0, R2=0. Correctly passes null control.",
+    "All baselines use identical splits, same frozen QCR bank (TFIDF Jaccard TAU 0.30), same ranker. QCR protocol respected."
+  ],
+  "recomputed_metrics": {
+    "rho_novelty_per_hit": 0.81995779861859,
+    "rho_novelty_per_hit_bootstrap_ci95": [0.7497642417708783, 0.87652683736545],
+    "block_permutation_p": 0.0001999600079984003,
+    "R2_delta_per_hit": 0.7516958303794341,
+    "R2_novelty_per_hit": 0.7517070048973944,
+    "rho_length_per_stratum": {
+      "0.0": 0.0,
+      "0.25": -0.001457910354843427,
+      "0.5": 0.0,
+      "0.75": 0.0,
+      "1.0": 0.0
+    },
+    "SPIDER_unknown_rate": 0.71875,
+    "SPIDER_per_hit_by_novelty": {
+      "0.0": 50.0,
+      "0.25": 319.77477650554573,
+      "0.5": 500.0,
+      "0.75": 500.0,
+      "1.0": 500.0
+    },
+    "RAG_per_hit_by_novelty": {
+      "0.0": 50.0,
+      "0.25": 203.23749967980737,
+      "0.5": 340.62568841415,
+      "0.75": 453.2916122339199,
+      "1.0": 500.0
+    },
+    "ratios_per_hit": {
+      "SPIDER_COLD_n0": 0.1,
+      "SPIDER_RAG_n0": 1.0,
+      "SPIDER_RAG_n025": 1.573404401300637,
+      "SPIDER_STAGEHAND_n0": 1.0,
+      "SPIDER_TERX_n025": 0.6395495530110915,
+      "SPIDER_TERX_n05": 1.0,
+      "SPIDER_TERX_n075": 1.0,
+      "SPIDER_TERX_n1": 1.0
+    },
+    "ratios_total": {
+      "SPIDER_COLD_n0": 0.16263237518910742,
+      "SPIDER_COLD_n1": 1.0546856742229493,
+      "SPIDER_RAG_n0": 1.12565445026178,
+      "SPIDER_RAG_n025": 1.5488761108207005,
+      "SPIDER_STAGEHAND_n0": 1.5034965034965035,
+      "SPIDER_TERX_n025": 0.6957032167175393,
+      "SPIDER_TERX_n05": 1.0545581720680812,
+      "SPIDER_TERX_n075": 1.0541792081500347,
+      "SPIDER_TERX_n1": 1.0546856742229493
+    },
+    "SPIDER_COLD_f100_n0": 0.14629349470499245,
+    "C1_pass": true,
+    "C2_pass": true,
+    "C3_pass": true,
+    "C4_pass": true,
+    "C5_total_pass": true,
+    "C5_perhit_pass": false,
+    "C6_pass": true,
+    "ece_exec_rows": 0.025454877401718035,
+    "confidence_std": 0.4053800944606679,
+    "false_accept": 0.0,
+    "unknown_precision": 1.0
+  },
+  "claim_ceiling": "C-RESIDUAL-NOVELTY remains FALSIFIED for the proxy file-based census setting. SPIDER parameterized inheritance does NOT achieve honest amortized saving >=25% vs COLD with per_hit parity/advantage to shipped baselines (Stagehand/RAG/TERX) under QCR. The high rho_novelty (0.82) and R2_delta (0.75) are artifacts of binary freshness gating (threshold 0.25) causing SPIDER to abstain at n>0, not proportional residual-novelty cost tracking. RAG-EMBED demonstrates the environment CAN express proportional cost scaling; SPIDER's gating prevents it. No promotion to EXPERIMENTAL for C-RESIDUAL-NOVELTY/C-PRODUCT-ECON/C-LLM-INHERIT on this evidence. The per_hit isolation (C4) and novelty tracking (C3) are technically satisfied but scientifically vacuous due to binary gating.",
+  "evidence_refs": [
+    "research/experiments/EXP-PRODUCT-35797365772/result.json",
+    "research/experiments/EXP-PRODUCT-35797365772/artifacts/raw_per_task.csv",
+    "research/experiments/EXP-PRODUCT-35797365772/artifacts/derived_metrics.json",
+    "research/experiments/EXP-PRODUCT-35797365772/artifacts/cost_config.json",
+    "research/experiments/EXP-PRODUCT-35797365772/artifacts/qcr_bank_manifest.json",
+    "research/experiments/EXP-PRODUCT-35797365772/artifacts/registry.jsonl",
+    "research/experiments/EXP-PRODUCT-35797365772/run_experiment.py",
+    "research/experiments/EXP-PRODUCT-35797365772/spec.json",
+    "research/experiments/EXP-PRODUCT-35797365772/prereg.md",
+    "research/experiments/EXP-PRODUCT-35797365772/freeze.json"
+  ],
+  "unresolved": [
+    "Whether relaxing freshness threshold from 0.25 to a higher value (or making it slot-aware) would enable parameterized binding at partial novelty without increasing false_accept.",
+    "Whether the non-vacuous mock (p=0.15 wrong-bound on forced execute) would yield discriminating false_accept/UNKNOWN_precision for SPIDER if SPIDER actually executed at n>0.",
+    "Whether gpt-4o-mini+Playwright Docker replication (mandated in Director question) would change the economics - currently disclosed as not executed due to unavailable credentials/network.",
+    "Whether continuous similarity novelty (vs disjoint A/B pools) changes the UNKNOWN boundary and ECE calibration.",
+    "Whether the per_hit metric should include verification_tokens (currently excluded) for fairer comparison with baselines that also pay verification per task.",
+    "Whether NC1 should be re-implemented as actual shuffled-slot execution through the kernel (not hardcoded COLD fallback) to properly test novelty-difficulty confounding."
+  ]
+}
