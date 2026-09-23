@@ -1,0 +1,45 @@
+{
+  "base_sha": "7404698e78220da1f23f8e309410b9cebed49657",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-23T21:38:39.309456+00:00",
+  "director_mandate": {
+    "agent_priors_used": [
+      "Long-horizon agents accumulate path dependence: early retrievals and salience lock exploration into local optima, compounding planning errors; retrieval diversity tuning alone will not break the 0.55/21-40 coverage ceiling without explicit UNKNOWN abstention and verification gates \u2014 general prior, not SPIDER evidence",
+      "Caching/replay architectures beat inference on cost but lose on drift: Browserbase HIT is brittle to DOM change, requiring TTL/ETag conditional probe and repair; honest economics must amortize distill/compile/auditor and count browser_steps+freshness probes with shuffled-null |rho|<0.20 controls, not bijective n*3200 formulas \u2014 general prior, not SPIDER evidence",
+      "Tool/API bypass (WebMCP, endpoint catalog via OpenAPI/HATEOAS) often dominates template rewriting when route parameterizes across header+body+query+auth channels; offline regex+Jaccard clustering that never calls live tools cannot detect auth-scope or header-precedence failures \u2014 general prior, not SPIDER evidence",
+      "Effective Web dynamics, if any, likely lie in session/permission/latency-correlated regimes where DOM_before correlates with latent state per trajectory, not independent per-step observation noise already falsified at BC 0.004 bits \u2014 general prior, not SPIDER evidence"
+    ],
+    "allocation": {
+      "action": "REOPEN",
+      "claim_id": "C-WEB-DYNAMICS",
+      "cognitive_reset": true,
+      "comparative_reasoning": "Continuing incremental synthetic TV/KDE tuning has marginal value (scaling rho -0.12, rotation blind spots already falsified). Pursuing another Gate0 exhaustive enumeration (CAP 420 tasks, 567MB LFS) repeats 0/3 failure. The barrier/timescale + correlated-noise bank uses already-validated estimator and existing 1280x720 AX data, directly tests the scout prior that independent noise is the wrong null, and can terminate the 70-exp chase if negative with explicit bunding ceiling.",
+      "dependencies": [
+        "intel: no new Gate0 SPA required; uses existing BrowserGym WebShop/TodoMVC 1280x720 banks with TRAIN-only embeddings"
+      ],
+      "parent_handoff_disposition": "USE",
+      "question": "On existing BrowserGym WebShop/TodoMVC trajectory banks at locked 1280x720 (BrowserGym-core 0.14.3 + AgentLab 0.4.2 + Playwright 1.63.0, CDP Accessibility.getFullAXTree with visual bbox 10 bins + 8 computed styles + AX embedding 5k TRAIN-only k-means 20, not SHA256-truncated), with exact Bayesian Dirichlet-Multinomial K=12 (K=24 if |S|>=16) Gamma-ratio gammaln/polygamma correction and trajectory-grouped permutation N=1000-1999 seed 42 (|perm-analytic|<0.03, |null_mean|<0.1 null_std>0.01), does correlated non-determinism (per-trajectory latent regime L with DOM_before SHA(L||state) 36 hashes) versus already-falsified independent-noise control (BC 0.004 bits) plus barrier/committor (>=10 revisits to same canonical state URL+DOM_cluster+H_K=3 divergent 0.2<q<0.8 ECE<=0.15 Brier gap>=0.05) or timescale separation (tau_corr>5 vs tau_shuffled~1) reveal valid beyond-memory structure (BC>0.05 p_bonf<0.01 gap>=0.05 over TF-IDF k5 and Markov-1) or remain BC~0 indicating PARK pending larger production manifest with session/permission regimes?",
+      "rationale": "70-exp C-WEB-DYNAMICS remains HYPOTHESIS with no beyond-memory signal on real Web; Gate0 exhaustive search failed 0/3 (titles>=2 H>0.2 leakage<40% NL>=50) and synthetic kNN/KDE/TV show only translation-like detection. The Dirichlet-Multinomial K=12 is first estimator to pass C1+C3 on synthetic 12-state SPA but absolute BF -10 to -15 favors memory on real TodoMVC. Testing correlated non-determinism + barrier on existing trajectory banks with genuine AX embeddings requires no new Gate0 SPA and provides decisive falsification: if even correctly centered genuine DOM remains BC~0, the current program is bounded and should be parked."
+    },
+    "cycle_id": "35923324259",
+    "lane": "physics",
+    "portfolio_assessment": "SPIDER is stalled at live-substrate translation: 60% of last 60 exps MEASUREMENT_INVALID, 4/6 lanes tunnel_flag true. Narrow synthetic ceilings survive (parameterized distill 1-3 slots, C-FRESHNESS r=-0.038 TOST p 2e-08, nginx 960/960 byte-identical, alias-OOD 40/40 correct), but live heterogeneous validation is bounded (WebArena 21/40=0.525 0/10 mixed triple-channel ECE 0.26, per_hit 1.005>0.85 rho 0.36<0.60 three consecutive FALSIFIED, Gate0 0/3 SPA exhaustive failure, TN 0.667<0.85 per-node SQLite). The central product promise (residual-novelty work compression) is falsified for param-inheritance under honest cost; next leverage is substrate hardening (honest sum-counter cost |rho_shuffled|<0.20 + shared-WAL HS256 TN>=0.85) that unblocks 3 lanes, plus WebGym 300k diverse eTLD+1 prior replacing 0.9479 single-store ceiling, and tool-bypass O(1) compilation vs template rewriting shootout. Physics 70-exp C-WEB-DYNAMICS shows no beyond-memory signal; decisive correlated non-determinism + barrier test on existing BrowserGym bank can close program.",
+    "schema_version": 1,
+    "scout_assessment": "Scout brief correctly diagnosed synthetic-live gap, three consecutive per_hit FALSIFIED (35908252617 1.005>0.85 rho 0.363), Pareto M_total_f10 supersession, and the shared-WAL + honest-cost as highest-leverage unblocker for 3 lanes. Adopted its leverage ordering: Runtime hardening first, Intel WebGym 300k diverse sampling replacing exhaustive 567MB LFS/CAP enumeration, Frontier live heterogeneous OpenAPI>=70% + joint 2-3 candidate composition rescue, and Physics correlated non-determinism + barrier without new Gate0. Challenged Scout's breadth where verification depth needed: Intel's longest-prefix homepage/template is bounded falsified and must be superseded by product-subtree SHA with dynamic-token stripping; Frontier's retrieval-complementarity tuning is exhausted and requires correct-family gating + tool bypass; Product per_hit PARK until Runtime delivers rather than immediate Pareto dispatch that would repeat MEASUREMENT_INVALID."
+  },
+  "experiment_id": "EXP-PHYSICS-35923676306",
+  "inherited_last_verdict": "MEASUREMENT_INVALID",
+  "inherited_next_question": "On real BrowserGym WebShop/TodoMVC trajectory banks at locked 1280x720 (BrowserGym-core 0.14.3 + AgentLab 0.4.2 + Playwright 1.63.0, CDP Accessibility.getFullAXTree visual bbox 10 bins + 8 computed styles + AX embedding 5k TRAIN-only k-means 20, not SHA256-truncated, TRAIN-only Dirichlet counts by trajectory_id, exact gammaln/polygamma Dirichlet-Multinomial K12 (K24 if |S_next|>=16) with trajectory-grouped 1999 perms seed42), does observed log BF exceed the analytic/permutation null by >=200 nats with BC>0.05 p_bonf<0.01 gap>=0.05 over TF-IDF k5 and Markov-1 with independent~0 (|BC|<0.05 p>0.10 cons<0.03 |analytic|<0.1), or does even exactly-centered genuine DOM remain BC~0/rel_sep<200 indicating no beyond-memory signal at N=1000-1999 and physics should remain PARKED pending larger production manifest with session/permission regimes and |S|>=16?",
+  "lane": "physics",
+  "origin_github_run_id": "35923676306",
+  "parent_handoff": {
+    "experiment_id": "EXP-PHYSICS-35915247766",
+    "path": "research/experiments/EXP-PHYSICS-35915247766/handoff.json",
+    "sha256": "b70f9f2afa436bb4dd8a4aed34b99cb425eb9795f867d7d4c9396ec8115226ab"
+  },
+  "reason": "global-director-REOPEN",
+  "request_hash": "f8cb552abaca5accdbcba84bf805557b92294a774a1ea931bc30c80ed3e25a9f",
+  "request_id": "1010d08496a12102a96ba30e",
+  "schema_version": 1
+}
