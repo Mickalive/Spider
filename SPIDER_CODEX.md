@@ -4,7 +4,7 @@ Pre-2.0 canonical memory remains frozen at `archive/spider-codex-ultimate:SPIDER
 
 Canonical Research 2.0 evidence lives in `codex/experiments/<experiment_id>/`.
 Use `codex/index.json` and `codex/claim_state.json` to locate relevant packets; do not load all experiment bodies by default.
-Validated experiments: **302**. Coverage gaps: **0**. Quarantined packets: **1**.
+Validated experiments: **303**. Coverage gaps: **0**. Quarantined packets: **1**.
 
 ## Experiment index
 
@@ -312,6 +312,7 @@ Validated experiments: **302**. Coverage gaps: **0**. Quarantined packets: **1**
 | EXP-PHYSICS-35915247766 | physics | MEASUREMENT_INVALID | MEASUREMENT_INVALID | C-MEAS-VALID | `b0fe80109943` |
 | EXP-PRODUCT-35916130502 | product | PASS | FALSIFIED | C-PRODUCT-ECON, C-RESIDUAL-NOVELTY, C-FRESHNESS | `0c7e03d30d5d` |
 | EXP-GRAPH-35918640311 | graph | MEASUREMENT_INVALID | MEASUREMENT_INVALID | C-PARAM-INHERIT | `710ce77cd200` |
+| EXP-PRODUCT-35921344930 | product | PASS | MEASUREMENT_INVALID | C-PRODUCT-ECON, C-RESIDUAL-NOVELTY, C-FRESHNESS | `683cb58372ca` |
 
 ## Latest recorded claim events
 
@@ -321,12 +322,12 @@ These are chronological latest events, not an automatic truth ranking.
 |---|---|---|---|
 | C-CROSSSITE | HYPOTHESIS | EXP-INTEL-35903200136 | intel |
 | C-DELTA-REPAIR | BLOCKED | EXP-GRAPH-35860314278 | graph |
-| C-FRESHNESS | HYPOTHESIS | EXP-PRODUCT-35916130502 | product |
+| C-FRESHNESS | HYPOTHESIS | EXP-PRODUCT-35921344930 | product |
 | C-LLM-INHERIT | HYPOTHESIS | EXP-PRODUCT-35797365772 | product |
 | C-MEAS-VALID | MEASUREMENT_INVALID | EXP-PHYSICS-35915247766 | physics |
 | C-PARAM-INHERIT | MEASUREMENT_INVALID | EXP-GRAPH-35918640311 | graph |
-| C-PRODUCT-ECON | REJECTED | EXP-PRODUCT-35916130502 | product |
-| C-RESIDUAL-NOVELTY | REJECTED | EXP-PRODUCT-35916130502 | product |
+| C-PRODUCT-ECON | HYPOTHESIS | EXP-PRODUCT-35921344930 | product |
+| C-RESIDUAL-NOVELTY | HYPOTHESIS | EXP-PRODUCT-35921344930 | product |
 | C-SEMANTIC-RESOLVE | EXPERIMENTAL | EXP-FRONTIER-35915275774 | frontier |
 | C-WEB-DYNAMICS | HYPOTHESIS | EXP-PHYSICS-35903177055 | physics |
 
