@@ -1,0 +1,104 @@
+{
+  "experiment_id": "EXP-RUNTIME-35784838353",
+  "github_run_id": "35784838353",
+  "base_sha": "366b5e66ee4043dc698fe772c219a41bc0962f07",
+  "run_experiment_sha": "df16bb85275ae305adcf432c2d4e8a35498b68de92479b6e32e12ce640c2ea7f",
+  "result_sha": "ee3c41ff78582953b8d2c0c5c9c19f2d35166f19ccb0af701d046ce190def640",
+  "raw_observations_sha": "4935cad79e9c1887f4a639684e9061ee00fb18f3ed4a270f5773d42bce09e08d",
+  "raw_freshness_sha": "1fc229d7121c34d2161343041a78b36f50c351dff23a39d33848b5c95106b408",
+  "batch_state_log_sha": "086c99fb8bd5feae44a89788a29713f0e0e979234fbc8ed23c0d60379552196c",
+  "environment": {
+    "python": "3.12.14",
+    "platform": "Linux-6.17.0-1022-azure-x86_64-with-glibc2.39",
+    "flask": "3.1.3",
+    "pyjwt": "2.14.0",
+    "gunicorn": "23.0.0",
+    "nginx": "1.24.0",
+    "werkzeug": "3.1.8",
+    "agentlab": "0.4.2",
+    "browsergym": "0.14.3",
+    "playwright": "1.48.0",
+    "host": "127.0.0.1",
+    "ports": {
+      "gunicorn": 19860,
+      "nginx": 19851
+    },
+    "seed": 44,
+    "excluded_headers": [
+      "Age",
+      "CF-Cache-Status",
+      "CF-RAY",
+      "Date",
+      "Server",
+      "X-Cache",
+      "X-Request-Id"
+    ],
+    "filter_out_keys": [
+      "age",
+      "cf-cache-status",
+      "cf-connecting-ip",
+      "cf-ray",
+      "date",
+      "server",
+      "x-cache",
+      "x-request-id",
+      "x-worker-pid"
+    ],
+    "body_shas": {
+      "A": "d0ca833f843c6d70ec9d6755f52a92dcbfc8b4ab601b871bced09ad027172e34",
+      "A1": "72f28c5c2b8fe28314392298accd9a9e44747e45b4ad497d63839332cef24f26",
+      "A2": "2667bef51a10d006c22eb01972648a7c989bf7b4f786e4551be7b186c0f5e72b",
+      "A3": "d79643f246bd4a4ff18dab702de41940d11d2f72863424143ba8a121c396decf",
+      "B": "67c186f2cee1ccf01f55c80235eb9b1b1d14b073223a807b9ce944405e67999c",
+      "C": "b46c461cceeefa595c3ac0d706689ed382340b59c20a269a930c786c8389dd32"
+    },
+    "body_lens": {
+      "A": 31,
+      "A1": 32,
+      "A2": 33,
+      "A3": 35,
+      "B": 70,
+      "C": 117
+    },
+    "db_paths": {
+      "shared": "/tmp/spider-runtime-35784838353/shared.db",
+      "per_node_template": "/tmp/spider-pernode-{pid}.db"
+    }
+  },
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-RUNTIME-35784838353/raw_observations.jsonl",
+      "sha256": "4935cad79e9c1887f4a639684e9061ee00fb18f3ed4a270f5773d42bce09e08d",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-RUNTIME-35784838353/raw_freshness_observations.jsonl",
+      "sha256": "1fc229d7121c34d2161343041a78b36f50c351dff23a39d33848b5c95106b408",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-RUNTIME-35784838353/raw_freshness_pernode.jsonl",
+      "sha256": "a03e0f8ca24ade918d9dc458e1503813f3b7ad1bac550c4ed857632e1f9f8be2",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-RUNTIME-35784838353/raw_freshness_sticky.jsonl",
+      "sha256": "735645ce219b43edfd199818c0405f631a7ba21c721feaa9c5fe6b4072286b85",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-RUNTIME-35784838353/batch_state_log.jsonl",
+      "sha256": "086c99fb8bd5feae44a89788a29713f0e0e979234fbc8ed23c0d60379552196c",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-RUNTIME-35784838353/run_experiment.py",
+      "sha256": "df16bb85275ae305adcf432c2d4e8a35498b68de92479b6e32e12ce640c2ea7f",
+      "role": "code"
+    }
+  ],
+  "commands": [
+    "python3 research/experiments/EXP-RUNTIME-35784838353/run_experiment.py"
+  ],
+  "timestamp": "2026-09-22T23:29:35.785789+00:00"
+}

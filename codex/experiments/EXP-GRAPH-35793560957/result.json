@@ -1,0 +1,110 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-35793560957",
+  "lane": "graph",
+  "status": "MEASUREMENT_INVALID",
+  "outcome": "NOT_APPLICABLE",
+  "metrics": {
+    "M-EXECUTABLE-SPIDER": null,
+    "M-BINDING-CORRECT": null,
+    "M-UNSUBSTITUTED-TEMPLATES": null,
+    "M-SUCCESS-SPIDER": null,
+    "M-SUCCESS-COLD": null,
+    "M-SUCCESS-RAG": null,
+    "M-SUCCESS-REPLAY": null,
+    "M-SUCCESS-INSTR": null,
+    "M-SUCCESS-LITERAL": null,
+    "M-FALSE-ACCEPT-SPIDER": null,
+    "M-UNKNOWN-RATE": null,
+    "M-ECE": null,
+    "M-AMORTIZED-SAVING-vs-COLD": null,
+    "M-COST-RATIO-RAG": null,
+    "M-CONTAMINATION": null,
+    "tasks_valid": 7,
+    "families_valid": 1,
+    "census_verified": true,
+    "llm_available": false,
+    "kernel_sha256": "04438d0ecd91113e4367a5d6de0e7b357f141ea67495778f44668da17f3853f6",
+    "kernel_checks": {
+      "distill_parameterized": true,
+      "_common_prefix_and_suffix": true,
+      "_extract_varying_values": true,
+      "_structure_similarity": true,
+      "_is_allowed_path": true,
+      "_field_path_to_slot_name": true,
+      "_sanitize_slot": true
+    },
+    "unit_tests_passed": true
+  },
+  "controls": {
+    "PC-PARAM-REGRESSION-AND-LITERAL-HIT": {
+      "status": "NOT_MEASURED",
+      "reason": "Infrastructure not ready"
+    },
+    "NC-SHUFFLED-AND-RANDOM": {
+      "status": "NOT_MEASURED",
+      "reason": "Infrastructure not ready"
+    },
+    "B-COLD": {
+      "status": "NOT_MEASURED",
+      "reason": "Infrastructure not ready"
+    },
+    "B-RAG": {
+      "status": "NOT_MEASURED",
+      "reason": "Infrastructure not ready"
+    },
+    "B-REPLAY-TERX": {
+      "status": "NOT_MEASURED",
+      "reason": "Infrastructure not ready"
+    },
+    "B-INSTR": {
+      "status": "NOT_MEASURED",
+      "reason": "Infrastructure not ready"
+    },
+    "B-LITERAL": {
+      "status": "NOT_MEASURED",
+      "reason": "Infrastructure not ready"
+    }
+  },
+  "artifacts": [
+    {
+      "path": "/home/runner/work/Spider/Spider/src/spider/kernel.py",
+      "sha256": "04438d0ecd91113e4367a5d6de0e7b357f141ea67495778f44668da17f3853f6",
+      "role": "code"
+    },
+    {
+      "path": "/home/runner/work/Spider/Spider/data/webarena_verified_v2.json",
+      "sha256": "f55c34141105a77b14db2420e43f48234b4391a27196daabc69bbeb32974f9c6",
+      "role": "raw"
+    },
+    {
+      "path": "tests/test_kernel_param_inherit.py",
+      "sha256": "87e456e2b1f4eed7b9dca4cb1c581f4374c061b91b9d0adba5ea44a3acaf099f",
+      "role": "code"
+    }
+  ],
+  "observations": [
+    "Kernel distill_parameterized implemented with three fixes: single-prefix _common_prefix_and_suffix, field-path filter (url/body.*/headers.*), Jaccard >=0.75 constant-anchor check, distinct slot naming per field-path, confidence 0.90",
+    "Unit tests (B1/B4/D1/E1/B2/B3/B5/C2) all PASS: True",
+    "WebArena-Verified v2 synthetic census generated: 275 tasks, 50 templates, duplication 0.8182, SHA256: f55c34141105a77b14db2420e43f48234b4391a27196daabc69bbeb32974f9c6",
+    "Pilot family selected: add_to_cart with 7 pool A tasks, 7 pool B tasks, zero overlap: True",
+    "OPENAI_API_KEY not present in environment - real LLM execution not possible",
+    "Playwright Chromium available: True",
+    "Per EXPERIMENT_PACKET.md \u00a79 and frozen decision_rule, infrastructure failure yields MEASUREMENT_INVALID not falsification",
+    "C-PARAM-INHERIT remains EXPERIMENTAL at synthetic-only ceiling per prior Codex evidence"
+  ],
+  "validity_notes": [
+    "Synthetic WebArena census used (not real Docker data) - ceiling downgraded to MEASUREMENT_INVALID for WebArena claim per prereg fallback clause",
+    "No real LLM execution due to missing OPENAI_API_KEY - primary measurement not obtained",
+    "Kernel fixes verified via code inspection and unit tests, but not exercised via real LLM+Playwright on held-out B",
+    "Positive controls PC1/PC2 and null controls NC1/NC2 not executed - substrate not ready",
+    "Per Director mandate and prereg, this synthetic pilot cannot advance C-PARAM-INHERIT beyond EXPERIMENTAL"
+  ],
+  "unresolved": [
+    "Real WebArena-Verified v2 census via Docker am1n3e/webarena-verified-shopping@sha256:3e8cb9b945",
+    "OPENAI_API_KEY provisioning for gpt-4o-mini-2024-07-18",
+    "Real LLM+Playwright execution on held-out B with deterministic _matches verification",
+    "Family-stratified bootstrap CIs and Wilson CIs for primary metrics",
+    "Honest amortized cost accounting (tokens+browser+retrieval+verification)"
+  ]
+}

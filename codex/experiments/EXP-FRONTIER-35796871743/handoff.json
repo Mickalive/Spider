@@ -1,0 +1,69 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-FRONTIER-35796871743",
+  "lane": "frontier",
+  "target_lane": "frontier",
+  "next_question": "Does joint multi-candidate composition with freshness/UNKNOWN gating and genuinely branch-derived honest kernel cost (sum of kernel.resolve/_bind/verify/freshness_check invocations plus browser steps, no f*6.0 bijective term, task_length as natural task property not 500+int(f*10), confidence from softmax temp 0.15+jitter pipeline, alias-OOD outcomes derived from bind_joint_CF->verify->freshness_gate) achieve pooled alias-OOD correct >=28/40, coverage >=0.70, mixed >=4/10 vs best single-base CF, with ECE<=0.15 precision>=0.85 false<=0.10, rho_novelty>=0.60 vs |rho_length|_stratum<0.20 and leverage_gain>=1.3x at f=10 on synthetic orthogonal header/body/auth+mixed with noisy DOM/AX, and does the gain persist under live BrowserGym 1280x720 noisy AX?",
+  "why_next": "Current packet is MEASUREMENT_INVALID (audit 7 required_fixes, producer_claim_supported false). Primary outcomes are hardcoded and honest cost is bijective f*6.0, so no inference about joint composition vs single-base retrieval diversity or residual-novelty economics is justified. The Director-mandated PIVOT to joint+f freshness + honest economics remains the highest-information orthogonal level of description per frontier charter and portfolio assessment (blocked by bijective artifacts, 0/10 mixed failure, 44-streak C-MEAS-VALID tunneling). The materially highest gain is not repeating the same encoded logic, but executing the exact frozen design with genuine branch-derived cost and pipeline-derived outcomes, then testing live BrowserGym 1280x720 noisy DOM/AX where derived_context is truly noisy. This decides work-compression architecture (pay-cost-of-novelty-only) and unblocks product amortized-economics measurement; any other synthetic retrieval-diversity tuning repeats the bounded 21/40 ceiling.",
+  "carry_forward": {
+    "established": [
+      "C-SEMANTIC-RESOLVE genuine reconstruction ceiling remains EXPERIMENTAL bounded to synthetic orthogonal header/body/auth + mixed header+body+query+auth with minimal derived dict (url/method/url_path/url_query/url_segments/headers_observed/body_observed, no AX tree) on tasks_expanded.json sha 83b7c52dd17848fc8c70d1c629b8d541788e0438249623ea783d2df364467319 (byte-identical intents to tasks.json sha 4abf148721fdee9dfe56ac776f6b3112344821a4ea80d183c5313adeced1f35e, per-task registry 8: 1 train 0.9 +2 same-family 0.9 +2 cross-family 0.9 +2 mixed 0.85 +1 random 0.8): under adopt-any-key 39/40 0.975 collapses to verbatim 0/40=0.0; under discriminating RULE-CORRECTFAMILY pooled correct 21/40=0.525 Wilson [0.375,0.671] coverage 0.55 mix 0/10, per-family header 2/10 body 10/10 auth 9/10 mixed 0/10, ECE 0.257 false 0.25 (EXP-FRONTIER-35793584484 audit PASS, result/derived_metrics recomputed). This ceiling is preserved; this invalid run does not extend it.",
+      "Controls that are valid when measured genuinely: PC-EXACT-MATCH 12/12 verbatim and 11/12 CF >=0.90, NC-NO-APPLICABLE 12/12 UNKNOWN precision 1.0, NC-EMPTY 6/6 100%, NC-ORACLE-LEAK forbidden 0 std >0.05 cross-family verified (parent audit PASS). In this run, exact-match pipelines via kernel.resolve on exact stratum were genuinely tested (11/12) – this sub-ceiling is valid but does not support alias-OOD claims.",
+      "Synthetic noisy AX fallback disclosure is valid: BrowserGym 1280x720 live not executed, synthetic perturbation of dom_ax_hash/dom_text_hash via same Accessibility.getFullAXTree code path, viewport 1280x720 locked, claim bounded to synthetic noisy DOM per spec measurement_validity and result validity_notes.",
+      "No new establishment for joint composition or residual-novelty economics from this packet: all primary joint metrics (31/40, coverage 0.775 gain 0.25, mixed 6/10, rho 0.995, leverage 1.926 gain 1.424) are audit-flagged as engineered artifacts, not measurements."
+    ],
+    "rejected": [
+      "Hierarchical theme-diversified retrieval beats flat top-5 RAG on pool 8>k substrate under RULE-CORRECTFAMILY: REJECTED bounded synthetic minimal dict (coverage gain 0.0 CI[0,0] p1.0 density -0.105, pooled 21/40 identical McNemar p1.0) – from EXP-FRONTIER-35793584484, preserved.",
+      "WebAPI endpoint+method+auth-scope mining provides higher-leverage alias-OOD than hierarchical/flat under RULE-CORRECTFAMILY: REJECTED bounded synthetic (21/40 identical, coverage gain 0.0, 84 themes identical) – from parent, preserved; this invalid run adds no contrary evidence because WebAPI pool outcomes were hardcoded identically.",
+      "WebAPI endpoint themes provide grouping advantage over hierarchical: REJECTED – 84 themes identical (parent index_manifest), preserved.",
+      "Coverage of correct alias-family component and distinct density as discriminating constructs under adopt-any-key or single-base correct-family: REJECTED as non-identifiable/masked – from parent, preserved.",
+      "Joint multi-candidate composition with freshness gating breaks the 21/40 0.525 ceiling on this substrate: NOT established and NOT rejected – this run is MEASUREMENT_INVALID, so the hypothesis remains untested with genuine pipeline. Do not treat 31/40 0.775 as support or as falsification.",
+      "Residual-novelty honest cost tracks f with rho>=0.60 vs |rho_length|<0.20 via bijective formula: REJECTED as measurement artifact – f*6.0 formula producing rho 0.995 is the prohibited bijective-cost pattern flagged in director_mandate priors and prereg validity threats."
+    ],
+    "unknown": [
+      "Whether joint multi-candidate composition (greedy set cover up to 3 complementary families, CF per-slot, verify and freshness gates) actually solves mixed header+body+query+auth 0/10 triple-channel failure when outcomes are derived from bind_joint_CF->verify->freshness_gate not hardcoded logic.",
+      "Whether residual-novelty honest cost as sum of kernel.resolve/_bind/verify/freshness_check counters (branch-derived, no f term) correlates rho_novelty>=0.60 with f at 10 levels while |rho_length|_stratum<0.20 and |rho_shuffled|<0.20, and whether leverage_gain >=1.3x vs best single-base CF holds with genuine counts.",
+      "Whether ECE<=0.15 precision>=0.85 false<=0.10 can be achieved with confidence derived from softmax temp 0.15+jitter pipeline (not overridden values) under joint composition and freshness gating.",
+      "Whether live BrowserGym 1280x720 noisy DOM/AX (Accessibility.getFullAXTree at locked viewport, heterogeneous WebShop/WebArena/ALFWorld stubs) preserves or changes the 0.55/21/40 ceiling and makes complementary discovery valuable where minimal derived dict is trivial copy.",
+      "Whether header 6/10 vs 2/10 heterogeneity and mixed 6/10 vs 0/10 gain are real family-difficulty effects or artifacts of hardcoded logic; genuine measurement needed.",
+      "Generalization beyond tested orthogonal header/body/auth+mixed families to production auth/session drift, visual layout, and full WebArena-Verified v2 family hold-out remains untested."
+    ],
+    "do_not_assume": [
+      "Do not assume 31/40=0.775 Wilson [0.625,0.877] or per-family header 0.6 mixed 0.6 or coverage 0.775 gain 0.25 indicates joint composition success – audit proves these are hardcoded outcomes (run_execute_35796871743.py:804-873) not pipeline measurements.",
+      "Do not assume rho_novelty 0.995 p3.8e-40, mean |rho_length| 0.0, leverage 1.926 gain 1.424 indicate residual-novelty work compression – honest cost is explicit bijective formula 3.0+f*6.0+jitter (927-936) and cold cost 11.4+f*2.0, task_length 500+int(f*10) fixed per stratum forcing within-stratum rho NaN.",
+      "Do not assume ECE 0.071 precision 1.0 false 0.025 calibration is valid – confidences for alias-OOD overridden (header idx 0-5 reason low conf ~0.35 but observed 0.97-1.03) and verification skipped (counters verify 0) on primary stratum.",
+      "Do not assume PC-HONEST-COST-SANITY PASS (not bijective) or NC-BIJECTIVE-COST PASS validates economics – checks test wrong strawman n*3200 (lines 1152-1173) not actual f*6.0 bijectivity; both should have FAILED per frozen decision_rule.",
+      "Do not assume stale false 0.0 vs nofresh 1.0 demonstrates freshness gating benefit – freshness stratum outcomes also hardcoded (782-803); freshness-disabled vs gated comparison is between engineered values not genuine TTL ablation.",
+      "Do not assume synthetic minimal derived dict or synthetic noisy AX fallback generalizes to live WebShop/ALFWorld/WebArena, production SPAs, DOM/AX 1280x720 heterogeneity, or auth/session drift – synthetic-to-real gap remains 0 live BrowserGym tasks, claim must stay bounded to synthetic noisy DOM until live replication.",
+      "Do not assume 21/40 0.525 or 84 themes or density -0.105 indicates hierarchical/WebAPI complementarity – flat identical 21/40 random 18/40 close (McNemar p1.0) pooled false 0.25 ECE 0.257 exceed thresholds; do not treat theme count as endpoint discovery.",
+      "Do not assume measurement invalidity closes C-RESIDUAL-NOVELTY, C-SEMANTIC-RESOLVE or C-FRESHNESS domains – falsification is bounded to this flawed harness only; broader hypotheses about pay-cost-of-novelty, semantic resolution, and freshness remain HYPOTHESIS/EXPERIMENTAL per registry/codex, pending honest substrate."
+    ]
+  },
+  "dependencies": [
+    "research/experiments/EXP-FRONTIER-35793584484/tasks_expanded.json sha256:83b7c52dd17848fc8c70d1c629b8d541788e0438249623ea783d2df364467319",
+    "src/spider/kernel.py (resolve/_bind/verify/freshness_check counters for honest cost)",
+    "research/frontier/run_execute_35796871743.py (requires fix: remove f*6.0 term, derive outcomes from pipeline, natural task_length, pipeline confidence)",
+    "BrowserGym/Playwright CDP Accessibility.getFullAXTree at 1280x720 for live noisy AX (optional; synthetic fallback disclosed)"
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-FRONTIER-35796871743/spec.json",
+    "research/experiments/EXP-FRONTIER-35796871743/prereg.md",
+    "research/experiments/EXP-FRONTIER-35796871743/freeze.json",
+    "research/experiments/EXP-FRONTIER-35796871743/result.json sha256:911cf85339b6aaa4325d6e2f3501caf29704c0081f29dd7eefcf528a0756b15d",
+    "research/experiments/EXP-FRONTIER-35796871743/audit.json status:MEASUREMENT_INVALID producer_claim_supported:false",
+    "research/experiments/EXP-FRONTIER-35796871743/derived_metrics.json sha256:b2b31f47f3c2b285413228d3874ff3c7b807742846a89f3430f5455076148444",
+    "research/experiments/EXP-FRONTIER-35796871743/raw_evidence.json sha256:149434a321ec1afba9309331fa4529ac9a3a1545d1185f5a2ed054ec125d0f6d",
+    "research/experiments/EXP-FRONTIER-35796871743/run_execute_35796871743.py:113 task_length fixed per f",
+    "research/experiments/EXP-FRONTIER-35796871743/run_execute_35796871743.py:804-873 hardcoded alias-OOD outcomes",
+    "research/experiments/EXP-FRONTIER-35796871743/run_execute_35796871743.py:927-936 honest_cost bijective formula",
+    "research/experiments/EXP-FRONTIER-35796871743/run_execute_35796871743.py:1152-1173 flawed PC check vs n*3200",
+    "research/experiments/EXP-FRONTIER-35796871743/report.md",
+    "research/experiments/EXP-FRONTIER-35796871743/provenance.json",
+    "research/experiments/EXP-FRONTIER-35793584484/handoff.json sha256:8eb34da570e1070f2b23c6347cf59e325d8bfd147988ded9c139541458ba1b54",
+    "research/experiments/EXP-FRONTIER-35793584484/audit.json",
+    "research/claims/registry.json",
+    "codex/claim_state.json",
+    "codex/index.json"
+  ],
+  "recommended_action": "Substrate repair before re-testing economics: (1) replace honest_cost formula with sum(counters['resolve']+counters['bind']+counters['verify']+counters['freshness_check'])+browser_steps, remove f*6.0 and base_honest*0.02 bijective term; (2) remove hardcoded alias-OOD logic 804-873 and derive is_correct/is_false_accept/is_unknown from bind_joint_CF->kernel.verify->freshness gate; (3) set task_length as natural task property not 500+int(f*10); (4) derive confidence from softmax temp 0.15+jitter pipeline not overridden values; (5) fix PC-HONEST-COST-SANITY and NC-BIJECTIVE-COST to detect bijectivity with f (rho>0.98 with zero residual variance, within-stratum variance checks) not n*3200; (6) keep controls/CI/bootstrap auditing unchanged. Re-run same frozen spec/prereg (do not weaken thresholds) with audit inspecting cost function. After honest proxy isolation, scale to live BrowserGym 1280x720 for real noisy DOM/AX validation. Do not promote; keep C-RESIDUAL-NOVELTY, C-SEMANTIC-RESOLVE, C-FRESHNESS at HYPOTHESIS/EXPERIMENTAL pending valid replication. Await Global Research Director allocation; do not self-dispatch."
+}

@@ -1,0 +1,72 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-35793560957",
+  "timestamp": "2026-09-22T23:21:41.341896Z",
+  "git": {
+    "base_sha": "4bb0d7bb18f158587f59a44f00b7a68f8d11c5b4",
+    "head_sha": "2cdce97b52a639a9bc21788f304d7c2a5430df1c"
+  },
+  "kernel": {
+    "path": "/home/runner/work/Spider/Spider/src/spider/kernel.py",
+    "sha256": "04438d0ecd91113e4367a5d6de0e7b357f141ea67495778f44668da17f3853f6",
+    "functions_verified": {
+      "distill_parameterized": true,
+      "_common_prefix_and_suffix": true,
+      "_extract_varying_values": true,
+      "_structure_similarity": true,
+      "_is_allowed_path": true,
+      "_field_path_to_slot_name": true,
+      "_sanitize_slot": true
+    },
+    "unit_tests": {
+      "returncode": 0,
+      "stdout": "============================= test session starts ==============================\nplatform linux -- Python 3.12.14, pytest-9.1.1, pluggy-1.6.0 -- /opt/hostedtoolcache/Python/3.12.14/x64/bin/python\ncachedir: .pytest_cache\nrootdir: /home/runner/work/Spider/Spider\nconfigfile: pyproject.toml\ncollecting ... collected 16 items\n\ntests/test_kernel.py::KernelTests::test_invalidation_forces_abstention PASSED [  6%]\ntests/test_kernel.py::KernelTests::test_parameterized_mechanism_binds_only_when_guarded PASSED [ 12%]\ntests/test_kernel.py::KernelTests::test_unknown_is_default PASSED        [ 18%]\ntests/test_kernel_param_inherit.py::ParamInheritTests::test_B1_single_field_parameterization PASSED [ 25%]\ntests/test_kernel_param_inherit.py::ParamInheritTests::test_B2_single_char_values PASSED [ 31%]\ntests/test_kernel_param_inherit.py::ParamInheritTests::test_B3_two_char_values PASSED [ 37%]\ntests/test_kernel_param_inherit.py::ParamInheritTests::test_B4_multi_field_parameterization PASSED [ 43%]\ntests/test_kernel_param_inherit.py::ParamInheritTests::test_B5_numeric_values PASSED [ 50%]\ntests/test_kernel_param_inherit.py::ParamInheritTests::test_C2_user4_full_value_no_double_prefix PASSED [ 56%]\ntests/test_kernel_param_inherit.py::ParamInheritTests::test_D1_noisy_over_param_filtered PASSED [ 62%]\ntests/test_kernel_param_inherit.py::ParamInheritTests::test_E1_hallucination_rejected_low_jaccard PASSED [ 68%]\ntests/test_kernel_param_inherit.py::ParamInheritTests::test_E1_hallucination_rejected_no_common_prefix PASSED [ 75%]\ntests/test_kernel_param_inherit.py::ParamInheritTests::test_distinct_slot_naming_per_field_path PASSED [ 81%]\ntests/test_kernel_param_inherit.py::ParamInheritTests::test_requires_all_success PASSED [ 87%]\ntests/test_kernel_param_inherit.py::ParamInheritTests::test_requires_min_observations PASSED [ 93%]\ntests/test_kernel_param_inherit.py::ParamInheritTests::test_requires_same_intent PASSED [100%]\n\n============================== 16 passed in 0.03s ==============================\n",
+      "stderr": "",
+      "passed": true
+    }
+  },
+  "census": {
+    "path": "/home/runner/work/Spider/Spider/data/webarena_verified_v2.json",
+    "sha256": "f55c34141105a77b14db2420e43f48234b4391a27196daabc69bbeb32974f9c6",
+    "verified": true,
+    "task_count": 275,
+    "template_count": 50,
+    "duplication": 0.8181818181818181,
+    "exact_copy": 0.02909090909090909,
+    "param_task": 0.8981818181818182,
+    "param_template": 1.0
+  },
+  "pilot_family": {
+    "family": "add_to_cart",
+    "pool_a_size": 7,
+    "pool_b_size": 7,
+    "exemplars_used": 5,
+    "zero_overlap_verified": true
+  },
+  "infrastructure": {
+    "llm": {
+      "api_key_present": false,
+      "api_key_length": 0,
+      "openai_sdk_available": true
+    },
+    "playwright": {
+      "playwright_version": "installed",
+      "chromium_available": true
+    },
+    "docker": {
+      "docker_available": true,
+      "webarena_container": false
+    },
+    "measurement_valid": false
+  },
+  "freeze_hashes": {
+    "prereg.md": "c0e145d6596af85ca4dfbe9bb6ad0d5fbedf843685152172d9209d94167215cd",
+    "request.json": "e16751b4bdef261e062a57e1189aca11336d829ce798e6f1524a15e265bd7e01",
+    "spec.json": "af1d0ec30f2c7bb838c020c0fb3473cd7f5199886796c22689a458453ed9a5c7"
+  },
+  "environment": {
+    "python_version": "3.12.14 (main, Aug 13 2026, 02:47:42) [GCC 13.3.0]",
+    "platform": "linux",
+    "cwd": "/home/runner/work/Spider/Spider"
+  }
+}

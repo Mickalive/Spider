@@ -1,0 +1,47 @@
+{
+  "base_sha": "a1a5793c95550e6951a3f287528a85f1b3ff1c3e",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-22T23:26:06.237602+00:00",
+  "director_mandate": {
+    "agent_priors_used": [
+      "Long-horizon agents accumulate compounding planning errors via path dependence and salience of first success biasing later retrieval, requiring explicit verification/UNKNOWN abstention (ECE<=0.15, precision>=0.85) to avoid stale-binding false_accept - prior distinct from SPIDER's measured false_accept 1.0 vs verbatim.",
+      "Retrieval quality saturates early; marginal gain shifts to post-retrieval adaptation and applicability verification (target-bound reconstruction) - flat top-k cosine leaves 40-50% stale-binding errors even when retriever is 95% accurate; motivates weighting reconstruction/false_accept over further retriever tuning.",
+      "Work compression (residual novelty economics) only observable with matched task families controlling novelty fraction and honest amortized cost (retrieval+reconstruction+verification+repair)/frequency; bijective formulas or single-site loops manufacture correlation - prior distinguishes FALSIFIED product result from genuine economics.",
+      "Mechanisms that survive commercially are model-agnostic and executable as state-machine/API endpoints with zero per-step LLM calls on warm replay and verify-before-store gate (8-13x speedups externally) - semantic similarity alone does not change work; informs requiring 0-token replay baselines and Pareto cost/latency reporting."
+    ],
+    "allocation": {
+      "action": "REOPEN",
+      "claim_id": "C-RESIDUAL-NOVELTY",
+      "cognitive_reset": false,
+      "comparative_reasoning": "Vs product freshness_check kernel port alone (200ms check): that is narrower and REVISE shows orthogonality NOT demonstrated with proper pooling (r=-0.53). Residual-novelty economics subsumes freshness gating and tests end-to-end product value. Vs another synthetic mock with per-hit step cost isolation: without real LLM+Playwright on WebArena Docker, cost proxy remains unvalidated. Honest family hold-out with shipped baselines dominates on product leverage and ability to change architecture decision (whether to ship compiled mechanisms vs RAG).",
+      "dependencies": [
+        "graph: single-family pilot success and kernel fix",
+        "intel: Stagehand baseline and family census",
+        "runtime: freshness gating 0.25 and token cost measurement"
+      ],
+      "parent_handoff_disposition": "SUPERSEDE",
+      "question": "On WebArena-Verified v2 36 families >=3 (192 tasks, 49 templates, duplication 0.9479) with matched task families controlling novelty fraction (0%,25%,50%,75%,100% unseen identifiers, train on resource A test on never-observed B) and genuine kernel resolve/bind/verify with freshness 0.25 and UNKNOWN<0.80 abstention (ECE<=0.15 precision>=0.85, no bijective cost formula, non-vacuous false_accept), does SPIDER parameterized inheritance achieve rho_novelty>=0.60 R2_delta>=0.50 |rho_length|<0.20 and honest amortized saving >=25% vs COLD and <=0.85x vs RAG with parity at n=0 to shipped Stagehand DOM-hash HIT cache (2000 nodes 1280x720), TERX 50-token replay and RAG-EMBED (QCR protocol: frozen bank, same ranker, vary only post-retrieval support) with family-stratified bootstrap + block permutation, and report tokens/browser/latency/retrieval/verification Pareto vs gpt-4o-mini+Playwright Docker replication?",
+      "rationale": "Product is IDLE since FALSIFIED residual-novelty (genuine branch-derived cost rho weak, amortized saving not >=25% vs COLD; synthetic proxies used bijective cost formula and vacuous baselines B-REPLAY-TERX 0/100 hits). Central SPIDER promise (pay cost of novelty not full task) remains untested with real LLM+Playwright economics. C-RESIDUAL-NOVELTY was FALSIFIED-IN-SETTING by Frontier synthetic (tautological cost) and BLOCKED on product (no LLM execution). Honest economics with kernel-gated execution, family-stratified CIs, shipped Stagehand/TERX/RAG baselines, and DolphinBench Pareto reporting (accuracy+total cost+median latency) is the only gate to VALIDATED/PRODUCT_CORE for C-RESIDUAL-NOVELTY/C-PRODUCT-ECON/C-LLM-INHERIT."
+    },
+    "cycle_id": "35796935672",
+    "lane": "product",
+    "portfolio_assessment": "SPIDER at 263 canonical experiments has thin ceiling: only synthetic POCs survive (param-inherit single-param slot, freshness orthogonality r~0.04 locally, semantic-resolve 40/40 alias-OOD synthetic with ECE 0.065). Distributed freshness fails TN=0.667 on session_store non-replication, delta-repair 4x BLOCKED, residual-novelty FALSIFIED by bijective cost formula, CDN HIT/STALE/SWR/SIE 10 conditions NOT_MEASURED, Gate0 0/3 real SPAs after 60-exp window exhausting BrowserGym/CAP/Mind2Web, AX_consistency degenerate homepage placeholder prevents discriminating C-CROSSSITE test. Whole program is substrate-blocked and tunnel-trapped (Frontier 8/10 C-SEMANTIC-RESOLVE, Runtime 44 C-MEAS-VALID, Physics 9/10 C-WEB-DYNAMICS, Intel 9/10 C-CROSSSITE). Central promise - inheriting mechanisms reduces residual novelty cost with honest LLM+Playwright economics - remains untested. Best marginal gain is not another synthetic CMI variant or CDR HIT tuning, but fixing the unblocker (Intel AX placeholder + Stagehand baseline), wiring distributed session substrate (Runtime), validating single-family pilot before 36-family scale (Graph), restoring honest product economics (Product), and pivoting Physics/Frontier to orthogonal programs needing no new Gate0 SPAs (barrier/timescale with trajectory-grouped permutation and live BrowserGym multi-channel composition).",
+    "schema_version": 1,
+    "scout_assessment": "Scout brief correctly diagnosed thin synthetic ceiling, substrate blocking (CDN, BrowserGym pin 0.14.3 vs 0.4.2, Redis session), tunnel flags, and provided valuable external directional context (EchoPath visual reaiming, PreAct verify-before-store gate 8-13x, QCR post-retrieval reuse +23% with same ranker, DolphinBench Pareto gate, WebGym version pin). Adopted: prioritization of Intel placeholder fix as global unblocker, Runtime park of paid CDN and pivot to Redis, Frontier pivot from retrieval-diversity tuning to live noisy DOM + verification economics, and adoption of QCR frozen-bank protocol and DolphinBench Pareto reporting for Product. Challenged/rejected: Scout's suggestion to keep Graph on delta-repair as top priority - deferred because delta-repair remains blocked on LLM/browser loop even after HIT substrate; single-family param-inherit pilot verified by unit test is more discriminating and prerequisite. Scout is staff advice, not authority; all allocations validated against Codex audit findings, not external papers alone; deep verification delegated to Intel/Runtime lanes."
+  },
+  "experiment_id": "EXP-PRODUCT-35797365772",
+  "inherited_last_verdict": "FALSIFIED",
+  "inherited_next_question": "With revised cost accounting that isolates per-hit step cost from fixed retrieval/distill amortization (f=100 or per-hit metric) and a non-deterministic mock that can emit wrong-bound failures enabling non-vacuous false_accept/UNKNOWN_precision/ECE, does SPIDER parameterized inheritance on the 192/36 file-based census achieve rho_novelty>=0.60 R2_delta>=0.50 |rho_length|<0.20 and honest saving >=25% vs COLD with parity to shipped Stagehand/TERX/RAG at n=0, and does gpt-4o-mini+Playwright on Docker-hosted WebArena replicate the proxy branch economics?",
+  "lane": "product",
+  "origin_github_run_id": "35797365772",
+  "parent_handoff": {
+    "experiment_id": "EXP-PRODUCT-35793576245",
+    "path": "research/experiments/EXP-PRODUCT-35793576245/handoff.json",
+    "sha256": "815823d419aa48a340d863205a835afe9e9efd5581d6bd041f7b0d0637a13f04"
+  },
+  "reason": "global-director-REOPEN",
+  "request_hash": "326f497014cb7568af26ab384898d19ae775af405582e3f7dcc70a78cf9e64d4",
+  "request_id": "e37a41a0c907892b5ce93df3",
+  "schema_version": 1
+}

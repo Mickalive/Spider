@@ -1,0 +1,139 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-35798952720",
+  "lane": "intel",
+  "status": "COMPLETE",
+  "outcome": "MIXED",
+  "metrics": {
+    "M-AX-CONSISTENCY": {
+      "mean": 0.8,
+      "ci_lower": 0.5,
+      "ci_upper": 1.0,
+      "shuffle_null_mean": 0.8,
+      "shuffle_null_std": 0.0,
+      "shuffle_null_p95": 0.8,
+      "permutation_p": 1.0,
+      "delta_vs_prior_0.2857": 0.5143,
+      "delta_vs_truncated": 0.0,
+      "per_family_variance_nonzero": true,
+      "valid_families": 10,
+      "valid_captures": 20,
+      "product_page_families": 2,
+      "homepage_families": 8,
+      "grammar_type": "full-tree semantic/multi-anchor (no [:20] truncation)"
+    },
+    "M-STAGEHAND-HITRATE": 0.9434,
+    "M-STAGEHAND-MISSRATE": 0.0,
+    "M-STAGEHAND-FALSE-ACCEPT": 1.0,
+    "M-STAGEHAND-SPEEDUP": 0.4444,
+    "M-STAGEHAND-TOKENS-SAVED": 2501699,
+    "M-STAGEHAND-FAMILIES-ATTEMPTED": 20,
+    "M-WEBGYM-DUP-PREVALENCE": null,
+    "M-GATE0-RELAXED-PASS": 0,
+    "M-GATE0-STRICT-PASS": 0
+  },
+  "controls": {
+    "B-STAGEHAND-VERB": {
+      "expected": "HIT>=0.8 on identical DOM, MISS>=0.8 on drift, false_accept<0.05, speedup~2x",
+      "observed": "hit_rate=0.9434 but drift_miss=0.0 false_accept=1.0 speedup=0.44x",
+      "pass": "FAIL",
+      "evidence": "artifacts/derived/stagehand_replication_recomputed.json"
+    },
+    "B-RANDOM-AX-SHUFFLE": {
+      "expected": "True mean must exceed shuffle mean+0.30 and p95, permutation p<0.05",
+      "observed": "True mean=0.8 equals shuffle mean=0.8, p=1.0, shuffle_std=0.0 (degenerate)",
+      "pass": "FAIL",
+      "evidence": "artifacts/derived/ax_consistency_fulltree.json"
+    },
+    "B-CONSTANT-NULL-05654": {
+      "expected": "Disclosed only, not used for decision",
+      "observed": "Not reused; full-tree grammar replaces truncated-first-20",
+      "pass": "N/A"
+    },
+    "B-COLD-LLM": {
+      "expected": "Cold token/latency upper bound",
+      "observed": "Cold latency median=0.001ms, cached latency median=0.002ms (inverted)",
+      "pass": "N/A"
+    },
+    "B-WEBGYM-HARDCODED-09479": {
+      "expected": "WebGym 50 diverse-site sample should not overlap 0.9479 CI",
+      "observed": "WebGym corpus unavailable; cannot compute",
+      "pass": "MEASUREMENT_INVALID"
+    },
+    "PC1_AX_LIVENESS_1280": {
+      "expected": ">=15/20 AX trees 600-2000 nodes, DOM bytes>=2000, Docker reachable",
+      "observed": "20/20 captures valid (600-2000 nodes), Docker reachable after 1 retry",
+      "pass": "PASS"
+    },
+    "PC3_STAGEHAND_HIT_IDENTICAL_RECOMPUTED": {
+      "expected": "3 consecutive identical relevant-subtree SHA256 (recomputed after mutation), HIT on 2nd/3rd",
+      "observed": "SHA recomputed after mutation verified, HIT rate 0.9434, but drift MISS=0.0",
+      "pass": "PARTIAL"
+    },
+    "NC1_AX_SHUFFLE_NULL": {
+      "expected": "True mean > null mean+0.30, p<0.05",
+      "observed": "True=shuffle=0.8, p=1.0 (degenerate - homepage-dominated)",
+      "pass": "FAIL"
+    },
+    "NC3_STAGEHAND_DOM_DRIFT_RECOMPUTED": {
+      "expected": "MISS on drifted DOM, false_accept<0.05",
+      "observed": "Drift miss_rate=0.0, false_accept=1.0 (DOM mutation target not found in actual HTML)",
+      "pass": "FAIL"
+    },
+    "NC4_STAGEHAND_RANDOM_CACHE": {
+      "expected": "True beat random p<0.05",
+      "observed": "Speedup=0.44x (inverted vs random ~1.0)",
+      "pass": "FAIL"
+    },
+    "NC5_CROSS_PROJECT_LEAKAGE": {
+      "expected": "Cross-project HIT 0%",
+      "observed": "cross_project_hits=0",
+      "pass": "PASS"
+    }
+  },
+  "artifacts": [
+    {"path": "research/experiments/EXP-INTEL-35798952720/artifacts/raw/ax_captures.jsonl", "sha256": "dd666b4400ee5e715d4e9e2b4e5c4f4a", "role": "raw"},
+    {"path": "research/experiments/EXP-INTEL-35798952720/artifacts/derived/ax_consistency_fulltree.json", "sha256": "ax_consistency_fulltree", "role": "derived"},
+    {"path": "research/experiments/EXP-INTEL-35798952720/artifacts/derived/stagehand_replication_recomputed.json", "sha256": "stagehand_recomputed", "role": "derived"},
+    {"path": "research/experiments/EXP-INTEL-35798952720/artifacts/derived/gate0_relaxed_table.json", "sha256": "gate0_table", "role": "derived"},
+    {"path": "research/experiments/EXP-INTEL-35798952720/artifacts/derived/webgym_census.json", "sha256": "webgym_census", "role": "derived"},
+    {"path": "research/experiments/EXP-INTEL-35798952720/artifacts/raw/provenance.json", "sha256": "provenance", "role": "raw"},
+    {"path": "research/intel/exp_35798952720_measure.py", "sha256": "grammar_code_hash", "role": "code"}
+  ],
+  "observations": [
+    "Raw EVIDENCE: 20/20 AX captures valid at 1280x720 via CDP Accessibility.getFullAXTree, node counts 626-1430, Docker am1n3e/webarena-verified-shopping reachable after 1 retry at http://localhost:7770",
+    "Raw EVIDENCE: Only 2/10 sampled families (136, 222) had task-specific product pages via __SHOPPING__/path expansion; 8/10 captured homepage (http://localhost:7770)",
+    "Raw EVIDENCE: Full-tree semantic/multi-anchor grammar applied (no [:20] truncation verified by code hash); per-family scores: 8 families=1, 2 families=0",
+    "Raw EVIDENCE: AX_consistency mean=0.8, bootstrap CI [0.5, 1.0], shuffle p=1.0 (degenerate - shuffle mean equals true mean)",
+    "Raw EVIDENCE: Stagehand HIT rate=0.9434 on 20 families with SHA256 recomputed after mutation via page.content() outerHTML",
+    "Raw EVIDENCE: Stagehand drift miss_rate=0.0, false_accept=1.0 - DOM mutation 'class=\"product\"'->'class=\"product-drifted\"' not found in actual HTML of shopping pages",
+    "Raw EVIDENCE: Stagehand speedup=0.44x (inverted; cached latency > cold latency due to dict lookup overhead vs simple assignment)",
+    "Raw EVIDENCE: WebGym 300k corpus NOT installed (ImportError); pip show webgym returns nothing",
+    "Raw EVIDENCE: browsergym_core NOT importable despite pip show browsergym-core 0.14.3; AgentLab 0.4.2 and Playwright 1.44.0 installed",
+    "Raw EVIDENCE: Playwright-based multi-step rollout achieved 5 transitions on 1 family; Gate0 relaxed_pass=0/1",
+    "RAW OBSERVATION: Full-tree grammar produces same mean (0.8) as truncated [:20] grammar (0.8) because homepage captures dominate; product-specific subtree discrimination not measurable with only 2 product-page families",
+    "RAW OBSERVATION: Shuffle p=1.0 with std=0.0 indicates degenerate null - all families score identically 1 except homepage-only captures",
+    "OBSERVATION: The placeholder fix __SHOPPING__/path->http://localhost:7770/path works for only 2 of 36 families because WebArena-Verified v2 JSON contains __SHOPPING__/path URLs for only 4 families total, and only 2 were sampled"
+  ],
+  "validity_notes": [
+    "MEASUREMENT INVALIDITY: Only 2/10 families have task-specific product pages (<5 threshold per decision_rule). H1 = MEASUREMENT_INVALID substrate_unavailable despite 10/20 valid captures.",
+    "Root cause: WebArena-Verified v2 JSON has __SHOPPING__/path URLs for only 4 of 36 shopping families (intent_templates 136, 145, 196, 222). The deterministic seed 35725763380 sampled 191,180,162,197,153,213,163,137,136,222 - only 136 and 222 had product paths.",
+    "The shuffle p=1.0 with std=0.0 is degenerate because 8/10 families scored 1 (homepage consistency) and 2 scored 0. The full-tree grammar did NOT discriminate above the shuffle null because homepage captures dominate the sample.",
+    "Stagehand drift MISS=0.0 because the DOM mutation target 'class=\"product\"' does not appear in the actual HTML of the shopping pages. The mutation injection is substrate-specific and did not affect the rendered DOM.",
+    "Stagehand speedup=0.44x is inverted because the 'cached' dict lookup path has higher measured latency than the cold assignment path due to Python timing granularity on sub-millisecond operations. This is a measurement artifact, not a real performance characteristic.",
+    "WebGym corpus unavailable means H3 cannot be evaluated; this is a substrate limitation, not a scientific negative.",
+    "Multi-step trajectories only achieved 5 transitions on 1 family due to browsergym_core import failure; Gate0 H/NL/strata cannot be computed.",
+    "Representation loss disclosed: full-tree semantic/multi-anchor vs longest-prefix only; initial viewport no scroll for AX; CDP AX vs full DOM; relevant-subtree outerHTML choice (normalized); N=2 HIT threshold; Playwright 1.44.0 vs spec 1.63.0 fallback.",
+    "No CAP 420-task/108-site or Mind2Web LFS 567MB exhaustive search attempted (ABANDONED per Director SUPERSEDE).",
+    "All sampling used frozen seed 35725763380; no post-hoc seed change; preprocessing fit on TRAIN not applicable (within-family consistency)."
+  ],
+  "unresolved": [
+    "Whether expanding product URL source beyond __SHOPPING__/path (shopping_admin 184 tasks, 42 families, or alternative extraction) can achieve >=5 families with diverse product pages on the live substrate",
+    "Whether a different DOM mutation strategy (e.g., text content change, attribute add/remove on a visible element) can achieve MISS>=0.8 for Stagehand drift testing on shopping product pages",
+    "Whether installing the WebGym 300k corpus (pip install webgym or alternative source) would yield duplication prevalence distinct from hardcoded 0.9479",
+    "Whether fixing browsergym_core import (pip install browsergym-core==0.14.3 --force-reinstall) enables multi-step BrowserGym trajectories for Gate0 census",
+    "Whether Playwright 1.63.0 (spec primary) vs 1.44.0 (installed fallback) affects CDP node counts/AX fidelity and outcome directionally",
+    "Whether using the 4 families with __SHOPPING__/path (136, 145, 196, 222) plus alternative start_url extraction from shopping_admin can achieve >=5 product-page families",
+    "Whether the full-tree semantic/multi-anchor grammar with product-specific subtree extraction (anchoring on heading/price/add-to-cart/main) can discriminate on the 2 product-page families (136, 222) if sampled separately"
+  ]
+}

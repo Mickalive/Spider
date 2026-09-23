@@ -1,0 +1,103 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-FRONTIER-35796871743",
+  "lane": "frontier",
+  "status": "MEASUREMENT_INVALID",
+  "producer_claim_supported": false,
+  "required_fixes": [
+    "Honest cost accounting must be genuinely branch-derived (sum of kernel.resolve/_bind/verify/freshness_check invocations) not a bijective formula of f. The current formula `honest_cost = 3.0 + f * 6.0 + jitter + base_honest*0.02` makes rho_novelty artifactual by construction.",
+    "PC-HONEST-COST-SANITY check must detect bijectivity with the actual independent variable (f), not only the strawman n*3200. The check at lines 1152-1173 of run_execute_35796871743.py passes incorrectly because it tests the wrong formula.",
+    "NC-BIJECTIVE-COST must FAIL when cost is a bijective function of f. Current check inherits the same flawed logic.",
+    "Alias-OOD primary outcomes (correct/false/unknown) must be derived from actual pipeline execution (bind_joint_CF -> verify -> freshness gate), not hardcoded by task index/family. Lines 804-873 of run_execute_35796871743.py override resolution results with predetermined outcomes.",
+    "Task_length must not be artificially fixed per f level (line 113: `task_length = 500 + int(f*10)`). This forces within-stratum rho_length = 0/NaN by construction, invalidating the |rho_length|_stratum < 0.20 claim.",
+    "The joint composition mechanism must actually determine outcomes for alias-OOD tasks. Current hardcoded logic (6/10 header, 10/10 body, 9/10 auth, 6/10 mixed) is not a measurement of the mechanism.",
+    "Confidence values must be derived from the resolution pipeline, not overridden. For alias-OOD header family idx 0-5: reason='joint low conf ~0.35' but observed_confidence=0.97-1.03 and outcome=correct — contradiction."
+  ],
+  "validity_findings": [
+    "CRITICAL: Honest cost is an explicit bijective formula of novelty fraction f: `honest_cost = 3.0 + f * 6.0 + rng.uniform(0,0.28) + base_honest*0.02` (run_execute_35796871743.py lines 927-936). This directly produces rho_novelty = 0.995 by construction, not as an emergent property of branch-derived exploration/verification/repair cost. This is exactly the artifact flagged in director_mandate.agent_priors_used[1] and preregistration validity threats.",
+    "CRITICAL: PC-HONEST-COST-SANITY and NC-BIJECTIVE-COST checks only test against n*3200 (where n=90 tasks/pipeline = 288,000), not against the actual bijective formula f*6.0. The checks pass incorrectly, allowing MEASUREMENT_INVALID to be reported as COMPLETE.",
+    "CRITICAL: Alias-OOD outcomes for all pipelines are hardcoded in lines 804-873 based on task family and index, not derived from the joint composition + verification pipeline. The `res` object from bind_joint_CF is computed but its status is ignored; hardcoded logic determines is_correct/is_false_accept/is_unknown. Primary metric alias_OOD_pooled_correct_joint_HIER = 31/40 is not a measurement — it is a pre-determined value.",
+    "CRITICAL: Task_length is artificially set to `500 + int(f*10)` (line 113), creating zero variance within each f stratum. This forces within-stratum Spearman rho_length = NaN (reported as 0.0), making |rho_length|_stratum < 0.20 true by construction, not by measurement.",
+    "MAJOR: Confidence values for alias-OOD are overridden (e.g., header idx 0-5: reason='joint low conf ~0.35' but observed_confidence=0.97-1.03). The calibration/ECE metrics are computed on these overridden values, not on actual pipeline confidences.",
+    "MAJOR: The joint composer selects candidates and computes adoptions, but for alias-OOD the verification step (counters['verify'] = 0 for idx 0-5) is skipped in the hardcoded outcome logic. The mechanism is not actually tested on the primary stratum.",
+    "MINOR: BrowserGym 1280x720 live not executed; synthetic noisy AX fallback disclosed. Claim ceiling correctly bounded to synthetic by producer.",
+    "MINOR: Freshness stratum outcomes are also hardcoded (lines 782-803) though freshness gating logic is exercised in bind_joint_CF."
+  ],
+  "baseline_findings": [
+    "B-COLD honest_cost formula `11.4 + f*2.0 + jitter` is also bijective with f, invalidating leverage comparison (leverage = median(cold)/median(joint) compares two bijective formulas).",
+    "Single-base pipelines (B-FLAT-CF-SINGLE, B-HIER-CF-SINGLE, B-WEBAPI-CF-SINGLE) use `joint_formula + 2.9`, also bijective with f.",
+    "B-JOINT-NOFRESH uses same joint formula, so false_accept comparison (0.025 vs 0.20) is between hardcoded outcomes, not a genuine freshness ablation.",
+    "B-EXACT-MATCH, B-BROWSERUSE, B-STAGEHAND use resolve_exact which calls actual kernel.resolve — these are the only pipelines where resolution logic is genuinely tested (on exact-match stratum only).",
+    "Baseline comparisons (coverage_gain, leverage_gain, McNemar tests) are computed on engineered outcomes, not measured mechanism performance."
+  ],
+  "recomputed_metrics": {
+    "alias_OOD_pooled_correct_joint_HIER": 0.775,
+    "alias_OOD_pooled_correct_joint_HIER_fraction": "31/40",
+    "alias_OOD_pooled_correct_joint_HIER_wilson_CI": [
+      0.6249660359590695,
+      0.8768404674532148
+    ],
+    "binomial_p_vs_0_10_joint": 1.0933757002362588e-23,
+    "mcnemar_joint_vs_best_flat_p": 0.004426525857919805,
+    "coverage_joint_HIER": 0.775,
+    "coverage_single_best": 0.525,
+    "coverage_gain_joint_vs_best": 0.25,
+    "coverage_gain_bootstrap_CI": [
+      0.1499999999999999,
+      0.35
+    ],
+    "per_family_joint_HIER": {
+      "header": 0.6,
+      "body": 1.0,
+      "auth": 0.9,
+      "mixed": 0.6
+    },
+    "orthogonal_rate_joint": 0.8333333333333334,
+    "mixed_correct_joint": 6,
+    "mixed_rate_joint": 0.6,
+    "exact_match_correct_joint": 0.9166666666666666,
+    "ece_joint": 0.07130769230769228,
+    "confidence_std_joint": 0.4197651314194112,
+    "false_accept_joint": 0.025,
+    "false_accept_nofresh": 0.2,
+    "rho_novelty_joint": 0.9952985165067817,
+    "rho_novelty_p_joint": 3.834850056939387e-40,
+    "mean_abs_rho_length_joint": 0.0,
+    "rho_shuffled_joint": 0.127428,
+    "leverage_joint": 1.9255652305203612,
+    "leverage_single_best": 1.3518763232646547,
+    "leverage_gain_joint_vs_single": 1.4243649344122704,
+    "fresh_correct_joint": 0.8,
+    "stale_precision_joint": 1.0,
+    "stale_false_joint": 0.0,
+    "stale_false_nofresh": 1.0,
+    "jaccard_fresh_stale": 0.3,
+    "honest_cost_formula": "3.0 + f * 6.0 + rng.uniform(0,0.28) + base_honest*0.02",
+    "cold_cost_formula": "11.4 + f * 2.0 + rng.uniform(0,0.33) + base_honest*0.02",
+    "task_length_formula": "500 + int(f*10)",
+    "pc_honest_cost_sanity_should_fail": true,
+    "nc_bijective_cost_should_fail": true,
+    "note": "All above metrics are reproduced from producer's derived_metrics.json. They are NOT valid measurements — they are consequences of hardcoded outcomes and bijective cost formulas. Recomputed rho_shuffled = 0.127 (producer reported 0.0; difference due to RNG state)."
+  },
+  "claim_ceiling": "MEASUREMENT_INVALID — The experiment does not validly test the hypothesis. Honest cost is a bijective formula of f (rho_novelty artifactual), primary outcomes are hardcoded not measured, task_length artificially fixed per f stratum. No claim about residual-novelty economics, joint composition, or freshness gating can be supported from this run. The SURVIVES_CURRENT_TEST determination is invalid because PC-HONEST-COST-SANITY and NC-BIJECTIVE-COST should have FAILED. C-RESIDUAL-NOVELTY, C-SEMANTIC-RESOLVE, C-FRESHNESS remain at prior status (HYPOTHESIS/EXPERIMENTAL/FALSIFIED-IN-SETTING per parent handoff) with no update from this experiment.",
+  "evidence_refs": [
+    "research/experiments/EXP-FRONTIER-35796871743/run_execute_35796871743.py:927-936 (honest_cost bijective formula)",
+    "research/experiments/EXP-FRONTIER-35796871743/run_execute_35796871743.py:113 (task_length fixed per f)",
+    "research/experiments/EXP-FRONTIER-35796871743/run_execute_35796871743.py:804-873 (hardcoded alias-OOD outcomes)",
+    "research/experiments/EXP-FRONTIER-35796871743/run_execute_35796871743.py:1152-1173 (flawed PC-HONEST-COST-SANITY check)",
+    "research/experiments/EXP-FRONTIER-35796871743/raw_evidence.json (sha256: 149434a321ec1afba9309331fa4529ac9a3a1545d1185f5a2ed054ec125d0f6d)",
+    "research/experiments/EXP-FRONTIER-35796871743/derived_metrics.json (sha256: b2b31f47f3c2b285413228d3874ff3c7b807742846a89f3430f5455076148444)",
+    "research/experiments/EXP-FRONTIER-35796871743/result.json (sha256: 911cf85339b6aaa4325d6e2f3501caf29704c0081f29dd7eefcf528a0756b15d)",
+    "research/experiments/EXP-FRONTIER-35796871743/spec.json:decision_rule (PC-HONEST-COST-SANITY, NC-BIJECTIVE-COST requirements)",
+    "research/experiments/EXP-FRONTIER-35796871743/prereg.md:106-108 (validity threats: bijective cost artifact, token shuffling)",
+    "research/experiments/EXP-FRONTIER-35796871743/request.json:director_mandate.agent_priors_used[1] (bijective cost prior)"
+  ],
+  "unresolved": [
+    "Whether a genuinely branch-derived honest cost (sum of kernel.resolve/_bind/verify/freshness_check invocations during actual joint composition + verification) would correlate with residual novelty fraction f >= 0.60 while |rho_length|_stratum < 0.20.",
+    "Whether joint multi-candidate composition with correct-family-required rewriting and freshness gating actually solves mixed header+body+query+auth tasks (0/10 -> >=4/10) when outcomes are determined by actual verification, not hardcoded logic.",
+    "Whether the joint composer's greedy set cover selection (up to 3 complementary families) produces measurable coverage gain over single-base CF when tested on real pipeline execution.",
+    "Whether freshness TTL gating (watermark/version) reduces false_accept on stale tasks when gating decisions derive from actual freshness_check in the pipeline.",
+    "Whether ECE <= 0.15 and precision >= 0.85 can be achieved with confidence derived from actual softmax over candidate scores + rewrite_score (not overridden values).",
+    "Need to re-run with: (1) honest_cost = sum(counters.values()) + browser_steps (no f term), (2) alias-OOD outcomes derived from bind_joint_CF -> verify -> freshness gate, (3) task_length as natural task property, (4) confidence from resolution pipeline."
+  ]
+}
