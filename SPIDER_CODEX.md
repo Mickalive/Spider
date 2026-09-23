@@ -4,7 +4,7 @@ Pre-2.0 canonical memory remains frozen at `archive/spider-codex-ultimate:SPIDER
 
 Canonical Research 2.0 evidence lives in `codex/experiments/<experiment_id>/`.
 Use `codex/index.json` and `codex/claim_state.json` to locate relevant packets; do not load all experiment bodies by default.
-Validated experiments: **265**. Coverage gaps: **0**. Quarantined packets: **0**.
+Validated experiments: **271**. Coverage gaps: **0**. Quarantined packets: **0**.
 
 ## Experiment index
 
@@ -267,6 +267,7 @@ Validated experiments: **265**. Coverage gaps: **0**. Quarantined packets: **0**
 | EXP-INTEL-35782546046 | intel | REVISE | REVISE — degenerate homepage-only measurement (placeholder bug) prevents discriminating AX_consistency test; Stagehand replication incomplete without drift MISS; no bounded falsification of longest-prefix method on product pages | C-LLM-INHERIT, C-CROSSSITE, C-PRODUCT-ECON | `34bc669a574f` |
 | EXP-FRONTIER-35782552659 | frontier | PASS | MIXED | C-SEMANTIC-RESOLVE | `ca6d0f60bf9d` |
 | EXP-GRAPH-35784823623 | graph | REVISE | MEASUREMENT_INVALID | C-PARAM-INHERIT | `8814e8b044fa` |
+| EXP-RUNTIME-35784838353 | runtime | MEASUREMENT_INVALID | MEASUREMENT_INVALID — Director PIVOT question not measured: distributed C-FRESHNESS and BrowserGym C-MEAS-VALID blocked by synthetic harness and relabeled direct requests; no valid evidence for shared-store/sticky TN>=0.85, n_non304>=800, orthogonality TOST, or browser fingerprint isolation with CDP AX>10 on /resource | C-MEAS-VALID, C-FRESHNESS | `2786b680971b` |
 | EXP-GRAPH-35787691878 | graph | FAIL | MEASUREMENT_INVALID | C-PARAM-INHERIT | `5f856b1bbc32` |
 | EXP-PHYSICS-35787698409 | physics | MEASUREMENT_INVALID | MEASUREMENT_INVALID | C-WEB-DYNAMICS | `7aff37743b75` |
 | EXP-FRONTIER-35789949165 | frontier | FAIL | MIXED | C-SEMANTIC-RESOLVE | `87e0410e20f3` |
@@ -275,6 +276,11 @@ Validated experiments: **265**. Coverage gaps: **0**. Quarantined packets: **0**
 | EXP-PHYSICS-35793566080 | physics | FAIL | MEASUREMENT_INVALID | C-WEB-DYNAMICS | `f06a69af7e6c` |
 | EXP-PRODUCT-35793576245 | product | PASS | FALSIFIED | C-RESIDUAL-NOVELTY | `8883235ece2f` |
 | EXP-FRONTIER-35793584484 | frontier | PASS | FALSIFIED-IN-SETTING | C-SEMANTIC-RESOLVE | `7c767ed15ff4` |
+| EXP-PHYSICS-35796855042 | physics | FAIL | MEASUREMENT_INVALID | C-WEB-DYNAMICS | `ec13a32ed8f0` |
+| EXP-FRONTIER-35796871743 | frontier | MEASUREMENT_INVALID | MEASUREMENT_INVALID | C-RESIDUAL-NOVELTY, C-SEMANTIC-RESOLVE, C-FRESHNESS | `daf0ce3c3dc3` |
+| EXP-PRODUCT-35797365772 | product | REVISE | FALSIFIED | C-RESIDUAL-NOVELTY, C-PRODUCT-ECON, C-LLM-INHERIT | `67c49b421749` |
+| EXP-GRAPH-35798169917 | graph | PASS | MEASUREMENT_INVALID | C-PARAM-INHERIT | `5aed08da5105` |
+| EXP-INTEL-35798952720 | intel | MEASUREMENT_INVALID | MEASUREMENT_INVALID | C-CROSSSITE | `c3f90f923f8f` |
 
 ## Latest recorded claim events
 
@@ -282,13 +288,13 @@ These are chronological latest events, not an automatic truth ranking.
 
 | Claim | Status | Experiment | Lane |
 |---|---|---|---|
-| C-CROSSSITE | MEASUREMENT_INVALID | EXP-INTEL-35789942386 | intel |
+| C-CROSSSITE | MEASUREMENT_INVALID | EXP-INTEL-35798952720 | intel |
 | C-DELTA-REPAIR | BLOCKED | EXP-GRAPH-35764315683 | graph |
-| C-FRESHNESS | EXPERIMENTAL | EXP-PRODUCT-35697049382 | product |
-| C-LLM-INHERIT | MEASUREMENT_INVALID | EXP-INTEL-35789942386 | intel |
-| C-MEAS-VALID | MEASUREMENT_INVALID | EXP-RUNTIME-35774047385 | runtime |
-| C-PARAM-INHERIT | MEASUREMENT_INVALID | EXP-GRAPH-35793560957 | graph |
-| C-PRODUCT-ECON | MEASUREMENT_INVALID | EXP-INTEL-35789942386 | intel |
-| C-RESIDUAL-NOVELTY | HYPOTHESIS | EXP-PRODUCT-35793576245 | product |
-| C-SEMANTIC-RESOLVE | EXPERIMENTAL | EXP-FRONTIER-35793584484 | frontier |
-| C-WEB-DYNAMICS | HYPOTHESIS | EXP-PHYSICS-35793566080 | physics |
+| C-FRESHNESS | MEASUREMENT_INVALID | EXP-FRONTIER-35796871743 | frontier |
+| C-LLM-INHERIT | HYPOTHESIS | EXP-PRODUCT-35797365772 | product |
+| C-MEAS-VALID | MEASUREMENT_INVALID | EXP-RUNTIME-35784838353 | runtime |
+| C-PARAM-INHERIT | MEASUREMENT_INVALID | EXP-GRAPH-35798169917 | graph |
+| C-PRODUCT-ECON | HYPOTHESIS | EXP-PRODUCT-35797365772 | product |
+| C-RESIDUAL-NOVELTY | HYPOTHESIS | EXP-PRODUCT-35797365772 | product |
+| C-SEMANTIC-RESOLVE | MEASUREMENT_INVALID | EXP-FRONTIER-35796871743 | frontier |
+| C-WEB-DYNAMICS | HYPOTHESIS | EXP-PHYSICS-35796855042 | physics |

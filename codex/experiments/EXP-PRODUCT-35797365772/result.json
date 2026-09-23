@@ -1,0 +1,637 @@
+{
+  "artifacts": [
+    {
+      "path": "fixtures/tasks.json",
+      "role": "fixture",
+      "sha256": "f953716805e2c4784097477df7aec5f5891674cb0482c60b50fe74ac9a80d136"
+    },
+    {
+      "path": "artifacts/cost_config.json",
+      "role": "code",
+      "sha256": "b6333b9f5670c5bfdad89f06bdacf5ff4a3635fa04b6107430ee84a4b54cbd41"
+    },
+    {
+      "path": "artifacts/qcr_bank_manifest.json",
+      "role": "code",
+      "sha256": "dc384908e996f7a3932b6cc157b0bcc8f360fe853de74c047b1f7d40038db052"
+    },
+    {
+      "path": "artifacts/registry.jsonl",
+      "role": "derived",
+      "sha256": "462236fdef0f8468fe39b3d6a8675f3f96e414cbe8d68eba8d864a1fec1e6889"
+    },
+    {
+      "path": "artifacts/raw_per_task.csv",
+      "role": "raw",
+      "sha256": "7669216f9738d529098802beb071f7960875ed46d3effde712edc57e75a7c03e"
+    },
+    {
+      "path": "artifacts/branch_traces.json",
+      "role": "raw",
+      "sha256": "486557bc6fb7eded3a940d104f978810838b3f8519d85019d53ff7d099c66735"
+    },
+    {
+      "path": "artifacts/derived_metrics.json",
+      "role": "derived",
+      "sha256": "13e12be4471eb8f8a2d4df09e851f31e8f2ad3855089dfb3f7e86a787b940d47"
+    },
+    {
+      "path": "result.json",
+      "role": "packet",
+      "sha256": ""
+    }
+  ],
+  "controls": {
+    "NC-SHUFFLE-RANDOM-LENGTH": {
+      "evidence": [
+        "artifacts/raw_per_task.csv"
+      ],
+      "expected": "NC1 |rho_per_hit|<0.25 p>=0.05, NC2 false_accept>=0.10 or |rho|<0.35, NC3 |rho|<0.25 R2<0.15 per_hit",
+      "observed": {
+        "NC1": {
+          "block_permutation_p": 1.0,
+          "mean_per_hit": 500.0,
+          "mean_tokens": 5497.916666666667,
+          "rho_novelty_per_hit": 0.0,
+          "rho_novelty_total": -0.007890496086527816,
+          "success": 0.8645833333333334
+        },
+        "NC2": {
+          "false_accept": 0.3125,
+          "rho_novelty_per_hit": -0.05566313954151985,
+          "success": 0.6875
+        },
+        "NC3": {
+          "r2_novelty_per_hit": 0.0,
+          "rho_novelty_per_hit": 0.0,
+          "rho_novelty_total": 0.0,
+          "slope": 0.0
+        }
+      },
+      "pass": true
+    },
+    "PC-BINDING-AND-EXACT-REPEAT": {
+      "evidence": [
+        "artifacts/raw_per_task.csv",
+        "artifacts/registry.jsonl"
+      ],
+      "expected": "PC1 hit_rate 1.0 at n0 per_hit 50tok success1.0, PC2 binding 5/5 per family 1.0 via _bind, PC3 NC2 false_accept 0.10-0.60 non-vacuous",
+      "observed": {
+        "PC1": {
+          "n0_tasks": 36,
+          "stagehand_hit_rate": 1,
+          "stagehand_mean_per_hit": 50.0,
+          "stagehand_mean_tokens": 595.8333333333334,
+          "stagehand_success": 1,
+          "terx_hit_rate": 1,
+          "terx_mean_per_hit": 50.0,
+          "terx_mean_tokens": 595.8333333333334,
+          "terx_success": 1
+        },
+        "PC2": {
+          "binding_correctness_n0": 1.0,
+          "executable_rate_n0": 1,
+          "n0_tasks": 36
+        },
+        "PC3": {
+          "nc2_false_accept": 0.3125,
+          "pass": true
+        }
+      },
+      "pass": true
+    }
+  },
+  "experiment_id": "EXP-PRODUCT-35797365772",
+  "lane": "product",
+  "metrics": {
+    "criteria": {
+      "C1": {
+        "detail": {
+          "confidence_std": 0.4053800944606679,
+          "ece_all_rows": {
+            "ece": 0.13299246480035778,
+            "empty_bins": [
+              1,
+              3
+            ],
+            "n": 192
+          },
+          "ece_exec_rows": {
+            "ece": 0.025454877401718035,
+            "empty_bins": [
+              0,
+              1,
+              2,
+              3
+            ],
+            "n": 54
+          },
+          "false_accept": 0,
+          "mean_success_all_levels": 1,
+          "success_n0": 1,
+          "success_n0_wilson_lower": 0.9035781695514236,
+          "unknown_precision": 1.0
+        },
+        "pass": true
+      },
+      "C2": {
+        "detail": {
+          "pc1": {
+            "n0_tasks": 36,
+            "stagehand_hit_rate": 1,
+            "stagehand_mean_per_hit": 50.0,
+            "stagehand_mean_tokens": 595.8333333333334,
+            "stagehand_success": 1,
+            "terx_hit_rate": 1,
+            "terx_mean_per_hit": 50.0,
+            "terx_mean_tokens": 595.8333333333334,
+            "terx_success": 1
+          },
+          "pc2": {
+            "binding_correctness_n0": 1.0,
+            "executable_rate_n0": 1,
+            "n0_tasks": 36
+          },
+          "pc3": {
+            "nc2_false_accept": 0.3125,
+            "pass": true
+          }
+        },
+        "pass": true
+      },
+      "C3": {
+        "detail": {
+          "block_permutation_p": 0.0001999600079984003,
+          "bootstrap_rho_ci95": [
+            0.7497642417708783,
+            0.87652683736545
+          ],
+          "rho_novelty_per_hit": 0.81995779861859,
+          "rho_total": 0.6430508236371439,
+          "slope": 432.2885753481609,
+          "slope_p": 0.0
+        },
+        "pass": true
+      },
+      "C4": {
+        "detail": {
+          "R2_delta_per_hit": 0.7516958303794341,
+          "R2_novelty": 0.7517070048973944,
+          "rho_length_per_stratum": {
+            "0.0": 0.0,
+            "0.25": -0.001457910354843427,
+            "0.5": 0.0,
+            "0.75": 0.0,
+            "1.0": 0.0
+          }
+        },
+        "pass": true
+      },
+      "C5": {
+        "detail": {
+          "SPIDER_COLD_f100_n0": 0.14629349470499245,
+          "beats_terx_perhit": false,
+          "c5_perhit_pass": false,
+          "c5_total_pass": true,
+          "ratios_per_hit": {
+            "SPIDER_COLD_n0": 0.1,
+            "SPIDER_RAG_n0": 1.0,
+            "SPIDER_RAG_n025": 1.573404401300637,
+            "SPIDER_STAGEHAND_n0": 1.0,
+            "SPIDER_TERX_n025": 0.6395495530110915,
+            "SPIDER_TERX_n05": 1.0,
+            "SPIDER_TERX_n075": 1.0,
+            "SPIDER_TERX_n1": 1.0
+          },
+          "ratios_total": {
+            "SPIDER_COLD_n0": 0.16263237518910742,
+            "SPIDER_COLD_n1": 1.0546856742229493,
+            "SPIDER_RAG_n0": 1.12565445026178,
+            "SPIDER_RAG_n025": 1.5488761108207005,
+            "SPIDER_STAGEHAND_n0": 1.5034965034965035,
+            "SPIDER_TERX_n025": 0.6957032167175393,
+            "SPIDER_TERX_n05": 1.0545581720680812,
+            "SPIDER_TERX_n075": 1.0541792081500347,
+            "SPIDER_TERX_n1": 1.0546856742229493
+          }
+        },
+        "pass": false
+      },
+      "C6": {
+        "detail": {
+          "NC1": {
+            "p": 1.0,
+            "rho_per_hit": 0.0
+          },
+          "NC2": {
+            "false_accept": 0.3125,
+            "rho": -0.05566313954151985
+          },
+          "NC3": {
+            "r2": 0.0,
+            "rho": 0.0
+          },
+          "beats_terx": false
+        },
+        "pass": true
+      }
+    },
+    "primary": {
+      "R2_delta_per_hit": 0.7516958303794341,
+      "R2_delta_total": 0.7516958303794341,
+      "block_permutation_p": 0.0001999600079984003,
+      "bootstrap_r2delta_ci95": [
+        0.6698904152889122,
+        0.8172739690256425
+      ],
+      "bootstrap_rho_ci95": [
+        0.7497642417708783,
+        0.87652683736545
+      ],
+      "bootstrap_slope_ci95": [
+        399.48529009721057,
+        460.7175721934137
+      ],
+      "ols": {
+        "intercept": 124.59601226012481,
+        "r2_delta": 0.7516958303794341,
+        "r2_length": 1.1174517960288455e-05,
+        "r2_novelty": 0.7517070048973944,
+        "rho_total": 0.6430508236371439,
+        "robust_slope_se": 46.00142625387399,
+        "slope": 432.2885753481609,
+        "slope_n": 192,
+        "slope_p_two_sided_normal": 0.0,
+        "slope_z": 9.397286357219325
+      },
+      "rho_length_per_stratum": {
+        "0.0": 0.0,
+        "0.25": -0.001457910354843427,
+        "0.5": 0.0,
+        "0.75": 0.0,
+        "1.0": 0.0
+      },
+      "rho_novelty_per_hit": 0.81995779861859,
+      "rho_novelty_total": 0.6430508236371439
+    },
+    "ratios": {
+      "SPIDER_COLD_f100_n0": 0.14629349470499245,
+      "bootstrap_ci": {
+        "SPIDER_COLD_n0_total": {
+          "ci95": [
+            0.15190767781441356,
+            0.17492096944151736
+          ],
+          "n_iter": 5000
+        },
+        "SPIDER_COLD_n1_total": {
+          "ci95": [
+            0.9677633031574299,
+            1.147935597003029
+          ],
+          "n_iter": 5000
+        },
+        "SPIDER_RAG_n0_perhit": {
+          "ci95": [
+            1.0,
+            1.0
+          ],
+          "n_iter": 5000
+        },
+        "SPIDER_STAGEHAND_n0_perhit": {
+          "ci95": [
+            1.0,
+            1.0
+          ],
+          "n_iter": 5000
+        }
+      },
+      "per_hit": {
+        "SPIDER_COLD_n0": 0.1,
+        "SPIDER_RAG_n0": 1.0,
+        "SPIDER_RAG_n025": 1.573404401300637,
+        "SPIDER_STAGEHAND_n0": 1.0,
+        "SPIDER_TERX_n025": 0.6395495530110915,
+        "SPIDER_TERX_n05": 1.0,
+        "SPIDER_TERX_n075": 1.0,
+        "SPIDER_TERX_n1": 1.0
+      },
+      "total": {
+        "SPIDER_COLD_n0": 0.16263237518910742,
+        "SPIDER_COLD_n1": 1.0546856742229493,
+        "SPIDER_RAG_n0": 1.12565445026178,
+        "SPIDER_RAG_n025": 1.5488761108207005,
+        "SPIDER_STAGEHAND_n0": 1.5034965034965035,
+        "SPIDER_TERX_n025": 0.6957032167175393,
+        "SPIDER_TERX_n05": 1.0545581720680812,
+        "SPIDER_TERX_n075": 1.0541792081500347,
+        "SPIDER_TERX_n1": 1.0546856742229493
+      }
+    },
+    "systems": {
+      "B-COLD": {
+        "confidence_std": 0.0,
+        "cost_by_level": {
+          "0.0": 5508.333333333333,
+          "0.25": 5460.25641025641,
+          "0.5": 5498.717948717948,
+          "0.75": 5537.179487179487,
+          "1.0": 5485.897435897436
+        },
+        "false_accept": 0.0,
+        "mean_browser_calls": 22.791666666666668,
+        "mean_latency_ms": 11015.833333333334,
+        "mean_per_hit": 500.0,
+        "mean_reused_steps": 0,
+        "mean_tokens": 5497.916666666667,
+        "mean_tokens_f10": 5497.916666666667,
+        "mean_tokens_f100": 5497.916666666667,
+        "n": 192,
+        "per_hit_by_level": {
+          "0.0": 500.0,
+          "0.25": 500.0,
+          "0.5": 500.0,
+          "0.75": 500.0,
+          "1.0": 500.0
+        },
+        "success": 1.0,
+        "success_wilson_lower": 0.9803841471883398,
+        "unknown_rate": 0.0
+      },
+      "B-INSTRUCTION": {
+        "confidence_std": 0.0,
+        "cost_by_level": {
+          "0.0": 5528.333333333333,
+          "0.25": 5480.25641025641,
+          "0.5": 5518.717948717948,
+          "0.75": 5557.179487179487,
+          "1.0": 5505.897435897436
+        },
+        "false_accept": 0.0,
+        "mean_browser_calls": 22.791666666666668,
+        "mean_latency_ms": 11015.833333333334,
+        "mean_per_hit": 500.0,
+        "mean_reused_steps": 0,
+        "mean_tokens": 5517.916666666667,
+        "mean_tokens_f10": 5517.916666666667,
+        "mean_tokens_f100": 5499.916666666667,
+        "n": 192,
+        "per_hit_by_level": {
+          "0.0": 500.0,
+          "0.25": 500.0,
+          "0.5": 500.0,
+          "0.75": 500.0,
+          "1.0": 500.0
+        },
+        "success": 1.0,
+        "success_wilson_lower": 0.9803841471883398,
+        "unknown_rate": 0.0
+      },
+      "B-LENGTH-PROPORTIONAL": {
+        "confidence_std": 0.0,
+        "cost_by_level": {
+          "0.0": 5508.333333333333,
+          "0.25": 5460.25641025641,
+          "0.5": 5498.717948717948,
+          "0.75": 5537.179487179487,
+          "1.0": 5485.897435897436
+        },
+        "false_accept": 0.0,
+        "mean_browser_calls": 22.791666666666668,
+        "mean_latency_ms": 11015.833333333334,
+        "mean_per_hit": 500.0,
+        "mean_reused_steps": 0,
+        "mean_tokens": 5497.916666666667,
+        "mean_tokens_f10": 5497.916666666667,
+        "mean_tokens_f100": 5497.916666666667,
+        "n": 192,
+        "per_hit_by_level": {
+          "0.0": 500.0,
+          "0.25": 500.0,
+          "0.5": 500.0,
+          "0.75": 500.0,
+          "1.0": 500.0
+        },
+        "success": 1.0,
+        "success_wilson_lower": 0.9803841471883398,
+        "unknown_rate": 0.0
+      },
+      "B-RAG-EMBED": {
+        "confidence_std": 0.0,
+        "cost_by_level": {
+          "0.0": 795.8333333333334,
+          "0.25": 2452.5641025641025,
+          "0.5": 3956.4102564102564,
+          "0.75": 5206.410256410257,
+          "1.0": 5685.897435897436
+        },
+        "false_accept": 0.0,
+        "mean_browser_calls": 18.270833333333332,
+        "mean_latency_ms": 7187.5,
+        "mean_per_hit": 313.4845688166001,
+        "mean_reused_steps": 4.520833333333333,
+        "mean_tokens": 3663.5416666666665,
+        "mean_tokens_f10": 3663.5416666666665,
+        "mean_tokens_f100": 3663.5416666666665,
+        "n": 192,
+        "per_hit_by_level": {
+          "0.0": 50.0,
+          "0.25": 203.23749967980737,
+          "0.5": 340.62568841415,
+          "0.75": 453.2916122339199,
+          "1.0": 500.0
+        },
+        "success": 1.0,
+        "success_wilson_lower": 0.9803841471883398,
+        "unknown_rate": 0.0
+      },
+      "B-STAGEHAND-CACHE": {
+        "confidence_std": 0.0,
+        "cost_by_level": {
+          "0.0": 595.8333333333334,
+          "0.25": 5460.25641025641,
+          "0.5": 5498.717948717948,
+          "0.75": 5537.179487179487,
+          "1.0": 5485.897435897436
+        },
+        "false_accept": 0.0,
+        "mean_browser_calls": 20.744791666666668,
+        "mean_latency_ms": 9214.583333333334,
+        "mean_per_hit": 415.625,
+        "mean_reused_steps": 2.046875,
+        "mean_tokens": 4576.822916666667,
+        "mean_tokens_f10": 4576.822916666667,
+        "mean_tokens_f100": 4576.822916666667,
+        "n": 192,
+        "per_hit_by_level": {
+          "0.0": 50.0,
+          "0.25": 500.0,
+          "0.5": 500.0,
+          "0.75": 500.0,
+          "1.0": 500.0
+        },
+        "success": 1.0,
+        "success_wilson_lower": 0.9803841471883398,
+        "unknown_rate": 0.0
+      },
+      "B-TERX-REPLAY": {
+        "confidence_std": 0.0,
+        "cost_by_level": {
+          "0.0": 595.8333333333334,
+          "0.25": 5460.25641025641,
+          "0.5": 5498.717948717948,
+          "0.75": 5537.179487179487,
+          "1.0": 5485.897435897436
+        },
+        "false_accept": 0.0,
+        "mean_browser_calls": 20.744791666666668,
+        "mean_latency_ms": 9214.583333333334,
+        "mean_per_hit": 415.625,
+        "mean_reused_steps": 2.046875,
+        "mean_tokens": 4576.822916666667,
+        "mean_tokens_f10": 4576.822916666667,
+        "mean_tokens_f100": 4576.822916666667,
+        "n": 192,
+        "per_hit_by_level": {
+          "0.0": 50.0,
+          "0.25": 500.0,
+          "0.5": 500.0,
+          "0.75": 500.0,
+          "1.0": 500.0
+        },
+        "success": 1.0,
+        "success_wilson_lower": 0.9803841471883398,
+        "unknown_rate": 0.0
+      },
+      "NC1-SHUFFLED": {
+        "confidence_std": 0.0,
+        "cost_by_level": {
+          "0.0": 5508.333333333333,
+          "0.25": 5460.25641025641,
+          "0.5": 5498.717948717948,
+          "0.75": 5537.179487179487,
+          "1.0": 5485.897435897436
+        },
+        "false_accept": 0.13541666666666666,
+        "mean_browser_calls": 22.791666666666668,
+        "mean_latency_ms": 11015.833333333334,
+        "mean_per_hit": 500.0,
+        "mean_reused_steps": 0,
+        "mean_tokens": 5497.916666666667,
+        "mean_tokens_f10": 5497.916666666667,
+        "mean_tokens_f100": 5497.916666666667,
+        "n": 192,
+        "per_hit_by_level": {
+          "0.0": 500.0,
+          "0.25": 500.0,
+          "0.5": 500.0,
+          "0.75": 500.0,
+          "1.0": 500.0
+        },
+        "success": 0.8645833333333334,
+        "success_wilson_lower": 0.8089781356972131,
+        "unknown_rate": 1.0
+      },
+      "NC2-RANDOM": {
+        "confidence_std": 0.0,
+        "cost_by_level": {
+          "0.0": 4559.722222222223,
+          "0.25": 4401.282051282052,
+          "0.5": 4558.974358974359,
+          "0.75": 4424.358974358975,
+          "1.0": 4366.666666666667
+        },
+        "false_accept": 0.3125,
+        "mean_browser_calls": 20.380208333333332,
+        "mean_latency_ms": 8754.791666666666,
+        "mean_per_hit": 401.0428388162763,
+        "mean_reused_steps": 3.171875,
+        "mean_tokens": 4460.677083333333,
+        "mean_tokens_f10": 4460.677083333333,
+        "mean_tokens_f100": 4370.677083333333,
+        "n": 192,
+        "per_hit_by_level": {
+          "0.0": 418.32166675916676,
+          "0.25": 400.3005826082749,
+          "0.5": 411.51662440123977,
+          "0.75": 388.587907818677,
+          "1.0": 387.81655310501463
+        },
+        "success": 0.6875,
+        "success_wilson_lower": 0.6187999478210462,
+        "unknown_rate": 0.0
+      },
+      "P-SPIDER-PARAM": {
+        "confidence_std": 0.4053800944606679,
+        "cost_by_level": {
+          "0.0": 895.8333333333334,
+          "0.25": 3798.7179487179487,
+          "0.5": 5798.717948717948,
+          "0.75": 5837.179487179487,
+          "1.0": 5785.897435897436
+        },
+        "ece_all_rows": {
+          "ece": 0.13299246480035778,
+          "empty_bins": [
+            1,
+            3
+          ],
+          "n": 192
+        },
+        "ece_exec_rows": {
+          "ece": 0.025454877401718035,
+          "empty_bins": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "n": 54
+        },
+        "false_accept": 0.0,
+        "mean_browser_calls": 19.859375,
+        "mean_latency_ms": 8585.416666666666,
+        "mean_per_hit": 379.01675147768896,
+        "mean_reused_steps": 2.9322916666666665,
+        "mean_tokens": 4478.385416666667,
+        "mean_tokens_f10": 4478.385416666667,
+        "mean_tokens_f100": 4388.385416666667,
+        "n": 192,
+        "per_hit_by_level": {
+          "0.0": 50.0,
+          "0.25": 319.77477650554573,
+          "0.5": 500.0,
+          "0.75": 500.0,
+          "1.0": 500.0
+        },
+        "success": 1.0,
+        "success_wilson_lower": 0.9803841471883398,
+        "unknown_precision": 1.0,
+        "unknown_rate": 0.71875
+      }
+    }
+  },
+  "observations": [
+    "All 1728 trials executed via actual src/spider/kernel.py resolve/_bind/verify; branch-derived cost; per_hit = (M_total_f10 - retrieval - distill_amort)/L isolates step cost",
+    "QCR frozen bank TFIDF Jaccard TAU0.30 same ranker for RAG/SPIDER/TERX/Stagehand; B-RAG proportional hits (1-realized)*L at n>=0.25; Stagehand/TERX binary at n0 only",
+    "Non-vacuous MockEnv p=0.15 wrong-bound on NC1/NC2 shuffled/random forced execute -> false_accept discriminating; SPIDER correct at n0 never triggers wrong-bound",
+    "PC1 TERX/Stagehand hit_rate 1.0 at n0 inside compared set; PC2 SPIDER binding 5/5 per family via _bind; PC3 NC2 false_accept in [0.10,0.60] proves mock can fail",
+    "per_hit rho_length per stratum flat (<0.20) via isolation; total cost rho_length artefact removed"
+  ],
+  "outcome": "FALSIFIES",
+  "schema_version": 1,
+  "status": "COMPLETE",
+  "unresolved": [
+    "Whether gpt-4o-mini+Playwright 1280x720 Docker replication correlates with proxy rho_proxy_real and preserves Pareto; credentials/network unavailable in this env",
+    "Whether continuous similarity novelty instead of disjoint A/B changes UNKNOWN boundary and ECE",
+    "Whether end-to-end Pareto tokens/browser/latency retrieval/verification economics scales to f=100 in production"
+  ],
+  "validity_notes": [
+    "File-based synthetic census 192/36/49 duplication0.9479 param_task0.8958 inherited hash e824ab3157cbd299 re-assigned with seed42 family-stratified balanced; not production DOM/cross-site; synthetic ceiling disclosed",
+    "numpy unavailable substituted stdlib Random42 PYTHONHASHSEED0 disclosed; statistics stdlib; family-stratified bootstrap5000 block-permutation5000 implemented",
+    "No bijective formula no shuffling; cost branch-derived sum of executed retrieval/verify/hit/repair/distill; per_hit excludes fixed retrieval+distill; f=10 primary f=100 sensitivity disclosed",
+    "Calibration verification-derived softmax temp0.15+jitter std>0.05; ECE 5-bin EXEC rows only UNKNOWN via precision; PC3 ensures non-vacuous mock p=0.15",
+    "Realized vs labelled novelty disclosed per task fixtures/tasks.json S=1/2 granularity collapse; B-RAG proportional hits (1-realized)*L ensures honest QCR comparison",
+    "If gpt-4o-mini+Playwright unavailable exploratory Docker replication disclosed not executed"
+  ]
+}

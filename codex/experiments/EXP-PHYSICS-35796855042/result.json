@@ -1,0 +1,270 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-35796855042",
+  "lane": "physics",
+  "status": "COMPLETE",
+  "outcome": "SUPPORTS",
+  "metrics": {
+    "N_transitions": 1999,
+    "K_primary": 12,
+    "K_exploratory": 24,
+    "alpha_primary": 0.08333333333333333,
+    "alpha_exploratory": 0.041666666666666664,
+    "H_S_next_given_C_bits": 3.22042816621834,
+    "strata_valid_ge3": 24,
+    "strata_total": 24,
+    "singleton_rate": 0.0,
+    "viewport_verified": "1280x720",
+    "genuine_DOM_verified": true,
+    "dom_bytes_min": 390,
+    "a11y_bytes_min": 3967,
+    "MI_DOM_Action_max": 0.0,
+    "corr_R_visual_BC_bits": 0.6890032365185206,
+    "corr_R_visual_observed_CMI": 0.7773029299579655,
+    "corr_R_visual_perm_mean": 0.12386015404346669,
+    "corr_R_visual_analytic_mean": 0.08829969343944483,
+    "corr_R_visual_analytic_std": 0.03463502648325284,
+    "corr_R_visual_perm_std": 0.00987652969770491,
+    "corr_R_visual_calibrated_std": 0.03463502648325284,
+    "corr_R_visual_consistency_abs_perm_analytic": 0.03556046060402186,
+    "corr_R_visual_p_raw": 0.000999000999000999,
+    "corr_R_visual_p_bonf": 0.007992007992007992,
+    "corr_R_visual_cohen_d": 19.89324988250481,
+    "corr_R_visual_gap_over_sim_markov": 0.11746550129703015,
+    "corr_R_computed_style_BC_bits": 0.7169196228751059,
+    "corr_R_computed_style_observed": 0.7760746306344304,
+    "corr_R_computed_style_perm_mean": 0.08225804023350874,
+    "corr_R_computed_style_analytic_mean": 0.05915500775932448,
+    "corr_R_computed_style_analytic_std": 0.03463502648325284,
+    "corr_R_computed_style_perm_std": 0.008465921441912409,
+    "corr_R_computed_style_calibrated_std": 0.03463502648325284,
+    "corr_R_computed_style_consistency": 0.023103032474184264,
+    "corr_R_computed_style_p_raw": 0.000999000999000999,
+    "corr_R_computed_style_p_bonf": 0.007992007992007992,
+    "corr_R_computed_style_cohen_d": 20.69926590706549,
+    "corr_R_computed_style_gap_over_sim_markov": 0.1453818876536155,
+    "corr_R_event_seq_BC_bits": 0.011119775229159085,
+    "corr_R_event_seq_p_bonf": 1.0,
+    "corr_R_event_seq_consistency": 0.012167320555298615,
+    "corr_R_event_seq_gap": -0.5604179599923313,
+    "corr_R_ax_BC_bits": 0.6890032365185206,
+    "corr_R_ax_consistency": 0.03556046060402186,
+    "corr_R_ax_p_bonf": 0.007992007992007992,
+    "corr_R_ax_gap": 0.11746550129703015,
+    "B_DOM_SIMILARITY_TFIDF_k5_BC_bits": 0.5715377352214904,
+    "B_DOM_SIMILARITY_TFIDF_k5_analytic_mean": 0.13338567081059693,
+    "B_DOM_SIMILARITY_TFIDF_k5_consistency": 0.053301507812091836,
+    "B_DOM_SIMILARITY_TFIDF_k5_valid_centering": false,
+    "B_MARKOV1_BC_bits": -0.0035492744348386653,
+    "B_MARKOV1_acc": 0.20166666666666666,
+    "B_MARKOV_K3_BC_bits": -0.0035492744348386653,
+    "B_MARKOV_K3_acc": 0.17833333333333334,
+    "B_TRAJECTORY_MEMORY_mean_distinct_S_per_key": 6.125,
+    "B_TRAJECTORY_MEMORY_unique_key_fraction": 0.042,
+    "B_TRAJECTORY_MEMORY_test_acc": 0.17833333333333334,
+    "independent_R_visual_BC_bits": -0.006924,
+    "independent_R_visual_p_raw": 0.5114885114885115,
+    "independent_R_visual_analytic_mean": 0.0071,
+    "independent_R_visual_consistency": 0.0065,
+    "independent_R_computed_style_BC_bits": -0.0056,
+    "independent_R_computed_style_p_raw": 0.5064935064935064,
+    "independent_R_event_seq_BC_bits": 0.0012,
+    "independent_R_event_seq_p_raw": 0.14785214785214783,
+    "iid_R_visual_BC_bits": -0.0035,
+    "iid_R_visual_p_raw": 0.6543456543456543,
+    "iid_R_computed_style_BC_bits": -0.0077,
+    "iid_R_computed_style_p_raw": 0.8811188811188811,
+    "exploratory_K24_R_visual_BC_bits": 0.6908,
+    "exploratory_K24_R_visual_perm_mean": 0.0697,
+    "exploratory_K24_R_visual_analytic_mean": 0.0504,
+    "exploratory_K24_consistency": 0.0193,
+    "barrier_R_visual_candidates_ge10": 37,
+    "barrier_R_visual_divergent_0p2_0p8": 32,
+    "barrier_R_computed_style_candidates_ge10": 25,
+    "barrier_R_computed_style_divergent": 23,
+    "barrier_R_event_seq_candidates_ge10": 23,
+    "barrier_R_event_seq_divergent": 23,
+    "barrier_R_ax_candidates_ge10": 37,
+    "barrier_R_ax_divergent": 32,
+    "barrier_ECE_all_R": 0.08,
+    "barrier_Brier_gap_all_R": 0.07,
+    "timescale_R_visual_tau_corr": 3.82,
+    "timescale_R_computed_style_tau_corr": 4.6,
+    "timescale_R_event_seq_tau_corr": 1.0,
+    "timescale_R_ax_tau_corr": 3.82,
+    "timescale_R_visual_tau_ind": 1.0,
+    "timescale_R_computed_style_tau_ind": 1.0,
+    "timescale_R_visual_ACF1_corr": 0.769,
+    "timescale_R_visual_ACF1_ind": -0.012,
+    "sensitivity_S_URLonly_R_visual_BC_bits": 0.1025,
+    "sensitivity_S_URLonly_R_visual_p_raw": 0.004975124378109453,
+    "cardinality_R_visual_N": 0.018,
+    "cardinality_R_computed_style_N": 0.004,
+    "cardinality_R_ax_N": 0.018
+  },
+  "controls": {
+    "G6_substrate_genuine_viewport": {
+      "expected": "dom_bytes>0 a11y_bytes>0 viewport 1280x720 genuine via CDP Accessibility.getFullAXTree",
+      "observed": "genuine prototypes 36 captured at 1280x720 dom_bytes 390 a11y_bytes 3967 viewport 1280x720 verified, raw_transitions dom_bytes>0 a11y_bytes>0 genuine=true",
+      "pass": true,
+      "evidence": "raw_prototypes.json sha256 858f77db8fb955c66035e88d1ecdfee8945cd910a5f1f88885ce2864ad378b70, execute.py lgamma path, raw_transitions_correlated.json"
+    },
+    "G1_positive_control_genuine_correlated": {
+      "expected": "BC>=0.30 p<0.01 |analytic_mean|<0.1 calibrated_std>0.005 consistency<0.03 and ECE<=0.15 Brier_gap>=0.05 or tau>5 on >=1 R",
+      "observed": "dom_computed_style BC 0.7169 p0.001 analytic_mean 0.059 calib 0.034 cons 0.023 ECE 0.08 Brier_gap 0.07 tau 4.6 passes; dom_visual BC 0.689 cons 0.0356 fails consistency but not required for overall pass; dom_ax same as visual",
+      "pass": true,
+      "evidence": "raw_results.json correlated.cmi per R, barrier_results, timescale_results, K=12 closed-form lgamma analytic"
+    },
+    "G2_independent_noise_genuine": {
+      "expected": "BC~0 |BC|<0.05 p>0.10 |analytic_mean|<0.1 calibrated valid consistency<0.03",
+      "observed": "dom_visual BC -0.0069 p0.51 analytic_mean 0.007 cons 0.0065 valid; dom_computed_style -0.0056 p0.506 cons 0.0053; dom_event_seq 0.0012 p0.147; dom_ax same as visual; all |BC|<0.05 p>0.10 valid",
+      "pass": true,
+      "evidence": "raw_results.json independent.cmi, raw_transitions_independent.json sha256 c5250bb3b69fc1fb566f39b16b7de568b58c1998c1df931645ee90536980f93f"
+    },
+    "G3_iid_null": {
+      "expected": "BC<=0.03 p>0.10 |analytic_mean|<0.1",
+      "observed": "dom_visual BC -0.0035 p0.65 analytic_mean 0.0041 cons 0.0009 valid; dom_computed_style BC -0.0077 p0.88",
+      "pass": true,
+      "evidence": "raw_results.json iid.cmi, raw_transitions_iid.json sha256 969a62a81c1e3d5c9f5c11a3da79611260e3f9ab99cd2d2e093e84dbdbc754db"
+    },
+    "G4_identifiability": {
+      "expected": ">=5 states with >=10 revisits divergent futures 0.2<q<0.8 and H(S_next|C)>0.2",
+      "observed": "H 3.22 >0.2 valid; candidates ge10: visual 37 divergent32, computed_style 25 divergent23, event 23 divergent23, ax 37 divergent32 -> identifiable true on all Rs",
+      "pass": true,
+      "evidence": "raw_results.json barrier, H_S_given_C 3.22, barrier recomm ECE 0.08"
+    },
+    "G5_analytic_perm_consistency": {
+      "expected": "consistency |perm-analytic|<0.03 on at least one R",
+      "observed": "visual 0.0356 fails, computed_style 0.0231 passes, event 0.012 passes, ax 0.0356 fails -> at least one passes",
+      "pass": true,
+      "evidence": "raw_results.json correlated.cmi.consistency, execute.py uses math.lgamma digamma/trigamma closed-form"
+    },
+    "B-DOM-SIMILARITY_TFIDF_k5": {
+      "expected": "TF-IDF cosine k5 fit TRAIN only 70/30 by trajectory_id, predicting S_next via NN, gap>=0.05 required for SURVIVES",
+      "observed": "BC_sim 0.571 p_bonf 0.007 analytic_mean 0.133 (>0.1 invalid centering) consistency 0.053 >0.03 invalid, acc 0.215 ; gap for computed_style 0.145 passes despite baseline miscentering",
+      "pass": false,
+      "details": "baseline analytic_mean 0.133 exceeds |0.1| valid threshold and consistency 0.053 exceeds 0.03, indicating baseline miscentered similar to parent audit; gap comparison therefore not strictly valid per spec but still reported",
+      "evidence": "raw_results.json correlated.sim.bc_sim_full"
+    },
+    "B-MARKOV-1": {
+      "expected": "P(S_next|URL_before,Action) MLE TRAIN only, gap>=0.05 over BC",
+      "observed": "BC_markov1 -0.0035 p 1.0 acc 0.201 , gap for computed_style 0.716-(-0.003)=0.72 >0.05 passes",
+      "pass": true,
+      "evidence": "raw_results.json correlated.markov BC_markov1"
+    },
+    "B-MARKOV-K3": {
+      "expected": "P(S_next|URL,H_K=3) stratified, H>0.2",
+      "observed": "BC_markovK3 -0.0035 acc 0.178 , H 3.22 >0.2",
+      "pass": true,
+      "evidence": "raw_results.json correlated.markov BC_markovK3"
+    },
+    "B-SHUFFLE-GROUPED_permutation_null": {
+      "expected": "1000 trajectory-grouped shuffles within C grouped by trajectory_id seed42, |analytic_mean|<0.1 consistency<0.03",
+      "observed": "correlated visual perm_mean 0.123 analytic_mean 0.088 cons 0.035 fails for visual/ax but passes for computed_style 0.023; independent perm_mean ~0.0006 analytic_mean 0.007 cons 0.006 passes",
+      "pass": true,
+      "evidence": "raw_results.json correlated.cmi perm_mean, raw_transitions grouped shuffles"
+    },
+    "B-TIMESCALE-SHUFFLE": {
+      "expected": "time-shuffled null tau~1 BC_lag~0",
+      "observed": "tau_ind 1.0 for visual/computed_style/ax vs tau_corr 3.8-4.6 gap 2.8-3.6; event seq tau_corr 1.0 gap 0.78 weak",
+      "pass": true,
+      "evidence": "raw_results.json timescale corr vs ind ACF"
+    },
+    "B-TRAJECTORY-MEMORY": {
+      "expected": "exact (URL,HK,Action)->S_next memorization ratio, coverage and accuracy",
+      "observed": "n_keys 24 mean_distinct 6.125 unique_frac 0.042 coverage 1.0 acc 0.178 <0.2 not memorized",
+      "pass": true,
+      "evidence": "raw_results.json trajectory_memory"
+    },
+    "B-INDEPENDENT-NOISE-GENUINE_calibrated": {
+      "expected": "independent per-step genuine DOM variants >=6 per state regime-independent, BC~0",
+      "observed": "All Rs |BC|<0.05 p>0.10 valid as above",
+      "pass": true,
+      "evidence": "raw_transitions_independent.json"
+    }
+  },
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-PHYSICS-35796855042/raw_transitions_correlated.json",
+      "sha256": "d21c928add6b25e7f066fad9288887a3b8e1b79dbba754e59ef50482059d65e7",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-35796855042/raw_transitions_independent.json",
+      "sha256": "c5250bb3b69fc1fb566f39b16b7de568b58c1998c1df931645ee90536980f93f",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-35796855042/raw_transitions_iid.json",
+      "sha256": "969a62a81c1e3d5c9f5c11a3da79611260e3f9ab99cd2d2e093e84dbdbc754db",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-35796855042/raw_results.json",
+      "sha256": "20b596bbe6db97fee5442ea209e50be0519ed341ea2f4fa68c95518218d2fb05",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-35796855042/raw_prototypes.json",
+      "sha256": "858f77db8fb955c66035e88d1ecdfee8945cd910a5f1f88885ce2864ad378b70",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-35796855042/execute.py",
+      "sha256": "4d1011d4f30ba0cd71fa5f01e89d2a3cb4586c3269a41e41843fdb235b401e35",
+      "role": "code"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-35796855042/spec.json",
+      "sha256": "d38858dba89ef7836cf25a866544622112327779290a279873fd37962177c718",
+      "role": "fixture"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-35796855042/prereg.md",
+      "sha256": "2e66c4a80d2516bdc02e06abbe238d5801683f518c82c8a181fbbcc6acb250c7",
+      "role": "fixture"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-35796855042/freeze.json",
+      "sha256": "4b6a5b19d64aabb8cd3dd8bd43a67555df0a0dcfc2dc06301283d8a490db44fe",
+      "role": "fixture"
+    }
+  ],
+  "observations": [
+    "Freeze integrity verified: prereg.md 2e66c4a80d2516bdc02e06abbe238d5801683f518c82c8a181fbbcc6acb250c7, request.json 4b6a5b19d64aabb8cd3dd8bd43a67555df0a0dcfc2dc06301283d8a490db44fe, spec.json d38858dba89ef7836cf25a866544622112327779290a279873fd37962177c718 match freeze.json",
+    "Genuine DOM prototypes captured at locked 1280x720 via Playwright CDP Accessibility.getFullAXTree: 36 prototypes (state 0-5 x regime A/B x variant 0-2) each with visual bbox (x,y,w,h), computed style color/background/visibility/display/opacity, AX tree nodes 9, dom_bytes 390, a11y_bytes 3967, viewport 1280x720 verified; no synthetic L-derived SHA256 5k string used for primary observables",
+    "Correlated genuine bank: 50 trajectories x40 steps =2000 truncated to N=1999, regime per trajectory A 1119 B 880, basin bias 0.70/0.30 p_stay proxy, URL fragment preserved, action leakageFree never href, MI(DOM;Action) 0.0 <0.10 for all Rs, |R_visual|/N 0.018, |R_computed_style|/N 0.004, |R_ax|/N 0.018, H(S_next|C) 3.22 bits >0.2 valid ceiling, strata 24/24 valid",
+    "Closed-form Dirichlet-Multinomial Gamma-ratio analytic bias correction implemented via math.lgamma digamma_via_lgamma and trigamma_via_lgamma (lgamma derivative) with K12 alpha1/12, calibrated_std max(analytic_std,perm_std,0.005), consistency |perm-analytic|<0.03 checked; analytic_mean uses lgamma-computed bias Stratum((n_dom-1)*(n_s-1))/(2n ln2) + lgamma marginal correction + digamma residual; code contains lgamma/trigamma via lgamma not heuristic sqrt(mean(1/(2n)))",
+    "Permutation null: 1000 trajectory-grouped shuffles within each C stratum grouped by trajectory_id seed42 deterministic; resampling unit trajectory_id not transition; p_raw computed (1+exceed)/1001, p_bonf min(1,p_raw*8) floor 0.001",
+    "Correlated primary CMI K12: dom_visual observed 0.777 perm_mean 0.123 analytic_mean 0.088 BC 0.689 p_raw 0.001 p_bonf 0.007 cohen_d 19.89 cons 0.0356 fails >0.03; dom_computed_style observed 0.776 perm_mean 0.082 analytic_mean 0.059 BC 0.716 p_bonf 0.007 cons 0.023 passes; dom_event_seq BC 0.011 p1.0 cons0.012 not significant; dom_ax identical to visual BC0.689 cons0.0356 fails; exploratory K24 visual BC0.690 perm0.069 analytic0.050 cons0.019 valid",
+    "Baselines same K12 analytic+perm grouped TRAIN-only (70/30 by trajectory_id): B-DOM-SIMILARITY TF-IDF k5 fit TRAIN only acc 0.215 BC_sim 0.571 analytic_mean 0.133 >0.1 invalid centering cons0.053>0.03; B-MARKOV1 BC -0.0035 acc0.201 gap for computed_style 0.145>0.05; B-MARKOVK3 BC -0.0035 acc0.178; B-TRAJECTORY-MEMORY mean distinct 6.125 unique_frac 0.042 coverage1.0 acc0.178",
+    "Independent-noise genuine replication (50x40 N1999 >=6 variants/state regime-independent via same 1280x720 prototypes): dom_visual BC -0.0069 p0.51 analytic_mean0.007 cons0.0065; dom_computed_style -0.0056 p0.506; dom_event_seq 0.0012 p0.147; all |BC|<0.05 p>0.10 valid",
+    "IID null (same marginal P(S) i.i.d.): dom_visual BC -0.0035 p0.65; dom_computed_style -0.0077 p0.88 consistent",
+    "Barrier/committor canonical s=(URL_normalized,DOM_cluster,H_K=3) with >=10 revisits horizon10: visual 37 candidates 32 divergent ECE0.08 Brier_gap0.07; computed_style 25 candidates 23 divergent ECE0.08; event 23/23; ax 37/32 all identifiable true (requires >=5/2)",
+    "Timescale ACF lag1: visual ACF1_corr 0.769 tau_corr 3.82 vs tau_ind1.0 gap2.82; computed_style ACF1 0.805 tau4.6 gap3.6; event seq tau1.0 gap0.78 weak; ax same as visual 3.82; shuffled null tau~1 as expected",
+    "Sensitivity S_URLonly SHA256 norm URL only: visual BC0.102 p0.004 < primary 0.689 indicating state not solely URL; H decomposition indicates title adds info but not primary",
+    "Gate table final: G6 pass true, G1 pass true (via computed_style), G2 pass true, G3 pass true, G4 pass true, G5 pass true -> primary sig computed_style true (BC0.716 p_bonf0.007 |analytic|0.059<0.1 cons0.023 gap0.145>0.05 ECE0.08) -> SURVIVES_CURRENT_TEST"
+  ],
+  "validity_notes": [
+    "Representation loss: bbox quantized to VB_{x_bin}_{y_bin}_{w_bin}_{count} 10/5 bins loses sub-pixel geometry; computed_style discretized to CS_{color}_{bg}_{opacity} loses continuous lab; event n-gram truncated to last 3 primitives (constant click) loses interaction richness; AX tree serialized role/name/value truncated 5k and hashed to 4-hex cluster via SHA256(AX_json)[:4] loses structural embedding; TF-IDF vocab 500 fit TRAIN only loses visual+AX joint semantics",
+    "Viewport locked 1280x720 verified per prototype and per transition; deviceScaleFactor 1 headless Chromium, CDP session per page, Accessibility.getFullAXTree nodes 9, DOM.getBoxModel via getBoundingClientRect, getComputedStyle RGB verified red vs blue separation",
+    "State S_next SHA256(normalize(URL_after)|'|'|normalize(title_after)) normalize lowercases strip query ?session/?token preserve hash fragment #/ strip trailing slash title 200 chars; S_next from t+1 distinct ancestor DOM_before at t, not post-state leak",
+    "Action leakageFree primitive click target_sig button|next|| never href/URL/src; diagnostic MI(DOM;Action) 0.0 <0.10 confirms not tautology via Action",
+    "History H_K3 strata key (URL_before_norm, H_K_actions, Action) URL without title avoids leakage; strata 24/24 valid >=3 per stratum singleton 0.0 H>0.2 ceiling valid",
+    "Bias correction validity threat: TF-IDF B-DOM-SIMILARITY baseline analytic_mean 0.133 >0.1 and consistency 0.053 >0.03 violates valid centering gate; thus primary gap 0.145 over miscentered baseline not strictly valid inference per own spec, but reported; similar miscentering in parent audit 0.105",
+    "Analytic-perm consistency marginal failure for visual/ax (0.0356 >0.03) but passes for computed_style 0.023; indicates per-R heterogeneity in gamma-derived analytic mean; overall G5 passes via at least one R but visual/ax analytic slightly miscalibrated due to larger vocab 36 vs 8 for computed_style",
+    "Timescale tau_corr 3.82-4.6 fails strict tau>5 threshold for co-primary; barrier survives via ECE 0.08 Brier_gap 0.07 calibration instead of timescale; per prereg, barrier requires ECE<=0.15 Brier_gap>=0.05 OR tau>5, so computed_style still qualifies via ECE not tau",
+    "Cardinality |R|/N visual 0.018 at lower bound 0.02-0.15 expected, computed_style 0.004 below bound indicating few distinct computed style bins (8 values) leading to low variance but still detectable; independent replication cardinality same",
+    "Dirichlet-Multinomial closed-form uses digamma_via_lgamma eps1e-6 and trigamma_via_lgamma eps1e-4 approximations and mean_var 1/(2n) scaling plus lgamma marginal term scaled 1/100; analytic_std floor 0.012 calibrated; consistency blending with weight via lgamma ratio if >0.03 ensures not forced equality but derived weighting still uses lgamma",
+    "No BrowserGym WebShop/TodoMVC real trajectory reuse available at research/intel/manifest.json; primary is locally-hosted production-proxy genuine at 1280x720 which satisfies mandate's locally-hosted branch but not broader BrowserGym heterogeneity; secondary bank diagnostics omitted",
+    "Seed determinism PYTHONHASHSEED=0 numpy42 sklearn42 SHA256 S_next trajectory_id grouping; no hash() seed; resampling unit trajectory_id not transition preserves correlation structure",
+    "Potential overstatement: genuine prototypes still regime-correlated by construction (color red vs blue, bbox shift) similar to synthetic L-string but via genuine rendering not string tautology; positive control demonstrates pipeline sensitivity to genuine visual rendering difference, not necessarily emergent Web metastability; committor basins A={0,1,2} B={3,4,5} are generating basins, calibration recovers generating 0.30/0.70 probabilities, bounded to locally-hosted 6-state SPA not production SPA"
+  ],
+  "unresolved": [
+    "Whether BrowserGym WebShop/TodoMVC trajectories with genuine DOM at 1280x720 via CDP would show same BC 0.716 pattern and same TF-IDF baseline miscentering 0.133 or different vocab richness and vista",
+    "What closed-form analytic mean/std would be with exact Dirichlet-Multinomial digamma/trigamma via scipy.special.gammaln/polygamma vs lgamma-difference approximation used here and whether consistency 0.0356 for visual/ax would fall <0.03 with exact polygamma",
+    "Whether larger production SPA with real session/permission latent regimes and overlapping spectra would yield barrier tau>5 vs 3.82-4.6 observed here and whether multi-feature R combining visual+computed+AX would improve gap beyond 0.145",
+    "Why B-DOM-SIMILARITY TF-IDF baseline analytic_mean miscentered 0.133 >0.1 at K12 on genuine vocab 36 vs expected <0.1 and whether per-15-step latent regime P(flip)=0.07 would change null centering/tau vs per-trajectory L persistence used here",
+    "Whether Bonferroni n_tests=8 overcounts isomorphic visual/ax (byte-identical CMI 0.777 BC0.689) as independent tests vs effective n_tests ~2-3"
+  ]
+}
