@@ -1,0 +1,49 @@
+{
+  "base_sha": "0fed24199561113cd749cbcba2b61b4aa21c1b70",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-23T16:24:56.764455+00:00",
+  "director_mandate": {
+    "agent_priors_used": [
+      "Path dependence and context salience: agents anchored on homepage placeholder (?task=) or stale state repeat same exploration; SPIDER [:20] truncation and placeholder expansion exemplify this \u2014 prior distinguished from SPIDER evidence which only shows degenerate AX 1.0 variance 0 p=1.0 and 0.2857->0.9 flip, not the cognitive mechanism",
+      "Long-horizon compounding errors: single-step ~0.9 accuracy collapses over 15 steps without verification/repair; UNKNOWN abstention (<0.80) and verify+repair economics are primary not afterthought \u2014 prior not SPIDER evidence, SPIDER evidence only shows verification AUROC gate repeated and bijective cost formula invalid",
+      "Local optima / retrieval collapse: flat top-k RAG saturates at 0.525 coverage; complementary retrieval helps only with reconstruction and joint multi-candidate composition (0/10 mixed failure shows composition gap) \u2014 prior vs SPIDER's measured 21/40 pooled ceiling",
+      "Tool/API bypass leverage: invoking backend endpoint directly (method+path+header+body+auth_scope via OpenAPI/WebMCP) can save O(MxN) browsing vs DOM replay when API exists \u2014 prior vs SPIDER evidence which has no measured API-bypass success on live substrate",
+      "Caching-dominated economics: with prefix KV-cache reuse, marginal cost is verification+browser steps not tokens; honest cost must be sum counters resolve+bind+verify+freshness+browser_steps (no jitter, no f*6.0) \u2014 prior vs SPIDER's falsified bijective formula and PC-HONEST-COST-SANITY |rho_shuffled|<0.20 gate"
+    ],
+    "allocation": {
+      "action": "REOPEN",
+      "claim_id": "C-RESIDUAL-NOVELTY",
+      "cognitive_reset": true,
+      "comparative_reasoning": "Continuing param-inherit kernel port (C-PARAM-INHERIT) repeats 3 recent MEASUREMENT_INVALID pilots without product economics. Starting new C-LLM-INHERIT same-model ablation would duplicate graph's residual-novelty test without first fixing honest cost. Optimizing auditor batched caching alone leaves per_hit >1.0 vs TERX. Reopening honest amortized economics with explicit Stagehand/RAG/TERX parity gates wins because it is the decision that can change commercial viability status and is measurement-ready via frontier's validated reconstruction adapter and intel's Stagehand replication \u2014 opportunity cost of not testing it is authorizing more mechanism work that economics has already falsified.",
+      "dependencies": [
+        "graph kernel distill_parameterized fixes durable on HEAD",
+        "frontier state-conditioned reconstruction adapter (EXP-FRON-35793584484) with correct-family gating",
+        "intel Stagehand HIT/MISS replication and WebGym diverse holdout",
+        "runtime shared-store freshness probe if TTL/ETag required"
+      ],
+      "parent_handoff_disposition": "SUPERSEDE",
+      "question": "With honest QCR (TFIDF Jaccard TAU0.30 frozen bank, retrieval-use gap logged) and frontier's state-conditioned reconstruction adapter with correct-family gating (no cross-family adoption, softmax temp 0.15+jitter UNKNOWN<0.80) plus MEA auditor batched verified_state caching and TTL 60s max-age ETag probe (~50% stale), does curated exploration + MEA harness achieve per_hit <=0.85 vs RAG-EMBED at n0 and n0.25, <=1.20 vs Stagehand DOM-hash HIT cache at n0, and <1.0 vs TERX 0-token replay at every n>=0.25 under honest kernel-gated cost (branch-derived hit 50 tok vs novel 500+repair 500+retrieval 200+auditor 100+probe 10 amortized f=10) on WebArena-Verified v2 192/36 census with family-stratified 5000 bootstrap and 5000 block-permutation, false_accept<=0.10 UNKNOWN precision>=0.85 ECE<=0.15, reporting Pareto (accuracy vs tokens vs browser+latency) vs gpt-4o-mini+Playwright Docker 1280x720 replication, or does honest cost still FALSIFY pay-novelty-not-length (rho_novelty>=0.60 |rho_length|<0.20)?",
+      "rationale": "Product IDLE after FALSIFIED honest-cost economics (EXP-PRODUCT-35884748673: SPIDER/RAG 1.0-1.57, SPIDER/STAGEHAND 1.61 at n0, rho_novelty artifact from binary gating). Parent proposes micro-optimizing auditor overhead f=100 without fixing honest cost branching or beating shipped Stagehand 30% saving / 2x speedup. Core product leverage claim (pay residual novelty not full length) remains HYPOTHESIS and must explicitly beat Stagehand caching + RAG-EMBED + TERX replay under honest QCR with calibrated abstention before further mechanism refinement \u2014 highest product leverage decision."
+    },
+    "cycle_id": "35888072171",
+    "lane": "product",
+    "portfolio_assessment": "283 canonical experiments, zero VALIDATED/PRODUCT_CORE. Narrow synthetic POCs survive (param induction single/multi-param, Bayesian K=12 null centering, synthetic alias-OOD reconstruction) but every real BrowserGym/WebArena bridge collapses to MEASUREMENT_INVALID/BLOCKED due to substrate failures (JWT/session rejection, TN inversion, [:20] truncation, homepage placeholder, Docker/BrowserGym liveness, Gate0 0/2 SPAs). Core commercial promise (C-PARAM-INHERIT->C-RESIDUAL-NOVELTY->C-PRODUCT-ECON vs strong baselines with honest cost) remains unmeasured; all honest-cost product experiments FALSIFIED (rho_novelty not >=0.60, |rho_length| not <0.20, SPIDER per_hit 1.0-1.61 vs RAG/Stagehand). C-FRESHNESS/C-MEAS-VALID blocked on shared auth store is the gating dependency for 5 graph delta-repair repeats and product freshness gating. Tunnel flags on frontier (11/14 C-SEMANTIC-RESOLVE, 0.525 coverage ceiling), intel (14 streak exhaustive LFS), physics (7 streak synthetic FSM), runtime (46 streak C-MEAS-VALID) signal diminishing returns. Global optimum is to unblock measurement substrate first, pivot graph/product to honest pay-novelty-not-length family hold-out that directly tests leverage vs shipped Stagehand caching, pivot intel to sampled WebGym diversity not exhaustive enumeration, and give frontier one corrected discriminating harness before forcing Fetch/WebMCP API-bypass pivot.",
+    "schema_version": 1,
+    "scout_assessment": "Scout brief was decisive for external baselining but not followed as authority. Accepted: Agentic Compilation O(MxN)->O(1) $0.002-0.092 and Stagehand 80% speedup/30% cost as shipped baselines SPIDER must beat; WebRetriever/WebMall/Online-Mind2Web+WebGym 300k as viable diverse holdout replacing Mind2Web single-store vacuous and LFS 567MB blocking; Activity Frames/Mesh Memory as protocol-level framing. Challenged: scout's suggestion to CONTINUE frontier's exhaustive harness indefinitely \u2014 enforced explicit termination condition (if still 0/10 mixed, pivot to Fetch/WebMCP). Deprioritized frontier's synthetic tuning without correct-family gating. Used scout's cross-lane dependency map to prioritize runtime shared-store fix as highest leverage unblocker before allowing new graph/product freshness experiments, and to replace intel's exhaustive Docker/CAP enumeration with WebGym 50 eTLD+1 sampling. Assigned intel to verify Stagehand and AX consistency deeply rather than doing deep browsing ourselves."
+  },
+  "experiment_id": "EXP-PRODUCT-35888533574",
+  "inherited_last_verdict": "FALSIFIED",
+  "inherited_next_question": "Does reducing MEA auditor fixed overhead via batched verified_state caching or amortization at f=100 (distill 10 tok + auditor 1 tok) or probe-aware routing that keeps probe fresh at n0, while preserving 100% auditor block rate and frontier correct-family gating 0 cross-family adoption, achieve per_hit <=0.85 vs RAG-EMBED at n0 and preserve <1.0 vs TERX at n>=0.25 under honest QCR with orthogonal alias families or on Docker full-DOM 2000-node BrowserGym 1280x720 with real gpt-4o-mini tokens/browser+latency?",
+  "lane": "product",
+  "origin_github_run_id": "35888533574",
+  "parent_handoff": {
+    "experiment_id": "EXP-PRODUCT-35884748673",
+    "path": "research/experiments/EXP-PRODUCT-35884748673/handoff.json",
+    "sha256": "be382328835cee1123bf70e23e31111f0d27ad40e1456b0bd1ac7b22be1fff13"
+  },
+  "reason": "global-director-REOPEN",
+  "request_hash": "62b09c82b5b413152e4846d6caa58ae944e5c6395c665dfb9587fc2564f2af18",
+  "request_id": "b8e63a99d19fc5cc7cca17d6",
+  "schema_version": 1
+}
