@@ -1,0 +1,208 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-35892841113",
+  "lane": "product",
+  "status": "MEASUREMENT_INVALID",
+  "producer_claim_supported": false,
+  "required_fixes": [
+    "Implement the frozen MEASUREMENT_INVALID clause 'frontier 1.0 hitRate artifact dominates per_hit TERX comparison' (spec.json falsifier enumeration; prereg.md: 'per_hit vs TERX must not be claimed if frontier hitRate=1.0 due to construction'). The run's frontier hit rate is 192/192 (1.0) by construction and production code has no such branch; the producer instead reported beats_terx=true as a PASS (~0.105-0.107 ratios). With the artifact removed (frontier adapter disabled), per_hit-vs-TERX ratios are ~1.0 (COLD fallback), so the entire claimed TERX margin is artifact.",
+    "Recompute per_hit with the frozen formula (M_per_hit=(M_total_f10 - retrieval - distill_amort - auditor_amort)/L; NO frontier exclusion) and re-evaluate all parity gates. Auditor recomputation: SPIDER n0 per_hit = 66.827 (producer reported 62.079 after excluding 50-tok frontier). Frozen-formula ratios: SPIDER_MEA_RAG_n0 = 1.2206 (still fails 0.85 gate), SPIDER_MEA_RAG_n025 = 0.2822 (passes), SPIDER_MEA_STAGE_n0 = 1.2206 (FLIPS producer's claimed PASS 1.134 <= 1.20 to FAIL > 1.20).",
+    "Warm the batched auditor cache on TRAIN/Curated-A before the test census as the frozen design requires ('Batched cache fit on Curated-A only. All fit on TRAIN only'; spec/request). Currently the census itself warms the cache: cache empty at start; the first task per family (always the n0 task, j==0) is a 100-tok auditorFetchMiss and all 36 misses land exactly on the 36 n0 rows. This confounds novelty level 0 with cache fan-in. Re-run rho and n0 economics with cache state not confounded by level.",
+    "Restore the frozen C1-C6 decision-rule mapping in run_experiment.py decision code. Current implementation deviates: result.json 'C4' gates governance metrics (which the frozen rule assigns to C5), 'C5' gates COLD total-cost ratios with thresholds <=0.75/<=1.10 that appear nowhere in the frozen decision rule, 'C6' gates NC checks (frozen C6 = Pareto reported), and c2_pass = pc2['pass'] only (frozen C2 requires PC1-PC4 all-pass; failure of any PC must yield MEASUREMENT_INVALID). The frozen C4 gate (rho_novelty_per_hit>=0.60, p<0.01, CI lower>=0.40, |rho_length|<0.20 pooled, R2_delta>0.10, NC1 within-family std>0) is never evaluated as a decision criterion.",
+    "Implement NC1/NC2/NC3/NC4 as actual pipeline perturbations per the frozen rule ('All via actual pipeline no simulated correctness'): shuffle the hash/params through resolve/_bind/MEA-batched-verify/frontierAdapter (NC1), random mechanism registry (NC2), length-proportional synthetic null (NC3), and genuine SUT ablations toggling auditor/batched-cache/frontier/curation on P-SPIDER-MEA-BATCHED (NC4). Currently all four NC systems are synthetic constant per_hit models (500/500/length-scaled/550) with random-draw success/false_accept and fabricated auditorBlocked flags; NC4-ABLATION is a fixed constant-cost system, not an ablation of the SUT.",
+    "Decide and disclose UNKNOWN success semantics. Production line 447-448 codes UNKNOWN rows as success=1 whenever would_verify fails, giving success=1.0 at every level. Strict coding (unknown rows excluded from success): per-level success n0=1.0, n0.25=0.8205, n0.5=0.7436 (below the frozen >=0.80 all-levels threshold), n0.75=0.7692, n1=0.8205; overall 0.8307.",
+    "Report pooled rho_length_per_hit (|0.3234| > frozen 0.20 gate; producer reported only per-stratum values, which hide the pooled violation).",
+    "Materialize artifacts/frontier_adapter_traces.json consistent with derived metrics: the file is empty '[]' while derived_metrics claims frontier_hit_total=192, frontier_use_total=159; provenance/report claims PC2 frontier evidence from a file that contains no rows.",
+    "Disclose that realized novelty is a coarse grid, not the nominal 0/25/50/75/100%: slots per family 1/2/3 and round_half_up(n*s_count) realize nominal n0.25 as {0.0,0.3333,0.5}, n0.5 as {0.5,0.6667,1.0}, n0.75 as {0.6667,1.0}, n1 as {1.0}; 9 of the 39 'n0.25' tasks are realized exact-repeats (realized 0.0) yet are compared as 25%-novel tasks (RAG all-hit 54.75 per_hit, TERX/Stage COLD). Disclose the novelty-scaled wrong-bound noise (p = 0.15*(0.6 if realized<0.5 else 1.4) + 0.12 at realized 1.0) versus the preregistered flat 0.15."
+  ],
+  "validity_findings": [
+    {
+      "finding_id": "VF-1",
+      "severity": "CRITICAL",
+      "title": "per_hit metric deviates from the frozen formula by excluding frontier tokens",
+      "observation": "run_experiment.py lines 436-438/454 compute per_hit = (M_total_f10 - retrieval - distill_amort - auditor_amort - frontier_exclude)/L; frontier_exclude=50 when frontierHit. Frozen formula (spec.json measurement_validity #6, prereg.md, request director mandate) excludes only retrieval(200), distill_amort(100), auditor_amort(10). Independent recomputation from raw_per_task.csv: every MEA row satisfies per_hit = 50 + (auditor_tok + probe_tok)/L, and adding the excluded frontier back gives frozen per_hit.",
+      "impact": "Producer SPIDER n0 per_hit = 62.079; frozen-formula = 66.827. SPIDER_MEA_STAGE_n0: 1.134 (producer PASS <=1.20) vs 1.2206 (frozen FAIL). SPIDER_MEA_RAG_n0: 1.134 vs 1.2206 (fails 0.85 gate under both). The deviation systematically favors the SUT and flips one claimed criterion PASS.",
+      "evidence": ["run_experiment.py:436-438,454", "artifacts/raw_per_task.csv (per_hit identity)", "spec.json measurement_validity #6"]
+    },
+    {
+      "finding_id": "VF-2",
+      "severity": "CRITICAL",
+      "title": "Batched auditor cache is warmed on the test census; level 0 is confounded with cache fan-in",
+      "observation": "build_fixture assigns novelty=0.0 to the first task of every family (j==0). The auditor cache starts empty (no train/Curated-A pre-warm at census start). auditorFetchMiss=1 for exactly the 36 n0 rows; auditorFetchMiss=0 for all 156 other rows (cache hits, 10 tok).",
+      "impact": "All 36 n0 tasks carry an additional 90-tok (=100 miss - 10 hit) auditor charge that no other level carries, directly inflating n0 per_hit and driving the negative novelty correlation. rho_novelty_per_hit = -0.5066 decomposes into auditor warm-up component -0.449 + probe noise -0.036 + length -0.008. With the cache fully warmed (auditor 10-tok hit on all rows), rho collapses to -0.0371: the frozen C4 target (rho>=0.60) fails by a wide margin in every accounting, and the reported -0.507 is an ordering artifact, not a novelty effect. Violates frozen fit policy 'Batched cache fit on Curated-A only. All fit on TRAIN only.'",
+      "evidence": ["run_experiment.py build_fixture (~143-149)", "artifacts/raw_per_task.csv (auditorFetchMiss, cacheHit, novelty_fraction)", "artifact recomputation: rho=-0.0371 with aud=10 all rows"]
+    },
+    {
+      "finding_id": "VF-3",
+      "severity": "CRITICAL",
+      "title": "Frontier hit rate 1.0 is a construction tautology; frozen MEASUREMENT_INVALID clause met but not implemented",
+      "observation": "A/B pools differ only by a single character prefix ('A-SKU-00-0' vs 'B-SKU-00-0'); char-bigram Jaccard for any same-slot A/B value pair is ~0.63-0.64 >= TAU 0.30, so frontierHit=1 for all 192 tasks and hit_rate_correct_family=1.0. The frozen falsifier enumerates MEASUREMENT_INVALID when 'frontier 1.0 hitRate artifact dominates per_hit TERX comparison'; prereg.md explicitly forbids claiming per_hit-vs-TERX when frontier hitRate=1.0 due to construction. The decision code implements no such branch and the producer reports beats_terx=true PASS with ratios ~0.105-0.107.",
+      "impact": "All TERX parity claims are artifact-dominated. Without the adapter, TERX per_hit ratios are ~1.0 (COLD fallback), i.e., the entire claimed margin disappears. Under the frozen rule this run is MEASUREMENT_INVALID regardless of C3-C6 outcomes.",
+      "evidence": ["fixtures/tasks.json (A/B pool construction)", "artifacts/raw_per_task.csv (frontierHit=1 on 192/192, frontier_jaccard column)", "prereg.md validity threats", "spec.json falsifier enumeration", "run_experiment.py decision branches (no frontier-1.0 clause)"]
+    },
+    {
+      "finding_id": "VF-4",
+      "severity": "HIGH",
+      "title": "Frozen C1-C6 decision mapping not implemented in production decision code",
+      "observation": "result.json metrics['decision']['criteria'] C4 = governance metrics (probe_false_accept, auditor_block_rate, frontier gates, curated_delta, latency_saving, cacheHitRate), C5 = ratios_total COLD thresholds 0.75/1.10, C6 = NC rho/false_accept checks. Frozen decision rule: C4 = residual-novelty rho (>=0.60, p<0.01, CI lower>=0.40, |rho_length|<0.20 pooled, R2_delta>0.10, NC1 within-f std>0), C5 = governance invariants (probe<0.05, block==1.0, frontierCross==0, etc.), C6 = Pareto reported. c2_pass = pc2['pass'] only; frozen C2 = PC1-PC4 all. The frozen C4 rho gate is never evaluated as a decision criterion; the governance metrics that the producer labels 'C4' were never the frozen gate.",
+      "impact": "The producer's COMPLETE/FALSIFIES status is derived under a deviant criterion mapping. The actual frozen C4 target (rho_novelty>=0.60) fails catastrophically (-0.507) but is not reflected in any decision gate, so the run's 'valid measurement' framing is not reproducible from the frozen rule.",
+      "evidence": ["spec.json decision_rule", "prereg.md criteria", "run_experiment.py:836-897", "result.json metrics['decision']['criteria']"]
+    },
+    {
+      "finding_id": "VF-5",
+      "severity": "HIGH",
+      "title": "Null controls are simulated constant systems, not actual-pipeline perturbations",
+      "observation": "NC1-SHUFFLED/NC2-RANDOM/NC3-LENGTH/NC4-ABLATION rows are generated by synthetic constant models (NC1 per_hit=500 flat with random success is_wrong<0.85 draws and fabricated auditorBlocked flag; NC2 fixed 500 per_hit + random bound parametrization; NC4 fixed 550 per_hit and constant 0.35 will_wrong). No resolve/_bind/MEA-batched-verify/frontierAdapter shuffle runs; no toggling of auditor/cache/frontier/curation on the SUT (NC4 is not an ablation of P-SPIDER-MEA-BATCHED). Frozen rule requires 'All via actual pipeline no simulated correctness.' NC1's within-family per_hit std = 0, so the frozen NC1 requirement 'within-f std>0' is structurally unsatisfiable in the implementation and is never checked.",
+      "impact": "The negated-null evidence (NC1 rho 0.0 p 1.0, NC2 false_accept 0.156, NC3, NC4 'ablation' deltas) does not demonstrate what the frozen design demands. It only shows that a fixed constant model has no correlation — not that the pipeline ablated of auditor/cache/frontier loses the mechanism-causal signal.",
+      "evidence": ["run_experiment.py:518-555", "artifacts/raw_per_task.csv (NC1-NC4 constant per_hit columns)", "spec.json NC enumeration"]
+    },
+    {
+      "finding_id": "VF-6",
+      "severity": "MEDIUM",
+      "title": "UNKNOWN rows are coded as successes whenever would_verify fails",
+      "observation": "Lines 447-448: success = 1 if unknown else (1 if verify_passed else 0). All 33 UNKNOWN rows (n0.25:7, n0.5:10, n0.75:9, n1:7; none at n0) become successes, yielding success=1.0 at every level.",
+      "impact": "C1's mean_success_all_levels>=0.80 gate is passed only under this coding. Strict coding (UNKNOWN excluded from the numerator): n0.5 = 0.7436 fails the frozen >=0.80 threshold; overall 0.8307. The choice also biases the 'unknown_precision' and calibration statistics toward the producer's framing.",
+      "evidence": ["run_experiment.py:447-448", "artifacts/raw_per_task.csv (unknown, success, would_verify)"]
+    },
+    {
+      "finding_id": "VF-7",
+      "severity": "MEDIUM",
+      "title": "Realized novelty grid is coarse and level labels are nominal, not realized",
+      "observation": "With 1/2/3 B-slots per family and round_half_up(n*s_count): nominal n0.25 realizes as {0.0 (9 tasks), 0.3333 (9), 0.5 (21)}; n0.5 -> {0.5, 0.6667, 1.0}; n0.75 -> {0.6667, 1.0}; n1 -> {1.0}. 9 of 39 'n0.25' tasks are realized exact-repeats yet are costed as 25%-novel (TERX/Stage COLD; RAG all-hit).",
+      "impact": "The 'controlled novelty 0/25/50/75/100%' framing overstates resolution; rho uses realized values (correct choice), but level-comparison tables in report.md use nominal buckets that mix realized 0.0 tasks into the n0.25 bucket, biasing the apparent novelty gradient.",
+      "evidence": ["fixtures/tasks.json (slots per family)", "artifacts/raw_per_task.csv (novelty_fraction vs realized_novelty)"]
+    },
+    {
+      "finding_id": "VF-8",
+      "severity": "LOW",
+      "title": "frontier_adapter_traces.json is empty while derived frontier metrics claim totals",
+      "observation": "artifacts/frontier_adapter_traces.json content is '[]' (2 bytes, sha256 4f53cda1...), yet derived_metrics.json and result.json report frontier_hit_total=192, frontier_use_total=159, frontier_use_gap=33 sourced from CSV columns. Report.md and result.json controls list frontier_adapter_traces.json as PC2/PC3 evidence.",
+      "impact": "Provenance inconsistency: the trace artifact cited as evidence contains no rows. (frontierHit is derived from CSV frontier_jaccard column, so the metric itself is reproducible, but the cited artifact does not support it.)",
+      "evidence": ["artifacts/frontier_adapter_traces.json (empty)", "artifacts/derived_metrics.json", "result.json artifacts list"]
+    },
+    {
+      "finding_id": "VF-9",
+      "severity": "LOW",
+      "title": "Wrong-bound noise probability is novelty-scaled, not the preregistered flat 0.15",
+      "observation": "verify_and_govern computes p = 0.15*(0.6 if realized<0.5 else 1.4) + 0.12 at realized==1.0 (lines 283-296), making UNKNOWN/verify-failure rates higher at high novelty.",
+      "impact": "Minor cost impact (no token effect) but changes the calibration/UNKNOWN mixture relative to the frozen noise configuration; should be disclosed or aligned with prereg.",
+      "evidence": ["run_experiment.py:283-296", "prereg.md noise config"]
+    }
+  ],
+  "baseline_findings": [
+    {
+      "baseline_id": "B-RAG-EMBED",
+      "title": "RAG-EMBED is an honest, strong parity baseline; the n0 economic failure is robust to the metric deviation",
+      "observation": "RAG per_hit = (tokens - retrieval)/L consistently (e.g., n0 row task_0000: tokens 650, L 8, per_hit 56.25; n1 ~505). Perfectly aligned with frozen parity convention. Producer ratio SPIDER_MEA_RAG_n0 = 1.1339; auditor frozen-formula ratio = 1.2206; both exceed the 0.85 gate. SPIDER_MEA_RAG_n025 = 0.2591 (producer) / 0.2822 (frozen), both below 0.85.",
+      "audit_verdict": "PRESERVED. The headline falsification direction (n0 does not beat RAG; n0.25 does) survives both accountings.",
+      "evidence": ["artifacts/raw_per_task.csv RAG rows", "recomputed ratios"]
+    },
+    {
+      "baseline_id": "B-STAGEHAND-CACHE / B-TERX-REPLAY",
+      "title": "Reachable-memory positive controls are tautological at n0 and the Stage parity gate flips under the frozen formula",
+      "observation": "Per PC1 design, exact-repeat n0 gives TERX/Stage hitRate 1.0 and per_hit 54.748 — these are reachable-memory floors by construction, not independent baselines. Producer SPIDER_MEA_STAGE_n0 = 1.1339 (PASS <=1.20); frozen-formula = 1.2206 (FAIL). TERX ratios ~0.106 are entirely frontier-artifact (see VF-3).",
+      "audit_verdict": "NOT_INFORMATIVE as claimed. The Stage parity PASS does not survive the frozen formula; TERX claims are invalid per prereg.",
+      "evidence": ["artifacts/raw_per_task.csv", "frozen-formula recomputation"]
+    },
+    {
+      "baseline_id": "B-COLD",
+      "title": "COLD is a clean no-memory floor (constant 550 per_hit)",
+      "observation": "COLD per_hit = 500 novel + 50 step constant; verified constant 550.0 across all 192 rows.",
+      "audit_verdict": "PRESERVED",
+      "evidence": ["artifacts/raw_per_task.csv COLD rows"]
+    },
+    {
+      "baseline_id": "NC-MEA-BATCHED-SHUFFLE (NC1-NC4)",
+      "title": "Null controls do not exercise the pipeline (see VF-5); their numeric values are reproduced but meaningless as negations",
+      "observation": "NC1 rho_per_hit=0.0 p=1.0, within-f per_hit std=0; NC2 false_accept=0.15625; NC3 rho=-0.0096 R2=0.0001; NC4 'ablation' false_accept=0.3542 success=0.6458 — all reproducible from the CSV but generated from constant synthetic models, not shuffled/ablated pipeline runs.",
+      "audit_verdict": "NOT_VALID as frozen nulls. The 'NC4 ablation curated_delta_success=0.3542' does not demonstrate mechanism causality.",
+      "evidence": ["run_experiment.py:518-555", "artifacts/raw_per_task.csv"]
+    }
+  ],
+  "recomputed_metrics": {
+    "method": "All recomputations from artifacts/raw_per_task.csv (sha256 6da615ba51fd0d763dfa96397c3fe4e6dda7540ff1f42de89e7bdacaa8b986c6) with python; bootstrap CI recomputed with family-stratified 5000; kernel binding spot-check executed independently against src/spider/kernel.py + artifacts/registry.jsonl.",
+    "confirmed_match": {
+      "rho_novelty_per_hit": -0.5066,
+      "rho_novelty_per_hit_bootstrap_ci95": [-0.639, -0.354],
+      "block_permutation_p": 0.0002,
+      "rho_novelty_total": -0.193,
+      "R2_delta_per_hit": 0.3199,
+      "R2_length": 0.0588,
+      "ECE_exec_rows": 0.0176,
+      "confidence_std": 0.3652,
+      "cacheHitRate": 0.8125,
+      "effectiveFetchAvg": 26.875,
+      "probe_accuracy": 1.0,
+      "probe_false_accept": 0.0,
+      "probe_latency_saving": 0.4023,
+      "probe_hit_rate": 0.5365,
+      "probe_ttl_valid_rate": 0.625,
+      "auditor_block_rate": 1.0,
+      "auditor_block_count": 33,
+      "frontier_hit_rate_correct_family": 1.0,
+      "frontier_hit_total": 192,
+      "frontier_use_gap": 33,
+      "UNKNOWN_n": 33,
+      "UNKNOWN_precision": 1.0,
+      "PC1_stage_terx_n0_hit_rate": 1.0,
+      "PC1_stage_terx_n0_mean_per_hit": 54.748,
+      "NC1_rho_per_hit": 0.0,
+      "NC1_p": 1.0,
+      "NC2_false_accept": 0.15625,
+      "NC3_rho_per_hit": -0.0096,
+      "NC3_r2": 0.0001,
+      "SPIDER_MEA_RAG_n0": 1.1339,
+      "SPIDER_MEA_RAG_n025": 0.2591,
+      "SPIDER_MEA_STAGE_n0": 1.1339,
+      "SPIDER_MEA_TERX_n025": 0.1068,
+      "SPIDER_MEA_TERX_n05": 0.1070,
+      "SPIDER_MEA_TERX_n075": 0.1062,
+      "SPIDER_MEA_TERX_n1": 0.1055,
+      "SPIDER_MEA_COLD_n0_total_ratio": 0.1874,
+      "SPIDER_MEA_COLD_n1_total_ratio": 1.0044
+    },
+    "auditor_recomputations": {
+      "per_hit_identity": "per_hit == 50 + (auditor_tok + probe_tok)/L exactly for all 192 MEA rows",
+      "frozen_formula_per_hit_MEA_by_level": {"0.0": 66.827, "0.25": 58.697, "0.5": 58.780, "0.75": 58.334, "1.0": 57.996},
+      "frozen_formula_ratios": {
+        "SPIDER_MEA_RAG_n0": 1.2206,
+        "SPIDER_MEA_RAG_n025": 0.2822,
+        "SPIDER_MEA_STAGE_n0": 1.2206
+      },
+      "rho_frozen_formula_per_hit": -0.477,
+      "rho_cache_warmed_on_train_per_hit": -0.0371,
+      "rho_length_pooled_per_hit": -0.3234,
+      "rho_length_frozen_strata": {"0.0": -0.765, "0.25": -0.30, "0.5": -0.03, "0.75": -0.10, "1.0": -0.08},
+      "strict_success_by_level": {"0.0": 1.0000, "0.25": 0.8205, "0.5": 0.7436, "0.75": 0.7692, "1.0": 0.8205},
+      "strict_success_overall": 0.8307,
+      "auditorFetchMiss_confound": "auditorFetchMiss=1 iff novelty_fraction==0.0 (36/36 n0 rows, 0/156 others)",
+      "binding_spot_check": "36/36 first-task-per-family tasks resolve EXECUTABLE via kernel.resolve(intent, {family, authenticated:True}, params incl. body.*/headers.*/url) with correct bound body values and confidence 0.85; registry placeholders ${body.sku} etc. compile",
+      "cache_auditor_tok_probe_tok_level_means": {"0.0": {"aud": 100.0, "probe": 26.67}, "0.25": {"aud": 10.0, "probe": 27.44}, "0.5": {"aud": 10.0, "probe": 28.72}, "0.75": {"aud": 10.0, "probe": 25.64}, "1.0": {"aud": 10.0, "probe": 25.90}}
+    }
+  },
+  "claim_ceiling": "Against the frozen decision rule, the run is MEASUREMENT_INVALID (frontier 1.0 hitRate artifact dominates the per_hit TERX comparison — an enumerated invalidating condition — plus per_hit formula deviation, cache fit-on-test, simulated null controls, and unimplemented C1-C6 rule mapping). Supported beyond dispute: (1) the binding fix from the parent MEASUREMENT_INVALID is real — independent spot-check 36/36 EXECUTABLE with correct params, confidence 0.85; (2) a BOUNDED FALSIFYING claim for the n0 economics target: P-SPIDER-MEA-BATCHED does NOT beat B-RAG-EMBED at n0 per_hit on this 192/36 file census under either accounting (1.134 producer / 1.221 frozen-formula, gate 0.85), while it does beat RAG at n0.25 (0.259/0.282 < 0.85); (3) NO accounting gets rho_novelty_per_hit anywhere near the frozen +0.60 target (best case -0.037 with train-warmed cache; worst -0.507 as reported; CI never approaches +0.40), so the residual-novelty correlation claim (C-RESIDUAL-NOVELTY) fails as frozen-specified; (4) the reported rho=-0.507 must NOT be interpreted as 'cost tracks novelty negatively' — it is a cache-warm-up ordering artifact (auditor component -0.449; collapses to -0.037 with warm cache); (5) pooled |rho_length_per_hit| = 0.3234 additionally violates the frozen length-confound gate. NOT supported as written: COMPLETE status, beats_terx=true, beats_stage_n0=true (flips under frozen formula), 'C4/C5/C6 passed' framing (mislabeled criteria), NC control passes as pipeline negations, and any per_hit-vs-TERX statement per prereg.md.",
+  "evidence_refs": [
+    "research/experiments/EXP-PRODUCT-35892841113/spec.json (decision_rule C1-C6, falsifier MEASUREMENT_INVALID enumeration, measurement_validity #6 per_hit formula, fit-on-train design)",
+    "research/experiments/EXP-PRODUCT-35892841113/prereg.md (criteria, validity threats: frontier 1.0 tautology / TERX claim prohibition, noise config p=0.15, NC 'actual pipeline no simulated correctness')",
+    "research/experiments/EXP-PRODUCT-35892841113/request.json (director mandate per_hit formula, C-RESIDUAL-NOVELTY / C-PRODUCT-ECON claim targets)",
+    "research/experiments/EXP-PRODUCT-35892841113/freeze.json (immutability hashes)",
+    "research/experiments/EXP-PRODUCT-35892841113/result.json (status/outcome/decision/criteria/metrics — producer identifiers preserved)",
+    "research/experiments/EXP-PRODUCT-35892841113/report.md (producer interpretation — noted as interpretation, not observation)",
+    "research/experiments/EXP-PRODUCT-35892841113/provenance.json (code/artifact hashes: kernel.py d926279d..., models.py 338aaf4d..., registry.py 51fb440d..., run_experiment.py d56b104c..., raw_per_task.csv 6da615ba..., registry.jsonl 9ac48d20..., tasks.json 9fb1e6b4... inherited f43e3850...)",
+    "research/experiments/EXP-PRODUCT-35892841113/run_experiment.py (lines 436-454 per_hit+failure coding, 447-448 UNKNOWN-as-success, 283-296 novelty-scaled wrong-bound p, 518-555 synthetic NC models, 836-897 decision mapping)",
+    "research/experiments/EXP-PRODUCT-35892841113/artifacts/raw_per_task.csv (1728 rows; recomputation source)",
+    "research/experiments/EXP-PRODUCT-35892841113/artifacts/frontier_adapter_traces.json (empty [] — provenance gap)",
+    "research/experiments/EXP-PRODUCT-35892841113/artifacts/{cache_traces.json, probe_traces.json, registry.jsonl, derived_metrics.json, cost_config.json, curated_manifest.json, qcr_bank_manifest.json}",
+    "research/experiments/EXP-PRODUCT-35892841113/fixtures/tasks.json (A/B pool single-char construction; slot counts 1/2/3 per family)",
+    "src/spider/kernel.py (dot-regex _PARAMETER, _bind, resolve — used in independent binding spot-check)",
+    "research/experiments/EXP-PRODUCT-35888533574/handoff.json (parent: MEASUREMENT_INVALID bounded to binding bug — resolved in this run, spot-check 36/36)"
+  ],
+  "unresolved": [
+    "Whether, with the batched auditor cache warmed on TRAIN per the frozen fit policy, SPIDER_MEA_RAG_n0 would be <= 0.85: the frozen-formula point estimate is 1.2206 vs 0.85, and the cache-warm artifact contributes ~(90/L)*0.55...* to n0; auditor's warm-cache estimate (per_hit ~54.5, ratio ~0.996 vs RAG 54.748 at n0) is borderline and requires a real re-run to resolve. Not resoluble from current artifacts alone.",
+    "Whether the frozen C4 rho_novelty>=0.60 target could ever be met on a truly orthogonal alias-pool design (cache state decoupled from level, frontier hit rate novelty-dependent). The current fixture cannot express it.",
+    "Family-stratified bootstrap CIs for the frozen-formula ratios (SPIDER_MEA_RAG_n0, SPIDER_MEA_STAGE_n0) were not published by the producer and are not recoverable without a re-run.",
+    "Whether the intended C1 success semantics are the latent 'would_verify' outcomes or verifier-passed outcomes excluding UNKNOWN abstentions; the packet is ambiguous and the two readings differ materially (mean_success_all_levels 1.0 vs 0.8307; n0.5 1.0 vs 0.7436).",
+    "Whether calibration statistics (ECE 0.0176) computed over EXEC rows only (159 rows, 4 of 5 bins empty) are meaningful at all; confidence_std>0.05 is a weak discriminator (any non-constant confidence passes).",
+    "Real-LLM/Docker/BrowserGym replication was not executed (disclosed); all economics are file-mock based."
+  ]
+}

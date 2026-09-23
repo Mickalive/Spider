@@ -1,0 +1,446 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-35892848544",
+  "lane": "intel",
+  "github_run_id": "35892848544",
+  "github_run_attempt": "1",
+  "request_hash": "498e6a2976ce7ae3c809acb437cb7921686eafc8c2616cfc781f9ff2de0d942a",
+  "request_id": "3c4c7410d61471b35aae0fa2",
+  "frozen_at": "2026-09-23T17:04:47.866933+00:00",
+  "measured_at": "2026-09-23T17:10:05+00:00",
+  "commit": "95bed1e3b96a50cbcce07693053e0dd25a8d6c71",
+  "base_sha": "95bed1e3b96a50cbcce07693053e0dd25a8d6c71",
+  "environment": {
+    "python_version": "3.12.14",
+    "os": "linux",
+    "docker_image_full": "am1n3e/webarena-verified-shopping@sha256:3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb",
+    "docker_digest_full": "sha256:3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb",
+    "docker_digest_truncated": "am1n3e/webarena-verified-shopping@sha256:3e8cb9b945",
+    "registry_resolution": {
+      "attempts": [
+        {
+          "attempt": 1,
+          "url": "https://hub.docker.com/v2/repositories/am1n3e/webarena-verified-shopping/tags?page_size=5",
+          "status": 200,
+          "error": null,
+          "resolved_digest": "sha256:3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb",
+          "response_preview": "{\"count\":2,\"next\":null,\"previous\":null,\"results\":[{\"creator\":9806697,\"id\":1062210625,\"images\":[{\"architecture\":\"amd64\",\"features\":\"\",\"variant\":null,\"digest\":\"sha256:3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb\",\"os\":\"linux\",\"os_features\":\"\",\"os_version\":null,\"size\":5421321813,\"status\":\"active\",\"last_pulled\":\"2026-09-23T16:43:43.123310651Z\",\"last_pushed\":\"2026-02-02T18:23:14.63464585Z\"}],\"last_updated\":\"2026-02-02T18:23:19.810286Z\",\"last_updater\":9806697,\"last_updater_username\":\"am1n3e\",\"name\":\"latest\",\"repository\":29932355,\"full_size\":5421321813,\"v2\":true,\"tag_status\":\"active\",\"tag_last_pulled\":\"2026-09-23T16:43:43.123310651Z\",\"tag_last_pushed\":\"2026-02-02T18:23:19.810286Z\",\"media_type\":\"application/vnd.docker.container.image.v1+json\",\"content_type\":\"image\",\"digest\":\"sha256:3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb\"},{\"creator\":9806697,\"id\":1062210546,\"images\":[{\"architecture\":\"amd64\",\"features\":\"\",\"variant\":null,\"digest\":\"sha256:3e8cb9b945ea9"
+        }
+      ],
+      "full_digest": "sha256:3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb",
+      "api_url": "https://hub.docker.com/v2/repositories/am1n3e/webarena-verified-shopping/tags?page_size=5",
+      "truncated_digest": "sha256:3e8cb9b945",
+      "is_valid_64": true
+    },
+    "docker_reachable": false,
+    "docker_retry_count": 3,
+    "docker_url": "http://localhost:7770",
+    "docker_last_error": "URLError: <urlopen error [Errno 111] Connection refused>",
+    "docker_pull_full": {
+      "cmd": "docker pull am1n3e/webarena-verified-shopping@sha256:3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb",
+      "returncode": -1,
+      "stdout": "",
+      "stderr": "TimeoutExpired: Command '['docker', 'pull', 'am1n3e/webarena-verified-shopping@sha256:3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb']' timed out after 90 seconds",
+      "success": false
+    },
+    "docker_pull_truncated": {
+      "cmd": "docker pull am1n3e/webarena-verified-shopping@sha256:3e8cb9b945",
+      "returncode": 1,
+      "stdout": "",
+      "stderr": "invalid reference format\n",
+      "success": false
+    },
+    "docker_run": {
+      "cmd": "docker run -d -p 7770:7770 am1n3e/webarena-verified-shopping@sha256:3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb",
+      "returncode": -1,
+      "stdout": "",
+      "stderr": "TimeoutExpired: Command '['docker', 'run', '-d', '-p', '7770:7770', 'am1n3e/webarena-verified-shopping@sha256:3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb']' timed out after 15 seconds",
+      "success": false
+    },
+    "docker_ps": {
+      "cmd": "docker ps -a",
+      "returncode": 0,
+      "stdout": "CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES\n",
+      "stderr": "",
+      "success": true
+    },
+    "docker_images": {
+      "cmd": "docker images --digests",
+      "returncode": 0,
+      "stdout": "REPOSITORY                                   TAG       DIGEST                                                                    IMAGE ID       CREATED       SIZE\nghcr.io/github/gh-aw-firewall/agent          latest    sha256:f7df036c86575527b61f3f7df91c4412349a12b2a74988d929eafa2999230c98   bd7acdea5936   2 weeks ago   569MB\nghcr.io/github/gh-aw-firewall/api-proxy      latest    sha256:6f95e2234dd9bd6333a8ff28ccea7ecf0204acd4a09108723844dbd2bf6268c5   9d8f8fbebb48   2 weeks ago   231MB\nghcr.io/github/gh-aw-mcpg                    latest    sha256:85b940556a8faa4e1fdbef124bfd75f2c4ebd855a10b88a1c3b6f3e97f6f1a53   5f22df3c4a88   2 weeks ago   181MB\nghcr.io/dependabot/dependabot-updater-core   latest    sha256:2fba19978e4b0b2a9829597be4a15fb1fe19878b241e97a9b4d1317692940c45   5c1f9f1da87f   2 weeks ago   826MB\nghcr.io/github/github-mcp-server             latest    sha256:46cdbbd810faf6f7aed1745ea04057443f5cb9fcadc15c7308add18cf9a83e33   3e165e25be8d   2 weeks ago   46.8MB\nghcr.io/github/gh-aw-firewall/squid          latest    sha256:2ce8df3abf3e9b76e9c0cf5863da41f1ab3f89b20ad14b988806ab89e7bf2cd5   ebc9c9e5ccbd   5 weeks ago   43.1MB\n",
+      "stderr": "",
+      "success": true
+    },
+    "skopeo_inspect": {
+      "cmd": "skopeo inspect docker://am1n3e/webarena-verified-shopping@sha256:3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb",
+      "returncode": 0,
+      "stdout": "{\n    \"Name\": \"docker.io/am1n3e/webarena-verified-shopping\",\n    \"Digest\": \"sha256:3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb\",\n    \"RepoTags\": [\n        \"0.1.0\",\n        \"latest\"\n    ],\n    \"Created\": \"2026-02-02T19:22:53.392305819+01:00\",\n    \"DockerVersion\": \"\",\n    \"Labels\": null,\n    \"Architecture\": \"amd64\",\n    \"Os\": \"linux\",\n    \"Layers\": [\n        \"sha256:c65b6d59765c287e6f6d5baf71dc3c6ae9c812c9b3a8b4beb392625402b72ae8\",\n        \"sha256:e7aabb51d2b1ffd9874e37c82fb1291932395bb1b8505176affae5f9d5de9805\",\n        \"sha256:4f4fb700ef54461cfa02571ae0db9a0dc1e0cdb5577484a6d75e68dc38e8acc1\",\n        \"sha256:b055823521cbe3f1a91a9c437de6ab9237b6bddb4fe6c9e2ea619e1df929d8a4\",\n        \"sha256:eb7578cf2e0d0635fa529bcb26f6512abbb45b1838e39aa4a23b3d4afc020f5a\",\n        \"sha256:673a2d1870a6353c16f4f19a243b5c77d0793168036ad2757d92ad6a9500a4ef\",\n        \"sha256:11937473430db8672b46a19359c3cd08639271782449876e568ee5d6c00f4acd\",\n        \"sha256:de55a3f5673d6a39d5a36000ed28f6dd93e79c58c9aa419b5fa764ecbb3c6e59\"\n    ],\n    \"LayersData\": [\n        {\n            \"MIMEType\": \"application/vnd.docker.image.rootfs.diff.tar.gzip\",\n            \"Digest\": \"sha256:c65b6d59765c287e6f6d5baf71dc3c6ae9c812c9b3a8b4beb392625402b72ae8\",\n            \"Size\": 4843404242,\n            \"Annotations\": null\n        },\n        {\n            \"MIMEType\": \"application/vnd.docker.image.rootfs.diff.tar.gzip\",\n            \"Digest\": \"sha256:e7aabb51d2b1ffd9874e37c82fb1291932395bb1b8505176affae5f9d5de9805\",\n            \"Size\": 577890649,\n            \"Annotations\": null\n        },\n        {\n            \"MIMEType\": \"application/vnd.docker.image.rootfs.diff.tar.gzip\",\n            \"Digest\": \"sha256:4f4fb700ef54461cfa02571ae0db9a0dc1e0cdb5577484a6d75e68dc38e8acc1\",\n            \"Size\": 32,\n            \"Annotations\": null\n        },\n        {\n            \"MIMEType\": \"application/vnd.docker.image.rootfs.diff.tar.gzip\",\n            \"Digest\": \"sha256:b055823521cbe3f1a91a9c437de6ab9237b6bddb4fe6c9e2ea619e1df929d8a4\",\n            \"Size\": 25119,\n            \"Annotations\": null\n        },\n        {\n            \"MIMEType\": \"application/vnd.docker.image.rootfs.diff.tar.gzip\",\n            \"Digest\": \"sha256:eb7578cf2e0d0635fa529bcb26f6512abbb45b1838e39aa4a23b3d4afc020f5a\",\n            \"Size\": 328,\n            \"Annotations\": null\n        },\n        {\n            \"MIMEType\": \"application/vnd.docker.image.rootfs.diff.tar.gzip\",\n            \"Digest\": \"sha256:673a2d1870a6353c16f4f19a243b5c77d0793168036ad2757d92ad6a9500a4ef\",\n            \"Size\": 369,\n            \"Annotations\": null\n        },\n        {\n            \"MIMEType\": \"application/vnd.docker.image.rootfs.diff.tar.gzip\",\n            \"Digest\": \"sha256:11937473430db8672b46a19359c3cd08639271782449876e568ee5d6c00f4acd\",\n            \"Size\": 366,\n            \"Annotations\": null\n        },\n        {\n            \"MIMEType\": \"application/vnd.docker.image.rootfs.diff.tar.gzip\",\n            \"Digest\": \"sha256:de55a3f5673d6a39d5a36000ed28f6dd93e79c58c9aa419b5fa764ecbb3c6e59\",\n            \"Size\": 708,\n            \"Annotations\": null\n        }\n    ],\n    \"Env\": [\n        \"BUILD_BASE_URL=http://localhost:65365/\",\n        \"BUILD_TIMEOUT=300\",\n        \"BUILD_DRY_RUN=false\",\n        \"BUILD_ENV_CTRL_SRC=/build-env-ctrl\",\n        \"WA_ENV_CTRL_ROOT=/opt\",\n        \"WA_ENV_CTRL_TYPE=shopping\",\n        \"PATH=/usr/share/java/elasticsearch/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin\",\n        \"PHPIZE_DEPS=autoconf \\t\\tdpkg-dev dpkg \\t\\tfile \\t\\tg++ \\t\\tgcc \\t\\tlibc-dev \\t\\tmake \\t\\tpkgconf \\t\\tre2c\",\n        \"PHP_INI_DIR=/usr/local/etc/php\",\n        \"PHP_CFLAGS=-fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64\",\n        \"PHP_CPPFLAGS=-fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64\",\n        \"PHP_LDFLAGS=-Wl,-O1 -pie\",\n        \"GPG_KEYS=528995BFEDFBA7191D46839EF9BA0ADA31CBD89E 39B641343D8C104B2B146DC3F9C39DC0B9698544 F1F692238FBC1666E5A5CCD4199F9DFEF6FFBAFD\",",
+      "stderr": "",
+      "success": true
+    },
+    "playwright_version": "1.63.0",
+    "playwright_installed": false,
+    "playwright_browser": "chromium",
+    "playwright_install_verified": false,
+    "playwright_pinned": "1.63.0",
+    "browsergym_version": "0.14.3",
+    "browsergym_core_available": false,
+    "browsergym_pinned": "0.14.3",
+    "agentlab_version": null,
+    "agentlab_available": false,
+    "agentlab_pinned": "0.4.2",
+    "webgym_version": null,
+    "webgym_available": false,
+    "webgym_download_attempts": [
+      {
+        "attempt": 1,
+        "url": "https://huggingface.co/datasets/WebGym/WebGym/resolve/main/manifest.json",
+        "status": 401,
+        "error": "HTTPError: HTTP Error 401: Unauthorized",
+        "sha256": null,
+        "bytes": 0
+      },
+      {
+        "attempt": 2,
+        "url": "https://raw.githubusercontent.com/ServiceNow/WebGym/main/data/manifest.json",
+        "status": 404,
+        "error": "HTTPError: HTTP Error 404: Not Found",
+        "sha256": null,
+        "bytes": 0
+      }
+    ],
+    "webgym_manifest_sha256": null,
+    "tiktoken_version": null,
+    "tiktoken_available": false,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "seed": 35725763380
+  },
+  "code_artifacts": {
+    "measurement_script": "research/intel/exp_35892848544_measure.py",
+    "measurement_script_sha256": "bbf12bc6673c411fc16807db1bfe2eb725e8dcc25cd242b8d2d2ea005d6be268",
+    "grammar_code_file": "research/intel/grammar_fulltree_358885.py",
+    "grammar_code_hash": "f2b5e3bb0fe5cab452f24d3d1ed18205813ae207de579870b1a16f5f156d542a",
+    "grammar_recomputed_live": true,
+    "dynamic_token_regexes": [
+      "csrf[_-]?token",
+      "session[_-]?id",
+      "_token",
+      "timestamp",
+      "nonce",
+      "csrf value",
+      "sessionId",
+      "\\b\\d{13}\\b",
+      "\\b[a-f0-9]{32,}\\b"
+    ],
+    "placeholder_expansion_function": "grammar_fulltree_358885.get_task_start_url expands __SHOPPING__/path -> base_url+path_part, code verified live",
+    "webarena_adapter": "research/intel/webarena_adapter.py",
+    "execution_model": "muse-spark-1.2-contributor-free"
+  },
+  "datasets": {
+    "webarena_verified": {
+      "path": "research/experiments/EXP-INTEL-35749371101/artifacts/raw/webarena-verified.json",
+      "sha256": "d65275660814663375028e9017e1f929e3c38321041b125795e2713b52243d30",
+      "total_tasks": 812,
+      "shopping_tasks": 192,
+      "shopping_families_ge3": 36,
+      "shopping_families_ge4": 34,
+      "shopping_families_ge5": 33,
+      "admin_tasks": 184,
+      "admin_families": 42,
+      "path_families": 4,
+      "homepage_families": 32
+    },
+    "webarena_families_sampled": [
+      191,
+      180,
+      162,
+      197,
+      153,
+      213,
+      163,
+      137,
+      136,
+      222
+    ],
+    "webarena_families_pool": [
+      101,
+      136,
+      137,
+      138,
+      139,
+      145,
+      147,
+      153,
+      154,
+      155,
+      156,
+      159,
+      160,
+      162,
+      163,
+      165,
+      169,
+      171,
+      172,
+      180,
+      186,
+      189,
+      191,
+      194,
+      196,
+      197,
+      204,
+      206,
+      207,
+      208,
+      211,
+      212,
+      213,
+      214,
+      222,
+      370
+    ],
+    "webarena_families_derivation": "random.Random(35725763380).sample(sorted(families_ge3),10)",
+    "stagehand_families": [
+      101,
+      136,
+      137,
+      138,
+      139,
+      145,
+      147,
+      153,
+      154,
+      155,
+      156,
+      159,
+      160,
+      162,
+      163,
+      165,
+      169,
+      171,
+      172,
+      180,
+      186,
+      189,
+      191,
+      194,
+      196,
+      197,
+      204,
+      206,
+      207,
+      208,
+      211,
+      212,
+      213,
+      214,
+      222,
+      370
+    ],
+    "webgym": {
+      "version": null,
+      "available": false,
+      "census_status": "UNAVAILABLE",
+      "error": "No module named 'webgym'",
+      "manifest_sha256": null,
+      "download_attempts": [
+        {
+          "attempt": 1,
+          "url": "https://huggingface.co/datasets/WebGym/WebGym/resolve/main/manifest.json",
+          "status": 401,
+          "error": "HTTPError: HTTP Error 401: Unauthorized",
+          "sha256": null,
+          "bytes": 0
+        },
+        {
+          "attempt": 2,
+          "url": "https://raw.githubusercontent.com/ServiceNow/WebGym/main/data/manifest.json",
+          "status": 404,
+          "error": "HTTPError: HTTP Error 404: Not Found",
+          "sha256": null,
+          "bytes": 0
+        }
+      ],
+      "note": "WebGym 300k not installed; 2 genuine urllib attempts captured; 401/404 gating"
+    }
+  },
+  "measurements": {
+    "total_captures_attempted": 20,
+    "valid_captures": 0,
+    "product_captures": 0,
+    "product_families": 0,
+    "families_sampled": [
+      191,
+      180,
+      162,
+      197,
+      153,
+      213,
+      163,
+      137,
+      136,
+      222
+    ],
+    "families_pool": [
+      101,
+      136,
+      137,
+      138,
+      139,
+      145,
+      147,
+      153,
+      154,
+      155,
+      156,
+      159,
+      160,
+      162,
+      163,
+      165,
+      169,
+      171,
+      172,
+      180,
+      186,
+      189,
+      191,
+      194,
+      196,
+      197,
+      204,
+      206,
+      207,
+      208,
+      211,
+      212,
+      213,
+      214,
+      222,
+      370
+    ],
+    "ax_node_range": null,
+    "dom_bytes_range": null,
+    "ax_consistency_mean": null,
+    "ax_consistency_ci": [
+      null,
+      null
+    ],
+    "ax_shuffle_p": null,
+    "ax_variance": null,
+    "ax_delta_truncated": null,
+    "ax_delta_vs_prior_02857": null,
+    "stagehand_hit_rate": null,
+    "stagehand_miss_rate": null,
+    "stagehand_hash_stability": null,
+    "stagehand_mutation_capability": null,
+    "stagehand_hash_changed_on_mutation": null,
+    "stagehand_cross_project_leakage": null,
+    "gate0_transitions": 0,
+    "gate0_transitions_required_per_family": 50,
+    "gate0_families_with_50": 0,
+    "gate0_relaxed_pass": 0,
+    "gate0_strict_pass": 0,
+    "gate0_H": null,
+    "gate0_NL": 0,
+    "gate0_leakage_validOnly": null,
+    "pip_list_sha256": "bc751d3e417bb9ab202566f411a75268ac7f4ce2212283e8becab471aa0cebd0",
+    "pip_freeze_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "pip_list_output_len": 47,
+    "pip_freeze_output_len": 0,
+    "grammar_code_hash": "f2b5e3bb0fe5cab452f24d3d1ed18205813ae207de579870b1a16f5f156d542a",
+    "registry_digest_resolved": true,
+    "registry_api_url": "https://hub.docker.com/v2/repositories/am1n3e/webarena-verified-shopping/tags?page_size=5"
+  },
+  "artifacts": {
+    "raw": [
+      {
+        "path": "research/experiments/EXP-INTEL-35892848544/artifacts/raw/ax_captures.jsonl",
+        "count": 20,
+        "sha256": "10da90465c7aff84a904337ea5fb92fdef284af7604b05609de64e660c6b6df5"
+      },
+      {
+        "path": "research/experiments/EXP-INTEL-35892848544/artifacts/raw/ax_captures.json",
+        "count": 20,
+        "sha256": "cd404e58308f1cafae15a265e7fddc7e489b9bd9d0ce33d1209c416528c99fc3"
+      },
+      {
+        "path": "research/experiments/EXP-INTEL-35892848544/artifacts/raw/provenance.json",
+        "sha256": "f5c31d7d4f10f0dce8af46b3d3520df085da9dc03ca4b4c535f9c9cdc3484310"
+      },
+      {
+        "path": "research/experiments/EXP-INTEL-35892848544/artifacts/raw/diagnostics.json",
+        "sha256": "4f3547b3fc843b06fadb5fd072f8b62774e9b4bddafc297e17f1b009f06bde31"
+      }
+    ],
+    "derived": [
+      {
+        "path": "research/experiments/EXP-INTEL-35892848544/artifacts/derived/ax_consistency_fulltree.json",
+        "sha256": "a57470efb22664b3e5937d0e737d0e82721533d04844006ab14af8be4490b8f9"
+      },
+      {
+        "path": "research/experiments/EXP-INTEL-35892848544/artifacts/derived/stagehand_replication_recomputed.json",
+        "sha256": "e23620c362412a89238a22277cf56459844ce22b1b41d79023f9793343fefd3a"
+      },
+      {
+        "path": "research/experiments/EXP-INTEL-35892848544/artifacts/derived/webgym_census.json",
+        "sha256": "46e24b1099a6f3a0ab77a63bdbc58582ae11281c0a55aed02e30f35fc63966cd"
+      },
+      {
+        "path": "research/experiments/EXP-INTEL-35892848544/artifacts/derived/gate0_relaxed_table.json",
+        "sha256": "5783e1d9d960ae8a6721c4e3f370d48f8dc0e10ed533fe73f6fe784774874452"
+      },
+      {
+        "path": "research/experiments/EXP-INTEL-35892848544/artifacts/derived/provenance.json",
+        "sha256": "7cc6ea213ec628f7bd5dc5871f588c06a048d940a63a771926235233db7d2802"
+      },
+      {
+        "path": "research/experiments/EXP-INTEL-35892848544/provenance.json",
+        "sha256": "7cc6ea213ec628f7bd5dc5871f588c06a048d940a63a771926235233db7d2802"
+      }
+    ]
+  },
+  "dependencies": [
+    "research/experiments/EXP-INTEL-35888540685/handoff.json:7576c779835c41e6b307c5e5417edc0c406e48afa41ed870e78c7a5b21b5e123 (parent handoff SUPERSEDE)",
+    "research/experiments/EXP-INTEL-35749371101/artifacts/raw/webarena-verified.json:d65275660814663375028e9017e1f929e3c38321041b125795e2713b52243d30 (WebArena pin 192 tasks 36 families)",
+    "am1n3e/webarena-verified-shopping@sha256:3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb (Docker substrate at http://localhost:7770, 1280x720 CDP, registry-resolved 64-char digest sha256:3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb)",
+    "BrowserGym-core 0.14.3 + AgentLab 0.4.2 + Playwright 1.63.0 + tiktoken at 1280x720 (pins per Director mandate, pip list/freeze recorded with non-empty sha, dry-run captured)",
+    "WebGym 300k async corpus (requires manifest sha256, 2 genuine download attempts captured)",
+    "seed 35725763380 deterministic for family/task sampling, 2000 bootstrap, 1000 trajectory-grouped shuffles (frozen, not exercised due to 0 captures)",
+    "grammar file research/intel/grammar_fulltree_358885.py hash f2b5e3bb0fe5cab452f24d3d1ed18205813ae207de579870b1a16f5f156d542a recomputed live"
+  ],
+  "freeze_hashes": {
+    "prereg.md": "317e9a2f4a0c0a52c6da08a785136a249d60c7436d25934cf4673a73bb0a016a",
+    "request.json": "f3a03285cb8024d083ab2c0dfc81d668de1d90b8cb983efdad018d048be8c3c8",
+    "spec.json": "708dcf150411f561e7d676a8271e490fff2d9de9bed13ceb04eb41639ad62870"
+  },
+  "representation_loss": [
+    "Full-tree vs longest-prefix only: longest-prefix metric frozen but not exercised (0 captures)",
+    "Initial viewport no scroll for AX; multi-step for Gate0 not collected due to missing BrowserGym",
+    "CDP AX vs full DOM: AX 600-2000 nodes required",
+    "Relevant-subtree outerHTML normalized with 9-regex stripping",
+    "N=2 HIT threshold for Stagehand",
+    "Product page scarcity not assessed (0/20)",
+    "Registry resolution succeeded (64-hex valid) but Docker HTTP liveness still failed - shows digest fix alone insufficient for GH runner env",
+    "WebGym 401/404 after 2 genuine attempts - gating not general unavailability",
+    "Pip list/freeze captured non-empty (fixes e3b0c442)"
+  ],
+  "commands": [
+    "Docker Hub API query https://hub.docker.com/v2/repositories/am1n3e/webarena-verified-shopping/tags?page_size=5 (3 attempts captured, resolved sha256:3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb)",
+    "docker pull am1n3e/webarena-verified-shopping@sha256:3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb (90s timeout captured)",
+    "docker run -d -p 7770:7770 am1n3e/webarena-verified-shopping@sha256:3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb (captured)",
+    "docker ps -a ; docker images --digests ; skopeo inspect (captured)",
+    "pip list ; pip freeze ; pip --version (captured with sha256)",
+    "pip install browsergym-core==0.14.3 --dry-run ; playwright==1.63.0 --dry-run ; agentlab==0.4.2 --dry-run (captured)",
+    "urllib 2 attempts for WebGym manifest (captured)",
+    "python3 research/intel/exp_35892848544_measure.py (3 HTTP probes, placeholder expansion, grammar live hash, WebGym check, Gate0 check)",
+    "sha256sum artifacts/raw/* artifacts/derived/* provenance.json"
+  ],
+  "provenance_self_hash": "7cc6ea213ec628f7bd5dc5871f588c06a048d940a63a771926235233db7d2802",
+  "provenance_top_hash": "7cc6ea213ec628f7bd5dc5871f588c06a048d940a63a771926235233db7d2802"
+}
