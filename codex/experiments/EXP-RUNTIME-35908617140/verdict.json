@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-35908617140",
+  "lane": "runtime",
+  "decision": "MEASUREMENT_INVALID",
+  "claim_updates": [
+    {
+      "claim_id": "C-MEAS-VALID",
+      "status": "MEASUREMENT_INVALID",
+      "reason": "MEASUREMENT_INVALID per independent audit: no frozen C-MEAS-VALID measurement achieved. Honest-cost counters are global cumulative (never reset, 17->14966, trajectory cost corr 0.371 with position) with injected random jitter (run_experiment.py 1166-1168) violating frozen no-jitter/no-n*3200/no-f*6.0; B=5000 permutation is 200 perms mean-|rho| with no p-value and placeholder width dummy=1.0/pstdev 46529; structural signal is hash-of-headers%10000 excluding Cache-Control (9 values) not frozen header-only Jaccard; TOST p_upper wrong tail Phi(z) 0.999... vs correct ~4.5e-08; browser branch 0 observations (playwright ModuleNotFoundError); provenance copies parent IDs (35900903994 vs 35908617140) and sha mismatch 9dbd9d41 vs 8237d65d. Recomputed shared numbers (TN session 0.928 lo 0.872, n_non304 1070, workers 603/597) match producer but cannot credit frozen H1. Claim remains EXPERIMENTAL bounded to prior single-host loopback (EXP-RUNTIME-35900903994 MIXED)."
+    },
+    {
+      "claim_id": "C-FRESHNESS",
+      "status": "MEASUREMENT_INVALID",
+      "reason": "MEASUREMENT_INVALID per audit: frozen C-FRESHNESS C3 orthogonality not measured as preregistered. Producer reports stratified r=0.305 CI [0.249,0.358] TOST p 0.999 fails delta 0.15, but structural was hash(headers_minus CLEN/ETag/Content-Range/Cache-Control)%10000 (run_experiment.py 296-305) not frozen header-only Jaccard excluding CLEN/ETag only, excluding Cache-Control signal; TOST recomputed with correct tail still fails (CI upper 0.358>0.15) but instrument off-design makes result uninformative for H2. Health gate 0 missing, scheduling r 0.066<0.30, n_non304 1070, per-node 0.667 replication, noise FP 0.0 verified, yet C3 not measured. Sticky arm STICKY_PRESEEDED invalid (sessions seeded in both DBs 2401-2405) with skew 0.6<0.90 and producer TN null vs raw 446 rows TN=1.0 contradiction. No support or falsification for header-only orthogonality; claim remains EXPERIMENTAL bounded to parent MIXED ceiling (shared TN 0.974 lo 0.955, orthogonality hash(body) r=0.721 falsified)."
+    }
+  ],
+  "product_action": "NO_ACTION",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "Can the frozen honest-cost and C-FRESHNESS substrate be correctly re-instrumented — per-trajectory-reset sum counters (resolve+bind+verify+freshness+browser_steps, no jitter/no n*3200/no f*6.0, true trajectory-grouped B=5000 permutation with p-values and bootstrap CI width>0) and true header-only Jaccard structural (filtered headers MINUS body-derived CLEN/ETag only, preserving Cache-Control/Set-Cookie/Vary) with de-confounded scheduling, correct TOST (upper-tail 1-Phi), health-gated shared WAL HS256>=32, single-worker sticky seeding via POST through nginx with >=10 distinct $request_uri for skew>0.90, and BrowserGym 1280x720 CDP AX>10 non-deterministic fixture (effective_distinct_n>1, B=1000 non-degenerate) — to test whether shared-store C1 TN>=0.85 Wilson lo>0.75 n_non304>=800 C3 stratified |r|<0.15 TOST delta 0.15 8/8 variance FP<=0.15, honest-cost |rho_shuffled|<0.20 within-f std>0, and browser discrimination/gradient ordering achieve non-degenerate CIs?",
+  "reason": "Bounded MEASUREMENT_INVALID grounded in audit PASS-exact recomputation: producer status MEASUREMENT_INVALID/INCONCLUSIVE is correct endpoint but cited trigger STATUS_PREFIX_STILL_PRESENT is irreproducible (committed code check returns False, runtime structural ints 446..8545 no prefix, provenance/sha mismatch 9dbd9d41 vs 8237d65d). Real invalidity is 6 independent frozen violations: COST_ARTIFACT_STILL_PRESENT (cumulative counters + injected jitter), structural off-design (hash%10000 vs Jaccard, Cache-Control excluded), TOST wrong tail (Phi vs 1-Phi, reported 0.999 vs correct ~4.5e-08, C3 still fails but metric miscalc), STICKY_PRESEEDED (dual seed) + skew 0.6<0.90 + TN null vs raw 446 TN 1.0 contradiction, provenance not trustworthy, browser 0 obs playwright missing. Verified mechanics (HS256 0.985 670/680, health 0 missing, workers 603/597 vs 581/619, n_non304 1070/1101, scheduling r 0.066, FP 0.0, 8/8 variance, per-node 0.667) demonstrate real HTTP harness works but do not measure frozen hypothesis. No claim ceiling advancement; both claims remain EXPERIMENTAL at parent bounds (single-host 2-worker localhost simulation, filtered headers, body 31-117B, single viewport, no paid CDN, no multi-host Redis). No VALIDATED or PRODUCT_CORE promotion.",
+  "evidence_refs": [
+    "research/experiments/EXP-RUNTIME-35908617140/spec.json:question/hypothesis/falsifier/decision_rule C1 TN>=0.85 Wilson>0.75 C2 n_non304>=800 C3 TOST delta 0.15 8/8 variance C7 |rho|<0.20 B=5000 trajectory-grouped C5/C6 browser 1280x720",
+    "research/experiments/EXP-RUNTIME-35908617140/prereg.md:sections 4-6 Server Design Measurement Decision Rule health gate 0 missing header-only Jaccard MINUS CLEN/ETag honest sum counters single-worker sticky >=10 URIs",
+    "research/experiments/EXP-RUNTIME-35908617140/freeze.json:frozen_at 2026-09-23T19:24:02 hashes prereg 0f21487f spec 938127f0 request df5ba65",
+    "research/experiments/EXP-RUNTIME-35908617140/result.json:status MEASUREMENT_INVALID outcome INCONCLUSIVE metrics shared_freshness_c1_tn_mean 0.976019 lo 0.957234 session 0.928 lo 0.872 n_non304 1070 n_304 130 stratified_r 0.305190 CI [0.24967,0.35871] tost_p_upper 0.999999954 fail false workers 603/597 honest_cost_shuffled_rho 0.13263 width 46529 per_node 0.6666 session 0.0 sticky TN null n_valid 0 skew 0.6",
+    "research/experiments/EXP-RUNTIME-35908617140/result.json:controls C1 pass true C2 pass true C3 pass false C4 pass true B-PER-NODE pass true B-SHARED-STORE pass true B-STICKY-URL pass false V-HEALTH-GATE pass true V-SCHEDULING pass true V-STATUS-FREE pass false",
+    "research/experiments/EXP-RUNTIME-35908617140/result.json:validity_notes playwright ModuleNotFoundError STATUS_PREFIX_STILL_PRESENT observations 0 browser AX None",
+    "research/experiments/EXP-RUNTIME-35908617140/audit.json:status MEASUREMENT_INVALID producer_claim_supported false required_fixes 6 validity_findings 8 baseline_findings 6 recomputed_metrics claim_ceiling No ceiling change",
+    "research/experiments/EXP-RUNTIME-35908617140/audit.json:required_fixes COST_ARTIFACT counters never reset injected jitter B=5000 as 200 placeholder structural hash%10000 vs Jaccard TOST wrong tail sticky pre-seeded provenance mismatch browser 0 obs",
+    "research/experiments/EXP-RUNTIME-35908617140/audit.json:recomputed_metrics shared TN 0.976 n_non304 1070 workers 603/597 stratified_r 0.305 CI [0.249,0.358] honest rho 0.132 max 0.416 within-f 45999/27632/45144 sticky recomputed profile 185 TN1.0 data_list 154 TN1.0 session 107 TN1.0 skew 0.6 aff 1.0 hs256 0.985",
+    "research/experiments/EXP-RUNTIME-35908617140/audit.json:evidence_refs request/spec/prereg/freeze/result/provenance/run_experiment lines 134-155 296-305 1060-1346 1166-1168 2307-2326 2401-2405 2552-2589 358 raw SHA d14bbc93 49d05330 571b29ff",
+    "research/experiments/EXP-RUNTIME-35908617140/report.md:status MEASUREMENT_INVALID shared TN 0.976 n_non304 1070 stratified_r 0.305 tost_p 1.0 sticky skew 0.6 browser provision None",
+    "research/experiments/EXP-RUNTIME-35908617140/run_experiment.py:lines 134-155 _reset_counters defined never called 296-305 structural_header_only hash%10000 1166-1168 jitter injection 2307-2326 honest B=5000 2401-2405 sticky dual pre-seed 2552-2589 status-prefix heuristic 358 TOST Phi",
+    "research/experiments/EXP-RUNTIME-35908617140/raw_freshness_observations.jsonl:1200 lines SHA d14bbc93 workers 46687/46688 603/597 is_304 real",
+    "research/experiments/EXP-RUNTIME-35908617140/raw_freshness_per_node.jsonl:1200 lines 49d05330 workers 46817/46816 per-node TN 0.666",
+    "research/experiments/EXP-RUNTIME-35908617140/raw_freshness_sticky_url.jsonl:1200 lines 571b29ff workers 46947/46948 720/480 per-URI 1.0x10 skew 0.6",
+    "research/experiments/EXP-RUNTIME-35908617140/provenance.json:github_run_id 35900903994 base_sha 6f579bd8 run_experiment_sha 8237d65d vs executed 9dbd9d41 playwright 1.63 listed but import fails",
+    "codex/claim_state.json:C-MEAS-VALID EXPERIMENTAL parent EXP-RUNTIME-35900903994 MIXED 2026-09-23T18:13:15 browser 1280x720 AX 54 remains ceiling",
+    "codex/claim_state.json:C-FRESHNESS EXPERIMENTAL parent EXP-RUNTIME-35900903994 MIXED shared 0.974 vs per-node 0.667 orthogonality 0.721 falsified body-hash"
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-35884739384",
+  "lane": "runtime",
+  "decision": "MIXED",
+  "claim_updates": [
+    {
+      "claim_id": "C-MEAS-VALID",
+      "status": "EXPERIMENTAL",
+      "reason": "Browser substrate provision survives at single-host loopback EXPERIMENTAL: AgentLab 0.4.2 importable (0.14.3 correctly absent), Playwright 1.63.0 chromium viewport 1280x720 verified per /resource page, CDP Accessibility.getFullAXTree median 54 on /resource pages PC-HEALTH 100% (>=80) DOM median 26 range 21-82 on /resource via real page.request fetches (raw_observations.jsonl 396 lines: 198 browser +198 direct, ax_dom_pages.jsonl 10 pages). Fingerprint SHA256(status||decompressed_body||sorted_filtered_headers) isolation holds via real browser: body-only AvsC full 1.0 body-only 1.0 status 0.0 headers-no-CLEN 0.0 (31B vs117B), header-only AvsE full 1.0 headers-only 1.0 body 0.0 CLEN 31==31, nulls 0.0 CI [0.0,0.0] contains 0 with X-Worker-Pid present. All CIs degenerate [1.0,1.0]/[0.0,0.0] width 0 effective_distinct_n=1 (audit V7) disclosed not precision; per-value gradients (1B/2B/4B/39B/86B CC_small/large ETag_small/large SC/Vary) all 1.0 degenerate at n=3-4 vs prereg N=20, so sensitivity ordering remains untested. Audit status REVISE, not PASS, so no promotion to VALIDATED/PRODUCT_CORE."
+    },
+    {
+      "claim_id": "C-FRESHNESS",
+      "status": "EXPERIMENTAL",
+      "reason": "Shared-store HS256 restores detection but fails orthogonality - PARTIAL at single-host loopback EXPERIMENTAL: B-SHARED-STORE via single SQLite WAL at /tmp/spider-runtime-35860330078/shared.db (WAL, check_same_thread=False) + HS256 shared-secret PyJWT 2.14.0 decode (not raw string) behind 2x gunicorn 23.0.0 sync + nginx 1.24.0 round-robin 127.0.0.1:19860/19851 achieves C1 mean TN 0.986 Wilson lo 0.969 (profile 1.0 lo 0.973, data_list 1.0 lo 0.973, session_status 0.958 lo 0.911) vs per-node baseline 0.666 session_status 0.0 replicates failure, C2 n_non304 1052/1183 after 131 real If-None-Match/ETag->304 stratified 400 per endpoint (>=800), HS256 valid success 0.991 (665/671) >=0.90, X-Worker-Pid 588/595 >=10, batch_state_log_shared.jsonl 31 lines distinct timestamps >=27, 8/8 variance std>0, FP noise 0.0 (V1-V3 PASS, recomputed match 1e-12). However C3 orthogonality FALSIFIED-IN-SETTING: stratified r -0.3579 CI [-0.409,-0.303] |r| 0.357 >0.15 pooled -0.355 fails delta=0.15 TOST (V4 high) even though p_upper 0.0; audit V5 shows structural includes status prefix (run_experiment.py:261 status|body_variant|) violating validity clause 8 - status-free structural worsens to +0.62. Sticky URL-bound HS256 NOT_TESTED as-specified: used hash $remote_addr (ip_hash) pinning 1200/1200 to one worker with replicate_session_to_workers=True mirroring sessions, so affinity alone untested (V6 medium). 17/1200 shared observations lack X-Worker-Pid due to nginx startup race (V2 low). Audit status REVISE (producer_claim_supported true but with 4 required_fixes), so detection remains EXPERIMENTAL bounded to this harness, not VALIDATED."
+    }
+  ],
+  "product_action": "none",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "Can C-FRESHNESS orthogonality be restored to stratified |r|<0.15 (TOST delta 0.15, CI upper<0.15, p_upper<0.05, 8/8 variance, FP<=0.15) with status-free structural signal (hash(body) only, no status prefix) and de-confounded body_variant vs drift scheduling plus health-gated nginx startup (0 missing X-Worker-Pid, 0 status None) while retaining C1 TN>=0.85 mean Wilson lower>0.75 session_status>=0.85 and C2 n_non304>=800 via real If-None-Match/ETag->304 on shared SQLite WAL at /tmp/spider-runtime-35860330078/shared.db with HS256 shared-secret, and can URL-bound sticky hash $request_uri consistent without session mirroring achieve TN>=0.85 vs per-node 0.667, and can browser per-value gradients at prereg N=20 per state yield non-degenerate CIs to order CC/ETag/CLEN sensitivity beyond degenerate ceiling?",
+  "reason": "Independent audit REVISE confirms real-HTTP substrate repairs close historic MEASUREMENT_INVALID block but leaves bounded failures: C1/C2/C4/C5/C6 pass with recomputed matches (shared TN 0.986 lo 0.969, per-node 0.666, n_non304 1052, HS256 0.991, X-Worker-Pid round-robin 588/595, browser 1280x720 AX 54 PC 100% DOM 26 isolation intact), so synthetic/inverted-TN/relabeled-direct failures are fixed and 304/SELECT/commit verified (31 logs). However C3 orthogonality falsified (|r| 0.357 >0.15, status confound +0.62 when removed, body_variant cycling correlation) violates product_consequence positivity clause requiring TOST within 0.15, and sticky arm misconfigures ip_hash with mirrored sessions (1200/1200 pin), plus gradient sample 3-4 vs 20 and 17 missing worker_ids. Decision MIXED bounds claim ceiling to single-host gunicorn+nginx loopback EXPERIMENTAL for both C-MEAS-VALID (browser provisioned, degenerate ceiling) and C-FRESHNESS detection (TN restored) with orthogonality rejected in this setting. No VALIDATED or PRODUCT_CORE warranted per REVISE status; 4 required_fixes must precede any promotion. Highest-information next is to fix structural confound/scheduling, re-test URL-bound sticky in isolation, and power gradients to N=20 before testing correlated non-determinism or multi-host Redis.",
+  "evidence_refs": [
+    "research/experiments/EXP-RUNTIME-35884739384/request.json",
+    "research/experiments/EXP-RUNTIME-35884739384/spec.json",
+    "research/experiments/EXP-RUNTIME-35884739384/prereg.md",
+    "research/experiments/EXP-RUNTIME-35884739384/freeze.json",
+    "research/experiments/EXP-RUNTIME-35884739384/result.json",
+    "research/experiments/EXP-RUNTIME-35884739384/report.md",
+    "research/experiments/EXP-RUNTIME-35884739384/provenance.json",
+    "research/experiments/EXP-RUNTIME-35884739384/audit.json",
+    "research/experiments/EXP-RUNTIME-35884739384/run_experiment.py sha 89d174104a2b79227e13d186f63b1b4f0eee9622603da11df24ace50b7defea7",
+    "research/experiments/EXP-RUNTIME-35884739384/raw_freshness_shared.jsonl sha 126784977c11ac90a805473465adb01143d10c55ba5e89d0aa04455b006356c7",
+    "research/experiments/EXP-RUNTIME-35884739384/raw_freshness_per_node.jsonl sha 2b5904fb710f05372a1f8276a575986e1505d333bcb2712ac9ba7942a66145c7",
+    "research/experiments/EXP-RUNTIME-35884739384/raw_freshness_sticky.jsonl sha 437cc1840f8deadf9bfe66f049f737827df55c9972c726b391b53eebfd3fe302",
+    "research/experiments/EXP-RUNTIME-35884739384/batch_state_log_shared.jsonl sha 81692043bb185526855c35f21fad24cc51b572345b6f8e933ef4dad7134cb5b0",
+    "research/experiments/EXP-RUNTIME-35884739384/raw_observations.jsonl sha 7177ba1242f7061c48661446ccbc731f42d657c3e2ada38441a23e672ce0203c",
+    "research/experiments/EXP-RUNTIME-35884739384/ax_dom_pages.jsonl sha 7eefd0a66c857ed6961b9c287cbe1f031aae9113b43a23b1f6592b8858f6cc39"
+  ]
+}

@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-35908252617",
+  "lane": "product",
+  "decision": "FALSIFIED",
+  "claim_updates": [
+    {
+      "claim_id": "C-PRODUCT-ECON",
+      "status": "REJECTED",
+      "reason": "FALSIFIED with VALID measurement (audit PASS, producer_claim_supported=true, PC1-PC5 PASS, NC1-NC4 PASS). Primary P-WEBMCP-TOOL fails frozen economics C3: WebMCP/RAG per_hit n0=1.005 >0.85 threshold (bootstrap 95% CI [0.82,1.21] audit recomputed 1.005, requires <=0.85 at BOTH n0 AND n0.25 where n0.25=0.313 passes but both required). Pooled rho_novelty_per_hit WebMCP=0.363 <0.60 fails C4 (bootstrap lower 0.18 <0.40, block p=0.0002 significant but below threshold, pooled |rho_length|=0.269 >0.20 per-stratum up to 0.365 fails). Audit validity finding 1 confirms per_hit metric excludes retrieval (200 tok) vs tool_lookup (15 tok) so both hit identical 50-tok verify path at n0, making n0 ratio ~1.0 by construction — design limitation not execution error but frozen rule still gates FALSIFIED. Bounded REJECTED to WebArena-Verified v2 192tasks/36families orthogonal file-proxy census at f=10 with honest summed-counters branch-derived costs; not global falsification."
+    },
+    {
+      "claim_id": "C-RESIDUAL-NOVELTY",
+      "status": "REJECTED",
+      "reason": "Same VALID FALSIFIED as C-PRODUCT-ECON under identical frozen controls: rho_novelty_per_hit 0.363 (Spider 0.409) CI [0.18,0.54] <0.60, R2_delta 0.19 >0.10 passes but rho fails, |rho_length| pooled 0.269 >0.20 and per-stratum up to 0.365 violates length-confound gate (<0.20 required). Per-hit vs RAG n0 1.005 and Spider/RAG n0 1.103 reproduce parent 1.12-type failure under honest cost. Controls PASS non-degenerate (orthogonal Jaccard 0.0 <0.30 verified 630 pairs hitRate_n1 0.387 in 0.3-0.6, cache TRAIN-warmed 0.86 effectiveFetch 20.65 auditor blockRate 1.0, probe saving 0.328 accuracy 1.0 falseAccept 0, calibration ECE 0.018 bootstrap upper 0.17, confidence_std 0.36, null shuffle |rho|=0.055 p=0.42 no leak, within-family std 12.3>0). Bounded REJECTED for pay-cost-of-novelty-not-length via WebMCP 714/2147 O(1) + MEA-batched on this proxy at f=10 only; f=100 exploratory ratio 0.88 >0.85 also fails; may transfer with richer DOM/QCR/HS256 substrate or different metric (M_total_f10)."
+    }
+  ],
+  "product_action": "no_promotion_park_file_proxy_economics",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "After bounded FALSIFIED of WebMCP Registry 714/2147 O(1) tool discovery vs RAG/Stagehand/TERX at honest f=10 on orthogonal file-proxy (per_hit n0 1.005>0.85, rho 0.363<0.60, |rho_length| 0.269>0.20 with valid controls), does any O(1) compilation lever survive on total-cost M_total_f10 Pareto or with f=100 amortization or richer Docker BrowserGym 2000-node 1280x720 full-DOM + real gpt-4o-mini tokens/browser/latency (rho_proxy_real>=0.50), or should Product PARK residual-novelty/WebMCP file-proxy economics and pivot to Stagehand selector-cache + TTL/ETag probe freshness gating and runtime distributed-store HS256 repair before any PRODUCT_CORE claim?",
+  "reason": "Audit PASS (status PASS, producer_claim_supported true, recomputed metrics within 1e-6: ratio_webmcp_rag_n0 1.005 audit 1.005, rho 0.363, |rho_length| max 0.354, cacheHitRate 0.859 vs 0.88, probe 1.0 saving 0.328). All PC PASS (PC1 hitRate 1.0 per_hit ~54.7, PC2 binding_correctness_n0 1.0 executable 1.0 confidence 0.85 slots via _template_slots dot-regex r'\\$\\{[A-Za-z_][A-Za-z0-9_\\.]*\\}' cross-family Jaccard 0.0 <0.30 hitRate_n1 0.387 registry 714/2147 lookup 1.0 15 tok, PC3 probe 1.0/0.328/0, PC4 NC2 false_accept 0.125 in [0.10,0.60] non-vacuous via actual pipeline is_nc 60% threshold 0.30, PC5 frozen per_hit formula match 4.5e-7 TRAIN-warmed no n*3200 frontier 0.387 not 1.0). Nulls PASS (|rho_shuffled| 0.055 p0.42 <0.20 within-f std 12.3). Controls non-degenerate so measurement VALID (COMPLETE not MEASUREMENT_INVALID) per prereg precedence PC > leak > frontier artifact > FALSIFIED. Economics gates C3 and C4 fail together => FALSIFIED not MIXED. Calibration C1 passes (success_n0 1.0 Wilson lower 0.904 mean 1.0 false_accept 0 UNKNOWN 1.0 ECE 0.018 empty_bins [0,1,2,3] disclosed std 0.36 bootstrap upper 0.17) and governance C5 passes (crossFamily 0 toolFamily 0 curated 0.65 cache 0.108 compile 7.824 frontier off 0.12). WebMCP/RAG n0 failure is partly metric-design artifact per audit V1 (per_hit excludes retrieval/tool_lookup where both hit 50 tok), noted as bounded limitation not execution invalidity. P-SPIDER head-to-head 1.103>0.85 reproduces prior 8-streak as expected contrast. No PRODUCT_CORE promotion without Docker 2000-node replication and rho_proxy_real>=0.50 per mandate. PARK file-proxy thread per Director REOPEN comparative reasoning was last discriminating test before PARK.",
+  "evidence_refs": [
+    "research/experiments/EXP-PRODUCT-35908252617/spec.json",
+    "research/experiments/EXP-PRODUCT-35908252617/prereg.md",
+    "research/experiments/EXP-PRODUCT-35908252617/freeze.json",
+    "research/experiments/EXP-PRODUCT-35908252617/result.json",
+    "research/experiments/EXP-PRODUCT-35908252617/audit.json",
+    "research/experiments/EXP-PRODUCT-35908252617/report.md",
+    "research/experiments/EXP-PRODUCT-35908252617/provenance.json",
+    "research/experiments/EXP-PRODUCT-35908252617/artifacts/raw_per_task.csv",
+    "research/experiments/EXP-PRODUCT-35908252617/artifacts/derived_metrics.json",
+    "research/experiments/EXP-PRODUCT-35908252617/artifacts/registry.jsonl",
+    "research/experiments/EXP-PRODUCT-35908252617/artifacts/webmcp_registry.jsonl",
+    "research/experiments/EXP-PRODUCT-35908252617/artifacts/qcr_bank_manifest.json",
+    "research/experiments/EXP-PRODUCT-35908252617/artifacts/probe_traces.json",
+    "research/experiments/EXP-PRODUCT-35908252617/artifacts/cache_traces.json",
+    "research/experiments/EXP-PRODUCT-35908252617/artifacts/frontier_adapter_traces.json",
+    "research/experiments/EXP-PRODUCT-35908252617/artifacts/webmcp_registry_traces.json",
+    "research/experiments/EXP-PRODUCT-35908252617/artifacts/branch_traces.json",
+    "research/experiments/EXP-PRODUCT-35908252617/fixtures/tasks.json"
+  ]
+}

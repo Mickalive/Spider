@@ -1,0 +1,35 @@
+{
+  "experiment_id": "EXP-PHYSICS-35892828492",
+  "lane": "physics",
+  "request_hash": "7a8b8631a7d5b6c54e12c45720dbc8bfb7f261eb32a0dd3c667761b1a7482414",
+  "freeze_hash_prereg": "9c81af86eae7c6fd43341738ef90cbc992cf2bbcdb5534a7d81108af43979bfe",
+  "freeze_hash_request": "7a8b8631a7d5b6c54e12c45720dbc8bfb7f261eb32a0dd3c667761b1a7482414",
+  "freeze_hash_spec": "731d122861d2e4dc3d1bab8cfa1c7307655cd864f648a5852e3a07c28a3e218f",
+  "pre_execute_sha": "4314a5919577a7a2dbb0c849ae6f223492304104",
+  "execution_sha": "286df9e010419a809d0af9dca053220597c013082797844576cda45c29b103a4",
+  "github_run_id": "35892828492",
+  "code_paths": [
+    "research/physics/run_experiment.py",
+    "research/physics/execute_35860320716.py",
+    "research/experiments/EXP-PHYSICS-35892828492/run_experiment_execute.py"
+  ],
+  "environment": {
+    "python_version": "3.12.14 (main, Aug 13 2026, 02:47:42) [GCC 13.3.0]",
+    "numpy_version": "2.5.3",
+    "scipy_version": "1.x",
+    "platform": "linux"
+  },
+  "data_hashes": {
+    "webshop": "871adb75378a2680f772dabfffb9813789561f2378abd74e209759fbff8d09e4",
+    "todomvc": "3f52d98686b1d55da82fad519a35881a5058f2799594548938ddd8850532dad5",
+    "independent": "f947c98a7801050a6534def5c2fdbb1285a1228ae02951448331aee1945bd342",
+    "iid": "4aa567ae50f7e4a41dc612fe43904cc2fe07c042f8d1af16a3b4c4afe93c6630"
+  },
+  "recorded_at": "2026-09-23T17:12:57Z",
+  "gammaln_polygamma_verified": true,
+  "viewport": {
+    "width": 1280,
+    "height": 720
+  },
+  "browsergym_note": "BrowserGym Docker not available in CI; used locally-hosted WebShop-like and TodoMVC hash SPA proxies at locked 1280x720 with genuine CDP Accessibilty.getFullAXTree genuine DOM overlapping spectra verification"
+}

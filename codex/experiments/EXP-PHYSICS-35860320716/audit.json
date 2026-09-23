@@ -1,0 +1,83 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-35860320716",
+  "lane": "physics",
+  "status": "MEASUREMENT_INVALID",
+  "producer_claim_supported": false,
+  "required_fixes": [],
+  "validity_findings": [
+    {
+      "category": "measurement_validity",
+      "finding": "Exact Gamma-ratio via scipy.special.gammaln/polygamma implemented; analytic-perm consistency < 0.03 on multiple Rs; trajectory_id grouped permutation 1000 perms seed 42 preserved correlation structure.",
+      "severity": "info",
+      "evidence": [
+        "raw_results.json",
+        "provenance.json"
+      ]
+    },
+    {
+      "category": "pipeline_gates",
+      "finding": "G6 substrate (1280x720 viewport, dom_bytes/a11y_bytes>0, overlapping spectra mean_overlap 0.399 > 0.3) passes. G2 independent-noise BC~0 (|BC|<0.05 p>0.10) passes. G3 IID BC<=0.03 passes. G4 identifiability passes. G5 consistency passes. G1 positive correlated control fails: BC 0.171 < 0.30 required for genuine correlated proxy (p_bonf 0.0080 but BC magnitude below threshold).",
+      "severity": "major",
+      "evidence": [
+        "result.json controls.G1_positive_control_genuine_correlated"
+      ]
+    },
+    {
+      "category": "representation_integrity",
+      "finding": "Genuine overlapping DOM at locked 1280x720 via CDP Accessibility.getFullAXTree; overlapping spectra verified (hist_intersection_color 0.667 > 0.3), not deterministic regime-color tautology. Action leakage-free MI(DOM;Action)<0.10. No SHA256 L-derived string labels as primary observables.",
+      "severity": "info",
+      "evidence": [
+        "raw_prototypes.json",
+        "overlap_verification.json",
+        "result.json observations"
+      ]
+    }
+  ],
+  "baseline_findings": [
+    {
+      "category": "baselines",
+      "finding": "TF-IDF k5 similarity baseline (TRAIN-only, trajectory_id grouping) shows BC_sim 0.161 with valid analytic centering (analytic 0.026, cons 0.027); gap over similarity/Markov is small (0.011 for best R) with primary BC 0.171 < 0.30. B-MARKOV1 BC -0.0035, B-MARKOV-K3 BC -0.0035.",
+      "severity": "info",
+      "evidence": [
+        "result.json metrics.B_DOM_SIMILARITY_TFIDF_k5_*",
+        "result.json metrics.B_MARKOV1_BC_bits"
+      ]
+    },
+    {
+      "category": "timescale",
+      "finding": "Timescale tau_corr 1.00 vs tau_shuffled 1.00 gap 0.00 for all Rs; timescale separation not observed on this bank.",
+      "severity": "info",
+      "evidence": [
+        "result.json metrics.timescale_*"
+      ]
+    }
+  ],
+  "recomputed_metrics": {
+    "corr_R_visual_BC_bits_recomputed": 0.1714809204469495,
+    "corr_R_computed_style_BC_bits_recomputed": 0.1714809204469495,
+    "corr_R_AX_embedding_BC_bits_recomputed": 0.1714809204469495,
+    "G1_pass": false,
+    "G2_pass": true,
+    "G6_pass": true,
+    "analytic_consistency_visual": 0.02864185958492564,
+    "analytic_uses_gammaln_polygamma": true
+  },
+  "claim_ceiling": "bounded to locally-hosted genuine overlapping DOM proxy at 1280x720 with exact gammaln/polygamma; barrier/committor/timescale program not supported on tested banks (G1 failed: positive correlated control BC 0.171 < 0.30 required)",
+  "evidence_refs": [
+    "research/experiments/EXP-PHYSICS-35860320716/result.json",
+    "research/experiments/EXP-PHYSICS-35860320716/report.md",
+    "research/experiments/EXP-PHYSICS-35860320716/provenance.json",
+    "research/experiments/EXP-PHYSICS-35860320716/raw_results.json",
+    "research/experiments/EXP-PHYSICS-35860320716/raw_prototypes.json",
+    "research/physics/execute_35860320716.py"
+  ],
+  "unresolved": [
+    "Whether BrowserGym WebShop/TodoMVC trajectories with genuine DOM at 1280x720 via CDP would show same BC pattern and same TF-IDF baseline centering or different vocab richness and vista",
+    "What closed-form analytic mean/std would be with alternative Dirichlet concentration alpha=1 vs 1/K and whether larger K=24 changes consistency gap as observed",
+    "Whether larger production SPA with real session/permission latent regimes and overlapping spectra at larger state spaces would yield barrier tau>5 vs 3-4 observed here and whether multi-feature R combining visual+computed+AX would improve gap beyond primary",
+    "Why B-DOM-SIMILARITY TF-IDF baseline analytic_mean validity and whether per-15-step latent regime P(flip)=0.07 would change null centering/tau vs per-trajectory persistence used here (per15 branch generated but not primary gating)",
+    "Whether Bonferroni n_tests=8 overcounts isomorphic visual/ax as independent tests vs effective n_tests ~2-3 and how that affects p_bonf threshold",
+    "What is the correct Dirichlet-Multinomial variance formula for stratified CMI and whether calibrated_std floor 0.005 is appropriate for low-n strata"
+  ]
+}

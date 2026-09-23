@@ -1,0 +1,184 @@
+{
+  "experiment_id": "EXP-RUNTIME-35900903994",
+  "github_run_id": 35900903994,
+  "base_sha": "6f579bd834c5ad36234ca444c401e3dd6301d35d",
+  "git_sha": "9933f067cba756fbaf220170880fbcc37d074fd0",
+  "env": {
+    "python": "3.12.14 (main, Aug 13 2026, 02:47:42) [GCC 13.3.0]",
+    "flask": "3.1.3",
+    "pyjwt": "2.14.0",
+    "gunicorn": "23.0.0",
+    "werkzeug": "3.1.8",
+    "nginx": "1.24.0",
+    "playwright": "1.63.0",
+    "agentlab": "0.4.2",
+    "requests": "2.34.2",
+    "sqlite3": "3.45.1"
+  },
+  "ports": {
+    "gunicorn_a": 19860,
+    "gunicorn_b": 19861,
+    "nginx": 19851
+  },
+  "seed": 44,
+  "jitter_ms": [
+    50,
+    150
+  ],
+  "excluded_headers": [
+    "Age",
+    "CF-Cache-Status",
+    "CF-RAY",
+    "Date",
+    "Server",
+    "X-Cache",
+    "X-Request-Id"
+  ],
+  "filter_out_keys": [
+    "age",
+    "cf-cache-status",
+    "cf-ray",
+    "date",
+    "server",
+    "x-cache",
+    "x-request-id",
+    "x-worker-pid"
+  ],
+  "body_states": {
+    "A": {
+      "len": 31,
+      "sha256": "d0ca833f843c6d70ec9d6755f52a92dcbfc8b4ab601b871bced09ad027172e34"
+    },
+    "A1": {
+      "len": 32,
+      "sha256": "72f28c5c2b8fe28314392298accd9a9e44747e45b4ad497d63839332cef24f26"
+    },
+    "A2": {
+      "len": 33,
+      "sha256": "2667bef51a10d006c22eb01972648a7c989bf7b4f786e4551be7b186c0f5e72b"
+    },
+    "A3": {
+      "len": 35,
+      "sha256": "d79643f246bd4a4ff18dab702de41940d11d2f72863424143ba8a121c396decf"
+    },
+    "B": {
+      "len": 70,
+      "sha256": "67c186f2cee1ccf01f55c80235eb9b1b1d14b073223a807b9ce944405e67999c"
+    },
+    "C": {
+      "len": 117,
+      "sha256": "b46c461cceeefa595c3ac0d706689ed382340b59c20a269a930c786c8389dd32"
+    }
+  },
+  "header_states": [
+    "BASE",
+    "E",
+    "CC_small",
+    "CC_large",
+    "ETag_small",
+    "ETag_large",
+    "SC_small",
+    "SC_large",
+    "Vary_small"
+  ],
+  "hs256_secret_sha256": "f137af8fee4c7febc5bbb2620706ba2c599d8771612250ca9648577334de2383",
+  "db_paths": {
+    "shared": "/tmp/spider-runtime-35860330078/shared.db",
+    "per_node_a": "/tmp/spider-pernode-19860.db",
+    "per_node_b": "/tmp/spider-pernode-19861.db",
+    "sticky_url_a": "/tmp/spider-sticky-19860.db",
+    "sticky_url_b": "/tmp/spider-sticky-19861.db"
+  },
+  "fixes_applied": {
+    "FIX-1_status_free_structural": "hash(body) only; no status prefix",
+    "FIX-2_deconfounded_scheduling": "body_variant random.choice independent of drift, seed logged",
+    "FIX-3_health_gate": "GET /health via nginx 200+X-Worker-Pid, 5 consecutive, <=30s; retry samples",
+    "FIX-4_sticky_url_bound": "hash $request_uri consistent; replicate_session_to_workers=False",
+    "FIX-5_browser_N20": "all gradients/nulls/comparisons at N=20 per state"
+  },
+  "scheduling_seed": 44,
+  "health_gate_status": "enforced in start_nginx/health_gate",
+  "nginx_upstream_modes": {
+    "rr": "default round-robin",
+    "sticky_url": "hash $request_uri consistent"
+  },
+  "run_experiment_sha256": "93def5a394c4c1ca48cff889f93db4460798ef134ff55334e60c9b876636efad",
+  "frozen_hashes": {
+    "request.json": "b61646fbd94186618f00195027fde0d0b2e5bae61a45754f55c6c55a6f0ef6b0",
+    "spec.json": "059beaf25ab7ce5b8b830c415760a0debad44a7e78098d26568db70eaedb9a19",
+    "prereg.md": "b5bab2abe9b236b52dc8fe831f0b059b0d6c8b7a471b5d493c94a5b9c5a1f141",
+    "freeze.json": "0b683f7a8849c2f18890edd3475df1c76f9dbd00372b416ae7f73263beb04d74"
+  },
+  "artifacts": [
+    {
+      "path": "/home/runner/work/Spider/Spider/research/experiments/EXP-RUNTIME-35900903994/result.json",
+      "role": "derived",
+      "sha256": "baac0f117804bd74b3770ee13bad1973f8c000f7565af355d88d43692a7038f6"
+    },
+    {
+      "path": "/home/runner/work/Spider/Spider/research/experiments/EXP-RUNTIME-35900903994/report.md",
+      "role": "derived",
+      "sha256": "15ccb6874a6bc55c7db49c43f34dd87a8e23c1c2ef10211e923c546d4aab9b71"
+    },
+    {
+      "path": "/home/runner/work/Spider/Spider/research/experiments/EXP-RUNTIME-35900903994/run_experiment.py",
+      "role": "code",
+      "sha256": "93def5a394c4c1ca48cff889f93db4460798ef134ff55334e60c9b876636efad"
+    },
+    {
+      "path": "/home/runner/work/Spider/Spider/research/experiments/EXP-RUNTIME-35900903994/raw_freshness_observations.jsonl",
+      "role": "raw",
+      "sha256": "e2003247d421ae25447d8874c97682fb865149a0b5f84a65d9ecea73d7c81e60"
+    },
+    {
+      "path": "/home/runner/work/Spider/Spider/research/experiments/EXP-RUNTIME-35900903994/raw_freshness_per_node.jsonl",
+      "role": "raw",
+      "sha256": "f5f2118ff3927bbff4aedb15c1c904b097a63c2a0c8c0a3ca160d9016395796f"
+    },
+    {
+      "path": "/home/runner/work/Spider/Spider/research/experiments/EXP-RUNTIME-35900903994/raw_freshness_sticky_url.jsonl",
+      "role": "raw",
+      "sha256": "d828fdb45c7a868b9a2c18ec8c68a11dbcdf8c9197353d3606d29bc24cc65a99"
+    },
+    {
+      "path": "/home/runner/work/Spider/Spider/research/experiments/EXP-RUNTIME-35900903994/batch_state_log.jsonl",
+      "role": "raw",
+      "sha256": "87743c56b8f58dd3a56f3311fd507aeab96010e36c3ee85391fc4ab539da62d8"
+    },
+    {
+      "path": "/home/runner/work/Spider/Spider/research/experiments/EXP-RUNTIME-35900903994/raw_observations.jsonl",
+      "role": "raw",
+      "sha256": "05f2b409cd19aae269918c3790012dadb74afaeb0b25b607d0ad9bf005ad5197"
+    },
+    {
+      "path": "/home/runner/work/Spider/Spider/research/experiments/EXP-RUNTIME-35900903994/ax_dom_pages.jsonl",
+      "role": "raw",
+      "sha256": "49c986bfc190427b8ae8e1ddea4c09eeae9adbef9b80ec0760e14cd41b76dc00"
+    },
+    {
+      "path": "/home/runner/work/Spider/Spider/research/experiments/EXP-RUNTIME-35900903994/prereg.md",
+      "role": "fixture",
+      "sha256": "b5bab2abe9b236b52dc8fe831f0b059b0d6c8b7a471b5d493c94a5b9c5a1f141"
+    },
+    {
+      "path": "/home/runner/work/Spider/Spider/research/experiments/EXP-RUNTIME-35900903994/spec.json",
+      "role": "fixture",
+      "sha256": "059beaf25ab7ce5b8b830c415760a0debad44a7e78098d26568db70eaedb9a19"
+    },
+    {
+      "path": "/home/runner/work/Spider/Spider/research/experiments/EXP-RUNTIME-35900903994/request.json",
+      "role": "fixture",
+      "sha256": "b61646fbd94186618f00195027fde0d0b2e5bae61a45754f55c6c55a6f0ef6b0"
+    },
+    {
+      "path": "/home/runner/work/Spider/Spider/research/experiments/EXP-RUNTIME-35900903994/freeze.json",
+      "role": "fixture",
+      "sha256": "0b683f7a8849c2f18890edd3475df1c76f9dbd00372b416ae7f73263beb04d74"
+    }
+  ],
+  "created_at": "2026-09-23T19:05:26.752539+00:00",
+  "post_execute_packet_finalize": {
+    "description": "After COMPLETE run, filled mandatory validity_notes/unresolved, added prereg metric aliases, sha256 on artifacts, corrected B-STICKY-URL dual criterion and C1 evidence_refs. No raw measurements changed.",
+    "raw_metrics_changed": false
+  }
+}

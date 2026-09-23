@@ -1,0 +1,57 @@
+{
+  "experiment_id": "EXP-FRONTIER-35915275774",
+  "lane": "frontier",
+  "git_commit": "5459e8836f4cb69c1129c68e15943f4c8a9a0d0b",
+  "github_run_id": "35915275774",
+  "created_at": "2026-09-23T20:28:32.738320+00:00",
+  "python_version": "3.12.14",
+  "platform": "Linux-6.17.0-1022-azure-x86_64-with-glibc2.39",
+  "packages": {
+    "numpy": "2.5.3",
+    "scipy": "1.15",
+    "sklearn": "1.5",
+    "playwright": "not_installed",
+    "browsergym-core": "not_installed",
+    "agentlab": "not_installed"
+  },
+  "fixture_sha256": "83b7c52dd17848fc8c70d1c629b8d541788e0438249623ea783d2df364467319",
+  "artifact_hashes": {
+    "research/experiments/EXP-FRONTIER-35915275774/raw_evidence.json": "5be80c185405faddca358ed59d3b40eece423e0d23236cbe4a8498b0912a60cb",
+    "research/experiments/EXP-FRONTIER-35915275774/derived_metrics.json": "e1c13c40d63f3eeeda71be03dd898bd31940c2e57fa6db1f932e088de606c7de",
+    "research/experiments/EXP-FRONTIER-35915275774/alias_catalog_manifest.json": "ca9d022a7f602d12b1a24dcf03bfa4a19755f961ea216516f1546fb86ef774c0",
+    "research/experiments/EXP-FRONTIER-35915275774/routing_manifest.json": "6421a0a28ad17fc7986bc3b550772226835b07cad7e4673ece4e6455a72142b6",
+    "research/experiments/EXP-FRONTIER-35915275774/fetch_manifest.json": "1decdb8836c3b48acd1ebd973451f182712abb57866e12103a9bfe55e0688516",
+    "research/experiments/EXP-FRONTIER-35915275774/index_manifest.json": "6825bf19d9f1c264516298001dbb61e46ab76432ede261c6370b858e732f7680",
+    "research/experiments/EXP-FRONTIER-35915275774/train_split_inventory.json": "f647a2346adf2cb9e3a1be652508bac7d527707d52b31256c4a1c3e9d6361783",
+    "research/experiments/EXP-FRONTIER-35915275774/compilation_ir_manifest.json": "4bb21e45ec23eba20df28f514fe205e281dacc5bdbe1a4fc250f6504c8c369b5",
+    "research/experiments/EXP-FRONTIER-35915275774/endpoint_catalog_manifest.json": "a113ddb1b4d6ce13e2292d217fd656083277b51611142eab0190fc762453e7a7",
+    "research/experiments/EXP-FRONTIER-35915275774/hierarchical_manifest.json": "6825bf19d9f1c264516298001dbb61e46ab76432ede261c6370b858e732f7680",
+    "research/experiments/EXP-FRONTIER-35915275774/joint_manifest.json": "d4c5485e195e58e86610ff4cad829f3739d3d4b256b98a259408edfa7f8ee3eb"
+  },
+  "census_log": [
+    "versions: agentlab not_installed playwright not_installed browsergym-core not_installed",
+    "attempt WebArena retry 1: failed ModuleNotFoundError: No module named 'browsergym'",
+    "attempt WebArena retry 2: failed ModuleNotFoundError: No module named 'browsergym'",
+    "attempt WebArena retry 3: failed ModuleNotFoundError: No module named 'browsergym'",
+    "attempt WebShop retry 1: failed ModuleNotFoundError: No module named 'browsergym'",
+    "attempt WebShop retry 2: failed ModuleNotFoundError: No module named 'browsergym'",
+    "attempt WebShop retry 3: failed ModuleNotFoundError: No module named 'browsergym'",
+    "attempt WebLINX retry 1: failed ModuleNotFoundError: No module named 'browsergym'",
+    "attempt WebLINX retry 2: failed ModuleNotFoundError: No module named 'browsergym'",
+    "attempt WebLINX retry 3: failed ModuleNotFoundError: No module named 'browsergym'",
+    "attempt WorkArena retry 1: failed ModuleNotFoundError: No module named 'browsergym'",
+    "attempt WorkArena retry 2: failed ModuleNotFoundError: No module named 'browsergym'",
+    "attempt WorkArena retry 3: failed ModuleNotFoundError: No module named 'browsergym'",
+    "BrowserGym census 4 envs x3 retries: live_available=False census_available=False synthetic_fallback_disclosed=True viewport=1280x720 code_path=Accessibility.getFullAXTree versions agentlab=not_installed playwright=not_installed browsergym-core=not_installed"
+  ],
+  "commands": [
+    "python research/experiments/EXP-FRONTIER-35915275774/run_experiment.py"
+  ],
+  "environment": {
+    "viewport": "1280x720",
+    "ax_code_path": "Accessibility.getFullAXTree",
+    "live_available": false,
+    "census_available": false,
+    "synthetic_fallback": true
+  }
+}
