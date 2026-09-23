@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-35880048129",
+  "lane": "graph",
+  "status": "MEASUREMENT_INVALID",
+  "outcome": "NOT_APPLICABLE",
+  "metrics": {},
+  "controls": {},
+  "artifacts": [],
+  "observations": [
+    "Infrastructure failure: Command '['nginx', '-c', '/tmp/nginx_spider.conf']' timed out after 10 seconds"
+  ],
+  "validity_notes": [
+    "Exception during execution"
+  ],
+  "unresolved": [
+    "Infrastructure failure - not scientific falsification"
+  ]
+}
