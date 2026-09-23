@@ -1,17 +1,17 @@
 {
   "lane": "graph",
   "human_paused": false,
-  "active_experiment_id": "EXP-GRAPH-35918640311",
-  "last_experiment_id": "EXP-GRAPH-35880048129",
+  "active_experiment_id": null,
+  "last_experiment_id": "EXP-GRAPH-35918640311",
   "last_verdict": "MEASUREMENT_INVALID",
   "continue_immediately": false,
-  "next_question": "After repairing gunicorn 23.0.0 2x sync + nginx 1.24.0 round-robin real-request substrate (validate nginx -t syntax, include mime.types, daemon off, non-privileged listen 18980, upstreams 127.0.0.1:18971/18972, X-Worker-Pid >=10 per worker, If-None-Match/ETag->304 verified, per-batch SELECT commitment at /tmp/spider-runtime-35784838353/shared.db with WAL) and provisioning shared store (Redis or shared SQLite WAL with PRAGMA journal_mode=WAL synchronous=NORMAL) with n_non304_shared>=800 stratified, does C-FRESHNESS orthogonality at delta=0.15 achieve C1 detection TN>=0.85 (Wilson lower>0.75, per-endpoint session_status>=0.85, delta vs per-node 0.667 >=0.15) and maintain stratified r within [-0.15,0.15] (CI upper<0.15, TOST p_upper<0.05) with confound |r|>=0.90, thereby unblocking Graph/Runtime freshness-gated inheritance and delta-repair?",
+  "next_question": "After durably committing src/spider/kernel.py distill_parameterized (single-prefix _common_prefix_and_suffix, distinct slot per field-path via _field_path_to_slot_name/_sanitize_slot, field-path relevance filter url/body.*/headers.* only via _is_allowed_path, Jaccard>=0.75 constant-anchor via _structure_similarity, confidence 0.90) verified by grep>=1, sha256 HEAD match, git diff base_sha 98b40ef4df6bac37548b4dbbbd823ccceaed35a1..HEAD nonempty and tests/test_kernel_param_inherit.py passing B1/B4/D1/E1/C2/B2/B3/B5, and loading WebArena-Verified v2 census from durable source (data/webarena_verified_v2.json pre-existing or Docker am1n3e/webarena-verified-shopping@sha256:3e8cb9b945 with pinned 64-char hash) with >=10 valid B tasks family-stratified zero-overlap (value_set_A intersect B = empty), does single-family add_to_cart pilot achieve EXECUTABLE>=0.75 (Wilson lower>=0.65) and binding correctness>=0.90 (lower>=0.80) with zero unsubstituted ${} templates via deterministic _matches, false_accept<=0.10 UNKNOWN in [0.00,0.15] ECE<=0.15?",
   "promotion_ready": false,
-  "consecutive_failures": 1,
-  "updated_at": "2026-09-23T21:09:02.174763+00:00",
-  "last_failure_retryable": false,
-  "last_handoff_sha256": "7e120ac7b78fee55ed3059949258fe2163c15fa85ea758f1e97ee48cbbef2b73",
-  "same_failure_count": 1,
-  "last_failure_fingerprint": "2da7640fe939d92b394b2ead",
-  "last_failure_control_revision": "076dc77b91c1d12ea39cb22825d01d847c1810ff7d44ed432bd5b1813468f5ae"
+  "consecutive_failures": 0,
+  "updated_at": "2026-09-23T21:26:12.845620+00:00",
+  "last_failure_retryable": null,
+  "last_handoff_sha256": "f582089f8cf45a0071dadd673ab174c61afe0cd149a7cb90f5fd0d35571832cd",
+  "same_failure_count": 0,
+  "last_failure_fingerprint": null,
+  "last_failure_control_revision": null
 }
