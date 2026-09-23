@@ -1,0 +1,16 @@
+{
+  "experiment_id": "EXP-GRAPH-35860314278",
+  "llm_api_key_present": false,
+  "openai_package_installed": false,
+  "playwright_installed": false,
+  "playwright_browsers": false,
+  "nginx_available": true,
+  "nginx_version": "nginx version: nginx/1.24.0 (Ubuntu)",
+  "nginx_proxy_cache_configured": false,
+  "flask_backend_deployed": false,
+  "flask_hs256_backend": false,
+  "repair_agent_implemented": false,
+  "kernel_available": false,
+  "models_available": false,
+  "registry_available": false
+}

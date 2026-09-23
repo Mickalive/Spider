@@ -1,0 +1,29 @@
+{
+  "experiment_id": "EXP-GRAPH-35860314278",
+  "failure_category": "INFRASTRUCTURE",
+  "failure_message": "Required substrate unavailable: OPENAI_API_KEY absent, openai package not installed, playwright not installed, nginx proxy_cache HIT/SWR/SIE/304 not configured, Flask HS256 backend not deployed, real LLM+Playwright+verify repair agent not implemented",
+  "retryable": true,
+  "smallest_next_actions": [
+    "Provision OPENAI_API_KEY in execution environment",
+    "Install openai>=1.0.0 and playwright>=1.40.0 packages",
+    "Run 'playwright install chromium' for browser binary",
+    "Deploy nginx reverse-proxy with proxy_cache HIT/SWR/SIE/304 configuration (Cache-Control max-age, stale-while-revalidate, stale-if-error)",
+    "Deploy Flask 3.1.3 + PyJWT 2.13.0 HS256 testbed backend on localhost",
+    "Implement execute_delta_repair_real.py with real LLM (gpt-4o-mini-2024-07-18, temp 0.0, seed 42, max 15 steps), real Playwright traces, real verify() on DOM/response state",
+    "Record nginx.conf hash, Flask testbed_server.py commit, decompression code hash, nginx/Playwright/Python versions"
+  ],
+  "frozen_gates_unevaluable": [
+    "C1: PC1/PC2 on real gpt-4o-mini pipeline",
+    "C2: NC1/NC2 + block-permutation FA<=5% AUROC 0.4-0.6",
+    "C3: B-RUNTIME-BYTE-IDENTITY >=0.99 via oracle-free gzip.decompress on real nginx",
+    "C4: repair success >=0.80 pooled AND >=0.70 per-family on TEST",
+    "C5: mean repair tokens <0.50*cold AND browser <0.40*cold AND verif<=2 on TEST",
+    "C6: contamination <0.10 (N>=24 unrelated)",
+    "C7: verification AUROC >=0.75 AND precision >=0.80 at TRAIN threshold",
+    "C8: amortized (repair+verif+10*retrieval) < cold at n=10 on TEST"
+  ],
+  "per_experiment_packet_s9": "Operational failure is not scientific falsification. This BLOCKED status must not be read as FALSIFIES or MEASUREMENT_INVALID on C-DELTA-REPAIR claim itself.",
+  "claim_ceiling_unchanged": "Maximum justified ceiling remains bounded synthetic simulation from EXP-GRAPH-35741890679 (audit REVISE: pooled repair success 0.833 CI[0.681,0.921], TEST 0.944 CI[0.742,0.990], token ratio 0.613 CI[0.569,0.661] failing <0.50, browser 0.431 CI[0.396,0.469] failing <0.40, AUROC 1.0 artefactual, contamination 0.0046 hardcoded, amortized 4744 vs 2226 2.1x failing) — bounded to simulation only, no inference to real substrate, no product promotion.",
+  "director_mandate_honored": "PIVOT to C-DELTA-REPAIR with real substrate respected; infrastructure failure correctly classified per AGENTS.md failure discipline and EXPERIMENT_PACKET.md §9",
+  "simulation_fallback_resisted": true
+}
