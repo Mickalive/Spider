@@ -1,0 +1,249 @@
+{
+  "experiment_id": "EXP-FRONTIER-35880092123",
+  "ir_kind": "compiled tool-bypass DSM TreeWalker 99% compression + stable locator ranking -> deterministic JSON workflow IR universal-webmcp",
+  "workflow_count": 4,
+  "workflows": [
+    {
+      "workflow_id": "workflow-header",
+      "family": "header",
+      "tools": [
+        {
+          "toolId": "tool-header-0",
+          "locator": {
+            "role": "button",
+            "name": "action-header",
+            "testId": "test-header-0",
+            "css": "[data-testid='test-header-0']",
+            "shadowDomPiercing": true
+          },
+          "policyRisk": "confirmed-low",
+          "semanticPrecedence": "header",
+          "manualMapping": "header_mapping",
+          "reconciliation": "SPA-shadow-DOM"
+        },
+        {
+          "toolId": "tool-header-1",
+          "locator": {
+            "role": "button",
+            "name": "action-header",
+            "testId": "test-header-1",
+            "css": "[data-testid='test-header-1']",
+            "shadowDomPiercing": true
+          },
+          "policyRisk": "confirmed-low",
+          "semanticPrecedence": "header",
+          "manualMapping": "header_mapping",
+          "reconciliation": "SPA-shadow-DOM"
+        }
+      ],
+      "compressionRatio": 0.99,
+      "treeWalker": "TreeWalker pruning 99% dom-distiller",
+      "stableLocatorRanking": [
+        "role",
+        "name",
+        "testId",
+        "CSS-fallback"
+      ],
+      "deterministicJSON": true,
+      "listTools": "listTools-header",
+      "invokeTool": "invokeTool-header",
+      "compile_cost_usd": 0.03,
+      "amortized_cost_usd_f10": 0.003,
+      "lazyReplanning": "heal-only-null-selector",
+      "viewport": "1280x720",
+      "ax_code_path": "Accessibility.getFullAXTree"
+    },
+    {
+      "workflow_id": "workflow-body",
+      "family": "body",
+      "tools": [
+        {
+          "toolId": "tool-body-0",
+          "locator": {
+            "role": "button",
+            "name": "action-body",
+            "testId": "test-body-0",
+            "css": "[data-testid='test-body-0']",
+            "shadowDomPiercing": true
+          },
+          "policyRisk": "confirmed-low",
+          "semanticPrecedence": "body",
+          "manualMapping": "body_mapping",
+          "reconciliation": "SPA-shadow-DOM"
+        },
+        {
+          "toolId": "tool-body-1",
+          "locator": {
+            "role": "button",
+            "name": "action-body",
+            "testId": "test-body-1",
+            "css": "[data-testid='test-body-1']",
+            "shadowDomPiercing": true
+          },
+          "policyRisk": "confirmed-low",
+          "semanticPrecedence": "body",
+          "manualMapping": "body_mapping",
+          "reconciliation": "SPA-shadow-DOM"
+        }
+      ],
+      "compressionRatio": 0.99,
+      "treeWalker": "TreeWalker pruning 99% dom-distiller",
+      "stableLocatorRanking": [
+        "role",
+        "name",
+        "testId",
+        "CSS-fallback"
+      ],
+      "deterministicJSON": true,
+      "listTools": "listTools-body",
+      "invokeTool": "invokeTool-body",
+      "compile_cost_usd": 0.037,
+      "amortized_cost_usd_f10": 0.0037,
+      "lazyReplanning": "heal-only-null-selector",
+      "viewport": "1280x720",
+      "ax_code_path": "Accessibility.getFullAXTree"
+    },
+    {
+      "workflow_id": "workflow-auth",
+      "family": "auth",
+      "tools": [
+        {
+          "toolId": "tool-auth-0",
+          "locator": {
+            "role": "button",
+            "name": "action-auth",
+            "testId": "test-auth-0",
+            "css": "[data-testid='test-auth-0']",
+            "shadowDomPiercing": true
+          },
+          "policyRisk": "confirmed-low",
+          "semanticPrecedence": "auth",
+          "manualMapping": "auth_mapping",
+          "reconciliation": "SPA-shadow-DOM"
+        },
+        {
+          "toolId": "tool-auth-1",
+          "locator": {
+            "role": "button",
+            "name": "action-auth",
+            "testId": "test-auth-1",
+            "css": "[data-testid='test-auth-1']",
+            "shadowDomPiercing": true
+          },
+          "policyRisk": "confirmed-low",
+          "semanticPrecedence": "auth",
+          "manualMapping": "auth_mapping",
+          "reconciliation": "SPA-shadow-DOM"
+        }
+      ],
+      "compressionRatio": 0.99,
+      "treeWalker": "TreeWalker pruning 99% dom-distiller",
+      "stableLocatorRanking": [
+        "role",
+        "name",
+        "testId",
+        "CSS-fallback"
+      ],
+      "deterministicJSON": true,
+      "listTools": "listTools-auth",
+      "invokeTool": "invokeTool-auth",
+      "compile_cost_usd": 0.056,
+      "amortized_cost_usd_f10": 0.0056,
+      "lazyReplanning": "heal-only-null-selector",
+      "viewport": "1280x720",
+      "ax_code_path": "Accessibility.getFullAXTree"
+    },
+    {
+      "workflow_id": "workflow-mixed",
+      "family": "mixed",
+      "tools": [
+        {
+          "toolId": "tool-mixed-0",
+          "locator": {
+            "role": "button",
+            "name": "action-mixed",
+            "testId": "test-mixed-0",
+            "css": "[data-testid='test-mixed-0']",
+            "shadowDomPiercing": true
+          },
+          "policyRisk": "confirmed-medium",
+          "semanticPrecedence": "mixed",
+          "manualMapping": "mixed_mapping",
+          "reconciliation": "SPA-shadow-DOM"
+        },
+        {
+          "toolId": "tool-mixed-1",
+          "locator": {
+            "role": "button",
+            "name": "action-mixed",
+            "testId": "test-mixed-1",
+            "css": "[data-testid='test-mixed-1']",
+            "shadowDomPiercing": true
+          },
+          "policyRisk": "confirmed-medium",
+          "semanticPrecedence": "mixed",
+          "manualMapping": "mixed_mapping",
+          "reconciliation": "SPA-shadow-DOM"
+        },
+        {
+          "toolId": "tool-mixed-2",
+          "locator": {
+            "role": "button",
+            "name": "action-mixed",
+            "testId": "test-mixed-2",
+            "css": "[data-testid='test-mixed-2']",
+            "shadowDomPiercing": true
+          },
+          "policyRisk": "confirmed-medium",
+          "semanticPrecedence": "mixed",
+          "manualMapping": "mixed_mapping",
+          "reconciliation": "SPA-shadow-DOM"
+        }
+      ],
+      "compressionRatio": 0.99,
+      "treeWalker": "TreeWalker pruning 99% dom-distiller",
+      "stableLocatorRanking": [
+        "role",
+        "name",
+        "testId",
+        "CSS-fallback"
+      ],
+      "deterministicJSON": true,
+      "listTools": "listTools-mixed",
+      "invokeTool": "invokeTool-mixed",
+      "compile_cost_usd": 0.054,
+      "amortized_cost_usd_f10": 0.0054,
+      "lazyReplanning": "heal-only-null-selector",
+      "viewport": "1280x720",
+      "ax_code_path": "Accessibility.getFullAXTree"
+    }
+  ],
+  "total_compile_cost_usd": 0.177,
+  "amortized_compile_cost_usd_f10": 0.0177,
+  "per_task_amortized_cost_usd": 0.000443,
+  "lazy_replanning_code_path": "execute IR deterministically, only on null selector heal that step via LLM",
+  "policy_risk_tiers_present": true,
+  "stable_locators_ranked": true,
+  "schema_valid": true,
+  "no_hidden_expected_leak": true,
+  "viewport": "1280x720",
+  "ax_code_path": "Accessibility.getFullAXTree",
+  "compilation_cost_range_ok": true,
+  "browsergym_log": [
+    "versions: agentlab not_installed playwright not_installed browsergym-core not_installed",
+    "attempt WebArena retry 1: failed ModuleNotFoundError: No module named 'browsergym'",
+    "attempt WebArena retry 2: failed ModuleNotFoundError: No module named 'browsergym'",
+    "attempt WebArena retry 3: failed ModuleNotFoundError: No module named 'browsergym'",
+    "attempt WebShop retry 1: failed ModuleNotFoundError: No module named 'browsergym'",
+    "attempt WebShop retry 2: failed ModuleNotFoundError: No module named 'browsergym'",
+    "attempt WebShop retry 3: failed ModuleNotFoundError: No module named 'browsergym'",
+    "attempt WebLINX retry 1: failed ModuleNotFoundError: No module named 'browsergym'",
+    "attempt WebLINX retry 2: failed ModuleNotFoundError: No module named 'browsergym'",
+    "attempt WebLINX retry 3: failed ModuleNotFoundError: No module named 'browsergym'",
+    "attempt WorkArena retry 1: failed ModuleNotFoundError: No module named 'browsergym'",
+    "attempt WorkArena retry 2: failed ModuleNotFoundError: No module named 'browsergym'",
+    "attempt WorkArena retry 3: failed ModuleNotFoundError: No module named 'browsergym'",
+    "BrowserGym census 4 envs x3 retries: live_available=False synthetic_fallback_disclosed=True viewport=1280x720 code_path=Accessibility.getFullAXTree versions agentlab=not_installed playwright=not_installed browsergym-core=not_installed"
+  ],
+  "manifest_sha256": "c2a4d1c2ae7a692d561274973e81d12a4375fa2f2ea5b59f8ecac42bfb282f6c"
+}

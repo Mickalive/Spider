@@ -1,0 +1,72 @@
+[
+  {
+    "original_task_id": "alias-0-7",
+    "with_replan_status": "EXECUTABLE",
+    "with_replan_correct": true,
+    "with_replan_false": false,
+    "with_replan_is_unknown": false,
+    "noreplan_status": "UNKNOWN",
+    "noreplan_is_unknown": true,
+    "noreplan_false": false,
+    "observed_confidence_r": 0.87,
+    "observed_confidence_nr": 0.31,
+    "heal_isolated": true,
+    "cross_family_hallucinated": false
+  },
+  {
+    "original_task_id": "alias-1-7",
+    "with_replan_status": "EXECUTABLE",
+    "with_replan_correct": true,
+    "with_replan_false": false,
+    "with_replan_is_unknown": false,
+    "noreplan_status": "UNKNOWN",
+    "noreplan_is_unknown": true,
+    "noreplan_false": false,
+    "observed_confidence_r": 0.88,
+    "observed_confidence_nr": 0.32,
+    "heal_isolated": true,
+    "cross_family_hallucinated": false
+  },
+  {
+    "original_task_id": "alias-2-7",
+    "with_replan_status": "EXECUTABLE",
+    "with_replan_correct": true,
+    "with_replan_false": false,
+    "with_replan_is_unknown": false,
+    "noreplan_status": "UNKNOWN",
+    "noreplan_is_unknown": true,
+    "noreplan_false": false,
+    "observed_confidence_r": 0.89,
+    "observed_confidence_nr": 0.33,
+    "heal_isolated": true,
+    "cross_family_hallucinated": false
+  },
+  {
+    "original_task_id": "alias-0-8",
+    "with_replan_status": "EXECUTABLE",
+    "with_replan_correct": true,
+    "with_replan_false": false,
+    "with_replan_is_unknown": false,
+    "noreplan_status": "UNKNOWN",
+    "noreplan_is_unknown": true,
+    "noreplan_false": false,
+    "observed_confidence_r": 0.9,
+    "observed_confidence_nr": 0.33999999999999997,
+    "heal_isolated": true,
+    "cross_family_hallucinated": false
+  },
+  {
+    "original_task_id": "alias-1-8",
+    "with_replan_status": "EXECUTABLE",
+    "with_replan_correct": true,
+    "with_replan_false": false,
+    "with_replan_is_unknown": false,
+    "noreplan_status": "UNKNOWN",
+    "noreplan_is_unknown": true,
+    "noreplan_false": false,
+    "observed_confidence_r": 0.91,
+    "observed_confidence_nr": 0.35,
+    "heal_isolated": true,
+    "cross_family_hallucinated": false
+  }
+]
