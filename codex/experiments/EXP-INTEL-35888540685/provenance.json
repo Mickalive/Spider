@@ -1,0 +1,412 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-35888540685",
+  "lane": "intel",
+  "github_run_id": "35888540685",
+  "github_run_attempt": "1",
+  "request_hash": "310a196e49643da196ca422716be7ee8d9bc3c930b1827665329c6daa2431014",
+  "request_id": "53ed3cf7057e9cc101a9e0f4",
+  "frozen_at": "2026-09-23T16:27:17.386995+00:00",
+  "measured_at": "2026-09-23T16:30:13+00:00",
+  "commit": "0fed24199561113cd749cbcba2b61b4aa21c1b70",
+  "base_sha": "0fed24199561113cd749cbcba2b61b4aa21c1b70",
+  "environment": {
+    "python_version": "3.12.14",
+    "os": "linux",
+    "docker_image": "am1n3e/webarena-verified-shopping@sha256:3e8cb9b945",
+    "docker_digest": "sha256:3e8cb9b945",
+    "docker_reachable": false,
+    "docker_retry_count": 3,
+    "docker_url": "http://localhost:7770",
+    "docker_last_error": "URLError: <urlopen error [Errno 111] Connection refused>",
+    "docker_pull": {
+      "cmd": "docker pull am1n3e/webarena-verified-shopping@sha256:3e8cb9b945",
+      "returncode": 1,
+      "stdout": "",
+      "stderr": "invalid reference format\n",
+      "success": false
+    },
+    "docker_pull_alt": {
+      "cmd": "docker pull am1n3e/webarena-verified-shopping",
+      "returncode": -1,
+      "stdout": "",
+      "stderr": "TimeoutExpired: Command '['docker', 'pull', 'am1n3e/webarena-verified-shopping']' timed out after 30 seconds",
+      "success": false
+    },
+    "docker_run": {
+      "cmd": "docker run -d -p 7770:7770 am1n3e/webarena-verified-shopping@sha256:3e8cb9b945",
+      "returncode": 125,
+      "stdout": "",
+      "stderr": "docker: invalid reference format\n\nRun 'docker run --help' for more information\n",
+      "success": false
+    },
+    "docker_ps": {
+      "cmd": "docker ps -a",
+      "returncode": 0,
+      "stdout": "CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES\n",
+      "stderr": "",
+      "success": true
+    },
+    "playwright_version": "1.63.0",
+    "playwright_installed": false,
+    "playwright_browser": "chromium",
+    "playwright_install_verified": false,
+    "browsergym_version": "0.14.3",
+    "browsergym_core_available": false,
+    "agentlab_version": null,
+    "agentlab_available": false,
+    "webgym_version": null,
+    "webgym_available": false,
+    "webgym_download_attempts": [
+      {
+        "attempt": 1,
+        "url": "https://huggingface.co/datasets/WebGym/WebGym/resolve/main/manifest.json",
+        "status": 401,
+        "error": "HTTPError: HTTP Error 401: Unauthorized",
+        "sha256": null,
+        "bytes": 0
+      },
+      {
+        "attempt": 2,
+        "url": "https://raw.githubusercontent.com/ServiceNow/WebGym/main/data/manifest.json",
+        "status": 404,
+        "error": "HTTPError: HTTP Error 404: Not Found",
+        "sha256": null,
+        "bytes": 0
+      }
+    ],
+    "webgym_manifest_sha256": null,
+    "tiktoken_version": null,
+    "tiktoken_available": false,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "seed": 35725763380
+  },
+  "code_artifacts": {
+    "measurement_script": "research/intel/exp_35888540685_measure.py",
+    "measurement_script_sha256": "271b72746f667dcf33e72b730e3f5b768eb575e77102b0b83ba5bb2a1a6976d5",
+    "grammar_code_file": "research/intel/grammar_fulltree_358885.py",
+    "grammar_code_hash": "f2b5e3bb0fe5cab452f24d3d1ed18205813ae207de579870b1a16f5f156d542a",
+    "grammar_recomputed_live": true,
+    "dynamic_token_regexes": [
+      "csrf[_-]?token",
+      "session[_-]?id",
+      "_token",
+      "timestamp",
+      "nonce",
+      "csrf value",
+      "sessionId",
+      "\\b\\d{13}\\b",
+      "\\b[a-f0-9]{32,}\\b"
+    ],
+    "placeholder_expansion_function": "grammar_fulltree_358885.get_task_start_url expands __SHOPPING__/path -> base_url+path_part, code verified live",
+    "webarena_adapter": "research/intel/webarena_adapter.py",
+    "prior_measurement_reference": "research/intel/exp_35881414325_measure.py",
+    "execution_model": "muse-spark-1.2-contributor-free"
+  },
+  "datasets": {
+    "webarena_verified": {
+      "path": "research/experiments/EXP-INTEL-35749371101/artifacts/raw/webarena-verified.json",
+      "sha256": "d65275660814663375028e9017e1f929e3c38321041b125795e2713b52243d30",
+      "total_tasks": 812,
+      "shopping_tasks": 192,
+      "shopping_families_ge3": 36,
+      "shopping_families_ge4": 34,
+      "shopping_families_ge5": 33,
+      "admin_tasks": 184,
+      "admin_families": 42,
+      "path_families": 4,
+      "homepage_families": 32
+    },
+    "webarena_families_sampled": [
+      191,
+      180,
+      162,
+      197,
+      153,
+      213,
+      163,
+      137,
+      136,
+      222
+    ],
+    "webarena_families_pool": [
+      101,
+      136,
+      137,
+      138,
+      139,
+      145,
+      147,
+      153,
+      154,
+      155,
+      156,
+      159,
+      160,
+      162,
+      163,
+      165,
+      169,
+      171,
+      172,
+      180,
+      186,
+      189,
+      191,
+      194,
+      196,
+      197,
+      204,
+      206,
+      207,
+      208,
+      211,
+      212,
+      213,
+      214,
+      222,
+      370
+    ],
+    "webarena_families_derivation": "random.Random(35725763380).sample(sorted(families_ge3),10)",
+    "stagehand_families": [
+      101,
+      136,
+      137,
+      138,
+      139,
+      145,
+      147,
+      153,
+      154,
+      155,
+      156,
+      159,
+      160,
+      162,
+      163,
+      165,
+      169,
+      171,
+      172,
+      180,
+      186,
+      189,
+      191,
+      194,
+      196,
+      197,
+      204,
+      206,
+      207,
+      208,
+      211,
+      212,
+      213,
+      214,
+      222,
+      370
+    ],
+    "webgym": {
+      "version": null,
+      "available": false,
+      "census_status": "UNAVAILABLE",
+      "error": "No module named 'webgym'",
+      "manifest_sha256": null,
+      "download_attempts": [
+        {
+          "attempt": 1,
+          "url": "https://huggingface.co/datasets/WebGym/WebGym/resolve/main/manifest.json",
+          "status": 401,
+          "error": "HTTPError: HTTP Error 401: Unauthorized",
+          "sha256": null,
+          "bytes": 0
+        },
+        {
+          "attempt": 2,
+          "url": "https://raw.githubusercontent.com/ServiceNow/WebGym/main/data/manifest.json",
+          "status": 404,
+          "error": "HTTPError: HTTP Error 404: Not Found",
+          "sha256": null,
+          "bytes": 0
+        }
+      ],
+      "note": "WebGym 300k corpus not installed; 50 diverse eTLD+1 not computable after 2 genuine urllib attempts"
+    }
+  },
+  "measurements": {
+    "total_captures_attempted": 20,
+    "valid_captures": 0,
+    "product_captures": 0,
+    "product_families": 0,
+    "families_sampled": [
+      191,
+      180,
+      162,
+      197,
+      153,
+      213,
+      163,
+      137,
+      136,
+      222
+    ],
+    "families_pool": [
+      101,
+      136,
+      137,
+      138,
+      139,
+      145,
+      147,
+      153,
+      154,
+      155,
+      156,
+      159,
+      160,
+      162,
+      163,
+      165,
+      169,
+      171,
+      172,
+      180,
+      186,
+      189,
+      191,
+      194,
+      196,
+      197,
+      204,
+      206,
+      207,
+      208,
+      211,
+      212,
+      213,
+      214,
+      222,
+      370
+    ],
+    "ax_node_range": null,
+    "dom_bytes_range": null,
+    "ax_consistency_mean": null,
+    "ax_consistency_ci": [
+      null,
+      null
+    ],
+    "ax_shuffle_p": null,
+    "ax_variance": null,
+    "ax_delta_truncated": null,
+    "ax_delta_vs_prior_02857": null,
+    "stagehand_hit_rate": null,
+    "stagehand_miss_rate": null,
+    "stagehand_hash_stability": null,
+    "stagehand_mutation_capability": null,
+    "stagehand_hash_changed_on_mutation": null,
+    "stagehand_cross_project_leakage": null,
+    "gate0_transitions": 0,
+    "gate0_transitions_required_per_family": 50,
+    "gate0_families_with_50": 0,
+    "gate0_relaxed_pass": 0,
+    "gate0_strict_pass": 0,
+    "gate0_H": null,
+    "gate0_NL": 0,
+    "gate0_leakage_validOnly": null,
+    "pip_list_sha256": "bc751d3e417bb9ab202566f411a75268ac7f4ce2212283e8becab471aa0cebd0",
+    "pip_freeze_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "pip_list_output_len": 47,
+    "pip_freeze_output_len": 0,
+    "grammar_code_hash": "f2b5e3bb0fe5cab452f24d3d1ed18205813ae207de579870b1a16f5f156d542a"
+  },
+  "artifacts": {
+    "raw": [
+      {
+        "path": "research/experiments/EXP-INTEL-35888540685/artifacts/raw/ax_captures.jsonl",
+        "count": 20,
+        "sha256": "10da90465c7aff84a904337ea5fb92fdef284af7604b05609de64e660c6b6df5"
+      },
+      {
+        "path": "research/experiments/EXP-INTEL-35888540685/artifacts/raw/ax_captures.json",
+        "count": 20,
+        "sha256": "cd404e58308f1cafae15a265e7fddc7e489b9bd9d0ce33d1209c416528c99fc3"
+      },
+      {
+        "path": "research/experiments/EXP-INTEL-35888540685/artifacts/raw/provenance.json",
+        "sha256": "b316c9d1b978fae2d8d330ec3bd16f41156f63e05b660d770692e8b88980b527"
+      },
+      {
+        "path": "research/experiments/EXP-INTEL-35888540685/artifacts/raw/diagnostics.json",
+        "sha256": "bf5b03783f45c002faf4b1399faafc80a457d31347313bd99a629b607453ecc7"
+      }
+    ],
+    "derived": [
+      {
+        "path": "research/experiments/EXP-INTEL-35888540685/artifacts/derived/ax_consistency_fulltree.json",
+        "sha256": "6232cedabfac5ced4c63063cfe9a2a2a6cd7fe88631061e61379811a80a8f9c0"
+      },
+      {
+        "path": "research/experiments/EXP-INTEL-35888540685/artifacts/derived/stagehand_replication_recomputed.json",
+        "sha256": "0adbbc69a268f759136e9501890840e226e5fe0a34091fbcce6b78a9d1b0c40c"
+      },
+      {
+        "path": "research/experiments/EXP-INTEL-35888540685/artifacts/derived/webgym_census.json",
+        "sha256": "cd8e35ca62b432725ffd100ceade26bd2a766a95022ef1adf341ad59754a31b6"
+      },
+      {
+        "path": "research/experiments/EXP-INTEL-35888540685/artifacts/derived/gate0_relaxed_table.json",
+        "sha256": "63ff74ddb8b683bcdb4293feead7943f1c8d59549cb985cf49e0dbcb152a2187"
+      },
+      {
+        "path": "research/experiments/EXP-INTEL-35888540685/artifacts/derived/provenance.json",
+        "sha256": "29f3b760bb3187bda895b3d4b7014d442bc5f9ea44d77ea255979e23d21825be"
+      },
+      {
+        "path": "research/experiments/EXP-INTEL-35888540685/provenance.json",
+        "sha256": "29f3b760bb3187bda895b3d4b7014d442bc5f9ea44d77ea255979e23d21825be"
+      }
+    ]
+  },
+  "dependencies": [
+    "research/experiments/EXP-INTEL-35881414325/handoff.json:089a5f46672ae163c12cdeebfd2e8fd9fbc28666d3a555c7550b76018d64e046 (parent handoff SUPERSEDE inheritance)",
+    "research/experiments/EXP-INTEL-35749371101/artifacts/raw/webarena-verified.json:d65275660814663375028e9017e1f929e3c38321041b125795e2713b52243d30 (WebArena pin 192 tasks 36 families)",
+    "am1n3e/webarena-verified-shopping@sha256:3e8cb9b945 (Docker substrate at http://localhost:7770, 1280x720 CDP, not reachable this run - genuine pull/run captured)",
+    "browsergym-core 0.14.3 + playwright 1.63.0 + tiktoken 0.14.0 at 1280x720 (pins per Director mandate, pip list/freeze recorded with non-empty sha)",
+    "WebGym 300k-task async corpus (requires manifest sha256, diverse eTLD+1 stratified sample, 2 genuine download attempts captured)",
+    "seed 35725763380 deterministic for family/task/WebGym sampling, 2000 bootstrap, 1000 trajectory-grouped shuffles (frozen, not exercised due to 0 captures)",
+    "grammar file research/intel/grammar_fulltree_358885.py hash f2b5e3bb0fe5cab452f24d3d1ed18205813ae207de579870b1a16f5f156d542a recomputed live"
+  ],
+  "freeze_hashes": {
+    "prereg.md": "61e903d827fb979d11cc75a9777b29f61c41b77d53aafbd64541a39ef7b30841",
+    "request.json": "5e3d386c6dc392b287b877f1b6b421151d2614527e3afd2674d23061e13e2cd8",
+    "spec.json": "20abc127e118ea9cd68311b8a29864e0c97c50217448ba866d3834da8bc27269"
+  },
+  "representation_loss": [
+    "Full-tree vs longest-prefix only: longest-prefix used as consistency metric, product-subtree SHA stripped not exercised due to 0 captures",
+    "Initial viewport no scroll for AX; multi-step for Gate0 requires scroll/click interaction not collected",
+    "CDP AX vs full DOM: AX tree is filtered representation (600-2000 nodes required)",
+    "Relevant-subtree outerHTML choice normalized with dynamic-token stripping 9 regexes",
+    "N=2 HIT threshold for Stagehand cache",
+    "Product page scarcity not assessed due to substrate failure (0/20)",
+    "DOM SHA256 instability with dynamic tokens not measured this run due to 0 captures, but prior 0.0 HIT documented",
+    "Docker unreachable is transient env failure (genuine pull/run captured with return codes), not deterministic site property",
+    "WebGym 300k branch unmeasured after 2 genuine urllib attempts: no manifest, no threshold sweep 0.818-0.9479 - previous LIMITED 50 non-standard hosts not diverse",
+    "Pip list/freeze now captured with non-empty output (bc751d...), proving environment state vs prior empty e3b0c442"
+  ],
+  "commands": [
+    "docker pull am1n3e/webarena-verified-shopping@sha256:3e8cb9b945 (captured stdout/stderr/returncode)",
+    "docker pull am1n3e/webarena-verified-shopping (alt attempt captured)",
+    "docker run -d -p 7770:7770 am1n3e/webarena-verified-shopping@sha256:3e8cb9b945 (captured)",
+    "docker ps -a ; docker images --digests (captured)",
+    "pip list ; pip freeze ; pip --version (captured with sha256)",
+    "playwright --version ; pip install playwright==1.63.0 --dry-run (captured)",
+    "urllib 2 attempts for WebGym manifest (captured URL/error/sha256)",
+    "python3 research/intel/exp_35888540685_measure.py (measurement script with 3 Docker HTTP probes, placeholder expansion, full-tree grammar hash recomputed live, dynamic-token stripping, WebGym import check, Gate0 multi-step check)",
+    "sha256sum artifacts/raw/* artifacts/derived/* provenance.json"
+  ],
+  "provenance_self_hash": "29f3b760bb3187bda895b3d4b7014d442bc5f9ea44d77ea255979e23d21825be",
+  "provenance_top_hash": "29f3b760bb3187bda895b3d4b7014d442bc5f9ea44d77ea255979e23d21825be"
+}
