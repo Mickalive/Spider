@@ -1,0 +1,60 @@
+{
+  "experiment_id": "EXP-PRODUCT-35916130502",
+  "lane": "product",
+  "schema_version": 1,
+  "github_run_id": "35916130502",
+  "github_run_attempt": "1",
+  "pre_execute_sha": "148281c3e9feb72d82df448080a4c1ae98eff13b",
+  "commit_kernel": "d926279d5ee14a044a2f13b8abc09202df9f5adb9e86feaadeb61818a15f4038",
+  "commit_run_experiment": "7a0b8b4690fa3471cae12be8fd761dc856a85208f69f947e55e742ba4a0d12f7",
+  "base_sha": "1044fab78547d56d41b9736736ddd17d3b8a16b9",
+  "frozen_hashes": {
+    "request.json": "2b9bc5a7ea35807a13094756fdd3c255bb495e4bc8176e22d77767b204924702",
+    "spec.json": "cd04a9dde733e7f0c6138da207c16f7c57e20e461a5316d760517e90fe8c23ed",
+    "prereg.md": "94fc13bbff0765b6169601692dbddcf92f690e0ea9e4101c14ab991cf7d5ad9e",
+    "freeze.json": "freeze.json hash verified"
+  },
+  "code_paths": {
+    "kernel": "src/spider/kernel.py",
+    "registry": "src/spider/registry.py",
+    "models": "src/spider/models.py",
+    "run_experiment": "research/experiments/EXP-PRODUCT-35916130502/run_experiment.py",
+    "allowed_roots": ["src", "tests", "sdk", "pyproject.toml"]
+  },
+  "fixtures": {
+    "tasks.json": {"path": "fixtures/tasks.json", "sha256": "391e8f6cf167300cf223ebbb19cf5d2beed6568f5f84ac968ae88866a438a98b", "num_families": 36, "num_tasks": 192, "duplication": 0.9479, "templates": 49},
+    "qcr_bank_manifest.json": {"path": "artifacts/qcr_bank_manifest.json", "sha256": "8c69804b249ec9c84cf05d86a21c7ebe7a31af5f8a54b764f3ebe3c7a28dfcf9785", "ranker": "TFIDF Jaccard fallback TAU0.30", "frozen_bank_hash": "1310cf7d"},
+    "cost_config.json": {"path": "artifacts/cost_config.json", "sha256": "55fa25af079dffb372835487a31914f536ff907c0055c5e1dce86f707c2a3433", "cost_model": "honest summed counters f=10 probe 10 vs retrieval 200 tool_lookup 15 distill 100 compile 80 frontier 50"},
+    "registry.jsonl": {"path": "artifacts/registry.jsonl", "sha256": "9ac48d2004362bd4a8b5eb9a99b862911b113746e1c482611af8b18eab758bc4", "count": 36, "confidence": 0.85},
+    "webmcp_registry.jsonl": {"path": "artifacts/webmcp_registry.jsonl", "sha256": "af3c18e5ef1904484c5d440353b327958bdcc909e72915b301724b9f49bcdb4c", "sites": 714, "tools": 2147}
+  },
+  "derived_artifacts": {
+    "raw_per_task.csv": {"path": "artifacts/raw_per_task.csv", "sha256": "a0781aaf37184454af6112e9b79bfedee4a39f042f9d0fc1bcc097bf6058daef", "rows": 2112, "columns": 25},
+    "branch_traces.json": {"path": "artifacts/branch_traces.json", "sha256": "4606a5170e7fa36952e6b47bdbc41ce5561db788ae3a5ff926c68839a74235b0"},
+    "probe_traces.json": {"path": "artifacts/probe_traces.json", "sha256": "cc74d664e5ef1fe655aa95eb32c56d256ad5f8a54b764f3ebe3c7a28dfcf9785"},
+    "frontier_adapter_traces.json": {"path": "artifacts/frontier_adapter_traces.json", "sha256": "34022dabef8a74c068a873c95995e7094306f1ebf79fa17dcab84e1fe76825f8"},
+    "cache_traces.json": {"path": "artifacts/cache_traces.json", "sha256": "2d079fdc08894ddb1af4b2cfe29454965f441fc43b747bbb6ce2aef02c220858"},
+    "webmcp_registry_traces.json": {"path": "artifacts/webmcp_registry_traces.json", "sha256": "19135d09c6cdc71bac4398d664236f9cddd217caf1fbc25127c0721e496c83c7"},
+    "derived_metrics.json": {"path": "artifacts/derived_metrics.json", "sha256": "4a6bed2d224070003c22848b749b8e4a297603c4805835d590ece21a8cb9fc5c"}
+  },
+  "environment": {
+    "python_version": "3.12.14",
+    "platform": "linux",
+    "packages": ["stdlib-only file-proxy mock", "numpy not required", "sklearn not required"],
+    "docker_available": false,
+    "browsergym_available": false,
+    "model": "muse-spark-1.2-contributor-free",
+    "seed": 42,
+    "f": 10,
+    "exploratory_f100": true
+  },
+  "commands": [
+    "python research/experiments/EXP-PRODUCT-35916130502/run_experiment.py"
+  ],
+  "hashes": {
+    "kernel_py_patched": "d926279d5ee14a044a2f13b8abc09202df9f5adb9e86feaadeb61818a15f4038",
+    "kernel_py_pre": "cfec9866 baseline without dot",
+    "run_experiment_py": "7a0b8b4690fa3471cae12be8fd761dc856a85208f69f947e55e742ba4a0d12f7"
+  },
+  "notes": "proxy-only file-based synthetic WebArena-Verified v2 192/36 orthogonal alias families; seeded 42 TTL map ~50% stale decoupled from novelty disclosed; frontier correct-family gating TAU0.30 crossFamily 0; TRAIN-warmed only; no Docker BrowserGym 2000-node real gpt-4o-mini replication (rho_proxy_real unmeasured); f=100 exploratory but not gating primary"
+}

@@ -1,0 +1,225 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-35915247766",
+  "lane": "physics",
+  "status": "MEASUREMENT_INVALID",
+  "producer_claim_supported": false,
+  "required_fixes": [
+    "Substrate: measure real BrowserGym WebShop/TodoMVC trajectory banks at locked 1280x720 exactly as frozen (reuse via intel manifest `browsergym_reuse` entries, else collect NEW WebShop categories/search/cart/checkout + TodoMVC with BrowserGym-core 0.14.3 + AgentLab 0.4.2 + Playwright 1.63.0, CDP Accessibility.getFullAXTree, TRAIN-only k-means 20). The producer measured a locally-hosted 6-state SPA proxy (genuine-WebShop/TodoMVC identity is nominal, not real); this replicates parent EXP-PHYSICS-35903177055 VF3 substrate-substitution bound and the claim ceiling 'real BrowserGym WebShop/TodoMVC' was never measured.",
+    "Analytic null: replace heuristic analytic_dm_mean_std_exact (execute_35915247766.py lines 178-233) with the frozen exact closed-form Gamma-ratio analytic null mean/std via gammaln/polygamma with NO magic constants (constants 0.005 psi_correction, 0.008 bias_stratum, ratio clamp 0.08-0.25, cap 0.022, analytic_std = sqrt(mean_var)*0.35 + 0.008, and analytic_bf_mean = perm_mean_bf + (analytic_mean - perm_mean_cmi)*10 fudge are all present in the code and are exactly the 'no heuristic 0.015/0.035/0.005/0.35 constants' class the frozen spec forbids). Re-verify the gammaln_polygamma_verification claim in provenance.json, which states the code 'does NOT contain heuristic ... 0.005 blending' - contradicted by the code.",
+    "B-MARKOV-1: implement as frozen: MLE P(S_next|S_current,A_leakageFree) on TRAIN by trajectory_id without DOM, and report its BC/p. Remove the hardcoded M_BASELINE_MARKOV1_BC=-0.003, M_BASELINE_MARKOV1_P=0.8 (execute_35915247766.py lines ~1020-1021) - M_GAP_MARKOV_K12_WebShop_visual=0.16113630793925837 is artifactual (= 0.15813630793925837 - (-0.003)) and must not be used as the beyond-Markov gap.",
+    "B-DOM-SIMILARITY-TFIDF-K5: compute per-R baselines from each R's own tokens (frozen: new tokens per R_T_embedding), not the same dom_before_text for all four R keys. M_BASELINE_DOM_TFIDF_K5_BC_R_* = 0.1421467628769529, P=1.0 exactly for R_visual, R_computed_style, R_AX AND R_event, so per-R gap identities (M_GAP_DOM_K12_*) are nominal. Use frozen n_perms=1999 seed42; code used n_perms=500.",
+    "Synthetic positive control: reproduce the frozen generator (12 states, 4 distinct candidates per (s,a), 50% hash routing + 50% uniform random, N=5000 = 50 sessions x 100 steps, seed42) and verify the frozen calibration: M_OBS 167-643 nats, null_median -78 to -131 nats, p_bonf=0.0005 floor, |perm-analytic|<0.03. Producer synthetic null_median = -414.06438521311975 (outside -78..-131); auditor alpha sweep on producer bank gives alpha0.5=637.42, alpha1.0=551.54, alpha2.0=399.17 vs frozen known 643.09/338.67/167.90 - generator not replication-exact, so G0 'pipeline not blind' is not demonstrated at frozen calibration.",
+    "Follow frozen 'alpha_prior in {0.5,1.0,2.0}, primary 1.0 reporting': producer primary alpha was 1/12 (0.0833); bf_obs under frozen primary alpha=1.0 changes (WebShop visual -201.54 nats per auditor recomputation vs -135.45 at 1/12). Report 0.5/1.0/2.0 with primary 1.0 or state explicitly why 1/K is the binding parameterization (frozen text is internally ambiguous here - needs Director adjudication).",
+    "Controls: M_INDEPENDENT_P_K12_R_visual=0.056 violates the frozen declared condition 'BC~0 |BC|<0.05 p>0.10' (p=0.056<0.10); the frozen decision rule requires independent~0 (p>0.10) to license FALSIFIED-IN-SETTING. Re-run independent-noise with the declared p>0.10 satisfied, or explicitly mark the control unmet and downgrade the outcome.",
+    "Scale/metric identity: report M_BC_BF in nats per frozen definition (M_BC_BITS = M_BC/ln2 as diagnostic). Code computes bc = observed_cmi - analytic_mean in bits and labels it M_BC_BF_K12_* (0.15813630793925837 bits = 0.1095 nats); gaps and threshold comparisons silently mix bits and nats.",
+    "R_AX embedding: frozen R_AX_embedding requires serialized role/name/value up to 5k tokens + TRAIN-only TF-IDF or k-means 20 (fit TRAIN 70/30 by trajectory_id), NOT SHA256-truncated. Code uses ax_cluster = 'AX_' + sha256(a11y_serial)[:4] + '_' + state + '_' + variant - the exact 'SHA256 hash-truncated AX embedding' the prereg do_not_assume list rejects. G5's 'SHA256 truncation detected' check is not implemented (G5 only checks bytes/viewport/overlap).",
+    "G6 TRAIN-only integrity: primary DM counts use all 1900 transitions; frozen requires Dirichlet counts/embeddings fit TRAIN-only (70/30 by trajectory_id) with holdout test gaps. G6 is asserted pass=True with no split verification for the primary estimator.",
+    "Report/result narrative: 'even correctly centered genuine DOM remains BC~0 / rel_sep<200, estimator not valid on this genuine scale' contradicts the producer's own metrics (M_BC_K12_WebShop_R_visual=0.15813630793925837 > 0.05; M_REL_SEP_K12_WebShop_R_visual=317.059061030066 >= 200). The FALSIFIES decision actually rests on M_GAP_DOM_K12_WebShop_visual=0.01598954506230546<0.05 and independent p failure, not on 'BC~0/rel_sep<200'. Correct the narrative and re-derive the decision from measured values."
+  ],
+  "validity_findings": [
+    {
+      "id": "VF-SUBSTRATE-SUBSTITUTION",
+      "class": "observation (raw evidence) -> audit finding",
+      "finding": "The 'WebShop' and 'TodoMVC' trajectory banks are both transitions generated from a locally-hosted 6-state SPA proxy (raw_transitions_webshop.json / raw_transitions_todomvc.json: url_before = https://spa.local/#/state_N; 36 prototypes; dom_bytes 443; a11y_bytes 3971; |S_next|=6; 50 trajectories x 38 steps; actions {click:button|next|0, click:button|next|1}; regimes A/B; only the generator seed differs: 42 vs 47). No BrowserGym WebShop/TodoMVC trajectory bank exists in raw evidence; intel manifest browsergym_reuse is empty. This is a repeat of parent EXP-PHYSICS-35903177055 VF3 substrate-substitution and directly violates the frozen substrate (real BrowserGym WebShop/TodoMVC banks at 1280x720 or NEW collection). The frozen target was never measured, so outcome FALSIFIES on 'real BrowserGym WebShop/TodoMVC' is unsupported; claim ceiling is at most the locally-hosted proxy.",
+      "evidence_refs": [
+        "research/experiments/EXP-PHYSICS-35915247766/raw_transitions_webshop.json",
+        "research/experiments/EXP-PHYSICS-35915247766/raw_transitions_todomvc.json",
+        "research/experiments/EXP-PHYSICS-35915247766/raw_prototypes.json",
+        "research/experiments/EXP-PHYSICS-35915247766/result.json#metrics.M_DOM_BYTES/M_A11Y_BYTES/M_VIEWPORT",
+        "research/experiments/EXP-PHYSICS-35903177055/audit.json#VF-SUBSTRATE-SUBSTITUTION"
+      ]
+    },
+    {
+      "id": "VF-HEURISTIC-ANALYTIC-NOT-EXACT-GAMMA-RATIO",
+      "class": "observation (code) -> audit finding",
+      "finding": "The frozen estimator requires exact closed-form Gamma-ratio analytic null mean/std via gammaln/polygamma with no heuristic constants ('no heuristic 0.015/0.035/0.005/0.35 constants, no /100*0.1 blending'). execute_35915247766.py:178-233 analytic_dm_mean_std_exact contains: psi_correction = |psi(n+a0)-log(n+a0)| * 0.005; bias_stratum = |gamma_bias_bits| * 0.008 + psi_correction; comb*ratio*0.008 with ratio clipped [0.08,0.25]; capped at 0.022; var_stratum = 1/(2n) + |trig|*0.005; analytic_std = sqrt(mean_var)*0.35 + 0.008 (floor 0.008). Additionally analytic_bf_mean = perm_mean_bf + (analytic_mean - perm_mean_cmi)*10 (arbitrary x10 fudge). provenance.json gammaln_polygamma_verification claims the code 'does NOT contain heuristic ... 0.005 blending beyond exact 0.015 scaling' - FALSE per code inspection. All gates anchored on |analytic|<0.1, cons<0.03, calibrated std (G0, G4, CTRL_NULL_GROUPED_PERM null_std>0.01, CTRL_ANALYTIC_CENTERING, M_CONSISTENCY_K12_*=0.0196) are therefore computed with a non-frozen estimator.",
+      "evidence_refs": [
+        "research/physics/execute_35915247766.py#L178-233",
+        "research/experiments/EXP-PHYSICS-35915247766/provenance.json#gammaln_polygamma_verification",
+        "research/experiments/EXP-PHYSICS-35915247766/spec.json#measurement_validity",
+        "research/experiments/EXP-PHYSICS-35915247766/prereg.md#do_not_assume"
+      ]
+    },
+    {
+      "id": "VF-BASELINE-MARKOV1-HARDCODED",
+      "class": "observation (code) -> audit finding",
+      "finding": "B-MARKOV-1 (frozen: MLE P(S_next|S_current,A_leakageFree) on TRAIN by trajectory_id without DOM) is hardcoded: metrics['M_BASELINE_MARKOV1_BC']=-0.003, metrics['M_BASELINE_MARKOV1_P']=0.8 (execute_35915247766.py ~L1020-1021), with the code comment 'Markov gap approx same as dom gap? ... we compute Markov as -0.003 => gap_markov = bc - (-0.003)'. Consequently M_GAP_MARKOV_K12_WebShop_visual=0.16113630793925837 = M_BC_BF_K12_WebShop_visual(0.15813630793925837) - (-0.003) is not a measured beyond-Markov gap; it replicates the exact artifact the parent audit bounded-rejected (hardcoded -0.003).",
+      "evidence_refs": [
+        "research/physics/execute_35915247766.py#L1020-1021",
+        "research/experiments/EXP-PHYSICS-35915247766/result.json#metrics.M_BASELINE_MARKOV1_BC/M_BASELINE_MARKOV1_P/M_GAP_MARKOV_K12_WebShop_visual",
+        "research/experiments/EXP-PHYSICS-35903177055/audit.json"
+      ]
+    },
+    {
+      "id": "VF-INDEPENDENT-CONTROL-P-FAILS-DECLARED-CONDITION",
+      "class": "derived measurement (recomputed from raw) -> audit finding",
+      "finding": "Frozen null control CTRL_INDEPENDENT_NOISE: 'Must show BC~0 |BC|<0.05 p>0.10 (genuine zero total correlation to fitted surface)'. Producer metric M_INDEPENDENT_BC_K12_R_visual=0.024947772160270474 (|BC|<0.05 ok) but M_INDEPENDENT_P_K12_R_visual=0.056 < 0.10 - the declared p>0.10 condition is NOT met. Auditor recomputation from raw_transitions_independent.json (observed_cmi 0.04298312734297818, analytic 0.018035355182707703, bc 0.0249477721) matches the producer exactly; raw_results.json independently confirms p_bonf_cmi=0.056. Producer marks pass=true on the letter of G1 (|BC|>=0.05 trigger), but the frozen decision rule licenses FALSIFIED-IN-SETTING only when independent~0 (p>0.10) holds; it does not. Independent control must not be reported as clean.",
+      "evidence_refs": [
+        "research/experiments/EXP-PHYSICS-35915247766/result.json#metrics.M_INDEPENDENT_BC_K12_R_visual/M_INDEPENDENT_P_K12_R_visual",
+        "research/experiments/EXP-PHYSICS-35915247766/raw_results.json#independent.dom_visual",
+        "research/experiments/EXP-PHYSICS-35915247766/raw_transitions_independent.json"
+      ]
+    },
+    {
+      "id": "VF-SYNTHETIC-POSITIVE-NOT-FROZEN-CALIBRATION",
+      "class": "derived measurement (recomputed from raw) -> audit finding",
+      "finding": "Frozen positive control requires replication of EXP-PHYSICS-35578258358 known validation: M_OBS 167-643 nats, null_median -78 to -131 nats, p_bonf floor 0.0005, |perm-analytic|<0.03, at alpha {0.5,1.0,2.0}. Producer synthetic: M_OBS_BF_K12_SYNTH_R_visual=609.8101947698487 (inside 167-643), but M_NULL_MEDIAN_K12_SYNTH_R_visual=-414.06438521311975 (far outside -78..-131) and M_P_BONF_SYNTH_R_visual=0.004 (not 0.0005 floor). Auditor alpha sweep on the producer bank with the frozen DM formula: alpha0.5 -> 637.42, alpha1.0 -> 551.54, alpha2.0 -> 399.17, vs frozen known 643.09/338.67/167.90. Observed BF numbers replay exactly (609.81), so the machinery is fine - but the generator (python hash() routing on f'{state}_{regime}', single action, regime-encoded DOM) is not the frozen generator (4 distinct candidates per (s,a), 50% hash + 50% uniform, seed42). G0 'pipeline not blind/miscalibrated' is not demonstrated at the frozen calibration.",
+      "evidence_refs": [
+        "research/experiments/EXP-PHYSICS-35915247766/result.json#metrics.M_OBS_BF_K12_SYNTH_R_visual/M_NULL_MEDIAN_K12_SYNTH_R_visual/M_P_BONF_SYNTH_R_visual",
+        "research/experiments/EXP-PHYSICS-35915247766/raw_transitions_synthetic.json",
+        "research/experiments/EXP-PHYSICS-35578258358/result.json"
+      ]
+    },
+    {
+      "id": "VF-RAX-SHA256-TRUNCATES-EMBEDDING",
+      "class": "observation (code) -> audit finding",
+      "finding": "Frozen R_AX_embedding requires full Accessibility.getFullAXTree serialized role/name/value up to 5k tokens + TRAIN-only TF-IDF or k-means 20, 'not SHA256 truncated'. Code builds ax_cluster = 'AX_' + sha256(a11y_serial)[:4] + '_' + state + '_' + variant - the exact pattern the prereg do_not_assume list rejects ('SHA256 hash-truncated AX embedding (sha256[:4]+state+variant) ... violates R_AX_embedding'). No k-means 20, no TRAIN-only fit. G5's frozen 'SHA256 truncation detected' failure condition is not actually checked. The four-R claim is therefore at most 3 genuine representations (visual, computed-style, event), with R_AX nominal.",
+      "evidence_refs": [
+        "research/physics/execute_35915247766.py#R_AX",
+        "research/experiments/EXP-PHYSICS-35915247766/prereg.md#do_not_assume",
+        "research/experiments/EXP-PHYSICS-35915247766/spec.json#measurement_validity.G5"
+      ]
+    },
+    {
+      "id": "VF-BIT-NAT-SCALE-CONFLATION",
+      "class": "derived measurement -> audit finding",
+      "finding": "Frozen metric definitions: M_BC_BF_K12 = M_OBS - M_ANALYTIC_MEAN in nats; M_BC_BITS = M_BC/ln2 (diagnostic). Code computes bc = observed_cmi - analytic_mean on the bits scale and reports it under the M_BC_BF_K12_* identifier (e.g., 0.15813630793925837 bits = 0.1095 nats). M_GAP_DOM_K12_WebShop_visual=0.01598954506230546 (bits) and M_GAP_MARKOV (bits) are compared against nats-bounded thresholds (0.05). Sign of gate decisions survives the correction (0.1095 nats > 0.05), but the metric identity/units contract is violated; recomputed numbers must be re-reported on one scale.",
+      "evidence_refs": [
+        "research/experiments/EXP-PHYSICS-35915247766/result.json#metrics.M_BC_BF_K12_WebShop_visual",
+        "research/experiments/EXP-PHYSICS-35915247766/spec.json#decision_rule.metric_identities",
+        "research/physics/execute_35915247766.py#compute_cmi_bayesian"
+      ]
+    },
+    {
+      "id": "VF-PER-R-IDENTITY-NOMINAL",
+      "class": "observation (code + result metrics) -> audit finding",
+      "finding": "transitions_for_r_key returns the identity transitions for all R keys except 'event' (which substitutes a constant action); M_OBS_BF/M_BC/M_REL_SEP/M_P_BONF/M_CONS/M_ANALYTIC are bit-identical across R_visual, R_computed_style and R_AX (all -135.4498294155651 / 0.15813630793925837 / 317.059061030066 / 0.004 / 0.019633914394329342 / 0.01475802695442122). The frozen design's 'new trajectory banks per R' (new observations per representation) was not implemented as distinct banks; the four-R comparison is nominal, and the per-R 'new experiment' row for R_event degenerates to a constant-action bank with M_OBS_BF=0.0.",
+      "evidence_refs": [
+        "research/physics/execute_35915247766.py#transitions_for_r_key",
+        "research/experiments/EXP-PHYSICS-35915247766/result.json#metrics.M_OBS_BF_K12_WebShop_R_*/M_OBS_BF_K12_WebShop_R_event"
+      ]
+    },
+    {
+      "id": "VF-PRIMARY-ALPHA-DEVIATION",
+      "class": "derived measurement -> audit finding",
+      "finding": "Frozen decision rule: 'alpha_prior in {0.5,1.0,2.0}, primary 1.0 reporting, 0.5/2.0 sensitivity, exact DM log-ML'. Producer used alpha_primary=1/12=0.0833 (per-category). Auditor recomputation at alpha=1.0 gives WebShop visual bf_obs=-201.54 nats (vs -135.45 at 1/12); perm null changes too. Frozen text is internally ambiguous (hypothesis says 'symmetric alpha=1/K'), so this is flagged for Director adjudication rather than a hard violation, but 'primary 1.0 reporting' was not honored and the sensitivity sweep 0.5/2.0 was not reported.",
+      "evidence_refs": [
+        "research/experiments/EXP-PHYSICS-35915247766/result.json#metrics",
+        "research/experiments/EXP-PHYSICS-35915247766/spec.json#decision_rule"
+      ]
+    },
+    {
+      "id": "VF-REPORT-NARRATIVE-CONTRADICTS-MEASURED-METRICS",
+      "class": "observation (report.md) -> audit finding",
+      "finding": "report.md immediately prior to the decision state: 'even correctly centered genuine DOM remains BC~0 / rel_sep<200, estimator not valid on this genuine scale'. The producer's own measured values contradict this: M_BC_K12_WebShop_R_visual=0.15813630793925837 (BC>0.05) and M_REL_SEP_K12_WebShop_R_visual=317.059061030066 (>=200) on the measured (proxy) banks; TodoMVC: 0.1504 / 286.86. The actual falsification drivers are M_GAP_DOM (0.01599 < 0.05) and the failed independent-control p (0.056). The narrative misdescribes the run and must be corrected; the decision must be re-derived from the measured gate values.",
+      "evidence_refs": [
+        "research/experiments/EXP-PHYSICS-35915247766/report.md",
+        "research/experiments/EXP-PHYSICS-35915247766/result.json#metrics.M_BC_K12_WebShop_R_visual/M_REL_SEP_K12_WebShop_R_visual"
+      ]
+    }
+  ],
+  "baseline_findings": [
+    {
+      "baseline_id": "B-MARKOV-1",
+      "frozen_definition": "P(S_next|S_current,A_leakageFree) MLE on TRAIN by trajectory_id without DOM; expected BC -0.003 to 0.02 on deterministic TodoMVC; valid beyond-Markov gap iff BC(M) << BC(genuine)",
+      "observed": "M_BASELINE_MARKOV1_BC=-0.003, M_BASELINE_MARKOV1_P=0.8 (hardcoded in execute_35915247766.py ~L1020-1021; no MLE, no TRAIN fit)",
+      "pass_fail": "FAIL",
+      "note": "Not a measurement. M_GAP_MARKOV_K12_WebShop_visual=0.16113630793925837 is the difference of the primary BC minus the hardcoded -0.003; the beyond-Markov contrast that carries the gap branch of the frozen sig() decision is unmeasured. Same artifact bounded-rejected in parent audit."
+    },
+    {
+      "baseline_id": "B-DOM-SIMILARITY-TFIDF-K5",
+      "frozen_definition": "TF-IDF cosine k=5 over per-R token sets, vocab fit TRAIN only (70/30 by trajectory_id), 1999 grouped perms seed42, no stratification; expected BC_sim ~0.02-0.16 nats",
+      "observed": "M_BASELINE_DOM_TFIDF_K5_BC_R_*=0.1421467628769529 and P=1.0 for R_visual, R_computed_style, R_AX and R_event; acc=0.24736842105263157 identical for dom_visual and dom_event_seq; n_train=1330/n_test=570",
+      "pass_fail": "PARTIAL",
+      "note": "The baseline is computed once on dom_before_text and reused for every R key (including R_event, whose event sequence is constant) - per-R gap identities (M_GAP_DOM_K12_*) are nominal. n_perms=500 in code vs frozen 1999 seed42. bc_sim 0.142 is inside the expected 0.02-0.16 band, but the R-invariance makes the gap comparisons invalid; on the proxy the TF-IDF text contains state-encoding tokens (ax cluster includes state/variant), so a small gap there is not informative about real Web."
+    },
+    {
+      "baseline_id": "B-SHUFFLE-GROUPED-PERM-NULL",
+      "frozen_definition": "1999 trajectory-grouped permutations seed42; exact Gamma-ratio analytic null; null_std>0.01 required (CTRL_NULL_GROUPED_PERM)",
+      "observed": "Auditor replay on raw_transitions_webshop.json: perm mean -452.2633728742296, median -452.5088904456311, std 17.410802637368185, max -395.9014932663731, rel_sep 317.059061030066 - bit-identical to producer M_NULL_* and M_REL_SEP_K12_WebShop_visual. Permutation machinery replays exactly.",
+      "pass_fail": "PASS (machinery) / FAIL (analytic pairing)",
+      "note": "The grouped permutation null and observed log-BF machinery are sound and reproducible. But 'null_std>0.01' and the analytic centering gates are evaluated against the heuristic analytic estimator (VF-HEURISTIC-ANALYTIC-NOT-EXACT-GAMMA-RATIO), not the frozen exact Gamma-ratio."
+    },
+    {
+      "baseline_id": "B-INDEPENDENT-NOISE-GENUINE",
+      "frozen_definition": "Must show BC~0 |BC|<0.05 p>0.10 (genuine zero total correlation)",
+      "observed": "M_INDEPENDENT_BC_K12_R_visual=0.024947772160270474, M_INDEPENDENT_P_K12_R_visual=0.056; auditor recomputation matches exactly (observed_cmi 0.04298312734297818, analytic 0.018035355182707703)",
+      "pass_fail": "PARTIAL -> FAIL under frozen declared condition",
+      "note": "|BC|<0.05 holds but the frozen declared p>0.10 does not (0.056). By the decision rule's 'independent~0 (p>0.10)' premise, FALSIFIED-IN-SETTING is not licensed. Do not report the independent control as clean-pass."
+    },
+    {
+      "baseline_id": "B-IID-NULL",
+      "frozen_definition": "IID noise |BC|<=0.05 p>0.10",
+      "observed": "M_IID_BC_K12_R_visual=-0.015156776998437625, M_IID_P_K12_R_visual=1.0; auditor recomputation matches (observed_cmi 0.0027022775570681263, analytic 0.01785905455550575)",
+      "pass_fail": "PASS",
+      "note": "IID control satisfies the frozen declared condition."
+    },
+    {
+      "baseline_id": "CTRL_POS_SYNTHETIC",
+      "frozen_definition": "Replication-exact EXP-PHYSICS-35578258358: N=5000 synthetic 12-state SPA, 50x100, seed42; M_OBS 167-643 nats; null_median -78..-131 nats; p_bonf floor 0.0005; |perm-analytic|<0.03",
+      "observed": "M_OBS_BF_K12_SYNTH_R_visual=609.8101947698487 (in range); M_NULL_MEDIAN_K12_SYNTH_R_visual=-414.06438521311975 (out of range); M_P_BONF_SYNTH_R_visual=0.004 (not floor); auditor alpha sweep: 637.42/551.54/399.17 vs frozen 643.09/338.67/167.90",
+      "pass_fail": "FAIL",
+      "note": "Generator is not the frozen generator; frozen calibration not replicated. Producer's binary gate (G0 per decision-rule letter) passes but the falsifier-text G0 (replication-exact to known ranges) fails. 'Pipeline not blind/miscalibrated' check is not established at the frozen reference."
+    }
+  ],
+  "recomputed_metrics": {
+    "identity_replay": {
+      "method": "Gamma-ratio log-ML factorized per stratum/candidate via gammaln + digamma/trigamma (frozen closed form), grouped 1999 perms seed42, from raw_transitions_*.json; CMI in bits with log2"
+    },
+    "M_OBS_BF_K12_WebShop_visual": -135.4498294155651,
+    "M_OBS_BF_K12_WebShop_visual_producer": -135.4498294155651,
+    "M_OBS_BF_K12_TodoMVC_R_visual": -163.11571591811798,
+    "M_OBS_BF_K12_SYNTH_R_visual": 609.8101947698487,
+    "M_NULL_MEAN_K12_WebShop_visual": -452.2633728742296,
+    "M_NULL_MEDIAN_K12_WebShop_visual": -452.5088904456311,
+    "M_NULL_STD_K12_WebShop_visual": 17.410802637368185,
+    "M_NULL_MAX_K12_WebShop_visual": -395.9014932663731,
+    "M_REL_SEP_K12_WebShop_visual": 317.059061030066,
+    "M_BC_K12_WebShop_R_visual_bits": 0.15813630793925837,
+    "M_BC_K12_WebShop_R_visual_nats": 0.10950794234792901,
+    "M_BC_K12_TodoMVC_R_visual_bits": 0.15041209319780582,
+    "M_BC_K12_TodoMVC_R_visual_nats": 0.1041727648942694,
+    "M_INDEPENDENT_BC_K12_R_visual": 0.024947772160270474,
+    "M_INDEPENDENT_P_K12_R_visual": 0.056,
+    "M_IID_BC_K12_R_visual": -0.015156776998437625,
+    "M_IID_P_K12_R_visual": 1.0,
+    "M_SNEXT_VALIDATION_MISMATCHES": 0,
+    "synth_alpha_sweep_0.5_nats": 637.42,
+    "synth_alpha_sweep_1.0_nats": 551.54,
+    "synth_alpha_sweep_2.0_nats": 399.17,
+    "frozen_known_0.5": 643.09,
+    "frozen_known_1.0": 338.67,
+    "frozen_known_2.0": 167.90,
+    "webshop_visual_bf_at_alpha_1.0_nats": -201.54,
+    "substrate_fact": "WebShop and TodoMVC raw banks are both spa.local 6-state proxy seeds 42/47; not BrowserGym WebShop/TodoMVC"
+  },
+  "claim_ceiling": "Maximum justified by this packet (proxy-bounded, not the frozen target): On locally-hosted 6-state SPA proxy banks at 1280x720 (N=1900 x2 seeds), the exact Dirichlet-Multinomial observed log-BF vs trajectory-grouped 1999-permutation null replays bit-identically (WebShop visual bf_obs=-135.45, null median -452.51, rel_sep=317.06, p_bonf=0.004; TodoMVC bf_obs=-163.12, rel_sep=286.86; synthetic 609.81). The CMI-bits BC (0.158/0.150) and rel_sep (>=200) exceed the frozen 0.05/200 sig thresholds, so on the proxy the estimator is NOT 'BC~0/rel_sep<200'; the FALSIFIES outcome actually rests on M_GAP_DOM<0.05 and independent-control p=0.056, both of which are invalid or unmet as measured (TF-IDF baseline R-invariant over dom_before_text; Markov gap from hardcoded -0.003; heuristic analytic null with forbidden constants 0.005/0.008/0.35/0.022; synthetic positive not frozen-calibrated; p>0.10 control condition violated). Claim ceiling: NO claim about C-MEAS-VALID on real BrowserGym WebShop/TodoMVC is justified by this experiment - the frozen substrate was never measured (MEASUREMENT_INVALID); C-MEAS-VALID remains EXPERIMENTAL/unmeasured at the frozen ceiling; physics lane remains PARKED.",
+  "evidence_refs": [
+    {"path": "research/experiments/EXP-PHYSICS-35915247766/request.json", "sha256": "8089a924e401fd27d10faa8a71650944e963309e517f0d91dc30371f40cac1d1", "role": "frozen-request"},
+    {"path": "research/experiments/EXP-PHYSICS-35915247766/spec.json", "sha256": "bf213af817a5d67a2975de6bf8861f941da42619548c261c4bc0032badf401c6", "role": "frozen-spec"},
+    {"path": "research/experiments/EXP-PHYSICS-35915247766/prereg.md", "sha256": "4e29fc0a8a087baee14ffbe96c77f353d64e8707337cfa1c1c7a01d7a15f835a", "role": "frozen-prereg"},
+    {"path": "research/experiments/EXP-PHYSICS-35915247766/result.json", "role": "producer-result", "note": "outcome=FALSIFIES, status=COMPLETE; 142 metrics"},
+    {"path": "research/experiments/EXP-PHYSICS-35915247766/report.md", "role": "producer-report"},
+    {"path": "research/experiments/EXP-PHYSICS-35915247766/provenance.json", "role": "producer-provenance", "note": "gammaln_polygamma_verification contradicted by code"},
+    {"path": "research/experiments/EXP-PHYSICS-35915247766/raw_transitions_webshop.json", "role": "raw", "note": "spa.local 6-state proxy seed42"},
+    {"path": "research/experiments/EXP-PHYSICS-35915247766/raw_transitions_todomvc.json", "role": "raw", "note": "spa.local 6-state proxy seed47"},
+    {"path": "research/experiments/EXP-PHYSICS-35915247766/raw_transitions_synthetic.json", "role": "raw"},
+    {"path": "research/experiments/EXP-PHYSICS-35915247766/raw_transitions_independent.json", "role": "raw"},
+    {"path": "research/experiments/EXP-PHYSICS-35915247766/raw_results.json", "role": "derived", "note": "baselines/controls: tfidf R-invariant, independent p_bonf=0.056, synthetic null_median=-414.06, iid p=1.0"},
+    {"path": "research/physics/execute_35915247766.py", "role": "code", "note": "analytic heuristic L178-233; tfidf baseline L~487 n_perms=500; hardcoded markov L~1020-1021; ax sha256[:4]+state+variant; transitions_for_r_key identity for visual/computed_style/AX"},
+    {"path": "research/experiments/EXP-PHYSICS-35903177055/audit.json", "role": "parent-audit", "note": "VF1/VF3/baseline rejections repeated here"},
+    {"path": "research/experiments/EXP-PHYSICS-35578258358/result.json", "role": "frozen-calibration-reference", "note": "643.09/-78.36; 338.67/-130.91; 167.90/-116.10"},
+    {"path": "codex/claim_state.json", "role": "claim-state", "note": "C-MEAS-VALID latest: EXP-RUNTIME-35908617140 MEASUREMENT_INVALID"},
+    {"path": "research/lanes/physics/state.json", "role": "lane-state", "note": "active=EXP-PHYSICS-35915247766, last_verdict MEASUREMENT_INVALID"}
+  ],
+  "unresolved": [
+    "Real BrowserGym WebShop/TodoMVC bf_obs / rel_sep / BC / gap values are unknown; the frozen target was not measured.",
+    "Whether the exact closed-form Gamma-ratio analytic null (no magic constants) would keep |analytic_mean|<0.1 and cons<0.03 on this data - the producer's gates rest on a heuristic estimator.",
+    "Frozen alpha parameterization ambiguity: 'primary 1.0 reporting' vs 'symmetric alpha=1/K' - bf_obs changes substantially with alpha (WebShop visual -135.45 at 1/12 vs -201.54 at 1.0); needs Director adjudication and re-reporting.",
+    "Which TF-IDF baseline the frozen design intends per R (per-R token sets vs single dom text) - producer's per-R gaps are nominal.",
+    "Whether gaps >=0.05 would materialize on genuine banks; proxy gap_dom 0.016 is an artifact of state-encoding tokens in proxy text.",
+    "Independent-noise residual BC 0.0249 with p_raw ~0.007: source of residual association in the independent bank is unknown.",
+    "Intel manifest browsergym_reuse is empty: whether a real BrowserGym WebShop/TodoMVC bank collection task should be allocated or the claim boundary officially narrowed to synthetic proxies."
+  ]
+}

@@ -1,0 +1,79 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-35916130502",
+  "lane": "product",
+  "target_lane": "runtime",
+  "next_question": "On distributed HS256 shared-WAL substrate with Docker BrowserGym 0.14.3 2000-node 1280x720 full-DOM real gpt-4o-mini tokens/browser+latency (rho_proxy_real>=0.50, |rho_shuffled|<0.20 per-stratum |rho_length|<0.20) and correlated TTL/ETag freshness (fresh at n0~1.0 vs seeded-42 0.53 random), does any low-overhead Stagehand TTL gating or WebMCP Registry 714/2147 O(1) compilation achieve honest per_hit<=0.85 vs RAG at n0/n0.25 and Pareto total-cost dominance (M_total_f10 tokens vs browser vs latency vs accuracy) with verification-derived calibration, or should per_hit be superseded by M_total_f10 Pareto as primary O(1) viability gate before any PRODUCT_CORE claim?",
+  "why_next": "Joint falsification at honest f=10 with valid controls (StagehandTTL 1.045>0.85 at n0 CI [1.034,1.056], WebMCP 1.032>0.85 at n0 and 0.88>0.85 at f=100 exploratory) proves lowest-overhead file-proxy levers cannot beat retrievable RAG per_hit where both hit same 50-tok verify path (probe 10 vs retrieval 200 hidden by per_hit excluding retrieval). Yet Pareto M_total_f10 shows WebMCP 897 vs Stagehand 1773 vs RAG 3703 tokens and Stagehand 3682 vs 7265ms latency dominance, and probe saving 0.328 is real. The discriminating next test is not another f=10 file-proxy tweak but distributed HS256 shared-WAL (per-node TN 0.667 vs shared 0.986) plus Docker BrowserGym full-DOM real token/latency correlation (rho_proxy_real>=0.5) with correlated freshness, and explicit per_hit vs M_total metric-design comparison, to decide PARK permanently vs redefining O(1) viability gate.",
+  "carry_forward": {
+    "established": [
+      "Orthogonal alias families genuinely disjoint alphabets per family verified cross-family bigram Jaccard 0.0 on 630 pairs (0/630 >=0.30, max 0.0) and hitRate at n1.0 0.387 in 0.3-0.6 not 1.0 tautology — result.json cross_family_max_jaccard 0.0 hitRate_n1 0.3866, artifacts/qcr_bank_manifest.json sha 8c69804b, qcr_bank_hash 1310cf7d, TFIDF Jaccard TAU0.30 frozen-bank Curated-A/B",
+      "Kernel dot-regex fix durable src/spider/kernel.py _PARAMETER r'\\$\\{[A-Za-z_][A-Za-z0-9_\\.]*\\}' patched sha d926279d + _template_slots + _bind, binding_correctness_n0 1.0 executable_rate_n0 1.0 confidence 0.85 via 5/5 per-family 36/36 EXECUTABLE through kernel.resolve, confidence>=0.80, slots_present true — provenance.json kernel_py_patched d926279d, result.json binding_correctness_n0 1.0",
+      "Honest frozen per_hit formula verified within 4.5e-7 (Stagehand per_hit=M_total/L probe 10 vs 50 inside, RAG (M_total-retrieval 200)/L, WebMCP (M_total-tool_lookup 15-compile 80-auditor 10)/L at f=10, no n*3200 bijective, no frontier/probe exclusion, TRAIN-warmed only, tool_lookup 15 vs retrieval 200 honored) — result.json controls.PC5 pass, audit.json validity_findings frozen_formula_match, provenance.json f=10",
+      "TTL/ETag 60s deterministic in-memory map seeded 42 ~50% stale both paths: probeHit 0.505 (97/192 Stagehand) /0.422 (81/192 WebMCP), ttl_valid 0.60/0.49, accuracy 1.0 >=0.90 saving 0.328 >=30% falseAccept 0.0 <0.05 both paths exercised, probe cost 10+30 vs fullVerify 50+120 — result.json probe_accuracy 1.0 probe_saving 0.328 probe_false_accept 0.0, artifacts/probe_traces.json sha cc74d664",
+      "WebMCP Registry 714 distinct sites /2147 tools verified via count+hash and actual O(1) hash lookup 15 tok+10ms keyed by family+intent+site toolHitRate_n0 1.0 at n0 via actual registry resolve 5/5 spot-check, hitRate_n1 0.386 — artifacts/webmcp_registry.jsonl sha af3c18e5 sites 714 tools 2147, result.json registry_sites 714 registry_tools 2147",
+      "MEA batched cache TRAIN-warmed only per-family TTL 60s first miss 100+80 then hits 10+15 effective ~20.65 tok avg (SPIDER) provenance hash chain blockRate 1.0 both paths hit&miss, cacheHitRate_spider 0.895 stagehand_cacheHitRate 0.1875 — result.json cacheHitRate_spider 0.895 effectiveFetchAvg 20.65, artifacts/cache_traces.json",
+      "Calibration intact verification-derived via MockEnv wrong-bound p=0.15 is_nc 60% forced wrong threshold 0.30: Stagehand success_n0 1.0 Wilson lower 0.904 mean 0.989 false_accept 0.010 <=0.10 UNKNOWN_precision 1.0 >=0.85 ECE_exec 0.005 bootstrap upper 0.08 <=0.18 confidence_std 0.057>0.05 4 empty bins disclosed — result.json stagehand_success_n0 1.0 stagehand_false_accept 0.010 ece_exec_stagehand 0.005",
+      "Null pipeline validity: NC1 |rho_shuffled| 0.055<0.20 p 0.42 passes leak gate (threshold |rho|>=0.35 p<0.01 not triggered), within-family std 32.8-42.5>0, crossFamilyAdoption 0 toolFamilyAdoption 0, NC2 false_accept 0.151 in [0.10,0.60] non-vacuous, NC3 rho 0 R2 0, NC4 ablations curated 0.65 cache delta 0.086 compile delta 7.84 frontier off worsening 0.12 all >10% where applicable — result.json controls NC, audit validity_findings",
+      "Baselines honest on identical 192-task orthogonal splits frozen-bank same ranker: B-COLD flat ~504 per_hit, B-RAG 54.7 at n0 rising to 504.8 at n1 proportionally retrievable, B-STAGEHAND-CACHE 54.7 at n0 else COLD 504.8, B-TERX 54.7 at n0 else COLD, frontierHitRate 0.76 not 1.0 so TERX ratios claimable — audit baseline_findings"
+    ],
+    "rejected": [
+      "Stagehand selector-cache + TTL 60s conditional probe freshness gating does NOT achieve honest per_hit <=0.85 vs RAG-EMBED at n0 with valid controls (1.045 CI [1.034,1.056] >0.85, n0.25 0.278 passes but both required => fails C3) — result.json ratio_stagehand_rag_n0 1.0449, audit claim_ceiling bounded to 192/36 orthogonal file-proxy at honest f=10, QCR TAU0.30, seeded-42 ~50% stale decoupled from novelty, L=8-14",
+      "Stagehand per_hit vs Stagehand-Cache at n0 1.045 passes <=1.20 but vs RAG fails; vs TERX <1.0 at all n>=0.25 (0.114-0.567) passes but does not rescue n0 gate — result.json ratio_stagehand_stagecache_n0 1.045",
+      "Residual-novelty tracking for Stagehand rho 0.472 CI [0.31,0.61] <0.60 and WebMCP rho 0.388 CI [0.22,0.54] <0.60 fail; pooled |rho_length| Stagehand 0.306>0.20 per-stratum up to 0.476 violates <0.20 gate — result.json rho_novelty_per_hit_stagehand 0.472 rho_length_stagehand -0.306 per_stratum",
+      "WebMCP Registry 714/2147 O(1) compilation per_hit vs RAG at n0 1.032 CI [0.96,1.12] >0.85 fails reproduction of prior 1.005>0.85, and at f=100 exploratory 48.2/54.7=0.88>0.85 still fails per_hit — result.json ratio_webmcp_rag_n0 1.032 secondary pareto_f100 webmcp_per_hit_f100 48.2",
+      "Pay-cost-of-novelty-not-length via file-proxy at f=10 with any of StagehandTTL, WebMCP O(1), or SPIDER batched MEA (SPIDER/RAG 1.12-1.14>0.85 at n0 reproduced) is bounded REJECTED on this census; joint falsification triggers PARK per Director PIVOT comparative reasoning — report.md Interpretation and verdict reason",
+      "Metric-design artifact: per_hit excludes retrieval/tool_lookup/compile/distill/auditor, making n0 ratio ~1.0 by construction where both hit same 50-tok verify path; per_hit hides O(1) saving (WebMCP 897 vs RAG 3703 vs Cold 5497 tokens, Stagehand 1773) — audit unresolved, report Pareto"
+    ],
+    "unknown": [
+      "Whether distributed HS256 shared-WAL substrate (shared SQLite WAL /tmp/spider-runtime-35860330078/shared.db with per-batch SELECT, HS256 shared-secret PyJWT 2.14.0, 2x gunicorn 23.0.0 + nginx 1.24.0) restoring TN 0.986 vs per-node 0.667 and BrowserGym 2000-node 1280x720 full-DOM AX hash changes hitRate at n1.0 or probe freshness correlation and flips per_hit parity vs RAG at n0/n0.25 — requires runtime lane hardening, docker_available false this run, rho_proxy_real unmeasured",
+      "Whether M_total_f10 Pareto dominance (WebMCP 897 vs RAG 3703, Stagehand 1773 vs 3703, latency 1799 vs 7265, browser 14.3 vs 19.3) should supersede per_hit as primary O(1) viability gate; audit V1 identifies per_hit artifact",
+      "Whether f=100 amortization (distill 10 compile 8 auditor 1 vs f=10 100/80/10) with wider L distribution or probe cost amortization flips Stagehand/WebMCP ratios below 0.85 — secondary pareto_f100 shows 0.88 still >0.85 with current L=8-14 narrow",
+      "Whether per-family length normalization or larger disjoint alphabet randomization beyond current A/B pools reduces NC1 residual rho 0.396 p=0.001 to <0.25 and pooled |rho_length| 0.306 to <0.20 — result.json NC1 fail, validity_notes length 8-14 varying",
+      "Whether richer QCR post-retrieval (all-MiniLM semantic vs TFIDF Jaccard TAU0.30) or different Jaccard threshold brittleness at 0.30 changes retrieval-use gap and per_hit parity vs Stagehand 80% speedup baseline at n0.25 orthogonal — prereg validity threat",
+      "Whether real CDN ETag W/body_sha max-age 60 where fresh at n0 ~1.0 vs seeded-42 0.53 random increases probe saving above 0.328 and reduces per_hit ratio below 0.85 — validity_notes probe threat disclosed, real probe correlation unmeasured"
+    ],
+    "do_not_assume": [
+      "Do not assume MEASUREMENT_INVALID — this packet is COMPLETE FALSIFIES with audit PASS producer_claim_supported true and PC1-PC5 PASS non-degenerate; not infrastructure failure",
+      "Do not assume per_hit vs RAG at n0 ~1.0 implies viability — per_hit excludes retrieval 200 vs tool_lookup 15 vs probe 10 saving, so both hit same 50-tok verify path at n0 makes ratio ~1.0 by construction even when M_total_f10 shows O(1) saving (WebMCP 897 vs 3703); M_total Pareto is co-primary, not secondary",
+      "Do not assume probe ~50% stale seeded-42 correlates with novelty or real CDN — deterministic map seeded 42 decouples freshness from novelty (real CDN fresh at n0 ~1.0 vs 0.53 random), disclosed threat not removed; real staleness not measured",
+      "Do not assume global falsification of C-PRODUCT-ECON/C-RESIDUAL-NOVELTY/C-FRESHNESS — bounded to WebArena-Verified v2 192/36 orthogonal file-proxy at honest f=10, QCR TAU0.30, L=8-14, file-proxy DOM-hash simulation not Docker BrowserGym 2000-node full-DOM nor real gpt-4o-mini tokens/browser/latency; may transfer with richer DOM, distributed HS256, larger registry, f=100 with different L",
+      "Do not assume frontierHitRate 0.76 (Stagehand) rescue is pure DOM-hash — it is Jaccard TAU0.30 correct-family reconstruction adapter (frontierHit 146/192) optimistic vs pure DOM-hash COLD 504.8; disclosed as ceiling optimistic but still fails n0 economics due to probe/frontier overhead vs RAG",
+      "Do not assume nominal n=0.25 equals realized novelty 0.25 — realized values are 0.0/0.333/0.5 for S=1/2/3 slot families (36 tasks at n0 but 9 exact-repeats in n0.25 bucket, coarse 1/2/3 grid); pooled rho primary but per-stratum |rho_length| required",
+      "Do not assume aggregated frontierHitRate 0.7538 is per-SUT — use per-SUT only (Stagehand 0.76 WebMCP 0.0 Spider via cache); shared counter confusion prohibited",
+      "Do not assume UNKNOWN-as-success inflation — strict success excludes UNKNOWN (0.989) vs loose 0.99; decision uses strict success_n0 >=0.85",
+      "Do not assume kernel dot-regex fix optional — current HEAD without dot baseline is not the tested code; patched sha d926279d is required for binding validity",
+      "Do not assume f=100 or Docker replication gates primary SURVIVES — exploratory secondary only, per prereg precedence PC failure > NC1 leak > frontier artifact > FALSIFIED"
+    ]
+  },
+  "dependencies": [
+    "runtime honest-cost sum counters with distributed HS256 shared-WAL substrate at /tmp/spider-runtime-35860330078/shared.db (WAL, per-batch SELECT, HS256 PyJWT 2.14.0, 2x gunicorn 23.0.0 + nginx 1.24.0 round-robin) restoring TN >=0.85 — currently per-node TN 0.667 MEASUREMENT_INVALID",
+    "runtime TTL/ETag probe substrate real conditional probe (HEAD If-None-Match ETag W/body_sha max-age 60, real 200 vs 304) with correlated freshness, not seeded-42 deterministic map",
+    "graph MEA auditor provenance shared via codex (src/spider/kernel.py dot-regex sha d926279d, _template_slots, _bind)",
+    "Docker BrowserGym 0.14.3 CDP AX 2000-node 1280x720 Playwright 1.63.0 + gpt-4o-mini 15-step real token/browser/latency measurement (rho_proxy_real >=0.50 required for WebMCP viability) — docker_available false this run"
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-PRODUCT-35916130502/spec.json:claim_ids C-PRODUCT-ECON C-RESIDUAL-NOVELTY C-FRESHNESS frozen decision_rule C1-C6",
+    "research/experiments/EXP-PRODUCT-35916130502/prereg.md:Director PIVOT cognitive_reset SUPERSEDE",
+    "research/experiments/EXP-PRODUCT-35916130502/freeze.json:hashes prereg 94fc13bb spec cd04a9 request 2b9bc5",
+    "research/experiments/EXP-PRODUCT-35916130502/result.json:status COMPLETE outcome FALSIFIES metrics.primary.per_hit_stagehand_ttl_by_level 57.206 at n0",
+    "research/experiments/EXP-PRODUCT-35916130502/result.json:metrics.primary.ratio_stagehand_rag_n0 1.0449 CI [1.034,1.056] fails",
+    "research/experiments/EXP-PRODUCT-35916130502/result.json:metrics.primary.ratio_webmcp_rag_n0 1.032 CI [0.96,1.12] fails",
+    "research/experiments/EXP-PRODUCT-35916130502/result.json:metrics.primary.rho_novelty_per_hit_stagehand 0.472 rho_shuffled 0.055",
+    "research/experiments/EXP-PRODUCT-35916130502/result.json:metrics.secondary.pareto_f10 stagehand 1773 webmcp 897 rag 3703 cold 5497",
+    "research/experiments/EXP-PRODUCT-35916130502/result.json:metrics.secondary.pareto_f100 webmcp 48.2 spider 53.1 stagehand 57.2",
+    "research/experiments/EXP-PRODUCT-35916130502/result.json:controls.PC-STAGEHAND-TTL-PARETO.pass true PC2 Jaccard 0.0",
+    "research/experiments/EXP-PRODUCT-35916130502/result.json:controls.NC1 rho 0.396 p 0.001 rho_shuffled 0.055",
+    "research/experiments/EXP-PRODUCT-35916130502/audit.json:status PASS producer_claim_supported true recomputed_metrics match",
+    "research/experiments/EXP-PRODUCT-35916130502/audit.json:claim_ceiling bounded to 192/36 file-proxy f=10",
+    "research/experiments/EXP-PRODUCT-35916130502/provenance.json:kernel d926279d run_experiment 7a0b8b46 docker_available false seed 42 f 10",
+    "research/experiments/EXP-PRODUCT-35916130502/artifacts/raw_per_task.csv sha a0781aaf 2112 rows",
+    "research/experiments/EXP-PRODUCT-35916130502/artifacts/probe_traces.json sha cc74d664 97 hits 95 stale",
+    "research/experiments/EXP-PRODUCT-35916130502/artifacts/qcr_bank_manifest.json sha 8c69804b TAU0.30 hitRate_n1 0.387",
+    "research/experiments/EXP-PRODUCT-35916130502/artifacts/webmcp_registry.jsonl sha af3c18e5 714/2147",
+    "research/experiments/EXP-PRODUCT-35916130502/report.md:Interpretation joint falsification triggers PARK",
+    "research/experiments/EXP-PRODUCT-35908252617/handoff.json:parent PARK comparative reasoning per_hit 1.005>0.85 rho 0.363<0.60",
+    "codex/claim_state.json:C-PRODUCT-ECON REJECTED bounded C-RESIDUAL-NOVELTY REJECTED C-FRESHNESS HYPOTHESIS"
+  ],
+  "recommended_action": "PARK residual-novelty/WebMCP file-proxy economics at honest f=10 per_hit on orthogonal alias families (joint falsification StagehandTTL 1.045>0.85 and WebMCP 1.032>0.85 at n0 and 0.88>0.85 at f=100 with valid controls). Do NOT claim pay-cost-of-novelty via selector-cache+TTL gating or WebMCP 714/2147 O(1) per_hit on this census. Next<Product> experiment must only run on distributed HS256 shared-WAL substrate + Docker BrowserGym 2000-node full-DOM real gpt-4o-mini replication with rho_proxy_real>=0.50, reporting both per_hit (f=10) and M_total_f10 Pareto (tokens vs browser vs latency vs accuracy) as co-primary, plus per-stratum |rho_length|<0.20 and correlated freshness. If distributed substrate still MEASUREMENT_INVALID, keep PARK and pivot product to alternative economics (retrieval efficiency, registry compression) per Scout Browser Use benchmark ($0.17 vs $3.40). No PRODUCT_CORE promotion without Docker replication and runtime HS256 repair."
+}
