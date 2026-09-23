@@ -1,17 +1,17 @@
 {
   "lane": "graph",
   "human_paused": false,
-  "active_experiment_id": "EXP-GRAPH-35880048129",
-  "last_experiment_id": "EXP-GRAPH-35876306030",
+  "active_experiment_id": null,
+  "last_experiment_id": "EXP-GRAPH-35880048129",
   "last_verdict": "MEASUREMENT_INVALID",
   "continue_immediately": false,
-  "next_question": "After durably committing src/spider/kernel.py distill_parameterized (single-prefix _common_prefix_and_suffix, distinct slot per field-path via _field_path_to_slot_name/_sanitize_slot, field-path relevance filter url/body.*/headers.* only via _is_allowed_path, Jaccard >=0.75 constant-anchor via _structure_similarity, confidence 0.90) verified by grep >=1, sha256 match to HEAD, git diff base_sha..HEAD nonempty, and tests/test_kernel_param_inherit.py passing B1/B4/D1/E1/C2/B2/B3/B5, and loading WebArena-Verified v2 census from pre-existing durable source (data/webarena_verified_v2.json pre-existing or Docker am1n3e/webarena-verified-shopping@sha256:3e8cb9b945 or static export sha256:d6527566... with pinned hash) with >=10 valid B tasks family-stratified zero-overlap (value_set_A \u2229 B = \u2205), does single-family add_to_cart pilot achieve EXECUTABLE>=0.75 (Wilson lower >=0.65) and binding correctness>=0.90 (lower >=0.80) with zero unsubstituted ${} templates via deterministic _matches, false_accept<=0.10 UNKNOWN in [0.00,0.15] ECE<=0.15?",
+  "next_question": "After repairing gunicorn 23.0.0 2x sync + nginx 1.24.0 round-robin real-request substrate (validate nginx -t syntax, include mime.types, daemon off, non-privileged listen 18980, upstreams 127.0.0.1:18971/18972, X-Worker-Pid >=10 per worker, If-None-Match/ETag->304 verified, per-batch SELECT commitment at /tmp/spider-runtime-35784838353/shared.db with WAL) and provisioning shared store (Redis or shared SQLite WAL with PRAGMA journal_mode=WAL synchronous=NORMAL) with n_non304_shared>=800 stratified, does C-FRESHNESS orthogonality at delta=0.15 achieve C1 detection TN>=0.85 (Wilson lower>0.75, per-endpoint session_status>=0.85, delta vs per-node 0.667 >=0.15) and maintain stratified r within [-0.15,0.15] (CI upper<0.15, TOST p_upper<0.05) with confound |r|>=0.90, thereby unblocking Graph/Runtime freshness-gated inheritance and delta-repair?",
   "promotion_ready": false,
-  "consecutive_failures": 7,
-  "updated_at": "2026-09-23T20:20:26.378141+00:00",
-  "last_failure_retryable": false,
-  "last_handoff_sha256": "4f6505467e18038fd8e04987c4d7665429b8a3034f3f066ed6062e4d4b1d7487",
-  "same_failure_count": 7,
-  "last_failure_fingerprint": "32fb61131a26107aaf831564",
-  "last_failure_control_revision": "076dc77b91c1d12ea39cb22825d01d847c1810ff7d44ed432bd5b1813468f5ae"
+  "consecutive_failures": 0,
+  "updated_at": "2026-09-23T20:46:23.060627+00:00",
+  "last_failure_retryable": null,
+  "last_handoff_sha256": "7e120ac7b78fee55ed3059949258fe2163c15fa85ea758f1e97ee48cbbef2b73",
+  "same_failure_count": 0,
+  "last_failure_fingerprint": null,
+  "last_failure_control_revision": null
 }
