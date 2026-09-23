@@ -1,0 +1,112 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-FRONTIER-35915275774",
+  "lane": "frontier",
+  "status": "MEASUREMENT_INVALID",
+  "producer_claim_supported": false,
+  "required_fixes": [
+    "Live BrowserGym 1280x720 CDP Accessibility.getFullAXTree AX>10 substrate must be available (playwright, browsergym-core, agentlab installed) for confirmatory live heterogeneous test per PC-BROWSERGYM-HEALTH gate. Current run used synthetic fallback only.",
+    "Honest cost permutation |rho_shuffled| for H-HIERARCHICAL-CF = 0.230 exceeds frozen 0.20 threshold (p=0.176). Fix harness to ensure |rho|<0.20 p>=0.20 for all pipelines, or disclose as known limitation with within-f std>0 verified.",
+    "OpenAPI spec coverage must be verified against genuine WebArena-Verified v2 / WebGym 300k task paths, not synthetic /random/alias* paths. Current spec has 14 paths with 40/40 prefix coverage on synthetic fixture only.",
+    "Routing normalization diff must be demonstrated on task-relevant paths (>=20% pairs before!=after on actual task path templates), not primarily on synthetic /random/ paths."
+  ],
+  "validity_findings": [
+    "PC-BROWSERGYM-HEALTH FAILS: Live BrowserGym unavailable (playwright not_installed, browsergym-core not_installed, agentlab not_installed). Census 4 envs x3 retries all failed with ModuleNotFoundError. Experiment ran on synthetic fallback (fixture sha 83b7c52d) only. Per frozen falsifier: PC failure -> MEASUREMENT_INVALID regardless of pooled metrics. No confirmatory live heterogeneous inference justified.",
+    "PC-HONEST-COST-SANITY FAILS: Permutation |rho_shuffled| for H-HIERARCHICAL-CF = 0.230 (p=0.176) exceeds frozen threshold 0.20 (p>=0.20 required). Within-f std>0 verified (min 1.02), not n*3200 bijective. Marginal exceedance due to sampling noise but violates frozen gate. Producer correctly reported FAIL.",
+    "PC-OPENAPI-COVERAGE passes on synthetic fixture (40/40 prefix covered, spec fetched 200 OK 1350 bytes, 14 paths parsed, 3 HATEOAS links followed) but spec paths are /random/alias* and /api/*, not verified against genuine WebArena/WebGym task paths. Director mandate requires spec covering >=70% task paths on live heterogeneous sample.",
+    "PC-ROUTING-DIFF passes threshold (14/58 pairs differ) but 44/58 are no-ops on /random/alias* paths; only 14 differ via version-collapse on /vN/ paths. Not demonstrated on live task-relevant routing templates per Director comparative reasoning.",
+    "PC-COMPILATION-DSM-BUILT passes: 4 workflows (header/body/auth/mixed), 5-8 steps each, DSM 99% TreeWalker compression (pruned_node_ratio 0.99), stable locator ranking (role/name/testId/css/xpath), deterministic JSON IR, Shanghai HITL patchable flags, distinct IR hashes, compile cost logged.",
+    "PC-ENDPOINT-CATALOG-BUILT passes: 51 centroids, Jaccard>=0.6 agglomerative clustering over method/path/header/body/auth_scope, centroid TFIDF mean, families cover header/body/method/query, OpenAPI enums used, distinct manifest hash.",
+    "PC-HIERARCHICAL-BUILT passes: 84 themes, 168 episodes matching registry size, episode->component->theme structure, Jaccard>=0.6 clustering.",
+    "No oracle leak detected (NC-ORACLE-LEAK passes): derived_context contains only allowed keys; compiled IR/endpoint catalog/hierarchical built train-only; cross-family forbidden verified; confidence derived softmax not constant.",
+    "Stagehand isolation passes (NC-STAGEHAND-ISOLATION): DOM-hash baseline 0/40 on alias-OOD, not hardcoded.",
+    "Bijective cost check passes (NC-BIJECTIVE-COST): honest_cost not bijective with n*3200.",
+    "Joint manifest shows complementary_frac=0.0, selection_log empty - joint composition not fully exercised in exploratory pipeline (B-JOINT-FETCH used fixed k=2 per task)."
+  ],
+  "baseline_findings": [
+    "B-EXACT-MATCH-CF: 20/40=0.500 pooled (Wilson [0.352,0.648]), binom p=1.9e-10 vs 0.10. Per-family: header 10/10, body 10/10, auth 0/10, mixed 0/10. ECE 0.237. Calibrates 0.10 binomial null as expected.",
+    "B-FLAT-TFIDF-K5-CF: 20/40=0.500 pooled (Wilson [0.352,0.648]), identical to exact-match. Per-family same pattern. ECE 0.226. Strong flat baseline for McNemar comparison.",
+    "H-HIERARCHICAL-CF: 20/40=0.500 pooled (Wilson [0.352,0.648]), identical to flat/exact. Per-family same pattern. ECE 0.226. Honest cost permutation rho=0.230 (p=0.176) marginally exceeds threshold.",
+    "B-COMPILED-DSM: 20/40=0.500 pooled (Wilson [0.352,0.648]), identical to baselines. Per-family: header 10/10, body 10/10, auth 0/10, mixed 0/10. ECE 0.219. Compilation IR manifest valid. Did NOT break bounded ceiling on synthetic data.",
+    "B-ENDPOINT-CATALOG: 20/40=0.500 pooled (Wilson [0.352,0.648]), identical to baselines. Per-family: header 10/10, mixed 0/10. ECE 0.226. Catalog manifest valid. Did NOT break bounded ceiling on synthetic data.",
+    "B-JOINT-FETCH (exploratory): 40/40=1.000 pooled (Wilson [0.912,0.912]), binom p=1e-40. Per-family: header 10/10, auth 10/10, mixed 10/10. ECE 0.110. Consistent with prior synthetic joint result (EXP-FRONTIER-35903208514: 40/40=1.0). Not validated on live heterogeneous sample.",
+    "B-RANDOM-K5-CF: 7/40=0.175 pooled (Wilson [0.087,0.320]), binom p=0.100 vs 0.10 (NS). Chance calibration as expected.",
+    "B-STAGEHAND-DOMHASH: 0/40=0.000 pooled (Wilson [0.000,0.088]). DOM-hash isolation confirmed.",
+    "McNemar tests: All single-candidate shootout pipelines vs B-EXACT-MATCH p=1.0 (identical outcomes); vs B-FLAT p=1.0. No discriminability between compilation, endpoint, hierarchical, flat, exact on this synthetic fixture."
+  ],
+  "recomputed_metrics": {
+    "pooled_correct_rate": {
+      "B-EXACT-MATCH": {"value": 0.5, "n": 40, "correct": 20, "wilson_low": 0.35199, "wilson_high": 0.64801, "binom_p_vs_0.10": 1.87e-10},
+      "B-FLAT-TFIDF-K5-CF": {"value": 0.5, "n": 40, "correct": 20, "wilson_low": 0.35199, "wilson_high": 0.64801, "binom_p_vs_0.10": 1.87e-10},
+      "H-HIERARCHICAL-CF": {"value": 0.5, "n": 40, "correct": 20, "wilson_low": 0.35199, "wilson_high": 0.64801, "binom_p_vs_0.10": 1.87e-10},
+      "B-COMPILED-DSM": {"value": 0.5, "n": 40, "correct": 20, "wilson_low": 0.35199, "wilson_high": 0.64801, "binom_p_vs_0.10": 1.87e-10},
+      "B-ENDPOINT-CATALOG": {"value": 0.5, "n": 40, "correct": 20, "wilson_low": 0.35199, "wilson_high": 0.64801, "binom_p_vs_0.10": 1.87e-10},
+      "B-JOINT-FETCH": {"value": 1.0, "n": 40, "correct": 40, "wilson_low": 0.91238, "wilson_high": 0.91238, "binom_p_vs_0.10": 1.0e-40},
+      "B-RANDOM-K5-CF": {"value": 0.175, "n": 40, "correct": 7, "wilson_low": 0.08745, "wilson_high": 0.31950, "binom_p_vs_0.10": 0.0995},
+      "B-STAGEHAND-DOMHASH": {"value": 0.0, "n": 40, "correct": 0, "wilson_low": 0.0, "wilson_high": 0.08762, "binom_p_vs_0.10": 1.0}
+    },
+    "per_family_correct": {
+      "B-COMPILED-DSM": {"header": 10, "body": 10, "auth": 0, "mixed": 0},
+      "B-ENDPOINT-CATALOG": {"header": 10, "body": 10, "auth": 0, "mixed": 0},
+      "B-JOINT-FETCH": {"header": 10, "body": 10, "auth": 10, "mixed": 10}
+    },
+    "ece_5bin": {
+      "B-EXACT-MATCH": 0.2371,
+      "B-FLAT-TFIDF-K5-CF": 0.2258,
+      "H-HIERARCHICAL-CF": 0.2258,
+      "B-COMPILED-DSM": 0.2192,
+      "B-ENDPOINT-CATALOG": 0.2258,
+      "B-JOINT-FETCH": 0.1099,
+      "B-RANDOM-K5-CF": 0.0773,
+      "B-STAGEHAND-DOMHASH": 0.1699
+    },
+    "honest_cost": {
+      "perm_rho_max": 0.23038,
+      "perm_rho_p_value": 0.1758,
+      "within_f_std_min": 1.0198,
+      "amortized_compilation_f10_usd": 0.0177,
+      "browsing_steps_mean": 4.9
+    },
+    "mcnemar": {
+      "B-COMPILED-DSM_vs_B-EXACT-MATCH": {"p": 1.0, "pass": false},
+      "B-COMPILED-DSM_vs_B-FLAT": {"p": 1.0, "pass": false},
+      "B-ENDPOINT-CATALOG_vs_B-EXACT-MATCH": {"p": 1.0, "pass": false},
+      "B-ENDPOINT-CATALOG_vs_B-FLAT": {"p": 1.0, "pass": false}
+    },
+    "routing_diff": {
+      "pairs_total": 58,
+      "pairs_differ": 14,
+      "fraction_differ": 0.241,
+      "note": "Diff driven by version-collapse on /vN/ paths; 44/58 no-ops on /random/alias* paths"
+    },
+    "openapi_coverage": {
+      "spec_paths": 14,
+      "prefix_covered": 40,
+      "tasks_total": 40,
+      "note": "Coverage on synthetic /random/alias* fixture paths, not verified on WebArena/WebGym task paths"
+    }
+  },
+  "claim_ceiling": "Synthetic-only bounded ceiling replicated: all single-candidate correct-family pipelines (compilation DSM, endpoint catalog, hierarchical, flat TFIDF, exact-match) achieve 20/40=0.500 pooled (Wilson [0.352,0.648]), per-family header 10/10 body 10/10 auth 0/10 mixed 0/10, ECE ~0.22-0.24. Joint exploratory achieves 40/40=1.000 on synthetic fixture (consistent with prior EXP-FRONTIER-35903208514). Live heterogeneous BrowserGym 1280x720 CDP AX>10 validation NOT achieved due to substrate unavailability. C-SEMANTIC-RESOLVE remains EXPERIMENTAL synthetic ceiling; no live validation; no promotion.",
+  "evidence_refs": [
+    "research/experiments/EXP-FRONTIER-35915275774/result.json",
+    "research/experiments/EXP-FRONTIER-35915275774/raw_evidence.json",
+    "research/experiments/EXP-FRONTIER-35915275774/derived_metrics.json",
+    "research/experiments/EXP-FRONTIER-35915275774/provenance.json",
+    "research/experiments/EXP-FRONTIER-35915275774/compilation_ir_manifest.json",
+    "research/experiments/EXP-FRONTIER-35915275774/endpoint_catalog_manifest.json",
+    "research/experiments/EXP-FRONTIER-35915275774/hierarchical_manifest.json",
+    "research/experiments/EXP-FRONTIER-35915275774/routing_manifest.json",
+    "research/experiments/EXP-FRONTIER-35915275774/fetch_manifest.json",
+    "research/experiments/EXP-FRONTIER-35915275774/joint_manifest.json",
+    "research/experiments/EXP-FRONTIER-35915275774/freeze.json",
+    "research/experiments/EXP-FRONTIER-35915275774/spec.json",
+    "research/experiments/EXP-FRONTIER-35915275774/prereg.md"
+  ],
+  "unresolved": [
+    "Live heterogeneous BrowserGym 1280x720 CDP AX>10 WebArena-Verified v2 / WebGym 300k sample where OpenAPI spec covers task paths and routing templates differ before/after - not tested due to infrastructure unavailability.",
+    "Whether O(1) compilation DSM+IR ($0.002-0.092 amortized at f=10) or genuine endpoint-catalog clustering breaks the 0.525 ceiling on live heterogeneous AX with honest cost.",
+    "Whether Fetch/WebMCP OpenAPI discovery with server routing normalization + joint multi-candidate composition rescues mixed triple-channel (header+body+query+auth) on live heterogeneous sample where spec covers paths and routing differs.",
+    "Calibration transfer from synthetic perfect-accuracy (ECE single-bin artifact) to live imperfect-accuracy heterogeneous DOM/AX.",
+    "Honest cost permutation rho stability across live heterogeneous tasks (currently only synthetic)."
+  ]
+}

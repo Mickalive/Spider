@@ -1,0 +1,78 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-FRONTIER-35915275774",
+  "lane": "frontier",
+  "target_lane": "frontier",
+  "next_question": "After repairing live BrowserGym 1280x720 CDP Accessibility.getFullAXTree substrate (playwright, browsergym-core, agentlab >=0.3) and frozen honest-cost sum-counter harness, does the genuine O(1) compiled DSM-IR vs genuine endpoint-catalog Jaccard>=0.6 shootout break the bounded 20/40=0.50 single-candidate ceiling on a live heterogeneous WebArena-Verified v2 / WebGym 300k sample where OpenAPI spec covers >=70% task paths and routing normalization differs before/after on >=20% task-relevant paths, under correct-family gating and honest cost (|rho_shuffled|<0.20, within-f std>0, not n*3200), and does joint Fetch/WebMCP + routing normalization + complementary 2-3 candidate composition rescue mixed triple-channel header+body+query+auth from 0/10 to >=4/10 with ECE<=0.15 and amortized O(1) $0.002-0.092 at f=10/100?",
+  "why_next": "Highest expected information gain per Director PIVOT rationale: 11 consecutive frontier C-SEMANTIC-RESOLVE attempts stalled at synthetic 20-21/40=0.50-0.525 single-candidate ceiling (mixed 0/10, coverage 0.5, ECE 0.22-0.26) with 40/40 joint only synthetic. This experiment replicated that ceiling exactly (all single 20/40 identical McNemar p=1.0, joint 40/40) but added genuine DSM 99% IR (4 workflows 5-8 steps) and genuine 51-centroid Jaccard>=0.6 catalog (vs prior code-identity failures) — still MEASUREMENT_INVALID because live hetero AX substrate unavailable and honest-cost rho marginally exceeded. The synthetic-to-live gap remains the dominant unknown (audit unresolved[1]), and spec/routing gates were only synthetic-path exercised. Re-testing the same synthetic fixture yields diminishing returns (Director comparative reasoning: orthogonal O(1) vs tool-bypass level outside retrieval-diversity basin). The informative next is live hetero validation where spec genuinely covers paths and routing genuinely differs on task templates, with honest cost guaranteed (|rho|<0.20) and CDP AX>10, to determine if compilation/catalog breaks ceiling or if joint composition is necessary for triple-channel; if still 0/10 mixed, consider per-value alias or residual-novelty barrier-physics per Frontier charter rather than further retrieval tuning.",
+  "carry_forward": {
+    "established": [
+      "Synthetic-only bounded ceiling replicated under correct-family gating and honest sum-counter cost: all single-candidate pipelines (B-EXACT-MATCH, B-FLAT-TFIDF-K5-CF, H-HIERARCHICAL-CF, B-COMPILED-DSM, B-ENDPOINT-CATALOG) achieve 20/40=0.500 Wilson [0.352,0.648] binomial p=1.87e-10 vs 0.10, per-family header 10/10 body 10/10 auth 0/10 mixed 0/10, coverage 0.500 ECE 0.22-0.24, McNemar vs each other p=1.0 (result.json:metrics, audit.json:recomputed_metrics.pooled_correct_rate, baseline_findings).",
+      "Joint complementary composition rescues synthetic mixed on fixture sha 83b7c52d: B-JOINT-FETCH 40/40=1.0 Wilson [0.912,0.912] binomial p=1e-40 per-family header 10/10 mixed 10/10 ECE 0.110, reproducing prior EXP-FRONTIER-35903208514 40/40=1.0 vs 21/40=0.525 gain 0.25, but bounded to synthetic minimal derived dict (audit claim_ceiling, baseline_findings, result observations).",
+      "Genuine implementations proven distinct: compilation IR manifest 4 workflows 5-8 steps DSM 99% TreeWalker, stable locator ranking, JSON IR hash distinct, Shanghai HITL patchable; endpoint catalog 51 centroids Jaccard>=0.6 over method/path/header/body/auth_scope TFIDF mean covering header/body/method/query; hierarchical 84 themes 168 episodes; arm Jaccard overlap <0.90 vs parent code-identity failures (audit validity_findings[5-7], provenance artifact_hashes).",
+      "Controls NC-NO-APPLICABLE 12/12 UNKNOWN precision 1.0 false 0, NC-EMPTY 6/6, NC-ORACLE-LEAK 0 forbidden reads, NC-BIJECTIVE-COST not n*3200, NC-STAGEHAND-ISOLATION 0/40 DOM-hash, confidence derived softmax temp0.15+jitter std 0.27-0.35 >0.05, honest_cost == sum counters diff 0 within-f std 1.02 >0 not bijective (result.json:controls, audit validity_findings[8-10]).",
+      "Bounded state: C-SEMANTIC-RESOLVE remains EXPERIMENTAL at synthetic orthogonal header/body/auth+mixed ceiling under correct-family gating; not VALIDATED, not PRODUCT_CORE, no live BrowserGym hetero validation, no calibrated live ECE, no measured O(1) token/latency economics (audit claim_ceiling, codex/claim_state.json C-SEMANTIC-RESOLVE).",
+      "Honest-cost harness preserves sum-counter definition (resolve+bind+verify+freshness+browser_steps+compile/fetch/spec/joint) with amortized compilation $0.0177 at f=10 within $0.002-0.092 vs browsing mean 4.9 steps (result.json:metrics amortized_compilation_f10, browsing_steps_mean, audit recomputed_metrics.honest_cost).",
+      "Fetch/WebMCP infrastructure exercised on synthetic fixture: spec fetch 200 OK 1350 bytes 14 paths prefix_covered 40/40, 3 HATEOAS links, routing diff 14/58 via version-collapse/trailing-slash/case (routing_manifest, fetch_manifest, audit recomputed_metrics.routing_diff/openapi_coverage)."
+    ],
+    "rejected": [
+      "Flat TFIDF-K5-CF, hierarchical xMemory, compiled DSM-IR, or endpoint-catalog as higher-leverage than each other on synthetic orthogonal header/body/auth+mixed under correct-family single-candidate: rejected bounded at 20/40=0.500 identical (McNemar p=1.0 vs flat/hierarchical, audit baseline_findings, result controls MCNEMAR_B-COMPILED-DSM_vs_B-FLAT p=1.0). Does not reject joint composition which succeeds 40/40.",
+      "Single-candidate correct-family can solve mixed 4-channel header+body+query+auth jointly: rejected bounded (all single pipelines 0/10 mixed vs joint 10/10, result per-family, audit per_family_correct).",
+      "Live BrowserGym 1280x720 hetero inference from this packet: rejected as MEASUREMENT_INVALID — live_available false, census 4 envs x3 retries failed, AX>10 not measured via real CDP (PC-BROWSERGYM-HEALTH FAIL, provenance census_log).",
+      "Honest-cost violation as substantive effect: rejected beyond marginal rho 0.23 on hierarchical (p=0.176, sampling noise) — within-f std>0 verified, not bijective, diff 0 (audit validity_findings[2])."
+    ],
+    "unknown": [
+      "Does O(1) compilation DSM 99% + stable locator + deterministic JSON workflow IR break 20/40=0.50 ceiling on live BrowserGym 1280x720 CDP AX>10 heterogeneous WebArena-Verified v2 / WebGym 300k sample where OpenAPI spec actually covers >=70% task paths and routing templates differ before/after on >=20% task-relevant paths, under frozen honest cost |rho|<0.20? (Director mandate dependencies intel + runtime, audit unresolved[1-2]).",
+      "Does genuine endpoint-catalog regex ${slot}+Jaccard>=0.6 centroids over method/path/header/body/auth_scope break same ceiling live where spec covers paths? Same substrate gap.",
+      "Does Fetch/WebMCP OpenAPI discovery (spec 200 + HATEOAS link following) + server routing normalization (OpenAPI path table + regex ${slot} version-collapse) + joint complementary 2-3 candidate composition rescue mixed triple-channel header+body+query+auth from 0/10 to >=4/10 on live hetero where spec covers paths and routing differs? Synthetic joint 40/40 suggests hypothesis but live untested (result unresolved[3], audit unresolved[3]).",
+      "Do amortized O(1) economics $0.002-0.092 at f=10 and f=100 survive measured token/latency vs O(MxN) browsing steps on live sites vs modeled $0.0001/unit? (result unresolved[2], audit unresolved[4]).",
+      "Does calibration transfer from synthetic perfect-accuracy ECE 0.22-0.24 single-bin artifact to live imperfect-accuracy hetero DOM/AX? (result unresolved[4], audit unresolved[4]).",
+      "Does honest-cost permutation |rho_shuffled|<0.20 hold stably across live heterogeneous tasks vs synthetic marginal exceedance? (audit required_fixes[2], validity_findings[2]).",
+      "Per-family auth 0/10 and mixed 0/10 systematic failure cause: registry lacks X-Permission header slot vs joint requirement, or retrieval-ranking vs binding? Need live family factorization.",
+      "Whether WebGym 300k heterogeneous sample where OpenAPI spec covers task paths can be procured with relaxed Gate0 NL>=20 trajectories per Director dependencies (intel dependency blocked).",
+      "Whether frozen honest-cost sum-counter harness with shared-store freshness gates (runtime dependency) remains stable at live scale."
+    ],
+    "do_not_assume": [
+      "Do not assume 20/40=0.500 synthetic ceiling generalizes to live hetero — live BrowserGym unavailable, synthetic fallback disclosed, claim bounded to fixture sha 83b7c52d only (result validity_notes, audit claim_ceiling).",
+      "Do not assume PC-OPENAPI-COVERAGE 40/40 prefix or PC-ROUTING-DIFF 14/58 proves Director gates satisfied on live task paths — both exercised on synthetic /random/alias* paths only, not WebArena/WebGym paths (audit validity_findings[3-4], required_fixes[3-4]).",
+      "Do not assume joint 40/40=1.0 mixed 10/10 on synthetic validates triple-channel rescue live — synthetic derived_context may contain expected bound verbatim observationally saturated, complementary_frac 0.0 and selection_log empty so joint not fully exercised (audit validity_findings[11], joint_manifest).",
+      "Do not assume honest-cost permutation rho 0.23 invalidates harness generally — marginal exceedance on hierarchical only (p=0.176 sampling noise), diff 0, within-f std 1.02 verifies not n*3200 bijective (result validity_notes, audit validity_findings[2]).",
+      "Do not assume compilation DSM 99% or endpoint 51 centroids provide live leverage — both proven genuine and distinct from hierarchical (vs prior code-identity), but pooled live effect remains 0 (identical to flat) on synthetic; leverage not demonstrated (audit baseline_findings).",
+      "Do not assume ECE 0.22-0.24 or 0.110 transfers to live — synthetic ECE is 5-bin bootstrap on perfect-accuracy fixture with 3-4 empty bins, not live imperfect-accuracy hetero (prereg validity notes, result observations).",
+      "Do not assume C-SEMANTIC-RESOLVE is VALIDATED or PRODUCT_CORE — remains EXPERIMENTAL synthetic ceiling, audit REVISE/FAIL lineage, no promotion without live replication and f=100 Pareto check (codex claim_state, prereg claim ceiling).",
+      "Do not assume amortized $0.0177 at f=10 is measured — modeled $0.0001/counter-unit, not measured LLM tokens/latency, browsing steps mean 4.9 only (result metrics, audit honest_cost).",
+      "Do not assume honest cost can include jitter, f*6.0, or bijective n*3200 — frozen sum counters+browser_steps+compile/fetch/spec/joint only, jitter would trigger PC-HONEST-COST-SANITY FAIL per prereg.",
+      "Do not repeat retrieval-diversity tuning on same synthetic fixture (pool 8>k, Jaccard 0.6, k=5 already exercised) — marginal info gain low per Director opportunity cost, pivot to live hetero or orthogonal basins.",
+      "Do not treat MEASUREMENT_INVALID as falsification of compilation/catalog/joint — infrastructure substrate unavailable, not scientific negative (EXPERIMENT_PACKET transmission invariants).",
+      "Do not assume mixed 0/10 persists live — synthetic mixed requires joint multi-channel adoption not satisfied by single-candidate CF rewrite; live task factorization may differ."
+    ]
+  },
+  "dependencies": [
+    "intel: WebGym 300k heterogeneous sample where OpenAPI spec covers >=70% task paths and routing diff >=20% on task-relevant templates + relaxed Gate0 NL>=20 trajectories",
+    "runtime: frozen honest-cost sum-counter harness (no n*3200, no jitter, |rho_shuffled|<0.20 within-f std>0) and shared-store freshness gates for verify",
+    "runtime: BrowserGym 1280x720 CDP Accessibility.getFullAXTree substrate repair (playwright, browsergym-core, agentlab >=0.3 installed and census 4 envs x3 retries logged as live_available true with AX>10 on >=80%)",
+    "product: Pareto f=10 vs f=100 economics via measured tokens/latency to determine if O(1) amortized $0.002-0.092 survives vs O(MxN) browsing steps",
+    "physics: 1280x720 viewport metadata preserved (locked) for AX tree comparability"
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-FRONTIER-35915275774/result.json",
+    "research/experiments/EXP-FRONTIER-35915275774/raw_evidence.json",
+    "research/experiments/EXP-FRONTIER-35915275774/derived_metrics.json",
+    "research/experiments/EXP-FRONTIER-35915275774/audit.json",
+    "research/experiments/EXP-FRONTIER-35915275774/provenance.json",
+    "research/experiments/EXP-FRONTIER-35915275774/spec.json",
+    "research/experiments/EXP-FRONTIER-35915275774/prereg.md",
+    "research/experiments/EXP-FRONTIER-35915275774/freeze.json",
+    "research/experiments/EXP-FRONTIER-35915275774/compilation_ir_manifest.json",
+    "research/experiments/EXP-FRONTIER-35915275774/endpoint_catalog_manifest.json",
+    "research/experiments/EXP-FRONTIER-35915275774/hierarchical_manifest.json",
+    "research/experiments/EXP-FRONTIER-35915275774/routing_manifest.json",
+    "research/experiments/EXP-FRONTIER-35915275774/fetch_manifest.json",
+    "research/experiments/EXP-FRONTIER-35915275774/joint_manifest.json",
+    "research/experiments/EXP-FRONTIER-35915275774/report.md",
+    "research/experiments/EXP-FRONTIER-35903208514/handoff.json",
+    "codex/claim_state.json",
+    "codex/index.json"
+  ],
+  "recommended_action": "PARK synthetic retrieval-diversity tuning on fixture sha 83b7c52d (ceiling 20/40 locked, joint 40/40 synthetic only). Prioritize substrate repair: install playwright, browsergym-core, agentlab >=0.3 and validate census 4 envs x3 retries with real CDP Accessibility.getFullAXTree AX>10 at 1280x720; fix harness to guarantee |rho_shuffled|<0.20 for all pipelines (not just sampling-noise pass). Then re-run frozen PIVOT live hetero shootout with genuine spec coverage and routing-diff verified on task-relevant paths (not synthetic /random/*), under correct-family gating and frozen honest cost, testing joint rescue for mixed 0/10. Do not promote compilation-IR or endpoint-catalog to product core without live McNemar p<0.05 vs best flat and vs hierarchical, coverage>=0.60 gain>=0.10, mixed>=4/10, ECE<=0.15, and measured f=10/100 economics. If substrate remains BLOCKED after 2 pulses, pivot frontier to materially orthogonal question per charter (residual-novelty barrier-physics/rewind memory or per-value alias handling) as flagged in Director mandate comparative_reasoning and Scout 300k pointer, rather than 12th alias permutation."
+}
