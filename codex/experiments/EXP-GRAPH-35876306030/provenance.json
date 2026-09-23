@@ -1,0 +1,140 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-35876306030",
+  "timestamp": "2026-09-23T14:50:15.000000Z",
+  "git": {
+    "base_sha": "9e0898ce6a3334f778e85bf5ceae3de61f57a6f3",
+    "head_sha": "07a90be2367c320e6a74b14019b87714a358ca7a",
+    "pre_execute_sha": "364d1c9af07520e33b008971216e2f987b676105",
+    "branch": "lab2/graph",
+    "diff_base_head_src_kernel_nonempty": false,
+    "diff_base_head_src_kernel_bytes": 0
+  },
+  "kernel": {
+    "path": "src/spider/kernel.py",
+    "sha256": "46929b3a951df48d7f9d1fd850871073c0d91c1868aa117e13d389fe274e8d61",
+    "head_sha": "07a90be2367c320e6a74b14019b87714a358ca7a",
+    "checks": {
+      "distill_parameterized": false,
+      "distill_parameterized_hits": 0,
+      "_common_prefix_and_suffix": false,
+      "_common_prefix_and_suffix_hits": 0,
+      "_extract_varying_values": false,
+      "_extract_varying_values_hits": 0,
+      "_structure_similarity": false,
+      "_structure_similarity_hits": 0,
+      "_is_allowed_path": false,
+      "_is_allowed_path_hits": 0,
+      "_ALLOWED_PREFIXES": false,
+      "_ALLOWED_PREFIXES_hits": 0,
+      "_field_path_to_slot_name": false,
+      "_field_path_to_slot_name_hits": 0,
+      "_sanitize_slot": false,
+      "_sanitize_slot_hits": 0,
+      "confidence_090": false,
+      "single_prefix": false,
+      "jaccard_075": false
+    },
+    "grep_all_ge1": false,
+    "diff_nonempty": false,
+    "diff_stat": "",
+    "unit_tests": {
+      "path": "tests/test_kernel_param_inherit.py",
+      "exists": false,
+      "sha256": null,
+      "passed": false,
+      "stdout": "",
+      "stderr": "No module named pytest; file not found",
+      "returncode": 1
+    },
+    "import_check": {
+      "has_distill_parameterized": false,
+      "kernel_methods": ["distill", "invalidate", "observe", "resolve", "verify"],
+      "_matches_exists": true,
+      "_matches_self_test": true
+    }
+  },
+  "census": {
+    "durable_source_satisfied": false,
+    "candidates": {
+      "data/webarena_verified_v2.json": {
+        "exists": false,
+        "sha256": null,
+        "size": 0
+      },
+      "research/experiments/EXP-GRAPH-35876306030/census.json": {
+        "exists": false,
+        "sha256": null,
+        "size": 0
+      }
+    },
+    "docker_image": "am1n3e/webarena-verified-shopping@sha256:3e8cb9b945",
+    "docker_present": false,
+    "static_export_sha256": "d65275660814663375028e9017e1f929e3c38321041b125795e2713b52243d30",
+    "static_export_present": false,
+    "tasks": 0,
+    "templates": 0,
+    "duplication": null,
+    "families_ge3": 0,
+    "pilot_a": 0,
+    "pilot_b": 0,
+    "zero_overlap": false,
+    "sha_a": null,
+    "sha_b": null
+  },
+  "pilot": {
+    "family": "add_to_cart",
+    "exemplars": 0,
+    "mechanism_id": null,
+    "slots": [],
+    "confidence": 0.9
+  },
+  "infrastructure": {
+    "llm_available": false,
+    "playwright_available": false,
+    "pytest_available": false,
+    "reason": "OPENAI_API_KEY absent; pytest not installed; kernel gate failed"
+  },
+  "metrics": {
+    "executable_rate": null,
+    "binding_rate": null,
+    "wilson_low_exec": null,
+    "wilson_low_bind": null,
+    "ece": null,
+    "unknown_rate": null,
+    "false_accept": null
+  },
+  "freeze_hashes": {
+    "prereg.md": "1ec076d2d23e330b23f2cfd80077c6d36692d729dac695df27ed542fa369d0db",
+    "request.json": "b6b7c45e29c8f324259d168122ffaca3455e590de1168fb4f3c3a2c8f7a72c98",
+    "spec.json": "1c079eba69c1729f47d3babbf21aae2c0ec26b35d3217ffa509c4429b0d67ab3",
+    "freeze.json": "3e9173d689fd964cda12178896358f739bd1daef1df95a6f29fdbb493b04d0e8"
+  },
+  "artifacts": {
+    "kernel": "46929b3a951df48d7f9d1fd850871073c0d91c1868aa117e13d389fe274e8d61",
+    "kernel_check": "1b8c5dd79f9add3dfbdf186495ccee3118219418affdc70982de3c1128b86aae",
+    "census_attempts": "365045025e42e9211334076139dbf6b2cdd4f7618089a051c87de9b9b69dba8f",
+    "distill_attempt": "9c6d77603a5dd097c3df5eb515eb23b231adcf2bf2dc07b464c49acc70111806",
+    "unit_test_output": "1bed183da44056438c206f9c329b5881e98a7b3ade581ff6e8463e8984d0dadd",
+    "per_task": "32894a6eaf7424020e1bb867e6d27f87d33aa5fdd34041988869c77840973a12",
+    "registry": "3b501b4b2e3fbc6b3cf85f75bfcbe6fa2fec1f7215e94ae56c96c242a5706ef1",
+    "cost_config": "4727054db7a59d37ec4fecf3df28db104c6137bf436f688d0b94f6c46cad91cf",
+    "environment": "7b31a096ac46a2402d7de33f099a0247e268e2f2c98329de24fa7df871d3e527"
+  },
+  "environment": {
+    "python_version": "3.12.14 (main, Aug 13 2026, 02:47:42) [GCC 13.3.0]",
+    "platform": "Linux-6.11.0-1018-azure-x86_64-with-glibc2.39",
+    "github_run_id": "35876306030",
+    "github_run_attempt": "1",
+    "workdir": "/home/runner/work/Spider/Spider"
+  },
+  "commands": [
+    "sha256sum src/spider/kernel.py",
+    "grep -n distill_parameterized src/spider/kernel.py | wc -l",
+    "git diff 9e0898ce6a3334f778e85bf5ceae3de61f57a6f3..HEAD -- src/spider/kernel.py",
+    "git diff --stat 9e0898ce6a3334f778e85bf5ceae3de61f57a6f3..HEAD -- src/spider/kernel.py",
+    "ls data/webarena_verified_v2.json research/experiments/EXP-GRAPH-35876306030/census.json",
+    "docker images --format '{{.Repository}}:{{.Tag}}' | head",
+    "PYTHONPATH=. python -m src.spider.kernel import check"
+  ]
+}

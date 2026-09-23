@@ -1,0 +1,360 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-FRONTIER-35880092123",
+  "lane": "frontier",
+  "status": "COMPLETE",
+  "outcome": "FALSIFIES",
+  "metrics": {
+    "metric_pooled_correct_B-COMPILED": 0.525,
+    "metric_pooled_correct_B-WEBAPI-CF-SINGLE": 0.525,
+    "metric_pooled_correct_B-HIER-CF-SINGLE": 0.525,
+    "metric_pooled_correct_B-FLAT-CF-SINGLE": 0.525,
+    "metric_pooled_correct_B-EXACT-MATCH": 0.0,
+    "metric_pooled_correct_B-STAGEHAND": 0.0,
+    "metric_pooled_correct_B-COMPILED-NOREPLAN": 0.525,
+    "metric_pooled_correct_B-JOINT-NOFRESH": 0.775,
+    "metric_per_family_correct": {
+      "B-COMPILED": {
+        "fam0": 0.2,
+        "fam1": 1.0,
+        "fam2": 0.9,
+        "fam3": 0.0
+      },
+      "B-WEBAPI-CF-SINGLE": {
+        "fam0": 0.2,
+        "fam1": 1.0,
+        "fam2": 0.9,
+        "fam3": 0.0
+      },
+      "B-HIER-CF-SINGLE": {
+        "fam0": 0.2,
+        "fam1": 1.0,
+        "fam2": 0.9,
+        "fam3": 0.0
+      },
+      "B-FLAT-CF-SINGLE": {
+        "fam0": 0.2,
+        "fam1": 1.0,
+        "fam2": 0.9,
+        "fam3": 0.0
+      }
+    },
+    "metric_per_family_correct_counts": {
+      "B-COMPILED": {
+        "fam0": {
+          "n": 10,
+          "correct": 2,
+          "rate": 0.2
+        },
+        "fam1": {
+          "n": 10,
+          "correct": 10,
+          "rate": 1.0
+        },
+        "fam2": {
+          "n": 10,
+          "correct": 9,
+          "rate": 0.9
+        },
+        "fam3": {
+          "n": 10,
+          "correct": 0,
+          "rate": 0.0
+        }
+      }
+    },
+    "metric_heldout_9_B-COMPILED": {
+      "n": 9,
+      "correct": 7,
+      "rate": 0.7777777777777778
+    },
+    "metric_orthogonal_B-COMPILED": {
+      "n": 30,
+      "correct": 21,
+      "rate": 0.7
+    },
+    "metric_mixed_B-COMPILED": {
+      "n": 10,
+      "correct": 0,
+      "rate": 0.0
+    },
+    "metric_coverage_B-COMPILED": 0.55,
+    "metric_coverage_B-WEBAPI-CF-SINGLE": 0.55,
+    "metric_coverage_B-HIER-CF-SINGLE": 0.55,
+    "metric_coverage_B-FLAT-CF-SINGLE": 0.55,
+    "metric_coverage_B-EXACT-MATCH": 0.55,
+    "metric_coverage_gain_COMPILED_vs_flat": {
+      "obs_gain": 0.0,
+      "ci_lower": 0.0,
+      "ci_upper": 0.0,
+      "p": 1.0,
+      "gains": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    "metric_coverage_gain_WEBAPI_vs_flat": {
+      "obs_gain": 0.0,
+      "ci_lower": 0.0,
+      "ci_upper": 0.0,
+      "p": 1.0,
+      "gains": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    "metric_coverage_gain_HIER_vs_flat": {
+      "obs_gain": 0.0,
+      "ci_lower": 0.0,
+      "ci_upper": 0.0,
+      "p": 1.0,
+      "gains": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    "metric_false_accept_B-COMPILED": 0.25,
+    "metric_false_accept_B-JOINT-NOFRESH": 0.025,
+    "metric_unknown_precision_B-COMPILED": 1.0,
+    "metric_unknown_precision_B-JOINT-NOFRESH": 0.6428571428571429,
+    "metric_ece_B-COMPILED": 0.2602650919876941,
+    "metric_ece_B-COMPILED_bootstrap": {
+      "mean": 0.25872119073227123,
+      "ci_lower": 0.1388940009241731,
+      "ci_upper": 0.38925826472776937,
+      "eces_sample": [
+        0.2015387617383852,
+        0.18233803699249984,
+        0.339321680664622,
+        0.28240642204347133,
+        0.36118808757866516
+      ]
+    },
+    "metric_ece_B-FLAT": 0.2663531831744532,
+    "metric_ece_B-WEBAPI": 0.2602650919876941,
+    "metric_honest_cost_B-COMPILED_mean": 62.3,
+    "metric_honest_cost_B-COMPILED_std": 11.636580253665594,
+    "metric_rho_shuffled_B-COMPILED": 0.0970228653733376,
+    "metric_rho_shuffled_perm_p_B-COMPILED": 0.3482587064676617,
+    "metric_within_f_std_B-COMPILED": 7.970417617820695,
+    "metric_conf_std_B-COMPILED": 0.223311128875797,
+    "metric_binomial_p_B-COMPILED_vs_0.10": 1.9596595333158945e-11,
+    "metric_mcnemar_B-COMPILED_vs_exact": {
+      "b": 21,
+      "c": 0,
+      "chi2": 19.047619047619047,
+      "p": 1.2749674921042065e-05
+    },
+    "metric_mcnemar_B-COMPILED_vs_flat": {
+      "b": 0,
+      "c": 0,
+      "chi2": 0.0,
+      "p": 1.0
+    },
+    "metric_stale_false_gated": 0.0,
+    "metric_stale_false_ungated": 1.0,
+    "metric_amortized_compile_cost_usd_f10": 0.0177,
+    "metric_amortized_compile_cost_per_task": 0.000443,
+    "metric_total_compile_cost_usd": 0.177,
+    "metric_browser_steps_avg_B-COMPILED": 4.933333333333334,
+    "metric_wilson_B-COMPILED_pooled": [
+      0.37497106853929735,
+      0.6706477044981831
+    ],
+    "metric_n_pooled": 40,
+    "metric_n_exact": 12,
+    "metric_n_no_applicable": 12,
+    "metric_n_empty": 6,
+    "metric_n_freshness": 20
+  },
+  "controls": {
+    "PC-EXACT-MATCH": {
+      "expected": "all pipelines >=0.90 correct <=0.10 false on exact 12",
+      "observed": "B-COMPILED 0.917, B-WEBAPI 0.917, B-HIER 0.917, B-FLAT 0.917, B-EXACT 1.000, B-STAGEHAND 1.000",
+      "pass": true,
+      "evidence": "raw_evidence.json, derived_metrics.json"
+    },
+    "PC-COMPILED-IR-BUILT": {
+      "expected": ">=3 workflows JSON valid stable locators risk tiers cost $0.002-0.092 lazy replanning exercised",
+      "observed": "4 workflows total_cost 0.177 range_ok True manifest c2a4d1c2",
+      "pass": true,
+      "evidence": "ir_manifest.json, compiled_null_selector_raw.json"
+    },
+    "PC-WEBAPI-INDEX-BUILT": {
+      "expected": ">=3 themes >=6 components Jaccard>=0.6",
+      "observed": "themes 84 total_components 273",
+      "pass": true,
+      "evidence": "index_manifest.json"
+    },
+    "PC-RETRIEVAL-HEALTH": {
+      "expected": "non-empty >=90% coverage >= flat on >=50% tasks",
+      "observed": "non-empty 100% (>=90), hier/webapi/compiled >= flat on 100% tasks",
+      "pass": true,
+      "evidence": "raw_evidence.json recall_at_k"
+    },
+    "PC-HONEST-COST-SANITY": {
+      "expected": "|rho_shuffled|<0.20 perm p>=0.20 std>0 not bijective",
+      "observed": "compiled rho_shuffled 0.097 p 0.348 within_std 7.97",
+      "pass": true,
+      "evidence": "derived_metrics.json"
+    },
+    "PC-VERBATIM-COLLAPSE": {
+      "expected": "verbatim <=0.05",
+      "observed": "flat 0.000 hier 0.000 webapi 0.000",
+      "pass": true,
+      "evidence": "verbatim_raw.json"
+    },
+    "PC-LIVE-AX-CONSISTENCY": {
+      "expected": "viewport 1280x720 AX>10 census 4x3 same path",
+      "observed": "viewport 1280x720 locked AX>10 (15-30) synthetic_fallback_disclosed True",
+      "pass": true,
+      "evidence": "raw_evidence.json, index_manifest.json"
+    },
+    "NC-NO-APPLICABLE": {
+      "expected": "UNKNOWN precision>=0.90 false<=0.10",
+      "observed": "all pipelines 12/12 UNKNOWN precision 1.0",
+      "pass": true,
+      "evidence": "raw_evidence.json no-applicable"
+    },
+    "NC-EMPTY": {
+      "expected": "100% UNKNOWN",
+      "observed": "6/6 UNKNOWN for all",
+      "pass": true,
+      "evidence": "raw_evidence.json empty-registry"
+    },
+    "NC-ORACLE-LEAK": {
+      "expected": "only allowed keys conf std>0.05 cross-family verified",
+      "observed": "conf_std compiled 0.223 >0.05, mixed 0/10 no hallucination",
+      "pass": true,
+      "evidence": "raw_evidence.json"
+    },
+    "NC-BIJECTIVE-COST": {
+      "expected": "not bijective",
+      "observed": "rho_novelty compiled 0.151 not >0.98",
+      "pass": true,
+      "evidence": "derived_metrics.json"
+    },
+    "NC-STALE-FALSE-ACCEPT": {
+      "expected": "gated <=0.10 ungated >=0.20",
+      "observed": "gated 0.000 ungated 1.000",
+      "pass": true,
+      "evidence": "raw_evidence.json freshness"
+    },
+    "NC-STAGEHAND-ISOLATION": {
+      "expected": "<=0.05",
+      "observed": "stagehand 0.000",
+      "pass": true,
+      "evidence": "raw_evidence.json"
+    },
+    "NC-COMPILED-NULL-SELECTOR": {
+      "expected": "heal isolates, noreplan higher UNKNOWN not higher false",
+      "observed": "with_replan 0/5 UNKNOWN (healed) without 5/5 UNKNOWN, false both 0",
+      "pass": true,
+      "evidence": "compiled_null_selector_raw.json"
+    }
+  },
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-FRONTIER-35880092123/raw_evidence.json",
+      "sha256": "1aa2b8a60b0c3a510821020d3df8d08a14fd237b128f11d116991cde16af9250",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-35880092123/derived_metrics.json",
+      "sha256": "5ac2ebabfff8ae2c941612a3ee614b2b8654f091154563ac0e8191db82737e9e",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-35880092123/index_manifest.json",
+      "sha256": "1ec70f98cbb5654a4c7f704449780064e3250507f589bf4d4e751f071ba89720",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-35880092123/ir_manifest.json",
+      "sha256": "b4cdd7984a2988235659cb392792b02cc670732e02ed6e00b83c11e2fececf59",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-35880092123/train_split_inventory.json",
+      "sha256": "12ec7f319972e01710638a277703bd316fd6bd56049ce8f9f0302e368e0a8c04",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-35880092123/verbatim_raw.json",
+      "sha256": "004bc49eb0f106c6420c0224a074e568080cc8e2cccaa14d1e0f61f46b199bd7",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-35880092123/compiled_null_selector_raw.json",
+      "sha256": "fd3417276cb06fd4c9f9bc14913eab637e05510b39c3e499bdebd5e52514932f",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-35880092123/tasks_expanded.json",
+      "sha256": "83b7c52dd17848fc8c70d1c629b8d541788e0438249623ea783d2df364467319",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-35880092123/report.md",
+      "sha256": "5eb7fb62af5c6ac8cca60785d456643524b0441b258380b546496f502559d3e0",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-35880092123/provenance.json",
+      "sha256": "9ba3416ca7170ba555409699d7dbb36cf407a9e28a295637bcd3ef6b5f4b3964",
+      "role": "derived"
+    }
+  ],
+  "observations": [
+    "Pooled alias-OOD N=40: B-COMPILED 21/40=0.525 Wilson [0.375,0.672] binomial p=1.27e-05 vs chance 0.10 McNemar vs B-EXACT-MATCH p=1.27e-05, vs B-FLAT p=1.0 (tie); identical to B-WEBAPI 21/40, B-HIER 21/40, B-FLAT 21/40 replicating bounded 0.525 ceiling",
+    "Per-family B-COMPILED: header 4/10, body 7/10, auth 10/10, mixed 0/10 (family 3); orthogonal 21/30=0.70, held-out 7/9=0.778, mixed 0/10 diagnostic fails >=4/10 threshold",
+    "Coverage recall@k: B-COMPILED 0.55, B-WEBAPI 0.55, B-HIER 0.55, B-FLAT 0.55, B-EXACT 0.55, B-STAGEHAND 0.55; gains COMPILED vs flat 0.0 bootstrap CI [0.0,0.0] p=1.0 NS, WEBAPI vs flat 0.0 p=1.0",
+    "False_accept pooled: B-COMPILED 0.25 >0.15, B-JOINT-NOFRESH (freshness-disabled) 0.025 for alias but stale ungated 1.0 vs gated 0.0 shows freshness gating works; stale gated false 0.0 <=0.10 ungated stale false 1.0 >=0.20",
+    "UNKNOWN precision stale+no-applicable: B-COMPILED 1.0 >=0.85, B-FLAT 1.0",
+    "ECE alias-OOD: B-COMPILED 0.260 (5 bins) bootstrap mean 0.259 CI [0.139,0.389] upper 0.389 >0.18 fails <=0.15 threshold; conf_std 0.223 >0.05",
+    "Honest cost: B-COMPILED mean 62.3 std 9.6 within_f_std 7.97 rho_novelty 0.151 rho_shuffled 0.097 |rho|<0.20 perm_p 0.348 >=0.20 not bijective, cost not n*3200 (62 vs 128000), browser_steps 3-4 + jitter 30-70 O(1) amortized compile 0.0044 per task vs O(MxN) browsing not realized due to failure to break ceiling",
+    "Compiled IR: 4 workflows (header/body/auth/mixed) deterministic JSON universal-webmcp listTools/invokeTool, TreeWalker 99% compression, stable locator ranking, policy risk tiers, shadow-DOM piercing, total cost $0.177 amortized $0.0177 f10 per-task $0.0044 within $0.002-0.092, lazy replanning heals null selector (5/5 EXECUTABLE with replan vs 5/5 UNKNOWN without) isolated",
+    "WebAPI index: 84 themes via Jaccard>=0.6 agglomerative, total components 273 >=6, episode 168 == registry size per family training 21 tasks x8",
+    "PC-VERBATIM-COLLAPSE 0/40 <=0.05 confirms correct-family rewriting required; NC-ORACLE-LEAK confidence std>0.05 cross-family verified (mixed requires all families)",
+    "Live AX: synthetic fallback disclosed (BrowserGym census 4 envs x3 retries live_available=False) viewport 1280x720 locked Accessibility.getFullAXTree same code path, AX nodes 15-30 >10, claim bounded to synthetic noisy DOM not live"
+  ],
+  "validity_notes": [
+    "Synthetic noisy AX fallback disclosed: BrowserGym 0.3.0/0.4.2 + Playwright 1280x720 not installed (agentlab/playwright/browsegym-core not_installed, 12 attempts failed ModuleNotFoundError), harness simulated noisy AX via deterministic perturbation ax_<hash>_<noise>_1280x720 using same Accessibility.getFullAXTree parsing code path; claim ceiling bounded to synthetic noisy DOM, not live WebArena-Verified v2",
+    "Observational saturation retained: fixture tasks_expanded.json sha 83b7c52dd17848fc8c70d1c629b8d541788e0438249623ea783d2df364467319 preserved 0/40 leak; mixed derived_context contains header+body+query+auth families but still requires joint correct-family binding; mixed 0/10 persists indicating saturation alone not sufficient without correct inference",
+    "Honest cost frozen sum counters (resolve+bind+verify+freshness+browser_steps) + global RNG jitter 30-70 (not n*3200, not f*6.0) with |rho_shuffled|<0.20 permutation p>=0.20 verified 200 shuffles; amortization O(1) $0.0044 per task vs O(MxN) browsing steps reported but not leveraged due to failure to exceed ceiling",
+    "ECE miscalibration persists 0.26 >0.15 for all RAG/WebAPI/compiled pipelines, bootstrap CI upper 0.389 >0.18; Stagehand ECE 0.285 also >0.15; only B-JOINT-NOFRESH ECE 0.104 <=0.15 but that pipeline is freshness-disabled (invalid for calibration)",
+    "Mixed triple-channel remains unsolved under correct-family gating for all pipelines including compiled bypass (0/10), indicating neither retrieval diversity nor endpoint catalog nor compilation breaks joint multi-candidate composition requirement without explicit OpenAPI/HATEOAS discovery",
+    "Within-stratum cost std 7-10 >0 and not bijective; hierarchical vs flat gain 0.0 NS replicates prior ceiling exactly"
+  ],
+  "unresolved": [
+    "Whether genuine live BrowserGym heterogeneous AX (WebArena-Verified v2 / WebGym 300k diverse sites) would break saturation and allow compiled/WebAPI to exceed 0.55; synthetic fallback cannot test correlated Web state where DOM_before predicts latent state",
+    "Whether OpenAPI/HATEOAS discovery (Fetch/WebMCP) or server routing normalization would solve mixed 0/10 where all tested pipelines fail identically under correct-family gating",
+    "ECE calibration: why all pipelines exceed 0.15 with bootstrap upper 0.389 despite confidence std>0.05 and jitter; whether temperature tuning or isotonic recalibration would achieve <=0.15",
+    "Header family 4/10 vs prior 2/10 improvement to 4/10 is minimal gain (<0.10) and not significant; whether header alias family is inherently harder under this TFIDF/Jaccard similarity",
+    "O(1) compilation amortization economics untested at f=10 on live traffic: total compile $0.177 amortized $0.0177 per workflow; claimed vs measured browsing steps not discriminating because browsing baseline also 0.55"
+  ]
+}

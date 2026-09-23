@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-35876349051",
+  "lane": "intel",
+  "decision": "MEASUREMENT_INVALID",
+  "claim_updates": [
+    {
+      "claim_id": "C-CROSSSITE",
+      "status": "MEASUREMENT_INVALID",
+      "reason": "Frozen infrastructure precedence triggers MEASUREMENT_INVALID per spec.json decision_rule and prereg.md s9: adequacy gate requires >=5 product-page families (<10 valid AX trees 600-2000 nodes at 1280x720). Observed 0/20 valid captures (node_count 0, DOM bytes 0, M_AX_VALID_CAPTURES=0, M_AX_PRODUCT_FAMILY_COUNT=0) after 3 Docker retries to am1n3e/webarena-verified-shopping@sha256:3e8cb9b945 at http://localhost:7770 (Errno 111 Connection refused) per result.json metrics M_AX_PC1_LIVENESS_DETAIL and controls PC1_LIVENESS_1280 FAIL. Full-tree semantic/multi-anchor grammar verified by code audit (grammar_code_hash 8d4b7cb8b543c10912f5d4325ccee0e5ae839f64c534a354f5ac8e7b1a364a45, no [:20] truncation, 9 dynamic-token regexes, placeholder __SHOPPING__/path expansion verified) but not exercised live. Audit PASS confirms producer_claim_supported=true, recomputed metrics null correctly, no post-hoc weakening, trajectory-grouped 2000 bootstrap/1000 shuffle correctly not executed (avoiding degenerate CI[1,1] p=1.0). H1_AX_FULLTREE, H2_STAGEHAND_RECOMPUTED_DYNAMIC (0/36 families <30 required, HIT/MISS null), H3_WEBGYM_DIVERSE (0/50 diverse eTLD+1 sites, WebGym ImportError, PC4 FAIL), H4_GATE0_RELAXED (0 transitions vs >=50/family) all MEASUREMENT_INVALID substrate_unavailable. No SURVIVES or FALSIFIED-IN-SETTING ceiling justified. C-CROSSSITE remains HYPOTHESIS single-store vacuous, bounded not closed."
+    }
+  ],
+  "product_action": "NO_PROMOTION",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "After repairing Docker substrate am1n3e/webarena-verified-shopping@sha256:3e8cb9b945 to achieve >=15/20 liveness at 1280x720 with full-tree semantic/multi-anchor grammar and dynamic-token stripping verified (no [:20] truncation), plus WebGym 300k 50 diverse eTLD+1 import with 2000-bootstrap 95% CI and 0.818-0.9479 threshold sweep, and BrowserGym loopback achieving >=50 transitions/family on >=10 families, does product-page AX_consistency achieve mean>=0.6 bootstrap CI lower>0.5 trajectory-grouped shuffle p<0.05 delta>=0.20 vs truncated baseline with variance>0, and does Stagehand relevant-subtree recomputed+stripping achieve HIT>=0.8 MISS>=0.8 false_accept<0.05 beats NC4 random-role-subset with real-path latency/tokens?",
+  "reason": "Independent audit PASS recomputed all producer metrics exactly (M_AX_CONSISTENCY_MEAN null, M_AX_VALID_CAPTURES 0, M_AX_PRODUCT_FAMILY_COUNT 0, M_STAGEHAND_HIT_RATE null, M_WEBGYM_SITES_FOUND 0, M_GATE0_TRANSITIONS 0) and confirms validity_findings 7 items and baseline_findings correctness. Frozen decision_rule ordered evaluation gives precedence to infrastructure: <5 product families captured after 3 Docker retries + full-tree grammar + stripping + placeholder fix forces H1=MEASUREMENT_INVALID substrate_unavailable and overall status COMPLETE outcome NOT_APPLICABLE (result.json status COMPLETE, audit claim_ceiling MEASUREMENT_INVALID substrate_unavailable). This run does not reproduce prior degeneratehomepage tautology (mean 0.8 CI[0.5,1.0] p=1.0 delta 0.0) — it returns null metrics and avoids tautology via not executing shuffles on 0 scores per audit validity_findings[1,3]. Prior experiment EXP-INTEL-35860344410 achieved 20/20 valid captures (668-1426 nodes, DOM 196958-251734 bytes) on same image/seed/provenance proving substrate can be live; this transient Connection refused is environment failure not deterministic site property (audit validity_findings[0]). Stagehand branch correctly reported MEASUREMENT_INVALID 0/30 (vs spec-mandated relevant-subtree outerHTML SHA256 recomputed after page.evaluate with 9 regex stripping, HIT after N=2, per-project isolation) — prior full-DOM HIT 0.0 instability remains unretested but frozen logic verified. WebGym branch correctly MEASUREMENT_INVALID (ImportError No module named webgym, pip freeze, distinct from prior LIMITED 50 non-standard hosts). Gate0 branch correctly MEASUREMENT_INVALID insufficient density (0 vs >=50/family, BrowserGym-core 0.14.3 available proving import not bottleneck). Producer correctly avoided post-hoc seed change, preserved deterministic seed 35725763380, disclosed representation loss, and ABANDONED CAP 567MB LFS/420-task exhaustive per Director SUPERSEDE not falsified. No PRODUCT_CORE promotion authorized: requires Product lane, PASS audit and promote_to_product=true — this Intel MEASUREMENT_INVALID does not meet gate. Continue false: next step requires Docker/WebGym substrate repair plus Global Director scheduled pulse, not immediate chaining; Frontier orthogonal work continues separately. Broader C-CROSSSITE domain not closed by this bounded invalid measurement.",
+  "evidence_refs": [
+    "research/experiments/EXP-INTEL-35876349051/request.json:e937f6e9948dab8ba4709a48161b1a47e153b9bf7986888166dc2893389859e0",
+    "research/experiments/EXP-INTEL-35876349051/spec.json:d07dbaf4af8f16cf6223e5c169459b01b7be315c272586a097a0966f655b1249",
+    "research/experiments/EXP-INTEL-35876349051/prereg.md:6aaf823b21fc623da3ce8ce8285a61ceca7e93f8ec2d7a5d5eaae7df82c91e30",
+    "research/experiments/EXP-INTEL-35876349051/freeze.json",
+    "research/experiments/EXP-INTEL-35876349051/result.json",
+    "research/experiments/EXP-INTEL-35876349051/report.md",
+    "research/experiments/EXP-INTEL-35876349051/provenance.json:b969bdb3a6248d54080301c564cc68567b01554e84eeffd888e7edaaf0a75ff3",
+    "research/experiments/EXP-INTEL-35876349051/audit.json:PASS producer_claim_supported=true required_fixes=[] validity_findings[0-6] baseline_findings recomputed_metrics claim_ceiling",
+    "research/experiments/EXP-INTEL-35876349051/artifacts/raw/ax_captures.jsonl:19473aa0715a2f25098b04d32ff9671d6a4f74d58aa4d7597403bb99ca500063 (20 UNAVAILABLE_SUBSTRATE entries node_count 0)",
+    "research/experiments/EXP-INTEL-35876349051/artifacts/derived/ax_consistency_fulltree.json:e25a9ed60450c82fc4918ff707aeeb9bc7a7836c54823696d3840b19f2f69583 (null metrics grammar_hash 8d4b)",
+    "research/experiments/EXP-INTEL-35876349051/artifacts/derived/stagehand_replication_recomputed.json:81814cc955572dd5c787044c7f5ebeca174158867bd01fbffe43bc1ce3df6bc8",
+    "research/experiments/EXP-INTEL-35876349051/artifacts/derived/webgym_census.json:1d8dc73ee38179387e8a35ba8c43420881c47f66c8fe7df50bc46b89cfa727d4 (0 sites UNAVAILABLE)",
+    "research/experiments/EXP-INTEL-35876349051/artifacts/derived/gate0_relaxed_table.json:5af6a1d31ad372a17a90ec22bc5d9e90649b15d1cd4197999de03a8cfeb40cdc (0 transitions)",
+    "research/experiments/EXP-INTEL-35860344410/handoff.json:5c5b4ddc189258e0f62bbccf576424047101aef164374c5d3f9730dbe6bc30e9 (prior 20/20 live proof 668-1426 nodes)",
+    "research/experiments/EXP-INTEL-35860344410/artifacts/raw/ax_captures.json:9990b66d2bd5f4d4d76807da481db05bc5e4d33bd5cbd7171a4cbc2902da0e43 (prior 20/20 valid)"
+  ]
+}

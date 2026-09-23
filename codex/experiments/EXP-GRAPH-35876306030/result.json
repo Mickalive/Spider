@@ -1,0 +1,249 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-35876306030",
+  "lane": "graph",
+  "status": "MEASUREMENT_INVALID",
+  "outcome": "NOT_APPLICABLE",
+  "metrics": {
+    "M-EXECUTABLE-SPIDER": null,
+    "M-EXECUTABLE-SPIDER-WilsonLow": null,
+    "M-EXECUTABLE-SPIDER-WilsonHigh": null,
+    "M-BINDING-CORRECT": null,
+    "M-BINDING-CORRECT-WilsonLow": null,
+    "M-BINDING-CORRECT-WilsonHigh": null,
+    "M-UNSUBSTITUTED-TEMPLATES": null,
+    "M-FALSE-ACCEPT-SPIDER": null,
+    "M-FALSE-ACCEPT-WilsonHigh": null,
+    "M-UNKNOWN-RATE-SPIDER": null,
+    "M-ECE": null,
+    "M-SUCCESS-SPIDER": null,
+    "M-SUCCESS-COLD": null,
+    "M-SUCCESS-RAG": null,
+    "M-SUCCESS-REPLAY": null,
+    "M-SUCCESS-INSTR": null,
+    "M-SUCCESS-LITERAL": null,
+    "M-BINDING-CONTROL-PC2": null,
+    "M-AMORTIZED-SAVING-vs-COLD": null,
+    "M-COST-RATIO-vs-RAG": null,
+    "tasks_valid": 0,
+    "families_valid": 0,
+    "census_verified": false,
+    "census_tasks": 0,
+    "census_templates": 0,
+    "census_duplication": null,
+    "families_ge3": 0,
+    "pilot_family": "add_to_cart",
+    "pool_a_size": 0,
+    "pool_b_size": 0,
+    "zero_overlap_verified": false,
+    "llm_available": false,
+    "kernel_sha256": "46929b3a951df48d7f9d1fd850871073c0d91c1868aa117e13d389fe274e8d61",
+    "kernel_checks": {
+      "distill_parameterized": false,
+      "distill_parameterized_hits": 0,
+      "_common_prefix_and_suffix": false,
+      "_common_prefix_and_suffix_hits": 0,
+      "_extract_varying_values": false,
+      "_extract_varying_values_hits": 0,
+      "_structure_similarity": false,
+      "_structure_similarity_hits": 0,
+      "_is_allowed_path": false,
+      "_is_allowed_path_hits": 0,
+      "_field_path_to_slot_name": false,
+      "_field_path_to_slot_name_hits": 0,
+      "_sanitize_slot": false,
+      "_sanitize_slot_hits": 0,
+      "confidence_090": false,
+      "single_prefix": false,
+      "jaccard_thresh": false
+    },
+    "unit_tests_passed": false,
+    "PC1-HIT-RATE": null,
+    "PC2-EXECUTABLE": null,
+    "PC2-BINDING": null,
+    "NC1-SHUFFLED-BINDING": null,
+    "B-LITERAL-EXECUTABLE": null,
+    "bootstrap-executable-low": null,
+    "bootstrap-executable-high": null,
+    "reason_api_key_absent": "OPENAI_API_KEY absent; LLM baselines NOT_APPLICABLE per frozen falsifier, but primary binding gate invalid independently due to kernel/census gates",
+    "kernel_gate_pass": false,
+    "census_gate_pass": false
+  },
+  "controls": {
+    "KERNEL-FIX": {
+      "id": "KERNEL-FIX",
+      "description": "distill_parameterized single-prefix field-filter Jaccard>=0.75 distinct slot confidence 0.90 durably in src/spider/kernel.py verified by grep>=1, sha256 HEAD, git diff base..HEAD nonempty, tests/test_kernel_param_inherit.py passing B1/B4/D1/E1/C2/B2/B3/B5",
+      "expected": "7 functions present (grep>=1 each), sha256 matches HEAD and provenance, git diff base_sha..HEAD nonempty for src/spider/kernel.py, unit tests 19/19 PASS",
+      "observed": "grep 0 hits for all 7 required symbols (distill_parameterized 0, _common_prefix_and_suffix 0, _extract_varying_values 0, _structure_similarity 0, _is_allowed_path 0, _field_path_to_slot_name 0, _sanitize_slot 0, confidence_090 0, single_prefix 0, jaccard_075 0), sha256 46929b3a951df48d7f9d1fd850871073c0d91c1868aa117e13d389fe274e8d61 vs claimed f2b86c98 mismatch, git diff base_sha 9e0898ce..HEAD empty (0 bytes), tests/test_kernel_param_inherit.py missing (no such file), pytest module not installed, SpiderKernel has no attribute distill_parameterized (kernel_methods=[distill, invalidate, observe, resolve, verify])",
+      "pass": false,
+      "evidence_ref": "research/experiments/EXP-GRAPH-35876306030/raw_evidence/kernel_check.json sha256 1b8c5dd79f9add3dfbdf186495ccee3118219418affdc70982de3c1128b86aae, research/experiments/EXP-GRAPH-35876306030/raw_evidence/distill_attempt.json sha256 9c6d77603a5dd097c3df5eb515eb23b231adcf2bf2dc07b464c49acc70111806, src/spider/kernel.py sha256 46929b3a951df48d7f9d1fd850871073c0d91c1868aa117e13d389fe274e8d61"
+    },
+    "CENSUS-VERIFICATION": {
+      "id": "CENSUS-VERIFICATION",
+      "description": "WebArena-Verified v2 file-based census from durable source data/webarena_verified_v2.json or Docker am1n3e/webarena-verified-shopping@sha256:3e8cb9b945 or static export sha256:d65275660814663375028e9017e1f929e3c38321041b125795e2713b52243d30 with >=10 valid B tasks family-stratified zero-overlap value_set_A ∩ B = ∅",
+      "expected": "durable file exists with >=10 valid B tasks, >=1 family >=10 tasks total, >=3 A exemplars and >=7 B tasks zero-overlap SHA256 logged, duplication stats logged, 404 GitHub fallback not counted",
+      "observed": "data/webarena_verified_v2.json exists false sha null size 0; research/experiments/EXP-GRAPH-35876306030/census.json exists false; Docker image not present (docker images shows only ghcr.io proxies, no am1n3e image); zero-overlap not verifiable (0 tasks); tasks_valid 0 <10 fails adequacy gate (>=10 required, <7 would be MEASUREMENT_INVALID)",
+      "pass": false,
+      "evidence_ref": "research/experiments/EXP-GRAPH-35876306030/raw_evidence/census_attempts.json sha256 365045025e42e9211334076139dbf6b2cdd4f7618089a051c87de9b9b69dba8f"
+    },
+    "PC-PARAM-REGRESSION-AND-LITERAL-HIT": {
+      "id": "PC-PARAM-REGRESSION-AND-LITERAL-HIT",
+      "description": "PC1 same-A literal hit_rate 1.0 50 tok success 1.0; PC2 multi-param same-A EXECUTABLE 1.0 binding 1.0 zero templates success >=0.90 (or binding 1.0 if LLM unavailable) via real registry/_bind/verify",
+      "expected": "PC1 hit_rate 1.0 cost 50 tok success 1.0; PC2 EXECUTABLE 1.0 binding 1.0 zero templates",
+      "observed": null,
+      "pass": false,
+      "reason": "Not executed: kernel gate failed (no distill_parameterized) and census gate failed (0 tasks), so PC1/PC2 cannot be measured via real registry/_bind/verify; prerequisite measurement_validity #1 and #2 fail before PC, per frozen decision_rule PC failure is MEASUREMENT_INVALID not falsification",
+      "evidence_ref": "research/experiments/EXP-GRAPH-35876306030/raw_evidence/per_task.csv sha256 32894a6eaf7424020e1bb867e6d27f87d33aa5fdd34041988869c77840973a12 (0 rows), research/experiments/EXP-GRAPH-35876306030/raw_evidence/registry.json sha256 3b501b4b2e3fbc6b3cf85f75bfcbe6fa2fec1f7215e94ae56c96c242a5706ef1"
+    },
+    "NC-SHUFFLED-AND-RANDOM": {
+      "id": "NC-SHUFFLED-AND-RANDOM",
+      "description": "NC1 shuffled slot mapping binding <0.50 success <=COLD+0.05 false_accept >=0.25; NC2 random retrieval false_accept >=0.30 via real registry/_bind/verify",
+      "expected": "NC1 shuffled binding <0.50 false_accept >=0.25; NC2 random false_accept >=0.30",
+      "observed": null,
+      "pass": false,
+      "reason": "Not executed: kernel and census gates failed, so NC1/NC2 cannot be exercised via real _bind/verify; null correctly not forced to flat constant per measurement_validity #3",
+      "evidence_ref": "research/experiments/EXP-GRAPH-35876306030/raw_evidence/distill_attempt.json"
+    },
+    "B-COLD": {
+      "id": "B-COLD",
+      "description": "Cold LLM agent no memory same model/tools/budget gpt-4o-mini-2024-07-18 temp 0.0 seed 42 max 15 steps 4096 tokens Playwright chromium",
+      "expected": "Success lower than SPIDER on held-out B where B identifiers never observed",
+      "observed": null,
+      "pass": "unknown",
+      "reason": "NOT_APPLICABLE: OPENAI_API_KEY absent per spec LLM unavailability makes F3/F4 NOT_APPLICABLE; primary binding gate invalid independently, so no LLM comparison possible"
+    },
+    "B-RAG": {
+      "id": "B-RAG",
+      "description": "RAG Jaccard 0.30 verbatim retrieval 200 tok measured, fallback to COLD on miss",
+      "expected": "Hit_rate ~0.05-0.10 on held-out B (exact-copy 0.0781)",
+      "observed": null,
+      "pass": "unknown",
+      "reason": "NOT_APPLICABLE: LLM unavailable and kernel/census gates failed"
+    },
+    "B-REPLAY-TERX": {
+      "id": "B-REPLAY-TERX",
+      "description": "0-token exact replay TERX 50 tok verification, exact action_template string equality, fallback to COLD on miss",
+      "expected": "Hit_rate ~0.0 on held-out B, cost = COLD",
+      "observed": null,
+      "pass": "unknown",
+      "reason": "NOT_APPLICABLE: LLM unavailable and kernel/census gates failed; same-A PC1 not measurable due to kernel gate"
+    },
+    "B-INSTR": {
+      "id": "B-INSTR",
+      "description": "Site-specific instructions 200 tok amortized 200/f=20 tok/task",
+      "expected": "Cost below COLD but above SPIDER",
+      "observed": null,
+      "pass": "unknown",
+      "reason": "NOT_APPLICABLE: LLM unavailable and census gate failed"
+    },
+    "B-LITERAL": {
+      "id": "B-LITERAL",
+      "description": "Literal distill without slots via same registry path, EXECUTABLE 0.0 expected on held-out B, leakage check >0.15 falsifies hold-out",
+      "expected": "Success ~0.0 on held-out B EXECUTABLE 0.0",
+      "observed": null,
+      "pass": false,
+      "reason": "Not measured: census gate failed (0 B tasks), so B-LITERAL cannot be exercised even though literal distill() exists in kernel (confidence 0.5 literal mechanism would be EXPLORE); requires valid B set to verify param necessity",
+      "evidence_ref": "src/spider/kernel.py distill() exists but distill_parameterized missing"
+    }
+  },
+  "artifacts": [
+    {
+      "path": "src/spider/kernel.py",
+      "sha256": "46929b3a951df48d7f9d1fd850871073c0d91c1868aa117e13d389fe274e8d61",
+      "role": "code"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-35876306030/raw_evidence/kernel_check.json",
+      "sha256": "1b8c5dd79f9add3dfbdf186495ccee3118219418affdc70982de3c1128b86aae",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-35876306030/raw_evidence/census_attempts.json",
+      "sha256": "365045025e42e9211334076139dbf6b2cdd4f7618089a051c87de9b9b69dba8f",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-35876306030/raw_evidence/distill_attempt.json",
+      "sha256": "9c6d77603a5dd097c3df5eb515eb23b231adcf2bf2dc07b464c49acc70111806",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-35876306030/raw_evidence/unit_test_output.json",
+      "sha256": "1bed183da44056438c206f9c329b5881e98a7b3ade581ff6e8463e8984d0dadd",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-35876306030/raw_evidence/per_task.csv",
+      "sha256": "32894a6eaf7424020e1bb867e6d27f87d33aa5fdd34041988869c77840973a12",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-35876306030/raw_evidence/registry.json",
+      "sha256": "3b501b4b2e3fbc6b3cf85f75bfcbe6fa2fec1f7215e94ae56c96c242a5706ef1",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-35876306030/raw_evidence/cost_config.json",
+      "sha256": "4727054db7a59d37ec4fecf3df28db104c6137bf436f688d0b94f6c46cad91cf",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-35876306030/raw_evidence/environment.json",
+      "sha256": "7b31a096ac46a2402d7de33f099a0247e268e2f2c98329de24fa7df871d3e527",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-35876306030/request.json",
+      "sha256": "b6b7c45e29c8f324259d168122ffaca3455e590de1168fb4f3c3a2c8f7a72c98",
+      "role": "fixture"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-35876306030/spec.json",
+      "sha256": "1c079eba69c1729f47d3babbf21aae2c0ec26b35d3217ffa509c4429b0d67ab3",
+      "role": "fixture"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-35876306030/prereg.md",
+      "sha256": "1ec076d2d23e330b23f2cfd80077c6d36692d729dac695df27ed542fa369d0db",
+      "role": "fixture"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-35876306030/freeze.json",
+      "sha256": "3e9173d689fd964cda12178896358f739bd1daef1df95a6f29fdbb493b04d0e8",
+      "role": "fixture"
+    }
+  ],
+  "observations": [
+    "Kernel file src/spider/kernel.py exists true size 4815 bytes sha256 46929b3a951df48d7f9d1fd850871073c0d91c1868aa117e13d389fe274e8d61 head_sha 07a90be2367c320e6a74b14019b87714a358ca7a base_sha 9e0898ce6a3334f778e85bf5ceae3de61f57a6f3",
+    "Grep hits in src/spider/kernel.py: distill_parameterized 0, _common_prefix_and_suffix 0, _extract_varying_values 0, _structure_similarity 0, _is_allowed_path 0, _ALLOWED_PREFIXES 0, _field_path_to_slot_name 0, _sanitize_slot 0, confidence 0.90 0, single-prefix 0, Jaccard 0.75 0 — grep_all_ge1 false",
+    "git diff base_sha 9e0898ce..HEAD -- src/spider/kernel.py nonempty false diff_stat '' diff_content empty (0 bytes), HEAD==base for this file, kernel fixes from prior EXP-GRAPH-35864745180 (sha f2b86c98) not durably retained on current branch",
+    "Attempted Python import: SpiderKernel has methods [distill, invalidate, observe, resolve, verify] but has_distill_parameterized false, error 'SpiderKernel has no attribute distill_parameterized', _matches self-test true, _template_slots self-test true — verification substrate exists but parameterization missing",
+    "tests/test_kernel_param_inherit.py exists false sha null, unit_test_output returncode 1 stderr 'No module named pytest' and file not found, unit_tests_passed false B1/B4/D1/E1/C2/B2/B3/B5 not exercised",
+    "Census durable sources: data/webarena_verified_v2.json exists false, research/experiments/EXP-GRAPH-35876306030/census.json exists false, Docker am1n3e/webarena-verified-shopping@sha256:3e8cb9b945 not present (docker images only ghcr.io proxies), durable_source_satisfied false",
+    "Census tasks_valid 0 <10 adequacy gate fails (target >=10 valid B tasks, <7 MEASUREMENT_INVALID per measurement_validity #2), families_valid 0, pilot_family add_to_cart with 0 exemplars, zero_overlap_verified false SHA null",
+    "Raw per_task.csv 0 rows plus header only, registry.json mechanisms 0, cost_config f=10 noted api_key_absent",
+    "LLM availability false: OPENAI_API_KEY absent, so B-COLD/B-RAG/B-REPLAY-TERX/B-INSTR and economics at f=10 are NOT_APPLICABLE per frozen falsifier, but binding gate invalid independently due to kernel/census gates",
+    "Previous experiment EXP-GRAPH-35864745180 had durably fixed kernel at head 19daf51f sha f2b86c98 with 282 tasks but current allocation base 9e0898ce lost that commit (lab2/graph not merged), repeating 6th consecutive MEASUREMENT_INVALID due to transient kernel/fabricated provenance pattern described in prereg background"
+  ],
+  "validity_notes": [
+    "MEASUREMENT_INVALID per frozen measurement_validity #1: durable kernel fix not in src/spider/kernel.py — 7 required functions grep 0, sha256 46929b3a mismatch vs claimed f2b86c98, git diff empty, unit tests missing/failing; must pass before any B measurement per prereg Design step 1, so no B inference attempted",
+    "MEASUREMENT_INVALID per frozen measurement_validity #2: WebArena-Verified v2 census not durably provisioned (<10 valid tasks after dedup/zero-overlap, no file at data/webarena_verified_v2.json or Docker or static export sha256:d65275660814663375028e9017e1f929e3c38321041b125795e2713b52243d30), 404 raw GitHub fallback alone does not count as census_verified per spec",
+    "Family hold-out leakage check not applicable (0 tasks) — value_set_A ∩ B cannot be verified, but would be logged via SHA256 of sorted value sets if census existed",
+    "Deterministic verification substrate _matches exists and self-tests pass, but distill_parameterized -> registry -> required_slots|template_slots/_bind/verify path not exercised because induction missing; verification broken clause (iv) not yet triggered but induction absent triggers kernel gate first",
+    "LLM unavailability alone does NOT invalidate F1/F2 binding gates per prereg falsifier and validity #5 — however here F1/F2 not measured due to kernel/census invalidity, so LLM NOT_APPLICABLE is secondary to primary MEASUREMENT_INVALID",
+    "Representation loss: file-based single-family ceiling would be bounded to synthetic/file census via deterministic _matches (no DOM/AX, history branching, multi-channel mixed requests) even if census existed — claim ceiling explicitly file-based per validity #2, not production DOM/AX",
+    "Statistics honoring task structure not computed (0 tasks) — Wilson 95% CI and family-stratified task-bootstrap 5000 seed 42 would be used if B set existed; at n=10 Wilson lower for perfect is 0.722 so binding Wilson lower >=0.80 requires n>=16 per validity #7 power disclosure (~0.45 power at n=14 for 0.12 delta)",
+    "Cost accounting: honest tokens+browser+retrieval+verification amortized at f=10 not measured; would be API usage + browser count+ms + retrieval 200 tok + verification 50 tok + distill 1000 tok amortized only to SPIDER; here null with reason api_key_absent but invalid independently",
+    "Prereg frozen before any outcome-bearing B measurement (freeze hashes prereg 1ec076d2 spec 1c079eba request b6b7c45e); thresholds EXECUTABLE 0.75 lower 0.65 binding 0.90 lower 0.80 false_accept 0.10 UNKNOWN [0.00,0.15] ECE 0.15 margin 0.12 saving 25% cost ratio 0.85 Jaccard 0.75 confidence 0.90 not weakened",
+    "Graph lane allowed_code_roots research/harness research/graph — src fix would require product lane but director mandate requires durable commit to src/spider/kernel.py; this EXECUTE correctly does not silently patch src, preserving frozen input immutability per AGENTS.md work discipline",
+    "This is 6th consecutive MEASUREMENT_INVALID on C-PARAM-INHERIT (prior 5 described in prereg plus current), confirming parent_handoff carry_forward do_not_assume 1-4 still holds: do not assume src HEAD contains 7 functions, do not assume tests pass, do not assume census durable"
+  ],
+  "unresolved": [
+    "Whether genuinely fixed distill_parameterized (single-prefix, distinct slot per field-path, field-path relevance filter url/body.*/headers.* only, Jaccard>=0.75 constant-anchor, confidence 0.90) durably committed to src/spider/kernel.py would achieve EXECUTABLE>=0.75 and binding>=0.90 with zero unsubstituted templates on durable single-family add_to_cart A->B zero-overlap via deterministic _matches — still unknown, requires durable src commit and re-run",
+    "Whether file-based synthetic census success would generalize to durable Docker/static-export WebArena census with production DOM/AX, history branching, multi-channel mixed requests, and multi-param families (10-family scale-up) — unknown, bounded ceiling",
+    "When LLM substrate provisioned (gpt-4o-mini-2024-07-18 temp 0.0 seed 42 max 15 steps 4096 tokens + Playwright + verify), does SPIDER achieve success margin>=0.12 vs each of B-COLD/B-RAG/B-REPLAY-TERX/B-INSTR and amortized saving>=25% vs COLD at f=10 with cost ratio<=0.85 vs RAG — NOT_APPLICABLE this run, requires LLM provision plus valid kernel/census",
+    "ECE<=0.15 calibration and false_accept<=0.10 stability at n>=16 with honest confidence gating on larger family-stratified task set — unresolved, no B measurements",
+    "Kernel integration details: _common_prefix_and_suffix single-prefix handling of full values (e.g., user-4 vs 4), double-prefix avoidance, and _structure_similarity threshold wiring into distill/bind path — unresolved due to missing implementation",
+    "What minimal next action unblocks measurement: (1) durably commit src/spider/kernel.py patch with 7 functions, confidence 0.90, sha256 logged and git diff vs base nonempty, (2) provision durable census via data/webarena_verified_v2.json or Docker am1n3e/webarena-verified-shopping@sha256:3e8cb9b945 or static export sha256:d6527566 with pinned hash, (3) ensure tests/test_kernel_param_inherit.py exists and passes B1/B4/D1/E1/C2/B2/B3/B5, (4) install pytest for unit test measurement — without these, any 60-task multi-family would be next MEASUREMENT_INVALID per Director comparative reasoning"
+  ]
+}

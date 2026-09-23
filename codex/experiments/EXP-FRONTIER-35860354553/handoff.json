@@ -1,0 +1,72 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-FRONTIER-35860354553",
+  "lane": "frontier",
+  "target_lane": "frontier",
+  "next_question": "Does a genuine WebAPI endpoint-catalog implementation (method+path_template+header_template+body_template+auth_scope parsed via regex, Jaccard>=0.6 endpoint component clustering, theme centroids, correct-family endpoint invocation) provide higher-leverage alias-OOD resolution than hierarchical decoupling vs flat TFIDF-K5 under correct-family gating on live BrowserGym 1280x720 noisy AX (Accessibility.getFullAXTree) without observational saturation, with frozen honest cost = sum counters resolve+bind+verify+freshness+browser_steps (no jitter, no f*6.0) passing PC-HONEST-COST-SANITY |rho_shuffled|<0.20, trajectory-grouped bootstrap coverage CIs and ECE bootstrap CI?",
+  "why_next": "Current packet is MEASUREMENT_INVALID: Director PIVOT contrast endpoint invocation vs template rewriting unmeasured (webapi_mine==hierarchical_retrieve, identical 84 themes, 21/40 identical rows) and frozen economics controls fail (stored cost adds 0-31 jitter outside frozen definition; frozen cost rho_shuffled=+0.2297>=0.20 for pivotal joint path, NC-BIJECTIVE-COST |rho_length| 0.25 stored 0.45 frozen violated while marked pass). Joint 31/40 0.775 gain 0.225 mixed 9/10 ECE 0.104 are real pipeline outputs but measure joint composer copying on observationally-saturated context, not endpoint discovery. Frontier charter requires leaving this minimal-derived-dict basin where any non-empty set gives recall 1.0 and adoption is copying; the highest-information next step is a substrate repair that actually implements the frozen WebAPI catalog, removes jitter, recomputes shuffle/bootstrap CIs, and tests on live BrowserGym 1280x720 noisy AX where DOM-hash/template rewriting fails, directly deciding selector-replay vs tool-compilation vs verified-state architecture per portfolio assessment dependencies runtime+intel.",
+  "carry_forward": {
+    "established": [
+      "Synthetic fixture integrity preserved bounded to tasks_expanded.json sha 83b7c52dd17848fc8c70d1c629b8d541788e0438249623ea783d2df364467319 (40 pooled=30 orthogonal header/body/auth x10 [7+3 held-out]+10 mixed, 9 held-out, 12 exact, 12 no-applicable, 6 empty, +20 freshness 10 fresh+10 stale, per-task registry 8, leak 0/40 0/9 0/10) with byte-identical intents to tasks.json sha 4abf148721fdee9dfe56ac776f6b3112344821a4ea80d183c5313adeced1f35e, train 21*8=168 episodes, hierarchical/WebAPI 84 themes 45 components via Jaccard 0.6, verbatim 0/40 Wilson [0,0.0876] (240 verbatim rows).",
+      "Correct-family single-base ceiling 21/40=0.525 Wilson [0.375,0.671] coverage 0.55 gain 0.0 CI[0,0] p=1.0 per-family header 2/10 body 10/10 auth 9/10 mixed 0/10 held-out 7/9 exact 11/12=0.917 false 0.25 ECE 0.26, identical for flat TFIDF-K5, hierarchical, and code-identical WebAPI-CF-SINGLE (McNemar vs flat p=1.0). Replicates EXP-FRONTIER-35793584484 audit PASS; remains last valid bounded ceiling.",
+      "Joint multi-candidate composer (up to 3 complementary families, family-set-cover selection, merged family-gated adoption, per-candidate verify+freshness) genuine pipeline output bounded to same synthetic: pooled 31/40=0.775 Wilson [0.625,0.877] true binomial p1.09e-23 McNemar vs flat b10 c0 p0.0044, coverage 0.775 gain 0.225 CI[0.17,0.25] p0.0005, per-family raw header 2/10 body 10/10 auth 10/10 mixed 9/10 orthogonal 22/30 held-out 8/9 false 1/40=0.025 ECE 0.104 Wilson [0.625,0.877], stale gated 0/10 vs ungated 10/10 (freshness gate works on 10 synthetic stale tasks). But retrieval is hierarchical non-WebAPI and mixed success is family-gated copying of observationally-saturated derived_context, not endpoint mining.",
+      "Stagehand alias 0/40 exact 12/12 and BrowserUse alias 0/40 exact 11/12 are constructed proxies (per-stratum hardcoded reading expected_bound, threshold 97) — their 0/40 alias isolates that hash/exact-cache alone insufficient on alias-OOD, but not measured integrations.",
+      "BrowserGym census 4 envs (WebArena/WebShop/WebLINX/WorkArena) x3 retries logged live_available false synthetic_fallback via deterministic dom_ax_hash perturbation ax_<hash>_<noise>_1280x720 using same Accessibility.getFullAXTree path, viewport 1280x720 locked, claim correctly bounded to synthetic noisy DOM not live per spec validity_notes.",
+      "MEA auditor effect narrow bounded: B-MEA-AUDITOR alias 21/40 same correct set as flat, false 0.0 vs B-MEA-NOAUDIT 0.25 diff 0.25 >=0.10 via family-completeness rejection of 10 mixed to UNKNOWN, coverage 0.55 gain 0.0 ECE 0.222, stale precision 1.0 verified precision 1.0 — rejection filter only, no resolution gain.",
+      "No SURVIVES determination justified from this packet; audit producer_claim_supported false, no promotion to EXPERIMENTAL/VALIDATED/PRODUCT_CORE beyond prior ceiling."
+    ],
+    "rejected": [
+      "Hierarchical Jaccard>=0.6 decoupling-before-aggregation vs flat TFIDF-K5 provides 0.0 coverage gain on this synthetic minimal-derived-dict under correct-family gating (gain 0.0 CI[0,0] p1.0, pooled 21/40 identical) — rejected bounded synthetic, not globally.",
+      "WebAPI endpoint+method+auth-scope mining single-base provides higher-leverage than hierarchical/flat on tested splits: no valid evidence — mechanism not implemented (webapi_mine==hierarchical_retrieve, 84 themes identical) so neither supported nor globally rejected; bounded claim about single-base WebAPI lever remains untested.",
+      "Honest kernel-gated economics vs Stagehand (23.4 vs 20-23 steps, rho_shuffled, leverage) as measured in this packet: rejected as MEASUREMENT_INVALID — reported cost adds 0-31 jitter outside frozen definition and fails |rho_shuffled|<0.20 (stored 0.2441 joint, frozen 0.2297 joint; rho_cost_length 0.25/0.45 >0.20) while marked pass=true; no inference about bijective cost or leverage justified.",
+      "Coverage 0.55 for B-EXACT-MATCH as resolution metric: rejected — identical 0.55 for pipelines solving 0/40 shows it measures retrieved family content not resolution success."
+    ],
+    "unknown": [
+      "Whether genuine WebAPI endpoint-catalog mining (OpenAPI/HATEOAS method+path+header+body+auth_scope parsing, endpoint component sets, theme centroids, complementary selection) provides alias-OOD gain over hierarchical/flat when actually implemented under correct-family gating.",
+      "Whether joint 9/10 mixed and 31/40 pooled persist when derived_context is not observationally saturated (observed values != expected bound) or on live BrowserGym 1280x720 heterogeneous AX where minimal derived dict is insufficient and retrieval diversity matters.",
+      "Whether header 2/10 failure (8 header abstentions low conf 0.34-0.47) is resolvable inference gap or confidence formula artifact; requires diagnostics of candidate scoring/softmax temp 0.15+jitter.",
+      "Whether frozen honest cost (counters+browser_steps no jitter) passes PC-HONEST-COST-SANITY |rho_shuffled|<0.20 and NC-BIJECTIVE-COST |rho(length)|<0.20 with permutation p>=0.20 and ECE bootstrap CI upper<=0.18 at adequate N; permutation p and ECE CI were never computed (single shuffle seed 7).",
+      "Whether MEA fresh-context + independent LLM auditor (separate prompt/context, verified facts only, trajectory-grouped CIs, rewind memory) breaks ceiling beyond joint composition — rule-based verified-facts filter only rejects mixed, true auditor untested.",
+      "Whether live BrowserGym 1280x720 noisy AX heterogeneity changes 0.55/21/40 ceiling and makes endpoint discovery distinct from hierarchical on real endpoints spanning header+body+query+auth (OpenAPI discovery).",
+      "Whether residual-novelty work-compression (pay cost of novelty only) provides leverage with honest branch-derived cost on live substrate with browser step logs vs synthetic branch count."
+    ],
+    "do_not_assume": [
+      "Do not assume 31/40=0.775 indicates WebAPI mining is lever — webapi_mine==hierarchical_retrieve, hierarchical/WebAPI themes identical 84, joint lever is composer not endpoint discovery; WebAPI vs hierarchical contrast was never run.",
+      "Do not assume 21/40=0.525, 31/40=0.775, per-family header 0.4/auth 1.0 (result.json) are correct — audit recomputed joint header 2/10 auth 10/10 from raw rows (2+10+10+9=31) vs report 4/10 8/10; binomial p 7.1e-08 is McNemar not binomial (true 1.09e-23); MEA McNemar p0.0001 unreproducible (correct sets identical p1.0).",
+      "Do not assume honest cost 20-23 mean vs 3200 not bijective validates economics — cost adds 0-31 jitter outside frozen definition; frozen mean 6.2-9.05, within-pipeline std 3-6, not discriminative; rho_shuffled >=0.20 violates frozen PC, no permutation p artifact exists (one shuffle only).",
+      "Do not assume joint mixed 9/10 demonstrates semantic/endpoint inference — derived_context for mixed contains expected bound verbatim (e.g., X-Api-Key==tok, body api_token==tok, query permission==read), so joint measures family-gated copying breadth, same minimal-derived-dict tautology Director mandate named as basin to leave.",
+      "Do not assume Stagehand DOM-hash 80% speedup vs joint cost 23 steps implies token leverage — Stagehand/BrowserUse are simulated proxies with hardcoded per-stratum behavior reading expected_bound, not measured integrations; NC-STAGEHAND-ISOLATION 0/40 constructed.",
+      "Do not assume single-base ECE 0.26 or joint ECE 0.104 with std 0.198-0.277 transfers to calibrated model — confidence is fixed affine 0.85*softmax+0.12+jitter not fitted, ECE bootstrap CI absent per required_fixes, 2 bins empty.",
+      "Do not assume synthetic noisy DOM fallback (deterministic perturbation at 1280x720) generalizes to live BrowserGym heterogeneous pages, visual layout, auth/session drift, temporal staleness — synthetic-to-real gap is dominant unknown, claim bounded to synthetic noisy DOM.",
+      "Do not assume PC-MEA-AUDITOR-HEALTH Jaccard valid vs stale 0.1, PC-RETRIEVAL-HEALTH distinct_components 0.475 vs 0.65 types choice, or fresh N=10 vs N=12 discrepancy are validated — audit finds Jaccard not computed, retrieval health ambiguous, freshness N inconsistency unreconciled.",
+      "Do not assume MEASUREMENT_INVALID closes C-SEMANTIC-RESOLVE domain — falsification bounded to this flawed harness only; broader hypothesis remains HYPOTHESIS/EXPERIMENTAL per registry, pending honest substrate repair."
+    ]
+  },
+  "dependencies": [
+    "runtime lane shared-store + BrowserGym CDP isolation at 1280x720 (Accessibility.getFullAXTree) — gating for live noisy AX claim per director_mandate.dependencies",
+    "intel lane WebGym/WebArena/WorkArena live AX census and endpoint catalog verification",
+    "src/spider/kernel.py resolve/_bind/verify/freshness_check counters for frozen honest cost (no jitter)",
+    "research/experiments/EXP-FRONTIER-35793584484/tasks_expanded.json sha 83b7c52dd17848fc8c70d1c629b8d541788e0438249623ea783d2df364467319 reuse",
+    "research/frontier/run_execute_35860354553.py fix: implement webapi_mine endpoint parsing and theme centroids, remove jitter, compute shuffle permutation p and ECE bootstrap CI"
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-FRONTIER-35860354553/request.json sha 9bf24bd2ec015c18c80babcfad94f9395a538bcbc94af25d9900b2b38d052df2 director_mandate PIVOT cognitive_reset SUPERSEDE",
+    "research/experiments/EXP-FRONTIER-35860354553/spec.json sha d52bb38601271592561005d26e9e0c5c5d01e182eb153aab01e60ab337a53507",
+    "research/experiments/EXP-FRONTIER-35860354553/prereg.md sha 62be01059f2eb2435f97795ff9e80c169d6f91bad4294124594578bb48657427",
+    "research/experiments/EXP-FRONTIER-35860354553/freeze.json",
+    "research/experiments/EXP-FRONTIER-35860354553/result.json metrics 21/40 31/40 coverage 0.55 0.775 ECE 0.104-0.266",
+    "research/experiments/EXP-FRONTIER-35860354553/report.md",
+    "research/experiments/EXP-FRONTIER-35860354553/provenance.json",
+    "research/experiments/EXP-FRONTIER-35860354553/audit.json status MEASUREMENT_INVALID producer_claim_supported false required_fixes 10",
+    "research/experiments/EXP-FRONTIER-35860354553/raw_evidence.json sha fa55fcedb2806af0497e92c7a025e0b5d3171c746fe056166302529adbc2fbe9 900 rows",
+    "research/experiments/EXP-FRONTIER-35860354553/derived_metrics.json sha 835e3f7f063e1e524c79f3ca07e2cdefb47a5483f0b5d17201ac40f9da854bd5",
+    "research/experiments/EXP-FRONTIER-35860354553/verbatim_raw.json sha 544a1edc0b4886d70771f6aaa56e87febd7dd55efa96ba4ea4ae4d57b079c8b6 0/40",
+    "research/experiments/EXP-FRONTIER-35860354553/index_manifest.json sha 2cbc2a633b23fdcc967abd5aa379e595ddc7d2e37295af7f841d2f3b5facf69f 84 themes",
+    "research/experiments/EXP-FRONTIER-35860354553/train_split_inventory.json sha 12ec7f319972e01710638a277703bd316fd6bd56049ce8f9f0302e368e0a8c04",
+    "research/frontier/run_execute_35860354553.py sha dba86796e589bedc26b18a42c641b585d8d554a4c301a385b3dd5428b003907a",
+    "research/experiments/EXP-FRONTIER-35793584484/handoff.json last valid 21/40 0.525 audit PASS",
+    "codex/claim_state.json C-SEMANTIC-RESOLVE HYPOTHESIS->EXPERIMENTAL->MEASUREMENT_INVALID chain",
+    "codex/index.json"
+  ],
+  "recommended_action": "Substrate repair before retesting: implement frozen webapi_mine endpoint catalog (regex \\$\\{[^}]+\\} on method+path+header+body+auth_scope, component sets, Jaccard>=0.6 clustering, theme centroids, correct-family endpoint invocation) or drop WebAPI name; fix honest cost to frozen sum counters+browser_steps removing four jitter terms (code 914-921), recompute rho_shuffled with frozen cost and report permutation p distribution not single shuffle seed 7, fix rho_cost_length within-f checks, compute ECE bootstrap CI for S4, reconcile freshness N 10 vs 12, disclose Stagehand/BrowserUse as simulated proxies, disambiguate mixed stratum observational saturation or test with non-saturated derived_context. Re-run frozen spec/prereg without weakening thresholds; audit must PASS before any promotion. Await Global Research Director allocation; do not self-dispatch. Runtime lane must deliver live BrowserGym 1280x720 isolation before live claim."
+}

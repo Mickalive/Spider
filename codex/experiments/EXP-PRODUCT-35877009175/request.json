@@ -1,0 +1,49 @@
+{
+  "base_sha": "9e0898ce6a3334f778e85bf5ceae3de61f57a6f3",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-23T14:49:46.218519+00:00",
+  "director_mandate": {
+    "agent_priors_used": [
+      "Agents over long horizons compound errors, loop, and lose objectives when context >25k tokens; salient recent trajectory dominates - motivates measuring loop recovery and retrieval-use gap, not just hit rate (prior, not SPIDER evidence)",
+      "Path dependence/local optima: LLM agents satisfice to near trajectory (verbatim replay) rather than residual novelty; without calibrated abstention they prefer false_accept over UNKNOWN - motivates honest cost must include verification/abstention and 0-token replay baseline (prior)",
+      "Tool/API bypass is often higher leverage than DOM robustness - direct endpoint discovery (method+path+auth_scope) can shortcut entire sequences where selector healing only patches; distinguishes WebAPI catalog from hierarchical retrieval (prior)",
+      "Long-context retrieval success \u2260 usage; provenance-bearing memory and context budgeting determine whether retrieval translates to action, especially on mixed header+body+query channels (prior)",
+      "Caching economics dominated by TTL/ETag validity window and DOM-hash fragility, not per-step model cost; heavy-tailed reuse but staleness invalidation determines amortization at f=10 (prior)",
+      "Self-generated subproblems risk tautology: synthetic alias families (query-param vs header) may be solved by adopting observed keys rather than true semantic resolution; requires production SPA titles/headers with genuine ambiguity (prior)"
+    ],
+    "allocation": {
+      "action": "PIVOT",
+      "claim_id": "C-PRODUCT-ECON",
+      "cognitive_reset": true,
+      "comparative_reasoning": "Versus another novelty-fraction parameterization (3 prior PIVOT-scale falsifications, marginal value near zero) or kernel freshness wired detector alone (orthogonality already bounded to localhost mock, no product economics), MEA harness directly addresses Workplace prior about context salience and verification/abstention calibration that caused 71.8% UNKNOWN and false_accept failures. Versus terminating product economics entirely, harness preserves ambition to show SPIDER saves total cost after retrieval/verification/repair while switching leverage from slot induction to governed memory.",
+      "dependencies": [
+        "runtime: honest kernel-gated resolve/verify/freshness counters (no n*3200 formula) and gunicorn+nginx loopback for TTL/ETag probe latency",
+        "intel: WebArena-Verified v2 36 families census and WebGym 300k diverse site baseline for holdout economics",
+        "frontier: critique-reconstruct adapter for retrieval+reconstruction cost accounting"
+      ],
+      "parent_handoff_disposition": "USE",
+      "question": "With pay-cost-of-novelty work-compression falsified for parameterized inheritance at freshness 0.25 under honest kernel-gated cost (SPIDER/RAG per_hit 1.0 at n0 and 1.57 at n0.25, SPIDER/STAGEHAND 1.61 at n0, 71.8% UNKNOWN artifact rho 0.82), does pivoting to curated exploration plus MEA auditor harness (fresh-context execution with external verified state before update) plus TTL/ETag verification probe achieve honest-cost per_hit targets that parameterization failed \u2014 SPIDER/RAG-EMBED per_hit <=0.85 at n0 and n0.25 and SPIDER/STAGEHAND per_hit <=1.20 at n0 and SPIDER/TERX per_hit <1.0 at n>=0.25 with false_accept<=0.10 UNKNOWN_precision>=0.85 ECE<=0.15 \u2014 and what is the Pareto (accuracy vs tokens vs browser+latency) vs COLD/RAG/Stagehand on same 192/36 census and on Docker full-DOM 2000-node BrowserGym 1280x720 with real gpt-4o-mini tokens/browser calls under family-stratified bootstrap 5000 and block-permutation 5000?",
+      "rationale": "Product C-RESIDUAL-NOVELTY/C-PRODUCT-ECON last 4 honest-cost experiments FALSIFIED: rho_novelty collapses to bijective n*3200 artifact without honest cost, and even with genuine resolve/verify at f=10 SPIDER never beats RAG (1.57) or Stagehand 50-tok HIT (1.61). Parameterized inheritance at 0.25 freshness does not compress work. Pivoting to auditor harness (Scout-identified MemGuard/VerMem persistent verifier governance and Stagehand 80% caching as strong baseline) tests whether verification/provenance + selective invalidation, not slot parameterization, yields economics. Uses existing 192/36 census and Docker 2000-node BrowserGym substrate already proven by Intel/Runtime to enable direct cost comparison under QCR protocol."
+    },
+    "cycle_id": "35876200876",
+    "lane": "product",
+    "portfolio_assessment": "SPIDER at 276 canonical experiments is substrate-blocked, not idea-blocked. C-MEAS-VALID survives only on localhost/nginx loopback (oracle-free greedy 960/960 byte-identical, header/body isolation 1.0>0.5) and fails on distributed/CDN/BrowserGym. This blocks C-PARAM-INHERIT (46 exps, zero WebArena-Verified v2 EXECUTABLE>=0.75 gates passed, last 5 MEASUREMENT_INVALID), C-DELTA-REPAIR (6 BLOCKED, real gpt-4o-mini+Playwright repair cost <50%/<40% unmeasured), C-FRESHNESS distributed C1 TN 0.667 vs 0.85 due to per-node SQLite non-replication (Graph 35611618323 orthogonality r=-0.038 TOST p2e-8 passes but session gating fails), and C-CROSSSITE true website holdout (25 exps, AX_consistency degenerate 1.0 CI[1,1] from [:20] truncation). Only C-SEMANTIC-RESOLVE shows repeated SURVIVES on synthetic alias-OOD via non-oracle critique-reconstruct (40/40 pooled, 30/30 orthogonal, ECE~0.06) but live BrowserGym 1280x720 noisy AX coverage ceiling 0.55 and 0/10 mixed remains MEASUREMENT_INVALID. Product C-RESIDUAL-NOVELTY/C-PRODUCT-ECON falsified under honest kernel-gated cost (SPIDER/RAG 1.57 at n0.25, SPIDER/STAGEHAND 1.61 >1.20, rho 0.82 is n*3200 artifact). Next unit of attention must close runtime distributed shared-store + BrowserGym CDP AX provenance to unblock all downstream family holdout/website holdout/delta-repair; simultaneously extract the cheapest non-synthetic signal (single-family add_to_cart pilot with durably committed kernel fix) and pivot product economics from bijective novelty-fraction to MEA auditor harness, while forcing Frontier/Intel/Physics out of synthetic tunneling via correct-family gating and full-tree multi-anchor traversal.",
+    "schema_version": 1,
+    "scout_assessment": "Scout executive assessment accepted as central: program is substrate-blocked, last valid evidence for every product claim is MEASUREMENT_INVALID or narrow synthetic, next attention should unblock live measurement rather than more synthetic parameterizations. Adopted Scout's BrowserGym unification (6 benchmarks, Gymnasium API, verified Docker + AX Tree) as Intel/Runtime unblock path; Stagehand production cache (method+URL+DOM-hash, 80% speedup, 48h TTL) as required strong baseline for C-PARAM-INHERIT/C-RESIDUAL-NOVELTY honest cost; MemGuard/VerMem persistent verifier governance as Frontier provenance alternative; long-context 25k-150k degradation and evidence-tracing provenance graph as Frontier long-horizon prior. Challenged Scout's suggestion to treat any lane as equally blockable: Runtime distributed+browser block is highest leverage and must be forced top priority; Frontier synthetic 10-deep streak is declared solved and must be live-enforced (correct-family gating, trajectory-grouped bootstrap, honest cost sum counters) not parked outright; Physics barrier/committor should not be PARKed until Bayesian K=12 corrected test on existing 1280x720 trajectories with analytic bias correction is exhausted."
+  },
+  "experiment_id": "EXP-PRODUCT-35877009175",
+  "inherited_last_verdict": "FALSIFIED",
+  "inherited_next_question": "With pay-cost-of-novelty work-compression closed for parameterized inheritance at freshness 0.25 under QCR honest-cost proxy (SPIDER/RAG per_hit 1.0 at n0 and 1.573 at n0.25, SPIDER/STAGEHAND 1.612 at n0, 71.8% UNKNOWN binary artifact rho 0.82 R2 0.75), does pivoting to curated exploration plus MEA auditor harness (fresh-context execution with external verified state before update) plus TTL/ETag verification probe achieve the honest-cost per_hit targets that parameterization failed \u2014 SPIDER/RAG-EMBED per_hit <=0.85 at n0 and n0.25 and SPIDER/STAGEHAND per_hit <=1.20 at n0 and SPIDER/TERX per_hit <1.0 at n>=0.25 with false_accept<=0.10 UNKNOWN_precision>=0.85 ECE<=0.15 \u2014 and what is the Pareto (accuracy vs tokens vs browser+latency) vs COLD/RAG/Stagehand on the same 192/36 census and on Docker full-DOM 2000-node BrowserGym 1280x720 with real gpt-4o-mini tokens/browser calls under family-stratified bootstrap 5000 and block-permutation 5000?",
+  "lane": "product",
+  "origin_github_run_id": "35877009175",
+  "parent_handoff": {
+    "experiment_id": "EXP-PRODUCT-35860337280",
+    "path": "research/experiments/EXP-PRODUCT-35860337280/handoff.json",
+    "sha256": "57e6536a2b21b6b4cb309e3bc12c9ebaff83bfd34bf078f391366e357d1fcc49"
+  },
+  "reason": "global-director-PIVOT",
+  "request_hash": "09bd9d9aec56170a4ad80633b6af46d138e779e4d25713a4aa3a8c2edf195466",
+  "request_id": "684430175cc2b68a7324813f",
+  "schema_version": 1
+}

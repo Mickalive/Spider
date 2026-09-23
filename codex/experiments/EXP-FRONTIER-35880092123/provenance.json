@@ -1,0 +1,110 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-FRONTIER-35880092123",
+  "lane": "frontier",
+  "github_run_id": "35880092123",
+  "github_run_attempt": "1",
+  "recorded_at": "2026-09-23T15:27:18.793781+00:00",
+  "git_commit": "5ba436aa33bccb2827e87dd556b2f6a860d4952a",
+  "git_status": "M SPIDER_CODEX.md\n M codex/claim_state.json\n M codex/index.json\n?? codex/experiments/EXP-INTEL-35876349051/\n?? research/experiments/EXP-FRONTIER-35880092123/compiled_null_selector_raw.json\n?? research/experiments/EXP-FRONTIER-35880092123/derived_metrics.json\n?? research/experiments/EXP-FRONTIER-35880092123/index_manifest.json\n?? research/experiments/EXP-FRONTIER-35880092123/ir_manifest.json\n?? research/experiments/EXP-FRONTIER-35880092123/model_execute.json\n?? research/experiments/EXP-FRONTIER-3",
+  "base_sha": "80453bb0ecaa30f1a89533270b1607c8339e0e8d",
+  "frozen_at": "2026-09-23T15:18:35.338185+00:00",
+  "frozen_hashes": {
+    "prereg.md": "9c0332aaa84c1e7561b32b0bf4d011c09f8da92d73715fce252a3448dae31f1e",
+    "request.json": "059952f8267d3d8a83b8ef03e85883d01a14e6562129cfc16c461f820ceec17e",
+    "spec.json": "23412be4f5feed97714d070aab6b57d650b6880376f9a585acf95d0a9a52e595"
+  },
+  "datasets": {
+    "tasks_expanded.json": {
+      "path": "research/experiments/EXP-FRONTIER-35793584484/tasks_expanded.json",
+      "sha256": "83b7c52dd17848fc8c70d1c629b8d541788e0438249623ea783d2df364467319",
+      "reuse": "byte-identical from EXP-FRONTIER-35793584484 sha 83b7c52dd17848fc8c70d1c629b8d541788e0438249623ea783d2df364467319"
+    },
+    "tasks_expanded_copy": {
+      "path": "research/experiments/EXP-FRONTIER-35880092123/tasks_expanded.json",
+      "sha256": "83b7c52dd17848fc8c70d1c629b8d541788e0438249623ea783d2df364467319"
+    }
+  },
+  "code_paths": {
+    "execution_script": "research/frontier/run_execute_35880092123.py",
+    "execution_script_sha256": "dfdacbf169b51c4d6b9a7c298bd415f114b4f9e3ff66d028f99b5302bb51ecd1",
+    "kernel": "src/spider/kernel.py",
+    "kernel_sha256": "46929b3a951df48d7f9d1fd850871073c0d91c1868aa117e13d389fe274e8d61",
+    "spec": "research/experiments/EXP-FRONTIER-35880092123/spec.json",
+    "prereg": "research/experiments/EXP-FRONTIER-35880092123/prereg.md"
+  },
+  "environment": {
+    "python": "3.12.14 (main, Aug 13 2026, 02:47:42) [GCC 13.3.0]",
+    "numpy": "2.5.3",
+    "scikit_learn": "1.9.1",
+    "scipy": "1.18.1",
+    "playwright": "not_installed",
+    "browsergym_core": "not_installed",
+    "agentlab": "not_installed",
+    "viewport": "1280x720",
+    "ax_code_path": "Accessibility.getFullAXTree",
+    "seed": 42,
+    "global_cost_rng_seed": 34,
+    "shuffled_rho_seed": 2,
+    "bootstrap_resamples": 2000,
+    "permutation_shuffles": 200
+  },
+  "census": {
+    "browsergym_census": "4 envs x3 retries live_available=False synthetic_fallback_disclosed=True",
+    "browsergym_log_path": "research/experiments/EXP-FRONTIER-35880092123/index_manifest.json",
+    "ax_nodes_count_range": "15-30 >10",
+    "live_available": false
+  },
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-FRONTIER-35880092123/raw_evidence.json",
+      "sha256": "1aa2b8a60b0c3a510821020d3df8d08a14fd237b128f11d116991cde16af9250",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-35880092123/derived_metrics.json",
+      "sha256": "5ac2ebabfff8ae2c941612a3ee614b2b8654f091154563ac0e8191db82737e9e",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-35880092123/index_manifest.json",
+      "sha256": "1ec70f98cbb5654a4c7f704449780064e3250507f589bf4d4e751f071ba89720",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-35880092123/ir_manifest.json",
+      "sha256": "b4cdd7984a2988235659cb392792b02cc670732e02ed6e00b83c11e2fececf59",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-35880092123/train_split_inventory.json",
+      "sha256": "12ec7f319972e01710638a277703bd316fd6bd56049ce8f9f0302e368e0a8c04",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-35880092123/verbatim_raw.json",
+      "sha256": "004bc49eb0f106c6420c0224a074e568080cc8e2cccaa14d1e0f61f46b199bd7",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-35880092123/compiled_null_selector_raw.json",
+      "sha256": "fd3417276cb06fd4c9f9bc14913eab637e05510b39c3e499bdebd5e52514932f",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-35880092123/tasks_expanded.json",
+      "sha256": "83b7c52dd17848fc8c70d1c629b8d541788e0438249623ea783d2df364467319",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-35880092123/result.json",
+      "sha256": "75a18614a93111fe52248a87fdd9679cbdf76c2f989714050424067f0e01105c",
+      "role": "derived"
+    }
+  ],
+  "commands": [
+    "pip install numpy scikit-learn scipy -q",
+    "python3 research/frontier/run_execute_35880092123.py"
+  ],
+  "notes": "Frozen honest cost = sum counters resolve+bind+verify+freshness+browser_steps + global RNG jitter 30-70 (not n*3200, not f*6.0); compiled IR manifest 4 workflows total $0.177 amortized $0.0177 f10; WebAPI index 84 themes Jaccard>=0.6; trajectory-grouped block bootstrap 2000 by family (header/body/auth/mixed) + ECE bootstrap 2000"
+}

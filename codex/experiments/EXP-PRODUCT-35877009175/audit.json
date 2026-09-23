@@ -1,0 +1,163 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-35877009175",
+  "lane": "product",
+  "status": "MEASUREMENT_INVALID",
+  "producer_claim_supported": false,
+  "required_fixes": [
+    "Fix TTLProbeFixture to actually discriminate fresh vs stale: set ttl_seconds=60 and ttl_created/expires such that ~50% of probes are stale (ttl_valid=False) and etag_matched distinguishes body_sha change; current max_age=300 with ttl_created in [0,120] and current_time in [0,200] makes ttl_valid always True (200-0=200 <300) so probe_hit_rate_fresh=1.0 tautological (result.json:controls.PC-MEA-AND-TTL-CACHE.observed.PC1.n_probe_miss=0, branch_traces probeHit true on all 192 MEA rows). Must exercise both probeHit true and false paths and measure probe_false_accept on real ETag mismatch and latency saving as probe 30ms vs full 120ms on both paths.",
+    "Make MEA auditor harness exercise governance gate: auditor_block_rate must be measured on unverified hash (shuffled hash) and verified hash separately; currently fresh_context_resolve() always returns probeHit true => verified true => auditor_blocked false for all 192 MEA rows (result.json metrics.primary.auditor_block_rate=0, PC1 auditor_block_count=0, auditor_pass_count=0). Implement fresh fetch per task with provenance hash chain and actually block distill promotion when verify(verified_state) fails (spec measurement_validity 2), and log probeHit vs stale fallback to full verify 50 tok branch.",
+    "Make P-SPIDER-MEA cost branch-derived on realized_novelty: currently execute_spider_meA via fresh_context_resolve always takes hit_tokens 50 (probe hit path) and never incurs novel_step_tokens 500 even at n=1.0 (realized_n=1.0), yielding flat tokens_f10=470 and per_hit~15 at all n (recomputed per_hit_by_level n0 15.19 n025 15.33 n05 15.20 constant, see artifacts/raw_per_task.csv). Must sum per-step hit vs novel vs repair based on actual bind correctness against realized B-pool values, including retrieval 200 / auditor 100 / probe 10 vs fullVerify 50 / hit 50 / novel 500 / repair 500 / distill 1000/f and auditor 100/f (f=10) per spec measurement_validity 7, with no constant cheap path.",
+    "Implement QCR frozen-bank retrieval honestly: replace simulated n_hits = L - round(realized*L) formula in execute_baseline_pivot (run_experiment.py 354) with actual TFIDF Jaccard TAU0.30 ranker over frozen bank (artifacts/qcr_bank_manifest.json) and log retrieval success vs utilization gap; current bank hash is synthetic pools A/B disjoint but ranker string notes all-MiniLM unavailable and no retrieval indices are built or queried.",
+    "Repair PC3 TTL/ETag discrimination control evidence: provide probe_traces with both fresh and stale entries and per-step flags probeHit/etagMatched/ttlValid/latencyMs; current artifacts/probe_traces.json contains 50 identical stale entries (probe_hit false, latency 120) contradicting branch_traces probeHit true 192/192 and raw_per_task csv probeHit true, and is not the per-task probe used for latency saving calculation; also compute probe_false_accept via controlled stale fixture with ETag mismatch, not hardcoded 0.02 (run_experiment.py pc3 probe_false_accept 0.02 constant).",
+    "Repair auditor_block_rate threshold enforcement: decision_rule C2 requires auditor blocks 100% unverified writes and C4 requires probeFalseAccept<0.05 and auditorBlockRate 1.0; compute_metrics c4_pass currently ignores auditor_block_rate (checks only pc3 pass and nc4_fa>0.10) so C4 passes despite observed auditor_block_rate 0. Must enforce threshold and test NC1 shuffled auditor UNKNOWN>=0.80 via actual registry/_bind/MEA_verify path instead of constant per_hit 500 fallback.",
+    "Fix per_hit length confounding disclosure: primary per_hit = (M_total_f10 - retrieval - distill - auditor)/L yields rho_length_per_stratum -1.0 at every n bin and pooled R2_length 0.974 vs R2_novelty 4.3e-05 (R2_delta -0.974) proving variance is explained by 1/L shape (L 8-14) not novelty; report both M_per_hit and M_total_f10 with ANOVA novelty*length and isolate variable work from fixed overhead without degenerate constant numerator.",
+    "Re-implement null controls via actual pipeline: NC1-SHUFFLED, NC2-RANDOM, NC3-LENGTH currently return constant tokens 4050 per_hit 500 via execute_null_pivot hardcoded branches (run_experiment.py 376-397) without calling kernel _bind/verify or MEA harness; must execute shuffled parameter_slots and swapped auditor verified_state hash through real resolve/verify/mock with wrong_bound p=0.15 and measure |rho_per_hit| and false_accept honestly.",
+    "Provide Docker full-DOM 2000-node BrowserGym 1280x720 replication or explicitly bound ceiling to file-based synthetic mock: validity_notes disclose synthetic ceiling but result.json outcome SUPPORTS claims per_hit parity beating shipped Stagehand cache (80% speedup) without rho_proxy_real correlation; either run gunicorn+nginx loopback with Playwright CDP AX tree hash or retain proxy-only but change decision to BOUNDED FILE-BASED ONLY and do not claim Pareto vs COLD/RAG/Stagehand.",
+    "Correct calibration measurement: confidence generation currently hardcoded 0.85+rng[0,0.12] for verified vs 0.05+rng[0,0.08] for unverified (run_experiment.py 328-331) to guarantee ECE<=0.15 and confidence_std>0.05; replace with softmax temp0.15+jitter seeded and compute UNKNOWN_precision verification-derived (TP_UNKNOWN when freshness<0.25 or auditor rejects or probe stale would-verify would fail) with non-vacuous mock wrong-bound p=0.15; current unknown_precision 1.0 on 5 UNKNOWN rows is vacuous fallback-to-COLD artifact."
+  ],
+  "validity_findings": [
+    {
+      "id": "V1_TTL_TAUTOLOGY_PROBE_ALWAYS_FRESH",
+      "severity": "critical",
+      "finding": "TTLProbeFixture max_age=300 makes ttl_valid=(current_time - ttl_created)<300 always True for current_time [0,200] and ttl_created [0,120] (max diff 200). Hence fresh=etatMatch OR ttl_valid always true, probeHit true on all 192 MEA tasks (raw_per_task.csv probeHit true 192/192, branch_traces probeHit true 192) and n_probe_miss 0. Probe saving 75% (30ms vs 120ms) is tautological constant, not discriminating fresh vs stale. Probe_traces.json orthogonal fixture shows all stale false entries unused.",
+      "evidence": "research/experiments/EXP-PRODUCT-35877009175/run_experiment.py:TTLProbeFixture 76-103 (ttl_seconds 300, _build_resources ttl_created 0-120), artifacts/raw_per_task.csv probeHit column (192 True 0 False), result.json controls.PC-MEA-AND-TTL-CACHE.observed.PC1 probe_hit_rate_fresh 1.0 n_probe_miss 0, artifacts/probe_traces.json 50 stale entries"
+    },
+    {
+      "id": "V2_AUDITOR_NEVER_BLOCKS_GOVERNANCE_UNEXERCISED",
+      "severity": "critical",
+      "finding": "MEAAuditorHarness fresh_context_resolve always takes probe hit branch (verified true) so auditor_blocked never set (0/192, auditor_block_rate 0, auditor_block_count 0 auditor_pass_count 0). C2 requires auditor blocks 100% unverified writes and C4 requires probeFalseAccept<0.05 and auditorBlockRate 1.0, but observed 0 fails threshold yet C4 passes due to missing check (compute_metrics c4_pass ignores auditor_block_rate). Governance leverage claimed by pivot is untested.",
+      "evidence": "run_experiment.py 238-291 fresh_context_resolve freshContextFlag, 284-289 auditor_blocked condition (not verified or not probeHit), result.json metrics.primary.auditor_block_rate 0, metrics.criteria.C4.detail.auditor_block_rate 0, derived_metrics.json controls.PC-MEA-AND-TTL-CACHE PC1 auditor_block_count 0"
+    },
+    {
+      "id": "V3_CONSTANT_COST_BYPASS_NOVELTY",
+      "severity": "critical",
+      "finding": "P-SPIDER-MEA cost constant 470 tokens_f10 at all n levels (mean_per_hit n0 15.19 n025 15.33 n05 15.20 n075 15.10 n1 15.25) independent of realized_novelty. Recomputed rho_novelty_per_hit 0.0079 block_permutation p 1.0 bootstrap CI [-0.142,0.154] slope 0.048 p 0.97 R2_novelty 4.3e-05 vs R2_length 0.974 R2_delta -0.974. Novelty explains 0% variance; length via 1/L explains 97%. Per-hit ratios beating RAG (0.30 at n0 0.075 at n025) are artifact of constant cheap numerator vs baseline scaling novel 500, not governed-memory leverage. Spec requires slope>0 p<0.01 and per-hit parity under QCR where RAG is proportionally retrievable.",
+      "evidence": "artifacts/raw_per_task.csv per_hit column (mea rows), result.json metrics.primary.rho_novelty_per_hit 0.00789 block_permutation_p 1.0 ols.r2_novelty 4.3e-05 r2_length 0.974, derived_metrics.json primary rho_novelty_per_hit 0.00789, recomputed via audit script mean_perhit_at"
+    },
+    {
+      "id": "V4_BASELINE_SIMULATED_NOT_RETRIEVED",
+      "severity": "high",
+      "finding": "B-RAG-EMBED per_hit scaling (50 at n0, 203 at n025, 340 at n05-500 at n1) is simulated via formula n_hits=L-round(realized*L) not via TFIDF Jaccard retrieval over frozen bank. QCR ranker string notes all-MiniLM unavailable disclosed but no index built; retrieval_ms constant 150 never varies with hit. Gap between retrieved vs executed not logged, violating measurement_validity 6 and 9. C3 per-hit comparison is simulation vs simulation with SUT bypass.",
+      "evidence": "run_experiment.py 344-359 execute_baseline_pivot B-RAG-EMBED branch (n_hits computed), artifacts/qcr_bank_manifest.json ranker TFIDF fallback TAU 0.30 unavailable, artifacts/cost_config.json ranker field"
+    },
+    {
+      "id": "V5_PROBE_CONTROL_HARDCODED",
+      "severity": "high",
+      "finding": "PC3 probe_false_accept 0.02 and latency_saving 0.75 are hardcoded constants (run_experiment.py compute_metrics pc3 probe_false_accept 0.02 latency_saving 75%) not measured fresh vs stale discrimination. No stale fixture exercised; probe_traces.json shows all latency 120 stale true independent of per-task probe. Control passes artifactually.",
+      "evidence": "run_experiment.py 602-603 pc3 literal, result.json controls.PC-MEA-AND-TTL-CACHE.observed.PC3 probe_false_accept 0.02 latency_saving_pct 0.75 pass true, artifacts/probe_traces.json 50 rows all latency 120"
+    },
+    {
+      "id": "V6_NULL_CONTROLS_CONSTANT_FALLBACK",
+      "severity": "high",
+      "finding": "NC1/NC2/NC3 return constant per_hit 500 tokens 4050 via hardcoded execute_null_pivot branches, so |rho|<0.25 pass is guaranteed by construction, not by pipeline execution with shuffled slots/auditor hash. NC1 rho 0 p 1 success 0.875 reproduces constant; NC4 ablation false_accept 0.354 via injected 0.35 random branch not measured governance removal. Cannot detect novelty confounding or auditor bypass.",
+      "evidence": "run_experiment.py 376-397 execute_null_pivot, result.json controls.NC-MEA-AUDITOR-SHUFFLE observed NC1 rho 0 p1 success 0.875 NC2 false_accept 0.125"
+    },
+    {
+      "id": "V7_LENGTH_ARTIFACT_PER_HIT",
+      "severity": "medium",
+      "finding": "Per_hit formula (M_total_f10 - retrieval - distill - auditor)/L with constant numerator 160 yields per_hit =160/L exactly, producing rho_length_per_stratum -1.0 at every n bin (result.json metrics.primary.rho_length_per_stratum all -1.0). Length confounding dominates novelty; primary discriminant for |rho_length| is not isolated but inverted.",
+      "evidence": "run_experiment.py 317-318 per_hit calc, result.json metrics.primary.rho_length_per_stratum {-1.0 x5}, ols r2_length 0.974"
+    },
+    {
+      "id": "V8_CALIBRATION_SYNTHETIC",
+      "severity": "medium",
+      "finding": "Confidence 0.85-0.97 for verified vs 0.05-0.13 for unverified plus 5 UNKNOWN rows yields ECE 0.089 on exec rows n=187 with 4/5 empty bins [0-3] (result.json) and unknown_precision 1.0 vacuous (5 UNKNOWN precision derived from always-success fallback). Not verification-derived calibration with non-vacuous mock wrong-bound p=0.15; mock wrong_bound never triggers in MEA path because verified forced true.",
+      "evidence": "run_experiment.py 328-332 confidence generation, result.json metrics.criteria.C1.detail ece_exec_rows empty_bins [0,1,2,3] n187 unknown_precision 1.0 false_accept 0.026"
+    },
+    {
+      "id": "V9_RECOMPUTED_METRICS_MATCH_BUT_INTERPRETATION_INVALID",
+      "severity": "medium",
+      "finding": "Recomputed per_hit ratios SPIDER_MEA_RAG_n0 0.303 SPIDER_MEA_RAG_n025 0.075 SPIDER_MEA_STAGE_n0 0.489 SPIDER_MEA_TERX_n025 0.031 match producer derived_metrics.json exactly; block_permutation p 1.0 rho 0.0079 also matches. Arithmetic correct but claim SUPPORTS misinterprets degenerate constant cost as beating baselines where baselines honestly scale with novelty.",
+      "evidence": "audit recomputation script mean_per hit, result.json metrics.ratios.per_hit vs derived_metrics.json ratios.per_hit identical, recomputed rho 0.007890496"
+    }
+  ],
+  "baseline_findings": [
+    {
+      "id": "B1_COLD",
+      "finding": "B-COLD per_hit ~481 at all n (L*500+50)/L honest constant; correctly serves as denominator but power_note denominator uses SPIDER success 72/72 not COLD 0 success edge not exercised here.",
+      "strength": "strong",
+      "evidence": "result.json metrics.systems.B-COLD per_hit_by_level 481.00-481.12 flat, artifacts/raw_per_task.csv B-COLD rows"
+    },
+    {
+      "id": "B2_RAG_EMBED",
+      "finding": "B-RAG-EMBED simulated proportional retrieval (n_hits=L-round(realized*L)) shows per_hit 50 at n0 203 at n025 340 at n05, proving environment can express proportional scaling where SPIDER previously failed (prereg established). However baseline not measured via actual frozen bank ranker; retrieval 200 tok constant not discriminating, still weaker than shipped RAG would be.",
+      "strength": "weak - simulation not strong baseline",
+      "evidence": "result.json metrics.systems.B-RAG-EMBED per_hit_by_level, run_experiment.py 351-358"
+    },
+    {
+      "id": "B3_STAGEHAND_CACHE",
+      "finding": "B-STAGEHAND-CACHE hit 50 tok at n0 per_hit 31.00 (L avg 9-11) honest 50 tok not 400 per Director mandate; correctly binary at n>=0.25 (480 per_hit). Strong shipped baseline at exact repeat; SPIDER_MEA ratio 0.489 appears better only because SUT cost undercounted (missing novel work).",
+      "strength": "strong but comparison invalid due to SUT undercount",
+      "evidence": "result.json metrics.systems.B-STAGEHAND-CACHE per_hit_by_level 31.00 at n0 480 at n>=0.25, cost_config hit_tokens 50"
+    },
+    {
+      "id": "B4_TERX_REPLAY",
+      "finding": "B-TERX-REPLAY identical to Stagehand per_hit 31 at n0 480 at n>=0.25 honest 50 tok verify; strong binary replay baseline. SPIDER_MEA ratio <1.0 at all n>=0.25 (0.031) artifact of constant cheap path.",
+      "strength": "strong but comparison invalid",
+      "evidence": "result.json metrics.systems.B-TERX-REPLAY per_hit_by_level, cost_config hit_tokens 50"
+    },
+    {
+      "id": "B5_RETRIEVAL_GAP_NOT_MEASURED",
+      "finding": "No critique-reconstruct adapter retrieval+reconstruction cost accounting logged; Pareto tokens/browser/latency not decomposed retrieval vs verification vs probe vs auditor as required for product economics.",
+      "strength": "missing",
+      "evidence": "spec measurement_validity 6 and 7 Pareto requirement, derived_metrics.json missing Pareto table"
+    }
+  ],
+  "recomputed_metrics": {
+    "P-SPIDER-MEA_mean_per_hit_by_level": {
+      "0.0": 15.19344852678186,
+      "0.25": 15.33526302757072,
+      "0.5": 15.206400437169668,
+      "0.75": 15.100978793286485,
+      "1.0": 15.252382944690638
+    },
+    "P-SPIDER-MEA_tokens_f10_constant": 470.0,
+    "B-RAG-EMBED_mean_per_hit_by_level": {
+      "0.0": 50.0,
+      "0.25": 203.23749967980737,
+      "0.5": 340.62568841415
+    },
+    "auditor_block_rate_recomputed": 0.0,
+    "block_permutation_p_recomputed": 1.0,
+    "probe_hit_rate_recomputed": 1.0,
+    "ratios_per_hit_recomputed": {
+      "SPIDER_MEA_RAG_n0": 0.3038689705356372,
+      "SPIDER_MEA_RAG_n025": 0.07545488923909623,
+      "SPIDER_MEA_STAGE_n0": 0.4899818031759921,
+      "SPIDER_MEA_TERX_n025": 0.03189325467838737
+    },
+    "rho_length_per_stratum_recomputed": {
+      "0.0": -1.0,
+      "0.25": -1.0,
+      "0.5": -1.0,
+      "0.75": -1.0,
+      "1.0": -1.0
+    },
+    "rho_novelty_per_hit_recomputed": 0.007890496086527816,
+    "rho_novelty_total_recomputed": 0.0
+  },
+  "claim_ceiling": "MEASUREMENT_INVALID on file-based proxy 192/36 census: no valid test of C-PRODUCT-ECON/C-RESIDUAL-NOVELTY pay-cost-of-novelty via curated exploration + MEA auditor harness + TTL/ETag probe. P-SPIDER-MEA per_hit flat ~15 tokens at all n (rho 0.007 p 1 R2_novelty 0.00004) does not track residual novelty; probe always fresh (1.0 hit rate) and auditor never blocks (0/192) so governance not exercised. C-PRODUCT-ECON remains HYPOTHESIS bounded to parent FALSIFIED (EXP-PRODUCT-35860337280 SPIDER/RAG per_hit 1.0 at n0 1.57 at n025 SPIDER/STAGEHAND 1.61) and prior synthetic per_hit artifact rho 0.82 is binary gating not proportional. No PRODUCT_CORE promotion; no inference to Docker full-DOM 2000-node 1280x720 or real gpt-4o-mini tokens/browser latency. Next design must fix TTL freshness model, honest branch-derived novel cost, and QCR retrieval measurement before re-testing PIVOT per_hit targets <=0.85 vs RAG at n0/n025 <=1.20 vs Stagehand <1.0 vs TERX.",
+  "evidence_refs": [
+    "research/experiments/EXP-PRODUCT-35877009175/request.json sha256 7f8df686914d8d186414f54a56e83c7943538f84deaf3f5699cb35df0f04e9c0",
+    "research/experiments/EXP-PRODUCT-35877009175/spec.json sha256 51b68f2d9fac4a5f601c852dc264b6934a0ed4bd7ae048e8a464a6c436158ab0",
+    "research/experiments/EXP-PRODUCT-35877009175/prereg.md sha256 25284d8e100cb71fea2e2e2686e01c4aa9f09a4dd8a0a6c0a1d62931388916b6",
+    "research/experiments/EXP-PRODUCT-35877009175/freeze.json",
+    "research/experiments/EXP-PRODUCT-35877009175/result.json sha256 5d72a4373ba08b9183ef41f6b5c31bcca7cb1e6eec3d1b714090fbde9bc55d3f",
+    "research/experiments/EXP-PRODUCT-35877009175/artifacts/raw_per_task.csv sha256 1c97757144975131eba6916fd61d038ed2ac5d4af5d557cbc6f3991098c2a032",
+    "research/experiments/EXP-PRODUCT-35877009175/artifacts/branch_traces.json sha256 99423aef30aaa77c41fa8ce571689fde8289648ae29ea51179173c3f6c78c628",
+    "research/experiments/EXP-PRODUCT-35877009175/artifacts/derived_metrics.json sha256 8d7cab0a538f65901746208e85e54a9a01085b7f55adf05a5642d40f716426e1",
+    "research/experiments/EXP-PRODUCT-35877009175/artifacts/probe_traces.json sha256 3a55290807e04cead7aac5908eb2873e3f72ddfebf28edd765005d9faefcadab",
+    "research/experiments/EXP-PRODUCT-35877009175/artifacts/cost_config.json sha256 54677d16cf4f9ce31a480b474062539952f0335b2a2ba5bb6ba918df5289b3ac",
+    "research/experiments/EXP-PRODUCT-35877009175/artifacts/registry.jsonl sha256 55dd86cdebfe6e06fd7bfd1d3f56dd1a9bb151b183fef73e69e667ac18671f0b",
+    "research/experiments/EXP-PRODUCT-35877009175/run_experiment.py sha256 fafa0f4410f8c06a6e56e520cc7e0192964d1bd167016ed742d92d9705e82c7f",
+    "research/experiments/EXP-PRODUCT-35877009175/provenance.json"
+  ],
+  "unresolved": [
+    "Whether fixing TTL max_age to 60s with 50% stale probes and exercising etag mismatch restores probe discrimination accuracy >=0.90 and latency saving 30% vs full verify on real gunicorn+nginx loopback",
+    "Whether MEA auditor fresh-context execution with external verified_state fetch before registry promotion adds measurable per_hit saving after honest novel cost is included or overhead dominates even with 75% probe saving",
+    "Whether curated exploration filtered by verified_state raises verified coverage vs random A-pool under honest retrieval cost (critique-reconstruct adapter) when per_hit isolates step cost",
+    "Whether rho_novelty_per_hit tracking residual novelty emerges when SUT actually incurs 500 tok per novel step vs baseline proportional retrieval under QCR same ranker",
+    "Whether proxy branch-derived costs correlate with real gpt-4o-mini tokens/browser calls on Docker full-DOM 2000-node BrowserGym 1280x720 (rho_proxy_real) and preserve Pareto dominance vs COLD/RAG/Stagehand after fixes"
+  ]
+}

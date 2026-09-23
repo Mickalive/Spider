@@ -1,0 +1,44 @@
+{
+  "base_sha": "00da54cecc6ed5fb0db8969a42b72066cc4af993",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-23T12:25:18.142946+00:00",
+  "director_mandate": {
+    "agent_priors_used": [
+      "Long-horizon agents accumulate compounding errors and context rot linearly with horizon; fresh-context execution + external verified state (MEA auditor pattern) outperforms in-context memory alone \u2014 prior, not SPIDER evidence, motivates requiring independent verification before state update and explains inflated novelty-cost correlations when cost is bijective.",
+      "Caching/replay baselines are deceptively strong on deterministic SPAs: any non-empty retrieval set achieves recall@k=1.0 when registry_size <=k; Stagehand selector+DOM-hash (80% speedup, zero tokens on hit) will beat semantic retrieval unless correct-family-required binding and header/body/auth parameterization are tested \u2014 prior explains Frontier 0.0 coverage gain as structural.",
+      "Agents over-attribute success when cost is a deterministic function of the manipulated variable (cost = 250+500*10*novelty guarantees rho~1.0) \u2014 prior flags all Product rho 0.97-0.995 as measurement-invalid until costs are branch-derived sums of kernel.resolve/_bind/verify/freshness_check + browser steps.",
+      "Freshness/staleness is multi-channel (auth/session, permission, DOM, endpoint, temporal) not scalar orthogonality; cheap TTL/ETag-stale-while-revalidate plus verification probe often dominates learned calibration \u2014 prior cautions against another adaptive Jaccard sweep after FP=1.0 falsifications.",
+      "Path dependence and local optima: repeating same synthetic SPA family with heuristic size-32 chunking or L-derived DOM locks Physics/Frontier in a basin where null bias is estimator-intrinsic (Laplace smoothing); orthogonal estimator switch (Bayesian DM) is the only escape \u2014 prior justifies tunnel_flag pivots."
+    ],
+    "allocation": {
+      "action": "PIVOT",
+      "claim_id": "C-WEB-DYNAMICS",
+      "cognitive_reset": true,
+      "comparative_reasoning": "Another synthetic 12-state L-string sweep with heuristic bias correction repeats the local optimum flagged by audits (permuted-null still biased, analytic approximation unverified). PARKing without testing genuine spectra wastes the validated estimator. Testing timescale separation alone on same TodoMVC deterministic FSM cannot achieve H>0.2. The combined exact Gamma-ratio + genuine visual/AX spectra + barrier/committor/timescale with trajectory-grouped permutation and independent-noise BC~0 control is the only path that can change the decision (BC>0.05 vs BC~0) and justify continuing or closing Web-physics search.",
+      "dependencies": [],
+      "parent_handoff_disposition": "USE",
+      "question": "With exact closed-form Dirichlet-Multinomial Gamma-ratio bias correction via scipy.special.gammaln/polygamma (exact digamma/trigamma, no heuristic scaling or consistency blending), overlapping genuine DOM spectra not deterministically tied to generating basins (visual bbox, computed style 8 values, AX embedding from locked 1280x720 BrowserGym WebShop/TodoMVC trajectories with real session/permission latent regime per-trajectory and per-15-step persistence) and trajectory-grouped permutation (N=1000-1999, K=12/24, |perm-analytic|<0.03), does barrier/committor (>=10 revisits to same canonical state URL+DOM_cluster+H_K=3 divergent 0.2<q<0.8, ECE<=0.15 Brier gap>=0.05) or timescale separation (tau_corr>5 vs tau_shuffled~1) reveal valid beyond-memory structure (BC>0.05 p_bonf<0.01 |analytic_mean|<0.1 gap>=0.05 over TF-IDF k5 and Markov) where independent-noise control remains BC~0 (|BC|<0.05), or does even correctly centered genuine DOM remain at BC~0 indicating barrier/committor not productive and physics should PARK pending larger production manifest?",
+      "rationale": "Physics tunnel_flag true with 14 recent C-WEB-DYNAMICS experiments, 60+ Gate0 failures (0/2-3 SPAs qualify), and all Laplace-smoothed PMI/KL, KSG, entropy-rate estimators failing null centering (|null| 0.2-0.7 >0.1). Only Bayesian DM K=12 (K=n_states=12, N=1999) passes C1+C3 (log BF 168-643, null -78 to -131) but absolute BF -10 to -15 nats on real TodoMVC favors memory. The handoff's exact Gamma-ratio with genuine observed spectra (not L-derived SHA256 labels) is the first orthogonal falsifiable program that bypasses smoothing bias without requiring new Gate0 SPAs, using existing TodoMVC/WebShop trajectories and locally-hosted correlated FSM bank."
+    },
+    "cycle_id": "35859819467",
+    "lane": "physics",
+    "portfolio_assessment": "SPIDER is stalled at 271 canonical experiments with zero claims VALIDATED/PRODUCT_CORE; 60 recent experiments are synthetic harnesses re-testing tautologies (bijective cost formulas, hardcoded confidences, hash-derived DOM, truncated selectors) yielding repeated MEASUREMENT_INVALID. Only narrow substrate advances survive: byte-preserving nginx HIT-cache oracle-free greedy decode 960/960 across HIT/SWR/SIE/304 (EXP-RUNTIME-35611612543) and Bayesian Dirichlet-Multinomial K=12 first estimator to pass C1+C3 on synthetic SPA (log BF 168-643 nats, null -78 to -131). All central product claims (C-PARAM-INHERIT 45 exps, C-FRESHNESS 43 exps, C-RESIDUAL-NOVELTY 8 exps, C-LLM-INHERIT 20 exps) are HYPOTHESIS/MEASUREMENT_INVALID with per-hit costs >1.0 vs TERX/Stagehand and 0/10 mixed-channel failures under correct-family gating. Highest leverage is to force live-substrate closure (runtime shared-store + BrowserGym CDP isolation) before any further live-pilot param-inherit economics, while redirecting still-feasible lanes to honest-cost and orthogonal mechanisms that do not require the still-missing distributed store.",
+    "schema_version": 1,
+    "scout_assessment": "Scout brief was decisive: adopted its bottleneck diagnosis that C-MEAS-VALID distributed C-FRESHNESS + BrowserGym isolation is the gating dependency blocking Graph/Product, its pin correction (browsergym-core 0.14.3 + agentlab 0.4.2 + playwright 1.63.0 at 1280x720), its identification of bijective cost and adopt-any-observed-key tautologies, and its Stagehand baseline threat model. Challenged Scout's breadth where it inferred product economics from synthetic proxies \u2014 requiring honest branch-derived cost with trajectory-grouped CIs rather than another formula sweep. Delegated deep verification of AX_consistency, WebGym duplication, and Gate0 census to Intel as Scout advised, but narrowed Intel from exhaustive 567MB LFS/CAP search to minimal discriminating deliverables (N=20 product-page full-tree AX + relaxed Gate0 H>0.1 NL>=20). Forced Frontier orthogonal pivot (WebAPI bypass/MEA) and Physics exact Gamma-ratio genuine-spectra direction exactly as Scout proposed, rejecting inherited handoffs that repeat local-optimum sweeps."
+  },
+  "experiment_id": "EXP-PHYSICS-35860320716",
+  "inherited_last_verdict": "MEASUREMENT_INVALID",
+  "inherited_next_question": "With exact closed-form Dirichlet-Multinomial Gamma-ratio bias correction via scipy.special.gammaln/polygamma (exact digamma/trigamma, no heuristic scaling or consistency blending), overlapping genuine DOM spectra not deterministically tied to generating basins, verified BrowserGym WebShop/TodoMVC trajectories at locked 1280x720 via CDP Accessibility.getFullAXTree plus a larger production-proxy with real session/permission latent regime (per-trajectory and per-15-step persistence) and trajectory-grouped permutation (N=1000-1999, K=12/24, |perm-analytic|<0.03), does barrier/committor (>=10 revisits to same canonical state divergent 0.2<q<0.8, ECE<=0.15 Brier gap>=0.05) or timescale (tau_corr>5 vs tau_shuffled~1) reveal valid beyond-memory structure (BC>0.05 p_bonf<0.01 |analytic_mean|<0.1 gap>=0.05 over TF-IDF k5 and Markov) where independent-noise remains BC~0, or does even correctly centered genuine DOM remain at BC~0 indicating barrier/committor not mechanistically productive and physics should PARK pending larger production manifest?",
+  "lane": "physics",
+  "origin_github_run_id": "35860320716",
+  "parent_handoff": {
+    "experiment_id": "EXP-PHYSICS-35796855042",
+    "path": "research/experiments/EXP-PHYSICS-35796855042/handoff.json",
+    "sha256": "15cdf6b415b84e0fe9da065cba8be9d1663f7800ae0c7c3b5f2da0c9386a9f1b"
+  },
+  "reason": "global-director-PIVOT",
+  "request_hash": "5a2ac9903e13af63afd7bd6aeeb39f4d767e62cf5985f8cf6b29e04b32c9af8a",
+  "request_id": "f7c7a5366376640f36e135ee",
+  "schema_version": 1
+}

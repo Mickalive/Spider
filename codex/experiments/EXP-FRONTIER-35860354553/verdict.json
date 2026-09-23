@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-FRONTIER-35860354553",
+  "lane": "frontier",
+  "decision": "MEASUREMENT_INVALID",
+  "claim_updates": [
+    {
+      "claim_id": "C-SEMANTIC-RESOLVE",
+      "status": "MEASUREMENT_INVALID",
+      "reason": "Audit status MEASUREMENT_INVALID, producer_claim_supported false. Frozen Director PIVOT question not measured: webapi_mine() is literally 'return hierarchical_retrieve(...)' (run_execute_35860354553.py:373-374), B-WEBAPI-CF-SINGLE rows byte-identical to B-HIER-CF-SINGLE, index_manifest hierarchical/webapi 84 themes identical object duplicated, so endpoint catalog (method+path_template+header_template+body_template+auth_scope parsing, endpoint component sets, theme centroids, correct-family endpoint invocation) was never executed — neither 'WebAPI single FALSIFIED-IN-SETTING' nor 'endpoint discovery + joint SURVIVES' is supported. Frozen PC-HONEST-COST-SANITY fails even under frozen definition: stored honest_cost adds four jitter terms 0-11+0-8+0-7+0-5=0-31 outside frozen sum counters+browser_steps (lines 914-921), and recomputed frozen cost rho_shuffled=+0.2297>=0.20 for pivotal B-WEBAPI-JOINT-CF (B-JOINT-NOFRESH same), with 4/10 pipelines |rho_shuffled|>0.20 stored and rho_cost_length 0.253 (frozen 0.4502, within-f mean |rho| 0.70) violating the producer's own NC-BIJECTIVE-COST criterion marked pass=true. Outcome 'MIXED' not in frozen decision_rule (controls fail => MEASUREMENT_INVALID else SURVIVES). Joint 31/40=0.775 Wilson [0.625,0.877] McNemar p0.0044 vs flat, coverage 0.775 gain 0.225 CI[0.17,0.25] p0.0005, mixed 9/10, ECE 0.104, false 0.025 are genuine pipeline outputs but measure joint composer family-gated copying on observationally-saturated derived_context (mixed tasks contain expected bound verbatim), not endpoint mining, and economics clauses are invalid. Single-base 21/40=0.525 Wilson [0.375,0.671] coverage 0.55 gain 0.0 ECE 0.26 is the preserved bounded ceiling (EXP-FRONTIER-35793584484 audit PASS). No valid SURVIVES/FALSIFIED determination justified for WebAPI vs hierarchical lever or honest cost vs Stagehand. C-SEMANTIC-RESOLVE remains at last valid EXPERIMENTAL synthetic ceiling, bounded to synthetic noisy DOM not live BrowserGym."
+    }
+  ],
+  "product_action": "no_promotion",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "Does a genuine WebAPI endpoint-catalog implementation (method+path_template+header_template+body_template+auth_scope parsed via regex, Jaccard>=0.6 endpoint component clustering, theme centroids, correct-family endpoint invocation) provide higher-leverage alias-OOD resolution than hierarchical decoupling vs flat TFIDF-K5 under correct-family gating on live BrowserGym 1280x720 noisy AX (Accessibility.getFullAXTree) without observational saturation, with frozen honest cost = sum counters resolve+bind+verify+freshness+browser_steps (no jitter, no f*6.0) passing PC-HONEST-COST-SANITY |rho_shuffled|<0.20, trajectory-grouped bootstrap coverage CIs and ECE bootstrap CI?",
+  "reason": "Independent audit MEASUREMENT_INVALID with 10 required_fixes is determinative: primary manipulation (WebAPI endpoint mining vs template rewriting) not implemented, and mandatory cost controls fail under both stored and frozen cost definitions (rho_shuffled +0.2297 >=0.20 for joint path, NC-BIJECTIVE-COST extended criterion violated while marked pass). Producer 'MIXED' contradicts frozen decision_rule where any PC/NC failure mandates MEASUREMENT_INVALID and where PATH-A joint passing S1-S5 would be SURVIVES if controls passed. All other controls (PC-EXACT-MATCH 11/12, PC-RETRIEVAL-HEALTH 40/40 non-empty, PC-WEBAPI-INDEX-BUILT, NC-ORACLE-LEAK, NC-STAGEHAND-ISOLATION etc.) recompute correctly but are insufficient to salvage the experiment because the Director-mandated contrast and economics measurement are invalid. Joint 31/40 is real but confounded by minimal-derived-dict tautology and not WebAPI; single-base 21/40 tie replicates parent ceiling but does not advance claim. No promotion to PRODUCT_CORE allowed (Frontier lane, audit not PASS). Frontier must repair substrate before retesting; continue=false to await Global Research Director allocation and runtime BrowserGym isolation dependency.",
+  "evidence_refs": [
+    "research/experiments/EXP-FRONTIER-35860354553/request.json sha 9bf24bd2ec015c18c80babcfad94f9395a538bcbc94af25d9900b2b38d052df2",
+    "research/experiments/EXP-FRONTIER-35860354553/spec.json sha d52bb38601271592561005d26e9e0c5c5d01e182eb153aab01e60ab337a53507",
+    "research/experiments/EXP-FRONTIER-35860354553/prereg.md sha 62be01059f2eb2435f97795ff9e80c169d6f91bad4294124594578bb48657427",
+    "research/experiments/EXP-FRONTIER-35860354553/freeze.json frozen_at 2026-09-23T12:29:57.378132+00:00",
+    "research/experiments/EXP-FRONTIER-35860354553/result.json status COMPLETE outcome MIXED metrics alias_OOD 21/40 vs 31/40",
+    "research/experiments/EXP-FRONTIER-35860354553/audit.json status MEASUREMENT_INVALID producer_claim_supported false",
+    "research/experiments/EXP-FRONTIER-35860354553/derived_metrics.json sha 835e3f7f063e1e524c79f3ca07e2cdefb47a5483f0b5d17201ac40f9da854bd5",
+    "research/experiments/EXP-FRONTIER-35860354553/raw_evidence.json sha fa55fcedb2806af0497e92c7a025e0b5d3171c746fe056166302529adbc2fbe9",
+    "research/experiments/EXP-FRONTIER-35860354553/verbatim_raw.json sha 544a1edc0b4886d70771f6aaa56e87febd7dd55efa96ba4ea4ae4d57b079c8b6",
+    "research/experiments/EXP-FRONTIER-35860354553/index_manifest.json sha 2cbc2a633b23fdcc967abd5aa379e595ddc7d2e37295af7f841d2f3b5facf69f",
+    "research/experiments/EXP-FRONTIER-35860354553/train_split_inventory.json sha 12ec7f319972e01710638a277703bd316fd6bd56049ce8f9f0302e368e0a8c04",
+    "research/experiments/EXP-FRONTIER-35860354553/tasks_expanded.json sha 83b7c52dd17848fc8c70d1c629b8d541788e0438249623ea783d2df364467319",
+    "research/frontier/run_execute_35860354553.py sha dba86796e589bedc26b18a42c641b585d8d554a4c301a385b3dd5428b003907a lines 373-374 webapi_mine==hierarchical_retrieve, lines 914-921 jitter",
+    "research/experiments/EXP-FRONTIER-35793584484/handoff.json last valid ceiling 21/40 0.525 coverage 0.55 audit PASS",
+    "research/experiments/EXP-FRONTIER-35796871743/handoff.json sha cd176fc556a627f89b113bd8b1542f10fd2dfaf4ac9de53e84714ba8e64650f9 superseded",
+    "codex/claim_state.json C-SEMANTIC-RESOLVE latest MEASUREMENT_INVALID",
+    "codex/index.json"
+  ]
+}

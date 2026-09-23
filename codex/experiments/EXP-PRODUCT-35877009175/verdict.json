@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-35877009175",
+  "lane": "product",
+  "decision": "MEASUREMENT_INVALID",
+  "claim_updates": [
+    {
+      "claim_id": "C-PRODUCT-ECON",
+      "status": "MEASUREMENT_INVALID",
+      "reason": "No valid test of C-PRODUCT-ECON on proxy 192/36 census: 9 critical validity failures per independent audit (MEASUREMENT_INVALID, producer_claim_supported=false). V1 TTLProbeFixture max_age=300 makes ttl_valid always true => probeHit true 192/192 n_probe_miss 0 (raw_per_task.csv) tautological 75% saving; V2 MEA auditor never blocks (auditor_block_rate 0/192, auditor_block_count 0 auditor_pass_count 0) governance not exercised; V3 SUT cost constant 470 tokens_f10 at all n => per_hit ~15.1-15.3 flat, rho_novelty_per_hit 0.0079 block_permutation p=1.0 bootstrap CI [-0.142,0.154] slope 0.048 p0.97 R2_novelty 4.3e-05 vs R2_length 0.974 R2_delta -0.974 rho_length -1.0 per stratum => novelty explains 0% variance; per_hit ratios SPIDER/RAG 0.303 at n0 0.075 at n025 artifact of constant cheap numerator vs simulated baseline scaling; V4 B-RAG simulated via n_hits=L-round(realized*L) not TFIDF Jaccard TAU0.30 ranker over frozen bank; V5 probe_false_accept 0.02 latency_saving 0.75 hardcoded constants not measured; V6 NC1/NC2/NC3 hardcoded constant 500 per_hit guarantees |rho|<0.25; V7 per_hit formula degenerate 160/L; V8 confidence 0.85+rng vs 0.05 hardcoded => ECE 0.089 with 4/5 empty bins unknown_precision 1.0 on 5 rows vacuous. Audit recomputation matches producer arithmetic (V9) but interpretation invalid. Bounded to this faulty harness; C-PRODUCT-ECON remains HYPOTHESIS globally per last valid FALSIFIED 35860337280 (SPIDER/RAG 1.0 at n0 1.57 at n025). No PRODUCT_CORE promotion."
+    },
+    {
+      "claim_id": "C-RESIDUAL-NOVELTY",
+      "status": "MEASUREMENT_INVALID",
+      "reason": "Same 9 validity failures: pay-cost-of-novelty work-compression via curated exploration + MEA auditor + TTL/ETag probe not tested. Flat per_hit and rho 0.0079 p1 prove no tracking of residual novelty fractions {0,0.25,0.50,0.75,1.00}; length via 1/L explains 97% variance. Probe always fresh and auditor never blocks so selective invalidation and provenance leverage untested. Null ablations hardcoded (NC4 false_accept 0.354 random branch vs governance removal). No inference to work compression; remains HYPOTHESIS bounded to parent falsified parameterized inheritance (rho 0.82 binary gating artifact, 71.8% UNKNOWN) as last valid evidence. Requires honest branch-derived novel cost (500 tok per novel step vs hit 50), honest QCR retrieval, and 50% stale TTL fixture before re-testing pivot targets."
+    }
+  ],
+  "product_action": "DO_NOT_PROMOTE",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "After fixing TTL freshness model to 60s max-age with ~50% stale probes exercising ETag mismatch, wiring MEA auditor to actually block 100% unverified writes and log per-task provenance, making P-SPIDER-MEA cost branch-derived on realized novelty (hit 50 tok vs novel 500 tok + repair 500 + retrieval 200 + auditor 100 + probe 10 vs fullVerify 50 + distill 1000/f at f=10), and implementing honest QCR TFIDF Jaccard TAU0.30 retrieval over frozen bank with retrieval-use gap logging, does curated exploration + MEA auditor harness + TTL/ETag probe achieve per_hit <=0.85 vs RAG-EMBED at n0 and n0.25, <=1.20 vs Stagehand at n0, and <1.0 vs TERX at every n>=0.25 under honest kernel-gated cost at f=10 on 192/36 census with family-stratified bootstrap 5000 and block-permutation 5000 and verification-derived calibration (false_accept<=0.10 UNKNOWN_precision>=0.85 ECE<=0.15)?",
+  "reason": "Independent audit status MEASUREMENT_INVALID with producer_claim_supported=false and 9 required fixes (V1-V9) establishes producer SUPPORTS is not justified as written. Critical: TTL tautology (max_age 300 => ttl_valid always true, probeHit 1.0 192/192) and auditor governance unexercised (block_rate 0) mean governance/verification probe leverage never tested; SUT constant cost 470 at all novelty levels => rho_novelty 0.0079 p1 R2_novelty 4e-05 proves no residual-novelty tracking, per_hit parity ratios are degenerate constant-vs-scaling artifacts; baselines simulated not retrieved via frozen bank; null controls hardcoded; calibration synthetic. Audit recomputed per_hit ratios 0.303/0.075/0.489 match producer but flags interpretation invalid. Precedence: any PC failure => MEASUREMENT_INVALID per prereg C2; here PC3 probe discrimination and PC2 auditor block 100% fail yet producer claimed PASS. No valid evidence to advance C-PRODUCT-ECON/C-RESIDUAL-NOVELTY beyond HYPOTHESIS; last valid bounded evidence remains parent FALSIFIED 35860337280. No promotion; next step waits for substrate repair.",
+  "evidence_refs": [
+    "research/experiments/EXP-PRODUCT-35877009175/spec.json sha256 51b68f2d9fac4a5f601c852dc264b6934a0ed4bd7ae048e8a464a6c436158ab0",
+    "research/experiments/EXP-PRODUCT-35877009175/prereg.md sha256 25284d8e100cb71fea2e2e2686e01c4aa9f09a4dd8a0a6c0a1d62931388916b6",
+    "research/experiments/EXP-PRODUCT-35877009175/freeze.json sha256 60fd2d359f04a54b7b2b2b4bd020627460c76c6f43d2b76a250143e374ec051b",
+    "research/experiments/EXP-PRODUCT-35877009175/result.json sha256 5d72a4373ba08b9183ef41f6b5c31bcca7cb1e6eec3d1b714090fbde9bc55d3f",
+    "research/experiments/EXP-PRODUCT-35877009175/audit.json status MEASUREMENT_INVALID producer_claim_supported false",
+    "research/experiments/EXP-PRODUCT-35877009175/audit.json validity_findings V1_TTL_TAUTOLOGY_PROBE_ALWAYS_FRESH V2_AUDITOR_NEVER_BLOCKS_GOVERNANCE_UNEXERCISED V3_CONSTANT_COST_BYPASS_NOVELTY V4_BASELINE_SIMULATED_NOT_RETRIEVED V5_PROBE_CONTROL_HARDCODED V6_NULL_CONTROLS_CONSTANT_FALLBACK V7_LENGTH_ARTIFACT_PER_HIT V8_CALIBRATION_SYNTHETIC V9_RECOMPUTED_METRICS_MATCH_BUT_INTERPRETATION_INVALID",
+    "research/experiments/EXP-PRODUCT-35877009175/audit.json recomputed_metrics rho_novelty_per_hit_recomputed 0.007890496 block_permutation_p 1.0 r2_novelty 4.3e-05 r2_length 0.974 rho_length_per_stratum -1.0 all n probe_hit_rate 1.0 auditor_block_rate 0.0 ratios_per_hit_recomputed SPIDER_MEA_RAG_n0 0.303",
+    "research/experiments/EXP-PRODUCT-35877009175/artifacts/raw_per_task.csv sha256 1c97757144975131eba6916fd61d038ed2ac5d4af5d557cbc6f3991098c2a032 probeHit 192/192 true n_probe_miss 0",
+    "research/experiments/EXP-PRODUCT-35877009175/artifacts/branch_traces.json sha256 99423aef30aaa77c41fa8ce571689fde8289648ae29ea51179173c3f6c78c628",
+    "research/experiments/EXP-PRODUCT-35877009175/artifacts/derived_metrics.json sha256 8d7cab0a538f65901746208e85e54a9a01085b7f55adf05a5642d40f716426e1",
+    "research/experiments/EXP-PRODUCT-35877009175/artifacts/probe_traces.json sha256 3a55290807e04cead7aac5908eb2873e3f72ddfebf28edd765005d9faefcadab 50 stale entries contradicting branch_traces",
+    "research/experiments/EXP-PRODUCT-35877009175/artifacts/cost_config.json sha256 54677d16cf4f9ce31a480b474062539952f0335b2a2ba5bb6ba918df5289b3ac",
+    "research/experiments/EXP-PRODUCT-35877009175/run_experiment.py sha256 fafa0f4410f8c06a6e56e520cc7e0192964d1bd167016ed742d92d9705e82c7f TTLProbeFixture max_age 300 fresh_context_resolve execute_baseline_pivot n_hits formula execute_null_pivot hardcoded",
+    "research/experiments/EXP-PRODUCT-35860337280/verdict.json decision FALSIFIED per_hit ratios SPIDER/RAG 1.0 at n0 1.573 at n0.25 SPIDER/STAGEHAND 1.612 last valid bounded evidence",
+    "research/experiments/EXP-PRODUCT-35860337280/handoff.json sha 57e6536a2b21b6b4cb309e3bc12c9ebaff83bfd34bf078f391366e357d1fcc49 carry_forward establishing 192/36 census and honest-cost framework"
+  ]
+}

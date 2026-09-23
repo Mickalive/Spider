@@ -1,1 +1,9 @@
-[]
+[
+  {
+    "lane": "product",
+    "experiment_id": "EXP-PRODUCT-35888533574",
+    "ref": "origin/lab2/product",
+    "source_commit": "eed07449d0ddce9d68f8161dfa371c6effec4b19",
+    "error": "packet file absent at verdict creation commit: audit.json"
+  }
+]
