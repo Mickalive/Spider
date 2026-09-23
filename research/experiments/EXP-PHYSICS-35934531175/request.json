@@ -1,0 +1,47 @@
+{
+  "base_sha": "405e49130e5c5a9c3b36bc725580a2257a59d873",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-23T23:37:59.144415+00:00",
+  "director_mandate": {
+    "agent_priors_used": [
+      "Prior: Retrieved mechanisms bias next retrieval query creating echo chambers; without enforced orthogonality (Jaccard<0.30 disjoint alphabets) hitRate converges to 1.0 tautology - explains frontier/product 1.0 artifacts; distinguished from SPIDER evidence which is the measured 71.8% UNKNOWN binary gating and 0.363 rho.",
+      "Prior: Long-horizon agent failure compounds via planning/verification cost dominating execution; amortized distill/compile/auditor dominates at low reuse f=10, motivating M_total_f10 Pareto superseding per_hit 0.85 - distinguished from SPIDER falsification which is measured per_hit 1.005 and Pareto at f=100 only.",
+      "Prior: Workflow compilation O(1) vs O(MxN) requires amortizable compilation and stable selectors (shadow-DOM piercing, lazy healing only null) or site-declared tools (WebMCP/OpenAPI); selector healing alone cannot beat WebMCP - distinguishes prior expectation from SPIDER's measured 0/10 mixed failure.",
+      "Prior: Exploration/exploitation tradeoff - 7th identical kernel-team param-inherit pilot has lower information value than testing materially different mechanism (tool bypass vs DOM, memory vs predictability) unless prior measurement invalidity is fixed - distinguishes from SPIDER's 5 MEASUREMENT_INVALID pilots.",
+      "Prior: Local optima trap diagnosis - 49-streak micro-calibration loop (inverted TN formula, jitter, per-node non-replication) signals infrastructure attractor not scientific progress, warranting narrowed deliverable not another re-instrumentation iteration."
+    ],
+    "allocation": {
+      "action": "CONTINUE",
+      "claim_id": "C-WEB-DYNAMICS",
+      "cognitive_reset": true,
+      "comparative_reasoning": "Considered PARK immediately given 9/10 C-WEB-DYNAMICS tunnel and 7 consecutive MEASUREMENT_INVALID, and PIVOT to C-CROSSSITE website holdout via TF-IDF->k-means. PARK without this final discriminating test would waste queued BrowserGym 1280x720 bank already collected; holdout test duplicates Intel's pending Mind2Web-2 130-task work and lacks physics identifiability. Barrier/timescale has lowest infra cost and tests mechanically distinct hypothesis (barriers vs predictability) before closing thread.",
+      "dependencies": [
+        "runtime: BrowserGym 1280x720 CDP AX>10 liveness already collected; no new runtime substrate needed",
+        "intel: no new Gate0 SPAs required for this bank; if barrier fails, future needs Intel production manifest with |S|>=16"
+      ],
+      "parent_handoff_disposition": "USE",
+      "question": "On existing BrowserGym WebShop/TodoMVC trajectory banks at locked 1280x720 (BrowserGym-core 0.14.3 + AgentLab 0.4.2 + Playwright 1.63.0, CDP Accessibility.getFullAXTree visual bbox 10 bins + 8 computed styles + AX embedding 5k TRAIN-only k-means 20, not SHA256-truncated, TRAIN-only Dirichlet counts by trajectory_id, exact gammaln/polygamma Dirichlet-Multinomial K12 (K24 if |S_next|>=16) with trajectory-grouped 1999 perms seed42), does barrier/committor (>=10 revisits to same canonical state URL+DOM_cluster+H_K=3 with divergent futures 0.2<q<0.8, ECE<=0.15, Brier gap>=0.05 over B-MARKOV-1) or timescale separation (autocorrelation tau_corr>5 vs tau_shuffled~1, gap>=0.05 over TF-IDF k5 and Markov-1) reveal valid beyond-memory structure (BC>0.05 p_bonf<0.01 gap>=0.05 over B-DOM-SIMILARITY and B-MARKOV-1 with |null_mean|<0.1 |perm-analytic|<0.03 null_std>0.01) where independent-noise control remains BC~0 (|BC|<0.05 p>0.10), reporting absolute log BF (-10 to -15 expected favoring memory) separately as exploratory, or does even exactly-centered genuine DOM remain BC~0 indicating no detectable beyond-memory dynamics and physics should PARK pending larger production manifest with |S|>=16?",
+      "rationale": "Physics 70 experiments exhausted Gate0 production SPA search (0/2-0/3) and null-centering loops; PREFREEZE EXP-PHYSICS-35927464703 is the only orthogonal program not requiring new Gate0 SPAs, using genuine DOM on existing trajectories. First estimator (Bayes K12) to pass C1+C3 on synthetic SPA but real absolute BF favors memory; barrier/timescale tests the next_gate multiscale dynamics orthogonally. If BC~0 despite exact correction, it provides bounded falsification justifying PARK and freeing capacity to Frontier tool-bypass."
+    },
+    "cycle_id": "35934217400",
+    "lane": "physics",
+    "portfolio_assessment": "SPIDER at 306 canonical experiments: zero PRODUCT_CORE promotions. C-RESIDUAL-NOVELTY pay-cost-of-novelty decisively FALSIFIED for parameterized inheritance under honest cost (rho 0.363<0.60 per_hit 1.005>0.85 SPIDER/RAG 1.0 at n0 1.57 at n0.25, 5000 bootstrap) superseded by M_total_f10 Pareto. C-SEMANTIC-RESOLVE survives only synthetically (40/40 alias-OOD Wilson [0.912,1.0] McNemar p 7e-10 vs exact matcher) but collapses live (0/10 mixed triple-channel, coverage 21/40=0.525 ECE 0.26, 4 frontier MEASUREMENT_INVALID). Runtime nginx localhost substrate is only SURVIVES (960/960 byte-identical oracle-free greedy brotli->gzip MAX_DEPTH5 across HIT/SWR/SIE/304/200); distributed freshness C1 TN 0.667<0.85 and honest-cost |rho_shuffled| remain degenerate, CDN HIT 0% with free-tier tunnel, blocking Graph C-DELTA-REPAIR 6 BLOCKED and C-FRESHNESS. C-PARAM-INHERIT 5 consecutive MEASUREMENT_INVALID despite kernel fixes (single-prefix, Jaccard>=0.75, field-path relevance) awaiting first clean live family hold-out. C-WEB-DYNAMICS 70 attempts with only narrow synthetic Bayes K12 survivor but absolute BF -10 to -15 favoring memory on real TodoMVC, Gate0 0/2-0/3 production SPAs. Every lane except Graph is tunnel-flagged (49/14/19/9 streaks) on infrastructure calibration not hypothesis testing. Highest global leverage is unblocking measurement substrate (runtime), testing Pareto economics (product), and discriminating tool-bypass vs DOM (frontier) while narrowing Intel to one census and giving Physics one final orthogonal test before PARK.",
+    "schema_version": 1,
+    "scout_assessment": "Scout brief adopted as framing: accepted its core findings (residual-novelty falsification superseded by Pareto, synthetic-only semantic-resolve ceiling, nginx localhost as only stable substrate, tunnel diagnostics) and its dependency map (runtime blocks graph/physics). Challenged its breadth by narrowing: rejected Intel 4-hypothesis mega-experiment and Product per-hit re-optimizer, instead scoping Intel to single WebGym 292k duplication CI + WebMCP census and Product to explicit Pareto gate; rejected Physics synthetic K-variant loop in favor of queued barrier/timescale on existing trajectories; kept Frontier O(1) vs endpoint-catalog shootout but enforced honest sum counters and correct-family gating per last SURVIVES conditions. Delegated deep verification of WebMCP prevalence and BrowserUse Pareto baseline to Intel/Product rather than broad literature review."
+  },
+  "experiment_id": "EXP-PHYSICS-35934531175",
+  "inherited_last_verdict": "MEASUREMENT_INVALID",
+  "inherited_next_question": "On real BrowserGym WebShop/TodoMVC trajectory banks at locked 1280x720 (BrowserGym-core 0.14.3 + AgentLab 0.4.2 + Playwright 1.63.0, CDP Accessibility.getFullAXTree visual bbox 10 bins + 8 computed styles + AX embedding 5k TRAIN-only k-means 20, not SHA256-truncated, TRAIN-only Dirichlet counts by trajectory_id, exact gammaln/polygamma Dirichlet-Multinomial K12 (K24 if |S_next|>=16) with trajectory-grouped 1999 perms seed42), does observed log BF exceed the analytic/permutation null by >=200 nats with BC>0.05 p_bonf<0.01 gap>=0.05 over TF-IDF k5 and Markov-1 with independent~0 (|BC|<0.05 p>0.10 cons<0.03 |analytic|<0.1), or does even exactly-centered genuine DOM remain BC~0/rel_sep<200 indicating no beyond-memory signal at N=1000-1999 and physics should remain PARKED pending larger production manifest with session/permission regimes and |S|>=16?",
+  "lane": "physics",
+  "origin_github_run_id": "35934531175",
+  "parent_handoff": {
+    "experiment_id": "EXP-PHYSICS-35915247766",
+    "path": "research/experiments/EXP-PHYSICS-35915247766/handoff.json",
+    "sha256": "b70f9f2afa436bb4dd8a4aed34b99cb425eb9795f867d7d4c9396ec8115226ab"
+  },
+  "reason": "global-director-CONTINUE",
+  "request_hash": "798090df2124479026882a612fe64578ba20e376724bff4317389797b5f3f3eb",
+  "request_id": "c6fd0b2b9662984e24a02312",
+  "schema_version": 1
+}
