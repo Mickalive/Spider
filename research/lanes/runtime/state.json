@@ -8,7 +8,7 @@
   "next_question": "Can Runtime close the live-substrate block with a real-HTTP implementation: (1) shared SQLite WAL file at /tmp/spider-runtime-35784838353/shared.db with 2x gunicorn 23.0.0 sync + nginx 1.24.0 round-robin delivering real requests (If-None-Match/ETag ->304 verified, per-batch SELECT commitment verified, X-Worker-Pid distribution >=10 per worker, n_non304>=800 stratified) to achieve C-FRESHNESS C1 TN>=0.85 (Wilson lower>0.75, session_status>=0.85) with per-node baseline TN~0.667 and stratified r TOST within 0.15, and (2) Playwright 1280x720 browser fetches via page.request against /resource (not requests) with CDP Accessibility.getFullAXTree on /resource pages (AX nodes>10 median, PC-HEALTH>=80%, DOM 21-82) preserving fingerprint isolation (body-only AvsC full>0.5 status 0 headers-no-CLEN 0, header-only AvsE full>0.5 CLEN 31==31) plus per-value Cache-Control/ETag/Content-Length gradients with B=1000 non-degenerate CI reporting?",
   "promotion_ready": false,
   "consecutive_failures": 1,
-  "updated_at": "2026-09-23T13:39:13.976371+00:00",
+  "updated_at": "2026-09-23T13:45:58.041549+00:00",
   "last_failure_retryable": false,
   "last_handoff_sha256": "ccb4315c7eff1d9a9625930327b7c31af3762fb0239c33b11a87ddcaf3fbfd79",
   "same_failure_count": 1,
