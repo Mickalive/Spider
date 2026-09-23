@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-35903200136",
+  "lane": "intel",
+  "decision": "MIXED — H1/H2 FALSIFIED-IN-SETTING (bounded to homepage/template longest-prefix + unstable Stagehand exact-match); H3/H4 MEASUREMENT_INVALID per infrastructure precedence; audit REVISE required; no SURVIVES, no promotion",
+  "claim_updates": [
+    {
+      "claim_id": "C-CROSSSITE",
+      "status": "HYPOTHESIS",
+      "reason": "Audit REVISE (producer_claim_supported=true, 8 required_fixes) confirms direction but corrects metrics: M_AX_CONSISTENCY_MEAN 0.9 correct, but bootstrap CI [1.0,1.0] impossible vs recomputed [0.7,1.0] (V2), shuffle_mean 1.0 vs recomputed 0.9 (V3), variance 0.0 vs recomputed pop 0.09/sample 0.10. H1_AX_FULLTREE is FALSIFIED-IN-SETTING bounded to full-tree semantic/multi-anchor longest_prefix_without_fallback with 9-regex stripping at 1280x720 on Magento One Stop Market homepage/template captures: 18/20 captures at http://localhost:7770 / with identical 1430 nodes/dom 251734, family_scores [1.0x9,0.0], shuffle p=1.0 gap 0.0, delta_vs_truncated null, variance>0 gate would PASS on recomputed value but p/delta fail; product-page transfer remains untested (only 1/10 families product pages family 6 864/668 nodes, required 10 families x2 task-specific __SHOPPING__/path expansion, product-subtree anchoring not validated V5, spec requires shopping_admin fallback). H2_STAGEHAND_RECOMPUTED_DYNAMIC is FALSIFIED-IN-SETTING bounded to exact selector+relevant-subtree SHA256 with 9-regex stripping recomputed after page.content+AX via page.evaluate on this template: HIT 0.0 <0.8 with hash_changed_on_every access (all 36 families before_hash!=after_hash, MISS 1.0 tautological, false_accept 0.0 vacuous, V6) even after stripping, so ~2x/~30% floor not validated on this corpus. H3_WEBGYM_DIVERSE and H4_GATE0_RELAXED correctly remain MEASUREMENT_INVALID per frozen infrastructure precedence: 0/50 diverse eTLD+1 after 2 genuine 401/404 attempts (V7) and 0/50 transitions/family BrowserGym API mismatch (V7), not negative evidence. CAP/LFS exhaustive ABANDONED per Director SUPERSEDE not falsified. C-CROSSSITE therefore remains HYPOTHESIS single-store vacuous, not globally REJECTED; bounded rejections do not close orthogonal mechanisms (parameterized slots, hierarchical/WebAPI retrieval, AX semantic similarity, expanded normalization, multi-store holdout)."
+    }
+  ],
+  "product_action": "none",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "With proper product-page sampling (10/10 families via task-specific __SHOPPING__/path expansion and shopping_admin 184/42 fallback, product-subtree isolation heading/price/add-to-cart/main at 1280x720) plus expanded dynamic-token normalization beyond 9 regex (form_key/uenc/store/session/Magento attributes) stabilizing relevant-subtree SHA, does full-tree AX_consistency achieve variance>0 p<0.05 delta>=0.20 vs truncated [:20] vs trajectory-grouped shuffle, does Stagehand recomputed+stabilized achieve HIT>=0.8 MISS>=0.8 false_accept<0.05 beating NC4 with real-path latency/tokens, and can WebGym 50 diverse eTLD+1 duplication CI + sweep 0.818-0.9479 and BrowserGym multi-step >=50 transitions/family on >=10 families close H3/H4 under pinned 64-char digest sha256:3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb + BrowserGym-core 0.14.3/AgentLab 0.4.2/Playwright 1.63.0 with alternative representations (parameterized slots, AX similarity) if longest-prefix still fails?",
+  "reason": "Frozen 4-branch design: adequacy achieved (20/20 captures 600-2000 nodes, PC1 PASS, Docker 64-hex live on 7770, grammar f2b5e3bb verified no truncation per audit V8) but sampling violated product-page requirement, so H1 evaluation is homepage/template tautology not preregistered product-page target. Audit REVISE requires recomputed metrics corrections before Codex ingestion and re-measurement of delta_vs_truncated, product-subtree, expanded stripping, multi-step. Bounded falsifications are valid for tested homepage/template exact-match mechanism (V1, V6) but do not falsify within-store transfer with proper sampling/representation or cross-site/delta-repair. H3/H4 correctly MEASUREMENT_INVALID per 2-attempt clause (V7), not to be treated as negative. No SURVIVES ceiling justified; no Product Core promotion (intel lane, REVISE audit, falsified H2 floor). Pause chaining until metric fixes and sampling repair; Director SUPERSEDE abandonment of exhaustive LFS/CAP respected.",
+  "evidence_refs": [
+    "research/experiments/EXP-INTEL-35903200136/request.json sha256 3b62a93d611331c578855c1c43cf276e0932065c62cc01f6a167088e9a32dfe6",
+    "research/experiments/EXP-INTEL-35903200136/spec.json sha256 bc2931bd94c1dc0b2e3de8100e51af2ca88fe48e70591a76fdcbdc17f341bca6",
+    "research/experiments/EXP-INTEL-35903200136/prereg.md sha256 e94712c2c13cad302849c2b4dc2137c48a7139bc54204bd7a45be099aa0abd11",
+    "research/experiments/EXP-INTEL-35903200136/freeze.json",
+    "research/experiments/EXP-INTEL-35903200136/result.json",
+    "research/experiments/EXP-INTEL-35903200136/audit.json status REVISE producer_claim_supported true required_fixes[8] validity_findings[8] recomputed_metrics claim_ceiling",
+    "research/experiments/EXP-INTEL-35903200136/report.md",
+    "research/experiments/EXP-INTEL-35903200136/provenance.json sha256 349ad7c430705e822bfa26ab14428e77edb5dafbf374ca6220012717768f1a9e grammar f2b5e3bb0fe5cab452f24d3d1ed18205813ae207de579870b1a16f5f156d542a docker sha256:3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb",
+    "research/experiments/EXP-INTEL-35903200136/artifacts/raw/ax_captures.jsonl sha256 5a002cc82c2829c6327e4911325aa6ac1ee824d65e6b0f9889f05d795ee3dc9f (20 captures 1430x18 864/668x2)",
+    "research/experiments/EXP-INTEL-35903200136/artifacts/derived/ax_consistency_fulltree.json sha256 6288cce9684b401e154c30057822895ef5c1e21c3d403b519d6df99d716f2582 family_scores [1.0x9,0.0] bootstrap [1.0,1.0] vs recomputed [0.7,1.0] shuffle 1.0/0.9",
+    "research/experiments/EXP-INTEL-35903200136/artifacts/derived/stagehand_replication_recomputed.json sha256 50dd5cd1ff8f5b09e05cb49974bbaae70badd17f8a2647dc1ec93a8c6c37ec32 HIT 0.0 MISS 1.0 hash_changed true all 36",
+    "research/experiments/EXP-INTEL-35903200136/artifacts/derived/webgym_census.json sha256 8ed6611f8b5f3630fe42326d3e477a8bf24af131288ef4d80347bfdf8125e49b 0 sites 401/404",
+    "research/experiments/EXP-INTEL-35903200136/artifacts/derived/gate0_relaxed_table.json sha256 73d3496cbbf5ea04567f41545a0948b7cd949c265415b44821dc0ecac6180788 0 transitions",
+    "research/intel/grammar_fulltree_358885.py sha256 f2b5e3bb0fe5cab452f24d3d1ed18205813ae207de579870b1a16f5f156d542a",
+    "research/experiments/EXP-INTEL-35892848544/handoff.json sha fc9913b28096ddfbd0bd132684461022589e2667aca1f0de3679b1cbabd1a9b7",
+    "codex/claim_state.json C-CROSSSITE HYPOTHESIS",
+    "codex/index.json"
+  ]
+}
