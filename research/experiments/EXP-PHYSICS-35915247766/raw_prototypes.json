@@ -1,0 +1,1262 @@
+{
+  "('A', 0, 0)": {
+    "visual_raw": "{\"x\": 100, \"y\": 180, \"w\": 120, \"h\": 28, \"count\": 6, \"depth\": 3, \"density\": 0.3}",
+    "computed_style_raw": "{\"color\": \"rgb(255, 0, 0)\", \"backgroundColor\": \"rgb(255, 255, 255)\", \"visibility\": \"visible\", \"display\": \"block\", \"opacity\": \"1\", \"border\": \"1px solid rgb(153, 153, 153)\", \"position\": \"absolute\", \"fontSize\": \"14px\"}",
+    "bbox": {
+      "x": 100,
+      "y": 180,
+      "width": 120,
+      "height": 28
+    },
+    "computed_style": {
+      "color": "rgb(255, 0, 0)",
+      "backgroundColor": "rgb(255, 255, 255)",
+      "visibility": "visible",
+      "display": "block",
+      "opacity": "1",
+      "border": "1px solid rgb(153, 153, 153)",
+      "position": "absolute",
+      "fontSize": "14px"
+    },
+    "a11y_serial": "[{\"nodeId\": \"1\", \"ignored\": false, \"role\": {\"type\": \"internalRole\", \"value\": \"RootWebArea\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 144}, \"name\": {\"type\": \"computedString\", \"value\": \"\", \"sources\": [{\"type\": \"relatedElement\", \"attribute\": \"aria-labelledby\"}, {\"type\": \"attribute\", \"attribute\": \"aria-label\"}, {\"type\": \"attribute\", \"attribute\": \"aria-label\", \"superseded\": true}, {\"type\": \"relatedElement\", \"nativeSource\": \"title\"}]}, \"properties\": [{\"name\": \"focusable\", \"value\": {\"type\": \"bo",
+    "a11y_bytes": 3971,
+    "dom_bytes": 443,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "dom_visual": "VB_10_18_24_6",
+    "dom_computed_style": "CS_red_rgb(255_1_6_10",
+    "dom_event_seq_base": "click",
+    "ax_cluster": "AX_7a0a_0_0",
+    "ax_bytes_len": 3043,
+    "html": "<html><head><style>body{margin:0;padding:0} #btn{position:absolute; left:100px; top:180px; width:120px; height:28px; color:rgb(255, 0, 0); background:rgb(255,255,255); display:block; visibility:visible; opacity:1.0; border:1px solid #999; font-size:14px;}</style></head><body><div id=\"root\"><button id=\"btn\" aria-label=\"action state 0 variant 0\">Action 0 A0</button><span>state0</span><div style=\"display:none\">depth3</div></div></body></html>",
+    "color_key": "red",
+    "left": 100
+  },
+  "('A', 0, 1)": {
+    "visual_raw": "{\"x\": 106, \"y\": 180, \"w\": 124, \"h\": 28, \"count\": 7, \"depth\": 3, \"density\": 0.4}",
+    "computed_style_raw": "{\"color\": \"rgb(255, 0, 0)\", \"backgroundColor\": \"rgb(242, 242, 242)\", \"visibility\": \"visible\", \"display\": \"block\", \"opacity\": \"1\", \"border\": \"1px solid rgb(153, 153, 153)\", \"position\": \"absolute\", \"fontSize\": \"14px\"}",
+    "bbox": {
+      "x": 106,
+      "y": 180,
+      "width": 124,
+      "height": 28
+    },
+    "computed_style": {
+      "color": "rgb(255, 0, 0)",
+      "backgroundColor": "rgb(242, 242, 242)",
+      "visibility": "visible",
+      "display": "block",
+      "opacity": "1",
+      "border": "1px solid rgb(153, 153, 153)",
+      "position": "absolute",
+      "fontSize": "14px"
+    },
+    "a11y_serial": "[{\"nodeId\": \"1\", \"ignored\": false, \"role\": {\"type\": \"internalRole\", \"value\": \"RootWebArea\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 144}, \"name\": {\"type\": \"computedString\", \"value\": \"\", \"sources\": [{\"type\": \"relatedElement\", \"attribute\": \"aria-labelledby\"}, {\"type\": \"attribute\", \"attribute\": \"aria-label\"}, {\"type\": \"attribute\", \"attribute\": \"aria-label\", \"superseded\": true}, {\"type\": \"relatedElement\", \"nativeSource\": \"title\"}]}, \"properties\": [{\"name\": \"focusable\", \"value\": {\"type\": \"bo",
+    "a11y_bytes": 3988,
+    "dom_bytes": 443,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "dom_visual": "VB_10_18_24_7",
+    "dom_computed_style": "CS_red_rgb(242_1_7_10",
+    "dom_event_seq_base": "click",
+    "ax_cluster": "AX_4b5c_0_1",
+    "ax_bytes_len": 3059,
+    "html": "<html><head><style>body{margin:0;padding:0} #btn{position:absolute; left:106px; top:180px; width:124px; height:28px; color:rgb(255, 0, 0); background:rgb(242,242,242); display:block; visibility:visible; opacity:1.0; border:1px solid #999; font-size:14px;}</style></head><body><div id=\"root\"><button id=\"btn\" aria-label=\"action state 0 variant 1\">Action 0 A1</button><span>state0</span><div style=\"display:none\">depth3</div></div></body></html>",
+    "color_key": "red",
+    "left": 106
+  },
+  "('A', 0, 2)": {
+    "visual_raw": "{\"x\": 112, \"y\": 180, \"w\": 128, \"h\": 28, \"count\": 8, \"depth\": 3, \"density\": 0.5}",
+    "computed_style_raw": "{\"color\": \"rgb(0, 0, 255)\", \"backgroundColor\": \"rgb(238, 238, 238)\", \"visibility\": \"visible\", \"display\": \"block\", \"opacity\": \"1\", \"border\": \"1px solid rgb(153, 153, 153)\", \"position\": \"absolute\", \"fontSize\": \"14px\"}",
+    "bbox": {
+      "x": 112,
+      "y": 180,
+      "width": 128,
+      "height": 28
+    },
+    "computed_style": {
+      "color": "rgb(0, 0, 255)",
+      "backgroundColor": "rgb(238, 238, 238)",
+      "visibility": "visible",
+      "display": "block",
+      "opacity": "1",
+      "border": "1px solid rgb(153, 153, 153)",
+      "position": "absolute",
+      "fontSize": "14px"
+    },
+    "a11y_serial": "[{\"nodeId\": \"1\", \"ignored\": false, \"role\": {\"type\": \"internalRole\", \"value\": \"RootWebArea\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 144}, \"name\": {\"type\": \"computedString\", \"value\": \"\", \"sources\": [{\"type\": \"relatedElement\", \"attribute\": \"aria-labelledby\"}, {\"type\": \"attribute\", \"attribute\": \"aria-label\"}, {\"type\": \"attribute\", \"attribute\": \"aria-label\", \"superseded\": true}, {\"type\": \"relatedElement\", \"nativeSource\": \"title\"}]}, \"properties\": [{\"name\": \"focusable\", \"value\": {\"type\": \"bo",
+    "a11y_bytes": 3988,
+    "dom_bytes": 443,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "dom_visual": "VB_11_18_25_8",
+    "dom_computed_style": "CS_blue_rgb(238_1_8_11",
+    "dom_event_seq_base": "click",
+    "ax_cluster": "AX_b832_0_2",
+    "ax_bytes_len": 3059,
+    "html": "<html><head><style>body{margin:0;padding:0} #btn{position:absolute; left:112px; top:180px; width:128px; height:28px; color:rgb(0, 0, 255); background:rgb(238,238,238); display:block; visibility:visible; opacity:1.0; border:1px solid #999; font-size:14px;}</style></head><body><div id=\"root\"><button id=\"btn\" aria-label=\"action state 0 variant 2\">Action 0 A2</button><span>state0</span><div style=\"display:none\">depth3</div></div></body></html>",
+    "color_key": "blue",
+    "left": 112
+  },
+  "('B', 0, 0)": {
+    "visual_raw": "{\"x\": 110, \"y\": 180, \"w\": 122, \"h\": 28, \"count\": 6, \"depth\": 3, \"density\": 0.3}",
+    "computed_style_raw": "{\"color\": \"rgb(0, 0, 255)\", \"backgroundColor\": \"rgb(255, 255, 255)\", \"visibility\": \"visible\", \"display\": \"block\", \"opacity\": \"1\", \"border\": \"1px solid rgb(153, 153, 153)\", \"position\": \"absolute\", \"fontSize\": \"14px\"}",
+    "bbox": {
+      "x": 110,
+      "y": 180,
+      "width": 122,
+      "height": 28
+    },
+    "computed_style": {
+      "color": "rgb(0, 0, 255)",
+      "backgroundColor": "rgb(255, 255, 255)",
+      "visibility": "visible",
+      "display": "block",
+      "opacity": "1",
+      "border": "1px solid rgb(153, 153, 153)",
+      "position": "absolute",
+      "fontSize": "14px"
+    },
+    "a11y_serial": "[{\"nodeId\": \"1\", \"ignored\": false, \"role\": {\"type\": \"internalRole\", \"value\": \"RootWebArea\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 144}, \"name\": {\"type\": \"computedString\", \"value\": \"\", \"sources\": [{\"type\": \"relatedElement\", \"attribute\": \"aria-labelledby\"}, {\"type\": \"attribute\", \"attribute\": \"aria-label\"}, {\"type\": \"attribute\", \"attribute\": \"aria-label\", \"superseded\": true}, {\"type\": \"relatedElement\", \"nativeSource\": \"title\"}]}, \"properties\": [{\"name\": \"focusable\", \"value\": {\"type\": \"bo",
+    "a11y_bytes": 3988,
+    "dom_bytes": 443,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "dom_visual": "VB_11_18_24_6",
+    "dom_computed_style": "CS_blue_rgb(255_1_6_11",
+    "dom_event_seq_base": "click",
+    "ax_cluster": "AX_9074_0_0",
+    "ax_bytes_len": 3059,
+    "html": "<html><head><style>body{margin:0;padding:0} #btn{position:absolute; left:110px; top:180px; width:122px; height:28px; color:rgb(0, 0, 255); background:rgb(255,255,255); display:block; visibility:visible; opacity:1.0; border:1px solid #999; font-size:14px;}</style></head><body><div id=\"root\"><button id=\"btn\" aria-label=\"action state 0 variant 0\">Action 0 B0</button><span>state0</span><div style=\"display:none\">depth3</div></div></body></html>",
+    "color_key": "blue",
+    "left": 110
+  },
+  "('B', 0, 1)": {
+    "visual_raw": "{\"x\": 116, \"y\": 180, \"w\": 126, \"h\": 28, \"count\": 7, \"depth\": 3, \"density\": 0.4}",
+    "computed_style_raw": "{\"color\": \"rgb(0, 0, 255)\", \"backgroundColor\": \"rgb(242, 242, 242)\", \"visibility\": \"visible\", \"display\": \"block\", \"opacity\": \"1\", \"border\": \"1px solid rgb(153, 153, 153)\", \"position\": \"absolute\", \"fontSize\": \"14px\"}",
+    "bbox": {
+      "x": 116,
+      "y": 180,
+      "width": 126,
+      "height": 28
+    },
+    "computed_style": {
+      "color": "rgb(0, 0, 255)",
+      "backgroundColor": "rgb(242, 242, 242)",
+      "visibility": "visible",
+      "display": "block",
+      "opacity": "1",
+      "border": "1px solid rgb(153, 153, 153)",
+      "position": "absolute",
+      "fontSize": "14px"
+    },
+    "a11y_serial": "[{\"nodeId\": \"1\", \"ignored\": false, \"role\": {\"type\": \"internalRole\", \"value\": \"RootWebArea\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 144}, \"name\": {\"type\": \"computedString\", \"value\": \"\", \"sources\": [{\"type\": \"relatedElement\", \"attribute\": \"aria-labelledby\"}, {\"type\": \"attribute\", \"attribute\": \"aria-label\"}, {\"type\": \"attribute\", \"attribute\": \"aria-label\", \"superseded\": true}, {\"type\": \"relatedElement\", \"nativeSource\": \"title\"}]}, \"properties\": [{\"name\": \"focusable\", \"value\": {\"type\": \"bo",
+    "a11y_bytes": 3988,
+    "dom_bytes": 443,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "dom_visual": "VB_11_18_25_7",
+    "dom_computed_style": "CS_blue_rgb(242_1_7_11",
+    "dom_event_seq_base": "click",
+    "ax_cluster": "AX_2999_0_1",
+    "ax_bytes_len": 3059,
+    "html": "<html><head><style>body{margin:0;padding:0} #btn{position:absolute; left:116px; top:180px; width:126px; height:28px; color:rgb(0, 0, 255); background:rgb(242,242,242); display:block; visibility:visible; opacity:1.0; border:1px solid #999; font-size:14px;}</style></head><body><div id=\"root\"><button id=\"btn\" aria-label=\"action state 0 variant 1\">Action 0 B1</button><span>state0</span><div style=\"display:none\">depth3</div></div></body></html>",
+    "color_key": "blue",
+    "left": 116
+  },
+  "('B', 0, 2)": {
+    "visual_raw": "{\"x\": 122, \"y\": 180, \"w\": 130, \"h\": 28, \"count\": 8, \"depth\": 3, \"density\": 0.5}",
+    "computed_style_raw": "{\"color\": \"rgb(255, 0, 0)\", \"backgroundColor\": \"rgb(238, 238, 238)\", \"visibility\": \"visible\", \"display\": \"block\", \"opacity\": \"1\", \"border\": \"1px solid rgb(153, 153, 153)\", \"position\": \"absolute\", \"fontSize\": \"14px\"}",
+    "bbox": {
+      "x": 122,
+      "y": 180,
+      "width": 130,
+      "height": 28
+    },
+    "computed_style": {
+      "color": "rgb(255, 0, 0)",
+      "backgroundColor": "rgb(238, 238, 238)",
+      "visibility": "visible",
+      "display": "block",
+      "opacity": "1",
+      "border": "1px solid rgb(153, 153, 153)",
+      "position": "absolute",
+      "fontSize": "14px"
+    },
+    "a11y_serial": "[{\"nodeId\": \"1\", \"ignored\": false, \"role\": {\"type\": \"internalRole\", \"value\": \"RootWebArea\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 144}, \"name\": {\"type\": \"computedString\", \"value\": \"\", \"sources\": [{\"type\": \"relatedElement\", \"attribute\": \"aria-labelledby\"}, {\"type\": \"attribute\", \"attribute\": \"aria-label\"}, {\"type\": \"attribute\", \"attribute\": \"aria-label\", \"superseded\": true}, {\"type\": \"relatedElement\", \"nativeSource\": \"title\"}]}, \"properties\": [{\"name\": \"focusable\", \"value\": {\"type\": \"bo",
+    "a11y_bytes": 3988,
+    "dom_bytes": 443,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "dom_visual": "VB_12_18_26_8",
+    "dom_computed_style": "CS_red_rgb(238_1_8_12",
+    "dom_event_seq_base": "click",
+    "ax_cluster": "AX_66f5_0_2",
+    "ax_bytes_len": 3059,
+    "html": "<html><head><style>body{margin:0;padding:0} #btn{position:absolute; left:122px; top:180px; width:130px; height:28px; color:rgb(255, 0, 0); background:rgb(238,238,238); display:block; visibility:visible; opacity:1.0; border:1px solid #999; font-size:14px;}</style></head><body><div id=\"root\"><button id=\"btn\" aria-label=\"action state 0 variant 2\">Action 0 B2</button><span>state0</span><div style=\"display:none\">depth3</div></div></body></html>",
+    "color_key": "red",
+    "left": 122
+  },
+  "('A', 1, 0)": {
+    "visual_raw": "{\"x\": 102, \"y\": 188, \"w\": 120, \"h\": 28, \"count\": 7, \"depth\": 3, \"density\": 0.3}",
+    "computed_style_raw": "{\"color\": \"rgb(255, 0, 0)\", \"backgroundColor\": \"rgb(255, 255, 255)\", \"visibility\": \"visible\", \"display\": \"block\", \"opacity\": \"1\", \"border\": \"1px solid rgb(153, 153, 153)\", \"position\": \"absolute\", \"fontSize\": \"14px\"}",
+    "bbox": {
+      "x": 102,
+      "y": 188,
+      "width": 120,
+      "height": 28
+    },
+    "computed_style": {
+      "color": "rgb(255, 0, 0)",
+      "backgroundColor": "rgb(255, 255, 255)",
+      "visibility": "visible",
+      "display": "block",
+      "opacity": "1",
+      "border": "1px solid rgb(153, 153, 153)",
+      "position": "absolute",
+      "fontSize": "14px"
+    },
+    "a11y_serial": "[{\"nodeId\": \"1\", \"ignored\": false, \"role\": {\"type\": \"internalRole\", \"value\": \"RootWebArea\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 144}, \"name\": {\"type\": \"computedString\", \"value\": \"\", \"sources\": [{\"type\": \"relatedElement\", \"attribute\": \"aria-labelledby\"}, {\"type\": \"attribute\", \"attribute\": \"aria-label\"}, {\"type\": \"attribute\", \"attribute\": \"aria-label\", \"superseded\": true}, {\"type\": \"relatedElement\", \"nativeSource\": \"title\"}]}, \"properties\": [{\"name\": \"focusable\", \"value\": {\"type\": \"bo",
+    "a11y_bytes": 3988,
+    "dom_bytes": 443,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "dom_visual": "VB_10_18_24_7",
+    "dom_computed_style": "CS_red_rgb(255_1_7_10",
+    "dom_event_seq_base": "click",
+    "ax_cluster": "AX_4ca1_1_0",
+    "ax_bytes_len": 3059,
+    "html": "<html><head><style>body{margin:0;padding:0} #btn{position:absolute; left:102px; top:188px; width:120px; height:28px; color:rgb(255, 0, 0); background:rgb(255,255,255); display:block; visibility:visible; opacity:1.0; border:1px solid #999; font-size:14px;}</style></head><body><div id=\"root\"><button id=\"btn\" aria-label=\"action state 1 variant 0\">Action 1 A0</button><span>state1</span><div style=\"display:none\">depth3</div></div></body></html>",
+    "color_key": "red",
+    "left": 102
+  },
+  "('A', 1, 1)": {
+    "visual_raw": "{\"x\": 108, \"y\": 188, \"w\": 124, \"h\": 28, \"count\": 8, \"depth\": 3, \"density\": 0.4}",
+    "computed_style_raw": "{\"color\": \"rgb(255, 0, 0)\", \"backgroundColor\": \"rgb(242, 242, 242)\", \"visibility\": \"visible\", \"display\": \"block\", \"opacity\": \"1\", \"border\": \"1px solid rgb(153, 153, 153)\", \"position\": \"absolute\", \"fontSize\": \"14px\"}",
+    "bbox": {
+      "x": 108,
+      "y": 188,
+      "width": 124,
+      "height": 28
+    },
+    "computed_style": {
+      "color": "rgb(255, 0, 0)",
+      "backgroundColor": "rgb(242, 242, 242)",
+      "visibility": "visible",
+      "display": "block",
+      "opacity": "1",
+      "border": "1px solid rgb(153, 153, 153)",
+      "position": "absolute",
+      "fontSize": "14px"
+    },
+    "a11y_serial": "[{\"nodeId\": \"1\", \"ignored\": false, \"role\": {\"type\": \"internalRole\", \"value\": \"RootWebArea\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 144}, \"name\": {\"type\": \"computedString\", \"value\": \"\", \"sources\": [{\"type\": \"relatedElement\", \"attribute\": \"aria-labelledby\"}, {\"type\": \"attribute\", \"attribute\": \"aria-label\"}, {\"type\": \"attribute\", \"attribute\": \"aria-label\", \"superseded\": true}, {\"type\": \"relatedElement\", \"nativeSource\": \"title\"}]}, \"properties\": [{\"name\": \"focusable\", \"value\": {\"type\": \"bo",
+    "a11y_bytes": 3988,
+    "dom_bytes": 443,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "dom_visual": "VB_10_18_24_8",
+    "dom_computed_style": "CS_red_rgb(242_1_8_10",
+    "dom_event_seq_base": "click",
+    "ax_cluster": "AX_e4ab_1_1",
+    "ax_bytes_len": 3059,
+    "html": "<html><head><style>body{margin:0;padding:0} #btn{position:absolute; left:108px; top:188px; width:124px; height:28px; color:rgb(255, 0, 0); background:rgb(242,242,242); display:block; visibility:visible; opacity:1.0; border:1px solid #999; font-size:14px;}</style></head><body><div id=\"root\"><button id=\"btn\" aria-label=\"action state 1 variant 1\">Action 1 A1</button><span>state1</span><div style=\"display:none\">depth3</div></div></body></html>",
+    "color_key": "red",
+    "left": 108
+  },
+  "('A', 1, 2)": {
+    "visual_raw": "{\"x\": 114, \"y\": 188, \"w\": 128, \"h\": 28, \"count\": 9, \"depth\": 3, \"density\": 0.5}",
+    "computed_style_raw": "{\"color\": \"rgb(0, 0, 255)\", \"backgroundColor\": \"rgb(238, 238, 238)\", \"visibility\": \"visible\", \"display\": \"block\", \"opacity\": \"1\", \"border\": \"1px solid rgb(153, 153, 153)\", \"position\": \"absolute\", \"fontSize\": \"14px\"}",
+    "bbox": {
+      "x": 114,
+      "y": 188,
+      "width": 128,
+      "height": 28
+    },
+    "computed_style": {
+      "color": "rgb(0, 0, 255)",
+      "backgroundColor": "rgb(238, 238, 238)",
+      "visibility": "visible",
+      "display": "block",
+      "opacity": "1",
+      "border": "1px solid rgb(153, 153, 153)",
+      "position": "absolute",
+      "fontSize": "14px"
+    },
+    "a11y_serial": "[{\"nodeId\": \"1\", \"ignored\": false, \"role\": {\"type\": \"internalRole\", \"value\": \"RootWebArea\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 144}, \"name\": {\"type\": \"computedString\", \"value\": \"\", \"sources\": [{\"type\": \"relatedElement\", \"attribute\": \"aria-labelledby\"}, {\"type\": \"attribute\", \"attribute\": \"aria-label\"}, {\"type\": \"attribute\", \"attribute\": \"aria-label\", \"superseded\": true}, {\"type\": \"relatedElement\", \"nativeSource\": \"title\"}]}, \"properties\": [{\"name\": \"focusable\", \"value\": {\"type\": \"bo",
+    "a11y_bytes": 4009,
+    "dom_bytes": 443,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "dom_visual": "VB_11_18_25_9",
+    "dom_computed_style": "CS_blue_rgb(238_1_9_11",
+    "dom_event_seq_base": "click",
+    "ax_cluster": "AX_1efb_1_2",
+    "ax_bytes_len": 3075,
+    "html": "<html><head><style>body{margin:0;padding:0} #btn{position:absolute; left:114px; top:188px; width:128px; height:28px; color:rgb(0, 0, 255); background:rgb(238,238,238); display:block; visibility:visible; opacity:1.0; border:1px solid #999; font-size:14px;}</style></head><body><div id=\"root\"><button id=\"btn\" aria-label=\"action state 1 variant 2\">Action 1 A2</button><span>state1</span><div style=\"display:none\">depth3</div></div></body></html>",
+    "color_key": "blue",
+    "left": 114
+  },
+  "('B', 1, 0)": {
+    "visual_raw": "{\"x\": 112, \"y\": 188, \"w\": 122, \"h\": 28, \"count\": 7, \"depth\": 3, \"density\": 0.3}",
+    "computed_style_raw": "{\"color\": \"rgb(0, 0, 255)\", \"backgroundColor\": \"rgb(255, 255, 255)\", \"visibility\": \"visible\", \"display\": \"block\", \"opacity\": \"1\", \"border\": \"1px solid rgb(153, 153, 153)\", \"position\": \"absolute\", \"fontSize\": \"14px\"}",
+    "bbox": {
+      "x": 112,
+      "y": 188,
+      "width": 122,
+      "height": 28
+    },
+    "computed_style": {
+      "color": "rgb(0, 0, 255)",
+      "backgroundColor": "rgb(255, 255, 255)",
+      "visibility": "visible",
+      "display": "block",
+      "opacity": "1",
+      "border": "1px solid rgb(153, 153, 153)",
+      "position": "absolute",
+      "fontSize": "14px"
+    },
+    "a11y_serial": "[{\"nodeId\": \"1\", \"ignored\": false, \"role\": {\"type\": \"internalRole\", \"value\": \"RootWebArea\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 144}, \"name\": {\"type\": \"computedString\", \"value\": \"\", \"sources\": [{\"type\": \"relatedElement\", \"attribute\": \"aria-labelledby\"}, {\"type\": \"attribute\", \"attribute\": \"aria-label\"}, {\"type\": \"attribute\", \"attribute\": \"aria-label\", \"superseded\": true}, {\"type\": \"relatedElement\", \"nativeSource\": \"title\"}]}, \"properties\": [{\"name\": \"focusable\", \"value\": {\"type\": \"bo",
+    "a11y_bytes": 4013,
+    "dom_bytes": 443,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "dom_visual": "VB_11_18_24_7",
+    "dom_computed_style": "CS_blue_rgb(255_1_7_11",
+    "dom_event_seq_base": "click",
+    "ax_cluster": "AX_677b_1_0",
+    "ax_bytes_len": 3079,
+    "html": "<html><head><style>body{margin:0;padding:0} #btn{position:absolute; left:112px; top:188px; width:122px; height:28px; color:rgb(0, 0, 255); background:rgb(255,255,255); display:block; visibility:visible; opacity:1.0; border:1px solid #999; font-size:14px;}</style></head><body><div id=\"root\"><button id=\"btn\" aria-label=\"action state 1 variant 0\">Action 1 B0</button><span>state1</span><div style=\"display:none\">depth3</div></div></body></html>",
+    "color_key": "blue",
+    "left": 112
+  },
+  "('B', 1, 1)": {
+    "visual_raw": "{\"x\": 118, \"y\": 188, \"w\": 126, \"h\": 28, \"count\": 8, \"depth\": 3, \"density\": 0.4}",
+    "computed_style_raw": "{\"color\": \"rgb(0, 0, 255)\", \"backgroundColor\": \"rgb(242, 242, 242)\", \"visibility\": \"visible\", \"display\": \"block\", \"opacity\": \"1\", \"border\": \"1px solid rgb(153, 153, 153)\", \"position\": \"absolute\", \"fontSize\": \"14px\"}",
+    "bbox": {
+      "x": 118,
+      "y": 188,
+      "width": 126,
+      "height": 28
+    },
+    "computed_style": {
+      "color": "rgb(0, 0, 255)",
+      "backgroundColor": "rgb(242, 242, 242)",
+      "visibility": "visible",
+      "display": "block",
+      "opacity": "1",
+      "border": "1px solid rgb(153, 153, 153)",
+      "position": "absolute",
+      "fontSize": "14px"
+    },
+    "a11y_serial": "[{\"nodeId\": \"1\", \"ignored\": false, \"role\": {\"type\": \"internalRole\", \"value\": \"RootWebArea\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 144}, \"name\": {\"type\": \"computedString\", \"value\": \"\", \"sources\": [{\"type\": \"relatedElement\", \"attribute\": \"aria-labelledby\"}, {\"type\": \"attribute\", \"attribute\": \"aria-label\"}, {\"type\": \"attribute\", \"attribute\": \"aria-label\", \"superseded\": true}, {\"type\": \"relatedElement\", \"nativeSource\": \"title\"}]}, \"properties\": [{\"name\": \"focusable\", \"value\": {\"type\": \"bo",
+    "a11y_bytes": 4013,
+    "dom_bytes": 443,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "dom_visual": "VB_11_18_25_8",
+    "dom_computed_style": "CS_blue_rgb(242_1_8_11",
+    "dom_event_seq_base": "click",
+    "ax_cluster": "AX_e5d6_1_1",
+    "ax_bytes_len": 3079,
+    "html": "<html><head><style>body{margin:0;padding:0} #btn{position:absolute; left:118px; top:188px; width:126px; height:28px; color:rgb(0, 0, 255); background:rgb(242,242,242); display:block; visibility:visible; opacity:1.0; border:1px solid #999; font-size:14px;}</style></head><body><div id=\"root\"><button id=\"btn\" aria-label=\"action state 1 variant 1\">Action 1 B1</button><span>state1</span><div style=\"display:none\">depth3</div></div></body></html>",
+    "color_key": "blue",
+    "left": 118
+  },
+  "('B', 1, 2)": {
+    "visual_raw": "{\"x\": 124, \"y\": 188, \"w\": 130, \"h\": 28, \"count\": 9, \"depth\": 3, \"density\": 0.5}",
+    "computed_style_raw": "{\"color\": \"rgb(255, 0, 0)\", \"backgroundColor\": \"rgb(238, 238, 238)\", \"visibility\": \"visible\", \"display\": \"block\", \"opacity\": \"1\", \"border\": \"1px solid rgb(153, 153, 153)\", \"position\": \"absolute\", \"fontSize\": \"14px\"}",
+    "bbox": {
+      "x": 124,
+      "y": 188,
+      "width": 130,
+      "height": 28
+    },
+    "computed_style": {
+      "color": "rgb(255, 0, 0)",
+      "backgroundColor": "rgb(238, 238, 238)",
+      "visibility": "visible",
+      "display": "block",
+      "opacity": "1",
+      "border": "1px solid rgb(153, 153, 153)",
+      "position": "absolute",
+      "fontSize": "14px"
+    },
+    "a11y_serial": "[{\"nodeId\": \"1\", \"ignored\": false, \"role\": {\"type\": \"internalRole\", \"value\": \"RootWebArea\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 144}, \"name\": {\"type\": \"computedString\", \"value\": \"\", \"sources\": [{\"type\": \"relatedElement\", \"attribute\": \"aria-labelledby\"}, {\"type\": \"attribute\", \"attribute\": \"aria-label\"}, {\"type\": \"attribute\", \"attribute\": \"aria-label\", \"superseded\": true}, {\"type\": \"relatedElement\", \"nativeSource\": \"title\"}]}, \"properties\": [{\"name\": \"focusable\", \"value\": {\"type\": \"bo",
+    "a11y_bytes": 4013,
+    "dom_bytes": 443,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "dom_visual": "VB_12_18_26_9",
+    "dom_computed_style": "CS_red_rgb(238_1_9_12",
+    "dom_event_seq_base": "click",
+    "ax_cluster": "AX_a110_1_2",
+    "ax_bytes_len": 3079,
+    "html": "<html><head><style>body{margin:0;padding:0} #btn{position:absolute; left:124px; top:188px; width:130px; height:28px; color:rgb(255, 0, 0); background:rgb(238,238,238); display:block; visibility:visible; opacity:1.0; border:1px solid #999; font-size:14px;}</style></head><body><div id=\"root\"><button id=\"btn\" aria-label=\"action state 1 variant 2\">Action 1 B2</button><span>state1</span><div style=\"display:none\">depth3</div></div></body></html>",
+    "color_key": "red",
+    "left": 124
+  },
+  "('A', 2, 0)": {
+    "visual_raw": "{\"x\": 104, \"y\": 196, \"w\": 120, \"h\": 28, \"count\": 6, \"depth\": 3, \"density\": 0.3}",
+    "computed_style_raw": "{\"color\": \"rgb(255, 0, 0)\", \"backgroundColor\": \"rgb(255, 255, 255)\", \"visibility\": \"visible\", \"display\": \"block\", \"opacity\": \"1\", \"border\": \"1px solid rgb(153, 153, 153)\", \"position\": \"absolute\", \"fontSize\": \"14px\"}",
+    "bbox": {
+      "x": 104,
+      "y": 196,
+      "width": 120,
+      "height": 28
+    },
+    "computed_style": {
+      "color": "rgb(255, 0, 0)",
+      "backgroundColor": "rgb(255, 255, 255)",
+      "visibility": "visible",
+      "display": "block",
+      "opacity": "1",
+      "border": "1px solid rgb(153, 153, 153)",
+      "position": "absolute",
+      "fontSize": "14px"
+    },
+    "a11y_serial": "[{\"nodeId\": \"1\", \"ignored\": false, \"role\": {\"type\": \"internalRole\", \"value\": \"RootWebArea\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 144}, \"name\": {\"type\": \"computedString\", \"value\": \"\", \"sources\": [{\"type\": \"relatedElement\", \"attribute\": \"aria-labelledby\"}, {\"type\": \"attribute\", \"attribute\": \"aria-label\"}, {\"type\": \"attribute\", \"attribute\": \"aria-label\", \"superseded\": true}, {\"type\": \"relatedElement\", \"nativeSource\": \"title\"}]}, \"properties\": [{\"name\": \"focusable\", \"value\": {\"type\": \"bo",
+    "a11y_bytes": 4013,
+    "dom_bytes": 443,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "dom_visual": "VB_10_19_24_6",
+    "dom_computed_style": "CS_red_rgb(255_1_6_10",
+    "dom_event_seq_base": "click",
+    "ax_cluster": "AX_0857_2_0",
+    "ax_bytes_len": 3079,
+    "html": "<html><head><style>body{margin:0;padding:0} #btn{position:absolute; left:104px; top:196px; width:120px; height:28px; color:rgb(255, 0, 0); background:rgb(255,255,255); display:block; visibility:visible; opacity:1.0; border:1px solid #999; font-size:14px;}</style></head><body><div id=\"root\"><button id=\"btn\" aria-label=\"action state 2 variant 0\">Action 2 A0</button><span>state2</span><div style=\"display:none\">depth3</div></div></body></html>",
+    "color_key": "red",
+    "left": 104
+  },
+  "('A', 2, 1)": {
+    "visual_raw": "{\"x\": 110, \"y\": 196, \"w\": 124, \"h\": 28, \"count\": 7, \"depth\": 3, \"density\": 0.4}",
+    "computed_style_raw": "{\"color\": \"rgb(255, 0, 0)\", \"backgroundColor\": \"rgb(242, 242, 242)\", \"visibility\": \"visible\", \"display\": \"block\", \"opacity\": \"1\", \"border\": \"1px solid rgb(153, 153, 153)\", \"position\": \"absolute\", \"fontSize\": \"14px\"}",
+    "bbox": {
+      "x": 110,
+      "y": 196,
+      "width": 124,
+      "height": 28
+    },
+    "computed_style": {
+      "color": "rgb(255, 0, 0)",
+      "backgroundColor": "rgb(242, 242, 242)",
+      "visibility": "visible",
+      "display": "block",
+      "opacity": "1",
+      "border": "1px solid rgb(153, 153, 153)",
+      "position": "absolute",
+      "fontSize": "14px"
+    },
+    "a11y_serial": "[{\"nodeId\": \"1\", \"ignored\": false, \"role\": {\"type\": \"internalRole\", \"value\": \"RootWebArea\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 144}, \"name\": {\"type\": \"computedString\", \"value\": \"\", \"sources\": [{\"type\": \"relatedElement\", \"attribute\": \"aria-labelledby\"}, {\"type\": \"attribute\", \"attribute\": \"aria-label\"}, {\"type\": \"attribute\", \"attribute\": \"aria-label\", \"superseded\": true}, {\"type\": \"relatedElement\", \"nativeSource\": \"title\"}]}, \"properties\": [{\"name\": \"focusable\", \"value\": {\"type\": \"bo",
+    "a11y_bytes": 4013,
+    "dom_bytes": 443,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "dom_visual": "VB_11_19_24_7",
+    "dom_computed_style": "CS_red_rgb(242_1_7_11",
+    "dom_event_seq_base": "click",
+    "ax_cluster": "AX_6835_2_1",
+    "ax_bytes_len": 3079,
+    "html": "<html><head><style>body{margin:0;padding:0} #btn{position:absolute; left:110px; top:196px; width:124px; height:28px; color:rgb(255, 0, 0); background:rgb(242,242,242); display:block; visibility:visible; opacity:1.0; border:1px solid #999; font-size:14px;}</style></head><body><div id=\"root\"><button id=\"btn\" aria-label=\"action state 2 variant 1\">Action 2 A1</button><span>state2</span><div style=\"display:none\">depth3</div></div></body></html>",
+    "color_key": "red",
+    "left": 110
+  },
+  "('A', 2, 2)": {
+    "visual_raw": "{\"x\": 116, \"y\": 196, \"w\": 128, \"h\": 28, \"count\": 8, \"depth\": 3, \"density\": 0.5}",
+    "computed_style_raw": "{\"color\": \"rgb(0, 0, 255)\", \"backgroundColor\": \"rgb(238, 238, 238)\", \"visibility\": \"visible\", \"display\": \"block\", \"opacity\": \"1\", \"border\": \"1px solid rgb(153, 153, 153)\", \"position\": \"absolute\", \"fontSize\": \"14px\"}",
+    "bbox": {
+      "x": 116,
+      "y": 196,
+      "width": 128,
+      "height": 28
+    },
+    "computed_style": {
+      "color": "rgb(0, 0, 255)",
+      "backgroundColor": "rgb(238, 238, 238)",
+      "visibility": "visible",
+      "display": "block",
+      "opacity": "1",
+      "border": "1px solid rgb(153, 153, 153)",
+      "position": "absolute",
+      "fontSize": "14px"
+    },
+    "a11y_serial": "[{\"nodeId\": \"1\", \"ignored\": false, \"role\": {\"type\": \"internalRole\", \"value\": \"RootWebArea\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 144}, \"name\": {\"type\": \"computedString\", \"value\": \"\", \"sources\": [{\"type\": \"relatedElement\", \"attribute\": \"aria-labelledby\"}, {\"type\": \"attribute\", \"attribute\": \"aria-label\"}, {\"type\": \"attribute\", \"attribute\": \"aria-label\", \"superseded\": true}, {\"type\": \"relatedElement\", \"nativeSource\": \"title\"}]}, \"properties\": [{\"name\": \"focusable\", \"value\": {\"type\": \"bo",
+    "a11y_bytes": 4013,
+    "dom_bytes": 443,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "dom_visual": "VB_11_19_25_8",
+    "dom_computed_style": "CS_blue_rgb(238_1_8_11",
+    "dom_event_seq_base": "click",
+    "ax_cluster": "AX_f441_2_2",
+    "ax_bytes_len": 3079,
+    "html": "<html><head><style>body{margin:0;padding:0} #btn{position:absolute; left:116px; top:196px; width:128px; height:28px; color:rgb(0, 0, 255); background:rgb(238,238,238); display:block; visibility:visible; opacity:1.0; border:1px solid #999; font-size:14px;}</style></head><body><div id=\"root\"><button id=\"btn\" aria-label=\"action state 2 variant 2\">Action 2 A2</button><span>state2</span><div style=\"display:none\">depth3</div></div></body></html>",
+    "color_key": "blue",
+    "left": 116
+  },
+  "('B', 2, 0)": {
+    "visual_raw": "{\"x\": 114, \"y\": 196, \"w\": 122, \"h\": 28, \"count\": 6, \"depth\": 3, \"density\": 0.3}",
+    "computed_style_raw": "{\"color\": \"rgb(0, 0, 255)\", \"backgroundColor\": \"rgb(255, 255, 255)\", \"visibility\": \"visible\", \"display\": \"block\", \"opacity\": \"1\", \"border\": \"1px solid rgb(153, 153, 153)\", \"position\": \"absolute\", \"fontSize\": \"14px\"}",
+    "bbox": {
+      "x": 114,
+      "y": 196,
+      "width": 122,
+      "height": 28
+    },
+    "computed_style": {
+      "color": "rgb(0, 0, 255)",
+      "backgroundColor": "rgb(255, 255, 255)",
+      "visibility": "visible",
+      "display": "block",
+      "opacity": "1",
+      "border": "1px solid rgb(153, 153, 153)",
+      "position": "absolute",
+      "fontSize": "14px"
+    },
+    "a11y_serial": "[{\"nodeId\": \"1\", \"ignored\": false, \"role\": {\"type\": \"internalRole\", \"value\": \"RootWebArea\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 144}, \"name\": {\"type\": \"computedString\", \"value\": \"\", \"sources\": [{\"type\": \"relatedElement\", \"attribute\": \"aria-labelledby\"}, {\"type\": \"attribute\", \"attribute\": \"aria-label\"}, {\"type\": \"attribute\", \"attribute\": \"aria-label\", \"superseded\": true}, {\"type\": \"relatedElement\", \"nativeSource\": \"title\"}]}, \"properties\": [{\"name\": \"focusable\", \"value\": {\"type\": \"bo",
+    "a11y_bytes": 4013,
+    "dom_bytes": 443,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "dom_visual": "VB_11_19_24_6",
+    "dom_computed_style": "CS_blue_rgb(255_1_6_11",
+    "dom_event_seq_base": "click",
+    "ax_cluster": "AX_21d5_2_0",
+    "ax_bytes_len": 3079,
+    "html": "<html><head><style>body{margin:0;padding:0} #btn{position:absolute; left:114px; top:196px; width:122px; height:28px; color:rgb(0, 0, 255); background:rgb(255,255,255); display:block; visibility:visible; opacity:1.0; border:1px solid #999; font-size:14px;}</style></head><body><div id=\"root\"><button id=\"btn\" aria-label=\"action state 2 variant 0\">Action 2 B0</button><span>state2</span><div style=\"display:none\">depth3</div></div></body></html>",
+    "color_key": "blue",
+    "left": 114
+  },
+  "('B', 2, 1)": {
+    "visual_raw": "{\"x\": 120, \"y\": 196, \"w\": 126, \"h\": 28, \"count\": 7, \"depth\": 3, \"density\": 0.4}",
+    "computed_style_raw": "{\"color\": \"rgb(0, 0, 255)\", \"backgroundColor\": \"rgb(242, 242, 242)\", \"visibility\": \"visible\", \"display\": \"block\", \"opacity\": \"1\", \"border\": \"1px solid rgb(153, 153, 153)\", \"position\": \"absolute\", \"fontSize\": \"14px\"}",
+    "bbox": {
+      "x": 120,
+      "y": 196,
+      "width": 126,
+      "height": 28
+    },
+    "computed_style": {
+      "color": "rgb(0, 0, 255)",
+      "backgroundColor": "rgb(242, 242, 242)",
+      "visibility": "visible",
+      "display": "block",
+      "opacity": "1",
+      "border": "1px solid rgb(153, 153, 153)",
+      "position": "absolute",
+      "fontSize": "14px"
+    },
+    "a11y_serial": "[{\"nodeId\": \"1\", \"ignored\": false, \"role\": {\"type\": \"internalRole\", \"value\": \"RootWebArea\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 144}, \"name\": {\"type\": \"computedString\", \"value\": \"\", \"sources\": [{\"type\": \"relatedElement\", \"attribute\": \"aria-labelledby\"}, {\"type\": \"attribute\", \"attribute\": \"aria-label\"}, {\"type\": \"attribute\", \"attribute\": \"aria-label\", \"superseded\": true}, {\"type\": \"relatedElement\", \"nativeSource\": \"title\"}]}, \"properties\": [{\"name\": \"focusable\", \"value\": {\"type\": \"bo",
+    "a11y_bytes": 4013,
+    "dom_bytes": 443,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "dom_visual": "VB_12_19_25_7",
+    "dom_computed_style": "CS_blue_rgb(242_1_7_12",
+    "dom_event_seq_base": "click",
+    "ax_cluster": "AX_0b4c_2_1",
+    "ax_bytes_len": 3079,
+    "html": "<html><head><style>body{margin:0;padding:0} #btn{position:absolute; left:120px; top:196px; width:126px; height:28px; color:rgb(0, 0, 255); background:rgb(242,242,242); display:block; visibility:visible; opacity:1.0; border:1px solid #999; font-size:14px;}</style></head><body><div id=\"root\"><button id=\"btn\" aria-label=\"action state 2 variant 1\">Action 2 B1</button><span>state2</span><div style=\"display:none\">depth3</div></div></body></html>",
+    "color_key": "blue",
+    "left": 120
+  },
+  "('B', 2, 2)": {
+    "visual_raw": "{\"x\": 126, \"y\": 196, \"w\": 130, \"h\": 28, \"count\": 8, \"depth\": 3, \"density\": 0.5}",
+    "computed_style_raw": "{\"color\": \"rgb(255, 0, 0)\", \"backgroundColor\": \"rgb(238, 238, 238)\", \"visibility\": \"visible\", \"display\": \"block\", \"opacity\": \"1\", \"border\": \"1px solid rgb(153, 153, 153)\", \"position\": \"absolute\", \"fontSize\": \"14px\"}",
+    "bbox": {
+      "x": 126,
+      "y": 196,
+      "width": 130,
+      "height": 28
+    },
+    "computed_style": {
+      "color": "rgb(255, 0, 0)",
+      "backgroundColor": "rgb(238, 238, 238)",
+      "visibility": "visible",
+      "display": "block",
+      "opacity": "1",
+      "border": "1px solid rgb(153, 153, 153)",
+      "position": "absolute",
+      "fontSize": "14px"
+    },
+    "a11y_serial": "[{\"nodeId\": \"1\", \"ignored\": false, \"role\": {\"type\": \"internalRole\", \"value\": \"RootWebArea\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 144}, \"name\": {\"type\": \"computedString\", \"value\": \"\", \"sources\": [{\"type\": \"relatedElement\", \"attribute\": \"aria-labelledby\"}, {\"type\": \"attribute\", \"attribute\": \"aria-label\"}, {\"type\": \"attribute\", \"attribute\": \"aria-label\", \"superseded\": true}, {\"type\": \"relatedElement\", \"nativeSource\": \"title\"}]}, \"properties\": [{\"name\": \"focusable\", \"value\": {\"type\": \"bo",
+    "a11y_bytes": 4013,
+    "dom_bytes": 443,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "dom_visual": "VB_12_19_26_8",
+    "dom_computed_style": "CS_red_rgb(238_1_8_12",
+    "dom_event_seq_base": "click",
+    "ax_cluster": "AX_4bb6_2_2",
+    "ax_bytes_len": 3079,
+    "html": "<html><head><style>body{margin:0;padding:0} #btn{position:absolute; left:126px; top:196px; width:130px; height:28px; color:rgb(255, 0, 0); background:rgb(238,238,238); display:block; visibility:visible; opacity:1.0; border:1px solid #999; font-size:14px;}</style></head><body><div id=\"root\"><button id=\"btn\" aria-label=\"action state 2 variant 2\">Action 2 B2</button><span>state2</span><div style=\"display:none\">depth3</div></div></body></html>",
+    "color_key": "red",
+    "left": 126
+  },
+  "('A', 3, 0)": {
+    "visual_raw": "{\"x\": 106, \"y\": 204, \"w\": 120, \"h\": 28, \"count\": 7, \"depth\": 3, \"density\": 0.3}",
+    "computed_style_raw": "{\"color\": \"rgb(255, 0, 0)\", \"backgroundColor\": \"rgb(255, 255, 255)\", \"visibility\": \"visible\", \"display\": \"block\", \"opacity\": \"0.95\", \"border\": \"1px solid rgb(153, 153, 153)\", \"position\": \"absolute\", \"fontSize\": \"14px\"}",
+    "bbox": {
+      "x": 106,
+      "y": 204,
+      "width": 120,
+      "height": 28
+    },
+    "computed_style": {
+      "color": "rgb(255, 0, 0)",
+      "backgroundColor": "rgb(255, 255, 255)",
+      "visibility": "visible",
+      "display": "block",
+      "opacity": "0.95",
+      "border": "1px solid rgb(153, 153, 153)",
+      "position": "absolute",
+      "fontSize": "14px"
+    },
+    "a11y_serial": "[{\"nodeId\": \"1\", \"ignored\": false, \"role\": {\"type\": \"internalRole\", \"value\": \"RootWebArea\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 144}, \"name\": {\"type\": \"computedString\", \"value\": \"\", \"sources\": [{\"type\": \"relatedElement\", \"attribute\": \"aria-labelledby\"}, {\"type\": \"attribute\", \"attribute\": \"aria-label\"}, {\"type\": \"attribute\", \"attribute\": \"aria-label\", \"superseded\": true}, {\"type\": \"relatedElement\", \"nativeSource\": \"title\"}]}, \"properties\": [{\"name\": \"focusable\", \"value\": {\"type\": \"bo",
+    "a11y_bytes": 4013,
+    "dom_bytes": 444,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "dom_visual": "VB_10_20_24_7",
+    "dom_computed_style": "CS_red_rgb(255_0.95_7_10",
+    "dom_event_seq_base": "click",
+    "ax_cluster": "AX_4dd5_3_0",
+    "ax_bytes_len": 3079,
+    "html": "<html><head><style>body{margin:0;padding:0} #btn{position:absolute; left:106px; top:204px; width:120px; height:28px; color:rgb(255, 0, 0); background:rgb(255,255,255); display:block; visibility:visible; opacity:0.95; border:1px solid #999; font-size:14px;}</style></head><body><div id=\"root\"><button id=\"btn\" aria-label=\"action state 3 variant 0\">Action 3 A0</button><span>state3</span><div style=\"display:none\">depth3</div></div></body></html>",
+    "color_key": "red",
+    "left": 106
+  },
+  "('A', 3, 1)": {
+    "visual_raw": "{\"x\": 112, \"y\": 204, \"w\": 124, \"h\": 28, \"count\": 8, \"depth\": 3, \"density\": 0.4}",
+    "computed_style_raw": "{\"color\": \"rgb(255, 0, 0)\", \"backgroundColor\": \"rgb(242, 242, 242)\", \"visibility\": \"visible\", \"display\": \"block\", \"opacity\": \"0.95\", \"border\": \"1px solid rgb(153, 153, 153)\", \"position\": \"absolute\", \"fontSize\": \"14px\"}",
+    "bbox": {
+      "x": 112,
+      "y": 204,
+      "width": 124,
+      "height": 28
+    },
+    "computed_style": {
+      "color": "rgb(255, 0, 0)",
+      "backgroundColor": "rgb(242, 242, 242)",
+      "visibility": "visible",
+      "display": "block",
+      "opacity": "0.95",
+      "border": "1px solid rgb(153, 153, 153)",
+      "position": "absolute",
+      "fontSize": "14px"
+    },
+    "a11y_serial": "[{\"nodeId\": \"1\", \"ignored\": false, \"role\": {\"type\": \"internalRole\", \"value\": \"RootWebArea\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 144}, \"name\": {\"type\": \"computedString\", \"value\": \"\", \"sources\": [{\"type\": \"relatedElement\", \"attribute\": \"aria-labelledby\"}, {\"type\": \"attribute\", \"attribute\": \"aria-label\"}, {\"type\": \"attribute\", \"attribute\": \"aria-label\", \"superseded\": true}, {\"type\": \"relatedElement\", \"nativeSource\": \"title\"}]}, \"properties\": [{\"name\": \"focusable\", \"value\": {\"type\": \"bo",
+    "a11y_bytes": 4013,
+    "dom_bytes": 444,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "dom_visual": "VB_11_20_24_8",
+    "dom_computed_style": "CS_red_rgb(242_0.95_8_11",
+    "dom_event_seq_base": "click",
+    "ax_cluster": "AX_2e10_3_1",
+    "ax_bytes_len": 3079,
+    "html": "<html><head><style>body{margin:0;padding:0} #btn{position:absolute; left:112px; top:204px; width:124px; height:28px; color:rgb(255, 0, 0); background:rgb(242,242,242); display:block; visibility:visible; opacity:0.95; border:1px solid #999; font-size:14px;}</style></head><body><div id=\"root\"><button id=\"btn\" aria-label=\"action state 3 variant 1\">Action 3 A1</button><span>state3</span><div style=\"display:none\">depth3</div></div></body></html>",
+    "color_key": "red",
+    "left": 112
+  },
+  "('A', 3, 2)": {
+    "visual_raw": "{\"x\": 118, \"y\": 204, \"w\": 128, \"h\": 28, \"count\": 9, \"depth\": 3, \"density\": 0.5}",
+    "computed_style_raw": "{\"color\": \"rgb(0, 0, 255)\", \"backgroundColor\": \"rgb(238, 238, 238)\", \"visibility\": \"visible\", \"display\": \"block\", \"opacity\": \"0.95\", \"border\": \"1px solid rgb(153, 153, 153)\", \"position\": \"absolute\", \"fontSize\": \"14px\"}",
+    "bbox": {
+      "x": 118,
+      "y": 204,
+      "width": 128,
+      "height": 28
+    },
+    "computed_style": {
+      "color": "rgb(0, 0, 255)",
+      "backgroundColor": "rgb(238, 238, 238)",
+      "visibility": "visible",
+      "display": "block",
+      "opacity": "0.95",
+      "border": "1px solid rgb(153, 153, 153)",
+      "position": "absolute",
+      "fontSize": "14px"
+    },
+    "a11y_serial": "[{\"nodeId\": \"1\", \"ignored\": false, \"role\": {\"type\": \"internalRole\", \"value\": \"RootWebArea\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 144}, \"name\": {\"type\": \"computedString\", \"value\": \"\", \"sources\": [{\"type\": \"relatedElement\", \"attribute\": \"aria-labelledby\"}, {\"type\": \"attribute\", \"attribute\": \"aria-label\"}, {\"type\": \"attribute\", \"attribute\": \"aria-label\", \"superseded\": true}, {\"type\": \"relatedElement\", \"nativeSource\": \"title\"}]}, \"properties\": [{\"name\": \"focusable\", \"value\": {\"type\": \"bo",
+    "a11y_bytes": 4013,
+    "dom_bytes": 444,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "dom_visual": "VB_11_20_25_9",
+    "dom_computed_style": "CS_blue_rgb(238_0.95_9_11",
+    "dom_event_seq_base": "click",
+    "ax_cluster": "AX_afc6_3_2",
+    "ax_bytes_len": 3079,
+    "html": "<html><head><style>body{margin:0;padding:0} #btn{position:absolute; left:118px; top:204px; width:128px; height:28px; color:rgb(0, 0, 255); background:rgb(238,238,238); display:block; visibility:visible; opacity:0.95; border:1px solid #999; font-size:14px;}</style></head><body><div id=\"root\"><button id=\"btn\" aria-label=\"action state 3 variant 2\">Action 3 A2</button><span>state3</span><div style=\"display:none\">depth3</div></div></body></html>",
+    "color_key": "blue",
+    "left": 118
+  },
+  "('B', 3, 0)": {
+    "visual_raw": "{\"x\": 116, \"y\": 204, \"w\": 122, \"h\": 28, \"count\": 7, \"depth\": 3, \"density\": 0.3}",
+    "computed_style_raw": "{\"color\": \"rgb(0, 0, 255)\", \"backgroundColor\": \"rgb(255, 255, 255)\", \"visibility\": \"visible\", \"display\": \"block\", \"opacity\": \"0.95\", \"border\": \"1px solid rgb(153, 153, 153)\", \"position\": \"absolute\", \"fontSize\": \"14px\"}",
+    "bbox": {
+      "x": 116,
+      "y": 204,
+      "width": 122,
+      "height": 28
+    },
+    "computed_style": {
+      "color": "rgb(0, 0, 255)",
+      "backgroundColor": "rgb(255, 255, 255)",
+      "visibility": "visible",
+      "display": "block",
+      "opacity": "0.95",
+      "border": "1px solid rgb(153, 153, 153)",
+      "position": "absolute",
+      "fontSize": "14px"
+    },
+    "a11y_serial": "[{\"nodeId\": \"1\", \"ignored\": false, \"role\": {\"type\": \"internalRole\", \"value\": \"RootWebArea\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 144}, \"name\": {\"type\": \"computedString\", \"value\": \"\", \"sources\": [{\"type\": \"relatedElement\", \"attribute\": \"aria-labelledby\"}, {\"type\": \"attribute\", \"attribute\": \"aria-label\"}, {\"type\": \"attribute\", \"attribute\": \"aria-label\", \"superseded\": true}, {\"type\": \"relatedElement\", \"nativeSource\": \"title\"}]}, \"properties\": [{\"name\": \"focusable\", \"value\": {\"type\": \"bo",
+    "a11y_bytes": 4013,
+    "dom_bytes": 444,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "dom_visual": "VB_11_20_24_7",
+    "dom_computed_style": "CS_blue_rgb(255_0.95_7_11",
+    "dom_event_seq_base": "click",
+    "ax_cluster": "AX_1d07_3_0",
+    "ax_bytes_len": 3079,
+    "html": "<html><head><style>body{margin:0;padding:0} #btn{position:absolute; left:116px; top:204px; width:122px; height:28px; color:rgb(0, 0, 255); background:rgb(255,255,255); display:block; visibility:visible; opacity:0.95; border:1px solid #999; font-size:14px;}</style></head><body><div id=\"root\"><button id=\"btn\" aria-label=\"action state 3 variant 0\">Action 3 B0</button><span>state3</span><div style=\"display:none\">depth3</div></div></body></html>",
+    "color_key": "blue",
+    "left": 116
+  },
+  "('B', 3, 1)": {
+    "visual_raw": "{\"x\": 122, \"y\": 204, \"w\": 126, \"h\": 28, \"count\": 8, \"depth\": 3, \"density\": 0.4}",
+    "computed_style_raw": "{\"color\": \"rgb(0, 0, 255)\", \"backgroundColor\": \"rgb(242, 242, 242)\", \"visibility\": \"visible\", \"display\": \"block\", \"opacity\": \"0.95\", \"border\": \"1px solid rgb(153, 153, 153)\", \"position\": \"absolute\", \"fontSize\": \"14px\"}",
+    "bbox": {
+      "x": 122,
+      "y": 204,
+      "width": 126,
+      "height": 28
+    },
+    "computed_style": {
+      "color": "rgb(0, 0, 255)",
+      "backgroundColor": "rgb(242, 242, 242)",
+      "visibility": "visible",
+      "display": "block",
+      "opacity": "0.95",
+      "border": "1px solid rgb(153, 153, 153)",
+      "position": "absolute",
+      "fontSize": "14px"
+    },
+    "a11y_serial": "[{\"nodeId\": \"1\", \"ignored\": false, \"role\": {\"type\": \"internalRole\", \"value\": \"RootWebArea\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 144}, \"name\": {\"type\": \"computedString\", \"value\": \"\", \"sources\": [{\"type\": \"relatedElement\", \"attribute\": \"aria-labelledby\"}, {\"type\": \"attribute\", \"attribute\": \"aria-label\"}, {\"type\": \"attribute\", \"attribute\": \"aria-label\", \"superseded\": true}, {\"type\": \"relatedElement\", \"nativeSource\": \"title\"}]}, \"properties\": [{\"name\": \"focusable\", \"value\": {\"type\": \"bo",
+    "a11y_bytes": 4013,
+    "dom_bytes": 444,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "dom_visual": "VB_12_20_25_8",
+    "dom_computed_style": "CS_blue_rgb(242_0.95_8_12",
+    "dom_event_seq_base": "click",
+    "ax_cluster": "AX_4df2_3_1",
+    "ax_bytes_len": 3079,
+    "html": "<html><head><style>body{margin:0;padding:0} #btn{position:absolute; left:122px; top:204px; width:126px; height:28px; color:rgb(0, 0, 255); background:rgb(242,242,242); display:block; visibility:visible; opacity:0.95; border:1px solid #999; font-size:14px;}</style></head><body><div id=\"root\"><button id=\"btn\" aria-label=\"action state 3 variant 1\">Action 3 B1</button><span>state3</span><div style=\"display:none\">depth3</div></div></body></html>",
+    "color_key": "blue",
+    "left": 122
+  },
+  "('B', 3, 2)": {
+    "visual_raw": "{\"x\": 128, \"y\": 204, \"w\": 130, \"h\": 28, \"count\": 9, \"depth\": 3, \"density\": 0.5}",
+    "computed_style_raw": "{\"color\": \"rgb(255, 0, 0)\", \"backgroundColor\": \"rgb(238, 238, 238)\", \"visibility\": \"visible\", \"display\": \"block\", \"opacity\": \"0.95\", \"border\": \"1px solid rgb(153, 153, 153)\", \"position\": \"absolute\", \"fontSize\": \"14px\"}",
+    "bbox": {
+      "x": 128,
+      "y": 204,
+      "width": 130,
+      "height": 28
+    },
+    "computed_style": {
+      "color": "rgb(255, 0, 0)",
+      "backgroundColor": "rgb(238, 238, 238)",
+      "visibility": "visible",
+      "display": "block",
+      "opacity": "0.95",
+      "border": "1px solid rgb(153, 153, 153)",
+      "position": "absolute",
+      "fontSize": "14px"
+    },
+    "a11y_serial": "[{\"nodeId\": \"1\", \"ignored\": false, \"role\": {\"type\": \"internalRole\", \"value\": \"RootWebArea\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 144}, \"name\": {\"type\": \"computedString\", \"value\": \"\", \"sources\": [{\"type\": \"relatedElement\", \"attribute\": \"aria-labelledby\"}, {\"type\": \"attribute\", \"attribute\": \"aria-label\"}, {\"type\": \"attribute\", \"attribute\": \"aria-label\", \"superseded\": true}, {\"type\": \"relatedElement\", \"nativeSource\": \"title\"}]}, \"properties\": [{\"name\": \"focusable\", \"value\": {\"type\": \"bo",
+    "a11y_bytes": 4013,
+    "dom_bytes": 444,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "dom_visual": "VB_12_20_26_9",
+    "dom_computed_style": "CS_red_rgb(238_0.95_9_12",
+    "dom_event_seq_base": "click",
+    "ax_cluster": "AX_44a1_3_2",
+    "ax_bytes_len": 3079,
+    "html": "<html><head><style>body{margin:0;padding:0} #btn{position:absolute; left:128px; top:204px; width:130px; height:28px; color:rgb(255, 0, 0); background:rgb(238,238,238); display:block; visibility:visible; opacity:0.95; border:1px solid #999; font-size:14px;}</style></head><body><div id=\"root\"><button id=\"btn\" aria-label=\"action state 3 variant 2\">Action 3 B2</button><span>state3</span><div style=\"display:none\">depth3</div></div></body></html>",
+    "color_key": "red",
+    "left": 128
+  },
+  "('A', 4, 0)": {
+    "visual_raw": "{\"x\": 108, \"y\": 212, \"w\": 120, \"h\": 28, \"count\": 6, \"depth\": 3, \"density\": 0.3}",
+    "computed_style_raw": "{\"color\": \"rgb(255, 0, 0)\", \"backgroundColor\": \"rgb(255, 255, 255)\", \"visibility\": \"visible\", \"display\": \"block\", \"opacity\": \"0.95\", \"border\": \"1px solid rgb(153, 153, 153)\", \"position\": \"absolute\", \"fontSize\": \"14px\"}",
+    "bbox": {
+      "x": 108,
+      "y": 212,
+      "width": 120,
+      "height": 28
+    },
+    "computed_style": {
+      "color": "rgb(255, 0, 0)",
+      "backgroundColor": "rgb(255, 255, 255)",
+      "visibility": "visible",
+      "display": "block",
+      "opacity": "0.95",
+      "border": "1px solid rgb(153, 153, 153)",
+      "position": "absolute",
+      "fontSize": "14px"
+    },
+    "a11y_serial": "[{\"nodeId\": \"1\", \"ignored\": false, \"role\": {\"type\": \"internalRole\", \"value\": \"RootWebArea\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 144}, \"name\": {\"type\": \"computedString\", \"value\": \"\", \"sources\": [{\"type\": \"relatedElement\", \"attribute\": \"aria-labelledby\"}, {\"type\": \"attribute\", \"attribute\": \"aria-label\"}, {\"type\": \"attribute\", \"attribute\": \"aria-label\", \"superseded\": true}, {\"type\": \"relatedElement\", \"nativeSource\": \"title\"}]}, \"properties\": [{\"name\": \"focusable\", \"value\": {\"type\": \"bo",
+    "a11y_bytes": 4013,
+    "dom_bytes": 444,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "dom_visual": "VB_10_21_24_6",
+    "dom_computed_style": "CS_red_rgb(255_0.95_6_10",
+    "dom_event_seq_base": "click",
+    "ax_cluster": "AX_3d1d_4_0",
+    "ax_bytes_len": 3079,
+    "html": "<html><head><style>body{margin:0;padding:0} #btn{position:absolute; left:108px; top:212px; width:120px; height:28px; color:rgb(255, 0, 0); background:rgb(255,255,255); display:block; visibility:visible; opacity:0.95; border:1px solid #999; font-size:14px;}</style></head><body><div id=\"root\"><button id=\"btn\" aria-label=\"action state 4 variant 0\">Action 4 A0</button><span>state4</span><div style=\"display:none\">depth3</div></div></body></html>",
+    "color_key": "red",
+    "left": 108
+  },
+  "('A', 4, 1)": {
+    "visual_raw": "{\"x\": 114, \"y\": 212, \"w\": 124, \"h\": 28, \"count\": 7, \"depth\": 3, \"density\": 0.4}",
+    "computed_style_raw": "{\"color\": \"rgb(255, 0, 0)\", \"backgroundColor\": \"rgb(242, 242, 242)\", \"visibility\": \"visible\", \"display\": \"block\", \"opacity\": \"0.95\", \"border\": \"1px solid rgb(153, 153, 153)\", \"position\": \"absolute\", \"fontSize\": \"14px\"}",
+    "bbox": {
+      "x": 114,
+      "y": 212,
+      "width": 124,
+      "height": 28
+    },
+    "computed_style": {
+      "color": "rgb(255, 0, 0)",
+      "backgroundColor": "rgb(242, 242, 242)",
+      "visibility": "visible",
+      "display": "block",
+      "opacity": "0.95",
+      "border": "1px solid rgb(153, 153, 153)",
+      "position": "absolute",
+      "fontSize": "14px"
+    },
+    "a11y_serial": "[{\"nodeId\": \"1\", \"ignored\": false, \"role\": {\"type\": \"internalRole\", \"value\": \"RootWebArea\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 144}, \"name\": {\"type\": \"computedString\", \"value\": \"\", \"sources\": [{\"type\": \"relatedElement\", \"attribute\": \"aria-labelledby\"}, {\"type\": \"attribute\", \"attribute\": \"aria-label\"}, {\"type\": \"attribute\", \"attribute\": \"aria-label\", \"superseded\": true}, {\"type\": \"relatedElement\", \"nativeSource\": \"title\"}]}, \"properties\": [{\"name\": \"focusable\", \"value\": {\"type\": \"bo",
+    "a11y_bytes": 4013,
+    "dom_bytes": 444,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "dom_visual": "VB_11_21_24_7",
+    "dom_computed_style": "CS_red_rgb(242_0.95_7_11",
+    "dom_event_seq_base": "click",
+    "ax_cluster": "AX_1434_4_1",
+    "ax_bytes_len": 3079,
+    "html": "<html><head><style>body{margin:0;padding:0} #btn{position:absolute; left:114px; top:212px; width:124px; height:28px; color:rgb(255, 0, 0); background:rgb(242,242,242); display:block; visibility:visible; opacity:0.95; border:1px solid #999; font-size:14px;}</style></head><body><div id=\"root\"><button id=\"btn\" aria-label=\"action state 4 variant 1\">Action 4 A1</button><span>state4</span><div style=\"display:none\">depth3</div></div></body></html>",
+    "color_key": "red",
+    "left": 114
+  },
+  "('A', 4, 2)": {
+    "visual_raw": "{\"x\": 120, \"y\": 212, \"w\": 128, \"h\": 28, \"count\": 8, \"depth\": 3, \"density\": 0.5}",
+    "computed_style_raw": "{\"color\": \"rgb(0, 0, 255)\", \"backgroundColor\": \"rgb(238, 238, 238)\", \"visibility\": \"visible\", \"display\": \"block\", \"opacity\": \"0.95\", \"border\": \"1px solid rgb(153, 153, 153)\", \"position\": \"absolute\", \"fontSize\": \"14px\"}",
+    "bbox": {
+      "x": 120,
+      "y": 212,
+      "width": 128,
+      "height": 28
+    },
+    "computed_style": {
+      "color": "rgb(0, 0, 255)",
+      "backgroundColor": "rgb(238, 238, 238)",
+      "visibility": "visible",
+      "display": "block",
+      "opacity": "0.95",
+      "border": "1px solid rgb(153, 153, 153)",
+      "position": "absolute",
+      "fontSize": "14px"
+    },
+    "a11y_serial": "[{\"nodeId\": \"1\", \"ignored\": false, \"role\": {\"type\": \"internalRole\", \"value\": \"RootWebArea\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 144}, \"name\": {\"type\": \"computedString\", \"value\": \"\", \"sources\": [{\"type\": \"relatedElement\", \"attribute\": \"aria-labelledby\"}, {\"type\": \"attribute\", \"attribute\": \"aria-label\"}, {\"type\": \"attribute\", \"attribute\": \"aria-label\", \"superseded\": true}, {\"type\": \"relatedElement\", \"nativeSource\": \"title\"}]}, \"properties\": [{\"name\": \"focusable\", \"value\": {\"type\": \"bo",
+    "a11y_bytes": 4013,
+    "dom_bytes": 444,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "dom_visual": "VB_12_21_25_8",
+    "dom_computed_style": "CS_blue_rgb(238_0.95_8_12",
+    "dom_event_seq_base": "click",
+    "ax_cluster": "AX_3ba1_4_2",
+    "ax_bytes_len": 3079,
+    "html": "<html><head><style>body{margin:0;padding:0} #btn{position:absolute; left:120px; top:212px; width:128px; height:28px; color:rgb(0, 0, 255); background:rgb(238,238,238); display:block; visibility:visible; opacity:0.95; border:1px solid #999; font-size:14px;}</style></head><body><div id=\"root\"><button id=\"btn\" aria-label=\"action state 4 variant 2\">Action 4 A2</button><span>state4</span><div style=\"display:none\">depth3</div></div></body></html>",
+    "color_key": "blue",
+    "left": 120
+  },
+  "('B', 4, 0)": {
+    "visual_raw": "{\"x\": 118, \"y\": 212, \"w\": 122, \"h\": 28, \"count\": 6, \"depth\": 3, \"density\": 0.3}",
+    "computed_style_raw": "{\"color\": \"rgb(0, 0, 255)\", \"backgroundColor\": \"rgb(255, 255, 255)\", \"visibility\": \"visible\", \"display\": \"block\", \"opacity\": \"0.95\", \"border\": \"1px solid rgb(153, 153, 153)\", \"position\": \"absolute\", \"fontSize\": \"14px\"}",
+    "bbox": {
+      "x": 118,
+      "y": 212,
+      "width": 122,
+      "height": 28
+    },
+    "computed_style": {
+      "color": "rgb(0, 0, 255)",
+      "backgroundColor": "rgb(255, 255, 255)",
+      "visibility": "visible",
+      "display": "block",
+      "opacity": "0.95",
+      "border": "1px solid rgb(153, 153, 153)",
+      "position": "absolute",
+      "fontSize": "14px"
+    },
+    "a11y_serial": "[{\"nodeId\": \"1\", \"ignored\": false, \"role\": {\"type\": \"internalRole\", \"value\": \"RootWebArea\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 144}, \"name\": {\"type\": \"computedString\", \"value\": \"\", \"sources\": [{\"type\": \"relatedElement\", \"attribute\": \"aria-labelledby\"}, {\"type\": \"attribute\", \"attribute\": \"aria-label\"}, {\"type\": \"attribute\", \"attribute\": \"aria-label\", \"superseded\": true}, {\"type\": \"relatedElement\", \"nativeSource\": \"title\"}]}, \"properties\": [{\"name\": \"focusable\", \"value\": {\"type\": \"bo",
+    "a11y_bytes": 4013,
+    "dom_bytes": 444,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "dom_visual": "VB_11_21_24_6",
+    "dom_computed_style": "CS_blue_rgb(255_0.95_6_11",
+    "dom_event_seq_base": "click",
+    "ax_cluster": "AX_82ca_4_0",
+    "ax_bytes_len": 3079,
+    "html": "<html><head><style>body{margin:0;padding:0} #btn{position:absolute; left:118px; top:212px; width:122px; height:28px; color:rgb(0, 0, 255); background:rgb(255,255,255); display:block; visibility:visible; opacity:0.95; border:1px solid #999; font-size:14px;}</style></head><body><div id=\"root\"><button id=\"btn\" aria-label=\"action state 4 variant 0\">Action 4 B0</button><span>state4</span><div style=\"display:none\">depth3</div></div></body></html>",
+    "color_key": "blue",
+    "left": 118
+  },
+  "('B', 4, 1)": {
+    "visual_raw": "{\"x\": 124, \"y\": 212, \"w\": 126, \"h\": 28, \"count\": 7, \"depth\": 3, \"density\": 0.4}",
+    "computed_style_raw": "{\"color\": \"rgb(0, 0, 255)\", \"backgroundColor\": \"rgb(242, 242, 242)\", \"visibility\": \"visible\", \"display\": \"block\", \"opacity\": \"0.95\", \"border\": \"1px solid rgb(153, 153, 153)\", \"position\": \"absolute\", \"fontSize\": \"14px\"}",
+    "bbox": {
+      "x": 124,
+      "y": 212,
+      "width": 126,
+      "height": 28
+    },
+    "computed_style": {
+      "color": "rgb(0, 0, 255)",
+      "backgroundColor": "rgb(242, 242, 242)",
+      "visibility": "visible",
+      "display": "block",
+      "opacity": "0.95",
+      "border": "1px solid rgb(153, 153, 153)",
+      "position": "absolute",
+      "fontSize": "14px"
+    },
+    "a11y_serial": "[{\"nodeId\": \"1\", \"ignored\": false, \"role\": {\"type\": \"internalRole\", \"value\": \"RootWebArea\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 144}, \"name\": {\"type\": \"computedString\", \"value\": \"\", \"sources\": [{\"type\": \"relatedElement\", \"attribute\": \"aria-labelledby\"}, {\"type\": \"attribute\", \"attribute\": \"aria-label\"}, {\"type\": \"attribute\", \"attribute\": \"aria-label\", \"superseded\": true}, {\"type\": \"relatedElement\", \"nativeSource\": \"title\"}]}, \"properties\": [{\"name\": \"focusable\", \"value\": {\"type\": \"bo",
+    "a11y_bytes": 4013,
+    "dom_bytes": 444,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "dom_visual": "VB_12_21_25_7",
+    "dom_computed_style": "CS_blue_rgb(242_0.95_7_12",
+    "dom_event_seq_base": "click",
+    "ax_cluster": "AX_9f5f_4_1",
+    "ax_bytes_len": 3079,
+    "html": "<html><head><style>body{margin:0;padding:0} #btn{position:absolute; left:124px; top:212px; width:126px; height:28px; color:rgb(0, 0, 255); background:rgb(242,242,242); display:block; visibility:visible; opacity:0.95; border:1px solid #999; font-size:14px;}</style></head><body><div id=\"root\"><button id=\"btn\" aria-label=\"action state 4 variant 1\">Action 4 B1</button><span>state4</span><div style=\"display:none\">depth3</div></div></body></html>",
+    "color_key": "blue",
+    "left": 124
+  },
+  "('B', 4, 2)": {
+    "visual_raw": "{\"x\": 130, \"y\": 212, \"w\": 130, \"h\": 28, \"count\": 8, \"depth\": 3, \"density\": 0.5}",
+    "computed_style_raw": "{\"color\": \"rgb(255, 0, 0)\", \"backgroundColor\": \"rgb(238, 238, 238)\", \"visibility\": \"visible\", \"display\": \"block\", \"opacity\": \"0.95\", \"border\": \"1px solid rgb(153, 153, 153)\", \"position\": \"absolute\", \"fontSize\": \"14px\"}",
+    "bbox": {
+      "x": 130,
+      "y": 212,
+      "width": 130,
+      "height": 28
+    },
+    "computed_style": {
+      "color": "rgb(255, 0, 0)",
+      "backgroundColor": "rgb(238, 238, 238)",
+      "visibility": "visible",
+      "display": "block",
+      "opacity": "0.95",
+      "border": "1px solid rgb(153, 153, 153)",
+      "position": "absolute",
+      "fontSize": "14px"
+    },
+    "a11y_serial": "[{\"nodeId\": \"1\", \"ignored\": false, \"role\": {\"type\": \"internalRole\", \"value\": \"RootWebArea\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 144}, \"name\": {\"type\": \"computedString\", \"value\": \"\", \"sources\": [{\"type\": \"relatedElement\", \"attribute\": \"aria-labelledby\"}, {\"type\": \"attribute\", \"attribute\": \"aria-label\"}, {\"type\": \"attribute\", \"attribute\": \"aria-label\", \"superseded\": true}, {\"type\": \"relatedElement\", \"nativeSource\": \"title\"}]}, \"properties\": [{\"name\": \"focusable\", \"value\": {\"type\": \"bo",
+    "a11y_bytes": 4013,
+    "dom_bytes": 444,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "dom_visual": "VB_13_21_26_8",
+    "dom_computed_style": "CS_red_rgb(238_0.95_8_13",
+    "dom_event_seq_base": "click",
+    "ax_cluster": "AX_d062_4_2",
+    "ax_bytes_len": 3079,
+    "html": "<html><head><style>body{margin:0;padding:0} #btn{position:absolute; left:130px; top:212px; width:130px; height:28px; color:rgb(255, 0, 0); background:rgb(238,238,238); display:block; visibility:visible; opacity:0.95; border:1px solid #999; font-size:14px;}</style></head><body><div id=\"root\"><button id=\"btn\" aria-label=\"action state 4 variant 2\">Action 4 B2</button><span>state4</span><div style=\"display:none\">depth3</div></div></body></html>",
+    "color_key": "red",
+    "left": 130
+  },
+  "('A', 5, 0)": {
+    "visual_raw": "{\"x\": 110, \"y\": 220, \"w\": 120, \"h\": 28, \"count\": 7, \"depth\": 3, \"density\": 0.3}",
+    "computed_style_raw": "{\"color\": \"rgb(255, 0, 0)\", \"backgroundColor\": \"rgb(255, 255, 255)\", \"visibility\": \"visible\", \"display\": \"block\", \"opacity\": \"0.95\", \"border\": \"1px solid rgb(153, 153, 153)\", \"position\": \"absolute\", \"fontSize\": \"14px\"}",
+    "bbox": {
+      "x": 110,
+      "y": 220,
+      "width": 120,
+      "height": 28
+    },
+    "computed_style": {
+      "color": "rgb(255, 0, 0)",
+      "backgroundColor": "rgb(255, 255, 255)",
+      "visibility": "visible",
+      "display": "block",
+      "opacity": "0.95",
+      "border": "1px solid rgb(153, 153, 153)",
+      "position": "absolute",
+      "fontSize": "14px"
+    },
+    "a11y_serial": "[{\"nodeId\": \"1\", \"ignored\": false, \"role\": {\"type\": \"internalRole\", \"value\": \"RootWebArea\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 144}, \"name\": {\"type\": \"computedString\", \"value\": \"\", \"sources\": [{\"type\": \"relatedElement\", \"attribute\": \"aria-labelledby\"}, {\"type\": \"attribute\", \"attribute\": \"aria-label\"}, {\"type\": \"attribute\", \"attribute\": \"aria-label\", \"superseded\": true}, {\"type\": \"relatedElement\", \"nativeSource\": \"title\"}]}, \"properties\": [{\"name\": \"focusable\", \"value\": {\"type\": \"bo",
+    "a11y_bytes": 4013,
+    "dom_bytes": 444,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "dom_visual": "VB_11_22_24_7",
+    "dom_computed_style": "CS_red_rgb(255_0.95_7_11",
+    "dom_event_seq_base": "click",
+    "ax_cluster": "AX_2c9c_5_0",
+    "ax_bytes_len": 3079,
+    "html": "<html><head><style>body{margin:0;padding:0} #btn{position:absolute; left:110px; top:220px; width:120px; height:28px; color:rgb(255, 0, 0); background:rgb(255,255,255); display:block; visibility:visible; opacity:0.95; border:1px solid #999; font-size:14px;}</style></head><body><div id=\"root\"><button id=\"btn\" aria-label=\"action state 5 variant 0\">Action 5 A0</button><span>state5</span><div style=\"display:none\">depth3</div></div></body></html>",
+    "color_key": "red",
+    "left": 110
+  },
+  "('A', 5, 1)": {
+    "visual_raw": "{\"x\": 116, \"y\": 220, \"w\": 124, \"h\": 28, \"count\": 8, \"depth\": 3, \"density\": 0.4}",
+    "computed_style_raw": "{\"color\": \"rgb(255, 0, 0)\", \"backgroundColor\": \"rgb(242, 242, 242)\", \"visibility\": \"visible\", \"display\": \"block\", \"opacity\": \"0.95\", \"border\": \"1px solid rgb(153, 153, 153)\", \"position\": \"absolute\", \"fontSize\": \"14px\"}",
+    "bbox": {
+      "x": 116,
+      "y": 220,
+      "width": 124,
+      "height": 28
+    },
+    "computed_style": {
+      "color": "rgb(255, 0, 0)",
+      "backgroundColor": "rgb(242, 242, 242)",
+      "visibility": "visible",
+      "display": "block",
+      "opacity": "0.95",
+      "border": "1px solid rgb(153, 153, 153)",
+      "position": "absolute",
+      "fontSize": "14px"
+    },
+    "a11y_serial": "[{\"nodeId\": \"1\", \"ignored\": false, \"role\": {\"type\": \"internalRole\", \"value\": \"RootWebArea\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 144}, \"name\": {\"type\": \"computedString\", \"value\": \"\", \"sources\": [{\"type\": \"relatedElement\", \"attribute\": \"aria-labelledby\"}, {\"type\": \"attribute\", \"attribute\": \"aria-label\"}, {\"type\": \"attribute\", \"attribute\": \"aria-label\", \"superseded\": true}, {\"type\": \"relatedElement\", \"nativeSource\": \"title\"}]}, \"properties\": [{\"name\": \"focusable\", \"value\": {\"type\": \"bo",
+    "a11y_bytes": 4013,
+    "dom_bytes": 444,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "dom_visual": "VB_11_22_24_8",
+    "dom_computed_style": "CS_red_rgb(242_0.95_8_11",
+    "dom_event_seq_base": "click",
+    "ax_cluster": "AX_9c3b_5_1",
+    "ax_bytes_len": 3079,
+    "html": "<html><head><style>body{margin:0;padding:0} #btn{position:absolute; left:116px; top:220px; width:124px; height:28px; color:rgb(255, 0, 0); background:rgb(242,242,242); display:block; visibility:visible; opacity:0.95; border:1px solid #999; font-size:14px;}</style></head><body><div id=\"root\"><button id=\"btn\" aria-label=\"action state 5 variant 1\">Action 5 A1</button><span>state5</span><div style=\"display:none\">depth3</div></div></body></html>",
+    "color_key": "red",
+    "left": 116
+  },
+  "('A', 5, 2)": {
+    "visual_raw": "{\"x\": 122, \"y\": 220, \"w\": 128, \"h\": 28, \"count\": 9, \"depth\": 3, \"density\": 0.5}",
+    "computed_style_raw": "{\"color\": \"rgb(0, 0, 255)\", \"backgroundColor\": \"rgb(238, 238, 238)\", \"visibility\": \"visible\", \"display\": \"block\", \"opacity\": \"0.95\", \"border\": \"1px solid rgb(153, 153, 153)\", \"position\": \"absolute\", \"fontSize\": \"14px\"}",
+    "bbox": {
+      "x": 122,
+      "y": 220,
+      "width": 128,
+      "height": 28
+    },
+    "computed_style": {
+      "color": "rgb(0, 0, 255)",
+      "backgroundColor": "rgb(238, 238, 238)",
+      "visibility": "visible",
+      "display": "block",
+      "opacity": "0.95",
+      "border": "1px solid rgb(153, 153, 153)",
+      "position": "absolute",
+      "fontSize": "14px"
+    },
+    "a11y_serial": "[{\"nodeId\": \"1\", \"ignored\": false, \"role\": {\"type\": \"internalRole\", \"value\": \"RootWebArea\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 144}, \"name\": {\"type\": \"computedString\", \"value\": \"\", \"sources\": [{\"type\": \"relatedElement\", \"attribute\": \"aria-labelledby\"}, {\"type\": \"attribute\", \"attribute\": \"aria-label\"}, {\"type\": \"attribute\", \"attribute\": \"aria-label\", \"superseded\": true}, {\"type\": \"relatedElement\", \"nativeSource\": \"title\"}]}, \"properties\": [{\"name\": \"focusable\", \"value\": {\"type\": \"bo",
+    "a11y_bytes": 4013,
+    "dom_bytes": 444,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "dom_visual": "VB_12_22_25_9",
+    "dom_computed_style": "CS_blue_rgb(238_0.95_9_12",
+    "dom_event_seq_base": "click",
+    "ax_cluster": "AX_f6c2_5_2",
+    "ax_bytes_len": 3079,
+    "html": "<html><head><style>body{margin:0;padding:0} #btn{position:absolute; left:122px; top:220px; width:128px; height:28px; color:rgb(0, 0, 255); background:rgb(238,238,238); display:block; visibility:visible; opacity:0.95; border:1px solid #999; font-size:14px;}</style></head><body><div id=\"root\"><button id=\"btn\" aria-label=\"action state 5 variant 2\">Action 5 A2</button><span>state5</span><div style=\"display:none\">depth3</div></div></body></html>",
+    "color_key": "blue",
+    "left": 122
+  },
+  "('B', 5, 0)": {
+    "visual_raw": "{\"x\": 120, \"y\": 220, \"w\": 122, \"h\": 28, \"count\": 7, \"depth\": 3, \"density\": 0.3}",
+    "computed_style_raw": "{\"color\": \"rgb(0, 0, 255)\", \"backgroundColor\": \"rgb(255, 255, 255)\", \"visibility\": \"visible\", \"display\": \"block\", \"opacity\": \"0.95\", \"border\": \"1px solid rgb(153, 153, 153)\", \"position\": \"absolute\", \"fontSize\": \"14px\"}",
+    "bbox": {
+      "x": 120,
+      "y": 220,
+      "width": 122,
+      "height": 28
+    },
+    "computed_style": {
+      "color": "rgb(0, 0, 255)",
+      "backgroundColor": "rgb(255, 255, 255)",
+      "visibility": "visible",
+      "display": "block",
+      "opacity": "0.95",
+      "border": "1px solid rgb(153, 153, 153)",
+      "position": "absolute",
+      "fontSize": "14px"
+    },
+    "a11y_serial": "[{\"nodeId\": \"1\", \"ignored\": false, \"role\": {\"type\": \"internalRole\", \"value\": \"RootWebArea\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 144}, \"name\": {\"type\": \"computedString\", \"value\": \"\", \"sources\": [{\"type\": \"relatedElement\", \"attribute\": \"aria-labelledby\"}, {\"type\": \"attribute\", \"attribute\": \"aria-label\"}, {\"type\": \"attribute\", \"attribute\": \"aria-label\", \"superseded\": true}, {\"type\": \"relatedElement\", \"nativeSource\": \"title\"}]}, \"properties\": [{\"name\": \"focusable\", \"value\": {\"type\": \"bo",
+    "a11y_bytes": 4013,
+    "dom_bytes": 444,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "dom_visual": "VB_12_22_24_7",
+    "dom_computed_style": "CS_blue_rgb(255_0.95_7_12",
+    "dom_event_seq_base": "click",
+    "ax_cluster": "AX_f52a_5_0",
+    "ax_bytes_len": 3079,
+    "html": "<html><head><style>body{margin:0;padding:0} #btn{position:absolute; left:120px; top:220px; width:122px; height:28px; color:rgb(0, 0, 255); background:rgb(255,255,255); display:block; visibility:visible; opacity:0.95; border:1px solid #999; font-size:14px;}</style></head><body><div id=\"root\"><button id=\"btn\" aria-label=\"action state 5 variant 0\">Action 5 B0</button><span>state5</span><div style=\"display:none\">depth3</div></div></body></html>",
+    "color_key": "blue",
+    "left": 120
+  },
+  "('B', 5, 1)": {
+    "visual_raw": "{\"x\": 126, \"y\": 220, \"w\": 126, \"h\": 28, \"count\": 8, \"depth\": 3, \"density\": 0.4}",
+    "computed_style_raw": "{\"color\": \"rgb(0, 0, 255)\", \"backgroundColor\": \"rgb(242, 242, 242)\", \"visibility\": \"visible\", \"display\": \"block\", \"opacity\": \"0.95\", \"border\": \"1px solid rgb(153, 153, 153)\", \"position\": \"absolute\", \"fontSize\": \"14px\"}",
+    "bbox": {
+      "x": 126,
+      "y": 220,
+      "width": 126,
+      "height": 28
+    },
+    "computed_style": {
+      "color": "rgb(0, 0, 255)",
+      "backgroundColor": "rgb(242, 242, 242)",
+      "visibility": "visible",
+      "display": "block",
+      "opacity": "0.95",
+      "border": "1px solid rgb(153, 153, 153)",
+      "position": "absolute",
+      "fontSize": "14px"
+    },
+    "a11y_serial": "[{\"nodeId\": \"1\", \"ignored\": false, \"role\": {\"type\": \"internalRole\", \"value\": \"RootWebArea\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 144}, \"name\": {\"type\": \"computedString\", \"value\": \"\", \"sources\": [{\"type\": \"relatedElement\", \"attribute\": \"aria-labelledby\"}, {\"type\": \"attribute\", \"attribute\": \"aria-label\"}, {\"type\": \"attribute\", \"attribute\": \"aria-label\", \"superseded\": true}, {\"type\": \"relatedElement\", \"nativeSource\": \"title\"}]}, \"properties\": [{\"name\": \"focusable\", \"value\": {\"type\": \"bo",
+    "a11y_bytes": 4013,
+    "dom_bytes": 444,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "dom_visual": "VB_12_22_25_8",
+    "dom_computed_style": "CS_blue_rgb(242_0.95_8_12",
+    "dom_event_seq_base": "click",
+    "ax_cluster": "AX_5b5d_5_1",
+    "ax_bytes_len": 3079,
+    "html": "<html><head><style>body{margin:0;padding:0} #btn{position:absolute; left:126px; top:220px; width:126px; height:28px; color:rgb(0, 0, 255); background:rgb(242,242,242); display:block; visibility:visible; opacity:0.95; border:1px solid #999; font-size:14px;}</style></head><body><div id=\"root\"><button id=\"btn\" aria-label=\"action state 5 variant 1\">Action 5 B1</button><span>state5</span><div style=\"display:none\">depth3</div></div></body></html>",
+    "color_key": "blue",
+    "left": 126
+  },
+  "('B', 5, 2)": {
+    "visual_raw": "{\"x\": 132, \"y\": 220, \"w\": 130, \"h\": 28, \"count\": 9, \"depth\": 3, \"density\": 0.5}",
+    "computed_style_raw": "{\"color\": \"rgb(255, 0, 0)\", \"backgroundColor\": \"rgb(238, 238, 238)\", \"visibility\": \"visible\", \"display\": \"block\", \"opacity\": \"0.95\", \"border\": \"1px solid rgb(153, 153, 153)\", \"position\": \"absolute\", \"fontSize\": \"14px\"}",
+    "bbox": {
+      "x": 132,
+      "y": 220,
+      "width": 130,
+      "height": 28
+    },
+    "computed_style": {
+      "color": "rgb(255, 0, 0)",
+      "backgroundColor": "rgb(238, 238, 238)",
+      "visibility": "visible",
+      "display": "block",
+      "opacity": "0.95",
+      "border": "1px solid rgb(153, 153, 153)",
+      "position": "absolute",
+      "fontSize": "14px"
+    },
+    "a11y_serial": "[{\"nodeId\": \"1\", \"ignored\": false, \"role\": {\"type\": \"internalRole\", \"value\": \"RootWebArea\"}, \"chromeRole\": {\"type\": \"internalRole\", \"value\": 144}, \"name\": {\"type\": \"computedString\", \"value\": \"\", \"sources\": [{\"type\": \"relatedElement\", \"attribute\": \"aria-labelledby\"}, {\"type\": \"attribute\", \"attribute\": \"aria-label\"}, {\"type\": \"attribute\", \"attribute\": \"aria-label\", \"superseded\": true}, {\"type\": \"relatedElement\", \"nativeSource\": \"title\"}]}, \"properties\": [{\"name\": \"focusable\", \"value\": {\"type\": \"bo",
+    "a11y_bytes": 4013,
+    "dom_bytes": 444,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "dom_visual": "VB_13_22_26_9",
+    "dom_computed_style": "CS_red_rgb(238_0.95_9_13",
+    "dom_event_seq_base": "click",
+    "ax_cluster": "AX_f939_5_2",
+    "ax_bytes_len": 3079,
+    "html": "<html><head><style>body{margin:0;padding:0} #btn{position:absolute; left:132px; top:220px; width:130px; height:28px; color:rgb(255, 0, 0); background:rgb(238,238,238); display:block; visibility:visible; opacity:0.95; border:1px solid #999; font-size:14px;}</style></head><body><div id=\"root\"><button id=\"btn\" aria-label=\"action state 5 variant 2\">Action 5 B2</button><span>state5</span><div style=\"display:none\">depth3</div></div></body></html>",
+    "color_key": "red",
+    "left": 132
+  }
+}
