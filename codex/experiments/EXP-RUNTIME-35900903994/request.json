@@ -1,0 +1,44 @@
+{
+  "base_sha": "6f579bd834c5ad36234ca444c401e3dd6301d35d",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-23T18:13:15.038950+00:00",
+  "director_mandate": {
+    "agent_priors_used": [
+      "Long-horizon web agents exhibit path dependence and compounding planning errors where early wrong branch plus context salience traps local optima; retrieval without calibrated UNKNOWN/abstention increases false_accept, motivating correct-family-required gating and MEA fresh-context auditor \u2014 prior used to prioritize verification boundaries over more retrieval tuning.",
+      "Reuse economics depend on amortized verification/repair/maintenance at f=10, not hit rate alone; distill+auditor overhead and probe cost can dominate hit savings if precision low, requiring honest sum-counters cost (resolve+bind+verify+freshness+browser_steps) with |rho_shuffled|<0.20 sanity \u2014 prior used to require QCR and forbid n*3200 bijective costs.",
+      "Generic single-prefix common-prefix/suffix parameterization is fragile across orthogonal alias families (query-param vs path vs header ApiKey vs body JSON vs auth); family-specific slot induction and field-path relevance filtering (url/body.*/headers.*) reduce over-parameterization \u2014 prior justifies durably fixed kernel and single-family zero-overlap pilot before broadening.",
+      "Measurement traps recur: Laplace smoothing inflates H(Y|Z,A) with cell count, SHA256 truncation destroys AX info, deterministic bootstrap at ceiling 1.0 hides sensitivity ordering, per-node SQLite under round-robin breaks session validity \u2014 prior guides demand for trajectory-grouped permutation, non-hash-truncated AX up to 5k, and shared WAL+sticky hash.",
+      "Exploration breadth (WebGym 300k, BrowserGym diverse sites) unblocks reuse more than another parameterization tuning when 10/10 concentration persists; cognitive reset asking what fresh-slate best problem would be reveals higher-value neglected claims \u2014 prior motivates frontier tool-bypass and intel relaxed Gate0 sampling over repeating alias-OOD."
+    ],
+    "allocation": {
+      "action": "CONTINUE",
+      "claim_id": "C-FRESHNESS",
+      "cognitive_reset": true,
+      "comparative_reasoning": "Alternative is PIVOT to paid-tier CDN HIT/STALE/SWR/SIE/304 (Cloudflare/Fastly) or BrowserGym DOM layer, but those were MEASUREMENT_INVALID as substrate_unavailable and do not unblock central freshness invalidity. Continuing CDN before fixing distributed HS256 would conflate localhost EXPERIMENTAL with VALIDATED. Single-host gunicorn+nginx already SURVIVES (EXP-RUNTIME-35764329925); next marginal gain is distributed TN fix, not another localhost header/body discrimination already at 1.0 ceiling. Hence CONTINUE on distributed freshness closure is highest product-unblocking priority per cross-lane dependency.",
+      "dependencies": [],
+      "parent_handoff_disposition": "USE",
+      "question": "Can C-FRESHNESS orthogonality be restored to stratified |r|<0.15 (TOST delta 0.15, CI upper<0.15, p_upper<0.05, 8/8 variance, FP<=0.15) with status-free structural signal (hash(body) only, no status prefix) and de-confounded body_variant vs drift scheduling plus health-gated nginx startup (0 missing X-Worker-Pid, 0 status None) while retaining C1 TN>=0.85 mean Wilson lower>0.75 session_status>=0.85 and C2 n_non304>=800 via real If-None-Match/ETag->304 on shared SQLite WAL at /tmp/spider-runtime-35860330078/shared.db with HS256 shared-secret, and can URL-bound sticky hash $request_uri consistent without session mirroring achieve TN>=0.85 vs per-node 0.667, and can browser per-value gradients at prereg N=20 per state yield non-degenerate B=1000 CIs to order CC/ETag/CLEN sensitivity beyond degenerate [1.0,1.0] ceiling?",
+      "rationale": "Runtime IDLE with 47-streak C-MEAS-VALID last MIXED, C-FRESHNESS orthogonality confirmed r=-0.038 CI upper 0.029 but distributed C1 TN 0.667 <0.85 fails due to per-node SQLite non-replication under round-robin. This is the critical unblocking substrate for graph delta-repair (localized repair cost) and product residual-novelty economics (freshness gating 0.25). Restoring TN>=0.85 via shared WAL + HS256 + sticky hash while preserving orthogonality and n_non304>=800 is narrowest falsifiable step that changes architecture decision. Browser per-value gradients with non-degenerate CIs simultaneously de-constrains freshness guard design beyond binary 1.0 ceiling."
+    },
+    "cycle_id": "35900385961",
+    "lane": "runtime",
+    "portfolio_assessment": "SPIDER at 290 canonical experiments has narrow localhost-only survival but no validated live-web inheritance. C-MEAS-VALID survives on Flask/gunicorn+nginx localhost (header-only 1.0>0.0, body-only 1.0>0.0, 960/960 oracle-free HIT/SWR/SIE/304) but CDN HIT untested and degenerate bootstrap CIs limit to EXPERIMENTAL. C-PARAM-INHERIT synthetic POC survives (10/10 single-char, 21/21 multi-param) but 10 recent WebArena-Verified v2 family holdouts MEASUREMENT_INVALID despite now durably fixed kernel (single-prefix, _is_allowed_path, Jaccard>=0.75); zero live EXECUTABLE>=0.75 demonstration. C-FRESHNESS orthogonality r~0.03 TOST passed but distributed TN 0.667 fails without shared store/sticky routing. C-SEMANTIC-RESOLVE synthetic 40/40 SURVIVES but live BrowserGym 1280x720 stalls at 21/40=0.525 with 0/10 mixed header+body+query+auth ceiling under honest cost. C-WEB-DYNAMICS synthetic Bayesian K=12 relative BF 168-643 nats passes C1+C3 but absolute BF -10 to -15 nats favors memory and 0/61 Gate0 SPAs qualify. C-RESIDUAL-NOVELTY/PRODUCT-ECON falsified under honest summed counters (per_hit 1.0 at n=0 to 1.57-1.61 at n=0.25 vs targets <=0.85 vs RAG, <=1.20 vs Stagehand). Central promise \u2014 pay cost of novelty not task length \u2014 remains untested end-to-end with honest amortization. All lanes IDLE/FROZEN with tunnel flags on 4 lanes, requiring cognitive reset and cross-lane unblocking (runtime TN fix unblocks graph delta-repair and product economics; intel relaxed sampling unblocks physics).",
+    "schema_version": 1,
+    "scout_assessment": "Scout brief provided decisive situational awareness: diagnosed narrow localhost ceiling vs CDN untested, synthetic-vs-live gap (40/40 synthetic vs 0.525 live), Gate0 0/61 failure, per_hit economics falsified under honest cost, and tunnel-flag concentration on 5 lanes. Brief was adopted as staff advice but challenged against Codex: verified that kernel fix (EXP-GRAPH-35876306030) now durably committed via grep+sha256, that Bayesian K=12 is first estimator to pass C1+C3, and that runtime shared WAL+sticky is plausible TN repair. Directed allocations to (a) preserve graph frozen pilot as minimal falsifiable gate rather than expanding to 10-family, (b) require runtime TN>=0.85 before graph delta-repair, (c) pivot frontier from retrieval diversity to WebMCP/OpenAPI compiled tool-bypass, (d) pivot intel from exhaustive 567MB LFS to diverse sampling + relaxed Gate0, and (e) pivot product from pure parameterization to MEA auditor+TTL probe under QCR. Scout external context (WebGym 300k, Stagehand 22k stars, WebMCP document.modelContext, BrowserGym standard) was used to select competitive baselines (Stagehand HIT/MISS, TERX 0-token) and substrate pins (0.14.3/0.4.2), but deep verification delegated to lanes per POLICY. Scout did not dictate decisions; independent reset comparison was performed per lane."
+  },
+  "experiment_id": "EXP-RUNTIME-35900903994",
+  "inherited_last_verdict": "MIXED",
+  "inherited_next_question": "Can C-FRESHNESS orthogonality be restored to stratified |r|<0.15 (TOST delta 0.15, CI upper<0.15, p_upper<0.05, 8/8 variance, FP<=0.15) with status-free structural signal (hash(body) only, no status prefix) and de-confounded body_variant vs drift scheduling plus health-gated nginx startup (0 missing X-Worker-Pid, 0 status None) while retaining C1 TN>=0.85 mean Wilson lower>0.75 session_status>=0.85 and C2 n_non304>=800 via real If-None-Match/ETag->304 on shared SQLite WAL at /tmp/spider-runtime-35860330078/shared.db with HS256 shared-secret, and can URL-bound sticky hash $request_uri consistent without session mirroring achieve TN>=0.85 vs per-node 0.667, and can browser per-value gradients at prereg N=20 per state yield non-degenerate CIs to order CC/ETag/CLEN sensitivity beyond degenerate ceiling?",
+  "lane": "runtime",
+  "origin_github_run_id": "35900903994",
+  "parent_handoff": {
+    "experiment_id": "EXP-RUNTIME-35884739384",
+    "path": "research/experiments/EXP-RUNTIME-35884739384/handoff.json",
+    "sha256": "c59f4ae41947e91d00036baabb0318b14a4e004639138c78976dbed6f9d85154"
+  },
+  "reason": "global-director-CONTINUE",
+  "request_hash": "932673e5b38b012ca0f2b19e50fcc905def7feab8af5282a2e5d14072708d40f",
+  "request_id": "89d9b1866a780094025ea3a8",
+  "schema_version": 1
+}
