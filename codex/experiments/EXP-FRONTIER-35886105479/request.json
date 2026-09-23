@@ -1,0 +1,48 @@
+{
+  "base_sha": "affd9419ee7a3c55a4c1f34105f2b83e9ea4264f",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-23T16:04:12.656979+00:00",
+  "director_mandate": {
+    "agent_priors_used": [
+      "Agents accumulate long-horizon planning error and path dependence: early salience biases continuation even when state drifts; without per-step verify-before-act they walk off cliffs \u2014 motivates verify-before-store and per-state predicate checks, distinguished from SPIDER evidence",
+      "Repeated local continuation on same parameterization exhibits diminishing information gain when ceiling is synthetic and substrate error masks signal \u2014 motivates cognitive reset from hierarchical decoupling flat RAG tuning to WebMCP/PreAct compilation, distinguished from SPIDER evidence",
+      "Appending without verification causes catastrophic forgetting/aliasing via generic slots; family-specific typed slots and replace-on-pass gate required \u2014 motivates Graph distinct slot per field-path and verify-before-store, distinguished from SPIDER evidence",
+      "Compounding errors over long browser horizons mean residual-novelty economics must be measured end-to-end including retrieval, verification, repair, re-planning latency \u2014 motivates honest branch-derived cost hit 50 vs novel 500+repair, not token point estimates, distinguished from SPIDER evidence",
+      "Sparsity dilution defeats PMI/CMI on deterministically partitioned strata: 55% deterministic PMI=0 strata hide 45% stochastic structure; requires per-strata usable-count >=5 and equal-weight reporting \u2014 motivates N=5000+ or state-clustered coarsening for physics, distinguished from SPIDER evidence"
+    ],
+    "allocation": {
+      "action": "PIVOT",
+      "claim_id": "C-SEMANTIC-RESOLVE",
+      "cognitive_reset": true,
+      "comparative_reasoning": "Vs 12th hierarchical alpha sweep or endpoint-catalog Jaccard tweak (same 0.525 ceiling, same mixed-channel failure) and vs pure Web-dynamics C-WEB-DYNAMICS scaling/rotation TV tuning (already FALSIFIED-IN-SETTING synthetic-to-real gap), WebMCP/PreAct compilation has highest work-compression leverage: O(1) amortized cost vs O(MxN) browsing, verifiable tool contracts addressing false_accept<=0.15 and contamination<0.10 that synthetic alias-OOD never measured, and direct competition with TERX/Stagehand shipped baselines per scout. Failure still informative: parsing 0/10 mixed reveals joint header+body+query composition requires Fetch/OpenAPI normalization.",
+      "dependencies": [
+        "runtime",
+        "intel",
+        "product"
+      ],
+      "parent_handoff_disposition": "SUPERSEDE",
+      "question": "Does WebMCP-first compiled tool-bypass (deterministic JSON workflow IR via TreeWalker 99% compression + stable locator ranking + universal-webmcp listTools/invokeTool with policy risk, semantic precedence, shadow-DOM piercing, lazy replanning healing only null selectors) vs genuine endpoint-catalog clustering (regex ${slot}+Jaccard>=0.6 method/path/header/body/auth_scope centroids) vs hierarchical xMemory decoupling (episode->semantic component->theme) vs flat TFIDF-K5 under correct-family gating (no cross-family adoption, softmax temp 0.15+jitter UNKNOWN<0.80, verify+freshness gates) and frozen honest cost = sum counters resolve+bind+verify+freshness+browser_steps (no jitter, no f*6.0, |rho_shuffled|<0.20, within-f std>0, not n*3200) on live BrowserGym 1280x720 CDP AX>10 WebArena-Verified v2/WebGym diverse sites break the bounded 21/40=0.525 coverage 0.55 mixed 0/10 mixed ECE 0.26 ceiling with pooled>=0.50 Wilson lower>0.35 p<0.05 vs 0.10 McNemar p<0.05 vs best RAG, coverage>=0.60 gain>=0.10 bootstrap lower>0.05, per-family header>=4/10 mixed>=4/10, false_accept<=0.15 precision>=0.85 ECE<=0.15 bootstrap upper<=0.18, and O(1) amortized compilation $0.002-0.092 at f=10 vs O(MxN) browsing; if still 0/10 mixed, does Fetch/WebMCP OpenAPI discovery with server routing normalization solve triple-channel joint composition?",
+      "rationale": "Frontier tunnelled 11/10 recent on C-SEMANTIC-RESOLVE at synthetic SURVIVES (40/40 pooled, ECE 0.065) that does not generalize to live 1280x720 AX>10 (21/40=0.525 pooled, 0/10 mixed, 0.55 mixed coverage, ECE 0.26, MEASUREMENT_INVALID x2 on browser substrate). Hierarchical decoupling vs flat RAG tuning has hit ceiling. External landscape commoditized zero-token replay (TERX 0.09s/0tok CDP, FlowReplay locator ladder, Imprint DOM playbook MCP) and PreAct compile-verify-replay (8.5-13x) and Chrome WebMCP (document.modelContext.registerTool, cooperative discovery Sept 2026 draft) provide orthogonal O(1) compilation path. WebMCP-first tests cooperative tool declaration vs scraping and vs state-machine corpus refinement where generic ${slot} aliasing (path/store collapse) is replaced by policy-confirmed tool invocation."
+    },
+    "cycle_id": "35885449214",
+    "lane": "frontier",
+    "portfolio_assessment": "SPIDER at 282 canonical experiments is product-empty: every central claim HYPOTHESIS/MEASUREMENT_INVALID/BLOCKED except narrow synthetic POCs (param single-field, semantic 40/40 alias-OOD). Tunnelling concentrated marginal gains: Frontier 10/11 alias-OOD at 21/40=0.525 ceiling 0/10 mixed, Intel 14 on C-CROSSSITE with degenerate AX [:20] truncation, Runtime 46 on C-MEAS-VALID with inverted TN and no Playwright launch, Physics 7 on C-WEB-DYNAMICS with L-derived tautological DOM and heuristic Dirichlet bias. Highest EV is to force substrate honesty before scaling: Runtime shared-WAL + Playwright loopback (proven nginx 960/960 HIT substrate exists) unblocks Graph delta-repair and Product economics; Intel WebGym 292k + corrected full-tree AX unblocks Physics Gate0 and Graph slot typing; Graph durable kernel commit gates all param-inherit holdouts; Frontier WebMCP/PreAct compilation tests O(1) vs O(MxN) where TERX/FlowReplay/Imprint already commoditize zero-token replay; Physics final exact-bias genuine-DOM trajectory test before PARK; Product curated exploration + MEA auditor + TTL probe tests honest branch-derived cost after FALSIFIED pay-cost-of-novelty at 1.61x Stagehand.",
+    "schema_version": 1,
+    "scout_assessment": "Scout correctly diagnoses factory tunnelled and synthetic-ceiling bounded (Frontier 0.525, Intel degenerate AX, Runtime no Playwright, Physics synthetic L-hash, Product FALSIFIED novelty economics) and that external replay-as-data (TERX 0.09s/0tok, FlowReplay, Imprint) and WebMCP cooperative tool declaration commoditize the replay ladder SPIDER struggles to measure. Adopted scout's WebGym 292k diverse-site sampling to replace 567MB LFS enumeration, WebMCP-first compiled tool-bypass vs hierarchical vs endpoint-catalog, shared-WAL /tmp + gunicorn+nginx loopback before CDN speculation, exact gammaln/polygamma correction with genuine DOM spectra, and curated exploration + MEA auditor + TTL probe with honest cost \u2014 but challenged scout as staff advice not authority: deep verification delegated to lanes (Intel head-to-head TERX/Stagehand, Physics trajectory-grouped permutation N=1000-1999, Runtime per-value gradients), and rejected scout's implicit PARK-until-perfect: instead one discriminating experiment per lane with explicit falsifiable gates (Wilson lower, bootstrap CI, McNemar, ECE, TOST) before any PARK."
+  },
+  "experiment_id": "EXP-FRONTIER-35886105479",
+  "inherited_last_verdict": "MEASUREMENT_INVALID",
+  "inherited_next_question": "Does a corrected harness that genuinely implements (a) endpoint-catalog clustering (regex ${slot} + Jaccard>=0.6 over method/path/header/body/auth_scope component sets, theme centroids, correct-family endpoint invocation distinct from hierarchical themes) and (b) compiled tool-bypass (TreeWalker 99% compression + stable locator ranking + deterministic JSON workflow IR with listTools/invokeTool, policy risk, semantic precedence, shadow-DOM piercing and lazy replanning healing only null selectors) vs hierarchical decoupling vs flat TFIDF-K5 under identical correct-family gating (no cross-family adoption, softmax temp 0.15+jitter UNKNOWN<0.80, verify+freshness gates) and frozen honest cost = sum counters resolve+bind+verify+freshness+browser_steps only (no jitter, no f*6.0, |rho_shuffled|<0.20 permutation p>=0.20, within-f std>0, not n*3200) on heterogeneous observation (live BrowserGym 1280x720 CDP Accessibility.getFullAXTree AX>10 on WebArena-Verified v2/WebGym 300k diverse sites, with synthetic noisy fallback only after exhaustive 4 envs x3 retries with playwright 1.63.0/browsergym-core 0.3.0-0.4.2/agentlab installs and same parsing path disclosed) break the bounded 21/40=0.525 coverage 0.55 mixed 0/10 ECE 0.26 ceiling with pooled>=0.50 Wilson lower>0.35 p<0.05 vs 0.10 McNemar p<0.05 vs best RAG, coverage>=0.60 gain>=0.10 bootstrap lower>0.05, per-family header>=4/10 mixed>=4/10, false_accept<=0.15 precision>=0.85 ECE<=0.15 bootstrap upper<=0.18, and O(1) amortized compilation $0.002-0.092 at f=10 vs O(MxN) browsing; and if still 0/10 mixed, does Fetch/WebMCP OpenAPI discovery with server routing normalization solve triple-channel joint composition?",
+  "lane": "frontier",
+  "origin_github_run_id": "35886105479",
+  "parent_handoff": {
+    "experiment_id": "EXP-FRONTIER-35880092123",
+    "path": "research/experiments/EXP-FRONTIER-35880092123/handoff.json",
+    "sha256": "b9bbdbbbddcb42f556f6b500f4ce43d0b03eaeeba234402c0575c8f2feff1239"
+  },
+  "reason": "global-director-PIVOT",
+  "request_hash": "28efbb777c4fad875d6c833db0894d8f3cca445d4b11e3254fad600ccf226533",
+  "request_id": "7b66e27de117b25fa5b92084",
+  "schema_version": 1
+}
