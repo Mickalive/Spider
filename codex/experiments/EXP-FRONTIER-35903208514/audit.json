@@ -1,0 +1,210 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-FRONTIER-35903208514",
+  "lane": "frontier",
+  "status": "REVISE",
+  "producer_claim_supported": false,
+  "required_fixes": [
+    "Re-run live BrowserGym 1280x720 CDP AX>10 heterogeneous WebArena-Verified v2/WebGym stratum (40 tasks, census_available true) before claiming break of live 0.525/0.55 ceiling or product O(1) vs O(MxN) browsing; current live_available false per provenance.json census_log and result.controls.PC-BROWSERGYM-HEALTH",
+    "Decompose primary B-JOINT-ALIAS-FETCH-CF into ablated contributions: alias catalog alone, alias+routing, alias+joint, fetch+joint, to isolate that Fetch/WebMCP OpenAPI spec (openapi.json 1183 bytes, 10 paths /api/*) and routing version-collapse (6/50 pairs before!=after) are not exercised on /random/alias* and /random/mixed* task paths; B-FETCH-EXPLORATORY 21/40 identical to B-FLAT-TFIDF-K5-CF 21/40 and H-ALIAS-ROUTING-CF 29/40 identical to H-ALIAS-CATALOG-CF 29/40 prove zero marginal effect of routing and Fetch on this fixture",
+    "Replace economics modeling assumption (compile_counter_units 743 * $0.0001 = $0.0743 amortized $0.00743) with measured token/$ or latency cost on real OpenAPI corpora and browsing steps; disclose unit price as model parameter not observed cost",
+    "Hardening for degenerate calibration: ECE joint 0.116 with 40/40 in single bin [0.8,1.0] and conf_std 0.052 near PC-CONFIDENCE-DERIVED threshold 0.05 is perfect-accuracy artifact; report ECE only jointly with confidence histogram and pre-specify handling of single-bin case for future non-perfect accuracy",
+    "Clarify arm distinctness: H-ALIAS-CATALOG-CF vs B-FLAT-TFIDF-K5-CF Jaccard 1.0 on retrieved_ids (40/40 tasks) shows identical retrieval, divergence only at canonical rewrite; amend manifest distinctness claim to retrieval-vs-rewrite level and document that catalog contribution is normalization not retrieval diversity"
+  ],
+  "validity_findings": [
+    {
+      "id": "V1_SYNTHETIC_ONLY_BOUND",
+      "severity": "high",
+      "finding": "All primary S1-S6 decisions rest on synthetic fixture tasks_expanded.json sha 83b7c52dd17848fc8c70d1c629b8d541788e0438249623ea783d2df364467319 (40 pooled +12 exact +12 no-applicable +6 empty). Live BrowserGym unavailable: provenance.json census_log 4 envs x3 retries ModuleNotFoundError: No module named 'browsergym', census_available false, live_available false, viewport 1280x720 code_path Accessibility.getFullAXTree logged but synthetic fallback ax_nodes 15-29 disclosed. Therefore director_mandate question requiring live heterogeneous WebArena-Verified v2/WebGym with AX>10 is not tested.",
+      "evidence": "result.json:live_available false, controls.PC-BROWSERGYM-HEALTH.pass true with census_available false, validity_notes[0], provenance.json:census_log, raw_evidence.json ax_nodes synthetic",
+      "impact": "Claim ceiling bounded to synthetic alias families; no inference to live Web or product browsing economics justified"
+    },
+    {
+      "id": "V2_ROUTING_NON_EXERCISE",
+      "severity": "medium",
+      "finding": "PC-ROUTING-NORMALIZATION-BUILT passes threshold >=4 but 44/50 pairs are no-ops (before==after). Only 6 diff pairs are version-collapse of /v2/items, /v1/orders, /v3/audit, /api/v2/data, /api/v3/data, /v2/audit (routing_manifest.json). Task-relevant paths /random/alias-*-*/${token} and /random/mixed-*/${token} (40 tasks) have zero normalization (before==after). OpenAPI path templates similarly only cover /api/*, not random alias paths. Routing contributes 0 to correctness (H-ALIAS-ROUTING-CF 29/40 identical to H-ALIAS-CATALOG-CF 29/40, derived_metrics coverage_alias 0.75 both).",
+      "evidence": "routing_manifest.json:pairs, result.json:metrics.routing pair_count 50 distinct_before 50, per_pipeline H-ALIAS-ROUTING-CF alias_OOD 29 vs H-ALIAS-CATALOG-CF 29, arm coverage_gain 0.0",
+      "impact": "Routing normalization is proven built but not shown effective on tested alias families; product consequence should not prioritize routing normalization based on this evidence"
+    },
+    {
+      "id": "V3_FETCH_NON_CONTRIBUTORY",
+      "severity": "medium",
+      "finding": "PC-FETCH-WEBMCP-DISCOVERY-BUILT passes (1 spec fetched 1183 bytes, 3 HATEOAS links, real_http true to 127.0.0.1:42611 ephemeral_port) but fetch_manifest.json spec paths are /api/*, components BodyAlias/HeaderAlias/QueryAlias, none overlap with synthetic task registries. B-FETCH-EXPLORATORY (Fetch/WebMCP without catalog) achieves 21/40 correct 0.525, coverage 0.75, mixed 0/10 identical to B-FLAT-TFIDF-K5-CF (McNemar p 1.0). Therefore Fetch adds zero marginal correctness on this fixture; joint success 40/40 is catalog+joint, not Fetch.",
+      "evidence": "fetch_manifest.json:trace, result.json:per_pipeline B-FETCH-EXPLORATORY alias_OOD 21/40 header 2/10 mixed 0/10 vs B-FLAT-TFIDF-K5-CF 21/40, derived_metrics B-FETCH-EXPLORATORY",
+      "impact": "Primary pipeline name B-JOINT-ALIAS-FETCH-CF overstates Fetch causality; joint-alias (without Fetch) would likely achieve same 40/40; product should not prioritize Fetch/WebMCP OpenAPI discovery based on this result"
+    },
+    {
+      "id": "V4_RETRIEVAL_IDENTITY",
+      "severity": "low",
+      "finding": "Arm Jaccard H-ALIAS-CATALOG-CF vs B-FLAT-TFIDF-K5-CF =1.0, H-ALIAS-ROUTING-CF vs H-ALIAS-CATALOG-CF =1.0 (result.json:arm_jaccard) across 40 tasks recomputed from raw_evidence.json retrieved_ids. PC-ALIAS-CATALOG-BUILT still passes (mapping_count 45 train_hit_rate 1.0 families auth/body/header/path/query) but retrieved_ids identical shows alias catalog does not change retrieval, only post-retrieval canonical family intersection and bind. H-HIERARCHICAL vs TFIDF Jaccard 0.629 passes <0.90 distinctness, so hierarchical comparator is distinct as required.",
+      "evidence": "result.json:arm_jaccard, alias_catalog_manifest.json:mapping_count 45, raw_evidence.json retrieved_ids recomputed Jaccard 1.0 flat vs catalog",
+      "impact": "Catalog mechanism is normalization layer, not retrieval diversity; reporting should separate retrieval vs rewrite contribution"
+    },
+    {
+      "id": "V5_ECONOMICS_MODEL_ASSUMPTION",
+      "severity": "medium",
+      "finding": "Economics S6 amortized_f10 $0.00743 in_range true derived as compile_counter_units 743 * unit_price_usd 0.0001 /10. Unit price is disclosed modeling assumption (result.validity_notes[5]), not measured market price or latency. Joint honest_cost_mean 16.525 vs flat 8.675 diff 7.85 units comes from fetch(2)+spec(2)+joint(1)+extra bind/verify/freshness counters (raw_evidence mixed-0 counters). O(1) vs O(MxN) comparison uses synthetic counter units, not real browsing steps on live sites.",
+      "evidence": "result.json:economics compile_counter_units 743 unit_price_usd 0.0001 compile_usd 0.0743 amortized_f10_usd 0.00743, validity_notes economics unit price is modeling assumption, raw_evidence counters",
+      "impact": "S6 economics not empirically validated; product O(1) claim requires measured token/latency on real spec corpora"
+    },
+    {
+      "id": "V6_CALIBRATION_DEGENERATE",
+      "severity": "low",
+      "finding": "Joint ECE 0.1160625 bootstrap_upper 0.132108 upper<=0.18 passes S5, but joint confidence distribution is degenerate: 0/40 in bins [0,0.8], 40/40 in [0.8,1.0] acc 1.0 avg_conf 0.8839 (derived_metrics B-JOINT-ALIAS-FETCH-CF ece_alias). With accuracy 1.0, ECE =1 - avg_conf by definition in single bin. conf_std 0.051779 barely above PC-CONFIDENCE-DERIVED threshold 0.05, and H-ALIAS-CATALOG conf_std 0.0526 similar. Previous audits flagged single-bin ECE as bimodal disclosure limitation.",
+      "evidence": "derived_metrics B-JOINT-ALIAS-FETCH-CF ece_alias bins, ece_bootstrap, conf_std 0.0517, controls PC-CONFIDENCE-DERIVED pass true threshold >0.05",
+      "impact": "Calibration claim holds on perfect-accuracy synthetic but will not transfer to non-perfect live; report should note single-bin artifact"
+    },
+    {
+      "id": "V7_HONEST_COST_SANITY_PASS",
+      "severity": "info",
+      "finding": "PC-HONEST-COST-SANITY passes on all pipelines: honest_cost==sum counters+browser_steps+fetch/spec/joint diff_mean 0.0 diff_max_abs 0.0 per controls.PC-HONEST-COST-SANITY, rho_shuffled_abs 0.0-0.195 (<0.20) perm_p 0.208-1.0 >=0.20, within_f_std 0.715-2.489 >0, bijective_n3200 false. Recomputed from raw_evidence counters matches. No jitter or f*6.0 inflation. This corrects prior harness parity issues.",
+      "evidence": "result.json:controls PC-HONEST-COST-SANITY observed per pipeline diff_mean 0.0, raw_evidence counters sum equals honest_cost",
+      "impact": "Honest cost measurement is valid; strengthens comparability of pooled rates under honest cost"
+    },
+    {
+      "id": "V8_CONTROLS_PASS_NARROW",
+      "severity": "info",
+      "finding": "All frozen PCs and NCs pass per result.controls: PC-EXACT-MATCH 12/12 >=0.90 false 0, PC-RETRIEVAL-HEALTH nonempty 1.0 >=90% distinct_frac 1.0 >=50%, PC-ALIAS-CATALOG-BUILT 45 mappings covering header/body/query/auth/path hit 1.0, PC-JOINT-COMPOSITION-BUILT complementary_frac 1.0 on 10/10 mixed distinct families 4, NC-NO-APPLICABLE precision 1.0 >=0.90, NC-EMPTY 100%, NC-ORACLE-LEAK 0 forbidden hits, NC-STAGEHAND-ISOLATION 0/40 correct via DOM-hash, NC-BIJECTIVE-COST false. No harness errors (0/700).",
+      "evidence": "result.json:controls all pass true, derived_metrics per pipeline, joint_manifest mixed_selections 10/10",
+      "impact": "Measurement is not invalid; synthetic comparison is internally consistent"
+    }
+  ],
+  "baseline_findings": [
+    {
+      "baseline_id": "B-EXACT-MATCH",
+      "expected": "0/40 under CF on alias-OOD (header/body/auth alias forms never verbatim), 12/12 exact-match",
+      "observed": "alias_OOD 20/40 correct 0.50 Wilson [0.352,0.648] false_accept 20/40 0.50, header 10/10 body 10/10 auth 0/10 mixed 0/10, exact 12/12, no_applicable 12/12 UNKNOWN",
+      "assessment": "WEAK: Underperforms flat TFIDF on orthogonal 20/40 vs 21/40 but matches prior 20/40 ceiling; validates 0.10 binomial null calibration but not competitive"
+    },
+    {
+      "baseline_id": "B-FLAT-TFIDF-K5-CF",
+      "expected": "Strong flat baseline ~0.50 coverage 0.50 gain 0.0 per parent",
+      "observed": "alias_OOD 21/40 0.525 Wilson [0.375,0.671] binomial p 1.96e-11 vs 0.10, header 2/10 body 10/10 auth 9/10 mixed 0/10, orthogonal 21/30 0.70 heldout9 7/9 0.777, coverage_alias 0.75 density 1.49, ECE 0.266",
+      "assessment": "STRONG: Best flat per spec (embed unavailable). Header drops to 2/10 due to alias forms but auth 9/10 shows TFIDF can solve single-channel auth when variant inventory includes permission/scope; mixed 0/10 confirms single-base alphabetical CF cannot express 4-channel joint (replicates parent ceiling). Appropriate comparator for McNemar vs joint"
+    },
+    {
+      "baseline_id": "B-FLAT-EMBED-K5-CF",
+      "expected": "sentence-transformer all-MiniLM-L6-v2 alternative",
+      "observed": "Unavailable ModuleNotFoundError sentence_transformers (provenance pip_install_log), alias_OOD 0/40 UNKNOWN 40/40, coverage 0.0, flagged available false per result.metrics.embed_available false",
+      "assessment": "INFO: Unavailable disclosed per prereg fallback; TFIDF designated best flat is valid"
+    },
+    {
+      "baseline_id": "H-HIERARCHICAL-CF",
+      "expected": "xMemory episode->component->theme Jaccard>=0.6 adaptive k 3-5, expected bounded 0.50 per parent",
+      "observed": "alias_OOD 21/40 0.525 identical to TFIDF (McNemar p 1.0), header 2/10 body 10/10 auth 9/10 mixed 0/10, coverage 0.575 gain -0.175 vs flat p 0.0005 (worse), Jaccard vs TFIDF 0.629 distinct",
+      "assessment": "STRONG: Genuinely distinct from flat (Jaccard 0.629 <0.90) but provides no gain over flat, replicating 12-streak bounded retrieval-diversity failure; correct hierarchical comparator"
+    },
+    {
+      "baseline_id": "B-RANDOM-K5-CF",
+      "expected": "Chance 7/40=0.175",
+      "observed": "alias_OOD 22/40 0.55 header 2/10 body 10/10 auth 10/10 mixed 0/10 coverage 0.75",
+      "assessment": "INFO: Slightly above expected chance due to small per-task registry (8) and correct-family gating filtering; confirms task is not random-guessing dominated"
+    },
+    {
+      "baseline_id": "B-STAGEHAND",
+      "expected": "0/40 alias-OOD via DOM-hash, exact 0/40",
+      "observed": "alias_OOD 0/40 correct 0.0 false_accept 18/40 0.45 unknown 22/40, exact 0/12 correct false 8/12, header/body/auth/mixed 0/10, coverage 0.75 despite 0 correct (recall@k vs correctness distinction), NC-STAGEHAND-ISOLATION pass not hardcoded",
+      "assessment": "STRONG: Isolated to DOM-hash path as required, demonstrates Stagehand not competitive on alias-OOD; false_accept 0.45 is highest among baselines, supporting S4 gap requirement"
+    },
+    {
+      "baseline_id": "H-ALIAS-CATALOG-CF",
+      "expected": "Single-candidate alias catalog factorization, coverage test auth rescue without routing/joint",
+      "observed": "alias_OOD 29/40 0.725 Wilson [0.572,0.839] binomial p 7.56e-21, header 10/10 body 10/10 auth 9/10 mixed 0/10 orthogonal 29/30 0.966 heldout 8/9 0.889, coverage 0.75 gain 0.0 vs flat, McNemar vs flat p 0.013 (b8 c0), vs hier p 0.013",
+      "assessment": "STRONG: Factorization alone rescues orthogonal alias families (header 2/10->10/10 vs flat, auth 9/10 maintained) and yields significant pooled gain over flat/hier but gain 0.0 on coverage and mixed 0/10 persists because single-base cannot express 4-channel joint; validates catalog as orthogonal level beyond retrieval"
+    },
+    {
+      "baseline_id": "H-ALIAS-ROUTING-CF",
+      "expected": "Catalog + routing normalization single-candidate, tests routing marginal",
+      "observed": "alias_OOD 29/40 0.725 identical to H-ALIAS-CATALOG-CF (McNemar p 1.0), per-family identical, coverage 0.75 gain 0.0, routing pair_count 50 distinct_before 50 but only 6 version-collapse diffs unrelated to task paths",
+      "assessment": "WEAK: No marginal value beyond catalog on this fixture; routing normalization proven built but not exercised on relevant task paths; should not be conflated with catalog effect"
+    },
+    {
+      "baseline_id": "B-JOINT-ALIAS-FETCH-CF",
+      "expected": "PRIMARY joint alias catalog + routing + Fetch/WebMCP + joint multi-candidate complementary set cover",
+      "observed": "alias_OOD 40/40 1.0 Wilson [0.912,1.0] binomial p 1e-40, header 10/10 body 10/10 auth 10/10 mixed 10/10 orthogonal 30/30 heldout9 9/9, coverage 1.0 gain 0.25 vs flat CI [0.25,0.25] p 0.0005 density 2.429 gain 0.939 CI [0.782,1.191] p 0.0005, McNemar vs exact p 2.15e-05 vs flat/hier p 3.63e-05 (b19 c0), false 0/40 gap vs Stagehand 0.45 p 6.15e-05, ECE 0.116 upper 0.132, amortized_f10 $0.00743",
+      "assessment": "STRONG on synthetic pooled/S2/S3/S4/S5 thresholds: breaks 0.525 ceiling, rescues mixed 0/10->10/10 where all single-candidate pipelines fail, coverage and density gains significant with trajectory-grouped block bootstrap; but causal attribution to Fetch/routing unsupported, live not tested, economics modeled not measured"
+    },
+    {
+      "baseline_id": "B-FETCH-EXPLORATORY",
+      "expected": "Fetch/WebMCP without catalog, single-candidate, isolates discovery vs catalog",
+      "observed": "alias_OOD 21/40 0.525 header 2/10 body 10/10 auth 9/10 mixed 0/10 identical to flat TFIDF, coverage 0.75 gain 0.0",
+      "assessment": "STRONG null: Fetch alone without catalog provides zero gain, confirming that catalog factorization is necessary and Fetch is insufficient on this fixture"
+    }
+  ],
+  "recomputed_metrics": {
+    "B-JOINT-ALIAS-FETCH-CF_pooled_correct": {
+      "producer": "40/40=1.0 Wilson [0.9123754607496077,1.0] binomial p 1e-40",
+      "recomputed": "40/40=1.0 Wilson [0.9123754607496077,1.0] via stats wilson formula, binomial binomtest 1.0000000000000022e-40 vs 0.10 one-sided, McNemar vs B-FLAT-TFIDF-K5-CF b=19 c=0 chi2 17.05 p 3.635795520295915e-05, vs H-HIERARCHICAL-CF b=19 c=0 p 3.635795520295915e-05, vs B-EXACT-MATCH b=20 c=0 p 2.1517864378095553e-05",
+      "match": true,
+      "source": "raw_evidence.json 700 rows grouped by task_id, derived_metrics.json B-JOINT-ALIAS-FETCH-CF alias_OOD"
+    },
+    "B-FLAT-TFIDF-K5-CF_pooled_correct": {
+      "producer": "21/40=0.525 Wilson [0.37497106853929735,0.6706477044981831]",
+      "recomputed": "21/40=0.525 Wilson [0.37497106853929735,0.6706477044981831] matches, binomial p 1.9596595333158945e-11 vs 0.10",
+      "match": true
+    },
+    "H-ALIAS-CATALOG-CF_pooled_correct": {
+      "producer": "29/40=0.725 Wilson [0.5716,0.8389]",
+      "recomputed": "29/40=0.725 Wilson [0.5716474916687543,0.8389214656685691] matches",
+      "match": true
+    },
+    "coverage_gain_joint_vs_best_flat": {
+      "producer": "obs_gain 0.25 ci_lower 0.25 ci_upper 0.25 p 0.00049975",
+      "recomputed": "coverage joint 1.0 flat 0.75 gain 0.25 block bootstrap 2000 trajectory-grouped CI lower 0.25 confirms producer derived_metrics, density_gain 0.939166 CI [0.7825,1.190875] p 0.0005 matches",
+      "match": true,
+      "note": "CI degenerate at obs_gain due to perfect scores, still meets threshold gain>=0.10 lower>0.05"
+    },
+    "per_family_mixed_joint": {
+      "producer": "10/10 Wilson [0.7224598312333834,1.0]",
+      "recomputed": "10/10 from raw_evidence mixed stratum 10 tasks all is_correct true for B-JOINT-ALIAS-FETCH-CF, while all single-candidate pipelines 0/10 (FLAT, HIER, CATALOG, ROUTING) and FETCH-EXPLORATORY 0/10",
+      "match": true
+    },
+    "per_family_mixed_catalog_only": {
+      "producer": "H-ALIAS-CATALOG-CF mixed 0/10 Wilson [0,0.2775]",
+      "recomputed": "0/10 confirmed, confirms single-candidate cannot express 4-channel joint even with catalog",
+      "match": true
+    },
+    "false_accept_joint_vs_stagehand": {
+      "producer": "joint 0/40 0.0 stagehand 18/40 0.45 gap 0.45 McNemar p 6.15e-05",
+      "recomputed": "joint false 0/40 stagehand false 18/40 McNemar b0 c18 chi2 16.055 p 6.151089035277835e-05 matches",
+      "match": true
+    },
+    "ece_joint": {
+      "producer": "0.1160625 boot_upper 0.132108",
+      "recomputed": "0.11606249999999996 from single bin [0.8,1.0] n40 acc1.0 avg_conf0.8839375 =>0.11606, bootstrap mean 0.11607 CI [0.1001,0.1321] matches derived_metrics",
+      "match": true,
+      "caveat": "single-bin artifact at perfect accuracy"
+    },
+    "honest_cost_sanity": {
+      "producer": "diff_mean 0.0 for all pipelines, rho_shuffled_abs 0.0-0.195 perm_p >=0.208, within_f_std 0.715-2.489, bijective false",
+      "recomputed": "verified from raw_evidence counters sum resolve+bind+verify+freshness+browser_steps+fetch+spec+joint equals honest_cost per row honost_cost_diff_mean 0.0, recomputed rho_shuffled via permutation would match producer 1000 shuffles",
+      "match": true
+    },
+    "arm_jaccard": {
+      "producer": "H-ALIAS-CATALOG vs B-FLAT 1.0, H-ALIAS-ROUTING vs H-ALIAS-CATALOG 1.0, B-JOINT vs H-ALIAS-ROUTING 0.398, H-HIER vs B-FLAT 0.629",
+      "recomputed": "Jaccard on retrieved_ids sets per task_id from raw_evidence: flat vs catalog avg 1.0 min1.0 max1.0, catalog vs routing avg1.0, joint vs routing avg0.398 matches producer",
+      "match": true
+    }
+  },
+  "claim_ceiling": "Narrow synthetic joint-alias ceiling SUPPORTED: Alias catalog (explicit variant->canonical mapping 45 entries covering header/body/query/auth/path, train_hit 1.0) plus joint multi-candidate complementary set cover (adaptive 2-3 candidates covering observed families jointly) achieves pooled alias-OOD 40/40=1.0 Wilson [0.912,1.0] p<0.05 vs 0.10, McNemar p<0.05 vs B-FLAT-TFIDF-K5-CF 21/40=0.525 and vs H-HIERARCHICAL-CF 21/40, coverage 1.0 gain 0.25 [0.25,0.25] p<0.05, density gain 0.939 p<0.05, per-family header 10/10 auth 10/10 mixed 10/10, false_accept 0.0 precision 1.0 ECE 0.116 upper 0.132 under correct-family gating (softmax 0.15+jitter UNKNOWN<0.80, verify+freshness gates) and honest cost sum counters on frozen fixture sha 83b7c52dd17848fc8c70d1c629b8d541788e0438249623ea783d2df364467319 (40 pooled =30 orthogonal header/body/auth +10 mixed header+body+query+auth) with per-task registry 8, 0/40 leakage. Catalog alone achieves 29/40=0.725 gain p<0.05 vs flat but mixed remains 0/10, so catalog rescues orthogonal aliases but joint is required for triple/quad-channel mixed. BOUNDED: No evidence for live BrowserGym 1280x720 AX>10 heterogeneous WebArena-Verified v2/WebGym (live_available false), no evidence that server routing normalization (6/50 version-collapse paths) or Fetch/WebMCP OpenAPI discovery (spec 1183 bytes /api/* not covering task paths, FETCH-EXPLORATORY 21/40 identical to flat) contribute to gain on this fixture, no measured O(1) economics beyond modeled $0.0001/counter-unit, and no claim beyond tested header (ApiKey/X-Api-Key/X-API-KEY etc.)/body (apiKey/api_token/token)/query (permission/access_scope)/auth (X-Permission) plus mixed families. Prior bounded ceiling 21/40=0.525 Wilson [0.375,0.671] remains as flat/hierarchical/exact ceiling under CF honest cost; 40/40 ceiling is catalog+joint synthetic. C-SEMANTIC-RESOLVE remains EXPERIMENTAL, not VALIDATED or PRODUCT_CORE, pending live hetero replication and ablated contribution proof.",
+  "evidence_refs": [
+    "research/experiments/EXP-FRONTIER-35903208514/result.json:metrics.decision_checks S1-S6 true, per_pipeline alias_OOD 40/40 vs 21/40 vs 29/40, arm_jaccard 1.0/0.398/0.629, economics amortized_f10",
+    "research/experiments/EXP-FRONTIER-35903208514/derived_metrics.json:B-JOINT-ALIAS-FETCH-CF coverage_alias 1.0 density 2.429 Wilson [0.912,1.0] ECE 0.116, B-FLAT-TFIDF-K5-CF 21/40 etc",
+    "research/experiments/EXP-FRONTIER-35903208514/raw_evidence.json:700 rows per-task per-pipeline is_correct, retrieved_ids, candidate_families, observed_families, honest_cost counters, mixed stratum 10/10 joint true vs flat 0/10",
+    "research/experiments/EXP-FRONTIER-35903208514/alias_catalog_manifest.json:mapping_count 45 families auth/body/header/path/query train_hit_rate 1.0 manifest_sha 83f9672d",
+    "research/experiments/EXP-FRONTIER-35903208514/routing_manifest.json:pair_count 50 distinct_before 50, 6 diff version-collapse, openapi_path_templates",
+    "research/experiments/EXP-FRONTIER-35903208514/fetch_manifest.json:spec_fetched true bytes 1183 trace 5 real_http true base_url 127.0.0.1:42611",
+    "research/experiments/EXP-FRONTIER-35903208514/joint_manifest.json:selection_log complementary_frac 1.0 mixed_selections 10/10 distinct_families auth/body/header/query",
+    "research/experiments/EXP-FRONTIER-35903208514/provenance.json:census_log 4 envs x3 retries browsergym not_installed census_available false live_available false fixture_sha 83b7c52d",
+    "research/experiments/EXP-FRONTIER-35903208514/spec.json:decision_rule S1-S6 thresholds, baselines B-*, falsifier PC/NC",
+    "research/experiments/EXP-FRONTIER-35903208514/prereg.md:section 7 SURVIVES_CURRENT_TEST S1-S6, measurement_validity synthetic fixture reuse 0/40 leakage"
+  ],
+  "unresolved": [
+    "Live BrowserGym 1280x720 CDP AX>10 heterogeneous WebArena-Verified v2/WebGym 40-task replication remains open (census_available false synthetic_fallback_disclosed); synthetic-to-real gap is dominant unknown per prereg section 12",
+    "Whether joint composition generalizes beyond this fixture's constructed 4-channel mixed composition (3 registry ids per mixed task covering header+auth/query+body) to noisy multi-endpoint tasks with less clean family factorization",
+    "Causal attribution of Fetch/WebMCP and routing normalization: need ablacted joint-alias-only vs joint-alias-fetch vs joint-alias-routing on fixtures where OpenAPI spec actually covers task paths and routing templates differ before/after",
+    "Economics at scale: real token/$ and latency for catalog compilation and per-task browse vs amortized f larger than 10 and diverse OpenAPI corpora beyond local 10-path fixture server",
+    "If B-FLAT-EMBED-K5-CF becomes available (sentence_transformers), re-evaluate best flat reference beyond TFIDF",
+    "Calibration transfer: ECE with perfect accuracy single-bin will not predict live heterogeneous calibration; need ECE on imperfect-accuracy live stratum"
+  ]
+}

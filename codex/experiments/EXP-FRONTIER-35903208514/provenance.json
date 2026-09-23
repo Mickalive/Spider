@@ -1,0 +1,73 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-FRONTIER-35903208514",
+  "github_run_id": "35903208514",
+  "recorded_at": "2026-09-23T20:01:04Z",
+  "commits": {
+    "src_spider_kernel": "cfec98660b0277ccbf295e8a4119e8d81ddccf50",
+    "src_spider_models": "f08608c36b1c7b536d553b690acd91cd63f590f7",
+    "src_spider_registry": "986317f71c4a7d5506e3295991bc7217e2a8d2da",
+    "head": "d3bf30c1b023d0cbb0ba8a757839e52176d52a19"
+  },
+  "frozen_hashes": {
+    "request.json": "a0060370fe38348bf3b59aa481430ea4788a8877a38a47d8391f740bd9ad04c2",
+    "spec.json": "84686c63f37a44952de5c87bafc40de09cff546024416907dd7ed106eb789d28",
+    "prereg.md": "2c5e284ecbfb40b855de8c204f82f4b8e4b75dc922e15055a663ebb80d432241",
+    "freeze.json": "9c73ef905c20f6dd7c3da06de05cc4fd9da2163d19499ba7bb7ffb7f5a6562b2",
+    "verified_at_execute": true
+  },
+  "fixture_sha256": "83b7c52dd17848fc8c70d1c629b8d541788e0438249623ea783d2df364467319",
+  "pip_install_log": [
+    "sentence-transformers unavailable: ModuleNotFoundError: No module named 'sentence_transformers'"
+  ],
+  "census_log": [
+    "versions: agentlab not_installed playwright not_installed browsergym-core not_installed",
+    "attempt WebArena retry 1: failed ModuleNotFoundError: No module named 'browsergym'",
+    "attempt WebArena retry 2: failed ModuleNotFoundError: No module named 'browsergym'",
+    "attempt WebArena retry 3: failed ModuleNotFoundError: No module named 'browsergym'",
+    "attempt WebShop retry 1: failed ModuleNotFoundError: No module named 'browsergym'",
+    "attempt WebShop retry 2: failed ModuleNotFoundError: No module named 'browsergym'",
+    "attempt WebShop retry 3: failed ModuleNotFoundError: No module named 'browsergym'",
+    "attempt WebLINX retry 1: failed ModuleNotFoundError: No module named 'browsergym'",
+    "attempt WebLINX retry 2: failed ModuleNotFoundError: No module named 'browsergym'",
+    "attempt WebLINX retry 3: failed ModuleNotFoundError: No module named 'browsergym'",
+    "attempt WorkArena retry 1: failed ModuleNotFoundError: No module named 'browsergym'",
+    "attempt WorkArena retry 2: failed ModuleNotFoundError: No module named 'browsergym'",
+    "attempt WorkArena retry 3: failed ModuleNotFoundError: No module named 'browsergym'",
+    "BrowserGym census 4 envs x3 retries: live_available=False census_available=False synthetic_fallback_disclosed=True viewport=1280x720 code_path=Accessibility.getFullAXTree versions agentlab=not_installed playwright=not_installed browsergym-core=not_installed"
+  ],
+  "census_available": false,
+  "live_available": false,
+  "viewport": "1280x720",
+  "ax_code_path": "Accessibility.getFullAXTree",
+  "commands": [
+    "python3 research/frontier/run_execute_35903208514.py"
+  ],
+  "artifacts": {
+    "raw_evidence.json": "research/experiments/EXP-FRONTIER-35903208514/raw_evidence.json",
+    "derived_metrics.json": "research/experiments/EXP-FRONTIER-35903208514/derived_metrics.json",
+    "alias_catalog_manifest.json": "research/experiments/EXP-FRONTIER-35903208514/alias_catalog_manifest.json",
+    "routing_manifest.json": "research/experiments/EXP-FRONTIER-35903208514/routing_manifest.json",
+    "fetch_manifest.json": "research/experiments/EXP-FRONTIER-35903208514/fetch_manifest.json",
+    "joint_manifest.json": "research/experiments/EXP-FRONTIER-35903208514/joint_manifest.json",
+    "index_manifest.json": "research/experiments/EXP-FRONTIER-35903208514/index_manifest.json",
+    "result.json": "research/experiments/EXP-FRONTIER-35903208514/result.json",
+    "report.md": "research/experiments/EXP-FRONTIER-35903208514/report.md",
+    "runner": "research/frontier/run_execute_35903208514.py"
+  },
+  "harness_errors": [],
+  "runner_sha256": "0522e12dfce22791ed31f79db31b2a2f74785018e766bb5009fee78a557fc020",
+  "environment": {
+    "python": "3.12.14",
+    "numpy": "2.5.3",
+    "sklearn": "1.9.1",
+    "scipy": "1.18.1",
+    "embed_available": false,
+    "embed_unavailable_reason": "ModuleNotFoundError: No module named 'sentence_transformers'"
+  },
+  "fetch_server": {
+    "base_url": "http://127.0.0.1:42611",
+    "real_http": true,
+    "ephemeral_port": true
+  }
+}

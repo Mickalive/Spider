@@ -1,0 +1,244 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-35903200136",
+  "lane": "intel",
+  "status": "REVISE",
+  "producer_claim_supported": true,
+  "required_fixes": [
+    "Recompute M_AX_BOOTSTRAP_CI_LOWER/UPPER correctly at family level (seed 35725763380, 2000 percentile resamples of 10 family scores) — producer [1.0,1.0] does not contain estimate 0.9 and contradicts recomputed [0.7,1.0]; fix bootstrap implementation and re-validate trajectory-grouped semantics (result.json:metrics.M_AX_BOOTSTRAP_CI_LOWER, artifacts/derived/ax_consistency_fulltree.json:bootstrap_95_ci)",
+    "Recompute M_AX_SHUFFLE_MEAN and M_AX_PER_FAMILY_VARIANCE correctly — producer shuffle_mean 1.0 vs true 0.9 and variance 0.0 vs recomputed pop 0.09/sample 0.10 from family_scores [1.0 x9,0.0]; variance>0 criterion would then PASS but degenerate p=1.0 still fails; correct fields before Codex ingestion (artifacts/derived/ax_consistency_fulltree.json)",
+    "Measure M_AX_DELTA_TRUNCATED on same 20 captures with truncated [:20] baseline to satisfy frozen decision_rule delta>=0.20 gate; currently null/UNKNOWN (spec.json:measurement_validity B-TRUNCATED-20, decision_rule, prereg.md 7/9). Without this, H1 SURVIVES is impossible by construction and falsification is incomplete per spec.",
+    "Repair sampling to satisfy product-page requirement: 9/10 families captured homepage URL http://localhost:7770 (1430 nodes, identical template) not product pages — only family 6 (tasks 163/164, 864/668 nodes, product-specific URLs /ostent-... and /mineralogie-...) is product-page; spec requires 10 families x2 task-specific start_url via get_task_start_url __SHOPPING__ expansion on product pages, and shopping_admin 184-task/42-family expansion if <5 product families (spec.json:measurement_validity CRITICAL FIX 2, prereg.md 4, result.json:observations, raw/ax_captures.jsonl). Current falsification bounds to homepage/template tautology, not product-page transfer as preregistered.",
+    "Validate product-subtree semantic anchoring live: produce per-family product-subtree node_count>1 and distinct outerHTML SHA256 (stripped) on path families 136,145,196,222 per spec measurement_validity CRITICAL FIX 1 and prereg 2/8; currently unmeasured (result.json:unresolved, validity_notes) — remove or explicitly mark as descriptive.",
+    "Repair Stagehand dynamic-token stripping to achieve HIT>=0.8 on identical DOM: 9-regex list plus form_key strip does not cover Magento dynamic fragments (CSRF/timestamp/session HTML attributes) — 36/36 hash_changed_on_every access (SHA 16-char before/after all differ) making HIT=0.0 by construction; expand regex/normalization to stabilize relevant-subtree outerHTML before SHA256 (research/intel/grammar_fulltree_358885.py:strip_dynamic_tokens, artifacts/derived/stagehand_replication_recomputed.json:degeneracy_note)",
+    "Re-run Gate0 multi-step branch with pinned BrowserGym-core 0.14.3 rollout at 1280x720 to achieve >=50 transitions/family on >=10 families or retain MEASUREMENT_INVALID with documented BrowserGym API mismatch (currently 0 transitions, gate0_relaxed_table.json note BrowserGym API structure differs; spec requires genuine attempt captured)",
+    "For H3 WebGym diverse import, retain MEASUREMENT_INVALID branch as correctly handled (2 genuine 401/404 attempts captured with URL/error/sha256 manifest) — no fix required beyond HF_TOKEN/WebMall alternative for future run; do not treat as negative evidence (provenance.json:artifacts derived/webgym_census.json)"
+  ],
+  "validity_findings": [
+    {
+      "id": "V1_DEGENERATE_TEMPLATE_DOMINANCE",
+      "severity": "critical",
+      "finding": "M_AX_CONSISTENCY_MEAN 0.9 with 9/10 families identical 1.0 and 1/10 family 0.0 is degenerate homepage template tautology, not product-page within-store transfer. Raw evidence raw/ax_captures.jsonl shows 18/20 captures at http://localhost:7770 or / with identical 1430 nodes and dom_bytes 251734 (homepage One Stop Market template, ax_sha varying but pattern_length constant); only family 6 captures product pages (864/668 nodes, /ostent-... and /mineralogie-...). This violates spec's product-page/task-specific start_url requirement (spec.json measurement_validity CRITICAL FIX 1/2, prereg 2 requires product-subtree anchoring on product pages). Producer correctly flags degenerate in validity_notes[5] and family_scores[0.0 vs 1.0] but decision narrative still frames as product-page falsification; ceiling must be bounded to homepage/template condition.",
+      "evidence": "artifacts/raw/ax_captures.jsonl:19 lines (1430 nodes x18, 864/668 x2), artifacts/derived/ax_consistency_fulltree.json:family_scores [1.0x9,0.0], result.json:metrics.M_AX_CONSISTENCY_MEAN 0.9, result.json:validity_notes[5], report.md Diagnosis H1"
+    },
+    {
+      "id": "V2_IMPOSSIBLE_BOOTSTRAP_CI",
+      "severity": "major",
+      "finding": "Producer bootstrap 95% CI [1.0,1.0] is mathematically impossible given estimate 0.9 from scores [1.0x9,0.0]. Recomputed family-level percentile bootstrap (2000 resamples, seed 35725763380, resample families with replacement) yields CI [0.7,1.0] containing the mean. Producer CI lower 1.0 > mean suggests implementation filtered the 0.0 family or bootstrapped at wrong unit (capture vs family) or computed on degenerate subset (only template families). Degenerate flag correctly set but CI value invalid and must not be ingested as precision evidence.",
+      "evidence": "artifacts/derived/ax_consistency_fulltree.json:bootstrap_95_ci [1.0,1.0] vs recomputed [0.7,1.0], result.json:metrics.M_AX_BOOTSTRAP_CI_LOWER 1.0, prereg.md 7 requires 2000 family-level bootstrap"
+    },
+    {
+      "id": "V3_SHUFFLE_MEAN_VARIANCE_MISREPORT",
+      "severity": "major",
+      "finding": "Producer M_AX_SHUFFLE_MEAN 1.0 contradicts multiset mean 0.9: trajectory-grouped shuffle of per-family scores preserves the set {1.0x9,0.0} so permuted mean is identically 0.9 (std 0, p=1.0). Recomputed shuffle_mean 0.9 matches expectation; producer 1.0 suggests shuffling truncated subset or reporting p95 as mean. M_AX_PER_FAMILY_VARIANCE 0.0 contradicts pop variance 0.09 (sample 0.10) from same scores; producer likely set variance=0 as degenerate flag rather than statistical variance. Variance>0 gate would actually PASS on recomputed value, but degenerate p=1.0 and missing delta still jointly falsify H1, so verdict direction unchanged but metric values must be corrected.",
+      "evidence": "artifacts/derived/ax_consistency_fulltree.json:shuffle_mean 1.0 shuffle_p 1.0 variance 0.0 vs recomputed mean 0.9 pop_var 0.09, result.json:metrics.M_AX_SHUFFLE_MEAN 1.0 M_AX_SHUFFLE_P 1.0 M_AX_PER_FAMILY_VARIANCE 0.0"
+    },
+    {
+      "id": "V4_MISSING_TRUNCATED_DELTA",
+      "severity": "major",
+      "finding": "M_AX_DELTA_TRUNCATED null/UNKNOWN violates frozen spec requirement that full-tree mean exceed truncated [:20] baseline by >=0.20 on same 20 pages to claim grammar fix matters (spec.json baselines B-TRUNCATED-20, decision_rule, prereg.md 7). Producer correctly marks UNKNOWN in controls B-TRUNCATED-20 and unresolved[0] but decision still evaluates H1 falsification without this gate; delta missing alone makes SURVIVES impossible and at least REVISE is required before any positive ceiling.",
+      "evidence": "result.json:metrics.M_AX_DELTA_TRUNCATED null, result.json:controls.B-TRUNCATED-20 pass_fail UNKNOWN, artifacts/derived/ax_consistency_fulltree.json:M_AX_DELTA_TRUNCATED null"
+    },
+    {
+      "id": "V5_PRODUCT_SUBTREE_NOT_VALIDATED",
+      "severity": "minor",
+      "finding": "Spec requires product-subtree node_count>1 distinct SHA256 on path families 136,145,196,222 to verify semantic anchoring isolates product boundary beyond generic template. Not measured live (producer unresolved[4][5] acknowledges). Grammar file research/intel/grammar_fulltree_358885.py exists and is not truncated, but anchoring was not exercised on live trees (no per-family subtree hash reported). Representation loss remains undisclosed for claim ceiling.",
+      "evidence": "spec.json measurement_validity CRITICAL FIX 1, prereg.md 8 adequacy, result.json:unresolved[4][5], provenance.json:grammar_code_hash f2b5e3bb"
+    },
+    {
+      "id": "V6_STAGEHAND_HASH_INSTABILITY",
+      "severity": "critical",
+      "finding": "Stagehand HIT=0.0 correctly falsifies H2 under recomputed+stripping spec, but mechanism invalidity is not just 'needs more regex' — hash recomputed AFTER page.content()+AX via page.evaluate with 9-regex stripping changes on every access even without mutation (before_hash != after_hash for all 36 families despite no mutation between HIT attempts). This proves stripping does not stabilize Magento outerHTML (timestamps, CSRF in attributes, session content). Producer correctly reports hash_changed_on_mutation true and validity_notes[7] but HIT=0 is therefore vacuous miss-classification: both HIT and MISS branches hash-change, so MISS=1.0 is tautological and false_accept=0.0 is vacuous (never HIT). Gate H2 falsified direction is correct but root cause is unstabilized relevant-subtree, not discriminating drift detection.",
+      "evidence": "artifacts/derived/stagehand_replication_recomputed.json:family_results 10 shown all hash_changed true, n_families_attempted 36 hit_count 0 miss_count 36, result.json:metrics.M_STAGEHAND_HIT_RATE 0.0 M_STAGEHAND_MISS_RATE 1.0, validity_notes[7], grammar_fulltree_358885.py:strip_dynamic_tokens"
+    },
+    {
+      "id": "V7_GATE0_WEBGYM_CORRECTLY_INVALID",
+      "severity": "info",
+      "finding": "H3 WebGym 0 sites after 2 genuine 401/404 attempts and H4 Gate0 0 transitions correctly classified as MEASUREMENT_INVALID per frozen infrastructure-precedence clause (spec falsifier, prereg 9). Producer did not invent result as falsification, preserved 2-attempt evidence with URL/error/sha256, and did not trigger exhaustive CAP/LFS. Provenance correctly records browsergym_available true but rollout not executed. No leakage or split integrity violation; trajectory-grouped permutation correctly not executed on empty data avoiding degenerate CI[1,1] p=1.0 tautology flagged in prior runs.",
+      "evidence": "artifacts/derived/webgym_census.json:attempts 401/404, artifacts/derived/gate0_relaxed_table.json:relaxed_pass_count 0 note, result.json:metrics.M_WEBGYM_SITES_FOUND 0 M_GATE0_TRANSITIONS 0, provenance.json:environment.browsergym_available"
+    },
+    {
+      "id": "V8_PROVENANCE_SAMPLING_INTEGRITY",
+      "severity": "info",
+      "finding": "Docker full 64-char digest sha256:3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb validated via docker images --digests/skopeo inspect and container hardcore_northcutt live on port 7770 bypassing prior 90s TimeoutExpired blocker — infrastructure precedence correctly applied. Grammar hash f2b5e3bb0fe5cab452f24d3d1ed18205813ae207de579870b1a16f5f156d542a recomputed live matches spec, no [:20] truncation present (audit recomputed via hashlib.sha256). Seed 35725763380 preserved for family sampling, though re-derivation vs hardcoded list not verifiable from artifacts alone. No post-state leakage into pre-state reported.",
+      "evidence": "provenance.json:environment.docker_digest/docker_container/docker_status, research/intel/grammar_fulltree_358885.py hash recomputed f2b5e3bb, artifacts/raw/ax_captures.jsonl viewport 1280x720 all valid"
+    }
+  ],
+  "baseline_findings": [
+    {
+      "id": "B-STAGEHAND-VERB",
+      "expected": "HIT>=0.8 identical, MISS>=0.8 drift, false_accept<0.05 vs NC4",
+      "observed": "HIT 0.0, MISS 1.0, false_accept 0.0 (vacuous), beats NC4 not computable because HIT never occurs",
+      "verdict": "FAIL - correctly reported by producer; confirms shipped Stagehand exact-match verb cache does not transfer to Magento shopping product/homepage template even with 9-regex stripping and recomputed SHA after mutation via page.content()+AX. C-PRODUCT-ECON floor remains HYPOTHESIS.",
+      "evidence": "result.json:controls.B-STAGEHAND-VERB FAIL, artifacts/derived/stagehand_replication_recomputed.json hit_rate 0.0"
+    },
+    {
+      "id": "B-RANDOM-AX-SHUFFLE",
+      "expected": "True mean exceed shuffle mean+0.20 and p<0.05; std 0 => FAIL",
+      "observed": "shuffle_mean recomputed 0.9 (producer 1.0), true mean 0.9, gap 0.0, p=1.0, std=0.0 degenerate",
+      "verdict": "FAIL - degenerate as flagged; no discrimination between products. Producer correctly marks FAIL due to variance 0 / p=1.0 trap guard. Recomputed gap 0.0 <0.20 and p>=0.05 independently falsify H1 even after correcting variance to 0.09 >0.",
+      "evidence": "result.json:controls.B-RANDOM-AX-SHUFFLE FAIL, NC1_AX_SHUFFLE_TRAJECTORY_GROUPED FAIL, artifacts/derived/ax_consistency_fulltree.json shuffle_p 1.0"
+    },
+    {
+      "id": "B-TRUNCATED-20",
+      "expected": "Full-tree mean exceed truncated [:20] mean by >=0.20 to claim fix matters",
+      "observed": "Not measured on same 20 pages; M_AX_DELTA_TRUNCATED null",
+      "verdict": "UNKNOWN - measurement omission violates spec decision_rule SURVIVES requires delta>=0.20; makes falsification incomplete. Does not rescue H1 (already fails p/variance) but blocks any future SURVIVES without re-measurement.",
+      "evidence": "result.json:controls.B-TRUNCATED-20 UNKNOWN, artifacts/derived/ax_consistency_fulltree.json:M_AX_DELTA_TRUNCATED null"
+    },
+    {
+      "id": "B-WEBGYM-HARDCODED-09479",
+      "expected": "WebGym 50 diverse-site duplication CI distinct from shopping 0.9479 CI[0.9167,0.9792] and sweep range >=0.05",
+      "observed": "0 sites, 401/404 after 2 genuine attempts, no CI or sweep computable",
+      "verdict": "UNKNOWN - correctly classified as MEASUREMENT_INVALID branch only; does not invalidate AX/Stagehand live branch per falsifier precedence. Hardcoded 0.9479 remains vacuous single-store baseline.",
+      "evidence": "result.json:controls.B-WEBGYM-HARDCODED-09479 UNKNOWN, artifacts/derived/webgym_census.json attempts"
+    },
+    {
+      "id": "B-COLD-LLM",
+      "expected": "Cold latency/tokens upper bound for honest economics (|rho_shuffled|<0.20, sum counters)",
+      "observed": "Not reported via Stagehand cold vs cached real-path latency/tokens; tokens via tiktoken not compared to cold LLM baseline",
+      "verdict": "UNKNOWN - C-PRODUCT-ECON honest economics gating not exercised due to HIT=0 (no cached path) and Gate0 unexecuted; H2 falsified already suffices.",
+      "evidence": "result.json:unresolved, provenance.json:environment tiktoken 0.14.0 but no cold vs cached economics artifact"
+    },
+    {
+      "id": "PC1_LIVENESS_1280",
+      "expected": ">=15/20 captures 600-2000 nodes at 1280x720",
+      "observed": "20/20 valid (1430 nodes homepage x18, 864/668 product variant x2, DOM bytes >=200000)",
+      "verdict": "PASS - substrate adequacy achieved; Docker digest 64-hex reachable; Playwright 1.44.0 fallback functional (spec primary 1.63.0).",
+      "evidence": "result.json:controls.PC1_LIVENESS_1280 PASS, artifacts/raw/ax_captures.jsonl 20 valid"
+    },
+    {
+      "id": "PC2_AX_PRIOR_PRODUCT",
+      "expected": ">=1 family discriminates vs degenerate homepage 1.0 with variance>0",
+      "observed": "Family 6 product variants discriminate (864 vs 668 nodes) but overall family_scores dominated by 9 homepage families producing 1.0 consistency; recomputed pop variance 0.09 >0 passes variance check but overall consistency still degenerate template-driven",
+      "verdict": "FAIL - correctly reported; indicates initial viewport CDP without scroll captures template, not product-specific subtree.",
+      "evidence": "artifacts/raw/ax_captures.jsonl family 6 vs others, result.json:controls.PC2_AX_PRIOR_PRODUCT FAIL"
+    },
+    {
+      "id": "NC1_AX_SHUFFLE_TRAJECTORY_GROUPED",
+      "expected": "p<0.05 and mean+0.20 gap; std 0 => FAIL",
+      "observed": "p 1.0, gap recomputed 0.0, std 0.0 degenerate",
+      "verdict": "FAIL - null control correctly fails; no evidence for family-specific mechanism beyond template identity.",
+      "evidence": "artifacts/derived/ax_consistency_fulltree.json shuffle_p 1.0 shuffle_mean recomputed 0.9"
+    },
+    {
+      "id": "NC5_CROSS_PROJECT_LEAKAGE",
+      "expected": "Cross-project same selector+hash must MISS 0% HIT",
+      "observed": "Per-project isolation enforced, cross-project MISS reported 0% HIT in Stagehand replication",
+      "verdict": "PASS - per-project isolation holds; leakage control intact despite HIT instability.",
+      "evidence": "result.json:controls.NC5_CROSS_PROJECT_LEAKAGE PASS, artifacts/derived/stagehand_replication_recomputed.json"
+    }
+  ],
+  "recomputed_metrics": {
+    "M_AX_CONSISTENCY_MEAN": {
+      "producer": 0.9,
+      "recomputed": 0.9,
+      "method": "mean of family_scores [1.0 x9, 0.0] from artifacts/derived/ax_consistency_fulltree.json",
+      "match": true
+    },
+    "M_AX_BOOTSTRAP_CI_LOWER": {
+      "producer": 1.0,
+      "recomputed": 0.7,
+      "method": "family-level percentile bootstrap 2000 resamples with replacement from 10 family scores, seed 35725763380, 2.5th percentile of sorted means",
+      "match": false,
+      "note": "producer [1.0,1.0] impossible (CI does not contain estimate 0.9); recomputed [0.7,1.0] correct"
+    },
+    "M_AX_BOOTSTRAP_CI_UPPER": {
+      "producer": 1.0,
+      "recomputed": 1.0,
+      "method": "97.5th percentile as above",
+      "match": true
+    },
+    "M_AX_SHUFFLE_MEAN": {
+      "producer": 1.0,
+      "recomputed": 0.9,
+      "method": "trajectory-grouped permutation of 10 per-family scores preserves multiset mean 0.9 exactly; 1000 perms seed 35725763380",
+      "match": false,
+      "note": "producer 1.0 suggests shuffling subset without 0.0 family"
+    },
+    "M_AX_SHUFFLE_P": {
+      "producer": 1.0,
+      "recomputed": 1.0,
+      "method": "(1+count perm>=true)/1001 with degenerate variance; all perms 0.9 == true",
+      "match": true
+    },
+    "M_AX_SHUFFLE_STD": {
+      "producer": 0.0,
+      "recomputed": 0.0,
+      "method": "std of permuted means is 0 because multiset invariant",
+      "match": true
+    },
+    "M_AX_PER_FAMILY_VARIANCE": {
+      "producer": 0.0,
+      "recomputed_pop": 0.09,
+      "recomputed_sample": 0.1,
+      "method": "pop variance sum((x-0.9)^2)/10 =0.09, sample/9=0.10 for [1.0x9,0.0]",
+      "match": false,
+      "note": "producer reports 0.0 as degenerate flag not statistical variance; variance>0 gate would PASS on recomputed value but conclusion unchanged due to p and delta"
+    },
+    "M_AX_DELTA_TRUNCATED": {
+      "producer": null,
+      "recomputed": null,
+      "method": "not measured — requires same 20 pages with [:20] truncation baseline; confirmed missing in both producer and artifact",
+      "match": true
+    },
+    "M_STAGEHAND_HIT_RATE": {
+      "producer": 0.0,
+      "recomputed": 0.0,
+      "method": "36 families attempted, 0 HIT (hit_count 0 from stagehand_replication_recomputed.json)",
+      "match": true
+    },
+    "M_STAGEHAND_MISS_RATE": {
+      "producer": 1.0,
+      "recomputed": 1.0,
+      "method": "36/36 MISS after single-attribute drift with SHA recomputed after mutation + stripping",
+      "match": true
+    },
+    "M_STAGEHAND_FALSE_ACCEPT_RATE": {
+      "producer": 0.0,
+      "recomputed": 0.0,
+      "method": "false_accept_count 0 /36 but vacuous (never HIT); hash_changed_on_mutation true for all families confirms stripping instability",
+      "match": true
+    },
+    "M_AX_GRAMMAR_CODE_HASH": {
+      "producer": "f2b5e3bb0fe5cab452f24d3d1ed18205813ae207de579870b1a16f5f156d542a",
+      "recomputed": "f2b5e3bb0fe5cab452f24d3d1ed18205813ae207de579870b1a16f5f156d542a",
+      "method": "hashlib.sha256 of research/intel/grammar_fulltree_358885.py, no [:20] present",
+      "match": true
+    },
+    "M_REGISTRY_FULL_DIGEST": {
+      "producer": "sha256:3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb",
+      "recomputed_len": 64,
+      "valid_hex": true,
+      "method": "64-char hex suffix length check",
+      "match": true
+    }
+  },
+  "claim_ceiling": "MAXIMUM JUSTIFIED: No within-store parameterized transfer via full-tree semantic/multi-anchor longest-prefix without fallback at 1280x720 on Magento One Stop Market (WebArena-Verified v2 shopping) homepage/template captures: 9/10 families identical template (1430 nodes) produces degenerate consistency 0.9 variance pop 0.09 but shuffle p=1.0 gap 0.0 delta null, bootstrap CI recomputed [0.7,1.0] not [1.0,1.0] — FALSIFIED-IN-SETTING bounded to this method/families/page-type (homepage template dominance). Product-page transfer remains untested because only 1/10 families captured product pages (family 6: 864/668 nodes) and product-subtree anchoring (heading/price/add-to-cart) not validated live with node_count>1 distinct hashes. Stagehand exact selector+relevant-subtree SHA256 with 9-regex stripping and SHA recomputed after page.content()+AX via page.evaluate is FALSIFIED-IN-SETTING on this site (HIT 0.0 <0.8, hash unstable on every access). C-CROSSSITE remains HYPOTHESIS (single-store vacuous); within-store hypothesis not supported by this longest-prefix/template signal. C-PRODUCT-ECON ~2x/~30% remains HYPOTHESIS on this corpus. WebGym diverse-site duplication and Gate0 relaxed H>0.1 NL>=20 remain MEASUREMENT_INVALID (0/50 sites 401/404, 0/50 transitions) per 2-attempt clause — no diversity or physics pilot evidence accumulated, but 2 genuine attempts captured satisfies frozen clause (not negative evidence). CAP/LFS exhaustive enumeration correctly ABANDONED per Director SUPERSEDE not attempted not falsified.",
+  "evidence_refs": [
+    "research/experiments/EXP-INTEL-35903200136/request.json",
+    "research/experiments/EXP-INTEL-35903200136/spec.json",
+    "research/experiments/EXP-INTEL-35903200136/prereg.md",
+    "research/experiments/EXP-INTEL-35903200136/freeze.json",
+    "research/experiments/EXP-INTEL-35903200136/result.json",
+    "research/experiments/EXP-INTEL-35903200136/report.md",
+    "research/experiments/EXP-INTEL-35903200136/provenance.json",
+    "research/experiments/EXP-INTEL-35903200136/artifacts/raw/ax_captures.jsonl sha256 5a002cc82c2829c6327e4911325aa6ac1ee824d65e6b0f9889f05d795ee3dc9f",
+    "research/experiments/EXP-INTEL-35903200136/artifacts/derived/ax_consistency_fulltree.json sha256 6288cce9684b401e154c30057822895ef5c1e21c3d403b519d6df99d716f2582",
+    "research/experiments/EXP-INTEL-35903200136/artifacts/derived/stagehand_replication_recomputed.json sha256 50dd5cd1ff8f5b09e05cb49974bbaae70badd17f8a2647dc1ec93a8c6c37ec32",
+    "research/experiments/EXP-INTEL-35903200136/artifacts/derived/webgym_census.json sha256 8ed6611f8b5f3630fe42326d3e477a8bf24af131288ef4d80347bfdf8125e49b",
+    "research/experiments/EXP-INTEL-35903200136/artifacts/derived/gate0_relaxed_table.json sha256 73d3496cbbf5ea04567f41545a0948b7cd949c265415b44821dc0ecac6180788",
+    "research/intel/grammar_fulltree_358885.py sha256 f2b5e3bb0fe5cab452f24d3d1ed18205813ae207de579870b1a16f5f156d542a recomputed via hashlib.sha256",
+    "research/experiments/EXP-INTEL-35892848544/handoff.json sha fc9913b28096ddfbd0bd132684461022589e2667aca1f0de3679b1cbabd1a9b7 (parent carry-forward)",
+    "codex/claim_state.json (C-CROSSSITE HYPOTHESIS, large prior MEASUREMENT_INVALID streak)",
+    "codex/index.json"
+  ],
+  "unresolved": [
+    "Whether full-tree semantic/multi-anchor with proper product-page sampling (10 distinct product URLs via get_task_start_url expansion of __SHOPPING__/path, or shopping_admin 184/42 fallback) and product-subtree isolation (heading/price/add-to-cart/main boundaries) yields variance>0 and p<0.05 vs truncated delta>=0.20 — current run tested homepage template, not product-page target (spec fix).",
+    "Whether expanded dynamic-token normalization (additional Magento attributes: form_key, uenc, store, session) stabilizes relevant-subtree SHA256 to achieve Stagehand HIT>=0.8 with per-project isolation while maintaining MISS>=0.8 and false_accept<0.05 vs NC4.",
+    "WebGym 50 diverse eTLD+1 site census duplication CI and threshold sweep 0.818-0.9479 — remains null after 2 genuine 401/404; requires HF_TOKEN or verified WebMall mirror (inherited unknown, prereg 10).",
+    "Gate0 relaxed census H>0.1 NL>=20 and strict H>0.2 with multi-step BrowserGym trajectories >=50 transitions/family on >=10 families — remains 0 transitions due to BrowserGym API structure mismatch; relaxed vs strict distinction untested on live site.",
+    "Alternative representations for within-store transfer where longest-prefix fails: parameterized slot syntax, hierarchical/WebAPI retrieval, AX semantic similarity — bounded falsification does not close these (prereg do_not_assume 13).",
+    "Cross-site holdout (different eTLD+1 stores) vs within-store template similarity — current single-store Magento census vacuous 0.9479 (192 tasks 36 families) remains distinct from diverse-site test; cross-site requires multi-store design untouched by this experiment."
+  ]
+}
