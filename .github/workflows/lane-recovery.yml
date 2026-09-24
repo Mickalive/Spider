@@ -19,6 +19,7 @@ jobs:
       - name: Wake freshest global direction after lane interruption
         env:
           GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
         shell: bash
         run: |
           set -euo pipefail
