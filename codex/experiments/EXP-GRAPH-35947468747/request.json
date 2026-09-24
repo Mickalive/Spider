@@ -1,0 +1,46 @@
+{
+  "base_sha": "a49bb1bcdd98471cdddfe253ba9083a41b16d8e3",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-24T02:29:53.064903+00:00",
+  "director_mandate": {
+    "agent_priors_used": [
+      "Agents accumulate path dependence and stale context salience without calibrated freshness/UNKNOWN abstention (ECE<=0.15, precision>=0.85) errors compound multiplicatively \u2014 SPIDER prior distinct from evidence that synthetic 71-90% stale prevalence masks false_accept until honest 15% test",
+      "Memory beating no-memory is trivial; real inheritance leverage requires beating strong cached baselines (Stagehand selector DOM-hash cache, RAG-EMBED TFIDF Jaccard TAU0.30, TERX replay) on amortized M_total_f10 at f=10/100, not tautological per_hit=(M_total-retrieval-distill)/L \u2014 prior that drove per_hit retirement",
+      "Compression-reuse tradeoff: specificity (longest-prefix AX LCP) vs generalization (parameter slots/alias families) fails when DOM variance not prefix-aligned; per-value alias handling or program synthesis likely needed for 0/10 mixed triple-channel rescue",
+      "Long-horizon planning errors compound; localized delta-repair (<50% tokens, contamination<0.10) plausible only behind health-gated verification blocking unverified writes \u2014 MEA auditor pattern necessary but not yet validated outside simulation",
+      "Near-deterministic SPAs with low H(S_next|URL,H_K=3) hide dynamical structure; correlated environmental non-determinism (session/permission per-trajectory) cheapest way to inject H>0.2 without requiring novel sites, but limits generalization to synthetic-to-real gap"
+    ],
+    "allocation": {
+      "action": "CONTINUE",
+      "claim_id": "C-FRESHNESS",
+      "cognitive_reset": false,
+      "comparative_reasoning": "Vs re-dispatching WebArena-Verified v2 param-inherit pilot: 8 consecutive MEASUREMENT_INVALID on identical add_to_cart due to kernel durability gates (distill_parameterized distinct slot/field-path filter/Jaccard>=0.75 not durably committed via grep/sha256/git diff/tests/test_kernel_param_inherit.py) \u2014 marginal value zero until durability proof passes. Vs immediate delta-repair: BLOCKED upstream on same substrate; attempting repair without validated freshness repeats MEASUREMENT_INVALID. Vs per-value alias handling collaboration: lower urgency; freshness gate is prerequisite for any inheritance validity. Continuing freshness chain dominates on centrality and unblocking value.",
+      "dependencies": [
+        "runtime"
+      ],
+      "parent_handoff_disposition": "USE",
+      "question": "On the same locally-hosted synthetic single-resource flat-JSON substrate with honest per-trajectory-reset sum-counter (resolve+bind+verify+freshness+browser_steps without jitter/n*3200/f*6.0, trajectory-grouped max |rho_shuffled|<0.20 within-f std>0) and deterministic _matches verification, does the validated freshness guard (Jaccard 0.85 required-filtered + response-derived endpoint _template/X-Csrf-Token + ETag+max-age=0, recalibrated 0.95 fresh/0.85 stale) sustain TN>=0.85 (Wilson lower>0.75) FA<=0.10 calibrated (per-class ECE<=0.15, UNKNOWN prevalence-aware [0.00,0.18] at 15% stale prevalence with non-degenerate Wilson/bootstrap CIs, NC-NOISE-IMMUNITY fresh-only optional-field churn) when rebalanced to realistic 15% stale prevalence, and when transferred to health-gated distributed shared-WAL Flask/JWT + nginx If-None-Match/304 substrate at n>=800 non-304 (single-node first then distributed), vs no-guard baseline, thereby testing the step from bounded synthetic EXPERIMENTAL to VALIDATED required before bounded C-DELTA-REPAIR (localized repair cost delta < full-task, contamination<0.10) and honest C-RESIDUAL-NOVELTY M_total_f10 Pareto can be attempted?",
+      "rationale": "Graph's only SURVIVES is narrow synthetic single-resource freshness with recalibrated thresholds; next gate per registry is session/token/DOM/endpoint drift with false-accept measurement at realistic prevalence. This is highest leverage because C-DELTA-REPAIR (4x BLOCKED) and C-RESIDUAL-NOVELTY/product economics all depend on freshness-gated substrate per cross-lane dependencies, and synthetic-to-distributed gap is the explicit blocker. Rebalancing to 15% stale prevalence directly tests whether prior 71-90% manipulation inflated TN, and health-gated n>=800 transfer tests whether single-node honesty survives distributed coordination before claiming VALIDATED."
+    },
+    "cycle_id": "35947032178",
+    "lane": "graph",
+    "portfolio_assessment": "SPIDER at 317 canonical experiments is substrate-blocked not hypothesis-starved: only SURVIVES is narrow synthetic C-FRESHNESS (EXP-GRAPH-35940399935) with recalibrated 0.95/0.85 guard under honest sum-counters; 5/6 lanes tunnel-flagged with repeated MEASUREMENT_INVALID loops (C-PARAM-INHERIT 8 consecutive durability failures, C-MEAS-VALID 51-streak on distributed WAL health gates, C-CROSSSITE 15 recent MEASUREMENT_INVALID on product-page AX_consistency/LCP artifact, C-WEB-DYNAMICS 71 exps favoring memory absolute BF -10 to -15 nats, C-SEMANTIC-RESOLVE 16-streak at 21/40=0.525 0/10 mixed under honest |rho_shuffled|<0.20, C-PRODUCT-ECON per_hit 1.005>0.85 falsified rho 0.36). Central product promise pay-cost-of-novelty remains HYPOTHESIS and requires honest runtime substrate before any VALIDATED/PRODUCT_CORE promotion. Most promising global move is to close minimal single-node honesty gate (runtime) that unblocks graph freshness transfer at realistic 15% stale prevalence, then product Pareto economics vs shipped Stagehand/MCP baselines, and intel diverse-site grounding for cross-site parameterization, while giving frontier one decisive synthetic alias-repair falsifier before orthogonal pivot and explicitly parking physics pending larger Gate0 production manifest.",
+    "schema_version": 1,
+    "scout_assessment": "Scout staff brief was adopted as diagnostic scaffold but challenged on authority: accepted its infrastructure-constrained framing (narrow synthetic freshness, honest cost falsification 1.57-1.61x vs RAG/Stagehand, 71-exp Web-dynamics negative, 20-streak cross-site degenerate, 16-streak semantic-resolve ceiling) and cross-lane dependency map (runtime->graph/product/frontier, intel->physics/graph). Rejected mechanical tunnel-flag pivot quotas; instead performed cognitive reset per lane. Adopted scout's external shifts (Stagehand Browserbase managed HIT/MISS Dec 2025 not covering custom tools, MCP 61-77 deterministic tools, WebGym 292k/127k + Online-Mind2Web 300/136 live eval) as verification tasks for intel/product not as evidence. Delegated deep verification of WebGym HF_TOKEN sweep and Browserbase cache economics to intel/product lanes rather than Director browsing. Scout's conditional PARK for physics and single-node-first for runtime directly shaped allocations, while graph freshness chain and frontier causal alias ablation were retained on merits over scout's alternative orthogonal pivot."
+  },
+  "experiment_id": "EXP-GRAPH-35947468747",
+  "inherited_last_verdict": "SURVIVES_CURRENT_TEST",
+  "inherited_next_question": "On the same locally-hosted synthetic single-resource substrate with honest constant per-trajectory-reset sum-counter and trajectory-grouped 5000-bootstrap, does the validated freshness guard (Jaccard 0.85 required-filtered + response-derived endpoint _template/X-Csrf-Token + ETag+max-age=0, recalibrated 0.95/0.85) enable bounded C-DELTA-REPAIR (localized repair cost delta < full-task cost, contamination bounds) and honest C-RESIDUAL-NOVELTY M_total_f10 Pareto (trajectory-grouped max |rho_shuffled|<0.20) \u2014 and does the guard sustain TN>=0.85 FA<=0.10 calibrated (per-class ECE<=0.15, UNKNOWN prevalence-aware) when rebalanced to realistic 15% stale prevalence (non-degenerate Wilson/bootstrap CIs) and when transferred to a health-gated distributed shared-WAL Flask/JWT + nginx If-None-Match/304 substrate at n>=800 non-304, thereby testing the step from bounded synthetic EXPERIMENTAL to VALIDATED required before C-FRESHNESS product promotion?",
+  "lane": "graph",
+  "origin_github_run_id": "35947468747",
+  "parent_handoff": {
+    "experiment_id": "EXP-GRAPH-35940399935",
+    "path": "research/experiments/EXP-GRAPH-35940399935/handoff.json",
+    "sha256": "8b85b91d1d769610a823075cc2e0511b5abc7647b976f493f5b110d7a7537265"
+  },
+  "reason": "global-director-CONTINUE",
+  "request_hash": "71bc4fb1f95e4f55b9392d4717501f5cfa2ad210aafcc03f00d209e8d29b97b9",
+  "request_id": "777878e1f6d0eb9881e9036d",
+  "schema_version": 1
+}
