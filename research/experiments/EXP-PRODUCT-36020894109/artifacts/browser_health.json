@@ -1,0 +1,14 @@
+{
+ "experiment_id": "EXP-PRODUCT-36020894109",
+ "playwright_version": "1.44.0",
+ "playwright_expected_frozen": "1.63.0",
+ "playwright_ax_nodes_synthetic_60node_dom": 46,
+ "playwright_ax_gt_10": true,
+ "playwright_launch": "ok",
+ "browsergym_docker_image_present": false,
+ "rho_proxy_real": null,
+ "rho_proxy_real_note": "NULL: OPENAI_API_KEY absent; no real LLM tokens measurable",
+ "safety_CuP": null,
+ "safety_note": "NULL: ST-WebAgentBench instrumentation requires live BrowserGym pages + LLM",
+ "scope": "supplementary honesty signal only; does NOT satisfy frozen MV6 Docker BrowserGym 0.14.3 2000-node CDP getFullAXTree requirement"
+}

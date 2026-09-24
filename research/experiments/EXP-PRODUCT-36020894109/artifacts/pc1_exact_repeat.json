@@ -1,0 +1,57 @@
+{
+ "experiment_id": "EXP-PRODUCT-36020894109",
+ "definition": "B-STAGEHAND-CACHE exact repeat at n=0: hit iff response-body hash identical; disclosed file-proxy DOM hash (Docker BrowserGym AX unavailable)",
+ "n": 5,
+ "hits": 5,
+ "hit_rate": 1.0,
+ "expected": "hit_rate 1.0 (5/5 spot-check), per_hit ~50 tokens",
+ "per_hit_tokens_on_hit": 50,
+ "pass": true,
+ "rows": [
+  {
+   "family_id": "family_00",
+   "hash1": "10b4f20916a56ae0",
+   "hash2": "10b4f20916a56ae0",
+   "hit": true,
+   "hit_tokens": 50,
+   "status1": 200,
+   "status2": 200
+  },
+  {
+   "family_id": "family_01",
+   "hash1": "0ee11f51fecbaa89",
+   "hash2": "0ee11f51fecbaa89",
+   "hit": true,
+   "hit_tokens": 50,
+   "status1": 200,
+   "status2": 200
+  },
+  {
+   "family_id": "family_02",
+   "hash1": "52d6ab723906f10b",
+   "hash2": "52d6ab723906f10b",
+   "hit": true,
+   "hit_tokens": 50,
+   "status1": 200,
+   "status2": 200
+  },
+  {
+   "family_id": "family_03",
+   "hash1": "d31af424fea62ee1",
+   "hash2": "d31af424fea62ee1",
+   "hit": true,
+   "hit_tokens": 50,
+   "status1": 200,
+   "status2": 200
+  },
+  {
+   "family_id": "family_04",
+   "hash1": "63a657f07e8b149b",
+   "hash2": "63a657f07e8b149b",
+   "hit": true,
+   "hit_tokens": 50,
+   "status1": 200,
+   "status2": 200
+  }
+ ]
+}

@@ -1,0 +1,76 @@
+{
+ "experiment_id": "EXP-PRODUCT-36020894109",
+ "check": "MV3/PC2 kernel dot-regex spot-check",
+ "kernel_sha256": "d926279d5ee14a044a2f13b8abc09202df9f5adb9e86feaadeb61818a15f4038",
+ "regex_in_code": "\\$\\{([A-Za-z_][A-Za-z0-9_\\.]*)\\}",
+ "regex_frozen_rendering": "\\$\\{[A-Za-z_][A-Za-z0-9_\\.]*\\}",
+ "regex_rendering_note": "frozen spec/prereg render the dotted language without showing the capture group; kernel._bind (match.group(1)) and _template_slots (findall) REQUIRE the capture group, so the operational frozen form includes parens: r'\\$\\{([A-Za-z_][A-Za-z0-9_\\.]*)}' \u2014 matching-language identical with/without parens for fullmatch/sub; 5/5 functional gate is the binding MV3 criterion",
+ "regex_matches_frozen": true,
+ "n_pass": 5,
+ "n_total": 5,
+ "confidence_all_ge_080": true,
+ "family_gate_UNKNOWN_on_wrong_family": true,
+ "pass": true,
+ "results": [
+  {
+   "family_id": "family_00",
+   "template": "/api/items/${item.id}",
+   "slot": "item.id",
+   "value": "IT-77",
+   "status": "EXECUTABLE",
+   "bound_url": "/api/items/IT-77",
+   "expected": "/api/items/IT-77",
+   "pass": true,
+   "wrong_family_status": "UNKNOWN",
+   "wrong_family_unknown": true
+  },
+  {
+   "family_id": "family_01",
+   "template": "/api/families/${family.id}/items",
+   "slot": "family.id",
+   "value": "fam_03",
+   "status": "EXECUTABLE",
+   "bound_url": "/api/families/fam_03/items",
+   "expected": "/api/families/fam_03/items",
+   "pass": true,
+   "wrong_family_status": "UNKNOWN",
+   "wrong_family_unknown": true
+  },
+  {
+   "family_id": "family_02",
+   "template": "https://${site.name}/catalog",
+   "slot": "site.name",
+   "value": "shop07.example.com",
+   "status": "EXECUTABLE",
+   "bound_url": "https://shop07.example.com/catalog",
+   "expected": "https://shop07.example.com/catalog",
+   "pass": true,
+   "wrong_family_status": "UNKNOWN",
+   "wrong_family_unknown": true
+  },
+  {
+   "family_id": "family_03",
+   "template": "/api/users/${user.profile.id}/profile",
+   "slot": "user.profile.id",
+   "value": "u-9182",
+   "status": "EXECUTABLE",
+   "bound_url": "/api/users/u-9182/profile",
+   "expected": "/api/users/u-9182/profile",
+   "pass": true,
+   "wrong_family_status": "UNKNOWN",
+   "wrong_family_unknown": true
+  },
+  {
+   "family_id": "family_04",
+   "template": "/orders/${order.item.sku}/status",
+   "slot": "order.item.sku",
+   "value": "SKU-42A",
+   "status": "EXECUTABLE",
+   "bound_url": "/orders/SKU-42A/status",
+   "expected": "/orders/SKU-42A/status",
+   "pass": true,
+   "wrong_family_status": "UNKNOWN",
+   "wrong_family_unknown": true
+  }
+ ]
+}

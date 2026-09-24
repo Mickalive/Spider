@@ -1,0 +1,384 @@
+{
+ "experiment_id": "EXP-PRODUCT-36020894109",
+ "conditions": {
+  "B-COLD": {
+   "key": "COLD",
+   "M_total_f10_tokens_mean": 5992.708333333333,
+   "M_total_f100_tokens_mean": 5992.708333333333,
+   "M_browser_calls_mean": 21.791666666666668,
+   "M_latency_ms_mean": 12203.333333333334,
+   "M_per_hit_mean": 550.0,
+   "resolve_rate": 0.0,
+   "fixed_amort_per_f": {
+    "f10": 0.0,
+    "f100": 0.0
+   },
+   "retrieval_tool_subtracted": 0.0
+  },
+  "B-RAG-EMBED-TAU030-QCR-K5": {
+   "key": "RAG",
+   "M_total_f10_tokens_mean": 1315.1041666666667,
+   "M_total_f100_tokens_mean": 1315.1041666666667,
+   "M_browser_calls_mean": 10.895833333333334,
+   "M_latency_ms_mean": 2595,
+   "M_per_hit_mean": 103.92512435481186,
+   "resolve_rate": 0.234375,
+   "fixed_amort_per_f": {
+    "f10": 0.0,
+    "f100": 0.0
+   },
+   "retrieval_tool_subtracted": 200
+  },
+  "B-STAGEHAND-CACHE": {
+   "key": "STAGEHAND",
+   "M_total_f10_tokens_mean": 4719.270833333333,
+   "M_total_f100_tokens_mean": 4719.270833333333,
+   "M_browser_calls_mean": 19.244791666666668,
+   "M_latency_ms_mean": 9656.458333333334,
+   "M_per_hit_mean": 432.8125,
+   "resolve_rate": 0.234375,
+   "fixed_amort_per_f": {
+    "f10": 0.0,
+    "f100": 0.0
+   },
+   "retrieval_tool_subtracted": 0.0
+  },
+  "B-DSM-O1-COMPILE": {
+   "key": "DSM",
+   "M_total_f10_tokens_mean": 6236.145833333333,
+   "M_total_f100_tokens_mean": 6164.145833333333,
+   "M_browser_calls_mean": 32.6875,
+   "M_latency_ms_mean": 12312.291666666666,
+   "M_per_hit_mean": 562.1466112012987,
+   "resolve_rate": 0.0,
+   "fixed_amort_per_f": {
+    "f10": 80.0,
+    "f100": 8.0
+   },
+   "retrieval_tool_subtracted": 30
+  },
+  "B-SGDR-AWM": {
+   "key": "SGDR",
+   "M_total_f10_tokens_mean": 1295.1041666666667,
+   "M_total_f100_tokens_mean": 1295.1041666666667,
+   "M_browser_calls_mean": 10.895833333333334,
+   "M_latency_ms_mean": 2595,
+   "M_per_hit_mean": 103.92512435481186,
+   "resolve_rate": 0.234375,
+   "fixed_amort_per_f": {
+    "f10": 0.0,
+    "f100": 0.0
+   },
+   "retrieval_tool_subtracted": 180
+  },
+  "P-SPIDER-ECON-PARETO": {
+   "key": "SPIDER",
+   "M_total_f10_tokens_mean": 1981.09375,
+   "M_total_f100_tokens_mean": 1891.09375,
+   "M_browser_calls_mean": 13.208333333333334,
+   "M_latency_ms_mean": 3992.890625,
+   "M_per_hit_mean": 168.55787586256338,
+   "resolve_rate": 1.0,
+   "fixed_amort_per_f": {
+    "f10": 100.0,
+    "f100": 10.0
+   },
+   "retrieval_tool_subtracted": 0.0
+  }
+ },
+ "f_levels": [
+  10,
+  100
+ ],
+ "dsm_site_overlap": [],
+ "dsm_n_task_sites": 36,
+ "dsm_registry_sites_considered": 0,
+ "gaps": {
+  "saving_vs_COLD_f10": 0.6694159568920564,
+  "saving_vs_COLD_f100": 0.6844342082391796,
+  "ratio_vs_RAG_f10": 1.5064158415841584,
+  "ratio_vs_RAG_f100": 1.437980198019802,
+  "browser_latency_saving_vs_COLD": 0.4940072375839585,
+  "resolve_margin_vs_COLD": 1.0,
+  "resolve_margin_vs_RAG": 0.765625,
+  "resolve_margin_vs_STAGEHAND": 0.765625,
+  "resolve_margin_vs_DSM": 1.0,
+  "resolve_margin_vs_SGDR": 0.765625,
+  "saving_vs_COLD_f10_CI95": [
+   0.6520424126542673,
+   0.687224057013732
+  ],
+  "ratio_vs_RAG_f10_CI95": [
+   1.479572104505246,
+   1.5306356174842528
+  ]
+ },
+ "rho_diagnostics": {
+  "rho_novelty_pooled": 0.7620215299096192,
+  "rho_novelty_CI95": [
+   0.6885563493002301,
+   0.8229741180088116
+  ],
+  "rho_length_pooled": -0.2871341837663058,
+  "per_family_rho_novelty": {
+   "family_00": {
+    "n": 6,
+    "rho_novelty": 0.9999999999999999
+   },
+   "family_01": {
+    "n": 6,
+    "rho_novelty": 0.9999999999999999
+   },
+   "family_02": {
+    "n": 6,
+    "rho_novelty": 1.0
+   },
+   "family_03": {
+    "n": 6,
+    "rho_novelty": 1.0000000000000002
+   },
+   "family_04": {
+    "n": 6,
+    "rho_novelty": 0.9999999999999999
+   },
+   "family_05": {
+    "n": 6,
+    "rho_novelty": 0.9999999999999999
+   },
+   "family_06": {
+    "n": 6,
+    "rho_novelty": 1.0
+   },
+   "family_07": {
+    "n": 6,
+    "rho_novelty": 1.0000000000000002
+   },
+   "family_08": {
+    "n": 6,
+    "rho_novelty": 0.9999999999999999
+   },
+   "family_09": {
+    "n": 6,
+    "rho_novelty": 0.9999999999999999
+   },
+   "family_10": {
+    "n": 6,
+    "rho_novelty": 1.0
+   },
+   "family_11": {
+    "n": 6,
+    "rho_novelty": 1.0000000000000002
+   },
+   "family_12": {
+    "n": 5,
+    "rho_novelty": 1.0
+   },
+   "family_13": {
+    "n": 5,
+    "rho_novelty": 1.0
+   },
+   "family_14": {
+    "n": 5,
+    "rho_novelty": 1.0000000000000002
+   },
+   "family_15": {
+    "n": 5,
+    "rho_novelty": 1.0
+   },
+   "family_16": {
+    "n": 5,
+    "rho_novelty": 1.0
+   },
+   "family_17": {
+    "n": 5,
+    "rho_novelty": 1.0
+   },
+   "family_18": {
+    "n": 5,
+    "rho_novelty": 1.0000000000000002
+   },
+   "family_19": {
+    "n": 5,
+    "rho_novelty": 1.0
+   },
+   "family_20": {
+    "n": 5,
+    "rho_novelty": 1.0
+   },
+   "family_21": {
+    "n": 5,
+    "rho_novelty": 1.0
+   },
+   "family_22": {
+    "n": 5,
+    "rho_novelty": 1.0000000000000002
+   },
+   "family_23": {
+    "n": 5,
+    "rho_novelty": 1.0
+   },
+   "family_24": {
+    "n": 5,
+    "rho_novelty": 1.0
+   },
+   "family_25": {
+    "n": 5,
+    "rho_novelty": 1.0
+   },
+   "family_26": {
+    "n": 5,
+    "rho_novelty": 1.0000000000000002
+   },
+   "family_27": {
+    "n": 5,
+    "rho_novelty": 1.0
+   },
+   "family_28": {
+    "n": 5,
+    "rho_novelty": 1.0
+   },
+   "family_29": {
+    "n": 5,
+    "rho_novelty": 1.0
+   },
+   "family_30": {
+    "n": 5,
+    "rho_novelty": 1.0000000000000002
+   },
+   "family_31": {
+    "n": 5,
+    "rho_novelty": 1.0
+   },
+   "family_32": {
+    "n": 5,
+    "rho_novelty": 1.0
+   },
+   "family_33": {
+    "n": 5,
+    "rho_novelty": 1.0
+   },
+   "family_34": {
+    "n": 5,
+    "rho_novelty": 1.0000000000000002
+   },
+   "family_35": {
+    "n": 5,
+    "rho_novelty": 1.0
+   }
+  },
+  "per_novelty_level": {
+   "0.0": {
+    "n": 45,
+    "realized_values_in_bin": [
+     0.0
+    ],
+    "rho_novelty": null,
+    "rho_novelty_null_reason": "n near-constant within novelty bin by construction",
+    "rho_length": -1.0,
+    "mean_per_hit": 74.31046731046732
+   },
+   "0.25": {
+    "n": 9,
+    "realized_values_in_bin": [
+     0.3333
+    ],
+    "rho_novelty": null,
+    "rho_novelty_null_reason": "n near-constant within novelty bin by construction",
+    "rho_length": -1.0000000000000002,
+    "mean_per_hit": 161.46079229412564
+   },
+   "0.5": {
+    "n": 42,
+    "realized_values_in_bin": [
+     0.5
+    ],
+    "rho_novelty": null,
+    "rho_novelty_null_reason": "n near-constant within novelty bin by construction",
+    "rho_length": -1.0,
+    "mean_per_hit": 165.67947264375834
+   },
+   "0.75": {
+    "n": 21,
+    "realized_values_in_bin": [
+     0.6667
+    ],
+    "rho_novelty": null,
+    "rho_novelty_null_reason": "n near-constant within novelty bin by construction",
+    "rho_length": -1.0,
+    "mean_per_hit": 247.68288589717162
+   },
+   "1.0": {
+    "n": 75,
+    "realized_values_in_bin": [
+     1.0
+    ],
+    "rho_novelty": null,
+    "rho_novelty_null_reason": "n near-constant within novelty bin by construction",
+    "rho_length": -0.3696912347221675,
+    "mean_per_hit": 229.76379176379177
+   }
+  },
+  "note": "bounded-ceiling diagnostics on honest file-proxy counters, not claim inference"
+ },
+ "per_hit_supersede_check": {
+  "0.0": {
+   "n": 45,
+   "realized_values_in_bin": [
+    0.0
+   ],
+   "mean_per_hit_tokens": 74.31046731046732,
+   "std_tokens": 2.750294038834402,
+   "ci95_tokens": [
+    73.50688763841835,
+    75.11404698251629
+   ],
+   "mean_per_hit_normalized_vs_COLD_step": 0.13510994056448603,
+   "std_normalized": 0.005000534616062552,
+   "ci95_normalized": [
+    0.13364888661530608,
+    0.13657099451366597
+   ],
+   "clears_0.85_normalized_lower": false,
+   "unit_note": "normalized = raw_tokens/550 (COLD per-step). Raw tokens are incommensurable with the 0.85 ratio gate; normalized ratio is the commensurable diagnostic. Supersede requires normalized>0.85 at BOTH bins AND decisive Pareto dominance."
+  },
+  "0.25": {
+   "n": 9,
+   "realized_values_in_bin": [
+    0.3333
+   ],
+   "mean_per_hit_tokens": 161.46079229412564,
+   "std_tokens": 19.16411610644111,
+   "ci95_tokens": [
+    148.94023643791743,
+    173.98134815033384
+   ],
+   "mean_per_hit_normalized_vs_COLD_step": 0.2935650768984102,
+   "std_normalized": 0.03484384746625656,
+   "ci95_normalized": [
+    0.2708004298871226,
+    0.3163297239096978
+   ],
+   "clears_0.85_normalized_lower": false,
+   "unit_note": "normalized = raw_tokens/550 (COLD per-step). Raw tokens are incommensurable with the 0.85 ratio gate; normalized ratio is the commensurable diagnostic. Supersede requires normalized>0.85 at BOTH bins AND decisive Pareto dominance."
+  },
+  "supersede_triggered": false,
+  "supersede_note": "Pareto dominance fails on honest ceiling (ratio_vs_RAG_f10=1.51>0.85), so the frozen conjoint cannot trigger irrespective of per_hit units."
+ },
+ "DSM_amortized": {
+  "f10": {
+   "amortized_tokens": 110.0,
+   "usd_assuming_0p15_per_1M_input": 1.7e-05,
+   "pricing_note": "USD conversion assumes gpt-4o-mini $0.15/1M input; NOT measured (no API)"
+  },
+  "f100": {
+   "amortized_tokens": 38.0,
+   "usd_assuming_0p15_per_1M_input": 6e-06,
+   "pricing_note": "USD conversion assumes gpt-4o-mini $0.15/1M input; NOT measured (no API)"
+  }
+ },
+ "NC4_DSM_compile_on_vs_off": {
+  "compile_on_total": 1197340.0,
+  "compile_off_cold_total": 1150600,
+  "delta": -46740.0
+ }
+}

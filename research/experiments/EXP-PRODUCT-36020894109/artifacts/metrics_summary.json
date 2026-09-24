@@ -1,0 +1,1011 @@
+{
+ "experiment_id": "EXP-PRODUCT-36020894109",
+ "lane": "product",
+ "elapsed_s": 16.3,
+ "env": {
+  "openai_key_present": false,
+  "browsergym_local_image": false,
+  "pins": {
+   "gunicorn": "23.0.0",
+   "jwt": "2.14.0",
+   "flask": "3.1.3",
+   "numpy": "2.5.3",
+   "scipy": "1.18.1",
+   "sklearn": "1.9.1",
+   "pandas": "3.0.6"
+  },
+  "pins_pass": true,
+  "playwright_version": "1.44.0",
+  "kernel_sha256_working_tree": "d926279d5ee14a044a2f13b8abc09202df9f5adb9e86feaadeb61818a15f4038",
+  "kernel_sha256_head": "8af66ccfb6f848e1f89805e90a1f52683ee28f62c9dd7b97f9d2762390e7b386",
+  "kernel_patch_durable_via_commit": false
+ },
+ "fixtures": {
+  "experiment_id": "EXP-PRODUCT-36020894109",
+  "census": {
+   "hard258": {
+    "staged": true,
+    "n_hard_ids": 258,
+    "n_matched_in_package": 258,
+    "subset_sha256": "3b0a4df231bb5a0c642215e521c3fa97701a384f52a734dc2db8f617ad0591a7",
+    "dataset_sha256": "d65275660814663375028e9017e1f929e3c38321041b125795e2713b52243d30",
+    "subset_path": "/opt/hostedtoolcache/Python/3.12.14/x64/lib/python3.12/site-packages/webarena_verified/assets/dataset/subsets/webarena-verified-hard.json",
+    "dataset_path": "/opt/hostedtoolcache/Python/3.12.14/x64/lib/python3.12/site-packages/webarena_verified/assets/dataset/webarena-verified.json",
+    "package": "webarena-verified (pip installed)",
+    "n_sites": 6,
+    "site_distribution": {
+     "shopping_admin": 57,
+     "shopping": 61,
+     "reddit": 65,
+     "gitlab": 81,
+     "map": 19,
+     "wikipedia": 23
+    },
+    "n_intent_templates": 114,
+    "revision_distribution": {
+     "2": 245,
+     "4": 5,
+     "3": 8
+    },
+    "full_task_count": 812,
+    "live_execution": "BLOCKED: requires self-hosted WebArena Docker sites + OPENAI_API_KEY gpt-4o-mini 15-step; manifest staged as census definition, executable economics on rebuilt 192/36 disclosed fallback per MV1"
+   },
+   "executable_holdout": "rebuilt WebArena-Verified v2 192 tasks / 36 families (disclosed fallback per MV1)",
+   "rebuilt_tasks_sha256": "374ef8f625be1a7426a59eb15dee65d11334526508ec28185cdcf9239b1b2fbe",
+   "canonical_contaminated_sha256": "391e8f6cf167300cf223ebbb19cf5d2beed6568f5f84ac968ae88866a438a98b",
+   "canonical_prefix_391e8f6c": true,
+   "n_tasks": 192,
+   "n_families": 36,
+   "novelty_distribution": {
+    "0.0": 36,
+    "0.25": 39,
+    "0.5": 39,
+    "0.75": 39,
+    "1.0": 39
+   },
+   "L_values": [
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14
+   ],
+   "L_family_specific_constant_within_family": true,
+   "remap_stats": {
+    "families_rebuilt": 18,
+    "task_values_remapped": 135,
+    "fallbacks": [],
+    "n_fallbacks": 0
+   },
+   "contaminated_families_rebuilt": [
+    "family_00",
+    "family_02",
+    "family_04",
+    "family_06",
+    "family_08",
+    "family_10",
+    "family_12",
+    "family_14",
+    "family_16",
+    "family_18",
+    "family_20",
+    "family_22",
+    "family_24",
+    "family_26",
+    "family_28",
+    "family_30",
+    "family_32",
+    "family_34"
+   ]
+  },
+  "value_set_disjointness": {
+   "pool_level_families_contaminated": [],
+   "pool_level_n_contaminated": 0,
+   "usage_level_demo_vs_testB_contaminated": [],
+   "usage_level_n_contaminated": 0,
+   "demo_values_outside_A": [],
+   "n_demo_values_outside_A": 0,
+   "frozen_requirement": "value_set_A intersect B empty verified per family",
+   "pass": true,
+   "pool_level_detail": [],
+   "usage_level_detail": []
+  },
+  "cross_family_jaccard": {
+   "definition": "max pairwise bigram Jaccard over A-pool first-slot values, 630 family pairs",
+   "n_pairs": 630,
+   "max_jaccard": 0.0,
+   "nonzero_pairs": 0,
+   "threshold": 0.3,
+   "pass": true
+  },
+  "qcr_bank_manifest": {
+   "staged": true,
+   "sha256": "8c69804b249ec9c84cf05d86a21c7ebe7a31af5f8d45e50a4e6d477b449f9f58",
+   "expected_prefix": "8c69804b",
+   "tau": 0.3
+  },
+  "dsm_registry": {
+   "n_sites": 714,
+   "n_tools": 2147,
+   "expected": "714/2147",
+   "pass": true
+  },
+  "sgdr_index": {
+   "n_state_key": 36,
+   "expected": 36,
+   "train_only": true,
+   "pass": true,
+   "path": "research/experiments/EXP-PRODUCT-36020894109/fixtures/sgdr_index_36.json",
+   "sha256": "523f3e579ab6130157ea62a7831add1238c5051f003b2a10a3675ffe2b0e1da6",
+   "representation_note": "DOM-hash component substituted with TRAIN post_state hash (disclosed)"
+  },
+  "cost_config": {
+   "pass": true,
+   "values": {
+    "hit_tokens": 50,
+    "tool_lookup_tokens": 15,
+    "sgdr_tokens": 180,
+    "probe_tokens": 10
+   },
+   "expected": "50/15/180/10",
+   "path": "research/experiments/EXP-PRODUCT-36020894109/fixtures/cost_config.json",
+   "sha256": "9f2754ae83fe4c4600875adf59d8dded2cfbf95447dff1855417cac452a374fa"
+  },
+  "staged_artifacts": {
+   "canonical_192_36_source": {
+    "path": "research/experiments/EXP-PRODUCT-35999358218/fixtures/webarena_verified_v2_tasks_192_36.json",
+    "sha256": "391e8f6cf167300cf223ebbb19cf5d2beed6568f5f84ac968ae88866a438a98b"
+   },
+   "webarena_verified_v2_tasks_192_36_rebuilt.json": {
+    "path": "research/experiments/EXP-PRODUCT-36020894109/fixtures/webarena_verified_v2_tasks_192_36_rebuilt.json",
+    "sha256": "374ef8f625be1a7426a59eb15dee65d11334526508ec28185cdcf9239b1b2fbe"
+   },
+   "qcr_bank_manifest.json": {
+    "path": "research/experiments/EXP-PRODUCT-36020894109/fixtures/qcr_bank_manifest.json",
+    "sha256": "8c69804b249ec9c84cf05d86a21c7ebe7a31af5f8d45e50a4e6d477b449f9f58",
+    "source": "research/experiments/EXP-PRODUCT-35999358218/fixtures/qcr_bank_manifest.json",
+    "source_sha256": "8c69804b249ec9c84cf05d86a21c7ebe7a31af5f8d45e50a4e6d477b449f9f58"
+   },
+   "dsm_webmcp_sites.jsonl": {
+    "path": "research/experiments/EXP-PRODUCT-36020894109/fixtures/dsm_webmcp_sites.jsonl",
+    "sha256": "8e106525f63bd2fc3f6138511fc5b8f6e6a033aed41bee765920b8b63e33e4df",
+    "source": "research/experiments/EXP-PRODUCT-35916130502/artifacts/webmcp_sites.jsonl",
+    "source_sha256": "8e106525f63bd2fc3f6138511fc5b8f6e6a033aed41bee765920b8b63e33e4df"
+   },
+   "dsm_webmcp_registry.jsonl": {
+    "path": "research/experiments/EXP-PRODUCT-36020894109/fixtures/dsm_webmcp_registry.jsonl",
+    "sha256": "af3c18e5ef1904484c5d440353b327958bdcc909e72915b301724b9f49bcdb4c",
+    "source": "research/experiments/EXP-PRODUCT-35916130502/artifacts/webmcp_registry.jsonl",
+    "source_sha256": "af3c18e5ef1904484c5d440353b327958bdcc909e72915b301724b9f49bcdb4c"
+   },
+   "hard258_census_manifest.json": {
+    "path": "research/experiments/EXP-PRODUCT-36020894109/fixtures/hard258_census_manifest.json",
+    "sha256": "1767ce2162008bbf64914ec4ab169fe964807229dfe11fc141b8c93c6c14ee6b"
+   }
+  }
+ },
+ "mv3_kernel_spot_check": {
+  "kernel_sha256": "d926279d5ee14a044a2f13b8abc09202df9f5adb9e86feaadeb61818a15f4038",
+  "n_pass": 5,
+  "n_total": 5,
+  "pass": true,
+  "regex_matches_frozen": true,
+  "family_gate_UNKNOWN_on_wrong_family": true
+ },
+ "substrate": {
+  "experiment_id": "EXP-PRODUCT-36020894109",
+  "via": "nginx 127.0.0.1:18930 hash $request_uri -> gunicorn :18929",
+  "endpoints": [
+   "ep-a",
+   "ep-b"
+  ],
+  "gate": "n_non304>=360 stratified >=180/endpoint",
+  "n_non304_stratified": {
+   "ep-a": 200,
+   "ep-b": 200
+  },
+  "n_non304_total": 400,
+  "n_304_stratified": {
+   "ep-a": 3,
+   "ep-b": 3
+  },
+  "n_requests": 406,
+  "if_none_match_exercised_requests": 406,
+  "if_none_match_exercised_fraction": 1.0,
+  "errors": 0,
+  "stratified_pass": true,
+  "probe_correlated": {
+   "n0_hit_rate_304": 1.0,
+   "n0_total": 150,
+   "n025_accuracy": 1.0,
+   "n025_stale_fraction": 0.5,
+   "n025_false_accept_rate": 0.0,
+   "TN_fresh": 1.0,
+   "n025_probe_tokens_sum": 4500,
+   "n025_full_counterfactual_tokens": 7500,
+   "n025_token_saving_vs_full": 0.4,
+   "n025_fresh": 75,
+   "n025_stale": 75,
+   "total": 150
+  },
+  "probe_random_seed42": {
+   "accuracy": 0.5933333333333334,
+   "false_accept_rate": 0.20666666666666667,
+   "total": 150,
+   "note": "balanced fresh/stale coin with Random(42); expected accuracy ~0.5"
+  },
+  "probe_correlated_delta_vs_random": 0.4066666666666666,
+  "TN_contrast_sticky_vs_direct": {
+   "sticky_nginx": {
+    "fresh_correct": 60,
+    "total": 60,
+    "TN": 1.0
+   },
+   "direct_gunicorn": {
+    "fresh_correct": 60,
+    "total": 60,
+    "TN": 1.0
+   }
+  },
+  "nginx_sticky_log_lines": 2117,
+  "nginx_sticky_sample": [
+   "/api/token upstream=127.0.0.1:18929 status=200",
+   "/api/token upstream=127.0.0.1:18929 status=200",
+   "/api/ep-a/res-ep-a-0 upstream=127.0.0.1:18929 status=200",
+   "/api/ep-a/res-ep-a-0 upstream=127.0.0.1:18929 status=304",
+   "/api/ep-a/res-ep-a-1 upstream=127.0.0.1:18929 status=200"
+  ],
+  "nginx_upstream_set": [
+   "127.0.0.1:18929"
+  ],
+  "sqlite": {
+   "journal_mode": "wal",
+   "n_log": 1096,
+   "n_200": 745,
+   "n_304": 351,
+   "n_inm_logged": 1096,
+   "distinct_worker_pids": [
+    84021
+   ],
+   "jwt_algs": [
+    "HS256"
+   ],
+   "path": "/tmp/spider-runtime/shared.db",
+   "single_worker": true
+  }
+ },
+ "substrate_start": {
+  "gunicorn_up": true,
+  "nginx_up": true,
+  "health_direct": {
+   "alg": "HS256",
+   "journal_mode": "wal",
+   "ok": true,
+   "pid": 84021
+  },
+  "nginx_start_exit": 0
+ },
+ "pc1": {
+  "hit_rate": 1.0,
+  "pass": true,
+  "n": 5,
+  "hits": 5,
+  "definition": "B-STAGEHAND-CACHE exact repeat at n=0: hit iff response-body hash identical; disclosed file-proxy DOM hash (Docker BrowserGym AX unavailable)"
+ },
+ "pc3": {
+  "AUROC_verif_true": 0.8714066060789105,
+  "AUROC_shuffled_null": 0.4680678729304522,
+  "precision_verif": 0.9490835030549898,
+  "forced_execute_wrong_accept_rate": 0.16071428571428573,
+  "confidence_std": 0.45428299686875,
+  "UNKNOWN_precision": 0.9837209302325581,
+  "ECE_5bin": 0.10695537008804719,
+  "ece_empty_bins": 0,
+  "pass": true
+ },
+ "economics": {
+  "experiment_id": "EXP-PRODUCT-36020894109",
+  "conditions": {
+   "B-COLD": {
+    "key": "COLD",
+    "M_total_f10_tokens_mean": 5992.708333333333,
+    "M_total_f100_tokens_mean": 5992.708333333333,
+    "M_browser_calls_mean": 21.791666666666668,
+    "M_latency_ms_mean": 12203.333333333334,
+    "M_per_hit_mean": 550.0,
+    "resolve_rate": 0.0,
+    "fixed_amort_per_f": {
+     "f10": 0.0,
+     "f100": 0.0
+    },
+    "retrieval_tool_subtracted": 0.0
+   },
+   "B-RAG-EMBED-TAU030-QCR-K5": {
+    "key": "RAG",
+    "M_total_f10_tokens_mean": 1315.1041666666667,
+    "M_total_f100_tokens_mean": 1315.1041666666667,
+    "M_browser_calls_mean": 10.895833333333334,
+    "M_latency_ms_mean": 2595,
+    "M_per_hit_mean": 103.92512435481186,
+    "resolve_rate": 0.234375,
+    "fixed_amort_per_f": {
+     "f10": 0.0,
+     "f100": 0.0
+    },
+    "retrieval_tool_subtracted": 200
+   },
+   "B-STAGEHAND-CACHE": {
+    "key": "STAGEHAND",
+    "M_total_f10_tokens_mean": 4719.270833333333,
+    "M_total_f100_tokens_mean": 4719.270833333333,
+    "M_browser_calls_mean": 19.244791666666668,
+    "M_latency_ms_mean": 9656.458333333334,
+    "M_per_hit_mean": 432.8125,
+    "resolve_rate": 0.234375,
+    "fixed_amort_per_f": {
+     "f10": 0.0,
+     "f100": 0.0
+    },
+    "retrieval_tool_subtracted": 0.0
+   },
+   "B-DSM-O1-COMPILE": {
+    "key": "DSM",
+    "M_total_f10_tokens_mean": 6236.145833333333,
+    "M_total_f100_tokens_mean": 6164.145833333333,
+    "M_browser_calls_mean": 32.6875,
+    "M_latency_ms_mean": 12312.291666666666,
+    "M_per_hit_mean": 562.1466112012987,
+    "resolve_rate": 0.0,
+    "fixed_amort_per_f": {
+     "f10": 80.0,
+     "f100": 8.0
+    },
+    "retrieval_tool_subtracted": 30
+   },
+   "B-SGDR-AWM": {
+    "key": "SGDR",
+    "M_total_f10_tokens_mean": 1295.1041666666667,
+    "M_total_f100_tokens_mean": 1295.1041666666667,
+    "M_browser_calls_mean": 10.895833333333334,
+    "M_latency_ms_mean": 2595,
+    "M_per_hit_mean": 103.92512435481186,
+    "resolve_rate": 0.234375,
+    "fixed_amort_per_f": {
+     "f10": 0.0,
+     "f100": 0.0
+    },
+    "retrieval_tool_subtracted": 180
+   },
+   "P-SPIDER-ECON-PARETO": {
+    "key": "SPIDER",
+    "M_total_f10_tokens_mean": 1981.09375,
+    "M_total_f100_tokens_mean": 1891.09375,
+    "M_browser_calls_mean": 13.208333333333334,
+    "M_latency_ms_mean": 3992.890625,
+    "M_per_hit_mean": 168.55787586256338,
+    "resolve_rate": 1.0,
+    "fixed_amort_per_f": {
+     "f10": 100.0,
+     "f100": 10.0
+    },
+    "retrieval_tool_subtracted": 0.0
+   }
+  },
+  "f_levels": [
+   10,
+   100
+  ],
+  "dsm_site_overlap": [],
+  "dsm_n_task_sites": 36,
+  "dsm_registry_sites_considered": 0,
+  "gaps": {
+   "saving_vs_COLD_f10": 0.6694159568920564,
+   "saving_vs_COLD_f100": 0.6844342082391796,
+   "ratio_vs_RAG_f10": 1.5064158415841584,
+   "ratio_vs_RAG_f100": 1.437980198019802,
+   "browser_latency_saving_vs_COLD": 0.4940072375839585,
+   "resolve_margin_vs_COLD": 1.0,
+   "resolve_margin_vs_RAG": 0.765625,
+   "resolve_margin_vs_STAGEHAND": 0.765625,
+   "resolve_margin_vs_DSM": 1.0,
+   "resolve_margin_vs_SGDR": 0.765625,
+   "saving_vs_COLD_f10_CI95": [
+    0.6520424126542673,
+    0.687224057013732
+   ],
+   "ratio_vs_RAG_f10_CI95": [
+    1.479572104505246,
+    1.5306356174842528
+   ]
+  },
+  "rho_diagnostics": {
+   "rho_novelty_pooled": 0.7620215299096192,
+   "rho_novelty_CI95": [
+    0.6885563493002301,
+    0.8229741180088116
+   ],
+   "rho_length_pooled": -0.2871341837663058,
+   "per_family_rho_novelty": {
+    "family_00": {
+     "n": 6,
+     "rho_novelty": 0.9999999999999999
+    },
+    "family_01": {
+     "n": 6,
+     "rho_novelty": 0.9999999999999999
+    },
+    "family_02": {
+     "n": 6,
+     "rho_novelty": 1.0
+    },
+    "family_03": {
+     "n": 6,
+     "rho_novelty": 1.0000000000000002
+    },
+    "family_04": {
+     "n": 6,
+     "rho_novelty": 0.9999999999999999
+    },
+    "family_05": {
+     "n": 6,
+     "rho_novelty": 0.9999999999999999
+    },
+    "family_06": {
+     "n": 6,
+     "rho_novelty": 1.0
+    },
+    "family_07": {
+     "n": 6,
+     "rho_novelty": 1.0000000000000002
+    },
+    "family_08": {
+     "n": 6,
+     "rho_novelty": 0.9999999999999999
+    },
+    "family_09": {
+     "n": 6,
+     "rho_novelty": 0.9999999999999999
+    },
+    "family_10": {
+     "n": 6,
+     "rho_novelty": 1.0
+    },
+    "family_11": {
+     "n": 6,
+     "rho_novelty": 1.0000000000000002
+    },
+    "family_12": {
+     "n": 5,
+     "rho_novelty": 1.0
+    },
+    "family_13": {
+     "n": 5,
+     "rho_novelty": 1.0
+    },
+    "family_14": {
+     "n": 5,
+     "rho_novelty": 1.0000000000000002
+    },
+    "family_15": {
+     "n": 5,
+     "rho_novelty": 1.0
+    },
+    "family_16": {
+     "n": 5,
+     "rho_novelty": 1.0
+    },
+    "family_17": {
+     "n": 5,
+     "rho_novelty": 1.0
+    },
+    "family_18": {
+     "n": 5,
+     "rho_novelty": 1.0000000000000002
+    },
+    "family_19": {
+     "n": 5,
+     "rho_novelty": 1.0
+    },
+    "family_20": {
+     "n": 5,
+     "rho_novelty": 1.0
+    },
+    "family_21": {
+     "n": 5,
+     "rho_novelty": 1.0
+    },
+    "family_22": {
+     "n": 5,
+     "rho_novelty": 1.0000000000000002
+    },
+    "family_23": {
+     "n": 5,
+     "rho_novelty": 1.0
+    },
+    "family_24": {
+     "n": 5,
+     "rho_novelty": 1.0
+    },
+    "family_25": {
+     "n": 5,
+     "rho_novelty": 1.0
+    },
+    "family_26": {
+     "n": 5,
+     "rho_novelty": 1.0000000000000002
+    },
+    "family_27": {
+     "n": 5,
+     "rho_novelty": 1.0
+    },
+    "family_28": {
+     "n": 5,
+     "rho_novelty": 1.0
+    },
+    "family_29": {
+     "n": 5,
+     "rho_novelty": 1.0
+    },
+    "family_30": {
+     "n": 5,
+     "rho_novelty": 1.0000000000000002
+    },
+    "family_31": {
+     "n": 5,
+     "rho_novelty": 1.0
+    },
+    "family_32": {
+     "n": 5,
+     "rho_novelty": 1.0
+    },
+    "family_33": {
+     "n": 5,
+     "rho_novelty": 1.0
+    },
+    "family_34": {
+     "n": 5,
+     "rho_novelty": 1.0000000000000002
+    },
+    "family_35": {
+     "n": 5,
+     "rho_novelty": 1.0
+    }
+   },
+   "per_novelty_level": {
+    "0.0": {
+     "n": 45,
+     "realized_values_in_bin": [
+      0.0
+     ],
+     "rho_novelty": null,
+     "rho_novelty_null_reason": "n near-constant within novelty bin by construction",
+     "rho_length": -1.0,
+     "mean_per_hit": 74.31046731046732
+    },
+    "0.25": {
+     "n": 9,
+     "realized_values_in_bin": [
+      0.3333
+     ],
+     "rho_novelty": null,
+     "rho_novelty_null_reason": "n near-constant within novelty bin by construction",
+     "rho_length": -1.0000000000000002,
+     "mean_per_hit": 161.46079229412564
+    },
+    "0.5": {
+     "n": 42,
+     "realized_values_in_bin": [
+      0.5
+     ],
+     "rho_novelty": null,
+     "rho_novelty_null_reason": "n near-constant within novelty bin by construction",
+     "rho_length": -1.0,
+     "mean_per_hit": 165.67947264375834
+    },
+    "0.75": {
+     "n": 21,
+     "realized_values_in_bin": [
+      0.6667
+     ],
+     "rho_novelty": null,
+     "rho_novelty_null_reason": "n near-constant within novelty bin by construction",
+     "rho_length": -1.0,
+     "mean_per_hit": 247.68288589717162
+    },
+    "1.0": {
+     "n": 75,
+     "realized_values_in_bin": [
+      1.0
+     ],
+     "rho_novelty": null,
+     "rho_novelty_null_reason": "n near-constant within novelty bin by construction",
+     "rho_length": -0.3696912347221675,
+     "mean_per_hit": 229.76379176379177
+    }
+   },
+   "note": "bounded-ceiling diagnostics on honest file-proxy counters, not claim inference"
+  },
+  "per_hit_supersede_check": {
+   "0.0": {
+    "n": 45,
+    "realized_values_in_bin": [
+     0.0
+    ],
+    "mean_per_hit_tokens": 74.31046731046732,
+    "std_tokens": 2.750294038834402,
+    "ci95_tokens": [
+     73.50688763841835,
+     75.11404698251629
+    ],
+    "mean_per_hit_normalized_vs_COLD_step": 0.13510994056448603,
+    "std_normalized": 0.005000534616062552,
+    "ci95_normalized": [
+     0.13364888661530608,
+     0.13657099451366597
+    ],
+    "clears_0.85_normalized_lower": false,
+    "unit_note": "normalized = raw_tokens/550 (COLD per-step). Raw tokens are incommensurable with the 0.85 ratio gate; normalized ratio is the commensurable diagnostic. Supersede requires normalized>0.85 at BOTH bins AND decisive Pareto dominance."
+   },
+   "0.25": {
+    "n": 9,
+    "realized_values_in_bin": [
+     0.3333
+    ],
+    "mean_per_hit_tokens": 161.46079229412564,
+    "std_tokens": 19.16411610644111,
+    "ci95_tokens": [
+     148.94023643791743,
+     173.98134815033384
+    ],
+    "mean_per_hit_normalized_vs_COLD_step": 0.2935650768984102,
+    "std_normalized": 0.03484384746625656,
+    "ci95_normalized": [
+     0.2708004298871226,
+     0.3163297239096978
+    ],
+    "clears_0.85_normalized_lower": false,
+    "unit_note": "normalized = raw_tokens/550 (COLD per-step). Raw tokens are incommensurable with the 0.85 ratio gate; normalized ratio is the commensurable diagnostic. Supersede requires normalized>0.85 at BOTH bins AND decisive Pareto dominance."
+   },
+   "supersede_triggered": false,
+   "supersede_note": "Pareto dominance fails on honest ceiling (ratio_vs_RAG_f10=1.51>0.85), so the frozen conjoint cannot trigger irrespective of per_hit units."
+  },
+  "DSM_amortized": {
+   "f10": {
+    "amortized_tokens": 110.0,
+    "usd_assuming_0p15_per_1M_input": 1.7e-05,
+    "pricing_note": "USD conversion assumes gpt-4o-mini $0.15/1M input; NOT measured (no API)"
+   },
+   "f100": {
+    "amortized_tokens": 38.0,
+    "usd_assuming_0p15_per_1M_input": 6e-06,
+    "pricing_note": "USD conversion assumes gpt-4o-mini $0.15/1M input; NOT measured (no API)"
+   }
+  },
+  "NC4_DSM_compile_on_vs_off": {
+   "compile_on_total": 1197340.0,
+   "compile_off_cold_total": 1150600,
+   "delta": -46740.0
+  }
+ },
+ "null_controls": {
+  "experiment_id": "EXP-PRODUCT-36020894109",
+  "disclosure": "honest sum counters on rebuilt contamination-free holdout; nulls via actual kernel pipeline; NOT claim economics for SURVIVES (browser/LLM gates blocked)",
+  "NC1_SHUFFLED": {
+   "rho_shuffled": -0.1367236964485896,
+   "null_rho_ci95": [
+    -0.1696093896534687,
+    0.09173454606505668
+   ],
+   "block_permutation_p": 0.07238552289542091,
+   "rho_length_pooled": -0.2871341837663058,
+   "per_stratum": {
+    "0.0": {
+     "n": 45,
+     "realized_values_in_bin": [
+      0.0
+     ],
+     "rho_shuffled": null,
+     "rho_shuffled_null_reason": "n near-constant within shuffled-n bin by construction",
+     "rho_length_shuffled": -0.08407564886941842
+    },
+    "0.25": {
+     "n": 9,
+     "realized_values_in_bin": [
+      0.3333
+     ],
+     "rho_shuffled": null,
+     "rho_shuffled_null_reason": "n near-constant within shuffled-n bin by construction",
+     "rho_length_shuffled": -0.3193390065900868
+    },
+    "0.5": {
+     "n": 42,
+     "realized_values_in_bin": [
+      0.5
+     ],
+     "rho_shuffled": null,
+     "rho_shuffled_null_reason": "n near-constant within shuffled-n bin by construction",
+     "rho_length_shuffled": -0.4668924464278881
+    },
+    "0.75": {
+     "n": 21,
+     "realized_values_in_bin": [
+      0.6667
+     ],
+     "rho_shuffled": null,
+     "rho_shuffled_null_reason": "n near-constant within shuffled-n bin by construction",
+     "rho_length_shuffled": -0.6565529006547741
+    },
+    "1.0": {
+     "n": 75,
+     "realized_values_in_bin": [
+      1.0
+     ],
+     "rho_shuffled": null,
+     "rho_shuffled_null_reason": "n near-constant within shuffled-n bin by construction",
+     "rho_length_shuffled": -0.30340953960775696
+    }
+   },
+   "per_family_rho_shuffled": {
+    "family_00": {
+     "n": 6,
+     "rho_shuffled": -0.35
+    },
+    "family_01": {
+     "n": 6,
+     "rho_shuffled": -0.016666666666666663
+    },
+    "family_02": {
+     "n": 6,
+     "rho_shuffled": 0.9354838709677419
+    },
+    "family_03": {
+     "n": 6,
+     "rho_shuffled": -0.5000000000000001
+    },
+    "family_04": {
+     "n": 6,
+     "rho_shuffled": -0.4333333333333333
+    },
+    "family_05": {
+     "n": 6,
+     "rho_shuffled": -0.35
+    },
+    "family_06": {
+     "n": 6,
+     "rho_shuffled": 0.03225806451612903
+    },
+    "family_07": {
+     "n": 6,
+     "rho_shuffled": 0.25000000000000006
+    },
+    "family_08": {
+     "n": 6,
+     "rho_shuffled": 0.31666666666666665
+    },
+    "family_09": {
+     "n": 6,
+     "rho_shuffled": -0.7666666666666666
+    },
+    "family_10": {
+     "n": 6,
+     "rho_shuffled": -0.22580645161290322
+    },
+    "family_11": {
+     "n": 6,
+     "rho_shuffled": -0.5000000000000001
+    },
+    "family_12": {
+     "n": 5,
+     "rho_shuffled": -0.027777777777777776
+    },
+    "family_13": {
+     "n": 5,
+     "rho_shuffled": -0.027777777777777776
+    },
+    "family_14": {
+     "n": 5,
+     "rho_shuffled": 0.2894736842105264
+    },
+    "family_15": {
+     "n": 5,
+     "rho_shuffled": -0.6666666666666666
+    },
+    "family_16": {
+     "n": 5,
+     "rho_shuffled": -0.4722222222222222
+    },
+    "family_17": {
+     "n": 5,
+     "rho_shuffled": -0.8055555555555556
+    },
+    "family_18": {
+     "n": 5,
+     "rho_shuffled": -0.36842105263157904
+    },
+    "family_19": {
+     "n": 5,
+     "rho_shuffled": -0.6666666666666666
+    },
+    "family_20": {
+     "n": 5,
+     "rho_shuffled": -0.027777777777777776
+    },
+    "family_21": {
+     "n": 5,
+     "rho_shuffled": -0.3611111111111111
+    },
+    "family_22": {
+     "n": 5,
+     "rho_shuffled": -0.9210526315789476
+    },
+    "family_23": {
+     "n": 5,
+     "rho_shuffled": 1.0
+    },
+    "family_24": {
+     "n": 5,
+     "rho_shuffled": 1.0
+    },
+    "family_25": {
+     "n": 5,
+     "rho_shuffled": -0.4722222222222222
+    },
+    "family_26": {
+     "n": 5,
+     "rho_shuffled": -0.36842105263157904
+    },
+    "family_27": {
+     "n": 5,
+     "rho_shuffled": 0.16666666666666666
+    },
+    "family_28": {
+     "n": 5,
+     "rho_shuffled": 1.0
+    },
+    "family_29": {
+     "n": 5,
+     "rho_shuffled": 0.75
+    },
+    "family_30": {
+     "n": 5,
+     "rho_shuffled": -0.605263157894737
+    },
+    "family_31": {
+     "n": 5,
+     "rho_shuffled": -0.6666666666666666
+    },
+    "family_32": {
+     "n": 5,
+     "rho_shuffled": -0.3611111111111111
+    },
+    "family_33": {
+     "n": 5,
+     "rho_shuffled": -0.027777777777777776
+    },
+    "family_34": {
+     "n": 5,
+     "rho_shuffled": -0.5263157894736843
+    },
+    "family_35": {
+     "n": 5,
+     "rho_shuffled": 0.16666666666666666
+    }
+   },
+   "pass": false
+  },
+  "NC1b_SWAPPED_FAMILY_KEYS": {
+   "n_nonexistent_family": 192,
+   "UNKNOWN_rate_nonexistent_family": 1.0,
+   "expectation": "UNKNOWN>=0.80 (family gating rejects unknown contexts)",
+   "value_swap_probe": {
+    "n": 1,
+    "params": {
+     "family_context": "family_01",
+     "slot": "p",
+     "value": "AAA0-family00-value (foreign family value)"
+    },
+    "status": "EXECUTABLE",
+    "bound_action": {
+     "url": "https://x/f01/AAA0-family00-value"
+    },
+    "EXECUTABLE_rate_cross_family_values": "1.0 (single-case probe)",
+    "note": "kernel binds structurally by slot name and validates family CONTEXT, not slot VALUES: a foreign-family value in a correctly-named slot still resolves EXECUTABLE. Value errors surface only at verify/repair. Disclosed kernel limitation; family-gating (nonexistent family -> UNKNOWN 1.0) is the enforced control."
+   }
+  },
+  "NC1c_SHUFFLED_EXECUTE_AUROC": {
+   "AUROC": 0.4629780037606115,
+   "n": 600,
+   "expectation": "0.45-0.60"
+  },
+  "NC2_RANDOM_KEYS": {
+   "UNKNOWN_rate": 0.654,
+   "false_accept_rate": 0.346,
+   "AUROC": 0.4619065145380935,
+   "n": 500,
+   "pass": true
+  },
+  "NC3_LENGTH_CONST": {
+   "rho_novelty": 0.007890496086527815,
+   "R2": 4.3207724255034385e-05,
+   "rho_length": -1.0,
+   "pass": true
+  },
+  "PC4_FROZEN_FORMULA": {
+   "n_parity_rows": 192,
+   "max_abs_diff": 5.684341886080802e-14,
+   "parity_within_1e6": true,
+   "rho_proxy_real_pooled": null,
+   "rho_proxy_real_per_stratum": {
+    "0.0": null,
+    "0.25": null,
+    "0.5": null,
+    "0.75": null,
+    "1.0": null
+   },
+   "rho_proxy_real_note": "NULL: requires Docker BrowserGym CDP + real gpt-4o-mini tokens (blocked)"
+  },
+  "MAIN_PIPELINE_DIAGNOSTIC": {
+   "rho_novelty_per_hit": 0.7620215299096192,
+   "rho_length_pooled": -0.2871341837663058,
+   "note": "diagnostic only on honest counters; claim rho requires real trajectories"
+  },
+  "B=5000": true
+ },
+ "browser_health": {
+  "experiment_id": "EXP-PRODUCT-36020894109",
+  "playwright_version": "1.44.0",
+  "playwright_expected_frozen": "1.63.0",
+  "playwright_ax_nodes_synthetic_60node_dom": 46,
+  "playwright_ax_gt_10": true,
+  "playwright_launch": "ok",
+  "browsergym_docker_image_present": false,
+  "rho_proxy_real": null,
+  "rho_proxy_real_note": "NULL: OPENAI_API_KEY absent; no real LLM tokens measurable",
+  "safety_CuP": null,
+  "safety_note": "NULL: ST-WebAgentBench instrumentation requires live BrowserGym pages + LLM",
+  "scope": "supplementary honesty signal only; does NOT satisfy frozen MV6 Docker BrowserGym 0.14.3 2000-node CDP getFullAXTree requirement"
+ },
+ "attempts": {
+  "experiment_id": "EXP-PRODUCT-36020894109",
+  "docker_browsergym": {
+   "cmd": "docker pull ghcr.io/servicenow/browsergym:0.14.3",
+   "result": {
+    "cmd": "docker pull ghcr.io/servicenow/browsergym:0.14.3",
+    "exit": 1,
+    "stdout": "",
+    "stderr": "Error response from daemon: manifest unknown\n"
+   },
+   "available": false,
+   "detail": "see docker_pull result; local image present only if servicenow/browsergym in docker images"
+  },
+  "openai_key": {
+   "present": false,
+   "detail": "ABSENT",
+   "gpt4o_mini_15step": "NOT RUN (OPENAI_API_KEY absent)"
+  },
+  "hard258": {
+   "staged_manifest": true,
+   "detail": "258-ID census manifest + 812-task package staged offline (see fixture_checks.census.hard258); live execution blocked (no self-hosted WebArena Docker + no OPENAI key)"
+  },
+  "playwright": {
+   "cmd": "/opt/hostedtoolcache/Python/3.12.14/x64/bin/python3 -c from playwright.sync_api import sync_playwright; print('ok')",
+   "exit": 0,
+   "stdout": "ok\n",
+   "stderr": ""
+  },
+  "playwright_version_note": "installed 1.44.0 vs frozen 1.63.0",
+  "browsergym_pip": {
+   "ok": true,
+   "n_task_ids": 812
+  },
+  "kernel_patch": {
+   "working_tree_sha": "d926279d5ee14a044a2f13b8abc09202df9f5adb9e86feaadeb61818a15f4038",
+   "head_sha": "8af66ccfb6f848e1f89805e90a1f52683ee28f62c9dd7b97f9d2762390e7b386",
+   "durable_via_commit": false,
+   "note": "EXECUTE may not commit; durability across clean checkouts uncommitted"
+  },
+  "sgdr_index": "staged 36 state_key TRAIN-only (see fixture_checks.sgdr_index)"
+ }
+}

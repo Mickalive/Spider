@@ -1,0 +1,142 @@
+{
+ "schema_version": 1,
+ "experiment_id": "EXP-PRODUCT-36020894109",
+ "lane": "product",
+ "github_run_id": "36020894109",
+ "execution_base_commit": "e1c228b31c8db15383b0c3294bb6a683fe3c5238",
+ "head_commit_at_execute": "f687ed98cc71fdeb0cde8f6af7b9c5a1659b2ec5",
+ "git_status_short_at_execute": "M .github/workflows/ci.yml\n M .github/workflows/factory-pulse.yml\n M .github/workflows/lane-recovery.yml\n M SPIDER_CODEX.md\n M codex/claim_state.json\n M codex/index.json\n M scripts/build_portfolio_snapshot.py\n M scripts/check_scope.py\n M scripts/validate_repo.py\n M src/spider/kernel.py\n?? .github/workflows/factory-recovery.yml\n?? codex/experiments/EXP-FRONTIER-36018230359/\n?? codex/experiments/EXP-RUNTIME-36020884510/\n?? research/experiments/EXP-PRODUCT-36020894109/artifacts/\n?? research/experiments/EXP-PRODUCT-36020894109/fixtures/\n?? research/experiments/EXP-PRODUCT-36020894109/model_execute.json\n?? research/experiments/EXP-PRODUCT-36020894109/report.md\n?? research/experiments/EXP-PRODUCT-36020894109/result.json\n?? research/experiments/EXP-PRODUCT-36020894109/run_experiment.py",
+ "working_tree_deltas_vs_base": "src/spider/kernel.py dot-regex patch (working-tree sha d926279d5ee14a044a2f13b8abc09202df9f5adb9e86feaadeb61818a15f4038; HEAD pre-patch); uncommitted by scope rule (EXECUTE may not commit). No frozen files modified.",
+ "frozen_inputs": {
+  "request.json": "0ae42754319dc64fed996ccfbfd5cf844912379f91958ed93d9f1fa91e50d2df",
+  "spec.json": "f376c5d3226b728b9e4321668467b7864bb60086e781a8fa639c9654bb018372",
+  "prereg.md": "e1b0da43b2778e30f64609816dfd8d01d1346655134e3a477d4dab1074f9e273",
+  "freeze.json": {
+   "experiment_id": "EXP-PRODUCT-36020894109",
+   "frozen_at": "2026-09-24T15:35:36.575511+00:00",
+   "hashes": {
+    "prereg.md": "e1b0da43b2778e30f64609816dfd8d01d1346655134e3a477d4dab1074f9e273",
+    "request.json": "0ae42754319dc64fed996ccfbfd5cf844912379f91958ed93d9f1fa91e50d2df",
+    "spec.json": "f376c5d3226b728b9e4321668467b7864bb60086e781a8fa639c9654bb018372"
+   },
+   "schema_version": 1
+  },
+  "frozen_inputs_modified": false
+ },
+ "code_paths": [
+  "research/experiments/EXP-PRODUCT-36020894109/run_experiment.py (this-packet EXECUTE harness; parent-pattern substrate/probe/PC code adapted, economics/nulls/rebuild new)",
+  "src/spider/kernel.py (frozen MV3 dot-regex patch, product-scope edit, tests/test_kernel.py 3/3)",
+  "tests/test_kernel.py (regression, PYTHONPATH=src unittest 3/3)"
+ ],
+ "code_diff_kernel": "diff --git a/src/spider/kernel.py b/src/spider/kernel.py\nindex cfec9866..761aa792 100644\n--- a/src/spider/kernel.py\n+++ b/src/spider/kernel.py\n@@ -9,7 +9,7 @@ from .models import Mechanism, Observation, Resolution, ResolutionStatus\n from .registry import MechanismRegistry\n \n \n-_PARAMETER = re.compile(r\"\\$\\{([A-Za-z_][A-Za-z0-9_]*)\\}\")\n+_PARAMETER = re.compile(r\"\\$\\{([A-Za-z_][A-Za-z0-9_\\.]*)\\}\")\n \n \n def _matches(required: dict[str, Any], actual: dict[str, Any]) -> bool:",
+ "environment": {
+  "experiment_id": "EXP-PRODUCT-36020894109",
+  "checked_at": "2026-09-24T17:24:28Z",
+  "pins": {
+   "gunicorn": "23.0.0",
+   "jwt": "2.14.0",
+   "flask": "3.1.3",
+   "numpy": "2.5.3",
+   "scipy": "1.18.1",
+   "sklearn": "1.9.1",
+   "pandas": "3.0.6"
+  },
+  "pin_expectations": {
+   "gunicorn": "23.0.0",
+   "jwt": "2.14.0"
+  },
+  "pins_pass": true,
+  "gunicorn": {
+   "cmd": "gunicorn --version",
+   "exit": 0,
+   "stdout": "gunicorn (version 23.0.0)\n",
+   "stderr": ""
+  },
+  "nginx_version": {
+   "cmd": "nginx -v",
+   "exit": 0,
+   "stdout": "",
+   "stderr": "nginx version: nginx/1.24.0 (Ubuntu)\n"
+  },
+  "python": "3.12.14 (main, Aug 13 2026, 02:47:42) [GCC 13.3.0]",
+  "openai_key_present": false,
+  "openai_key_note": "ABSENT",
+  "playwright_version": "1.44.0",
+  "playwright_expectation": "1.63.0 (frozen MV6 toolchain)",
+  "playwright_importable": {
+   "cmd": "/opt/hostedtoolcache/Python/3.12.14/x64/bin/python3 -c from playwright.sync_api import sync_playwright; print('ok')",
+   "exit": 0,
+   "stdout": "ok\n",
+   "stderr": ""
+  },
+  "browsergym_core_version": "0.14.3",
+  "browsergym_webarena_verified_version": "0.14.3",
+  "webarena_verified_version": "1.2.3",
+  "kernel_sha256_working_tree": "d926279d5ee14a044a2f13b8abc09202df9f5adb9e86feaadeb61818a15f4038",
+  "kernel_sha256_head": "8af66ccfb6f848e1f89805e90a1f52683ee28f62c9dd7b97f9d2762390e7b386",
+  "kernel_patch_durable_via_commit": false,
+  "docker_pull_browsergym": {
+   "cmd": "docker pull ghcr.io/servicenow/browsergym:0.14.3",
+   "exit": 1,
+   "stdout": "",
+   "stderr": "Error response from daemon: manifest unknown\n"
+  },
+  "docker_images": {
+   "cmd": "docker images",
+   "exit": 0,
+   "stdout": "REPOSITORY                                   TAG       IMAGE ID       CREATED       SIZE\nghcr.io/github/gh-aw-mcpg                    latest    8fd5ed88dce2   7 days ago    181MB\nghcr.io/github/gh-aw-firewall/agent          latest    dc9d80ee1508   7 days ago    565MB\nghcr.io/github/github-mcp-server             latest    09777492cb75   8 days ago    46.9MB\nghcr.io/dependabot/dependabot-updater-core   latest    8c87fce2da7e   8 days ago    828MB\nghcr.io/github/gh-aw-firewall/api-proxy      latest    008b8653cd89   9 days ago    209MB\nghcr.io/github/gh-aw-firewall/squid          latest    ebc9c9e5ccbd   6 weeks ago   43.1MB\n",
+   "stderr": ""
+  },
+  "browsergym_local_image": false,
+  "pip_webarena": {
+   "cmd": "/opt/hostedtoolcache/Python/3.12.14/x64/bin/python3 -m pip index versions webarena",
+   "exit": 1,
+   "stdout": "",
+   "stderr": "ERROR: No matching distribution found for webarena\n"
+  },
+  "browsergym_webarena_verified_import": {
+   "ok": true,
+   "n_task_ids": 812
+  }
+ },
+ "datasets_fixtures": {
+  "canonical_192_36_readonly": "research/experiments/EXP-PRODUCT-35999358218/fixtures/webarena_verified_v2_tasks_192_36.json",
+  "rebuilt_holdout": "research/experiments/EXP-PRODUCT-36020894109/fixtures/webarena_verified_v2_tasks_192_36_rebuilt.json",
+  "rebuilt_sha256": "374ef8f625be1a7426a59eb15dee65d11334526508ec28185cdcf9239b1b2fbe",
+  "hard258_subset_system_path": "/opt/hostedtoolcache/Python/3.12.14/x64/lib/python3.12/site-packages/webarena_verified/assets/dataset/subsets/webarena-verified-hard.json",
+  "qcr_bank_sha256": "8c69804b249ec9c84cf05d86a21c7ebe7a31af5f8d45e50a4e6d477b449f9f58",
+  "cost_config_sha256": "9f2754ae83fe4c4600875adf59d8dded2cfbf95447dff1855417cac452a374fa"
+ },
+ "commands": [
+  "python3 research/experiments/EXP-PRODUCT-36020894109/run_experiment.py (background, log /tmp/opencode/exp36020894109_run2.log; rerun of run_economics/run_null_controls/run_mv3_kernel_spot_check in-process for corrected NC1b/supersede-units/MV3-literal)",
+  "PYTHONPATH=src python3 -m unittest discover -s tests (3/3 OK)",
+  "docker pull ghcr.io/servicenow/browsergym:0.14.3 (exit 1 manifest unknown, recorded)",
+  "gunicorn -w 1 --bind 127.0.0.1:18929 + nginx 1.24.0 $request_uri sticky (provisioned/stopped by harness; DB /tmp/spider-runtime/shared.db WAL)"
+ ],
+ "artifact_hashes": {
+  "research/experiments/EXP-PRODUCT-36020894109/artifacts/attempts_log.json": "217fd2b3f85b424d7902b9ffb4bb3cee7293fdfd149ed68bca6cd87c56803325",
+  "research/experiments/EXP-PRODUCT-36020894109/artifacts/browser_health.json": "8d58ee7a9ba9f259c03c53a567e79a50675550818a70bfcab9079a9b6b32297d",
+  "research/experiments/EXP-PRODUCT-36020894109/artifacts/economics.json": "35231387a36d4b30d06f57f1a2ab58f08ea36ff346fb2494b5fbb222fb3418ef",
+  "research/experiments/EXP-PRODUCT-36020894109/artifacts/economics_per_trajectory.csv": "e48d2e35577ea96cc2fa5fc7e7025da96b617fbf9afdcdaf75f9d2647e545d4d",
+  "research/experiments/EXP-PRODUCT-36020894109/artifacts/env_audit.json": "5dd793ce8334d899ee748e8dccd48a2fe4377ec29acb62899370291a53d1d2d0",
+  "research/experiments/EXP-PRODUCT-36020894109/artifacts/fixture_checks.json": "622d409286f8373ce01a9af5a24941e76c83dd47dca29c6a1e7e9f28d6f3b922",
+  "research/experiments/EXP-PRODUCT-36020894109/artifacts/metrics_summary.json": "eaabf74b899d0e29fcaea0f94d64536e9ba4be6e3cd0c487dad4586fe15705cc",
+  "research/experiments/EXP-PRODUCT-36020894109/artifacts/mv3_kernel_spot_check.json": "16fa013bc433bf9f570b78fdc6254a5a569edf7f6460411fda47aad1d51ac4dc",
+  "research/experiments/EXP-PRODUCT-36020894109/artifacts/nc_trajectory_counters.json": "2dfc222836c5f869f2e521ad885b115305d43aed30307a9f4e89d45bd2f2c8e6",
+  "research/experiments/EXP-PRODUCT-36020894109/artifacts/null_controls.json": "679fd9645f5a2cb18571f80c5c661dd077c8b68ce02329f387f7fc3b083083b3",
+  "research/experiments/EXP-PRODUCT-36020894109/artifacts/pc1_exact_repeat.json": "529ed9cbd0faa1e212f6bdf71eb3aa6d5ecec052fd818840e81c787914972693",
+  "research/experiments/EXP-PRODUCT-36020894109/artifacts/pc3_verify_calibration.json": "824a1a803e094b80f2639ab0c12af441536f605fd8ff98e1e565c2db58d68204",
+  "research/experiments/EXP-PRODUCT-36020894109/artifacts/probe_traces.jsonl": "8258e41d94ace4e016b463240c91624399bde45468ee29fbd2870e98a6aedd90",
+  "research/experiments/EXP-PRODUCT-36020894109/artifacts/substrate_probe.json": "3c78014c4393c2b1fe0a88370fe97c1a9f1e248351584ca7c611a41bfa41f64d",
+  "research/experiments/EXP-PRODUCT-36020894109/artifacts/substrate_start.json": "0797fb75ef49bdc908d6af87931e5d6ba96f9898187e03dc61e4f9ea9f710688",
+  "research/experiments/EXP-PRODUCT-36020894109/fixtures/cost_config.json": "9f2754ae83fe4c4600875adf59d8dded2cfbf95447dff1855417cac452a374fa",
+  "research/experiments/EXP-PRODUCT-36020894109/fixtures/dsm_webmcp_registry.jsonl": "af3c18e5ef1904484c5d440353b327958bdcc909e72915b301724b9f49bcdb4c",
+  "research/experiments/EXP-PRODUCT-36020894109/fixtures/dsm_webmcp_sites.jsonl": "8e106525f63bd2fc3f6138511fc5b8f6e6a033aed41bee765920b8b63e33e4df",
+  "research/experiments/EXP-PRODUCT-36020894109/fixtures/hard258_census_manifest.json": "1767ce2162008bbf64914ec4ab169fe964807229dfe11fc141b8c93c6c14ee6b",
+  "research/experiments/EXP-PRODUCT-36020894109/fixtures/qcr_bank_manifest.json": "8c69804b249ec9c84cf05d86a21c7ebe7a31af5f8d45e50a4e6d477b449f9f58",
+  "research/experiments/EXP-PRODUCT-36020894109/fixtures/sgdr_index_36.json": "523f3e579ab6130157ea62a7831add1238c5051f003b2a10a3675ffe2b0e1da6",
+  "research/experiments/EXP-PRODUCT-36020894109/fixtures/webarena_verified_v2_tasks_192_36_rebuilt.json": "374ef8f625be1a7426a59eb15dee65d11334526508ec28185cdcf9239b1b2fbe"
+ },
+ "timing": 16.3,
+ "notes": "Substrate stopped post-run by harness stop_substrate. No git commit/push/switch/reset performed. Product-scope edit limited to src/spider/kernel.py (+ this-packet harness/outputs)."
+}

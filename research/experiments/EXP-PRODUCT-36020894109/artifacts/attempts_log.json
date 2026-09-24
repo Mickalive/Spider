@@ -1,0 +1,41 @@
+{
+ "experiment_id": "EXP-PRODUCT-36020894109",
+ "docker_browsergym": {
+  "cmd": "docker pull ghcr.io/servicenow/browsergym:0.14.3",
+  "result": {
+   "cmd": "docker pull ghcr.io/servicenow/browsergym:0.14.3",
+   "exit": 1,
+   "stdout": "",
+   "stderr": "Error response from daemon: manifest unknown\n"
+  },
+  "available": false,
+  "detail": "see docker_pull result; local image present only if servicenow/browsergym in docker images"
+ },
+ "openai_key": {
+  "present": false,
+  "detail": "ABSENT",
+  "gpt4o_mini_15step": "NOT RUN (OPENAI_API_KEY absent)"
+ },
+ "hard258": {
+  "staged_manifest": true,
+  "detail": "258-ID census manifest + 812-task package staged offline (see fixture_checks.census.hard258); live execution blocked (no self-hosted WebArena Docker + no OPENAI key)"
+ },
+ "playwright": {
+  "cmd": "/opt/hostedtoolcache/Python/3.12.14/x64/bin/python3 -c from playwright.sync_api import sync_playwright; print('ok')",
+  "exit": 0,
+  "stdout": "ok\n",
+  "stderr": ""
+ },
+ "playwright_version_note": "installed 1.44.0 vs frozen 1.63.0",
+ "browsergym_pip": {
+  "ok": true,
+  "n_task_ids": 812
+ },
+ "kernel_patch": {
+  "working_tree_sha": "d926279d5ee14a044a2f13b8abc09202df9f5adb9e86feaadeb61818a15f4038",
+  "head_sha": "8af66ccfb6f848e1f89805e90a1f52683ee28f62c9dd7b97f9d2762390e7b386",
+  "durable_via_commit": false,
+  "note": "EXECUTE may not commit; durability across clean checkouts uncommitted"
+ },
+ "sgdr_index": "staged 36 state_key TRAIN-only (see fixture_checks.sgdr_index)"
+}

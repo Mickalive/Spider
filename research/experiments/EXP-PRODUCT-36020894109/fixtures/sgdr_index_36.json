@@ -1,0 +1,224 @@
+{
+ "experiment_id": "EXP-PRODUCT-36020894109",
+ "n_state_key": 36,
+ "train_only": true,
+ "note": "state_key=family::sha256(TRAIN demo post_state); BrowserGym DOM hash unavailable so DOM component replaced by TRAIN post_state hash (disclosed representation loss)",
+ "rows": [
+  {
+   "state_key": "family_00::f54e202f9ce05181",
+   "family_id": "family_00",
+   "source": "TRAIN_demo0_post_state",
+   "verified_state": "f54e202f9ce05181"
+  },
+  {
+   "state_key": "family_01::0c7c0ce6938bbe54",
+   "family_id": "family_01",
+   "source": "TRAIN_demo0_post_state",
+   "verified_state": "0c7c0ce6938bbe54"
+  },
+  {
+   "state_key": "family_02::4c0fdaa39578332d",
+   "family_id": "family_02",
+   "source": "TRAIN_demo0_post_state",
+   "verified_state": "4c0fdaa39578332d"
+  },
+  {
+   "state_key": "family_03::ffe84220e72ff194",
+   "family_id": "family_03",
+   "source": "TRAIN_demo0_post_state",
+   "verified_state": "ffe84220e72ff194"
+  },
+  {
+   "state_key": "family_04::22fa8b20b99473ab",
+   "family_id": "family_04",
+   "source": "TRAIN_demo0_post_state",
+   "verified_state": "22fa8b20b99473ab"
+  },
+  {
+   "state_key": "family_05::9c7cd61ee773f47c",
+   "family_id": "family_05",
+   "source": "TRAIN_demo0_post_state",
+   "verified_state": "9c7cd61ee773f47c"
+  },
+  {
+   "state_key": "family_06::991d38264dc02ba6",
+   "family_id": "family_06",
+   "source": "TRAIN_demo0_post_state",
+   "verified_state": "991d38264dc02ba6"
+  },
+  {
+   "state_key": "family_07::0b2fa761a0cfdf65",
+   "family_id": "family_07",
+   "source": "TRAIN_demo0_post_state",
+   "verified_state": "0b2fa761a0cfdf65"
+  },
+  {
+   "state_key": "family_08::dad26fca92f8c295",
+   "family_id": "family_08",
+   "source": "TRAIN_demo0_post_state",
+   "verified_state": "dad26fca92f8c295"
+  },
+  {
+   "state_key": "family_09::b6c8cf396f2ed6f8",
+   "family_id": "family_09",
+   "source": "TRAIN_demo0_post_state",
+   "verified_state": "b6c8cf396f2ed6f8"
+  },
+  {
+   "state_key": "family_10::ff06c6f44daf1a0b",
+   "family_id": "family_10",
+   "source": "TRAIN_demo0_post_state",
+   "verified_state": "ff06c6f44daf1a0b"
+  },
+  {
+   "state_key": "family_11::cd26d2e06acfb353",
+   "family_id": "family_11",
+   "source": "TRAIN_demo0_post_state",
+   "verified_state": "cd26d2e06acfb353"
+  },
+  {
+   "state_key": "family_12::9e29873ab7f8250f",
+   "family_id": "family_12",
+   "source": "TRAIN_demo0_post_state",
+   "verified_state": "9e29873ab7f8250f"
+  },
+  {
+   "state_key": "family_13::1f7a74a89300c2fd",
+   "family_id": "family_13",
+   "source": "TRAIN_demo0_post_state",
+   "verified_state": "1f7a74a89300c2fd"
+  },
+  {
+   "state_key": "family_14::74224a7762488790",
+   "family_id": "family_14",
+   "source": "TRAIN_demo0_post_state",
+   "verified_state": "74224a7762488790"
+  },
+  {
+   "state_key": "family_15::eb96a9b3f48cafee",
+   "family_id": "family_15",
+   "source": "TRAIN_demo0_post_state",
+   "verified_state": "eb96a9b3f48cafee"
+  },
+  {
+   "state_key": "family_16::5d58a0ff763a0d92",
+   "family_id": "family_16",
+   "source": "TRAIN_demo0_post_state",
+   "verified_state": "5d58a0ff763a0d92"
+  },
+  {
+   "state_key": "family_17::57a544f6ee887648",
+   "family_id": "family_17",
+   "source": "TRAIN_demo0_post_state",
+   "verified_state": "57a544f6ee887648"
+  },
+  {
+   "state_key": "family_18::07f3898555b01dd2",
+   "family_id": "family_18",
+   "source": "TRAIN_demo0_post_state",
+   "verified_state": "07f3898555b01dd2"
+  },
+  {
+   "state_key": "family_19::59d5988d4130c4ac",
+   "family_id": "family_19",
+   "source": "TRAIN_demo0_post_state",
+   "verified_state": "59d5988d4130c4ac"
+  },
+  {
+   "state_key": "family_20::792cb1cbd2dbf868",
+   "family_id": "family_20",
+   "source": "TRAIN_demo0_post_state",
+   "verified_state": "792cb1cbd2dbf868"
+  },
+  {
+   "state_key": "family_21::7cc2d0d5fceeb984",
+   "family_id": "family_21",
+   "source": "TRAIN_demo0_post_state",
+   "verified_state": "7cc2d0d5fceeb984"
+  },
+  {
+   "state_key": "family_22::2fdc23565ae72117",
+   "family_id": "family_22",
+   "source": "TRAIN_demo0_post_state",
+   "verified_state": "2fdc23565ae72117"
+  },
+  {
+   "state_key": "family_23::86e9e0e434b51d09",
+   "family_id": "family_23",
+   "source": "TRAIN_demo0_post_state",
+   "verified_state": "86e9e0e434b51d09"
+  },
+  {
+   "state_key": "family_24::909384f567a1c37e",
+   "family_id": "family_24",
+   "source": "TRAIN_demo0_post_state",
+   "verified_state": "909384f567a1c37e"
+  },
+  {
+   "state_key": "family_25::eb06af294e08e6c5",
+   "family_id": "family_25",
+   "source": "TRAIN_demo0_post_state",
+   "verified_state": "eb06af294e08e6c5"
+  },
+  {
+   "state_key": "family_26::4e19d8aea0fb48ab",
+   "family_id": "family_26",
+   "source": "TRAIN_demo0_post_state",
+   "verified_state": "4e19d8aea0fb48ab"
+  },
+  {
+   "state_key": "family_27::00c38cea0eb4c419",
+   "family_id": "family_27",
+   "source": "TRAIN_demo0_post_state",
+   "verified_state": "00c38cea0eb4c419"
+  },
+  {
+   "state_key": "family_28::edaa3bfb88bcb96d",
+   "family_id": "family_28",
+   "source": "TRAIN_demo0_post_state",
+   "verified_state": "edaa3bfb88bcb96d"
+  },
+  {
+   "state_key": "family_29::05fa0e716bc0bd53",
+   "family_id": "family_29",
+   "source": "TRAIN_demo0_post_state",
+   "verified_state": "05fa0e716bc0bd53"
+  },
+  {
+   "state_key": "family_30::535989646cdb7665",
+   "family_id": "family_30",
+   "source": "TRAIN_demo0_post_state",
+   "verified_state": "535989646cdb7665"
+  },
+  {
+   "state_key": "family_31::c149fbe6c56fdfc2",
+   "family_id": "family_31",
+   "source": "TRAIN_demo0_post_state",
+   "verified_state": "c149fbe6c56fdfc2"
+  },
+  {
+   "state_key": "family_32::9117e621b54de16b",
+   "family_id": "family_32",
+   "source": "TRAIN_demo0_post_state",
+   "verified_state": "9117e621b54de16b"
+  },
+  {
+   "state_key": "family_33::27443ba7fdaca11d",
+   "family_id": "family_33",
+   "source": "TRAIN_demo0_post_state",
+   "verified_state": "27443ba7fdaca11d"
+  },
+  {
+   "state_key": "family_34::57c6dddd23e14382",
+   "family_id": "family_34",
+   "source": "TRAIN_demo0_post_state",
+   "verified_state": "57c6dddd23e14382"
+  },
+  {
+   "state_key": "family_35::70d534fd47c35190",
+   "family_id": "family_35",
+   "source": "TRAIN_demo0_post_state",
+   "verified_state": "70d534fd47c35190"
+  }
+ ]
+}
