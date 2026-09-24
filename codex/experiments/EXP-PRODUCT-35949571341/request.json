@@ -1,0 +1,48 @@
+{
+  "base_sha": "207c3071e3b69940df2d4d1b29344c028df4e67e",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-24T03:00:09.502507+00:00",
+  "director_mandate": {
+    "agent_priors_used": [
+      "Prior: long-horizon agents compound path-dependent salience pollution and local-optima - early retrieval choice conditions later observations, distinguished from SPIDER evidence which shows frontier 0/10 mixed failure suggests single next-step PMI misses correlated-session dynamics; used to require trajectory-grouped permutation and correct-family gating",
+      "Prior: thresholded fingerprint caching (DOM-hash, SHA, ETag) trades correctness for speed and requires calibrated UNKNOWN/ECE<=0.15 else false_accept dominates at scale - distinguished from SPIDER evidence of recalibrated 0.95/0.85 confidence and Jaccard 0.85+ETag that partially addresses it",
+      "Prior: parameterization only transfers when alias families are orthogonal Jaccard<0.30 with family-specific slots, otherwise templated alias binds vacuously - distinguished from SPIDER evidence of 8 MEASUREMENT_INVALID param-inherit pilots and frontier cross-family key adoption tautology",
+      "Prior: O(1) tool/API bypass dominates O(MxN) browsing when manifest/routing normalization solved (800 tokens amortized f=10/100) - distinguished from SPIDER evidence of WebMCP Registry 714/2147 and frontier mixed 0/10 ceiling which is still bounded failing",
+      "Prior: measurement degeneracy at ceiling discrimination 1.0 CI [1.0,1.0] signals insufficient task diversity not strong evidence; requires heterogeneous |S|>=16, L=8-14, 2000 bootstrap - distinguished from SPIDER evidence of runtime 1.0 ceiling blocked gradients and physics BF -10 nats on 3-4 state TodoMVC"
+    ],
+    "allocation": {
+      "action": "CONTINUE",
+      "claim_id": "C-PRODUCT-ECON",
+      "cognitive_reset": true,
+      "comparative_reasoning": "Alternative was another WebArena-Verified v2 192/36 novelty-fraction sweep testing rho_novelty>0.60 vs rho_length with same per_hit formula - rejected because per_hit already falsified and bijective n*3200 proxy was removed; repeating with same metric does not change architecture decision. Alternative MEA auditor batched verified_state caching as primary question is lower leverage until Pareto definition is settled. Stagehand vs SPIDER head-to-head on frozen bank QCR is valuable but is subsumed by Pareto dominance gate which includes it.",
+      "dependencies": [
+        "runtime",
+        "intel",
+        "frontier"
+      ],
+      "parent_handoff_disposition": "USE",
+      "question": "On health-gated shared-WAL HS256 substrate (single-worker sticky $request_uri hash, If-None-Match/ETag->304 n_non304>=800 probe, TTL 60s max-age conditional probe with ETag W/body_sha ~50% stale at n=0.25 vs ~1.0 at n=0) plus Docker BrowserGym 0.14.3 2000-node 1280x720 real gpt-4o-mini 15-step tokens/browser_steps+latency with rho_proxy_real>=0.50 and per-stratum |rho_shuffled|<0.20 and |rho_length|<0.20, does honest M_total_f10 Pareto dominance (tokens vs browser+latency vs accuracy at f=10/100, 5000 family-stratified bootstrap + 5000 block-permutation) superseding contested per_hit=(M_total_f10 - retrieval - distill/compile - auditor)/L <=0.85 show Stagehand selector-cache+TTL vs WebMCP Registry 714 sites/2147 tools O(1) compilation (amortized 800/f) vs SGDR/AWM state-grounded retrieval achieving dominance vs RAG-EMBED TAU0.30 QCR with verification-derived calibration false_accept<=0.10 UNKNOWN precision>=0.85 ECE<=0.15 bootstrap upper<=0.18 and ST-WebAgentBench safety, thereby formally testing PRODUCT_CORE gate after per_hit falsified 1.005>0.85 rho 0.363<0.60?",
+      "rationale": "Product is IDLE, 13 econ recent, per_hit falsified under honest sum-counter. Continuing per_hit<=0.85 thread has negative expected value; handoff correctly proposes superseding it with honest M_total_f10 Pareto at f=10/100 vs shipped baselines Stagehand (selector+DOM-hash HIT>=0.8 MISS>=0.8 2x/~30%, 48h TTL) and WebMCP O(1) (714/2147). This directly tests commercial viability with real gpt-4o-mini replication and honest cost, requires runtime single-node gate as dependency but can be designed/queued in parallel."
+    },
+    "cycle_id": "35949179364",
+    "lane": "product",
+    "portfolio_assessment": "SPIDER at 319 canonical exps has zero VALIDATED/PRODUCT_CORE/SHIPPED claims. Sole bounded SURVIVES is C-FRESHNESS synthetic single-resource flat-JSON guard (EXP-GRAPH-35947468747: Jaccard 0.85 {id,name,email}+endpoint _template/X-Csrf-Token+ETag+max-age=0, recalibrated 0.95/0.85, TN>=0.85 FA<=0.10 ECE<=0.15 at 15% stale 360-req with transfer to shared-WAL flask/nginx) - still synthetic, not production CDN. All other central claims are MEASUREMENT_INVALID or bounded FALSIFIED: C-PARAM-INHERIT 8 consecutive MEASUREMENT_INVALID on WebArena-Verified v2 A->B family holdout (kernel durability gates failed); C-RESIDUAL-NOVELTY/C-PRODUCT-ECON falsified under honest sum-counter (per_hit 1.005>0.85 rho 0.363<0.60, R2 fails) and 5 consecutive FALSIFIED/MEASUREMENT_INVALID; C-WEB-DYNAMICS 0/71 beyond-memory hits on real data (synthetic BF passes, real log BF -10 to -15 nats favors memory, Gate0 0/5 titles/leakage); C-CROSSSITE vacuous single-store 0.9479 (15 MEASUREMENT_INVALID, longest-prefix with truncation/SHA instability); C-DELTA-REPAIR BLOCKED x3; C-MEAS-VALID blocked at 51-exp distributed honest-count failure despite localhost 960/960 byte-identical lifecycle. Three lanes tunnel-flagged (frontier 16 semantic, intel 15 crosssite, physics 13 web-dynamics, product 13 econ, runtime 51 meas-valid) and three lanes idle. Most promising global move is unblocking: runtime single-node honesty gate (honest per-trajectory-reset sum-counter |rho_shuffled|<0.20) must pass before graph distributed VALIDATED or product M_total_f10 Pareto can be trusted; intel diverse-site substrate (WebGym 292k >=50 eTLD+1 + Mind2Web-2 130-task) must pass before physics beyond-memory or graph param-inherit/crosssite. Frontier synthetic alias gate needs one discriminating ablation before live BrowserGym shootout. Graph should harvest synthetic freshness leverage on delta-repair (localized contamination<0.10) rather than immediately harvesting another degenerate distributed MEASUREMENT_INVALID.",
+    "schema_version": 1,
+    "scout_assessment": "Scout brief correctly flagged central blockers (runtime 51-streak distributed honest-count, frontier 16-deep alias-OOD 21/40=0.525 ECE 0.26, param-inherit 8 MEASUREMENT_INVALID, residual/product per_hit falsified under honest sum-counter, Stagehand 80% speedup and WebMCP 714 sites as shipped competitors, WebGym 292k/Mind2Web-2 as unblocking diverse substrate). Brief affected decisions strongly: adopted Scout's honest sum-counter (|rho_shuffled|<0.20) and WebGym diverse-site recommendation for intel, and Stagehand/WebMCP Pareto comparison for product. Challenged Scout where it suggested immediate distributed pursuit: instead mandated minimal single-node gate before distributed VALIDATED for graph/runtime to avoid harvesting more degenerate [1.0,1.0] distributed MEASUREMENT_INVALID. Did not delegate broad literature review - assigned deep verification to intel (WebGym) and frontier (ablation) as staff advice not authority."
+  },
+  "experiment_id": "EXP-PRODUCT-35949571341",
+  "inherited_last_verdict": "MEASUREMENT_INVALID",
+  "inherited_next_question": "On health-gated shared-WAL HS256 substrate (single-worker sticky URL-bound hash $request_uri, real If-None-Match/ETag->304 n_non304>=800) with TTL 60s max-age conditional probe (ETag W/body_sha ~50% stale at n=0.25 vs ~1.0 at n=0) and Docker BrowserGym 0.14.3 2000-node 1280x720 full-DOM real gpt-4o-mini 15-step tokens/browser+latency (rho_proxy_real>=0.50 |rho_shuffled|<0.20 per-stratum |rho_length|<0.20) and correlated TTL 60s max-age conditional probe ETag W/body_sha ~50% stale at n0.25 vs ~1.0 at n0, does Stagehand selector-cache + TTL gating vs WebMCP Registry 714 sites/2147 tools O(1) compilation (amortized compile 800/f) vs SGDR/AWM state-grounded retrieval achieve honest M_total_f10 Pareto dominance (tokens vs browser+latency vs accuracy at f=10/100) with verification-derived calibration false_accept<=0.10 UNKNOWN precision>=0.85 ECE<=0.15 bootstrap upper<=0.18, thereby formally superseding contested per_hit=(M_total_f10 - retrieval - distill_or_compile_amort - auditor_amort)/L <=0.85 vs RAG-EMBED as PRODUCT_CORE gate, reporting family-stratified 5000 bootstrap + block-permutation 5000 vs gpt-4o-mini+Playwright replication?",
+  "lane": "product",
+  "origin_github_run_id": "35949571341",
+  "parent_handoff": {
+    "experiment_id": "EXP-PRODUCT-35947481519",
+    "path": "research/experiments/EXP-PRODUCT-35947481519/handoff.json",
+    "sha256": "cbaa327ac40ebfb8f99ebaf7834f3ebbf2027c8931ee93e71eca82585bde2c13"
+  },
+  "reason": "global-director-CONTINUE",
+  "request_hash": "ce25605acf5a3028cc862c07ac04bbf0e1a20ffa25fb4acbeddc968833d9aca0",
+  "request_id": "720db13fd2bfe7f0463a3e35",
+  "schema_version": 1
+}
