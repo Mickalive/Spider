@@ -1,0 +1,61 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-35954196999",
+  "lane": "product",
+  "target_lane": "product",
+  "next_question": "After provisioning single-node HS256 sticky WAL at /tmp/spider-runtime/shared.db with nginx 1.24.0 $request_uri sticky + real If-None-Match/ETag W/body_sha conditional probe (n_non304>=800, TN>=0.85) and authorizing BrowserGym 0.14.3 2000-node 1280x720 CDP AX + gpt-4o-mini 15-step key, does honest M_total_f10/f100 Pareto (tokens+browser+latency vs accuracy at f=10/100, 5000 family-stratified trajectory-grouped bootstrap + 5000 block-permutation, rho_proxy_real>=0.50 per-stratum |rho_shuffled|<0.20 |rho_length|<0.20, AUROC>=0.75 precision>=0.80 false_accept<=0.10 UNKNOWN>=0.85 per-class ECE<=0.15 Wilson/bootstrap, correlated probe saving>=30% accuracy>=0.90 vs seeded-42 random 0.53, DSM 714/2147 80-94% $0.002-0.092 amortized, safety <=RAG+0.02) demonstrate supersession of per_hit<=0.85 artifact by Pareto dominance vs RAG-EMBED TAU0.30/QCR, Stagehand-cache, and DSM/SGDR on WebArena-Verified Hard258 or disclosed 192/36 orthogonal fallback?",
+  "why_next": "Director REOPEN with SUPERSEDE remains unresolved: per_hit falsification (1.045>0.85 at n0, rho 0.472<0.60) is bounded to file-proxy isolated SQLite; Pareto supersession test (M_total tokens vs browser+latency vs accuracy at f=10/100 with rho_proxy_real>=0.50 and correlated TTL vs random delta>10%) is the minimal honest substrate that can flip C-PRODUCT-ECON from HYPOTHESIS to EXPERIMENTAL or PARK it even on honest substrate. This packet CLEARED only MV2 kernel fix and installability; substrate, keys, sgdr_index remain blockers. Next experiment must retry identical frozen question on provisioned single-node health-gated correlated substrate + real BrowserGym tokens before any alternative product pivot.",
+  "carry_forward": {
+    "established": [
+      "Frozen inputs byte-identical to freeze.json verified (request 500888432e900629085d83032bf13d75aa528166427862fc59f4228e7a08e43a, spec 5cf9297b763238b704a78436655121b0d83043f8d9268112ca5d8a27e917a7be, prereg ba51631006aa8d598e6f2e7fdc5c7f50c5ca88db6372901fa35bac9bea068a65, freeze 810514ca93cc102aaa2b370d5ae93a8a6066991ca7fc9335a9a87ec982d31077) with provenance git head 30c57a10, no frozen file edited, no commit/push/reset, audit PASS on transmission invariants.",
+      "src/spider/kernel.py dot-regex patched in working tree only: line12 r'\\$\\{[A-Za-z_][A-Za-z0-9_\\.]*\\}' sha256 d926279d5ee14a044a2f13b8abc09202df9f5adb9e86feaadeb61818a15f4038, 5/5 n0 EXECUTABLE confidence 0.85 with correct dot-nested binding (${item.id}, ${family.id}, ${site.name}), family-gate UNKNOWN, low-conf EXPLORE, tests/test_kernel.py 3/3 PASS (artifacts/mv2_kernel_spot_check.json deee06f08ae7a4e01de170e261616751995bd6bb9e62bfe0d9b93e415e9492ef). Required for MV2 correctness.",
+      "Scientific stack importable after executor install (numpy 2.5.3 scipy 1.18.1 sklearn 1.9.1 pandas 3.0.6 flask 3.1.3 pyjwt 2.15.0 gunicorn 26.2.0 requests 2.34.2), de-risking 5000 bootstrap/5000 permutation computability, but with version drift vs frozen MV3 pins (gunicorn 26.2.0 !=23.0.0, pyjwt 2.15.0 !=2.14.0).",
+      "No economics inference for C-PRODUCT-ECON on health-gated substrate: all primary metrics null per packet contract (n_non304 null, rho_proxy_real null, M_total_f10 null, M_per_hit null, success null, ECE null, probe saving null, sgdr/dsm hit null), controls correctly UNKNOWN except kernel sub-gate, producer correctly refused banned file-proxy/n*3200/seeded-42 proxies, outcome INCONCLUSIVE not FALSIFIED."
+    ],
+    "rejected": [
+      "On file-proxy WebArena-Verified v2 192/36 orthogonal alias families 630 pairs Jaccard 0.0 QCR TAU0.30 honest f=10 sum counters, per_hit<=0.85 viability fails: StagehandTTL per_hit 1.045 CI[1.034,1.056]>0.85 at n0 (requires <=0.85 at BOTH n0 and n0.25) and WebMCP 1.032>0.85 at n0 and 0.88>0.85 at f=100, rho_novelty 0.472<0.60 |rho_length|0.306>0.20 (bounded file-proxy only, not global pareto failure). Pareto M_total_f10 WebMCP 897 vs Stagehand 1773 vs RAG 3703 vs Cold 5497 is bounded descriptive, not gated.",
+      "Kernel HEAD pre-patch regex r'\\$\\{[A-Za-z_][A-Za-z0-9_]*\\}' sha 46929b3a fails dot-nested slots and was not durable at parent verdict dac04e60; do not carry as established.",
+      "No rejection of honest single-node health-gated correlated freshness Pareto or residual-novelty rho>=0.60; no rejection of DSM O(1) $0.002-0.092 amortized or SGDR vs DSM delta on honest substrate; those remain untested."
+    ],
+    "unknown": [
+      "Whether /tmp/spider-runtime/shared.db WAL single-worker gunicorn 23.0.0 + nginx 1.24.0 $request_uri sticky hash + PyJWT 2.14.0 HS256 + real If-None-Match/ETag W/body_sha 200 vs 304 loop can be provisioned health-gated with n_non304>=800, TN>=0.85, freshness fresh ~1.0 at n0 vs ~0.5 stale at n0.25, saving>=30% accuracy>=0.90 falseAccept<0.05.",
+      "Whether Docker BrowserGym 0.14.3 2000-node 1280x720 CDP Accessibility.getFullAXTree + gpt-4o-mini 15-step real tokens/browser_steps/latency exists (requires GHCR pull authorization + OPENAI_API_KEY) and file-proxy cost tracks real cost rho_proxy_real>=0.50 pooled+per-stratum with |rho_shuffled|<0.20 and |rho_length|<0.20.",
+      "Whether sgdr_index 36 state_key TRAIN-only + WebArena-Verified Hard258 258-task heterogeneous census (or disclosed 192/36 fallback) + qcr_bank_manifest TAU0.30 Jaccard<0.30 + dsm_registry 714/2147 + cost_config 50/15/180/10 can be staged TRAIN-only without contamination and measured with 5000 family-stratified trajectory-grouped bootstrap + 5000 block-permutation.",
+      "Whether P-STAGEHAND-TTL correlated probe and DSM O(1) compile (80-94% success, 15tok+10ms amortized 800/f $0.002-0.092) and P-SGDR state-grounded retrieval achieve M_total Pareto tokens>=30% and browser+latency>=20% vs RAG at f=10 and f=100 with accuracy>=0.85, AUROC>=0.75 precision>=0.80 false_accept<=0.10 UNKNOWN>=0.85 ECE<=0.15, and safety CuP <=RAG+0.02, superseding per_hit artifact.",
+      "Whether Pareto dominance supersession clause holds: per_hit>0.85 at BOTH n0 and n0.25 but M_total Pareto decisively dominates with rho>=0.60 per-stratum n>=800 and calibration gates PASS, formally retiring per_hit<=0.85 as gate."
+    ],
+    "do_not_assume": [
+      "MEASUREMENT_INVALID is infrastructure failure, not scientific falsification per EXPERIMENT_PACKET s9; file-proxy per_hit~1.0 artifact (both hit same 50-tok verify after excluding 200 vs 15 vs 180) does not imply M_total Pareto fails on honest health-gated substrate.",
+      "Working-tree kernel patch d926279d is not committed: HEAD 30c57a10 and parent verdict dac04e60 still blob cfec9866 pre-patch 46929b3a; do not assume dot-regex durable across clean checkouts; must commit before SURVIVES.",
+      "Scientific stack installable does not imply version-pin compliance or substrate health: gunicorn 26.2.0 !=23.0.0 and pyjwt 2.15.0 !=2.14.0 drift; nginx binary present (1.24.0) does not imply $request_uri sticky running or If-None-Match exercised or n_non304>=800.",
+      "Docker binary present (28.0.4) and pip browsergym 0.14.3 available on index do not imply BrowserGym image available (ghcr pull denied) or OPENAI_API_KEY provisioned; file-proxy fallback is banned by frozen rule for SURVIVES.",
+      "Prior-run artifacts (qcr_bank_manifest 8c69804b, webmcp_registry 2147 lines 714 sites af3c18e5, webmcp_sites 8e106525, cost_config 55fa25af, tasks.json 391e8f6c 192/36) are cross-experiment immutable references evidencing fixture availability for future staging, not this experiment's staged census; sgdr_index absent repo-wide, Hard258 census not staged.",
+      "runtime C-MEAS-VALID single-node HS256 gate remains MEASUREMENT_INVALID (EXP-RUNTIME-35949568321 wsgi sys.path import loop) and graph C-FRESHNESS only synthetic stdlib http.server flat-JSON SURVIVES; do not assume distributed or single-node health-gated substrate validated.",
+      "Pareto vs per_hit supersession not tested: both per_hit and M_total remain unmeasured on honest substrate; null metrics are explicit unknown (null per contract, not zero) and controls correctly UNKNOWN, no degenerate CI[1,1] or |rho_shuffled|>=0.35 false PASS."
+    ]
+  },
+  "dependencies": [
+    "runtime:C-MEAS-VALID single-node HS256 honesty gate at /tmp/spider-runtime/shared.db WAL single-worker sticky $request_uri health_gated n_non304>=800 (fix EXP-RUNTIME-35949568321 wsgi import loop, pin gunicorn 23.0.0 pyjwt 2.14.0, configure nginx 1.24.0 upstream)",
+    "graph:C-FRESHNESS single-node freshness TN>=0.85 validation on health-gated substrate (beyond synthetic flat-JSON; real If-None-Match/304 correlated probe)",
+    "provision BrowserGym 0.14.3 Docker image (ghcr.io/servicenow/browsergym:0.14.3 GHCR authorization or alternative 2000-node 1280x720 CDP AX image) + OPENAI_API_KEY for gpt-4o-mini 15-step real tokens/browser+latency rho_proxy_real>=0.50 per-stratum",
+    "commit src/spider/kernel.py dot-regex patch sha d926279d durably and reconcile version pins; stage sgdr_index 36 state_key TRAIN-only + WebArena-Verified Hard258 (or disclosed 192/36 fallback) + qcr TAU0.30 + dsm 714/2147 + cost_config 50/15/180/10 with hashes"
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-PRODUCT-35954196999/request.json sha256 500888432e900629085d83032bf13d75aa528166427862fc59f4228e7a08e43a",
+    "research/experiments/EXP-PRODUCT-35954196999/spec.json sha256 5cf9297b763238b704a78436655121b0d83043f8d9268112ca5d8a27e917a7be",
+    "research/experiments/EXP-PRODUCT-35954196999/prereg.md sha256 ba51631006aa8d598e6f2e7fdc5c7f50c5ca88db6372901fa35bac9bea068a65",
+    "research/experiments/EXP-PRODUCT-35954196999/freeze.json sha256 810514ca93cc102aaa2b370d5ae93a8a6066991ca7fc9335a9a87ec982d31077",
+    "research/experiments/EXP-PRODUCT-35954196999/result.json sha256 d17c8d0624c59646b2cc2d7e0417c10a5ae9e7b2d9c854b292bcd3761344fe5a status MEASUREMENT_INVALID outcome INCONCLUSIVE",
+    "research/experiments/EXP-PRODUCT-35954196999/audit.json status MEASUREMENT_INVALID producer_claim_supported false claim_ceiling HYPOTHESIS",
+    "research/experiments/EXP-PRODUCT-35954196999/provenance.json head 30c57a10 pre_execute 77f7cd9b kernel post_patch d926279d",
+    "research/experiments/EXP-PRODUCT-35954196999/artifacts/env_audit.json sha256 f3e99ad6651d635d97fa04d48f5b9608f519e9129cf28ebdaa8d43fdc99ab29f",
+    "research/experiments/EXP-PRODUCT-35954196999/artifacts/mv2_kernel_spot_check.json sha256 deee06f08ae7a4e01de170e261616751995bd6bb9e62bfe0d9b93e415e9492ef 5/5 EXECUTABLE",
+    "src/spider/kernel.py working-tree sha256 d926279d5ee14a044a2f13b8abc09202df9f5adb9e86feaadeb61818a15f4038 vs HEAD 46929b3a951df48d7f9d1fd850871073c0d91c1868aa117e13d389fe274e8d61",
+    "research/experiments/EXP-PRODUCT-35916130502/artifacts/qcr_bank_manifest.json sha256 8c69804b249ec9c84cf05d86a21c7ebe7a31af5f8d45e50a4e6d477b449f9f58",
+    "research/experiments/EXP-PRODUCT-35916130502/artifacts/webmcp_registry.jsonl sha256 af3c18e5ef1904484c5d440353b327958bdcc909e72915b301724b9f49bcdb4c 714/2147",
+    "research/experiments/EXP-PRODUCT-35916130502/fixtures/tasks.json sha256 391e8f6cf167300cf223ebbb19cf5d2beed6568f5f84ac968ae88866a438a98b",
+    "codex/experiments/EXP-RUNTIME-35949568321/verdict.json MEASUREMENT_INVALID",
+    "codex/experiments/EXP-GRAPH-35952148696/handoff.json SURVIVES_CURRENT_TEST synthetic flat-JSON only"
+  ],
+  "recommended_action": "Do not retry Pareto economics until smallest unblockers complete: (1) fix runtime wsgi import loop and provision single-node shared.db WAL single-worker gunicorn 23.0.0 + nginx $request_uri sticky + PyJWT 2.14.0 HS256 with real If-None-Match/304 and log n_non304>=800 health_gated TN>=0.85; (2) authorize GHCR BrowserGym 0.14.3 pull and provision OPENAI_API_KEY to enable rho_proxy_real>=0.50 per-stratum validation; (3) commit kernel dot-regex patch d926279d durably and reconcile gunicorn/pyjwt pins; (4) stage sgdr_index 36 + Hard258/192 census + qcr/dsm with hashes TRAIN-only. Then re-execute identical frozen REOPEN design with honest per-trajectory-reset sum counters f=10/f=100, 5000 bootstrap + 5000 permutation, and full C1-C4 gate including supersession test. No product promotion until PASS audit on that substrate."
+}
