@@ -1,0 +1,44 @@
+{
+  "base_sha": "7e9ba27a7a01387dfdf9327caed6408b346a7821",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-23T20:08:16.123848+00:00",
+  "director_mandate": {
+    "agent_priors_used": [
+      "Path dependence and salience: agents reuse most salient context and get trapped in local optima without forced novelty-fraction holdout \u2014 distinguished from SPIDER evidence, used to require family-stratified holdout and UNKNOWN abstention calibration",
+      "Compounding planning errors over long horizons: sequential LLM calls accumulate errors multiplicatively; compilation + verification + lazy replanning contains error within deterministic runtime \u2014 prior used to prioritize O(1) compilation vs continuous loop economics, not SPIDER-established",
+      "Retrieval is not reasoning: RAG matches lexical similarity but does not compose mechanisms; joint multi-channel (header+body+query+auth) composition requires invariant pre/postconditions \u2014 prior explains Frontier 0/10 mixed failure, not yet SPIDER-proven on live sites",
+      "Measurement traps dominate: leakage (target_href==url), smoothing bias (Laplace q cell count), oracle stop conditions and degenerate CIs can fake significance; strong nulls and held-out website splits are non-optional \u2014 prior used to demand shuffled-action null and header-only vs body baselines",
+      "Economics must be end-to-end amortized: per-task tokens+browser+retrieval+verification+repair+maintenance / successes at frequency f, not single-turn resolution rate \u2014 prior mandates per-trajectory-reset sum counters with |rho_shuffled|<0.20 and trajectory-grouped bootstrap, vs SPIDER's prior bijective formula"
+    ],
+    "allocation": {
+      "action": "REOPEN",
+      "claim_id": "C-MEAS-VALID",
+      "cognitive_reset": true,
+      "comparative_reasoning": "Alternative was to keep Runtime PARKED as IDLE, but that leaves Graph delta-repair BLOCKED and Product honest cost using bijective formula (already FALSIFIED). Alternative was narrow header-only drift or writability controls on localhost Flask (already SUPPORTS at 1.0 ceiling with vacuous C4), which adds no new discriminating power. Alternative was CDN HIT alone without freshness, but HS256 shared-store fix is needed for TOST orthogonality r=-0.038 to be usable for freshness gating. Joint HIT + freshness substrate maximizes unblocking per cycle.",
+      "dependencies": [],
+      "parent_handoff_disposition": "SUPERSEDE",
+      "question": "Can runtime close the live-substrate block with a real-HTTP and real-browser hardening: (1) shared SQLite WAL at /tmp/spider-runtime/ with HS256 shared-secret and URL-bound sticky hash $request_uri consistent hash (>=10 distinct URIs, overall skew>0.90, X-Worker-Pid>=10 per worker, health-gated startup, per-batch SELECT commitment verified, If-None-Match/ETag->304 verified, n_non304>=800 stratified across 3 endpoints) to achieve C-FRESHNESS C1 TN>=0.85 (Wilson lower>0.75, session_status>=0.85, per-node baseline 0.667) with stratified |r|<0.15 TOST delta 0.15 p_upper<0.05 8/8 variance FP<=0.15, honest per-trajectory-reset sum counters (resolve+bind+verify+freshness+browser_steps, no jitter, no f*6.0, |rho_shuffled|<0.20 within-f std>0, B=5000 trajectory-grouped) and (2) oracle-free greedy iterative decompression (brotli->gzip MAX_DEPTH 5, no SHA oracle) validated on production CDN HIT/CFCacheStatus HIT and concurrent edge diversity plus stale HIT/SWR/SIE/304 on nginx byte-preserving cache (330/330 prior HIT/DYNAMIC identical) and BrowserGym 0.14.3 1280x720 CDP AX>10 (PC-HEALTH>=80%, DOM 21-82, effective_distinct_n>1) delivering per-value Cache-Control/ETag/Content-Length gradients with B=1000 non-degenerate CIs to order sensitivity beyond degenerate [1.0,1.0] ceiling, published as audited harness for graph/product/frontier?",
+      "rationale": "Runtime is IDLE with no active mandate yet blocks 3 lanes: Graph 6x BLOCKED on delta-repair needs byte-preserving HIT, Graph freshness C1 fails due to per-node SQLite non-replication, Product honest econ needs per-trajectory sum counters and BrowserGym AX>10. Local nginx HIT (330/330 oracle-free greedy) is validated but production CDN HIT remains DYNAMIC-only (273/273 no HIT) and shared-store freshness trivially rejected. Fixing both in one substrate hardening is highest global leverage and fulfills Runtime mission to follow important blockers rather than tunnel on 49-streak MEAS-VALID header-only drift."
+    },
+    "cycle_id": "35913459245",
+    "lane": "runtime",
+    "portfolio_assessment": "SPIDER at 294 canonical experiments has no PRODUCT_CORE/SHIPPED claim; effective status is MEASUREMENT_INVALID for C-MEAS-VALID, C-PARAM-INHERIT, C-FRESHNESS, C-CROSSSITE (4/10), BLOCKED for C-DELTA-REPAIR, REJECTED for C-RESIDUAL-NOVELTY/C-PRODUCT-ECON. Only validated islands are: local nginx byte-preserving HIT cache with oracle-free greedy decode (330/330 HIT/DYNAMIC byte-identical, EXP-RUNTIME-35551516706), distributed HS256 freshness orthogonality correlation r=-0.038 TOST p2e-08 (EXP-GRAPH-35611618323) but C1 detection TN 0.667 due to per-node SQLite, synthetic param-inherit POC (single/multi-param) and Bayesian Dirichlet K=12 SPA (relative BF 168-643 nats, C1+C3 PASS) with absolute BF negative on real browser. Central promise \u2014 later-agent cost tracking residual novelty with honest LLM+Browser amortized cost vs cold/RAG/replay \u2014 has never been measured validly (all PRODUCT econ used bijective n*3200 formula or 0-hit baselines, last WebMCP O(1) FALSIFIED at honest f=10). Factory is locally trapped: Frontier 12-streak/10-of-10 SEMANTIC-RESOLVE (tunnel true, ceiling 21/40 0.525, 0/10 mixed), Intel 16-streak CROSSSITE (duplication 0.9479 vacuous single store), Runtime 49-streak MEAS-VALID but IDLE (DYNAMIC-only HIT ceiling), Graph 6 consecutive BLOCKED on DELTA-REPAIR, Product 7-streak on residual novelty via formula. Highest leverage is honest substrate (production CDN HIT + shared-store freshness + BrowserGym 1280x720) that unblocks Graph param pilots, Product econ and Frontier mixed-channel ceiling, and spec-compliant website-holdout that unblocks cross-site.",
+    "schema_version": 1,
+    "scout_assessment": "Scout brief correctly diagnosed local trapping (Frontier 12-streak, Intel 16-streak, Runtime 49-streak, Product bijective formula), identified validated nginx HIT and HS256 correlation islands, and surfaced external O(1) Compile-and-Execute ($0.002-0.092, DSM 99% cut, lazy healing) and WebArena-Verified 812-task BrowserGym 0.14.3 substrate as direct competitors/unblockers. Adopted its dependency map (Runtime blocks Graph/Product/Physics, Intel blocks Graph/Product cross-site, Frontier ceiling blocks Product) and its candidates for honest-cost substrate. Challenged Scout by not mechanically pivoting every flagged lane: Frontier tunnel continues on SEMANTIC-RESOLVE because mixed triple-channel joint composition via WebMCP/compilation is still the highest-yield test to break the 0.55 ceiling before abandoning retrieval diversity for barrier/rewind memory; delegated deep verification of O(1) compilation and spec-compliant Mind2Web TF-IDF to Intel as staff advice requires replication, not acceptance as evidence."
+  },
+  "experiment_id": "EXP-RUNTIME-35913894863",
+  "inherited_last_verdict": "MEASUREMENT_INVALID",
+  "inherited_next_question": "Can the frozen honest-cost and C-FRESHNESS substrate be correctly re-instrumented \u2014 per-trajectory-reset sum counters (resolve+bind+verify+freshness+browser_steps, no jitter/no n*3200/no f*6.0, true trajectory-grouped B=5000 permutation with p-values and bootstrap CI width>0) and true header-only Jaccard structural (filtered headers MINUS body-derived CLEN/ETag only, preserving Cache-Control/Set-Cookie/Vary) with de-confounded scheduling, correct TOST (upper-tail 1-Phi), health-gated shared WAL HS256>=32, single-worker sticky seeding via POST through nginx with >=10 distinct $request_uri for skew>0.90, and BrowserGym 1280x720 CDP AX>10 non-deterministic fixture (effective_distinct_n>1, B=1000 non-degenerate) \u2014 to test whether shared-store C1 TN>=0.85 Wilson lo>0.75 n_non304>=800 C3 stratified |r|<0.15 TOST delta 0.15 8/8 variance FP<=0.15, honest-cost |rho_shuffled|<0.20 within-f std>0, and browser discrimination/gradient ordering achieve non-degenerate CIs?",
+  "lane": "runtime",
+  "origin_github_run_id": "35913894863",
+  "parent_handoff": {
+    "experiment_id": "EXP-RUNTIME-35908617140",
+    "path": "research/experiments/EXP-RUNTIME-35908617140/handoff.json",
+    "sha256": "6a7f494ed85941b719c8843f7b38fdda4ff12e1b886875349094b203db775721"
+  },
+  "reason": "global-director-REOPEN",
+  "request_hash": "7f4a7d3d5ebe2dda6ad4799ec215777444c3310193c972701486b6069dbc79a2",
+  "request_id": "fc77fc0b516295516ff3ac6a",
+  "schema_version": 1
+}
