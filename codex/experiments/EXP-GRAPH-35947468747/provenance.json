@@ -1,0 +1,60 @@
+{
+  "experiment_id": "EXP-GRAPH-35947468747",
+  "lane": "graph",
+  "github_run_id": "35947468747",
+  "github_run_attempt": 1,
+  "base_sha": "a49bb1bcdd98471cdddfe253ba9083a41b16d8e3",
+  "pre_execute_sha": "30414aebb54b335bd6a7b9cc77a15493997fee5b",
+  "execute_sha": "84b1c15e740dcc542ad1ee66ffdf669211b7f655",
+  "commit": "84b1c15e740dcc542ad1ee66ffdf669211b7f655",
+  "executed_at": "2026-09-24T03:10:00+00:00",
+  "executor_model": "muse-spark-1.2-contributor-free",
+  "environment": {
+    "python": "3.12.14",
+    "platform": "linux",
+    "stdlib_http_server": "127.0.0.1 ephemeral",
+    "no_llm": true,
+    "no_docker_primary": true,
+    "no_browser": true
+  },
+  "code_paths": [
+    "research/graph/freshness_detection/execute_rebalanced_35947468747.py",
+    "src/spider/kernel.py",
+    "research/experiments/EXP-GRAPH-35947468747/raw_evidence/execution_results.json",
+    "research/experiments/EXP-GRAPH-35947468747/raw_evidence/metrics.json",
+    "research/experiments/EXP-GRAPH-35947468747/raw_evidence/bootstrap_ci.json"
+  ],
+  "frozen_hashes": {
+    "request.json": "43e79ba78f6d6ca39d452729cc951e1f43999a2a0adc8ec896c2b91c7fd18056",
+    "spec.json": "cfe1e040a994e0ed73949372ae00862ba5914a865a4831da940b30ffb7dfe229",
+    "prereg.md": "3c8fe385c09fe6dcb45478844644d898a69e360aaf5ef55813d7463fcf139719",
+    "freeze.json": "freeze at 2026-09-24T02:34:28.797898+00:00"
+  },
+  "artifacts": [
+    {"path": "research/experiments/EXP-GRAPH-35947468747/raw_evidence/execution_results.json", "sha256": "17ba6f3f0623d825fb2b7d6b819c83d3ba6b5fd28950d0aa340f4ab981baad69", "role": "raw", "count": 390},
+    {"path": "research/experiments/EXP-GRAPH-35947468747/raw_evidence/request_logs.json", "sha256": "3f3a47ad5a21cd31486d5672a5b9d97e54ab7097736409f0dc106405e9a7e110", "role": "raw"},
+    {"path": "research/experiments/EXP-GRAPH-35947468747/raw_evidence/metrics.json", "sha256": "8258d05481ead8cc4f4d3df0cbcdd1756bea25ec61b8875579d01e015e113d6d", "role": "derived"},
+    {"path": "research/experiments/EXP-GRAPH-35947468747/raw_evidence/cost_logs.json", "sha256": "0b949b43e016e0a8355ca7aba8385c1dd1d45d960f3bb9ef369f4d574747bb60", "role": "raw"},
+    {"path": "research/experiments/EXP-GRAPH-35947468747/raw_evidence/bootstrap_ci.json", "sha256": "e63e2bcc2a6715f07aa4e77b275a5b00f4aaa79b34d7a4db88019e72e72518bc", "role": "derived"},
+    {"path": "research/experiments/EXP-GRAPH-35947468747/raw_evidence/per_trajectory_cache.json", "sha256": "836289f101c0b592e6f7b893a33354c4c74726667e131868e92c7a53f4078619", "role": "derived"},
+    {"path": "research/experiments/EXP-GRAPH-35947468747/raw_evidence/decision.json", "sha256": "93ca7029614c3b5bb0b3a842e0402674ae33956496eddd011ff939e07dde2475", "role": "derived"},
+    {"path": "research/experiments/EXP-GRAPH-35947468747/raw_evidence/summary.json", "sha256": "f4d15b7da889f4222a8948e0076190da7f893b147cc34f708f6ae1e05f7e40a2", "role": "derived"},
+    {"path": "research/experiments/EXP-GRAPH-35947468747/raw_evidence/health_gate.json", "sha256": "cf67c619d18023cf58e6ad47292b498f5fd133654f5797d933de9a95a7f55513", "role": "derived"},
+    {"path": "research/experiments/EXP-GRAPH-35947468747/raw_evidence/distributed_metrics.json", "sha256": "9b3f1e7e6a7d6c96ac3391c24110367a86e19598c1372c022bc89c3d78e44037", "role": "derived"},
+    {"path": "research/graph/freshness_detection/execute_rebalanced_35947468747.py", "sha256": "fde76caf23f70adecb76ae2ff567de12dacede6a44e1a76e66f9c8975d07edb2", "role": "code"},
+    {"path": "src/spider/kernel.py", "sha256": "46929b3a951df48d7f9d1fd850871073c0d91c1868aa117e13d389fe274e8d61", "role": "code"}
+  ],
+  "datasets_fixtures": {
+    "synthetic_site": "stdlib http.server on 127.0.0.1 ephemeral port, single-resource flat-JSON /resource/{id}, deterministic orthogonal drifts at DRIFT_POINT=6",
+    "staleness_composition": "12 stable trajs x15=180 fresh + 2 per drift family x10=60 (30 fresh pre-drift +30 stale) =240 staleness pool + 15 noise trajs x10=150 (5 per churn variant) =390 total; spec 360 discrepancy disclosed as counting 30 fresh drift",
+    "stale_rate": "actual 30/240=0.125, expected 30/210=0.1428, both within [0.0928,0.18]",
+    "families": ["dom_drift Jaccard 0.5 required-filtered {id,name,email} <0.85", "param_header_mutation response-derived _template detail->uid + X-Csrf-Token abc->xyz", "cache_expiry ETag SHA256[:16] + Cache-Control 60->0 with 304", "stable fresh", "noise_A_phone", "noise_B_nickname", "noise_C_null"],
+    "thresholds_frozen": "Jaccard 0.85, confidence 0.95 fresh/0.85 stale, DRIFT_POINT 6, UNKNOWN bound [0.00,0.18] and stale_rate+/-0.07, max rho 0.20 trajectory-grouped, per-trajectory cache 3, 5000 bootstrap family-stratified trajectory-grouped, Wilson z=1.96, health-gate X-Worker-Pid>=2 HS256 n>=800",
+    "honest_counter": "resolve+bind+verify+freshness+browser_steps=4 per request constant integer, browser_steps 0 deterministic, per-trajectory reset, no jitter/n*3200/f*6.0/parity/bijective proxy"
+  },
+  "commands": [
+    "python research/graph/freshness_detection/execute_rebalanced_35947468747.py"
+  ],
+  "reproduction": "Run the same command on linux python 3.12 with stdlib only; no LLM, no Docker, no external network; deterministic seeds 42 for rho permutations and 123 for bootstrap; health-gated distributed stage will be DISTRIBUTED_MEASUREMENT_INVALID unless Flask 3.1.3+PyJWT 2.13.0 HS256 +2x gunicorn 23 +nginx 1.24 shared WAL at /tmp/spider-runtime/*/shared.db is deployed",
+  "notes": "Primary synthetic-rebalanced gate is independent of distributed stage per spec; distributed MEASUREMENT_INVALID does not override PRIMARY SURVIVES; total 390 vs spec 360 due to counting fresh pre-drift from stale trajectories (30) required for V5 and per-trajectory cache — stale_rate 0.125 still within expected window, Wilson FA upper 0.1135 <0.18 informative at n_stale=30"
+}
