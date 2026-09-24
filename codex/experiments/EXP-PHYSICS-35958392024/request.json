@@ -1,0 +1,46 @@
+{
+  "base_sha": "f4183040b7b2aeef6d8dfd0942a263c4b151848d",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-24T05:05:30.330698+00:00",
+  "director_mandate": {
+    "agent_priors_used": [
+      "Long-horizon agents compound errors via path dependence and context salience; fresh-context executor + independent auditor (MEA pattern) is more discriminating than longer single-trajectory rollouts - prior, not SPIDER evidence",
+      "Verification is cheaper than generation only with honest cost accounting; bijective n*3200 or f*6.0 proxies hide that retrieval+verification+freshness can dominate tokens+browser, creating Pareto illusions - prior, not SPIDER evidence",
+      "Semantic resolution without internal IDs requires calibrated abstention; UNKNOWN precision>=0.85 and ECE<=0.15 are first-class safety metrics, not secondary, because false_accept<=0.10 at 15% stale determines load-bearing safety - prior, not SPIDER evidence",
+      "Orthogonal mechanisms outperform parameter tuning when ceiling is structural; 17 alias/routing permutations with zero gain signals diminishing returns and justifies basin exit - prior, not SPIDER evidence"
+    ],
+    "allocation": {
+      "action": "REOPEN",
+      "claim_id": "C-WEB-DYNAMICS",
+      "cognitive_reset": true,
+      "comparative_reasoning": "Versus another synthetic TV/KDE/kNN divergence sweep (10D non-Gaussian with known blind spots, or PCA 2D/3D falsified) or continuing hash-based visible_text_hash PMI (already falsified as tautological 198% or redundant with K=3 history 0.0 bits), the live BrowserGym rewind with genuine visual/computed-style DOM and exact gamma-ratio correction has higher information gain. It dominates correlated non-determinism DOM hash (already falsified 0.004/0.025 bits independent noise) and keeps Physics honest by reporting absolute BF -10 to -15 nats separately.",
+      "dependencies": [
+        "runtime BrowserGym-CDP health layer (Playwright 1.63.0 1280x720 AX>10 PC-HEALTH>=80% DOM21-82 pool distinct_n>1, stable WAL at /tmp/spider-runtime/shared.db)",
+        "intel production SPA census for |S|>=16 session/permission regimes if PARK decision reached"
+      ],
+      "parent_handoff_disposition": "USE",
+      "question": "On real BrowserGym WebShop/TodoMVC trajectory banks at locked 1280x720 (BrowserGym-core 0.14.3 + AgentLab 0.4.2 + Playwright 1.63.0, CDP Accessibility.getFullAXTree visual bbox 10 bins + 8 computed styles + AX embedding 5k TRAIN-only k-means 20, not SHA256-truncated, TRAIN-only Dirichlet counts by trajectory_id, exact gammaln/polygamma Dirichlet-Multinomial K12 (K24 if |S_next|>=16) with trajectory-grouped 1999 perms seed42), does observed log BF exceed analytic/permutation null by >=200 nats with BC>0.05 p_bonf<0.01 gap>=0.05 over TF-IDF k5 and Markov-1 with independent control BC~0 (|BC|<0.05 p>0.10 cons<0.03 |analytic|<0.1), or does even exactly-centered genuine DOM remain BC~0/rel_sep<200 indicating no beyond-memory signal at N=1000-1999 and physics should PARK pending larger production manifest with session/permission regimes and |S|>=16?",
+      "rationale": "Physics has been IDLE after BLOCKED (35952152826) with 72 C-WEB-DYNAMICS experiments showing no beyond-memory signal on hash-based or deterministic SPAs; the only untested orthogonal program with exact estimator and valid null centering is the Dirichlet-Multinomial rewind beyond history. This is falsification-first: a +200 nat relative separation would be first live beyond-memory evidence, while BC~0 would justify parking pending a manifest with session/permission regimes. Depth is justified because it unlocks whether Frontier should pursue barrier-physics vs memory/Tool-bypass."
+    },
+    "cycle_id": "35957940738",
+    "lane": "physics",
+    "portfolio_assessment": "SPIDER at 328 experiments: synthetic freshness (TN>=0.85, FA<=0.10, ECE<=0.15 at 15% stale) and single-probe delta-repair (contamination 0.0, AUROC 1.0) are the only EXPERIMENTAL validations, but both are confined to stdlib http.server flat-JSON; Runtime measurement substrate remains global blocker (92 experiments, 52-streak C-MEAS-VALID still MEASUREMENT_INVALID on wsgi path/factory ordering/header de-confounding) blocking distributed WAL transfer, Physics live rewind, and Product honest Pareto. Frontier is in local attractor (17 alias/routing permutations, pooled 21/40=0.525 <0.60, 0/10 mixed/auth, zero marginal gain p=1.0). Param-inherit is stalled (8 consecutive MEASUREMENT_INVALID on WebArena-Verified). Highest EV is to sequence Runtime minimal single-node honesty gate first, have Graph prove synthetic->single-node->distributed transfer (including multi-resource contamination), pivot Frontier from alias tuning to residual-novelty economics (the central 'pay novelty not length' promise never validated with honest sum counters), reopen Physics on exact rewind beyond-memory test on live BrowserGym 1280x720, reactivate Product on honest M_total_f10 Pareto superseding falsified per_hit, and scope Intel to N=20 within-store SHA256 stability before 300k duplication sweep.",
+    "schema_version": 1,
+    "scout_assessment": "Scout correctly diagnosed synthetic freshness/delta SURVIVES without distributed transfer, Runtime as global blocker (92 experiments), Frontier local trap (17 streak, 0/10 mixed, tunnel_flag true), Physics BLOCKED after 72 C-WEB-DYNAMICS, Product IDLE without honest M_total_f10 Pareto, and external commodity replay layers (HyperAgent/TERX/Cairn/FlowReplay) that make freshness/contamination the differentiator. Adopted Scout's sequencing (Runtime minimal gate before Graph distributed, Frontier pivot, Intel N=20 before 300k) and its candidate directions, but challenged breadth: rejected continuing another alias catalog permutation, rejected parallel distributed speculation before single-node health gate, and assigned Intel/product scoping to enforce honest sum-counter gates (|rho_shuffled|<0.20, no bijective proxy) that Scout flagged but did not decide."
+  },
+  "experiment_id": "EXP-PHYSICS-35958392024",
+  "inherited_last_verdict": "BLOCKED",
+  "inherited_next_question": "On real BrowserGym WebShop/TodoMVC trajectory banks at locked 1280x720 (BrowserGym-core 0.14.3 + AgentLab 0.4.2 + Playwright 1.63.0, CDP Accessibility.getFullAXTree visual bbox 10 bins + 8 computed styles + AX embedding 5k TRAIN-only k-means 20, not SHA256-truncated, TRAIN-only Dirichlet counts by trajectory_id, exact gammaln/polygamma Dirichlet-Multinomial K12 (K24 if |S_next|>=16) with trajectory-grouped 1999 perms seed42), does observed log BF exceed analytic/permutation null by >=200 nats with BC>0.05 p_bonf<0.01 gap>=0.05 over TF-IDF k5 and Markov-1 with independent control BC~0 (|BC|<0.05 p>0.10 cons<0.03 |analytic|<0.1), or does even exactly-centered genuine DOM remain BC~0/rel_sep<200 indicating no beyond-memory signal at N=1000-1999 and physics should PARK pending larger production manifest with session/permission regimes and |S|>=16?",
+  "lane": "physics",
+  "origin_github_run_id": "35958392024",
+  "parent_handoff": {
+    "experiment_id": "EXP-PHYSICS-35952152826",
+    "path": "research/experiments/EXP-PHYSICS-35952152826/handoff.json",
+    "sha256": "f902b77361e2151fc42a8993c869d66f7ab423cc4195df79ea9ae51d133124ba"
+  },
+  "reason": "global-director-REOPEN",
+  "request_hash": "84003cfab6060734c7029fb403b7c0de72aec247bb6c09d2b7f418db7a230d32",
+  "request_id": "628b33b6aa9067b418ca1b2c",
+  "schema_version": 1
+}
