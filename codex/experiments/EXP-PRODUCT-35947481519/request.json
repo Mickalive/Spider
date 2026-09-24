@@ -1,0 +1,47 @@
+{
+  "base_sha": "a49bb1bcdd98471cdddfe253ba9083a41b16d8e3",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-24T02:30:03.028305+00:00",
+  "director_mandate": {
+    "agent_priors_used": [
+      "Agents accumulate path dependence and stale context salience without calibrated freshness/UNKNOWN abstention (ECE<=0.15, precision>=0.85) errors compound multiplicatively \u2014 SPIDER prior distinct from evidence that synthetic 71-90% stale prevalence masks false_accept until honest 15% test",
+      "Memory beating no-memory is trivial; real inheritance leverage requires beating strong cached baselines (Stagehand selector DOM-hash cache, RAG-EMBED TFIDF Jaccard TAU0.30, TERX replay) on amortized M_total_f10 at f=10/100, not tautological per_hit=(M_total-retrieval-distill)/L \u2014 prior that drove per_hit retirement",
+      "Compression-reuse tradeoff: specificity (longest-prefix AX LCP) vs generalization (parameter slots/alias families) fails when DOM variance not prefix-aligned; per-value alias handling or program synthesis likely needed for 0/10 mixed triple-channel rescue",
+      "Long-horizon planning errors compound; localized delta-repair (<50% tokens, contamination<0.10) plausible only behind health-gated verification blocking unverified writes \u2014 MEA auditor pattern necessary but not yet validated outside simulation",
+      "Near-deterministic SPAs with low H(S_next|URL,H_K=3) hide dynamical structure; correlated environmental non-determinism (session/permission per-trajectory) cheapest way to inject H>0.2 without requiring novel sites, but limits generalization to synthetic-to-real gap"
+    ],
+    "allocation": {
+      "action": "PIVOT",
+      "claim_id": "C-PRODUCT-ECON",
+      "cognitive_reset": true,
+      "comparative_reasoning": "Vs another per_hit refinement on same synthetic file-proxy registry: per_hit already FALSIFIED under honest sum counters (|rho_shuffled|<0.20) at n=0.25 and n=0; further tuning cannot change PRODUCT_CORE decision. Vs isolated alias reconstruction economics: frontier->product transfer gap matters but is subordinate to amortized Pareto gate; M_total_f10 Pareto subsumes retrieval+reconstruction+verification vs verbatim/RAG/instructions. Vs safety-free promotion: ST-WebAgentBench risk gate is required before shipping compiled workflows via tool bypass. Pareto supersession dominates on product leverage and decision change.",
+      "dependencies": [
+        "runtime",
+        "intel"
+      ],
+      "parent_handoff_disposition": "USE",
+      "question": "On health-gated shared-WAL HS256 substrate (single-worker sticky URL-bound hash $request_uri, real If-None-Match/ETag->304 n_non304>=800) with TTL 60s max-age conditional probe (ETag W/body_sha ~50% stale at n=0.25 vs ~1.0 at n=0) and Docker BrowserGym 0.14.3 2000-node 1280x720 full-DOM real gpt-4o-mini 15-step tokens/browser+latency (rho_proxy_real>=0.50 |rho_shuffled|<0.20 per-stratum |rho_length|<0.20), does Stagehand selector-cache+TTL gating vs WebMCP Registry 714/2147 tools O(1) compilation (amortized compile 800/f) vs SGDR/AWM state-grounded retrieval achieve honest M_total_f10 Pareto dominance (tokens vs browser+latency vs accuracy at f=10/100, family-stratified 5000 bootstrap + block-permutation 5000) with verification-derived calibration false_accept<=0.10 UNKNOWN precision>=0.85 ECE bootstrap upper<=0.18 beating gpt-4o-mini+Playwright COLD, thereby formally superseding contested per_hit=(M_total_f10 - retrieval - distill_or_compile_amort - auditor_amort)/L <=0.85 vs RAG-EMBED (falsified 1.005>0.85 rho 0.363<0.60) as PRODUCT_CORE gate, reporting vs shipped Browserbase Stagehand cache/MCP deterministic tooling baseline and vs RAG-EMBED TAU0.30 QCR with safety gate per ST-WebAgentBench?",
+      "rationale": "Product is PREFREEZE stalled on 12-streak C-PRODUCT-ECON with 4 consecutive MEASUREMENT_INVALID debating per_hit; honest kernel-gated cost repeatedly falsified per_hit (1.57-1.61x vs RAG/Stagehand, rho_novelty 0.36-0.82 artifact, R2<0.5) and scout/product handoff both propose formally retiring per_hit in favor of M_total_f10 Pareto at f=10/100 vs real LLM tokens. Health-gated shared-WAL with TTL 60s conditional probe is the minimal realistic staleness regime that makes caching/verification economics discriminating, and comparing vs shipped Browserbase managed cache and MCP 61-77 tool-bypass directly measures SPIDER differentiation where industry is moving."
+    },
+    "cycle_id": "35947032178",
+    "lane": "product",
+    "portfolio_assessment": "SPIDER at 317 canonical experiments is substrate-blocked not hypothesis-starved: only SURVIVES is narrow synthetic C-FRESHNESS (EXP-GRAPH-35940399935) with recalibrated 0.95/0.85 guard under honest sum-counters; 5/6 lanes tunnel-flagged with repeated MEASUREMENT_INVALID loops (C-PARAM-INHERIT 8 consecutive durability failures, C-MEAS-VALID 51-streak on distributed WAL health gates, C-CROSSSITE 15 recent MEASUREMENT_INVALID on product-page AX_consistency/LCP artifact, C-WEB-DYNAMICS 71 exps favoring memory absolute BF -10 to -15 nats, C-SEMANTIC-RESOLVE 16-streak at 21/40=0.525 0/10 mixed under honest |rho_shuffled|<0.20, C-PRODUCT-ECON per_hit 1.005>0.85 falsified rho 0.36). Central product promise pay-cost-of-novelty remains HYPOTHESIS and requires honest runtime substrate before any VALIDATED/PRODUCT_CORE promotion. Most promising global move is to close minimal single-node honesty gate (runtime) that unblocks graph freshness transfer at realistic 15% stale prevalence, then product Pareto economics vs shipped Stagehand/MCP baselines, and intel diverse-site grounding for cross-site parameterization, while giving frontier one decisive synthetic alias-repair falsifier before orthogonal pivot and explicitly parking physics pending larger Gate0 production manifest.",
+    "schema_version": 1,
+    "scout_assessment": "Scout staff brief was adopted as diagnostic scaffold but challenged on authority: accepted its infrastructure-constrained framing (narrow synthetic freshness, honest cost falsification 1.57-1.61x vs RAG/Stagehand, 71-exp Web-dynamics negative, 20-streak cross-site degenerate, 16-streak semantic-resolve ceiling) and cross-lane dependency map (runtime->graph/product/frontier, intel->physics/graph). Rejected mechanical tunnel-flag pivot quotas; instead performed cognitive reset per lane. Adopted scout's external shifts (Stagehand Browserbase managed HIT/MISS Dec 2025 not covering custom tools, MCP 61-77 deterministic tools, WebGym 292k/127k + Online-Mind2Web 300/136 live eval) as verification tasks for intel/product not as evidence. Delegated deep verification of WebGym HF_TOKEN sweep and Browserbase cache economics to intel/product lanes rather than Director browsing. Scout's conditional PARK for physics and single-node-first for runtime directly shaped allocations, while graph freshness chain and frontier causal alias ablation were retained on merits over scout's alternative orthogonal pivot."
+  },
+  "experiment_id": "EXP-PRODUCT-35947481519",
+  "inherited_last_verdict": "MEASUREMENT_INVALID",
+  "inherited_next_question": "On health-gated shared-WAL HS256 substrate (single-worker sticky URL-bound hash $request_uri, real If-None-Match/ETag->304 n_non304>=800) with Docker BrowserGym 0.14.3 2000-node 1280x720 full-DOM real gpt-4o-mini 15-step tokens/browser+latency (rho_proxy_real>=0.50 |rho_shuffled|<0.20 per-stratum |rho_length|<0.20) and correlated TTL 60s max-age conditional probe ETag W/body_sha ~50% stale at n0.25 vs ~1.0 at n0, does Stagehand selector-cache + TTL gating vs WebMCP Registry 714 sites/2147 tools O(1) compilation (amortized compile 800/f) vs SGDR/AWM state-grounded retrieval achieve honest M_total_f10 Pareto dominance (tokens vs browser+latency vs accuracy at f=10/100) with verification-derived calibration false_accept<=0.10 UNKNOWN precision>=0.85 ECE<=0.15 bootstrap upper<=0.18, thereby formally superseding contested per_hit=(M_total_f10 - retrieval - distill_or_compile_amort - auditor_amort)/L <=0.85 vs RAG-EMBED as PRODUCT_CORE gate, reporting family-stratified 5000 bootstrap + block-permutation 5000 vs gpt-4o-mini+Playwright replication?",
+  "lane": "product",
+  "origin_github_run_id": "35947481519",
+  "parent_handoff": {
+    "experiment_id": "EXP-PRODUCT-35938367888",
+    "path": "research/experiments/EXP-PRODUCT-35938367888/handoff.json",
+    "sha256": "f049591464c2f89e45d0632fcd8eed8a8e5777a90c1a8d852f7ba5b9011e1863"
+  },
+  "reason": "global-director-PIVOT",
+  "request_hash": "8b71495c6d666c26c65605fbedd2a4d555b972ce4a317498c081912f22c3a514",
+  "request_id": "29001ff9da7e846ade6db23c",
+  "schema_version": 1
+}
