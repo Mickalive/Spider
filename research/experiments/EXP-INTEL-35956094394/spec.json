@@ -1,17 +1,95 @@
 {
   "experiment_id": "EXP-INTEL-35956094394",
   "lane": "intel",
-  "claim_ids": [],
-  "question": "",
-  "hypothesis": "",
-  "falsifier": "",
-  "baselines": [],
-  "positive_control": "",
-  "null_control": "",
-  "measurement_validity": [],
-  "decision_rule": "",
-  "product_consequence_positive": "",
-  "product_consequence_negative": "",
-  "estimated_cost": "",
-  "expected_information_gain": ""
+  "claim_ids": ["C-CROSSSITE", "C-RESIDUAL-NOVELTY", "C-PRODUCT-ECON"],
+  "question": "Can Intel deliver the durable census and external baseline substrate that unblocks cross-site transfer: (1) acquire WebArena-Verified v2 812-task census via durable pinned source (HuggingFace OpenEnv BrowserGym hosted layer or Docker am1n3e/webarena-verified-shopping@sha256:3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb with 64-char hash, byte-identical manifest) and repair fragment extraction for BrowserGym CDP Accessibility.getFullAXTree 1280x720 AX>10 noise handling, and (2) blindly reproduce external SOTA baselines (Agentic Compilation DSM 99% + deterministic JSON IR + HITL patching $0.002-0.092, TraceCompiler def-use 0.928/0.943, browser-memory catalog deterministic replay) on SPIDER's synthetic 40-task alias-OOD (30 orthogonal header/body/auth +10 mixed multi-channel) with trajectory-grouped bootstrap coverage/CIs and honest per-trajectory-reset sum-counter M_total_f10 Pareto f=10/100 vs SPIDER alias-catalog/routing/WebMCP, measuring where SPIDER must beat O(1) compilation to claim residual-novelty economics?",
+  "hypothesis": "H_A_DURABLE_CENSUS: A byte-identical durable pin (HF dataset raw/manifest or Docker 64-char digest, >=2 genuine attempts each with URL/status/bytes/sha256/64-char digest/command provenance) can yield a verifiable census of WebArena-Verified v2 (812 tasks: 192 shopping/184 shopping_admin/36 families_ge3 or measured count within 812±10 with digest equality) and a repaired BrowserGym fragment-extraction pipeline at 1280x720 (BrowserGym-core==0.14.3, AgentLab==0.4.2, Playwright==1.63.0, chromium --with-deps, CDP Accessibility.getFullAXTree not fallback snapshot) that achieves measurement-valid captures: median AX nodes >10, median DOM bytes >=2000 across >=10 probe captures, outerHTML SHA256 recomputed AFTER page.content()+AX with 9 base + expanded (form_key/uenc/store/session/timestamp/nonce) + body-regex (<body>.*</body> DOTALL) stripping before hash, grammar hash recomputed live, SHA stability before==after identical TRUE and after visible textContent/name mutation != TRUE on >=10 families, richer AX bbox/computedStyle present. H_B_SOTA_CEILING: On SPIDER's synthetic 40-task alias-OOD (deterministic seed, 10 header-param +10 body-param +10 auth-param +10 mixed multi-channel, generation code hash logged), external SOTA baselines reproduced BLIND per published recipe — B-AGENTIC-DSM (DSM 99% + deterministic JSON IR + HITL patch $0.002-0.092), B-TRACECOMPILER-DEFUSE (def-use 0.928/0.943), B-BMEM-CATALOG (deterministic replay) — achieve directly comparable coverage and honest per-trajectory-reset sum-counter costs (resolve+bind+verify+freshness+browser_steps summed per trajectory, not n*3200 or f*6.0 or Gaussian jitter) with trajectory-grouped bootstrap 95% CIs (B=2000, unit=task/trajectory, not transition) and Pareto f=10/100 amortized, alongside identically-measured SPIDER baselines B-SPIDER-ALIAS, B-SPIDER-ROUTING, B-SPIDER-WEBMCP, so the O(1) compilation cost ceiling (USD and M_total) that SPIDER must beat for C-RESIDUAL-NOVELTY/C-PRODUCT-ECON is quantified.",
+  "falsifier": "H_A falsified if after >=2 genuine attempts per durable source (HF and Docker, each timeout>=300s or docker load cached tar/ghcr mirror fallback, HF_TOKEN true/false logged, Hub digest 200 verification) no byte-identical manifest +64-char digest census artifact is produced (manifest_sha256 null or byte mismatch across sources without single pinned hash file, census total not in 700-812 verifiable range), OR the repaired AX pipeline fails measurement validity (median AX <=10 or median DOM <2000 or SHA stability before==after false or mutation-unchanged, or fallback snapshot used, or version/viewport mismatch). H_B falsified if external baselines cannot be executed blind on the synthetic 40 tasks with per-task logs producing coverage and honest M_total_f10/f100 with non-degenerate trajectory-grouped CIs, OR they are statistically indistinguishable from null controls (coverage within null permutation 95% CI, |rho_shuffled|>=0.20, or HIT/MISS degenerate). Single-module falsification yields experiment outcome FALSIFIES for that module (overall MIXED if one survives, overall FALSIFIES if both fail). Measurement failure (fewer than 2 genuine attempts, missing 64-char digest/pipline provenance, non-grouped or jitter proxies) triggers MEASUREMENT_INVALID, not falsification.",
+  "baselines": [
+    {
+      "id": "B-DURABLE-HF",
+      "description": "HuggingFace durable source: OpenEnv BrowserGym hosted layer or ServiceNow/WebArena-Verified raw manifest via HF API / huggingface.co/datasets with Authorization: Bearer HF_TOKEN, byte-identical manifest capture. Expected: manifest_bytes identical across attempts, sha256 pinned, status 200.",
+      "type": "durability",
+      "expected_behavior": "200 + byte-identical sha256, cataloged as durable pin for Graph census"
+    },
+    {
+      "id": "B-DURABLE-DOCKER",
+      "description": "Docker Hub source: am1n3e/webarena-verified-shopping@sha256:3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb, 64-char digest verified via Hub API /v2/repositories/.../tags, docker pull --digests or docker load cached tar, docker images --digests shows 64-char, container curl http://localhost:7770 reachable with 3 retries. Expected: digest_valid true, reachable true.",
+      "type": "durability",
+      "expected_behavior": "64-char digest equality and reachable host for BrowserGym live probe"
+    },
+    {
+      "id": "B-TRUNCATED-20",
+      "description": "Fragment truncation null baseline: selectors/AX tokens [:20] truncated vs full-tree. Measures delta_vs_truncated diagnostic that full-tree handling matters.",
+      "type": "fragment",
+      "expected_behavior": "M_AX_DELTA_TRUNCATED = M_CONSISTENCY_full - M_CONSISTENCY_trunc20, expected >=0.20 if full-tree is non-vacuous"
+    },
+    {
+      "id": "B-AGENTIC-DSM",
+      "description": "External SOTA: Agentic Compilation — Deep-Structure Model 99% compile + deterministic JSON IR + human-in-the-loop patching. Reproduced blind per paper: template compilation to JSON IR, DSM fill, patch hook. Cost USD $0.002-0.092 per task measured. Expected coverage ~99% on single-channel, lower on mixed.",
+      "type": "external_sota",
+      "expected_behavior": "coverage 0.95-0.99 on orthogonal single-channel, cost Pareto f=10/100 quantified"
+    },
+    {
+      "id": "B-TRACECOMPILER-DEFUSE",
+      "description": "External SOTA: TraceCompiler def-use chain extraction (0.928/0.943 reported). Reproduced blind: dynamic trace → def-use edges → IR compilation. Expected coverage per reported numbers on alias-OOD.",
+      "type": "external_sota",
+      "expected_behavior": "coverage ~0.928 header/body, ~0.943 mixed if synthetic overlaps TraceCompiler domain"
+    },
+    {
+      "id": "B-BMEM-CATALOG",
+      "description": "External SOTA: browser-memory catalog deterministic replay (exact selector cache without alias handling). Reproduced blind: exact outerHTML selector replay, no param slots. Expected to fail on alias-shifted tasks.",
+      "type": "external_sota",
+      "expected_behavior": "coverage high on no-shift, near 0 on alias-OOD (demonstrates alias problem)"
+    },
+    {
+      "id": "B-SPIDER-ALIAS",
+      "description": "SPIDER baseline: alias-catalog (literal selector catalog with per-value alias handling stub). Measured identically with honest sum-counters.",
+      "type": "spider",
+      "expected_behavior": "coverage vs external baselines on orthogonal vs mixed, cost comparison ceiling"
+    },
+    {
+      "id": "B-SPIDER-ROUTING",
+      "description": "SPIDER baseline: mechanism routing (score + param-slot-count tie-break, recalibrated 0.95/0.85 confidence).",
+      "type": "spider",
+      "expected_behavior": "coverage and false_accept calibrated vs Agentic DSM"
+    },
+    {
+      "id": "B-SPIDER-WEBMCP",
+      "description": "SPIDER baseline: WebMCP tool prevalence emulation (tool/API bypass where prevalence known). Measured at f=10 and f=100 amortized.",
+      "type": "spider",
+      "expected_behavior": "prevalence_f10/f100 CI vs compilation ceiling; O(1) vs browsing hybrid dispatch signal"
+    },
+    {
+      "id": "B-COLD-LLM",
+      "description": "Cold LLM no-memory control: same model/tools/budget, no inherited mechanisms. Floor for inheritance gain.",
+      "type": "cold",
+      "expected_behavior": "lowest coverage, highest M_total, defines absolute lower bound"
+    }
+  ],
+  "positive_control": {
+    "id": "PC-SYNTHETIC-FIXTURE-AND-TOY-DSM",
+    "description": "Two positive controls: (PC-A) Synthetic Flask product fixture at 1280x720 with fixed DOM (heading+price+add-to-cart+main+contentinfo) served localhost, known AX tree 20 nodes, outerHTML deterministic. Pipeline must capture median AX>10, DOM>=2000, SHA before==after identical TRUE, must detect visible textContent mutation (change price $1-> $2) as SHA !=. (PC-B) Toy single-header param task where Agentic DSM paper's minimal example compiles deterministically to JSON IR and achieves coverage 1.0 on the spot; guarantees external baseline harness can run, not just fail due to scaffolding.",
+    "expected": "PC-A VALID captures >=2 on localhost with stability both directions; PC-B coverage 1.0 on toy, otherwise harness invalid."
+  },
+  "null_control": {
+    "id": "NC-SHUFFLED-AND-TRUNCATION",
+    "description": "Three nulls: (NC1) Family-label shuffle for duplication/coverage: permutation of task family labels (trajectory-grouped, 1000 perms) applied to duplication prevalence and to baseline coverage; expected |rho_shuffled|<0.20 and coverage shuffle mean ~ chance (~1/num_families), gap >=0.20 vs real. (NC2) Truncated baseline B-TRUNCATED-20 vs full-tree: delta_vs_truncated >=0.20 must hold to show full-tree not vacuous; shuffled version must not. (NC3) HITL patch disabled / random patch null: Agentic DSM with HITL hook replaced by no-op or random string patch must drop coverage >=0.30 vs HITL, isolating HITL contribution. All nulls trajectory-grouped, not transition-grouped.",
+    "expected": "NC1 |rho|<0.20 p>0.05, NC2 delta<0.05, NC3 coverage delta >=0.30 for HITL"
+  },
+  "measurement_validity": [
+    "MV1_DURABLE_ATTEMPTS: Each durable source (HF, Docker) requires >=2 genuine attempts logged with canonical path+hash: attempt URL, HTTP status/returncode, bytes, sha256 hex, 64-char digest substring check (len 64 hex), timeout >=300s or docker load fallback path captured (docker pull ... or docker load < tar), stderr/stdout captured. Single-attempt success is MEASUREMENT_INVALID. HF_TOKEN present true/false logged (not required to be true) but attempts must include Authorization header when token set. Evidence paths: artifacts/raw/webarena_verified_pin.json, artifacts/raw/browsergym_webarena_pin.json or hf_manifest provenance, freeze.json hashes.",
+    "MV2_BYTE_IDENTITY: Manifest byte-identicalness via sha256 hex digest equality stored; if only one source succeeds, single sha256 pinned file + download log suffices but cross-source equality must be explicitly marked unavailable, not assumed equal. Docker digest_form must be exactly sha256:3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb (64 hex chars after colon) with Hub API verification 200.",
+    "MV3_AX_REPAIR: Fragment repair requires BrowserGym-core==0.14.3, AgentLab==0.4.2, Playwright==1.63.0, playwright install --with-deps chromium verified via pip freeze sha256 nonempty and playwright --version + browser validation. Viewport strictly 1280x720. CDP Accessibility.getFullAXTree must be used (client.send via cdp_session) — fallback accessibility.snapshot counts as degraded and triggers MEASUREMENT_INVALID for H_A. Metrics median AX>10, median DOM>=2000, outerHTML body regex + 9 base + expanded stripping (form_key/uenc/store/session/timestamp/nonce) applied BEFORE SHA256 via page.evaluate, recomputed AFTER page.content()+AX, grammar hash live recomputed (not hardcoded). Provenance: ax_captures.jsonl, derived/ax_consistency_fulltree.json, grammar_fulltree_358885.py new sha256 with body regex present.",
+    "MV4_SHA_STABILITY: SHA stability both directions: before==after identical TRUE on no-mutation re-capture, and before!=after TRUE after visible textContent/name mutation (price/heading token) via page.evaluate mutation + re-capture. Tested on >=10 families (or synthetic fixture >=2 repeats if Docker unreachable). Without both tests, H_A inconclusive.",
+    "MV5_SYNTHETIC_ALIAS_OOD: Synthetic 40 tasks generation seed deterministic (seed 360360 or 35725763380), generation code hash logged, split 30 orthogonal (10 header-only/10 body-only/10 auth-only param slots) +10 mixed (header+body+auth) preserved in artifact research/intel/synthetic_alias_ood_40.json with per-task channel label. Body/header/auth orthogonality verified (no cross-channel leakage). If file missing, generate deterministically and hash generation script.",
+    "MV6_HONEST_COST: All cost metrics M_total_f10 and M_total_f100 are per-trajectory-reset sum-counters (resolve + bind + verify + freshness_check + browser_steps) reset per trajectory/task, summed, then amortized at f=10 and f=100. Prohibited proxies n*3200, f*6.0, Gaussian jitter, n*constant are MEASUREMENT_INVALID. Trajectory-grouped bootstrap B=2000 resampling unit=task/trajectory (not transition or step), 95% CI [lower,upper] non-degenerate width reported, variance>0, single valid trajectory insufficient. Negative shuffle controls use |rho_shuffled|<0.20 threshold on cost vs length correlation.",
+    "MV7_EXTERNAL_BLINDNESS: External baselines implemented blind per recipe citations without tuning to synthetic OOD split labels; code paths logged, recipe doc references (DSM IR schema, TraceCompiler def-use rule, catalog replay selector) stored. Per-task logs for all 40 tasks per baseline required. Fixture-agnostic: same 40-task split for all baselines in one run.",
+    "MV8_PROVENANCE: Every artifact path+sha256 stored in provenance.json: request/spec/prereg/freeze hashes, pip freeze hash nonempty, docker images --digests hash, command logs for pull/load/run, HF manifest sha256/bytes, generation script hash, per-baseline result jsonl. Missing provenance for any durability or cost path -> MEASUREMENT_INVALID for that module."
+  ],
+  "decision_rule": "Frozen three-way rule evaluated after MEASUREMENT_INVALID check: (A) MEASUREMENT_INVALID if any MV1-MV8 gating fails: <2 genuine attempts per durable source, missing 64-char digest or byte-identical sha, pip freeze empty or version/viewport mismatch, fallback AX snapshot used, body regex absent, or honest-cost proxy/ungrouped CI detected — then no SURVIVES/FALSIFIED inference, status MEASUREMENT_INVALID. (B) SURVIVES_CURRENT_TEST iff A passes AND module H_A_SURVIVES: (SRC_HF_SUCCESS OR SRC_DOCKER_SUCCESS) with census artifact (manifest_sha256 pinned, total_tasks 700-812, families_ge3 >=30 recorded) AND AX repair probe median AX>10 & median DOM>=2000 with SHA stability both directions TRUE and richer AX bbox/computedStyle present (prob >=10 captures) AND module H_B_SURVIVES: all three external baselines B-AGENTIC-DSM/B-TRACECOMPILER-DEFUSE/B-BMEM-CATALOG executed on 40 alias-OOD with per-task logs, coverage point estimates + trajectory-grouped 95% CIs non-degenerate, honest M_total_f10 and M_total_f100 with CIs, |rho_shuffled|<0.20, SPIDER baselines measured identically for Pareto comparison, and positive controls PC-A/PC-B passed (PC-A stability both ways, PC-B toy DSM 1.0). Promotion-ready artifacts delivered. (C) FALSIFIED_IN_SETTING if A passes (measurement valid) but H_A or H_B thresholds fail after genuine attempts: e.g., both durable sources return persistent 401/404 or byte mismatch after 2 attempts (no byte-identical pin), or AX median <=10/SHA stability false, or external baselines fail to run blind or are indistinguishable from NC1/NC2/NC3 shuffles (coverage within null CI or delta_vs_truncated <0.05 or HITL null not worse by >=0.30). Outcome MIXED if one module survives and the other falsified. All thresholds frozen; single-family or degenerate full-page LCP 0.0 variance explicitly NOT counted as valid AX signal.",
+  "product_consequence_positive": "If SURVIVES: Intel delivers CODEC-accepted durable census artifacts (pinned manifest hash + census json + Docker digest provenance) unblocking Graph's >=10-family hold-out design — next Graph experiment can use durable pin without re-probing WebArena liveness. Repaired fragment pipeline (1280x720 CDP AX>10 + body/expanded stripping) becomes shared measurement substrate for runtime/graph. External baseline reproduction defines O(1) compilation ceiling ($0.002-0.092, M_total_f10/f100 CIs) that SPIDER must beat; Product can now run honest Stagehand/WebMCP vs compilation Pareto to decide whether SPIDER alias-catalog/routing/WebMCP warrants VALIDATED or needs hybrid learned dispatch (tool bypass vs browsing). C-CROSSSITE advances from HYPOTHESIS toward EXPERIMENTAL for durable artifact dimension; C-RESIDUAL-NOVELTY/C-PRODUCT-ECON gain falsifiable cost baseline for economics claim. Promotion is to durable artifact dependency, not to code promotion to src.",
+  "product_consequence_negative": "If FALSIFIED: No durable WebArena v2 pin is viable at current HF/Docker coordinates (requires alternative durable source: WebMall/Mind2Web-2 130-task BrowserGym loopback, or LFS with 567MB manifest revalidated), so Graph hold-out remains BLOCKED on census and must not re-attempt N=20 longest-prefix on degenerate single-family substrate (expected MEASUREMENT_INVALID per Director). If external baselines falsify (cannot reproduce blind or perform at null level), then published O(1) ceilings are not blindly transferable to SPIDER's alias-OOD or synthetic orthogonal design is misaligned — requires redesign of alias-OOD channels or HITL cost model before Product can claim residual-novelty economics; tendency to repeat re-evaluations of alias/catalog without fresh baseline is to be PARKED. C-CROSSSITE stays HYPOTHESIS, C-RESIDUAL-NOVELTY/C-PRODUCT-ECON remain HYPOTHESIS with narrowed ceiling (compilation not yet a fair comparator). If MEASUREMENT_INVALID, no claim update; smallest next fix is infra repair per MV1-MV8 (genuine attempts >=2, versions, CDP path, honest counters, trajectory-grouped CIs).",
+  "estimated_cost": "Compute: runner 2.5-4h wall (docker pull 5.4GB if not cached, 2x genuine attempts with 300s timeout or docker load fallback ~15-30min, BrowserGym/AX probe 120 captures ~20min, synthetic 40-task x 6 baselines =240 task executions + cost aggregation ~60min). Network: HF manifest 2x attempts + Hub API digest check. Tokens: no LLM calls required (synthetic + deterministic harness; optional LLM only if testing SPIDER LLM-inherit later — excluded here). USD estimate $2-4 GH runner + $0 if HF_TOKEN cached else free. Artifact storage <50MB.",
+  "expected_information_gain": "High (Director-ranked). First gate for entire product thread: determines whether 327-exp tunnel on degenerate <5-family AX substrate is bypassed via durable artifact (unblocks Graph's >=10 family parameterization claim) and whether 10/15 last-pulse MEASUREMENT_INVALID rate drops. Quantifies the comparator that dominates work-compression: if Agentic DSM achieves 0.95-0.99 coverage at $0.002-0.092 M_total_f10, SPIDER alias-catalog must beat O(1) not just cold/retrieval; a negative (DSM fails on orthogonal alias shift) reveals site-stability dispatch opportunity (hybrid WebAPI vs browsing). Directly answers Global Director's comparative reasoning (durable census + threshold sweep vs exhaustive LFS/CAP) and decides next Graph hold-out and Product Pareto experiment design without another 8th repeat of same AX substrate."
 }
