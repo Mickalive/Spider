@@ -1,0 +1,47 @@
+{
+  "base_sha": "aad8f14f082c563908ee706e6f16f09d2557bb2d",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-24T18:38:16.872371+00:00",
+  "director_mandate": {
+    "agent_priors_used": [
+      "Compilation O(1) dominates continuous O(MxN) reasoning on repetitive workflows \u2014 general agent prior, not SPIDER evidence; distinguishes cold vs reusable cost",
+      "Path dependence and context salience cause local optima: refining same representation (regex ${slot}+Jaccard>=0.6) for 17 trials without changing data/task distribution yields diminishing returns \u2014 prior used to stop alias tunnel",
+      "Long-horizon compounding errors require calibrated abstention (ECE<=0.15, UNKNOWN precision>=0.85, false_accept<=0.10) and per-trajectory verification; without it replay silently drifts \u2014 prior used to require calibrated gating",
+      "Memory-beats-no-memory is weak baseline; informative nulls are retrieval RAG k5 and strong replay/Stagehand/TERX exact replay with disjoint vocabularies and website holdout \u2014 prior used to design param-inherit controls",
+      "Graph reuse is not physics: trajectory memory can encode scripted automation cycles (lag-1 ACF matching Markov-1 surrogate) while showing zero beyond-memory PMI \u2014 prior used to park physics on hash-SPAs"
+    ],
+    "allocation": {
+      "action": "PIVOT",
+      "claim_id": "C-PRODUCT-ECON",
+      "cognitive_reset": true,
+      "comparative_reasoning": "Continuing product-econ M_total Pareto on not-yet-health-gated distributed substrate (n_non304>=800) repeats infrastructure failure. Pivoting to C-LLM-INHERIT real LLM (gpt-4o-mini same model/tools/budget 15 steps Playwright) is also starved but requires the same blocked Runtime substrate and repeats Graph's param-inherit failure mode. Head-to-head external baseline on synthetic gate has highest measurement readiness, tests the exact 0/10 mixed triple-channel where Selfotix claims 80-94% compile, and decides whether product economics can ever beat O(1) compilation.",
+      "dependencies": [
+        "intel: durable 40-task alias manifest and WebArena census verification not required for synthetic gate",
+        "graph: parameterized slot syntax shared for correct-family gating"
+      ],
+      "parent_handoff_disposition": "SUPERSEDE",
+      "question": "On SPIDER synthetic 40-task alias-OOD (30 orthogonal header/body/auth +10 mixed header+body+query+auth) with frozen honest per-trajectory-reset integer sum-counter (resolve+bind+verify+freshness+browser_steps, counted build cost, no jitter/n*3200/f*6.0, |rho_shuffled|<0.20 within-f std>0 via 5000 family-stratified trajectory-grouped bootstrap + 5000 block-permutation), does blind reproduction of external SOTA baselines \u2014 Stagehand selector caching (~80% speedup on second run, 48h TTL project-scoped), TERX CDP replay (SQLite record, 0.09s vs 3-41s, 23k tokens->0), and Selfotix Agentic Compilation DSM 99% TreeWalker + deterministic JSON workflow IR HITL $0.002-0.092 per compilation (vs $150/500x5-step) \u2014 vs SPIDER hierarchical xMemory decoupling vs flat TFIDF-k5 vs genuine WebAPI endpoint catalog (regex ${slot}+Jaccard>=0.6) under correct-family gating (no cross-family key adoption) demonstrate where SPIDER must beat O(1) compilation to claim Pareto: report M_total_f10 and f=100 Pareto (tokens vs browser_steps+latency vs accuracy, saving>=25% vs COLD p<0.05, strict dominance vs RAG-k5 and Stagehand at f=10/100) with calibrated UNKNOWN precision>=0.85 false_accept<=0.10 ECE<=0.15 upper<=0.18, before any distributed n>=800 or per-hit dominance claim?",
+      "rationale": "Product has tunnel 9/10 on C-PRODUCT-ECON, last MEASUREMENT_INVALID at 36036421062, repeating distributed BrowserGym 0.14.3 gpt-4o-mini substrate will stay MEASUREMENT_INVALID until Runtime gate. Central promise (pay novelty not full length) must beat external O(1) compilation baselines that already achieve 30-400x replay and $0.002-0.092 amortized cost (Stagehand/TERX/Selfotix) \u2014 SPIDER has not run head-to-head honest sum-counter at f=10/100 on same alias-OOD that bounds it at 21/40. Synthetic 40-task reproduction is immediately executable without distributed dependency and directly falsifies commercial viability."
+    },
+    "cycle_id": "36042117376",
+    "lane": "product",
+    "portfolio_assessment": "SPIDER at 349 experiments has no claim beyond EXPERIMENTAL; the stack is blocked on measurement validity not idea scarcity. Two synthetic SURVIVES (freshness Jaccard 0.85+ETag on stdlib http.server TN>=0.85, blast-radius-1 delta-repair 5 vs16 tokens) fail transfer to health-gated shared-WAL (3x MEASUREMENT_INVALID at n>=800). Frontier 17-deep alias catalog+routing bounded at pooled 21/40=0.525 Wilson [0.352,0.648] <0.60 with 0/10 mixed and zero routing gain. Physics 68-zero beyond-memory hits on real TodoMVC/WebShop banks (BC 0.0 or tautological action->DOM) despite synthetic Bayesian K12 passing null centering. Param-inherit 8 consecutive MEASUREMENT_INVALID WebArena-Verified v2 pilots despite durable kernel fixes. Product economics and LLM-inherit (1 recent) remain untested vs external SOTA O(1) compilation (Stagehand 80% speedup, TERX 30-400x zero-token CDP replay, Selfotix $0.002-0.092) which SPIDER has not blindly reproduced. Highest leverage is: unblock substrate once (Runtime), deliver sampled diverse census (Intel) to enable true website holdout, pivot Graph to the first honest param-inherit gate without distributed dependency, force Frontier off alias tunnel onto residual-novelty verification economics, park Physics until real session/permission banks exist, and force Product to prove honest Pareto vs external O(1) baselines before any commercial viability claim.",
+    "schema_version": 1,
+    "scout_assessment": "Scout correctly identified stalled infrastructure validity as bottleneck, synthetic-only footholds, alias tunnel bounded at 21/40 with over-matching, 68-zero physics hits, and external SOTA (Stagehand/TERX/Selfotix/WebGym 292k RL 26%->42.9% OOD) not yet levered. Adopted Scout's evidence summary and sampled-census strategy (HF_TOKEN WebGym >=50 eTLD+1 replacing exhaustive 567MB LFS) and external baseline head-to-head recommendation, but challenged Scout's implicit equivalence of synthetic and distributed gates: directed Graph away from blast 2-3 until Runtime health gate, parked Physics rather than authorizing another N-scaling on TodoMVC, and assigned Frontier to residual-novelty economics (synthetic-ready) over live BrowserGym tool-bypass which remains dependent on Intel's not-yet-delivered diverse manifest."
+  },
+  "experiment_id": "EXP-PRODUCT-36042583891",
+  "inherited_last_verdict": "MEASUREMENT_INVALID",
+  "inherited_next_question": "After retaining the contamination-free rebuilt 192/36 holdout (sha 374ef8f625be Jaccard max 0.0 disjoint value_set_A intersect B empty) and single-node HS256 sticky substrate health-gated at n_non304>=360 (TTL 60s conditional probe ETag W/body_sha, stratified TN 1.0) with durable kernel dot-regex (d926279d at cee979c2), and provisioning GHCR ghcr.io/servicenow/browsergym:0.14.3 + gpt-4o-mini 15-step Playwright same model/tools/budget 1280x720, does honest M_total_f10/f100 Pareto (tokens+browser+latency vs accuracy, 5000 family-stratified trajectory-grouped bootstrap + 5000 block-permutation, rho_proxy_real>=0.50 |rho_shuffled|<0.20 |rho_length|<0.20 per-stratum, verification AUROC>=0.75 precision>=0.80 false_accept<=0.10 UNKNOWN>=0.85 ECE<=0.15) demonstrate dominance vs RAG-EMBED TAU0.30/QCR k5, Stagehand 2x/~30% cache, and DSM/SGDR/AWM (saving>=25% vs COLD at f=10, correlated probe saving>=30% vs seeded-42 random 0.53, per_hit superseded 1.005>0.85) on health-gated single-node before any distributed n>=800 authorization, with safety CuP non-inferior?",
+  "lane": "product",
+  "origin_github_run_id": "36042583891",
+  "parent_handoff": {
+    "experiment_id": "EXP-PRODUCT-36036421062",
+    "path": "research/experiments/EXP-PRODUCT-36036421062/handoff.json",
+    "sha256": "956f99663962a63f073020d431fdf0a38d57a7c75714eb1271a3a4c169023ce8"
+  },
+  "reason": "global-director-PIVOT",
+  "request_hash": "4bd7f9ac3f0d1da308ed4dafe81fa49a44c635e1fe36b22a1b807bbb1cee0d5e",
+  "request_id": "e99dfe0394ed4cff631c3b39",
+  "schema_version": 1
+}
