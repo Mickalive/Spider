@@ -1,17 +1,48 @@
 {
   "experiment_id": "EXP-GRAPH-35937576511",
   "lane": "graph",
-  "claim_ids": [],
-  "question": "",
-  "hypothesis": "",
-  "falsifier": "",
-  "baselines": [],
-  "positive_control": "",
-  "null_control": "",
-  "measurement_validity": [],
-  "decision_rule": "",
-  "product_consequence_positive": "",
-  "product_consequence_negative": "",
-  "estimated_cost": "",
-  "expected_information_gain": ""
+  "claim_ids": ["C-FRESHNESS"],
+  "question": "After 8 consecutive MEASUREMENT_INVALID WebArena-Verified v2 param-inherit pilots on identical add_to_cart with failed kernel durability gates, does a controlled single-resource staleness probe — DOM token drift / endpoint param+header mutation / Cache-Control+ETag expiry on one resource only on a locally-hosted synthetic site with deterministic freshness signal — enable detection with TN>=0.85 (Wilson lower>0.75), false_accept<=0.10, UNKNOWN in [0.00,0.15] ECE<=0.15 vs no-guard baseline, measured with deterministic _matches verification and honest per-trajectory-reset sum counters with 5000 family-stratified trajectory-grouped bootstrap CIs?",
+  "hypothesis": "A minimal single-resource freshness guard using deterministic freshness signals (DOM field-set tokens, endpoint query/body/headers param template, Cache-Control+ETag header values) on a locally-hosted synthetic site can detect staleness with TN>=0.85 (Wilson lower>0.75), false_accept<=0.10, UNKNOWN calibrated in [0.00,0.15] with ECE<=0.15, and beats a no-guard baseline on false_accept by >=0.15 absolute, under honest per-trajectory-reset sum-counter economics (|rho_shuffled|<0.20, within-family std>0). The signal isolates staleness from header/body conflation and confounded scheduling that caused prior TN 0.667 failure and stratified |r| TOST failure at delta 0.15.",
+  "falsifier": "C-FRESHNESS single-resource detection is falsified-in-setting if ANY of: (F1) TN_SPIDER <0.85 OR Wilson lower (95%, z=1.96) <=0.75; (F2) false_accept_SPIDER >0.10; (F3) UNKNOWN rate outside [0.00,0.15]; (F4) ECE >0.15; (F5) no-guard baseline does not show worse false_accept (false_accept_NO_GUARD - false_accept_SPIDER <0.15 OR false_accept_NO_GUARD <=0.10); (F6) per-drift-pattern TN <0.75 on any of the three staleness families (DOM-drift, param+header-mutation, cache-expiry). MEASUREMENT_INVALID if honesty gates fail: (M1) any per-trajectory-reset sum counter uses jitter, n*3200, or f*6.0 proxy; (M2) |rho_shuffled| >=0.20 between shuffled cost and outcome; (M3) within-family std ==0 for any family; (M4) verification not deterministic _matches; (M5) 5000 trajectory-grouped family-stratified bootstrap not performed.",
+  "baselines": [
+    {
+      "id": "B-NO-GUARD",
+      "description": "No freshness guard: same single-resource workload, same mechanisms, but resolve() always returns EXECUTABLE when preconditions and required_slots pass, never UNKNOWN. Freshness score not consulted. Postconditions verified post-execution via _matches only for measurement (not gating). Expected: TN ~0, false_accept ~0.30-0.75 (all stale accepted as fresh), UNKNOWN=0, ECE not computed. Provides discriminating false_accept delta vs SPIDER.",
+      "expected": "false_accept >0.30, TN ~0, UNKNOWN=0"
+    },
+    {
+      "id": "B-JACCARD-ONLY",
+      "description": "Ablation: freshness uses only DOM field-set Jaccard (field_path,type) similarity, ignoring Cache-Control/ETag and endpoint param+header mutation signals. Tests whether isolation requires combined signal. Threshold fixed at 0.85 pre-freeze.",
+      "expected": "degraded TN or elevated false_accept vs full multi-signal guard"
+    },
+    {
+      "id": "B-HEADER-ONLY",
+      "description": "Ablation: freshness uses only Cache-Control+ETag+header mutation signals, ignoring DOM token drift. Complementary ablation to B-JACCARD-ONLY. Same threshold logic.",
+      "expected": "fails DOM-drift pattern, passes cache-expiry"
+    }
+  ],
+  "positive_control": "PC-STALE-DETECTION: artificially stale responses with deterministic drift injected at request >= DRIFT_POINT per family must be flagged as stale/UNKNOWN by SPIDER guard with TP >=0.85 (Wilson lower >0.75) per pattern. Uses synthetic site /resource/{id} with three drift families: (1) DOM-drift: add/remove/change field type in JSON body (e.g., remove author, add phone, change id int->str); (2) endpoint param+header mutation: query param renamed (userId->uid) or header X-Csrf-Token value rotated; (3) cache-expiry: ETag SHA256(body) changes and Cache-Control max-age=0 vs max-age=60 with 304 simulation. Drift is deterministic per request number, not model-inferred. PC passes only if TP threshold met via _matches-verified ground truth.",
+  "null_control": "NC-FRESH-RETAIN: fresh responses (request < DRIFT_POINT, no mutation, ETag stable, headers stable) must be retained as EXECUTABLE with TN >=0.85 (Wilson lower >0.75) and not flagged stale. Requires 304-exclusion consistent logic (304 not counted as stale). NC-NOISE-IMMUNITY: structural noise patterns that should NOT trigger staleness (optional_field churn where added field is unused, null-valued fields) must have false_accept <=0.10 when guard is applied, testing that guard does not conflate noise with staleness. Both NCs use deterministic _matches ground truth.",
+  "measurement_validity": [
+    "V1_DETERMINISTIC_VERIFICATION: postcondition verification uses only src/spider/kernel.py _matches(required, actual) exact equality on postconditions, no heuristic similarity or LLM judge. required_slots = set(parameter_slots) | _template_slots(action_template).",
+    "V2_HONEST_SUM_COUNTER: per-trajectory-reset honest sum counter = resolve + bind + verify + freshness + browser_steps, counted as integer operations per trajectory, reset at trajectory boundary, no jitter (f*6.0), no n*3200 or n*4096 proxy, no Gaussian noise. Counter logged per trajectory and summed.",
+    "V3_NO_JITTER_NO_PROXY: verification that cost vector contains no injected jitter and no bijective proxy; checked by asserting cost values are integers, |rho_shuffled| <0.20 on shuffled-label null, and within-family std>0 for every family.",
+    "V4_RHO_SHUFFLED_BOUND: compute Pearson rho between shuffled cost labels and outcome (1000 permutations trajectory-grouped); require |rho_shuffled| <0.20; if >=0.20 mark MEASUREMENT_INVALID (covers prior PRODUCT-ECON tautology).",
+    "V5_WITHIN_FAMILY_STD: within-each-family std of freshness score and of cost must be >0 (non-degenerate); otherwise MEASUREMENT_INVALID (covers prior degenerate CI [1.0,1.0]).",
+    "V6_TRAJECTORY_GROUPED_BOOTSTRAP: 5000 family-stratified bootstrap iterations resampling at trajectory/family group level (not individual request), preserving family proportions, computing TN, false_accept, UNKNOWN, ECE per iteration for 95% CIs.",
+    "V7_WILSON_CI: Wilson score interval (z=1.96) for TN and false_accept proportions, computed on raw counts (TN, FP, TP, FN) not smoothed estimates; lower bound reported.",
+    "V8_ECE_CALIBRATION: ECE computed with 10 equal-width confidence bins [0,0.1)...[0.9,1.0] on SPIDER guard confidence (confidence 0.90 for fresh, 0.5 for stale/UNKNOWN), ECE = sum_b |acc_b - conf_b| * (n_b/N); require ECE <=0.15 and UNKNOWN in [0.00,0.15].",
+    "V9_SINGLE_RESOURCE_ISOLATION: synthetic site hosts ONE resource type (/resource/{id}) only, no cross-resource scheduling confound; three staleness families applied orthogonally to same resource type in separate trajectories, not overlapping in time; header/body signals separated (body field-set vs header/ETag).",
+    "V10_DETERMINISTIC_FRESHNESS_SIGNAL: freshness signal is deterministic: DOM tokens = sorted (field_path,type) set from JSON body; ETag = SHA256(canonical_json_body)[:16]; Cache-Control max-age header; If-None-Match/304 handling deterministic. No stochastic model or external network.",
+    "V11_FAMILY_STRATIFIED_SAMPLING: each of 3 drift families gets equal N (minimum 30 fresh + 30 stale per family), plus fresh control family with 30 requests; total N >= 120 staleness trials (60 fresh + 60 stale minimum) to achieve Wilson lower sensitivity.",
+    "V12_LOCAL_SYNTHETIC_SITE: server is stdlib http.server or Flask on 127.0.0.1 ephemeral port, no external dependencies, no Docker, no live web fetch; broad enough to support DOM/param/header/cache drift injection deterministically.",
+    "V13_GROUND_TRUTH_LOGGING: every request logs ground_truth (fresh/stale), family, request_number, url, response body, ETag, Cache-Control, threshold decision, confidence, and _matches outcome to raw_evidence/*.json with SHA256.",
+    "V14_NO_SHARED_WAL: no distributed shared WAL, nginx, or multi-node cache required; single-node isolation directly tests freshness signal vs prior confounded multi-node scheduling."
+  ],
+  "decision_rule": "SURVIVES_CURRENT_TEST if ALL of: (D1) TN_SPIDER >=0.85 AND Wilson lower >0.75; (D2) false_accept_SPIDER <=0.10; (D3) UNKNOWN in [0.00,0.15]; (D4) ECE <=0.15; (D5) false_accept_NO_GUARD - false_accept_SPIDER >=0.15 AND false_accept_NO_GUARD >0.10; (D6) per-family TN >=0.75 for each of 3 families; (D7) PC-STALE-DETECTION TP >=0.85 per family; (D8) NC-FRESH-RETAIN TN >=0.85; (D9) honesty gates V3-V6 pass (|rho_shuffled|<0.20, within-f std>0, sum-counter integer, 5000 bootstrap done). FALSIFIED-IN-SETTING if any D1-D8 fails while D9 passes (valid negative). MEASUREMENT_INVALID if any honesty gate V3-V6 fails, or verification not deterministic _matches, or 304 included in TN, or server failure, or insufficient N (<60 fresh + <60 stale). INCONCLUSIVE if CIs straddle thresholds with width >0.20 due to underpower (N < planned).",
+  "product_consequence_positive": "C-FRESHNESS single-resource staleness detection survives at bounded synthetic ceiling: freshness guard with TN>=0.85, false_accept<=0.10, calibrated UNKNOWN/ECE unblocks Graph residual-novelty (rho_novelty>=0.60) and Product amortized economics (per_hit) gates by providing safe reuse with abstention. Product may proceed to delta-repair contamination bounds using same deterministic signal isolation before re-validating param-inherit on WebArena-Verified v2; distributed WAL not required for this ceiling.",
+  "product_consequence_negative": "C-FRESHNESS single-resource detection falsified at tested sensitivity (DOM/param+header/cache at n~60 per family): either TN <0.85, false_accept >0.10, or UNKNOWN/ECE miscalibrated, or no delta vs no-guard. Product must NOT use freshness gating for reuse at this threshold; fallback to UNKNOWN precision>=0.85 ECE<=0.15 not achieved, so any reuse remains unsafe. Provides calibrated abstention baseline for future repair/UNKNOWN work; does NOT close broader C-FRESHNESS domain (only this signal/threshold/site), does not reinstate param-inherit pilots.",
+  "estimated_cost": "Low: single-node stdlib http.server synthetic site, ~200 lines server + 300 lines harness, no LLM, no browser, no Docker, no distributed infra; N~210 requests total (3 families*60 +30 control), 5000 bootstraps CPU-only <5 min, <0.5 compute-hour, <$1.",
+  "expected_information_gain": "Very high: Director PIVOT rationale identifies this as the single highest-leverage neglected claim (1/15 recent, blocks C-RESIDUAL-NOVELTY and C-DELTA-REPAIR and C-PRODUCT-ECON). Minimal single-resource probe isolates the confounded scheduling and header/body conflation that caused prior TN 0.667 vs 0.85 and stratified |r| TOST delta0.15 failures, without distributed WAL cost. Either SURVIVES or FALSIFIES changes next product decision; MEASUREMENT_INVALID would reveal honest-cost or verification substrate failure that has blocked 80 prior MEASUREMENT_INVALID experiments."
 }
