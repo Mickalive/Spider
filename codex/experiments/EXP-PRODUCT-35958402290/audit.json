@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-35958402290",
+  "lane": "product",
+  "status": "MEASUREMENT_INVALID",
+  "producer_claim_supported": false,
+  "required_fixes": [
+    "Provision /tmp/spider-runtime/shared.db WAL single-worker gunicorn 23.0.0 + nginx 1.24.0 $request_uri sticky hash + PyJWT 2.14.0 HS256 with real If-None-Match/ETag W/body_sha conditional probe loop; log n_non304>=800 stratified 400/endpoint and TN>=0.85",
+    "Authorize GHCR pull for BrowserGym 0.14.3 2000-node 1280x720 CDP Accessibility.getFullAXTree and provision OPENAI_API_KEY for gpt-4o-mini 15-step to enable rho_proxy_real>=0.50 per-stratum validation",
+    "Commit src/spider/kernel.py dot-regex patch (sha d926279d5ee14a044a2f13b8abc09202df9f5adb9e86feaadeb61818a15f4038) durably; reconcile gunicorn 23.0.0 and pyjwt 2.14.0 pins (currently working-tree only)",
+    "Stage WebArena-Verified Hard258 258-task heterogeneous census (or disclosed 192/36 orthogonal fallback) + qcr_bank_manifest TAU0.30 Jaccard<0.30 + dsm_registry 714/2147 + sgdr_index 36 state_key TRAIN-only + cost_config 50/15/180/10 with hashes"
+  ],
+  "validity_findings": [
+    "Producer correctly identified MEASUREMENT_INVALID per frozen falsifier clause (1): PC5 health-gate FAIL (n_non304=0 < 800, nginx sticky not running, If-None-Match not exercised), Docker BrowserGym + gpt-4o-mini unavailable (rho_proxy_real unmeasurable), fixtures missing (Hard258 not staged, sgdr_index absent repo-wide, qcr/dsm only cross-experiment references), kernel dot-regex patch only in working tree (not committed). Five independent triggers, any one sufficient.",
+    "No economics inference was run — frozen rule correctly bans file-proxy fallback for SURVIVES. All primary metrics (rho_novelty, rho_proxy_real, M_total_f10, M_per_hit, success, AUROC, ECE, probe_saving, DSM/SGDR hit rates) are explicitly null per contract, not zero. Controls correctly reported UNKNOWN (nulls not executed, non-degenerate by vacuity, not by PASS). Outcome INCONCLUSIVE correctly reflects infrastructure failure, not scientific falsification per EXPERIMENT_PACKET §9.",
+    "Kernel MV2 sub-gate PASS in working tree (5/5 EXECUTABLE confidence 0.85, regression 3/3) but HEAD remains pre-patch (sha 46929b3a). This matches parent handoff: patch not committed, not durable across clean checkouts. Must be committed before any SURVIVES claim.",
+    "Version pin drift confirmed: installed gunicorn 26.2.0 != frozen 23.0.0, pyjwt 2.15.0 != 2.14.0. nginx 1.24.0 binary present but $request_uri sticky not configured/running. Substrate provisioning incomplete."
+  ],
+  "baseline_findings": [
+    "No baselines executed (B-COLD, B-RAG-EMBED-TAU030-QCR, B-STAGEHAND-CACHE, P-STAGEHAND-TTL-CORRELATED, P-DSM-COMPILE-O1, P-SGDR-AWM) — substrate blocked at health-gate. All baselines correctly UNKNOWN.",
+    "Null controls (NC-SINGLE-NODE-SHUFFLE-PIPELINE) not executed — no degenerate CI produced, non-degeneracy gate not reached. Correctly UNKNOWN.",
+    "Positive control PC-SINGLE-NODE-PARETO-CORRELATED: PC2 kernel sub-gate PASS (working tree), PC1/PC3/PC4/PC5 FAIL (substrate unavailable). PC5 FAIL alone triggers MEASUREMENT_INVALID per frozen rule."
+  ],
+  "recomputed_metrics": {},
+  "claim_ceiling": "HYPOTHESIS (bounded to file-proxy rejection only; honest-substrate Pareto test remains UNKNOWN). C-PRODUCT-ECON cannot be updated from HYPOTHESIS because the frozen design's mandatory health-gated single-node substrate with correlated freshness (n_non304>=800, TN>=0.85), real BrowserGym tokens (rho_proxy_real>=0.50), and staged heterogeneous census were not provisioned. The bounded file-proxy per_hit falsification (1.045>0.85 at n0, rho_novelty 0.472<0.60, |rho_length|0.306>0.20) from parent experiment EXP-PRODUCT-35954196999 remains the ceiling — it is neither reopened nor extended by this run.",
+  "evidence_refs": [
+    "research/experiments/EXP-PRODUCT-35958402290/result.json",
+    "research/experiments/EXP-PRODUCT-35958402290/report.md",
+    "research/experiments/EXP-PRODUCT-35958402290/provenance.json",
+    "research/experiments/EXP-PRODUCT-35958402290/artifacts/env_audit.json (sha256: 009a1c66c922b18d9f6de55e6812d25fc61fdda8057e43e67f0659a9c1cdf0e1)",
+    "research/experiments/EXP-PRODUCT-35958402290/artifacts/mv2_kernel_spot_check.json (sha256: 8132153593ce6e6122e5a4cb99b274e3321539f210213aab4158a923f5ad8e56)",
+    "research/experiments/EXP-PRODUCT-35958402290/artifacts/substrate_probe.json (sha256: d15a0c9f57f1f5ab8c685e2d6c7e9bc12deb57193f4b54ac1ddb44fc65b346c5)",
+    "research/experiments/EXP-PRODUCT-35958402290/freeze.json",
+    "research/experiments/EXP-PRODUCT-35958402290/spec.json",
+    "research/experiments/EXP-PRODUCT-35958402290/prereg.md",
+    "research/experiments/EXP-PRODUCT-35954196999/handoff.json (sha256: f6560fac076e389f2275962332bdfa050e32c903caf9bdb750584d6a5d05ff28)"
+  ],
+  "unresolved": [
+    "Whether honest single-node health-gated substrate with correlated ETag freshness (fresh ~1.0 at n0 vs ~50% stale at n0.25, n_non304>=800 stratified) can be provisioned and achieve TN>=0.85 saving>=30% accuracy>=0.90 falseAccept<0.05",
+    "Whether Docker BrowserGym 0.14.3 + gpt-4o-mini 15-step real tokens/browser_steps/latency exists (GHCR authorization + OPENAI_API_KEY) and file-proxy cost tracks real cost (rho_proxy_real>=0.50 per-stratum with |rho_shuffled|<0.20 |rho_length|<0.20)",
+    "Whether sgdr_index 36 state_key TRAIN-only + WebArena-Verified Hard258/192 + qcr TAU0.30 + dsm 714/2147 + cost_config can be staged TRAIN-only without contamination and measured with 5000 family-stratified trajectory-grouped bootstrap + 5000 block-permutation",
+    "Whether P-STAGEHAND-TTL correlated probe and DSM O(1) compile (80-94% success, 15tok+10ms amortized 800/f $0.002-0.092) and P-SGDR achieve M_total Pareto tokens>=30% and browser+latency>=20% vs RAG at f=10/f=100 with accuracy>=0.85 AUROC>=0.75 precision>=0.80 false_accept<=0.10 UNKNOWN>=0.85 ECE<=0.15 and safety CuP <=RAG+0.02",
+    "Whether Pareto supersession clause holds: per_hit>0.85 at both n0 and n0.25 but M_total Pareto decisively dominates with rho>=0.60 per-stratum n>=800 and calibration gates PASS, formally retiring per_hit<=0.85 as gate"
+  ]
+}

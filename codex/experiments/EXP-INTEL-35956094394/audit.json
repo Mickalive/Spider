@@ -1,0 +1,256 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-35956094394",
+  "lane": "intel",
+  "status": "REVISE",
+  "producer_claim_supported": false,
+  "required_fixes": [
+    "MV4_FAMILY_CAP: pin contains only 4 product_page families (136,145,196,222) among 36 families_ge3; frozen MV4 requires >=10 families when Docker reachable. Do not claim >=10-family fragment coverage. Next experiment must either expand product_page family definition beyond the 192 shopping shopping slice or select a census with >=10 product families, and re-probe SA stability on >=10 distinct families.",
+    "MV3_RICHER_AX: M_AX_RICHER_BBOX false (0/16 bbox_fields_in_ax). Chromium 153 removed AXNode.boundingBox/computedStyle; replacement anchored Runtime.evaluate present 13/13. Amend spec hypothesis to explicitly accept anchored geometry as valid richer signal or restore bbox source; current H_A richer clause unsatisfied as written.",
+    "MEASUREMENT_DEGENERATE_CIs: BMEM 0/40 CI[0,0], SPIDER-ROUTING 40/40 CI[1,1], SPIDER-WEBMCP 40/40 CI[1,1] have variance 0 per prereg 12.7 and are flagged degenerate. H_B non-degenerate CI requirement fails for BMEM (external) and for two SPIDER Pareto points. Larger N (>=120) or harder alias-OOD split required for non-degenerate width; do not treat point estimates as CI-validated.",
+    "CROSS_SOURCE_EQUALITY: HF 401 x3 (HF_TOKEN absent) prevents byte-identical cross-source verification (MV2 single-source clause satisfied but census rests on one pin). Acquire HF_TOKEN read scope and re-verify manifest sha d65275660814663375028e9017e1f929e3c38321041b125795e2713b52243d30 against HuggingFace raw bytes for true byte-identity.",
+    "REAL_HOLDOUT_GAP: Module B is synthetic deterministic world (MAX_STEPS 10, strict per-channel verification, Poisson rotp, M_FALSE_ACCEPT structural 0) — no browser/network/LLM tokens. C-CROSSSITE website hold-out and C-RESIDUAL-NOVELTY/C-PRODUCT-ECON real-cost Pareto remain unmeasured (UNRES-REAL-HOLDOUT). Require real WebArena product-family hold-out replay with identical honest counters before promoting to VALIDATED.",
+    "HARNESS_SHA_DISCREPANCY: prior log harness sha ae7ea9e7ebc1e541ffc979fe2f7835a63617db2d8ae10160d75d04e35e5c224a does not match on-disk a2077018314bed366133522f9ed1ea017575c5eff0de469fcaefca719ebc3239; resolved by 2026-09-24 byte-identical re-run of sota_blind_results.jsonl sha 3c5ab5afbaa3d28910dc0e6c3bcd77ed51262f028dc045e1df896324af386402, but provenance must pin authoritative on-disk hash and retain re-run log.",
+    "WEBGYM_DUPLICATION_UNMEASURED: WebGym 292k manifest unavailable (HF 401) so diverse eTLD+1 slice, duplication prevalence sweep 0.818-0.9479 and param prevalence not computed (null in webarena_census.json). Do not claim duplication threshold gate until MANIFEST available."
+  ],
+  "validity_findings": [
+    {
+      "id": "VF-MV1",
+      "severity": "low",
+      "finding": "MV1 >=2 genuine attempts per durable source satisfied: HF 3 attempts (401 x3, bytes 0) + Docker Hub API 2x200 + docker pull 2x0 with 300s timeout + health curl 3x200. HF elapsed 0.0-0.1s not 300s but timeout clause applies to docker pull; genuine-attempt count passes. No MEASUREMENT_INVALID.",
+      "evidence": "artifacts/raw/hf_manifest_attempts.json (3x401), artifacts/raw/docker_hub_api_attempts.json (2x200 digest 64hex), artifacts/raw/webarena_verified_pin.json attempts_log src_docker_pull returncodes [0,0]"
+    },
+    {
+      "id": "VF-MV2",
+      "severity": "medium",
+      "finding": "MV2 byte-identity single-source pin only: manifest sha d65275660814663375028e9017e1f929e3c38321041b125795e2713b52243d30 (927596 bytes) matches established local copy, cross-source equality unavailable due HF 401. Producer correctly marks unavailable not assumed equal; H_A durable pin delivered via Docker digest sha256:3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb (64 hex) verified Hub API 200. Accept under single-source clause, downgrade ceiling to Docker-only pin.",
+      "evidence": "artifacts/raw/webarena_verified_pin.json manifest_sha256, docker_digest_64hex len 64, cross_source_equality=unavailable; provenance.json datasets.webarena_verified_manifest.sha256"
+    },
+    {
+      "id": "VF-MV3",
+      "severity": "medium",
+      "finding": "MV3 versions/viewport/CDP path pass (browsergym-core 0.14.3, agentlab 0.4.2, playwright 1.63.0, chromium 153.0.8010.12, viewport 1280x720, CDP Accessibility.getFullAXTree not snapshot). Median AX 698 >10 and median DOM 201305 >=2000 on 13 real product pages verified via ax_captures.jsonl. Grammar hash live 273eafbcb817e8981f843581a724594665cabdd357b318c701251929ee9c83de includes body regex <body[^>]*>.*?</body> DOTALL and fotorama\\d{6,} expanded pattern. Recomputed AFTER page.content()+AX with stripping. PASS. Richer AX bbox false is platform fact (protocol dump AXNode schema lacks boundingBox/computedStyle) with anchored Runtime.evaluate replacement present 13/13.",
+      "evidence": "artifacts/raw/ax_captures.jsonl 16 captures, artifacts/derived/ax_analysis.json median_web 698/201305, artifacts/raw/ax_protocol_dump.json AXNode fields, research/intel/grammar_fulltree_358885.py live hash"
+    },
+    {
+      "id": "VF-MV4",
+      "severity": "high",
+      "finding": "MV4 SHA stability both directions empirically 16/16 identical+mutated (price .price mutation via page.evaluate) but only 4 distinct product families present in census (136,145,196,222) + 3 PC-A synthetic repeats. Frozen MV4 requires >=10 families when Docker reachable; not constructible from this pin (design-level property). Producer discloses VN-MV4-FAMILY-CAP. H_A_SURVIVES as written not met at 10-family threshold; evidence supports 4-family stability only. Ceiling must be bounded to 4 families.",
+      "evidence": "artifacts/raw/ax_captures.jsonl families_covered [fam136,fam145,fam196,fam222], artifacts/raw/webarena_verified_pin.json census.product_page_families [136,145,196,222], product_page_tasks 7, ax_gates ax_families_found 4"
+    },
+    {
+      "id": "VF-MV5",
+      "severity": "low",
+      "finding": "MV5 synthetic alias-OOD 40 tasks deterministic seed 360360, generator sha 5311a58113e50d00546547634aa239c45cf3dec659509580abd56eb63678c1b0, split 10 header_param +10 body_param +10 auth_param +10 mixed (header+body+auth) orthogonal no cross-channel leakage verified. Body renders only, value_spaces disjoint. Recomputed.",
+      "evidence": "research/intel/synthetic_alias_ood_40.json seed 360360, split auth/body/header/mixed 10 each, generator_script_sha256, orthogonality asserted"
+    },
+    {
+      "id": "VF-MV6",
+      "severity": "low",
+      "finding": "MV6 honest per-trajectory-reset sum-counters (resolve+bind+verify+freshness+browser_steps, reset per task) with trajectory-grouped bootstrap B=2000 on task/trajectory unit, 95% percentile CIs width >0 for non-degenerate baselines. No n*3200/f*6.0/jitter proxies. Recomputed M_TOTAL_F10 = sum/ min(10,40) matches producer: DSM 226/10=22.6, TRACE 100/10=10.0, ALIAS 301/10=30.1. CI lower/upper reported. PASS.",
+      "evidence": "artifacts/derived/sota_blind_results.jsonl counters m_total, artifacts/derived/sota_analysis.json mtotal f10/f100 CIs, research/intel/exp_35956094394_blind_harness.py MAX_STEPS 10 honest counters, research/intel/exp_35956094394_analysis.py B=2000"
+    },
+    {
+      "id": "VF-MV7",
+      "severity": "low",
+      "finding": "MV7 blindness satisfied: external policies coded only from prereg recipe text (DSM template->JSON IR->HITL patch, TraceCompiler def-use, BMEM exact replay) never read synthetic task JSON channels/aliases; per-task logs for all 40 tasks per baseline present (327 rows: 40x8 +7 toy, DSM-NOHITL 40). Artifact hash sota_blind_results.jsonl 3c5ab5afbaa3d28910dc0e6c3bcd77ed51262f028dc045e1df896324af386402 byte-identical on 2026-09-24 re-run.",
+      "evidence": "research/intel/exp_35956094394_blind_harness.py blindness header, artifacts/derived/sota_blind_results.jsonl 327 rows sha 3c5ab5..."
+    },
+    {
+      "id": "VF-MV8",
+      "severity": "low",
+      "finding": "MV8 provenance path+sha256 present for all durability/cost paths: request/spec/prereg/freeze hashes, pip freeze sha 31e19397f99100d3c81c3f57686428f893fbad3eae704749e0f1abb316d87e28, docker digest, generation script, per-baseline result jsonl. Missing cross-source HF bytes explained by 401. No gap.",
+      "evidence": "provenance.json frozen_inputs, environment.pip_freeze_sha256, datasets, code, artifacts raw/derived with sha256"
+    },
+    {
+      "id": "VF-DEGENERATE-CI",
+      "severity": "medium",
+      "finding": "Degenerate CIs per prereg 12.7 correctly flagged and not counted valid: BMEM 0/40 CI[0,0], SPIDER-ROUTING 40/40 CI[1,1], SPIDER-WEBMCP 40/40 CI[1,1] variance 0 width 0. Interior estimators DSM [0.625,0.875], SPIDER-ALIAS [0.85,1.0], TRACE [0.125,0.375], COLD [0.125,0.375] are non-degenerate and usable. Pareto comparisons relying on degenerate points are point-estimate only with inflated certainty.",
+      "evidence": "result.json VN-DEGENERATE-CI, artifacts/derived/sota_analysis.json coverage.*.degenerate true for BMEM/ROUTING/WEBMCP, result.json M_AX_CONSISTENCY_CI [1,1] degenerate VN note"
+    },
+    {
+      "id": "VF-SYNTHETIC-WORLD-LIMIT",
+      "severity": "high",
+      "finding": "Module B world is fully synthetic deterministic simulation with MAX_STEPS 10 truncation (ALIAS 3 failures are step-11 budget exceed, not verification), strict per-channel server verification makes M_FALSE_ACCEPT=0 structural not empirical, Poisson session rotation rotp {0.15,0.25,0.35} seeded, page_renders_only_body=true, no browser/network/LLM tokens. M_total is work-unit counter not USD/wall-clock (USD only DSM patch midpoint $0.047). Transfer to real Web volatility, auth/session expiry, DOM heterogeneity not demonstrated.",
+      "evidence": "result.json VN-WORLD-MODEL-SYNTHETIC, VN-FALSE-ACCEPT-STRUCTURAL, provenance.json expiry_model, sota_blind_results.jsonl world_steps, research/intel/synthetic_alias_ood_40.json page_renders"
+    },
+    {
+      "id": "VF-NC1-WEAK-STATISTIC",
+      "severity": "medium",
+      "finding": "NC1 family-label permutation with exactly 4 equal-size families (10 each) yields weak statistic; SPIDER-ALIAS permutation p=0.626 gap 0.013 shows coverage flat across families (real_std 0.083 vs shuffled mean 0.07) orthogonal mechanism. Producer correctly reports but correctly gates on |rho_shuffled|=0.1592 <0.20 (real rho 0.8656 pooled). Coverage shuffle mean ~ chance gap thesis not crisply gated via gap>=0.20 due to 4-family design.",
+      "evidence": "artifacts/derived/sota_analysis.json nc1_coverage_shuffle (gap DSM 0.174, TRACE 0.322, ALIAS 0.013, p ALIAS 0.626), rho gate_abs_lt_0_20 true"
+    },
+    {
+      "id": "VF-NC2-N",
+      "severity": "low",
+      "finding": "NC2 delta_vs_truncated 0.6667 (full 1.0 vs truncated 0.3333) on n=3 (2 WebArena + PC-A) meets threshold 0.20 but n is below 10-family ideal; sensitivity limited to .price mutations. Honest nuance that PC-A tiny DOM is truncation-sensitive while real pages are not is disclosed. Non-vacuity demonstrated.",
+      "evidence": "artifacts/derived/truncation_control.json n=3 delta 0.6667, per_record full_sensitive 3/3 truncated 1/3"
+    }
+  ],
+  "baseline_findings": [
+    {
+      "id": "B-DURABLE-HF",
+      "finding": "FAIL as expected due HF_TOKEN absent: 3 genuine attempts 401 Unauthorized, bytes 0, sha null. Not SURVIVES for HF source alone, but decision rule requires HF OR Docker, so not falsifying H_A. Durability via HF pending token.",
+      "expected": "200 + byte-identical sha256",
+      "observed": "401 x3, 0 bytes",
+      "pass": false
+    },
+    {
+      "id": "B-DURABLE-DOCKER",
+      "finding": "PASS: Hub API 200 x2 with digest sha256:3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb (64 hex) len 64, docker pull returncode 0 x2 timeout 300, images --digests shows same digest, container quirky_ishizaka reachable http://localhost:7770 HTTP 200 x3.",
+      "expected": "64-char digest valid + reachable",
+      "observed": "digest valid 64 hex, container reachable 200",
+      "pass": true
+    },
+    {
+      "id": "B-AGENTIC-DSM",
+      "finding": "PARTIAL PASS: coverage 0.75 [0.625,0.875] n=40, single-channel 27/30 (0.90) header 1.0 body 1.0 auth 0.7 mixed 0.3; ~5pp below published 0.95-0.99 ceiling, interior CI non-degenerate variance 0.1923. Blind reproduction attenuated by auth rotation races (Poisson rotp). Cost M_TOTAL_F10 22.6 [19.8,26.0] F100 5.65 [4.92,6.42] USD $0.0353/task [0.0294,0.0411] total $1.41/40 n_patch 30. HITL ablation drop 0.50 isolates patch contribution.",
+      "expected": "0.95-0.99 single-channel",
+      "observed": "0.75 overall, 0.90 single-channel, NC3 drop 0.50",
+      "pass": "partial"
+    },
+    {
+      "id": "B-TRACECOMPILER-DEFUSE",
+      "finding": "PASS collapse on alias shift as expected: coverage 0.25 [0.125,0.375] with strong family structure body 1.0 header/auth/mixed 0.0. Def-use sets generalize only where trace surface matches rendered channel (body). Demonstrates alias problem for trace-only baseline. M_TOTAL_F10 10.0 [9.4,10.6] cheapest.",
+      "expected": "0.928/0.943 collapses on shift",
+      "observed": "0.25, family structure confirmed",
+      "pass": true
+    },
+    {
+      "id": "B-BMEM-CATALOG",
+      "finding": "PASS collapse: coverage 0.0 [0,0] degenerate CI width 0 on total alias shift (train alias != test alias all tasks, every channel). Confirms exact replay without alias slots fails. Cost 10.0 [9.0,11.2]. Degenerate CI flagged not valid width.",
+      "expected": "~1.0 memory, collapse on shift",
+      "observed": "0.0 collapse",
+      "pass": true
+    },
+    {
+      "id": "B-SPIDER-ALIAS",
+      "finding": "PASS interior: coverage 0.925 [0.85,1.0] width 0.15 header 1.0 body 0.9 auth 1.0 mixed 0.8. Flat across families (p=0.626 gap 0.013) orthogonal to alias channel. 3 failures are MAX_STEPS 11>10 truncation not verification. M_TOTAL_F10 30.1 [25.4,35.5] F100 7.53 [6.28,8.85] (+7.5 vs DSM at f10 for +0.175 coverage). Mechanism by construction alias-aware.",
+      "expected": "compare to DSM ceiling",
+      "observed": "0.925 flat, cost higher than DSM",
+      "pass": true
+    },
+    {
+      "id": "B-SPIDER-ROUTING",
+      "finding": "DEGENERATE PASS: coverage 1.0 [1,1] degenerate variance 0 on all 4 channels. Param-slot-count tie-break + recalibrated 0.95/0.85 confidence yields perfect score in this MAX_STEPS 10 synthetic regime; CI uninformative at ceiling. M_TOTAL_F10 33.0 [26.6,41.0] highest SPIDER cost.",
+      "expected": "coverage vs TraceCompiler",
+      "observed": "1.0 degenerate",
+      "pass": true
+    },
+    {
+      "id": "B-SPIDER-WEBMCP",
+      "finding": "DEGENERATE PASS: coverage 1.0 [1,1] degenerate. Tool bypass prevalence 0.725 [0.575,0.85] (29/40 first-attempt) amortized f10 2.9 f100 0.725 demonstrates hybrid dispatch cheap channel when tool available. M_TOTAL_F10 28.0 [22.4,34.4].",
+      "expected": "prevalence f10/f100",
+      "observed": "0.725 prevalence, 1.0 coverage degenerate",
+      "pass": true
+    },
+    {
+      "id": "B-COLD-LLM",
+      "finding": "PASS floor: coverage 0.25 [0.125,0.375] ties TRACE/DSM-NOHITL (BMEM 0 lower by collapse), M_TOTAL sum 380 highest, f10 38.0 [33.0,43.5] f100 9.5 [8.12,10.75] defines lower bound. Body-only success 1.0 (like TRACE) indicates world renders body channel deterministically.",
+      "expected": "lowest coverage highest cost",
+      "observed": "0.25 coverage, 38.0 f10 highest",
+      "pass": true
+    },
+    {
+      "id": "B-TRUNCATED-20",
+      "finding": "PASS non-vacuity: full-tree sensitive 1.0 truncated 0.3333 delta 0.6667 >=0.20. Real pages truncated_sensitive false, PC-A true shows [:20] blind to deep .price on real DOM length ~200k.",
+      "expected": "delta >=0.20",
+      "observed": "delta 0.6667",
+      "pass": true
+    },
+    {
+      "id": "PC-A-SYNTHETIC-FIXTURE",
+      "finding": "PASS 3/3 repeats ax_nodes 17 DOM 355 sha identical 3/3 mutated 3/3.",
+      "expected": "AX>10 DOM sized SHA both ways",
+      "observed": "3/3 pass",
+      "pass": true
+    },
+    {
+      "id": "PC-B-TOY-DSM",
+      "finding": "PASS DSM True on no-shift toy (harness-compile validity). TRACE/COLD False on header-only toy as expected per trace/body-only nature.",
+      "expected": "DSM 1.0 on toy",
+      "observed": "DSM true, others as expected",
+      "pass": true
+    },
+    {
+      "id": "NC1-SHUFFLED",
+      "finding": "PASS gate |rho_shuffled|=0.1592 <0.20 (pooled rho_real 0.8656). Coverage shuffle p=0.0 for DSM/TRACE/COLD/DSM-NOHITL shows structure, p=0.626 flat for ALIAS, p=1.0 degenerate for BMEM/ROUTING/WEBMCP. Gap threshold 0.20 weakly tested due 4-family equal size.",
+      "expected": "|rho|<0.20 gap>=0.20",
+      "observed": "|rho| 0.1592 pass, gaps DSM0.174 TRACE0.322 ALIAS0.013",
+      "pass": true
+    },
+    {
+      "id": "NC2-TRUNCATED",
+      "finding": "PASS delta 0.6667 >=0.20 with n=3 nuance disclosed.",
+      "expected": "delta>=0.20",
+      "observed": "0.6667",
+      "pass": true
+    },
+    {
+      "id": "NC3-NO-HITL",
+      "finding": "PASS drop 0.50 >=0.30 (DSM 0.75 -> NOHITL 0.25).",
+      "expected": "drop >=0.30",
+      "observed": "0.50",
+      "pass": true
+    }
+  ],
+  "recomputed_metrics": {
+    "M_AX_NODES_MEDIAN": {"producer": 698, "recomputed": 698, "match": true, "detail": "web product pages only, pca 17"},
+    "M_AX_NODES_MIN": {"producer": 626, "recomputed": 626, "match": true},
+    "M_DOM_BYTES_MEDIAN": {"producer": 201305, "recomputed": 201305, "match": true},
+    "M_DOM_BYTES_MIN": {"producer": 195052, "recomputed": 195052, "match": true},
+    "M_SHA_STABILITY_IDENTICAL": {"producer": true, "recomputed": true, "n": "16/16"},
+    "M_SHA_MUTATION_CHANGED": {"producer": true, "recomputed": true, "n": "16/16"},
+    "M_AX_RICHER_BBOX": {"producer": false, "recomputed": false, "replacement": "anchored_geometry 13/13"},
+    "M_AX_DELTA_TRUNCATED": {"producer": 0.6667, "recomputed": 0.6667, "match": true, "n": 3},
+    "M_COV_AGT_DSM": {"producer": 0.75, "recomputed": 0.75, "n": "30/40", "ci": "[0.625,0.875]"},
+    "M_COV_TRACE": {"producer": 0.25, "recomputed": 0.25, "n": "10/40", "ci": "[0.125,0.375]"},
+    "M_COV_BMEM": {"producer": 0.0, "recomputed": 0.0, "n": "0/40", "degenerate": true, "ci": "[0,0]"},
+    "M_COV_SPIDER_ALIAS": {"producer": 0.925, "recomputed": 0.925, "n": "37/40", "ci": "[0.85,1.0]"},
+    "M_COV_SPIDER_ROUTING": {"producer": 1.0, "recomputed": 1.0, "n": "40/40", "degenerate": true},
+    "M_COV_SPIDER_WEBMCP": {"producer": 1.0, "recomputed": 1.0, "n": "40/40", "degenerate": true},
+    "M_COV_COLD": {"producer": 0.25, "recomputed": 0.25, "n": "10/40"},
+    "M_TOTAL_F10_AGT_DSM": {"producer": 22.6, "recomputed": 22.6, "sum": 226},
+    "M_TOTAL_F10_TRACE": {"producer": 10.0, "recomputed": 10.0, "sum": 100},
+    "M_TOTAL_F10_BMEM": {"producer": 10.0, "recomputed": 10.0, "sum": 100},
+    "M_TOTAL_F10_SPIDER_ALIAS": {"producer": 30.1, "recomputed": 30.1, "sum": 301},
+    "M_TOTAL_F10_SPIDER_ROUTING": {"producer": 33.0, "recomputed": 33.0, "sum": 330},
+    "M_TOTAL_F10_SPIDER_WEBMCP": {"producer": 28.0, "recomputed": 28.0, "sum": 280},
+    "M_TOTAL_F100_AGT_DSM": {"producer": 5.65, "recomputed": 5.65},
+    "M_TOTAL_F100_SPIDER_ALIAS": {"producer": 7.53, "recomputed": 7.525},
+    "M_COST_USD_AGT_DSM_MEAN": {"producer": 0.0353, "recomputed": null, "note": "USD simulated midpoint not independently recomputable from work units; 30 patch tasks total $1.41 matches $0.047 midpoint"},
+    "M_RHO_REAL": {"producer": 0.8656, "recomputed": 0.8656, "pooled_all_baselines": true},
+    "M_RHO_SHUFFLED": {"producer": 0.1592, "recomputed": 0.1592, "gate_abs_lt_0_20": true},
+    "M_FALSE_ACCEPT": {"producer": 0.0, "recomputed": 0.0, "note": "structural zero, not empirical"},
+    "M_PREVALENCE_WEBMCP_TOOL_BYPASS": {"producer": 0.725, "recomputed": 0.725, "n": "29/40"},
+    "M_HITL_DROP": {"producer": 0.5, "recomputed": 0.5},
+    "M_PER_CHANNEL_COVERAGE": {"producer": {"header_param":{"DSM":1.0,"TRACE":0.0,"BMEM":0.0,"ALIAS":1.0},"body_param":{"DSM":1.0,"TRACE":1.0,"BMEM":0.0,"ALIAS":0.9},"auth_param":{"DSM":0.7,"TRACE":0.0,"BMEM":0.0,"ALIAS":1.0},"mixed":{"DSM":0.3,"TRACE":0.0,"BMEM":0.0,"ALIAS":0.8}}, "recomputed_match": true}
+  },
+  "claim_ceiling": "MAXIMUM JUSTIFIED: Docker-pinned WebArena-Verified v2 812-task census (sha d65275660814663375028e9017e1f929e3c38321041b125795e2713b52243d30, 192 shopping first-site, 36 families_ge3, 4 product_page families [136,145,196,222] product_page_tasks 7) with repaired full-tree CDP pipeline at 1280x720 achieving median 698 AX nodes and 201305 DOM bytes and SHA stability 16/16 both directions on 13 real pages+3 synthetic (4 families only; richer bbox via anchored Runtime.evaluate 13/13 not AXNode.boundingBox); AND blind synthetic alias-OOD Pareto on 40 tasks (10 header/10 body/10 auth/10 mixed, seed 360360) with honest sum-counters showing DSM 0.75 [0.625,0.875] at F10 22.6 / F100 5.65 USD $0.035/task vs SPIDER-ALIAS 0.925 [0.85,1.0] at F10 30.1 / F100 7.53 and SPIDER-ROUTING/WEBMCP 1.0 degenerate CIs, |rho_shuffled|0.1592<0.20, HITL drop 0.50, truncated delta 0.6667. DOES NOT JUSTIFY: >=10-family product hold-out (only 4 constructible), cross-source byte-identity (HF 401), WebGym 292k duplication/prevalence sweep, real-browser/network/LLM cost Pareto, or C-CROSSSITE website-holdout transfer beyond synthetic alias heterogeneity. Economics ceiling is mechanism work units at MAX_STEPS 10 truncation, not wall-clock/USD at scale.",
+  "evidence_refs": [
+    "research/experiments/EXP-INTEL-35956094394/artifacts/raw/webarena_verified_pin.json sha 8a529cc8243a09d71fec6583427fbcd7ae35167b81659a695ee847d1100945df",
+    "research/experiments/EXP-INTEL-35956094394/artifacts/derived/webarena_census.json sha 6fcdc04f442ac69caa7a5a5a8e1f4a58e936ea99d8b3fde13f6372b6f410f206",
+    "research/experiments/EXP-INTEL-35956094394/artifacts/raw/ax_captures.jsonl sha 61256b4fa8eac12ef4b44ddeab8691d6153d1488b6bc759f702dce8d99a1e415",
+    "research/experiments/EXP-INTEL-35956094394/artifacts/raw/ax_protocol_dump.json sha 97b1ac8f17d80d99a18f7323f9f0068774e84156ac0f9d63616c54d78753e0a6",
+    "research/experiments/EXP-INTEL-35956094394/artifacts/raw/hf_manifest_attempts.json sha 5cdc778703b1a34a528cf5a654363bcbd72594a7ea5403a0019568e659391597",
+    "research/experiments/EXP-INTEL-35956094394/artifacts/raw/docker_hub_api_attempts.json sha 5d4b6955c86d880ed3ca493bbd6a1a9b8b6d5c245b3597e517a956420ff0a628",
+    "research/experiments/EXP-INTEL-35956094394/artifacts/derived/ax_analysis.json sha 0b3cb4dfd9e24d839e335e452c02acf12bc1202ed0e91d1111eba8442249dc4f",
+    "research/experiments/EXP-INTEL-35956094394/artifacts/derived/sota_blind_results.jsonl sha 3c5ab5afbaa3d28910dc0e6c3bcd77ed51262f028dc045e1df896324af386402",
+    "research/experiments/EXP-INTEL-35956094394/artifacts/derived/sota_analysis.json sha 199570b64ae43c4f34f90297d2f649b3d92fd657682a1fdceeff81c969e45d88",
+    "research/experiments/EXP-INTEL-35956094394/artifacts/derived/truncation_control.json sha 871808ab031ed0d3c43f4b720c9a2dabf383d2d256c9a1878161388c13f82c49",
+    "research/intel/grammar_fulltree_358885.py sha 273eafbcb817e8981f843581a724594665cabdd357b318c701251929ee9c83de",
+    "research/intel/synthetic_alias_ood_40.json sha 6f42bc82cb1b6fb292320200ab0beb46694ceb260f16dd44d38e489ad9089205 file_sha 6f42bc82",
+    "research/intel/exp_35956094394_blind_harness.py sha a2077018314bed366133522f9ed1ea017575c5eff0de469fcaefca719ebc3239",
+    "research/intel/exp_35956094394_ax_probe.py sha b7088d05fd697b2b90105bc3c233ec4999c808333571c81f1e91dfb8b568253f",
+    "research/intel/exp_35956094394_synth_gen.py sha 5311a58113e50d00546547634aa239c45cf3dec659509580abd56eb63678c1b0"
+  ],
+  "unresolved": [
+    "UNRES-CROSS-SOURCE: HF manifest byte-identity vs Docker pin unverifiable without HF_TOKEN; single-source pin is durability via Docker only.",
+    "UNRES-SATURATED-CI: BMEM/ROUTING/WEBMCP degenerate CIs require larger N or harder split for non-degenerate width; frozen prereg flags CI[1,1] invalid.",
+    "UNRES-AUTH-RACES: DSM auth 0.7 vs SPIDER 1.0 gap causal step (patch timing vs Poisson rotation) not isolated from per-task logs alone; needs step-level world trace.",
+    "UNRES-REAL-HOLDOUT: C-CROSSSITE transfer on real website holdout families (pinned census) not measured; Module B synthetic only.",
+    "UNRES-HARNESS-SHA-ORIGIN: prior log harness sha ae7ea9e7... vs on-disk a2077018... discrepancy disclosed but origin not re-derivable; results sha authoritative via re-run.",
+    "UNRES-WEBGYM-CENSUS: WebGym 292k diverse eTLD+1 and duplication sweep 0.818-0.9479 range require manifest acquisition (HF 401 blocked).",
+    "UNRES-PRODUCT-ECON-REAL-COST: USD $0.035/task simulated from patch midpoint $0.047 not measured wall-clock/tokens/network; product economics needs real cost instrumentation."
+  ]
+}

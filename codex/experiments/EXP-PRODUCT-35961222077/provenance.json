@@ -1,0 +1,98 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-35961222077",
+  "lane": "product",
+  "github_run_id": "35961222077",
+  "github_run_attempt": "1",
+  "pre_execute_sha": "da34d861612047259fabf39bf4899cf095aa8d2d",
+  "head_commit_at_execute": "58fc8fe4c9f3312756546cbb0e1aa84d2e3c4265",
+  "recorded_at": "2026-09-24T06:15:00Z",
+  "frozen_inputs": {
+    "request.json": {"sha256": "43a4574b27366ed787a333eb2f75ad0d82e50cbbd17309dd6767d1d6415bee11", "matches_freeze": true},
+    "spec.json": {"sha256": "d2d2dce88fd227a0e7242ecf5402d7655826b5601cabacd6be3ca566acb479c3", "matches_freeze": true},
+    "prereg.md": {"sha256": "bf9f962649ead055c24bc8e5555560dfafbb2580f9a5fe2a130482f0a0f9834a", "matches_freeze": true},
+    "freeze.json": {"sha256": "abecadd25c28c029022a3699dfc7309f27053a9a94a4e458a73b6ee4bed1cd6e", "frozen_at": "2026-09-24T05:47:42.806356+00:00"}
+  },
+  "environment": {
+    "platform": "linux",
+    "python": "3.12.14",
+    "gunicorn": "23.0.0 (pin compliant)",
+    "pyjwt": "2.14.0 (pin compliant)",
+    "flask": "3.1.3",
+    "nginx_binary": "nginx/1.24.0 (Ubuntu), $request_uri sticky RUNNING during execute",
+    "scientific_stack": "numpy 2.5.3 scipy 1.18.1 sklearn 1.9.1 pandas 3.0.6",
+    "openai_key": "ABSENT",
+    "docker_browsergym": "ghcr.io/servicenow/browsergym:0.14.3 pull DENIED; no local image",
+    "playwright": "ModuleNotFoundError",
+    "browsergym_pip": "browsergym==0.14.3 wheel 1.5 kB metapackage only",
+    "substrate_path": "/tmp/spider-runtime/shared.db",
+    "substrate_ports": {"gunicorn": 18929, "nginx": 18930},
+    "substrate_worker_pid": 69030,
+    "jwt_alg": "HS256",
+    "sqlite_journal_mode": "wal"
+  },
+  "kernel_patch": {
+    "path": "src/spider/kernel.py",
+    "regex": "r'\\$\\{[A-Za-z_][A-Za-z0-9_\\.]*\\}'",
+    "working_tree_sha256": "d926279d5ee14a044a2f13b8abc09202df9f5adb9e86feaadeb61818a15f4038",
+    "committed": false,
+    "scope": "product lane granted edit (working tree only; no commit/push performed)"
+  },
+  "code_paths": [
+    "research/experiments/EXP-PRODUCT-35961222077/run_experiment.py (sha bcd024598d797b0bbde20951dd8b5b10af82ab12331bcd882006d3a535ee0764)",
+    "src/spider/kernel.py (dot-regex patch working tree)",
+    "research/experiments/EXP-PRODUCT-35961222077/artifacts/* (raw + derived evidence)",
+    "research/experiments/EXP-PRODUCT-35961222077/fixtures/* (staged fixtures)"
+  ],
+  "commands": [
+    "python3 -m py_compile research/experiments/EXP-PRODUCT-35961222077/run_experiment.py",
+    "python3 research/experiments/EXP-PRODUCT-35961222077/run_experiment.py",
+    "PYTHONPATH=src python3 -m unittest tests.test_kernel (3/3 OK, prior session)",
+    "docker pull ghcr.io/servicenow/browsergym:0.14.3 (exit 1 denied)",
+    "python3 -m pip index versions webarena (No matching distribution)",
+    "python3 -m pip download browsergym==0.14.3 --no-deps (1.5 kB metapackage)",
+    "python3 -c import playwright (ModuleNotFoundError)",
+    "nginx -t -c /tmp/spider-runtime/nginx.conf (ok)",
+    "gunicorn -w 1 --bind 127.0.0.1:18929 --chdir /tmp/spider-runtime app:APP",
+    "nginx -c /tmp/spider-runtime/nginx.conf (started)"
+  ],
+  "datasets_fixtures": {
+    "Hard258_census": "NOT STAGED (webarena undistributable); disclosed fallback used",
+    "webarena_verified_v2_tasks_192_36": {
+      "sha256": "391e8f6cf167300cf223ebbb19cf5d2beed6568f5f84ac968ae88866a438a98b",
+      "source": "research/experiments/EXP-PRODUCT-35916130502/fixtures/tasks.json",
+      "n_tasks": 192,
+      "n_families": 36,
+      "value_set_disjointness": "FAIL 18/36 even-index families contaminated (pool+usage); not modified"
+    },
+    "qcr_bank_manifest": {"sha256": "8c69804b249ec9c84cf05d86a21c7ebe7a31af5f8d45e50a4e6d477b449f9f58", "tau": 0.3},
+    "cost_config": {"sha256": "55fa25af079dffb372835487a31914f536ff907c0055c5e1dce86f707c2a3433"},
+    "dsm_webmcp_registry": {"sha256": "af3c18e5ef1904484c5d440353b327958bdcc909e72915b301724b9f49bcdb4c", "n_sites": 714, "n_tools": 2147},
+    "dsm_webmcp_sites": {"sha256": "8e106525f63bd2fc3f6138511fc5b8f6e6a033aed41bee765920b8b63e33e4df"},
+    "sgdr_index_36": {
+      "sha256": "e93cb920a49afadc803ee2709d91068ff324dc9bd9eea88ef924c68b16c4b1a0",
+      "n_state_key": 36,
+      "train_only": true,
+      "representation_note": "DOM-hash component substituted with TRAIN post_state hash (BrowserGym AX unavailable); disclosed"
+    }
+  },
+  "material_artifacts": [
+    {"path": "artifacts/env_audit.json", "sha256": "0e6c81e1bcf915629b37065ccfdb187da4d77080156c979799cd74d5d12f9367", "role": "raw"},
+    {"path": "artifacts/fixture_checks.json", "sha256": "b9aff0f0f39de7c84de82cae642a80be650dbf6d3c52abfaba70443c7e19c4f1", "role": "derived"},
+    {"path": "artifacts/substrate_start.json", "sha256": "3962140de09f18b7e9ee880d3634c5a0b8ad491c673b5ee908999284890dba44", "role": "raw"},
+    {"path": "artifacts/probe_traces.jsonl", "sha256": "1ff598fbb1f13faf98e6339319b84dabf2145ffcbe17e760cea0bb975e61e34c", "role": "raw", "n_lines": 1296},
+    {"path": "artifacts/substrate_probe.json", "sha256": "ef115499a0acd623eca21ba086baaba9485e551355b2e630e2f7cd421557a871", "role": "derived"},
+    {"path": "artifacts/pc1_exact_repeat.json", "sha256": "77fd8371c888e1f331ddf05cb3ff4d76375f6e85881a60ad83137dd65c4993e2", "role": "derived"},
+    {"path": "artifacts/pc3_verify_calibration.json", "sha256": "68f88ae1f1c0b76edddb564cf75f91d0a3858b8133d57549dfa93fd499a11a91", "role": "derived"},
+    {"path": "artifacts/mv2_kernel_spot_check.json", "sha256": "8bbb163d63500615ff7899c6bd326bfa3a8b5830e00f9350469d7989b08759b3", "role": "derived"},
+    {"path": "artifacts/null_controls.json", "sha256": "0934771ba555fbab771f70f31bed22dd9a56a0172648f0e5a2de411cd85e5356", "role": "derived"},
+    {"path": "artifacts/nc_trajectory_counters.json", "sha256": "f12b18b2918556709bcffd977b9ebbae38786402df310b8554ae70a1d9298afc", "role": "raw"},
+    {"path": "artifacts/attempts_log.json", "sha256": "091f99c03ff3c228be8aed8124e7262a10aa4b7d882a8113e11fb2850e9e4c57", "role": "raw"},
+    {"path": "artifacts/metrics_summary.json", "sha256": "b63aedd44a5df2efe4216cf19da8b88e38a6f792165db89e230532fc099365c1", "role": "derived"}
+  ],
+  "execution_notes": [
+    "Harness executed once after fixing pre-run TypeError (run_cmd missing cwd=) and a dead-code walrus typo in unused provision_substrate(); frozen scientific inputs untouched.",
+    "Elapsed wall 12.3s includes env audit, fixture staging, substrate provision, 846 HTTP probes, PC1/PC3, NC with B=5000 bootstrap and B=5000 block-permutation.",
+    "No git commit, push, branch switch, or force operations performed; only product-scope worktree edits (kernel.py already patched prior to execute; run_experiment.py + artifacts/fixtures created)."
+  ]
+}

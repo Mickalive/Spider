@@ -1,0 +1,87 @@
+{
+ "schema_version": 1,
+ "experiment_id": "EXP-PRODUCT-35999358218",
+ "lane": "product",
+ "github": {
+  "repository": "Mickalive/Spider",
+  "run_id": 35999358218,
+  "run_attempt": 1,
+  "run_number": 1070,
+  "workflow": "SPIDER R2 Lane",
+  "workflow_ref": "Mickalive/Spider/.github/workflows/spider-lane.yml@refs/heads/main",
+  "actor": "github-actions[bot]",
+  "event_sha": "d4113e41e3f74a6fed6ad204a0bbef4b3faefaa9",
+  "notes": "codex sync commit at event; experiment execution base is HEAD ce852f20930fe0d762bb5b7f1a860163efadcf9d ('R2 product: execution base EXP-PRODUCT-35999358218') created at freeze time 2026-09-24T12:34:58Z"
+ },
+ "commits": {
+  "execution_base_head": {
+   "sha": "ce852f20930fe0d762bb5b7f1a860163efadcf9d",
+   "subject": "R2 product: execution base EXP-PRODUCT-35999358218"
+  },
+  "freeze_commit": {
+   "sha": "182490ea3af36b73481d5bbee50463d06fc4cff0",
+   "subject": "R2 product: freeze EXP-PRODUCT-35999358218"
+  },
+  "allocation_commit": {
+   "sha": "8fd586b8c4677a8f19ccd4c3f7d1b4eb4e2069ed",
+   "subject": "R2 product: allocate EXP-PRODUCT-35999358218"
+  },
+  "git_status_at_execution": "M src/spider/kernel.py (MV3 dot-regex patch staged in working tree); untracked artifacts/, fixtures/, run_experiment.py, model_execute.json; no commits pushed by EXECUTE"
+ },
+ "frozen_inputs": {
+  "request.json": {"sha256": "3479a809de9cba7ee7d3a8aa66c1158bd230052d9c3a4c5f6ca48879f5b2469f"},
+  "spec.json": {"sha256": "d0a0411ee16b8f7dc101b8ac0bd8f2288fd69572f9844a32a47f2867108889db"},
+  "prereg.md": {"sha256": "f8abd4e51ab9df60f3bdab110efd42eed86f4958f512f7e445560ac045bebaf1"},
+  "freeze.json": {"frozen_at": "2026-09-24T12:34:58.896476+00:00", "schema_version": 1},
+  "note": "All three frozen-hash checks re-verified against freeze.json before execution; byte-identical."
+ },
+ "parent_handoff": {
+  "experiment_id": "EXP-PRODUCT-35961222077",
+  "result_status": "MEASUREMENT_INVALID",
+  "outcome": "INCONCLUSIVE",
+  "next_question": "After authorizing GHCR ghcr.io/servicenow/browsergym:0.14.3 (playwright 1.63.0 importable, 2000-node 1280x720 CDP getFullAXTree AX>10) + OPENAI_API_KEY for gpt-4o-mini 15-step ... does honest M_total_f10/f100 Pareto ... show SPIDER provides margin >=0.12 vs EACH of B-COLD/B-INSTRUCTIONS/B-RAG-EMBED TAU0.30 k5/B-STAGEHAND-CACHE and Pareto saving >=25% vs COLD and <=0.85x vs RAG at both f=10/100 ... superseding per_hit 1.005>0.85 rho 0.363<0.60 artifact?"
+ },
+ "parent_harness_source": {
+  "path": "research/experiments/EXP-PRODUCT-35961222077/run_experiment.py",
+  "adapted_into": "research/experiments/EXP-PRODUCT-35999358218/run_experiment.py",
+  "changes": ["EXP_ID/JWT_SECRET/control IDs per frozen spec", "NC1 corrected: trajectory-grouped family-stratified block-permutation of parameter_slots (parent degenerate within-trajectory re-sample replaced)", "MV3 kernel dot-regex spot-check added", "PC4 frozen-formula parity + rho_proxy_real logging added", "attempts log detail updated (manifest unknown / OPENAI absent)", "main() extended 7->8 steps"]
+ },
+ "environment": {
+  "os": "linux (GitHub Actions hosted, x64)",
+  "python": "3.12.14 (/opt/hostedtoolcache/Python/3.12.14/x64)",
+  "pins": {"gunicorn": "23.0.0", "jwt": "2.14.0", "flask": "3.1.3", "numpy": "2.5.3", "scipy": "1.18.1", "sklearn": "1.9.1", "pandas": "3.0.6"},
+  "nginx": "1.24.0 (Ubuntu)",
+  "docker": "client 28.0.4, daemon running (4 CPU, 15.61GiB RAM)",
+  "secrets": {"OPENAI_API_KEY": "ABSENT", "GH_TOKEN": "present (used for GHCR auth)"},
+  "docker_pull_browsergym": "exit 1: 'Error response from daemon: manifest unknown' (after docker login succeeded)",
+  "pip_webarena": "exit 1: 'No matching distribution found for webarena'",
+  "playwright_importable": "exit 1 (not installed)",
+  "representation_loss_notes": ["192/36 census is TRAIN-contaminated on 18/36 even families (disclosed, MEASUREMENT_INVALID trigger)", "sgdr state_key DOM-hash component replaced by TRAIN post_state hash", "B-STAGEHAND-CACHE PC1 via file-proxy DOM hash (no Docker AX)"]
+ },
+ "commands": {
+  "install": "pip install gunicorn==23.0.0 pyjwt==2.14.0 flask==3.1.3 numpy==2.5.3 scipy==1.18.1 scikit-learn==1.9.1 pandas==3.0.6",
+  "mv3_stage": "edit src/spider/kernel.py _PARAMETER to r'\\$\\{[A-Za-z_][A-Za-z0-9_\\.]*\\}' (frozen MV3 patch, sha now d926279d5ee14a044a2f13b8abc09202df9f5adb9e86feaadeb61818a15f4038)",
+  "tests": "PYTHONPATH=src python3 -m unittest discover -s tests -> 3/3 OK",
+  "execute": "python3 research/experiments/EXP-PRODUCT-35999358218/run_experiment.py (elapsed 11.8s)",
+  "docker_auth_probe": "docker login ghcr.io -u githubactions --password-stdin with GH_TOKEN -> Login Succeeded; docker pull ghcr.io/servicenow/browsergym:0.14.3 -> manifest unknown",
+  "substrate": "gunicorn 23.0.0 -w 1 on 127.0.0.1:18929, nginx 1.24.0 on 127.0.0.1:18930 hash $request_uri consistent -> 127.0.0.1:18929; JWT HS256 PyJWT 2.14.0; SQLite WAL /tmp/spider-runtime/shared.db",
+  "note": "No git add/commit/push performed by EXECUTE."
+ },
+ "fixture_sources": {
+  "tasks": "research/experiments/EXP-PRODUCT-35916130502/fixtures/tasks.json -> fixtures/webarena_verified_v2_tasks_192_36.json (sha256 391e8f6cf167300cf223ebbb19cf5d2beed6568f5f84ac968ae88866a438a98b)",
+  "qcr_bank_manifest": "research/experiments/EXP-PRODUCT-35916130502/artifacts/qcr_bank_manifest.json -> fixtures/qcr_bank_manifest.json (sha256 8c69804b249ec9c84cf05d86a21c7ebe7a31af5f8d45e50a4e6d477b449f9f58, tau 0.30)",
+  "cost_config": "research/experiments/EXP-PRODUCT-35916130502/artifacts/cost_config.json -> fixtures/cost_config.json (sha256 55fa25af079dffb372835487a31914f536ff907c0055c5e1dce86f707c2a3433)",
+  "dsm_sites": "research/experiments/EXP-PRODUCT-35916130502/artifacts/webmcp_sites.jsonl -> fixtures/dsm_webmcp_sites.jsonl (sha256 8e106525f63bd2fc3f6138511fc5b8f6e6a033aed41bee765920b8b63e33e4df, 714 lines)",
+  "dsm_registry": "research/experiments/EXP-PRODUCT-35916130502/artifacts/webmcp_registry.jsonl -> fixtures/dsm_webmcp_registry.jsonl (sha256 af3c18e5ef1904484c5d440353b327958bdcc909e72915b301724b9f49bcdb4c, 2147 lines)",
+  "sgdr_index": "derived in stage_fixtures from 36 TRAIN demo0 post_state hashes -> fixtures/sgdr_index_36.json (sha256 1c3850727061aa8ef96912fc23b7b55f44641a94a5b7b7eebcd82e3665ac11d4)",
+  "note": "All bytes copied verbatim from canonical lane sources (same as parent EXP-PRODUCT-35961222077 staging), shas logged in artifacts/fixture_checks.json.staged_artifacts"
+ },
+ "material_artifacts": {
+  "result.json": "research/experiments/EXP-PRODUCT-35999358218/result.json",
+  "report.md": "research/experiments/EXP-PRODUCT-35999358218/report.md",
+  "provenance.json": "research/experiments/EXP-PRODUCT-35999358218/provenance.json",
+  "harness": "research/experiments/EXP-PRODUCT-35999358218/run_experiment.py (sha256 f6dedf1b06d78abb1bc45762aed573239169ea5e86efa6562de88cc63a51975f)",
+  "raw": ["artifacts/probe_traces.jsonl (sha256 8d991adb5a9a5a0e62eabcab679b4e11fa59feb6e143a2a9c5bd17bdeb616556)", "artifacts/substrate_start.json (86615bbd0204657b3b29aab9561d051a0b2cf187adc35579e71b037d1dfd6c44)", "artifacts/env_audit.json (6b58758a7222ab0268d0977894bd473178c614e3fc1df18dfdbcbc36cad27d16)", "artifacts/attempts_log.json (36715358a6ffcfc03cacadc723a606333ca942fd00db5d76234b969fe728a5b4)"],
+  "derived": ["artifacts/fixture_checks.json (022fa85b6dab88ca03f3ec4bc0b16b67ef596ad094ff31993edc383e9c366506)", "artifacts/substrate_probe.json (5239c390fdfb6a8ae1c897b9fbba998af5caadb781469d1bc16cfe6443f96974)", "artifacts/pc1_exact_repeat.json (5c8bedf7283f700728484e1e3c1c52e27997b5558bc6a3d1595984eee7d905ca)", "artifacts/pc3_verify_calibration.json (8aa966fba95beaec7080a39e95dc11e0ddc255c87672761c75b9eca51173e730)", "artifacts/mv3_kernel_spot_check.json (4c36e30b144bdb9ebb31c77cff653def459c30918cdd77e2865723f1c35f534d)", "artifacts/null_controls.json (22173094ada37a5568dd44015a9f0797968b7383b20ab3b23fb8389bb0e2f4ed)", "artifacts/nc_trajectory_counters.json (977fa92366abce19ff478e0873308a71292c437cfb0bfd93f234697ec7e92c96)", "artifacts/metrics_summary.json (6875e6f13c1e188acdbcf7e1fdcf9f164ab2b3e25f2b84c3ba2144f9c44f3cb1)"]
+ }
+}
