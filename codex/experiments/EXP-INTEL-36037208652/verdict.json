@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-36037208652",
+  "lane": "intel",
+  "decision": "MIXED",
+  "claim_updates": [
+    {
+      "claim_id": "C-CROSSSITE",
+      "status": "HYPOTHESIS",
+      "reason": "H_A_ORTHO_CENSUS_10FAM boundedly falsified on attempted orthogonal sources under frozen protocol: primary 812 + Hard258 union still 4 product families [136,145,196,222] (M_CONSTRUCTIBLE_FAMILIES=4 <10 gate), orthogonal WebMall 0, Mind2Web expansion 0, WebGym-derived 0 (M_CONSTRUCTIBLE_FAMILIES_ORTHO_ONLY=0) after 2 genuine 401/404 attempts each logged HONEST UNAVAILABLE not zero; full-tree AX_consistency on available 4-family set mean 0.454 <0.6 CI lower 0.396 <=0.5 gap 0.143 <0.20 (M_AX_* FAIL), Stagehand HIT_post 0.775 <0.8 (M_STAGEHAND_HIT_POST_STRIP FAIL) lift 0.775 PASS but rotation-insensitive variant null, Gate0 1/10 families (M_GATE0_FAMILIES_MEETING_THRESHOLD=1 <10), WebGym diverse ETL null UNAVAILABLE per MV5 exception with 2x401 logged. Audit REVISE recomputed_metrics exact match producer; measurement valid per MV1-MV4/MV6-MV8 PASS with MV5 WebGym UNAVAILABLE exception; no advance beyond prior 4-family durable pin. Global C-CROSSSITE remains bounded HYPOTHESIS at 4-family ceiling, not globally closed."
+    },
+    {
+      "claim_id": "C-MEAS-VALID",
+      "status": "HYPOTHESIS",
+      "reason": "C-MEAS-VALID health-gated single-node 1280x720 CDP Accessibility.getFullAXTree pipeline verified median AX>10 DOM>=2000 PASS but fresh live probe not re-executed this run (12 captures reused from EXP-INTEL-36020904615 with fresh environment_pin.json; audit validity_findings MV3 reuse disclosed as representation loss). Gate0 multi-step collection UNAVAILABLE on live BrowserGym sites (GHCR manifest 404 x2 pull denied x2, 6 genuine attempts) fixture only shopping_admin 50/10 families; leakage valid-only null UNAVAILABLE not measured. WebGym diverse CI/sweep UNAVAILABLE pending HF_TOKEN. Audit REVISE required_fixes include fresh live probe, rotation variant, GHCR live Gate0. Substrate not promoted beyond single-node health gate."
+    },
+    {
+      "claim_id": "C-WEB-DYNAMICS",
+      "status": "HYPOTHESIS",
+      "reason": "C-WEB-DYNAMICS remains HYPOTHESIS pending valid diverse family bank and Gate0 physics sampling: orthogonal census 0 families means no new beyond-memory N=1000-1999 bank; Gate0 1/10 families with per-trajectory counters proven only on fixture. No PMI beyond-memory test executed. Audit claim_ceiling bounds to 4-family ceiling with synthetic alias-OOD only (synthetic-to-real gap preserved)."
+    }
+  ],
+  "product_action": "NO_PROMOTION",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "Can HF_TOKEN-provisioned retrieval of WebArena-Verified + WebGym 292k/127k manifests (demonstrating >=50 distinct eTLD+1 with family-level B=2000 duplication prevalence non-degenerate CI width>0 and threshold sweep at 0.818 and 0.9479 range>=0.05 monotonic), combined with a fresh live CDP Accessibility.getFullAXTree 1280x720 probe (no reuse) on canonical families [136,145,196,222] and on a newly sampled orthogonal census achieving >=10 distinct product families via verified product-subtree anchoring and SHA stability (using GHCR BrowserGym 0.14.3 via docker load fallback or alternative registry and independent eTLD+1 hosting for WebMall/Mind2Web-2 loopback beyond 130-task), plus an explicit rotation-insensitive/freshness-gated Stagehand variant, deliver full-tree multi-anchor AX_consistency mean>=0.6 CI lower>0.5 gap>=0.20 variance>0 delta>=0.20 on the >=10 set, Stagehand HIT>=0.8 lift>=0.40, and BrowserGym multi-step Gate0 >=50 transitions/family on >=10 families across shopping_admin/Reddit/GitLab/Wikipedia/VisualWebArena/WorkArena with leakage<0.40 under identical deterministic Random(35725763380).sample protocol?",
+  "reason": "Measurement transaction valid per frozen MV1-MV4/MV6-MV8 PASS (all durables >=2 genuine 300s attempts logged with canonical path+hash, 64-hex digest checks, pip freeze nonempty 238 lines, BrowserGym-core 0.14.3 AgentLab 0.4.2 Playwright 1.63.0 viewport 1280x720, body regex + 9 base + expanded stripping present, deterministic Random(35725763380).sample x2 logged S1==S2, trailing provenance complete). MV5 WebGym diverse clause correctly UNAVAILABLE not MEASUREMENT_INVALID per exception (HF_TOKEN false 401 x2). Producer outcome MIXED is correct per frozen three-way rule: SURVIVES requires >=10 families + AX gates + Stagehand HIT>=0.8 with variant + WebGym diverse + Gate0 >=10 families — all fail except lifts/delta; bounded FALSIFIED triple not fully satisfied because WebGym UNAVAILABLE is exception not strong fail, so MIXED. Audit REVISE recomputed_metrics all match producer (M_CONSTRUCTIBLE_FAMILIES 4, AX mean 0.45426266 CI[0.3960,0.5164] gap0.143 delta0.427 variance0.00476, Stagehand HIT_post 0.775 lift0.775, Gate0 1/10, |rho_shuffled|0.1936 PASS). Required_fixes prevent VALIDATED/EXPERIMENTAL promotion: reused AX captures not fresh live probe, rotation variant not implemented, Gate0 live substrate UNAVAILABLE, WebGym manifest absent, GHCR 404, NC2 structural floor 0.31. Claim ceiling bounded to 4-family durable pin (families 136,145,196,222) with full-tree pipeline non-vacuous but gates failing on slug-URL substrate; no inference to broader WebMall/WebGym diversity or production hold-out. No product promotion. Next step requires HF_TOKEN + fresh live probe + orthogonal independent hosting, not re-probing same 4-family pin (would be MEASUREMENT_INVALID).",
+  "evidence_refs": [
+    "research/experiments/EXP-INTEL-36037208652/spec.json",
+    "research/experiments/EXP-INTEL-36037208652/prereg.md",
+    "research/experiments/EXP-INTEL-36037208652/freeze.json",
+    "research/experiments/EXP-INTEL-36037208652/result.json",
+    "research/experiments/EXP-INTEL-36037208652/report.md",
+    "research/experiments/EXP-INTEL-36037208652/provenance.json",
+    "research/experiments/EXP-INTEL-36037208652/audit.json",
+    "research/experiments/EXP-INTEL-36037208652/artifacts/derived/census_summary.json",
+    "research/experiments/EXP-INTEL-36037208652/artifacts/derived/deterministic_family_samples.json",
+    "research/experiments/EXP-INTEL-36037208652/artifacts/derived/ax_consistency_fulltree.json",
+    "research/experiments/EXP-INTEL-36037208652/artifacts/derived/stagehand_strip_delta.json",
+    "research/experiments/EXP-INTEL-36037208652/artifacts/derived/gate0_per_family.json",
+    "research/experiments/EXP-INTEL-36037208652/artifacts/raw/hf_manifest_attempts.json",
+    "research/experiments/EXP-INTEL-36037208652/artifacts/raw/hf_webgym_manifest_attempts.json",
+    "research/experiments/EXP-INTEL-36037208652/artifacts/raw/ghcr_browsergym_attempts.json",
+    "research/experiments/EXP-INTEL-36037208652/artifacts/raw/docker_hub_api_attempts.json",
+    "research/experiments/EXP-INTEL-36037208652/artifacts/raw/webmall_attempts.json",
+    "research/experiments/EXP-INTEL-36037208652/artifacts/raw/mind2web_attempts.json",
+    "research/experiments/EXP-INTEL-36037208652/artifacts/raw/environment_pin.json"
+  ]
+}

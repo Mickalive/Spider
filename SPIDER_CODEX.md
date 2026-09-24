@@ -4,7 +4,7 @@ Pre-2.0 canonical memory remains frozen at `archive/spider-codex-ultimate:SPIDER
 
 Canonical Research 2.0 evidence lives in `codex/experiments/<experiment_id>/`.
 Use `codex/index.json` and `codex/claim_state.json` to locate relevant packets; do not load all experiment bodies by default.
-Validated experiments: **347**. Coverage gaps: **0**. Quarantined packets: **2**.
+Validated experiments: **353**. Coverage gaps: **0**. Quarantined packets: **2**.
 
 ## Experiment index
 
@@ -355,8 +355,14 @@ Validated experiments: **347**. Coverage gaps: **0**. Quarantined packets: **2**
 | EXP-PRODUCT-36020894109 | product | MEASUREMENT_INVALID | MEASUREMENT_INVALID | C-PRODUCT-ECON | `f50726bca9dd` |
 | EXP-INTEL-36020904615 | intel | PASS | MIXED | C-CROSSSITE, C-PRODUCT-ECON, C-RESIDUAL-NOVELTY | `d2ec81b3eead` |
 | EXP-RUNTIME-36030564009 | runtime | MEASUREMENT_INVALID | MEASUREMENT_INVALID | C-MEAS-VALID | `d6eb12aa3673` |
+| EXP-RUNTIME-36033919138 | runtime | MEASUREMENT_INVALID | MEASUREMENT_INVALID | C-MEAS-VALID | `00b0148f0d82` |
 | EXP-FRONTIER-36033935647 | frontier | MEASUREMENT_INVALID | MEASUREMENT_INVALID | C-RESIDUAL-NOVELTY | `67050f01369b` |
 | EXP-PRODUCT-36036421062 | product | PASS | MEASUREMENT_INVALID | C-PRODUCT-ECON | `1973aba861c0` |
+| EXP-INTEL-36037208652 | intel | REVISE | MIXED | C-CROSSSITE, C-MEAS-VALID, C-WEB-DYNAMICS | `71f2cf41f317` |
+| EXP-FRONTIER-36037217518 | frontier | FAIL | FALSIFIED-IN-SETTING | C-RESIDUAL-NOVELTY | `fa10fbe798a7` |
+| EXP-PHYSICS-36038994684 | physics | MEASUREMENT_INVALID | MEASUREMENT_INVALID | C-WEB-DYNAMICS | `70b96211d494` |
+| EXP-FRONTIER-36042599040 | frontier | PASS | FALSIFIED-IN-SETTING | C-RESIDUAL-NOVELTY | `1abfc09bcd5b` |
+| EXP-RUNTIME-36044045537 | runtime | REVISE | EXPERIMENTAL_BOUNDED — C-MEAS-VALID survives frozen C1-C4 thresholds on single-node honesty gate (C1 n_non304=850>=800 stratified 422/428 hs_rate=1.0 batch_ts=26; C3 |rho_shuffled|=0.0397 p=0.374 within_f_std=4.468 width=0.1143 effective=6 nullFP=0.0; C4 full=0.7619 CI[0.7048,0.8190] width=0.1143 effective=4 >0.5 and full>body(0.381)+0.05 diff_lo=0.3143 nullFP=0.0) with exclusive nginx -c, factory WSGI, shared TESTBED_SECRET and health-gate 0 missing verified, but audit REVISE downgrades producer SUPPORTS to bounded EXPERIMENTAL due to construct-validity threats: C2 header-only Jaccard variance=0.0 mean=1.0 constant (r=0.0 trivial by implementation, headers invariant to auth drift), C4 margin driven by synthetic post-response header mutation not natural auth-state header variation, C5 secondary FAIL header_drift=0.9583<1.0, HIT 330/330 in-memory only with proxy_cache_disabled=true, nginx duplicate hash warning. Claim ceiling remains single-node localhost EXPERIMENTAL, not VALIDATED/PRODUCT_CORE; distributed shared-WAL n>=800 HIT remains UNKNOWN. | C-MEAS-VALID | `88f6c08cd3cd` |
 
 ## Latest recorded claim events
 
@@ -364,16 +370,16 @@ These are chronological latest events, not an automatic truth ranking.
 
 | Claim | Status | Experiment | Lane |
 |---|---|---|---|
-| C-CROSSSITE | EXPERIMENTAL | EXP-INTEL-36020904615 | intel |
+| C-CROSSSITE | HYPOTHESIS | EXP-INTEL-36037208652 | intel |
 | C-DELTA-REPAIR | MEASUREMENT_INVALID | EXP-GRAPH-35999336958 | graph |
 | C-FRESHNESS | HYPOTHESIS | EXP-PRODUCT-35949571341 | product |
 | C-LLM-INHERIT | MEASUREMENT_INVALID | EXP-PRODUCT-35961222077 | product |
-| C-MEAS-VALID | MEASUREMENT_INVALID | EXP-RUNTIME-36030564009 | runtime |
+| C-MEAS-VALID | EXPERIMENTAL | EXP-RUNTIME-36044045537 | runtime |
 | C-PARAM-INHERIT | MEASUREMENT_INVALID | EXP-GRAPH-35932480731 | graph |
 | C-PRODUCT-ECON | HYPOTHESIS | EXP-PRODUCT-36036421062 | product |
-| C-RESIDUAL-NOVELTY | MEASUREMENT_INVALID | EXP-FRONTIER-36033935647 | frontier |
+| C-RESIDUAL-NOVELTY | HYPOTHESIS | EXP-FRONTIER-36042599040 | frontier |
 | C-SEMANTIC-RESOLVE | EXPERIMENTAL | EXP-FRONTIER-35949576588 | frontier |
-| C-WEB-DYNAMICS | HYPOTHESIS | EXP-PHYSICS-36013140158 | physics |
+| C-WEB-DYNAMICS | HYPOTHESIS | EXP-PHYSICS-36038994684 | physics |
 
 ## Integrity accounting
 

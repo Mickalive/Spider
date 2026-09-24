@@ -1,0 +1,236 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-36044045537",
+  "lane": "runtime",
+  "status": "COMPLETE",
+  "outcome": "SUPPORTS",
+  "metrics": {
+    "freshness_n_total": 1008,
+    "freshness_n_non304": 850,
+    "freshness_n_304": 158,
+    "freshness_n_missing_worker": 0,
+    "freshness_hs256_valid_success_rate": 1.0,
+    "freshness_batch_distinct_ts": 26,
+    "freshness_per_ep_non304": {
+      "/api/profile": 422,
+      "/api/data_list": 428
+    },
+    "freshness_per_ep_304": {
+      "/api/profile": 82,
+      "/api/data_list": 76
+    },
+    "freshness_scheduling_confound_r": 0.0,
+    "freshness_scheduling_r_raw": 0.0,
+    "freshness_scheduling_p": 1.0,
+    "freshness_cramers_v": 0.0531,
+    "freshness_header_only_jaccard_mean": 1.0,
+    "freshness_header_only_jaccard_ci_lo": -0.0981,
+    "freshness_header_only_jaccard_ci_hi": 0.0981,
+    "freshness_header_only_variance": 0.0,
+    "freshness_header_only_preserves_cache_control": true,
+    "freshness_scheduling_confound_r_freshness": 0.0154,
+    "honest_cost_rho_shuffled": 0.0397,
+    "honest_cost_p": 0.374,
+    "honest_cost_rho_obs": 0.0442,
+    "honest_cost_rho_obs_raw": -0.0442,
+    "honest_cost_within_f_std": 4.468,
+    "honest_cost_ci_width": 0.1163,
+    "honest_cost_effective_distinct_n": 6,
+    "honest_cost_n_trajectories": 401,
+    "honest_cost_null_FP": 0.0,
+    "full_vector_discrimination_full": 0.7619,
+    "full_vector_discrimination_body_only": 0.381,
+    "full_vector_discrimination_status_only": 0.0,
+    "full_vector_discrimination_body_varying": 1.0,
+    "full_vector_discrimination_header_varying": 1.0,
+    "full_vector_discrimination_null": 0.0,
+    "full_vector_discrimination_nginx": 1.0,
+    "full_vector_ci_lo": 0.7048,
+    "full_vector_ci_hi": 0.819,
+    "full_vector_ci_width": 0.1143,
+    "full_vector_effective_distinct_n": 4,
+    "full_vector_diff_lo": 0.3143,
+    "hit_byte_identical": 330,
+    "hit_total": 330,
+    "hit_rate": 1.0,
+    "loopback_header_drift": 0.9583,
+    "loopback_body_drift": 1.0,
+    "loopback_null_FP": 0.0
+  },
+  "controls": {
+    "V-NGINX-CONFIG-OK": {
+      "pass": true,
+      "expected": "nginx -t syntax ok exclusive -c",
+      "observed": "2026/09/24 19:02:33 [warn] 56578#56578: load balancing method redefined in /tmp/spider-runtime/36044045537/nginx.conf:10\nnginx: the configuration file /tmp/spider-runtime/36044045537/nginx.conf syntax"
+    },
+    "V-FLASK-LISTENING": {
+      "pass": true,
+      "expected": "Flask verified listening 127.0.0.1:19860",
+      "observed": "socket connect ok"
+    },
+    "V-EXCLUSIVE-NGINX-C": {
+      "pass": true,
+      "expected": "nginx -c /tmp/spider-runtime/36044045537/nginx.conf exclusively loaded",
+      "observed": "ps aux shows experiment nginx -c"
+    },
+    "V-NGINX-CACHE-PERMS": {
+      "pass": true,
+      "expected": "No Permission denied",
+      "observed": "No Permission denied in nginx_error.log"
+    },
+    "V-HEALTH-GATE": {
+      "pass": true,
+      "expected": "0 missing X-Worker-Pid",
+      "observed": "1 attempts, last status {'attempt': 0, 'status': 200, 'worker': '56580, 56580'}"
+    },
+    "C1-FRESHNESS-NON304": {
+      "expected": "n_non304>=800 stratified 400/endpoint hs>=0.90 batch>=10 0 missing",
+      "observed": "n_non304=850 per_ep={'/api/profile': 422, '/api/data_list': 428} hs_rate=1.0 batch=26 missing=0",
+      "pass": true
+    },
+    "C2-ORTHOGONALITY": {
+      "expected": "|r|<0.30 V<0.30 de-confounded",
+      "observed": "r=0.0000 abs=0.0000 V=0.0531 mean_j=1.0000 n=400",
+      "pass": true
+    },
+    "C3-HONEST-COST": {
+      "expected": "|rho_shuffled|<0.20 p>=0.20 within-f std>0 width>0 effective>1 nullFP<=0.05",
+      "observed": "|rho_shuffled|=0.0397 p=0.3740 rho_obs=0.0442 std=4.4680 width=0.1163 eff=6 nullFP=0.0000",
+      "pass": true
+    },
+    "C4-FULL-VECTOR": {
+      "expected": "full>0.5 full>max(body,status)+0.05 width>0 eff>1 diff_lo>0 nullFP<=0.05",
+      "observed": "full=0.7619 body=0.3810 status=0.0000 bodyVar=1.0000 hdrVar=1.0000 width=0.1143 eff=4 diff_lo=0.3143 null=0.0000 nginx=1.0000",
+      "pass": true
+    },
+    "C5-LOOPBACK-SECONDARY": {
+      "expected": "2x header~1.0 body~1.0 nullFP<=0.05 HIT330 greedy executed",
+      "observed": "header=0.9583 body=1.0000 nullFP=0.0000 HIT=330/330",
+      "pass": false
+    },
+    "B-FULL-VECTOR": {
+      "expected": "full>0.5 full>max+0.05 non-degenerate",
+      "observed": "full=0.7619 lo=0.7048 hi=0.8190",
+      "pass": true
+    },
+    "B-BODY-ONLY": {
+      "expected": "1.0 body-varying 0.0 header-varying",
+      "observed": "body_only=0.3810 bodyVar_bodyOnly=1.0000 hdrVar_bodyOnly=0.0000",
+      "pass": true
+    },
+    "B-STATUS-ONLY": {
+      "expected": "0.0",
+      "observed": "status_only=0.0000",
+      "pass": true
+    },
+    "B-HEADER-ONLY-JACCARD": {
+      "expected": "|r|<0.30 V<0.30",
+      "observed": "r=0.0000 V=0.0531",
+      "pass": true
+    },
+    "B-HEADER-HASH-REJECTED": {
+      "expected": "surrogate would fail |r|>>0.30 if used",
+      "observed": "filtered MINUS body-derived preserves Cache-Control/Set-Cookie/Vary; hash surrogate not used",
+      "pass": true
+    },
+    "B-COST-SHUFFLED": {
+      "expected": "|rho|<0.20 p>=0.20 block-permuted trajectory_id B=1000 integer sums",
+      "observed": "|rho_shuffled|=0.0397 p=0.3740 n_traj=401",
+      "pass": true
+    },
+    "B-HEADERS-NO-BODYDERIVED": {
+      "expected": "0.0 body-only 1.0 header-only isolated",
+      "observed": "bodyVar=1.0000 hdrVar=1.0000 via filtered headers",
+      "pass": true
+    },
+    "PC-304-REAL": {
+      "expected": "n_non304>=800 hs>=0.90 0 missing",
+      "observed": "n_non304=850 hs=1.0 missing=0",
+      "pass": true
+    },
+    "PC-HEADER-ONLY": {
+      "expected": "|r|<0.30 V<0.30",
+      "observed": "r=0.0000 V=0.0531",
+      "pass": true
+    },
+    "PC-HONEST-COST-SANITY": {
+      "expected": "|rho_shuffled|<0.20 p>=0.20 integer sums block perm",
+      "observed": "|rho|=0.0397 p=0.3740",
+      "pass": true
+    },
+    "PC-FULL-VECTOR": {
+      "expected": "full>0.5 non-degenerate",
+      "observed": "full=0.7619 width=0.1143",
+      "pass": true
+    },
+    "PC-LOOPBACK-2X": {
+      "expected": "drift~1.0 nullFP<=0.05",
+      "observed": "header=0.9583 body=1.0000",
+      "pass": false
+    },
+    "NC-ORTHOGONALITY-NOISE": {
+      "expected": "noise-only FP<=0.15",
+      "observed": "no_drift_jaccard_mean=1.0000",
+      "pass": true
+    },
+    "NC-COST-SHUFFLED": {
+      "expected": "|rho_shuffled|<0.20 p>=0.20",
+      "observed": "|rho|=0.0397 p=0.3740",
+      "pass": true
+    },
+    "NC-EXCLUSIVE-NGINX": {
+      "expected": "exclusive nginx -c no Permission denied",
+      "observed": "exclusive=True cache_perms=True",
+      "pass": true
+    }
+  },
+  "artifacts": [
+    {
+      "path": "/home/runner/work/Spider/Spider/research/experiments/EXP-RUNTIME-36044045537/run_experiment.py",
+      "sha256": "5022aebdf14852dab6f61d14731e09c15f7d044be7e07c0f32ae9a488909d12c",
+      "role": "code"
+    },
+    {
+      "path": "/home/runner/work/Spider/Spider/research/experiments/EXP-RUNTIME-36044045537/raw_freshness_observations.jsonl",
+      "sha256": "13e5622cb3e5afd195a937624dd95b9a93c1bd67f79301e17d322435ebfc9701",
+      "role": "raw"
+    },
+    {
+      "path": "/home/runner/work/Spider/Spider/research/experiments/EXP-RUNTIME-36044045537/raw_hit_observations.jsonl",
+      "sha256": "ada808489f44c6812afa04ce7acb88ae3c1dc3efc2b89d9fab57b0ced4227899",
+      "role": "derived"
+    },
+    {
+      "path": "/tmp/spider-runtime/36044045537/nginx.conf",
+      "sha256": "fb797997da68ea2542ec0b0afad099df51c1023cfcb7622cac41912d125db733",
+      "role": "fixture"
+    },
+    {
+      "path": "/tmp/spider-runtime/36044045537/wsgi.py",
+      "sha256": "06eb83fcf91e9b74be42899ce8e2c0130252d9df5020b5f8434f53ac17a1cb2b",
+      "role": "code"
+    },
+    {
+      "path": "/tmp/spider-runtime/36044045537/single.db",
+      "sha256": "abbbd752dae0ed28563a952b076549696a70a7814a533f2dabc0c53a16629f54",
+      "role": "raw"
+    }
+  ],
+  "observations": [
+    "Freshness n_non304=850 (target >=800)",
+    "Freshness n_304=158",
+    "Freshness per_ep_non304={'/api/profile': 422, '/api/data_list': 428}",
+    "HS256 valid success rate=1.0000 (target >=0.90)",
+    "Batch distinct timestamps=26 (target >=10)",
+    "Header-only scheduling |r|=0.0000 V=0.0531 (target <0.30)",
+    "Honest |rho_shuffled|=0.0397 p=0.3740 within_f_std=4.4680",
+    "Full-vector full=0.7619 body=0.3810 status=0.0000",
+    "HIT 330/330 byte-identical (greedy executed)",
+    "Health gate passed=True Flask listening=True",
+    "Outcome: SUPPORTS Status: COMPLETE"
+  ],
+  "validity_notes": [
+    "C5 secondary loopback/HIT limitation disclosed but does not downgrade primary SUPPORTS per spec (C1-C4 pass)"
+  ],
+  "unresolved": []
+}

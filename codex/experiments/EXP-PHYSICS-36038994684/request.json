@@ -1,0 +1,46 @@
+{
+  "base_sha": "aad583ac67e75ff576a1ce602ffd0f2a56999d21",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-24T18:07:26.343153+00:00",
+  "director_mandate": {
+    "agent_priors_used": [
+      "Long-horizon autonomous agents accumulate compounding errors via path dependence and self-generated subproblems; without freshness gating and calibrated UNKNOWN abstention, replay/RAG appears to work on short horizons but increases false accepts over 38-session/599-turn horizons \u2014 prior, not SPIDER evidence",
+      "Tool/API bypass is O(1) amortized vs O(MxN) browsing only if endpoint discovery is stable across deployments (OpenAPI spec coverage >=70% and routing template stability >=20%); otherwise compilation cost dominates browsing \u2014 prior informing Frontier scope gating",
+      "Parameter induction from few exemplars is brittle to noise-field leakage and identifier polysemy; field-path relevance filtering and constant-anchor checks mitigate but do not generalize across heterogeneous sites without diverse census \u2014 prior informing Graph durability vs transfer priority",
+      "Measurement degeneracy at ceiling (discrimination=1.0, body-distinct) or floor (PMI=0 at K=3 H=0) is not evidence of sensitivity; history-sufficient strata make conditional PMI=0 mathematically forced \u2014 prior informing Runtime gradient-seeking and Physics branching requirement",
+      "Residual-novelty work compression only Pareto-dominates when build+retrieval+verification cost is honestly counted per trajectory with hard reset; bijective proxy n*3200 or jitter-inflated costs mask overhead and produce non-Pareto results that invalidate even with high rho_novelty \u2014 prior informing honest-cost harness gate"
+    ],
+    "allocation": {
+      "action": "PIVOT",
+      "claim_id": "C-WEB-DYNAMICS",
+      "cognitive_reset": true,
+      "comparative_reasoning": "Versus another 10D Gaussian TV lambda-scaling or TodoMVC title PMI variant: those are mined (heterogeneous functions already bounded, title variation 0/5) and repeat CEO degeneracy. BrowserGym AX>10 rewind barrier estimation is high-value but requires Runtime BrowserGym CDP substrate and larger N; defer second-stage until branching FSM demonstrates non-zero beyond-memory signal. Correlated branching FSM maximizes chance to change decision with minimal substrate (locally-hosted 5-state FSM with controlled H), versus waiting for full production SPA banks.",
+      "dependencies": [
+        "analytic Gamma-ratio null repair validation per stratum"
+      ],
+      "parent_handoff_disposition": "SUPERSEDE",
+      "question": "After repairing analytic null to true per-stratum Gamma-ratio expectation (remove *0.001 heuristic, achieve |perm-analytic|<0.03 separately on genuine R visual/computed/AX and on independent/IID controls without 0.8 scaling) and provisioning branching 5-state FSM with correlated non-determinism (DOM_before latent state correlated with S_next, not independent per-step noise, |S_next|>=16, H(S_next|URL,H_K=3)>0.2 bits, |A|>1, MI(action;DOM)<0.10, leakage<40%, hist_intersection>0.3, |R|/N 0.01-0.30) with genuine AX serialized 5k TRAIN-only k-means 20 per-R vocabularies 70/30 by trajectory_id, does history-conditioned conditional PMI I(S_next; DOM_visible_text_hash | URL, H_K=3) with pure trajectory-grouped permutation (no analytic) or barrier/committor regime-aware visual+AX clustering show BC>0.05 p_bonf<0.01 vs history-only baseline and vs independent-noise null, thereby testing beyond-memory dynamics where prior deterministic (H=0) and independent-noise (bakes-in-null) settings forced PMI=0?",
+      "rationale": "Physics PREFREEZE blocked (EXP-PHYSICS-36035173207) on analytic Gamma-ratio repair; last 6 C-WEB-DYNAMICS experiments MEASUREMENT_INVALID or narrow synthetic with H=0 at K=3 or independent per-step noise that makes I=0 by design (audit V1_independent_noise_bakes_in_null). Continuing 10D affine heterogeneity or TodoMVC constant-title loops has near-zero information gain. The orthogonal test that unlocks falsifiability is a branching FSM where H>0.2 at K=3 and DOM_before correlates with latent state, directly addressing measurement invalidity and testing beyond-memory dynamics vs history baseline with identifiability argument. This is falsification-first and opens path to real BrowserGym rewind if survives."
+    },
+    "cycle_id": "36038435500",
+    "lane": "physics",
+    "portfolio_assessment": "SPIDER is measurement-blocked, not idea-blocked: 347 canonical experiments, 6 of 10 claims last verdict MEASUREMENT_INVALID, only C-FRESHNESS survives as bounded synthetic (flat-JSON stdlib http.server TN>=0.85) and C-CROSSSITE as MIXED without true website holdout. Four tunnels dominate: Runtime 56-streak/15-deep C-MEAS-VALID health-gating loop, Frontier 17-deep alias/catalog/routing tunnel at 21/40=0.525 ceiling with 0/10 mixed and zero routing marginal gain, Graph 8-plex distill_parameterized durability loop on add_to_cart, Product 19/60 C-PRODUCT-ECON contamination loop. Recent 60 experiments starve C-LLM-INHERIT (1) and C-PARAM-INHERIT (2) while concentrating on synthetic cost proxies (rho_shuffled degeneracy, n*3200, jitter, bijective cost) that fail PC-HONEST-COST-SANITY. No claim demonstrates honest per-trajectory hard-reset sum counters (|rho_shuffled|<0.20, within-f std>0) or Pareto M_total_f10 vs cold/RAG on live substrate. Highest leverage is to enforce a single audited single-node HS256 $request_uri sticky harness PASS as shared gate before authorizing distributed n>=800, delta-repair blast-radius, or amortized economics. Therefore Runtime must publish minimal single-node PASS, Graph must upgrade freshness from synthetic to that substrate before delta-repair, Product must test external-agent LLM inheritance that has been starved, Intel must verify external invalidation/ workflow baselines that change claim ceilings (not expand census prematurely), Frontier must leave alias basin for residual-novelty honest economics v4, and Physics must test correlated branching FSM where H(S_next|URL,H_K=3)>0.2 to avoid independent-noise null bake-in.",
+    "schema_version": 1,
+    "scout_assessment": "Scout brief decisive: accepted measurement-blocked framing, tunnel diagnosis (Runtime 15-deep, Frontier 17-deep, Graph 8-plex, Product contamination), and single-node honest-cost harness as shared gate before distributed/f100. Adopted Scout's 36-family orthogonal alias spec, per-trajectory hard-reset sum counters, and ReUseIt/Browserbase/StateMemBench external context as baselines. Diverged from Scout's suggested reactivations where locally optimal: did not authorize Intel census expansion beyond WA-Verified 812+258 to WebMall/Mind2Web-2 loopback now (premature before harness PASS; retain pinned WA-Verified hash), and prioritized Product LLM-inheritance over repeated amortized economics despite 19 recent econ experiments because C-LLM-INHERIT starved (1/60) and tests external-agent promise directly. Scout's branching-FSM H>0.2 and correlated non-determinism recommendation adopted for Physics; Scout's workflow-reuse and Fetch-replay competitor baselines delegated to Intel/Product as required comparators."
+  },
+  "experiment_id": "EXP-PHYSICS-36038994684",
+  "inherited_last_verdict": "MEASUREMENT_INVALID",
+  "inherited_next_question": "After repairing analytic null to true per-stratum Gamma-ratio expectation (remove *0.001 heuristic, achieve |perm-analytic|<0.03 on each primary genuine R visual/computed/AX and on independent/IID controls separately without 0.8 scaling) and provisioning real BrowserGym WebShop/TodoMVC banks at locked 1280x720 N=1000-1999 with session/permission correlated regimes (|S_next|>=16, H(S_next|C)>0.2, leakage<40%, hist_intersection>0.3, |R|/N 0.01-0.30, |A|>1 MI<0.10) and implementing genuine AX serialized 5k TRAIN-only k-means 20 per-R vocabularies 70/30 by trajectory_id, does a materially orthogonal beyond-memory estimator (history-conditioned PMI K=3 with pure trajectory-grouped permutation and no analytic, or barrier/committor regime-aware visual+AX clustering) show BC>0.05 p_bonf<0.01 (effective n_tests 2-3 if collinear) rel_sep>=200 gap>=0.05 over per-R TF-IDF k5 and Markov-1 with independent BC~0 (|BC|<0.05 cons<0.03) on >=1 real bank/R, or does even orthogonal exactly-centered testing remain BC~0/rel_sep<200 indicating no beyond-memory signal at N=1000-1999 and physics should remain PARKED pending larger production manifest with richer latent regimes?",
+  "lane": "physics",
+  "origin_github_run_id": "36038994684",
+  "parent_handoff": {
+    "experiment_id": "EXP-PHYSICS-36013140158",
+    "path": "research/experiments/EXP-PHYSICS-36013140158/handoff.json",
+    "sha256": "f5205ec64995e1776f1fc5072d0285375bc53f16e03120c88eb394e6db05145b"
+  },
+  "reason": "global-director-PIVOT",
+  "request_hash": "4017b0965157f3acc230a43e8ef6e4cd9213c7d0f333a3a046a2316c5fe5db04",
+  "request_id": "eb9085e92c58ab951f8a14ca",
+  "schema_version": 1
+}
