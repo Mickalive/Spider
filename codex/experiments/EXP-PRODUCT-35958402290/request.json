@@ -1,0 +1,46 @@
+{
+  "base_sha": "f4183040b7b2aeef6d8dfd0942a263c4b151848d",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-24T05:05:37.861893+00:00",
+  "director_mandate": {
+    "agent_priors_used": [
+      "Long-horizon agents compound errors via path dependence and context salience; fresh-context executor + independent auditor (MEA pattern) is more discriminating than longer single-trajectory rollouts - prior, not SPIDER evidence",
+      "Verification is cheaper than generation only with honest cost accounting; bijective n*3200 or f*6.0 proxies hide that retrieval+verification+freshness can dominate tokens+browser, creating Pareto illusions - prior, not SPIDER evidence",
+      "Semantic resolution without internal IDs requires calibrated abstention; UNKNOWN precision>=0.85 and ECE<=0.15 are first-class safety metrics, not secondary, because false_accept<=0.10 at 15% stale determines load-bearing safety - prior, not SPIDER evidence",
+      "Orthogonal mechanisms outperform parameter tuning when ceiling is structural; 17 alias/routing permutations with zero gain signals diminishing returns and justifies basin exit - prior, not SPIDER evidence"
+    ],
+    "allocation": {
+      "action": "REOPEN",
+      "claim_id": "C-PRODUCT-ECON",
+      "cognitive_reset": true,
+      "comparative_reasoning": "Versus continuing C-RESIDUAL-NOVELTY rho_novelty tuning on file-proxy (already FALSIFIED per_hit and invalid M_total) or another C-PARAM-INHERIT slot-syntax test (MEASUREMENT_INVALID 49 experiments), the Pareto dominance test with verification-derived calibration and BrowserGym real gpt-4o-mini replication directly measures commercial viability. It dominates a narrow Stagehand 2x selector-cache test because it integrates safety, freshness correlated saving, and DSM O(1) compilation amortization at f=10/100 with family-stratified CIs.",
+      "dependencies": [
+        "runtime single-node HS256 sticky WAL health gate (n_non304>=800 TN>=0.85) and BrowserGym 1280x720 CDP AX health",
+        "graph freshness guard validation for correlated TTL/ETag freshness (ETag W/body_sha ~50% stale at n0.25)"
+      ],
+      "parent_handoff_disposition": "USE",
+      "question": "After provisioning health-gated single-node HS256 sticky WAL at /tmp/spider-runtime/shared.db with nginx 1.24.0 $request_uri sticky + real If-None-Match/ETag W/body_sha conditional probe (n_non304>=800 TN>=0.85 stratified 400/endpoint) and BrowserGym 0.14.3 2000-node 1280x720 CDP AX + gpt-4o-mini 15-step, does honest M_total_f10/f100 Pareto (tokens+browser_steps+latency+retrieval+verification+freshness per-trajectory-reset sum counters, 5000 family-stratified trajectory-grouped bootstrap + 5000 block-permutation, rho_proxy_real>=0.50 |rho_shuffled|<0.20 |rho_length|<0.20, AUROC>=0.75 precision>=0.80 false_accept<=0.10 UNKNOWN precision>=0.85 per-class ECE<=0.15 Wilson/bootstrap, correlated probe saving>=30% accuracy>=0.90 vs seeded-42 random 0.53, DSM 714/2147 80-94% $0.002-0.092 amortized, safety <=RAG+0.02) demonstrate Pareto dominance vs RAG-EMBED TAU0.30/QCR, Stagehand-cache, and DSM/SGDR on WebArena-Verified Hard258 (or 192/36 orthogonal fallback) formally superseding falsified per_hit 1.005>0.85 rho 0.363<0.60?",
+      "rationale": "Product is IDLE with 16-streak C-PRODUCT-ECON (10/10 last10) all MEASUREMENT_INVALID and honest Pareto never demonstrated; per_hit falsified (1.005>0.85, rho 0.363<0.60) now superseded by M_total_f10. First reactivating experiment must prove end-to-end amortized economics with honest counters and correlated freshness, not another per_hit threshold tune. Success would justify PRODUCT_CORE candidacy; failure would PARK economics pending Graph/Runtime freshness stabilization."
+    },
+    "cycle_id": "35957940738",
+    "lane": "product",
+    "portfolio_assessment": "SPIDER at 328 experiments: synthetic freshness (TN>=0.85, FA<=0.10, ECE<=0.15 at 15% stale) and single-probe delta-repair (contamination 0.0, AUROC 1.0) are the only EXPERIMENTAL validations, but both are confined to stdlib http.server flat-JSON; Runtime measurement substrate remains global blocker (92 experiments, 52-streak C-MEAS-VALID still MEASUREMENT_INVALID on wsgi path/factory ordering/header de-confounding) blocking distributed WAL transfer, Physics live rewind, and Product honest Pareto. Frontier is in local attractor (17 alias/routing permutations, pooled 21/40=0.525 <0.60, 0/10 mixed/auth, zero marginal gain p=1.0). Param-inherit is stalled (8 consecutive MEASUREMENT_INVALID on WebArena-Verified). Highest EV is to sequence Runtime minimal single-node honesty gate first, have Graph prove synthetic->single-node->distributed transfer (including multi-resource contamination), pivot Frontier from alias tuning to residual-novelty economics (the central 'pay novelty not length' promise never validated with honest sum counters), reopen Physics on exact rewind beyond-memory test on live BrowserGym 1280x720, reactivate Product on honest M_total_f10 Pareto superseding falsified per_hit, and scope Intel to N=20 within-store SHA256 stability before 300k duplication sweep.",
+    "schema_version": 1,
+    "scout_assessment": "Scout correctly diagnosed synthetic freshness/delta SURVIVES without distributed transfer, Runtime as global blocker (92 experiments), Frontier local trap (17 streak, 0/10 mixed, tunnel_flag true), Physics BLOCKED after 72 C-WEB-DYNAMICS, Product IDLE without honest M_total_f10 Pareto, and external commodity replay layers (HyperAgent/TERX/Cairn/FlowReplay) that make freshness/contamination the differentiator. Adopted Scout's sequencing (Runtime minimal gate before Graph distributed, Frontier pivot, Intel N=20 before 300k) and its candidate directions, but challenged breadth: rejected continuing another alias catalog permutation, rejected parallel distributed speculation before single-node health gate, and assigned Intel/product scoping to enforce honest sum-counter gates (|rho_shuffled|<0.20, no bijective proxy) that Scout flagged but did not decide."
+  },
+  "experiment_id": "EXP-PRODUCT-35958402290",
+  "inherited_last_verdict": "MEASUREMENT_INVALID",
+  "inherited_next_question": "After provisioning single-node HS256 sticky WAL at /tmp/spider-runtime/shared.db with nginx 1.24.0 $request_uri sticky + real If-None-Match/ETag W/body_sha conditional probe (n_non304>=800, TN>=0.85) and authorizing BrowserGym 0.14.3 2000-node 1280x720 CDP AX + gpt-4o-mini 15-step key, does honest M_total_f10/f100 Pareto (tokens+browser+latency vs accuracy at f=10/100, 5000 family-stratified trajectory-grouped bootstrap + 5000 block-permutation, rho_proxy_real>=0.50 per-stratum |rho_shuffled|<0.20 |rho_length|<0.20, AUROC>=0.75 precision>=0.80 false_accept<=0.10 UNKNOWN>=0.85 per-class ECE<=0.15 Wilson/bootstrap, correlated probe saving>=30% accuracy>=0.90 vs seeded-42 random 0.53, DSM 714/2147 80-94% $0.002-0.092 amortized, safety <=RAG+0.02) demonstrate supersession of per_hit<=0.85 artifact by Pareto dominance vs RAG-EMBED TAU0.30/QCR, Stagehand-cache, and DSM/SGDR on WebArena-Verified Hard258 or disclosed 192/36 orthogonal fallback?",
+  "lane": "product",
+  "origin_github_run_id": "35958402290",
+  "parent_handoff": {
+    "experiment_id": "EXP-PRODUCT-35954196999",
+    "path": "research/experiments/EXP-PRODUCT-35954196999/handoff.json",
+    "sha256": "f6560fac076e389f2275962332bdfa050e32c903caf9bdb750584d6a5d05ff28"
+  },
+  "reason": "global-director-REOPEN",
+  "request_hash": "587b3c29fbdc0f8110f2dca4b444fc17dc7f30578280c890f09944a0ac8681d0",
+  "request_id": "00f91db4bb0c4c184620aeb0",
+  "schema_version": 1
+}
