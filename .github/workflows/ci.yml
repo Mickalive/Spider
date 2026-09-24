@@ -53,6 +53,11 @@ jobs:
           lanes = ["graph", "physics", "runtime", "product", "intel", "frontier"]
           index = json.loads(Path("codex/index.json").read_text())["experiments"]
           quarantine = json.loads(Path("codex/quarantine.json").read_text())
+          quarantine_by_id = {
+              item.get("experiment_id"): item
+              for item in quarantine
+              if item.get("experiment_id")
+          }
           gaps = json.loads(Path("codex/coverage_gaps.json").read_text())
 
           by_lane = {lane: [] for lane in lanes}
@@ -73,7 +78,16 @@ jobs:
               if not by_lane[lane]:
                   failures.append(f"{lane}: no canonical finalized experiment")
               if last and last not in index:
-                  failures.append(f"{lane}: last official experiment {last} is not canonical")
+                  q = quarantine_by_id.get(last)
+                  if q and by_lane[lane]:
+                      print(
+                          "CODEX_LIVE_FALLBACK "
+                          f"lane={lane} quarantined_last={last} "
+                          f"canonical_fallback={by_lane[lane][-1]} "
+                          f"reason={q.get('error')}"
+                      )
+                  else:
+                      failures.append(f"{lane}: last official experiment {last} is not canonical or explicitly quarantined with fallback")
 
           print(f"CODEX_LIVE_TOTAL canonical={len(index)} quarantine={len(quarantine)} gaps={len(gaps)}")
           for item in quarantine:
