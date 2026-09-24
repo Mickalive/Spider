@@ -1,17 +1,17 @@
 {
   "lane": "frontier",
   "human_paused": false,
-  "active_experiment_id": "EXP-FRONTIER-36049636798",
-  "last_experiment_id": "EXP-FRONTIER-36046077922",
+  "active_experiment_id": null,
+  "last_experiment_id": "EXP-FRONTIER-36049636798",
   "last_verdict": "MEASUREMENT_INVALID",
   "continue_immediately": false,
-  "next_question": "On live BrowserGym 1280x720 CDP AX>10 heterogeneous sites with Intel diverse-site manifest (\u226510 families Jaccard<0.30 product-subtree anchored 1280x720, deterministic seed 42) and Runtime health-gated single-worker sticky substrate (n_non304\u2265800 stratified, trajectory-grouped |rho_shuffled|<0.20, honest sum counters, If-None-Match/ETag TTL 60s), does history-conditioned bias-corrected PMI I(S_next;DOM_before|S_before URL,H_K) with trajectory-grouped permutation (1000 perms within (URL,H_K) strata, Bonferroni p<0.01) exceed TF-IDF k5 by gap>=0.05 bits with BC PMI>0.05 and rel_sep>=200 (>=70% strata BC>0.02, >=2/3 sites BC>0.05), revealing predictive structure beyond memory, or does even orthogonal exactly-centered testing remain BC~0/rel_sep<200 indicating PARK pending larger manifest (>=50 eTLD+1 families, production SPAs, richer visual representations)?",
+  "next_question": "On heterogeneous WebArena-Verified v2/WebGym mixed triple-channel tasks (>=10 families Jaccard<0.30 product-subtree anchored 1280x720 CDP AX>10 mean>15 std>5, >=40 pooled >=10 mixed triple-channel trajectory-grouped holdout, honest per-trajectory hard-reset sum counters + tokens + latency, 5000 family-stratified bootstrap + 5000 block-permutation + 5000 global permutation), does deterministic compilation bypass (TreeWalker 99% + stable locator ranking + deterministic JSON/Python DAG with speculative guards and bailout fallback) achieve honest M_total_f10/f100 Pareto dominance (saving>=25% vs cold lower>15% p<0.05 strict dominance vs TF-IDF RAG k5 and vs alias catalog+routing at f10 and f100 robust to +-50% build, mixed >=4/10 pooled>=0.60 Wilson lower>=0.45 gap>=0.07 vs alias 0.525, hot-path mean<200ms median<100ms 0 tokens vs LLM median>=3000ms, resolve+bind reduction>=40%, calibration UNKNOWN>=0.85 false_accept<=0.10 ECE<=0.15 upper<=0.18 and |rho_shuffled|<0.20 centered |mean|<0.05 std<0.15 gap>0.35) and break the 0.525 alias ceiling where retrieval-diversity alone was bounded?",
   "promotion_ready": false,
-  "consecutive_failures": 1,
-  "updated_at": "2026-09-24T19:39:55.294147+00:00",
-  "last_failure_retryable": true,
-  "last_handoff_sha256": "1feba9cb8658f818b1483d3907321a2e69d056c997858e5ffec9aa05a0f9869f",
-  "same_failure_count": 1,
-  "last_failure_fingerprint": "3691cba9d2d6ddee9e8b54f4",
-  "last_failure_control_revision": "373719f006bb73b9e36c60fcd18b32b6a7a71921a93c6008fa7c6be7e34a6ea7"
+  "consecutive_failures": 0,
+  "updated_at": "2026-09-24T19:56:35.104460+00:00",
+  "last_failure_retryable": null,
+  "last_handoff_sha256": "6484bfb411bc23dbfce9f396fdcfbe4a279d4acf4a9701aebf76b869d01bd789",
+  "same_failure_count": 0,
+  "last_failure_fingerprint": null,
+  "last_failure_control_revision": null
 }
