@@ -1,0 +1,46 @@
+{
+  "experiment_id": "EXP-RUNTIME-36004383518",
+  "github_run_id": 36004383518,
+  "base_sha": "815a6a243cb43e4f1af1f6e25547f3399a8f7ea7",
+  "request_hash": "8ffe16d15779d76044eadfd8af7cbbec82052996e6d885b20c33a9441437c7db",
+  "env": {
+    "python": "3.12.14 (main, Aug 13 2026, 02:47:42) [GCC 13.3.0]",
+    "flask": "3.1.3",
+    "pyjwt": "2.14.0",
+    "gunicorn": "23.0.0",
+    "nginx": "1.24.0",
+    "playwright": "1.44.0 (spec requires 1.63.0)",
+    "requests": "2.34.2",
+    "sqlite3": "3.45.1",
+    "brotli": "available",
+    "gzip": "available",
+    "scipy": "1.18.1",
+    "browsergym": "0.14.3",
+    "agentlab": "0.4.2"
+  },
+  "ports": {
+    "flask": 19860,
+    "nginx": 19851
+  },
+  "seed": 44,
+  "db_path": "/tmp/spider-runtime/36004383518/app.db",
+  "hs256_secret_sha256": "9baa75a023b8bc76adae52ac14d97d75b5310ad03c8dcd022c698b3b2f6a7f17",
+  "hs256_secret_len": 32,
+  "n_observations": 0,
+  "n_hit_observations": 0,
+  "n_browser_observations": 0,
+  "batch_state_log": [],
+  "browser_gym_installed": true,
+  "agentlab_installed": true,
+  "factory_pattern_wsgi": true,
+  "flask_listening_verified": true,
+  "health_gate_verified": false,
+  "freeze_hashes": {
+    "request.json": "c2dedc92461f9d0a0685dff252bec7984d60abd068d60b3350efaffc20da585c",
+    "spec.json": "f08833e776e3e53a66ea6a2349697db5dc81d5b43ed5dbeaacdaade69844dd8c",
+    "prereg.md": "5d69f9a261150674e10953a42e2e38e8519363f804345d28c99431454ccdcc82",
+    "freeze.json": "schema_version:1"
+  },
+  "scope": "single-node only - no distributed WAL, no 2x gunicorn, no paid CDN",
+  "created_at": "2026-09-24T13:49:34.656633+00:00"
+}

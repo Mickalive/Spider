@@ -1,0 +1,192 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-35999366789",
+  "lane": "intel",
+  "role": "provenance for result.json",
+  "github_run_id": "35999366789",
+  "commits": {
+    "execute_head": "1e4221ff0aeec896734857a3e4345d8111984177",
+    "pre_execute_sha": "77b2790c012bac7ecea2832278a636c2e2c245bb",
+    "freeze_commit": "77b2790c (R2 intel: freeze EXP-INTEL-35999366789)"
+  },
+  "datasets_and_fixtures": [
+    {
+      "path": "research/experiments/EXP-INTEL-35725763380/artifacts/raw/webarena-verified.json",
+      "sha256": "d65275660814663375028e9017e1f929e3c38321041b125795e2713b52243d30",
+      "bytes": 927596,
+      "role": "pinned WebArena-Verified v2 812-task manifest (established EXP-INTEL-35725763380 identity)"
+    },
+    {
+      "path": "research/intel/synthetic_alias_ood_40.json",
+      "sha256": "6f42bc82cb1b6fb292320200ab0beb46694ceb260f16dd44d38e489ad9089205",
+      "role": "frozen synthetic 40-task alias-OOD fixture (seed 360360, 10 header +10 body +10 auth +10 mixed)"
+    }
+  ],
+  "code": [
+    {
+      "path": "research/intel/exp_35999366789_durable_sources.py",
+      "sha256": "740febcb29121d8aad819feff7b8db5714030aa2bdfbdd613574f74cc6242d26",
+      "role": "A1 durable-source attempts (HF x2, WebGym x2, Docker Hub API x2, docker pull x2, health x3)"
+    },
+    {
+      "path": "research/intel/exp_35999366789_census_sampling.py",
+      "sha256": "53e1fcc82fe23bd3fd76b61fab89bc44b665ccb423d7ae6991023b4faf5af3ef",
+      "role": "A2a census derivation + deterministic sample S1/S2 (Random(35725763380))"
+    },
+    {
+      "path": "research/intel/exp_35999366789_ax_probe.py",
+      "sha256": "c4331b55dcfb01dad157da0ab59b31e9c41c77bfada198476189af4de1b7974d",
+      "role": "A2b CDP AX probe at 1280x720 + anchored Runtime.evaluate + SHA both directions + PC-A x3 + protocol dump"
+    },
+    {
+      "path": "research/intel/exp_35999366789_blind_harness.py",
+      "sha256": "b11ea9700c7190f1fb7ef6f169af1f5da4d04dd6d52ae631376cc3c51f59ff21",
+      "role": "B1/B2 blind harness (port of parent, OUT path only; byte-identical recipes)",
+      "re_run": "research/intel/exp_35999366789_blind_harness_run2.py sha256 c7bc6aa0c68e1ea353388a403e5b113aecd152703747f968a6f8db5a2cb4089b (identical outputs)"
+    },
+    {
+      "path": "research/intel/exp_35999366789_analysis.py",
+      "sha256": "45db2374354c5ad7b4789e0a13ce4102d17110c59779d3a349aa9420bfdcef86",
+      "role": "B analysis: B=2000 trajectory-grouped bootstrap, rho shuffle, NC1/NC2/NC3, USD, Pareto"
+    },
+    {
+      "path": "research/intel/exp_35999366789_nc2_probe.py",
+      "sha256": "18bb7c0b254972fa6fc08437fe3b6b5efa40d22c08d3a04879df39707bba6eb6",
+      "role": "NC2-TRUNCATED empirical probe (tokens[:20] vs full tree)"
+    },
+    {
+      "path": "research/intel/grammar_fulltree_358885.py",
+      "sha256": "273eafbcb817e8981f843581a724594665cabdd357b318c701251929ee9c83de",
+      "role": "frozen strip grammar (9 base + expanded fotorama regex + body regex <body[^>]*>.*?</body> DOTALL); live recomputed hash matches module hash"
+    }
+  ],
+  "environment": {
+    "python": "3.12.14 (/opt/hostedtoolcache/Python/3.12.14/x64/bin/python3)",
+    "pip_freeze_sha256": "7c4dfcce1c78ece3a03f05816eb0cec5bb7d4f62113d3310cda78b14b93fe416",
+    "pip_freeze_path": "/tmp/opencode/exp_35999366789_pip_freeze.txt (263 lines; browsergym-core==0.14.3, agentlab==0.4.2, playwright==1.63.0 force-installed --no-deps over pinned 1.44, flask==3.1.3, tldextract==5.3.2, gymnasium==1.3.0, mcp==2.2.0)",
+    "browser": "chromium 153.0.8010.12 (playwright install chromium; sudo playwright install-deps chromium)",
+    "viewport": "1280x720",
+    "ax_mode": "CDP Accessibility.getFullAXTree (protocol dump confirms params [depth, frameId]; AXNode 13 properties; boundingBox absent in Chromium153 -> anchored Runtime.evaluate replacement)",
+    "docker": "container webarena_exp on localhost:7770, image am1n3e/webarena-verified-shopping@sha256:3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb (64 hex)",
+    "hf_token_present": false
+  },
+  "commands_that_materially_affect_reproduction": [
+    "pip install browsergym-core==0.14.3 agentlab==0.4.2 (resolved browsergym dependency conflicts in temp venv)",
+    "pip install --force-reinstall --no-deps playwright==1.63.0 (browsergym-core pins playwright==1.44; MV3 requires 1.63.0)",
+    "python3 -m playwright install chromium && sudo $(which python3) -m playwright install-deps chromium",
+    "python3 research/intel/exp_35999366789_durable_sources.py (A1; docker pull @digest within 300s timeout; health curl x3)",
+    "python3 research/intel/exp_35999366789_census_sampling.py (A2a; Random(35725763380).sample x2 with identical seed reset)",
+    "python3 research/intel/exp_35999366789_ax_probe.py (A2b; 12 product-page captures + 3 PC-A; SKIP_PROTOCOL_DUMP=1 permissible on rerun)",
+    "python3 research/intel/exp_35999366789_blind_harness.py && python3 research/intel/exp_35999366789_blind_harness_run2.py (MV8 byte-identical re-run)",
+    "python3 research/intel/exp_35999366789_analysis.py (B bootstrap; B=2000, PERMS=1000, SEED=360361, DSM_PATCH_USD=0.047)",
+    "python3 research/intel/exp_35999366789_nc2_probe.py (NC2; Flask fixture on 127.0.0.1:8898)"
+  ],
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-INTEL-35999366789/artifacts/raw/webarena_verified_pin.json",
+      "sha256": "5dca7e23ab683f63f6ef743ee5232ac1a8e674181c4fcba3d61c0b9d3e426043",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-35999366789/artifacts/raw/hf_manifest_attempts.json",
+      "sha256": "231242e1849769364a13cd039d94e655a5975ace7d99f86c71afc7c2d75a2df6",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-35999366789/artifacts/raw/hf_webgym_manifest_attempts.json",
+      "sha256": "ab8aa18d2d2ac7be4110bb84256eb7d0fafc73fda9f94dd0f3601c135ac5d5e1",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-35999366789/artifacts/raw/docker_hub_api_attempts.json",
+      "sha256": "9334ac655c8d9fcf97a2b327f925cbb80f95d24cd81f76e3dfad1a69f7d718a4",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-35999366789/artifacts/raw/docker_pull_attempts.json",
+      "sha256": "858c54e2412842af3daab1aa7e0ec1562b71f042ecfd13f7f5e30df81176d520",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-35999366789/artifacts/raw/ax_captures.jsonl",
+      "sha256": "8c523b446652affb8f89264a42a5bb89de1ff2df5ec4fad1e2285f51735d97d1",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-35999366789/artifacts/raw/ax_protocol_dump.json",
+      "sha256": "eb18a6db6a64dec2ed3a49567b19e0114967401704d284a4cfa7e21e5f65e4d0",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-35999366789/artifacts/raw/environment_pin.json",
+      "sha256": "e22cee99dc4626892764882d62ff73c4bee2f5a58ac534a0387a0cb7c6a313e7",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-35999366789/artifacts/derived/webarena_census.json",
+      "sha256": "97d78ae1094cf209902621046fbf7f47f84f6e78b239197fa52b1d113dbe22ba",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-35999366789/artifacts/derived/deterministic_family_samples.json",
+      "sha256": "371e78b77d657b06b2f2cec164fef8f2114cf34a6bbbf8b9161fde01a9a0cb43",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-35999366789/artifacts/derived/family_anchoring.json",
+      "sha256": "918027eacc9919abf5d4f2ec9c09ef29b05b39104b16736d3512665f64d691a6",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-35999366789/artifacts/derived/ax_analysis.json",
+      "sha256": "ac70e90945f7aca7fe25b4770e2d568f27022dee592d7ba68376d0095e6e24cd",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-35999366789/artifacts/derived/webgym_diverse_sample.json",
+      "sha256": "8dd4e0ddc6739846bb4cd2dbf75b71484a7011b1d85af4d3055477b35f7696e9",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-35999366789/artifacts/derived/sota_blind_results.jsonl",
+      "sha256": "3c5ab5afbaa3d28910dc0e6c3bcd77ed51262f028dc045e1df896324af386402",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-35999366789/artifacts/derived/sota_blind_results_run2.jsonl",
+      "sha256": "3c5ab5afbaa3d28910dc0e6c3bcd77ed51262f028dc045e1df896324af386402",
+      "role": "derived (MV8 byte-identical re-run)"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-35999366789/artifacts/derived/sota_analysis.json",
+      "sha256": "0b0b68c5a299cd30d28c33810b363f2107cde7b69dbc1aabd910b610db3e0fd0",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-35999366789/artifacts/derived/truncation_control.json",
+      "sha256": "3a7adc66a361a4a807dd45ed22fc9f95ce7890f13a5de1e06ebb76741c230371",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-35999366789/result.json",
+      "sha256": "b4369098b37d1836ebf52b527735ea120db891195819fb1a670ff59ca9f1b0fd",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-35999366789/provenance.json",
+      "sha256": "95c824f90c450726e6d56cd4015360154875323d0d0f6f325c482c3dbd8b2e74",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-35999366789/report.md",
+      "sha256": "6822fd1eded9b910b9bca0852c339ed93d35c7d1af8ecbf11126666ee68f8ce4",
+      "role": "derived"
+    }
+  ],
+  "inherited_evidence_refs": [
+    "parent EXP-INTEL-35956094394 handoff.json sha 75a71dd1e1b483712a31f8838a82c4609b47e4f53a051a8de16d8733fea81771 (four-way carry_forward preserved)",
+    "parent derived/webarena_census.json sha 6fcdc04f442ac69caa7a5a5a8e1f4a58e936ea99d8b3fde13f6372b6f410f206 (this run's census matches)",
+    "parent derived/sota_blind_results.jsonl sha 3c5ab5afbaa3d28910dc0e6c3bcd77ed51262f028dc045e1df896324af386402 (this run is byte-identical to it)",
+    "pinned manifest EXP-INTEL-35725763380/artifacts/raw/webarena-verified.json sha d65275660814663375028e9017e1f929e3c38321041b125795e2713b52243d30"
+  ]
+}
