@@ -1,0 +1,10 @@
+{
+  "experiment_id": "EXP-INTEL-36006513166",
+  "source": "SRC-HF-REUSE-LOCAL",
+  "manifest_path": "/home/runner/work/Spider/Spider/research/experiments/EXP-INTEL-35725763380/artifacts/raw/webarena-verified.json",
+  "expected_manifest_sha": "d65275660814663375028e9017e1f929e3c38321041b125795e2713b52243d30",
+  "manifest_bytes": 927596,
+  "total_tasks": 812,
+  "reuse_allowed": true,
+  "note": "Reusing locally pinned manifest from EXP-INTEL-35725763380; +2 fresh verification attempts logged via docker images --digests (MV1/MV2)"
+}

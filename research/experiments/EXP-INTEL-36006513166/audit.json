@@ -1,0 +1,71 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-36006513166",
+  "lane": "intel",
+  "status": "PASS",
+  "producer_claim_supported": false,
+  "required_fixes": [],
+  "validity_findings": [
+    "All MV1-MV4/MV6-MV9 mandatory gates pass: durable sources verified (Docker digest match, manifest SHA d6527566... 927596 bytes), versions correct (BrowserGym-core 0.14.3, AgentLab 0.4.2, Playwright 1.63.0), CDP full-tree multi-anchor used, deterministic sampling executed exactly on both censuses, honest per-trajectory-reset sum-counters with trajectory-grouped B=2000 bootstrap, blind implementation confirmed.",
+    "MV5 (WebGym diverse) documented as UNAVAILABLE with 2 genuine 401 attempts logged — per MV5 exception, does not trigger MEASUREMENT_INVALID.",
+    "AX_consistency full-tree gates ALL PASS: mean=0.6208≥0.6, CI lower=0.5514>0.5, shuffle p=0.0<0.05, gap=0.2420≥0.20, variance=0.00765>0, delta_vs_truncated=0.5871≥0.20.",
+    "Deterministic sampling fidelity verified: S1==S2 on both primary and fallback censuses with identical seed reset.",
+    "Honest cost integrity confirmed: no n*3200/f*6.0/jitter proxies, trajectory-grouped B=2000, degenerate [0,0]/[1,1] flagged per prereg 12.7.",
+    "Blind implementation confirmed: same 40-task split for all baselines, per-task logs for all 40x7 variants, recipe citations followed without tuning to synthetic labels."
+  ],
+  "baseline_findings": [
+    "B-AGENTIC-DSM: coverage 0.75 [0.625,0.875], USD $0.0353/task — reproduces published interior, confirms O(1) compilation ceiling on alias-OOD.",
+    "B-AGENTIC-DSM-NOHITL: coverage 0.25, drop 0.50 — HITL is the measured mechanism, not scaffolding.",
+    "B-TRACECOMPILER-DEFUSE: coverage 0.25 body1.0 only — collapses on alias-shifted header/auth/mixed as expected.",
+    "B-BMEM-CATALOG: coverage 0.0 [0,0] degenerate — exact-catalog deterministic replay fails on alias-OOD, flagged not counted as valid-width.",
+    "B-SPIDER-ALIAS: coverage 0.925 [0.85,1.0] flat p=0.626 — structured approach beats flat on alias-OOD.",
+    "B-SPIDER-ROUTING: coverage 1.0 [1,1] degenerate — synthetic ceiling, flagged per prereg 12.7.",
+    "B-SPIDER-WEBMCP: coverage 1.0 [1,1] degenerate — tool-bypass prevalence 0.725, amortized f10=2.9/f100=0.725.",
+    "B-COLD-LLM: coverage 0.25 [0.125,0.375] — floor confirmed.",
+    "|rho_shuffled|=0.1592<0.20 — honest cost tracks residual novelty, not length."
+  ],
+  "recomputed_metrics": {
+    "M_AX_CONSISTENCY_MEAN": 0.6208,
+    "M_AX_CONSISTENCY_CI_LOWER": 0.5514,
+    "M_AX_CONSISTENCY_SHUFFLE_P": 0.0,
+    "M_AX_CONSISTENCY_GAP": 0.2420,
+    "M_AX_CONSISTENCY_VARIANCE": 0.00765,
+    "M_AX_DELTA_TRUNCATED": 0.5871,
+    "M_RHO_SHUFFLED": 0.1592,
+    "M_HITL_DROP": 0.50,
+    "M_PREVALENCE_WEBMCP": 0.725,
+    "M_COV_AGT_DSM": 0.75,
+    "M_COV_SPIDER_ALIAS": 0.925,
+    "M_TOTAL_F10_AGT_DSM": 22.6,
+    "M_TOTAL_F10_SPIDER_ALIAS": 30.1,
+    "M_COST_USD_AGT_DSM_MEAN": 0.0353,
+    "M_CONSTRUCTIBLE_COUNT": 4,
+    "M_A_MANIFEST_SHA256": "d65275660814663375028e9017e1f929e3c38321041b125795e2713b52243d30",
+    "M_A_MANIFEST_BYTES": 927596,
+    "M_A_DOCKER_DIGEST_VALID": true,
+    "M_WEBGYM_DIVERSE_N": null
+  },
+  "claim_ceiling": "H_A bounded FALSIFIED_IN_SETTING: deterministic sampling on BOTH primary (36 families_ge3) and shopping_admin fallback (42 families_ge3) censuses yields only 4 constructible product families [136,145,196,222], not >=10. AX_consistency full-tree gates PASS (mean>=0.6, CI lower>0.5, p<0.05, gap>=0.20, variance>0, delta>=0.20). H_B SURVIVES (all external baselines blind-reproduced with honest Pareto). WebGym diverse UNAVAILABLE (HF_TOKEN absent).",
+  "evidence_refs": [
+    "artifacts/derived/ax_consistency_fulltree.json sha 1690251d812e813f79b41433373a54edfa686e5dda6ebb928110e03193026b36",
+    "artifacts/derived/deterministic_family_samples.json sha 224ef654874d3bbbd3be475cebae53bda4251d4b27e34bbfe33c1959727f94ac",
+    "artifacts/derived/shopping_admin_census.json sha a9ede58ddb242716063f83b6fdf15e2140792784318eab588432000b376b059d",
+    "artifacts/derived/family_anchoring.json sha b55d6332f160fd21e91c6a002fddd577c768932f3957b667aa9dc09f0707f2c1",
+    "artifacts/derived/sota_blind_results.jsonl sha 3c5ab5afbaa3d28910dc0e6c3bcd77ed51262f028dc045e1df896324af386402",
+    "artifacts/derived/ax_captures.jsonl sha 7ffebb0d1d4d674901a7ed67aaeff153eb290403ddf2c001d48ac07ce7d773e0",
+    "artifacts/derived/docker_verification.json sha 3a25641ccbae6fdbab7de594aab74de8991880ec9839788b947fe30f11c66d34",
+    "research/intel/synthetic_alias_ood_40.json sha 6f42bc82cb1b6fb292320200ab0beb46694ceb260f16dd44d38e489ad9089205",
+    "research/experiments/EXP-INTEL-35999366789/handoff.json sha 8ead3e808c9ff8e903a35865ea017b0c64c57d730430952f816d3eaf92ab8d92",
+    "result.json",
+    "report.md",
+    "provenance.json"
+  ],
+  "unresolved": [
+    "WebGym 292k diverse sample pending HF_TOKEN — MV5 UNAVAILABLE",
+    "Cross-source byte-identity (Docker vs HF) pending HF_TOKEN",
+    "Shopping_admin fallback tasks use __SHOPPING_ADMIN__ admin URLs, not consumer product pages — need definition expansion or separate hosting",
+    "Real WebArena product-family hold-out not measured (synthetic work units only)",
+    "Degenerate CIs [0,0]/[1,1] flagged per prereg 12.7 but non-degenerate width requires larger N",
+    "NC2 shuffled-truncation variant not separately measured"
+  ]
+}

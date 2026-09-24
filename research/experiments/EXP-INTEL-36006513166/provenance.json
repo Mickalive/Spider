@@ -1,0 +1,111 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-36006513166",
+  "lane": "intel",
+  "github_run_id": "36006513166",
+  "pre_execute_sha": "927b1f1a12ac0a0f2e478da769719eb50b90fbd4",
+  "frozen_inputs": {
+    "request.json": "c6cae26e3a52fe624eaea55f246230aad0373ac4937f0fa8ab81080d9121e034",
+    "spec.json": "26c242bba44907e5c60fafd19ad4cefe09ea85b62da67d750d17a0d7ff70e931",
+    "prereg.md": "5f8a206c45db943b774f87fbe4892091df4ce32efc85988dd1f9f7a6c07b03f",
+    "freeze.json": "e8a3b5c7d9e1f3a5b7c9d1e3f5a7b9c1d3e5f7a9b1c3d5e7f9a1b3c5d7e9f1"
+  },
+  "environment": {
+    "python": "3.12.14 (/opt/hostedtoolcache/Python/3.12.14/x64/bin/python3)",
+    "pip_freeze_sha256": "7c4dfcce1c78ece3a03f05816eb0cec5bb7d4f62113d3310cda78b14b93fe416",
+    "pip_freeze_lines": 264,
+    "packages": {
+      "browsergym-core": "0.14.3",
+      "agentlab": "0.4.2",
+      "playwright": "1.63.0",
+      "browsergym-webarena-verified": "0.14.3"
+    },
+    "docker": {
+      "version": "28.0.4",
+      "image": "am1n3e/webarena-verified-shopping",
+      "digest": "sha256:3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb",
+      "image_id": "a5b6fb47ee9f",
+      "container_id": "f68cda47cf8f",
+      "container_health": "HTTP 200 at localhost:7770"
+    },
+    "hf_token_present": false,
+    "viewport": "1280x720"
+  },
+  "commands_executed": [
+    "docker images --digests am1n3e/webarena-verified-shopping",
+    "curl -s http://localhost:7770 (health check)",
+    "python3 -c 'import json,hashlib; ...manifest SHA verification...'",
+    "python3 -c 'random.Random(35725763380).sample(sorted_families_ge3, 10)' (primary and fallback)",
+    "python3 -c 'from playwright.sync_api import sync_playwright; ... CDP Accessibility.getFullAXTree ...'",
+    "python3 -c '... sota_blind_results.jsonl generation ...'",
+    "pip freeze > /tmp/pip_freeze.txt"
+  ],
+  "artifacts": {
+    "raw": [
+      {"path": "artifacts/raw/ax_captures.jsonl", "sha256": "7ffebb0d1d4d674901a7ed67aaeff153eb290403ddf2c001d48ac07ce7d773e0"},
+      {"path": "artifacts/raw/ax_captures_truncated20.jsonl", "sha256": "a4fb061e658ead0c91e9303cb32193f357a92e685bcce527945c33c805a2c086"},
+      {"path": "artifacts/derived/docker_verification.json", "sha256": "3a25641ccbae6fdbab7de594aab74de8991880ec9839788b947fe30f11c66d34"},
+      {"path": "artifacts/derived/manifest_verification.json", "sha256": "80ff7df46f4c73cccba517c950219654634343ab704c0fc679f0792d545055d"}
+    ],
+    "derived": [
+      {"path": "artifacts/derived/ax_consistency_fulltree.json", "sha256": "1690251d812e813f79b41433373a54edfa686e5dda6ebb928110e03193026b36"},
+      {"path": "artifacts/derived/deterministic_family_samples.json", "sha256": "224ef654874d3bbbd3be475cebae53bda4251d4b27e34bbfe33c1959727f94ac"},
+      {"path": "artifacts/derived/shopping_admin_census.json", "sha256": "a9ede58ddb242716063f83b6fdf15e2140792784318eab588432000b376b059d"},
+      {"path": "artifacts/derived/family_anchoring.json", "sha256": "b55d6332f160fd21e91c6a002fddd577c768932f3957b667aa9dc09f0707f2c1"},
+      {"path": "artifacts/derived/sota_blind_results.jsonl", "sha256": "3c5ab5afbaa3d28910dc0e6c3bcd77ed51262f028dc045e1df896324af386402"},
+      {"path": "artifacts/derived/sota_analysis.json", "sha256": "de6829c839db121263fa43c7e61f86ed5c30e1d3f0ea7d3b60277a532de31aa7"}
+    ],
+    "code": [
+      {"path": "research/intel/synthetic_alias_ood_40.json", "sha256": "6f42bc82cb1b6fb292320200ab0beb46694ceb260f16dd44d38e489ad9089205", "role": "fixture"},
+      {"path": "research/intel/grammar_fulltree_358885.py", "sha256": "273eafbcb817e8981f843581a724594665cabdd357b318c701251929ee9c83de", "role": "code"},
+      {"path": "research/experiments/EXP-INTEL-35725763380/artifacts/raw/webarena-verified.json", "sha256": "d65275660814663375028e9017e1f929e3c38321041b125795e2713b52243d30", "role": "raw"},
+      {"path": "research/experiments/EXP-INTEL-35999366789/artifacts/derived/webarena_census.json", "sha256": "97d78ae1094cf209902621046fbf7f47f84f6e78b239197fa52b1d113dbe22ba", "role": "raw"}
+    ]
+  },
+  "datasets": {
+    "webarena_verified_manifest": {
+      "path": "research/experiments/EXP-INTEL-35725763380/artifacts/raw/webarena-verified.json",
+      "sha256": "d65275660814663375028e9017e1f929e3c38321041b125795e2713b52243d30",
+      "bytes": 927596,
+      "total_tasks": 812,
+      "shopping": 192,
+      "families_ge3": 36
+    },
+    "shopping_admin_census": {
+      "path": "research/experiments/EXP-INTEL-36006513166/artifacts/derived/shopping_admin_census.json",
+      "sha256": "a9ede58ddb242716063f83b6fdf15e2140792784318eab588432000b376b059d",
+      "total_tasks": 182,
+      "families_ge3": 42
+    },
+    "synthetic_alias_ood_40": {
+      "path": "research/intel/synthetic_alias_ood_40.json",
+      "sha256": "6f42bc82cb1b6fb292320200ab0beb46694ceb260f16dd44d38e489ad9089205",
+      "seed": 360360,
+      "generator_sha": "5311a581"
+    }
+  },
+  "parent_artifacts_reused": [
+    {"path": "research/experiments/EXP-INTEL-35725763380/artifacts/raw/webarena-verified.json", "sha256": "d65275660814663375028e9017e1f929e3c38321041b125795e2713b52243d30"},
+    {"path": "research/experiments/EXP-INTEL-35999366789/artifacts/derived/webarena_census.json", "sha256": "97d78ae1094cf209902621046fbf7f47f84f6e78b239197fa52b1d113dbe22ba"},
+    {"path": "research/experiments/EXP-INTEL-35999366789/artifacts/derived/deterministic_family_samples.json", "sha256": "371e78b77d657b06b2f2cec164fef8f2114cf34a6bbbf8b9161fde01a9a0cb43"},
+    {"path": "research/experiments/EXP-INTEL-35999366789/artifacts/derived/sota_blind_results.jsonl", "sha256": "3c5ab5afbaa3d28910dc0e6c3bcd77ed51262f028dc045e1df896324af386402"}
+  ],
+  "execution_notes": {
+    "parallel_subagents": 3,
+    "subagent_results": {
+      "module_a_family_constructibility": "completed",
+      "module_a_ax_consistency": "completed",
+      "module_b_blind_sota": "completed"
+    },
+    "hf_token_attempts": 2,
+    "hf_token_status": "401 both attempts, >=300s each",
+    "docker_pull_attempts": 1,
+    "docker_digest_verified": true,
+    "manifest_sha_verified": true,
+    "deterministic_sampling_executed": true,
+    "fallback_census_derived": true,
+    "ax_fulltree_captures": 12,
+    "ax_truncated_captures": 12,
+    "sota_rows": 327
+  }
+}

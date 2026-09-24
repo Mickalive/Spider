@@ -1,0 +1,21 @@
+{
+  "experiment_id": "EXP-INTEL-36006513166",
+  "source": "SRC-DOCKER",
+  "image": "am1n3e/webarena-verified-shopping",
+  "expected_digest": "sha256:3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb",
+  "actual_digest": "sha256:3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb",
+  "digest_valid": true,
+  "image_id": "a5b6fb47ee9f",
+  "size": "13.3GB",
+  "container_running": true,
+  "container_health_http_200": true,
+  "attempts": [
+    {
+      "type": "docker images --digests",
+      "status": "success",
+      "digest_match": true
+    }
+  ],
+  "hub_api_verified": false,
+  "note": "Image verified locally via docker images --digests; Hub API not accessible but digest matches expected 64-hex substring"
+}

@@ -1,0 +1,104 @@
+{
+  "experiment_id": "EXP-INTEL-36006513166",
+  "measurement": "full_tree_multi_anchor_ax_consistency",
+  "families": [
+    136,
+    145,
+    196,
+    222
+  ],
+  "n_captures_per_family": 3,
+  "viewport": {
+    "width": 1280,
+    "height": 720
+  },
+  "full_tree": {
+    "per_family": {
+      "136": 0.580327868852459,
+      "145": 0.722007722007722,
+      "196": 0.6584507042253521,
+      "222": 0.5225225225225225
+    },
+    "mean": 0.6208272044020139,
+    "variance": 0.007652343847099727,
+    "bootstrap_ci_95": {
+      "lower": 0.5514251956874907,
+      "upper": 0.6902292131165371
+    },
+    "shuffle_means_sample_mean": 0.37887322141170754,
+    "shuffle_p": 0.0,
+    "gap": 0.24195398299030635
+  },
+  "truncated_20": {
+    "per_family": {
+      "136": 0.03187250996015936,
+      "145": 0.03463203463203463,
+      "196": 0.037209302325581395,
+      "222": 0.03125
+    },
+    "mean": 0.033740961729443845
+  },
+  "delta_vs_truncated": 0.58708624267257,
+  "diagnostics": {
+    "median_ax": 633.5,
+    "median_dom": 197353.5,
+    "sha_before_after_identical": true,
+    "sha_after_mutation": true,
+    "total_captures": 12,
+    "ax_counts": {
+      "136": [
+        647,
+        647,
+        647
+      ],
+      "145": [
+        620,
+        620,
+        620
+      ],
+      "196": [
+        595,
+        595,
+        595
+      ],
+      "222": [
+        674,
+        674,
+        674
+      ]
+    },
+    "dom_lengths": {
+      "136": [
+        196745,
+        196754,
+        196754
+      ],
+      "145": [
+        197953,
+        197962,
+        197962
+      ],
+      "196": [
+        196529,
+        196538,
+        196538
+      ],
+      "222": [
+        229559,
+        229568,
+        229568
+      ]
+    }
+  },
+  "gates": {
+    "mean_fulltree_ge_0_6": true,
+    "bootstrap_ci_lower_gt_0_5": true,
+    "shuffle_p_lt_0_05": true,
+    "gap_ge_0_20": true,
+    "variance_gt_0": true,
+    "delta_vs_truncated_ge_0_20": true,
+    "median_ax_gt_10": true,
+    "median_dom_ge_2000": true,
+    "sha_identical": true
+  }
+}

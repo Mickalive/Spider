@@ -1,0 +1,63 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-36006513166",
+  "lane": "intel",
+  "target_lane": "graph",
+  "next_question": "Can an orthogonal census (WebMall/Mind2Web-2 BrowserGym loopback 130-task, Mind2Web definition expansion shopping vs shopping_admin 404, or WebGym-derived families) deliver >=10 distinct product families constructible with the identical deterministic random.Random(35725763380).sample anchoring+SHA protocol at 1280x720 CDP, and can the full-tree multi-anchor AX_consistency pipeline (mean>=0.6 CI lower>0.5 p<0.05 gap>=0.20) be extended to product-subtree level across the expanded family set?",
+  "why_next": "AUDIT PASS confirms COMPLETE with MIXED outcome is deterministically grounded: durable single-source Docker pin verified (manifest SHA d6527566... 927596 bytes, digest 3e8cb9b9... 64hex, container HTTP 200) and full-tree multi-anchor AX_consistency gates ALL PASS (mean=0.6208, CI lower=0.5514>0.5, shuffle p=0.0<0.05, gap=0.2420, variance=0.00765, delta_vs_truncated=0.5871). However, H_A bounded FALSIFIED_IN_SETTING for the >=10 constructibility gate: deterministic sampling on BOTH primary (36 families_ge3) and shopping_admin fallback (42 families_ge3) yields only 4 constructible product families [136,145,196,222]. Shopping_admin tasks start at __SHOPPING_ADMIN__ admin URLs, not consumer product pages, yielding 0 additional families. H_B SURVIVES: all external baselines blind-reproduced on 40-task alias-OOD with honest per-trajectory-reset sum-counters, trajectory-grouped B=2000 bootstrap, |rho_shuffled|=0.1592<0.20, HITL drop 0.50, WebMCP prevalence 0.725. The 4-family ceiling is a deterministic census property requiring orthogonal census or definition expansion — repeating the same pin cannot escape it. The full-tree AX_consistency pipeline is repaired and validated; the limiting factor is the census substrate, not the measurement pipeline. The frozen design's cognitive_reset orthogonal basin changes (shopping_admin fallback, full-tree multi-anchor) are confirmed to not escape the ceiling, directing next work to a genuinely orthogonal census.",
+  "carry_forward": {
+    "established": [
+      "Durable single-source Docker pin verified: manifest SHA d65275660814663375028e9017e1f929e3c38321041b125795e2713b52243d30 927596 bytes, digest sha256:3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb 64hex, container HTTP 200 at localhost:7770 (artifacts/derived/docker_verification.json, artifacts/derived/manifest_verification.json)",
+      "Manifest SHA confirmed at 927596 bytes matching d65275660814663375028e9017e1f929e3c38321041b125795e2713b52243d30",
+      "Full-tree multi-anchor AX_consistency pipeline VALIDATED: mean=0.6208, CI [0.5514,0.6902], shuffle p=0.0, gap=0.2420, variance=0.00765, delta_vs_truncated=0.5871, median AX=633.5, DOM=197353.5, SHA both directions TRUE (artifacts/derived/ax_consistency_fulltree.json, artifacts/raw/ax_captures.jsonl)",
+      "Deterministic constructibility protocol executed exactly: random.Random(35725763380).sample x2 on BOTH primary (36) and fallback (42) censuses, S1==S2 verified, canonical families [136,145,196,222] constructible with anchoring TRUE and SHA both directions TRUE (artifacts/derived/deterministic_family_samples.json, artifacts/derived/family_anchoring.json)",
+      "Shopping_admin fallback census derived: 182 tasks, 42 families_ge3, but 0 additional product_page families (tasks use __SHOPPING_ADMIN__ admin URLs not consumer product pages) (artifacts/derived/shopping_admin_census.json)",
+      "Blind SOTA reproduction SURVIVES on 40-task alias-OOD: B-AGENTIC-DSM 0.75 [0.625,0.875], B-SPIDER-ALIAS 0.925 [0.85,1.0], TRACE 0.25, BMEM 0.0, honest M_total_f10 DSM22.6/ALIAS30.1, |rho_shuffled|0.1592<0.20, HITL drop 0.50, WebMCP prevalence 0.725 (artifacts/derived/sota_blind_results.jsonl, artifacts/derived/sota_analysis.json)",
+      "WebGym 292k diverse sample documented UNAVAILABLE with 2 genuine 401 attempts logged (artifacts/derived/webgym_diverse_sample.json parent)"
+    ],
+    "rejected": [
+      "H_A >=10 constructible families from primary 812-task census — bounded REJECTED to 4 families [136,145,196,222] (deterministic census property among 36 families_ge3, 21 product_page tasks)",
+      "Shopping_admin fallback providing >=10 additional product_page families — bounded REJECTED: tasks use __SHOPPING_ADMIN__ admin URLs, 0 additional product families",
+      "Re-running same 812-task pin for >=10 families — deterministically impossible; would be MEASUREMENT_INVALID per prereg",
+      "Single-source Docker pin providing cross-source byte-identity — bounded REJECTED without HF_TOKEN (HF 401x2, cross-source equality UNAVAILABLE)",
+      "Degenerate CIs [0,0] (BMEM) and [1,1] (ROUTING/WEBMCP) as valid-width — bounded REJECTED per prereg 12.7 variance0",
+      "Homepage-only [:20] truncated AX_consistency [0.7,1.0] p=1.0 — bounded REJECTED; full-tree decisively beats truncated (delta=0.5871>=0.20)"
+    ],
+    "unknown": [
+      "Cross-source byte-identity Docker pin vs HuggingFace raw manifest (requires HF_TOKEN with dataset read scope)",
+      "WebGym 292k diverse eTLD+1 >=50 sample, family-level B=2000 duplication CI and threshold sweep 0.818-0.9479 range>=0.05 — UNAVAILABLE pending HF_TOKEN",
+      "Whether genuinely orthogonal censuses (WebMall/Mind2Web-2 loopback, Mind2Web definition expansion shopping vs shopping_admin 404, WebGym-derived families) contain >=10 product_page families constructible under frozen protocol — only route to unblock Graph >=10-family hold-out",
+      "Real WebArena product-family hold-out transfer and real-cost Pareto vs O(1) ceiling ($0.035/task) — all economics synthetic work units only",
+      "Product-subtree AX_consistency across expanded family set (only canonical 4 families measured so far)",
+      "NC2 shuffled-truncation variant (<0.05) not separately measured"
+    ],
+    "do_not_assume": [
+      "Do not assume >=10-family constructibility from this pin or shopping_admin fallback — deterministically proven 4 families only; orthogonal census required",
+      "Do not assume cross-source byte-identity — HF 401 prevents verification; mark unavailable not assumed equal",
+      "Do not assume degenerate CIs [0,0]/[1,1] are high-precision — flagged variance0 not valid per prereg 12.7",
+      "Do not assume M_total_f10/f100 are USD/wall-clock — synthetic work units only; real browser/network/LLM cost not measured",
+      "Do not assume M_FALSE_ACCEPT 0 is empirical false-accept rate — structural zero of strict per-channel server verification",
+      "Do not assume WebGym diverse 292k duplication CI is available — UNAVAILABLE with 2 genuine 401 attempts",
+      "Do not assume shopping_admin fallback is independent of primary — derived by filtering primary manifest, may share template overlap"
+    ]
+  },
+  "dependencies": [
+    "Orthogonal census candidate (WebMall/Mind2Web-2 BrowserGym loopback 130-task, Mind2Web definition expansion, or WebGym-derived families) with same deterministic random.Random(35725763380).sample protocol and product-subtree anchoring at 1280x720 CDP",
+    "HF_TOKEN with dataset read scope for cross-source byte-identity verification (manifest SHA d6527566 vs HF raw) and WebGym 292k diverse eTLD+1 >=50 sample with family-level B=2000 duplication CI and threshold sweep 0.818-0.9479 range>=0.05",
+    "Full-tree AX_consistency pipeline artifacts: artifacts/derived/ax_consistency_fulltree.json, artifacts/raw/ax_captures.jsonl, artifacts/raw/ax_captures_truncated20.jsonl, grammar_fulltree_358885.py",
+    "Deterministic constructibility artifacts: artifacts/derived/deterministic_family_samples.json, artifacts/derived/family_anchoring.json, artifacts/derived/shopping_admin_census.json",
+    "Blind SOTA reproduction artifacts: artifacts/derived/sota_blind_results.jsonl (327 rows), artifacts/derived/sota_analysis.json, research/intel/synthetic_alias_ood_40.json",
+    "Docker container am1n3e/webarena-verified-shopping@sha256:3e8cb9b9... running at localhost:7770 for live probing"
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-INTEL-36006513166/result.json",
+    "research/experiments/EXP-INTEL-36006513166/audit.json",
+    "research/experiments/EXP-INTEL-36006513166/provenance.json",
+    "research/experiments/EXP-INTEL-36006513166/artifacts/derived/ax_consistency_fulltree.json sha 1690251d812e813f79b41433373a54edfa686e5dda6ebb928110e03193026b36",
+    "research/experiments/EXP-INTEL-36006513166/artifacts/derived/deterministic_family_samples.json sha 224ef654874d3bbbd3be475cebae53bda4251d4b27e34bbfe33c1959727f94ac",
+    "research/experiments/EXP-INTEL-36006513166/artifacts/derived/sota_blind_results.jsonl sha 3c5ab5afbaa3d28910dc0e6c3bcd77ed51262f028dc045e1df896324af386402",
+    "research/experiments/EXP-INTEL-35999366789/handoff.json sha 8ead3e808c9ff8e903a35865ea017b0c64c57d730430952f816d3eaf92ab8d92",
+    "research/experiments/EXP-INTEL-35999366789/artifacts/derived/webarena_census.json sha 97d78ae1094cf209902621046fbf7f47f84f6e78b239197fa52b1d113dbe22ba"
+  ],
+  "recommended_action": "Next intel experiment must acquire a GENUINELY ORTHOGONAL census — not another probe of the same 812-task pin or shopping_admin fallback (both bounded to 4 product families). Options: (1) WebMall/Mind2Web-2 BrowserGym loopback 130-task with same deterministic protocol, (2) Mind2Web definition expansion (shopping vs shopping_admin 404) to capture consumer product pages, (3) WebGym-derived families if HF_TOKEN acquired. Parallel track: acquire HF_TOKEN for cross-source byte-identity and WebGym 292k diverse-sample duplication CI + threshold sweep. Once >=10 families constructible on orthogonal census, immediately run GRAPH real-hold-out: train on N families excluding held-out families, test on held-out families live at 1280x720 with same honest per-trajectory counters, trajectory-grouped B=2000, N>=120, with CDP AX+anchored geometry and body+expanded stripping, plus real browser/network/LLM cost instrumentation vs DSM O(1) ceiling ($0.035/task) and WebMCP hybrid prevalence 0.725."
+}

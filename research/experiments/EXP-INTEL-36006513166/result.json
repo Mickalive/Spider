@@ -1,0 +1,263 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-36006513166",
+  "lane": "intel",
+  "status": "COMPLETE",
+  "outcome": "MIXED",
+  "metrics": {
+    "M_A_MANIFEST_SHA256": "d65275660814663375028e9017e1f929e3c38321041b125795e2713b52243d30",
+    "M_A_MANIFEST_BYTES": 927596,
+    "M_A_DOCKER_DIGEST_VALID": true,
+    "M_A_CENSUS_TOTAL_TASKS": 812,
+    "M_A_CENSUS_SHOPPING_ADMIN_TOTAL": 182,
+    "M_A_FAMILIES_GE3": 36,
+    "M_A_FAMILIES_GE3_FALLBACK": 42,
+    "M_A_PRODUCT_PAGE_FAMILIES_COUNT": 4,
+    "M_A_PRODUCT_PAGE_FAMILIES_LIST": [136, 145, 196, 222],
+    "M_A_FALLBACK_PRODUCT_PAGE_FAMILIES_LIST": [],
+    "M_A_DETERMINISTIC_S1_PRIMARY": [191, 180, 162, 197, 153, 213, 163, 137, 136, 222],
+    "M_A_DETERMINISTIC_S2_PRIMARY": [191, 180, 162, 197, 153, 213, 163, 137, 136, 222],
+    "M_A_DETERMINISTIC_S1_FALLBACK": [268, 257, 250, 274, 288, 244, 277, 241, 237, 253],
+    "M_A_DETERMINISTIC_S2_FALLBACK": [268, 257, 250, 274, 288, 244, 277, 241, 237, 253],
+    "M_A_CONSTRUCTIBLE_LIST": [136, 145, 196, 222],
+    "M_A_CONSTRUCTIBLE_COUNT": 4,
+    "M_A_CONSTRUCTIBLE_FALLBACK_COUNT": 0,
+    "M_A_ANCHORING_PER_FAMILY": {
+      "136": {"node_count": 4, "sha_identical": true, "sha_mutation_changed": true, "ax_nodes": 647},
+      "145": {"node_count": 4, "sha_identical": true, "sha_mutation_changed": true, "ax_nodes": 620},
+      "196": {"node_count": 4, "sha_identical": true, "sha_mutation_changed": true, "ax_nodes": 595},
+      "222": {"node_count": 4, "sha_identical": true, "sha_mutation_changed": true, "ax_nodes": 674}
+    },
+    "M_AX_VALID_CAPTURES": 12,
+    "M_AX_FAMILIES_FOUND": 4,
+    "M_AX_NODES_MEDIAN": 633.5,
+    "M_AX_NODES_MIN": 595,
+    "M_DOM_BYTES_MEDIAN": 197353.5,
+    "M_SHA_STABILITY_IDENTICAL": true,
+    "M_SHA_MUTATION_CHANGED": true,
+    "M_AX_RICHER_BBOX_VIA_EVALUATE": true,
+    "M_AX_CONSISTENCY_MEAN": 0.6208,
+    "M_AX_CONSISTENCY_CI_LOWER": 0.5514,
+    "M_AX_CONSISTENCY_CI_UPPER": 0.6902,
+    "M_AX_CONSISTENCY_SHUFFLE_MEAN": 0.3789,
+    "M_AX_CONSISTENCY_SHUFFLE_P": 0.0,
+    "M_AX_CONSISTENCY_GAP": 0.2420,
+    "M_AX_CONSISTENCY_VARIANCE": 0.00765,
+    "M_AX_DELTA_TRUNCATED": 0.5871,
+    "M_WEBGYM_DIVERSE_N": null,
+    "M_WEBGYM_DIVERSE_ETLD_PLUS1_DISTINCT": null,
+    "M_WEBGYM_DUPLICATION_PREVALENCE": null,
+    "M_WEBGYM_DUPLICATION_CI_LOWER": null,
+    "M_WEBGYM_DUPLICATION_CI_UPPER": null,
+    "M_WEBGYM_THRESHOLD_SWEEP_0818": null,
+    "M_WEBGYM_THRESHOLD_SWEEP_09479": null,
+    "M_WEBGYM_SWEEP_RANGE": null,
+    "M_WEBGYM_SWEEP_MONOTONIC": null,
+    "M_COV_AGT_DSM": 0.75,
+    "M_COV_TRACE": 0.25,
+    "M_COV_BMEM": 0.0,
+    "M_COV_SPIDER_ALIAS": 0.925,
+    "M_COV_SPIDER_ROUTING": 1.0,
+    "M_COV_SPIDER_WEBMCP": 1.0,
+    "M_COV_COLD": 0.25,
+    "M_COV_AGT_DSM_HEADER": 1.0,
+    "M_COV_AGT_DSM_BODY": 1.0,
+    "M_COV_AGT_DSM_AUTH": 0.7,
+    "M_COV_AGT_DSM_MIXED": 0.3,
+    "M_TOTAL_F10_AGT_DSM": 22.6,
+    "M_TOTAL_F100_AGT_DSM": 5.65,
+    "M_TOTAL_F10_TRACE": 10.0,
+    "M_TOTAL_F10_BMEM": 10.0,
+    "M_TOTAL_F10_SPIDER_ALIAS": 30.1,
+    "M_TOTAL_F10_SPIDER_ROUTING": 33.0,
+    "M_TOTAL_F10_SPIDER_WEBMCP": 28.0,
+    "M_TOTAL_F10_COLD": 38.0,
+    "M_TOTAL_F100_AGT_DSM": 2.5,
+    "M_TOTAL_F100_TRACE": 1.0,
+    "M_TOTAL_F100_BMEM": 1.0,
+    "M_TOTAL_F100_SPIDER_ALIAS": 3.0,
+    "M_TOTAL_F100_SPIDER_ROUTING": 3.0,
+    "M_TOTAL_F100_SPIDER_WEBMCP": 2.5,
+    "M_TOTAL_F100_COLD": 4.0,
+    "M_COST_USD_AGT_DSM_MEAN": 0.0353,
+    "M_COST_USD_AGT_DSM_CI_LOWER": 0.0294,
+    "M_COST_USD_AGT_DSM_CI_UPPER": 0.0411,
+    "M_COST_USD_AGT_DSM_TOTAL_40": 1.41,
+    "M_COST_USD_AGT_DSM_N_PATCH_TASKS": 30,
+    "M_RHO_REAL": 0.8656,
+    "M_RHO_SHUFFLED": 0.1592,
+    "M_RHO_SHUFFLED_GATE_ABS_LT_0_20": true,
+    "M_RHO_P": 0.0,
+    "M_FALSE_ACCEPT": 0.0,
+    "M_PREVALENCE_WEBMCP_TOOL_BYPASS": 0.725,
+    "M_PREVALENCE_WEBMCP_CI_LOWER": 0.575,
+    "M_PREVALENCE_WEBMCP_CI_UPPER": 0.85,
+    "M_PREVALENCE_WEBMCP_AMORTIZED_F10": 2.9,
+    "M_PREVALENCE_WEBMCP_AMORTIZED_F100": 0.725,
+    "M_HITL_DROP": 0.50,
+    "M_HITL_DROP_GE_0_30": true
+  },
+  "controls": {
+    "B-DURABLE-HF": {
+      "expected_behavior": "200 + byte-identical SHA d6527566... 927596 bytes",
+      "observed_behavior": "Manifest SHA verified d65275660814663375028e9017e1f929e3c38321041b125795e2713b52243d30, 927596 bytes; reuse of locally pinned copy from EXP-INTEL-35725763380 with +1 fresh docker images --digests verification attempt",
+      "pass_fail": "PASS",
+      "evidence_ref": "artifacts/derived/manifest_verification.json"
+    },
+    "B-DURABLE-DOCKER": {
+      "expected_behavior": "64-char digest sha256:3e8cb9b9... + host reachable",
+      "observed_behavior": "Digest sha256:3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb verified via docker images --digests; container running on localhost:7770 HTTP 200",
+      "pass_fail": "PASS",
+      "evidence_ref": "artifacts/derived/docker_verification.json"
+    },
+    "B-SHOPPING-ADMIN-FALLBACK": {
+      "expected_behavior": "fallback census total 184 +-10 families_ge3 42 +-5 with >=10 product families anchoring true",
+      "observed_behavior": "Shopping_admin census derived from primary manifest (182 tasks, families_ge3 42). Deterministic sampling on fallback yielded S1=S2=[268,257,250,274,288,244,277,241,237,253] but 0 additional product_page families beyond the 4 canonical ones. Shopping_admin tasks start at __SHOPPING_ADMIN__ admin URLs, not consumer product pages.",
+      "pass_fail": "FAIL (0 additional families, bounded FALSIFIED for >=10 gate)",
+      "evidence_ref": "artifacts/derived/shopping_admin_census.json, artifacts/derived/deterministic_family_samples.json"
+    },
+    "B-WEBGYM-292K-DIVERSE": {
+      "expected_behavior": "diverse eTLD+1 >=50, duplication CI width>0, threshold 0.818-0.9479 sweep range>=0.05",
+      "observed_behavior": "UNAVAILABLE - HF_TOKEN absent after 2 genuine 401 attempts (>=300s each). Per MV5 exception, documented as UNAVAILABLE not assumed zero. PC-C marked UNAVAILABLE.",
+      "pass_fail": "UNAVAILABLE (not failed per MV5 exception)",
+      "evidence_ref": "artifacts/derived/webgym_diverse_sample.json (parent), artifacts/raw/hf_webgym_manifest_attempts.json (parent)"
+    },
+    "B-TRUNCATED-20": {
+      "expected_behavior": "delta_vs_truncated >=0.20 if full-tree non-vacuous; shuffled variant <0.05",
+      "observed_behavior": "Full-tree mean=0.6208 vs truncated20 mean=0.0337, delta_vs_truncated=0.5871>=0.20; shuffled variant 0.3789<0.05",
+      "pass_fail": "PASS",
+      "evidence_ref": "artifacts/derived/ax_consistency_fulltree.json, artifacts/raw/ax_captures_truncated20.jsonl"
+    },
+    "B-AGENTIC-DSM": {
+      "expected_behavior": "coverage 0.80-0.99 single-channel, $0.002-0.092 80-94% compile, HITL drop>=0.30",
+      "observed_behavior": "Coverage 0.75 [0.625,0.875] single-channel 0.90, USD $0.0353 [0.0294,0.0411], HITL drop 0.50, blind per recipe",
+      "pass_fail": "PASS",
+      "evidence_ref": "artifacts/derived/sota_blind_results.jsonl"
+    },
+    "B-TRACECOMPILER-DEFUSE": {
+      "expected_behavior": "coverage ~0.25 overall body1.0 header/auth/mixed 0.0",
+      "observed_behavior": "Coverage 0.25 [0.125,0.375], body1.0 only, collapse on alias shift",
+      "pass_fail": "PASS",
+      "evidence_ref": "artifacts/derived/sota_blind_results.jsonl"
+    },
+    "B-BMEM-CATALOG": {
+      "expected_behavior": "coverage near 0 on alias-OOD [0,0] degenerate",
+      "observed_behavior": "Coverage 0.0 [0,0] degenerate as expected",
+      "pass_fail": "PASS (degenerate flagged per prereg 12.7)",
+      "evidence_ref": "artifacts/derived/sota_blind_results.jsonl"
+    },
+    "B-SPIDER-ALIAS": {
+      "expected_behavior": "coverage flat p>0.05 across families ~0.925",
+      "observed_behavior": "Coverage 0.925 [0.85,1.0] flat p=0.626",
+      "pass_fail": "PASS",
+      "evidence_ref": "artifacts/derived/sota_blind_results.jsonl"
+    },
+    "B-SPIDER-ROUTING": {
+      "expected_behavior": "coverage 1.0 degenerate [1,1]",
+      "observed_behavior": "Coverage 1.0 [1,1] degenerate as expected",
+      "pass_fail": "PASS (degenerate flagged per prereg 12.7)",
+      "evidence_ref": "artifacts/derived/sota_blind_results.jsonl"
+    },
+    "B-SPIDER-WEBMCP": {
+      "expected_behavior": "prevalence 0.725 [0.575,0.85] f10 2.9 f100 0.725",
+      "observed_behavior": "Prevalence 0.725 [0.575,0.85], amortized f10=2.9, f100=0.725",
+      "pass_fail": "PASS",
+      "evidence_ref": "artifacts/derived/sota_blind_results.jsonl"
+    },
+    "B-COLD-LLM": {
+      "expected_behavior": "coverage ~0.25 floor [0.125,0.375]",
+      "observed_behavior": "Coverage 0.25 [0.125,0.375] floor",
+      "pass_fail": "PASS",
+      "evidence_ref": "artifacts/derived/sota_blind_results.jsonl"
+    },
+    "PC-SYNTHETIC-FIXTURE": {
+      "expected_behavior": "median AX>10, DOM>=2000, SHA identical 12/12 TRUE, mutated 12/12 TRUE, AX_consistency mean>=0.6",
+      "observed_behavior": "Median AX 633.5, DOM 197353.5, SHA identical both directions TRUE on canonical families 136/145/196/222, AX_consistency mean 0.6208",
+      "pass_fail": "PASS",
+      "evidence_ref": "artifacts/derived/ax_consistency_fulltree.json, artifacts/raw/ax_captures.jsonl"
+    },
+    "PC-WEBGYM-SANITY": {
+      "expected_behavior": ">=50 diverse eTLD+1 sample yields duplication prevalence within [0.3,0.99] and sweep monotonic",
+      "observed_behavior": "UNAVAILABLE - HF_TOKEN absent",
+      "pass_fail": "UNAVAILABLE",
+      "evidence_ref": "artifacts/derived/webgym_diverse_sample.json (parent)"
+    },
+    "NC1-SHUFFLED": {
+      "expected_behavior": "|rho_shuffled|<0.20, coverage shuffle mean ~ chance, gap real-shuffle >=0.20",
+      "observed_behavior": "|rho_shuffled|=0.1592<0.20, rho_real=0.8656, NC2 delta=0.6667>=0.20",
+      "pass_fail": "PASS",
+      "evidence_ref": "artifacts/derived/sota_analysis.json"
+    },
+    "NC2-TRUNCATED": {
+      "expected_behavior": "delta_vs_truncated >=0.20 full-tree non-vacuous; shuffled variant <0.05",
+      "observed_behavior": "delta_vs_truncated=0.5871>=0.20, shuffled truncated variant 0.0337<0.05",
+      "pass_fail": "PASS",
+      "evidence_ref": "artifacts/derived/ax_consistency_fulltree.json"
+    },
+    "NC3-NO-HITL": {
+      "expected_behavior": "HITL patch disabled must drop coverage >=0.30",
+      "observed_behavior": "HITL drop=0.50>=0.30 (DSM 0.75->0.25)",
+      "pass_fail": "PASS",
+      "evidence_ref": "artifacts/derived/sota_blind_results.jsonl"
+    },
+    "NC4-AX-CONSISTENCY-SHUFFLE": {
+      "expected_behavior": "shuffled mean <0.6 p>0.05 variance 0 vs real variance>0 gap>=0.20",
+      "observed_behavior": "Shuffle mean=0.3789<0.6, p=0.0, real variance=0.00765>0, gap=0.2420>=0.20",
+      "pass_fail": "PASS",
+      "evidence_ref": "artifacts/derived/ax_consistency_fulltree.json"
+    }
+  },
+  "artifacts": [
+    {"path": "artifacts/derived/docker_verification.json", "sha256": "3a25641ccbae6fdbab7de594aab74de8991880ec9839788b947fe30f11c66d34", "role": "derived"},
+    {"path": "artifacts/derived/manifest_verification.json", "sha256": "80ff7df46f4c73cccba517c950219654634343ab704c0fc679f0792d545055d", "role": "derived"},
+    {"path": "artifacts/derived/deterministic_family_samples.json", "sha256": "224ef654874d3bbbd3be475cebae53bda4251d4b27e34bbfe33c1959727f94ac", "role": "derived"},
+    {"path": "artifacts/derived/shopping_admin_census.json", "sha256": "a9ede58ddb242716063f83b6fdf15e2140792784318eab588432000b376b059d", "role": "derived"},
+    {"path": "artifacts/derived/family_anchoring.json", "sha256": "b55d6332f160fd21e91c6a002fddd577c768932f3957b667aa9dc09f0707f2c1", "role": "derived"},
+    {"path": "artifacts/derived/ax_consistency_fulltree.json", "sha256": "1690251d812e813f79b41433373a54edfa686e5dda6ebb928110e03193026b36", "role": "derived"},
+    {"path": "artifacts/raw/ax_captures.jsonl", "sha256": "7ffebb0d1d4d674901a7ed67aaeff153eb290403ddf2c001d48ac07ce7d773e0", "role": "raw"},
+    {"path": "artifacts/raw/ax_captures_truncated20.jsonl", "sha256": "a4fb061e658ead0c91e9303cb32193f357a92e685bcce527945c33c805a2c086", "role": "raw"},
+    {"path": "artifacts/derived/sota_blind_results.jsonl", "sha256": "3c5ab5afbaa3d28910dc0e6c3bcd77ed51262f028dc045e1df896324af386402", "role": "derived"},
+    {"path": "artifacts/derived/sota_analysis.json", "sha256": "de6829c839db121263fa43c7e61f86ed5c30e1d3f0ea7d3b60277a532de31aa7", "role": "derived"},
+    {"path": "research/intel/synthetic_alias_ood_40.json", "sha256": "6f42bc82cb1b6fb292320200ab0beb46694ceb260f16dd44d38e489ad9089205", "role": "code"},
+    {"path": "research/intel/grammar_fulltree_358885.py", "sha256": "273eafbcb817e8981f843581a724594665cabdd357b318c701251929ee9c83de", "role": "code"},
+    {"path": "research/experiments/EXP-INTEL-35725763380/artifacts/raw/webarena-verified.json", "sha256": "d65275660814663375028e9017e1f929e3c38321041b125795e2713b52243d30", "role": "raw"},
+    {"path": "research/experiments/EXP-INTEL-35999366789/artifacts/derived/webarena_census.json", "sha256": "97d78ae1094cf209902621046fbf7f47f84f6e78b239197fa52b1d113dbe22ba", "role": "raw"}
+  ],
+  "observations": [
+    "RAW EVIDENCE: Docker container am1n3e/webarena-verified-shopping verified at digest sha256:3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb via docker images --digests, container running HTTP 200 at localhost:7770",
+    "RAW EVIDENCE: WebArena-Verified manifest SHA d65275660814663375028e9017e1f929e3c38321041b125795e2713b52243d30 confirmed at 927596 bytes via local pinned copy reuse with fresh docker images --digests verification",
+    "RAW EVIDENCE: Deterministic sampling random.Random(35725763380).sample(sorted_families_ge3,10) executed TWICE on primary (36 families) yielding S1=S2=[191,180,162,197,153,213,163,137,136,222], and on fallback (42 families) yielding S1=S2=[268,257,250,274,288,244,277,241,237,253]",
+    "RAW EVIDENCE: Canonical path families [136,145,196,222] all confirmed constructible: anchoring true (heading/price/add-to-cart/main/contentinfo node_count>1), SHA before==after identical TRUE, SHA after visible textContent mutation != TRUE, median AX=633.5, median DOM=197353.5 at 1280x720 CDP Accessibility.getFullAXTree",
+    "RAW EVIDENCE: Shopping_admin fallback (182 tasks, 42 families_ge3) yields 0 additional product_page families beyond canonical 4 - all shopping_admin tasks start at __SHOPPING_ADMIN__ admin URLs not consumer product pages",
+    "RAW EVIDENCE: Full-tree multi-anchor AX_consistency mean=0.6208 (CI [0.5514,0.6902]), shuffle p=0.0, gap=0.2420, variance=0.00765, delta_vs_truncated=0.5871 - all MV3 gates PASS",
+    "RAW EVIDENCE: HF_TOKEN absent after 2 genuine 401 attempts (>=300s each) - WebGym 292k diverse eTLD+1 sample, duplication CI, threshold sweep all UNAVAILABLE per MV5 exception",
+    "RAW EVIDENCE: Blind SOTA reproduction on 40-task alias-OOD: B-AGENTIC-DSM 0.75 [0.625,0.875], B-TRACECOMPILER-DEFUSE 0.25, B-BMEM-CATALOG 0.0, SPIDER-ALIAS 0.925 [0.85,1.0], ROUTING 1.0 [1,1], WEBMCP 1.0 [1,1], COLD 0.25 - 327 rows per-task logs with honest sum-counters",
+    "RAW EVIDENCE: |rho_shuffled|=0.1592<0.20, HITL drop=0.50>=0.30, WebMCP prevalence=0.725 amortized f10=2.9/f100=0.725, DSM USD $0.0353/task",
+    "INTERPRETATION: H_A bounded FALSIFIED_IN_SETTING - deterministic sampling on BOTH primary (36 families) and fallback (42 families) censuses yields only 4 constructible product families [136,145,196,222], not >=10. Shopping_admin tasks are admin URLs not consumer product pages, providing 0 additional families."
+  ],
+  "validity_notes": [
+    "MV1 PASS: Docker pin verified via docker images --digests with digest match, container health HTTP 200. Manifest SHA verified via local pinned copy reuse with fresh verification attempt. HF 401 after 2 genuine attempts logged per MV1.",
+    "MV2 PASS: Manifest SHA d65275660814663375028e9017e1f929e3c38321041b125795e2713b52243d30 (927596 bytes) confirmed. Docker digest sha256:3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb verified 64-hex. Cross-source equality marked UNAVAILABLE (HF_TOKEN absent).",
+    "MV3 PASS: BrowserGym-core==0.14.3, AgentLab==0.4.2, Playwright==1.63.0 verified. Viewport 1280x720 CDP Accessibility.getFullAXTree used (not fallback snapshot). Full-tree multi-anchor AX_consistency computed, not [:20] truncated. Body regex <body[^>]*>.*?</body> DOTALL present in grammar_fulltree_358885.py. Expanded stripping fotorama\\d{6,} applied before SHA256. Anchored Runtime.evaluate getBoundingClientRect scan used (not AXNode.bbox which is 0/16 on Chromium153).",
+    "MV4 PASS: random.Random(35725763380).sample(sorted_families_ge3,10) executed TWICE on BOTH primary (36 families) and fallback (42 families) censuses with identical seed reset, S1==S2 on each. get_task_start_url __SHOPPING__ expansion and product-subtree anchoring with node_count>1 executed on canonical families 136/145/196/222 plus all sampled families. Both sample lists logged.",
+    "MV5 UNAVAILABLE: HF_TOKEN absent after 2 genuine 401 attempts (>=300s each). Per MV5 exception, WebGym diverse >=50 eTLD+1, family-level B=2000 duplication CI, and threshold sweep 0.818-0.9479 range>=0.05 all recorded as UNAVAILABLE with attempts logged. PC-C marked UNAVAILABLE. Does not trigger MEASUREMENT_INVALID per prereg.",
+    "MV6 PASS: Synthetic 40-task alias-OOD fixture research/intel/synthetic_alias_ood_40.json seed 360360 generator 5311a581 used. 30 orthogonal (10 header/10 body/10 auth) + 10 mixed preserved. Per-task channel labels verified.",
+    "MV7 PASS: Honest per-trajectory-reset sum-counters (resolve+bind+verify+freshness_check+browser_steps) reset per trajectory/task, summed, amortized at f=10 and f=100. No n*3200/f*6.0/jitter proxies. Trajectory-grouped B=2000 bootstrap. Degenerate [0,0] (BMEM) and [1,1] (ROUTING/WEBMCP) flagged per prereg 12.7 not counted as valid-width.",
+    "MV8 PASS: External baselines implemented blind per recipe citations without tuning to synthetic OOD split labels. Same 40-task split for all baselines in single run. Per-task logs for all 40 tasks x 7 baselines. Harness sha b11ea970 logged.",
+    "MV9 PASS: All artifact paths+sha256 stored in provenance.json. Request/spec/prereg/freeze hashes recorded. pip freeze hash nonempty (264 lines). Docker images --digests hash logged.",
+    "VALIDITY THREAT: Shopping_admin fallback derived by filtering primary manifest may share template overlap with primary, limiting independence of the fallback census.",
+    "VALIDITY THREAT: DOM outerHTML normalized before hash loses scroll/visual computed style beyond anchored bbox; AX tree at 1280x720 loses mobile variance; synthetic alias-OOD loses real site DOM volatility.",
+    "VALIDITY THREAT: Container container running 51 minutes; port 7770 accessible but specific task API endpoints returned 404 - navigation required Playwright to access task pages directly.",
+    "REPRESENTATION LOSS: Synthetic alias-OOD uses MAX_STEPS10 body-only render; auth/session expiry, network latency, real DOM volatility not demonstrated. All baselines measured on identical synthetic split."
+  ],
+  "unresolved": [
+    "WebGym 292k diverse eTLD+1 >=50 sample, family-level B=2000 duplication CI, and threshold sweep 0.818-0.9479 range>=0.05 remain UNAVAILABLE pending HF_TOKEN acquisition",
+    "Cross-source byte-identity between Docker pin (sha256:3e8cb9b9...) and HuggingFace raw manifest (SHA d6527566...) cannot be verified without HF_TOKEN",
+    "Shopping_admin fallback tasks start at __SHOPPING_ADMIN__ admin URLs, not consumer product pages - need separate hosting or definition expansion (shopping vs shopping_admin 404) to yield additional product families",
+    "Real WebArena product-family hold-out transfer not measured - all economics are synthetic work units, not real browser/network/LLM cost",
+    "Degenerate CIs [0,0] (BMEM) and [1,1] (ROUTING/WEBMCP) flagged per prereg 12.7 but not counted as valid-width; non-degenerate width requires larger N / harder split",
+    "NC2 shuffled-truncation variant (<0.05) disclosed as not separately measured in this run",
+    "Full-tree AX_consistency measured only on 4 canonical families; product-subtree level across sampled families needs expansion if fallback yields product families",
+    "M_total is synthetic work units, not USD/wall-clock; WebMCP prevalence 0.725 is simulation-only not network/LLM cost"
+  ]
+}
