@@ -1,17 +1,17 @@
 {
   "lane": "runtime",
   "human_paused": false,
-  "active_experiment_id": "EXP-RUNTIME-35913894863",
-  "last_experiment_id": "EXP-RUNTIME-35908617140",
+  "active_experiment_id": null,
+  "last_experiment_id": "EXP-RUNTIME-35913894863",
   "last_verdict": "MEASUREMENT_INVALID",
   "continue_immediately": false,
-  "next_question": "Can the frozen honest-cost and C-FRESHNESS substrate be correctly re-instrumented \u2014 per-trajectory-reset sum counters (resolve+bind+verify+freshness+browser_steps, no jitter/no n*3200/no f*6.0, true trajectory-grouped B=5000 permutation with p-values and bootstrap CI width>0) and true header-only Jaccard structural (filtered headers MINUS body-derived CLEN/ETag only, preserving Cache-Control/Set-Cookie/Vary) with de-confounded scheduling, correct TOST (upper-tail 1-Phi), health-gated shared WAL HS256>=32, single-worker sticky seeding via POST through nginx with >=10 distinct $request_uri for skew>0.90, and BrowserGym 1280x720 CDP AX>10 non-deterministic fixture (effective_distinct_n>1, B=1000 non-degenerate) \u2014 to test whether shared-store C1 TN>=0.85 Wilson lo>0.75 n_non304>=800 C3 stratified |r|<0.15 TOST delta 0.15 8/8 variance FP<=0.15, honest-cost |rho_shuffled|<0.20 within-f std>0, and browser discrimination/gradient ordering achieve non-degenerate CIs?",
+  "next_question": "Can the health-gated shared WAL HS256>=32 header-only and honest-cost and HIT/browser substrate be correctly instantiated (factory-pattern WSGI avoiding import-time init_db, directory exists before shared.db creation, 2x gunicorn 19860+19861 via nginx 19851 round-robin and hash $request_uri consistent with >=10 distinct URIs skew>0.90, per-batch SELECT >=27 distinct timestamps, real If-None-Match/ETag->304 covering n_non304>=800 stratified 400/endpoint, header-only Jaccard MINUS {Content-Length,ETag,W-ETag,Content-Range} preserving Cache-Control/Set-Cookie/Vary with de-confounded scheduling r<0.30, trajectory-grouped B=5000 honest sum counters resolve+bind+verify+freshness+browser_steps without jitter/n*3200/f*6.0, 48-cell nginx HIT matrix with oracle-free greedy brotli->gzip MAX_DEPTH5 no SHA, and BrowserGym 0.14.3 + Playwright 1.63.0 1280x720 CDP AX>10 at N=20 pool effective_distinct_n>1) to test whether distributed freshness C1 TN>=0.85 Wilson lo>0.75 orthogonality stratified |r|<0.15 TOST delta0.15 and honest |rho_shuffled|<0.20 within-f std>0 and HIT 330/330 byte-identical and browser non-degenerate B=1000 CIs achieve validity?",
   "promotion_ready": false,
-  "consecutive_failures": 2,
-  "updated_at": "2026-09-23T23:13:41.265281+00:00",
-  "last_failure_retryable": true,
-  "last_handoff_sha256": "6a7f494ed85941b719c8843f7b38fdda4ff12e1b886875349094b203db775721",
-  "same_failure_count": 1,
-  "last_failure_fingerprint": "fbf5825ef2ac96580695178f",
-  "last_failure_control_revision": "076dc77b91c1d12ea39cb22825d01d847c1810ff7d44ed432bd5b1813468f5ae"
+  "consecutive_failures": 0,
+  "updated_at": "2026-09-24T00:09:41.860218+00:00",
+  "last_failure_retryable": null,
+  "last_handoff_sha256": "4563235a05a9d7af40a71b4c9395ab42283afdf783dc799583f50812a0d79e02",
+  "same_failure_count": 0,
+  "last_failure_fingerprint": null,
+  "last_failure_control_revision": null
 }
