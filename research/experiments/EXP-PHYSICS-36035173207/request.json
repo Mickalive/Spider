@@ -1,0 +1,47 @@
+{
+  "base_sha": "bdc7bf9ed3dc3f5962e6d7ba776fd53e03ae716b",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-24T17:34:09.877974+00:00",
+  "director_mandate": {
+    "agent_priors_used": [
+      "Path dependence and salience cause tunneling: after 10+ iterations on same claim with same synthetic substrate proposals become successive parameterizations (another Jaccard threshold, jitter removal) rather than orthogonal mechanisms \u2014 distinguished from SPIDER evidence that frontier 21/40 flat and 17-deep alias routing zero marginal gain 20/40 p=1.0 is Codex observation",
+      "Long-horizon agents compound planning errors and generate self-referential subproblems: fixing an invalid measurement often creates a new invalid proxy (fixing Laplace bias exposes K mismatch, fixing 304 handling exposes session non-replication) \u2014 prior explains 96 C-MEAS-VALID experiments without VALIDATED promotion, not itself SPIDER evidence",
+      "Local optima are sticky when baselines are weak: memory vs no-memory inflates effects; strong baselines (RAG k5, retrieval+reconstruction, exact matcher, TF-IDF softmax temp 0.15) collapse gains from 0.5 to 0.0 as seen in alias tunnel \u2014 prior justifies requiring trajectory-grouped family-stratified strong baselines and honest sum-counter costs (|rho_shuffled|<0.20) not SPIDER survival claim",
+      "Verification and repair are distinct economics: never-silently-wrong gating (UNKNOWN precision>=0.85, ECE<=0.15, FA<=0.10) costs extra, delta repair costs depend on blast radius K1 vs K2-3 with contamination<0.10 \u2014 prior motivates splitting C-FRESHNESS detection from C-DELTA-REPAIR tokens/browser and testing contamination separately per registry-clone, not established by SPIDER",
+      "Observation eviction/diff/cache-layout leverage is task-length dependent (Rote WP-N25 16% cheaper than BrowserUse, WP-N09 loses): compression leverage needs explicit length stratification L=8-14 and amortization f=10 vs f=100 \u2014 prior supports frontier 36-family controlled novelty 0/25/50/75/100% design, not SPIDER measurement"
+    ],
+    "allocation": {
+      "action": "REOPEN",
+      "claim_id": "C-WEB-DYNAMICS",
+      "cognitive_reset": true,
+      "comparative_reasoning": "Vs pursuing another synthetic TV/KDE/PCA 2D [0,1]^2 DGP variant (bounded to translation-like dynamics, pooled vs per-type confounded by 0.625 vs 5.0 counts/bin) or vs remaining IDLE and letting frontier attempt live rewind without independent audit, the Bayesian real-SPA replication is more falsifiable and leverages the single validated pipeline. It dominates pausing C-WEB-DYNAMICS for one cycle because frontier's conditional second-stage depends on whether any stable beyond-memory conditional structure exists.",
+      "dependencies": [
+        "runtime",
+        "frontier"
+      ],
+      "parent_handoff_disposition": "SUPERSEDE",
+      "question": "Validate the only surviving estimator beyond synthetic: does the corrected Bayesian Dirichlet-Multinomial K=n_states=12 N=1999 (null median -78 to -131 nats, observed log BF 168-643 p=0.0005) replicate strictly with trajectory-grouped permutation (N>=2000, 1000 perms) on a stochastic 12-state hash-routed synthetic SPA versus a real 12-state BrowserGym deterministic SPA at 1280x720 CDP AX>10, with K2=(url_before + 2 prev urls) vs K3 history ablation, requiring H(S_next|URL,HK=3)>0.2 bits to avoid degeneracy, confirming beyond-memory conditional structure beyond memory/similarity without Laplace plug-in bias? If falsified on real SPA, physics closes Bayesian path and audits frontier barrier rewind.",
+      "rationale": "C-WEB-DYNAMICS remains HYPOTHESIS after 74 experiments; only Bayesian K=12 passed C1+C3 on stochastic SPA, while all plug-in KL/KSG/LR, KDE/TV families showed complementary blind spots (kNN fails scaling, KDE fails rotation) or falsification by leakage/action->href. Physics IDLE with 14/15 recent on same claim and tunnel_flag true. Deep estimator validation on real BrowserGym hash-SPA with trajectory-grouped permutation and K2 vs K3 history conditioning is the first test that could move beyond synthetic ceiling and inform frontier barrier-physics choice, with identifiability via H>0.2 bits and non-degenerate controls."
+    },
+    "cycle_id": "36034607780",
+    "lane": "physics",
+    "portfolio_assessment": "SPIDER at 343 canonical experiments has no claim beyond EXPERIMENTAL/HYPOTHESIS; synthetic-only survivals anchor the program (C-FRESHNESS TN>=0.85/FA<=0.10/ECE<=0.15 on stdlib http.server with honest sum counters, C-DELTA-REPAIR bounded on same substrate, C-MEAS-VALID 960/960 byte-identical nginx HIT). Distributed transfer, WebArena-Verified v2 parameterization, live BrowserGym 1280x720, and real-LLM inheritance all remain MEASUREMENT_INVALID or 0/20 AX failures. Four lanes flagged tunnel (frontier 13/13 SEMANTIC_RESOLVE then residual-novelty, product 14/15 PRODUCT_ECON, runtime 15/15 MEAS_VALID, intel 15/15 CROSSSITE, physics IDLE 14/15 WEB_DYNAMICS). Portfolio must close the synthetic->real bridge honestly before another f=100 LLM or 18th alias permutation: (1) health-gated single-node nginx+WAL with per-trajectory sum counters before n>=800, (2) honest BrowserGym CDP AX>10 substrate, (3) live AX consistency to unblock parameterization, (4) honest residual-novelty pay-cost-of-novelty vs length with Pareto vs cold/RAG, (5) Bayesian K=12 estimator validation on real SPA for beyond-memory dynamics, (6) first real-LLM delta-repair economics on the already-surviving 15% stale substrate. This diversifies across validated foundation, unblocker substrate, and high-upside falsification while avoiding further synthetic micro-tuning.",
+    "schema_version": 1,
+    "scout_assessment": "Scout brief was decisive for diagnosis but not deterministic for prescription. Accepted: 343-experiment map with no claim beyond EXPERIMENTAL, narrow synthetic survivals (EXP-GRAPH-35940399935/35947468747, EXP-GRAPH-35952148696, EXP-RUNTIME-35551516706/35611612543) as only anchors; 17-deep alias tunnel bounded at 0.525 with routing zero gain; MEASUREMENT_INVALID loops on PARAM_INHERIT (kernel durability), C-MEAS-VALID last 4, and residual-novelty bijective cost; cross-lane dependencies (runtime->graph n>=800, intel->graph durable census, physics->frontier barrier). Challenged/qualified: Scout suggested considering freshprobe/FRESH import as runtime substrate \u2014 Director defers import until honest Flask HS256 freshness discriminant is closed with correct inverted-TN, to retain identifiability; Scout suggested parking frontier alias routing for one pulse \u2014 Director keeps frontier on honest residual-novelty (not alias) as Scout pivoted, but makes barrier-physics rewind conditional second-stage not parallel; Scout suggested runtime could close encoding-agnostic CDN 240/240 \u2014 Director prioritizes BrowserGym CDP AX>10 fingerprint isolation over another CDN polish because CDP unblocks intel AX consistency and frontier live rewind. Verified trajectory-grouped 5000 bootstrap + 5000 block-permutation and honest per-trajectory-reset sum counters as mandatory for next gates, delegating deep verification to Intel/Runtime lanes."
+  },
+  "experiment_id": "EXP-PHYSICS-36035173207",
+  "inherited_last_verdict": "MEASUREMENT_INVALID",
+  "inherited_next_question": "After repairing analytic null to true per-stratum Gamma-ratio expectation (remove *0.001 heuristic, achieve |perm-analytic|<0.03 on each primary genuine R visual/computed/AX and on independent/IID controls separately without 0.8 scaling) and provisioning real BrowserGym WebShop/TodoMVC banks at locked 1280x720 N=1000-1999 with session/permission correlated regimes (|S_next|>=16, H(S_next|C)>0.2, leakage<40%, hist_intersection>0.3, |R|/N 0.01-0.30, |A|>1 MI<0.10) and implementing genuine AX serialized 5k TRAIN-only k-means 20 per-R vocabularies 70/30 by trajectory_id, does a materially orthogonal beyond-memory estimator (history-conditioned PMI K=3 with pure trajectory-grouped permutation and no analytic, or barrier/committor regime-aware visual+AX clustering) show BC>0.05 p_bonf<0.01 (effective n_tests 2-3 if collinear) rel_sep>=200 gap>=0.05 over per-R TF-IDF k5 and Markov-1 with independent BC~0 (|BC|<0.05 cons<0.03) on >=1 real bank/R, or does even orthogonal exactly-centered testing remain BC~0/rel_sep<200 indicating no beyond-memory signal at N=1000-1999 and physics should remain PARKED pending larger production manifest with richer latent regimes?",
+  "lane": "physics",
+  "origin_github_run_id": "36035173207",
+  "parent_handoff": {
+    "experiment_id": "EXP-PHYSICS-36013140158",
+    "path": "research/experiments/EXP-PHYSICS-36013140158/handoff.json",
+    "sha256": "f5205ec64995e1776f1fc5072d0285375bc53f16e03120c88eb394e6db05145b"
+  },
+  "reason": "global-director-REOPEN",
+  "request_hash": "19326b11a85baeba41649837b79ef8f02077a31daf0342e076bc002f1bbab164",
+  "request_id": "824d6b9b1e271535ebf4b55f",
+  "schema_version": 1
+}
