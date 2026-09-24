@@ -1,17 +1,17 @@
 {
   "lane": "intel",
   "human_paused": false,
-  "active_experiment_id": "EXP-INTEL-36042590671",
-  "last_experiment_id": "EXP-INTEL-36037208652",
+  "active_experiment_id": null,
+  "last_experiment_id": "EXP-INTEL-36042590671",
   "last_verdict": "MIXED",
   "continue_immediately": false,
-  "next_question": "Can HF_TOKEN-provisioned retrieval of WebArena-Verified + WebGym 292k/127k manifests (demonstrating >=50 distinct eTLD+1 with family-level B=2000 duplication prevalence non-degenerate CI width>0 and threshold sweep at 0.818 and 0.9479 range>=0.05 monotonic), combined with a fresh live CDP Accessibility.getFullAXTree 1280x720 probe (no reuse) on canonical families [136,145,196,222] and on a newly sampled orthogonal census achieving >=10 distinct product families via verified product-subtree anchoring and SHA stability (using GHCR BrowserGym 0.14.3 via docker load fallback or alternative registry and independent eTLD+1 hosting for WebMall/Mind2Web-2 loopback beyond 130-task), plus an explicit rotation-insensitive/freshness-gated Stagehand variant, deliver full-tree multi-anchor AX_consistency mean>=0.6 CI lower>0.5 gap>=0.20 variance>0 delta>=0.20 on the >=10 set, Stagehand HIT>=0.8 lift>=0.40, and BrowserGym multi-step Gate0 >=50 transitions/family on >=10 families across shopping_admin/Reddit/GitLab/Wikipedia/VisualWebArena/WorkArena with leakage<0.40 under identical deterministic Random(35725763380).sample protocol?",
+  "next_question": "With HF_TOKEN provisioned for WebGym 292k/127k manifests, can a sampled diverse census achieve >=50 distinct eTLD+1 sites with family-level B=2000 bootstrap 95% CI width>0 non-degenerate, threshold sweep at 0.818 and 0.9479 monotonic with range>=0.05 versus vacuous 0.9479, and real-manifest parameterization prevalence 0.8958 +-0.05 with byte-identical manifest SHA verification, and does the union with pinned WebArena-Verified v2 812 yield >=10 constructible product families under frozen product-subtree anchoring (heading/price/add-to-cart/main/contentinfo) and SHA stability both directions TRUE at 1280x720 CDP Accessibility.getFullAXTree median AX>10 DOM>=2000, thereby deterministically proving sampled census replaces exhaustive 567MB LFS test.zip/CAP 420 enumeration for Graph N>=120 zero-overlap holdout and Physics website-holdout banks?",
   "promotion_ready": false,
-  "consecutive_failures": 1,
-  "updated_at": "2026-09-24T19:32:55.070038+00:00",
-  "last_failure_retryable": false,
-  "last_handoff_sha256": "63329ba4519279d4f87b0aa7690d8a2eefe4abdf4e9f082a44da84470ddff0aa",
-  "same_failure_count": 1,
-  "last_failure_fingerprint": "ae03546c19226c4291589b0f",
-  "last_failure_control_revision": "373719f006bb73b9e36c60fcd18b32b6a7a71921a93c6008fa7c6be7e34a6ea7"
+  "consecutive_failures": 0,
+  "updated_at": "2026-09-24T20:50:52.743689+00:00",
+  "last_failure_retryable": null,
+  "last_handoff_sha256": "6204a37a79f577feef40f3b674d39067224535e6a887ca0c940d47862111e8be",
+  "same_failure_count": 0,
+  "last_failure_fingerprint": null,
+  "last_failure_control_revision": null
 }
