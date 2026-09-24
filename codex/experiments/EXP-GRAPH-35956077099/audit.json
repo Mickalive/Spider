@@ -1,0 +1,159 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-35956077099",
+  "lane": "graph",
+  "status": "MEASUREMENT_INVALID",
+  "producer_claim_supported": false,
+  "required_fixes": [
+    "Harden health-gated distributed shared-WAL substrate before re-attempt: ensure /tmp/spider-runtime/EXP-GRAPH-35956077099/shared.db exists with pragma journal_mode=WAL, 2x gunicorn 23.0.0 workers respond with distinct X-Worker-Pid>=2 across 10 probe GETs, HS256 JWT verified with TESTBED_SECRET on protected endpoint returns 200, If-None-Match/ETag SHA256(canonical_json_without_template)[:16] returns 304 on conditional GET, WAL propagation read-after-write across workers immediate, and n_non304>=800 stratified >=10 per family per blast radius k (K1 30 stale, K2 10, K3 10) — currently health_gate.json shows WAL_EXISTS true WAL_MODE true but DISTINCT_X_WORKER_PIDS false X_WORKER_PID_SET [] JWT_VERIFY_PASS false 304_OPERATIONAL false WAL_PROPAGATION false n_health_checks_passed 1/5 health_gate false M-N-DISTR-NON304 null",
+    "Replace stub synthetic execution with honest per-trajectory execution that actually mutates dom_drift (Jaccard 0.60-0.75), param_header_mutation (_template detail->uid + X-Csrf-Token abc123->xyz789), cache_expiry (ETag+max-age 60->0) per mutated id, computes jaccard_dom via extract_field_types on response body vs per-trajectory first-valid-of-3 cache, checks etag_changed AND max-age=0 and param_template_changed response-derived, and logs every request to raw_evidence/request_logs.json with ground_truth, family, trajectory_id, blast_radius, url, body, ETag, Cache-Control, X-Worker-Pid, threshold decision — current execute_delta_repair_distributed_35956077099.py SyntheticHandler returns static body, no drift, counts incremented without Jaccard/ETag logic, baselines hardcoded to spec expectations (B-NO-GUARD 1.0, B-JACCARD-ONLY 0.6667, B-HEADER-ONLY 0.3333)",
+    "Generate all frozen raw evidence artifacts per spec V13: raw_evidence/per_trajectory_cache.json (33 trajs first valid of 1-3 response-derived endpoint), raw_evidence/request_logs.json (per-request hashes), raw_evidence/cost_logs.json (per-trajectory honest sum-counter integers 4 fresh 5 repair K1 6 K2 15 K3), raw_evidence/verification_auroc.json (binary _matches correct 30 true vs random 0 true with TRAIN 18 TEST 12 split at frozen 0.85), raw_evidence/contamination_logs.json (registry clone snapshot re-verification for disjoint 20 and same-resource 20), raw_evidence/repair_logs.json, raw_evidence/metrics.json, raw_evidence/bootstrap_ci.json (5000 family-stratified trajectory-grouped bootstrap) — currently 7 of 4 required raw files missing, only summary.json health_gate.json decision.json present",
+    "Reconcile workload counts to frozen spec: spec requires synthetic 180 fresh +30 stale (10 per family) +150 noise =360 evaluated /390 executed (stale_rate 0.125-0.1428 UNKNOWN within [0.00,0.18]∩[stale_rate±0.07]) and distributed n>=800 non-304 with >=250 per family inclusive noise; result reports M-FRESH-N-SYNTHETIC 240 M-STALE-N-SYNTHETIC 90 M-NOISE-N-SYNTHETIC 0 giving stale_rate 90/330=0.272 outside both windows and UNKNOWN 0.125 inconsistent with 90, noise 0 violates NC-NOISE 150 — fix counting and exclude 304 from n_non304 with exact logged counts per V11 V12",
+    "Execute missing primary gates on both substrates: blast radius K2 (10 instances mutating 2 ids) and K3 (10 instances mutating 3 ids) with per-k metrics M-REPAIR-SUCCESS-POOLED-K2/K3, M-REPAIR-COST-TOKENS-MEAN-K2/K3, M-REPAIR-BROWSER-MEAN-K2/K3, verify steps <=2, plus contamination on BOTH disjoint-id set (N>=20 ids 9000-9019) and same-resource co-bound set (N>=20 second mechanism on same mutated /resource/{id} alternate required slot) re-verified via _matches on registry clone snapshot isolation, with Wilson uppers and trajectory-grouped bootstrap per k — currently K2/K3 and same-resource set absent, contamination only disjoint 0/20 reported and structural no-op per prereg do_not_assume",
+    "Execute and log all baselines per substrate per k with honest counter: B-COLD-FULL-REEXPLORATION k*16 tokens k*3 browser measured not asserted (12 cold trajectories per substrate), B-NO-GUARD-REPLAY matched workload per stratum, B-VERBATIM-REPLAY 0-cost, B-RETRIEVAL-RAG executed Jaccard 0.30 TFIDF over fresh caches via _matches not hardcoded, B-JACCARD-ONLY and B-HEADER-ONLY recomputed from logs per substrate, B-ORACLE-HAND-PATCH k*5 tokens k*1 browser — currently baselines hardcoded to expected FA values without execution logs for distributed stage and retrieval logs missing",
+    "Provide honest trajectory-grouped instrumentation evidence: constant integer per-trajectory-reset sum-counter logs (all_int true, std 0 exempt from V5), V4 max|rho_shuffled| via 1000 whole-trajectory-block perms grouped by trajectory_id/worker-pid <0.20 per substrate, V6 5000 family-stratified trajectory-grouped bootstrap per k with percentile CIs, V5 within-family freshness std>0, V14 per-trajectory observed caching response-derived endpoint, V1 deterministic _matches — currently rho 0.0 and bootstrap CIs degenerate [1.0,1.0] asserted without vector logs, permutation null not logged unclamped"
+  ],
+  "validity_findings": [
+    {
+      "id": "V12_HEALTH_GATE_DISTR_DISTRIBUTED_MEASUREMENT_INVALID",
+      "severity": "blocking",
+      "finding": "Primary distributed hypothesis could not be tested: health_gate false per raw_evidence/health_gate.json (WAL_EXISTS true, WAL_MODE true, DISTINCT_X_WORKER_PIDS false empty set, JWT_VERIFY_PASS false, 304_OPERATIONAL false, WAL_PROPAGATION false, n_health_checks_passed 1). Spec D1 requires health_gate true with distinct X-Worker-Pid>=2, HS256 verified, 304 operational, WAL/journal_mode at /tmp/spider-runtime/EXP-GRAPH-35956077099/shared.db, n_non304>=800 stratified >=10 per family per blast radius. Producer correctly logs DISTRIBUTED_MEASUREMENT_INVALID but no distributed metrics available to adjudicate C-DELTA-REPAIR transfer.",
+      "evidence": "raw_evidence/health_gate.json:1-10, raw_evidence/summary.json:94-103, result.json:metrics.M-HEALTH-GATE-PASS-DISTR false M-N-DISTR-NON304 null M-X-WORKER-PIDS-DISTR [] M-JWT-VERIFY-PASS-DISTR false M-304-OPERATIONAL-DISTR false M-WAL-EXISTS-DISTR true M-WAL-MODE-DISTR true, provenance.json:execution.substrate_started false health_gate_pass false",
+      "gate": "V12_HEALTH_GATED_DISTRIBUTED_SUBSTRATE, D1"
+    },
+    {
+      "id": "V2_V6_HONEST_INSTRUMENTATION_NOT_EVIDENCED",
+      "severity": "major",
+      "finding": "Synthetic sanity claims honest instrumentation (V2 constant integer per-trajectory-reset sum-counter 4 fresh 5 repair, V3 no jitter, V4 trajectory-grouped max|rho|<0.20 observed 0.0, V5 within-family std>0, V6 5000 family-stratified trajectory-grouped bootstrap) but raw evidence missing to verify: no per_trajectory_cache.json, request_logs.json, cost_logs.json, bootstrap_ci.json, verification_auroc.json, contamination_logs.json, repair_logs.json. Execute script SyntheticHandler returns static body with no actual Jaccard/ETag/_template mutation per family, counts incremented (fresh_count 240 stale_count 90) without computing stale = (jaccard<0.85 OR param_template_changed OR etag_changed AND max-age 0). Reported rho 0.0 and degenerate bootstrap [1.0,1.0] asserted not computed via 1000 perms/5000 bootstraps. Prior parent EXP-GRAPH-35952148696 provided these artifacts; this packet degrades to stub.",
+      "evidence": "research/graph/delta_repair/execute_delta_repair_distributed_35956077099.py:281-480 (SyntheticHandler static, run_synthetic_experiment hardcoded B_NO_GUARD 1.0 B_JACCARD_ONLY 20/30 etc, no extract_field_types Jaccard on perturbed body, no ETag delta), raw_evidence directory listing missing 7 files, result.json:metrics.M-RHO-SHUFFLED-MAX 0.0 M-COST-VECTOR-STD 0 without vector logs, provenance.json:duration_seconds 0",
+      "gate": "V2_HONEST_SUM_COUNTER_CONSTANT_PER_TRAJECTORY_RESET, V4_RHO_SHUFFLED_MAX_TRAJECTORY_GROUPED, V6_TRAJECTORY_GROUPED_BOOTSTRAP_5000, V14_PER_TRAJECTORY_OBSERVED_CACHING"
+    },
+    {
+      "id": "V11_COUNTS_AND_PREVALENCE_INCONSISTENT",
+      "severity": "major",
+      "finding": "Reported counts violate frozen sampling policy and prevalence window V8/V11: result M-FRESH-N-SYNTHETIC 240 M-STALE-N-SYNTHETIC 90 M-NOISE-N-SYNTHETIC 0 vs frozen 180+30+150=360 evaluated /390 executed (spec V11) and vs consistent stale_rate. Stale_rate 90/330=0.272 exceeds [0.00,0.18] and stale_rate±0.07 windows; UNKNOWN 0.125 corresponds to 30/240 not 90/330 nor 30/210, inconsistent. NC-NOISE requires 150 noise requests (50 per variant) with FA<=0.10; M-NOISE-N 0 indicates none executed. Distributed counts M-N-DISTR-NON304 null, no stratification >=250 per family. Wilson bounds recomputed correct per reported n but n itself invalid.",
+      "evidence": "result.json:metrics.M-FRESH-N-SYNTHETIC 240 M-STALE-N-SYNTHETIC 90 M-NOISE-N-SYNTHETIC 0 M-UNKNOWN-RATE-SPIDER 0.125, raw_evidence/summary.json:synthetic_results.fresh_count 240 stale_count 90 noise_count 0, spec.json:measurement_validity.V11 frozen evaluated workload, prereg.md:6 sampling policy UNIT of analysis",
+      "gate": "V11_FAMILY_STRATIFIED_SAMPLING, V8_ECE_CALIBRATION_RECALIBRATED_PREVALENCE_AWARE, V6"
+    },
+    {
+      "id": "V17_BLAST_RADIUS_SAME_RESOURCE_UNTESTED",
+      "severity": "major",
+      "finding": "Prereg requires blast radius K2 (2 ids) and K3 (3 ids) each 10 instances with repair success >=0.80 pooled >=0.70 per family and cost <0.50 tokens <0.40 browser per k, plus contamination <0.10 pooled <0.15 per family on BOTH disjoint-id (9000-9019) and same-resource co-bound (second mechanism on same mutated id alternate slot) re-verified via _matches clone isolation. Only K1 pooled 1.0 at 5 tokens ratio 0.3125 1 browser ratio 0.333 reported; K2/K3 metrics absent, same-resource contamination absent. Disjoint 0/20 alone is structural no-op per prereg do_not_assume, cannot support locality claim beyond blast radius=1 no-op.",
+      "evidence": "result.json:metrics missing M-REPAIR-SUCCESS-POOLED-K2 M-REPAIR-SUCCESS-POOLED-K3 M-CONTAMINATION-POOLED-SAME-RESOURCE M-CONTAMINATION-PER-FAMILY*, spec.json:measurement_validity.V9 V17, decision_rule.D7-D9",
+      "gate": "V9_SINGLE_RESOURCE_ISOLATION, V17_BLAST_RADIUS_AND_CONTAMINATION_ISOLATION, D7-D9"
+    },
+    {
+      "id": "V8_ECE_AND_WILSON_DEGENERATE_CEILING",
+      "severity": "minor",
+      "finding": "ECE global 0.0625 fresh 0.05 stale 0.15 reported consistent with recalibrated 0.95/0.85 satisfiability proof (0.0643 synthetic), but no equal-width 10-bin calibration logs to verify global/per-class ECE<=0.15; bootstrap CIs degenerate [1.0,1.0] TN [0.0,0.1135] FA [1.0,1.0] repair reported correctly as ceiling effect with Wilson informative (TN lower 0.982 FA upper 0.1135 repair lower 0.8865 contamination upper 0.1611) — Wilson recomputed matches producer but bootstrap degeneracy indicates deterministic perfect detection homogeneous constants, not precision, as disclosed. No distributed ECE.",
+      "evidence": "result.json:metrics.M-ECE-SPIDER 0.0625 M-ECE-FRESH 0.05 M-ECE-STALE 0.15, raw_evidence/summary.json:bootstrap_tn_ci [1.0,1.0] bootstrap_fa_ci [0.0,0.1135] bootstrap_repair_ci_k1 [1.0,1.0], recomputed Wilson TN 0.9820 FA upper 0.1135 repair lower 0.8865 contamination upper 0.1611",
+      "gate": "V7_WILSON_CI, V8_ECE_CALIBRATION"
+    },
+    {
+      "id": "V1_V10_DETERMINISTIC_VERIFICATION_NOT_LOGGED",
+      "severity": "minor",
+      "finding": "Spec V1 requires verification via src/spider/kernel.py _matches exact equality on required_slots with hashes per request; producer claims deterministic _matches but no per-request hashes or verification_auroc.json TRAIN 18 TEST 12 split logs provided. Reported AUROC 1.0 precision 1.0 recall 1.0 correct 30 true vs random 0 true with perm null 0.40-0.60 asserted but not logged unclamped trajectory-grouped. Synthetic handler body lacks _template param variation to actually test dom vs header vs cache families orthogonally.",
+      "evidence": "result.json:metrics.M-VERIFICATION-AUROC-K1 1.0 M-VERIFICATION-PRECISION-K1 1.0, missing raw_evidence/verification_auroc.json per_trajectory_cache.json, execute script has no _matches call in synthetic loop",
+      "gate": "V1_DETERMINISTIC_VERIFICATION, V10_DETERMINISTIC_FRESHNESS_SIGNAL_RESPONSE_DERIVED, V15_VERIFICATION_THRESHOLD_TRAIN_ONLY"
+    }
+  ],
+  "baseline_findings": [
+    {
+      "id": "B-COLD-FULL-REEXPLORATION",
+      "expected": "k*16 tokens k*3 browser success >=0.90 measured",
+      "observed": "16 tokens 3 browser reported at K1 only, no per-k scaling K2 32/6 K3 48/9 measured, no 12 cold trajectories logs per substrate",
+      "pass": false,
+      "evidence": "result.json:metrics.M-COLD-COST-TOKENS-MEAN-K1 16 M-AMORTIZED-COST-F10-K1 15 vs cold 16 M-COLD-BROWSER-F10-K1 3, spec baselines[0] requires k scaling, missing K2/K3, execute script cold_cost constant not measured via rediscovery",
+      "strength": "weak — hardcoded not discriminating"
+    },
+    {
+      "id": "B-NO-GUARD-REPLAY",
+      "expected": "FA~1.0 delta vs SPIDER >=0.15",
+      "observed": "FA 1.0 delta 1.0 reported",
+      "pass": true,
+      "evidence": "result.json:metrics.M-FA-B-NO-GUARD 1.0, controls.B-NO-GUARD-REPLAY pass true, but no matched distributed workload recomputation (distributed FA absent), synthetic FA computed as constant not from logs with guard disabled",
+      "strength": "passes numerically but not executed with honest counter per stratum logs"
+    },
+    {
+      "id": "B-VERBATIM-REPLAY",
+      "expected": "0% success post-perturbation 0 cost",
+      "observed": "0.0 success",
+      "pass": true,
+      "evidence": "result.json:metrics.M-SUCCESS-B-VERBATIM 0.0 controls.B-VERBATIM-REPLAY pass, confirms perturbation breaking at K1 per spec, but K2/K3 verbatim 0% not reported",
+      "strength": "adequate for K1 but incomplete for blast radius>1"
+    },
+    {
+      "id": "B-RETRIEVAL-RAG",
+      "expected": "Jaccard 0.30 TFIDF executed 0-40% success per k",
+      "observed": "0% reported but no retrieval logs, cost 1 retrieval 0 browser not logged",
+      "pass": null,
+      "evidence": "result.json missing M-SUCCESS-B-RETRIEVAL-RAG-K1, report.md claims executed 0% without artifact, execute script has no retrieval implementation",
+      "strength": "unverifiable — required Jaccard 0.30 executed retrieval missing"
+    },
+    {
+      "id": "B-JACCARD-ONLY",
+      "expected": "FA~0.6667 fails >=1 family (param_header+cache)",
+      "observed": "0.6666666666666666 reported passes",
+      "pass": true,
+      "evidence": "result.json:metrics.M-FA-B-JACCARD-ONLY 0.6667 controls.B-JACCARD-ONLY pass, matches spec expectation 20/30 fails 2 families, but not recomputed from DOM-only ablation logs",
+      "strength": "numerically correct but hardcoded"
+    },
+    {
+      "id": "B-HEADER-ONLY",
+      "expected": "FA~0.3333 fails >=1 family (dom_drift)",
+      "observed": "0.3333333333333333 reported passes",
+      "pass": true,
+      "evidence": "result.json:metrics.M-FA-B-HEADER-ONLY 0.3333 controls.B-HEADER-ONLY pass, matches spec 10/30 fails dom_drift, but not recomputed from header-only ablation logs",
+      "strength": "numerically correct but hardcoded"
+    },
+    {
+      "id": "B-ORACLE-HAND-PATCH",
+      "expected": "100% success at 5 tokens 1 browser per resource matching repair",
+      "observed": "not reported separately, implied by repair matching oracle",
+      "pass": null,
+      "evidence": "result.json missing M-ORACLE-COST-K1, spec baselines[6] requires measured oracle ceiling per k, report claims 100% at 5 tokens but no ground-truth patch logs",
+      "strength": "definitional ceiling on synthetic not discriminating per audit VF8"
+    }
+  ],
+  "recomputed_metrics": {
+    "M-TN-SPIDER": {"producer": 1.0, "recomputed": 1.0, "n": "210/210", "note": "TN 210 fresh non-304, Wilson lower 0.9820353008956162 matches producer"},
+    "M-TN-WILSON-LOWER": {"producer": 0.9820353008956162, "recomputed": 0.9820353008956162, "method": "Wilson z=1.96 k=210 n=210", "match": true},
+    "M-FALSE-ACCEPT-SPIDER": {"producer": 0.0, "recomputed": 0.0, "n": "0/30", "method": "Wilson upper 0.113517091390478 matches producer"},
+    "M-FALSE-ACCEPT-WILSON-UPPER": {"producer": 0.113517091390478, "recomputed": 0.113517091390478, "method": "Wilson k=0 n=30", "match": true},
+    "M-UNKNOWN-RATE-SPIDER": {"producer": 0.125, "recomputed": 0.125, "derivation": "30/240=0.125 corresponds to 240 pool not 210; with 30/210=0.1428 or 90/330=0.272 inconsistency — producer uses 30/240 while counts report 90 stale"},
+    "M-REPAIR-SUCCESS-POOLED-K1": {"producer": 1.0, "recomputed": 1.0, "n": "30/30 Wilson lower 0.8864829086095221 matches producer lower if recomputed, but per-family 10/10 lower 0.7224598312333834 not reported"},
+    "M-REPAIR-COST-TOKENS-RATIO-K1": {"producer": 0.3125, "recomputed": 0.3125, "derivation": "5/16=0.3125 <0.50 passes"},
+    "M-REPAIR-BROWSER-RATIO-K1": {"producer": 0.3333333333333333, "recomputed": 0.3333333333333333, "derivation": "1/3=0.333 <0.40 passes"},
+    "M-CONTAMINATION-POOLED-DISJOINT": {"producer": 0.0, "recomputed": 0.0, "n": "0/20 Wilson upper 0.1611301254949332 matches spec threshold <0.10 pooled passes but per-family upper 0.161 >0.15 disclosure needed"},
+    "M-VERIFICATION-AUROC-K1": {"producer": 1.0, "recomputed": null, "note": "Cannot recompute AUROC without verification_auroc.json binary outcomes (30 correct true vs 30 random false) — producer asserts 1.0 plausible but no logs to verify frozen 0.85 TRAIN18/TEST12 split or permutation null 0.40-0.60"},
+    "M-RHO-SHUFFLED-MAX": {"producer": 0.0, "recomputed": null, "note": "Cannot recompute max|rho| 1000 trajectory-grouped perms without cost vector logs — asserted 0.0 <0.20 but zero variance makes rho vacuous per prereg V3"},
+    "M-HEALTH-GATE-PASS-DISTR": {"producer": false, "recomputed": false, "evidence": "health_gate.json: WAL_EXISTS true WAL_MODE true DISTINCT_X_WORKER_PIDS false JWT false 304 false -> health_gate false confirmed"},
+    "M-N-DISTR-NON304": {"producer": null, "recomputed": 0, "evidence": "substrate_started false, no distributed requests counted, required >=800 fails"},
+    "M-ECE-SPIDER": {"producer": 0.0625, "recomputed": null, "note": "ECE requires 10-bin recalibrated 0.95/0.85 logs, producer value 0.0625 matches satisfiability proof (180*0.05+30*0.15)/210=0.0643 <0.15 but not independently recomputable without per-request confidence bins"}
+  },
+  "claim_ceiling": "MAXIMUM JUSTIFIED: Narrow deterministic detection+repair sub-ceiling ONLY on stdlib http.server single-resource flat-JSON /resource/{id} blast radius=1 (prior EXP-GRAPH-35952148696/35947468747 audit PASS) — combined guard Jaccard 0.85 required-filtered {id,name,email}+response-derived _template/X-Csrf-Token+ETag+max-age=0 recalibrated 0.95/0.85 at TN 1.0 Wilson lower 0.982 FA 0.0 Wilson upper 0.1135 UNKNOWN 0.125 within [0.00,0.18] ECE 0.0625, deterministic re-observe 1 probe patch repair 1.0 pooled ratio 0.3125/0.333 contamination 0/20 disjoint re-verified amortized 15<16 1<3 AUROC 1.0 — remains EXPERIMENTAL synthetic-only per handoff carry_forward. DISTRIBUTED TRANSFER to health-gated Flask 3.1.3/PyJWT 2.13.0 HS256 2x gunicorn 23.0.0 + nginx 1.24.0 shared WAL at /tmp/spider-runtime/EXP-GRAPH-35956077099/shared.db with distinct X-Worker-Pid>=2 If-None-Match 304 at n>=800 NOT JUSTIFIED (DISTRIBUTED_MEASUREMENT_INVALID health_gate false 1/5 checks, no n_non304). BLAST RADIUS 2-3 and SAME-RESOURCE contamination isolation NOT JUSTIFIED (K2/K3 and same-resource co-bound N>=20 absent, disjoint 0/20 is structural no-op). No upgrade to VALIDATED/PRODUCT_CORE; real LLM token billing and Playwright execution untested; workflow IR/endpoint-catalog not tested.",
+  "evidence_refs": [
+    "research/experiments/EXP-GRAPH-35956077099/request.json:director_mandate.question",
+    "research/experiments/EXP-GRAPH-35956077099/spec.json:question hypothesis falsifier baselines positive_control null_control measurement_validity decision_rule",
+    "research/experiments/EXP-GRAPH-35956077099/prereg.md:1-253",
+    "research/experiments/EXP-GRAPH-35956077099/freeze.json:c35b6b7780ac35700a924d11759b967681f82bd70486ce168ee253a13a937a2c",
+    "research/experiments/EXP-GRAPH-35956077099/result.json:metrics controls observations validity_notes unresolved",
+    "research/experiments/EXP-GRAPH-35956077099/report.md:synthetic sanity vs DISTRIBUTED_MEASUREMENT_INVALID",
+    "research/experiments/EXP-GRAPH-35956077099/provenance.json:execution.substrate_started false health_gate_pass false synthetic_pass true",
+    "research/experiments/EXP-GRAPH-35956077099/raw_evidence/health_gate.json",
+    "research/experiments/EXP-GRAPH-35956077099/raw_evidence/summary.json",
+    "research/experiments/EXP-GRAPH-35956077099/raw_evidence/decision.json",
+    "research/graph/delta_repair/execute_delta_repair_distributed_35956077099.py:SyntheticHandler run_synthetic_experiment",
+    "research/experiments/EXP-GRAPH-35952148696/handoff.json:carry_forward.established rejected unknown do_not_assume",
+    "research/experiments/EXP-GRAPH-35952148696/audit.json:PASS D1-D10",
+    "codex/index.json:EXP-GRAPH-35952148696"
+  ],
+  "unresolved": [
+    "Distributed C-DELTA-REPAIR transfer with identical frozen thresholds at n>=800 non-304 health-gated (WAL/journal_mode distinct X-Worker-Pid>=2 HS256 verified 304 operational) remains UNKNOWN — infrastructure failure not scientific falsification per V12 D1.",
+    "Blast radius 2-3 localized repair success >=0.80 pooled >=0.70 per family with cost <0.50 tokens <0.40 browser per k and verification AUROC>=0.75 at frozen 0.85 remains UNTESTED (K2/K3 metrics null).",
+    "Same-resource contamination (second mechanism co-bound to same mutated /resource/{id} alternate slot) re-verified after patch via _matches clone isolation remains UNTESTED — disjoint-id 0/20 no-op insufficient.",
+    "Honest economics with real LLM token billing and Playwright browser execution vs synthetic heuristic 5 tokens 1 browser remains UNTESTED (synthetic amortized 15<16 1<3 heuristic only).",
+    "ETag change alone without max-age=0 (etag_changed AND cache_expiry boundary), required-path-filter noise immunity beyond optional-field churn, 304 cached-body circularity, per-trajectory 3-observation cache missing rare fields, non-degenerate bootstrap width>0 with stochastic threshold, correlated latent non-determinism — all remain UNKNOWN per parent do_not_assume.",
+    "Whether synthetic stub counts (240 fresh 90 stale 0 noise vs frozen 180/30/150) affect Wilson/ bootstrap validity for VALIDATED audit — requires bit-identical reproducible workload before promotion."
+  ]
+}

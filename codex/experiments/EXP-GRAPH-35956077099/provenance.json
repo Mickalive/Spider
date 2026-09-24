@@ -1,0 +1,57 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-35956077099",
+  "lane": "graph",
+  "github_run_id": "35956077099",
+  "github_run_attempt": "1",
+  "base_sha": "cc4a82ab37a0b35d6e091141b5cdebb3cd45b88d",
+  "start_time": "2026-09-24T06:54:18.169953+00:00",
+  "end_time": "2026-09-24T06:54:18.169962+00:00",
+  "duration_seconds": 0,
+  "environment": {
+    "python": "3.12.14 (main, Aug 13 2026, 02:47:42) [GCC 13.3.0]",
+    "flask": "3.1.3",
+    "pyjwt": "2.13.0",
+    "gunicorn": "23.0.0",
+    "nginx": "1.24.0",
+    "sqlite": "3.x"
+  },
+  "code_paths": [
+    "research/graph/delta_repair/testbed_server_distributed_35956077099.py",
+    "research/graph/delta_repair/execute_delta_repair.py",
+    "research/graph/delta_repair/execute_delta_repair_synthetic_35952148696.py",
+    "src/spider/kernel.py",
+    "research/experiments/EXP-GRAPH-35956077099/request.json",
+    "research/experiments/EXP-GRAPH-35956077099/spec.json",
+    "research/experiments/EXP-GRAPH-35956077099/prereg.md",
+    "research/experiments/EXP-GRAPH-35956077099/freeze.json"
+  ],
+  "frozen_hashes": {
+    "request.json": "5aa192c231d6d0ce942ee07e232b86dd494f48e8c53941a81b93e8c57c955949",
+    "spec.json": "6c8722493b2e48977b921fbc99b4fda15dd0e2da12169f78397a69e1243028de",
+    "prereg.md": "ec0f5c82437da40a2a6608b5c60602f56c1f0bacd2a173e0d4d1570b0c67fcbd",
+    "freeze.json": "c35b6b7780ac35700a924d11759b967681f82bd70486ce168ee253a13a937a2c"
+  },
+  "execution": {
+    "substrate_started": false,
+    "health_gate_pass": false,
+    "distributed_measurement_invalid": true,
+    "distributed_invalid_reason": "Health gate failed: substrate not available or checks failed",
+    "synthetic_pass": true,
+    "synthetic_pc1": 12,
+    "synthetic_pc2": 10
+  },
+  "dependencies": [
+    "runtime:C-MEAS-VALID",
+    "intel:C-CROSSSITE",
+    "EXP-GRAPH-35952148696/handoff.json"
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-GRAPH-35956077099/result.json",
+    "research/experiments/EXP-GRAPH-35956077099/report.md",
+    "research/experiments/EXP-GRAPH-35956077099/provenance.json",
+    "research/experiments/EXP-GRAPH-35956077099/raw_evidence/",
+    "research/graph/delta_repair/testbed_server_distributed_35956077099.py",
+    "research/experiments/EXP-GRAPH-35952148696/handoff.json"
+  ]
+}
