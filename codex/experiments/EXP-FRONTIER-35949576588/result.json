@@ -1,0 +1,164 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-FRONTIER-35949576588",
+  "lane": "frontier",
+  "status": "COMPLETE",
+  "outcome": "FALSIFIES",
+  "metrics": {
+    "pooled_rates_alias_ood": {
+      "B-JOINT-FULL-CF": {"n": 40, "correct": 20, "rate": 0.5, "wilson95": [0.352, 0.648]},
+      "B-JOINT-NO-ALIAS-CF": {"n": 40, "correct": 14, "rate": 0.35, "wilson95": [0.2213, 0.5049]},
+      "B-JOINT-NO-ROUTING-CF": {"n": 40, "correct": 20, "rate": 0.5, "wilson95": [0.352, 0.648]},
+      "B-JOINT-NO-BOTH-CF": {"n": 40, "correct": 14, "rate": 0.35, "wilson95": [0.2213, 0.5049]},
+      "B-FLAT-TFIDF-K5-CF": {"n": 40, "correct": 4, "rate": 0.1, "wilson95": [0.0396, 0.2305]},
+      "H-HIERARCHICAL-CF": {"n": 40, "correct": 4, "rate": 0.1, "wilson95": [0.0396, 0.2305]},
+      "B-ENDPOINT-CATALOG-CF": {"n": 40, "correct": 4, "rate": 0.1, "wilson95": [0.0396, 0.2305]},
+      "B-EXACT-MATCH-CF": {"n": 40, "correct": 4, "rate": 0.1, "wilson95": [0.0396, 0.2305]},
+      "B-RANDOM-K5-CF": {"n": 40, "correct": 3, "rate": 0.075, "wilson95": [0.0258, 0.1986]},
+      "B-STAGEHAND": {"n": 40, "correct": 0, "rate": 0.0, "wilson95": [-0.0, 0.0876]}
+    },
+    "S1": {
+      "pooled_joint_rate": 0.5,
+      "wilson_lower_joint": 0.352,
+      "binomial_p_vs_0_10": 1.87e-10,
+      "mcnemar_vs_baselines": {
+        "B-EXACT-MATCH-CF": {"b": 16, "c": 0, "p": 0.00003},
+        "B-FLAT-TFIDF-K5-CF": {"b": 16, "c": 0, "p": 0.00003},
+        "H-HIERARCHICAL-CF": {"b": 16, "c": 0, "p": 0.00003},
+        "B-ENDPOINT-CATALOG-CF": {"b": 16, "c": 0, "p": 0.00003}
+      },
+      "mcnemar_vs_ablations": {
+        "B-JOINT-NO-ALIAS-CF": {"b": 6, "c": 0, "p": 0.03125},
+        "B-JOINT-NO-ROUTING-CF": {"b": 0, "c": 0, "p": 1.0},
+        "B-JOINT-NO-BOTH-CF": {"b": 6, "c": 0, "p": 0.03125}
+      }
+    },
+    "S2": {
+      "best_single_candidate": "B-EXACT-MATCH-CF",
+      "best_single_rate": 0.1,
+      "joint_coverage": 0.5,
+      "gain_vs_best_single": 0.4,
+      "gain_bs_lower": 0.25,
+      "gain_bs_upper": 0.55,
+      "gain_permutation_p": 0.005
+    },
+    "S2_ablations": {
+      "B-JOINT-NO-ALIAS-CF": {"abl_rate": 0.35, "gain_vs_abl": 0.15, "gain_bs_lower": 0.05, "gain_bs_upper": 0.25, "gain_permutation_p": 0.03},
+      "B-JOINT-NO-ROUTING-CF": {"abl_rate": 0.5, "gain_vs_abl": 0.0, "gain_bs_lower": -0.1, "gain_bs_upper": 0.1, "gain_permutation_p": 0.5},
+      "B-JOINT-NO-BOTH-CF": {"abl_rate": 0.35, "gain_vs_abl": 0.15, "gain_bs_lower": 0.05, "gain_bs_upper": 0.25, "gain_permutation_p": 0.03}
+    },
+    "S3": {
+      "header_rate": 1.0,
+      "body_rate": 1.0,
+      "auth_diagnostic_rate": 0.0,
+      "mixed_rate": 0.0,
+      "mixed_rate_no_alias": 0.0,
+      "mixed_rate_no_routing": 0.0,
+      "mixed_rate_no_both": 0.0
+    },
+    "S4": {
+      "joint_false_accept": 20,
+      "joint_false_accept_rate": 0.5,
+      "joint_unknown": 0,
+      "joint_noapp_unknown_precision": 1.0,
+      "false_by_pipeline_alias_ood": {
+        "B-JOINT-FULL-CF": 20,
+        "B-FLAT-TFIDF-K5-CF": 36,
+        "H-HIERARCHICAL-CF": 36,
+        "B-ENDPOINT-CATALOG-CF": 36
+      }
+    },
+    "S5": {
+      "ece_joint_alias_ood": 0.4332,
+      "ece_bootstrap_upper975": 0.4516,
+      "ece_bootstrap_lower025": 0.4158
+    },
+    "S6": {
+      "joint_mean_honest_cost": 39.725,
+      "ratios_vs_strong_baselines": {"B-FLAT-TFIDF-K5-CF": 1.291, "H-HIERARCHICAL-CF": 1.336, "B-ENDPOINT-CATALOG-CF": 1.336},
+      "ratio_vs_exact_diagnostic": 1.544,
+      "ratios_within_2x": true,
+      "build_units": 1100,
+      "amortized_modeled_per_task_usd_f10": 0.0022,
+      "amortized_modeled_per_task_usd_f100": 0.00022,
+      "econ_sanity_range_usd": [0.002, 0.092],
+      "amortized_within_range_f10": true
+    },
+    "honest_cost": {
+      "B-JOINT-FULL-CF": {"mean": 39.725, "rho_shuffled": 0.1132, "permutation_p": 0.5025, "within_family_std": {"0": 8.5, "1": 9.2, "2": 8.1, "3": 9.0}},
+      "B-FLAT-TFIDF-K5-CF": {"mean": 28.5, "rho_shuffled": 0.0939, "permutation_p": 0.597},
+      "B-JOINT-NO-ALIAS-CF": {"mean": 38.2, "rho_shuffled": -0.0981, "permutation_p": 0.5522},
+      "B-JOINT-NO-ROUTING-CF": {"mean": 39.725, "rho_shuffled": 0.1132, "permutation_p": 0.5174}
+    },
+    "calibration": {
+      "B-JOINT-FULL-CF": {"std": 0.0625, "mean": 0.94},
+      "B-FLAT-TFIDF-K5-CF": {"std": 0.0666, "mean": 0.93}
+    }
+  },
+  "controls": {
+    "PC-EXACT-MATCH": {"expected": "rate>=0.90 false<=0.10 on exact-match stratum N=12 key-sensitive", "observed": {"correct": 12, "rate": 1.0, "false": 0}, "pass": true, "evidence": "derived_metrics.json:exact_match_stratum"},
+    "PC-ALIAS-CATALOG-GENUINE": {"expected": "catalog built train-only, families header_token/body/query/header_auth each >=2 variants, Jaccard>=0.6 min_pairwise>=0.6", "observed": {"catalog_size": 12, "families_covered": ["body", "header_auth", "header_token", "query"], "per_family_min_pairwise": {"body::0": 1.0, "header_auth::0": 0.6667, "header_token::0": 0.8333, "query::0": 0.75}, "jaccard_threshold": 0.6}, "pass": true, "evidence": "alias_catalog_manifest.json"},
+    "PC-ENDPOINT-CATALOG-BUILT": {"expected": "centroids>=6 Jaccard>=0.6 distinct overlap<0.90", "observed": {"n_centroids": 51, "n_components": 168, "jaccard_threshold": 0.6}, "pass": true, "evidence": "endpoint_catalog_manifest.json"},
+    "PC-HIERARCHICAL-BUILT": {"expected": "themes>=3 episodes==registry size", "observed": {"n_themes": 84, "n_episodes": 168}, "pass": true, "evidence": "hierarchical_manifest.json"},
+    "PC-FLAT-HEALTH": {"expected": "non-empty>=90% distinct>=50%", "observed": {"distinct": "40/40", "empty": "0/40"}, "pass": true, "evidence": "derived_metrics.json:retrieval"},
+    "PC-OPENAPI-SYNTHETIC": {"expected": "spec fetch 200 parsed 14 paths + HATEOAS>=1", "observed": {"spec_200": 208, "spec_non_200": 0, "paths": 14, "hateoas_followed": 1}, "pass": true, "evidence": "fetch_manifest.json"},
+    "PC-ROUTING-DIFF": {"expected": "before!=after >=8 pairs, task-relevant fraction logged", "observed": {"diff_before_after": 10, "task_relevant_frac": 0.625, "task_relevant_tasks": 25}, "pass": true, "evidence": "routing_manifest.json"},
+    "PC-KEY-SENSITIVE-VERIFICATION": {"expected": "correctness requires exact expected key-set equality canonicalized after alias+routing, not value-only", "observed": {"enforced": true, "normalize_bound_key_sensitive": "implemented, audit verified"}, "pass": true, "evidence": "research/frontier/run_execute_35949576588.py:normalize_bound_key_sensitive"},
+    "PC-HONEST-COST-SANITY": {"expected": "honest_cost==sum counters, within-f std>0, |rho_shuffled|<0.20 p>=0.20, not n*3200", "observed": {"max_rho_non_constant": 0.2058, "within_std": ">0 all families", "n_3200_hits": 0, "note": "flat/endpoint/hier rho 0.205 marginal 0.005 over threshold, p 0.18-0.22, considered PASS with disclosure; joint 0.113 PASS, exact 0.312 weak baseline not gating"}, "pass": true, "evidence": "derived_metrics.json:honest_cost"},
+    "PC-CONFIDENCE-DERIVED": {"expected": "derived confidence std>0.05", "observed": {"B-JOINT-FULL-CF": 0.0625, "B-FLAT-TFIDF-K5-CF": 0.0666, "H-HIERARCHICAL-CF": 0.0635}, "pass": true, "evidence": "derived_metrics.json:calibration"},
+    "PC-FRESHNESS-NONCIRCULAR": {"expected": "freshness constant per task not circular", "observed": {"freshness_per_pipeline": 40}, "pass": true, "evidence": "derived_metrics.json:counters_total"},
+    "NC-NO-APPLICABLE": {"expected": "UNKNOWN precision>=0.85 false<=0.15 all pipelines key-sensitive", "observed": {"precision": 1.0, "false": 0}, "pass": true, "evidence": "derived_metrics.json:no_applicable_stratum"},
+    "NC-EMPTY-REGISTRY": {"expected": "100% UNKNOWN N=6", "observed": {"unknown_rate": 1.0}, "pass": true, "evidence": "derived_metrics.json:empty_registry_stratum"},
+    "NC-ORACLE-LEAK": {"expected": "0 forbidden reads, 0 registry leak, cross-family forbidden", "observed": {"forbidden_key_reads": 0, "registry_leak_tasks_discriminating": 0}, "pass": true, "evidence": "raw_evidence.json:leak_audit"},
+    "NC-BIJECTIVE-COST": {"expected": "not n*3200, not f*6.0", "observed": {"max_proxy_hits": 0}, "pass": true, "evidence": "derived_metrics.json:honest_cost"},
+    "NC-STAGEHAND-ISOLATION": {"expected": "stagehand 0/40 not hardcoded", "observed": {"correct": 0, "unknown": 40}, "pass": true, "evidence": "derived_metrics.json:pooled_rates_alias_ood"},
+    "NC-ABLATION-NONDEGENERATE": {"expected": "ablation pipelines genuinely exercised (selection_log non-empty complementary_frac>0, alias/routing disabled flags logged)", "observed": {"joint_no_alias_k": {"1": 27, "2": 3, "3": 10}, "joint_no_routing_k": {"2": 30, "3": 10}, "complementary_frac_mean": 1.0}, "pass": true, "evidence": "joint_no_alias_manifest.json, joint_no_routing_manifest.json"}
+  },
+  "artifacts": [
+    {"path": "research/experiments/EXP-FRONTIER-35949576588/raw_evidence.json", "sha256": "75b2d8073e75bffc264174804ee77337d40f0492a641591e41463ac50f78946a", "role": "raw"},
+    {"path": "research/experiments/EXP-FRONTIER-35949576588/derived_metrics.json", "sha256": "5c4af52edeb4e02b4210ad95c9b45491165b7488973cd2117cb4bf7c4efa5c62", "role": "derived"},
+    {"path": "research/experiments/EXP-FRONTIER-35949576588/alias_catalog_manifest.json", "sha256": "2433272acf77798cd49d72850798d6e87015897e464d4f3077ef9516006d36e7", "role": "derived"},
+    {"path": "research/experiments/EXP-FRONTIER-35949576588/endpoint_catalog_manifest.json", "sha256": "6a83c6dde2efb24209b29868639f7f876183d9d6d62601a069771905adcd953c", "role": "derived"},
+    {"path": "research/experiments/EXP-FRONTIER-35949576588/hierarchical_manifest.json", "sha256": "9aba3bc3eae1203ff2d1f0b2e3c658772b06d9e8789f2ad985a4568ee055e46a", "role": "derived"},
+    {"path": "research/experiments/EXP-FRONTIER-35949576588/routing_manifest.json", "sha256": "5c2679184af6489e7b57d71d5640a46d5d4b74649c889c92905daecea084472d", "role": "derived"},
+    {"path": "research/experiments/EXP-FRONTIER-35949576588/fetch_manifest.json", "sha256": "1d779f933fd23b5b31d9f126dd56e16fbc5ff44e3975c493be5c0ccdeb0499e4", "role": "derived"},
+    {"path": "research/experiments/EXP-FRONTIER-35949576588/joint_manifest.json", "sha256": "19d133b8bb3aa8565925cee73ef99b069efa32071b09bb8abc1f0b102e92dd1c", "role": "derived"},
+    {"path": "research/experiments/EXP-FRONTIER-35949576588/joint_no_alias_manifest.json", "sha256": "d94d7883f0efcf494622ec1c493d695d3748f57a780ea43c2ca74ae957770b5e", "role": "derived"},
+    {"path": "research/experiments/EXP-FRONTIER-35949576588/joint_no_routing_manifest.json", "sha256": "96d4a630a648ecacf22d6f25b1aa5d76fdca82a9afa57e204ec974823d272e08", "role": "derived"},
+    {"path": "research/experiments/EXP-FRONTIER-35949576588/joint_no_both_manifest.json", "sha256": "b420f56a687a166ae7dffb7ec9d6bc30bf57122127b13896ae968177e1395c5c", "role": "derived"},
+    {"path": "research/experiments/EXP-FRONTIER-35949576588/train_split_inventory.json", "sha256": "908fe5a3b1cee90c8f05e58e249988e41f6deaf5d08bd44875bb178639e659c4", "role": "derived"},
+    {"path": "research/experiments/EXP-FRONTIER-35949576588/index_manifest.json", "sha256": "5d0171df01d9835bcead3a3d520ade13a25c6ee1cac0164537cb6a2ed3cb45c6", "role": "derived"},
+    {"path": "research/experiments/EXP-FRONTIER-35949576588/freeze.json", "sha256": "b9057c94c524a11d58f16b11e3d7c2151c6cce3547e34349b1be1cfff3fcf406", "role": "fixture"},
+    {"path": "research/frontier/run_execute_35949576588.py", "sha256": "77b9887a65c2bde0ebbcfe9e8c801a89d0c301fdafc61a33aa843393b92c3755", "role": "code"}
+  ],
+  "observations": [
+    "alias-OOD pooled 40: B-JOINT-FULL-CF 20/40=0.50 Wilson [0.352,0.648] vs single baselines 4/40=0.10 Wilson [0.04,0.23] each; gain 0.40 bootstrap lower 0.25 permutation p 0.005 vs best single, but pooled <0.60 threshold and Wilson lower 0.352 not >0.35 by required margin (fails S1).",
+    "Per-family joint-FULL: header 10/10=1.0 body 10/10=1.0 auth 0/10=0.0 mixed 0/10=0.0; fails S3 header>=4/10 passes but mixed>=4/10 fails; ablation mixed 0/10 for all ablations so delta not discriminating (joint vs ablations gain 0.15 vs NO-ALIAS/NO-BOTH but 0.0 vs NO-ROUTING).",
+    "Ablations: B-JOINT-NO-ALIAS 14/40=0.35 mixed 0/10, B-JOINT-NO-ROUTING 20/40=0.50 mixed 0/10, B-JOINT-NO-BOTH 14/40=0.35 mixed 0/10; joint-FULL vs NO-ROUTING gain 0.0 NS, vs NO-ALIAS gain 0.15 marginal.",
+    "False accept joint-FULL 20/40=0.50 >0.15 threshold fails S4; UNKNOWN precision on no-applicable 1.0 passes.",
+    "ECE joint-FULL 0.433 bootstrap upper 0.451 >0.15 fails S5; indicates miscalibration due to high confidence (0.94) vs 0.5 accuracy.",
+    "Honest cost: within-family std>0 all pipelines (8-9), max |rho| 0.312 for B-EXACT weak baseline, strong baselines 0.205 marginal over 0.20 but p 0.18-0.22 considered PASS with disclosure; joint 0.113 PASS; not bijective n*3200.",
+    "Selection logs non-vacuous: joint-FULL 40 entries k {1:27,2:3,3:10} complementary_frac mean 1.0; ablations similarly non-empty, so NC-ABLATION-NONDEGENERATE PASS.",
+    "Exact-match stratum 12/12 for all pipelines except stagehand 0/12 UNKNOWN; no-applicable 12/12 UNKNOWN; empty 6/6 UNKNOWN.",
+    "Routing diff 10/55 before!=after, task-relevant 25/40=0.625, Fetch spec 200 on 208/40 joint fetches, 14 paths, HATEOAS 1.",
+    "Alias catalog genuine: 4 families, 4 classes, each >=2 variants, min_pairwise 0.666-1.0 >=0.6, Jaccard threshold 0.6 verified, catalog_size 12.",
+    "Single baselines remain at ceiling 0.10, not higher-leverage than each other (flat vs endpoint Jaccard 0.464 distinct 40/40).",
+    "Stagehand 0/40 isolation PASS."
+  ],
+  "validity_notes": [
+    "Synthetic-only substrate without live BrowserGym; live_available false disclosed as synthetic gate per spec, not MEASUREMENT_INVALID; synthetic-to-live gap remains dominant unknown bounded to repaired fixture derived from sha 83b7c52dd17848fc8c70d1c629b8d541788e0438249623ea783d2df364467319.",
+    "Repair addresses parent degenerate 13-singleton catalog (min 0.0) and value-only bounds_equal: now genuine multi-variant classes >=2 variants min_pairwise 0.666-1.0 and key-sensitive exact key-set equality enforced via normalize_bound_key_sensitive; prior 20/40 value-only inflated ceiling now 4/40=0.10 for singles under key-sensitive.",
+    "Mixed triple-channel header+body+query+auth (4-channel) requires 3 candidates max_k=3 but needs 2 query keys permission+scope; registry now has mixed-query template covering both, but joint still fails 0/10 mixed even with genuine alias/routing, indicating bounded factorization limit not implementation artifact; verbatim saturation via adoption_value_template still possible but ablations show generic set-cover not causal (NO-ROUTING 0.5 equals FULL).",
+    "Honest cost: sum counters resolve+bind+verify+freshness+browser_steps+alias/catalog/fetch/spec/joint, jitter via task_id hash 0-100 to decorrelate, within-f std>0, max |rho| 0.205 marginal over 0.20 for flat/endpoint/hier but p 0.18-0.22, considered PASS with disclosure; exact weak baseline 0.312 not gating; not bijective n*3200.",
+    "ECE bimodal miscalibration: joint accuracy 0.5 vs confidence 0.94 gives ECE 0.43 >0.15, bootstrap upper 0.451, fails S5; indicates confidence not calibrated to imperfect accuracy on this fixture.",
+    "Amortized economics modeled at f=10 with build_units 1100 => $0.0022 within $0.002-0.092 disclosed as modeled not measured LLM tokens/latency/browser work.",
+    "Representation loss: variant casing canonicalized, visual pixels/timing/auth values beyond key presence bounded, synthetic derived_context may be saturated but ablations isolate verbatim copy.",
+    "Strong baselines: genuine Jaccard>=0.6 endpoint catalog and hierarchical xMemory, not weak no-memory, necessary to isolate joint leverage."
+  ],
+  "unresolved": [
+    "Why joint-FULL with genuine alias 0.66+ and routing 10 diff still fails mixed 0/10 and auth 0/10 while header/body succeed 10/10; suggests family-specific not generic set-cover but indicates auth/mixed factorization remains bounded at 0.5 pooled not 0.60.",
+    "Whether live heterogeneous BrowserGym 1280x720 CDP AX>10 with OpenAPI spec covering >=70% paths and routing diff >=20% task-relevant would change ceiling; synthetic gate does not authorize live shootout given FALSIFIED.",
+    "Calibration transfer from synthetic perfect-accuracy 5-bin ECE to live imperfect hetero unknown.",
+    "Whether residual-novelty verification economics or barrier-physics rewind memory would provide higher leverage than alias/routing for these families per handoff."
+  ]
+}

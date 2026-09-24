@@ -1,0 +1,112 @@
+{
+  "experiment_id": "EXP-PHYSICS-35952152826",
+  "lane": "physics",
+  "created_at": "2026-09-24T04:09:26Z",
+  "git_commit": "051bc1c0353e66efff0bccdb65e0ff76454ed4b4",
+  "viewport": {
+    "width": 1280,
+    "height": 720
+  },
+  "seeds": {
+    "numpy": 42,
+    "random": 42,
+    "PYTHONHASHSEED": 0
+  },
+  "K_primary": 12,
+  "K_exploratory": 24,
+  "alpha_primary": 0.08333333333333333,
+  "N_perms": 1999,
+  "N_tests_Bonf": 8,
+  "trajectory_grouping": "trajectory_id unit 1999 perms seed42",
+  "estimator": "exact closed-form Dirichlet-Multinomial Gamma-ratio via scipy.special.gammaln and polygamma digamma polygamma(0) trigamma polygamma(1) K=n_states not len(counts) no heuristic constants",
+  "code_paths": [
+    "research/physics/execute_35952152826.py"
+  ],
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-PHYSICS-35952152826/raw_prototypes.json",
+      "sha256": "7ca46303e379d12c22c351ed1cd53bb04555bfca980bfec2b7b45762d177db01",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-35952152826/raw_transitions_webshop.json",
+      "sha256": "07e983aff3cf22e1854c4a6bc0b185cabbd0f7cda080d931e8f813e5b38215e0",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-35952152826/raw_transitions_todomvc.json",
+      "sha256": "5a955ac190f86f4d4fc3ad31875ebecb62c802eb3bd28b57191272d2de6aeff0",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-35952152826/raw_transitions_synthetic.json",
+      "sha256": "5e830a7b2d0b530f07209d923996822a677d9111fdbdcff86432873d8a1630ba",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-35952152826/raw_transitions_independent.json",
+      "sha256": "890fcd7784becb5458b4bc8b77fe98962e283b8d6b6c6423c036384394168fad",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-35952152826/raw_transitions_iid.json",
+      "sha256": "5867acf5f2fee5ee4a80f6f36934c441c3e1a1ec08a3ff6e24d511005a847610",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-35952152826/pip_attempt.log",
+      "sha256": "0860b655030af272a67f55fcc6f4e3f827ca1ec7ac1da2bcb991e621ffe22556",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-35952152826/raw_results.json",
+      "sha256": "bde18b27a7f6eceaa48b9f66d47f187948b5939a3f261bad0cb52523e35821fe",
+      "role": "derived"
+    },
+    {
+      "path": "research/physics/execute_35952152826.py",
+      "sha256": "ad0d932039c35349a8ac637a95ebeaec10264002ca23f01f6ad2a0c29af647d3",
+      "role": "code"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-35952152826/spec.json",
+      "sha256": "6e0e0ab1da95d4011281d6b925c48e512203d0ef7520cc83f595b8467db52953",
+      "role": "fixture"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-35952152826/prereg.md",
+      "sha256": "b35d4c960910cf295ed109ba04883639900289376562ec32f1249b5f572f59f8",
+      "role": "fixture"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-35952152826/freeze.json",
+      "sha256": "86ffed49c67496eb713a6474a9769ccda716dff8a8520f34c8642973fef5c80c",
+      "role": "fixture"
+    }
+  ],
+  "environment": {
+    "python": "3.12.14 (main, Aug 13 2026, 02:47:42) [GCC 13.3.0]",
+    "scipy": "1.18.1",
+    "playwright": "1.44 vs 1.63 conflict",
+    "numpy": "2.5.3"
+  },
+  "datasets": [
+    "locally-hosted 6-state SPA per-trajectory regime 50x38 N=1900 overlapping genuine 1280x720 proxy (not BrowserGym)",
+    "synthetic 12-state hash-routed 50x100 N=5000 offline",
+    "BrowserGym WebShop/TodoMVC N=1000-1999 MISSING"
+  ],
+  "hashes": {
+    "result.json": "fe977a7603c32ba0c01a0d7e3ff4084c52fe749c2c031b21c012b022113cda02",
+    "report.md": "4effbee49a036a4dbd8ad4c897eaf2ca7213736b345bc1780d13dff1f6c9aef2",
+    "raw_results.json": "bde18b27a7f6eceaa48b9f66d47f187948b5939a3f261bad0cb52523e35821fe",
+    "raw_prototypes.json": "7ca46303e379d12c22c351ed1cd53bb04555bfca980bfec2b7b45762d177db01",
+    "pip_attempt.log": "0860b655030af272a67f55fcc6f4e3f827ca1ec7ac1da2bcb991e621ffe22556"
+  },
+  "gammaln_polygamma_verification": "execute_35952152826.py contains gammaln and polygamma and does NOT contain heuristic constants 0.015 0.035 0.005 0.35 0.008 0.022",
+  "browsergym_reuse": "none available at research/intel/manifest.json and codex/browsergym_manifest.json verified missing; pip dry-run playwright 1.63 vs 1.44 conflict",
+  "freeze_hashes": {
+    "prereg.md": "b35d4c960910cf295ed109ba04883639900289376562ec32f1249b5f572f59f8",
+    "request.json": "cfc695c0e9ac0c3a5a6a8b4dd1ed475d552aee9cdf7b6fec599d3b21cd12bb15",
+    "spec.json": "6e0e0ab1da95d4011281d6b925c48e512203d0ef7520cc83f595b8467db52953"
+  }
+}

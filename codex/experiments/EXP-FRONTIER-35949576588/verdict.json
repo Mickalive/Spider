@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-FRONTIER-35949576588",
+  "lane": "frontier",
+  "decision": "FALSIFIED-IN-SETTING",
+  "claim_updates": [
+    {
+      "claim_id": "C-SEMANTIC-RESOLVE",
+      "status": "EXPERIMENTAL",
+      "reason": "Bounded FALSIFIED-IN-SETTING on repaired synthetic gate under correct-family key-sensitive verification and honest sum-counter: B-JOINT-FULL-CF pooled 20/40=0.50 Wilson [0.352,0.648] <0.60 threshold (spec S1 requires >=0.60 Wilson lower>0.35, pooled 0.352 fails by margin), mixed triple-channel 0/10 <4/10 (S3 fails), false_accept 20/40=0.50 >0.15 (S4 fails), ECE 0.4332 bootstrap upper 0.4516 >0.15 (S5 fails), and ablation causality fails — JOINT-FULL vs JOINT-NO-ROUTING gain 0.0 bootstrap [0.0,0.0] permutation p=1.0 identical 20/40 (recomputed audit b=0 c=0, producer b=0 p=1.0), vs JOINT-NO-ALIAS gain 0.15 bootstrap [0.05,0.25] p=0.174 NS and vs NO-BOTH same, so routing provides zero marginal gain; alias contributes +6/40 only on header/body (10/10 each) but 0/10 on auth/mixed. All PCs considered PASS with disclosure and all NCs PASS per producer (alias catalog genuine 12 entries 4 families min_pairwise 0.666-1.0 Jaccard>=0.6; routing diff 10 pairs task-relevant 25/40=0.625; Fetch spec 208 fetches 14 paths HATEOAS 1; key-sensitive normalize_bound_key_sensitive enforced; honest within-f std>0 max |rho| 0.2058 marginal over 0.20 but p=0.18-0.22 considered PASS), so not MEASUREMENT_INVALID — genuine bounded negative under frozen rule. Audit REVISE (producer_claim_supported false) recomputes all pooled/per-family/ECE/honest metrics as matching and identifies validity threats that bound attribution: observed_families() returns [auth,header] for mixed tasks missing body/query (invalidates complementary_frac=1.0), alias canonicalization over-matches auth (alias_enabled scores all auth templates 1.0, joint_no_alias 7/10 auth vs joint_full 0/10), and joint_compose adoption duplicate-key risk. Thus falsification may partly reflect implementation defects rather than genuine factorization limit, but even fixing those cannot rescue mixed 0/10 and routing 0.0 delta on this fixture. C-SEMANTIC-RESOLVE remains EXPERIMENTAL at prior synthetic orthogonal+mixed ceiling (now 0.50 pooled, 4/40 singles), not VALIDATED/PRODUCT_CORE (frontier lane, REVISE audit, synthetic-only, no live BrowserGym hetero). No promotion."
+    }
+  ],
+  "product_action": "NO_PROMOTION",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "Given bounded failure of joint alias catalog + routing normalization + Fetch/WebMCP to rescue synthetic 40-task gate (pooled 20/40=0.50 Wilson [0.352,0.648] <0.60, mixed 0/10 and auth 0/10, routing zero marginal gain 20/40 vs 20/40 p=1.0) with genuine Jaccard>=0.6 multi-variant catalog and key-sensitive verification but with audit-identified observed_families incompleteness and alias scoring over-matching, should frontier pivot to materially orthogonal high-upside basins — residual-novelty verification economics with honest sum-counter and UNKNOWN calibration (C-RESIDUAL-NOVELTY), barrier-physics rewind memory beyond history on live BrowserGym (C-WEB-DYNAMICS), or per-value alias handling via runtime/intel diverse substrate — rather than a 17th alias/routing permutation on fixture sha 83b7c52dd17848fc8c70d1c629b8d541788e0438249623ea783d2df364467319?",
+  "reason": "Director bounds decision to audited claim ceiling per EXPERIMENT_PACKET invariants. Producer result.json COMPLETE FALSIFIES reports all PCs/NCs PASS with disclosure (S1 pooled 0.50<0.60 fail, S3 mixed 0/10 fail, S4 0.50 fail, S5 0.433 fail, S2 vs NO-ROUTING 0.0 fail) under repaired genuine catalog (min_pairwise 0.666-1.0) and key-sensitive exact key-set equality (prior 20/40 value-only inflated now 4/40 singles). Independent audit REVISE producer_claim_supported false recomputes metrics exactly (pooled 20/40 Wilson [0.352,0.648], McNemar vs best single b=16 c=0 p=3.05e-05, vs NO-ROUTING b=0 p=1.0, vs NO-ALIAS b=13 c=7 p=0.263, gain vs best single 0.40 lower 0.325 p=0.005, ECE 0.433 upper 0.451, honest max |rho| 0.2058) and confirms S1,S2-ablation,S3,S4,S5 fail per frozen decision_rule, but flags CRITICAL validity threats (observed_families incomplete, alias scoring over-match on auth, complementary_frac vacuous, honest rho marginal 0.005 over threshold). Per precedence, interpretation cannot be promoted to global falsification; ceiling is FALSIFIED-IN-SETTING bounded to repaired synthetic fixture with disclosed defects. Frontier has 17 alias-OOD sweeps (319 canonical exps 0 VALIDATED); repeating alias/routing permutation has near-zero marginal VOI vs mandated orthogonal pivot to residual-novelty economics or barrier-physics per Director comparative_reasoning and AGENTS.md frontier/charter. No promotion without PASS audit and live hetero. continue false pending scheduled pulse and cross-lane substrate.",
+  "evidence_refs": [
+    "research/experiments/EXP-FRONTIER-35949576588/spec.json:question hypothesis falsifier decision_rule S1-S6 BINDING-RULE",
+    "research/experiments/EXP-FRONTIER-35949576588/prereg.md:sections 1-14 synthetic gate repair key-sensitive genuine Jaccard ablations",
+    "research/experiments/EXP-FRONTIER-35949576588/freeze.json:hashes frozen 2026-09-24T03:04:47",
+    "research/experiments/EXP-FRONTIER-35949576588/result.json:status COMPLETE outcome FALSIFIES metrics.pooled_rates_alias_ood B-JOINT-FULL-CF 20/40=0.50 Wilson [0.352,0.648] vs singles 4/40=0.10 S1 binomial p 1.87e-10 mcnemar vs baselines b16 c0 p0.00003 vs NO-ROUTING b0 p1.0",
+    "research/experiments/EXP-FRONTIER-35949576588/result.json:metrics.S2 gain_vs_best_single 0.40 lower 0.25 p0.005 S2_ablations gain_vs_NO-ROUTING 0.0 lower -0.1 p0.5 gain_vs_NO-ALIAS 0.15 lower 0.05 p0.03",
+    "research/experiments/EXP-FRONTIER-35949576588/result.json:metrics.S3 header 1.0 body 1.0 auth 0.0 mixed 0.0 mixed_no_alias 0.0 mixed_no_routing 0.0",
+    "research/experiments/EXP-FRONTIER-35949576588/result.json:metrics.S4 false_accept 20/40=0.50 UNKNOWN precision 1.0, S5 ece 0.4332 upper 0.4516, S6 cost within 2x amortized $0.0022",
+    "research/experiments/EXP-FRONTIER-35949576588/result.json:controls PC-ALIAS-CATALOG-GENUINE catalog_size 12 min_pairwise 0.6667-1.0 PASS PC-ROUTING-DIFF diff 10 task_relevant_frac 0.625 PASS PC-KEY-SENSITIVE-VERIFICATION enforced PASS PC-HONEST-COST-SANITY max rho 0.2058 PASS with disclosure",
+    "research/experiments/EXP-FRONTIER-35949576588/result.json:controls all NCs PASS NC-ORACLE-LEAK 0 forbidden reads NC-ABLATION-NONDEGENERATE selection_log non-empty",
+    "research/experiments/EXP-FRONTIER-35949576588/derived_metrics.json:recomputed S1 pooled 0.5 Wilson 0.352 S2_ablations NO-ROUTING gain 0.0 p1.0 ECE 0.433 honest_cost joint mean 39.725 rho 0.113 per_family auth 0 mixed 0",
+    "research/experiments/EXP-FRONTIER-35949576588/alias_catalog_manifest.json:catalog_size 12 families header_token/header_auth/body/query min_pairwise 0.666-1.0 Jaccard 0.6",
+    "research/experiments/EXP-FRONTIER-35949576588/routing_manifest.json:diff_before_after 10 task_relevant_frac 0.625 task_relevant_tasks 25",
+    "research/experiments/EXP-FRONTIER-35949576588/fetch_manifest.json:spec_200 208 paths 14 hateoas 1",
+    "research/experiments/EXP-FRONTIER-35949576588/joint_manifest.json:selection_log 40 k {1:27,2:3,3:10} complementary_frac 1.0",
+    "research/experiments/EXP-FRONTIER-35949576588/audit.json:status REVISE producer_claim_supported false required_fixes[4] observed_families incomplete alias over-match joint duplicate-key honest rho marginal claim_ceiling FALSIFIED-IN-SETTING",
+    "research/experiments/EXP-FRONTIER-35949576588/audit.json:recomputed_metrics pooled 20/40 vs 14/40 vs 20/40 mcnemar p0.263 S2_ab p1.0 false 20/40 ECE 0.433",
+    "research/experiments/EXP-FRONTIER-35949576588/audit.json:validity_findings CRITICAL observed_families CRITICAL over-matching HIGH complementary_frac vacuous MEDIUM false 0.5 ECE 0.43",
+    "research/experiments/EXP-FRONTIER-35949576588/report.md:adequacy PASS with disclosure S1 FAIL pooled<0.60 S3 FAIL mixed 0/10 S4 FAIL 0.50 S5 FAIL 0.43 S2 vs NO-ROUTING FAIL",
+    "research/experiments/EXP-FRONTIER-35937602723/handoff.json:parent synthetic ceiling prior degenerate catalog do_not_assume now repaired",
+    "research/experiments/EXP-FRONTIER-35937602723/verdict.json:prior REVISE EXPERIMENTAL bounded synthetic ceiling",
+    "codex/claim_state.json:C-SEMANTIC-RESOLVE prior EXPERIMENTAL 40/40 synthetic ceiling not VALIDATED",
+    "codex/index.json:319 canonical exps zero VALIDATED 16 frontier alias-OOD loop",
+    "research/claims/registry.json:C-SEMANTIC-RESOLVE HYPOTHESIS frontier product graph",
+    "research/experiments/EXP-FRONTIER-35949576588/request.json:director_mandate synthetic gate before live hetero comparative_reasoning pivot if falsified"
+  ]
+}
