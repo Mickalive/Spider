@@ -1,0 +1,201 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-36020884510",
+  "lane": "runtime",
+  "status": "MEASUREMENT_INVALID",
+  "producer_claim_supported": false,
+  "required_fixes": [
+    "FIX-FLASK-IMPORT-PATH (root cause of this abort): wsgi.py at /tmp/spider-runtime/36020884510/wsgi.py contains 'from run_experiment import create_app' but run_experiment.py lives at research/experiments/EXP-RUNTIME-36020884510/run_experiment.py not in BASE_DIR. Adding /tmp/spider-runtime/36020884510 to sys.path does not make run_experiment importable. Gunicorn therefore fails to start (ModuleNotFoundError hidden via DEVNULL). Fix by copying run_experiment.py into BASE_DIR, or changing wsgi import to absolute import with PYTHONPATH including research/experiments/EXP-RUNTIME-36020884510, or using importlib.util.spec_from_file_location. Verify with 'curl http://127.0.0.1:19860/health 200 + X-Worker-Pid' and socket connect retry 30s before nginx start, logging gunicorn stderr not DEVNULL.",
+    "FIX-HEALTH-GATE-AFTER-FLASK-FIX: Once Flask listens, re-verify nginx proxy_pass http://127.0.0.1:19860 without trailing slash, proxy_set_header Host $host, add_header X-Worker-Pid $upstream_http_x_worker_pid always, proxy_cache_key $request_uri. Capture nginx_error.log and per-attempt status/headers (currently truncated) to diagnose header stripping vs proxy failure. Keep 30 attempts with per-attempt diagnostics as implemented.",
+    "FIX-HEADER-ONLY-BODY-DERIVED-KEYS: BODY_DERIVED_KEYS in run_experiment.py:47 is {'content-length','etag','etag-w','content-range'} but frozen spec requires {'content-length','etag','w-etag','range'} lowercased. 'etag-w' != 'w-etag' and 'content-range' != 'range' so W-ETag and Range would not be excluded, violating measurement_validity #2 and prereg #2. Change to {'content-length','etag','w-etag','range'}. Verify via grep that filter excludes those four and preserves Cache-Control/Set-Cookie/Vary.",
+    "FIX-FINGERPRINT-EXCLUDED-HEADERS: _compute_fingerprint via sorted_filtered_json only removes body-derived keys, not EXCLUDED {Date,Server,X-Request-Id,CF-RAY,CF-Cache-Status,X-Cache,Age,X-Worker-Pid}. EXCLUDED headers must be removed before SHA. Compose filter as filtered_headers = {k:v for k,v in headers.items() if k.lower() not in FILTER_OUT_KEYS and k.lower() not in BODY_DERIVED_KEYS} or call filter_headers then headers_no_bodyderived sequentially.",
+    "FIX-HONEST-COST-SYNTHETIC: Phase 3 honest-cost currently synthesizes traj_cost = random randint ops independent of real resolve/bind/verify/freshness/browser_steps from Phase 1. Frozen spec requires honest_cost per trajectory_id = sum(count_resolve+count_bind+count_verify+count_freshness+count_browser_steps) once per real op, integer sums, trajectory-grouped block permutation B=1000. Wire real counters from Phase 1 requests into trajectory aggregates; remove synthetic randint fabrication.",
+    "FIX-FULL-VECTOR-DISCRIMINATION-LOGIC: Phase 4 computes disc_full by comparing fp_full vs fp_body_only on SAME observation (different fingerprint functions), not paired probe discrimination (AvsC body-varying vs AvsE header-varying across two observations). Implement frozen probe sets: body-varying pairs (31B vs 117B bodies, headers identical) and header-varying pairs (31B bodies identical, CC/Set-Cookie differ) via direct 19860 and nginx 19851 and 2x loopback, bootstrap B=1000 width>0 effective>1.",
+    "FIX-HEALTH-GATE-MISSING-LOGIC: _health_gate returns True immediately when worker=='missing' if missing<3 (lines 310-318), incorrectly passing health gate with missing X-Worker-Pid. Change to require X-Worker-Pid present; only return True when header present, continue retrying otherwise, fail after 30 attempts with 0 missing.",
+    "FIX-HS256-SUCCESS-METRIC: hs256_valid_success currently increments on use_valid and status==200 via empty X-Jwt-Payload header decode (lines 474-480), tautologically 0. Implement real jwt.decode check at origin /api/auth-check or validate via /api/profile auth path returning 200 vs 401 based on jwt.decode, and count P(200|valid) correctly.",
+    "FIX-RECOMPUTE-AND-PROVENANCE: After health gate pass, ensure raw_freshness_observations.jsonl contains ~1200 lines with X-Worker-Pid,is_304,header-only Jaccard,body_variant,trajectory_id,honest_cost integer sum, fingerprint fields, and that recomputation of Jaccard/Pearson/CramersV/rho/full-vector bootstrap matches 0 mismatches. Populate artifact sha256 not null and batch_state_log >=10 distinct timestamps.",
+    "PRESERVE-ALREADY-CORRECT CODE: Keep nginx single location / block, proxy_pass without trailing slash, add_header always, $request_uri sticky upstream, factory directory before init_db, wsgi sys.path insert, HS256 len>=32 shared secret, SEED=44 jitter 50-150ms between bursts only not inside honest_cost, greedy brotli->gzip MAX_DEPTH5 without oracle, header-only Jaccard preserving Cache-Control/Set-Cookie/Vary."
+  ],
+  "validity_findings": [
+    {
+      "id": "V-FLASK-NOT-LISTENING-INFRASTRUCTURE",
+      "severity": "high",
+      "finding": "FLASK_NOT_LISTENING is infrastructure failure not scientific falsification. Producer correctly classified status=MEASUREMENT_INVALID outcome=INCONCLUSIVE metrics={} with 0 observations. Gunicorn failed to bind 127.0.0.1:19860 because wsgi.py cannot import run_experiment (wrong sys.path). Socket verification 30x0.5s correctly timed out. Per EXPERIMENT_PACKET.md s1/s9 this is not falsification of H1-SINGLE-NODE-HONESTY-CORRECTED.",
+      "evidence": "result.json validity_notes FLASK_NOT_LISTENING; provenance.json flask_listening_verified false health_gate_verified false n_observations 0; raw_freshness_observations.jsonl 0 lines; run_experiment.py _start_gunicorn wsgi_path /tmp/spider-runtime/36020884510/wsgi.py sys.path.insert Path(__file__).parent plus _verify_flask_listening 30 loops; handoff parent EXP-RUNTIME-36013149664 had flask_listening true with same wsgi pattern but different import path handling"
+    },
+    {
+      "id": "V-FROZEN-INPUTS-IMMUTABLE",
+      "severity": "info",
+      "finding": "Frozen inputs immutable: request.json 5b5b85aa..., spec.json eb0403f0..., prereg.md 370589bb... match freeze.json and provenance freeze_hashes exactly. No post-freeze design drift.",
+      "evidence": "freeze.json hashes; provenance.json freeze_hashes; spec.json claim_ids C-MEAS-VALID"
+    },
+    {
+      "id": "V-NGINX-CONFIG-OK-BUT-INSUFFICIENT",
+      "severity": "info",
+      "finding": "V-NGINX-CONFIG-OK PASS (nginx -t syntax ok, single location /, proxy_pass without trailing slash, add_header X-Worker-Pid always, $request_uri sticky) is correctly reported in result.json controls. However it does not imply proxy forwarding health gate would pass; Flask must listen first. Parent handoff correctly warned that V-FLASK-LISTENING + V-NGINX-CONFIG-OK does not imply health gate pass.",
+      "evidence": "result.json controls V-NGINX-CONFIG-OK pass true; provenance single_nginx_location true nginx_proxy_pass_no_trailing_slash true nginx_add_header_x_worker_pid_always true nginx_request_uri_sticky true"
+    },
+    {
+      "id": "V-EMPTY-RAW-EVIDENCE-NULL-NOT-NEGATIVE",
+      "severity": "info",
+      "finding": "All producer observations are zero-placeholders derived from empty metrics dict (all_metrics.get(...,0)) not measurements: n_non304 0, n_304 0, hs_rate 0.0, scheduling r 0.0, |rho| 0.0, full 0.0. These are null representations correctly terminated before Phase 1. Must not be read as falsification of C1-C4.",
+      "evidence": "result.json observations 15 lines all 0.0; raw_freshness_observations.jsonl 0 lines sha e3b0c442... empty; run_experiment.py _write_outputs all_metrics.get defaults"
+    },
+    {
+      "id": "V-BODY-DERIVED-KEYS-MISMATCH-LATENT",
+      "severity": "high",
+      "finding": "Latent measurement_validity breach: BODY_DERIVED_KEYS = {content-length,etag,etag-w,content-range} mismatches frozen set {content-length,etag,w-etag,range}. Would cause W-ETag and Range to leak into header-only Jaccard even after Flask fix, violating header-only MINUS body-derived validity gate and de-confounded |r|<0.30 requirement. Not yet exercised due to early abort but must be fixed before valid measurement.",
+      "evidence": "run_experiment.py:47 BODY_DERIVED_KEYS definition; prereg.md sec 2 structural MUST be header-only Jaccard on headers_no_bodyderived MINUS {content-length,etag,w-etag,range}; spec measurement_validity #2"
+    },
+    {
+      "id": "V-FINGERPRINT-EXCLUDED-LEAKAGE-LATENT",
+      "severity": "high",
+      "finding": "Latent breach: sorted_filtered_json only removes BODY_DERIVED_KEYS, not EXCLUDED {Date,Server,X-Request-Id,CF-RAY,...}. Date/Server would be included in full-vector fingerprint SHA, conflating fingerprint and violating measurement_validity #2. filter_headers function exists but not composed with headers_no_bodyderived in _compute_fingerprint.",
+      "evidence": "run_experiment.py:192-201 filter_headers vs headers_no_bodyderived vs sorted_filtered_json vs _compute_fingerprint 349-354; spec state representation EXCLUDED set"
+    },
+    {
+      "id": "V-HONEST-COST-FABRICATION-LATENT",
+      "severity": "high",
+      "finding": "Latent breach: honest-cost Phase 3 synthesizes costs via rng.randint and random ops independent of real Phase 1 operation counts. Frozen integer sum counter (resolve+bind+verify+freshness+browser_steps once per real op summed per trajectory_id) never wired to real requests. Would produce artificial |rho_shuffled|~0 and within-f std on synthetic noise, invalidating PC-HONEST-COST-SANITY and NC-COST-SHUFFLED gates.",
+      "evidence": "run_experiment.py Phase 3 lines 589-605 traj_cost synthetic; Phase 1 counters _inc_* defined but _inc calls only in Flask routes not correlated to trajectory_id; spec measurement_validity #3 honest-cost counter validity frozen integer sum mandatory"
+    },
+    {
+      "id": "V-FULL-VECTOR-DISCRIMINATION-TAUTOLOGY-LATENT",
+      "severity": "high",
+      "finding": "Latent breach: Phase 4 discrimination compares fp_full vs fp_body_only on same observation (different functions) not paired probe sets body-varying AvsC and header-varying AvsE across two observations. Would yield vacuous full~1 whenever headers non-empty, not frozen non-vacuous full>0.5 full>max(body,status)+0.05 B=1000 ordering test.",
+      "evidence": "run_experiment.py lines 654-667 fp_full vs fp_body_only on same rec; spec baselines B-FULL-VECTOR vs B-BODY-ONLY vs B-STATUS-ONLY paired probe design"
+    },
+    {
+      "id": "V-HEALTH-GATE-MISSING-HEADER-BUG-LATENT",
+      "severity": "medium",
+      "finding": "Latent bug: _health_gate returns True on first attempt where X-Worker-Pid missing if missing<3, incorrectly passing health gate with 0 missing requirement. Should require header present, not absent.",
+      "evidence": "run_experiment.py:303-321 health_gate missing counter logic"
+    },
+    {
+      "id": "V-CODE-READY-BUT-UNEXERCISED",
+      "severity": "info",
+      "finding": "Code-correct gates already implemented and verified in audit of parent: HS256 len 62 >=32 SHA logged, jwt.decode at origin in /api/auth-check, single nginx location, proxy_pass without trailing slash, factory directory before init_db asserted, wsgi sys.path insert present, greedy MAX_DEPTH5 decompress, SEED=44, jitter between bursts only, header-only Jaccard function structure. These are code-ready but unexercised due to import-path abort.",
+      "evidence": "provenance.json hs256_secret_len 62 hs256_secret_sha256 3fbf808d..., wsgi_sys_path_insert true factory_pattern_wsgi true; run_experiment.py _greedy_decompress, HS256_SECRET len 62, SEED 44"
+    }
+  ],
+  "baseline_findings": [
+    {
+      "id": "B-FULL-VECTOR",
+      "observed": "NOT_EXECUTED",
+      "detail": "0 probe pairs collected; health gate aborted before Phase 4. Latent implementation would be tautological (same-observation comparison) and MEASUREMENT_INVALID even if executed."
+    },
+    {
+      "id": "B-BODY-ONLY",
+      "observed": "NOT_EXECUTED",
+      "detail": "0 observations; no body-only discrimination measured. Code defines _compute_fingerprint with empty headers but not applied to paired body-varying probes."
+    },
+    {
+      "id": "B-STATUS-ONLY",
+      "observed": "NOT_EXECUTED",
+      "detail": "0 observations; status-only 0.0 expectation not tested."
+    },
+    {
+      "id": "B-HEADER-ONLY-JACCARD",
+      "observed": "NOT_EXECUTED",
+      "detail": "0 freshness records; header-only Jaccard MINUS body-derived not measured. Latent BODY_DERIVED_KEYS mismatch would invalidate if executed."
+    },
+    {
+      "id": "B-HEADER-HASH-REJECTED",
+      "observed": "NOT_EXECUTED",
+      "detail": "Rejected surrogate hash(body)%10000 not present in code (correctly excluded) but positive control for filter necessity not exercised; no data to show it fails r>>0.30 as expected."
+    },
+    {
+      "id": "B-COST-SHUFFLED",
+      "observed": "NOT_EXECUTED",
+      "detail": "B=1000 trajectory-block permutation not executed (synthetic Phase 3 gated by health gate). Latent synthetic fabrication would be invalid."
+    },
+    {
+      "id": "B-HEADERS-NO-BODYDERIVED",
+      "observed": "NOT_EXECUTED",
+      "detail": "Isolated header-only signal 0.0 body-only / 1.0 header-only not measured; same latent key mismatch affects this baseline."
+    },
+    {
+      "id": "NC-ORTHOGONALITY-NOISE",
+      "observed": "NOT_EXECUTED",
+      "detail": "Noise-only structural drift FP not measured; 0 observations."
+    },
+    {
+      "id": "NC-COST-SHUFFLED",
+      "observed": "NOT_EXECUTED",
+      "detail": "Block-permuted |rho_shuffled|<0.20 p>=0.20 not measured."
+    },
+    {
+      "id": "NC-BROWSER-SAME-STATE-ANALOG",
+      "observed": "NOT_EXECUTED",
+      "detail": "Same-body same-header resampled 0.0 expectation via direct/nginx not measured; browser provisioning secondary and gated."
+    },
+    {
+      "id": "NC-LOOPBACK-NULL",
+      "observed": "NOT_EXECUTED",
+      "detail": "2x gunicorn+nginx loopback drift 1.0 null FP 0.0 secondary not executed."
+    },
+    {
+      "id": "PC-304-REAL",
+      "observed": "NOT_EXECUTED",
+      "detail": "n_non304 0 stratified 0/400 hs_rate 0.0 per-batch SELECT 0 distinct ts; health gate blocked real If-None-Match/ETag->304 verification."
+    },
+    {
+      "id": "PC-HEADER-ONLY",
+      "observed": "NOT_EXECUTED",
+      "detail": "|r| 0.0 V 0.0 reported as null placeholders not measurements."
+    },
+    {
+      "id": "PC-HONEST-COST-SANITY",
+      "observed": "NOT_EXECUTED",
+      "detail": "|rho_shuffled| 0.0 within-f std 0.0 width 0.0 as placeholders."
+    },
+    {
+      "id": "PC-FULL-VECTOR",
+      "observed": "NOT_EXECUTED",
+      "detail": "full 0.0 body 0.0 status 0.0 placeholders."
+    }
+  ],
+  "recomputed_metrics": {
+    "producer_metrics_match": true,
+    "recompute_note": "No material metrics to recompute: result.json metrics {} and raw_freshness_observations.jsonl 0 lines (empty file sha e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855) are consistent with Phase 0 abort. All zero-valued observations are .get defaults not measurements.",
+    "freshness_n_non304": {"reported": 0, "recomputed": 0, "match": true, "method": "Count is_304==false in raw_freshness_observations.jsonl (0 lines) and provenance n_observations 0"},
+    "freshness_n_304": {"reported": 0, "recomputed": 0, "match": true},
+    "freshness_hs256_valid_success_rate": {"reported": 0.0, "recomputed": 0.0, "match": true, "note": "hs_total 0 so 0.0 placeholder, not tautological measurement"},
+    "freshness_batch_distinct_ts": {"reported": 0, "recomputed": 0, "match": true, "method": "batch_state_log [] length 0 in provenance.json"},
+    "freshness_scheduling_r": {"reported": 0.0, "recomputed": null, "match": true, "note": "No Jaccard pairs (n=0) so Pearson undefined -> reported 0.0 is null placeholder, recomputed as null not 0 correlation"},
+    "honest_rho_shuffled": {"reported": 0.0, "recomputed": null, "match": true, "note": "No trajectories executed, B=1000 not run, 0.0 is placeholder"},
+    "full_vector_discrimination": {"reported": 0.0, "recomputed": 0.0, "match": true, "note": "0 probe pairs, discrimination undefined -> 0 placeholder"},
+    "freeze_hash_check": {"request.json": "5b5b85aa78c00efd86252bca1964cdaff473208a178a1971c962d27ae079e7b8 MATCH", "spec.json": "eb0403f0e81b42948d742a3a64ab1aa4829c17c434fd1532c18333bab062f810 MATCH", "prereg.md": "370589bb2c3dd42ab53946072e14ff3855bf793edb60fc18ec32d6c8e629d6ab MATCH"},
+    "flask_listening_verified": {"reported": false, "recomputed": false, "match": true, "evidence": "provenance flask_listening_verified false health_gate_verified false; result validity_notes FLASK_NOT_LISTENING"},
+    "nginx_config_ok": {"reported": true, "recomputed": true, "match": true, "evidence": "result controls V-NGINX-CONFIG-OK pass true; run_experiment nginx -t syntax ok path /tmp/spider-runtime/36020884510/nginx.conf single location"},
+    "artifact_sha256_null": {"finding": "result.json artifact sha256 fields are null despite files existing; provenance reports hashes for freeze only, not artifacts. Not material to validity but indicates incomplete provenance."}
+  },
+  "claim_ceiling": "No advancement. C-MEAS-VALID remains at EXPERIMENTAL bounded to prior validated islands only, with single-node honesty gate UNRESOLVED and 54-experiment MEASUREMENT_INVALID streak continuing (now 54+1). This packet provides zero evidence toward H1-SINGLE-NODE-HONESTY-CORRECTED: C1 n_non304>=800 stratified 400/endpoint hs_rate>=0.90 batch>=10, C2 header-only |r|<0.30 V<0.30 de-confounded, C3 |rho_shuffled|<0.20 p>=0.20 within-f std>0 width>0 effective>1, C4 full>0.5 full>max(body,status)+0.05 non-degenerate B=1000, C5 loopback 1.0/0.0 all remain UNTESTED (0 lines). Maximum justified ceiling remains: (1) local nginx 1.24.0 proxy_cache byte-preserving HIT 330/330 HIT/DYNAMIC oracle-free greedy brotli->gzip MAX_DEPTH5 0 ambiguous validated at EXP-RUNTIME-35551516706 audit PASS; (2) C-FRESHNESS orthogonality delta0.15 r=0.0022 CI upper 0.0916 TOST p0.0006 n480 stdlib http.server at EXP-GRAPH-35389145821 audit PASS — not superseded; (3) distributed correlation r=-0.0381 TOST p2e-08 n844 per-node mean TN 0.6667 at EXP-GRAPH-35611618323 remains bounded distributed ceiling. No SINGLE-NODE honest substrate EXPERIMENTAL promotion, no VALIDATED/PRODUCT_CORE, no authorization for distributed 2x gunicorn shared-WAL n>=800 stratified or Graph/Product/Frontier substrate reuse. All distributed/shared-WAL/sticky/HIT/browser/CROSSSITE hypotheses remain UNKNOWN.",
+  "evidence_refs": [
+    "research/experiments/EXP-RUNTIME-36020884510/request.json sha 5b5b85aa78c00efd86252bca1964cdaff473208a178a1971c962d27ae079e7b8 director_mandate REOPEN C-MEAS-VALID cognitive_reset true SUPERSEDE",
+    "research/experiments/EXP-RUNTIME-36020884510/spec.json sha eb0403f0e81b42948d742a3a64ab1aa4829c17c434fd1532c18333bab062f810 claim_ids C-MEAS-VALID decision_rule C1-C5 validity 7 gates",
+    "research/experiments/EXP-RUNTIME-36020884510/prereg.md sha 370589bb2c3dd42ab53946072e14ff3855bf793edb60fc18ec32d6c8e629d6ab single-node honesty gate H1 with wsgi factory, HS256 shared, header-only MINUS, honest sum, full-vector",
+    "research/experiments/EXP-RUNTIME-36020884510/freeze.json sha 5b5b85aa...eb0403f0...370589bb verified immutable",
+    "research/experiments/EXP-RUNTIME-36020884510/result.json status MEASUREMENT_INVALID outcome INCONCLUSIVE metrics {} controls V-NGINX-CONFIG-OK PASS validity_notes FLASK_NOT_LISTENING observations all 0 placeholders",
+    "research/experiments/EXP-RUNTIME-36020884510/provenance.json hs256_secret_len 62 sha 3fbf808d flask_listening_verified false health_gate_verified false n_observations 0 n_hit 0 n_browser 0 factory_pattern_wsgi true wsgi_sys_path_insert true db_path /tmp/spider-runtime/36020884510/single.db ports 19860/19851",
+    "research/experiments/EXP-RUNTIME-36020884510/report.md status MEASUREMENT_INVALID outcome INCONCLUSIVE",
+    "research/experiments/EXP-RUNTIME-36020884510/run_experiment.py sha pending BODY_DERIVED_KEYS etag-w/content-range bug, filter_headers vs sorted_filtered_json leakage, _start_gunicorn wsgi import path bug, _verify_flask_listening, _health_gate missing logic, Phase 3 synthetic honest-cost, Phase 4 tautological full-vector",
+    "research/experiments/EXP-RUNTIME-36020884510/raw_freshness_observations.jsonl 0 lines empty sha e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "research/experiments/EXP-RUNTIME-36020884510/execution_checkpoint.json pre_execute_sha 22f80d60...",
+    "research/experiments/EXP-RUNTIME-36020884510/model_execute.json ling-3.0-flash success 36020884510",
+    "research/experiments/EXP-RUNTIME-36013149664/handoff.json sha 43a61f0e... parent MEASUREMENT_INVALID health gate proxy forwarding failure, established partial factory fix, unknown C1-C4",
+    "research/experiments/EXP-RUNTIME-36013149664/audit.json status MEASUREMENT_INVALID producer_claim_supported false 6 required_fixes isolates proxy forwarding",
+    "codex/index.json runtime entries prior ceilings EXP-RUNTIME-35551516706 330/330 etc",
+    "codex/claim_state.json C-MEAS-VALID MEASUREMENT_INVALID streak 54, C-WEB-DYNAMICS HYPOTHESIS, C-FRESHNESS islands",
+    "research/lanes/registry.json runtime lane allowed_code_roots research/harness research/runtime substrates"
+  ],
+  "unresolved": [
+    "Why gunicorn import path was changed to break Flask listening in this retry vs parent where Flask listening passed (parent provenance flask_listening_verified true). Requires execution logs with gunicorn stderr (currently DEVNULL).",
+    "Whether fixing import path alone restores health gate or proxy_pass/header forwarding will still fail as in parent (parent health gate 0/15 despite Flask listening). Need nginx_error.log diagnosis after fix.",
+    "Whether latent BODY_DERIVED_KEYS and fingerprint EXCLUDED leakage corrections alone restore de-confounded |r|<0.30 and full>max baselines; current synthetic Phase 2/4 implementations would still be MEASUREMENT_INVALID even after Flask fix.",
+    "Whether honest-cost wiring to real operation counts per trajectory_id (not synthetic) can achieve |rho_shuffled|<0.20 p>=0.20 with within-f std>0 and effective>1 once real measurements flow.",
+    "Whether real If-None-Match/ETag->304 with shared TESTBED_SECRET HS256 jwt.decode can achieve n_non304>=800 stratified 400/endpoint hs_rate>=0.90 per-batch >=10 distinct ts via Flask 19860 direct or nginx 19851 single-upstream once Flask is reachable.",
+    "Whether 2x gunicorn 23.0.0 + nginx loopback header-only/body-only drift 1.0 null FP 0.0 holds after single-node fix; secondary but requires separate loopback substrate.",
+    "All C1-C4 primary decision gates remain UNTESTED and UNKNOWN; broadest conclusion is infrastructure failure not scientific falsification; do_not_assume any prior 0.0 metrics prove single-node honesty gate falsified."
+  ]
+}
