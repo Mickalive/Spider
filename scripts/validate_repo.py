@@ -96,6 +96,7 @@ def main():
 
     scope = text("scripts/check_scope.py")
     require("from control_plane import CONTROL_ROOTS" in scope, "check_scope must use canonical CONTROL_ROOTS")
+    require('"audit.json"' in scope and '"verdict.json"' in scope and '"handoff.json"' in scope and 'stage == "execute"' in scope, "EXECUTE scope must protect future-stage packet outputs")
     require("--untracked-files=all" in scope and "SPIDER_SCOPE_REPAIRED" in scope, "scope checker lacks complete repair/revalidation path")
 
     resilient = text(".github/scripts/run-opencode-resilient.sh")
@@ -117,6 +118,12 @@ def main():
     prepare = text("scripts/prepare_lane.py")
     require("product promotion pending" in prepare and "promotion_ready" in prepare, "Product allocator must honor the promotion transaction latch")
     require("Global Research Director mandate required" in prepare and "director_mandate" in prepare, "NEW experiments must carry a Global Director mandate")
+
+    snapshot_builder = text("scripts/build_portfolio_snapshot.py")
+    require("quarantine_by_id" in snapshot_builder and "lane_state_last_quarantined" in snapshot_builder and "canonical_last_decision" in snapshot_builder, "portfolio snapshot must exclude quarantined lane-state verdicts from Director evidence")
+
+    ci_wf = text(".github/workflows/ci.yml")
+    require("CODEX_LIVE_FALLBACK" in ci_wf and "quarantine_by_id" in ci_wf, "CI must allow only explicit quarantine with canonical fallback")
 
     pulse = text(".github/workflows/factory-pulse.yml")
     require("SPIDER_CIRCUIT_OPEN" in pulse and "last_failure_control_revision" in pulse, "factory pulse lacks repeated-failure circuit breaker")
