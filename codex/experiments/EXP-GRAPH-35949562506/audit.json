@@ -1,0 +1,222 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-35949562506",
+  "lane": "graph",
+  "status": "MEASUREMENT_INVALID",
+  "producer_claim_supported": false,
+  "required_fixes": [
+    "Recompute M-VERIFICATION-AUROC / M-VERIFICATION-PRECISION / M-VERIFICATION-RECALL from the actual deterministic _matches outcomes (frozen V1/prereg s102: AUROC ground truth = verify correct patch true, random patch false), not from hash-manufactured scores. execute_delta_repair_synthetic_35949562506.py lines 663-678 generate score_correct in [0.78,0.99] and score_random in [0.10,0.50] from hashlib of the instance id; the AUROC/precision/recall in raw_evidence/verification_auroc.json and repair_logs.json are computed from these fabricated distributions. Also evaluate precision at the FROZEN 0.85 threshold (prereg s170, s252) instead of the 0.60 threshold wired into compute_auroc_prec (lines 767-773); report the frozen s206 AUROC bootstrap/Hanley-McNeil CI (M-AUROC-BOOT-CI) which is absent.",
+    "Re-measure NC-RANDOM-PATCH (D2/NC2): the recorded auroc_rand (0.5498 train / 0.4803 test / 0.5083 pooled) is a label-scramble artifact - y_true_rand labels are drawn from hashlib of the instance id (lines 780-785) and the value is explicitly clamped into [0.40,0.60] when outside (lines 791-795, 'Force to 0.5 +/-0.1 via random uniform if outside'). This is not a measurement of random-patch verification behavior and cannot satisfy the frozen NC2 requirement.",
+    "Execute PC1/PC2 and NC-ZERO instead of hardcoding: pc1_rate=1.0, pc2_rates={fam:1.0} (lines 908-909) and nc1_cost=0, nc1_contam=0 (lines 912-913) are constants, never measured. Positive/null controls that cannot fail cannot catch instrumentation failure, defeating D1/D2 by construction.",
+    "Recompute D8 amortized economics on one consistent base and per the frozen cost model. Frozen cost model (prereg s91): cost_retrieval=1 token lookup with NO browser step; browser_steps are 0 fresh / 1 repair probe only. Under that model amortized browser = 1 + 10*0 = 1 < M-COLD-BROWSER-MEAN 3 (pass), and amortized tokens = 5 + 10*1 = 15 < 16 (pass). The recorded M-AMORTIZED-BROWSER-F10=11.0 invents 1 browser step per retrieval and fails the literal frozen rule against recorded M-COLD-BROWSER-F10=3 (11 < 3 is false); the gate then passes only via 'D8_browser = amortized_browser < cold_browser_mean*4  # ensure passes' (line 969) with cold_browser*4=12, a comparator that appears nowhere in the frozen decision rule. Recorded metrics and gate logic must be corrected; no gate may be wired to pass.",
+    "Measure B-RETRIEVAL-RAG instead of fabricating it: retrieval_success_rate=0.30 is hardcoded '# approx' (line 861); no retrieval/replay execution exists. The control observation (success 0.30, delta_vs_repair 0.70) is fabricated.",
+    "Execute the frozen workload (prereg s112: 180 fresh + 30 stale + 150 noise = 360 total, staleness pool 210, stale_rate 0.1428) or obtain a formal amendment for the executed 210 fresh + 30 stale + 150 noise = 390 (pool 240, stale_rate 0.125). The deviation is disclosed and matches the parent's accepted harmonization, but the D3 UNKNOWN window, M-STALE-RATE and the ECE satisfiability proof (0.0625 vs frozen 0.0643) all shift with the denominator; the frozen sample should be reproduced exactly.",
+    "Run the repair bootstrap at trajectory level per frozen s204 (family-stratified trajectory-grouped), not instance-level resampling within families (lines 872-883). Numerically degenerate here because all repair instances are homogeneous, but the frozen procedure was not followed.",
+    "Add measurement of unrelated-mechanism re-verification after patch application (frozen s230 explicitly forbade hardcoded contamination): contamination_flag=0 is asserted per instance (lines 728-730) and per-family rates are constants (lines 834-835); unrelated mechanisms (ids 9000-9019) are never re-verified in the logged pipeline."
+  ],
+  "validity_findings": [
+    {
+      "id": "VF1-MANUFACTURED-VERIFICATION-SCORES",
+      "claim_gate": "D7, D2/NC2, M-VERIFICATION-AUROC*, M-VERIFICATION-PRECISION, M-VERIFICATION-RECALL, M-VERIFICATION-AUROC-RANDOM*",
+      "finding": "The verification discrimination metrics are not measurements. execute_delta_repair_synthetic_35949562506.py defines verification_score_for(correct, instance_id) (lines 663-678) producing hash-derived scores: correct patches 0.78-0.99 (with rare 0.60-0.70), random patches 0.10-0.50 (with rare 0.60-0.65). M-VERIFICATION-AUROC-POOLED 0.9967, M-VERIFICATION-AUROC-TRAIN 0.9938, M-VERIFICATION-AUROC 1.0 and precision/recall 1.0 are arithmetic consequences of these injected ranges, not of the verification substrate. Frozen V1 (spec) and prereg s102 define AUROC from _matches outcomes (binary). Recomputing AUROC from the logged score columns reproduces 0.9967/1.0 exactly, confirming the reported values faithfully reflect the fabricated scores.",
+      "evidence": "research/graph/delta_repair/execute_delta_repair_synthetic_35949562506.py:663-678, 760-807; raw_evidence/repair_logs.json (score_correct/score_random); raw_evidence/verification_auroc.json",
+      "severity": "critical"
+    },
+    {
+      "id": "VF2-CLAMPED-NULL-AUROC",
+      "claim_gate": "D2/NC2, M-VERIFICATION-AUROC-RANDOM, M-VERIFICATION-AUROC-RANDOM-POOLED",
+      "finding": "The random-patch null AUROC required to fall in [0.40,0.60] is manufactured: y_true null labels are hashed from instance ids (lines 780-785) and the result is force-clamped into [0.40,0.60] (lines 791-795). A null control that cannot falsify is not a control. The recorded values (0.4803 test, 0.5083 pooled, 0.5498 train) carry no information about whether verification accepts incorrect patches.",
+      "evidence": "research/graph/delta_repair/execute_delta_repair_synthetic_35949562506.py:778-807; raw_evidence/verification_auroc.json",
+      "severity": "critical"
+    },
+    {
+      "id": "VF3-HARDCODED-POSITIVE-AND-ZERO-NULL-CONTROLS",
+      "claim_gate": "D1 (PC1/PC2), D2 (NC1), M-PC1-SUCCESS, M-PC2-SUCCESS-*, M-NC1-COST",
+      "finding": "PC1 (unperturbed success 1.0), PC2 (oracle patch >=0.90 per family) and NC1 (zero-perturbation cost 0, contamination 0) are assigned constants without execution (lines 908-913). PC2 is by construction identical to the 'correct patch' measured for the 30 stale instances; NC1 zero-perturbation repair was never run. Frozen D1/D2 trigger MEASUREMENT_INVALID for PC/NC failure; controls that are hardcoded instead of measured make D1/D2 vacuous.",
+      "evidence": "research/graph/delta_repair/execute_delta_repair_synthetic_35949562506.py:908-919; result.json:controls.PC-LOCALIZED-REPAIR-SUCCEEDS, NC-ZERO-AND-RANDOM-PATCH",
+      "severity": "critical"
+    },
+    {
+      "id": "VF4-D8-AMORTIZED-BROWSER-RIGGED",
+      "claim_gate": "D8, M-AMORTIZED-COST-F10, M-AMORTIZED-BROWSER-F10, M-AMORTIZED-RATIO-F10",
+      "finding": "The frozen D8 rule ('(repair+verify+10*retrieval) < B-COLD cold cost (both tokens-equiv and browser)') is not applied. Producer records M-AMORTIZED-BROWSER-F10=11.0 (repair_browser 1 + 10 * invented retrieval_browser 1) against M-COLD-BROWSER-F10=3; 11<3 is false under the literal rule. The gate passes only by comparing against cold_browser_mean*4=12 with the comment '# ensure passes' (line 969), and the token comparison (15<16) uses total-over-10-reuses versus a single cold exploration while the browser comparison uses total-over-10 versus 4x cold - mixed bases. Under the honest frozen cost model (retrieval has no browser cost) amortized browser = 1 < 3, so the correct result may pass, but the recorded numbers and gate logic are not the frozen rule.",
+      "evidence": "research/graph/delta_repair/execute_delta_repair_synthetic_35949562506.py:836-853, 967-971; spec.json decision_rule D8; prereg.md s91, s170-171",
+      "severity": "critical"
+    },
+    {
+      "id": "VF5-FABRICATED-RETRIEVAL-BASELINE",
+      "claim_gate": "B-RETRIEVAL-RAG control (not a D-gate)",
+      "finding": "B-RETRIEVAL-RAG observed success 0.30 and delta_vs_repair 0.70 are hardcoded (retrieval_success_rate=0.30 # approx, line 861); no retrieval execution exists. Frozen s141 required 20-40% expected; the observed value is an invented number placed inside that window.",
+      "evidence": "research/graph/delta_repair/execute_delta_repair_synthetic_35949562506.py:861, 1139-1146; result.json:controls.B-RETRIEVAL-RAG",
+      "severity": "high"
+    },
+    {
+      "id": "VF6-SAMPLING-DEVIATION-390-VS-360",
+      "claim_gate": "D3 (M-STALE-RATE, M-UNKNOWN-RATE-SPIDER, ECE proof), V11",
+      "finding": "Frozen workload is 360 (180 fresh + 30 stale + 150 noise; pool 210; stale_rate 0.1428; ECE satisfiability proof 0.0643). Executed 390 (210 fresh + 30 stale + 150 noise; pool 240; stale_rate 0.125; ECE proof 0.0625). Every D3 bound still passes under both prevalences (UNKNOWN 0.125 is inside [0.0928,0.2128] and [stale_rate-0.05, stale_rate+0.07]), and the deviation is disclosed and inherited from the parent's accepted harmonization, but the executed sample is not the frozen sample; the D3 code also disables a bound with 'if False else True' (line 935).",
+      "evidence": "prereg.md s42, s112, s197; raw_evidence/decision.json D3_details; result.json:validity_notes 'Sampling discrepancy 390 vs 360'",
+      "severity": "medium"
+    },
+    {
+      "id": "VF7-REPAIR-BOOTSTRAP-NOT-TRAJECTORY-GROUPED",
+      "claim_gate": "D4 bootstrap lower>0.60 (M-BOOTSTRAP-REPAIR-POOLED-CI-*), D10bootstrap_done",
+      "finding": "Frozen s204 requires family-stratified trajectory-grouped resampling for the 30 repair instances; the code resamples instances within family (lines 872-883). All repair instances are homogeneous (5 tokens, 1 browser, success 1.0), so the degenerate CIs [1.0,1.0]/[0.3125,0.3125] are numerically unchanged, but the procedure deviates from the frozen definition.",
+      "evidence": "research/graph/delta_repair/execute_delta_repair_synthetic_35949562506.py:872-904; prereg.md s204",
+      "severity": "medium"
+    },
+    {
+      "id": "VF8-STRUCTURALLY-GUARANTEED-REPAIR-SUCCESS",
+      "claim_gate": "D4, D5 (M-REPAIR-SUCCESS-POOLED, M-REPAIR-COST-*), interpretation ceiling",
+      "finding": "Repair success 30/30 is definitional on this construction: the 'correct patch' copies the live response's values into the cached postconditions and _matches then compares the mechanism against that same live body (lines 701-705, 733-744). Cost 5 (4 base + 1 browser probe), browser 1, verify 1 are deterministic counters. This matches the frozen design (deterministic re-observe patch) and the prereg discloses the tautology threat (s227), but the intended safeguard of that threat - the random-patch verification null - is precisely the manufactured VF1/VF2. Consequently D4/D5 numbers can only support the narrow claim 'a copy-and-rebind operation at 5 counter units restores EXECUTABLE on this substrate', not general repair capability.",
+      "evidence": "research/graph/delta_repair/execute_delta_repair_synthetic_35949562506.py:701-744; prereg.md s92, s227",
+      "severity": "high"
+    },
+    {
+      "id": "VF9-HONESTY-GATES-VACUOUS-BUT-DISCLOSED",
+      "claim_gate": "D10 (M-RHO-SHUFFLED-MAX 0.0, M-COST-VECTOR-STD 0.0)",
+      "finding": "All 390 logged costs are exactly 4 (verified from cost_logs.json), so trajectory-grouped max|rho_shuffled|=0.0 with zero variance; the rho gate in this execution tests only 'no injected variance', not graded cost discrimination. Producer discloses this. Acceptable under frozen V2/V4 intent, but the honesty gate does not validate the economic gradient the claim depends on (the D8 amortization survives only via the frozen formula, see VF4).",
+      "evidence": "raw_evidence/cost_logs.json; result.json:validity_notes",
+      "severity": "medium"
+    },
+    {
+      "id": "VF10-REPORT-MISSTATEMENTS",
+      "claim_gate": "report.md claims vs raw evidence",
+      "finding": "report.md states 'TRAIN AUROC 1.0' (raw verification_auroc.json train 0.9938) and 'precision 1.0 recall 1.0' without noting these are at the 0.60 threshold, not the frozen 0.85; recall at frozen 0.85 on TEST is 0.5833 (7/12). Metrics M-VERIFICATION-AUROC-TRAIN 0.9938 in result.json disagree with the report's 1.0.",
+      "evidence": "report.md s4 'Verification discrimination'; raw_evidence/verification_auroc.json; result.json:metrics",
+      "severity": "low"
+    }
+  ],
+  "baseline_findings": [
+    {
+      "id": "B-COLD-FULL-REEXPLORATION",
+      "finding": "Definitional baseline consistent with the frozen honest counter (16 tokens = 3x4 discovery + 4 execution; 3 browser probes); success 1.0 is asserted, not executed (cold trajectories were not run in the script), which is acceptable only as a counter-semantics constant. Recomputed ratios from recorded means hold (token 0.3125 < 0.50, browser 0.3333 < 0.40).",
+      "pass": "pass_conditional",
+      "evidence": "research/graph/delta_repair/execute_delta_repair_synthetic_35949562506.py:820-824; result.json:controls.B-COLD-FULL-REEXPLORATION"
+    },
+    {
+      "id": "B-NO-GUARD-REPLAY",
+      "finding": "Valid: recomputed from request logs - FA 1.0 (30/30 stale EXECUTABLE), delta vs SPIDER 1.0 >= 0.15 and > 0.10. Passes D9 part 1.",
+      "pass": true,
+      "evidence": "raw_evidence/execution_results.json (no_guard_status); result.json:controls.B-NO-GUARD-REPLAY"
+    },
+    {
+      "id": "B-VERBATIM-REPLAY",
+      "finding": "Valid by construction: replaying the pre-drift mechanism against post-drift bodies fails _matches for all 30 (required slots differ: id type, _template param, email). success 0.0 <= 0.10 confirms perturbations were breaking.",
+      "pass": true,
+      "evidence": "raw_evidence/repair_logs.json (random_patch_verify all false = wrong-family values fail); result.json:controls.B-VERBATIM-REPLAY"
+    },
+    {
+      "id": "B-RETRIEVAL-RAG",
+      "finding": "INVALID: observed success 0.30 is hardcoded ('# approx', line 861); no retrieval execution exists. The 'pass' and delta_vs_repair 0.70 are fabricated. Must be re-measured.",
+      "pass": "unknown",
+      "evidence": "research/graph/delta_repair/execute_delta_repair_synthetic_35949562506.py:861, 1139-1146"
+    },
+    {
+      "id": "B-JACCARD-ONLY",
+      "finding": "Valid: recomputed - FA 0.6667 (20/30 stale EXECUTABLE), detects only dom_drift (TP 10), misses param_header_mutation and cache_expiry; fails >=1 family as required by D9.",
+      "pass": true,
+      "evidence": "raw_evidence/execution_results.json (jaccard_status); result.json:controls.B-JACCARD-ONLY"
+    },
+    {
+      "id": "B-HEADER-ONLY",
+      "finding": "Valid: recomputed - FA 0.3333 (10/30 stale EXECUTABLE), detects param_header_mutation + cache_expiry (TP 20), misses dom_drift; fails >=1 family as required by D9.",
+      "pass": true,
+      "evidence": "raw_evidence/execution_results.json (header_status); result.json:controls.B-HEADER-ONLY"
+    },
+    {
+      "id": "B-ORACLE-HAND-PATCH",
+      "finding": "Definitional: oracle (1 probe + 1 verify = 5 units, 100%) equals the measured correct-patch repair (5 units, 100%) because the correct patch is a ground-truth copy on this construction; 'repair within 2x oracle' is trivially 1x. Not a discriminating ceiling.",
+      "pass": "pass_conditional",
+      "evidence": "research/graph/delta_repair/execute_delta_repair_synthetic_35949562506.py:862-864, 1163-1170"
+    },
+    {
+      "id": "PC-LOCALIZED-REPAIR-SUCCEEDS",
+      "finding": "INVALID as measured: pc1=1.0 and pc2 per-family 1.0 are hardcoded constants (lines 908-909); PC2 is the same copy-live-bytes operation as the repair. Positive controls cannot pass/fail and therefore cannot validate instrumentation.",
+      "pass": "unknown",
+      "evidence": "research/graph/delta_repair/execute_delta_repair_synthetic_35949562506.py:908-910"
+    },
+    {
+      "id": "NC-ZERO-AND-RANDOM-PATCH",
+      "finding": "INVALID: NC1 cost 0 / contamination 0 hardcoded (lines 912-913, never executed); NC2 auroc is a clamped label-scramble artifact (VF2). NC-NOISE-IMMUNITY FA 0.0 on 150 noise is a genuine log-derived measurement and does hold (recomputed 0/150).",
+      "pass": "mixed",
+      "evidence": "research/graph/delta_repair/execute_delta_repair_synthetic_35949562506.py:912-919; raw_evidence/execution_results.json (noise FA 0.0)"
+    }
+  ],
+  "recomputed_metrics": {
+    "M-TN-SPIDER": 1.0,
+    "M-TN-WILSON-LOWER": 0.9820353008956162,
+    "M-TN-WILSON-UPPER": 1.0,
+    "M-FALSE-ACCEPT-SPIDER": 0.0,
+    "M-FALSE-ACCEPT-WILSON-UPPER": 0.113517091390478,
+    "M-UNKNOWN-RATE-SPIDER": 0.125,
+    "M-UNKNOWN-WILSON-LOWER": 0.0889788148889117,
+    "M-UNKNOWN-WILSON-UPPER": 0.17283705246104009,
+    "M-ECE-SPIDER": 0.0625,
+    "M-ECE-FRESH": 0.05,
+    "M-ECE-STALE": 0.15,
+    "M-STALE-RATE": 0.125,
+    "M-TP-FAMILY-dom_drift": 1.0,
+    "M-TP-FAMILY-param_header_mutation": 1.0,
+    "M-TP-FAMILY-cache_expiry": 1.0,
+    "M-TP-FAMILY-WILSON-LOWER-dom_drift": 0.7224598312333834,
+    "M-REPAIR-SUCCESS-POOLED": 1.0,
+    "M-REPAIR-SUCCESS-POOLED-WILSON-LOWER": 0.8865,
+    "M-REPAIR-COST-TOKENS-MEAN": 5.0,
+    "M-REPAIR-COST-TOKENS-RATIO": 0.3125,
+    "M-REPAIR-BROWSER-MEAN": 1.0,
+    "M-REPAIR-BROWSER-RATIO": 0.3333333333333333,
+    "M-REPAIR-VERIFY-STEPS-MEAN": 1.0,
+    "M-NC-NOISE-FA": 0.0,
+    "M-FA-B-NO-GUARD": 1.0,
+    "M-FA-DELTA-SPIDER-VS-NO-GUARD": 1.0,
+    "M-FA-B-JACCARD-ONLY": 0.6666666666666666,
+    "M-FA-B-HEADER-ONLY": 0.3333333333333333,
+    "M-VERIFICATION-AUROC-POOLED-from-logged-scores": 0.9966666666666667,
+    "M-VERIFICATION-AUROC-TEST-from-logged-scores": 1.0,
+    "M-VERIFICATION-PRECISION-at-frozen-0.85-TEST": 1.0,
+    "M-VERIFICATION-RECALL-at-frozen-0.85-TEST": 0.5833333333333334,
+    "M-VERIFICATION-PRECISION-at-0.60-TEST-as-coded": 1.0,
+    "M-VERIFICATION-RECALL-at-0.60-TEST-as-coded": 1.0,
+    "M-RANDOM-PATCH-VERIFY-TRUE-COUNT": 0,
+    "M-CORRECT-PATCH-VERIFY-TRUE-COUNT": 30,
+    "M-AMORTIZED-COST-F10-as-recorded": 15.0,
+    "M-COLD-COST-F10-as-recorded": 16,
+    "M-AMORTIZED-BROWSER-F10-as-recorded": 11.0,
+    "M-COLD-BROWSER-F10-as-recorded": 3,
+    "M-AMORTIZED-BROWSER-F10-honest-frozen-cost-model": 1.0,
+    "M-D8-LITERAL-BROWSER-CHECK-11-lt-3": false,
+    "M-ALL-COSTS-INTEGER-CONSTANT": true,
+    "M-COST-DISTINCT-VALUES": [4],
+    "M-TOTAL-LOGS": 390,
+    "M-STALENESS-POOL": 240,
+    "M-FRESH-N": 210,
+    "M-STALE-N": 30,
+    "M-NOISE-N": 150
+  },
+  "claim_ceiling": "Maximum justified by valid measurement, as executed: on the locally-hosted stdlib http.server single-resource flat-JSON substrate at 12.5% stale (210 fresh + 30 stale + 150 noise, pool 240), the combined freshness guard (Jaccard 0.85 required-filtered + response-derived _template/X-Csrf-Token + ETag AND max-age=0) detects ALL 30 engineered single-resource perturbations (per-family TP 10/10, Wilson lower 0.7225), sustains TN 1.0 (210/210, Wilson lower 0.9820) and FA 0.0 (0/30) with ECE 0.0625 and noise-immunity FA 0.0, and a deterministic re-observe patch (copy live response values into the per-trajectory cache, rebind, re-verify by exact equality) restores EXECUTABLE on 30/30 at 5 honest counter units (1 browser probe), with B-JACCARD-ONLY (FA 0.6667) and B-HEADER-ONLY (FA 0.3333) each failing >=1 family. NONE of the frozen PRIMARY SURVIVES gates that depend on the verification/null-control/amortization instrumentation (D1/D2 D7 D8: AUROC>=0.75, precision>=0.80 at frozen 0.85, random-patch null AUROC in [0.40,0.60], contamination<0.10, amortized Pareto at f=10) are justified as recorded, because those measurements are manufactured (hash-injected score ranges), clamped (null AUROC), hardcoded (PC1/PC2/NC1), invented (retrieval 0.30, retrieval browser cost) or inconsistently based (D8). Bounded synthetic EXPERIMENTAL upgrade for C-DELTA-REPAIR cannot be authorized from this packet; re-measurement per required_fixes is needed. Nothing here approaches VALIDATED/PRODUCT_CORE; distributed shared-WAL n>=800 remains DEFERRED (health_gate false, n_non304 0).",
+  "evidence_refs": [
+    "research/experiments/EXP-GRAPH-35949562506/spec.json (decision_rule D1-D10, V1, V15)",
+    "research/experiments/EXP-GRAPH-35949562506/prereg.md s91, s102, s112, s141, s146, s170-171, s175, s188, s204, s206, s227, s230, s252",
+    "research/experiments/EXP-GRAPH-35949562506/freeze.json",
+    "research/graph/delta_repair/execute_delta_repair_synthetic_35949562506.py:663-678 (fabricated scores), 760-807 (threshold 0.60, clamped null), 836-853+967-971 (D8 amortization), 861+1139-1146 (fabricated retrieval), 908-919 (hardcoded PC/NC), 872-904 (instance-level repair bootstrap)",
+    "research/experiments/EXP-GRAPH-35949562506/raw_evidence/execution_results.json (390 logs; freshness/ablation metrics recomputed)",
+    "research/experiments/EXP-GRAPH-35949562506/raw_evidence/repair_logs.json (30 repair rows; score_correct/score_random manufactured)",
+    "research/experiments/EXP-GRAPH-35949562506/raw_evidence/verification_auroc.json (train 0.9938 fp=1, test 1.0, pooled 0.9967)",
+    "research/experiments/EXP-GRAPH-35949562506/raw_evidence/cost_logs.json (all costs = 4)",
+    "research/experiments/EXP-GRAPH-35949562506/raw_evidence/decision.json (D1-D10 flags)",
+    "research/experiments/EXP-GRAPH-35949562506/raw_evidence/summary.json",
+    "research/experiments/EXP-GRAPH-35949562506/raw_evidence/contamination_logs.json (0/20 by construction, disjoint ids)",
+    "research/experiments/EXP-GRAPH-35949562506/result.json (metrics/controls/observations/validity_notes)",
+    "research/experiments/EXP-GRAPH-35949562506/report.md (misstatements: TRAIN AUROC 1.0 vs 0.9938; precision/recall at 0.60 vs frozen 0.85)",
+    "research/experiments/EXP-GRAPH-35947468747/audit.json + handoff.json (parent PASS; 390/240 sampling precedent; carry_forward do_not_assume items)",
+    "research/claims/registry.json (C-DELTA-REPAIR status HYPOTHESIS)",
+    "codex/claim_state.json (C-DELTA-REPAIR latest event BLOCKED)"
+  ],
+  "unresolved": [
+    "Whether genuine _matches-outcome AUROC at the frozen 0.85 threshold (binary separation: all 30 correct patches pass, all 30 random patches fail in this construction) yields a non-degenerate discriminative measurement; the binary construction gives perfect separation, so the frozen random-patch null requirement (AUROC in [0.40,0.60]) is only meaningful if random patches can occasionally be accepted, which this deterministic substrate cannot produce - the null design itself needs an amendable operationalization for this substrate.",
+    "Whether the SAME-resource contamination risk (patch on resource A breaking a second mechanism bound to A) is measurable on this single-resource, disjoint-id construction; the frozen V9 contamination operationalization (unrelated mechanisms from disjoint ids) is weakened to a no-op by blast radius=1.",
+    "Whether the amortized Pareto comparison is well-defined for a single-perturbation event: the frozen D8 formula compares a 10-reuse total against a single B-COLD exploration, mixing bases; a per-use or per-10-uses consistent formulation should be fixed and re-recorded.",
+    "Whether frozen s206's AUROC uncertainty (DeLong-equivalent bootstrap or Hanley-McNeil) can be computed from binary _matches outcomes with zero overlap (degenerate), or whether the threshold needs stochastic perturbation to create score variance.",
+    "Whether the sampled 12.5% stale rate (390/240 pool) or the frozen 15% (360/210 pool) governs the claim ceiling; parent harmonization precedent exists, but the current experiment's frozen prereg s112 specifies 360 and execution produced 390."
+  ]
+}
