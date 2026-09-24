@@ -1,0 +1,69 @@
+{
+ "experiment_id": "EXP-INTEL-36042590671",
+ "source": "SRC-GHCR-BROWSERGYM",
+ "reference": "ghcr.io/servicenow/browsergym:0.14.3",
+ "api_attempts": [
+  {
+   "attempt_label": "GHCR anonymous token",
+   "url": "https://ghcr.io/token?service=ghcr.io&scope=repository:servicenow/browsergym:pull",
+   "timeout_configured_s": 300,
+   "hf_token_present": false,
+   "status": 403,
+   "bytes": 0,
+   "sha256": null,
+   "digest_header": null,
+   "elapsed_s": 0.031,
+   "error": "HTTPError 403: Forbidden"
+  },
+  {
+   "attempt_label": "GHCR token with GH_TOKEN",
+   "url": "https://ghcr.io/token?service=ghcr.io&scope=repository:servicenow/browsergym:pull",
+   "timeout_configured_s": 300,
+   "hf_token_present": false,
+   "status": 200,
+   "bytes": 517,
+   "sha256": "1deef2944336722e6ada8659b31e41d05f0c0c4ff610aacc002c23ec10ecb5ac",
+   "digest_header": null,
+   "elapsed_s": 0.095,
+   "error": null
+  },
+  {
+   "attempt_label": "GHCR manifest GET attempt 1",
+   "url": "https://ghcr.io/v2/servicenow/browsergym/manifests/0.14.3",
+   "timeout_configured_s": 300,
+   "hf_token_present": false,
+   "status": 404,
+   "bytes": 0,
+   "sha256": null,
+   "digest_header": null,
+   "elapsed_s": 0.036,
+   "error": "HTTPError 404: Not Found"
+  },
+  {
+   "attempt_label": "GHCR manifest GET attempt 2",
+   "url": "https://ghcr.io/v2/servicenow/browsergym/manifests/0.14.3",
+   "timeout_configured_s": 300,
+   "hf_token_present": false,
+   "status": 404,
+   "bytes": 0,
+   "sha256": null,
+   "digest_header": null,
+   "elapsed_s": 0.036,
+   "error": "HTTPError 404: Not Found"
+  }
+ ],
+ "docker_pull_attempts": [
+  {
+   "cmd": "docker pull ghcr.io/servicenow/browsergym:0.14.3",
+   "timeout_configured_s": 300,
+   "returncode": 1,
+   "stdout_tail": "",
+   "stderr_tail": "Error response from daemon: Head \"https://ghcr.io/v2/servicenow/browsergym/manifests/0.14.3\": denied\n",
+   "elapsed_s": 0.098,
+   "error": null
+  }
+ ],
+ "n_genuine_attempts": 5,
+ "digest": null,
+ "note": "MV2: if one source succeeds, single pinned file + log suffices; cross-source equality explicitly UNAVAILABLE not assumed equal"
+}

@@ -1,0 +1,6 @@
+{
+ "control_id": "B-VACUOUS-SINGLE-STORE",
+ "prevalence": 0.9479,
+ "source": "prior 18/20 identical homepage/template Magento AX artifact (EXP-INTEL-36037208652 family of runs)",
+ "note": "Reference only; diverse sweep UNAVAILABLE this experiment so vacuous baseline not beaten/compared numerically"
+}

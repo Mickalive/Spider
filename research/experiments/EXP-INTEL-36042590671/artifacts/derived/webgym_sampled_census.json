@@ -1,0 +1,12 @@
+{
+ "experiment_id": "EXP-INTEL-36042590671",
+ "census_label": "WebGym_292k_127k_sampled_diverse",
+ "provenance": "UNAVAILABLE HF_TOKEN absent 401 x2 (hf_webgym_manifest_attempts.json)",
+ "total_tasks": null,
+ "shopping_tasks": null,
+ "families_ge3_shopping": 0,
+ "families_ge3_ids": [],
+ "product_page_families": [],
+ "note": "Would sample >=50 distinct eTLD+1 when HF_TOKEN succeeds; UNAVAILABLE per MV3/MV5 exception",
+ "families_ge3_shopping_count": 0
+}

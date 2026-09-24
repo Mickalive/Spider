@@ -1,0 +1,92 @@
+{
+ "experiment_id": "EXP-INTEL-36042590671",
+ "attempts": {
+  "webgym": [
+   {
+    "attempt_label": "WebGym 292k tasks manifest (hub tree)",
+    "url": "https://huggingface.co/api/datasets/ServiceNow/WebGym/tree/main",
+    "timeout_configured_s": 300,
+    "hf_token_present": false,
+    "status": 401,
+    "bytes": 0,
+    "sha256": null,
+    "digest_header": null,
+    "elapsed_s": 0.117,
+    "error": "HTTPError 401: Unauthorized"
+   },
+   {
+    "attempt_label": "WebGym 292k tasks manifest (hub tree)",
+    "url": "https://huggingface.co/api/datasets/ServiceNow/WebGym/tree/main",
+    "timeout_configured_s": 300,
+    "hf_token_present": false,
+    "status": 401,
+    "bytes": 0,
+    "sha256": null,
+    "digest_header": null,
+    "elapsed_s": 0.033,
+    "error": "HTTPError 401: Unauthorized"
+   },
+   {
+    "attempt_label": "WebGym 127k sites manifest (hub tree)",
+    "url": "https://huggingface.co/api/datasets/OpenEnv/WebGym/tree/main",
+    "timeout_configured_s": 300,
+    "hf_token_present": false,
+    "status": 401,
+    "bytes": 0,
+    "sha256": null,
+    "digest_header": null,
+    "elapsed_s": 0.035,
+    "error": "HTTPError 401: Unauthorized"
+   },
+   {
+    "attempt_label": "WebGym 127k sites manifest (hub tree)",
+    "url": "https://huggingface.co/api/datasets/OpenEnv/WebGym/tree/main",
+    "timeout_configured_s": 300,
+    "hf_token_present": false,
+    "status": 401,
+    "bytes": 0,
+    "sha256": null,
+    "digest_header": null,
+    "elapsed_s": 0.034,
+    "error": "HTTPError 401: Unauthorized"
+   },
+   {
+    "attempt_label": "WebGym README probe",
+    "url": "https://huggingface.co/datasets/ServiceNow/WebGym/resolve/main/README.md",
+    "timeout_configured_s": 300,
+    "hf_token_present": false,
+    "status": 401,
+    "bytes": 0,
+    "sha256": null,
+    "digest_header": null,
+    "elapsed_s": 0.036,
+    "error": "HTTPError 401: Unauthorized"
+   },
+   {
+    "attempt_label": "WebGym README probe",
+    "url": "https://huggingface.co/datasets/ServiceNow/WebGym/resolve/main/README.md",
+    "timeout_configured_s": 300,
+    "hf_token_present": false,
+    "status": 401,
+    "bytes": 0,
+    "sha256": null,
+    "digest_header": null,
+    "elapsed_s": 0.033,
+    "error": "HTTPError 401: Unauthorized"
+   }
+  ]
+ },
+ "census_files": [
+  "artifacts/derived/webgym_sampled_census.json"
+ ],
+ "deterministic_samples": "artifacts/derived/deterministic_family_samples.json",
+ "manifest_sha_heuristic": "d65275660814663375028e9017e1f929e3c38321041b125795e2713b52243d30",
+ "webgym_status": "UNAVAILABLE_HF_TOKEN_ABSENT_401",
+ "families_ge3_primary": 36,
+ "product_page_families_primary": [
+  136,
+  145,
+  196,
+  222
+ ]
+}
