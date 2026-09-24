@@ -1,0 +1,15 @@
+{
+  "browsergym_available": false,
+  "browsergym_version": null,
+  "playwright_available": false,
+  "webgym_292k_exists": false,
+  "diverse_manifest_exists": false,
+  "manifest_families": 0,
+  "manifest_jaccard_mean": null,
+  "manifest_jaccard_max": null,
+  "runtime_wal_exists": false,
+  "heterogeneity_adequate": false,
+  "coverage_adequate": false,
+  "substrate_adequate": false,
+  "live_available": false
+}
