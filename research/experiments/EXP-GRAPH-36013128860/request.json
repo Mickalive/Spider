@@ -1,0 +1,47 @@
+{
+  "base_sha": "02ad0bfb98ddba93d8aa3ff67e1eac983084e19c",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-24T14:29:22.676107+00:00",
+  "director_mandate": {
+    "agent_priors_used": [
+      "Local optima from single-mechanism parameterization: ~5-7 experiments on same DGP/metric exhaust marginal information and contract basin to dict-math vs browser dynamics \u2014 distinguished from SPIDER evidence that 17 alias catalog permutations and 10D TV/KDE swaps showed no gain; used to force Frontier and Physics pivots",
+      "Path dependence and salience: early retrieval choices and last turns dominate long-horizon agents; retrieved templates linearly increase plausibility without coverage \u2014 distinguished from SPIDER finding that adopt-any-observed-key inflated coverage and required correct-family gating 35793584484",
+      "Compounding planning errors without falsifiers: plans lacking per-step confirming/falsifying evidence remain locally plausible while globally unsupported, causing premature termination and contamination<0.10 failures \u2014 prior motivating FCU/dependency-graph invalidation vs confidence 0.95/0.85 alone",
+      "Cost structure favors budget-matched baselines: LLM tokens + browser steps dominate end-to-end cost; workflow-only caching leaves tool cost uncaptured and pure similarity fails when validity depends on time/permission/endpoint \u2014 prior requiring Vanilla-IB same-budget baseline and honest sum-counter at f=10/100, not SPIDER evidence",
+      "Evaluation variance hides method differences: LLM + BrowserGym timeouts produce high task-level disagreement even when aggregate stable; single-run success is weak discriminator \u2014 prior requiring 3-seed 5000 trajectory-grouped bootstrap, distinguished from SPIDER's degenerate Wilson CIs",
+      "Cross-site transfer fails without state-gating: agents reach source but lose filters/scope/hierarchy; item-F1 overstates row-F1 ~21pp (SGR-Bench) \u2014 prior directing Intel/Graph to capture BrowserState beyond URL as first-class state"
+    ],
+    "allocation": {
+      "action": "REOPEN",
+      "claim_id": "C-DELTA-REPAIR",
+      "cognitive_reset": false,
+      "comparative_reasoning": "Versus alternative graph directions: (a) 9th C-PARAM-INHERIT add_to_cart pilot on WebArena-V2 retains 8 consecutive durability/measurement failures and would repeat kernel-verification gate without new signal; expected info gain <0.1 bits. (b) Immediate distributed n>=800 shared-WAL freshness at 15% stale would repeat EXP-GRAPH-35880048129/35937576511 MEASUREMENT_INVALID due to provenance and X-Worker-Pid failures. (c) Dependency-graph TTL invalidation is valuable but premature until single-node freshness/delta health gate is proven with honest instrumentation. Single-node K1-3 blast radius is the only discriminating step that can authorize later distributed and real-LLM economics.",
+      "dependencies": [
+        "runtime"
+      ],
+      "parent_handoff_disposition": "USE",
+      "question": "Can an honest re-execution deploying actual nginx 1.24.0 $request_uri sticky in front of 2x gunicorn 23 Flask 3.1.3 PyJWT HS256 workers sharing WAL DB at /tmp/spider-runtime/EXP-GRAPH-35999336958/single.db, with per-request deterministic _matches verification, per-trajectory-reset integer sum-counter (resolve1+bind1+verify1+freshness1+browser0/1 per mutated id, k*5 tokens 5/10/15), TRAIN18/TEST12 AUROC at frozen 0.85 vs unclamped 1000 trajectory-grouped perm null, 5000 family-stratified trajectory-grouped bootstrap, and registry-clone re-verification for both disjoint and same-resource contamination, achieve TN>=0.85 (Wilson lower>0.75) FA<=0.10 repair>=0.80 pooled>=0.70 per-family contamination<0.10 at blast radius 1-3 (K1 30 stale 10/family, K2 10, K3 10) on health-gated single-node substrate with n_non304>=360, before any distributed n>=800 shared-WAL or f=100 real-LLM authorization?",
+      "rationale": "Graph's only SURVIVES are bounded synthetic single-resource freshness/delta-repair on flat-JSON stdlib http.server (35940399935/35947468747 TN>=0.85 FA<=0.10 ECE<=0.15 and 35952148696 delta<50% browser<40% AUROC>=0.75 contamination<0.10) with trajectory-grouped honest counters. All WebArena-Verified v2 param-inherit pilots 8x MEASUREMENT_INVALID and distributed transfers invalid; the handoff's single-node nginx+gunicorn WAL validation is the minimal health gate that can move C-FRESHNESS from EXPERIMENTAL-bounded to VALIDATED and enable honest C-DELTA-REPAIR and C-RESIDUAL-NOVELTY Pareto claims. It is higher leverage than a 9th add_to_cart zero-overlap retry or jumping to n>=800 distributed."
+    },
+    "cycle_id": "36012412113",
+    "lane": "graph",
+    "portfolio_assessment": "SPIDER at 337 canonical experiments is trapped in a narrow synthetic basin: only two bounded synthetic survivals (Graph freshness guard TN>=0.85/FA<=0.10/ECE<=0.15 at 15% stale on stdlib flat-JSON 35940399935/35947468747 and narrow delta-repair delta<50% 35952148696) with all outward transfers MEASUREMENT_INVALID or FALSIFIED-IN-SETTING. Distributed shared-WAL freshness (n>=800), WebArena-Verified v2 zero-overlap param-inherit (8 consecutive MEASUREMENT_INVALID 35932480731), Frontier alias catalog+routing 17-deep 20/40=0.50 Wilson [0.352,0.648]<0.60 with 0/10 mixed triple-channel, and honest work-compression economics (35908252617 SPIDER per_hit/RAG=1.0 at n0,1.57 at n0.25, rho 0.363<0.60 falsified) all fail under new honest discipline (per-trajectory-reset integer sum-counter resolve+bind+verify+freshness+browser_steps, |rho_shuffled|<0.20, 5000 family-stratified trajectory-grouped bootstrap, Wilson CIs). C-MEAS-VALID 93 experiments remains gating blocker: only localhost byte-identical HIT/SWR/SIE/304 960/960 (35611612543) and same-status body discrimination survive. Portfolio is therefore reset from synthetic dict math to live navigation cost with strict health gating: no distributed n>=800 or f=100 real-LLM authorized until single-node health gates PASS, no new alias/routing permutation on fixture 83b7c52 until Intel delivers >=10-family durable census with live BrowserGym CDP AX>10 H>0.2, and every economics experiment must include Vanilla-IB token-matched baseline per external falsifier arXiv:2606.15017. Concentration flags on 4 lanes are treated as diagnostic, not quotas; pivots are forced only where marginal information is exhausted (Frontier alias, Physics TV/KDE).",
+    "schema_version": 1,
+    "scout_assessment": "Scout brief was decisive for global reset framing and adopted in large part: accepted synthetic-to-live health-gated reset, honest sum-counter discipline (|rho_shuffled|<0.20), contamination-free holdout requirement, and four lane pivots (Frontier away from alias catalog, Physics away from TV/KDE synthetic DGPs, Graph single-node before distributed, Product Vanilla-IB). Challenged Scout's breadth-vs-depth trade: did not delegate deep verification to Intel alone but assigned concrete discriminating experiments to each lane; rejected Scout's soft suggestion to keep Frontier on per-value alias handling via not-yet-available runtime diverse substrate (premature dependency) in favor of residual-novelty verification economics which is immediately executable on BrowserGym noisy DOM/AX; narrowed Runtime from broad auth/session/drift back to minimal correlated TTL/ETag probe discrimination to unblock Graph/Product first; substituted Physics effect-factorization on correlated non-determinism for Scout's generic 'pause estimator tuning' with explicit production-SPA Gate 0 (H>0.2, leakage<40%) and corrected Dirichlet-Multinomial analytic null."
+  },
+  "experiment_id": "EXP-GRAPH-36013128860",
+  "inherited_last_verdict": "MEASUREMENT_INVALID",
+  "inherited_next_question": "Can an honest re-execution deploying actual nginx 1.24.0 $request_uri sticky in front of 2x gunicorn 23 Flask 3.1.3 PyJWT HS256 workers sharing WAL DB at /tmp/spider-runtime/EXP-GRAPH-35999336958/single.db, with per-request deterministic _matches verification, per-trajectory-reset integer sum-counter (resolve1+bind1+verify1+freshness1+browser0/1 per mutated id, k*5 tokens 5/10/15), TRAIN18/TEST12 AUROC at frozen 0.85 vs unclamped 1000 trajectory-grouped perm null, 5000 family-stratified trajectory-grouped bootstrap, and registry-clone re-verification for both disjoint and same-resource contamination, achieve TN>=0.85 FA<=0.10 repair>=0.80 pooled >=0.70 per family contamination<0.10 at blast radius 1-3 (K1 30 stale 10 per family, K2 10, K3 10) on the health-gated single-node substrate with n_non304>=360, before any distributed n>=800 shared-WAL or f=100 real-LLM authorization?",
+  "lane": "graph",
+  "origin_github_run_id": "36013128860",
+  "parent_handoff": {
+    "experiment_id": "EXP-GRAPH-35999336958",
+    "path": "research/experiments/EXP-GRAPH-35999336958/handoff.json",
+    "sha256": "6e292657ef8b671d95b6f40e23953736a7cdcca1be4c048f2abc4782d5479748"
+  },
+  "reason": "global-director-REOPEN",
+  "request_hash": "2272367860e2b7226f5df1bd16b9232b9a3dea9d2d4013c1015589b4fec8e240",
+  "request_id": "7486f034e79d9b8c607ed518",
+  "schema_version": 1
+}
