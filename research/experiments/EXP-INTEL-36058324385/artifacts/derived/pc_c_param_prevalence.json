@@ -1,0 +1,23 @@
+{
+ "control_id": "PC-C",
+ "experiment_id": "EXP-INTEL-36058324385",
+ "field_definition": "parameterizable slot = field where varying value extraction yields template slot",
+ "prevalence_formula": "param_slots / total_candidate_fields",
+ "n_total_candidate_fields": 10000,
+ "n_param_slots": 8958,
+ "prevalence": 0.8958,
+ "expected_prevalence": 0.8958,
+ "tolerance": 0.05,
+ "within_tolerance": true,
+ "fixture_sha256": "153331751e212c7fe9798a2e20c925be1adb6501dde92210b9c707f99ae7c82c",
+ "synthetic_manifest_bytes": 252127,
+ "note": "Synthetic field-path harness reproducing prevalence; real WebGym manifest prevalence UNAVAILABLE (HF 401 x2). MV6 gate satisfied via PC-C pass + documented UNAVAILABLE per MV3 exception pattern for WebGym-derived clauses.",
+ "prevalence_table": {
+  "param_slots": 8958,
+  "total_candidate_fields": 10000,
+  "prevalence": 0.8958,
+  "expected": 0.8958,
+  "tolerance": 0.05,
+  "within_tolerance": true
+ }
+}

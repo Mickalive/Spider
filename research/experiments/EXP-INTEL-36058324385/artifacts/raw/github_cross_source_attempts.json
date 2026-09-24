@@ -1,0 +1,37 @@
+{
+ "experiment_id": "EXP-INTEL-36058324385",
+ "source": "SRC-GITHUB-CROSS-SOURCE",
+ "expected_sha256": "d65275660814663375028e9017e1f929e3c38321041b125795e2713b52243d30",
+ "webarena_attempts": [
+  {
+   "attempt_label": "GitHub raw webarena-verified.json fresh attempt 1",
+   "url": "https://raw.githubusercontent.com/ServiceNow/WebArena-Verified/main/assets/dataset/webarena-verified.json",
+   "timeout_configured_s": 300,
+   "hf_token_present": false,
+   "status": 200,
+   "bytes": 927596,
+   "sha256": "d65275660814663375028e9017e1f929e3c38321041b125795e2713b52243d30",
+   "digest_header": null,
+   "elapsed_s": 0.163,
+   "error": null
+  },
+  {
+   "attempt_label": "GitHub raw webarena-verified.json fresh attempt 2",
+   "url": "https://raw.githubusercontent.com/ServiceNow/WebArena-Verified/main/assets/dataset/webarena-verified.json",
+   "timeout_configured_s": 300,
+   "hf_token_present": false,
+   "status": 200,
+   "bytes": 927596,
+   "sha256": "d65275660814663375028e9017e1f929e3c38321041b125795e2713b52243d30",
+   "digest_header": null,
+   "elapsed_s": 0.019,
+   "error": null
+  }
+ ],
+ "byte_identity_match": [
+  true,
+  true
+ ],
+ "n_genuine_attempts": 2,
+ "fresh_verification_this_experiment": true
+}

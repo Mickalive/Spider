@@ -1,0 +1,32 @@
+{
+ "experiment_id": "EXP-INTEL-36058324385",
+ "viewport": "1280x720",
+ "ax_mode": "CDP Accessibility.getFullAXTree (fresh live probe, no reused captures)",
+ "records_total": 23,
+ "errors": [],
+ "product_page_captures": 12,
+ "homepage_captures": 8,
+ "pc_a_captures": 3,
+ "canonical_product_captures": 12,
+ "ax_nodes_median_canonical": 716,
+ "ax_nodes_min_canonical": 627,
+ "dom_bytes_median_canonical": 203748,
+ "dom_bytes_min_canonical": 195052,
+ "canonical_sha_identical_all": true,
+ "canonical_sha_mutation_changed_all": true,
+ "canonical_dual_impl_digest_match_all": true,
+ "pc_a_ax_nodes_median": 18,
+ "pc_a_dom_bytes_median": 384,
+ "pc_a_sha_identical_all": true,
+ "pc_a_sha_mutation_changed_all": true,
+ "pc_a_anchors_gt1_all": false,
+ "constructible_families": [
+  136,
+  145,
+  196,
+  222
+ ],
+ "constructible_count": 4,
+ "mv5_constructible_gate_10": false,
+ "fresh_live_probe": true
+}

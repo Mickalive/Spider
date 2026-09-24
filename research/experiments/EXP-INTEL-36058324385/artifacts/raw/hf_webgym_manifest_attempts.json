@@ -1,0 +1,81 @@
+{
+ "experiment_id": "EXP-INTEL-36058324385",
+ "source": "SRC-HF-WEBGYM",
+ "hf_token_present": false,
+ "attempts": [
+  {
+   "attempt_label": "WebGym 292k tasks manifest (hub tree)",
+   "url": "https://huggingface.co/api/datasets/ServiceNow/WebGym/tree/main",
+   "timeout_configured_s": 300,
+   "hf_token_present": false,
+   "status": 401,
+   "bytes": 0,
+   "sha256": null,
+   "digest_header": null,
+   "elapsed_s": 0.116,
+   "error": "HTTPError 401: Unauthorized"
+  },
+  {
+   "attempt_label": "WebGym 292k tasks manifest (hub tree)",
+   "url": "https://huggingface.co/api/datasets/ServiceNow/WebGym/tree/main",
+   "timeout_configured_s": 300,
+   "hf_token_present": false,
+   "status": 401,
+   "bytes": 0,
+   "sha256": null,
+   "digest_header": null,
+   "elapsed_s": 0.073,
+   "error": "HTTPError 401: Unauthorized"
+  },
+  {
+   "attempt_label": "WebGym 127k sites manifest (hub tree)",
+   "url": "https://huggingface.co/api/datasets/OpenEnv/WebGym/tree/main",
+   "timeout_configured_s": 300,
+   "hf_token_present": false,
+   "status": 401,
+   "bytes": 0,
+   "sha256": null,
+   "digest_header": null,
+   "elapsed_s": 0.075,
+   "error": "HTTPError 401: Unauthorized"
+  },
+  {
+   "attempt_label": "WebGym 127k sites manifest (hub tree)",
+   "url": "https://huggingface.co/api/datasets/OpenEnv/WebGym/tree/main",
+   "timeout_configured_s": 300,
+   "hf_token_present": false,
+   "status": 401,
+   "bytes": 0,
+   "sha256": null,
+   "digest_header": null,
+   "elapsed_s": 0.074,
+   "error": "HTTPError 401: Unauthorized"
+  },
+  {
+   "attempt_label": "WebGym README probe",
+   "url": "https://huggingface.co/datasets/ServiceNow/WebGym/resolve/main/README.md",
+   "timeout_configured_s": 300,
+   "hf_token_present": false,
+   "status": 401,
+   "bytes": 0,
+   "sha256": null,
+   "digest_header": null,
+   "elapsed_s": 0.074,
+   "error": "HTTPError 401: Unauthorized"
+  },
+  {
+   "attempt_label": "WebGym README probe",
+   "url": "https://huggingface.co/datasets/ServiceNow/WebGym/resolve/main/README.md",
+   "timeout_configured_s": 300,
+   "hf_token_present": false,
+   "status": 401,
+   "bytes": 0,
+   "sha256": null,
+   "digest_header": null,
+   "elapsed_s": 0.078,
+   "error": "HTTPError 401: Unauthorized"
+  }
+ ],
+ "n_genuine_attempts": 6,
+ "note": "MV3/MV4/MV5/MV7 exception: if HF_TOKEN absent/401 after >=2 genuine attempts, diverse count / sweep / prevalence / Jaccard are UNAVAILABLE not zero, not MEASUREMENT_INVALID"
+}
