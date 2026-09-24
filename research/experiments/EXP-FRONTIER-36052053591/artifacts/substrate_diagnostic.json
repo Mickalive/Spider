@@ -1,0 +1,46 @@
+{
+  "alt_manifests": [],
+  "ax_check": null,
+  "browsergym_1280x720_cdp_available": false,
+  "browsergym_available": false,
+  "browsergym_core_available": false,
+  "browsergym_core_error": "ModuleNotFoundError: No module named 'browsergym'",
+  "browsergym_error": "ModuleNotFoundError: No module named 'browsergym'",
+  "coverage_adequate": false,
+  "data_dir_exists": false,
+  "data_listing": [],
+  "elapsed_seconds": 0.00095367431640625,
+  "experiment_id": "EXP-FRONTIER-36052053591",
+  "heterogeneity_adequate": false,
+  "live_available": false,
+  "manifest_families": 0,
+  "manifest_jaccard_max": null,
+  "manifest_jaccard_mean": null,
+  "mixed_tasks": 0,
+  "openapi_fetch_test": null,
+  "paths_checked": {
+    "diverse_manifest": {
+      "exists": false,
+      "path": "/home/runner/work/Spider/Spider/research/intel/diverse_site_manifest.json"
+    },
+    "runtime_wal": {
+      "exists": false,
+      "path": "/tmp/spider-runtime/shared.db"
+    },
+    "webarena_verified": {
+      "exists": false,
+      "path": "/home/runner/work/Spider/Spider/data/webarena_verified"
+    },
+    "webgym_292k": {
+      "exists": false,
+      "path": "/home/runner/work/Spider/Spider/data/webgym_292k"
+    }
+  },
+  "pip_list_snippet": "Package Version\n------- -------\npip     26.2.1\n",
+  "playwright_available": false,
+  "playwright_error": "ModuleNotFoundError: No module named 'playwright'",
+  "pooled_tasks": 0,
+  "runtime_wal_exists": false,
+  "timestamp": "2026-09-24T20:06:50Z",
+  "webmcp_registry_available": false
+}

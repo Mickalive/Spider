@@ -1,0 +1,13 @@
+{
+  "pipeline": "TreeWalker 99% + stable locator ranking + DAG codegen + SQLite INSERT OR IGNORE + guard bailout + WebMCP Fetch/OpenAPI+HATEOAS",
+  "attempted": true,
+  "treewalker_fidelity": null,
+  "locator_top1": null,
+  "dag_exec": null,
+  "sqlite_roundtrip": null,
+  "guard_eval_ms": null,
+  "bailout_detection": null,
+  "webmcp_fetch_success": null,
+  "reason": "BrowserGym/CDP missing, no DOM to compress, no CDP AX tree to rank",
+  "status": "NOT_RUN"
+}

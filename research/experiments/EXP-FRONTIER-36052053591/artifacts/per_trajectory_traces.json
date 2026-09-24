@@ -1,0 +1,6 @@
+{
+  "description": "Per-trajectory honest counters resolve+bind+verify+freshness+browser_steps + tokens + latency per trajectory hard reset with guard/tool mask",
+  "trajectories": [],
+  "total_trajectories": 0,
+  "note": "No trajectories captured due to missing substrate"
+}

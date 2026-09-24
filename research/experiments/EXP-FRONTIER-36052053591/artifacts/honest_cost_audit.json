@@ -1,0 +1,8 @@
+{
+  "hard_reset_verified": false,
+  "diff_zero": null,
+  "within_family_std": null,
+  "bijective_gap": null,
+  "rho_shuffled": null,
+  "reason": "No honest counters executed - substrate missing"
+}
