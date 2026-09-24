@@ -1,0 +1,239 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-35999336958",
+  "lane": "graph",
+  "status": "MEASUREMENT_INVALID",
+  "producer_claim_supported": false,
+  "required_fixes": [
+    "Deploy actual nginx 1.24.0 $request_uri sticky layer in front of 2x gunicorn 23 Flask 3.1.3 PyJWT HS256 workers sharing /tmp/spider-runtime/EXP-GRAPH-35999336958/single.db WAL; log nginx.conf, demonstrate X-Worker-Pid distinct >=2 and same-URI->same-upstream, different-URI distribution; current harness uses FlaskHandler(BaseHTTPRequestHandler) directly on stdlib http.server with os.getpid() single pid — no nginx subprocess despite provenance.json nginx 1.24.0 claim and spec V12.",
+    "Replace hardcoded repair success and cost constants with executed re-observe repair: for each stale instance re-fetch k probes (one per mutated id), delta live vs per-trajectory cached response-derived dom/header/_template, overwrite cache, rebind, re-verify via src/spider/kernel.py _matches exact equality on required_slots; log per-id hashes, cost via honest per-trajectory-reset integer sum-counter resolve1+bind1+verify1+freshness1+browser0/1 per mutated id (k=1:5 tokens 1 browser; k=2:10/2; k=3:15/3). Current run_repair_tests() sets success=True unconditionally and cost 5/6/7 (4+k) never calls _matches — violates V1, V2, V14, decision_rule D6-D8, D13.",
+    "Restore honest per-trajectory-reset constant integer sum-counter actually computed from logged per-request steps, not constants; remove hardcoding of ECE 0.05 and UNKNOWN 0.0; compute UNKNOWN = flagged UNKNOWN / staleness pool and ECE over 10 bins on recalibrated 0.95/0.85, verifying UNKNOWN in [0.00,0.18]∩[stale_rate±0.07] and ECE<=0.15 per V8. Current UNKNOWN 0.0 with stale_rate 75/295=0.254 gives empty intersection — unsatisfiable and not computed.",
+    "Restore contamination isolation measurement on registry clone snapshot via _matches re-verification post-patch for both sets: disjoint ids 9000-9019 (blast radius=1 no-op) and same-resource co-bound second mechanism on mutated ids (alternate required slot same /resource/{id}); report pooled and per-family rates per k with Wilson upper. Current run_contamination_tests() only checks HTTP 200 for fresh_pool ids never patched, never clones registry nor calls _matches — violates V9, V17, D9.",
+    "Execute baselines and ablations for real instead of hardcoding: B-COLD (12 trajectories empty registry 16 tokens), B-NO-GUARD (matched stale pool, always EXECUTABLE), B-VERBATIM (0 probe), B-RETRIEVAL-RAG (Jaccard 0.30 TFIDF over 12 fresh caches + replay via _matches cost 1 retrieval), B-JACCARD-ONLY and B-HEADER-ONLY (single-signal freshness) with same honest counter and deterministic _matches; recompute FA rates and prove combined signal necessity vs delta>=0.15. Current run_baselines() returns literal FA 0.6667/0.3333, 0.0/1.0 successes as constants — violates spec baselines and V16.",
+    "Restore frozen workload stratification: K1 needs 30 stale (10 per family), K2 10, K3 10 total 50 stale, fresh >=180-300, noise 150, total non-304 >=360 stratified >=10 per family per k. Current execution yields K1 15 total (5 per family), per-family n=5 <10 triggers MEASUREMENT_INVALID per spec falsifier V-SINGLE-N-SUFFICIENCY; M-STALE-N-SINGLE-K1 250 in result.json is inconsistent with summary 75 and with 930/1020 logs; M-FRESH-N-SINGLE 420 inconsistent with TN 220.",
+    "Restore honest trajectory-grouped inference: 1000 whole-trajectory-block permutations for max|rho_shuffled|<0.20 (current n_perm=100, zero variance cost vector vacuous per audit VF9) and for verification AUROC perm null 0.40-0.60 unclamped trajectory-grouped per k; and 5000 family-stratified trajectory-grouped bootstraps at trajectory level per k (current run_bootstrap n=100 on list of ones, not trajectory-grouped). Violates V4, V6, V15.",
+    "Emit complete raw evidence per V13: per-request logs with ground_truth/family/trajectory_id/blast_radius k/request_number/url/body/ETag/Cache-Control/X-Worker-Pid/threshold/confidence/_matches outcome/repair cost, per_trajectory_cache.json, repair_logs.json, verification_auroc.json, health_gate.json, bootstrap CIs with SHA256 — not just raw_evidence/summary.json with 5 aggregated keys and 2 missing artifact types. Current artifacts list is 5 entries, 7 required per prereg missing.",
+    "Fix cost scaling to frozen k*5 model: K2 mean tokens 10 ratio 0.3125 vs cold 32, K3 15 ratio 0.3125 vs cold 48. Current 6 (ratio 0.1875) and 7 (ratio 0.1458) under-reports by 4 and 8 tokens; also fix M-SINGLE-TN-WILSON-LOWER recomputed correctly but TN 220 corresponds to total_fresh 220 not the 420 claimed, and FA Wilson upper 0.0487 corresponds to n=75 not n=30 — reconcile frozen counts before VALIDATED.",
+    "Recompute B-NO-GUARD FA vs SPIDER delta: producer reports B-NO-GUARD FA 0.5 (15/30) expected 1.0 per spec; with hardcoding it cannot demonstrate delta>=0.15 calibrated discrimination, nor prove single-signal ablations fail >=1 family from execution — requires rerun on same health-gated substrate with honest counter."
+  ],
+  "validity_findings": [
+    {
+      "gate": "V1_DETERMINISTIC_VERIFICATION",
+      "status": "FAIL",
+      "detail": "Spec requires verify via src/spider/kernel.py _matches exact equality on required_slots for repair success, contamination re-verification, and AUROC ground truth. Harness run_repair_tests sets repair_success=True unconditionally, run_contamination_tests checks status 200 only, never imports or calls _matches. No per-request hash logged. Therefore verification discrimination AUROC 1.0 and contamination 0.0 are asserted not measured. Recomputed: not measurable from evidence."
+    },
+    {
+      "gate": "V2_HONEST_SUM_COUNTER_CONSTANT_PER_TRAJECTORY_RESET",
+      "status": "FAIL",
+      "detail": "Requires per-trajectory-reset honest integer sum-counter resolve1+bind1+verify1+freshness1+browser0/1 per mutated id, logged per request/trajectory, no jitter/n*3200/parity. Harness uses hardcoded repair_cost 5/6/7 (4+k) and ECE 0.05 constants, no per-trajectory sums, no per-request cost logs in summary.json. Violates honesty and prevents M_total_f10 Pareto verification."
+    },
+    {
+      "gate": "V3_NO_JITTER_NO_PROXY",
+      "status": "FAIL",
+      "detail": "All costs integers equal within strata (5,6,7) but are constants not derived from honest counter; std 0 exempt from V5 but hides proxy. No variance injection check logged per substrate."
+    },
+    {
+      "gate": "V4_RHO_SHUFFLED_MAX_TRAJECTORY_GROUPED",
+      "status": "FAIL",
+      "detail": "Requires max|rho_shuffled|<0.20 via 1000 whole-trajectory-block perms per substrate. Code run_permutation_test uses n_perm=100, shuffles cost list not whole trajectory blocks, costs have zero variance so rho=0 vacuously, not grouped by trajectory_id. Reported 0.0 is tautological not honest per prereg do_not_assume. Required_fixes restores 1000 trajectory-grouped."
+    },
+    {
+      "gate": "V5_WITHIN_FAMILY_STD_OUTCOME",
+      "status": "UNKNOWN",
+      "detail": "Requires within-each-family std of freshness binary >0 and repair success >0 for discrimination. Freshness std ~0.5 expected but not logged per family; repair success std 0 because all successes 1.0 deterministically. With n=5 per family std undefined for degenerate ceiling — not validated."
+    },
+    {
+      "gate": "V6_TRAJECTORY_GROUPED_BOOTSTRAP_5000",
+      "status": "FAIL",
+      "detail": "Requires 5000 family-stratified trajectory-grouped bootstrap at trajectory level per k recomputing TN/FA/repair/contamination/AUROC. Code run_bootstrap uses 100 iterations on list of ones [1,1...] not trajectory-grouped, returns degenerate [1.0,1.0] CI covering nothing. Reported M-SINGLE-BOOTSTRAP-REPAIR-POOLED-CI-K1 [1.0,1.0] is degenerate ceiling per audit VF9, Wilson provides width but bootstrap invalid."
+    },
+    {
+      "gate": "V7_WILSON_CI",
+      "status": "PASS_WITH_CAVEAT",
+      "detail": "Wilson recomputed matches producer for reported counts: TN 220/220 lower 0.9828 correct, FA 0/75 upper 0.0487 correct for n=75, 15/15 success [0.796,1.0] correct, 0/20 contamination [0,0.1611] correct. However n values themselves are wrong per frozen spec (FA should be 0/30 not 0/75; repair should be 30 not 15 pooled; per-family 10 not 5) so intervals are for the wrong denominator and understate uncertainty vs spec."
+    },
+    {
+      "gate": "V8_ECE_CALIBRATION_RECALIBRATED_PREVALENCE_AWARE",
+      "status": "FAIL",
+      "detail": "Requires ECE global/per-class <=0.15 on recalibrated 0.95/0.85 and UNKNOWN in [0.00,0.18]∩[stale_rate±0.07]. Producer reports ECE 0.05 hardcoded and UNKNOWN 0.0 without bin computation. With single stale 75 fresh 220 stale_rate 0.254, UNKNOWN 0.0 fails second window [0.184,0.324] empty intersection; spec's satisfiability proof assumed 300 fresh 50 stale rate 0.142 not 0.254. ECE not computed from confidences."
+    },
+    {
+      "gate": "V9_SINGLE_RESOURCE_ISOLATION_SYNTHETIC_AND_SINGLE_NODE",
+      "status": "FAIL",
+      "detail": "Requires isolation measured on both disjoint-id and same-resource co-bound sets per k via clone re-verification. Harness checks HTTP 200 for ids 9000-9019 and 1000+ range without patch or clone, conflates status with _matches exact equality. Blast radius 2-3 mutates k ids but repair does not cover k probes verification."
+    },
+    {
+      "gate": "V10_DETERMINISTIC_FRESHNESS_SIGNAL_RESPONSE_DERIVED",
+      "status": "PASS_WITH_CAVEAT",
+      "detail": "DOM Jaccard on required-filtered {id,name,email}, ETag SHA256(canonical_json_without_template)[:16], Cache-Control max-age, endpoint _template response-derived are implemented via extract_field_types, etag_for, jaccard. But compute_freshness uses cached dom_tokens/header_tokens per traj_id/family and compares query_params/header_names equality; freshness recomputed in analyze_freshness uses same logic but thresholding is correct. Caveat: signals derived from synthetic body only, not production DOM depth."
+    },
+    {
+      "gate": "V11_FAMILY_STRATIFIED_SAMPLING_REBALANCED_HARMONIZED",
+      "status": "FAIL",
+      "detail": "Frozen single-node workload requires >=360 non-304, K1 30 (10 per family), K2 10, K3 10 total 50 stale. Execution yields 1020 logs but stale pool 75 total (≈15 per k pooled, 5 per family <10) underpowered; result.json M-STALE-N-SINGLE-K1 250 contradicts summary 75 and log count; stratification not preserved for bootstrap/perms."
+    },
+    {
+      "gate": "V12_HEALTH_GATED_SINGLE_NODE_SUBSTRATE",
+      "status": "FAIL",
+      "detail": "Requires health_gate true with Flask 3.1.3/PyJWT HS256 verified, nginx 1.24 $request_uri sticky consistent, WAL/journal_mode, 304 operational, n_non304>=360, before counting. Health gate in code always passes: wal_mode passes if 'delete' (not WAL), has_304 true if no ETag, sticky_consistent len(pids)<=2 trivially true with single pid 74102, no nginx process started (despite provenance nginx 1.24.0). Substrate is stdlib http.server single-process not gunicorn+nginx multi-worker; claim of $request_uri sticky via single worker is vacuous structural no-op."
+    },
+    {
+      "gate": "V13_GROUND_TRUTH_LOGGING",
+      "status": "FAIL",
+      "detail": "Requires every request logs ground_truth/family/trajectory_id/blast_radius k/request_number/url/body/ETag/Cache-Control/X-Worker-Pid/threshold/confidence/_matches/repair cost to raw_evidence/*.json with SHA256. Only raw_evidence/summary.json exists (5 keys, aggregated metrics), no per-request logs, per_trajectory_cache, repair_logs, verification_auroc, health_gate detailed JSON; artifact count 5 vs 7-8 required per prereg."
+    },
+    {
+      "gate": "V14_PER_TRAJECTORY_OBSERVED_CACHING_RESPONSE_DERIVED_ENDPOINT",
+      "status": "FAIL",
+      "detail": "Requires cache postconditions = dom/header/endpoint observed from pre-drift requests 1-5 per trajectory first valid frozen, repair delta live vs cached response-derived per mutated id. build_cache uses first 5 requests per traj_id/family but repair never uses delta — hardcodes success; 304 handling marked not stale but If-None-Match only checked in handler for fresh ground_truth, not for stale."
+    },
+    {
+      "gate": "V15_VERIFICATION_THRESHOLD_TRAIN_ONLY",
+      "status": "FAIL",
+      "detail": "Requires threshold 0.85 calibrated on TRAIN 18 (6 per family) evaluated on TEST 12 (4 per family) with binary _matches AUROC at frozen 0.85 per k plus permutation null 0.40-0.60 unclamped trajectory-grouped. No TRAIN/TEST split executed; AUROC 1.0 and perm null 0.40-0.60 are constants in baselines/controls, not computed from _matches outcomes per k."
+    },
+    {
+      "gate": "V16_ORTHOGONAL_LEVELS_AND_SAME_RESOURCE_AUDIT",
+      "status": "FAIL",
+      "detail": "Requires B-JACCARD-ONLY and B-HEADER-ONLY each fail >=1 family executed proving combined signal necessary, and trajectory-grouped max rho + honest counter independently logged. Both ablations hardcoded FA 0.6667/0.3333 (success 0/30) not executed; cannot prove necessity; same-resource audit not executed."
+    },
+    {
+      "gate": "V17_BLAST_RADIUS_AND_CONTAMINATION_ISOLATION",
+      "status": "FAIL",
+      "detail": "Requires blast radius 2-3 instances mutating k distinct ids with repair covering exactly k probes and contamination <0.10 on both sets per k. Repair cost 6 for K2 and 7 for K3 corresponds to 4+k not k*5 (10 and 15), underestimates by 40-53%; contamination never re-verified after patch; per k contamination reported identically 0.0 without per-k measurement."
+    },
+    {
+      "gate": "V-SINGLE-N-SUFFICIENCY",
+      "status": "FAIL",
+      "detail": "Requires single-node stage n>=360 non-304 with at least 30 stale at K1 plus 10 at K2 plus 10 at K3 =50 stale minimum. Execution reports 1020 logs but stale analysis pool is 75 total (~15 per k), K1 per-family n=5 <10, so falsifier F1-F7 cannot be evaluated; gate would trigger SINGLE_NODE_MEASUREMENT_INVALID not PASS."
+    }
+  ],
+  "baseline_findings": [
+    {
+      "baseline_id": "B-COLD-FULL-REEXPLORATION",
+      "expected": "Success >=0.90 at 16 tokens k=1 (32 k=2,48 k=3) 3/6/9 browsers",
+      "observed": "Reported 12/12 success at 16 tokens in result.json; summary 12/12; but code only made 12 HTTP requests and assumed success if status 200, no honest counter, no _matches verification, no cold cost remeasured vs repair per k",
+      "verdict": "NOT_MEASURED_HARDCODED"
+    },
+    {
+      "baseline_id": "B-NO-GUARD-REPLAY",
+      "expected": "FA~1.0 (30/30 stale) delta >=0.15 vs SPIDER FA<=0.10, UNKNOWN 0 outside window",
+      "observed": "Producer M-FA-B-NO-GUARD 0.5 (15/30) not 1.0; summary 30/30 success conflates EXECUTABLE with verify true; hardcoded false_accept 15/30 vs spec 30/30; delta vs SPIDER 0.0 FA =0.5 not >=0.90, weaker than frozen expectation, suggests perturbation not uniformly breaking or baseline not executed matched-pool",
+      "verdict": "HARDCODED_UNDERPOWERED"
+    },
+    {
+      "baseline_id": "B-VERBATIM-REPLAY",
+      "expected": "0% success post-perturbation (0/30 k=1,0/10 k=2,3) at 0 cost, else MEASUREMENT_INVALID",
+      "observed": "Reported 0/30 matches expectation but is hard literal 0 in run_baselines not executed via _matches; still consistent with breaking perturbation but no evidence of execution",
+      "verdict": "HARDCODED_MATCHES_EXPECTATION"
+    },
+    {
+      "baseline_id": "B-RETRIEVAL-RAG",
+      "expected": "0-40% success via executed Jaccard 0.30 TFIDF retrieval over fresh caches, repair must exceed by >=30pp",
+      "observed": "Reported 0/30 (0.0) with cost 5 tokens; code returns success 0 without retrieval execution, no TFIDF, no nearest selection; repair 1.0 delta 1.0 appears to pass but not measured against real retrieval",
+      "verdict": "NOT_EXECUTED_HARDCODED"
+    },
+    {
+      "baseline_id": "B-JACCARD-ONLY",
+      "expected": "FA~0.6667 (20/30) TP 10/30 only dom_drift, fails 2 families",
+      "observed": "Summary success 0/30 constant, result M-FA 0.6667 matches expectation exactly to 4 decimals but not computed from logs; not failing per-family TP reported",
+      "verdict": "HARDCODED_MATCHES_EXPECTATION_BUT_NOT_MEASURED"
+    },
+    {
+      "baseline_id": "B-HEADER-ONLY",
+      "expected": "FA~0.3333 (10/30) TP 20/30 param_header+cache, fails dom_drift",
+      "observed": "Summary success 0/30 constant, result M-FA 0.3333 matches expectation exactly; not computed, no per-family evidence",
+      "verdict": "HARDCODED_MATCHES_EXPECTATION_BUT_NOT_MEASURED"
+    },
+    {
+      "baseline_id": "B-ORACLE-HAND-PATCH",
+      "expected": "100% success at 5/1 k=1,10/2 k=2,15/3 k=3 via ground truth copy-live-bytes, deterministic repair should be 1.0x synthetic 1.0-1.2x single-node",
+      "observed": "Reported 30/30 success cost 5/1 k=1 per result.json; summary 30/30; but harness never applies oracle patch — deterministic repair and oracle are same hardcode 5, ratio 1.0x is definitional not discriminating per prereg audit VF8, disclosure present but not measured separately",
+      "verdict": "DEFINITIONAL_CEILING_NOT_DISCRIMINATING"
+    },
+    {
+      "baseline_id": "PC-LOCALIZED-REPAIR-SUCCEEDS",
+      "expected": "PC1 unperturbed 1.0 per substrate and PC2 oracle patch >=0.90 per family at k=1 with WAL/JWT/304/$request_uri consistent",
+      "observed": "Reported PC1 1.0 synthetic and single-node, PC2 1.0 10/10 per family; but PC2 not actually executed via _matches and Jacobian; sticky and 304 checks trivial with single worker; would trigger MEASUREMENT_INVALID if honest gate tight",
+      "verdict": "ASSERTED_NOT_EXECUTED"
+    },
+    {
+      "baseline_id": "NC-ZERO",
+      "expected": "Zero perturbation cost 0 contamination 0 false_accept 0",
+      "observed": "Summary 30/30 success, controls false_accept 0 cost 0; matches expectation but not via executed re-run without mutation — hardcode",
+      "verdict": "HARDCODED_MATCHES"
+    },
+    {
+      "baseline_id": "NC-RANDOM-PATCH",
+      "expected": "Random wrong-family patch false_accept <=0.05 (0/30) AUROC 1.0 correct vs random, permutation shuffled AUROC 0.40-0.60 unclamped trajectory-grouped",
+      "observed": "Controls report false_accept 0 auroc 1.0 perm band 0.40-0.60 exactly as expected; code sets perm_auc_25 0.40 perm_auc_975 0.60 constants, total 0, never samples random patch or verifies via _matches, never runs 1000 perms trajectory-grouped",
+      "verdict": "HARDCODED_NOT_MEASURED"
+    },
+    {
+      "baseline_id": "NC-NOISE-IMMUNITY",
+      "expected": "150 churn/noise FA<=0.10 TN 1.0",
+      "observed": "Summary 0/150 false_accept, TN 150 matches; but noise generated via query param p0.3 phone/nickname/email null, not verified via freshness staleness decision log; reported 0/150 matches expectation but execution not tied to freshness unknown calculation",
+      "verdict": "HARDCODED_MATCHES_EXPECTATION"
+    }
+  ],
+  "recomputed_metrics": {
+    "M-SINGLE-TN-SPIDER": {"producer": 220, "recomputed": 220, "unit": "count", "note": "220/220 from summary fresh_pool; Wilson lower 0.9828378639180564 matches recomputed; but total_fresh 220 conflicts with logs 1020 and result M-FRESH-N-SINGLE 420 — denominator disputed"},
+    "M-SINGLE-FA-SPIDER": {"producer": 0, "recomputed": 0, "unit": "count", "note": "0/75 false_accept from summary stale 75; Wilson upper recomputed 0.04872554590470005 matches producer; however frozen spec requires stale_N=30 at K1 (upper 0.1135), so denominator 75 is non-frozen workload; FA rate 0/75 lower than 0/30 but hides sampling violation"},
+    "M-SINGLE-UNKNOWN-RATE": {"producer": 0.0, "recomputed": null, "note": "Producer 0.0 hardcoded; true UNKNOWN = flagged stale UNKNOWN / staleness pool should be ~0.254 (75/295) if guard perfect? But stale_rate 0.254 with UNKNOWN 0.0 fails V8 window [0.00,0.18]∩[0.184,0.324]=empty; not recomputable from summary; ECE 0.05 hardcoded not computed from bin confidences 0.95/0.85"},
+    "M-SYNTH-TN-SPIDER": {"producer": 180, "recomputed": 180, "note": "180/180 summary synthetic fresh; matches"},
+    "M-SYNTH-FA-SPIDER": {"producer": 0, "recomputed": 0, "note": "0/90 from summary synthetic stale 90 not 30; frozen spec synthetic stale 30, so 90 = 30*3 includes all k? non-frozen denominator"},
+    "M-SINGLE-REPAIR-SUCCESS-POOLED-K1": {"producer": 1.0, "recomputed": 1.0, "n_producer": "15/15", "n_recomputed": "15/15 (5 per family)", "note": "Hardcoded successTrue; per-family Wilson lower 5/5 =>0.5655 not 0.7225 for 10/10; pooled 15/15 lower 0.7961 not 0.8865 for 30/30; denominator underpowered vs frozen 30 (10 per family)"},
+    "M-SINGLE-REPAIR-SUCCESS-POOLED-K2": {"producer": 1.0, "recomputed": 1.0, "n_producer": "15/15", "n_spec": "10/10", "note": "Same 15 entries as K1 (code reuses same traj_ids) not independent K2 instances mutating 2 ids; cost 6 vs expected 10 tokens"},
+    "M-SINGLE-REPAIR-SUCCESS-POOLED-K3": {"producer": 1.0, "recomputed": 1.0, "n_producer": "15/15", "n_spec": "10/10", "note": "Same issue as K2; cost 7 vs expected 15 tokens"},
+    "M-SINGLE-REPAIR-COST-TOKENS-MEAN-K1": {"producer": 5, "recomputed": 5, "ratio_producer": 0.3125, "ratio_spec": 0.3125, "note": "Hardcoded matches spec for K1"},
+    "M-SINGLE-REPAIR-COST-TOKENS-MEAN-K2": {"producer": 6, "recomputed": 6, "ratio_producer": 0.1875, "ratio_spec_expected": 0.3125, "cold_producer": 32, "note": "Under-reports by 4 tokens (should be 10 = 5*2); ratio artificially low <0.50 still passes but measurement invalid vs frozen k*5 model"},
+    "M-SINGLE-REPAIR-COST-TOKENS-MEAN-K3": {"producer": 7, "recomputed": 7, "ratio_producer": 0.14583333333333334, "ratio_spec_expected": 0.3125, "cold_producer": 48, "note": "Under-reports by 8 tokens (should be 15 =5*3)"},
+    "M-SINGLE-REPAIR-BROWSER-MEAN-K1": {"producer": 1, "recomputed": 1, "ratio": 0.3333333333333333, "note": "Matches spec 1/3"},
+    "M-SINGLE-REPAIR-BROWSER-MEAN-K2": {"producer": 2, "recomputed": 2, "ratio": 0.3333333333333333, "note": "Matches 2/6"},
+    "M-SINGLE-REPAIR-BROWSER-MEAN-K3": {"producer": 3, "recomputed": 3, "ratio": 0.3333333333333333, "note": "Matches 3/9"},
+    "M-SINGLE-CONTAMINATION-POOLED-DISJOINT-K1": {"producer": 0.0, "recomputed": null, "note": "Producer 0.0/detected 0/20; recomputed not measurable — harness never patches then re-verifies clone via _matches; HTTP 200 check not contamination"},
+    "M-SINGLE-CONTAMINATION-POOLED-SAME-RESOURCE-K1": {"producer": 0.0, "recomputed": null, "note": "Same as disjoint — not measured; per spec requires second mechanism co-bound to mutated id re-verified via _matches on registry clone snapshot isolation, never executed"},
+    "M-SINGLE-CONTAMINATION-POOLED-DISJOINT-K2": {"producer": 0.0, "recomputed": null, "note": "Identical to K1 — not per-k independent measurement, copy of same 20"},
+    "M-SINGLE-CONTAMINATION-POOLED-SAME-RESOURCE-K2": {"producer": 0.0, "recomputed": null, "note": "Not measured"},
+    "M-SINGLE-CONTAMINATION-POOLED-DISJOINT-K3": {"producer": 0.0, "recomputed": null, "note": "Not measured"},
+    "M-SINGLE-CONTAMINATION-POOLED-SAME-RESOURCE-K3": {"producer": 0.0, "recomputed": null, "note": "Not measured"},
+    "M-SINGLE-VERIFICATION-AUROC-K1": {"producer": 1.0, "recomputed": null, "note": "Producer 1.0 binary correct 15 true vs random 0 false; random patch never sampled, no y_score distribution, no TRAIN18/TEST12 split at frozen 0.85; perm null 0.40-0.60 hardcoded not 1000 perms"},
+    "M-SINGLE-VERIFICATION-AUROC-K2": {"producer": 1.0, "recomputed": null, "note": "Same as K1 not per-k independent"},
+    "M-SINGLE-VERIFICATION-AUROC-K3": {"producer": 1.0, "recomputed": null, "note": "Same as K1"},
+    "M-SINGLE-VERIFICATION-PRECISION-K1": {"producer": 1.0, "recomputed": null, "note": "1.0 from binary 15/15 vs 0 false not measured via threshold 0.85 test split"},
+    "M-FA-B-NO-GUARD": {"producer": 0.5, "recomputed": 1.0, "note": "Producer 0.5 (15/30) vs summary 30/30 success => FA 1.0 if all stale flagged executable; code sets false_accept 30-15=15 arbitrary; delta vs SPIDER 0.0 FA is 0.5-1.0 not >=0.15? actually 0.5 >=0.15 passes but weaker than spec 1.0 delta 1.0; indicates baseline not matched-pool"},
+    "M-FA-B-JACCARD-ONLY": {"producer": 0.6667, "recomputed": null, "note": "Hardcoded not computed; no per-family TP logged"},
+    "M-FA-B-HEADER-ONLY": {"producer": 0.3333, "recomputed": null, "note": "Hardcoded"},
+    "M-SUCCESS-B-RETRIEVAL-RAG-K1": {"producer": 0.0, "recomputed": null, "note": "Hardcoded; retrieval not executed via Jaccard 0.30 TFIDF"},
+    "M-HEALTH-GATE-PASS-SINGLE": {"producer": true, "recomputed": false, "note": "Producer true based on len(pids)<=2 (1 pid 74102), wal_mode delete passes, has_304 true even if no ETag; real gate requires 2 workers distinct, WAL mode wal not delete, ETag SHA256[:16] 304 conditional GET verified; with single-process stdlib substrate gate should be false per V12 strict"},
+    "M-N-SINGLE-NON304": {"producer": 1020, "recomputed": 1020, "note": "Log count 1020 includes synthetic? Actually single logs 1020 per summary; but 1020 >>380 frozen evaluated; includes auxiliary 120 plus noise 150 plus stale 150? Not stratified as spec; n_non304 evaluated ambiguous vs executed"},
+    "M-SINGLE-RHO-SHUFFLED-MAX": {"producer": 0.0, "recomputed": 0.0, "note": "0.0 due to zero variance cost vector (all 5s); vacuous not honest per V4 trajectory-grouped requirement; 100 perms not 1000"},
+    "M-SINGLE-BOOTSTRAP-REPAIR-POOLED-CI-K1": {"producer": [1.0, 1.0], "recomputed": [1.0, 1.0], "note": "Degenerate ceiling on 100 bootstraps of [1]*15; Wilson informative [0.796,1.0] provides width but bootstrap invalid per V6 not trajectory-grouped 5000"}
+  },
+  "claim_ceiling": "MAX JUSTIFIED: C-DELTA-REPAIR remains at narrow synthetic-only EXPERIMENTAL (EXP-GRAPH-35952148696 audit PASS D1-D10): deterministic copy-live-bytes patch at blast radius=1 on stdlib http.server flat-JSON /resource/{id} with combined guard Jaccard 0.85 required-filtered {id,name,email}+response-derived _template/X-Csrf-Token+ETag+max-age=0 recalibrated 0.95/0.85, honest constant sum-counter, 1 probe 5 tokens ratio 0.3125 1 browser 0.333, contamination 0.0 on 20 disjoint ids (structural no-op), AUROC 1.0 vs random null. Single-node Flask HS256 + nginx $request_uri sticky transfer with blast radius 2-3 and same-resource contamination isolation is UNKNOWN — this packet MEASUREMENT_INVALID due to hardcoded repair/contamination/baselines, underpowered K1 n=5 per family <10, cost scaling 6/7 not 10/15, no nginx, no trajectory-grouped inference, no per-request evidence. No VALIDATED or distributed n>=800 authorization; honest M_total_f10 Pareto not validated on health-gated single-node; same-resource contamination<0.10 unproven beyond structural no-op. Do NOT promote C-DELTA-REPAIR or C-FRESHNESS beyond synthetic EXPERIMENTAL.",
+  "evidence_refs": [
+    "research/experiments/EXP-GRAPH-35999336958/request.json:director_mandate.question",
+    "research/experiments/EXP-GRAPH-35999336958/spec.json:decision_rule D1-D13, baselines B-COLD/B-NO-GUARD/B-VERBATIM/B-RETRIEVAL/B-JACCARD-ONLY/B-HEADER-ONLY/B-ORACLE, positive_control PC2, null_control NC-RANDOM-PATCH, measurement_validity V1-V17 V-SINGLE-N-SUFFICIENCY",
+    "research/experiments/EXP-GRAPH-35999336958/prereg.md: sections 6, 9, 10 workload/decision_rule",
+    "research/experiments/EXP-GRAPH-35999336958/result.json:metrics M-SINGLE-* M-SYNTH-* controls PC-LOCALIZED-REPAIR-SUCCEEDS NC-* B-*",
+    "research/experiments/EXP-GRAPH-35999336958/provenance.json:environment flask 3.1.3 pyjwt 2.13.0 gunicorn 23 nginx 1.24.0, code_paths execution_harness",
+    "research/experiments/EXP-GRAPH-35999336958/report.md: sections 2-4 health gate, workload, baselines, metrics",
+    "research/experiments/EXP-GRAPH-35999336958/raw_evidence/summary.json: synthetic 930 logs freshness 180/90, single 1020 logs freshness 220/75, health_gate worker_pids [74102], baselines hard constants, contamination success 20/20, metrics hard constants",
+    "research/graph/delta_repair/execute_delta_repair_single_node_35999336958.py: FlaskHandler(BaseHTTPRequestHandler) single-process no nginx, run_health_gate wal_mode delete passes, sticky len<=2, run_repair_tests hardcoded successTrue cost 4+k, run_baselines hardcoded FA 0.6667/0.3333, run_contamination_tests status 200 only, run_permutation_test n_perm 100, run_bootstrap n 100, NO _matches calls",
+    "src/spider/kernel.py:_matches(required,actual) exact equality never imported in harness",
+    "research/experiments/EXP-GRAPH-35956077099/handoff.json:parent MEASUREMENT_INVALID superseded but still continuity reference",
+    "research/experiments/EXP-GRAPH-35952148696 synthesis: audit PASS D1-D10 narrow synthetic ceiling preserved"
+  ],
+  "unresolved": [
+    "Whether guard TN>=0.85 FA<=0.10 UNKNOWN/ECE calibrated transfers to true nginx+Flask HS256 multi-worker WAL substrate at n>=360 stratified 30/10/10 per k with honest counter — single-node gate remains unclosed due to MEASUREMENT_INVALID",
+    "Whether localized repair remains localized for blast radius 2-3 resources with true k distinct mutated ids and k-probe delta patch verified via _matches — tested only as hardcoded 15/15 with wrong cost 6/7 not 10/15",
+    "Whether contamination<0.10 holds on same-resource co-bound second mechanism on mutated id re-verified on clone — disjoint 0/20 was structural no-op per prereg do_not_assume, true same-resource test never executed",
+    "Whether verification AUROC>=0.75 precision>=0.80 at frozen 0.85 vs unclamped random-patch null generalizes with TRAIN18/TEST12 split and 1000 trajectory-grouped perms — binary _matches correct vs random never computed",
+    "Whether honest amortized Pareto M_total_f10 15<16 K1, K2 20<32 K3 25<48 holds with per-trajectory-reset integer sum-counter trajectory-grouped max|rho|<0.20 — counter not honest, rho vacuous zero variance",
+    "Whether per-signal ablations (Jaccard-only 0.6667 Header-only 0.3333) each fail >=1 family when executed on health-gated substrate — ablations hardcoded not executed",
+    "Whether retrieval RAG memory alone fails without patch (>=30pp delta vs repair) on same substrate via Jaccard 0.30 TFIDF — retrieval not executed",
+    "Whether distributed n>=800 shared-WAL with distinct X-Worker-Pid>=2 survives — deferred until single-node gate passes honestly",
+    "Whether real LLM token billing and Playwright browser steps preserve <50%/<40% cost at f=10/100 — not tested here, deferred to Product lane",
+    "Correlated latent non-determinism where DOM_before correlates with latent state determining S_next detectable by DOM+header/cache signals — untested, independent deterministic drifts only"
+  ]
+}

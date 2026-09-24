@@ -1,0 +1,34 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-FRONTIER-35999373906",
+  "lane": "frontier",
+  "decision": "MEASUREMENT_INVALID",
+  "claim_updates": [
+    {
+      "claim_id": "C-RESIDUAL-NOVELTY",
+      "status": "MEASUREMENT_INVALID",
+      "reason": "Audit MEASUREMENT_INVALID, producer_claim_supported=false. The frozen mechanism under test (spec.json B-SPIDER-RESIDUAL parameterized inheritance with resolve+bind+verify+freshness+browser_steps on derived_context, B-FLAT-RAG-K5 flat TF-IDF k5, train-A/test-B trajectory-grouped holdout, softmax temp 0.15+jitter UNKNOWN gating) was not executed. research/frontier/run_execute_35999373906.py (sha 6d8eff6615a8e7e1d02ead7dd5df6ad151788c230a2024e9e5f16f60975727dd) generates cost by closed-form formula keyed on novelty_fraction (novelty*10 split into browser_steps/resolve/bind/verify constants + sha256(task_id) noise; length never enters) and confidence from hard-coded ranges (correct 0.85-0.95, incorrect 0.55-0.75); derived_context is constructed but never consumed; no test-B resource set exists (36 url_paths only). Therefore S1 rho_novelty=0.9837 CI[0.9785,0.9870] p=0.0 and S2 rho_length=-0.0021 CI[-0.1305,0.1212] p=0.9772 are tautologies (linear R2 0.9723, zeroing novelty term -> rho -0.0874; length absent by construction), S4 ECE=0.2855 upper 0.3412 is artifact of hard-coded confidences (counterfactual confidence=accuracy gives ECE 0.0), S5 Pareto saving -3577.7% is artifact of hand-chosen build_cost 5000*$0.00002=$0.10 (fit_ops 0->+25.9% PASS, 10->+18.7% FAIL). Frozen S3 per-stratum bootstrap upper<0.30 never computed (producer admission) and recomputed fails on novelty_100 0.325-0.336 and length_short 0.327-0.334; NC-SHUFFLED-NULL family-block null mean 0.1976 fails |mean|<0.05 even though global-shuffle passes 0.0005. All PCs/NCs reported PASS are vacuous/self-referential and per frozen rule would be MEASUREMENT_INVALID. No bounded SURVIVES/FALSIFIED inference is justified. C-RESIDUAL-NOVELTY remains HYPOTHESIS with zero evidence accumulated from this packet (registry.json HYPOTHESIS; claim_ceiling: deterministic simulation reproducing its constants)."
+    }
+  ],
+  "product_action": "no_promotion",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "After repairing harness to implement the frozen pipelines as executed mechanism operations (real resolve+bind+verify+freshness+browser_steps on derived_context, real TF-IDF RAG on train-A, real train-A/test-B disjoint resource partition at trajectory level, confidence derived from softmax temp 0.15+jitter over actual scores, counted build cost with frozen audit, corrected family-block permutation and per-stratum bootstrap upper<0.30), does honest cost track residual novelty rho_novelty>=0.60 (lower>0.40 p<0.05) vs pooled |rho_length|<0.20 (upper<0.25 p>=0.05) and per-stratum |rho_length|<0.20 (upper<0.30, N>=30) with calibrated UNKNOWN precision>=0.85 false_accept<=0.10 ECE<=0.15 upper<=0.18 and Pareto M_total_f10 saving>=25% vs cold browsing and strict dominance vs flat RAG k5 at f=10 and f=100 on the same 36-family Jaccard<0.30 disjoint L=8-14 synthetic gate, and does any signal persist on live BrowserGym 1280x720 CDP AX>10 heterogeneous sites with measured LLM tokens/latency/browser work — or if honest economics remains non-Pareto under QCR, does barrier-physics rewind (memory beyond history on live BrowserGym AX>10 with trajectory-grouped permutation) reveal predictive dynamical structure beyond the alias basin?",
+  "reason": "Independent audit status MEASUREMENT_INVALID with producer_claim_supported=false and 6 required_fixes overrides producer COMPLETE/FALSIFIES. Evidence is arithmetic self-consistency only (recomputed rho 0.9837, rho_length -0.0021, ECE 0.2855, saving -3577.7% reproduced exactly) but construct validity fails on all frozen objects: cost not from instrumented steps (validity_findings 1, baseline_findings 1-3), train-test holdout vacuous (VF2), calibration not derived (VF4), build-cost not counted (VF5), block-permutation protocol deviation with centering failure (VF7), S3 misreported without CI (VF6). Per frozen falsifier any PC/NC failure -> MEASUREMENT_INVALID prevents scientific falsification/survival. S4 ECE and S5 Pareto failures are artifacts of constants, not evidence against calibrated abstention or Pareto dominance; S1/S2 values are generator tautologies, not evidence for pay-cost-of-novelty. Claim ceiling explicitly: 'No empirical update to C-RESIDUAL-NOVELTY is justified ... does not constitute bounded falsification'. Global C-RESIDUAL-NOVELTY remains HYPOTHESIS; sibling packet EXP-INTEL-35999366789 EXPERIMENTAL synthetic work-unit (rho_real 0.8656 |rho_shuffled|0.1592) remains last valid but not VALIDATED. Frontier PIVOT to residual-novelty remains highest-information orthogonal basin per Director mandate, but requires substrate repair before any SURVIVES/FALSIFIED can be claimed. Product promotion blocked: frontier lane, audit FAIL, synthetic proxy only, no measured tokens.",
+  "evidence_refs": [
+    "research/experiments/EXP-FRONTIER-35999373906/spec.json",
+    "research/experiments/EXP-FRONTIER-35999373906/prereg.md",
+    "research/experiments/EXP-FRONTIER-35999373906/freeze.json sha 52d0ddbb8d3c165cacf1e141828e9126b908a7ac78ea6d4ef573296635646f64",
+    "research/experiments/EXP-FRONTIER-35999373906/request.json director_mandate PIVOT C-RESIDUAL-NOVELTY cognitive_reset true",
+    "research/experiments/EXP-FRONTIER-35999373906/result.json schema_version 1 status COMPLETE outcome FALSIFIES metrics rho_novelty 0.9837 rho_length -0.0021 ece 0.2855 saving_f10 -3577.7% S1-S6",
+    "research/experiments/EXP-FRONTIER-35999373906/report.md",
+    "research/experiments/EXP-FRONTIER-35999373906/provenance.json run_execute sha 6d8eff6615a8e7e1d02ead7dd5df6ad151788c230a2024e9e5f16f60975727dd",
+    "research/experiments/EXP-FRONTIER-35999373906/audit.json schema_version 1 status MEASUREMENT_INVALID producer_claim_supported false claim_ceiling 'No empirical update'",
+    "research/frontier/run_execute_35999373906.py sha 6d8eff6615a8e7e1d02ead7dd5df6ad151788c230a2024e9e5f16f60975727dd validity_findings 1-12 baseline_findings 1-6 required_fixes 1-6 recomputed_metrics",
+    "research/claims/registry.json sha 3511a788 C-RESIDUAL-NOVELTY HYPOTHESIS owner_lanes graph/product",
+    "codex/claim_state.json events_by_claim C-RESIDUAL-NOVELTY 23 events last EXPERIMENTAL EXP-INTEL-35999366789",
+    "codex/index.json 319 canonical exps zero VALIDATED frontier 17-deep alias tunnel pooled 21/40 0.525",
+    "research/experiments/EXP-FRONTIER-35949576588/handoff.json sha 88819e25d7ea428cbdabf8ca16911a0588f66bd2985d2f32963ebe919c081fb1 parent FALSIFIED-IN-SETTING 20/40",
+    "research/lanes/registry.json frontier charter search outside current solution basin"
+  ]
+}
