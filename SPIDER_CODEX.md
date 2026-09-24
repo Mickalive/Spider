@@ -4,7 +4,7 @@ Pre-2.0 canonical memory remains frozen at `archive/spider-codex-ultimate:SPIDER
 
 Canonical Research 2.0 evidence lives in `codex/experiments/<experiment_id>/`.
 Use `codex/index.json` and `codex/claim_state.json` to locate relevant packets; do not load all experiment bodies by default.
-Validated experiments: **360**. Coverage gaps: **0**. Quarantined packets: **2**.
+Validated experiments: **361**. Coverage gaps: **0**. Quarantined packets: **2**.
 
 ## Experiment index
 
@@ -370,6 +370,7 @@ Validated experiments: **360**. Coverage gaps: **0**. Quarantined packets: **2**
 | EXP-FRONTIER-36049636798 | frontier | MEASUREMENT_INVALID | MEASUREMENT_INVALID | C-RESIDUAL-NOVELTY | `debe94de9781` |
 | EXP-PHYSICS-36052025550 | physics | MEASUREMENT_INVALID | MEASUREMENT_INVALID | C-WEB-DYNAMICS | `d134291129e8` |
 | EXP-FRONTIER-36052053591 | frontier | PASS | MEASUREMENT_INVALID | C-SEMANTIC-RESOLVE | `a44d80c206e7` |
+| EXP-INTEL-36058324385 | intel | REVISE | MIXED — H_SAMPLED_CENSUS_REPLACES_EXHAUSTIVE does NOT SURVIVE on attempted censuses; durable single-source pin survives but union 4/10, WebGym diverse UNAVAILABLE pending HF_TOKEN, delta inverted fails gate | C-CROSSSITE | `e5f53e7c8be8` |
 
 ## Latest recorded claim events
 
@@ -377,7 +378,7 @@ These are chronological latest events, not an automatic truth ranking.
 
 | Claim | Status | Experiment | Lane |
 |---|---|---|---|
-| C-CROSSSITE | HYPOTHESIS | EXP-INTEL-36042590671 | intel |
+| C-CROSSSITE | HYPOTHESIS | EXP-INTEL-36058324385 | intel |
 | C-DELTA-REPAIR | MEASUREMENT_INVALID | EXP-GRAPH-35999336958 | graph |
 | C-FRESHNESS | HYPOTHESIS | EXP-PRODUCT-35949571341 | product |
 | C-LLM-INHERIT | MEASUREMENT_INVALID | EXP-PRODUCT-35961222077 | product |

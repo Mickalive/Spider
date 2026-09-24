@@ -1,0 +1,292 @@
+{
+ "experiment_id": "EXP-INTEL-36058324385",
+ "schema_version": 1,
+ "frozen_inputs": {
+  "request.json": "625c0dc1b06a2b2f0d2aee9f0d5aa73068b25c9720d8f5d26121a68a6810d9ce",
+  "spec.json": "d491946c42ccf0360723ac6cca66f21bbc1811367c84ad17831651bfc6cc85eb",
+  "prereg.md": "4f5c357aa8be47918b1ae8eb9159594738ba6e58e9d560e3651a4742eb7dd7ad",
+  "freeze.json": "c8fc614bb7982542d4181c86dd038eb4c1ddd2d91fd13b09955ebe3ec4e16985"
+ },
+ "frozen_inputs_verified_byte_identical": true,
+ "environment": {
+  "experiment_id": "EXP-INTEL-36058324385",
+  "pip_freeze_sha256": "eb8f9bc6314eced8e9e1d7b32d96f41e9b967d0e3da876b107742b76047af53f",
+  "pip_freeze_lines": 263,
+  "pip_freeze_nonempty": true,
+  "playwright_version": "Version 1.63.0",
+  "viewport": "1280x720",
+  "browsergym_core": "0.14.3",
+  "agentlab": "0.4.2",
+  "playwright": "1.63.0",
+  "versions_match": true
+ },
+ "docker": {
+  "hub_digest": "sha256:3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb",
+  "expected": "sha256:3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb",
+  "container_http": 200,
+  "images_digests": {
+   "cmd": "docker images --digests am1n3e/webarena-verified-shopping",
+   "timeout_configured_s": 120,
+   "returncode": 0,
+   "stdout_tail": "REPOSITORY                          TAG       DIGEST                                                                    IMAGE ID       CREATED        SIZE\nam1n3e/webarena-verified-shopping   <none>    sha256:3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb   a5b6fb47ee9f   7 months ago   13.3GB\n",
+   "stderr_tail": "",
+   "elapsed_s": 0.017,
+   "error": null
+  },
+  "orchestration": "artifacts/raw/container_orchestration.json"
+ },
+ "durable_attempts": {
+  "hf_webgym": "artifacts/raw/hf_webgym_manifest_attempts.json",
+  "hf_webarena": "artifacts/raw/hf_webarena_attempts.json",
+  "github_cross_source": "artifacts/raw/github_cross_source_attempts.json",
+  "ghcr": "artifacts/raw/ghcr_browsergym_attempts.json",
+  "docker_hub": "artifacts/raw/docker_hub_api_attempts.json"
+ },
+ "shared_manifest": {
+  "path": "research/experiments/EXP-INTEL-36058324385/artifacts/derived/shared_diverse_manifest.json",
+  "sha256": "a360cf670d2d15ae3e07cc72c35775f6303f838057bd0fc537b59a175ad9f90b"
+ },
+ "artifacts": [
+  {
+   "path": "research/experiments/EXP-INTEL-36058324385/artifacts/raw/container_health.json",
+   "sha256": "fa80016c49c6306753fcc998f608ec90b563666447adc92576b5f41d4ffbdced"
+  },
+  {
+   "path": "research/experiments/EXP-INTEL-36058324385/artifacts/raw/container_orchestration.json",
+   "sha256": "011c295c2931a8f8a1de951929fd46e92af2511dece748d13c172d17efb6c9ee"
+  },
+  {
+   "path": "research/experiments/EXP-INTEL-36058324385/artifacts/raw/docker_hub_api_attempts.json",
+   "sha256": "eca5b9924c9f9533d4b802a45a42dc5349afd2e6c8269eeb930d25a6c117af23"
+  },
+  {
+   "path": "research/experiments/EXP-INTEL-36058324385/artifacts/raw/environment_pin.json",
+   "sha256": "46a472f28a7d71a9a63987e0c28e58b5a10b3bb898a827bf6801e10ee3f0ab07"
+  },
+  {
+   "path": "research/experiments/EXP-INTEL-36058324385/artifacts/raw/ghcr_browsergym_attempts.json",
+   "sha256": "2f9a1e242330612fded6ecfaae47db7534c54ace88873856d745d813f4af186f"
+  },
+  {
+   "path": "research/experiments/EXP-INTEL-36058324385/artifacts/raw/github_cross_source_attempts.json",
+   "sha256": "c3f2ff4e9957e4469e019024523bdbd75b22c00403c0e4540ae328f30eabd381"
+  },
+  {
+   "path": "research/experiments/EXP-INTEL-36058324385/artifacts/raw/grammar_hash.json",
+   "sha256": "667b86cd6cfad59a630b1dea418f7fc0a1a18ec8de5e8f665c255c7fe0ca5103"
+  },
+  {
+   "path": "research/experiments/EXP-INTEL-36058324385/artifacts/raw/hf_webarena_attempts.json",
+   "sha256": "286625f0facd6eab1884370dacc20bab9a84be1616e9c9269c7aea35baf1ca31"
+  },
+  {
+   "path": "research/experiments/EXP-INTEL-36058324385/artifacts/raw/hf_webgym_manifest_attempts.json",
+   "sha256": "75005fa0d3974145dbb3ab3209ea369a79163435dd905f64717176c25570bdce"
+  },
+  {
+   "path": "research/experiments/EXP-INTEL-36058324385/artifacts/raw/orthogonal_census_provenance.json",
+   "sha256": "329c733eda0824f88487c03497f20989ea26ce48125a7965010334a748485749"
+  },
+  {
+   "path": "research/experiments/EXP-INTEL-36058324385/artifacts/raw/tldextract_pin.json",
+   "sha256": "58a16a839dd0ae89ac7ae0378a7fcf82aa1690e520afafa30d1997e079a8257f"
+  },
+  {
+   "path": "research/experiments/EXP-INTEL-36058324385/artifacts/raw/webarena-verified-fresh.json",
+   "sha256": "d65275660814663375028e9017e1f929e3c38321041b125795e2713b52243d30"
+  },
+  {
+   "path": "research/experiments/EXP-INTEL-36058324385/artifacts/raw/pc_c_fixture.txt",
+   "sha256": "153331751e212c7fe9798a2e20c925be1adb6501dde92210b9c707f99ae7c82c"
+  },
+  {
+   "path": "research/experiments/EXP-INTEL-36058324385/artifacts/raw/pip_freeze.txt",
+   "sha256": "eb8f9bc6314eced8e9e1d7b32d96f41e9b967d0e3da876b107742b76047af53f"
+  },
+  {
+   "path": "research/experiments/EXP-INTEL-36058324385/artifacts/raw/ax_captures.jsonl",
+   "sha256": "6502b4a9f45b43c035685f3f0bed83fbae3fe611e2c178d146d18b4a612ec856"
+  },
+  {
+   "path": "research/experiments/EXP-INTEL-36058324385/artifacts/raw/ax_captures_consistency_fresh.jsonl",
+   "sha256": "6425f123ec327392ddfc99f0a4cdc2bd838888c713da9f5e8d770cbffc5448be"
+  },
+  {
+   "path": "research/experiments/EXP-INTEL-36058324385/artifacts/derived/ax_analysis.json",
+   "sha256": "efb35f27c0155fe2ce6f8d932f55170f7411a104c079a771c70e232a04aba865"
+  },
+  {
+   "path": "research/experiments/EXP-INTEL-36058324385/artifacts/derived/ax_consistency_fulltree.json",
+   "sha256": "cbaff4f8c8809974ed793db86b9659968b0efceba9abc477c7f87331defacfb7"
+  },
+  {
+   "path": "research/experiments/EXP-INTEL-36058324385/artifacts/derived/deterministic_family_samples.json",
+   "sha256": "7071fab5c76ccdf55282f401e683b24f2afa021a31af5ea7aa25e3ca03708e3c"
+  },
+  {
+   "path": "research/experiments/EXP-INTEL-36058324385/artifacts/derived/family_anchoring.json",
+   "sha256": "2f1479127c0becec650c263b45b947a8352fd6314b950f6de97ff2cbd93e35e8"
+  },
+  {
+   "path": "research/experiments/EXP-INTEL-36058324385/artifacts/derived/pc_c_param_prevalence.json",
+   "sha256": "82e47d10bce1a32929eb0aaf1ed0828e551d933ee85ee1b5476dd647ecec696e"
+  },
+  {
+   "path": "research/experiments/EXP-INTEL-36058324385/artifacts/derived/shared_diverse_manifest.json",
+   "sha256": "a360cf670d2d15ae3e07cc72c35775f6303f838057bd0fc537b59a175ad9f90b"
+  },
+  {
+   "path": "research/experiments/EXP-INTEL-36058324385/artifacts/derived/vacuous_single_store.json",
+   "sha256": "68655bfd8dfbc9005f4577f23f424acb5d23282d5dc7f8a9013078bf0f18e540"
+  },
+  {
+   "path": "research/experiments/EXP-INTEL-36058324385/artifacts/derived/webarena_census.json",
+   "sha256": "db0890b092fe5d6fdb5f3a70d2082939a71553e406d97ff3e62538e9da31c831"
+  },
+  {
+   "path": "research/experiments/EXP-INTEL-36058324385/artifacts/derived/webgym_sampled_census.json",
+   "sha256": "7efa52ea5154ff7790ebadcde2d190fed3388c6e69bf86368daaf2daf5050d19"
+  },
+  {
+   "path": "research/experiments/EXP-INTEL-36058324385/artifacts/derived/webgym_threshold_sweep.json",
+   "sha256": "8e09c95c2d28e811b8106aef23cafbe877701cc58706029204a71c25efdb0678"
+  }
+ ],
+ "grammar_hash_live": {
+  "path": "/home/runner/work/Spider/Spider/research/intel/grammar_fulltree_358885.py",
+  "sha256": "273eafbcb817e8981f843581a724594665cabdd357b318c701251929ee9c83de",
+  "body_regex_present": true,
+  "grammar_hash_live_at_execute": "273eafbcb817e8981f843581a724594665cabdd357b318c701251929ee9c83de"
+ },
+ "deterministic_samples": {
+  "experiment_id": "EXP-INTEL-36058324385",
+  "seed": 35725763380,
+  "operator": "random.Random(35725763380).sample(sorted(families_ge3),10) executed twice with seed reset, on EACH census",
+  "primary": {
+   "census_label": "primary_webarena_verified_v2_812",
+   "seed": 35725763380,
+   "operator": "random.Random(35725763380).sample(sorted_families_ge3,10) executed twice with seed reset",
+   "sorted_families_ge3": [
+    101,
+    136,
+    137,
+    138,
+    139,
+    145,
+    147,
+    153,
+    154,
+    155,
+    156,
+    159,
+    160,
+    162,
+    163,
+    165,
+    169,
+    171,
+    172,
+    180,
+    186,
+    189,
+    191,
+    194,
+    196,
+    197,
+    204,
+    206,
+    207,
+    208,
+    211,
+    212,
+    213,
+    214,
+    222,
+    370
+   ],
+   "n_families_ge3": 36,
+   "S1": [
+    191,
+    180,
+    162,
+    197,
+    153,
+    213,
+    163,
+    137,
+    136,
+    222
+   ],
+   "S2": [
+    191,
+    180,
+    162,
+    197,
+    153,
+    213,
+    163,
+    137,
+    136,
+    222
+   ],
+   "S1_equals_S2": true,
+   "unique_S1_union_S2": [
+    136,
+    137,
+    153,
+    162,
+    163,
+    180,
+    191,
+    197,
+    213,
+    222
+   ],
+   "n_unique": 10,
+   "product_page_families": [
+    136,
+    145,
+    196,
+    222
+   ],
+   "sample_product_page_families": [
+    136,
+    222
+   ],
+   "sample_families_without_product_urls": [
+    137,
+    153,
+    162,
+    163,
+    180,
+    191,
+    197,
+    213
+   ]
+  },
+  "webgym_diverse": {
+   "census_label": "WebGym_292k_127k_sampled_diverse",
+   "seed": 35725763380,
+   "operator": "random.Random(35725763380).sample(sorted_families_ge3,10) executed twice with seed reset",
+   "sorted_families_ge3": [],
+   "n_families_ge3": 0,
+   "S1": "ERROR: ValueError: Sample larger than population or is negative",
+   "S2": "ERROR: ValueError: Sample larger than population or is negative",
+   "S1_equals_S2": null,
+   "unique_S1_union_S2": [],
+   "n_unique": 0,
+   "product_page_families": [],
+   "sample_product_page_families": [],
+   "sample_families_without_product_urls": []
+  },
+  "canonical_families": [
+   136,
+   145,
+   196,
+   222
+  ],
+  "union_constructible_note": "WebGym UNAVAILABLE; union of S1|S2 (primary) + canonical",
+  "webgym_sample_status": "UNAVAILABLE_HF_TOKEN_ABSENT"
+ },
+ "note": "Fresh live CDP probe at 1280x720 CDP Accessibility.getFullAXTree; no reused captures. freeze.json is immutable and carries only frozen-input hashes (freeze discipline); the shared-manifest path+sha256 mandated by MV8a is stored here in provenance.json, which is the EXECUTE-owned provenance file."
+}
