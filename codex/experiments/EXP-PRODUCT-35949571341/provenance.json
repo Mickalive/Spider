@@ -1,0 +1,120 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-35949571341",
+  "lane": "product",
+  "github_run_id": "35949571341",
+  "github_run_attempt": "1",
+  "recorded_at": "2026-09-24T03:06:40+00:00",
+  "base_sha": "207c3071e3b69940df2d4d1b29344c028df4e67e",
+  "commit": "f289c5a3a4fca283bfb2a8795ba1d69881f7c2b3",
+  "pre_execute_sha": "b25277a07e720df59dfe2f624d69265fbd6d4610",
+  "frozen_input_hashes": {
+    "request.json": "bd1734bab51125245d8459b4775c6a13e393359ef7a23845b4ec2a5f021517b4",
+    "spec.json": "42b085faf9d1603fceb33b9a249f8a683cf8038c29648488f26f804c355da9ac",
+    "prereg.md": "cced2e99e275ab6a7f26888b912b7c5d09d72d3c671303bdd04f6c1b0515654e",
+    "freeze.json": "f6d8ae26a3ac78f89a266cbc6430632730ef000015f689532a806ff79f48bb70",
+    "freeze_json_content_hashes": {
+      "prereg.md": "cced2e99e275ab6a7f26888b912b7c5d09d72d3c671303bdd04f6c1b0515654e",
+      "request.json": "bd1734bab51125245d8459b4775c6a13e393359ef7a23845b4ec2a5f021517b4",
+      "spec.json": "42b085faf9d1603fceb33b9a249f8a683cf8038c29648488f26f804c355da9ac"
+    }
+  },
+  "request_hash": "ce25605acf5a3028cc862c07ac04bbf0e1a20ffa25fb4acbeddc968833d9aca0",
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "claim_ids": ["C-PRODUCT-ECON"],
+  "code_artifacts": {
+    "src/spider/kernel.py": {
+      "sha256": "46929b3a951df48d7f9d1fd850871073c0d91c1868aa117e13d389fe274e8d61",
+      "note": "Current HEAD _PARAMETER regex r'\\$\\{([A-Za-z_][A-Za-z0-9_]*)\\}' lacks dot; frozen design requires r'\\$\\{[A-Za-z_][A-Za-z0-9_\\.]*\\}' (patch d926279d). Left unmodified, tree clean - primary gate is substrate absence, not patch.",
+      "line_12": "_PARAMETER = re.compile(r\"\\$\\{([A-Za-z_][A-Za-z0-9_]*)\\}\")"
+    },
+    "src/spider/models.py": {
+      "sha256": null,
+      "note": "Not modified; part of allowed product code roots src/"
+    },
+    "src/spider/registry.py": {
+      "sha256": null,
+      "note": "Not modified"
+    },
+    "tests/test_kernel.py": {
+      "sha256": null,
+      "note": "Existing kernel unit tests - pytest not installed so suite not runnable in this environment; cannot test distributed substrate"
+    }
+  },
+  "environment": {
+    "python_version": "3.12.14",
+    "sqlite_version": "3.45.1",
+    "nginx_binary_present": true,
+    "nginx_version": "1.24.0",
+    "nginx_configured_sticky": false,
+    "nginx_error": "open() /run/nginx.pid failed (13: Permission denied); stock config no upstream/proxy_pass no $request_uri sticky hash",
+    "gunicorn_present": false,
+    "gunicorn_version": null,
+    "jwt_present": false,
+    "jwt_version": null,
+    "numpy_present": false,
+    "scipy_present": false,
+    "sklearn_present": false,
+    "pandas_present": false,
+    "browsergym_present": false,
+    "playwright_present": false,
+    "docker_version": "28.0.4",
+    "docker_images": ["ghcr.io/github/gh-aw-mcpg latest 8fd5ed88dce2", "ghcr.io/github/gh-aw-firewall/agent latest dc9d80ee1508", "ghcr.io/github/github-mcp-server latest 09777492cb75", "ghcr.io/dependabot/dependabot-updater-core latest 8c87fce2da7e", "ghcr.io/github/gh-aw-firewall/api-proxy latest 008b8653cd89", "ghcr.io/github/gh-aw-firewall/squid latest ebc9c9e5ccbd"],
+    "docker_browsergym_configured": false,
+    "fixtures_dir_exists": false,
+    "webarena_dir_exists": false,
+    "research_harness_exists": false,
+    "shared_wal_db_exists": false,
+    "shared_wal_db_paths_checked": ["/tmp/spider-runtime/shared.db", "/tmp/spider-runtime-35949571341/shared.db"],
+    "shared_wal_db_found_via_find": false,
+    "gpt4o_mini_available": false,
+    "openid_env_keys_present": false
+  },
+  "substrate_dependencies_all_absent": true,
+  "health_gated": false,
+  "n_non304": null,
+  "n_non304_threshold": 800,
+  "rho_proxy_real": null,
+  "rho_proxy_real_threshold": 0.5,
+  "honest_cost_counters": "NOT COMPUTED - no distributed WAL substrate on which to sum branches; no n*3200 bijective fallback fabricated per frozen prereg section 4",
+  "bootstrap_5000": "NOT COMPUTED - numpy/scipy/sklearn/pandas absent",
+  "block_permutation_5000": "NOT COMPUTED - numpy/scipy absent",
+  "measurement_transaction": "NOT COMPLETED - substrate absent; no outcome-bearing measurement run; per frozen falsifier precedence PC failure mandates MEASUREMENT_INVALID",
+  "commands_executed": [
+    "sha256sum research/experiments/EXP-PRODUCT-35949571341/request.json research/experiments/EXP-PRODUCT-35949571341/spec.json research/experiments/EXP-PRODUCT-35949571341/prereg.md research/experiments/EXP-PRODUCT-35949571341/freeze.json",
+    "cat research/experiments/EXP-PRODUCT-35949571341/freeze.json",
+    "sha256sum src/spider/kernel.py; grep -n _PARAMETER src/spider/kernel.py",
+    "git rev-parse HEAD; git log --oneline -1 -- src/spider/kernel.py; git status --short",
+    "ls -la /tmp/spider-runtime; ls -la /tmp/spider-runtime-35949571341; find /tmp -name shared.db",
+    "python3 -c \"import jwt\"; python3 -c \"import numpy\"; python3 -c \"import scipy\"; python3 -c \"import sklearn\"; python3 -c \"import pandas\"; python3 -c \"import browsergym\"; python3 -c \"import playwright\"",
+    "which gunicorn; gunicorn --version; nginx -v; nginx -T; docker info; docker images",
+    "env | grep -i openai; ls fixtures; ls /tmp/webarena; ls research/harness"
+  ],
+  "frozen_design_refs": {
+    "request.json": "research/experiments/EXP-PRODUCT-35949571341/request.json",
+    "spec.json": "research/experiments/EXP-PRODUCT-35949571341/spec.json",
+    "prereg.md": "research/experiments/EXP-PRODUCT-35949571341/prereg.md",
+    "freeze.json": "research/experiments/EXP-PRODUCT-35949571341/freeze.json",
+    "parent_handoff": "research/experiments/EXP-PRODUCT-35947481519/handoff.json (referenced in request.json parent_handoff sha cbaa327ac40ebfb8f99ebaf7834f3ebbf2027c8931ee93e71eca82585bde2c13, file not present on disk but predecessor provenance confirms MEASUREMENT_INVALID substrate absence)"
+  },
+  "codex_evidence_refs": {
+    "claim_registry_path": "research/claims/registry.json",
+    "claim_registry_sha": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+    "claim_state_path": "codex/claim_state.json",
+    "codex_index_path": "codex/index.json"
+  },
+  "prior_experiments_referenced": [
+    {
+      "experiment_id": "EXP-PRODUCT-35947481519",
+      "outcome": "MEASUREMENT_INVALID",
+      "path": "research/experiments/EXP-PRODUCT-35947481519/",
+      "note": "Parent handoff (USE disposition) - MEASUREMENT_INVALID with audit PASS for identical substrate absence; economics ceiling and do_not_assume list inherited verbatim; replication of substrate audit confirms no hardening between cycles"
+    },
+    {
+      "experiment_id": "EXP-PRODUCT-35916130502",
+      "outcome": "FALSIFIED (bounded to 192/36 file-proxy)",
+      "note": "Maximum justified economics ceiling on file-proxy only: StagehandTTL per_hit 1.045 CI[1.034,1.056]>0.85 at n0, WebMCP 1.032>0.85, rho_novelty 0.472 |rho_length| 0.306, Pareto WebMCP 897 vs Stagehand 1773 vs RAG 3703 vs Cold 5497 - not re-measured here"
+    }
+  ],
+  "smallest_next_action": "runtime: provision health-gated shared SQLite WAL HS256 HS256 PyJWT 2.14.0 1x gunicorn 23.0.0 single-worker + nginx 1.24.0 $request_uri sticky hash with If-None-Match/ETag->304 n_non304>=800 fixture at /tmp/spider-runtime/shared.db (WAL mode per-batch SELECT) + pip install numpy/scipy/scikit-learn/pandas for bootstrap/permutation + BrowserGym 0.14.3 2000-node 1280x720 Playwright 1.63.0 Docker image + gpt-4o-mini key for rho_proxy_real + WebArena 192/36 orthogonal fixtures (qcr_bank_manifest, webmcp_registry 714/2147, sgdr_index 36) + re-apply kernel dot-regex patch d926279d; then re-run 192-task census with honest distributed sum counters (no n*3200, no file-proxy fallback)"
+}
