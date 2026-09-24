@@ -74,7 +74,10 @@ jobs:
             sleep 15
           done
           echo "ready=$ready" >> "$GITHUB_OUTPUT"
-          exit 0
+          if [[ "$ready" != true ]]; then
+            echo "::error::SPIDER_DIRECTION_OPENCODE_UNAVAILABLE rc=${rc:-75}"
+            exit "${rc:-75}"
+          fi
 
       - name: Scout lane — general reconnaissance
         id: scout
@@ -100,7 +103,10 @@ jobs:
             rc=$?
           fi
           echo "ready=$([[ "$rc" -eq 0 ]] && echo true || echo false)" >> "$GITHUB_OUTPUT"
-          exit 0
+          if [[ "$rc" -ne 0 ]]; then
+            echo "::error::SPIDER_SCOUT_UNAVAILABLE rc=$rc"
+            exit "$rc"
+          fi
 
       - name: Global Research Director — choose lane objectives
         id: director
@@ -126,7 +132,10 @@ jobs:
             rc=$?
           fi
           echo "ready=$([[ "$rc" -eq 0 ]] && echo true || echo false)" >> "$GITHUB_OUTPUT"
-          exit 0
+          if [[ "$rc" -ne 0 ]]; then
+            echo "::error::SPIDER_GLOBAL_DIRECTOR_UNAVAILABLE rc=$rc"
+            exit "$rc"
+          fi
 
       - name: Preserve direction artifacts
         if: always()
