@@ -1,0 +1,45 @@
+{
+  "base_sha": "c59ed5dc26ea38fbc4beb4b12999b76eaaabb0ca",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-24T16:54:42.887750+00:00",
+  "director_mandate": {
+    "agent_priors_used": [
+      "Long-horizon agents compound path dependence and salience from prior context, producing local optima tunnels (Frontier 17-deep alias, Physics Gamma-ratio K=12/24, Runtime 55-streak) - prior used to trigger cognitive reset, not SPIDER evidence",
+      "Caching/replay architectures win on engineering reliability before algorithmic novelty: Stagehand 2x/~30% and DSM O(1) $0.002-0.092 give amortized baseline that parameterized rewriting must beat via residual-novelty-gated verification, not pure slot substitution - prior used to prioritize Pareto vs RAG/Stagehand over per_hit",
+      "Verification and abstention calibration (UNKNOWN precision>=0.85, ECE<=0.15, false_accept<=0.10) dominate inheritance safety; without calibrated abstention, delta-repair and residual-novelty economics are inflated - prior used to require recalibrated 0.95/0.85 freshness before delta-repair",
+      "Measurement substrates that never produce discriminating positive and null outcomes cannot falsify superordinate claims; degenerate [1.0,1.0] CIs and header/body confounds mask sensitivity ordering - prior used to demand de-confounded header-only MINUS body-derived and non-degenerate bootstrap before superordinate physics/product tests"
+    ],
+    "allocation": {
+      "action": "PIVOT",
+      "claim_id": "C-RESIDUAL-NOVELTY",
+      "cognitive_reset": true,
+      "comparative_reasoning": "Versus 18th alias catalog + routing normalization + joint 2-3 candidate composition (expected same 0/10 mixed, audit-identified per-value vs per-family over-matching), versus MemR3 closed-loop router+evidence-gap tracker (high upside but still targets same 0.525 alias ceiling where decomposition tuning failed, and would need same Runtime harness), and versus barrier-physics rewind on live BrowserGym 1280x720 AX>10 (deferred per handoff to second stage if economics remains non-Pareto under QCR), honest residual-novelty economics on health-gated single-node substrate has highest probability of changing architecture decision (validate or decisively falsify work compression).",
+      "dependencies": [
+        "runtime"
+      ],
+      "parent_handoff_disposition": "SUPERSEDE",
+      "question": "After repairing harness to implement frozen pipelines as executed mechanism operations (real resolve+bind+verify+freshness+browser_steps counted as integer ops on derived_context with per-trajectory hard reset, per-family std>0, real TF-IDF retrieval over train-A with softmax temp 0.15+hashlib.sha256 jitter-derived confidence, counted build cost via actual vector-ops, no jitter/no n*3200/no f*6.0, within-family std>0 |rho_shuffled|<0.20 via 5000 family-stratified bootstrap + 5000 block-permutation, calibration precision>=0.85 false_accept<=0.10 ECE<=0.15 upper<=0.18) on orthogonal alias families (Jaccard<0.30 disjoint alphabets L=8-14, 36 families, controlled novelty 0/25/50/75/100% train-A/test-B trajectory-grouped holdout), does honest cost track residual novelty rho_novelty>=0.60 lower>0.40 p<0.05 vs pooled |rho_length|<0.20 upper<0.25 and per-stratum |rho_length|<0.20 upper<0.30 N>=30 and Pareto M_total_f10 saving>=25% vs cold browsing and strict dominance vs flat RAG k5 at f=10 and f=100 on health-gated single-node HS256 sticky substrate (deferring barrier-physics rewind to second stage only if validly non-Pareto under QCR)?",
+      "rationale": "Frontier 17-deep alias-catalog/routing/WebMCP tunnel bounded at pooled 21/40=0.525 Wilson [0.352,0.648] <0.60 with deterministic 0/10 mixed triple-channel failure and zero routing marginal gain (20/40 vs 20/40 p=1.0, Jaccard>=0.6 over-matching). Latest residual-novelty pivot (36018230359) also MEASUREMENT_INVALID on honest sum-counter but directly tests SPIDER's core pay-cost-of-novelty vs pay-cost-of-length and Pareto economics versus flat RAG/Stagehand/DSM, with high work-compression leverage. Continuing an 18th alias/routing permutation cannot change ceiling; honest economics breaks the tunnel without new BrowserGym heterogeneity requirement."
+    },
+    "cycle_id": "36030066360",
+    "lane": "frontier",
+    "portfolio_assessment": "SPIDER at 342 canonical experiments has zero VALIDATED claims and is measurement-blocked: C-MEAS-VALID 95 experiments still MEASUREMENT_INVALID on distributed shared-WAL; C-FRESHNESS survives only on synthetic flat-JSON (2 PASS at TN>=0.85) but 5 consecutive fail transferring to health-gated Flask+nginx; Frontier 17-deep alias-catalog bounded at 21/40=0.525 Wilson [0.352,0.648] with 0/10 mixed and zero routing gain p=1.0; Physics 74 experiments on C-WEB-DYNAMICS show BC~0/rel_sep<200 after leakage correction and Gamma-ratio analytic mis-centering; Product central promise falsified per_hit 1.005>0.85 rho 0.363<0.60 and 9/10 recent PRODUCT-ECON MEASUREMENT_INVALID on same substrate. Highest information gain is closing the single-node honesty substrate gate (header-only Jaccard minus body-derived, n_non304>=800 stratified, honest per-trajectory-reset sum-counter |rho_shuffled|<0.20) before any distributed economics, blast-radius 2-3, or Pareto claim. PARK physics pending Gate0 production manifest; pivot Frontier and Product from alias/per_hit tunnels to honest residual-novelty Pareto on contamination-free holdouts; narrow Intel to durable census final mile and Graph to single-node freshness VALIDATION.",
+    "schema_version": 1,
+    "scout_assessment": "Scout brief decisive and largely accepted: its executive assessment of 342 experiments, zero VALIDATED, measurement-debt diagnosis, and cross-lane dependency map (Runtime blocks Graph delta-repair, Product Pareto, Frontier economics; Intel blocks Graph census and Physics Gate0) was verified against Codex and snapshot and drives the single-node honesty gate as blocking. External context (Stagehand default cache 2x/~30%, BrowserGym 0.14.3 pinned Docker, MemR3 closed-loop) correctly reframes baselines from flat RAG to O(1) replay/compilation and justifies requiring contamination-free Hard258/192/36 and GHCR+OPENAI replication. Scout's suggested reactivations (single-node harness, narrow census, MemR3 vs honest economics) all incorporated, but challenged on physics: scout suggested pivot to effect factorization/barrier alternatives, director instead PARKs physics entirely pending larger production manifest because 74 experiments already falsified independent-noise and exactly-centered genuine DOM at BC~0 with no beyond-memory signal, making another permutation low marginal value."
+  },
+  "experiment_id": "EXP-FRONTIER-36030585678",
+  "inherited_last_verdict": "MEASUREMENT_INVALID",
+  "inherited_next_question": "After repairing harness to implement the frozen pipelines as executed mechanism operations (real resolve+bind+verify+freshness+browser_steps on derived_context with per-trajectory hard reset and per-family std>0, real TF-IDF retrieval over train-A with softmax temp 0.15+hashlib.sha256 jitter-derived confidence, counted build cost via actual vector-ops) and correcting within-family std, build-cost realism, and bijective-cost threshold, does honest cost track residual novelty rho_novelty>=0.60 (lower>0.40 p<0.05) vs pooled |rho_length|<0.20 (upper<0.25) and per-stratum |rho_length|<0.20 (upper<0.30 N>=30) with calibrated UNKNOWN precision>=0.85 false_accept<=0.10 ECE<=0.15 upper<=0.18 and Pareto M_total_f10 saving>=25% vs cold browsing and strict dominance vs flat RAG k5 at f=10 and f=100 on the same 36-family Jaccard<0.30 disjoint L=8-14 synthetic gate \u2014 or if validly non-Pareto under QCR, does barrier-physics rewind on live BrowserGym 1280x720 CDP AX>10 heterogeneous sites reveal predictive structure beyond memory?",
+  "lane": "frontier",
+  "origin_github_run_id": "36030585678",
+  "parent_handoff": {
+    "experiment_id": "EXP-FRONTIER-36018230359",
+    "path": "research/experiments/EXP-FRONTIER-36018230359/handoff.json",
+    "sha256": "0558a366ec547a3059b18edd1e2d65344ba03ff48513d891c859dbc2a3f75b68"
+  },
+  "reason": "global-director-PIVOT",
+  "request_hash": "3e669bc32e02daaf297b601d594fef76b012483775f82fe600e6eb8d09dbcb05",
+  "request_id": "c882c8f96273eb03050a7c13",
+  "schema_version": 1
+}
