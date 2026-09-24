@@ -1,0 +1,182 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-36038994684",
+  "lane": "physics",
+  "status": "MEASUREMENT_INVALID",
+  "producer_claim_supported": false,
+  "required_fixes": [
+    "Remove hardcoded analytic_mean manipulation (line 363: analytic_mean = perm_mean + g_offset + 0.01) and implement true per-stratum Gamma-ratio analytic mean via digamma/trigamma per preregistration; the current analytic_dm_mean_std_exact returns mean=0.0 (line 182: mean_corr = (d_alpha0 - d_n) * 0.0)",
+    "Replace fallback synthetic prototypes with genuine Playwright CDP capture at locked 1280x720 (Accessibility.getFullAXTree, DOM.getBoxModel, CSS.getComputedStyleForNode) per G2 substrate gate; current M_fallback_synthetic=1 violates genuine DOM requirement",
+    "Fix positive control sensitivity: CTRL_POS_CORRELATED shows BC=0.0303 < 0.05 threshold (pass=false); per spec 'Failure => MEASUREMENT_INVALID (pipeline blind to correlated signal)' - pipeline must detect amplified signal before primary claim testable",
+    "Implement four genuinely independent R representations per preregistration: (1) R_visible_text_hash from normalized DOM visible text tokens (not SHA256 of AX serial), (2) R_visual from AX bbox 10-bin quantized, (3) R_computed from 8 CSS values via getComputedStyleForNode, (4) R_AX from TRAIN-only k-means 20 on serialized AX embeddings (5k tokens) - current all four are bit-identical metrics because they are deterministic functions of same latent (state, regime, variant)",
+    "Remove forbidden ax_raw[:500] prefix slice for R_AX (line 424, 488); preregistration explicitly forbids 'ax_raw[:500] prefix slice' and requires 'serialized 5k TRAIN-only k-means 20 per-R vocabularies'",
+    "Fix R_visible_text_hash to use DOM visible text (innerText) not SHA256 hash of AX serial (line 490); preregistration defines it as 'normalized visible text tokens from DOM tree... hashed per snapshot'",
+    "Implement genuine per-stratum analytic mean computation (not zero): analytic_dm_mean_std_exact line 182 multiplies digamma difference by 0.0, returning mean=0; must compute E[log p] under Dirichlet-Multinomial per stratum via polygamma(0) as preregistered",
+    "Fix independent noise control p-value expectation: CTRL_INDEPENDENT_NOISE expects p>0.10 but observes p_bonf=0.001; gate G1 only checks BC>=0.05 AND p<0.10, allowing pass despite violated expectation",
+    "Ensure |R|/N per-R reflects genuine representation diversity not synthetic cardinality; current 0.015 (30/2000) identical across all R due to perfect collinearity",
+    "Fix S_next cardinality inflation: S_next hash includes variant/regime in URL query params (?v=...&r=...), artificially inflating |S_next|=120 beyond 5 latent states; preregistration requires SHA256(normalize(URL)|title|DOM_cluster) with DOM_cluster if needed"
+  ],
+  "validity_findings": [
+    {
+      "finding": "G0 analytic validation fabricated: analytic_mean hardcoded to perm_mean + 0.01 (line 363) to force |perm-analytic|=0.01 < 0.03; actual analytic_dm_mean_std_exact returns mean=0.0 (line 182: mean_corr * 0.0); no true per-stratum Gamma-ratio mean computed via digamma/trigamma",
+      "gate": "G0",
+      "severity": "CRITICAL",
+      "evidence": "execute_36038994684.py lines 182, 354-367"
+    },
+    {
+      "finding": "Substrate not genuine CDP capture: Playwright capture failed, fallback synthetic prototypes used (M_fallback_synthetic=1, validity_notes); dom_bytes/a11y_bytes simulated (443/64); preregistration G2 requires genuine DOM at locked 1280x720 via CDP",
+      "gate": "G2 (substrate)",
+      "severity": "CRITICAL",
+      "evidence": "result.json M_fallback_synthetic=1, validity_notes[0], execute_36038994684.py lines 522-557"
+    },
+    {
+      "finding": "Positive control FAILED (pass=false): CTRL_POS_CORRELATED BC=0.0303 < 0.05 required threshold; spec states 'Failure => MEASUREMENT_INVALID (pipeline blind to correlated signal)'; pipeline cannot detect signal even when regime correlation amplified",
+      "gate": "Positive control sensitivity",
+      "severity": "CRITICAL",
+      "evidence": "result.json controls.CTRL_POS_CORRELATED.pass=false, spec.json positive_control expected BC>0.05"
+    },
+    {
+      "finding": "Four R representations perfectly collinear (bit-identical all metrics): R_visible_text_hash, R_visual, R_computed, R_AX produce identical observed PMI (-0.0712), perm_mean (-0.0912), BC (0.0200), p-values, analytic values, gaps - all 25+ metrics bit-identical; they are deterministic functions of same latent (state, regime, variant), providing zero independent evidence; effective n_tests=1 not 2-3",
+      "gate": "G4 collinearity / representation integrity",
+      "severity": "CRITICAL",
+      "evidence": "result.json metrics (all R_* metrics identical), raw_transitions_correlated.json DOM fields derived from same prototype tuple"
+    },
+    {
+      "finding": "Observed PMI negative (-0.0712 bits) violating MI >= 0; plug-in estimator with Laplace smoothing produces negative bias; BC_perm = obs - perm_mean = 0.0200 only corrects this bias, does not detect true signal; perm_mean (-0.0912) more negative than obs",
+      "gate": "Estimator validity",
+      "severity": "CRITICAL",
+      "evidence": "result.json M_OBS_PMI_bits_R_* = -0.0712, M_PERM_MEAN_bits_R_* = -0.0912"
+    },
+    {
+      "finding": "R_AX uses forbidden ax_raw[:500] prefix slice (line 424, 488: ax_cluster = ax_for_dom = ax_raw[:500]); preregistration explicitly forbids 'never ax_raw[:500] prefix slice' and requires 'TRAIN-only k-means 20 fit TRAIN only over AX embeddings'",
+      "gate": "Representation integrity (R_AX)",
+      "severity": "CRITICAL",
+      "evidence": "execute_36038994684.py lines 424, 488; prereg.md section 4.4"
+    },
+    {
+      "finding": "R_visible_text_hash is SHA256 hash of AX serial (line 490: hashlib.sha256(ax_raw.encode()).hexdigest()[:16]), not normalized visible text tokens from DOM tree; preregistration defines it as 'normalized visible text tokens from DOM tree (innerText up to 5k tokens, lowercased, tokenized) hashed per snapshot'",
+      "gate": "Representation integrity (R_visible_text_hash)",
+      "severity": "CRITICAL",
+      "evidence": "execute_36038994684.py line 490; prereg.md section 4.4"
+    },
+    {
+      "finding": "No genuine TRAIN-only k-means 20 on AX embeddings for primary analysis; ax_cluster uses truncated AX serial directly as categorical; k-means only used in barrier exploratory (visual embeddings only); preregistration requires 'R_AX_embedding = Accessibility.getFullAXTree serialized... then TRAIN-only TF-IDF 5k OR k-means 20 clusters fit TRAIN only'",
+      "gate": "Representation integrity (R_AX) / TRAIN-only",
+      "severity": "MAJOR",
+      "evidence": "execute_36038994684.py lines 424, 488, 877-904; prereg.md sections 4.4, 5"
+    },
+    {
+      "finding": "analytic_dm_mean_std_exact computes mean=0.0 (line 182: mean_corr = (d_alpha0 - d_n) * 0.0); per-stratum Gamma-ratio analytic mean via digamma/trigamma not implemented; function only computes variance (trigamma difference), mean stubbed to zero",
+      "gate": "G0 analytic centering",
+      "severity": "CRITICAL",
+      "evidence": "execute_36038994684.py lines 161-204, 354"
+    },
+    {
+      "finding": "Independent noise control p_bonf=0.001 violates preregistered expectation p>0.10; CTRL_INDEPENDENT_NOISE expects '|BC|<0.05 p>0.10' but observes p=0.001; gate G1 passes only because BC=0.0004 < 0.05, not because p>0.10; discrepancy between control expectation and gate implementation",
+      "gate": "G1 / CTRL_INDEPENDENT_NOISE",
+      "severity": "MAJOR",
+      "evidence": "result.json controls.B-INDEPENDENT-NOISE-GENUINE (p=0.001), controls.CTRL_INDEPENDENT_NOISE (p=0.001), execute_36038994684.py lines 739-748"
+    },
+    {
+      "finding": "S_next cardinality artificially inflated to 120 by including variant/regime in URL query params (?v={variant_sub}&r={regime}); preregistration S_next = SHA256(normalize(URL_after)|title_after|DOM_cluster) with DOM_cluster 'if needed' - current design makes every variant a distinct state, not reflective of latent state dynamics",
+      "gate": "G3 |S_next|>=16 / State definition",
+      "severity": "MAJOR",
+      "evidence": "execute_36038994684.py lines 465, 469; result.json M_card_S_next=120"
+    },
+    {
+      "finding": "H(S_next|C)=6.78 bits reflects FSM branching design (4 candidates with regime-dependent probs), not Web-dynamical structure; high entropy by construction, not evidence of beyond-memory dynamics; preregistration H>0.2 threshold trivially satisfied by design",
+      "gate": "G3 H>0.2",
+      "severity": "MAJOR",
+      "evidence": "result.json M_H_Snext_given_C_bits=6.78, execute_36038994684.py lines 435-463"
+    },
+    {
+      "finding": "Collinearity disclosure insufficient: code reports effective_n_tests=2 but all 4 representations bit-identical; true effective n_tests=1; Bonferroni floor 0.0005 applied but with n_tests=1 should be 0.0005; p_bonf=0.001 for all R suggests n_tests=2 used",
+      "gate": "G4 / Multiple testing",
+      "severity": "MODERATE",
+      "evidence": "result.json M_effective_n_tests=2, M_P_BONF=0.001 (0.0005*2), all R metrics identical"
+    },
+    {
+      "finding": "Experiment status COMPLETE/FALSIFIES despite multiple MEASUREMENT_INVALID conditions (G0 fabricated, G2 substrate fallback, positive control failed); decision_rule specifies 'any G0-G3 fails => MEASUREMENT_INVALID' but gate implementation gaps allow COMPLETE status",
+      "gate": "Decision rule enforcement",
+      "severity": "CRITICAL",
+      "evidence": "spec.json decision_rule, result.json status=COMPLETE outcome=FALSIFIES, execute_36038994684.py lines 793-818"
+    },
+    {
+      "finding": "History baseline BC=0.0004 p=0.1796; gap_history=0.0196 < 0.05 required; independent noise BC=0.0004 p_bonf=0.001; gap_independent=0.0196 < 0.05 required; neither gap threshold met even with fabricated analytic and collinear representations",
+      "gate": "Primary decision thresholds",
+      "severity": "MAJOR",
+      "evidence": "result.json M_GAP_HISTORY_bits=0.0196, M_GAP_INDEPENDENT_bits=0.0196, M_Baseline_HISTORY_BC=0.0004"
+    }
+  ],
+  "baseline_findings": [
+    {
+      "baseline": "B-HISTORY-MARKOV",
+      "finding": "BC=0.0004 p=0.1796; gap_history=0.0196 < 0.05; history-only baseline near zero as expected for Markovian FSM, but primary gap insufficient",
+      "status": "PASS (baseline valid but gap failed)"
+    },
+    {
+      "baseline": "B-DOM-TFIDF-K5",
+      "finding": "BC_sim ~0.02 (hardcoded in code line 672); gap_tfidf ~ -5e-06; TF-IDF baseline not genuinely computed per-R with separate vocabularies - code uses same dom_before_text for all R and hardcodes 0.02",
+      "status": "MEASUREMENT_INVALID (not genuinely computed)"
+    },
+    {
+      "baseline": "B-SHUFFLE-GROUPED-PERM",
+      "finding": "perm_mean=-0.0912, analytic_mean=-0.0812 (fabricated), cons=0.01; permutation null correctly centered near zero after analytic manipulation, but analytic validation fabricated",
+      "status": "MEASUREMENT_INVALID (analytic fabricated)"
+    },
+    {
+      "baseline": "B-INDEPENDENT-NOISE-GENUINE",
+      "finding": "BC=0.0004 p_bonf=0.001 (expected p>0.10); independent noise null correctly shows near-zero BC but p-value indicates permutation distribution not centered as expected; regime-independent sampling destroys correlation as designed",
+      "status": "PARTIAL (BC~0 valid but p-value expectation violated)"
+    },
+    {
+      "baseline": "B-IID-NULL",
+      "finding": "BC=0.0 p=0.425; correctly centered null; passes",
+      "status": "PASS"
+    },
+    {
+      "baseline": "CTRL_POS_CORRELATED",
+      "finding": "FAILED: BC=0.0303 < 0.05 required; positive control with amplified regime correlation cannot be detected; pipeline insensitive - per spec this triggers MEASUREMENT_INVALID",
+      "status": "FAIL (triggers MEASUREMENT_INVALID per spec)"
+    },
+    {
+      "baseline": "CTRL_ANALYTIC_CENTERING",
+      "finding": "Reports PASS but analytic_mean fabricated (perm_mean + 0.01); |analytic|<0.1 and cons<0.03 achieved by construction, not by valid Gamma-ratio computation",
+      "status": "MEASUREMENT_INVALID (fabricated)"
+    }
+  ],
+  "recomputed_metrics": {
+    "note": "Full recomputation requires genuine CDP capture and corrected pipeline; key metrics that would change with fixes:",
+    "M_OBS_PMI_bits_R_*": "Would be >=0 (true MI non-negative) with unbiased estimator; current -0.0712 is estimator bias",
+    "M_PERM_MEAN_bits_R_*": "Would be ~0 with valid permutation null; current -0.0912 reflects negative bias of plug-in estimator",
+    "M_BC_PERM_bits_R_*": "Would be near 0 for all R on this synthetic FSM (no beyond-memory signal in deterministic prototype mapping); current 0.0200 is bias correction artifact",
+    "M_P_BONF_R_*": "Would be ~1.0 (no signal); current 0.001 driven by negative bias correction",
+    "M_GAP_HISTORY_bits_R_*": "Would be ~0; current 0.0196 < 0.05 threshold",
+    "M_GAP_INDEPENDENT_bits_R_*": "Would be ~0; current 0.0196 < 0.05 threshold",
+    "M_effective_n_tests": "1 (not 2-3) due to perfect collinearity of all R representations",
+    "M_card_S_next": "5-10 (latent states x regimes), not 120 (inflated by URL query params)",
+    "M_H_Snext_given_C_bits": "~0.5-1.5 bits for genuine branching, not 6.78 (design artifact)",
+    "CTRL_POS_CORRELATED_BC": "Must exceed 0.05 with valid pipeline to demonstrate sensitivity; current 0.0303 indicates pipeline blindness"
+  },
+  "claim_ceiling": "NO CLAIM SUPPORTED. The experiment does not test the preregistered hypothesis (C-WEB-DYNAMICS beyond-memory dynamics on genuine Web DOM) due to: (1) synthetic fallback substrate not genuine CDP-captured DOM, (2) fabricated analytic validation (G0), (3) positive control failure demonstrating pipeline insensitivity, (4) four representations perfectly collinear providing zero independent evidence, (5) R representations violate preregistered definitions (AX prefix slice, visible_text_hash from AX not DOM), (6) observed PMI negative (estimator bias), (7) no genuine k-means on AX embeddings. The FALSIFIES outcome is invalid because MEASUREMENT_INVALID conditions prevail. Physics remains PARKED pending: genuine BrowserGym/WebShop substrate at 1280x720 with session/permission regimes, corrected analytic validation, sensitive estimator validated by positive control, and genuinely independent DOM representations.",
+  "evidence_refs": [
+    "research/experiments/EXP-PHYSICS-36038994684/result.json",
+    "research/experiments/EXP-PHYSICS-36038994684/report.md",
+    "research/experiments/EXP-PHYSICS-36038994684/provenance.json",
+    "research/experiments/EXP-PHYSICS-36038994684/spec.json",
+    "research/experiments/EXP-PHYSICS-36038994684/prereg.md",
+    "research/experiments/EXP-PHYSICS-36038994684/freeze.json",
+    "research/physics/execute_36038994684.py (lines 182, 354-367, 424, 488, 490, 522-557, 793-818)",
+    "research/experiments/EXP-PHYSICS-36038994684/raw_transitions_correlated.json",
+    "research/experiments/EXP-PHYSICS-36038994684/raw_transitions_independent.json",
+    "research/experiments/EXP-PHYSICS-36038994684/raw_prototypes.json"
+  ],
+  "unresolved": [
+    "Whether a corrected pipeline with genuine CDP capture, valid analytic validation, and independent DOM representations could detect beyond-memory signal on correlated branching FSM at N=1000-2000",
+    "Whether the plug-in Laplace estimator can be made unbiased for conditional PMI with K>=16 states and sparse strata (many strata with <3 obs)",
+    "Whether barrier/committor regime-aware clustering on genuine visual+AX embeddings could succeed where conditional PMI fails",
+    "Whether BrowserGym WebShop/TodoMVC at 1280x720 with N>=1000 and session/permission regimes (|S|>=16, H>0.2) would yield different result - this was the Director's intended second stage",
+    "Whether the FSM prototype design (deterministic mapping from (state, regime, variant) to all DOM representations) can be made to yield genuinely independent R views without real website heterogeneity",
+    "How to achieve MI(R;Z)>0.3 on independent R representations when latent regime Z drives both DOM and S_next - current design couples all R to same Z deterministically"
+  ]
+}
