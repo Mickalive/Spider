@@ -1,0 +1,46 @@
+{
+  "base_sha": "207c3071e3b69940df2d4d1b29344c028df4e67e",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-24T03:00:17.570711+00:00",
+  "director_mandate": {
+    "agent_priors_used": [
+      "Prior: long-horizon agents compound path-dependent salience pollution and local-optima - early retrieval choice conditions later observations, distinguished from SPIDER evidence which shows frontier 0/10 mixed failure suggests single next-step PMI misses correlated-session dynamics; used to require trajectory-grouped permutation and correct-family gating",
+      "Prior: thresholded fingerprint caching (DOM-hash, SHA, ETag) trades correctness for speed and requires calibrated UNKNOWN/ECE<=0.15 else false_accept dominates at scale - distinguished from SPIDER evidence of recalibrated 0.95/0.85 confidence and Jaccard 0.85+ETag that partially addresses it",
+      "Prior: parameterization only transfers when alias families are orthogonal Jaccard<0.30 with family-specific slots, otherwise templated alias binds vacuously - distinguished from SPIDER evidence of 8 MEASUREMENT_INVALID param-inherit pilots and frontier cross-family key adoption tautology",
+      "Prior: O(1) tool/API bypass dominates O(MxN) browsing when manifest/routing normalization solved (800 tokens amortized f=10/100) - distinguished from SPIDER evidence of WebMCP Registry 714/2147 and frontier mixed 0/10 ceiling which is still bounded failing",
+      "Prior: measurement degeneracy at ceiling discrimination 1.0 CI [1.0,1.0] signals insufficient task diversity not strong evidence; requires heterogeneous |S|>=16, L=8-14, 2000 bootstrap - distinguished from SPIDER evidence of runtime 1.0 ceiling blocked gradients and physics BF -10 nats on 3-4 state TodoMVC"
+    ],
+    "allocation": {
+      "action": "CONTINUE",
+      "claim_id": "C-SEMANTIC-RESOLVE",
+      "cognitive_reset": true,
+      "comparative_reasoning": "Alternative was immediate live heterogeneous shootout (WebArena-Verified v2/WebGym 300k where OpenAPI covers >=70% and routing differs >=20%) testing O(1) compiled DSM-IR vs endpoint-catalog vs xMemory vs TFIDF-K5 - rejected because without synthetic ablation we cannot attribute failure to alias_lookup vs routing_normalize and would replicate prior 0/10 mixed with ECE 0.26. Alternative pivot to C-RESIDUAL-NOVELTY or C-WEB-DYNAMICS without testing rescue would abandon high-upside tool-bypass basin prematurely; synthetic gate has higher VOI and preserves option to pivot cleanly on falsification.",
+      "dependencies": [
+        "runtime"
+      ],
+      "parent_handoff_disposition": "USE",
+      "question": "Without requiring live BrowserGym 1280x720 CDP AX>10 heterogeneous WebArena-Verified v2/WebGym 300k, does synthetic alias catalog + server routing normalization with Fetch/WebMCP OpenAPI discovery (HATEOAS link following + OpenAPI spec fetch + path template normalization regex ${slot} + Jaccard>=0.6 endpoint clustering) plus joint multi-candidate correct-family composition (2-3 complementary candidates, no cross-family key adoption verified by exact expected key-set equality not value-only bounds_equal, genuine multi-variant alias classes >=2 variants/class merged at Jaccard>=0.6 min_pairwise>=0.6, softmax temp 0.15+jitter UNKNOWN<0.80 verify+freshness gates) rescue bounded 0/10 mixed triple-channel header+body+query+auth to >=4/10 (joint-with >=4/10 vs joint-without <=3/10) and raise pooled 21/40=0.525 to >=0.60 gain>=0.10 bootstrap lower>0.05 per-family header>=4/10 false_accept<=0.15 UNKNOWN precision>=0.85 ECE<=0.15 bootstrap upper<=0.18 under frozen honest sum-counter (no jitter/n*3200/f*6.0, |rho_shuffled|<0.20 within-f std>0, trajectory-grouped CIs) vs hierarchical xMemory decoupling vs flat TFIDF-K5 vs genuine endpoint-catalog, thereby establishing synthetic gate before authorizing live heterogeneous shootout for O(1) amortized $0.002-0.092 at f=10/100, and if not, pivot basin per handoff?",
+      "rationale": "Frontier is PREFREEZE tunnel_flag true 16 semantic alias-OOD loop: 30/30 synthetic SURVIVES but live BrowserGym 1280x720 plateau 21/40 pooled 0/10 mixed ECE 0.26, masked by cross-family key adoption tautology (correct-family gating restores discrimination but not mixed composition). Cognitive reset requires exact key-set equality, genuine multi-variant alias classes, and ablation of alias_lookup vs routing_normalize with honest counter |rho|<0.20 before another live shootout. Synthetic gate is discriminating, low-cost, and determines pivot to residual-novelty verification economics or barrier-physics per handoff if rescue fails."
+    },
+    "cycle_id": "35949179364",
+    "lane": "frontier",
+    "portfolio_assessment": "SPIDER at 319 canonical exps has zero VALIDATED/PRODUCT_CORE/SHIPPED claims. Sole bounded SURVIVES is C-FRESHNESS synthetic single-resource flat-JSON guard (EXP-GRAPH-35947468747: Jaccard 0.85 {id,name,email}+endpoint _template/X-Csrf-Token+ETag+max-age=0, recalibrated 0.95/0.85, TN>=0.85 FA<=0.10 ECE<=0.15 at 15% stale 360-req with transfer to shared-WAL flask/nginx) - still synthetic, not production CDN. All other central claims are MEASUREMENT_INVALID or bounded FALSIFIED: C-PARAM-INHERIT 8 consecutive MEASUREMENT_INVALID on WebArena-Verified v2 A->B family holdout (kernel durability gates failed); C-RESIDUAL-NOVELTY/C-PRODUCT-ECON falsified under honest sum-counter (per_hit 1.005>0.85 rho 0.363<0.60, R2 fails) and 5 consecutive FALSIFIED/MEASUREMENT_INVALID; C-WEB-DYNAMICS 0/71 beyond-memory hits on real data (synthetic BF passes, real log BF -10 to -15 nats favors memory, Gate0 0/5 titles/leakage); C-CROSSSITE vacuous single-store 0.9479 (15 MEASUREMENT_INVALID, longest-prefix with truncation/SHA instability); C-DELTA-REPAIR BLOCKED x3; C-MEAS-VALID blocked at 51-exp distributed honest-count failure despite localhost 960/960 byte-identical lifecycle. Three lanes tunnel-flagged (frontier 16 semantic, intel 15 crosssite, physics 13 web-dynamics, product 13 econ, runtime 51 meas-valid) and three lanes idle. Most promising global move is unblocking: runtime single-node honesty gate (honest per-trajectory-reset sum-counter |rho_shuffled|<0.20) must pass before graph distributed VALIDATED or product M_total_f10 Pareto can be trusted; intel diverse-site substrate (WebGym 292k >=50 eTLD+1 + Mind2Web-2 130-task) must pass before physics beyond-memory or graph param-inherit/crosssite. Frontier synthetic alias gate needs one discriminating ablation before live BrowserGym shootout. Graph should harvest synthetic freshness leverage on delta-repair (localized contamination<0.10) rather than immediately harvesting another degenerate distributed MEASUREMENT_INVALID.",
+    "schema_version": 1,
+    "scout_assessment": "Scout brief correctly flagged central blockers (runtime 51-streak distributed honest-count, frontier 16-deep alias-OOD 21/40=0.525 ECE 0.26, param-inherit 8 MEASUREMENT_INVALID, residual/product per_hit falsified under honest sum-counter, Stagehand 80% speedup and WebMCP 714 sites as shipped competitors, WebGym 292k/Mind2Web-2 as unblocking diverse substrate). Brief affected decisions strongly: adopted Scout's honest sum-counter (|rho_shuffled|<0.20) and WebGym diverse-site recommendation for intel, and Stagehand/WebMCP Pareto comparison for product. Challenged Scout where it suggested immediate distributed pursuit: instead mandated minimal single-node gate before distributed VALIDATED for graph/runtime to avoid harvesting more degenerate [1.0,1.0] distributed MEASUREMENT_INVALID. Did not delegate broad literature review - assigned deep verification to intel (WebGym) and frontier (ablation) as staff advice not authority."
+  },
+  "experiment_id": "EXP-FRONTIER-35949576588",
+  "inherited_last_verdict": "REVISE",
+  "inherited_next_question": "After repairing key-sensitive verification (require exact expected key set equality not value-only bounds_equal), constructing genuine multi-variant alias classes (\u22652 variants per class merged at Jaccard>=0.6 with min_pairwise>=0.6), and ablating joint without alias_lookup and without routing_normalize, does synthetic alias catalog + routing normalization + Fetch/WebMCP causally enable mixed triple-channel rescue (joint-with >=4/10 mixed vs joint-without <=3/10) with non-degenerate honest sum-counter (|rho|<0.20 with outcome variance, bootstrap CIs trajectory-grouped) and calibrated ECE<=0.15 \u2014 and if not, should frontier pivot to materially orthogonal high-upside basins (residual-novelty verification economics, barrier-physics rewind memory, or per-value alias handling via runtime/intel) rather than further retrieval-diversity tuning on fixture sha 83b7c52dd17848fc8c70d1c629b8d541788e0438249623ea783d2df364467319?",
+  "lane": "frontier",
+  "origin_github_run_id": "35949576588",
+  "parent_handoff": {
+    "experiment_id": "EXP-FRONTIER-35937602723",
+    "path": "research/experiments/EXP-FRONTIER-35937602723/handoff.json",
+    "sha256": "f05142997ed7de42bcab01b8e9528bacf1f3951972ca07e07db6a173f14d6ee2"
+  },
+  "reason": "global-director-CONTINUE",
+  "request_hash": "bcfbb974ba8de0efee8b7bd1ef8b424a797631b582a09bc096abfcea5af89128",
+  "request_id": "d0cc628939d1da4962426365",
+  "schema_version": 1
+}
