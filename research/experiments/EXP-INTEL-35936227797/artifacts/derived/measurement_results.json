@@ -1,0 +1,285 @@
+{
+  "experiment_id": "EXP-INTEL-35936227797",
+  "timestamp": "2026-09-24T01:34:57+00:00",
+  "h1": {
+    "total_urls_tested": 21,
+    "valid_captures": 21,
+    "m_ax_consistency_mean": 0.0,
+    "m_ax_per_family_variance": 0.0,
+    "pairs": [
+      {
+        "pair": "21-22",
+        "consistency": 0.0
+      },
+      {
+        "pair": "22-23",
+        "consistency": 0.0
+      },
+      {
+        "pair": "23-24",
+        "consistency": 0.0
+      },
+      {
+        "pair": "24-25",
+        "consistency": 0.0
+      },
+      {
+        "pair": "25-163",
+        "consistency": 0.0
+      },
+      {
+        "pair": "163-164",
+        "consistency": 0.0
+      },
+      {
+        "pair": "164-165",
+        "consistency": 0.0
+      },
+      {
+        "pair": "165-166",
+        "consistency": 0.0
+      },
+      {
+        "pair": "166-167",
+        "consistency": 0.0
+      },
+      {
+        "pair": "167-431",
+        "consistency": 0.0
+      },
+      {
+        "pair": "431-432",
+        "consistency": 0.0
+      },
+      {
+        "pair": "432-433",
+        "consistency": 0.0
+      },
+      {
+        "pair": "433-434",
+        "consistency": 0.0
+      },
+      {
+        "pair": "434-435",
+        "consistency": 0.0
+      },
+      {
+        "pair": "435-516",
+        "consistency": 0.0
+      },
+      {
+        "pair": "516-517",
+        "consistency": 0.0
+      },
+      {
+        "pair": "517-518",
+        "consistency": 0.0
+      },
+      {
+        "pair": "518-519",
+        "consistency": 0.0
+      },
+      {
+        "pair": "519-520",
+        "consistency": 0.0
+      },
+      {
+        "pair": "520-0",
+        "consistency": 0.0
+      }
+    ],
+    "pc1_liveness": 21,
+    "ax_nodes_range": [
+      600,
+      1426
+    ],
+    "families_found": 5,
+    "product_families_available": 4,
+    "shopping_admin_families_available": 42
+  },
+  "h1_sha_stability": {
+    "before_hash_after_hash_identical": true,
+    "before_hash_after_mutation_different": false,
+    "hash_before": "3520312c017f05f7c964031714b7d967",
+    "hash_after": "3520312c017f05f7c964031714b7d967",
+    "hash_mutated": "3520312c017f05f7c964031714b7d967"
+  },
+  "substrate_availability": {
+    "webgym": false,
+    "browsergym": false,
+    "agentlab": false,
+    "mind2web2": false,
+    "webmcp": false,
+    "hf_token": false
+  },
+  "valid_captures": [
+    {
+      "url": "http://localhost:7770/6s-wireless-headphones-over-ear-noise-canceling-hi-fi-bass-foldable-stereo-wireless-kid-headsets-earbuds-with-built-in-mic-micro-sd-tf-fm-for-iphone-samsung-ipad-pc-black-gold.html",
+      "task_id": 21,
+      "ax_nodes": 649,
+      "dom_len": 199951,
+      "template": "Get name(s) of reviewer(s) who mention {{description}} for t",
+      "site": "shopping"
+    },
+    {
+      "url": "http://localhost:7770/fujifilm-finepix-z200fd-10mp-digital-camera-with-5x-optical-dual-image-stabilized-zoom-black.html",
+      "task_id": 22,
+      "ax_nodes": 716,
+      "dom_len": 202267,
+      "template": "Get name(s) of reviewer(s) who mention {{description}} for t",
+      "site": "shopping"
+    },
+    {
+      "url": "http://localhost:7770/3-pack-samsung-galaxy-s6-screen-protector-nearpow-tempered-glass-screen-protector-with-9h-hardness-crystal-clear-easy-bubble-free-installation-scratch-resist.html",
+      "task_id": 23,
+      "ax_nodes": 626,
+      "dom_len": 195308,
+      "template": "Get name(s) of reviewer(s) who mention {{description}} for t",
+      "site": "shopping"
+    },
+    {
+      "url": "http://localhost:7770/haflinger-men-s-wool-felt-open-back-slippers-beige-550-peat-us-7.html",
+      "task_id": 24,
+      "ax_nodes": 627,
+      "dom_len": 187206,
+      "template": "Get name(s) of reviewer(s) who mention {{description}} for t",
+      "site": "shopping"
+    },
+    {
+      "url": "http://localhost:7770/epson-workforce-wf-3620-wifi-direct-all-in-one-color-inkjet-printer-copier-scanner-amazon-dash-replenishment-ready.html",
+      "task_id": 25,
+      "ax_nodes": 1150,
+      "dom_len": 248139,
+      "template": "Get name(s) of reviewer(s) who mention {{description}} for t",
+      "site": "shopping"
+    },
+    {
+      "url": "http://localhost:7770/ostent-16gb-memory-card-stick-storage-for-sony-ps-vita-psv1000-2000-pch-z081-z161-z321-z641.html",
+      "task_id": 163,
+      "ax_nodes": 864,
+      "dom_len": 233918,
+      "template": "Get all review titles with 2 stars or below for the product ",
+      "site": "shopping"
+    },
+    {
+      "url": "http://localhost:7770/mineralogie-all-natural-lip-gloss-ruby-rose.html",
+      "task_id": 164,
+      "ax_nodes": 668,
+      "dom_len": 200413,
+      "template": "Get all review titles with 2 stars or below for the product ",
+      "site": "shopping"
+    },
+    {
+      "url": "http://localhost:7770/sandgrens-swedish-handmade-wooden-clog-sandal-copenhagen.html",
+      "task_id": 165,
+      "ax_nodes": 1160,
+      "dom_len": 259146,
+      "template": "Get all review titles with 2 stars or below for the product ",
+      "site": "shopping"
+    },
+    {
+      "url": "http://localhost:7770/sensodyne-repair-protect-whitening-toothpaste-with-fluoride-3-4-oz-pack-of-3.html",
+      "task_id": 166,
+      "ax_nodes": 665,
+      "dom_len": 196678,
+      "template": "Get all review titles with 2 stars or below for the product ",
+      "site": "shopping"
+    },
+    {
+      "url": "http://localhost:7770/photosmart-plus-b209-clr-inkjetfb-p-s-c-usb-wrls-1.html",
+      "task_id": 167,
+      "ax_nodes": 626,
+      "dom_len": 195242,
+      "template": "Get all review titles with 2 stars or below for the product ",
+      "site": "shopping"
+    },
+    {
+      "url": "http://localhost:7770/tall-pink-taper-candles-4-piece-orange-colored-tapered-candles-gradient-candles-10-6-inches-tall-tie-dye-candle-set-large-dripless-long-burning-candlesticks-two-color-taper-candles-candlesticks.html",
+      "task_id": 431,
+      "ax_nodes": 713,
+      "dom_len": 223868,
+      "template": "Add the product with the lowest per unit price from my open ",
+      "site": "shopping"
+    },
+    {
+      "url": "http://localhost:7770/ciclon-energy-drink-regular-24-cans-8-3oz.html",
+      "task_id": 432,
+      "ax_nodes": 654,
+      "dom_len": 190027,
+      "template": "Add the product with the lowest per unit price from my open ",
+      "site": "shopping"
+    },
+    {
+      "url": "http://localhost:7770/tazrigo-5pcs-white-dental-resin-brush-pens-dental-shaping-silicone-tooth-tool.html",
+      "task_id": 433,
+      "ax_nodes": 634,
+      "dom_len": 196178,
+      "template": "Add the product with the lowest per unit price from my open ",
+      "site": "shopping"
+    },
+    {
+      "url": "http://localhost:7770/3-pairs-ruffle-socks-lace-ankle-socks-for-girls-frilly-socks-women-decorative.html",
+      "task_id": 434,
+      "ax_nodes": 714,
+      "dom_len": 198558,
+      "template": "Add the product with the lowest per unit price from my open ",
+      "site": "shopping"
+    },
+    {
+      "url": "http://localhost:7770/35-ft-hdmi-cable-gearit-pro-series-hdmi-cable-35-feet-high-speed-ethernet-4k-resolution-3d-video-and-arc-audio-return-channel-hdmi-cable-white.html",
+      "task_id": 435,
+      "ax_nodes": 703,
+      "dom_len": 201593,
+      "template": "Add the product with the lowest per unit price from my open ",
+      "site": "shopping"
+    },
+    {
+      "url": "http://localhost:7770/elmwood-inn-fine-teas-orange-vanilla-caffeine-free-fruit-infusion-16-ounce-pouch.html",
+      "task_id": 516,
+      "ax_nodes": 686,
+      "dom_len": 192694,
+      "template": "Add the product on the current page to my wishlist",
+      "site": "shopping"
+    },
+    {
+      "url": "http://localhost:7770/skinit-decal-gaming-skin-compatible-with-xbox-one-s-console-and-controller-bundle-officially-licensed-nfl-baltimore-ravens-design.html",
+      "task_id": 517,
+      "ax_nodes": 613,
+      "dom_len": 191973,
+      "template": "Add the product on the current page to my wishlist",
+      "site": "shopping"
+    },
+    {
+      "url": "http://localhost:7770/sceptre-e195bd-srr-19-inch-720p-led-tv-true-black-2017.html",
+      "task_id": 518,
+      "ax_nodes": 628,
+      "dom_len": 188121,
+      "template": "Add the product on the current page to my wishlist",
+      "site": "shopping"
+    },
+    {
+      "url": "http://localhost:7770/iphone-13-pro-max-case-neon-turtle-iphone-13-pro-max-cases-tempered-glass-back-soft-silicone-tpu-shock-protective-case-for-apple-iphone-13-pro-max.html",
+      "task_id": 519,
+      "ax_nodes": 869,
+      "dom_len": 221523,
+      "template": "Add the product on the current page to my wishlist",
+      "site": "shopping"
+    },
+    {
+      "url": "http://localhost:7770/magnetic-metal-stainless-steel-d-pads-kits-directional-pad-replacement-parts-for-xbox-one-elite-controller-elite-series-2-xbox-one-xbox-one-s-x-controller.html",
+      "task_id": 520,
+      "ax_nodes": 600,
+      "dom_len": 198067,
+      "template": "Add the product on the current page to my wishlist",
+      "site": "shopping"
+    },
+    {
+      "url": "http://localhost:7770",
+      "task_id": 0,
+      "ax_nodes": 1426,
+      "dom_len": 251734,
+      "template": "Get the top-{{n}} best-selling {{entity}} in {{period}}",
+      "site": "shopping_admin"
+    }
+  ]
+}
