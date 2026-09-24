@@ -1,0 +1,45 @@
+{
+  "base_sha": "2400b5d7f24eb5dcdf85f48d747c18623c48654e",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-24T20:01:27.040610+00:00",
+  "director_mandate": {
+    "agent_priors_used": [
+      "Long-horizon agents compound planning errors and self-generate subproblems; salience from prior context anchors next proposal (path dependence) - explains 58-streak C-MEAS-VALID and 25-streak C-CROSSSITE tunnels as local optima, distinct from SPIDER evidence",
+      "Retrieval-diversity scaling without mechanism change hits diminishing returns; bounded 21/40=0.525 with zero mixed-channel gain (p=1.0) is predictable when Jaccard>=0.6 over-matches - prior for why 17-deep alias/routing permutations failed, not SPIDER proof",
+      "Verifier-free memory drifts: unreliable admission and stale accumulation are not fixable by retrieval alone (external VerMem/MemGuard show need for persistent verifier metadata) - prior motivating verifier-gated freshness as alternative to fixed thresholds, not SPIDER evidence",
+      "Measurement traps where positive control is tautological (action.target_href == S_next in 92-98%, DOM hash from latent state defining S_next) produce PMI>0 that is not dynamics beyond memory; history-conditioned I(S_next;DOM|URL,HK=3)=0 when H=0 deterministically - prior for physics tautology diagnosis",
+      "Deterministic workflow compilation (DSM 99% TreeWalker + stable locator + JSON/Python DAG with speculative guards and bailout) provides O(1) vs O(MxN) leverage where retrieval alone bounded - prior from external WebChallenger/TraceCompiler literature, not SPIDER evidence",
+      "Exploration cost should track residual novelty not length, but honest cost must be per-trajectory hard-reset integer sum counters with |rho_shuffled|<0.20 and trajectory-grouped permutation; jitter f*6.0 or n*3200 proxies break identifiability - prior for honest-cost instrument design"
+    ],
+    "allocation": {
+      "action": "PIVOT",
+      "claim_id": "C-WEB-DYNAMICS",
+      "cognitive_reset": true,
+      "comparative_reasoning": "Vs continuing per-stratum PMI on deterministic or independent-noise SPAs (tautologically 0 or leakage-driven), the branching correlated FSM directly addresses audit V1 ceiling (H=0) and V5 observation-noise confound. Vs regime-aware barrier/committor clustering (alternative candidate) which requires Intel Gate0 >=10 families with revisits, the CMI branching test is locally feasible without waiting for exhaustive production crawl. Vs parking immediately, one final centered test preserves falsification-first discipline while bounding sunk cost.",
+      "dependencies": [],
+      "parent_handoff_disposition": "SUPERSEDE",
+      "question": "After fixing per-stratum Gamma-ratio analytic (true digamma/trigamma via gammaln/polygamma, no *0.001 offset, |perm-analytic|<0.03) and provisioning correlated non-determinism FSM (|S_next|>=16 H(S_next|URL,H_K=3)>0.2 bits leakage<40% |R|/N 0.01-0.30 MI(action;DOM)<0.10) with genuine AX serialized 5k TRAIN-only k-means 20 vocabularies, does history-conditioned CMI I(S_next;DOM_before|URL,H_K=3) via pure trajectory-grouped permutation (1000 perms, no analytic heuristic, BC>0.05 Bonferroni p<0.01 gap>=0.05 bits vs history-only and vs independent-noise) survive on locally-hosted branching FSM, and if BC~0 / rel_sep<200 at N=1000-1999, park physics pending larger production SPA manifest rather than continue Laplace/DM alpha sweeps?",
+      "rationale": "Physics has 77 experiments, Bayesian DM K=12 first to pass synthetic C1+C3 but real BrowserGym log BF -10 to -15 favors memory; last 9 genuine-DOM experiments all MEASUREMENT_INVALID with heuristic-biased Gamma estimators and independent per-step noise that bakes in null (EXP-PHYSICS-34764605162). The handoff's correlated non-determinism where DOM_before correlates with latent state determining S_next, with strict leakage, entropy, and genuine AX controls, is the first exactly-centered orthogonal test. If even this yields BC~0, continuing estimator-family sweeps has negative expected value and physics should consolidate negative evidence."
+    },
+    "cycle_id": "36051627529",
+    "lane": "physics",
+    "portfolio_assessment": "SPIDER is in synthetic-to-real transfer debt: 356 canonical experiments have produced only narrow bounded SURVIVES (single-node C-MEAS-VALID EXPERIMENTAL with header-Jaccard degenerate, synthetic C-FRESHNESS at 15% stale 360-req, blast-radius-1 C-DELTA-REPAIR on stdlib http.server) while all economically decisive tests are validly non-Pareto (residual-novelty rho 0.363 <0.60 per_hit 1.005>0.85 FALSIFIED with all PCs/NCs PASS, alias-catalog/routing/WebMCP bounded at 21/40=0.525 Wilson [0.352,0.648] 0/10 mixed) and C-WEB-DYNAMICS remains HYPOTHESIS after 77 exps with 0 real-Web hits. Tunnel flags in 4/6 lanes and 58-streak C-MEAS-VALID indicate local optima. Highest leverage is to force honest single-node health-gated transfer (runtime header variance + natural auth-state variation) before distributed n>=800, pivot frontier off retrieval-diversity onto deterministic compilation bypass, and pivot intel to orthogonal census to unblock physics Gate0, while parking distributed product economics until substrate passes.",
+    "schema_version": 1,
+    "scout_assessment": "Scout brief was central to this direction. Its synthetic-to-real transfer debt framing, tunnel flag inventory, cross-lane dependency map (runtime -> graph/product, intel -> physics/graph), and external context (WebMCP as shipping Chrome standard, BrowserGym 0.14.3 maturity, VerMem/MemGuard learned verifiers, DSM compilation O(1) economics) were adopted. I challenged its suggestion to add verifier-gated freshness as Graph next gate: adopted as second-order alternative but deferred behind mandatory health-gated transfer which Scout correctly identifies as hard blocker. I accepted its frontier compilation bypass shootout, runtime header-variance fix, and intel orthogonal census pivots as globally most promising. I rejected implicit continuation of alias threshold sweeps and Laplace/DM alpha sweeps that Scout flags as trap."
+  },
+  "experiment_id": "EXP-PHYSICS-36052025550",
+  "inherited_last_verdict": "MEASUREMENT_INVALID",
+  "inherited_next_question": "After repairing per-stratum Gamma-ratio analytic to true digamma/trigamma expectation without heuristic stub (*0.0) or offset (+0.01) achieving |perm-analytic|<0.03 separately on each genuine R and on independent/IID controls (|analytic|<0.1), and provisioning genuine Playwright CDP-captured correlated banks at locked 1280x720 (Accessibility.getFullAXTree + DOM.getBoxModel + CSS.getComputedStyleForNode, dom_bytes/a11y_bytes>0 no synthetic fallback) with genuinely independent DOM representations (R_visible_text_hash from DOM visible tokens vs R_visual bbox 10-bin vs R_computed 8 CSS values vs R_AX serialized 5k TRAIN-only k-means 20 per-R separate 70/30 by trajectory_id, |R|/N 0.01-0.30 MI<0.10 hist>0.3 |S_next|>=5 latent states not query-param inflated H>0.2 |A|>1) validated by positive control BC>0.05 p<0.01, does history-conditioned conditional PMI I(S_next;R|C) with pure trajectory-grouped permutation (1999 shuffles BC=obs-perm_mean) using an unbiased/bias-corrected estimator or barrier/committor visual+AX regime clustering (k=20 flux/mean-first-passage) show BC>0.05 p_bonf<0.01 gap_history>=0.05 gap_independent>=0.05 vs history-only and independent-noise nulls on >=1 R, or does even correctly centered and sensitive testing remain BC~0/gap<0.05 requiring Physics PARK and pivot to materially orthogonal objects (tool/API-bypass residual-novelty honest-cost, production SPA session/permission regimes with richer latent structure, or window-level entropy estimators)?",
+  "lane": "physics",
+  "origin_github_run_id": "36052025550",
+  "parent_handoff": {
+    "experiment_id": "EXP-PHYSICS-36038994684",
+    "path": "research/experiments/EXP-PHYSICS-36038994684/handoff.json",
+    "sha256": "aa4592986b5634b817130b9669933094d7fdf4f5f0a15aec420860f351af0aa0"
+  },
+  "reason": "global-director-PIVOT",
+  "request_hash": "f5c99c4e9d8e00e151ae77f062c2f7e7340bf233dd9462728c2be943f2f28134",
+  "request_id": "25466ab9c946c41339e64e41",
+  "schema_version": 1
+}
