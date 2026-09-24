@@ -1,0 +1,169 @@
+{
+  "experiment_id": "EXP-PRODUCT-35936223443",
+  "generated_at": "2026-09-24T00:04:00+00:00",
+  "observations": [
+    {
+      "id": "OBS-1",
+      "check": "docker daemon reachable",
+      "available": true,
+      "raw": "CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES"
+    },
+    {
+      "id": "OBS-2",
+      "check": "BrowserGym/WebArena Docker images",
+      "available": false,
+      "raw": "ghcr.io/github/gh-aw-mcpg:latest\nghcr.io/github/gh-aw-firewall/agent:latest\nghcr.io/github/github-mcp-server:latest\nghcr.io/dependabot/dependabot-updater-core:latest\nghcr.io/github/gh-aw-firewall/api-proxy:latest\nghcr.io/github/gh-aw-firewall/squid:latest",
+      "images_found": [
+        "ghcr.io/github/gh-aw-mcpg:latest",
+        "ghcr.io/github/gh-aw-firewall/agent:latest",
+        "ghcr.io/github/github-mcp-server:latest",
+        "ghcr.io/dependabot/dependabot-updater-core:latest",
+        "ghcr.io/github/gh-aw-firewall/api-proxy:latest",
+        "ghcr.io/github/gh-aw-firewall/squid:latest"
+      ]
+    },
+    {
+      "id": "OBS-3",
+      "check": "shared WAL canonical paths",
+      "p1_exists": false,
+      "p2_exists": false,
+      "raw": "/tmp/spider-runtime/shared.db exists=False; /tmp/spider-runtime-35936223443/shared.db exists=False"
+    },
+    {
+      "id": "OBS-4",
+      "check": "find /tmp -name shared.db",
+      "raw": "find: \u2018/tmp/systemd-private-0dd400a35ec84722ae8bcd4c7774e59e-chrony.service-USgaIY\u2019: Permission denied\nfind: \u2018/tmp/snap-private-tmp\u2019: Permission denied\nfind: \u2018/tmp/systemd-private-0dd400a35ec84722ae8bcd4c7774e59e-polkit.service-YyY4ol\u2019: Permission denied\nfind: \u2018/tmp/systemd-private-0dd400a35ec84722ae8bcd4c7774e59e-haveged.service-hRE2c5\u2019: Permission denied\nfind: \u2018/tmp/systemd-private-0dd400a35ec84722ae8bcd4c7774e59e-ModemManager.service-56Fmg5\u2019: Permission denied\nfind: \u2018/tmp/systemd-private-0dd400a35ec84722ae8bcd4c7774e59e-systemd-resolved.service-Na0ALO\u2019: Permission denied\nfind: \u2018/tmp/systemd-private-0dd400a35ec84722ae8bcd4c7774e59e-systemd-logind.service-E21Hvu\u2019: Permission denied",
+      "found": "find: \u2018/tmp/systemd-private-0dd400a35ec84722ae8bcd4c7774e59e-chrony.service-USgaIY\u2019: Permission denied\nfind: \u2018/tmp/snap-private-tmp\u2019: Permission denied\nfind: \u2018/tmp/systemd-private-0dd400a35ec84722ae8bcd4c7774e59e-polkit.service-YyY4ol\u2019: Permission denied\nfind: \u2018/tmp/systemd-private-0dd400a35ec84722ae8bcd4c7774e59e-haveged.service-hRE2c5\u2019: Permission denied\nfind: \u2018/tmp/systemd-private-0dd400a35ec84722ae8bcd4c7774e59e-ModemManager.service-56Fmg5\u2019: Permission denied\nfind: \u2018/tmp/systemd-private-0dd400a35ec84722ae8bcd4c7774e59e-systemd-resolved.service-Na0ALO\u2019: Permission denied\nfind: \u2018/tmp/systemd-private-0dd400a35ec84722ae8bcd4c7774e59e-systemd-logind.service-E21Hvu\u2019: Permission denied"
+    },
+    {
+      "id": "OBS-5",
+      "check": "PyJWT HS256",
+      "available": false,
+      "raw": "No module named 'jwt'"
+    },
+    {
+      "id": "OBS-6",
+      "check": "gunicorn 23.0.0",
+      "available": false,
+      "raw": "[Errno 2] No such file or directory: 'gunicorn'"
+    },
+    {
+      "id": "OBS-7",
+      "check": "nginx 1.24.0",
+      "available": true,
+      "raw": "nginx version: nginx/1.24.0 (Ubuntu); which: /usr/sbin/nginx"
+    },
+    {
+      "id": "OBS-8",
+      "check": "numpy",
+      "available": false,
+      "raw": "No module named 'numpy'"
+    },
+    {
+      "id": "OBS-9-scipy",
+      "check": "scipy",
+      "available": false,
+      "raw": "No module named 'scipy'"
+    },
+    {
+      "id": "OBS-9-sklearn",
+      "check": "sklearn",
+      "available": false,
+      "raw": "No module named 'sklearn'"
+    },
+    {
+      "id": "OBS-9-pandas",
+      "check": "pandas",
+      "available": false,
+      "raw": "No module named 'pandas'"
+    },
+    {
+      "id": "OBS-10",
+      "check": "browsergym 0.14.3 python package",
+      "available": false,
+      "raw": "No module named 'browsergym'"
+    },
+    {
+      "id": "OBS-11",
+      "check": "playwright 1.63.0",
+      "available": false,
+      "raw": "No module named 'playwright'"
+    },
+    {
+      "id": "OBS-12",
+      "check": "gpt-4o-mini API key",
+      "available": false,
+      "raw": "{'OPENAI_API_KEY': False, 'GPT4O_MINI_KEY': False, 'OPENAI_KEY': False, 'ANTHROPIC_API_KEY': False}"
+    },
+    {
+      "id": "OBS-13",
+      "check": "kernel dot-regex current HEAD",
+      "has_dot": false,
+      "sha256": "46929b3a951df48d7f9d1fd850871073c0d91c1868aa117e13d389fe274e8d61",
+      "raw": "_PARAMETER = re.compile(r\"\\$\\{([A-Za-z_][A-Za-z0-9_]*)\\}\")",
+      "post_patch_sha256": "d926279d5ee14a044a2f13b8abc09202df9f5adb9e86feaadeb61818a15f4038",
+      "post_patch_has_dot": true,
+      "post_patch_raw": "_PARAMETER = re.compile(r\"\\$\\{([A-Za-z_][A-Za-z0-9_\\.]*)\\}\")",
+      "unittest_after_patch": "3/3 PASS"
+    },
+    {
+      "id": "OBS-14",
+      "check": "frozen inputs byte-identical to freeze.json",
+      "matched": true,
+      "raw": "req a3532d5d spec b4403f1b prereg c64f2b23 freeze rec req a3532d5d"
+    },
+    {
+      "id": "OBS-15",
+      "check": "n_non304 health-gated",
+      "available": false,
+      "n_non304": null,
+      "raw": "No shared WAL, no nginx upstream, no conditional probe exercised -> n_non304 null <800 gate fails"
+    },
+    {
+      "id": "OBS-16",
+      "check": "outcome-bearing economics trial",
+      "raw": "No branch_traces, no qcr_bank_manifest, no registry.jsonl/webmcp_registry.jsonl generated; honest distributed counters via per-batch SELECT not attempted due to substrate absence; frozen prohibition on file-proxy fallback honored"
+    },
+    {
+      "id": "OBS-17",
+      "check": "bootstrap 5000 / block-permutation 5000 computable",
+      "available": false,
+      "raw": "numpy/scipy absent so bootstrap uncomputable"
+    },
+    {
+      "id": "OBS-18",
+      "check": "nginx upstream gunicorn config",
+      "raw": "user www-data;\nworker_processes auto;\npid /run/nginx.pid;\nerror_log /var/log/nginx/error.log;\ninclude /etc/nginx/modules-enabled/*.conf;\n\nevents {\n\tworker_connections 768;\n\t# multi_accept on;\n}\n\nhttp {\n\n\t##\n\t# Basic Settings\n\t##\n\n\tsendfile on;\n\ttcp_nopush on;\n\ttypes_hash_max_size 2048;\n\t# server_tokens off;\n\n\t# server_names_hash_bucket_size 64;\n\t# server_name_in_redirect off;\n\n\tinclude /etc/nginx/mime.types;\n\tdefault_type application/octet-stream;\n\n\t##\n\t# SSL Settings\n\t##\n\n\tssl_protocols TLSv1 TLSv1.1 TLSv1.2 TLSv1.3; # Dropping SSLv3, ref: POODLE\n\tssl_prefer_server_ciphers on;\n\n\t##\n\t# Logging Settings\n\t##\n\n\taccess_log /var/log/nginx/access.log;\n\n\t##\n\t# Gzip Settings\n\t##\n\n\tgzip on;\n\n\t# gzip_vary on;\n\t# gzip_proxied any;\n\t# gzip_comp_level 6;\n\t# gzip_buffers 16 8k;\n\t# gzip_http_version 1.1;"
+    },
+    {
+      "id": "OBS-19",
+      "check": "kernel dot-regex re-applied and verified post-patch",
+      "available": true,
+      "raw": "src/spider/kernel.py sha256 d926279d5ee14a044a2f13b8abc09202df9f5adb9e86feaadeb61818a15f4038 dot-aware regex; PYTHONPATH=src unittest 3/3 PASS; manual dotted bind 2/2 PASS (a.b, sku.id)",
+      "sha256": "d926279d5ee14a044a2f13b8abc09202df9f5adb9e86feaadeb61818a15f4038"
+    }
+  ],
+  "summary": {
+    "docker_daemon_available": true,
+    "browsergym_docker_image_available": false,
+    "shared_db_wal_substrate_available": false,
+    "distributed_wal_per_batch_select_runnable": false,
+    "pyjwt_available": false,
+    "gunicorn_available": false,
+    "nginx_available": "binary-only-1.24.0-no-upstream",
+    "numpy_available": false,
+    "browsergym_python_package_available": false,
+    "playwright_available": false,
+    "gpt4o_mini_key_available": false,
+    "n_non304": null,
+    "health_gated_URL_sticky": false,
+    "rho_proxy_real_computable": false,
+    "bootstrap5000_computable": false,
+    "block_permutation5000_computable": false,
+    "kernel_dot_regex_pre_patch_sha256": "46929b3a951df48d7f9d1fd850871073c0d91c1868aa117e13d389fe274e8d61",
+    "frozen_inputs_matched": true,
+    "kernel_dot_regex_fix_applied": "d926279d5ee14a044a2f13b8abc09202df9f5adb9e86feaadeb61818a15f4038",
+    "kernel_unittest_result": "3/3 PASS (PYTHONPATH=src python3 -m unittest tests.test_kernel -v)",
+    "frozen_inputs_mutated": false
+  }
+}
