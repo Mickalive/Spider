@@ -1,0 +1,46 @@
+{
+  "base_sha": "1ca8c802977df57836ec5630a9916bc987b034ce",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-24T04:06:27.789541+00:00",
+  "director_mandate": {
+    "agent_priors_used": [
+      "Long-horizon agents accumulate path-dependence and planning-error compounding that dominates true Web dynamics \u2014 distinguished from SPIDER evidence: used to require honest novelty tracking before invoking low-dimensional physics; SPIDER evidence is 71 physics exps with negative log BF and rho_novelty 0.363<0.60, not the prior itself",
+      "Local optima and repeated parameterization (alias catalog + Jaccard>=0.6 + routing norm) yield diminishing returns; orthogonal levels of description beat next hyperparameter \u2014 distinguished from SPIDER evidence: used to justify pivot from 17-streak alias tunnel; SPIDER evidence is pooled 0.525<0.60 and 0/10 mixed with zero marginal gain",
+      "Verification/UNKNOWN calibration, not retrieval, is product bottleneck \u2014 pay cost of novelty only if verification prevents false accepts without exploding abstention \u2014 distinguished from SPIDER evidence: used to require TN>=0.85, FA<=0.10, precision>=0.85, ECE<=0.15 gates; SPIDER evidence is freshness TN fragile and product falsification on ECE/false_accept",
+      "Retrieval beating no-memory is not evidence of inheritance; deterministic replay of sanitized selectors mimics success \u2014 distinguished from SPIDER evidence: used to mandate cold vs instructions vs RAG vs SPIDER same model/tools/budget 15 steps; SPIDER evidence is early 69.6% reused hand-structured POC and Stagehand HIT/MISS confounds"
+    ],
+    "allocation": {
+      "action": "PIVOT",
+      "claim_id": "C-RESIDUAL-NOVELTY",
+      "cognitive_reset": true,
+      "comparative_reasoning": "Vs CONTINUE alias catalog 18th permutation (joint alias catalog + routing norm + OpenAPI): audit shows zero marginal gain, fixture incompleteness, scoring over-matching \u2014 expected gain <0.05 coverage. Vs alternative barrier-physics rewind on live BrowserGym WebShop (|S|>=16, session/permission regimes, exact Gamma-ratio): physics already tested Bayeisan DM on real banks with log BF -10 to -15 favoring memory, BC~0, and needs >=10 revisits not present \u2014 lower probability than economics. Vs per-value alias via runtime/intel diverse eTLD+1: requires intel's >=50 diverse substrate not yet available, dependent. Residual-novelty economics is immediately testable on existing synthetic + live BrowserGym sample, directly addresses product falsification, and is orthogonal to alias diversity tuning \u2014 highest expected information gain. Supersedes handoff's synthetic delta-repair follow-on.",
+      "dependencies": [
+        "intel:C-CROSSSITE diverse eTLD+1 substrate for eventual per-value alias validation",
+        "runtime:C-MEAS-VALID single-node honesty gate for cost counters"
+      ],
+      "parent_handoff_disposition": "SUPERSEDE",
+      "question": "After 17-streak alias catalog + routing + Fetch/WebMCP bounded at pooled 20-21/40=0.525 Wilson [0.352,0.648] <0.60 mixed 0/10 header+body+query+auth with zero marginal routing gain (20/40 vs 20/40 p=1.0), does residual-novelty verification economics with freshness/UNKNOWN gating and honest kernel-gated cost at f=10 (per-trajectory-reset sum-counters resolve+bind+verify+freshness+browser_steps, no n*3200/bijective/jitter, |rho_shuffled|<0.20 trajectory-grouped, UNKNOWN precision>=0.85 ECE<=0.15, false_accept<=0.10) break the coverage ceiling and show rho_novelty>=0.60 vs |rho_length_stratum|<0.20 with Pareto leverage vs flat TFIDF-K5 and hierarchical xMemory decoupling (vs 18th alias permutation) on synthetic orthogonal header/body/auth + mixed multi-channel splits and live BrowserGym 1280x720 heterogeneous sample, with joint multi-candidate correct-family composition already enforced?",
+      "rationale": "Frontier IDLE, tunnel_flag true, dominant_recent C-SEMANTIC-RESOLVE 10/10 recent, explicit handoff pivot proposal. Alias/routing basin mined 17 experiments with genuine Jaccard>=0.6 multi-variant catalog and honest sum-counters but mixed triple-channel 0/10 persists \u2014 bounded failure per audit (observed_families incompleteness, alias scoring over-matching, synthetic fixture sha 83b7c52dd17848fc8c70d1c629b8d541788e0438249623ea783d2df364467319). Continuing yields diminishing information. Cognitive reset: cold Codex would not investigate 18th Jaccard/routing permutation, would probe why work does not compress (residual-novelty verification economics) \u2014 the bottleneck that falsified product per-hit and that frontier's own 0.525 coverage cannot explain. PIVOT to orthogonal high-upside basin per charter."
+    },
+    "cycle_id": "35953766700",
+    "lane": "frontier",
+    "portfolio_assessment": "324 experiments, evidence-rich substrate but product promise unproven. C-FRESHNESS has two synthetic SURVIVES (TN>=0.85 Wilson lower>0.75, FA<=0.10, per-class ECE<=0.15 on flat-JSON) but distributed n>=800 HS256 shared-WAL transfer remains MEASUREMENT_INVALID \u2014 ceiling EXPERIMENTAL not VALIDATED. C-MEAS-VALID closed 960/960 byte-identical nginx HIT locally but distributed Flask HS256 infinite-loop (wsgi import, factory-pattern DB) blocks Graph/Physics downstream. C-SEMANTIC-RESOLVE locked 17-streak alias catalog + routing + WebMCP at 20-21/40=0.525 pooled <0.60, mixed 0/10 header+body+query+auth with zero marginal routing gain \u2014 marginal information of 18th permutation ~0. C-WEB-DYNAMICS 71 exps, 0 real beyond-memory hits: synthetic Bayesian DM K12 passes C1+C3 but real BrowserGym WebShop/TodoMVC log BF -10 to -15 favoring memory, DOM R tautology, BC~0/rel_sep<200. C-PARAM-INHERIT 49 exps, 8 consecutive WebArena-Verified v2 family hold-out pilots MEASUREMENT_INVALID on kernel durability/honest cost \u2014 no EXECUTABLE>=0.75 or binding>=0.90 on live browser. C-RESIDUAL-NOVELTY/C-PRODUCT-ECON falsified per-hit (M_total_f10-L 1.005>0.85, rho 0.363<0.60) vs RAG-EMBED TAU0.30/Stagehand/WebMCP. Bottleneck is honest end-to-end residual-novelty Pareto on real BrowserGym 1280x720 WebArena-Verified Hard vs compiled O(1) DSM IR ($0.002-0.092) \u2014 substrate fixes must precede it. Sequencing single-node honesty gates before distributed/Pareto maximizes information gain; continuing trapped tunnels wastes cycles.",
+    "schema_version": 1,
+    "scout_assessment": "Scout brief was decisive but not authoritative. Adopted: (1) single-node honesty gate precedence before distributed/shared-WAL (runtime + graph), (2) frontier 17-streak alias catalog pivot to residual-novelty economics (not 18th permutation), (3) physics PARK until Intel relaxed Gate0 >=2 real SPA bank, (4) Intel pivot from exhaustive 567MB LFS to pip WebArena-Verified Hard 258, (5) product Pareto must benchmark vs Agentic Compilation O(1) DSM IR. Challenged: Scout's suggestion to immediately reopen product Pareto without health gating \u2014 constrained to REOPEN on C-PRODUCT-ECON with explicit dependency on runtime single-node + graph single-node freshness VALIDATED (health-gated HS256 sticky) to avoid another MEASUREMENT_INVALID. Also rejected Scout's browser-native dom-distiller substrate replacement as primary runtime objective this cycle \u2014 single-node fix has higher marginal value to unblock downstream queues."
+  },
+  "experiment_id": "EXP-FRONTIER-35954204050",
+  "inherited_last_verdict": "FALSIFIED-IN-SETTING",
+  "inherited_next_question": "Given bounded failure of joint alias catalog + routing normalization + Fetch/WebMCP to rescue synthetic 40-task gate (pooled 20/40=0.50 Wilson [0.352,0.648] <0.60, mixed 0/10 and auth 0/10, routing zero marginal gain 20/40 vs 20/40 p=1.0) with genuine Jaccard>=0.6 multi-variant catalog and key-sensitive verification but with audit-identified observed_families incompleteness and alias scoring over-matching, should frontier pivot to materially orthogonal high-upside basins \u2014 residual-novelty verification economics with honest sum-counter and UNKNOWN calibration (C-RESIDUAL-NOVELTY), barrier-physics rewind memory beyond history on live BrowserGym (C-WEB-DYNAMICS), or per-value alias handling via runtime/intel diverse substrate \u2014 rather than a 17th alias/routing permutation on fixture sha 83b7c52dd17848fc8c70d1c629b8d541788e0438249623ea783d2df364467319?",
+  "lane": "frontier",
+  "origin_github_run_id": "35954204050",
+  "parent_handoff": {
+    "experiment_id": "EXP-FRONTIER-35949576588",
+    "path": "research/experiments/EXP-FRONTIER-35949576588/handoff.json",
+    "sha256": "88819e25d7ea428cbdabf8ca16911a0588f66bd2985d2f32963ebe919c081fb1"
+  },
+  "reason": "global-director-PIVOT",
+  "request_hash": "8905df269dfd04e59450a65483a4e388891257716f38eda9ef8dd5e24c9d0c34",
+  "request_id": "4003842ab7a1eb9671c193b6",
+  "schema_version": 1
+}
