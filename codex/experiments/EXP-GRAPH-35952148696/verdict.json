@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-35952148696",
+  "lane": "graph",
+  "decision": "SURVIVES_CURRENT_TEST",
+  "claim_updates": [
+    {
+      "claim_id": "C-DELTA-REPAIR",
+      "status": "EXPERIMENTAL",
+      "reason": "Bounded synthetic SURVIVES_CURRENT_TEST with honest instrumentation: audit PASS producer_claim_supported=true (all 7 parent required_fixes resolved). D1 PC1 1.0 (180/180 fresh via _matches, 155 stable+25 pre-drift) and PC2 per-family 1.0 (10/10 each via deterministic re-observe) executed not hardcoded; D2 NC1 cost 0 contamination 0 (10 zero-perturbation fresh), NC2 random-patch false_accept 0.0 (0/30) binary AUROC pooled 1.0 TEST 1.0 vs permutation-shuffled null unclamped 1000 whole-trajectory-block perms pooled 0.5002 TEST 0.4952 within [0.40,0.60] delta 0.504 >=0.25, NC-NOISE FA 0.0 (0/150 TN 1.0) executed; D3 freshness TN 1.0 Wilson lower 0.982 (210/210) FA 0.0 Wilson upper 0.1135 (0/30) UNKNOWN 0.125 Wilson [0.089,0.1728] ECE global 0.0625 fresh 0.05 stale 0.15 <=0.15 satisfies prevalence-aware bound 0.0643 <0.15 at both stale_rate 0.125 executed (30/240) and 0.1428 evaluated (30/210) within [0.00,0.18]∩[stale_rate±0.07]; D4 repair pooled 1.0 (30/30 Wilson lower 0.8865) per-family 1.0 (10/10 lower 0.7225) bootstrap lower>0.60 with 5000 family-stratified trajectory-grouped bootstrap CI [1.0,1.0] degenerate ceiling Wilson informative; D5 tokens mean 5 ratio 0.3125<0.50 browser mean 1 ratio 0.333<0.40 verify steps 1 <=2 bootstrap upper <0.55/<0.45 via honest constant integer per-trajectory-reset sum-counter (resolve1+bind1+verify1+freshness1=4 base fresh 5 repair 1 probe retrieval 1 token 0 browser no jitter/n*3200/f*6.0/parity all_int true); D6 contamination pooled 0.0 (0/20 Wilson upper 0.1611) per-family 0.0 <0.15 re-verified on registry clone snapshot isolation disjoint ids 9000-9019 via _matches blast radius=1; D7 verification AUROC 1.0 precision 1.0 recall 1.0 on TEST 12 (TRAIN 18 pool 30 correct 30 true vs 30 random 0 true) at frozen 0.85 threshold with TRAIN 18 (6 per family) TEST 12 (4 per family) split via binary _matches not hash-injected scores, permutation null 0.4952-0.5002 unclamped proves not artefactual; D8 honest amortized 15 (5+10*1) <16 cold token and 1 (1+10*0) <3 cold browser at f=10 with retrieval browser 0 comparator 3 not 12 (fixes prior 11<12 with *4); D9 B-NO-GUARD FA 1.0 delta 1.0 >=0.15 >0.10, B-JACCARD-ONLY FA 0.6667 (TP 10/30 only dom_drift) and B-HEADER-ONLY FA 0.3333 (TP 20/30 param+cache miss dom_drift) each fail >=1 family proving combined signal required, B-VERBATIM 0.0 (0/30) breaking, B-RETRIEVAL executed 0.0 (0/30 via Jaccard 0.30 TFIDF) delta 1.0 >=0.30 proves patch adds value beyond memory; D10 honesty max|rho_shuffled| 0.0 <0.20 via 1000 whole-trajectory-block perms, within-family freshness std 0.5 >0, 5000 bootstrap trajectory-grouped, per-trajectory caching response-derived _template/X-Csrf-Token, deterministic _matches. All gates pass per frozen decision_rule requiring ALL D1-D10. Claim ceiling remains narrow synthetic EXPERIMENTAL (audit claim_ceiling): stdlib http.server flat-JSON single-resource /resource/{id} blast radius=1 deterministic copy-live-bytes rebind at 5 units matching oracle 1.0x, degenerate bootstrap CIs [1.0,1.0] ceiling not precision, distributed n>=800 DEFERRED health_gate false n 0<800 WAL false. Does NOT promote to VALIDATED/PRODUCT_CORE; requires health-gated distributed n>=800 PASS plus real LLM/Playwright. Prior MEASUREMENT_INVALID (5 BLOCKED) now resolved to bounded EXPERIMENTAL honesty."
+    }
+  ],
+  "product_action": "NO_PROMOTION",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "Does the honest synthetic-validated combined freshness guard (Jaccard 0.85 required-filtered {id,name,email}+response-derived _template/X-Csrf-Token+ETag+max-age=0 recalibrated 0.95/0.85) and deterministic localized repair (re-observe 1 probe overwrite rebond re-verify 5 tokens 1 browser, TN 1.0 FA 0.0 repair 1.0 contamination 0.0 AUROC 1.0 amortized 15<16 1<3) transfer to the health-gated distributed shared-WAL substrate (2x gunicorn 23 + nginx 1.24 HS256 distinct X-Worker-Pid>=2 If-None-Match 304 WAL/journal_mode at /tmp/spider-runtime/*/shared.db) at n>=800 non-304 with identical thresholds and honest trajectory-grouped instrumentation, and does localized repair hold for multi-resource blast radius>1 (2-3 resources) and same-resource contamination beyond the disjoint-id 0/20 no-op, before any VALIDATED/PRODUCT_CORE promotion or f=100 real-LLM claim?",
+  "reason": "Independent audit PASS confirms producer SUPPORTS claim is now honestly measured: all 7 prior VF1-VF7 required_fixes resolved (binary _matches AUROC at frozen 0.85 TRAIN18/TEST12 vs hash 0.78-0.99, unclamped perm null 0.5002/0.4952 vs clamped 0.4803, executed PC1/PC2/NC1 vs hardcoded 1.0, honest D8 1<3 retrieval browser 0 vs rigged 11<12 with *4, executed retrieval 0.0 vs hardcoded 0.30, harmonized 360 evaluated/390 executed both within prevalence window vs shifted 390, trajectory-grouped family-stratified 5000 bootstrap vs instance-level, clone re-verified contamination 0/20 vs asserted 0). Recomputed metrics match producer exactly (M-TN 1.0 lower 0.982, M-FA 0.0 upper 0.1135, M-REPAIR 1.0 lower 0.8865, cost ratio 0.3125/0.333, AUROC 1.0 vs random 0.4952, amortized 15<16 1<3, rho 0.0<0.20). Honesty gates pass but are vacuous via constant cost 4 (audit VF9 disclosed) — D8 amortized Pareto now honest required for economics. All 10 frozen decision gates D1-D10 pass, satisfying PRIMARY SURVIVES_CURRENT_TEST. This upgrades C-DELTA-REPAIR from HYPOTHESIS/BLOCKED (5 prior BLOCKED + parent MEASUREMENT_INVALID) to bounded synthetic EXPERIMENTAL with honest economics on single-resource deterministic substrate only. Cannot VALIDATE: degenerate bootstrap [1.0,1.0] ceiling reflects deterministic perfect detection not precision (Wilson informative), blast radius=1 disjoint-id contamination is structural no-op not same-resource proof, ETag AND boundary untested, required-path noise tautological, 304 circular, correlated latent non-determinism and multi-resource locality deferred per V12, distributed DEFERRED (health_gate false n 0<800 X-Worker-Pid 0 WAL false per health_gate.json). No Product Core promotion (graph lane, synthetic, no real LLM/Playwright). Immediate continue false per Director PARK disposition: wait for runtime to harden distributed WAL then identical re-run at n>=800.",
+  "evidence_refs": [
+    "research/experiments/EXP-GRAPH-35952148696/request.json",
+    "research/experiments/EXP-GRAPH-35952148696/spec.json",
+    "research/experiments/EXP-GRAPH-35952148696/prereg.md",
+    "research/experiments/EXP-GRAPH-35952148696/freeze.json",
+    "research/experiments/EXP-GRAPH-35952148696/result.json",
+    "research/experiments/EXP-GRAPH-35952148696/provenance.json",
+    "research/experiments/EXP-GRAPH-35952148696/report.md",
+    "research/experiments/EXP-GRAPH-35952148696/audit.json",
+    "research/experiments/EXP-GRAPH-35952148696/raw_evidence/summary.json",
+    "research/experiments/EXP-GRAPH-35952148696/raw_evidence/metrics.json",
+    "research/experiments/EXP-GRAPH-35952148696/raw_evidence/verification_auroc.json",
+    "research/experiments/EXP-GRAPH-35952148696/raw_evidence/contamination_logs.json",
+    "research/experiments/EXP-GRAPH-35952148696/raw_evidence/repair_logs.json",
+    "research/experiments/EXP-GRAPH-35952148696/raw_evidence/cost_logs.json",
+    "research/experiments/EXP-GRAPH-35952148696/raw_evidence/bootstrap_ci.json",
+    "research/experiments/EXP-GRAPH-35952148696/raw_evidence/health_gate.json",
+    "research/experiments/EXP-GRAPH-35952148696/raw_evidence/per_trajectory_cache.json",
+    "research/experiments/EXP-GRAPH-35952148696/raw_evidence/decision.json",
+    "research/graph/delta_repair/execute_delta_repair_synthetic_35952148696.py",
+    "src/spider/kernel.py",
+    "research/experiments/EXP-GRAPH-35949562506/handoff.json",
+    "research/experiments/EXP-GRAPH-35947468747/audit.json",
+    "research/claims/registry.json",
+    "codex/claim_state.json",
+    "codex/index.json"
+  ]
+}

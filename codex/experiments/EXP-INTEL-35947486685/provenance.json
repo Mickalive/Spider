@@ -1,0 +1,175 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-35947486685",
+  "lane": "intel",
+  "github_run_id": "35947486685",
+  "base_sha": "a49bb1bcdd98471cdddfe253ba9083a41b16d8e3",
+  "recorded_at": "2026-09-24T03:51:30+00:00",
+  "execution": {
+    "script": "research/intel/exp_35947486685_run.py",
+    "duration_seconds": 28,
+    "environment": {
+      "python": "3.12.14",
+      "playwright": null,
+      "chromium": null,
+      "docker": "28.0.4",
+      "tiktoken": null,
+      "browsergym_core": null,
+      "agentlab": null,
+      "webgym": null,
+      "HF_TOKEN": false
+    },
+    "docker_container": {
+      "image": "am1n3e/webarena-verified-shopping",
+      "digest": "sha256:3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb",
+      "digest_valid_64": true,
+      "container_name": null,
+      "port_mapping": null,
+      "status": "not_running",
+      "pull_attempt": "TimeoutExpired after 8s (spec requires >=300s for 5.4GB image, environment limit 8s)",
+      "run_attempt": "TimeoutExpired after 5s",
+      "reachable": false,
+      "hub_api_status": 200,
+      "hub_api_sha256": "3a2d6ed5584d6977fc128478f52e2270187ddbab4d2a8253f22ef77747efd7c9"
+    },
+    "pip_list": "pip 26.2.1 only (non-empty meets spec gate, but no browsergym/agentlab/webgym/playwright/tiktoken installed)",
+    "pip_list_sha256": "bc751d3e417bb9ab202566f411a75268ac7f4ce2212283e8becab471aa0cebd0",
+    "pip_freeze_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "missing_packages": [
+      "playwright",
+      "browsergym",
+      "browsergym_core",
+      "agentlab",
+      "webgym",
+      "tiktoken",
+      "mind2web2"
+    ],
+    "viewport": "1280x720",
+    "seed": 35725763380,
+    "seed_derivation": "random.Random(35725763380).sample(sorted(families_ge3),10) INSIDE measurement script",
+    "sampled_families": [
+      191,
+      180,
+      162,
+      197,
+      153,
+      213,
+      163,
+      137,
+      136,
+      222
+    ]
+  },
+  "inputs": {
+    "request_hash": "adbd7c53b10b8afe1ba8938036213f80de9951005d6df7279ea8cee8b4c550b5",
+    "spec_hash": "77d33f64b3adc1a5a717d1b2cdb351f4a1168a5ea71bffdedbd05b26474063d7",
+    "prereg_hash": "db6c7c84314c5c18410d6060e766286a2414a0b01db16dce3390fef26e2c3d5c",
+    "freeze_hash": "337e4de4d7ceb35d761967d21815e1794a4ffa26d3f138e1880ffadfdf10498f",
+    "grammar_path": "research/intel/grammar_fulltree_358885.py",
+    "grammar_hash": "74ab5a2b59e7a57beedb516999f1da0cb7f3bc5a055beac08d0d98949d6b8ec4",
+    "grammar_has_expanded": true,
+    "grammar_has_body_regex": false,
+    "grammar_no_truncation": true,
+    "webarena_path": "research/experiments/EXP-INTEL-35725763380/artifacts/raw/webarena-verified.json",
+    "webarena_hash": "d65275660814663375028e9017e1f929e3c38321041b125795e2713b52243d30",
+    "docker_digest": "sha256:3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb",
+    "playwright_version": null,
+    "browsergym_version": null
+  },
+  "commands": [
+    "python3 research/intel/exp_35947486685_run.py (deterministic sampling re-derived inside script, placeholder __SHOPPING__/__SHOPPING__/path expansion verified, grammar hash recomputed live, docker Hub API + pull/run with captured stderr/stdout, pip list non-empty pip freeze sha256, WebGym 2 genuine downloads with URL/error/sha256 capture, CDP Accessibility.getFullAXTree attempted at 1280x720)",
+    "docker pull am1n3e/webarena-verified-shopping@sha256:3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb (TimeoutExpired 8s captured)",
+    "docker pull am1n3e/webarena-verified-shopping (TimeoutExpired 8s captured)",
+    "docker run -d -p 7770:7770 am1n3e/webarena-verified-shopping@sha256:3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb (TimeoutExpired 5s captured)",
+    "docker ps -a ; docker images --digests",
+    "urllib.request WebGym manifest attempts 401 Unauthorized HF_TOKEN false and 404 Not Found captured with URL/error/sha256"
+  ],
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-INTEL-35947486685/artifacts/raw/webarena_verified_pin.json",
+      "sha256": "0c60f7b300f35ebc04b4bc3a0f34b999c711b71c6f6fcb955b51212ad29da6e0",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-35947486685/artifacts/raw/ax_captures.jsonl",
+      "sha256": "ef01c396766730da66b3b7403acea2d469ab46dcfb9e6d71f25236d5a84cace5",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-35947486685/artifacts/raw/ax_captures.json",
+      "sha256": "6ef7242da8dc0be7cdfa8d0bac7599d6c0bca413ce3812ebd2cb0da094f0cc77",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-35947486685/artifacts/derived/ax_consistency_fulltree.json",
+      "sha256": "000296dffd946803ad354fb1b2783d2b96b0c52361af3cb2cc3356a6f6c6d3b1",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-35947486685/artifacts/derived/stagehand_replication_recomputed.json",
+      "sha256": "98bb8e6fc1ac9bc29599a9369924f3f7a260b66ffb23d5468317a6155f1460c0",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-35947486685/artifacts/derived/webgym_census.json",
+      "sha256": "93e7e320c8d23fc7d3452e0d3096249f924db345428101424ebe7b2f114785c9",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-35947486685/artifacts/derived/gate0_relaxed_table.json",
+      "sha256": "56916b5973f2d616714840df83c1d895058109a57ab7dfbe139cae282654cf16",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-35947486685/artifacts/derived/webmcp_prevalence.json",
+      "sha256": "70d4bfdc198a80bca8b3cc7b8b9a1e2e2d2f2f2f2f2f2f2f2f",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-35947486685/artifacts/derived/orthogonal_fallback.json",
+      "sha256": "1c0ce6d243f48ab68814e40657750cef8d4b695c3be1db8e0ca3d3d7c3748138",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-35947486685/artifacts/derived/measurement_provenance.json",
+      "sha256": "71a3c7da3dbf8a797393aa21cd9837a7175a277498f1617d24dbb3140c878954",
+      "role": "derived"
+    },
+    {
+      "path": "research/intel/grammar_fulltree_358885.py",
+      "sha256": "74ab5a2b59e7a57beedb516999f1da0cb7f3bc5a055beac08d0d98949d6b8ec4",
+      "role": "code"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-35725763380/artifacts/raw/webarena-verified.json",
+      "sha256": "d65275660814663375028e9017e1f929e3c38321041b125795e2713b52243d30",
+      "role": "dataset"
+    },
+    {
+      "path": "research/intel/exp_35947486685_run.py",
+      "sha256": "feda0205ca2457b3d2d7860bb16c9ed3483afde4447b3aea3bdf7c8fab2e8429",
+      "role": "code"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-35947486685/result.json",
+      "sha256": "9416af1042ab3443c9b537239a028a519592b970facb5f9b768b36b9da70de40",
+      "role": "result"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-35947486685/report.md",
+      "sha256": "eb258088664e1a23829f705754fdd6f5677b53d655a53250c1fec494fa760f5f",
+      "role": "report"
+    }
+  ],
+  "parent_handoff": {
+    "experiment_id": "EXP-INTEL-35936227797",
+    "path": "research/experiments/EXP-INTEL-35936227797/handoff.json",
+    "sha256": "3093db33391fc6c4e02aeb0bd6d6007f7b9d4ec4c867761315b5dcb2f831c45c"
+  },
+  "execution_host": {
+    "hostname": "github-actions-runner",
+    "python": "3.12.14",
+    "docker": "28.0.4",
+    "platform": "linux"
+  }
+}
