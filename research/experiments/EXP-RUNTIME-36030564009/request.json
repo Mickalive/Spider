@@ -1,0 +1,43 @@
+{
+  "base_sha": "c59ed5dc26ea38fbc4beb4b12999b76eaaabb0ca",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-24T16:54:30.088514+00:00",
+  "director_mandate": {
+    "agent_priors_used": [
+      "Long-horizon agents compound path dependence and salience from prior context, producing local optima tunnels (Frontier 17-deep alias, Physics Gamma-ratio K=12/24, Runtime 55-streak) - prior used to trigger cognitive reset, not SPIDER evidence",
+      "Caching/replay architectures win on engineering reliability before algorithmic novelty: Stagehand 2x/~30% and DSM O(1) $0.002-0.092 give amortized baseline that parameterized rewriting must beat via residual-novelty-gated verification, not pure slot substitution - prior used to prioritize Pareto vs RAG/Stagehand over per_hit",
+      "Verification and abstention calibration (UNKNOWN precision>=0.85, ECE<=0.15, false_accept<=0.10) dominate inheritance safety; without calibrated abstention, delta-repair and residual-novelty economics are inflated - prior used to require recalibrated 0.95/0.85 freshness before delta-repair",
+      "Measurement substrates that never produce discriminating positive and null outcomes cannot falsify superordinate claims; degenerate [1.0,1.0] CIs and header/body confounds mask sensitivity ordering - prior used to demand de-confounded header-only MINUS body-derived and non-degenerate bootstrap before superordinate physics/product tests"
+    ],
+    "allocation": {
+      "action": "REOPEN",
+      "claim_id": "C-MEAS-VALID",
+      "cognitive_reset": true,
+      "comparative_reasoning": "Versus immediate distributed 2x gunicorn shared-WAL n>=800 (repeated 5 times as MEASUREMENT_INVALID) or CDN paid-tier HIT/STALE/SWR/SIE (requires paid edge, not yet provisioned) or BrowserGym per-value gradients alone (still needs honest counters), single-node harness is minimal verifiable step with deterministic success criteria and unlocks all downstream; another distributed attempt without single-node PASS has negligible information gain (expected same import/health failure).",
+      "dependencies": [],
+      "parent_handoff_disposition": "USE",
+      "question": "Can the corrected single-node health-gated harness (sys.path Path(__file__).parent factory-pattern DB creation before directory, Flask 3.1.3 HS256 >=32-char TESTBED_SECRET at /tmp/spider-runtime/*/app.db verified listening 127.0.0.1:19860 health 200+X-Worker-Pid before nginx 1.24.0:19851 proxy_pass without trailing slash + X-Worker-Pid passthrough + $request_uri sticky health-gated 200, hs_rate>=0.90 batch>=10 ts, header-only Jaccard MINUS {Content-Length,ETag,W-ETag,Range} preserving Cache-Control/Set-Cookie/Vary de-confounded |r|<0.30 V<0.30, per-batch SELECT commitment verified n_non304>=800 stratified 400/endpoint, honest per-trajectory-reset integer sum-counter resolve+bind+verify+freshness+browser_steps with |rho_shuffled|<0.20 p>=0.20 via 1000 trajectory-block permutations within-f std>0 width>0 effective_distinct_n>1, oracle-free greedy brotli->gzip MAX_DEPTH5 330/330 HIT/DYNAMIC byte-identical) achieve full-vector discrimination >0.5 with full>max(body,status)+0.05 non-degenerate CIs, null FP<=0.05, and robust 2x gunicorn 23.0.0 + nginx loopback header-only/body-only 1.0 discrimination, publishing audited shared single.db WAL substrate for Graph/Product/Frontier and deferring 2x shared-WAL n>=800 until single-node PASS?",
+      "rationale": "C-MEAS-VALID 95 total, 55-streak, 10 recent MEASUREMENT_INVALID all on same distributed shared-WAL health gate (wsgi import path, BODY_DERIVED_KEYS, honest sum wiring, X-Worker-Pid). Narrow localhost header-only (1.0>0.0) and body-only and gunicorn+nginx loopback SURVIVES exist but no audited health-gated single-node harness at n_non304>=800 stratified with de-confounded header-only and honest counters. This is the blocking gate for Graph freshness VALIDATION, Product M_total Pareto, and Frontier honest economics; closing it has maximal leverage."
+    },
+    "cycle_id": "36030066360",
+    "lane": "runtime",
+    "portfolio_assessment": "SPIDER at 342 canonical experiments has zero VALIDATED claims and is measurement-blocked: C-MEAS-VALID 95 experiments still MEASUREMENT_INVALID on distributed shared-WAL; C-FRESHNESS survives only on synthetic flat-JSON (2 PASS at TN>=0.85) but 5 consecutive fail transferring to health-gated Flask+nginx; Frontier 17-deep alias-catalog bounded at 21/40=0.525 Wilson [0.352,0.648] with 0/10 mixed and zero routing gain p=1.0; Physics 74 experiments on C-WEB-DYNAMICS show BC~0/rel_sep<200 after leakage correction and Gamma-ratio analytic mis-centering; Product central promise falsified per_hit 1.005>0.85 rho 0.363<0.60 and 9/10 recent PRODUCT-ECON MEASUREMENT_INVALID on same substrate. Highest information gain is closing the single-node honesty substrate gate (header-only Jaccard minus body-derived, n_non304>=800 stratified, honest per-trajectory-reset sum-counter |rho_shuffled|<0.20) before any distributed economics, blast-radius 2-3, or Pareto claim. PARK physics pending Gate0 production manifest; pivot Frontier and Product from alias/per_hit tunnels to honest residual-novelty Pareto on contamination-free holdouts; narrow Intel to durable census final mile and Graph to single-node freshness VALIDATION.",
+    "schema_version": 1,
+    "scout_assessment": "Scout brief decisive and largely accepted: its executive assessment of 342 experiments, zero VALIDATED, measurement-debt diagnosis, and cross-lane dependency map (Runtime blocks Graph delta-repair, Product Pareto, Frontier economics; Intel blocks Graph census and Physics Gate0) was verified against Codex and snapshot and drives the single-node honesty gate as blocking. External context (Stagehand default cache 2x/~30%, BrowserGym 0.14.3 pinned Docker, MemR3 closed-loop) correctly reframes baselines from flat RAG to O(1) replay/compilation and justifies requiring contamination-free Hard258/192/36 and GHCR+OPENAI replication. Scout's suggested reactivations (single-node harness, narrow census, MemR3 vs honest economics) all incorporated, but challenged on physics: scout suggested pivot to effect factorization/barrier alternatives, director instead PARKs physics entirely pending larger production manifest because 74 experiments already falsified independent-noise and exactly-centered genuine DOM at BC~0 with no beyond-memory signal, making another permutation low marginal value."
+  },
+  "experiment_id": "EXP-RUNTIME-36030564009",
+  "inherited_last_verdict": "MEASUREMENT_INVALID",
+  "inherited_next_question": "Can the corrected wsgi import path (run_experiment.py copied to BASE_DIR or PYTHONPATH including research/experiments/EXP-RUNTIME-36020884510 or importlib.spec_from_file_location) plus fixed BODY_DERIVED_KEYS {content-length,etag,w-etag,range}, fingerprint EXCLUDED header removal, honest per-trajectory integer sum wiring to real operation counts, paired-probe full-vector discrimination, health-gate requiring X-Worker-Pid present and real jwt.decode HS256 validation, together with Flask 3.1.3 verified listening 127.0.0.1:19860 before nginx 1.24.0:19851 proxy_pass without trailing slash + X-Worker-Pid passthrough + $request_uri sticky health-gated 200, achieve n_non304>=800 stratified 400/endpoint hs_rate>=0.90 batch>=10 ts, header-only Jaccard MINUS body-derived |r|<0.30 V<0.30 de-confounded, honest |rho_shuffled|<0.20 p>=0.20 within-f std>0 width>0 effective>1, full>0.5 full>max(body,status)+0.05 non-degenerate CIs via direct+nginx+2x loopback on shared single.db WAL?",
+  "lane": "runtime",
+  "origin_github_run_id": "36030564009",
+  "parent_handoff": {
+    "experiment_id": "EXP-RUNTIME-36020884510",
+    "path": "research/experiments/EXP-RUNTIME-36020884510/handoff.json",
+    "sha256": "b913345ccdedd0ebd9c93cccf5a0df012b8bfd8c0e1993e817796a9c2160259b"
+  },
+  "reason": "global-director-REOPEN",
+  "request_hash": "44709ae933208afbc73288d93919d5c84c3ab1f856514e8dadc10b9fa679f58c",
+  "request_id": "9517d62f6a1f61f37f7f25c6",
+  "schema_version": 1
+}
