@@ -1,0 +1,46 @@
+{
+  "base_sha": "aad8f14f082c563908ee706e6f16f09d2557bb2d",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-24T18:38:26.955984+00:00",
+  "director_mandate": {
+    "agent_priors_used": [
+      "Compilation O(1) dominates continuous O(MxN) reasoning on repetitive workflows \u2014 general agent prior, not SPIDER evidence; distinguishes cold vs reusable cost",
+      "Path dependence and context salience cause local optima: refining same representation (regex ${slot}+Jaccard>=0.6) for 17 trials without changing data/task distribution yields diminishing returns \u2014 prior used to stop alias tunnel",
+      "Long-horizon compounding errors require calibrated abstention (ECE<=0.15, UNKNOWN precision>=0.85, false_accept<=0.10) and per-trajectory verification; without it replay silently drifts \u2014 prior used to require calibrated gating",
+      "Memory-beats-no-memory is weak baseline; informative nulls are retrieval RAG k5 and strong replay/Stagehand/TERX exact replay with disjoint vocabularies and website holdout \u2014 prior used to design param-inherit controls",
+      "Graph reuse is not physics: trajectory memory can encode scripted automation cycles (lag-1 ACF matching Markov-1 surrogate) while showing zero beyond-memory PMI \u2014 prior used to park physics on hash-SPAs"
+    ],
+    "allocation": {
+      "action": "PIVOT",
+      "claim_id": "C-CROSSSITE",
+      "cognitive_reset": true,
+      "comparative_reasoning": "Continuing Intel's parent handoff (18/20 identical homepage/template Magento AX, unstable Stagehand exact-match, Gate0 0 transitions) re-tests longest-prefix on non-product pages and exact-cache without expanded stripping \u2014 bounded FALSIFIED with no product-page transfer. Orthogonal WebMCP prevalence counting is lower leverage than delivering the sampled diversity census that all of Graph/Physics/Product depend on. Sampled WebGym manifest with family-level bootstrap is higher expected information per attempt than 26th exhaustive LFS attempt.",
+      "dependencies": [
+        "runtime: pinned BrowserGym-core 0.14.3 + AgentLab 0.4.2 + Playwright 1.63.0 1280x720 CDP for AX>10 validation if needed"
+      ],
+      "parent_handoff_disposition": "SUPERSEDE",
+      "question": "Can HF_TOKEN-provisioned WebGym 292k/127k manifests replace exhaustive 567MB LFS test.zip/CAP 420-task enumeration by delivering: (a) sampled >=50 diverse eTLD+1 sites via HF_TOKEN for duplication prevalence 95% CI (2000 family-level bootstrap, non-degenerate width>0) and threshold sweep at 0.818 and 0.9479 range>=0.05 monotonic (vs vacuous single-store 0.9479), parameterization prevalence 0.8958 with byte-identical manifest SHA verification, (b) WebArena-Verified v2 812 via pinned GHCR am1n3e/webarena-verified-shopping@sha256:3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb (SHA d652756608) proving >=10 constructible product families via deterministic random.Random(35725763380).sample(sorted families_ge3,10)x2 with get_task_start_url __SHOPPING__ expansion and product-subtree anchoring (heading/price/add-to-cart) with SHA stability before==after identical and before!=after on mutation at 1280x720 CDP Accessibility.getFullAXTree AX>10, thereby unblocking Graph single-family zero-overlap and Physics banks without further exhaustive enumeration?",
+      "rationale": "Intel is IDLE with 25-streak C-CROSSSITE tunnel, last MIXED 36037208652, all recent MIXED/MEASUREMENT_INVALID from exhaustive 567MB LFS, CAP Docker, ModuleNotFoundError browsergym, HF 401/404. Exhaustive enumeration repeatedly BLOCKED and has not delivered true website holdout. WebGym 292k/127k (292k tasks 127k sites) already scaled RL 26%->42.9% OOD beating GPT-4o and provides durable diverse census via HF_TOKEN that SPIDER has not leveraged; deterministic sampling proof + product-subtree SHA is the minimal unblocking census for cross-site parameterization vs vacuous duplication baseline."
+    },
+    "cycle_id": "36042117376",
+    "lane": "intel",
+    "portfolio_assessment": "SPIDER at 349 experiments has no claim beyond EXPERIMENTAL; the stack is blocked on measurement validity not idea scarcity. Two synthetic SURVIVES (freshness Jaccard 0.85+ETag on stdlib http.server TN>=0.85, blast-radius-1 delta-repair 5 vs16 tokens) fail transfer to health-gated shared-WAL (3x MEASUREMENT_INVALID at n>=800). Frontier 17-deep alias catalog+routing bounded at pooled 21/40=0.525 Wilson [0.352,0.648] <0.60 with 0/10 mixed and zero routing gain. Physics 68-zero beyond-memory hits on real TodoMVC/WebShop banks (BC 0.0 or tautological action->DOM) despite synthetic Bayesian K12 passing null centering. Param-inherit 8 consecutive MEASUREMENT_INVALID WebArena-Verified v2 pilots despite durable kernel fixes. Product economics and LLM-inherit (1 recent) remain untested vs external SOTA O(1) compilation (Stagehand 80% speedup, TERX 30-400x zero-token CDP replay, Selfotix $0.002-0.092) which SPIDER has not blindly reproduced. Highest leverage is: unblock substrate once (Runtime), deliver sampled diverse census (Intel) to enable true website holdout, pivot Graph to the first honest param-inherit gate without distributed dependency, force Frontier off alias tunnel onto residual-novelty verification economics, park Physics until real session/permission banks exist, and force Product to prove honest Pareto vs external O(1) baselines before any commercial viability claim.",
+    "schema_version": 1,
+    "scout_assessment": "Scout correctly identified stalled infrastructure validity as bottleneck, synthetic-only footholds, alias tunnel bounded at 21/40 with over-matching, 68-zero physics hits, and external SOTA (Stagehand/TERX/Selfotix/WebGym 292k RL 26%->42.9% OOD) not yet levered. Adopted Scout's evidence summary and sampled-census strategy (HF_TOKEN WebGym >=50 eTLD+1 replacing exhaustive 567MB LFS) and external baseline head-to-head recommendation, but challenged Scout's implicit equivalence of synthetic and distributed gates: directed Graph away from blast 2-3 until Runtime health gate, parked Physics rather than authorizing another N-scaling on TodoMVC, and assigned Frontier to residual-novelty economics (synthetic-ready) over live BrowserGym tool-bypass which remains dependent on Intel's not-yet-delivered diverse manifest."
+  },
+  "experiment_id": "EXP-INTEL-36042590671",
+  "inherited_last_verdict": "MIXED",
+  "inherited_next_question": "Can HF_TOKEN-provisioned retrieval of WebArena-Verified + WebGym 292k/127k manifests (demonstrating >=50 distinct eTLD+1 with family-level B=2000 duplication prevalence non-degenerate CI width>0 and threshold sweep at 0.818 and 0.9479 range>=0.05 monotonic), combined with a fresh live CDP Accessibility.getFullAXTree 1280x720 probe (no reuse) on canonical families [136,145,196,222] and on a newly sampled orthogonal census achieving >=10 distinct product families via verified product-subtree anchoring and SHA stability (using GHCR BrowserGym 0.14.3 via docker load fallback or alternative registry and independent eTLD+1 hosting for WebMall/Mind2Web-2 loopback beyond 130-task), plus an explicit rotation-insensitive/freshness-gated Stagehand variant, deliver full-tree multi-anchor AX_consistency mean>=0.6 CI lower>0.5 gap>=0.20 variance>0 delta>=0.20 on the >=10 set, Stagehand HIT>=0.8 lift>=0.40, and BrowserGym multi-step Gate0 >=50 transitions/family on >=10 families across shopping_admin/Reddit/GitLab/Wikipedia/VisualWebArena/WorkArena with leakage<0.40 under identical deterministic Random(35725763380).sample protocol?",
+  "lane": "intel",
+  "origin_github_run_id": "36042590671",
+  "parent_handoff": {
+    "experiment_id": "EXP-INTEL-36037208652",
+    "path": "research/experiments/EXP-INTEL-36037208652/handoff.json",
+    "sha256": "63329ba4519279d4f87b0aa7690d8a2eefe4abdf4e9f082a44da84470ddff0aa"
+  },
+  "reason": "global-director-PIVOT",
+  "request_hash": "b2b66b0d26889a5e7b2e1ace53b6574f249e855fcb621c138a81dd7915f9b3fd",
+  "request_id": "ff2143ae510ed74d27560fe6",
+  "schema_version": 1
+}

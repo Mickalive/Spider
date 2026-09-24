@@ -1,0 +1,126 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-FRONTIER-36046077922",
+  "lane": "frontier",
+  "status": "MEASUREMENT_INVALID",
+  "producer_claim_supported": false,
+  "required_fixes": [
+    "Install live BrowserGym substrate: playwright, browsergym-core, agentlab with 1280x720 CDP headless launch and AX>10 extraction (research/frontier/run_execute_36046077922.py:check_browsergym currently ModuleNotFoundError: No module named 'browsergym' — independently recomputed find_spec=None — blocks PC-BROWSERGYM-HETEROGENEITY and all live collection per prereg §3 and spec measurement_validity[0])",
+    "Produce Intel diverse-site manifest: deterministic sampling seed 42 on WebGym 292k dedup >=50 eTLD+1 or WebArena-Verified v2 192/36 with >=10 families pairwise Jaccard<0.30 product-subtree anchored depth>=2 at 1280x720 (expected paths data/webgym_292k, research/intel/diverse_site_manifest.json absent — recomputed data/ missing, research/intel/ missing — blocks PC-BROWSERGYM-HETEROGENEITY, PC-CEILING-NONDEGENERATE, NC-TRAIN-VOCAB-ISOLATED, NC-SITE-HOLDOUT per spec baselines BINDING-RULE)",
+    "Deploy Runtime health-gated single-worker sticky Flask HS256+nginx substrate: /tmp/spider-runtime/shared.db WAL, sticky cookie, If-None-Match/ETag TTL 60s conditional probes with n_non304>=800 stratified >=80/family, honest per-trajectory hard-reset sum counters resolve+bind+verify+freshness+browser_steps and trajectory-grouped |rho_shuffled|<0.20 (provenance.json:runtime_substrate all false, n_non304_stratified 0 — blocks PC-RUNTIME-HEALTH and NC-TRAJECTORY-GROUPED-CENTERED per spec dependencies director_mandate.dependencies)"
+  ],
+  "validity_findings": [
+    {
+      "id": "V1_frozen_transmission_invariants",
+      "severity": "pass",
+      "finding": "Frozen transmission invariants preserved. freeze.json hashes match actual files: request.json 787ed1ccfe3326d32e1fbbd3d2280127a61d0a59e27c206f326a49dc4ec387d3, spec.json d4e2f1ec257be9f1b0fbeacacb84b8e76a97bd53b06277f7ffe1665b942afbbe, prereg.md a3876539e863164913db68e095c4c5e7f4f6ae4882c2dde36d48a88003ddf964 — independently recomputed via sha256sum and match. No post-freeze re-design, no outcome-bearing measurement during DESIGN. Parent handoff EXP-FRONTIER-36042599040 correctly referenced with SUPERSEDE disposition per director_mandate.",
+      "evidence_ref": "research/experiments/EXP-FRONTIER-36046077922/freeze.json, research/experiments/EXP-FRONTIER-36046077922/spec.json, research/experiments/EXP-FRONTIER-36046077922/prereg.md, research/experiments/EXP-FRONTIER-36046077922/request.json",
+      "control_id": "provenance"
+    },
+    {
+      "id": "V2_infrastructure_failure_not_falsification",
+      "severity": "pass",
+      "finding": "Producer correctly reports MEASUREMENT_INVALID / NOT_APPLICABLE and does NOT convert missing data into negative result. Observations, validity_notes and report.md explicitly state infrastructure failure, not scientific falsification, preserving RAW EVIDENCE -> INTERPRETATION distinction per AGENTS.md. All 8 controls set observed=not_run pass=null evidence_ref=dependency_unavailable rather than fabricating PC/NC pass/fail. Decision correctly follows frozen measurement_validity[5] and decision_rule: ANY PC/NC fail including unmet dependencies => MEASUREMENT_INVALID precedence over SURVIVES/FALSIFIED. No synthetic fallback was attempted, correctly avoiding prohibited synthetic extrapolation for C-WEB-DYNAMICS (prereg §11).",
+      "evidence_ref": "research/experiments/EXP-FRONTIER-36046077922/result.json:status, outcome, controls, validity_notes, observations; research/experiments/EXP-FRONTIER-36046077922/report.md:Dependency Verification; research/experiments/EXP-FRONTIER-36046077922/prereg.md:§7; research/experiments/EXP-FRONTIER-36046077922/spec.json:measurement_validity",
+      "control_id": "decision_rule"
+    },
+    {
+      "id": "V3_dependency_recomputation",
+      "severity": "pass",
+      "finding": "Independent recomputation confirms dependencies unavailable exactly as producer reports: BrowserGym import ModuleNotFoundError: No module named 'browsergym' — recomputed importlib.util.find_spec('browsergym')=None; Intel manifest expected paths data/webgym_292k, research/intel/diverse_site_manifest.json absent — recomputed ls data/ ENOENT, ls research/intel/ ENOENT, provenance.json:intel_manifest families_count 0 jaccard_max 1.0; Runtime /tmp/spider-runtime/shared.db absent — ls /tmp/spider-runtime ENOENT, provenance.json:runtime_substrate n_non304_stratified 0. Physics PARK true per director_mandate and provenance.json — correct. Provenance duration 0.035s, python 3.12.14, numpy 2.5.3 consistent with diagnostic-only run.",
+      "evidence_ref": "research/experiments/EXP-FRONTIER-36046077922/provenance.json:dependencies_checked, environment; research/frontier/run_execute_36046077922.py:check_browsergym, check_intel_manifest, check_runtime_substrate; independent recomputation importlib, filesystem ls",
+      "control_id": "PC-BROWSERGYM-HETEROGENEITY, PC-RUNTIME-HEALTH"
+    },
+    {
+      "id": "V4_controls_and_representation_integrity",
+      "severity": "pass",
+      "finding": "Representation and sampling requirements correctly not claimed: metrics live_available false, browsergym_available false, intel_families 0, runtime_available false — honestly reported not imputed. Controls PC-SYNTHETIC-PIPELINE (would require BC>1.0 synthetic FSM), PC-CEILING-NONDEGENERATE (H>=0.4/0.2), NC-TRAJECTORY-GROUPED-CENTERED (|BC_shuffled|<0.05), NC-LEAKAGE-FILTERED, NC-TRAIN-VOCAB-ISOLATED, NC-SITE-HOLDOUT correctly not_run. Baseline B-TFIDF-K5, B-URL-ONLY, B-SPIDER-HISTORY-PMI-PRIMARY, B-SHUFFLE-NULL correctly not computed — no MEASUREMENT_INVALID laundering. Leakage filter, H>=0.2, n>=30, Jaccard<0.30, AX>10, 1280x720, TRAIN-only vocab, trajectory-grouped permutation all correctly gated not tested. Lane charter allowed_code_roots [research/harness,research/frontier] obeyed: code_path research/frontier/run_execute_36046077922.py only.",
+      "evidence_ref": "research/experiments/EXP-FRONTIER-36046077922/result.json:metrics, controls; research/experiments/EXP-FRONTIER-36046077922/spec.json:baselines, positive_control, null_control, measurement_validity; research/lanes/registry.json:frontier",
+      "control_id": "NC-TRAJECTORY-GROUPED-CENTERED, NC-LEAKAGE-FILTERED, NC-TRAIN-VOCAB-ISOLATED, NC-SITE-HOLDOUT"
+    },
+    {
+      "id": "V5_provenance_lane_compliance",
+      "severity": "info",
+      "finding": "Provenance minor inconsistency non-material to verdict: provenance.json:frozen_inputs freeze.json hash duplicates spec.json hash d4e2f1ec... (run_execute_36046077922.py:364 sets freeze.json SHA to spec hash) vs actual freeze.json sha256 7366fab6ae811c5d45fedfd577a4f0d8f8deb70b1a28bf3531eccd9cc6b305eb computed independently. Does not affect outcome because request/spec/prereg hashes correct and freeze logic otherwise intact. Environment honestly reports playwright_available false, browsergym_cdp_available false with no artifact fabrication (artifacts []).",
+      "evidence_ref": "research/experiments/EXP-FRONTIER-36046077922/provenance.json:frozen_inputs; research/frontier/run_execute_36046077922.py:364; independent sha256sum of freeze.json 7366fab6...",
+      "control_id": "provenance"
+    },
+    {
+      "id": "V6_claim_ceiling_no_inflation",
+      "severity": "pass",
+      "finding": "Producer report.md Conclusion correctly bounds claim: does not falsify C-WEB-DYNAMICS, status remains HYPOTHESIS per codex/claim_state.json, and does not promote to EXPERIMENTAL/PRODUCT_CORE. No per_hit economics, no PMI interpretation, no synthetic 1.27 bits citation as evidence. Respects director_mandate dependencies and portfolio_assessment single-node honesty gate before distributed n>=800/f=100 authorization.",
+      "evidence_ref": "research/experiments/EXP-FRONTIER-36046077922/report.md:Conclusion, Next Steps; codex/claim_state.json:C-WEB-DYNAMICS HYPOTHESIS; research/experiments/EXP-FRONTIER-36046077922/spec.json:product_consequence_positive/negative",
+      "control_id": "claim_ceiling"
+    }
+  ],
+  "baseline_findings": [
+    {
+      "id": "B-TFIDF-K5",
+      "finding": "Not run — dependency_unavailable. Producer correctly did not compute TF-IDF k5 gap or claim gap>=0.05. No baseline strength assessment possible; absence correctly recorded as MEASUREMENT_INVALID not zero-gap. Recomputation confirms no dom_features_AX10_1280x720.json or vocabulary artifact exists.",
+      "severity": "info",
+      "evidence_ref": "research/experiments/EXP-FRONTIER-36046077922/result.json:controls, artifacts []; research/experiments/EXP-FRONTIER-36046077922/provenance.json:artifacts []"
+    },
+    {
+      "id": "B-URL-ONLY",
+      "finding": "Not run — dependency_unavailable. Correctly not used to infer DOM adds information beyond URL.",
+      "severity": "info",
+      "evidence_ref": "research/experiments/EXP-FRONTIER-36046077922/result.json:controls"
+    },
+    {
+      "id": "B-SPIDER-HISTORY-PMI-PRIMARY",
+      "finding": "Not run — primary history-conditioned BC PMI K=1/K=3 with trajectory-grouped 1000 perms not computed. Producer preserves metric identifiers bc_pmi_history_cond_pooled_K1 etc without fabricating values, respecting stable IDs for future audit comparison. No leakage of synthetic PMI as evidence.",
+      "severity": "info",
+      "evidence_ref": "research/experiments/EXP-FRONTIER-36046077922/result.json:metrics, report.md:Metrics"
+    },
+    {
+      "id": "B-SHUFFLE-NULL",
+      "finding": "Not run — trajectory-grouped permutation null (1000 perms within (URL,H_K), Bonferroni, |BC_shuffled|<0.05) not computed. Producer correctly reports NC-TRAJECTORY-GROUPED-CENTERED not_run p=null rather than imputing centered null.",
+      "severity": "info",
+      "evidence_ref": "research/experiments/EXP-FRONTIER-36046077922/result.json:controls.NC-TRAJECTORY-GROUPED-CENTERED"
+    }
+  ],
+  "recomputed_metrics": {
+    "live_available": false,
+    "browsergym_available": false,
+    "browsergym_cdp_available": false,
+    "intel_families": 0,
+    "intel_jaccard_max": 1.0,
+    "intel_product_subtree": false,
+    "runtime_available": false,
+    "physics_parked": true,
+    "recomputed_browsergym_find_spec": null,
+    "recomputed_data_dir_exists": false,
+    "recomputed_intel_dir_exists": false,
+    "recomputed_runtime_wal_exists": false,
+    "recomputed_freeze_hashes_match": {
+      "request.json": true,
+      "spec.json": true,
+      "prereg.md": true,
+      "freeze.json_actual": "7366fab6ae811c5d45fedfd577a4f0d8f8deb70b1a28bf3531eccd9cc6b305eb"
+    },
+    "recomputed_pc_synthetic_pipeline": null,
+    "recomputed_bc_pmi_history_cond_pooled_K1": null,
+    "recomputed_gap_over_tfidf_k5": null,
+    "recomputed_rel_sep_pooled": null,
+    "notes": "All material metrics recomputed as null/not_run — confirmed no BrowserGym import, no Intel manifest, no Runtime WAL, no artifacts. Producer metrics values verified exactly (live_available false etc). No PMI/gap/rel_sep computable, confirming MEASUREMENT_INVALID not false negative."
+  },
+  "claim_ceiling": "No new evidence for C-WEB-DYNAMICS. Claim remains HYPOTHESIS (per codex/claim_state.json) with narrowed non-evidence: history-conditioned bias-corrected PMI with trajectory-grouped permutation (BC>0.05 Bonferroni p<0.01 gap>=0.05 over TF-IDF k5 rel_sep>=200) on live BrowserGym 1280x720 CDP AX>10 heterogeneous sites remains UNTESTED on this substrate. Prior ceilings unchanged: alias-catalog 21/40=0.525 bounded, residual-novelty non-Pareto validly FALSIFIED (EXP-360425), Physics Dirichlet-Multinomial BC~0 companions unchanged. No authorization for larger manifest (>=50 eTLD+1 families) or distributed M_total Pareto at f=10/100, and no promotion to EXPERIMENTAL/PRODUCT_CORE. Valid SURVIVES would require >=10 families Jaccard<0.30 product-subtree 1280x720, n_non304>=800 stratified, honest counters, 1000 trajectory-grouped perms, NL>=100 pooled >=50/site for >=3 sites, BC>0.05 Bonferroni p<0.01 gap>=0.05 rel_sep>=200 with >=2/3 sites replication.",
+  "evidence_refs": [
+    "research/experiments/EXP-FRONTIER-36046077922/request.json:787ed1ccfe3326d32e1fbbd3d2280127a61d0a59e27c206f326a49dc4ec387d3",
+    "research/experiments/EXP-FRONTIER-36046077922/spec.json:d4e2f1ec257be9f1b0fbeacacb84b8e76a97bd53b06277f7ffe1665b942afbbe",
+    "research/experiments/EXP-FRONTIER-36046077922/prereg.md:a3876539e863164913db68e095c4c5e7f4f6ae4882c2dde36d48a88003ddf964",
+    "research/experiments/EXP-FRONTIER-36046077922/freeze.json",
+    "research/experiments/EXP-FRONTIER-36046077922/result.json:1f83d9ee9b7bca534683c7fd8be07557ff931eceb64a60798a8c720aeb8e37c1",
+    "research/experiments/EXP-FRONTIER-36046077922/report.md",
+    "research/experiments/EXP-FRONTIER-36046077922/provenance.json",
+    "research/frontier/run_execute_36046077922.py",
+    "research/lanes/registry.json:frontier",
+    "codex/claim_state.json:C-WEB-DYNAMICS HYPOTHESIS",
+    "codex/index.json"
+  ],
+  "unresolved": [
+    "Install playwright, browsergym-core, agentlab for live 1280x720 CDP AX>10 collection with display support — independent recomputation confirms ModuleNotFoundError: No module named 'browsergym'",
+    "Produce Intel manifest with >=10 families Jaccard<0.30 product-subtree anchored at 1280x720 from WebGym 292k or WebArena-Verified v2 192/36 deterministic seed 42 — independent recomputation confirms data/ and research/intel/ absent",
+    "Deploy Runtime single-worker sticky Flask HS256+nginx with /tmp/spider-runtime/shared.db WAL, honest per-trajectory hard-reset counters, If-None-Match/ETag TTL 60s, n_non304>=800 stratified >=80/family, trajectory-grouped |rho_shuffled|<0.20 — independent recomputation confirms /tmp/spider-runtime absent"
+  ]
+}

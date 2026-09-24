@@ -1,0 +1,274 @@
+{
+ "experiment_id": "EXP-INTEL-36042590671",
+ "schema_version": 1,
+ "frozen_inputs": {
+  "request.json": "489bdca45f551aa8d3890d89b36fbc3ef15b8ac27650aeae8b4828181db2fbe8",
+  "spec.json": "36ecb5aeb670b4b6c207898b77ace39e5b6939612089fbe8d241e850abb02ef4",
+  "prereg.md": "407bac4ba228237623936550f9216330e62f9ea7e76c6314c0756d68c66db933",
+  "freeze.json": "5c1ad07df044d327045c975ab2cd86e530aa2015e3b00c23ede7e1225fbacf7f"
+ },
+ "environment": {
+  "experiment_id": "EXP-INTEL-36042590671",
+  "pip_freeze_sha256": "05bd307a1ce69f8d4802cf20c742f2c8c157b2071dad5245486c2661656000e9",
+  "pip_freeze_lines": 41,
+  "pip_freeze_nonempty": true,
+  "playwright_version": "Version 1.63.0",
+  "viewport": "1280x720",
+  "browsergym_core": "0.14.3",
+  "agentlab": "0.4.2",
+  "playwright": "1.63.0",
+  "versions_match": true
+ },
+ "docker": {
+  "hub_digest": "sha256:3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb",
+  "expected": "sha256:3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb",
+  "container_http": 200,
+  "images_digests": {
+   "cmd": "docker images --digests am1n3e/webarena-verified-shopping",
+   "timeout_configured_s": 120,
+   "returncode": 0,
+   "stdout_tail": "REPOSITORY                          TAG       DIGEST                                                                    IMAGE ID       CREATED        SIZE\nam1n3e/webarena-verified-shopping   <none>    sha256:3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb   a5b6fb47ee9f   7 months ago   13.3GB\n",
+   "stderr_tail": "",
+   "elapsed_s": 0.016,
+   "error": null
+  }
+ },
+ "durable_attempts": {
+  "hf_webgym": "artifacts/raw/hf_webgym_manifest_attempts.json",
+  "hf_webarena": "artifacts/raw/hf_webarena_attempts.json",
+  "github_cross_source": "artifacts/raw/github_cross_source_attempts.json",
+  "ghcr": "artifacts/raw/ghcr_browsergym_attempts.json",
+  "docker_hub": "artifacts/raw/docker_hub_api_attempts.json"
+ },
+ "artifacts": [
+  {
+   "path": "research/experiments/EXP-INTEL-36042590671/artifacts/raw/container_health.json",
+   "sha256": "99e27123a2457b97cb6a1269dbe2617da9a3dda18d4966c08b01f412410d712b"
+  },
+  {
+   "path": "research/experiments/EXP-INTEL-36042590671/artifacts/raw/docker_hub_api_attempts.json",
+   "sha256": "95218742d6be4353241ae6b9ee1732efda8d45ad784797ef7b2148bc05f9a03a"
+  },
+  {
+   "path": "research/experiments/EXP-INTEL-36042590671/artifacts/raw/environment_pin.json",
+   "sha256": "1599bd8fd763952e8463be2f5a7131ffe5a6d2922f328691f9abb827a67a7672"
+  },
+  {
+   "path": "research/experiments/EXP-INTEL-36042590671/artifacts/raw/ghcr_browsergym_attempts.json",
+   "sha256": "0a02f2ea8a67f9042543f23700af0cd0dcf244cfdd75813b726f2f643ad5ab6f"
+  },
+  {
+   "path": "research/experiments/EXP-INTEL-36042590671/artifacts/raw/github_cross_source_attempts.json",
+   "sha256": "f52da4d9efe24d723cdd1f428c43e2041b2f6d21ce8ea7948c4dcb84a18c5463"
+  },
+  {
+   "path": "research/experiments/EXP-INTEL-36042590671/artifacts/raw/grammar_hash.json",
+   "sha256": "667b86cd6cfad59a630b1dea418f7fc0a1a18ec8de5e8f665c255c7fe0ca5103"
+  },
+  {
+   "path": "research/experiments/EXP-INTEL-36042590671/artifacts/raw/hf_webarena_attempts.json",
+   "sha256": "80cd9eeef1cd2e543461ae037ca3bb0d01022445bc3607468840e7f6839575de"
+  },
+  {
+   "path": "research/experiments/EXP-INTEL-36042590671/artifacts/raw/hf_webgym_manifest_attempts.json",
+   "sha256": "316459bdf86e1fe1ee583b791640c999b6417db608159c2b6561703978f176e5"
+  },
+  {
+   "path": "research/experiments/EXP-INTEL-36042590671/artifacts/raw/orthogonal_census_provenance.json",
+   "sha256": "6c503826f04b1c41600cb041fa06311c321e33eef5e9fd841ba60679498ffe95"
+  },
+  {
+   "path": "research/experiments/EXP-INTEL-36042590671/artifacts/raw/webarena-verified-fresh.json",
+   "sha256": "d65275660814663375028e9017e1f929e3c38321041b125795e2713b52243d30"
+  },
+  {
+   "path": "research/experiments/EXP-INTEL-36042590671/artifacts/raw/pc_c_fixture.txt",
+   "sha256": "153331751e212c7fe9798a2e20c925be1adb6501dde92210b9c707f99ae7c82c"
+  },
+  {
+   "path": "research/experiments/EXP-INTEL-36042590671/artifacts/raw/pip_freeze.txt",
+   "sha256": "05bd307a1ce69f8d4802cf20c742f2c8c157b2071dad5245486c2661656000e9"
+  },
+  {
+   "path": "research/experiments/EXP-INTEL-36042590671/artifacts/raw/ax_captures.jsonl",
+   "sha256": "44654a58b08faa59b777e6f182cc5fc5636863bd421c52160329ca5254641ba8"
+  },
+  {
+   "path": "research/experiments/EXP-INTEL-36042590671/artifacts/raw/ax_captures_consistency_fresh.jsonl",
+   "sha256": "cb5ef48d0aa19033bec751aff4c0cd14ae7426681a68c6c12bb8fc3d3e6d5509"
+  },
+  {
+   "path": "research/experiments/EXP-INTEL-36042590671/artifacts/derived/ax_analysis.json",
+   "sha256": "0aae1c77c6407f62ae136b352c47a1fa7b80a2be4e6f9d762f01699a0797e0c6"
+  },
+  {
+   "path": "research/experiments/EXP-INTEL-36042590671/artifacts/derived/ax_consistency_fulltree.json",
+   "sha256": "724999ff5d6997650f6a05526ffbeedb02f31b9d104fbbc247c0d91016bbe781"
+  },
+  {
+   "path": "research/experiments/EXP-INTEL-36042590671/artifacts/derived/deterministic_family_samples.json",
+   "sha256": "e9e4ec9c2807cb8e1cc2dbd78e4de751de3336f2ee1615fabbd3cebf6113dee5"
+  },
+  {
+   "path": "research/experiments/EXP-INTEL-36042590671/artifacts/derived/family_anchoring.json",
+   "sha256": "245ea1cc6045d1955482a715991fb0ed57113634116790be01b0ddba6825bf3d"
+  },
+  {
+   "path": "research/experiments/EXP-INTEL-36042590671/artifacts/derived/pc_c_param_prevalence.json",
+   "sha256": "21b38138b0042f38e8de4fa26ff785ed59d91d474035f3ade9185e0c17970ec5"
+  },
+  {
+   "path": "research/experiments/EXP-INTEL-36042590671/artifacts/derived/vacuous_single_store.json",
+   "sha256": "68655bfd8dfbc9005f4577f23f424acb5d23282d5dc7f8a9013078bf0f18e540"
+  },
+  {
+   "path": "research/experiments/EXP-INTEL-36042590671/artifacts/derived/webarena_census.json",
+   "sha256": "bcb368316b98a6508e2c2a174a265123fe18f306124e0f69375298173612386f"
+  },
+  {
+   "path": "research/experiments/EXP-INTEL-36042590671/artifacts/derived/webgym_sampled_census.json",
+   "sha256": "1271875a4da6350e74c20f2f8ad518533cdd2a7e464b5ad38da5e9c9b84321de"
+  },
+  {
+   "path": "research/experiments/EXP-INTEL-36042590671/artifacts/derived/webgym_threshold_sweep.json",
+   "sha256": "2b0485651c180b4510db61a0c919ac76821f9eb5fff5a3491bb60935c8509f04"
+  }
+ ],
+ "grammar_hash_live": {
+  "path": "/home/runner/work/Spider/Spider/research/intel/grammar_fulltree_358885.py",
+  "sha256": "273eafbcb817e8981f843581a724594665cabdd357b318c701251929ee9c83de",
+  "body_regex_present": true,
+  "grammar_hash_live_at_execute": "273eafbcb817e8981f843581a724594665cabdd357b318c701251929ee9c83de"
+ },
+ "deterministic_samples": {
+  "experiment_id": "EXP-INTEL-36042590671",
+  "seed": 35725763380,
+  "operator": "random.Random(35725763380).sample(sorted(families_ge3),10) executed twice with seed reset, on EACH census",
+  "primary": {
+   "census_label": "primary_webarena_verified_v2_812",
+   "seed": 35725763380,
+   "operator": "random.Random(35725763380).sample(sorted_families_ge3,10) executed twice with seed reset",
+   "sorted_families_ge3": [
+    101,
+    136,
+    137,
+    138,
+    139,
+    145,
+    147,
+    153,
+    154,
+    155,
+    156,
+    159,
+    160,
+    162,
+    163,
+    165,
+    169,
+    171,
+    172,
+    180,
+    186,
+    189,
+    191,
+    194,
+    196,
+    197,
+    204,
+    206,
+    207,
+    208,
+    211,
+    212,
+    213,
+    214,
+    222,
+    370
+   ],
+   "n_families_ge3": 36,
+   "S1": [
+    191,
+    180,
+    162,
+    197,
+    153,
+    213,
+    163,
+    137,
+    136,
+    222
+   ],
+   "S2": [
+    191,
+    180,
+    162,
+    197,
+    153,
+    213,
+    163,
+    137,
+    136,
+    222
+   ],
+   "S1_equals_S2": true,
+   "unique_S1_union_S2": [
+    136,
+    137,
+    153,
+    162,
+    163,
+    180,
+    191,
+    197,
+    213,
+    222
+   ],
+   "n_unique": 10,
+   "product_page_families": [
+    136,
+    145,
+    196,
+    222
+   ],
+   "sample_product_page_families": [
+    136,
+    222
+   ],
+   "sample_families_without_product_urls": [
+    137,
+    153,
+    162,
+    163,
+    180,
+    191,
+    197,
+    213
+   ]
+  },
+  "webgym_diverse": {
+   "census_label": "WebGym_292k_127k_sampled_diverse",
+   "seed": 35725763380,
+   "operator": "random.Random(35725763380).sample(sorted_families_ge3,10) executed twice with seed reset",
+   "sorted_families_ge3": [],
+   "n_families_ge3": 0,
+   "S1": "ERROR: ValueError: Sample larger than population or is negative",
+   "S2": "ERROR: ValueError: Sample larger than population or is negative",
+   "S1_equals_S2": null,
+   "unique_S1_union_S2": [],
+   "n_unique": 0,
+   "product_page_families": [],
+   "sample_product_page_families": [],
+   "sample_families_without_product_urls": []
+  },
+  "canonical_families": [
+   136,
+   145,
+   196,
+   222
+  ],
+  "union_constructible_note": "WebGym UNAVAILABLE; union of S1|S2 (primary) + canonical",
+  "webgym_sample_status": "UNAVAILABLE_HF_TOKEN_ABSENT"
+ },
+ "note": "Fresh live CDP probe at 1280x720 CDP Accessibility.getFullAXTree; no reused captures."
+}

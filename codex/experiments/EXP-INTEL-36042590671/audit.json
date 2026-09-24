@@ -1,0 +1,333 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-36042590671",
+  "lane": "intel",
+  "status": "REVISE",
+  "producer_claim_supported": false,
+  "required_fixes": [
+    "MV6_PARAM_PREVALENCE_08958 real-manifest prevalence: PC-C synthetic 0.8958 (8958/10000) does not satisfy MV6 real-manifest requirement on WebGym diverse bytes. Producer marks MV6 as satisfied via PC-C + UNAVAILABLE pattern, but prereg MV6 requires prevalence computed on sampled diverse bytes with byte-identical manifest SHA verification and manifest bytes hashed before parsing. With HF 401 x2, real M_PARAM_PREVALENCE remains null UNAVAILABLE; do not count synthetic PC-C as MV6 pass for claim (A)(iii). Next run must compute prevalence on real WebGym bytes or mark MV6 as UNAVAILABLE with smallest repair = HF_TOKEN provisioning — do not claim 0.8958 diverse parameterization.",
+    "B-TRUNCATED-VS-FULLTREE delta reporting: producer reports B-TRUNCATED pass null without quantitative delta = fulltree - truncated. Recomputed full-tree mean 0.45426266 CI[0.39603,0.51637] variance 0.004755 B=2000 family-level is verified, but truncated[:20] mean and delta>=0.20 vs shuffled delta<0.05 table not logged. Add artifact with truncated mean and per-shuffle delta to satisfy spec B-TRUNCATED-VS-FULLTREE expected_behavior; do not claim representation non-vacuity without explicit delta.",
+    "M_AX_MEDIAN / M_DOM_MEDIAN recomputation discrepancy: producer reports M_AX_MEDIAN 716 and M_AX_PRODUCT_FAMILY_COUNT median via ax_consistency_fulltree 702.5, recomputed median across 12 canonical product captures (ax nodes [627,642,668,678,688,698,716,717,724,727,864,1160]) is 707.0 (median DOM 202526.5 vs producer 203748). Both exceed gates >10 / >=2000 and do not change PASS, but correct values and method (median of 12 captures vs per-family mean) should be documented to avoid artificial precision.",
+    "MV5_WEBGYM_SAMPLE_LOGGED phrasing: WebGym diverse S1/S2 logged as ERROR ValueError Sample larger than population due to empty families_ge3=[] is correct given HF 401 UNAVAILABLE, but note that this is UNAVAILABLE not a successful sampling of 10. Do not count ERROR as evidence of diversity; next census must supply actual families_ge3 >=10 to test constructibility."
+  ],
+  "validity_findings": [
+    {
+      "id": "MV1_DURABLE_ATTEMPTS",
+      "finding": "PASS",
+      "detail": "Verified >=2 genuine attempts per durable source with timeout>=300s logged: HF WebGym 6 attempts 401 (hf_webgym_manifest_attempts.json), HF WebArena 2 attempts 401 (hf_webarena_attempts.json) plus GitHub raw cross-source 2 attempts 200 byte-identical (github_cross_source_attempts.json), GHCR 5 attempts including docker pull denied (ghcr_browsergym_attempts.json timeout 300, 403/404 + token 200), Docker Hub 2 attempts 200 (docker_hub_api_attempts.json). HF_TOKEN present false logged consistently. Meets MV1 not MEASUREMENT_INVALID.",
+      "evidence": "artifacts/raw/hf_webgym_manifest_attempts.json:6x401, artifacts/raw/hf_webarena_attempts.json:2x401, artifacts/raw/github_cross_source_attempts.json:2x200 SHA d65275660814663375028e9017e1f929e3c38321041b125795e2713b52243d30 927596 bytes, artifacts/raw/ghcr_browsergym_attempts.json:5 attempts, artifacts/raw/docker_hub_api_attempts.json:2x200"
+    },
+    {
+      "id": "MV2_BYTE_IDENTITY",
+      "finding": "PASS_PARTIAL_SINGLE_SOURCE",
+      "detail": "WebArena manifest SHA d65275660814663375028e9017e1f929e3c38321041b125795e2713b52243d30 recomputed locally via sha256sum matches expected and bytes 927596 via 2 fresh GitHub raw 200 in this experiment (not reused). Docker Hub digest sha256:3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb 64-hex verified via Hub API 200 and docker images --digests a5b6fb47ee9f. GHCR BrowserGym 0.14.3 unavailable after 5 attempts (403/404/denied) correctly marked UNAVAILABLE not assumed equal per MV2 exception. WebGym manifest SHA correctly null UNAVAILABLE due HF 401. Cross-source equality correctly UNAVAILABLE.",
+      "evidence": "artifacts/raw/webarena-verified-fresh.json sha d65275660814663375028e9017e1f929e3c38321041b125795e2713b52243d30 927596 bytes, artifacts/raw/github_cross_source_attempts.json byte_identity_match [true,true], provenance.json docker.hub_digest 3e8cb9..., docker_hub_api_attempts.json digest_64hex_len 64 digest_expected_match true"
+    },
+    {
+      "id": "MV3_SAMPLED_DIVERSE_50",
+      "finding": "UNAVAILABLE_CORRECTLY_GATED",
+      "detail": "M_WEBGYM_DIVERSE_ETLD null UNAVAILABLE correctly, not zero. Producer logged 6 genuine 401 attempts with HF_TOKEN absent, tldextract==5.3.2 pinned via pip freeze, family-level grouping preserved conceptually but no families extracted. B=2000 family bootstrap CI width>0 not computed — correctly null not degenerate [0,0]. Per prereg MV3/MV4 exception, HF 401 after >=2 attempts => UNAVAILABLE not MEASUREMENT_INVALID and not falsified. Diverse census claim (a)(i) untested.",
+      "evidence": "artifacts/raw/hf_webgym_manifest_attempts.json n_genuine_attempts 6 status 401, artifacts/derived/webgym_sampled_census.json families_ge3_shopping 0 families_ge3_ids [], artifacts/raw/pip_freeze.txt tldextract==5.3.2, result.json M_WEBGYM_DIVERSE_ETLD status UNAVAILABLE"
+    },
+    {
+      "id": "MV4_THRESHOLD_SWEEP_0818_09479",
+      "finding": "UNAVAILABLE_CORRECTLY_GATED",
+      "detail": "Threshold sweep at exactly 0.818 and 0.9479 correctly null UNAVAILABLE, range null, monotonic null. Swept on same sampled diverse set not computable due HF 401. Producer correctly marks UNAVAILABLE not zero, not MEASUREMENT_INVALID per MV4 exception. Vacuous single-store 0.9479 reference retained in vacuous_single_store.json but not beaten. Sweep gate range>=0.05 monotonic not tested.",
+      "evidence": "artifacts/derived/webgym_threshold_sweep.json status UNAVAILABLE thresholds [0.818,0.9479] prevalence_at null range null, artifacts/raw/hf_webgym_manifest_attempts.json"
+    },
+    {
+      "id": "MV5_CONSTRUCTIBILITY_10FAM",
+      "finding": "PASS_MEASUREMENT_FAIL_GATE",
+      "detail": "Deterministic constructibility executed exactly as frozen on BOTH censuses: primary webarena 812 sorted families_ge3 36 ids verified, Random(35725763380).sample x2 S1==S2==[191,180,162,197,153,213,163,137,136,222] recomputed and matches provenance/deterministic_family_samples.json, n_unique 10. WebGym diverse census sorted families_ge3 [] S1/S2 ERROR ValueError correctly logged per MV5 EACH census requirement (empty population expected given HF 401). Viewport strictly 1280x720 CDP Accessibility.getFullAXTree via cdp_session required verified in all 23 captures ax_mode CDP, no fallback snapshot. Product-subtree anchoring heading/price/add-to-cart/main/contentinfo node_count>1 verified on 12 canonical product captures across families 136/145/196/222 with bounding boxes and visibility. Distinct outerHTML SHA256 with body regex <body[^>]*>.*?</body> DOTALL + 9 base + expanded {form_key,uenc,store,session,nonce,fotorama\\d{6,},timestamp} stripping before SHA via page.evaluate recomputed after page.content()+AX verified: body regex present in grammar_fulltree_358885.py BODY_REGEX, EXPANDED_ATTR_PATTERNS fotorama\\d{6,} present, dual_impl_digest_match true on all 12 captures, grammar_hash_live 273eafbcb817e8981f843581a724594665cabdd357b318c701251929ee9c83de recomputed matches. SHA before==after TRUE 12/12 and after DOM textContent mutation !=TRUE 12/12 verified via ax_captures.jsonl (capture_before sha == capture_after sha, != capture_mutated sha). Homepage probes for families 137/153/162/163/180/191/197/213 correctly recorded with is_product_page_probe false and NOT counted as constructible per frozen MV4 (family_constructible false with reason). Median AX 707.0 (producer 716) min 627 >10 PASS, median DOM 202526.5 (producer 203748) min 195052 >=2000 PASS. Union constructible families =4 [136,145,196,222] (M_CONSTRUCTIBLE_FAMILIES) fails gate >=10. Measurement VALID, claim falsified on attempted censuses (bounded).",
+      "evidence": "artifacts/derived/deterministic_family_samples.json S1 S1_equals_S2 true, provenance.json deterministic_samples, artifacts/derived/family_anchoring.json 13 families with per_product_url anchoring node_counts heading2 price6 add_to_cart2 main226-365 contentinfo31, artifacts/raw/ax_captures.jsonl 23 records dual_impl_digest_match true viewport 1280x720 ax_mode CDP, artifacts/raw/grammar_hash.json body_regex_present true, research/intel/grammar_fulltree_358885.py BODY_REGEX, artifacts/derived/ax_consistency_fulltree.json viewport 1280x720, artifacts/derived/ax_analysis.json fresh_live_probe true constructible 4"
+    },
+    {
+      "id": "MV6_PARAM_PREVALENCE_08958",
+      "finding": "REVISE_SYNTHETIC_ONLY",
+      "detail": "Producer reports M_PARAM_PREVALENCE null UNAVAILABLE for real manifest plus pc_c prevalence 0.8958 (10000 fields 8958 param slots) within tolerance true. Synthetic fixture sha 153331751e212c7fe9798a2e20c925be1adb6501dde92210b9c707f99ae7c82c 252127 bytes verified. Tolerance +-0.05 documented and field_definition documented. However MV6 requires prevalence on sampled diverse bytes with byte-identical manifest SHA verification (depends MV2). Real manifest unavailable due HF 401, so real prevalence not computed. Producer extends MV3/MV5 UNAVAILABLE exception to MV6 and marks MV6 via PC-C as satisfied — this is interpretation not in prereg's explicit MV6 exception (which says missing manifest => MEASUREMENT_INVALID for prevalence clause). Correct handling is MV6 real clause UNAVAILABLE (not INVALID given HF 401 infrastructure), PC-C passes as positive control only. Do not claim parameterization prevalence 0.8958 on diverse bytes; claim remains unknown.",
+      "evidence": "artifacts/derived/pc_c_param_prevalence.json prevalence 0.8958 n_total 10000 n_param 8958 within_tolerance true, result.json M_PARAM_PREVALENCE status UNAVAILABLE pc_c harness, artifacts/raw/hf_webgym_manifest_attempts.json 401"
+    },
+    {
+      "id": "MV7_PROVENANCE",
+      "finding": "PASS",
+      "detail": "All artifact path+sha256 stored in provenance.json 19 entries plus freeze hashes; pip freeze 41 lines sha 05bd307a nonempty, playwright 1.63.0, browsergym-core 0.14.3 agentlab 0.4.2 versions_match true viewport 1280x720, docker images --digests logged, GHCR/Docker attempts logged, HF sha/bytes or 401 logged, census jsons, per-family anchoring S1/S2, AX probe logs with grammar hash live 273eaf..., threshold sweep table, param table, command logs present. Missing provenance for WebGym diverse manifest correctly logged as UNAVAILABLE not omitted. Satisfies MV7 not MEASUREMENT_INVALID.",
+      "evidence": "provenance.json hashes, artifacts/raw/environment_pin.json versions_match true, artifacts/raw/pip_freeze.txt, artifacts/raw/grammar_hash.json, orthogonal_census_provenance.json"
+    },
+    {
+      "id": "SAMPLING_INTEGRITY",
+      "finding": "PASS",
+      "detail": "Target integrity preserved: sorted families_ge3 derived from primary webarena_verified_v2_812 census 812 tasks 192 shopping 36 families_ge3; random.Random(35725763380).sample executed twice with seed reset per census, S1==S2 deterministically reproducible. No leakage: WebGym diverse census not imported from another lane's unrecorded narrative; explicit HF attempt logs. Representation loss disclosed: full-tree multi-anchor without [:20] truncation verified via grammar_fulltree_358885.py walk tokens no truncation.",
+      "evidence": "webarena_census.json families_ge3_ids 36, deterministic_family_samples.json, research/intel/grammar_fulltree_358885.py assert [:20] NOT done"
+    },
+    {
+      "id": "LEAKAGE_CONTROL",
+      "finding": "PASS",
+      "detail": "No split leakage: constructibility tested via fresh live CDP probe not reused captures from prior experiments (producer freshness note validated via 23 fresh captures with distinct sha). Homepage vs product page leakage correctly controlled by excluding localhost:7770/ homepage probes from constructible count (8 homepage captures excluded).",
+      "evidence": "artifacts/raw/ax_captures.jsonl is_product_page_probe false for 8 homepage captures, family_anchoring.json reason No product-page start_url..."
+    }
+  ],
+  "baseline_findings": [
+    {
+      "id": "B-DURABLE-PIN-812",
+      "finding": "PASS",
+      "detail": "Durable pin verified: manifest SHA d65275660814663375028e9017e1f929e3c38321041b125795e2713b52243d30 927596 bytes byte-identical x2 via GitHub raw 200 (github_cross_source_attempts.json), families_ge3 36 >=30, Docker Hub digest 3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb 64-hex equality via Hub API 200 and docker images --digests, container localhost:7770 HTTP 200 (container_health.json). Proves census demographics. GHCR unavailable but single-source suffices per prior audit.",
+      "evidence": "artifacts/raw/github_cross_source_attempts.json, artifacts/raw/docker_hub_api_attempts.json, artifacts/derived/webarena_census.json families_ge3_shopping 36, artifacts/raw/container_health.json status 200"
+    },
+    {
+      "id": "B-WEBGYM-292K-SAMPLED-50",
+      "finding": "UNAVAILABLE",
+      "detail": "Sampled diverse census not delivered: distinct eTLD+1 null, CI width null, threshold sweep null due HF 401. Correctly marked UNAVAILABLE not zero with attempts logged per MV3/MV5 exception. Does not satisfy sampled >=50 diverse eTLD+1 gate. Cost baseline to replace exhaustive 567MB LFS not met on this run.",
+      "evidence": "artifacts/derived/webgym_sampled_census.json families_ge3_shopping 0, webgym_threshold_sweep.json status UNAVAILABLE, hf_webgym_manifest_attempts.json 6x401"
+    },
+    {
+      "id": "B-VACUOUS-SINGLE-STORE",
+      "finding": "REFERENCE_ONLY",
+      "detail": "Vacuous single-store duplication prevalence 0.9479 reference from prior 18/20 identical homepage/template Magento AX retained in vacuous_single_store.json. Comparison not computable because diverse sweep UNAVAILABLE, so B-VACUOUS not beaten. No inflation: diverse prevalence not claimed as 0.9479.",
+      "evidence": "artifacts/derived/vacuous_single_store.json prevalence 0.9479, webgym_threshold_sweep.json range null"
+    },
+    {
+      "id": "B-EXHAUSTIVE-LFS-567M",
+      "finding": "REFERENCE_ONLY",
+      "detail": "Exhaustive 567MB LFS test.zip / CAP 420-task enumeration correctly not executed; reference cost 5-7h wall used as cost baseline. Sampled path attempted instead and documented as UNAVAILABLE due HF 401, not as zero-cost success.",
+      "evidence": "result.json controls B-EXHAUSTIVE-LFS-567M observed not run"
+    },
+    {
+      "id": "B-TRUNCATED-VS-FULLTREE",
+      "finding": "PARTIAL",
+      "detail": "Full-tree AX_consistency diagnostic computed: mean 0.45426266604842663 CI95 [0.3960327368567069,0.5163660993035543] B=2000 family-level variance 0.004755 non-degenerate, NC1 |rho_shuffled| 0.084099462 <0.20 PASS p-like gap ~0.37, median AX 702.5 DOM 218149. Gate mean>=0.6 CI lower>0.5 gap>=0.20 variance>0 delta>=0.20 not met on slug-URL substrate (0.454 <0.6). Truncated [:20] variant delta not quantitatively logged; required fix to log delta fulltree - truncated >=0.20 real vs <0.05 shuffled explicitly. Representation not vacuous but gate fails on this substrate.",
+      "evidence": "artifacts/derived/ax_consistency_fulltree.json full_tree mean 0.454 variance 0.0047 bootstrap B 2000, nc1_family_label_shuffle rho_shuffled_abs_mean 0.084 gate true, frozen gate requires >=10 families not met (4)"
+    },
+    {
+      "id": "PC-DURABLE-SHA-FIXTURE-SWEEP-SANITY",
+      "finding": "PASS_WITH_EXCEPTION",
+      "detail": "PC-A durable SHA fixture: WebArena SHA identity PASS, Docker digest PASS, canonical 12 captures median AX>10 DOM>=2000 SHA both directions TRUE 12/12 mutation changed 12/12, median AX 716 (recomputed 707) PASS, plus synthetic Flask fixture 3 captures AX 18 DOM 384 SHA both directions TRUE with grammar hash live. PC-B sweep sanity correctly UNAVAILABLE due HF 401 not failed. PC-C parameterization synthetic 0.8958 +-0.05 PASS but only synthetic, not real diverse bytes.",
+      "evidence": "artifacts/raw/ax_captures.jsonl PC-A 3 captures, artifacts/derived/ax_analysis.json pc_a_ax_nodes_median 18, pc_c_param_prevalence.json"
+    },
+    {
+      "id": "NC-SHUFFLED-SINGLESTORE-TRUNCATED",
+      "finding": "PASS",
+      "detail": "NC1 family-label shuffle |rho_shuffled| 0.084 <0.20 PASS gap real-shuffle ~0.37 vs shuffled mean 0.31 diagnostic; NC2 vacuous 0.9479 preserved but not beaten due diverse UNAVAILABLE; NC3 truncated delta shuffled <0.05 not quantified but NC1 passes; degenerate CIs [0,0]/[1,1] correctly flagged and not counted as width. All CIs family-level unit=family not transition-level.",
+      "evidence": "ax_consistency_fulltree.json nc1_family_label_shuffle B_perms 1000 rho_shuffled_abs_mean 0.084, result.json controls NC-SHUFFLED-SINGLESTORE-TRUNCATED pass true"
+    }
+  ],
+  "recomputed_metrics": {
+    "M_WEBGYM_DIVERSE_ETLD": {
+      "producer_value": null,
+      "producer_status": "UNAVAILABLE",
+      "recomputed_value": null,
+      "recomputed_status": "UNAVAILABLE",
+      "agreement": true,
+      "gate": ">=50",
+      "pass": null,
+      "evidence": "artifacts/raw/hf_webgym_manifest_attempts.json 6x401 hf_token_present false, webgym_sampled_census.json families_ge3 0"
+    },
+    "M_WEBGYM_DUP_PREVALENCE_MEAN": {
+      "producer_value": null,
+      "recomputed_value": null,
+      "agreement": true,
+      "note": "requires WebGym manifest, UNAVAILABLE correctly"
+    },
+    "M_WEBGYM_DUP_PREVALENCE_CI_WIDTH": {
+      "producer_value": null,
+      "recomputed_value": null,
+      "agreement": true,
+      "gate": "width>0 non-degenerate",
+      "evidence": "not computed due HF 401, degenerate width 0 correctly not claimed"
+    },
+    "M_WEBGYM_SWEEP_AT_0818": {
+      "producer_value": null,
+      "recomputed_value": null,
+      "agreement": true,
+      "evidence": "webgym_threshold_sweep.json prevalence_at_0_818 null"
+    },
+    "M_WEBGYM_SWEEP_AT_09479": {
+      "producer_value": null,
+      "recomputed_value": null,
+      "agreement": true,
+      "evidence": "webgym_threshold_sweep.json prevalence_at_0_9479 null"
+    },
+    "M_WEBGYM_SWEEP_RANGE": {
+      "producer_value": null,
+      "recomputed_value": null,
+      "gate": ">=0.05",
+      "agreement": true,
+      "evidence": "range null monotonic null UNAVAILABLE"
+    },
+    "M_WEBGYM_SWEEP_MONOTONIC": {
+      "producer_value": null,
+      "recomputed_value": null,
+      "agreement": true
+    },
+    "M_PARAM_PREVALENCE": {
+      "producer_value": null,
+      "producer_status": "UNAVAILABLE",
+      "producer_pc_c_prevalence": 0.8958,
+      "recomputed_pc_c_prevalence": 0.8958,
+      "recomputed_pc_c_n_total": 10000,
+      "recomputed_pc_c_n_param": 8958,
+      "recomputed_pc_c_within_tolerance": true,
+      "real_manifest_recomputed_value": null,
+      "real_manifest_status": "UNAVAILABLE_HF_401",
+      "agreement_on_synthetic": true,
+      "gate": "0.8958 +-0.05",
+      "pass_real": null,
+      "pass_synthetic": true,
+      "note": "Synthetic harness passes; real diverse bytes prevalence unmeasured - do not conflate",
+      "evidence": "artifacts/derived/pc_c_param_prevalence.json fixture_sha 153331751e212c7fe9798a2e20c925be1adb6501dde92210b9c707f99ae7c82c"
+    },
+    "M_MANIFEST_SHA_WEBARA": {
+      "producer_value": "d65275660814663375028e9017e1f929e3c38321041b125795e2713b52243d30",
+      "producer_pass": true,
+      "recomputed_sha256": "d65275660814663375028e9017e1f929e3c38321041b125795e2713b52243d30",
+      "recomputed_bytes": 927596,
+      "recomputed_via": "sha256sum webarena-verified-fresh.json + github_cross_source_attempts.json 2x200",
+      "agreement": true,
+      "gate": "d65275660814663375028e9017e1f929e3c38321041b125795e2713b52243d30 927596 bytes",
+      "pass": true
+    },
+    "M_MANIFEST_SHA_WEBGYM": {
+      "producer_value": null,
+      "recomputed_value": null,
+      "status": "UNAVAILABLE",
+      "agreement": true,
+      "evidence": "hf_webgym_manifest_attempts.json 401"
+    },
+    "M_CONSTRUCTIBLE_FAMILIES": {
+      "producer_value": 4,
+      "producer_families": [136, 145, 196, 222],
+      "recomputed_value": 4,
+      "recomputed_families": [136, 145, 196, 222],
+      "recomputed_families_webara_only": 4,
+      "recomputed_families_diverse_only": 0,
+      "gate": ">=10",
+      "pass": false,
+      "agreement": true,
+      "evidence": "artifacts/derived/family_anchoring.json fam136,145,196,222 true; fam137,153,162,163,180,191,197,213 false homepage excluded"
+    },
+    "M_AX_MEDIAN": {
+      "producer_value": 716,
+      "recomputed_median": 707.0,
+      "recomputed_mean": 742.4166666666666,
+      "recomputed_min": 627,
+      "recomputed_sorted": [627, 642, 668, 678, 688, 698, 716, 717, 724, 727, 864, 1160],
+      "discrepancy": "-9 due to producer median 716 vs recomputed 707 (average of 6th/7th values); ax_consistency_fulltree median 702.5 is per-family mean in that artifact",
+      "gate": ">10",
+      "pass": true,
+      "agreement_on_pass": true
+    },
+    "M_DOM_MEDIAN": {
+      "producer_value": 203748,
+      "recomputed_median": 202526.5,
+      "recomputed_min": 195052,
+      "recomputed_sorted": [195052, 198426, 198904, 199025, 200413, 201305, 203748, 204280, 205490, 230799, 233918, 261498],
+      "gate": ">=2000",
+      "pass": true,
+      "agreement_on_pass": true
+    },
+    "M_SHA_STABILITY_TRUE": {
+      "producer_value": true,
+      "recomputed": true,
+      "n_canonical_captures": 12,
+      "detail": "before==after TRUE 12/12 verified via dual_impl_digest_match",
+      "pass": true,
+      "agreement": true
+    },
+    "M_SHA_MUTATION_SENSITIVITY": {
+      "producer_value": true,
+      "recomputed": true,
+      "n_canonical_captures": 12,
+      "detail": "after mutation !=TRUE 12/12 verified",
+      "pass": true,
+      "agreement": true
+    },
+    "M_AX_VALID_CAPTURES": {
+      "producer_value": 12,
+      "recomputed": 12,
+      "agreement": true
+    },
+    "M_AX_PRODUCT_FAMILY_COUNT": {
+      "producer_value": 4,
+      "recomputed": 4,
+      "gate": ">=10",
+      "pass": false,
+      "agreement": true
+    },
+    "M_RHO_SHUFFLED": {
+      "producer_value": 0.0840994620019605,
+      "recomputed_value": 0.0840994620019605,
+      "gate": "|rho_shuffled|<0.20",
+      "pass": true,
+      "agreement": true,
+      "evidence": "ax_consistency_fulltree.json nc1_family_label_shuffle"
+    },
+    "M_WEBGYM_FAMILIES_GE3": {
+      "producer_value": 0,
+      "recomputed": 0,
+      "status": "UNAVAILABLE",
+      "agreement": true
+    },
+    "M_PRIMARY_CENSUS_FAMILIES_GE3": {
+      "producer_value": 36,
+      "recomputed": 36,
+      "gate": ">=30",
+      "pass": true,
+      "agreement": true,
+      "evidence": "webarena_census.json families_ge3_shopping 36"
+    },
+    "M_FULLTREE_MEAN": {
+      "producer_value": 0.45426266604842663,
+      "recomputed": 0.45426266604842663,
+      "ci_lower": 0.3960327368567069,
+      "ci_upper": 0.5163660993035543,
+      "variance": 0.004755471751318398,
+      "bootstrap_B": 2000,
+      "bootstrap_unit": "family",
+      "agreement": true,
+      "gate_mean_ge_0_6": false,
+      "gate_ci_lower_gt_0_5": false,
+      "gate_gap_ge_0_20": false,
+      "evidence": "ax_consistency_fulltree.json"
+    },
+    "M_DETERMINISTIC_SAMPLE_S1_S2": {
+      "producer_S1": [191, 180, 162, 197, 153, 213, 163, 137, 136, 222],
+      "recomputed_S1": [191, 180, 162, 197, 153, 213, 163, 137, 136, 222],
+      "S1_equals_S2": true,
+      "agreement": true,
+      "method": "random.Random(35725763380).sample(sorted families_ge3 36,10) x2 seed reset"
+    }
+  },
+  "claim_ceiling": "BOUNDED 4-family ceiling on attempted censuses: Durable single-source pin WebArena-Verified v2 812 SHA d65275660814663375028e9017e1f929e3c38321041b125795e2713b52243d30 927596 bytes byte-identical x2 via GitHub raw 200 + Docker Hub am1n3e/webarena-verified-shopping@sha256:3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb verified (GHCR UNAVAILABLE correctly), 36 families_ge3 21 product tasks, exactly 4 product families [136,145,196,222] constructible under frozen product-subtree anchoring (heading2 price6 add_to_cart2 main contentinfo) with SHA stability both directions TRUE and mutation sensitivity TRUE at 1280x720 CDP Accessibility.getFullAXTree median AX ~707>10 DOM ~202k>=2000 via dual-impl digest match and live grammar_fulltree 273eaf... with DOTALL body regex + expanded fotorama stripping. No evidence for >=10 constructible families, no sampled WebGym 292k/127k diverse census >=50 eTLD+1, no threshold sweep range>=0.05 monotonic, no real-manifest parameterization prevalence 0.8958 (synthetic PC-C only). Full-tree AX_consistency mean 0.454 CI[0.396,0.516] fails gate >=0.6. Does NOT replace exhaustive 567MB LFS/CAP 420 enumeration on these censuses. C-CROSSSITE remains HYPOTHESIS at 4-family product-page ceiling; does not unblock Graph N>=120 zero-overlap hold-out or Physics website-holdout banks. Infrastructure UNAVAILABLE (HF 401, GHCR 403/404) correctly not counted as falsification.",
+  "evidence_refs": [
+    "research/experiments/EXP-INTEL-36042590671/request.json hash b2b66b0d26889a5e7b2e1ace53b6574f249e855fcb621c138a81dd7915f9b3fd",
+    "research/experiments/EXP-INTEL-36042590671/spec.json hash 36ecb5aeb670b4b6c207898b77ace39e5b6939612089fbe8d241e850abb02ef4",
+    "research/experiments/EXP-INTEL-36042590671/prereg.md hash 407bac4ba228237623936550f9216330e62f9ea7e76c6314c0756d68c66db933",
+    "research/experiments/EXP-INTEL-36042590671/freeze.json hash 5c1ad07df044d327045c975ab2cd86e530aa2015e3b00c23ede7e1225fbacf7f",
+    "research/experiments/EXP-INTEL-36042590671/result.json metrics M_CONSTRUCTIBLE_FAMILIES 4 gate >=10 pass false",
+    "research/experiments/EXP-INTEL-36042590671/provenance.json pip_freeze 05bd307a docker hub_digest 3e8cb9...",
+    "research/experiments/EXP-INTEL-36042590671/artifacts/raw/github_cross_source_attempts.json 2x200 SHA d6527566",
+    "research/experiments/EXP-INTEL-36042590671/artifacts/raw/webarena-verified-fresh.json sha d65275660814663375028e9017e1f929e3c38321041b125795e2713b52243d30 927596 bytes",
+    "research/experiments/EXP-INTEL-36042590671/artifacts/raw/hf_webgym_manifest_attempts.json 6x401 hf_token_present false",
+    "research/experiments/EXP-INTEL-36042590671/artifacts/raw/ghcr_browsergym_attempts.json 5 attempts 403/404 denied digest null",
+    "research/experiments/EXP-INTEL-36042590671/artifacts/raw/docker_hub_api_attempts.json Hub API 200 digest 64-hex valid",
+    "research/experiments/EXP-INTEL-36042590671/artifacts/derived/webarena_census.json families_ge3 36 product_page_families [136,145,196,222]",
+    "research/experiments/EXP-INTEL-36042590671/artifacts/derived/webgym_sampled_census.json families_ge3 0 UNAVAILABLE",
+    "research/experiments/EXP-INTEL-36042590671/artifacts/derived/webgym_threshold_sweep.json status UNAVAILABLE",
+    "research/experiments/EXP-INTEL-36042590671/artifacts/derived/deterministic_family_samples.json S1==S2 [191,180,162,197,153,213,163,137,136,222]",
+    "research/experiments/EXP-INTEL-36042590671/artifacts/derived/family_anchoring.json 13 fams 4 constructible 8 homepage excluded",
+    "research/experiments/EXP-INTEL-36042590671/artifacts/raw/ax_captures.jsonl 23 captures 12 canonical product dual_impl true viewport 1280x720",
+    "research/experiments/EXP-INTEL-36042590671/artifacts/derived/ax_consistency_fulltree.json mean 0.454 CI [0.396,0.516] variance 0.0047 rho_shuffled 0.084",
+    "research/experiments/EXP-INTEL-36042590671/artifacts/derived/ax_analysis.json median 716 constructible 4 fresh_live_probe true",
+    "research/experiments/EXP-INTEL-36042590671/artifacts/derived/pc_c_param_prevalence.json synthetic 0.8958 10000/8958 tolerance true",
+    "research/experiments/EXP-INTEL-36042590671/artifacts/raw/grammar_hash.json body_regex_present true sha 273eafb",
+    "research/intel/grammar_fulltree_358885.py BODY_REGEX <body[^>]*>.*?</body> DOTALL EXPANDED fotorama\\d{6,}",
+    "research/experiments/EXP-INTEL-36042590671/artifacts/raw/pip_freeze.txt browsergym-core==0.14.3 agentlab==0.4.2 playwright==1.63.0 tldextract==5.3.2",
+    "research/experiments/EXP-INTEL-36042590671/artifacts/raw/environment_pin.json versions_match true viewport 1280x720"
+  ],
+  "unresolved": [
+    "Whether WebGym 292k tasks / 127k sites manifest contains >=50 distinct eTLD+1 sites and yields family-level B=2000 duplication prevalence CI width>0 and threshold sweep at 0.818-0.9479 range>=0.05 monotonic vs vacuous 0.9479 — requires HF_TOKEN provisioning and 2 genuine fetches with 64-hex SHA logging.",
+    "Real-manifest parameterization prevalence 0.8958 +-0.05 on sampled diverse bytes with byte-identical SHA verification — requires HF_TOKEN and documented field definition numerator/denominator (PC-C synthetic only so far).",
+    "Whether union of WebArena 812 plus genuinely sampled diverse census yields >=10 distinct product families constructible with anchoring true + SHA both directions at 1280x720 CDP — requires HF_TOKEN plus orthogonal eTLD+1 hosting beyond current 4-family Magento substrate; not falsified globally beyond attempted censuses.",
+    "Whether GHCR BrowserGym 0.14.3 64-char digest is cross-verifiable with Docker Hub — UNAVAILABLE this run (403/404/denied after 5 attempts), single-source Docker pin suffices per prior audit but cross-source equality remains unknown.",
+    "Full-tree AX_consistency gate mean>=0.6 CI lower>0.5 gap>=0.20 on a future >=10-family set — unknown because current set only 4 families; truncated vs full-tree delta >=0.20 quantification remains partially logged."
+  ]
+}
