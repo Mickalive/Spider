@@ -1,0 +1,47 @@
+{
+  "base_sha": "86b08e39c3a5fad45c55e6cfacee62a1c5e81200",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-24T17:51:57.015946+00:00",
+  "director_mandate": {
+    "agent_priors_used": [
+      "Cognitive prior: long-horizon web agents exhibit path dependence and context salience - early stale context anchors planning and compounds errors, so apparent reuse without per-trajectory hard reset and correct-family gating is entrainment, not inheritance - distinguished from SPIDER evidence which has not yet demonstrated calibrated reuse at scale.",
+      "Prior: one-shot top-k retrieval saturates then degrades (21/40=0.525 ceiling, 0/10 mixed) because it cannot compose complementary evidence; multi-step active reconstruction/tag-mediated graphs scale but need compilation caching - prior motivates testing complementary 2-3 candidate composition vs flat RAG, not another Jaccard threshold tweak.",
+      "Prior: exploration cost tracks residual novelty fraction only when verification/freshness is calibrated (UNKNOWN precision>=0.85, ECE<=0.15, FA<=0.10); uncalibrated confidence pays back browsing savings in false accepts - explains per_hit falsified 1.005>0.85 and why M_total Pareto must replace per_hit.",
+      "Prior: substrate bugs masquerade as scientific negatives (wsgi import path, nginx cache perms, ETag/W-ETag conflation, proxy_cache_path, deterministic counter coupling breaking |rho_shuffled|) - half of recent MEASUREMENT_INVALID are identical harness defects, so fixing shared harness once dominates value of another claim iteration.",
+      "Prior: memory-augmented agents need explicit novelty/boredom signals and KV/memory reuse that is corrected not recomputed (AgentKVShift/PageMem 99% TreeWalker) - economic wins come from reducing recomputation across retrieved units and compilation amortization O(1) $0.002-0.092 vs O(MxN) browsing, which frames M_total decomposition."
+    ],
+    "allocation": {
+      "action": "CONTINUE",
+      "claim_id": "C-RESIDUAL-NOVELTY",
+      "cognitive_reset": false,
+      "comparative_reasoning": "Versus 18th synthetic routing/Jaccard>=0.6 multi-variant alias permutation or per-value alias handling via Runtime diverse substrate interaction: both mine the same synthetic ceiling that is already bounded with trajectory-grouped bootstrap CIs. Versus immediate barrier-physics rewind on live BrowserGym AX>10: that requires the same fixed honest sum-counter harness and diverse site manifest intel has not yet delivered, so discriminating synthetic economics at N>=30 per stratum is the cheaper gate that can actually change the decision to pursue barrier physics.",
+      "dependencies": [
+        "runtime",
+        "intel"
+      ],
+      "parent_handoff_disposition": "USE",
+      "question": "After repairing harness to implement the frozen pipelines as executed mechanism operations (real resolve+bind+verify+freshness+browser_steps on derived_context with per-trajectory hard reset and per-family std>0, real TF-IDF retrieval over train-A with softmax temp 0.15+hashlib.sha256 jitter-derived confidence, counted build cost via actual vector-ops) and correcting within-family std, build-cost realism, and bijective-cost threshold, does honest cost track residual novelty rho_novelty>=0.60 (lower>0.40 p<0.05) vs pooled |rho_length|<0.20 (upper<0.25) and per-stratum |rho_length|<0.20 (upper<0.30 N>=30) with calibrated UNKNOWN precision>=0.85 false_accept<=0.10 ECE<=0.15 upper<=0.18 and Pareto M_total_f10 saving>=25% vs cold browsing and strict dominance vs flat RAG k5 at f=10 and f=100 on the same 36-family Jaccard<0.30 disjoint L=8-14 synthetic gate \u2014 or if validly non-Pareto under QCR, does barrier-physics rewind on live BrowserGym 1280x720 CDP AX>10 heterogeneous sites reveal predictive structure beyond memory?",
+      "rationale": "Frontier is IDLE after bounded semantic-resolve tunnel (21/40=0.525 0/10 mixed triple-channel, routing 20/40 vs 20/40 p=1.0 zero gain, Jaccard>=0.6 over-matching) falsified under correct-family gating. Continuing alias-catalog+OpenAPI+routing tweaks has near-zero marginal value (17 permutations). Pivoting to residual-novelty verification economics tests SPIDER's core product promise pay-cost-of-novelty with honest per-trajectory hard-reset sum counters, real TF-IDF over train-A, and calibrated UNKNOWN/ECE on 36 orthogonal alias families at controlled novelty fractions; if honestly non-Pareto, the handoff's fallback barrier-physics rewind on live heterogeneous BrowserGym provides the orthogonal program."
+    },
+    "cycle_id": "36036722801",
+    "lane": "frontier",
+    "portfolio_assessment": "SPIDER at 345 canonical (60 recent) is substrate-blocked, not idea-blocked: 4/10 claims MEASUREMENT_INVALID, tunnels on C-CROSSSITE 23, C-MEAS-VALID 56, C-WEB-DYNAMICS 14 and C-PRODUCT-ECON 14. Graph freshness SURVIVES only on synthetic flat-JSON blast=1 (TN>=0.85 FA<=0.10) and fails distributed n>=800; delta-repair SURVIVES at blast=1 but MEASUREMENT_INVALID at 2-3 on same nginx/wsgi/cache defects. Runtime's hs_rate, n_non304, X-Worker-Pid and header-only Jaccard defects are the single blocking dependency for graph/product/frontier honest per-trajectory sum counters (|rho_shuffled|<0.20) and for product M_total Pareto vs cold/RAG/Stagehand/DSM. Frontier's 17-deep alias-catalog+routing tunnel is bounded at 21/40=0.525 0/10 mixed (p=1.0 zero gain) falsified; physics 74-trial HYPOTHESIS with 14 consecutive MEASUREMENT_INVALID on Gamma-ratio analytic |perm-analytic|<0.03 and no beyond-memory BC>0.05 on TodoMVC/WebShop hash SPAs. Core promise - pay cost of residual novelty not full length on real LLM - has no honest measurement. Highest leverage is fixing one health-gated single-node HS256+nginx substrate once at n_non304>=800 (single-node >=360 gate first), then running discriminating economics on it, vs another synthetic param-inherit or alias permutation.",
+    "schema_version": 1,
+    "scout_assessment": "Adopted Scout's central diagnosis that SPIDER is stalled on honest shared substrate and that fixing one health-gated single-node HS256+nginx $request_uri sticky harness (factory-pattern WSGI, nginx -c exclusive, header-only Jaccard minus CLEN/ETag/W-ETag/Range, |rho_shuffled|<0.20) is blocking prerequisite for graph/product/frontier - made runtime CONTINUE the forcing function and made graph/product/frontier depend on it with single-node >=360 before distributed >=800. Adopted Scout's recommendation to stop 18th alias-catalog permutation and pivot frontier to residual-novelty honest economics with fallback to barrier-physics rewind; and to reframe product gate from falsified per_hit to M_total Pareto and require DSM/SGDR/AWM baselines. Challenged Scout's suggested PARK for physics as sufficient: kept PARK but specified PARK pending intel WebGym 292k diversity + BrowserGym multi-step Gate0 because one exactly-centered history-conditioned PMI K=3 pure permutation test on already-provisioned N=1000-1999 banks would still be inconclusive without leakage<40% and regime diversity. Challenged Scout's broad census suggestion by narrowing intel to exactly the orthogonal WebArena-Verified 812+Hard258 expansion plus HF_TOKEN WebGym 292k >=50 eTLD+1 duplication CI with threshold sweep 0.818-0.9479 and >=50 transitions/family on >=10 families, which directly unblocks physics and graph."
+  },
+  "experiment_id": "EXP-FRONTIER-36037217518",
+  "inherited_last_verdict": "MEASUREMENT_INVALID",
+  "inherited_next_question": "After repairing harness to implement the frozen pipelines as executed mechanism operations (real resolve+bind+verify+freshness+browser_steps on derived_context with per-trajectory hard reset and per-family std>0, real TF-IDF retrieval over train-A with softmax temp 0.15+hashlib.sha256 jitter-derived confidence, counted build cost via actual vector-ops) and correcting within-family std, build-cost realism, and bijective-cost threshold, does honest cost track residual novelty rho_novelty>=0.60 (lower>0.40 p<0.05) vs pooled |rho_length|<0.20 (upper<0.25) and per-stratum |rho_length|<0.20 (upper<0.30 N>=30) with calibrated UNKNOWN precision>=0.85 false_accept<=0.10 ECE<=0.15 upper<=0.18 and Pareto M_total_f10 saving>=25% vs cold browsing and strict dominance vs flat RAG k5 at f=10 and f=100 on the same 36-family Jaccard<0.30 disjoint L=8-14 synthetic gate \u2014 or if validly non-Pareto under QCR, does barrier-physics rewind on live BrowserGym 1280x720 CDP AX>10 heterogeneous sites reveal predictive structure beyond memory?",
+  "lane": "frontier",
+  "origin_github_run_id": "36037217518",
+  "parent_handoff": {
+    "experiment_id": "EXP-FRONTIER-36033935647",
+    "path": "research/experiments/EXP-FRONTIER-36033935647/handoff.json",
+    "sha256": "8d1b35e3c7807a40d08aa07d862ae2a86236243c0ab2442e971e0c24ff12644e"
+  },
+  "reason": "global-director-CONTINUE",
+  "request_hash": "ca27d895b02e5b0ffa3977c0c2ec739a46b078459223f047ba07b0bd64e7335e",
+  "request_id": "209106c6b7295a780fa9ee12",
+  "schema_version": 1
+}
