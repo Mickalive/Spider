@@ -1,0 +1,133 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-FRONTIER-36042599040",
+  "lane": "frontier",
+  "status": "PASS",
+  "producer_claim_supported": false,
+  "required_fixes": [],
+  "validity_findings": [
+    "All 6 positive controls (PC-HONEST-COST-SANITY, PC-ORTHOGONAL-FAMILIES-JACCARD, PC-TRAIN-TEST-DISJOINT, PC-CALIBRATION-DERIVED, PC-NOVELTY-MONOTONICITY, PC-BUILD-COST-ISOLATED) and all 5 null controls (NC-NO-APPLICABLE, NC-EMPTY-REGISTRY, NC-ORACLE-LEAK, NC-BIJECTIVE-COST, NC-SHUFFLED-NULL) PASS per frozen thresholds. Measurement is VALID (not MEASUREMENT_INVALID).",
+    "Honest cost accounting verified: per-trajectory total == sum(resolve+bind+verify+freshness+browser_steps) for all 552 SPIDER pooled trajectories (diff=0). Within-family std > 0 naturally for all 180 family/novelty cells (zero_cells=0/180). No artificial variance injection.",
+    "Orthogonal family construction verified: 36 families with pairwise disjoint character alphabets (L=8-14), canonical bigram Jaccard max=0.0000, mean=0.0000. Train-A/test-B trajectory-grouped holdout with 0 leakage confirmed.",
+    "TAU0.30 topology gating correctly applied: resolve counts all 5 scored candidates; bind/verify/freshness/browser_steps only for candidates with max_cosine >= 0.30. Pass rate = 0.874 across all baselines. Global shuffled null centered (|mean| < 0.05, std < 0.15) under same TAU gating.",
+    "Derived confidence from actual TF-IDF TAU0.30 retrieval scores (softmax temp 0.15 + deterministic hashlib.sha256 jitter range 0.02), not hard-coded. Conf_std = 0.1746 > 0.05, pooled accuracy = 0.7722 (imperfect, within 0.35-0.78), ECE = 0.2161 with 5 adaptive bins.",
+    "Build cost isolated: 108 mechanism vectors * $0.00002/vector-op frozen before outcomes. Per-task costs topology-gated (only TAU-passing candidates incur bind/verify/browser_steps).",
+    "Bijective proxy check strengthened: gap = rho_novelty - |rho_shuffled_novelty| = 0.4837 > 0.35; |rho_proxy_novelty| = 0.4386 < 0.60, |rho_proxy_length| = 0.0857 < 0.60, |rho_proxy_tau| = 0.3105 < 0.60. Cost not bijective with novelty/length/TAU-count proxies.",
+    "Synthetic-to-live gap correctly disclosed as dominant validity threat: disjoint alphabets (288-504 chars) exceed natural 26-letter alphabet to guarantee Jaccard<0.30; no BrowserGym/CDP, no LLM tokens, no live sites. live_available=false disclosed per prereg.",
+    "Per-stratum N adequacy: all 5 novelty strata N=108 >=30, all 3 length tertiles N>=145 >=30, per-family per-stratum N=3, family coverage 36/36 >=30/36. Family-block permutation valid.",
+    "Deterministic execution: seeds=42 (numpy RandomState) + hashlib.sha256 for jitter/sharding/TAU thresholding. No Python hash(). Per-trajectory operation traces with TAU mask logged and hashed."
+  ],
+  "baseline_findings": [
+    "B-BROWSE-COLD: Cold browsing baseline uses formulaic browser_steps = round(length*3.2 + n_novel*5.0 + hash_jitter + 2). While topology-gated for SPIDER/RAG, BROWSE has no TAU gate (always attempts). Mean cost = 50.15 vs SPIDER 16.84. This inflates SPIDER's apparent Pareto saving but is a valid upper-bound baseline per spec.",
+    "B-FLAT-RAG-K5: Flat TF-IDF retrieval with identical TAU0.30 gating and softmax+jitter confidence as SPIDER. Mean cost = 14.72 (lower than SPIDER 16.84). SPIDER does NOT dominate RAG at f=10 (0.005553 > 0.005126) or f=100 (0.036086 > 0.031819). RAG baseline is stronger than SPIDER on this fixture.",
+    "B-SPIDER-RESIDUAL: Primary pipeline with parameterized inheritance. Honest cost increases with novelty (0%: 13.61, 25%: 16.29, 50%: 16.82, 75%: 18.32, 100%: 19.77) but rho_novelty = 0.4837 < 0.60 threshold.",
+    "B-RANDOM-GATE: Random confidence (0.50-0.95) and random correctness (50%) control. Validates chance-level precision/ECE. TAU gate stats identical to other baselines (deterministic retrieval).",
+    "TAU gate statistics identical across all 4 baselines (mean_candidates_scored=5.0, mean_passing=1.61, pass_rate=0.874, mean_max_cosine=0.486) confirming retrieval is identical; only cost accounting and correctness differ."
+  ],
+  "recomputed_metrics": {
+    "rho_novelty": {
+      "producer_value": 0.4837,
+      "audit_value": 0.4995,
+      "ci95_audit": [0.4282, 0.5667],
+      "block_perm_p_audit": 0.0000,
+      "threshold": ">=0.60 with bootstrap lower>0.40 and block perm p<0.05",
+      "verdict": "FAIL (value < 0.60; bootstrap lower > 0.40 PASS; block perm p < 0.05 PASS)"
+    },
+    "rho_length_pooled": {
+      "producer_value": 0.0857,
+      "audit_value": 0.1128,
+      "ci95_audit": [0.0289, 0.1936],
+      "block_perm_p_audit": 0.0546,
+      "threshold": "|rho|<0.20 with bootstrap upper<0.25 and block perm p>=0.05",
+      "verdict": "FAIL (|rho|<0.20 PASS; bootstrap upper<0.25 PASS; block perm p=0.0546 marginally >=0.05 PASS but producer p=0.0418 < 0.05 FAIL)"
+    },
+    "rho_length_per_stratum": {
+      "novelty_0": {"n": 108, "rho_length": 0.1791, "bootstrap_upper_producer": 0.3203, "bootstrap_upper_audit": 0.324, "threshold_upper": 0.30, "verdict": "FAIL (upper > 0.30)"},
+      "novelty_25": {"n": 108, "rho_length": 0.0362, "bootstrap_upper_producer": 0.195, "verdict": "PASS"},
+      "novelty_50": {"n": 108, "rho_length": -0.0899, "bootstrap_upper_producer": 0.0784, "verdict": "PASS"},
+      "novelty_75": {"n": 108, "rho_length": -0.0293, "bootstrap_upper_producer": 0.1389, "verdict": "PASS"},
+      "novelty_100": {"n": 108, "rho_length": 0.007, "bootstrap_upper_producer": 0.1813, "verdict": "PASS"},
+      "length_short": {"n": 184, "rho_length": -0.0262, "bootstrap_upper_producer": 0.1076, "verdict": "PASS"},
+      "length_medium": {"n": 211, "rho_length": 0.0254, "bootstrap_upper_producer": 0.1451, "verdict": "PASS"},
+      "length_long": {"n": 145, "rho_length": 0.1575, "bootstrap_upper_producer": 0.3009, "bootstrap_upper_audit": 0.302, "threshold_upper": 0.30, "verdict": "FAIL (upper > 0.30)"}
+    },
+    "ece": {
+      "producer_value": 0.2161,
+      "audit_value": 0.2113,
+      "bootstrap_upper_producer": 0.2492,
+      "bootstrap_upper_audit": 0.2443,
+      "threshold": "<=0.15 with bootstrap upper<=0.18",
+      "verdict": "FAIL (ECE > 0.15, upper > 0.18)"
+    },
+    "unknown_precision": {
+      "producer_value": 1.0,
+      "audit_value": 1.0,
+      "n_unknown": 12,
+      "n_total": 12,
+      "threshold": ">=0.85",
+      "verdict": "PASS"
+    },
+    "false_accept_rate": {
+      "producer_pooled": 0.0167,
+      "audit_pooled": 0.0163,
+      "threshold_no_applicable": "<=0.10",
+      "threshold_pooled": "<=0.10",
+      "verdict": "PASS"
+    },
+    "m_total_f10": {
+      "spider": 0.005553,
+      "browse": 0.010171,
+      "rag": 0.005126,
+      "saving_pct": 45.41,
+      "saving_ci": [43.13, 47.58],
+      "dominance_f10": false,
+      "dominance_ci_f10": [-0.00048, -0.000374],
+      "threshold": "saving>=25% lower>15% p<0.05 AND strict dominance vs RAG (dominance CI lower>0)",
+      "verdict": "FAIL (saving PASS but dominance_f10=False: SPIDER > RAG)"
+    },
+    "m_total_f100": {
+      "spider": 0.036086,
+      "browse": 0.101715,
+      "rag": 0.031819,
+      "saving_pct": 64.52,
+      "dominance_f100": false,
+      "dominance_ci_f100": [-0.0048, -0.003767],
+      "threshold": "same strict dominance at f=100",
+      "verdict": "FAIL (dominance_f100=False: SPIDER > RAG)"
+    },
+    "gap_rho_vs_shuffled": {
+      "producer_value": 0.4837,
+      "threshold": ">0.35 with |rho_shuffled|<0.20",
+      "verdict": "PASS"
+    },
+    "monotonicity": {
+      "spider_d": 1.497,
+      "spider_p": 0.0,
+      "browse_d": 2.119,
+      "browse_p": 0.0,
+      "threshold": "100%>0% p<0.05 d>0.8",
+      "verdict": "PASS"
+    }
+  },
+  "claim_ceiling": "Bounded FALSIFIED-IN-SETTING on this synthetic TAU0.30-gated orthogonal disjoint-alphabet fixture: All positive/negative controls PASS (measurement VALID), but S1 (rho_novelty=0.48<0.60), S2 (pooled rho_length p=0.042<0.05), S3 (novelty_0 upper=0.32>0.30, length_long upper=0.30>0.30), S4 (ECE=0.216>0.15), and S5 (no dominance vs RAG at f=10/100) FAIL. Only S6 (honest gap>0.35) PASS. Pay-cost-of-novelty not demonstrated even with maximal orthogonality (Jaccard=0.0), TAU0.30 topology gating, honest executed counters, and valid controls. C-RESIDUAL-NOVELTY remains HYPOTHESIS. Synthetic-to-live gap dominant; no inference to BrowserGym AX>10 heterogeneity.",
+  "evidence_refs": [
+    "research/experiments/EXP-FRONTIER-36042599040/result.json",
+    "research/experiments/EXP-FRONTIER-36042599040/report.md",
+    "research/experiments/EXP-FRONTIER-36042599040/provenance.json",
+    "research/experiments/EXP-FRONTIER-36042599040/artifacts/family_manifest.json (sha256:9b003e7c416317ab25b371c2520a03f28abe4c817105595862a472377d80fd12)",
+    "research/experiments/EXP-FRONTIER-36042599040/artifacts/per_trajectory_traces.json (sha256:591b1f14bcf2bf4ef7983faa6e2da75747086ba26ffc22de99d605dd5564accb)",
+    "research/experiments/EXP-FRONTIER-36042599040/artifacts/bootstrap_permutation_nulls.json (sha256:19300c9ccba864d451520d774b07f348f0e4d31cfc85c3210b8cd7b73d040e5d)",
+    "research/experiments/EXP-FRONTIER-36042599040/artifacts/confidences.json (sha256:b442351f7aa0ce793157e603b535ed9cf92f5592e54610a6f3f2c269e501c35a)",
+    "research/frontier/run_execute_36042599040.py (sha256:d5e2a45ea5f23441e58b239ca04ccf312e7a4972cf4dc18c4e0a8fdc95814b60)",
+    "research/experiments/EXP-FRONTIER-36042599040/spec.json (sha256:c88974ca1079861d91b4308d3f30b0949d9d43103cc38528c373a431fe98fe44)",
+    "research/experiments/EXP-FRONTIER-36042599040/prereg.md (sha256:b3f4392427ba516102e0ce896d0c9a7f1207e28c28e24309c9b36a43aed2e98e)",
+    "research/experiments/EXP-FRONTIER-36042599040/freeze.json (sha256:2a0442bab9bb213068e953cba2bce857ffd74e60edefa4060a5847a1515e4a2a)"
+  ],
+  "unresolved": [
+    "Whether the synthetic disjoint-alphabet construction (Jaccard=0.0, 288-504 unique chars) over- or under-estimates real Web lexical transfer where Jaccard 0.30-0.60 is common; requires WebArena-Verified v2 192/36 or WebGym 300k with Intel diverse manifest for live replication.",
+    "Whether the modeled build cost ($0.00002/vector-op) and per-task costs translate to measured end-to-end economics with real LLM tokens, browser steps, latency, network, retrieval verification, and repair under Runtime health-gated single-worker sticky substrate.",
+    "Whether barrier-physics rewind (C-WEB-DYNAMICS) on live BrowserGym heterogeneous sites would reveal predictive structure beyond memory (BC PMI > 0.05) if residual-novelty remains non-Pareto under QCR, per Director's deferred orthogonal pivot.",
+    "Whether per-value alias handling via Runtime diverse substrate would rescue residual-novelty economics where per-family parameterization shows parity failure vs RAG (SPIDER cost > RAG cost at f=10/100) under TAU0.30 gating.",
+    "Whether ECE=0.216 > 0.15 reflects TF-IDF softmax calibration mismatch requiring Platt/isotonic scaling, or is an inherent property of the retrieval distribution under TAU gating; conf_std=0.1746 > 0.05 and imperfect accuracy=0.772 are satisfied."
+  ]
+}
