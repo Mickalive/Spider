@@ -1,0 +1,82 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-FRONTIER-35937602723",
+  "lane": "frontier",
+  "status": "REVISE",
+  "producer_claim_supported": false,
+  "required_fixes": [
+    "Prover claims synthetic alias variant->canonical catalog + server routing normalization with Fetch/WebMCP OpenAPI discovery (Jaccard>=0.6) plus joint 2-3 candidate composition rescues mixed triple-channel from 0/10 to >=4/10 and lifts pooled 21/40=0.525 to >=0.60 with gain>=0.10. Numerical S1-S6 thresholds recompute PASS on fixture 83b7c52dd17848fc8c70d1c629b8d541788e0438249623ea783d2df364467319 (40/40 pooled Wilson [0.912,1.0], gain 0.5 bootstrap lower 0.5, McNemar b=20 c=0, ECE 0.0895 upper 0.1096), but causal attribution to alias catalog and routing is not isolated. Required fix: ablate joint adoption_value_template path — run joint without alias_catalog lookup and without routing_normalize_path and show mixed drops to <=3/10 while joint with them holds >=4/10; otherwise ceiling is 'joint greedy set-cover adoption of observed keys' not 'alias+routing'.",
+    "Replace key-agnostic bounds_equal correctness. result.json derived_metrics.json use normalize_bound that compares only header/body values sorted (Bearer stripping) ignoring header/body/query key names. This makes alias resolution vacuous: single-candidate B-EXACT-MATCH-CF scores 20/40 not 0/40 (spec expected 0/40 alias-OOD) and any wrong-key template with correct value counts correct. Required fix: key-sensitive verification (require exact expected key set match via parsed template vs observed canonical family via key equality, not just family intersection) and re-run; report corrected rates.",
+    "Alias catalog PC-ALIAS-CATALOG-BUILT passes formally but is degenerate: alias_catalog_manifest.json catalog_size 13 classes=13 each singleton min_pairwise_jaccard 0.0 across all 13 classes, jaccard_threshold 0.6 logged but never exercised intra-class. Zero classes test Jaccard>=0.6 clustering; dist_template vs train_template alias forms not held-out beyond singleton identity (variant inventory from 21 train tasks contains same keys as test: header_token ApiKey/X-Custom-Header/X-Reset-Token, header_auth Authorization/X-Permission/X-Scope etc). Required fix: construct fixture with at least 2 variants per alias class that have Jaccard>=0.6 (e.g., X-Auth vs X-Auth-Token) and verify catalog merges them with min_pairwise>=0.6, or disclose catalog is identity mapping and remove Jaccard>=0.6 claim from product consequence.",
+    "Disclose degenerate honest-cost calibration for joint. PC-HONEST-COST-SANITY passes with rho 0.0 perm_p 1.0 for B-JOINT-ALIAS-ROUTING-CF because correctness is constant 40/40 (Spearman NaN→0) and validity_notes already flags degenerate shuffle. Required fix: report honest-cost |rho| as not applicable when outcome constant, or require imperfect-accuracy fixture (at least 2 errors) to make correlation falsifiable; do not claim honest sum-counter validated via permutation when joint has zero variance in outcome.",
+    "Recompute McNemar exact p: producer reports 1.91e-06 (exact binomial two-sided without continuity), auditor recomputes continuity-corrected chi2=18.05 p=2.15e-05 and exact binomial 3.81e-06 two-sided (2*0.5^20). Both <0.05 so S1 significance holds, but report must state method (exact vs continuity) per prereg block bootstrap pairing; keep metric ID S1.mcnemar_vs_baselines unchanged."
+  ],
+  "validity_findings": [
+    "Synthetic saturation tautology: derived_context in fixture tasks_expanded.json contains headers_observed/body_observed/url_query with exact expected values verbatim (e.g., alias-0-0 headers_observed Authorization: Bearer tok_0_0 equals hidden_expected.expected_bound). Joint pipeline joint_compose lines 662-676 copies any observed key not already covered via adoption_value_template(params) directly, without needing alias catalog. First-loop alias lookup (catalog_lookup) only maps key to itself because catalog is singleton identity. Hence 40/40 is adoption of observed keys, not alias/route factorization. Disclosure in validity_notes and prereg sec13 acknowledges saturation but does not prevent over-claim of alias+routing leverage.",
+    "Representation loss disclosed but undercuts tested effect: prereg measurement_validity states 'synthetic derived_context may contain expected bound verbatim observationally saturated' and spec allows it; the tested environment could not express alias-resolution failure because bound correctness ignores keys. The observed environment (single-candidate 20/40 with bounds_equal) cannot distinguish correct alias from value-only copy, so joint rescue does not demonstrate semantic alias handling.",
+    "Routing normalization genuine but not causal: routing_manifest.json proves 10/55 before!=after pairs via regex_slot_version_collapse and openapi_table, task_relevant 21/40 (0.525) via version/case/trailing-slash in registry paths. However synthetic tasks' observed families are header/body/query/auth, none depend on path versioning for correctness (derived_context url_path /api/data vs registry url_path unchanged). No task requires routing to become correct; fix shows path normalization not exercised for mixed rescue.",
+    "Fetch/WebMCP OpenAPI discovery: fetch_manifest.json spec_200 52/40 joint fetches, 14 paths, HATEOAS present via mocked http.server.ThreadingHTTPServer on 127.0.0.1. Spec enumerated OPENAPI_PATH_TEMPLATES includes synthetic versioned paths but joint_compose never uses spec content for template selection (fetch_spec called but return value unused except counters). OpenAPI spec does not affect candidate scoring, so spec coverage >=70% live gate not represented.",
+    "ECE bimodal warning valid: joint ECE 0.0895 recomputed via 5-bin uniform [0,0.2,0.4,0.6,0.8,1.0] matches producer 0.0895; bootstrap upper 0.1096 <0.18 passes. However with perfect accuracy 3 bins empty, calibration is trivially good; live imperfect accuracy remains dominant unknown as disclosed.",
+    "Honest sum-counter verified: raw_evidence.json honest_cost equals sum counters for all pipelines (e.g., B-JOINT 20 = alias 2+bind1+browser0+catalog5+fetch1+freshness1+joint1+resolve1+spec1+verify7). Within-family std >0 for all families pipelines, max |rho| 0.1583 <0.20 passes. No n*3200 bijective proxy (max_proxy_hits 0).",
+    "Sampling/representation integrity: pooled 40 orthogonal stratified (10 header/10 body/10 auth/10 mixed) preserved, held-out via train 21 (alias-0-0..0-6,1-0..1-6,2-0..2-6) vs test 19 (0-7..0-9,1-7..1-9,2-7..2-9 plus 10 mixed). No registry leak on discriminating tasks: leak_audit forbidden_key_reads 0, registry_leak 0/40, exact_stratum 12/12 by design excluded. Controls PC-EXACT-MATCH 12/12, NC-NO-APPLICABLE 12/12 UNKNOWN precision 1.0, NC-EMPTY 6/6 hold."
+  ],
+  "baseline_findings": [
+    "Single-candidate baselines are strong under frozen BINDING-RULE (correct-family-required, softmax temp 0.15+sha256 jitter UNKNOWN<0.80, train-only TFIDF): B-FLAT-TFIDF-K5-CF flat TF-IDF top-k5, H-HIERARCHICAL-CF xMemory hierarchical 84 themes via Jaccard>=0.6 agglomerative centroid TFIDF mean, B-ENDPOINT-CATALOG-CF genuine endpoint catalog 51 centroids via Jaccard>=0.6 over method/path/header/body/auth_scope. All three achieve exactly 20/40=0.50 Wilson [0.352,0.648] with 20 false_accept, reproducing prior ceiling, distinct retrieval sets 40/40 and mean flat-vs-endpoint Jaccard 0.464 proving code-distinctness (manifest hashes distinct). Not weak no-memory.",
+    "B-EXACT-MATCH-CF expected 0/40 per spec but observed 20/40 due to key-agnostic bounds_equal; still diagnostic weak baseline but frozen S1 McNemar uses it and producer correctly treats S6 ratio vs exact as diagnostic (2.341) not gating — ratios_vs_strong_baselines 1.605/1.904 within 2x so S6 gated correctly per frozen validity-threat note sec13.",
+    "B-RANDOM-K5-CF 11/40=0.275 Wilson [0.161,0.428] chance calibration ~0.175 expected but observed 0.275 slightly high due to 20/40 ceiling structure; B-STAGEHAND 0/40 UNKNOWN isolation holds, confirming no hardcoded bypass.",
+    "McNemar recomputed for joint vs each single baseline: b=20 c=0 pooled 40 paired, exact two-sided p=3.81e-06, continuity-corrected p=2.15e-05, producer p=1.91e-06 (one-sided exact?) — all <0.05, so S1 superiority holds independent of method. Block bootstrap gain lower 0.5 >0.05 and permutation p 0.005 <0.05 also hold under trajectory-grouped CIs.",
+    "No leakage advantage to baselines: all pipelines share identical derived_context filtering, correct-family gating, and train-only catalogs; joint retrieves k=10 vs baselines k=5 but single-candidate still chooses alphabetically first eligible, so retrieval recall not confounded with joint set-cover advantage — isolation of joint composition is fair, but alias/routing contribution not isolated."
+  ],
+  "recomputed_metrics": {
+    "S1.pooled_joint_rate": 1.0,
+    "S1.wilson_lower_joint_recomputed": 0.9124,
+    "S1.wilson_20_40_recomputed": 0.352,
+    "S1.binomial_p_vs_0_10": 1.0e-40,
+    "S1.mcnemar_b20_c0_producer_p": 1.91e-06,
+    "S1.mcnemar_b20_c0_auditor_exact_two_sided": 3.814697265625e-06,
+    "S1.mcnemar_b20_c0_auditor_chi2_continuity_p": 2.15e-05,
+    "S2.gain_vs_best_single": 0.5,
+    "S2.gain_bs_lower": 0.5,
+    "S2.gain_bs_upper": 0.5,
+    "S2.permutation_p": 0.005,
+    "S3.header_rate": 1.0,
+    "S3.mixed_rate": 1.0,
+    "S4.joint_false_accept_rate": 0.0,
+    "S4.joint_unknown_precision": 1.0,
+    "S5.ece_joint_recomputed": 0.0895,
+    "S5.ece_bootstrap_upper975": 0.1096,
+    "S5.ece_baselines_recomputed_flat_hier_endpoint": 0.411,
+    "S6.joint_mean_honest_cost": 20.425,
+    "S6.ratios_vs_strong_flat": 1.605,
+    "S6.ratios_vs_strong_hier_endpoint": 1.904,
+    "S6.amortized_modeled": 0.056616,
+    "honest_cost_max_rho": 0.1583,
+    "honest_cost_within_std_all_gt0": true,
+    "alias_catalog_min_jaccard": 0.0,
+    "alias_catalog_classes": 13,
+    "alias_catalog_size": 13,
+    "routing_diff_pairs": 10,
+    "routing_task_relevant": 21
+  },
+  "claim_ceiling": "BOUNDED SYNTHETIC-ONLY: Joint greedy set-cover (min-2 distinct, 2-3 adaptive) adoption of verbatim observed keys achieves 40/40 pooled correct-family coverage Wilson [0.912,1.0] on synthetic orthogonal fixture sha 83b7c52dd17848fc8c70d1c629b8d541788e0438249623ea783d2df364467319 under key-agnostic value-only bounds_equal, rescuing single-candidate ceiling 20/40=0.50 (gain 0.5, McNemar p<0.05, bootstrap lower 0.5) with per-family header 10/10 mixed 10/10, false_accept 0.0, UNKNOWN precision 1.0, ECE 0.0895 bootstrap upper 0.1096, honest sum-counter cost ~20.4 within 2x strong baselines, amortized modeled $0.0566 at f=10 within $0.002-0.092. No evidence that synthetic alias catalog (13 singleton classes min Jaccard 0.0) or server routing normalization (10/55) or Fetch/WebMCP OpenAPI 14-path spec causally contributed — joint second-loop adoption copies observed keys trivially. Does NOT support live heterogeneous WebArena-Verified v2/WebGym 300k CDP AX>10, does NOT support Jaccard>=0.6 alias clustering, does NOT support calibrated ECE<=0.15 on imperfect accuracy, does NOT support O(1) amortized economics beyond modeled vector-ops, does NOT support C-SEMANTIC-RESOLVE beyond synthetic value-copy task. Remains EXPERIMENTAL synthetic-gate-passed, not VALIDATED or PRODUCT_CORE.",
+  "evidence_refs": [
+    "research/experiments/EXP-FRONTIER-35937602723/result.json:metrics.S1-S6 controls PC-*/NC-*",
+    "research/experiments/EXP-FRONTIER-35937602723/raw_evidence.json:event_rows 70*7 stratified honest_cost == sum counters, bounds_equal key-agnostic",
+    "research/experiments/EXP-FRONTIER-35937602723/derived_metrics.json:metrics pooled_rates_alias_ood, joint_selection, honest_cost, calibration",
+    "research/experiments/EXP-FRONTIER-35937602723/alias_catalog_manifest.json:catalog_size 13 catalog_variant_classes 13 each min_pairwise_jaccard 0.0 families_covered [body,header_auth,header_token,query] jaccard_threshold 0.6",
+    "research/experiments/EXP-FRONTIER-35937602723/endpoint_catalog_manifest.json:n_centroids 51 jaccard_threshold 0.6",
+    "research/experiments/EXP-FRONTIER-35937602723/hierarchical_manifest.json:n_themes 84 n_episodes 168",
+    "research/experiments/EXP-FRONTIER-35937602723/routing_manifest.json:diff_before_after 10 pairs_total 55 task_relevant_frac 0.525 task_relevant_tasks 21",
+    "research/experiments/EXP-FRONTIER-35937602723/fetch_manifest.json:spec_200 52 n_paths 14 hateoas_present true",
+    "research/experiments/EXP-FRONTIER-35937602723/joint_manifest.json:selection_log 40 entries k_distribution {2:30,3:10} complementary_frac_mean 1.0 derived from joint_compose adoption_value_template",
+    "research/experiments/EXP-FRONTIER-35937602723/train_split_inventory.json:train_task_ids 21 vs pooled 40 held-out mixed 10",
+    "research/experiments/EXP-FRONTIER-35921359961/tasks_expanded.json:fixture sha 83b7c52dd17848fc8c70d1c629b8d541788e0438249623ea783d2df364467319 derived_context verbatim expected_bound",
+    "research/frontier/run_execute_35937602723.py:normalize_bound ignoring keys, bind_template, joint_compose adoption_value_template lines 619-680, candidate_families/observed_families, PC-HONEST-COST-SANITY all |rho|<0.20, honest_cost degenerate rho 0.0"
+  ],
+  "unresolved": [
+    "Whether joint 2-3 composition would still rescue mixed triple-channel if derived_context required alias inference (observed key != expected key, e.g., ApiKey observed vs Authorization expected) and correctness required key equality — the direct test of alias catalog leverage.",
+    "Whether alias catalog with genuine Jaccard>=0.6 merged classes (multi-member) would improve over identity mapping, and whether routing normalization is necessary for any task's success on a fixture where path versioning is task-relevant.",
+    "Live heterogeneous generalization: O(1) amortized $0.002-0.092 at f=10/100 vs O(MxN) browsing under honest sum-counter and calibrated ECE<=0.15 on imperfect accuracy remains untested; producer unresolved correctly notes live deferral.",
+    "Economics beyond modeled vector-ops: actual LLM token cost, latency, browser/network work, retrieval and verification falsifiability not measured on live hardware."
+  ]
+}

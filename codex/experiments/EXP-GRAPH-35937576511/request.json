@@ -1,0 +1,47 @@
+{
+  "base_sha": "2b29750986fe925ee8f2158dc00541a4de6c9c4f",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-24T00:15:41.389212+00:00",
+  "director_mandate": {
+    "agent_priors_used": [
+      "Long-horizon agents accumulate compounding planning errors and self-generated subproblems; retrieval diversity without verification amplifies false accepts even as recall improves \u2014 prior, not SPIDER evidence, motivates joint verify/freshness gating and UNKNOWN precision>=0.85 ECE<=0.15 before coverage claims",
+      "Path dependence plus salience causes local optima: re-optimizing same template family (add_to_cart, alias rewriting) yields diminishing information gain vs testing orthogonal mechanism class \u2014 prior justifies pivoting graph off 8th param pilot and frontier off 5th live compilation shootout",
+      "Amortized cost honest accounting (tokens+browser+retrieval+verification) is fragile to bijective proxies (n*3200, f*6.0 jitter) creating spurious |rho_shuffled|>0.20; sum-counter without jitter is required before any product-economics claim \u2014 prior explains repeated PRODUCT-ECON honest-cost MEASUREMENT_INVALID",
+      "Tool/API bypass typically dominates browsing on instrumented sites where OpenAPI/spec coverage >=70% \u2014 prior motivates testing MCP endpoint-catalog vs hierarchical vs compiled DSM-IR under same honest cost and correct-family gating, but spec coverage must be verified (>20% path-template delta) before live shootout is meaningful",
+      "Session/permission-correlated non-determinism where DOM_before correlates with latent environment state is the only untrapped falsifier for C-WEB-DYNAMICS after independent per-step noise correctly falsified at BC 0.004 bits \u2014 prior distinguishes correlated latent from independent observation noise"
+    ],
+    "allocation": {
+      "action": "PIVOT",
+      "claim_id": "C-FRESHNESS",
+      "cognitive_reset": true,
+      "comparative_reasoning": "Continuing the 9th identical add_to_cart param pilot has near-zero marginal information gain: kernel distill_parameterized fixes repeatedly fail same durability gates and 49 total exps show 0 end-to-end real-task transfer beyond synthetic POC SURVIVES. Within-store AX Jaccard semantic similarity alternative is lower leverage than freshness, which is prerequisite for any reuse to be safe. Delta-repair is BLOCKED pending runtime byte-preserving HIT-cache (960/9600) and cannot be tested until freshness detection works. Freshness staleness detection dominates on centrality, uncertainty, and product leverage.",
+      "dependencies": [
+        "C-MEAS-VALID",
+        "C-DELTA-REPAIR"
+      ],
+      "parent_handoff_disposition": "SUPERSEDE",
+      "question": "After 8 consecutive MEASUREMENT_INVALID WebArena-Verified v2 family holdout param-inherit pilots on identical single-family add_to_cart with failed kernel durability gates (grep/sha/diff, zero unsubstituted templates), does a controlled single-resource staleness probe \u2014 DOM token drift / endpoint param+header mutation / Cache-Control+ETag expiry on one resource only on a locally-hosted synthetic site with deterministic freshness signal \u2014 enable detection with TN>=0.85 (Wilson lower>0.75), false_accept<=0.10, UNKNOWN in [0.00,0.15] ECE<=0.15 vs no-guard baseline, measured with deterministic _matches verification and honest per-trajectory-reset sum counters (resolve+bind+verify+freshness+browser_steps, no jitter, no n*3200, |rho_shuffled|<0.20 within-f std>0) with 5000 family-stratified bootstrap trajectory-grouped CIs?",
+      "rationale": "C-FRESHNESS is neglected (1/15 recent) yet blocks all residual-novelty and product-econ gates (C-RESIDUAL-NOVELTY rho_novelty>=0.60, C-PRODUCT-ECON per_hit) and C-DELTA-REPAIR contamination bounds. Freshness orthogonality has failed stratified |r| TOST delta0.15 and TN 0.667 vs 0.85 due to confounded scheduling and header/body conflation. A minimal single-resource probe isolates staleness signal and UNKNOWN calibration without requiring distributed shared WAL, directly testing the next_gate session/token/DOM/endpoint drift with false-accept measurement. Success unblocks Graph and Product amortized economics; failure provides calibrated abstention baseline."
+    },
+    "cycle_id": "35937189245",
+    "lane": "graph",
+    "portfolio_assessment": "SPIDER at 309 canonical experiments is tunnel-locked and measurement-invalid across all 10 claims (80 MEASUREMENT_INVALID, 0 PRODUCT_CORE). All 6 lanes are tunnel-flagged with streaks 50/15/10/10/15: runtime 50x C-MEAS-VALID on same 48-cell HIT/oracle-tautological CDN matrix, frontier 15x C-SEMANTIC-RESOLVE live BrowserGym 1280x720 CDP AX shootout stuck at bounded 21/40=0.525 coverage 0/10 mixed ECE 0.26, graph 8/10 C-PARAM-INHERIT WebArena-Verified v2 add_to_cart pilot MEASUREMENT_INVALID on kernel durability gates (grep/sha/diff) never passing, intel 15x C-CROSSSITE longest-prefix AX_consistency bounded FALSIFIED on homepage/template (18/20 identical 1430-node CI [0.7,1.0] shuffle p1.0) with product-page hypothesis MEASUREMENT_INVALID due to 1/10 family sampling, physics 9/10 C-WEB-DYNAMICS Bayesian K12 on real TodoMVC log BF -10 to -15 nats favoring memory despite relative separation p0.0005, product 10/10 C-PRODUCT-ECON per_hit tautology via n*3200/f*6.0 (|rho_shuffled|>0.20) falsified at 1.0/1.57 vs RAG. Central promise \u2014 pay residual novelty not full task \u2014 never tested end-to-end because honesty (|rho_shuffled|<0.20 sum-counter), freshness (TN>=0.85, stratified |r|<0.15 TOST), and writable substrate remain invalid. Marginal value of another complex distributed WAL/nginx 800-stratified or live heterogeneous shootout is near zero until minimal single-node honesty, product-subtree SHA stability, and synthetic joint-composition gates pass. Global priority is reset to minimal discriminating tests with honest metrics that can unblock reuse economics, before authorizing infrastructure-heavy distributed/live claims.",
+    "schema_version": 1,
+    "scout_assessment": "Scout brief correctly diagnoses deep tunnel and measurement-invalid dominance (309 exps, 80 invalid, no product-core beyond synthetic ceilings) and that complex handoffs (1280x720 CDP AX, shared WAL nginx, O(1) compilation) precede base gates. Direction adopts Scout's core leverage reset: minimal single-node header-only Jaccard + oracle-free decode + honest sum-counter before distributed WAL; synthetic-only alias catalog + routing normalization joint composition rescuing 0/10 mixed to >=4/10 before live heterogeneous shootout; narrow intel to product-subtree SHA stability (families 136/145/196/222, expanded stripping, before==after/before!=after proofs) before WebGym 292k exhaustive sampling; pivot graph to neglected C-FRESHNESS staleness detection; pivot product to honest residual-novelty probe deciding per_hit vs M_total_f10 Pareto. Scout challenged where it recommended immediate PARK for physics: instead allocate one final low-cost synthetic correlated-latent CMI test (N>=4000 K24 trajectory-grouped, gap>=0.05 over similarity/Markov, |null_mean|<0.1) to close the locally-hosted path before PARK pending relaxed Gate0 H>0.1 NL>=20 production SPAs. WebGym 292k/MemoryArena/MCP competitive context retained as sampled holdout after product-subtree closure, not as immediate next experiment. Scout's broad reconnaissance was used; deep verification delegated to lanes."
+  },
+  "experiment_id": "EXP-GRAPH-35937576511",
+  "inherited_last_verdict": "MEASUREMENT_INVALID",
+  "inherited_next_question": "After durably committing src/spider/kernel.py distill_parameterized (single-prefix _common_prefix_and_suffix, distinct slot per field-path via _field_path_to_slot_name/_sanitize_slot, field-path relevance filter url/body.*/headers.* only via _is_allowed_path, Jaccard>=0.75 constant-anchor via _structure_similarity, confidence 0.90) verified by grep>=1, sha256 HEAD match, git diff base_sha 219d24aeddf5998da13c15e1ceb23636cf79910c..HEAD nonempty (and chain from 98b40ef4df6bac37548b4dbbbd823ccceaed35a1) and tests/test_kernel_param_inherit.py passing B1/B4/D1/E1/C2/B2/B3/B5, and loading WebArena-Verified v2 census from durable source (data/webarena_verified_v2.json pre-existing or Docker am1n3e/webarena-verified-shopping@sha256:3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb with pinned 64-char hash) with >=10 valid B tasks family-stratified zero-overlap (value_set_A intersect B = empty), does single-family add_to_cart pilot achieve EXECUTABLE>=0.75 (Wilson lower>=0.65) and binding correctness>=0.90 (lower>=0.80) with zero unsubstituted ${} templates via deterministic _matches, false_accept<=0.10 UNKNOWN in [0.00,0.15] ECE<=0.15 vs B-COLD/B-RAG/B-REPLAY-TERX/B-INSTR with family-stratified 5000-bootstrap CIs and honest tokens+browser+retrieval+verification amortized cost at f=10?",
+  "lane": "graph",
+  "origin_github_run_id": "35937576511",
+  "parent_handoff": {
+    "experiment_id": "EXP-GRAPH-35932480731",
+    "path": "research/experiments/EXP-GRAPH-35932480731/handoff.json",
+    "sha256": "6627d79217d86d0258c300e3cd1efde5c5e7d74b0c484b4d397ea0d225684b48"
+  },
+  "reason": "global-director-PIVOT",
+  "request_hash": "00c07a78491bcf20a8226b5c0e4c07b9f4cd089777b73771963fc42176828ae8",
+  "request_id": "8bd91abb36bb4f9452975abc",
+  "schema_version": 1
+}
