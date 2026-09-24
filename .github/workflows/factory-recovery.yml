@@ -25,6 +25,7 @@ jobs:
       - name: Recover latest failed strategic control cycle
         env:
           GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
         shell: bash
         run: |
           set -euo pipefail
