@@ -116,6 +116,10 @@ def main():
     prepare = text("scripts/prepare_lane.py")
     require("product promotion pending" in prepare and "promotion_ready" in prepare, "Product allocator must honor the promotion transaction latch")
     require("Global Research Director mandate required" in prepare and "director_mandate" in prepare, "NEW experiments must carry a Global Director mandate")
+    researcher = text(".opencode/agents/spider_lane_researcher.md")
+    packet_contract = text("research/EXPERIMENT_PACKET.md")
+    require("evidentiary scope" in researcher and "Director's target claim" in researcher, "researcher must preserve governed claim scope for substrate experiments")
+    require("evidentiary scope" in packet_contract and "MUST include the Director target claim" in packet_contract, "experiment packet must define governed claim_ids semantics")
 
     pulse = text(".github/workflows/factory-pulse.yml")
     require("SPIDER_CIRCUIT_OPEN" in pulse and "last_failure_control_revision" in pulse, "factory pulse lacks repeated-failure circuit breaker")
@@ -130,6 +134,10 @@ def main():
     direction_validator = text("scripts/validate_portfolio_allocation.py")
     require("tunnel continuation/allocation requires" not in direction_validator, "direction validator must not override Director judgment with tunnel quotas")
     require("SPIDER_SUPERSEDE_PREFREEZE" in pulse and "SPIDER_RESUME_FROZEN" in pulse, "factory pulse must distinguish pre-freeze redirection from frozen transaction completion")
+    require("ACTIVE_OLD_CLAIM" in pulse and "ACTIVE_OLD_QUESTION" in pulse, "prefreeze resume must compare strategic mandate identity")
+    snapshot_builder = text("scripts/build_portfolio_snapshot.py")
+    require('req.get("director_mandate")' in snapshot_builder, "portfolio snapshot must expose active Director mandates")
+    require('req.get("portfolio_allocation")' not in snapshot_builder, "snapshot must not use removed portfolio_allocation request key")
 
     promote = text(".github/workflows/product-promote.yml")
     require("git merge --no-commit --no-ff origin/lab2/product" not in promote, "Product workflow must never merge the whole research branch")

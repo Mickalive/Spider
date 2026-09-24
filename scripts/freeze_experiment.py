@@ -59,7 +59,8 @@ def main():
         target_claim = allocation.get("claim_id")
         if target_claim not in spec["claim_ids"]:
             raise SystemExit(
-                f"spec claim_ids {spec['claim_ids']} do not include Director target claim {target_claim}"
+                f"spec claim_ids {spec['claim_ids']} do not include Director target claim {target_claim}; "
+                "claim_ids records evidentiary scope even for substrate/measurement-only experiments"
             )
         if allocation.get("action") not in {"CONTINUE", "PIVOT", "REOPEN"}:
             raise SystemExit("Director mandate action does not authorize a new experiment")
