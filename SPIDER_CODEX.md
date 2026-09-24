@@ -4,7 +4,7 @@ Pre-2.0 canonical memory remains frozen at `archive/spider-codex-ultimate:SPIDER
 
 Canonical Research 2.0 evidence lives in `codex/experiments/<experiment_id>/`.
 Use `codex/index.json` and `codex/claim_state.json` to locate relevant packets; do not load all experiment bodies by default.
-Validated experiments: **316**. Coverage gaps: **0**. Quarantined packets: **1**.
+Validated experiments: **317**. Coverage gaps: **0**. Quarantined packets: **1**.
 
 ## Experiment index
 
@@ -322,6 +322,7 @@ Validated experiments: **316**. Coverage gaps: **0**. Quarantined packets: **1**
 | EXP-PRODUCT-35936223443 | product | PASS | MEASUREMENT_INVALID | C-PRODUCT-ECON | `e99b63e477c2` |
 | EXP-INTEL-35936227797 | intel | REVISE | MEASUREMENT_INVALID — H1 product-page within-store AX_consistency not tested (4 families <5 adequacy; full-page LCP 0.0 is representation artifact); no SURVIVES/FALSIFIED ceiling beyond substrate liveness | C-CROSSSITE | `e789a0513e48` |
 | EXP-GRAPH-35937576511 | graph | MEASUREMENT_INVALID | MEASUREMENT_INVALID | C-FRESHNESS | `43a03d3f739d` |
+| EXP-RUNTIME-35937588416 | runtime | MEASUREMENT_INVALID | MEASUREMENT_INVALID | C-MEAS-VALID | `2cfe9b903d2d` |
 | EXP-FRONTIER-35937602723 | frontier | REVISE | REVISE | C-SEMANTIC-RESOLVE | `5e2001367d5a` |
 | EXP-PHYSICS-35938359115 | physics | MEASUREMENT_INVALID | MEASUREMENT_INVALID | C-WEB-DYNAMICS | `79a2ee06118e` |
 | EXP-PRODUCT-35938367888 | product | PASS | MEASUREMENT_INVALID | C-PRODUCT-ECON | `1831e7ef4f04` |
@@ -337,7 +338,7 @@ These are chronological latest events, not an automatic truth ranking.
 | C-DELTA-REPAIR | BLOCKED | EXP-GRAPH-35860314278 | graph |
 | C-FRESHNESS | EXPERIMENTAL | EXP-GRAPH-35940399935 | graph |
 | C-LLM-INHERIT | HYPOTHESIS | EXP-PRODUCT-35797365772 | product |
-| C-MEAS-VALID | MEASUREMENT_INVALID | EXP-PHYSICS-35915247766 | physics |
+| C-MEAS-VALID | MEASUREMENT_INVALID | EXP-RUNTIME-35937588416 | runtime |
 | C-PARAM-INHERIT | MEASUREMENT_INVALID | EXP-GRAPH-35932480731 | graph |
 | C-PRODUCT-ECON | HYPOTHESIS | EXP-PRODUCT-35938367888 | product |
 | C-RESIDUAL-NOVELTY | HYPOTHESIS | EXP-PRODUCT-35938367888 | product |
