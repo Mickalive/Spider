@@ -7,11 +7,11 @@
   "continue_immediately": false,
   "next_question": "On a health-gated single-node HS256 sticky $request_uri If-None-Match/304 substrate (n>=800 non-304, TTL 60s max-age conditional probe with ETag W/body_sha ~50% stale at n=0.25 vs ~1.0 at n=0) plus Docker BrowserGym 0.14.3 2000-node 1280x720 real gpt-4o-mini 15-step tokens/browser_steps+latency with rho_proxy_real>=0.50 and per-stratum |rho_shuffled|<0.20 and |rho_length|<0.20, does honest M_total_f10 Pareto dominance (tokens vs browser+latency vs accuracy at f=10/100, 5000 family-stratified bootstrap + 5000 block-permutation) superseding the contested per_hit=(M_total_f10 - retrieval - distill/compile - auditor)/L <=0.85 (falsified 1.005>0.85 rho 0.363<0.60) achieve dominance vs RAG-EMBED TAU0.30 QCR, Stagehand selector-cache+TTL (2x speedup ~30% cost) and WebMCP Registry 714/2147 O(1) compilation (800/f amortized) and SGDR/AWM with verification-derived calibration false_accept<=0.10 UNKNOWN precision>=0.85 ECE<=0.15 bootstrap upper<=0.18 and ST-WebAgentBench safety, thereby formally testing PRODUCT_CORE gate?",
   "promotion_ready": false,
-  "consecutive_failures": 0,
-  "updated_at": "2026-09-24T04:06:21.811571+00:00",
-  "last_failure_retryable": null,
+  "consecutive_failures": 1,
+  "updated_at": "2026-09-24T04:25:27.247396+00:00",
+  "last_failure_retryable": false,
   "last_handoff_sha256": "202e61277460798dbae088b6c45b91977f21997a808a6aff5b4b033600f59e3a",
-  "same_failure_count": 0,
-  "last_failure_fingerprint": null,
-  "last_failure_control_revision": null
+  "same_failure_count": 1,
+  "last_failure_fingerprint": "32fb61131a26107aaf831564",
+  "last_failure_control_revision": "076dc77b91c1d12ea39cb22825d01d847c1810ff7d44ed432bd5b1813468f5ae"
 }
