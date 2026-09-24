@@ -1,0 +1,54 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-FRONTIER-36049636798",
+  "lane": "frontier",
+  "git_commit": "6f600ea0483a74554499186a93cfafc2e0579521",
+  "github_run_id": "36049636798",
+  "executed_at": "2026-09-24T19:49:20.342438Z",
+  "elapsed_seconds": 0.0005044937133789062,
+  "python_version": "3.12.14",
+  "numpy_version": "not_imported",
+  "environment": {
+    "browsergym_available": false,
+    "playwright_available": false,
+    "webgym_292k_exists": false,
+    "diverse_manifest_exists": false,
+    "runtime_wal_exists": false
+  },
+  "code_paths": [
+    "research/experiments/EXP-FRONTIER-36049636798/run_execute.py"
+  ],
+  "frozen_inputs": {
+    "request.json": "d614d4ad194ea9f19ea7af12764d8431c977471937ae1667398a0785d258c3a0",
+    "spec.json": "8b3ad05e346cf8da583c50905aebaf3e2dd4d9e9b0974cfc5e64135f4d66c49e",
+    "prereg.md": "098f9a6114faf1a2d8862cb84a66cdf16b6c8e304932af87a970130add396371",
+    "freeze.json": "abfcee9d1459aad58c78d6bd5a4d690c365c0b8da3cdb4700555440dff24b001"
+  },
+  "artifacts_produced": [
+    {
+      "path": "artifacts/substrate_diagnostic.json",
+      "sha256": "620d9d0d08c81b0fc1c9b1f35aba647e1bb4100d14aaa525d7917eb4201f5a9a",
+      "role": "raw"
+    }
+  ],
+  "substrate_diagnostic": {
+    "browsergym_available": false,
+    "browsergym_version": null,
+    "playwright_available": false,
+    "webgym_292k_exists": false,
+    "diverse_manifest_exists": false,
+    "manifest_families": 0,
+    "manifest_jaccard_mean": null,
+    "manifest_jaccard_max": null,
+    "runtime_wal_exists": false,
+    "heterogeneity_adequate": false,
+    "coverage_adequate": false,
+    "substrate_adequate": false,
+    "live_available": false
+  },
+  "diagnostic_mode": true,
+  "measurement_invalid_reason": "Required measurement substrate absent: BrowserGym/CDP, Intel WebGym 292k manifest (>=10 families Jaccard<0.30), Runtime WAL n_non304>=800 stratified. All positive controls NOT_RUN or FAIL, all null controls NOT_RUN.",
+  "prior_valid_evidence_preserved": [
+    "EXP-FRONTIER-36046077922 carry_forward.established: alias ceiling 21/40=0.525, residual-novelty non-Pareto falsified (EXP-FRONTIER-36042599040)"
+  ]
+}
