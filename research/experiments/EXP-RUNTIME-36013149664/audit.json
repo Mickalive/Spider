@@ -1,0 +1,57 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-36013149664",
+  "lane": "runtime",
+  "status": "MEASUREMENT_INVALID",
+  "producer_claim_supported": false,
+  "required_fixes": [
+    "Fix nginx health gate: nginx proxy at 19851 must successfully forward /health to Flask at 19860 and pass through X-Worker-Pid header. Current health gate fails (0/15 retries) despite Flask verified listening on 19860 via direct socket.",
+    "Verify nginx upstream proxy_pass configuration: proxy_pass http://127.0.0.1:19860; and add_header X-Worker-Pid $upstream_http_x_worker_pid; must actually deliver the header. Check nginx error logs at /tmp/spider-runtime/36013149664/nginx_error.log.",
+    "Ensure gunicorn wsgi:application factory pattern correctly serves /health endpoint with X-Worker-Pid header. The Flask /health returns jsonify({\"status\": \"ok\"}), 200, {\"X-Worker-Pid\": pid} but nginx may not be forwarding it.",
+    "Increase health gate timeout or add diagnostic logging: current 15s (30x0.5s) with missing>=3 failure threshold may be too aggressive for cold start. Log each attempt's status_code and headers to distinguish proxy failure from header stripping.",
+    "Confirm single nginx location / block does not conflict with health endpoint routing. The nginx config shows single location / block which should handle /health, but verify no rewrite rules interfere.",
+    "Re-run after health gate fix to collect n_non304>=800 stratified 400/endpoint, header-only Jaccard de-confounded |r|<0.30, honest-cost |rho_shuffled|<0.20 p>=0.20, full-vector discrimination >0.5 non-vacuous per frozen decision_rule"
+  ],
+  "validity_findings": [
+    "HEALTH_GATE_FAILED is an infrastructure/substrate failure, not a scientific falsification. Per EXPERIMENT_PACKET.md: 'infrastructure or substrate failure must never be encoded as scientific falsification.' The producer correctly reported status=MEASUREMENT_INVALID and outcome=INCONCLUSIVE.",
+    "No raw observations were collected (raw_freshness_observations.jsonl is 0 lines). All metrics in result.json are empty/zero because experiment terminated at Phase 0 health gate before any measurement phases executed.",
+    "Factory-pattern WSGI fix (wsgi.py sys.path.insert Path(__file__).parent, directory before init_db, gunicorn 'run_experiment:create_app()') is implemented in code and verified by V-FLASK-LISTENING PASS (Flask socket connect on 127.0.0.1:19860 succeeded).",
+    "NGINX_CONFIG-OK PASS confirms nginx -t syntax validation passed with single location / block (fixes prior duplicate location root cause from EXP-RUNTIME-36004383518).",
+    "HS256 secret length 62 bytes (>=32) and SHA256 logged in provenance.json. JWT decode at origin implemented in /api/auth-check endpoint.",
+    "Header-only Jaccard filter (MINUS {Content-Length,ETag,W-ETag,Content-Range} preserving Cache-Control/Set-Cookie/Vary) is implemented in headers_no_bodyderived() and filter_headers() functions.",
+    "Honest-cost sum counters (resolve+bind+verify+freshness+browser_steps per trajectory_id, block permutation B=1000) are implemented with grep bans for jitter/n*3200/f*6.0.",
+    "Full-vector fingerprint SHA256(status||decompressed_body||sorted_filtered_headers_no_bodyderived) with greedy decompression MAX_DEPTH5 is implemented.",
+    "Scheduling de-confounding (SEED=44, body_variant random independent of drift, Pearson/CramersV recompute) is implemented.",
+    "All validity gates except health gate are satisfied in code. The measurement transaction cannot complete without health gate passing."
+  ],
+  "baseline_findings": [
+    "B-FULL-VECTOR, B-BODY-ONLY, B-STATUS-ONLY, B-HEADER-ONLY-JACCARD, B-HEADER-HASH-REJECTED, B-COST-SHUFFLED, B-HEADERS-NO-BODYDERIVED: All baselines defined in spec.json and prereg.md but NOT EXECUTED because health gate failed before measurement phases. No baseline measurements exist to evaluate.",
+    "NC-ORTHOGONALITY-NOISE, NC-COST-SHUFFLED, NC-BROWSER-SAME-STATE-ANALOG, NC-HEADER-HASH-REJECTED, NC-FACTORY-REGRESSION: Null controls defined but not executed.",
+    "Positive controls PC-304-REAL, PC-HEADER-ONLY, PC-HONEST-COST-SANITY, PC-FULL-VECTOR: All require health gate pass to execute. PC-304-REAL specifically requires n_non304>=800 stratified which cannot be measured."
+  ],
+  "recomputed_metrics": {},
+  "claim_ceiling": "C-MEAS-VALID remains at EXPERIMENTAL (bounded to single-node localhost) with honesty gate UNRESOLVED. The 53-experiment MEASUREMENT_INVALID streak continues because health gate infrastructure failure prevents any validity assessment. No scientific claim about single-node honesty gate can be made from this run. Ceiling does not expand to 'single-node honest substrate EXPERIMENTAL' (per product_consequence_positive) because C1-C4 gates were never reached. Distributed/shared-WAL/sticky/HIT 330/330/browser hypotheses remain UNKNOWN.",
+  "evidence_refs": [
+    "research/experiments/EXP-RUNTIME-36013149664/request.json",
+    "research/experiments/EXP-RUNTIME-36013149664/spec.json",
+    "research/experiments/EXP-RUNTIME-36013149664/prereg.md",
+    "research/experiments/EXP-RUNTIME-36013149664/freeze.json",
+    "research/experiments/EXP-RUNTIME-36013149664/result.json",
+    "research/experiments/EXP-RUNTIME-36013149664/report.md",
+    "research/experiments/EXP-RUNTIME-36013149664/provenance.json",
+    "research/experiments/EXP-RUNTIME-36013149664/run_experiment.py",
+    "research/experiments/EXP-RUNTIME-36013149664/raw_freshness_observations.jsonl (empty)",
+    "research/experiments/EXP-RUNTIME-36013149664/execution_checkpoint.json",
+    "research/experiments/EXP-RUNTIME-36013149664/model_execute.json",
+    "research/experiments/EXP-RUNTIME-36013149664/model_audit.json"
+  ],
+  "unresolved": [
+    "Why nginx health gate fails despite Flask listening verified on 19860. Need nginx error/access logs to diagnose proxy_pass or header forwarding failure.",
+    "Whether the X-Worker-Pid header from Flask /health is being stripped by nginx or not set correctly. The health gate checks for this header via nginx on port 19851.",
+    "Whether gunicorn worker process correctly serves /health with X-Worker-Pid under factory pattern. The wsgi.py creates application = create_app(DB_PATH) but gunicorn may have worker initialization timing issues.",
+    "Whether the 15s health gate timeout with missing>=3 threshold is appropriate for cold start. The code sleeps 1s after nginx start before health gate.",
+    "Whether the single nginx location / block correctly handles /health without rewrite conflicts. Config shows proxy_cache spider; proxy_cache_key $request_uri; which should work for /health.",
+    "All C1-C4 primary metrics (n_non304, header-only orthogonality, honest-cost, full-vector discrimination) remain unmeasured and UNKNOWN.",
+    "Browser provisioning (secondary/disclosed) not attempted due to early termination."
+  ]
+}
