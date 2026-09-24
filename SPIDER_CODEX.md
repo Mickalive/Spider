@@ -4,7 +4,7 @@ Pre-2.0 canonical memory remains frozen at `archive/spider-codex-ultimate:SPIDER
 
 Canonical Research 2.0 evidence lives in `codex/experiments/<experiment_id>/`.
 Use `codex/index.json` and `codex/claim_state.json` to locate relevant packets; do not load all experiment bodies by default.
-Validated experiments: **326**. Coverage gaps: **0**. Quarantined packets: **1**.
+Validated experiments: **327**. Coverage gaps: **0**. Quarantined packets: **1**.
 
 ## Experiment index
 
@@ -336,6 +336,7 @@ Validated experiments: **326**. Coverage gaps: **0**. Quarantined packets: **1**
 | EXP-FRONTIER-35949576588 | frontier | REVISE | FALSIFIED-IN-SETTING | C-SEMANTIC-RESOLVE | `81206e58269f` |
 | EXP-PRODUCT-35951662423 | product | PASS | MEASUREMENT_INVALID | C-PRODUCT-ECON | `dac04e600f38` |
 | EXP-GRAPH-35952148696 | graph | PASS | SURVIVES_CURRENT_TEST | C-DELTA-REPAIR | `9ad0f50a5ba2` |
+| EXP-PHYSICS-35952152826 | physics | PASS | BLOCKED | C-WEB-DYNAMICS | `82498893ea12` |
 
 ## Latest recorded claim events
 
@@ -352,7 +353,7 @@ These are chronological latest events, not an automatic truth ranking.
 | C-PRODUCT-ECON | HYPOTHESIS | EXP-PRODUCT-35951662423 | product |
 | C-RESIDUAL-NOVELTY | HYPOTHESIS | EXP-PRODUCT-35949571341 | product |
 | C-SEMANTIC-RESOLVE | EXPERIMENTAL | EXP-FRONTIER-35949576588 | frontier |
-| C-WEB-DYNAMICS | HYPOTHESIS | EXP-PHYSICS-35938359115 | physics |
+| C-WEB-DYNAMICS | HYPOTHESIS | EXP-PHYSICS-35952152826 | physics |
 
 ## Integrity accounting
 
