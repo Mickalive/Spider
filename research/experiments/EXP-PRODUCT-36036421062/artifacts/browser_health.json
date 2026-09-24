@@ -1,0 +1,14 @@
+{
+ "experiment_id": "EXP-PRODUCT-36036421062",
+ "playwright_version": "1.44.0",
+ "playwright_expected_frozen": "1.63.0",
+ "playwright_launch": "FAILED: BrowserType.launch: Executable doesn't exist at /home/runner/.cache/ms-playwright/chromium-1117/chrome-linux/chrome\n\u2554\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2557\n\u2551 Looks like Playwright was just installed or updated.       \u2551\n\u2551 Please run the following command to download new browsers: \u2551\n\u2551                                                            \u2551\n\u2551     playwright install                                     \u2551\n\u2551                                                            \u2551\n\u2551 <3 Playwright Team                                         \u2551\n\u255a\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u255d",
+ "playwright_ax_nodes_synthetic_60node_dom": null,
+ "playwright_ax_gt_10": null,
+ "browsergym_docker_image_present": false,
+ "rho_proxy_real": null,
+ "rho_proxy_real_note": "NULL: OPENAI_API_KEY absent; no real LLM tokens measurable",
+ "safety_CuP": null,
+ "safety_note": "NULL: ST-WebAgentBench instrumentation requires live BrowserGym pages + LLM",
+ "scope": "supplementary honesty signal only; does NOT satisfy frozen MV6 Docker BrowserGym 0.14.3 2000-node CDP getFullAXTree requirement"
+}

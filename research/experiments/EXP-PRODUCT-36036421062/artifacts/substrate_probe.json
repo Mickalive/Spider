@@ -1,0 +1,82 @@
+{
+ "experiment_id": "EXP-PRODUCT-36036421062",
+ "via": "nginx 127.0.0.1:18930 hash $request_uri -> gunicorn :18929",
+ "endpoints": [
+  "ep-a",
+  "ep-b"
+ ],
+ "gate": "n_non304>=360 stratified >=180/endpoint",
+ "n_non304_stratified": {
+  "ep-a": 200,
+  "ep-b": 200
+ },
+ "n_non304_total": 400,
+ "n_304_stratified": {
+  "ep-a": 3,
+  "ep-b": 3
+ },
+ "n_requests": 406,
+ "if_none_match_exercised_requests": 406,
+ "if_none_match_exercised_fraction": 1.0,
+ "errors": 0,
+ "stratified_pass": true,
+ "probe_correlated": {
+  "n0_hit_rate_304": 1.0,
+  "n0_total": 150,
+  "n025_accuracy": 1.0,
+  "n025_stale_fraction": 0.5,
+  "n025_false_accept_rate": 0.0,
+  "TN_fresh": 1.0,
+  "n025_probe_tokens_sum": 4500,
+  "n025_full_counterfactual_tokens": 7500,
+  "n025_token_saving_vs_full": 0.4,
+  "n025_fresh": 75,
+  "n025_stale": 75,
+  "total": 150
+ },
+ "probe_random_seed42": {
+  "accuracy": 0.5933333333333334,
+  "false_accept_rate": 0.20666666666666667,
+  "total": 150,
+  "note": "balanced fresh/stale coin with Random(42); expected accuracy ~0.5"
+ },
+ "probe_correlated_delta_vs_random": 0.4066666666666666,
+ "TN_contrast_sticky_vs_direct": {
+  "sticky_nginx": {
+   "fresh_correct": 60,
+   "total": 60,
+   "TN": 1.0
+  },
+  "direct_gunicorn": {
+   "fresh_correct": 60,
+   "total": 60,
+   "TN": 1.0
+  }
+ },
+ "nginx_sticky_log_lines": 1053,
+ "nginx_sticky_sample": [
+  "/api/token upstream=127.0.0.1:18929 status=200",
+  "/api/token upstream=127.0.0.1:18929 status=200",
+  "/api/ep-a/res-ep-a-0 upstream=127.0.0.1:18929 status=200",
+  "/api/ep-a/res-ep-a-0 upstream=127.0.0.1:18929 status=304",
+  "/api/ep-a/res-ep-a-1 upstream=127.0.0.1:18929 status=200"
+ ],
+ "nginx_upstream_set": [
+  "127.0.0.1:18929"
+ ],
+ "sqlite": {
+  "journal_mode": "wal",
+  "n_log": 1096,
+  "n_200": 745,
+  "n_304": 351,
+  "n_inm_logged": 1096,
+  "distinct_worker_pids": [
+   51939
+  ],
+  "jwt_algs": [
+   "HS256"
+  ],
+  "path": "/tmp/spider-runtime/shared.db",
+  "single_worker": true
+ }
+}
