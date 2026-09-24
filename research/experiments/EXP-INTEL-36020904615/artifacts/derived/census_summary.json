@@ -1,0 +1,129 @@
+{
+ "experiment_id": "EXP-INTEL-36020904615",
+ "primary": {
+  "total_tasks": 812,
+  "shopping_tasks": 192,
+  "families_ge3_shopping": 36,
+  "product_page_families": [
+   136,
+   145,
+   196,
+   222
+  ],
+  "product_page_tasks": 21,
+  "manifest_sha256": "d65275660814663375028e9017e1f929e3c38321041b125795e2713b52243d30"
+ },
+ "hard258": {
+  "total_tasks": 258,
+  "shopping_tasks": 61,
+  "families_ge3_shopping": 11,
+  "families_ge3_ids": [
+   101,
+   136,
+   139,
+   145,
+   154,
+   155,
+   160,
+   169,
+   191,
+   194,
+   208
+  ],
+  "product_page_families": [
+   136,
+   145
+  ],
+  "product_page_tasks": 6
+ },
+ "hard258_gates": {
+  "total_ge_200": true,
+  "families_ge3_ge_10": true,
+  "task_ids_subset_of_base": true
+ },
+ "samples": {
+  "primary": {
+   "S1": [
+    191,
+    180,
+    162,
+    197,
+    153,
+    213,
+    163,
+    137,
+    136,
+    222
+   ],
+   "S2": [
+    191,
+    180,
+    162,
+    197,
+    153,
+    213,
+    163,
+    137,
+    136,
+    222
+   ],
+   "equal": true,
+   "sample_product_page_families": [
+    136,
+    222
+   ]
+  },
+  "hard258": {
+   "S1": [
+    155,
+    154,
+    145,
+    160,
+    194,
+    101,
+    191,
+    208,
+    169,
+    136
+   ],
+   "S2": [
+    155,
+    154,
+    145,
+    160,
+    194,
+    101,
+    191,
+    208,
+    169,
+    136
+   ],
+   "equal": true,
+   "sample_product_page_families": [
+    136,
+    145
+   ]
+  }
+ },
+ "union_sample_product_page_families": [
+  136,
+  145,
+  222
+ ],
+ "pc_d": {
+  "experiment_id": "EXP-INTEL-36020904615",
+  "control_id": "PC-D",
+  "fixture_task_count": 6,
+  "families_ge3": 2,
+  "families_ge3_ids": [
+   901,
+   902
+  ],
+  "product_page_families": [
+   901,
+   902
+  ],
+  "pass": true,
+  "expected": "families_ge3 >= 2 on fixture data"
+ }
+}

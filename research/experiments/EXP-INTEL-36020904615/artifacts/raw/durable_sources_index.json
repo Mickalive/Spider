@@ -1,0 +1,16 @@
+{
+ "experiment_id": "EXP-INTEL-36020904615",
+ "hf_token_present": false,
+ "gh_token_present": true,
+ "timeout_configured_s": 300,
+ "files": [
+  "docker_hub_api_attempts.json",
+  "docker_pull_attempts.json",
+  "ghcr_browsergym_attempts.json",
+  "github_cross_source_attempts.json",
+  "hf_hard258_attempts.json",
+  "hf_manifest_attempts.json",
+  "hf_webgym_manifest_attempts.json",
+  "docker_pull_attempts.json"
+ ]
+}

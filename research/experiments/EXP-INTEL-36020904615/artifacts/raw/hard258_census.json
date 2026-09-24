@@ -1,0 +1,85 @@
+{
+ "census_label": "hard258_slice_derived_from_pinned_base",
+ "total_tasks": 258,
+ "first_site_counts": {
+  "shopping_admin": 55,
+  "shopping": 61,
+  "reddit": 50,
+  "gitlab": 73,
+  "map": 3,
+  "wikipedia": 16
+ },
+ "shopping_tasks": 61,
+ "families_ge3_shopping": 11,
+ "families_ge3_ids": [
+  101,
+  136,
+  139,
+  145,
+  154,
+  155,
+  160,
+  169,
+  191,
+  194,
+  208
+ ],
+ "family_size_histogram": {
+  "3": 10,
+  "5": 1
+ },
+ "families_ge3_all_sites_count": 50,
+ "product_page_families": [
+  136,
+  145
+ ],
+ "product_page_tasks": 6,
+ "family_product_urls": {
+  "136": [
+   "http://localhost:7770/ostent-16gb-memory-card-stick-storage-for-sony-ps-vita-psv1000-2000-pch-z081-z161-z321-z641.html",
+   "http://localhost:7770/sandgrens-swedish-handmade-wooden-clog-sandal-copenhagen.html",
+   "http://localhost:7770/sensodyne-repair-protect-whitening-toothpaste-with-fluoride-3-4-oz-pack-of-3.html"
+  ],
+  "145": [
+   "http://localhost:7770/tall-pink-taper-candles-4-piece-orange-colored-tapered-candles-gradient-candles-10-6-inches-tall-tie-dye-candle-set-large-dripless-long-burning-candlesticks-two-color-taper-candles-candlesticks.html",
+   "http://localhost:7770/spaas-white-taper-candles-4-pack-10-inch-tall-candles-scent-free-premium-wax-candle-sticks-8-hour-long-burning-white-candlesticks-for-home-decoration-wedding-holiday-and-parties.html",
+   "http://localhost:7770/white-starfish-wall-candle-sconces-set-of-2-beach-decor-ocean-themed-wall-mount-candleholders-nautical-style-beach-bathroom-decor-coastal-farmhouse-seashell-candle-holders.html",
+   "http://localhost:7770/ciclon-energy-drink-regular-24-cans-8-3oz.html",
+   "http://localhost:7770/v8-energy-healthy-energy-drink-steady-energy-from-black-and-green-tea-pomegranate-blueberry-8-ounce-can-pack-of-24.html",
+   "http://localhost:7770/35-ft-hdmi-cable-gearit-pro-series-hdmi-cable-35-feet-high-speed-ethernet-4k-resolution-3d-video-and-arc-audio-return-channel-hdmi-cable-white.html",
+   "http://localhost:7770/dp-to-hdmi-cable-6ft-2-pack-fosmon-gold-plated-displayport-to-hdmi-cable-1080p-full-hd-for-pcs-to-hdtv-monitor-projector-with-hdmi-port.html"
+  ]
+ },
+ "family_start_urls": {
+  "101": "http://localhost:7770/",
+  "136": "http://localhost:7770/ostent-16gb-memory-card-stick-storage-for-sony-ps-vita-psv1000-2000-pch-z081-z161-z321-z641.html",
+  "139": "http://localhost:7770/",
+  "145": "http://localhost:7770/tall-pink-taper-candles-4-piece-orange-colored-tapered-candles-gradient-candles-10-6-inches-tall-tie-dye-candle-set-large-dripless-long-burning-candlesticks-two-color-taper-candles-candlesticks.html",
+  "154": "http://localhost:7770/",
+  "155": "http://localhost:7770/",
+  "160": "http://localhost:7770/",
+  "169": "http://localhost:7770/",
+  "191": "http://localhost:7770/",
+  "194": "http://localhost:7770/",
+  "208": "http://localhost:7770/"
+ },
+ "experiment_id": "EXP-INTEL-36020904615",
+ "hard_filter_provenance": {
+  "upstream_file": "ServiceNow/WebArena-Verified assets/dataset/webarna-verfied-hard.json (upstream typo preserved)",
+  "fetched_this_experiment": true,
+  "fetch_attempts": "artifacts/raw/github_cross_source_attempts.json (2 genuine attempts, HTTP 200, timeout 300s configured)",
+  "upstream_sha256": "4fccaef496870558a0c65ae97c7350c625b498688df87051afd254db7899a76f",
+  "upstream_bytes": 516731,
+  "upstream_task_count": 258,
+  "task_ids_present_in_pinned_base": 258,
+  "task_ids_missing_from_pinned_base": [],
+  "field_differences_vs_base": {
+   "eval": 258
+  },
+  "derivation": "Hard258 slice = pinned base tasks (SHA d6527566...) whose task_id appears in the upstream hard file; only the `eval` evaluator schema differs between upstream hard file and base, all task-defining fields (sites/start_urls/intent/template) are identical, so the slice is a byte-identical hard subset of the durable pin.",
+  "difficulty_definition": "upstream `hard` dataset partition (webarna-verfied-hard.json), NOT a locally invented hardness heuristic; documented filter = membership in upstream hard file intersected with the pinned 812 manifest."
+ },
+ "hard_slice_sha256_of_canonical_json": "a10b9cd2f9c2750fff7f436bde7de7490d3969cd56bbdfc35d05c07d23805e73",
+ "manifest_sha256_base": "d65275660814663375028e9017e1f929e3c38321041b125795e2713b52243d30",
+ "hf_hard258_status": "UNAVAILABLE_HF_401 (2 genuine attempts logged); GitHub raw used as documented fallback"
+}

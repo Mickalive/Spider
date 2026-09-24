@@ -1,0 +1,38 @@
+{
+ "experiment_id": "EXP-INTEL-36020904615",
+ "viewport": "1280x720",
+ "ax_mode": "CDP Accessibility.getFullAXTree",
+ "records_total": 37,
+ "errors": [],
+ "product_page_captures": 18,
+ "homepage_captures": 16,
+ "pc_a_captures": 3,
+ "canonical_product_captures": 18,
+ "ax_nodes_median_canonical": 717,
+ "ax_nodes_min_canonical": 627,
+ "dom_bytes_median_canonical": 203748,
+ "dom_bytes_min_canonical": 195052,
+ "canonical_sha_identical_all": true,
+ "canonical_sha_mutation_changed_all": true,
+ "canonical_dual_impl_digest_match_all": true,
+ "pc_a_ax_nodes_median": 18,
+ "pc_a_dom_bytes_median": 384,
+ "pc_a_sha_identical_all": true,
+ "pc_a_sha_mutation_changed_all": true,
+ "pc_a_anchors_gt1_all": false,
+ "constructible_families": [
+  "fam136",
+  "fam145",
+  "fam196",
+  "fam222"
+ ],
+ "constructible_count": 4,
+ "mv4_constructible_gate_10": false,
+ "grammar_hash_live_last": "273eafbcb817e8981f843581a724594665cabdd357b318c701251929ee9c83de",
+ "settings": {
+  "viewport": "1280x720",
+  "browser": "chromium",
+  "ax_mode": "CDP Accessibility.getFullAXTree",
+  "stripping": "body DOTALL + 9 base + expanded"
+ }
+}

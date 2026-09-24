@@ -1,0 +1,23 @@
+{
+ "harness_path": "research/intel/exp_35999366789_blind_harness.py",
+ "harness_sha256": "b11ea9700c7190f1fb7ef6f169af1f5da4d04dd6d52ae631376cc3c51f59ff21",
+ "harness_expected_sha256": "b11ea9700c7190f1fb7ef6f169af1f5da4d04dd6d52ae631376cc3c51f59ff21",
+ "harness_byte_identity": true,
+ "harness_out_redirected_only": true,
+ "stagehand_id": "B-STAGEHAND-SELECTOR",
+ "stagehand_nostrip_id": "B-STAGEHAND-SELECTOR-NOSTRIP",
+ "expanded_set": [
+  "form_key",
+  "uenc",
+  "store",
+  "session",
+  "nonce"
+ ],
+ "rows_total": 409,
+ "rows_stagehand_post": 41,
+ "rows_stagehand_pre": 41,
+ "hit_post_strip_40": 0.775,
+ "hit_pre_strip_40": 0.0,
+ "lift": 0.775,
+ "synthetic_fixture_sha256": "6f42bc82cb1b6fb292320200ab0beb46694ceb260f16dd44d38e489ad9089205"
+}

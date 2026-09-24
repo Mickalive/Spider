@@ -1,0 +1,117 @@
+{
+ "M_STAGEHAND_HIT_POST_STRIP": {
+  "ci_lower": 0.625,
+  "ci_upper": 0.9,
+  "hit_rate": 0.775,
+  "hits": 31,
+  "n": 40,
+  "variance": 0.1788
+ },
+ "M_STAGEHAND_HIT_PRE_STRIP": {
+  "ci_lower": 0.0,
+  "ci_upper": 0.0,
+  "hit_rate": 0.0,
+  "hits": 0,
+  "n": 40,
+  "variance": 0
+ },
+ "M_STAGEHAND_LIFT": 0.775,
+ "control_id": "NC4",
+ "coverage_post": {
+  "ci_lower": 0.3,
+  "ci_upper": 0.625,
+  "ci_width": 0.325,
+  "coverage": 0.475,
+  "degenerate": false,
+  "n": 40,
+  "variance": 0.2558
+ },
+ "expanded_set": [
+  "form_key",
+  "uenc",
+  "store",
+  "session",
+  "nonce",
+  "fotorama\\d{6,}"
+ ],
+ "experiment_id": "EXP-INTEL-36020904615",
+ "gates": {
+  "hit_post_ge_0.80": false,
+  "lift_ge_0.40": true,
+  "nc4_delta_ge_0.40": true,
+  "nc4_pre_lt_0.50": true,
+  "pre_lt_0.40": true
+ },
+ "per_channel_family": {
+  "auth_param": {
+   "post": {
+    "coverage": 0.2,
+    "hit": 1.0,
+    "n": 10
+   },
+   "pre": {
+    "coverage": 0.9,
+    "hit": 0.0,
+    "n": 10
+   }
+  },
+  "body_param": {
+   "post": {
+    "coverage": 0.8,
+    "hit": 0.7,
+    "n": 10
+   },
+   "pre": {
+    "coverage": 0.8,
+    "hit": 0.0,
+    "n": 10
+   }
+  },
+  "header_param": {
+   "post": {
+    "coverage": 0.5,
+    "hit": 1.0,
+    "n": 10
+   },
+   "pre": {
+    "coverage": 0.7,
+    "hit": 0.0,
+    "n": 10
+   }
+  },
+  "mixed_multi_channel": {
+   "post": {
+    "coverage": 0.4,
+    "hit": 0.4,
+    "n": 10
+   },
+   "pre": {
+    "coverage": 0.2,
+    "hit": 0.0,
+    "n": 10
+   }
+  }
+ },
+ "per_channel_label": {
+  "auth": {
+   "coverage": 0.2,
+   "hit": 1.0,
+   "n": 10
+  },
+  "body": {
+   "coverage": 0.8,
+   "hit": 0.7,
+   "n": 10
+  },
+  "header": {
+   "coverage": 0.5,
+   "hit": 1.0,
+   "n": 10
+  },
+  "header-body-auth": {
+   "coverage": 0.4,
+   "hit": 0.4,
+   "n": 10
+  }
+ }
+}
