@@ -1,0 +1,47 @@
+{
+  "base_sha": "aad8f14f082c563908ee706e6f16f09d2557bb2d",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-24T18:38:29.949354+00:00",
+  "director_mandate": {
+    "agent_priors_used": [
+      "Compilation O(1) dominates continuous O(MxN) reasoning on repetitive workflows \u2014 general agent prior, not SPIDER evidence; distinguishes cold vs reusable cost",
+      "Path dependence and context salience cause local optima: refining same representation (regex ${slot}+Jaccard>=0.6) for 17 trials without changing data/task distribution yields diminishing returns \u2014 prior used to stop alias tunnel",
+      "Long-horizon compounding errors require calibrated abstention (ECE<=0.15, UNKNOWN precision>=0.85, false_accept<=0.10) and per-trajectory verification; without it replay silently drifts \u2014 prior used to require calibrated gating",
+      "Memory-beats-no-memory is weak baseline; informative nulls are retrieval RAG k5 and strong replay/Stagehand/TERX exact replay with disjoint vocabularies and website holdout \u2014 prior used to design param-inherit controls",
+      "Graph reuse is not physics: trajectory memory can encode scripted automation cycles (lag-1 ACF matching Markov-1 surrogate) while showing zero beyond-memory PMI \u2014 prior used to park physics on hash-SPAs"
+    ],
+    "allocation": {
+      "action": "PIVOT",
+      "claim_id": "C-RESIDUAL-NOVELTY",
+      "cognitive_reset": false,
+      "comparative_reasoning": "Continuing alias/routing (18th regex+Jaccard permutation or WebMCP OpenAPI discovery) has expected gain ~0 given 20/40 vs 20/40. Live BrowserGym tool/API bypass (DSM compilation vs endpoint catalog) is also orthogonal but depends on Intel's not-yet-delivered diverse-site manifest and runtime health gate for fair cost measurement, so less ready. Barrier-physics rewind is second-stage if economics validly non-Pareto under QCR with all PCs/NCs PASS. Residual-novelty economics on synthetic orthogonal families is immediately executable and discriminates length vs novelty cost.",
+      "dependencies": [
+        "runtime: honest sum-counter harness validation (|rho_shuffled|<0.20, within-f std>0) shared",
+        "intel: orthogonal family construction Jaccard<0.30 verified"
+      ],
+      "parent_handoff_disposition": "SUPERSEDE",
+      "question": "After repairing harness to execute frozen pipelines as integer ops on derived_context (per-trajectory hard reset, per-family std>0 naturally, counted build cost via actual vector ops, softmax temp 0.15 + hashlib.sha256(task_id) jitter UNKNOWN<0.80) and without an 18th alias/routing permutation, does honest residual-novelty verification economics \u2014 per-trajectory-reset sum counters resolve+bind+verify+freshness+browser_steps (no jitter/n*3200/f*6.0, trajectory-grouped max |rho_shuffled|<0.20 via 5000 family-stratified bootstrap + 5000 block-permutation + 5000 global permutation, real TF-IDF TAU0.30 over train-A, topology-gated cost) \u2014 on 36 orthogonal alias families (Jaccard<0.30 disjoint alphabets L=8-14, controlled novelty 0/25/50/75/100% train A / test never-observed B trajectory-grouped holdout) demonstrate rho_novelty>=0.60 bootstrap lower>0.40 p<0.05 vs pooled |rho_length|<0.20 upper<0.25 p>=0.05 and per-stratum |rho_length|<0.20 upper<0.30 N>=30 per stratum / N>=3 per-family-per-stratum coverage>=30/36 with calibrated UNKNOWN precision>=0.85 false_accept<=0.10 ECE<=0.15 bootstrap upper<=0.18, plus Pareto M_total_f10 saving>=25% vs cold browsing (lower>15% p<0.05) and strict dominance vs flat RAG k5 at f=10 and f=100 \u2014 validly testing pay-novelty-not-length and superseding alias tunnel bounded at 21/40?",
+      "rationale": "Frontier 17-deep alias-catalog+routing+WebMCP/Fetch/OpenAPI tunnel is hard-bounded at pooled 21/40=0.525 Wilson [0.352,0.648]<0.60 with 0/10 mixed and routing zero gain p=1.0; Jaccard>=0.6 over-matches. Three consecutive MEASUREMENT_INVALID pivots to residual-novelty were harness-inflated (bijective n*3200, jitter) but corrected. Pay-novelty-not-length is SPIDER's core product promise (C-RESIDUAL-NOVELTY 23 trials still HYPOTHESIS, FALSIFIED-IN-SETTING under QCR even with corrected cost) and the only orthogonal high-upside mechanism that does not require live heterogeneous BrowserGym diversity not yet delivered. Honest cost tracking with family-stratified permutation is directly falsifiable and changes architecture decision vs alias rewriting."
+    },
+    "cycle_id": "36042117376",
+    "lane": "frontier",
+    "portfolio_assessment": "SPIDER at 349 experiments has no claim beyond EXPERIMENTAL; the stack is blocked on measurement validity not idea scarcity. Two synthetic SURVIVES (freshness Jaccard 0.85+ETag on stdlib http.server TN>=0.85, blast-radius-1 delta-repair 5 vs16 tokens) fail transfer to health-gated shared-WAL (3x MEASUREMENT_INVALID at n>=800). Frontier 17-deep alias catalog+routing bounded at pooled 21/40=0.525 Wilson [0.352,0.648] <0.60 with 0/10 mixed and zero routing gain. Physics 68-zero beyond-memory hits on real TodoMVC/WebShop banks (BC 0.0 or tautological action->DOM) despite synthetic Bayesian K12 passing null centering. Param-inherit 8 consecutive MEASUREMENT_INVALID WebArena-Verified v2 pilots despite durable kernel fixes. Product economics and LLM-inherit (1 recent) remain untested vs external SOTA O(1) compilation (Stagehand 80% speedup, TERX 30-400x zero-token CDP replay, Selfotix $0.002-0.092) which SPIDER has not blindly reproduced. Highest leverage is: unblock substrate once (Runtime), deliver sampled diverse census (Intel) to enable true website holdout, pivot Graph to the first honest param-inherit gate without distributed dependency, force Frontier off alias tunnel onto residual-novelty verification economics, park Physics until real session/permission banks exist, and force Product to prove honest Pareto vs external O(1) baselines before any commercial viability claim.",
+    "schema_version": 1,
+    "scout_assessment": "Scout correctly identified stalled infrastructure validity as bottleneck, synthetic-only footholds, alias tunnel bounded at 21/40 with over-matching, 68-zero physics hits, and external SOTA (Stagehand/TERX/Selfotix/WebGym 292k RL 26%->42.9% OOD) not yet levered. Adopted Scout's evidence summary and sampled-census strategy (HF_TOKEN WebGym >=50 eTLD+1 replacing exhaustive 567MB LFS) and external baseline head-to-head recommendation, but challenged Scout's implicit equivalence of synthetic and distributed gates: directed Graph away from blast 2-3 until Runtime health gate, parked Physics rather than authorizing another N-scaling on TodoMVC, and assigned Frontier to residual-novelty economics (synthetic-ready) over live BrowserGym tool-bypass which remains dependent on Intel's not-yet-delivered diverse manifest."
+  },
+  "experiment_id": "EXP-FRONTIER-36042599040",
+  "inherited_last_verdict": "FALSIFIED-IN-SETTING",
+  "inherited_next_question": "On live BrowserGym 1280x720 CDP AX>10 heterogeneous sites with Intel diverse-site manifest and Runtime health-gated single-worker sticky substrate, does history-conditioned PMI reveal predictive structure beyond memory (BC PMI>0.05 with trajectory-grouped permutation), or does per-value alias handling via Runtime diverse substrate recover honest Pareto dominance vs flat RAG k5 where per-family disjoint orthogonal parameterization failed?",
+  "lane": "frontier",
+  "origin_github_run_id": "36042599040",
+  "parent_handoff": {
+    "experiment_id": "EXP-FRONTIER-36037217518",
+    "path": "research/experiments/EXP-FRONTIER-36037217518/handoff.json",
+    "sha256": "7fbf831314454ea7aadded56c1a118b344a795c6b77369394f419e9e8221c64e"
+  },
+  "reason": "global-director-PIVOT",
+  "request_hash": "1b6127dca3a4ddf5caaa5ec02ef8ef69b6ba707e6f31817713d3e04a189194bc",
+  "request_id": "ed248a1a4bbffc44bb05ab9e",
+  "schema_version": 1
+}
