@@ -1,0 +1,138 @@
+{
+  "experiment_id": "EXP-GRAPH-35952148696",
+  "lane": "graph",
+  "github_run_id": "35952148696",
+  "github_run_attempt": 1,
+  "pre_execute_sha": "c71b2bc66dff111c9879d48556f285079a38f787",
+  "post_execute_sha": null,
+  "frozen_hashes": {
+    "request.json": "69caac9a5a4a98c9bbcd97c81567cc0af07e9966e0914216764be21ce5f3f3ea",
+    "spec.json": "26925d904768e36373e66ded9184490ed0f7bf9e515bb9391c12c7fe70496390",
+    "prereg.md": "8448a8146960e8514fa980aa7074053a7b7e402a058d3817a16774d31394ae8e",
+    "freeze.json": "0a3d78857e90394db65d83144b1646879832abbc3dd993b8da38bc83a11cd2c5"
+  },
+  "code_paths": [
+    "research/graph/delta_repair/execute_delta_repair_synthetic_35952148696.py",
+    "src/spider/kernel.py",
+    "src/spider/registry.py",
+    "src/spider/models.py"
+  ],
+  "code_hashes": {
+    "research/graph/delta_repair/execute_delta_repair_synthetic_35952148696.py": "c756409508f7470e58e7927cec2969273a85990453dce9f02244932e64033424",
+    "src/spider/kernel.py": "46929b3a951df48d7f9d1fd850871073c0d91c1868aa117e13d389fe274e8d61"
+  },
+  "datasets_fixtures": [
+    "synthetic stdlib http.server flat-JSON single-resource /resource/{id} on 127.0.0.1 ephemeral port, no external network, deterministic ETag SHA256(canonical_json_without_template)[:16] + Cache-Control max-age",
+    "workload harmonized 360 evaluated (180 fresh 12x15 +30 stale 3 families x2x10 DRIFT_POINT=6 =>5+5 per traj 10 per family +150 noise 15x10) =390 executed with 30 auxiliary pre-drift fresh pooled 240 stale_rate 0.125 evaluated 0.1428 both within [0.00,0.18]∩[stale_rate±0.07]",
+    "drift families orthogonal single-resource: dom_drift Jaccard 0.60-0.75 via id int->str+phone, param_header_mutation _template detail->uid + X-Csrf-Token abc123->xyz789 response-derived, cache_expiry ETag+max-age 60->0, blast radius=1",
+    "noise families 150 churn (phone p0.3, nickname p0.3, email null p0.2+phone) for NC-NOISE-IMMUNITY",
+    "unrelated mechanisms N=20 disjoint ids 9000-9019 for contamination re-verification via registry clone snapshot isolation"
+  ],
+  "environment": {
+    "python_version": "3.12.14",
+    "platform": "linux",
+    "no_docker": true,
+    "no_browser": true,
+    "no_llm_api": true,
+    "stdlib_only": true,
+    "seeds": {
+      "server_ephemeral_port": true,
+      "rho_perms": 42,
+      "bootstrap": 123,
+      "perm_null": 999,
+      "retrieval_hash": "deterministic hashlib per instance via traj_id+req_num"
+    },
+    "cost_model": "honest per-trajectory-reset constant integer sum-counter resolve1+bind1+verify1+freshness1=4 base fresh 5 repair (1 deterministic re-observe probe browser 0/1) retrieval 1 token 0 browser, no jitter/n*3200/f*6.0/parity, trajectory-grouped max|rho|<0.20 1000 whole-trajectory-block perms, 5000 family-stratified trajectory-grouped bootstrap",
+    "verification": "deterministic src/spider/kernel.py _matches required_slots filtered without _template exact equality, binary AUROC/precision/recall at frozen 0.85 TRAIN 18 TEST 12 split, permutation-shuffled null 1000 perms unclamped"
+  },
+  "commands": [
+    "python research/graph/delta_repair/execute_delta_repair_synthetic_35952148696.py"
+  ],
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-GRAPH-35952148696/raw_evidence/bootstrap_ci.json",
+      "sha256": "0e27503801e22f956cb1ad3bfe7e1ef7a6b7a18adf1e1bdfd644720cae2806f0",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-35952148696/raw_evidence/contamination_logs.json",
+      "sha256": "a46f86fadc249709b4095a9c4db94758b16af1254a6cbe5d1f5135cf3e4768df",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-35952148696/raw_evidence/cost_logs.json",
+      "sha256": "bb347eb50ef050d29dda22c04de0f84d988cb9324a8b240d3b967dec3dd0b870",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-35952148696/raw_evidence/decision.json",
+      "sha256": "d1d1548e0912a9a1f96187d89e60babad6ccc14630539105b5f8e19d83723fdc",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-35952148696/raw_evidence/distributed_metrics.json",
+      "sha256": "324e1458846e2c73befe0708ea159394a5c529ef27775c9e16042612578b17be",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-35952148696/raw_evidence/execution_results.json",
+      "sha256": "344fcba1eb32e33dfc35a48ef4208e755064d98d6f37456e70b2a02a3b340c24",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-35952148696/raw_evidence/health_gate.json",
+      "sha256": "2ce3e219b06e63c7afce2e31d1e1e9b27a67dc50b2e2402b79ec35db70cffb0c",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-35952148696/raw_evidence/metrics.json",
+      "sha256": "0fc6a9baded180c8ba83754a943884679407e95eb0eae4a9bc33e60d2eb1d73b",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-35952148696/raw_evidence/per_trajectory_cache.json",
+      "sha256": "9b102d6ef9a4efe3589fa1b3732bcf2f587efe4f1b5cd8c222b4ee9b38317065",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-35952148696/raw_evidence/repair_logs.json",
+      "sha256": "8680b43a60621e4673bd498abd716edfeecd4cc5e5fde79edf5cea778f8a10ff",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-35952148696/raw_evidence/request_logs.json",
+      "sha256": "395369189eeaa4c3572cfdb889a0d5dd263d038df360e23d5c026e5af4b6b8ba",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-35952148696/raw_evidence/summary.json",
+      "sha256": "5516fd910dfdffbe9cc7657ed64b3ee94495dd23331bdbb3387a5ff0c8987bbe",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-35952148696/raw_evidence/verification_auroc.json",
+      "sha256": "d05a215aa51d2845ee642a5d2daba544ba49bc94170807be3088907556efe879",
+      "role": "raw"
+    },
+    {
+      "path": "research/graph/delta_repair/execute_delta_repair_synthetic_35952148696.py",
+      "sha256": "c756409508f7470e58e7927cec2969273a85990453dce9f02244932e64033424",
+      "role": "code"
+    }
+  ],
+  "material_hashes": {
+    "spec": "26925d904768e36373e66ded9184490ed0f7bf9e515bb9391c12c7fe70496390",
+    "prereg": "8448a8146960e8514fa980aa7074053a7b7e402a058d3817a16774d31394ae8e",
+    "request": "69caac9a5a4a98c9bbcd97c81567cc0af07e9966e0914216764be21ce5f3f3ea",
+    "freeze": "0a3d78857e90394db65d83144b1646879832abbc3dd993b8da38bc83a11cd2c5"
+  },
+  "execution_time": "<0.9 compute-hour, <15 min CPU for 5000 bootstrap +1000 perms, 390 requests",
+  "distributed_deferred": {
+    "reason": "No distributed shared-WAL Flask/JWT + nginx substrate deployed in this execution environment; health-gate requires 2x gunicorn workers, shared WAL at /tmp/spider-runtime/*/shared.db, HS256 JWT, X-Worker-Pid>=2, nginx If-None-Match/304. Synthetic primary stage is independent. DEFERRED per spec V12 and director disposition.",
+    "n_non304": 0,
+    "health_gate_pass": false,
+    "wal_exists": false,
+    "dependency": "runtime lane to harden shared WAL /tmp/spider-runtime/*/shared.db WAL/journal_mode, 2x gunicorn 23 + nginx 1.24 HS256 shared TESTBED_SECRET, distinct X-Worker-Pid>=2, If-None-Match 304"
+  },
+  "reproducibility": "Deterministic seeds 42/123/999, ephemeral port auto, trajectory order fixed, perturbation seeds via hashlib but not for scores, per-trajectory caching first valid of 1-3 response-derived, exact equality _matches, all raw evidence logged with SHA256"
+}

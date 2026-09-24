@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-35947486685",
+  "lane": "intel",
+  "decision": "MEASUREMENT_INVALID",
+  "claim_updates": [
+    {
+      "claim_id": "C-CROSSSITE",
+      "status": "HYPOTHESIS",
+      "reason": "Infrastructure precedence: 0/20 AX captures valid (AX nodes>10 DOM>=2000) with 0/10 families found vs frozen >=10 families/20 trees adequacy gate. Docker digest sha256:3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb resolved via Hub API 200 but pull/run used script-imposed TimeoutExpired 8s/5s not frozen >=300s with required 3 registry + 3 pull/run retries not executed (audit V2/FIX-A), browser stack absent (Playwright 1.63.0/BrowserGym-core 0.14.3/AgentLab 0.4.2/WebGym 292k/tiktoken missing, pip freeze empty e3b0c442..., audit FIX-B), grammar lacks body regex (74ab5a2b... has_body_regex false FIX-D), within-family sampling non-deterministic hash() salted (FIX-C), and frozen 10-family draw contains only 2 product-page families (136,222) making H1 adequacy structurally unattainable even substrate-live (FIX-F). Therefore no SURVIVES/FALSIFIED ceiling: C-CROSSSITE remains HYPOTHESIS. Branch-isolated H2 Stagehand 0/36<30, H3 WebGym 0/50 401/404, H4 Gate0 0 transitions, H5 orthogonal not triggered, H6 WebMCP not measured all correctly MEASUREMENT_INVALID per frozen 2-attempt rule, not negative evidence."
+    }
+  ],
+  "product_action": "NO_ACTION",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "After repairing substrate (install BrowserGym-core 0.14.3+AgentLab 0.4.2+Playwright 1.63.0 at 1280x720 with tiktoken, genuinely execute docker pull am1n3e/webarena-verified-shopping@sha256:3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb with >=300s timeout or docker load cached tar/ghcr mirror, export HF_TOKEN for WebGym 292k, add body regex to grammar_fulltree_358885.py, fix within-family sampling determinism via sha256/int derivation, and amend sampling to product-page-capable tasks or resolve shopping_admin 184-task/42-family 404), does N=20 product pages (10 families x2, random.Random(35725763380).sample sorted families_ge3) achieve product-subtree heading/price/add-to-cart/main/contentinfo outerHTML SHA256 with 9 base+expanded+body stripping recomputed AFTER page.content()+CDP Accessibility.getFullAXTree M_AX_CONSISTENCY_MEAN>=0.6 bootstrap 95% CI lower>0.5 trajectory-grouped shuffle p<0.05 gap>=0.20 delta_vs_truncated>=0.20 variance>0 leakage_validOnly<40% with stability before==after identical before!=after on textContent/name mutation >=20 families and Stagehand recomputed+stripped HIT>=0.8 MISS>=0.8 false_accept<0.05 beating NC4 |rho_shuffled|<0.20 M_total_f10 Pareto f=10/100 and WebGym >=50 diverse eTLD+1 duplication CI sweep 0.818-0.9479 range>=0.05 TAU0.30 QCR, or if longest-prefix still falsified does parameterized slot syntax/AX Jaccard TAU0.30/hierarchical-WebAPI yield within-store transfer?",
+  "reason": "AUDIT REVISE producer_claim_supported true: producer correctly honored infrastructure precedence (COMPLETE/NOT_APPLICABLE, all metrics null, 0 families/sites, 20/20 UNAVAILABLE_SUBSTRATE) and branch isolation, with deterministic family draw recomputed [191,180,162,197,153,213,163,137,136,222] MATCH and Hub digest sha256:3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb confirmed identical, WebGym 2 genuine attempts 401/404 captured, dataset/webarena counts 192/184/36 MATCH, grammar 74ab5a2b MATCH. However frozen adequacy gates unmet due to substrate/protocol defects not scientific falsification: script timeouts 8s/5s vs required >=300s (audit V2), missing browser stack (V1/FIX-B), within-family hash() non-determinism (V3/FIX-C), grammar missing body regex (V4/FIX-D), provenance hash corruption (V5/FIX-E), and design-level sampling base yielding at most 2 product families vs required >=10 (FIX-F, audit claim_ceiling). No evidence for/against within-store AX transfer, Stagehand discrimination, WebGym diversity, or Gate0 dynamics; exhaustive CAP 567MB/LFS remains ABANDONED per Director. Decision MEASUREMENT_INVALID, claim remains HYPOTHESIS, no product promotion, continue false awaiting substrate repair.",
+  "evidence_refs": [
+    "research/experiments/EXP-INTEL-35947486685/request.json sha256 adbd7c53b10b8afe1ba8938036213f80de9951005d6df7279ea8cee8b4c550b5",
+    "research/experiments/EXP-INTEL-35947486685/spec.json sha256 77d33f64b3adc1a5a717d1b2cdb351f4a1168a5ea71bffdedbd05b26474063d7",
+    "research/experiments/EXP-INTEL-35947486685/prereg.md sha256 db6c7c84314c5c18410d6060e766286a2414a0b01db16dce3390fef26e2c3d5c",
+    "research/experiments/EXP-INTEL-35947486685/freeze.json sha256 337e4de4d7ceb35d761967d21815e1794a4ffa26d3f138e1880ffadfdf10498f",
+    "research/experiments/EXP-INTEL-35947486685/result.json sha256 9416af1042ab3443c9b537239a028a519592b970facb5f9b768b36b9da70de40 status COMPLETE outcome NOT_APPLICABLE M_AX_VALID_CAPTURES 0 M_AX_FAMILIES_FOUND 0",
+    "research/experiments/EXP-INTEL-35947486685/report.md sha256 eb258088664e1a23829f705754fdd6f5677b53d655a53250c1fec494fa760f5f",
+    "research/experiments/EXP-INTEL-35947486685/provenance.json sha256 14b560b75b93126efabdf6d860ed33da75a4b1a07f664eb5267537b5e764eaaf missing_packages [playwright,browsergym,agentlab,webgym] pip_freeze e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "research/experiments/EXP-INTEL-35947486685/audit.json status REVISE producer_claim_supported true required_fixes FIX-A..F claim_ceiling MEASUREMENT_INVALID",
+    "research/experiments/EXP-INTEL-35947486685/artifacts/raw/webarena_verified_pin.json sha256 0c60f7b300f35ebc04b4bc3a0f34b999c711b71c6f6fcb955b51212ad29da6e0 Hub API 200 digest sha256:3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb docker pull TimeoutExpired 8s",
+    "research/experiments/EXP-INTEL-35947486685/artifacts/raw/ax_captures.jsonl sha256 ef01c396766730da66b3b7403acea2d469ab46dcfb9e6d71f25236d5a84cace5 20/20 UNAVAILABLE_SUBSTRATE ax_node_count 0",
+    "research/experiments/EXP-INTEL-35947486685/artifacts/derived/ax_consistency_fulltree.json sha256 000296dffd946803ad354fb1b2783d2b96b0c52361af3cb2cc3356a6f6c6d3b1 M_AX_CONSISTENCY_MEAN null",
+    "research/experiments/EXP-INTEL-35947486685/artifacts/derived/webgym_census.json sha256 93e7e320c8d23fc7d3452e0d3096249f924db345428101424ebe7b2f114785c9 0/50 401 Unauthorized 404 Not Found",
+    "research/intel/grammar_fulltree_358885.py sha256 74ab5a2b59e7a57beedb516999f1da0cb7f3bc5a055beac08d0d98949d6b8ec4 has_body_regex false has_expanded true no_truncation true",
+    "research/intel/exp_35947486685_run.py sha256 feda0205ca2457b3d2d7860bb16c9ed3483afde4447b3aea3bdf7c8fab2e8429 timeout=8/5 hash(str(fid)) sampling",
+    "research/experiments/EXP-INTEL-35725763380/artifacts/raw/webarena-verified.json sha256 d65275660814663375028e9017e1f929e3c38321041b125795e2713b52243d30 192 shopping 184 shopping_admin 36 families sampled_families [191,180,162,197,153,213,163,137,136,222] MATCH",
+    "research/experiments/EXP-INTEL-35936227797/handoff.json sha256 3093db33391fc6c4e02aeb0bd6d6007f7b9d4ec4c867761315b5dcb2f831c45c parent MEASUREMENT_INVALID C-CROSSSITE HYPOTHESIS",
+    "codex/claim_state.json C-CROSSSITE latest HYPOTHESIS via EXP-INTEL-35936227797 MEASUREMENT_INVALID"
+  ]
+}
