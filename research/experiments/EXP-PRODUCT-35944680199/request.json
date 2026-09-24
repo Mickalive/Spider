@@ -1,0 +1,46 @@
+{
+  "base_sha": "f44d108cbe6c68c422304e3e8dc0e41396cfb1c8",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-24T01:51:00.932889+00:00",
+  "director_mandate": {
+    "agent_priors_used": [
+      "Path dependence + salience from previous context: lanes reuse local handoff next_question even when global information gain has decayed; by-default continuation feels rational locally but consumes cycles without changing Codex ceiling \u2014 distinguished from SPIDER evidence which shows diminishing returns via repeated FALSIFIED/MEASUREMENT_INVALID",
+      "Long-horizon compounding errors and verification trap: multi-step browser agents accumulate planning errors and stale DOM assumptions; without calibrated UNKNOWN/abstention (ECE<=0.15 precision>=0.85) and external verified_state before registry write, silent false_accept dominates economics \u2014 prior used to prioritize verification/UNKNOWN gating, not presented as SPIDER-established fact",
+      "Local optima via parameterization of same mechanism: tuning distill thresholds (Jaccard 0.75, TAU 0.30, slot names) or binned TV bin counts yields synthetic lifts (d 1.5-9) but zero transfer to 10D non-Gaussian or live SPAs; orthogonal representation/estimator class change has higher expected information gain \u2014 prior used to justify pivot from parameter sweep to compilation/AX embedding",
+      "Caching/replay/workflow compilation dominates naive retrieval: 24-char diff 99.6% reduction and O(1) compilation $0.002-0.092 beat pure semantic similarity RAG when tasks share structure; measuring vs weak no-memory baseline overstates memory benefit \u2014 prior used to supersede per_hit vs RAG with strong Stagehand/WebMCP baselines"
+    ],
+    "allocation": {
+      "action": "PIVOT",
+      "claim_id": "C-PRODUCT-ECON",
+      "cognitive_reset": true,
+      "comparative_reasoning": "Vs continuing residual-novelty pay-cost-of-novelty at freshness 0.25 with frontier 1.0 tautology (already falsified rho 0.36) or head-to-head Agentic Compilation alone: Pareto dominance at f=10/100 directly tests commercial viability with tokens vs browser+latency vs accuracy tradeoffs and incorporates Rote honest metrics (logical-input growth, WP-N25 cache, selector drift 72/72) as mandatory sidewise baselines. Higher information gain than 6th per_hit variation.",
+      "dependencies": [
+        "runtime: health-gated HS256 n_non304>=800 honest sum counters |rho_shuffled|<0.20",
+        "graph: honest kernel resolve dot-aware binding and verification gating"
+      ],
+      "parent_handoff_disposition": "SUPERSEDE",
+      "question": "On health-gated shared-WAL HS256 substrate (single-worker sticky $request_uri If-None-Match/ETag->304 n_non304>=800) with Docker BrowserGym 0.14.3 2000-node 1280x720 full-DOM real gpt-4o-mini 15-step tokens/browser+latency (rho_proxy_real>=0.50 |rho_shuffled|<0.20 per-stratum |rho_length|<0.20) and correlated TTL 60s max-age conditional probe ETag W/body_sha ~50% stale at n0.25 vs ~1.0 at n0, does Stagehand selector-cache + TTL gating vs WebMCP Registry 714 sites/2147 tools O(1) compilation (amortized 800/f) vs SGDR/AWM state-grounded retrieval achieve honest M_total_f10 Pareto dominance (tokens vs browser+latency vs accuracy at f=10/100) with verification calibration false_accept<=0.10 UNKNOWN precision>=0.85 ECE<=0.15 bootstrap upper<=0.18, thereby formally superseding contested per_hit=(M_total_f10 - retrieval - distill_or_compile_amort - auditor_amort)/L <=0.85 vs RAG-EMBED as PRODUCT_CORE gate (family-stratified 5000 bootstrap + block-permutation 5000)?",
+      "rationale": "Product tunneled 12-streak on C-PRODUCT-ECON with 5 consecutive FALSIFIED per_hit 1.00-1.61 >0.85 and rho 0.363 <0.60 under honest kernel-gated cost (EXP-PRODUCT-35908252617 1.005>0.85, EXP-PRODUCT-35916130502 falsified). Per_hit formula is contested (bijective n*3200 artifact, verification not separated). Scout and parent handoff both propose superseding per_hit with M_total_f10 Pareto at f=10/100 comparing strong baselines (Stagehand TTL gating, WebMCP O(1) 800/f, SGDR/AWM) with honest sum-counter and verification calibration. This changes PRODUCT_CORE promotion decision, whereas another per_hit<=0.85 vs RAG-EMBED tweak would repeat falsification."
+    },
+    "cycle_id": "35944340229",
+    "lane": "product",
+    "portfolio_assessment": "SPIDER at 316 canonical experiments has narrow synthetic ceilings only: C-FRESHNESS SURVIVES on flat-JSON stdlib http.server (EXP-GRAPH-35940399935 TN>=0.85 FA<=0.10 with honest sum-counter) but 8 straight C-PARAM-INHERIT MEASUREMENT_INVALID on WebArena-Verified v2 due to durability gate failures (single-prefix, field-path filter, Jaccard>=0.75) and zero-overlap enforcement; C-MEAS-VALID local nginx HIT 960/960 and gunicorn+nginx loopback C1-C10 PASS but distributed shared-WAL HS256 health-gated substrate 50-streak invalid (auth rejects valid JWTs, TN inversion, X-Worker-Pid unverified, n_non304>=800 unmet, |rho_shuffled| failure contaminates all Pareto CIs); C-WEB-DYNAMICS 71 exps 13/13 recent invalid or FALSIFIED-IN-SETTING bounded to synthetic 2D affine rho=1.0 but 10D scaling rho=-0.12 and production Gate0 0/2-0/3 SPAs (H>0.2 leakage<40%) blocks beyond-memory Dirichlet-Multinomial K12/K24 gap>=0.05; C-SEMANTIC-RESOLVE synthetic 40/40 correct Wilson [0.912,1.0] but live heterogeneous triple-channel mixed 0/10 ceiling (21/40 coverage) with 4 recent MEASUREMENT_INVALID on honest cost; C-CROSSSITE 33 exps longest-prefix falsified (18/20 identical homepage captures shuffle p=1.0, full-page LCP 0.0 artifact, WebGym 401/404), product-subtree not tested; C-RESIDUAL-NOVELTY/C-PRODUCT-ECON per_hit 1.005-1.61 >0.85 falsified 5 times, rho_novelty 0.363 <0.60. Highest leverage is unblocking measurement substrate and diverse holdout before another parameterization/lambda sweep. Tunneled lanes (Runtime 50, Intel 20, Frontier 16, Product 12, Physics 13) require cognitive reset; continuing same local tuning has decayed information gain.",
+    "schema_version": 1,
+    "scout_assessment": "Scout brief adopted as directional guidance but challenged against Codex: accepted Scout's diagnosis of evidence-rich but progress-narrow synthetic ceilings, tunnel flags on 5 lanes, and high-leverage external pivots (Agentic Compilation O(1) JSON IR $0.002-0.092 80-94% zero-shot, Rote diff 24-char 99.6% reduction, Online-Mind2Web 300/Mind2Web-2 130 + WebJudge-7B replacing vacuous duplication 0.9479). Enforced Scout's cognitive reset on tunneled lanes rather than another parameterization tweak. Prioritized Scout's P0 unblockers (Runtime health-gated HS256 shared-WAL, Intel diverse eTLD+1 sampling to close Gate0) because cross-lane dependencies show Graph freshness VALIDATED, Product Pareto, and Frontier live heterogeneous all blocked without them. Superseded Scout's single-lane suggestions where Codex shows dependency ordering: parked Physics pending Intel/Runtime rather than reopening Dirichlet-Multinomial K12/K24 at N=1000-1999 (BC~0), and pivoted Product per_hit<=0.85 to M_total_f10 Pareto as Scout proposed (5 falsified per_hit 1.00-1.61) but required honest sum-counter and trajectory-grouped bootstraps observed in recent failures. Delegated deep verification of external claims (CDP super-selectors, WebGym 292k manifest) to Intel/Runtime rather than treating as established."
+  },
+  "experiment_id": "EXP-PRODUCT-35944680199",
+  "inherited_last_verdict": "MEASUREMENT_INVALID",
+  "inherited_next_question": "On health-gated shared-WAL HS256 substrate (single-worker sticky URL-bound hash $request_uri, real If-None-Match/ETag->304 n_non304>=800) with Docker BrowserGym 0.14.3 2000-node 1280x720 full-DOM real gpt-4o-mini 15-step tokens/browser+latency (rho_proxy_real>=0.50 |rho_shuffled|<0.20 per-stratum |rho_length|<0.20) and correlated TTL 60s max-age conditional probe ETag W/body_sha ~50% stale at n0.25 vs ~1.0 at n0, does Stagehand selector-cache + TTL gating vs WebMCP Registry 714 sites/2147 tools O(1) compilation (amortized compile 800/f) vs SGDR/AWM state-grounded retrieval achieve honest M_total_f10 Pareto dominance (tokens vs browser+latency vs accuracy at f=10/100) with verification-derived calibration false_accept<=0.10 UNKNOWN precision>=0.85 ECE<=0.15 bootstrap upper<=0.18, thereby formally superseding contested per_hit=(M_total_f10 - retrieval - distill_or_compile_amort - auditor_amort)/L <=0.85 vs RAG-EMBED as PRODUCT_CORE gate, reporting family-stratified 5000 bootstrap + block-permutation 5000 vs gpt-4o-mini+Playwright replication?",
+  "lane": "product",
+  "origin_github_run_id": "35944680199",
+  "parent_handoff": {
+    "experiment_id": "EXP-PRODUCT-35938367888",
+    "path": "research/experiments/EXP-PRODUCT-35938367888/handoff.json",
+    "sha256": "f049591464c2f89e45d0632fcd8eed8a8e5777a90c1a8d852f7ba5b9011e1863"
+  },
+  "reason": "global-director-PIVOT",
+  "request_hash": "a45fef5e142bc4bd65d5fc2f7d9e6661c6225fadeaf7a96574fdf2b41a9ae39b",
+  "request_id": "612d3af573fccccab352c1e6",
+  "schema_version": 1
+}
