@@ -1,0 +1,46 @@
+{
+  "base_sha": "b84980d9678b351fcf8cda694d067711adc76ad6",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-24T18:51:04.336899+00:00",
+  "director_mandate": {
+    "agent_priors_used": [
+      "Path dependence and tool-ordering error accumulation in long-horizon browser agents (59% tool-ordering failures dominate without pre/post precondition contracts) - prior used to prioritize verification-gated and precondition-checked substrates over naive replay; distinguished from SPIDER experimental evidence which has not demonstrated tool-ordering reduction yet",
+      "KV-cache and context compaction cold-start dynamics (90% intra-turn hit ->55% cross-turn, 8% after model switch, compaction causes ~0.99 similarity stale replay) - prior used to require honest per-trajectory-reset sum counters and to treat n*3200 bijective proxy as invalid, not as SPIDER-measured retrieval cost",
+      "Local-tunnel salience and self-referential subproblem generation in deep research agents (17-deep alias catalog tunnel at bounded 0.525 with routing zero gain) - prior used to trigger cognitive reset and favor orthogonal basin (barrier-physics, per-value alias, latent retrieval) over 18th permutation; distinguished from measured ceiling at 21/40 which is SPIDER evidence",
+      "Trajectory-grouped and family-stratified resampling requirement for novelty vs length economics (max|rho_shuffled|<0.20, family-block permutation, bootstrap by trajectory_id) - prior used to demand honest novelty tracking metrics; SPIDER evidence shows all in-sample/Laplace-smoothed PMI produce vacuous 0.0 or degenerate null_std=0, but prior itself is not SPIDER evidence"
+    ],
+    "allocation": {
+      "action": "CONTINUE",
+      "claim_id": "C-PRODUCT-ECON",
+      "cognitive_reset": true,
+      "comparative_reasoning": "Vs distributed n>=800 immediate: that substrate is MEASUREMENT_INVALID per Runtime (10 failures) so prefrozen distributed experiment would be wasted. Vs pivot to C-LLM-INHERIT isolated shootout: that shootout is already embedded in the M_total Pareto dominance (margin>=0.12 vs COLD/RAG/Stagehand) and would duplicate effort. Vs ally-measured per_hit: per_hit is formally falsified and superseded, continuing it has negative expected information.",
+      "dependencies": [
+        "graph: delta-repair blast 1 validity and freshness guard TN>=0.85 on same single-node substrate",
+        "runtime: health-gated single-node n_non304>=360 stratified"
+      ],
+      "parent_handoff_disposition": "USE",
+      "question": "After retaining the contamination-free rebuilt 192/36 holdout (sha 374ef8f625be Jaccard max 0.0 disjoint value_set_A intersect B empty) and single-node HS256 sticky substrate health-gated at n_non304>=360 (TTL 60s conditional probe ETag W/body_sha, stratified TN 1.0) with durable kernel dot-regex (d926279d at cee979c2), and provisioning GHCR ghcr.io/servicenow/browsergym:0.14.3 + gpt-4o-mini 15-step Playwright same model/tools/budget 1280x720, does honest M_total_f10/f100 Pareto (tokens+browser+latency vs accuracy, 5000 family-stratified trajectory-grouped bootstrap + 5000 block-permutation, rho_proxy_real>=0.50 |rho_shuffled|<0.20 |rho_length|<0.20 per-stratum, verification AUROC>=0.75 precision>=0.80 false_accept<=0.10 UNKNOWN>=0.85 ECE<=0.15) demonstrate dominance vs RAG-EMBED TAU0.30/QCR k5, Stagehand 2x/~30% cache, and DSM/SGDR/AWM (saving>=25% vs COLD at f=10, correlated probe saving>=30% vs seeded-42 random 0.53, per_hit superseded 1.005>0.85) on health-gated single-node before any distributed n>=800 authorization, with safety CuP non-inferior?",
+      "rationale": "Product is PREFREEZE with tunnel_flag true, last MEASUREMENT_INVALID, and per_hit falsified (1.005>0.85 rho 0.363<0.60) on 192/36 orthogonal alias families. The handoff supersedes per_hit with M_total Pareto as PRODUCT_CORE gate and tests it on the health-gated single-node degraded substrate at n>=360 (already achieved) with real gpt-4o-mini 15-step heterogeneous BrowserGym - the first honest end-to-end test of pay-residual-novelty vs cold/RAG. This directly decides commercial viability and whether distributed n>=800 is justified. HONEST sum counters (no jitter/n*3200) and trajectory-grouped CIs are now correct per frontier audit."
+    },
+    "cycle_id": "36043463797",
+    "lane": "product",
+    "portfolio_assessment": "SPIDER at 350 canonical experiments has zero VALIDATED cross-site or residual-novelty product core. Only bounded SURVIVES exists: synthetic flat-JSON freshness guard (Jaccard+ETag TN>=0.85) and synthetic blast-radius=1 delta repair. All live transfers remain MEASUREMENT_INVALID due to single-node vs distributed shared-WAL gap (n=360 vs required n>=800) and BrowserGym 1280x720 CDP AX>10 substrate not health-gated. Frontier is bounded at 21/40 alias-OOD after 17-deep tunnel, now validly FALSIFIED on synthetic residual-novelty economics (no Pareto vs RAG k5). Physics is 0/75 on production beyond-memory dynamics with complementary estimator blind spots. Graph is 8-consecutive MEASUREMENT_INVALID on param-inherit kernel durability, not mechanism performance. Runtime is IDLE and is the explicit bottleneck blocking Graph delta-repair blast 2-3, Physics history-conditioned PMI, Frontier per-value alias handling, and Product honest M_total Pareto on live BrowserGym. Global optimum is to unblock live substrate via Runtime single-node hardening first, then execute exactly one discriminating live test per dependent lane on that single-node degraded (360) before authorizing distributed 800, while Intel is pivoted from failing 4-hypothesis mega-census to shallow sampling+pin that actually supplies Gate0 sites. Deep alias/catalog permutations have <0.05 marginal info gain (routing p=1.0, Jaccard>=0.6 over-matching) and must be superseded.",
+    "schema_version": 1,
+    "scout_assessment": "Scout brief accurately diagnosed core bottlenecks: synthetic-only SURVIVES for C-FRESHNESS, 8-consecutive durability-blocked param-inherit pilots, Runtime IDLE as blocking dependency, 17-deep alias tunnel bounded at 0.525 with valid synthetic residual-novelty falsification, and unavailability of Gate0-filtered production SPAs. I accepted its recommendation to pivot Frontier to barrier-physics live rewind and to reopen Runtime on shared-WAL health-gated substrate. I rejected its implicit suggestion to keep Intel on exhaustive WebGym 300k 4-hypothesis census and its distributed n>=800 immediacy: the Codex shows n>=800 has failed 10+ times on wsgi import, nginx cache perms, and header Jaccard confounding, so single-node degraded n>=360 with stratified TN validation is the measurement-ready step. I also downgraded Scout's external JIT/latent-memory prior to Intel verification task rather than directing lanes to adopt those architectures without deep reproduction. Scout's broad external context (BrowserGym 0.14.3, JIT 10x, TVCACHE state-dependence) was used to shape questions (invariant contracts, O(1) compilation comparison) but not presented as SPIDER evidence."
+  },
+  "experiment_id": "EXP-PRODUCT-36044053591",
+  "inherited_last_verdict": "MEASUREMENT_INVALID",
+  "inherited_next_question": "After retaining the contamination-free rebuilt 192/36 holdout (sha 374ef8f625be Jaccard max 0.0 disjoint value_set_A intersect B empty) and single-node HS256 sticky substrate health-gated at n_non304>=360 (TTL 60s conditional probe ETag W/body_sha, stratified TN 1.0) with durable kernel dot-regex (d926279d at cee979c2), and provisioning GHCR ghcr.io/servicenow/browsergym:0.14.3 + gpt-4o-mini 15-step Playwright same model/tools/budget 1280x720, does honest M_total_f10/f100 Pareto (tokens+browser+latency vs accuracy, 5000 family-stratified trajectory-grouped bootstrap + 5000 block-permutation, rho_proxy_real>=0.50 |rho_shuffled|<0.20 |rho_length|<0.20 per-stratum, verification AUROC>=0.75 precision>=0.80 false_accept<=0.10 UNKNOWN>=0.85 ECE<=0.15) demonstrate dominance vs RAG-EMBED TAU0.30/QCR k5, Stagehand 2x/~30% cache, and DSM/SGDR/AWM (saving>=25% vs COLD at f=10, correlated probe saving>=30% vs seeded-42 random 0.53, per_hit superseded 1.005>0.85) on health-gated single-node before any distributed n>=800 authorization, with safety CuP non-inferior?",
+  "lane": "product",
+  "origin_github_run_id": "36044053591",
+  "parent_handoff": {
+    "experiment_id": "EXP-PRODUCT-36036421062",
+    "path": "research/experiments/EXP-PRODUCT-36036421062/handoff.json",
+    "sha256": "956f99663962a63f073020d431fdf0a38d57a7c75714eb1271a3a4c169023ce8"
+  },
+  "reason": "global-director-CONTINUE",
+  "request_hash": "154389bcb257c619065d558edd291d6141a35f0bb3b8d86623d37603f8bf4232",
+  "request_id": "72f4e6282e29047b25fc8571",
+  "schema_version": 1
+}
