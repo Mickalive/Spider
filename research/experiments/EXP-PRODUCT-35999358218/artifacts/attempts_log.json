@@ -1,0 +1,42 @@
+{
+ "experiment_id": "EXP-PRODUCT-35999358218",
+ "docker_browsergym": {
+  "cmd": "docker pull ghcr.io/servicenow/browsergym:0.14.3",
+  "result": {
+   "cmd": "docker pull ghcr.io/servicenow/browsergym:0.14.3",
+   "exit": 1,
+   "stdout": "",
+   "stderr": "Error response from daemon: manifest unknown\n"
+  },
+  "available": false,
+  "detail": "GHCR manifest denied/unknown"
+ },
+ "openai_key": {
+  "present": false,
+  "detail": "ABSENT",
+  "gpt4o_mini_15step": "NOT RUN (OPENAI_API_KEY absent)"
+ },
+ "hard258": {
+  "pip_webarena": {
+   "cmd": "/opt/hostedtoolcache/Python/3.12.14/x64/bin/python3 -m pip index versions webarena",
+   "exit": 1,
+   "stdout": "",
+   "stderr": "ERROR: No matching distribution found for webarena\n"
+  },
+  "staged": false,
+  "fallback": "WebArena-Verified v2 192/36 disclosed per MV1"
+ },
+ "playwright": {
+  "cmd": "/opt/hostedtoolcache/Python/3.12.14/x64/bin/python3 -c import playwright",
+  "exit": 1,
+  "stdout": "",
+  "stderr": "Traceback (most recent call last):\n  File \"<string>\", line 1, in <module>\nModuleNotFoundError: No module named 'playwright'\n"
+ },
+ "browsergym_pip_meta": {
+  "cmd": "/opt/hostedtoolcache/Python/3.12.14/x64/bin/python3 -m pip download browsergym==0.14.3 --no-deps -d /tmp/bgcheck",
+  "exit": 0,
+  "stdout": "Collecting browsergym==0.14.3\n  Downloading browsergym-0.14.3-py3-none-any.whl.metadata (1.2 kB)\nDownloading browsergym-0.14.3-py3-none-any.whl (1.5 kB)\nSaved /tmp/bgcheck/browsergym-0.14.3-py3-none-any.whl\nSuccessfully downloaded browsergym\n",
+  "stderr": ""
+ },
+ "sgdr_index": "staged 36 state_key TRAIN-only (see fixture_checks.sgdr_index); DOM-hash component substituted with TRAIN post_state hash (disclosed)"
+}

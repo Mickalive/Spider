@@ -1,0 +1,70 @@
+{
+ "experiment_id": "EXP-PRODUCT-35999358218",
+ "disclosure": "deterministic honest sum counters on disclosed file-proxy task structure; NOT claim economics (Docker/LLM gates blocked); used only for null-control non-degeneracy per frozen NC definitions",
+ "NC1_SHUFFLED": {
+  "definition": "trajectory-grouped family-stratified block-permutation of parameter_slots (n) across trajectories; counters stay attached to original trajectories (frozen NC1); parent 35961222077 degenerate re-sample replaced",
+  "rho_shuffled": -0.1367236964485896,
+  "null_rho_ci95": [
+   -0.1696093896534687,
+   0.09173454606505668
+  ],
+  "block_permutation_p": 0.07238552289542091,
+  "rho_length_pooled": -0.2871341837663058,
+  "per_stratum": {
+   "0.0": {
+    "n": 45,
+    "rho_length_shuffled": -0.08407564886941842
+   },
+   "0.25": {
+    "n": 0,
+    "rho_length_shuffled": null
+   },
+   "0.5": {
+    "n": 42,
+    "rho_length_shuffled": -0.4668924464278881
+   },
+   "0.75": {
+    "n": 0,
+    "rho_length_shuffled": null
+   },
+   "1.0": {
+    "n": 75,
+    "rho_length_shuffled": -0.30340953960775696
+   }
+  },
+  "pass": false
+ },
+ "NC2_RANDOM_KEYS": {
+  "AUROC": 0.47979166666666667,
+  "false_accept_rate": 0.104,
+  "n": 500,
+  "pass": true
+ },
+ "NC3_LENGTH_CONST": {
+  "rho_novelty": 0.007890496086527815,
+  "R2": 4.3207724255034385e-05,
+  "rho_length": -1.0,
+  "pass": true
+ },
+ "PC4_FROZEN_FORMULA": {
+  "frozen_formula": "(M_total - retrieval - distill/compile - auditor)/L with retrieval=distill=compile=auditor=0 in disclosed deterministic branch",
+  "n_parity_rows": 192,
+  "max_abs_diff": 0.0,
+  "parity_within_1e6": true,
+  "rho_proxy_real_pooled": null,
+  "rho_proxy_real_per_stratum": {
+   "0.0": null,
+   "0.25": null,
+   "0.5": null,
+   "0.75": null,
+   "1.0": null
+  },
+  "rho_proxy_real_note": "NULL: requires Docker BrowserGym 0.14.3 CDP + real gpt-4o-mini 15-step tokens (both blocked in this environment); frozen clause (1) gpt-4o-mini unavailable => MEASUREMENT_INVALID regardless of parity result"
+ },
+ "MAIN_PIPELINE_DIAGNOSTIC": {
+  "rho_novelty_per_hit": 0.7620215299096192,
+  "rho_length_pooled": -0.2871341837663058,
+  "note": "diagnostic only; primary rho_novelty claim metric requires real gpt-4o-mini tokens (null)"
+ },
+ "B=5000": true
+}
