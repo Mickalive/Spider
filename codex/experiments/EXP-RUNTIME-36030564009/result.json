@@ -1,0 +1,65 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-36030564009",
+  "lane": "runtime",
+  "status": "MEASUREMENT_INVALID",
+  "outcome": "INCONCLUSIVE",
+  "metrics": {},
+  "controls": {
+    "V-NGINX-CONFIG-OK": {
+      "pass": true,
+      "detail": "nginx -t syntax ok, single location / block, proxy_pass without trailing slash, add_header X-Worker-Pid always, $request_uri sticky"
+    },
+    "V-FLASK-LISTENING": {
+      "pass": true,
+      "detail": "Flask verified listening on 127.0.0.1:19860 via socket connect"
+    }
+  },
+  "artifacts": [
+    {
+      "path": "/home/runner/work/Spider/Spider/research/experiments/EXP-RUNTIME-36030564009/run_experiment.py",
+      "sha256": "28e9a37e3ef341ba0e7faa63902223e91965eb71dd58837c114103ab75458546",
+      "role": "code"
+    },
+    {
+      "path": "/home/runner/work/Spider/Spider/research/experiments/EXP-RUNTIME-36030564009/raw_freshness_observations.jsonl",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "role": "raw"
+    },
+    {
+      "path": "/home/runner/work/Spider/Spider/research/experiments/EXP-RUNTIME-36030564009/raw_hit_observations.jsonl",
+      "sha256": "347398d647e16277121d12eb0b1da137e5c7e876c0451b87652a2b8a1024ee2f",
+      "role": "derived"
+    },
+    {
+      "path": "/tmp/spider-runtime/36030564009/nginx.conf",
+      "sha256": "dd60a1089260bf973c6dde78b31493f64e5e9d7defc313453c0e5b8d92642850",
+      "role": "fixture"
+    },
+    {
+      "path": "/tmp/spider-runtime/36030564009/wsgi.py",
+      "sha256": "93ed5af7a97f96a3d75ca4d1e6e08c0653061c85a80d9741ce7d24ffd68a50aa",
+      "role": "code"
+    }
+  ],
+  "observations": [
+    "Freshness n_non304=0 (target >=800)",
+    "Freshness n_304=0",
+    "Freshness per_ep_non304={}",
+    "HS256 valid success rate=0.0000 (target >=0.90)",
+    "Batch distinct timestamps=0 (target >=10)",
+    "Header-only scheduling |r|=0.0000 V=0.0000 (target <0.30)",
+    "Header-only Jaccard mean=0.0000 var=0.000000",
+    "Honest |rho_shuffled|=0.0000 p=0.0000 within_f_std=0.0000 width=0.0000 eff=0",
+    "Full-vector full=0.0000 body=0.0000 status=0.0000 width=0.0000 eff=0 diff_lo=0.0000",
+    "HIT 0/330 byte-identical greedy brotli->gzip MAX_DEPTH5",
+    "Loopback header_drift=0.0000 body_drift=0.0000 nullFP=0.0000",
+    "Health gate passed=False Flask listening=True",
+    "Outcome: INCONCLUSIVE Status: MEASUREMENT_INVALID"
+  ],
+  "validity_notes": [
+    "HEALTH_GATE_FAILED: nginx+Flask did not respond 200+X-Worker-Pid within 30s",
+    "NGINX_ERROR_LOG:  \"127.0.0.1:19851\"\n2026/09/24 17:02:08 [crit] 54143#54143: *47 open() \"/var/lib/nginx/proxy/4/02/0000000024\" failed (13: Permission denied) while reading upstream, client: 127.0.0.1, server: localhost, request: \"GET /health HTTP/1.1\", upstream: \"http://127.0.0.1:19860/health\", host: \"127.0.0.1:19851\"\n2026/09/24 17:02:09 [crit] 54143#54143: *49 open() \"/var/lib/nginx/proxy/5/02/0000000025\" failed (13: Permission denied) while reading upstream, client: 127.0.0.1, server: localhost, request: \"GET /health HTTP/1.1\", upstream: \"http://127.0.0.1:19860/health\", host: \"127.0.0.1:19851\"\n2026/09/24 17:02:10 [crit] 54143#54143: *51 open() \"/var/lib/nginx/proxy/6/02/0000000026\" failed (13: Permission denied) while reading upstream, client: 127.0.0.1, server: localhost, request: \"GET /health HTTP/1.1\", upstream: \"http://127.0.0.1:19860/health\", host: \"127.0.0.1:19851\"\n2026/09/24 17:02:11 [crit] 54143#54143: *53 open() \"/var/lib/nginx/proxy/7/02/0000000027\" failed (13: Permission denied) while reading upstream, client: 127.0.0.1, server: localhost, request: \"GET /health HTTP/1.1\", upstream: \"http://127.0.0.1:19860/health\", host: \"127.0.0.1:19851\"\n2026/09/24 17:02:12 [crit] 54143#54143: *55 open() \"/var/lib/nginx/proxy/8/02/0000000028\" failed (13: Permission denied) while reading upstream, client: 127.0.0.1, server: localhost, request: \"GET /health HTTP/1.1\", upstream: \"http://127.0.0.1:19860/health\", host: \"127.0.0.1:19851\"\n2026/09/24 17:02:13 [crit] 54143#54143: *57 open() \"/var/lib/nginx/proxy/9/02/0000000029\" failed (13: Permission denied) while reading upstream, client: 127.0.0.1, server: localhost, request: \"GET /health HTTP/1.1\", upstream: \"http://127.0.0.1:19860/health\", host: \"127.0.0.1:19851\"\n2026/09/24 17:02:14 [crit] 54143#54143: *59 open() \"/var/lib/nginx/proxy/0/03/0000000030\" failed (13: Permission denied) while reading upstream, client: 127.0.0.1, server: localhost, request: \"GET /health HTTP/1.1\", upstream: \"http://127.0.0.1:19860/health\", host: \"127.0.0.1:19851\"\n"
+  ],
+  "unresolved": []
+}
