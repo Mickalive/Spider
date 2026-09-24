@@ -1,0 +1,141 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-35954196999",
+  "lane": "product",
+  "status": "MEASUREMENT_INVALID",
+  "outcome": "INCONCLUSIVE",
+  "metrics": {
+    "n_non304": null,
+    "rho_proxy_real": null,
+    "rho_proxy_real_per_stratum": null,
+    "M_total_f10_tokens": null,
+    "M_total_f100_tokens": null,
+    "M_total_f10_latency_ms": null,
+    "M_total_f10_browser_calls": null,
+    "M_per_hit_f10_tokens": null,
+    "success_rate_n0": null,
+    "false_accept_rate": null,
+    "ECE_5bin": null,
+    "correlated_probe_saving_pct": null,
+    "webmcp_lookup_hit_rate": null,
+    "sgdr_hit_rate": null,
+    "mv2_kernel_5of5_executable": true,
+    "mv2_kernel_dot_regex_patched": true,
+    "frozen_inputs_byte_identical": true,
+    "scientific_stack_installable": true,
+    "single_node_substrate_provisioned": false,
+    "docker_browsergym_image_available": false,
+    "openai_key_available": false,
+    "sgdr_index_present": false,
+    "dsm_compile_ok": null,
+    "hard258_census_staged": false,
+    "fixtures_present_prior_paths": true
+  },
+  "controls": {
+    "PC-SINGLE-NODE-PARETO-CORRELATED": {
+      "expected_behavior": "PC1 hit 1.0 per_hit ~50; PC2 Jaccard<0.30 max 0.0 kernel 1.0/1.0 confidence>=0.80 correlated probe fresh ~1.0 stale ~0.5 accuracy>=0.90 saving>=30% registry 714/2147 1.0 at n0 SGDR 36 hit>=0.5; PC3 false_accept 0.10-0.60; PC4 formula within 1e-6; PC5 n_non304>=800 single-node sticky health_gated.",
+      "observed_behavior": "PC2 kernel sub-gate PASS this run: dot-regex patched (src/spider/kernel.py post-patch sha256 d926279d5ee14a044a2f13b8abc09202df9f5adb9e86feaadeb61818a15f4038, exactly the frozen prereg-referenced patched sha prefix d926279d) and 5/5 n0 EXECUTABLE confidence 0.85 with correct dot-nested binding (${item.id}, ${family.id}, ${site.name}), family-gate abstention UNKNOWN, low-confidence EXPLORE (see artifacts/mv2_kernel_spot_check.json; unittest tests/test_kernel.py 3/3 PASS). All other PC1-PC5 sub-gates FAIL/UNKNOWN: no single-node substrate (no /tmp/spider-runtime, no shared.db anywhere, n_non304 null), no BrowserGym image + no OPENAI_API_KEY so rho_proxy_real unmeasurable, SGDR index absent repo-wide, registry 714/2147 not rebuilt for this experiment, no executed pipeline for PC1/PC3/PC4.",
+      "pass_fail": "UNKNOWN",
+      "evidence_refs": [
+        "artifacts/mv2_kernel_spot_check.json",
+        "artifacts/env_audit.json",
+        "src/spider/kernel.py"
+      ]
+    },
+    "NC-SINGLE-NODE-SHUFFLE-PIPELINE": {
+      "expected_behavior": "NC1 |rho|<0.25 ns (|rho_shuffled|<0.20 p>=0.20 within-std>0 per-stratum |rho_length|<0.20); NC2 false_accept>=0.10; NC3 rho~0 R2~0; NC4 correlated vs random delta >10% shared vs isolated TN contrast.",
+      "observed_behavior": "Not runnable: nulls must execute through the actual single-node health-gated pipeline (resolve/_bind/probe/registry-lookup/SGDR-rerank/auditorCache), which does not exist in this environment. Per frozen design no simulated correctness is permitted (test-warm / mock wrong-bound p=0.15 not substituted).",
+      "pass_fail": "UNKNOWN",
+      "evidence_refs": [
+        "artifacts/env_audit.json"
+      ]
+    },
+    "B-COLD": {
+      "expected_behavior": "M_total_f10 ~5497 tokens, latency ~7265ms, flat vs n",
+      "observed_behavior": "Not measurable: requires single-node health-gated nginx+gunicorn+PyJWT+WAL substrate with honest counter execution; not present. File-proxy numbers from prior runs are bounded file-proxy evidence only (do_not_assume per prereg).",
+      "pass_fail": "UNKNOWN",
+      "evidence_refs": []
+    },
+    "B-RAG-EMBED-TAU030-QCR": {
+      "expected_behavior": "per_hit ~54 at n0, M_total_f10 ~3703 tokens; target to beat",
+      "observed_behavior": "Not measurable on this run: no substrate, no re-built QCR bank for this experiment; only prior-run artifact research/experiments/EXP-PRODUCT-35916130502/artifacts/qcr_bank_manifest.json (sha256 8c69804b249ec9c84cf05d86a21c7ebe7a31af5f8d45e50a4e6d477b449f9f58, 36 families TAU 0.30 Jaccard<0.30) exists in-repo as cross-experiment evidence, not this experiment's staged census.",
+      "pass_fail": "UNKNOWN",
+      "evidence_refs": [
+        "research/experiments/EXP-PRODUCT-35916130502/artifacts/qcr_bank_manifest.json"
+      ]
+    },
+    "B-STAGEHAND-CACHE": {
+      "expected_behavior": "hit_rate 1.0 at n0 per_hit ~50, 0 at n>=0.25",
+      "observed_behavior": "Not measurable: exact-repeat DOM-hash cache requires BrowserGym CDP AX DOM hash or disclosed file-proxy hash path; file-proxy fallback is banned by frozen falsifier for this experiment (no file-proxy fallback).",
+      "pass_fail": "UNKNOWN",
+      "evidence_refs": []
+    },
+    "P-STAGEHAND-TTL-CORRELATED": {
+      "expected_behavior": "correlated probeHit ~1.0 at n0 ~0.5 at n0.25 accuracy>=0.90 saving>=30% Pareto dominance vs RAG",
+      "observed_behavior": "Not measurable: correlated TTL/ETag conditional probe requires provisioned If-None-Match/304 substrate with n_non304>=800; absent (n_non304 null).",
+      "pass_fail": "UNKNOWN",
+      "evidence_refs": []
+    },
+    "P-DSM-COMPILE-O1": {
+      "expected_behavior": "O(1) map-build compile 30 workers tokens; lookup latency ~0.2ms; hit_rate 1.0 at n0 on 714/2147",
+      "observed_behavior": "Not measurable: DSM compile requires the provisioned pipeline counters and this experiment's staged webmcp_registry (714/2147). Prior-run registry evidence exists (sha256 af3c18e5ef1904484c5d440353b327958bdcc909e72915b301724b9f49bcdb4c, 2147 lines / 714 sites) but O(1) economics not re-measured on this run.",
+      "pass_fail": "UNKNOWN",
+      "evidence_refs": [
+        "research/experiments/EXP-PRODUCT-35916130502/artifacts/webmcp_registry.jsonl"
+      ]
+    },
+    "P-SGDR-AWM": {
+      "expected_behavior": "SGDRHitRate ~0.6 at n0.25 vs RAG ~0.5 vs WebMCP 1.0 at n0; delta vs WebMCP <20% would subsume tool benefit",
+      "observed_behavior": "Not measurable: sgdr_index.json (36 state_key, TRAIN-only) is absent repo-wide (searched research/ maxdepth 4 and codex/ maxdepth 3); SGDR corpus not built for this run.",
+      "pass_fail": "UNKNOWN",
+      "evidence_refs": []
+    }
+  },
+  "artifacts": [
+    {"path": "artifacts/env_audit.json", "sha256": "f3e99ad6651d635d97fa04d48f5b9608f519e9129cf28ebdaa8d43fdc99ab29f", "role": "raw"},
+    {"path": "artifacts/mv2_kernel_spot_check.json", "sha256": "deee06f08ae7a4e01de170e261616751995bd6bb9e62bfe0d9b93e415e9492ef", "role": "derived"},
+    {"path": "src/spider/kernel.py", "sha256": "d926279d5ee14a044a2f13b8abc09202df9f5adb9e86feaadeb61818a15f4038", "role": "code"},
+    {"path": "prereg.md", "sha256": "ba51631006aa8d598e6f2e7fdc5c7f50c5ca88db6372901fa35bac9bea068a65", "role": "fixture"},
+    {"path": "request.json", "sha256": "500888432e900629085d83032bf13d75aa528166427862fc59f4228e7a08e43a", "role": "fixture"},
+    {"path": "spec.json", "sha256": "5cf9297b763238b704a78436655121b0d83043f8d9268112ca5d8a27e917a7be", "role": "fixture"},
+    {"path": "freeze.json", "sha256": "810514ca93cc102aaa2b370d5ae93a8a6066991ca7fc9335a9a87ec982d31077", "role": "fixture"},
+    {"path": "research/experiments/EXP-PRODUCT-35916130502/artifacts/qcr_bank_manifest.json", "sha256": "8c69804b249ec9c84cf05d86a21c7ebe7a31af5f8d45e50a4e6d477b449f9f58", "role": "fixture"},
+    {"path": "research/experiments/EXP-PRODUCT-35916130502/artifacts/webmcp_registry.jsonl", "sha256": "af3c18e5ef1904484c5d440353b327958bdcc909e72915b301724b9f49bcdb4c", "role": "fixture"},
+    {"path": "research/experiments/EXP-PRODUCT-35916130502/artifacts/webmcp_sites.jsonl", "sha256": "8e106525f63bd2fc3f6138511fc5b8f6e6a033aed41bee765920b8b63e33e4df", "role": "fixture"},
+    {"path": "research/experiments/EXP-PRODUCT-35916130502/artifacts/cost_config.json", "sha256": "55fa25af079dffb372835487a31914f536ff907c0055c5e1dce86f707c2a3433", "role": "fixture"},
+    {"path": "research/experiments/EXP-PRODUCT-35916130502/artifacts/curated_manifest.json", "sha256": "0219b15fddc0999e7c3b70a1491583a08187e5056d1ff96f59bdca33fe5f4926", "role": "fixture"},
+    {"path": "research/experiments/EXP-PRODUCT-35916130502/fixtures/tasks.json", "sha256": "391e8f6cf167300cf223ebbb19cf5d2beed6568f5f84ac968ae88866a438a98b", "role": "fixture"}
+  ],
+  "observations": [
+    "Frozen inputs re-verified byte-identical to freeze.json (request.json 500888432e900629085d83032bf13d75aa528166427862fc59f4228e7a08e43a, spec.json 5cf9297b763238b704a78436655121b0d83043f8d9268112ca5d8a27e917a7be, prereg.md ba51631006aa8d598e6f2e7fdc5c7f50c5ca88db6372901fa35bac9bea068a65, freeze.json 810514ca93cc102aaa2b370d5ae93a8a6066991ca7fc9335a9a87ec982d31077) at run start and again at packet write.",
+    "git HEAD 30c57a10 'R2 product: execution base EXP-PRODUCT-35954196999'; execution_checkpoint.json records pre_execute_sha 77f7cd9b; prior EXECUTE attempts produced no packet outputs (failure.json code 76; model_execute.json attempt 3 exit_code 76 category output-missing).",
+    "src/spider/kernel.py at HEAD (blob cfec9866, sha256 46929b3a951df48d7f9d1fd850871073c0d91c1868aa117e13d389fe274e8d61) contains the NON-dot regex r\"\\$\\{([A-Za-z_][A-Za-z0-9_]*)\\}\" on line 12 -> MV2 gate FAIL at HEAD. Parent verdict commit dac04e60's kernel blob cfec9866 is byte-identical pre-patch. The frozen MV2 patch was re-applied this run: r\"\\$\\{([A-Za-z_][A-Za-z0-9_\\.]*)\\}\"; post-patch sha256 d926279d5ee14a044a2f13b8abc09202df9f5adb9e86feaadeb61818a15f4038 (git diff shows exactly this one-line change).",
+    "MV2 spot-check executed 5/5 resolutions: ${item.id}/${family.id}/${site.name} dot-nested slots -> EXECUTABLE confidence 0.85 with correct binding; unknown family -> abstain UNKNOWN; confidence-0.5 mechanism -> EXPLORE not EXECUTABLE. all_pass true recorded in artifacts/mv2_kernel_spot_check.json (sha256 deee06f08ae7a4e01de170e261616751995bd6bb9e62bfe0d9b93e415e9492ef). tests/test_kernel.py 3/3 PASS with the patch.",
+    "Environment: Python 3.12.14, pip 26.2.1, 4 cores, 15 GB RAM, 85 GB free, Linux 6.17.0-1022-azure x86_64. Scientific stack ABSENT at run start (ModuleNotFoundError for numpy); executor installed numpy 2.5.3, scipy 1.18.1, sklearn 1.9.1, pandas 3.0.6, flask 3.1.3, pyjwt 2.15.0, gunicorn 26.2.0, requests 2.34.2, pytest; pip install -e . succeeded (import spider ok). Frozen MV3 pins gunicorn 23.0.0 and pyjwt 2.14.0 -> installed versions differ.",
+    "Docker 28.0.4 daemon present; only 6 gh-aw firewall/dependabot local images; docker pull ghcr.io/servicenow/browsergym:0.14.3 -> 'Error response from daemon: Head https://ghcr.io/v2/servicenow/browsergym/manifests/0.14.3: denied'. pip index shows browsergym 0.14.3 exists on PyPI but not installed; pip webarena package not found on index.",
+    "OPENAI_API_KEY unset; only GH_TOKEN present in environment; no LLM key of any provider -> rho_proxy_real pooled and per-stratum unmeasurable (no gpt-4o-mini).",
+    "/tmp/spider-runtime does not exist; shared.db found nowhere on filesystem (find / -name 'shared.db*' empty); no SQLite WAL. nginx 1.24.0 binary present but not running and only stock sites-enabled/default config (no proxy_pass, no upstream block, no $request_uri sticky hash, no ETag/304 conditional path); no process listening on 80/8080/8000 at audit.",
+    "n_non304 is null: no conditional probe executed because no If-None-Match/304 substrate exists.",
+    "Fixtures present only under prior-run paths (EXP-PRODUCT-35916130502): qcr_bank_manifest.json 8c69804b249ec9c84cf05d86a21c7ebe7a31af5f8d45e50a4e6d477b449f9f58 (36 families, TAU 0.30, bank_source pools A/B disjoint orthogonal Jaccard<0.30); webmcp_registry.jsonl af3c18e5ef1904484c5d440353b327958bdcc909e72915b301724b9f49bcdb4c (2147 lines, 714 distinct site_id); webmcp_sites.jsonl 8e106525f63bd2fc3f6138511fc5b8f6e6a033aed41bee765920b8b63e33e4df (714 lines); cost_config.json 55fa25af079dffb372835487a31914f536ff907c0055c5e1dce86f707c2a3433; curated_manifest.json 0219b15fddc0999e7c3b70a1491583a08187e5056d1ff96f59bdca33fe5f4926; fixtures/tasks.json 391e8f6cf167300cf223ebbb19cf5d2beed6568f5f84ac968ae88866a438a98b (192 tasks, 36 families, 36 demos, families_ge3 36, L=8 per family). sgdr_index NOT FOUND repo-wide (find research/ maxdepth 4 and codex/ maxdepth 3 empty).",
+    "Dependency lanes this cycle: runtime EXP-RUNTIME-35949568321 C-MEAS-VALID -> MEASUREMENT_INVALID (wsgi.py sys.path.insert(BASE_DIR='/tmp/spider-runtime/35949568321') then 'from run_experiment import create_app' wrong path -> gunicorn ModuleNotFoundError); graph EXP-GRAPH-35952148696 C-DELTA-REPAIR -> SURVIVES_CURRENT_TEST but C-FRESHNESS established ceiling is narrow deterministic detection+repair ONLY on stdlib http.server single-resource flat-JSON /resource/{id}, transfer to health-gated distributed substrate explicitly open. No EXP-RUNTIME-*/EXP-GRAPH-* dirs exist under research/experiments/ (codex copies only).",
+    "git working tree at packet write: modified SPIDER_CODEX.md, codex/claim_state.json, codex/index.json, research/experiments/EXP-PRODUCT-35954196999/model_execute.json, src/spider/kernel.py (this run's patch); untracked codex/experiments/EXP-GRAPH-35952148696/, EXP-INTEL-35947486685/, EXP-PHYSICS-35952152826/, research/experiments/EXP-PRODUCT-35954196999/artifacts/, src/spider_web_inheritance.egg-info/ (pip editable-install metadata). Nothing committed by this run.",
+    "No outcome-bearing economics measurements were executed: frozen rule bans file-proxy fallback, n*3200 bijective proxy, and seeded-42 random proxy; no pipeline exists to run PC1/PC3/PC4/NC1-NC4 honestly."
+  ],
+  "validity_notes": [
+    "Frozen falsifier precedence fires on multiple independent DIE triggers, so this experiment is MEASUREMENT_INVALID by the frozen decision rule irrespective of any economics: (a) single-node HS256 sticky substrate not provisioned (/tmp/spider-runtime absent; shared.db absent anywhere; nginx 1.24.0 stock config only, not running; n_non304 null < 800); (b) Docker BrowserGym 0.14.3 image + gpt-4o-mini key unavailable so rho_proxy_real pooled and per-stratum unmeasurable; (c) SGDR index (36 state_key) absent repo-wide; (d) Director-REOPEN stacking dependencies not satisfied this cycle - runtime C-MEAS-VALID single-node HS256 gate MEASUREMENT_INVALID (EXP-RUNTIME-35949568321 gunicorn wsgi import loop), graph C-FRESHNESS single-node TN>=0.85 validated only on synthetic stdlib http.server flat-JSON (EXP-GRAPH-35952148696 established ceiling), no EXP-RUNTIME-*/EXP-GRAPH-* dirs exist under research/experiments/. This is infrastructure/substrate failure, NOT scientific falsification; do_not_assume from prereg holds.",
+    "One MV gate resolved vs parent: MV2 kernel dot-regex patch re-applied and verified (5/5 EXECUTABLE at confidence>=0.80 with correct dot binding ${item.id}/${family.id}/${site.name}, family-gate UNKNOWN abstention, low-confidence EXPLORE; tests/test_kernel.py 3/3 PASS). Post-patch sha256 d926279d matches the frozen prereg-referenced patched sha prefix exactly. IMPORTANT durability finding for this cycle: the parent's claimed patched kernel state was NOT in the committed tree (blob cfec9866 pre-patch at dac04e60 and at HEAD 30c57a10); the patch must be committed with the verdict or it will regress again.",
+    "scientific stack installability now established (numpy 2.5.3, scipy 1.18.1, sklearn 1.9.1, pandas 3.0.6, flask 3.1.3, pyjwt 2.15.0, gunicorn 26.2.0, requests 2.34.2 importable): 5000-bootstrap/5000-permutation machinery computable in principle once substrate and fixtures exist. Version drift vs frozen MV3 pins persists (gunicorn 26.2.0 != 23.0.0, pyjwt 2.15.0 != 2.14.0); resolve before any SURVIVES-class claim.",
+    "No economics metrics (M_total, M_per_hit, Pareto, calibration, freshness, rho, n_non304) were computed or inferred: frozen rule bans file-proxy fallback, n*3200 bijective proxy, and seeded-42 random proxy. null entries mean explicitly unknown/not available per packet contract, not zero.",
+    "Hard 258 pip census fixture not staged; only prior-run 192/36 fallback census present (tasks.json 391e8f6c: 36 families, 36 demos, families_ge3 36, L=8 per family). Fallback existence is disclosed but does not satisfy MV1/MV7 staging for this experiment.",
+    "Prior-run in-repo artifacts (qcr_bank_manifest 8c69804b, webmcp_registry/webmcp_sites af3c18e5/8e106525 714/2147, cost_config 55fa25af, curated_manifest 0219b15f) are cross-experiment immutable references evidencing fixture availability for future staging; they were not re-measured as this experiment's census and carry bounded file-proxy ceiling only.",
+    "A previous execute attempt (model_execute.json attempt 3, exit_code 76, category output-missing) produced no packet outputs; this run is the first complete producer output for the frozen experiment. Prior-attempt files left untouched."
+  ],
+  "unresolved": [
+    "Smallest next action to unblock MEASUREMENT_INVALID -> measurable economics: provision OPENAI_API_KEY (gpt-4o-mini) and a pullable BrowserGym 0.14.3 Docker image (ghcr.io/servicenow/browsergym:0.14.3 currently denied; need registry access or alternative 2000-node 1280x720 CDP AX image), then measure rho_proxy_real pooled + per-stratum.",
+    "Provision single-node substrate exactly per frozen MV3: /tmp/spider-runtime/shared.db (SQLite WAL), single-worker gunicorn pinned 23.0.0, nginx 1.24.0 $request_uri sticky hash, PyJWT 2.14.0 HS256, real If-None-Match/ETag W/body_sha conditional 200 vs 304 loop, n_non304>=800; log WAL=1 worker=1 JWT alg TN n_non304 sticky hash. Runtime lane's wsgi.py sys.path import-loop blocker must be fixed first (EXP-RUNTIME-35949568321 MEASUREMENT_INVALID).",
+    "Build sgdr_index.json (36 state_key, TRAIN-only Curated-A, file-proxy hash disclosed per MV7) and stage frozen fixtures for THIS experiment: 192/36 orthogonal census (or Hard 258), qcr_bank_manifest TAU0.30 Jaccard<0.30, webmcp registry 714/2147 + DSM compile inputs, cost_config.",
+    "Commit the MV2 kernel dot-regex patch so it is durable (this cycle proved the parent patch state was not in the tree; blob cfec9866 pre-patch at verdict commit dac04e60).",
+    "After substrate+key+fixtures: run PC1-PC5 and NC1-NC4 via the actual single-node pipeline, then C1-C4 gate suite (bootstrap5000 family-stratified, block-permutation5000, ECE/latency/utility Pareto accounting) before any SURVIVES/FALSIFIED/SUPERSEDE decision on C-PRODUCT-ECON.",
+    "Reconcile gunicorn (26.2.0 installed vs frozen 23.0.0) and PyJWT (2.15.0 installed vs frozen 2.14.0) versions when provisioning; frozen MV3 specifies exact versions."
+  ]
+}

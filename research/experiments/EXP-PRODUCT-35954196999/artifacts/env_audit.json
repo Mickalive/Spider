@@ -1,0 +1,128 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-35954196999",
+  "lane": "product",
+  "role": "raw_environment_audit",
+  "audited_at_run_start": true,
+  "environment": {
+    "python": "Python 3.12.14",
+    "pip": "pip 26.2.1",
+    "platform": "Linux runnervmlun5p 6.17.0-1022-azure #22-Ubuntu SMP Mon Jul 27 17:24:03 UTC 2026 x86_64 GNU/Linux",
+    "runner_user": "runner uid=1001",
+    "cores": "4",
+    "mem_gb": "15 (14 available)",
+    "disk_free_gb": "85"
+  },
+  "scientific_stack": {
+    "present_at_run_start": "no (ModuleNotFoundError for numpy/scipy/sklearn/pandas/flask/pyjwt/gunicorn at audit)",
+    "installed_by_executor": {
+      "numpy": "2.5.3",
+      "scipy": "1.18.1",
+      "sklearn": "1.9.1",
+      "pandas": "3.0.6",
+      "flask": "3.1.3",
+      "pyjwt": "2.15.0",
+      "gunicorn": "26.2.0",
+      "requests": "2.34.2",
+      "pytest": "installed"
+    },
+    "frozen_mv3_pins": {"gunicorn": "23.0.0", "pyjwt": "2.14.0"},
+    "version_drift": "gunicorn 26.2.0 != 23.0.0; pyjwt 2.15.0 != 2.14.0"
+  },
+  "spider_package": {
+    "editable_install": "pip install -e . succeeded; import spider ok",
+    "side_effect": "untracked src/spider_web_inheritance.egg-info/ created (build metadata)"
+  },
+  "substrate": {
+    "tmp_spider_runtime_exists": "no",
+    "shared_db_anywhere": "none found (find / -name shared.db* 2>/dev/null empty)",
+    "sqlite_wal_present": "no",
+    "nginx_binary": "nginx version: nginx/1.24.0 (Ubuntu)",
+    "nginx_running": "no",
+    "nginx_config": "only stock sites-enabled/default; no proxy_pass, no upstream block, no $request_uri sticky hash, no ETag/304 conditional path",
+    "gunicorn_installed_at_run_start": "no",
+    "pyjwt_installed_at_run_start": "no",
+    "listening_ports": "no process on 80/8080/8000 at audit"
+  },
+  "llm_keys": {
+    "OPENAI_API_KEY_set": "no",
+    "other_env_keys": "GH_TOKEN only (no LLM keys)"
+  },
+  "browsergym": {
+    "pip_browsergym_available": "browsergym 0.14.3 on PyPI index (serve pip index versions)",
+    "pip_webarena_available": "not found on pip index",
+    "ghcr_browsergym_pull": "Error response from daemon: Head \"https://ghcr.io/v2/servicenow/browsergym/manifests/0.14.3\": denied",
+    "local_images": "6 local Docker images, all gh-aw firewall/dependabot (no browsergym/playwright image)",
+    "browsergym_installed_in_venv": "no"
+  },
+  "fixtures": {
+    "prior_qcr_bank_manifest": {
+      "path": "research/experiments/EXP-PRODUCT-35916130502/artifacts/qcr_bank_manifest.json",
+      "sha256": "8c69804b249ec9c84cf05d86a21c7ebe7a31af5f8d45e50a4e6d477b449f9f58",
+      "content_summary": "36 families, TAU 0.30, bank_source pools A/B disjoint orthogonal Jaccard<0.30"
+    },
+    "webmcp_registry": {
+      "path": "research/experiments/EXP-PRODUCT-35916130502/artifacts/webmcp_registry.jsonl",
+      "sha256": "af3c18e5ef1904484c5d440353b327958bdcc909e72915b301724b9f49bcdb4c",
+      "counts": "2147 lines, 714 distinct site_id (frozen identity 714/2147)"
+    },
+    "webmcp_sites": {
+      "path": "research/experiments/EXP-PRODUCT-35916130502/artifacts/webmcp_sites.jsonl",
+      "sha256": "8e106525f3c9e813dd50326c885db00a5747e083f08e771336ae7057edec6d93",
+      "counts": "714 lines"
+    },
+    "prior_cost_config": {
+      "sha256": "55fa25af079dffb372835487a31914f536ff907c0055c5e1dce86f707c2a3433",
+      "content_summary": "retrieval 200 tok, tool 15 tok, probe 10 tok, verify 50 tok, TTL 60 s, f=10"
+    },
+    "tasks_fixture": {
+      "path": "research/experiments/EXP-PRODUCT-35916130502/fixtures/tasks.json",
+      "sha256": "391e8f6c5fef4dcb4a3dfb51a130952d1923cc4f63968b895a9708776310995d",
+      "content_summary": "192 tasks, 36 families, 36 demos, families_ge3 36, L=8 per family (fallback census, not Hard 258)"
+    },
+    "curated_manifest": {
+      "path": "research/experiments/EXP-PRODUCT-35916130502/artifacts/curated_manifest.json",
+      "sha256": "0219b15f93b7e53133d2e7ba00c7d7232b1333ac5d0e80a1e374166b1e24e2c9"
+    },
+    "sgdr_index_search": "NOT FOUND repo-wide (find research -maxdepth 4; find codex -maxdepth 3)",
+    "staged_for_this_experiment": "no (fixtures remain under prior-run paths only)"
+  },
+  "frozen_inputs": {
+    "request.json_sha": "500888432e900629085d83032bf13d75aa528166427862fc59f4228e7a08e43a",
+    "spec.json_sha": "5cf9297b763238b704a78436655121b0d83043f8d9268112ca5d8a27e917a7be",
+    "prereg.md_sha": "ba51631006aa8d598e6f2e7fdc5c7f50c5ca88db6372901fa35bac9bea068a65",
+    "freeze.json_sha": "810514ca93cc102aaa2b370d5ae93a8a6066991ca7fc9335a9a87ec982d31077",
+    "all_byte_identical_to_freeze": true
+  },
+  "kernel": {
+    "head_blob": "cfec9866",
+    "head_sha256": "46929b3a951df48d7f9d1fd850871073c0d91c1868aa117e13d389fe274e8d61",
+    "at_head_regex": "r\"\\$\\{([A-Za-z_][A-Za-z0-9_]*)\\}\" (no dot) -> MV2 gate FAIL at HEAD",
+    "patched_regex": "r\"\\$\\{([A-Za-z_][A-Za-z0-9_\\.]*)\\}\"",
+    "post_patch_sha256": "d926279d5ee14a044a2f13b8abc09202df9f5adb9e86feaadeb61818a15f4038",
+    "post_patch_matches_frozen_d926279d_prefix": true,
+    "patch_durability": "patch was NOT durable in committed tree: parent verdict commit dac04e60 blob cfec9866 still pre-patch 46929b3a; re-applied this run"
+  },
+  "dependency_lanes_this_cycle": {
+    "runtime": {
+      "packet": "codex/experiments/EXP-RUNTIME-35949568321/verdict.json",
+      "decision": "MEASUREMENT_INVALID",
+      "reason": "wsgi.py sys.path.insert(BASE_DIR='/tmp/spider-runtime/35949568321') then 'from run_experiment import create_app' wrong path -> gunicorn ModuleNotFoundError, deterministic substrate failure; C-MEAS-VALID single-node HS256 gate NOT validated",
+      "research_experiments_dir": "no EXP-RUNTIME-* dirs exist under research/experiments/ (codex copies only)"
+    },
+    "graph": {
+      "packet": "codex/experiments/EXP-GRAPH-35952148696/handoff.json",
+      "decision": "SURVIVES_CURRENT_TEST (C-DELTA-REPAIR)",
+      "established_ceiling": "narrow deterministic detection+repair sub-ceiling ONLY on stdlib http.server single-resource flat-JSON /resource/{id}; C-FRESHNESS TN>=0.85 NOT validated on health-gated distributed substrate (that transfer is the open next_question)",
+      "research_experiments_dir": "no EXP-GRAPH-* dirs exist under research/experiments/ (codex copies only)"
+    }
+  },
+  "git": {
+    "head": "30c57a10",
+    "head_message": "R2 product: execution base EXP-PRODUCT-35954196999",
+    "execution_checkpoint_pre_execute_sha": "77f7cd9b",
+    "prior_attempts": "failure.json code 76; model_execute.json attempt 3 exit_code 76 category output-missing (no packet outputs produced)",
+    "working_tree_at_audit": "M SPIDER_CODEX.md, M codex/claim_state.json, M codex/index.json, M research/experiments/EXP-PRODUCT-35954196999/model_execute.json, M src/spider/kernel.py (my patch), ?? codex/experiments/EXP-GRAPH-35952148696/, ?? codex/experiments/EXP-INTEL-35947486685/, ?? codex/experiments/EXP-PHYSICS-35952152826/, ?? research/experiments/EXP-PRODUCT-35954196999/artifacts/, ?? src/spider_web_inheritance.egg-info/",
+    "committed_nothing": true
+  }
+}

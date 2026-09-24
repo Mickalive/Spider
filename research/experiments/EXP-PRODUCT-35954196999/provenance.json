@@ -1,0 +1,57 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-35954196999",
+  "lane": "product",
+  "stage": "EXECUTE",
+  "model_id": "opencode/big-pickle",
+  "git": {
+    "head": "30c57a10",
+    "head_message": "R2 product: execution base EXP-PRODUCT-35954196999",
+    "execution_checkpoint_pre_execute_sha": "77f7cd9b",
+    "parent_verdict_commit": "dac04e60",
+    "committed_this_run": false,
+    "working_tree_deltas": "M src/spider/kernel.py (MV2 patch, this run); M research/experiments/EXP-PRODUCT-35954196999/model_execute.json (prior attempt, pre-existing); M SPIDER_CODEX.md, codex/claim_state.json, codex/index.json (pre-existing other-lane deltas, untouched); ?? codex/experiments/EXP-GRAPH-35952148696/, EXP-INTEL-35947486685/, EXP-PHYSICS-35952152826/ (codex sync, untouched); ?? research/experiments/EXP-PRODUCT-35954196999/artifacts/ (this run); ?? src/spider_web_inheritance.egg-info/ (pip editable-install metadata)"
+  },
+  "frozen_inputs": {
+    "request.json": "500888432e900629085d83032bf13d75aa528166427862fc59f4228e7a08e43a",
+    "spec.json": "5cf9297b763238b704a78436655121b0d83043f8d9268112ca5d8a27e917a7be",
+    "prereg.md": "ba51631006aa8d598e6f2e7fdc5c7f50c5ca88db6372901fa35bac9bea068a65",
+    "freeze.json": "810514ca93cc102aaa2b370d5ae93a8a6066991ca7fc9335a9a87ec982d31077",
+    "verified_byte_identical": true
+  },
+  "kernel": {
+    "pre_patch_sha256": "46929b3a951df48d7f9d1fd850871073c0d91c1868aa117e13d389fe274e8d61",
+    "post_patch_sha256": "d926279d5ee14a044a2f13b8abc09202df9f5adb9e86feaadeb61818a15f4038",
+    "diff": "single line: _PARAMETER regex gains dot class [A-Za-z0-9_\\.]* per frozen MV2 patch",
+    "tests": "tests/test_kernel.py 3/3 PASS; MV2 spot-check 5/5 all_pass"
+  },
+  "outputs": {
+    "result.json": "d17c8d0624c59646b2cc2d7e0417c10a5ae9e7b2d9c854b292bcd3761344fe5a",
+    "report.md": "d098a0064857402d4c38ac4c68aa4f5e4e18f552b97c751146c67c37b145cd31",
+    "provenance.json": null,
+    "artifacts/env_audit.json": "f3e99ad6651d635d97fa04d48f5b9608f519e9129cf28ebdaa8d43fdc99ab29f",
+    "artifacts/mv2_kernel_spot_check.json": "deee06f08ae7a4e01de170e261616751995bd6bb9e62bfe0d9b93e415e9492ef"
+  },
+  "environment": "Python 3.12.14, pip 26.2.1, 4 cores / 15 GB / 85 GB free, Linux 6.17.0-1022-azure; Docker 28.0.4 (browsergym pull denied); OPENAI_API_KEY unset",
+  "scientific_stack_installed": {
+    "numpy": "2.5.3", "scipy": "1.18.1", "sklearn": "1.9.1", "pandas": "3.0.6",
+    "flask": "3.1.3", "pyjwt": "2.15.0", "gunicorn": "26.2.0", "requests": "2.34.2", "pytest": "latest"
+  },
+  "frozen_version_pins": {"gunicorn": "23.0.0", "pyjwt": "2.14.0"},
+  "prior_attempts": [
+    {"file": "failure.json", "exit_code": 76},
+    {"file": "model_execute.json", "attempt": 3, "exit_code": 76, "category": "output-missing"}
+  ],
+  "dependency_lanes": {
+    "runtime": {"id": "EXP-RUNTIME-35949568321", "claim": "C-MEAS-VALID", "decision": "MEASUREMENT_INVALID", "packet": "codex/experiments/EXP-RUNTIME-35949568321/verdict.json"},
+    "graph": {"id": "EXP-GRAPH-35952148696", "claim": "C-DELTA-REPAIR", "decision": "SURVIVES_CURRENT_TEST", "ceiling": "synthetic stdlib http.server flat-JSON only", "packet": "codex/experiments/EXP-GRAPH-35952148696/handoff.json"}
+  },
+  "status": "MEASUREMENT_INVALID",
+  "outcome": "INCONCLUSIVE",
+  "evidence_notes": [
+    "Raw evidence preserved in artifacts/env_audit.json and result.json.observations; interpretation confined to result.json.validity_notes and report.md.",
+    "Measurement failure (missing substrate/key/index/image) distinguished from negative result: no claim about C-PRODUCT-ECON economics made.",
+    "No frozen file modified; no git commit/push/reset performed.",
+    "provenance.json self-hash is null because its content hash is self-referential (fixed-point); verifiers may hash the file directly. All other output hashes are final."
+  ]
+}
