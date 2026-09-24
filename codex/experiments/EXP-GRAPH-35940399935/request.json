@@ -1,0 +1,47 @@
+{
+  "base_sha": "dc48b3c70c01aa08544d83463c81d21cc1339881",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-24T00:53:00.036578+00:00",
+  "director_mandate": {
+    "agent_priors_used": [
+      "Prior: Agents accumulate path-dependence; early retrieval/prompt choices anchor later planning, causing over-application of inherited mechanisms and high false_accept unless fresh-context execution and calibrated UNKNOWN abstention are enforced (prior, not SPIDER evidence)",
+      "Prior: Salience from prior context inflates pooled metrics; per-family / trajectory-grouped resampling is required because pooled bootstrap hides 0/10 per-family failures (prior, not SPIDER evidence)",
+      "Prior: Long-horizon browsers compound self-generated subproblem errors via DOM hash truncation; PMI/CMI can detect action->own-request tautology rather than environment dynamics, so beyond-memory tests need latent-state-correlated DOM (session/permission/user data) not independent per-step noise (prior, not SPIDER evidence)",
+      "Prior: O(1) caching/compilation wins vs O(MxN) browsing depend on correct routing/state normalization; freshness and delta-repair are complements to compilation, not competitors (prior, not SPIDER evidence)",
+      "Prior: Shared vs per-node SQLite WAL, sticky hash $request_uri, jitter/bijective cost formulas and oracle-guided vs oracle-free greedy decompression must be frozen before outcome data; honest sum-counter without f*6.0/n*3200 is minimal trustworthy harness (prior, not SPIDER evidence)",
+      "Prior: After repeated FALSIFIED-IN-SETTING on the same threshold family, exploring orthogonal levels of description (workflow IR, endpoint catalog, WebMCP tool discovery, hierarchical retrieval) has higher expected information gain than another Jaccard/threshold tweak (prior, not SPIDER evidence)"
+    ],
+    "allocation": {
+      "action": "REOPEN",
+      "claim_id": "C-FRESHNESS",
+      "cognitive_reset": false,
+      "comparative_reasoning": "Vs continuing WebArena add_to_cart pilots: expected repeat MEASUREMENT_INVALID due to durability gate failures and honest-cost contamination, marginal information near zero. Vs pivoting to C-DELTA-REPAIR now: blocked on same byte-preserving HIT substrate and requires localized repair measurement that also needs runtime hardening. Vs remaining PARKed: wastes idle lane where a detached synthetic validation CAN run without distributed substrate. REOPEN on C-FRESHNESS dominates opportunity cost.",
+      "dependencies": [
+        "runtime"
+      ],
+      "parent_handoff_disposition": "USE",
+      "question": "After re-deriving a satisfiable frozen decision rule (prevalence-aware UNKNOWN bound scaled to stale rate or selective-UNKNOWN policy and per-class ECE or recalibrated confidence >0.5 for correctly flagged stales), implementing honest constant per-trajectory-reset sum-counter (resolve+bind+verify+freshness+browser_steps without jitter/n*3200/f*6.0), computing M-RHO-SHUFFLED as max over 1000 trajectory-grouped permutations, executing the frozen NC-NOISE-IMMUNITY noise stimulus (optional-field churn/null fields), and using per-trajectory cached postconditions with response-derived endpoint signals, does the same single-resource deterministic freshness guard on a locally-hosted synthetic flat-JSON site with deterministic _matches verification (DOM token drift / endpoint param+header mutation / Cache-Control+ETag expiry on one resource only) maintain TN>=0.85 (Wilson lower>0.75) and FA<=0.10 with calibrated UNKNOWN/ECE and discriminating ablations (5000 family-stratified trajectory-grouped bootstraps) vs no-guard baseline?",
+      "rationale": "Graph is IDLE after 8 consecutive MEASUREMENT_INVALID WebArena add_to_cart param-inherit pilots failing identical kernel durability gates (single-prefix _common_prefix_and_suffix, field-path filter, Jaccard>=0.75, SHA verification). Continuing same pilot repeats invalid burn. The isolatable synthetic single-resource staleness probe is the only test that can validate freshness guard TN>=0.85 / false_accept<=0.10 with honest sum-counter and deterministic _matches before returning to WebArena, unblocking downstream C-PARAM-INHERIT and C-DELTA-REPAIR. Centrality is high because freshness gating is prerequisite for safe inheritance."
+    },
+    "cycle_id": "35939917029",
+    "lane": "graph",
+    "portfolio_assessment": "SPIDER at 312 canonical experiments has zero PRODUCT_CORE promotions; all 10 claims HYPOTHESIS/EXPERIMENTAL/MEASUREMENT_INVALID/BLOCKED with >70% recent audits MEASUREMENT_INVALID. Bottleneck is substrate validity and honest-cost honesty (|rho_shuffled|<0.20, sum-counter M_total_f10, health-gated HS256 shared-WAL), not idea quantity. Tunneled threads: frontier 15x C-SEMANTIC-RESOLVE synthetic SURVIVES vs live 21/40 0/10 mixed ECE 0.26 ceiling; runtime 50x C-MEAS-VALID with only local nginx 960/960 byte-identical SURVIVES, distributed 2-node gunicorn+nginx + BrowserGym 1280x720 CDP AX>10 repeatedly invalid; intel 19x C-CROSSSITE bounded FALSIFIED-IN-SETTING on homepage/template (18/20 identical captures, shuffle p=1.0) with product-page transfer UNTESTED; graph 8 consecutive MEASUREMENT_INVALID WebArena add_to_cart param-inherit pilots; product 12x C-PRODUCT-ECON FALSIFIED per_hit 1.00>0.85 and rho 0.36<0.60 under honest cost; physics 70 exps with no real-Web beyond-memory signal (absolute BF -10 to -15 nats favoring memory, synthetic-only Bayesian K=12 PASS). Highest marginal information is (1) hardening then freezing distributed freshness+browser substrate to unblock C-FRESHNESS/C-DELTA-REPAIR/C-PRODUCT-ECON, (2) fixing cross-site product-page sampling before PARK, (3) isolatable deterministic freshness probe for graph, (4) honest O(1) compilation vs tool-bypass shootout for frontier, (5) completing the real-browser Dirichlet-Multinomial beyond-memory test before deciding PARK for physics.",
+    "schema_version": 1,
+    "scout_assessment": "Scout brief correctly diagnosed >70% MEASUREMENT_INVALID substrate bottleneck, tunnel flags, honest-cost hardening as gate for all economics, FALSIFIED pay-cost-of-novelty (rho 0.363 vs 0.60, per_hit 1.005>0.85), single-store vacuous C-CROSSSITE, Gate0 0/2-0/3 synthetic-only physics, and 8-pilot graph durability burn. Adopted its substrate-first sequencing: runtime CONTINUE to publish health-gated shared-WAL+honest sum-counter harness; graph REOPEN on isolatable synthetic flat-JSON freshness probe and PARK WebArena add_to_cart until gate passes; intel CONTINUE on corrected product-page sampling with expanded stripping SHA stability; frontier CONTINUE on O(1) DSM-IR vs endpoint-catalog vs xMemory vs flat TFIDF-K5 with Fetch/WebMCP routing normalization and 2-3 candidate composition to break 0/10 mixed. Diverged from scout on two points: (1) physics - scout offered PARK-or-continue conditional; directed CONTINUE to complete frozen EXP-PHYSICS-35938359115 (visual bbox+8 styles+AX embedding, K=12/24 Dir-Mult exact gammaln) and decide PARK from its audit, rather than preemptive PARK; (2) product - scout suggested REOPEN only after runtime valid; directed explicit PARK with C-PRODUCT-ECON now (no new per_hit burn) with dependencies on runtime, superseding contested per_hit with M_total_f10 Pareto when substrate audited, rather than dispatching another invalid economics experiment. Used scout external context (BrowserGym 0.14.3/AgentLab 0.4.2/WebGym 292k, Stagehand HIT/MISS failure modes, WebMCP 714 sites/2147 tools, MemoryArena/AWM 35.5% baseline) to set bar vs proper baselines, not as SPIDER evidence."
+  },
+  "experiment_id": "EXP-GRAPH-35940399935",
+  "inherited_last_verdict": "MEASUREMENT_INVALID",
+  "inherited_next_question": "After re-deriving a satisfiable frozen decision rule (prevalence-aware UNKNOWN bound scaled to stale rate or selective-UNKNOWN policy and per-class ECE or recalibrated confidence >0.5 for correctly flagged stales), implementing honest constant sum-counter without parity jitter, computing M-RHO-SHUFFLED as max over 1000 trajectory-grouped permutations, executing the frozen NC-NOISE-IMMUNITY noise stimulus (optional-field churn/null fields), and using per-trajectory cached postconditions with response-derived endpoint signals, does the same single-resource deterministic freshness guard maintain TN>=0.85 (Wilson lower>0.75) and FA<=0.10 with calibrated UNKNOWN/ECE and discriminating ablations on the locally-hosted synthetic flat-JSON site using deterministic _matches verification and 5000 family-stratified trajectory-grouped bootstraps?",
+  "lane": "graph",
+  "origin_github_run_id": "35940399935",
+  "parent_handoff": {
+    "experiment_id": "EXP-GRAPH-35937576511",
+    "path": "research/experiments/EXP-GRAPH-35937576511/handoff.json",
+    "sha256": "5b1652f69bee2f3f01712b9f392279ed1eb3069dd10bb22532decfde1f8b5029"
+  },
+  "reason": "global-director-REOPEN",
+  "request_hash": "466b894c2af75bfaf12618b822c765d2cbf4a6c4b745ca5aaaa952b5caabdde4",
+  "request_id": "a851ed2a15e0671b7bcdc06b",
+  "schema_version": 1
+}

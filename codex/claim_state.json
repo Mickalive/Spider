@@ -1065,6 +1065,16 @@
         "claim_id": "C-SEMANTIC-RESOLVE",
         "status": "EXPERIMENTAL",
         "reason": "MEASUREMENT_INVALID per frozen falsifier: PC-BROWSERGYM-HEALTH FAIL (live_available false, census 4 envs x3 retries all ModuleNotFoundError browsergym/playwright/agentlab not installed, synthetic fallback fixture sha 83b7c52dd17848fc8c70d1c629b8d541788e0438249623ea783d2df364467319 only) and PC-HONEST-COST-SANITY FAIL (permutation |rho_shuffled| 0.23038 for H-HIERARCHICAL-CF p=0.176 exceeds 0.20 threshold). PC-OPENAPI-COVERAGE and PC-ROUTING-DIFF pass only on synthetic /random/alias* paths (14 spec paths prefix_covered 40/40, 14/58 pairs differ via version-collapse) not on live WebArena-Verified v2/WebGym 300k task paths per Director mandate. All single-candidate correct-family pipelines identical 20/40=0.500 Wilson [0.352,0.648] per-family header 10/10 body 10/10 auth 0/10 mixed 0/10 ECE 0.22-0.24 (B-EXACT-MATCH, B-FLAT-TFIDF-K5-CF, H-HIERARCHICAL-CF, B-COMPILED-DSM, B-ENDPOINT-CATALOG) with McNemar p=1.0 vs each other, replicating bounded 21/40=0.525 synthetic ceiling. Joint exploratory B-JOINT-FETCH 40/40=1.0 Wilson [0.912,0.912] mixed 10/10 replicates prior EXP-FRONTIER-35903208514 and EXP-FRONTIER-35915275774 synthetic joint 40/40 but remains synthetic-only with joint_manifest selection_log=[] complementary_frac=0.0. Audit MEASUREMENT_INVALID producer_claim_supported false recomputes all pooled/per-family/ECE/honest_cost exactly and confirms no valid live inference. No confirmatory live discrimination of O(1) DSM-IR vs endpoint-catalog vs hierarchical vs flat justified; synthetic EXPERIMENTAL ceiling preserved, no VALIDATED or PRODUCT_CORE."
+      },
+      {
+        "experiment_id": "EXP-FRONTIER-35937602723",
+        "lane": "frontier",
+        "created_at": "2026-09-24T00:16:01.311060+00:00",
+        "decision": "REVISE",
+        "source_commit": "5e2001367d5a5b43cc1fe2cedef02eab4e47e084",
+        "claim_id": "C-SEMANTIC-RESOLVE",
+        "status": "EXPERIMENTAL",
+        "reason": "BOUNDED EXPERIMENTAL synthetic-only: Numerical S1-S6 thresholds recompute PASS (joint 40/40 pooled Wilson [0.912,1.0] vs single baselines 20/40=0.50, gain 0.5 bootstrap lower 0.5, McNemar b=20 c=0 exact two-sided p=3.81e-06 auditor / 1.91e-06 producer <0.05, per-family header 10/10 mixed 10/10, false_accept 0.0 precision 1.0, ECE 0.0895 upper 0.1096 <0.18, honest max |rho| 0.1583 <0.20) but audit REVISE shows producer_claim_supported=false for causal attribution. Alias catalog degenerate: 13 singleton classes min_pairwise_jaccard 0.0 never exercises Jaccard>=0.6 clustering; single-candidate B-EXACT 20/40 not 0/40 due to key-agnostic normalize_bound ignoring header/body/query keys; routing 10/55 diff genuine but not task-relevant for header/body/auth families; Fetch spec 14 paths fetched but return unused for candidate scoring; joint second-loop adoption_value_template copies verbatim observed keys (synthetic saturation) making 40/40 adoption of observed keys not alias/route factorization. Honest cost degenerate for joint (rho 0.0 perm_p 1.0 due to constant 40/40 outcome, validity_findings degenerate calibration). No advancement beyond prior EXPERIMENTAL synthetic ceiling (EXP-FRONTIER-35921359961 20/40). Not VALIDATED (requires PASS audit) and not PRODUCT_CORE (frontier lane, no live BrowserGym 1280x720 hetero, no imperfect-accuracy ECE, no measured O(1) tokens). Required fixes pending before synthetic gate can be considered passed."
       }
     ],
     "C-FRESHNESS": [
@@ -1627,6 +1637,16 @@
         "claim_id": "C-FRESHNESS",
         "status": "HYPOTHESIS",
         "reason": "Correlated TTL/ETag freshness gating unmeasured: fresh_at_n0_rate (~1.0 via HEAD If-None-Match ETag W/body_sha) and stale_at_n0.25_rate (~50% stale 304) null; required correlated probe saving>=30% accuracy>=0.90 falseAccept<0.05 vs seeded-42 random 0.53 decoupled null contrast not exercised (NC4 unknown, probe_correlated_vs_random_delta null, n_non304 null health_gated false). Distributed WAL TN>=0.85 vs per-node 0.667 contrast not computable. Kernel dot-regex fix not applied this transaction (HEAD sha 46929b3a951df48d7f9d1fd850871073c0d91c1868aa117e13d389fe274e8d61 missing dot, required r'\\$\\{[A-Za-z_][A-Za-z0-9_\\.]*\\}' patch d926279d), disclosed as secondary validity issue (audit V6). Remains HYPOTHESIS pending real conditional probe on nginx 1.24.0 + gunicorn 23.0.0 + HS256 PyJWT 2.14.0 with n_non304>=800 single-worker sticky."
+      },
+      {
+        "experiment_id": "EXP-GRAPH-35940399935",
+        "lane": "graph",
+        "created_at": "2026-09-24T00:53:00.036578+00:00",
+        "decision": "SURVIVES_CURRENT_TEST",
+        "source_commit": "05cba79a8649a1c8bf1eed0e8c0b0606f0a8dbb8",
+        "claim_id": "C-FRESHNESS",
+        "status": "EXPERIMENTAL",
+        "reason": "Audit PASS (producer_claim_supported true): all 9 frozen D1-D9 pass on bounded synthetic single-resource ceiling \u2014 M-TN-SPIDER 1.0 Wilson lower 0.969 (120/120), M-FALSE-ACCEPT 0.0 Wilson upper 0.0409 (0/90) per-family TP/TN 1.0 lower 0.8865, UNKNOWN 0.4286 within [0.00,0.50] and [0.3786,0.4986] stale_rate 0.4286, global ECE 0.0929 per-class fresh 0.05 stale 0.15 at threshold under recalibrated 0.95/0.85, delta vs B-NO-GUARD 1.0 >=0.15, NC-NOISE FA 0.0 on 150 noise, ablations B-JACCARD-ONLY FA 0.6667 and B-HEADER-ONLY FA 0.3333 proving combined signal necessity, honest constant sum-counter 4 per request total 1440 all_int true max trajectory-grouped |rho| 0.0 <0.20, within-family freshness std 0.5 >0, 5000 family-stratified trajectory-grouped bootstrap degenerate CIs [1.0,1.0]/[0.0,0.0] reported as ceiling effect, per-trajectory observed caching 36 trajectories and response-derived endpoint via _template/X-Csrf-Token with deterministic 304 marked not stale. Recomputed metrics match producer. Claim ceiling bounded to stdlib http.server flat-JSON single-resource deterministic orthogonal drifts only; does NOT advance to VALIDATED/PRODUCT_CORE which requires n>=800 + real-API/distributed health-gated shared-WAL per registry. Prior 8 WebArena pilots remain PARKED."
       }
     ],
     "C-PARAM-INHERIT": [
@@ -4034,24 +4054,24 @@
       "reason": "Residual-novelty tracking unmeasured: rho_novelty_M_total StagehandTTL/WebMCP null because honest sum counters require shared WAL per-batch SELECT and BrowserGym full-DOM CDP AX; numpy/scipy/sklearn absent prevents family-stratified bootstrap 5000 and block-permutation 5000, rho_proxy_real and per-stratum |rho_shuffled|/|rho_length| unmeasurable, within-family std>0 uncheckable. Controls NC-DISTRIBUTED-SHUFFLE-PIPELINE-SINGLE correctly UNKNOWN (audit validity_findings V3). Remains HYPOTHESIS pending distributed correlated substrate; parent bounded REJECTED on file-proxy (rho 0.472<0.60, |rho_length| 0.306>0.20) stays file-proxy only and is not expanded by this invalid transaction."
     },
     "C-SEMANTIC-RESOLVE": {
-      "experiment_id": "EXP-FRONTIER-35921359961",
+      "experiment_id": "EXP-FRONTIER-35937602723",
       "lane": "frontier",
-      "created_at": "2026-09-23T21:16:26.018182+00:00",
-      "decision": "MEASUREMENT_INVALID",
-      "source_commit": "ce68eca9af283c29284ca26a909f899a29605e81",
+      "created_at": "2026-09-24T00:16:01.311060+00:00",
+      "decision": "REVISE",
+      "source_commit": "5e2001367d5a5b43cc1fe2cedef02eab4e47e084",
       "claim_id": "C-SEMANTIC-RESOLVE",
       "status": "EXPERIMENTAL",
-      "reason": "MEASUREMENT_INVALID per frozen falsifier: PC-BROWSERGYM-HEALTH FAIL (live_available false, census 4 envs x3 retries all ModuleNotFoundError browsergym/playwright/agentlab not installed, synthetic fallback fixture sha 83b7c52dd17848fc8c70d1c629b8d541788e0438249623ea783d2df364467319 only) and PC-HONEST-COST-SANITY FAIL (permutation |rho_shuffled| 0.23038 for H-HIERARCHICAL-CF p=0.176 exceeds 0.20 threshold). PC-OPENAPI-COVERAGE and PC-ROUTING-DIFF pass only on synthetic /random/alias* paths (14 spec paths prefix_covered 40/40, 14/58 pairs differ via version-collapse) not on live WebArena-Verified v2/WebGym 300k task paths per Director mandate. All single-candidate correct-family pipelines identical 20/40=0.500 Wilson [0.352,0.648] per-family header 10/10 body 10/10 auth 0/10 mixed 0/10 ECE 0.22-0.24 (B-EXACT-MATCH, B-FLAT-TFIDF-K5-CF, H-HIERARCHICAL-CF, B-COMPILED-DSM, B-ENDPOINT-CATALOG) with McNemar p=1.0 vs each other, replicating bounded 21/40=0.525 synthetic ceiling. Joint exploratory B-JOINT-FETCH 40/40=1.0 Wilson [0.912,0.912] mixed 10/10 replicates prior EXP-FRONTIER-35903208514 and EXP-FRONTIER-35915275774 synthetic joint 40/40 but remains synthetic-only with joint_manifest selection_log=[] complementary_frac=0.0. Audit MEASUREMENT_INVALID producer_claim_supported false recomputes all pooled/per-family/ECE/honest_cost exactly and confirms no valid live inference. No confirmatory live discrimination of O(1) DSM-IR vs endpoint-catalog vs hierarchical vs flat justified; synthetic EXPERIMENTAL ceiling preserved, no VALIDATED or PRODUCT_CORE."
+      "reason": "BOUNDED EXPERIMENTAL synthetic-only: Numerical S1-S6 thresholds recompute PASS (joint 40/40 pooled Wilson [0.912,1.0] vs single baselines 20/40=0.50, gain 0.5 bootstrap lower 0.5, McNemar b=20 c=0 exact two-sided p=3.81e-06 auditor / 1.91e-06 producer <0.05, per-family header 10/10 mixed 10/10, false_accept 0.0 precision 1.0, ECE 0.0895 upper 0.1096 <0.18, honest max |rho| 0.1583 <0.20) but audit REVISE shows producer_claim_supported=false for causal attribution. Alias catalog degenerate: 13 singleton classes min_pairwise_jaccard 0.0 never exercises Jaccard>=0.6 clustering; single-candidate B-EXACT 20/40 not 0/40 due to key-agnostic normalize_bound ignoring header/body/query keys; routing 10/55 diff genuine but not task-relevant for header/body/auth families; Fetch spec 14 paths fetched but return unused for candidate scoring; joint second-loop adoption_value_template copies verbatim observed keys (synthetic saturation) making 40/40 adoption of observed keys not alias/route factorization. Honest cost degenerate for joint (rho 0.0 perm_p 1.0 due to constant 40/40 outcome, validity_findings degenerate calibration). No advancement beyond prior EXPERIMENTAL synthetic ceiling (EXP-FRONTIER-35921359961 20/40). Not VALIDATED (requires PASS audit) and not PRODUCT_CORE (frontier lane, no live BrowserGym 1280x720 hetero, no imperfect-accuracy ECE, no measured O(1) tokens). Required fixes pending before synthetic gate can be considered passed."
     },
     "C-FRESHNESS": {
-      "experiment_id": "EXP-PRODUCT-35938367888",
-      "lane": "product",
-      "created_at": "2026-09-24T00:26:00.111279+00:00",
-      "decision": "MEASUREMENT_INVALID",
-      "source_commit": "1831e7ef4f0428b4c01043c12dd9bb19338740ca",
+      "experiment_id": "EXP-GRAPH-35940399935",
+      "lane": "graph",
+      "created_at": "2026-09-24T00:53:00.036578+00:00",
+      "decision": "SURVIVES_CURRENT_TEST",
+      "source_commit": "05cba79a8649a1c8bf1eed0e8c0b0606f0a8dbb8",
       "claim_id": "C-FRESHNESS",
-      "status": "HYPOTHESIS",
-      "reason": "Correlated TTL/ETag freshness gating unmeasured: fresh_at_n0_rate (~1.0 via HEAD If-None-Match ETag W/body_sha) and stale_at_n0.25_rate (~50% stale 304) null; required correlated probe saving>=30% accuracy>=0.90 falseAccept<0.05 vs seeded-42 random 0.53 decoupled null contrast not exercised (NC4 unknown, probe_correlated_vs_random_delta null, n_non304 null health_gated false). Distributed WAL TN>=0.85 vs per-node 0.667 contrast not computable. Kernel dot-regex fix not applied this transaction (HEAD sha 46929b3a951df48d7f9d1fd850871073c0d91c1868aa117e13d389fe274e8d61 missing dot, required r'\\$\\{[A-Za-z_][A-Za-z0-9_\\.]*\\}' patch d926279d), disclosed as secondary validity issue (audit V6). Remains HYPOTHESIS pending real conditional probe on nginx 1.24.0 + gunicorn 23.0.0 + HS256 PyJWT 2.14.0 with n_non304>=800 single-worker sticky."
+      "status": "EXPERIMENTAL",
+      "reason": "Audit PASS (producer_claim_supported true): all 9 frozen D1-D9 pass on bounded synthetic single-resource ceiling \u2014 M-TN-SPIDER 1.0 Wilson lower 0.969 (120/120), M-FALSE-ACCEPT 0.0 Wilson upper 0.0409 (0/90) per-family TP/TN 1.0 lower 0.8865, UNKNOWN 0.4286 within [0.00,0.50] and [0.3786,0.4986] stale_rate 0.4286, global ECE 0.0929 per-class fresh 0.05 stale 0.15 at threshold under recalibrated 0.95/0.85, delta vs B-NO-GUARD 1.0 >=0.15, NC-NOISE FA 0.0 on 150 noise, ablations B-JACCARD-ONLY FA 0.6667 and B-HEADER-ONLY FA 0.3333 proving combined signal necessity, honest constant sum-counter 4 per request total 1440 all_int true max trajectory-grouped |rho| 0.0 <0.20, within-family freshness std 0.5 >0, 5000 family-stratified trajectory-grouped bootstrap degenerate CIs [1.0,1.0]/[0.0,0.0] reported as ceiling effect, per-trajectory observed caching 36 trajectories and response-derived endpoint via _template/X-Csrf-Token with deterministic 304 marked not stale. Recomputed metrics match producer. Claim ceiling bounded to stdlib http.server flat-JSON single-resource deterministic orthogonal drifts only; does NOT advance to VALIDATED/PRODUCT_CORE which requires n>=800 + real-API/distributed health-gated shared-WAL per registry. Prior 8 WebArena pilots remain PARKED."
     },
     "C-PARAM-INHERIT": {
       "experiment_id": "EXP-GRAPH-35932480731",
