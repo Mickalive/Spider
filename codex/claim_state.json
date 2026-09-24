@@ -1023,6 +1023,16 @@
         "claim_id": "C-RESIDUAL-NOVELTY",
         "status": "HYPOTHESIS",
         "reason": "Valid honest measurement (all 11 PCs/NCs PASS per frozen thresholds, audit FAIL with producer_claim_supported=false but recomputed metrics exact): executed honest cost == sum resolve+bind+verify+freshness+browser_steps diff 0, zero_cells 0/180 naturally no fixup, gap 0.426>0.35 |rho_proxy|0.319<0.60, global |rho_shuffled|0.0001 p0.997 mean -0.0001 std 0.0439 centered, Jaccard 0.0000<0.30 disjoint L8-14, 0 leakage trajectory-grouped, build 108 ops frozen, conf std 0.1286 acc 0.5667. On 36-family orthogonal-disjoint synthetic fixture (540 pooled 108/stratum +30 calib, per-family per-stratum N=3, coverage 36/36, family-stratified bootstrap 5000 + block perm 5000 + global 5000) SURVIVES fails 4/6 S gates: S1 rho_novelty 0.4257 CI[0.3537,0.4930] p0.0002 <0.60 lower>0.40 FAIL; S3 length_long rho 0.1663 upper 0.3111>0.30 FAIL (N=145); S4 ECE 0.1924 CI[0.1589,0.2296] upper 0.2296>0.18 FAIL despite precision 1.0 false 0.0; S5 Pareto vs RAG dominance false at f10 CI[-0.000397,-0.000269] and f100 CI[-0.003967,-0.002667] FAIL despite saving 44.83% vs browse. S2 pooled |rho_length|0.0558 upper 0.025 p0.202 PASS and S6 gap 0.4256>0.35 PASS. Bounded FALSIFIED-IN-SETTING under QCR; C-RESIDUAL-NOVELTY remains global HYPOTHESIS. No promotion."
+      },
+      {
+        "experiment_id": "EXP-FRONTIER-36042599040",
+        "lane": "frontier",
+        "created_at": "2026-09-24T18:38:29.949354+00:00",
+        "decision": "FALSIFIED-IN-SETTING",
+        "source_commit": "1abfc09bcd5b75357f5bc63193bc3ad2f2046d1d",
+        "claim_id": "C-RESIDUAL-NOVELTY",
+        "status": "HYPOTHESIS",
+        "reason": "Bounded FALSIFIED-IN-SETTING on synthetic TAU0.30 topology-gated orthogonal-disjoint fixture with VALID measurement (audit PASS, producer_claim_supported=false, all 11 PCs/NCs PASS): PC-HONEST-COST-SANITY PASS diff0 zero_cells 0/180 gap 0.484>0.35 |rho_proxy|0.439/0.086/0.311<0.60 global |rho_shuffled|~0.000 p>=0.99 mean~0.0 std<0.05 centered, PC-JACCARD PASS max 0.0<0.30 disjoint L8-14, PC-DISJOINT leak 0, PC-CALIBRATION derived conf std 0.1746 acc 0.772 bins 5, PC-MONOTONICITY d1.50 p0.0, PC-BUILD 108 ops, NCs PASS. On 540 pooled tasks (108/stratum, per-family N=3, coverage 36/36, 5000 family-stratified bootstrap + 5000 block-permutation + 5000 global) 5/6 S gates FAIL: S1 rho_novelty 0.4837 CI[0.4102,0.5523] audit 0.4995 CI[0.4282,0.5667] p0.0002 <0.60 (lower>0.40 passes) FAIL; S2 pooled |rho_length|0.0857 upper 0.1651 PASS but block p0.0418 producer /0.0546 audit <0.05 threshold p>=0.05 FAIL; S3 per-stratum novelty_0 rho 0.1791 upper 0.3203>0.30 and length_long rho 0.1575 upper 0.3009 audit 0.302>0.30 FAIL (N=108/145 powered); S4 ECE 0.2161 upper 0.2492 audit 0.2113 upper 0.2443 >0.15/0.18 FAIL despite precision 1.0 false 0.0; S5 Pareto saving 45.41% CI[43.13,47.58] and 64.52% at f100 vs browse PASS but strict dominance vs RAG false at f10 0.005553>0.005126 CI[-0.00048,-0.000374] and f100 0.036086>0.031819 CI[-0.0048,-0.003767] FAIL; S6 gap 0.4837>0.35 PASS. TAU0.30 pass_rate 0.874 identical across baselines, RAG mean 14.72 < SPIDER 16.84. Claim remains global HYPOTHESIS; synthetic-to-live gap dominant."
       }
     ],
     "C-SEMANTIC-RESOLVE": [
@@ -4524,14 +4534,14 @@
       "reason": "C-WEB-DYNAMICS remains HYPOTHESIS pending valid diverse family bank and Gate0 physics sampling: orthogonal census 0 families means no new beyond-memory N=1000-1999 bank; Gate0 1/10 families with per-trajectory counters proven only on fixture. No PMI beyond-memory test executed. Audit claim_ceiling bounds to 4-family ceiling with synthetic alias-OOD only (synthetic-to-real gap preserved)."
     },
     "C-RESIDUAL-NOVELTY": {
-      "experiment_id": "EXP-FRONTIER-36037217518",
+      "experiment_id": "EXP-FRONTIER-36042599040",
       "lane": "frontier",
-      "created_at": "2026-09-24T17:51:57.015946+00:00",
+      "created_at": "2026-09-24T18:38:29.949354+00:00",
       "decision": "FALSIFIED-IN-SETTING",
-      "source_commit": "fa10fbe798a7e88df5d5bd389fe4c69b3c50c7e7",
+      "source_commit": "1abfc09bcd5b75357f5bc63193bc3ad2f2046d1d",
       "claim_id": "C-RESIDUAL-NOVELTY",
       "status": "HYPOTHESIS",
-      "reason": "Valid honest measurement (all 11 PCs/NCs PASS per frozen thresholds, audit FAIL with producer_claim_supported=false but recomputed metrics exact): executed honest cost == sum resolve+bind+verify+freshness+browser_steps diff 0, zero_cells 0/180 naturally no fixup, gap 0.426>0.35 |rho_proxy|0.319<0.60, global |rho_shuffled|0.0001 p0.997 mean -0.0001 std 0.0439 centered, Jaccard 0.0000<0.30 disjoint L8-14, 0 leakage trajectory-grouped, build 108 ops frozen, conf std 0.1286 acc 0.5667. On 36-family orthogonal-disjoint synthetic fixture (540 pooled 108/stratum +30 calib, per-family per-stratum N=3, coverage 36/36, family-stratified bootstrap 5000 + block perm 5000 + global 5000) SURVIVES fails 4/6 S gates: S1 rho_novelty 0.4257 CI[0.3537,0.4930] p0.0002 <0.60 lower>0.40 FAIL; S3 length_long rho 0.1663 upper 0.3111>0.30 FAIL (N=145); S4 ECE 0.1924 CI[0.1589,0.2296] upper 0.2296>0.18 FAIL despite precision 1.0 false 0.0; S5 Pareto vs RAG dominance false at f10 CI[-0.000397,-0.000269] and f100 CI[-0.003967,-0.002667] FAIL despite saving 44.83% vs browse. S2 pooled |rho_length|0.0558 upper 0.025 p0.202 PASS and S6 gap 0.4256>0.35 PASS. Bounded FALSIFIED-IN-SETTING under QCR; C-RESIDUAL-NOVELTY remains global HYPOTHESIS. No promotion."
+      "reason": "Bounded FALSIFIED-IN-SETTING on synthetic TAU0.30 topology-gated orthogonal-disjoint fixture with VALID measurement (audit PASS, producer_claim_supported=false, all 11 PCs/NCs PASS): PC-HONEST-COST-SANITY PASS diff0 zero_cells 0/180 gap 0.484>0.35 |rho_proxy|0.439/0.086/0.311<0.60 global |rho_shuffled|~0.000 p>=0.99 mean~0.0 std<0.05 centered, PC-JACCARD PASS max 0.0<0.30 disjoint L8-14, PC-DISJOINT leak 0, PC-CALIBRATION derived conf std 0.1746 acc 0.772 bins 5, PC-MONOTONICITY d1.50 p0.0, PC-BUILD 108 ops, NCs PASS. On 540 pooled tasks (108/stratum, per-family N=3, coverage 36/36, 5000 family-stratified bootstrap + 5000 block-permutation + 5000 global) 5/6 S gates FAIL: S1 rho_novelty 0.4837 CI[0.4102,0.5523] audit 0.4995 CI[0.4282,0.5667] p0.0002 <0.60 (lower>0.40 passes) FAIL; S2 pooled |rho_length|0.0857 upper 0.1651 PASS but block p0.0418 producer /0.0546 audit <0.05 threshold p>=0.05 FAIL; S3 per-stratum novelty_0 rho 0.1791 upper 0.3203>0.30 and length_long rho 0.1575 upper 0.3009 audit 0.302>0.30 FAIL (N=108/145 powered); S4 ECE 0.2161 upper 0.2492 audit 0.2113 upper 0.2443 >0.15/0.18 FAIL despite precision 1.0 false 0.0; S5 Pareto saving 45.41% CI[43.13,47.58] and 64.52% at f100 vs browse PASS but strict dominance vs RAG false at f10 0.005553>0.005126 CI[-0.00048,-0.000374] and f100 0.036086>0.031819 CI[-0.0048,-0.003767] FAIL; S6 gap 0.4837>0.35 PASS. TAU0.30 pass_rate 0.874 identical across baselines, RAG mean 14.72 < SPIDER 16.84. Claim remains global HYPOTHESIS; synthetic-to-live gap dominant."
     },
     "C-SEMANTIC-RESOLVE": {
       "experiment_id": "EXP-FRONTIER-35949576588",

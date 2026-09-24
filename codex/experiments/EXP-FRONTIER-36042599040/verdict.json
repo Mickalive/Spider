@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-FRONTIER-36042599040",
+  "lane": "frontier",
+  "decision": "FALSIFIED-IN-SETTING",
+  "claim_updates": [
+    {
+      "claim_id": "C-RESIDUAL-NOVELTY",
+      "status": "HYPOTHESIS",
+      "reason": "Bounded FALSIFIED-IN-SETTING on synthetic TAU0.30 topology-gated orthogonal-disjoint fixture with VALID measurement (audit PASS, producer_claim_supported=false, all 11 PCs/NCs PASS): PC-HONEST-COST-SANITY PASS diff0 zero_cells 0/180 gap 0.484>0.35 |rho_proxy|0.439/0.086/0.311<0.60 global |rho_shuffled|~0.000 p>=0.99 mean~0.0 std<0.05 centered, PC-JACCARD PASS max 0.0<0.30 disjoint L8-14, PC-DISJOINT leak 0, PC-CALIBRATION derived conf std 0.1746 acc 0.772 bins 5, PC-MONOTONICITY d1.50 p0.0, PC-BUILD 108 ops, NCs PASS. On 540 pooled tasks (108/stratum, per-family N=3, coverage 36/36, 5000 family-stratified bootstrap + 5000 block-permutation + 5000 global) 5/6 S gates FAIL: S1 rho_novelty 0.4837 CI[0.4102,0.5523] audit 0.4995 CI[0.4282,0.5667] p0.0002 <0.60 (lower>0.40 passes) FAIL; S2 pooled |rho_length|0.0857 upper 0.1651 PASS but block p0.0418 producer /0.0546 audit <0.05 threshold p>=0.05 FAIL; S3 per-stratum novelty_0 rho 0.1791 upper 0.3203>0.30 and length_long rho 0.1575 upper 0.3009 audit 0.302>0.30 FAIL (N=108/145 powered); S4 ECE 0.2161 upper 0.2492 audit 0.2113 upper 0.2443 >0.15/0.18 FAIL despite precision 1.0 false 0.0; S5 Pareto saving 45.41% CI[43.13,47.58] and 64.52% at f100 vs browse PASS but strict dominance vs RAG false at f10 0.005553>0.005126 CI[-0.00048,-0.000374] and f100 0.036086>0.031819 CI[-0.0048,-0.003767] FAIL; S6 gap 0.4837>0.35 PASS. TAU0.30 pass_rate 0.874 identical across baselines, RAG mean 14.72 < SPIDER 16.84. Claim remains global HYPOTHESIS; synthetic-to-live gap dominant."
+    }
+  ],
+  "product_action": "no_promotion",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "On live BrowserGym 1280x720 CDP AX>10 heterogeneous sites with Intel diverse-site manifest and Runtime health-gated single-worker sticky substrate, does history-conditioned PMI reveal predictive structure beyond memory (BC PMI>0.05 with trajectory-grouped permutation), or does per-value alias handling via Runtime diverse substrate recover honest Pareto dominance vs flat RAG k5 where per-family disjoint orthogonal parameterization failed?",
+  "reason": "Measurement is VALID (audit PASS confirms all recomputed metrics match producer within expected jitter; all PCs/NCs PASS per TAU0.30-gated thresholds including strengthened gap>0.35 |rho_proxy|<0.60 and zero_cells 0/180 naturally, correcting prior MEASUREMENT_INVALID tautologies). With valid measurement, the Director-mandated PIVOT SUPERSEDE honest gate with TAU0.30 topology gating (resolve counts all 5 candidates, bind/verify/browser_steps only if cosine>=0.30) still fails 5 of 6 SURVIVES gates on the maximally orthogonal synthetic fixture (Jaccard 0.0 disjoint alphabets, 36 families 540 pooled trajectory-grouped). rho_novelty 0.4837 misses 0.60 by 0.116 and CI entirely below 0.60; pooled length coupling marginally significant p0.042 violates p>=0.05 gate; two per-stratum strata exceed upper 0.30 (novelty_0 0.3203, length_long 0.3009); ECE 0.216 exceeds 0.15 by 0.066 (upper 0.2492>0.18) despite derived confidence; and SPIDER does not dominate RAG at f10 or f100 (RAG cheaper by ~0.00043 at f10, ~0.0043 at f100). Valid saving vs cold browsing (45% f10, 64% f100) confirms browse tracks length but does not imply novelty economics or RAG dominance. Per frozen decision_rule, this is a bounded FALSIFIED-IN-SETTING under QCR, not MEASUREMENT_INVALID. It supersedes the alias tunnel 21/40=0.525 and the parent FALSIFIED (rho 0.426) with a second valid negative under topology gating. No PRODUCT_CORE promotion (frontier lane, audit PASS but S1-S5 FAIL, synthetic-only, live_available false). Per Director comparative_reasoning and prereg OR clause, PARK synthetic residual-novelty economics on this fixture and authorize deferred orthogonal pivots (barrier-physics rewind C-WEB-DYNAMICS or per-value alias via Runtime diverse substrate) as separate packets requiring Runtime health-gated single-worker sticky and Intel diverse manifest.",
+  "evidence_refs": [
+    "research/experiments/EXP-FRONTIER-36042599040/result.json",
+    "research/experiments/EXP-FRONTIER-36042599040/audit.json",
+    "research/experiments/EXP-FRONTIER-36042599040/spec.json (sha256:c88974ca1079861d91b4308d3f30b0949d9d43103cc38528c373a431fe98fe44)",
+    "research/experiments/EXP-FRONTIER-36042599040/prereg.md (sha256:b3f4392427ba516102e0ce896d0c9a7f1207e28c28e24309c9b36a43aed2e98e)",
+    "research/experiments/EXP-FRONTIER-36042599040/freeze.json (sha256:2a0442bab9bb213068e953cba2bce857ffd74e60edefa4060a5847a1515e4a2a)",
+    "research/experiments/EXP-FRONTIER-36042599040/artifacts/family_manifest.json (sha256:9b003e7c416317ab25b371c2520a03f28abe4c817105595862a472377d80fd12)",
+    "research/experiments/EXP-FRONTIER-36042599040/artifacts/per_trajectory_traces.json (sha256:591b1f14bcf2bf4ef7983faa6e2da75747086ba26ffc22de99d605dd5564accb)",
+    "research/experiments/EXP-FRONTIER-36042599040/artifacts/bootstrap_permutation_nulls.json (sha256:19300c9ccba864d451520d774b07f348f0e4d31cfc85c3210b8cd7b73d040e5d)",
+    "research/experiments/EXP-FRONTIER-36042599040/artifacts/confidences.json (sha256:b442351f7aa0ce793157e603b535ed9cf92f5592e54610a6f3f2c269e501c35a)",
+    "research/frontier/run_execute_36042599040.py (sha256:d5e2a45ea5f23441e58b239ca04ccf312e7a4972cf4dc18c4e0a8fdc95814b60)",
+    "research/experiments/EXP-FRONTIER-36042599040/report.md",
+    "research/experiments/EXP-FRONTIER-36042599040/provenance.json",
+    "research/experiments/EXP-FRONTIER-36037217518/handoff.json (sha256:7fbf831314454ea7aadded56c1a118b344a795c6b77369394f419e9e8221c64e)",
+    "codex/claim_state.json",
+    "codex/index.json"
+  ]
+}
