@@ -8,7 +8,7 @@
   "next_question": "Can the health-gated shared WAL HS256>=32 header-only and honest-cost and HIT/browser substrate be correctly instantiated (factory-pattern WSGI avoiding import-time init_db, directory exists before shared.db creation, 2x gunicorn 19860+19861 via nginx 19851 round-robin and hash $request_uri consistent with >=10 distinct URIs skew>0.90, per-batch SELECT >=27 distinct timestamps, real If-None-Match/ETag->304 covering n_non304>=800 stratified 400/endpoint, header-only Jaccard MINUS {Content-Length,ETag,W-ETag,Content-Range} preserving Cache-Control/Set-Cookie/Vary with de-confounded scheduling r<0.30, trajectory-grouped B=5000 honest sum counters resolve+bind+verify+freshness+browser_steps without jitter/n*3200/f*6.0, 48-cell nginx HIT matrix with oracle-free greedy brotli->gzip MAX_DEPTH5 no SHA, and BrowserGym 0.14.3 + Playwright 1.63.0 1280x720 CDP AX>10 at N=20 pool effective_distinct_n>1) to test whether distributed freshness C1 TN>=0.85 Wilson lo>0.75 orthogonality stratified |r|<0.15 TOST delta0.15 and honest |rho_shuffled|<0.20 within-f std>0 and HIT 330/330 byte-identical and browser non-degenerate B=1000 CIs achieve validity?",
   "promotion_ready": false,
   "consecutive_failures": 1,
-  "updated_at": "2026-09-24T01:16:30.639488+00:00",
+  "updated_at": "2026-09-24T01:50:55.280807+00:00",
   "last_failure_retryable": false,
   "last_handoff_sha256": "4563235a05a9d7af40a71b4c9395ab42283afdf783dc799583f50812a0d79e02",
   "same_failure_count": 1,
