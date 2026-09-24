@@ -1,17 +1,17 @@
 {
   "lane": "frontier",
   "human_paused": false,
-  "active_experiment_id": "EXP-FRONTIER-35999373906",
-  "last_experiment_id": "EXP-FRONTIER-35949576588",
-  "last_verdict": "FALSIFIED-IN-SETTING",
+  "active_experiment_id": null,
+  "last_experiment_id": "EXP-FRONTIER-35999373906",
+  "last_verdict": "MEASUREMENT_INVALID",
   "continue_immediately": false,
-  "next_question": "Given bounded failure of joint alias catalog + routing normalization + Fetch/WebMCP to rescue synthetic 40-task gate (pooled 20/40=0.50 Wilson [0.352,0.648] <0.60, mixed 0/10 and auth 0/10, routing zero marginal gain 20/40 vs 20/40 p=1.0) with genuine Jaccard>=0.6 multi-variant catalog and key-sensitive verification but with audit-identified observed_families incompleteness and alias scoring over-matching, should frontier pivot to materially orthogonal high-upside basins \u2014 residual-novelty verification economics with honest sum-counter and UNKNOWN calibration (C-RESIDUAL-NOVELTY), barrier-physics rewind memory beyond history on live BrowserGym (C-WEB-DYNAMICS), or per-value alias handling via runtime/intel diverse substrate \u2014 rather than a 17th alias/routing permutation on fixture sha 83b7c52dd17848fc8c70d1c629b8d541788e0438249623ea783d2df364467319?",
+  "next_question": "After repairing harness to implement the frozen pipelines as executed mechanism operations (real resolve+bind+verify+freshness+browser_steps on derived_context, real TF-IDF RAG on train-A, real train-A/test-B disjoint resource partition at trajectory level, confidence derived from softmax temp 0.15+jitter over actual scores, counted build cost with frozen audit, corrected family-block permutation and per-stratum bootstrap upper<0.30), does honest cost track residual novelty rho_novelty>=0.60 (lower>0.40 p<0.05) vs pooled |rho_length|<0.20 (upper<0.25 p>=0.05) and per-stratum |rho_length|<0.20 (upper<0.30, N>=30) with calibrated UNKNOWN precision>=0.85 false_accept<=0.10 ECE<=0.15 upper<=0.18 and Pareto M_total_f10 saving>=25% vs cold browsing and strict dominance vs flat RAG k5 at f=10 and f=100 on the same 36-family Jaccard<0.30 disjoint L=8-14 synthetic gate, and does any signal persist on live BrowserGym 1280x720 CDP AX>10 heterogeneous sites with measured LLM tokens/latency/browser work \u2014 or if honest economics remains non-Pareto under QCR, does barrier-physics rewind (memory beyond history on live BrowserGym AX>10 with trajectory-grouped permutation) reveal predictive dynamical structure beyond the alias basin?",
   "promotion_ready": false,
-  "consecutive_failures": 1,
-  "updated_at": "2026-09-24T14:29:44.483444+00:00",
-  "last_failure_retryable": false,
-  "last_handoff_sha256": "88819e25d7ea428cbdabf8ca16911a0588f66bd2985d2f32963ebe919c081fb1",
-  "same_failure_count": 1,
-  "last_failure_fingerprint": "32fb61131a26107aaf831564",
-  "last_failure_control_revision": "076dc77b91c1d12ea39cb22825d01d847c1810ff7d44ed432bd5b1813468f5ae"
+  "consecutive_failures": 0,
+  "updated_at": "2026-09-24T15:02:35.218454+00:00",
+  "last_failure_retryable": null,
+  "last_handoff_sha256": "2fb242de196b5df6e85d1154d6fc41c8c3c75e0e46c5e984aa70707ec335b9df",
+  "same_failure_count": 0,
+  "last_failure_fingerprint": null,
+  "last_failure_control_revision": null
 }
