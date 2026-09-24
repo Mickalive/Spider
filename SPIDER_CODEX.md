@@ -4,7 +4,7 @@ Pre-2.0 canonical memory remains frozen at `archive/spider-codex-ultimate:SPIDER
 
 Canonical Research 2.0 evidence lives in `codex/experiments/<experiment_id>/`.
 Use `codex/index.json` and `codex/claim_state.json` to locate relevant packets; do not load all experiment bodies by default.
-Validated experiments: **342**. Coverage gaps: **0**. Quarantined packets: **2**.
+Validated experiments: **343**. Coverage gaps: **0**. Quarantined packets: **2**.
 
 ## Experiment index
 
@@ -352,6 +352,7 @@ Validated experiments: **342**. Coverage gaps: **0**. Quarantined packets: **2**
 | EXP-RUNTIME-36013149664 | runtime | MEASUREMENT_INVALID | MEASUREMENT_INVALID | C-MEAS-VALID | `37efb7c025d3` |
 | EXP-FRONTIER-36018230359 | frontier | MEASUREMENT_INVALID | MEASUREMENT_INVALID | C-RESIDUAL-NOVELTY | `c651c8f9d86a` |
 | EXP-RUNTIME-36020884510 | runtime | MEASUREMENT_INVALID | MEASUREMENT_INVALID | C-MEAS-VALID | `651b726363b1` |
+| EXP-RUNTIME-36030564009 | runtime | MEASUREMENT_INVALID | MEASUREMENT_INVALID | C-MEAS-VALID | `d6eb12aa3673` |
 
 ## Latest recorded claim events
 
@@ -363,7 +364,7 @@ These are chronological latest events, not an automatic truth ranking.
 | C-DELTA-REPAIR | MEASUREMENT_INVALID | EXP-GRAPH-35999336958 | graph |
 | C-FRESHNESS | HYPOTHESIS | EXP-PRODUCT-35949571341 | product |
 | C-LLM-INHERIT | MEASUREMENT_INVALID | EXP-PRODUCT-35961222077 | product |
-| C-MEAS-VALID | MEASUREMENT_INVALID | EXP-RUNTIME-36020884510 | runtime |
+| C-MEAS-VALID | MEASUREMENT_INVALID | EXP-RUNTIME-36030564009 | runtime |
 | C-PARAM-INHERIT | MEASUREMENT_INVALID | EXP-GRAPH-35932480731 | graph |
 | C-PRODUCT-ECON | HYPOTHESIS | EXP-INTEL-35999366789 | intel |
 | C-RESIDUAL-NOVELTY | MEASUREMENT_INVALID | EXP-FRONTIER-36018230359 | frontier |
