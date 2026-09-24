@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-FRONTIER-36037217518",
+  "lane": "frontier",
+  "decision": "FALSIFIED-IN-SETTING",
+  "claim_updates": [
+    {
+      "claim_id": "C-RESIDUAL-NOVELTY",
+      "status": "HYPOTHESIS",
+      "reason": "Valid honest measurement (all 11 PCs/NCs PASS per frozen thresholds, audit FAIL with producer_claim_supported=false but recomputed metrics exact): executed honest cost == sum resolve+bind+verify+freshness+browser_steps diff 0, zero_cells 0/180 naturally no fixup, gap 0.426>0.35 |rho_proxy|0.319<0.60, global |rho_shuffled|0.0001 p0.997 mean -0.0001 std 0.0439 centered, Jaccard 0.0000<0.30 disjoint L8-14, 0 leakage trajectory-grouped, build 108 ops frozen, conf std 0.1286 acc 0.5667. On 36-family orthogonal-disjoint synthetic fixture (540 pooled 108/stratum +30 calib, per-family per-stratum N=3, coverage 36/36, family-stratified bootstrap 5000 + block perm 5000 + global 5000) SURVIVES fails 4/6 S gates: S1 rho_novelty 0.4257 CI[0.3537,0.4930] p0.0002 <0.60 lower>0.40 FAIL; S3 length_long rho 0.1663 upper 0.3111>0.30 FAIL (N=145); S4 ECE 0.1924 CI[0.1589,0.2296] upper 0.2296>0.18 FAIL despite precision 1.0 false 0.0; S5 Pareto vs RAG dominance false at f10 CI[-0.000397,-0.000269] and f100 CI[-0.003967,-0.002667] FAIL despite saving 44.83% vs browse. S2 pooled |rho_length|0.0558 upper 0.025 p0.202 PASS and S6 gap 0.4256>0.35 PASS. Bounded FALSIFIED-IN-SETTING under QCR; C-RESIDUAL-NOVELTY remains global HYPOTHESIS. No promotion."
+    }
+  ],
+  "product_action": "no_promotion",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "On live BrowserGym 1280x720 CDP AX>10 heterogeneous sites with Intel diverse-site manifest and Runtime health-gated single-worker sticky substrate, does history-conditioned PMI reveal predictive structure beyond memory (BC PMI>0.05 with trajectory-grouped permutation), or does per-value alias handling via Runtime diverse substrate recover honest Pareto dominance vs flat RAG k5 where per-family disjoint orthogonal parameterization failed?",
+  "reason": "All PCs/NCs PASS validates the core repair of two prior MEASUREMENT_INVALID packets (formula -> executed TF-IDF retrieval, no artificial std fixup, deterministic correctness vs base_p, actual 108 ops build, strengthened gap>0.35 |rho_proxy|<0.60, trajectory-grouped dual permutation centering). With valid measurement, the honest cost does not strongly track residual novelty (rho 0.426<0.60), couples to length in long stratum (upper 0.311>0.30), miscalibrates (ECE 0.192>0.15), and fails strict Pareto vs flat RAG at both f10 and f100 despite 44.8% vs cold browsing. This is a valid bounded scientific negative on the maximally orthogonal synthetic gate (Jaccard 0.0 disjoint alphabets), not an infrastructure failure. Per frozen decision_rule and Director OR clause, this FALSIFIED-IN-SETTING with QCR authorizes the deferred barrier-physics rewind on live heterogeneous BrowserGym as next orthogonal frontier basin, while parking synthetic residual-novelty economics on this fixture. No PRODUCT_CORE promotion until live diverse-site replication with measured LLM tokens/latency/browser work.",
+  "evidence_refs": [
+    "research/experiments/EXP-FRONTIER-36037217518/result.json",
+    "research/experiments/EXP-FRONTIER-36037217518/audit.json",
+    "research/experiments/EXP-FRONTIER-36037217518/spec.json (sha256:37925618efde6990cbeb884e419c9eb9ac59d907fb0c2bce020f63b0bf015fdb)",
+    "research/experiments/EXP-FRONTIER-36037217518/prereg.md (sha256:6f13733011973be853a8b930910038fc5ccf004daa5b80903184baff220648c9)",
+    "research/experiments/EXP-FRONTIER-36037217518/freeze.json (sha256:4b1c09516d4222ad72533d373a51fd1b76205fd3fea76e7dad2b7d2a4b2e1bc8)",
+    "research/experiments/EXP-FRONTIER-36037217518/artifacts/family_manifest.json (sha256:bd332b2d7eca61b5ce620e410e8141392fccdd38950f718053ebead0821a761f)",
+    "research/experiments/EXP-FRONTIER-36037217518/artifacts/per_trajectory_traces.json (sha256:d03da907610c62a7e4b3fc701ebc6dec3a73ea1316089f1cadf2b9926a9a95c7)",
+    "research/experiments/EXP-FRONTIER-36037217518/artifacts/bootstrap_permutation_nulls.json (sha256:5fee387e126fb366dd9b89b6716b737fdf83b209469ce127e966cadca0325779)",
+    "research/experiments/EXP-FRONTIER-36037217518/artifacts/confidences.json (sha256:a5a18b8ce2a3c93232b4b53cea37bf7c8a920bd1207b31824576eef1d22b944c)",
+    "research/frontier/run_execute_36037217518.py (sha256:0490c283e3a9a7a58dcebcba44c585f86d79232c36f4e2c529aa3704c1213c41)",
+    "research/experiments/EXP-FRONTIER-36037217518/report.md",
+    "research/experiments/EXP-FRONTIER-36037217518/provenance.json"
+  ]
+}
