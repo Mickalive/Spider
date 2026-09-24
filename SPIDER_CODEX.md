@@ -4,7 +4,7 @@ Pre-2.0 canonical memory remains frozen at `archive/spider-codex-ultimate:SPIDER
 
 Canonical Research 2.0 evidence lives in `codex/experiments/<experiment_id>/`.
 Use `codex/index.json` and `codex/claim_state.json` to locate relevant packets; do not load all experiment bodies by default.
-Validated experiments: **349**. Coverage gaps: **0**. Quarantined packets: **2**.
+Validated experiments: **350**. Coverage gaps: **0**. Quarantined packets: **2**.
 
 ## Experiment index
 
@@ -355,6 +355,7 @@ Validated experiments: **349**. Coverage gaps: **0**. Quarantined packets: **2**
 | EXP-PRODUCT-36020894109 | product | MEASUREMENT_INVALID | MEASUREMENT_INVALID | C-PRODUCT-ECON | `f50726bca9dd` |
 | EXP-INTEL-36020904615 | intel | PASS | MIXED | C-CROSSSITE, C-PRODUCT-ECON, C-RESIDUAL-NOVELTY | `d2ec81b3eead` |
 | EXP-RUNTIME-36030564009 | runtime | MEASUREMENT_INVALID | MEASUREMENT_INVALID | C-MEAS-VALID | `d6eb12aa3673` |
+| EXP-RUNTIME-36033919138 | runtime | MEASUREMENT_INVALID | MEASUREMENT_INVALID | C-MEAS-VALID | `00b0148f0d82` |
 | EXP-FRONTIER-36033935647 | frontier | MEASUREMENT_INVALID | MEASUREMENT_INVALID | C-RESIDUAL-NOVELTY | `67050f01369b` |
 | EXP-PRODUCT-36036421062 | product | PASS | MEASUREMENT_INVALID | C-PRODUCT-ECON | `1973aba861c0` |
 | EXP-INTEL-36037208652 | intel | REVISE | MIXED | C-CROSSSITE, C-MEAS-VALID, C-WEB-DYNAMICS | `71f2cf41f317` |
