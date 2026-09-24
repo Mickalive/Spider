@@ -132,6 +132,7 @@ def main():
     require("SPIDER_DIRECTION_OPENCODE_UNAVAILABLE" in pulse and "SPIDER_SCOUT_UNAVAILABLE" in pulse and "SPIDER_GLOBAL_DIRECTOR_UNAVAILABLE" in pulse, "strategic control failures must be visible and propagate to Factory failure")
     require("DIRECTION_MISSING" in pulse and "SPIDER_DIRECTION_UNAVAILABLE" in pulse, "factory pulse must fail closed when global direction is unavailable")
     recovery_wf = text(".github/workflows/lane-recovery.yml")
+    require("GH_REPO:" in recovery_wf, "Lane recovery must provide explicit repository context to gh without checkout")
     require("workflow_run:" in recovery_wf and "SPIDER R2 Lane" in recovery_wf and "conclusion != 'success'" in recovery_wf and "gh workflow run factory-pulse.yml" in recovery_wf, "failed/cancelled lane recovery must explicitly wake global direction outside Factory Pulse concurrency")
     codex_wf = text(".github/workflows/codex-sync.yml")
     require("actions: write" in codex_wf and "Wake global direction after canonicalization" in codex_wf and "gh workflow run factory-pulse.yml" in codex_wf, "Codex sync must explicitly wake global direction after canonicalization")
@@ -142,6 +143,7 @@ def main():
     factory_recovery = text(".github/workflows/factory-recovery.yml")
     require("SPIDER R2 Factory Pulse" in factory_recovery and "SPIDER_FACTORY_RECOVERY_RETRY" in factory_recovery and "SPIDER_FACTORY_RECOVERY_CIRCUIT_OPEN" in factory_recovery and "gh workflow run factory-pulse.yml" in factory_recovery, "Factory Pulse failures must have bounded external recovery")
     require('cron: "*/5 * * * *"' in factory_recovery and "gh run list --workflow=factory-pulse.yml --limit 1" in factory_recovery and "SPIDER_FACTORY_RECOVERY_ACTIVE" in factory_recovery, "Factory recovery must poll independently of GITHUB_TOKEN event chaining and inspect only the freshest pulse")
+    require("GH_REPO:" in factory_recovery, "Factory recovery must provide explicit repository context to gh without checkout")
     require("conclusion == 'cancelled'" not in factory_recovery, "Factory recovery must not retry cancellation superseded by fresher direction")
 
     promote = text(".github/workflows/product-promote.yml")
