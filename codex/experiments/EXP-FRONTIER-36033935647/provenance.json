@@ -1,0 +1,69 @@
+{
+  "experiment_id": "EXP-FRONTIER-36033935647",
+  "lane": "frontier",
+  "github_run_id": "36033935647",
+  "code_path": "research/frontier/run_execute_36033935647.py",
+  "code_sha256": "7ef4e4fd80d3ef4810de5db1baab197ae3e2be1f20a737d99e0f8ecbbefdac05",
+  "spec_sha256": "0254f5d416c222994e72dd7f53b3f4c43b50df445c6f31ad8520b5e33b1eeb25",
+  "prereg_sha256": "712f79be4e84522e9dccbc6616b43e1727d28bd07bc4d7a63df5985dfbf2390e",
+  "freeze_sha256": "59d2b8a23659ee5a10be834c4b861679ce357bdb21655ff157cde5249ffed66b",
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-FRONTIER-36033935647/artifacts/family_manifest.json",
+      "sha256": "bd332b2d7eca61b5ce620e410e8141392fccdd38950f718053ebead0821a761f",
+      "role": "fixture"
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-36033935647/artifacts/per_trajectory_traces.json",
+      "sha256": "ec41fe0d419545d1086c8658fb00ba57fbdd73e51bf9bd754d1a825706c754ce",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-36033935647/artifacts/bootstrap_permutation_nulls.json",
+      "sha256": "8b597b60676ab8acce4636499803c556914f0e6a4db20d9bd79ed9db065765dc",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-36033935647/artifacts/confidences.json",
+      "sha256": "29b55d820ed90e19e130decb15ea7efbf805ea895d43311247b756fdca953488",
+      "role": "raw"
+    },
+    {
+      "path": "research/frontier/run_execute_36033935647.py",
+      "sha256": "7ef4e4fd80d3ef4810de5db1baab197ae3e2be1f20a737d99e0f8ecbbefdac05",
+      "role": "code"
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-36033935647/spec.json",
+      "sha256": "0254f5d416c222994e72dd7f53b3f4c43b50df445c6f31ad8520b5e33b1eeb25",
+      "role": "fixture"
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-36033935647/prereg.md",
+      "sha256": "712f79be4e84522e9dccbc6616b43e1727d28bd07bc4d7a63df5985dfbf2390e",
+      "role": "fixture"
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-36033935647/freeze.json",
+      "sha256": "59d2b8a23659ee5a10be834c4b861679ce357bdb21655ff157cde5249ffed66b",
+      "role": "fixture"
+    }
+  ],
+  "environment": {
+    "python": "3.12.14 (main, Aug 13 2026, 02:47:42) [GCC 13.3.0]",
+    "numpy": "2.5.3",
+    "platform": "linux",
+    "seed": 42,
+    "deterministic_jitter": "hashlib.sha256(task_id) 0.02 range top5 softmax temp0.15",
+    "bootstrap_n": 5000,
+    "permutation_n": 5000,
+    "build_cost_model": "$0.00002/vector-op counted offline 108 spider/60 rag frozen before outcomes",
+    "live_available": false,
+    "synthetic_gate": true
+  },
+  "commands": [
+    "pip install numpy scipy -q",
+    "python research/frontier/run_execute_36033935647.py"
+  ],
+  "notes": "Executed honest per-trajectory sum counters on derived_context only (templates + observed key-sets) with TF-IDF retrieval over train-A only, softmax top5 temp0.15 + jitter, UNKNOWN<0.80, family-stratified trajectory-grouped bootstrap/permutation, disjoint alphabets Jaccard<0.30, FIXES VF-001..VF-005."
+}
