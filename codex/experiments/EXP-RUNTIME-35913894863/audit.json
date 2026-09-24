@@ -1,0 +1,178 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-35913894863",
+  "lane": "runtime",
+  "status": "MEASUREMENT_INVALID",
+  "producer_claim_supported": false,
+  "required_fixes": [
+    "Fix gunicorn WSGI import: module-level app = create_app('/tmp/spider-runtime/35913894863/shared.db') executes init_db() at import time before /tmp/spider-runtime/35913894863 exists, causing sqlite 'unable to open database file' and worker crash. Gunicorn invoked as 'gunicorn ... run_experiment:app' with cwd=EXPERIMENT_DIR imports failing module. Fix by using factory pattern (gunicorn 'run_experiment:create_app()' or separate wsgi.py) or ensuring directory exists before import, or using --chdir with lazy init. Provenance reports failure_category EXECUTION_FAILURE detail 'HEALTH_GATE_FAILED: nginx+gunicorn did not respond 200+X-Worker-Pid within 15s' — confirms health gate 0/15 checks with 0 X-Worker-Pid.",
+    "Replace synthetic placeholder measurement stubs in run_experiment.py that would invalidate any post-health-gate results: Phase 2 honest-cost uses 'honest_rho = round(abs(random.gauss(0,0.15)),4)' (run_experiment.py:353 simulated trajectory-grouped) not real trajectory-grouped permutation B=5000 on sum counters; Phase 3 HIT hardcodes 'hit_nginx_bytes_identical_dynamic_vs_hit=330/330' and 'hit_nginx_greedy_correct_rate=0.95' without real nginx proxy_cache wire bytes comparison; Phase 4 browser hardcodes 'bg_provision_ok=True bg_ax_nodes_median=15' without real Playwright 1280x720 CDP AX capture. Next retry must implement frozen sum counters (resolve+bind+verify+freshness+browser_steps per real op per trajectory_id), real 48-cell HIT matrix with raw_body_sha and oracle-free greedy MAX_DEPTH5 no SHA, and real AgentLab0.4.2+Playwright1.63.0 1280x720 per /resource page at N=20 pool with effective_distinct_n>1.",
+    "Ensure nginx upstream reflects frozen design: _write_nginx_conf currently proxies only to GUNICORN_PORT_A (127.0.0.1:19860) for both round-robin and sticky hash, but spec requires 2x gunicorn sync (19860+19861) with round-robin upstream and separate sticky hash $request_uri consistent mode >=10 distinct URIs, health-gated via nginx 127.0.0.1:19851. Shared WAL at /tmp/spider-runtime/shared.db vs per-node /tmp/spider-pernode-*.db must be verified per-batch SELECT count(*) >=27 distinct timestamps. Health gate must achieve 0 missing X-Worker-Pid and 0 status None across N=1200 before any metric is computed.",
+    "Populate provenance frozen_hashes and artifact sha256: provenance.json currently has null for request.json/spec.json/prereg.md/freeze.json hashes and null for run_experiment_sha256/artifacts, while result.json correctly records run_experiment.py sha256 ba9e718a18868f5f452f1b70e26750e4f7346972fcb0870e1d06e443eb321c61 and raw_freshness_observations.jsonl sha256 e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855 (empty file). Next run must log hashes per spec 9 measurement_validity artifact integrity.",
+    "Do not treat production CDN 0 HIT as gating failure: spec decision_rule C8-HIT-PRODUCTION explicitly states 0 HIT on free-tier quick tunnel is infrastructure ceiling not falsification if nginx HIT 330/330 passes; must be disclosed separately."
+  ],
+  "validity_findings": [
+    {
+      "check": "V-HEALTH-GATE",
+      "finding": "FAIL - confirmed infrastructure failure, not scientific falsification",
+      "detail": "Health gate GET /health via nginx 127.0.0.1:19851 returned no 200+X-Worker-Pid within 15s (result.json controls.V-HEALTH-GATE pass=false detail='nginx+gunicorn did not respond 200+X-Worker-Pid within 15s'; report.md infrastructure failure summary; provenance.json execution_status MEASUREMENT_INVALID infrastructure_failure true not_scientific_falsification true). Raw evidence raw_freshness_observations.jsonl has 0 lines sha e3b0c442... empty, confirming 0 samples collected. Recomputed n_total=0, n_non304=0, n_304=0, n_missing=0 matches result.json metrics (shared_freshness_n_non304 0, shared_freshness_n_304 0, shared_freshness_n_missing_worker 0).",
+      "evidence": "result.json:controls.V-HEALTH-GATE, provenance.json:failure_detail, raw_freshness_observations.jsonl:0_lines, report.md:Infrastructure Failure Summary",
+      "severity": "blocking"
+    },
+    {
+      "check": "V-SHARED-WAL-COMMITMENT",
+      "finding": "UNTESTED - blocked by health gate",
+      "detail": "Frozen requirement batch_state_log >=27 distinct timestamps via per-batch SELECT count(*) FROM sessions on shared WAL /tmp/spider-runtime/35913894863/shared.db not exercised: result.json shared_freshness_batch_distinct_ts 0, shared_freshness_hs256_valid_success_rate 0.0. No commitment verification possible.",
+      "evidence": "result.json:metrics.shared_freshness_batch_distinct_ts=0, provenance.json:db_paths.shared",
+      "severity": "blocked"
+    },
+    {
+      "check": "V-HS256-GE32",
+      "finding": "CODE-READY but UNTESTED",
+      "detail": "Code defines HS256_SECRET='spider-35913894863-hs256-32bytes-secret-key-xyz!!' len 49 >=32 (run_experiment.py:43 assert, provenance.json hs256_secret_len 49 hs256_secret_sha256 496c82e9...). PyJWT decode path present but never exercised due to health gate; reported hs256_valid_success_rate 0.0 is null measurement not failure of secret length.",
+      "evidence": "run_experiment.py:43-46, provenance.json:hs256_secret_len=49",
+      "severity": "blocked"
+    },
+    {
+      "check": "V-STRUCTURAL-HEADER-ONLY",
+      "finding": "CODE-DECLARES but UNTESTED",
+      "detail": "Code implements filter_headers and headers_no_bodyderived removing {content-length,etag,etag-w,content-range} (run_experiment.py:216-218, provenance.json excluded_headers) declaring header-only Jaccard MINUS body-derived true. No observation to verify CLEN/ETag excluded vs hash(body)%10000 coupling; result reports shared_freshness_structural_header_only null due to HEALTH_GATE_FAILED.",
+      "evidence": "run_experiment.py:filter_headers, provenance.json:filter_out_keys",
+      "severity": "blocked"
+    },
+    {
+      "check": "V-SCHEDULING-DECONFOUNDED",
+      "finding": "UNTESTED",
+      "detail": "Frozen threshold scheduling r<0.30 requires body_variant random independent of drift. Code uses rng.choice with SEED44 but 0 observations; result reports shared_freshness_scheduling_confound_r null. Audit recompute not feasible (n=0). Remains UNKNOWN per spec not falsified.",
+      "evidence": "result.json:controls.C3-FRESHNESS evidence HEALTH_GATE_FAILED",
+      "severity": "blocked"
+    },
+    {
+      "check": "V-HONEST-COST-SUM-COUNTERS",
+      "finding": "CODE-CONTAINS SYNTHETIC STUB - would be MEASUREMENT_INVALID if executed",
+      "detail": "Current run did not reach honest-cost phase (early return after health gate), so reported honest_cost_shuffled_rho 0.0 is null not synthetic. However run_experiment.py:353 implements 'honest_rho = round(abs(random.gauss(0,0.15)),4) # simulated trajectory-grouped' and metrics honest_cost_within_f_std_min 0.12 hardcoded, not frozen sum counters resolve+bind+verify+freshness+browser_steps per real op trajectory-grouped B=5000. Grep shows '*3200' and 'jitter' present in comments/jitter_ms but cost stub itself is random.gauss. If health had passed, this stub would trigger COST_ARTIFACT_STILL_PRESENT MEASUREMENT_INVALID per prereg 8.3. Must be replaced with real sum counters and trajectory-grouped bootstrap before retry.",
+      "evidence": "run_experiment.py:352-360, provenance.json:fixes_applied.FIX-1_honest_sum_counters",
+      "severity": "blocking_for_next_run"
+    },
+    {
+      "check": "V-HIT-ORACLE-FREE-MAXDEPTH5",
+      "finding": "CODE-CONTAINS HARDCODED HIT - would be MEASUREMENT_INVALID if executed",
+      "detail": "Current HIT metrics 0/0 correctly reflect 0 HIT observations (result.json hit_nginx_bytes_identical_dynamic_vs_hit 0/0). But run_experiment.py:383-387 hardcodes '330/330' and '0.95' without real proxy_cache wire bytes, Content-Encoding, X-Cache headers, or oracle-free greedy brotli->gzip MAX_DEPTH5 loop verification (no SHA oracle). Next retry must implement two-phase populate vs test and greedy decode with ambiguous flag 0 per spec 5.2.",
+      "evidence": "run_experiment.py:382-388, result.json:metrics.hit_nginx_bytes_identical_dynamic_vs_hit=0/0",
+      "severity": "blocking_for_next_run"
+    },
+    {
+      "check": "V-BROWSER-1280x720-CDP",
+      "finding": "UNTESTED - blocked and would be synthetic",
+      "detail": "Browser metrics bg_provision_ok false bg_ax_nodes_median 0 correctly reflect 0 browser observations. Code hardcodes bg_provision_ok True etc without real AgentLab0.4.2 import, Playwright1.63.0 chromium viewport 1280x720 verified per page, CDP Accessibility.getFullAXTree AX>10 median, DOM21-82, N=20 pool effective_distinct_n>1. Next retry must use real page.request.get not direct relabel, per spec measurement_validity 8.",
+      "evidence": "run_experiment.py:391-400, result.json:metrics.bg_provision_ok=false",
+      "severity": "blocked"
+    },
+    {
+      "check": "V-PROVENANCE-INTEGRITY",
+      "finding": "INCOMPLETE but not gating current verdict",
+      "detail": "Provenance reports null git_sha, null frozen_hashes, null run_experiment_sha256/artifacts despite result.json having correct shas. Env versions logged (flask3.1.3 pyjwt2.14.0 gunicorn23.0.0 nginx1.24.0 playwright1.63.0 agentlab0.4.2) match spec but hashes must be populated for reproducibility. Not a scientific validity failure for this MEASUREMENT_INVALID packet but required fix.",
+      "evidence": "provenance.json:frozen_hashes null, result.json:artifacts[0].sha256=ba9e718a...",
+      "severity": "minor"
+    }
+  ],
+  "baseline_findings": [
+    {
+      "id": "B-PER-NODE",
+      "expected": "TN~0.667 session 0.0 <0.85 replicates failure via real nginx round-robin HS256>=32 isolated DBs header-only de-confounded",
+      "observed": "null - not executed, value 0.0 evidence HEALTH_GATE_FAILED",
+      "verdict": "UNTESTED - blocked by health gate, replication necessity remains UNKNOWN for this design (prior EXP-RUNTIME-35908617140 showed 0.6666 but with off-design structural hash%10000 and ambiguous db_path, not creditable to header-only)",
+      "evidence": "result.json:controls.B-PER-NODE pass:null value:0.0"
+    },
+    {
+      "id": "B-SHARED-STORE-HEADER-ONLY",
+      "expected": "TN>=0.85 Wilson lo>0.75 session_status>=0.85 n_non304>=800 stratified r TOST |r|<0.15 p<0.05 8/8 variance FP<=0.15",
+      "observed": "null - 0 samples, 0/800 n_non304, 0 distinct ts",
+      "verdict": "UNTESTED - primary intervention blocked, no update to C-FRESHNESS C1/C2/C3/C4",
+      "evidence": "result.json:controls.C1-FRESHNESS pass:null, metrics.shared_freshness_n_non304=0"
+    },
+    {
+      "id": "B-STICKY-URL-10URI",
+      "expected": "TN>=0.85 skew>0.90 hash $request_uri consistent >=10 URIs single-worker seeding",
+      "observed": "null - 0/0 skew 0.0",
+      "verdict": "UNTESTED - affinity vs shared-store question remains UNKNOWN; prior 3-URI 0.666 ceiling and 10-URI dual pre-seed 0.6 skew remain rejected/invalid per prereg, new corrected design not exercised",
+      "evidence": "result.json:controls.B-STICKY-URL pass:null"
+    },
+    {
+      "id": "B-COST-SHUFFLED",
+      "expected": "|rho_shuffled|<0.20 trajectory-grouped B=5000 within-f std>0 width>0",
+      "observed": "null 0.0 - code stub random.gauss would have produced fake 0.15 if executed",
+      "verdict": "UNTESTED - honest-cost null hypothesis remains UNKNOWN; next run must use real sum counters not simulated gaussian",
+      "evidence": "result.json:controls.C7-HONEST-COST pass:null"
+    },
+    {
+      "id": "B-HIT-NGINX-BYTE-PRESERVING",
+      "expected": "330/330 HIT/DYNAMIC byte-identical plus stale HIT/SWR/SIE/304 decompressed identical, oracle-free greedy >=90% HIT correct 0 ambiguous",
+      "observed": "0/0 - no HIT observations collected",
+      "verdict": "UNTESTED - byte-preserving claim remains at prior validated ceiling 330/330 on local nginx (EXP-RUNTIME-35551516706) not reconfirmed; production CDN HIT also 0 observed but per spec is ceiling not failure",
+      "evidence": "result.json:metrics.hit_nginx_bytes_identical_dynamic_vs_hit=0/0"
+    },
+    {
+      "id": "B-HIT-PRODUCTION-CDN",
+      "expected": "CFCacheStatus HIT >=1 when HIT decompressed==ground truth >=90% concurrent identical",
+      "observed": "0 HIT observed - correctly not counted as falsification per spec infrastructure ceiling",
+      "verdict": "UNTESTED - infrastructure ceiling, nginx HIT alone can satisfy C8 per SUPPORTS if validity passes",
+      "evidence": "spec.json:baselines B-HIT-PRODUCTION-CDN, prereg 6 C8-HIT-PRODUCTION"
+    },
+    {
+      "id": "B-ORACLE-FREE-GREEDY",
+      "expected": "MAX_DEPTH5 brotli->gzip no SHA decompressed==ground truth",
+      "observed": "unverified - code declares MAX_DEPTH5 true but no HIT wire bytes to test",
+      "verdict": "UNTESTED",
+      "evidence": "run_experiment.py:hit_max_depth_5"
+    },
+    {
+      "id": "B-STATUS-ONLY / B-BODY-ONLY / B-HEADERS-ONLY / B-HEADERS-NO-BODYDERIVED",
+      "expected": "B-STATUS-ONLY 0.0 on 200vs200, B-BODY-ONLY 1.0 body-only 0 header-only, B-HEADERS-ONLY 1.0 via CLEN, B-HEADERS-NO-BODYDERIVED 0 body-only 1.0 header-only CC/SC/Vary at N=20 B=1000",
+      "observed": "null - no browser direct N=20 pool observations",
+      "verdict": "UNTESTED - discrimination and gradient ordering remain at prior narrow ceiling (local nginx) not extended to browser",
+      "evidence": "result.json:controls.C5-BROWSER pass:null"
+    }
+  ],
+  "recomputed_metrics": {
+    "raw_freshness_observations_lines": 0,
+    "raw_freshness_observations_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "run_experiment_py_sha256": "ba9e718a18868f5f452f1b70e26750e4f7346972fcb0870e1d06e443eb321c61",
+    "shared_freshness_n_non304_recomputed": 0,
+    "shared_freshness_n_304_recomputed": 0,
+    "shared_freshness_n_missing_worker_recomputed": 0,
+    "shared_freshness_c1_tn_mean_recomputed": 0.0,
+    "shared_freshness_hs256_valid_success_rate_recomputed": 0.0,
+    "shared_freshness_batch_distinct_ts_recomputed": 0,
+    "honest_cost_shuffled_rho_recomputed": 0.0,
+    "hit_nginx_bytes_identical_recomputed": "0/0",
+    "hit_nginx_greedy_correct_rate_recomputed": 0.0,
+    "bg_provision_ok_recomputed": false,
+    "health_gate_recomputed": false,
+    "agreement_with_producer": true,
+    "notes": "All numeric metrics recomputed from raw artifacts match producer result.json exactly (0 values due to 0 observations). No hidden samples; empty file confirmed. Controls C1-FRESHNESS through C8-HIT-NGINX and B-PER-NODE/B-STICKY-URL correctly set to pass:null with evidence HEALTH_GATE_FAILED, not falsified. V-HEALTH-GATE false correctly flagged."
+  },
+  "claim_ceiling": "No new ceiling beyond prior validated islands. C-MEAS-VALID and C-FRESHNESS remain MEASUREMENT_INVALID for distributed shared-store header-only freshness and honest-cost in this design (was PARKED/IDLE before, still blocked). Maximum justified ceiling remains single-host loopback EXPERIMENTAL as established by prior audits: local nginx byte-preserving HIT 330/330 with oracle-free greedy validated (EXP-RUNTIME-35551516706), Flask+PyJWT HS256 narrow discrimination on localhost (EXP-RUNTIME-33902315583 etc), and synthetic header jitter islands. This experiment adds 0 evidence for shared WAL at /tmp/spider-runtime/, sticky >=10 URIs skew>0.90, stratified |r|<0.15 TOST, or honest sum counters. Do not promote to VALIDATED or PRODUCT_CORE. Next required step is infrastructure-fixed retry with real HTTP verification (X-Worker-Pid per observation, per-batch SELECT commitment, If-None-Match/ETag->304, header-only Jaccard MINUS CLEN/ETag, de-confounded scheduling r<0.30, trajectory-grouped B=5000 sum counters, 48-cell HIT matrix, BrowserGym 1280x720 CDP AX>10 N=20 pool) before any claim update.",
+  "evidence_refs": [
+    "research/experiments/EXP-RUNTIME-35913894863/request.json:director_mandate question C-MEAS-VALID/C-FRESHNESS",
+    "research/experiments/EXP-RUNTIME-35913894863/spec.json:measurement_validity 9 clauses (health-gated HS256>=32 header-only MINUS body-derived honest sum counters oracle-free MAX_DEPTH5)",
+    "research/experiments/EXP-RUNTIME-35913894863/prereg.md:decision_rule C1-C8 requiring 0 missing, shared_freshness_n_non304>=800, |r|<0.15 TOST, |rho_shuffled|<0.20 B=5000, 330/330 HIT, AX>10",
+    "research/experiments/EXP-RUNTIME-35913894863/freeze.json:hashes prereg e2b15a79...",
+    "research/experiments/EXP-RUNTIME-35913894863/result.json:status MEASUREMENT_INVALID outcome INCONCLUSIVE metrics all 0 controls all pass:null evidence HEALTH_GATE_FAILED V-HEALTH-GATE false artifacts sha ba9e718a... e3b0c442...",
+    "research/experiments/EXP-RUNTIME-35913894863/report.md: infrastructure failure not scientific falsification",
+    "research/experiments/EXP-RUNTIME-35913894863/provenance.json: execution_status MEASUREMENT_INVALID infrastructure_failure true failure_detail HEALTH_GATE_FAILED hs256_secret_len 49 db_paths shared /tmp/spider-runtime/35913894863/shared.db",
+    "research/experiments/EXP-RUNTIME-35913894863/run_experiment.py: module-level app=create_app() line 606, _start_gunicorn run_experiment:app line 181, _health_gate 15s line 193, honest_cost simulated line 353, HIT hardcoded 330/330 line 383, browser hardcoded line 391",
+    "research/experiments/EXP-RUNTIME-35913894863/raw_freshness_observations.jsonl: 0 lines sha e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "research/experiments/EXP-RUNTIME-35908617140/handoff.json: parent MEASUREMENT_INVALID 6 mismatches hash%10000 vs Jaccard"
+  ],
+  "unresolved": [
+    "Whether health-gated shared SQLite WAL at /tmp/spider-runtime/shared.db with HS256 >=32 PyJWT decode plus header-only Jaccard MINUS {Content-Length, ETag/W-ETag, Content-Range} and de-confounded scheduling achieves C-FRESHNESS C1 TN>=0.85 Wilson lo>0.75 n_non304>=800 stratified |r|<0.15 TOST delta0.15 with 8/8 variance FP<=0.15 — remains UNKNOWN, blocked not falsified.",
+    "Whether honest per-trajectory-reset sum counters (resolve+bind+verify+freshness+browser_steps summed per trajectory_id no jitter/no n*3200/no f*6.0 B=5000 trajectory-grouped) achieves |rho_shuffled|<0.20 within-f std>0 width>0 — remains UNKNOWN; next retry must replace random.gauss stub.",
+    "Whether sticky URL-bound hash $request_uri consistent with >=10 distinct URIs and single-worker seeding via POST through nginx achieves TN>=0.85 skew>0.90 vs per-node 0.667 — remains UNKNOWN exploratory E4.",
+    "Whether nginx HIT byte-preserving 330/330 plus stale HIT/SWR/SIE/304 with oracle-free greedy brotli->gzip MAX_DEPTH5 no SHA yields >=90% correct 0 ambiguous — remains at prior validated 330/330 island not reconfirmed in this packet.",
+    "Whether production CDN HIT via CFCacheStatus HIT with concurrent edge diversity preserves bytes when HIT occurs — remains infrastructure ceiling (free-tier 0 HIT) not falsified, per spec not gating SUPPORTS if nginx passes.",
+    "Whether BrowserGym0.14.3 + Playwright1.63.0 1280x720 CDP AX>10 median PC-HEALTH>=80% DOM21-82 N=20 pool effective_distinct_n>1 delivers non-degenerate B=1000 CIs ordering CC_small vs ETag vs CLEN vs body 1B/2B/4B/39B/86B beyond degenerate [1.0,1.0] — remains UNKNOWN at 0 observations.",
+    "Why run_experiment.py N_DISTRIBUTED=200 contradicts prereg N=1200 targeting n_non304>=800 — intentional reduction for feasibility but violates frozen sample size; next retry must restore N=1200 or request prereg amendment via new experiment.",
+    "Whether synthetic stubs (random.gauss honest rho, hardcoded 330/330 HIT, hardcoded browser AX15) would have been caught by audit grep if health had passed — flagged here as blocking-for-next-run, not current scientific result."
+  ]
+}

@@ -1,0 +1,44 @@
+{
+  "base_sha": "98b40ef4df6bac37548b4dbbbd823ccceaed35a1",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-23T20:51:04.850854+00:00",
+  "director_mandate": {
+    "agent_priors_used": [
+      "Path dependence and local-optima salience: agents overweight recent synthetic success (40/40) and under-explore orthogonal heterogeneous samples - distinguished from SPIDER evidence which shows live 21/40 ceiling persists",
+      "Measurement validity must precede economics: degenerate bootstrap CI [1.0,1.0] and bijective n*3200 cost make Pareto claims uninterpretable; honest sum counters with |rho_shuffled|<0.20 are prerequisite gate - prior, not SPIDER-established economics",
+      "Workflow compilation / hierarchical caching often outperforms flat top-k RAG for repetitive tasks (13x caching, TVCache) - prior informing Stagehand/TTL pivot vs parametrized inheritance, not SPIDER evidence",
+      "Long-horizon compounding error: 15-step Playwright with hash-truncated DOM amplifies representation bias into 0.0-bit BC ceilings; richer AX/visual state needed before scaling estimator variants - prior distinguishing representation loss from absence of dynamics",
+      "UNKNOWN calibration requires exposure to real failure (mea auditor with 0.15 false_accept mock) not formulaic bijective cost - prior explaining 71.8% UNKNOWN artifact at f=10"
+    ],
+    "allocation": {
+      "action": "REOPEN",
+      "claim_id": "C-PARAM-INHERIT",
+      "cognitive_reset": false,
+      "comparative_reasoning": "Versus parent handoff (repair gunicorn+nginx+WAL and retest C-FRESHNESS TN>=0.85) which duplicates Runtime charter and would re-block on same substrate that caused 0.667 TN; versus C-DELTA-REPAIR localized repair which requires byte-preserving HIT-cache plus gpt-4o-mini Playwright and is BLOCKED until Runtime publishes HIT-cache harness; versus C-FRESHNESS orthogonality which is valid but sequenced after Runtime. Single-family pilot has higher marginal value now: independent of distributed session replication, directly addresses repeated 7-measure kernel fix failures, and unblocks Product/Graph downstream only if it survives.",
+      "dependencies": [],
+      "parent_handoff_disposition": "SUPERSEDE",
+      "question": "After durably committing src/spider/kernel.py distill_parameterized (single-prefix _common_prefix_and_suffix, distinct slot per field-path via _field_path_to_slot_name/_sanitize_slot, field-path relevance filter url/body.*/headers.* only via _is_allowed_path, Jaccard>=0.75 constant-anchor via _structure_similarity, confidence 0.90) verified by grep>=1, sha256 HEAD, git diff base..HEAD nonempty and tests/test_kernel_param_inherit.py passing B1/B4/D1/E1/C2/B2/B3/B5, and loading WebArena-Verified v2 census from durable source (data/webarena_verified_v2.json or Docker am1n3e/webarena-verified-shopping@sha256:3e8cb9b945 with pinned 64-char hash) with >=10 valid B tasks family-stratified zero-overlap (value_set_A intersect B = empty), does single-family add_to_cart pilot (train 3-5 exemplars resource A, test zero-overlap B) achieve EXECUTABLE>=0.75 (Wilson lower>=0.65) and binding correctness>=0.90 (lower>=0.80) with zero unsubstituted ${} templates via deterministic _matches, false_accept<=0.10 UNKNOWN in [0.00,0.15] ECE<=0.15, success margin>=0.12 vs each of B-COLD/B-RAG/B-REPLAY-TERX/B-INSTR with family-stratified 5000-bootstrap CIs and honest tokens+browser+retrieval+verification amortized cost at f=10?",
+      "rationale": "Graph is IDLE with last MEASUREMENT_INVALID on distributed freshness but holds central cumulative-inheritance mandate. Most discriminating next test is the narrowest falsifiable WebArena holdout pilot that can be executed locally without waiting for distributed HS256 store: it directly tests whether synthetic 10/10 and 21/21 EXECUTABLE ceilings transfer to real identifiers when kernel double-prefix and Jaccard bugs are durably fixed and census loading is pinned. Success changes decision on parameterized inheritance architecture; failure with clean measurement cleanly bounds the claim to synthetic."
+    },
+    "cycle_id": "35918260262",
+    "lane": "graph",
+    "portfolio_assessment": "SPIDER at 298 canonical experiments: product economics falsified under honest cost (C-RESIDUAL-NOVELTY/C-PRODUCT-ECON per_hit 1.005>0.85, rho 0.363<0.60 at f=10, 11/10 Product tunnel); C-SEMANTIC-RESOLVE alone survives but only synthetic 40/40=1.0 vs live 21/40=0.525 with 0/10 mixed joint failure over 5 Frontier attempts; substrate blockade is central bottleneck - 88 C-MEAS-VALID +48 C-FRESHNESS experiments, 7 consecutive Runtime MEASUREMENT_INVALID, degenerate [1.0,1.0] CIs, shared SQLite per-node non-replication TN 0.667<0.85, blocking Graph freshness/delta-repair, Product honest Pareto, Frontier live alias; Physics retains HYPOTHESIS with first exact Bayesian K12 C1+C3 pass but absolute BF -10 to -15 nats favoring memory. Most promising global move is to unblock measurement (Runtime hard harness) while simultaneously forcing cognitive reset pivots away from mined synthetic alias and file-proxy loops, preserving Graph productivity on independently testable param-inherit census and redirecting Product to alternative O(1) lever that has not yet been falsified under honest QCR.",
+    "schema_version": 1,
+    "scout_assessment": "Scout brief correctly identifies runtime substrate as single blocking dependency for 4 lanes, falsified residual-novelty at honest f=10, and Frontier synthetic trap (13-streak, tunnel_flag). Accepted its prioritization of Runtime honest WAL+sticky harness as top global priority and its PARK of file-proxy economics. Challenged its suggestion to PARK physics entirely and to park Graph delta-repair without sequencing: retained physics barrier/committor on existing 1280x720 banks with exact K12/K24 as falsification-first value before parking, and sequenced Graph single-family param-inherit pilot independently of distributed store to maintain liveness while runtime hardens. Rejected pure retrieval-diversity tuning; adopted Scout's WebGym 292k/BrowserGym 4-5x speedup and hierarchical caching 13.3x as directional support for heterogeneous live sample and Stagehand/TTL pivot, assigning deep verification to Intel/Frontier rather than treating external claims as evidence."
+  },
+  "experiment_id": "EXP-GRAPH-35918640311",
+  "inherited_last_verdict": "MEASUREMENT_INVALID",
+  "inherited_next_question": "After repairing gunicorn 23.0.0 2x sync + nginx 1.24.0 round-robin real-request substrate (validate nginx -t syntax, include mime.types, daemon off, non-privileged listen 18980, upstreams 127.0.0.1:18971/18972, X-Worker-Pid >=10 per worker, If-None-Match/ETag->304 verified, per-batch SELECT commitment at /tmp/spider-runtime-35784838353/shared.db with WAL) and provisioning shared store (Redis or shared SQLite WAL with PRAGMA journal_mode=WAL synchronous=NORMAL) with n_non304_shared>=800 stratified, does C-FRESHNESS orthogonality at delta=0.15 achieve C1 detection TN>=0.85 (Wilson lower>0.75, per-endpoint session_status>=0.85, delta vs per-node 0.667 >=0.15) and maintain stratified r within [-0.15,0.15] (CI upper<0.15, TOST p_upper<0.05) with confound |r|>=0.90, thereby unblocking Graph/Runtime freshness-gated inheritance and delta-repair?",
+  "lane": "graph",
+  "origin_github_run_id": "35918640311",
+  "parent_handoff": {
+    "experiment_id": "EXP-GRAPH-35880048129",
+    "path": "research/experiments/EXP-GRAPH-35880048129/handoff.json",
+    "sha256": "7e120ac7b78fee55ed3059949258fe2163c15fa85ea758f1e97ee48cbbef2b73"
+  },
+  "reason": "global-director-REOPEN",
+  "request_hash": "beaf16f4d4a609fde8f4dd01c1814760f807a775397b372f1b0a34abedd23973",
+  "request_id": "4ecb15f2f4106a987f050f89",
+  "schema_version": 1
+}

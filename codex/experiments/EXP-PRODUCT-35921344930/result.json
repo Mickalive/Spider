@@ -1,0 +1,196 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-35921344930",
+  "lane": "product",
+  "status": "MEASUREMENT_INVALID",
+  "outcome": "INCONCLUSIVE",
+  "status_reason": "Frozen PRIMARY DEPENDENCY gate unsatisfied: distributed HS256 shared-WAL substrate, Docker BrowserGym 0.14.3 CDP AX 2000-node 1280x720, and gpt-4o-mini token/browser/latency measurement are all unavailable in the execution environment (see artifacts/substrate_audit.json OBS-1..OBS-18). Frozen decision rule: 'if distributed substrate or rho_proxy_real unavailable -> MEASUREMENT_INVALID, not FALSIFIED' (spec.json measurement_validity[3]/[5], prereg sections 4 and 7). This is an infrastructure failure, NOT a scientific negative: no outcome-bearing economics measurement was performed and no claim is made or changed by this transaction. Companion failure.json records the exact failure and smallest next action.",
+  "metrics": {
+    "diagnostics": {
+      "runs_env_available": true,
+      "docker_daemon_available": true,
+      "browsergym_docker_image_available": false,
+      "browsergym_python_package_available": false,
+      "playwright_available": false,
+      "shared_db_wal_substrate_available": false,
+      "distributed_wal_per_batch_select_runnable": false,
+      "pyjwt_available": false,
+      "gunicorn_available": false,
+      "nginx_available": "binary-only-no-upstream",
+      "numpy_available": false,
+      "scipy_sklearn_pandas_available": false,
+      "gpt4o_mini_key_available": false,
+      "kernel_dot_regex_fix_applied": "d926279d5ee14a044a2f13b8abc09202df9f5adb9e86feaadeb61818a15f4038",
+      "kernel_unittest_pass": "5/5",
+      "frozen_inputs_mutated": false
+    },
+    "primary": {
+      "per_hit_ratio_STAGEHANDTTL_vs_RAG_n0": null,
+      "per_hit_ratio_STAGEHANDTTL_vs_RAG_n0_25": null,
+      "per_hit_ratio_WEBMCP_vs_RAG_n0": null,
+      "per_hit_ratio_WEBMCP_vs_RAG_n0_25": null,
+      "per_hit_ratio_STAGEHANDTTL_vs_STAGEHANDCACHE_n0": null,
+      "per_hit_ratio_STAGEHANDTTL_vs_STAGEHANDCACHE_n0_25": null,
+      "rho_proxy_real": null,
+      "rho_novelty_per_hit_STAGEHANDTTL": null,
+      "rho_novelty_per_hit_WEBMCP": null,
+      "rho_length_per_hit": null,
+      "rho_shuffled": null,
+      "fresh_at_n0_rate": null,
+      "stale_at_n0_25_rate": null,
+      "M_total_f10": null,
+      "M_total_f100": null,
+      "M_per_hit_f10": null,
+      "success_n0": null,
+      "false_accept": null,
+      "UNKNOWN_precision": null,
+      "ECE_exec": null,
+      "probe_tokens_saved": null,
+      "probe_accuracy": null,
+      "pool_relative_truth": null,
+      "distributed_TN": null,
+      "per_node_TN": null,
+      "webmcp_registry_load_state": null
+    },
+    "metric_units_notes": "All primary metrics carry explicit null: they are UNMEASURABLE, not zero (missing-data vs negative-result distinction per EXPERIMENT_PACKET.md). Bootstrap 5000 / block-permutation 5000 statistics are not computable in this environment (numpy/scipy/sklearn absent; substrate absent). Values would have been compared against frozen thresholds rho_proxy_real>=0.50, |rho_shuffled|<0.20, per-stratum |rho_length|<0.20, per_hit<=0.85 at n0/n0.25, UNKNOWN precision>=0.85, ECE<=0.15, bootstrap upper<=0.18."
+  },
+  "controls": {
+    "primary_claim": "C-PRODUCT-ECON",
+    "secondary_claims": ["C-RESIDUAL-NOVELTY", "C-FRESHNESS"],
+    "control_group": "PC-PLUS-DISTRIBUTED-PARETO-CORRELATED",
+    "null_group": "NC-DISTRIBUTED-SHUFFLE-PIPELINE",
+    "entries": [
+      {
+        "control_id": "PC1-CORRELATED-FRESHNESS-CONFOUND-CLOSURE",
+        "expected": "Correlated ETag W/body_sha freshness (fresh ~1.0 at n0, ~50% stale at n0.25) yields internal 95% CI excluding 0; CI half-width <= 0.037 (n0) / <= 0.081 (n0.25)",
+        "observed": "not evaluable - requires distributed substrate + BrowserGym + gpt-4o-mini run",
+        "status": "unknown",
+        "evidence_ref": "artifacts/substrate_audit.json OBS-2, OBS-3, OBS-4, OBS-12"
+      },
+      {
+        "control_id": "PC2-CORRELATED-PROBE-DOTFIX-KERNEL",
+        "expected": "Dotted-slot parameter binding fix (${store.id}) applied to src/spider/kernel.py _PARAMETER and regression-tested before run",
+        "observed": "fix re-applied: sha256 d926279d5ee14a044a2f13b8abc09202df9f5adb9e86feaadeb61818a15f4038; regression tests test_dotted_parameter_slot_binds_fully + test_plain_identifier_slot_still_binds pass; suite 5/5",
+        "status": "pass",
+        "evidence_ref": "src/spider/kernel.py, tests/test_kernel.py"
+      },
+      {
+        "control_id": "PC3-GPT4OMINI-REAL-ECON",
+        "expected": "Real gpt-4o-mini 15-step tokens/browser+latency: N=2000 (n0 1000, n0.25 1000), rho_proxy_real >= 0.50, TTR 25th pct 7.9s",
+        "observed": "not evaluable - no gpt-4o-mini key, no BrowserGym image/package, no playwright",
+        "status": "unknown",
+        "evidence_ref": "artifacts/substrate_audit.json OBS-2, OBS-10, OBS-11, OBS-12"
+      },
+      {
+        "control_id": "PC4-PERHIT-ECON-GATE",
+        "expected": "All four per_hit ratios <= 0.85 at n0 and n0.25 (STAGEHANDTTL vs RAG, WEBMCP vs RAG, STAGEHANDTTL vs StagehandCache), with internal CI half-width <= 0.05 and ratios respecting StagehandCache <= RAG <= TTL; bunching <= 15%",
+        "observed": "not evaluable - per_hit measurement requires honest distributed-WAL counters (frozen design expressly prohibits file-proxy isolated SQLite for economics)",
+        "status": "unknown",
+        "evidence_ref": "artifacts/substrate_audit.json OBS-3, OBS-4; spec.json decision_rule"
+      },
+      {
+        "control_id": "PC5-DISTRIBUTED-WAL-ORACLE-FREE",
+        "expected": "Oracle-free distributed WAL 960/960 decode TN >= 0.85 (vs per-node 0.667 artifact), per-batch SELECT, HS256 PyJWT 2.14.0, 2x gunicorn 23.0.0, nginx 1.24.0 round-robin sticky hash",
+        "observed": "not evaluable - substrate absent: no shared.db anywhere, PyJWT/gunicorn not installed, nginx binary-only",
+        "status": "unknown",
+        "evidence_ref": "artifacts/substrate_audit.json OBS-3, OBS-4, OBS-5, OBS-6, OBS-7, OBS-16"
+      },
+      {
+        "control_id": "NC1-SHUFFLED-LABEL-SELFINFORMATION-ZERO",
+        "expected": "Shuffled-honest-label self-information ~0 (|rho_shuffled| < 0.20)",
+        "observed": "not evaluable - requires distributed cost pipeline",
+        "status": "unknown",
+        "evidence_ref": "metrics.primary.rho_shuffled"
+      },
+      {
+        "control_id": "NC2-LEAKAGE-BOUND",
+        "expected": "Per-stratum |rho_length| < 0.20 under partial-length control",
+        "observed": "not evaluable - requires distributed cost pipeline",
+        "status": "unknown",
+        "evidence_ref": "metrics.primary.rho_length_per_hit"
+      },
+      {
+        "control_id": "NC3-FRESHNESS-NULL-VS-CORRELATED",
+        "expected": "Seeded-42 random freshness (~0.53 at both n0 and n0.25) renders no delta; correlated freshness renders the frozen delta",
+        "observed": "not evaluable - requires correlated-freshness fixture on distributed substrate",
+        "status": "unknown",
+        "evidence_ref": "metrics.primary.fresh_at_n0_rate, metrics.primary.stale_at_n0_25_rate"
+      },
+      {
+        "control_id": "NC4-NOVELTY-NULL",
+        "expected": "Fresh-record-novelty zero-inflated null (|rho_novelty| < 0.20 under null)",
+        "observed": "not evaluable - requires distributed cost pipeline",
+        "status": "unknown",
+        "evidence_ref": "metrics.primary.rho_novelty_per_hit_STAGEHANDTTL, metrics.primary.rho_novelty_per_hit_WEBMCP"
+      }
+    ],
+    "control_verdict": "PASS",
+    "control_verdict_note": "control_verdict=PASS refers ONLY to control-execution integrity for the two controls that could run (PC2 instrument prep pass; raw evidence control OBS-1..18 collected verbatim, frozen inputs unmutated). It does NOT indicate scientific hypothesis support: all outcome-bearing controls (PC1, PC3, PC4, PC5, NC1-NC4) are 'unknown' because the frozen substrate is absent, and per frozen precedence the experiment resolves to MEASUREMENT_INVALID regardless of control statuses."
+  },
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-PRODUCT-35921344930/artifacts/substrate_audit.json",
+      "sha256": "277a7502a49cdd56362fa0ca8f5290412759cec9ddb2ae8fa9af8969d069b5c0",
+      "role": "raw_evidence"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-35921344930/failure.json",
+      "sha256": "6a07409de05ac5b353ff536c4f875de327e72ca6562dd80de8f1bc06996df300",
+      "role": "derived"
+    },
+    {
+      "path": "src/spider/kernel.py",
+      "sha256": "d926279d5ee14a044a2f13b8abc09202df9f5adb9e86feaadeb61818a15f4038",
+      "role": "code"
+    },
+    {
+      "path": "tests/test_kernel.py",
+      "sha256": "5eadf14ebdbcd2ec9f8d875bb357033275b37bacefda4f51b4d9a4584562575d",
+      "role": "code"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-35916130502/result.json",
+      "sha256": null,
+      "role": "inherited_evidence_reference",
+      "note": "Parent packet reference for continuity only; no parent artifact was modified or re-hashed in this transaction."
+    }
+  ],
+  "observations": [
+    {"id": "OBS-1", "raw": "docker daemon reachable, 0 running containers", "derived": "containerization available but no experiment substrate deployed"},
+    {"id": "OBS-2", "raw": "docker images: only GitHub baseline infra images (firewall/agent, api-proxy, mcpg, dependabot, github-mcp-server, squid); no browsergym/agentlab/webarena image", "derived": "BrowserGym 0.14.3 CDP AX unlikely to be assemblable; rho_proxy_real unmeasurable"},
+    {"id": "OBS-3", "raw": "/tmp/spider-runtime-35860330078/ does not exist (canonical shared runtime path from parent)", "derived": "distributed WAL substrate never deployed"},
+    {"id": "OBS-4", "raw": "/tmp/spider-runtime/ does not exist; find / -name shared.db returns nothing", "derived": "no shared SQLite WAL anywhere on filesystem; honest per-batch counters impossible"},
+    {"id": "OBS-5", "raw": "PyJWT import fails (not installed)", "derived": "HS256 shared-secret signing unavailable"},
+    {"id": "OBS-6", "raw": "gunicorn not installed", "derived": "2x-worker distributed nginx loopback topology unbuildable"},
+    {"id": "OBS-7", "raw": "nginx binary present at /usr/sbin/nginx", "derived": "one half of the sticky-hash loopback present; counter service required and absent"},
+    {"id": "OBS-8", "raw": "numpy import fails", "derived": "frozen bootstrap 5000 / block-permutation 5000 statistics not computable"},
+    {"id": "OBS-9", "raw": "scipy, sklearn, pandas import fail", "derived": "TFIDF Jaccard ranker and CI machinery unavailable"},
+    {"id": "OBS-10", "raw": "browsergym python package import fails", "derived": "no local BrowserGym env even without Docker"},
+    {"id": "OBS-11", "raw": "playwright import fails", "derived": "no browser automation substrate"},
+    {"id": "OBS-12", "raw": "no OpenAI/gpt API key in environment (only GH_TOKEN)", "derived": "real gpt-4o-mini 15-step token/browser/latency measurement impossible"},
+    {"id": "OBS-13", "raw": "/tmp/webarena census absent; repo-cached parent fixtures exist under research/experiments/EXP-PRODUCT-35916130502/fixtures/tasks.json", "derived": "census availability is moot: substrate gate fails first"},
+    {"id": "OBS-14", "raw": "research/runtime/ and substrates/ directories do not exist in repo", "derived": "runtime lane hardening (binding dependency) not yet landed"},
+    {"id": "OBS-15", "raw": "Python 3.12.14, pip 26.2.1 only", "derived": "no scientific stack present"},
+    {"id": "OBS-16", "raw": "sqlite3 module OK (3.45.1) but no WAL db file exists to open", "derived": "WAL-capable runtime present; substrate content absent"},
+    {"id": "OBS-17", "raw": "repo HEAD 87ff4234 'R2 product: execution base EXP-PRODUCT-35921344930'", "derived": "execution base is the expected frozen snapshot (no git ops performed)"},
+    {"id": "OBS-18", "raw": "kernel _PARAMETER at start of EXECUTE was non-dot baseline r\"\\$\\{([A-Za-z_][A-Za-z0-9_]*)\\}\"", "derived": "frozen prereg's flagged binding-fix prerequisite; re-applied and regression-tested (sha d926279d...)"}
+  ],
+  "validity_notes": [
+    "Frozen gate (spec.json measurement_validity[3] and [5], prereg sections 4 and 7): distributed HS256 shared-WAL substrate + Docker BrowserGym 0.14.3 1280x720 + rho_proxy_real >= 0.50 are PRIMARY DEPENDENCIES. They are absent (OBS-2..OBS-12); per frozen decision rule this transaction is MEASUREMENT_INVALID and must NOT be read as a scientific negative or as FALSIFIED.",
+    "EXECUTE performed no outcome-bearing economics measurement. All 'primary' metric values are explicitly null - unmeasurable, not zero. Missing infrastructure is never encoded as a negative result (AGENTS.md failure discipline).",
+    "Frozen design expressly prohibits a file-proxy fallback for economics claims: 'Honest-cost counters must be summed via distributed WAL, not file-proxy isolated SQLite'. Therefore no proxy re-run of the parent's file-proxy harness was attempted.",
+    "Statistics stack (numpy/scipy/sklearn/pandas) absent: even a proxy pipeline could not compute the frozen family-stratified bootstrap 5000 / trajectory-grouped block-permutation 5000.",
+    "PC2 instrument prep was completed exactly as the frozen design mandates (re-apply dot-aware _PARAMETER, log patched sha, regression-test): kernel.py sha256 d926279d5ee14a044a2f13b8abc09202df9f5adb9e86feaadeb61818a15f4038 (matches pre-2.0 verified patched hash family), tests 5/5 pass. This removes the PC2 blocker for the retry but does NOT satisfy the substrate gate.",
+    "control_verdict=PASS is scoped strictly to control-execution integrity (PC2 fix + raw evidence collection + frozen-input immutability), not to hypothesis support; all scientific controls are status=unknown.",
+    "Raw evidence (artifacts/substrate_audit.json) separates command+result observations from all interpretations, per EXPERIMENT_PACKET.md RAW EVIDENCE -> OBSERVATION -> DERIVED MEASUREMENT -> INTERPRETATION discipline.",
+    "Frozen inputs unmutated: request.json c3bfbb9a155329..., spec.json 119615e7..., prereg.md 90d40e33... byte-identical to freeze.json hashes (verified via sha256sum during this EXECUTE)."
+  ],
+  "unresolved": [
+    "Whether the hardened distributed substrate restores oracle-free TN 0.986 (vs per-node 0.667 artifact) and whether honest per_hit economics (0.85 vs RAG parity at n0/n0.25) replicate from the parent - the frozen primary question remains OPEN and unanswerable until the substrate exists.",
+    "Whether correlated ETag W/body_sha freshness (fresh ~1.0 at n0 vs ~0.53 seeded-42 random, ~50% stale at n0.25) flips the per_hit or probe-savings comparison - C-FRESHNESS unmeasured.",
+    "Whether M_total_f10 Pareto dominance should supersede per_hit as the O(1) viability gate (conservative discipline on validation loss at low n), and f=100 amortization behavior - undetermined.",
+    "Whether Docker BrowserGym 0.14.3 + gpt-4o-mini access becomes available to measure rho_proxy_real >= 0.50.",
+    "Runtime lane hardening (shared SQLite WAL HS256 sticky nginx fixture + honest sum counters + BrowserGym 1280x720 fixture) has not landed in the repo (no research/runtime/, no substrates/) - it is the binding smallest next action.",
+    "Parent-handoff do_not_assume items preserved: parent's SUPERSEDE advisory (EXP-PRODUCT-35916130502) must NOT be treated as established; C-PRODUCT-ECON remains bounded-REJECTED on the file-proxy substrate only, and nothing in this transaction changes claim statuses."
+  ]
+}

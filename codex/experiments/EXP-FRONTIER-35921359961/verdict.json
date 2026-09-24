@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-FRONTIER-35921359961",
+  "lane": "frontier",
+  "decision": "MEASUREMENT_INVALID",
+  "claim_updates": [
+    {
+      "claim_id": "C-SEMANTIC-RESOLVE",
+      "status": "EXPERIMENTAL",
+      "reason": "MEASUREMENT_INVALID per frozen falsifier: PC-BROWSERGYM-HEALTH FAIL (live_available false, census 4 envs x3 retries all ModuleNotFoundError browsergym/playwright/agentlab not installed, synthetic fallback fixture sha 83b7c52dd17848fc8c70d1c629b8d541788e0438249623ea783d2df364467319 only) and PC-HONEST-COST-SANITY FAIL (permutation |rho_shuffled| 0.23038 for H-HIERARCHICAL-CF p=0.176 exceeds 0.20 threshold). PC-OPENAPI-COVERAGE and PC-ROUTING-DIFF pass only on synthetic /random/alias* paths (14 spec paths prefix_covered 40/40, 14/58 pairs differ via version-collapse) not on live WebArena-Verified v2/WebGym 300k task paths per Director mandate. All single-candidate correct-family pipelines identical 20/40=0.500 Wilson [0.352,0.648] per-family header 10/10 body 10/10 auth 0/10 mixed 0/10 ECE 0.22-0.24 (B-EXACT-MATCH, B-FLAT-TFIDF-K5-CF, H-HIERARCHICAL-CF, B-COMPILED-DSM, B-ENDPOINT-CATALOG) with McNemar p=1.0 vs each other, replicating bounded 21/40=0.525 synthetic ceiling. Joint exploratory B-JOINT-FETCH 40/40=1.0 Wilson [0.912,0.912] mixed 10/10 replicates prior EXP-FRONTIER-35903208514 and EXP-FRONTIER-35915275774 synthetic joint 40/40 but remains synthetic-only with joint_manifest selection_log=[] complementary_frac=0.0. Audit MEASUREMENT_INVALID producer_claim_supported false recomputes all pooled/per-family/ECE/honest_cost exactly and confirms no valid live inference. No confirmatory live discrimination of O(1) DSM-IR vs endpoint-catalog vs hierarchical vs flat justified; synthetic EXPERIMENTAL ceiling preserved, no VALIDATED or PRODUCT_CORE."
+    }
+  ],
+  "product_action": "HOLD",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "After repairing live BrowserGym 1280x720 CDP Accessibility.getFullAXTree substrate (playwright, browsergym-core, agentlab >=0.3) and frozen honest-cost sum-counter harness, does the genuine O(1) compiled DSM-IR vs genuine endpoint-catalog Jaccard>=0.6 shootout break the bounded 20/40=0.50 single-candidate ceiling on a live heterogeneous WebArena-Verified v2 / WebGym 300k sample where OpenAPI spec covers >=70% task paths and routing normalization differs before/after on >=20% task-relevant paths, under correct-family gating and honest cost (|rho_shuffled|<0.20, within-f std>0, not n*3200), and does joint Fetch/WebMCP + routing normalization + complementary 2-3 candidate composition rescue mixed triple-channel header+body+query+auth from 0/10 to >=4/10 with ECE<=0.15 and amortized O(1) $0.002-0.092 at f=10/100?",
+  "reason": "Independent audit MEASUREMENT_INVALID confirms frozen decision_rule triggers on two hard PC failures regardless of pooled metrics. PC-BROWSERGYM-HEALTH fails: provenance.json census_log shows 12 failures live_available=False census_available=False synthetic_fallback_disclosed=True, no CDP AX>10 live data, so Director binding question on live hetero sample where spec covers paths and routing differs was not tested (audit validity_findings[1], result.json controls PC-BROWSERGYM-HEALTH pass=false). PC-HONEST-COST-SANITY fails marginally: H-HIERARCHICAL-CF perm |rho|=0.23038 p=0.176 exceeds frozen |rho|<0.20 threshold (audit recomputed_metrics hon est_cost_perm_rho_max 0.23038; within-f std 1.02 passes, not bijective, but gate is absolute per spec). PC-OPENAPI-COVERAGE and PC-ROUTING-DIFF synthetic-path passes are artifactual: fetch_manifest spec paths are synthetic /random/alias* only, routing_manifest only 6/40 task-relevant pairs =15% <20% per audit validity_findings[4-5], so Director >=70% and >=20% not met on task paths. Phenotype 20/40=0.50 for all single pipelines vs 40/40 joint is exact replica of prior synthetic bounded ceiling 21/40=0.525 and 40/40 joint (EXP-FRONTIER-35915275774) — 15th frontier alias shootout with zero live discrimination (McNemar p=1.0). Audit recomputed_metrics match producer exactly (pooled 0.5/1.0, per-family 10/10 mixed 0/10 vs joint 10/10, ECE 0.22 vs 0.11, honest_cost diff 0). No SURVIVES/FALSIFIED determination for compilation-IR or endpoint-catalog leverage justified; infrastructure failure is not scientific falsification. Claim ceiling bounded to synthetic orthogonal header/body/auth+mixed minimal derived dict, no live BrowserGym heterogeneity, no promotion. Immediate chaining would repeat synthetic fallback; must wait for substrate repair. RAW EVIDENCE (synthetic 20/40 and 40/40 counts, census log failures, manifests) -> OBSERVATION (all single identical) -> AUDIT FINDING (MEASUREMENT_INVALID, producer_claim_supported false) -> DECISION (HOLD, EXPERIMENTAL preserved).",
+  "evidence_refs": [
+    "research/experiments/EXP-FRONTIER-35921359961/spec.json",
+    "research/experiments/EXP-FRONTIER-35921359961/prereg.md",
+    "research/experiments/EXP-FRONTIER-35921359961/freeze.json",
+    "research/experiments/EXP-FRONTIER-35921359961/result.json",
+    "research/experiments/EXP-FRONTIER-35921359961/result.json:controls.PC-BROWSERGYM-HEALTH",
+    "research/experiments/EXP-FRONTIER-35921359961/result.json:controls.PC-HONEST-COST-SANITY",
+    "research/experiments/EXP-FRONTIER-35921359961/result.json:metrics.honest_cost_perm_rho_max",
+    "research/experiments/EXP-FRONTIER-35921359961/raw_evidence.json",
+    "research/experiments/EXP-FRONTIER-35921359961/derived_metrics.json",
+    "research/experiments/EXP-FRONTIER-35921359961/audit.json",
+    "research/experiments/EXP-FRONTIER-35921359961/audit.json:validity_findings",
+    "research/experiments/EXP-FRONTIER-35921359961/audit.json:recomputed_metrics",
+    "research/experiments/EXP-FRONTIER-35921359961/audit.json:claim_ceiling",
+    "research/experiments/EXP-FRONTIER-35921359961/provenance.json",
+    "research/experiments/EXP-FRONTIER-35921359961/provenance.json:census_log",
+    "research/experiments/EXP-FRONTIER-35921359961/compilation_ir_manifest.json",
+    "research/experiments/EXP-FRONTIER-35921359961/endpoint_catalog_manifest.json",
+    "research/experiments/EXP-FRONTIER-35921359961/hierarchical_manifest.json",
+    "research/experiments/EXP-FRONTIER-35921359961/routing_manifest.json",
+    "research/experiments/EXP-FRONTIER-35921359961/fetch_manifest.json",
+    "research/experiments/EXP-FRONTIER-35921359961/joint_manifest.json",
+    "research/experiments/EXP-FRONTIER-35915275774/handoff.json",
+    "codex/claim_state.json:C-SEMANTIC-RESOLVE",
+    "codex/index.json"
+  ]
+}
