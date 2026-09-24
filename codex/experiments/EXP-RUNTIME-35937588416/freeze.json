@@ -1,0 +1,10 @@
+{
+  "experiment_id": "EXP-RUNTIME-35937588416",
+  "frozen_at": "2026-09-24T00:19:47.103709+00:00",
+  "hashes": {
+    "prereg.md": "f553f497081ae4bf6fa6cdcebf181e13bb8039163bd1dde3909f3b801153e0d2",
+    "request.json": "a317c2a368c208c1a7832606d1496215f3450d6c95c0e0d12f009b915f0e1848",
+    "spec.json": "74f9120d3bf44531cc1096d87d3102f1ac13fd5ac757195d2df4c8684e54b5ad"
+  },
+  "schema_version": 1
+}
