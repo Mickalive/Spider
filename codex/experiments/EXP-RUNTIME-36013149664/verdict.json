@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-36013149664",
+  "lane": "runtime",
+  "decision": "MEASUREMENT_INVALID",
+  "claim_updates": [
+    {
+      "claim_id": "C-MEAS-VALID",
+      "status": "MEASUREMENT_INVALID",
+      "reason": "Infrastructure health-gate failure, not scientific falsification. Producer status MEASUREMENT_INVALID outcome INCONCLUSIVE correctly classified per EXPERIMENT_PACKET.md s1. Evidence: result.json metrics {} n_non304=0 n_304=0 hs256_valid_success 0.0 batch_distinct_ts 0 health_gate_verified false; raw_freshness_observations.jsonl 0 lines; validity_notes HEALTH_GATE_FAILED nginx+Flask did not respond 200+X-Worker-Pid within 15s. Audit status MEASUREMENT_INVALID producer_claim_supported false confirms 0 mismatches, recomputed_metrics {} empty, and that V-FLASK-LISTENING PASS (socket connect 127.0.0.1:19860 verified) and V-NGINX-CONFIG-OK PASS (nginx -t syntax ok single location /) are satisfied but nginx proxy at 19851 fails to forward /health to Flask at 19860 with X-Worker-Pid header (required_fixes 1-6). All frozen gates C1 n_non304>=800 stratified 400/endpoint, C2 header-only |r|<0.30 V<0.30 MINUS body-derived, C3 honest-cost |rho_shuffled|<0.20 p>=0.20 B=1000 block-permuted, C4 full-vector >0.5 full>max(body,status) non-vacuous remain UNTESTED (audit baseline_findings all NOT EXECUTED). No ceiling change; prior EXPERIMENTAL streak continues."
+    }
+  ],
+  "product_action": "No product promotion. C-MEAS-VALID remains EXPERIMENTAL bounded to single-host localhost islands; honesty gate unresolved.",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "Can the minimal single-node honesty gate be restored after fixing nginx health-gate forwarding (proxy_pass http://127.0.0.1:19860 with add_header X-Worker-Pid passthrough verified via nginx error/access logs at /tmp/spider-runtime/36013149664/, increased health-gate timeout/diagnostic logging, and verified gunicorn wsgi:application factory serving /health with X-Worker-Pid) to achieve n_non304>=800 stratified 400/endpoint per-batch SELECT >=10 distinct ts plus header-only Jaccard MINUS {Content-Length,ETag,W-ETag,Content-Range} de-confounded |r|<0.30 and honest per-trajectory-reset sum counters |rho_shuffled|<0.20 p>=0.20 and full-vector >0.5 full>max(body,status) non-vacuously with non-degenerate CIs?",
+  "reason": "Audit independently validates MEASUREMENT_INVALID: health gate infrastructure failure prevents measurement of any frozen decision_rule condition. Producer correctly did not claim SUPPORTS or FALSIFIED. Factory-pattern WSGI fix (wsgi.py sys.path.insert Path(__file__).parent, directory before init_db, gunicorn run_experiment:create_app()) is implemented and Flask listening verified, fixing parent duplicate-location root cause, but nginx proxy forwarding of X-Worker-Pid still fails (0/15 health retries). All code-validity gates except health gate are satisfied in code (HS256 len 62 >=32, header-only MINUS filter preserving Cache-Control/Set-Cookie/Vary, honest sum counters no jitter/no n*3200/no f*6.0, fingerprint SHA256 decompressed). Zero observations means no evidence for or against single-node honesty gate; claim ceiling cannot expand to single-node honest substrate EXPERIMENTAL as per product_consequence_positive. Distributed/shared-WAL/sticky/HIT 330/330/browser hypotheses remain UNKNOWN.",
+  "evidence_refs": [
+    "research/experiments/EXP-RUNTIME-36013149664/request.json sha d57750a2c72e7282acb4c8ee22914eee006ee5e4592f84a4d5c33f048ccb2e17",
+    "research/experiments/EXP-RUNTIME-36013149664/spec.json sha 49b3bab8839a281098b4986bd856d6965fd8cbad64e969b4aa93077db0d4b034",
+    "research/experiments/EXP-RUNTIME-36013149664/prereg.md sha f7133d41ca14fd0ccebc78518373f30a853990294840e952ed803c8e428afc19",
+    "research/experiments/EXP-RUNTIME-36013149664/freeze.json",
+    "research/experiments/EXP-RUNTIME-36013149664/result.json status MEASUREMENT_INVALID outcome INCONCLUSIVE metrics {} controls V-NGINX-CONFIG-OK PASS V-FLASK-LISTENING PASS validity_notes HEALTH_GATE_FAILED observations n_non304=0 hs256_valid_success 0.0 batch distinct 0",
+    "research/experiments/EXP-RUNTIME-36013149664/provenance.json hs256_secret_len 62 hs256_secret_sha256 3fbf808d9c2dcfb00c6cb1544fa610228e0567d13fc67f6847fd159d77d72e40 flask_listening_verified true health_gate_verified false n_observations 0 factory_pattern_wsgi true wsgi_sys_path_insert true jwt_decode_at_origin true single_nginx_location true",
+    "research/experiments/EXP-RUNTIME-36013149664/audit.json status MEASUREMENT_INVALID producer_claim_supported false required_fixes 6 validity_findings 10 baseline_findings NOT EXECUTED recomputed_metrics {} claim_ceiling C-MEAS-VALID remains EXPERIMENTAL with honesty gate UNRESOLVED unresolved 7 evidence_refs 13",
+    "research/experiments/EXP-RUNTIME-36013149664/report.md status MEASUREMENT_INVALID outcome INCONCLUSIVE controls V-NGINX-CONFIG-OK PASS V-FLASK-LISTENING PASS validity_notes HEALTH_GATE_FAILED",
+    "research/experiments/EXP-RUNTIME-36013149664/run_experiment.py factory create_app DB_PATH wsgi.py sys.path.insert Path(__file__).parent _verify_flask_listening _health_gate _write_nginx_conf single location / proxy_pass 127.0.0.1:19860 add_header X-Worker-Pid",
+    "research/experiments/EXP-RUNTIME-36013149664/raw_freshness_observations.jsonl 0 lines sha e3b0c442... empty",
+    "research/experiments/EXP-RUNTIME-36013149664/execution_checkpoint.json",
+    "codex/claim_state.json C-MEAS-VALID MEASUREMENT_INVALID 53-experiment streak prior islands EXP-RUNTIME-35551516706 330/330 HIT and EXP-GRAPH-35389145821 orthogonality delta0.15 r=0.0022",
+    "codex/index.json runtime entries C-MEAS-VALID bounded localhost HS256 survival"
+  ]
+}

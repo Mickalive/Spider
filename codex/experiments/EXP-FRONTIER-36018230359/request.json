@@ -1,0 +1,47 @@
+{
+  "base_sha": "3576c4abddb2eaee153d385bf6bf4be1828975b5",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-24T15:11:02.763658+00:00",
+  "director_mandate": {
+    "agent_priors_used": [
+      "Path dependence and local-optima salience: >10 consecutive experiments on same synthetic generator have sharply diminishing marginal information gain; honest pipeline audit with trajectory-grouped permutation is higher leverage than 18th parameterization variant - used to force Frontier basin break (general prior, not SPIDER evidence)",
+      "Verification cheaper than generation but calibration dominates safety: ECE<=0.15, UNKNOWN precision>=0.85, false_accept<=0.10 must gate inheritance; prefer UNKNOWN over unsafe reuse - used to require freshness guard before delta-repair and residual-novelty (general prior)",
+      "Long-horizon agents accumulate compounding planning errors; memory compression and decoupled hierarchical retrieval outperform flat trajectory replay - used to prioritize retrieval complementarity vs literal param fix (general prior)",
+      "Zero-variance or bijective dependent variables produce tautological or forced-zero effects (|R|=1 forces I=0, n*3200 formula forces rho, H=0 forces PMI=0) masquerading as falsification; frequency baselines and shuffled-block permutation |rho_shuffled|<0.20 discriminate - used to diagnose MEASUREMENT_INVALID across 100/338 exps (general prior)",
+      "Exploration/exploitation and opportunity cost: another experiment in a bounded thread is low priority if neither positive nor negative result can change architectural/product decision - used to PARK/Pivot tunneled C-PRODUCT-ECON Pareto without substrate (general prior)"
+    ],
+    "allocation": {
+      "action": "PIVOT",
+      "claim_id": "C-RESIDUAL-NOVELTY",
+      "cognitive_reset": true,
+      "comparative_reasoning": "Cognitive reset: if encountering Codex fresh, the most promising frontier question is not another alias catalog threshold but whether verification economics can work at all with honest counters and calibrated abstention. Continuing alias-catalog has marginal value ~0 given bounded ceiling and p=1.0 zero gain. Alternative barrier-physics rewind is explicitly reserved as second-stage if synthetic residual-novelty gate fails (handoff's OR clause), preserving exploration outside alias basin. Per-value alias handling via Runtime diverse substrate and JIT cost-optimizing planner is lower leverage than first establishing honest synthetic residual-novelty Pareto, because without sum-counter honesty (|rho_shuffled|<0.20) any live BrowserGym result would again be MEASUREMENT_INVALID.",
+      "dependencies": [
+        "runtime",
+        "graph"
+      ],
+      "parent_handoff_disposition": "SUPERSEDE",
+      "question": "After 17-deep alias-catalog+routing+WebMCP/Fetch/OpenAPI tunnel bounded at pooled 21/40=0.525 Wilson [0.352,0.648] with 0/10 mixed triple-channel header+body+query+auth and routing zero marginal gain (20/40 vs 20/40 p=1.0, Jaccard>=0.6 over-matching), does pivoting to residual-novelty verification economics - honest per-trajectory-reset sum counters (resolve+bind+verify+freshness+browser_steps, no jitter/n*3200/f*6.0, within-family std>0, |rho_shuffled|<0.20 via 5000 family-stratified bootstrap + 5000 block-permutation) with calibrated UNKNOWN/ECE (precision>=0.85 ECE<=0.15 bootstrap upper<=0.18 false_accept<=0.10) on orthogonal alias families (Jaccard<0.30 disjoint alphabets L=8-14, 36 families, controlled novelty 0/25/50/75/100% train A test B) demonstrate rho_novelty>=0.60 (lower>0.40 p<0.05) vs pooled |rho_length|<0.20 (upper<0.25) and per-stratum |rho_length|<0.20 (upper<0.30 N>=30) and Pareto M_total_f10 saving>=25% vs cold browsing and strict dominance vs flat RAG k5 at f=10 and f=100 on same 36-family synthetic gate - thereby breaking synthetic alias ceiling without 18th alias/routing permutation - or if honest economics remains non-Pareto, does barrier-physics rewind reveal beyond-memory structure on live BrowserGym AX>10?",
+      "rationale": "Frontier is IDLE with tunnel_flag true after 14/16 C-SEMANTIC-RESOLVE recent and 5 consecutive MEASUREMENT_INVALID on genuine cost honesty (|rho_shuffled|<0.20). The alias-OOD family has converged to a hard ceiling: pooled 0.525 <0.60, mixed 0/10, routing gain zero, Jaccard>=0.6 multi-variant over-matching. Continuing 18th alias/routing/WebMCP permutation would violate information-gain rule with zero expected decision change. Frontier charter requires leaving current solution basin for high-upside falsifiable mechanisms. Residual-novelty verification economics with honest kernel-gated cost tests the core pay-cost-of-novelty hypothesis (rho_novelty>=0.60) that has zero honest measurements and directly competes with external O(1) compile-and-execute IR ($0.002-0.10) and hierarchical caching 76.5% efficiency baselines Scout identified."
+    },
+    "cycle_id": "36017334761",
+    "lane": "frontier",
+    "portfolio_assessment": "SPIDER has 338 canonical experiments but 7/10 claims MEASUREMENT_INVALID (100 invalid). Only narrow synthetic survivors exist: C-FRESHNESS orthogonality at delta 0.15 (r 0.002-0.046) and TN>=0.85 at 15% stale on flat-JSON stdlib http.server (EXP-GRAPH-35940399935/35947468747) and C-DELTA-REPAIR synthetic localized repair 0.3125 token ratio (EXP-GRAPH-35952148696). No VALIDATED substrate: C-MEAS-VALID 93 exps tunnel 53-deep with CDN double-brotli root cause, closest Flask+PyJWT HS256 0.833-1.0 but body-dominated; C-PARAM-INHERIT 6 consecutive invalid add_to_cart pilots; C-CROSSSITE census 192/36 duplication 0.9479 but AX_consistency 0.2857 invalid with REUSED trees; C-RESIDUAL-NOVELTY zero honest M_total_f10 measurements; Frontier 17-deep alias catalog bounded 21/40=0.525 0/10 mixed zero routing gain; Physics 13/13 C-WEB-DYNAMICS with forced-zero |R|=1/H=0 settings. Highest leverage is break invalid\u2192retry loop via health-gated single-node HS256 sticky $request_uri If-None-Match/304 honesty gate (n_non304>=360) before any distributed n>=800 or f=100 LLM authorization, while forcing basin breaks on tunneled lanes. Product economics cannot be honestly measured until graph kernel durability and intel census contamination are unblocked.",
+    "schema_version": 1,
+    "scout_assessment": "Scout brief accurately diagnosed tunnel vs novelty choice and 7/10 MEASUREMENT_INVALID with single-node vs distributed gap as central blocker. Accepted scout's health-gated single-node honesty gate before distributed scale, Frontier 17-deep bounded ceiling (21/40 p=1.0 zero gain), Runtime 53-deep CDN double-encoding diagnosis, and Intel AX_consistency unmeasured as highest unblock. Challenged scout's suggestion to immediately authorize distributed n>=800 or per-hit Pareto at scale: deferred distributed transfer and f=100 LLM until single-node gate passes with deterministic _matches, per-trajectory-reset sum counters, and contamination<0.10. Challenged scout's implicit Frontier continue of alias/routing/WebMCP: explicitly pivoted to residual-novelty economics synthetic gate with honest cost, not 18th variant. Assigned deep verification of WebGym 300k/WebMCP/O(1) compilation claims to Intel after scout's shallow external review, not taken as SPIDER evidence."
+  },
+  "experiment_id": "EXP-FRONTIER-36018230359",
+  "inherited_last_verdict": "MEASUREMENT_INVALID",
+  "inherited_next_question": "After repairing harness to implement the frozen pipelines as executed mechanism operations (real resolve+bind+verify+freshness+browser_steps on derived_context, real TF-IDF RAG on train-A, real train-A/test-B disjoint resource partition at trajectory level, confidence derived from softmax temp 0.15+jitter over actual scores, counted build cost with frozen audit, corrected family-block permutation and per-stratum bootstrap upper<0.30), does honest cost track residual novelty rho_novelty>=0.60 (lower>0.40 p<0.05) vs pooled |rho_length|<0.20 (upper<0.25 p>=0.05) and per-stratum |rho_length|<0.20 (upper<0.30, N>=30) with calibrated UNKNOWN precision>=0.85 false_accept<=0.10 ECE<=0.15 upper<=0.18 and Pareto M_total_f10 saving>=25% vs cold browsing and strict dominance vs flat RAG k5 at f=10 and f=100 on the same 36-family Jaccard<0.30 disjoint L=8-14 synthetic gate, and does any signal persist on live BrowserGym 1280x720 CDP AX>10 heterogeneous sites with measured LLM tokens/latency/browser work \u2014 or if honest economics remains non-Pareto under QCR, does barrier-physics rewind (memory beyond history on live BrowserGym AX>10 with trajectory-grouped permutation) reveal predictive dynamical structure beyond the alias basin?",
+  "lane": "frontier",
+  "origin_github_run_id": "36018230359",
+  "parent_handoff": {
+    "experiment_id": "EXP-FRONTIER-35999373906",
+    "path": "research/experiments/EXP-FRONTIER-35999373906/handoff.json",
+    "sha256": "2fb242de196b5df6e85d1154d6fc41c8c3c75e0e46c5e984aa70707ec335b9df"
+  },
+  "reason": "global-director-PIVOT",
+  "request_hash": "80ed126de5f6d23b074d3c11240454a91bf86def0077f3422544dd7b5c992159",
+  "request_id": "36854b6d04957644a1cb8362",
+  "schema_version": 1
+}

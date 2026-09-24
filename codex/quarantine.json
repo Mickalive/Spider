@@ -1,5 +1,12 @@
 [
   {
+    "lane": "intel",
+    "experiment_id": "EXP-INTEL-36006513166",
+    "ref": "origin/lab2/intel",
+    "source_commit": "e2c8384b1bcf655d8acc2f277aeda264faf5c0c5",
+    "error": "post-finalization mutation detected: audit.json"
+  },
+  {
     "lane": "product",
     "experiment_id": "EXP-PRODUCT-35888533574",
     "ref": "origin/lab2/product",
