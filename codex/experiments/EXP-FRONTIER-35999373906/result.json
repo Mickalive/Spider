@@ -1,0 +1,261 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-FRONTIER-35999373906",
+  "lane": "frontier",
+  "status": "COMPLETE",
+  "outcome": "FALSIFIES",
+  "metrics": {
+    "rho_novelty": {
+      "value": 0.9837,
+      "ci95": [
+        0.9785,
+        0.987
+      ],
+      "p_value": 0.0,
+      "bootstrap_n": 5000,
+      "permutation_n": 5000
+    },
+    "rho_length_pooled": {
+      "value": -0.0021,
+      "ci95": [
+        -0.1305,
+        0.1212
+      ],
+      "p_value": 0.9772
+    },
+    "rho_length_per_stratum": {
+      "novelty_0": {
+        "n": 39,
+        "rho_length": 0.09343215008144945,
+        "p": 0.5715708116482011
+      },
+      "novelty_25": {
+        "n": 38,
+        "rho_length": -0.18339160848975852,
+        "p": 0.2704108024038436
+      },
+      "novelty_50": {
+        "n": 39,
+        "rho_length": 0.06878252722461226,
+        "p": 0.6773627221403331
+      },
+      "novelty_75": {
+        "n": 38,
+        "rho_length": -0.1521850673199724,
+        "p": 0.36170451044627827
+      },
+      "novelty_100": {
+        "n": 38,
+        "rho_length": 0.08608466750480613,
+        "p": 0.6073286292965505
+      },
+      "length_short": {
+        "n": 80,
+        "rho_length": 0.15736655385794884,
+        "p": 0.16329350584413785
+      },
+      "length_medium": {
+        "n": 47,
+        "rho_length": -0.10024310755863396,
+        "p": 0.5025911332682684
+      },
+      "length_long": {
+        "n": 65,
+        "rho_length": 0.04351322112112566,
+        "p": 0.7307177341411555
+      }
+    },
+    "rho_shuffled_novelty": {
+      "value": -0.0063,
+      "p_value": 0.93081,
+      "mean_perm": -0.0002,
+      "std_perm": 0.0717
+    },
+    "rho_shuffled_length": {
+      "value": -0.0538,
+      "p_value": 0.45897,
+      "mean_perm": -0.0013,
+      "std_perm": 0.072
+    },
+    "ece": {
+      "value": 0.2855,
+      "ci95": [
+        0.2812,
+        0.3412
+      ],
+      "bootstrap_upper": 0.3412,
+      "bins": 5
+    },
+    "unknown_precision": {
+      "value": 1.0,
+      "n_unknown": 12,
+      "n_total": 12
+    },
+    "false_accept_rate": {
+      "value": 0.0,
+      "pooled": 0.0
+    },
+    "honest_cost_mean_per_novelty": {
+      "0": 4.641,
+      "25": 7.711,
+      "50": 10.077,
+      "75": 13.5,
+      "100": 15.632
+    },
+    "within_family_std": {
+      "pooled_std": 3.994,
+      "within_ok": true
+    },
+    "m_total_f10_spider": 0.102056,
+    "m_total_f10_browse": 0.002775,
+    "m_total_f10_rag": 0.062326,
+    "m_total_f100_spider": 0.120563,
+    "m_total_f100_browse": 0.02775,
+    "m_total_f100_rag": 0.08326,
+    "saving_f10_pct": -3577.7,
+    "saving_f10_ci": [
+      -3737.96,
+      -3430.58
+    ],
+    "saving_f100_pct": -334.46,
+    "dominance_f10": false,
+    "dominance_f100": false,
+    "mean_cost_100_vs_0_spider": {
+      "mean0": 4.641,
+      "mean100": 15.632,
+      "cohen_d": 15.068,
+      "p": 0.0
+    },
+    "mean_cost_100_vs_0_browse": {
+      "mean0": 10.333,
+      "mean100": 16.474,
+      "cohen_d": 1.668,
+      "p": 0.0
+    },
+    "max_jaccard": 0.0,
+    "mean_jaccard": 0.0,
+    "gap_rho_vs_shuffled": 0.9774,
+    "S1_pass": true,
+    "S2_pass": true,
+    "S3_pass": true,
+    "S4_pass": false,
+    "S5_pass": false,
+    "S6_pass": true,
+    "survives": false
+  },
+  "controls": {
+    "PC-HONEST-COST-SANITY": {
+      "expected": "honest==sum diff0 std>0 shuffled |rho|<0.20 p>=0.20",
+      "observed": "diff0=True pooled_std=3.994 within_ok=True |rho_shuff_nov|=0.006 p=0.931 |rho_shuff_len|=0.054 p=0.459",
+      "pass": true,
+      "evidence_ref": "honest sum audit, within-family std, shuffled null"
+    },
+    "PC-ORTHOGONAL-FAMILIES-JACCARD": {
+      "expected": "36 families max Jaccard<0.30 mean<0.15 alphabets disjoint",
+      "observed": "max=0.0000 mean=0.0000 families=36 disjoint=True L 8-14 verified",
+      "pass": true,
+      "evidence_ref": "family manifests, alphabet disjointness"
+    },
+    "PC-TRAIN-TEST-DISJOINT": {
+      "expected": "0 test-B leaks trajectory-grouped",
+      "observed": "0 forbidden reads, catalog built train-A only, trajectory-grouped holdout",
+      "pass": true,
+      "evidence_ref": "harness signatures, manifest disjointness"
+    },
+    "PC-CALIBRATION-DERIVED": {
+      "expected": "std>0.05 imperfect accuracy 0.35-0.75, 5 adaptive bins",
+      "observed": "std=0.1351 acc=0.573 bins=5 ECE=0.2855",
+      "pass": true,
+      "evidence_ref": "derived confidence stats"
+    },
+    "PC-NOVELTY-MONOTONICITY": {
+      "expected": "100% >0% p<0.05 d>0.8 for SPIDER and BROWSE",
+      "observed": "SPIDER mean0=4.64 mean100=15.63 d=15.07 p=0.0000; BROWSE mean0=10.33 mean100=16.47 d=1.67 p=0.0000",
+      "pass": true,
+      "evidence_ref": "monotonicity permutation"
+    },
+    "PC-BUILD-COST-ISOLATED": {
+      "expected": "build + f*per_task auditable",
+      "observed": "build_spider=0.100000 build_rag=0.060000 build_browse=0 per_task spider 0.000206 browse 0.000278 rag 0.000233",
+      "pass": true,
+      "evidence_ref": "vector-op counts"
+    },
+    "NC-NO-APPLICABLE": {
+      "expected": "precision>=0.85 false<=0.15 gated reduction >=0.20 N=12",
+      "observed": "SPIDER prec=1.000 false=0.000 reduction=1.000; all pipelines checked",
+      "pass": true,
+      "evidence_ref": "no-applicable 12 tasks"
+    },
+    "NC-EMPTY-REGISTRY": {
+      "expected": "N=6 -> UNKNOWN 100% precision 1.0",
+      "observed": "SPIDER n_unknown=6/6 (checked all pipelines 6/6) prec 1.0",
+      "pass": true,
+      "evidence_ref": "empty registry 6 tasks"
+    },
+    "NC-ORACLE-LEAK": {
+      "expected": "0 forbidden-key reads, catalog never sees test-B",
+      "observed": "0 forbidden reads, derived_context allowed keys only, family-stratified bootstrap preserves family identity",
+      "pass": true,
+      "evidence_ref": "harness audit"
+    },
+    "NC-BIJECTIVE-COST": {
+      "expected": "not bijective gap>0.30 |rho| vs n*3200 <1.0",
+      "observed": "rho_proxy_nov=0.984 rho_proxy_len=-0.002 gap=0.977 rho_nov=0.984 |rho_shuff|=0.006",
+      "pass": true,
+      "evidence_ref": "bijective proxy check"
+    },
+    "NC-SHUFFLED-NULL": {
+      "expected": "|rho_shuffled|<0.20 p>=0.20 |mean|<0.05 std<0.15 both novelty/length",
+      "observed": "nov |rho|=0.006 p=0.931 mean=-0.0002 std=0.0717; len |rho|=0.054 p=0.459 mean=-0.0013 std=0.0720",
+      "pass": true,
+      "evidence_ref": "5000 block-perms"
+    }
+  },
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-FRONTIER-35999373906/result.json",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-35999373906/report.md",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-35999373906/provenance.json",
+      "role": "derived"
+    },
+    {
+      "path": "research/frontier/run_execute_35999373906.py",
+      "role": "code",
+      "sha256": "6d8eff6615a8e7e1d02ead7dd5df6ad151788c230a2024e9e5f16f60975727dd"
+    }
+  ],
+  "observations": [
+    "36 families disjoint alphabets L 8-14 max Jaccard 0.0000 mean 0.0000 (<0.30 required)",
+    "192 pooled tasks across 5 novelty strata (39/38/39/38/38) +12 no-applicable +6 empty +12 exact =222 per pipeline, 4 pipelines =>888 evaluations",
+    "SPIDER honest cost rho_novelty 0.984 CI [0.979,0.987] p_perm 0.0000 vs rho_length -0.002 CI [-0.130,0.121] p 0.9772",
+    "Shuffled null |rho_nov| 0.006 p 0.931 mean -0.0002 std 0.0717; |rho_len| 0.054 p 0.459 mean -0.0013 std 0.0720",
+    "ECE 0.2855 bootstrap upper 0.3412 (threshold 0.15/0.18) conf_std 0.1351 pooled acc 0.573",
+    "UNKNOWN precision 1.000 false_accept 0.000 pooled false 0.000 (thresholds 0.85/0.10)",
+    "Pareto M_total f10 spider 0.102056 browse 0.002775 rag 0.062326 saving -3577.7% CI lower -3738.0%; f100 spider 0.120563 browse 0.027750 rag 0.083260",
+    "Monotonicity SPIDER 0% mean 4.64 100% mean 15.63 d 15.07 p 0.0000; BROWSE 0% 10.33 100% 16.47 d 1.67 p 0.0000",
+    "Controls PC True NC True S gates S1 True S2 True S3 True S4 False S5 False S6 True => survives False",
+    "Raw evidence preserved per-trajectory honest sum counters with hard reset, no jitter, no n*3200/f*6.0 scaling, trajectory-grouped family-stratified bootstrap 5000 + block-permutation 5000"
+  ],
+  "validity_notes": [
+    "Synthetic controlled-novelty substrate with deliberately disjoint alphabets isolates factorization from lexical similarity; prior Jaccard>=0.6 alias rescue leakage inverted to Jaccard<0.30",
+    "Synthetic-to-live gap is dominant validity threat: no BrowserGym 1280x720 CDP AX>10, no WebArena-Verified v2 192/36, no WebGym 300k heterogeneity; synthetic alphabets use disjoint Unicode tokens not real DOM heterogeneity",
+    "Honest sum counters are instrumented integers per-trajectory with hard reset; no jitter, no global scaling n*3200/f*6.0; within-family std>0 verified, |rho_shuffled|<0.20 p>=0.20",
+    "L-geometry: 36 families require 36*8=288 disjoint characters exceeding 26-letter alphabet; using family-private synthetic tokens satisfies disjointness but introduces representation loss vs natural language",
+    "Calibration: derived confidence via softmax temp 0.15 + deterministic hashlib jitter; ECE 5 adaptive quantile bins, bootstrap CI 5000; UNKNOWN gate fixed <0.80",
+    "Baselines share identical acceptance predicate (exact expected key-set equality canonicalized after alias resolution), same verification/freshness, same trajectory-grouped resampling",
+    "Live replication on WebArena-Verified v2 or WebGym with heterogeneous sites and measured LLM tokens/latency/browser work is explicitly deferred per prereg section 5",
+    "Family-stratified bootstrap preserves family/novelty/length proportions; block permutation preserves family as resampling block; small per-stratum N>=30 ensures per-stratum rho stability"
+  ],
+  "unresolved": [
+    "Whether rho_novelty>=0.60 with calibrated UNKNOWN and Pareto dominance replicates on live BrowserGym 1280x720 CDP AX>10 heterogeneous sites with real LLM agent tokens/latency vs synthetic $0.00002 vector-op model",
+    "Whether disjoint-alphabet fixing (Jaccard 0.0) underestimates real Web lexical transfer where Jaccard 0.3-0.6 is common; test on WebArena-Verified v2 with overlapping vocabularies needed",
+    "Barrier-physics rewind (C-WEB-DYNAMICS) on live BrowserGym as alternative orthogonal basin remains untested vs residual-novelty pivot",
+    "Per-value alias handling via Runtime diverse substrate with Intel diverse manifest remains alternative pivot not tested in this synthetic gate"
+  ]
+}
