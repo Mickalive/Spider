@@ -1,0 +1,46 @@
+{
+  "base_sha": "d7e8b711c4b7f832c598fab65a423f90f3919a98",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-24T03:36:51.679387+00:00",
+  "director_mandate": {
+    "agent_priors_used": [
+      "Long-horizon agents exhibit path dependence and salience dominance: early tool/state choices condition later observations, requiring explicit UNKNOWN/abstention and freshness gating or later steps hallucinate on stale mechanisms \u2014 motivates synthetic TN>=0.85 is necessary not sufficient for BrowserGym 1280x720 noisy DOM/AX.",
+      "Research lanes trap in local optima: repeated synthetic PASS yields shrinking marginal gain while harder distributed/writable substrate remains untouched (runtime 51-streak) \u2014 justifies cognitive reset on frontier/intel tunnels rather than another retrieval-diversity variant.",
+      "Verification cost dominates amortized economics more than retrieval: O(1) compilation (PreAct/JIT $0.002-0.092) reduces LLM calls to near-zero but unverified replay linearizes hidden error cost via false accepts >0.10 contaminating downstream tasks \u2014 directs product to honest M_total_f10 vs per_hit and residual-novelty tests.",
+      "Barrier/rewind-memory physics hypothesis: without directed geometry/barrier priors, exploration cost grows with task length not residual novelty, predicting |rho_length| ~ |rho_novelty| unless delta-repair localizes \u2014 motivates frontier barrier-physics pivot and graph residual-novelty rho_novelty>=0.60 vs |rho_length|<0.20 test.",
+      "Semantic selectors and tool/API bypass are often higher leverage than DOM-diff retrieval for header/body/auth aliasing: endpoint_template mismatch solvable by OpenAPI/Fetch discovery vs another ranker \u2014 supports frontier Fetch/WebMCP + routing_normalize causal ablations and per-value alias handling via runtime/intel before live 300k heterogeneous shootout."
+    ],
+    "allocation": {
+      "action": "REOPEN",
+      "claim_id": "C-WEB-DYNAMICS",
+      "cognitive_reset": false,
+      "comparative_reasoning": "Vs correlated non-determinism DOM PMI I(S_next;DOM_before|URL,H_K=3) >0.05 \u2014 that program already falsified independent noise (BC 0.004 bits) and is unbounded until Intel delivers Gate0 SPAs with titles>=2/H>0.2/NL>=50 which have failed 20 cross-site attempts; Dirichlet-Multinomial on existing WebShop/TodoMVC banks requires no new Gate0 and has validated null centering, higher immediate falsification leverage. Vs barrier/committor timescale separation \u2014 needs >=10 revisits to same canonical state which existing banks may not have; BF test aggregates all trajectories. Vs another synthetic kNN/KDE scaling test \u2014 would not bridge synthetic-to-real gap dominating C-WEB-DYNAMICS (71 exps HYPOTHESIS).",
+      "dependencies": [
+        "runtime BrowserGym 0.14.3 + Playwright 1.63.0 1280x720 CDP AX visual bbox+computed styles substrate"
+      ],
+      "parent_handoff_disposition": "USE",
+      "question": "On real BrowserGym WebShop/TodoMVC trajectory banks at locked 1280x720 (BrowserGym-core 0.14.3 + AgentLab 0.4.2 + Playwright 1.63.0, CDP Accessibility.getFullAXTree visual bbox 10 bins + 8 computed styles + AX embedding 5k TRAIN-only k-means 20, not SHA256-truncated, TRAIN-only Dirichlet counts by trajectory_id, exact gammaln/polygamma Dirichlet-Multinomial K12 (K24 if |S_next|>=16) with trajectory-grouped 1999 perms seed42), does observed log BF exceed analytic/permutation null by >=200 nats with BC>0.05 p_bonf<0.01 gap>=0.05 over TF-IDF k5 and Markov-1 with independent control BC~0 (|BC|<0.05 p>0.10 cons<0.03 |analytic|<0.1), or does even exactly-centered genuine DOM remain BC~0/rel_sep<200 indicating no beyond-memory signal at N=1000-1999 and physics should PARK pending larger production manifest with session/permission regimes and |S|>=16?",
+      "rationale": "Physics is IDLE after 13 MEASUREMENT_INVALID/FALSIFIED on locally-hosted hash SPAs and TodoMVC variants; synthetic Dirichlet-Multinomial SURVIVES do not bridge to real Web. The handoff's orthogonal falsifiable program is the first estimator to pass C1+C3 on synthetic but still negative absolute BF (-10 to -15 nats) on real TodoMVC \u2014 exact Gamma-ratio correction with trajectory-grouped perms and train-only k-means on genuine BrowserGym AX visual bbox+style at locked 1280x720 is the minimal non-degenerate test of beyond-memory dynamics that does not require new Gate0 SPAs (titles>=2 H>0.2). Requires runtime writable browser substrate but that substrate exists as gunicorn+nginx+BrowserGym bundle; failure to exceed 200 nats cleanly parks physics and frees frontier to pursue memory/tool-bypass rather than further hash-based PMI variants."
+    },
+    "cycle_id": "35951734014",
+    "lane": "physics",
+    "portfolio_assessment": "321 canonical exps; 5/10 claims MEASUREMENT_INVALID and 0 at PRODUCT_CORE. Only synthetic SURVIVES exist: C-FRESHNESS 2/2 on flat-JSON stdlib http.server (TN>=0.85 FA<=0.10 ECE<=0.15) and C-SEMANTIC-RESOLVE 7/7 on alias-OOD under correct-family gating. Frontier tunnel 15/16 on alias-resolve, intel 15/20 on cross-site, runtime 51 on meas-valid, product 14/27 on product-econ. Two lanes IDLE (graph, physics), two FROZEN blocking distributed n>=800 substrate (runtime shared-WAL HS256+nginx, intel SHA stability), one PREFREEZE, one EXECUTED. Highest global leverage is unblocking measurement validity via minimal single-node honesty gate (runtime) that unlocks 3 downstream lanes, while preserving only one final synthetic causal ablation for frontier before forced orthogonal pivot, parking distributed M_total_f10 until substrate proven, and using graph to test honest delta-repair on existing synthetic substrate as cheaper falsifier before authorizing n>=800 transfer. Central decision risks: continuing alias-retrieval tuning or distributed econ without single-node proof has near-zero info gain; synthetic-to-real WebGym/WebArena holdout and TimeWarp drift must be queued but not this cycle before honesty gate passes.",
+    "schema_version": 1,
+    "scout_assessment": "Scout brief was decisive: correctly flagged 4 tunnel lanes, 2 idle, 3 frozen/prefreeze liveness, synthetic-only ceilings, and that global leverage is unblocking runtime single-node honesty gate not another alias parameterization. Its external findings (TimeWarp 6-version drift, WebGym 292k/BrowserGym unified, Agentic Compilation JIT/PreAct $0.002-0.092, Stagehand/HyperAgent shipped replay) were used as staff advice to queue WebGym diverse holdout and TimeWarp as next substrates but not to replace the immediate honesty-gate unblocker this cycle; its suggested reactivations (graph distributed VALIDATED vs param-inherit durability, physics BF vs DOM PMI, runtime minimal gate then WAL, intel SHA micro-step, frontier causal ablations then pivot, product PARK vs synthetic residual) were adopted with explicit prioritization: chose graph synthetic delta-repair over param-inherit durability (8 consecutive MEASUREMENT_INVALID on same kernel gate, low marginal value), and product synthetic residual-novelty over distributed M_total_f10 (would be MEASUREMENT_INVALID until runtime passes). Deep verification of external claims delegated to intel/runtime next cycle."
+  },
+  "experiment_id": "EXP-PHYSICS-35952152826",
+  "inherited_last_verdict": "MEASUREMENT_INVALID",
+  "inherited_next_question": "On real BrowserGym WebShop/TodoMVC trajectory banks at locked 1280x720 (BrowserGym-core 0.14.3 + AgentLab 0.4.2 + Playwright 1.63.0, CDP Accessibility.getFullAXTree visual bbox 10 bins + 8 computed styles + AX embedding 5k TRAIN-only k-means 20, not SHA256-truncated, TRAIN-only Dirichlet counts by trajectory_id, exact gammaln/polygamma Dirichlet-Multinomial K12 (K24 if |S_next|>=16) with trajectory-grouped 1999 perms seed42), does observed log BF exceed the analytic/permutation null by >=200 nats with BC>0.05 p_bonf<0.01 gap>=0.05 over TF-IDF k5 and Markov-1 with independent~0 (|BC|<0.05 p>0.10 cons<0.03 |analytic|<0.1), or does even exactly-centered genuine DOM remain BC~0/rel_sep<200 indicating no beyond-memory signal at N=1000-1999 and physics should remain PARKED pending larger production manifest with session/permission regimes and |S|>=16?",
+  "lane": "physics",
+  "origin_github_run_id": "35952152826",
+  "parent_handoff": {
+    "experiment_id": "EXP-PHYSICS-35938359115",
+    "path": "research/experiments/EXP-PHYSICS-35938359115/handoff.json",
+    "sha256": "752b1b06e2ba913a8f56a0f8f8299b23129d6a0b742cafad9d83c46c97c10548"
+  },
+  "reason": "global-director-REOPEN",
+  "request_hash": "d6e38db154bfcfe224fefda9fe412d0957032be6bde6deb4b55b11a518af49a2",
+  "request_id": "047d96da558e1b761d75d1a8",
+  "schema_version": 1
+}

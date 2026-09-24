@@ -1,0 +1,266 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-35947486685",
+  "lane": "intel",
+  "status": "REVISE",
+  "producer_claim_supported": true,
+  "required_fixes": [
+    "FIX-A (substrate protocol): The frozen falsifier substrate clause required '3 registry API attempts to resolve full 64-char digest +3 docker pull/run retries timeout>=300s (or docker load cached tar/ghcr mirror)'. This run made 1 Hub API attempt (200 OK, digest confirmed) followed by 2 pull + 1 run attempts whose timeouts were SCRIPT-imposed at 8s/8s/5s (exp_35947486685_run.py lines 258-263: run_cmd(..., timeout=8) / timeout=5, comment 'limited to 8s in this environment to avoid stall'). Raw evidence shows Python subprocess.TimeoutExpired, i.e., the script's own timeout parameter fired; no OS-level kill is evidenced. Audit environment check: `sleep 12` completes normally here, so an 8s hard environment cap is not observable; the 'environment limit 8s' attribution in result.json validity_notes and report.md §5 is not supported. Next run must either genuinely execute the frozen >=300s pull protocol (or docker load cached tar / ghcr mirror) with captured stderr/stdout, or explicitly document that the timeouts are script-imposed and the substrate-unavailability conclusion rests on the missing browser stack rather than a proven Docker pull failure.",
+    "FIX-B (pin verification): pip list non-empty gate passed vacuously with only 'pip 26.2.1' (pip freeze empty, sha256 e3b0c442... — reproduced in audit environment). The frozen intent was BrowserGym-core 0.14.3 / AgentLab 0.4.2 / Playwright 1.63.0 / tiktoken present. None are installed (M_SUBSTRATE_PLAYWRIGHT/BROWSERGYM/WEBGYM false all confirmed). Install the pinned stack on the runner BEFORE the capture attempt or the H1/H2 branches are untenable regardless of Docker.",
+    "FIX-C (within-family sampling determinism): family-level draw random.Random(35725763380).sample(sorted(families_ge3_id),10) recomputes exactly to producer's [191,180,162,197,153,213,163,137,136,222] (MATCH). But within-family task selection uses random.Random(SEED + hash(str(fid)) % 100000) (run script line 248); hash() on str is PYTHONHASHSEED-salted per process. Audit ran 4 fresh processes: family 222 produced task pairs [24,25], [23,24], [25,22], [23,25] and family 191 produced [798,795], [797,798], [798,797] — none reproducibly equal to the recorded [23,25] / [798,797] except by chance. Replace hash(str(fid)) with a deterministic derivation (e.g., int(sha256(str(fid))[:8],16) or the raw numeric family id) so recorded sampled_tasks re-derive from seed 35725763380 in any process, satisfying prereg 'Frozen seed ... for ALL choices'.",
+    "FIX-D (frozen grammar completeness): grammar_fulltree_358885.py sha256 74ab5a2b... (recorded as the frozen representation identity) contains the 9 base regexes and 6 Magento patterns but NO body regex (has_body_regex false, confirmed by file read). CRITICAL FIX 1 requires body regex before outerHTML SHA256. The run script simulates a body strip at capture time (lines 317-321) but that is not part of the grammar module whose hash is recorded; a substrate-live run with grammar hash 74ab5a2b would not satisfy the frozen normalization. Add the body regex to grammar_fulltree_358885.py and record the new live hash, or the H1 representation remains non-frozen.",
+    "FIX-E (provenance integrity): provenance.json artifact entry for artifacts/derived/webmcp_prevalence.json is an invalid 50-char string '70d4bfdc198a80bca8b3cc7b8b9a1e2e2d2f2f2f2f2f2f2f2f2f' that matches neither the on-disk file (70d4bfdc198a80bc45be1c97924fc1127d6aa948fc21dc095c400983a5dcaeb9) nor result.json's correct listing. result.json and on-disk agree; the provenance field is corrupted and must be corrected.",
+    "FIX-F (design-level, for Director/next DESIGN — cannot be fixed inside EXECUTE): of the 10 frozen-drawn families, only 2 (136, 222) have sampled tasks whose start URLs are product pages (verified from webarena-verified.json start_urls and ax_captures.jsonl expansions); the other 8 sampled tasks start at the __SHOPPING__ root (order details, contact form, category listing, coupon request). Parent handoff established only 4 product-page families are live (222,136,145,196) and shopping_admin 404s. Even with a fully live substrate, this draw yields at most 2 product-page families / 4 product trees, failing the frozen >=10 product-page families adequacy gate (and the 'product-subtree distinct SHA on 136/145/196/222' check is incomputable since 145/196 are not in the draw). H1 as frozen cannot reach SURVIVES/FALSIFIED with this sampling base; amend the sample to draw only product-page-capable tasks (or resolve shopping_admin 404) before the next substrate-live attempt, else the MEASUREMENT_INVALID streak continues for reasons unrelated to substrate."
+  ],
+  "validity_findings": [
+    "V1 (VALID — infrastructure precedence honored): All 20 capture attempts correctly recorded status UNAVAILABLE_SUBSTRATE with ax_node_count 0 / dom_bytes 0 / is_product_page false (artifacts/raw/ax_captures.jsonl, sha256 ef01c396...). Raw evidence independently confirms: Docker image not cached on this runner (docker ps -a empty, docker images --digests shows no webarena image), http://localhost:7770 Connection refused after 3 retries, playwright/browsergym/agentlab/webgym/tiktoken/mind2web all ModuleNotFoundError, HF_TOKEN false. The producer correctly refused to derive any scientific conclusion from infrastructure failure (status COMPLETE, outcome NOT_APPLICABLE, H1..H6 MEASUREMENT_INVALID). This is the single most important thing the packet got right.",
+    "V2 (HIGH — 'environment limit 8s' misattribution): result.json validity_notes 'CRITICAL HOST LIMITATION: ... environment limited to 8s per command' and report.md §5 'environment enforces 8s command timeout' attribute the Docker timeout to the host. Raw evidence (webarena_verified_pin.json docker_pull/run entries + script code) shows the 8s/5s limits were passed by the measurement script itself (run_cmd timeout=8 / timeout=5), and the raised exception is Python subprocess.TimeoutExpired from that parameter. Audit environment check `timeout 8 sleep 12; echo $?` → 124 (timeout tool) but plain `sleep 12` → completes: no 8s host cap is evident. The 'falsifier clause met' statement in result.json validity_notes overstates compliance (1 registry API attempt, not 3; pulls at 8s, not >=300s; no docker load/ghcr mirror). Classification remains conservatively correct because the browser stack is absent regardless, but the rationale as written is not supported by evidence.",
+    "V3 (MEDIUM — partial sampling repair): The family-level frozen-draw fix is genuinely delivered and reproducible (recomputed in audit: MATCH). The within-family task-pair selection (2 distinct tasks per family) is NOT reproducible across processes because of hash() salting (FIX-C). Since 0 captures occurred, no measured metric is affected this run, but the recorded sampled_tasks cannot be re-derived from the seed, violating the frozen all-choices determinism requirement.",
+    "V4 (MEDIUM — representation artifact incomplete): The recorded frozen grammar hash 74ab5a2b... lacks the body regex required by CRITICAL FIX 1 (has_body_regex false, confirmed by reading grammar_fulltree_358885.py). The producer disclosed this honestly (validity_notes REPRESENTATION GAP, unresolved). Note this defect is in the frozen grammar artifact itself, so it must be repaired and the new hash recorded before any valid H1 measurement.",
+    "V5 (LOW — provenance hash corruption): provenance.json webmcp_prevalence.json sha256 is an invalid 50-char value; on-disk and result.json agree on the correct 64-hex. All other 9 artifact hashes in result.json and provenance.json match on-disk (verified via sha256sum). Frozen file hashes (request/spec/prereg) match freeze.json exactly. Dataset webarena-verified.json sha256 d6527566... matches on disk.",
+    "V6 (INFO — cross-packet count drift): this packet records shopping 192 / shopping_admin 184 / families_ge3 36 while parent handoff EXP-INTEL-35936227797 recorded 187 / 182 / 35 for the same dataset sha256 d6527566... . Audit recomputation with substring site match gives 192/184/36, so the difference is counting-rule dependent, not a dataset change. Not material to this run's outcome; flag for consistency.",
+    "V7 (INFO — WebGym attempts genuine): 2 download attempts with URL/error/bytes/sha256 captured (401 Unauthorized HF_TOKEN false; 404 raw-GitHub mirror path), manifest_sha256 null, Mind2Web-2 unavailable. Meets the frozen 2-genuine-attempt rule for H3 branch MEASUREMENT_INVALID. 401 indicates auth-gated, not permanent unavailability (consistent with parent handoff do_not_assume).",
+    "V8 (INFO — digest resolution independently confirmed): audit re-queried hub.docker.com/v2/repositories/am1n3e/webarena-verified-shopping/tags: first image digest sha256:3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb — identical to the frozen 64-char digest. (Response body sha differs from producer's recorded hub_api_sha256 3a2d6ed5... due to response drift; the digest field itself matches.)"
+  ],
+  "baseline_findings": [
+    {
+      "control_id": "B-STAGEHAND-VERB",
+      "producer_status": "NOT_MEASURED",
+      "audit_finding": "AGREE: n_families_attempted 0 < 30, recomputed_after_mutation false, body_regex_applied false. Correctly NOT_MEASURED due to missing substrate; no H2 evidence either way.",
+      "pass": null
+    },
+    {
+      "control_id": "B-RANDOM-AX-SHUFFLE",
+      "producer_status": "NOT_COMPUTED",
+      "audit_finding": "AGREE: 0 families valid; shuffle p null. No degenerate CI[1,1]/p=1 trap manufactured — correct null handling.",
+      "pass": null
+    },
+    {
+      "control_id": "B-TRUNCATED-20",
+      "producer_status": "NOT_COMPUTED",
+      "audit_finding": "AGREE: 0 product pages captured; M_AX_DELTA_TRUNCATED null. Correct: delta cannot be computed on zero pages.",
+      "pass": null
+    },
+    {
+      "control_id": "B-WEBGYM-HARDCODED-09479",
+      "producer_status": "NOT_COMPUTED",
+      "audit_finding": "AGREE: 0/50 sites; duplicate CI and sweep null. Hardcoded 0.9479 single-store vacuity remains UNCHALLENGED by this run (neither confirmed nor refuted).",
+      "pass": null
+    },
+    {
+      "control_id": "B-COLD-LLM",
+      "producer_status": "NOT_MEASURED",
+      "audit_finding": "AGREE: no cold/cached latency or token counts; M_TOTAL_F10, M_RHO_SHUFFLED null. Honest-cost Pareto not measured — remains open.",
+      "pass": null
+    },
+    {
+      "control_id": "B-MIND2WEB2-JUDGE",
+      "producer_status": "NOT_MEASURED",
+      "audit_finding": "AGREE: mind2web module absent; fallback not executed. MEASUREMENT_INVALID branch, not negative evidence.",
+      "pass": null
+    },
+    {
+      "control_id": "B-WEBMCP-TOOL-PREV",
+      "producer_status": "NOT_MEASURED",
+      "audit_finding": "AGREE: 0 sites scanned; prevalences null. NC7 not computable. WebMCP 714/2147 baseline untestable this run.",
+      "pass": null
+    },
+    {
+      "control_id": "B-CONSTANT-NULL-05654",
+      "producer_status": "NOT_APPLICABLE",
+      "audit_finding": "AGREE: correctly excluded from decision; disclosure-only as frozen. pass null is appropriate.",
+      "pass": null
+    },
+    {
+      "control_id": "PC1_LIVENESS_1280",
+      "producer_status": "FAIL",
+      "audit_finding": "AGREE with FAIL label (0/20 valid captures) but note the substrate-failure evidence underlies it: Docker image not on this runner (NOT proven un-pullable — see V2), browser stack absent. Prior run EXP-INTEL-35936227797 proved the same image + Playwright 1.63.0 was live (21/21 captures), so 'unavailable on this runner' is environment state, not substrate impossibility.",
+      "pass": false
+    },
+    {
+      "control_id": "PC2_SHA_STABILITY",
+      "producer_status": "FAIL",
+      "audit_finding": "AGREE: M_SHA_STABILITY_IDENTICAL false, M_SHA_CHANGED_ON_MUTATION false — 0 families, stability not proved. Correctly not claimed.",
+      "pass": false
+    },
+    {
+      "control_id": "PC3_PRODUCT_SUBTREE",
+      "producer_status": "FAIL",
+      "audit_finding": "AGREE on FAIL for 0 product-subtrees; additionally note path families 145/196 are NOT in the frozen draw at all, so the frozen PC3 check (distinct SHA on 136/145/196/222) is incomputable with this sample even substrate-live. Design gap (FIX-F).",
+      "pass": false
+    },
+    {
+      "control_id": "PC4_STAGEHAND_HIT_RECOMPUTED",
+      "producer_status": "FAIL",
+      "audit_finding": "AGREE: no HIT measured on 0 families. Not evidence against the Stagehand cache mechanism.",
+      "pass": false
+    },
+    {
+      "control_id": "PC5_WEBGYM_IMPORT_VALID",
+      "producer_status": "FAIL",
+      "audit_finding": "AGREE: 0/50 sites, 2 genuine attempts captured (401/404), manifest null. HF_TOKEN or alternate mirror required; not permanent unavailability.",
+      "pass": false
+    },
+    {
+      "control_id": "PC6_WEBMCP_DETECT",
+      "producer_status": "FAIL",
+      "audit_finding": "AGREE: 0 sites scanned, 0 detections; descriptive only.",
+      "pass": false
+    },
+    {
+      "control_id": "NC1_AX_SHUFFLE_TRAJECTORY_GROUPED",
+      "producer_status": "NOT_COMPUTED",
+      "audit_finding": "AGREE: null shuffle p on 0 families is honest; inherits valid-only/performance concern from parent (NC1 requires family gating) but nothing measurable here.",
+      "pass": null
+    },
+    {
+      "control_id": "NC2_RANDOM_PATTERN",
+      "producer_status": "NOT_COMPUTED",
+      "audit_finding": "AGREE: nothing to permute.",
+      "pass": null
+    },
+    {
+      "control_id": "NC3_DOM_DRIFT_RECOMPUTED",
+      "producer_status": "FAIL",
+      "audit_finding": "AGREE with FAIL on 'not measured' basis: 0 families mutated, recomputed_after_mutation false, MISS/false_accept null. FAIL here means gate unmet due to substrate, not mechanism falsified.",
+      "pass": false
+    },
+    {
+      "control_id": "NC4_RANDOM_CACHE_ROLE_SUBSET",
+      "producer_status": "NOT_COMPUTED",
+      "audit_finding": "AGREE: nc4_p null with HIT null.",
+      "pass": null
+    },
+    {
+      "control_id": "NC5_CROSS_PROJECT_LEAKAGE",
+      "producer_status": "NOT_APPLICABLE",
+      "audit_finding": "AGREE: no captures to test cross-project isolation; pass null appropriate.",
+      "pass": null
+    },
+    {
+      "control_id": "NC6_WEBGYM_SHUFFLE",
+      "producer_status": "NOT_COMPUTED",
+      "audit_finding": "AGREE: 0 sites.",
+      "pass": null
+    },
+    {
+      "control_id": "NC7_WEBMCP_RANDOM",
+      "producer_status": "NOT_COMPUTED",
+      "audit_finding": "AGREE: nothing to permute.",
+      "pass": null
+    },
+    {
+      "control_id": "NC8_RHO_SHUFFLED",
+      "producer_status": "FAIL",
+      "audit_finding": "AGREE with FAIL on 'not measured' basis: |rho| null, M_total_f10 null. Honest-cost economics remain untested; per-trajectory-reset sum counters not computed.",
+      "pass": false
+    }
+  ],
+  "recomputed_metrics": {
+    "sampled_families_seed_35725763380_recompute": {
+      "producer": [191, 180, 162, 197, 153, 213, 163, 137, 136, 222],
+      "audit_recompute": [191, 180, 162, 197, 153, 213, 163, 137, 136, 222],
+      "match": true,
+      "method": "random.Random(35725763380).sample(sorted(families_ge3_id),10) on webarena-verified.json sha256 d6527566..."
+    },
+    "within_family_task_pair_reproducibility": {
+      "producer_recorded_family222": [23, 25],
+      "audit_4_process_draws_family222": [[24, 25], [23, 24], [25, 22], [23, 25]],
+      "producer_recorded_family191": [798, 797],
+      "audit_3_process_draws_family191": [[798, 795], [797, 798], [798, 797]],
+      "match": false,
+      "method": "run script uses random.Random(35725763380 + hash(str(fid))%100000); hash() on str is PYTHONHASHSEED-salted per process",
+      "consequence": "sampled_tasks in webarena_verified_pin.json are not re-derivable from the frozen seed in a fresh process (V3, FIX-C)"
+    },
+    "dataset_counts": {
+      "producer": {"shopping": 192, "shopping_admin": 184, "families_ge3": 36},
+      "audit_recompute": {"shopping": 192, "shopping_admin": 184, "families_ge3": 36},
+      "match": true,
+      "note": "parent handoff counts differ (187/182/35) — counting-rule drift, same dataset sha256"
+    },
+    "webarena_verified_sha256": {
+      "producer": "d65275660814663375028e9017e1f929e3c38321041b125795e2713b52243d30",
+      "ondisk": "d65275660814663375028e9017e1f929e3c38321041b125795e2713b52243d30",
+      "match": true
+    },
+    "grammar_fulltree_358885_sha256": {
+      "producer": "74ab5a2b59e7a57beedb516999f1da0cb7f3bc5a055beac08d0d98949d6b8ec4",
+      "ondisk": "74ab5a2b59e7a57beedb516999f1da0cb7f3bc5a055beac08d0d98949d6b8ec4",
+      "match": true,
+      "has_body_regex": false,
+      "has_expanded": true,
+      "no_truncation": true
+    },
+    "run_script_sha256": {
+      "producer": "feda0205ca2457b3d2d7860bb16c9ed3483afde4447b3aea3bdf7c8fab2e8429",
+      "ondisk": "feda0205ca2457b3d2d7860bb16c9ed3483afde4447b3aea3bdf7c8fab2e8429",
+      "match": true
+    },
+    "artifact_hashes_result_json_vs_disk": {
+      "all_10_artifacts": "MATCH (verified: webarena_verified_pin.json 0c60f7b3..., ax_captures.jsonl ef01c396..., ax_captures.json 6ef7242d..., ax_consistency_fulltree.json 000296df..., stagehand_replication_recomputed.json 98bb8e6f..., webgym_census.json 93e7e320..., gate0_relaxed_table.json 56916b59..., webmcp_prevalence.json 70d4bfdc198a80bc45be..., orthogonal_fallback.json 1c0ce6d2..., measurement_provenance.json 71a3c7da...)",
+      "provenance_webmcp_entry": "MISMATCH — provenance.json has invalid 50-char '70d4bfdc198a80bca8b3cc7b8b9a1e2e2d2f2f2f2f2f2f2f2f2f'; on-disk and result.json share correct 64-hex 70d4bfdc198a80bc45be1c97924fc1127d6aa948fc21dc095c400983a5dcaeb9 (FIX-E)"
+    },
+    "frozen_file_integrity": {
+      "request.json": "adbd7c53b10b8afe1ba8938036213f80de9951005d6df7279ea8cee8b4c550b5 MATCH freeze.json",
+      "spec.json": "77d33f64b3adc1a5a717d1b2cdb351f4a1168a5ea71bffdedbd05b26474063d7 MATCH freeze.json",
+      "prereg.md": "db6c7c84314c5c18410d6060e766286a2414a0b01db16dce3390fef26e2c3d5c MATCH freeze.json",
+      "freeze_self_sha": "337e4de4d7ceb35d761967d21815e1794a4ffa26d3f138e1880ffadfdf10498f (recorded in provenance as freeze_hash)"
+    },
+    "docker_digest_resolution": {
+      "producer_hub_first_image_digest": "sha256:3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb",
+      "audit_independent_hub_query": "sha256:3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb",
+      "match": true,
+      "note": "response-body sha differs (3a2d6ed5... producer vs 99616237... audit) due to API response drift; digest field identical"
+    },
+    "environment_timeout_claim": {
+      "producer_claim": "environment limited to 8s per command",
+      "audit_test": "`sleep 12` completes (12.0s); `timeout 8 sleep 12` exits 124 only when timeout tool imposed",
+      "finding": "No 8s host cap observable; Docker TimeoutExpired was caused by the script's own timeout=8/5 arguments (V2)"
+    },
+    "pip_freeze_empty_sha": {
+      "producer": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "audit_recompute": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "match": true
+    },
+    "valid_capture_count_and_family_count": {
+      "M_AX_VALID_CAPTURES": 0,
+      "M_AX_FAMILIES_FOUND": 0,
+      "audit_confirm": true,
+      "note": "20/20 jsonl rows UNAVAILABLE_SUBSTRATE, ax_node_count 0, dom_bytes 0; consistent with producer"
+    }
+  },
+  "claim_ceiling": "Maximum justified claim from this packet: 'On this GitHub Actions runner, none of the frozen measurements could be executed because the browser stack (Playwright 1.63.0 / BrowserGym-core 0.14.3 / AgentLab 0.4.2 / WebGym / tiktoken) was absent, the Docker image was not cached, HF_TOKEN was unset, and the two WebGym manifest download attempts returned 401/404. All branches are therefore MEASUREMENT_INVALID; this is NOT negative evidence about within-store AX transfer, Stagehand cache discrimination, WebGym duplication diversity, or Gate0 dynamics.' NOT justified: (a) the claim that the environment enforces an 8s command cap — script-imposed timeouts, no host cap observed (V2); (b) the claim that the frozen substrate retry protocol (3 registry attempts; >=300s pulls; docker load/ghcr) was executed — it was not (V2); (c) the claim that deterministic sampling was fully repaired — family draw yes, within-family task pairs no (V3, FIX-C); (d) any claim that the frozen grammar representation was complete — body regex missing from grammar 74ab5a2b (V4, FIX-D). C-CROSSSITE remains HYPOTHESIS (codex claim_state latest_event status HYPOTHESIS from EXP-INTEL-35936227797); nothing in this run changes that. Critically, even with substrate repaired, the frozen 10-family draw contains only 2 product-page families (136, 222), so H1 adequacy (>=10 product-page families) is structurally unattainable under the current sampling base — a design amendment is required before the next substrate-live attempt (FIX-F).",
+  "evidence_refs": [
+    "research/experiments/EXP-INTEL-35947486685/request.json sha256 adbd7c53b10b8afe1ba8938036213f80de9951005d6df7279ea8cee8b4c550b5 (freeze-hash; director_mandate CONTINUE C-CROSSSITE)",
+    "research/experiments/EXP-INTEL-35947486685/spec.json sha256 77d33f64b3adc1a5a717d1b2cdb351f4a1168a5ea71bffdedbd05b26474063d7 (frozen H1/H2/H3/H4/H5/H6, falsifier, baselines, decision rule)",
+    "research/experiments/EXP-INTEL-35947486685/prereg.md sha256 db6c7c84314c5c18410d6060e766286a2414a0b01db16dce3390fef26e2c3d5c (frozen sampling/adequacy/gates)",
+    "research/experiments/EXP-INTEL-35947486685/freeze.json sha256 337e4de4d7ceb35d761967d21815e1794a4ffa26d3f138e1880ffadfdf10498f",
+    "research/experiments/EXP-INTEL-35947486685/result.json sha256 9416af1042ab3443c9b537239a028a519592b970facb5f9b768b36b9da70de40 (producer metrics/controls/observations/validity_notes)",
+    "research/experiments/EXP-INTEL-35947486685/report.md sha256 eb258088664e1a23829f705754fdd6f5677b53d655a53250c1fec494fa760f5f",
+    "research/experiments/EXP-INTEL-35947486685/provenance.json sha256 14b560b75b93126efabdf6d860ed33da75a4b1a07f664eb5267537b5e764eaaf (note corrupted webmcp_prevalence.json hash entry, FIX-E)",
+    "research/experiments/EXP-INTEL-35947486685/artifacts/raw/webarena_verified_pin.json sha256 0c60f7b300f35ebc04b4bc3a0f34b999c711b71c6f6fcb955b51212ad29da6e0 (docker pull/run TimeoutExpired 8s/8s/5s, pip list pip-only, WebGym 401/404, hub digest)",
+    "research/experiments/EXP-INTEL-35947486685/artifacts/raw/ax_captures.jsonl sha256 ef01c396766730da66b3b7403acea2d469ab46dcfb9e6d71f25236d5a84cace5 (20/20 UNAVAILABLE_SUBSTRATE records)",
+    "research/experiments/EXP-INTEL-35947486685/artifacts/raw/ax_captures.json sha256 6ef7242da8dc0be7cdfa8d0bac7599d6c0bca413ce3812ebd2cb0da094f0cc77",
+    "research/experiments/EXP-INTEL-35947486685/artifacts/derived/ax_consistency_fulltree.json sha256 000296dffd946803ad354fb1b2783d2b96b0c52361af3cb2cc3356a6f6c6d3b1",
+    "research/experiments/EXP-INTEL-35947486685/artifacts/derived/stagehand_replication_recomputed.json sha256 98bb8e6fc1ac9bc29599a9369924f3f7a260b66ffb23d5468317a6155f1460c0",
+    "research/experiments/EXP-INTEL-35947486685/artifacts/derived/webgym_census.json sha256 93e7e320c8d23fc7d3452e0d3096249f924db345428101424ebe7b2f114785c9",
+    "research/experiments/EXP-INTEL-35947486685/artifacts/derived/gate0_relaxed_table.json sha256 56916b5973f2d616714840df83c1d895058109a57ab7dfbe139cae282654cf16",
+    "research/experiments/EXP-INTEL-35947486685/artifacts/derived/webmcp_prevalence.json sha256 70d4bfdc198a80bc45be1c97924fc1127d6aa948fc21dc095c400983a5dcaeb9",
+    "research/experiments/EXP-INTEL-35947486685/artifacts/derived/orthogonal_fallback.json sha256 1c0ce6d243f48ab68814e40657750cef8d4b695c3be1db8e0ca3d3d7c3748138 (NOT_TRIGGERED — correct, H1 not falsified)",
+    "research/experiments/EXP-INTEL-35947486685/artifacts/derived/measurement_provenance.json sha256 71a3c7da3dbf8a797393aa21cd9837a7175a277498f1617d24dbb3140c878954",
+    "research/intel/grammar_fulltree_358885.py sha256 74ab5a2b59e7a57beedb516999f1da0cb7f3bc5a055beac08d0d98949d6b8ec4 (frozen grammar WITHOUT body regex — V4/FIX-D)",
+    "research/intel/exp_35947486685_run.py sha256 feda0205ca2457b3d2d7860bb16c9ed3483afde4447b3aea3bdf7c8fab2e8429 (script-imposed 8s/5s docker timeouts; hash(str(fid)) task sampling — V2/V3/FIX-A/FIX-C)",
+    "research/experiments/EXP-INTEL-35725763380/artifacts/raw/webarena-verified.json sha256 d65275660814663375028e9017e1f929e3c38321041b125795e2713b52243d30 (dataset; counts and family draw recomputed, product-page start URLs verified for 136/222 only)",
+    "research/experiments/EXP-INTEL-35936227797/handoff.json sha256 3093db33391fc6c4e02aeb0bd6d6007f7b9d4ec4c867761315b5dcb2f831c45c (parent: 4 live product families, shopping_admin 404, do_not_assume list)",
+    "codex/claim_state.json C-CROSSSITE latest_event status HYPOTHESIS (EXP-INTEL-35936227797 MEASUREMENT_INVALID)",
+    "research/lanes/registry.json (intel lane charter, priority claims incl. C-CROSSSITE)"
+  ],
+  "unresolved": [
+    "Whether a genuine >=300s docker pull (or docker load cached tar / ghcr mirror) would succeed on a provisioned runner: never executed this run (script-imposed 8s/5s). Parent run proved the image live at 1280x720 on a prior runner, so this is runner-state, not substrate impossibility.",
+    "Whether shopping_admin 184-task/42-family superset can be made reachable (parent established __SHOPPING_ADMIN__ URLs 404 on the running container) — required to reach >=10 product-page families since only 4 product families are live and the frozen draw contains only 2 of them.",
+    "WebGym 292k manifest retrieval with HF_TOKEN (401 indicates auth-gating, not absence); WebMall or Mind2Web-2 130-task remain alternatives; raw-GitHub mirror path returns 404 (wrong path).",
+    "Within-store AX consistency for product pages (H1), Stagehand recomputed cache discrimination (H2), WebGym duplication diversity vs 0.9479 (H3), Gate0 relaxed dynamics (H4), orthogonal slot syntax/AX Jaccard/hierarchical-WebAPI (H5), WebMCP prevalence f10/f100 (H6) — all remain UNKNOWN; this run produced zero measurements on all six.",
+    "Whether the next design samples product-page-capable tasks only (or resolves shopping_admin 404) so that H1 adequacy (>=10 product families, product-subtree distinct SHA on 136/145/196/222) is reachable at all — unresolved at design level (FIX-F).",
+    "Whether the environment really would terminate a 300s pull were one attempted: not tested; the '8s limit' claim is contradicted by script evidence and audit env check (V2)."
+  ]
+}

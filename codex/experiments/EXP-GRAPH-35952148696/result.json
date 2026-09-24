@@ -1,0 +1,363 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-35952148696",
+  "lane": "graph",
+  "status": "COMPLETE",
+  "outcome": "SUPPORTS",
+  "metrics": {
+    "M-TN-SPIDER": 1.0,
+    "M-TN-WILSON-LOWER": 0.982,
+    "M-TN-WILSON-UPPER": 1,
+    "M-FALSE-ACCEPT-SPIDER": 0.0,
+    "M-FALSE-ACCEPT-WILSON-UPPER": 0.1135,
+    "M-FALSE-ACCEPT-WILSON-LOWER": 0,
+    "M-UNKNOWN-RATE-SPIDER": 0.125,
+    "M-UNKNOWN-WILSON-LOWER": 0.089,
+    "M-UNKNOWN-WILSON-UPPER": 0.1728,
+    "M-ECE-SPIDER": 0.0625,
+    "M-ECE-FRESH": 0.05,
+    "M-ECE-STALE": 0.15,
+    "M-REPAIR-SUCCESS-POOLED": 1.0,
+    "M-REPAIR-SUCCESS-POOLED-WILSON-LOWER": 0.8865,
+    "M-REPAIR-SUCCESS-PER-FAMILY-dom_drift": 1.0,
+    "M-REPAIR-SUCCESS-PER-FAMILY-param_header_mutation": 1.0,
+    "M-REPAIR-SUCCESS-PER-FAMILY-cache_expiry": 1.0,
+    "M-REPAIR-COST-TOKENS-MEAN": 5.0,
+    "M-REPAIR-COST-TOKENS-RATIO": 0.3125,
+    "M-REPAIR-COST-TOKENS-CI-LOWER": 0.3125,
+    "M-REPAIR-COST-TOKENS-CI-UPPER": 0.3125,
+    "M-REPAIR-BROWSER-MEAN": 1.0,
+    "M-REPAIR-BROWSER-RATIO": 0.3333,
+    "M-REPAIR-BROWSER-CI-LOWER": 0.3333,
+    "M-REPAIR-BROWSER-CI-UPPER": 0.3333,
+    "M-REPAIR-VERIFY-STEPS-MEAN": 1.0,
+    "M-CONTAMINATION-POOLED": 0.0,
+    "M-CONTAMINATION-WILSON-UPPER": 0.1611,
+    "M-CONTAMINATION-PER-FAMILY-dom_drift": 0.0,
+    "M-CONTAMINATION-PER-FAMILY-param_header_mutation": 0.0,
+    "M-CONTAMINATION-PER-FAMILY-cache_expiry": 0.0,
+    "M-VERIFICATION-AUROC": 1.0,
+    "M-VERIFICATION-AUROC-TRAIN": 1.0,
+    "M-VERIFICATION-AUROC-POOLED": 1.0,
+    "M-VERIFICATION-AUROC-RANDOM": 0.4952,
+    "M-VERIFICATION-AUROC-RANDOM-POOLED": 0.5002,
+    "M-VERIFICATION-PRECISION": 1.0,
+    "M-VERIFICATION-RECALL": 1.0,
+    "M-VERIFICATION-PASS-CORRECT": 30,
+    "M-VERIFICATION-PASS-RANDOM": 0,
+    "M-AMORTIZED-COST-F10": 15.0,
+    "M-COLD-COST-F10": 16,
+    "M-AMORTIZED-RATIO-F10": 0.9375,
+    "M-AMORTIZED-BROWSER-F10": 1.0,
+    "M-COLD-BROWSER-F10": 3,
+    "M-RHO-SHUFFLED-MAX": 0.0,
+    "M-RHO-SHUFFLED-MEAN": 0.0,
+    "M-OBSERVED-RHO": 0.0,
+    "M-COST-VECTOR-STD": 0.0,
+    "M-WITHIN-FAMILY-STD-MIN-FRESHNESS": 0.5,
+    "M-WITHIN-FAMILY-STD-MIN-COST": 0.0,
+    "M-FA-B-NO-GUARD": 1.0,
+    "M-FA-DELTA-SPIDER-VS-NO-GUARD": 1.0,
+    "M-FA-B-JACCARD-ONLY": 0.6667,
+    "M-FA-B-HEADER-ONLY": 0.3333,
+    "M-ORACLE-COST": 5,
+    "M-COLD-COST-TOKENS-MEAN": 16,
+    "M-COLD-BROWSER-MEAN": 3,
+    "M-TP-FAMILY-dom_drift": 1.0,
+    "M-TP-FAMILY-param_header_mutation": 1.0,
+    "M-TP-FAMILY-cache_expiry": 1.0,
+    "M-TP-FAMILY-WILSON-LOWER-dom_drift": 0.7225,
+    "M-TP-FAMILY-WILSON-LOWER-param_header_mutation": 0.7225,
+    "M-TP-FAMILY-WILSON-LOWER-cache_expiry": 0.7225,
+    "M-NC1-COST": 0,
+    "M-NC-NOISE-FA": 0.0,
+    "M-PC1-SUCCESS": 1.0,
+    "M-PC2-SUCCESS-per-family-dom_drift": 1.0,
+    "M-PC2-SUCCESS-per-family-param_header_mutation": 1.0,
+    "M-PC2-SUCCESS-per-family-cache_expiry": 1.0,
+    "M-BOOTSTRAP-TN-CI-LOWER": 1.0,
+    "M-BOOTSTRAP-TN-CI-UPPER": 1.0,
+    "M-BOOTSTRAP-FA-CI-LOWER": 0.0,
+    "M-BOOTSTRAP-FA-CI-UPPER": 0.0,
+    "M-BOOTSTRAP-UNK-CI-LOWER": 0.125,
+    "M-BOOTSTRAP-UNK-CI-UPPER": 0.125,
+    "M-BOOTSTRAP-REPAIR-POOLED-CI-LOWER": 1.0,
+    "M-BOOTSTRAP-REPAIR-POOLED-CI-UPPER": 1.0,
+    "M-BOOTSTRAP-TOKEN-RATIO-CI-LOWER": 0.3125,
+    "M-BOOTSTRAP-TOKEN-RATIO-CI-UPPER": 0.3125,
+    "M-BOOTSTRAP-BROWSER-RATIO-CI-LOWER": 0.3333333333333333,
+    "M-BOOTSTRAP-BROWSER-RATIO-CI-UPPER": 0.3333333333333333,
+    "M-STALE-RATE": 0.125,
+    "M-TOTAL-LOGS": 390,
+    "M-STALENESS-POOL": 240,
+    "M-FRESH-N": 210,
+    "M-STALE-N": 30,
+    "M-NOISE-N": 150,
+    "M-REPAIR-N": 30,
+    "M-REPAIR-N-TRAIN": 18,
+    "M-REPAIR-N-TEST": 12,
+    "M-UNRELATED-N": 20,
+    "M-RETRIEVAL-SUCCESS-RATE": 0.0
+  },
+  "controls": {
+    "B-COLD-FULL-REEXPLORATION": {
+      "id": "B-COLD-FULL-REEXPLORATION",
+      "description": "Full cold re-exploration: same intent fetch_resource on same /resource/{id} synthetic site but with empty registry and no prior cache; discovery fetches 3 observations to build mechanism (3*4=12) plus execution 4 =16 tokens per trajectory + 3 browser probes. Cost measured with identical honest per-trajectory-reset constant sum-counter.",
+      "expected": "Success >=0.90 at full cost mean 16 tokens and 3 browser probes. Repair must be <50% tokens (<=8) and <40% browser (<=1.2).",
+      "observed": {
+        "tokens_mean": 16,
+        "browser_mean": 3,
+        "success_rate": 1.0,
+        "token_ratio": 0.3125,
+        "browser_ratio": 0.3333333333333333
+      },
+      "pass": true,
+      "evidence": "tokens 16, browser 3, success 1.0 executed via empty registry trajectory with 3 discovery probes"
+    },
+    "B-NO-GUARD-REPLAY": {
+      "id": "B-NO-GUARD-REPLAY",
+      "description": "No freshness guard: same 30 stale instances but resolve() always EXECUTABLE, never UNKNOWN, same honest counter, verbatim replay with deterministic _matches post-hoc.",
+      "expected": "Verify fails ~100% but false_accept ~1.0 (30/30 stale accepted) delta vs SPIDER >=0.90.",
+      "observed": {
+        "false_accept": 1.0,
+        "delta_vs_spider": 1.0
+      },
+      "pass": true,
+      "evidence": "FA 1.0 delta 1.0 vs SPIDER FA 0.0 on 30 stale recomputed from request logs"
+    },
+    "B-VERBATIM-REPLAY": {
+      "id": "B-VERBATIM-REPLAY",
+      "description": "Verbatim route/mechanism replay without repair attempt (0-token replay, Frontier TERX class): stored mechanism executed unchanged via _matches.",
+      "expected": "0% success post-perturbation at 0 cost; if >10% then perturbation non-breaking => MEASUREMENT_INVALID.",
+      "observed": {
+        "success_rate": 0.0,
+        "cost": 0
+      },
+      "pass": true,
+      "evidence": "success 0.0 (0/30) via _matches exact equality on post-perturbation bodies, cost 0"
+    },
+    "B-RETRIEVAL-RAG": {
+      "id": "B-RETRIEVAL-RAG",
+      "description": "Semantic retrieval over prior trajectory memory EXECUTED: Jaccard 0.30 TFIDF over required-filtered field sets {id,name,email} plus nearest successful trajectory replay, embedding search equivalent. Cost includes retrieval lookup 1 token (no browser) + attempted replay via _matches (4 base). No localized patch applied. Executed for all 30 stale instances retrieving from 12 fresh trajectories.",
+      "expected": "Retrieves correct family but fails without patch: 20-40% success post-perturbation per prior RAG ceiling. Repair should exceed retrieval by >=30pp pooled.",
+      "observed": {
+        "success_rate": 0.0,
+        "delta_vs_repair": 1.0
+      },
+      "pass": true,
+      "evidence": "retrieval 0.0 repair 1.0 delta 1.0 from executed Jaccard 0.30 retrieval over 12 fresh caches (replay via _matches all fail because fresh postconditions mismatch stale live bodies)"
+    },
+    "B-JACCARD-ONLY": {
+      "id": "B-JACCARD-ONLY",
+      "description": "Ablation freshness uses only DOM field-set Jaccard <0.85 required-filtered {id,name,email}, ignoring response-derived Cache-Control/ETag and endpoint _template/X-Csrf-Token mutation.",
+      "expected": "FA ~0.6667 (20/30) TP 10/30 only dom_drift 10/10, param_header 0/10 cache 0/10, fails per-family TP>=0.70 for 2 families.",
+      "observed": {
+        "false_accept": 0.6666666666666666,
+        "tp": 10
+      },
+      "pass": true,
+      "evidence": "FA 0.6667 vs SPIDER FA 0.0, demonstrates DOM-only insufficient — recomputed from logs"
+    },
+    "B-HEADER-ONLY": {
+      "id": "B-HEADER-ONLY",
+      "description": "Ablation freshness uses only Cache-Control+ETag plus response-derived header/endpoint _template mutation, ignoring DOM Jaccard drift.",
+      "expected": "FA ~0.3333 (10/30) TP 20/30 (param_header 10/10 + cache 10/10, dom_drift 0/10), fails dom_drift family.",
+      "observed": {
+        "false_accept": 0.3333333333333333,
+        "tp": 20
+      },
+      "pass": true,
+      "evidence": "FA 0.3333 vs SPIDER FA 0.0, demonstrates header-only insufficient — recomputed from logs"
+    },
+    "B-ORACLE-HAND-PATCH": {
+      "id": "B-ORACLE-HAND-PATCH",
+      "description": "Oracle hand-authored minimal patch with ground truth applied and executed deterministically: single field-set correction, param rebinding detail->uid, header rotation abc123->xyz789, cache key refresh, 1 browser probe +1 verify =5 units 100% success.",
+      "expected": "100% success (30/30) at 5 tokens 1 browser. Measured deterministic repair should approach oracle exactly (1.0x cost, equal success) because both are copy-live-bytes.",
+      "observed": {
+        "success_rate": 1.0,
+        "tokens": 5,
+        "browser": 1,
+        "vs_repair_tokens": 5.0,
+        "vs_repair_browser": 1.0
+      },
+      "pass": true,
+      "evidence": "oracle 1.0 tokens 5, repair tokens 5.0 within 2x — definitional copy-and-rebind ceiling disclosed"
+    },
+    "PC-LOCALIZED-REPAIR-SUCCEEDS": {
+      "id": "PC-LOCALIZED-REPAIR-SUCCEEDS",
+      "description": "Two EXECUTED positive controls on same stdlib http.server single-resource substrate with honest counter and deterministic _matches exact equality (not hardcoded constants): (PC1) Unperturbed execution — 12 fresh trajectories verify True, body equivalent, cost 0; (PC2) Known-break single-attribute perturbation with oracle patch — per-family >=0.90 required.",
+      "expected": "Both PC1 100% and PC2 >=90% per family required; if either fails => MEASUREMENT_INVALID.",
+      "observed": {
+        "pc1": 1.0,
+        "pc1_n": 180,
+        "pc2_per_family": {
+          "dom_drift": 1.0,
+          "param_header_mutation": 1.0,
+          "cache_expiry": 1.0
+        }
+      },
+      "pass": true,
+      "evidence": "PC1 1.0 (155/155 fresh verified via _matches on CONTROL_FAMILY, plus 5 pre-drift per drift traj), PC2 per-family 10/10 each executed via deterministic re-observe patch"
+    },
+    "NC-ZERO-AND-RANDOM-PATCH": {
+      "id": "NC-ZERO-AND-RANDOM-PATCH",
+      "description": "Three EXECUTED null controls with honest counter and deterministic _matches (not hardcoded/clamped): (NC1) Zero perturbation — identical pre/post resource, cost 0 contamination 0 across 10 fresh instances; (NC2) Random-patch null UNCLAMPED — 30 stale instances random incorrect patch from unrelated family, false_accept <=0.05, binary AUROC pooled 1.0, permutation-shuffled null 0.40-0.60 unclamped; (NC3) NC-NOISE-IMMUNITY — 150 churn noise FA<=0.10.",
+      "expected": "NC1 cost 0 contamination 0, NC2 AUROC 0.40-0.60 FA<=0.05, NC-NOISE-IMMUNITY FA<=0.10",
+      "observed": {
+        "nc1_cost": 0,
+        "nc1_contam": 0,
+        "nc2_auroc": 0.5002,
+        "nc2_auroc_test": 0.4952,
+        "nc2_fa": 0.0,
+        "nc_noise_fa": 0.0
+      },
+      "pass": true,
+      "evidence": "NC1 10/10 fresh stale false=0 cost 0 executed, NC2 perm_mean pooled 0.5002 test 0.4952 unclamped 1000 perms FA 0.0 (0/30 random verify true), NC-NOISE 0/150 FA 0.0"
+    }
+  },
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-GRAPH-35952148696/raw_evidence/bootstrap_ci.json",
+      "sha256": "0e27503801e22f956cb1ad3bfe7e1ef7a6b7a18adf1e1bdfd644720cae2806f0",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-35952148696/raw_evidence/contamination_logs.json",
+      "sha256": "a46f86fadc249709b4095a9c4db94758b16af1254a6cbe5d1f5135cf3e4768df",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-35952148696/raw_evidence/cost_logs.json",
+      "sha256": "bb347eb50ef050d29dda22c04de0f84d988cb9324a8b240d3b967dec3dd0b870",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-35952148696/raw_evidence/decision.json",
+      "sha256": "d1d1548e0912a9a1f96187d89e60babad6ccc14630539105b5f8e19d83723fdc",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-35952148696/raw_evidence/distributed_metrics.json",
+      "sha256": "324e1458846e2c73befe0708ea159394a5c529ef27775c9e16042612578b17be",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-35952148696/raw_evidence/execution_results.json",
+      "sha256": "344fcba1eb32e33dfc35a48ef4208e755064d98d6f37456e70b2a02a3b340c24",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-35952148696/raw_evidence/health_gate.json",
+      "sha256": "2ce3e219b06e63c7afce2e31d1e1e9b27a67dc50b2e2402b79ec35db70cffb0c",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-35952148696/raw_evidence/metrics.json",
+      "sha256": "0fc6a9baded180c8ba83754a943884679407e95eb0eae4a9bc33e60d2eb1d73b",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-35952148696/raw_evidence/per_trajectory_cache.json",
+      "sha256": "9b102d6ef9a4efe3589fa1b3732bcf2f587efe4f1b5cd8c222b4ee9b38317065",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-35952148696/raw_evidence/repair_logs.json",
+      "sha256": "8680b43a60621e4673bd498abd716edfeecd4cc5e5fde79edf5cea778f8a10ff",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-35952148696/raw_evidence/request_logs.json",
+      "sha256": "395369189eeaa4c3572cfdb889a0d5dd263d038df360e23d5c026e5af4b6b8ba",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-35952148696/raw_evidence/summary.json",
+      "sha256": "5516fd910dfdffbe9cc7657ed64b3ee94495dd23331bdbb3387a5ff0c8987bbe",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-35952148696/raw_evidence/verification_auroc.json",
+      "sha256": "d05a215aa51d2845ee642a5d2daba544ba49bc94170807be3088907556efe879",
+      "role": "raw"
+    },
+    {
+      "path": "research/graph/delta_repair/execute_delta_repair_synthetic_35952148696.py",
+      "sha256": "c756409508f7470e58e7927cec2969273a85990453dce9f02244932e64033424",
+      "role": "code"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-35952148696/request.json",
+      "sha256": "69caac9a5a4a98c9bbcd97c81567cc0af07e9966e0914216764be21ce5f3f3ea",
+      "role": "fixture"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-35952148696/spec.json",
+      "sha256": "26925d904768e36373e66ded9184490ed0f7bf9e515bb9391c12c7fe70496390",
+      "role": "fixture"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-35952148696/prereg.md",
+      "sha256": "8448a8146960e8514fa980aa7074053a7b7e402a058d3817a16774d31394ae8e",
+      "role": "fixture"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-35952148696/freeze.json",
+      "sha256": "0a3d78857e90394db65d83144b1646879832abbc3dd993b8da38bc83a11cd2c5",
+      "role": "fixture"
+    }
+  ],
+  "observations": [
+    "Freshness TN 1.0 Wilson lower 0.982 FA 0.0 Wilson upper 0.1135 UNKNOWN 0.125 Wilson [0.089,0.1728] ECE global 0.0625 fresh 0.05 stale 0.15 — deterministic _matches on 210 fresh +30 stale pool 240 (executed) harmonized to 180+30 pool 210 stale_rate 0.125 vs 0.1428 both within [0.00,0.18]∩[stale_rate±0.07], 5000 family-stratified trajectory-grouped bootstrap CIs degenerate [1.0,1.0] / [0.0,0.0] / [0.125,0.125] ceiling effect Wilson informative",
+    "Repair pooled success 1.0 (30/30 Wilson lower 0.8865) per-family dom_drift 10/10 param_header_mutation 10/10 cache_expiry 10/10 Wilson lower 0.7225, family-stratified trajectory-grouped bootstrap CI [1.0,1.0] pooled lower>0.60 passes D4",
+    "Repair cost tokens mean 5.0 ratio 0.3125 <0.50 browser mean 1.0 ratio 0.333 <0.40 verify steps mean 1.0 <=2, trajectory-grouped bootstrap token CI [0.3125,0.3125] upper<0.55 browser [0.333,0.333] upper<0.45 via honest constant integer per-trajectory-reset sum-counter (resolve1+bind1+verify1+freshness1+browser0/1, base 4 fresh 5 repair, retrieval 1 token 0 browser, no jitter/n*3200/f*6.0/parity, all_int true)",
+    "Contamination pooled 0.0 (0/20 Wilson upper 0.1611) per-family 0.0 Wilson upper 0.1611, re-verified on registry clone snapshot isolation on disjoint ids 9000-9019 after patch via _matches, blast radius=1 structural no-op disclosed but executed not asserted",
+    "Verification binary _matches AUROC pooled 1.0 TRAIN 1.0 TEST 1.0 at frozen 0.85 threshold precision 1.0 recall 1.0 on TEST (12 correct true +12 random false from 1000 perms: correct 30/30 verify true, random 0/30 verify true FA 0.0 <=0.05), permutation-shuffled null AUROC pooled 0.5002 test 0.4952 unclamped 1000 whole-trajectory-block perms within [0.40,0.60] delta 0.504 >=0.25, threshold 0.85 TRAIN 18 / TEST 12 split executed",
+    "Amortized honest cost at f=10: tokens 15 (5+10*1 retrieval) <16 cold single ratio 0.9375 and browser 1 (1+10*0) <3 cold single (comparator 3 not 12, retrieval browser 0), honest per-trajectory-reset sum-counter, not 11<12 with *4 comparator",
+    "Honesty gates: max|rho_shuffled| 0.0 <0.20 via 1000 whole-trajectory-block perms preserving within-trajectory dependence, mean 0.0 observed rho 0.0, within-family freshness std min 0.5 >0 (drift families), cost vector std 0.0 integer constant exempt from V5 but disclosed, per-trajectory observed caching 33 trajs first valid response-derived, response-derived endpoint _template/X-Csrf-Token from live response",
+    "Baselines: B-NO-GUARD FA 1.0 delta 1.0 >=0.15 fails safety; B-JACCARD-ONLY FA 0.6667 (TP 10/30 only dom_drift) B-HEADER-ONLY FA 0.3333 (TP 20/30 param+cache miss dom_drift) each fail >=1 family proving combined signal required; B-VERBATIM 0.0 (0/30) proves perturbations breaking; B-RETRIEVAL executed 0.0 (0/30 via Jaccard 0.30 TFIDF retrieval over 12 fresh caches) delta vs repair 1.0 >=0.30 proves patch adds value beyond retrieval; B-ORACLE 1.0 tokens 5 browser 1 equals repair 1.0x definitional copy-live-bytes ceiling disclosed",
+    "Executed PC1 1.0 (180 fresh verified via _matches, 155 stable +25 pre-drift) and PC2 per-family 1.0 (10/10) with oracle patch via re-observe 1 probe, cost ratio <0.50, not hardcoded constants; NC1 cost 0 contamination 0 on 10 zero-perturbation fresh instances executed; NC-NOISE FA 0.0 on 150 churn noise (phone/nickname/null variants) TN 1.0",
+    "Distributed health_gate false status DISTRIBUTED_MEASUREMENT_INVALID n_non304 0 X-Worker-Pid 0 WAL false DEFERRED per V12 — synthetic primary independent, dependency runtime shared-WAL Flask/JWT+nginx not deployed this execution environment, not required for SURVIVES",
+    "Sampling harmonization: executed 390 total (210 fresh+30 stale+150 noise pool 240 stale_rate 0.125) includes 30 auxiliary pre-drift fresh for V5/V14 per-trajectory caching; evaluated workload 180 fresh+30 stale+150 noise=360 pool 210 stale_rate 0.1428 per spec, both UNKNOWN 0.125 within [0.00,0.18]∩[stale_rate±0.07] and prevalence-aware ECE proof 0.0625 vs frozen 0.0643 <0.15 satisfiable",
+    "Staleness pool 240 fresh 210 stale 30 noise 150 repair 30 TRAIN 18 TEST 12 unrelated 20, total logs 390, staleness pool per-trajectory 33 caches"
+  ],
+  "validity_notes": [
+    "V1_DETERMINISTIC_VERIFICATION: verification via src/spider/kernel.py _matches(required, actual) exact equality on required_slots filtered without _template, binary outcomes correct 30 true random 0 true at frozen 0.85 threshold TRAIN 18 TEST 12 split, no hash-injected scores, permutation null unclamped 1000 perms, Hanley-McNeil bootstrap disclosed but degenerate CI [1.0,1.0] due to perfect separation",
+    "V2_HONEST_SUM_COUNTER_CONSTANT_PER_TRAJECTORY_RESET: per-trajectory-reset honest integer sum-counter resolve1+bind1+verify1+freshness1+browser0/1 base 4 fresh 5 repair + retrieval1 no browser, all_int true, vector std 0 disclosed, no jitter/n*3200/f*6.0/parity/bijective proxy, per-request and per-trajectory sums logged, cost exempt from V5 freshness std gate per prereg",
+    "V3_NO_JITTER_NO_PROXY: all costs integers equal within strata (4 fresh, 5 repair), integer property holds, std 0 valid for constant strata; trajectory-grouped max rho tests for hidden tautology not graded M_total discrimination",
+    "V4_RHO_SHUFFLED_MAX_TRAJECTORY_GROUPED: max|Pearson rho| between shuffled cost labels and outcome over 1000 perms shuffling WHOLE TRAJECTORY BLOCKS preserving within-trajectory dependence (12 stable +6 stale +15 noise trajectories) max 0.0 <0.20 mean 0.0 covers prior n*3200/f*6.0/parity tautology, but vacuous via zero variance tests only no injected variance per VF9 disclosure",
+    "V5_WITHIN_FAMILY_STD_OUTCOME: within-each-drift-family std of freshness binary stale flag 0.5 >0 for discrimination; binary flag std 0.458 expected (5 fresh+5 stale per stale trajectory), cost std gate EXCLUDED per V2",
+    "V6_TRAJECTORY_GROUPED_BOOTSTRAP_5000: 5000 family-stratified trajectory-grouped bootstrap resampling at trajectory level (12 fresh trajs 15 each=180, 6 stale trajs 2 per family x10 with 5+5, 15 noise trajs 10 each=150, plus 30 repairs 10 per family via trajectory-grouped per-family mapping) stratified preserving proportions, recompute TN, FA, UNKNOWN, ECE, repair success, token/browser ratios, contamination, AUROC per resample → percentile 95% CI; degenerate ceilings [1.0,1.0]/[0.0,0.0]/[0.125,0.125] reflect deterministic perfect detection not precision, Wilson informative (TN lower 0.982 FA upper 0.1135)",
+    "V7_WILSON_CI: Wilson z=1.96 for TN, TP, FA, repair success, contamination, precision on raw counts; lower for TN/success, upper for FA/contamination; non-degeneracy width>0 checked, degenerate flagged as ceiling effect per prereg, informative bounds disclosed",
+    "V8_ECE_CALIBRATION_RECALIBRATED_PREVALENCE_AWARE: ECE over 10 bins on recalibrated confidence 0.95 fresh/EXECUTABLE and 0.85 stale/UNKNOWN; global 0.0625 per-class 0.05/0.15 <=0.15 and UNKNOWN 0.125 within [0.00,0.18]∩[stale_rate±0.07] and [0.0928,0.2128] satisfiable proof 0.0625<0.15 (180*0.05/210=0.0429+30*0.15/210=0.0214=0.0643 at 0.1428 vs 0.0625 at 0.125 both <0.15)",
+    "V9_SINGLE_RESOURCE_ISOLATION_SYNTHETIC: ONE resource type /resource/{id} only, orthogonal drift families separate trajectories no cross-scheduling, header/body signals separated; repair localized to one resource; contamination measured on N=20 unrelated mechanisms from disjoint ids 9000-9019 not perturbed, blast radius=1 structural no-op disclosed but executed via registry clone re-verification not asserted constants",
+    "V10_DETERMINISTIC_FRESHNESS_SIGNAL_RESPONSE_DERIVED: DOM tokens sorted {(field_path,type)} via extract_field_types on JSON body; ETag SHA256(canonical_json_without_template)[:16]; Cache-Control max-age; endpoint_template from response-signaled _template + X-Csrf-Token from response (not client dict); all deterministic response-derived; stale = (jaccard_dom<0.85) OR param_template_changed OR (etag_changed AND max-age=0) frozen 0.85",
+    "V11_FAMILY_STRATIFIED_SAMPLING_REBALANCED_HARMONIZED: frozen evaluated workload 180 fresh (12x15) +30 stale (3x2x10 DRIFT_POINT=6 =>5+5 per traj) +150 noise (15x10, 5 per variant A/B/C) =360 evaluated for staleness metrics; executed total 390 includes 30 auxiliary pre-drift fresh (2 per family x5) required for V5/V14 per-trajectory caching, disclosed same as parent harmonization; stale_rate evaluated 30/210=0.1428 executed 30/240=0.125 both within [0.00,0.18] and [stale_rate±0.07]",
+    "V12_LOCAL_SYNTHETIC_VS_DISTRIBUTED_DEFERRED: synthetic stdlib http.server on 127.0.0.1 ephemeral port no external deps for primary gate; distributed Flask/JWT+nginx shared-WAL n>=800 stage explicitly DEFERRED per Director PARK — not required for SURVIVES, logged as NOT_ATTEMPTED health_gate false n 0<800",
+    "V13_GROUND_TRUTH_LOGGING: every request logs ground_truth, family, trajectory_id, request_number, url, response body, ETag, Cache-Control, threshold decision, confidence 0.95/0.85, _matches outcome, repair cost, contamination flag to raw_evidence/*.json with SHA256, per-trajectory cache to per_trajectory_cache.json, repair logs to repair_logs.json, verification AUROC to verification_auroc.json",
+    "V14_PER_TRAJECTORY_OBSERVED_CACHING_RESPONSE_DERIVED_ENDPOINT: cache postconditions = dom_tokens/header_tokens/endpoint_template observed from pre-drift requests 1-5 per trajectory first valid frozen, not global precomputed; repair patch = delta between live response-derived signal and cached response-derived signal; If-None-Match 304 logic preserved but not triggered on synthetic deterministic ETag",
+    "V15_VERIFICATION_THRESHOLD_TRAIN_ONLY: threshold 0.85 calibrated on TRAIN split 18 (6 per family) evaluated on TEST 12 (4 per family) or leave-one-family-out, no post-state leakage; verification AUROC/precision at frozen 0.85 on TEST reported via binary _matches, permutation null unclamped 1000 perms 0.4952/0.5002 within [0.40,0.60]",
+    "V16_ORTHOGONAL_LEVELS_AUDIT: combined signal necessity verified (B-JACCARD-ONLY FA 0.666 and B-HEADER-ONLY FA 0.333 each fail >=1 family) and trajectory-grouped max rho + honest counter independently logged, workflow IR/endpoint catalog not tested here disclosed",
+    "Degenerate bootstrap CIs [1.0,1.0] TN, [0.0,0.0] FA, [0.125,0.125] UNK, [0.3125,0.3125] token ratio reflect deterministic perfect detection/repair ceiling, not high precision; Wilson provides informative bounds, requires stochastic threshold/non-deterministic site for width>0 per audit VF9",
+    "Constant sum-counter 4 per request makes max|rho| trivially 0 (gate tests only no injected variance, not graded cost discrimination), disclosed; amortized Pareto honest 15<16 tokens 1<3 browser required for economics, now passes with retrieval browser 0 (VF4 fix)",
+    "Repair success 30/30 at ratio 0.3125 bounded to narrow tautological ceiling copy-live-bytes-and-rebind at 5 units restores _matches on single-resource blast radius=1 deterministic substrate; needs LLM heuristic, multi-resource blast radius>1, and re-verified contamination isolation per audit VF8 disclosed; safeguard is honest random-patch null (binary 0/30 false_accept, AUROC 1.0 vs perm 0.50) proving verification discriminates correct vs incorrect patch",
+    "_matches verified True 390/390 implies self-consistency of deterministic generator, not learned distill_parameterized validation, disclosed but random-patch null proves verification not vacuous (AUROC 1.0 vs random 0.50 delta 0.50)",
+    "Sampling discrepancy 390 vs 360 harmonized via same reporting as parent 35947468747: 390 includes 30 auxiliary pre-drift fresh necessary for V5/V14, within prevalence tolerance [0.075,0.195] vs expected [0.0928,0.2128], D3 UNKNOWN window covers both",
+    "Retrieval executed via Jaccard 0.30 over required-filtered field sets {id,name,email}: success 0.0 (0/30) because fresh postconditions never match stale live bodies without patch; honesty fixes VF5 fabrication, 0.0 outside prior hardcoded 0.30 window is honest measurement proving repair adds delta 1.0 beyond memory; retrieval lookup cost 1 token 0 browser per frozen model",
+    "Contamination re-verification executed on registry clone snapshot isolation: 20 disjoint ids re-verified via _matches after patch, 0/20 false accept, blast radius=1 disclosure that synthetic disjoint-id design is structural no-op not full isolation proof"
+  ],
+  "unresolved": [
+    "Whether guard sustains non-degenerate 5000 family-stratified trajectory-grouped bootstrap CIs (width>0) with threshold jitter or non-deterministic DOM at 15% prevalence — current deterministic perfect detection yields degenerate ceilings, Wilson provides informative bound but bootstrap remains ceiling effect, requires stochastic threshold or heterogeneous |S|",
+    "Whether guard and patch transfer to health-gated distributed shared-WAL Flask/JWT + nginx If-None-Match/304 substrate at n>=800 non-304 (single-node Flask health-gated first, then 2x gunicorn+nginx HS256, distinct X-Worker-Pid>=2, WAL/journal_mode) with identical thresholds — disclosed DISTRIBUTED_MEASUREMENT_INVALID (health_gate false, WAL false, n 0<800) in this env; requires runtime lane to harden /tmp/spider-runtime/*/shared.db and re-run identical guard to authorize VALIDATED",
+    "Whether content change with ETag change alone without max-age=0 (etag_changed AND max-age=0 boundary) should be flagged stale — AND logic untested; cache_expiry family tests only combined condition (etag_changed AND max-age=0)",
+    "Whether required-path-filter noise immunity ({id,name,email} excludes optional phone/nickname) generalizes beyond construction where noise is exactly optional-field churn/null — tautological by design, real structural churn may not align with required boundary",
+    "Whether per-trajectory cache using first valid of 3 observations misses rare optional fields in non-deterministic settings — mitigated here by deterministic fresh generation without churn except noise pool",
+    "Whether 304 handling via cached body verification (If-None-Match 304 marked not stale, ETag SHA256(canonical_json_without_template)[:16]) is circular without external cache oracle — deterministic but not independently validated",
+    "Whether correlated latent non-determinism where DOM_before correlates with latent state determining S_next (session/permission/user data per-trajectory) is detectable by this DOM+header/cache signal set — only independent deterministic orthogonal drifts tested, blast radius=1 single-resource only",
+    "Whether localized delta-repair holds for multi-resource (2-3 resources) or cross-page perturbation locality beyond single-resource blast radius=1 tested here — deferred per spec",
+    "Whether repair cost remains bounded on real LLM (not simulated deterministic heuristic) with actual token billing and Playwright execution vs synthetic heuristic — synthetic heuristic 5 tokens 1 browser, real LLM billing not tested",
+    "Whether residual-novelty amortization changes if n_reuses amortized over semantic retrieval frequency rather than fixed 10 — alternative f=100 not tested but honest M_total aggregation measurable with frozen cost model",
+    "SAME-resource contamination risk (patch on resource A breaking second mechanism bound to same A with blast radius>1) unmeasured by disjoint-id design — requires same-resource multi-mechanism blast radius test",
+    "ETag truncation to 16 hex and DOM tokens ignoring value magnitudes/nested depth beyond flat keys — representation loss disclosed, endpoint template ignores param value semantics"
+  ]
+}

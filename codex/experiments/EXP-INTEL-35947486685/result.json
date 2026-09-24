@@ -1,0 +1,480 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-35947486685",
+  "lane": "intel",
+  "status": "COMPLETE",
+  "outcome": "NOT_APPLICABLE",
+  "metrics": {
+    "M_AX_CONSISTENCY_MEAN": {
+      "value": null,
+      "unit": "ratio",
+      "threshold": ">=0.6",
+      "note": "No valid product pages captured (0/20 AX trees with AX nodes>10 DOM>=2000); infrastructure precedence prevents computation"
+    },
+    "M_AX_BOOTSTRAP_CI_LOWER": {
+      "value": null,
+      "unit": "ratio",
+      "threshold": ">0.5",
+      "note": "2000 family-level bootstrap not computable: 0 families <10 required for H1 SURVIVES gate"
+    },
+    "M_AX_BOOTSTRAP_CI_UPPER": {
+      "value": null,
+      "unit": "ratio",
+      "note": "Not computable due to 0 families"
+    },
+    "M_AX_SHUFFLE_P_TRAJECTORY_GROUPED": {
+      "value": null,
+      "unit": "p-value",
+      "threshold": "<0.05",
+      "note": "1000 trajectory-grouped permutations not computable (0 families)"
+    },
+    "M_AX_SHUFFLE_MEAN": {
+      "value": null,
+      "unit": "ratio",
+      "note": "Shuffle null not computable"
+    },
+    "M_AX_SHUFFLE_STD": {
+      "value": null,
+      "unit": "ratio",
+      "note": "Degenerate std0 p=1 trap not applicable; no data"
+    },
+    "M_AX_DELTA_TRUNCATED": {
+      "value": null,
+      "unit": "delta",
+      "threshold": ">=0.20",
+      "note": "B-TRUNCATED-20 comparison requires same 20 product pages full-tree vs [:20]; 0 pages captured"
+    },
+    "M_AX_PER_FAMILY_VARIANCE": {
+      "value": null,
+      "unit": "variance",
+      "threshold": ">0",
+      "note": "Variance undefined with 0 families; prior degenerate 0.0 artifact (full-page LCP) not replicated here"
+    },
+    "M_SHA_STABILITY_IDENTICAL": {
+      "value": false,
+      "unit": "boolean",
+      "threshold": "True",
+      "note": "SHA before==after identical on identical content not proved: 0 families, before_hash null"
+    },
+    "M_SHA_CHANGED_ON_MUTATION": {
+      "value": false,
+      "unit": "boolean",
+      "threshold": "True",
+      "note": "before!=after on single-attribute textContent/name mutation not proved: 0 families, mutation not executed"
+    },
+    "M_AX_VALID_CAPTURES": {
+      "value": 0,
+      "unit": "count",
+      "threshold": ">=20",
+      "note": "0/20 captures valid (AX nodes>10 DOM>=2000) at 1280x720 via CDP Accessibility.getFullAXTree"
+    },
+    "M_AX_FAMILIES_FOUND": {
+      "value": 0,
+      "unit": "count",
+      "threshold": ">=10",
+      "note": "0 families with task-specific product pages; sampled_families re-derived inside script random.Random(35725763380).sample(sorted(families_ge3),10)=[191,180,162,197,153,213,163,137,136,222] (10 families) but live capture 0 due to Docker unreachable"
+    },
+    "M_AX_NODES_RANGE": {
+      "value": null,
+      "unit": "count",
+      "note": "No captures to report range; prior live range 600-1160 not reproduced this run"
+    },
+    "M_DOM_LEN_MIN": {
+      "value": null,
+      "unit": "bytes",
+      "threshold": ">=2000",
+      "note": "No DOM bytes captured"
+    },
+    "M_LEAKAGE_VALIDONLY": {
+      "value": null,
+      "unit": "ratio",
+      "threshold": "<0.40",
+      "note": "History-conditioned PMI leakage_validOnly<40% not computable with 0 transitions"
+    },
+    "M_STAGEHAND_HIT": {
+      "value": null,
+      "unit": "ratio",
+      "threshold": ">=0.8",
+      "note": "0/36 families attempted recomputed SHA after page.content()+AX with 9+expanded+body stripping; requires >=30/36 per spec"
+    },
+    "M_STAGEHAND_MISS": {
+      "value": null,
+      "unit": "ratio",
+      "threshold": ">=0.8",
+      "note": "Not measured substrate unavailable"
+    },
+    "M_FALSE_ACCEPT": {
+      "value": null,
+      "unit": "ratio",
+      "threshold": "<0.05",
+      "note": "Not measured"
+    },
+    "M_STAGEHAND_SPEEDUP_LAT": {
+      "value": null,
+      "unit": "ratio",
+      "threshold": "~2x",
+      "note": "Real-path Playwright latency cold vs cached not measured; per-trajectory-reset sum counters not computed"
+    },
+    "M_TOKENS_SAVED": {
+      "value": null,
+      "unit": "ratio",
+      "threshold": "~30%",
+      "note": "tiktoken counts not measured"
+    },
+    "M_RHO_SHUFFLED": {
+      "value": null,
+      "unit": "correlation",
+      "threshold": "|rho|<0.20",
+      "note": "NC8 honest-cost gate not computed due to 0 sum counters"
+    },
+    "M_TOTAL_F10": {
+      "value": null,
+      "unit": "amortized_cost",
+      "note": "Pareto f=10/100 not computed; per-trajectory-reset sum counters resolve+bind+verify+freshness+browser_steps not measured"
+    },
+    "M_WEBGYM_DUP_PREVALENCE": {
+      "value": null,
+      "unit": "ratio",
+      "note": "0/50 diverse eTLD+1 sites parsed vs >=50 required; 2 genuine download attempts captured 401 Unauthorized + 404 Not Found"
+    },
+    "M_WEBGYM_DUP_CI_LOWER": {
+      "value": null,
+      "unit": "ratio",
+      "note": "2000 family bootstrap CI not computable"
+    },
+    "M_WEBGYM_DUP_CI_UPPER": {
+      "value": null,
+      "unit": "ratio",
+      "note": "Not computable"
+    },
+    "M_WEBGYM_THRESHOLD_RANGE": {
+      "value": null,
+      "unit": "delta",
+      "threshold": ">=0.05",
+      "note": "Sweep 0.818-0.9479 range not computable (0 sites)"
+    },
+    "M_WEBGYM_PARAM_PREVALENCE": {
+      "value": null,
+      "unit": "ratio",
+      "note": "Not computable"
+    },
+    "M_WEBGYM_SITE_ENTROPY": {
+      "value": null,
+      "unit": "bits",
+      "note": "Not computable"
+    },
+    "M_GATE0_RELAXED_PASS_COUNT": {
+      "value": 0,
+      "unit": "count",
+      "threshold": ">=1",
+      "note": "0 relaxed passes H>0.1 NL>=20 titles>=1 singleton<50% leakage<40% (0 transitions/family, BrowserGym not installed)"
+    },
+    "M_GATE0_STRICT_PASS_COUNT": {
+      "value": 0,
+      "unit": "count",
+      "note": "0 strict passes H>0.2 NL>=50 strata>=10 (0 transitions)"
+    },
+    "M_WEBMCP_PREVALENCE_F10": {
+      "value": null,
+      "unit": "ratio",
+      "note": "WebMCP 714/2147 at f=10 not measured (0 sites scanned)"
+    },
+    "M_WEBMCP_PREVALENCE_F100": {
+      "value": null,
+      "unit": "ratio",
+      "note": "Not measured"
+    },
+    "M_H5_HIT_EQUIV": {
+      "value": null,
+      "unit": "ratio",
+      "threshold": ">=0.8",
+      "note": "Orthogonal fallback not triggered (H1 MEASUREMENT_INVALID, not falsified)"
+    },
+    "M_SUBSTRATE_WEBARENA_LIVE": {
+      "value": false,
+      "unit": "boolean",
+      "note": "Docker NOT reachable at http://localhost:7770 after 3 retries Connection refused; docker pull/run timed out after 8s/5s (spec requires >=300s for 5.4GB image)"
+    },
+    "M_SUBSTRATE_PLAYWRIGHT": {
+      "value": false,
+      "unit": "boolean",
+      "note": "Playwright 1.63.0 NOT installed (pip list only pip 26.2.1)"
+    },
+    "M_SUBSTRATE_BROWSERGYM": {
+      "value": false,
+      "unit": "boolean",
+      "note": "BrowserGym-core 0.14.3 NOT installed"
+    },
+    "M_SUBSTRATE_WEBGYM": {
+      "value": false,
+      "unit": "boolean",
+      "note": "WebGym 292k NOT installed; download attempts 401/404 captured"
+    },
+    "M_SUBSTRATE_HF_TOKEN": {
+      "value": false,
+      "unit": "boolean",
+      "note": "HF_TOKEN not set"
+    }
+  },
+  "controls": {
+    "B-STAGEHAND-VERB": {
+      "status": "NOT_MEASURED",
+      "expected": "HIT>=0.8 MISS>=0.8 false_accept<0.05 beats NC4 p<0.05 cold vs cached ~2x/~30% when derived selectors only and stability gate passes",
+      "observed": "0/36 families attempted; SHA not recomputed after mutation with expanded+body stripping; stability not proved",
+      "pass": false,
+      "evidence": "artifacts/derived/stagehand_replication_recomputed.json n_families_attempted 0 <30 required"
+    },
+    "B-RANDOM-AX-SHUFFLE": {
+      "status": "NOT_COMPUTED",
+      "expected": "True mean > shuffle mean+0.20 p<0.05 trajectory-grouped 1000 perms",
+      "observed": "0 families valid, no scores to shuffle",
+      "pass": false,
+      "evidence": "artifacts/derived/ax_consistency_fulltree.json m_ax_shuffle_p null"
+    },
+    "B-TRUNCATED-20": {
+      "status": "NOT_COMPUTED",
+      "expected": "Full-tree mean exceeds truncated [:20] by >=0.20",
+      "observed": "0 product pages captured, truncated baseline not computable",
+      "pass": false,
+      "evidence": "ax_captures.jsonl 0 valid captures"
+    },
+    "B-WEBGYM-HARDCODED-09479": {
+      "status": "NOT_COMPUTED",
+      "expected": "WebGym >=50 diverse-site CI non-overlapping 0.9479 CI[0.9167,0.9792] sweep range>=0.05",
+      "observed": "0/50 sites, CI null, sweep range null",
+      "pass": false,
+      "evidence": "artifacts/derived/webgym_census.json duplication_prevalence null"
+    },
+    "B-COLD-LLM": {
+      "status": "NOT_MEASURED",
+      "expected": "Cold LLM upper bound; SPIDER/Stagehand must beat cold with false_accept penalty for C-PRODUCT-ECON via per-trajectory-reset sum counters M_total_f10 Pareto",
+      "observed": "No cold path latency/tokens measured; |rho_shuffled| null",
+      "pass": false,
+      "evidence": "stagehand_replication_recomputed.json status MEASUREMENT_INVALID"
+    },
+    "B-MIND2WEB2-JUDGE": {
+      "status": "NOT_MEASURED",
+      "expected": "Mind2Web-2 130-task provides independent diverse holdout duplication/param prevalence with 2000 bootstrap",
+      "observed": "Mind2Web2 not available, no fallback executed",
+      "pass": false,
+      "evidence": "webgym_census.json mind2web2_fallback available false"
+    },
+    "B-WEBMCP-TOOL-PREV": {
+      "status": "NOT_MEASURED",
+      "expected": "Prevalence <0.3 at f=10 vs >0.6 at f=100 distinguishes honest f informs compilation vs retrieval",
+      "observed": "0 sites scanned, prevalences null",
+      "pass": false,
+      "evidence": "artifacts/derived/webmcp_prevalence.json status MEASUREMENT_INVALID"
+    },
+    "B-CONSTANT-NULL-05654": {
+      "status": "NOT_APPLICABLE",
+      "expected": "Not used for decision; prevents reuse of F(n)=0.5654",
+      "observed": "Not used",
+      "pass": null,
+      "evidence": "Excluded per spec"
+    },
+    "PC1_LIVENESS_1280": {
+      "status": "FAIL",
+      "expected": ">=15/20 captures AX nodes>10 (expect 600-2000) DOM>=2000 at 1280x720 Docker resolved 64-char digest sha256:3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb",
+      "observed": "0/20 valid captures AX nodes>10 DOM>=2000; Docker unreachable Connection refused, docker ps shows no webarena container",
+      "pass": false,
+      "evidence": "artifacts/raw/webarena_verified_pin.json docker_reachable false docker_ps empty docker_pull TimeoutExpired 8s"
+    },
+    "PC2_SHA_STABILITY": {
+      "status": "FAIL",
+      "expected": "before_hash==after_hash identical without mutation for all families; before!=after on single-attribute textContent/name mutation recomputed AFTER page.content()+AX with 9+expanded+body stripping+richer AX on >=20 families",
+      "observed": "0 families, before_hash null, after_hash null; stability not proved",
+      "pass": false,
+      "evidence": "artifacts/derived/ax_consistency_fulltree.json m_sha_stability_identical false"
+    },
+    "PC3_PRODUCT_SUBTREE": {
+      "status": "FAIL",
+      "expected": "product-subtree anchored heading/price/add-to-cart/main/contentinfo node_count>1 distinct SHA on path families 136/145/196/222 with richer AX bbox/computed style",
+      "observed": "0 valid product-subtrees; node_count 0 distinct SHA null; families 136 present in sample but capture 0",
+      "pass": false,
+      "evidence": "ax_consistency_fulltree.json product_subtree_node_count_gt1 false product_subtree_distinct_sha_path_families false"
+    },
+    "PC4_STAGEHAND_HIT_RECOMPUTED": {
+      "status": "FAIL",
+      "expected": "3 consecutive identical subtree SHA+selector with expanded+body stripping+richer AX -> HIT on 2nd/3rd per-project isolation cross-project MISS 0% stability proved",
+      "observed": "0 families, no HIT measured",
+      "pass": false,
+      "evidence": "stagehand_replication_recomputed.json pc4_hit_recomputed false"
+    },
+    "PC5_WEBGYM_IMPORT_VALID": {
+      "status": "FAIL",
+      "expected": "WebGym 292k import parses >=50 sites with 2 genuine download attempts captured manifest sha256 sweep computable",
+      "observed": "0/50 sites; 2 attempts captured 401 Unauthorized HF_TOKEN false and 404 Not Found; manifest_sha256 null",
+      "pass": false,
+      "evidence": "artifacts/derived/webgym_census.json attempts statuses 401/404 webgym_census status MEASUREMENT_INVALID"
+    },
+    "PC6_WEBMCP_DETECT": {
+      "status": "FAIL",
+      "expected": "WebMCP prevalence pipeline detects registrations on >=1 top site",
+      "observed": "0 sites scanned, 0 detections",
+      "pass": false,
+      "evidence": "webmcp_prevalence.json n_sites_scanned 0"
+    },
+    "NC1_AX_SHUFFLE_TRAJECTORY_GROUPED": {
+      "status": "NOT_COMPUTED",
+      "expected": "Permute per-family scores 1000 perms seed 35725763380 recompute mean require p<0.05 and mean+0.20 gap std0=>FAIL",
+      "observed": "Not computable 0 families",
+      "pass": false,
+      "evidence": "ax_consistency_fulltree.json shuffle p null"
+    },
+    "NC2_RANDOM_PATTERN": {
+      "status": "NOT_COMPUTED",
+      "expected": "Random full-tree assignment expected <0.2",
+      "observed": "Not computable",
+      "pass": null,
+      "evidence": null
+    },
+    "NC3_DOM_DRIFT_RECOMPUTED": {
+      "status": "FAIL",
+      "expected": "Inject single-attribute mutation via page.evaluate >=20 families recompute SHA AFTER via page.content()+AX with 9+expanded+body stripping+richer AX require MISS>=0.8 false_accept<0.05",
+      "observed": "0 families mutated, MISS null false_accept null",
+      "pass": false,
+      "evidence": "stagehand_replication_recomputed.json recomputed_after_mutation false"
+    },
+    "NC4_RANDOM_CACHE_ROLE_SUBSET": {
+      "status": "NOT_COMPUTED",
+      "expected": "Shuffle HIT/MISS labels 1000 perms expected ~50% speedup ~1 true Stagehand must beat p<0.05",
+      "observed": "Not computable: HIT null",
+      "pass": false,
+      "evidence": "stagehand_replication_recomputed.json nc4_p null"
+    },
+    "NC5_CROSS_PROJECT_LEAKAGE": {
+      "status": "NOT_APPLICABLE",
+      "expected": "Same selector+hash different project namespace must MISS 0% HIT",
+      "observed": "Single-project localhost:7770 not tested due to 0 captures",
+      "pass": null,
+      "evidence": "No cross-project isolation tested"
+    },
+    "NC6_WEBGYM_SHUFFLE": {
+      "status": "NOT_COMPUTED",
+      "expected": "Shuffle site labels 1000 perms trajectory-grouped for duplication true must exceed shuffled p<0.05 threshold sensitivity >0.05 TAU0.30",
+      "observed": "Not computable 0 sites",
+      "pass": false,
+      "evidence": "webgym_census.json duplication_prevalence null"
+    },
+    "NC7_WEBMCP_RANDOM": {
+      "status": "NOT_COMPUTED",
+      "expected": "Random endpoint assignment null for WebMCP prevalence",
+      "observed": "Not computable",
+      "pass": null,
+      "evidence": null
+    },
+    "NC8_RHO_SHUFFLED": {
+      "status": "FAIL",
+      "expected": "|rho_shuffled|<0.20 sanity on sum-counter economics distinguishes tautological n*3200 from honest overhead; M_total_f10 Pareto f=10/100 reported",
+      "observed": "|rho| null, M_total_f10 null; honest-cost per-trajectory-reset sum counters not measured",
+      "pass": false,
+      "evidence": "stagehand_replication_recomputed.json rho_shuffled null"
+    }
+  },
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-INTEL-35947486685/artifacts/raw/webarena_verified_pin.json",
+      "sha256": "0c60f7b300f35ebc04b4bc3a0f34b999c711b71c6f6fcb955b51212ad29da6e0",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-35947486685/artifacts/raw/ax_captures.jsonl",
+      "sha256": "ef01c396766730da66b3b7403acea2d469ab46dcfb9e6d71f25236d5a84cace5",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-35947486685/artifacts/raw/ax_captures.json",
+      "sha256": "6ef7242da8dc0be7cdfa8d0bac7599d6c0bca413ce3812ebd2cb0da094f0cc77",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-35947486685/artifacts/derived/ax_consistency_fulltree.json",
+      "sha256": "000296dffd946803ad354fb1b2783d2b96b0c52361af3cb2cc3356a6f6c6d3b1",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-35947486685/artifacts/derived/stagehand_replication_recomputed.json",
+      "sha256": "98bb8e6fc1ac9bc29599a9369924f3f7a260b66ffb23d5468317a6155f1460c0",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-35947486685/artifacts/derived/webgym_census.json",
+      "sha256": "93e7e320c8d23fc7d3452e0d3096249f924db345428101424ebe7b2f114785c9",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-35947486685/artifacts/derived/gate0_relaxed_table.json",
+      "sha256": "56916b5973f2d616714840df83c1d895058109a57ab7dfbe139cae282654cf16",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-35947486685/artifacts/derived/webmcp_prevalence.json",
+      "sha256": "70d4bfdc198a80bc45be1c97924fc1127d6aa948fc21dc095c400983a5dcaeb9",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-35947486685/artifacts/derived/orthogonal_fallback.json",
+      "sha256": "1c0ce6d243f48ab68814e40657750cef8d4b695c3be1db8e0ca3d3d7c3748138",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-35947486685/artifacts/derived/measurement_provenance.json",
+      "sha256": "71a3c7da3dbf8a797393aa21cd9837a7175a277498f1617d24dbb3140c878954",
+      "role": "derived"
+    },
+    {
+      "path": "research/intel/grammar_fulltree_358885.py",
+      "sha256": "74ab5a2b59e7a57beedb516999f1da0cb7f3bc5a055beac08d0d98949d6b8ec4",
+      "role": "code"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-35725763380/artifacts/raw/webarena-verified.json",
+      "sha256": "d65275660814663375028e9017e1f929e3c38321041b125795e2713b52243d30",
+      "role": "dataset"
+    },
+    {
+      "path": "research/intel/exp_35947486685_run.py",
+      "sha256": "feda0205ca2457b3d2d7860bb16c9ed3483afde4447b3aea3bdf7c8fab2e8429",
+      "role": "code"
+    }
+  ],
+  "observations": [
+    "RAW EVIDENCE: Deterministic sampling re-derived INSIDE measurement script random.Random(35725763380).sample(sorted(families_ge3),10)=[191,180,162,197,153,213,163,137,136,222] from 36 families_ge3 (webarena-verified.json sha256 d65275660814663375028e9017e1f929e3c38321041b125795e2713b52243d30 192 shopping 184 shopping_admin) with 2 distinct tasks per family verified get_task_start_url __SHOPPING__/__SHOPPING__/path expansion at 1280x720",
+    "RAW EVIDENCE: Docker Hub API resolves am1n3e/webarena-verified-shopping@sha256:3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb to 64-char digest valid true hub_first_image_digest sha256:3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb hub_api_status 200 sha256 3a2d6ed5584d6977fc128478f52e2270187ddbab4d2a8253f22ef77747efd7c9",
+    "RAW EVIDENCE: docker pull am1n3e/webarena-verified-shopping@sha256:3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb TimeoutExpired after 8s (spec requires >=300s for 5.4GB image, environment limit 8s) captured stderr/stdout; docker pull am1n3e/webarena-verified-shopping also TimeoutExpired 8s; docker run -d -p 7770:7770 TimeoutExpired 5s",
+    "RAW EVIDENCE: docker ps -a shows no webarena container running (empty table) vs prior nervous_lamarr container; docker images --digests shows no webarena image",
+    "RAW EVIDENCE: http://localhost:7770 unreachable after 3 retries Connection refused URLError",
+    "RAW EVIDENCE: pip list genuine capture non-empty: pip 26.2.1 stdout sha256 bc751d3e417bb9ab202566f411a75268ac7f4ce2212283e8becab471aa0cebd0 pip freeze empty sha256 e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855 (no installed packages beyond pip in this venv)",
+    "RAW EVIDENCE: Playwright 1.63.0 NOT installed, BrowserGym-core 0.14.3 NOT installed, AgentLab 0.4.2 NOT installed, WebGym 292k NOT installed, tiktoken NOT installed, Mind2Web2 not available (all ModuleNotFoundError captured via importlib.util.find_spec)",
+    "RAW EVIDENCE: WebGym 292k 2 genuine download attempts: attempt1 https://huggingface.co/datasets/WebGym/WebGym/resolve/main/manifest.json -> 401 Unauthorized HTTPError (HF_TOKEN false), attempt2 https://raw.githubusercontent.com/ServiceNow/WebGym/main/data/manifest.json -> 404 Not Found, manifest_sha256 null bytes 0",
+    "RAW EVIDENCE: 0/20 AX captures valid (AX nodes>10 DOM>=2000) product-subtree node_count>1 distinct SHA false, richer AX bbox/computed style false, SHA recomputed AFTER page.content()+AX not demonstrated on any family",
+    "RAW EVIDENCE: Grammar file research/intel/grammar_fulltree_358885.py sha256 74ab5a2b59e7a57beedb516999f1da0cb7f3bc5a055beac08d0d98949d6b8ec4 has 9 base regex no [:20] truncation true but expanded+body stripping flags: has_expanded true has_body_regex false (body regex missing)",
+    "OBSERVATION: Deterministic sampling and placeholder expansion verifiably correct inside script per frozen seed 35725763380 but live capture adequacy 0/10 families violates >=5/10 gate",
+    "OBSERVATION: Docker digest resolution succeeds but docker pull/run infrastructure fails due to timeout/environment, not invalid digest; PC1_LIVENESS_1280 FAIL is infrastructure not scientific",
+    "OBSERVATION: WebGym diverse holdout remains blocked after 2 genuine attempts (401/404) as in prior 0/50 401/404 attempts; HF_TOKEN or WebMall alternative required",
+    "OBSERVATION: All Stagehand, Gate0 multi-step, WebMCP, H5 orthogonal branches MEASUREMENT_INVALID with 0 families/sites/transitions due to same substrate missing, not negative evidence"
+  ],
+  "validity_notes": [
+    "CRITICAL HOST LIMITATION: Docker pull timeout 8s vs spec >=300s for 5.4GB image; environment limited to 8s per command causes TimeoutExpired before image download can complete; prior run proved same image live with 21/21 captures but now container not running; requires cached tar docker load or ghcr mirror or longer timeout to unblock",
+    "CRITICAL HOST LIMITATION: Playwright 1.63.0 Chromium ~300MB NOT installed (pip list only pip 26.2.1) prevents any CDP Accessibility.getFullAXTree capture at 1280x720; BrowserGym-core 0.14.3/AgentLab 0.4.2 also missing blocks multi-step Gate0 and Stagehand recomputed pipeline",
+    "INFRASTRUCTURE PRECEDENCE: H1_AX_FULLTREE branch meets falsifier clause <5 families valid (<10 trees AX nodes>10 DOM>=2000) after 3 Docker digest-resolution retries + full-tree grammar verification + placeholder fix +64-char digest sha256:3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb pull/run captured; therefore status COMPLETE outcome NOT_APPLICABLE with H1=MEASUREMENT_INVALID substrate_unavailable, no SURVIVES/FALSIFIED ceiling beyond substrate liveness per frozen decision_rule",
+    "BRANCH ISOLATION VALID: H2_STAGEHAND_RECOMPUTED <30/36 families (0 attempted, SHA not recomputed after mutation with expanded+body stripping stability>0) => H2=MEASUREMENT_INVALID; H3_WEBGYM_DIVERSE <50 sites (0/50 after 2 genuine downloads) => H3=MEASUREMENT_INVALID; H4_GATE0 <5 families >=50 transitions (0 transitions, BrowserGym missing) => MEASUREMENT_INVALID Gate0 branch; H6_WEBMCP and NC gates similarly MEASUREMENT_INVALID; does not invalidate other branches per spec",
+    "REPRESENTATION GAP: Grammar file has 9 base regex +6 Magento expanded patterns true but body regex false (no <body> stripping pattern); spec requires attribute-bounded 9 base + form_key/uenc/store/session/timestamp/nonce HTML-attribute + body regex before outerHTML SHA256; provenance records body regex missing",
+    "VALIDITY THREAT: Pip list non-empty passes minimal validity gate (pip 26.2.1) but pip freeze empty indicates venv has no installed packages; validates infrastructure measurement integrity but confirms missing substrate not broken measurement",
+    "VALIDITY THREAT: Deterministic sampling correctly re-derived inside script (proves fix for prior hardcoded list) but live capture 0 indicates sampling correctness does not unblock liveness; next run must fix substrate before testing sampling effect",
+    "NO FALSIFICATION: 0/10 relaxed Gate0 and 0/50 WebGym are MEASUREMENT_INVALID insufficient density not physics closure or cross-site negative; degenerate CI[null,null] and p null correctly flagged invalid per prereg, must not be interpreted as evidence for or against transfer",
+    "EXHAUSTIVE SCOPE: No CAP 420-task/108-site or Mind2Web 567MB LFS or WebJudge-7B exhaustive attempted per Director comparative reasoning ABANDONED low marginal info (already 0/2-0/3 MEASUREMENT_INVALID)",
+    "LEAKAGE GATE: history-conditioned PMI leakage_validOnly<40% not computable with 0 transitions; richer AX bbox/computed style not demonstrated"
+  ],
+  "unresolved": [
+    "Whether proper product-page sampling random.Random(35725763380).sample(sorted(families_ge3),10) re-derived inside script with verified get_task_start_url __SHOPPING__/__SHOPPING__/path expansion plus product-subtree anchoring heading/price/add-to-cart/main/contentinfo node_count>1 distinct SHA on path families 136/145/196/222 at 1280x720 yields discriminating within-store AX_consistency M_AX_CONSISTENCY_MEAN>=0.6 bootstrap CI lower>0.5 trajectory-grouped shuffle p<0.05 gap>=0.20 delta_vs_truncated>=0.20 variance>0 leakage<40% with richer AX bbox/computed style \u2014 UNTESTED due to Docker unreachable + Playwright missing (0 valid trees)",
+    "Whether attribute-bounded expanded+body stripping (9 base + form_key/uenc/store/session/timestamp/nonce + body regex before outerHTML SHA256 recomputed AFTER page.content()+CDP Accessibility.getFullAXTree) achieves SHA stability before==after identical before!=after on textContent/name mutation on >=20 families enabling Stagehand recomputed+stripped HIT>=0.8 MISS>=0.8 false_accept<0.05 beating NC4 p<0.05 with per-trajectory-reset sum counters M_total_f10 Pareto f=10/100 |rho_shuffled|<0.20 on 36 families derived selectors only \u2014 UNTESTED (0 families, body regex missing from grammar)",
+    "Correct M_AX_DELTA_TRUNCATED vs true [:20] baseline selectors[:20] extract_element_pattern [:20] on same 20 product-subtree pages for SURVIVES gate \u2014 UNTESTED 0 pages",
+    "WebGym 292k >=50 diverse eTLD+1 duplication CI (2000 family bootstrap) + threshold sweep 0.818-0.9479 range>=0.05 TAU0.30 QCR correct-family gating and Mind2Web-2 130-task Judge \u2014 0/50 BLOCKED by 401/404 after 2 genuine attempts with HF_TOKEN false, not negative evidence",
+    "Gate0 relaxed H>0.1 NL>=20 titles>=1 singleton<50% and strict H>0.2 NL>=50 strata>=10 with BrowserGym-core 0.14.3 multi-step >=50 transitions/family trajectory-grouped \u2014 0 transitions ENV_FAILED missing packages",
+    "Honest-cost per-trajectory-reset sum counters M_total_f10 Pareto f=10/100 |rho_shuffled|<0.20 and WebMCP prevalence 714/2147 at f=10 vs f=100 \u2014 NOT_MEASURED",
+    "Whether orthogonal H5 fallback parameterized slot syntax / AX Jaccard TAU0.30 / hierarchical-WebAPI yields within-store transfer when longest-prefix fails \u2014 H1 MEASUREMENT_INVALID so fallback not triggered UNKNOWN",
+    "Resolution of shopping_admin 184-task/42-family superset 404 on running container and addition of body regex to grammar_fulltree_358885.py to satisfy CRITICAL FIX 1 before next attempt"
+  ]
+}
