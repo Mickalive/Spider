@@ -1,0 +1,299 @@
+{
+  "M-TN-SPIDER": 1.0,
+  "M-TN-WILSON-LOWER": 0.969,
+  "M-TN-WILSON-UPPER": 1,
+  "M-FALSE-ACCEPT-SPIDER": 0.0,
+  "M-FALSE-ACCEPT-WILSON-UPPER": 0.0409,
+  "M-FALSE-ACCEPT-WILSON-LOWER": 0,
+  "M-UNKNOWN-RATE-SPIDER": 0.4286,
+  "M-ECE-SPIDER": 0.0929,
+  "M-ECE-FRESH": 0.05,
+  "M-ECE-STALE": 0.15,
+  "M-TP-SPIDER": 1.0,
+  "M-COST-SPIDER-SUM": 1440,
+  "M-COST-SPIDER-VECTOR-STD": 0.0,
+  "M-RHO-SHUFFLED-MAX": 0,
+  "M-RHO-SHUFFLED-MEAN": 0.0,
+  "M-RHO-SHUFFLED": 0,
+  "M-RHO-OBSERVED": 0,
+  "M-WITHIN-FAMILY-STD-MIN-FRESHNESS": 0.5,
+  "M-WITHIN-FAMILY-STD-MIN-JACCARD": 0.0,
+  "M-WITHIN-FAMILY-STD-MIN-COST": 0.0,
+  "M-FA-NOISE": 0.0,
+  "M-TN-NOISE": 1.0,
+  "counts": {
+    "tn": 120,
+    "fp": 0,
+    "tp": 90,
+    "fn": 0,
+    "total": 210,
+    "fresh": 120,
+    "stale": 90,
+    "total_with_noise": 360,
+    "noise_n": 150
+  },
+  "per_family": {
+    "param_header_mutation": {
+      "fresh_n": 30,
+      "stale_n": 30,
+      "tn": 30,
+      "fp": 0,
+      "tp": 30,
+      "fn": 0,
+      "tn_rate": 1.0,
+      "tp_rate": 1.0,
+      "false_accept": 0.0,
+      "wilson_tn_lower": 0.8865,
+      "wilson_tp_lower": 0.8865
+    },
+    "dom_drift": {
+      "fresh_n": 30,
+      "stale_n": 30,
+      "tn": 30,
+      "fp": 0,
+      "tp": 30,
+      "fn": 0,
+      "tn_rate": 1.0,
+      "tp_rate": 1.0,
+      "false_accept": 0.0,
+      "wilson_tn_lower": 0.8865,
+      "wilson_tp_lower": 0.8865
+    },
+    "noise_C_null": {
+      "fresh_n": 50,
+      "stale_n": 0,
+      "tn": 50,
+      "fp": 0,
+      "tp": 0,
+      "fn": 0,
+      "tn_rate": 1.0,
+      "tp_rate": null,
+      "false_accept": null,
+      "wilson_tn_lower": 0.9286,
+      "wilson_tp_lower": null
+    },
+    "noise_B_nickname": {
+      "fresh_n": 50,
+      "stale_n": 0,
+      "tn": 50,
+      "fp": 0,
+      "tp": 0,
+      "fn": 0,
+      "tn_rate": 1.0,
+      "tp_rate": null,
+      "false_accept": null,
+      "wilson_tn_lower": 0.9286,
+      "wilson_tp_lower": null
+    },
+    "cache_expiry": {
+      "fresh_n": 30,
+      "stale_n": 30,
+      "tn": 30,
+      "fp": 0,
+      "tp": 30,
+      "fn": 0,
+      "tn_rate": 1.0,
+      "tp_rate": 1.0,
+      "false_accept": 0.0,
+      "wilson_tn_lower": 0.8865,
+      "wilson_tp_lower": 0.8865
+    },
+    "stable": {
+      "fresh_n": 30,
+      "stale_n": 0,
+      "tn": 30,
+      "fp": 0,
+      "tp": 0,
+      "fn": 0,
+      "tn_rate": 1.0,
+      "tp_rate": null,
+      "false_accept": null,
+      "wilson_tn_lower": 0.8865,
+      "wilson_tp_lower": null
+    },
+    "noise_A_phone": {
+      "fresh_n": 50,
+      "stale_n": 0,
+      "tn": 50,
+      "fp": 0,
+      "tp": 0,
+      "fn": 0,
+      "tn_rate": 1.0,
+      "tp_rate": null,
+      "false_accept": null,
+      "wilson_tn_lower": 0.9286,
+      "wilson_tp_lower": null
+    }
+  },
+  "baselines": {
+    "B-NO-GUARD": {
+      "tn_rate": 1.0,
+      "false_accept": 1.0,
+      "delta_vs_spider": 1.0
+    },
+    "B-JACCARD-ONLY": {
+      "tn_rate": 1.0,
+      "false_accept": 0.6667,
+      "tp": 30,
+      "fn": 60,
+      "tn": 120,
+      "fp": 0
+    },
+    "B-HEADER-ONLY": {
+      "tn_rate": 1.0,
+      "false_accept": 0.3333,
+      "tp": 60,
+      "fn": 30,
+      "tn": 120,
+      "fp": 0
+    }
+  },
+  "ece_bins": [
+    {
+      "bin": [
+        0.0,
+        0.1
+      ],
+      "n": 0,
+      "acc": null,
+      "conf": null,
+      "contrib": 0
+    },
+    {
+      "bin": [
+        0.1,
+        0.2
+      ],
+      "n": 0,
+      "acc": null,
+      "conf": null,
+      "contrib": 0
+    },
+    {
+      "bin": [
+        0.2,
+        0.3
+      ],
+      "n": 0,
+      "acc": null,
+      "conf": null,
+      "contrib": 0
+    },
+    {
+      "bin": [
+        0.3,
+        0.4
+      ],
+      "n": 0,
+      "acc": null,
+      "conf": null,
+      "contrib": 0
+    },
+    {
+      "bin": [
+        0.4,
+        0.5
+      ],
+      "n": 0,
+      "acc": null,
+      "conf": null,
+      "contrib": 0
+    },
+    {
+      "bin": [
+        0.5,
+        0.6
+      ],
+      "n": 0,
+      "acc": null,
+      "conf": null,
+      "contrib": 0
+    },
+    {
+      "bin": [
+        0.6,
+        0.7
+      ],
+      "n": 0,
+      "acc": null,
+      "conf": null,
+      "contrib": 0
+    },
+    {
+      "bin": [
+        0.7,
+        0.8
+      ],
+      "n": 0,
+      "acc": null,
+      "conf": null,
+      "contrib": 0
+    },
+    {
+      "bin": [
+        0.8,
+        0.9
+      ],
+      "n": 90,
+      "acc": 1.0,
+      "conf": 0.85,
+      "contrib": 0.0643
+    },
+    {
+      "bin": [
+        0.9,
+        1.0
+      ],
+      "n": 120,
+      "acc": 1.0,
+      "conf": 0.95,
+      "contrib": 0.0286
+    }
+  ],
+  "wilson": {
+    "tn_lower": 0.969,
+    "tn": 120,
+    "fp": 0,
+    "n_fresh": 120,
+    "fa_upper": 0.0409
+  },
+  "cost_all_int": true,
+  "within_std": {
+    "param_header_mutation": {
+      "jaccard_std": 0.0,
+      "cost_std": 0.0,
+      "freshness_std": 0.5
+    },
+    "dom_drift": {
+      "jaccard_std": 0.25,
+      "cost_std": 0.0,
+      "freshness_std": 0.5
+    },
+    "noise_C_null": {
+      "jaccard_std": 0.0,
+      "cost_std": 0.0,
+      "freshness_std": 0.0
+    },
+    "noise_B_nickname": {
+      "jaccard_std": 0.0,
+      "cost_std": 0.0,
+      "freshness_std": 0.0
+    },
+    "cache_expiry": {
+      "jaccard_std": 0.0,
+      "cost_std": 0.0,
+      "freshness_std": 0.5
+    },
+    "stable": {
+      "jaccard_std": 0.0,
+      "cost_std": 0.0,
+      "freshness_std": 0.0
+    },
+    "noise_A_phone": {
+      "jaccard_std": 0.0,
+      "cost_std": 0.0,
+      "freshness_std": 0.0
+    }
+  },
+  "stale_rate": 0.4286
+}

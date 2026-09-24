@@ -1,0 +1,48 @@
+{
+  "survives": true,
+  "falsified_in_setting": false,
+  "measurement_invalid": false,
+  "checks": {
+    "D1_TN": true,
+    "D2_FA": true,
+    "D3_UNKNOWN": true,
+    "D4_ECE": true,
+    "D5_DELTA": true,
+    "D6_PER_FAMILY": true,
+    "D7_PC": true,
+    "D8_NC": true,
+    "D8_NC_FRESH": true,
+    "D8_NOISE_FA": 0.0,
+    "D9_HONESTY": true,
+    "D9_RHO_MAX": 0,
+    "D9_FRESH_STD_MIN": 0.5,
+    "has_per_traj_cache": true
+  },
+  "ci": {
+    "tn_95ci": [
+      1.0,
+      1.0
+    ],
+    "fa_95ci": [
+      0.0,
+      0.0
+    ],
+    "unk_95ci": [
+      0.4286,
+      0.4286
+    ],
+    "ece_95ci": [
+      0.0929,
+      0.0929
+    ],
+    "ece_fresh_95ci": [
+      0.05,
+      0.05
+    ],
+    "ece_stale_95ci": [
+      0.15,
+      0.15
+    ]
+  },
+  "stale_rate": 0.42857142857142855
+}
