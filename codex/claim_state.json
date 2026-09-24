@@ -863,6 +863,26 @@
         "claim_id": "C-RESIDUAL-NOVELTY",
         "status": "HYPOTHESIS",
         "reason": "Residual-novelty tracking unmeasured: rho_novelty_per_hit_STAGEHANDTTL and WEBMCP null because honest sum counters require shared WAL per-batch SELECT and BrowserGym full-DOM CDP AX; numpy/scipy/sklearn absent prevents family-stratified bootstrap 5000 and trajectory-grouped block-permutation 5000. Controls NC1-NC4 correctly status unknown (|rho_shuffled| per-stratum, |rho_length| pooled+per-stratum unmeasurable, within-family std>0 uncheckable). Audit confirms environment incapable of expressing effect (M_per_hit=(M_total - retrieval/tool_lookup - distill/compile - auditor)/L undefined, n_non304 null). Remains HYPOTHESIS pending distributed correlated substrate; parent bounded REJECTED (rho 0.472<0.60, |rho_length| 0.306>0.20) stays file-proxy only and is not expanded by this invalid transaction."
+      },
+      {
+        "experiment_id": "EXP-PRODUCT-35936223443",
+        "lane": "product",
+        "created_at": "2026-09-23T23:59:10.245823+00:00",
+        "decision": "MEASUREMENT_INVALID",
+        "source_commit": "e99b63e477c22cd04230b774c2a6ff9f4a5b12d2",
+        "claim_id": "C-RESIDUAL-NOVELTY",
+        "status": "HYPOTHESIS",
+        "reason": "Residual-novelty tracking unmeasured: rho_novelty_per_hit_STAGEHANDTTL and WEBMCP null because honest sum counters require shared WAL per-batch SELECT and BrowserGym full-DOM CDP AX; numpy/scipy/sklearn absent prevents family-stratified bootstrap 5000 and block-permutation 5000, rho_proxy_real and per-stratum |rho_shuffled|/|rho_length| unmeasurable, within-family std>0 uncheckable. Controls NC1-NC4 correctly unknown. Audit PASS V5 confirms environment incapable of expressing effect (M_per_hit=(M_total - retrieval/tool_lookup - distill/compile - auditor)/L undefined, n_non304 null health_gated false). Remains HYPOTHESIS pending distributed correlated substrate; parent bounded REJECTED (rho 0.472<0.60, |rho_length| 0.306>0.20) stays file-proxy only and is not expanded by this invalid transaction."
+      },
+      {
+        "experiment_id": "EXP-PRODUCT-35938367888",
+        "lane": "product",
+        "created_at": "2026-09-24T00:26:00.111279+00:00",
+        "decision": "MEASUREMENT_INVALID",
+        "source_commit": "1831e7ef4f0428b4c01043c12dd9bb19338740ca",
+        "claim_id": "C-RESIDUAL-NOVELTY",
+        "status": "HYPOTHESIS",
+        "reason": "Residual-novelty tracking unmeasured: rho_novelty_M_total StagehandTTL/WebMCP null because honest sum counters require shared WAL per-batch SELECT and BrowserGym full-DOM CDP AX; numpy/scipy/sklearn absent prevents family-stratified bootstrap 5000 and block-permutation 5000, rho_proxy_real and per-stratum |rho_shuffled|/|rho_length| unmeasurable, within-family std>0 uncheckable. Controls NC-DISTRIBUTED-SHUFFLE-PIPELINE-SINGLE correctly UNKNOWN (audit validity_findings V3). Remains HYPOTHESIS pending distributed correlated substrate; parent bounded REJECTED on file-proxy (rho 0.472<0.60, |rho_length| 0.306>0.20) stays file-proxy only and is not expanded by this invalid transaction."
       }
     ],
     "C-SEMANTIC-RESOLVE": [
@@ -1577,6 +1597,36 @@
         "claim_id": "C-FRESHNESS",
         "status": "HYPOTHESIS",
         "reason": "Correlated TTL/ETag freshness gating unmeasured: fresh_at_n0_rate (~1.0 via HEAD If-None-Match ETag W/body_sha) and stale_at_n0.25_rate (~50% stale 304) null; required correlated probe saving>=30% accuracy>=0.90 falseAccept<0.05 vs seeded-42 random 0.53 decoupled null not exercised (NC4 unknown, probe_correlated_vs_random_delta null, n_non304 null). Distributed WAL TN>=0.85 vs per-node 0.667 contrast not computable. PC2 kernel dot-regex fix is the only outcome that succeeded (src/spider/kernel.py sha d926279d5ee14a044a2f13b8abc09202df9f5adb9e86feaadeb61818a15f4038 5/5 unittest, manual dotted bind 2/2 PASS) but does not satisfy freshness gate. Remains HYPOTHESIS pending real conditional probe on nginx 1.24.0 + gunicorn 23.0.0 + HS256 PyJWT 2.14.0 with n_non304>=800."
+      },
+      {
+        "experiment_id": "EXP-PRODUCT-35936223443",
+        "lane": "product",
+        "created_at": "2026-09-23T23:59:10.245823+00:00",
+        "decision": "MEASUREMENT_INVALID",
+        "source_commit": "e99b63e477c22cd04230b774c2a6ff9f4a5b12d2",
+        "claim_id": "C-FRESHNESS",
+        "status": "HYPOTHESIS",
+        "reason": "Correlated TTL/ETag freshness gating unmeasured: fresh_at_n0_rate (~1.0 via HEAD If-None-Match ETag W/body_sha) and stale_at_n0.25_rate (~50% stale 304) null; required correlated probe saving>=30% accuracy>=0.90 falseAccept<0.05 vs seeded-42 random 0.53 decoupled null contrast not exercised (NC4 unknown, probe_correlated_vs_random_delta null, n_non304 null health_gated false). Distributed WAL TN>=0.85 vs per-node 0.667 contrast not computable. PC2 kernel dot-regex fix is only outcome that succeeded (src/spider/kernel.py sha d926279d5ee14a044a2f13b8abc09202df9f5adb9e86feaadeb61818a15f4038 3/3 unittest PASS 2/2 manual dotted bind PASS) but does not satisfy freshness gate. Remains HYPOTHESIS pending real conditional probe on nginx 1.24.0 + gunicorn 23.0.0 + HS256 PyJWT 2.14.0 with n_non304>=800 single-worker sticky."
+      },
+      {
+        "experiment_id": "EXP-GRAPH-35937576511",
+        "lane": "graph",
+        "created_at": "2026-09-24T00:15:41.389212+00:00",
+        "decision": "MEASUREMENT_INVALID",
+        "source_commit": "43a03d3f739d31f6756abea5f3cb35435a9f10c2",
+        "claim_id": "C-FRESHNESS",
+        "status": "MEASUREMENT_INVALID",
+        "reason": "Audit status MEASUREMENT_INVALID producer_claim_supported=false overrides producer COMPLETE/FALSIFIES. Frozen honesty gates V3-V6 do not pass under frozen text: V2/V3/V5-cost fail - cost counter fabricated via traj_idx%2 parity offset (execute_single_resource_staleness.py:272-281 comment 'To ensure within-family std>0') giving cost 4/5 and std 0.4714/0.5; honest constant 4 would give std 0 and trigger MEASUREMENT_INVALID per spec decision_rule. V4 rho metric identity violated - prereg md:84 defines M-RHO-SHUFFLED as max over 1000 trajectory-grouped perms, producer reported mean 0.0578 under that id while max request-level 0.2147 >=0.20 violates gate; correct trajectory-grouped max 0.1514 would pass if computed but was not (code 509-521 independent shuffle). V5 Jaccard std 0.0 for 2/3 drift families, freshness std 0.20 is derived confidence not raw score. NC-NOISE-IMMUNITY not executed (no optional-field churn/null bodies, all fresh {email,id,name}). Decision rule SURVIVES arithmetically impossible: D2 FA<=0.10 forces >=81/90 stales UNKNOWN => UNKNOWN >=0.386 contradicting D3 <=0.15, and D4 ECE<=0.15 impossible under 0.9/0.5 scheme floor 0.2714 (observed 0.2714 UNKNOWN 0.4286). Therefore FALSIFIES conveys no discriminating information. Recomputed detection TN 1.0 (120/120 Wilson lower 0.969) FA 0.0 (0/90 Wilson upper 0.0409) per-family 1.0 lower 0.8865 vs B-NO-GUARD FA 1.0 delta 1.0 and ablations 0.6667/0.3333 are verified observations but only bounded synthetic POC, not a validated freshness capability. C-FRESHNESS remains HYPOTHESIS globally (codex claim_state prior MEASUREMENT_INVALID from EXP-PRODUCT-35936223443)."
+      },
+      {
+        "experiment_id": "EXP-PRODUCT-35938367888",
+        "lane": "product",
+        "created_at": "2026-09-24T00:26:00.111279+00:00",
+        "decision": "MEASUREMENT_INVALID",
+        "source_commit": "1831e7ef4f0428b4c01043c12dd9bb19338740ca",
+        "claim_id": "C-FRESHNESS",
+        "status": "HYPOTHESIS",
+        "reason": "Correlated TTL/ETag freshness gating unmeasured: fresh_at_n0_rate (~1.0 via HEAD If-None-Match ETag W/body_sha) and stale_at_n0.25_rate (~50% stale 304) null; required correlated probe saving>=30% accuracy>=0.90 falseAccept<0.05 vs seeded-42 random 0.53 decoupled null contrast not exercised (NC4 unknown, probe_correlated_vs_random_delta null, n_non304 null health_gated false). Distributed WAL TN>=0.85 vs per-node 0.667 contrast not computable. Kernel dot-regex fix not applied this transaction (HEAD sha 46929b3a951df48d7f9d1fd850871073c0d91c1868aa117e13d389fe274e8d61 missing dot, required r'\\$\\{[A-Za-z_][A-Za-z0-9_\\.]*\\}' patch d926279d), disclosed as secondary validity issue (audit V6). Remains HYPOTHESIS pending real conditional probe on nginx 1.24.0 + gunicorn 23.0.0 + HS256 PyJWT 2.14.0 with n_non304>=800 single-worker sticky."
       }
     ],
     "C-PARAM-INHERIT": [
@@ -3037,6 +3087,26 @@
         "claim_id": "C-PRODUCT-ECON",
         "status": "HYPOTHESIS",
         "reason": "No discriminating measurement performed: distributed HS256 shared-WAL substrate (/tmp/spider-runtime/shared.db and /tmp/spider-runtime-35932494797/shared.db WAL per-batch SELECT, HS256 PyJWT 2.14.0, 2x gunicorn 23.0.0 + nginx 1.24.0 round-robin sticky hash, health-gated URL-sticky real If-None-Match/ETag W/body_sha 200 vs 304 n_non304>=800), Docker BrowserGym 0.14.3 CDP AX 2000-node 1280x720 full-DOM, and gpt-4o-mini 15-step tokens/browser+latency (rho_proxy_real) are all absent per 18 raw observations (artifacts/substrate_audit.json OBS-1..OBS-18 sha 130530eeb395227a96e102cd40596c88f58517e60de212cd70de24ac6c3d618a). Per frozen spec measurement_validity[3][5], prereg sections 4/7 and decision_rule precedence, this is MEASUREMENT_INVALID not FALSIFIED. All primary metrics remain explicit null (per_hit ratios StagehandTTL/WebMCP vs RAG at n0/n0.25, rho_proxy_real, rho_novelty, rho_length, M_total_f10, success_n0, UNKNOWN_precision, ECE) not zero; audit PASS producer_claim_supported true independently recomputed absence and confirms producer correctly left metrics null and honored prohibition on file-proxy fallback (no n*3200, no seeded-42 proxy economics). Bounded ceiling remains parent EXP-PRODUCT-35916130502 FALSIFIED on file-proxy 192/36 orthogonal alias families at honest f=10 (StagehandTTL per_hit 1.045 CI[1.034,1.056]>0.85 at n0 fails gate, rho 0.472<0.60 |rho_length| 0.306>0.20, Pareto M_total_f10 WebMCP 897 vs RAG 3703 hidden by per_hit artifact). No evidence for/against distributed correlated freshness added. Product discipline: UNKNOWN remains valid, no promotion without rho_proxy_real>=0.50 per-stratum |rho_shuffled|<0.20 and distributed TN>=0.85 n_non304>=800."
+      },
+      {
+        "experiment_id": "EXP-PRODUCT-35936223443",
+        "lane": "product",
+        "created_at": "2026-09-23T23:59:10.245823+00:00",
+        "decision": "MEASUREMENT_INVALID",
+        "source_commit": "e99b63e477c22cd04230b774c2a6ff9f4a5b12d2",
+        "claim_id": "C-PRODUCT-ECON",
+        "status": "HYPOTHESIS",
+        "reason": "No discriminating measurement performed: distributed HS256 shared-WAL substrate (shared.db absent at both canonical paths and anywhere under /tmp, PyJWT absent, gunicorn absent, nginx binary-only 1.24.0 no upstream single-worker sticky not configured, per-batch SELECT unrunnable), Docker BrowserGym 0.14.3 CDP AX 2000-node 1280x720 Playwright 1.63.0 absent (0 browsergym images, browsergym/playwright python packages absent), gpt-4o-mini key absent, numpy/scipy/sklearn/pandas absent so family-stratified bootstrap 5000 / trajectory-grouped block-permutation 5000 and TFIDF Jaccard TAU0.30 uncomputable per 19 raw observations artifacts/substrate_audit.json OBS-1..OBS-19 sha af30657e0ade7a6433308f9ea7ae9550e5fa3f55faf3e9e5a423b367ad6bb5b7. Per frozen spec measurement_validity[3][5], prereg section 5 decision_rule precedence 'PC failure or distributed substrate unavailable/single-worker sticky violated or n_non304<800 or If-None-Match not exercised or health-gate failed -> MEASUREMENT_INVALID irrespective of economics' correctly triggered. All primary metrics remain explicit null (per_hit ratios StagehandTTL/WebMCP vs RAG at n0/n0.25, rho_proxy_real, rho_novelty, rho_length, M_total_f10, success_n0, UNKNOWN_precision, ECE) not zero. Audit PASS producer_claim_supported true independently recomputed null (recomputed_metrics primary all null) and confirms producer correctly left metrics null, honored prohibition on file-proxy fallback (no n*3200, no seeded-42 random staleness proxy, no branch_traces fabricated) and that PC2-kernel subcheck PASS is only surviving instrument. Bounded ceiling remains parent EXP-PRODUCT-35916130502 FALSIFIED on file-proxy 192/36 orthogonal alias families at honest f=10 (StagehandTTL per_hit 1.045 CI[1.034,1.056]>0.85 at n0 fails gate requires <=0.85 at BOTH n0 and n0.25, WebMCP 1.032>0.85 at n0 and 0.88>0.85 at f=100, rho_novelty 0.472<0.60 |rho_length| 0.306>0.20, Pareto M_total_f10 WebMCP 897 vs RAG 3703 vs Cold 5497 hidden by per_hit artifact where both hit same 50-tok verify). No evidence for/against distributed correlated freshness added; C-PRODUCT-ECON stays HYPOTHESIS."
+      },
+      {
+        "experiment_id": "EXP-PRODUCT-35938367888",
+        "lane": "product",
+        "created_at": "2026-09-24T00:26:00.111279+00:00",
+        "decision": "MEASUREMENT_INVALID",
+        "source_commit": "1831e7ef4f0428b4c01043c12dd9bb19338740ca",
+        "claim_id": "C-PRODUCT-ECON",
+        "status": "HYPOTHESIS",
+        "reason": "No discriminating measurement performed: distributed HS256 shared-WAL single-worker sticky health-gated $request_uri substrate entirely absent per 19 raw observations (substrate_audit OBS-1..OBS-19 sha verification, shared.db absent at both canonical paths, PyJWT absent, gunicorn absent, nginx binary-only 1.24.0 no upstream single-worker sticky, per-batch SELECT unrunnable), Docker BrowserGym 0.14.3 CDP AX 2000-node 1280x720 Playwright 1.63.0 absent, gpt-4o-mini key absent, numpy/scipy/sklearn/pandas absent so family-stratified bootstrap 5000 / block-permutation 5000 and TFIDF Jaccard TAU0.30 uncomputable. Per frozen spec measurement_validity[3][5], prereg section 5 and decision_rule precedence 'PC failure or distributed substrate unavailable/single-worker sticky violated or n_non304<800 or If-None-Match not exercised or health-gate failed -> MEASUREMENT_INVALID irrespective of economics' correctly triggered (result.json status MEASUREMENT_INVALID outcome INCONCLUSIVE metrics {} controls PC-DISTRIBUTED-PARETO-CORRELATED-SINGLE pass_fail UNKNOWN, audit.json status PASS producer_claim_supported true recomputed_metrics primary all null). Producer correctly left all primary metrics explicit null (per_hit ratios StagehandTTL/WebMCP vs RAG at n0/n0.25, rho_proxy_real, rho_novelty, rho_length, M_total_f10/f100, success_n0, UNKNOWN_precision, ECE) not zero, honored prohibition on file-proxy fallback (no n*3200, no seeded-42 random staleness proxy, no branch_traces fabricated). Bounded ceiling remains parent EXP-PRODUCT-35916130502 FALSIFIED on file-proxy 192/36 orthogonal alias families at honest f=10 (StagehandTTL per_hit 1.045 CI[1.034,1.056]>0.85 at n0 fails gate, WebMCP 1.032>0.85 at n0 and 0.88>0.85 at f=100, rho_novelty 0.472<0.60 |rho_length| 0.306>0.20, Pareto M_total_f10 WebMCP 897 vs RAG 3703 vs Cold 5497 hidden by per_hit artifact). No evidence for/against distributed correlated freshness added; C-PRODUCT-ECON stays HYPOTHESIS (registry sha 3511a788)."
       }
     ],
     "C-MEAS-VALID": [
@@ -3954,14 +4024,14 @@
       "reason": "MEASUREMENT_INVALID per independent audit status MEASUREMENT_INVALID producer_claim_supported=false. Frozen scope requires real BrowserGym WebShop/TodoMVC at locked 1280x720 with exact Gamma-ratio DM log-BF/BC via scipy gammaln/polygamma and |perm-analytic|<0.03, |analytic|<0.1, non-degenerate |A|>1. Producer fell back to locally-hosted 6-state overlapping proxy (N=2000, dom_bytes 443 a11y 3971 viewport 1280x720 verified) not BrowserGym heterogeneity (audit VF3). Heuristic analytic analytic_dm_mean_std_exact uses magic constants 0.015/0.035/0.005/0.35 not exact closed-form (VF1, execute_35903177055.py:189-214), independent/IID consistency 0.0357/0.0321 >0.03 fails (VF6). Action degenerate |A|=1 Counter click:button|next 2000 (VF2) makes action-conditioned CMI and barrier clustering vacuous. Positive control BC 0.171 p_bonf 0.00799 <0.30 and >0.001 fails frozen G0 (VF4), timescale tau_corr 0.353 <<5 fails orthogonal channel (VF7), R_visual/computed/AX bit-identical collinerarity inflates n_tests (VF5), TF-IDF k5 baseline hardcoded BC 0.0 due to missing dom_before_text (baseline_findings INVALID_WEAK_BASELINE) and Markov -0.003 hardcoded, so gap>=0.05 artifactual. No SURVIVES/FALSIFIED justified; C-WEB-DYNAMICS remains HYPOTHESIS UNMEASURED on real BrowserGym; physics barrier/timescale program remains PARKED."
     },
     "C-RESIDUAL-NOVELTY": {
-      "experiment_id": "EXP-PRODUCT-35932494797",
+      "experiment_id": "EXP-PRODUCT-35938367888",
       "lane": "product",
-      "created_at": "2026-09-23T23:13:48.119851+00:00",
+      "created_at": "2026-09-24T00:26:00.111279+00:00",
       "decision": "MEASUREMENT_INVALID",
-      "source_commit": "31e453f42ec6edafbc2afb7177fd3b2a2e287020",
+      "source_commit": "1831e7ef4f0428b4c01043c12dd9bb19338740ca",
       "claim_id": "C-RESIDUAL-NOVELTY",
       "status": "HYPOTHESIS",
-      "reason": "Residual-novelty tracking unmeasured: rho_novelty_per_hit_STAGEHANDTTL and WEBMCP null because honest sum counters require shared WAL per-batch SELECT and BrowserGym full-DOM CDP AX; numpy/scipy/sklearn absent prevents family-stratified bootstrap 5000 and trajectory-grouped block-permutation 5000. Controls NC1-NC4 correctly status unknown (|rho_shuffled| per-stratum, |rho_length| pooled+per-stratum unmeasurable, within-family std>0 uncheckable). Audit confirms environment incapable of expressing effect (M_per_hit=(M_total - retrieval/tool_lookup - distill/compile - auditor)/L undefined, n_non304 null). Remains HYPOTHESIS pending distributed correlated substrate; parent bounded REJECTED (rho 0.472<0.60, |rho_length| 0.306>0.20) stays file-proxy only and is not expanded by this invalid transaction."
+      "reason": "Residual-novelty tracking unmeasured: rho_novelty_M_total StagehandTTL/WebMCP null because honest sum counters require shared WAL per-batch SELECT and BrowserGym full-DOM CDP AX; numpy/scipy/sklearn absent prevents family-stratified bootstrap 5000 and block-permutation 5000, rho_proxy_real and per-stratum |rho_shuffled|/|rho_length| unmeasurable, within-family std>0 uncheckable. Controls NC-DISTRIBUTED-SHUFFLE-PIPELINE-SINGLE correctly UNKNOWN (audit validity_findings V3). Remains HYPOTHESIS pending distributed correlated substrate; parent bounded REJECTED on file-proxy (rho 0.472<0.60, |rho_length| 0.306>0.20) stays file-proxy only and is not expanded by this invalid transaction."
     },
     "C-SEMANTIC-RESOLVE": {
       "experiment_id": "EXP-FRONTIER-35921359961",
@@ -3974,14 +4044,14 @@
       "reason": "MEASUREMENT_INVALID per frozen falsifier: PC-BROWSERGYM-HEALTH FAIL (live_available false, census 4 envs x3 retries all ModuleNotFoundError browsergym/playwright/agentlab not installed, synthetic fallback fixture sha 83b7c52dd17848fc8c70d1c629b8d541788e0438249623ea783d2df364467319 only) and PC-HONEST-COST-SANITY FAIL (permutation |rho_shuffled| 0.23038 for H-HIERARCHICAL-CF p=0.176 exceeds 0.20 threshold). PC-OPENAPI-COVERAGE and PC-ROUTING-DIFF pass only on synthetic /random/alias* paths (14 spec paths prefix_covered 40/40, 14/58 pairs differ via version-collapse) not on live WebArena-Verified v2/WebGym 300k task paths per Director mandate. All single-candidate correct-family pipelines identical 20/40=0.500 Wilson [0.352,0.648] per-family header 10/10 body 10/10 auth 0/10 mixed 0/10 ECE 0.22-0.24 (B-EXACT-MATCH, B-FLAT-TFIDF-K5-CF, H-HIERARCHICAL-CF, B-COMPILED-DSM, B-ENDPOINT-CATALOG) with McNemar p=1.0 vs each other, replicating bounded 21/40=0.525 synthetic ceiling. Joint exploratory B-JOINT-FETCH 40/40=1.0 Wilson [0.912,0.912] mixed 10/10 replicates prior EXP-FRONTIER-35903208514 and EXP-FRONTIER-35915275774 synthetic joint 40/40 but remains synthetic-only with joint_manifest selection_log=[] complementary_frac=0.0. Audit MEASUREMENT_INVALID producer_claim_supported false recomputes all pooled/per-family/ECE/honest_cost exactly and confirms no valid live inference. No confirmatory live discrimination of O(1) DSM-IR vs endpoint-catalog vs hierarchical vs flat justified; synthetic EXPERIMENTAL ceiling preserved, no VALIDATED or PRODUCT_CORE."
     },
     "C-FRESHNESS": {
-      "experiment_id": "EXP-PRODUCT-35932494797",
+      "experiment_id": "EXP-PRODUCT-35938367888",
       "lane": "product",
-      "created_at": "2026-09-23T23:13:48.119851+00:00",
+      "created_at": "2026-09-24T00:26:00.111279+00:00",
       "decision": "MEASUREMENT_INVALID",
-      "source_commit": "31e453f42ec6edafbc2afb7177fd3b2a2e287020",
+      "source_commit": "1831e7ef4f0428b4c01043c12dd9bb19338740ca",
       "claim_id": "C-FRESHNESS",
       "status": "HYPOTHESIS",
-      "reason": "Correlated TTL/ETag freshness gating unmeasured: fresh_at_n0_rate (~1.0 via HEAD If-None-Match ETag W/body_sha) and stale_at_n0.25_rate (~50% stale 304) null; required correlated probe saving>=30% accuracy>=0.90 falseAccept<0.05 vs seeded-42 random 0.53 decoupled null not exercised (NC4 unknown, probe_correlated_vs_random_delta null, n_non304 null). Distributed WAL TN>=0.85 vs per-node 0.667 contrast not computable. PC2 kernel dot-regex fix is the only outcome that succeeded (src/spider/kernel.py sha d926279d5ee14a044a2f13b8abc09202df9f5adb9e86feaadeb61818a15f4038 5/5 unittest, manual dotted bind 2/2 PASS) but does not satisfy freshness gate. Remains HYPOTHESIS pending real conditional probe on nginx 1.24.0 + gunicorn 23.0.0 + HS256 PyJWT 2.14.0 with n_non304>=800."
+      "reason": "Correlated TTL/ETag freshness gating unmeasured: fresh_at_n0_rate (~1.0 via HEAD If-None-Match ETag W/body_sha) and stale_at_n0.25_rate (~50% stale 304) null; required correlated probe saving>=30% accuracy>=0.90 falseAccept<0.05 vs seeded-42 random 0.53 decoupled null contrast not exercised (NC4 unknown, probe_correlated_vs_random_delta null, n_non304 null health_gated false). Distributed WAL TN>=0.85 vs per-node 0.667 contrast not computable. Kernel dot-regex fix not applied this transaction (HEAD sha 46929b3a951df48d7f9d1fd850871073c0d91c1868aa117e13d389fe274e8d61 missing dot, required r'\\$\\{[A-Za-z_][A-Za-z0-9_\\.]*\\}' patch d926279d), disclosed as secondary validity issue (audit V6). Remains HYPOTHESIS pending real conditional probe on nginx 1.24.0 + gunicorn 23.0.0 + HS256 PyJWT 2.14.0 with n_non304>=800 single-worker sticky."
     },
     "C-PARAM-INHERIT": {
       "experiment_id": "EXP-GRAPH-35932480731",
@@ -4024,14 +4094,14 @@
       "reason": "Bounded FALSIFIED same setting: QCR frozen bank TFIDF Jaccard TAU 0.30 same ranker for all systems shows RAG-EMBED proportional retrievability at n0.25 while SPIDER parameterized binding is gated to UNKNOWN, so post-retrieval parameterized inheritance advantage (SPIDER/RAG <=0.85) not demonstrated under QCR. Audit finds RAG per_hit 203 < SPIDER 320 at n0.25, SPIDER does not beat retrievable RAG or TERX at partial novelty. No real LLM selection accuracy or real LLM cost measured. C-LLM-INHERIT remains HYPOTHESIS bounded; no evidence for cross-site LLM inheritance transfer on this census."
     },
     "C-PRODUCT-ECON": {
-      "experiment_id": "EXP-PRODUCT-35932494797",
+      "experiment_id": "EXP-PRODUCT-35938367888",
       "lane": "product",
-      "created_at": "2026-09-23T23:13:48.119851+00:00",
+      "created_at": "2026-09-24T00:26:00.111279+00:00",
       "decision": "MEASUREMENT_INVALID",
-      "source_commit": "31e453f42ec6edafbc2afb7177fd3b2a2e287020",
+      "source_commit": "1831e7ef4f0428b4c01043c12dd9bb19338740ca",
       "claim_id": "C-PRODUCT-ECON",
       "status": "HYPOTHESIS",
-      "reason": "No discriminating measurement performed: distributed HS256 shared-WAL substrate (/tmp/spider-runtime/shared.db and /tmp/spider-runtime-35932494797/shared.db WAL per-batch SELECT, HS256 PyJWT 2.14.0, 2x gunicorn 23.0.0 + nginx 1.24.0 round-robin sticky hash, health-gated URL-sticky real If-None-Match/ETag W/body_sha 200 vs 304 n_non304>=800), Docker BrowserGym 0.14.3 CDP AX 2000-node 1280x720 full-DOM, and gpt-4o-mini 15-step tokens/browser+latency (rho_proxy_real) are all absent per 18 raw observations (artifacts/substrate_audit.json OBS-1..OBS-18 sha 130530eeb395227a96e102cd40596c88f58517e60de212cd70de24ac6c3d618a). Per frozen spec measurement_validity[3][5], prereg sections 4/7 and decision_rule precedence, this is MEASUREMENT_INVALID not FALSIFIED. All primary metrics remain explicit null (per_hit ratios StagehandTTL/WebMCP vs RAG at n0/n0.25, rho_proxy_real, rho_novelty, rho_length, M_total_f10, success_n0, UNKNOWN_precision, ECE) not zero; audit PASS producer_claim_supported true independently recomputed absence and confirms producer correctly left metrics null and honored prohibition on file-proxy fallback (no n*3200, no seeded-42 proxy economics). Bounded ceiling remains parent EXP-PRODUCT-35916130502 FALSIFIED on file-proxy 192/36 orthogonal alias families at honest f=10 (StagehandTTL per_hit 1.045 CI[1.034,1.056]>0.85 at n0 fails gate, rho 0.472<0.60 |rho_length| 0.306>0.20, Pareto M_total_f10 WebMCP 897 vs RAG 3703 hidden by per_hit artifact). No evidence for/against distributed correlated freshness added. Product discipline: UNKNOWN remains valid, no promotion without rho_proxy_real>=0.50 per-stratum |rho_shuffled|<0.20 and distributed TN>=0.85 n_non304>=800."
+      "reason": "No discriminating measurement performed: distributed HS256 shared-WAL single-worker sticky health-gated $request_uri substrate entirely absent per 19 raw observations (substrate_audit OBS-1..OBS-19 sha verification, shared.db absent at both canonical paths, PyJWT absent, gunicorn absent, nginx binary-only 1.24.0 no upstream single-worker sticky, per-batch SELECT unrunnable), Docker BrowserGym 0.14.3 CDP AX 2000-node 1280x720 Playwright 1.63.0 absent, gpt-4o-mini key absent, numpy/scipy/sklearn/pandas absent so family-stratified bootstrap 5000 / block-permutation 5000 and TFIDF Jaccard TAU0.30 uncomputable. Per frozen spec measurement_validity[3][5], prereg section 5 and decision_rule precedence 'PC failure or distributed substrate unavailable/single-worker sticky violated or n_non304<800 or If-None-Match not exercised or health-gate failed -> MEASUREMENT_INVALID irrespective of economics' correctly triggered (result.json status MEASUREMENT_INVALID outcome INCONCLUSIVE metrics {} controls PC-DISTRIBUTED-PARETO-CORRELATED-SINGLE pass_fail UNKNOWN, audit.json status PASS producer_claim_supported true recomputed_metrics primary all null). Producer correctly left all primary metrics explicit null (per_hit ratios StagehandTTL/WebMCP vs RAG at n0/n0.25, rho_proxy_real, rho_novelty, rho_length, M_total_f10/f100, success_n0, UNKNOWN_precision, ECE) not zero, honored prohibition on file-proxy fallback (no n*3200, no seeded-42 random staleness proxy, no branch_traces fabricated). Bounded ceiling remains parent EXP-PRODUCT-35916130502 FALSIFIED on file-proxy 192/36 orthogonal alias families at honest f=10 (StagehandTTL per_hit 1.045 CI[1.034,1.056]>0.85 at n0 fails gate, WebMCP 1.032>0.85 at n0 and 0.88>0.85 at f=100, rho_novelty 0.472<0.60 |rho_length| 0.306>0.20, Pareto M_total_f10 WebMCP 897 vs RAG 3703 vs Cold 5497 hidden by per_hit artifact). No evidence for/against distributed correlated freshness added; C-PRODUCT-ECON stays HYPOTHESIS (registry sha 3511a788)."
     },
     "C-MEAS-VALID": {
       "experiment_id": "EXP-PHYSICS-35915247766",
