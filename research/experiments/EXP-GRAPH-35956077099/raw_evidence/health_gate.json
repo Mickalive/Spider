@@ -1,0 +1,10 @@
+{
+  "WAL_EXISTS": true,
+  "WAL_MODE": true,
+  "DISTINCT_X_WORKER_PIDS": false,
+  "X_WORKER_PID_SET": [],
+  "JWT_VERIFY_PASS": false,
+  "304_OPERATIONAL": false,
+  "WAL_PROPAGATION": false,
+  "n_health_checks_passed": 1
+}

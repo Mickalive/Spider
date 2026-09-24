@@ -1,10 +1,10 @@
 {
-  "status": "failure",
-  "model": "opencode/muse-spark-1.3-contributor-free",
-  "attempt": 8,
-  "exit_code": 76,
-  "category": "output-missing-pool-exhausted",
-  "github_run_id": "35956077099",
+  "status": "success",
+  "model": "opencode/ling-3.0-flash-fin-free",
+  "attempt": 6,
+  "exit_code": 0,
+  "category": "ok",
+  "github_run_id": "35961210682",
   "github_run_attempt": "1",
-  "recorded_at": "2026-09-24T04:58:43.737129+00:00"
+  "recorded_at": "2026-09-24T06:55:40.689449+00:00"
 }
