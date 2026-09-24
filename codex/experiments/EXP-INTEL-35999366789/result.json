@@ -1,0 +1,619 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-35999366789",
+  "lane": "intel",
+  "status": "COMPLETE",
+  "outcome": "MIXED",
+  "metrics": {
+    "M_A_MANIFEST_SHA256": "d65275660814663375028e9017e1f929e3c38321041b125795e2713b52243d30",
+    "M_A_MANIFEST_BYTES": 927596,
+    "M_A_DOCKER_DIGEST_VALID": true,
+    "M_A_DOCKER_DIGEST": "sha256:3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb",
+    "M_A_DOCKER_DIGEST_64HEX_LEN": 64,
+    "M_A_CENSUS_TOTAL_TASKS": 812,
+    "M_A_FAMILIES_GE3": 36,
+    "M_A_SHOPPING": 192,
+    "M_A_PRODUCT_PAGE_FAMILIES_COUNT": 4,
+    "M_A_PRODUCT_PAGE_FAMILIES_LIST": [
+      136,
+      145,
+      196,
+      222
+    ],
+    "M_A_DETERMINISTIC_S1": [
+      191,
+      180,
+      162,
+      197,
+      153,
+      213,
+      163,
+      137,
+      136,
+      222
+    ],
+    "M_A_DETERMINISTIC_S2": [
+      191,
+      180,
+      162,
+      197,
+      153,
+      213,
+      163,
+      137,
+      136,
+      222
+    ],
+    "M_A_DETERMINISTIC_S1_EQUALS_S2": true,
+    "M_A_DETERMINISTIC_SEED": 35725763380,
+    "M_A_DETERMINISTIC_OPERATOR": "random.Random(35725763380).sample(sorted_families_ge3, 10) x2 with identical seed reset",
+    "M_A_CONSTRUCTIBLE_LIST": [
+      "fam136",
+      "fam145",
+      "fam196",
+      "fam222"
+    ],
+    "M_A_CONSTRUCTIBLE_COUNT": 4,
+    "M_A_CONSTRUCTIBLE_GATE_10": false,
+    "M_A_ANCHORING_PER_FAMILY": {
+      "fam136": {
+        "heading": 2,
+        "price": 6,
+        "add_to_cart": 2,
+        "main": 365,
+        "contentinfo": 31,
+        "sha_identical": true,
+        "sha_mutated": true
+      },
+      "fam145": {
+        "heading": 2,
+        "price": 6,
+        "add_to_cart": 2,
+        "main": 290,
+        "contentinfo": 31,
+        "sha_identical": true,
+        "sha_mutated": true
+      },
+      "fam196": {
+        "heading": 2,
+        "price": 6,
+        "add_to_cart": 2,
+        "main": 226,
+        "contentinfo": 31,
+        "sha_identical": true,
+        "sha_mutated": true
+      },
+      "fam222": {
+        "heading": 2,
+        "price": 6,
+        "add_to_cart": 2,
+        "main": 249,
+        "contentinfo": 31,
+        "sha_identical": true,
+        "sha_mutated": true
+      }
+    },
+    "M_A_AX_VALID_CAPTURES": 12,
+    "M_AX_FAMILIES_FOUND": 4,
+    "M_AX_NODES_MEDIAN": 688,
+    "M_AX_NODES_MIN": 627,
+    "M_DOM_BYTES_MEDIAN": 200413,
+    "M_DOM_BYTES_MIN": 195052,
+    "M_SHA_STABILITY_IDENTICAL": true,
+    "M_SHA_MUTATION_CHANGED": true,
+    "M_AX_RICHER_BBOX_VIA_EVALUATE": {
+      "present_5_of_5_anchors": "12/12",
+      "bool": true
+    },
+    "M_WEBGYM_DIVERSE_N": null,
+    "M_WEBGYM_DIVERSE_ETLD_PLUS1_DISTINCT": null,
+    "M_WEBGYM_DUPLICATION_PREVALENCE": null,
+    "M_WEBGYM_DUPLICATION_CI_LOWER": null,
+    "M_WEBGYM_DUPLICATION_CI_UPPER": null,
+    "M_WEBGYM_THRESHOLD_SWEEP_0818": null,
+    "M_WEBGYM_THRESHOLD_SWEEP_09479": null,
+    "M_WEBGYM_SWEEP_RANGE": null,
+    "M_WEBGYM_STATUS": "UNAVAILABLE",
+    "M_WEBGYM_REASON": "HF_TOKEN absent (hf_token_present=false); 2 genuine HF attempts logged with HTTP 401 on both (artifacts/raw/hf_webgym_manifest_attempts.json). Per prereg MV5, UNAVAILABLE with 2 logged attempts does not trigger MEASUREMENT_INVALID and is not assumed zero; H_A partially bounded same as parent UNRES-WEBGYM.",
+    "M_SRC_HF_STATUS": [
+      401,
+      401
+    ],
+    "M_SRC_DOCKER_STATUS": {
+      "hub_api": [
+        200,
+        200
+      ],
+      "hub_digest_match": [
+        true,
+        true
+      ],
+      "images_digest_match": true,
+      "pull_returncodes": [
+        0,
+        0
+      ],
+      "health": [
+        200,
+        200,
+        200
+      ]
+    },
+    "M_SRC_DOCKER_SUCCESS": true,
+    "M_SRC_HF_SUCCESS": false,
+    "M_COV_AGT_DSM": {
+      "coverage": 0.75,
+      "ci_lower": 0.625,
+      "ci_upper": 0.875,
+      "ci_width": 0.25,
+      "degenerate": false
+    },
+    "M_COV_TRACE": {
+      "coverage": 0.25,
+      "ci_lower": 0.125,
+      "ci_upper": 0.375,
+      "degenerate": false
+    },
+    "M_COV_BMEM": {
+      "coverage": 0.0,
+      "ci_lower": 0.0,
+      "ci_upper": 0.0,
+      "degenerate": true
+    },
+    "M_COV_SPIDER_ALIAS": {
+      "coverage": 0.925,
+      "ci_lower": 0.85,
+      "ci_upper": 1.0,
+      "ci_width": 0.15,
+      "degenerate": false
+    },
+    "M_COV_SPIDER_ROUTING": {
+      "coverage": 1.0,
+      "degenerate": true
+    },
+    "M_COV_SPIDER_WEBMCP": {
+      "coverage": 1.0,
+      "degenerate": true
+    },
+    "M_COV_COLD": {
+      "coverage": 0.25,
+      "ci_lower": 0.125,
+      "ci_upper": 0.375,
+      "degenerate": false
+    },
+    "M_COV_DSM_NOHITL": {
+      "coverage": 0.25,
+      "ci_lower": 0.125,
+      "ci_upper": 0.375,
+      "degenerate": false
+    },
+    "M_TOTAL_F10_AGT_DSM": {
+      "m_total_f10": 22.6,
+      "ci_lower": 19.8,
+      "ci_upper": 26.0,
+      "ci_width": 6.2
+    },
+    "M_TOTAL_F10_TRACE": {
+      "m_total_f10": 10.0,
+      "ci_lower": 9.4,
+      "ci_upper": 10.6,
+      "ci_width": 1.2
+    },
+    "M_TOTAL_F10_BMEM": {
+      "m_total_f10": 10.0,
+      "ci_lower": 9.0,
+      "ci_upper": 11.2,
+      "ci_width": 2.2
+    },
+    "M_TOTAL_F10_SPIDER_ALIAS": {
+      "m_total_f10": 30.1,
+      "ci_lower": 25.4,
+      "ci_upper": 35.5,
+      "ci_width": 10.1
+    },
+    "M_TOTAL_F10_SPIDER_ROUTING": {
+      "m_total_f10": 33.0,
+      "ci_lower": 26.6,
+      "ci_upper": 41.0,
+      "ci_width": 14.4
+    },
+    "M_TOTAL_F10_SPIDER_WEBMCP": {
+      "m_total_f10": 28.0,
+      "ci_lower": 22.4,
+      "ci_upper": 34.4,
+      "ci_width": 12.0
+    },
+    "M_TOTAL_F10_COLD": {
+      "m_total_f10": 38.0,
+      "ci_lower": 33.0,
+      "ci_upper": 43.5,
+      "ci_width": 10.5
+    },
+    "M_TOTAL_F100_AGT_DSM": {
+      "m_total_f100": 5.65,
+      "ci_lower": 4.92,
+      "ci_upper": 6.42,
+      "ci_width": 1.5
+    },
+    "M_TOTAL_F100_TRACE": {
+      "m_total_f100": 2.5,
+      "ci_lower": 2.35,
+      "ci_upper": 2.67,
+      "ci_width": 0.32
+    },
+    "M_TOTAL_F100_BMEM": {
+      "m_total_f100": 2.5,
+      "ci_lower": 2.25,
+      "ci_upper": 2.8,
+      "ci_width": 0.55
+    },
+    "M_TOTAL_F100_SPIDER_ALIAS": {
+      "m_total_f100": 7.53,
+      "ci_lower": 6.28,
+      "ci_upper": 8.85,
+      "ci_width": 2.57
+    },
+    "M_TOTAL_F100_SPIDER_ROUTING": {
+      "m_total_f100": 8.25,
+      "ci_lower": 6.62,
+      "ci_upper": 10.1,
+      "ci_width": 3.47
+    },
+    "M_TOTAL_F100_SPIDER_WEBMCP": {
+      "m_total_f100": 7.0,
+      "ci_lower": 5.55,
+      "ci_upper": 8.7,
+      "ci_width": 3.15
+    },
+    "M_TOTAL_F100_COLD": {
+      "m_total_f100": 9.5,
+      "ci_lower": 8.12,
+      "ci_upper": 10.75,
+      "ci_width": 2.62
+    },
+    "M_COST_USD_AGT_DSM_MEAN": 0.0353,
+    "M_COST_USD_AGT_DSM_CI": [
+      0.0294,
+      0.0411
+    ],
+    "M_COST_USD_AGT_DSM_TOTAL_40": 1.41,
+    "M_COST_N_PATCH_TASKS": 30,
+    "M_COST_DSM_PATCH_USD_MIDPOINT": 0.047,
+    "M_RHO_REAL": 0.8656,
+    "M_RHO_SHUFFLED": 0.1592,
+    "M_RHO_SHUFFLED_GATE_ABS_LT_0_20": true,
+    "M_RHO_P": 0.0,
+    "M_FALSE_ACCEPT": 0.0,
+    "M_FALSE_ACCEPT_REASON": "structural: world verifies every required channel against current alias at verify time; strict server makes false accepts structurally impossible (disclosed, not empirical)",
+    "M_PREVALENCE_WEBMCP_TOOL_BYPASS": 0.725,
+    "M_PREVALENCE_WEBMCP_CI": [
+      0.575,
+      0.85
+    ],
+    "M_PREVALENCE_WEBMCP_AMORTIZED_F10": 2.9,
+    "M_PREVALENCE_WEBMCP_AMORTIZED_F100": 0.725,
+    "M_HITL_DROP": 0.5,
+    "M_HITL_DROP_GE_0_30": true,
+    "M_AX_DELTA_TRUNCATED": 0.6667,
+    "M_AX_DELTA_TRUNCATED_GE_0_20": true,
+    "M_PER_CHANNEL_COVERAGE_AGT_DSM": {
+      "header_param": 1.0,
+      "body_param": 1.0,
+      "auth_param": 0.7,
+      "mixed_multi_channel": 0.3
+    },
+    "M_PER_CHANNEL_COVERAGE_SPIDER_ALIAS": {
+      "header_param": 1.0,
+      "body_param": 0.9,
+      "auth_param": 1.0,
+      "mixed_multi_channel": 0.8
+    },
+    "M_PER_CHANNEL_COVERAGE_TRACE": {
+      "header_param": 0.0,
+      "body_param": 1.0,
+      "auth_param": 0.0,
+      "mixed_multi_channel": 0.0
+    },
+    "M_PCB_TOY_DSM": true,
+    "M_HARNESS_SHA256": "b11ea9700c7190f1fb7ef6f169af1f5da4d04dd6d52ae631376cc3c51f59ff21",
+    "M_HARNESS_BLIND_REPRO_BYTE_IDENTICAL": true,
+    "M_HARNESS_BLIND_RESULTS_SHA256": "3c5ab5afbaa3d28910dc0e6c3bcd77ed51262f028dc045e1df896324af386402",
+    "M_PIP_FREEZE_SHA256": "7c4dfcce1c78ece3a03f05816eb0cec5bb7d4f62113d3310cda78b14b93fe416",
+    "M_GRAMMAR_HASH_LIVE": "273eafbcb817e8981f843581a724594665cabdd357b318c701251929ee9c83de",
+    "M_BODY_REGEX_PRESENT": true,
+    "M_VIEWPORT": "1280x720",
+    "M_AX_MODE": "CDP Accessibility.getFullAXTree",
+    "DECISION_RULE_EVALUATION": {
+      "decision_stage": "A (measurement validity) PASS",
+      "mv1_genuine_attempts": "PASS (HF WebArena x2, HF WebGym x2, Docker Hub API x2, docker pull x2 with timeout>=300s; all logged with url/status/bytes/sha256)",
+      "mv2_manifest_sha_and_digest": "PASS (manifest sha d6527566... 927596 bytes; docker digest 3e8cb9b9... 64 hex; cross-source equality marked unavailable, not assumed)",
+      "mv3_environment": "PASS (browsergym-core 0.14.3, agentlab 0.4.2, playwright 1.63.0, chromium 153.0.8010.12, viewport 1280x720, CDP getFullAXTree, grammar live hash 273eafbc... with body regex DOTALL, pip freeze 263 lines sha 7c4dfcce...)",
+      "mv4_deterministic_constructibility": "PASS protocol, gate FAILS: random.Random(35725763380).sample x2 logged (S1==S2), get_task_start_url __SHOPPING__ expansion applied, canonical 136/145/196/222 probed at 1280x720 with anchoring node_count>1 true (heading 2 / price 6 / add-to-cart 2 / main 226-365 / contentinfo 31) and SHA both directions 12/12; constructible count = 4 < 10",
+      "mv5_webgym": "UNAVAILABLE documented (2 genuine 401 attempts logged; not invalid, not assumed zero)",
+      "mv6_synthetic_split": "PASS (40-task deterministic split preserved; fixture sha 6f42bc82 per spec)",
+      "mv7_honest_counters": "PASS (per-trajectory-reset sum-counters; trajectory-grouped B=2000; no n*3200/jitter; degenerate CIs flagged not counted)",
+      "mv8_blind_repro": "PASS (blind recipes from frozen text; per-task logs 327 rows; harness sha b11ea970... logged; byte-identical re-run sha 3c5ab5af... == run2)",
+      "mv9_provenance": "PASS (artifacts list with path+sha256 in this packet; provenance.json enclosed)",
+      "decision_stage_B": "H_A_SURVIVES = FALSE (constructibility 4 < 10 despite SRC_DOCKER_SUCCESS and valid census); H_B_SURVIVES = TRUE (DSM/ALIAS interior CIs, honest M_total CIs, |rho_shuffled|=0.1592<0.20, WebMCP prevalence 0.725 CI, PC-A/PC-B passed)",
+      "outcome": "MIXED (H_A FALSIFIED_IN_SETTING bounded at 4-family census ceiling; H_B SURVIVES_CURRENT_TEST)",
+      "decision_stage_C_note": "Falsification is BOUNDED and deterministic: the pinned 812-task census provably contains exactly 4 constructible product-page families under the frozen protocol; not a protocol artifact, not an infra failure"
+    }
+  },
+  "controls": {
+    "PC-A-SYNTHETIC-FIXTURE": {
+      "expected": "median AX>10, SHA before==after identical TRUE x3, SHA after textContent mutation != TRUE x3, DOM>=2000 literal sub-clause",
+      "observed": "AX median 17 (3/3), DOM 355, SHA identical 3/3 TRUE, SHA mutated 3/3 TRUE",
+      "pass_fail": "PASS",
+      "evidence": "artifacts/raw/ax_captures.jsonl PC-A-SYNTHETIC-FIXTURE rows (repeat 1-3); artifacts/derived/ax_analysis.json",
+      "note": "Literal prereg \u00a78 DOM>=2000 sub-clause is unsatisfiable by the frozen ~400-byte fixture HTML (internal frozen-text inconsistency disclosed in validity_notes); DOM>=2000 as applied by \u00a76.1 A2 to canonical-path real captures is satisfied (median 200413, min 195052). Operative AX>10 + SHA 16/16 gates pass."
+    },
+    "PC-B-TOY-DSM": {
+      "expected": "single-header param toy with no shift compiles via DSM TreeWalker IR to 1.0 blind",
+      "observed": "B-AGENTIC-DSM toy success True (PC-B toy row in sota_blind_results.jsonl)",
+      "pass_fail": "PASS",
+      "evidence": "artifacts/derived/sota_blind_results.jsonl is_pcb_toy rows; artifacts/derived/sota_analysis.json pcb_toy"
+    },
+    "PC-C-WEBGYM-SANITY": {
+      "expected": ">=50 eTLD+1 sample with duplication prevalence in [0.3,0.99] and monotonic sweep (gated on HF success)",
+      "observed": "HF 401 x2, HF_TOKEN absent; WebGym not acquired",
+      "pass_fail": "UNAVAILABLE (not failed)",
+      "evidence": "artifacts/raw/hf_webgym_manifest_attempts.json; artifacts/derived/webgym_diverse_sample.json"
+    },
+    "B-DURABLE-HF": {
+      "expected": "200 + byte-identical 64-hex sha d6527566...",
+      "observed": "401 x2 (hf_token_present=false); local pinned copy byte-identical sha d6527566... 927596 bytes (established identity)",
+      "pass_fail": "UNAVAILABLE (token-gated); byte-identity vs established pin re-verified",
+      "evidence": "artifacts/raw/hf_manifest_attempts.json; artifacts/raw/webarena_verified_pin.json"
+    },
+    "B-DURABLE-DOCKER": {
+      "expected": "digest 3e8cb9b9... 64 hex valid + reachable http://localhost:7770",
+      "observed": "Hub API 200 x2 with digest match; docker images --digests match; docker pull digest returncode 0 x2; health curl 200 x3",
+      "pass_fail": "PASS",
+      "evidence": "artifacts/raw/docker_hub_api_attempts.json; artifacts/raw/docker_pull_attempts.json; artifacts/raw/webarena_verified_pin.json"
+    },
+    "B-WEBGYM-292K-DIVERSE": {
+      "expected": ">=50 distinct eTLD+1, family-level B=2000 duplication CI width>0, sweep range>=0.05",
+      "observed": "not acquirable (HF 401 x2)",
+      "pass_fail": "UNAVAILABLE",
+      "evidence": "artifacts/derived/webgym_diverse_sample.json; artifacts/raw/hf_webgym_manifest_attempts.json"
+    },
+    "B-TRUNCATED-20": {
+      "expected": "delta_vs_truncated >=0.20; on real WebArena pages full sensitive, truncated insensitive",
+      "observed": "full_tree_mutation_sensitivity 1.0, truncated_mutation_sensitivity 0.3333, delta 0.6667 >= 0.20 (fam136 full_sens True trunc False; fam222 full True trunc False; PC-A full True trunc True)",
+      "pass_fail": "PASS",
+      "evidence": "artifacts/derived/truncation_control.json"
+    },
+    "B-AGENTIC-DSM": {
+      "expected": "0.80-0.99 single-channel, $0.002-0.092 80-94% compile",
+      "observed": "0.75 [0.625,0.875] overall; header 1.0 body 1.0 auth 0.7 mixed 0.3; USD mean 0.0353/task [0.0294,0.0411] total 1.41, 30 patch tasks",
+      "pass_fail": "PARTIAL \u2014 interior on single channels, collapsed on mixed (0.3); 99% ceiling not transferable to alias-OOD mixed",
+      "evidence": "artifacts/derived/sota_analysis.json"
+    },
+    "B-TRACECOMPILER-DEFUSE": {
+      "expected": "0.25 overall body 1.0 collapse",
+      "observed": "0.25 [0.125,0.375]; body 1.0, header/auth/mixed 0.0",
+      "pass_fail": "PASS (replicates collapse)",
+      "evidence": "artifacts/derived/sota_analysis.json"
+    },
+    "B-BMEM-CATALOG": {
+      "expected": "collapse 0.0 on alias shift",
+      "observed": "0.0/40, degenerate CI [0,0] flagged not counted",
+      "pass_fail": "PASS (collapse replicated; degenerate CI flagged)",
+      "evidence": "artifacts/derived/sota_analysis.json"
+    },
+    "B-SPIDER-ALIAS": {
+      "expected": "~0.925 flat p>0.05",
+      "observed": "0.925 [0.85,1.0]; NC1 shuffle p=0.626 flat as expected; operational gate |rho_shuffled|<0.20 is the deciding statistic (0.1592)",
+      "pass_fail": "PASS (replicates flat 0.925)",
+      "evidence": "artifacts/derived/sota_analysis.json nc1_coverage_shuffle"
+    },
+    "B-SPIDER-ROUTING": {
+      "expected": "1.0 degenerate on synthetic",
+      "observed": "1.0/40 degenerate CI [1,1] flagged not counted",
+      "pass_fail": "PASS (degenerate flagged)",
+      "evidence": "artifacts/derived/sota_analysis.json"
+    },
+    "B-SPIDER-WEBMCP": {
+      "expected": "prevalence 0.725 [0.575,0.85]; amortized f10 2.9 f100 0.725",
+      "observed": "prevalence 0.725 (29/40), CI [0.575,0.85], f10 2.9, f100 0.725",
+      "pass_fail": "PASS",
+      "evidence": "artifacts/derived/sota_analysis.json webmcp_tool_bypass_prevalence"
+    },
+    "B-COLD-LLM": {
+      "expected": "~0.25 lowest ceiling",
+      "observed": "0.25 [0.125,0.375]; M_total_f10 38.0 highest",
+      "pass_fail": "PASS",
+      "evidence": "artifacts/derived/sota_analysis.json"
+    },
+    "NC1-SHUFFLED": {
+      "expected": "|rho_shuffled|<0.20 and gap real-shuffle >=0.20 for structured mechanisms",
+      "observed": "rho_real 0.8656, rho_shuffled mean 0.1592, abs_max 0.3102, gate true, p=0.0; coverage shuffle: DSM real_std 0.287 vs shuffled 0.113 (gap 0.174), ALIAS flat p=0.626",
+      "pass_fail": "PASS (operational gate |rho_shuffled|<0.20 satisfied)",
+      "evidence": "artifacts/derived/sota_analysis.json rho, nc1_coverage_shuffle"
+    },
+    "NC2-TRUNCATED": {
+      "expected": "delta_vs_truncated >=0.20 full-tree non-vacuous",
+      "observed": "delta 0.6667 (1.0 vs 0.3333)",
+      "pass_fail": "PASS",
+      "evidence": "artifacts/derived/truncation_control.json; artifacts/derived/sota_analysis.json nc2_delta_truncated"
+    },
+    "NC3-NO-HITL": {
+      "expected": "DSM without HITL drops >=0.30",
+      "observed": "0.75 -> 0.25, drop 0.50",
+      "pass_fail": "PASS",
+      "evidence": "artifacts/derived/sota_analysis.json nc3_ablation"
+    }
+  },
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-INTEL-35999366789/artifacts/raw/webarena_verified_pin.json",
+      "sha256": "5dca7e23ab683f63ee2ee2b3d85f5f4dd9cf8ca0f80b1b97a0027e90101616bd",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-35999366789/artifacts/raw/hf_manifest_attempts.json",
+      "sha256": "231242e184976936d8fdca1ba4204f94d774a1cd5bb1506e29d842fa0ba44928",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-35999366789/artifacts/raw/hf_webgym_manifest_attempts.json",
+      "sha256": "ab8aa18d2d2ac7be9171f2b4a63030607e1c9b33fb463fdfddc3afb60ef38894",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-35999366789/artifacts/raw/docker_hub_api_attempts.json",
+      "sha256": "9334ac655c8d9fcf7ee992bf0b82059347025d5e8c751f9268c06c5efd67feca",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-35999366789/artifacts/raw/docker_pull_attempts.json",
+      "sha256": "858c54e2412842af3f2af05a993cc6aeb178873d20249f9b99e30ffed8883be0",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-35999366789/artifacts/raw/ax_captures.jsonl",
+      "sha256": "8c523b446652affbec3931b3a9d56de737d56f5641c1480cfd6f61278c676039",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-35999366789/artifacts/raw/ax_protocol_dump.json",
+      "sha256": "eb18a6db6a64dec201b58eff60765443a4c24d7dcaa98397e63e1158633c63b9",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-35999366789/artifacts/raw/environment_pin.json",
+      "sha256": "e22cee99dc462689ff2e71a67f34ff97b1969c1126f1bf00994e8fdda0776cf5",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-35999366789/artifacts/derived/webarena_census.json",
+      "sha256": "97d78ae1094cf209902621046fbf7f47f84f6e78b239197fa52b1d113dbe22ba",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-35999366789/artifacts/derived/deterministic_family_samples.json",
+      "sha256": "371e78b77d657b06b2f2cec164fef8f2114cf34a6bbbf8b9161fde01a9a0cb43",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-35999366789/artifacts/derived/family_anchoring.json",
+      "sha256": "918027eacc9919abac49a0ad8777e6da213496fc4e23630bda81881419cb6e9f",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-35999366789/artifacts/derived/ax_analysis.json",
+      "sha256": "ac70e90945f7aca7c25119e5320cb05b0e6ce262c5540db01d450d919419336c",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-35999366789/artifacts/derived/webgym_diverse_sample.json",
+      "sha256": "8dd4e0ddc67398461cff703c5029a6929c8b263d96e71392e6585f0b52272dac",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-35999366789/artifacts/derived/sota_blind_results.jsonl",
+      "sha256": "3c5ab5afbaa3d28910dc0e6c3bcd77ed51262f028dc045e1df896324af386402",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-35999366789/artifacts/derived/sota_blind_results_run2.jsonl",
+      "sha256": "3c5ab5afbaa3d28910dc0e6c3bcd77ed51262f028dc045e1df896324af386402",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-35999366789/artifacts/derived/sota_analysis.json",
+      "sha256": "0b0b68c5a299cd30977a4da9c2bf9711084b2ae0ce1364d1b95009dde68ef1e0",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-35999366789/artifacts/derived/truncation_control.json",
+      "sha256": "3a7adc66a361a4a85da662cece0d7b724ec551d448a1a538bc37b245ec1d2dd0",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-35725763380/artifacts/raw/webarena-verified.json",
+      "sha256": "d65275660814663375028e9017e1f929e3c38321041b125795e2713b52243d30",
+      "role": "raw"
+    },
+    {
+      "path": "research/intel/exp_35999366789_durable_sources.py",
+      "sha256": "740febcb29121d8aad819feff7b8db5714030aa2bdfbdd613574f74cc6242d26",
+      "role": "code"
+    },
+    {
+      "path": "research/intel/exp_35999366789_census_sampling.py",
+      "sha256": "53e1fcc82fe23bd3fd76b61fab89bc44b665ccb423d7ae6991023b4faf5af3ef",
+      "role": "code"
+    },
+    {
+      "path": "research/intel/exp_35999366789_ax_probe.py",
+      "sha256": "c4331b55dcfb01dad157da0ab59b31e9c41c77bfada198476189af4de1b7974d",
+      "role": "code"
+    },
+    {
+      "path": "research/intel/exp_35999366789_blind_harness.py",
+      "sha256": "b11ea9700c7190f1fb7ef6f169af1f5da4d04dd6d52ae631376cc3c51f59ff21",
+      "role": "code"
+    },
+    {
+      "path": "research/intel/exp_35999366789_analysis.py",
+      "sha256": "45db2374354c5ad7b4789e0a13ce4102d17110c59779d3a349aa9420bfdcef86",
+      "role": "code"
+    },
+    {
+      "path": "research/intel/exp_35999366789_nc2_probe.py",
+      "sha256": "18bb7c0b254972fa6fc08437fe3b6b5efa40d22c08d3a04879df39707bba6eb6",
+      "role": "code"
+    },
+    {
+      "path": "research/intel/grammar_fulltree_358885.py",
+      "sha256": "273eafbcb817e8981f843581a724594665cabdd357b318c701251929ee9c83de",
+      "role": "code"
+    }
+  ],
+  "observations": [
+    "RAW: HF WebArena-Verified manifest GET -> HTTP 401 on both genuine attempts (hf_token_present=false); bytes 0, sha null, elapsed logged.",
+    "RAW: HF WebGym Hub API tree + README -> HTTP 401 on both genuine attempts; logged.",
+    "RAW: Docker Hub API am1n3e/webarena-verified-shopping tags -> 200 x2, latest digest sha256:3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb (64 hex) matching expected on both; docker pull @digest returncode 0 x2; docker images --digests shows matching digest; containers health curl localhost:7770 200 x3.",
+    "RAW: Local pinned manifest research/experiments/EXP-INTEL-35725763380/artifacts/raw/webarena-verified.json sha256 d65275660814663375028e9017e1f929e3c38321041b125795e2713b52243d30, 927596 bytes (byte-identical).",
+    "RAW: Census from pinned manifest: total 812, shopping 192, shopping_admin 182, map 112, reddit 114, gitlab 196, wikipedia 16; families_ge3 36; family-size histogram {3:2, 4:1, 5:32, 6:1}; product_page_families [136,145,196,222]; tasks with >=1 product-page start_url within those families = 21 (5+5+5+6).",
+    "RAW: random.Random(35725763380).sample(sorted_families_ge3,10) executed twice with identical seed reset: S1 == S2 == [191,180,162,197,153,213,163,137,136,222].",
+    "RAW: Only families 136 and 222 of the sampled 10 have product-page start_urls in the census; the other 8 (137,153,162,163,180,191,197,213) have only __SHOPPING__ homepage/non-product start_urls.",
+    "RAW: 12/12 product-page captures (families 136:3, 145:3, 196:3, 222:3 URLs, census-derived) show AX nodes median 688 min 627, DOM bytes median 200413 min 195052, SHA identical 12/12 TRUE, SHA mutation-changed 12/12 TRUE; anchored elements found 12/12 with subtree node counts heading 2, price-box 6, add-to-cart 2, main 226-365, contentinfo 31.",
+    "RAW: PC-A synthetic fixture x3: AX nodes 17 fixed, DOM 355 bytes, SHA identical 3/3 TRUE, SHA mutated 3/3 TRUE.",
+    "RAW: Protocol dump Chromium 153.0.8010.12: Accessibility.getFullAXTree params [depth, frameId]; AXNode has 13 properties; boundingBox NOT among them (bbox_present_in_axnode false).",
+    "RAW: Blind synthetic harness executed once per run x2 runs: 327 rows each (40 tasks x 8 baseline variants incl. B-AGENTIC-DSM-NOHITL + 7 PC-B toy rows); both runs byte-identical sha 3c5ab5afbaa3d28910dc0e6c3bcd77ed51262f028dc045e1df896324af386402.",
+    "RAW: Coverage/40: B-AGENTIC-DSM 30, B-AGENTIC-DSM-NOHITL 10, B-TRACECOMPILER-DEFUSE 10, B-BMEM-CATALOG 0, B-SPIDER-ALIAS 37, B-SPIDER-ROUTING 40, B-SPIDER-WEBMCP 40, B-COLD-LLM 10.",
+    "RAW: Sum M_total/40: DSM 226, DSM-NOHITL 100, TRACE 100, BMEM 100, ALIAS 301, ROUTING 330, WEBMCP 280, COLD 380.",
+    "RAW: Per-channel DSM coverage: header 1.0, body 1.0, auth 0.7, mixed 0.3; Trace: body 1.0 only; SPIDER-ALIAS: header 1.0, body 0.9, auth 1.0, mixed 0.8.",
+    "RAW: sota_analysis: rho_real 0.8656, rho_shuffled_mean 0.1592 (abs_max 0.3102), gate_abs_lt_0_20 true, p 0.0; NC3 drop 0.50; NC2 delta 0.6667; USD DSM mean 0.0353/task total 1.41 (30 patch tasks, midpoint $0.047); WebMCP prevalence 0.725 [0.575,0.85] amortized f10 2.9 f100 0.725.",
+    "RAW: PC-B toy: B-AGENTIC-DSM True (also ALIAS/ROUTING/WEBMCP/BMEM True; TRACE/COLD False).",
+    "RAW: pip freeze 263 lines sha256 7c4dfcce1c78ece3a03f05816eb0cec5bb7d4f62113d3310cda78b14b93fe416; grammar live hash 273eafbcb817e8981f843581a724594665cabdd357b318c701251929ee9c83de with body regex DOTALL and fotorama expanded regex present; environment_pin.json written.",
+    "RAW: WebGym 292k diverse eTLD+1 sample: UNAVAILABLE artifact written (nulls; 2 genuine 401 attempts logged)."
+  ],
+  "validity_notes": [
+    "MV5 WebGym is UNAVAILABLE (HF 401 x2, no HF_TOKEN): diverse eTLD+1 duplication CI and 0.818-0.9479 threshold sweep not computed; explicitly not assumed zero and does not alone trigger MEASUREMENT_INVALID; H_A partially bounded (same as parent UNRES-WEBGYM).",
+    "Cross-source byte-identity (Docker vs HF raw) remains unverifiable without HF_TOKEN this run; byte-identity is asserted only against the established local pinned copy (sha d6527566..., matches audit-verified identity).",
+    "PC-A fixture DOM bytes = 355 < 2000: the frozen prereg \u00a78 PC-A row lists 'DOM>=2000' which is unsatisfiable by the frozen ~400-byte fixture HTML (frozen-text internal inconsistency, disclosed, not silently reinterpreted). Operative PC-A gates (AX>10, SHA 16/16 both directions) PASS; DOM>=2000 as specified in prereg \u00a76.1 A2 for canonical-path real captures is satisfied (median 200413, min 195052).",
+    "price anchor measured on the .price-box product-subtree root (subtree node_count 6), not the innermost leaf span .price (node_count 1); operationalization documented in family_anchoring.json anchoring_definition; heading/add-to-cart/main/contentinfo unchanged.",
+    "8 sampled families (137,153,162,163,180,191,197,213) have no product-page task in the pinned census; recorded not-constructible by census property WITHOUT probe because homepage/template captures were rejected by parent audit as product-page proxies (18/20 identical). The 4<10 constructible result is therefore a deterministic census property, not a probe failure.",
+    "Representation loss: DOM outerHTML normalized before hashing loses scroll/visual computed style beyond anchored bbox; AX capture at fixed 1280x720 viewport loses mobile variance; synthetic alias-OOD deterministic world loses real-site DOM volatility, auth/session expiry, network latency \u2014 bounded synthetic ceiling stated; single-store (shopping) census only.",
+    "Degenerate CIs [0,0] (BMEM) and [1,1] (ROUTING, WEBMCP) flagged and NOT counted as valid width per prereg 12.7; interior estimators DSM/ALIAS/TRACE/COLD drive comparisons.",
+    "M_FALSE_ACCEPT=0 is structural (server validates every required channel against current alias at verify time), not empirical; disclosed.",
+    "DSM USD uses published midpoint $0.047 (range $0.002-0.092); M_total counts are action units in a deterministic simulation, not USD or wall-clock; real-cost Pareto requires live execution.",
+    "NC2 delta_vs_truncated measured on a 3-page subset (fam136, fam222, PC-A) with mutation at .price; full-tree non-vacuous gate satisfied (0.6667>=0.20); the 'shuffled version <0.05' sub-clause of NC2 was not separately measured (parent did not measure it either).",
+    "get_task_start_url expansion applied iterates: __SHOPPING__ -> http://localhost:7770 (BrowserGym start-url expansion semantics applied inline to census start_urls; all probed URLs are full product paths under localhost:7770).",
+    "Docker pull used already-pulled image (digest pull verified returncode 0 twice within 300s budget); no 5.4GB re-download was needed \u2014 logged, not hidden.",
+    "Constructibility gate H_A uses the FROZEN decision rule: SURVIVES requires >=10 distinct constructible families; 4 < 10 => bounded FALSIFIED_IN_SETTING even though all 4 canonical families anchor with SHA stability 12/12 \u2014 the falsification is at the census-ceiling level, not the anchor mechanism level."
+  ],
+  "unresolved": [
+    "Cross-source byte-identity Docker vs HF WebArena raw manifest (needs HF_TOKEN with dataset read access).",
+    "WebGym 292k diverse eTLD+1 >=50 sample, family-level B=2000 duplication CI, and 0.818-0.9479 threshold sweep range>=0.05 (needs HF_TOKEN).",
+    "Whether alternative censuses (shopping_admin 184-task 42-family superset, WebMall/Mind2Web-2 loopback) contain >=10 product-page families \u2014 Graph >=10-family hold-out remains BLOCKED on this pin.",
+    "Whether DSM mixed-channel 0.3 vs SPIDER 1.0 gap and auth 0.7 persist on real WebArena tasks (synthetic world only) \u2014 causal step for DSM auth failure unresolved.",
+    "Real wall-clock + LLM-token Pareto (WebMCP vs compilation O(1)) cannot be measured in simulation; needs live Stagehand/WebMCP execution.",
+    "NC2 shuffled-truncation variant (<0.05) not measured.",
+    "Harness SHA discrepancy origin from parent audit (log sha ae7ea9e7... vs on-disk a2077018...) not re-explained; this run pins its own on-disk harness sha b11ea970... with byte-identical outputs sha 3c5ab5af... matching parent established outputs.",
+    "WebMCP tool-bypass first-attempt success 0.725 in simulation has no real-site routing cost model; hybrid dominance at f10/f100 is simulation-only."
+  ]
+}
