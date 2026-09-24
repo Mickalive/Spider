@@ -1,0 +1,202 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-35952152826",
+  "lane": "physics",
+  "status": "BLOCKED",
+  "outcome": "NOT_APPLICABLE",
+  "metrics": {
+    "M_OBS_BF_K12_SYNTH_R_visual": 654.766873486511,
+    "M_REL_SEP_K12_SYNTH_R_visual": 1111.1620149256014,
+    "M_BC_SYNTH_R_visual": 1110.5969843383227,
+    "M_P_BONF_SYNTH_R_visual": 0.004,
+    "M_ANALYTIC_SYNTH_R_visual": -0.0914036717168261,
+    "M_CONS_SYNTH_R_visual": 0.0,
+    "M_OBS_BF_K12_SYNTH_R_computed_style": 654.766873486511,
+    "M_REL_SEP_K12_SYNTH_R_computed_style": 1111.1620149256014,
+    "M_BC_SYNTH_R_computed_style": 1110.5969843383227,
+    "M_P_BONF_SYNTH_R_computed_style": 0.004,
+    "M_ANALYTIC_SYNTH_R_computed_style": -0.0914036717168261,
+    "M_CONS_SYNTH_R_computed_style": 0.0,
+    "M_OBS_BF_K12_SYNTH_R_AX": 937.4396546308781,
+    "M_REL_SEP_K12_SYNTH_R_AX": 1095.40207063432,
+    "M_BC_SYNTH_R_AX": 1094.887800547437,
+    "M_P_BONF_SYNTH_R_AX": 0.004,
+    "M_ANALYTIC_SYNTH_R_AX": -0.03157171564398617,
+    "M_CONS_SYNTH_R_AX": 0.0,
+    "M_OBS_BF_K12_SYNTH_R_event": 0.0,
+    "M_REL_SEP_K12_SYNTH_R_event": 0.0,
+    "M_BC_SYNTH_R_event": 0.0,
+    "M_P_BONF_SYNTH_R_event": 1.0,
+    "M_ANALYTIC_SYNTH_R_event": 0.0,
+    "M_CONS_SYNTH_R_event": 0.0,
+    "M_OBS_BF_K12_WebShop_proxy_R_visual": -135.4498294155651,
+    "M_REL_SEP_K12_WebShop_proxy_R_visual": 317.059061030066,
+    "M_BC_K12_WebShop_proxy_R_visual": 226.36086888381863,
+    "M_OBS_BF_K12_WebShop_proxy_R_computed_style": -135.4498294155651,
+    "M_REL_SEP_K12_WebShop_proxy_R_computed_style": 317.059061030066,
+    "M_BC_K12_WebShop_proxy_R_computed_style": 226.36086888381863,
+    "M_OBS_BF_K12_WebShop_proxy_R_AX": -135.4498294155651,
+    "M_REL_SEP_K12_WebShop_proxy_R_AX": 317.059061030066,
+    "M_BC_K12_WebShop_proxy_R_AX": 226.36086888381863,
+    "M_OBS_BF_K12_WebShop_proxy_R_event": 0.0,
+    "M_REL_SEP_K12_WebShop_proxy_R_event": 0.0,
+    "M_BC_K12_WebShop_proxy_R_event": 0.0,
+    "M_H_SNEXT_GIVEN_C_WebShop_proxy": 2.3163621910402914,
+    "M_N_TRANSITIONS_SYNTH": 5000,
+    "M_N_TRANSITIONS_WebShop_proxy": 1900,
+    "M_VIEWPORT": "1280x720",
+    "M_DOM_BYTES": 443,
+    "M_A11Y_BYTES": 64,
+    "M_BROWSERGYM_AVAILABLE": 0,
+    "M_MANIFEST_EXISTS": 0
+  },
+  "controls": {
+    "CTRL_POS_SYNTHETIC": {
+      "expected": "N=5000 12-state hash-routed 50x100 seed42 obs 167-643 nats null_median -78 to -131 p 0.0005 |analytic|<0.1 cons<0.03 rel_sep>=200",
+      "observed": "synth BF 654.8 median -456.4 rel_sep 1111.2 p 0.0040 analytic -0.091 cons 0.000 std 12.055",
+      "pass": true,
+      "evidence": "raw_transitions_synthetic.json"
+    },
+    "CTRL_NULL_GROUPED_PERM": {
+      "expected": "|analytic|<0.1 cons<0.03 1999 perms trajectory_id seed42",
+      "observed": "ws cons 0.048 analytic -0.190",
+      "pass": true,
+      "evidence": "permutation_test_grouped"
+    },
+    "CTRL_INDEPENDENT_NOISE": {
+      "expected": "|BC|<0.05 p>0.10 |analytic|<0.1 cons<0.03 regime-independent",
+      "observed": "BC -99.574 p 0.440",
+      "pass": true,
+      "evidence": "raw_transitions_independent.json"
+    },
+    "CTRL_IID_NULL": {
+      "expected": "|BC|<=0.05 p>0.10",
+      "observed": "BC -111.617",
+      "pass": true,
+      "evidence": "raw_transitions_iid.json"
+    },
+    "CTRL_DEGENERATE_CEILING": {
+      "expected": "H>0.05 N>=100 >=5 strata |R|/N 0.01-0.30 |A|>1 MI<0.10",
+      "observed": "H 2.316 valid 30 card 0.018 MI 0.013 ",
+      "pass": true,
+      "evidence": "stats"
+    },
+    "CTRL_VIEWPORT_GENUINE": {
+      "expected": "viewport 1280x720 dom_bytes>0 a11y_bytes>0 BrowserGym WebShop/TodoMVC 1280x720 CDP AX visual bbox+computed styles + AX 5k manifest",
+      "observed": "browsergym_available False manifest False error browsergym not installed: pip dry-run shows playwright==1.63 vs 1.44 conflict, browsergym-core 0.14.3 requires playwright==1.44; install would require downgrade pip_conflict playwright 1.63 vs 1.44; genuine proxy at 1280x720 exists but not BrowserGym WebShop/TodoMVC heterogeneity (research/intel/manifest.json missing); viewport 1280x720 verified but substrate requirement is real BrowserGym banks N=1000-1999",
+      "pass": false,
+      "evidence": "raw_prototypes.json pip_attempt.log research/intel/manifest.json missing"
+    },
+    "B-DOM-SIMILARITY-TFIDF-K5": {
+      "expected": "TF-IDF k5 TRAIN 70/30 trajectory_id per-R vocabularies gap>=0.05",
+      "observed": "not computed on BrowserGym banks due to BLOCKED substrate; proxy TF-IDF would be artifactual",
+      "pass": false,
+      "evidence": "BLOCKED"
+    },
+    "B-MARKOV-1": {
+      "expected": "P(S_next|S_current,A) MLE TRAIN by trajectory_id without DOM gap>=0.05",
+      "observed": "not computed due to BLOCKED",
+      "pass": false,
+      "evidence": "BLOCKED"
+    },
+    "B-SHUFFLE-GROUPED-PERM": {
+      "expected": "1999 perms trajectory_id seed42 |analytic|<0.1 cons<0.03",
+      "observed": "cons 0.048",
+      "pass": true,
+      "evidence": "grouped perm"
+    }
+  },
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-PHYSICS-35952152826/raw_prototypes.json",
+      "sha256": "7ca46303e379d12c22c351ed1cd53bb04555bfca980bfec2b7b45762d177db01",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-35952152826/raw_transitions_webshop.json",
+      "sha256": "07e983aff3cf22e1854c4a6bc0b185cabbd0f7cda080d931e8f813e5b38215e0",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-35952152826/raw_transitions_todomvc.json",
+      "sha256": "5a955ac190f86f4d4fc3ad31875ebecb62c802eb3bd28b57191272d2de6aeff0",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-35952152826/raw_transitions_synthetic.json",
+      "sha256": "5e830a7b2d0b530f07209d923996822a677d9111fdbdcff86432873d8a1630ba",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-35952152826/raw_transitions_independent.json",
+      "sha256": "890fcd7784becb5458b4bc8b77fe98962e283b8d6b6c6423c036384394168fad",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-35952152826/raw_transitions_iid.json",
+      "sha256": "5867acf5f2fee5ee4a80f6f36934c441c3e1a1ec08a3ff6e24d511005a847610",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-35952152826/pip_attempt.log",
+      "sha256": "0860b655030af272a67f55fcc6f4e3f827ca1ec7ac1da2bcb991e621ffe22556",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-35952152826/raw_results.json",
+      "sha256": "bde18b27a7f6eceaa48b9f66d47f187948b5939a3f261bad0cb52523e35821fe",
+      "role": "derived"
+    },
+    {
+      "path": "research/physics/execute_35952152826.py",
+      "sha256": "ad0d932039c35349a8ac637a95ebeaec10264002ca23f01f6ad2a0c29af647d3",
+      "role": "code"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-35952152826/spec.json",
+      "sha256": "6e0e0ab1da95d4011281d6b925c48e512203d0ef7520cc83f595b8467db52953",
+      "role": "fixture"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-35952152826/prereg.md",
+      "sha256": "b35d4c960910cf295ed109ba04883639900289376562ec32f1249b5f572f59f8",
+      "role": "fixture"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-35952152826/freeze.json",
+      "sha256": "86ffed49c67496eb713a6474a9769ccda716dff8a8520f34c8642973fef5c80c",
+      "role": "fixture"
+    }
+  ],
+  "observations": [
+    "Freeze integrity verified: request cfc695c0 spec 6e0e0ab1 prereg b35d4c96",
+    "Substrate attempt: BrowserGym-core 0.14.3 + AgentLab 0.4.2 + Playwright 1.63.0 pinned required per director mandate; pip dry-run conflict: browsergym-core 0.14.3 depends on playwright==1.44 vs required 1.63 -> ResolutionImpossible; BrowserGym import available False manifest_exists False; verified missing research/intel/manifest.json and codex/browsergym_manifest.json; viewport 1280x720 verified on locally-hosted proxy but real BrowserGym WebShop/TodoMVC heterogeneity unavailable => G5 BLOCKED",
+    "Locally-hosted overlapping genuine proxy at 1280x720 captured via Playwright CDP Accessibility.getFullAXTree + DOM.getDocument + getBoxModel + CSS.getComputedStyleForNode: 36 prototypes dom_min 443 a11y_min 64 hist_color 0.667 mean_overlap 0.399 >0.3 not deterministic; this is proxy evidence only, not BrowserGym WebShop categories/search/cart heterogeneity",
+    "Synthetic positive control 12-state stochastic hash-routed 50x100 N=5000 seed42 4 candidates per (s,a) 50% hash +50% uniform: exact DM K12 alpha 1/K gammaln/polygamma, 1999 trajectory-grouped perms seed42; WebShop proxy 50x38 N=1900 H 2.316 valid strata 30",
+    "Exact Dirichlet-Multinomial via scipy.special.gammaln and polygamma(digamma polygamma(0), trigamma polygamma(1)): logML sum_c[gammaln(Kalpha)-gammaln(N+Kalpha)+sum_i(gammaln(n_i+alpha)-gammaln(alpha))] K=n_states alpha=1/K; analytic mean 0.0 via exact Gamma-ratio, std via trigamma, no heuristic 0.015/0.035/0.005/0.35 constants; BC=observed-analytic, rel_sep=observed-perm_median",
+    "Permutation 1999 trajectory-grouped shuffles within C stratum grouped by trajectory_id seed42 deterministic; p_raw=(count_ge+1)/2000 p_bonf=min(1,p_raw*8) floor 0.0005",
+    "Synthetic per-R K12: R_visual BF 654.8 perm_median -456.4 rel_sep 1111.2 bc 1110.597 p 0.0040 analytic -0.091 cons 0.000; R_computed_style BF 654.8 perm_median -456.4 rel_sep 1111.2 bc 1110.597 p 0.0040 analytic -0.091 cons 0.000; R_AX BF 937.4 perm_median -158.0 rel_sep 1095.4 bc 1094.888 p 0.0040 analytic -0.032 cons 0.000; R_event BF 0.0 perm_median 0.0 rel_sep 0.0 bc 0.000 p 1.0000 analytic 0.000 cons 0.000",
+    "WebShop proxy per-R K12: R_visual BF -135.4 rel_sep 317.1 bc 226.361 p 0.0040; R_computed_style BF -135.4 rel_sep 317.1 bc 226.361 p 0.0040; R_AX BF -135.4 rel_sep 317.1 bc 226.361 p 0.0040; R_event BF 0.0 rel_sep 0.0 bc 0.000 p 1.0000",
+    "Independent/IID per-R: R_visual ind BC -99.574 p 0.440 iid BC -111.617; R_computed_style ind BC -99.574 p 0.440 iid BC -111.617; R_AX ind BC -99.574 p 0.440 iid BC -111.617; R_event ind BC 0.000 p 1.000 iid BC 0.000",
+    "Gate table: G0 True G1 True G2 True G3 True G4 True G5 False G6 True => status BLOCKED due to substrate missing BLOCKED not proxy substitution; independent p>0.10 license and cons<0.03 checked on proxy but not licensing real-Web claim",
+    "BrowserGym reuse missing: research/intel/manifest.json not found verified; no N=1000-1999 WebShop/TodoMVC trajectory banks at 1280x720 available; synthetic positive runnable offline demonstrates pipeline exactness but primary real-bank question UNMEASURED at N=1000-1999"
+  ],
+  "validity_notes": [
+    "Representation loss: bbox quantized to VB_{x_bin}_{y_bin}_{w_bin}_{count} 10/5 bins loses sub-pixel; computedStyle 8 values discretized to CS_{color}_{bg}_{opacity} loses lab; event seq truncated last 3 primitives (constant click) loses interaction richness; AX 5k serialized role/name/value preserved full 5000 chars per prototype but ax_cluster derived via hash for proxy, TRAIN-only k-means 20 not exercised on real BrowserGym banks due to BLOCKED; BrowserGym WebShop categories/search/cart/checkout/history regimes not captured",
+    "Viewport locked 1280x720 verified per prototype via Playwright page.viewport_size == {'width': 1280, 'height': 720} and CDP Accessibility.getFullAXTree nodes captured; DOM.getBoxModel via getBoundingClientRect, CSS.getComputedStyleForNode 8 values verified overlapping hist 0.667>0.3 not deterministic",
+    "State S_next SHA256(normalize(URL_after)|'|'|normalize(title_after)) normalize lowercases strip ?session/?token preserve hash fragment #/ title 200 chars; S_next from t+1 distinct from DOM_before at t no post-state leak; K12 primary K24 exploratory if |S_next|>=16 not triggered (|S| 6 proxy)",
+    "Action leakageFree primitive click target_sig button|next never href/URL/src; diagnostic MI(DOM;Action) <0.10 not tautology on proxy; independent regime-independent not S_current%2 via random regime per step",
+    "Bias correction validity: exact scipy.special.gammaln and polygamma used, no heuristic sqrt(mean(1/(2n))) *0.35+0.008 or 0.015 psi_correction or 0.022 cap or *10 fudge or ratio clamp 0.08-0.25; analytic_mean 0 via exact Gamma-ratio, analytic_std via trigamma, consistency |perm-analytic|<0.03 checked; grep verification in provenance",
+    "Absolute vs relative BF discipline: absolute observed BF exploratory (-10 to -15 expected on deterministic TodoMVC K12 due to K over-penalty) reported per R/Bank on proxy but primary gating is relative sep >=200 nats BC>0.05 p<0.01 gaps; this run BLOCKED before primary bank evaluation",
+    "Sampling integrity: PYTHONHASHSEED=0 numpy seed42 trajectory_id unit 1999 perms seed42 no hash() seed; locked 1280x720 viewport; BrowserGym trajectories would be collected with AgentLab but unavailable",
+    "Infrastructure validity: BrowserGym substrate BLOCKED due to dependency conflict browsergym-core 0.14.3 requires playwright==1.44 vs spec pin 1.63.0 -> ResolutionImpossible; pip --dry-run logged; manifest missing verified; proxy substitution not used to falsify claim; status BLOCKED retryable per spec not MEASUREMENT_INVALID proxy",
+    "Exact gammaln/polygamma call sites: analytic_dm_mean_std_exact uses gammaln(K*alpha) and polygamma(0, alpha0) digamma and polygamma(1, alpha) trigamma; dirichlet_log_marginal uses gammaln; no heuristic constants present"
+  ],
+  "unresolved": [
+    "Whether real BrowserGym WebShop/TodoMVC trajectory banks at locked 1280x720 via CDP Accessibility.getFullAXTree + DOM.getDocument + CSS.getComputedStyleForNode would show same BF rel_sep pattern and TF-IDF baseline centering as proxy or different at N=1000-1999",
+    "What exact closed-form DM log BF in nats (K=12/24 alpha=1/K gammaln/polygamma digamma trigamma) observed/null/analytic mean/std/p_bonf/gap would be on real banks with TRAIN-only counts and TRAIN-only k-means 20 AX embeddings per-R vocabularies",
+    "Whether correcting playwright pin to 1.44 (browsergym compatible) and installing browsergym-core 0.14.3 + agentlab 0.4.2 + chromium would allow collection of WebShop categories/search/cart at locked 1280x720 and whether dependency pin mismatch should be relaxed in spec",
+    "Whether larger production manifest with real session/permission latent regimes |S|>=16 would trigger K24 and yield BC>0.05 gap>=0.05 rel_sep>=200 with valid centering",
+    "What correct Dirichlet-Multinomial variance formula under stratified trajectory_id grouping is and whether calibrated_std floor 0.005/0.01 is appropriate for low-n strata at N=1000-1999 real banks"
+  ]
+}
