@@ -1,0 +1,59 @@
+{
+ "experiment_id": "EXP-PRODUCT-35961222077",
+ "disclosure": "deterministic honest sum counters on disclosed file-proxy task structure; NOT claim economics (Docker/LLM gates blocked); used only for null-control non-degeneracy per frozen NC definitions",
+ "NC1_SHUFFLED": {
+  "rho_shuffled": 0.7779702846778452,
+  "rho_shuffled_ci95": [
+   0.7087675405672773,
+   0.8302314623419543
+  ],
+  "block_permutation_p": 0.0001999600079984003,
+  "rho_length_pooled": -0.33678853365178457,
+  "per_stratum": {
+   "0.0": {
+    "rho_length_main": -1.0,
+    "rho_length_nc1": null,
+    "n": 45
+   },
+   "0.25": {
+    "rho_length_main": null,
+    "rho_length_nc1": null,
+    "n": 0
+   },
+   "0.5": {
+    "rho_length_main": -1.0,
+    "rho_length_nc1": null,
+    "n": 42
+   },
+   "0.75": {
+    "rho_length_main": null,
+    "rho_length_nc1": null,
+    "n": 0
+   },
+   "1.0": {
+    "rho_length_main": -0.3696912347221675,
+    "rho_length_nc1": null,
+    "n": 75
+   }
+  },
+  "pass": false
+ },
+ "NC2_RANDOM_KEYS": {
+  "AUROC": 0.47979166666666667,
+  "false_accept_rate": 0.104,
+  "n": 500,
+  "pass": true
+ },
+ "NC3_LENGTH_CONST": {
+  "rho_novelty": 0.007890496086527815,
+  "R2": 4.3207724255034385e-05,
+  "rho_length": -1.0,
+  "pass": true
+ },
+ "MAIN_PIPELINE_DIAGNOSTIC": {
+  "rho_novelty_per_hit": 0.7620215299096192,
+  "rho_length_pooled": -0.2871341837663058,
+  "note": "diagnostic only; primary rho_novelty claim metric requires real gpt-4o-mini tokens (null)"
+ },
+ "B=5000": true
+}

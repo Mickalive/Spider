@@ -1,0 +1,409 @@
+{
+ "experiment_id": "EXP-PRODUCT-35961222077",
+ "census": {
+  "hard258_staged": false,
+  "hard258_detail": "pip index webarena: no matching distribution (see env_audit.pip_webarena)",
+  "fallback_disclosed": "WebArena-Verified v2 192 tasks / 36 families (frozen fallback per MV1)",
+  "tasks_sha256": "391e8f6cf167300cf223ebbb19cf5d2beed6568f5f84ac968ae88866a438a98b",
+  "expected_tasks_sha_prefix": "391e8f6c",
+  "n_tasks": 192,
+  "n_families": 36
+ },
+ "value_set_disjointness": {
+  "pool_level_families_contaminated": [
+   "family_00",
+   "family_02",
+   "family_04",
+   "family_06",
+   "family_08",
+   "family_10",
+   "family_12",
+   "family_14",
+   "family_16",
+   "family_18",
+   "family_20",
+   "family_22",
+   "family_24",
+   "family_26",
+   "family_28",
+   "family_30",
+   "family_32",
+   "family_34"
+  ],
+  "pool_level_n_contaminated": 18,
+  "usage_level_demo_vs_testB_contaminated": [
+   "family_00",
+   "family_02",
+   "family_04",
+   "family_06",
+   "family_08",
+   "family_10",
+   "family_12",
+   "family_14",
+   "family_16",
+   "family_18",
+   "family_20",
+   "family_22",
+   "family_24",
+   "family_26",
+   "family_28",
+   "family_30",
+   "family_32",
+   "family_34"
+  ],
+  "usage_level_n_contaminated": 18,
+  "frozen_requirement": "value_set_A intersect B empty verified per family",
+  "pass": false,
+  "pool_level_detail": [
+   {
+    "family_id": "family_00",
+    "slot": "sku",
+    "intersection": [
+     "AAA0",
+     "AAA1",
+     "AAA2",
+     "AAA3",
+     "AAA4",
+     "AAA5",
+     "AAA6",
+     "AAA7",
+     "AAA8",
+     "AAA9"
+    ]
+   },
+   {
+    "family_id": "family_00",
+    "slot": "store_id",
+    "intersection": [
+     "AAA0",
+     "AAA1",
+     "AAA2",
+     "AAA3",
+     "AAA4",
+     "AAA5",
+     "AAA6",
+     "AAA7",
+     "AAA8",
+     "AAA9"
+    ]
+   },
+   {
+    "family_id": "family_02",
+    "slot": "category",
+    "intersection": [
+     "CCC0",
+     "CCC1",
+     "CCC2",
+     "CCC3",
+     "CCC4",
+     "CCC5",
+     "CCC6",
+     "CCC7",
+     "CCC8",
+     "CCC9"
+    ]
+   },
+   {
+    "family_id": "family_02",
+    "slot": "sku",
+    "intersection": [
+     "CCC0",
+     "CCC1",
+     "CCC2",
+     "CCC3",
+     "CCC4",
+     "CCC5",
+     "CCC6",
+     "CCC7",
+     "CCC8",
+     "CCC9"
+    ]
+   },
+   {
+    "family_id": "family_02",
+    "slot": "store_id",
+    "intersection": [
+     "CCC0",
+     "CCC1",
+     "CCC2",
+     "CCC3",
+     "CCC4",
+     "CCC5",
+     "CCC6",
+     "CCC7",
+     "CCC8",
+     "CCC9"
+    ]
+   },
+   {
+    "family_id": "family_04",
+    "slot": "sku",
+    "intersection": [
+     "EEE0",
+     "EEE1",
+     "EEE2",
+     "EEE3",
+     "EEE4",
+     "EEE5",
+     "EEE6",
+     "EEE7",
+     "EEE8",
+     "EEE9"
+    ]
+   },
+   {
+    "family_id": "family_04",
+    "slot": "store_id",
+    "intersection": [
+     "EEE0",
+     "EEE1",
+     "EEE2",
+     "EEE3",
+     "EEE4",
+     "EEE5",
+     "EEE6",
+     "EEE7",
+     "EEE8",
+     "EEE9"
+    ]
+   },
+   {
+    "family_id": "family_06",
+    "slot": "category",
+    "intersection": [
+     "GGG0",
+     "GGG1",
+     "GGG2",
+     "GGG3",
+     "GGG4",
+     "GGG5",
+     "GGG6",
+     "GGG7",
+     "GGG8",
+     "GGG9"
+    ]
+   },
+   {
+    "family_id": "family_06",
+    "slot": "sku",
+    "intersection": [
+     "GGG0",
+     "GGG1",
+     "GGG2",
+     "GGG3",
+     "GGG4",
+     "GGG5",
+     "GGG6",
+     "GGG7",
+     "GGG8",
+     "GGG9"
+    ]
+   },
+   {
+    "family_id": "family_06",
+    "slot": "store_id",
+    "intersection": [
+     "GGG0",
+     "GGG1",
+     "GGG2",
+     "GGG3",
+     "GGG4",
+     "GGG5",
+     "GGG6",
+     "GGG7",
+     "GGG8",
+     "GGG9"
+    ]
+   },
+   {
+    "family_id": "family_08",
+    "slot": "sku",
+    "intersection": [
+     "III0",
+     "III1",
+     "III2",
+     "III3",
+     "III4",
+     "III5",
+     "III6",
+     "III7",
+     "III8",
+     "III9"
+    ]
+   },
+   {
+    "family_id": "family_08",
+    "slot": "store_id",
+    "intersection": [
+     "III0",
+     "III1",
+     "III2",
+     "III3",
+     "III4",
+     "III5",
+     "III6",
+     "III7",
+     "III8",
+     "III9"
+    ]
+   }
+  ],
+  "usage_level_detail": [
+   {
+    "family_id": "family_00",
+    "intersection": [
+     "AAA0",
+     "AAA1"
+    ]
+   },
+   {
+    "family_id": "family_02",
+    "intersection": [
+     "CCC0",
+     "CCC1",
+     "CCC2"
+    ]
+   },
+   {
+    "family_id": "family_04",
+    "intersection": [
+     "EEE0",
+     "EEE1"
+    ]
+   },
+   {
+    "family_id": "family_06",
+    "intersection": [
+     "GGG0",
+     "GGG1",
+     "GGG2"
+    ]
+   },
+   {
+    "family_id": "family_08",
+    "intersection": [
+     "III0",
+     "III1"
+    ]
+   },
+   {
+    "family_id": "family_10",
+    "intersection": [
+     "KKK0",
+     "KKK1"
+    ]
+   },
+   {
+    "family_id": "family_12",
+    "intersection": [
+     "MMM0"
+    ]
+   },
+   {
+    "family_id": "family_14",
+    "intersection": [
+     "OOO0"
+    ]
+   },
+   {
+    "family_id": "family_16",
+    "intersection": [
+     "QQQ0"
+    ]
+   },
+   {
+    "family_id": "family_18",
+    "intersection": [
+     "SSS0",
+     "SSS1"
+    ]
+   },
+   {
+    "family_id": "family_20",
+    "intersection": [
+     "UUU0"
+    ]
+   },
+   {
+    "family_id": "family_22",
+    "intersection": [
+     "WWW1"
+    ]
+   }
+  ],
+  "even_family_rotation_note": "pools built with B={C*3}{(i+5)%10} for even family_idx (rotation of A) and B={C}Z{i}{C} for odd; even families therefore share A/B alphabets by construction of the canonical 192/36 census"
+ },
+ "cross_family_jaccard": {
+  "definition": "max pairwise bigram Jaccard over A-pool first-slot values, 630 family pairs",
+  "n_pairs": 630,
+  "max_jaccard": 0.0,
+  "nonzero_pairs": 0,
+  "threshold": 0.3,
+  "pass": true
+ },
+ "qcr_bank_manifest": {
+  "staged": true,
+  "sha256": "8c69804b249ec9c84cf05d86a21c7ebe7a31af5f8d45e50a4e6d477b449f9f58",
+  "expected_prefix": "8c69804b",
+  "tau": 0.3
+ },
+ "dsm_registry": {
+  "n_sites": 714,
+  "n_tools": 2147,
+  "expected": "714/2147",
+  "pass": true
+ },
+ "sgdr_index": {
+  "n_state_key": 36,
+  "expected": 36,
+  "train_only": true,
+  "pass": true,
+  "path": "research/experiments/EXP-PRODUCT-35961222077/fixtures/sgdr_index_36.json",
+  "sha256": "e93cb920a49afadc803ee2709d91068ff324dc9bd9eea88ef924c68b16c4b1a0",
+  "representation_note": "DOM-hash component of state_key unavailable without BrowserGym; TRAIN post_state hash used and disclosed"
+ },
+ "cost_config": {
+  "pass": true,
+  "values": {
+   "hit_tokens": 50,
+   "tool_lookup_tokens": 15,
+   "compile_tokens": 800,
+   "probe_tokens": 10,
+   "fullverify_tokens": 50,
+   "retrieval_tokens": 200
+  },
+  "expected": "50/15/800/10 (hit/tool/compile/probe) i.e. frozen 50/15/180/10 row read from staged cost_config"
+ },
+ "staged_artifacts": {
+  "webarena_verified_v2_tasks_192_36.json": {
+   "path": "research/experiments/EXP-PRODUCT-35961222077/fixtures/webarena_verified_v2_tasks_192_36.json",
+   "sha256": "391e8f6cf167300cf223ebbb19cf5d2beed6568f5f84ac968ae88866a438a98b",
+   "source": "research/experiments/EXP-PRODUCT-35916130502/fixtures/tasks.json",
+   "source_sha256": "391e8f6cf167300cf223ebbb19cf5d2beed6568f5f84ac968ae88866a438a98b"
+  },
+  "qcr_bank_manifest.json": {
+   "path": "research/experiments/EXP-PRODUCT-35961222077/fixtures/qcr_bank_manifest.json",
+   "sha256": "8c69804b249ec9c84cf05d86a21c7ebe7a31af5f8d45e50a4e6d477b449f9f58",
+   "source": "research/experiments/EXP-PRODUCT-35916130502/artifacts/qcr_bank_manifest.json",
+   "source_sha256": "8c69804b249ec9c84cf05d86a21c7ebe7a31af5f8d45e50a4e6d477b449f9f58"
+  },
+  "cost_config.json": {
+   "path": "research/experiments/EXP-PRODUCT-35961222077/fixtures/cost_config.json",
+   "sha256": "55fa25af079dffb372835487a31914f536ff907c0055c5e1dce86f707c2a3433",
+   "source": "research/experiments/EXP-PRODUCT-35916130502/artifacts/cost_config.json",
+   "source_sha256": "55fa25af079dffb372835487a31914f536ff907c0055c5e1dce86f707c2a3433"
+  },
+  "dsm_webmcp_sites.jsonl": {
+   "path": "research/experiments/EXP-PRODUCT-35961222077/fixtures/dsm_webmcp_sites.jsonl",
+   "sha256": "8e106525f63bd2fc3f6138511fc5b8f6e6a033aed41bee765920b8b63e33e4df",
+   "source": "research/experiments/EXP-PRODUCT-35916130502/artifacts/webmcp_sites.jsonl",
+   "source_sha256": "8e106525f63bd2fc3f6138511fc5b8f6e6a033aed41bee765920b8b63e33e4df"
+  },
+  "dsm_webmcp_registry.jsonl": {
+   "path": "research/experiments/EXP-PRODUCT-35961222077/fixtures/dsm_webmcp_registry.jsonl",
+   "sha256": "af3c18e5ef1904484c5d440353b327958bdcc909e72915b301724b9f49bcdb4c",
+   "source": "research/experiments/EXP-PRODUCT-35916130502/artifacts/webmcp_registry.jsonl",
+   "source_sha256": "af3c18e5ef1904484c5d440353b327958bdcc909e72915b301724b9f49bcdb4c"
+  }
+ }
+}

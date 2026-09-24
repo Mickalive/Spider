@@ -1,0 +1,61 @@
+{
+ "experiment_id": "EXP-PRODUCT-35961222077",
+ "checked_at": "2026-09-24T06:12:26Z",
+ "pins": {
+  "gunicorn": "23.0.0",
+  "jwt": "2.14.0",
+  "flask": "3.1.3",
+  "numpy": "2.5.3",
+  "scipy": "1.18.1",
+  "sklearn": "1.9.1",
+  "pandas": "3.0.6"
+ },
+ "gunicorn": {
+  "cmd": "gunicorn --version",
+  "exit": 0,
+  "stdout": "gunicorn (version 23.0.0)\n",
+  "stderr": ""
+ },
+ "nginx_version": {
+  "cmd": "nginx -v",
+  "exit": 0,
+  "stdout": "",
+  "stderr": "nginx version: nginx/1.24.0 (Ubuntu)\n"
+ },
+ "python": "3.12.14 (main, Aug 13 2026, 02:47:42) [GCC 13.3.0]",
+ "openai_key_present": false,
+ "openai_key_note": "ABSENT",
+ "kernel_sha256_working_tree": "d926279d5ee14a044a2f13b8abc09202df9f5adb9e86feaadeb61818a15f4038",
+ "kernel_sha256_head": "8af66ccfb6f848e1f89805e90a1f52683ee28f62c9dd7b97f9d2762390e7b386",
+ "docker_pull_browsergym": {
+  "cmd": "docker pull ghcr.io/servicenow/browsergym:0.14.3",
+  "exit": 1,
+  "stdout": "",
+  "stderr": "Error response from daemon: Head \"https://ghcr.io/v2/servicenow/browsergym/manifests/0.14.3\": denied\n"
+ },
+ "docker_images": {
+  "cmd": "docker images",
+  "exit": 0,
+  "stdout": "REPOSITORY                                   TAG       IMAGE ID       CREATED       SIZE\nghcr.io/github/gh-aw-firewall/agent          latest    bd7acdea5936   2 weeks ago   569MB\nghcr.io/github/gh-aw-firewall/api-proxy      latest    9d8f8fbebb48   2 weeks ago   231MB\nghcr.io/github/gh-aw-mcpg                    latest    5f22df3c4a88   2 weeks ago   181MB\nghcr.io/dependabot/dependabot-updater-core   latest    5c1f9f1da87f   2 weeks ago   826MB\nghcr.io/github/github-mcp-server             latest    3e165e25be8d   2 weeks ago   46.8MB\nghcr.io/github/gh-aw-firewall/squid          latest    ebc9c9e5ccbd   6 weeks ago   43.1MB\n",
+  "stderr": ""
+ },
+ "browsergym_local_image": false,
+ "pip_webarena": {
+  "cmd": "/opt/hostedtoolcache/Python/3.12.14/x64/bin/python3 -m pip index versions webarena",
+  "exit": 1,
+  "stdout": "",
+  "stderr": "ERROR: No matching distribution found for webarena\n"
+ },
+ "pip_browsergym_meta": {
+  "cmd": "/opt/hostedtoolcache/Python/3.12.14/x64/bin/python3 -m pip download browsergym==0.14.3 --no-deps -d /tmp/bgcheck",
+  "exit": 0,
+  "stdout": "Collecting browsergym==0.14.3\n  Using cached browsergym-0.14.3-py3-none-any.whl.metadata (1.2 kB)\nUsing cached browsergym-0.14.3-py3-none-any.whl (1.5 kB)\nSaved /tmp/bgcheck/browsergym-0.14.3-py3-none-any.whl\nSuccessfully downloaded browsergym\n",
+  "stderr": ""
+ },
+ "playwright_importable": {
+  "cmd": "/opt/hostedtoolcache/Python/3.12.14/x64/bin/python3 -c import playwright",
+  "exit": 1,
+  "stdout": "",
+  "stderr": "Traceback (most recent call last):\n  File \"<string>\", line 1, in <module>\nModuleNotFoundError: No module named 'playwright'\n"
+ }
+}

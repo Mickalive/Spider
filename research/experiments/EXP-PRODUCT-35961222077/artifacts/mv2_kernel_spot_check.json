@@ -1,0 +1,64 @@
+{
+ "experiment_id": "EXP-PRODUCT-35961222077",
+ "check": "MV3/PC2 kernel dot-regex spot-check",
+ "kernel_sha256": "d926279d5ee14a044a2f13b8abc09202df9f5adb9e86feaadeb61818a15f4038",
+ "regex": "r'\\$\\{[A-Za-z_][A-Za-z0-9_\\.]*\\}'",
+ "head_regex_pre_patch": "r'\\$\\{[A-Za-z_][A-Za-z0-9_]*\\}'",
+ "n_pass": 5,
+ "n_total": 5,
+ "confidence_all_ge_080": true,
+ "family_gate_UNKNOWN_on_wrong_family": true,
+ "results": [
+  {
+   "template": "/api/items/${item.id}",
+   "slot": "item.id",
+   "status": "EXECUTABLE",
+   "bound_url": "/api/items/IT-77",
+   "expected": "/api/items/IT-77",
+   "confidence": 0.85,
+   "pass": true,
+   "family_gate_wrong_status": "UNKNOWN"
+  },
+  {
+   "template": "/api/families/${family.id}/items",
+   "slot": "family.id",
+   "status": "EXECUTABLE",
+   "bound_url": "/api/families/fam_03/items",
+   "expected": "/api/families/fam_03/items",
+   "confidence": 0.85,
+   "pass": true,
+   "family_gate_wrong_status": "UNKNOWN"
+  },
+  {
+   "template": "https://${site.name}/catalog",
+   "slot": "site.name",
+   "status": "EXECUTABLE",
+   "bound_url": "https://shop07.example.com/catalog",
+   "expected": "https://shop07.example.com/catalog",
+   "confidence": 0.85,
+   "pass": true,
+   "family_gate_wrong_status": "UNKNOWN"
+  },
+  {
+   "template": "/api/users/${user.profile.id}/profile",
+   "slot": "user.profile.id",
+   "status": "EXECUTABLE",
+   "bound_url": "/api/users/u-9182/profile",
+   "expected": "/api/users/u-9182/profile",
+   "confidence": 0.85,
+   "pass": true,
+   "family_gate_wrong_status": "UNKNOWN"
+  },
+  {
+   "template": "/orders/${order.item.sku}/status",
+   "slot": "order.item.sku",
+   "status": "EXECUTABLE",
+   "bound_url": "/orders/SKU-42A/status",
+   "expected": "/orders/SKU-42A/status",
+   "confidence": 0.85,
+   "pass": true,
+   "family_gate_wrong_status": "UNKNOWN"
+  }
+ ],
+ "pass": true
+}

@@ -1,0 +1,233 @@
+{
+ "experiment_id": "EXP-PRODUCT-35961222077",
+ "definition": "MV10 prereg MockEnv: softmax temp0.15 + jitter, wrong-bound p=0.15, EXEC rows for AUROC",
+ "n": 1000,
+ "AUROC_verif_true": 0.9194597379181557,
+ "AUROC_shuffled_null": 0.48184101226697573,
+ "precision_verif": 0.9682539682539683,
+ "false_accept_rate_wrong_bound": 0.032989690721649485,
+ "forced_execute_wrong_accept_rate": 0.16907216494845362,
+ "confidence_std": 0.4528861339879617,
+ "UNKNOWN_precision": 0.9829268292682927,
+ "ECE_5bin": 0.10263369771787187,
+ "ece_empty_bins": 0,
+ "n_unknown": 410,
+ "n_exec": 504,
+ "thresholds": {
+  "AUROC_true": 0.75,
+  "AUROC_shuf_range": [
+   0.45,
+   0.6
+  ],
+  "precision": 0.8,
+  "false_accept_forced_range": [
+   0.1,
+   0.6
+  ],
+  "confidence_std_gt": 0.05,
+  "ECE_max": 0.15
+ },
+ "pass": true,
+ "rows_sample": [
+  {
+   "i": 0,
+   "correct": 0,
+   "confidence": 0.03279731895631703,
+   "verify_pass": 0,
+   "unknown": 1,
+   "executable": 0,
+   "false_accept": 0,
+   "wrong_bound": 1
+  },
+  {
+   "i": 1,
+   "correct": 0,
+   "confidence": 0.9442634337164317,
+   "verify_pass": 0,
+   "unknown": 0,
+   "executable": 0,
+   "false_accept": 0,
+   "wrong_bound": 1
+  },
+  {
+   "i": 2,
+   "correct": 1,
+   "confidence": 0.999,
+   "verify_pass": 1,
+   "unknown": 0,
+   "executable": 1,
+   "false_accept": 0,
+   "wrong_bound": 0
+  },
+  {
+   "i": 3,
+   "correct": 0,
+   "confidence": 0.036094633029382976,
+   "verify_pass": 0,
+   "unknown": 1,
+   "executable": 0,
+   "false_accept": 0,
+   "wrong_bound": 1
+  },
+  {
+   "i": 4,
+   "correct": 1,
+   "confidence": 0.9655475453622275,
+   "verify_pass": 1,
+   "unknown": 0,
+   "executable": 1,
+   "false_accept": 0,
+   "wrong_bound": 0
+  },
+  {
+   "i": 5,
+   "correct": 0,
+   "confidence": 0.001,
+   "verify_pass": 1,
+   "unknown": 1,
+   "executable": 0,
+   "false_accept": 0,
+   "wrong_bound": 1
+  },
+  {
+   "i": 6,
+   "correct": 0,
+   "confidence": 0.048178572095570096,
+   "verify_pass": 0,
+   "unknown": 1,
+   "executable": 0,
+   "false_accept": 0,
+   "wrong_bound": 1
+  },
+  {
+   "i": 7,
+   "correct": 1,
+   "confidence": 0.999,
+   "verify_pass": 1,
+   "unknown": 0,
+   "executable": 1,
+   "false_accept": 0,
+   "wrong_bound": 0
+  },
+  {
+   "i": 8,
+   "correct": 0,
+   "confidence": 0.001,
+   "verify_pass": 0,
+   "unknown": 1,
+   "executable": 0,
+   "false_accept": 0,
+   "wrong_bound": 1
+  },
+  {
+   "i": 9,
+   "correct": 1,
+   "confidence": 0.9732786787289764,
+   "verify_pass": 1,
+   "unknown": 0,
+   "executable": 1,
+   "false_accept": 0,
+   "wrong_bound": 0
+  },
+  {
+   "i": 10,
+   "correct": 1,
+   "confidence": 0.987014320417269,
+   "verify_pass": 1,
+   "unknown": 0,
+   "executable": 1,
+   "false_accept": 0,
+   "wrong_bound": 0
+  },
+  {
+   "i": 11,
+   "correct": 1,
+   "confidence": 0.999,
+   "verify_pass": 1,
+   "unknown": 0,
+   "executable": 1,
+   "false_accept": 0,
+   "wrong_bound": 0
+  },
+  {
+   "i": 12,
+   "correct": 0,
+   "confidence": 0.001,
+   "verify_pass": 0,
+   "unknown": 1,
+   "executable": 0,
+   "false_accept": 0,
+   "wrong_bound": 1
+  },
+  {
+   "i": 13,
+   "correct": 0,
+   "confidence": 0.018509240302607623,
+   "verify_pass": 0,
+   "unknown": 1,
+   "executable": 0,
+   "false_accept": 0,
+   "wrong_bound": 1
+  },
+  {
+   "i": 14,
+   "correct": 0,
+   "confidence": 0.3990448854375251,
+   "verify_pass": 0,
+   "unknown": 1,
+   "executable": 0,
+   "false_accept": 0,
+   "wrong_bound": 1
+  },
+  {
+   "i": 15,
+   "correct": 1,
+   "confidence": 0.999,
+   "verify_pass": 1,
+   "unknown": 0,
+   "executable": 1,
+   "false_accept": 0,
+   "wrong_bound": 0
+  },
+  {
+   "i": 16,
+   "correct": 1,
+   "confidence": 0.9888301745741097,
+   "verify_pass": 1,
+   "unknown": 0,
+   "executable": 1,
+   "false_accept": 0,
+   "wrong_bound": 0
+  },
+  {
+   "i": 17,
+   "correct": 1,
+   "confidence": 0.999,
+   "verify_pass": 1,
+   "unknown": 0,
+   "executable": 1,
+   "false_accept": 0,
+   "wrong_bound": 0
+  },
+  {
+   "i": 18,
+   "correct": 1,
+   "confidence": 0.9719320756525585,
+   "verify_pass": 1,
+   "unknown": 0,
+   "executable": 1,
+   "false_accept": 0,
+   "wrong_bound": 0
+  },
+  {
+   "i": 19,
+   "correct": 0,
+   "confidence": 0.001,
+   "verify_pass": 1,
+   "unknown": 1,
+   "executable": 0,
+   "false_accept": 0,
+   "wrong_bound": 1
+  }
+ ]
+}

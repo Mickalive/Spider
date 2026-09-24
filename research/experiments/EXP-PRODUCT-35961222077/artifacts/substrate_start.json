@@ -1,0 +1,20 @@
+{
+ "experiment_id": "EXP-PRODUCT-35961222077",
+ "started_at": "2026-09-24T06:12:28Z",
+ "nginx_test": {
+  "cmd": "nginx -t -c /tmp/spider-runtime/nginx.conf",
+  "exit": 0,
+  "stdout": "",
+  "stderr": "nginx: the configuration file /tmp/spider-runtime/nginx.conf syntax is ok\nnginx: configuration file /tmp/spider-runtime/nginx.conf test is successful\n"
+ },
+ "gunicorn_pid": 69029,
+ "gunicorn_up": true,
+ "nginx_start_exit": 0,
+ "nginx_up": true,
+ "health_direct": {
+  "alg": "HS256",
+  "journal_mode": "wal",
+  "ok": true,
+  "pid": 69030
+ }
+}

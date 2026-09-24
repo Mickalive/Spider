@@ -1,0 +1,5384 @@
+{
+ "main": [
+  {
+   "tokens": 530,
+   "per_hit": 66.25,
+   "L": 8,
+   "n": 0.0,
+   "novel": 0,
+   "reused": 8,
+   "family_id": "family_00",
+   "task_id": "task_0000"
+  },
+  {
+   "tokens": 910,
+   "per_hit": 113.75,
+   "L": 8,
+   "n": 0.5,
+   "novel": 1,
+   "reused": 6,
+   "family_id": "family_00",
+   "task_id": "task_0001"
+  },
+  {
+   "tokens": 910,
+   "per_hit": 113.75,
+   "L": 8,
+   "n": 0.5,
+   "novel": 1,
+   "reused": 6,
+   "family_id": "family_00",
+   "task_id": "task_0002"
+  },
+  {
+   "tokens": 1290,
+   "per_hit": 161.25,
+   "L": 8,
+   "n": 1.0,
+   "novel": 2,
+   "reused": 4,
+   "family_id": "family_00",
+   "task_id": "task_0003"
+  },
+  {
+   "tokens": 1290,
+   "per_hit": 161.25,
+   "L": 8,
+   "n": 1.0,
+   "novel": 2,
+   "reused": 4,
+   "family_id": "family_00",
+   "task_id": "task_0004"
+  },
+  {
+   "tokens": 910,
+   "per_hit": 113.75,
+   "L": 8,
+   "n": 0.5,
+   "novel": 1,
+   "reused": 6,
+   "family_id": "family_00",
+   "task_id": "task_0005"
+  },
+  {
+   "tokens": 590,
+   "per_hit": 65.55555555555556,
+   "L": 9,
+   "n": 0.0,
+   "novel": 0,
+   "reused": 9,
+   "family_id": "family_01",
+   "task_id": "task_0006"
+  },
+  {
+   "tokens": 970,
+   "per_hit": 107.77777777777777,
+   "L": 9,
+   "n": 0.5,
+   "novel": 1,
+   "reused": 7,
+   "family_id": "family_01",
+   "task_id": "task_0007"
+  },
+  {
+   "tokens": 1350,
+   "per_hit": 150.0,
+   "L": 9,
+   "n": 1.0,
+   "novel": 2,
+   "reused": 5,
+   "family_id": "family_01",
+   "task_id": "task_0008"
+  },
+  {
+   "tokens": 1350,
+   "per_hit": 150.0,
+   "L": 9,
+   "n": 1.0,
+   "novel": 2,
+   "reused": 5,
+   "family_id": "family_01",
+   "task_id": "task_0009"
+  },
+  {
+   "tokens": 970,
+   "per_hit": 107.77777777777777,
+   "L": 9,
+   "n": 0.5,
+   "novel": 1,
+   "reused": 7,
+   "family_id": "family_01",
+   "task_id": "task_0010"
+  },
+  {
+   "tokens": 970,
+   "per_hit": 107.77777777777777,
+   "L": 9,
+   "n": 0.5,
+   "novel": 1,
+   "reused": 7,
+   "family_id": "family_01",
+   "task_id": "task_0011"
+  },
+  {
+   "tokens": 650,
+   "per_hit": 65.0,
+   "L": 10,
+   "n": 0.0,
+   "novel": 0,
+   "reused": 10,
+   "family_id": "family_02",
+   "task_id": "task_0012"
+  },
+  {
+   "tokens": 1410,
+   "per_hit": 141.0,
+   "L": 10,
+   "n": 0.6667,
+   "novel": 2,
+   "reused": 6,
+   "family_id": "family_02",
+   "task_id": "task_0013"
+  },
+  {
+   "tokens": 1790,
+   "per_hit": 179.0,
+   "L": 10,
+   "n": 1.0,
+   "novel": 3,
+   "reused": 4,
+   "family_id": "family_02",
+   "task_id": "task_0014"
+  },
+  {
+   "tokens": 1030,
+   "per_hit": 103.0,
+   "L": 10,
+   "n": 0.3333,
+   "novel": 1,
+   "reused": 8,
+   "family_id": "family_02",
+   "task_id": "task_0015"
+  },
+  {
+   "tokens": 1410,
+   "per_hit": 141.0,
+   "L": 10,
+   "n": 0.6667,
+   "novel": 2,
+   "reused": 6,
+   "family_id": "family_02",
+   "task_id": "task_0016"
+  },
+  {
+   "tokens": 1410,
+   "per_hit": 141.0,
+   "L": 10,
+   "n": 0.6667,
+   "novel": 2,
+   "reused": 6,
+   "family_id": "family_02",
+   "task_id": "task_0017"
+  },
+  {
+   "tokens": 710,
+   "per_hit": 64.54545454545455,
+   "L": 11,
+   "n": 0.0,
+   "novel": 0,
+   "reused": 11,
+   "family_id": "family_03",
+   "task_id": "task_0018"
+  },
+  {
+   "tokens": 1090,
+   "per_hit": 99.0909090909091,
+   "L": 11,
+   "n": 1.0,
+   "novel": 1,
+   "reused": 9,
+   "family_id": "family_03",
+   "task_id": "task_0019"
+  },
+  {
+   "tokens": 710,
+   "per_hit": 64.54545454545455,
+   "L": 11,
+   "n": 0.0,
+   "novel": 0,
+   "reused": 11,
+   "family_id": "family_03",
+   "task_id": "task_0020"
+  },
+  {
+   "tokens": 1090,
+   "per_hit": 99.0909090909091,
+   "L": 11,
+   "n": 1.0,
+   "novel": 1,
+   "reused": 9,
+   "family_id": "family_03",
+   "task_id": "task_0021"
+  },
+  {
+   "tokens": 1090,
+   "per_hit": 99.0909090909091,
+   "L": 11,
+   "n": 1.0,
+   "novel": 1,
+   "reused": 9,
+   "family_id": "family_03",
+   "task_id": "task_0022"
+  },
+  {
+   "tokens": 1090,
+   "per_hit": 99.0909090909091,
+   "L": 11,
+   "n": 1.0,
+   "novel": 1,
+   "reused": 9,
+   "family_id": "family_03",
+   "task_id": "task_0023"
+  },
+  {
+   "tokens": 770,
+   "per_hit": 64.16666666666667,
+   "L": 12,
+   "n": 0.0,
+   "novel": 0,
+   "reused": 12,
+   "family_id": "family_04",
+   "task_id": "task_0024"
+  },
+  {
+   "tokens": 1150,
+   "per_hit": 95.83333333333333,
+   "L": 12,
+   "n": 0.5,
+   "novel": 1,
+   "reused": 10,
+   "family_id": "family_04",
+   "task_id": "task_0025"
+  },
+  {
+   "tokens": 1150,
+   "per_hit": 95.83333333333333,
+   "L": 12,
+   "n": 0.5,
+   "novel": 1,
+   "reused": 10,
+   "family_id": "family_04",
+   "task_id": "task_0026"
+  },
+  {
+   "tokens": 1530,
+   "per_hit": 127.5,
+   "L": 12,
+   "n": 1.0,
+   "novel": 2,
+   "reused": 8,
+   "family_id": "family_04",
+   "task_id": "task_0027"
+  },
+  {
+   "tokens": 1530,
+   "per_hit": 127.5,
+   "L": 12,
+   "n": 1.0,
+   "novel": 2,
+   "reused": 8,
+   "family_id": "family_04",
+   "task_id": "task_0028"
+  },
+  {
+   "tokens": 1150,
+   "per_hit": 95.83333333333333,
+   "L": 12,
+   "n": 0.5,
+   "novel": 1,
+   "reused": 10,
+   "family_id": "family_04",
+   "task_id": "task_0029"
+  },
+  {
+   "tokens": 830,
+   "per_hit": 63.84615384615385,
+   "L": 13,
+   "n": 0.0,
+   "novel": 0,
+   "reused": 13,
+   "family_id": "family_05",
+   "task_id": "task_0030"
+  },
+  {
+   "tokens": 1210,
+   "per_hit": 93.07692307692308,
+   "L": 13,
+   "n": 0.5,
+   "novel": 1,
+   "reused": 11,
+   "family_id": "family_05",
+   "task_id": "task_0031"
+  },
+  {
+   "tokens": 1590,
+   "per_hit": 122.3076923076923,
+   "L": 13,
+   "n": 1.0,
+   "novel": 2,
+   "reused": 9,
+   "family_id": "family_05",
+   "task_id": "task_0032"
+  },
+  {
+   "tokens": 1590,
+   "per_hit": 122.3076923076923,
+   "L": 13,
+   "n": 1.0,
+   "novel": 2,
+   "reused": 9,
+   "family_id": "family_05",
+   "task_id": "task_0033"
+  },
+  {
+   "tokens": 1210,
+   "per_hit": 93.07692307692308,
+   "L": 13,
+   "n": 0.5,
+   "novel": 1,
+   "reused": 11,
+   "family_id": "family_05",
+   "task_id": "task_0034"
+  },
+  {
+   "tokens": 1210,
+   "per_hit": 93.07692307692308,
+   "L": 13,
+   "n": 0.5,
+   "novel": 1,
+   "reused": 11,
+   "family_id": "family_05",
+   "task_id": "task_0035"
+  },
+  {
+   "tokens": 890,
+   "per_hit": 63.57142857142857,
+   "L": 14,
+   "n": 0.0,
+   "novel": 0,
+   "reused": 14,
+   "family_id": "family_06",
+   "task_id": "task_0036"
+  },
+  {
+   "tokens": 1650,
+   "per_hit": 117.85714285714286,
+   "L": 14,
+   "n": 0.6667,
+   "novel": 2,
+   "reused": 10,
+   "family_id": "family_06",
+   "task_id": "task_0037"
+  },
+  {
+   "tokens": 2030,
+   "per_hit": 145.0,
+   "L": 14,
+   "n": 1.0,
+   "novel": 3,
+   "reused": 8,
+   "family_id": "family_06",
+   "task_id": "task_0038"
+  },
+  {
+   "tokens": 1270,
+   "per_hit": 90.71428571428571,
+   "L": 14,
+   "n": 0.3333,
+   "novel": 1,
+   "reused": 12,
+   "family_id": "family_06",
+   "task_id": "task_0039"
+  },
+  {
+   "tokens": 1650,
+   "per_hit": 117.85714285714286,
+   "L": 14,
+   "n": 0.6667,
+   "novel": 2,
+   "reused": 10,
+   "family_id": "family_06",
+   "task_id": "task_0040"
+  },
+  {
+   "tokens": 1650,
+   "per_hit": 117.85714285714286,
+   "L": 14,
+   "n": 0.6667,
+   "novel": 2,
+   "reused": 10,
+   "family_id": "family_06",
+   "task_id": "task_0041"
+  },
+  {
+   "tokens": 530,
+   "per_hit": 66.25,
+   "L": 8,
+   "n": 0.0,
+   "novel": 0,
+   "reused": 8,
+   "family_id": "family_07",
+   "task_id": "task_0042"
+  },
+  {
+   "tokens": 910,
+   "per_hit": 113.75,
+   "L": 8,
+   "n": 1.0,
+   "novel": 1,
+   "reused": 6,
+   "family_id": "family_07",
+   "task_id": "task_0043"
+  },
+  {
+   "tokens": 530,
+   "per_hit": 66.25,
+   "L": 8,
+   "n": 0.0,
+   "novel": 0,
+   "reused": 8,
+   "family_id": "family_07",
+   "task_id": "task_0044"
+  },
+  {
+   "tokens": 910,
+   "per_hit": 113.75,
+   "L": 8,
+   "n": 1.0,
+   "novel": 1,
+   "reused": 6,
+   "family_id": "family_07",
+   "task_id": "task_0045"
+  },
+  {
+   "tokens": 910,
+   "per_hit": 113.75,
+   "L": 8,
+   "n": 1.0,
+   "novel": 1,
+   "reused": 6,
+   "family_id": "family_07",
+   "task_id": "task_0046"
+  },
+  {
+   "tokens": 910,
+   "per_hit": 113.75,
+   "L": 8,
+   "n": 1.0,
+   "novel": 1,
+   "reused": 6,
+   "family_id": "family_07",
+   "task_id": "task_0047"
+  },
+  {
+   "tokens": 590,
+   "per_hit": 65.55555555555556,
+   "L": 9,
+   "n": 0.0,
+   "novel": 0,
+   "reused": 9,
+   "family_id": "family_08",
+   "task_id": "task_0048"
+  },
+  {
+   "tokens": 970,
+   "per_hit": 107.77777777777777,
+   "L": 9,
+   "n": 0.5,
+   "novel": 1,
+   "reused": 7,
+   "family_id": "family_08",
+   "task_id": "task_0049"
+  },
+  {
+   "tokens": 970,
+   "per_hit": 107.77777777777777,
+   "L": 9,
+   "n": 0.5,
+   "novel": 1,
+   "reused": 7,
+   "family_id": "family_08",
+   "task_id": "task_0050"
+  },
+  {
+   "tokens": 1350,
+   "per_hit": 150.0,
+   "L": 9,
+   "n": 1.0,
+   "novel": 2,
+   "reused": 5,
+   "family_id": "family_08",
+   "task_id": "task_0051"
+  },
+  {
+   "tokens": 1350,
+   "per_hit": 150.0,
+   "L": 9,
+   "n": 1.0,
+   "novel": 2,
+   "reused": 5,
+   "family_id": "family_08",
+   "task_id": "task_0052"
+  },
+  {
+   "tokens": 970,
+   "per_hit": 107.77777777777777,
+   "L": 9,
+   "n": 0.5,
+   "novel": 1,
+   "reused": 7,
+   "family_id": "family_08",
+   "task_id": "task_0053"
+  },
+  {
+   "tokens": 650,
+   "per_hit": 65.0,
+   "L": 10,
+   "n": 0.0,
+   "novel": 0,
+   "reused": 10,
+   "family_id": "family_09",
+   "task_id": "task_0054"
+  },
+  {
+   "tokens": 1030,
+   "per_hit": 103.0,
+   "L": 10,
+   "n": 0.5,
+   "novel": 1,
+   "reused": 8,
+   "family_id": "family_09",
+   "task_id": "task_0055"
+  },
+  {
+   "tokens": 1410,
+   "per_hit": 141.0,
+   "L": 10,
+   "n": 1.0,
+   "novel": 2,
+   "reused": 6,
+   "family_id": "family_09",
+   "task_id": "task_0056"
+  },
+  {
+   "tokens": 1410,
+   "per_hit": 141.0,
+   "L": 10,
+   "n": 1.0,
+   "novel": 2,
+   "reused": 6,
+   "family_id": "family_09",
+   "task_id": "task_0057"
+  },
+  {
+   "tokens": 1030,
+   "per_hit": 103.0,
+   "L": 10,
+   "n": 0.5,
+   "novel": 1,
+   "reused": 8,
+   "family_id": "family_09",
+   "task_id": "task_0058"
+  },
+  {
+   "tokens": 1030,
+   "per_hit": 103.0,
+   "L": 10,
+   "n": 0.5,
+   "novel": 1,
+   "reused": 8,
+   "family_id": "family_09",
+   "task_id": "task_0059"
+  },
+  {
+   "tokens": 710,
+   "per_hit": 64.54545454545455,
+   "L": 11,
+   "n": 0.0,
+   "novel": 0,
+   "reused": 11,
+   "family_id": "family_10",
+   "task_id": "task_0060"
+  },
+  {
+   "tokens": 1470,
+   "per_hit": 133.63636363636363,
+   "L": 11,
+   "n": 0.6667,
+   "novel": 2,
+   "reused": 7,
+   "family_id": "family_10",
+   "task_id": "task_0061"
+  },
+  {
+   "tokens": 1850,
+   "per_hit": 168.1818181818182,
+   "L": 11,
+   "n": 1.0,
+   "novel": 3,
+   "reused": 5,
+   "family_id": "family_10",
+   "task_id": "task_0062"
+  },
+  {
+   "tokens": 1090,
+   "per_hit": 99.0909090909091,
+   "L": 11,
+   "n": 0.3333,
+   "novel": 1,
+   "reused": 9,
+   "family_id": "family_10",
+   "task_id": "task_0063"
+  },
+  {
+   "tokens": 1470,
+   "per_hit": 133.63636363636363,
+   "L": 11,
+   "n": 0.6667,
+   "novel": 2,
+   "reused": 7,
+   "family_id": "family_10",
+   "task_id": "task_0064"
+  },
+  {
+   "tokens": 1470,
+   "per_hit": 133.63636363636363,
+   "L": 11,
+   "n": 0.6667,
+   "novel": 2,
+   "reused": 7,
+   "family_id": "family_10",
+   "task_id": "task_0065"
+  },
+  {
+   "tokens": 770,
+   "per_hit": 64.16666666666667,
+   "L": 12,
+   "n": 0.0,
+   "novel": 0,
+   "reused": 12,
+   "family_id": "family_11",
+   "task_id": "task_0066"
+  },
+  {
+   "tokens": 1150,
+   "per_hit": 95.83333333333333,
+   "L": 12,
+   "n": 1.0,
+   "novel": 1,
+   "reused": 10,
+   "family_id": "family_11",
+   "task_id": "task_0067"
+  },
+  {
+   "tokens": 770,
+   "per_hit": 64.16666666666667,
+   "L": 12,
+   "n": 0.0,
+   "novel": 0,
+   "reused": 12,
+   "family_id": "family_11",
+   "task_id": "task_0068"
+  },
+  {
+   "tokens": 1150,
+   "per_hit": 95.83333333333333,
+   "L": 12,
+   "n": 1.0,
+   "novel": 1,
+   "reused": 10,
+   "family_id": "family_11",
+   "task_id": "task_0069"
+  },
+  {
+   "tokens": 1150,
+   "per_hit": 95.83333333333333,
+   "L": 12,
+   "n": 1.0,
+   "novel": 1,
+   "reused": 10,
+   "family_id": "family_11",
+   "task_id": "task_0070"
+  },
+  {
+   "tokens": 1150,
+   "per_hit": 95.83333333333333,
+   "L": 12,
+   "n": 1.0,
+   "novel": 1,
+   "reused": 10,
+   "family_id": "family_11",
+   "task_id": "task_0071"
+  },
+  {
+   "tokens": 830,
+   "per_hit": 63.84615384615385,
+   "L": 13,
+   "n": 0.0,
+   "novel": 0,
+   "reused": 13,
+   "family_id": "family_12",
+   "task_id": "task_0072"
+  },
+  {
+   "tokens": 1210,
+   "per_hit": 93.07692307692308,
+   "L": 13,
+   "n": 0.5,
+   "novel": 1,
+   "reused": 11,
+   "family_id": "family_12",
+   "task_id": "task_0073"
+  },
+  {
+   "tokens": 1210,
+   "per_hit": 93.07692307692308,
+   "L": 13,
+   "n": 0.5,
+   "novel": 1,
+   "reused": 11,
+   "family_id": "family_12",
+   "task_id": "task_0074"
+  },
+  {
+   "tokens": 1590,
+   "per_hit": 122.3076923076923,
+   "L": 13,
+   "n": 1.0,
+   "novel": 2,
+   "reused": 9,
+   "family_id": "family_12",
+   "task_id": "task_0075"
+  },
+  {
+   "tokens": 1590,
+   "per_hit": 122.3076923076923,
+   "L": 13,
+   "n": 1.0,
+   "novel": 2,
+   "reused": 9,
+   "family_id": "family_12",
+   "task_id": "task_0076"
+  },
+  {
+   "tokens": 890,
+   "per_hit": 63.57142857142857,
+   "L": 14,
+   "n": 0.0,
+   "novel": 0,
+   "reused": 14,
+   "family_id": "family_13",
+   "task_id": "task_0077"
+  },
+  {
+   "tokens": 1270,
+   "per_hit": 90.71428571428571,
+   "L": 14,
+   "n": 0.5,
+   "novel": 1,
+   "reused": 12,
+   "family_id": "family_13",
+   "task_id": "task_0078"
+  },
+  {
+   "tokens": 1650,
+   "per_hit": 117.85714285714286,
+   "L": 14,
+   "n": 1.0,
+   "novel": 2,
+   "reused": 10,
+   "family_id": "family_13",
+   "task_id": "task_0079"
+  },
+  {
+   "tokens": 1650,
+   "per_hit": 117.85714285714286,
+   "L": 14,
+   "n": 1.0,
+   "novel": 2,
+   "reused": 10,
+   "family_id": "family_13",
+   "task_id": "task_0080"
+  },
+  {
+   "tokens": 1270,
+   "per_hit": 90.71428571428571,
+   "L": 14,
+   "n": 0.5,
+   "novel": 1,
+   "reused": 12,
+   "family_id": "family_13",
+   "task_id": "task_0081"
+  },
+  {
+   "tokens": 530,
+   "per_hit": 66.25,
+   "L": 8,
+   "n": 0.0,
+   "novel": 0,
+   "reused": 8,
+   "family_id": "family_14",
+   "task_id": "task_0082"
+  },
+  {
+   "tokens": 1290,
+   "per_hit": 161.25,
+   "L": 8,
+   "n": 0.6667,
+   "novel": 2,
+   "reused": 4,
+   "family_id": "family_14",
+   "task_id": "task_0083"
+  },
+  {
+   "tokens": 1670,
+   "per_hit": 208.75,
+   "L": 8,
+   "n": 1.0,
+   "novel": 3,
+   "reused": 2,
+   "family_id": "family_14",
+   "task_id": "task_0084"
+  },
+  {
+   "tokens": 910,
+   "per_hit": 113.75,
+   "L": 8,
+   "n": 0.3333,
+   "novel": 1,
+   "reused": 6,
+   "family_id": "family_14",
+   "task_id": "task_0085"
+  },
+  {
+   "tokens": 1290,
+   "per_hit": 161.25,
+   "L": 8,
+   "n": 0.6667,
+   "novel": 2,
+   "reused": 4,
+   "family_id": "family_14",
+   "task_id": "task_0086"
+  },
+  {
+   "tokens": 590,
+   "per_hit": 65.55555555555556,
+   "L": 9,
+   "n": 0.0,
+   "novel": 0,
+   "reused": 9,
+   "family_id": "family_15",
+   "task_id": "task_0087"
+  },
+  {
+   "tokens": 970,
+   "per_hit": 107.77777777777777,
+   "L": 9,
+   "n": 1.0,
+   "novel": 1,
+   "reused": 7,
+   "family_id": "family_15",
+   "task_id": "task_0088"
+  },
+  {
+   "tokens": 590,
+   "per_hit": 65.55555555555556,
+   "L": 9,
+   "n": 0.0,
+   "novel": 0,
+   "reused": 9,
+   "family_id": "family_15",
+   "task_id": "task_0089"
+  },
+  {
+   "tokens": 970,
+   "per_hit": 107.77777777777777,
+   "L": 9,
+   "n": 1.0,
+   "novel": 1,
+   "reused": 7,
+   "family_id": "family_15",
+   "task_id": "task_0090"
+  },
+  {
+   "tokens": 970,
+   "per_hit": 107.77777777777777,
+   "L": 9,
+   "n": 1.0,
+   "novel": 1,
+   "reused": 7,
+   "family_id": "family_15",
+   "task_id": "task_0091"
+  },
+  {
+   "tokens": 650,
+   "per_hit": 65.0,
+   "L": 10,
+   "n": 0.0,
+   "novel": 0,
+   "reused": 10,
+   "family_id": "family_16",
+   "task_id": "task_0092"
+  },
+  {
+   "tokens": 1030,
+   "per_hit": 103.0,
+   "L": 10,
+   "n": 0.5,
+   "novel": 1,
+   "reused": 8,
+   "family_id": "family_16",
+   "task_id": "task_0093"
+  },
+  {
+   "tokens": 1030,
+   "per_hit": 103.0,
+   "L": 10,
+   "n": 0.5,
+   "novel": 1,
+   "reused": 8,
+   "family_id": "family_16",
+   "task_id": "task_0094"
+  },
+  {
+   "tokens": 1410,
+   "per_hit": 141.0,
+   "L": 10,
+   "n": 1.0,
+   "novel": 2,
+   "reused": 6,
+   "family_id": "family_16",
+   "task_id": "task_0095"
+  },
+  {
+   "tokens": 1410,
+   "per_hit": 141.0,
+   "L": 10,
+   "n": 1.0,
+   "novel": 2,
+   "reused": 6,
+   "family_id": "family_16",
+   "task_id": "task_0096"
+  },
+  {
+   "tokens": 710,
+   "per_hit": 64.54545454545455,
+   "L": 11,
+   "n": 0.0,
+   "novel": 0,
+   "reused": 11,
+   "family_id": "family_17",
+   "task_id": "task_0097"
+  },
+  {
+   "tokens": 1090,
+   "per_hit": 99.0909090909091,
+   "L": 11,
+   "n": 0.5,
+   "novel": 1,
+   "reused": 9,
+   "family_id": "family_17",
+   "task_id": "task_0098"
+  },
+  {
+   "tokens": 1470,
+   "per_hit": 133.63636363636363,
+   "L": 11,
+   "n": 1.0,
+   "novel": 2,
+   "reused": 7,
+   "family_id": "family_17",
+   "task_id": "task_0099"
+  },
+  {
+   "tokens": 1470,
+   "per_hit": 133.63636363636363,
+   "L": 11,
+   "n": 1.0,
+   "novel": 2,
+   "reused": 7,
+   "family_id": "family_17",
+   "task_id": "task_0100"
+  },
+  {
+   "tokens": 1090,
+   "per_hit": 99.0909090909091,
+   "L": 11,
+   "n": 0.5,
+   "novel": 1,
+   "reused": 9,
+   "family_id": "family_17",
+   "task_id": "task_0101"
+  },
+  {
+   "tokens": 770,
+   "per_hit": 64.16666666666667,
+   "L": 12,
+   "n": 0.0,
+   "novel": 0,
+   "reused": 12,
+   "family_id": "family_18",
+   "task_id": "task_0102"
+  },
+  {
+   "tokens": 1530,
+   "per_hit": 127.5,
+   "L": 12,
+   "n": 0.6667,
+   "novel": 2,
+   "reused": 8,
+   "family_id": "family_18",
+   "task_id": "task_0103"
+  },
+  {
+   "tokens": 1910,
+   "per_hit": 159.16666666666666,
+   "L": 12,
+   "n": 1.0,
+   "novel": 3,
+   "reused": 6,
+   "family_id": "family_18",
+   "task_id": "task_0104"
+  },
+  {
+   "tokens": 1150,
+   "per_hit": 95.83333333333333,
+   "L": 12,
+   "n": 0.3333,
+   "novel": 1,
+   "reused": 10,
+   "family_id": "family_18",
+   "task_id": "task_0105"
+  },
+  {
+   "tokens": 1530,
+   "per_hit": 127.5,
+   "L": 12,
+   "n": 0.6667,
+   "novel": 2,
+   "reused": 8,
+   "family_id": "family_18",
+   "task_id": "task_0106"
+  },
+  {
+   "tokens": 830,
+   "per_hit": 63.84615384615385,
+   "L": 13,
+   "n": 0.0,
+   "novel": 0,
+   "reused": 13,
+   "family_id": "family_19",
+   "task_id": "task_0107"
+  },
+  {
+   "tokens": 1210,
+   "per_hit": 93.07692307692308,
+   "L": 13,
+   "n": 1.0,
+   "novel": 1,
+   "reused": 11,
+   "family_id": "family_19",
+   "task_id": "task_0108"
+  },
+  {
+   "tokens": 830,
+   "per_hit": 63.84615384615385,
+   "L": 13,
+   "n": 0.0,
+   "novel": 0,
+   "reused": 13,
+   "family_id": "family_19",
+   "task_id": "task_0109"
+  },
+  {
+   "tokens": 1210,
+   "per_hit": 93.07692307692308,
+   "L": 13,
+   "n": 1.0,
+   "novel": 1,
+   "reused": 11,
+   "family_id": "family_19",
+   "task_id": "task_0110"
+  },
+  {
+   "tokens": 1210,
+   "per_hit": 93.07692307692308,
+   "L": 13,
+   "n": 1.0,
+   "novel": 1,
+   "reused": 11,
+   "family_id": "family_19",
+   "task_id": "task_0111"
+  },
+  {
+   "tokens": 890,
+   "per_hit": 63.57142857142857,
+   "L": 14,
+   "n": 0.0,
+   "novel": 0,
+   "reused": 14,
+   "family_id": "family_20",
+   "task_id": "task_0112"
+  },
+  {
+   "tokens": 1270,
+   "per_hit": 90.71428571428571,
+   "L": 14,
+   "n": 0.5,
+   "novel": 1,
+   "reused": 12,
+   "family_id": "family_20",
+   "task_id": "task_0113"
+  },
+  {
+   "tokens": 1270,
+   "per_hit": 90.71428571428571,
+   "L": 14,
+   "n": 0.5,
+   "novel": 1,
+   "reused": 12,
+   "family_id": "family_20",
+   "task_id": "task_0114"
+  },
+  {
+   "tokens": 1650,
+   "per_hit": 117.85714285714286,
+   "L": 14,
+   "n": 1.0,
+   "novel": 2,
+   "reused": 10,
+   "family_id": "family_20",
+   "task_id": "task_0115"
+  },
+  {
+   "tokens": 1650,
+   "per_hit": 117.85714285714286,
+   "L": 14,
+   "n": 1.0,
+   "novel": 2,
+   "reused": 10,
+   "family_id": "family_20",
+   "task_id": "task_0116"
+  },
+  {
+   "tokens": 530,
+   "per_hit": 66.25,
+   "L": 8,
+   "n": 0.0,
+   "novel": 0,
+   "reused": 8,
+   "family_id": "family_21",
+   "task_id": "task_0117"
+  },
+  {
+   "tokens": 910,
+   "per_hit": 113.75,
+   "L": 8,
+   "n": 0.5,
+   "novel": 1,
+   "reused": 6,
+   "family_id": "family_21",
+   "task_id": "task_0118"
+  },
+  {
+   "tokens": 1290,
+   "per_hit": 161.25,
+   "L": 8,
+   "n": 1.0,
+   "novel": 2,
+   "reused": 4,
+   "family_id": "family_21",
+   "task_id": "task_0119"
+  },
+  {
+   "tokens": 1290,
+   "per_hit": 161.25,
+   "L": 8,
+   "n": 1.0,
+   "novel": 2,
+   "reused": 4,
+   "family_id": "family_21",
+   "task_id": "task_0120"
+  },
+  {
+   "tokens": 910,
+   "per_hit": 113.75,
+   "L": 8,
+   "n": 0.5,
+   "novel": 1,
+   "reused": 6,
+   "family_id": "family_21",
+   "task_id": "task_0121"
+  },
+  {
+   "tokens": 590,
+   "per_hit": 65.55555555555556,
+   "L": 9,
+   "n": 0.0,
+   "novel": 0,
+   "reused": 9,
+   "family_id": "family_22",
+   "task_id": "task_0122"
+  },
+  {
+   "tokens": 1350,
+   "per_hit": 150.0,
+   "L": 9,
+   "n": 0.6667,
+   "novel": 2,
+   "reused": 5,
+   "family_id": "family_22",
+   "task_id": "task_0123"
+  },
+  {
+   "tokens": 1730,
+   "per_hit": 192.22222222222223,
+   "L": 9,
+   "n": 1.0,
+   "novel": 3,
+   "reused": 3,
+   "family_id": "family_22",
+   "task_id": "task_0124"
+  },
+  {
+   "tokens": 970,
+   "per_hit": 107.77777777777777,
+   "L": 9,
+   "n": 0.3333,
+   "novel": 1,
+   "reused": 7,
+   "family_id": "family_22",
+   "task_id": "task_0125"
+  },
+  {
+   "tokens": 1350,
+   "per_hit": 150.0,
+   "L": 9,
+   "n": 0.6667,
+   "novel": 2,
+   "reused": 5,
+   "family_id": "family_22",
+   "task_id": "task_0126"
+  },
+  {
+   "tokens": 650,
+   "per_hit": 65.0,
+   "L": 10,
+   "n": 0.0,
+   "novel": 0,
+   "reused": 10,
+   "family_id": "family_23",
+   "task_id": "task_0127"
+  },
+  {
+   "tokens": 1030,
+   "per_hit": 103.0,
+   "L": 10,
+   "n": 1.0,
+   "novel": 1,
+   "reused": 8,
+   "family_id": "family_23",
+   "task_id": "task_0128"
+  },
+  {
+   "tokens": 650,
+   "per_hit": 65.0,
+   "L": 10,
+   "n": 0.0,
+   "novel": 0,
+   "reused": 10,
+   "family_id": "family_23",
+   "task_id": "task_0129"
+  },
+  {
+   "tokens": 1030,
+   "per_hit": 103.0,
+   "L": 10,
+   "n": 1.0,
+   "novel": 1,
+   "reused": 8,
+   "family_id": "family_23",
+   "task_id": "task_0130"
+  },
+  {
+   "tokens": 1030,
+   "per_hit": 103.0,
+   "L": 10,
+   "n": 1.0,
+   "novel": 1,
+   "reused": 8,
+   "family_id": "family_23",
+   "task_id": "task_0131"
+  },
+  {
+   "tokens": 710,
+   "per_hit": 64.54545454545455,
+   "L": 11,
+   "n": 0.0,
+   "novel": 0,
+   "reused": 11,
+   "family_id": "family_24",
+   "task_id": "task_0132"
+  },
+  {
+   "tokens": 1090,
+   "per_hit": 99.0909090909091,
+   "L": 11,
+   "n": 0.5,
+   "novel": 1,
+   "reused": 9,
+   "family_id": "family_24",
+   "task_id": "task_0133"
+  },
+  {
+   "tokens": 1090,
+   "per_hit": 99.0909090909091,
+   "L": 11,
+   "n": 0.5,
+   "novel": 1,
+   "reused": 9,
+   "family_id": "family_24",
+   "task_id": "task_0134"
+  },
+  {
+   "tokens": 1470,
+   "per_hit": 133.63636363636363,
+   "L": 11,
+   "n": 1.0,
+   "novel": 2,
+   "reused": 7,
+   "family_id": "family_24",
+   "task_id": "task_0135"
+  },
+  {
+   "tokens": 1470,
+   "per_hit": 133.63636363636363,
+   "L": 11,
+   "n": 1.0,
+   "novel": 2,
+   "reused": 7,
+   "family_id": "family_24",
+   "task_id": "task_0136"
+  },
+  {
+   "tokens": 770,
+   "per_hit": 64.16666666666667,
+   "L": 12,
+   "n": 0.0,
+   "novel": 0,
+   "reused": 12,
+   "family_id": "family_25",
+   "task_id": "task_0137"
+  },
+  {
+   "tokens": 1150,
+   "per_hit": 95.83333333333333,
+   "L": 12,
+   "n": 0.5,
+   "novel": 1,
+   "reused": 10,
+   "family_id": "family_25",
+   "task_id": "task_0138"
+  },
+  {
+   "tokens": 1530,
+   "per_hit": 127.5,
+   "L": 12,
+   "n": 1.0,
+   "novel": 2,
+   "reused": 8,
+   "family_id": "family_25",
+   "task_id": "task_0139"
+  },
+  {
+   "tokens": 1530,
+   "per_hit": 127.5,
+   "L": 12,
+   "n": 1.0,
+   "novel": 2,
+   "reused": 8,
+   "family_id": "family_25",
+   "task_id": "task_0140"
+  },
+  {
+   "tokens": 1150,
+   "per_hit": 95.83333333333333,
+   "L": 12,
+   "n": 0.5,
+   "novel": 1,
+   "reused": 10,
+   "family_id": "family_25",
+   "task_id": "task_0141"
+  },
+  {
+   "tokens": 830,
+   "per_hit": 63.84615384615385,
+   "L": 13,
+   "n": 0.0,
+   "novel": 0,
+   "reused": 13,
+   "family_id": "family_26",
+   "task_id": "task_0142"
+  },
+  {
+   "tokens": 1590,
+   "per_hit": 122.3076923076923,
+   "L": 13,
+   "n": 0.6667,
+   "novel": 2,
+   "reused": 9,
+   "family_id": "family_26",
+   "task_id": "task_0143"
+  },
+  {
+   "tokens": 1970,
+   "per_hit": 151.53846153846155,
+   "L": 13,
+   "n": 1.0,
+   "novel": 3,
+   "reused": 7,
+   "family_id": "family_26",
+   "task_id": "task_0144"
+  },
+  {
+   "tokens": 1210,
+   "per_hit": 93.07692307692308,
+   "L": 13,
+   "n": 0.3333,
+   "novel": 1,
+   "reused": 11,
+   "family_id": "family_26",
+   "task_id": "task_0145"
+  },
+  {
+   "tokens": 1590,
+   "per_hit": 122.3076923076923,
+   "L": 13,
+   "n": 0.6667,
+   "novel": 2,
+   "reused": 9,
+   "family_id": "family_26",
+   "task_id": "task_0146"
+  },
+  {
+   "tokens": 890,
+   "per_hit": 63.57142857142857,
+   "L": 14,
+   "n": 0.0,
+   "novel": 0,
+   "reused": 14,
+   "family_id": "family_27",
+   "task_id": "task_0147"
+  },
+  {
+   "tokens": 1270,
+   "per_hit": 90.71428571428571,
+   "L": 14,
+   "n": 1.0,
+   "novel": 1,
+   "reused": 12,
+   "family_id": "family_27",
+   "task_id": "task_0148"
+  },
+  {
+   "tokens": 890,
+   "per_hit": 63.57142857142857,
+   "L": 14,
+   "n": 0.0,
+   "novel": 0,
+   "reused": 14,
+   "family_id": "family_27",
+   "task_id": "task_0149"
+  },
+  {
+   "tokens": 1270,
+   "per_hit": 90.71428571428571,
+   "L": 14,
+   "n": 1.0,
+   "novel": 1,
+   "reused": 12,
+   "family_id": "family_27",
+   "task_id": "task_0150"
+  },
+  {
+   "tokens": 1270,
+   "per_hit": 90.71428571428571,
+   "L": 14,
+   "n": 1.0,
+   "novel": 1,
+   "reused": 12,
+   "family_id": "family_27",
+   "task_id": "task_0151"
+  },
+  {
+   "tokens": 530,
+   "per_hit": 66.25,
+   "L": 8,
+   "n": 0.0,
+   "novel": 0,
+   "reused": 8,
+   "family_id": "family_28",
+   "task_id": "task_0152"
+  },
+  {
+   "tokens": 910,
+   "per_hit": 113.75,
+   "L": 8,
+   "n": 0.5,
+   "novel": 1,
+   "reused": 6,
+   "family_id": "family_28",
+   "task_id": "task_0153"
+  },
+  {
+   "tokens": 910,
+   "per_hit": 113.75,
+   "L": 8,
+   "n": 0.5,
+   "novel": 1,
+   "reused": 6,
+   "family_id": "family_28",
+   "task_id": "task_0154"
+  },
+  {
+   "tokens": 1290,
+   "per_hit": 161.25,
+   "L": 8,
+   "n": 1.0,
+   "novel": 2,
+   "reused": 4,
+   "family_id": "family_28",
+   "task_id": "task_0155"
+  },
+  {
+   "tokens": 1290,
+   "per_hit": 161.25,
+   "L": 8,
+   "n": 1.0,
+   "novel": 2,
+   "reused": 4,
+   "family_id": "family_28",
+   "task_id": "task_0156"
+  },
+  {
+   "tokens": 590,
+   "per_hit": 65.55555555555556,
+   "L": 9,
+   "n": 0.0,
+   "novel": 0,
+   "reused": 9,
+   "family_id": "family_29",
+   "task_id": "task_0157"
+  },
+  {
+   "tokens": 970,
+   "per_hit": 107.77777777777777,
+   "L": 9,
+   "n": 0.5,
+   "novel": 1,
+   "reused": 7,
+   "family_id": "family_29",
+   "task_id": "task_0158"
+  },
+  {
+   "tokens": 1350,
+   "per_hit": 150.0,
+   "L": 9,
+   "n": 1.0,
+   "novel": 2,
+   "reused": 5,
+   "family_id": "family_29",
+   "task_id": "task_0159"
+  },
+  {
+   "tokens": 1350,
+   "per_hit": 150.0,
+   "L": 9,
+   "n": 1.0,
+   "novel": 2,
+   "reused": 5,
+   "family_id": "family_29",
+   "task_id": "task_0160"
+  },
+  {
+   "tokens": 970,
+   "per_hit": 107.77777777777777,
+   "L": 9,
+   "n": 0.5,
+   "novel": 1,
+   "reused": 7,
+   "family_id": "family_29",
+   "task_id": "task_0161"
+  },
+  {
+   "tokens": 650,
+   "per_hit": 65.0,
+   "L": 10,
+   "n": 0.0,
+   "novel": 0,
+   "reused": 10,
+   "family_id": "family_30",
+   "task_id": "task_0162"
+  },
+  {
+   "tokens": 1410,
+   "per_hit": 141.0,
+   "L": 10,
+   "n": 0.6667,
+   "novel": 2,
+   "reused": 6,
+   "family_id": "family_30",
+   "task_id": "task_0163"
+  },
+  {
+   "tokens": 1790,
+   "per_hit": 179.0,
+   "L": 10,
+   "n": 1.0,
+   "novel": 3,
+   "reused": 4,
+   "family_id": "family_30",
+   "task_id": "task_0164"
+  },
+  {
+   "tokens": 1030,
+   "per_hit": 103.0,
+   "L": 10,
+   "n": 0.3333,
+   "novel": 1,
+   "reused": 8,
+   "family_id": "family_30",
+   "task_id": "task_0165"
+  },
+  {
+   "tokens": 1410,
+   "per_hit": 141.0,
+   "L": 10,
+   "n": 0.6667,
+   "novel": 2,
+   "reused": 6,
+   "family_id": "family_30",
+   "task_id": "task_0166"
+  },
+  {
+   "tokens": 710,
+   "per_hit": 64.54545454545455,
+   "L": 11,
+   "n": 0.0,
+   "novel": 0,
+   "reused": 11,
+   "family_id": "family_31",
+   "task_id": "task_0167"
+  },
+  {
+   "tokens": 1090,
+   "per_hit": 99.0909090909091,
+   "L": 11,
+   "n": 1.0,
+   "novel": 1,
+   "reused": 9,
+   "family_id": "family_31",
+   "task_id": "task_0168"
+  },
+  {
+   "tokens": 710,
+   "per_hit": 64.54545454545455,
+   "L": 11,
+   "n": 0.0,
+   "novel": 0,
+   "reused": 11,
+   "family_id": "family_31",
+   "task_id": "task_0169"
+  },
+  {
+   "tokens": 1090,
+   "per_hit": 99.0909090909091,
+   "L": 11,
+   "n": 1.0,
+   "novel": 1,
+   "reused": 9,
+   "family_id": "family_31",
+   "task_id": "task_0170"
+  },
+  {
+   "tokens": 1090,
+   "per_hit": 99.0909090909091,
+   "L": 11,
+   "n": 1.0,
+   "novel": 1,
+   "reused": 9,
+   "family_id": "family_31",
+   "task_id": "task_0171"
+  },
+  {
+   "tokens": 770,
+   "per_hit": 64.16666666666667,
+   "L": 12,
+   "n": 0.0,
+   "novel": 0,
+   "reused": 12,
+   "family_id": "family_32",
+   "task_id": "task_0172"
+  },
+  {
+   "tokens": 1150,
+   "per_hit": 95.83333333333333,
+   "L": 12,
+   "n": 0.5,
+   "novel": 1,
+   "reused": 10,
+   "family_id": "family_32",
+   "task_id": "task_0173"
+  },
+  {
+   "tokens": 1150,
+   "per_hit": 95.83333333333333,
+   "L": 12,
+   "n": 0.5,
+   "novel": 1,
+   "reused": 10,
+   "family_id": "family_32",
+   "task_id": "task_0174"
+  },
+  {
+   "tokens": 1530,
+   "per_hit": 127.5,
+   "L": 12,
+   "n": 1.0,
+   "novel": 2,
+   "reused": 8,
+   "family_id": "family_32",
+   "task_id": "task_0175"
+  },
+  {
+   "tokens": 1530,
+   "per_hit": 127.5,
+   "L": 12,
+   "n": 1.0,
+   "novel": 2,
+   "reused": 8,
+   "family_id": "family_32",
+   "task_id": "task_0176"
+  },
+  {
+   "tokens": 830,
+   "per_hit": 63.84615384615385,
+   "L": 13,
+   "n": 0.0,
+   "novel": 0,
+   "reused": 13,
+   "family_id": "family_33",
+   "task_id": "task_0177"
+  },
+  {
+   "tokens": 1210,
+   "per_hit": 93.07692307692308,
+   "L": 13,
+   "n": 0.5,
+   "novel": 1,
+   "reused": 11,
+   "family_id": "family_33",
+   "task_id": "task_0178"
+  },
+  {
+   "tokens": 1590,
+   "per_hit": 122.3076923076923,
+   "L": 13,
+   "n": 1.0,
+   "novel": 2,
+   "reused": 9,
+   "family_id": "family_33",
+   "task_id": "task_0179"
+  },
+  {
+   "tokens": 1590,
+   "per_hit": 122.3076923076923,
+   "L": 13,
+   "n": 1.0,
+   "novel": 2,
+   "reused": 9,
+   "family_id": "family_33",
+   "task_id": "task_0180"
+  },
+  {
+   "tokens": 1210,
+   "per_hit": 93.07692307692308,
+   "L": 13,
+   "n": 0.5,
+   "novel": 1,
+   "reused": 11,
+   "family_id": "family_33",
+   "task_id": "task_0181"
+  },
+  {
+   "tokens": 890,
+   "per_hit": 63.57142857142857,
+   "L": 14,
+   "n": 0.0,
+   "novel": 0,
+   "reused": 14,
+   "family_id": "family_34",
+   "task_id": "task_0182"
+  },
+  {
+   "tokens": 1650,
+   "per_hit": 117.85714285714286,
+   "L": 14,
+   "n": 0.6667,
+   "novel": 2,
+   "reused": 10,
+   "family_id": "family_34",
+   "task_id": "task_0183"
+  },
+  {
+   "tokens": 2030,
+   "per_hit": 145.0,
+   "L": 14,
+   "n": 1.0,
+   "novel": 3,
+   "reused": 8,
+   "family_id": "family_34",
+   "task_id": "task_0184"
+  },
+  {
+   "tokens": 1270,
+   "per_hit": 90.71428571428571,
+   "L": 14,
+   "n": 0.3333,
+   "novel": 1,
+   "reused": 12,
+   "family_id": "family_34",
+   "task_id": "task_0185"
+  },
+  {
+   "tokens": 1650,
+   "per_hit": 117.85714285714286,
+   "L": 14,
+   "n": 0.6667,
+   "novel": 2,
+   "reused": 10,
+   "family_id": "family_34",
+   "task_id": "task_0186"
+  },
+  {
+   "tokens": 530,
+   "per_hit": 66.25,
+   "L": 8,
+   "n": 0.0,
+   "novel": 0,
+   "reused": 8,
+   "family_id": "family_35",
+   "task_id": "task_0187"
+  },
+  {
+   "tokens": 910,
+   "per_hit": 113.75,
+   "L": 8,
+   "n": 1.0,
+   "novel": 1,
+   "reused": 6,
+   "family_id": "family_35",
+   "task_id": "task_0188"
+  },
+  {
+   "tokens": 530,
+   "per_hit": 66.25,
+   "L": 8,
+   "n": 0.0,
+   "novel": 0,
+   "reused": 8,
+   "family_id": "family_35",
+   "task_id": "task_0189"
+  },
+  {
+   "tokens": 910,
+   "per_hit": 113.75,
+   "L": 8,
+   "n": 1.0,
+   "novel": 1,
+   "reused": 6,
+   "family_id": "family_35",
+   "task_id": "task_0190"
+  },
+  {
+   "tokens": 910,
+   "per_hit": 113.75,
+   "L": 8,
+   "n": 1.0,
+   "novel": 1,
+   "reused": 6,
+   "family_id": "family_35",
+   "task_id": "task_0191"
+  }
+ ],
+ "nc1": [
+  {
+   "tokens": 910,
+   "per_hit": 113.75,
+   "L": 8,
+   "n": 0.6394267984578837,
+   "novel": 1,
+   "reused": 6,
+   "family_id": "family_00",
+   "task_id": "task_0000"
+  },
+  {
+   "tokens": 910,
+   "per_hit": 113.75,
+   "L": 8,
+   "n": 0.27502931836911926,
+   "novel": 1,
+   "reused": 6,
+   "family_id": "family_00",
+   "task_id": "task_0001"
+  },
+  {
+   "tokens": 910,
+   "per_hit": 113.75,
+   "L": 8,
+   "n": 0.7364712141640124,
+   "novel": 1,
+   "reused": 6,
+   "family_id": "family_00",
+   "task_id": "task_0002"
+  },
+  {
+   "tokens": 1290,
+   "per_hit": 161.25,
+   "L": 8,
+   "n": 0.8921795677048454,
+   "novel": 2,
+   "reused": 4,
+   "family_id": "family_00",
+   "task_id": "task_0003"
+  },
+  {
+   "tokens": 910,
+   "per_hit": 113.75,
+   "L": 8,
+   "n": 0.4219218196852704,
+   "novel": 1,
+   "reused": 6,
+   "family_id": "family_00",
+   "task_id": "task_0004"
+  },
+  {
+   "tokens": 530,
+   "per_hit": 66.25,
+   "L": 8,
+   "n": 0.21863797480360336,
+   "novel": 0,
+   "reused": 8,
+   "family_id": "family_00",
+   "task_id": "task_0005"
+  },
+  {
+   "tokens": 590,
+   "per_hit": 65.55555555555556,
+   "L": 9,
+   "n": 0.026535969683863625,
+   "novel": 0,
+   "reused": 9,
+   "family_id": "family_01",
+   "task_id": "task_0006"
+  },
+  {
+   "tokens": 970,
+   "per_hit": 107.77777777777777,
+   "L": 9,
+   "n": 0.6498844377795232,
+   "novel": 1,
+   "reused": 7,
+   "family_id": "family_01",
+   "task_id": "task_0007"
+  },
+  {
+   "tokens": 590,
+   "per_hit": 65.55555555555556,
+   "L": 9,
+   "n": 0.2204406220406967,
+   "novel": 0,
+   "reused": 9,
+   "family_id": "family_01",
+   "task_id": "task_0008"
+  },
+  {
+   "tokens": 1350,
+   "per_hit": 150.0,
+   "L": 9,
+   "n": 0.8094304566778266,
+   "novel": 2,
+   "reused": 5,
+   "family_id": "family_01",
+   "task_id": "task_0009"
+  },
+  {
+   "tokens": 1350,
+   "per_hit": 150.0,
+   "L": 9,
+   "n": 0.8058192518328079,
+   "novel": 2,
+   "reused": 5,
+   "family_id": "family_01",
+   "task_id": "task_0010"
+  },
+  {
+   "tokens": 970,
+   "per_hit": 107.77777777777777,
+   "L": 9,
+   "n": 0.3402505165179919,
+   "novel": 1,
+   "reused": 7,
+   "family_id": "family_01",
+   "task_id": "task_0011"
+  },
+  {
+   "tokens": 1790,
+   "per_hit": 179.0,
+   "L": 10,
+   "n": 0.9572130722067812,
+   "novel": 3,
+   "reused": 4,
+   "family_id": "family_02",
+   "task_id": "task_0012"
+  },
+  {
+   "tokens": 650,
+   "per_hit": 65.0,
+   "L": 10,
+   "n": 0.09274584338014791,
+   "novel": 0,
+   "reused": 10,
+   "family_id": "family_02",
+   "task_id": "task_0013"
+  },
+  {
+   "tokens": 1790,
+   "per_hit": 179.0,
+   "L": 10,
+   "n": 0.8474943663474598,
+   "novel": 3,
+   "reused": 4,
+   "family_id": "family_02",
+   "task_id": "task_0014"
+  },
+  {
+   "tokens": 1410,
+   "per_hit": 141.0,
+   "L": 10,
+   "n": 0.8071282732743802,
+   "novel": 2,
+   "reused": 6,
+   "family_id": "family_02",
+   "task_id": "task_0015"
+  },
+  {
+   "tokens": 1410,
+   "per_hit": 141.0,
+   "L": 10,
+   "n": 0.5362280914547007,
+   "novel": 2,
+   "reused": 6,
+   "family_id": "family_02",
+   "task_id": "task_0016"
+  },
+  {
+   "tokens": 1030,
+   "per_hit": 103.0,
+   "L": 10,
+   "n": 0.3785343772083535,
+   "novel": 1,
+   "reused": 8,
+   "family_id": "family_02",
+   "task_id": "task_0017"
+  },
+  {
+   "tokens": 1090,
+   "per_hit": 99.0909090909091,
+   "L": 11,
+   "n": 0.8294046642529949,
+   "novel": 1,
+   "reused": 9,
+   "family_id": "family_03",
+   "task_id": "task_0018"
+  },
+  {
+   "tokens": 1090,
+   "per_hit": 99.0909090909091,
+   "L": 11,
+   "n": 0.8617069003107772,
+   "novel": 1,
+   "reused": 9,
+   "family_id": "family_03",
+   "task_id": "task_0019"
+  },
+  {
+   "tokens": 1090,
+   "per_hit": 99.0909090909091,
+   "L": 11,
+   "n": 0.7045718362149235,
+   "novel": 1,
+   "reused": 9,
+   "family_id": "family_03",
+   "task_id": "task_0020"
+  },
+  {
+   "tokens": 710,
+   "per_hit": 64.54545454545455,
+   "L": 11,
+   "n": 0.22789827565154686,
+   "novel": 0,
+   "reused": 11,
+   "family_id": "family_03",
+   "task_id": "task_0021"
+  },
+  {
+   "tokens": 710,
+   "per_hit": 64.54545454545455,
+   "L": 11,
+   "n": 0.0797919769236275,
+   "novel": 0,
+   "reused": 11,
+   "family_id": "family_03",
+   "task_id": "task_0022"
+  },
+  {
+   "tokens": 710,
+   "per_hit": 64.54545454545455,
+   "L": 11,
+   "n": 0.10100142940972912,
+   "novel": 0,
+   "reused": 11,
+   "family_id": "family_03",
+   "task_id": "task_0023"
+  },
+  {
+   "tokens": 1150,
+   "per_hit": 95.83333333333333,
+   "L": 12,
+   "n": 0.6356844442644002,
+   "novel": 1,
+   "reused": 10,
+   "family_id": "family_04",
+   "task_id": "task_0024"
+  },
+  {
+   "tokens": 1150,
+   "per_hit": 95.83333333333333,
+   "L": 12,
+   "n": 0.37018096711688264,
+   "novel": 1,
+   "reused": 10,
+   "family_id": "family_04",
+   "task_id": "task_0025"
+  },
+  {
+   "tokens": 1150,
+   "per_hit": 95.83333333333333,
+   "L": 12,
+   "n": 0.26697782204911336,
+   "novel": 1,
+   "reused": 10,
+   "family_id": "family_04",
+   "task_id": "task_0026"
+  },
+  {
+   "tokens": 1150,
+   "per_hit": 95.83333333333333,
+   "L": 12,
+   "n": 0.6480353852465935,
+   "novel": 1,
+   "reused": 10,
+   "family_id": "family_04",
+   "task_id": "task_0027"
+  },
+  {
+   "tokens": 770,
+   "per_hit": 64.16666666666667,
+   "L": 12,
+   "n": 0.171138648198097,
+   "novel": 0,
+   "reused": 12,
+   "family_id": "family_04",
+   "task_id": "task_0028"
+  },
+  {
+   "tokens": 770,
+   "per_hit": 64.16666666666667,
+   "L": 12,
+   "n": 0.1634024937619284,
+   "novel": 0,
+   "reused": 12,
+   "family_id": "family_04",
+   "task_id": "task_0029"
+  },
+  {
+   "tokens": 1590,
+   "per_hit": 122.3076923076923,
+   "L": 13,
+   "n": 0.9895233506365952,
+   "novel": 2,
+   "reused": 9,
+   "family_id": "family_05",
+   "task_id": "task_0030"
+  },
+  {
+   "tokens": 1210,
+   "per_hit": 93.07692307692308,
+   "L": 13,
+   "n": 0.5569497437746462,
+   "novel": 1,
+   "reused": 11,
+   "family_id": "family_05",
+   "task_id": "task_0031"
+  },
+  {
+   "tokens": 1590,
+   "per_hit": 122.3076923076923,
+   "L": 13,
+   "n": 0.8428519201898096,
+   "novel": 2,
+   "reused": 9,
+   "family_id": "family_05",
+   "task_id": "task_0032"
+  },
+  {
+   "tokens": 830,
+   "per_hit": 63.84615384615385,
+   "L": 13,
+   "n": 0.22904807196410437,
+   "novel": 0,
+   "reused": 13,
+   "family_id": "family_05",
+   "task_id": "task_0033"
+  },
+  {
+   "tokens": 1210,
+   "per_hit": 93.07692307692308,
+   "L": 13,
+   "n": 0.3154530480590819,
+   "novel": 1,
+   "reused": 11,
+   "family_id": "family_05",
+   "task_id": "task_0034"
+  },
+  {
+   "tokens": 830,
+   "per_hit": 63.84615384615385,
+   "L": 13,
+   "n": 0.21098284358632646,
+   "novel": 0,
+   "reused": 13,
+   "family_id": "family_05",
+   "task_id": "task_0035"
+  },
+  {
+   "tokens": 2030,
+   "per_hit": 145.0,
+   "L": 14,
+   "n": 0.8763676264726689,
+   "novel": 3,
+   "reused": 8,
+   "family_id": "family_06",
+   "task_id": "task_0036"
+  },
+  {
+   "tokens": 1650,
+   "per_hit": 117.85714285714286,
+   "L": 14,
+   "n": 0.65543866529488,
+   "novel": 2,
+   "reused": 10,
+   "family_id": "family_06",
+   "task_id": "task_0037"
+  },
+  {
+   "tokens": 2030,
+   "per_hit": 145.0,
+   "L": 14,
+   "n": 0.9145475897405435,
+   "novel": 3,
+   "reused": 8,
+   "family_id": "family_06",
+   "task_id": "task_0038"
+  },
+  {
+   "tokens": 1270,
+   "per_hit": 90.71428571428571,
+   "L": 14,
+   "n": 0.26488016649805246,
+   "novel": 1,
+   "reused": 12,
+   "family_id": "family_06",
+   "task_id": "task_0039"
+  },
+  {
+   "tokens": 1650,
+   "per_hit": 117.85714285714286,
+   "L": 14,
+   "n": 0.5613681341631508,
+   "novel": 2,
+   "reused": 10,
+   "family_id": "family_06",
+   "task_id": "task_0040"
+  },
+  {
+   "tokens": 1650,
+   "per_hit": 117.85714285714286,
+   "L": 14,
+   "n": 0.5845859902235405,
+   "novel": 2,
+   "reused": 10,
+   "family_id": "family_06",
+   "task_id": "task_0041"
+  },
+  {
+   "tokens": 530,
+   "per_hit": 66.25,
+   "L": 8,
+   "n": 0.39940050514039727,
+   "novel": 0,
+   "reused": 8,
+   "family_id": "family_07",
+   "task_id": "task_0042"
+  },
+  {
+   "tokens": 910,
+   "per_hit": 113.75,
+   "L": 8,
+   "n": 0.9975376064951103,
+   "novel": 1,
+   "reused": 6,
+   "family_id": "family_07",
+   "task_id": "task_0043"
+  },
+  {
+   "tokens": 530,
+   "per_hit": 66.25,
+   "L": 8,
+   "n": 0.09090941217379389,
+   "novel": 0,
+   "reused": 8,
+   "family_id": "family_07",
+   "task_id": "task_0044"
+  },
+  {
+   "tokens": 530,
+   "per_hit": 66.25,
+   "L": 8,
+   "n": 0.10964913035065915,
+   "novel": 0,
+   "reused": 8,
+   "family_id": "family_07",
+   "task_id": "task_0045"
+  },
+  {
+   "tokens": 910,
+   "per_hit": 113.75,
+   "L": 8,
+   "n": 0.7920793643629641,
+   "novel": 1,
+   "reused": 6,
+   "family_id": "family_07",
+   "task_id": "task_0046"
+  },
+  {
+   "tokens": 530,
+   "per_hit": 66.25,
+   "L": 8,
+   "n": 0.06352770615195713,
+   "novel": 0,
+   "reused": 8,
+   "family_id": "family_07",
+   "task_id": "task_0047"
+  },
+  {
+   "tokens": 1350,
+   "per_hit": 150.0,
+   "L": 9,
+   "n": 0.9961213802400968,
+   "novel": 2,
+   "reused": 5,
+   "family_id": "family_08",
+   "task_id": "task_0048"
+  },
+  {
+   "tokens": 1350,
+   "per_hit": 150.0,
+   "L": 9,
+   "n": 0.9710783776136181,
+   "novel": 2,
+   "reused": 5,
+   "family_id": "family_08",
+   "task_id": "task_0049"
+  },
+  {
+   "tokens": 590,
+   "per_hit": 65.55555555555556,
+   "L": 9,
+   "n": 0.011481021942819636,
+   "novel": 0,
+   "reused": 9,
+   "family_id": "family_08",
+   "task_id": "task_0050"
+  },
+  {
+   "tokens": 970,
+   "per_hit": 107.77777777777777,
+   "L": 9,
+   "n": 0.6817103690265748,
+   "novel": 1,
+   "reused": 7,
+   "family_id": "family_08",
+   "task_id": "task_0051"
+  },
+  {
+   "tokens": 970,
+   "per_hit": 107.77777777777777,
+   "L": 9,
+   "n": 0.2668251899525428,
+   "novel": 1,
+   "reused": 7,
+   "family_id": "family_08",
+   "task_id": "task_0052"
+  },
+  {
+   "tokens": 590,
+   "per_hit": 65.55555555555556,
+   "L": 9,
+   "n": 0.11155217359587644,
+   "novel": 0,
+   "reused": 9,
+   "family_id": "family_08",
+   "task_id": "task_0053"
+  },
+  {
+   "tokens": 1030,
+   "per_hit": 103.0,
+   "L": 10,
+   "n": 0.45372370632920644,
+   "novel": 1,
+   "reused": 8,
+   "family_id": "family_09",
+   "task_id": "task_0054"
+  },
+  {
+   "tokens": 1410,
+   "per_hit": 141.0,
+   "L": 10,
+   "n": 0.8758529403781941,
+   "novel": 2,
+   "reused": 6,
+   "family_id": "family_09",
+   "task_id": "task_0055"
+  },
+  {
+   "tokens": 1030,
+   "per_hit": 103.0,
+   "L": 10,
+   "n": 0.5005861130502983,
+   "novel": 1,
+   "reused": 8,
+   "family_id": "family_09",
+   "task_id": "task_0056"
+  },
+  {
+   "tokens": 1410,
+   "per_hit": 141.0,
+   "L": 10,
+   "n": 0.9126278393448205,
+   "novel": 2,
+   "reused": 6,
+   "family_id": "family_09",
+   "task_id": "task_0057"
+  },
+  {
+   "tokens": 1030,
+   "per_hit": 103.0,
+   "L": 10,
+   "n": 0.2984447914486329,
+   "novel": 1,
+   "reused": 8,
+   "family_id": "family_09",
+   "task_id": "task_0058"
+  },
+  {
+   "tokens": 1030,
+   "per_hit": 103.0,
+   "L": 10,
+   "n": 0.6089702114381723,
+   "novel": 1,
+   "reused": 8,
+   "family_id": "family_09",
+   "task_id": "task_0059"
+  },
+  {
+   "tokens": 1470,
+   "per_hit": 133.63636363636363,
+   "L": 11,
+   "n": 0.7625108000751513,
+   "novel": 2,
+   "reused": 7,
+   "family_id": "family_10",
+   "task_id": "task_0060"
+  },
+  {
+   "tokens": 1470,
+   "per_hit": 133.63636363636363,
+   "L": 11,
+   "n": 0.7786264786305582,
+   "novel": 2,
+   "reused": 7,
+   "family_id": "family_10",
+   "task_id": "task_0061"
+  },
+  {
+   "tokens": 710,
+   "per_hit": 64.54545454545455,
+   "L": 11,
+   "n": 0.0005718961279435053,
+   "novel": 0,
+   "reused": 11,
+   "family_id": "family_10",
+   "task_id": "task_0062"
+  },
+  {
+   "tokens": 710,
+   "per_hit": 64.54545454545455,
+   "L": 11,
+   "n": 0.019476742385832302,
+   "novel": 0,
+   "reused": 11,
+   "family_id": "family_10",
+   "task_id": "task_0063"
+  },
+  {
+   "tokens": 1850,
+   "per_hit": 168.1818181818182,
+   "L": 11,
+   "n": 0.8787218778231842,
+   "novel": 3,
+   "reused": 5,
+   "family_id": "family_10",
+   "task_id": "task_0064"
+  },
+  {
+   "tokens": 1090,
+   "per_hit": 99.0909090909091,
+   "L": 11,
+   "n": 0.30751412540266143,
+   "novel": 1,
+   "reused": 9,
+   "family_id": "family_10",
+   "task_id": "task_0065"
+  },
+  {
+   "tokens": 1150,
+   "per_hit": 95.83333333333333,
+   "L": 12,
+   "n": 0.8780095992040405,
+   "novel": 1,
+   "reused": 10,
+   "family_id": "family_11",
+   "task_id": "task_0066"
+  },
+  {
+   "tokens": 770,
+   "per_hit": 64.16666666666667,
+   "L": 12,
+   "n": 0.08565345206787878,
+   "novel": 0,
+   "reused": 12,
+   "family_id": "family_11",
+   "task_id": "task_0067"
+  },
+  {
+   "tokens": 770,
+   "per_hit": 64.16666666666667,
+   "L": 12,
+   "n": 0.06921251846838361,
+   "novel": 0,
+   "reused": 12,
+   "family_id": "family_11",
+   "task_id": "task_0068"
+  },
+  {
+   "tokens": 1150,
+   "per_hit": 95.83333333333333,
+   "L": 12,
+   "n": 0.7658344293069878,
+   "novel": 1,
+   "reused": 10,
+   "family_id": "family_11",
+   "task_id": "task_0069"
+  },
+  {
+   "tokens": 770,
+   "per_hit": 64.16666666666667,
+   "L": 12,
+   "n": 0.4752823780987313,
+   "novel": 0,
+   "reused": 12,
+   "family_id": "family_11",
+   "task_id": "task_0070"
+  },
+  {
+   "tokens": 770,
+   "per_hit": 64.16666666666667,
+   "L": 12,
+   "n": 0.2650566289400591,
+   "novel": 0,
+   "reused": 12,
+   "family_id": "family_11",
+   "task_id": "task_0071"
+  },
+  {
+   "tokens": 1210,
+   "per_hit": 93.07692307692308,
+   "L": 13,
+   "n": 0.4231379402008869,
+   "novel": 1,
+   "reused": 11,
+   "family_id": "family_12",
+   "task_id": "task_0072"
+  },
+  {
+   "tokens": 1210,
+   "per_hit": 93.07692307692308,
+   "L": 13,
+   "n": 0.5392960887794583,
+   "novel": 1,
+   "reused": 11,
+   "family_id": "family_12",
+   "task_id": "task_0073"
+  },
+  {
+   "tokens": 830,
+   "per_hit": 63.84615384615385,
+   "L": 13,
+   "n": 0.2011510633896959,
+   "novel": 0,
+   "reused": 13,
+   "family_id": "family_12",
+   "task_id": "task_0074"
+  },
+  {
+   "tokens": 1590,
+   "per_hit": 122.3076923076923,
+   "L": 13,
+   "n": 0.9951493566608947,
+   "novel": 2,
+   "reused": 9,
+   "family_id": "family_12",
+   "task_id": "task_0075"
+  },
+  {
+   "tokens": 1210,
+   "per_hit": 93.07692307692308,
+   "L": 13,
+   "n": 0.43810008391450406,
+   "novel": 1,
+   "reused": 11,
+   "family_id": "family_12",
+   "task_id": "task_0076"
+  },
+  {
+   "tokens": 890,
+   "per_hit": 63.57142857142857,
+   "L": 14,
+   "n": 0.12100419586826572,
+   "novel": 0,
+   "reused": 14,
+   "family_id": "family_13",
+   "task_id": "task_0077"
+  },
+  {
+   "tokens": 1270,
+   "per_hit": 90.71428571428571,
+   "L": 14,
+   "n": 0.33808556214745533,
+   "novel": 1,
+   "reused": 12,
+   "family_id": "family_13",
+   "task_id": "task_0078"
+  },
+  {
+   "tokens": 890,
+   "per_hit": 63.57142857142857,
+   "L": 14,
+   "n": 0.230114732596577,
+   "novel": 0,
+   "reused": 14,
+   "family_id": "family_13",
+   "task_id": "task_0079"
+  },
+  {
+   "tokens": 890,
+   "per_hit": 63.57142857142857,
+   "L": 14,
+   "n": 0.07099308600903254,
+   "novel": 0,
+   "reused": 14,
+   "family_id": "family_13",
+   "task_id": "task_0080"
+  },
+  {
+   "tokens": 890,
+   "per_hit": 63.57142857142857,
+   "L": 14,
+   "n": 0.22894178381115438,
+   "novel": 0,
+   "reused": 14,
+   "family_id": "family_13",
+   "task_id": "task_0081"
+  },
+  {
+   "tokens": 1670,
+   "per_hit": 208.75,
+   "L": 8,
+   "n": 0.8596354002537465,
+   "novel": 3,
+   "reused": 2,
+   "family_id": "family_14",
+   "task_id": "task_0082"
+  },
+  {
+   "tokens": 910,
+   "per_hit": 113.75,
+   "L": 8,
+   "n": 0.23800463436899522,
+   "novel": 1,
+   "reused": 6,
+   "family_id": "family_14",
+   "task_id": "task_0083"
+  },
+  {
+   "tokens": 910,
+   "per_hit": 113.75,
+   "L": 8,
+   "n": 0.2142368073704386,
+   "novel": 1,
+   "reused": 6,
+   "family_id": "family_14",
+   "task_id": "task_0084"
+  },
+  {
+   "tokens": 1670,
+   "per_hit": 208.75,
+   "L": 8,
+   "n": 0.935514240580671,
+   "novel": 3,
+   "reused": 2,
+   "family_id": "family_14",
+   "task_id": "task_0085"
+  },
+  {
+   "tokens": 910,
+   "per_hit": 113.75,
+   "L": 8,
+   "n": 0.47267102631179414,
+   "novel": 1,
+   "reused": 6,
+   "family_id": "family_14",
+   "task_id": "task_0086"
+  },
+  {
+   "tokens": 970,
+   "per_hit": 107.77777777777777,
+   "L": 9,
+   "n": 0.8074969977666434,
+   "novel": 1,
+   "reused": 7,
+   "family_id": "family_15",
+   "task_id": "task_0087"
+  },
+  {
+   "tokens": 590,
+   "per_hit": 65.55555555555556,
+   "L": 9,
+   "n": 0.09693081422882333,
+   "novel": 0,
+   "reused": 9,
+   "family_id": "family_15",
+   "task_id": "task_0088"
+  },
+  {
+   "tokens": 590,
+   "per_hit": 65.55555555555556,
+   "L": 9,
+   "n": 0.4235786230199208,
+   "novel": 0,
+   "reused": 9,
+   "family_id": "family_15",
+   "task_id": "task_0089"
+  },
+  {
+   "tokens": 970,
+   "per_hit": 107.77777777777777,
+   "L": 9,
+   "n": 0.7290758494598506,
+   "novel": 1,
+   "reused": 7,
+   "family_id": "family_15",
+   "task_id": "task_0090"
+  },
+  {
+   "tokens": 970,
+   "per_hit": 107.77777777777777,
+   "L": 9,
+   "n": 0.9841652113659661,
+   "novel": 1,
+   "reused": 7,
+   "family_id": "family_15",
+   "task_id": "task_0091"
+  },
+  {
+   "tokens": 1030,
+   "per_hit": 103.0,
+   "L": 10,
+   "n": 0.4026212821022688,
+   "novel": 1,
+   "reused": 8,
+   "family_id": "family_16",
+   "task_id": "task_0092"
+  },
+  {
+   "tokens": 1410,
+   "per_hit": 141.0,
+   "L": 10,
+   "n": 0.8616725363527911,
+   "novel": 2,
+   "reused": 6,
+   "family_id": "family_16",
+   "task_id": "task_0093"
+  },
+  {
+   "tokens": 650,
+   "per_hit": 65.0,
+   "L": 10,
+   "n": 0.1902089084408115,
+   "novel": 0,
+   "reused": 10,
+   "family_id": "family_16",
+   "task_id": "task_0094"
+  },
+  {
+   "tokens": 1030,
+   "per_hit": 103.0,
+   "L": 10,
+   "n": 0.4218816398344042,
+   "novel": 1,
+   "reused": 8,
+   "family_id": "family_16",
+   "task_id": "task_0095"
+  },
+  {
+   "tokens": 650,
+   "per_hit": 65.0,
+   "L": 10,
+   "n": 0.2498064478821005,
+   "novel": 0,
+   "reused": 10,
+   "family_id": "family_16",
+   "task_id": "task_0096"
+  },
+  {
+   "tokens": 1090,
+   "per_hit": 99.0909090909091,
+   "L": 11,
+   "n": 0.44313074505345695,
+   "novel": 1,
+   "reused": 9,
+   "family_id": "family_17",
+   "task_id": "task_0097"
+  },
+  {
+   "tokens": 1090,
+   "per_hit": 99.0909090909091,
+   "L": 11,
+   "n": 0.5503253124498481,
+   "novel": 1,
+   "reused": 9,
+   "family_id": "family_17",
+   "task_id": "task_0098"
+  },
+  {
+   "tokens": 1470,
+   "per_hit": 133.63636363636363,
+   "L": 11,
+   "n": 0.9992824684127266,
+   "novel": 2,
+   "reused": 7,
+   "family_id": "family_17",
+   "task_id": "task_0099"
+  },
+  {
+   "tokens": 1470,
+   "per_hit": 133.63636363636363,
+   "L": 11,
+   "n": 0.9689962572847513,
+   "novel": 2,
+   "reused": 7,
+   "family_id": "family_17",
+   "task_id": "task_0100"
+  },
+  {
+   "tokens": 1470,
+   "per_hit": 133.63636363636363,
+   "L": 11,
+   "n": 0.8486957344143055,
+   "novel": 2,
+   "reused": 7,
+   "family_id": "family_17",
+   "task_id": "task_0101"
+  },
+  {
+   "tokens": 1150,
+   "per_hit": 95.83333333333333,
+   "L": 12,
+   "n": 0.48564112545071847,
+   "novel": 1,
+   "reused": 10,
+   "family_id": "family_18",
+   "task_id": "task_0102"
+  },
+  {
+   "tokens": 1150,
+   "per_hit": 95.83333333333333,
+   "L": 12,
+   "n": 0.4010402925494526,
+   "novel": 1,
+   "reused": 10,
+   "family_id": "family_18",
+   "task_id": "task_0103"
+  },
+  {
+   "tokens": 1150,
+   "per_hit": 95.83333333333333,
+   "L": 12,
+   "n": 0.3789731189769161,
+   "novel": 1,
+   "reused": 10,
+   "family_id": "family_18",
+   "task_id": "task_0104"
+  },
+  {
+   "tokens": 1150,
+   "per_hit": 95.83333333333333,
+   "L": 12,
+   "n": 0.26520305817215195,
+   "novel": 1,
+   "reused": 10,
+   "family_id": "family_18",
+   "task_id": "task_0105"
+  },
+  {
+   "tokens": 1150,
+   "per_hit": 95.83333333333333,
+   "L": 12,
+   "n": 0.4550083673391433,
+   "novel": 1,
+   "reused": 10,
+   "family_id": "family_18",
+   "task_id": "task_0106"
+  },
+  {
+   "tokens": 1210,
+   "per_hit": 93.07692307692308,
+   "L": 13,
+   "n": 0.9573176408596732,
+   "novel": 1,
+   "reused": 11,
+   "family_id": "family_19",
+   "task_id": "task_0107"
+  },
+  {
+   "tokens": 1210,
+   "per_hit": 93.07692307692308,
+   "L": 13,
+   "n": 0.5557683234056182,
+   "novel": 1,
+   "reused": 11,
+   "family_id": "family_19",
+   "task_id": "task_0108"
+  },
+  {
+   "tokens": 830,
+   "per_hit": 63.84615384615385,
+   "L": 13,
+   "n": 0.15479682527406413,
+   "novel": 0,
+   "reused": 13,
+   "family_id": "family_19",
+   "task_id": "task_0109"
+  },
+  {
+   "tokens": 1210,
+   "per_hit": 93.07692307692308,
+   "L": 13,
+   "n": 0.9687093649691588,
+   "novel": 1,
+   "reused": 11,
+   "family_id": "family_19",
+   "task_id": "task_0110"
+  },
+  {
+   "tokens": 1210,
+   "per_hit": 93.07692307692308,
+   "L": 13,
+   "n": 0.5421952013742742,
+   "novel": 1,
+   "reused": 11,
+   "family_id": "family_19",
+   "task_id": "task_0111"
+  },
+  {
+   "tokens": 890,
+   "per_hit": 63.57142857142857,
+   "L": 14,
+   "n": 0.05716527290748308,
+   "novel": 0,
+   "reused": 14,
+   "family_id": "family_20",
+   "task_id": "task_0112"
+  },
+  {
+   "tokens": 1270,
+   "per_hit": 90.71428571428571,
+   "L": 14,
+   "n": 0.5028503829195136,
+   "novel": 1,
+   "reused": 12,
+   "family_id": "family_20",
+   "task_id": "task_0113"
+  },
+  {
+   "tokens": 890,
+   "per_hit": 63.57142857142857,
+   "L": 14,
+   "n": 0.15743272793948326,
+   "novel": 0,
+   "reused": 14,
+   "family_id": "family_20",
+   "task_id": "task_0114"
+  },
+  {
+   "tokens": 890,
+   "per_hit": 63.57142857142857,
+   "L": 14,
+   "n": 0.08011146524058688,
+   "novel": 0,
+   "reused": 14,
+   "family_id": "family_20",
+   "task_id": "task_0115"
+  },
+  {
+   "tokens": 1270,
+   "per_hit": 90.71428571428571,
+   "L": 14,
+   "n": 0.5950351064500277,
+   "novel": 1,
+   "reused": 12,
+   "family_id": "family_20",
+   "task_id": "task_0116"
+  },
+  {
+   "tokens": 530,
+   "per_hit": 66.25,
+   "L": 8,
+   "n": 0.2352038950009312,
+   "novel": 0,
+   "reused": 8,
+   "family_id": "family_21",
+   "task_id": "task_0117"
+  },
+  {
+   "tokens": 1290,
+   "per_hit": 161.25,
+   "L": 8,
+   "n": 0.8902873141294375,
+   "novel": 2,
+   "reused": 4,
+   "family_id": "family_21",
+   "task_id": "task_0118"
+  },
+  {
+   "tokens": 910,
+   "per_hit": 113.75,
+   "L": 8,
+   "n": 0.5945191535334412,
+   "novel": 1,
+   "reused": 6,
+   "family_id": "family_21",
+   "task_id": "task_0119"
+  },
+  {
+   "tokens": 910,
+   "per_hit": 113.75,
+   "L": 8,
+   "n": 0.4192249153358725,
+   "novel": 1,
+   "reused": 6,
+   "family_id": "family_21",
+   "task_id": "task_0120"
+  },
+  {
+   "tokens": 910,
+   "per_hit": 113.75,
+   "L": 8,
+   "n": 0.5227827155319589,
+   "novel": 1,
+   "reused": 6,
+   "family_id": "family_21",
+   "task_id": "task_0121"
+  },
+  {
+   "tokens": 970,
+   "per_hit": 107.77777777777777,
+   "L": 9,
+   "n": 0.20425919942353643,
+   "novel": 1,
+   "reused": 7,
+   "family_id": "family_22",
+   "task_id": "task_0122"
+  },
+  {
+   "tokens": 970,
+   "per_hit": 107.77777777777777,
+   "L": 9,
+   "n": 0.23868595261584602,
+   "novel": 1,
+   "reused": 7,
+   "family_id": "family_22",
+   "task_id": "task_0123"
+  },
+  {
+   "tokens": 1350,
+   "per_hit": 150.0,
+   "L": 9,
+   "n": 0.6716902229599713,
+   "novel": 2,
+   "reused": 5,
+   "family_id": "family_22",
+   "task_id": "task_0124"
+  },
+  {
+   "tokens": 970,
+   "per_hit": 107.77777777777777,
+   "L": 9,
+   "n": 0.31617719627185403,
+   "novel": 1,
+   "reused": 7,
+   "family_id": "family_22",
+   "task_id": "task_0125"
+  },
+  {
+   "tokens": 590,
+   "per_hit": 65.55555555555556,
+   "L": 9,
+   "n": 0.07254311449315731,
+   "novel": 0,
+   "reused": 9,
+   "family_id": "family_22",
+   "task_id": "task_0126"
+  },
+  {
+   "tokens": 1030,
+   "per_hit": 103.0,
+   "L": 10,
+   "n": 0.9984544408544423,
+   "novel": 1,
+   "reused": 8,
+   "family_id": "family_23",
+   "task_id": "task_0127"
+  },
+  {
+   "tokens": 650,
+   "per_hit": 65.0,
+   "L": 10,
+   "n": 0.073260721099633,
+   "novel": 0,
+   "reused": 10,
+   "family_id": "family_23",
+   "task_id": "task_0128"
+  },
+  {
+   "tokens": 650,
+   "per_hit": 65.0,
+   "L": 10,
+   "n": 0.26520041475040135,
+   "novel": 0,
+   "reused": 10,
+   "family_id": "family_23",
+   "task_id": "task_0129"
+  },
+  {
+   "tokens": 1030,
+   "per_hit": 103.0,
+   "L": 10,
+   "n": 0.8808641736864395,
+   "novel": 1,
+   "reused": 8,
+   "family_id": "family_23",
+   "task_id": "task_0130"
+  },
+  {
+   "tokens": 650,
+   "per_hit": 65.0,
+   "L": 10,
+   "n": 0.36952708873888396,
+   "novel": 0,
+   "reused": 10,
+   "family_id": "family_23",
+   "task_id": "task_0131"
+  },
+  {
+   "tokens": 1470,
+   "per_hit": 133.63636363636363,
+   "L": 11,
+   "n": 0.833744954639807,
+   "novel": 2,
+   "reused": 7,
+   "family_id": "family_24",
+   "task_id": "task_0132"
+  },
+  {
+   "tokens": 1090,
+   "per_hit": 99.0909090909091,
+   "L": 11,
+   "n": 0.6116777657259501,
+   "novel": 1,
+   "reused": 9,
+   "family_id": "family_24",
+   "task_id": "task_0133"
+  },
+  {
+   "tokens": 1090,
+   "per_hit": 99.0909090909091,
+   "L": 11,
+   "n": 0.6539763177107326,
+   "novel": 1,
+   "reused": 9,
+   "family_id": "family_24",
+   "task_id": "task_0134"
+  },
+  {
+   "tokens": 1470,
+   "per_hit": 133.63636363636363,
+   "L": 11,
+   "n": 0.8171041351154616,
+   "novel": 2,
+   "reused": 7,
+   "family_id": "family_24",
+   "task_id": "task_0135"
+  },
+  {
+   "tokens": 1090,
+   "per_hit": 99.0909090909091,
+   "L": 11,
+   "n": 0.6633887149660773,
+   "novel": 1,
+   "reused": 9,
+   "family_id": "family_24",
+   "task_id": "task_0136"
+  },
+  {
+   "tokens": 770,
+   "per_hit": 64.16666666666667,
+   "L": 12,
+   "n": 0.13429111439336772,
+   "novel": 0,
+   "reused": 12,
+   "family_id": "family_25",
+   "task_id": "task_0137"
+  },
+  {
+   "tokens": 770,
+   "per_hit": 64.16666666666667,
+   "L": 12,
+   "n": 0.10703597770941764,
+   "novel": 0,
+   "reused": 12,
+   "family_id": "family_25",
+   "task_id": "task_0138"
+  },
+  {
+   "tokens": 1150,
+   "per_hit": 95.83333333333333,
+   "L": 12,
+   "n": 0.2723482123148163,
+   "novel": 1,
+   "reused": 10,
+   "family_id": "family_25",
+   "task_id": "task_0139"
+  },
+  {
+   "tokens": 1150,
+   "per_hit": 95.83333333333333,
+   "L": 12,
+   "n": 0.7176121871387979,
+   "novel": 1,
+   "reused": 10,
+   "family_id": "family_25",
+   "task_id": "task_0140"
+  },
+  {
+   "tokens": 1150,
+   "per_hit": 95.83333333333333,
+   "L": 12,
+   "n": 0.6342379588850797,
+   "novel": 1,
+   "reused": 10,
+   "family_id": "family_25",
+   "task_id": "task_0141"
+  },
+  {
+   "tokens": 1210,
+   "per_hit": 93.07692307692308,
+   "L": 13,
+   "n": 0.48853185214937656,
+   "novel": 1,
+   "reused": 11,
+   "family_id": "family_26",
+   "task_id": "task_0142"
+  },
+  {
+   "tokens": 1970,
+   "per_hit": 151.53846153846155,
+   "L": 13,
+   "n": 0.8461037132948555,
+   "novel": 3,
+   "reused": 7,
+   "family_id": "family_26",
+   "task_id": "task_0143"
+  },
+  {
+   "tokens": 1210,
+   "per_hit": 93.07692307692308,
+   "L": 13,
+   "n": 0.42357577256372636,
+   "novel": 1,
+   "reused": 11,
+   "family_id": "family_26",
+   "task_id": "task_0144"
+  },
+  {
+   "tokens": 830,
+   "per_hit": 63.84615384615385,
+   "L": 13,
+   "n": 0.0035456890877823,
+   "novel": 0,
+   "reused": 13,
+   "family_id": "family_26",
+   "task_id": "task_0145"
+  },
+  {
+   "tokens": 1590,
+   "per_hit": 122.3076923076923,
+   "L": 13,
+   "n": 0.6371133773013796,
+   "novel": 2,
+   "reused": 9,
+   "family_id": "family_26",
+   "task_id": "task_0146"
+  },
+  {
+   "tokens": 1270,
+   "per_hit": 90.71428571428571,
+   "L": 14,
+   "n": 0.7412309083479308,
+   "novel": 1,
+   "reused": 12,
+   "family_id": "family_27",
+   "task_id": "task_0147"
+  },
+  {
+   "tokens": 890,
+   "per_hit": 63.57142857142857,
+   "L": 14,
+   "n": 0.42768691898067934,
+   "novel": 0,
+   "reused": 14,
+   "family_id": "family_27",
+   "task_id": "task_0148"
+  },
+  {
+   "tokens": 890,
+   "per_hit": 63.57142857142857,
+   "L": 14,
+   "n": 0.07524386007376704,
+   "novel": 0,
+   "reused": 14,
+   "family_id": "family_27",
+   "task_id": "task_0149"
+  },
+  {
+   "tokens": 1270,
+   "per_hit": 90.71428571428571,
+   "L": 14,
+   "n": 0.9039285715598931,
+   "novel": 1,
+   "reused": 12,
+   "family_id": "family_27",
+   "task_id": "task_0150"
+  },
+  {
+   "tokens": 1270,
+   "per_hit": 90.71428571428571,
+   "L": 14,
+   "n": 0.8345950198860167,
+   "novel": 1,
+   "reused": 12,
+   "family_id": "family_27",
+   "task_id": "task_0151"
+  },
+  {
+   "tokens": 530,
+   "per_hit": 66.25,
+   "L": 8,
+   "n": 0.14809378556748265,
+   "novel": 0,
+   "reused": 8,
+   "family_id": "family_28",
+   "task_id": "task_0152"
+  },
+  {
+   "tokens": 910,
+   "per_hit": 113.75,
+   "L": 8,
+   "n": 0.3082583499301337,
+   "novel": 1,
+   "reused": 6,
+   "family_id": "family_28",
+   "task_id": "task_0153"
+  },
+  {
+   "tokens": 1290,
+   "per_hit": 161.25,
+   "L": 8,
+   "n": 0.7961223048880417,
+   "novel": 2,
+   "reused": 4,
+   "family_id": "family_28",
+   "task_id": "task_0154"
+  },
+  {
+   "tokens": 1290,
+   "per_hit": 161.25,
+   "L": 8,
+   "n": 0.8989246365264746,
+   "novel": 2,
+   "reused": 4,
+   "family_id": "family_28",
+   "task_id": "task_0155"
+  },
+  {
+   "tokens": 530,
+   "per_hit": 66.25,
+   "L": 8,
+   "n": 0.24952973922292443,
+   "novel": 0,
+   "reused": 8,
+   "family_id": "family_28",
+   "task_id": "task_0156"
+  },
+  {
+   "tokens": 1350,
+   "per_hit": 150.0,
+   "L": 9,
+   "n": 0.7801162418714427,
+   "novel": 2,
+   "reused": 5,
+   "family_id": "family_29",
+   "task_id": "task_0157"
+  },
+  {
+   "tokens": 970,
+   "per_hit": 107.77777777777777,
+   "L": 9,
+   "n": 0.4063773898321168,
+   "novel": 1,
+   "reused": 7,
+   "family_id": "family_29",
+   "task_id": "task_0158"
+  },
+  {
+   "tokens": 590,
+   "per_hit": 65.55555555555556,
+   "L": 9,
+   "n": 0.15455333833220464,
+   "novel": 0,
+   "reused": 9,
+   "family_id": "family_29",
+   "task_id": "task_0159"
+  },
+  {
+   "tokens": 1350,
+   "per_hit": 150.0,
+   "L": 9,
+   "n": 0.864605696219964,
+   "novel": 2,
+   "reused": 5,
+   "family_id": "family_29",
+   "task_id": "task_0160"
+  },
+  {
+   "tokens": 1350,
+   "per_hit": 150.0,
+   "L": 9,
+   "n": 0.8107717199403969,
+   "novel": 2,
+   "reused": 5,
+   "family_id": "family_29",
+   "task_id": "task_0161"
+  },
+  {
+   "tokens": 650,
+   "per_hit": 65.0,
+   "L": 10,
+   "n": 0.024786361898188725,
+   "novel": 0,
+   "reused": 10,
+   "family_id": "family_30",
+   "task_id": "task_0162"
+  },
+  {
+   "tokens": 1030,
+   "per_hit": 103.0,
+   "L": 10,
+   "n": 0.33218546794642867,
+   "novel": 1,
+   "reused": 8,
+   "family_id": "family_30",
+   "task_id": "task_0163"
+  },
+  {
+   "tokens": 1410,
+   "per_hit": 141.0,
+   "L": 10,
+   "n": 0.8022351389371389,
+   "novel": 2,
+   "reused": 6,
+   "family_id": "family_30",
+   "task_id": "task_0164"
+  },
+  {
+   "tokens": 1410,
+   "per_hit": 141.0,
+   "L": 10,
+   "n": 0.810749316574389,
+   "novel": 2,
+   "reused": 6,
+   "family_id": "family_30",
+   "task_id": "task_0165"
+  },
+  {
+   "tokens": 1410,
+   "per_hit": 141.0,
+   "L": 10,
+   "n": 0.7873745091354711,
+   "novel": 2,
+   "reused": 6,
+   "family_id": "family_30",
+   "task_id": "task_0166"
+  },
+  {
+   "tokens": 1090,
+   "per_hit": 99.0909090909091,
+   "L": 11,
+   "n": 0.8721667829060897,
+   "novel": 1,
+   "reused": 9,
+   "family_id": "family_31",
+   "task_id": "task_0167"
+  },
+  {
+   "tokens": 710,
+   "per_hit": 64.54545454545455,
+   "L": 11,
+   "n": 0.22243371754566443,
+   "novel": 0,
+   "reused": 11,
+   "family_id": "family_31",
+   "task_id": "task_0168"
+  },
+  {
+   "tokens": 710,
+   "per_hit": 64.54545454545455,
+   "L": 11,
+   "n": 0.4603032346789421,
+   "novel": 0,
+   "reused": 11,
+   "family_id": "family_31",
+   "task_id": "task_0169"
+  },
+  {
+   "tokens": 1090,
+   "per_hit": 99.0909090909091,
+   "L": 11,
+   "n": 0.7953454991528618,
+   "novel": 1,
+   "reused": 9,
+   "family_id": "family_31",
+   "task_id": "task_0170"
+  },
+  {
+   "tokens": 710,
+   "per_hit": 64.54545454545455,
+   "L": 11,
+   "n": 0.02366443470145152,
+   "novel": 0,
+   "reused": 11,
+   "family_id": "family_31",
+   "task_id": "task_0171"
+  },
+  {
+   "tokens": 1150,
+   "per_hit": 95.83333333333333,
+   "L": 12,
+   "n": 0.3282619511977065,
+   "novel": 1,
+   "reused": 10,
+   "family_id": "family_32",
+   "task_id": "task_0172"
+  },
+  {
+   "tokens": 1530,
+   "per_hit": 127.5,
+   "L": 12,
+   "n": 0.9668891040483611,
+   "novel": 2,
+   "reused": 8,
+   "family_id": "family_32",
+   "task_id": "task_0173"
+  },
+  {
+   "tokens": 1150,
+   "per_hit": 95.83333333333333,
+   "L": 12,
+   "n": 0.6414817386076277,
+   "novel": 1,
+   "reused": 10,
+   "family_id": "family_32",
+   "task_id": "task_0174"
+  },
+  {
+   "tokens": 1530,
+   "per_hit": 127.5,
+   "L": 12,
+   "n": 0.9811496871982601,
+   "novel": 2,
+   "reused": 8,
+   "family_id": "family_32",
+   "task_id": "task_0175"
+  },
+  {
+   "tokens": 1530,
+   "per_hit": 127.5,
+   "L": 12,
+   "n": 0.9392371403247157,
+   "novel": 2,
+   "reused": 8,
+   "family_id": "family_32",
+   "task_id": "task_0176"
+  },
+  {
+   "tokens": 1590,
+   "per_hit": 122.3076923076923,
+   "L": 13,
+   "n": 0.970400611022228,
+   "novel": 2,
+   "reused": 9,
+   "family_id": "family_33",
+   "task_id": "task_0177"
+  },
+  {
+   "tokens": 1590,
+   "per_hit": 122.3076923076923,
+   "L": 13,
+   "n": 0.9625343157615555,
+   "novel": 2,
+   "reused": 9,
+   "family_id": "family_33",
+   "task_id": "task_0178"
+  },
+  {
+   "tokens": 830,
+   "per_hit": 63.84615384615385,
+   "L": 13,
+   "n": 0.1084025472147111,
+   "novel": 0,
+   "reused": 13,
+   "family_id": "family_33",
+   "task_id": "task_0179"
+  },
+  {
+   "tokens": 1210,
+   "per_hit": 93.07692307692308,
+   "L": 13,
+   "n": 0.7285450606527043,
+   "novel": 1,
+   "reused": 11,
+   "family_id": "family_33",
+   "task_id": "task_0180"
+  },
+  {
+   "tokens": 1210,
+   "per_hit": 93.07692307692308,
+   "L": 13,
+   "n": 0.6062088533061433,
+   "novel": 1,
+   "reused": 11,
+   "family_id": "family_33",
+   "task_id": "task_0181"
+  },
+  {
+   "tokens": 1270,
+   "per_hit": 90.71428571428571,
+   "L": 14,
+   "n": 0.38519543334472717,
+   "novel": 1,
+   "reused": 12,
+   "family_id": "family_34",
+   "task_id": "task_0182"
+  },
+  {
+   "tokens": 1270,
+   "per_hit": 90.71428571428571,
+   "L": 14,
+   "n": 0.25472250613858194,
+   "novel": 1,
+   "reused": 12,
+   "family_id": "family_34",
+   "task_id": "task_0183"
+  },
+  {
+   "tokens": 890,
+   "per_hit": 63.57142857142857,
+   "L": 14,
+   "n": 0.0016912782186294661,
+   "novel": 0,
+   "reused": 14,
+   "family_id": "family_34",
+   "task_id": "task_0184"
+  },
+  {
+   "tokens": 1650,
+   "per_hit": 117.85714285714286,
+   "L": 14,
+   "n": 0.5384519970927919,
+   "novel": 2,
+   "reused": 10,
+   "family_id": "family_34",
+   "task_id": "task_0185"
+  },
+  {
+   "tokens": 1650,
+   "per_hit": 117.85714285714286,
+   "L": 14,
+   "n": 0.7419500778394765,
+   "novel": 2,
+   "reused": 10,
+   "family_id": "family_34",
+   "task_id": "task_0186"
+  },
+  {
+   "tokens": 530,
+   "per_hit": 66.25,
+   "L": 8,
+   "n": 0.3642214717812642,
+   "novel": 0,
+   "reused": 8,
+   "family_id": "family_35",
+   "task_id": "task_0187"
+  },
+  {
+   "tokens": 910,
+   "per_hit": 113.75,
+   "L": 8,
+   "n": 0.6642376849112723,
+   "novel": 1,
+   "reused": 6,
+   "family_id": "family_35",
+   "task_id": "task_0188"
+  },
+  {
+   "tokens": 530,
+   "per_hit": 66.25,
+   "L": 8,
+   "n": 0.31391564505835967,
+   "novel": 0,
+   "reused": 8,
+   "family_id": "family_35",
+   "task_id": "task_0189"
+  },
+  {
+   "tokens": 910,
+   "per_hit": 113.75,
+   "L": 8,
+   "n": 0.7197542630139502,
+   "novel": 1,
+   "reused": 6,
+   "family_id": "family_35",
+   "task_id": "task_0190"
+  },
+  {
+   "tokens": 530,
+   "per_hit": 66.25,
+   "L": 8,
+   "n": 0.30928466220865325,
+   "novel": 0,
+   "reused": 8,
+   "family_id": "family_35",
+   "task_id": "task_0191"
+  }
+ ],
+ "nc3": [
+  {
+   "tokens": 4060,
+   "per_hit": 507.5,
+   "L": 8,
+   "n": 0.0,
+   "family_id": "family_00",
+   "task_id": "task_0000"
+  },
+  {
+   "tokens": 4060,
+   "per_hit": 507.5,
+   "L": 8,
+   "n": 0.5,
+   "family_id": "family_00",
+   "task_id": "task_0001"
+  },
+  {
+   "tokens": 4060,
+   "per_hit": 507.5,
+   "L": 8,
+   "n": 0.5,
+   "family_id": "family_00",
+   "task_id": "task_0002"
+  },
+  {
+   "tokens": 4060,
+   "per_hit": 507.5,
+   "L": 8,
+   "n": 1.0,
+   "family_id": "family_00",
+   "task_id": "task_0003"
+  },
+  {
+   "tokens": 4060,
+   "per_hit": 507.5,
+   "L": 8,
+   "n": 1.0,
+   "family_id": "family_00",
+   "task_id": "task_0004"
+  },
+  {
+   "tokens": 4060,
+   "per_hit": 507.5,
+   "L": 8,
+   "n": 0.5,
+   "family_id": "family_00",
+   "task_id": "task_0005"
+  },
+  {
+   "tokens": 4560,
+   "per_hit": 506.6666666666667,
+   "L": 9,
+   "n": 0.0,
+   "family_id": "family_01",
+   "task_id": "task_0006"
+  },
+  {
+   "tokens": 4560,
+   "per_hit": 506.6666666666667,
+   "L": 9,
+   "n": 0.5,
+   "family_id": "family_01",
+   "task_id": "task_0007"
+  },
+  {
+   "tokens": 4560,
+   "per_hit": 506.6666666666667,
+   "L": 9,
+   "n": 1.0,
+   "family_id": "family_01",
+   "task_id": "task_0008"
+  },
+  {
+   "tokens": 4560,
+   "per_hit": 506.6666666666667,
+   "L": 9,
+   "n": 1.0,
+   "family_id": "family_01",
+   "task_id": "task_0009"
+  },
+  {
+   "tokens": 4560,
+   "per_hit": 506.6666666666667,
+   "L": 9,
+   "n": 0.5,
+   "family_id": "family_01",
+   "task_id": "task_0010"
+  },
+  {
+   "tokens": 4560,
+   "per_hit": 506.6666666666667,
+   "L": 9,
+   "n": 0.5,
+   "family_id": "family_01",
+   "task_id": "task_0011"
+  },
+  {
+   "tokens": 5060,
+   "per_hit": 506.0,
+   "L": 10,
+   "n": 0.0,
+   "family_id": "family_02",
+   "task_id": "task_0012"
+  },
+  {
+   "tokens": 5060,
+   "per_hit": 506.0,
+   "L": 10,
+   "n": 0.6667,
+   "family_id": "family_02",
+   "task_id": "task_0013"
+  },
+  {
+   "tokens": 5060,
+   "per_hit": 506.0,
+   "L": 10,
+   "n": 1.0,
+   "family_id": "family_02",
+   "task_id": "task_0014"
+  },
+  {
+   "tokens": 5060,
+   "per_hit": 506.0,
+   "L": 10,
+   "n": 0.3333,
+   "family_id": "family_02",
+   "task_id": "task_0015"
+  },
+  {
+   "tokens": 5060,
+   "per_hit": 506.0,
+   "L": 10,
+   "n": 0.6667,
+   "family_id": "family_02",
+   "task_id": "task_0016"
+  },
+  {
+   "tokens": 5060,
+   "per_hit": 506.0,
+   "L": 10,
+   "n": 0.6667,
+   "family_id": "family_02",
+   "task_id": "task_0017"
+  },
+  {
+   "tokens": 5560,
+   "per_hit": 505.45454545454544,
+   "L": 11,
+   "n": 0.0,
+   "family_id": "family_03",
+   "task_id": "task_0018"
+  },
+  {
+   "tokens": 5560,
+   "per_hit": 505.45454545454544,
+   "L": 11,
+   "n": 1.0,
+   "family_id": "family_03",
+   "task_id": "task_0019"
+  },
+  {
+   "tokens": 5560,
+   "per_hit": 505.45454545454544,
+   "L": 11,
+   "n": 0.0,
+   "family_id": "family_03",
+   "task_id": "task_0020"
+  },
+  {
+   "tokens": 5560,
+   "per_hit": 505.45454545454544,
+   "L": 11,
+   "n": 1.0,
+   "family_id": "family_03",
+   "task_id": "task_0021"
+  },
+  {
+   "tokens": 5560,
+   "per_hit": 505.45454545454544,
+   "L": 11,
+   "n": 1.0,
+   "family_id": "family_03",
+   "task_id": "task_0022"
+  },
+  {
+   "tokens": 5560,
+   "per_hit": 505.45454545454544,
+   "L": 11,
+   "n": 1.0,
+   "family_id": "family_03",
+   "task_id": "task_0023"
+  },
+  {
+   "tokens": 6060,
+   "per_hit": 505.0,
+   "L": 12,
+   "n": 0.0,
+   "family_id": "family_04",
+   "task_id": "task_0024"
+  },
+  {
+   "tokens": 6060,
+   "per_hit": 505.0,
+   "L": 12,
+   "n": 0.5,
+   "family_id": "family_04",
+   "task_id": "task_0025"
+  },
+  {
+   "tokens": 6060,
+   "per_hit": 505.0,
+   "L": 12,
+   "n": 0.5,
+   "family_id": "family_04",
+   "task_id": "task_0026"
+  },
+  {
+   "tokens": 6060,
+   "per_hit": 505.0,
+   "L": 12,
+   "n": 1.0,
+   "family_id": "family_04",
+   "task_id": "task_0027"
+  },
+  {
+   "tokens": 6060,
+   "per_hit": 505.0,
+   "L": 12,
+   "n": 1.0,
+   "family_id": "family_04",
+   "task_id": "task_0028"
+  },
+  {
+   "tokens": 6060,
+   "per_hit": 505.0,
+   "L": 12,
+   "n": 0.5,
+   "family_id": "family_04",
+   "task_id": "task_0029"
+  },
+  {
+   "tokens": 6560,
+   "per_hit": 504.61538461538464,
+   "L": 13,
+   "n": 0.0,
+   "family_id": "family_05",
+   "task_id": "task_0030"
+  },
+  {
+   "tokens": 6560,
+   "per_hit": 504.61538461538464,
+   "L": 13,
+   "n": 0.5,
+   "family_id": "family_05",
+   "task_id": "task_0031"
+  },
+  {
+   "tokens": 6560,
+   "per_hit": 504.61538461538464,
+   "L": 13,
+   "n": 1.0,
+   "family_id": "family_05",
+   "task_id": "task_0032"
+  },
+  {
+   "tokens": 6560,
+   "per_hit": 504.61538461538464,
+   "L": 13,
+   "n": 1.0,
+   "family_id": "family_05",
+   "task_id": "task_0033"
+  },
+  {
+   "tokens": 6560,
+   "per_hit": 504.61538461538464,
+   "L": 13,
+   "n": 0.5,
+   "family_id": "family_05",
+   "task_id": "task_0034"
+  },
+  {
+   "tokens": 6560,
+   "per_hit": 504.61538461538464,
+   "L": 13,
+   "n": 0.5,
+   "family_id": "family_05",
+   "task_id": "task_0035"
+  },
+  {
+   "tokens": 7060,
+   "per_hit": 504.2857142857143,
+   "L": 14,
+   "n": 0.0,
+   "family_id": "family_06",
+   "task_id": "task_0036"
+  },
+  {
+   "tokens": 7060,
+   "per_hit": 504.2857142857143,
+   "L": 14,
+   "n": 0.6667,
+   "family_id": "family_06",
+   "task_id": "task_0037"
+  },
+  {
+   "tokens": 7060,
+   "per_hit": 504.2857142857143,
+   "L": 14,
+   "n": 1.0,
+   "family_id": "family_06",
+   "task_id": "task_0038"
+  },
+  {
+   "tokens": 7060,
+   "per_hit": 504.2857142857143,
+   "L": 14,
+   "n": 0.3333,
+   "family_id": "family_06",
+   "task_id": "task_0039"
+  },
+  {
+   "tokens": 7060,
+   "per_hit": 504.2857142857143,
+   "L": 14,
+   "n": 0.6667,
+   "family_id": "family_06",
+   "task_id": "task_0040"
+  },
+  {
+   "tokens": 7060,
+   "per_hit": 504.2857142857143,
+   "L": 14,
+   "n": 0.6667,
+   "family_id": "family_06",
+   "task_id": "task_0041"
+  },
+  {
+   "tokens": 4060,
+   "per_hit": 507.5,
+   "L": 8,
+   "n": 0.0,
+   "family_id": "family_07",
+   "task_id": "task_0042"
+  },
+  {
+   "tokens": 4060,
+   "per_hit": 507.5,
+   "L": 8,
+   "n": 1.0,
+   "family_id": "family_07",
+   "task_id": "task_0043"
+  },
+  {
+   "tokens": 4060,
+   "per_hit": 507.5,
+   "L": 8,
+   "n": 0.0,
+   "family_id": "family_07",
+   "task_id": "task_0044"
+  },
+  {
+   "tokens": 4060,
+   "per_hit": 507.5,
+   "L": 8,
+   "n": 1.0,
+   "family_id": "family_07",
+   "task_id": "task_0045"
+  },
+  {
+   "tokens": 4060,
+   "per_hit": 507.5,
+   "L": 8,
+   "n": 1.0,
+   "family_id": "family_07",
+   "task_id": "task_0046"
+  },
+  {
+   "tokens": 4060,
+   "per_hit": 507.5,
+   "L": 8,
+   "n": 1.0,
+   "family_id": "family_07",
+   "task_id": "task_0047"
+  },
+  {
+   "tokens": 4560,
+   "per_hit": 506.6666666666667,
+   "L": 9,
+   "n": 0.0,
+   "family_id": "family_08",
+   "task_id": "task_0048"
+  },
+  {
+   "tokens": 4560,
+   "per_hit": 506.6666666666667,
+   "L": 9,
+   "n": 0.5,
+   "family_id": "family_08",
+   "task_id": "task_0049"
+  },
+  {
+   "tokens": 4560,
+   "per_hit": 506.6666666666667,
+   "L": 9,
+   "n": 0.5,
+   "family_id": "family_08",
+   "task_id": "task_0050"
+  },
+  {
+   "tokens": 4560,
+   "per_hit": 506.6666666666667,
+   "L": 9,
+   "n": 1.0,
+   "family_id": "family_08",
+   "task_id": "task_0051"
+  },
+  {
+   "tokens": 4560,
+   "per_hit": 506.6666666666667,
+   "L": 9,
+   "n": 1.0,
+   "family_id": "family_08",
+   "task_id": "task_0052"
+  },
+  {
+   "tokens": 4560,
+   "per_hit": 506.6666666666667,
+   "L": 9,
+   "n": 0.5,
+   "family_id": "family_08",
+   "task_id": "task_0053"
+  },
+  {
+   "tokens": 5060,
+   "per_hit": 506.0,
+   "L": 10,
+   "n": 0.0,
+   "family_id": "family_09",
+   "task_id": "task_0054"
+  },
+  {
+   "tokens": 5060,
+   "per_hit": 506.0,
+   "L": 10,
+   "n": 0.5,
+   "family_id": "family_09",
+   "task_id": "task_0055"
+  },
+  {
+   "tokens": 5060,
+   "per_hit": 506.0,
+   "L": 10,
+   "n": 1.0,
+   "family_id": "family_09",
+   "task_id": "task_0056"
+  },
+  {
+   "tokens": 5060,
+   "per_hit": 506.0,
+   "L": 10,
+   "n": 1.0,
+   "family_id": "family_09",
+   "task_id": "task_0057"
+  },
+  {
+   "tokens": 5060,
+   "per_hit": 506.0,
+   "L": 10,
+   "n": 0.5,
+   "family_id": "family_09",
+   "task_id": "task_0058"
+  },
+  {
+   "tokens": 5060,
+   "per_hit": 506.0,
+   "L": 10,
+   "n": 0.5,
+   "family_id": "family_09",
+   "task_id": "task_0059"
+  },
+  {
+   "tokens": 5560,
+   "per_hit": 505.45454545454544,
+   "L": 11,
+   "n": 0.0,
+   "family_id": "family_10",
+   "task_id": "task_0060"
+  },
+  {
+   "tokens": 5560,
+   "per_hit": 505.45454545454544,
+   "L": 11,
+   "n": 0.6667,
+   "family_id": "family_10",
+   "task_id": "task_0061"
+  },
+  {
+   "tokens": 5560,
+   "per_hit": 505.45454545454544,
+   "L": 11,
+   "n": 1.0,
+   "family_id": "family_10",
+   "task_id": "task_0062"
+  },
+  {
+   "tokens": 5560,
+   "per_hit": 505.45454545454544,
+   "L": 11,
+   "n": 0.3333,
+   "family_id": "family_10",
+   "task_id": "task_0063"
+  },
+  {
+   "tokens": 5560,
+   "per_hit": 505.45454545454544,
+   "L": 11,
+   "n": 0.6667,
+   "family_id": "family_10",
+   "task_id": "task_0064"
+  },
+  {
+   "tokens": 5560,
+   "per_hit": 505.45454545454544,
+   "L": 11,
+   "n": 0.6667,
+   "family_id": "family_10",
+   "task_id": "task_0065"
+  },
+  {
+   "tokens": 6060,
+   "per_hit": 505.0,
+   "L": 12,
+   "n": 0.0,
+   "family_id": "family_11",
+   "task_id": "task_0066"
+  },
+  {
+   "tokens": 6060,
+   "per_hit": 505.0,
+   "L": 12,
+   "n": 1.0,
+   "family_id": "family_11",
+   "task_id": "task_0067"
+  },
+  {
+   "tokens": 6060,
+   "per_hit": 505.0,
+   "L": 12,
+   "n": 0.0,
+   "family_id": "family_11",
+   "task_id": "task_0068"
+  },
+  {
+   "tokens": 6060,
+   "per_hit": 505.0,
+   "L": 12,
+   "n": 1.0,
+   "family_id": "family_11",
+   "task_id": "task_0069"
+  },
+  {
+   "tokens": 6060,
+   "per_hit": 505.0,
+   "L": 12,
+   "n": 1.0,
+   "family_id": "family_11",
+   "task_id": "task_0070"
+  },
+  {
+   "tokens": 6060,
+   "per_hit": 505.0,
+   "L": 12,
+   "n": 1.0,
+   "family_id": "family_11",
+   "task_id": "task_0071"
+  },
+  {
+   "tokens": 6560,
+   "per_hit": 504.61538461538464,
+   "L": 13,
+   "n": 0.0,
+   "family_id": "family_12",
+   "task_id": "task_0072"
+  },
+  {
+   "tokens": 6560,
+   "per_hit": 504.61538461538464,
+   "L": 13,
+   "n": 0.5,
+   "family_id": "family_12",
+   "task_id": "task_0073"
+  },
+  {
+   "tokens": 6560,
+   "per_hit": 504.61538461538464,
+   "L": 13,
+   "n": 0.5,
+   "family_id": "family_12",
+   "task_id": "task_0074"
+  },
+  {
+   "tokens": 6560,
+   "per_hit": 504.61538461538464,
+   "L": 13,
+   "n": 1.0,
+   "family_id": "family_12",
+   "task_id": "task_0075"
+  },
+  {
+   "tokens": 6560,
+   "per_hit": 504.61538461538464,
+   "L": 13,
+   "n": 1.0,
+   "family_id": "family_12",
+   "task_id": "task_0076"
+  },
+  {
+   "tokens": 7060,
+   "per_hit": 504.2857142857143,
+   "L": 14,
+   "n": 0.0,
+   "family_id": "family_13",
+   "task_id": "task_0077"
+  },
+  {
+   "tokens": 7060,
+   "per_hit": 504.2857142857143,
+   "L": 14,
+   "n": 0.5,
+   "family_id": "family_13",
+   "task_id": "task_0078"
+  },
+  {
+   "tokens": 7060,
+   "per_hit": 504.2857142857143,
+   "L": 14,
+   "n": 1.0,
+   "family_id": "family_13",
+   "task_id": "task_0079"
+  },
+  {
+   "tokens": 7060,
+   "per_hit": 504.2857142857143,
+   "L": 14,
+   "n": 1.0,
+   "family_id": "family_13",
+   "task_id": "task_0080"
+  },
+  {
+   "tokens": 7060,
+   "per_hit": 504.2857142857143,
+   "L": 14,
+   "n": 0.5,
+   "family_id": "family_13",
+   "task_id": "task_0081"
+  },
+  {
+   "tokens": 4060,
+   "per_hit": 507.5,
+   "L": 8,
+   "n": 0.0,
+   "family_id": "family_14",
+   "task_id": "task_0082"
+  },
+  {
+   "tokens": 4060,
+   "per_hit": 507.5,
+   "L": 8,
+   "n": 0.6667,
+   "family_id": "family_14",
+   "task_id": "task_0083"
+  },
+  {
+   "tokens": 4060,
+   "per_hit": 507.5,
+   "L": 8,
+   "n": 1.0,
+   "family_id": "family_14",
+   "task_id": "task_0084"
+  },
+  {
+   "tokens": 4060,
+   "per_hit": 507.5,
+   "L": 8,
+   "n": 0.3333,
+   "family_id": "family_14",
+   "task_id": "task_0085"
+  },
+  {
+   "tokens": 4060,
+   "per_hit": 507.5,
+   "L": 8,
+   "n": 0.6667,
+   "family_id": "family_14",
+   "task_id": "task_0086"
+  },
+  {
+   "tokens": 4560,
+   "per_hit": 506.6666666666667,
+   "L": 9,
+   "n": 0.0,
+   "family_id": "family_15",
+   "task_id": "task_0087"
+  },
+  {
+   "tokens": 4560,
+   "per_hit": 506.6666666666667,
+   "L": 9,
+   "n": 1.0,
+   "family_id": "family_15",
+   "task_id": "task_0088"
+  },
+  {
+   "tokens": 4560,
+   "per_hit": 506.6666666666667,
+   "L": 9,
+   "n": 0.0,
+   "family_id": "family_15",
+   "task_id": "task_0089"
+  },
+  {
+   "tokens": 4560,
+   "per_hit": 506.6666666666667,
+   "L": 9,
+   "n": 1.0,
+   "family_id": "family_15",
+   "task_id": "task_0090"
+  },
+  {
+   "tokens": 4560,
+   "per_hit": 506.6666666666667,
+   "L": 9,
+   "n": 1.0,
+   "family_id": "family_15",
+   "task_id": "task_0091"
+  },
+  {
+   "tokens": 5060,
+   "per_hit": 506.0,
+   "L": 10,
+   "n": 0.0,
+   "family_id": "family_16",
+   "task_id": "task_0092"
+  },
+  {
+   "tokens": 5060,
+   "per_hit": 506.0,
+   "L": 10,
+   "n": 0.5,
+   "family_id": "family_16",
+   "task_id": "task_0093"
+  },
+  {
+   "tokens": 5060,
+   "per_hit": 506.0,
+   "L": 10,
+   "n": 0.5,
+   "family_id": "family_16",
+   "task_id": "task_0094"
+  },
+  {
+   "tokens": 5060,
+   "per_hit": 506.0,
+   "L": 10,
+   "n": 1.0,
+   "family_id": "family_16",
+   "task_id": "task_0095"
+  },
+  {
+   "tokens": 5060,
+   "per_hit": 506.0,
+   "L": 10,
+   "n": 1.0,
+   "family_id": "family_16",
+   "task_id": "task_0096"
+  },
+  {
+   "tokens": 5560,
+   "per_hit": 505.45454545454544,
+   "L": 11,
+   "n": 0.0,
+   "family_id": "family_17",
+   "task_id": "task_0097"
+  },
+  {
+   "tokens": 5560,
+   "per_hit": 505.45454545454544,
+   "L": 11,
+   "n": 0.5,
+   "family_id": "family_17",
+   "task_id": "task_0098"
+  },
+  {
+   "tokens": 5560,
+   "per_hit": 505.45454545454544,
+   "L": 11,
+   "n": 1.0,
+   "family_id": "family_17",
+   "task_id": "task_0099"
+  },
+  {
+   "tokens": 5560,
+   "per_hit": 505.45454545454544,
+   "L": 11,
+   "n": 1.0,
+   "family_id": "family_17",
+   "task_id": "task_0100"
+  },
+  {
+   "tokens": 5560,
+   "per_hit": 505.45454545454544,
+   "L": 11,
+   "n": 0.5,
+   "family_id": "family_17",
+   "task_id": "task_0101"
+  },
+  {
+   "tokens": 6060,
+   "per_hit": 505.0,
+   "L": 12,
+   "n": 0.0,
+   "family_id": "family_18",
+   "task_id": "task_0102"
+  },
+  {
+   "tokens": 6060,
+   "per_hit": 505.0,
+   "L": 12,
+   "n": 0.6667,
+   "family_id": "family_18",
+   "task_id": "task_0103"
+  },
+  {
+   "tokens": 6060,
+   "per_hit": 505.0,
+   "L": 12,
+   "n": 1.0,
+   "family_id": "family_18",
+   "task_id": "task_0104"
+  },
+  {
+   "tokens": 6060,
+   "per_hit": 505.0,
+   "L": 12,
+   "n": 0.3333,
+   "family_id": "family_18",
+   "task_id": "task_0105"
+  },
+  {
+   "tokens": 6060,
+   "per_hit": 505.0,
+   "L": 12,
+   "n": 0.6667,
+   "family_id": "family_18",
+   "task_id": "task_0106"
+  },
+  {
+   "tokens": 6560,
+   "per_hit": 504.61538461538464,
+   "L": 13,
+   "n": 0.0,
+   "family_id": "family_19",
+   "task_id": "task_0107"
+  },
+  {
+   "tokens": 6560,
+   "per_hit": 504.61538461538464,
+   "L": 13,
+   "n": 1.0,
+   "family_id": "family_19",
+   "task_id": "task_0108"
+  },
+  {
+   "tokens": 6560,
+   "per_hit": 504.61538461538464,
+   "L": 13,
+   "n": 0.0,
+   "family_id": "family_19",
+   "task_id": "task_0109"
+  },
+  {
+   "tokens": 6560,
+   "per_hit": 504.61538461538464,
+   "L": 13,
+   "n": 1.0,
+   "family_id": "family_19",
+   "task_id": "task_0110"
+  },
+  {
+   "tokens": 6560,
+   "per_hit": 504.61538461538464,
+   "L": 13,
+   "n": 1.0,
+   "family_id": "family_19",
+   "task_id": "task_0111"
+  },
+  {
+   "tokens": 7060,
+   "per_hit": 504.2857142857143,
+   "L": 14,
+   "n": 0.0,
+   "family_id": "family_20",
+   "task_id": "task_0112"
+  },
+  {
+   "tokens": 7060,
+   "per_hit": 504.2857142857143,
+   "L": 14,
+   "n": 0.5,
+   "family_id": "family_20",
+   "task_id": "task_0113"
+  },
+  {
+   "tokens": 7060,
+   "per_hit": 504.2857142857143,
+   "L": 14,
+   "n": 0.5,
+   "family_id": "family_20",
+   "task_id": "task_0114"
+  },
+  {
+   "tokens": 7060,
+   "per_hit": 504.2857142857143,
+   "L": 14,
+   "n": 1.0,
+   "family_id": "family_20",
+   "task_id": "task_0115"
+  },
+  {
+   "tokens": 7060,
+   "per_hit": 504.2857142857143,
+   "L": 14,
+   "n": 1.0,
+   "family_id": "family_20",
+   "task_id": "task_0116"
+  },
+  {
+   "tokens": 4060,
+   "per_hit": 507.5,
+   "L": 8,
+   "n": 0.0,
+   "family_id": "family_21",
+   "task_id": "task_0117"
+  },
+  {
+   "tokens": 4060,
+   "per_hit": 507.5,
+   "L": 8,
+   "n": 0.5,
+   "family_id": "family_21",
+   "task_id": "task_0118"
+  },
+  {
+   "tokens": 4060,
+   "per_hit": 507.5,
+   "L": 8,
+   "n": 1.0,
+   "family_id": "family_21",
+   "task_id": "task_0119"
+  },
+  {
+   "tokens": 4060,
+   "per_hit": 507.5,
+   "L": 8,
+   "n": 1.0,
+   "family_id": "family_21",
+   "task_id": "task_0120"
+  },
+  {
+   "tokens": 4060,
+   "per_hit": 507.5,
+   "L": 8,
+   "n": 0.5,
+   "family_id": "family_21",
+   "task_id": "task_0121"
+  },
+  {
+   "tokens": 4560,
+   "per_hit": 506.6666666666667,
+   "L": 9,
+   "n": 0.0,
+   "family_id": "family_22",
+   "task_id": "task_0122"
+  },
+  {
+   "tokens": 4560,
+   "per_hit": 506.6666666666667,
+   "L": 9,
+   "n": 0.6667,
+   "family_id": "family_22",
+   "task_id": "task_0123"
+  },
+  {
+   "tokens": 4560,
+   "per_hit": 506.6666666666667,
+   "L": 9,
+   "n": 1.0,
+   "family_id": "family_22",
+   "task_id": "task_0124"
+  },
+  {
+   "tokens": 4560,
+   "per_hit": 506.6666666666667,
+   "L": 9,
+   "n": 0.3333,
+   "family_id": "family_22",
+   "task_id": "task_0125"
+  },
+  {
+   "tokens": 4560,
+   "per_hit": 506.6666666666667,
+   "L": 9,
+   "n": 0.6667,
+   "family_id": "family_22",
+   "task_id": "task_0126"
+  },
+  {
+   "tokens": 5060,
+   "per_hit": 506.0,
+   "L": 10,
+   "n": 0.0,
+   "family_id": "family_23",
+   "task_id": "task_0127"
+  },
+  {
+   "tokens": 5060,
+   "per_hit": 506.0,
+   "L": 10,
+   "n": 1.0,
+   "family_id": "family_23",
+   "task_id": "task_0128"
+  },
+  {
+   "tokens": 5060,
+   "per_hit": 506.0,
+   "L": 10,
+   "n": 0.0,
+   "family_id": "family_23",
+   "task_id": "task_0129"
+  },
+  {
+   "tokens": 5060,
+   "per_hit": 506.0,
+   "L": 10,
+   "n": 1.0,
+   "family_id": "family_23",
+   "task_id": "task_0130"
+  },
+  {
+   "tokens": 5060,
+   "per_hit": 506.0,
+   "L": 10,
+   "n": 1.0,
+   "family_id": "family_23",
+   "task_id": "task_0131"
+  },
+  {
+   "tokens": 5560,
+   "per_hit": 505.45454545454544,
+   "L": 11,
+   "n": 0.0,
+   "family_id": "family_24",
+   "task_id": "task_0132"
+  },
+  {
+   "tokens": 5560,
+   "per_hit": 505.45454545454544,
+   "L": 11,
+   "n": 0.5,
+   "family_id": "family_24",
+   "task_id": "task_0133"
+  },
+  {
+   "tokens": 5560,
+   "per_hit": 505.45454545454544,
+   "L": 11,
+   "n": 0.5,
+   "family_id": "family_24",
+   "task_id": "task_0134"
+  },
+  {
+   "tokens": 5560,
+   "per_hit": 505.45454545454544,
+   "L": 11,
+   "n": 1.0,
+   "family_id": "family_24",
+   "task_id": "task_0135"
+  },
+  {
+   "tokens": 5560,
+   "per_hit": 505.45454545454544,
+   "L": 11,
+   "n": 1.0,
+   "family_id": "family_24",
+   "task_id": "task_0136"
+  },
+  {
+   "tokens": 6060,
+   "per_hit": 505.0,
+   "L": 12,
+   "n": 0.0,
+   "family_id": "family_25",
+   "task_id": "task_0137"
+  },
+  {
+   "tokens": 6060,
+   "per_hit": 505.0,
+   "L": 12,
+   "n": 0.5,
+   "family_id": "family_25",
+   "task_id": "task_0138"
+  },
+  {
+   "tokens": 6060,
+   "per_hit": 505.0,
+   "L": 12,
+   "n": 1.0,
+   "family_id": "family_25",
+   "task_id": "task_0139"
+  },
+  {
+   "tokens": 6060,
+   "per_hit": 505.0,
+   "L": 12,
+   "n": 1.0,
+   "family_id": "family_25",
+   "task_id": "task_0140"
+  },
+  {
+   "tokens": 6060,
+   "per_hit": 505.0,
+   "L": 12,
+   "n": 0.5,
+   "family_id": "family_25",
+   "task_id": "task_0141"
+  },
+  {
+   "tokens": 6560,
+   "per_hit": 504.61538461538464,
+   "L": 13,
+   "n": 0.0,
+   "family_id": "family_26",
+   "task_id": "task_0142"
+  },
+  {
+   "tokens": 6560,
+   "per_hit": 504.61538461538464,
+   "L": 13,
+   "n": 0.6667,
+   "family_id": "family_26",
+   "task_id": "task_0143"
+  },
+  {
+   "tokens": 6560,
+   "per_hit": 504.61538461538464,
+   "L": 13,
+   "n": 1.0,
+   "family_id": "family_26",
+   "task_id": "task_0144"
+  },
+  {
+   "tokens": 6560,
+   "per_hit": 504.61538461538464,
+   "L": 13,
+   "n": 0.3333,
+   "family_id": "family_26",
+   "task_id": "task_0145"
+  },
+  {
+   "tokens": 6560,
+   "per_hit": 504.61538461538464,
+   "L": 13,
+   "n": 0.6667,
+   "family_id": "family_26",
+   "task_id": "task_0146"
+  },
+  {
+   "tokens": 7060,
+   "per_hit": 504.2857142857143,
+   "L": 14,
+   "n": 0.0,
+   "family_id": "family_27",
+   "task_id": "task_0147"
+  },
+  {
+   "tokens": 7060,
+   "per_hit": 504.2857142857143,
+   "L": 14,
+   "n": 1.0,
+   "family_id": "family_27",
+   "task_id": "task_0148"
+  },
+  {
+   "tokens": 7060,
+   "per_hit": 504.2857142857143,
+   "L": 14,
+   "n": 0.0,
+   "family_id": "family_27",
+   "task_id": "task_0149"
+  },
+  {
+   "tokens": 7060,
+   "per_hit": 504.2857142857143,
+   "L": 14,
+   "n": 1.0,
+   "family_id": "family_27",
+   "task_id": "task_0150"
+  },
+  {
+   "tokens": 7060,
+   "per_hit": 504.2857142857143,
+   "L": 14,
+   "n": 1.0,
+   "family_id": "family_27",
+   "task_id": "task_0151"
+  },
+  {
+   "tokens": 4060,
+   "per_hit": 507.5,
+   "L": 8,
+   "n": 0.0,
+   "family_id": "family_28",
+   "task_id": "task_0152"
+  },
+  {
+   "tokens": 4060,
+   "per_hit": 507.5,
+   "L": 8,
+   "n": 0.5,
+   "family_id": "family_28",
+   "task_id": "task_0153"
+  },
+  {
+   "tokens": 4060,
+   "per_hit": 507.5,
+   "L": 8,
+   "n": 0.5,
+   "family_id": "family_28",
+   "task_id": "task_0154"
+  },
+  {
+   "tokens": 4060,
+   "per_hit": 507.5,
+   "L": 8,
+   "n": 1.0,
+   "family_id": "family_28",
+   "task_id": "task_0155"
+  },
+  {
+   "tokens": 4060,
+   "per_hit": 507.5,
+   "L": 8,
+   "n": 1.0,
+   "family_id": "family_28",
+   "task_id": "task_0156"
+  },
+  {
+   "tokens": 4560,
+   "per_hit": 506.6666666666667,
+   "L": 9,
+   "n": 0.0,
+   "family_id": "family_29",
+   "task_id": "task_0157"
+  },
+  {
+   "tokens": 4560,
+   "per_hit": 506.6666666666667,
+   "L": 9,
+   "n": 0.5,
+   "family_id": "family_29",
+   "task_id": "task_0158"
+  },
+  {
+   "tokens": 4560,
+   "per_hit": 506.6666666666667,
+   "L": 9,
+   "n": 1.0,
+   "family_id": "family_29",
+   "task_id": "task_0159"
+  },
+  {
+   "tokens": 4560,
+   "per_hit": 506.6666666666667,
+   "L": 9,
+   "n": 1.0,
+   "family_id": "family_29",
+   "task_id": "task_0160"
+  },
+  {
+   "tokens": 4560,
+   "per_hit": 506.6666666666667,
+   "L": 9,
+   "n": 0.5,
+   "family_id": "family_29",
+   "task_id": "task_0161"
+  },
+  {
+   "tokens": 5060,
+   "per_hit": 506.0,
+   "L": 10,
+   "n": 0.0,
+   "family_id": "family_30",
+   "task_id": "task_0162"
+  },
+  {
+   "tokens": 5060,
+   "per_hit": 506.0,
+   "L": 10,
+   "n": 0.6667,
+   "family_id": "family_30",
+   "task_id": "task_0163"
+  },
+  {
+   "tokens": 5060,
+   "per_hit": 506.0,
+   "L": 10,
+   "n": 1.0,
+   "family_id": "family_30",
+   "task_id": "task_0164"
+  },
+  {
+   "tokens": 5060,
+   "per_hit": 506.0,
+   "L": 10,
+   "n": 0.3333,
+   "family_id": "family_30",
+   "task_id": "task_0165"
+  },
+  {
+   "tokens": 5060,
+   "per_hit": 506.0,
+   "L": 10,
+   "n": 0.6667,
+   "family_id": "family_30",
+   "task_id": "task_0166"
+  },
+  {
+   "tokens": 5560,
+   "per_hit": 505.45454545454544,
+   "L": 11,
+   "n": 0.0,
+   "family_id": "family_31",
+   "task_id": "task_0167"
+  },
+  {
+   "tokens": 5560,
+   "per_hit": 505.45454545454544,
+   "L": 11,
+   "n": 1.0,
+   "family_id": "family_31",
+   "task_id": "task_0168"
+  },
+  {
+   "tokens": 5560,
+   "per_hit": 505.45454545454544,
+   "L": 11,
+   "n": 0.0,
+   "family_id": "family_31",
+   "task_id": "task_0169"
+  },
+  {
+   "tokens": 5560,
+   "per_hit": 505.45454545454544,
+   "L": 11,
+   "n": 1.0,
+   "family_id": "family_31",
+   "task_id": "task_0170"
+  },
+  {
+   "tokens": 5560,
+   "per_hit": 505.45454545454544,
+   "L": 11,
+   "n": 1.0,
+   "family_id": "family_31",
+   "task_id": "task_0171"
+  },
+  {
+   "tokens": 6060,
+   "per_hit": 505.0,
+   "L": 12,
+   "n": 0.0,
+   "family_id": "family_32",
+   "task_id": "task_0172"
+  },
+  {
+   "tokens": 6060,
+   "per_hit": 505.0,
+   "L": 12,
+   "n": 0.5,
+   "family_id": "family_32",
+   "task_id": "task_0173"
+  },
+  {
+   "tokens": 6060,
+   "per_hit": 505.0,
+   "L": 12,
+   "n": 0.5,
+   "family_id": "family_32",
+   "task_id": "task_0174"
+  },
+  {
+   "tokens": 6060,
+   "per_hit": 505.0,
+   "L": 12,
+   "n": 1.0,
+   "family_id": "family_32",
+   "task_id": "task_0175"
+  },
+  {
+   "tokens": 6060,
+   "per_hit": 505.0,
+   "L": 12,
+   "n": 1.0,
+   "family_id": "family_32",
+   "task_id": "task_0176"
+  },
+  {
+   "tokens": 6560,
+   "per_hit": 504.61538461538464,
+   "L": 13,
+   "n": 0.0,
+   "family_id": "family_33",
+   "task_id": "task_0177"
+  },
+  {
+   "tokens": 6560,
+   "per_hit": 504.61538461538464,
+   "L": 13,
+   "n": 0.5,
+   "family_id": "family_33",
+   "task_id": "task_0178"
+  },
+  {
+   "tokens": 6560,
+   "per_hit": 504.61538461538464,
+   "L": 13,
+   "n": 1.0,
+   "family_id": "family_33",
+   "task_id": "task_0179"
+  },
+  {
+   "tokens": 6560,
+   "per_hit": 504.61538461538464,
+   "L": 13,
+   "n": 1.0,
+   "family_id": "family_33",
+   "task_id": "task_0180"
+  },
+  {
+   "tokens": 6560,
+   "per_hit": 504.61538461538464,
+   "L": 13,
+   "n": 0.5,
+   "family_id": "family_33",
+   "task_id": "task_0181"
+  },
+  {
+   "tokens": 7060,
+   "per_hit": 504.2857142857143,
+   "L": 14,
+   "n": 0.0,
+   "family_id": "family_34",
+   "task_id": "task_0182"
+  },
+  {
+   "tokens": 7060,
+   "per_hit": 504.2857142857143,
+   "L": 14,
+   "n": 0.6667,
+   "family_id": "family_34",
+   "task_id": "task_0183"
+  },
+  {
+   "tokens": 7060,
+   "per_hit": 504.2857142857143,
+   "L": 14,
+   "n": 1.0,
+   "family_id": "family_34",
+   "task_id": "task_0184"
+  },
+  {
+   "tokens": 7060,
+   "per_hit": 504.2857142857143,
+   "L": 14,
+   "n": 0.3333,
+   "family_id": "family_34",
+   "task_id": "task_0185"
+  },
+  {
+   "tokens": 7060,
+   "per_hit": 504.2857142857143,
+   "L": 14,
+   "n": 0.6667,
+   "family_id": "family_34",
+   "task_id": "task_0186"
+  },
+  {
+   "tokens": 4060,
+   "per_hit": 507.5,
+   "L": 8,
+   "n": 0.0,
+   "family_id": "family_35",
+   "task_id": "task_0187"
+  },
+  {
+   "tokens": 4060,
+   "per_hit": 507.5,
+   "L": 8,
+   "n": 1.0,
+   "family_id": "family_35",
+   "task_id": "task_0188"
+  },
+  {
+   "tokens": 4060,
+   "per_hit": 507.5,
+   "L": 8,
+   "n": 0.0,
+   "family_id": "family_35",
+   "task_id": "task_0189"
+  },
+  {
+   "tokens": 4060,
+   "per_hit": 507.5,
+   "L": 8,
+   "n": 1.0,
+   "family_id": "family_35",
+   "task_id": "task_0190"
+  },
+  {
+   "tokens": 4060,
+   "per_hit": 507.5,
+   "L": 8,
+   "n": 1.0,
+   "family_id": "family_35",
+   "task_id": "task_0191"
+  }
+ ]
+}
