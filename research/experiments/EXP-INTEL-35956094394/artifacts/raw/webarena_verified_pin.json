@@ -1,0 +1,137 @@
+{
+ "experiment_id": "EXP-INTEL-35956094394",
+ "created_at": "2026-09-24T00:00:00+00:00",
+ "dataset": "WebArena-Verified v2",
+ "pinned_source": "ServiceNow/WebArena-Verified (HuggingFace dataset), commit ef74e1bfd0d83d4bab1c55b2d1b4c2aeaac8e0d0 (per EXP-INTEL-35697055679 provenance)",
+ "manifest_path": "research/experiments/EXP-INTEL-35725763380/artifacts/raw/webarena-verified.json",
+ "manifest_sha256": "d65275660814663375028e9017e1f929e3c38321041b125795e2713b52243d30",
+ "manifest_bytes": 927596,
+ "byte_identical": true,
+ "cross_source_equality": "unavailable",
+ "cross_source_equality_reason": "MV2: HF resolve/API returned 401 Unauthorized (HF_TOKEN absent, logged false) on all 3 genuine attempts this run; byte-identity asserted only against the established local pinned copy whose sha256 matches the audit-verified expired identity d6527566...",
+ "docker_digest": "sha256:3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb",
+ "docker_digest_64hex": "3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb",
+ "docker_url": "docker.io/am1n3e/webarena-verified-shopping@sha256:3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb",
+ "census": {
+  "total_tasks": 812,
+  "shopping_first_site": 192,
+  "shopping_admin_first_site": 182,
+  "shopping_admin_contains_site": 184,
+  "families_ge3_shopping": 36,
+  "families_ge3_ids": [
+   101,
+   136,
+   137,
+   138,
+   139,
+   145,
+   147,
+   153,
+   154,
+   155,
+   156,
+   159,
+   160,
+   162,
+   163,
+   165,
+   169,
+   171,
+   172,
+   180,
+   186,
+   189,
+   191,
+   194,
+   196,
+   197,
+   204,
+   206,
+   207,
+   208,
+   211,
+   212,
+   213,
+   214,
+   222,
+   370
+  ],
+  "family_size_histogram_families_ge3": {
+   "3": 2,
+   "4": 1,
+   "5": 32,
+   "6": 1
+  },
+  "product_page_families_shopping": [
+   136,
+   145,
+   196,
+   222
+  ],
+  "product_page_tasks": 7
+ },
+ "ax_gates": {
+  "captures_total": 16,
+  "captures_webarena_product_pages": 13,
+  "captures_pca_positive_control": 3,
+  "ax_tree_present_prob": "13/13 web + 3/3 PCA (median 698 AX nodes on product pages; all >= 10)",
+  "dom_rich_prob": "13/13 web (median 201305 bytes; min 195052 >= 2000)",
+  "sha_stability_identical_prob": "16/16 captures identical across reloads",
+  "sha_mutation_changed_prob": "16/16 captures change after visible textContent mutation",
+  "ax_cdp_bbox_field": false,
+  "ax_cdp_bbox_field_reason": "Chromium 153 / Playwright 1.63 removed AXNode.boundingBox and computedStyle from the CDP Accessibility protocol (verified via protocol dump artifact ax_protocol_dump.json; AXNode fields: nodeId, ignored, ignoredReasons, role, chromeRole, name, description, value, properties, parentId, childIds, backendDOMNodeId, frameId). Richer geometry captured instead via anchored-element Runtime.evaluate (getBoundingClientRect + getComputedStyle) on heading/price/add-to-cart/main/contentinfo: present 13/13 web pages.",
+  "ax_families_found": 4,
+  "ax_families_found_reason": "Only 4 product_page families (136, 145, 196, 222) exist in the 812-task census of 36 families_ge3; MV4 >=10-family requirement is not constructible from the pinned census (design-level property, see prereg FIX-F).",
+  "capture_log": "artifacts/raw/ax_captures.jsonl",
+  "protocol_dump": "artifacts/raw/ax_protocol_dump.json",
+  "analysis": "artifacts/derived/ax_analysis.json",
+  "grammar_module": "research/intel/grammar_fulltree_358885.py",
+  "grammar_hash_live": "273eafbcb817e8981f843581a724594665cabdd357b318c701251929ee9c83de",
+  "capture_stack": "Playwright 1.63.0 / Chromium 153.0.8010.12 headless, viewport 1280x720, CDP Accessibility.getFullAXTree + page.content() outerHTML SHA256 with 9 base + bounded expanded + body-regex dynamic-token stripping (fotorama instance tokens added to expanded set; documented in grammar module)"
+ },
+ "attempts_log": {
+  "src_hf": {
+   "logs_path": "artifacts/raw/hf_manifest_attempts.json",
+   "n_attempts": 3,
+   "result": "401 Unauthorized x3, hf_token_present false"
+  },
+  "src_docker_hub_api": {
+   "logs_path": "artifacts/raw/docker_hub_api_attempts.json",
+   "n_attempts": 2,
+   "status": [
+    200,
+    200
+   ],
+   "digest_64hex_len": [
+    64,
+    64
+   ]
+  },
+  "src_docker_pull": {
+   "log_paths": [
+    "/tmp/opencode/pull1.log",
+    "/tmp/opencode/pull2.log"
+   ],
+   "returncodes": [
+    0,
+    0
+   ],
+   "timeout": 300,
+   "digest_confirmed": "sha256:3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb"
+  },
+  "src_docker_images": {
+   "digest_shown": "sha256:3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb",
+   "size_bytes": 13300000000
+  },
+  "health_check": {
+   "url": "http://localhost:7770/",
+   "attempts": 3,
+   "status": [
+    200,
+    200,
+    200
+   ],
+   "container": "quirky_ishizaka up, 0.0.0.0:7770->80/tcp"
+  }
+ }
+}

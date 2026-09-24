@@ -1,0 +1,81 @@
+{
+ "browser_version": "153.0.8010.12",
+ "axnode_type": {
+  "type_id": "AXNode",
+  "properties": [
+   {
+    "name": "nodeId",
+    "optional": false,
+    "type": null
+   },
+   {
+    "name": "ignored",
+    "optional": false,
+    "type": "boolean"
+   },
+   {
+    "name": "ignoredReasons",
+    "optional": true,
+    "type": "array"
+   },
+   {
+    "name": "role",
+    "optional": true,
+    "type": null
+   },
+   {
+    "name": "chromeRole",
+    "optional": true,
+    "type": null
+   },
+   {
+    "name": "name",
+    "optional": true,
+    "type": null
+   },
+   {
+    "name": "description",
+    "optional": true,
+    "type": null
+   },
+   {
+    "name": "value",
+    "optional": true,
+    "type": null
+   },
+   {
+    "name": "properties",
+    "optional": true,
+    "type": "array"
+   },
+   {
+    "name": "parentId",
+    "optional": true,
+    "type": null
+   },
+   {
+    "name": "childIds",
+    "optional": true,
+    "type": "array"
+   },
+   {
+    "name": "backendDOMNodeId",
+    "optional": true,
+    "type": null
+   },
+   {
+    "name": "frameId",
+    "optional": true,
+    "type": null
+   }
+  ]
+ },
+ "getFullAXTree": {
+  "name": "getFullAXTree",
+  "params": [
+   "depth",
+   "frameId"
+  ]
+ },
+ "bbox_present_in_axnode": false
+}

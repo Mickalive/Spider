@@ -1,0 +1,29 @@
+{
+ "experiment_id": "EXP-INTEL-35956094394",
+ "dataset": "WebArena-Verified v2 (812 tasks)",
+ "manifest_sha256": "d65275660814663375028e9017e1f929e3c38321041b125795e2713b52243d30",
+ "total_tasks": 812,
+ "shopping": 192,
+ "shopping_admin_contains": 184,
+ "families_ge3": 36,
+ "family_size_histogram": {
+  "3": 2,
+  "4": 1,
+  "5": 32,
+  "6": 1
+ },
+ "shopping_admin_families": "184-task/42-family superset (parent: __SHOPPING_ADMIN__ 404 on container; not re-probed this run)",
+ "product_page_families": [
+  136,
+  145,
+  196,
+  222
+ ],
+ "diverse_etld_plus1": null,
+ "diverse_etld_plus1_note": "WebGym 292k manifest not acquirable: HF 401 x3 (token false) this run; prior run 401/404 (EXP-INTEL-35947486685 webgym_census.json). Not negative evidence; requires HF_TOKEN.",
+ "duplication_prevalence": null,
+ "duplication_note": "Requires WebGym 292k manifest (above) - not measured; threshold sweep 0.818-0.9479 range not computable.",
+ "param_prevalence": null,
+ "product_page_capable_tasks": 7,
+ "webarena_pin_path": "artifacts/raw/webarena_verified_pin.json"
+}

@@ -1,0 +1,985 @@
+{
+ "artifact_sha256": "69a7462c2054f8a55694c36e9dd6e1054090339f8f2513ff96d478af7553270c",
+ "experiment_id": "EXP-INTEL-35956094394",
+ "expiry_model": "seeded per-task Poisson session rotation (rotp in {0.15,0.25,0.35}) on every world step; makes freshness gates operational (prereg 11: auth/session expiry dynamics). rotation_step_lt retained as legacy field, superseded by rotp.",
+ "gap_generator": "distinct token spaces per channel; train alias A vs test alias B per channel",
+ "generator_script": "research/intel/exp_35956094394_synth_gen.py",
+ "generator_script_sha256": "5311a58113e50d00546547634aa239c45cf3dec659509580abd56eb63678c1b0",
+ "orthogonality": {
+  "asserted": true,
+  "no_cross_channel_leakage": true,
+  "page_renders_only_body": true,
+  "value_spaces_disjoint": true
+ },
+ "pcb_toy": {
+  "alias_test": {
+   "header": "fb8d318db94c4be13b8612e20a76e7a8"
+  },
+  "alias_train": {
+   "header": "fb8d318db94c4be13b8612e20a76e7a8"
+  },
+  "channels": [
+   "header"
+  ],
+  "family": "toy_header_noshift",
+  "page_renders": {
+   "header": false
+  },
+  "param_names": {
+   "header": "X-Session-Key"
+  },
+  "rotation_step_lt": null,
+  "rotp": 0.0,
+  "task_id": "pcb_toy"
+ },
+ "seed": 360360,
+ "split": {
+  "auth_param": 10,
+  "body_param": 10,
+  "header_param": 10,
+  "mixed_multi_channel": 10,
+  "pcb_toy": 1
+ },
+ "tasks": [
+  {
+   "alias_test": {
+    "header": "bd887a6628c0c74e9d3dd9a579fe0e2e"
+   },
+   "alias_train": {
+    "header": "2868c2e711e86a3117640f04603abf26"
+   },
+   "channels": [
+    "header"
+   ],
+   "family": "header_param",
+   "page_renders": {
+    "header": false
+   },
+   "param_names": {
+    "header": "X-Session-Key"
+   },
+   "rotation_step_lt": 4,
+   "rotp": 0.15,
+   "task_id": "hd_00"
+  },
+  {
+   "alias_test": {
+    "header": "e25fb1f47e2abbfeefdf2eeb4cf9a165"
+   },
+   "alias_train": {
+    "header": "af6b7b5b53e3c3b4d54b03f24baf0c63"
+   },
+   "channels": [
+    "header"
+   ],
+   "family": "header_param",
+   "page_renders": {
+    "header": false
+   },
+   "param_names": {
+    "header": "X-Session-Key"
+   },
+   "rotation_step_lt": 5,
+   "rotp": 0.25,
+   "task_id": "hd_01"
+  },
+  {
+   "alias_test": {
+    "header": "e161d22009f0315d6b6c24ea9b757d3d"
+   },
+   "alias_train": {
+    "header": "965e5fcd2436e8db8ea471167d60d9ce"
+   },
+   "channels": [
+    "header"
+   ],
+   "family": "header_param",
+   "page_renders": {
+    "header": false
+   },
+   "param_names": {
+    "header": "X-Session-Key"
+   },
+   "rotation_step_lt": 5,
+   "rotp": 0.15,
+   "task_id": "hd_02"
+  },
+  {
+   "alias_test": {
+    "header": "463430a8c115f987a423969aa1368182"
+   },
+   "alias_train": {
+    "header": "d1526c7516149d110cd0b68ae037f965"
+   },
+   "channels": [
+    "header"
+   ],
+   "family": "header_param",
+   "page_renders": {
+    "header": false
+   },
+   "param_names": {
+    "header": "X-Session-Key"
+   },
+   "rotation_step_lt": 3,
+   "rotp": 0.25,
+   "task_id": "hd_03"
+  },
+  {
+   "alias_test": {
+    "header": "1a3031f32cb15ecf40ed486e2defe8d8"
+   },
+   "alias_train": {
+    "header": "eab7239351fff3d2bf1276b0aa1f0e26"
+   },
+   "channels": [
+    "header"
+   ],
+   "family": "header_param",
+   "page_renders": {
+    "header": false
+   },
+   "param_names": {
+    "header": "X-Session-Key"
+   },
+   "rotation_step_lt": 4,
+   "rotp": 0.15,
+   "task_id": "hd_04"
+  },
+  {
+   "alias_test": {
+    "header": "f4149c5f6e91eb3dd0b81c80e8670b2b"
+   },
+   "alias_train": {
+    "header": "8882f6acff948d0c2945dfab194f3abd"
+   },
+   "channels": [
+    "header"
+   ],
+   "family": "header_param",
+   "page_renders": {
+    "header": false
+   },
+   "param_names": {
+    "header": "X-Session-Key"
+   },
+   "rotation_step_lt": 4,
+   "rotp": 0.25,
+   "task_id": "hd_05"
+  },
+  {
+   "alias_test": {
+    "header": "2dfc79fae103d84a0c1372016665146c"
+   },
+   "alias_train": {
+    "header": "00d06a96b18aacc35e6157eb83edc519"
+   },
+   "channels": [
+    "header"
+   ],
+   "family": "header_param",
+   "page_renders": {
+    "header": false
+   },
+   "param_names": {
+    "header": "X-Session-Key"
+   },
+   "rotation_step_lt": 5,
+   "rotp": 0.15,
+   "task_id": "hd_06"
+  },
+  {
+   "alias_test": {
+    "header": "3587f4df86c243cf41c90e0c7417beab"
+   },
+   "alias_train": {
+    "header": "36ffbbc93839f22b161679bf639d98c6"
+   },
+   "channels": [
+    "header"
+   ],
+   "family": "header_param",
+   "page_renders": {
+    "header": false
+   },
+   "param_names": {
+    "header": "X-Session-Key"
+   },
+   "rotation_step_lt": 3,
+   "rotp": 0.35,
+   "task_id": "hd_07"
+  },
+  {
+   "alias_test": {
+    "header": "d8df95d78b933563fd9cb5906be6cac7"
+   },
+   "alias_train": {
+    "header": "0a13cd4de0c4a057f3bb39b84a8e076b"
+   },
+   "channels": [
+    "header"
+   ],
+   "family": "header_param",
+   "page_renders": {
+    "header": false
+   },
+   "param_names": {
+    "header": "X-Session-Key"
+   },
+   "rotation_step_lt": 5,
+   "rotp": 0.25,
+   "task_id": "hd_08"
+  },
+  {
+   "alias_test": {
+    "header": "d3294c1906ca484365ad168b5239a9d2"
+   },
+   "alias_train": {
+    "header": "94530a02fd85d2e263656da6513c306b"
+   },
+   "channels": [
+    "header"
+   ],
+   "family": "header_param",
+   "page_renders": {
+    "header": false
+   },
+   "param_names": {
+    "header": "X-Session-Key"
+   },
+   "rotation_step_lt": 5,
+   "rotp": 0.25,
+   "task_id": "hd_09"
+  },
+  {
+   "alias_test": {
+    "body": "16243187"
+   },
+   "alias_train": {
+    "body": "79475760"
+   },
+   "channels": [
+    "body"
+   ],
+   "family": "body_param",
+   "page_renders": {
+    "body": true
+   },
+   "param_names": {
+    "body": "session_token"
+   },
+   "rotation_step_lt": 5,
+   "rotp": 0.25,
+   "task_id": "bd_00"
+  },
+  {
+   "alias_test": {
+    "body": "80881146"
+   },
+   "alias_train": {
+    "body": "96892358"
+   },
+   "channels": [
+    "body"
+   ],
+   "family": "body_param",
+   "page_renders": {
+    "body": true
+   },
+   "param_names": {
+    "body": "session_token"
+   },
+   "rotation_step_lt": 4,
+   "rotp": 0.25,
+   "task_id": "bd_01"
+  },
+  {
+   "alias_test": {
+    "body": "34737937"
+   },
+   "alias_train": {
+    "body": "77083259"
+   },
+   "channels": [
+    "body"
+   ],
+   "family": "body_param",
+   "page_renders": {
+    "body": true
+   },
+   "param_names": {
+    "body": "session_token"
+   },
+   "rotation_step_lt": 5,
+   "rotp": 0.25,
+   "task_id": "bd_02"
+  },
+  {
+   "alias_test": {
+    "body": "10989501"
+   },
+   "alias_train": {
+    "body": "16578248"
+   },
+   "channels": [
+    "body"
+   ],
+   "family": "body_param",
+   "page_renders": {
+    "body": true
+   },
+   "param_names": {
+    "body": "session_token"
+   },
+   "rotation_step_lt": 5,
+   "rotp": 0.25,
+   "task_id": "bd_03"
+  },
+  {
+   "alias_test": {
+    "body": "19127468"
+   },
+   "alias_train": {
+    "body": "62893389"
+   },
+   "channels": [
+    "body"
+   ],
+   "family": "body_param",
+   "page_renders": {
+    "body": true
+   },
+   "param_names": {
+    "body": "session_token"
+   },
+   "rotation_step_lt": 5,
+   "rotp": 0.15,
+   "task_id": "bd_04"
+  },
+  {
+   "alias_test": {
+    "body": "76705719"
+   },
+   "alias_train": {
+    "body": "55747333"
+   },
+   "channels": [
+    "body"
+   ],
+   "family": "body_param",
+   "page_renders": {
+    "body": true
+   },
+   "param_names": {
+    "body": "session_token"
+   },
+   "rotation_step_lt": 4,
+   "rotp": 0.25,
+   "task_id": "bd_05"
+  },
+  {
+   "alias_test": {
+    "body": "39618178"
+   },
+   "alias_train": {
+    "body": "73671065"
+   },
+   "channels": [
+    "body"
+   ],
+   "family": "body_param",
+   "page_renders": {
+    "body": true
+   },
+   "param_names": {
+    "body": "session_token"
+   },
+   "rotation_step_lt": 4,
+   "rotp": 0.35,
+   "task_id": "bd_06"
+  },
+  {
+   "alias_test": {
+    "body": "94753718"
+   },
+   "alias_train": {
+    "body": "42400012"
+   },
+   "channels": [
+    "body"
+   ],
+   "family": "body_param",
+   "page_renders": {
+    "body": true
+   },
+   "param_names": {
+    "body": "session_token"
+   },
+   "rotation_step_lt": 4,
+   "rotp": 0.15,
+   "task_id": "bd_07"
+  },
+  {
+   "alias_test": {
+    "body": "65632988"
+   },
+   "alias_train": {
+    "body": "78555728"
+   },
+   "channels": [
+    "body"
+   ],
+   "family": "body_param",
+   "page_renders": {
+    "body": true
+   },
+   "param_names": {
+    "body": "session_token"
+   },
+   "rotation_step_lt": 3,
+   "rotp": 0.25,
+   "task_id": "bd_08"
+  },
+  {
+   "alias_test": {
+    "body": "59573958"
+   },
+   "alias_train": {
+    "body": "18127957"
+   },
+   "channels": [
+    "body"
+   ],
+   "family": "body_param",
+   "page_renders": {
+    "body": true
+   },
+   "param_names": {
+    "body": "session_token"
+   },
+   "rotation_step_lt": 3,
+   "rotp": 0.15,
+   "task_id": "bd_09"
+  },
+  {
+   "alias_test": {
+    "auth": "t-q5h1pt5zmztf093zem6029h2"
+   },
+   "alias_train": {
+    "auth": "t-sumc0zh6477basvng3sn8wnh"
+   },
+   "channels": [
+    "auth"
+   ],
+   "family": "auth_param",
+   "page_renders": {
+    "auth": false
+   },
+   "param_names": {
+    "auth": "auth_sig"
+   },
+   "rotation_step_lt": 5,
+   "rotp": 0.15,
+   "task_id": "au_00"
+  },
+  {
+   "alias_test": {
+    "auth": "t-l8ylzhlkonsct1m69g0z4m21"
+   },
+   "alias_train": {
+    "auth": "t-8p71iz1bzwd6wi0mqrl3jz8g"
+   },
+   "channels": [
+    "auth"
+   ],
+   "family": "auth_param",
+   "page_renders": {
+    "auth": false
+   },
+   "param_names": {
+    "auth": "auth_sig"
+   },
+   "rotation_step_lt": 5,
+   "rotp": 0.25,
+   "task_id": "au_01"
+  },
+  {
+   "alias_test": {
+    "auth": "t-4z31v4j84btzyldaxa628yy5"
+   },
+   "alias_train": {
+    "auth": "t-pggg7vypd5c1xeaful3owk73"
+   },
+   "channels": [
+    "auth"
+   ],
+   "family": "auth_param",
+   "page_renders": {
+    "auth": false
+   },
+   "param_names": {
+    "auth": "auth_sig"
+   },
+   "rotation_step_lt": 5,
+   "rotp": 0.15,
+   "task_id": "au_02"
+  },
+  {
+   "alias_test": {
+    "auth": "t-hgplvkvbk748wv6ou615fb58"
+   },
+   "alias_train": {
+    "auth": "t-cd6pdim9u3xvjdbup0qhrfux"
+   },
+   "channels": [
+    "auth"
+   ],
+   "family": "auth_param",
+   "page_renders": {
+    "auth": false
+   },
+   "param_names": {
+    "auth": "auth_sig"
+   },
+   "rotation_step_lt": 5,
+   "rotp": 0.35,
+   "task_id": "au_03"
+  },
+  {
+   "alias_test": {
+    "auth": "t-wxq9spyge39r0e8xe4n2cap1"
+   },
+   "alias_train": {
+    "auth": "t-9ths96s7f0icp921ptp5s3wg"
+   },
+   "channels": [
+    "auth"
+   ],
+   "family": "auth_param",
+   "page_renders": {
+    "auth": false
+   },
+   "param_names": {
+    "auth": "auth_sig"
+   },
+   "rotation_step_lt": 5,
+   "rotp": 0.15,
+   "task_id": "au_04"
+  },
+  {
+   "alias_test": {
+    "auth": "t-60ksxkczmuy7fpgljel8i6ne"
+   },
+   "alias_train": {
+    "auth": "t-yp318ouhjwny4bi0h0dret2i"
+   },
+   "channels": [
+    "auth"
+   ],
+   "family": "auth_param",
+   "page_renders": {
+    "auth": false
+   },
+   "param_names": {
+    "auth": "auth_sig"
+   },
+   "rotation_step_lt": 3,
+   "rotp": 0.35,
+   "task_id": "au_05"
+  },
+  {
+   "alias_test": {
+    "auth": "t-v0yoyvxqqqz8ie86ap4fpebc"
+   },
+   "alias_train": {
+    "auth": "t-cc7v7rwarne9n0pvj3lcz3a0"
+   },
+   "channels": [
+    "auth"
+   ],
+   "family": "auth_param",
+   "page_renders": {
+    "auth": false
+   },
+   "param_names": {
+    "auth": "auth_sig"
+   },
+   "rotation_step_lt": 3,
+   "rotp": 0.35,
+   "task_id": "au_06"
+  },
+  {
+   "alias_test": {
+    "auth": "t-ig4vk5hjejgsk1w5h6564y8v"
+   },
+   "alias_train": {
+    "auth": "t-kukjhhophipp6othv8kygy1d"
+   },
+   "channels": [
+    "auth"
+   ],
+   "family": "auth_param",
+   "page_renders": {
+    "auth": false
+   },
+   "param_names": {
+    "auth": "auth_sig"
+   },
+   "rotation_step_lt": 5,
+   "rotp": 0.25,
+   "task_id": "au_07"
+  },
+  {
+   "alias_test": {
+    "auth": "t-vxmokeky1u9s3569g5kwqlq3"
+   },
+   "alias_train": {
+    "auth": "t-x24ykmnolz1g9868uvwc5qgy"
+   },
+   "channels": [
+    "auth"
+   ],
+   "family": "auth_param",
+   "page_renders": {
+    "auth": false
+   },
+   "param_names": {
+    "auth": "auth_sig"
+   },
+   "rotation_step_lt": 3,
+   "rotp": 0.15,
+   "task_id": "au_08"
+  },
+  {
+   "alias_test": {
+    "auth": "t-395x3enzbjq4oaxqws83yalr"
+   },
+   "alias_train": {
+    "auth": "t-5vmdk9vhwew37nxg3aax6ncy"
+   },
+   "channels": [
+    "auth"
+   ],
+   "family": "auth_param",
+   "page_renders": {
+    "auth": false
+   },
+   "param_names": {
+    "auth": "auth_sig"
+   },
+   "rotation_step_lt": 5,
+   "rotp": 0.35,
+   "task_id": "au_09"
+  },
+  {
+   "alias_test": {
+    "auth": "t-36aygxjrt5x2xcszz1na8a70",
+    "body": "42282218",
+    "header": "90a856601b88c73e563bd3df2ce95e60"
+   },
+   "alias_train": {
+    "auth": "t-6ojmj8vo1wdietq2hk87h12s",
+    "body": "30722798",
+    "header": "d3451c6e7b4bc107c5bc2504066381b6"
+   },
+   "channels": [
+    "header",
+    "body",
+    "auth"
+   ],
+   "family": "mixed_multi_channel",
+   "page_renders": {
+    "auth": false,
+    "body": true,
+    "header": false
+   },
+   "param_names": {
+    "auth": "auth_sig",
+    "body": "session_token",
+    "header": "X-Session-Key"
+   },
+   "rotation_step_lt": 4,
+   "rotp": 0.35,
+   "task_id": "mx_00"
+  },
+  {
+   "alias_test": {
+    "auth": "t-f5ramrh9iusr072wf4zjynjt",
+    "body": "68701014",
+    "header": "9a99383f4a7fbf1c552199c17c375298"
+   },
+   "alias_train": {
+    "auth": "t-qeemymenlh10i61jy1x9n7ln",
+    "body": "31365217",
+    "header": "d1895f8c90995c55a16ac350b98af78b"
+   },
+   "channels": [
+    "header",
+    "body",
+    "auth"
+   ],
+   "family": "mixed_multi_channel",
+   "page_renders": {
+    "auth": false,
+    "body": true,
+    "header": false
+   },
+   "param_names": {
+    "auth": "auth_sig",
+    "body": "session_token",
+    "header": "X-Session-Key"
+   },
+   "rotation_step_lt": 3,
+   "rotp": 0.25,
+   "task_id": "mx_01"
+  },
+  {
+   "alias_test": {
+    "auth": "t-tcg2q0almv5x3zs82nyotd0h",
+    "body": "96854200",
+    "header": "1e8e3a01b36bbd808f4fb8109e2bf5c6"
+   },
+   "alias_train": {
+    "auth": "t-2tpbyor84oeydccecioxlh8r",
+    "body": "27070394",
+    "header": "a1e5e76962b1fec50c80d1ad16812348"
+   },
+   "channels": [
+    "header",
+    "body",
+    "auth"
+   ],
+   "family": "mixed_multi_channel",
+   "page_renders": {
+    "auth": false,
+    "body": true,
+    "header": false
+   },
+   "param_names": {
+    "auth": "auth_sig",
+    "body": "session_token",
+    "header": "X-Session-Key"
+   },
+   "rotation_step_lt": 4,
+   "rotp": 0.15,
+   "task_id": "mx_02"
+  },
+  {
+   "alias_test": {
+    "auth": "t-fgk7ol0304zkiza7yb5e8vam",
+    "body": "58143234",
+    "header": "6db258c60a2026e6f54811263a1b3483"
+   },
+   "alias_train": {
+    "auth": "t-q3zsxgb9jskh2npqccv51g7i",
+    "body": "63392806",
+    "header": "e89ad9659d5f5b3d198ef7490e0ba229"
+   },
+   "channels": [
+    "header",
+    "body",
+    "auth"
+   ],
+   "family": "mixed_multi_channel",
+   "page_renders": {
+    "auth": false,
+    "body": true,
+    "header": false
+   },
+   "param_names": {
+    "auth": "auth_sig",
+    "body": "session_token",
+    "header": "X-Session-Key"
+   },
+   "rotation_step_lt": 5,
+   "rotp": 0.15,
+   "task_id": "mx_03"
+  },
+  {
+   "alias_test": {
+    "auth": "t-t34m6agnvmvtncmfi5b1uibh",
+    "body": "91818440",
+    "header": "8b30e8ff5f0e301c4ee1376dccf467cb"
+   },
+   "alias_train": {
+    "auth": "t-bqmhsaiql6lwbjgomtqo50wa",
+    "body": "53269569",
+    "header": "3c558900af477e3750f40355a4d8fb81"
+   },
+   "channels": [
+    "header",
+    "body",
+    "auth"
+   ],
+   "family": "mixed_multi_channel",
+   "page_renders": {
+    "auth": false,
+    "body": true,
+    "header": false
+   },
+   "param_names": {
+    "auth": "auth_sig",
+    "body": "session_token",
+    "header": "X-Session-Key"
+   },
+   "rotation_step_lt": 3,
+   "rotp": 0.15,
+   "task_id": "mx_04"
+  },
+  {
+   "alias_test": {
+    "auth": "t-7zzpsc4mwwfvvbgnyyguxsrt",
+    "body": "65200225",
+    "header": "5fd19aac2a150ba5d5e1b3bfd6ea390e"
+   },
+   "alias_train": {
+    "auth": "t-jr01cq2lrz4ixx8ddufqzwnv",
+    "body": "93185748",
+    "header": "2d3638bb94e2371629232df658d087af"
+   },
+   "channels": [
+    "header",
+    "body",
+    "auth"
+   ],
+   "family": "mixed_multi_channel",
+   "page_renders": {
+    "auth": false,
+    "body": true,
+    "header": false
+   },
+   "param_names": {
+    "auth": "auth_sig",
+    "body": "session_token",
+    "header": "X-Session-Key"
+   },
+   "rotation_step_lt": 4,
+   "rotp": 0.25,
+   "task_id": "mx_05"
+  },
+  {
+   "alias_test": {
+    "auth": "t-zajbq7vn4rx8vfvsxrduoem8",
+    "body": "58620076",
+    "header": "c23674904f0ab7f4f61aac695f590636"
+   },
+   "alias_train": {
+    "auth": "t-9e6a5dy217isrn2twczhfn4u",
+    "body": "35380689",
+    "header": "08d4d311ebf7d023220b5b7909f5799c"
+   },
+   "channels": [
+    "header",
+    "body",
+    "auth"
+   ],
+   "family": "mixed_multi_channel",
+   "page_renders": {
+    "auth": false,
+    "body": true,
+    "header": false
+   },
+   "param_names": {
+    "auth": "auth_sig",
+    "body": "session_token",
+    "header": "X-Session-Key"
+   },
+   "rotation_step_lt": 3,
+   "rotp": 0.25,
+   "task_id": "mx_06"
+  },
+  {
+   "alias_test": {
+    "auth": "t-py874yx59nic6bs3bx95u7xl",
+    "body": "98826906",
+    "header": "90f9db10f9534620c5f98f901506bd98"
+   },
+   "alias_train": {
+    "auth": "t-nz7mvrm5hcdgygyidka2zgvf",
+    "body": "19313677",
+    "header": "cba0e833b95934ca842162adcbbc4bb3"
+   },
+   "channels": [
+    "header",
+    "body",
+    "auth"
+   ],
+   "family": "mixed_multi_channel",
+   "page_renders": {
+    "auth": false,
+    "body": true,
+    "header": false
+   },
+   "param_names": {
+    "auth": "auth_sig",
+    "body": "session_token",
+    "header": "X-Session-Key"
+   },
+   "rotation_step_lt": 5,
+   "rotp": 0.35,
+   "task_id": "mx_07"
+  },
+  {
+   "alias_test": {
+    "auth": "t-23gj47k8pilhprv3g8df45ru",
+    "body": "63099883",
+    "header": "96deaca5c83b542d06ed0a1aeb1302d7"
+   },
+   "alias_train": {
+    "auth": "t-f5yanljhvrh1666eog302ile",
+    "body": "10859919",
+    "header": "330ab3ca4ec85ab5d3f593c5b4e70014"
+   },
+   "channels": [
+    "header",
+    "body",
+    "auth"
+   ],
+   "family": "mixed_multi_channel",
+   "page_renders": {
+    "auth": false,
+    "body": true,
+    "header": false
+   },
+   "param_names": {
+    "auth": "auth_sig",
+    "body": "session_token",
+    "header": "X-Session-Key"
+   },
+   "rotation_step_lt": 5,
+   "rotp": 0.35,
+   "task_id": "mx_08"
+  },
+  {
+   "alias_test": {
+    "auth": "t-su93qx5mhmmi75ep732me0zj",
+    "body": "63450869",
+    "header": "c36642c5ee4cdc4e637ecd6d0ac7ebd3"
+   },
+   "alias_train": {
+    "auth": "t-sul6sl62gisjbh3xnvh5doar",
+    "body": "56358303",
+    "header": "20c7ccc3ad204ccce3e34bc205e0b18d"
+   },
+   "channels": [
+    "header",
+    "body",
+    "auth"
+   ],
+   "family": "mixed_multi_channel",
+   "page_renders": {
+    "auth": false,
+    "body": true,
+    "header": false
+   },
+   "param_names": {
+    "auth": "auth_sig",
+    "body": "session_token",
+    "header": "X-Session-Key"
+   },
+   "rotation_step_lt": 5,
+   "rotp": 0.35,
+   "task_id": "mx_09"
+  }
+ ]
+}

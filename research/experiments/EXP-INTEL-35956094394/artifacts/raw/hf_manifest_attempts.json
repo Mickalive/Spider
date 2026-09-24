@@ -1,0 +1,38 @@
+{
+ "experiment_id": "EXP-INTEL-35956094394",
+ "source": "SRC-HF",
+ "hf_token_present": false,
+ "attempts": [
+  {
+   "attempt": 1,
+   "url": "https://huggingface.co/datasets/ServiceNow/WebArena-Verified/resolve/main/webarena-verified.json",
+   "hf_token_present": false,
+   "status": 401,
+   "bytes": 0,
+   "sha256": null,
+   "error": "HTTPError 401: Unauthorized",
+   "elapsed_s": 0.1
+  },
+  {
+   "attempt": 2,
+   "url": "https://huggingface.co/api/datasets/ServiceNow/WebArena-Verified/tree/main",
+   "hf_token_present": false,
+   "status": 401,
+   "bytes": 0,
+   "sha256": null,
+   "error": "HTTPError 401: Unauthorized",
+   "elapsed_s": 0.0
+  },
+  {
+   "attempt": 3,
+   "url": "https://huggingface.co/api/datasets/OpenEnv/BrowserGym",
+   "hf_token_present": false,
+   "status": 401,
+   "bytes": 0,
+   "sha256": null,
+   "error": "HTTPError 401: Unauthorized",
+   "elapsed_s": 0.0
+  }
+ ],
+ "downloads": {}
+}

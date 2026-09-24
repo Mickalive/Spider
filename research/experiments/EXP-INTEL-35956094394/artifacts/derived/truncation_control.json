@@ -1,0 +1,60 @@
+{
+ "control": "NC2-TRUNCATED",
+ "delta_ge_0_20": true,
+ "delta_vs_truncated": 0.6667,
+ "experiment_id": "EXP-INTEL-35956094394",
+ "full_tree_mutation_sensitivity": 1.0,
+ "n": 3,
+ "per_record": [
+  {
+   "family": "fam136",
+   "full_after_hash": "6833a802724be0585e420bc58021e9bb4d8904af32e8900c60427eea9512b011",
+   "full_before_hash": "7515873873d500a60998ac64fb503cd9df78bd2f2d83590057395e7c442511a9",
+   "full_before_len": 173402,
+   "full_sensitive": true,
+   "mutation": {
+    "found": true,
+    "selector": ".price"
+   },
+   "selector_hit": ".price",
+   "truncated_after_hash": "7679b2795243d3e2806f9d722bd243feba147237e8d16a859502b85b8a607ae6",
+   "truncated_before_hash": "7679b2795243d3e2806f9d722bd243feba147237e8d16a859502b85b8a607ae6",
+   "truncated_sensitive": false,
+   "url": "http://localhost:7770/ostent-16gb-memory-card-stick-storage-for-sony-ps-vita-psv1000-2000-pch-z081-z161-z321-z641.html"
+  },
+  {
+   "family": "fam222",
+   "full_after_hash": "264fe3cf8ceb890896a2497a86d5b1313d484e45539dfca345c1d6d518d5d166",
+   "full_before_hash": "df9e143587bc641483474cdc5a3020ef2a5d868979a73d4673adcc1caaf34b93",
+   "full_before_len": 187521,
+   "full_sensitive": true,
+   "mutation": {
+    "found": true,
+    "selector": ".price"
+   },
+   "selector_hit": ".price",
+   "truncated_after_hash": "c6bc6cb3d7d5890a1a541790cb8b078d4b5d6d4863a5c7f3650ed3815d358384",
+   "truncated_before_hash": "c6bc6cb3d7d5890a1a541790cb8b078d4b5d6d4863a5c7f3650ed3815d358384",
+   "truncated_sensitive": false,
+   "url": "http://localhost:7770/epson-workforce-wf-3620-wifi-direct-all-in-one-color-inkjet-printer-copier-scanner-amazon-dash-replenishment-ready.html"
+  },
+  {
+   "family": "PC-A-SYNTHETIC-FIXTURE",
+   "full_after_hash": "12c82192acf39ba594c0e4c11c1ef448d62045f67e7e861603875505ca580103",
+   "full_before_hash": "efe1b696b5a73c37be5e5592736580f7f2667aba53562c05d9de6e3f69d23ddd",
+   "full_before_len": 286,
+   "full_sensitive": true,
+   "mutation": {
+    "found": true,
+    "selector": ".price"
+   },
+   "selector_hit": ".price",
+   "truncated_after_hash": "2844c908d2a0167110dc597ddd3907859d70e6d2bc4919d13b7e6efc54b95cd6",
+   "truncated_before_hash": "866762bedd5bf70a351715419c172848908058723d9aad3fa1936f96fbf49135",
+   "truncated_sensitive": true,
+   "url": "http://127.0.0.1:8898/"
+  }
+ ],
+ "semantics": "tokens[:20] of stripped outerHTML (same grammar as full-tree) vs full stripped outerHTML SHA256",
+ "truncated_mutation_sensitivity": 0.3333
+}

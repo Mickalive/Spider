@@ -1,0 +1,28 @@
+{
+ "experiment_id": "EXP-INTEL-35956094394",
+ "source": "SRC-DOCKER-HUB-API",
+ "attempts": [
+  {
+   "url": "https://hub.docker.com/v2/repositories/am1n3e/webarena-verified-shopping/tags",
+   "status": 200,
+   "bytes": 1694,
+   "sha256": "4f40af4c0af420658dab093482175ce1fd33fcb7989de573b4d5f2d4da9acc9a",
+   "elapsed_s": 0.2,
+   "attempt": 1,
+   "latest_digest": "sha256:3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb",
+   "digest_64hex": "3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb",
+   "digest_64hex_len": 64
+  },
+  {
+   "url": "https://hub.docker.com/v2/repositories/am1n3e/webarena-verified-shopping/tags",
+   "status": 200,
+   "bytes": 1694,
+   "sha256": "4f40af4c0af420658dab093482175ce1fd33fcb7989de573b4d5f2d4da9acc9a",
+   "elapsed_s": 0.1,
+   "attempt": 2,
+   "latest_digest": "sha256:3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb",
+   "digest_64hex": "3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb",
+   "digest_64hex_len": 64
+  }
+ ]
+}

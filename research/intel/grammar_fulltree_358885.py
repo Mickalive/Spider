@@ -10,6 +10,10 @@ import re
 import hashlib
 from pathlib import Path
 
+# Body regex (CRITICAL FIX / MV3): outerHTML is reduced to <body>...</body> (DOTALL)
+# BEFORE dynamic-token stripping and SHA256. added by EXECUTE EXP-INTEL-35956094394.
+BODY_REGEX = re.compile(r"<body[^>]*>.*?</body>", re.DOTALL)
+
 # 9 dynamic-token regexes frozen before capture, not fit on outcome
 DYNAMIC_TOKEN_REGEXES = [
     r"csrf[_-]?token",
@@ -28,25 +32,39 @@ DYNAMIC_TOKEN_COMPILED = [re.compile(p, re.IGNORECASE) for p in DYNAMIC_TOKEN_RE
 # Semantic anchors for product subtree: heading/price/add-to-cart/main/contentinfo
 SEMANTIC_ANCHORS = ["heading", "price", "add-to-cart", "add_to_cart", "main", "contentinfo", "product", "heading[", "button"]
 
+def extract_body(html: str) -> str:
+    """Reduce outerHTML to <body>...</body> (DOTALL). Falls back to full html if no body tag."""
+    m = BODY_REGEX.search(html)
+    if m:
+        return m.group(0)
+    return html
+
+# Expanded Magento attribute-bound stripping: only the attribute name + its quoted value
+# are removed, never unbounded content. REPAIRED in EXP-INTEL-35956094394 (parent's
+# r'form_key[^"]*' swallowed the whole document on single-quoted attributes, which made
+# mutation detection impossible; bounded patterns fix that).
+EXPANDED_ATTR_PATTERNS = [
+    r"\b(?:form_key|uenc|store|session|timestamp|nonce)\s*=\s*\"[^\"]*\"",
+    r"\b(?:form_key|uenc|store|session|timestamp|nonce)\s*=\s*'[^']*'",
+    # Magento fotorama gallery instance token: fotorama{13-digit random} - a timestamp
+    # class token (13-digit run preceded by letters) that changes per page load and
+    # otherwise breaks SHA stability. Added under the 'expanded' set in
+    # EXP-INTEL-35956094394 (fragment repair).
+    r"\bfotorama\d{6,}\b",
+]
+EXPANDED_ATTR_COMPILED = [re.compile(p, re.IGNORECASE) for p in EXPANDED_ATTR_PATTERNS]
+
 def strip_dynamic_tokens(html: str) -> str:
     """Normalize outerHTML by stripping dynamic tokens before SHA256.
-    Includes 9 base regexes plus expanded Magento form_key/uenc/store/session/timestamp/nonce HTML-attribute stripping.
+    Includes 9 base regexes plus bounded expanded Magento form_key/uenc/store/session/timestamp/nonce
+    attribute stripping. Applied AFTER body-regex reduction (extract_body).
     """
-    normalized = html
+    body = extract_body(html)
+    normalized = body
     for pat in DYNAMIC_TOKEN_COMPILED:
         normalized = pat.sub("__STRIPPED__", normalized)
-    # Also strip common Magento dynamic fragments (expanded per spec CRITICAL FIX)
-    # form_key, uenc, store, session, timestamp, nonce as HTML attributes
-    magento_patterns = [
-        r'form_key[^"]*',
-        r'uenc[^"]*',
-        r'store[^"]*',
-        r'session[^"]*',
-        r'timestamp[^"]*',
-        r'nonce[^"]*',
-    ]
-    for pat in magento_patterns:
-        normalized = re.sub(pat, '__STRIPPED__', normalized)
+    for pat in EXPANDED_ATTR_COMPILED:
+        normalized = pat.sub("__STRIPPED__", normalized)
     return normalized
 
 def sha256_normalized_subtree(outer_html: str) -> str:
@@ -116,4 +134,6 @@ if __name__ == "__main__":
     # Verify no truncation present: tokens[:20] string not in file
     content = Path(__file__).read_text()
     assert "[:20]" not in content or "NOT done" in content, "Truncation found"
+    assert BODY_REGEX.pattern == r"<body[^>]*>.*?</body>", "body regex missing"
     print("No truncation verified, anchors:", SEMANTIC_ANCHORS)
+    print("body regex present:", BODY_REGEX.pattern)
