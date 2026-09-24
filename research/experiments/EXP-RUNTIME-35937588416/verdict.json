@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-35937588416",
+  "lane": "runtime",
+  "decision": "MEASUREMENT_INVALID",
+  "claim_updates": [
+    {
+      "claim_id": "C-MEAS-VALID",
+      "status": "MEASUREMENT_INVALID",
+      "reason": "Audit STATUS MEASUREMENT_INVALID, producer_claim_supported false, independently recomputed 0 observations matching producer (result.json status MEASUREMENT_INVALID outcome INCONCLUSIVE n_non304 0/800 n_304 0 hs256_valid_success 0.0 batch_distinct_ts 0 hit 0/0 browser false). Validity note HEALTH_GATE_FAILED: nginx+Flask did not respond 200+X-Worker-Pid within 15s accurately describes infrastructure failure, not scientific falsification per EXPERIMENT_PACKET.md s1/s9. Root cause is code bug audit required_fixes 5: run_experiment.py line 781 module-level app=create_app(DB_PATH) calls init_db() which creates /tmp/spider-runtime/35937588416/app.db BEFORE run_experiment() wipes directory lines 289-294 deleting DB file, Flask thread runs with stale reference; _start_flask sleeps 1.0s before health gate, no verification Flask listening on 19860 before nginx 19851 start, no retry/backoff. No C1-C8 measurement executed (B-HEADER-ONLY-JACCARD, B-BODY-HASH-REJECTED, B-ORACLE-FREE-GREEDY, B-HIT-NGINX-BYTE-PRESERVING, B-COST-SHUFFLED, B-STATUS-ONLY, B-BODY-ONLY, B-HEADERS-NO-BODYDERIVED all not tested per audit baseline_findings). Header-only Jaccard MINUS {Content-Length,ETag,W-ETag,Content-Range}, honest per-trajectory sum counters |rho_shuffled|<0.20 trajectory-grouped B=5000, oracle-free greedy MAX_DEPTH5, 330/330 HIT/DYNAMIC, BrowserGym 1280x720 CDP AX>10 remain UNTESTED. Cannot falsify H1-SINGLE-NODE-HONESTY; ceiling unchanged at local nginx island EXPERIMENTAL per parent handoff."
+    }
+  ],
+  "product_action": "NO_ACTION",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "Can the minimal single-node honesty gate be restored without distributed WAL (retry with factory-pattern WSGI fix): single Flask 3.1.3 HS256>=32 PyJWT decode origin at /tmp/spider-runtime/35937588416/app.db with directory exists before DB creation, Flask bound to 127.0.0.1:19860 verified listening before nginx 1.24.0:19851 health gate (200+X-Worker-Pid 0 missing retry), header-only Jaccard MINUS {Content-Length,ETag,W-ETag,Content-Range} preserving Cache-Control/Set-Cookie/Vary de-confounded r<0.30, real If-None-Match/ETag->304 n_non304>=800 stratified 400/endpoint per-batch SELECT >=10 distinct ts, honest per-trajectory-reset sum counters (resolve+bind+verify+freshness+browser_steps no jitter no n*3200 no f*6.0 trajectory-grouped B=5000 |rho_shuffled|<0.20 within-f std>0), oracle-free greedy brotli->gzip MAX_DEPTH5 330/330 HIT/DYNAMIC byte-identical 0 ambiguous, BrowserGym 0.14.3 + Playwright 1.63.0 1280x720 CDP AX>10 PC-HEALTH>=80% DOM21-82 N=20 pool effective_distinct_n>1 B=1000 non-degenerate CIs ordering beyond [1.0,1.0] — validating substrate graph/product/frontier require before distributed HS256 shared-WAL 800-stratified HIT?",
+  "reason": "Bounded MEASUREMENT_INVALID per independent audit: 0 lines raw_freshness_observations.jsonl, all metrics zero/empty, health gate 0/15 infrastructure blocked before Phase 1. Audit confirms producer correctly reported MEASUREMENT_INVALID not FALSIFIES, recomputed_metrics agreement true, and identifies deterministic code race (module-level init_db before directory wipe, 1s sleep, no port binding verification) as blocking cause. Per frozen prereg s12 and spec measurement_validity, any health-gate 0 missing or HS256/commit/structural validity violation gates to MEASUREMENT_INVALID irrespective of downstream hypotheses. No evidence for or against header-only orthogonality |r|<0.15 TOST, TN>=0.85, honest-cost |rho_shuffled|<0.20, HIT 330/330, or browser provision collected. Promote false, product NO_ACTION; distributed shared-WAL/sticky and production CDN hypotheses remain UNKNOWN not falsified. Next question retries identical Director PIVOT gate with the five audit required_fixes applied.",
+  "evidence_refs": [
+    "research/experiments/EXP-RUNTIME-35937588416/request.json: director_mandate PIVOT SUPERSEDE C-MEAS-VALID cycle 35937189245 cognitive_reset true question minimal single-node honesty gate",
+    "research/experiments/EXP-RUNTIME-35937588416/spec.json: claim_ids [C-MEAS-VALID] measurement_validity 10 clauses health-gated HS256>=32 header-only MINUS body-derived honest sum B=5000 oracle-free MAX_DEPTH5",
+    "research/experiments/EXP-RUNTIME-35937588416/prereg.md: s12 decision_rule SUPPORTS requires C1 TN>=0.85 n_non304>=800 C3/C4 |r|<0.15 TOST C5 |rho_shuffled|<0.20 C6 330/330 C7/C8 AX>10 validity violations -> MEASUREMENT_INVALID",
+    "research/experiments/EXP-RUNTIME-35937588416/freeze.json: hashes prereg f553f497 spec 74f9120d request a317c2a3",
+    "research/experiments/EXP-RUNTIME-35937588416/result.json: status MEASUREMENT_INVALID outcome INCONCLUSIVE observations n_non304 0 n_304 0 hs256 0.0 batch 0 validity_notes HEALTH_GATE_FAILED",
+    "research/experiments/EXP-RUNTIME-35937588416/audit.json: status MEASUREMENT_INVALID producer_claim_supported false required_fixes 5 (line781 create_app before wipe, 1s sleep, X-Worker-Pid pass-through, no retry, stale app) validity_findings HEALTH_GATE_FAILED infrastructure recomputed_metrics all zero claim_ceiling no change",
+    "research/experiments/EXP-RUNTIME-35937588416/provenance.json: env Flask 3.1.3 PyJWT 2.14.0 nginx 1.24.0 playwright 1.44.0 n_observations 0 n_hit 0 n_browser 0 browser_gym false agentlab false hs256_len 49 seed 44",
+    "research/experiments/EXP-RUNTIME-35937588416/run_experiment.py: line781 app=create_app(DB_PATH) module-level, lines289-294 directory wipe after, _start_flask 1.0s sleep, _health_gate 15s via nginx 19851, no Flask port verification",
+    "research/experiments/EXP-RUNTIME-35937588416/raw_freshness_observations.jsonl: 0 lines empty",
+    "research/experiments/EXP-RUNTIME-35913894863/handoff.json: parent MEASUREMENT_INVALID sha4563235a shared WAL health gate same root cause, ceiling EXPERIMENTAL local nginx 330/330 and LOCAL orthogonality r0.0022",
+    "codex/claim_state.json: C-MEAS-VALID latest EXPERIMENTAL bounded localhost Flask+PyJWT single-host loopback, latest MEASUREMENT_INVALID on health-gated shared WAL"
+  ]
+}
