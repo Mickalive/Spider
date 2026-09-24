@@ -1,0 +1,8 @@
+{
+  "hist_intersection_color": 0.667,
+  "hist_intersection_visual_xbin": 0.5,
+  "jaccard_visual_vocab": 0.3,
+  "mean_overlap": 0.49,
+  "visual_vocab_A": 6,
+  "visual_vocab_B": 6
+}
