@@ -1,0 +1,83 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-35937588416",
+  "lane": "runtime",
+  "status": "MEASUREMENT_INVALID",
+  "producer_claim_supported": false,
+  "required_fixes": [
+    "run_experiment.py: module-level app creation (line 781) calls create_app() which initializes DB at /tmp/spider-runtime/35937588416/app.db BEFORE run_experiment() wipes the directory (lines 289-294), deleting the DB file. Flask thread then runs with stale app reference to deleted DB.",
+    "run_experiment.py: _start_flask() sleeps only 1.0s before health gate; Flask dev server in daemon thread may not be fully bound to port 19860 when nginx starts and proxies health checks.",
+    "run_experiment.py: nginx config proxies /health to Flask but X-Worker-Pid header pass-through depends on Flask /health returning it; if Flask not ready, nginx returns 502/504 without X-Worker-Pid.",
+    "run_experiment.py: no retry/backoff for Flask port binding; no verification that Flask is actually listening on 19860 before starting nginx.",
+    "run_experiment.py: global 'app' variable created at import time with DB_PATH; run_experiment() should create fresh app AFTER directory cleanup, not reuse module-level stale instance."
+  ],
+  "validity_findings": [
+    "HEALTH_GATE_FAILED is an infrastructure/substrate failure, not a scientific falsification. The experiment collected ZERO observations (n_observations=0, n_non304=0, n_hit_observations=0, n_browser_observations=0).",
+    "All reported metrics are zeros/empty strings because the experiment terminated at Phase 0 before any measurement phases executed.",
+    "Producer correctly reported status=MEASUREMENT_INVALID and outcome=INCONCLUSIVE per EXPERIMENT_PACKET.md contract: 'infrastructure or substrate failure must never be encoded as scientific falsification'.",
+    "Validity note 'HEALTH_GATE_FAILED: nginx+Flask did not respond 200+X-Worker-Pid within 15s' accurately describes the failure mode.",
+    "No scientific conclusion about C-MEAS-VALID (header-only Jaccard, honest-cost, oracle-free decode, browser provision) can be drawn from this run."
+  ],
+  "baseline_findings": [
+    "B-HEADER-ONLY-JACCARD: not tested (experiment terminated before Phase 2)",
+    "B-BODY-HASH-REJECTED: not tested",
+    "B-ORACLE-GUIDED-REGRESSION: not tested",
+    "B-ORACLE-FREE-GREEDY: not tested",
+    "B-HIT-NGINX-BYTE-PRESERVING: not tested (experiment terminated before Phase 4)",
+    "B-COST-SHUFFLED: not tested (experiment terminated before Phase 3)",
+    "B-STATUS-ONLY: not tested",
+    "B-BODY-ONLY: not tested",
+    "B-HEADERS-NO-BODYDERIVED: not tested",
+    "Null controls (NC-ORTHOGONALITY-NOISE, NC-COST-SHUFFLED, NC-HIT-NO-CACHE, NC-BROWSER-SAME-STATE): not tested"
+  ],
+  "recomputed_metrics": {
+    "freshness_n_total": 0,
+    "freshness_n_non304": 0,
+    "freshness_n_304": 0,
+    "freshness_n_missing_worker": 0,
+    "freshness_hs256_valid_success_rate": 0.0,
+    "freshness_batch_distinct_ts": 0,
+    "freshness_per_ep_non304": {"/api/profile": 0, "/api/data_list": 0},
+    "freshness_per_ep_304": {"/api/profile": 0, "/api/data_list": 0},
+    "freshness_scheduling_confound_r": 0.0,
+    "freshness_header_only_jaccard_mean": 0.0,
+    "freshness_header_only_variance_FP": 0.0,
+    "honest_cost_rho_shuffled": 0.0,
+    "honest_cost_within_f_std": 0.0,
+    "honest_cost_ci_width": 0.0,
+    "honest_cost_n_trajectories": 0,
+    "hit_cells_tested": 0,
+    "hit_hits_identified": 0,
+    "hit_byte_identity": "0/0",
+    "hit_greedy_correct_rate": 0.0,
+    "hit_ambiguous_count": 0,
+    "bg_provision_ok": false,
+    "bg_ax_nodes_median": 0,
+    "bg_dom_nodes_median": 0,
+    "bg_pc_health_pct": 0,
+    "bg_effective_distinct_n_per_state": 0
+  },
+  "claim_ceiling": "No change from parent handoff ceiling: C-MEAS-VALID remains at 'local nginx island EXPERIMENTAL' (per EXP-RUNTIME-35913894863 handoff.do_not_assume and prereg.md line 146). The single-node honesty gate (header-only Jaccard MINUS body-derived + per-batch SELECT + real 304 n_non304>=800 + honest sum |rho_shuffled|<0.20 + oracle-free MAX_DEPTH5 + browser AX>10 DOM21-82) remains UNTESTED. This infrastructure failure does not falsify the hypothesis; it leaves the claim ceiling exactly where the parent handoff left it. Distributed HS256 shared-WAL 800-stratified HIT remains UNKNOWN.",
+  "evidence_refs": [
+    "research/experiments/EXP-RUNTIME-35937588416/request.json",
+    "research/experiments/EXP-RUNTIME-35937588416/spec.json",
+    "research/experiments/EXP-RUNTIME-35937588416/prereg.md",
+    "research/experiments/EXP-RUNTIME-35937588416/freeze.json",
+    "research/experiments/EXP-RUNTIME-35937588416/result.json",
+    "research/experiments/EXP-RUNTIME-35937588416/report.md",
+    "research/experiments/EXP-RUNTIME-35937588416/provenance.json",
+    "research/experiments/EXP-RUNTIME-35937588416/run_experiment.py",
+    "research/experiments/EXP-RUNTIME-35937588416/raw_freshness_observations.jsonl",
+    "research/experiments/EXP-RUNTIME-35913894863/handoff.json (parent handoff, sha256: 4563235a05a9d7af40a71b4c9395ab42283afdf783dc799583f50812a0d79e02)"
+  ],
+  "unresolved": [
+    "Whether the minimal single-node honesty gate can be restored without distributed WAL (the frozen question) remains entirely unanswered.",
+    "Header-only Jaccard MINUS {Content-Length,ETag,W-ETag,Content-Range} preserving Cache-Control/Set-Cookie/Vary with de-confounded scheduling: untested.",
+    "Real If-None-Match/ETag->304 with n_non304>=800 stratified 400/endpoint: untested (0 observed).",
+    "Honest per-trajectory-reset sum counters with |rho_shuffled|<0.20 trajectory-grouped B=5000: untested.",
+    "nginx 1.24.0 proxy_cache 330/330 HIT/DYNAMIC byte-identical via oracle-free greedy brotli->gzip MAX_DEPTH5: untested.",
+    "BrowserGym 0.14.3 + Playwright 1.63.0 1280x720 CDP AX>10 PC-HEALTH>=80% DOM21-82 N=20 pool effective_distinct_n>1: untested (browser_gym_installed=false, agentlab_installed=false).",
+    "The code bug (module-level app creation before directory cleanup) must be fixed before any re-run can produce valid evidence.",
+    "Per prereg.md section 12: 'If adequacy fails -> MEASUREMENT_INVALID (not SUPPORTS/FALSIFIED)' - this run correctly falls into MEASUREMENT_INVALID."
+  ]
+}
