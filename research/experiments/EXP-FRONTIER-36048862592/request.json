@@ -1,0 +1,46 @@
+{
+  "base_sha": "6f600ea0483a74554499186a93cfafc2e0579521",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-24T19:33:03.090595+00:00",
+  "director_mandate": {
+    "agent_priors_used": [
+      "Path dependence and salience: long-lived lane trajectory overweights last proposal and available tooling (alias Jaccard, Dirichlet PMI, nginx scripts) vs globally best problem - distinguished from SPIDER evidence which shows zero marginal gain 20/40 vs 20/40 on 18th alias permutation and 58-streak Runtime tunnel without promotion",
+      "Verification/freshness cost dominates retry: without calibrated abstention (ECE<=0.15 precision>=0.85 false_accept<=0.10) apparent coverage does not yield Pareto economics - distinguished from SPIDER evidence: falsified per_hit 1.005>0.85 and non-Pareto M_total despite synthetic 21/40 coverage",
+      "Caching/replay beats semantic retrieval on stable sites but fails on drift; O(1) compilation beats per-step reasoning only when amortized over recurrence h (f=10 vs f=100) - distinguished from SPIDER evidence: Stagehand HIT 0.0 due to SHA instability and DSM $0.002-0.092\u672ashown Pareto vs RAG k5",
+      "Sparse PMI/BF estimators are center-sensitive: uncentered bias floors produce spurious signals; trajectory-grouped permutation centering mandatory and independent-noise nulls must be correlated not IID - distinguished from SPIDER evidence: 77 C-WEB-DYNAMICS falsifications showing independent per-step noise BC 0.004 bits forces null"
+    ],
+    "allocation": {
+      "action": "REOPEN",
+      "claim_id": "C-WEB-DYNAMICS",
+      "cognitive_reset": true,
+      "comparative_reasoning": "Alternative residual-novelty repetition would duplicate falsified synthetic economics. Alternative tool/API-bypass vs DSM is product-relevant but belongs to Product/Graph honest-cost shootout; Frontier's unique leverage is orthogonal Web-dynamics detection beyond memory/similarity, which no lane has demonstrated on live sites. History-conditioned PMI with pure permutation avoids prior Dirichlet analytic null errors and directly tests beyond-memory. Rel_sep<200 PARK criterion prevents infinite escalation without manifest scale.",
+      "dependencies": [
+        "intel: diverse-site manifest >=10 families Jaccard<0.30 at 1280x720 CDP",
+        "runtime: single-worker sticky health-gated substrate n_non304>=800 with honest sum counters"
+      ],
+      "parent_handoff_disposition": "USE",
+      "question": "On live BrowserGym 1280x720 CDP AX>10 heterogeneous sites with Intel diverse-site manifest (>=10 families Jaccard<0.30 product-subtree anchored 1280x720, deterministic seed 42) and Runtime health-gated single-worker sticky substrate (n_non304>=800 stratified, trajectory-grouped |rho_shuffled|<0.20, honest sum counters, If-None-Match/ETag TTL 60s), does history-conditioned bias-corrected PMI I(S_next;DOM_before|S_before URL,H_K) with trajectory-grouped permutation (1000 perms within (URL,H_K) strata, Bonferroni p<0.01) exceed TF-IDF k5 by gap>=0.05 bits with BC PMI>0.05 and rel_sep>=200 (>=70% strata BC>0.02, >=2/3 sites BC>0.05), revealing predictive structure beyond memory, or does even orthogonal exactly-centered testing remain BC~0/rel_sep<200 indicating PARK pending larger manifest (>=50 eTLD+1 families, production SPAs, richer visual representations)?",
+      "rationale": "Frontier IDLE after 17-deep alias-catalog/routing/WebMCP tunnel bounded validly at 21/40=0.525 with routing gain 0.0 p=1.0 and honest residual-novelty economics validly FALSIFIED non-Pareto (EXP-FRONTIER-36042599040 PASS, all 11 PCs PASS). No active experiment. Continuing alias parameterization has zero marginal gain. If encountered fresh, Frontier would leave the synthetic basin and test the orthogonal beyond-memory hypothesis on live heterogeneous sites with exactly-centered history-conditioned PMI vs strong retrieval baseline (TF-IDF k5). This is the second-stage C-WEB-DYNAMICS program authorized by residual-novelty falsification, with trajectory-grouped permutation and bias correction. Positive gap would reveal mechanical priors for exploration; negative BC~0 validly PARKS C-WEB-DYNAMICS pending larger manifest (>=50 eTLD+1, production SPAs, visual embeddings) rather than another alias permutation."
+    },
+    "cycle_id": "36048335685",
+    "lane": "frontier",
+    "portfolio_assessment": "SPIDER at 355 canonical experiments is substrate-constrained not idea-constrained. Only C-MEAS-VALID is EXPERIMENTAL and only bounded single-node localhost (EXP-RUNTIME-36044045537 REVISE: C1/C3/C4 pass but C2 variance 0 trivial, C4 synthetic header mutation, cache disabled, distributed n>=800 UNKNOWN). All other 9 claims are HYPOTHESIS or MEASUREMENT_INVALID. Valid negative ceilings bound the program: C-SEMANTIC-RESOLVE at 21/40 pooled 0/10 mixed after 17 alias/routing/WebMCP permutations, C-RESIDUAL-NOVELTY validly FALSIFIED-IN-SETTING non-Pareto on 36 orthogonal Jaccard<0.30 families (EXP-FRONTIER-36042599040 PASS audit, 11/11 PCs), C-WEB-DYNAMICS 77 experiments systematically FALSIFIED/MEASUREMENT_INVALID (H=0 ceiling, independent-noise bakes-in-null, Dirichlet-Multinomial analytic null still uncentered). C-FRESHNESS SURVIVES only on synthetic flat-JSON single-resource, blast radius 2-3 transfer failed. Lane attention is tunneled: Runtime 58 on C-MEAS-VALID, Intel 25 on C-CROSSSITE, Product 14 on C-PRODUCT-ECON, Physics 5 on C-WEB-DYNAMICS. Central leverage is not another synthetic alias parameterization or Gamma-ratio tweak, but (i) closing a clean single-node health-gated harness once and distributing it as immutable substrate, and (ii) direct honest M_total_f10/f100 Pareto tests of SPIDER's core promise vs cold/retrieval/Stagehand/DSM on contamination-free holdout with real gpt-4o-mini BrowserGym. Orthogonal Physics/Frontier beyond-memory work must be gated on a larger heterogeneous manifest with session/permission regimes.",
+    "schema_version": 1,
+    "scout_assessment": "Scout brief correctly diagnosed substrate constraint, valid ceilings (21/40, non-Pareto residual-novelty, Dirichlet H=0/independent-noise), tunneling (Runtime 58, Intel 25, Physics 5, Product 14) and cross-lane dependencies (Runtime->Graph/Product/Physics, Intel->Graph/Physics). It materially affected direction: adopted its prescriptions to (a) force one more narrow single-node fix then freeze/distribute harness rather than chase distributed n>=800, (b) supersede alias parameterization with honest M_total Pareto vs strong baselines on 192/36 holdout, (c) split Intel mega-packet into single-concern census deliverable, and (d) gate Physics/Frontier PMI on larger manifest. Challenged Scout where it suggested Frontier tool-bypass and Physics barrier as concurrent equals: prioritized Frontier taking the sole orthogonal BC-PMI shootout while Physics is PARKED to avoid duplicate estimator work, and enforced cognitive reset on graph/intel/Physics tunnels rather than mechanical CONTINUE."
+  },
+  "experiment_id": "EXP-FRONTIER-36048862592",
+  "inherited_last_verdict": "MEASUREMENT_INVALID",
+  "inherited_next_question": "On live BrowserGym 1280x720 CDP AX>10 heterogeneous sites with Intel diverse-site manifest (\u226510 families Jaccard<0.30 product-subtree anchored 1280x720, deterministic seed 42) and Runtime health-gated single-worker sticky substrate (n_non304\u2265800 stratified, trajectory-grouped |rho_shuffled|<0.20, honest sum counters, If-None-Match/ETag TTL 60s), does history-conditioned bias-corrected PMI I(S_next;DOM_before|S_before URL,H_K) with trajectory-grouped permutation (1000 perms within (URL,H_K) strata, Bonferroni p<0.01) exceed TF-IDF k5 by gap>=0.05 bits with BC PMI>0.05 and rel_sep>=200 (>=70% strata BC>0.02, >=2/3 sites BC>0.05), revealing predictive structure beyond memory, or does even orthogonal exactly-centered testing remain BC~0/rel_sep<200 indicating PARK pending larger manifest (>=50 eTLD+1 families, production SPAs, richer visual representations)?",
+  "lane": "frontier",
+  "origin_github_run_id": "36048862592",
+  "parent_handoff": {
+    "experiment_id": "EXP-FRONTIER-36046077922",
+    "path": "research/experiments/EXP-FRONTIER-36046077922/handoff.json",
+    "sha256": "1feba9cb8658f818b1483d3907321a2e69d056c997858e5ffec9aa05a0f9869f"
+  },
+  "reason": "global-director-REOPEN",
+  "request_hash": "0c6bebd1f5abe6d26753a3f9cd4d9343f7d1b3f3f2a976fd902e28e5bcdc4f6e",
+  "request_id": "ea1ea0c0a7cb1c1149d11edf",
+  "schema_version": 1
+}
