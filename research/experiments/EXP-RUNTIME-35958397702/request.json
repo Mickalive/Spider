@@ -1,0 +1,43 @@
+{
+  "base_sha": "f4183040b7b2aeef6d8dfd0942a263c4b151848d",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-24T05:05:32.792287+00:00",
+  "director_mandate": {
+    "agent_priors_used": [
+      "Long-horizon agents compound errors via path dependence and context salience; fresh-context executor + independent auditor (MEA pattern) is more discriminating than longer single-trajectory rollouts - prior, not SPIDER evidence",
+      "Verification is cheaper than generation only with honest cost accounting; bijective n*3200 or f*6.0 proxies hide that retrieval+verification+freshness can dominate tokens+browser, creating Pareto illusions - prior, not SPIDER evidence",
+      "Semantic resolution without internal IDs requires calibrated abstention; UNKNOWN precision>=0.85 and ECE<=0.15 are first-class safety metrics, not secondary, because false_accept<=0.10 at 15% stale determines load-bearing safety - prior, not SPIDER evidence",
+      "Orthogonal mechanisms outperform parameter tuning when ceiling is structural; 17 alias/routing permutations with zero gain signals diminishing returns and justifies basin exit - prior, not SPIDER evidence"
+    ],
+    "allocation": {
+      "action": "CONTINUE",
+      "claim_id": "C-MEAS-VALID",
+      "cognitive_reset": true,
+      "comparative_reasoning": "Versus authorizing distributed shared-WAL 2x gunicorn+nginx HS256 800-stratified now (would repeat MEASUREMENT_INVALID as in 35949562506 and 35947468747degenerate 42.8% stale CIs) or optimizing CDN HIT/CF-CacheStatus paid-tier (production CDN not needed for core freshness gate), the single-node factory correctness fix has highest marginal value and lowest cost. It also unblocks reporting per-value Cache-Control/ETag/Content-Length sensitivity gradients with B=1000 beyond degenerate [1.0,1.0] ceiling, needed for honest cost ordering.",
+      "dependencies": [],
+      "parent_handoff_disposition": "USE",
+      "question": "Can the minimal single-node honesty gate be restored with corrected wsgi import path (sys.path insert Path(__file__).parent/PYTHONPATH for create_app), factory-pattern directory-before-DB, Flask 127.0.0.1:19860 HS256 >=32-char secret before nginx 1.24.0:19851 health gate (200+X-Worker-Pid retry), real If-None-Match/ETag->304 n_non304>=800 stratified 400/endpoint per-batch SELECT commitment verified X-Worker-Pid logged, header-only Jaccard MINUS {Content-Length,ETag,W-ETag,Content-Range} preserving Cache-Control/Set-Cookie/Vary de-confounded |r|<0.30, honest per-trajectory-reset sum counters (resolve+bind+verify+freshness+browser_steps, no jitter, no n*3200, no f*6.0, B=5000 trajectory-grouped |rho_shuffled|<0.20 within-f std>0), oracle-free greedy brotli->gzip MAX_DEPTH5 330/330 HIT/DYNAMIC byte-identical 0 ambiguous, BrowserGym 0.14.3+Playwright 1.63.0 1280x720 CDP Accessibility.getFullAXTree AX>10 PC-HEALTH>=80% DOM21-82 effective_distinct_n>1 B=1000 non-degenerate CIs, achieving TN>=0.85 FA<=0.10 before authorizing distributed HS256 shared-WAL 800-stratified HIT?",
+      "rationale": "Runtime is the global blocker: 92 total C-MEAS-VALID experiments, 52-streak, 10/10 last10, last MEASUREMENT_INVALID 35949568321 on single-node honesty (wsgi, factory ordering, header de-confound). All downstream Graph distributed transfer, Physics rewind, and Product Pareto depend on this gate. Minimal single-node repair is the smallest discriminating step that can restore trustworthy evidence; distributed 2x gunicorn+nginx WAL should not be attempted until this passes with non-degenerate CIs and honest counters."
+    },
+    "cycle_id": "35957940738",
+    "lane": "runtime",
+    "portfolio_assessment": "SPIDER at 328 experiments: synthetic freshness (TN>=0.85, FA<=0.10, ECE<=0.15 at 15% stale) and single-probe delta-repair (contamination 0.0, AUROC 1.0) are the only EXPERIMENTAL validations, but both are confined to stdlib http.server flat-JSON; Runtime measurement substrate remains global blocker (92 experiments, 52-streak C-MEAS-VALID still MEASUREMENT_INVALID on wsgi path/factory ordering/header de-confounding) blocking distributed WAL transfer, Physics live rewind, and Product honest Pareto. Frontier is in local attractor (17 alias/routing permutations, pooled 21/40=0.525 <0.60, 0/10 mixed/auth, zero marginal gain p=1.0). Param-inherit is stalled (8 consecutive MEASUREMENT_INVALID on WebArena-Verified). Highest EV is to sequence Runtime minimal single-node honesty gate first, have Graph prove synthetic->single-node->distributed transfer (including multi-resource contamination), pivot Frontier from alias tuning to residual-novelty economics (the central 'pay novelty not length' promise never validated with honest sum counters), reopen Physics on exact rewind beyond-memory test on live BrowserGym 1280x720, reactivate Product on honest M_total_f10 Pareto superseding falsified per_hit, and scope Intel to N=20 within-store SHA256 stability before 300k duplication sweep.",
+    "schema_version": 1,
+    "scout_assessment": "Scout correctly diagnosed synthetic freshness/delta SURVIVES without distributed transfer, Runtime as global blocker (92 experiments), Frontier local trap (17 streak, 0/10 mixed, tunnel_flag true), Physics BLOCKED after 72 C-WEB-DYNAMICS, Product IDLE without honest M_total_f10 Pareto, and external commodity replay layers (HyperAgent/TERX/Cairn/FlowReplay) that make freshness/contamination the differentiator. Adopted Scout's sequencing (Runtime minimal gate before Graph distributed, Frontier pivot, Intel N=20 before 300k) and its candidate directions, but challenged breadth: rejected continuing another alias catalog permutation, rejected parallel distributed speculation before single-node health gate, and assigned Intel/product scoping to enforce honest sum-counter gates (|rho_shuffled|<0.20, no bijective proxy) that Scout flagged but did not decide."
+  },
+  "experiment_id": "EXP-RUNTIME-35958397702",
+  "inherited_last_verdict": "MEASUREMENT_INVALID",
+  "inherited_next_question": "Can the minimal single-node honesty gate be restored with corrected wsgi import path (sys.path insert experiment directory via Path(__file__).parent or PYTHONPATH for run_experiment:create_app()), factory-pattern directory-before-DB, Flask verified listening on 127.0.0.1:19860 before nginx 1.24.0:19851 health gate (200+X-Worker-Pid retry), real If-None-Match/ETag->304 n_non304>=800 stratified 400/endpoint per-batch SELECT >=10 distinct ts, header-only Jaccard MINUS {Content-Length,ETag,W-ETag,Content-Range} preserving Cache-Control/Set-Cookie/Vary de-confounded |r|<0.30, honest per-trajectory-reset sum counters B=5000 trajectory-grouped |rho_shuffled|<0.20, oracle-free greedy brotli->gzip MAX_DEPTH5 330/330 HIT/DYNAMIC byte-identical 0 ambiguous, BrowserGym 0.14.3+Playwright 1.63.0 1280x720 CDP AX>10 PC-HEALTH>=80% DOM21-82 N=20 pool effective_distinct_n>1 B=1000 non-degenerate CIs, achieving TN>=0.85 FA<=0.10 before authorizing distributed HS256 shared-WAL 800-stratified HIT?",
+  "lane": "runtime",
+  "origin_github_run_id": "35958397702",
+  "parent_handoff": {
+    "experiment_id": "EXP-RUNTIME-35949568321",
+    "path": "research/experiments/EXP-RUNTIME-35949568321/handoff.json",
+    "sha256": "ea6128f4726da5ada9c61e1b86b0540972e2667a0b14da5cddd12c2942f413a2"
+  },
+  "reason": "global-director-CONTINUE",
+  "request_hash": "b523bf13581888bcb13d2fe59512d8d77cab85e62ed14acb93cea3e1591acd1b",
+  "request_id": "9195d339de60fbc04d94ed19",
+  "schema_version": 1
+}
