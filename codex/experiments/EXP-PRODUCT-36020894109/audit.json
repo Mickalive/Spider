@@ -1,0 +1,211 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-36020894109",
+  "lane": "product",
+  "status": "MEASUREMENT_INVALID",
+  "producer_claim_supported": false,
+  "required_fixes": [
+    "Provision GHCR authorization for ghcr.io/servicenow/browsergym:0.14.3 (docker pull exit 1 manifest unknown must be resolved) AND OPENAI_API_KEY AND playwright 1.63.0 (installed 1.44.0) to enable P-SPIDER-ECON-PARETO, B-COLD, B-RAG-EMBED-TAU030-QCR-K5, B-STAGEHAND-CACHE, B-DSM-O1-COMPILE, B-SGDR-AWM on real gpt-4o-mini 15-step Playwright 1280x720 CDP getFullAXTree 2000 nodes AX>10 with rho_proxy_real>=0.50 per-stratum, |rho_shuffled_proxy|<0.20, browser/latency, safety CuP, and DSM amortized $0.002-0.092 — file-proxy ceiling cannot substitute for SURVIVES per frozen falsifier (1) / decision step 2",
+    "Re-measure null validity on real trajectories to break deterministic counter coupling: current NC1 on honest file-proxy counters yields rho_shuffled -0.1367 PASS band but block_permutation p 0.0724 FAIL (<0.20) and rho_length pooled -0.2871 plus per-stratum -0.319..-0.657 exceed |0.20| (identical to parent -0.2871 reproduces coupling via reused=max(0,L-n_novel*2)); must achieve |rho_shuffled|<0.20 p>=0.20 per-stratum, |rho_length|<0.20, AUROC 0.45-0.60 with B=5000 family-stratified trajectory-grouped block-permutation on browser-validated costs where MV6 measured",
+    "Resolve DSM synthetic-fixture transfer: staged dsm_webmcp_registry 714/2147 shares 0/36 sites with rebuilt 192/36 synthetic fixture, so DSM lookup 1.0 at n0 fails and baseline degenerates to COLD+wasted lookup (f10 6236 vs COLD 5992, delta -46740 compile-on adds cost). Stage overlapping or live Hard258 sites or disclose DSM ceiling separate; do not count degenerate DSM equivalence as covering 714/2147 compiled registry gate",
+    "Re-verify kernel dot-regex durability across clean checkouts: at execute check working-tree sha d926279d5ee14a044a2f13b8abc09202df9f5adb9e86feaadeb61818a15f4038 vs HEAD 8af66ccfb6f848e1f89805e90a1f52683ee28f62c9dd7b97f9d2762390e7b386 false (provenance env_audit.json / provenance.json), now committed at cee979c2d169820a891ee5f352011524af0d4a9a — re-execute after clean checkout verifies durable commit before next SURVIVES attempt",
+    "Re-execute full six-condition honest economics: 192 rebuilt (or Hard258 258-task) x6 conditions x5 novelty levels at f=10/f100 with honest per-trajectory-reset integer sum counters (probe 10 tok+30ms, retrieval 200+150ms, SGDR 180, DSM tool 15, no n*3200/f*6.0/jitter) plus 5000 family-stratified bootstrap and 5000 block-permutation to test C1 Pareto saving>=25% vs COLD and ratio<=0.85 vs RAG at BOTH f with browser+latency>=20% accuracy>=0.85, C2 margin>=0.12 vs each baseline, C3 false_accept<=0.10 UNKNOWN>=0.85 ECE<=0.15 AUROC>=0.75, C4 rho_novelty>=0.60 per-stratum |rho_length|<0.20 |rho_shuffled|<0.20, C5 probe saving>=30% accuracy>=0.90 TN>=0.85 delta>10%, safety CuP non-inferior",
+    "Reconcile cost_config compile token staging (fixtures/cost_config.json 50/15/180/10 expected vs toolchain note) and SGDR representation loss (sgdr_index_36.json DOM-hash substituted with TRAIN post_state hash) before claiming SGDR/DSM amortization; keep provenance single-worker WAL /tmp/spider-runtime/shared.db and nginx 1.24.0 $request_uri sticky verified at n_non304>=360 stratified 180/endpoint for every re-run"
+  ],
+  "validity_findings": [
+    {
+      "finding": "Producer MEASUREMENT_INVALID / INCONCLUSIVE is correct under frozen precedence — PC composite PARTIAL and NC MIXED prevent any SURVIVES or FALSIFIES inference",
+      "severity": "critical",
+      "detail": "Falsifier (1) fires if any PC1-PC5 fails OR n_non304<360 stratified OR sticky violated OR If-None-Match not exercised OR single-node HS256 not at /tmp/spider-runtime/shared.db WAL single-worker OR fixtures missing/contaminated OR bijective proxy OR degenerate metrics; falsifier (2) for shuffled degeneracy |rho_shuffled|>=0.35 p<0.01. Observed: PC-SINGLE-NODE-ECON-PARETO-CORRELATED status PARTIAL pass false (PC5 BrowserGym/LLM half absent, PC2 DSM sub-clause site overlap 0, PC4 rho_proxy_real NULL despite parity 5.7e-14 PASS), NC-SHUFFLE-ECON-PARETO status MIXED pass false (rho_shuffled -0.1367 PASS band but p 0.0724 FAIL, rho_length pooled -0.2871 FAIL per-stratum -0.084..-0.657). FALSIFIES requires controls PASS non-degenerate — not met — so ceiling ratio 1.506 vs RAG is diagnostic not falsification. Producer correctly holds Pareto/margin/accuracy/rho_proxy/safety claim metrics NULL with metrics_null_reasons (unknown not zero).",
+      "evidence_ref": "research/experiments/EXP-PRODUCT-36020894109/result.json: status MEASUREMENT_INVALID outcome INCONCLUSIVE controls.PC-SINGLE-NODE-ECON-PARETO-CORRELATED PARTIAL pass false controls.NC-SHUFFLE-ECON-PARETO MIXED pass false; spec.json falsifier (1)(2); prereg.md section 9; artifacts/env_audit.json provenance.json"
+    },
+    {
+      "finding": "Contamination-free holdout achieved for the first time — MV2 closure is the bounded advance, verified at both pool and usage level",
+      "severity": "info",
+      "detail": "Canonical 391e8f6c had 18/36 even families with rotation B[k]=A[(k+5)%10] sharing intensive. Rebuilt webarena_verified_v2_tasks_192_36_rebuilt.json sha 374ef8f625be1a7426a59eb15dee65d11334526508ec28185cdcf9239b1b2fbe replaces even-family B pools with odd-family LZL disjoint-alphabet convention, remapping 135 task values (0 fallbacks). Recomputed fixture_checks.json: pool_level_n_contaminated 0/36, usage_level_demo_vs_testB 0/36, demo_values_outside_A 0, cross_family bigram Jaccard max 0.0 on 630 pairs <0.30, L family-constant 8-14, qcr_bank_manifest TAU0.30 sha 8c69804b249ec9c84cf05d86a21c7ebe7a31af5f8d45e50a4e6d477b449f9f58 staged. Recomputation of Jaccard max 0.0 matches artifact. MV2 now PASS; prior bounded rejection superseded.",
+      "evidence_ref": "research/experiments/EXP-PRODUCT-36020894109/artifacts/fixture_checks.json:value_set_disjointness pass true cross_family_jaccard max 0.0 qcr_bank_manifest; fixtures/webarena_verified_v2_tasks_192_36_rebuilt.json sha 374ef8f6; result.json observations [0]"
+    },
+    {
+      "finding": "Single-node HS256 sticky substrate health-gated PASS with margin at lowered n>=360 gate",
+      "severity": "info",
+      "detail": "Shared WAL /tmp/spider-runtime/shared.db WAL journal_mode wal single gunicorn worker pid 84021, nginx 1.24.0 $request_uri sticky single upstream 127.0.0.1:18929, PyJWT HS256 only, n_non304 400 stratified 200/200 (gate 360/180) n_requests 406 If-None-Match 406/406 fraction 1.0 errors 0, n_304 351, n_200 745, distinct_worker_pids [84021] single_worker true. Correlated TTL 60s ETag W/body_sha probe: fresh_hit 1.0 at n0 (150/150 304), n025 accuracy 1.0 stale 0.5 false_accept 0.0 TN 1.0, token saving 4500/7500=0.40 >=0.30, random_seed42 accuracy 0.593 false_accept 0.206 delta +0.4067 >0.10 (expected ~0.53 random). Recomputed saving 0.40, delta 0.4067, 200+200=400 correct. TN sticky 1.0 vs direct 1.0 shows no sticky artifact.",
+      "evidence_ref": "research/experiments/EXP-PRODUCT-36020894109/artifacts/substrate_probe.json: n_non304_stratified 200/200 stratified_pass true probe_correlated saving 0.4 TN 1.0 delta 0.4067 nginx sticky 2117 lines single upstream; artifacts/substrate_start.json; provenance.json single-worker"
+    },
+    {
+      "finding": "Docker BrowserGym 0.14.3 + gpt-4o-mini 15-step + playwright 1.63.0 unavailable — rho_proxy_real, browser/latency, safety, DSM compiler gates blocked, correctly held NULL",
+      "severity": "critical",
+      "detail": "MV6 requires Docker BrowserGym 0.14.3 2000-node 1280x720 CDP getFullAXTree + gpt-4o-mini 15-step same model/tools/budget with rho_proxy_real>=0.50 per-stratum and |rho_shuffled_proxy|<0.20. Observed: docker pull exit 1 manifest unknown (env_audit, browser_health, attempts_log), docker images no servicenow/browsergym, browsergym pip metapackage 1.5kB only, playwright 1.44.0 vs frozen 1.63.0 (importable but 60-node synthetic AX 46 not 2000-node), OPENAI_API_KEY ABSENT, browsergym_webarena_verified_import ok 812 task ids but no live execution. Recomputed env_audit openai_key_present false, docker_pull exit 1, playwright 1.44. Result metrics rho_proxy_real_pooled null, per-stratum null, M_browser_steps_real null, safety_CuP null with disclosed reasons, browser_health scope supplementary honesty signal only. No file-proxy surrogation claimed for SURVIVES.",
+      "evidence_ref": "research/experiments/EXP-PRODUCT-36020894109/artifacts/env_audit.json: docker_pull exit1 browsergym_local_image false openai_key_present false playwright 1.44 vs 1.63; artifacts/browser_health.json rho_proxy_real null safety null; result.json metrics_null_reasons rho_proxy_real OPENAI absent"
+    },
+    {
+      "finding": "Kernel dot-regex patch functionally PASS, durability fixed post-execute",
+      "severity": "medium",
+      "detail": "src/spider/kernel.py regex r'\\$\\{[A-Za-z_][A-Za-z0-9_\\.]*\\}' working-tree sha d926279d5ee14a044a2f13b8abc09202df9f5adb9e86feaadeb61818a15f4038 vs HEAD pre-patch 8af66ccf at execute check (env_audit durable false), now committed at cee979c2 recomputed head hash d926279d matches working tree. mv3_kernel_spot_check 5/5 dotted-path EXECUTABLE confidence 0.85 wrong-family UNKNOWN, tests/test_kernel.py 3/3 pass. Frozen spec rendered dot-regex without capture parens is disclosure issue but operational form with parens has identical language; match semantics correct.",
+      "evidence_ref": "research/experiments/EXP-PRODUCT-36020894109/artifacts/mv3_kernel_spot_check.json 5/5 pass; artifacts/env_audit.json kernel_patch_durable false; provenance.json git diff kernel; git show cee979c2 kernel now d926279d"
+    },
+    {
+      "finding": "Null controls disclose deterministic-counter coupling — honest limitation not hidden falsification",
+      "severity": "critical",
+      "detail": "NC1_SHUFFLED rho_shuffled -0.1367 CI95 [-0.1696,0.0917] PASS band (fixes parent 0.778 degenerate) but block_permutation p 0.0724 FAIL (<0.20 threshold) and rho_length pooled -0.2871 identical to parent reproduces deterministic honest sum counter property (reused=max(0,L-n_novel*2) couples M_per_hit to L/n). Per-stratum rho_length -0.084 to -0.657 (novelty bins n near-constant so per-stratum rho_shuffled null reason correctly disclosed) and per-family rho_shuffled ranges -0.92..1.0 on ~5-task families (degenerate small n disclosed, gate applied pooled/per-bin only). NC1b nonexistent-family UNKNOWN 1.0 PASS, value-swap EXECUTABLE 1.0 discloses kernel validates family CONTEXT not slot VALUES. NC1c AUROC 0.463 PASS, NC2 UNKNOWN 0.654 fa 0.346 AUROC 0.4619 PASS, NC3 rho 0.0079 R2 0.0 PASS. Producer correctly holds NC overall MIXED. Recomputed p 0.0724 and rho_length -0.2871 match.",
+      "evidence_ref": "research/experiments/EXP-PRODUCT-36020894109/artifacts/null_controls.json: NC1_SHUFFLED rho -0.1367 p 0.0724 rho_length -0.2871 per_stratum disclosed; result.json controls.NC-SHUFFLE-ECON-PARETO MIXED observed; economics.json rho_diagnostics rho_length -0.2871"
+    },
+    {
+      "finding": "Honest economics ceiling discriminates but fails RAG Pareto — not claim falsification",
+      "severity": "medium",
+      "detail": "On honest file-proxy per-trajectory-reset counters (no n*3200/f*6.0/jitter) SPIDER f10 1981.1 tok/trajectory saving 0.6694 CI95 [0.6520,0.6872] vs COLD 5992.7 cost gate met, but ratio vs RAG 1.5064 CI95 [1.4796,1.5306] >0.85 FAIL (SPIDER 1.5x costlier than RAG once-per-trajectory retrieval+verbatim bind). f100 1.438 same. Recomputed (5992.7-1981.1)/5992.7=0.6694 and 1981.1/1315.1=1.5064 match artifacts. Browser/latency saving 0.494 on model counts not real CDP. Per_hit normalized vs COLD step 0.135 at n0 (CI 0.1336-0.1366) and 0.2936 at n0.25 (CI 0.2708-0.3163) both <0.85, unit note correctly holds raw tokens incommensurable with 0.85 gate — supersede not triggered and Pareto already fails. Resolve_rate SPIDER 1.0 vs RAG 0.234 margin 0.765 reported but is kernel resolve not task success (disclosed). DSM f10 6236 > COLD degenerates (site overlap 0). Producer correctly marks Pareto dominance vs COLD/RAG null with reason.",
+      "evidence_ref": "research/experiments/EXP-PRODUCT-36020894109/artifacts/economics.json: gaps saving 0.669 ratio 1.506 per_hit_supersede_check 0.135/0.294 supersede false; result.json metrics M_total_saving 0.6694 ratio 1.506 metrics_null_reasons holds as diagnostic; economics_per_trajectory.csv 193 lines"
+    },
+    {
+      "finding": "Baseline coverage honest but insufficient for browser-validated economics without Docker/LLM",
+      "severity": "critical",
+      "detail": "All six baselines staged with same frozen splits, qcr_bank TA30, DSM 714/2147, SGDR 36 state_key (DOM-hash substituted with TRAIN post_state hash disclosed), cost_config 50/15/180/10. B-COLD, B-RAG, B-STAGEHAND, B-DSM, B-SGDR all report honest ceiling costs but no live-browser success/accuracy/safety. B-STAGEHAND PC1 1.0 file-proxy DOM hash 5/5 pass disclosed not Docker AX, B-DSM PARTIAL (compile success null site overlap 0). Without real BrowserGym+LLM token trajectories, baseline strength for Pareto is unmeasured — producer does not overclaim.",
+      "evidence_ref": "research/experiments/EXP-PRODUCT-36020894109/artifacts/fixture_checks.json staged_artifacts; result.json controls B-COLD/B-RAG/B-STAGEHAND/B-DSM/B-SGDR; artifacts/economics.json conditions"
+    },
+    {
+      "finding": "Frozen transmission invariants preserved; honest disclosure of representation loss",
+      "severity": "info",
+      "detail": "freeze.json hashes request 0ae42754319dc64fed996ccfbfd5cf844912379f91958ed93d9f1fa91e50d2df spec f376c5d3226b728b9e4321668467b7864bb60086e781a8fa639c9654bb018372 prereg e1b0da43b2778e30f64609816dfd8d01d1346655134e3a477d4dab1074f9e273 recomputed match provenance frozen_inputs_modified false. git status shows only constitutional workflows/codex pollution (not frozen inputs), provenance commits e1c228 freeze f687ed base. Validity_notes disclose toolchain mismatch, DSM site overlap 0, SGDR substitution, USD conversion assumption, NC4 TN contrast. RAW evidence (probe_traces 976 lines, economics_per_trajectory 193 rows, nc_trajectory_counters 192 tasks) distinct from derived measurements.",
+      "evidence_ref": "research/experiments/EXP-PRODUCT-36020894109/freeze.json vs recomputed; provenance.json frozen_inputs_modified false; result.json validity_notes unresolved distinct; artifacts/* hashes"
+    },
+    {
+      "finding": "Environment could not express primary M_total Pareto / supersession effect — infrastructure failure not scientific negative",
+      "severity": "critical",
+      "detail": "Director question requires n_non304>=360 single-node PLUS where BrowserGym+gpt-4o-mini provisioned rho_proxy_real>=0.50 per-stratum, browser/latency, ST-WebAgentBench CuP, DSM $ amortized at f=10/100. Blocked on GHCR manifest unknown and OPENAI absent and Hard258 live site Docker, so primary gates C1-C5 untestable. Producer correctly labels supersede_triggered false (Pareto fails on ceiling) and refuses to infer support or rejection for C-PRODUCT-ECON. Prior per_hit falsification 1.005>0.85 rho 0.363 remains bounded to file-proxy only.",
+      "evidence_ref": "research/experiments/EXP-PRODUCT-36020894109/artifacts/economics.json per_hit_supersede_check supersede false supersede_note Pareto fails; result.json metrics per_hit_normalized_vs_COLD 0.135/0.293; prereg.md decision rule supersede clause"
+    }
+  ],
+  "baseline_findings": [
+    {
+      "baseline_id": "B-COLD",
+      "strength": "strong_design_not_executed_live",
+      "expected": "Cold no-memory same gpt-4o-mini 15-step Playwright 1280x720, 500 tok+2 browser_steps+50+120ms verify per step via health-gated n_non304>=360 stratified, flat vs n, denominator for saving>=25% and margin>=0.12",
+      "observed": "Honest ceiling 5992.7 tok/trajectory (model counts) resolve_rate 0.0 by definition, no live LLM browsing; saving vs COLD 0.669 on ceiling but task success/accuracy/latency null",
+      "passes": null,
+      "issue": "No live execution; saving ratio is ceiling diagnostic not Pareto evidence",
+      "evidence_ref": "research/experiments/EXP-PRODUCT-36020894109/artifacts/economics.json:B-COLD; result.json controls.B-COLD PASS (ceiling basis)"
+    },
+    {
+      "baseline_id": "B-RAG-EMBED-TAU030-QCR-K5",
+      "strength": "strong_design_not_executed_live",
+      "expected": "RAG retrieval 200+150ms TAU0.30 TFIDF Jaccard k5 verbatim bind verify fallback to COLD, primary comparator ratio<=0.85x at both f=10/100 margin>=0.12",
+      "observed": "Ceiling 1315.1 tok/trajectory resolve_rate 0.234, SPIDER/RAG 1.506 (SPIDER costlier: probe-per-step+per-novel-slot repair+auditor+distill exceed once-per-trajectory retrieval). Ceiling indicates Pareto fails on deterministic costs; real retrieval miss rates and browser costs remain unmeasured",
+      "passes": null,
+      "issue": "Ratio contradicts dominance on honest ceiling but file-proxy ceiling cannot falsify browser/LLM claim; held as diagnostic",
+      "evidence_ref": "research/experiments/EXP-PRODUCT-36020894109/artifacts/economics.json:B-RAG gaps ratio 1.506 CI [1.48,1.53]; result.json controls.B-RAG-EMBED PASS"
+    },
+    {
+      "baseline_id": "B-STAGEHAND-CACHE",
+      "strength": "partial_file_proxy_only",
+      "expected": "Stagehand DOM-hash selector cache without TTL, hit 1.0 at n0 0 at n>=0.25 orthogonal, 50 tok+120ms+1 step hit",
+      "observed": "PC1 5/5 hit_rate 1.0 per_hit 50 via file-proxy body hash disclosed (Docker BrowserGym AX unavailable); ceiling f10 4719.3 resolve_rate 0.234 n0 tasks only",
+      "passes": null,
+      "issue": "File-proxy hash not Docker 2000-node CDP AX>10 heterogeneity required for SURVIVES; disclosed partial",
+      "evidence_ref": "research/experiments/EXP-PRODUCT-36020894109/artifacts/pc1_exact_repeat.json hit_rate 1.0; result.json controls.B-STAGEHAND-CACHE PASS"
+    },
+    {
+      "baseline_id": "B-DSM-O1-COMPILE",
+      "strength": "degenerate_on_synthetic_fixture",
+      "expected": "DSM O(1) 714/2147 lookup 15 tok amortized $0.002-0.092 at f10/100 80-94% compile",
+      "observed": "Registry 714/2147 staged sha af3c18e5 but site overlap with synthetic fixture 0/36 -> degenerates to COLD+wasted lookup f10 6236.1 f100 6164.1 amortized 110/38 tokens USD assumptions not measured; compile-success null",
+      "passes": null,
+      "issue": "Zero overlap makes DSM comparator degenerate; delta -46740 compile-on adds cost; does not test compilation vs inheritance trade-off",
+      "evidence_ref": "research/experiments/EXP-PRODUCT-36020894109/artifacts/economics.json:B-DSM delta -46740 dsm_site_overlap []; artifacts/fixture_checks.json dsm_registry 714/2147"
+    },
+    {
+      "baseline_id": "B-SGDR-AWM",
+      "strength": "partial_with_substitution",
+      "expected": "SGDR state_key retrieval 180 tok+150ms grounded bind, 36 state_key TRAIN-only",
+      "observed": "SGDR index 36 state_key staged TRAIN-only pass but DOM-hash substituted with TRAIN post_state hash disclosed; ceiling f10 1295.1 cheapest baseline on ceiling resolve_rate 0.234 cheapest but retrieval-bound ceiling only",
+      "passes": null,
+      "issue": "Representation substitution disclosed; no live grounding measurement",
+      "evidence_ref": "research/experiments/EXP-PRODUCT-36020894109/artifacts/fixture_checks.json sgdr_index representation_note; artifacts/economics.json B-SGDR"
+    },
+    {
+      "baseline_id": "P-SPIDER-ECON-PARETO",
+      "strength": "not_measured_claim_null",
+      "expected": "SPIDER freshness-gated 0.95/0.85 Jaccard 0.85 + repair + dot-regex + TTL 60s 10tok+30ms + MEA auditor, Pareto saving>=25% vs COLD ratio<=0.85 vs RAG at both f browser+latency>=20% accuracy>=0.85 margin>=0.12 AUROC>=0.75 rho>=0.60 safety non-inferior",
+      "observed": "Ceiling f10 1981.1 f100 1891.1 browser_calls 13.2 latency 3992ms model counts resolve_rate 1.0 via real kernel.resolve 192/192 bound_ok 1.0; claim-level success/safety/ECE/AUROC_real/rho_proxy remain NULL; per_hit normalized 0.135/0.293 <0.85 so supersede not triggered",
+      "passes": null,
+      "issue": "No live task success/accuracy/safety/rho_proxy evidence; ceiling alone does not support or falsify M_total Pareto",
+      "evidence_ref": "research/experiments/EXP-PRODUCT-36020894109/artifacts/economics.json P-SPIDER; result.json metrics_null_reasons all claim metrics null"
+    }
+  ],
+  "recomputed_metrics": {
+    "M_total_f10_tokens_mean_SPIDER": 1981.09375,
+    "M_total_f100_tokens_mean_SPIDER": 1891.09375,
+    "M_total_saving_vs_COLD_f10": 0.6694159568920564,
+    "M_total_saving_vs_COLD_f10_CI95": [0.6520424126542673, 0.687224057013732],
+    "M_total_saving_vs_COLD_f100": 0.6844342082391796,
+    "M_total_ratio_vs_RAG_f10": 1.5064158415841584,
+    "M_total_ratio_vs_RAG_f10_CI95": [1.479572104505246, 1.5306356174842528],
+    "M_total_ratio_vs_RAG_f100": 1.437980198019802,
+    "M_browser_latency_saving_vs_COLD": 0.4940072375839585,
+    "M_per_hit_mean_SPIDER_f10": 168.55787586256338,
+    "per_hit_normalized_vs_COLD_step_n0": 0.13510994056448603,
+    "per_hit_normalized_vs_COLD_step_n0_CI95": [0.13364888661530608, 0.13657099451366597],
+    "per_hit_normalized_vs_COLD_step_n025": 0.2935650768984102,
+    "per_hit_normalized_vs_COLD_step_n025_CI95": [0.2708004298871226, 0.3163297239096978],
+    "rho_novelty_pooled_diagnostic": 0.7620215299096192,
+    "rho_novelty_pooled_diagnostic_CI95": [0.6885563493002301, 0.8229741180088116],
+    "rho_length_pooled": -0.2871341837663058,
+    "rho_shuffled_pooled": -0.1367236964485896,
+    "rho_shuffled_block_permutation_p": 0.07238552289542091,
+    "probe_n0_hit_rate": 1.0,
+    "probe_n025_accuracy": 1.0,
+    "probe_TN_fresh": 1.0,
+    "probe_token_saving_vs_full": 0.4,
+    "probe_correlated_delta_vs_random42": 0.4066666666666666,
+    "n_non304_total": 400,
+    "n_non304_stratified": {"ep-a": 200, "ep-b": 200},
+    "pc1_hit_rate": 1.0,
+    "AUROC_verif_true_MockEnv": 0.8714066060789105,
+    "AUROC_shuffled_null_MockEnv": 0.4680678729304522,
+    "precision_verif_MockEnv": 0.9490835030549898,
+    "forced_execute_wrong_accept_MockEnv": 0.16071428571428573,
+    "UNKNOWN_precision_MockEnv": 0.9837209302325581,
+    "ECE_5bin_MockEnv": 0.10695537008804719,
+    "PC4_parity_max_abs_diff": 5.684341886080802e-14,
+    "PC4_parity_within_1e6": true,
+    "rho_proxy_real_pooled": null,
+    "DSM_site_overlap_with_fixture": 0,
+    "probe_traces_rows": 976,
+    "economics_per_trajectory_rows": 193,
+    "frozen_request_sha256": "0ae42754319dc64fed996ccfbfd5cf844912379f91958ed93d9f1fa91e50d2df",
+    "frozen_spec_sha256": "f376c5d3226b728b9e4321668467b7864bb60086e781a8fa639c9654bb018372",
+    "frozen_prereg_sha256": "e1b0da43b2778e30f64609816dfd8d01d1346655134e3a477d4dab1074f9e273",
+    "kernel_sha256_working_tree_recomputed": "d926279d5ee14a044a2f13b8abc09202df9f5adb9e86feaadeb61818a15f4038",
+    "kernel_sha256_HEAD_at_audit": "d926279d5ee14a044a2f13b8abc09202df9f5adb9e86feaadeb61818a15f4038"
+  },
+  "claim_ceiling": "Maximum justified: contamination-free 192/36 holdout (374ef8f6, 0/36 pool and usage disjoint, Jaccard 0.0 630 pairs) and single-node HS256 sticky substrate health-gated at n_non304=400 (200/200 >=360/180, TN 1.0, WAL single-worker, If-None-Match 1.0) with correlated TTL 60s ETag freshness discriminating fresh vs stale (accuracy 1.0 saving 0.40 delta 0.407 vs random) and kernel dot-regex correct-family reconstruction (5/5) and honest per-trajectory economics machinery (family-stratified B=5000) are VALIDATED as a bounded ceiling on file-proxy counters only. No inference justified for C-PRODUCT-ECON M_total Pareto dominance vs RAG-EMBED TAU0.30 k5 / Stagehand / DSM O(1) $0.002-0.092 / SGDR, no task success/accuracy, no rho_novelty>=0.60 claim, no rho_proxy_real>=0.50, no browser/latency beyond model counts, no safety CuP non-inferior, no calibration beyond MockEnv; per_hit 1.005>0.85 falsification stands untouched and supersession remains NOT triggered (normalized per_hit 0.135/0.293 <0.85 and Pareto diagnostic 1.506>0.85). C-PRODUCT-ECON remains HYPOTHESIS bounded to single-node-only ceiling; distributed n>=800 and browser-validated Pareto remain unauthorized.",
+  "evidence_refs": [
+    "research/experiments/EXP-PRODUCT-36020894109/request.json sha 0ae42754319dc64fed996ccfbfd5cf844912379f91958ed93d9f1fa91e50d2df",
+    "research/experiments/EXP-PRODUCT-36020894109/spec.json sha f376c5d3226b728b9e4321668467b7864bb60086e781a8fa639c9654bb018372",
+    "research/experiments/EXP-PRODUCT-36020894109/prereg.md sha e1b0da43b2778e30f64609816dfd8d01d1346655134e3a477d4dab1074f9e273",
+    "research/experiments/EXP-PRODUCT-36020894109/freeze.json",
+    "research/experiments/EXP-PRODUCT-36020894109/result.json",
+    "research/experiments/EXP-PRODUCT-36020894109/report.md",
+    "research/experiments/EXP-PRODUCT-36020894109/provenance.json",
+    "research/experiments/EXP-PRODUCT-36020894109/artifacts/fixture_checks.json sha 622d409286f8373ce01a9af5a24941e76c83dd47dca29c6a1e7e9f28d6f3b922",
+    "research/experiments/EXP-PRODUCT-36020894109/artifacts/substrate_probe.json sha 3c78014c4393c2b1fe0a88370fe97c1a9f1e248351584ca7c611a41bfa41f64d",
+    "research/experiments/EXP-PRODUCT-36020894109/artifacts/env_audit.json sha 5dd793ce8334d899ee748e8dccd48a2fe4377ec29acb62899370291a53d1d2d0",
+    "research/experiments/EXP-PRODUCT-36020894109/artifacts/economics.json sha 35231387a36d4b30d06f57f1a2ab58f08ea36ff346fb2494b5fbb222fb3418ef",
+    "research/experiments/EXP-PRODUCT-36020894109/artifacts/economics_per_trajectory.csv sha e48d2e35577ea96cc2fa5fc7e7025da96b617fbf9afdcdaf75f9d2647e545d4d",
+    "research/experiments/EXP-PRODUCT-36020894109/artifacts/null_controls.json sha 679fd9645f5a2cb18571f80c5c661dd077c8b68ce02329f387f7fc3b083083b3",
+    "research/experiments/EXP-PRODUCT-36020894109/artifacts/pc1_exact_repeat.json sha 529ed9cbd0faa1e212f6bdf71eb3aa6d5ecec052fd818840e81c787914972693",
+    "research/experiments/EXP-PRODUCT-36020894109/artifacts/pc3_verify_calibration.json sha 824a1a803e094b80f2639ab0c12af441536f605fd8ff98e1e565c2db58d68204",
+    "research/experiments/EXP-PRODUCT-36020894109/artifacts/browser_health.json sha 8d58ee7a9ba9f259c03c53a567e79a50675550818a70bfcab9079a9b6b32297d",
+    "research/experiments/EXP-PRODUCT-36020894109/artifacts/probe_traces.jsonl sha 8258e41d94ace4e016b463240c91624399bde45468ee29fbd2870e98a6aedd90",
+    "research/experiments/EXP-PRODUCT-36020894109/artifacts/mv3_kernel_spot_check.json sha 16fa013bc433bf9f570b78fdc6254a5a569edf7f6460411fda47aad1d51ac4dc",
+    "research/experiments/EXP-PRODUCT-36020894109/fixtures/webarena_verified_v2_tasks_192_36_rebuilt.json sha 374ef8f625be1a7426a59eb15dee65d11334526508ec28185cdcf9239b1b2fbe",
+    "research/experiments/EXP-PRODUCT-36020894109/fixtures/qcr_bank_manifest.json sha 8c69804b249ec9c84cf05d86a21c7ebe7a31af5f8d45e50a4e6d477b449f9f58",
+    "src/spider/kernel.py sha d926279d5ee14a044a2f13b8abc09202df9f5adb9e86feaadeb61818a15f4038 now HEAD durable"
+  ],
+  "unresolved": [
+    "Whether rho_proxy_real>=0.50 pooled+per-stratum and |rho_shuffled_proxy|<0.20 hold on real gpt-4o-mini 15-step BrowserGym trajectories (blocked: OPENAI key absent, GHCR image manifest unknown)",
+    "Whether NC1 per-stratum |rho_length|<0.20 and |rho_shuffled|<0.20 p>=0.20 can pass on real browser costs once deterministic counter coupling removed",
+    "Whether honest M_total Pareto ratio<=0.85 vs RAG-EMBED TAU0.30 k5 at f=10/100 holds with real retrieval miss rates, repair triggers, and browser/latency (ceiling 1.506 suggests probe+repair overhead dominates on synthetic costs)",
+    "Whether DSM O(1) 80-94% compile and $0.002-0.092 amortized at f10/100 hold with real DSM compiler on overlapping sites (current 0 overlap degenerate)",
+    "Whether ST-WebAgentBench safety CuP is non-inferior for SPIDER vs baselines (>= best -0.02) where BrowserGym measured",
+    "Whether per_hit supersession formally retires 1.005>0.85 — conjoint requires Pareto dominance which fails on ceiling, so per_hit artifact remains contested not superseded"
+  ]
+}
