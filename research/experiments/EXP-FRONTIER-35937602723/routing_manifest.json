@@ -1,0 +1,63 @@
+{
+  "diff_before_after": 10,
+  "pairs": [
+    {
+      "after": "/items",
+      "before": "/v2/items",
+      "source": "regex_slot_version_collapse"
+    },
+    {
+      "after": "/orders",
+      "before": "/v1/orders",
+      "source": "regex_slot_version_collapse"
+    },
+    {
+      "after": "/audit",
+      "before": "/v3/audit",
+      "source": "regex_slot_version_collapse"
+    },
+    {
+      "after": "/api/data",
+      "before": "/api/v2/data",
+      "source": "regex_slot_version_collapse"
+    },
+    {
+      "after": "/api/data",
+      "before": "/api/v3/data",
+      "source": "regex_slot_version_collapse"
+    },
+    {
+      "after": "/audit",
+      "before": "/v2/audit",
+      "source": "regex_slot_version_collapse"
+    },
+    {
+      "after": "/api/data",
+      "before": "/api/v1/data",
+      "source": "openapi_table"
+    },
+    {
+      "after": "/users/${id}",
+      "before": "/v1/users/${id}",
+      "source": "openapi_table"
+    },
+    {
+      "after": "/api/orders",
+      "before": "/api/orders/",
+      "source": "openapi_table"
+    },
+    {
+      "after": "/api/data",
+      "before": "/API/Data",
+      "source": "openapi_table"
+    }
+  ],
+  "pairs_total": 55,
+  "sources": [
+    "openapi_table",
+    "regex_slot_version_collapse"
+  ],
+  "table_size": 55,
+  "task_relevant_frac": 0.525,
+  "task_relevant_tasks": 21
+}

@@ -1,0 +1,9 @@
+{
+  "fetch_counter_semantics": "1 real HTTP GET /openapi.json per joint task before composition",
+  "hateoas_present": true,
+  "n_paths": 14,
+  "openapi_version": "3.0.3",
+  "probe_200": 0,
+  "spec_200": 52,
+  "spec_non_200": 0
+}

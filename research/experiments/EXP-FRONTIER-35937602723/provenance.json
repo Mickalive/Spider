@@ -1,0 +1,77 @@
+{
+  "artifacts": {
+    "alias_catalog_manifest.json": {
+      "role": "derived",
+      "sha256": "261d361d133580ee0cb9969689548879a044e81cee7d930b6581eb62cc602b5a"
+    },
+    "derived_metrics.json": {
+      "role": "derived",
+      "sha256": "d0b1abe3113974e229848e94a406138fff2a9ae83381fa6c574004ef1cdb655e"
+    },
+    "endpoint_catalog_manifest.json": {
+      "role": "derived",
+      "sha256": "a9695ab2511767140eb23deb0a70fd8f84084f0d9d51ac9cfea3754c36d3227a"
+    },
+    "fetch_manifest.json": {
+      "role": "evidence",
+      "sha256": "ba095b77f648ee7c718b23adec1ec936aac95f6a842ca212fd04b4d1ef5a41af"
+    },
+    "hierarchical_manifest.json": {
+      "role": "derived",
+      "sha256": "efb5c35190efecd9125362afece798050b1bdc62f899335fcd57486f2e0d5fe7"
+    },
+    "index_manifest.json": {
+      "role": "derived",
+      "sha256": "7064dab6a444ac8f9e33fbf6c67f7ddcefb0a1fcf461da6ce1e05e7b05073c34"
+    },
+    "joint_manifest.json": {
+      "role": "derived",
+      "sha256": "512b60d308ef728a540202b8c571bf457178bd372fd5912ce1a81561b6328c44"
+    },
+    "raw_evidence.json": {
+      "role": "raw",
+      "sha256": "3d8c2fe7ec4b9b61d00835b5171c6a196e4911649ba9e57bd3f3b1e9a6e385f9"
+    },
+    "result.json": {
+      "role": "result",
+      "sha256": "4f9919c85c4bb2d23d1be32878aba2e76e96fa0ad408ec2893b8846b59db73e1"
+    },
+    "routing_manifest.json": {
+      "role": "derived",
+      "sha256": "56d41d07df012911eb0cb3004619358aaef3d4b23e1f1eaafc6ec0f6cee63cd4"
+    },
+    "train_split_inventory.json": {
+      "role": "derived",
+      "sha256": "ea8fcedcc7e1754aeded7a3aebb6466ac5c68d47cec293320543d11d093b2772"
+    }
+  },
+  "determinism": {
+    "hash": "sha256",
+    "python_hash_used": false,
+    "rng": "np.RandomState",
+    "seed": 42
+  },
+  "experiment_id": "EXP-FRONTIER-35937602723",
+  "fixture": {
+    "path": "research/experiments/EXP-FRONTIER-35921359961/tasks_expanded.json",
+    "sha256": "83b7c52dd17848fc8c70d1c629b8d541788e0438249623ea783d2df364467319"
+  },
+  "frozen_inputs": {
+    "freeze.json": "062233f0db7b5558f907636a110590e750d5359206332935aa8e0c15d0884351",
+    "prereg.md": "825e38d5f5c63e31b27ed819b093fd0011de76a5004ad7dd864592b3858669b3",
+    "request.json": "35ea0384ce49b63954c8b99e46cb682759f35e6e035c057dbec7fce71ff5c60c",
+    "spec.json": "728c4ee8c2e3e69e3f5bb9698c1e7891cc5d70fef29a2b1f980803b3766a2d32"
+  },
+  "lane": "frontier",
+  "outcome": "SUPPORTS",
+  "producer": {
+    "agent": "opencode/big-pickle",
+    "host": "github-actions",
+    "role": "EXECUTE"
+  },
+  "script": {
+    "path": "research/frontier/run_execute_35937602723.py",
+    "sha256": "3752af595b632591d60bd0ec54cd391978375c24fa15a6d768cff455e6e6f179"
+  },
+  "status": "COMPLETE"
+}

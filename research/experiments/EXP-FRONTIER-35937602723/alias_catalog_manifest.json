@@ -1,0 +1,105 @@
+{
+  "catalog_size": 13,
+  "catalog_variant_classes": {
+    "body::0": {
+      "canonical": "token",
+      "members": [
+        "token"
+      ],
+      "min_pairwise_jaccard": 0.0
+    },
+    "body::1": {
+      "canonical": "key",
+      "members": [
+        "key"
+      ],
+      "min_pairwise_jaccard": 0.0
+    },
+    "body::2": {
+      "canonical": "key_alt",
+      "members": [
+        "key_alt"
+      ],
+      "min_pairwise_jaccard": 0.0
+    },
+    "body::3": {
+      "canonical": "apiKey",
+      "members": [
+        "apiKey"
+      ],
+      "min_pairwise_jaccard": 0.0
+    },
+    "header_auth::0": {
+      "canonical": "X-Scope",
+      "members": [
+        "X-Scope"
+      ],
+      "min_pairwise_jaccard": 0.0
+    },
+    "header_auth::1": {
+      "canonical": "X-Permission",
+      "members": [
+        "X-Permission"
+      ],
+      "min_pairwise_jaccard": 0.0
+    },
+    "header_auth::2": {
+      "canonical": "Authorization",
+      "members": [
+        "Authorization"
+      ],
+      "min_pairwise_jaccard": 0.0
+    },
+    "header_token::0": {
+      "canonical": "X-Reset-Token",
+      "members": [
+        "X-Reset-Token"
+      ],
+      "min_pairwise_jaccard": 0.0
+    },
+    "header_token::1": {
+      "canonical": "X-Custom-Header",
+      "members": [
+        "X-Custom-Header"
+      ],
+      "min_pairwise_jaccard": 0.0
+    },
+    "header_token::2": {
+      "canonical": "ApiKey",
+      "members": [
+        "ApiKey"
+      ],
+      "min_pairwise_jaccard": 0.0
+    },
+    "query::0": {
+      "canonical": "scope",
+      "members": [
+        "scope"
+      ],
+      "min_pairwise_jaccard": 0.0
+    },
+    "query::1": {
+      "canonical": "permission",
+      "members": [
+        "permission"
+      ],
+      "min_pairwise_jaccard": 0.0
+    },
+    "query::2": {
+      "canonical": "admin_scope",
+      "members": [
+        "admin_scope"
+      ],
+      "min_pairwise_jaccard": 0.0
+    }
+  },
+  "families_covered": [
+    "body",
+    "header_auth",
+    "header_token",
+    "query"
+  ],
+  "fit_ops": 183,
+  "jaccard_threshold": 0.6,
+  "train_tasks": 21
+}

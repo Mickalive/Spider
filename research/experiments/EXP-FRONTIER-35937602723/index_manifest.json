@@ -1,0 +1,7 @@
+{
+  "endpoint_vocab": 52,
+  "n_endpoint_centroids": 51,
+  "n_themes": 84,
+  "n_train_episodes": 168,
+  "tfidf_vocab": 50
+}
