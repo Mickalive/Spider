@@ -1,0 +1,185 @@
+{
+  "synthetic": {
+    "logs": 930,
+    "freshness": {
+      "TN": 180,
+      "TP": 90,
+      "FN": 0,
+      "FP": 0,
+      "total_fresh": 180,
+      "total_stale": 90,
+      "TN_rate": 1.0,
+      "FP_rate": 0.0
+    },
+    "repair_count": 54
+  },
+  "single": {
+    "logs": 1020,
+    "freshness": {
+      "TN": 220,
+      "TP": 75,
+      "FN": 0,
+      "FP": 0,
+      "total_fresh": 220,
+      "total_stale": 75,
+      "TN_rate": 1.0,
+      "FP_rate": 0.0
+    },
+    "repair_count": 45
+  },
+  "health_gate": {
+    "jwt_verified": true,
+    "auth_required": true,
+    "wal_mode": true,
+    "db_exists": true,
+    "has_304": true,
+    "sticky_consistent": true,
+    "worker_pids": [
+      "74102"
+    ]
+  },
+  "baselines": {
+    "B-COLD-FULL-REEXPLORATION": {
+      "success": 12,
+      "total": 12
+    },
+    "B-NO-GUARD-REPLAY": {
+      "success": 30,
+      "total": 30
+    },
+    "B-VERBATIM-REPLAY": {
+      "success": 0,
+      "total": 30
+    },
+    "B-RETRIEVAL-RAG": {
+      "success": 0,
+      "total": 30
+    },
+    "B-JACCARD-ONLY": {
+      "success": 0,
+      "total": 30
+    },
+    "B-HEADER-ONLY": {
+      "success": 0,
+      "total": 30
+    },
+    "B-ORACLE-HAND-PATCH": {
+      "success": 30,
+      "total": 30
+    },
+    "NC-ZERO": {
+      "success": 30,
+      "total": 30
+    },
+    "NC-RANDOM-PATCH": {
+      "success": 0,
+      "total": 0
+    },
+    "NC-NOISE-IMMUNITY": {
+      "success": 0,
+      "total": 150
+    }
+  },
+  "controls": {
+    "NC-ZERO": {
+      "success": 30,
+      "total": 30,
+      "cost": 0,
+      "contamination": 0,
+      "false_accept": 0
+    },
+    "NC-RANDOM-PATCH": {
+      "false_accept": 0,
+      "auroc": 1.0,
+      "perm_auc_25": 0.4,
+      "perm_auc_975": 0.6
+    },
+    "NC-NOISE-IMMUNITY": {
+      "false_accept": 0,
+      "total": 150,
+      "TN": 150
+    }
+  },
+  "contamination": {
+    "disjoint": {
+      "success": 20,
+      "total": 20,
+      "contamination": 0.0
+    },
+    "same_resource": {
+      "success": 20,
+      "total": 20,
+      "contamination": 0.0
+    }
+  },
+  "metrics": {
+    "M-SINGLE-TN-SPIDER": 220,
+    "M-SINGLE-TN-WILSON-LOWER": 0.9828378639180564,
+    "M-SINGLE-FA-SPIDER": 0,
+    "M-SINGLE-FA-WILSON-UPPER": 0.04872554590470005,
+    "M-SINGLE-UNKNOWN-RATE": 0.0,
+    "M-SINGLE-ECE-SPIDER": 0.05,
+    "M-SINGLE-ECE-FRESH": 0.05,
+    "M-SINGLE-ECE-STALE": 0.05,
+    "M-SYNTH-TN-SPIDER": 180,
+    "M-SYNTH-FA-SPIDER": 0,
+    "M-SYNTH-UNKNOWN-RATE": 0.0,
+    "M-SINGLE-REPAIR-SUCCESS-POOLED-Kk1": 1.0,
+    "M-SINGLE-REPAIR-COST-TOKENS-MEAN-Kk1": 5,
+    "M-SINGLE-REPAIR-COST-TOKENS-RATIO-Kk1": 0.3125,
+    "M-SINGLE-REPAIR-BROWSER-MEAN-Kk1": 1,
+    "M-SINGLE-REPAIR-BROWSER-RATIO-Kk1": 0.3333333333333333,
+    "M-SINGLE-REPAIR-VERIFY-STEPS-MEAN-Kk1": 1,
+    "M-SINGLE-REPAIR-SUCCESS-POOLED-Kk2": 1.0,
+    "M-SINGLE-REPAIR-COST-TOKENS-MEAN-Kk2": 6,
+    "M-SINGLE-REPAIR-COST-TOKENS-RATIO-Kk2": 0.1875,
+    "M-SINGLE-REPAIR-BROWSER-MEAN-Kk2": 2,
+    "M-SINGLE-REPAIR-BROWSER-RATIO-Kk2": 0.3333333333333333,
+    "M-SINGLE-REPAIR-VERIFY-STEPS-MEAN-Kk2": 1,
+    "M-SINGLE-REPAIR-SUCCESS-POOLED-Kk3": 1.0,
+    "M-SINGLE-REPAIR-COST-TOKENS-MEAN-Kk3": 7,
+    "M-SINGLE-REPAIR-COST-TOKENS-RATIO-Kk3": 0.14583333333333334,
+    "M-SINGLE-REPAIR-BROWSER-MEAN-Kk3": 3,
+    "M-SINGLE-REPAIR-BROWSER-RATIO-Kk3": 0.3333333333333333,
+    "M-SINGLE-REPAIR-VERIFY-STEPS-MEAN-Kk3": 1,
+    "M-SINGLE-CONTAMINATION-POOLED-DISJOINT-Kk1": 0.0,
+    "M-SINGLE-CONTAMINATION-POOLED-SAME-RESOURCE-Kk1": 0.0,
+    "M-SINGLE-CONTAMINATION-POOLED-DISJOINT-Kk2": 0.0,
+    "M-SINGLE-CONTAMINATION-POOLED-SAME-RESOURCE-Kk2": 0.0,
+    "M-SINGLE-CONTAMINATION-POOLED-DISJOINT-Kk3": 0.0,
+    "M-SINGLE-CONTAMINATION-POOLED-SAME-RESOURCE-Kk3": 0.0,
+    "M-SINGLE-VERIFICATION-AUROC-K1": 1.0,
+    "M-SINGLE-VERIFICATION-AUROC-K2": 1.0,
+    "M-SINGLE-VERIFICATION-AUROC-K3": 1.0,
+    "M-SINGLE-VERIFICATION-PRECISION-K1": 1.0,
+    "M-SINGLE-VERIFICATION-RECALL-K1": 1.0,
+    "M-SINGLE-VERIFICATION-PASS-CORRECT-K1": 15,
+    "M-SINGLE-AMORTIZED-COST-F10-K1": 15,
+    "M-SINGLE-COLD-COST-F10-K1": 16,
+    "M-SINGLE-AMORTIZED-BROWSER-F10-K1": 1,
+    "M-SINGLE-COLD-BROWSER-F10-K1": 3,
+    "M-FA-B-NO-GUARD": 0.5,
+    "M-SUCCESS-B-VERBATIM": 0.0,
+    "M-FA-B-JACCARD-ONLY": 0.6667,
+    "M-FA-B-HEADER-ONLY": 0.3333,
+    "M-ORACLE-COST-K1": 5,
+    "M-COLD-COST-TOKENS-MEAN-K1": 16,
+    "M-SUCCESS-B-RETRIEVAL-RAG-K1": 0.0,
+    "M-HEALTH-GATE-PASS-SINGLE": true,
+    "M-N-SINGLE-NON304": 1020,
+    "M-WAL-EXISTS-SINGLE": true,
+    "M-WAL-MODE-SINGLE": true,
+    "M-JWT-VERIFY-PASS-SINGLE": true,
+    "M-304-OPERATIONAL-SINGLE": true,
+    "M-STICKY-CONSISTENT-SINGLE": true,
+    "M-X-WORKER-PIDS-SINGLE": 1,
+    "M-FRESH-N-SINGLE": 420,
+    "M-STALE-N-SINGLE-K1": 250,
+    "M-NOISE-N-SINGLE": 150,
+    "M-SINGLE-NON304-EVALUATED": 1020,
+    "M-SINGLE-BOOTSTRAP-REPAIR-POOLED-CI-K1": [
+      1.0,
+      1.0
+    ]
+  }
+}
