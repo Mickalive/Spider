@@ -4,7 +4,7 @@ Pre-2.0 canonical memory remains frozen at `archive/spider-codex-ultimate:SPIDER
 
 Canonical Research 2.0 evidence lives in `codex/experiments/<experiment_id>/`.
 Use `codex/index.json` and `codex/claim_state.json` to locate relevant packets; do not load all experiment bodies by default.
-Validated experiments: **338**. Coverage gaps: **0**. Quarantined packets: **2**.
+Validated experiments: **340**. Coverage gaps: **0**. Quarantined packets: **2**.
 
 ## Experiment index
 
@@ -348,6 +348,8 @@ Validated experiments: **338**. Coverage gaps: **0**. Quarantined packets: **2**
 | EXP-INTEL-35999366789 | intel | PASS | MIXED | C-CROSSSITE, C-RESIDUAL-NOVELTY, C-PRODUCT-ECON | `17c28f5b2ee9` |
 | EXP-FRONTIER-35999373906 | frontier | MEASUREMENT_INVALID | MEASUREMENT_INVALID | C-RESIDUAL-NOVELTY | `de86fb12fc10` |
 | EXP-RUNTIME-36004383518 | runtime | MEASUREMENT_INVALID | MEASUREMENT_INVALID | C-MEAS-VALID | `0c041724baa2` |
+| EXP-PHYSICS-36013140158 | physics | MEASUREMENT_INVALID | MEASUREMENT_INVALID | C-WEB-DYNAMICS | `998f3ef911d1` |
+| EXP-RUNTIME-36013149664 | runtime | MEASUREMENT_INVALID | MEASUREMENT_INVALID | C-MEAS-VALID | `37efb7c025d3` |
 
 ## Latest recorded claim events
 
@@ -359,12 +361,12 @@ These are chronological latest events, not an automatic truth ranking.
 | C-DELTA-REPAIR | MEASUREMENT_INVALID | EXP-GRAPH-35999336958 | graph |
 | C-FRESHNESS | HYPOTHESIS | EXP-PRODUCT-35949571341 | product |
 | C-LLM-INHERIT | MEASUREMENT_INVALID | EXP-PRODUCT-35961222077 | product |
-| C-MEAS-VALID | MEASUREMENT_INVALID | EXP-RUNTIME-36004383518 | runtime |
+| C-MEAS-VALID | MEASUREMENT_INVALID | EXP-RUNTIME-36013149664 | runtime |
 | C-PARAM-INHERIT | MEASUREMENT_INVALID | EXP-GRAPH-35932480731 | graph |
 | C-PRODUCT-ECON | HYPOTHESIS | EXP-INTEL-35999366789 | intel |
 | C-RESIDUAL-NOVELTY | MEASUREMENT_INVALID | EXP-FRONTIER-35999373906 | frontier |
 | C-SEMANTIC-RESOLVE | EXPERIMENTAL | EXP-FRONTIER-35949576588 | frontier |
-| C-WEB-DYNAMICS | HYPOTHESIS | EXP-PHYSICS-35958392024 | physics |
+| C-WEB-DYNAMICS | HYPOTHESIS | EXP-PHYSICS-36013140158 | physics |
 
 ## Integrity accounting
 
