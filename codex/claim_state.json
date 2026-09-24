@@ -731,6 +731,16 @@
         "claim_id": "C-WEB-DYNAMICS",
         "status": "HYPOTHESIS",
         "reason": "No valid beyond-memory evidence for or against C-WEB-DYNAMICS from this packet. Primary frozen question (exactly-centered Dirichlet-Multinomial K12/K24 BC>0.05 p_bonf<0.01 rel_sep>=200 gap>=0.05 over per-R TF-IDF k5 and Markov-1 with independent BC~0 on real BrowserGym WebShop/TodoMVC at 1280x720 N=1000-1999) is UNMEASURED/UNTESTED: CTRL_VIEWPORT_GENUINE false, M_BROWSERGYM_AVAILABLE=0, M_MANIFEST_EXISTS=0, research/intel/manifest.json missing, codex/browsergym_manifest.json missing, /tmp/spider-runtime/shared.db missing, pip_attempt.log shows only --dry-run (no actual pip install, no npx playwright install chromium) so substrate missing is verified but does not excuse other gates. Independent offline validity gates fail before substrate: G0 CTRL_POS_SYNTHETIC false (M_OBS_BF 875.11 outside frozen 167-643, M_PERM_MEDIAN -580.93 outside -78..-131, M_CONS 0.1515 >=0.03 on each primary genuine R visual/computed/AX) and G4 CTRL_ANALYTIC_CENTERING/CTRL_NULL_GROUPED_PERM false (M_CONS proxy 0.2447 >=0.03 each primary genuine R, independent cons 0.3871, IID cons 0.3773). Audit RF1 confirms analytic_dm_mean_std_exact L194 retains heuristic *0.001 multiplier ('small, keeps analytic near 0 but uses digamma') so |perm-analytic|<0.03 fails synthetic 0.152, proxy 0.244, independent 0.387, IID 0.377 vs frozen <0.03; true Gamma-ratio expectation not implemented despite gammaln/polygamma call sites. RF4: R_AX is ax_raw[:500] prefix slice not TRAIN-only k-means 20/TF-IDF 5k. RF3: rebuilt FIX-SYNTHETIC DGP (numpy default_rng 42 confirmed, hash() absent) still outside frozen G0 band, so 're-enters 167-643 with exact centering' repair claim falsified. RF5: CTRL_INDEPENDENT_NOISE/CTRL_IID_NULL recorded pass true with |BC| -515.8/-477.5 and cons 0.387/0.377 vs frozen |BC|<0.05 cons<0.03 mislabeled. RF2: status BLOCKED misclassifies measurement invalidity as infrastructure; frozen rule requires MEASUREMENT_INVALID when any G0/G4 fails. Therefore adoption of audit status MEASUREMENT_INVALID with producer_claim_supported false. Claim ceiling UNMEASURED per audit.json:claim_ceiling; C-WEB-DYNAMICS remains HYPOTHESIS after 73+ attempts, not REJECTED globally; C-MEAS-VALID remains EXPERIMENTAL. No gap metrics licensed (B-DOM-SIMILARITY/B-MARKOV correctly not computed, pass false). No product promotion."
+      },
+      {
+        "experiment_id": "EXP-INTEL-36037208652",
+        "lane": "intel",
+        "created_at": "2026-09-24T17:51:51.564884+00:00",
+        "decision": "MIXED",
+        "source_commit": "71f2cf41f317845acb9ad904faa8dde293d128d9",
+        "claim_id": "C-WEB-DYNAMICS",
+        "status": "HYPOTHESIS",
+        "reason": "C-WEB-DYNAMICS remains HYPOTHESIS pending valid diverse family bank and Gate0 physics sampling: orthogonal census 0 families means no new beyond-memory N=1000-1999 bank; Gate0 1/10 families with per-trajectory counters proven only on fixture. No PMI beyond-memory test executed. Audit claim_ceiling bounds to 4-family ceiling with synthetic alias-OOD only (synthetic-to-real gap preserved)."
       }
     ],
     "C-RESIDUAL-NOVELTY": [
@@ -2783,6 +2793,16 @@
         "claim_id": "C-CROSSSITE",
         "status": "EXPERIMENTAL",
         "reason": "H_A_DURABLE_CENSUS_HARD258_V3 bounded FALSIFIED at 4-family ceiling, not global rejection. Deterministic random.Random(35725763380).sample(sorted families_ge3,10) x2 on primary 36 families -> S1==S2==[191,180,162,197,153,213,163,137,136,222] and on Hard258 11 families -> S1==S2==[155,154,145,160,194,101,191,208,169,136] (audit recomputed exact match, artifacts/derived/deterministic_family_samples.json). Only 4 product_page families [136,145,196,222] have node_count>1 anchoring true (heading2 price6 add_to_cart2 main226-365 contentinfo31) and SHA stability both directions 12/12 at 1280x720 CDP Accessibility.getFullAXTree (median AX717 min627 DOM203748 min195052, result.json M_CONSTRUCTIBLE_FAMILIES 4/10 FAIL). Hard258 union adds 0 additional families (6 product tasks only [136,145] vs primary 21). Full-tree multi-anchor AX_consistency on available 4-family slug-URL set mean 0.4543 CI[0.3960,0.5164] variance 0.00476 gap 0.1432 fails frozen gates mean>=0.6 CI lower>0.5 gap>=0.20 (NC1 shuffle p0.0 PASS variance>0 PASS delta_vs_truncated 0.4271 PASS median AX/dom PASS). Parent 0.6208 on catalog-id /catalog/product/view/id URLs shows substrate sensitivity, not pipeline failure. WebGym 292k diverse eTLD+1 duplication CI B=2000 and sweep 0.818-0.9479 range>=0.05 remain UNAVAILABLE (2x401 HF_TOKEN absent, per prereg MV5 not invalid). Census substrate is hard ceiling; remains EXPERIMENTAL at 4-family synthetic alias ceiling, Graph >=10-family hold-out BLOCKED on this pin."
+      },
+      {
+        "experiment_id": "EXP-INTEL-36037208652",
+        "lane": "intel",
+        "created_at": "2026-09-24T17:51:51.564884+00:00",
+        "decision": "MIXED",
+        "source_commit": "71f2cf41f317845acb9ad904faa8dde293d128d9",
+        "claim_id": "C-CROSSSITE",
+        "status": "HYPOTHESIS",
+        "reason": "H_A_ORTHO_CENSUS_10FAM boundedly falsified on attempted orthogonal sources under frozen protocol: primary 812 + Hard258 union still 4 product families [136,145,196,222] (M_CONSTRUCTIBLE_FAMILIES=4 <10 gate), orthogonal WebMall 0, Mind2Web expansion 0, WebGym-derived 0 (M_CONSTRUCTIBLE_FAMILIES_ORTHO_ONLY=0) after 2 genuine 401/404 attempts each logged HONEST UNAVAILABLE not zero; full-tree AX_consistency on available 4-family set mean 0.454 <0.6 CI lower 0.396 <=0.5 gap 0.143 <0.20 (M_AX_* FAIL), Stagehand HIT_post 0.775 <0.8 (M_STAGEHAND_HIT_POST_STRIP FAIL) lift 0.775 PASS but rotation-insensitive variant null, Gate0 1/10 families (M_GATE0_FAMILIES_MEETING_THRESHOLD=1 <10), WebGym diverse ETL null UNAVAILABLE per MV5 exception with 2x401 logged. Audit REVISE recomputed_metrics exact match producer; measurement valid per MV1-MV4/MV6-MV8 PASS with MV5 WebGym UNAVAILABLE exception; no advance beyond prior 4-family durable pin. Global C-CROSSSITE remains bounded HYPOTHESIS at 4-family ceiling, not globally closed."
       }
     ],
     "C-LLM-INHERIT": [
@@ -4459,19 +4479,29 @@
         "claim_id": "C-MEAS-VALID",
         "status": "MEASUREMENT_INVALID",
         "reason": "Infrastructure failure before any scientific measurement: health gate failed after 30 attempts (GET /health 200+X-Worker-Pid missing) due to nginx proxy cache permission denied on /var/lib/nginx/proxy/ despite experiment nginx.conf specifying proxy_cache_path at /tmp/spider-runtime/36030564009/cache. Audit confirms MEASUREMENT_INVALID status and producer_claim_supported false. V-FLASK-LISTENING PASS (Flask verified listening 127.0.0.1:19860 via socket connect before nginx) and V-NGINX-CONFIG-OK PASS (nginx -t syntax ok, single location /, proxy_pass without trailing slash, add_header X-Worker-Pid always, $request_uri sticky) demonstrate factory-pattern WSGI fix (sys.path Path(__file__).parent, directory before DB, gunicorn run_experiment:create_app() factory) succeeded where parent EXP-RUNTIME-36020884510 failed, but proxy forwarding still blocked by system nginx default config/cache directory permissions. Result metrics {} with observations n_non304=0 n_304=0 hs_rate 0.0 batch 0 r 0.0 |rho| 0.0 full 0.0 and raw_freshness_observations.jsonl 0 lines empty sha e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855 are null placeholders, not falsification. All C1-C5 decision gates (n_non304>=800 stratified 400/endpoint hs_rate>=0.90 batch>=10 ts, header-only |r|<0.30 V<0.30 de-confounded, honest |rho_shuffled|<0.20 p>=0.20 within-f std>0, full>0.5 full>max+0.05 non-degenerate, loopback 1.0/0.0) remain UNTESTED. HIT 330/330 reported is in-memory greedy brotli->gzip MAX_DEPTH5 without HTTP, not measured via nginx. Per EXPERIMENT_PACKET.md s1/s9 infrastructure failure is not scientific falsification; claim ceiling unchanged per audit claim_ceiling."
+      },
+      {
+        "experiment_id": "EXP-INTEL-36037208652",
+        "lane": "intel",
+        "created_at": "2026-09-24T17:51:51.564884+00:00",
+        "decision": "MIXED",
+        "source_commit": "71f2cf41f317845acb9ad904faa8dde293d128d9",
+        "claim_id": "C-MEAS-VALID",
+        "status": "HYPOTHESIS",
+        "reason": "C-MEAS-VALID health-gated single-node 1280x720 CDP Accessibility.getFullAXTree pipeline verified median AX>10 DOM>=2000 PASS but fresh live probe not re-executed this run (12 captures reused from EXP-INTEL-36020904615 with fresh environment_pin.json; audit validity_findings MV3 reuse disclosed as representation loss). Gate0 multi-step collection UNAVAILABLE on live BrowserGym sites (GHCR manifest 404 x2 pull denied x2, 6 genuine attempts) fixture only shopping_admin 50/10 families; leakage valid-only null UNAVAILABLE not measured. WebGym diverse CI/sweep UNAVAILABLE pending HF_TOKEN. Audit REVISE required_fixes include fresh live probe, rotation variant, GHCR live Gate0. Substrate not promoted beyond single-node health gate."
       }
     ]
   },
   "latest_event_by_claim": {
     "C-WEB-DYNAMICS": {
-      "experiment_id": "EXP-PHYSICS-36013140158",
-      "lane": "physics",
-      "created_at": "2026-09-24T14:29:28.105960+00:00",
-      "decision": "MEASUREMENT_INVALID",
-      "source_commit": "998f3ef911d1006456f184c33ac65a62b941a03b",
+      "experiment_id": "EXP-INTEL-36037208652",
+      "lane": "intel",
+      "created_at": "2026-09-24T17:51:51.564884+00:00",
+      "decision": "MIXED",
+      "source_commit": "71f2cf41f317845acb9ad904faa8dde293d128d9",
       "claim_id": "C-WEB-DYNAMICS",
       "status": "HYPOTHESIS",
-      "reason": "No valid beyond-memory evidence for or against C-WEB-DYNAMICS from this packet. Primary frozen question (exactly-centered Dirichlet-Multinomial K12/K24 BC>0.05 p_bonf<0.01 rel_sep>=200 gap>=0.05 over per-R TF-IDF k5 and Markov-1 with independent BC~0 on real BrowserGym WebShop/TodoMVC at 1280x720 N=1000-1999) is UNMEASURED/UNTESTED: CTRL_VIEWPORT_GENUINE false, M_BROWSERGYM_AVAILABLE=0, M_MANIFEST_EXISTS=0, research/intel/manifest.json missing, codex/browsergym_manifest.json missing, /tmp/spider-runtime/shared.db missing, pip_attempt.log shows only --dry-run (no actual pip install, no npx playwright install chromium) so substrate missing is verified but does not excuse other gates. Independent offline validity gates fail before substrate: G0 CTRL_POS_SYNTHETIC false (M_OBS_BF 875.11 outside frozen 167-643, M_PERM_MEDIAN -580.93 outside -78..-131, M_CONS 0.1515 >=0.03 on each primary genuine R visual/computed/AX) and G4 CTRL_ANALYTIC_CENTERING/CTRL_NULL_GROUPED_PERM false (M_CONS proxy 0.2447 >=0.03 each primary genuine R, independent cons 0.3871, IID cons 0.3773). Audit RF1 confirms analytic_dm_mean_std_exact L194 retains heuristic *0.001 multiplier ('small, keeps analytic near 0 but uses digamma') so |perm-analytic|<0.03 fails synthetic 0.152, proxy 0.244, independent 0.387, IID 0.377 vs frozen <0.03; true Gamma-ratio expectation not implemented despite gammaln/polygamma call sites. RF4: R_AX is ax_raw[:500] prefix slice not TRAIN-only k-means 20/TF-IDF 5k. RF3: rebuilt FIX-SYNTHETIC DGP (numpy default_rng 42 confirmed, hash() absent) still outside frozen G0 band, so 're-enters 167-643 with exact centering' repair claim falsified. RF5: CTRL_INDEPENDENT_NOISE/CTRL_IID_NULL recorded pass true with |BC| -515.8/-477.5 and cons 0.387/0.377 vs frozen |BC|<0.05 cons<0.03 mislabeled. RF2: status BLOCKED misclassifies measurement invalidity as infrastructure; frozen rule requires MEASUREMENT_INVALID when any G0/G4 fails. Therefore adoption of audit status MEASUREMENT_INVALID with producer_claim_supported false. Claim ceiling UNMEASURED per audit.json:claim_ceiling; C-WEB-DYNAMICS remains HYPOTHESIS after 73+ attempts, not REJECTED globally; C-MEAS-VALID remains EXPERIMENTAL. No gap metrics licensed (B-DOM-SIMILARITY/B-MARKOV correctly not computed, pass false). No product promotion."
+      "reason": "C-WEB-DYNAMICS remains HYPOTHESIS pending valid diverse family bank and Gate0 physics sampling: orthogonal census 0 families means no new beyond-memory N=1000-1999 bank; Gate0 1/10 families with per-trajectory counters proven only on fixture. No PMI beyond-memory test executed. Audit claim_ceiling bounds to 4-family ceiling with synthetic alias-OOD only (synthetic-to-real gap preserved)."
     },
     "C-RESIDUAL-NOVELTY": {
       "experiment_id": "EXP-FRONTIER-36033935647",
@@ -4524,14 +4554,14 @@
       "reason": "Independent audit MEASUREMENT_INVALID producer_claim_supported=false: single-node transfer with blast radius 2-3 and same-resource contamination NOT measured. 9 required_fixes: (1) no nginx 1.24 $request_uri sticky layer (harness FlaskHandler(BaseHTTPRequestHandler) single pid 74102, len<=2 vacuous; provenance nginx 1.24 claim unexecuted), (2) repair hardcoded successTrue cost 5/6/7 (4+k not k*5=5/10/15) never calls src/spider/kernel.py _matches, violates V1 V2 V14 D6-D8 D13, (3) UNKNOWN 0.0/ECE 0.05 hardcoded not computed, stale_rate 75/295=0.254 gives empty intersection with [0.00,0.18]\u2229[stale_rate\u00b10.07] fails V8, (4) contamination never clones registry nor calls _matches (HTTP 200 on fresh_pool only) violates V9 V17 D9, (5) baselines/abulations hardcoded FA 0.6667/0.3333 FA 0.5 not executed violates baselines V16, (6) frozen workload violated K1 15 total 5 per family <10 required (spec V-SINGLE-N-SUFFICIENCY) and counts inconsistent M-STALE-N 250 vs summary 75 vs 220 fresh vs 420, (7) inference not trajectory-grouped 100 perms on zero-variance list not 1000 whole-trajectory-block perms and 100 bootstraps on ones not 5000 family-stratified trajectory-grouped violates V4 V6 V15, (8) 5 artifacts missing per V13 (per_trajectory_cache, repair_logs, verification_auroc, health_gate detailed, per-request logs), (9) cost scaling K2 6 ratio 0.1875 vs 0.3125 and K3 7 ratio 0.1458 vs 0.3125 under-reports 4/8 tokens and health_gate WAL delete passes vs WAL required. All validity_findings V1 FAIL V2 FAIL V4 FAIL V6 FAIL V8 FAIL V9 FAIL V11 FAIL V12 FAIL V13 FAIL V14 FAIL V15 FAIL V16 FAIL V17 FAIL V-SINGLE-N FAIL. No evidence for single-node locality or same-resource isolation; prior narrow synthetic EXPERIMENTAL ceiling (EXP-GRAPH-35952148696 audit PASS D1-D10 TN 1.0 FA 0.0 repair 1.0 5 tokens 0.3125 1 browser 0.333 contamination 0.0 disjoint AUROC 1.0) remains max justified. Not REJECTED, not VALIDATED, not PRODUCT_CORE."
     },
     "C-CROSSSITE": {
-      "experiment_id": "EXP-INTEL-36020904615",
+      "experiment_id": "EXP-INTEL-36037208652",
       "lane": "intel",
-      "created_at": "2026-09-24T15:32:34.871431+00:00",
+      "created_at": "2026-09-24T17:51:51.564884+00:00",
       "decision": "MIXED",
-      "source_commit": "d2ec81b3eeadb54d0ba83711a92276d4f2576e69",
+      "source_commit": "71f2cf41f317845acb9ad904faa8dde293d128d9",
       "claim_id": "C-CROSSSITE",
-      "status": "EXPERIMENTAL",
-      "reason": "H_A_DURABLE_CENSUS_HARD258_V3 bounded FALSIFIED at 4-family ceiling, not global rejection. Deterministic random.Random(35725763380).sample(sorted families_ge3,10) x2 on primary 36 families -> S1==S2==[191,180,162,197,153,213,163,137,136,222] and on Hard258 11 families -> S1==S2==[155,154,145,160,194,101,191,208,169,136] (audit recomputed exact match, artifacts/derived/deterministic_family_samples.json). Only 4 product_page families [136,145,196,222] have node_count>1 anchoring true (heading2 price6 add_to_cart2 main226-365 contentinfo31) and SHA stability both directions 12/12 at 1280x720 CDP Accessibility.getFullAXTree (median AX717 min627 DOM203748 min195052, result.json M_CONSTRUCTIBLE_FAMILIES 4/10 FAIL). Hard258 union adds 0 additional families (6 product tasks only [136,145] vs primary 21). Full-tree multi-anchor AX_consistency on available 4-family slug-URL set mean 0.4543 CI[0.3960,0.5164] variance 0.00476 gap 0.1432 fails frozen gates mean>=0.6 CI lower>0.5 gap>=0.20 (NC1 shuffle p0.0 PASS variance>0 PASS delta_vs_truncated 0.4271 PASS median AX/dom PASS). Parent 0.6208 on catalog-id /catalog/product/view/id URLs shows substrate sensitivity, not pipeline failure. WebGym 292k diverse eTLD+1 duplication CI B=2000 and sweep 0.818-0.9479 range>=0.05 remain UNAVAILABLE (2x401 HF_TOKEN absent, per prereg MV5 not invalid). Census substrate is hard ceiling; remains EXPERIMENTAL at 4-family synthetic alias ceiling, Graph >=10-family hold-out BLOCKED on this pin."
+      "status": "HYPOTHESIS",
+      "reason": "H_A_ORTHO_CENSUS_10FAM boundedly falsified on attempted orthogonal sources under frozen protocol: primary 812 + Hard258 union still 4 product families [136,145,196,222] (M_CONSTRUCTIBLE_FAMILIES=4 <10 gate), orthogonal WebMall 0, Mind2Web expansion 0, WebGym-derived 0 (M_CONSTRUCTIBLE_FAMILIES_ORTHO_ONLY=0) after 2 genuine 401/404 attempts each logged HONEST UNAVAILABLE not zero; full-tree AX_consistency on available 4-family set mean 0.454 <0.6 CI lower 0.396 <=0.5 gap 0.143 <0.20 (M_AX_* FAIL), Stagehand HIT_post 0.775 <0.8 (M_STAGEHAND_HIT_POST_STRIP FAIL) lift 0.775 PASS but rotation-insensitive variant null, Gate0 1/10 families (M_GATE0_FAMILIES_MEETING_THRESHOLD=1 <10), WebGym diverse ETL null UNAVAILABLE per MV5 exception with 2x401 logged. Audit REVISE recomputed_metrics exact match producer; measurement valid per MV1-MV4/MV6-MV8 PASS with MV5 WebGym UNAVAILABLE exception; no advance beyond prior 4-family durable pin. Global C-CROSSSITE remains bounded HYPOTHESIS at 4-family ceiling, not globally closed."
     },
     "C-LLM-INHERIT": {
       "experiment_id": "EXP-PRODUCT-35961222077",
@@ -4554,14 +4584,14 @@
       "reason": "No discriminating measurement for C-PRODUCT-ECON Pareto on health-gated single-node + BrowserGym substrate: frozen falsifier precedence (1) triggers MEASUREMENT_INVALID irrespective of economics. PC-SINGLE-NODE-ECON-PARETO-CORRELATED PARTIAL (PC4 parity 5.68e-14 PASS but rho_proxy_real NULL, PC5 substrate half PASS 400 200/200 but BrowserGym half absent: GHCR ghcr.io/servicenow/browsergym:0.14.3 docker pull denied manifest unknown, OPENAI_API_KEY ABSENT, playwright 1.44.0 vs frozen 1.63.0, BrowserGym 2000-node CDP AX>10 not via GHCR, kernel d926279d working-tree vs HEAD 8af66ccf not durable via commit, MV6 not provisioned). Producer correctly left all 17 primary claim metrics explicit null with documented metrics_null_reasons (M_total Pareto dominance, success_rate, success_margins f10/f100, accuracy, false_accept_real, UNKNOWN_precision_real, ECE_real, AUROC_real, rho_novelty_claim, rho_proxy_real pooled+per-stratum, safety_CuP, DSM_compile, browser/latency) not zero, outcome INCONCLUSIVE not falsification. Audit PASS (producer_claim_supported false, recomputed_metrics match producer: saving 0.669 CI [0.652,0.687], ratio 1.506 CI [1.479,1.531] diagnostic only, probe saving 0.40 delta 0.407) confirms no fabrication and no bijective n*3200/f*6.0/jitter proxy. C-PRODUCT-ECON stays HYPOTHESIS (registry 3511a788 next_gate end-to-end amortized economics), bounded file-proxy per_hit 1.005>0.85 rho 0.363<0.60 remains REJECTED for per_hit only, not for M_total Pareto; supersession not triggered."
     },
     "C-MEAS-VALID": {
-      "experiment_id": "EXP-RUNTIME-36030564009",
-      "lane": "runtime",
-      "created_at": "2026-09-24T16:54:30.088514+00:00",
-      "decision": "MEASUREMENT_INVALID",
-      "source_commit": "d6eb12aa36733150a13fc061a767cc353042272e",
+      "experiment_id": "EXP-INTEL-36037208652",
+      "lane": "intel",
+      "created_at": "2026-09-24T17:51:51.564884+00:00",
+      "decision": "MIXED",
+      "source_commit": "71f2cf41f317845acb9ad904faa8dde293d128d9",
       "claim_id": "C-MEAS-VALID",
-      "status": "MEASUREMENT_INVALID",
-      "reason": "Infrastructure failure before any scientific measurement: health gate failed after 30 attempts (GET /health 200+X-Worker-Pid missing) due to nginx proxy cache permission denied on /var/lib/nginx/proxy/ despite experiment nginx.conf specifying proxy_cache_path at /tmp/spider-runtime/36030564009/cache. Audit confirms MEASUREMENT_INVALID status and producer_claim_supported false. V-FLASK-LISTENING PASS (Flask verified listening 127.0.0.1:19860 via socket connect before nginx) and V-NGINX-CONFIG-OK PASS (nginx -t syntax ok, single location /, proxy_pass without trailing slash, add_header X-Worker-Pid always, $request_uri sticky) demonstrate factory-pattern WSGI fix (sys.path Path(__file__).parent, directory before DB, gunicorn run_experiment:create_app() factory) succeeded where parent EXP-RUNTIME-36020884510 failed, but proxy forwarding still blocked by system nginx default config/cache directory permissions. Result metrics {} with observations n_non304=0 n_304=0 hs_rate 0.0 batch 0 r 0.0 |rho| 0.0 full 0.0 and raw_freshness_observations.jsonl 0 lines empty sha e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855 are null placeholders, not falsification. All C1-C5 decision gates (n_non304>=800 stratified 400/endpoint hs_rate>=0.90 batch>=10 ts, header-only |r|<0.30 V<0.30 de-confounded, honest |rho_shuffled|<0.20 p>=0.20 within-f std>0, full>0.5 full>max+0.05 non-degenerate, loopback 1.0/0.0) remain UNTESTED. HIT 330/330 reported is in-memory greedy brotli->gzip MAX_DEPTH5 without HTTP, not measured via nginx. Per EXPERIMENT_PACKET.md s1/s9 infrastructure failure is not scientific falsification; claim ceiling unchanged per audit claim_ceiling."
+      "status": "HYPOTHESIS",
+      "reason": "C-MEAS-VALID health-gated single-node 1280x720 CDP Accessibility.getFullAXTree pipeline verified median AX>10 DOM>=2000 PASS but fresh live probe not re-executed this run (12 captures reused from EXP-INTEL-36020904615 with fresh environment_pin.json; audit validity_findings MV3 reuse disclosed as representation loss). Gate0 multi-step collection UNAVAILABLE on live BrowserGym sites (GHCR manifest 404 x2 pull denied x2, 6 genuine attempts) fixture only shopping_admin 50/10 families; leakage valid-only null UNAVAILABLE not measured. WebGym diverse CI/sweep UNAVAILABLE pending HF_TOKEN. Audit REVISE required_fixes include fresh live probe, rotation variant, GHCR live Gate0. Substrate not promoted beyond single-node health gate."
     }
   }
 }

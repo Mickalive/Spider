@@ -4,7 +4,7 @@ Pre-2.0 canonical memory remains frozen at `archive/spider-codex-ultimate:SPIDER
 
 Canonical Research 2.0 evidence lives in `codex/experiments/<experiment_id>/`.
 Use `codex/index.json` and `codex/claim_state.json` to locate relevant packets; do not load all experiment bodies by default.
-Validated experiments: **347**. Coverage gaps: **0**. Quarantined packets: **2**.
+Validated experiments: **348**. Coverage gaps: **0**. Quarantined packets: **2**.
 
 ## Experiment index
 
@@ -357,6 +357,7 @@ Validated experiments: **347**. Coverage gaps: **0**. Quarantined packets: **2**
 | EXP-RUNTIME-36030564009 | runtime | MEASUREMENT_INVALID | MEASUREMENT_INVALID | C-MEAS-VALID | `d6eb12aa3673` |
 | EXP-FRONTIER-36033935647 | frontier | MEASUREMENT_INVALID | MEASUREMENT_INVALID | C-RESIDUAL-NOVELTY | `67050f01369b` |
 | EXP-PRODUCT-36036421062 | product | PASS | MEASUREMENT_INVALID | C-PRODUCT-ECON | `1973aba861c0` |
+| EXP-INTEL-36037208652 | intel | REVISE | MIXED | C-CROSSSITE, C-MEAS-VALID, C-WEB-DYNAMICS | `71f2cf41f317` |
 
 ## Latest recorded claim events
 
@@ -364,16 +365,16 @@ These are chronological latest events, not an automatic truth ranking.
 
 | Claim | Status | Experiment | Lane |
 |---|---|---|---|
-| C-CROSSSITE | EXPERIMENTAL | EXP-INTEL-36020904615 | intel |
+| C-CROSSSITE | HYPOTHESIS | EXP-INTEL-36037208652 | intel |
 | C-DELTA-REPAIR | MEASUREMENT_INVALID | EXP-GRAPH-35999336958 | graph |
 | C-FRESHNESS | HYPOTHESIS | EXP-PRODUCT-35949571341 | product |
 | C-LLM-INHERIT | MEASUREMENT_INVALID | EXP-PRODUCT-35961222077 | product |
-| C-MEAS-VALID | MEASUREMENT_INVALID | EXP-RUNTIME-36030564009 | runtime |
+| C-MEAS-VALID | HYPOTHESIS | EXP-INTEL-36037208652 | intel |
 | C-PARAM-INHERIT | MEASUREMENT_INVALID | EXP-GRAPH-35932480731 | graph |
 | C-PRODUCT-ECON | HYPOTHESIS | EXP-PRODUCT-36036421062 | product |
 | C-RESIDUAL-NOVELTY | MEASUREMENT_INVALID | EXP-FRONTIER-36033935647 | frontier |
 | C-SEMANTIC-RESOLVE | EXPERIMENTAL | EXP-FRONTIER-35949576588 | frontier |
-| C-WEB-DYNAMICS | HYPOTHESIS | EXP-PHYSICS-36013140158 | physics |
+| C-WEB-DYNAMICS | HYPOTHESIS | EXP-INTEL-36037208652 | intel |
 
 ## Integrity accounting
 
