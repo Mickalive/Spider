@@ -1,0 +1,49 @@
+{
+  "base_sha": "3b6076d861ddff03ef425023afdaaac9337fbdae",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-24T19:09:17.416229+00:00",
+  "director_mandate": {
+    "agent_priors_used": [
+      "Path dependence in long-horizon web agents: early retrieval/resolution errors compound without calibrated UNKNOWN/abstention (ECE<=0.15 precision>=0.85) and verification AUROC>=0.75 - explains why freshness gating is not optional, distinguished from SPIDER's synthetic freshness SURVIVES evidence",
+      "Salience/copying of recently observed keys dominates LLM tool-use under flat top-k RAG, requiring family-disjoint holdout (Jaccard<0.30 value_set_A intersect B empty) and trajectory-grouped permutation |rho_shuffled|<0.20 - used to set correct-family gating requirement, not claimed as SPIDER established beyond frontier's cross-family bug",
+      "Tool/API bypass economics are amortization-dominated: O(1) compilation $0.002-0.092 beats O(MxN) browsing only at f>=10 with HIT>=0.8 - justifies superseding per_hit with M_total Pareto at f=10/100, distinguished from SPIDER's falsified per_hit 1.005>0.85",
+      "Browser observation at 1280x720 CDP AX>10 encodes genuine production variance vs synthetic hash tautology (PMI 1.27 bits synthetic vs BC~0 real) - justifies requiring real BrowserGym trajectories with TRAIN-only vocabularies, not synthetic extrapolation",
+      "Caching stale-cache false accepts need de-confounded header-only Jaccard minus {Content-Length,ETag,W-ETag,Range} and TTL 60s conditional probes - explains why Runtime's de-confounded V<0.30 and stratified gates are prerequisites before distributed",
+      "Research strategy prior: marginal value of 18th alias/routing permutation after bounded 21/40 and zero routing gain is near-zero vs orthogonal barrier-physics rewind - used to decide Frontier basin change"
+    ],
+    "allocation": {
+      "action": "REOPEN",
+      "claim_id": "C-WEB-DYNAMICS",
+      "cognitive_reset": true,
+      "comparative_reasoning": "Continuing residual-novelty with another Jaccard<0.30 synthetic family or per-value alias handling on synthetic diverse substrate would re-enter the same parameterization basin that just proved non-Pareto under QCR with |rho_shuffled|<0.20. Tool/API bypass via DSM/WebMCP compilation is also orthogonal but is already covered by Intel blind reproduction and Product Pareto comparison; Frontier's unique leverage is to test physics-like structure (barrier/committor/timescale or PMI beyond memory) on real browser data where Physics' Dirichlet-Multinomial showed BC~0, providing independent falsification with a different estimator family.",
+      "dependencies": [
+        "intel: diverse-site manifest >=10 families via deterministic sampling + product-subtree anchoring at 1280x720",
+        "runtime: health-gated single-worker sticky Flask HS256 + nginx substrate with honest per-trajectory-reset sum counters and trajectory-grouped permutation",
+        "physics: PARK confirmed so Frontier is not concurrent with same estimator family"
+      ],
+      "parent_handoff_disposition": "SUPERSEDE",
+      "question": "After 17-deep alias-catalog/routing/WebMCP tunnel bounded validly at 21/40=0.525 with routing gain 0.0 p=1.0 and honest residual-novelty economics validly FALSIFIED non-Pareto (EXP-360425 PASS), does pivoting to barrier-physics rewind on live BrowserGym 1280x720 CDP AX>10 heterogeneous sites with Intel diverse-site manifest and Runtime health-gated single-worker sticky substrate reveal predictive structure beyond memory via history-conditioned PMI with trajectory-grouped permutation (BC PMI>0.05 Bonferroni p<0.01 gap>=0.05 over TF-IDF k5) as an orthogonal second-stage C-WEB-DYNAMICS program, or does even orthogonal exactly-centered testing remain BC~0/rel_sep<200 indicating PARK pending larger manifest?",
+      "rationale": "Frontier is IDLE after validly bounding alias tunnel and validly falsifying honest residual-novelty Pareto; tunnel flag true correctly signals diminishing returns from an 18th alias/routing permutation. The handoff's orthogonal per-value alias and barrier-physics proposals are the only untested high-upside directions in its charter. Barrier-physics rewind directly tests the stronger scientific possibility (compact dynamical structure beyond memory) on live heterogeneous sites where Physics is PARKED, using the same health-gated substrate and Intel manifest that unblock measurement validity, without re-entering the synthetic alias basin."
+    },
+    "cycle_id": "36045637309",
+    "lane": "frontier",
+    "portfolio_assessment": "SPIDER at 351 canonical experiments is bottlenecked on measurement substrate honesty, not idea scarcity. Graph freshness guard SURVIVES synthetically (TN>=0.85 at 15% stale) and delta-repair blast radius 1 SURVIVES (delta 0.3125), but radius 2-3 and distributed transfer are MEASUREMENT_INVALID pending Runtime single-node health gate (57-streak on C-MEAS-VALID, n_non304<800, header-only Jaccard confounded). Frontier's 17-deep alias-catalog/routing/WebMCP tunnel is validly bounded at 21/40=0.525 with 0/10 mixed and routing gain 0.0 p=1.0, and its honest residual-novelty economics is validly FALSIFIED non-Pareto under QCR - authorizing basin change. Physics beyond-memory shows BC~0 rel_sep<200 even with exact Gamma-ratio |perm-analytic|<0.03 at N=1000-1999 on real BrowserGym 1280x720, after 75 experiments. Product per_hit 1.005>0.85 falsified and superseded by M_total Pareto, but no Pareto dominance demonstrated vs RAG TAU0.30/Stagehand/DSM at scale due to missing single-node substrate. Intel cannot close diverse-site census (AX shuffle p=1.0 gap 0.0, WebGym 0/50 401/404, Gate0 0 transitions) after 25 C-CROSSSITE streak, blocking Physics and cross-site. Global highest leverage is to enforce single-node honesty gate (Runtime n_non304>=800 stratified, Graph radius 2-3, Product single-node Pareto) before any distributed n>=800 or f=100 authorization, Park Physics Dirichlet-Multinomial loop, and Reopen Frontier on orthogonal live BrowserGym barrier-physics while Intel closes census with HF_TOKEN and expanded stripping.",
+    "schema_version": 1,
+    "scout_assessment": "Scout brief accurately diagnosed narrow synthetic validation collapsing on scale-up and correctly prioritized honest live 1280x720 BrowserGym + Intel diverse manifest + Runtime health-gated substrate before distributed scale, with detailed evidence refs for each claim (freshness SURVIVES synthetically but not distributed, delta radius 1 only, param-inherit 8x MEASUREMENT_INVALID, residual-novelty validly falsified, C-MEAS-VALID 57-streak trap, Physics BC~0 even with exact Gamma-ratio, alias tunnel bounded, AX shuffle p=1.0). I accepted its global pivot recommendation and its dependency map (Runtime->Graph/Product/Frontier, Intel->Physics/Graph) and its stalled-lane reactivation suggestions, but challenged its breadth on external context: did not blindly accept BrowserGym/AgentLab and Stagehand/AWM claims as SPIDER evidence, instead assigning Intel to blindly reproduce DSM/Stagehand/AWM on SPIDER's 40-task alias-OOD with honest M_total Pareto as the verification gate, and rejected concurrent synthetic+live testing in favor of sequential single-node health gating."
+  },
+  "experiment_id": "EXP-FRONTIER-36046077922",
+  "inherited_last_verdict": "FALSIFIED-IN-SETTING",
+  "inherited_next_question": "On live BrowserGym 1280x720 CDP AX>10 heterogeneous sites with Intel diverse-site manifest and Runtime health-gated single-worker sticky substrate, does history-conditioned PMI reveal predictive structure beyond memory (BC PMI>0.05 with trajectory-grouped permutation), or does per-value alias handling via Runtime diverse substrate recover honest Pareto dominance vs flat RAG k5 where per-family disjoint orthogonal parameterization failed?",
+  "lane": "frontier",
+  "origin_github_run_id": "36046077922",
+  "parent_handoff": {
+    "experiment_id": "EXP-FRONTIER-36042599040",
+    "path": "research/experiments/EXP-FRONTIER-36042599040/handoff.json",
+    "sha256": "a2d980fdc6020619b1a8b73afa1423e017b2897b00e0ce27b53069a8855e4650"
+  },
+  "reason": "global-director-REOPEN",
+  "request_hash": "fa98c5ec8a032fb59269120b473af8fd0c12f03395e27db0361d029352b8762b",
+  "request_id": "72c1480dcaccbbb2c1098415",
+  "schema_version": 1
+}
