@@ -1,0 +1,153 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-35936223443",
+  "lane": "product",
+  "github_run_id": "35936223443",
+  "github_run_attempt": "1",
+  "executed_at": "2026-09-24T00:04:00+00:00",
+  "completed_at": "2026-09-24T00:07:00+00:00",
+  "base_sha": "c2b97ca249252ee1fd709de96d916f8e51ed89b4",
+  "pre_execute_sha": "bedd6205772d04b36aff76b7f57190f5d9382c95",
+  "post_execute_sha": "8dccde1c6b121866766f1b2f9bbb6d7b4ea57612",
+  "freeze_sha": "bedd6205772d04b36aff76b7f57190f5d9382c95",
+  "frozen_inputs": {
+    "request.json": "research/experiments/EXP-PRODUCT-35936223443/request.json",
+    "spec.json": "research/experiments/EXP-PRODUCT-35936223443/spec.json",
+    "prereg.md": "research/experiments/EXP-PRODUCT-35936223443/prereg.md",
+    "freeze.json": "research/experiments/EXP-PRODUCT-35936223443/freeze.json",
+    "hashes": {
+      "request.json": "a3532d5d3e24d6dccf083848508d74f287dd72d282841384a298249976996ae1",
+      "spec.json": "b4403f1beed4bdfb2461518474f1a4b007949bfc82a48055a362e70622577ead",
+      "prereg.md": "c64f2b233797baa626dc21d81b8d3f5815fbd62a4cdb650e1e77e03f8784337b",
+      "freeze.json": "6e75efa3cf4ffbb2c8e429ca58860e438cb09d98172fd56f4f30811888be4842"
+    },
+    "immutable_check": "byte-identical to freeze.json per artifacts/substrate_audit.json OBS-14",
+    "parent_handoff": {
+      "experiment_id": "EXP-PRODUCT-35932494797",
+      "path": "research/experiments/EXP-PRODUCT-35932494797/handoff.json",
+      "sha256": "8766d9cb38c290e792065a06c3689137af65814bf823e02c3a009650f368ab4c"
+    }
+  },
+  "code_paths": {
+    "kernel": {
+      "path": "src/spider/kernel.py",
+      "sha256_pre": "46929b3a951df48d7f9d1fd850871073c0d91c1868aa117e13d389fe274e8d61",
+      "sha256_post": "d926279d5ee14a044a2f13b8abc09202df9f5adb9e86feaadeb61818a15f4038",
+      "role": "SpiderKernel with dot-aware _PARAMETER r\"${[A-Za-z_][A-Za-z0-9_.]*} re-applied durable; _template_slots/_bind support dotted slots (sku.id, a.b) - regex is dollar-brace with dot in class",
+      "allowed_code_roots": "product lane: src/, tests/, sdk/, pyproject.toml",
+      "change_type": "1 insertion (dot in regex capture group) to restore dotted binding validity for PC2 kernel binding 1.0/1.0 confidence>=0.80"
+    },
+    "kernel_tests": {
+      "path": "tests/test_kernel.py",
+      "sha256": "ff9c1561c4169d306fba56d52442546a3bbfdab11d3ab56c51d7369309e9c0b6",
+      "role": "regression tests: test_unknown_is_default, test_parameterized_mechanism_binds_only_when_guarded, test_invalidation_forces_abstention - all 3/3 PASS post-patch",
+      "command": "PYTHONPATH=src python3 -m unittest tests.test_kernel -v"
+    },
+    "models": {
+      "path": "src/spider/models.py",
+      "sha256": "338aaf4d7ba0e31f7a5fe8a47abdbb2ea52d9c1c4ef0ce014f2b809b9a2a9b78",
+      "role": "Mechanism, Observation, Resolution dataclasses (unchanged)"
+    },
+    "registry": {
+      "path": "src/spider/registry.py",
+      "sha256": "51fb440d3827f21cccb5f77ad17dc0e76ccdbc2d52d7b05044cd821bb8a9322c",
+      "role": "MechanismRegistry JSONL persistence (unchanged)"
+    }
+  },
+  "artifacts": {
+    "substrate_audit": {
+      "path": "research/experiments/EXP-PRODUCT-35936223443/artifacts/substrate_audit.json",
+      "sha256": "af30657e0ade7a6433308f9ea7ae9550e5fa3f55faf3e9e5a423b367ad6bb5b7",
+      "role": "raw",
+      "description": "18+1 raw observations: docker, shared WAL, PyJWT, gunicorn, nginx, numpy/scipy/sklearn/pandas, browsergym, playwright, gpt key, kernel patch, frozen hashes, n_non304, bootstrap computability"
+    },
+    "failure": {
+      "path": "research/experiments/EXP-PRODUCT-35936223443/failure.json",
+      "sha256": "67060af7debf76ee217246784292ae58b1c129fba429f8feb54cd796b546720d",
+      "role": "derived",
+      "description": "BLOCKED failure record with smallest next action runtime hardening (shared WAL HS256 sticky + BrowserGym + scientific stack)"
+    },
+    "result": {
+      "path": "research/experiments/EXP-PRODUCT-35936223443/result.json",
+      "sha256": "9be98ffca831b8bba3ec78ddd471e288557a023b8c017b1d59cefed55311c355",
+      "role": "derived",
+      "description": "Canonical result packet with MEASUREMENT_INVALID status, null primary metrics, fail/unknown controls, 19 observations, validity_notes, unresolved"
+    },
+    "report": {
+      "path": "research/experiments/EXP-PRODUCT-35936223443/report.md",
+      "sha256": "5d64b43ade7a82122c1aa9de9d3fa20f717e5211d9e81546aedf493e60da15c3",
+      "role": "derived",
+      "description": "Human-readable interpretation of MEASUREMENT_INVALID outcome vs frozen decision rule"
+    }
+  },
+  "environment": {
+    "python_version": "3.12.14",
+    "platform": "Linux 6.17.0-1022-azure x86_64",
+    "working_directory": "/home/runner/work/Spider/Spider",
+    "dependencies": {
+      "numpy": "not installed (ModuleNotFoundError)",
+      "scipy": "not installed",
+      "sklearn": "not installed",
+      "pandas": "not installed",
+      "pyjwt": "not installed",
+      "gunicorn": "not installed",
+      "playwright": "not installed",
+      "browsergym": "not installed",
+      "nginx": "1.24.0 binary-only no upstream"
+    },
+    "docker": {
+      "daemon_available": true,
+      "images": [
+        "ghcr.io/github/gh-aw-mcpg:latest",
+        "ghcr.io/github/gh-aw-firewall/agent:latest",
+        "ghcr.io/github/github-mcp-server:latest",
+        "ghcr.io/dependabot/dependabot-updater-core:latest",
+        "ghcr.io/github/gh-aw-firewall/api-proxy:latest",
+        "ghcr.io/github/gh-aw-firewall/squid:latest"
+      ],
+      "browsergym_image": false
+    },
+    "openai_key": false,
+    "shared_db": "absent at /tmp/spider-runtime/shared.db and /tmp/spider-runtime-35936223443/shared.db and anywhere under /tmp"
+  },
+  "code_changes_made": [
+    {
+      "file": "src/spider/kernel.py",
+      "sha256_before": "46929b3a951df48d7f9d1fd850871073c0d91c1868aa117e13d389fe274e8d61",
+      "sha256_after": "d926279d5ee14a044a2f13b8abc09202df9f5adb9e86feaadeb61818a15f4038",
+      "diff": "_PARAMETER = re.compile(r\"${([A-Za-z_][A-Za-z0-9_]*)}\") -> _PARAMETER = re.compile(r\"${([A-Za-z_][A-Za-z0-9_.]*)}')  with dot in class to restore dotted binding",
+      "reason": "prereg Design details Binding fix (re-apply, currently missing in HEAD): kernel.py _PARAMETER dot-regex must be patched before EXECUTE (current HEAD is non-dot baseline; provenance prior d926279d had dot). Required for PC2 kernel binding 1.0/1.0 confidence>=0.80 via 5/5 per-family spot-check EXECUTABLE with correct bound_action via kernel.resolve.",
+      "tested": "PYTHONPATH=src python3 -m unittest tests.test_kernel -v -> 3/3 PASS; manual dotted bind a.b + sku.id 2/2 PASS"
+    }
+  ],
+  "reproduction": {
+    "commands": [
+      "PYTHONPATH=src python3 -m unittest tests.test_kernel -v",
+      "python3 /tmp/audit_substrate.py (or audit logic in report)",
+      "cat research/experiments/EXP-PRODUCT-35936223443/artifacts/substrate_audit.json",
+      "cat research/experiments/EXP-PRODUCT-35936223443/result.json"
+    ],
+    "expected_duration": "<2 min (audit only, no 960 census due to substrate absence)",
+    "determinism": "audit is deterministic; kernel patch is deterministic; no model calls, no network, no browser calls performed due to substrate block",
+    "notes": "This is a BLOCKED/MEASUREMENT_INVALID execution: honest substrate unavailable, so no 192/36 census, no bootstrap 5000, no Pareto economics measured. Re-running without runtime hardening will reproduce same MEASUREMENT_INVALID. Next valid run requires runtime lane to provision shared WAL + BrowserGym + scientific stack first."
+  },
+  "parent_chain": {
+    "parent_experiment_id": "EXP-PRODUCT-35932494797",
+    "parent_handoff_path": "research/experiments/EXP-PRODUCT-35932494797/handoff.json",
+    "parent_handoff_sha256": "8766d9cb38c290e792065a06c3689137af65814bf823e02c3a009650f368ab4c",
+    "parent_result_status": "MEASUREMENT_INVALID",
+    "parent_verdict": "MEASUREMENT_INVALID",
+    "parent_audit_status": "PASS"
+  },
+  "director_mandate": {
+    "claim_id": "C-PRODUCT-ECON",
+    "action": "PIVOT",
+    "cognitive_reset": true,
+    "question": "On distributed HS256 shared-WAL substrate (health-gated URL-sticky $request_uri If-None-Match/ETag->304 n_non304>=800, single-worker sticky) with Docker BrowserGym 0.14.3 2000-node 1280x720 full-DOM real gpt-4o-mini 15-step tokens/browser+latency (rho_proxy_real>=0.50 |rho_shuffled|<0.20 per-stratum |rho_length|<0.20) and correlated TTL 60s max-age conditional probe ETag W/body_sha ~50% stale at n0.25 vs ~1.0 at n0, does Stagehand selector-cache + TTL gating vs WebMCP Registry 714 sites/2147 tools O(1) compilation (amortized compile 800/f) achieve honest per_hit<=0.85 vs RAG-EMBED at n0/n0.25 and <=1.20 vs Stagehand HIT at n0 and Pareto M_total_f10 dominance with verification-derived calibration, or should per_hit be superseded by M_total_f10 Pareto, reporting family-stratified 5000 bootstrap + block-permutation 5000 vs gpt-4o-mini+Playwright replication?",
+    "dependencies": [
+      "runtime"
+    ]
+  },
+  "stage": "EXECUTE",
+  "notes": "EXECUTE honors frozen precedence: distributed substrate health-gated $request_uri n_non304>=800 single-worker sticky unavailable -> MEASUREMENT_INVALID irrespective of economics; no file-proxy fallback fabricated; runtime hardening is blocking dependency per Director dependencies."
+}
