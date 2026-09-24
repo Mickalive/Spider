@@ -1,0 +1,47 @@
+{
+  "base_sha": "cc4a82ab37a0b35d6e091141b5cdebb3cd45b88d",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-24T04:33:00.804824+00:00",
+  "director_mandate": {
+    "agent_priors_used": [
+      "Agent prior: long-horizon web agents exhibit strong path dependence and context salience - early retrieved mechanism ranking and first tokens anchor plans, causing local optima and over-matching (e.g., Jaccard >=0.6 adopting any observed key across families). Distinguished from SPIDER evidence; used to weight Frontier tunnel diagnosis and require fresh-context reset.",
+      "Agent prior: compounding planning errors and self-generated subproblems grow with task length without freshness/UNKNOWN gating and verification boundaries, inflating false_accept; honest per-trajectory-reset sum-counter with |rho_shuffled|<0.20 and trajectory-grouped CIs is necessary to separate novelty-driven cost from length noise. Distinguished from SPIDER evidence; used to prioritize honest cost instrumentation over n*3200/jitter proxies.",
+      "Agent prior: tool/API bypass and deterministic selector compilation dominate work compression when site internals are stable, while DOM/AX reasoning dominates when volatile; optimal architecture is hybrid with learned dispatch, not pure browsing or pure catalog. Distinguished from SPIDER evidence; used to judge Frontier WebAPI vs DSM-IR shootout as directionally correct but invalidated by noisy AX and contamination, and to require site-stability as experimental factor.",
+      "Agent prior: caching/replay without freshness and per-value alias handling degenerates to replay-like behavior under shift; calibration (ECE<=0.15) and abstention (UNKNOWN precision>=0.85, FA<=0.10) are product-critical, and literal high-confidence mechanisms win ties unless tie-break includes parameter-slot-count and recalibrated 0.95/0.85 confidence. Distinguished from SPIDER evidence; used to require calibrated gating before any VALIDATED promotion."
+    ],
+    "allocation": {
+      "action": "PIVOT",
+      "claim_id": "C-RESIDUAL-NOVELTY",
+      "cognitive_reset": true,
+      "comparative_reasoning": "Continuing alias catalog + routing normalization + Fetch/WebMCP joint multi-candidate would be 18th permutation on frozen sha 83b7c52 fixture with expected pooled <0.60 and mixed 0/10 persistence, as prior synthetic and live ceilings show construction contamination (Jaccard over-match, cross-family key adoption) and retrieval complementarity not resolving triple-channel composition. Barrier-physics rewind pivot is also valid orthogonal basin but overlaps with parked Physics and requires larger manifest not yet available; residual-novelty economics dominates now because it is testable synthetically with honest counters, challenges external Agentic Compilation O(1) baseline that scout flagged as raising bar for C-PRODUCT-ECON, and can falsify a core architectural claim (tool-bypass vs verification boundary) with single experiment. If rho_novelty falsified, it cleanly justifies PARK of residual-novelty economics and pivot to barrier-physics or per-value substrate next cycle.",
+      "dependencies": [
+        "runtime:C-MEAS-VALID",
+        "intel:C-CROSSSITE",
+        "graph:C-DELTA-REPAIR"
+      ],
+      "parent_handoff_disposition": "SUPERSEDE",
+      "question": "Does residual-novelty-tracked verification economics with freshness/UNKNOWN gating (correct-family-required rewriting no cross-family key adoption, joint 2-3 candidate complementarity, honest per-trajectory-reset sum-counter resolve+bind+verify+freshness+browser_steps |rho_shuffled|<0.20, recalibrated 0.95 fresh/0.85 stale, trajectory-grouped 5000 bootstrap + block permutation) demonstrate that later-agent cost tracks residual novelty not full length (rho_novelty>=0.60 vs |rho_length| per stratum <0.20 and pooled |rho_shuffled|<0.20, R2_delta>=0.50) and honest M_total_f10 Pareto dominance at f=10/100 vs cold/RAG-EMBED Stagehand selector-cache and WebMCP O(1) compilation $0.002-0.092 with false_accept<=0.10 UNKNOWN precision>=0.85 ECE<=0.15 bootstrap upper<=0.18 and non-vacuous verification, breaking the synthetic 21/40=0.525 coverage 0/10 mixed ECE 0.26 ceiling from economics angle rather than 18th alias/routing permutation - thereby testing pay-cost-of-novelty without requiring live BrowserGym 300k heterogeneous shootout until synthetic gate passes?",
+      "rationale": "Frontier is PREFREEZE (EXP-FRONTIER-35954204050) without portfolio mandate and tunnel true 17-streak on C-SEMANTIC-RESOLVE. Last synthetic gate FALSIFIED-IN-SETTING 20/40=0.50 Wilson [0.352,0.648] <0.60 with 0/10 mixed/auth and zero marginal routing gain p=1.0, replicating 0.55 coverage ceiling and ECE 0.26 seen on live BrowserGym. Handoff itself recommends abandoning alias/routing basin. Cognitive reset: with no inherited question, highest upside is testing genuinely orthogonal work-compression mechanism (residual novelty economics) that directly addresses SPIDER's central pay-cost-of-novelty promise and has honest cost model via sum-counter, rather than per-value alias completeness which Runtime/Intel heterogeneous substrate should handle."
+    },
+    "cycle_id": "35955604667",
+    "lane": "frontier",
+    "portfolio_assessment": "SPIDER has 327 canonical experiments with 33% MEASUREMENT_INVALID overall and 10/15 invalid last pulse. Narrow synthetic SURVIVES exists for C-FRESHNESS (TN 1.0 FA 0.0 at 15% stale on flat JSON stdlib http.server) and C-DELTA-REPAIR (single-resource 1-probe repair contamination 0.0 amortized 15<16) but transfer to distributed health-gated shared-WAL substrate (n>=800, X-Worker-Pid>=2, HS256, If-None-Match 304) unproven. C-PARAM-INHERIT has 8 consecutive MEASUREMENT_INVALID on WebArena-Verified v2 family hold-out due to kernel durability/census gates. C-MEAS-VALID is MEASUREMENT_INVALID after 92 exps (largest cohort) with ceiling-degenerate distinct-body designs and invalid distributed probes. C-WEB-DYNAMICS is BLOCKED after 72 exps with independent-noise models baking in null and PMI leakage. Frontier is locally trapped 17-streak on C-SEMANTIC-RESOLVE (tunnel true, 20/40=0.50 <0.60 pooled, 0/10 mixed, routing p=1.0 zero gain) with handoff itself recommending pivot. Core product claims C-RESIDUAL-NOVELTY/C-LLM-INHERIT/C-PRODUCT-ECON remain HYPOTHESIS with repeated invalid honest-cost accounting (n*3200, f*6.0, jitter). Bottleneck is measurement substrate validity, not idea scarcity. Highest information now is (1) restoring a minimal honest single-node health gate then distributed WAL, (2) parking re-attempts that re-use invalid scaffolds, and (3) forcing residual-novelty economics to be tested with honest sum-counters vs external O(1) compilation baselines.",
+    "schema_version": 1,
+    "scout_assessment": "Scout brief was central but not authoritative. Adopted its diagnosis of evidence-rich yet progress-narrow state, 17-streak Frontier trap, 52-streak Runtime and 15-streak Product tunnels, and cross-lane dependencies (Runtime shared-WAL blocks Graph FRESHNESS/DELTA-REPAIR; Intel census blocks Graph/Product param-inherit; Physics independent-noise models are degenerate). Adopted its external context (Agentic Compilation O(1) $0.002-0.092, TraceCompiler def-use, browser-memory deterministic capsule, WebGym 300k/BrowserGym) as directionally raising bar for residual-novelty/product economics, but did not treat those external numbers as SPIDER evidence - instead assigned Intel to reproduce them on SPIDER's 40-task alias-OOD with trajectory-grouped CIs and honest cost. Challenged Scout's suggested reactivations where they would duplicate invalid scaffolds: rejected continued Frontier alias/routing permutations and repeated Physics TodoMVC PMI/timescale repeats at N=1000 with same SPA manifest; instead forced PARK for Physics pending larger manifest with session/permission regimes and single-node-first hardening for Runtime."
+  },
+  "experiment_id": "EXP-FRONTIER-35956098523",
+  "inherited_last_verdict": "FALSIFIED-IN-SETTING",
+  "inherited_next_question": "Given bounded failure of joint alias catalog + routing normalization + Fetch/WebMCP to rescue synthetic 40-task gate (pooled 20/40=0.50 Wilson [0.352,0.648] <0.60, mixed 0/10 and auth 0/10, routing zero marginal gain 20/40 vs 20/40 p=1.0) with genuine Jaccard>=0.6 multi-variant catalog and key-sensitive verification but with audit-identified observed_families incompleteness and alias scoring over-matching, should frontier pivot to materially orthogonal high-upside basins \u2014 residual-novelty verification economics with honest sum-counter and UNKNOWN calibration (C-RESIDUAL-NOVELTY), barrier-physics rewind memory beyond history on live BrowserGym (C-WEB-DYNAMICS), or per-value alias handling via runtime/intel diverse substrate \u2014 rather than a 17th alias/routing permutation on fixture sha 83b7c52dd17848fc8c70d1c629b8d541788e0438249623ea783d2df364467319?",
+  "lane": "frontier",
+  "origin_github_run_id": "35956098523",
+  "parent_handoff": {
+    "experiment_id": "EXP-FRONTIER-35949576588",
+    "path": "research/experiments/EXP-FRONTIER-35949576588/handoff.json",
+    "sha256": "88819e25d7ea428cbdabf8ca16911a0588f66bd2985d2f32963ebe919c081fb1"
+  },
+  "reason": "global-director-PIVOT",
+  "request_hash": "4c38dca4fdec9eaa221498c6ef1046c39dc4237f4e8276ba1a19cefbf93c56fe",
+  "request_id": "aa890b83ba7a172a45810a55",
+  "schema_version": 1
+}
