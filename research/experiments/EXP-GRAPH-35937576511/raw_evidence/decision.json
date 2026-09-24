@@ -1,0 +1,33 @@
+{
+  "survives": false,
+  "falsified_in_setting": true,
+  "checks": {
+    "D1_TN": true,
+    "D2_FA": true,
+    "D3_UNKNOWN": false,
+    "D4_ECE": false,
+    "D5_DELTA": true,
+    "D6_PER_FAMILY": true,
+    "D7_PC": true,
+    "D8_NC": true,
+    "D9_HONESTY": true
+  },
+  "ci": {
+    "tn_95ci": [
+      1.0,
+      1.0
+    ],
+    "fa_95ci": [
+      0.0,
+      0.0
+    ],
+    "unk_95ci": [
+      0.4286,
+      0.4286
+    ],
+    "ece_95ci": [
+      0.2714,
+      0.2714
+    ]
+  }
+}

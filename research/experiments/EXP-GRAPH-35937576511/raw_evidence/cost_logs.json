@@ -1,0 +1,380 @@
+[
+  {
+    "trajectory_id": "dom_drift-0",
+    "family": "dom_drift",
+    "request_count": 10,
+    "costs_per_request": [
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4
+    ],
+    "trajectory_sum": 40
+  },
+  {
+    "trajectory_id": "dom_drift-1",
+    "family": "dom_drift",
+    "request_count": 10,
+    "costs_per_request": [
+      5,
+      5,
+      5,
+      5,
+      5,
+      5,
+      5,
+      5,
+      5,
+      5
+    ],
+    "trajectory_sum": 50
+  },
+  {
+    "trajectory_id": "dom_drift-2",
+    "family": "dom_drift",
+    "request_count": 10,
+    "costs_per_request": [
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4
+    ],
+    "trajectory_sum": 40
+  },
+  {
+    "trajectory_id": "dom_drift-3",
+    "family": "dom_drift",
+    "request_count": 10,
+    "costs_per_request": [
+      5,
+      5,
+      5,
+      5,
+      5,
+      5,
+      5,
+      5,
+      5,
+      5
+    ],
+    "trajectory_sum": 50
+  },
+  {
+    "trajectory_id": "dom_drift-4",
+    "family": "dom_drift",
+    "request_count": 10,
+    "costs_per_request": [
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4
+    ],
+    "trajectory_sum": 40
+  },
+  {
+    "trajectory_id": "dom_drift-5",
+    "family": "dom_drift",
+    "request_count": 10,
+    "costs_per_request": [
+      5,
+      5,
+      5,
+      5,
+      5,
+      5,
+      5,
+      5,
+      5,
+      5
+    ],
+    "trajectory_sum": 50
+  },
+  {
+    "trajectory_id": "param_header_mutation-0",
+    "family": "param_header_mutation",
+    "request_count": 10,
+    "costs_per_request": [
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4
+    ],
+    "trajectory_sum": 40
+  },
+  {
+    "trajectory_id": "param_header_mutation-1",
+    "family": "param_header_mutation",
+    "request_count": 10,
+    "costs_per_request": [
+      5,
+      5,
+      5,
+      5,
+      5,
+      5,
+      5,
+      5,
+      5,
+      5
+    ],
+    "trajectory_sum": 50
+  },
+  {
+    "trajectory_id": "param_header_mutation-2",
+    "family": "param_header_mutation",
+    "request_count": 10,
+    "costs_per_request": [
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4
+    ],
+    "trajectory_sum": 40
+  },
+  {
+    "trajectory_id": "param_header_mutation-3",
+    "family": "param_header_mutation",
+    "request_count": 10,
+    "costs_per_request": [
+      5,
+      5,
+      5,
+      5,
+      5,
+      5,
+      5,
+      5,
+      5,
+      5
+    ],
+    "trajectory_sum": 50
+  },
+  {
+    "trajectory_id": "param_header_mutation-4",
+    "family": "param_header_mutation",
+    "request_count": 10,
+    "costs_per_request": [
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4
+    ],
+    "trajectory_sum": 40
+  },
+  {
+    "trajectory_id": "param_header_mutation-5",
+    "family": "param_header_mutation",
+    "request_count": 10,
+    "costs_per_request": [
+      5,
+      5,
+      5,
+      5,
+      5,
+      5,
+      5,
+      5,
+      5,
+      5
+    ],
+    "trajectory_sum": 50
+  },
+  {
+    "trajectory_id": "cache_expiry-0",
+    "family": "cache_expiry",
+    "request_count": 10,
+    "costs_per_request": [
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4
+    ],
+    "trajectory_sum": 40
+  },
+  {
+    "trajectory_id": "cache_expiry-1",
+    "family": "cache_expiry",
+    "request_count": 10,
+    "costs_per_request": [
+      5,
+      5,
+      5,
+      5,
+      5,
+      5,
+      5,
+      5,
+      5,
+      5
+    ],
+    "trajectory_sum": 50
+  },
+  {
+    "trajectory_id": "cache_expiry-2",
+    "family": "cache_expiry",
+    "request_count": 10,
+    "costs_per_request": [
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4
+    ],
+    "trajectory_sum": 40
+  },
+  {
+    "trajectory_id": "cache_expiry-3",
+    "family": "cache_expiry",
+    "request_count": 10,
+    "costs_per_request": [
+      5,
+      5,
+      5,
+      5,
+      5,
+      5,
+      5,
+      5,
+      5,
+      5
+    ],
+    "trajectory_sum": 50
+  },
+  {
+    "trajectory_id": "cache_expiry-4",
+    "family": "cache_expiry",
+    "request_count": 10,
+    "costs_per_request": [
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4
+    ],
+    "trajectory_sum": 40
+  },
+  {
+    "trajectory_id": "cache_expiry-5",
+    "family": "cache_expiry",
+    "request_count": 10,
+    "costs_per_request": [
+      5,
+      5,
+      5,
+      5,
+      5,
+      5,
+      5,
+      5,
+      5,
+      5
+    ],
+    "trajectory_sum": 50
+  },
+  {
+    "trajectory_id": "stable-0",
+    "family": "stable",
+    "request_count": 10,
+    "costs_per_request": [
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4
+    ],
+    "trajectory_sum": 40
+  },
+  {
+    "trajectory_id": "stable-1",
+    "family": "stable",
+    "request_count": 10,
+    "costs_per_request": [
+      5,
+      5,
+      5,
+      5,
+      5,
+      5,
+      5,
+      5,
+      5,
+      5
+    ],
+    "trajectory_sum": 50
+  },
+  {
+    "trajectory_id": "stable-2",
+    "family": "stable",
+    "request_count": 10,
+    "costs_per_request": [
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4
+    ],
+    "trajectory_sum": 40
+  }
+]
