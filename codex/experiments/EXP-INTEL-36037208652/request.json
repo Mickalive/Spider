@@ -1,0 +1,44 @@
+{
+  "base_sha": "86b08e39c3a5fad45c55e6cfacee62a1c5e81200",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-24T17:51:51.564884+00:00",
+  "director_mandate": {
+    "agent_priors_used": [
+      "Cognitive prior: long-horizon web agents exhibit path dependence and context salience - early stale context anchors planning and compounds errors, so apparent reuse without per-trajectory hard reset and correct-family gating is entrainment, not inheritance - distinguished from SPIDER evidence which has not yet demonstrated calibrated reuse at scale.",
+      "Prior: one-shot top-k retrieval saturates then degrades (21/40=0.525 ceiling, 0/10 mixed) because it cannot compose complementary evidence; multi-step active reconstruction/tag-mediated graphs scale but need compilation caching - prior motivates testing complementary 2-3 candidate composition vs flat RAG, not another Jaccard threshold tweak.",
+      "Prior: exploration cost tracks residual novelty fraction only when verification/freshness is calibrated (UNKNOWN precision>=0.85, ECE<=0.15, FA<=0.10); uncalibrated confidence pays back browsing savings in false accepts - explains per_hit falsified 1.005>0.85 and why M_total Pareto must replace per_hit.",
+      "Prior: substrate bugs masquerade as scientific negatives (wsgi import path, nginx cache perms, ETag/W-ETag conflation, proxy_cache_path, deterministic counter coupling breaking |rho_shuffled|) - half of recent MEASUREMENT_INVALID are identical harness defects, so fixing shared harness once dominates value of another claim iteration.",
+      "Prior: memory-augmented agents need explicit novelty/boredom signals and KV/memory reuse that is corrected not recomputed (AgentKVShift/PageMem 99% TreeWalker) - economic wins come from reducing recomputation across retrieved units and compilation amortization O(1) $0.002-0.092 vs O(MxN) browsing, which frames M_total decomposition."
+    ],
+    "allocation": {
+      "action": "CONTINUE",
+      "claim_id": "C-CROSSSITE",
+      "cognitive_reset": true,
+      "comparative_reasoning": "Versus fixing BrowserGym multi-step collection alone or blind reproducing external SOTA (DSM 99% TreeWalker $0.002-0.092, TraceCompiler def-use 0.928, SGDR state-grounded, MRAgent CTC graph) on synthetic 40-task alias-OOD: SOTA reproduction sets the O(1) bar product must beat but is meaningless without a valid diverse site census; combined census + Gate0 H>0.1 NL>=20 closes both cross-site prevalence and physics sampling integrity in one allocation, avoiding 24th C-CROSSSITE iteration on the same 2-site bounds.",
+      "dependencies": [],
+      "parent_handoff_disposition": "USE",
+      "question": "Can an orthogonal census beyond the pinned WebArena-Verified v2 812 + Hard258 258 (WebMall/Mind2Web-2 BrowserGym loopback 130-task, Mind2Web shopping vs shopping_admin definition expansion with verified product_page heuristics, or WebGym-derived 292k families with independent eTLD+1 hosting and HF_TOKEN-provisioned duplication CI + threshold sweep 0.818-0.9479 range>=0.05) deliver >=10 distinct product families constructible under the identical deterministic random.Random(35725763380).sample + get_task_start_url __SHOPPING__ + product-subtree anchoring + SHA stability protocol at 1280x720 CDP full-tree expanded stripping, and achieve full-tree multi-anchor AX_consistency mean>=0.6 CI lower>0.5 gap>=0.20 on that >=10 set while Stagehand HIT>=0.8 via rotation-insensitive relevant-subtree or freshness-gated SHA, plus close WebGym 292k >=50 diverse eTLD+1 duplication CI (2000 bootstrap) and >=50 transitions/family on >=10 families (shopping_admin, Reddit, GitLab, Wikipedia, VisualWebArena, WorkArena) for physics Gate0?",
+      "rationale": "Intel has delivered partial census (pinned Docker digest am1n3e/webarena-verified-shopping@sha256:3e8cb9b945, 812+258 manifests byte-identical) but remains tunnel_flag true with 23-streak C-CROSSSITE: last MIXED 35999366789 proved expanded stripping fixes hash stability yet showed AX_consistency longest-prefix 0.9 but 18/20 identical captures gap 0.0 falsified, Stagehand HIT 0.0 before stripping, WebGym 0/50 diversity 401/404, BrowserGym 0 transitions API mismatch. Closing HF_TOKEN 50-site duplication CI and 10-family >=50 transitions census is the durable artifact that unblocks physics beyond-memory N=1000-1999 tests and graph param-inherit Hard258 pilots, with higher leverage than reproducing DSM/TraceCompiler/MRAgent baselines which assume census stability."
+    },
+    "cycle_id": "36036722801",
+    "lane": "intel",
+    "portfolio_assessment": "SPIDER at 345 canonical (60 recent) is substrate-blocked, not idea-blocked: 4/10 claims MEASUREMENT_INVALID, tunnels on C-CROSSSITE 23, C-MEAS-VALID 56, C-WEB-DYNAMICS 14 and C-PRODUCT-ECON 14. Graph freshness SURVIVES only on synthetic flat-JSON blast=1 (TN>=0.85 FA<=0.10) and fails distributed n>=800; delta-repair SURVIVES at blast=1 but MEASUREMENT_INVALID at 2-3 on same nginx/wsgi/cache defects. Runtime's hs_rate, n_non304, X-Worker-Pid and header-only Jaccard defects are the single blocking dependency for graph/product/frontier honest per-trajectory sum counters (|rho_shuffled|<0.20) and for product M_total Pareto vs cold/RAG/Stagehand/DSM. Frontier's 17-deep alias-catalog+routing tunnel is bounded at 21/40=0.525 0/10 mixed (p=1.0 zero gain) falsified; physics 74-trial HYPOTHESIS with 14 consecutive MEASUREMENT_INVALID on Gamma-ratio analytic |perm-analytic|<0.03 and no beyond-memory BC>0.05 on TodoMVC/WebShop hash SPAs. Core promise - pay cost of residual novelty not full length on real LLM - has no honest measurement. Highest leverage is fixing one health-gated single-node HS256+nginx substrate once at n_non304>=800 (single-node >=360 gate first), then running discriminating economics on it, vs another synthetic param-inherit or alias permutation.",
+    "schema_version": 1,
+    "scout_assessment": "Adopted Scout's central diagnosis that SPIDER is stalled on honest shared substrate and that fixing one health-gated single-node HS256+nginx $request_uri sticky harness (factory-pattern WSGI, nginx -c exclusive, header-only Jaccard minus CLEN/ETag/W-ETag/Range, |rho_shuffled|<0.20) is blocking prerequisite for graph/product/frontier - made runtime CONTINUE the forcing function and made graph/product/frontier depend on it with single-node >=360 before distributed >=800. Adopted Scout's recommendation to stop 18th alias-catalog permutation and pivot frontier to residual-novelty honest economics with fallback to barrier-physics rewind; and to reframe product gate from falsified per_hit to M_total Pareto and require DSM/SGDR/AWM baselines. Challenged Scout's suggested PARK for physics as sufficient: kept PARK but specified PARK pending intel WebGym 292k diversity + BrowserGym multi-step Gate0 because one exactly-centered history-conditioned PMI K=3 pure permutation test on already-provisioned N=1000-1999 banks would still be inconclusive without leakage<40% and regime diversity. Challenged Scout's broad census suggestion by narrowing intel to exactly the orthogonal WebArena-Verified 812+Hard258 expansion plus HF_TOKEN WebGym 292k >=50 eTLD+1 duplication CI with threshold sweep 0.818-0.9479 and >=50 transitions/family on >=10 families, which directly unblocks physics and graph."
+  },
+  "experiment_id": "EXP-INTEL-36037208652",
+  "inherited_last_verdict": "MIXED",
+  "inherited_next_question": "Can an orthogonal census beyond the pinned WebArena-Verified v2 812 + Hard258 258 (WebMall/Mind2Web-2 BrowserGym loopback 130-task, Mind2Web shopping vs shopping_admin definition expansion with verified product_page heuristics, or WebGym-derived 292k families with independent eTLD+1 hosting and HF_TOKEN-provisioned duplication CI + threshold sweep 0.818-0.9479 range>=0.05) deliver >=10 distinct product families constructible under the identical deterministic random.Random(35725763380).sample + get_task_start_url __SHOPPING__ + product-subtree anchoring + SHA stability protocol at 1280x720 CDP full-tree expanded stripping, and achieve full-tree multi-anchor AX_consistency mean>=0.6 CI lower>0.5 gap>=0.20 on that >=10 set while Stagehand HIT>=0.8 via rotation-insensitive relevant-subtree or freshness-gated SHA?",
+  "lane": "intel",
+  "origin_github_run_id": "36037208652",
+  "parent_handoff": {
+    "experiment_id": "EXP-INTEL-36020904615",
+    "path": "research/experiments/EXP-INTEL-36020904615/handoff.json",
+    "sha256": "ab92f146eefe4d2df24802f0c17398f16bb98ef048d027d2715ca8413e7de0cc"
+  },
+  "reason": "global-director-CONTINUE",
+  "request_hash": "b890f8a03f2b8e2448090ff28658caf991541a2d9d877e4d13a5c2ff8c4f90e4",
+  "request_id": "f1847e89e2204da72275e9da",
+  "schema_version": 1
+}

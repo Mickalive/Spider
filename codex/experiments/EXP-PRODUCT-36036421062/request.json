@@ -1,0 +1,49 @@
+{
+  "base_sha": "3c4e09ba6e97acb69b5765c54783bf01c7643a86",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-24T17:44:59.749786+00:00",
+  "director_mandate": {
+    "agent_priors_used": [
+      "Path dependence / context salience: early retrievals condition later context, causing self-reinforcing retrieval bias (explains SPIDER cross-family key adoption and Jaccard>=0.6 over-matching persisting across 17 parametrizations) - used to de-prioritize 18th alias/routing permutation - distinguished from SPIDER evidence",
+      "Compounding verification error: single-candidate verification miss probability multiplies for joint header+body+query+auth composition (0.7^3~0.34 matches 0/10 mixed) - used to prioritize joint multi-candidate composition and honest per-channel verification over retrieval tuning - prior not SPIDER evidence",
+      "Similarity retrieval mixes valid and erroneous traces (Mage): contamination rises with reuse count f, eroding amortized economics at f=10/100 unless isolated - used to require blast-radius contamination<0.10 as first-order gate - prior not SPIDER evidence",
+      "Verification cheaper than generation only if signal is diverse (Cache-Control/Set-Cookie/Vary) not body-correlated (ETag/Content-Length/W-ETag body_sha) - used to require MINUS {Content-Length,ETag,W-ETag,Range} de-confounding for C-FRESHNESS/C-MEAS-VALID - prior not SPIDER evidence",
+      "Diminishing returns after ~5 failures on same claim with same representation: broad reconnaissance should trigger basin pivot - used to park Physics after 74 experiments and enforce Frontier pivot after tunnel - prior not SPIDER evidence",
+      "Cold vs instructed vs RAG vs SPIDER only discriminates if model/tools/budget/browser held constant with honest sum-counter including verification/repair; simulated baselines inflate advantage - used to require gpt-4o-mini 15-step Playwright 1280x720 same-budget test for C-LLM-INHERIT - prior not SPIDER evidence"
+    ],
+    "allocation": {
+      "action": "REOPEN",
+      "claim_id": "C-PRODUCT-ECON",
+      "cognitive_reset": true,
+      "comparative_reasoning": "Remaining PARKED would leave highest product leverage untested while Frontier/Graph repeat synthetic economics. Distributed n>=800 Pareto requires Runtime permission fix not yet audited - lower readiness. Single-family param-inherit pilot repeats 8 identical MEASUREMENT_INVALID gates. Single-node honest Pareto at f=10/100 with same-budget LLM comparison is most discriminating (changes architecture decision) and executable now per rebuilt holdout SHA and sticky WAL health gate (200/200 TN 1.0).",
+      "dependencies": [
+        "runtime single-node health-gated HS256 sticky n_non304>=360 with honest sum-counter",
+        "intel strong baseline Stagehand HIT/MISS vs memory-reuse replication for fair comparator",
+        "graph freshness guard TN>=0.85 recalibrated 0.95/0.85 for freshness-gated inheritance"
+      ],
+      "parent_handoff_disposition": "USE",
+      "question": "After retaining the contamination-free rebuilt 192/36 holdout (sha 374ef8f625be Jaccard max 0.0 disjoint value_set_A intersect B empty) and single-node HS256 sticky substrate health-gated at n_non304>=360 (TTL 60s conditional probe ETag W/body_sha, stratified TN 1.0) with durable kernel dot-regex (d926279d at cee979c2), and provisioning GHCR ghcr.io/servicenow/browsergym:0.14.3 + gpt-4o-mini 15-step Playwright same model/tools/budget 1280x720, does honest M_total_f10/f100 Pareto (tokens+browser+latency vs accuracy, 5000 family-stratified trajectory-grouped bootstrap + 5000 block-permutation, rho_proxy_real>=0.50 |rho_shuffled|<0.20 |rho_length|<0.20 per-stratum, verification AUROC>=0.75 precision>=0.80 false_accept<=0.10 UNKNOWN>=0.85 ECE<=0.15) demonstrate dominance vs RAG-EMBED TAU0.30/QCR k5, Stagehand 2x/~30% cache, and DSM/SGDR/AWM (saving>=25% vs COLD at f=10, correlated probe saving>=30% vs seeded-42 random 0.53, per_hit superseded 1.005>0.85) on health-gated single-node before any distributed n>=800 authorization, with safety CuP non-inferior?",
+      "rationale": "Product is IDLE (no active experiment, EXP-PRODUCT-36020894109 MEASUREMENT_INVALID 2026-09-24) despite owning C-PRODUCT-ECON (14/10 recent), C-RESIDUAL-NOVELTY (4), C-LLM-INHERIT (1/21). No true LLM inheritance with same model/tools/budget has survived (all 21 simulated baselines). Honest per_hit falsified 1.005>0.85 rho 0.363<0.60. Health-gated single-node HS256 sticky n_non304>=360 with BrowserGym 0.14.3 2000-node and gpt-4o-mini 15-step is now executable substrate that unblocks first real-LLM test at f=10/100 with honest sum-counter and trajectory-grouped permutation. Result changes promotion decision: Pareto dominance vs RAG-EMBED/Stagehand/DSM would promote to PRODUCT_CORE; failure would trigger capsule/ KV-reuse pivot."
+    },
+    "cycle_id": "36035788383",
+    "lane": "product",
+    "portfolio_assessment": "SPIDER at 344 canonical experiments (60 recent) has a synthetic freshness guard that SURVIVES (TN>=0.85 FA<=0.10 at 15% stale, 360-req flat-JSON, 2 consecutive) but distributed n>=800 transfer repeatedly MEASUREMENT_INVALID due to per-node SQLite / proxy_cache misconfiguration; C-MEAS-VALID ceiling remains at gunicorn 23+nginx loopback with degenerate [1.0,1.0] CI; Frontier tunneled 17-deep alias-catalog/routing/WebMCP bounded at 21/40=0.525 <0.60 with zero mixed triple-channel and zero routing marginal gain; Graph delta-repair blast-1 survives synthetically but blast 2-3 and same-resource contamination untested; C-PARAM-INHERIT 49 experiments stuck at identical kernel durability gate; C-WEB-DYNAMICS 74 experiments with no beyond-memory signal beyond synthetic SPA and 6 recent MEASUREMENT_INVALID due to analytic Gamma-ratio heuristic; Product IDLE despite owning C-PRODUCT-ECON/C-LLM-INHERIT/C-RESIDUAL-NOVELTY (18/10 recent product-econ, only 1 LLM-inherit) with honest per_hit falsified 1.005>0.85 rho 0.363<0.60; Intel quarantined with 23-streak C-CROSSSITE but WebGym 300k duplication 0.818-0.948 prevalence 0.896 is only unblocked signal while AX_consistency remains degenerate. Highest portfolio leverage is health-gated single-node HS256 sticky n_non304>=360 validation for all downstream freshness/delta-repair/economics before authorizing distributed f=100 or barrier-physics BrowserGym rewind. Opportunity cost of another distributed or alias permutation exceeds one honest-cost repair and one strong-baseline replication.",
+    "schema_version": 1,
+    "scout_assessment": "Scout brief accepted as accurate situational map: confirmed health-gated single-node HS256 sticky n_non304>=360 as minimal viable gate before distributed; validated duplication prevalence without exhaustive LFS and degenerate AX_consistency diagnosis; flagged Frontier alias ceiling, Runtime degenerate ceiling, Physics analytic-null trap, Product idle risk. Challenged Scout's suggestion to continue Runtime distributed n>=800 immediately and Physics analytic repatching for 4th cycle - judged lower information gain than single-node non-degenerate gradients and PARK pending production manifest. Delegated deep verification of memory-reuse/browser-use rerun_history and BrowserGym CDP AX>10 census to Intel, and honest-cost harness repair to Frontier/Graph/Product, rather than broad literature review."
+  },
+  "experiment_id": "EXP-PRODUCT-36036421062",
+  "inherited_last_verdict": "MEASUREMENT_INVALID",
+  "inherited_next_question": "After retaining the now contamination-free rebuilt 192/36 holdout (sha 374ef8f625be1a7426a59eb15dee65d11334526508ec28185cdcf9239b1b2fbe 0/36 pool and usage disjoint Jaccard max 0.0 on 630 pairs) and single-node HS256 sticky substrate health-gated at n_non304>=360 stratified (200/200 TN 1.0 WAL single-worker ETag W/body_sha probe saving 0.40 delta 0.407) with durable kernel dot-regex (d926279d committed at cee979c2), and after provisioning GHCR ghcr.io/servicenow/browsergym:0.14.3 (playwright 1.63.0 2000-node 1280x720 CDP getFullAXTree AX>10) + OPENAI_API_KEY for gpt-4o-mini 15-step Playwright same model/tools/budget and fixing DSM site overlap 0/36 (stage overlapping or Hard258 live sites 714/2147 80-94% $0.002-0.092) and breaking NC1 deterministic counter coupling to achieve |rho_shuffled|<0.20 p>=0.20 per-stratum |rho_length|<0.20 |rho_shuffled_proxy|<0.20 on real trajectories, does honest M_total_f10/f100 Pareto (tokens+browser+latency vs accuracy at f=10/100 5000 family-stratified trajectory-grouped bootstrap + 5000 block-permutation rho_proxy_real>=0.50 per-stratum AUROC>=0.75 precision>=0.80 false_accept<=0.10 UNKNOWN>=0.85 ECE<=0.15 correlated probe saving>=30% accuracy>=0.90 vs seeded-42 random 0.53 DSM amortized 80-94% $0.002-0.092 safety CuP non-inferior) demonstrate dominance vs RAG-EMBED TAU0.30/QCR k5 Stagehand cache and DSM/SGDR/AWM formally superseding per_hit 1.005>0.85 rho 0.363<0.60 on health-gated single-node HS256 sticky n_non304>=360 stratified substrate before any distributed n>=800 authorization?",
+  "lane": "product",
+  "origin_github_run_id": "36036421062",
+  "parent_handoff": {
+    "experiment_id": "EXP-PRODUCT-36020894109",
+    "path": "research/experiments/EXP-PRODUCT-36020894109/handoff.json",
+    "sha256": "809b0f9528ee37b0aa3d2b47211ca6d40f0ef8690fd2aab020a74100facc8b61"
+  },
+  "reason": "global-director-REOPEN",
+  "request_hash": "45ba58d859703f4a97fcf84f4c396b79f40cc02095242119c2d5811fe9d39b27",
+  "request_id": "c6d9fd89139f42ea90b92456",
+  "schema_version": 1
+}
