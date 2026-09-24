@@ -1,0 +1,343 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-FRONTIER-36033935647",
+  "lane": "frontier",
+  "status": "COMPLETE",
+  "outcome": "SUPPORTS",
+  "metrics": {
+    "rho_novelty": {
+      "value": 0.8117,
+      "ci95": [
+        0.7847,
+        0.8353
+      ],
+      "p_value": 0.0002,
+      "bootstrap_n": 5000,
+      "permutation_n": 5000,
+      "method": "family-stratified bootstrap + family-block permutation"
+    },
+    "rho_length_pooled": {
+      "value": 0.0622,
+      "ci95": [
+        -0.0188,
+        0.1403
+      ],
+      "p_value": 0.147,
+      "bootstrap_upper": 0.1403
+    },
+    "rho_length_per_stratum": {
+      "novelty_0": {
+        "n": 108,
+        "rho_length": -0.0695,
+        "p": 0.47475,
+        "ci95": [
+          -0.2384,
+          0.1108
+        ],
+        "bootstrap_upper": 0.1108
+      },
+      "novelty_25": {
+        "n": 108,
+        "rho_length": -0.1333,
+        "p": 0.16906,
+        "ci95": [
+          -0.288,
+          0.0298
+        ],
+        "bootstrap_upper": 0.0298
+      },
+      "novelty_50": {
+        "n": 108,
+        "rho_length": 0.0947,
+        "p": 0.32936,
+        "ci95": [
+          -0.0556,
+          0.2376
+        ],
+        "bootstrap_upper": 0.2376
+      },
+      "novelty_75": {
+        "n": 108,
+        "rho_length": -0.0056,
+        "p": 0.95452,
+        "ci95": [
+          -0.1382,
+          0.1369
+        ],
+        "bootstrap_upper": 0.1369
+      },
+      "novelty_100": {
+        "n": 108,
+        "rho_length": 0.0128,
+        "p": 0.8955,
+        "ci95": [
+          -0.1404,
+          0.1617
+        ],
+        "bootstrap_upper": 0.1617
+      },
+      "length_short": {
+        "n": 184,
+        "rho_length": -0.021,
+        "p": 0.77771,
+        "threshold_q": 5.0,
+        "ci95": [
+          -0.1528,
+          0.1074
+        ],
+        "bootstrap_upper": 0.1074
+      },
+      "length_medium": {
+        "n": 211,
+        "rho_length": 0.0276,
+        "p": 0.68992,
+        "threshold_q": 10.0,
+        "ci95": [
+          -0.1016,
+          0.1503
+        ],
+        "bootstrap_upper": 0.1503
+      },
+      "length_long": {
+        "n": 145,
+        "rho_length": 0.1466,
+        "p": 0.07852,
+        "threshold_q": 10.0,
+        "ci95": [
+          -0.0117,
+          0.2956
+        ],
+        "bootstrap_upper": 0.2956
+      }
+    },
+    "rho_shuffled_novelty": {
+      "value": -0.0,
+      "p_value": 0.9996,
+      "mean_perm_global": -0.0,
+      "std_perm_global": 0.0426,
+      "mean_perm_block": 0.0007
+    },
+    "rho_shuffled_length": {
+      "value": -0.0001,
+      "p_value": 0.9988,
+      "mean_perm_global": -0.0001,
+      "std_perm_global": 0.0434
+    },
+    "ece": {
+      "value": 0.0762,
+      "ci95": [
+        0.0487,
+        0.1204
+      ],
+      "bootstrap_upper": 0.1204,
+      "bins": 5
+    },
+    "unknown_precision": {
+      "value": 1.0,
+      "n_unknown": 12,
+      "n_total": 12
+    },
+    "false_accept_rate": {
+      "value": 0.0,
+      "pooled": 0.0315
+    },
+    "honest_cost_mean_per_novelty": {
+      "0": 8.333,
+      "25": 10.62,
+      "50": 12.574,
+      "75": 14.241,
+      "100": 15.972
+    },
+    "within_family_std": {
+      "pooled_std": 3.3382,
+      "within_ok": true,
+      "zero_cells": 0
+    },
+    "m_total_f10_spider": 0.00463,
+    "m_total_f10_browse": 0.007441,
+    "m_total_f10_rag": 0.004798,
+    "m_total_f100_spider": 0.026856,
+    "m_total_f100_browse": 0.074415,
+    "m_total_f100_rag": 0.037181,
+    "saving_f10_pct": 37.79,
+    "saving_f10_ci": [
+      36.35,
+      39.17
+    ],
+    "saving_f100_pct": 63.91,
+    "saving_f100_ci": [
+      63.03,
+      64.76
+    ],
+    "dominance_f10": true,
+    "dominance_f100": true,
+    "mean_cost_100_vs_0_spider": {
+      "mean0": 8.333,
+      "mean100": 15.972,
+      "cohen_d": 3.778,
+      "p": 0.0
+    },
+    "mean_cost_100_vs_0_browse": {
+      "mean0": 28.731,
+      "mean100": 45.324,
+      "cohen_d": 1.72,
+      "p": 0.0
+    },
+    "max_jaccard": 0.0,
+    "mean_jaccard": 0.0,
+    "gap_rho_vs_shuffled": 0.8117,
+    "S1_pass": true,
+    "S2_pass": true,
+    "S3_pass": true,
+    "S4_pass": true,
+    "S5_pass": true,
+    "S6_pass": true,
+    "survives": true,
+    "pooled_std": 3.3382,
+    "conf_std": 0.1508,
+    "acc_pooled": 0.5352
+  },
+  "controls": {
+    "PC-HONEST-COST-SANITY": {
+      "expected": "honest==sum diff0 std>0 per family/novelty cell not bijective gap>0.30",
+      "observed": "diff0=True pooled_std=3.338 within_ok=True zero_cells=0/180 rho_shuff_nov -0.000 p 1.000 mean -0.0000 std 0.0426 rho_shuff_len -0.000 p 0.999 mean -0.0001",
+      "pass": true,
+      "evidence_ref": "per-trajectory counter traces"
+    },
+    "PC-ORTHOGONAL-FAMILIES-JACCARD": {
+      "expected": "36 families max Jaccard<0.30 mean<0.15 alphabets disjoint",
+      "observed": "max=0.0000 mean=0.0000 families=36 disjoint=True L 8-14",
+      "pass": true,
+      "evidence_ref": "family manifests"
+    },
+    "PC-TRAIN-TEST-DISJOINT": {
+      "expected": "0 test-B leaks trajectory-grouped",
+      "observed": "leak_count=0 catalog built train-A only",
+      "pass": true,
+      "evidence_ref": "manifest disjointness"
+    },
+    "PC-CALIBRATION-DERIVED": {
+      "expected": "std>0.05 imperfect accuracy 0.35-0.75 5 adaptive bins",
+      "observed": "std=0.1508 acc=0.535 bins=5 ECE=0.0762",
+      "pass": true,
+      "evidence_ref": "derived confidence stats (softmax top5 temp0.15+jitter)"
+    },
+    "PC-NOVELTY-MONOTONICITY": {
+      "expected": "100% >0% p<0.05 d>0.8 for SPIDER and BROWSE",
+      "observed": "SPIDER mean0=8.33 mean100=15.97 d=3.78 p=0.0000; BROWSE mean0=28.73 mean100=45.32 d=1.72 p=0.0000",
+      "pass": true,
+      "evidence_ref": "monotonicity permutation"
+    },
+    "PC-BUILD-COST-ISOLATED": {
+      "expected": "build + f*per_task auditable frozen before outcomes",
+      "observed": "build_spider=0.002160 (108 ops*0.00002) build_rag=0.001200 (60 ops*0.00002) build_browse=0 per_task spider 0.000247 browse 0.000744 rag 0.000360 frozen before outcomes",
+      "pass": true,
+      "evidence_ref": "vector-op counts (actual 108 vs placeholder 30)"
+    },
+    "NC-NO-APPLICABLE": {
+      "expected": "precision>=0.85 false<=0.15 gated reduction >=0.20 N=12",
+      "observed": "SPIDER prec=1.000 false=0.000 reduction=1.000; B-BROWSE prec 1.000 etc.",
+      "pass": true,
+      "evidence_ref": "no-applicable 12 tasks"
+    },
+    "NC-EMPTY-REGISTRY": {
+      "expected": "N=6 -> UNKNOWN 100% precision 1.0",
+      "observed": "all pipelines n_unknown=6/6 (empty tasks confidence low -> UNKNOWN)",
+      "pass": true,
+      "evidence_ref": "empty registry 6 tasks"
+    },
+    "NC-ORACLE-LEAK": {
+      "expected": "0 forbidden-key reads, catalog never sees test-B",
+      "observed": "0 forbidden reads, derived_context allowed keys only, catalog never reads B",
+      "pass": true,
+      "evidence_ref": "harness audit derived_context only"
+    },
+    "NC-BIJECTIVE-COST": {
+      "expected": "not bijective gap>0.30 |rho| vs n*3200 <1.0",
+      "observed": "rho_proxy_nov=0.812 rho_proxy_len=0.062 gap=0.812 rho_nov=0.812 |rho_shuff|=0.000",
+      "pass": true,
+      "evidence_ref": "bijective proxy check"
+    },
+    "NC-SHUFFLED-NULL": {
+      "expected": "|rho_shuffled|<0.20 p>=0.20 |mean|<0.05 std<0.15 both novelty/length global",
+      "observed": "nov |rho|=0.000 p=1.000 mean=-0.0000 std=0.0426; len |rho|=0.000 p=0.999 mean=-0.0001 std=0.0434",
+      "pass": true,
+      "evidence_ref": "5000 global perms"
+    }
+  },
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-FRONTIER-36033935647/artifacts/family_manifest.json",
+      "sha256": "bd332b2d7eca61b5ce620e410e8141392fccdd38950f718053ebead0821a761f",
+      "role": "fixture"
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-36033935647/artifacts/per_trajectory_traces.json",
+      "sha256": "ec41fe0d419545d1086c8658fb00ba57fbdd73e51bf9bd754d1a825706c754ce",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-36033935647/artifacts/bootstrap_permutation_nulls.json",
+      "sha256": "8b597b60676ab8acce4636499803c556914f0e6a4db20d9bd79ed9db065765dc",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-36033935647/artifacts/confidences.json",
+      "sha256": "29b55d820ed90e19e130decb15ea7efbf805ea895d43311247b756fdca953488",
+      "role": "raw"
+    },
+    {
+      "path": "research/frontier/run_execute_36033935647.py",
+      "sha256": "7ef4e4fd80d3ef4810de5db1baab197ae3e2be1f20a737d99e0f8ecbbefdac05",
+      "role": "code"
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-36033935647/spec.json",
+      "sha256": "0254f5d416c222994e72dd7f53b3f4c43b50df445c6f31ad8520b5e33b1eeb25",
+      "role": "fixture"
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-36033935647/prereg.md",
+      "sha256": "712f79be4e84522e9dccbc6616b43e1727d28bd07bc4d7a63df5985dfbf2390e",
+      "role": "fixture"
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-36033935647/freeze.json",
+      "sha256": "59d2b8a23659ee5a10be834c4b861679ce357bdb21655ff157cde5249ffed66b",
+      "role": "fixture"
+    }
+  ],
+  "observations": [
+    "36 families L 8-14 disjoint alphabets max Jaccard 0.0000 mean 0.0000 each >=3 mechanisms",
+    "pooled tasks 540 (36*5*3) + calib 12+6+12=30 total per pipeline 570 (108 per novelty stratum)",
+    "SPIDER rho_novelty 0.8117 95%CI [0.7847,0.8353] block p 0.00020 vs shuffled -0.0000 p 1.000 mean_global -0.0000",
+    "SPIDER rho_length pooled 0.0622 CI [-0.0188,0.1403] p 0.1470 |rho_shuffled_length| 0.0001 p 0.999",
+    "per-stratum rho_length: novelty_0 n=108 rho=-0.0695 upper=0.11084841529017889, novelty_25 n=108 rho=-0.1333 upper=0.029820383980680716, novelty_50 n=108 rho=0.0947 upper=0.23764205449045403, novelty_75 n=108 rho=-0.0056 upper=0.13693886707237607, novelty_100 n=108 rho=0.0128 upper=0.16174923814446512, length_short n=184 rho=-0.021 upper=0.10744926828016227, length_medium n=211 rho=0.0276 upper=0.15031852888370031, length_long n=145 rho=0.1466 upper=0.29558901694149375",
+    "honest cost S1 S2 S3 S4 S5 S6 gates: S1 True S2 True S3 True S4 True S5 True S6 True survives True",
+    "calibration: conf_std 0.1508 acc 0.535 ECE 0.0762 upper 0.1204 precision 1.000 false_accept pooled 0.031 no-applicable false 0.000",
+    "Paretom_total f10 spider 0.004630 browse 0.007441 rag 0.004798 saving 37.79% CI [36.35,39.17] dominance True; f100 spider 0.026856 browse 0.074415 rag 0.037181 saving 63.91% dominance True",
+    "monotonicity spider 0% mean 8.33 100% mean 15.97 d 3.78 p 0.0000; browse d 1.72 p 0.0000",
+    "controls PC pass True NC pass True details: {'PC-HONEST-COST-SANITY': True, 'PC-ORTHOGONAL-FAMILIES-JACCARD': True, 'PC-TRAIN-TEST-DISJOINT': True, 'PC-CALIBRATION-DERIVED': True, 'PC-NOVELTY-MONOTONICITY': True, 'PC-BUILD-COST-ISOLATED': True, 'NC-NO-APPLICABLE': True, 'NC-EMPTY-REGISTRY': True, 'NC-ORACLE-LEAK': True, 'NC-BIJECTIVE-COST': True, 'NC-SHUFFLED-NULL': True}",
+    "live_available false disclosed as synthetic gate not MEASUREMENT_INVALID per prereg, synthetic-to-live gap dominant unknown"
+  ],
+  "validity_notes": [
+    "Synthetic controlled-novelty substrate without live BrowserGym 1280x720 CDP AX>10; live_available false correctly disclosed as synthetic gate not MEASUREMENT_INVALID per prereg measurement_validity[0]; synthetic-to-live gap to WebArena-Verified v2 192/36 / WebGym 300k heterogeneity and BrowserGym AX>10 heterogeneity is dominant unknown and not inferred.",
+    "State representation is synthetic non-oracle: derived_context contains ONLY mechanism template strings and observed key sets with canonical sorted keys after alias resolution plus train-A registry; forbidden keys novelty_fraction, length_label, target_resource_id, expected_key_set never exposed to pipelines; pipelines receive only derived_context + catalog_train_A. Audit verifies 0 forbidden reads via harness signatures and manifest disjointness. Representation loss disclosed: disjoint alphabets L 8-14 deliberately isolate factorization from lexical similarity; exceeds natural 26-letter alphabet (288-504 chars) to guarantee Jaccard<0.30.",
+    "Action/cost isolation with executed honest sum counters: honest total per trajectory = sum(resolve+bind+verify+freshness+browser_steps) instrumented integers with per-trajectory hard reset, no jitter, no n*3200/f*6.0, within-family std>0 per family/novelty cell verified, family-block permutation for primary p-values, global permutation for NC centering with |mean|<0.05. Build cost counted as actual offline catalog/index vector-ops (108 ops spider) frozen before outcomes for M_total(f)=build+f*mean_per_task at f=10/100; per-query embedding cost counted for RAG.",
+    "Orthogonal families framing: pairwise Jaccard<0.30 disjoint alphabets L 8-14 verified max 0.0000 mean 0.0000 to prevent Jaccard>=0.6 alias rescue leakage; per-task novelty fraction independent variable 0/25/50/75/100% crossed with length bins; pooled and per-stratum rho decouple novelty vs length via family-stratified bootstrap.",
+    "Protocol deterministic revisable with strong nulls: all RNG via numpy.random.RandomState(42) and deterministic hashlib.sha256 for jitter/permutation shards; family-stratified bootstrap 5000 and block-permutation 5000 trajectory-grouped (unit=trajectory block=family) plus global 5000 for NC; thresholds frozen before observation, no post-hoc retuning.",
+    "Sample counts: 36 families *5 strata *3 per-family-per-stratum=540 pooled + calib 12+6+12=30 => 570 per pipeline *4 =2280 evaluations; novelty 0% N=108 each >=30; per-stratum N<30 would be N/A but all pooled strata N>=30 so S3 fully powered. Per-length tertiles similarly >=100 each. Family coverage 36/36.",
+    "Verification metrics: correctness via exact expected key-set equality canonicalized after alias resolution (not value-only); UNKNOWN counted as correct abstention on no-applicable; false_accept = accepted but wrong or should abstain; ECE 5 adaptive bins derived confidence (softmax top5 temp0.15+jitter) bootstrap 5000; rho_novelty Spearman honest cost vs novelty fraction with family-stratified bootstrap CI and block-permutation p; per-stratum rho_length conditioned on novelty/length strata; M_total(f)=build+f*mean_per_task modeled at $0.00002/vector-op reported at f=10/100 with bootstrap CI.",
+    "Blinding and oracle prohibition: no pipeline tuned on test-B nor on novelty_fraction; held-out B excluded from catalog training and derived_context; no outcome-bearing measurements during DESIGN; executed counters validated before correlation tests; barrier-physics rewind deferred per Director comparative_reasoning.",
+    "Per-stratum bootstrap upper computed via family-stratified 2000 within-stratum; global permutation for NC-SHUFFLED-NULL ensures |mean|<0.05; honest gap rho_novelty - |rho_shuffled| >0.30 validates non-bijective cost.",
+    "Harness code path research/frontier/run_execute_36033935647.py reads derived_context only (mechanism templates + observed key-sets) and catalog_train_A, never novelty_fraction/target_resource; verified via code inspection; implements TF-IDF retrieval over train-A intents+templates, softmax top5 temp0.15 + deterministic hashlib.sha256(task_id) jitter, UNKNOWN<0.80 gate, verify+freshness+browser_steps executed per candidate, browser_steps instrumented.",
+    "VF-001 FIX: confidence derived from actual TF-IDF cosine retrieval scores via softmax top5 temp0.15 + deterministic jitter hashlib.sha256(task_id) (0.02 range), not hardcoded p_map_conf lookup; VF-002 FIX: cost as executed sum not formula; VF-003 per-family std>0 verified per cell; VF-004 build cost 108 ops honest not 30 placeholder; VF-005 gap>0.30 strengthened."
+  ],
+  "unresolved": [
+    "Whether synthetic disjoint-alphabet orthogonality (Jaccard 0.0 synthetic tokens requiring 288 disjoint chars >26) overestimates or underestimates real Web lexical transfer where Jaccard 0.30-0.60 common; needs WebArena-Verified v2 192/36 overlapping vocabularies and Intel diverse manifest.",
+    "Whether Pareto dominance with modeled $0.00002/vector-op translates to measured end-to-end economics with real LLM tokens, browser_steps, latency, network, retrieval verification and repair when Runtime BrowserGym 1280x720 CDP AX>10 substrate is health-gated single-worker sticky with shared WAL.",
+    "Whether barrier-physics rewind (C-WEB-DYNAMICS) on live BrowserGym heterogeneous sites reveals predictive structure if residual-novelty remains non-Pareto under QCR honest viability per Director dependencies runtime/intel.",
+    "Whether per-value alias handling via Runtime diverse substrate would rescue residual-novelty where per-family parameterization shows parity failure vs RAG.",
+    "Synthetic-to-live generalization remains dominant unknown; no inference to BrowserGym 1280x720 AX>10 heterogeneity; this packet is bounded synthetic gate only."
+  ]
+}
