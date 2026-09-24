@@ -1,0 +1,266 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-35940399935",
+  "lane": "graph",
+  "status": "COMPLETE",
+  "outcome": "SUPPORTS",
+  "metrics": {
+    "M-TN-SPIDER": 1.0,
+    "M-TN-WILSON-LOWER": 0.969,
+    "M-TN-WILSON-UPPER": 1.0,
+    "M-FALSE-ACCEPT-SPIDER": 0.0,
+    "M-FALSE-ACCEPT-WILSON-UPPER": 0.0409,
+    "M-FALSE-ACCEPT-WILSON-LOWER": 0.0,
+    "M-UNKNOWN-RATE-SPIDER": 0.4286,
+    "M-ECE-SPIDER": 0.0929,
+    "M-ECE-FRESH": 0.05,
+    "M-ECE-STALE": 0.15,
+    "M-TP-SPIDER": 1.0,
+    "M-COST-SPIDER-SUM": 1440,
+    "M-COST-SPIDER-VECTOR-STD": 0.0,
+    "M-RHO-SHUFFLED-MAX": 0.0,
+    "M-RHO-SHUFFLED-MEAN": 0.0,
+    "M-RHO-SHUFFLED": 0.0,
+    "M-RHO-OBSERVED": 0.0,
+    "M-WITHIN-FAMILY-STD-MIN-FRESHNESS": 0.5,
+    "M-WITHIN-FAMILY-STD-MIN-JACCARD": 0.0,
+    "M-WITHIN-FAMILY-STD-MIN-COST": 0.0,
+    "M-FA-NOISE": 0.0,
+    "M-TN-NOISE": 1.0,
+    "M-FA-B-NO-GUARD": 1.0,
+    "M-FA-B-JACCARD-ONLY": 0.6667,
+    "M-FA-B-HEADER-ONLY": 0.3333,
+    "M-TP-FAMILY-dom_drift": 1.0,
+    "M-TN-FAMILY-dom_drift": 1.0,
+    "M-TP-FAMILY-param_header_mutation": 1.0,
+    "M-TN-FAMILY-param_header_mutation": 1.0,
+    "M-TP-FAMILY-cache_expiry": 1.0,
+    "M-TN-FAMILY-cache_expiry": 1.0,
+    "counts": {
+      "tn": 120,
+      "fp": 0,
+      "tp": 90,
+      "fn": 0,
+      "total": 210,
+      "fresh": 120,
+      "stale": 90,
+      "total_with_noise": 360,
+      "noise_n": 150,
+      "stale_rate": 0.4286
+    },
+    "per_family": {
+      "dom_drift": {"fresh_n": 30, "stale_n": 30, "tn": 30, "fp": 0, "tp": 30, "fn": 0, "tn_rate": 1.0, "tp_rate": 1.0, "false_accept": 0.0, "wilson_tn_lower": 0.8865, "wilson_tp_lower": 0.8865},
+      "param_header_mutation": {"fresh_n": 30, "stale_n": 30, "tn": 30, "fp": 0, "tp": 30, "fn": 0, "tn_rate": 1.0, "tp_rate": 1.0, "false_accept": 0.0, "wilson_tn_lower": 0.8865, "wilson_tp_lower": 0.8865},
+      "cache_expiry": {"fresh_n": 30, "stale_n": 30, "tn": 30, "fp": 0, "tp": 30, "fn": 0, "tn_rate": 1.0, "tp_rate": 1.0, "false_accept": 0.0, "wilson_tn_lower": 0.8865, "wilson_tp_lower": 0.8865},
+      "stable": {"fresh_n": 30, "stale_n": 0, "tn": 30, "fp": 0, "tp": 0, "fn": 0, "tn_rate": 1.0, "tp_rate": null, "false_accept": null, "wilson_tn_lower": 0.8865},
+      "noise_A_phone": {"fresh_n": 50, "stale_n": 0, "tn": 50, "fp": 0, "tp": 0, "fn": 0, "tn_rate": 1.0, "tp_rate": null, "false_accept": null, "wilson_tn_lower": 0.9286},
+      "noise_B_nickname": {"fresh_n": 50, "stale_n": 0, "tn": 50, "fp": 0, "tp": 0, "fn": 0, "tn_rate": 1.0, "tp_rate": null, "false_accept": null, "wilson_tn_lower": 0.9286},
+      "noise_C_null": {"fresh_n": 50, "stale_n": 0, "tn": 50, "fp": 0, "tp": 0, "fn": 0, "tn_rate": 1.0, "tp_rate": null, "false_accept": null, "wilson_tn_lower": 0.9286}
+    },
+    "baselines": {
+      "B-NO-GUARD": {"tn_rate": 1.0, "false_accept": 1.0, "delta_vs_spider": 1.0},
+      "B-JACCARD-ONLY": {"tn_rate": 1.0, "false_accept": 0.6667, "tp": 30, "fn": 60, "tn": 120, "fp": 0},
+      "B-HEADER-ONLY": {"tn_rate": 1.0, "false_accept": 0.3333, "tp": 60, "fn": 30, "tn": 120, "fp": 0}
+    },
+    "bootstrap_ci": {
+      "tn_95ci": [1.0, 1.0],
+      "fa_95ci": [0.0, 0.0],
+      "unk_95ci": [0.4286, 0.4286],
+      "ece_95ci": [0.0929, 0.0929],
+      "ece_fresh_95ci": [0.05, 0.05],
+      "ece_stale_95ci": [0.15, 0.15]
+    },
+    "ece_bins": [
+      {"bin": [0.0, 0.1], "n": 0, "acc": null, "conf": null, "contrib": 0},
+      {"bin": [0.1, 0.2], "n": 0, "acc": null, "conf": null, "contrib": 0},
+      {"bin": [0.2, 0.3], "n": 0, "acc": null, "conf": null, "contrib": 0},
+      {"bin": [0.3, 0.4], "n": 0, "acc": null, "conf": null, "contrib": 0},
+      {"bin": [0.4, 0.5], "n": 0, "acc": null, "conf": null, "contrib": 0},
+      {"bin": [0.5, 0.6], "n": 0, "acc": null, "conf": null, "contrib": 0},
+      {"bin": [0.6, 0.7], "n": 0, "acc": null, "conf": null, "contrib": 0},
+      {"bin": [0.7, 0.8], "n": 0, "acc": null, "conf": null, "contrib": 0},
+      {"bin": [0.8, 0.9], "n": 90, "acc": 1.0, "conf": 0.85, "contrib": 0.0643},
+      {"bin": [0.9, 1.0], "n": 120, "acc": 1.0, "conf": 0.95, "contrib": 0.0286}
+    ],
+    "wilson": {"tn_lower": 0.969, "tn": 120, "fp": 0, "n_fresh": 120, "fa_upper": 0.0409},
+    "cost_all_int": true,
+    "within_std": {
+      "dom_drift": {"jaccard_std": 0.25, "cost_std": 0.0, "freshness_std": 0.5},
+      "param_header_mutation": {"jaccard_std": 0.0, "cost_std": 0.0, "freshness_std": 0.5},
+      "cache_expiry": {"jaccard_std": 0.0, "cost_std": 0.0, "freshness_std": 0.5},
+      "stable": {"jaccard_std": 0.0, "cost_std": 0.0, "freshness_std": 0.0},
+      "noise_A_phone": {"jaccard_std": 0.0, "cost_std": 0.0, "freshness_std": 0.0},
+      "noise_B_nickname": {"jaccard_std": 0.0, "cost_std": 0.0, "freshness_std": 0.0},
+      "noise_C_null": {"jaccard_std": 0.0, "cost_std": 0.0, "freshness_std": 0.0}
+    },
+    "M-WILSON-TN-LOWER": 0.969,
+    "M-WILSON-FA-UPPER": 0.0409
+  },
+  "controls": {
+    "B-NO-GUARD": {
+      "id": "B-NO-GUARD",
+      "description": "No freshness guard: same 210-request workload, always EXECUTABLE when preconditions pass, never UNKNOWN",
+      "expected": "false_accept ~1.0, UNKNOWN=0, delta vs SPIDER >=0.15",
+      "observed": "false_accept=1.0, TN=1.0, UNKNOWN=0, delta 1.0 vs SPIDER 0.0",
+      "pass": true,
+      "evidence": "research/experiments/EXP-GRAPH-35940399935/raw_evidence/metrics.json baselines.B-NO-GUARD delta_vs_spider=1.0"
+    },
+    "B-JACCARD-ONLY": {
+      "id": "B-JACCARD-ONLY",
+      "description": "Ablation freshness uses only DOM field-set Jaccard <0.85, ignoring Cache-Control/ETag and endpoint mutation",
+      "expected": "FA ~0.6667 TP 30/90 fails param_header+cache families, proving signal isolation",
+      "observed": "false_accept=0.6667 TP 30/90 TN 1.0 only dom_drift detected, param_header and cache_expiry missed",
+      "pass": true,
+      "evidence": "research/experiments/EXP-GRAPH-35940399935/raw_evidence/metrics.json baselines.B-JACCARD-ONLY"
+    },
+    "B-HEADER-ONLY": {
+      "id": "B-HEADER-ONLY",
+      "description": "Ablation freshness uses only Cache-Control+ETag+response-derived header mutation, ignoring DOM drift",
+      "expected": "FA ~0.3333 TP 60/90 fails dom_drift family",
+      "observed": "false_accept=0.3333 TP 60/90 TN 1.0 dom_drift missed, param_header+cache detected",
+      "pass": true,
+      "evidence": "research/experiments/EXP-GRAPH-35940399935/raw_evidence/metrics.json baselines.B-HEADER-ONLY"
+    },
+    "PC-STALE-DETECTION": {
+      "id": "PC-STALE-DETECTION",
+      "description": "Deterministic injected stale responses at request >= DRIFT_POINT per family must be flagged stale/UNKNOWN with TP>=0.85 per family",
+      "expected": "TP>=0.85 Wilson lower>0.75 per family",
+      "observed": "dom_drift TP=1.0 lower 0.8865, param_header_mutation TP=1.0 lower 0.8865, cache_expiry TP=1.0 lower 0.8865",
+      "pass": true,
+      "evidence": "research/experiments/EXP-GRAPH-35940399935/raw_evidence/metrics.json per_family"
+    },
+    "NC-FRESH-RETAIN": {
+      "id": "NC-FRESH-RETAIN",
+      "description": "Fresh responses (request <DRIFT_POINT) must be retained EXECUTABLE with TN>=0.85 Wilson lower>0.75, 304-exclusion deterministic",
+      "expected": "TN>=0.85 Wilson lower>0.75",
+      "observed": "TN=1.0 Wilson lower 0.969 (120/120), stable family TN=1.0 lower 0.8865 (30/30), 304 returned deterministically when If-None-Match matches fresh ETag and marked not stale",
+      "pass": true,
+      "evidence": "research/experiments/EXP-GRAPH-35940399935/raw_evidence/metrics.json counts and per_family.stable, raw_evidence/execution_results.json status 304 entries"
+    },
+    "NC-NOISE-IMMUNITY": {
+      "id": "NC-NOISE-IMMUNITY",
+      "description": "Frozen stimulus 15 fresh trajectories (5 per churn variant) with optional-field churn/null that must NOT trigger staleness, FA<=0.10",
+      "expected": "FA<=0.10 on 150 noise requests (phone p0.3, nickname p0.3, email null p0.2)",
+      "observed": "FA=0.0 on 150 noise requests (noise_A 50/50, noise_B 50/50, noise_C 50/50 all EXECUTABLE), TN noise 1.0, Jaccard required-filtered stays 1.0, etag_changed without cache_expiry not flagged",
+      "pass": true,
+      "evidence": "research/experiments/EXP-GRAPH-35940399935/raw_evidence/metrics.json M-FA-NOISE 0.0, per_family noise_*"
+    },
+    "V1_DETERMINISTIC_VERIFICATION": {
+      "id": "V1_DETERMINISTIC_VERIFICATION",
+      "description": "postcondition verification uses only src/spider/kernel.py _matches exact equality",
+      "expected": "all requests verified via _matches",
+      "observed": "all 360 requests verified True via _matches on required_slots filtered body without _template, no heuristic similarity, logged per request",
+      "pass": true,
+      "evidence": "research/graph/freshness_detection/execute_single_resource_staleness.py _matches, research/experiments/EXP-GRAPH-35940399935/raw_evidence/execution_results.json verified field"
+    },
+    "V2_HONEST_SUM_COUNTER_CONSTANT": {
+      "id": "V2_HONEST_SUM_COUNTER_CONSTANT",
+      "description": "per-trajectory-reset honest integer sum counter base 4 per request, no jitter parity f*6 n*3200 bijective proxy, std 0 valid",
+      "expected": "all costs integers equal 4, trajectory sum 40, vector std 0 valid per V2 narrowing",
+      "observed": "cost 4 integer for all 360 requests, trajectory sums 40 each, total 1440, all_int true, vector std 0.0 correctly not failing V5",
+      "pass": true,
+      "evidence": "research/experiments/EXP-GRAPH-35940399935/raw_evidence/cost_logs.json and metrics M-COST-SPIDER-SUM 1440"
+    },
+    "V3_NO_JITTER_NO_PROXY": {
+      "id": "V3_NO_JITTER_NO_PROXY",
+      "description": "cost vector contains no injected variance, all integers equal",
+      "expected": "no parity injection, no Gaussian jitter, no bijective proxy",
+      "observed": "all costs integers equal 4, no variance, no parity traj_idx%2, no f*6",
+      "pass": true,
+      "evidence": "research/experiments/EXP-GRAPH-35940399935/raw_evidence/metrics.json cost_all_int true, cost_logs.json"
+    },
+    "V4_RHO_SHUFFLED_MAX_TRAJECTORY_GROUPED": {
+      "id": "V4_RHO_SHUFFLED_MAX_TRAJECTORY_GROUPED",
+      "description": "max |Pearson rho| between shuffled cost and outcome over 1000 trajectory-grouped permutations, report max (primary) and mean",
+      "expected": "max |rho| <0.20 trajectory-grouped",
+      "observed": "max 0.0 mean 0.0 observed 0.0 <0.20, shuffled whole trajectory blocks preserving within-dependence (6 per family +3 stable), honest constant cost gives zero tautology",
+      "pass": true,
+      "evidence": "research/experiments/EXP-GRAPH-35940399935/raw_evidence/metrics.json M-RHO-SHUFFLED-MAX 0.0"
+    },
+    "V5_WITHIN_FAMILY_STD_OUTCOME": {
+      "id": "V5_WITHIN_FAMILY_STD_OUTCOME",
+      "description": "within-each-drift-family std of freshness score >0 for discrimination, cost std exempted, stable exempted",
+      "expected": "drift families freshness std >0",
+      "observed": "dom_drift freshness std 0.5, param_header 0.5, cache_expiry 0.5 >0, stable and noise 0.0 exempted, cost std 0.0 exempted per V2 narrowing, jaccard 0/0.25 not gating",
+      "pass": true,
+      "evidence": "research/experiments/EXP-GRAPH-35940399935/raw_evidence/metrics.json within_std and M-WITHIN-FAMILY-STD-MIN-FRESHNESS 0.5"
+    },
+    "V6_TRAJECTORY_GROUPED_BOOTSTRAP_5000": {
+      "id": "V6_TRAJECTORY_GROUPED_BOOTSTRAP_5000",
+      "description": "5000 family-stratified trajectory-grouped bootstrap preserving family proportions",
+      "expected": "5000 iterations resampling trajectory level with family stratification",
+      "observed": "5000 iterations resampling 6 per drift family +3 stable +15 noise grouped, preserving counts, percentile 95% CIs TN [1.0,1.0] FA [0.0,0.0] unk [0.4286,0.4286] ECE [0.0929,0.0929] degenerate at ceiling but valid",
+      "pass": true,
+      "evidence": "research/experiments/EXP-GRAPH-35940399935/raw_evidence/bootstrap_ci.json"
+    },
+    "V7_WILSON_CI": {
+      "id": "V7_WILSON_CI",
+      "description": "Wilson score interval z=1.96 on raw counts for TN and FA",
+      "expected": "Wilson lower for TN >0.75, upper for FA <0.10 when perfect",
+      "observed": "TN 120/120 lower 0.969 >0.75, per-family 30/30 lower 0.8865, FA 0/90 upper 0.0409 <0.10",
+      "pass": true,
+      "evidence": "research/experiments/EXP-GRAPH-35940399935/raw_evidence/metrics.json wilson"
+    },
+    "V8_ECE_CALIBRATION_RECALIBRATED": {
+      "id": "V8_ECE_CALIBRATION_RECALIBRATED",
+      "description": "ECE 10 bins on recalibrated confidence 0.95 fresh /0.85 stale, global <=0.15 and per-class each <=0.15, UNKNOWN prevalence-aware bound",
+      "expected": "global ECE <=0.15, per-class fresh <=0.15, per-class stale <=0.15, UNKNOWN in [0.00,0.50] and [0.3786,0.4986]",
+      "observed": "global 0.0929 <=0.15, fresh 0.05 <=0.15, stale 0.15 at threshold, UNKNOWN 0.4286 in [0.00,0.50] and in [0.3786,0.4986], both gates pass with satisfiable recalibration",
+      "pass": true,
+      "evidence": "research/experiments/EXP-GRAPH-35940399935/raw_evidence/metrics.json M-ECE-SPIDER 0.0929, ece_bins"
+    },
+    "V14_PER_TRAJECTORY_OBSERVED_CACHING": {
+      "id": "V14_PER_TRAJECTORY_OBSERVED_CACHING",
+      "description": "cache postconditions from observed pre-drift requests 1-3 per trajectory not global precomputed, response-derived endpoint via _template",
+      "expected": "per-trajectory observed caching, response-derived endpoint comparison not client dict self-comparison, 304 marked not stale",
+      "observed": "per-trajectory cache built from requests 1-3 per trajectory (first valid), 36 trajectories cached, endpoint mutation detected via response-derived _template query_params and X-Csrf-Token header name/value from response vs cached response, 304 deterministic If-None-Match handling marked not stale",
+      "pass": true,
+      "evidence": "research/experiments/EXP-GRAPH-35940399935/raw_evidence/per_trajectory_cache.json 36 entries, execution_results.json _template fields"
+    }
+  },
+  "artifacts": [
+    {"path": "research/experiments/EXP-GRAPH-35940399935/raw_evidence/execution_results.json", "sha256": "84f1678c388fb2b7ed0f6458d77abc57284102fd1806172ae82053276bb88002", "role": "raw"},
+    {"path": "research/experiments/EXP-GRAPH-35940399935/raw_evidence/request_logs.json", "sha256": "e8af984f87259745448828e5f0fd7b8420ccbd7e9fbfffec6ec00ef6ff87076b", "role": "raw"},
+    {"path": "research/experiments/EXP-GRAPH-35940399935/raw_evidence/metrics.json", "sha256": "84f824b9e3cc462f36645092b51214a049e4dd2523f4a2ed06e4ec850a5cf847", "role": "derived"},
+    {"path": "research/experiments/EXP-GRAPH-35940399935/raw_evidence/cost_logs.json", "sha256": "440806df77a0af05ee372cb06056437c5655211302e76a4351f2b9d1b807149a", "role": "derived"},
+    {"path": "research/experiments/EXP-GRAPH-35940399935/raw_evidence/bootstrap_ci.json", "sha256": "9cb508031e3c572e64da70ff62fef10616a9c95dbe1b573109036b64ddde6511", "role": "derived"},
+    {"path": "research/experiments/EXP-GRAPH-35940399935/raw_evidence/per_trajectory_cache.json", "sha256": "760183d77710b55c2a44fd3f288dd170c2c13a757915d82d499abcccafb65a0c", "role": "derived"},
+    {"path": "research/experiments/EXP-GRAPH-35940399935/raw_evidence/decision.json", "sha256": "fbc62ce22cf2bfc6bef1a52ce70d044e2fff2f19f85e014c1fa0a8a8ebfc2d3c", "role": "derived"},
+    {"path": "research/experiments/EXP-GRAPH-35940399935/raw_evidence/summary.json", "sha256": "0efd64241b1e9fadf31cb6a2bad5bcd0503a723cce0081abe66d16a3cce6d5e9", "role": "derived"},
+    {"path": "research/graph/freshness_detection/execute_single_resource_staleness.py", "sha256": "ef8b3460ed9e3586e5e22ab5ce074aa41a117da48aa9660e904e68a2b31749ba", "role": "code"},
+    {"path": "src/spider/kernel.py", "sha256": "46929b3a951df48d7f9d1fd850871073c0d91c1868aa117e13d389fe274e8d61", "role": "code"}
+  ],
+  "observations": [
+    "RAW: TN_SPIDER 1.0 (120/120 fresh retained EXECUTABLE) Wilson lower 0.969 >0.75 on staleness pool N=210 (120 fresh+90 stale) via deterministic _matches verification",
+    "RAW: false_accept_SPIDER 0.0 (0/90 stale accepted as EXECUTABLE) Wilson upper 0.0409 <0.10, beats B-NO-GUARD false_accept 1.0 by delta 1.0 >=0.15",
+    "RAW: per-family TN 1.0 and TP 1.0 for each drift family (30 fresh+30 stale each) Wilson lower 0.8865, stable TN 1.0 (30/30) lower 0.8865",
+    "RAW: PC-STALE-DETECTION TP 1.0 per family >=0.85, NC-FRESH-RETAIN TN 1.0 >=0.85, NC-NOISE-IMMUNITY FA 0.0 on 150 noise requests (50 phone churn, 50 nickname churn, 50 null churn) TN 1.0",
+    "RAW: UNKNOWN rate 0.4286 (90/210 stale flagged UNKNOWN) within prevalence-aware [0.00,0.50] and within [0.3786,0.4986] (stale_rate 0.4286)",
+    "RAW: ECE recalibrated 0.95 fresh/0.85 stale global 0.0929 <=0.15, per-class fresh 0.05 <=0.15 stale 0.15 <=0.15, bins [0.8,0.9] n90 stale conf0.85 contrib0.0643 [0.9,1.0] n120 fresh conf0.95 contrib0.0286, bootstrap ECE CI [0.0929,0.0929]",
+    "RAW: B-JACCARD-ONLY false_accept 0.6667 TP 30/90 only dom_drift, B-HEADER-ONLY false_accept 0.3333 TP 60/90 fails dom_drift, both worse than full guard proving combined signal necessity",
+    "RAW: Honest sum counter constant integer 4 per request trajectory sum 40 total 1440 vector std 0.0 valid per V2, all_int true, max trajectory-grouped |rho| 0.0 <0.20 (1000 perms shuffling whole trajectory blocks), observed rho 0.0",
+    "RAW: Within-family freshness std min 0.5 >0 for drift families (dom 0.5 param 0.5 cache 0.5), stable/noise 0.0 exempted, cost std 0.0 exempted per V2 narrowing",
+    "RAW: Trajectory-grouped family-stratified bootstrap 5000 iterations completed preserving family counts (6 per drift +3 stable +15 noise), TN CI [1.0,1.0] FA [0.0,0.0] unk [0.4286,0.4286] ECE [0.0929,0.0929] degenerate at ceiling but valid per V5 non-degenerate freshness std",
+    "RAW: Per-trajectory observed caching from requests 1-3 per trajectory (36 trajectories, first valid), endpoint mutation response-derived via _template field and X-Csrf-Token header vs cached response, 304 deterministic If-None-Match path exercised and marked not stale",
+    "RAW: Single-resource isolation all GET /resource/{id} on 127.0.0.1 ephemeral stdlib http.server, no Docker/external, deterministic ETag SHA256(canonical_json_body_without_template)[:16], Cache-Control max-age 60 vs 0"
+  ],
+  "validity_notes": [
+    "V1 deterministic _matches passes on all 360 requests using src/spider/kernel.py exact equality on required_slots filtered body without _template",
+    "V2 honest constant sum-counter exempt: vector std 0.0 is VALID for constant cost (base 4 per request), V5 applies only to outcome-bearing freshness/accuracy not cost vector per FIX-1; all costs integers no jitter parity f*6 n*3200",
+    "V4 trajectory-grouped max |rho| 0.0 <0.20 covers prior product-economics tautology and mean-vs-max misreporting; implemented by shuffling whole trajectory blocks not individual requests preserving dependence, director prior on trajectory-grouped resampling satisfied",
+    "V5 within-family std gate passes via freshness binary 0/1 giving std 0.5 for drift families; cost std 0 excluded per V2 narrowing, stable exempted (fresh-only), bootstrap CI degenerate [1.0,1.0] at ceiling is ceiling effect not high precision but valid because freshness std >0",
+    "V8 recalibrated satisfiability proof holds: 120 fresh at 0.95 contributes 0.05*120/210=0.0286, 90 stale at 0.85 contributes 0.15*90/210=0.0643 total 0.0929 <0.15, per-class fresh 0.05 stale 0.15 at threshold both <=0.15, UNKNOWN 0.4286 within prevalence-aware [0.00,0.50] and [0.3786,0.4986]",
+    "Representation loss disclosed: DOM tokens via extract_field_types ignore value magnitudes, nested depth beyond flat keys, and map NoneType to string for NC-NOISE null handling; ETag truncated 16 hex irrelevant for 360 requests; endpoint template ignores param value semantics intentionally testing structural drift; per-trajectory cache uses only first valid of 3 observations; required-path filtering {id,name,email} excludes optional phone/nickname for Jaccard to achieve noise-immunity while still detecting dom_drift via id type change and added phone via required id type change",
+    "Jaccard required-filtered: noise phone/nickname are optional not in required set so Jaccard stays 1.0 not flagged; dom_drift still flagged because id integer vs string type difference changes required set (intersection 2 union 4 =>0.5); param_header and cache families use orthogonal header/cache signals separated",
+    "Single-resource synthetic ceiling only: stdlib http.server flat JSON, one resource type, orthogonal families separate trajectories, no cross-resource scheduling confound, no production Flask/JWT/WAL/CDN/session rotation, no distributed multi-node shared WAL",
+    "No LLM/browser/Docker, deterministic drift injection at DRIFT_POINT 6 per trajectory, no outcome-dependent adaptation, no external network",
+    "All material facts logged to raw_evidence with SHA256; no fact exists only in Actions log; stable metric/control ids reused verbatim for AUDIT"
+  ],
+  "unresolved": [
+    "Rebalanced 15% stale prevalence (e.g., 180 fresh+30 stale) not tested here, keeps 42.8% to preserve power, acknowledges CI degeneracy at ceiling as valid but not informative about sparse stale regime",
+    "Transfer to real APIs with production ETag/Cache-Control/If-None-Match 304 session token rotation Flask/JWT/WAL/CDN not tested, disclosed synthetic ceiling",
+    "Correlated latent non-determinism where DOM_before correlates with latent state determining S_next not tested, only independent deterministic drift per director mandate",
+    "Whether degenerate bootstrap CIs [1.0,1.0] would become informative under noisier threshold or lower prevalence not tested, remains ceiling effect",
+    "Miss pattern content change with unchanged max-age=60 (cache_expiry without cache_expiry flag) not injected, ETag change alone not flagged per AND logic, untested boundary"
+  ]
+}

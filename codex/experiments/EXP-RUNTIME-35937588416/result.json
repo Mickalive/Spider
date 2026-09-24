@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-35937588416",
+  "lane": "runtime",
+  "status": "MEASUREMENT_INVALID",
+  "outcome": "INCONCLUSIVE",
+  "metrics": {},
+  "controls": {},
+  "artifacts": [
+    {
+      "path": "/home/runner/work/Spider/Spider/research/experiments/EXP-RUNTIME-35937588416/run_experiment.py",
+      "sha256": null,
+      "role": "code"
+    },
+    {
+      "path": "/home/runner/work/Spider/Spider/research/experiments/EXP-RUNTIME-35937588416/raw_freshness_observations.jsonl",
+      "sha256": null,
+      "role": "raw"
+    }
+  ],
+  "observations": [
+    "Freshness n_non304=0 (target >=800)",
+    "Freshness n_304=0",
+    "HS256 valid success rate=0.0000",
+    "Batch distinct timestamps=0",
+    "Header-only scheduling r=0.0000",
+    "Header-only variance FP=0.000000",
+    "Honest |rho_shuffled|=0.0000",
+    "Honest within-f std=0.0000",
+    "HIT byte identity=N/A",
+    "HIT greedy correct=0.0000",
+    "Browser provision ok=False",
+    "Browser AX nodes=0",
+    "Browser PC-HEALTH=0",
+    "Outcome: INCONCLUSIVE"
+  ],
+  "validity_notes": [
+    "HEALTH_GATE_FAILED: nginx+Flask did not respond 200+X-Worker-Pid within 15s"
+  ],
+  "unresolved": []
+}
