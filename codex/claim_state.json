@@ -1539,6 +1539,16 @@
         "reason": "MEASUREMENT_INVALID per audit: frozen C-FRESHNESS C3 orthogonality not measured as preregistered. Producer reports stratified r=0.305 CI [0.249,0.358] TOST p 0.999 fails delta 0.15, but structural was hash(headers_minus CLEN/ETag/Content-Range/Cache-Control)%10000 (run_experiment.py 296-305) not frozen header-only Jaccard excluding CLEN/ETag only, excluding Cache-Control signal; TOST recomputed with correct tail still fails (CI upper 0.358>0.15) but instrument off-design makes result uninformative for H2. Health gate 0 missing, scheduling r 0.066<0.30, n_non304 1070, per-node 0.667 replication, noise FP 0.0 verified, yet C3 not measured. Sticky arm STICKY_PRESEEDED invalid (sessions seeded in both DBs 2401-2405) with skew 0.6<0.90 and producer TN null vs raw 446 rows TN=1.0 contradiction. No support or falsification for header-only orthogonality; claim remains EXPERIMENTAL bounded to parent MIXED ceiling (shared TN 0.974 lo 0.955, orthogonality hash(body) r=0.721 falsified)."
       },
       {
+        "experiment_id": "EXP-RUNTIME-35913894863",
+        "lane": "runtime",
+        "created_at": "2026-09-23T20:08:16.123848+00:00",
+        "decision": "MEASUREMENT_INVALID",
+        "source_commit": "52f81b8ed7eebeef002662efe73c7523d9aa92e3",
+        "claim_id": "C-FRESHNESS",
+        "status": "MEASUREMENT_INVALID",
+        "reason": "Distributed C-FRESHNESS primary intervention (shared WAL at /tmp/spider-runtime/35913894863/shared.db HS256>=32 header-only Jaccard MINUS {Content-Length,ETag,W-ETag,Content-Range} de-confounded r<0.30 with per-batch SELECT >=27 ts, If-None-Match/ETag->304 n_non304>=800, stratified |r|<0.15 TOST delta0.15, 8/8 variance FP<=0.15, C1 TN>=0.85, sticky >=10 URIs skew>0.90) blocked by same health gate: 0 observations, C1-FRESHNESS pass null evidence HEALTH_GATE_FAILED, C2 0/800, C3 pooled r null, session_status TN null. No valid behavioral (graded session_status_check) or structural header-only measurement. Prior LOCAL orthogonality CONFIRMED delta0.15 (EXP-GRAPH-35389145821 r=0.0022 CI upper0.092 TOST p0.0006 n480 audit PASS; distributed r=-0.038 p2e-08 n844) remains cleanest evidence, not superseded. Sticky affinity vs shared-store remains UNKNOWN. No status change."
+      },
+      {
         "experiment_id": "EXP-PRODUCT-35916130502",
         "lane": "product",
         "created_at": "2026-09-23T20:28:21.427873+00:00",
@@ -3909,6 +3919,16 @@
         "claim_id": "C-MEAS-VALID",
         "status": "MEASUREMENT_INVALID",
         "reason": "MEASUREMENT_INVALID per independent audit: no frozen C-MEAS-VALID measurement achieved. Honest-cost counters are global cumulative (never reset, 17->14966, trajectory cost corr 0.371 with position) with injected random jitter (run_experiment.py 1166-1168) violating frozen no-jitter/no-n*3200/no-f*6.0; B=5000 permutation is 200 perms mean-|rho| with no p-value and placeholder width dummy=1.0/pstdev 46529; structural signal is hash-of-headers%10000 excluding Cache-Control (9 values) not frozen header-only Jaccard; TOST p_upper wrong tail Phi(z) 0.999... vs correct ~4.5e-08; browser branch 0 observations (playwright ModuleNotFoundError); provenance copies parent IDs (35900903994 vs 35908617140) and sha mismatch 9dbd9d41 vs 8237d65d. Recomputed shared numbers (TN session 0.928 lo 0.872, n_non304 1070, workers 603/597) match producer but cannot credit frozen H1. Claim remains EXPERIMENTAL bounded to prior single-host loopback (EXP-RUNTIME-35900903994 MIXED)."
+      },
+      {
+        "experiment_id": "EXP-RUNTIME-35913894863",
+        "lane": "runtime",
+        "created_at": "2026-09-23T20:08:16.123848+00:00",
+        "decision": "MEASUREMENT_INVALID",
+        "source_commit": "52f81b8ed7eebeef002662efe73c7523d9aa92e3",
+        "claim_id": "C-MEAS-VALID",
+        "status": "MEASUREMENT_INVALID",
+        "reason": "Health-gated substrate never established: GET /health via nginx 127.0.0.1:19851 returned 0/15 200+X-Worker-Pid within 15s due to gunicorn WSGI import failure (module-level app=create_app('/tmp/spider-runtime/35913894863/shared.db') executes init_db() before directory exists, sqlite unable to open database file). Raw freshness artifacts 0 lines sha e3b0c442... confirms 0 samples collected; all metrics 0/0 (shared_freshness_c1_tn_mean 0.0, n_non304 0, hs256_valid_success 0.0, honest_cost_shuffled_rho 0.0, hit_nginx 0/0, bg_provision false). Audit recomputed n_total 0 matches producer, agreement true. Honest-cost, header-only Jaccard, HIT oracle-free greedy, and browser CDP untested; code stubs (random.gauss honest rho, hardcoded 330/330 HIT, hardcoded AX15) would trigger COST_ARTIFACT_STILL_PRESENT if executed. Infrastructure failure per contract, not falsification. Ceiling unchanged at EXPERIMENTAL localhost."
       },
       {
         "experiment_id": "EXP-PHYSICS-35915247766",
