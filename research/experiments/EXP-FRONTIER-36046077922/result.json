@@ -1,0 +1,85 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-FRONTIER-36046077922",
+  "lane": "frontier",
+  "status": "MEASUREMENT_INVALID",
+  "outcome": "NOT_APPLICABLE",
+  "metrics": {
+    "live_available": false,
+    "browsergym_available": false,
+    "browsergym_cdp_available": false,
+    "intel_families": 0,
+    "intel_jaccard_max": 1.0,
+    "intel_product_subtree": false,
+    "runtime_available": false,
+    "physics_parked": true
+  },
+  "controls": {
+    "PC-SYNTHETIC-PIPELINE": {
+      "expected": "BC>1.0 p<0.01",
+      "observed": "not_run",
+      "pass": null,
+      "evidence_ref": "dependency_unavailable"
+    },
+    "PC-BROWSERGYM-HETEROGENEITY": {
+      "expected": "\u226510 families Jaccard<0.30 AX>10",
+      "observed": "not_run",
+      "pass": null,
+      "evidence_ref": "dependency_unavailable"
+    },
+    "PC-CEILING-NONDEGENERATE": {
+      "expected": "H\u22650.4 K=1, H\u22650.2 K=3",
+      "observed": "not_run",
+      "pass": null,
+      "evidence_ref": "dependency_unavailable"
+    },
+    "PC-RUNTIME-HEALTH": {
+      "expected": "n_non304\u2265800 stratified, |rho_shuffled|<0.20",
+      "observed": "not_run",
+      "pass": null,
+      "evidence_ref": "dependency_unavailable"
+    },
+    "NC-TRAJECTORY-GROUPED-CENTERED": {
+      "expected": "|BC_shuffled|<0.05 |mean|<0.05 p\u22650.20",
+      "observed": "not_run",
+      "pass": null,
+      "evidence_ref": "dependency_unavailable"
+    },
+    "NC-LEAKAGE-FILTERED": {
+      "expected": "shuffled |BC|<0.05 p\u22650.20",
+      "observed": "not_run",
+      "pass": null,
+      "evidence_ref": "dependency_unavailable"
+    },
+    "NC-TRAIN-VOCAB-ISOLATED": {
+      "expected": "0 leakage",
+      "observed": "not_run",
+      "pass": null,
+      "evidence_ref": "dependency_unavailable"
+    },
+    "NC-SITE-HOLDOUT": {
+      "expected": "LOFO within 50%, site_id PMI\u22480",
+      "observed": "not_run",
+      "pass": null,
+      "evidence_ref": "dependency_unavailable"
+    }
+  },
+  "artifacts": [],
+  "observations": [
+    "BrowserGym live collection: available=False, CDP=False",
+    "Intel manifest: families=0, jaccard_max=1.0000, product_subtree=False",
+    "Runtime substrate: available=False",
+    "Physics PARK: True",
+    "MEASUREMENT_INVALID: Required dependencies (Intel manifest, Runtime substrate, BrowserGym CDP) not available. This is infrastructure failure, not scientific falsification."
+  ],
+  "validity_notes": [
+    "BrowserGym not available: BrowserGym import failed: ModuleNotFoundError: No module named 'browsergym'",
+    "Intel diverse-site manifest unavailable: No Intel diverse-site manifest found at expected paths",
+    "Runtime health-gated substrate unavailable: No Runtime substrate found at expected paths"
+  ],
+  "unresolved": [
+    "Install playwright, browsergym-core, agentlab for live 1280x720 CDP AX>10 collection",
+    "Produce Intel manifest with \u226510 families Jaccard<0.30 product-subtree anchored at 1280x720 from WebGym 292k or WebArena-Verified v2 192/36",
+    "Deploy Runtime single-worker sticky Flask HS256+nginx with honest per-trajectory counters, If-None-Match/ETag TTL 60s, n_non304\u2265800 stratified, trajectory-grouped |rho_shuffled|<0.20"
+  ]
+}
