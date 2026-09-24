@@ -1,0 +1,169 @@
+{
+  "full_stats": {
+    "complementary_frac_mean": 1.0,
+    "complementary_frac_min": 1.0,
+    "k_distribution": {
+      "2": 30,
+      "3": 10
+    },
+    "nonempty_entries": 40
+  },
+  "joint_full": [
+    {
+      "alias_enabled": true,
+      "complementary_frac": 1.0,
+      "covered_families": [
+        "header"
+      ],
+      "k": 2,
+      "observed_families": [
+        "header"
+      ],
+      "remaining_families": [],
+      "routing_enabled": true,
+      "selected": [
+        "m-alias-0-0-e0",
+        "m-alias-0-0-e0-extra-header"
+      ],
+      "task_id": "alias-0-0"
+    },
+    {
+      "alias_enabled": true,
+      "complementary_frac": 1.0,
+      "covered_families": [
+        "header"
+      ],
+      "k": 2,
+      "observed_families": [
+        "header"
+      ],
+      "remaining_families": [],
+      "routing_enabled": true,
+      "selected": [
+        "m-alias-0-1-e0-extra-header",
+        "m-alias-0-1-e0"
+      ],
+      "task_id": "alias-0-1"
+    }
+  ],
+  "joint_no_alias": [
+    {
+      "alias_enabled": false,
+      "complementary_frac": 1.0,
+      "covered_families": [
+        "auth",
+        "header",
+        "query"
+      ],
+      "k": 2,
+      "observed_families": [
+        "header"
+      ],
+      "remaining_families": [],
+      "routing_enabled": true,
+      "selected": [
+        "m-alias-0-0-e0",
+        "m-alias-0-0-e5"
+      ],
+      "task_id": "alias-0-0"
+    },
+    {
+      "alias_enabled": false,
+      "complementary_frac": 1.0,
+      "covered_families": [
+        "body",
+        "header"
+      ],
+      "k": 2,
+      "observed_families": [
+        "header"
+      ],
+      "remaining_families": [],
+      "routing_enabled": true,
+      "selected": [
+        "m-alias-0-1-e0",
+        "m-alias-0-1-e6"
+      ],
+      "task_id": "alias-0-1"
+    }
+  ],
+  "joint_no_both": [
+    {
+      "alias_enabled": false,
+      "complementary_frac": 1.0,
+      "covered_families": [
+        "auth",
+        "header",
+        "query"
+      ],
+      "k": 2,
+      "observed_families": [
+        "header"
+      ],
+      "remaining_families": [],
+      "routing_enabled": false,
+      "selected": [
+        "m-alias-0-0-e0",
+        "m-alias-0-0-e5"
+      ],
+      "task_id": "alias-0-0"
+    },
+    {
+      "alias_enabled": false,
+      "complementary_frac": 1.0,
+      "covered_families": [
+        "body",
+        "header"
+      ],
+      "k": 2,
+      "observed_families": [
+        "header"
+      ],
+      "remaining_families": [],
+      "routing_enabled": false,
+      "selected": [
+        "m-alias-0-1-e0",
+        "m-alias-0-1-e6"
+      ],
+      "task_id": "alias-0-1"
+    }
+  ],
+  "joint_no_routing": [
+    {
+      "alias_enabled": true,
+      "complementary_frac": 1.0,
+      "covered_families": [
+        "header"
+      ],
+      "k": 2,
+      "observed_families": [
+        "header"
+      ],
+      "remaining_families": [],
+      "routing_enabled": false,
+      "selected": [
+        "m-alias-0-0-e0",
+        "m-alias-0-0-e0-extra-header"
+      ],
+      "task_id": "alias-0-0"
+    },
+    {
+      "alias_enabled": true,
+      "complementary_frac": 1.0,
+      "covered_families": [
+        "header"
+      ],
+      "k": 2,
+      "observed_families": [
+        "header"
+      ],
+      "remaining_families": [],
+      "routing_enabled": false,
+      "selected": [
+        "m-alias-0-1-e0-extra-header",
+        "m-alias-0-1-e0"
+      ],
+      "task_id": "alias-0-1"
+    }
+  ]
+}

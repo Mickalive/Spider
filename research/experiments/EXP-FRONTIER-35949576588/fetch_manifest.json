@@ -1,0 +1,23 @@
+{
+  "hateoas_followed": 1,
+  "openapi_bytes": 1172,
+  "openapi_paths": [
+    "/api/data",
+    "/api/auth",
+    "/api/users",
+    "/v2/items",
+    "/v1/orders",
+    "/admin/settings",
+    "/api/reports",
+    "/v3/audit",
+    "/api/v1/data",
+    "/api/v2/data",
+    "/api/v3/data",
+    "/v1/users/${id}",
+    "/api/orders/",
+    "/API/Data"
+  ],
+  "probe_ok": 0,
+  "spec_200": 208,
+  "spec_non_200": 0
+}

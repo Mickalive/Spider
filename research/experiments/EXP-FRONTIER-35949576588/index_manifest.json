@@ -1,0 +1,5 @@
+{
+  "endpoint_vocab": 54,
+  "n_train_episodes": 189,
+  "tfidf_vocab": 52
+}

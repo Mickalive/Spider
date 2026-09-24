@@ -1,0 +1,78 @@
+{
+  "catalog_size": 9,
+  "catalog_variant_classes": {
+    "body::0": {
+      "canonical": "api_token",
+      "members": [
+        "api-token",
+        "apiToken",
+        "api_token"
+      ],
+      "min_pairwise_jaccard": 1.0
+    },
+    "header_auth::0": {
+      "canonical": "scope",
+      "members": [
+        "scope",
+        "scope1",
+        "scopes"
+      ],
+      "min_pairwise_jaccard": 0.6667
+    },
+    "header_token::0": {
+      "canonical": "ApiKey",
+      "members": [
+        "ApiKey",
+        "X-Api-Key",
+        "X_Api_Key"
+      ],
+      "min_pairwise_jaccard": 0.8333
+    },
+    "query::0": {
+      "canonical": "permission",
+      "members": [
+        "permission",
+        "permission_id",
+        "permissions"
+      ],
+      "min_pairwise_jaccard": 0.75
+    }
+  },
+  "families_covered": [
+    "body",
+    "header_auth",
+    "header_token",
+    "query"
+  ],
+  "fit_ops": 180,
+  "jaccard_threshold": 0.6,
+  "per_family_min_pairwise": {
+    "body::0": 1.0,
+    "header_auth::0": 0.6667,
+    "header_token::0": 0.8333,
+    "query::0": 0.75
+  },
+  "train_tasks": 21,
+  "variant_sets": {
+    "body": [
+      "api-token",
+      "apiToken",
+      "api_token"
+    ],
+    "header_auth": [
+      "scope",
+      "scope1",
+      "scopes"
+    ],
+    "header_token": [
+      "ApiKey",
+      "X-Api-Key",
+      "X_Api_Key"
+    ],
+    "query": [
+      "permission",
+      "permission_id",
+      "permissions"
+    ]
+  }
+}

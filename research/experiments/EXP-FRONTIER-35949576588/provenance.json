@@ -1,0 +1,62 @@
+{
+  "experiment_id": "EXP-FRONTIER-35949576588",
+  "lane": "frontier",
+  "status": "COMPLETE",
+  "outcome": "FALSIFIES",
+  "github_run_id": "35949576588",
+  "github_run_attempt": "1",
+  "pre_execute_sha": "a1201ceaa3a223992e5a10121a9a83aa9314f5a2",
+  "frozen_inputs": {
+    "request.json": "355ca3200321039ac184e4cc12d18cd8e44e6a4cf4394788f77803a596bb1cd7",
+    "spec.json": "0223c0f55329cdb9bed24359fa13284e6684edd8e30772485c9249ee230316b9",
+    "prereg.md": "1f03b8b18ddf831c60cc3b2707149a168ac2d55cdc206ad8feb3995f21b6b69a",
+    "freeze.json": "b9057c94c524a11d58f16b11e3d7c2151c6cce3547e34349b1be1cfff3fcf406"
+  },
+  "fixture": {
+    "path": "research/experiments/EXP-FRONTIER-35921359961/tasks_expanded.json",
+    "sha256": "83b7c52dd17848fc8c70d1c629b8d541788e0438249623ea783d2df364467319",
+    "repaired": "genuine multi-variant alias classes >=2 variants Jaccard>=0.6 min 0.66-1.0 + routing versioned mixed tasks + mixed-query dual-key template"
+  },
+  "code": {
+    "path": "research/frontier/run_execute_35949576588.py",
+    "sha256": "77b9887a65c2bde0ebbcfe9e8c801a89d0c301fdafc61a33aa843393b92c3755"
+  },
+  "artifacts": {
+    "raw_evidence.json": {"sha256": "75b2d8073e75bffc264174804ee77337d40f0492a641591e41463ac50f78946a", "role": "raw"},
+    "derived_metrics.json": {"sha256": "5c4af52edeb4e02b4210ad95c9b45491165b7488973cd2117cb4bf7c4efa5c62", "role": "derived"},
+    "alias_catalog_manifest.json": {"sha256": "2433272acf77798cd49d72850798d6e87015897e464d4f3077ef9516006d36e7", "role": "derived"},
+    "endpoint_catalog_manifest.json": {"sha256": "6a83c6dde2efb24209b29868639f7f876183d9d6d62601a069771905adcd953c", "role": "derived"},
+    "hierarchical_manifest.json": {"sha256": "9aba3bc3eae1203ff2d1f0b2e3c658772b06d9e8789f2ad985a4568ee055e46a", "role": "derived"},
+    "routing_manifest.json": {"sha256": "5c2679184af6489e7b57d71d5640a46d5d4b74649c889c92905daecea084472d", "role": "derived"},
+    "fetch_manifest.json": {"sha256": "1d779f933fd23b5b31d9f126dd56e16fbc5ff44e3975c493be5c0ccdeb0499e4", "role": "derived"},
+    "joint_manifest.json": {"sha256": "19d133b8bb3aa8565925cee73ef99b069efa32071b09bb8abc1f0b102e92dd1c", "role": "derived"},
+    "joint_no_alias_manifest.json": {"sha256": "d94d7883f0efcf494622ec1c493d695d3748f57a780ea43c2ca74ae957770b5e", "role": "derived"},
+    "joint_no_routing_manifest.json": {"sha256": "96d4a630a648ecacf22d6f25b1aa5d76fdca82a9afa57e204ec974823d272e08", "role": "derived"},
+    "joint_no_both_manifest.json": {"sha256": "b420f56a687a166ae7dffb7ec9d6bc30bf57122127b13896ae968177e1395c5c", "role": "derived"},
+    "train_split_inventory.json": {"sha256": "908fe5a3b1cee90c8f05e58e249988e41f6deaf5d08bd44875bb178639e659c4", "role": "derived"},
+    "index_manifest.json": {"sha256": "5d0171df01d9835bcead3a3d520ade13a25c6ee1cac0164537cb6a2ed3cb45c6", "role": "derived"},
+    "result.json": {"sha256": "58951520fa6d6488c16d47ce5baf4fa75ceb502e69f24778716ec80a0c8fcab3", "role": "result"},
+    "report.md": {"sha256": "2723d90cb9abbd3113f7c347aee6a3799670f34303817a02048f4286f3c1ef65", "role": "report"}
+  },
+  "environment": {
+    "python": "3.12.14",
+    "numpy": "2.5.3",
+    "scipy": "1.18.1",
+    "sklearn": "1.9.1",
+    "platform": "linux",
+    "seed": 42,
+    "rng": "np.RandomState(42) + random.seed(42) + hashlib.sha256"
+  },
+  "commands": [
+    "python research/frontier/run_execute_35949576588.py"
+  ],
+  "determinism": {
+    "hash": "sha256",
+    "python_hash_used": false,
+    "seed": 42
+  },
+  "producer": {
+    "agent": "muse-spark-1.2-contributor-free",
+    "role": "EXECUTE"
+  }
+}

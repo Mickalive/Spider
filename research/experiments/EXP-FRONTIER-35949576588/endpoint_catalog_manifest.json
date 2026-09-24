@@ -1,0 +1,6 @@
+{
+  "centroids_nonempty": 48,
+  "jaccard_threshold": 0.6,
+  "n_centroids": 48,
+  "n_components": 189
+}

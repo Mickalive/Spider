@@ -1,0 +1,27 @@
+{
+  "n_alias_ood": 40,
+  "n_train": 21,
+  "train_task_ids": [
+    "alias-0-0",
+    "alias-0-1",
+    "alias-0-2",
+    "alias-0-3",
+    "alias-0-4",
+    "alias-0-5",
+    "alias-0-6",
+    "alias-1-0",
+    "alias-1-1",
+    "alias-1-2",
+    "alias-1-3",
+    "alias-1-4",
+    "alias-1-5",
+    "alias-1-6",
+    "alias-2-0",
+    "alias-2-1",
+    "alias-2-2",
+    "alias-2-3",
+    "alias-2-4",
+    "alias-2-5",
+    "alias-2-6"
+  ]
+}
