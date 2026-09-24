@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-35947468747",
+  "lane": "graph",
+  "decision": "SURVIVES_CURRENT_TEST",
+  "claim_updates": [
+    {
+      "claim_id": "C-FRESHNESS",
+      "status": "EXPERIMENTAL",
+      "reason": "Audit PASS producer_claim_supported=true: all 9 frozen D1-D9 pass on synthetic-rebalanced ceiling at 12.5% stale prevalence (210 fresh+30 stale+150 noise=390, stale_rate 0.125). M-TN-SPIDER 1.0 Wilson lower 0.982 >0.75 (210/210, stable 180/180 lower 0.9791, per-family 10/10 lower 0.7225), M-FALSE-ACCEPT 0.0 Wilson upper 0.1135 (0/30) <=0.10, UNKNOWN 0.125 (30/240) Wilson [0.089,0.1728] within prevalence-aware [0.00,0.18] and within [stale_rate-0.05, stale_rate+0.07]=[0.075,0.195] and expected [0.0928,0.18] (30/210=0.1428), global ECE 0.0625 per-class fresh 0.05 stale 0.15 <=0.15 (proof 210*0.05/240=0.0438+30*0.15/240=0.0188=0.0625) under recalibrated 0.95/0.85, delta vs B-NO-GUARD FA 1.0 >=0.15, per-family TP 1.0 (10/10 each) >=0.85, PC-STALE-DETECTION 1.0 per family, NC-FRESH-RETAIN TN 1.0, NC-NOISE-IMMUNITY FA 0.0 (0/150) TN 1.0 across 3 churn variants. Honesty gates pass: V1 _matches exact equality all 390, V2 constant integer sum-counter 4 per request total 1560 all_int true vector std 0 valid per V2 narrowing exempt from V5, V3 no jitter/parity/bijective proxy, V4 trajectory-grouped max|rho| 0.0 <0.20 via 1000 whole-trajectory-block perms, V5 within-family freshness std 0.5 >0 for drift families (cost exempt, stable/noise exempt), V6 5000 family-stratified trajectory-grouped bootstrap done preserving 12 stable+2 per drift+5 per noise proportions but degenerate CIs [1.0,1.0]/[0.0,0.0]/[0.125,0.125]/[0.0625,0.0625] disclosed as ceiling effect per spec F8 (Wilson non-degenerate width TN 0.018 FA 0.1135 UNKNOWN 0.083 provides informative precision), V7 Wilson z=1.96, V8 recalibrated ECE+UNKNOWN satisfiable, V14 per-trajectory observed caching 33 trajectories first valid of 1-3 + response-derived endpoint via _template/X-Csrf-Token vs cached response with deterministic If-None-Match 304 marked not stale. Signal necessity replicated at sparsity: B-JACCARD-ONLY FA 0.6667 TP 10/30 only dom_drift, B-HEADER-ONLY FA 0.3333 TP 20/30 misses dom_drift (audit baseline_findings PASS). Distributed stage correctly DISTRIBUTED_MEASUREMENT_INVALID (health_gate_pass false, WAL false, X-Worker-Pids [], JWT false, 304 false, n_non304 0<800 per V-DIST-HEALTH-GATE/V-DIST-N-SUFFICIENCY) does not override PRIMARY SURVIVES per frozen decision_rule. Sampling discrepancy disclosed: spec 180 fresh+30 stale=360 stale_rate 0.1428 vs execution 210 fresh+30 stale=240 stale_rate 0.125 delta 0.0178 within 0.05 tolerance, required for V5/V14 (pre-drift fresh from 6 stale trajectories counted). Recomputed metrics match producer (audit recomputed_metrics). Claim ceiling remains bounded synthetic flat-JSON stdlib http.server single-resource deterministic orthogonal drifts; does NOT advance to VALIDATED/PRODUCT_CORE which requires n>=800 + health-gated distributed shared-WAL Flast/JWT/nginx per registry."
+    }
+  ],
+  "product_action": "NO_PROMOTION — bounded synthetic-rebalanced EXPERIMENTAL only. No promotion to VALIDATED or PRODUCT_CORE. Guard may be used only as synthetic prerequisite for bounded C-DELTA-REPAIR (localized repair delta < full-task, contamination<0.10) and honest C-RESIDUAL-NOVELTY M_total_f10 Pareto with trajectory-grouped max|rho|<0.20 on same stdlib http.server substrate without distributed WAL; not authorized for product reuse gating at this threshold/confidence/site outside this ceiling. Distributed VALIDATED gate (health-gated HS256 shared-WAL/journal_mode, 2x gunicorn 23 + nginx 1.24 round-robin, operational If-None-Match/ETag->304, distinct X-Worker-Pid>=2, n>=800 non-304 stratified) remains required per registry and director_mandate before any VALIDATED/PRODUCT_CORE.",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "Does the validated synthetic-rebalanced freshness guard (Jaccard 0.85 required-filtered {id,name,email} + response-derived endpoint _template/X-Csrf-Token + ETag+max-age=0, recalibrated 0.95 fresh/0.85 stale) enable bounded C-DELTA-REPAIR (localized repair cost delta < full-task cost, contamination<0.10) and honest C-RESIDUAL-NOVELTY M_total_f10 Pareto (trajectory-grouped max |rho_shuffled|<0.20, non-degenerate Wilson) on the same locally-hosted synthetic single-resource flat-JSON substrate, and does the same guard sustain TN>=0.85 (Wilson lower>0.75) FA<=0.10 calibrated (global/per-class ECE<=0.15, UNKNOWN prevalence-aware [0.00,0.18]) when transferred to a health-gated distributed shared-WAL Flask/JWT + nginx If-None-Match/304 substrate at n>=800 non-304 (single-node Flask health-gated first, then 2x gunicorn+nginx round-robin HS256 shared TESTBED_SECRET, distinct X-Worker-Pid>=2), thereby testing the step from bounded synthetic EXPERIMENTAL (12.5% prevalence, degenerate bootstrap ceiling) to VALIDATED required before C-FRESHNESS product promotion?",
+  "reason": "Frozen PRIMARY SURVIVES_CURRENT_TEST fires correctly: D1 TN 1.0 lower 0.982 >0.75, D2 FA 0.0 <=0.10 (upper 0.1135 <0.18 informative at n_stale=30), D3 UNKNOWN 0.125 in [0.00,0.18] and stale_rate windows, D4 global 0.0625 fresh 0.05 stale 0.15 <=0.15, D5 delta 1.0 >=0.15 vs B-NO-GUARD 1.0, D6 per-family 1.0 >=0.85, D7 PC 1.0, D8 NC fresh 1.0 noise 0.0, D9 honesty pass (constant 4 integer, max|rho| 0.0 <0.20 trajectory-grouped, freshness std 0.5 >0, 5000 bootstrap done, per-trajectory caching 33 entries response-derived, deterministic 304). Audit PASS confirms recomputed metrics identical and validity_findings correctly note degenerate bootstrap [1.0,1.0] width 0 is ceiling effect not precision per F8 — Wilson provides non-degenerate informative CIs (FA upper 0.1135 width 0.1135). Sampling discrepancy 210 vs 180 fresh (extra 30 pre-drift fresh from stale trajectories) disclosed in validity_notes and audit validity_findings, within prevalence tolerance and necessary for V5/V14, does not hide per-family 0/10 (family-stratified bootstrap preserves 10 per family). Distributed secondary stage correctly flagged DISTRIBUTED_MEASUREMENT_INVALID (health_gate false, n 0<800) per prereg, does not retroactively falsify synthetic gate. Therefore C-FRESHNESS survives at this rebalanced synthetic prevalence with honest sum-counter and trajectory-grouped rho, advancing from degenerate 42.8% ceiling to non-degenerate Wilson prevalence-aware calibration (bootstrap remains degenerate due to deterministic perfect detection) but remains EXPERIMENTAL not VALIDATED/PRODUCT_CORE per audit claim_ceiling which bounds to synthetic stdlib http.server flat-JSON single-resource, combined Jaccard+header/cache signal, recalibrated 0.95/0.85, 12.5% prevalence. Unblocks synthetic C-DELTA-REPAIR and honest M_total_f10 Pareto per director mandate; distributed n>=800 health-gated transfer still required for VALIDATED.",
+  "evidence_refs": [
+    "research/experiments/EXP-GRAPH-35947468747/request.json",
+    "research/experiments/EXP-GRAPH-35947468747/spec.json",
+    "research/experiments/EXP-GRAPH-35947468747/prereg.md",
+    "research/experiments/EXP-GRAPH-35947468747/freeze.json",
+    "research/experiments/EXP-GRAPH-35947468747/result.json",
+    "research/experiments/EXP-GRAPH-35947468747/provenance.json",
+    "research/experiments/EXP-GRAPH-35947468747/report.md",
+    "research/experiments/EXP-GRAPH-35947468747/audit.json",
+    "research/experiments/EXP-GRAPH-35947468747/raw_evidence/metrics.json",
+    "research/experiments/EXP-GRAPH-35947468747/raw_evidence/bootstrap_ci.json",
+    "research/experiments/EXP-GRAPH-35947468747/raw_evidence/per_trajectory_cache.json",
+    "research/experiments/EXP-GRAPH-35947468747/raw_evidence/cost_logs.json",
+    "research/experiments/EXP-GRAPH-35947468747/raw_evidence/execution_results.json",
+    "research/experiments/EXP-GRAPH-35947468747/raw_evidence/request_logs.json",
+    "research/experiments/EXP-GRAPH-35947468747/raw_evidence/decision.json",
+    "research/experiments/EXP-GRAPH-35947468747/raw_evidence/health_gate.json",
+    "research/experiments/EXP-GRAPH-35947468747/raw_evidence/distributed_metrics.json",
+    "research/graph/freshness_detection/execute_rebalanced_35947468747.py",
+    "src/spider/kernel.py",
+    "research/experiments/EXP-GRAPH-35940399935/handoff.json",
+    "research/experiments/EXP-GRAPH-35940399935/audit.json",
+    "codex/claim_state.json",
+    "codex/index.json"
+  ]
+}
