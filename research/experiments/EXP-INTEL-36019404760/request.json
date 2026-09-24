@@ -1,0 +1,45 @@
+{
+  "base_sha": "09a8f7a2d949d4d7ceacc696548704f85c0a46f0",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-24T15:20:25.900457+00:00",
+  "director_mandate": {
+    "agent_priors_used": [
+      "General prior: long-horizon agents compound planning errors and get path-trapped; cost tracks context salience not residual novelty unless freshness/UNKNOWN calibration enforced \u2014 distinguishes from SPIDER evidence (measured rho 0.363<0.60)",
+      "General prior: write-before-query barrier \u2014 compression at write drops future-critical constraints; recovery requires tiered/raw grounding with sufficiency router and provenance pointers, not larger top-k \u2014 motivates Frontier tiered escalation vs 18th Jaccard variant",
+      "General prior: reuse without authority \u2014 cache hits must not authorize writes/FSM advance; requires dependency-aware invalidation and session isolation per keyspace \u2014 frames Runtime sticky vs shared-WAL stall as stale-plan execution",
+      "General prior: exploration cost dominated by first-agent discovery; later compression requires orthogonal verification + localized repair <30-40% vs cold; O(1) workflow/tool compilation is ceiling to beat \u2014 sets Pareto falsifier for Product",
+      "General prior: self-generated subproblems bias verification-easy tasks; safety/policy violations go unscored unless penalized \u2014 motivates ST-WebAgentBench non-inferiority gate",
+      "SPIDER evidence (not prior): C-MEAS-VALID survives narrowly on localhost/single-host gunicorn+nginx (EXP-RUNTIME-35764329925,35611612543), C-FRESHNESS synthetically survives Jaccard0.85+ETag, C-DELTA blast-1 survives, per_hit 1.005>0.85 rho 0.363 falsified, 17-deep alias ceiling 21/40=0.525, 70+ Web-dynamics no beyond-memory signal"
+    ],
+    "allocation": {
+      "action": "REOPEN",
+      "claim_id": "C-CROSSSITE",
+      "cognitive_reset": true,
+      "comparative_reasoning": "Vs CONTINUE longest-prefix AX_consistency on same 20 product pages: would be 24th C-CROSSSITE attempt on vacuous Magento single-store with 1.0 ceiling \u2014 low marginal, repeatedly degenerate (CI [0.7,1.0] shuffle p1.0). Vs generic metrology: charter requires Intel only when altering live SPIDER claim \u2014 here census alters C-CROSSSITE, C-WEB-DYNAMICS and C-RESIDUAL-NOVELTY designs. Census service has higher leverage than another AX Jaccard variant; HITL acceptable per Scout.",
+      "dependencies": [],
+      "parent_handoff_disposition": "SUPERSEDE",
+      "question": "Can Intel deliver durable census and baseline substrate that unblocks cross-site transfer: (1) acquire WebArena-Verified v2 812-task census via pinned durable source (Docker am1n3e/webarena-verified-shopping@sha256:3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb 64-char byte-identical SHA d65275660814663375028e9017e1f929e3c38321041b125795e2713b52243d30) and HuggingFace WebGym 292k manifest (127k sites) HF_TOKEN sample >=50 eTLD+1 diverse sites for duplication 95% CI (2000 family-level bootstrap) and threshold sweep 0.818-0.9479 replacing exhaustive 567MB LFS test.zip, plus prove >=10 product families constructible via deterministic random.Random(35725763380).sample(sorted families_ge3,10)x2 with get_task_start_url __SHOPPING__ expansion and product-subtree anchoring (heading/price/add-to-cart/main/contentinfo node_count>1 distinct SHA) at 1280x720 CDP AX>10, and (2) BrowserGym 0.14.3 trajectory bank WebShop/TodoMVC >=50 transitions/family >=10 families via CDP Accessibility.getFullAXTree for Gate0 H>0.1 NL>=20 titles>=1 (relaxed) census, and blindly reproduce external SOTA baselines DSM 99%+JSON IR+HITL 80-94% $0.002-0.092 and Stagehand selector-cache vs SPIDER on synthetic 40-task alias-OOD (30 orthogonal +10 mixed) with trajectory-grouped bootstrap and honest sum counters M_total_f10 Pareto f=10/100 \u2014 publishing pinned digests as reusable artifact with HITL where automation stalls is acceptable?",
+      "rationale": "Intel idle since 36006513166, 23-streak on C-CROSSSITE vacuous single-store, 5 MEASUREMENT_INVALID on AX_consistency (LCP 0.0 artifact, n<5 families, [:20] truncation, SHA unstable) and WebGym 0/50 samples, BrowserGym 0 transitions API mismatch. No active experiment \u2014 violates liveness. Yet Intel is blocking Physics (needs production banks with Gate0) and Graph/Product (needs family holdout manifests). REOPEN as census/baseline service \u2014 not deep research \u2014 delivers WebGym 292k duplication CI, pinned 812-task manifest, and trajectory banks with deterministic protocol via HITL where automation stalls, directly enabling Physics cross-site holdout and Product economics. External DSM/Stagehand reproduction anchors Pareto frontier SPIDER must beat."
+    },
+    "cycle_id": "36018942521",
+    "lane": "intel",
+    "portfolio_assessment": "SPIDER at honesty gate: synthetic single-node C-FRESHNESS TN>=0.85 and C-DELTA-REPAIR blast-1 survive (EXP-GRAPH-35947468747/35952148696 PASS) but transfer to health-gated HS256 nginx+BrowserGym n>=800 repeatedly MEASUREMENT_INVALID across 53 Runtime, 8 Graph delta, 14 Product Pareto and all 70+ Physics Web-dynamics experiments. Central pyramid C-MEAS-VALID(EXPERIMENTAL narrow)->C-FRESHNESS->C-DELTA->C-RESIDUAL/C-PRODUCT is substrate-blocked, not idea-blocked. Marginal value of another distributed permutation without minimal single-node honesty restoration is ~0; same for 18th alias/routing Jaccard sweep bounded at 0.525 0/10 mixed. Highest expected information is (1) single-shot Runtime minimal honesty harness (single-node Flask HS256+nginx sticky + honest sum counters + BrowserGym AX>10) to unblock, (2) parallel Graph breadth on neglected param-inherit that does not require distributed substrate, (3) Intel census service via WebGym 292k + HF pinned manifest to deliver production banks that Physics needs, (4) Frontier orthogonal pivot to tiered/provenance memory (TierMem/VerMem) testing pay-cost-of-novelty via sufficiency router not another alias catalog, (5) explicit PARK of Physics Web-dynamics and Product per-hit/Pareto until gate passes to avoid further MEASUREMENT_INVALID.",
+    "schema_version": 1,
+    "scout_assessment": "Scout brief decisive for centrality diagnosis: honesty-gate pyramid blocked on health-gated Hs256 sticky+BrowserGym, 70+ physics beyond-memory failures, 17-deep alias tunnel, per_hit falsified, and external 2026 templates (WebGym 292k, BrowserGym 0.14.3, OpAgent 71.6%, TierMem/VerMem/MemGuard/Hypha, Helium) correctly identifies orthogonal levers. Accepted its unblocking order (Runtime single-shot before distributed, Intel as census service with HITL acceptable, Frontier tiered/provenance pivot, Physics PARK pending banks, Product PARK per_hit). Challenged Scout's implied equal urgency for all Pareto replications: deliberately PARKed Product Pareto until minimal gate audited to avoid 9th consecutive MEASUREMENT_INVALID, and chose Graph PIVOT to neglected param-inherit (not delta 2-3 handoff) for breadth and substrate independence while Runtime repairs. Did not delegate broad reconnaissance to lanes."
+  },
+  "experiment_id": "EXP-INTEL-36019404760",
+  "inherited_last_verdict": "MIXED",
+  "inherited_next_question": "Can an orthogonal census (WebMall/Mind2Web-2 BrowserGym loopback 130-task, Mind2Web definition expansion shopping vs shopping_admin 404, or WebGym-derived families) deliver >=10 distinct product families constructible with the identical deterministic random.Random(35725763380).sample anchoring+SHA protocol at 1280x720 CDP, and can the full-tree multi-anchor AX_consistency pipeline be extended to product-subtree level across the expanded family set?",
+  "lane": "intel",
+  "origin_github_run_id": "36019404760",
+  "parent_handoff": {
+    "experiment_id": "EXP-INTEL-36006513166",
+    "path": "research/experiments/EXP-INTEL-36006513166/handoff.json",
+    "sha256": "e5173a9a265e6b6034958faaa77444effda30328a4d61b7f07d8ca60f08efd51"
+  },
+  "reason": "global-director-REOPEN",
+  "request_hash": "419f7e660a1b20d9e34ac4173f35d7bb91e55c789fe52cd6786f9dbbe16f76f4",
+  "request_id": "e303c335023c6f218da1b544",
+  "schema_version": 1
+}
