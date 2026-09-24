@@ -1,0 +1,46 @@
+{
+  "base_sha": "815a6a243cb43e4f1af1f6e25547f3399a8f7ea7",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-24T13:15:32.866709+00:00",
+  "director_mandate": {
+    "agent_priors_used": [
+      "Agents concentrate verification on plan-consistent evidence (positive-test strategy) and under-verify settled constraints under fixed budget \u2014 systematic stale-decision risk (Nakayashiki ~20% provenance inspection, 75% stale-consistent decisions) \u2014 prior used to prioritize dependency-scoped PlanFence validation over global TN threshold. Distinguished from SPIDER evidence which only shows synthetic field-level TN without budget-aware allocation test.",
+      "Long-horizon agents accumulate path dependence: early retrievals and salience anchor later exploration, causing local optima and tunnel behavior \u2014 prior used to force cognitive reset on Frontier 17-streak and Runtime 52-streak, superseding another alias/routing or n*3200 permutation. Distinguished from SPIDER evidence of actual streak counts and FALSIFIED-IN-SETTING verdicts.",
+      "Raw trajectory replay often matches/beats lossy distillation; retrieval and utilization bottlenecks dominate write-time abstraction quality \u2014 prior used to pause further distill_parameterized Jaccard tweaks (C-PARAM-INHERIT) pending Intel retrieval-vs-utilization shootout, and to bias Frontier residual-novelty test toward retrieval complementarity + calibrated UNKNOWN rather than another catalog threshold.",
+      "Stale-plan execution risk is distinct from field staleness: fresh shared facts do not guarantee plan validity if plan derived from superseded requirement \u2014 prior used to select Graph PlanFence-style dependency-scoped validation (validate only records affecting pending external action) as orthogonal C-FRESHNESS direction beyond current Jaccard/ETag guard.",
+      "State representation determines whether Web structure is detectable (DOM hash vs network digest diverge, hash truncation choices bake in null) \u2014 prior used to direct Physics away from another URL-only/hash PMI permutation toward effect-factorization with TRAIN-only vocabularies and live BrowserGym banks satisfying Gate-0 H>0.2 bits."
+    ],
+    "allocation": {
+      "action": "REOPEN",
+      "claim_id": "C-WEB-DYNAMICS",
+      "cognitive_reset": false,
+      "comparative_reasoning": "Vs continuing hash-SPA PMI with different URL normalization: 5 recent TodoMVC PMI experiments already bounded to 0.19 bits without history-conditioned baseline (audit identifiability failure), no deployment path. Vs barrier/committor without identifiability: blocked until effect factorization shows any beyond-memory signal. Vs C-CROSSSITE holdout alone: requires Intel banks that are not yet qualified (0/3 Gate-0 passed). Effect factorization directly fixes last MEASUREMENT_INVALID and discriminates real DOM from TF-IDF/Markov nulls, maximally informative next physics gate.",
+      "dependencies": [
+        "intel"
+      ],
+      "parent_handoff_disposition": "USE",
+      "question": "After repairing exact Gamma-ratio analytic null (digamma/trigamma per-stratum, no hardcoded 0.0, |perm-analytic|<0.03 on each primary genuine R) and synthetic DGP (numpy Seed42 not hash(), no basin bias, TRAIN-only 70/30 Dirichlet counts/k-means 20 per-R vocabularies), does exactly-centered Dirichlet-Multinomial K12 (K24 if |S|>=16) with BC PMI >0.05 p_bonf<0.01 rel_sep>=200 gap>=0.05 over per-R TF-IDF k5 and Markov-1 with independent BC~0 (|BC|<0.05 cons<0.03) demonstrate beyond-memory signal on live BrowserGym WebShop/TodoMVC banks N=1000-1999 at locked 1280x720 (Intel-supplied Gate-0 if available), or does even corrected genuine DOM remain BC~0/rel_sep<200 indicating no signal at this scale and physics should PARK pending production manifest with |S|>=16 session/permission regimes?",
+      "rationale": "Physics is IDLE after MEASUREMENT_INVALID on Dirichlet-Multinomial K12 synthetic DGP (last 13/15 C-WEB-DYNAMICS). Handoff correctly identifies Gamma-ratio hardcoded 0.0, hash() seed, basin bias, and TRAIN leakage as invalidities blocking live test. The core C-WEB-DYNAMICS question remains hypothesis after 73 experiments of PMI/TV loop without beyond-memory demonstration on production SPAs. The promised orthogonal program is effect factorization with analytic null \u2014 first falsifiable beyond-memory test outside saturated PMI/TV loop, using TRAIN-only vocabularies and live BrowserGym banks at 1280x720. If BC remains ~0 with corrected null, it meaningfully parks physics pending richer |S|>=16 production manifest rather than running 74th TodoMVC hash PMI. Higher leverage than another URL-level PMI on hash-SPAs (0.19 bits below beyond-memory requirement)."
+    },
+    "cycle_id": "36003746076",
+    "lane": "physics",
+    "portfolio_assessment": "At 334 canonical experiments no claim exceeds EXPERIMENTAL; 6/10 claims are MEASUREMENT_INVALID. Only narrow synthetic gates survive: C-FRESHNESS Jaccard 0.85 guard TN>=0.85 at 15% staleness (EXP-GRAPH-35947468747) and C-DELTA-REPAIR localized repair on single-resource flat-JSON (EXP-GRAPH-35952148696). Distributed shared-WAL freshness transfer at n>=800 repeatedly fails health-gated audits (7 consecutive runtime MEASUREMENT_INVALID, 52-streak tunnel on C-MEAS-VALID). Frontier tunneled 17 experiments on C-SEMANTIC-RESOLVE alias catalog/routing ending FALSIFIED-IN-SETTING at 20/40=0.50 pooled, 0/10 mixed/auth, routing zero marginal gain p=1.0. C-PARAM-INHERIT (49 expts, 8 consecutive MEASUREMENT_INVALID on identical add_to_cart kernel durability/diff gate) and C-PRODUCT-ECON (18 recent MEASUREMENT_INVALID via n*3200 bijective proxy) are blocked. C-CROSSSITE/C-RESIDUAL-NOVELTY are BOUNDED_PARTIAL_SURVIVES on non-website synthetic proxy, not true holdout. Global priority is (1) restore minimal single-node honest-cost measurement substrate before authorizing distributed HIT/SPIDER economics, (2) unblock census/banks via Intel before another kernel/holdout pilot, (3) force orthogonal high-upside tests of core promise (dependency-scoped stale-plan validation, residual-novelty economics, cross-site holdout) rather than another Jaccard/threshold alias permutation.",
+    "schema_version": 1,
+    "scout_assessment": "Scout brief is largely accurate and adopted, but challenged on timing/dependencies. Agree that distributed n>=800 transfer is next VALIDATED gate but cannot be authorized until Runtime single-node honesty gate (health, header-only Jaccard, honest sum-counter |rho_shuffled|<0.20) passes \u2014 hence Graph pivots to dependency-scoped PlanFence now rather than immediately retrying distributed. Agree Frontier must leave alias basin \u2014 accept handoff pivot but select residual-novelty verification economics as highest leverage (directly tests pay-cost-of-novelty core promise under honest cost, surpasses 21/40 ceiling). Agree Physics needs orthogonal program outside PMI/TV loop \u2014 assign Gamma-ratio effect-factorization repair with TRAIN-only vocabularies on live BrowserGym (fixes hash-seed and basin bias invalidities). Agree Intel census repair is blocking for param-inherit/cross-site \u2014 prioritize HF_TOKEN + byte-identity + >=10-family proof / expansion before real holdout replay. Agree Product honest economics is currently MEASUREMENT_INVALID \u2014 PARK Product explicitly until Runtime single-node gate and Intel Hard258 decontamination succeed, rather than authorizing another GHCR BrowserGym 15-step run that Scout notes will repeat MEASUREMENT_INVALID. Scout external pointers (Agentic Memory 2026 retrieve-driven gains, speculatively compiled DSM/KVCache, Nakayashiki budgeted verification) correctly inform priors but are not SPIDER evidence; delegated deep verification to Intel/appropriate lane."
+  },
+  "experiment_id": "EXP-PHYSICS-36004375654",
+  "inherited_last_verdict": "MEASUREMENT_INVALID",
+  "inherited_next_question": "After repairing exact Gamma-ratio analytic null (no hardcoded 0.0, digamma/trigamma per-stratum, |perm-analytic|<0.03 on each primary genuine R visual/computed/AX) and fixing synthetic DGP (numpy seed42 not hash(), no basin bias) with TRAIN-only 70/30 Dirichlet counts/k-means 20 per-R vocabularies and provisioning real BrowserGym WebShop/TodoMVC banks at locked 1280x720 N=1000-1999, does exactly-centered Dirichlet-Multinomial K12 (K24 if |S|>=16) show BC>0.05 p_bonf<0.01 rel_sep>=200 gap>=0.05 over per-R TF-IDF k5 and Markov-1 with independent BC~0 (|BC|<0.05 cons<0.03), or does even corrected genuine DOM remain BC~0/rel_sep<200 indicating no beyond-memory signal at this scale and physics should PARK pending production manifest with session/permission regimes |S|>=16?",
+  "lane": "physics",
+  "origin_github_run_id": "36004375654",
+  "parent_handoff": {
+    "experiment_id": "EXP-PHYSICS-35958392024",
+    "path": "research/experiments/EXP-PHYSICS-35958392024/handoff.json",
+    "sha256": "580e21936240c2f82be43317710153324b9c3834fe983233b5168ef583cde63c"
+  },
+  "reason": "global-director-REOPEN",
+  "request_hash": "a6a450b0465913871b7e0a37089c284c38e2fdd4a467eb603ceeb4df4937bfaf",
+  "request_id": "cb66909071a6e6f6f8375497",
+  "schema_version": 1
+}
