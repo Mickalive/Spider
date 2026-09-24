@@ -128,7 +128,23 @@ def stage_policy(lane: str, experiment_id: str, stage: str):
     elif stage == "execute":
         prefixes = [exp] + cfg.get("allowed_code_roots", [])
         exact = []
-        protected = {f"{exp}/{x}" for x in ["request.json", "spec.json", "prereg.md", "freeze.json", "execution_checkpoint.json"]} | {lane_state}
+        protected = {
+            f"{exp}/{x}"
+            for x in [
+                "request.json",
+                "spec.json",
+                "prereg.md",
+                "freeze.json",
+                "execution_checkpoint.json",
+                # Future-stage outputs are forbidden during EXECUTE even
+                # though the experiment directory is otherwise writable.
+                "audit.json",
+                "verdict.json",
+                "handoff.json",
+                "model_audit.json",
+                "model_director.json",
+            ]
+        } | {lane_state}
     elif stage == "audit":
         prefixes = []
         exact = [f"{exp}/audit.json", f"{exp}/failure.json", f"{exp}/model_audit.json"]
