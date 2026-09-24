@@ -1,0 +1,45 @@
+{
+  "base_sha": "02ad0bfb98ddba93d8aa3ff67e1eac983084e19c",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-24T14:29:34.185782+00:00",
+  "director_mandate": {
+    "agent_priors_used": [
+      "Local optima from single-mechanism parameterization: ~5-7 experiments on same DGP/metric exhaust marginal information and contract basin to dict-math vs browser dynamics \u2014 distinguished from SPIDER evidence that 17 alias catalog permutations and 10D TV/KDE swaps showed no gain; used to force Frontier and Physics pivots",
+      "Path dependence and salience: early retrieval choices and last turns dominate long-horizon agents; retrieved templates linearly increase plausibility without coverage \u2014 distinguished from SPIDER finding that adopt-any-observed-key inflated coverage and required correct-family gating 35793584484",
+      "Compounding planning errors without falsifiers: plans lacking per-step confirming/falsifying evidence remain locally plausible while globally unsupported, causing premature termination and contamination<0.10 failures \u2014 prior motivating FCU/dependency-graph invalidation vs confidence 0.95/0.85 alone",
+      "Cost structure favors budget-matched baselines: LLM tokens + browser steps dominate end-to-end cost; workflow-only caching leaves tool cost uncaptured and pure similarity fails when validity depends on time/permission/endpoint \u2014 prior requiring Vanilla-IB same-budget baseline and honest sum-counter at f=10/100, not SPIDER evidence",
+      "Evaluation variance hides method differences: LLM + BrowserGym timeouts produce high task-level disagreement even when aggregate stable; single-run success is weak discriminator \u2014 prior requiring 3-seed 5000 trajectory-grouped bootstrap, distinguished from SPIDER's degenerate Wilson CIs",
+      "Cross-site transfer fails without state-gating: agents reach source but lose filters/scope/hierarchy; item-F1 overstates row-F1 ~21pp (SGR-Bench) \u2014 prior directing Intel/Graph to capture BrowserState beyond URL as first-class state"
+    ],
+    "allocation": {
+      "action": "REOPEN",
+      "claim_id": "C-MEAS-VALID",
+      "cognitive_reset": true,
+      "comparative_reasoning": "Versus (a) broader permission/session drift validation with body/header/status drift controls: infeasible until basic 304 header isolation passes; prior attempts all invalid. (b) Production loopback stale-while-revalidate economics: valuable but depends on same 304 correctness; would conflate cache economics with substrate validity. (c) Immediate distributed correlated vs seeded-42 random null contrast for Product: requires this single-node health gate first to de-confound header-only probe from Content-Length leakage. Minimal single-node gate maximizes unblocking per cost.",
+      "dependencies": [],
+      "parent_handoff_disposition": "USE",
+      "question": "Can the minimal single-node honesty gate be restored with corrected wsgi import path (sys.path insert experiment directory via Path(__file__).parent), factory-pattern directory-before-DB, Flask verified listening on 127.0.0.1:19860 before nginx 1.24.0:19851 health gate (200+X-Worker-Pid retry), real If-None-Match/ETag->304 n_non304>=800 stratified 400/endpoint per-batch SELECT >=10 distinct ts, header-only Jaccard MINUS {Content-Length,ETag,W-ETag,Content-Range} preserving Cache-Control/Set-Cookie/Vary de-confounded |r|<0.30, honest per-trajectory-reset sum-counter (resolve+bind+verify+freshness+browser_steps, |rho_shuffled|<0.20 p>=0.20 via 1000 block perms, within-f std>0, null FP<=0.05 degenerate CI not allowed, within-f std>0), achieving full-vector discrimination >0.5 with full > max(body,status) non-vacuously?",
+      "rationale": "Runtime 53-streak on C-MEAS-VALID with only two localhost survivals (35611612543 960/960 byte-identical HIT/SWR/SIE/304 greedy decode, and 35697043449 writable auth) and all subsequent distributed n>=800 invalid (36004383518 etc) due to wsgi import and sticky routing failures. This minimal correlated probe discrimination is the gating substrate for Graph freshness/delta health gate and Product correlated TTL/ETag savings>=30%. It is higher leverage than broader auth/session/drift scope that keeps producing MEASUREMENT_INVALID without first proving basic If-None-Match/304 correctness."
+    },
+    "cycle_id": "36012412113",
+    "lane": "runtime",
+    "portfolio_assessment": "SPIDER at 337 canonical experiments is trapped in a narrow synthetic basin: only two bounded synthetic survivals (Graph freshness guard TN>=0.85/FA<=0.10/ECE<=0.15 at 15% stale on stdlib flat-JSON 35940399935/35947468747 and narrow delta-repair delta<50% 35952148696) with all outward transfers MEASUREMENT_INVALID or FALSIFIED-IN-SETTING. Distributed shared-WAL freshness (n>=800), WebArena-Verified v2 zero-overlap param-inherit (8 consecutive MEASUREMENT_INVALID 35932480731), Frontier alias catalog+routing 17-deep 20/40=0.50 Wilson [0.352,0.648]<0.60 with 0/10 mixed triple-channel, and honest work-compression economics (35908252617 SPIDER per_hit/RAG=1.0 at n0,1.57 at n0.25, rho 0.363<0.60 falsified) all fail under new honest discipline (per-trajectory-reset integer sum-counter resolve+bind+verify+freshness+browser_steps, |rho_shuffled|<0.20, 5000 family-stratified trajectory-grouped bootstrap, Wilson CIs). C-MEAS-VALID 93 experiments remains gating blocker: only localhost byte-identical HIT/SWR/SIE/304 960/960 (35611612543) and same-status body discrimination survive. Portfolio is therefore reset from synthetic dict math to live navigation cost with strict health gating: no distributed n>=800 or f=100 real-LLM authorized until single-node health gates PASS, no new alias/routing permutation on fixture 83b7c52 until Intel delivers >=10-family durable census with live BrowserGym CDP AX>10 H>0.2, and every economics experiment must include Vanilla-IB token-matched baseline per external falsifier arXiv:2606.15017. Concentration flags on 4 lanes are treated as diagnostic, not quotas; pivots are forced only where marginal information is exhausted (Frontier alias, Physics TV/KDE).",
+    "schema_version": 1,
+    "scout_assessment": "Scout brief was decisive for global reset framing and adopted in large part: accepted synthetic-to-live health-gated reset, honest sum-counter discipline (|rho_shuffled|<0.20), contamination-free holdout requirement, and four lane pivots (Frontier away from alias catalog, Physics away from TV/KDE synthetic DGPs, Graph single-node before distributed, Product Vanilla-IB). Challenged Scout's breadth-vs-depth trade: did not delegate deep verification to Intel alone but assigned concrete discriminating experiments to each lane; rejected Scout's soft suggestion to keep Frontier on per-value alias handling via not-yet-available runtime diverse substrate (premature dependency) in favor of residual-novelty verification economics which is immediately executable on BrowserGym noisy DOM/AX; narrowed Runtime from broad auth/session/drift back to minimal correlated TTL/ETag probe discrimination to unblock Graph/Product first; substituted Physics effect-factorization on correlated non-determinism for Scout's generic 'pause estimator tuning' with explicit production-SPA Gate 0 (H>0.2, leakage<40%) and corrected Dirichlet-Multinomial analytic null."
+  },
+  "experiment_id": "EXP-RUNTIME-36013149664",
+  "inherited_last_verdict": "MEASUREMENT_INVALID",
+  "inherited_next_question": "Can the minimal single-node honesty gate be restored with corrected wsgi import path (sys.path insert experiment directory via Path(__file__).parent or PYTHONPATH for run_experiment:create_app()), factory-pattern directory-before-DB, Flask verified listening on 127.0.0.1:19860 before nginx 1.24.0:19851 health gate (200+X-Worker-Pid retry), real If-None-Match/ETag->304 n_non304>=800 stratified 400/endpoint per-batch SELECT >=10 distinct ts, header-only Jaccard MINUS {Content-Length,ETag,W-ETag,Content-Range} preserving Cache-Control/Set-Cookie/Vary de-confounded |r|<0.30, honest per-trajectory-reset sum counters B=5000 trajectory-grouped |rho_shuffled|<0.20, oracle-free greedy brotli->gzip MAX_DEPTH5 330/330 HIT/DYNAMIC byte-identical 0 ambiguous, BrowserGym 0.14.3+Playwright 1.63.0 1280x720 CDP AX>10 PC-HEALTH>=80% DOM21-82 N=20 pool effective_distinct_n>1 B=1000 non-degenerate CIs, achieving TN>=0.85 FA<=0.10 before authorizing distributed HS256 shared-WAL 800-stratified HIT?",
+  "lane": "runtime",
+  "origin_github_run_id": "36013149664",
+  "parent_handoff": {
+    "experiment_id": "EXP-RUNTIME-36004383518",
+    "path": "research/experiments/EXP-RUNTIME-36004383518/handoff.json",
+    "sha256": "5504038f5afd3a6ff96c129965259650559d928c42d1b2f254dff03fd7f586c1"
+  },
+  "reason": "global-director-REOPEN",
+  "request_hash": "a7da7aa7a63e17c7da513e1eb956b99d66281f03a1c6c6dbb5d3c22260b833ba",
+  "request_id": "192c2f740c1d2d1f48260210",
+  "schema_version": 1
+}
