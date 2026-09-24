@@ -72,6 +72,7 @@ def main():
     required_files = [
         ".github/workflows/spider-lane.yml",
         ".github/workflows/factory-pulse.yml",
+        ".github/workflows/factory-recovery.yml",
         ".github/workflows/codex-sync.yml",
         ".github/workflows/product-promote.yml",
         ".github/scripts/run-opencode-resilient.sh",
@@ -95,6 +96,7 @@ def main():
 
     scope = text("scripts/check_scope.py")
     require("from control_plane import CONTROL_ROOTS" in scope, "check_scope must use canonical CONTROL_ROOTS")
+    require('"audit.json"' in scope and '"verdict.json"' in scope and '"handoff.json"' in scope and 'stage == "execute"' in scope, "EXECUTE scope must protect future-stage packet outputs")
     require("--untracked-files=all" in scope and "SPIDER_SCOPE_REPAIRED" in scope, "scope checker lacks complete repair/revalidation path")
 
     resilient = text(".github/scripts/run-opencode-resilient.sh")
@@ -117,12 +119,20 @@ def main():
     require("product promotion pending" in prepare and "promotion_ready" in prepare, "Product allocator must honor the promotion transaction latch")
     require("Global Research Director mandate required" in prepare and "director_mandate" in prepare, "NEW experiments must carry a Global Director mandate")
 
+    snapshot_builder = text("scripts/build_portfolio_snapshot.py")
+    require("quarantine_by_id" in snapshot_builder and "lane_state_last_quarantined" in snapshot_builder and "canonical_last_decision" in snapshot_builder, "portfolio snapshot must exclude quarantined lane-state verdicts from Director evidence")
+
+    ci_wf = text(".github/workflows/ci.yml")
+    require("CODEX_LIVE_FALLBACK" in ci_wf and "quarantine_by_id" in ci_wf, "CI must allow only explicit quarantine with canonical fallback")
+
     pulse = text(".github/workflows/factory-pulse.yml")
     require("SPIDER_CIRCUIT_OPEN" in pulse and "last_failure_control_revision" in pulse, "factory pulse lacks repeated-failure circuit breaker")
     require("SPIDER_PRODUCT_PROMOTION_PENDING" in pulse, "factory pulse must block Product while promotion is pending")
     require("spider_research_scout" in pulse and "spider_portfolio_director" in pulse, "factory pulse must run Scout then Global Research Director")
+    require("SPIDER_DIRECTION_OPENCODE_UNAVAILABLE" in pulse and "SPIDER_SCOUT_UNAVAILABLE" in pulse and "SPIDER_GLOBAL_DIRECTOR_UNAVAILABLE" in pulse, "strategic control failures must be visible and propagate to Factory failure")
     require("DIRECTION_MISSING" in pulse and "SPIDER_DIRECTION_UNAVAILABLE" in pulse, "factory pulse must fail closed when global direction is unavailable")
     recovery_wf = text(".github/workflows/lane-recovery.yml")
+    require("GH_REPO:" in recovery_wf, "Lane recovery must provide explicit repository context to gh without checkout")
     require("workflow_run:" in recovery_wf and "SPIDER R2 Lane" in recovery_wf and "conclusion != 'success'" in recovery_wf and "gh workflow run factory-pulse.yml" in recovery_wf, "failed/cancelled lane recovery must explicitly wake global direction outside Factory Pulse concurrency")
     codex_wf = text(".github/workflows/codex-sync.yml")
     require("actions: write" in codex_wf and "Wake global direction after canonicalization" in codex_wf and "gh workflow run factory-pulse.yml" in codex_wf, "Codex sync must explicitly wake global direction after canonicalization")
@@ -130,6 +140,11 @@ def main():
     direction_validator = text("scripts/validate_portfolio_allocation.py")
     require("tunnel continuation/allocation requires" not in direction_validator, "direction validator must not override Director judgment with tunnel quotas")
     require("SPIDER_SUPERSEDE_PREFREEZE" in pulse and "SPIDER_RESUME_FROZEN" in pulse, "factory pulse must distinguish pre-freeze redirection from frozen transaction completion")
+    factory_recovery = text(".github/workflows/factory-recovery.yml")
+    require("SPIDER R2 Factory Pulse" in factory_recovery and "SPIDER_FACTORY_RECOVERY_RETRY" in factory_recovery and "SPIDER_FACTORY_RECOVERY_CIRCUIT_OPEN" in factory_recovery and "gh workflow run factory-pulse.yml" in factory_recovery, "Factory Pulse failures must have bounded external recovery")
+    require('cron: "*/5 * * * *"' in factory_recovery and "gh run list --workflow=factory-pulse.yml --limit 1" in factory_recovery and "SPIDER_FACTORY_RECOVERY_ACTIVE" in factory_recovery, "Factory recovery must poll independently of GITHUB_TOKEN event chaining and inspect only the freshest pulse")
+    require("GH_REPO:" in factory_recovery, "Factory recovery must provide explicit repository context to gh without checkout")
+    require("conclusion == 'cancelled'" not in factory_recovery, "Factory recovery must not retry cancellation superseded by fresher direction")
 
     promote = text(".github/workflows/product-promote.yml")
     require("git merge --no-commit --no-ff origin/lab2/product" not in promote, "Product workflow must never merge the whole research branch")

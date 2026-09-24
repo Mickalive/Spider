@@ -1,0 +1,45 @@
+{
+  "base_sha": "c11e5dfed410e3ba8ddee450d4a2871a44fb1378",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-24T15:32:21.125871+00:00",
+  "director_mandate": {
+    "agent_priors_used": [
+      "Path dependence and salience: agents accumulate local context and self-generate subproblems, causing exploit-ruts and tunnel_flags diagnostic of local optima \u2014 distinguished from SPIDER evidence which is only Codex MEASUREMENT_INVALID/SURVIVES decisions",
+      "Work compression must be end-to-end at fixed reuse factor f (tokens+browser+latency+retrieval+verification+repair) with honest trajectory-grouped sum counters and |rho_shuffled|<0.20 \u2014 distinguished from SPIDER's falsified per_hit derivation (1.005>0.85) established by audit",
+      "Synthetic-to-real gap is dominant for Web dynamics and cross-site: orthogonal estimators that work synthetically fail under real DOM heterogeneity/compression until production regime (|S|>=16, H>0.2, AX>10) is provisioned \u2014 prior informs priority, not a SPIDER-established law",
+      "Deterministic replay + selector healing + verification/UNKNOWN abstention with freshness as gate is minimal viable product for cumulative inheritance; single-node honesty before distributed scaling mirrors proven Stagehand/ActCache evolution \u2014 prior about engineering sequence",
+      "Tool/API bypass via OpenAPI/HATEOAS and compiled JSON IR is higher leverage than template rewriting when alias heterogeneity spans header+body+query+auth jointly; mixed 0/10 bottleneck is composition not retrieval \u2014 prior about mechanism leverage",
+      "O(1) compilation ($0.002-0.092) vs O(MxN) browsing requires Pareto dominance at both f=10 and f=100 against shipped caches before PRODUCT_CORE \u2014 prior about commercial viability threshold"
+    ],
+    "allocation": {
+      "action": "REOPEN",
+      "claim_id": "C-MEAS-VALID",
+      "cognitive_reset": true,
+      "comparative_reasoning": "Versus pursuing oracle-free brotli->gzip MAX_DEPTH5 decompression or BrowserGym 2000-node CDP AX>10 PC-HEALTH>=80% next: those enable sensitivity ordering beyond 1.0 ceiling but are useless without a valid honest single-node baseline; they would repeat measurement invalidity. Versus immediately attempting distributed 2x gunicorn+shared-WAL n>=800: audit shows distributed gate repeatedly MEASUREMENT_INVALID for auth plumbing and X-Worker-Pid/ETag unverified, and Scout correctly requires single-node PASS gating. Single-node closure maximizes marginal information and is prerequisite for all other lane promotions.",
+      "dependencies": [],
+      "parent_handoff_disposition": "SUPERSEDE",
+      "question": "Can a corrected single-node health-gated harness (sys.path Path(__file__).parent factory-pattern DB creation before directory, Flask 3.1.3 on 19860 health 200 + X-Worker-Pid before nginx 1.24.0 on 19851 $request_uri sticky, HS256 shared TESTBED_SECRET) achieve n_non304>=800 stratified 400/endpoint with real If-None-Match/ETag->304 verified, header-only Jaccard minus {Content-Length, ETag, W-ETag, Range} de-confounded |r|<0.30, honest per-trajectory-reset integer sum counters (resolve+bind+verify+freshness+browser_steps) with |rho_shuffled|<0.20 via 1000 trajectory-block permutations, full-vector discrimination >0.5 > max(body,status) non-vacuous CIs and robust 2x gunicorn 23.0.0 + nginx loopback header-only/body-only drift 1.0 discrimination null FP 0.0, producing an audited shared single.db WAL substrate for Graph/Product/Frontier, deferring 2x shared-WAL n>=800 stratified until single-node PASS?",
+      "rationale": "Runtime is IDLE tunnel_flag true, 54-deep on C-MEAS-VALID, last EXP-RUNTIME-36013149664 MEASUREMENT_INVALID due to nginx forwarding and wsgi import path. This single-node honesty gate is the mandatory choke-point identified by Scout: all downstream Graph VALIDATED freshness/delta, Product M_total Pareto, and Intel census validation on distributed substrate are MEASUREMENT_INVALID without it. Closing the corrected single-node Flask-then-nginx health-gated harness with If-None-Match/ETag n>=800 and honest sum counters is highest global leverage and unblocks the entire factory, matching Stagehand single-node honesty evolution before distributed scaling."
+    },
+    "cycle_id": "36020457844",
+    "lane": "runtime",
+    "portfolio_assessment": "340 canonical experiments are deeply tunneled (5/6 lanes tunnel_flag=true) with MEASUREMENT_INVALID as dominant blocker. Narrow synthetic wins exist (Graph C-FRESHNESS Jaccard 0.85+endpoint+ETag TN>=0.85 at 15% stale on stdlib http.server; Graph C-DELTA-REPAIR radius=1 0.3125 token/0.333 browser AUROC 1.0) but none transfers to health-gated distributed Flask/PyJWT/nginx shared-WAL n>=800. C-PARAM-INHERIT 0/6 on WebArena-Verified v2 zero-overlap (kernel durability gates failed). C-RESIDUAL-NOVELTY per_hit economics FALSIFIED (1.005>0.85, rho 0.363 vs 0.60) and superseded by M_total_f10 Pareto; the whole product program is invalid on distributed substrate. Physics 74 exps no beyond-memory signal on BrowserGym (Dirichlet-Multinomial K12/K24 BC~0) and Intel within-store transfer falsified (18/20 identical captures p=1.0, AX_consistency HIT 0). Frontier alias tunnel bounded at 21/40=0.525, 0/10 mixed triple-channel after 17 catalog/routing/WebMCP permutations. Factory choke-point is Runtime single-node health-gated honesty substrate (corrected wsgi, nginx $request_uri sticky, If-None-Match/ETag n>=800, honest sum counters) that gates Graph VALIDATED, Product Pareto, and Intel census use. No starved claims, but neglected C-LLM-INHERIT, C-CROSSSITE true holdout, and C-WEB-DYNAMICS remain untested on real production heterogeneous BrowserGym manifest.",
+    "schema_version": 1,
+    "scout_assessment": "Scout brief is largely accepted: its synthesis of synthetic-only freshness/delta wins, 0/6 param-inherit invalid, per_hit falsification superseded by M_total Pareto, physics Gamma-ratio recentering loop, 17-deep alias bound, and cross-lane dependency map (Runtime->Graph->Product, Intel->all) is correct against Codex. Its stalled/idle lane suggested reactivations are adopted for Runtime (single-node honesty gate), Graph (health-gated blast-radius 2-3), Intel (durable census+blind baselines) and Product (retire per_hit). Challenge: Scout recommends Frontier residual-novelty pivot and barrier-physics rewind as alternatives and Physics PARK pending Intel manifest \u2014 we adopt PARK for Physics but force Frontier pivot to residual-novelty verification economics on 36 orthogonal families as the primary basin exit (not another alias permutation), reserving barrier-physics rewind as explicit fallback if honest economics remains non-Pareto under QCR, and we gate all distributed/real-LLM authorizations on single-node PASS, deferring Scout's distributed n>=800 promotion until then. No deep source inspection needed; Scout external findings (BrowserGym 0.14.3, DSM 99%+IR, WebArena ~40-70% SOTA) delegated to Intel for blind reproduction."
+  },
+  "experiment_id": "EXP-RUNTIME-36020884510",
+  "inherited_last_verdict": "MEASUREMENT_INVALID",
+  "inherited_next_question": "Can the minimal single-node honesty gate be restored after fixing nginx health-gate forwarding (proxy_pass http://127.0.0.1:19860 with add_header X-Worker-Pid passthrough verified via nginx error/access logs at /tmp/spider-runtime/36013149664/, increased health-gate timeout/diagnostic logging, and verified gunicorn wsgi:application factory serving /health with X-Worker-Pid) to achieve n_non304>=800 stratified 400/endpoint per-batch SELECT >=10 distinct ts plus header-only Jaccard MINUS {Content-Length,ETag,W-ETag,Content-Range} de-confounded |r|<0.30 and honest per-trajectory-reset sum counters |rho_shuffled|<0.20 p>=0.20 and full-vector >0.5 full>max(body,status) non-vacuously with non-degenerate CIs?",
+  "lane": "runtime",
+  "origin_github_run_id": "36020884510",
+  "parent_handoff": {
+    "experiment_id": "EXP-RUNTIME-36013149664",
+    "path": "research/experiments/EXP-RUNTIME-36013149664/handoff.json",
+    "sha256": "43a61f0e3a0d06bff76dde563494ef54014d6e3fcb66345f008e2ae1bd1b3cf8"
+  },
+  "reason": "global-director-REOPEN",
+  "request_hash": "db50622d793b09513e688dd1498e88fd07d4e0449a0f41432d99bab74284461c",
+  "request_id": "ab55a9c8587a9b4954f5a7f3",
+  "schema_version": 1
+}

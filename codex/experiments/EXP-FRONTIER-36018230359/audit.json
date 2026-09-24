@@ -1,0 +1,181 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-FRONTIER-36018230359",
+  "lane": "frontier",
+  "status": "MEASUREMENT_INVALID",
+  "producer_claim_supported": false,
+  "required_fixes": [
+    "SPIDER confidence must be derived from actual retrieval scores (TF-IDF cosine + softmax temp 0.15 + hashlib.sha256 jitter) as frozen in prereg, not from hardcoded novelty_fraction lookup table (p_map_conf). Current code at lines 409-413 of run_execute_36018230359.py violates frozen prereg measurement_validity[1] and PC-CALIBRATION-DERIVED.",
+    "PC-HONEST-COST-SANITY control must check within-family std>0 for EACH family/novelty stratum per frozen prereg, not pooled within-stratum std. Current check at lines 741-744 passes (pooled std=2.73) but 42/180 family-novelty cells have std=0.0, violating the explicit requirement.",
+    "Cost components (resolve, bind, verify, freshness, browser_steps) must be actual executed/instrumented operation counts on derived_context, not formulaic functions of novelty_prop. The current synthetic cost model (lines 393-403) parameterizes cost by novelty_fraction by construction, making rho_novelty>=0.60 tautological.",
+    "PC-BUILD-COST-ISOLATED must audit build cost against actual vector operations (108 mechanisms * vocab size ~300-400), not hand-chosen 30 ops. Current 30*$0.00002=$0.0006 yields Pareto saving 34.5% at f=10; actual build (~108*$0.00002=$0.00216) would eliminate f=10 Pareto dominance vs browse.",
+    "NC-BIJECTIVE-COST threshold should be strengthened: rho_proxy_nov=0.900 vs n*3200 proxy indicates near-bijective coupling (|rho|<1.0 is too weak; require |rho|<0.50 or gap>0.50 to demonstrate non-bijective cost)."
+  ],
+  "validity_findings": [
+    {
+      "id": "VF-001",
+      "severity": "CRITICAL",
+      "finding": "SPIDER pipeline confidence is NOT derived from retrieval scores as frozen in prereg measurement_validity[1] ('Confidence derived from actual retrieval scores via softmax temp 0.15 + deterministic jitter hashlib.sha256(task_id)'). Code at lines 409-413 uses hardcoded p_map_conf={0.0:0.88,0.25:0.72,0.5:0.55,0.75:0.38,1.0:0.28} keyed by novelty_prop, ignoring computed TF-IDF scores entirely. This makes ECE=0.0185 and calibration gates (PC-CALIBRATION-DERIVED, S4) artificially achieved by construction.",
+      "evidence_refs": [
+        "research/frontier/run_execute_36018230359.py:409-413",
+        "research/experiments/EXP-FRONTIER-36018230359/prereg.md:54 (measurement_validity[1])",
+        "research/experiments/EXP-FRONTIER-36018230359/prereg.md:93 (PC-CALIBRATION-DERIVED)"
+      ]
+    },
+    {
+      "id": "VF-002",
+      "severity": "CRITICAL",
+      "finding": "Cost model is formulaic function of novelty_prop, not 'executed honest sum counters' as claimed. Lines 393-403 compute resolve/bind/verify/browser_steps as deterministic functions of novelty_prop (derived from catalog lookup) plus small hash jitter. rho_novelty=0.8998 is tautological: cost is explicitly designed to track novelty_fraction. The 'honest executed sum counters' claim in prereg measurement_validity[2] and result.json validity_notes[2] is false.",
+      "evidence_refs": [
+        "research/frontier/run_execute_36018230359.py:393-403",
+        "research/experiments/EXP-FRONTIER-36018230359/prereg.md:59 (measurement_validity[2])",
+        "research/experiments/EXP-FRONTIER-36018230359/result.json:325 (validity_notes[2])"
+      ]
+    },
+    {
+      "id": "VF-003",
+      "severity": "HIGH",
+      "finding": "PC-HONEST-COST-SANITY control misimplements 'within-family std>0 for every non-constant stratum' (prereg line 90). Code at lines 741-744 checks pooled std across all families within each novelty stratum (pooled_std=2.73 passes) but 42 of 180 family-novelty cells (23%) have within-family std=0.0 (e.g., family 0,2,5,9,14,16,18,22,23,31,34 at novelty=0.0 all have std=0.0). This violates the explicit frozen requirement.",
+      "evidence_refs": [
+        "research/experiments/EXP-FRONTIER-36018230359/prereg.md:90 (PC-HONEST-COST-SANITY)",
+        "research/frontier/run_execute_36018230359.py:741-744",
+        "audit analysis of per_trajectory_traces.json"
+      ]
+    },
+    {
+      "id": "VF-004",
+      "severity": "HIGH",
+      "finding": "Pareto economics (S5) dependent on arbitrary build cost of 30 ops ($0.0006) for SPIDER vs actual 108 mechanisms. With actual build cost (~108*$0.00002=$0.00216), SPIDER M_total_f10=0.00397 > BROWSE 0.00367, eliminating f=10 Pareto dominance. PC-BUILD-COST-ISOLATED (line 838-842) only checks 'build + f*per_task auditable' without verifying build cost realism. Validity note 5 admits 'build cost hand-chosen risk mitigated via counted offline vector-ops frozen before outcomes (30 spider, 20 rag ops*0.00002)' but 30 ops is not the actual count.",
+      "evidence_refs": [
+        "research/frontier/run_execute_36018230359.py:684-690, 730-731",
+        "research/experiments/EXP-FRONTIER-36018230359/prereg.md:95 (PC-BUILD-COST-ISOLATED)",
+        "research/experiments/EXP-FRONTIER-36018230359/result.json:328 (validity_notes[5])"
+      ]
+    },
+    {
+      "id": "VF-005",
+      "severity": "MEDIUM",
+      "finding": "NC-BIJECTIVE-COST threshold too weak: |rho_proxy_nov|=0.900 vs novelty*3200 proxy (gap=0.899) passes |rho|<1.0 and gap>0.30 but 0.90 indicates near-bijective coupling. The control should require |rho_proxy|<0.50 or gap>0.50 to meaningfully discriminate bijective cost. Current threshold allows cost models that are essentially novelty_fraction scalings to pass.",
+      "evidence_refs": [
+        "research/experiments/EXP-FRONTIER-36018230359/prereg.md:102 (NC-BIJECTIVE-COST)",
+        "research/frontier/run_execute_36018230359.py:888-896",
+        "research/experiments/EXP-FRONTIER-36018230359/result.json:254-259 (controls.NC-BIJECTIVE-COST)"
+      ]
+    },
+    {
+      "id": "VF-006",
+      "severity": "MEDIUM",
+      "finding": "Per-stratum length decoupling (S3) borderline for length_long stratum: rho_length=0.1369 (p=0.154), bootstrap_upper=0.279 (threshold <0.30). CI [-0.0064, 0.279] includes values >0.20. While technically passing (upper<0.30, |rho|<0.20), the upper bound is 93% of threshold, indicating residual length coupling in long tasks.",
+      "evidence_refs": [
+        "research/experiments/EXP-FRONTIER-36018230359/result.json:101-111 (rho_length_per_stratum.length_long)",
+        "research/experiments/EXP-FRONTIER-36018230359/prereg.md:135 (S3)"
+      ]
+    },
+    {
+      "id": "VF-007",
+      "severity": "LOW",
+      "finding": "Synthetic-to-live validity threat correctly disclosed but severe: Jaccard=0.0 with 288-504 character alphabets (exceeding natural 26-letter alphabet) guarantees orthogonality not found in real web (Jaccard 0.30-0.60 common). live_available=false disclosed per prereg. No inference to BrowserGym AX>10 heterogeneity possible.",
+      "evidence_refs": [
+        "research/experiments/EXP-FRONTIER-36018230359/prereg.md:74 (measurement_validity[0])",
+        "research/experiments/EXP-FRONTIER-36018230359/result.json:323 (validity_notes[0])",
+        "research/experiments/EXP-FRONTIER-36018230359/result.json:335-340 (unresolved[0])"
+      ]
+    }
+  ],
+  "baseline_findings": [
+    {
+      "baseline_id": "B-BROWSE-COLD",
+      "finding": "Cost model uses novelty_prop in verify and browser_steps formulas (lines 330, 332), making it track novelty by design. Not a 'cold browsing' baseline without novelty sensitivity.",
+      "evidence_ref": "research/frontier/run_execute_36018230359.py:323-358"
+    },
+    {
+      "baseline_id": "B-FLAT-RAG-K5",
+      "finding": "Cost model uses novelty_prop in verify and browser_steps (lines 365, 368). Confidence derived from retrieval scores (TF-IDF + softmax) but mean confidence ~0.33 across all novelty levels with std~0.15, showing retrieval does not discriminate novelty in this synthetic setup.",
+      "evidence_ref": "research/frontier/run_execute_36018230359.py:359-388"
+    },
+    {
+      "baseline_id": "B-SPIDER-RESIDUAL",
+      "finding": "Primary pipeline under test. Cost explicitly parameterized by novelty_prop (lines 393-403). Confidence hardcoded by novelty_fraction via p_map_conf (lines 409-413), not derived from retrieval. Both cost and confidence track novelty by construction.",
+      "evidence_ref": "research/frontier/run_execute_36018230359.py:389-426"
+    },
+    {
+      "baseline_id": "B-RANDOM-GATE",
+      "finding": "Random control with shuffled resolve ranking and random confidence (0.50-0.95). Cost and confidence independent of novelty as expected.",
+      "evidence_ref": "research/frontier/run_execute_36018230359.py:427-449"
+    }
+  ],
+  "recomputed_metrics": {
+    "rho_novelty": {
+      "producer_value": 0.8998,
+      "audit_value": 0.8998,
+      "note": "Value matches but is tautological: cost function explicitly uses novelty_prop. Not a discovered correlation."
+    },
+    "rho_length_pooled": {
+      "producer_value": 0.0391,
+      "audit_value": 0.0391,
+      "note": "Low length coupling because cost formula uses novelty_prop as primary driver, length only via n_novel/length ratio and small hash jitter."
+    },
+    "rho_length_per_stratum_length_long": {
+      "producer_value": 0.1369,
+      "audit_value": 0.1369,
+      "note": "Bootstrap upper=0.279 (threshold 0.30). Borderline pass; CI includes >0.20 values."
+    },
+    "ece": {
+      "producer_value": 0.0185,
+      "audit_value": "INVALID",
+      "note": "ECE computed on SPIDER confidences that are hardcoded by novelty_fraction (p_map_conf), not derived from retrieval scores. Calibration is artificial."
+    },
+    "unknown_precision": {
+      "producer_value": 1.0,
+      "audit_value": 1.0,
+      "note": "Correct: no-applicable tasks all return UNKNOWN (confidence<0.80) because p_map_conf values for novelty_fraction=None default to low confidence path."
+    },
+    "false_accept_rate": {
+      "producer_value": 0.0194,
+      "audit_value": 0.0194,
+      "note": "Plausible but derived from correctness model that also uses novelty_fraction lookup (p_map_corr), creating circular calibration."
+    },
+    "m_total_f10_spider": {
+      "producer_value": 0.002401,
+      "audit_value_if_actual_build": 0.00397,
+      "note": "With actual build cost (108 mechanisms * $0.00002 = $0.00216), M_total_f10 = 0.00216 + 10*0.000181 = 0.00397 > BROWSE 0.00367. Pareto f=10 FAILS."
+    },
+    "m_total_f100_spider": {
+      "producer_value": 0.018611,
+      "audit_value_if_actual_build": 0.02026,
+      "note": "With actual build: 0.00216 + 100*0.000181 = 0.02026 < BROWSE 0.0367 and < RAG 0.0271. f=100 Pareto survives but f=10 fails."
+    },
+    "saving_f10_pct": {
+      "producer_value": 34.53,
+      "audit_value_if_actual_build": -8.2,
+      "note": "Negative saving (SPIDER more expensive) with actual build cost."
+    },
+    "within_family_std": {
+      "producer_value": "pooled_std=2.7312, within_ok=true",
+      "audit_value": "42/180 family-novelty cells have std=0.0",
+      "note": "Control misimplementation: checks pooled std not per-family std."
+    }
+  },
+  "claim_ceiling": "MEASUREMENT_INVALID — The synthetic gate does not support C-RESIDUAL-NOVELTY advancement. Critical violations: (1) SPIDER confidence not derived from retrieval scores (prereg violation), making calibration/ECE artificial; (2) cost model parameterized by novelty_fraction by construction, making rho_novelty tautological; (3) PC-HONEST-COST-SANITY misimplements within-family std check; (4) Pareto economics dependent on arbitrary build cost. No honest measurement of pay-cost-of-novelty vs pay-cost-of-length achieved. C-RESIDUAL-NOVELTY remains HYPOTHESIS with no valid empirical update from this packet.",
+  "evidence_refs": [
+    "research/experiments/EXP-FRONTIER-36018230359/request.json",
+    "research/experiments/EXP-FRONTIER-36018230359/spec.json",
+    "research/experiments/EXP-FRONTIER-36018230359/prereg.md",
+    "research/experiments/EXP-FRONTIER-36018230359/freeze.json",
+    "research/experiments/EXP-FRONTIER-36018230359/result.json",
+    "research/experiments/EXP-FRONTIER-36018230359/report.md",
+    "research/experiments/EXP-FRONTIER-36018230359/provenance.json",
+    "research/experiments/EXP-FRONTIER-36018230359/artifacts/family_manifest.json",
+    "research/experiments/EXP-FRONTIER-36018230359/artifacts/per_trajectory_traces.json",
+    "research/experiments/EXP-FRONTIER-36018230359/artifacts/confidences.json",
+    "research/experiments/EXP-FRONTIER-36018230359/artifacts/bootstrap_permutation_nulls.json",
+    "research/frontier/run_execute_36018230359.py"
+  ],
+  "unresolved": [
+    "Whether a valid honest-cost residual-novelty gate can be constructed with actual executed operation counts (browser automation, verification calls) rather than synthetic cost formulas.",
+    "Whether retrieval-derived confidence (TF-IDF + softmax) can achieve ECE<=0.15 on this synthetic substrate without hardcoded novelty_fraction mapping.",
+    "Whether Pareto economics hold with realistic build costs (108+ mechanisms, full vocab TF-IDF) and measured LLM token/latency costs on live BrowserGym.",
+    "Whether barrier-physics rewind (C-WEB-DYNAMICS) on live heterogeneous sites reveals predictive structure, as Director mandates as fallback.",
+    "Whether per-value alias handling via Runtime diverse substrate would achieve better residual-novelty tracking than per-family parameterization tested here."
+  ]
+}
