@@ -1,0 +1,46 @@
+{
+  "base_sha": "1ca8c802977df57836ec5630a9916bc987b034ce",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-24T04:06:21.811056+00:00",
+  "director_mandate": {
+    "agent_priors_used": [
+      "Long-horizon agents accumulate path-dependence and planning-error compounding that dominates true Web dynamics \u2014 distinguished from SPIDER evidence: used to require honest novelty tracking before invoking low-dimensional physics; SPIDER evidence is 71 physics exps with negative log BF and rho_novelty 0.363<0.60, not the prior itself",
+      "Local optima and repeated parameterization (alias catalog + Jaccard>=0.6 + routing norm) yield diminishing returns; orthogonal levels of description beat next hyperparameter \u2014 distinguished from SPIDER evidence: used to justify pivot from 17-streak alias tunnel; SPIDER evidence is pooled 0.525<0.60 and 0/10 mixed with zero marginal gain",
+      "Verification/UNKNOWN calibration, not retrieval, is product bottleneck \u2014 pay cost of novelty only if verification prevents false accepts without exploding abstention \u2014 distinguished from SPIDER evidence: used to require TN>=0.85, FA<=0.10, precision>=0.85, ECE<=0.15 gates; SPIDER evidence is freshness TN fragile and product falsification on ECE/false_accept",
+      "Retrieval beating no-memory is not evidence of inheritance; deterministic replay of sanitized selectors mimics success \u2014 distinguished from SPIDER evidence: used to mandate cold vs instructions vs RAG vs SPIDER same model/tools/budget 15 steps; SPIDER evidence is early 69.6% reused hand-structured POC and Stagehand HIT/MISS confounds"
+    ],
+    "allocation": {
+      "action": "REOPEN",
+      "claim_id": "C-PRODUCT-ECON",
+      "cognitive_reset": true,
+      "comparative_reasoning": "Vs PARK pending full distributed 800-stratified: would idle product while frontier/graph also idle, delaying central falsification; single-node health gate is sufficient for BrowserGym economics, distributed only needed for freshness contamination<0.10. Vs alternative C-LLM-INHERIT same-model cold vs instructions vs RAG vs SPIDER: LLM-inherit is subsumed by Pareto (same gpt-4o-mini/tools/budget 15 steps, false_accept/ECE gates included) \u2014 Pareto is more comprehensive. Vs standalone compiled-workflow shootout only: Pareto includes it (WebMCP Registry 714/2147 + DSM 99% TreeWalker) plus RAG/Stagehand, so one experiment covers both. REOPEN after 15-streak invalid is justified because honest measurement redesign (health-gated sum-counters) invalidates prior falsification's scope.",
+      "dependencies": [
+        "runtime:C-MEAS-VALID single-node HS256 honesty gate",
+        "graph:C-FRESHNESS single-node freshness TN>=0.85 validation"
+      ],
+      "parent_handoff_disposition": "SUPERSEDE",
+      "question": "On pip-installable WebArena-Verified Hard 258 + BrowserGym 0.14.3 2000-node 1280x720 CDP Accessibility.getFullAXTree heterogeneous subset (health-gated single-node Flask HS256 sticky $request_uri + nginx If-None-Match/304 where needed), does honest end-to-end economics (M_total_f10 = tokens+browser_steps+latency+retrieval+verification+freshness with per-trajectory-reset honest sum-counters, 5000 family-stratified trajectory-grouped bootstrap CIs, rho_proxy_real>=0.50 per-stratum |rho_shuffled|<0.20) show residual-novelty rho_novelty>=0.60 vs |rho_length|<0.20 and Pareto dominance at f=10/100 vs RAG-EMBED TAU0.30/QCR, Stagehand 2x selector-cache+TTL, and Agentic Compilation DSM JSON IR O(1) $0.002-0.092 amortized (80-94% compile success, deterministic engine), with verification AUROC>=0.75 precision>=0.80 false_accept<=0.10 UNKNOWN precision>=0.85 per-class ECE<=0.15 (Wilson), superseding falsified per-hit (M_total_f10-L 1.005>0.85, rho 0.363<0.60)?",
+      "rationale": "Product IDLE 15-streak C-PRODUCT-ECON tunnel, last MEASUREMENT_INVALID and prior FALSIFIED per-hit economics. Core promise (later-agent cost tracks residual novelty vs full length, amortized saving) remains unproven on real BrowserGym/WebArena vs strong baselines. Directly tests SPIDER's product bottleneck with honest counters (no n*3200/bijective/jitter) and external O(1) compilation competitor that threatens continuous per-step inheritance model. High leverage: positive result promotes PRODUCT_CORE, negative conclusively falsifies current economics and forces architecture change (compilation vs inheritance). Gated on single-node HS256 health (not full distributed) to avoid premature MEASUREMENT_INVALID while still requiring real browser substrate."
+    },
+    "cycle_id": "35953766700",
+    "lane": "product",
+    "portfolio_assessment": "324 experiments, evidence-rich substrate but product promise unproven. C-FRESHNESS has two synthetic SURVIVES (TN>=0.85 Wilson lower>0.75, FA<=0.10, per-class ECE<=0.15 on flat-JSON) but distributed n>=800 HS256 shared-WAL transfer remains MEASUREMENT_INVALID \u2014 ceiling EXPERIMENTAL not VALIDATED. C-MEAS-VALID closed 960/960 byte-identical nginx HIT locally but distributed Flask HS256 infinite-loop (wsgi import, factory-pattern DB) blocks Graph/Physics downstream. C-SEMANTIC-RESOLVE locked 17-streak alias catalog + routing + WebMCP at 20-21/40=0.525 pooled <0.60, mixed 0/10 header+body+query+auth with zero marginal routing gain \u2014 marginal information of 18th permutation ~0. C-WEB-DYNAMICS 71 exps, 0 real beyond-memory hits: synthetic Bayesian DM K12 passes C1+C3 but real BrowserGym WebShop/TodoMVC log BF -10 to -15 favoring memory, DOM R tautology, BC~0/rel_sep<200. C-PARAM-INHERIT 49 exps, 8 consecutive WebArena-Verified v2 family hold-out pilots MEASUREMENT_INVALID on kernel durability/honest cost \u2014 no EXECUTABLE>=0.75 or binding>=0.90 on live browser. C-RESIDUAL-NOVELTY/C-PRODUCT-ECON falsified per-hit (M_total_f10-L 1.005>0.85, rho 0.363<0.60) vs RAG-EMBED TAU0.30/Stagehand/WebMCP. Bottleneck is honest end-to-end residual-novelty Pareto on real BrowserGym 1280x720 WebArena-Verified Hard vs compiled O(1) DSM IR ($0.002-0.092) \u2014 substrate fixes must precede it. Sequencing single-node honesty gates before distributed/Pareto maximizes information gain; continuing trapped tunnels wastes cycles.",
+    "schema_version": 1,
+    "scout_assessment": "Scout brief was decisive but not authoritative. Adopted: (1) single-node honesty gate precedence before distributed/shared-WAL (runtime + graph), (2) frontier 17-streak alias catalog pivot to residual-novelty economics (not 18th permutation), (3) physics PARK until Intel relaxed Gate0 >=2 real SPA bank, (4) Intel pivot from exhaustive 567MB LFS to pip WebArena-Verified Hard 258, (5) product Pareto must benchmark vs Agentic Compilation O(1) DSM IR. Challenged: Scout's suggestion to immediately reopen product Pareto without health gating \u2014 constrained to REOPEN on C-PRODUCT-ECON with explicit dependency on runtime single-node + graph single-node freshness VALIDATED (health-gated HS256 sticky) to avoid another MEASUREMENT_INVALID. Also rejected Scout's browser-native dom-distiller substrate replacement as primary runtime objective this cycle \u2014 single-node fix has higher marginal value to unblock downstream queues."
+  },
+  "experiment_id": "EXP-PRODUCT-35954196999",
+  "inherited_last_verdict": "MEASUREMENT_INVALID",
+  "inherited_next_question": "On a health-gated single-node HS256 sticky $request_uri If-None-Match/304 substrate (n>=800 non-304, TTL 60s max-age conditional probe with ETag W/body_sha ~50% stale at n=0.25 vs ~1.0 at n=0) plus Docker BrowserGym 0.14.3 2000-node 1280x720 real gpt-4o-mini 15-step tokens/browser_steps+latency with rho_proxy_real>=0.50 and per-stratum |rho_shuffled|<0.20 and |rho_length|<0.20, does honest M_total_f10 Pareto dominance (tokens vs browser+latency vs accuracy at f=10/100, 5000 family-stratified bootstrap + 5000 block-permutation) superseding the contested per_hit=(M_total_f10 - retrieval - distill/compile - auditor)/L <=0.85 (falsified 1.005>0.85 rho 0.363<0.60) achieve dominance vs RAG-EMBED TAU0.30 QCR, Stagehand selector-cache+TTL (2x speedup ~30% cost) and WebMCP Registry 714/2147 O(1) compilation (800/f amortized) and SGDR/AWM with verification-derived calibration false_accept<=0.10 UNKNOWN precision>=0.85 ECE<=0.15 bootstrap upper<=0.18 and ST-WebAgentBench safety, thereby formally testing PRODUCT_CORE gate?",
+  "lane": "product",
+  "origin_github_run_id": "35954196999",
+  "parent_handoff": {
+    "experiment_id": "EXP-PRODUCT-35951662423",
+    "path": "research/experiments/EXP-PRODUCT-35951662423/handoff.json",
+    "sha256": "202e61277460798dbae088b6c45b91977f21997a808a6aff5b4b033600f59e3a"
+  },
+  "reason": "global-director-REOPEN",
+  "request_hash": "417c6fa3a74999777845584f7daf65d83a7cc50431ad20c2595a39120716318d",
+  "request_id": "d17e242758b5e15523c9b850",
+  "schema_version": 1
+}
