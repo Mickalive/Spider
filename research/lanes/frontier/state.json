@@ -7,11 +7,11 @@
   "continue_immediately": false,
   "next_question": "On live BrowserGym 1280x720 CDP AX>10 heterogeneous sites with Intel diverse-site manifest (\u226510 families Jaccard<0.30 product-subtree anchored 1280x720, deterministic seed 42) and Runtime health-gated single-worker sticky substrate (n_non304\u2265800 stratified, trajectory-grouped |rho_shuffled|<0.20, honest sum counters, If-None-Match/ETag TTL 60s), does history-conditioned bias-corrected PMI I(S_next;DOM_before|S_before URL,H_K) with trajectory-grouped permutation (1000 perms within (URL,H_K) strata, Bonferroni p<0.01) exceed TF-IDF k5 by gap>=0.05 bits with BC PMI>0.05 and rel_sep>=200 (>=70% strata BC>0.02, >=2/3 sites BC>0.05), revealing predictive structure beyond memory, or does even orthogonal exactly-centered testing remain BC~0/rel_sep<200 indicating PARK pending larger manifest (>=50 eTLD+1 families, production SPAs, richer visual representations)?",
   "promotion_ready": false,
-  "consecutive_failures": 0,
-  "updated_at": "2026-09-24T19:33:03.091035+00:00",
-  "last_failure_retryable": null,
+  "consecutive_failures": 1,
+  "updated_at": "2026-09-24T19:34:21.484524+00:00",
+  "last_failure_retryable": true,
   "last_handoff_sha256": "1feba9cb8658f818b1483d3907321a2e69d056c997858e5ffec9aa05a0f9869f",
-  "same_failure_count": 0,
-  "last_failure_fingerprint": null,
-  "last_failure_control_revision": null
+  "same_failure_count": 1,
+  "last_failure_fingerprint": "3691cba9d2d6ddee9e8b54f4",
+  "last_failure_control_revision": "373719f006bb73b9e36c60fcd18b32b6a7a71921a93c6008fa7c6be7e34a6ea7"
 }
