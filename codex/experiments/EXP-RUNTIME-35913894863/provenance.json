@@ -1,0 +1,95 @@
+{
+  "experiment_id": "EXP-RUNTIME-35913894863",
+  "github_run_id": 35913894863,
+  "base_sha": "7e9ba27a7a01387dfdf9327caed6408b346a7821",
+  "git_sha": null,
+  "env": {
+    "python": "3.12.14 (main, Aug 13 2026, 02:47:42) [GCC 13.3.0]",
+    "flask": "3.1.3",
+    "pyjwt": "2.14.0",
+    "gunicorn": "23.0.0",
+    "nginx": "1.24.0",
+    "playwright": "1.63.0",
+    "agentlab": "0.4.2",
+    "requests": "2.34.2",
+    "sqlite3": "3.45.1",
+    "brotli": "available"
+  },
+  "ports": {
+    "gunicorn_a": 19860,
+    "gunicorn_b": 19861,
+    "nginx": 19851
+  },
+  "seed": 44,
+  "jitter_ms": [
+    50,
+    150
+  ],
+  "excluded_headers": [
+    "Age",
+    "CF-Cache-Status",
+    "CF-RAY",
+    "Date",
+    "Server",
+    "X-Cache",
+    "X-Request-Id"
+  ],
+  "filter_out_keys": [
+    "age",
+    "cf-cache-status",
+    "cf-ray",
+    "date",
+    "server",
+    "x-cache",
+    "x-request-id",
+    "x-worker-pid"
+  ],
+  "body_states": {
+    "A": {
+      "len": 31,
+      "sha256": "d0ca833f843c6d70ec9d6755f52a92dcbfc8b4ab601b871bced09ad027172e34"
+    },
+    "C": {
+      "len": 117,
+      "sha256": "21b929ad1a9403218e1eccfdb8308ebe777f7b05696610611c372b95fbc8dcc2"
+    }
+  },
+  "hs256_secret_sha256": "496c82e91b6396dcc228871c547d9bcc90de731c5b0774499debcf06e649a842",
+  "hs256_secret_len": 49,
+  "db_paths": {
+    "shared": "/tmp/spider-runtime/35913894863/shared.db",
+    "per_node_a": "/tmp/spider-pernode-19860-35913894863.db",
+    "per_node_b": "/tmp/spider-pernode-19861-35913894863.db"
+  },
+  "fixes_applied": {
+    "FIX-1_honest_sum_counters": "resolve+bind+verify+freshness+browser_steps per real op, per-trajectory reset",
+    "FIX-2_header_only_jaccard_minus_bd": "structural = header-only Jaccard MINUS {CLEN,ETag,W-ETag,Content-Range}",
+    "FIX-3_hs256_ge32": "HS256 shared-secret 49 bytes, PyJWT decode",
+    "FIX-4_sticky_10uri": "hash $request_uri consistent with >=10 distinct URIs",
+    "FIX-5_health_gate": "GET /health via nginx 200+X-Worker-Pid, 0 missing",
+    "FIX-6_honest_no_jitter": "grep verified no n*3200/jitter/f*6.0"
+  },
+  "nginx_upstream_modes": {
+    "rr": "default round-robin",
+    "sticky_url": "hash $request_uri consistent"
+  },
+  "run_experiment_sha256": null,
+  "frozen_hashes": {
+    "request.json": null,
+    "spec.json": null,
+    "prereg.md": null,
+    "freeze.json": null
+  },
+  "artifacts": {
+    "/home/runner/work/Spider/Spider/research/experiments/EXP-RUNTIME-35913894863/run_experiment.py": null,
+    "/home/runner/work/Spider/Spider/research/experiments/EXP-RUNTIME-35913894863/raw_freshness_observations.jsonl": null
+  },
+  "created_at": "2026-09-24T00:02:03.165549+00:00",
+  "execution_status": "MEASUREMENT_INVALID",
+  "execution_outcome": "INCONCLUSIVE",
+  "failure_category": "EXECUTION_FAILURE",
+  "failure_detail": "HEALTH_GATE_FAILED: nginx+gunicorn did not respond 200+X-Worker-Pid within 15s. Gunicorn could not import Flask app module via run_experiment:app reference.",
+  "infrastructure_failure": true,
+  "not_scientific_falsification": true,
+  "next_action": "Fix gunicorn module import path and retry"
+}

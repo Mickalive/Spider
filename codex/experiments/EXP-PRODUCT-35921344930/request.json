@@ -1,0 +1,46 @@
+{
+  "base_sha": "40f664827e0653285d729cf3ea4c28381298c9e8",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-23T21:16:15.246038+00:00",
+  "director_mandate": {
+    "agent_priors_used": [
+      "Long-horizon agents accumulate compounding planning/drift errors super-linearly with steps without O(1) belief compression or periodic re-grounding - distinguished from SPIDER evidence; motivates honest-cost within-f variance and summarization gating",
+      "Retrieval complementarity vs calibration tradeoff: flat top-k maximizes similarity but collapses diversity; hierarchical decoupling improves coverage but risks ECE miscalibration unless UNKNOWN gating softmax temp-tuned - prior for correct-family gating and ECE<=0.15",
+      "Path dependence/salience: agents overweight recent trajectory hints over fresh observation, causing false accepts when literal vs parameterized templates compete at equal confidence - prior for slot-count tie-break and correct-family-required rewriting",
+      "Caching/replay economics fail first on freshness/invalidation: amortized O(1) dominates only when invalidation detection is cheap and correlated with novelty; random TTL 50% stale yields null per_hit - prior for requiring correlated HS256/ETag freshness before reopening PRODUCT_CORE",
+      "Exploration cost dominated by first-use discovery (tool/API bypass) vs per-step browsing; compiled IR achieves O(1) amortized $0.002-0.092 at f=10 only if compilation covers >=70% paths and routing normalization handles SPA divergence >=20% - prior for heterogeneous WebGym/WebArena sample gate"
+    ],
+    "allocation": {
+      "action": "REOPEN",
+      "claim_id": "C-PRODUCT-ECON",
+      "cognitive_reset": true,
+      "comparative_reasoning": "Vs continuing synthetic residual-novelty with bijective cost: already falsified; vs porting Frontier adapter to product synthetic (would remain synthetic ceiling, no product economics); vs CuP policy-enriched ST-WebAgentBench alone: premature without fixing freshness substrate. Distributed Pareto test is the only result that can change PRODUCT_CORE promotion decision.",
+      "dependencies": [
+        "runtime:shared SQLite WAL HS256 sticky nginx + honest sum counters + BrowserGym 1280x720 fixture"
+      ],
+      "parent_handoff_disposition": "SUPERSEDE",
+      "question": "On distributed HS256 shared-WAL substrate with Docker BrowserGym 0.14.3 2000-node 1280x720 full-DOM real gpt-4o-mini 15-step tokens/browser+latency (rho_proxy_real>=0.50, |rho_shuffled|<0.20 per-stratum |rho_length|<0.20) and correlated TTL/ETag freshness (fresh at n0~1.0 via conditional probe ETag W/body_sha ~50% stale at n0.25 vs seeded-42 0.53 random), does any low-overhead Stagehand TTL gating or WebMCP Registry 714/2147 O(1) compilation (amortized compile 800/f) achieve honest per_hit=(M_total_f10 - retrieval - distill_or_compile_amort - auditor_amort)/L <=0.85 vs RAG-EMBED at n0/n0.25 and Pareto total-cost dominance M_total_f10 (tokens vs browser+latency vs accuracy) with verification-derived calibration (UNKNOWN precision>=0.85 ECE<=0.15 bootstrap upper<=0.18), or should per_hit be formally superseded by M_total_f10 Pareto as PRODUCT_CORE viability gate before any promotion, reporting family-stratified bootstrap 5000 and block-permutation 5000 vs gpt-4o-mini+Playwright Docker replication?",
+      "rationale": "Product validly FALSIFIED at honest f=10 file-proxy (Stagehand-TTL per_hit 1.045 CI[1.034,1.056]>0.85, rho 0.472<0.60) bounding per_hit failure to 192/36 file-proxy; Pareto showed WebMCP 897 vs RAG 3703 hidden saving while ST-WebAgentBench shows CuP as true economics. Distributed correlated freshness is the diagnosed single missing prerequisite (seeded-42 random 0.53 stale null). Testing on distributed HS256 shared-WAL + real BrowserGym tokens decides whether to supersede per_hit with M_total_f10 or remain PARKED."
+    },
+    "cycle_id": "35920834258",
+    "lane": "product",
+    "portfolio_assessment": "301 canonical experiments: product economics cleanly FALSIFIED at honest f=10 file-proxy (per_hit 1.045>0.85, rho 0.47<0.60) bounding C-PRODUCT-ECON/C-RESIDUAL-NOVELTY to file-proxy rejection; C-FRESHNESS correlation confirmed (r -0.038 TOST PASS) but distributed detection TN 0.667<0.85 due to per-node SQLite non-replication now MEASUREMENT_INVALID on retry (n<800); C-PARAM-INHERIT 47 exps MEASUREMENT_INVALID on durable kernel commit + census pinning; C-MEAS-VALID EXPERIMENTAL with validated nginx HIT 960/960 oracle-free decode but honest-cost/Jaccard/TOST/BrowserGym fixture still mis-instrumented blocking 3 lanes; C-WEB-DYNAMICS 70 exps no real beyond-memory signal after Laplace bias defeat (only synthetic Bayesian K12 SURVIVES) with 2 consecutive physics proxy MEASUREMENT_INVALID; Frontier 14-streak tunnel on C-SEMANTIC-RESOLVE at 0.55 coverage/21/40=0.525/0/10 mixed ceiling synthetic-only SURVIVES then MEASUREMENT_INVALID; Intel 17-streak on C-CROSSSITE census 192/36 dup 0.9479 done but AX_consistency homepage/template + truncated [:20] still MEASUREMENT_INVALID. Global bottleneck is runtime substrate (honest sum counters, HS256 shared-WAL, BrowserGym 1280x720 AX>10) and Intel product-page sampling. Next pulse must unblock substrate first, keep frontier from tunnel, park physics on proxy, and queue product Pareto retest on distributed correlated freshness.",
+    "schema_version": 1,
+    "scout_assessment": "Scout brief adopted as staff advice not authority: adopted its dependency map (runtime shared-WAL HS256 blocks graph/product, BrowserGym banks block physics, Intel census blocks graph param-inherit) and external landscape (WebGym 300k, BrowserGym 0.14.3/AgentLab 0.4.2, WebChallenger PageMem, SGDR, ST-WebAgentBench CuP) to prioritize substrate unblocking; challenged its bundled-runtime suggestion against invalidity risk but retained bundled repair as highest leverage given 49-streak and 3-lane unblock; rejected continuing Frontier semantic tunnel and Physics proxy-bridging as Scout flagged tunnel_flag; used Pareto M_total_f10 vs per_hit reframing and CuP insight to shape Product REOPEN but kept per_hit falsification as bounded not global."
+  },
+  "experiment_id": "EXP-PRODUCT-35921344930",
+  "inherited_last_verdict": "FALSIFIED",
+  "inherited_next_question": "On distributed HS256 shared-WAL substrate with Docker BrowserGym 0.14.3 2000-node 1280x720 full-DOM real gpt-4o-mini tokens/browser+latency (rho_proxy_real>=0.50, |rho_shuffled|<0.20 per-stratum |rho_length|<0.20) and correlated TTL/ETag freshness (fresh at n0~1.0 vs seeded-42 0.53 random), does any low-overhead Stagehand TTL gating or WebMCP Registry 714/2147 O(1) compilation achieve honest per_hit<=0.85 vs RAG at n0/n0.25 and Pareto total-cost dominance (M_total_f10 tokens vs browser vs latency vs accuracy) with verification-derived calibration, or should per_hit be superseded by M_total_f10 Pareto as primary O(1) viability gate before any PRODUCT_CORE claim?",
+  "lane": "product",
+  "origin_github_run_id": "35921344930",
+  "parent_handoff": {
+    "experiment_id": "EXP-PRODUCT-35916130502",
+    "path": "research/experiments/EXP-PRODUCT-35916130502/handoff.json",
+    "sha256": "cd2babdb9e6389c528059b761c22954ac78acf6494fe8d3d3f19a3a6d44e693f"
+  },
+  "reason": "global-director-REOPEN",
+  "request_hash": "29a7184b5d384b584e3f2fab66499c213cc9bce3d04c62a796601c25787e04f0",
+  "request_id": "64b03e88bd07e8494256318a",
+  "schema_version": 1
+}

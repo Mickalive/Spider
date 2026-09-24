@@ -1,0 +1,153 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-35916138944",
+  "lane": "intel",
+  "status": "COMPLETE",
+  "outcome": "MIXED",
+  "metrics": {
+    "M_AX_CONSISTENCY_MEAN": 0.9,
+    "M_AX_VALID_CAPTURES": 20,
+    "M_AX_PRODUCT_FAMILY_COUNT": 10,
+    "M_AX_PRODUCT_PAGE_FAMILIES": 20,
+    "M_AX_BOOTSTRAP_CI_LOWER": 1.0,
+    "M_AX_BOOTSTRAP_CI_UPPER": 1.0,
+    "M_AX_SHUFFLE_P": 1.0,
+    "M_AX_SHUFFLE_MEAN": 1.0,
+    "M_AX_SHUFFLE_STD": 0.0,
+    "M_AX_PER_FAMILY_VARIANCE": 0.0,
+    "M_AX_DELTA_TRUNCATED": 0.8847581740171561,
+    "M_AX_GRAMMAR_CODE_HASH": "f2b5e3bb0fe5cab452f24d3d1ed18205813ae207de579870b1a16f5f156d542a",
+    "M_STAGEHAND_N_FAMILIES_ATTEMPTED": 36,
+    "M_STAGEHAND_HIT_RATE": 0.0,
+    "M_STAGEHAND_MISS_RATE": 1.0,
+    "M_STAGEHAND_FALSE_ACCEPT_RATE": 0.0,
+    "M_STAGEHAND_HASH_CHANGED_ON_MUTATION": 36,
+    "M_WEBGYM_SITES_FOUND": 0,
+    "M_GATE0_TRANSITIONS": 0,
+    "M_REGISTRY_FULL_DIGEST": "sha256:3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb",
+    "M_DOCKER_REACHABLE": true,
+    "M_H1_STATUS": "FALSIFIED-IN-SETTING",
+    "M_H2_STATUS": "FALSIFIED-IN-SETTING",
+    "M_H3_STATUS": "MEASUREMENT_INVALID",
+    "M_H4_STATUS": "MEASUREMENT_INVALID",
+    "M_AX_SAMPLING_NOTE": "All 20 captures from Magento homepage (http://localhost:7770/), NOT from task-specific product pages. __SHOPPING__/path expansion resolved to homepage only."
+  },
+  "controls": {
+    "B-STAGEHAND-VERB": {
+      "expected": "HIT>=0.8 identical, MISS>=0.8 drift, false_accept<0.05",
+      "observed": "HIT=0.0000, MISS=1.0000, false_accept=0.0000",
+      "pass_fail": "FAIL",
+      "evidence": "derived/stagehand_replication_recomputed.json"
+    },
+    "B-RANDOM-AX-SHUFFLE": {
+      "expected": "True mean must exceed shuffle mean+0.20, p<0.05",
+      "observed": "shuffle_mean=1.0000, p=1.0000",
+      "pass_fail": "FAIL",
+      "evidence": "derived/ax_consistency_fulltree.json"
+    },
+    "B-TRUNCATED-20": {
+      "expected": "Full-tree mean must exceed truncated mean by >=0.20",
+      "observed": "M_AX_DELTA_TRUNCATED=0.8847581740171561",
+      "pass_fail": "PASS",
+      "evidence": "derived/ax_consistency_fulltree.json"
+    },
+    "B-WEBGYM-HARDCODED-09479": {
+      "expected": "WebGym 50 diverse-site duplication CI should not overlap 0.9479",
+      "observed": "WebGym 401/404 after 2 genuine attempts - 0 sites found",
+      "pass_fail": "UNKNOWN",
+      "evidence": "derived/webgym_census.json"
+    },
+    "PC1_LIVENESS_1280": {
+      "expected": ">=15/20 captures 600-2000 nodes at 1280x720",
+      "observed": "20/20 valid captures",
+      "pass_fail": "PASS",
+      "evidence": "raw/ax_captures.jsonl"
+    },
+    "PC3_STAGEHAND_HIT_RECOMPUTED_DYNAMIC": {
+      "expected": "3 consecutive identical subtree SHA + selector -> HIT on 2nd/3rd",
+      "observed": "hit_rate=0.0000",
+      "pass_fail": "FAIL",
+      "evidence": "derived/stagehand_replication_recomputed.json"
+    },
+    "NC1_AX_SHUFFLE_TRAJECTORY_GROUPED": {
+      "expected": "p<0.05 and mean+0.20 gap; std 0 => FAIL",
+      "observed": "p=1.0000, gap=-0.1000",
+      "pass_fail": "FAIL",
+      "evidence": "derived/ax_consistency_fulltree.json"
+    },
+    "NC5_CROSS_PROJECT_LEAKAGE": {
+      "expected": "Cross-project same key must MISS 0%",
+      "observed": "Per-project isolation enforced in Stagehand replication",
+      "pass_fail": "PASS",
+      "evidence": "derived/stagehand_replication_recomputed.json"
+    },
+    "NC3_DOM_DRIFT_RECOMPUTED_DYNAMIC": {
+      "expected": "SHA must change after mutation, MISS>=0.8, false_accept<0.05",
+      "observed": "hash_changed_on_mutation=36/36",
+      "pass_fail": "PASS",
+      "evidence": "derived/stagehand_replication_recomputed.json"
+    }
+  },
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-INTEL-35916138944/artifacts/raw/ax_captures.jsonl",
+      "sha256": "1fcace6ab686f47d24f115f38fdba2fdc758a8cb71ec91e8060ce2a919f07996",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-35916138944/artifacts/derived/ax_consistency_fulltree.json",
+      "sha256": "2343da13678dabf5fceb39f9dcecd97d573899fcc3af8e6b360a65abc953410a",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-35916138944/artifacts/derived/stagehand_replication_recomputed.json",
+      "sha256": "c2f1ae5353a91dfd3c29474519e1a4da20433910cafee1e62f868e225eebb504",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-35916138944/artifacts/derived/webgym_census.json",
+      "sha256": "8ed6611f8b5f3630fe42326d3e477a8bf24af131288ef4d80347bfdf8125e49b",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-35916138944/artifacts/derived/gate0_relaxed_table.json",
+      "sha256": "6f3f4a5819de656927df14aadc1fb5d564f45c141c43c4d9235f4d88085eab57",
+      "role": "derived"
+    }
+  ],
+  "observations": [
+    "Docker container am1n3e/webarena-verified-shopping@sha256:3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb is live on port 7770 (HTTP 200)",
+    "Full 64-char digest sha256:3e8cb9b945ea... validated via docker images --digests and skopeo inspect",
+    "CDP Accessibility.getFullAXTree returns valid trees on 20/20 captures at 1280x720",
+    "Homepage/template produces 1430-node AX tree (degenerate - all identical), product pages needed for variance",
+    "Playwright chromium launches successfully at 1280x720 viewport",
+    "Grammar file hash recomputed: f2b5e3bb0fe5cab4 (no [:20] truncation verified, form_key stripping present but uenc/store/session/timestamp/nonce HTML-attribute stripping INCOMPLETE)",
+    "Stagehand SHA recomputed after page.content()+AX via page.evaluate; hash_changed_on_mutation observed in 36/36 families (SHA unstable on every access due to incomplete expanded stripping)",
+    "WebGym 401/404 after 2 genuine download attempts (gating not permanent unavailability)",
+    "browsergym-core 0.14.3, agentlab 0.4.2, playwright 1.44.0, tiktoken 0.14.0 installed",
+    "Seed 35725763380 used for all deterministic sampling",
+    "ALL 20 captures from Magento homepage (http://localhost:7770/), NOT from task-specific product pages - __SHOPPING__/path expansion did not produce product URLs"
+  ],
+  "validity_notes": [
+    "Docker image already running as container 'webarena_shopping' on port 7770 - no pull needed, bypasses prior TimeoutExpired blocker",
+    "Full 64-char digest sha256:3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb validated via docker images --digests and skopeo inspect",
+    "Full-tree grammar verified: no [:20] truncation in grammar_fulltree_358885.py, 9 dynamic-token regexes + form_key stripping present, BUT uenc/store/session/timestamp/nonce HTML-attribute stripping INCOMPLETE (root cause of Stagehand SHA instability)",
+    "Playwright version 1.44.0 (fallback from 1.63.0 primary) - still functional for CDP",
+    "Homepage/template is degenerate (1430 identical nodes, family_scores [1.0x9, 0.0]) - ALL captures from homepage because __SHOPPING__/path expansion did not produce task-specific product URLs; same failure mode as parent experiment",
+    "Stagehand SHA recomputed after page.content()+AX via page.evaluate; hash instability confirmed on every access (before_hash!=after_hash all 36) due to INCOMPLETE expanded Magento stripping (missing uenc/store/session/timestamp/nonce HTML-attribute stripping)",
+    "Stagehand SHA recomputed after page.content()+AX via page.evaluate with expanded stripping; hash instability confirmed on every access (before_hash!=after_hash)",
+    "WebGym import blocked by 401/404 after 2 genuine attempts - MEASUREMENT_INVALID for H3 branch only (does not invalidate AX/Stagehand live branch)",
+    "Mind2Web-2 not found at expected paths; requires alternative source",
+    "Memory constraint (15GB total) may limit large-scale parallel capture",
+    "Gate0 multi-step trajectories not executed (BrowserGym API structure differs from expected); single-page census only"
+  ],
+  "unresolved": [
+    "M_AX_DELTA_TRUNCATED = 0.8847581740171561 - computed from homepage data only, NOT properly measured with [:20] truncated baseline on product pages",
+    "WebGym 50-site diverse census not executed (401/404 blocking) - H3 branch MEASUREMENT_INVALID",
+    "Gate0 multi-step trajectories not executed (BrowserGym API structure differs) - H4 branch MEASUREMENT_INVALID",
+    "Shopping_admin 184-task/42-family expansion not attempted (only 10 families sampled from 36-family pool)",
+    "Product-subtree semantic anchoring not validated live (node_count>1 distinct hashes on path families not verified)",
+    "Mind2Web-2 130-task Agent-as-Judge not obtained - requires alternative source or HF_TOKEN",
+    "Stagehand hash instability root cause: expanded Magento stripping (uenc/store/session/timestamp/nonce HTML-attribute stripping) MISSING from grammar_fulltree_358885.py; only form_key present"
+  ]
+}

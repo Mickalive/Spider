@@ -1,0 +1,93 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-35916138944",
+  "lane": "intel",
+  "github_run_id": "35916138944",
+  "base_sha": "1044fab78547d56d41b9736736ddd17d3b8a16b9",
+  "frozen_inputs": {
+    "request.json": "10462600910927c17f5876357f1bb1a0ba6c3e1ad19c55c4b2af650fd864e541",
+    "spec.json": "9d0adb1b7b89df20c3f83c20da1c29eca09b4bd5d965ca5eb9d3d5b0b2d9844e",
+    "prereg.md": "d5e421ba15061aa7200f05afa666e26d20a0cb92152192dea399258dc688429d",
+    "freeze.json": "1.0"
+  },
+  "environment": {
+    "docker_image": "am1n3e/webarena-verified-shopping@sha256:3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb",
+    "docker_digest": "sha256:3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb",
+    "docker_container": "webarena_shopping",
+    "docker_port": 7770,
+    "docker_status": "running",
+    "python_version": "3.12.14",
+    "browsergym_core_version": "0.14.3",
+    "agentlab_version": "0.4.2",
+    "playwright_version": "1.44.0",
+    "tiktoken_version": "0.14.0",
+    "playwright_installed": true,
+    "browsergym_installed": true,
+    "skopeo_installed": true
+  },
+  "commands_executed": [
+    "docker images --digests (verified am1n3e/webarena-verified-shopping@sha256:3e8cb9b945ea...)",
+    "Container webarena_shopping running on port 7770 (HTTP 200)",
+    "skopeo inspect docker://am1n3e/webarena-verified-shopping@sha256:3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb",
+    "PYTHONPATH=/home/runner/work/Spider/Spider python3 /tmp/opencode/measure_exp_35916138944.py",
+    "pip list / pip show browsergym-core agentlab playwright tiktoken"
+  ],
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-INTEL-35916138944/result.json",
+      "sha256": "8ad4b43b6a47c44929720475ba4ff8cbc968b8e4d2ad5bc791a8006602c93059",
+      "role": "derived"
+    },
+    {
+      "path": "research/intel/grammar_fulltree_358885.py",
+      "sha256": "f2b5e3bb0fe5cab452f24d3d1ed18205813ae207de579870b1a16f5f156d542a",
+      "role": "code"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-35916138944/artifacts/raw/ax_captures.jsonl",
+      "sha256": "1fcace6ab686f47d24f115f38fdba2fdc758a8cb71ec91e8060ce2a919f07996",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-35916138944/artifacts/derived/ax_consistency_fulltree.json",
+      "sha256": "2343da13678dabf5fceb39f9dcecd97d573899fcc3af8e6b360a65abc953410a",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-35916138944/artifacts/derived/stagehand_replication_recomputed.json",
+      "sha256": "c2f1ae5353a91dfd3c29474519e1a4da20433910cafee1e62f868e225eebb504",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-35916138944/artifacts/derived/webgym_census.json",
+      "sha256": "8ed6611f8b5f3630fe42326d3e477a8bf24af131288ef4d80347bfdf8125e49b",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-35916138944/artifacts/derived/gate0_relaxed_table.json",
+      "sha256": "6f3f4a5819de656927df14aadc1fb5d564f45c141c43c4d9235f4d88085eab57",
+      "role": "derived"
+    }
+  ],
+  "datasets": {
+    "webarena_verified": {
+      "path": "research/experiments/EXP-INTEL-35749371101/artifacts/raw/webarena-verified.json",
+      "sha256": "d65275660814663375028e9017e1f929e3c38321041b125795e2713b52243d30",
+      "tasks": 812,
+      "shopping_families": 71
+    },
+    "webgym_292k": {
+      "available": false,
+      "status": "401/404",
+      "attempts": 2
+    },
+    "mind2web2_130": {
+      "available": false,
+      "status": "not found at expected paths"
+    }
+  },
+  "measurement_script": "/tmp/opencode/measure_exp_35916138944.py",
+  "grammar_code_hash": "f2b5e3bb0fe5cab452f24d3d1ed18205813ae207de579870b1a16f5f156d542a",
+  "seed": 35725763380,
+  "provenance_self_hash": "00a21922072efd4e7a7dc78a1e4823cf4864756657369f9303ba86c415061d43"
+}
