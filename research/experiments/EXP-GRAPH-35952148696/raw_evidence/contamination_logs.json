@@ -1,0 +1,49 @@
+{
+  "unrelated_ids": [
+    9000,
+    9001,
+    9002,
+    9003,
+    9004,
+    9005,
+    9006,
+    9007,
+    9008,
+    9009,
+    9010,
+    9011,
+    9012,
+    9013,
+    9014,
+    9015,
+    9016,
+    9017,
+    9018,
+    9019
+  ],
+  "contamination_rate": 0.0,
+  "contamination_N": 20,
+  "contamination_events": 0,
+  "per_family": {
+    "dom_drift": {
+      "k": 0,
+      "n": 20,
+      "rate": 0,
+      "wilson_upper": 0.1611301254949332
+    },
+    "param_header_mutation": {
+      "k": 0,
+      "n": 20,
+      "rate": 0,
+      "wilson_upper": 0.1611301254949332
+    },
+    "cache_expiry": {
+      "k": 0,
+      "n": 20,
+      "rate": 0,
+      "wilson_upper": 0.1611301254949332
+    }
+  },
+  "re_verified": true,
+  "method": "registry clone snapshot isolation, re-verify 20 disjoint ids 9000-9019 via _matches after patch, blast radius=1"
+}

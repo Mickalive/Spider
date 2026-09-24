@@ -1,0 +1,10 @@
+{
+  "health_gate_pass": false,
+  "reason": "No distributed shared-WAL Flask/JWT + nginx substrate deployed in this execution environment; health-gate requires 2x gunicorn workers, shared WAL at /tmp/spider-runtime/*/shared.db, HS256 JWT, X-Worker-Pid>=2, nginx If-None-Match/304. Synthetic primary stage is independent. DEFERRED per spec V12.",
+  "n_non304": 0,
+  "x_worker_pids": [],
+  "jwt_verify": false,
+  "304_operational": false,
+  "wal_exists": false,
+  "status": "DISTRIBUTED_MEASUREMENT_INVALID"
+}
