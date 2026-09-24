@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-35958402290",
+  "lane": "product",
+  "decision": "MEASUREMENT_INVALID",
+  "claim_updates": [
+    {
+      "claim_id": "C-PRODUCT-ECON",
+      "status": "MEASUREMENT_INVALID",
+      "reason": "MEASUREMENT_INVALID per frozen falsifier clause (1) audited PASS: five independent DIE triggers fire - (a) single-node HS256 sticky WAL substrate absent (/tmp/spider-runtime/shared.db absent, n_non304=0 <800 stratified 400/endpoint, nginx 1.24.0 binary present but no $request_uri sticky running, If-None-Match/ETag W/body_sha not exercised, TN null), (b) Docker BrowserGym 0.14.3 2000-node 1280x720 CDP AX unavailable (ghcr.io/servicenow/browsergym:0.14.3 pull denied, browsergym pip not importable, no image), (c) OPENAI_API_KEY absent so rho_proxy_real pooled+per-stratum unmeasurable, (d) fixtures missing (Hard258 pip webarena no distribution, sgdr_index absent repo-wide, qcr/dsm only cross-experiment refs 8c69804b/af3c18e5 not staged TRAIN-only), (e) kernel dot-regex only in working tree not committed. All primary metrics explicitly null per contract (metrics AUROC/M_total_f10/M_per_hit/rho_* null, controls UNKNOWN except MV2 PASS), producer correctly refused banned file-proxy/n*3200/seeded-42 proxies, outcome INCONCLUSIVE not falsification per EXPERIMENT_PACKET s9. Bounded file-proxy ceiling remains parent EXP-PRODUCT-35954196999/35916130502 FALSIFIED (StagehandTTL per_hit 1.045 CI[1.034,1.056]>0.85 at n0, rho 0.472<0.60 |rho_length|0.306>0.20, Pareto M_total_f10 WebMCP 897 vs RAG 3703 hidden by per_hit artifact). C-PRODUCT-ECON globally remains HYPOTHESIS; honest-substrate Pareto supersession untested. No EXPERIMENTAL or PRODUCT_CORE promotion."
+    }
+  ],
+  "product_action": "none",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "After provisioning single-node HS256 sticky WAL at /tmp/spider-runtime/shared.db with nginx 1.24.0 $request_uri sticky + real If-None-Match/ETag W/body_sha conditional probe (n_non304>=800, TN>=0.85) and authorizing BrowserGym 0.14.3 2000-node 1280x720 CDP AX + gpt-4o-mini 15-step key, does honest M_total_f10/f100 Pareto (tokens+browser+latency vs accuracy at f=10/100, 5000 family-stratified trajectory-grouped bootstrap + 5000 block-permutation, rho_proxy_real>=0.50 per-stratum |rho_shuffled|<0.20 |rho_length|<0.20, AUROC>=0.75 precision>=0.80 false_accept<=0.10 UNKNOWN>=0.85 per-class ECE<=0.15 Wilson/bootstrap, correlated probe saving>=30% accuracy>=0.90 vs seeded-42 random 0.53, DSM 714/2147 80-94% $0.002-0.092 amortized, safety <=RAG+0.02) demonstrate supersession of per_hit<=0.85 artifact by Pareto dominance vs RAG-EMBED TAU0.30/QCR, Stagehand-cache, and DSM/SGDR on WebArena-Verified Hard258 or disclosed 192/36 orthogonal fallback?",
+  "reason": "Audit PASS confirms producer correctly declares MEASUREMENT_INVALID with four independent frozen DIE triggers and honors prohibition on file-proxy/n*3200/seeded-42 fabrication; all economics metrics null not zero, controls correctly UNKNOWN. Frozen inputs byte-identical to freeze.json verified, provenance intact (head 67101aa), kernel MV2 sub-gate PASS (5/5 EXECUTABLE patched sha d926279d, tests/test_kernel.py 3/3) but HEAD still pre-patch 46929b3a, gunicorn 23.0.0/pyjwt 2.14.0 pins now PASS vs parent drift, substrate/Docker/fixtures blockers remain. Decision cannot be SURVIVES/FALSIFIED; claim ceiling remains bounded file-proxy REJECTED only for per_hit<=0.85, Pareto and residual-novelty rho remain UNTESTED on required minimal honest single-node health-gated correlated substrate + real BrowserGym tokens. continue=false because runtime C-MEAS-VALID wsgi loop and sgdr/provisioning must be repaired before retry; next_question preserves Director REOPEN SUPERSEDE supersession test on health-gated correlated substrate.",
+  "evidence_refs": [
+    "research/experiments/EXP-PRODUCT-35958402290/request.json sha256 16e47e0f19cfcfbd5a2d0043fecd7bed9a2920da9c9207b120a975f40524bee6",
+    "research/experiments/EXP-PRODUCT-35958402290/spec.json sha256 456a2e549253ce6e1b7ef38b63da070c7e00c8d3af79966748f53d4e9b524354",
+    "research/experiments/EXP-PRODUCT-35958402290/prereg.md sha256 a74bc9081de963b4dbd272adf5f84655b071ac61ca737aefeac09c9d7b1dc936",
+    "research/experiments/EXP-PRODUCT-35958402290/freeze.json sha256 verified byte-identical",
+    "research/experiments/EXP-PRODUCT-35958402290/result.json metrics all null controls UNKNOWN except PC2 PASS artifact hashes 009a1c66/d15a0c9f/81321535 status MEASUREMENT_INVALID outcome INCONCLUSIVE",
+    "research/experiments/EXP-PRODUCT-35958402290/audit.json status MEASUREMENT_INVALID producer_claim_supported false claim_ceiling HYPOTHESIS",
+    "research/experiments/EXP-PRODUCT-35958402290/provenance.json head 67101aa gunicorn 23.0.0 PASS pyjwt 2.14.0 PASS kernel post_sha d926279d",
+    "research/experiments/EXP-PRODUCT-35958402290/report.md MEASUREMENT_INVALID 5 triggers no economics inference",
+    "research/experiments/EXP-PRODUCT-35958402290/artifacts/env_audit.json sha256 009a1c66c922b18d9f6de55e6812d25fc61fdda8057e43e67f0659a9c1cdf0e1 n_non304 0 FAIL nginx sticky false docker denied openai absent",
+    "research/experiments/EXP-PRODUCT-35958402290/artifacts/substrate_probe.json sha256 d15a0c9f57f1f5ab8c685e2d6c7e9bc12deb57193f4b54ac1ddb44fc65b346c5 health_gate n_non304 0 kernel PASS real_token FAIL",
+    "research/experiments/EXP-PRODUCT-35958402290/artifacts/mv2_kernel_spot_check.json sha256 8132153593ce6e6122e5a4cb99b274e3321539f210213aab4158a923f5ad8e56 5/5 EXECUTABLE regression 3/3",
+    "src/spider/kernel.py working-tree sha256 d926279d5ee14a044a2f13b8abc09202df9f5adb9e86feaadeb61818a15f4038 vs HEAD pre-patch 46929b3a951df48d7f9d1fd850871073c0d91c1868aa117e13d389fe274e8d61",
+    "research/experiments/EXP-PRODUCT-35954196999/handoff.json sha256 f6560fac076e389f2275962332bdfa050e32c903caf9bdb750584d6a5d05ff28 parent ceiling",
+    "research/experiments/EXP-PRODUCT-35916130502/artifacts/qcr_bank_manifest.json sha256 8c69804b249ec9c84cf05d86a21c7ebe7a31af5f8d45e50a4e6d477b449f9f58 prior-run only",
+    "research/experiments/EXP-PRODUCT-35916130502/artifacts/webmcp_registry.jsonl sha256 af3c18e5ef1904484c5d440353b327958bdcc909e72915b301724b9f49bcdb4c prior-run only",
+    "codex/experiments/EXP-RUNTIME-35949568321/verdict.json MEASUREMENT_INVALID wsgi import loop",
+    "codex/claim_state.json C-PRODUCT-ECON remains HYPOTHESIS"
+  ]
+}
