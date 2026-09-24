@@ -1,0 +1,32 @@
+{
+  "experiment_id": "EXP-INTEL-35947486685",
+  "browsergym_core": {
+    "available": false,
+    "version": null,
+    "error": "ModuleNotFoundError: No module named 'browsergym'"
+  },
+  "agentlab": {
+    "available": false,
+    "version": null,
+    "error": "No module named 'agentlab'"
+  },
+  "playwright": {
+    "available": false,
+    "version": null,
+    "error": "No module named 'playwright'"
+  },
+  "transitions_per_family": 0,
+  "families_attempted": 0,
+  "families_required": 5,
+  "relaxed_pass_count": 0,
+  "strict_pass_count": 0,
+  "per_family": [],
+  "title_entropy_H_S_next_URL_HK3": null,
+  "leakage_validOnly": null,
+  "nl_count": 0,
+  "strata_count": 0,
+  "singleton_rate": null,
+  "browser_latency_vs_accuracy_pareto_f10_f100": null,
+  "status": "MEASUREMENT_INVALID",
+  "reason": "BrowserGym-core 0.14.3 not installed, 0 transitions collected (<5 families >=50)"
+}

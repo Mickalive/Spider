@@ -1,0 +1,13 @@
+{
+  "experiment_id": "EXP-INTEL-35947486685",
+  "h1_falsified_triggered": false,
+  "h1_status": "MEASUREMENT_INVALID",
+  "parameterized_slot_syntax": null,
+  "ax_jaccard_tau030": null,
+  "hierarchical_webapi": null,
+  "hit_equiv": null,
+  "leakage_validOnly": null,
+  "rho_shuffled": null,
+  "status": "NOT_TRIGGERED",
+  "reason": "H1 MEASUREMENT_INVALID so orthogonal fallback not triggered per spec (only if H1 falsified after proper capture)"
+}

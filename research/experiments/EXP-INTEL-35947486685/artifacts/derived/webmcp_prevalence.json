@@ -1,0 +1,14 @@
+{
+  "experiment_id": "EXP-INTEL-35947486685",
+  "n_sites_scanned": 0,
+  "prevalence_f10": null,
+  "prevalence_f100": null,
+  "tool_coverage": null,
+  "ci_f10_lower": null,
+  "ci_f10_upper": null,
+  "ci_f100_lower": null,
+  "ci_f100_upper": null,
+  "bootstrap_reps": 2000,
+  "status": "MEASUREMENT_INVALID",
+  "reason": "WebMCP prevalence requires WebGym sites; 0 sites scanned, no tool registrations detected"
+}

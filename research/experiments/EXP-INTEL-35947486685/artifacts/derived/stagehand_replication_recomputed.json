@@ -1,0 +1,33 @@
+{
+  "experiment_id": "EXP-INTEL-35947486685",
+  "grammar_code_hash": "74ab5a2b59e7a57beedb516999f1da0cb7f3bc5a055beac08d0d98949d6b8ec4",
+  "dynamic_token_regexes": [
+    "csrf[_-]?token",
+    "session[_-]?id",
+    "_token",
+    "timestamp",
+    "nonce",
+    "csrf value",
+    "sessionId",
+    "\\b\\d{13}\\b",
+    "\\b[a-f0-9]{32,}\\b"
+  ],
+  "body_regex_applied": false,
+  "recomputed_after_mutation": false,
+  "n_families_attempted": 0,
+  "n_families_required": 30,
+  "m_stagehand_hit": null,
+  "m_stagehand_miss": null,
+  "m_false_accept": null,
+  "nc4_p": null,
+  "rho_shuffled": null,
+  "m_total_f10": null,
+  "per_trajectory_reset_sum_counters": false,
+  "derived_selectors_only": true,
+  "synthetic_fallback_count": 0,
+  "before_hash_after_hash_identical": null,
+  "before_hash_after_mutation_different": null,
+  "pc4_hit_recomputed": false,
+  "status": "MEASUREMENT_INVALID",
+  "reason": "Stagehand substrate unavailable: playwright/browsergym missing, docker not running, no recomputed SHA families <30"
+}

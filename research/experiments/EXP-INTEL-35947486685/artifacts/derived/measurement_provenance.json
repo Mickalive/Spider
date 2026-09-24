@@ -1,0 +1,63 @@
+{
+  "experiment_id": "EXP-INTEL-35947486685",
+  "seed": 35725763380,
+  "grammar_code_hash": "74ab5a2b59e7a57beedb516999f1da0cb7f3bc5a055beac08d0d98949d6b8ec4",
+  "grammar_path": "research/intel/grammar_fulltree_358885.py",
+  "webarena_path": "research/experiments/EXP-INTEL-35725763380/artifacts/raw/webarena-verified.json",
+  "webarena_sha256": "d65275660814663375028e9017e1f929e3c38321041b125795e2713b52243d30",
+  "docker_digest": "sha256:3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb",
+  "docker_digest_valid": true,
+  "docker_pull": {
+    "cmd": "docker pull am1n3e/webarena-verified-shopping@sha256:3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb",
+    "returncode": -1,
+    "stdout": "",
+    "stderr": "TimeoutExpired: Command '['docker', 'pull', 'am1n3e/webarena-verified-shopping@sha256:3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb']' timed out after 8 seconds",
+    "success": false
+  },
+  "docker_run": {
+    "cmd": "docker run -d -p 7770:7770 am1n3e/webarena-verified-shopping@sha256:3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb",
+    "returncode": -1,
+    "stdout": "",
+    "stderr": "TimeoutExpired: Command '['docker', 'run', '-d', '-p', '7770:7770', 'am1n3e/webarena-verified-shopping@sha256:3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb']' timed out after 5 seconds",
+    "success": false
+  },
+  "docker_reachable": {
+    "reachable": false,
+    "attempt": 3,
+    "error": "URLError: <urlopen error [Errno 111] Connection refused>"
+  },
+  "pip_list_sha256": "bc751d3e417bb9ab202566f411a75268ac7f4ce2212283e8becab471aa0cebd0",
+  "pip_freeze_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "playwright": {
+    "available": false,
+    "version": null,
+    "error": "No module named 'playwright'"
+  },
+  "browsergym": {
+    "available": false,
+    "version": null,
+    "error": "No module named 'browsergym_core'"
+  },
+  "agentlab": {
+    "available": false,
+    "version": null,
+    "error": "No module named 'agentlab'"
+  },
+  "webgym": {
+    "available": false,
+    "version": null,
+    "error": "No module named 'webgym'"
+  },
+  "hf_token_present": false,
+  "artifacts_written": [
+    "research/experiments/EXP-INTEL-35947486685/artifacts/raw/webarena_verified_pin.json",
+    "research/experiments/EXP-INTEL-35947486685/artifacts/raw/ax_captures.jsonl",
+    "research/experiments/EXP-INTEL-35947486685/artifacts/raw/ax_captures.json",
+    "research/experiments/EXP-INTEL-35947486685/artifacts/derived/stagehand_replication_recomputed.json",
+    "research/experiments/EXP-INTEL-35947486685/artifacts/derived/ax_consistency_fulltree.json",
+    "research/experiments/EXP-INTEL-35947486685/artifacts/derived/orthogonal_fallback.json",
+    "research/experiments/EXP-INTEL-35947486685/artifacts/derived/gate0_relaxed_table.json",
+    "research/experiments/EXP-INTEL-35947486685/artifacts/derived/webgym_census.json",
+    "research/experiments/EXP-INTEL-35947486685/artifacts/derived/webmcp_prevalence.json"
+  ]
+}

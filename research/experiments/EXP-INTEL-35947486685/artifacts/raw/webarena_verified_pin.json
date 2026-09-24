@@ -1,0 +1,230 @@
+{
+  "experiment_id": "EXP-INTEL-35947486685",
+  "webarena_path": "research/experiments/EXP-INTEL-35725763380/artifacts/raw/webarena-verified.json",
+  "webarena_sha256": "d65275660814663375028e9017e1f929e3c38321041b125795e2713b52243d30",
+  "shopping_tasks": 192,
+  "shopping_admin_tasks": 184,
+  "families_ge3": 36,
+  "sampled_families": [
+    191,
+    180,
+    162,
+    197,
+    153,
+    213,
+    163,
+    137,
+    136,
+    222
+  ],
+  "sampled_tasks": [
+    {
+      "family_id": "191",
+      "task_id": 798
+    },
+    {
+      "family_id": "191",
+      "task_id": 797
+    },
+    {
+      "family_id": "180",
+      "task_id": 298
+    },
+    {
+      "family_id": "180",
+      "task_id": 299
+    },
+    {
+      "family_id": "162",
+      "task_id": 144
+    },
+    {
+      "family_id": "162",
+      "task_id": 142
+    },
+    {
+      "family_id": "197",
+      "task_id": 51
+    },
+    {
+      "family_id": "197",
+      "task_id": 50
+    },
+    {
+      "family_id": "153",
+      "task_id": 653
+    },
+    {
+      "family_id": "153",
+      "task_id": 655
+    },
+    {
+      "family_id": "213",
+      "task_id": 234
+    },
+    {
+      "family_id": "213",
+      "task_id": 232
+    },
+    {
+      "family_id": "163",
+      "task_id": 689
+    },
+    {
+      "family_id": "163",
+      "task_id": 691
+    },
+    {
+      "family_id": "137",
+      "task_id": 351
+    },
+    {
+      "family_id": "137",
+      "task_id": 355
+    },
+    {
+      "family_id": "136",
+      "task_id": 163
+    },
+    {
+      "family_id": "136",
+      "task_id": 164
+    },
+    {
+      "family_id": "222",
+      "task_id": 23
+    },
+    {
+      "family_id": "222",
+      "task_id": 25
+    }
+  ],
+  "seed": 35725763380,
+  "seed_derivation": "random.Random(35725763380).sample(sorted(families_ge3),10) INSIDE script",
+  "grammar_code_hash": "74ab5a2b59e7a57beedb516999f1da0cb7f3bc5a055beac08d0d98949d6b8ec4",
+  "grammar_no_truncation": true,
+  "docker_digest": "sha256:3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb",
+  "docker_digest_valid_64": true,
+  "docker_pull": {
+    "cmd": "docker pull am1n3e/webarena-verified-shopping@sha256:3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb",
+    "returncode": -1,
+    "stdout": "",
+    "stderr": "TimeoutExpired: Command '['docker', 'pull', 'am1n3e/webarena-verified-shopping@sha256:3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb']' timed out after 8 seconds",
+    "success": false
+  },
+  "docker_pull_alt": {
+    "cmd": "docker pull am1n3e/webarena-verified-shopping",
+    "returncode": -1,
+    "stdout": "",
+    "stderr": "TimeoutExpired: Command '['docker', 'pull', 'am1n3e/webarena-verified-shopping']' timed out after 8 seconds",
+    "success": false
+  },
+  "docker_run": {
+    "cmd": "docker run -d -p 7770:7770 am1n3e/webarena-verified-shopping@sha256:3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb",
+    "returncode": -1,
+    "stdout": "",
+    "stderr": "TimeoutExpired: Command '['docker', 'run', '-d', '-p', '7770:7770', 'am1n3e/webarena-verified-shopping@sha256:3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb']' timed out after 5 seconds",
+    "success": false
+  },
+  "docker_ps": {
+    "cmd": "docker ps -a",
+    "returncode": 0,
+    "stdout": "CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES\n",
+    "stderr": "",
+    "success": true
+  },
+  "docker_reachable": {
+    "reachable": false,
+    "attempt": 3,
+    "error": "URLError: <urlopen error [Errno 111] Connection refused>"
+  },
+  "docker_digest_evidence": {
+    "hub_api_status": 200,
+    "hub_api_bytes": 1694,
+    "hub_api_sha256": "3a2d6ed5584d6977fc128478f52e2270187ddbab4d2a8253f22ef77747efd7c9",
+    "hub_first_tag": "latest",
+    "hub_first_image_digest": "sha256:3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb",
+    "docker_images_digests": {
+      "cmd": "docker images --digests",
+      "returncode": 0,
+      "stdout": "REPOSITORY                                   TAG       DIGEST                                                                    IMAGE ID       CREATED       SIZE\nghcr.io/github/gh-aw-mcpg                    latest    sha256:9be0a86220e807a0ecc89e53d7453468f7a53fbc6b3d1efd2299025ffe01d086   8fd5ed88dce2   6 days ago    181MB\nghcr.io/github/gh-aw-firewall/agent          latest    sha256:1bacef0f405d77999d01d8c00cb731222531b3f43ef9dc8312c513d6d9038bb1   dc9d80ee1508   6 days ago    565MB\nghcr.io/github/github-mcp-server             latest    sha256:508a0857ec762b1ab1cece29193345b501fab1dd9d1228a7b617062954cecac6   09777492cb75   7 days ago    46.9MB\nghcr.io/dependabot/dependabot-updater-core   latest    sha256:9449e9908fd44ed006f2fbde2066eba314d45c564c765d50eaa1aedb96cabde0   8c87fce2da7e   7 days ago    828MB\nghcr.io/github/gh-aw-firewall/api-proxy      latest    sha256:30ab6d3261dd95364281fa0b52ab78450e1c01aa074eccc3a8d4f04b12a6560b   008b8653cd89   9 days ago    209MB\nghcr.io/github/gh-aw-firewall/squid          latest    sha256:cba5f56857e4869c4a00c1cce29c3056516cf1a746e18ce380753ecfbe40f112   ebc9c9e5ccbd   6 weeks ago   43.1MB\n",
+      "stderr": "",
+      "success": true
+    },
+    "digest_64_valid": true,
+    "digest_value": "sha256:3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb"
+  },
+  "pip_list": {
+    "cmd": "/opt/hostedtoolcache/Python/3.12.14/x64/bin/python3 -m pip list",
+    "returncode": 0,
+    "stdout": "Package Version\n------- -------\npip     26.2.1\n",
+    "stderr": "",
+    "success": true
+  },
+  "pip_list_sha256": "bc751d3e417bb9ab202566f411a75268ac7f4ce2212283e8becab471aa0cebd0",
+  "pip_freeze": {
+    "cmd": "/opt/hostedtoolcache/Python/3.12.14/x64/bin/python3 -m pip freeze",
+    "returncode": 0,
+    "stdout": "",
+    "stderr": "",
+    "success": true
+  },
+  "pip_freeze_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "playwright": {
+    "available": false,
+    "version": null,
+    "error": "No module named 'playwright'"
+  },
+  "browsergym": {
+    "available": false,
+    "version": null,
+    "error": "No module named 'browsergym_core'"
+  },
+  "browsergym_core": {
+    "available": false,
+    "version": null,
+    "error": "ModuleNotFoundError: No module named 'browsergym'"
+  },
+  "webgym": {
+    "available": false,
+    "version": null,
+    "error": "No module named 'webgym'"
+  },
+  "agentlab": {
+    "available": false,
+    "version": null,
+    "error": "No module named 'agentlab'"
+  },
+  "tiktoken": {
+    "available": false,
+    "version": null,
+    "error": "No module named 'tiktoken'"
+  },
+  "hf_token_present": false,
+  "webgym_download": {
+    "attempts": [
+      {
+        "attempt": 1,
+        "url": "https://huggingface.co/datasets/WebGym/WebGym/resolve/main/manifest.json",
+        "status": 401,
+        "error": "HTTPError: HTTP Error 401: Unauthorized",
+        "sha256": null,
+        "bytes": 0,
+        "hf_token_used": false
+      },
+      {
+        "attempt": 2,
+        "url": "https://raw.githubusercontent.com/ServiceNow/WebGym/main/data/manifest.json",
+        "status": 404,
+        "error": "HTTPError: HTTP Error 404: Not Found",
+        "sha256": null,
+        "bytes": 0,
+        "hf_token_used": false
+      }
+    ],
+    "manifest_sha256": null,
+    "hf_token": false
+  },
+  "viewport": "1280x720",
+  "timestamp": "2026-09-24T03:51:03Z"
+}
