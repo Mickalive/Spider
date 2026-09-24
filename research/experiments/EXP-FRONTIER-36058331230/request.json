@@ -1,0 +1,46 @@
+{
+  "base_sha": "1666682e87b3a3d10f326bb3bf970dcce1a43b74",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-24T20:57:58.031968+00:00",
+  "director_mandate": {
+    "agent_priors_used": [
+      "Retrieval dominance prior: under current embeddings retrieval/ranking quality governs end-to-end memory more than write-time slot induction sophistication - used to deprioritize further distill_parameterized tuning vs stabilizing retrieval baselines (SPIDER evidence is only that 49 param-inherit exps failed on durability, not that retrieval dominates generally)",
+      "Synthetic-to-real gap prior: mechanisms validated on locally-hosted SPAs, 2D DGPs or 36-family orthogonal synthetic fixtures (Jaccard<0.30) rarely transfer to BrowserGym 1280x720 heterogeneous AX>10 without revalidation; permutation-based deterministic functions trivially degenerate - used to require health-gated BrowserGym/HS256 transfer before claiming PRODUCT_CORE",
+      "Long-horizon compounding prior: path dependence, salience from prior context and self-generated subproblems cause error accumulation over 10-15 step BrowserGym trajectories; calibration (UNKNOWN/ECE false_accept) and bailout fallback matter more than single-step accuracy - used to prioritize verification/freshness/bailout design",
+      "Local optima via concentration prior: lanes spending 6-10 exps on one claim (Physics 9/10 WEB-DYNAMICS, Product 9/14 PRODUCT-ECON, Frontier 6/10 RESIDUAL-NOVELTY after 17-deep alias tunnel) show diminishing information gain; honest non-Pareto falsification is more informative than another alias/routing permutation"
+    ],
+    "allocation": {
+      "action": "PIVOT",
+      "claim_id": "C-WEB-DYNAMICS",
+      "cognitive_reset": true,
+      "comparative_reasoning": "Vs deterministic compilation bypass shootout on heterogeneous WebArena-Verified v2/WebGym mixed triple-channel (TreeWalker 99% + stable locator ranking + JSON DAG speculative guards/bailout, M_total Pareto vs alias 0.525 portfolio at f10/f100) -> equally blocked on Intel+Runtime manifest and was just attempted as 36049636798 MEASUREMENT_INVALID (Playwright not importable); barrier-physics is more orthogonal given retrieval-diversity saturated. Vs continuing residual-novelty verification economics (validly falsified non-Pareto with PASS - further reps wasteful) -> dominated. Vs explicit PARK of alias tunnel without replacement (would leave Frontier idle) -> pivot to barrier-physics retains exploratory mandate while acknowledging alias ceiling as bounded. Dependencies make it honest PARK-until-unblocked vs immediate execution.",
+      "dependencies": [
+        "intel:C-CROSSSITE diverse manifest >=10 families",
+        "runtime:C-MEAS-VALID health-gated n_non304>=800"
+      ],
+      "parent_handoff_disposition": "SUPERSEDE",
+      "question": "After 17-deep alias-catalog+routing+WebMCP/Fetch/OpenAPI tunnel bounded validly at pooled 21/40=0.525 with routing gain 0.0 p=1.0 (Jaccard>=0.6 over-matching) and valid non-Pareto falsification of residual-novelty economics (36042599040 PASS all 11 PCs/NCs PASS, Pareto saving>=25% fails vs cold and vs TF-IDF RAG k5), does pivoting to barrier-physics rewind on live BrowserGym 1280x720 CDP AX>10 heterogeneous sites with Intel diverse-site manifest (>=10 families Jaccard<0.30, 40 pooled trajectories >=10 mixed triple-channel, product-subtree anchored) and Runtime health-gated single-worker sticky Flask HS256+nginx substrate (If-None-Match/ETag, n_non304>=800 stratified) reveal predictive structure beyond memory via history-conditioned bias-corrected PMI (BC PMI>0.05 Bonferroni p<0.01 gap>=0.05 bits over TF-IDF k5 retrieval) with trajectory-grouped permutation, or does orthogonal exactly-centered testing remain BC~0 / rel_sep<200 indicating PARK pending larger manifest?",
+      "rationale": "Frontier IDLE after MEASUREMENT_INVALID 36052053591 (substrate absent) following valid non-Pareto falsification 36042599040. Alias tunnel's 0.525 ceiling is informative negative; 18th alias/routing permutation has near-zero expected information gain (audit-identified Jaccard over-matching). Frontier charter requires leaving current basin; deterministic compilation bypass also requires same heterogeneous substrate and was already attempted with invalid cost counters. Barrier-physics rewind is orthogonal second-stage C-WEB-DYNAMICS program per parent handoff's deferred clause, genuinely outside retrieval-diversity basin and tests mechanical priors for exploration. Execution gated on Intel+Runtime substrates to avoid another MEASUREMENT_INVALID."
+    },
+    "cycle_id": "36057723447",
+    "lane": "frontier",
+    "portfolio_assessment": "Program at 360 canonical exps with 7/10 claims HYPOTHESIS/MEASUREMENT_INVALID. Only C-MEAS-VALID EXPERIMENTAL and C-FRESHNESS synthetic SURVIVES (35947468747). C-SEMANTIC-RESOLVE alias tunnel bounded validly at pooled 21/40=0.525 Wilson [0.352,0.648] with 0/10 mixed triple-channel and routing gain 0.0 p=1.0; C-RESIDUAL-NOVELTY validly falsified non-Pareto with audit PASS (36042599040 all 11 PCs/NCs PASS). C-PARAM-INHERIT 49 exps with 6 consecutive MEASUREMENT_INVALID on identical add_to_cart kernel durability gate. Central leverage is measurement readiness: Runtime single-node/distributed HS256 health gating (n_non304>=360/800) and Intel diverse census (>=50 eTLD+1) unblock Graph freshness VALIDATED, delta-repair blast radius, Physics beyond-memory PMI and Frontier compilation bypass. No lane left idle; explicit PARK of Product and pivoted Frontier avoids repeating infra MEASUREMENT_INVALID while unblocking substrates.",
+    "schema_version": 1,
+    "scout_assessment": "Scout brief accurately diagnosed strategic inflection (360 exps, alias 0.525 ceiling bounded, residual-novelty PASS falsified non-Pareto, freshness synthetic SURVIVES, runtime valid falsified natural header, 4 lanes IDLE) and correctly identified cross-lane dependencies (Runtime HS256 shared-WAL n>=360/800 blocks Graph delta-repair/freshness VALIDATED; Intel diverse census blocks Physics/Frontier/Product) and external context (ICLR 2026 retrieval 14-23pts vs write 3-8pts, BrowserGym 0.14.3 pin/auth, Playwright MCP CLI efficiency). Brief influenced direction by elevating substrate unblocking over continued alias/param churn. Challenged Scout's implicit parity between Graph param-inherit durability reset and freshness VALIDATED transfer: choose freshness/delta-repair over param-inherit (retrieval dominance prior + 6 identical MEASUREMENT_INVALID). Rejected immediate Frontier deterministic compilation bypass on heterogeneous WebArena/WebGym as next experiment without Intel+Runtime manifest (would repeat MEASUREMENT_INVALID); instead PARK alias thread and pivot Frontier to orthogonal C-WEB-DYNAMICS barrier program gated on substrates, while Physics takes Gate0-independent timescale/barrier work that is immediately executable."
+  },
+  "experiment_id": "EXP-FRONTIER-36058331230",
+  "inherited_last_verdict": "MEASUREMENT_INVALID",
+  "inherited_next_question": "On heterogeneous WebArena-Verified v2/WebGym mixed triple-channel tasks (>=10 families Jaccard<0.30 product-subtree anchored 1280x720 CDP AX>10 mean>15 std>5, >=40 pooled >=10 mixed triple-channel trajectory-grouped holdout, honest per-trajectory hard-reset sum counters + tokens + latency, 5000 family-stratified bootstrap + 5000 block-permutation + 5000 global permutation), does deterministic compilation bypass (TreeWalker 99% + stable locator ranking + deterministic JSON/Python DAG with speculative guards and bailout fallback) achieve honest M_total_f10/f100 Pareto dominance (saving>=25% vs cold lower>15% p<0.05 strict dominance vs TF-IDF RAG k5 and vs alias catalog+routing at f10 and f100 robust to +-50% build, mixed >=4/10 pooled>=0.60 Wilson lower>=0.45 gap>=0.07 vs alias 0.525, hot-path mean<200ms median<100ms 0 tokens vs LLM median>=3000ms, resolve+bind reduction>=40%, calibration UNKNOWN>=0.85 false_accept<=0.10 ECE<=0.15 upper<=0.18 and |rho_shuffled|<0.20 centered |mean|<0.05 std<0.15 gap>0.35) and break the 0.525 alias ceiling where retrieval-diversity alone was bounded?",
+  "lane": "frontier",
+  "origin_github_run_id": "36058331230",
+  "parent_handoff": {
+    "experiment_id": "EXP-FRONTIER-36052053591",
+    "path": "research/experiments/EXP-FRONTIER-36052053591/handoff.json",
+    "sha256": "5e5812f96cc6f3d5552638096a3a084085a94aa6f77ccc5f33fb40fe34e83c08"
+  },
+  "reason": "global-director-PIVOT",
+  "request_hash": "db57e9948725633a25fff2ad5db68d37c0c104a257e44c7cd6dd4ee7dce20056",
+  "request_id": "bbd5bc8f945262a6d6ec6675",
+  "schema_version": 1
+}
