@@ -4,7 +4,7 @@ Pre-2.0 canonical memory remains frozen at `archive/spider-codex-ultimate:SPIDER
 
 Canonical Research 2.0 evidence lives in `codex/experiments/<experiment_id>/`.
 Use `codex/index.json` and `codex/claim_state.json` to locate relevant packets; do not load all experiment bodies by default.
-Validated experiments: **321**. Coverage gaps: **0**. Quarantined packets: **1**.
+Validated experiments: **324**. Coverage gaps: **0**. Quarantined packets: **1**.
 
 ## Experiment index
 
@@ -330,7 +330,10 @@ Validated experiments: **321**. Coverage gaps: **0**. Quarantined packets: **1**
 | EXP-GRAPH-35947468747 | graph | PASS | SURVIVES_CURRENT_TEST | C-FRESHNESS | `729ad852d9f5` |
 | EXP-PRODUCT-35947481519 | product | PASS | MEASUREMENT_INVALID | C-PRODUCT-ECON | `7e28c4875320` |
 | EXP-GRAPH-35949562506 | graph | MEASUREMENT_INVALID | MEASUREMENT_INVALID | C-DELTA-REPAIR | `02679ce4c771` |
+| EXP-RUNTIME-35949568321 | runtime | MEASUREMENT_INVALID | MEASUREMENT_INVALID | C-MEAS-VALID | `54925d614d12` |
 | EXP-PRODUCT-35949571341 | product | PASS | MEASUREMENT_INVALID | C-PRODUCT-ECON | `db7a09b601cd` |
+| EXP-FRONTIER-35949576588 | frontier | REVISE | FALSIFIED-IN-SETTING | C-SEMANTIC-RESOLVE | `81206e58269f` |
+| EXP-PRODUCT-35951662423 | product | PASS | MEASUREMENT_INVALID | C-PRODUCT-ECON | `dac04e600f38` |
 
 ## Latest recorded claim events
 
@@ -342,11 +345,11 @@ These are chronological latest events, not an automatic truth ranking.
 | C-DELTA-REPAIR | MEASUREMENT_INVALID | EXP-GRAPH-35949562506 | graph |
 | C-FRESHNESS | HYPOTHESIS | EXP-PRODUCT-35949571341 | product |
 | C-LLM-INHERIT | HYPOTHESIS | EXP-PRODUCT-35797365772 | product |
-| C-MEAS-VALID | MEASUREMENT_INVALID | EXP-RUNTIME-35937588416 | runtime |
+| C-MEAS-VALID | MEASUREMENT_INVALID | EXP-RUNTIME-35949568321 | runtime |
 | C-PARAM-INHERIT | MEASUREMENT_INVALID | EXP-GRAPH-35932480731 | graph |
-| C-PRODUCT-ECON | HYPOTHESIS | EXP-PRODUCT-35949571341 | product |
+| C-PRODUCT-ECON | HYPOTHESIS | EXP-PRODUCT-35951662423 | product |
 | C-RESIDUAL-NOVELTY | HYPOTHESIS | EXP-PRODUCT-35949571341 | product |
-| C-SEMANTIC-RESOLVE | EXPERIMENTAL | EXP-FRONTIER-35937602723 | frontier |
+| C-SEMANTIC-RESOLVE | EXPERIMENTAL | EXP-FRONTIER-35949576588 | frontier |
 | C-WEB-DYNAMICS | HYPOTHESIS | EXP-PHYSICS-35938359115 | physics |
 
 ## Integrity accounting

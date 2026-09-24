@@ -1,0 +1,159 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-FRONTIER-35949576588",
+  "lane": "frontier",
+  "status": "REVISE",
+  "producer_claim_supported": false,
+  "required_fixes": [
+    "observed_families function fails to detect body and query families for mixed tasks (manifest shows observed_families=[\"auth\",\"header\"] but repair sets all four); this breaks joint complementary selection logic and invalidates complementary_frac=1.0 metric",
+    "alias canonicalization in candidate_score causes over-matching on auth family (all auth-header variants score 1.0), leading to poor joint candidate selection; joint_no_alias outperforms joint_full on auth (7/10 vs 0/10) and body (7/10 vs 10/10 tied) revealing scoring defect",
+    "joint_compose adoption_value_template adds ALL observed keys to bound output including test-variant keys (permission_id, scope1, api-token, X_Api_Key); while key-sensitive verification canonicalizes them, the extra keys create duplicate canonical keys in parse_query dict (last-write-wins) risking value mismatch",
+    "PC-HONEST-COST-SANITY marginal pass (rho=0.2058 for flat/endpoint/hier, p=0.18-0.22) should be flagged as marginal not PASS; threshold 0.20 is exceeded"
+  ],
+  "validity_findings": [
+    "CRITICAL: observed_families() returns incomplete family set for mixed tasks (family 3). Repair code sets headers_observed={X_Api_Key}, body_observed={api-token}, url_query={permission_id, scope1} but manifest logs observed_families=[\"auth\",\"header\"] only. Body and query families missing. This causes select_joint to think remaining_families=[] after covering only auth+header, making complementary_frac=1.0 vacuous. Root cause undetermined but invalidates S3 mixed gate and ablation causality interpretation.",
+    "CRITICAL: alias canonicalization in candidate_score creates over-matching for auth family. With alias_enabled=True, all auth-header template keys (scope, scopes, scope1) canonicalize to \"scope\" and match observed \"scope1\". This inflates scores for ALL auth candidates, causing retrieval/selection to pick wrong candidates. Evidence: joint_no_alias (alias disabled) achieves 7/10 on auth vs joint_full 0/10; joint_no_routing (alias enabled) also 0/10 on auth. Alias hurts auth family performance.",
+    "HIGH: complementary_frac metric is misleading. Computed as 1.0 - len(remaining & obs_fams)/len(obs_fams). When obs_families is incomplete (missing body/query), remaining becomes empty after covering only auth+header, yielding complementary_frac=1.0 even though joint didn't cover all required families. All 40 joint selections report complementary_frac=1.0 but mixed tasks fail 0/10.",
+    "HIGH: joint_compose adoption loop adds ALL observed keys not already covered by selected candidates. For mixed tasks, this adds permission_id and scope1 (test variants) alongside canonical permission and scope from selected candidates. parse_query() keeps last value for duplicate keys; canonicalization maps both to same canonical key but value order depends on qparts list order. Risk of value mismatch not ruled out.",
+    "MEDIUM: PC-HONEST-COST-SANITY rho=0.2058 for flat/endpoint/hier exceeds 0.20 threshold (p=0.18-0.22). Producer calls this PASS with disclosure but frozen decision_rule requires |rho_shuffled|<0.20. This is a marginal control failure that should be flagged.",
+    "MEDIUM: False accept rate 0.50 for joint_full (20/40) indicates joint pipeline accepts wrong key-sets on half of alias-OOD tasks. This is not just mixed/auth failure - header and body tasks also contribute false accepts. The joint composition produces executable bounds that fail key-sensitive verification.",
+    "MEDIUM: ECE 0.433 (bootstrap upper 0.451) far exceeds 0.15 threshold. Confidence mean 0.933 vs accuracy 0.50 confirms systematic miscalibration. This is expected under imperfect accuracy with high softmax confidence but violates S5 gate.",
+    "LOW: Routing normalization diff_before_after=10 pairs but only 10/55 total paths differ. Task-relevant fraction 0.625 (25/40) driven by mixed tasks having versioned paths (/api/v2/data). For header/body/auth families, routing diff may be irrelevant. Ablation NO-ROUTING matches FULL (20/40) confirming routing not causal for header/body rescue."
+  ],
+  "baseline_findings": [
+    "B-EXACT-MATCH-CF: 4/40=0.10 on alias-OOD (expected 0/40 under key-sensitive). The 4 correct are family 0 header tasks where exact match finds verbatim mechanism. This matches expectation.",
+    "B-FLAT-TFIDF-K5-CF, H-HIERARCHICAL-CF, B-ENDPOINT-CATALOG-CF: All 4/40=0.10 on alias-OOD. Correct-family gating + key-sensitive verification reduces singles to chance ceiling. Distinct retrieval sets 40/40 confirms code distinctness.",
+    "B-RANDOM-K5-CF: 3/40=0.075, near chance. B-STAGEHAND: 0/40 isolation PASS.",
+    "All single baselines correctly hit key-sensitive ceiling of ~0.10, validating that key-sensitive verification works and prior 0.50 value-only ceiling was inflated.",
+    "Ablation baselines: B-JOINT-NO-ROUTING-CF matches B-JOINT-FULL-CF exactly (20/40, identical per-task outcomes, McNemar b=0,c=0,p=1.0). Routing normalization provides zero marginal gain. B-JOINT-NO-ALIAS-CF and B-JOINT-NO-BOTH-CF at 14/40 show alias contributes +6/40 on header+body but zero on auth/mixed."
+  ],
+  "recomputed_metrics": {
+    "pooled_rates_alias_ood": {
+      "B-JOINT-FULL-CF": {"n": 40, "correct": 20, "rate": 0.5, "wilson95": [0.352, 0.648]},
+      "B-JOINT-NO-ALIAS-CF": {"n": 40, "correct": 14, "rate": 0.35, "wilson95": [0.2213, 0.5049]},
+      "B-JOINT-NO-ROUTING-CF": {"n": 40, "correct": 20, "rate": 0.5, "wilson95": [0.352, 0.648]},
+      "B-JOINT-NO-BOTH-CF": {"n": 40, "correct": 14, "rate": 0.35, "wilson95": [0.2213, 0.5049]},
+      "B-FLAT-TFIDF-K5-CF": {"n": 40, "correct": 4, "rate": 0.1, "wilson95": [0.0396, 0.2305]},
+      "H-HIERARCHICAL-CF": {"n": 40, "correct": 4, "rate": 0.1, "wilson95": [0.0396, 0.2305]},
+      "B-ENDPOINT-CATALOG-CF": {"n": 40, "correct": 4, "rate": 0.1, "wilson95": [0.0396, 0.2305]},
+      "B-EXACT-MATCH-CF": {"n": 40, "correct": 4, "rate": 0.1, "wilson95": [0.0396, 0.2305]},
+      "B-RANDOM-K5-CF": {"n": 40, "correct": 3, "rate": 0.075, "wilson95": [0.0258, 0.1986]},
+      "B-STAGEHAND": {"n": 40, "correct": 0, "rate": 0.0, "wilson95": [0.0, 0.0876]}
+    },
+    "S1": {
+      "pooled_joint_rate": 0.5,
+      "wilson_lower_joint": 0.352,
+      "binomial_p_vs_0_10": 1.87e-10,
+      "mcnemar_vs_baselines": {
+        "B-EXACT-MATCH-CF": {"b": 16, "c": 0, "p": 3.05e-05},
+        "B-FLAT-TFIDF-K5-CF": {"b": 16, "c": 0, "p": 3.05e-05},
+        "H-HIERARCHICAL-CF": {"b": 16, "c": 0, "p": 3.05e-05},
+        "B-ENDPOINT-CATALOG-CF": {"b": 16, "c": 0, "p": 3.05e-05}
+      },
+      "mcnemar_vs_ablations": {
+        "B-JOINT-NO-ALIAS-CF": {"b": 13, "c": 7, "p": 0.263},
+        "B-JOINT-NO-ROUTING-CF": {"b": 0, "c": 0, "p": 1.0},
+        "B-JOINT-NO-BOTH-CF": {"b": 13, "c": 7, "p": 0.263}
+      }
+    },
+    "S2": {
+      "best_single_candidate": "B-EXACT-MATCH-CF",
+      "best_single_rate": 0.1,
+      "joint_coverage": 0.5,
+      "gain_vs_best_single": 0.4,
+      "gain_bs_lower": 0.325,
+      "gain_bs_upper": 0.475,
+      "gain_permutation_p": 0.005
+    },
+    "S2_ablations": {
+      "B-JOINT-NO-ALIAS-CF": {"abl_rate": 0.35, "gain_vs_abl": 0.15, "gain_bs_lower": 0.05, "gain_bs_upper": 0.25, "gain_permutation_p": 0.174},
+      "B-JOINT-NO-ROUTING-CF": {"abl_rate": 0.5, "gain_vs_abl": 0.0, "gain_bs_lower": 0.0, "gain_bs_upper": 0.0, "gain_permutation_p": 1.0},
+      "B-JOINT-NO-BOTH-CF": {"abl_rate": 0.35, "gain_vs_abl": 0.15, "gain_bs_lower": 0.05, "gain_bs_upper": 0.25, "gain_permutation_p": 0.124}
+    },
+    "S3": {
+      "header_rate": 1.0,
+      "body_rate": 1.0,
+      "auth_diagnostic_rate": 0.0,
+      "mixed_rate": 0.0,
+      "mixed_rate_no_alias": 0.0,
+      "mixed_rate_no_routing": 0.0,
+      "mixed_rate_no_both": 0.0
+    },
+    "S4": {
+      "joint_false_accept": 20,
+      "joint_false_accept_rate": 0.5,
+      "joint_unknown": 18,
+      "joint_noapp_unknown_precision": 1.0,
+      "false_by_pipeline_alias_ood": {
+        "B-JOINT-FULL-CF": 20,
+        "B-FLAT-TFIDF-K5-CF": 34,
+        "H-HIERARCHICAL-CF": 36,
+        "B-ENDPOINT-CATALOG-CF": 36,
+        "B-JOINT-NO-ALIAS-CF": 23,
+        "B-JOINT-NO-ROUTING-CF": 20,
+        "B-JOINT-NO-BOTH-CF": 24,
+        "B-RANDOM-K5-CF": 35,
+        "B-STAGEHAND": 0,
+        "B-EXACT-MATCH-CF": 36
+      }
+    },
+    "S5": {
+      "ece_joint_alias_ood": 0.4332,
+      "ece_bootstrap_lower025": 0.4152,
+      "ece_bootstrap_upper975": 0.4516,
+      "ece_baselines": {
+        "B-FLAT-TFIDF-K5-CF": 0.8346,
+        "H-HIERARCHICAL-CF": 0.8384,
+        "B-ENDPOINT-CATALOG-CF": 0.8401,
+        "B-JOINT-NO-ALIAS-CF": 0.5912,
+        "B-JOINT-NO-ROUTING-CF": 0.4542,
+        "B-JOINT-NO-BOTH-CF": 0.5763
+      }
+    },
+    "S6": {
+      "joint_mean_honest_cost": 39.725,
+      "ratios_vs_strong_baselines": {"B-FLAT-TFIDF-K5-CF": 0.507, "H-HIERARCHICAL-CF": 0.514, "B-ENDPOINT-CATALOG-CF": 0.514},
+      "ratio_vs_exact_diagnostic": 1.544,
+      "ratios_within_2x": true,
+      "build_units": 1100,
+      "amortized_modeled_per_task_usd_f10": 0.0022,
+      "amortized_modeled_per_task_usd_f100": 0.00022,
+      "econ_sanity_range_usd": [0.002, 0.092],
+      "amortized_within_range_f10": true
+    },
+    "honest_cost": {
+      "B-JOINT-FULL-CF": {"mean": 39.725, "rho_shuffled": 0.1132, "permutation_p": 0.5025, "within_family_std": {"0": 3.376, "1": 4.565, "2": 2.879, "3": 4.821}},
+      "B-FLAT-TFIDF-K5-CF": {"mean": 78.375, "rho_shuffled": 0.2058, "permutation_p": 0.2239, "within_family_std": {"0": 33.285, "1": 33.094, "2": 24.845, "3": 23.758}},
+      "H-HIERARCHICAL-CF": {"mean": 77.325, "rho_shuffled": 0.2058, "permutation_p": 0.194, "within_family_std": {"0": 33.285, "1": 33.094, "2": 24.845, "3": 23.728}},
+      "B-ENDPOINT-CATALOG-CF": {"mean": 77.325, "rho_shuffled": 0.2058, "permutation_p": 0.1841, "within_family_std": {"0": 33.285, "1": 33.094, "2": 24.845, "3": 23.728}},
+      "B-JOINT-NO-ALIAS-CF": {"mean": 39.725, "rho_shuffled": -0.0981, "permutation_p": 0.5522, "within_family_std": {"0": 3.376, "1": 4.565, "2": 2.879, "3": 4.821}},
+      "B-JOINT-NO-ROUTING-CF": {"mean": 39.725, "rho_shuffled": 0.1132, "permutation_p": 0.5174, "within_family_std": {"0": 3.376, "1": 4.565, "2": 2.879, "3": 4.821}},
+      "B-JOINT-NO-BOTH-CF": {"mean": 39.725, "rho_shuffled": -0.0981, "permutation_p": 0.5721, "within_family_std": {"0": 3.376, "1": 4.565, "2": 2.879, "3": 4.821}}
+    },
+    "calibration": {
+      "B-JOINT-FULL-CF": {"mean": 0.9332, "std": 0.0649, "min": 0.817, "max": 0.995},
+      "B-FLAT-TFIDF-K5-CF": {"mean": 0.9346, "std": 0.0622, "min": 0.788, "max": 0.995}
+    }
+  },
+  "claim_ceiling": "FALSIFIED-IN-SETTING: On repaired synthetic orthogonal fixture with genuine Jaccard>=0.6 multi-variant alias classes and key-sensitive verification, joint multi-candidate composition does not rescue pooled coverage to >=0.60 (achieved 0.50, Wilson lower 0.352) nor mixed triple-channel to >=4/10 (achieved 0/10). Ablation shows routing normalization provides zero marginal gain (joint-full vs joint-no-routing identical 20/40, p=1.0). Alias catalog contributes +6/40 on header/body but zero on auth/mixed. False accept rate 0.50 and ECE 0.433 violate calibration gates. Validity threats (observed_families bug, alias scoring over-matching) mean this falsification may reflect implementation defects rather than genuine factorization limit. Per frozen decision_rule, outcome is FALSIFIED-IN-SETTING (adequacy PASS but S1,S2-ablation,S3,S4,S5 fail). Does not authorize live heterogeneous shootout. Does not close live question. Pivot to orthogonal basins per Director mandate.",
+  "evidence_refs": [
+    "research/experiments/EXP-FRONTIER-35949576588/result.json",
+    "research/experiments/EXP-FRONTIER-35949576588/derived_metrics.json",
+    "research/experiments/EXP-FRONTIER-35949576588/raw_evidence.json",
+    "research/experiments/EXP-FRONTIER-35949576588/alias_catalog_manifest.json",
+    "research/experiments/EXP-FRONTIER-35949576588/joint_manifest.json",
+    "research/experiments/EXP-FRONTIER-35949576588/joint_no_alias_manifest.json",
+    "research/experiments/EXP-FRONTIER-35949576588/joint_no_routing_manifest.json",
+    "research/experiments/EXP-FRONTIER-35949576588/joint_no_both_manifest.json",
+    "research/experiments/EXP-FRONTIER-35949576588/routing_manifest.json",
+    "research/experiments/EXP-FRONTIER-35949576588/fetch_manifest.json",
+    "research/frontier/run_execute_35949576588.py"
+  ],
+  "unresolved": [
+    "Root cause of observed_families() returning incomplete family set for mixed tasks (missing body, query). Repair code appears correct but manifest logs show only [\"auth\",\"header\"]. Need to instrument observed_families at runtime on mixed tasks to diagnose.",
+    "Why alias canonicalization in candidate_score hurts auth family performance (0/10 with alias vs 7/10 without). The over-matching hypothesis needs verification by inspecting candidate_score distributions per family.",
+    "Whether joint_compose adoption_value_template duplicate-key canonicalization causes value mismatches in verification. Need to trace bound vs expected query key values for mixed tasks.",
+    "Whether live heterogeneous BrowserGym with real OpenAPI specs and routing differences would change the ceiling. Synthetic gate does not authorize live shootout per Director mandate.",
+    "Whether residual-novelty verification economics (C-RESIDUAL-NOVELTY) or barrier-physics rewind memory (C-WEB-DYNAMICS) provide higher leverage for these families per handoff recommendation."
+  ]
+}

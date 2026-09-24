@@ -1,0 +1,85 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-35951662423",
+  "lane": "product",
+  "github_run_id": 35951662423,
+  "execution": {
+    "model": "opencode/big-pickle",
+    "mode": "EXECUTE",
+    "executed_at": "2026-09-24T00:00:00Z",
+    "git_head": "5930a02a8209e4d4f3944a2f52ba655df6137422",
+    "pre_execute_sha": "61245fba116d1ca2da6c642fbe1385e8bfcaf2e4",
+    "base_sha": "922763b9806a7fc914aa62351837dfa3e61bddce",
+    "pre_existing_dirty": [
+      "M codex/index.json",
+      "?? research/experiments/EXP-PRODUCT-35951662423/model_execute.json"
+    ],
+    "notes": [
+      "model_execute.json in this dir records a prior execute attempt 3, exit_code 76, category output-missing; not touched.",
+      "No git commit/push/reset was performed; only in-scope writes: src/spider/kernel.py (MV2 patch), this experiment dir packet files, /tmp/opencode scratch."
+    ]
+  },
+  "frozen_inputs": {
+    "freeze.json_sha256": "9d9d3be82add2d493c138fdf9a632ab1cbf8b4c6b339c4406591edc514b09cdb",
+    "prereg.md_sha256": "49c6027fb72098f404fbba55c6dedd066e3ebe94def2d6bb220feb033f18be35",
+    "request.json_sha256": "a4dfe5393c033560c2f34604dc3771b00ba7f3b2404a948428602136a735737d",
+    "spec.json_sha256": "4225441b1f7018c400be45006815250d222504e9223187e5cc276cf6e22f6e4b",
+    "verified_byte_identical": true
+  },
+  "environment": {
+    "os": "Linux runnervmlun5p 6.17.0-1022-azure x86_64",
+    "python": "3.12.14",
+    "pip": "26.2.1 (PyPI network working)",
+    "scientific_stack": {
+      "numpy": "2.5.3",
+      "scipy": "1.18.1",
+      "sklearn": "1.9.1",
+      "pandas": "3.0.6",
+      "flask": "3.1.3",
+      "pyjwt": "2.15.0",
+      "gunicorn": "26.2.0",
+      "requests": "2.34.2"
+    },
+    "nginx": "1.24.0 (Ubuntu)",
+    "docker": "28.0.4 (only 6 gh-aw firewall images; BrowserGym pulls denied)",
+    "openai_key": "unset",
+    "substrate": "/tmp/spider-runtime absent; /tmp/spider-runtime/shared.db absent",
+    "sgdr_index": "not found repo-wide (find research -maxdepth 4 -name 'sgdr_index*' -> empty)"
+  },
+  "code_changes": [
+    {
+      "path": "src/spider/kernel.py",
+      "pre_sha256": "46929b3a951df48d7f9d1fd850871073c0d91c1868aa117e13d389fe274e8d61",
+      "post_sha256": "d926279d5ee14a044a2f13b8abc09202df9f5adb9e86feaadeb61818a15f4038",
+      "change": "line 12 _PARAMETER regex patched to include dot: r\"\\$\\{([A-Za-z_][A-Za-z0-9_\\.]*)\\}\"",
+      "frozen_reference": "prereg.md MV2; prereg referenced patched sha prefix d926279d (matches post-patch sha prefix)",
+      "tests": ["tests/test_kernel.py 3/3 PASS", "MV2 spot-check 5/5 EXECUTABLE conf>=0.80 (artifacts/mv2_kernel_spot_check.json)"]
+    }
+  ],
+  "fixture_references": [
+    {"path": "research/experiments/EXP-PRODUCT-35916130502/artifacts/qcr_bank_manifest.json", "sha256": "8c69804b249ec9c84cf05d86a21c7ebe7a31af5f8d45e50a4e6d477b449f9f58", "note": "prior-run artifact, 36 families TAU0.30 bank_source pools A/B"},
+    {"path": "research/experiments/EXP-PRODUCT-35916130502/artifacts/webmcp_registry.jsonl", "sha256": "af3c18e5ef1904484c5d440353b327958bdcc909e72915b301724b9f49bcdb4c", "note": "2147 lines, 714 distinct site_id - matches frozen 714/2147 identity"},
+    {"path": "research/experiments/EXP-PRODUCT-35916130502/artifacts/cost_config.json", "sha256": "55fa25af079dffb372835487a31914f536ff907c0055c5e1dce86f707c2a3433", "note": "cost model config"},
+    {"path": "research/experiments/EXP-PRODUCT-35916130502/artifacts/registry.jsonl", "sha256": "9ac48d2004362bd4", "note": "prior-run curated registry (bounded file-proxy evidence only)"}
+  ],
+  "artifacts": [
+    {"path": "research/experiments/EXP-PRODUCT-35951662423/artifacts/env_audit.json", "sha256": "029607c010da60e761a5bba102724e09e91f04404d4907d014067f556fcebc51", "role": "raw"},
+    {"path": "research/experiments/EXP-PRODUCT-35951662423/artifacts/mv2_kernel_spot_check.json", "sha256": "520b552f7111ee90bfcfb7a3aa39c2a13e0479a07eb10aa76d7f7f8c07fa19fc", "role": "derived"},
+    {"path": "research/experiments/EXP-PRODUCT-35951662423/result.json", "sha256": null, "role": "packet"},
+    {"path": "research/experiments/EXP-PRODUCT-35951662423/report.md", "sha256": null, "role": "packet"},
+    {"path": "research/experiments/EXP-PRODUCT-35951662423/provenance.json", "sha256": null, "role": "packet"}
+  ],
+  "reproduction_commands": [
+    "PYTHONPATH=src python3 -m unittest tests/test_kernel.py -v",
+    "PYTHONPATH=src python3 /tmp/opencode/mv2_spot_check.py  (5/5 EXECUTABLE spot-check; results copied to artifacts/mv2_kernel_spot_check.json)",
+    "docker pull -q ghcr.io/servicenow/browsergym:0.14.3   (denied)",
+    "docker pull -q browserless/browsergym   (denied)",
+    "pip index versions browsergym   (0.14.3 available on PyPI; no image, no key)",
+    "find research -maxdepth 4 -name 'sgdr_index*'   (empty)"
+  ],
+  "limits": [
+    "No economics measured at all - frozen rule bans file-proxy/n*3200/seeded-42 proxies when substrate absent.",
+    "Prior-run artifacts are cross-experiment references only; re-staging them as this experiment's frozen fixtures requires audit of TRAIN-only provenance and staging under this experiment's fixture paths.",
+    "gunicorn 26.2.0 vs frozen 23.0.0 and PyJWT 2.15.0 vs frozen 2.14.0 version drift to reconcile at provisioning."
+  ]
+}
