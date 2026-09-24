@@ -13,7 +13,7 @@
       "decision": "SURVIVES \u2014 C-PARAM-INHERIT survives at synthetic in-kernel POC level: distill_parameterized() with _extract_varying_values() correctly induces one parameter slot for isomorphic action paths and resolves to EXECUTABLE with correct bound_action for all 10 unseen single-char identifiers. All four frozen decision-rule conditions satisfied. Audit PASS confirms recomputed metrics match producer. However, the claim ceiling is narrow: single-parameter, single-field, common-prefix heuristic, deterministic synthetic data, hardcoded confidence, simulated baselines. No broader product promotion is authorized by this evidence.",
       "promote_to_product": false,
       "source_ref": "origin/lab2/product",
-      "source_ref_head": "8225bc64ed162396eb3422898268a5af19fbc015",
+      "source_ref_head": "1973aba861c0e1f00e19ebd4b8356959e0419760",
       "source_commit": "fb05ae4d41a0fec34053d42e6fe827e19c624e96",
       "hashes": {
         "request.json": "fd3e6828457739fc3e7094df53ba020c82d12bf513ddddcd7c3bbda070508a35",
@@ -40,7 +40,7 @@
       "decision": "MEASUREMENT_INVALID",
       "promote_to_product": false,
       "source_ref": "origin/lab2/frontier",
-      "source_ref_head": "67050f01369b90b3840908f2f27cc2ae6a793a51",
+      "source_ref_head": "acc9cd2cebe1f010d5c6b6308c25c37e32721aeb",
       "source_commit": "9cf80f63bd0f58287bbbf1526ca3432febca9492",
       "hashes": {
         "request.json": "dbadd1fc6298fab81a2ccd08632e720f5621ae6ab56fba31d3a732c2bf21a60e",
@@ -124,7 +124,7 @@
       "decision": "SUPPORTS",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "e9c3ecb2deabba24455f1cc99552f784f588f7e8",
+      "source_ref_head": "11526693fda2f25d6a237e0ce222b485f4779f04",
       "source_commit": "14d124a7e652c1bde161ec9b07cec61a0ff5ecc4",
       "hashes": {
         "request.json": "ac060980eee635b3edec766758f02747cfb02c42f5433aba27178285d1561c15",
@@ -205,7 +205,7 @@
       "decision": "MULTI-PARAM-SURVIVES \u2014 the frozen decision rule passes all 7 checks: C1 regression (slot\u22651, resolution=1.0, binding=1.0), C2 multi-param (slot=2, distinct, resolution=1.0, binding=1.0), C3 three-param (slot=3, distinct, resolution=1.0, binding=1.0), C4 non-identifier (slot=1, resolution=1.0, binding=1.0), C5 no-collision (slot=2, distinct, resolution=1.0, binding=1.0), null_control passed, no crashes. Producer metrics verified: 21/21 EXECUTABLE, 21/21 binding correct, 0/21 unsubstituted templates. Audit PASS confirms all recomputed metrics match producer. However, the claim ceiling remains narrow: synthetic POC implemented only in run_experiment.py (not in kernel.py), single-intent deterministic observations, trivial full-replacement parameterization for body fields, tautological confidence gate (0.8 == min_confidence 0.8), null control passes via intent mismatch not pattern absence, fragile positional slot-to-param mapping in harness. Do NOT promote to Product Core.",
       "promote_to_product": false,
       "source_ref": "origin/lab2/product",
-      "source_ref_head": "8225bc64ed162396eb3422898268a5af19fbc015",
+      "source_ref_head": "1973aba861c0e1f00e19ebd4b8356959e0419760",
       "source_commit": "b99b379f508ab3940986efbd32b2f9119b536ced",
       "hashes": {
         "request.json": "4b1917a31ca05e7dd0c4cf6c890445f0c08c444ea0b199b514870af6e8b8c554",
@@ -232,7 +232,7 @@
       "decision": "MEASUREMENT_INVALID",
       "promote_to_product": false,
       "source_ref": "origin/lab2/frontier",
-      "source_ref_head": "67050f01369b90b3840908f2f27cc2ae6a793a51",
+      "source_ref_head": "acc9cd2cebe1f010d5c6b6308c25c37e32721aeb",
       "source_commit": "f48d8baf8331e4a081fffa58aa3ad03e810a85d6",
       "hashes": {
         "request.json": "4fd8e220e5b0d682c402df1e674ef6147ab702e6cc34c73aff2514ae1f8746fd",
@@ -369,7 +369,7 @@
       "decision": "PARTIALLY_COMPATIBLE",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "e9c3ecb2deabba24455f1cc99552f784f588f7e8",
+      "source_ref_head": "11526693fda2f25d6a237e0ce222b485f4779f04",
       "source_commit": "957181df06b1fb89836ca0ea9e6299d90e84a812",
       "hashes": {
         "request.json": "d7ac099ff31b5f45a830349529520d4c2ee5473ea319c7b4af7cb37d955de79c",
@@ -396,7 +396,7 @@
       "decision": "FALSIFIED-IN-SETTING",
       "promote_to_product": false,
       "source_ref": "origin/lab2/frontier",
-      "source_ref_head": "67050f01369b90b3840908f2f27cc2ae6a793a51",
+      "source_ref_head": "acc9cd2cebe1f010d5c6b6308c25c37e32721aeb",
       "source_commit": "dca0b76bab7b58b4be4a44eea380e811550330b2",
       "hashes": {
         "request.json": "fb3652d895740298ef1e10009db3916536de1e2aec8f662affc63ea1e155a0ae",
@@ -451,7 +451,7 @@
       "decision": "SUPPORTS",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "e9c3ecb2deabba24455f1cc99552f784f588f7e8",
+      "source_ref_head": "11526693fda2f25d6a237e0ce222b485f4779f04",
       "source_commit": "8a494724d6ccee840c334bd11ae1c0e054007fe2",
       "hashes": {
         "request.json": "edd5c10df7802f25a590a582fbff6a4d8f165ad37f543608596140f57c9af185",
@@ -478,7 +478,7 @@
       "decision": "FALSIFIED-IN-SETTING",
       "promote_to_product": false,
       "source_ref": "origin/lab2/frontier",
-      "source_ref_head": "67050f01369b90b3840908f2f27cc2ae6a793a51",
+      "source_ref_head": "acc9cd2cebe1f010d5c6b6308c25c37e32721aeb",
       "source_commit": "d4353fcba3d3bb06d0f628cc54d9fbc111243db7",
       "hashes": {
         "request.json": "1b231c2b8bfde60e6ba3693de74a87b33e7d85aeabd091e87a057831e43366c5",
@@ -507,7 +507,7 @@
       "decision": "MIXED",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "e9c3ecb2deabba24455f1cc99552f784f588f7e8",
+      "source_ref_head": "11526693fda2f25d6a237e0ce222b485f4779f04",
       "source_commit": "8f2ef00975dfa2cc9d432e36ea67b2b4fec8f2dd",
       "hashes": {
         "request.json": "bb5b84eb9c0144aaa540ff513c65e954751faa98d0b0f2423083e4fd7a4d51db",
@@ -589,7 +589,7 @@
       "decision": "KERNEL-INTEGRATION-FALSIFIED",
       "promote_to_product": false,
       "source_ref": "origin/lab2/product",
-      "source_ref_head": "8225bc64ed162396eb3422898268a5af19fbc015",
+      "source_ref_head": "1973aba861c0e1f00e19ebd4b8356959e0419760",
       "source_commit": "bcbc236d4ad4884ac9d439c0262c23a0c3058746",
       "hashes": {
         "request.json": "f3ac6e2ab30480ed7370041882af1fc9ac886489f7fe1668772593145237246f",
@@ -616,7 +616,7 @@
       "decision": "FIXES-FALSIFIED",
       "promote_to_product": false,
       "source_ref": "origin/lab2/product",
-      "source_ref_head": "8225bc64ed162396eb3422898268a5af19fbc015",
+      "source_ref_head": "1973aba861c0e1f00e19ebd4b8356959e0419760",
       "source_commit": "44d59cfed64d527ca5261503d3c35886d386d93f",
       "hashes": {
         "request.json": "77e2c8039f4cc0dd2813eb3fd231667e388cfca68372b727c979a7172bfa296e",
@@ -670,7 +670,7 @@
       "decision": "FIXES-FALSIFIED",
       "promote_to_product": false,
       "source_ref": "origin/lab2/product",
-      "source_ref_head": "8225bc64ed162396eb3422898268a5af19fbc015",
+      "source_ref_head": "1973aba861c0e1f00e19ebd4b8356959e0419760",
       "source_commit": "740204b76eccdb1ff004e104d2686ecea01d84ab",
       "hashes": {
         "request.json": "d8aa047873053228069f0ae6f2a40d37a124c6489b58135e0f8a2fe7e7e5c6bb",
@@ -724,7 +724,7 @@
       "decision": "KERNEL-INTEGRATION-PARTIAL",
       "promote_to_product": false,
       "source_ref": "origin/lab2/product",
-      "source_ref_head": "8225bc64ed162396eb3422898268a5af19fbc015",
+      "source_ref_head": "1973aba861c0e1f00e19ebd4b8356959e0419760",
       "source_commit": "74256fb86a510180082f39d7346efa5894c7a070",
       "hashes": {
         "request.json": "8637bf8cae798a7888136c6b2ddde5787bb45a4a3cfda5af414e9e8bcbed25f7",
@@ -751,7 +751,7 @@
       "decision": "FALSIFIED-IN-SETTING",
       "promote_to_product": false,
       "source_ref": "origin/lab2/frontier",
-      "source_ref_head": "67050f01369b90b3840908f2f27cc2ae6a793a51",
+      "source_ref_head": "acc9cd2cebe1f010d5c6b6308c25c37e32721aeb",
       "source_commit": "22ccea04903ae256d363b8968b3c2a4690ef6057",
       "hashes": {
         "request.json": "c41a142a4c8e69b271678b4c32800520e0cb5293a1f1bccd2e9e4da1f0a63ac6",
@@ -807,7 +807,7 @@
       "decision": "BLOCKED",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "e9c3ecb2deabba24455f1cc99552f784f588f7e8",
+      "source_ref_head": "11526693fda2f25d6a237e0ce222b485f4779f04",
       "source_commit": "c621fb1ed4a31330b70fb21850baf07bf3a8ed19",
       "hashes": {
         "request.json": "7ee0962085333152786c15e640a9fa22623c1153b8c80a2a4bf868e7099f7e3f",
@@ -861,7 +861,7 @@
       "decision": "SURVIVES_CURRENT_TEST",
       "promote_to_product": false,
       "source_ref": "origin/lab2/frontier",
-      "source_ref_head": "67050f01369b90b3840908f2f27cc2ae6a793a51",
+      "source_ref_head": "acc9cd2cebe1f010d5c6b6308c25c37e32721aeb",
       "source_commit": "8ae9ddc8f2025e7f38632b0eea3c02e62160f6a6",
       "hashes": {
         "request.json": "c307fca8608e2b9c1f7d246c67dfcbe0840173ae920aca112319e4ecede89c7f",
@@ -888,7 +888,7 @@
       "decision": "FALSIFIED-IN-SETTING",
       "promote_to_product": false,
       "source_ref": "origin/lab2/frontier",
-      "source_ref_head": "67050f01369b90b3840908f2f27cc2ae6a793a51",
+      "source_ref_head": "acc9cd2cebe1f010d5c6b6308c25c37e32721aeb",
       "source_commit": "be11b0bfedbf5382b271084e52a2a36f44de855b",
       "hashes": {
         "request.json": "7e41f131747af8a2a3b2ef8fbf911c5a86de89b3534b77271a209d9ef3d5ac80",
@@ -942,7 +942,7 @@
       "decision": "FALSIFIED-IN-SETTING",
       "promote_to_product": false,
       "source_ref": "origin/lab2/frontier",
-      "source_ref_head": "67050f01369b90b3840908f2f27cc2ae6a793a51",
+      "source_ref_head": "acc9cd2cebe1f010d5c6b6308c25c37e32721aeb",
       "source_commit": "111951aeb5f0c770376457836dc23e17b94e32e1",
       "hashes": {
         "request.json": "562ecee83cbc08a62295c677ad2d53909b81291c3806be0cd85cba15599e8526",
@@ -1050,7 +1050,7 @@
       "decision": "C2-FIX-FALSIFIED",
       "promote_to_product": false,
       "source_ref": "origin/lab2/product",
-      "source_ref_head": "8225bc64ed162396eb3422898268a5af19fbc015",
+      "source_ref_head": "1973aba861c0e1f00e19ebd4b8356959e0419760",
       "source_commit": "b6a0886e36754837ded02ab836511b63f0522c14",
       "hashes": {
         "request.json": "ce4b6c34736ca35f2a986a7f7ea40647c45ba76637b3bd4efbd4db38f546a7cc",
@@ -1158,7 +1158,7 @@
       "decision": "C2-FIX-FALSIFIED",
       "promote_to_product": false,
       "source_ref": "origin/lab2/product",
-      "source_ref_head": "8225bc64ed162396eb3422898268a5af19fbc015",
+      "source_ref_head": "1973aba861c0e1f00e19ebd4b8356959e0419760",
       "source_commit": "d04d236205ae78814ed604f448585ca9e379333f",
       "hashes": {
         "request.json": "ba041eed4d24d1e99ed377e2f3a85a5d2a89e4806f79b563532b727a1b7a72d1",
@@ -1295,7 +1295,7 @@
       "decision": "REVISE",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "e9c3ecb2deabba24455f1cc99552f784f588f7e8",
+      "source_ref_head": "11526693fda2f25d6a237e0ce222b485f4779f04",
       "source_commit": "3b2e25ab87930a13cbba404b5a56a62b3e03a546",
       "hashes": {
         "request.json": "50ae967293cafdce03cf4b1072babb1b3ec76e8f03de0f57d04a09025a1e6261",
@@ -1376,7 +1376,7 @@
       "decision": "SURVIVES_CURRENT_TEST",
       "promote_to_product": false,
       "source_ref": "origin/lab2/product",
-      "source_ref_head": "8225bc64ed162396eb3422898268a5af19fbc015",
+      "source_ref_head": "1973aba861c0e1f00e19ebd4b8356959e0419760",
       "source_commit": "21e4401730683715d2680684fed56506c9527b7d",
       "hashes": {
         "request.json": "08b6fea0fb6b846a9c81cdb47094ca6e993855a157d9021f306d6e605fb731b5",
@@ -1430,7 +1430,7 @@
       "decision": "FALSIFIED-IN-SETTING",
       "promote_to_product": false,
       "source_ref": "origin/lab2/product",
-      "source_ref_head": "8225bc64ed162396eb3422898268a5af19fbc015",
+      "source_ref_head": "1973aba861c0e1f00e19ebd4b8356959e0419760",
       "source_commit": "f3fee46cab94ef248b72b034f41f14ac632afd7d",
       "hashes": {
         "request.json": "cfca5639a8a7f2674b165ee94f5089f6800b92124567b2751b6c362a8718d007",
@@ -1511,7 +1511,7 @@
       "decision": "MEASUREMENT_INVALID",
       "promote_to_product": false,
       "source_ref": "origin/lab2/frontier",
-      "source_ref_head": "67050f01369b90b3840908f2f27cc2ae6a793a51",
+      "source_ref_head": "acc9cd2cebe1f010d5c6b6308c25c37e32721aeb",
       "source_commit": "ca9884ed23d6f4d05199f80d093ccab39a3ea420",
       "hashes": {
         "request.json": "44fc1148df1f4f750c29ef9fdee31b22cedb50bce3c12868c20f1297956b4845",
@@ -1539,7 +1539,7 @@
       "decision": "MIXED",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "e9c3ecb2deabba24455f1cc99552f784f588f7e8",
+      "source_ref_head": "11526693fda2f25d6a237e0ce222b485f4779f04",
       "source_commit": "e79ae260a5b5b473df2597a5bb6b5eada1277c62",
       "hashes": {
         "request.json": "875f313b648ffdf067827b0aaeea2f7dd808b0ba68149712d9fe919e41e13ca8",
@@ -1594,7 +1594,7 @@
       "decision": "MEASUREMENT_INVALID",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "e9c3ecb2deabba24455f1cc99552f784f588f7e8",
+      "source_ref_head": "11526693fda2f25d6a237e0ce222b485f4779f04",
       "source_commit": "0fa3c79845aee7f4f6a28b8d437667978fc3a867",
       "hashes": {
         "request.json": "98f667a8beaa87cb0386c9ec51228ecf21ddeeac39ed6c6878c4d3a710e816d0",
@@ -1648,7 +1648,7 @@
       "decision": "FALSIFIED-IN-SETTING",
       "promote_to_product": false,
       "source_ref": "origin/lab2/product",
-      "source_ref_head": "8225bc64ed162396eb3422898268a5af19fbc015",
+      "source_ref_head": "1973aba861c0e1f00e19ebd4b8356959e0419760",
       "source_commit": "44f6659854350c031c5ed54cd415374d2db9277c",
       "hashes": {
         "request.json": "633f9e924564e990435ba30a8f5f48bde4cc725c74046fdc7cb548ba5ed227e9",
@@ -1702,7 +1702,7 @@
       "decision": "SURVIVES_CURRENT_TEST",
       "promote_to_product": false,
       "source_ref": "origin/lab2/product",
-      "source_ref_head": "8225bc64ed162396eb3422898268a5af19fbc015",
+      "source_ref_head": "1973aba861c0e1f00e19ebd4b8356959e0419760",
       "source_commit": "60981e36e57022a10d3d5e780cbbc532ce26d4ae",
       "hashes": {
         "request.json": "42e0f10452526e8c0ad0ae84275a10c086ba9bb104b8b696a7cb81e4c0f9a316",
@@ -1756,7 +1756,7 @@
       "decision": "SURVIVES_CURRENT_TEST",
       "promote_to_product": false,
       "source_ref": "origin/lab2/product",
-      "source_ref_head": "8225bc64ed162396eb3422898268a5af19fbc015",
+      "source_ref_head": "1973aba861c0e1f00e19ebd4b8356959e0419760",
       "source_commit": "359a1644d1ba75423ab41a20689235331fc62fc7",
       "hashes": {
         "request.json": "0a650b5eeb497774ed60ddf457eb4b5dd7cedcc42f470902fa1dedeb5491135d",
@@ -1810,7 +1810,7 @@
       "decision": "REVISE",
       "promote_to_product": false,
       "source_ref": "origin/lab2/product",
-      "source_ref_head": "8225bc64ed162396eb3422898268a5af19fbc015",
+      "source_ref_head": "1973aba861c0e1f00e19ebd4b8356959e0419760",
       "source_commit": "569a1573e40b239768c6b75da2c32a1bd2a8780c",
       "hashes": {
         "request.json": "e4249732669660c49afb59ba70b5fa6b1c5fd536c6ba3c6114dd93958da3ea57",
@@ -1865,7 +1865,7 @@
       "decision": "MEASUREMENT_INVALID",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "e9c3ecb2deabba24455f1cc99552f784f588f7e8",
+      "source_ref_head": "11526693fda2f25d6a237e0ce222b485f4779f04",
       "source_commit": "bfbe74400ae9a3d15317c83ef51768731f467eec",
       "hashes": {
         "request.json": "51a0702f5b47e3b4c0643db51c9ab005bf398bbe52a41484f255f266ba8189c0",
@@ -1946,7 +1946,7 @@
       "decision": "FALSIFIED-IN-SETTING",
       "promote_to_product": false,
       "source_ref": "origin/lab2/frontier",
-      "source_ref_head": "67050f01369b90b3840908f2f27cc2ae6a793a51",
+      "source_ref_head": "acc9cd2cebe1f010d5c6b6308c25c37e32721aeb",
       "source_commit": "636109afec367ad29acb94c1584fa6740c062169",
       "hashes": {
         "request.json": "b31258748fe218f9105e9df2914467bc9ff3d2e44d582fb7a2448391846d41a4",
@@ -2054,7 +2054,7 @@
       "decision": "FALSIFIED-IN-SETTING",
       "promote_to_product": false,
       "source_ref": "origin/lab2/frontier",
-      "source_ref_head": "67050f01369b90b3840908f2f27cc2ae6a793a51",
+      "source_ref_head": "acc9cd2cebe1f010d5c6b6308c25c37e32721aeb",
       "source_commit": "858edf9f6a14693e1c85d059c07365c13e1a2315",
       "hashes": {
         "request.json": "c426eaabcd14022130061e65d1bbb140d41ab22a9c81d28d0d5d4a9e0ae418d2",
@@ -2083,7 +2083,7 @@
       "decision": "INCONCLUSIVE",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "e9c3ecb2deabba24455f1cc99552f784f588f7e8",
+      "source_ref_head": "11526693fda2f25d6a237e0ce222b485f4779f04",
       "source_commit": "1addb517158ec8aadf49941115e39be7d45bebfd",
       "hashes": {
         "request.json": "781b7f6a13ce6f0c7a0c8dc825c842bfa21385e348d6227a60787d9dfbdb4a91",
@@ -2137,7 +2137,7 @@
       "decision": "FALSIFIED-IN-SETTING",
       "promote_to_product": false,
       "source_ref": "origin/lab2/frontier",
-      "source_ref_head": "67050f01369b90b3840908f2f27cc2ae6a793a51",
+      "source_ref_head": "acc9cd2cebe1f010d5c6b6308c25c37e32721aeb",
       "source_commit": "2916a7c97b2c2bc9299fe8644e4914dae54f99e9",
       "hashes": {
         "request.json": "f211fd104e0a2ce6c45dda252c283b4f991683522b2aa7ed2be2e21f621dbaab",
@@ -2191,7 +2191,7 @@
       "decision": "MEASUREMENT_INVALID",
       "promote_to_product": false,
       "source_ref": "origin/lab2/frontier",
-      "source_ref_head": "67050f01369b90b3840908f2f27cc2ae6a793a51",
+      "source_ref_head": "acc9cd2cebe1f010d5c6b6308c25c37e32721aeb",
       "source_commit": "57ca23d0c9a481288a3e30b836396e9c0880253f",
       "hashes": {
         "request.json": "0596702daeeb836a1e6e44e2e802b838a2e351b43edce59f44627f1ea3fdc839",
@@ -2245,7 +2245,7 @@
       "decision": "FALSIFIED-IN-SETTING \u2014 Frozen decision_rule triggers FALSIFIED-IN-SETTING: null control passes for both KDE (8/8) and kNN (8/8) at lambda=0, but CV \u22640.5 at lambda=1 fails for both KDE (max 0.5745 on type 4, 7/8 pass) and kNN (max 0.5750 on type 0, 7/8 pass). Positive controls pass strongly (KDE t=7.81 p=0.0007, kNN t=6.82 p=0.0012). The frozen rule requires ALL conditions for BOTH measures; CV failure on one type per measure is sufficient. The result is a valid scientific negative on per-type stability at 250/type, not measurement invalidity. Audit PASS confirms all recomputed metrics match producer. Claim ceiling bounded to: KDE and kNN achieve per-type null control (8/8 pass) where binned TV fails (4/8 pass), confirming the binned TV false-positive is estimator-specific; however, per-type CV stability \u22640.5 is not achieved at 250/type by either KDE (max 0.575, marginal) or kNN (max 0.755, substantial). All evidence remains synthetic 2D [0,1]^2 with 8 heterogeneous affine page types; no inference to real Web DOM dynamics warranted.",
       "promote_to_product": false,
       "source_ref": "origin/lab2/frontier",
-      "source_ref_head": "67050f01369b90b3840908f2f27cc2ae6a793a51",
+      "source_ref_head": "acc9cd2cebe1f010d5c6b6308c25c37e32721aeb",
       "source_commit": "5a4e556ee45cafa4bbed8846efc28f6cefa113b9",
       "hashes": {
         "request.json": "b84320774f42091c164f6f00e86a0dbc1a80c615ff79bee14715392124b52c9b",
@@ -2301,7 +2301,7 @@
       "decision": "FALSIFIED-IN-SETTING",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "e9c3ecb2deabba24455f1cc99552f784f588f7e8",
+      "source_ref_head": "11526693fda2f25d6a237e0ce222b485f4779f04",
       "source_commit": "ac10541a53a9de96a5038ab6c39404a04861f041",
       "hashes": {
         "request.json": "2a9100b28b5f34ddfd3f8dc6157d53999d7540d50159d985c4c1c309eb11b4b3",
@@ -2436,7 +2436,7 @@
       "decision": "SURVIVES_CURRENT_TEST",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "e9c3ecb2deabba24455f1cc99552f784f588f7e8",
+      "source_ref_head": "11526693fda2f25d6a237e0ce222b485f4779f04",
       "source_commit": "f0eb80b6f16f98ba5144c42fb3b4fb3d5a234ab8",
       "hashes": {
         "request.json": "1a02bca6e6fe9aa825c93e541e7e3ecbae8d8629f26ae482337def95dea81a28",
@@ -2490,7 +2490,7 @@
       "decision": "FALSIFIED-IN-SETTING",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "e9c3ecb2deabba24455f1cc99552f784f588f7e8",
+      "source_ref_head": "11526693fda2f25d6a237e0ce222b485f4779f04",
       "source_commit": "d5a6add38ab8f7d1ef4ca23c840e09e900db77ae",
       "hashes": {
         "request.json": "431840fb12fdb08f4c5c0c4093fba7ece2a023d6091ae5797bd5577c85b35371",
@@ -2517,7 +2517,7 @@
       "decision": "MEASUREMENT_INVALID",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "e9c3ecb2deabba24455f1cc99552f784f588f7e8",
+      "source_ref_head": "11526693fda2f25d6a237e0ce222b485f4779f04",
       "source_commit": "211227fc18095750b46c91f055d38b9b017a36f5",
       "hashes": {
         "request.json": "16cc65cdab8dcb20606191828520d31bcb3d6bfd6851cde151681f35c46bdfd4",
@@ -2544,7 +2544,7 @@
       "decision": "SURVIVES_CURRENT_TEST",
       "promote_to_product": false,
       "source_ref": "origin/lab2/product",
-      "source_ref_head": "8225bc64ed162396eb3422898268a5af19fbc015",
+      "source_ref_head": "1973aba861c0e1f00e19ebd4b8356959e0419760",
       "source_commit": "75062582173d25a6bb1097b6d1d4d574aa44c2ad",
       "hashes": {
         "request.json": "09566c08deef4d2b39cf6d8f743ef382841406889557ad122cceb20cdb9d04d9",
@@ -2599,7 +2599,7 @@
       "decision": "SURVIVES_CURRENT_TEST",
       "promote_to_product": false,
       "source_ref": "origin/lab2/product",
-      "source_ref_head": "8225bc64ed162396eb3422898268a5af19fbc015",
+      "source_ref_head": "1973aba861c0e1f00e19ebd4b8356959e0419760",
       "source_commit": "0efda56bec081f965bb543dc494e249eb5865fc9",
       "hashes": {
         "request.json": "3d10ab9f180af2b51eb5399baa5e93c3cf56f117f5084b2a212cb536475e1bc8",
@@ -2681,7 +2681,7 @@
       "decision": "PROVENANCE_PARTIAL",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "e9c3ecb2deabba24455f1cc99552f784f588f7e8",
+      "source_ref_head": "11526693fda2f25d6a237e0ce222b485f4779f04",
       "source_commit": "57efaab4f56233946882021b627ad578524c8174",
       "hashes": {
         "request.json": "03255fbd74467fd5cce429a979531a999dfaac9006d5477d277a48c1f5a4ea05",
@@ -2709,7 +2709,7 @@
       "decision": "REVISE \u2014 frozen decision rule passes arithmetically on all 5 conditions (Fix1+Fix2+Fix3 importable, binding_accuracy=1.0 on 3 parameterized endpoints, mechanism count 3 vs 5 = 40% reduction, protocol-only prevalence 19.23% on curated corpus, zero task failures). However, the audit identifies high-severity measurement validity gaps that prevent producer claims from being fully supported: (1) protocol-only prevalence measured on curated 52-URL hardcoded list (V1_PROTOCOL_CORPUS_NOT_LIVE) not actual live browser traffic as required by spec measurement_validity[3]; (2) binding accuracy validated by exact URL string matching (V2_BINDING_NOT_HTTP) not real HTTP execution against jsonplaceholder.typicode.com as required by spec measurement_validity[2]; (3) mechanism count reduction conflates GET/PUT methods (V3_MECHANISM_COUNT_METHOD_CONFLATION) \u2014 method-aware counting yields 5 vs 4 = 20% at threshold; (4) token cost baseline uses arbitrary arithmetic without pricing documentation (V4_TOKEN_COST_ARBITRARY); (5) B_UNFIXED_PROTOCOL_ONLY baseline omitted (V7_B_UNFIXED_MISSING). The claim ceiling is bounded to: committed-code synthetic single-slot with metadata-only slot_prefixes on src/spider/kernel.py, string-match binding accuracy 1.0 on 3 parameterized endpoints, method-excluded mechanism reduction 40% (method-aware 20% at boundary), curated 52-URL protocol-only prevalence 19.23% (20.41% deduped). Real HTTP binding correctness, live traffic prevalence, literal vs parameterized real cost per successful task (C-PRODUCT-ECON), and model-token economics are NOT established. No product promotion.",
       "promote_to_product": false,
       "source_ref": "origin/lab2/product",
-      "source_ref_head": "8225bc64ed162396eb3422898268a5af19fbc015",
+      "source_ref_head": "1973aba861c0e1f00e19ebd4b8356959e0419760",
       "source_commit": "6e4206dcccf7de5d47af3da4a8f8cb4dde8f4326",
       "hashes": {
         "request.json": "559b2942cce49ff61af4766771387874cc647e2cecae0d9b6611f5c1c3cdc185",
@@ -2736,7 +2736,7 @@
       "decision": "MEASUREMENT_INVALID",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "e9c3ecb2deabba24455f1cc99552f784f588f7e8",
+      "source_ref_head": "11526693fda2f25d6a237e0ce222b485f4779f04",
       "source_commit": "10549ee646b031aa873d82f61ff86234d9b17eb8",
       "hashes": {
         "request.json": "643b91daec4b9882f577ba4f922d043f4fdf33b8f7d7cfe03c0fa9b57e479a43",
@@ -2845,7 +2845,7 @@
       "decision": "MEASUREMENT_INVALID",
       "promote_to_product": false,
       "source_ref": "origin/lab2/product",
-      "source_ref_head": "8225bc64ed162396eb3422898268a5af19fbc015",
+      "source_ref_head": "1973aba861c0e1f00e19ebd4b8356959e0419760",
       "source_commit": "62cbcc826660c3c3b162490e326acdfa67cc3c32",
       "hashes": {
         "request.json": "8a18ac1f8ecc2aeed9ae710e5bc80de5c9445e2345a2a99ef546fe29427d3580",
@@ -3007,7 +3007,7 @@
       "decision": "DESIGN_PARTIALLY_RESOLVED \u2014 the C2 semantic contradiction is correctly diagnosed (falsifier and null_control agree null>=observed is bad; original FALSIFIED 0.5275>0.3 grounds this intent) and a 8-component canonical-script specification is produced. However, the frozen verdict mapping C1 AND C2 -> SURVIVES_CURRENT_TEST remains inverted and unamended (audit V1), the null-model recipe is underspecified to reproducibility (audit V2), the density denominator is ambiguous (audit V3), and the canonical script is a design document not committed executable code. Substrate blocker (locatableSample cap at measure_fullpage_yield.py:89) is confirmed still present. The producer's BLOCKING_REDUCED verdict overstates: at most one blocker is fully verified (substrate still present), design is partially narrowed but not closed, code still absent.",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "e9c3ecb2deabba24455f1cc99552f784f588f7e8",
+      "source_ref_head": "11526693fda2f25d6a237e0ce222b485f4779f04",
       "source_commit": "8f0ab2e1591c3e4ca45ca2449b5134a12f04926f",
       "hashes": {
         "request.json": "dd1ea16d08f06485d0a541bef1477f9ca184a5d4dfb496fe4d7dbb3a81ff6096",
@@ -3034,7 +3034,7 @@
       "decision": "MEASUREMENT_INVALID",
       "promote_to_product": false,
       "source_ref": "origin/lab2/frontier",
-      "source_ref_head": "67050f01369b90b3840908f2f27cc2ae6a793a51",
+      "source_ref_head": "acc9cd2cebe1f010d5c6b6308c25c37e32721aeb",
       "source_commit": "a4de5f75a516c0da50d5a6ef069cbc8dbb3949ea",
       "hashes": {
         "request.json": "8404e00d5823b999ba2fb8b91d27cd3c437c0cb1173503bf9ef60721d447edd1",
@@ -3062,7 +3062,7 @@
       "decision": "FALSIFIED-IN-SETTING",
       "promote_to_product": false,
       "source_ref": "origin/lab2/product",
-      "source_ref_head": "8225bc64ed162396eb3422898268a5af19fbc015",
+      "source_ref_head": "1973aba861c0e1f00e19ebd4b8356959e0419760",
       "source_commit": "d093d4367f8b3d3913fe7fd5c009979fd7c0e609",
       "hashes": {
         "request.json": "e2dcb2eaf998554344124e3812688ddadc039d254776dd0ce2a97641c49d6dd5",
@@ -3116,7 +3116,7 @@
       "decision": "SURVIVES_CURRENT_TEST",
       "promote_to_product": false,
       "source_ref": "origin/lab2/product",
-      "source_ref_head": "8225bc64ed162396eb3422898268a5af19fbc015",
+      "source_ref_head": "1973aba861c0e1f00e19ebd4b8356959e0419760",
       "source_commit": "0c62083dcf0d98660b821b6307b2218a5bb6d822",
       "hashes": {
         "request.json": "1bfeeab35e875b39f4c7fd66a85a5f813c7a7e8e21b1eaad1a0b85b2f1de63a1",
@@ -3198,7 +3198,7 @@
       "decision": "FALSIFIED-IN-SETTING \u2014 frozen decision_rule requires ALL C1-C7 for SURVIVES_CURRENT_TEST. C1-C3 and C7 pass (resolve/bind pipeline validated, kernel regression intact), but C4-C6 fail decisively: parameterized mechanisms use MORE tokens than literal for all 5 patterns (0/5 vs >=4/5 threshold), mean savings -6.4% (vs >=15%), and savings decrease with parameter count (3-param -9.68% < 1-param -4.81%). Audit PASS confirms all recomputed metrics match producer. The falsification is bounded to short-value (1-3 char numeric) URL patterns with tiktoken cl100k_base encoding; long-value savings remain open.",
       "promote_to_product": false,
       "source_ref": "origin/lab2/product",
-      "source_ref_head": "8225bc64ed162396eb3422898268a5af19fbc015",
+      "source_ref_head": "1973aba861c0e1f00e19ebd4b8356959e0419760",
       "source_commit": "7a32946451c624a06a716933f6e9e4fed9ebc677",
       "hashes": {
         "request.json": "933647e49136510834bca5b34aba74ab060d851f553e2a9fd4a67ec65d8a6db3",
@@ -3252,7 +3252,7 @@
       "decision": "MEASUREMENT_INVALID \u2014 The frozen decision rule is logically incoherent: NC1 expects the new weighted-per-task recipe to reproduce the parent p=0.5 per-iteration null mean 0.5275 within 0.001, but these recipes are structurally different by design (producer notes expected; audit V2 confirms). SURVIVES requires NC1 PASS, making SURVIVES logically impossible. F3 triggered (parent recipe null mean 0.5394 vs stored 0.5275, diff 0.0119 > 0.001) but audit V1 identifies this as a measurement-threshold artifact (unsorted set iteration + PYTHONHASHSEED + estimator mismatch), not scientific falsification of the robustness hypothesis. The critical scientific finding is that the recipe choice is material, not a nuisance parameter: parent recipe yields null 0.5275 > observed 0.3 (C2 FALSE, ordering LESS stable than random) while new recipe yields null ~0.28 < observed 0.3 (C2 TRUE, ordering MORE stable than random). The new recipe IS robust (F1 SD=0.0117, F2 all True, cross-RNG max diff 0.0024) but this does not settle the scientific question because the canonical recipe is unspecified. The measurement cannot support or falsify C-MEAS-VALID in this state.",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "e9c3ecb2deabba24455f1cc99552f784f588f7e8",
+      "source_ref_head": "11526693fda2f25d6a237e0ce222b485f4779f04",
       "source_commit": "4a05cb4bddd4a363a16fef0efb3f527351171bb5",
       "hashes": {
         "request.json": "f9bf5371a07ca694b57bed901fcb2f59a165d6cf5bd709f25db0a746564d2106",
@@ -3360,7 +3360,7 @@
       "decision": "SURVIVES_CURRENT_TEST \u2014 All six frozen decision criteria pass. Corrected implementation with deterministic sorted roles and aligned estimator reproduces the parent FALSIFIED conclusion: C2 = FALSE under canonical per-iteration p=0.5 null recipe (observed 0.3 < null 0.5273, seed=42; all 10 seeds FALSE). Parent null mean reproduced within 0.0002 of stored 0.5275 (threshold 0.02). Both parent orderings reproduced exactly. Audit PASS confirms all recomputed metrics match producer. The FALSIFIED conclusion (page-type density ordering is less stable than random role subsets) is a genuine scientific finding, not an implementation artifact. Claim ceiling bounded to: canonical per-iteration recipe, truncated-first-20 locatable sample, 7 tasks deduped, 1 Magento site, 3 definitions (2 distinct orderings), elements_with_bbox denominator, frozen seeds. Does NOT establish full-DOM, cross-site, 5-definition agreement, or broader C-MEAS-VALID status. Product consequence: density metric ordering is definition-dependent; pivot to definition-invariant alternatives or abandon ordering-based approach.",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "e9c3ecb2deabba24455f1cc99552f784f588f7e8",
+      "source_ref_head": "11526693fda2f25d6a237e0ce222b485f4779f04",
       "source_commit": "46d4ce687f16595932ac9aaa12c25d733da34872",
       "hashes": {
         "request.json": "450c3863973676610d95beecdb0bf50b95ed7eb48fc10f4c31edf110a21e0c0d",
@@ -3442,7 +3442,7 @@
       "decision": "FALSIFIED-IN-SETTING \u2014 Frozen decision_rule requires ALL C1-C8 for SURVIVES_CURRENT_TEST. C4 fails (2/5 < 3/5 patterns with positive savings) and C6 fails (r=0.3909 < 0.7, savings do not correlate with value length). The hypothesis that parameterized representation saves tokens for long-value URL patterns as a general claim is falsified under tiktoken cl100k_base. However, the ceiling is stratified: single-slot genuinely long values DO save tokens (UUID 36-char +44.44%, bearer 64-char +56.72%) while multi-slot patterns with short per-slot values penalize even at long total string length (P3 -11.54%, P5 -9.68%). Audit REVISE status accepted: arithmetic verified exactly, but 'long-value' label is misapplied to P3/P5 (per-slot values are 3-5 chars, not long), and mean 15.99% is bimodal and misleading as a standalone statistic. C1-C3 and C7-C8 pass, confirming resolve/bind pipeline works correctly for long values and kernel regression is intact.",
       "promote_to_product": false,
       "source_ref": "origin/lab2/product",
-      "source_ref_head": "8225bc64ed162396eb3422898268a5af19fbc015",
+      "source_ref_head": "1973aba861c0e1f00e19ebd4b8356959e0419760",
       "source_commit": "ddc6bddb4fcaddaa4073464f5c647d5a5dde9acc",
       "hashes": {
         "request.json": "e89bcae26152102e64ebab561cc63cd648d1437788fadc31404d18ccbfbd1ff1",
@@ -3469,7 +3469,7 @@
       "decision": "MIXED",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "e9c3ecb2deabba24455f1cc99552f784f588f7e8",
+      "source_ref_head": "11526693fda2f25d6a237e0ce222b485f4779f04",
       "source_commit": "ec614d8a01bb1935f2dcc3426714d4f6e2d4fa26",
       "hashes": {
         "request.json": "c632c17ab522cecd32dd3f3f3ba9efc11c7ffa5c67c4b33ba2b5afd8c019fb4c",
@@ -3523,7 +3523,7 @@
       "decision": "SURVIVES",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "e9c3ecb2deabba24455f1cc99552f784f588f7e8",
+      "source_ref_head": "11526693fda2f25d6a237e0ce222b485f4779f04",
       "source_commit": "84a41525644ef003ab20bd0f1dd30b3fc1ea945c",
       "hashes": {
         "request.json": "473e95dcb69c5603e9d9509d73b87a4a544bac20583d02e63bc2f2052dfedf17",
@@ -3604,7 +3604,7 @@
       "decision": "REVISE \u2014 Producer SURVIVES_CURRENT_TEST claim not justified at systematic-review ceiling. Preregistered PubMed/EconLit/Cochrane database search was not executed (audit V1_DATABASE_MISREPRESENTATION, severity high): provenance.json shows web-search-API natural-language queries, not database-specific syntax with Boolean operators/MeSH/Cochrane filters. Positive controls PC1/PC2 pass on recomputed distinct counts (PC1 min 5-6 distinct \u22652 threshold, PC2 strong count 1 via OECD sensitivity framework \u22651 threshold). Falsifiers F1/F2 correctly not triggered. Audit dedup corrects producer counts: M1 3\u21922-3, M2 4\u21923, M4 3\u21921 strong, M6 12\u219210 distinct URLs. Provenance integrity degraded: 2 duplicate URL pairs in key_sources (Munda/Greco share Springer DOI, Dobbie/Zhou share ScienceDirect pii), M5 screened total 30 vs provenance 34. Evidence provides non-systematic synthesis of additional theoretical grounding (OECD sensitivity analysis framework for MIXED outcome handling; psychometric composite score problems; econometric composite indicator aggregation ambiguity) at interpretive-analogy ceiling, not the systematic-review ceiling claimed by producer. Report.md \u00a71-3 overstates by presenting SURVIVES without bounding to interpretive ceiling (audit V6). C-MEAS-VALID remains EXPERIMENTAL: this experiment adds theoretical grounding for the recipe choice sub-problem but does not provide empirical resolution (full-DOM re-run required). No claim status change warranted.",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "e9c3ecb2deabba24455f1cc99552f784f588f7e8",
+      "source_ref_head": "11526693fda2f25d6a237e0ce222b485f4779f04",
       "source_commit": "287ed35331a86c21ab1f48fe96993a23f1eb1064",
       "hashes": {
         "request.json": "cfcbb95331a97887331e31eb073ca950fc2af1e398a0e58cdf6422763b53fca4",
@@ -3632,7 +3632,7 @@
       "decision": "FALSIFIED-IN-SETTING \u2014 Frozen decision_rule requires ALL C1-C5 for SURVIVES_CURRENT_TEST. C5 (NULL-NO-SHARING) fails under correct computation: isolated null-control ratio for 3 search tasks is 1.253 (param 104 tokens / literal 83 tokens), not ~1.0 as required by spec expected_behavior; code hardcodes c5_pass=True via self-ratio (search_param/search_param). Additionally C1 violates measurement_validity[0]: spec requires mechanisms from existing SPIDER registry/task corpus, but producer uses hardcoded synthetic TASK_CORPUS (32 tasks in run_experiment.py), violating the frozen population contract. Per frozen ALL-must-pass rule, FALSIFIED-IN-SETTING triggers. However, the arithmetic is verified: on the as-implemented synthetic 32-task corpus, parameterized representation yields 25 vs 32 mechanisms (21.9% reduction) and 679 vs 791 tokens (0.8584 dedup ratio, 112 tokens/14.16% savings) because 3 of 25 patterns are shared across 2-5 tasks. The savings are a lower bound (heuristic missed admin u-aaa class, true dedup ratio ~0.757 and savings ~24.3% if corrected). Per-task analysis reveals shared patterns incur -15.8% per-task penalty (parameterized costs MORE per task) but corpus savings arise from storing the pattern once instead of N times. The null-control failure is informative: unique patterns show 25.3% overhead from ${slot} syntax, meaning deduplication wins only when sharing frequency exceeds the per-pattern overhead threshold. No product promotion. C-PRODUCT-ECON remains HYPOTHESIS (frozen gate failed, measurement validity violated). C-PARAM-INHERIT remains EXPERIMENTAL.",
       "promote_to_product": false,
       "source_ref": "origin/lab2/product",
-      "source_ref_head": "8225bc64ed162396eb3422898268a5af19fbc015",
+      "source_ref_head": "1973aba861c0e1f00e19ebd4b8356959e0419760",
       "source_commit": "0cf231b45dbfa5213dccfbbafe1ea67100767d0a",
       "hashes": {
         "request.json": "6cf2db7ee54cf212683851a447e4ef6539d5bba1dbc32a05d70ed595947e7c68",
@@ -3714,7 +3714,7 @@
       "decision": "REVISE \u2014 frozen decision_rule requires ALL C1-C5 for SURVIVES_CURRENT_TEST. C1 (100% success for both conditions) is stipulated as an analytical assumption, not measured: no LLM selection or resolution was executed, no binding failures observed (audit V1_C1_SUCCESS_UNMEASURED). The arithmetic portion of the frozen gate passes: C2 param selection tokens 16523 <= literal 19691 (16.09% reduction), C3 param total 18624 <= literal 19691 (5.42% net savings, 1067 tokens), C4 positive control 5 blog-read-post tasks collapse to 1 pattern with correct resolution, C5 null control ratio 1.0185 (1.85% overhead, well within 50% threshold). All arithmetic independently recomputed and verified exactly. However, C1 being an assumption rather than an observation is a measurement validity gap that prevents the frozen gate from passing. Additionally, completion tokens are hard-coded estimates (2 selection, 15 resolution, 20 cold) not measured from real model outputs \u2014 with 5.42% margin, modest variation in actual LLM response length could reverse C3 (audit V2_COMPLETION_TOKENS_ESTIMATED). Browser/verification costs omitted per frozen spec \u00a75.1 but claim ceiling in report.md references 'end-to-end workflow savings' (audit V3_BROWSER_VERIFICATION). COLD baseline at 77 tokens/task is 8x cheaper than either registry condition but success rate unmeasured (audit V4_COLD_INVERSION). The producer SUPPORTS outcome is not justified as written because C1 was not measured and C3 margin is narrow under estimated completion tokens. The 5.42% analytical savings on this synthetic corpus is arithmetic-verified and informative but does not establish end-to-end workflow cost reduction.",
       "promote_to_product": false,
       "source_ref": "origin/lab2/product",
-      "source_ref_head": "8225bc64ed162396eb3422898268a5af19fbc015",
+      "source_ref_head": "1973aba861c0e1f00e19ebd4b8356959e0419760",
       "source_commit": "1ebac5133f8548e89b5346940b7bce7c31d6f021",
       "hashes": {
         "request.json": "d7a59059f5a984baec1f94a88e886ad1bb9a52a82bea0e35e8abefc4d9990c38",
@@ -3795,7 +3795,7 @@
       "decision": "REVISE \u2014 Producer's MIXED outcome is not justified per frozen decision_rule. The observed C-pattern (C1 PASS, C2 FAIL, C3 PASS, C4 PASS, C5 PASS) has no frozen bucket: MIXED requires NOT C5 but C5 passes (null_ci_gte_13x true, dominance within 15%). This is a preregistration coverage defect (audit V1_DECISION_RULE_UNCLASSIFIABLE), not a scientific result. Additionally, C2_DOMINANCE_INFORMATIVE is construct-impossible with exactly 2 recipes (all dominance necessarily 0%/100%, audit V2), C3_CI_INFORMATIVE compares rank-width to density-range in incommensurable units (audit V3), C4 chi-square never computed and N=14 vs frozen 21 (audit V4), and C5 null dominance is tautological with 2 recipes (audit V5). The OECD/COINr framework as operationalized is not informative for MIXED outcome handling in the 2-recipe setting. The parent's next question (full-DOM C2 reversal persistence) remains blocked by the runtime locatableSample cap. C-MEAS-VALID status unchanged: remains EXPERIMENTAL.",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "e9c3ecb2deabba24455f1cc99552f784f588f7e8",
+      "source_ref_head": "11526693fda2f25d6a237e0ce222b485f4779f04",
       "source_commit": "5741bbc510a113e333cc68908856e6ce3766b9af",
       "hashes": {
         "request.json": "8d7edc7a275de1318b7d3d39632de656e24549b5d18f0bd824efed5f1388a144",
@@ -3823,7 +3823,7 @@
       "decision": "MEASUREMENT_INVALID \u2014 Frozen decision_rule triggers MEASUREMENT_INVALID: 0/32 tasks executed in any condition (threshold >=5). No LLM API keys available in execution environment. This is an infrastructure failure, not a scientific negative. The frozen decision_rule C1-C4 cannot be evaluated. No new evidence accumulated. Parent analytical ceiling (5.42% token savings on synthetic 32-task corpus) remains the most recent valid measurement and is unchanged by this experiment.",
       "promote_to_product": false,
       "source_ref": "origin/lab2/product",
-      "source_ref_head": "8225bc64ed162396eb3422898268a5af19fbc015",
+      "source_ref_head": "1973aba861c0e1f00e19ebd4b8356959e0419760",
       "source_commit": "086b152058240628e7c5cfe8a423846179fac71f",
       "hashes": {
         "request.json": "309c2eda8d950e0562f59cef8a904b5dedc22847ad6ef8a01064c16f4160de56",
@@ -3877,7 +3877,7 @@
       "decision": "FALSIFIED-IN-SETTING \u2014 Frozen decision_rule condition C2 fails: 0/3 pairwise dominance comparisons are non-degenerate (all strictly 0% or 100%). C1 passes (63/63 valid), but C1 AND NOT C2 triggers FALSIFIED-IN-SETTING per spec.json decision_rule. The meta-analytic mean recipe (canonical+weighted)/2 always ranks between the two originals by mathematical identity (OBS-1, VN-1), so no linear combination of two strictly-ordered recipes can produce non-degenerate dominance. The 2-recipe degeneracy is NOT solely a 2-recipe artifact \u2014 it persists because the density metric has extreme recipe sensitivity (31x canonical/weighted gap) and linear interpolation preserves ordering. The MIXED outcome decision rule remains UNRESOLVED. C-MEAS-VALID status unchanged: remains EXPERIMENTAL.",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "e9c3ecb2deabba24455f1cc99552f784f588f7e8",
+      "source_ref_head": "11526693fda2f25d6a237e0ce222b485f4779f04",
       "source_commit": "94c085899b8cd91699778cbd24e5aa5204dc5961",
       "hashes": {
         "request.json": "5a66aac977545bc7bc2f7c271c1e021a29744aea791d298a393d9c6adba93abc",
@@ -3931,7 +3931,7 @@
       "decision": "MEASUREMENT_INVALID \u2014 infrastructure failure: no LLM API keys available in execution environment. 0/32 tasks executed. Frozen decision_rule MEASUREMENT_INVALID clause triggers (32/32 tasks failed, threshold >=5). This is the second consecutive PRODUCT lane experiment with identical infrastructure cause (parent EXP-PRODUCT-35353007958 also MEASUREMENT_INVALID, 0/32). Per packet contract section 9, infrastructure failure is NOT a scientific negative. No evidence was produced or falsified. No new claim-relevant measurement accumulated. The parent analytical ceiling (5.42% token savings on synthetic 32-task corpus, EXP-PRODUCT-35330741529 audit REVISE) remains the most recent valid measurement and is unchanged by this experiment. Producer correctly classified as MEASUREMENT_INVALID with outcome NOT_APPLICABLE; audit independently confirmed (PASS, producer_claim_supported=false, claim_ceiling 'no new evidence').",
       "promote_to_product": false,
       "source_ref": "origin/lab2/product",
-      "source_ref_head": "8225bc64ed162396eb3422898268a5af19fbc015",
+      "source_ref_head": "1973aba861c0e1f00e19ebd4b8356959e0419760",
       "source_commit": "f8fa4320c2d60f3c0031fd5d034a72ee8b53e979",
       "hashes": {
         "request.json": "61afd3418e5be59f7517c93fbb7915d99f3c312efd363a96516b080243f34230",
@@ -3985,7 +3985,7 @@
       "decision": "FALSIFIED-IN-SETTING \u2014 Frozen decision_rule condition C2 fails: with correct task-major ordering, |Spearman(R, canonical)| = 0.23 (p=0.31) and |Spearman(R, weighted)| = 0.21 (p=0.36), both below the 0.30 threshold; eta-squared(R, page_type) = 0.144 < 0.20. C1 passes (CV=0.70 > 0.10). C1 AND NOT C2 triggers FALSIFIED-IN-SETTING per spec.json decision_rule. The producer's claimed C2 pass was an artifact of definition-major data ordering (all DEF-FULL-MAP first, then all DEF-FORM-ONLY, then all ISOLATED-A-LINK), creating artificial monotonic structure. The density ratio is definition-sensitive (10x gap between DEF-FORM-ONLY and others) but does not significantly correlate with task type or recipe sensitivity in this N=21 sample. NC1 null control also fails: real eta-squared=0.144 vs shuffled mean=0.117, task-type structure not statistically significant (permutation p=0.23). C-MEAS-VALID status updated to REJECTED for the density-ratio MIXED metric approach.",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "e9c3ecb2deabba24455f1cc99552f784f588f7e8",
+      "source_ref_head": "11526693fda2f25d6a237e0ce222b485f4779f04",
       "source_commit": "2d30a999746852de85c2bc6b49378ca47044f9df",
       "hashes": {
         "request.json": "7ecd8c6f07eb2d73b50195889183ba74970114f594865a50528ca8b45ca05cad",
@@ -4093,7 +4093,7 @@
       "decision": "SURVIVES_CURRENT_TEST \u2014 frozen decision_rule C1-C5 all pass (C1: 32/32 browser measurable >=25, C2: 32/32 verification >0 >=20, C3: browser diff 0.0 <106.7 threshold, C4: param 20123 <= literal 21190, C5: positive control 5/5 HTTP 200). Audit PASS on arithmetic (V1) and genuine measurement (V2), but producer_claim_supported=false because C3 and C4 are tautologically satisfied: browser execution uses identical HTTP actions for LITERAL and PARAMETERIZED by construction (run_experiment.py:401-405 literal_browser_total=param_browser_total=total_browser_ms), so browser cost difference is identically 0.0 and workflow difference identically 1067 tokens (parent arithmetic). Neither criterion can falsify even if browser costs were large. The frozen spec makes this degenerate; the experiment cannot discriminate whether browser costs dominate. Parent token costs remain analytical estimates (completion tokens 2/15/20, C1 success 100% assumed, not measured with real LLM). Verification measured as JSON.parse + status check only (0.026ms/task), not semantic verification. Browser measured via Python requests, not Playwright. Endpoint is jsonplaceholder.typicode.com CDN, not production. Maximum justified claim: browser+verification cost is non-zero (1499 token-equivalents), negligible verification (0.06%), and identical across registry conditions by construction, so arithmetic token savings (1067 tokens, 5.42%) is preserved as a constant offset. No inference justified that 5.42% is economically meaningful in real SPIDER workflows.",
       "promote_to_product": false,
       "source_ref": "origin/lab2/product",
-      "source_ref_head": "8225bc64ed162396eb3422898268a5af19fbc015",
+      "source_ref_head": "1973aba861c0e1f00e19ebd4b8356959e0419760",
       "source_commit": "ffde2d5b953212649ba5a4755b53291c8ae44c75",
       "hashes": {
         "request.json": "210bd41fb56bb0bab6c75316f1c16519e358e6c48af4ab64c12b89296fbab44b",
@@ -4174,7 +4174,7 @@
       "decision": "MEASUREMENT_INVALID",
       "promote_to_product": false,
       "source_ref": "origin/lab2/frontier",
-      "source_ref_head": "67050f01369b90b3840908f2f27cc2ae6a793a51",
+      "source_ref_head": "acc9cd2cebe1f010d5c6b6308c25c37e32721aeb",
       "source_commit": "da226f7149e87018afd43e6579eb36547ef7f160",
       "hashes": {
         "request.json": "0c7b22e87685530e1d5ca1f3dafecb7bb1751112605297f713f067cd7d04c005",
@@ -4201,7 +4201,7 @@
       "decision": "FALSIFIED-IN-SETTING \u2014 Frozen decision_rule triggers FALSIFIED-IN-SETTING: C4 fails (eta-squared=0.000 < 0.10 threshold). C1 passes (CV=0.584 > 0.10), C2 passes (7/21 pairs outside convex hull, threshold 3), C3 passes (|rho(hier, canonical)|=0.879 < 0.90, OR clause). The hierarchy-weighted density recipe produces zero task-type discrimination across all tested alpha values (0.1, 0.3, 0.5) with identical mean density (0.667) across listing, detail, and cart page types. The recipe is a perfect monotonic reparameterization of area-weighted density (Spearman rho=1.0 at alpha=0.3) because the depth estimation heuristic uses inForm (binary flag) rather than actual DOM tree structure, making the depth distribution task-invariant. Hull-breaking on 7/21 pairs is entirely ISOLATED-A-LINK and definition-dependent, not task-type-dependent. Positive control PC1 fails (inter-type ratio=1.0). Null control NC1 fails (random weights show equivalent correlation structure). Audit PASS confirms all recomputed metrics match producer; audit VF-1 identifies depth estimation as heuristic (not true DOM depth); audit VF-2 corrects producer p-values (irrelevant to binary decision rule). The negative result is bounded to heuristic depth estimation on truncated-first-20 locatable_sample (7 tasks, 1 Magento site, 3 definitions); true DOM tree depth with parent-child links remains untested (producer U-1).",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "e9c3ecb2deabba24455f1cc99552f784f588f7e8",
+      "source_ref_head": "11526693fda2f25d6a237e0ce222b485f4779f04",
       "source_commit": "748397fec07423756cf20550cd9d55915933c23b",
       "hashes": {
         "request.json": "3b11e5a172d8795255f6482ee75791ab5c00c48e095cfd3ee6a45237cfe92b1b",
@@ -4309,7 +4309,7 @@
       "decision": "FRAGILE-HYPOTHESIS-FALSIFIED-BUT-ECONOMICS-UNMEASURED \u2014 The frozen fragile hypothesis is FALSIFIED: break-even systematic bias is 33.3 tokens/task (far exceeds frozen F1 threshold of 3 tokens/task) and bootstrap survival is 96.1% under \u00b150% completion variation (far exceeds frozen F2 threshold of 70%). The margin is analytically robust to completion token estimation error under the frozen assumptions. However: (1) the audit V1_V_BREAK_EVEN_TAUTOLOGY identifies that systematic uniform bias cannot erase the margin by construction (margin is a difference), so the break-even threshold is only meaningful for differential bias; (2) the audit V2_V_BOOTSTRAP_SCALE_MISMATCH identifies that the bootstrap tests the 112-token selection savings, not the full 1067-token workflow margin, due to independent sampling dropping the 955-token completion offset; (3) critically, audit V4_V4_PURELY_ANALYTICAL_NO_LLM_MEASUREMENT confirms this is the fourth consecutive PRODUCT experiment with zero real LLM calls \u2014 the 5.42% margin is based entirely on analytical estimates (completion tokens 2/15/20 assumed, not measured). The absolute savings (1067 tokens, 5.42%) remain thin and the COLD baseline is analytically 7.5x cheaper. No product promotion. C-PRODUCT-ECON remains HYPOTHESIS.",
       "promote_to_product": false,
       "source_ref": "origin/lab2/product",
-      "source_ref_head": "8225bc64ed162396eb3422898268a5af19fbc015",
+      "source_ref_head": "1973aba861c0e1f00e19ebd4b8356959e0419760",
       "source_commit": "c054b9f56124bb536c9288c9ce792f58aef28363",
       "hashes": {
         "request.json": "951fbf3af1b0244060447645da27899e7d2420c8e00f6d6823c2d7b80614c151",
@@ -4336,7 +4336,7 @@
       "decision": "FALSIFIES \u2014 Frozen decision_rule NOT C1 triggers FALSIFIES: sample elements are NOT 100% identical within page type (y-coordinates differ for elements 12-19, 8/20 elements). Even ignoring positional y-differences, C2 and C4 still FAIL (eta2=1.0 on tag_entropy/form_fraction/total_area, I_sample=1.449 bits \u2260 0.0). The template-composition hypothesis is decisively falsified: the locatable_sample HAS task-type discrimination (eta2=1.0), and the parent's hierarchy-weighted density producing eta2=0.0 is caused by the density formula collapsing between-type variance, not by sample template invariance. Audit PASS confirms all recomputed metrics match producer. Claim ceiling bounded to 7 tasks, 1 Magento site, 3 definitions, truncated-first-20 locatable_sample.",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "e9c3ecb2deabba24455f1cc99552f784f588f7e8",
+      "source_ref_head": "11526693fda2f25d6a237e0ce222b485f4779f04",
       "source_commit": "f8d8e8447dc3950bc04bd48db5bfc2ea529131f8",
       "hashes": {
         "request.json": "f3b67c47b365bacb65a23bee56991c1178571d9a27268b37fd3055c581d87fa2",
@@ -4363,7 +4363,7 @@
       "decision": "MEASUREMENT_INVALID",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "e9c3ecb2deabba24455f1cc99552f784f588f7e8",
+      "source_ref_head": "11526693fda2f25d6a237e0ce222b485f4779f04",
       "source_commit": "f2ad3407e3153321c3e94644170dd5cb03f77343",
       "hashes": {
         "request.json": "1234c5b1fcc3badb2143a1354153b5aa476ad3eed4b78289caf3f6346ebcc9d8",
@@ -4390,7 +4390,7 @@
       "decision": "MIXED \u2014 Frozen conjunctive rule: C1 PASS (raw features reproduce eta2=1.0), C2 PASS (normalized hierarchy eta2=0.0), C3 PASS (max pipeline eta2=0.999645 \u226b 0.05), C4 FAIL (ranking preservation not achieved across all 6 definition\u00d7recipe combinations per audit recomputation: canonical recipe 58%/48% agreement, per-task recipe untested), C5 PASS (0.999645 > 0.0+0.01). The OECD/COINr pipeline preserves between-type discrimination for DEF-FULL-MAP and DEF-FORM-ONLY (non-recipe eta2 0.964-0.999), confirming the hierarchy formula \u2014 not the pipeline \u2014 was the bottleneck. However, ranking reversal under recipe sampling (especially DEF-FORM-ONLY and per-task recipe ~0.36) means the pipeline does not reliably preserve the natural page-type ranking across all definition\u00d7recipe combinations. Claim ceiling bounded to single Magento site, truncated-first-20 locatable_sample, 7 tasks (cart n=1 degenerate), 2 non-degenerate definitions, y-proxy hierarchy depth.",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "e9c3ecb2deabba24455f1cc99552f784f588f7e8",
+      "source_ref_head": "11526693fda2f25d6a237e0ce222b485f4779f04",
       "source_commit": "aa5566a0948dbc4f8ad3d056683f4f7a11c41738",
       "hashes": {
         "request.json": "e0fc549849a8c37b49d05e3b9e0d51e1d7e0474c77119eb0497690a93eb8a095",
@@ -4418,7 +4418,7 @@
       "decision": "MEASUREMENT_INVALID \u2014 C3 orthogonality test is measurement-invalid: behavioral signal has zero variance (std=0.0) across all 720 co-occurring samples due to behavioral_score scoring weights producing identical 0.5 for all drift types, making Pearson r undefined and TOST inapplicable. This is a measurement design flaw (deterministic WSGI server, scoring weight collisions, server state carry-over), not a scientific falsification of signal independence. C1 (auth discrimination 0.8333), C2 (behavioral TP 1.0), and C4 (noise FP 0.0) all pass individually. The parent EXP-GRAPH-35353011131 already confirmed orthogonality at delta=0.15 under stochastic mock (r=0.046, CI upper 0.135). Frozen decision_rule triggers MEASUREMENT_INVALID because C3 cannot be evaluated. Director closes C-PRODUCT-ECON separately based on the accumulated evidence chain.",
       "promote_to_product": false,
       "source_ref": "origin/lab2/product",
-      "source_ref_head": "8225bc64ed162396eb3422898268a5af19fbc015",
+      "source_ref_head": "1973aba861c0e1f00e19ebd4b8356959e0419760",
       "source_commit": "f42f866a7b435c96d3682a488591149b4fc1342f",
       "hashes": {
         "request.json": "daa1bb8c32b7a0b25f9a211ff6cd4d0f20f92c2049eb25804b4d770af18973d6",
@@ -4553,7 +4553,7 @@
       "decision": "MIXED",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "e9c3ecb2deabba24455f1cc99552f784f588f7e8",
+      "source_ref_head": "11526693fda2f25d6a237e0ce222b485f4779f04",
       "source_commit": "68db4301ae84b028e5b5aecab29415df7122ed8c",
       "hashes": {
         "request.json": "5f4575e2483f36e680819c0d1673746f82b03eabad6d5e1014c38203a51aac32",
@@ -4580,7 +4580,7 @@
       "decision": "SURVIVES_CURRENT_TEST \u2014 All four frozen decision conditions pass at the bounded localhost stochastic-mock ceiling. C1 auth discrimination 0.8333 > 0.5 (positive control, replicating EXP-RUNTIME-33902315583). C2 behavioral TP 1.0 >= 0.85 on all three drift types in isolation and 8/8 co-occurring conditions. C3 behavioral variance 8/8 conditions with std > 0.05 (range 0.087\u20130.104) AND orthogonality confirmed at delta=0.15 (pooled r=-0.0258, 95% CI [-0.115, 0.064], CI upper 0.064 < 0.15, TOST p_upper 5.6e-05 < 0.05, shared variance < 0.4%). C4 noise FP 0.0 <= 0.15 on 240 noise-only samples. Audit PASS confirms all recomputed metrics match producer exactly. The three root causes of parent EXP-PRODUCT-35434772331 measurement invalidity \u2014 deterministic server, scoring weight collisions, server state carry-over \u2014 are resolved. However, the claim ceiling is strictly bounded to localhost stochastic mock (Flask 3.1.3 + SQLite WAL + TTL cache 0.5s + jitter 10-100ms + HS256/RS256 JWT on 127.0.0.1:18950, seed 42). No production generalization, PRODUCT_CORE promotion, or non-mock inference is warranted from this evidence alone.",
       "promote_to_product": false,
       "source_ref": "origin/lab2/product",
-      "source_ref_head": "8225bc64ed162396eb3422898268a5af19fbc015",
+      "source_ref_head": "1973aba861c0e1f00e19ebd4b8356959e0419760",
       "source_commit": "c8551c6a9bbb22a6a3adc4e8f8c3ca313b992b5a",
       "hashes": {
         "request.json": "848354573e2d33f2edfdbdbef3013e8a3961cf1c4a06dfb78fde7e6422a36c33",
@@ -4607,7 +4607,7 @@
       "decision": "SURVIVES_CURRENT_TEST \u2014 frozen decision_rule conditions C1-C4 all pass (C1 discrimination 0.8333 > 0.5, C2 token_refresh TP=1.0 on all 4 co-occurring noise conditions, C3 behavioral_std 0.134-0.143 > 0.05 on all 4 conditions, C4 FP=0.0 <= 0.15). Audit REVISE (not PASS): N=240 violates frozen N>=480 (spec measurement_validity #6, power halved causing TOST lower-tail failure ci_lower=-0.185 < -0.15), behavioral_score is bimodal discrete (0.35/0.65) not continuous as spec requires (V2), threshold 0.25 below both modes makes TP=1.0 tautological (V3), TOST full equivalence at delta=0.15 not met (tost_pass=false, p_lower=0.081). All numeric metrics match producer. Claim ceiling strictly bounded: token_refresh TP=1.0 under co-occurring structural noise on localhost stochastic mock only (Flask 3.1.3 + SQLite WAL + TTL 0.5s + jitter 10-100ms + HS256/RS256 JWT, 127.0.0.1:18951, seed 42, p_refresh_success=0.7, BIMODAL scores 0.35/0.65). No production generalization, no PRODUCT_CORE promotion, no non-mock inference.",
       "promote_to_product": false,
       "source_ref": "origin/lab2/product",
-      "source_ref_head": "8225bc64ed162396eb3422898268a5af19fbc015",
+      "source_ref_head": "1973aba861c0e1f00e19ebd4b8356959e0419760",
       "source_commit": "3cf7f72560eacccdb36457abec4aeeae698a4ba4",
       "hashes": {
         "request.json": "bd8909c2cdc0077d3a1ed07107afcbc2923269e927a1bcbc998f7f533a371a14",
@@ -4688,7 +4688,7 @@
       "decision": "BLOCKED \u2014 C3 gate fails: 0/7 tasks have locatable_sample length >20; all truncated to first-20 at collection time in EXP-INTEL-34782350557. Frozen decision_rule clause NOT C3 \u2192 BLOCKED correctly triggered. No scientific evidence accumulated for or against the full-DOM hypothesis. Infrastructure failure, not scientific falsification.",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "e9c3ecb2deabba24455f1cc99552f784f588f7e8",
+      "source_ref_head": "11526693fda2f25d6a237e0ce222b485f4779f04",
       "source_commit": "dd87835fc927ead19f6f3e31a7fb9951b954cdc4",
       "hashes": {
         "request.json": "377d57138c68319b02d2ed80a20cd24d51cd5e2c47147869e8afc0ef1bbf1b5e",
@@ -4770,7 +4770,7 @@
       "decision": "BLOCKED",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "e9c3ecb2deabba24455f1cc99552f784f588f7e8",
+      "source_ref_head": "11526693fda2f25d6a237e0ce222b485f4779f04",
       "source_commit": "b8c47aeabfe1ed7fbeda65056c425763d500e1f2",
       "hashes": {
         "request.json": "42a221ad654b0c78d2b8a39c73aed9d1d8da7200e2d2cca45bfdbc10888008c9",
@@ -4853,7 +4853,7 @@
       "decision": "MEASUREMENT_INVALID \u2014 Frozen decision_rule triggers MEASUREMENT_INVALID: C1_SNR_MODEL_VALID fails (Phi(mean(SNR_i)) predicts 0.9999999999999991 at n=15 and 1.0 at n=20 versus observed 0.4998/0.5595; residuals 0.5002 and 0.4405 exceed 10pp threshold by ~40\u201350pp). Root cause is noise-scale misspecification: frozen model uses within-iteration within-type SE (~1e-5) as noise term, but ranking flips are driven by across-iteration margin variation (margin_std ~1e-4 to 6e-4, 10\u201350x larger). Per frozen rule, NOT C1 \u2192 MEASUREMENT_INVALID regardless of C2/C3. C2 passes only via rho=1.0 tautology forced by template invariance + shared role subset (not independent mechanism evidence). C3 extrapolation (predicted agreement \u226580% at n=50) is gated behind failed C1 and must not be used to justify Docker re-collection. Audit PASS independently recomputes all metrics matching producer. No scientific conclusion about the instability mechanism or full-DOM ranking agreement is supported by this run.",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "e9c3ecb2deabba24455f1cc99552f784f588f7e8",
+      "source_ref_head": "11526693fda2f25d6a237e0ce222b485f4779f04",
       "source_commit": "babdbc00dc72e290a327005cb9b85dcc0cd177e5",
       "hashes": {
         "request.json": "0403e9eecf4fb89b4917531c3001196de239ba3dd5008569305e96e92d75e1ea",
@@ -4907,7 +4907,7 @@
       "decision": "SURVIVES_CURRENT_TEST \u2014 all five frozen decision conditions pass at n=480. C1 structural discrimination 0.8333 > 0.5. C2 token_refresh TP=1.0 on all 4 co-occurring conditions (Wilson lower 0.969). C3 behavioral_std 0.133-0.141 > 0.05, TOST pass=true at delta=0.15 (r=-0.0366, CI [-0.126, 0.053], both tails p<0.05). C4 FP=0.0 on 240 noise-only samples. C5 TOST equivalence confirmed at n=480 (CI upper 0.053 < 0.15 delta, both tails pass). Parent n=240 TOST lower-tail failure (p_lower=0.081) confirmed as sample-size power artifact: CI width narrowed from 0.252 to 0.179, lower bound moved from -0.185 to -0.126 within equivalence interval. Audit PASS confirms all recomputed metrics match producer. Claim ceiling strictly bounded to localhost stochastic mock (Flask 3.1.3 + SQLite WAL + TTL 0.5s + jitter 10-100ms + HS256/RS256 JWT, 127.0.0.1:18951, seed 42, p_refresh_success=0.7). No production generalization, no PRODUCT_CORE promotion, no non-mock inference. Threshold sensitivity analysis (exploratory) confirms TP=1.0 at 0.15-0.35, cliff to 0.694 at 0.40 \u2014 bimodal distribution limits threshold calibration utility.",
       "promote_to_product": false,
       "source_ref": "origin/lab2/product",
-      "source_ref_head": "8225bc64ed162396eb3422898268a5af19fbc015",
+      "source_ref_head": "1973aba861c0e1f00e19ebd4b8356959e0419760",
       "source_commit": "03c15bc561cfbe2a7bedeb55ff3125b0f94f7c3f",
       "hashes": {
         "request.json": "988e0cdbe2926390140f67e96d41b763cf7800b166e48e705e3ce50cefea96cb",
@@ -4961,7 +4961,7 @@
       "decision": "SURVIVES_CURRENT_TEST with audit-reduced claim ceiling \u2014 all five frozen decision conditions pass (C1 discrimination 0.8333 > 0.5, C2 TP=1.0 on all 4 co-occurring production-like noise conditions, C3 behavioral_std 0.1345-0.1465 > 0.05, C4 FP=0.0, C5 TOST pass at delta=0.15 CI upper 0.1055 < 0.15). However, audit REVISE status applies because: (1) error_format_variation noise is inert on measured channels (V-ERROR-FORMAT-INERT), reducing effective coverage to 3/4 types; (2) threshold tautology at 0.25 (below both behavioral modes 0.35/0.65) means TP=1.0 is not discriminatingly tested (V-THRESHOLD-TAUTOLOGY); (3) bimodal discrete scores limit generalizability. The frozen SURVIVES maps to canonical SURVIVES outcome but producer_claim_supported=false per audit. C-FRESHNESS remains EXPERIMENTAL. No PRODUCT_CORE promotion authorized. Claim ceiling bounded to localhost stochastic mock with 3/4 effective production-like noise types and tautological threshold.",
       "promote_to_product": false,
       "source_ref": "origin/lab2/product",
-      "source_ref_head": "8225bc64ed162396eb3422898268a5af19fbc015",
+      "source_ref_head": "1973aba861c0e1f00e19ebd4b8356959e0419760",
       "source_commit": "4310ab40d861b59de21940a4b60a1423cfebaae2",
       "hashes": {
         "request.json": "9764dfb802b3b1f636d365e16aaefa436aa8c68f7d7896295c5eec611fc51d3b",
@@ -5234,7 +5234,7 @@
       "decision": "MEASUREMENT_INVALID",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "e9c3ecb2deabba24455f1cc99552f784f588f7e8",
+      "source_ref_head": "11526693fda2f25d6a237e0ce222b485f4779f04",
       "source_commit": "c8c9ee1d83a1eafe2940373d62b82ae08dfd6d10",
       "hashes": {
         "request.json": "77331f7d7cecee79e669ff86f04173a631a29b7b20bdaf7cfc9fd3b1308a5f65",
@@ -5289,7 +5289,7 @@
       "decision": "SURVIVES_CURRENT_TEST \u2014 all five frozen decision conditions pass (C1 discrimination 0.8333 > 0.5, C2 TP=1.0 at calibrated threshold 0.20 Wilson lower 0.9842 >= 0.80, C3 behavioral_std 0.1957-0.2010 > 0.05 all 4 conditions AND Pearson r=-0.0065 CI upper 0.0831 < 0.15, C4 FP=0.0 <= 0.10 on 240 noise-only samples, C5 TOST pass at delta=0.15 p_upper 0.000288 < 0.05). However, audit REVISE status applies because: (1) FP constraint never binding \u2014 noise-only scores 0.05-0.14 fully separated from failure minimum 0.20 by design, so no test of discriminating operating point under overlapping distributions; (2) calibrated threshold 0.20 at lower bound of tested range, below hypothesized [0.40,0.60], because FP never binding means argmax F1 selects lowest feasible threshold; (3) threshold tautology partially resolved (gradual TP decline 1.00\u21920.917\u21920.85\u21920.78 from 0.20-0.35 vs parent flat 1.0 across 0.15-0.35) but operating point remains low-edge not middle-range; (4) mock-only ceiling \u2014 all measurements on localhost Flask 3.1.3 + SQLite WAL + JWT; no production OAuth/OIDC, CDN, network RTT, or DB-backed sessions. The frozen SURVIVES maps to canonical SUPPORTS outcome but producer_claim_supported=false per audit. C-FRESHNESS remains EXPERIMENTAL. No PRODUCT_CORE promotion authorized. Claim ceiling bounded to localhost stochastic mock with 4/4 effective noise types (error_format_variation fixed, now non-inert at structural_std 0.4017) and low-edge calibrated threshold.",
       "promote_to_product": false,
       "source_ref": "origin/lab2/product",
-      "source_ref_head": "8225bc64ed162396eb3422898268a5af19fbc015",
+      "source_ref_head": "1973aba861c0e1f00e19ebd4b8356959e0419760",
       "source_commit": "9a71547e8a3f38021bcee844b19d9b7f3f7b4ef3",
       "hashes": {
         "request.json": "622217d20c3a9b60e6676bba198c4d5c29dd89c3134a99d00d447f96070caaa4",
@@ -5399,7 +5399,7 @@
       "decision": "MEASUREMENT_INVALID",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "e9c3ecb2deabba24455f1cc99552f784f588f7e8",
+      "source_ref_head": "11526693fda2f25d6a237e0ce222b485f4779f04",
       "source_commit": "d5283e58d1c0f6d0cb70253cfe9c09be76ceb4b3",
       "hashes": {
         "request.json": "ce14534fa06958648c1d105cd42c11e4a72f1afb73da90ff886a936c697fa11c",
@@ -5481,7 +5481,7 @@
       "decision": "MEASUREMENT_INVALID",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "e9c3ecb2deabba24455f1cc99552f784f588f7e8",
+      "source_ref_head": "11526693fda2f25d6a237e0ce222b485f4779f04",
       "source_commit": "20b68de67a0bf65b63521d8414307537a185e67e",
       "hashes": {
         "request.json": "db0f173842ccf6ffa325300b64c1b3d28302918748d4cdcf7645ffd24ff5728b",
@@ -5562,7 +5562,7 @@
       "decision": "MIXED \u2014 partial support for discriminating operating point under overlap. The frozen decision_rule requires BOTH: (1) calibrated threshold increases with overlap \u2014 TRUE (0.20\u21920.25 at 100% overlap); (2) FP > 0 at threshold 0.20 for overlap >=25% \u2014 FALSE (FP=0.0 at 25% and 50%, nonzero only at 75%=0.0958 and 100%=0.35). The threshold does increase but only at extreme (full) overlap, not gradually as hypothesized. FP binding emerges only at 75%+ overlap, not at the hypothesized >=25%. However, the audit identifies that the overlap operationalization was materially flawed: the code shift (overlap_pct/100*0.09) produces 0% actual distributional overlap at the 25% and 50% conditions, so FP=0 at those conditions is an artifact of insufficient shift, not evidence against discrimination. The threshold calibration grid is coarse discrete [0.20,0.25,...0.80] \u2014 the true optimum between 0.20 and 0.25 was not probed. Orthogonality marginal failure at 75% overlap (CI upper 0.1549 > 0.15) is flagged but may be sample-size artifact at n=480. Audit status REVISE, not PASS. No PRODUCT_CORE promotion authorized. C-FRESHNESS remains EXPERIMENTAL.",
       "promote_to_product": false,
       "source_ref": "origin/lab2/product",
-      "source_ref_head": "8225bc64ed162396eb3422898268a5af19fbc015",
+      "source_ref_head": "1973aba861c0e1f00e19ebd4b8356959e0419760",
       "source_commit": "2bd9859d5657f52cdb2b58f01ae31f1497c00b3d",
       "hashes": {
         "request.json": "5f6d81fad5c9f453bfb5f92762d6997dd79b3d025da0f5dae04a81a4d1a43036",
@@ -5590,7 +5590,7 @@
       "decision": "REJECTED \u2014 The frozen gates (C1/C2/C3) pass mechanically (logistic R2=1.0, max residual 3.78e-08pp, F50=0.5654), but the extrapolation is informationally identical to the constant null F(n)=0.5654 and provides zero new predictive information. The logistic learns a step-function approximation (k=10.75) that saturates to L=0.5654 for all n>15, reproducing the n=20 observation as the asymptote. With 4 training points and 3 free parameters, overfitting is structurally guaranteed (audit VF2). The R2 improvement over parent (+0.12 vs power law 0.8797) is purely in-sample interpolation, not extrapolation power (audit VF3). Hill h=20.0 at upper bound is boundary-degenerate (audit VF4). The claim that a validated extrapolation exists is not supported: the extrapolation carries the full uncertainty of a single observation at n=20 and cannot discriminate L=0.5654 (plateau) from L=0.80 or L=1.0 (growth). The model-based extrapolation path is definitively closed after six consecutive failures (5 parent + this informationally vacuous result). Docker-based direct full-DOM measurement is the ONLY remaining path.",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "e9c3ecb2deabba24455f1cc99552f784f588f7e8",
+      "source_ref_head": "11526693fda2f25d6a237e0ce222b485f4779f04",
       "source_commit": "e60795b8004c6b7224af6870b843f4388c73c740",
       "hashes": {
         "request.json": "9890c168e758e39e33ab49855ceecc3ed750e24abc089dfd9021c4dca4b9c818",
@@ -5617,7 +5617,7 @@
       "decision": "FALSIFIES \u2014 The truncation-artifact hypothesis is decisively falsified. Full-DOM canonical recipe ranking agreement for tag_entropy x DEF-FULL-MAP is 37.26%, which is 18.69pp BELOW the truncated-first-20 baseline (55.95%) and far below all preregistered thresholds (C5: 60.95%, C6: 75%). Per-task agreement collapses from 78.65% to 11.41% (\u221267.24pp). The ranking instability is NOT a truncation artifact; it WORSENS with full DOM elements. F1 and F2 both trigger. The hypothesis (H1 >=80%, H2 >=+10pp, H3 >=85%) is falsified across all three conditions. Controls pass (PC1 eta2=1.0, NC1 eta2=0.0, C4 max eta2=0.99996), confirming the pipeline is functioning; the negative result is scientific, not infrastructural. Audit REVISE corrects B3 non-recipe ranking preservation (actually 0% for tag_entropy/form_fraction due to direct vs pipeline ranking inversion), within-type clone degeneracy (identical locatable_samples per type inflate discrimination), and hash salt non-determinism \u2014 none change the falsification direction. The Bootstrap CI is degenerate [0,1] due to binary ranking agreement across bootstraps with N=7 tasks, consistent with within-type clone degeneracy.",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "e9c3ecb2deabba24455f1cc99552f784f588f7e8",
+      "source_ref_head": "11526693fda2f25d6a237e0ce222b485f4779f04",
       "source_commit": "77f66f2a302d98d827a3f38df2f5b84d4907de7e",
       "hashes": {
         "request.json": "8244b9e09e1f5febce4d1d797c115e0236b297940532cf634b78c1f879b3580d",
@@ -5671,7 +5671,7 @@
       "decision": "FALSIFIED \u2014 frozen spec.json decision_rule condition (c) triggers: orthogonality (TOST delta=0.15) breaks at 50% overlap (pearson r=0.080, CI upper 0.168 > 0.15, TOST p_upper=0.061). Secondary trigger: calibrated_threshold is None at 75% and 100% overlap (prereg step 4). Both are independent falsification paths per the frozen decision tree. However, the audit claim_ceiling correctly identifies that the 100% condition is tautological (identical distributions cannot be separated) and the orthogonality failure at 50% is marginal (12% above delta, non-monotonic, likely Type I under multiple testing at n=480). The maximum justified scientific finding is bounded discrimination under genuine Gaussian overlap: usable at 0-25% (threshold 0.20->0.25, orthogonality holds, FP moderate), marginal at 50% (threshold 0.27, orthogonality fragile), unusable at >=75% (no operating point). C-FRESHNESS remains EXPERIMENTAL. No PRODUCT_CORE promotion authorized.",
       "promote_to_product": false,
       "source_ref": "origin/lab2/product",
-      "source_ref_head": "8225bc64ed162396eb3422898268a5af19fbc015",
+      "source_ref_head": "1973aba861c0e1f00e19ebd4b8356959e0419760",
       "source_commit": "5edcd6c0ac24d7a91853d3475b7ba728760966b2",
       "hashes": {
         "request.json": "d1afbf5af925db66c845ef8c84f048736b0394f3051981249ecb823bbc4ab6b9",
@@ -5782,7 +5782,7 @@
       "decision": "MEASUREMENT_INVALID",
       "promote_to_product": false,
       "source_ref": "origin/lab2/product",
-      "source_ref_head": "8225bc64ed162396eb3422898268a5af19fbc015",
+      "source_ref_head": "1973aba861c0e1f00e19ebd4b8356959e0419760",
       "source_commit": "2f64ee8b0fe45766c28a88b28edc3f121841d541",
       "hashes": {
         "request.json": "7b91620ed6d05992b57315f75fd10875ecb7c99e9a4a793eccede85e9dddcdc6",
@@ -5863,7 +5863,7 @@
       "decision": "BLOCKED",
       "promote_to_product": false,
       "source_ref": "origin/lab2/product",
-      "source_ref_head": "8225bc64ed162396eb3422898268a5af19fbc015",
+      "source_ref_head": "1973aba861c0e1f00e19ebd4b8356959e0419760",
       "source_commit": "8a4a4e2345195c6c76ee319f46cbed61af6f4656",
       "hashes": {
         "request.json": "1410d3f28eb6c50a6c1cec91b6fba6589470b1e19d1746f57fe4219dbe398e4d",
@@ -5892,7 +5892,7 @@
       "decision": "SURVIVES_CURRENT_TEST \u2014 frozen decision rule passes: condition (1) M1>=0.5 satisfied by WebArena shopping (1.0) and VisualWebArena (1.0); condition (2) M2>=0.5 satisfied by WebArena shopping (0.8) and Mind2Web (0.65); condition (3) M3=true satisfied by Mind2Web official 3-way split. However, the claim ceiling is strictly bounded by audit: this is a distributed structural-documentation survey only. No direct dataset inspection performed. Mind2Web M1=0.8182 is inflated from hardcoded instance_count=10 (audit VF1; empirical mean 4.42 gives corrected M1=0.311). M2 values are heuristic estimates from scoring rules, not measured fractions of task instances with variable fields (audit VF2). PC1/NC1 controls are tautological \u2014 they test scoring code output, not independent benchmark structure verification (audit VF3). No single benchmark simultaneously provides cross-site structure, parameterization, AND novelty splits (audit VF4). Cross-site mechanism sharing is assumed from documentation, not verified on task samples (audit VF5). Mind2Web novelty-fraction split guarantees instance-level separation but not same-mechanism overlap across train/test (audit VF6). Transformation costs inherited from EXP-INTEL-33925056324, not re-measured (audit VF7). The frozen decision_rule is satisfied; the producer's SUPPORTS outcome is valid under distributed interpretation. But the maximum justified ceiling is: public documentation suggests WebArena shopping (imposed cross-site pairs, 12 stores sharing platform) and Mind2Web (official instance-level splits) provide complementary structural properties that *could* support C-LLM-INHERIT experiment design pending dataset-level verification of mechanism sharing, duplication fraction, and parameterization prevalence. This is not a validated ranked suitability list for SPIDER execution.",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "e9c3ecb2deabba24455f1cc99552f784f588f7e8",
+      "source_ref_head": "11526693fda2f25d6a237e0ce222b485f4779f04",
       "source_commit": "98a79bab85bc3df1f0f2065384ce44db9adb6836",
       "hashes": {
         "request.json": "cfcd41df4428a9c32908ec2982e56384c1d5ac8efc4a2715c013d929b2fa4cdf",
@@ -5919,7 +5919,7 @@
       "decision": "FALSIFIED-IN-SETTING (bundled frozen rule \u2014 spec contradiction bounded)",
       "promote_to_product": false,
       "source_ref": "origin/lab2/frontier",
-      "source_ref_head": "67050f01369b90b3840908f2f27cc2ae6a793a51",
+      "source_ref_head": "acc9cd2cebe1f010d5c6b6308c25c37e32721aeb",
       "source_commit": "332c6fe69ebfa29b5cc5b251ba4e72382e6251f0",
       "hashes": {
         "request.json": "482030f631b57e348726e98db9e8bf408d6258d686327fb1ab8fca7b24a602f8",
@@ -6000,7 +6000,7 @@
       "decision": "REVISE \u2014 kernel freshness_check subprocess is wired and detects drift (TP 1.0) with noise tolerance (FP 0.0) at reduced N, but frozen SURVIVES_CURRENT_TEST does not hold per spec: orthogonality NOT demonstrated (Phase B degenerate, producer pooled A+B+C to manufacture variance yielding anti-correlation r=-0.53, one-sided TOST passes but two-sided fails), variance gate C3 artifact, missing parallel-channel baselines, and trivial regression; audit REVISE, producer_claim_supported=false",
       "promote_to_product": false,
       "source_ref": "origin/lab2/product",
-      "source_ref_head": "8225bc64ed162396eb3422898268a5af19fbc015",
+      "source_ref_head": "1973aba861c0e1f00e19ebd4b8356959e0419760",
       "source_commit": "4b66117fcb208dbeb7b8daf84fda911ef3826ca4",
       "hashes": {
         "request.json": "cc735295b9478f0c67a6aa6ad3d0c95e7e5b586afb8ad3f23a5f25d6f9de61d4",
@@ -6028,7 +6028,7 @@
       "decision": "MIXED \u2014 frozen decision rule triggers MIXED on clause (2): duplication fraction 0.9479 >=0.8. All measurements completed validly (status COMPLETE). Cross-store mechanism overlap is vacuous null (not 0.0) because WebArena-Verified v2 defines exactly one shopping store. Parameterization prevalence 0.8958 and positive control PASS both exceed frozen thresholds. Audit PASS confirms all recomputed metrics match producer (except minor duplication CI discrepancy not threshold-relevant).",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "e9c3ecb2deabba24455f1cc99552f784f588f7e8",
+      "source_ref_head": "11526693fda2f25d6a237e0ce222b485f4779f04",
       "source_commit": "f95178a51de3d209f5eb15112fb87612d3901de1",
       "hashes": {
         "request.json": "ea8240ee7e99ee598773a95ce5d979d1cd7b7b2364455fb0a1a7e1103a51368e",
@@ -6055,7 +6055,7 @@
       "decision": "MEASUREMENT_INVALID \u2014 audit MEASUREMENT_INVALID, producer_claim_supported=false. The frozen C-RESIDUAL-NOVELTY SURVIVES_CURRENT_TEST claim is not justified: dependent variable is bijective formula of novelty, parameterized inheritance with freshness gating and UNKNOWN abstention never executed, success/false_accept/unknown are constants, strong baselines structurally prevented from hitting (B-REPLAY-TERX 0/100 including n=0.0, B-RAG 1/100 hits), and frozen C3 p<0.01 fails on exact block-permutation (p=0.0167 two-sided). No empirical claim supported.",
       "promote_to_product": false,
       "source_ref": "origin/lab2/product",
-      "source_ref_head": "8225bc64ed162396eb3422898268a5af19fbc015",
+      "source_ref_head": "1973aba861c0e1f00e19ebd4b8356959e0419760",
       "source_commit": "233ae6efbbf9a2ce5e87f8e8d7128e59d9b74164",
       "hashes": {
         "request.json": "eef2aea33a5c85333aec17e71e0d3cdfcf711f384347fa2e6d277cc8e610e528",
@@ -6083,7 +6083,7 @@
       "decision": "REVISE \u2014 WebArena quantitative census replicates exactly (192 shopping tasks, 49 intent_templates, 36 families >=3 [34 >=4, 33 >=5], duplication 0.9479 95% CI [0.9167,0.9792], exact-copy 0.0781 [0.0417,0.1198], param_task 0.8958 [0.8490,0.9375]) but within-store same-mechanism AX consistency (threshold >=0.6, requires 15 tasks 2-per-family live CDP Accessibility.getFullAXTree at 1280x720 initial viewport) is UNMEASURED (ax_consistency=null, REUSED 10 trees 1-per-family, playwright_installed=false despite docker_available=true) so frozen clause 1 is FALSIFIED-IN-SETTING per spec, not PARTIAL; Mind2Web cross-website overlap measurement is methodologically non-compliant (coarse 33-mechanism heuristic vs frozen TF-IDF->k-means k=min(50,unique_tasks/20) train-only, synthetic 60/40 website shuffle replacing official train/test_website/test_domain splits, shuffle null as label-shuffle with random split_point, 73/3 vs spec 137/31 divergence revision_unknown) so Mind2Web axis is INCONCLUSIVE not falsified; producer MIXED verdict not supported as stated; bounded ceiling is census-level parameterized family reuse only, no LLM inheritance demonstrated",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "e9c3ecb2deabba24455f1cc99552f784f588f7e8",
+      "source_ref_head": "11526693fda2f25d6a237e0ce222b485f4779f04",
       "source_commit": "4264b65fcf92f6702284a72b43f90cf4c324e414",
       "hashes": {
         "request.json": "a7f23b05df38515a4c5c31b007d02b8f04e84d9457e486714f33381a531bdbdc",
@@ -6164,7 +6164,7 @@
       "decision": "REVISE \u2014 SURVIVES_CURRENT_TEST fails frozen C2/C3 and PC hit-rate; producer MIXED not justified as confirmatory; C-RESIDUAL-NOVELTY remains HYPOTHESIS at bounded synthetic mock ceiling",
       "promote_to_product": false,
       "source_ref": "origin/lab2/product",
-      "source_ref_head": "8225bc64ed162396eb3422898268a5af19fbc015",
+      "source_ref_head": "1973aba861c0e1f00e19ebd4b8356959e0419760",
       "source_commit": "1382bf264b250d8f051f2df305da4e60f6c0acc0",
       "hashes": {
         "request.json": "4a4fa7e5ac9cc1057d9ff71817451e55a6765c0f99a501e4c341ada5d6e97a40",
@@ -6192,7 +6192,7 @@
       "decision": "REVISE \u2014 WebArena census replicates exactly and live CDP infrastructure verified, but AX_consistency 0.2857 (2/7) is MEASUREMENT_INVALID not valid FALSIFIED-IN-SETTING per audit; Mind2Web axis correctly MEASUREMENT_INVALID per Gate 0; bounded ceiling remains quantitative census only",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "e9c3ecb2deabba24455f1cc99552f784f588f7e8",
+      "source_ref_head": "11526693fda2f25d6a237e0ce222b485f4779f04",
       "source_commit": "3377d6b4dbcaf175773e620f7ec5fd7e4ec41209",
       "hashes": {
         "request.json": "1682b411adab1a191ddd3320cb2f0e60d56b609d858494398f58f4adc0079da8",
@@ -6219,7 +6219,7 @@
       "decision": "MEASUREMENT_INVALID",
       "promote_to_product": false,
       "source_ref": "origin/lab2/frontier",
-      "source_ref_head": "67050f01369b90b3840908f2f27cc2ae6a793a51",
+      "source_ref_head": "acc9cd2cebe1f010d5c6b6308c25c37e32721aeb",
       "source_commit": "dbc59208079f8e686a7166a1146758fdc520d81c",
       "hashes": {
         "request.json": "07113a78c28423b79a471c26b8e34388c4fbee5f3e4c099d35e819bc6bfb78a8",
@@ -6328,7 +6328,7 @@
       "decision": "MIXED \u2014 WebArena within-store PASS (AX 0.9), Mind2Web MEASUREMENT_INVALID per Gate0",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "e9c3ecb2deabba24455f1cc99552f784f588f7e8",
+      "source_ref_head": "11526693fda2f25d6a237e0ce222b485f4779f04",
       "source_commit": "06fb976833b2171d1d23d316cb6190adac5553ae",
       "hashes": {
         "request.json": "b128fd6d8168b953f27d7391e4b98b8e13b4092d3f0ea5028b7c3e084b6e0afd",
@@ -6382,7 +6382,7 @@
       "decision": "MEASUREMENT_INVALID",
       "promote_to_product": false,
       "source_ref": "origin/lab2/product",
-      "source_ref_head": "8225bc64ed162396eb3422898268a5af19fbc015",
+      "source_ref_head": "1973aba861c0e1f00e19ebd4b8356959e0419760",
       "source_commit": "ea59075c0a92057e9f354ced54691100e0ebf5a1",
       "hashes": {
         "request.json": "3001849469922ae1e4e74832545f116dc7cc6a2a684a251025a623ad2aa915c0",
@@ -6409,7 +6409,7 @@
       "decision": "SURVIVES_CURRENT_TEST",
       "promote_to_product": false,
       "source_ref": "origin/lab2/frontier",
-      "source_ref_head": "67050f01369b90b3840908f2f27cc2ae6a793a51",
+      "source_ref_head": "acc9cd2cebe1f010d5c6b6308c25c37e32721aeb",
       "source_commit": "ddf9ac679c05a4e78bb79b353545e52549f49309",
       "hashes": {
         "request.json": "5b84d9351344af2b3cdfa20dba3237ab46d253a6a4026b51f457370c4a5cc327",
@@ -6463,7 +6463,7 @@
       "decision": "MEASUREMENT_INVALID",
       "promote_to_product": false,
       "source_ref": "origin/lab2/product",
-      "source_ref_head": "8225bc64ed162396eb3422898268a5af19fbc015",
+      "source_ref_head": "1973aba861c0e1f00e19ebd4b8356959e0419760",
       "source_commit": "e1532a3d4a0f3d2516c67d68d20aaefb00fed68d",
       "hashes": {
         "request.json": "6eb39e0f005c30b317c87cf0a9b3a4e85a8f54e8ecffc861a00c83bba2a94455",
@@ -6518,7 +6518,7 @@
       "decision": "INCONCLUSIVE \u2013 both axes MEASUREMENT_INVALID per frozen gates (Mind2Web Gate0 single train; Docker PC3 count window violated); outcome MIXED mislabeled per audit",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "e9c3ecb2deabba24455f1cc99552f784f588f7e8",
+      "source_ref_head": "11526693fda2f25d6a237e0ce222b485f4779f04",
       "source_commit": "5653a0e75662ab35fd4303ca6ae87282d511a28f",
       "hashes": {
         "request.json": "0f393cfafa046eb6bea925af16b4dcf3eadfc84c6ca4d7f1043b4a16f4ddab72",
@@ -6545,7 +6545,7 @@
       "decision": "SURVIVES_CURRENT_TEST",
       "promote_to_product": false,
       "source_ref": "origin/lab2/frontier",
-      "source_ref_head": "67050f01369b90b3840908f2f27cc2ae6a793a51",
+      "source_ref_head": "acc9cd2cebe1f010d5c6b6308c25c37e32721aeb",
       "source_commit": "0a8d4c0cb7efb0046ccbe658c7ca1c41f5d100d2",
       "hashes": {
         "request.json": "e781f6832208715625c7f23568355ff2496349fc961727566af2da456656fed3",
@@ -6654,7 +6654,7 @@
       "decision": "MEASUREMENT_INVALID substrate_unavailable \u2014 Gate0 0/2 real SPAs qualify after exhaustive search; H2A and H2B both MEASUREMENT_INVALID",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "e9c3ecb2deabba24455f1cc99552f784f588f7e8",
+      "source_ref_head": "11526693fda2f25d6a237e0ce222b485f4779f04",
       "source_commit": "7d9ba0ad46826e9c928df81510027aff1ed1d6bd",
       "hashes": {
         "request.json": "544bebb4019fedde0d96e98984a205b8ca3a2e5b721bef816b21ef751f666938",
@@ -6681,7 +6681,7 @@
       "decision": "SURVIVES_CURRENT_TEST",
       "promote_to_product": false,
       "source_ref": "origin/lab2/frontier",
-      "source_ref_head": "67050f01369b90b3840908f2f27cc2ae6a793a51",
+      "source_ref_head": "acc9cd2cebe1f010d5c6b6308c25c37e32721aeb",
       "source_commit": "436d62d23bcbdc535ba9948481600eeae2b1dec0",
       "hashes": {
         "request.json": "7b9fb4f60e5e9570f5c71d5a80bfb7d67d8868e32708e8b8076c2a4b0648a3ce",
@@ -6708,7 +6708,7 @@
       "decision": "MEASUREMENT_INVALID",
       "promote_to_product": false,
       "source_ref": "origin/lab2/product",
-      "source_ref_head": "8225bc64ed162396eb3422898268a5af19fbc015",
+      "source_ref_head": "1973aba861c0e1f00e19ebd4b8356959e0419760",
       "source_commit": "c5b525970f6d6e83ed8e39803371ea4a0669682d",
       "hashes": {
         "request.json": "7726ab9de938558af144d83eb801b8ec062836dff8d39fc74e452efb22ee5b84",
@@ -6736,7 +6736,7 @@
       "decision": "MEASUREMENT_INVALID substrate_unavailable \u2014 Gate0 0/3 real SPAs qualify after exhaustive joint BrowserGym 0.14.3/CAP outside ServiceNow/cap/Mind2Web-2/Online-Mind2Web/WebJudge-7B/Docker enumeration; H2B CAP, H2C Mind2Web-2/WebJudge and H2A Docker all MEASUREMENT_INVALID",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "e9c3ecb2deabba24455f1cc99552f784f588f7e8",
+      "source_ref_head": "11526693fda2f25d6a237e0ce222b485f4779f04",
       "source_commit": "093292693457a494ab42e4022f1cc0cff2fd7b45",
       "hashes": {
         "request.json": "6992c1dbef0b05e053dde3de1cb86ae80ff24fabd82a5e1e9e2ce28c03138ca5",
@@ -6763,7 +6763,7 @@
       "decision": "SURVIVES_CURRENT_TEST",
       "promote_to_product": false,
       "source_ref": "origin/lab2/frontier",
-      "source_ref_head": "67050f01369b90b3840908f2f27cc2ae6a793a51",
+      "source_ref_head": "acc9cd2cebe1f010d5c6b6308c25c37e32721aeb",
       "source_commit": "ba2035d7a21455d3ad7773da97b2c4f3cf7885b1",
       "hashes": {
         "request.json": "da9dfd8ffa68469c7ac01820d2fd74a7e7f16955c181e42c524a4a2ffb2aafe1",
@@ -6844,7 +6844,7 @@
       "decision": "SURVIVES_CURRENT_TEST \u2014 product kernel port SURVIVES synthetic-only ceiling: 40/40 pooled alias-OOD correct (Wilson [0.912,1.0], binomial p=1e-40 vs 0.10, McNemar p=6.98e-10 vs B-EXACT-MATCH 0/40), orthogonal 30/30 and mixed 10/10 and held-out 9/9 and per-family 10/10 each with false_accept 0.0 (gap 1.0 vs B-VERBATIM-REPLAY 1.0, McNemar p=6.98e-10), exact-match 12/12 no regression, no-applicable UNKNOWN precision 1.0 FA 0.0, empty-registry 6/6 UNKNOWN, ECE 0.065 (5 bins, 3 empty disclosed) within 0.05 of frontier proxy 0.080, confidence std 0.400, parity gap 0.0, controls C1-C8 all PASS; PC-BROWSERGYM-HEALTH 0/0 correctly bounds live to exploratory per frozen C1, audit PASS",
       "promote_to_product": false,
       "source_ref": "origin/lab2/product",
-      "source_ref_head": "8225bc64ed162396eb3422898268a5af19fbc015",
+      "source_ref_head": "1973aba861c0e1f00e19ebd4b8356959e0419760",
       "source_commit": "768d9dbef3ca0385ea7f95908a4fe986e80570fd",
       "hashes": {
         "request.json": "625cfc0d0782e4cd83999fef7a426cb0dffaf0758dccb208f8832bb8ca323407",
@@ -6898,7 +6898,7 @@
       "decision": "MEASUREMENT_INVALID",
       "promote_to_product": false,
       "source_ref": "origin/lab2/product",
-      "source_ref_head": "8225bc64ed162396eb3422898268a5af19fbc015",
+      "source_ref_head": "1973aba861c0e1f00e19ebd4b8356959e0419760",
       "source_commit": "33332c146c20c29dcbaebddeb5e1f2ea879cf341",
       "hashes": {
         "request.json": "e0e67411444ef49cb703cb4ebbc36c5f22adfcc1b60633805227c4bd4dabfc06",
@@ -6927,7 +6927,7 @@
       "decision": "REVISE \u2014 degenerate homepage-only measurement (placeholder bug) prevents discriminating AX_consistency test; Stagehand replication incomplete without drift MISS; no bounded falsification of longest-prefix method on product pages",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "e9c3ecb2deabba24455f1cc99552f784f588f7e8",
+      "source_ref_head": "11526693fda2f25d6a237e0ce222b485f4779f04",
       "source_commit": "34bc669a574f27f35bd8dc76d556f25007adccd1",
       "hashes": {
         "request.json": "255d8b7bf8b69f0b3c152d12fac32150e5555b79e2fda0470a81696c8d32dc02",
@@ -6954,7 +6954,7 @@
       "decision": "MIXED",
       "promote_to_product": false,
       "source_ref": "origin/lab2/frontier",
-      "source_ref_head": "67050f01369b90b3840908f2f27cc2ae6a793a51",
+      "source_ref_head": "acc9cd2cebe1f010d5c6b6308c25c37e32721aeb",
       "source_commit": "ca6d0f60bf9d674db76c4dd98350239ec9b99fc8",
       "hashes": {
         "request.json": "e1de2994695629b68fa60f476667453ccd5a90beb454ee8920f7fd2b314c7407",
@@ -7090,7 +7090,7 @@
       "decision": "MIXED",
       "promote_to_product": false,
       "source_ref": "origin/lab2/frontier",
-      "source_ref_head": "67050f01369b90b3840908f2f27cc2ae6a793a51",
+      "source_ref_head": "acc9cd2cebe1f010d5c6b6308c25c37e32721aeb",
       "source_commit": "87e0410e20f31574a8245ea53aed9e5f05d9a4a7",
       "hashes": {
         "request.json": "ae653c915103ccdc2791816f827126d662812190b8609aebf3578464868ed855",
@@ -7119,7 +7119,7 @@
       "decision": "MEASUREMENT_INVALID \u2014 placeholder fix verified but AX pattern grammar truncated [:20] generic tokens, drift SHA256 not recomputed, multi-step BrowserGym unavailable; mean 1.0 CI[1.0,1.0] variance 0 p=1.0 degenerate vs shuffle null. No bounded falsification of longest-prefix method.",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "e9c3ecb2deabba24455f1cc99552f784f588f7e8",
+      "source_ref_head": "11526693fda2f25d6a237e0ce222b485f4779f04",
       "source_commit": "e9e7e7a1955807ece73279c6f45cdb6c161318d0",
       "hashes": {
         "request.json": "64ee25addf28572a08a656946e0479fc1a2b0ff40d87e57915859bf0d90293e3",
@@ -7200,7 +7200,7 @@
       "decision": "FALSIFIED",
       "promote_to_product": false,
       "source_ref": "origin/lab2/product",
-      "source_ref_head": "8225bc64ed162396eb3422898268a5af19fbc015",
+      "source_ref_head": "1973aba861c0e1f00e19ebd4b8356959e0419760",
       "source_commit": "8883235ece2f892529e594c566571308fc7586bc",
       "hashes": {
         "request.json": "56418f847f072e6ca2617e4ad06988b9b97fb34288fa1ed055c2925e7e8f447a",
@@ -7227,7 +7227,7 @@
       "decision": "FALSIFIED-IN-SETTING",
       "promote_to_product": false,
       "source_ref": "origin/lab2/frontier",
-      "source_ref_head": "67050f01369b90b3840908f2f27cc2ae6a793a51",
+      "source_ref_head": "acc9cd2cebe1f010d5c6b6308c25c37e32721aeb",
       "source_commit": "7c767ed15ff4bea72e3cbdb835dbcc7af187a21a",
       "hashes": {
         "request.json": "3947d1e26d7a2c5bae94d06628b4f22e197aea33ca6669a08bfc5deb23dc1672",
@@ -7283,7 +7283,7 @@
       "decision": "MEASUREMENT_INVALID",
       "promote_to_product": false,
       "source_ref": "origin/lab2/frontier",
-      "source_ref_head": "67050f01369b90b3840908f2f27cc2ae6a793a51",
+      "source_ref_head": "acc9cd2cebe1f010d5c6b6308c25c37e32721aeb",
       "source_commit": "daf0ce3c3dc34a8e81a497de5dc53c5dd565674f",
       "hashes": {
         "request.json": "221ae9969371123ef62e2c112f4da599db3e9d271acae033457a433decf4e4a5",
@@ -7312,7 +7312,7 @@
       "decision": "FALSIFIED",
       "promote_to_product": false,
       "source_ref": "origin/lab2/product",
-      "source_ref_head": "8225bc64ed162396eb3422898268a5af19fbc015",
+      "source_ref_head": "1973aba861c0e1f00e19ebd4b8356959e0419760",
       "source_commit": "67c49b4217496749032df9276458cdedc6102c18",
       "hashes": {
         "request.json": "a094deee55331930e681556621512a83e56e9bfb3febb6e38b0edaa763794245",
@@ -7366,7 +7366,7 @@
       "decision": "MEASUREMENT_INVALID",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "e9c3ecb2deabba24455f1cc99552f784f588f7e8",
+      "source_ref_head": "11526693fda2f25d6a237e0ce222b485f4779f04",
       "source_commit": "c3f90f923f8f88f3594e98f0bf7c469b6e9448eb",
       "hashes": {
         "request.json": "6ebd2a12427d06a71dbba3a893e6d5e8023addf99167ea08777bdfaeca44d45f",
@@ -7476,7 +7476,7 @@
       "decision": "FALSIFIED",
       "promote_to_product": false,
       "source_ref": "origin/lab2/product",
-      "source_ref_head": "8225bc64ed162396eb3422898268a5af19fbc015",
+      "source_ref_head": "1973aba861c0e1f00e19ebd4b8356959e0419760",
       "source_commit": "a213170f49e39472b80cdebad67d3fe446aa3b7e",
       "hashes": {
         "request.json": "50e83a21186348d1efda5503504c87c283e8e14cfce57d14306f70fcd1942eef",
@@ -7503,7 +7503,7 @@
       "decision": "MEASUREMENT_INVALID",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "e9c3ecb2deabba24455f1cc99552f784f588f7e8",
+      "source_ref_head": "11526693fda2f25d6a237e0ce222b485f4779f04",
       "source_commit": "50586c3476001369f43a50c3eb7eefd9d993c280",
       "hashes": {
         "request.json": "8e0bc46ea98cef7bb15749e0b25b2c46d36a474cb75fcd29d4e7c64abd260ca9",
@@ -7530,7 +7530,7 @@
       "decision": "MEASUREMENT_INVALID",
       "promote_to_product": false,
       "source_ref": "origin/lab2/frontier",
-      "source_ref_head": "67050f01369b90b3840908f2f27cc2ae6a793a51",
+      "source_ref_head": "acc9cd2cebe1f010d5c6b6308c25c37e32721aeb",
       "source_commit": "d94ee76f676807b884130eef296cb3204d4f6cc3",
       "hashes": {
         "request.json": "9bf24bd2ec015c18c80babcfad94f9395a538bcbc94af25d9900b2b38d052df2",
@@ -7611,7 +7611,7 @@
       "decision": "MEASUREMENT_INVALID",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "e9c3ecb2deabba24455f1cc99552f784f588f7e8",
+      "source_ref_head": "11526693fda2f25d6a237e0ce222b485f4779f04",
       "source_commit": "77bf1c49e51b00c1252bca754508d3e30b451214",
       "hashes": {
         "request.json": "e937f6e9948dab8ba4709a48161b1a47e153b9bf7986888166dc2893389859e0",
@@ -7639,7 +7639,7 @@
       "decision": "MEASUREMENT_INVALID",
       "promote_to_product": false,
       "source_ref": "origin/lab2/product",
-      "source_ref_head": "8225bc64ed162396eb3422898268a5af19fbc015",
+      "source_ref_head": "1973aba861c0e1f00e19ebd4b8356959e0419760",
       "source_commit": "4c95a0c64a5b0f85e54a1b5fd375e83c74753a5a",
       "hashes": {
         "request.json": "7f8df686914d8d186414f54a56e83c7943538f84deaf3f5699cb35df0f04e9c0",
@@ -7693,7 +7693,7 @@
       "decision": "MEASUREMENT_INVALID",
       "promote_to_product": false,
       "source_ref": "origin/lab2/frontier",
-      "source_ref_head": "67050f01369b90b3840908f2f27cc2ae6a793a51",
+      "source_ref_head": "acc9cd2cebe1f010d5c6b6308c25c37e32721aeb",
       "source_commit": "756f922dd21b7fe71eae244ee8ca1cb2cf2a34a1",
       "hashes": {
         "request.json": "059952f8267d3d8a83b8ef03e85883d01a14e6562129cfc16c461f820ceec17e",
@@ -7720,7 +7720,7 @@
       "decision": "MEASUREMENT_INVALID",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "e9c3ecb2deabba24455f1cc99552f784f588f7e8",
+      "source_ref_head": "11526693fda2f25d6a237e0ce222b485f4779f04",
       "source_commit": "70d20c57f0fe17f55f09a650e0cfe07d5291596c",
       "hashes": {
         "request.json": "d7a76dddc68b7d24e6940645b05888c6b3eabde8b8ca372266e7e75b69c3fe46",
@@ -7776,7 +7776,7 @@
       "decision": "FALSIFIED",
       "promote_to_product": false,
       "source_ref": "origin/lab2/product",
-      "source_ref_head": "8225bc64ed162396eb3422898268a5af19fbc015",
+      "source_ref_head": "1973aba861c0e1f00e19ebd4b8356959e0419760",
       "source_commit": "c400df086e155cfd2a44670a504c55c3350f36c4",
       "hashes": {
         "request.json": "65e23171c2c6057203cc711b23ea602a34a3752b3672ab8e41d38ff554f97cc2",
@@ -7803,7 +7803,7 @@
       "decision": "FALSIFIED-IN-SETTING",
       "promote_to_product": false,
       "source_ref": "origin/lab2/frontier",
-      "source_ref_head": "67050f01369b90b3840908f2f27cc2ae6a793a51",
+      "source_ref_head": "acc9cd2cebe1f010d5c6b6308c25c37e32721aeb",
       "source_commit": "d79f1b5edca01a3c87e65f44fc50158b280e5a83",
       "hashes": {
         "request.json": "398fde22062495d558abb69096b3ca3045e7dd64d1b1f2cc255078c52f7e6e0b",
@@ -7830,7 +7830,7 @@
       "decision": "MEASUREMENT_INVALID",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "e9c3ecb2deabba24455f1cc99552f784f588f7e8",
+      "source_ref_head": "11526693fda2f25d6a237e0ce222b485f4779f04",
       "source_commit": "ef0b8c076ba4ca7eca86c0a6450a695462df0e31",
       "hashes": {
         "request.json": "5e3d386c6dc392b287b877f1b6b421151d2614527e3afd2674d23061e13e2cd8",
@@ -7885,7 +7885,7 @@
       "decision": "MEASUREMENT_INVALID",
       "promote_to_product": false,
       "source_ref": "origin/lab2/product",
-      "source_ref_head": "8225bc64ed162396eb3422898268a5af19fbc015",
+      "source_ref_head": "1973aba861c0e1f00e19ebd4b8356959e0419760",
       "source_commit": "85dbe41c95c9daecd6b94265d689729f849f8d24",
       "hashes": {
         "request.json": "8a3ca4e986acaa25e119509f5cd8c129d910a3693b7508fb686069558a295f46",
@@ -7912,7 +7912,7 @@
       "decision": "MEASUREMENT_INVALID",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "e9c3ecb2deabba24455f1cc99552f784f588f7e8",
+      "source_ref_head": "11526693fda2f25d6a237e0ce222b485f4779f04",
       "source_commit": "304f93e3453e7f76ee647ace750dd0f9a5f443c3",
       "hashes": {
         "request.json": "f3a03285cb8024d083ab2c0dfc81d668de1d90b8cb983efdad018d048be8c3c8",
@@ -7968,7 +7968,7 @@
       "decision": "MEASUREMENT_INVALID",
       "promote_to_product": false,
       "source_ref": "origin/lab2/product",
-      "source_ref_head": "8225bc64ed162396eb3422898268a5af19fbc015",
+      "source_ref_head": "1973aba861c0e1f00e19ebd4b8356959e0419760",
       "source_commit": "07558b5a5f2799ba44d14928b88f9c18b008f5ec",
       "hashes": {
         "request.json": "7456f953ab77abca8d25c44c28693b82b37f8811b83ed5228ca127450e881bb0",
@@ -8022,7 +8022,7 @@
       "decision": "MIXED \u2014 H1/H2 FALSIFIED-IN-SETTING (bounded to homepage/template longest-prefix + unstable Stagehand exact-match); H3/H4 MEASUREMENT_INVALID per infrastructure precedence; audit REVISE required; no SURVIVES, no promotion",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "e9c3ecb2deabba24455f1cc99552f784f588f7e8",
+      "source_ref_head": "11526693fda2f25d6a237e0ce222b485f4779f04",
       "source_commit": "91f074f43c3a0a5416ab4a1ac5013afa9cb742bb",
       "hashes": {
         "request.json": "3b62a93d611331c578855c1c43cf276e0932065c62cc01f6a167088e9a32dfe6",
@@ -8049,7 +8049,7 @@
       "decision": "SURVIVES_SYNTHETIC_BOUNDED",
       "promote_to_product": false,
       "source_ref": "origin/lab2/frontier",
-      "source_ref_head": "67050f01369b90b3840908f2f27cc2ae6a793a51",
+      "source_ref_head": "acc9cd2cebe1f010d5c6b6308c25c37e32721aeb",
       "source_commit": "1d58cb44fef1706742939405b480261c346afa71",
       "hashes": {
         "request.json": "a0060370fe38348bf3b59aa481430ea4788a8877a38a47d8391f740bd9ad04c2",
@@ -8077,7 +8077,7 @@
       "decision": "FALSIFIED",
       "promote_to_product": false,
       "source_ref": "origin/lab2/product",
-      "source_ref_head": "8225bc64ed162396eb3422898268a5af19fbc015",
+      "source_ref_head": "1973aba861c0e1f00e19ebd4b8356959e0419760",
       "source_commit": "2dfc94a81a079fa99bfd54e1cb7268233ba29cc7",
       "hashes": {
         "request.json": "111ae8538e06cc5a3ee050c7fa0e587bf0b89da9da7890bb6e5684902f168e4f",
@@ -8160,7 +8160,7 @@
       "decision": "MEASUREMENT_INVALID",
       "promote_to_product": false,
       "source_ref": "origin/lab2/frontier",
-      "source_ref_head": "67050f01369b90b3840908f2f27cc2ae6a793a51",
+      "source_ref_head": "acc9cd2cebe1f010d5c6b6308c25c37e32721aeb",
       "source_commit": "87097c6574b886e6b1efa188e8bfc4b2bbf4a274",
       "hashes": {
         "request.json": "9e6c07063944f41a4f49b65fff8a0f9ee0e60adacfd7bec5348e6053f42c3f61",
@@ -8216,7 +8216,7 @@
       "decision": "FALSIFIED",
       "promote_to_product": false,
       "source_ref": "origin/lab2/product",
-      "source_ref_head": "8225bc64ed162396eb3422898268a5af19fbc015",
+      "source_ref_head": "1973aba861c0e1f00e19ebd4b8356959e0419760",
       "source_commit": "0c7e03d30d5dcb3e2db80f220314e53e07fffafa",
       "hashes": {
         "request.json": "2b9bc5a7ea35807a13094756fdd3c255bb495e4bc8176e22d77767b204924702",
@@ -8243,7 +8243,7 @@
       "decision": "REVISE \u2014 No SURVIVES; audit REVISE producer_claim_supported=false. H1/H2 remain bounded FALSIFIED-IN-SETTING on Magento homepage/template only (18/20 identical 1430-node captures, recomputed CI [0.7,1.0] not [1.0,1.0], shuffle_mean 0.9 not 1.0, variance pop 0.09/sample 0.10, shuffle p=1.0 gap 0.0, delta_vs_truncated null); product-page within-store transfer UNTESTED (1/10 families with 2 product pages, adequacy gate <5 families) \u2192 MEASUREMENT_INVALID for H1 product hypothesis; Stagehand HIT 0.0 due to incomplete expanded stripping (grammar f2b5e3bb only form_key, missing uenc/store/session/timestamp/nonce, hash_changed_on_every access 36/36 before_hash!=after_hash) \u2192 H2 FALSIFIED bounded to unstable exact-cache, MISS 1.0/false_accept 0.0 vacuous; H3 WebGym 0/50 (401/404 after 2 genuine attempts) and H4 Gate0 0 transitions (BrowserGym API mismatch) correctly MEASUREMENT_INVALID per frozen 2-attempt infrastructure precedence; Docker 64-char digest sha256:3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb and 20/20 AX liveness at 1280x720 remain valid. C-CROSSSITE stays HYPOTHESIS.",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "e9c3ecb2deabba24455f1cc99552f784f588f7e8",
+      "source_ref_head": "11526693fda2f25d6a237e0ce222b485f4779f04",
       "source_commit": "d9d990f43b66965e784fef504a869543423f72e6",
       "hashes": {
         "request.json": "10462600910927c17f5876357f1bb1a0ba6c3e1ad19c55c4b2af650fd864e541",
@@ -8299,7 +8299,7 @@
       "decision": "MEASUREMENT_INVALID",
       "promote_to_product": false,
       "source_ref": "origin/lab2/product",
-      "source_ref_head": "8225bc64ed162396eb3422898268a5af19fbc015",
+      "source_ref_head": "1973aba861c0e1f00e19ebd4b8356959e0419760",
       "source_commit": "683cb58372caef7bc7757353dabee5c56ffa914a",
       "hashes": {
         "request.json": "c3bfbb9a1553298b83b83b8cde4adb7a6b768f9c7ad1301b8c6e883f61614caf",
@@ -8326,7 +8326,7 @@
       "decision": "MEASUREMENT_INVALID",
       "promote_to_product": false,
       "source_ref": "origin/lab2/frontier",
-      "source_ref_head": "67050f01369b90b3840908f2f27cc2ae6a793a51",
+      "source_ref_head": "acc9cd2cebe1f010d5c6b6308c25c37e32721aeb",
       "source_commit": "ce68eca9af283c29284ca26a909f899a29605e81",
       "hashes": {
         "request.json": "81bf00f1ba3d70ab27ac9f67fbe99208c0a595795f2b7cb6d824295841b1ba26",
@@ -8353,7 +8353,7 @@
       "decision": "REVISE \u2014 No SURVIVES; audit REVISE producer_claim_supported=false. H1 product-page hypothesis MEASUREMENT_INVALID (sampling deviation), listing-vs-detail pairing bounded FALSIFIED-IN-SETTING only; H2 Stagehand MEASUREMENT_INVALID (n=5<30 and SHA unstable); H3 WebGym and H4 Gate0 correctly MEASUREMENT_INVALID per frozen 2-attempt infrastructure precedence. C-CROSSSITE remains HYPOTHESIS single-store vacuous.",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "e9c3ecb2deabba24455f1cc99552f784f588f7e8",
+      "source_ref_head": "11526693fda2f25d6a237e0ce222b485f4779f04",
       "source_commit": "b283857164d7d60728c397badc09916db52a7f92",
       "hashes": {
         "request.json": "e5e629e06b1c575c91a6d3be88ffc76c518a313cc45eaf2cd8d5f6f4f18710d1",
@@ -8407,7 +8407,7 @@
       "decision": "MEASUREMENT_INVALID",
       "promote_to_product": false,
       "source_ref": "origin/lab2/product",
-      "source_ref_head": "8225bc64ed162396eb3422898268a5af19fbc015",
+      "source_ref_head": "1973aba861c0e1f00e19ebd4b8356959e0419760",
       "source_commit": "31e453f42ec6edafbc2afb7177fd3b2a2e287020",
       "hashes": {
         "request.json": "203baed2d0384475486714bd31b8808f7ebb4c674ec6218ae2aeb7d48af0f9d6",
@@ -8434,7 +8434,7 @@
       "decision": "MEASUREMENT_INVALID",
       "promote_to_product": false,
       "source_ref": "origin/lab2/product",
-      "source_ref_head": "8225bc64ed162396eb3422898268a5af19fbc015",
+      "source_ref_head": "1973aba861c0e1f00e19ebd4b8356959e0419760",
       "source_commit": "e99b63e477c22cd04230b774c2a6ff9f4a5b12d2",
       "hashes": {
         "request.json": "a3532d5d3e24d6dccf083848508d74f287dd72d282841384a298249976996ae1",
@@ -8461,7 +8461,7 @@
       "decision": "MEASUREMENT_INVALID \u2014 H1 product-page within-store AX_consistency not tested (4 families <5 adequacy; full-page LCP 0.0 is representation artifact); no SURVIVES/FALSIFIED ceiling beyond substrate liveness",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "e9c3ecb2deabba24455f1cc99552f784f588f7e8",
+      "source_ref_head": "11526693fda2f25d6a237e0ce222b485f4779f04",
       "source_commit": "e789a0513e48ab20e92da139b63d826d4788eae3",
       "hashes": {
         "request.json": "803980b91c8378d7f10ae1b0e66829332cafbb1e49a226fe91783851a32c2721",
@@ -8542,7 +8542,7 @@
       "decision": "REVISE",
       "promote_to_product": false,
       "source_ref": "origin/lab2/frontier",
-      "source_ref_head": "67050f01369b90b3840908f2f27cc2ae6a793a51",
+      "source_ref_head": "acc9cd2cebe1f010d5c6b6308c25c37e32721aeb",
       "source_commit": "5e2001367d5a5b43cc1fe2cedef02eab4e47e084",
       "hashes": {
         "request.json": "35ea0384ce49b63954c8b99e46cb682759f35e6e035c057dbec7fce71ff5c60c",
@@ -8596,7 +8596,7 @@
       "decision": "MEASUREMENT_INVALID",
       "promote_to_product": false,
       "source_ref": "origin/lab2/product",
-      "source_ref_head": "8225bc64ed162396eb3422898268a5af19fbc015",
+      "source_ref_head": "1973aba861c0e1f00e19ebd4b8356959e0419760",
       "source_commit": "1831e7ef4f0428b4c01043c12dd9bb19338740ca",
       "hashes": {
         "request.json": "cb29b55400d80b4c2a1881d68005710c09bf99fb60e4ffecfe6412d0fb2fc38b",
@@ -8677,7 +8677,7 @@
       "decision": "MEASUREMENT_INVALID",
       "promote_to_product": false,
       "source_ref": "origin/lab2/product",
-      "source_ref_head": "8225bc64ed162396eb3422898268a5af19fbc015",
+      "source_ref_head": "1973aba861c0e1f00e19ebd4b8356959e0419760",
       "source_commit": "7e28c4875320eccd791071eae18b4b76d51a4d5d",
       "hashes": {
         "request.json": "afb09f5aa7a46116fd8d01e4534bb05ecbcf6c26359764edf7904f5e0f555a14",
@@ -8704,7 +8704,7 @@
       "decision": "MEASUREMENT_INVALID",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "e9c3ecb2deabba24455f1cc99552f784f588f7e8",
+      "source_ref_head": "11526693fda2f25d6a237e0ce222b485f4779f04",
       "source_commit": "ac173516f5c6f6132c545a0d1ea0e63d5eafff91",
       "hashes": {
         "request.json": "adbd7c53b10b8afe1ba8938036213f80de9951005d6df7279ea8cee8b4c550b5",
@@ -8785,7 +8785,7 @@
       "decision": "MEASUREMENT_INVALID",
       "promote_to_product": false,
       "source_ref": "origin/lab2/product",
-      "source_ref_head": "8225bc64ed162396eb3422898268a5af19fbc015",
+      "source_ref_head": "1973aba861c0e1f00e19ebd4b8356959e0419760",
       "source_commit": "db7a09b601cdf60f0858e9a59430328746d63be4",
       "hashes": {
         "request.json": "bd1734bab51125245d8459b4775c6a13e393359ef7a23845b4ec2a5f021517b4",
@@ -8812,7 +8812,7 @@
       "decision": "FALSIFIED-IN-SETTING",
       "promote_to_product": false,
       "source_ref": "origin/lab2/frontier",
-      "source_ref_head": "67050f01369b90b3840908f2f27cc2ae6a793a51",
+      "source_ref_head": "acc9cd2cebe1f010d5c6b6308c25c37e32721aeb",
       "source_commit": "81206e58269faa980c7bc1aacd438c7d153f4d45",
       "hashes": {
         "request.json": "355ca3200321039ac184e4cc12d18cd8e44e6a4cf4394788f77803a596bb1cd7",
@@ -8839,7 +8839,7 @@
       "decision": "MEASUREMENT_INVALID",
       "promote_to_product": false,
       "source_ref": "origin/lab2/product",
-      "source_ref_head": "8225bc64ed162396eb3422898268a5af19fbc015",
+      "source_ref_head": "1973aba861c0e1f00e19ebd4b8356959e0419760",
       "source_commit": "dac04e600f3837a60d33681b5987be6101fa2454",
       "hashes": {
         "request.json": "a4dfe5393c033560c2f34604dc3771b00ba7f3b2404a948428602136a735737d",
@@ -8920,7 +8920,7 @@
       "decision": "MEASUREMENT_INVALID",
       "promote_to_product": false,
       "source_ref": "origin/lab2/product",
-      "source_ref_head": "8225bc64ed162396eb3422898268a5af19fbc015",
+      "source_ref_head": "1973aba861c0e1f00e19ebd4b8356959e0419760",
       "source_commit": "d4c1cd0569e2f1825c43daf1aab3df92af9e34ca",
       "hashes": {
         "request.json": "500888432e900629085d83032bf13d75aa528166427862fc59f4228e7a08e43a",
@@ -8976,7 +8976,7 @@
       "decision": "REVISE \u2014 BOUNDED_PARTIAL_SURVIVES",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "e9c3ecb2deabba24455f1cc99552f784f588f7e8",
+      "source_ref_head": "11526693fda2f25d6a237e0ce222b485f4779f04",
       "source_commit": "e81ea95c6a3d7154ff3ef0ea51fa439d4ea01b12",
       "hashes": {
         "request.json": "8bf79eb97b2d5507bed7ada74eae57056a62d65fbdc0d740783d7270bf5e70ae",
@@ -9030,7 +9030,7 @@
       "decision": "MEASUREMENT_INVALID",
       "promote_to_product": false,
       "source_ref": "origin/lab2/product",
-      "source_ref_head": "8225bc64ed162396eb3422898268a5af19fbc015",
+      "source_ref_head": "1973aba861c0e1f00e19ebd4b8356959e0419760",
       "source_commit": "7c476c3d8e230faf4334a6065f6e0acbc075c8bd",
       "hashes": {
         "request.json": "16e47e0f19cfcfbd5a2d0043fecd7bed9a2920da9c9207b120a975f40524bee6",
@@ -9057,7 +9057,7 @@
       "decision": "MEASUREMENT_INVALID",
       "promote_to_product": false,
       "source_ref": "origin/lab2/product",
-      "source_ref_head": "8225bc64ed162396eb3422898268a5af19fbc015",
+      "source_ref_head": "1973aba861c0e1f00e19ebd4b8356959e0419760",
       "source_commit": "3dcbf2b32f909a450f9ad471bc79083fb3d58067",
       "hashes": {
         "request.json": "43a4574b27366ed787a333eb2f75ad0d82e50cbbd17309dd6767d1d6415bee11",
@@ -9111,7 +9111,7 @@
       "decision": "MEASUREMENT_INVALID",
       "promote_to_product": false,
       "source_ref": "origin/lab2/product",
-      "source_ref_head": "8225bc64ed162396eb3422898268a5af19fbc015",
+      "source_ref_head": "1973aba861c0e1f00e19ebd4b8356959e0419760",
       "source_commit": "60da942114a0b179edcf79a71e7b9c47ed246e18",
       "hashes": {
         "request.json": "3479a809de9cba7ee7d3a8aa66c1158bd230052d9c3a4c5f6ca48879f5b2469f",
@@ -9140,7 +9140,7 @@
       "decision": "MIXED",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "e9c3ecb2deabba24455f1cc99552f784f588f7e8",
+      "source_ref_head": "11526693fda2f25d6a237e0ce222b485f4779f04",
       "source_commit": "17c28f5b2ee97c7879dc682889563fa10f170edf",
       "hashes": {
         "request.json": "ade7c451dc83b5997ce910b52bdd85c8f7193be14ed2587fd7d6eee300a43dde",
@@ -9167,7 +9167,7 @@
       "decision": "MEASUREMENT_INVALID",
       "promote_to_product": false,
       "source_ref": "origin/lab2/frontier",
-      "source_ref_head": "67050f01369b90b3840908f2f27cc2ae6a793a51",
+      "source_ref_head": "acc9cd2cebe1f010d5c6b6308c25c37e32721aeb",
       "source_commit": "de86fb12fc10503bd024260a7e261369ddb39cfa",
       "hashes": {
         "request.json": "150cd7de0410f6c55af479bdc634e1e8a552caed24448d8a4433f0e91616a799",
@@ -9275,7 +9275,7 @@
       "decision": "MEASUREMENT_INVALID",
       "promote_to_product": false,
       "source_ref": "origin/lab2/frontier",
-      "source_ref_head": "67050f01369b90b3840908f2f27cc2ae6a793a51",
+      "source_ref_head": "acc9cd2cebe1f010d5c6b6308c25c37e32721aeb",
       "source_commit": "c651c8f9d86a32119f07ca0de5b77ce2f643ca07",
       "hashes": {
         "request.json": "40f42d13acc50e7108cd2db2b071471c11eea902dcd16e98affa0bb23a9e72f4",
@@ -9329,7 +9329,7 @@
       "decision": "MEASUREMENT_INVALID",
       "promote_to_product": false,
       "source_ref": "origin/lab2/product",
-      "source_ref_head": "8225bc64ed162396eb3422898268a5af19fbc015",
+      "source_ref_head": "1973aba861c0e1f00e19ebd4b8356959e0419760",
       "source_commit": "f50726bca9dde2b790b4d3de6e9226201d127d17",
       "hashes": {
         "request.json": "0ae42754319dc64fed996ccfbfd5cf844912379f91958ed93d9f1fa91e50d2df",
@@ -9342,6 +9342,35 @@
         "audit.json": "612cbd6109505b5386a86305cb42536cb1513d51af9a538eb71f051bf5f8efd6",
         "verdict.json": "2678444bf1acbead81e05af0dc089eabff483f40a541ab7a6850b30278560c08",
         "handoff.json": "809b0f9528ee37b0aa3d2b47211ca6d40f0ef8690fd2aab020a74100facc8b61"
+      }
+    },
+    "EXP-INTEL-36020904615": {
+      "lane": "intel",
+      "request_id": "e71a5aa98f8db354c2b167b9",
+      "created_at": "2026-09-24T15:32:34.871431+00:00",
+      "claim_ids": [
+        "C-CROSSSITE",
+        "C-PRODUCT-ECON",
+        "C-RESIDUAL-NOVELTY"
+      ],
+      "question": "Can Intel deliver (a) a durable census without exhaustive 567MB LFS: Hard258 + WebArena-Verified v2 812 via pinned GHCR ghcr.io/servicenow/browsergym:0.14.3 and am1n3e/webarena-verified-shopping@sha256:3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb (64-char hash, byte-identical manifest SHA d6527566) proving >=10 constructible families (deterministic random.Random(35725763380).sample, get_task_start_url expansion, product-subtree distinct SHA on path families 136/145/196/222 at 1280x720 CDP AX>10) and WebGym 292k 127k sites >=50 diverse eTLD+1 duplication 95% CI via threshold sweep 0.818-0.9479 (2000 family bootstrap, HF_TOKEN) replacing exhaustive test.zip, plus (b) blind external baseline reproductions on SPIDER synthetic 40-task alias-OOD (30 orthogonal+10 mixed): Agentic Compilation DSM 99% TreeWalker+JSON IR $0.002-0.092, Stagehand selector+relevant-subtree SHA256 HIT/MISS >=0.8 after expanded stripping {form_key,uenc,store,session,nonce}, and browser-memory catalog deterministic replay \u2014 with trajectory-grouped bootstrap coverage/CIs, honest M_total_f10 Pareto vs SPIDER catalog/routing/WebMCP, as the unblocking deliverable for Graph/Physics/Product?",
+      "audit_status": "PASS",
+      "decision": "MIXED",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/intel",
+      "source_ref_head": "11526693fda2f25d6a237e0ce222b485f4779f04",
+      "source_commit": "d2ec81b3eeadb54d0ba83711a92276d4f2576e69",
+      "hashes": {
+        "request.json": "024857aad14ec1a631c98236e0bff3a5a2382bc946f2c8b0d15555be85f082fc",
+        "spec.json": "c8c61a1aab6a6ff8f76aa9f5f5f3d9e2661883ae05d32631f1da5bc11f10908e",
+        "prereg.md": "7c425515703e3b35cc40f0a84155131318d30f3e496ec6f724429c67c8f55978",
+        "freeze.json": "d268198592db3ac31fc89161a8a98495311e18ec6d6a2a16f1a1447b9c458594",
+        "result.json": "8d60941ffccc22afc137aae0dbc9d2332855e0fd843a709abf09bda8e54967dc",
+        "report.md": "47945b554e4e2b7611534c2427c8b6c0a7f0b5c1f321e3e76b7d918203018ea2",
+        "provenance.json": "7b2e462bc8a13b00385d1f0b779c70d5e4a74074bddd0013c70419070bfc66b3",
+        "audit.json": "edbfbfe769b3c95014dcd656e20dfc0a310362509a3cb4575b0439e58746017e",
+        "verdict.json": "811c505a5c80de840d295144fda2b6ff08a25fbf40df62bafd7cc1cbe4bfb8ea",
+        "handoff.json": "ab92f146eefe4d2df24802f0c17398f16bb98ef048d027d2715ca8413e7de0cc"
       }
     },
     "EXP-RUNTIME-36030564009": {
@@ -9383,7 +9412,7 @@
       "decision": "MEASUREMENT_INVALID",
       "promote_to_product": false,
       "source_ref": "origin/lab2/frontier",
-      "source_ref_head": "67050f01369b90b3840908f2f27cc2ae6a793a51",
+      "source_ref_head": "acc9cd2cebe1f010d5c6b6308c25c37e32721aeb",
       "source_commit": "67050f01369b90b3840908f2f27cc2ae6a793a51",
       "hashes": {
         "request.json": "d72db7de7158a90723a703295dba9716c209cb51b54349ec3cba96694f1ae5eb",
@@ -9396,6 +9425,33 @@
         "audit.json": "82f0861bd5dc0276cf567b6041faaf38d495f793fe3bb6465b18bbf77bf57e77",
         "verdict.json": "d7726f508fffb8a9f04ccdda90c97d9e9056cdd6d32f952713c81b73c1f0b3f2",
         "handoff.json": "8d1b35e3c7807a40d08aa07d862ae2a86236243c0ab2442e971e0c24ff12644e"
+      }
+    },
+    "EXP-PRODUCT-36036421062": {
+      "lane": "product",
+      "request_id": "c6d9fd89139f42ea90b92456",
+      "created_at": "2026-09-24T17:44:59.749786+00:00",
+      "claim_ids": [
+        "C-PRODUCT-ECON"
+      ],
+      "question": "After retaining the contamination-free rebuilt 192/36 holdout (sha 374ef8f625be Jaccard max 0.0 disjoint value_set_A intersect B empty) and single-node HS256 sticky substrate health-gated at n_non304>=360 (TTL 60s conditional probe ETag W/body_sha, stratified TN 1.0) with durable kernel dot-regex (d926279d at cee979c2), and provisioning GHCR ghcr.io/servicenow/browsergym:0.14.3 + gpt-4o-mini 15-step Playwright same model/tools/budget 1280x720, does honest M_total_f10/f100 Pareto (tokens+browser+latency vs accuracy, 5000 family-stratified trajectory-grouped bootstrap + 5000 block-permutation, rho_proxy_real>=0.50 |rho_shuffled|<0.20 |rho_length|<0.20 per-stratum, verification AUROC>=0.75 precision>=0.80 false_accept<=0.10 UNKNOWN>=0.85 ECE<=0.15) demonstrate dominance vs RAG-EMBED TAU0.30/QCR k5, Stagehand 2x/~30% cache, and DSM/SGDR/AWM (saving>=25% vs COLD at f=10, correlated probe saving>=30% vs seeded-42 random 0.53, per_hit superseded 1.005>0.85) on health-gated single-node before any distributed n>=800 authorization, with safety CuP non-inferior?",
+      "audit_status": "PASS",
+      "decision": "MEASUREMENT_INVALID",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/product",
+      "source_ref_head": "1973aba861c0e1f00e19ebd4b8356959e0419760",
+      "source_commit": "1973aba861c0e1f00e19ebd4b8356959e0419760",
+      "hashes": {
+        "request.json": "0e85730156f4bcd27267d92afccc3a1915848e0fbdef716cf1a7a6d88c08f5e4",
+        "spec.json": "cf7dfd22720899c72ee176fa6a8b47defacc6e1ab006f654489394080ec5fabd",
+        "prereg.md": "c765d738e3a735c9f35a34715ff1db396009ff9fa0a32c376470646e06eb5e1d",
+        "freeze.json": "1c551559ed450b3b458394550ee5974a424dd783bf07e8531d392864114c1aa6",
+        "result.json": "bedaefd840b5b9a27748bb40aca5f999fa6004fdaf938bca3f5933934fa176d3",
+        "report.md": "b3fe8b874a487a8e9981559090722ba78f0abab41dbddc4b6ee184a3ea53dd00",
+        "provenance.json": "e3f33af86b5c3f4468e97b724af90ca5bcc3fe524032179a2e261ce57452d374",
+        "audit.json": "47f1a30d525111c190cc834d5980d07a0bd417284227eeb7612d39bde9cd0c10",
+        "verdict.json": "bdc73a38835db1c4292e9d406e6d833c0a24150c9e25f61eef1485cc268be32d",
+        "handoff.json": "956f99663962a63f073020d431fdf0a38d57a7c75714eb1271a3a4c169023ce8"
       }
     }
   }

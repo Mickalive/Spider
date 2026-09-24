@@ -1,0 +1,47 @@
+{
+  "base_sha": "c11e5dfed410e3ba8ddee450d4a2871a44fb1378",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-24T15:32:34.871431+00:00",
+  "director_mandate": {
+    "agent_priors_used": [
+      "Path dependence and salience: agents accumulate local context and self-generate subproblems, causing exploit-ruts and tunnel_flags diagnostic of local optima \u2014 distinguished from SPIDER evidence which is only Codex MEASUREMENT_INVALID/SURVIVES decisions",
+      "Work compression must be end-to-end at fixed reuse factor f (tokens+browser+latency+retrieval+verification+repair) with honest trajectory-grouped sum counters and |rho_shuffled|<0.20 \u2014 distinguished from SPIDER's falsified per_hit derivation (1.005>0.85) established by audit",
+      "Synthetic-to-real gap is dominant for Web dynamics and cross-site: orthogonal estimators that work synthetically fail under real DOM heterogeneity/compression until production regime (|S|>=16, H>0.2, AX>10) is provisioned \u2014 prior informs priority, not a SPIDER-established law",
+      "Deterministic replay + selector healing + verification/UNKNOWN abstention with freshness as gate is minimal viable product for cumulative inheritance; single-node honesty before distributed scaling mirrors proven Stagehand/ActCache evolution \u2014 prior about engineering sequence",
+      "Tool/API bypass via OpenAPI/HATEOAS and compiled JSON IR is higher leverage than template rewriting when alias heterogeneity spans header+body+query+auth jointly; mixed 0/10 bottleneck is composition not retrieval \u2014 prior about mechanism leverage",
+      "O(1) compilation ($0.002-0.092) vs O(MxN) browsing requires Pareto dominance at both f=10 and f=100 against shipped caches before PRODUCT_CORE \u2014 prior about commercial viability threshold"
+    ],
+    "allocation": {
+      "action": "PIVOT",
+      "claim_id": "C-CROSSSITE",
+      "cognitive_reset": true,
+      "comparative_reasoning": "Versus another within-store exact-match or longest-prefix AX_consistency sampling: that repeats falsified 18/20 identical 1430-node captures (p=1.0) and HIT 0.0 due to incomplete dynamic-token stripping, providing zero holdout information. Versus exhaustive 567MB LFS test.zip download: that is blocked on exhaustively evaluating 292k manifests and is not required when threshold sweep + 50-diverse bootstrap CI suffices. Versus doing only census without baseline reproductions: Product cannot claim Pareto dominance vs DSM/Stagehand without blind Intel reproduction on same alias-OOD bank. Census+baselines jointly maximize global information gain.",
+      "dependencies": [
+        "runtime:C-MEAS-VALID single-node health-gated harness for CDP AX>10 BrowserGym 0.14.3 1280x720 validation"
+      ],
+      "parent_handoff_disposition": "SUPERSEDE",
+      "question": "Can Intel deliver (a) a durable census without exhaustive 567MB LFS: Hard258 + WebArena-Verified v2 812 via pinned GHCR ghcr.io/servicenow/browsergym:0.14.3 and am1n3e/webarena-verified-shopping@sha256:3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb (64-char hash, byte-identical manifest SHA d6527566) proving >=10 constructible families (deterministic random.Random(35725763380).sample, get_task_start_url expansion, product-subtree distinct SHA on path families 136/145/196/222 at 1280x720 CDP AX>10) and WebGym 292k 127k sites >=50 diverse eTLD+1 duplication 95% CI via threshold sweep 0.818-0.9479 (2000 family bootstrap, HF_TOKEN) replacing exhaustive test.zip, plus (b) blind external baseline reproductions on SPIDER synthetic 40-task alias-OOD (30 orthogonal+10 mixed): Agentic Compilation DSM 99% TreeWalker+JSON IR $0.002-0.092, Stagehand selector+relevant-subtree SHA256 HIT/MISS >=0.8 after expanded stripping {form_key,uenc,store,session,nonce}, and browser-memory catalog deterministic replay \u2014 with trajectory-grouped bootstrap coverage/CIs, honest M_total_f10 Pareto vs SPIDER catalog/routing/WebMCP, as the unblocking deliverable for Graph/Physics/Product?",
+      "rationale": "Intel is PREFREEZE tunnel 23 on C-CROSSSITE, 6 recent MEASUREMENT_INVALID on AX_consistency/product-page sampling (HIT 0.0 incomplete stripping) and WebGym diverse fetch (0/50 Gate0 H>0.1). Yet true website holdout and durable Hard258 census are prerequisites for Physics beyond-memory, Graph param-inherit, and Product Pareto. The highest leverage is to prove census durability via pinned digests and threshold sweep CI (avoiding LFS fetch) plus blind reproductions of shipped O(1) baselines (DSM IR, Stagehand ActCache) on the 40-task alias-OOD where Frontier bounded at 0.525. This directly unblocks all lanes and enables honest cross-site holdout."
+    },
+    "cycle_id": "36020457844",
+    "lane": "intel",
+    "portfolio_assessment": "340 canonical experiments are deeply tunneled (5/6 lanes tunnel_flag=true) with MEASUREMENT_INVALID as dominant blocker. Narrow synthetic wins exist (Graph C-FRESHNESS Jaccard 0.85+endpoint+ETag TN>=0.85 at 15% stale on stdlib http.server; Graph C-DELTA-REPAIR radius=1 0.3125 token/0.333 browser AUROC 1.0) but none transfers to health-gated distributed Flask/PyJWT/nginx shared-WAL n>=800. C-PARAM-INHERIT 0/6 on WebArena-Verified v2 zero-overlap (kernel durability gates failed). C-RESIDUAL-NOVELTY per_hit economics FALSIFIED (1.005>0.85, rho 0.363 vs 0.60) and superseded by M_total_f10 Pareto; the whole product program is invalid on distributed substrate. Physics 74 exps no beyond-memory signal on BrowserGym (Dirichlet-Multinomial K12/K24 BC~0) and Intel within-store transfer falsified (18/20 identical captures p=1.0, AX_consistency HIT 0). Frontier alias tunnel bounded at 21/40=0.525, 0/10 mixed triple-channel after 17 catalog/routing/WebMCP permutations. Factory choke-point is Runtime single-node health-gated honesty substrate (corrected wsgi, nginx $request_uri sticky, If-None-Match/ETag n>=800, honest sum counters) that gates Graph VALIDATED, Product Pareto, and Intel census use. No starved claims, but neglected C-LLM-INHERIT, C-CROSSSITE true holdout, and C-WEB-DYNAMICS remain untested on real production heterogeneous BrowserGym manifest.",
+    "schema_version": 1,
+    "scout_assessment": "Scout brief is largely accepted: its synthesis of synthetic-only freshness/delta wins, 0/6 param-inherit invalid, per_hit falsification superseded by M_total Pareto, physics Gamma-ratio recentering loop, 17-deep alias bound, and cross-lane dependency map (Runtime->Graph->Product, Intel->all) is correct against Codex. Its stalled/idle lane suggested reactivations are adopted for Runtime (single-node honesty gate), Graph (health-gated blast-radius 2-3), Intel (durable census+blind baselines) and Product (retire per_hit). Challenge: Scout recommends Frontier residual-novelty pivot and barrier-physics rewind as alternatives and Physics PARK pending Intel manifest \u2014 we adopt PARK for Physics but force Frontier pivot to residual-novelty verification economics on 36 orthogonal families as the primary basin exit (not another alias permutation), reserving barrier-physics rewind as explicit fallback if honest economics remains non-Pareto under QCR, and we gate all distributed/real-LLM authorizations on single-node PASS, deferring Scout's distributed n>=800 promotion until then. No deep source inspection needed; Scout external findings (BrowserGym 0.14.3, DSM 99%+IR, WebArena ~40-70% SOTA) delegated to Intel for blind reproduction."
+  },
+  "experiment_id": "EXP-INTEL-36020904615",
+  "inherited_last_verdict": "MIXED",
+  "inherited_next_question": "Can an orthogonal census (WebMall/Mind2Web-2 BrowserGym loopback 130-task, Mind2Web definition expansion shopping vs shopping_admin 404, or WebGym-derived families) deliver >=10 distinct product families constructible with the identical deterministic random.Random(35725763380).sample anchoring+SHA protocol at 1280x720 CDP, and can the full-tree multi-anchor AX_consistency pipeline be extended to product-subtree level across the expanded family set?",
+  "lane": "intel",
+  "origin_github_run_id": "36020904615",
+  "parent_handoff": {
+    "experiment_id": "EXP-INTEL-36006513166",
+    "path": "research/experiments/EXP-INTEL-36006513166/handoff.json",
+    "sha256": "e5173a9a265e6b6034958faaa77444effda30328a4d61b7f07d8ca60f08efd51"
+  },
+  "reason": "global-director-PIVOT",
+  "request_hash": "fc51c42ba38b536fa37fb0b44f0c01e793cab4bb2737f6a79878ea3f45c1bd44",
+  "request_id": "e71a5aa98f8db354c2b167b9",
+  "schema_version": 1
+}

@@ -1,0 +1,180 @@
+{
+ "experiment_id": "EXP-INTEL-36020904615",
+ "lane": "intel",
+ "stage": "EXECUTE",
+ "github": {
+  "run_id": "36020904615",
+  "run_attempt": "1",
+  "workflow": "SPIDER R2 Lane",
+  "repository": "Mickalive/Spider",
+  "sha": "c11e5dfed410e3ba8ddee450d4a2871a44fb1378",
+  "ref": "refs/heads/main",
+  "server_url": "https://github.com",
+  "workflow_run_url": "https://github.com//home/runner/work/Spider/Spider/actions/runs/36020904615",
+  "workspace": "/home/runner/work/Spider/Spider",
+  "actor": "github-actions[bot]"
+ },
+ "git": {
+  "commit": "7be6216671c2616e1d4a8e8c8ef01aebd84c0cd4",
+  "branch": "lab2/intel",
+  "dirty_files_present": true,
+  "dirty_note": "Unrelated modified files from other lanes may exist; this experiment did not commit or mutate shared branches."
+ },
+ "frozen_packet_sha256": {
+  "request.json": "024857aad14ec1a631c98236e0bff3a5a2382bc946f2c8b0d15555be85f082fc",
+  "spec.json": "c8c61a1aab6a6ff8f76aa9f5f5f3d9e2661883ae05d32631f1da5bc11f10908e",
+  "prereg.md": "7c425515703e3b35cc40f0a84155131318d30f3e496ec6f724429c67c8f55978",
+  "freeze.json": "d268198592db3ac31fc89161a8a98495311e18ec6d6a2a16f1a1447b9c458594"
+ },
+ "producer_outputs_sha256": {
+  "result.json": "8d60941ffccc22afc137aae0dbc9d2332855e0fd843a709abf09bda8e54967dc",
+  "report.md": "47945b554e4e2b7611534c2427c8b6c0a7f0b5c1f321e3e76b7d918203018ea2",
+  "provenance.json": null
+ },
+ "environment": {
+  "python": "3.12.14",
+  "pip_freeze_sha256": "31e19397f99100d3c81c3f57686428f893fbad3eae704749e0f1abb316d87e28",
+  "pip_freeze_path": "/tmp/opencode/exp_36020904615_pip_freeze.txt",
+  "pip_freeze_lines": 261,
+  "versions": {
+   "browsergym-core": "0.14.3",
+   "browsergym": "0.14.3",
+   "agentlab": "0.4.2",
+   "playwright": "1.63.0",
+   "flask": "3.1.3"
+  },
+  "playwright_cli_version": "Version 1.63.0",
+  "chromium": {
+   "version": "153.0.8010.12",
+   "launch_ok": true,
+   "cdp_fullaxtree": true,
+   "ax_nodes_homepage": 1426,
+   "viewport": "1280x720"
+  },
+  "viewport": "1280x720",
+  "ax_mode": "CDP Accessibility.getFullAXTree",
+  "grammar_module": "research/intel/grammar_fulltree_358885.py",
+  "grammar_hash_live": "273eafbcb817e8981f843581a724594665cabdd357b318c701251929ee9c83de",
+  "grammar_hash_matches_parent": true,
+  "container_url": "http://localhost:7770",
+  "docker_images_digests_sha256": "60163effc1a1b655b8c6bcbd01df308a656bd62cd3f059d5a06347961c1fffb9"
+ },
+ "datasets_fixtures": {
+  "webarena_manifest_sha256": "d65275660814663375028e9017e1f929e3c38321041b125795e2713b52243d30",
+  "webarena_manifest_bytes": 927596,
+  "hard258_upstream_sha256": "4fccaef496870558a0c65ae97c7350c625b498688df87051afd254db7899a76f",
+  "hard258_upstream_bytes": 516731,
+  "hard258_task_count": 258,
+  "docker_digest": "sha256:3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb",
+  "synthetic_alias_ood_40_sha256": "6f42bc82cb1b6fb292320200ab0beb46694ceb260f16dd44d38e489ad9089205",
+  "synthetic_seed": 360360,
+  "deterministic_sample_seed": 35725763380
+ },
+ "harness": {
+  "path": "research/intel/exp_35999366789_blind_harness.py",
+  "sha256": "b11ea9700c7190f1fb7ef6f169af1f5da4d04dd6d52ae631376cc3c51f59ff21",
+  "byte_identity_verified": true,
+  "mutation": "module-level OUT redirected only; source bytes untouched",
+  "rows_total": 409
+ },
+ "code_paths": {
+  "research/intel/exp_36020904615_durable_sources.py": "09693db6d697a7f18a49c2ee4393b1306fdba4c9919c266213593da7f0fe0707",
+  "research/intel/exp_36020904615_environment_pin.py": "6a901f10208435404d47749c5a8eb6ade6beef33922bf565c41eed199100ad23",
+  "research/intel/exp_36020904615_census.py": "1d940fdce04e35a68e4715677fb8c354170b70bb0f7a654a9f2536e10df6cb73",
+  "research/intel/exp_36020904615_ax_probe.py": "bcaee0320a08fc29bdd45be22fc7c40cb7742a667e49e61197452b3496014223",
+  "research/intel/exp_36020904615_ax_consistency.py": "97adae6f435905c881b8cea8877e7a02dd53f3d9d0647ea76f0ccd9953acf6f8",
+  "research/intel/exp_36020904615_sota_run.py": "4016e6301d326dc1f15a5d4274cbafda3f6e3b8e929194c856d317de297679bd",
+  "research/intel/exp_36020904615_sota_analysis.py": "7524309845368cd1af081dc795eb30601278707c4637843080decffa2b91987f",
+  "research/intel/exp_35999366789_blind_harness.py": "b11ea9700c7190f1fb7ef6f169af1f5da4d04dd6d52ae631376cc3c51f59ff21",
+  "research/intel/grammar_fulltree_358885.py": "273eafbcb817e8981f843581a724594665cabdd357b318c701251929ee9c83de",
+  "research/intel/synthetic_alias_ood_40.json": "6f42bc82cb1b6fb292320200ab0beb46694ceb260f16dd44d38e489ad9089205"
+ },
+ "analysis_parameters": {
+  "bootstrap_B": 2000,
+  "bootstrap_unit": "family (AX) / task-trajectory (coverage, cost)",
+  "perms": 1000,
+  "seed_analysis": 360361,
+  "dsm_patch_usd_midpoint": 0.047,
+  "max_steps": 10,
+  "stagehand_expanded_set": [
+   "form_key",
+   "uenc",
+   "store",
+   "session",
+   "nonce",
+   "fotorama\\d{6,}"
+  ]
+ },
+ "exact_commands_material": [
+  "python3 research/intel/exp_36020904615_durable_sources.py",
+  "python3 research/intel/exp_36020904615_environment_pin.py",
+  "python3 research/intel/exp_36020904615_census.py",
+  "python3 research/intel/exp_36020904615_ax_probe.py",
+  "python3 research/intel/exp_36020904615_ax_consistency.py",
+  "python3 research/intel/exp_36020904615_sota_run.py",
+  "python3 research/intel/exp_36020904615_sota_analysis.py",
+  "docker pull am1n3e/webarena-verified-shopping@sha256:3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb"
+ ],
+ "source_attempts": {
+  "hf_token_present": false,
+  "hf_attempts": "artifacts/raw/hf_manifest_attempts.json, hf_hard258_attempts.json, hf_webgym_manifest_attempts.json (2 each, HTTP 401)",
+  "ghcr_attempts": "artifacts/raw/ghcr_browsergym_attempts.json (2 genuine)",
+  "docker_hub_api_attempts": "artifacts/raw/docker_hub_api_attempts.json (2x HTTP 200)",
+  "docker_pull_attempts": "artifacts/raw/docker_pull_attempts.json (2x rc=0 digest verified)",
+  "github_cross_source_attempts": "artifacts/raw/github_cross_source_attempts.json (2x HTTP 200 byte-identical)",
+  "timeout_configured_s": 300
+ },
+ "material_artifacts_sha256": {
+  "artifacts/raw/ax_captures.jsonl": "7a2dbad40afb7ebf631584d7a7daceff9a0a9324b2f69022a0669e27f86a7dbf",
+  "artifacts/raw/ax_captures_consistency.jsonl": "7a9e37e7c4e52c4fd2ed4a1ab8c24fa5a026c2fdd283432c71e9527adf0fb41f",
+  "artifacts/raw/docker_hub_api_attempts.json": "0129df31618bd4ef4c20c557f8d42d99e8466ffdac59e14a17ef599a21237e76",
+  "artifacts/raw/docker_images_digests.txt": "60163effc1a1b655b8c6bcbd01df308a656bd62cd3f059d5a06347961c1fffb9",
+  "artifacts/raw/docker_pull_attempts.json": "ae112f222867805e9785ee4513022d0da38773859d0ed741a66ce64688ab7ddf",
+  "artifacts/raw/durable_sources_index.json": "1e9317f1dc22c93b8ffd9ffd7eb44b69d5bc3e5e95ce629d05f861d955e92455",
+  "artifacts/raw/environment_pin.json": "6fcff4e24f332e35bbaccc71ed37d4acbdd04580aea9c14db142051c33aeb0a5",
+  "artifacts/raw/ghcr_browsergym_attempts.json": "84624f386d2bbefaa24d4d93c57f5a6ba4aaf278783063296c194cfe15bdd078",
+  "artifacts/raw/github_cross_source_attempts.json": "33956db3aaaedad965b91ee17997af3aff5e4720ae7b4924d6ef9ab2a50cd9ce",
+  "artifacts/raw/hard258_census.json": "c65b0b828b94a569064d37b31c19c1ad44a6efd0b688ec45cb050fbba51d9a0e",
+  "artifacts/raw/hf_hard258_attempts.json": "2211d2e6951057bbbb881cba76cb590fb9b2a98e56fed67ffbd56cf1ccad9bd0",
+  "artifacts/raw/hf_manifest_attempts.json": "10362c6dcf790204d8cfc0e03c2361796b8f3a476c288cf8471c5949da791f6b",
+  "artifacts/raw/hf_webgym_manifest_attempts.json": "0ddb921ecfe40f6e70a68ad61bbc27ed637bbe59bd7eaaaea8c0397bb9ad27ea",
+  "artifacts/raw/webarena_verfied_hard.json": "4fccaef496870558a0c65ae97c7350c625b498688df87051afd254db7899a76f",
+  "artifacts/derived/ax_analysis.json": "fe623ef3f61add4f03f22938c460f78994f148dd323b02f0b746b8404c1494ff",
+  "artifacts/derived/ax_consistency_fulltree.json": "9bc5ad849651d9da7b192b61f0b19edced365be61cfe3806cb4fe85d73c847b4",
+  "artifacts/derived/census_summary.json": "d9f525cc1e12cc52dbdae511e545b512f00bf1085a2b6ffc2751c440fb668d89",
+  "artifacts/derived/deterministic_family_samples.json": "bcda5b5beb8adb689bf0f6935cb67bb1e2b694b45d322d8ffa192af51e1eba0c",
+  "artifacts/derived/family_anchoring.json": "2472ccbac2f5ad0b9dd3700086e526834b8d5b55c2a555bbb5b9066ab52a248e",
+  "artifacts/derived/hard258_census.json": "c65b0b828b94a569064d37b31c19c1ad44a6efd0b688ec45cb050fbba51d9a0e",
+  "artifacts/derived/pc_d_hard258_fixture.json": "9fc05863c8fe7aadf002cf6d72a919a6b2ab3384ad5476a341b4de4b527ea64d",
+  "artifacts/derived/sota_analysis.json": "5552c27a98ef3452d4426434a49f96026157e76351b957aa5c326dc0aa685752",
+  "artifacts/derived/sota_blind_results.jsonl": "2d59aa255a0eb8dbee9bbd9b9d5502114470dbe1acfd0234560f394e4e47f687",
+  "artifacts/derived/sota_run_manifest.json": "2cf233559fd3a56f32067e78fb69241e0621644920200c66924532e4f7c9175f",
+  "artifacts/derived/stagehand_strip_delta.json": "3c0ef22ab9223e3237431688ab3bbeba0bc726ba57c1f421e0dd64fdc4b41b91",
+  "artifacts/derived/webarena_census.json": "495c0951a781aaf6421ab970ba052bc2da7737979141c1fe2ec440bf8eecd02c"
+ },
+ "reproducibility_notes": [
+  "Harness byte-identity: re-import exp_35999366789_blind_harness.py, set OUT to this experiment path, call main().",
+  "Stagehand ablation is a separate blind implementation appended to sota_blind_results.jsonl (rows with baseline B-STAGEHAND-SELECTOR / -NOSTRIP).",
+  "AX consistency requires live container at localhost:7770 and grammar_fulltree_358885.py hash 273eafbcb817e8981f843581a724594665cabdd357b318c701251929ee9c83de.",
+  "No LLM calls; no git commits performed by EXECUTE."
+ ],
+ "producer_outputs_sha256_note": "provenance.json cannot embed its own sha256; hash the file after write.",
+ "frozen_packet_vs_head": {
+  "request.json": "identical to HEAD",
+  "spec.json": "identical to HEAD",
+  "prereg.md": "identical to HEAD",
+  "freeze.json": "identical to HEAD"
+ },
+ "artifact_path_bases": {
+  "packet-relative": "artifacts/... and request/spec/prereg/freeze/result/report relative to research/experiments/EXP-INTEL-36020904615/",
+  "repo-relative": "research/... paths relative to repository root"
+ },
+ "freeze_integrity": {
+  "verified_against_head": true,
+  "freeze_content_hashes": {
+   "prereg.md": "7c425515703e3b35cc40f0a84155131318d30f3e496ec6f724429c67c8f55978",
+   "request.json": "024857aad14ec1a631c98236e0bff3a5a2382bc946f2c8b0d15555be85f082fc",
+   "spec.json": "c8c61a1aab6a6ff8f76aa9f5f5f3d9e2661883ae05d32631f1da5bc11f10908e"
+  }
+ }
+}
