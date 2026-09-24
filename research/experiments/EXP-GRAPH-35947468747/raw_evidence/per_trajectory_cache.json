@@ -1,0 +1,1712 @@
+{
+  "dom_drift-0": {
+    "dom": [
+      [
+        "email",
+        "string"
+      ],
+      [
+        "id",
+        "integer"
+      ],
+      [
+        "name",
+        "string"
+      ]
+    ],
+    "dom_required": [
+      [
+        "email",
+        "string"
+      ],
+      [
+        "id",
+        "integer"
+      ],
+      [
+        "name",
+        "string"
+      ]
+    ],
+    "headers": {
+      "Cache-Control": "max-age=60",
+      "ETag": "c81d3183de359310",
+      "X-Csrf-Token": "token-abc123"
+    },
+    "endpoint_template": {
+      "path": "/resource/{id}",
+      "query_params": [
+        "detail"
+      ],
+      "header_names": [
+        "X-Csrf-Token"
+      ]
+    },
+    "etag": "c81d3183de359310",
+    "csrf_value": "token-abc123",
+    "param_names": [
+      "detail"
+    ],
+    "observed_count": 3
+  },
+  "dom_drift-1": {
+    "dom": [
+      [
+        "email",
+        "string"
+      ],
+      [
+        "id",
+        "integer"
+      ],
+      [
+        "name",
+        "string"
+      ]
+    ],
+    "dom_required": [
+      [
+        "email",
+        "string"
+      ],
+      [
+        "id",
+        "integer"
+      ],
+      [
+        "name",
+        "string"
+      ]
+    ],
+    "headers": {
+      "Cache-Control": "max-age=60",
+      "ETag": "908bd7d8951ff8f1",
+      "X-Csrf-Token": "token-abc123"
+    },
+    "endpoint_template": {
+      "path": "/resource/{id}",
+      "query_params": [
+        "detail"
+      ],
+      "header_names": [
+        "X-Csrf-Token"
+      ]
+    },
+    "etag": "908bd7d8951ff8f1",
+    "csrf_value": "token-abc123",
+    "param_names": [
+      "detail"
+    ],
+    "observed_count": 3
+  },
+  "param_header_mutation-0": {
+    "dom": [
+      [
+        "email",
+        "string"
+      ],
+      [
+        "id",
+        "integer"
+      ],
+      [
+        "name",
+        "string"
+      ]
+    ],
+    "dom_required": [
+      [
+        "email",
+        "string"
+      ],
+      [
+        "id",
+        "integer"
+      ],
+      [
+        "name",
+        "string"
+      ]
+    ],
+    "headers": {
+      "Cache-Control": "max-age=60",
+      "ETag": "c81d3183de359310",
+      "X-Csrf-Token": "token-abc123"
+    },
+    "endpoint_template": {
+      "path": "/resource/{id}",
+      "query_params": [
+        "detail"
+      ],
+      "header_names": [
+        "X-Csrf-Token"
+      ]
+    },
+    "etag": "c81d3183de359310",
+    "csrf_value": "token-abc123",
+    "param_names": [
+      "detail"
+    ],
+    "observed_count": 3
+  },
+  "param_header_mutation-1": {
+    "dom": [
+      [
+        "email",
+        "string"
+      ],
+      [
+        "id",
+        "integer"
+      ],
+      [
+        "name",
+        "string"
+      ]
+    ],
+    "dom_required": [
+      [
+        "email",
+        "string"
+      ],
+      [
+        "id",
+        "integer"
+      ],
+      [
+        "name",
+        "string"
+      ]
+    ],
+    "headers": {
+      "Cache-Control": "max-age=60",
+      "ETag": "908bd7d8951ff8f1",
+      "X-Csrf-Token": "token-abc123"
+    },
+    "endpoint_template": {
+      "path": "/resource/{id}",
+      "query_params": [
+        "detail"
+      ],
+      "header_names": [
+        "X-Csrf-Token"
+      ]
+    },
+    "etag": "908bd7d8951ff8f1",
+    "csrf_value": "token-abc123",
+    "param_names": [
+      "detail"
+    ],
+    "observed_count": 3
+  },
+  "cache_expiry-0": {
+    "dom": [
+      [
+        "email",
+        "string"
+      ],
+      [
+        "id",
+        "integer"
+      ],
+      [
+        "name",
+        "string"
+      ]
+    ],
+    "dom_required": [
+      [
+        "email",
+        "string"
+      ],
+      [
+        "id",
+        "integer"
+      ],
+      [
+        "name",
+        "string"
+      ]
+    ],
+    "headers": {
+      "Cache-Control": "max-age=60",
+      "ETag": "c81d3183de359310",
+      "X-Csrf-Token": "token-abc123"
+    },
+    "endpoint_template": {
+      "path": "/resource/{id}",
+      "query_params": [
+        "detail"
+      ],
+      "header_names": [
+        "X-Csrf-Token"
+      ]
+    },
+    "etag": "c81d3183de359310",
+    "csrf_value": "token-abc123",
+    "param_names": [
+      "detail"
+    ],
+    "observed_count": 3
+  },
+  "cache_expiry-1": {
+    "dom": [
+      [
+        "email",
+        "string"
+      ],
+      [
+        "id",
+        "integer"
+      ],
+      [
+        "name",
+        "string"
+      ]
+    ],
+    "dom_required": [
+      [
+        "email",
+        "string"
+      ],
+      [
+        "id",
+        "integer"
+      ],
+      [
+        "name",
+        "string"
+      ]
+    ],
+    "headers": {
+      "Cache-Control": "max-age=60",
+      "ETag": "908bd7d8951ff8f1",
+      "X-Csrf-Token": "token-abc123"
+    },
+    "endpoint_template": {
+      "path": "/resource/{id}",
+      "query_params": [
+        "detail"
+      ],
+      "header_names": [
+        "X-Csrf-Token"
+      ]
+    },
+    "etag": "908bd7d8951ff8f1",
+    "csrf_value": "token-abc123",
+    "param_names": [
+      "detail"
+    ],
+    "observed_count": 3
+  },
+  "stable-0": {
+    "dom": [
+      [
+        "email",
+        "string"
+      ],
+      [
+        "id",
+        "integer"
+      ],
+      [
+        "name",
+        "string"
+      ]
+    ],
+    "dom_required": [
+      [
+        "email",
+        "string"
+      ],
+      [
+        "id",
+        "integer"
+      ],
+      [
+        "name",
+        "string"
+      ]
+    ],
+    "headers": {
+      "Cache-Control": "max-age=60",
+      "ETag": "c81d3183de359310",
+      "X-Csrf-Token": "token-abc123"
+    },
+    "endpoint_template": {
+      "path": "/resource/{id}",
+      "query_params": [
+        "detail"
+      ],
+      "header_names": [
+        "X-Csrf-Token"
+      ]
+    },
+    "etag": "c81d3183de359310",
+    "csrf_value": "token-abc123",
+    "param_names": [
+      "detail"
+    ],
+    "observed_count": 3
+  },
+  "stable-1": {
+    "dom": [
+      [
+        "email",
+        "string"
+      ],
+      [
+        "id",
+        "integer"
+      ],
+      [
+        "name",
+        "string"
+      ]
+    ],
+    "dom_required": [
+      [
+        "email",
+        "string"
+      ],
+      [
+        "id",
+        "integer"
+      ],
+      [
+        "name",
+        "string"
+      ]
+    ],
+    "headers": {
+      "Cache-Control": "max-age=60",
+      "ETag": "908bd7d8951ff8f1",
+      "X-Csrf-Token": "token-abc123"
+    },
+    "endpoint_template": {
+      "path": "/resource/{id}",
+      "query_params": [
+        "detail"
+      ],
+      "header_names": [
+        "X-Csrf-Token"
+      ]
+    },
+    "etag": "908bd7d8951ff8f1",
+    "csrf_value": "token-abc123",
+    "param_names": [
+      "detail"
+    ],
+    "observed_count": 3
+  },
+  "stable-2": {
+    "dom": [
+      [
+        "email",
+        "string"
+      ],
+      [
+        "id",
+        "integer"
+      ],
+      [
+        "name",
+        "string"
+      ]
+    ],
+    "dom_required": [
+      [
+        "email",
+        "string"
+      ],
+      [
+        "id",
+        "integer"
+      ],
+      [
+        "name",
+        "string"
+      ]
+    ],
+    "headers": {
+      "Cache-Control": "max-age=60",
+      "ETag": "372c0c33587dab55",
+      "X-Csrf-Token": "token-abc123"
+    },
+    "endpoint_template": {
+      "path": "/resource/{id}",
+      "query_params": [
+        "detail"
+      ],
+      "header_names": [
+        "X-Csrf-Token"
+      ]
+    },
+    "etag": "372c0c33587dab55",
+    "csrf_value": "token-abc123",
+    "param_names": [
+      "detail"
+    ],
+    "observed_count": 3
+  },
+  "stable-3": {
+    "dom": [
+      [
+        "email",
+        "string"
+      ],
+      [
+        "id",
+        "integer"
+      ],
+      [
+        "name",
+        "string"
+      ]
+    ],
+    "dom_required": [
+      [
+        "email",
+        "string"
+      ],
+      [
+        "id",
+        "integer"
+      ],
+      [
+        "name",
+        "string"
+      ]
+    ],
+    "headers": {
+      "Cache-Control": "max-age=60",
+      "ETag": "b2c6d5977f0de487",
+      "X-Csrf-Token": "token-abc123"
+    },
+    "endpoint_template": {
+      "path": "/resource/{id}",
+      "query_params": [
+        "detail"
+      ],
+      "header_names": [
+        "X-Csrf-Token"
+      ]
+    },
+    "etag": "b2c6d5977f0de487",
+    "csrf_value": "token-abc123",
+    "param_names": [
+      "detail"
+    ],
+    "observed_count": 3
+  },
+  "stable-4": {
+    "dom": [
+      [
+        "email",
+        "string"
+      ],
+      [
+        "id",
+        "integer"
+      ],
+      [
+        "name",
+        "string"
+      ]
+    ],
+    "dom_required": [
+      [
+        "email",
+        "string"
+      ],
+      [
+        "id",
+        "integer"
+      ],
+      [
+        "name",
+        "string"
+      ]
+    ],
+    "headers": {
+      "Cache-Control": "max-age=60",
+      "ETag": "25b786e28da27c9b",
+      "X-Csrf-Token": "token-abc123"
+    },
+    "endpoint_template": {
+      "path": "/resource/{id}",
+      "query_params": [
+        "detail"
+      ],
+      "header_names": [
+        "X-Csrf-Token"
+      ]
+    },
+    "etag": "25b786e28da27c9b",
+    "csrf_value": "token-abc123",
+    "param_names": [
+      "detail"
+    ],
+    "observed_count": 3
+  },
+  "stable-5": {
+    "dom": [
+      [
+        "email",
+        "string"
+      ],
+      [
+        "id",
+        "integer"
+      ],
+      [
+        "name",
+        "string"
+      ]
+    ],
+    "dom_required": [
+      [
+        "email",
+        "string"
+      ],
+      [
+        "id",
+        "integer"
+      ],
+      [
+        "name",
+        "string"
+      ]
+    ],
+    "headers": {
+      "Cache-Control": "max-age=60",
+      "ETag": "3d0d2641fb376a3a",
+      "X-Csrf-Token": "token-abc123"
+    },
+    "endpoint_template": {
+      "path": "/resource/{id}",
+      "query_params": [
+        "detail"
+      ],
+      "header_names": [
+        "X-Csrf-Token"
+      ]
+    },
+    "etag": "3d0d2641fb376a3a",
+    "csrf_value": "token-abc123",
+    "param_names": [
+      "detail"
+    ],
+    "observed_count": 3
+  },
+  "stable-6": {
+    "dom": [
+      [
+        "email",
+        "string"
+      ],
+      [
+        "id",
+        "integer"
+      ],
+      [
+        "name",
+        "string"
+      ]
+    ],
+    "dom_required": [
+      [
+        "email",
+        "string"
+      ],
+      [
+        "id",
+        "integer"
+      ],
+      [
+        "name",
+        "string"
+      ]
+    ],
+    "headers": {
+      "Cache-Control": "max-age=60",
+      "ETag": "ba5644ba752c4053",
+      "X-Csrf-Token": "token-abc123"
+    },
+    "endpoint_template": {
+      "path": "/resource/{id}",
+      "query_params": [
+        "detail"
+      ],
+      "header_names": [
+        "X-Csrf-Token"
+      ]
+    },
+    "etag": "ba5644ba752c4053",
+    "csrf_value": "token-abc123",
+    "param_names": [
+      "detail"
+    ],
+    "observed_count": 3
+  },
+  "stable-7": {
+    "dom": [
+      [
+        "email",
+        "string"
+      ],
+      [
+        "id",
+        "integer"
+      ],
+      [
+        "name",
+        "string"
+      ]
+    ],
+    "dom_required": [
+      [
+        "email",
+        "string"
+      ],
+      [
+        "id",
+        "integer"
+      ],
+      [
+        "name",
+        "string"
+      ]
+    ],
+    "headers": {
+      "Cache-Control": "max-age=60",
+      "ETag": "b2c52e5bec948050",
+      "X-Csrf-Token": "token-abc123"
+    },
+    "endpoint_template": {
+      "path": "/resource/{id}",
+      "query_params": [
+        "detail"
+      ],
+      "header_names": [
+        "X-Csrf-Token"
+      ]
+    },
+    "etag": "b2c52e5bec948050",
+    "csrf_value": "token-abc123",
+    "param_names": [
+      "detail"
+    ],
+    "observed_count": 3
+  },
+  "stable-8": {
+    "dom": [
+      [
+        "email",
+        "string"
+      ],
+      [
+        "id",
+        "integer"
+      ],
+      [
+        "name",
+        "string"
+      ]
+    ],
+    "dom_required": [
+      [
+        "email",
+        "string"
+      ],
+      [
+        "id",
+        "integer"
+      ],
+      [
+        "name",
+        "string"
+      ]
+    ],
+    "headers": {
+      "Cache-Control": "max-age=60",
+      "ETag": "ea041f4774540f9c",
+      "X-Csrf-Token": "token-abc123"
+    },
+    "endpoint_template": {
+      "path": "/resource/{id}",
+      "query_params": [
+        "detail"
+      ],
+      "header_names": [
+        "X-Csrf-Token"
+      ]
+    },
+    "etag": "ea041f4774540f9c",
+    "csrf_value": "token-abc123",
+    "param_names": [
+      "detail"
+    ],
+    "observed_count": 3
+  },
+  "stable-9": {
+    "dom": [
+      [
+        "email",
+        "string"
+      ],
+      [
+        "id",
+        "integer"
+      ],
+      [
+        "name",
+        "string"
+      ]
+    ],
+    "dom_required": [
+      [
+        "email",
+        "string"
+      ],
+      [
+        "id",
+        "integer"
+      ],
+      [
+        "name",
+        "string"
+      ]
+    ],
+    "headers": {
+      "Cache-Control": "max-age=60",
+      "ETag": "5332989043bdae94",
+      "X-Csrf-Token": "token-abc123"
+    },
+    "endpoint_template": {
+      "path": "/resource/{id}",
+      "query_params": [
+        "detail"
+      ],
+      "header_names": [
+        "X-Csrf-Token"
+      ]
+    },
+    "etag": "5332989043bdae94",
+    "csrf_value": "token-abc123",
+    "param_names": [
+      "detail"
+    ],
+    "observed_count": 3
+  },
+  "stable-10": {
+    "dom": [
+      [
+        "email",
+        "string"
+      ],
+      [
+        "id",
+        "integer"
+      ],
+      [
+        "name",
+        "string"
+      ]
+    ],
+    "dom_required": [
+      [
+        "email",
+        "string"
+      ],
+      [
+        "id",
+        "integer"
+      ],
+      [
+        "name",
+        "string"
+      ]
+    ],
+    "headers": {
+      "Cache-Control": "max-age=60",
+      "ETag": "d3193c82590fe6c4",
+      "X-Csrf-Token": "token-abc123"
+    },
+    "endpoint_template": {
+      "path": "/resource/{id}",
+      "query_params": [
+        "detail"
+      ],
+      "header_names": [
+        "X-Csrf-Token"
+      ]
+    },
+    "etag": "d3193c82590fe6c4",
+    "csrf_value": "token-abc123",
+    "param_names": [
+      "detail"
+    ],
+    "observed_count": 3
+  },
+  "stable-11": {
+    "dom": [
+      [
+        "email",
+        "string"
+      ],
+      [
+        "id",
+        "integer"
+      ],
+      [
+        "name",
+        "string"
+      ]
+    ],
+    "dom_required": [
+      [
+        "email",
+        "string"
+      ],
+      [
+        "id",
+        "integer"
+      ],
+      [
+        "name",
+        "string"
+      ]
+    ],
+    "headers": {
+      "Cache-Control": "max-age=60",
+      "ETag": "9c0d80e7e530fc02",
+      "X-Csrf-Token": "token-abc123"
+    },
+    "endpoint_template": {
+      "path": "/resource/{id}",
+      "query_params": [
+        "detail"
+      ],
+      "header_names": [
+        "X-Csrf-Token"
+      ]
+    },
+    "etag": "9c0d80e7e530fc02",
+    "csrf_value": "token-abc123",
+    "param_names": [
+      "detail"
+    ],
+    "observed_count": 3
+  },
+  "noise_A_phone-0": {
+    "dom": [
+      [
+        "email",
+        "string"
+      ],
+      [
+        "id",
+        "integer"
+      ],
+      [
+        "name",
+        "string"
+      ],
+      [
+        "phone",
+        "string"
+      ]
+    ],
+    "dom_required": [
+      [
+        "email",
+        "string"
+      ],
+      [
+        "id",
+        "integer"
+      ],
+      [
+        "name",
+        "string"
+      ]
+    ],
+    "headers": {
+      "Cache-Control": "max-age=60",
+      "ETag": "7ae7259f2fb2d9e6",
+      "X-Csrf-Token": "token-abc123"
+    },
+    "endpoint_template": {
+      "path": "/resource/{id}",
+      "query_params": [
+        "detail"
+      ],
+      "header_names": [
+        "X-Csrf-Token"
+      ]
+    },
+    "etag": "7ae7259f2fb2d9e6",
+    "csrf_value": "token-abc123",
+    "param_names": [
+      "detail"
+    ],
+    "observed_count": 3
+  },
+  "noise_A_phone-1": {
+    "dom": [
+      [
+        "email",
+        "string"
+      ],
+      [
+        "id",
+        "integer"
+      ],
+      [
+        "name",
+        "string"
+      ],
+      [
+        "phone",
+        "string"
+      ]
+    ],
+    "dom_required": [
+      [
+        "email",
+        "string"
+      ],
+      [
+        "id",
+        "integer"
+      ],
+      [
+        "name",
+        "string"
+      ]
+    ],
+    "headers": {
+      "Cache-Control": "max-age=60",
+      "ETag": "6ac35db3950787ae",
+      "X-Csrf-Token": "token-abc123"
+    },
+    "endpoint_template": {
+      "path": "/resource/{id}",
+      "query_params": [
+        "detail"
+      ],
+      "header_names": [
+        "X-Csrf-Token"
+      ]
+    },
+    "etag": "6ac35db3950787ae",
+    "csrf_value": "token-abc123",
+    "param_names": [
+      "detail"
+    ],
+    "observed_count": 3
+  },
+  "noise_A_phone-2": {
+    "dom": [
+      [
+        "email",
+        "string"
+      ],
+      [
+        "id",
+        "integer"
+      ],
+      [
+        "name",
+        "string"
+      ],
+      [
+        "phone",
+        "string"
+      ]
+    ],
+    "dom_required": [
+      [
+        "email",
+        "string"
+      ],
+      [
+        "id",
+        "integer"
+      ],
+      [
+        "name",
+        "string"
+      ]
+    ],
+    "headers": {
+      "Cache-Control": "max-age=60",
+      "ETag": "4652a1d89946975b",
+      "X-Csrf-Token": "token-abc123"
+    },
+    "endpoint_template": {
+      "path": "/resource/{id}",
+      "query_params": [
+        "detail"
+      ],
+      "header_names": [
+        "X-Csrf-Token"
+      ]
+    },
+    "etag": "4652a1d89946975b",
+    "csrf_value": "token-abc123",
+    "param_names": [
+      "detail"
+    ],
+    "observed_count": 3
+  },
+  "noise_A_phone-3": {
+    "dom": [
+      [
+        "email",
+        "string"
+      ],
+      [
+        "id",
+        "integer"
+      ],
+      [
+        "name",
+        "string"
+      ],
+      [
+        "phone",
+        "string"
+      ]
+    ],
+    "dom_required": [
+      [
+        "email",
+        "string"
+      ],
+      [
+        "id",
+        "integer"
+      ],
+      [
+        "name",
+        "string"
+      ]
+    ],
+    "headers": {
+      "Cache-Control": "max-age=60",
+      "ETag": "1f13ac272f305c64",
+      "X-Csrf-Token": "token-abc123"
+    },
+    "endpoint_template": {
+      "path": "/resource/{id}",
+      "query_params": [
+        "detail"
+      ],
+      "header_names": [
+        "X-Csrf-Token"
+      ]
+    },
+    "etag": "1f13ac272f305c64",
+    "csrf_value": "token-abc123",
+    "param_names": [
+      "detail"
+    ],
+    "observed_count": 3
+  },
+  "noise_A_phone-4": {
+    "dom": [
+      [
+        "email",
+        "string"
+      ],
+      [
+        "id",
+        "integer"
+      ],
+      [
+        "name",
+        "string"
+      ],
+      [
+        "phone",
+        "string"
+      ]
+    ],
+    "dom_required": [
+      [
+        "email",
+        "string"
+      ],
+      [
+        "id",
+        "integer"
+      ],
+      [
+        "name",
+        "string"
+      ]
+    ],
+    "headers": {
+      "Cache-Control": "max-age=60",
+      "ETag": "b2587ab5d4ba59b8",
+      "X-Csrf-Token": "token-abc123"
+    },
+    "endpoint_template": {
+      "path": "/resource/{id}",
+      "query_params": [
+        "detail"
+      ],
+      "header_names": [
+        "X-Csrf-Token"
+      ]
+    },
+    "etag": "b2587ab5d4ba59b8",
+    "csrf_value": "token-abc123",
+    "param_names": [
+      "detail"
+    ],
+    "observed_count": 3
+  },
+  "noise_B_nickname-0": {
+    "dom": [
+      [
+        "email",
+        "string"
+      ],
+      [
+        "id",
+        "integer"
+      ],
+      [
+        "name",
+        "string"
+      ],
+      [
+        "nickname",
+        "string"
+      ]
+    ],
+    "dom_required": [
+      [
+        "email",
+        "string"
+      ],
+      [
+        "id",
+        "integer"
+      ],
+      [
+        "name",
+        "string"
+      ]
+    ],
+    "headers": {
+      "Cache-Control": "max-age=60",
+      "ETag": "b0cdfa0fe8edad08",
+      "X-Csrf-Token": "token-abc123"
+    },
+    "endpoint_template": {
+      "path": "/resource/{id}",
+      "query_params": [
+        "detail"
+      ],
+      "header_names": [
+        "X-Csrf-Token"
+      ]
+    },
+    "etag": "b0cdfa0fe8edad08",
+    "csrf_value": "token-abc123",
+    "param_names": [
+      "detail"
+    ],
+    "observed_count": 3
+  },
+  "noise_B_nickname-1": {
+    "dom": [
+      [
+        "email",
+        "string"
+      ],
+      [
+        "id",
+        "integer"
+      ],
+      [
+        "name",
+        "string"
+      ],
+      [
+        "nickname",
+        "string"
+      ]
+    ],
+    "dom_required": [
+      [
+        "email",
+        "string"
+      ],
+      [
+        "id",
+        "integer"
+      ],
+      [
+        "name",
+        "string"
+      ]
+    ],
+    "headers": {
+      "Cache-Control": "max-age=60",
+      "ETag": "7a3dbd5758126c5c",
+      "X-Csrf-Token": "token-abc123"
+    },
+    "endpoint_template": {
+      "path": "/resource/{id}",
+      "query_params": [
+        "detail"
+      ],
+      "header_names": [
+        "X-Csrf-Token"
+      ]
+    },
+    "etag": "7a3dbd5758126c5c",
+    "csrf_value": "token-abc123",
+    "param_names": [
+      "detail"
+    ],
+    "observed_count": 3
+  },
+  "noise_B_nickname-2": {
+    "dom": [
+      [
+        "email",
+        "string"
+      ],
+      [
+        "id",
+        "integer"
+      ],
+      [
+        "name",
+        "string"
+      ],
+      [
+        "nickname",
+        "string"
+      ]
+    ],
+    "dom_required": [
+      [
+        "email",
+        "string"
+      ],
+      [
+        "id",
+        "integer"
+      ],
+      [
+        "name",
+        "string"
+      ]
+    ],
+    "headers": {
+      "Cache-Control": "max-age=60",
+      "ETag": "f457525d2eb1e644",
+      "X-Csrf-Token": "token-abc123"
+    },
+    "endpoint_template": {
+      "path": "/resource/{id}",
+      "query_params": [
+        "detail"
+      ],
+      "header_names": [
+        "X-Csrf-Token"
+      ]
+    },
+    "etag": "f457525d2eb1e644",
+    "csrf_value": "token-abc123",
+    "param_names": [
+      "detail"
+    ],
+    "observed_count": 3
+  },
+  "noise_B_nickname-3": {
+    "dom": [
+      [
+        "email",
+        "string"
+      ],
+      [
+        "id",
+        "integer"
+      ],
+      [
+        "name",
+        "string"
+      ],
+      [
+        "nickname",
+        "string"
+      ]
+    ],
+    "dom_required": [
+      [
+        "email",
+        "string"
+      ],
+      [
+        "id",
+        "integer"
+      ],
+      [
+        "name",
+        "string"
+      ]
+    ],
+    "headers": {
+      "Cache-Control": "max-age=60",
+      "ETag": "9c66cae681a44a09",
+      "X-Csrf-Token": "token-abc123"
+    },
+    "endpoint_template": {
+      "path": "/resource/{id}",
+      "query_params": [
+        "detail"
+      ],
+      "header_names": [
+        "X-Csrf-Token"
+      ]
+    },
+    "etag": "9c66cae681a44a09",
+    "csrf_value": "token-abc123",
+    "param_names": [
+      "detail"
+    ],
+    "observed_count": 3
+  },
+  "noise_B_nickname-4": {
+    "dom": [
+      [
+        "email",
+        "string"
+      ],
+      [
+        "id",
+        "integer"
+      ],
+      [
+        "name",
+        "string"
+      ],
+      [
+        "nickname",
+        "string"
+      ]
+    ],
+    "dom_required": [
+      [
+        "email",
+        "string"
+      ],
+      [
+        "id",
+        "integer"
+      ],
+      [
+        "name",
+        "string"
+      ]
+    ],
+    "headers": {
+      "Cache-Control": "max-age=60",
+      "ETag": "864c45d92ab66af2",
+      "X-Csrf-Token": "token-abc123"
+    },
+    "endpoint_template": {
+      "path": "/resource/{id}",
+      "query_params": [
+        "detail"
+      ],
+      "header_names": [
+        "X-Csrf-Token"
+      ]
+    },
+    "etag": "864c45d92ab66af2",
+    "csrf_value": "token-abc123",
+    "param_names": [
+      "detail"
+    ],
+    "observed_count": 3
+  },
+  "noise_C_null-0": {
+    "dom": [
+      [
+        "email",
+        "string"
+      ],
+      [
+        "id",
+        "integer"
+      ],
+      [
+        "name",
+        "string"
+      ],
+      [
+        "phone",
+        "string"
+      ]
+    ],
+    "dom_required": [
+      [
+        "email",
+        "string"
+      ],
+      [
+        "id",
+        "integer"
+      ],
+      [
+        "name",
+        "string"
+      ]
+    ],
+    "headers": {
+      "Cache-Control": "max-age=60",
+      "ETag": "7ae7259f2fb2d9e6",
+      "X-Csrf-Token": "token-abc123"
+    },
+    "endpoint_template": {
+      "path": "/resource/{id}",
+      "query_params": [
+        "detail"
+      ],
+      "header_names": [
+        "X-Csrf-Token"
+      ]
+    },
+    "etag": "7ae7259f2fb2d9e6",
+    "csrf_value": "token-abc123",
+    "param_names": [
+      "detail"
+    ],
+    "observed_count": 3
+  },
+  "noise_C_null-1": {
+    "dom": [
+      [
+        "email",
+        "string"
+      ],
+      [
+        "id",
+        "integer"
+      ],
+      [
+        "name",
+        "string"
+      ],
+      [
+        "phone",
+        "string"
+      ]
+    ],
+    "dom_required": [
+      [
+        "email",
+        "string"
+      ],
+      [
+        "id",
+        "integer"
+      ],
+      [
+        "name",
+        "string"
+      ]
+    ],
+    "headers": {
+      "Cache-Control": "max-age=60",
+      "ETag": "6ac35db3950787ae",
+      "X-Csrf-Token": "token-abc123"
+    },
+    "endpoint_template": {
+      "path": "/resource/{id}",
+      "query_params": [
+        "detail"
+      ],
+      "header_names": [
+        "X-Csrf-Token"
+      ]
+    },
+    "etag": "6ac35db3950787ae",
+    "csrf_value": "token-abc123",
+    "param_names": [
+      "detail"
+    ],
+    "observed_count": 3
+  },
+  "noise_C_null-2": {
+    "dom": [
+      [
+        "email",
+        "string"
+      ],
+      [
+        "id",
+        "integer"
+      ],
+      [
+        "name",
+        "string"
+      ],
+      [
+        "phone",
+        "string"
+      ]
+    ],
+    "dom_required": [
+      [
+        "email",
+        "string"
+      ],
+      [
+        "id",
+        "integer"
+      ],
+      [
+        "name",
+        "string"
+      ]
+    ],
+    "headers": {
+      "Cache-Control": "max-age=60",
+      "ETag": "4652a1d89946975b",
+      "X-Csrf-Token": "token-abc123"
+    },
+    "endpoint_template": {
+      "path": "/resource/{id}",
+      "query_params": [
+        "detail"
+      ],
+      "header_names": [
+        "X-Csrf-Token"
+      ]
+    },
+    "etag": "4652a1d89946975b",
+    "csrf_value": "token-abc123",
+    "param_names": [
+      "detail"
+    ],
+    "observed_count": 3
+  },
+  "noise_C_null-3": {
+    "dom": [
+      [
+        "email",
+        "string"
+      ],
+      [
+        "id",
+        "integer"
+      ],
+      [
+        "name",
+        "string"
+      ],
+      [
+        "phone",
+        "string"
+      ]
+    ],
+    "dom_required": [
+      [
+        "email",
+        "string"
+      ],
+      [
+        "id",
+        "integer"
+      ],
+      [
+        "name",
+        "string"
+      ]
+    ],
+    "headers": {
+      "Cache-Control": "max-age=60",
+      "ETag": "1f13ac272f305c64",
+      "X-Csrf-Token": "token-abc123"
+    },
+    "endpoint_template": {
+      "path": "/resource/{id}",
+      "query_params": [
+        "detail"
+      ],
+      "header_names": [
+        "X-Csrf-Token"
+      ]
+    },
+    "etag": "1f13ac272f305c64",
+    "csrf_value": "token-abc123",
+    "param_names": [
+      "detail"
+    ],
+    "observed_count": 3
+  },
+  "noise_C_null-4": {
+    "dom": [
+      [
+        "email",
+        "string"
+      ],
+      [
+        "id",
+        "integer"
+      ],
+      [
+        "name",
+        "string"
+      ],
+      [
+        "phone",
+        "string"
+      ]
+    ],
+    "dom_required": [
+      [
+        "email",
+        "string"
+      ],
+      [
+        "id",
+        "integer"
+      ],
+      [
+        "name",
+        "string"
+      ]
+    ],
+    "headers": {
+      "Cache-Control": "max-age=60",
+      "ETag": "b2587ab5d4ba59b8",
+      "X-Csrf-Token": "token-abc123"
+    },
+    "endpoint_template": {
+      "path": "/resource/{id}",
+      "query_params": [
+        "detail"
+      ],
+      "header_names": [
+        "X-Csrf-Token"
+      ]
+    },
+    "etag": "b2587ab5d4ba59b8",
+    "csrf_value": "token-abc123",
+    "param_names": [
+      "detail"
+    ],
+    "observed_count": 3
+  }
+}

@@ -1,0 +1,5 @@
+{
+  "status": "DISTRIBUTED_MEASUREMENT_INVALID",
+  "reason": "No distributed shared-WAL Flask/JWT + nginx substrate deployed in this execution environment; health-gate requires 2x gunicorn workers, shared WAL at /tmp/spider-runtime/*/shared.db, HS256 JWT, X-Worker-Pid>=2, nginx If-None-Match/304. Synthetic primary stage is independent.",
+  "n_non304": 0
+}

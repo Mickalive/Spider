@@ -1,0 +1,430 @@
+{
+  "metrics": {
+    "M-TN-SPIDER": 1.0,
+    "M-TN-WILSON-LOWER": 0.982,
+    "M-TN-WILSON-UPPER": 1,
+    "M-FALSE-ACCEPT-SPIDER": 0.0,
+    "M-FALSE-ACCEPT-WILSON-UPPER": 0.1135,
+    "M-FALSE-ACCEPT-WILSON-LOWER": 0,
+    "M-UNKNOWN-RATE-SPIDER": 0.125,
+    "M-UNKNOWN-WILSON-LOWER": 0.089,
+    "M-UNKNOWN-WILSON-UPPER": 0.1728,
+    "M-ECE-SPIDER": 0.0625,
+    "M-ECE-FRESH": 0.05,
+    "M-ECE-STALE": 0.15,
+    "M-TP-SPIDER": 1.0,
+    "M-COST-SPIDER-SUM": 1560,
+    "M-COST-SPIDER-VECTOR-STD": 0.0,
+    "M-RHO-SHUFFLED-MAX": 0,
+    "M-RHO-SHUFFLED-MEAN": 0.0,
+    "M-RHO-SHUFFLED": 0,
+    "M-RHO-OBSERVED": 0,
+    "M-WITHIN-FAMILY-STD-MIN-FRESHNESS": 0.5,
+    "M-WITHIN-FAMILY-STD-MIN-JACCARD": 0.0,
+    "M-WITHIN-FAMILY-STD-MIN-COST": 0.0,
+    "M-FA-NOISE": 0.0,
+    "M-TN-NOISE": 1.0,
+    "counts": {
+      "tn": 210,
+      "fp": 0,
+      "tp": 30,
+      "fn": 0,
+      "total": 240,
+      "fresh": 210,
+      "stale": 30,
+      "total_with_noise": 390,
+      "noise_n": 150,
+      "stale_rate": 0.125
+    },
+    "per_family": {
+      "noise_C_null": {
+        "fresh_n": 50,
+        "stale_n": 0,
+        "tn": 50,
+        "fp": 0,
+        "tp": 0,
+        "fn": 0,
+        "tn_rate": 1.0,
+        "tp_rate": null,
+        "false_accept": null,
+        "wilson_tn_lower": 0.9286,
+        "wilson_tp_lower": null,
+        "wilson_tp_upper": null
+      },
+      "param_header_mutation": {
+        "fresh_n": 10,
+        "stale_n": 10,
+        "tn": 10,
+        "fp": 0,
+        "tp": 10,
+        "fn": 0,
+        "tn_rate": 1.0,
+        "tp_rate": 1.0,
+        "false_accept": 0.0,
+        "wilson_tn_lower": 0.7225,
+        "wilson_tp_lower": 0.7225,
+        "wilson_tp_upper": 1
+      },
+      "noise_B_nickname": {
+        "fresh_n": 50,
+        "stale_n": 0,
+        "tn": 50,
+        "fp": 0,
+        "tp": 0,
+        "fn": 0,
+        "tn_rate": 1.0,
+        "tp_rate": null,
+        "false_accept": null,
+        "wilson_tn_lower": 0.9286,
+        "wilson_tp_lower": null,
+        "wilson_tp_upper": null
+      },
+      "dom_drift": {
+        "fresh_n": 10,
+        "stale_n": 10,
+        "tn": 10,
+        "fp": 0,
+        "tp": 10,
+        "fn": 0,
+        "tn_rate": 1.0,
+        "tp_rate": 1.0,
+        "false_accept": 0.0,
+        "wilson_tn_lower": 0.7225,
+        "wilson_tp_lower": 0.7225,
+        "wilson_tp_upper": 1
+      },
+      "stable": {
+        "fresh_n": 180,
+        "stale_n": 0,
+        "tn": 180,
+        "fp": 0,
+        "tp": 0,
+        "fn": 0,
+        "tn_rate": 1.0,
+        "tp_rate": null,
+        "false_accept": null,
+        "wilson_tn_lower": 0.9791,
+        "wilson_tp_lower": null,
+        "wilson_tp_upper": null
+      },
+      "cache_expiry": {
+        "fresh_n": 10,
+        "stale_n": 10,
+        "tn": 10,
+        "fp": 0,
+        "tp": 10,
+        "fn": 0,
+        "tn_rate": 1.0,
+        "tp_rate": 1.0,
+        "false_accept": 0.0,
+        "wilson_tn_lower": 0.7225,
+        "wilson_tp_lower": 0.7225,
+        "wilson_tp_upper": 1
+      },
+      "noise_A_phone": {
+        "fresh_n": 50,
+        "stale_n": 0,
+        "tn": 50,
+        "fp": 0,
+        "tp": 0,
+        "fn": 0,
+        "tn_rate": 1.0,
+        "tp_rate": null,
+        "false_accept": null,
+        "wilson_tn_lower": 0.9286,
+        "wilson_tp_lower": null,
+        "wilson_tp_upper": null
+      }
+    },
+    "baselines": {
+      "B-NO-GUARD": {
+        "tn_rate": 1.0,
+        "false_accept": 1.0,
+        "delta_vs_spider": 1.0
+      },
+      "B-JACCARD-ONLY": {
+        "tn_rate": 1.0,
+        "false_accept": 0.6667,
+        "tp": 10,
+        "fn": 20,
+        "tn": 210,
+        "fp": 0
+      },
+      "B-HEADER-ONLY": {
+        "tn_rate": 1.0,
+        "false_accept": 0.3333,
+        "tp": 20,
+        "fn": 10,
+        "tn": 210,
+        "fp": 0
+      }
+    },
+    "ece_bins": [
+      {
+        "bin": [
+          0.0,
+          0.1
+        ],
+        "n": 0,
+        "acc": null,
+        "conf": null,
+        "contrib": 0
+      },
+      {
+        "bin": [
+          0.1,
+          0.2
+        ],
+        "n": 0,
+        "acc": null,
+        "conf": null,
+        "contrib": 0
+      },
+      {
+        "bin": [
+          0.2,
+          0.3
+        ],
+        "n": 0,
+        "acc": null,
+        "conf": null,
+        "contrib": 0
+      },
+      {
+        "bin": [
+          0.3,
+          0.4
+        ],
+        "n": 0,
+        "acc": null,
+        "conf": null,
+        "contrib": 0
+      },
+      {
+        "bin": [
+          0.4,
+          0.5
+        ],
+        "n": 0,
+        "acc": null,
+        "conf": null,
+        "contrib": 0
+      },
+      {
+        "bin": [
+          0.5,
+          0.6
+        ],
+        "n": 0,
+        "acc": null,
+        "conf": null,
+        "contrib": 0
+      },
+      {
+        "bin": [
+          0.6,
+          0.7
+        ],
+        "n": 0,
+        "acc": null,
+        "conf": null,
+        "contrib": 0
+      },
+      {
+        "bin": [
+          0.7,
+          0.8
+        ],
+        "n": 0,
+        "acc": null,
+        "conf": null,
+        "contrib": 0
+      },
+      {
+        "bin": [
+          0.8,
+          0.9
+        ],
+        "n": 30,
+        "acc": 1.0,
+        "conf": 0.85,
+        "contrib": 0.0188
+      },
+      {
+        "bin": [
+          0.9,
+          1.0
+        ],
+        "n": 210,
+        "acc": 1.0,
+        "conf": 0.95,
+        "contrib": 0.0438
+      }
+    ],
+    "wilson": {
+      "tn_lower": 0.982,
+      "tn": 210,
+      "fp": 0,
+      "n_fresh": 210,
+      "fa_upper": 0.1135,
+      "fa_lower": 0,
+      "unknown_lower": 0.089,
+      "unknown_upper": 0.1728
+    },
+    "cost_all_int": true,
+    "within_std": {
+      "noise_C_null": {
+        "jaccard_std": 0.0,
+        "cost_std": 0.0,
+        "freshness_std": 0.0
+      },
+      "param_header_mutation": {
+        "jaccard_std": 0.0,
+        "cost_std": 0.0,
+        "freshness_std": 0.5
+      },
+      "noise_B_nickname": {
+        "jaccard_std": 0.0,
+        "cost_std": 0.0,
+        "freshness_std": 0.0
+      },
+      "dom_drift": {
+        "jaccard_std": 0.25,
+        "cost_std": 0.0,
+        "freshness_std": 0.5
+      },
+      "stable": {
+        "jaccard_std": 0.0,
+        "cost_std": 0.0,
+        "freshness_std": 0.0
+      },
+      "cache_expiry": {
+        "jaccard_std": 0.0,
+        "cost_std": 0.0,
+        "freshness_std": 0.5
+      },
+      "noise_A_phone": {
+        "jaccard_std": 0.0,
+        "cost_std": 0.0,
+        "freshness_std": 0.0
+      }
+    },
+    "stale_rate": 0.125
+  },
+  "bootstrap_ci": {
+    "tn_95ci": [
+      1.0,
+      1.0
+    ],
+    "fa_95ci": [
+      0.0,
+      0.0
+    ],
+    "unk_95ci": [
+      0.125,
+      0.125
+    ],
+    "ece_95ci": [
+      0.0625,
+      0.0625
+    ],
+    "ece_fresh_95ci": [
+      0.05,
+      0.05
+    ],
+    "ece_stale_95ci": [
+      0.15,
+      0.15
+    ]
+  },
+  "decision": {
+    "survives": true,
+    "falsified_in_setting": false,
+    "measurement_invalid": false,
+    "checks": {
+      "D1_TN": true,
+      "D2_FA": true,
+      "D3_UNKNOWN": true,
+      "D3_actual_window": [
+        0.075,
+        0.195
+      ],
+      "D3_expected_window": [
+        0.0928,
+        0.18
+      ],
+      "D4_ECE": true,
+      "D5_DELTA": true,
+      "D6_PER_FAMILY": true,
+      "D7_PC": true,
+      "D8_NC": true,
+      "D8_NC_FRESH": true,
+      "D8_NOISE_FA": 0.0,
+      "D9_HONESTY": true,
+      "D9_RHO_MAX": 0,
+      "D9_FRESH_STD_MIN": 0.5,
+      "has_per_traj_cache": true,
+      "tn_bootstrap_width": 0.0,
+      "fa_bootstrap_width": 0.0,
+      "ci_degenerate": true,
+      "distributed_health_gate": {
+        "health_gate_pass": false,
+        "reason": "No distributed shared-WAL Flask/JWT + nginx substrate deployed in this execution environment; health-gate requires 2x gunicorn workers, shared WAL at /tmp/spider-runtime/*/shared.db, HS256 JWT, X-Worker-Pid>=2, nginx If-None-Match/304. Synthetic primary stage is independent.",
+        "n_non304": 0,
+        "x_worker_pids": [],
+        "jwt_verify": false,
+        "304_operational": false,
+        "wal_exists": false
+      },
+      "N_ok": true
+    },
+    "ci": {
+      "tn_95ci": [
+        1.0,
+        1.0
+      ],
+      "fa_95ci": [
+        0.0,
+        0.0
+      ],
+      "unk_95ci": [
+        0.125,
+        0.125
+      ],
+      "ece_95ci": [
+        0.0625,
+        0.0625
+      ],
+      "ece_fresh_95ci": [
+        0.05,
+        0.05
+      ],
+      "ece_stale_95ci": [
+        0.15,
+        0.15
+      ]
+    },
+    "stale_rate": 0.125,
+    "expected_stale_rate": 0.14285714285714285,
+    "unk": 0.125,
+    "distributed": {
+      "health_gate_pass": false,
+      "reason": "No distributed shared-WAL Flask/JWT + nginx substrate deployed in this execution environment; health-gate requires 2x gunicorn workers, shared WAL at /tmp/spider-runtime/*/shared.db, HS256 JWT, X-Worker-Pid>=2, nginx If-None-Match/304. Synthetic primary stage is independent.",
+      "n_non304": 0,
+      "x_worker_pids": [],
+      "jwt_verify": false,
+      "304_operational": false,
+      "wal_exists": false
+    }
+  },
+  "total_logs": 390,
+  "distributed": {
+    "health_gate_pass": false,
+    "reason": "No distributed shared-WAL Flask/JWT + nginx substrate deployed in this execution environment; health-gate requires 2x gunicorn workers, shared WAL at /tmp/spider-runtime/*/shared.db, HS256 JWT, X-Worker-Pid>=2, nginx If-None-Match/304. Synthetic primary stage is independent.",
+    "n_non304": 0,
+    "x_worker_pids": [],
+    "jwt_verify": false,
+    "304_operational": false,
+    "wal_exists": false
+  }
+}

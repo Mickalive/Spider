@@ -1,0 +1,656 @@
+[
+  {
+    "trajectory_id": "dom_drift-0",
+    "family": "dom_drift",
+    "request_count": 10,
+    "costs_per_request": [
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4
+    ],
+    "trajectory_sum": 40
+  },
+  {
+    "trajectory_id": "dom_drift-1",
+    "family": "dom_drift",
+    "request_count": 10,
+    "costs_per_request": [
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4
+    ],
+    "trajectory_sum": 40
+  },
+  {
+    "trajectory_id": "param_header_mutation-0",
+    "family": "param_header_mutation",
+    "request_count": 10,
+    "costs_per_request": [
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4
+    ],
+    "trajectory_sum": 40
+  },
+  {
+    "trajectory_id": "param_header_mutation-1",
+    "family": "param_header_mutation",
+    "request_count": 10,
+    "costs_per_request": [
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4
+    ],
+    "trajectory_sum": 40
+  },
+  {
+    "trajectory_id": "cache_expiry-0",
+    "family": "cache_expiry",
+    "request_count": 10,
+    "costs_per_request": [
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4
+    ],
+    "trajectory_sum": 40
+  },
+  {
+    "trajectory_id": "cache_expiry-1",
+    "family": "cache_expiry",
+    "request_count": 10,
+    "costs_per_request": [
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4
+    ],
+    "trajectory_sum": 40
+  },
+  {
+    "trajectory_id": "stable-0",
+    "family": "stable",
+    "request_count": 15,
+    "costs_per_request": [
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4
+    ],
+    "trajectory_sum": 60
+  },
+  {
+    "trajectory_id": "stable-1",
+    "family": "stable",
+    "request_count": 15,
+    "costs_per_request": [
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4
+    ],
+    "trajectory_sum": 60
+  },
+  {
+    "trajectory_id": "stable-2",
+    "family": "stable",
+    "request_count": 15,
+    "costs_per_request": [
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4
+    ],
+    "trajectory_sum": 60
+  },
+  {
+    "trajectory_id": "stable-3",
+    "family": "stable",
+    "request_count": 15,
+    "costs_per_request": [
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4
+    ],
+    "trajectory_sum": 60
+  },
+  {
+    "trajectory_id": "stable-4",
+    "family": "stable",
+    "request_count": 15,
+    "costs_per_request": [
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4
+    ],
+    "trajectory_sum": 60
+  },
+  {
+    "trajectory_id": "stable-5",
+    "family": "stable",
+    "request_count": 15,
+    "costs_per_request": [
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4
+    ],
+    "trajectory_sum": 60
+  },
+  {
+    "trajectory_id": "stable-6",
+    "family": "stable",
+    "request_count": 15,
+    "costs_per_request": [
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4
+    ],
+    "trajectory_sum": 60
+  },
+  {
+    "trajectory_id": "stable-7",
+    "family": "stable",
+    "request_count": 15,
+    "costs_per_request": [
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4
+    ],
+    "trajectory_sum": 60
+  },
+  {
+    "trajectory_id": "stable-8",
+    "family": "stable",
+    "request_count": 15,
+    "costs_per_request": [
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4
+    ],
+    "trajectory_sum": 60
+  },
+  {
+    "trajectory_id": "stable-9",
+    "family": "stable",
+    "request_count": 15,
+    "costs_per_request": [
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4
+    ],
+    "trajectory_sum": 60
+  },
+  {
+    "trajectory_id": "stable-10",
+    "family": "stable",
+    "request_count": 15,
+    "costs_per_request": [
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4
+    ],
+    "trajectory_sum": 60
+  },
+  {
+    "trajectory_id": "stable-11",
+    "family": "stable",
+    "request_count": 15,
+    "costs_per_request": [
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4
+    ],
+    "trajectory_sum": 60
+  },
+  {
+    "trajectory_id": "noise_A_phone-0",
+    "family": "noise_A_phone",
+    "request_count": 10,
+    "costs_per_request": [
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4
+    ],
+    "trajectory_sum": 40
+  },
+  {
+    "trajectory_id": "noise_A_phone-1",
+    "family": "noise_A_phone",
+    "request_count": 10,
+    "costs_per_request": [
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4
+    ],
+    "trajectory_sum": 40
+  },
+  {
+    "trajectory_id": "noise_A_phone-2",
+    "family": "noise_A_phone",
+    "request_count": 10,
+    "costs_per_request": [
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4
+    ],
+    "trajectory_sum": 40
+  },
+  {
+    "trajectory_id": "noise_A_phone-3",
+    "family": "noise_A_phone",
+    "request_count": 10,
+    "costs_per_request": [
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4
+    ],
+    "trajectory_sum": 40
+  },
+  {
+    "trajectory_id": "noise_A_phone-4",
+    "family": "noise_A_phone",
+    "request_count": 10,
+    "costs_per_request": [
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4
+    ],
+    "trajectory_sum": 40
+  },
+  {
+    "trajectory_id": "noise_B_nickname-0",
+    "family": "noise_B_nickname",
+    "request_count": 10,
+    "costs_per_request": [
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4
+    ],
+    "trajectory_sum": 40
+  },
+  {
+    "trajectory_id": "noise_B_nickname-1",
+    "family": "noise_B_nickname",
+    "request_count": 10,
+    "costs_per_request": [
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4
+    ],
+    "trajectory_sum": 40
+  },
+  {
+    "trajectory_id": "noise_B_nickname-2",
+    "family": "noise_B_nickname",
+    "request_count": 10,
+    "costs_per_request": [
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4
+    ],
+    "trajectory_sum": 40
+  },
+  {
+    "trajectory_id": "noise_B_nickname-3",
+    "family": "noise_B_nickname",
+    "request_count": 10,
+    "costs_per_request": [
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4
+    ],
+    "trajectory_sum": 40
+  },
+  {
+    "trajectory_id": "noise_B_nickname-4",
+    "family": "noise_B_nickname",
+    "request_count": 10,
+    "costs_per_request": [
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4
+    ],
+    "trajectory_sum": 40
+  },
+  {
+    "trajectory_id": "noise_C_null-0",
+    "family": "noise_C_null",
+    "request_count": 10,
+    "costs_per_request": [
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4
+    ],
+    "trajectory_sum": 40
+  },
+  {
+    "trajectory_id": "noise_C_null-1",
+    "family": "noise_C_null",
+    "request_count": 10,
+    "costs_per_request": [
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4
+    ],
+    "trajectory_sum": 40
+  },
+  {
+    "trajectory_id": "noise_C_null-2",
+    "family": "noise_C_null",
+    "request_count": 10,
+    "costs_per_request": [
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4
+    ],
+    "trajectory_sum": 40
+  },
+  {
+    "trajectory_id": "noise_C_null-3",
+    "family": "noise_C_null",
+    "request_count": 10,
+    "costs_per_request": [
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4
+    ],
+    "trajectory_sum": 40
+  },
+  {
+    "trajectory_id": "noise_C_null-4",
+    "family": "noise_C_null",
+    "request_count": 10,
+    "costs_per_request": [
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4
+    ],
+    "trajectory_sum": 40
+  }
+]
