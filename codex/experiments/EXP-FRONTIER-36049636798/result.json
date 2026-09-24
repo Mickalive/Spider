@@ -1,0 +1,117 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-FRONTIER-36049636798",
+  "lane": "frontier",
+  "status": "MEASUREMENT_INVALID",
+  "outcome": "NOT_APPLICABLE",
+  "metrics": {
+    "live_available": false,
+    "browsergym_available": false,
+    "playwright_available": false,
+    "manifest_families": 0,
+    "manifest_jaccard_mean": null,
+    "manifest_jaccard_max": null,
+    "runtime_wal_exists": false,
+    "heterogeneity_adequate": false,
+    "elapsed_seconds": 0.0005044937133789062
+  },
+  "controls": {
+    "positive_controls": {
+      "PC-COMPILATION-PIPELINE": {
+        "status": "NOT_RUN",
+        "reason": "BrowserGym/CDP missing"
+      },
+      "PC-HONEST-COST-SANITY": {
+        "status": "NOT_RUN",
+        "reason": "No trajectories captured"
+      },
+      "PC-ORTHOGONAL-HETEROGENEOUS-MANIFEST": {
+        "status": "FAIL",
+        "reason": "Manifest families=0 <10, Jaccard mean=None"
+      },
+      "PC-TRAIN-TEST-DISJOINT": {
+        "status": "NOT_RUN",
+        "reason": "No train/test split without manifest"
+      },
+      "PC-CALIBRATION-DERIVED": {
+        "status": "NOT_RUN",
+        "reason": "No live data"
+      },
+      "PC-BROWSERGYM-SUBSTRATE": {
+        "status": "FAIL",
+        "reason": "browsergym_available=False, playwright_available=False"
+      }
+    },
+    "null_controls": {
+      "NC-EMPTY-COMPILE": {
+        "status": "NOT_RUN",
+        "reason": "No compilation pipeline"
+      },
+      "NC-NO-APPLICABLE-MIXED": {
+        "status": "NOT_RUN",
+        "reason": "No mixed triple-channel tasks"
+      },
+      "NC-ORACLE-LEAK": {
+        "status": "NOT_RUN",
+        "reason": "No live data to audit"
+      },
+      "NC-BIJECTIVE-COST": {
+        "status": "NOT_RUN",
+        "reason": "No honest counters executed"
+      },
+      "NC-SHUFFLED-NULL": {
+        "status": "NOT_RUN",
+        "reason": "No trajectories for permutation"
+      },
+      "NC-GUARD-SPECIFICITY": {
+        "status": "NOT_RUN",
+        "reason": "No guard pipeline"
+      }
+    },
+    "pc_all_pass": false,
+    "nc_all_pass": false,
+    "s1_pareto": false,
+    "s2_mixed_breakthrough": false,
+    "s3_latency_pareto": false,
+    "s4_calibration": false
+  },
+  "artifacts": [
+    {
+      "path": "artifacts/substrate_diagnostic.json",
+      "sha256": "620d9d0d08c81b0fc1c9b1f35aba647e1bb4100d14aaa525d7917eb4201f5a9a",
+      "role": "raw"
+    }
+  ],
+  "observations": [
+    "BrowserGym module not importable (ModuleNotFoundError)",
+    "Playwright module not importable (ModuleNotFoundError)",
+    "WebGym 292k data directory not found at /home/runner/work/Spider/Spider/data/webgym_292k",
+    "Diverse site manifest not found at /home/runner/work/Spider/Spider/research/intel/diverse_site_manifest.json",
+    "Runtime WAL database not found at /tmp/spider-runtime/shared.db",
+    "Manifest families = 0 (required >=10 pairwise Jaccard<0.30)",
+    "All positive controls NOT_RUN or FAIL due to missing substrate",
+    "All null controls NOT_RUN due to missing substrate",
+    "No BrowserGym 1280x720 CDP trajectories captured",
+    "No compilation pipeline executed (TreeWalker, locator ranking, DAG codegen, SQLite)",
+    "No baseline replays executed (cold LLM, alias catalog, TF-IDF RAG, TERX)",
+    "No honest per-trajectory counters collected",
+    "No bootstrap/permutation statistics computed"
+  ],
+  "validity_notes": [
+    "MEASUREMENT_INVALID per frozen decision_rule: BrowserGym/CDP missing, Intel manifest absent (0 families), Runtime WAL absent, heterogeneity gate fails (manifest_families=0 <10), coverage gate fails (pooled=0 <40, mixed=0 <10)",
+    "This is an infrastructure/substrate failure, NOT a scientific falsification of C-RESIDUAL-NOVELTY or compilation bypass hypothesis",
+    "Frozen spec measurement_validity[0] explicitly requires: 'If BrowserGym/CDP or Intel diverse manifest unavailable or n_non304 stratified insufficient, declare live_available=false and MEASUREMENT_INVALID diagnostic (0.035s-style) without falsifying claim \u2014 do not substitute synthetic disjoint alphabets as live evidence.'",
+    "Prior valid bounded evidence preserved: alias-catalog/routing 21/40=0.525 ceiling (EXP-FRONTIER-36046077922 carry_forward.established[1]), honest residual-novelty non-Pareto falsification on TAU0.30 synthetic gate (EXP-FRONTIER-36042599040 all 11 PCs/NCs PASS, rho=0.4837<0.60, ECE=0.216>0.15, RAG dominance false)",
+    "Director mandate PIVOT SUPERSEDE with cognitive_reset=true remains binding; this diagnostic does not invalidate the PIVOT direction",
+    "Required fixes for live test: (1) install playwright browsergym-core agentlab with display support for 1280x720 CDP AX>10; (2) produce Intel manifest deterministic seed 42 on WebGym 292k >=50 eTLD+1 or WebArena-Verified v2 192/36 with >=10 families Jaccard<0.30; (3) deploy Runtime single-worker sticky Flask HS256+nginx WAL with honest per-trajectory hard-reset counters and If-None-Match/ETag TTL 60s n_non304>=800 stratified |rho_shuffled|<0.20",
+    "Agent priors from director_mandate (path dependence, planning horizon, amortization optimism, memory vs dynamics, compilation vs LLM leverage) are general priors labeled in validity_notes/do_not_assume, not SPIDER evidence"
+  ],
+  "unresolved": [
+    "Whether deterministic compilation bypass achieves honest Pareto dominance on live heterogeneous mixed triple-channel tasks (WebArena-Verified v2 / WebGym >=10 families Jaccard<0.30 AX>10 1280x720 CDP)",
+    "Whether compilation breaks mixed 0/10 to >=4/10 with pooled coverage>=0.60 exceeding alias 0.525 ceiling",
+    "Whether guard bailout calibration achieves UNKNOWN>=0.85 false_accept<=0.10 ECE<=0.15 on live substrate",
+    "Whether |rho_shuffled|<0.20 holds for novelty/length proxies with trajectory-grouped permutation on real Web data",
+    "Whether code-approval leverage (compile-once + guard-verified replay) materially exceeds retrieval-diversity ceiling",
+    "Substrate repair: Intel WebGym 292k dedup manifest >=50 eTLD+1, Runtime single-worker sticky n_non304>=800 health gate, BrowserGym 1280x720 CDP collection"
+  ]
+}
