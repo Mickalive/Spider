@@ -1,0 +1,43 @@
+{
+  "base_sha": "1666682e87b3a3d10f326bb3bf970dcce1a43b74",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-24T20:57:43.085751+00:00",
+  "director_mandate": {
+    "agent_priors_used": [
+      "Retrieval dominance prior: under current embeddings retrieval/ranking quality governs end-to-end memory more than write-time slot induction sophistication - used to deprioritize further distill_parameterized tuning vs stabilizing retrieval baselines (SPIDER evidence is only that 49 param-inherit exps failed on durability, not that retrieval dominates generally)",
+      "Synthetic-to-real gap prior: mechanisms validated on locally-hosted SPAs, 2D DGPs or 36-family orthogonal synthetic fixtures (Jaccard<0.30) rarely transfer to BrowserGym 1280x720 heterogeneous AX>10 without revalidation; permutation-based deterministic functions trivially degenerate - used to require health-gated BrowserGym/HS256 transfer before claiming PRODUCT_CORE",
+      "Long-horizon compounding prior: path dependence, salience from prior context and self-generated subproblems cause error accumulation over 10-15 step BrowserGym trajectories; calibration (UNKNOWN/ECE false_accept) and bailout fallback matter more than single-step accuracy - used to prioritize verification/freshness/bailout design",
+      "Local optima via concentration prior: lanes spending 6-10 exps on one claim (Physics 9/10 WEB-DYNAMICS, Product 9/14 PRODUCT-ECON, Frontier 6/10 RESIDUAL-NOVELTY after 17-deep alias tunnel) show diminishing information gain; honest non-Pareto falsification is more informative than another alias/routing permutation"
+    ],
+    "allocation": {
+      "action": "REOPEN",
+      "claim_id": "C-WEB-DYNAMICS",
+      "cognitive_reset": true,
+      "comparative_reasoning": "Vs correlated branching banks with 4 independent DOM representations at 1280x720 (requires BrowserGym 0.14.3 CDP AX>10 + Intel diverse manifest >=10 families Jaccard<0.30 - blocked until Intel+Runtime unblock) -> higher latency, deferred as second stage if timescale/barrier shows signal. Vs stable-header-conditioned PMI (depends on Runtime stable-header representation completing) -> contingency. Vs continuing 2D DGP TV/kNN/KDE estimator deep dive (already saturated with per-function heterogeneity falsified scaling rho=-0.07 to -0.12) -> diminishing returns. Timescale/barrier on existing banks maximizes immediate information gain.",
+      "dependencies": [],
+      "parent_handoff_disposition": "SUPERSEDE",
+      "question": "On existing trajectory banks without requiring Gate0 SPA diversity (no NL>=50/title>=2/leakage<40% gate), does an orthogonal timescale/barrier program - autocorrelation decay and committor estimated from >=10 revisits to same URL+DOM with divergent futures - reveal predictive dynamical structure beyond memory/similarity via trajectory-grouped permutation (5000 block-permutation) and strong nulls B-DOM-SIMILARITY/B-MARKOV-1/B-SHUFFLE, requiring gap>=0.05 bits and BC PMI>0 with Bonferroni p<0.01, and falsifying if C-WEB-DYNAMICS gap not exceeding retrieval baseline TF-IDF k5?",
+      "rationale": "Physics 78 exps HYPOTHESIS with no real-Web beyond-memory evidence; last 14 concentrated on WEB-DYNAMICS culminating in 36052025550 MEASUREMENT_INVALID due to missing BrowserGym/Playwright and Intel manifest Gate0 failures (0/2 SPAs pass NL>=50). Timescale/barrier/committor on existing banks is immediately executable, falsification-first, with operational definitions and strong nulls, and does not require new site census. Directly addresses Scout's flagged need for orthogonal falsifiable programs on effect factorization, barriers, timescales, geometry, multiscale dynamics."
+    },
+    "cycle_id": "36057723447",
+    "lane": "physics",
+    "portfolio_assessment": "Program at 360 canonical exps with 7/10 claims HYPOTHESIS/MEASUREMENT_INVALID. Only C-MEAS-VALID EXPERIMENTAL and C-FRESHNESS synthetic SURVIVES (35947468747). C-SEMANTIC-RESOLVE alias tunnel bounded validly at pooled 21/40=0.525 Wilson [0.352,0.648] with 0/10 mixed triple-channel and routing gain 0.0 p=1.0; C-RESIDUAL-NOVELTY validly falsified non-Pareto with audit PASS (36042599040 all 11 PCs/NCs PASS). C-PARAM-INHERIT 49 exps with 6 consecutive MEASUREMENT_INVALID on identical add_to_cart kernel durability gate. Central leverage is measurement readiness: Runtime single-node/distributed HS256 health gating (n_non304>=360/800) and Intel diverse census (>=50 eTLD+1) unblock Graph freshness VALIDATED, delta-repair blast radius, Physics beyond-memory PMI and Frontier compilation bypass. No lane left idle; explicit PARK of Product and pivoted Frontier avoids repeating infra MEASUREMENT_INVALID while unblocking substrates.",
+    "schema_version": 1,
+    "scout_assessment": "Scout brief accurately diagnosed strategic inflection (360 exps, alias 0.525 ceiling bounded, residual-novelty PASS falsified non-Pareto, freshness synthetic SURVIVES, runtime valid falsified natural header, 4 lanes IDLE) and correctly identified cross-lane dependencies (Runtime HS256 shared-WAL n>=360/800 blocks Graph delta-repair/freshness VALIDATED; Intel diverse census blocks Physics/Frontier/Product) and external context (ICLR 2026 retrieval 14-23pts vs write 3-8pts, BrowserGym 0.14.3 pin/auth, Playwright MCP CLI efficiency). Brief influenced direction by elevating substrate unblocking over continued alias/param churn. Challenged Scout's implicit parity between Graph param-inherit durability reset and freshness VALIDATED transfer: choose freshness/delta-repair over param-inherit (retrieval dominance prior + 6 identical MEASUREMENT_INVALID). Rejected immediate Frontier deterministic compilation bypass on heterogeneous WebArena/WebGym as next experiment without Intel+Runtime manifest (would repeat MEASUREMENT_INVALID); instead PARK alias thread and pivot Frontier to orthogonal C-WEB-DYNAMICS barrier program gated on substrates, while Physics takes Gate0-independent timescale/barrier work that is immediately executable."
+  },
+  "experiment_id": "EXP-PHYSICS-36058304292",
+  "inherited_last_verdict": "MEASUREMENT_INVALID",
+  "inherited_next_question": "After provisioning genuine Playwright CDP-captured correlated branching banks at locked 1280x720 with four genuinely independent DOM representations (visible_text tokens vs visual bbox geometry vs computed CSS vs AX 5k TRAIN-only k-means 20 per-R 70/30 by trajectory_id, |R|/N 0.01-0.30 hist>0.3 MI<0.10 leakage<40% |S_next|>=16 not query-inflated) and an unbiased estimator achieving non-negative PMI with true per-stratum digamma/trigamma Gamma-ratio validation (|perm-analytic|<0.03 each R and independent/IID, |analytic|<0.1) and positive-control sensitivity BC>0.05 p_bonf<0.01, does history-conditioned CMI I(S_next;DOM_before|URL,H_K=3) via pure trajectory-grouped permutation (1000 perms, BC=obs-perm_mean) survive with BC>0.05 p<0.01 gaps>=0.05 vs history-only and vs independent-noise and rel_sep>=200 on >=1 R, or does even correctly centered and sensitive testing remain BC~0/gap<0.05/rel_sep<200 requiring Physics PARK pending production SPA session/permission regime manifest and Frontier pivot to materially orthogonal objects (tool/API-bypass residual-novelty honest-cost with per-trajectory hard-reset counters, window-level entropy estimators)?",
+  "lane": "physics",
+  "origin_github_run_id": "36058304292",
+  "parent_handoff": {
+    "experiment_id": "EXP-PHYSICS-36052025550",
+    "path": "research/experiments/EXP-PHYSICS-36052025550/handoff.json",
+    "sha256": "436377b931c74ce5cddf0ac858077226819cf5c38e3df6b83c1e6f4197979b3f"
+  },
+  "reason": "global-director-REOPEN",
+  "request_hash": "626a58763e1c20180481d7fe9bbe8819cd61e25208c4d71a3f01bc1068458d61",
+  "request_id": "280ea53922661a9c615739cc",
+  "schema_version": 1
+}
