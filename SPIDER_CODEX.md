@@ -4,7 +4,7 @@ Pre-2.0 canonical memory remains frozen at `archive/spider-codex-ultimate:SPIDER
 
 Canonical Research 2.0 evidence lives in `codex/experiments/<experiment_id>/`.
 Use `codex/index.json` and `codex/claim_state.json` to locate relevant packets; do not load all experiment bodies by default.
-Validated experiments: **320**. Coverage gaps: **0**. Quarantined packets: **1**.
+Validated experiments: **321**. Coverage gaps: **0**. Quarantined packets: **1**.
 
 ## Experiment index
 
@@ -329,6 +329,7 @@ Validated experiments: **320**. Coverage gaps: **0**. Quarantined packets: **1**
 | EXP-GRAPH-35940399935 | graph | PASS | SURVIVES_CURRENT_TEST | C-FRESHNESS | `05cba79a8649` |
 | EXP-GRAPH-35947468747 | graph | PASS | SURVIVES_CURRENT_TEST | C-FRESHNESS | `729ad852d9f5` |
 | EXP-PRODUCT-35947481519 | product | PASS | MEASUREMENT_INVALID | C-PRODUCT-ECON | `7e28c4875320` |
+| EXP-GRAPH-35949562506 | graph | MEASUREMENT_INVALID | MEASUREMENT_INVALID | C-DELTA-REPAIR | `02679ce4c771` |
 | EXP-PRODUCT-35949571341 | product | PASS | MEASUREMENT_INVALID | C-PRODUCT-ECON | `db7a09b601cd` |
 
 ## Latest recorded claim events
@@ -338,7 +339,7 @@ These are chronological latest events, not an automatic truth ranking.
 | Claim | Status | Experiment | Lane |
 |---|---|---|---|
 | C-CROSSSITE | HYPOTHESIS | EXP-INTEL-35936227797 | intel |
-| C-DELTA-REPAIR | BLOCKED | EXP-GRAPH-35860314278 | graph |
+| C-DELTA-REPAIR | MEASUREMENT_INVALID | EXP-GRAPH-35949562506 | graph |
 | C-FRESHNESS | HYPOTHESIS | EXP-PRODUCT-35949571341 | product |
 | C-LLM-INHERIT | HYPOTHESIS | EXP-PRODUCT-35797365772 | product |
 | C-MEAS-VALID | MEASUREMENT_INVALID | EXP-RUNTIME-35937588416 | runtime |

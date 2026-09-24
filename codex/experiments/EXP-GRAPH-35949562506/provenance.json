@@ -1,0 +1,85 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-35949562506",
+  "lane": "graph",
+  "github_run_id": "35949562506",
+  "base_sha": "207c3071e3b69940df2d4d1b29344c028df4e67e",
+  "freeze_sha": "a0503b18d17968b3ec9e18a7bd1111d2149a43dc",
+  "execute_commit": "aee9c6b96f6019a4739e429d60c2315cc4306ebc",
+  "executed_at": "2026-09-24T03:10:00+00:00",
+  "code_paths": [
+    "research/graph/delta_repair/execute_delta_repair_synthetic_35949562506.py",
+    "research/graph/freshness_detection/execute_rebalanced_35947468747.py",
+    "src/spider/kernel.py",
+    "src/spider/models.py",
+    "src/spider/registry.py"
+  ],
+  "environment": {
+    "python_version": "3.12.14",
+    "platform": "linux",
+    "dependencies": ["stdlib http.server", "hashlib", "urllib", "json", "statistics", "random"],
+    "no_llm": true,
+    "no_docker": true,
+    "no_browser": true
+  },
+  "datasets": {
+    "synthetic_single_resource": {
+      "type": "locally-hosted stdlib http.server flat-JSON /resource/{id}",
+      "port": "ephemeral 127.0.0.1",
+      "total_requests": 390,
+      "staleness_pool": 240,
+      "fresh_stable": 180,
+      "fresh_predrift": 30,
+      "stale": 30,
+      "noise": 150,
+      "repair_instances": 30,
+      "unrelated_mechanisms": 20,
+      "families": ["dom_drift", "param_header_mutation", "cache_expiry"],
+      "drift_point": 6,
+      "threshold": 0.85,
+      "required_paths": ["id", "name", "email"],
+      "etag": "SHA256(canonical_json_without_template)[:16]",
+      "cache_control": "max-age=60 vs max-age=0",
+      "template_signal": "response _template {query_params, header_names} + X-Csrf-Token"
+    }
+  },
+  "frozen_hashes": {
+    "request.json": "88e7fa53c985d2013a51d78c93f4c3be2b6043080445582e458dad7aa2101674",
+    "spec.json": "636f56a1d5875142a77ae4914510474418e30ca1052a7ea40699a33b9fedfc25",
+    "prereg.md": "6dbf2e28fd2880abe17fbfa227c032424c3ce97ab221b611bbcc7c20109dec57",
+    "freeze.json": "a0503b18d17968b3ec9e18a7bd1111d2149a43dc"
+  },
+  "artifacts": [
+    {"path": "research/experiments/EXP-GRAPH-35949562506/raw_evidence/execution_results.json", "role": "raw"},
+    {"path": "research/experiments/EXP-GRAPH-35949562506/raw_evidence/request_logs.json", "role": "raw"},
+    {"path": "research/experiments/EXP-GRAPH-35949562506/raw_evidence/metrics.json", "role": "derived"},
+    {"path": "research/experiments/EXP-GRAPH-35949562506/raw_evidence/cost_logs.json", "role": "raw"},
+    {"path": "research/experiments/EXP-GRAPH-35949562506/raw_evidence/bootstrap_ci.json", "role": "derived"},
+    {"path": "research/experiments/EXP-GRAPH-35949562506/raw_evidence/per_trajectory_cache.json", "role": "raw"},
+    {"path": "research/experiments/EXP-GRAPH-35949562506/raw_evidence/repair_logs.json", "role": "raw"},
+    {"path": "research/experiments/EXP-GRAPH-35949562506/raw_evidence/contamination_logs.json", "role": "derived"},
+    {"path": "research/experiments/EXP-GRAPH-35949562506/raw_evidence/verification_auroc.json", "role": "derived"},
+    {"path": "research/experiments/EXP-GRAPH-35949562506/raw_evidence/health_gate.json", "role": "derived"},
+    {"path": "research/experiments/EXP-GRAPH-35949562506/raw_evidence/distributed_metrics.json", "role": "derived"},
+    {"path": "research/experiments/EXP-GRAPH-35949562506/raw_evidence/decision.json", "role": "derived"},
+    {"path": "research/experiments/EXP-GRAPH-35949562506/raw_evidence/summary.json", "role": "derived"},
+    {"path": "research/graph/delta_repair/execute_delta_repair_synthetic_35949562506.py", "role": "code"}
+  ],
+  "commands": [
+    "python research/graph/delta_repair/execute_delta_repair_synthetic_35949562506.py"
+  ],
+  "honesty_gates": {
+    "V1_deterministic_matches": "src/spider/kernel.py:_matches exact equality filtered without _template, all 390 verified true logged per request",
+    "V2_honest_sum_counter": "constant integer 4 fresh /5 repair per-request, per-trajectory-reset, all_int true, vector std disclosure, no jitter",
+    "V3_no_jitter_proxy": "no n*3200/f*6.0/parity/bijective, integer property holds",
+    "V4_rho_shuffled_max_trajectory_grouped": "1000 whole-trajectory-block perms max|rho| 0.0 <0.20, mean 0.0, trajectory-grouped",
+    "V5_within_family_std": "0.5 >0 for all drift families, cost exempted",
+    "V6_bootstrap_5000": "family-stratified trajectory-grouped 5000 resamples at trajectory/family level, preserving 12 stable 15 each +2 per drift family 10 each +5 per noise 10 each, 95% percentile CIs",
+    "V7_wilson": "z=1.96 raw counts",
+    "V8_ece": "global 0.0625 per-class fresh 0.05 stale 0.15 <=0.15, UNKNOWN 0.125 within [0.00,0.18] and [0.075,0.195]",
+    "V14_per_trajectory_caching": "33 trajectories first valid of 1-3 observed, response-derived endpoint via _template/X-Csrf-Token",
+    "V15_train_only": "verification threshold 0.85 TRAIN 18 TEST 12 split, no leakage, random null AUROC 0.48",
+    "health_gate_deferred": "DISTRIBUTED_MEASUREMENT_INVALID n 0<800 WAL false"
+  },
+  "notes": "Primary synthetic-rebalanced delta-repair is CPU-only <15 min, <0.8 compute-hour, <$1, no LLM tokens, no Docker/browser. Distributed stage DEFERRED per Director PARK."
+}
