@@ -1,0 +1,162 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-35949571341",
+  "lane": "product",
+  "status": "MEASUREMENT_INVALID",
+  "outcome": "INCONCLUSIVE",
+  "metrics": {},
+  "controls": {
+    "B-COLD": {
+      "id": "B-COLD",
+      "expected_behavior": "Flat vs novelty per_hit ~500 |rho|<0.20 M_total_f10 Cold ~5497 tokens latency ~7265ms. No retrieval/compile/auditor/probe/SGDR.",
+      "observed_behavior": "NOT TESTABLE - requires shared SQLite WAL HS256 PyJWT 2.14.0 1x gunicorn 23.0.0 single-worker + nginx 1.24.0 $request_uri sticky hash health-gated real If-None-Match/ETag->304 n_non304>=800 honest sum counters on distributed substrate. Substrate absent (shared.db not found, PyJWT absent, gunicorn absent, nginx not sticky-configured).",
+      "pass_fail": "UNKNOWN",
+      "evidence_refs": ["substrate_audit: /tmp/spider-runtime/shared.db absent, /tmp/spider-runtime-35949571341/shared.db absent, PyJWT ModuleNotFoundError, gunicorn command not found, nginx pid permission denied no sticky hash"]
+    },
+    "B-RAG-EMBED": {
+      "id": "B-RAG-EMBED",
+      "expected_behavior": "per_hit ~54.7 at n0 M_total_f10 ~3703 tokens proportionally retrievable at n0.25 orthogonal via TFIDF Jaccard TAU0.30 same ranker shared WAL TN>=0.85 health-gated $request_uri n_non304>=800",
+      "observed_behavior": "NOT TESTABLE - requires shared WAL health-gated $request_uri n_non304>=800 single-worker sticky + QCR frozen bank Curated-A (qcr_bank_manifest.json 36 families) + fixtures. Fixtures absent (/tmp/webarena absent, fixtures/ absent).",
+      "pass_fail": "UNKNOWN",
+      "evidence_refs": ["fixtures_audit: /tmp/webarena absent, fixtures/ absent, qcr_bank_manifest.json not found"]
+    },
+    "B-STAGEHAND-CACHE": {
+      "id": "B-STAGEHAND-CACHE",
+      "expected_behavior": "hit_rate 1.0 at n0 per_hit ~50 0 at n>=0.25 orthogonal; Stagehand+TTL parity <=1.20x at n0 allowed (probe 10+30 amort). TN>=0.85 n_non304>=800 single-worker sticky health-gated $request_uri.",
+      "observed_behavior": "NOT TESTABLE - requires DOM-hash 2000-node 1280x720 CDP AX via BrowserGym 0.14.3 + shared WAL health-gated $request_uri n_non304>=800 single-worker sticky",
+      "pass_fail": "UNKNOWN",
+      "evidence_refs": ["docker_audit: browsergym absent, playwright absent, BrowserGym image absent (only 6 gh-aw images), shared.db absent"]
+    },
+    "B-TERX-REPLAY": {
+      "id": "B-TERX-REPLAY",
+      "expected_behavior": "per_hit ~50 at n0 ~500 at n>=0.25 honest 50 tok verify; gated MEASUREMENT_INVALID if hitRate==1.0 at n>=0.25",
+      "observed_behavior": "NOT TESTABLE - requires shared WAL health-gated $request_uri n_non304>=800 single-worker sticky",
+      "pass_fail": "UNKNOWN",
+      "evidence_refs": ["substrate_audit: shared WAL absent health_gated false"]
+    },
+    "B-BROWSERBASE-MCP": {
+      "id": "B-BROWSERBASE-MCP",
+      "expected_behavior": "WebMCP 714/2147 Pareto 897 vs 3703 tokens as shipped-competitor delta vs Browserbase/MCP 61-77 tools O(1) 15 tok+10ms amortized 800/f",
+      "observed_behavior": "NOT TESTABLE - reporting view over P-WEBMCP-TOOL which requires distributed substrate + rho_proxy_real>=0.50 + n_non304>=800 + WebMCP registry 714/2147 built TRAIN-only",
+      "pass_fail": "UNKNOWN",
+      "evidence_refs": ["substrate_audit: distributed substrate absent, webmcp_registry.jsonl absent"]
+    },
+    "P-STAGEHAND-TTL": {
+      "id": "P-STAGEHAND-TTL",
+      "expected_behavior": "PRIMARY SUT correlated probeHit ~1.0 at n0 ~0.5 at n0.25 accuracy>=0.90 saving>=30% per_hit <=0.85 vs RAG at n0/n0.25 UNKNOWN>=0.85 ECE<=0.15 bootstrap upper<=0.18 n_non304>=800 rho_proxy_real>=0.50 single-worker sticky health-gated $request_uri",
+      "observed_behavior": "NOT TESTABLE - primary SUT requires distributed HS256 shared-WAL single-worker sticky health-gated URL-sticky $request_uri + correlated TTL/ETag probe 10 tok+30ms HEAD If-None-Match ETag W/body_sha fresh at n0 ~1.0 vs stale ~0.5 at n0.25 + Docker BrowserGym 2000-node 1280x720 real gpt-4o-mini 15-step tokens/browser+latency",
+      "pass_fail": "UNKNOWN",
+      "evidence_refs": ["substrate_audit: all distributed dependencies absent, gpt-4o-mini key absent, BrowserGym absent, n_non304 null"]
+    },
+    "P-WEBMCP-TOOL": {
+      "id": "P-WEBMCP-TOOL",
+      "expected_behavior": "f=10 per_hit vs RAG at n0/n0.25 + f=100 exploratory; M_total Pareto 897 vs 3703 dominant 15 tok+10ms lookup 800/f compile single-worker sticky n_non304>=800 rho_proxy_real>=0.50 registry 714/2147",
+      "observed_behavior": "NOT TESTABLE - requires distributed substrate + 714/2147 registry TRAIN-only + Docker BrowserGym real tokens + honest distributed counters",
+      "pass_fail": "UNKNOWN",
+      "evidence_refs": ["substrate_audit: shared.db absent, registry absent, docker browsergym false"]
+    },
+    "P-SGDR-AWM": {
+      "id": "P-SGDR-AWM",
+      "expected_behavior": "SGDR 180 tok rerank state-conditioned hitRate>=0.5 at n0; WebMCP vs SGDR delta <20% reported via shared WAL health-gated $request_uri n_non304>=800 state_key family+DOM_hash 36 families TRAIN-only",
+      "observed_behavior": "NOT TESTABLE - requires SGDR corpus 36 families state_key index (sgdr_index.jsonl) + BrowserGym CDP AX 2000-node DOM hash + distributed WAL health-gated single-worker sticky",
+      "pass_fail": "UNKNOWN",
+      "evidence_refs": ["substrate_audit: sgdr_index.jsonl absent, BrowserGym absent, shared.db absent"]
+    },
+    "P-SPIDER-MEA-BATCHED": {
+      "id": "P-SPIDER-MEA-BATCHED",
+      "expected_behavior": "per_hit ~1.12>0.85 vs RAG reproduced unless shared-WAL TN 0.986 restores auditor efficacy; contrast vs Stagehand TTL descriptive not gating",
+      "observed_behavior": "NOT TESTABLE - contrast SUT requires distributed shared-WAL single-worker sticky TRAIN-warmed only batched cache",
+      "pass_fail": "UNKNOWN",
+      "evidence_refs": ["substrate_audit: shared WAL absent health_gated false"]
+    },
+    "PC-DISTRIBUTED-PARETO-CORRELATED-SINGLE": {
+      "id": "PC-DISTRIBUTED-PARETO-CORRELATED-SINGLE",
+      "expected_behavior": "PC1 hit_rate 1.0 per_hit ~50 via shared WAL TN>=0.85 health-gated $request_uri n_non304>=800 single-worker sticky. PC2 orthogonal Jaccard<0.30 max 0.0 hitRate n1.0 0.3-0.6 kernel binding 1.0/1.0 confidence>=0.80 correlated probe fresh at n0 ~1.0 stale at n0.25 ~0.5 accuracy>=0.90 saving>=30% falseAccept<0.05 registry 714/2147 lookup 1.0 at n0 15 tok SGDR 36 hitRate>=0.5 at n0 180 tok. PC3 false_accept 0.10-0.60 non-vacuous. PC4 frozen formula within 1e-6 honest distributed sum counters single-worker sticky rho_proxy_real>=0.50 per-stratum thresholds. PC5 distributed WAL 960/960 BrowserGym 2000-node rho_proxy_real>=0.50 n_non304>=800 health-gated single-worker sticky.",
+      "observed_behavior": "PC1-PC5 NOT TESTABLE - all require distributed HS256 shared-WAL single-worker sticky health-gated $request_uri substrate which is entirely absent. Kernel HEAD also lacks dot patch d926279d (r'\\$\\{[A-Za-z_][A-Za-z0-9_]*\\}' without dot) so PC2 kernel binding spot-check would fail; but primary gate is substrate absence irrespective of patch.",
+      "pass_fail": "UNKNOWN",
+      "evidence_refs": ["substrate_audit: shared.db absent, PyJWT absent, gunicorn absent, nginx no sticky hash, n_non304 null, health_gated false, rho_proxy_real unmeasurable, kernel sha 46929b3a lacks dot"]
+    },
+    "NC-DISTRIBUTED-SHUFFLE-PIPELINE-SINGLE": {
+      "id": "NC-DISTRIBUTED-SHUFFLE-PIPELINE-SINGLE",
+      "expected_behavior": "NC1 |rho|<0.25 n.s. (|rho_shuffled|<0.20 p>=0.20 within-f std>0 per-stratum |rho_length|<0.20) success collapse crossFamily 0 correlated probe/SGDR not rescue shuffled single-worker sticky. NC2 false_accept>=0.10 or |rho|<0.25. NC3 rho~0 R2~0. NC4 ablation deltas correlated vs random >10% fresh delta, shared vs per-node TN 0.986 vs 0.667 health-gated $request_uri n_non304>=800 vs <100 without sticky, WebMCP vs SGDR delta <20% reported.",
+      "observed_behavior": "NOT TESTABLE - all nulls require actual distributed pipeline single-worker sticky health-gated $request_uri (resolve/_bind/probe/registry-lookup/SGDR-rerank/frontierAdapter/MockEnv/auditorCache via shared WAL single-worker + BrowserGym CDP AX hash) and numpy/scipy/sklearn/pandas for block-permutation 5000 bootstrap 5000. All dependencies absent.",
+      "pass_fail": "UNKNOWN",
+      "evidence_refs": ["substrate_audit: distributed pipeline absent, numpy/scipy/sklearn/pandas ModuleNotFoundError, block-permutation 5000 uncomputable"]
+    }
+  },
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-PRODUCT-35949571341/request.json",
+      "sha256": "bd1734bab51125245d8459b4775c6a13e393359ef7a23845b4ec2a5f021517b4",
+      "role": "frozen_input"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-35949571341/spec.json",
+      "sha256": "42b085faf9d1603fceb33b9a249f8a683cf8038c29648488f26f804c355da9ac",
+      "role": "frozen_input"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-35949571341/prereg.md",
+      "sha256": "cced2e99e275ab6a7f26888b912b7c5d09d72d3c671303bdd04f6c1b0515654e",
+      "role": "frozen_input"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-35949571341/freeze.json",
+      "sha256": "f6d8ae26a3ac78f89a266cbc6430632730ef000015f689532a806ff79f48bb70",
+      "role": "frozen_input"
+    },
+    {
+      "path": "src/spider/kernel.py",
+      "sha256": "46929b3a951df48d7f9d1fd850871073c0d91c1868aa117e13d389fe274e8d61",
+      "role": "code"
+    },
+    {
+      "path": "codex/claim_state.json",
+      "sha256": null,
+      "role": "codex"
+    },
+    {
+      "path": "codex/index.json",
+      "sha256": null,
+      "role": "codex"
+    }
+  ],
+  "observations": [
+    "RAW OBSERVATION: Distributed HS256 shared-WAL single-worker sticky health-gated $request_uri substrate is entirely absent. /tmp/spider-runtime does not exist; /tmp/spider-runtime-35949571341 does not exist; find /tmp reports no shared.db at any accessible path (only permission-denied systemd private dirs).",
+    "RAW OBSERVATION: PyJWT (jwt module) absent - python3 -c \"import jwt\" raises ModuleNotFoundError: No module named 'jwt'; HS256 shared-secret authentication cannot be constructed.",
+    "RAW OBSERVATION: gunicorn absent - which gunicorn returns not found, python3 -c \"import gunicorn\" fails, gunicorn --version not found; 1x gunicorn 23.0.0 single-worker sticky required by spec absent.",
+    "RAW OBSERVATION: nginx binary 1.24.0 present but nginx -T shows stock config with no upstream, no proxy_pass, no $request_uri sticky hash; nginx -T fails open() /run/nginx.pid permission denied; single-worker sticky $request_uri routing not configured, health_gated false.",
+    "RAW OBSERVATION: numpy, scipy, sklearn, pandas all absent - python3 -c \"import numpy\" raises ModuleNotFoundError; family-stratified bootstrap 5000 and trajectory-grouped block-permutation 5000 uncomputable; rank correlations and CIs cannot be computed.",
+    "RAW OBSERVATION: browsergym and playwright absent - python3 -c \"import browsergym\" ModuleNotFoundError, python3 -c \"import playwright\" ModuleNotFoundError; Docker engine 28.0.4 present but docker images shows only 6 gh-aw images (gh-aw-firewall/agent, api-proxy, squid, github-mcp-server, dependabot) - no BrowserGym 0.14.3 image; Docker BrowserGym 2000-node 1280x720 full-DOM CDP AX measurement not configured.",
+    "RAW OBSERVATION: No gpt-4o-mini / OPENAI key in environment - OPENAI_API_KEY absent, OPENAI_KEY absent, env | grep openai empty; real 15-step token/browser+latency replication cannot run, rho_proxy_real unmeasurable.",
+    "RAW OBSERVATION: /tmp/webarena does not exist; fixtures/ directory does not exist; no fixtures/tasks.json, qcr_bank_manifest.json (36 families), webmcp_registry.jsonl (714/2147), sgdr_index.jsonl (36 state_key), cost_config.json, curated_manifest.json exist; 192-task orthogonal 36-family census cannot be constructed; research/harness absent.",
+    "RAW OBSERVATION: Current src/spider/kernel.py line 12 _PARAMETER regex is r'\\$\\{([A-Za-z_][A-Za-z0-9_]*)\\}' lacking dot inside char class; frozen measurement_validity[2] requires r'\\$\\{[A-Za-z_][A-Za-z0-9_\\.]*\\}' (patch d926279d); 5/5 per-family n0 EXECUTABLE spot-check therefore cannot pass as specified; sha256 46929b3a matches HEAD without dot.",
+    "RAW OBSERVATION: 960/960 probe oracle-free decode not performed; n_non304 is null (threshold requires >=800); health_gated false; If-None-Match/ETag conditional 200-vs-304 path not exercised; correlated-vs-random probe delta unmeasured; sGDR state_key construction not exercised.",
+    "RAW OBSERVATION: Frozen inputs verify byte-identical to freeze.json (request.json bd1734ba, spec.json 42b085fa, prereg.md cced2e99 match freeze.json hashes); git status shows clean tree except model_execute.json untracked; no file-proxy fallback census was run and no proxy per_hit/Pareto/calibration/safety numbers were fabricated.",
+    "RAW OBSERVATION: Per frozen spec falsifier precedence, PC failure or n_non304<800 or If-None-Match not exercised or single-worker sticky violated or rho_proxy_real unmeasurable mandates MEASUREMENT_INVALID irrespective of economics; metric supersede vs falsify branch not reachable.",
+    "RAW OBSERVATION: Parent experiment EXP-PRODUCT-35947481519 was MEASUREMENT_INVALID with audit PASS for identical substrate absence; this experiment replicates that substrate audit byte-for-byte, confirming the dependency is still unprovisioned in cycle 35949571341."
+  ],
+  "validity_notes": [
+    "Per frozen spec.json decision_rule and prereg section 5: if distributed single-worker sticky substrate or rho_proxy_real unavailable or n_non304<800 or $request_uri sticky violated or SGDR index missing -> MEASUREMENT_INVALID not FALSIFIED. All five conditions hold by direct observation (shared.db absent, BrowserGym absent, n_non304 null, sticky violated, sgdr_index missing).",
+    "Per prereg section 4 and AGENTS.md failure discipline: when substrate unavailable, primary gate is MEASUREMENT_INVALID per Director dependencies (runtime, intel, frontier); EXECUTE must not claim economics and must not substitute file-proxy isolated SQLite for distributed WAL. No proxy census was run (~2628 deterministic trials) and no economics were fabricated, honoring the prohibition on bijective n*3200 and seeded-42 fallback.",
+    "Infrastructure/substrate failure is never encoded as scientific falsification (research/EXPERIMENT_PACKET.md section 1). metrics is {} (checked and empty) because the measurement transaction could not complete validly, not because effects are zero. status=MEASUREMENT_INVALID describes measurement validity/completion, not the scientific answer; outcome=INCONCLUSIVE preserves parent bounded file-proxy falsification ceiling without expanding or contracting it.",
+    "Kernel dot-regex gap (HEAD lacks dot patch d926279d) is a secondary PC2 validity issue (measurement_validity item 2, PC2 binding 1.0/1.0 confidence>=0.80). Primary MEASUREMENT_INVALID gate is triggered solely by substrate absence and would hold even with the patch applied. src/spider/kernel.py was deliberately left unmodified and the git tree kept clean to avoid conflating code change with substrate hardening; provenance logs the gap for audit replay.",
+    "Maximum justified economics ceiling remains the inherited parent bounded falsification on file-proxy only (192/36 orthogonal alias families 630 pairs Jaccard 0.0 QCR TAU0.30 at honest f=10: StagehandTTL 1.045 CI[1.034,1.056]>0.85 at n0, WebMCP 1.032>0.85, rho 0.472 |rho_length| 0.306, Pareto WebMCP 897 vs Stagehand 1773 vs RAG 3703 vs Cold 5497). No new ceiling is claimed by this transaction.",
+    "Docker engine presence (28.0.4) and nginx binary presence (1.24.0) are explicitly NOT counted as substrate availability: no BrowserGym image, no gunicorn upstream, no sticky $request_uri hash, no PyJWT, no WAL database, no keys, no fixtures exist. BrowserGym 0.14.3 CDP AX 2000-node 1280x720 Playwright 1.63.0 + gpt-4o-mini 15-step rho_proxy_real>=0.50 gate is unmeasured.",
+    "Bootstrap 5000 and block-permutation 5000 require numpy/scipy/sklearn/pandas which are absent; even if substrate were present, statistical gates (|rho_shuffled|<0.20, rho_proxy_real>=0.50, per-stratum |rho_length|<0.20) would remain uncomputable until scientific stack provisioning.",
+    "Health-gated $request_uri n_non304>=800 is the discriminating DIE gate per Director mandate (single-worker sticky hash, If-None-Match/ETag->304). Current n_non304 is null, not <800 by measurement, but by absence of any conditional probe execution. This is correctly classified as measurement failure, not as evidence that correlated TTL gating fails."
+  ],
+  "unresolved": [
+    "Whether distributed HS256 shared-WAL substrate can be provisioned at /tmp/spider-runtime/shared.db (WAL mode, per-batch SELECT, PyJWT 2.14.0 shared-secret, 1x gunicorn 23.0.0 single-worker + nginx 1.24.0 $request_uri sticky hash) with n_non304>=800 health-gated If-None-Match/ETag W/body_sha conditional 200 vs 304 - entirely untested in this cycle.",
+    "Whether Docker BrowserGym 0.14.3 CDP AX 2000-node 1280x720 Playwright 1.63.0 + gpt-4o-mini 15-step real tokens/browser+latency with rho_proxy_real>=0.50 per-stratum |rho_shuffled|<0.20 |rho_length|<0.20 can be provisioned - unmeasurable (key absent, image absent).",
+    "Whether numpy/scipy/sklearn/pandas 5000-bootstrap + 5000-block-permutation scientific stack can be installed so family-stratified CIs and permutation p-values become computable.",
+    "Whether kernel dot-regex patch d926279d (r'\\$\\{[A-Za-z_][A-Za-z0-9_\\.]*\\}') can be re-applied to HEAD (46929b3a) and verified 5/5 per-family n0 EXECUTABLE with confidence>=0.80 via kernel.resolve on distributed WAL.",
+    "Whether WebArena-Verified v2 192/36 orthogonal census fixtures (QCR bank TAU0.30 frozen A/B disjoint alphabets Jaccard<0.30, WebMCP 714/2147 registry, SGDR 36 state_key corpus TRAIN-only, cost_config honest 50-tok hits 15-tok tool 180-tok SGDR) can be generated or loaded from TRAIN only without test contamination.",
+    "Whether correlated ETag W/body_sha conditional probe (fresh_at_n0 ~1.0 vs ~50% stale at n0.25, saving>=30% accuracy>=0.90 falseAccept<0.05) flips honest per_hit parity vs RAG (1.045>0.85) on distributed substrate with honest summed counters.",
+    "Whether SGDR/AWM 180 tok state-grounded rerank captures most of WebMCP O(1) benefit (WebMCP vs SGDR delta <20% at n0.25) on distributed substrate - SGDRHitRate vs toolHitRate vs RAG hitRate unmeasured.",
+    "Whether M_total_f10 Pareto dominance (tokens vs browser+latency vs accuracy at f=10/100, saving >=30% Stagehand >=50% WebMCP >=25% SGDR) should formally supersede contested per_hit=(M_total - retrieval/tool_lookup/SGDR - distill/compile - auditor)/L <=0.85 (falsified 1.005>0.85 rho 0.363) as PRODUCT_CORE gate per Director second clause - entirely UNDECIDED pending a valid measurement.",
+    "Whether C-PRODUCT-ECON / C-RESIDUAL-NOVELTY / C-FRESHNESS move from bounded file-proxy REJECTED (HYPOTHESIS per registry) toward EXPERIMENTAL on valid distributed correlated health-gated single-worker sticky substrate - UNRESOLVED.",
+    "Whether ST-WebAgentBench CuP safety non-inferiority (WebMCP violation_rate <= RAG + 0.02 and absolute <=0.05) holds for compiled O(1) workflows - unmeasured, must be reported as null not PASS.",
+    "Whether f=100 amortization (WebMCP 0.88>0.85 at f=100 on file-proxy) flips on distributed substrate with rho_proxy_real>=0.50 - untested."
+  ]
+}
