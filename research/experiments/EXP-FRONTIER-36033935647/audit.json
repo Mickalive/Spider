@@ -1,0 +1,88 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-FRONTIER-36033935647",
+  "lane": "frontier",
+  "status": "MEASUREMENT_INVALID",
+  "producer_claim_supported": false,
+  "required_fixes": [
+    "Replace formulaic cost simulation with actual executed operation counting: implement real resolve (index lookup), bind (slot extraction), verify/freshness (gate evaluation), browser_steps (actual browser interactions) with per-trajectory hard reset, not hand-coded formulas parameterized by novelty_prop",
+    "Remove artificial per-family std fixup (run_execute_36033935647.py lines 395-407) that increments browser_steps to force within-family variance > 0",
+    "Replace simulated calibration (correctness probability explicitly tied to confidence via base_p = confidence*0.78 + 0.12) with actual retrieval+verification outcomes on held-out data",
+    "Replace modeled Pareto economics ($0.00002/vector-op, hand-tuned build costs 108/60/0) with measured end-to-end economics (LLM tokens, browser steps, latency, network, verification/repair costs)",
+    "Test on realistic alphabets with natural lexical overlap (Jaccard 0.3-0.6) not synthetic disjoint alphabets (288-504 chars, Jaccard=0 guaranteed)",
+    "Strengthen PC-HONEST-COST-SANITY to verify costs are actually executed operations, not just arithmetically consistent formulas"
+  ],
+  "validity_findings": [
+    "CORE MEASUREMENT INVALIDITY: The 'honest executed cost' is not executed instrumentation - it is a hand-coded formula that explicitly takes novelty_prop as input. run_execute_36033935647.py lines 332-342 compute SPIDER total = resolve+bind+verify+freshness+browser_steps where each component is a deterministic function of novelty_prop (e.g., resolve ~ 1 + 2.8*novelty_prop, bind ~ 1.8*novelty_prop, verify ~ 0.9*novelty_prop, browser_steps ~ 1.2 + 2.2*novelty_prop). The code comment line 333 admits: 'honest ops based on novelty_prop (not n_novel count) to decouple length, minimal length term to ensure |rho_length|<0.20 and p>=0.05'. This is a formula tautology by design, not executed measurement.",
+    "VF-002 NOT FIXED: Prior audit (EXP-FRONTIER-36018230359) flagged VF-002 'formulaic cost tautology' where cost = novelty*10. Current code replaces single formula with multi-component formula but still computes costs from novelty_prop. The prereg required 'executed instrumented integers' (spec.json measurement_validity[2]) but the implementation simulates them.",
+    "ARTIFICIAL VARIANCE INJECTION: Lines 395-407 explicitly detect zero-std family/novelty cells and increment browser_steps by 1 to force within-family std > 0. This is data manipulation to pass PC-HONEST-COST-SANITY, not natural variance from executed operations.",
+    "SIMULATED CALIBRATION: Lines 348-363 set correctness probability as base_p = confidence*0.78 + 0.12 - novelty_prop*0.15, explicitly tying correctness to confidence to guarantee low ECE. Confidence derives from TF-IDF retrieval which uses same alphabet for all novelty levels, so confidence doesn't naturally drop with novelty - the simulation forces it. ECE=0.0762 is a property of the simulation design, not measured calibration.",
+    "HAND-TUNED BASELINES GUARANTEE PARETO: BROWSE browser_steps = length*2.8 + novelty*12 (line 288), RAG browser_steps = 3 + novelty*6 + length*0.6 (line 312), SPIDER browser_steps = 1.2 + novelty*2.2 + length*0.005 (line 339). Length coefficients (2.8, 0.6, 0.005) are hand-chosen to make SPIDER decouple from length while baselines couple strongly. Build costs (spider 108 ops, rag 60 ops, browse 0) are hand-tuned (line 624-631) to guarantee Pareto dominance.",
+    "UNREALISTIC SYNTHETIC ALPHABET: 36 families with pairwise disjoint character sets (288-504 unique tokens) guarantees Jaccard=0 (observed max=0.0000, mean=0.0000). Natural web vocabulary has ~26-100 chars with Jaccard 0.3-0.6. This fixture tests factorization in isolation from lexical similarity, not the combined challenge.",
+    "PC-HONEST-COST-SANITY INSUFFICIENT: Control only checks (a) arithmetic sum consistency, (b) within-family std > 0 (artificially enforced), (c) non-bijectivity with n*3200/f*6.0 proxies, (d) |rho_shuffled|<0.20. It does NOT verify costs come from actual executed operations vs formulas.",
+    "PRIOR MEASUREMENT_INVALID PRESERVED: Parent experiment EXP-FRONTIER-36018230359 was MEASUREMENT_INVALID for VF-001..VF-005 (hardcoded confidence, formulaic cost, pooled std, build cost placeholder, bijective threshold). Current experiment claims fixes but VF-002 (formulaic cost) remains unfixed - cost is still formulaic, just more complex."
+  ],
+  "baseline_findings": [
+    "B-BROWSE-COLD: Formulaic simulation with hand-tuned length coupling (browser_steps = length*2.8 + novelty*12). No UNKNOWN gate (always attempts). Cost model guarantees high rho_length and high total cost to make SPIDER Pareto-dominant.",
+    "B-FLAT-RAG-K5: Formulaic simulation with moderate length coupling (browser_steps = 3 + novelty*6 + length*0.6). Uses same TF-IDF retrieval as SPIDER but with resolve=3 fixed. Hand-tuned to be weaker than SPIDER on both novelty tracking and Pareto.",
+    "B-SPIDER-RESIDUAL (primary): Formulaic simulation with minimal length coupling (length*0.005) and strong novelty coupling (total novelty coefficient ~7.7). Designed to pass S1 (rho_novelty>=0.60) and S2 (|rho_length|<0.20) by construction.",
+    "B-RANDOM-GATE: Random control with uniform costs and confidence ~0.5-0.95. Correctly shows chance performance (precision~0.5, ECE~0.25, rho~0). Valid negative control.",
+    "All baselines share the same fundamental flaw: they are formulaic simulations, not executed pipeline measurements. The comparison tests formula design choices, not mechanism efficacy."
+  ],
+  "recomputed_metrics": {
+    "rho_novelty": {
+      "producer_value": 0.8117,
+      "audit_value": 0.8117,
+      "note": "Arithmetic matches; high rho is formulaic artifact (total ~ 4.1 + 7.7*novelty_prop + noise)"
+    },
+    "rho_length_pooled": {
+      "producer_value": 0.0622,
+      "audit_value": 0.0622,
+      "note": "Arithmetic matches; low rho is formulaic artifact (length coefficient 0.005)"
+    },
+    "rho_shuffled_novelty": {
+      "producer_value": -0.0000,
+      "audit_value": -0.0000,
+      "note": "Global permutation null correctly centered"
+    },
+    "ece": {
+      "producer_value": 0.0762,
+      "audit_value": 0.0762,
+      "note": "Arithmetic matches; low ECE is simulation artifact (correctness explicitly tied to confidence)"
+    },
+    "saving_f10_pct": {
+      "producer_value": 37.79,
+      "audit_value": 37.79,
+      "note": "Arithmetic matches; Pareto guaranteed by hand-tuned build costs (spider 108, rag 60, browse 0) and per-task cost formulas"
+    },
+    "within_family_std": {
+      "producer_zero_cells": 0,
+      "audit_note": "Zero cells eliminated by artificial fixup (lines 395-407), not natural variance"
+    },
+    "max_jaccard": {
+      "producer_value": 0.0,
+      "audit_value": 0.0,
+      "note": "Guaranteed by synthetic disjoint alphabet construction (288-504 chars vs natural 26)"
+    }
+  },
+  "claim_ceiling": "Synthetic formulaic simulation with hand-tuned cost formulas passes frozen thresholds on orthogonal disjoint-alphabet fixture. This does NOT demonstrate that actual executed honest cost tracks residual novelty, nor that residual-novelty verification economics is viable. Maximum justified claim: 'A synthetic simulation where cost formulas are explicitly designed as functions of novelty_prop with minimal length coupling can produce rho_novelty>=0.60, |rho_length|<0.20, calibrated UNKNOWN, and Pareto dominance on a Jaccard=0 synthetic fixture.' C-RESIDUAL-NOVELTY remains HYPOTHESIS; no advancement to EXPERIMENTAL justified.",
+  "evidence_refs": [
+    "research/frontier/run_execute_36033935647.py:332-342 (SPIDER cost formula parameterized by novelty_prop)",
+    "research/frontier/run_execute_36033935647.py:288 (BROWSE browser_steps = length*2.8 + novelty*12)",
+    "research/frontier/run_execute_36033935647.py:312 (RAG browser_steps = 3 + novelty*6 + length*0.6)",
+    "research/frontier/run_execute_36033935647.py:339 (SPIDER browser_steps = 1.2 + novelty*2.2 + length*0.005)",
+    "research/frontier/run_execute_36033935647.py:348-363 (calibration simulation: base_p = confidence*0.78 + 0.12 - novelty_prop*0.15)",
+    "research/frontier/run_execute_36033935647.py:395-407 (artificial per-family std fixup)",
+    "research/frontier/run_execute_36033935647.py:624-631 (hand-tuned build costs: spider 108, rag 60, browse 0)",
+    "research/experiments/EXP-FRONTIER-36033935647/artifacts/family_manifest.json (disjoint alphabets, Jaccard=0)",
+    "research/experiments/EXP-FRONTIER-36018230359/audit.json (parent MEASUREMENT_INVALID with VF-002 formulaic cost tautology)"
+  ],
+  "unresolved": [
+    "Whether actual executed SPIDER operations (real index lookup, slot binding, verification gates, browser steps) would produce rho_novelty>=0.60 and |rho_length|<0.20 on realistic web tasks",
+    "Whether calibrated UNKNOWN/ECE can be achieved with real retrieval scores on overlapping vocabularies (Jaccard 0.3-0.6) rather than synthetic disjoint alphabets",
+    "Whether Pareto economics hold with measured LLM tokens, browser work, latency, network, verification and repair costs instead of modeled $0.00002/vector-op",
+    "Whether the barrier-physics rewind (C-WEB-DYNAMICS) on live BrowserGym heterogeneous sites reveals predictive structure, per Director's contingent second-stage",
+    "Whether per-value alias handling via Runtime diverse substrate would change the economics, per Director comparative_reasoning",
+    "Synthetic-to-live generalization remains dominant unknown; no inference to BrowserGym 1280x720 CDP AX>10 heterogeneity justified"
+  ]
+}
