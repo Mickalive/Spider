@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-36052025550",
+  "lane": "physics",
+  "decision": "MEASUREMENT_INVALID",
+  "claim_updates": [
+    {
+      "claim_id": "C-WEB-DYNAMICS",
+      "status": "HYPOTHESIS",
+      "reason": "No valid evidence for or against C-WEB-DYNAMICS. Audit status MEASUREMENT_INVALID adopted over producer COMPLETE/FALSIFIES (audit producer_claim_supported=false). Frozen gates fail per spec decision_rule precedence: G0 fabricated (|perm-analytic|=0 by construction audit.json:required_fixes[3] execute_36052025550.py:339 analytic_mean=perm_mean, per-stratum gammaln/polygamma loops compute variance clamped to 0.02 not mean, true digamma/trigamma not computed despite call-site presence), G2 substrate not genuine CDP (M_fallback_synthetic=0 misreported, audit recomputed M_fallback_synthetic_TRUE=1, raw_prototypes.json synthetic single-button HTML, a11y 64 bytes 1 node, dom 405 bytes, not Accessibility.getFullAXTree/DOM.getBoxModel/CSS.getComputedStyleForNode), positive control blind (CTRL_POS_CORRELATED BC=0.0145 bits audit recomputed M_POS_BC 0.014533 <0.05 required, audit.json:controls.CTRL_POS_CORRELATED.pass=false => spec 'Failure=>MEASUREMENT_INVALID'), G1 independent-noise expectation violated (B-INDEPENDENT-NOISE R_visible_text_hash p_bonf 0.00799 <0.10 audit recomputed M_INDEPENDENT_P_RAW 0.009901, spec requires p>0.10 for |BC|<0.05), perfect collinearity (all 4 Rs M_OBS -0.044364 bits, M_BC 0.0105 bits, p_bonf 0.001998 bit-identical 14 decimals, audit recomputed M_effective_n_tests_TRUE=1 not 2), estimator bias (M_OBS -0.0444 <0 violating MI>=0, BC 0.0105 is bias residue perm -0.0549 vs obs, gap_history 0.0096 <0.05 gap_independent 0.01046 <0.05 rel_sep 0.526 <200). Decision_rule requires any G0-G3 fail => MEASUREMENT_INVALID, so producer FALSIFIES invalid. C-WEB-DYNAMICS remains HYPOTHESIS bounded to synthetic 5-state single-button FSM proxy, not globally falsified; 77 prior physics attempts remain HYPOTHESIS."
+    }
+  ],
+  "product_action": "none",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "After provisioning genuine Playwright CDP-captured correlated branching banks at locked 1280x720 with four genuinely independent DOM representations (visible_text tokens vs visual bbox geometry vs computed CSS vs AX 5k TRAIN-only k-means 20 per-R 70/30 by trajectory_id, |R|/N 0.01-0.30 hist>0.3 MI<0.10 leakage<40% |S_next|>=16 not query-inflated) and an unbiased estimator achieving non-negative PMI with true per-stratum digamma/trigamma Gamma-ratio validation (|perm-analytic|<0.03 each R and independent/IID, |analytic|<0.1) and positive-control sensitivity BC>0.05 p_bonf<0.01, does history-conditioned CMI I(S_next;DOM_before|URL,H_K=3) via pure trajectory-grouped permutation (1000 perms, BC=obs-perm_mean) survive with BC>0.05 p<0.01 gaps>=0.05 vs history-only and vs independent-noise and rel_sep>=200 on >=1 R, or does even correctly centered and sensitive testing remain BC~0/gap<0.05/rel_sep<200 requiring Physics PARK pending production SPA session/permission regime manifest and Frontier pivot to materially orthogonal objects (tool/API-bypass residual-novelty honest-cost with per-trajectory hard-reset counters, window-level entropy estimators)?",
+  "reason": "Independent audit MEASUREMENT_INVALID with 6 required_fixes and 10 validity_findings reproduces producer numbers (M_OBS -0.044364 recomputed -0.044364, M_BC 0.010527 recomputed 0.010508, H 6.522 vs 6.475, N 1200 104 strata 97 S) but exposes fatal gate breaches: analytic_mean fabricated to perm_mean (execute line339) cons 0 by construction not digamma/trigamma, substrate synthetic single-button prototypes misreported as genuine (dom 405 a11y 64 1 node), positive control BC 0.0145 <0.05 blind, independent-noise p 0.008 violates p>0.10, 4 Rs collinear effective 1 not 2, negative PMI bias. All primary thresholds fail (BC 0.0105 <0.05 gaps 0.0096/0.0104 <0.05 rel_sep 0.526 <200) but irrelevant under MEASUREMENT_INVALID precedence. Producer COMPLETE/FALSIFIES unsupported. Bounded claim_ceiling per audit: no valid measurement, synthetic 5-state FSM at 1280x720 with Laplace bias and fabricated validation, no inference to genuine Web correlated dynamics. C-WEB-DYNAMICS stays HYPOTHESIS; synthetic-to-real gap remains dominant unknown. continue=false because immediate retry without RF1-6 repairs would repeat MEASUREMENT_INVALID; next step waits for scheduled pulse with genuine banks and corrected pipeline. No product promotion for physics lane.",
+  "evidence_refs": [
+    "research/experiments/EXP-PHYSICS-36052025550/request.json sha256 9b8d1db3fc49506a17390b9f4d4e6996fa2dbe06f98af3a5f85caa6cdb880045 director_mandate PIVOT cycle 36051627529",
+    "research/experiments/EXP-PHYSICS-36052025550/spec.json sha256 039ee02a1c0795eed853ea62f9ec184286c942964912c82e158787f2511612b6 frozen question branching correlated FSM H>0.2",
+    "research/experiments/EXP-PHYSICS-36052025550/prereg.md sha256 5d170ca606ad8dae8999719c9402f8227c305170e30bd0f65a3e9a91ccd7bcef G0-G4 gates no heuristic",
+    "research/experiments/EXP-PHYSICS-36052025550/freeze.json sha256 20834ed0cf2be6369682d5a05ab7b77e523aaa11bc0b7088602330f5cd8f8909",
+    "research/experiments/EXP-PHYSICS-36052025550/result.json sha256 7ea035a10f10a77740d09e66c24883e09b3823f9ebe3498a0a4d34cdda83f86a status COMPLETE outcome FALSIFIES M_OBS -0.04436 M_BC 0.010527 M_POS_BC 0.01454 M_fallback_synthetic 0 H 6.522 |S| 97",
+    "research/experiments/EXP-PHYSICS-36052025550/audit.json status MEASUREMENT_INVALID producer_claim_supported false 6 required_fixes 10 validity_findings claim_ceiling NO VALID MEASUREMENT recomputed_metrics M_OBS -0.044364 M_BC 0.010508 M_POS 0.014533 M_effective_n_tests_TRUE 1 M_fallback_synthetic_TRUE 1",
+    "research/experiments/EXP-PHYSICS-36052025550/report.md sha256 1b3ebbf1572a213dfd1d241dda3544a36bd4308f5069bf4c62014c2a56ba11ea COMPLETE/FALSIFIES gate table mislabeled G0 True",
+    "research/experiments/EXP-PHYSICS-36052025550/provenance.json sha256 20834ed viewport 1280x720 dom 405 a11y 64 M_fallback_synthetic 0",
+    "research/physics/execute_36052025550.py line339 analytic_mean=perm_mean, lines166-173 gammaln/polygamma variance clamped 0.02, lines389/395/399 regime per-step, raw_prototypes.json synthetic single-button",
+    "research/experiments/EXP-PHYSICS-36052025550/raw_transitions_correlated.json sha256 e6d3f0ce81d3856dae5998d1c392aa9bacc651724237eaed56720e559013d0a7 N=1200",
+    "research/experiments/EXP-PHYSICS-36052025550/raw_transitions_independent.json sha256 f9deb5a218e0c74bf19747e7b5121d87489e687edd3174e2cb105ae1619e8caa",
+    "research/experiments/EXP-PHYSICS-36052025550/raw_transitions_positive_control.json sha256 50c91eb4e14df552d1d087faebf9df9f4bf8bbd7e3d58d7bd97939eb8ba40099 BC 0.0145 fail",
+    "research/experiments/EXP-PHYSICS-36038994684/handoff.json sha256 aa4592986b5634b817130b9669933094d7fdf4f5f0a15aec420860f351af0aa0 parent MEASUREMENT_INVALID",
+    "codex/claim_state.json C-WEB-DYNAMICS HYPOTHESIS 77 experiments 0 real-Web hits",
+    "codex/index.json lane physics"
+  ]
+}

@@ -1,0 +1,53 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-36033919138",
+  "lane": "runtime",
+  "status": "MEASUREMENT_INVALID",
+  "outcome": "INCONCLUSIVE",
+  "metrics": {},
+  "controls": {},
+  "artifacts": [
+    {
+      "path": "/home/runner/work/Spider/Spider/research/experiments/EXP-RUNTIME-36033919138/run_experiment.py",
+      "sha256": "14770b7c5b69b2f82b988eb38b105b8bf205461cf6e4ac1476b08ecf3df56b6e",
+      "role": "code"
+    },
+    {
+      "path": "/home/runner/work/Spider/Spider/research/experiments/EXP-RUNTIME-36033919138/raw_freshness_observations.jsonl",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "role": "raw"
+    },
+    {
+      "path": "/home/runner/work/Spider/Spider/research/experiments/EXP-RUNTIME-36033919138/raw_hit_observations.jsonl",
+      "sha256": "347398d647e16277121d12eb0b1da137e5c7e876c0451b87652a2b8a1024ee2f",
+      "role": "derived"
+    },
+    {
+      "path": "/tmp/spider-runtime/36033919138/nginx.conf",
+      "sha256": "234fe72ba9b6aed9013da6dea765af158ddc03527c62f237db1fc7dbac6673bb",
+      "role": "fixture"
+    },
+    {
+      "path": "/tmp/spider-runtime/36033919138/wsgi.py",
+      "sha256": null,
+      "role": "code"
+    }
+  ],
+  "observations": [
+    "Freshness n_non304=0 (target >=800)",
+    "Freshness n_304=0",
+    "Freshness per_ep_non304={}",
+    "HS256 valid success rate=0.0000 (target >=0.90)",
+    "Batch distinct timestamps=0 (target >=10)",
+    "Header-only scheduling |r|=0.0000 V=0.0000 (target <0.30)",
+    "Honest |rho_shuffled|=0.0000 p=0.0000 within_f_std=0.0000",
+    "Full-vector full=0.0000 body=0.0000 status=0.0000",
+    "HIT 0/330 byte-identical",
+    "Health gate passed=False Flask listening=False",
+    "Outcome: INCONCLUSIVE Status: MEASUREMENT_INVALID"
+  ],
+  "validity_notes": [
+    "NGINX_CONFIG_TEST_FAIL: 2026/09/24 18:26:26 [warn] 73142#73142: load balancing method redefined in /tmp/spider-runtime/36033919138/nginx.conf:12\n2026/09/24 18:26:26 [emerg] 73142#73142: invalid number of arguments in \"location\" directive in /tmp/spider-runtime/36033919138/nginx.conf:17\nnginx: configuration file /tmp/spider-runtime/36033919138/nginx.conf test failed"
+  ],
+  "unresolved": []
+}

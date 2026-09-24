@@ -1,0 +1,238 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-FRONTIER-36049636798",
+  "lane": "frontier",
+  "status": "MEASUREMENT_INVALID",
+  "producer_claim_supported": false,
+  "required_fixes": [
+    "Install BrowserGym/CDP substrate: pip install playwright browsergym-core agentlab with display support, verify importlib.util.find_spec('browsergym') != None and find_spec('playwright') != None and Playwright 1280x720 CDP launch with AX>10 extraction succeeds (currently both find_spec=None per independent recomputation, blocks PC-COMPILATION-PIPELINE and PC-BROWSERGYM-SUBSTRATE)",
+    "Produce Intel heterogeneous manifest deterministic seed 42 on WebGym 292k dedup >=50 eTLD+1 or WebArena-Verified v2 192/36 with >=10 families pairwise bigram Jaccard<0.30 mean<0.15 product-subtree anchored depth>=2 at 1280x720 AX>10 mean>15 std>5 raw N>=500 >=50/family sibling dedup 299a300 (currently data/webgym_292k absent and research/intel/diverse_site_manifest.json absent, manifest_families=0, blocks PC-ORTHOGONAL-HETEROGENEOUS-MANIFEST and PC-TRAIN-TEST-DISJOINT)",
+    "Deploy Runtime health-gated single-worker sticky Flask HS256+nginx WAL at /tmp/spider-runtime/shared.db with sticky cookie, If-None-Match/ETag TTL 60s conditional probes, honest per-trajectory hard-reset sum counters resolve+bind+verify+freshness+browser_steps and trajectory-grouped |rho_shuffled|<0.20 with n_non304>=800 stratified >=80/family (currently runtime_wal_exists=false, blocks PC-BROWSERGYM-SUBSTRATE health gate and all NC permutation checks)",
+    "After substrate repair, re-execute frozen compilation bypass pipeline end-to-end (TreeWalker 99% compression fidelity, locator top-1 >=95%, DAG codegen executable SQLite INSERT OR IGNORE, guard <5ms, bailout 100% on injection) with trajectory-grouped holdout and recompute S1-S4 with 5000 family-stratified bootstrap + 5000 block-permutation + 5000 global permutation per frozen thresholds before any claim of Pareto dominance or mixed breakthrough"
+  ],
+  "validity_findings": [
+    {
+      "id": "V1_frozen_transmission_invariants",
+      "severity": "pass",
+      "finding": "Frozen transmission invariants preserved exactly. Independently recomputed sha256: request.json d614d4ad194ea9f19ea7af12764d8431c977471937ae1667398a0785d258c3a0, spec.json 8b3ad05e346cf8da583c50905aebaf3e2dd4d9e9b0974cfc5e64135f4d66c49e, prereg.md 098f9a6114faf1a2d8862cb84a66cdf16b6c8e304932af87a970130add396371, freeze.json abfcee9d1459aad58c78d6bd5a4d690c365c0b8da3cdb4700555440dff24b001 all match freeze.json hashes and provenance.json:frozen_inputs. No post-freeze redesign, no outcome-bearing measurement during DESIGN, director_mandate PIVOT SUPERSEDE with cognitive_reset respected, parent handoff EXP-FRONTIER-36046077922 correctly referenced not drifted to barrier-PMI.",
+      "evidence_ref": "research/experiments/EXP-FRONTIER-36049636798/freeze.json, research/experiments/EXP-FRONTIER-36049636798/request.json, research/experiments/EXP-FRONTIER-36049636798/spec.json, research/experiments/EXP-FRONTIER-36049636798/prereg.md, research/experiments/EXP-FRONTIER-36049636798/provenance.json:frozen_inputs",
+      "control_id": "provenance"
+    },
+    {
+      "id": "V2_infrastructure_failure_not_falsification",
+      "severity": "pass",
+      "finding": "Producer correctly reports status=MEASUREMENT_INVALID outcome=NOT_APPLICABLE and does NOT convert missing substrate into negative scientific result. Observations, validity_notes, report.md explicitly state infrastructure failure not falsification, preserving RAW EVIDENCE -> INTERPRETATION distinction per AGENTS.md. All 6 PCs set to NOT_RUN or FAIL and all 6 NCs to NOT_RUN with dependency_unavailable reasons rather than fabricating pass/fail. Decision correctly follows frozen spec measurement_validity[0] and decision_rule: ANY PC/NC fail or manifest<10 or pooled<40 or BrowserGym missing => MEASUREMENT_INVALID precedence over SURVIVES/FALSIFIED. No synthetic Jaccard 0.0 alphabets substituted as live evidence, correctly honoring disclosed prior synthetic ceiling.",
+      "evidence_ref": "research/experiments/EXP-FRONTIER-36049636798/result.json:status, outcome, controls, validity_notes, observations; research/experiments/EXP-FRONTIER-36049636798/report.md:Verdict; research/experiments/EXP-FRONTIER-36049636798/spec.json:measurement_validity, decision_rule",
+      "control_id": "decision_rule"
+    },
+    {
+      "id": "V3_dependency_recomputation",
+      "severity": "pass",
+      "finding": "Independent recomputation confirms dependencies unavailable exactly as producer reports. importlib.util.find_spec('browsergym')=None, find_spec('playwright')=None; filesystem checks: data/webgym_292k absent, research/intel/diverse_site_manifest.json absent (manifest_families 0), /tmp/spider-runtime/shared.db absent (runtime_wal_exists false, live_available false). Provenance substrate_diagnostic matches recomputed values byte-for-byte, diagnostic artifact hash 620d9d0d08c81b0fc1c9b1f35aba647e1bb4100d14aaa525d7917eb4201f5a9a recomputed via sha256sum. Elapsed 0.0005s consistent with diagnostic-only run, python 3.12.14 honestly reported.",
+      "evidence_ref": "research/experiments/EXP-FRONTIER-36049636798/provenance.json:environment, substrate_diagnostic, artifacts_produced; research/experiments/EXP-FRONTIER-36049636798/artifacts/substrate_diagnostic.json; independent recomputation via importlib and filesystem ls",
+      "control_id": "PC-BROWSERGYM-SUBSTRATE, PC-ORTHOGONAL-HETEROGENEOUS-MANIFEST"
+    },
+    {
+      "id": "V4_controls_and_representation_integrity",
+      "severity": "pass",
+      "finding": "Representation, sampling, and leakage controls correctly not claimed. Metrics live_available false, heterogeneity_adequate false, coverage_adequate false honestly reported not imputed. Controls PC-COMPILATION-PIPELINE (TreeWalker>=90% locator top-1>=95% guard<5ms), PC-HONEST-COST-SANITY (diff 0, std>0, gap>0.35), PC-TRAIN-TEST-DISJOINT (0 leakage), PC-CALIBRATION-DERIVED (std>0.05), NC-EMPTY-COMPILE (100% UNKNOWN), NC-NO-APPLICABLE-MIXED (precision>=0.85), NC-ORACLE-LEAK (0 forbidden reads), NC-BIJECTIVE-COST, NC-SHUFFLED-NULL (|rho_shuffled|<0.20 centered), NC-GUARD-SPECIFICITY (drop>=30%) correctly set to NOT_RUN/FAIL not PASS. No leakage possible without data; TRAIN-only vocab isolation correctly gated not tested. Sampling adequacy (>=10 families Jaccard<0.30, pooled>=40, mixed>=10) correctly failed. Lane charter allowed_code_roots [research/harness, research/frontier] obeyed: code_path only research/experiments/EXP-FRONTIER-36049636798/run_execute.py.",
+      "evidence_ref": "research/experiments/EXP-FRONTIER-36049636798/result.json:metrics, controls; research/experiments/EXP-FRONTIER-36049636798/spec.json:positive_control, null_control, measurement_validity, baselines; research/lanes/registry.json:frontier",
+      "control_id": "PC-COMPILATION-PIPELINE, PC-ORTHOGONAL-HETEROGENEOUS-MANIFEST, NC-ORACLE-LEAK, NC-SHUFFLED-NULL"
+    },
+    {
+      "id": "V5_target_split_sampling_representation",
+      "severity": "pass",
+      "finding": "Target integrity correctly preserved: no M_total(f), pooled_coverage, mixed_accuracy, latency, ECE, or rho computed or claimed — avoids target substitution. Split integrity preserved: 0 train/test leakage because no split executed; producer reports PC-TRAIN-TEST-DISJOINT NOT_RUN not PASS. Sampling integrity preserved: trajectory-grouped holdout (unit=trajectory nested in family) correctly not evaluated; family-stratified bootstrap/permutation not executed rather than fabricated. Representation integrity preserved: TreeWalker 99% compression, stable locator ranking tier, DAG parameter slots, guards, SQLite canonical compile all correctly not executed — no representation loss disclosed as irrelevant because no observation to compress; AX>10 validation correctly gated not bypassed.",
+      "evidence_ref": "research/experiments/EXP-FRONTIER-36049636798/result.json:observations, validity_notes; research/experiments/EXP-FRONTIER-36049636798/spec.json:measurement_validity[1][2][5][6]; research/experiments/EXP-FRONTIER-36049636798/prereg.md:§3,§5,§7,§8",
+      "control_id": "PC-TRAIN-TEST-DISJOINT, PC-CALIBRATION-DERIVED"
+    },
+    {
+      "id": "V6_provenance_and_baseline_strength",
+      "severity": "pass",
+      "finding": "Provenance complete and reproducible: git_commit 6f600ea0483a74554499186a93cfafc2e0579521 matches request.base_sha, github_run_id 36049636798 matches origin_github_run_id, frozen_inputs hashes verified, code_paths limited to run_execute.py, diagnostic_mode true, measurement_invalid_reason explicit, prior_valid_evidence_preserved cites alias 21/40 and EXP-360425 PASS correctly. Baseline strength correctly not assessed: B-COLD-LLM, B-ALIAS-CATALOG-ROUTING (17-deep ceiling), B-FLAT-RAG-K5 (TF-IDF k5 TAU0.30), B-COMPILE-BYPASS (primary), B-TERX-REPLAY all correctly NOT_RUN — producer does not claim weak baselines as evidence, does not inflate Pareto saving via formula n*3200/f*6.0, and does not treat 0 tokens 0.09s external evidence as SPIDER evidence. Honest cost accounting correctly gated.",
+      "evidence_ref": "research/experiments/EXP-FRONTIER-36049636798/provenance.json; research/experiments/EXP-FRONTIER-36049636798/result.json:metrics, artifacts; research/experiments/EXP-FRONTIER-36049636798/spec.json:baselines",
+      "control_id": "provenance, B-COLD-LLM, B-ALIAS-CATALOG-ROUTING, B-FLAT-RAG-K5"
+    },
+    {
+      "id": "V7_claim_ceiling_no_inflation",
+      "severity": "pass",
+      "finding": "Producer claim ceiling correctly bounded: report.md Conclusion does not falsify or validate C-RESIDUAL-NOVELTY or C-WEB-DYNAMICS, status remains HYPOTHESIS per codex/claim_state.json, no promotion to EXPERIMENTAL/PRODUCT_CORE, no per-hit economics interpretation, no synthetic 36-family TAU0.30 non-Pareto reinterpreted as live evidence. Respects director_mandate comparative_reasoning (compilation bypass PIVOT) and portfolio_assessment honesty gate (Runtime n>=800 single-node before distributed). Agent priors from director_mandate correctly labeled as priors not SPIDER evidence in validity_notes/do_not_assume.",
+      "evidence_ref": "research/experiments/EXP-FRONTIER-36049636798/report.md:Conclusion, Do Not Assume, Next Action; codex/claim_state.json:C-RESIDUAL-NOVELTY; research/experiments/EXP-FRONTIER-36049636798/spec.json:product_consequence_positive/negative",
+      "control_id": "claim_ceiling"
+    },
+    {
+      "id": "V8_environment_expressiveness",
+      "severity": "info",
+      "finding": "Observed environment could not express tested effect by design — no BrowserGym 1280x720 CDP AX>10 pages observed, no heterogeneous WebArena/WebGym tasks sampled, no trajectory-grouped CIs estimable. Producer correctly identifies this as MEASUREMENT_INVALID not negative evidence. Future live environment must satisfy: deterministic seed 42, >=10 families Jaccard<0.30 mean<0.15, AX>10 mean>15 std>5, per-trajectory hard-reset integer counters, 5000 family-stratified bootstrap + 5000 block-permutation + 5000 global permutation, trajectory-grouped holdout, TRAIN-only vocab isolation to be capable of expressing Pareto dominance and mixed breakthrough.",
+      "evidence_ref": "research/experiments/EXP-FRONTIER-36049636798/result.json:validity_notes; research/experiments/EXP-FRONTIER-36049636798/spec.json:measurement_validity[0][1][6][7]; research/experiments/EXP-FRONTIER-36049636798/prereg.md:§12",
+      "control_id": "PC-BROWSERGYM-SUBSTRATE"
+    }
+  ],
+  "baseline_findings": [
+    {
+      "id": "B-COLD-LLM",
+      "finding": "Not run — dependency_unavailable. Producer correctly did not compute M_total_COMPILE vs M_total_COLD saving>=25% lower>15% p<0.05. No baseline strength assessment possible; absence correctly recorded as MEASUREMENT_INVALID not zero saving. Recomputation confirms no LLM token counts or latency traces artifact exists.",
+      "severity": "info",
+      "evidence_ref": "research/experiments/EXP-FRONTIER-36049636798/result.json:controls.s1_pareto false; research/experiments/EXP-FRONTIER-36049636798/artifacts/substrate_diagnostic.json"
+    },
+    {
+      "id": "B-ALIAS-CATALOG-ROUTING",
+      "finding": "Not run — dependency_unavailable. 17-deep alias catalog+routing+hierarchical xMemory baseline (21/40=0.525 ceiling, 0/10 mixed) not re-executed. Producer correctly does not claim gap>=0.07 vs pooled 0.525. Prior bounded ceiling preserved as established, not overwritten.",
+      "severity": "info",
+      "evidence_ref": "research/experiments/EXP-FRONTIER-36049636798/result.json:controls.s2_mixed_breakthrough false; research/experiments/EXP-FRONTIER-36046077922/handoff.json"
+    },
+    {
+      "id": "B-FLAT-RAG-K5",
+      "finding": "Not run — dependency_unavailable. Strong flat TF-IDF k=5 TAU0.30 baseline not computed. Producer correctly does not claim strict dominance M_SPIDER < M_RAG at f10/f100 with bootstrap lower>0. No RAG dominance false imputed.",
+      "severity": "info",
+      "evidence_ref": "research/experiments/EXP-FRONTIER-36049636798/result.json:controls.s1_pareto, s4_calibration"
+    },
+    {
+      "id": "B-COMPILE-BYPASS",
+      "finding": "Not run — PRIMARY. Deterministic compilation bypass (TreeWalker 99% + locator ranking + DAG codegen + SQLite INSERT OR IGNORE + guard bailout fallback) not executed beyond substrate check. No honest build cost vs per-task M_total(f) Pareto frontier estimated. Hot-path 0 tokens <0.1ms vs LLM 3-17s not measured; correctly not claimed. PC-COMPILATION-PIPELINE correctly NOT_RUN not PASS.",
+      "severity": "info",
+      "evidence_ref": "research/experiments/EXP-FRONTIER-36049636798/result.json:controls.positive_controls.PC-COMPILATION-PIPELINE; provenance.json:diagnostic_mode true"
+    },
+    {
+      "id": "B-TERX-REPLAY",
+      "finding": "Not run — ablation deterministic CDP replay without guards not executed. Producer correctly does not isolate guard+bailout value vs naive replay. No external TERX 100-400x citation treated as SPIDER evidence.",
+      "severity": "info",
+      "evidence_ref": "research/experiments/EXP-FRONTIER-36049636798/result.json:observations; provenance.json"
+    }
+  ],
+  "recomputed_metrics": {
+    "live_available": {
+      "producer_value": false,
+      "audit_value": false,
+      "match": true
+    },
+    "browsergym_available": {
+      "producer_value": false,
+      "audit_value": false,
+      "match": true,
+      "audit_recomputation": "importlib.util.find_spec('browsergym') is None"
+    },
+    "playwright_available": {
+      "producer_value": false,
+      "audit_value": false,
+      "match": true,
+      "audit_recomputation": "importlib.util.find_spec('playwright') is None"
+    },
+    "manifest_families": {
+      "producer_value": 0,
+      "audit_value": 0,
+      "match": true,
+      "audit_recomputation": "filesystem ls data/webgym_292k ENOENT, research/intel/diverse_site_manifest.json ENOENT"
+    },
+    "manifest_jaccard_mean": {
+      "producer_value": null,
+      "audit_value": null,
+      "match": true
+    },
+    "manifest_jaccard_max": {
+      "producer_value": null,
+      "audit_value": null,
+      "match": true
+    },
+    "runtime_wal_exists": {
+      "producer_value": false,
+      "audit_value": false,
+      "match": true,
+      "audit_recomputation": "ls /tmp/spider-runtime/shared.db ENOENT"
+    },
+    "heterogeneity_adequate": {
+      "producer_value": false,
+      "audit_value": false,
+      "match": true,
+      "note": "requires >=10 families Jaccard mean<0.15 max<0.30 — fails with 0 families"
+    },
+    "elapsed_seconds": {
+      "producer_value": 0.0005044937133789062,
+      "audit_note": "diagnostic elapsed <0.01s plausible, no live BrowserGym capture time expected; independent recomputation confirms diagnostic completes in <0.01s"
+    },
+    "substrate_diagnostic_sha256": {
+      "producer_value": "620d9d0d08c81b0fc1c9b1f35aba647e1bb4100d14aaa525d7917eb4201f5a9a",
+      "audit_value": "620d9d0d08c81b0fc1c9b1f35aba647e1bb4100d14aaa525d7917eb4201f5a9a",
+      "match": true,
+      "audit_recomputation": "sha256sum artifacts/substrate_diagnostic.json"
+    },
+    "frozen_hashes": {
+      "request.json": {
+        "producer_value": "d614d4ad194ea9f19ea7af12764d8431c977471937ae1667398a0785d258c3a0",
+        "audit_value": "d614d4ad194ea9f19ea7af12764d8431c977471937ae1667398a0785d258c3a0",
+        "match": true
+      },
+      "spec.json": {
+        "producer_value": "8b3ad05e346cf8da583c50905aebaf3e2dd4d9e9b0974cfc5e64135f4d66c49e",
+        "audit_value": "8b3ad05e346cf8da583c50905aebaf3e2dd4d9e9b0974cfc5e64135f4d66c49e",
+        "match": true
+      },
+      "prereg.md": {
+        "producer_value": "098f9a6114faf1a2d8862cb84a66cdf16b6c8e304932af87a970130add396371",
+        "audit_value": "098f9a6114faf1a2d8862cb84a66cdf16b6c8e304932af87a970130add396371",
+        "match": true
+      },
+      "freeze.json": {
+        "producer_value": "abfcee9d1459aad58c78d6bd5a4d690c365c0b8da3cdb4700555440dff24b001",
+        "audit_value": "abfcee9d1459aad58c78d6bd5a4d690c365c0b8da3cdb4700555440dff24b001",
+        "match": true
+      }
+    },
+    "pc_all_pass": {
+      "producer_value": false,
+      "audit_value": false,
+      "match": true
+    },
+    "nc_all_pass": {
+      "producer_value": false,
+      "audit_value": false,
+      "match": true
+    },
+    "s1_pareto": {
+      "producer_value": false,
+      "audit_value": null,
+      "note": "Not computed — correctly not claimed, no honest M_total(f)=build+f*mean_per_task estimable without trajectories"
+    },
+    "s2_mixed_breakthrough": {
+      "producer_value": false,
+      "audit_value": null,
+      "note": "Not computed — mixed 0/10 not tested, pooled coverage not estimated"
+    },
+    "s3_latency_pareto": {
+      "producer_value": false,
+      "audit_value": null,
+      "note": "Not computed — no latency traces"
+    },
+    "s4_calibration": {
+      "producer_value": false,
+      "audit_value": null,
+      "note": "Not computed — no UNKNOWN/false_accept/ECE/rho_shuffled estimable"
+    },
+    "notes": "All material metrics recomputed as false/null/not_run — confirmed no BrowserGym import, no Intel manifest, no Runtime WAL, no artifacts beyond diagnostic. Producer metrics verified exactly. No Pareto/coding/leakage metric fabricable, confirming MEASUREMENT_INVALID not false negative or false positive."
+  },
+  "claim_ceiling": "No new evidence for C-RESIDUAL-NOVELTY. Deterministic compilation bypass (AgentJIT/TraceCompiler/COVENANT pattern: TreeWalker 99% + stable locator ranking + deterministic JSON/Python DAG with speculative guards and bailout fallback) remains UNTESTED on heterogeneous mixed triple-channel gate. Hypothesis H1 that compilation achieves honest M_total f10/f100 Pareto dominance (saving>=25% lower>15% p<0.05 strict dominance vs cold/RAG/alias at f10 and f100 robust to +/-50% build), breaks mixed 0/10 to >=4/10 with pooled coverage>=0.60 gap>=0.07 vs alias 0.525, achieves hot-path 0 tokens <200ms mean <100ms median with resolve+bind reduction >=40%, and calibration UNKNOWN>=0.85 false_accept<=0.10 ECE<=0.15 with |rho_shuffled|<0.20 centered is neither supported nor falsified on live substrate. Prior bounded evidence unchanged: 17-deep alias-catalog/routing/WebMCP tunnel pooled 21/40=0.525 Wilson [0.352,0.648] 0/10 mixed routing gain 0.0, and honest residual-novelty non-Pareto on 36-family orthogonal Jaccard<0.30 synthetic fixture (EXP-FRONTIER-36042599040 PASS all 11 PCs/NCs PASS rho 0.4837 ECE 0.216 RAG dominance false) remain the only VALID ceilings. C-RESIDUAL-NOVELTY stays HYPOTHESIS. No authorization for product promotion of SQLite canonical compile + postcondition guard + bailout, nor for cross-site replication claim, until live heterogeneous gate with >=10 families Jaccard<0.30 AX>10 1280x720 CDP single-worker sticky, >=40 pooled tasks >=10 mixed triple-channel, per-trajectory hard-reset honest sum counters, 5000 family-stratified bootstrap + 5000 block-permutation + 5000 global permutation, trajectory-grouped holdout, TRAIN-only vocab isolation is health-gated and passes all PCs/NCs.",
+  "evidence_refs": [
+    "research/experiments/EXP-FRONTIER-36049636798/request.json:d614d4ad194ea9f19ea7af12764d8431c977471937ae1667398a0785d258c3a0",
+    "research/experiments/EXP-FRONTIER-36049636798/spec.json:8b3ad05e346cf8da583c50905aebaf3e2dd4d9e9b0974cfc5e64135f4d66c49e",
+    "research/experiments/EXP-FRONTIER-36049636798/prereg.md:098f9a6114faf1a2d8862cb84a66cdf16b6c8e304932af87a970130add396371",
+    "research/experiments/EXP-FRONTIER-36049636798/freeze.json:abfcee9d1459aad58c78d6bd5a4d690c365c0b8da3cdb4700555440dff24b001",
+    "research/experiments/EXP-FRONTIER-36049636798/result.json",
+    "research/experiments/EXP-FRONTIER-36049636798/report.md",
+    "research/experiments/EXP-FRONTIER-36049636798/provenance.json",
+    "research/experiments/EXP-FRONTIER-36049636798/artifacts/substrate_diagnostic.json:620d9d0d08c81b0fc1c9b1f35aba647e1bb4100d14aaa525d7917eb4201f5a9a",
+    "research/experiments/EXP-FRONTIER-36049636798/run_execute.py",
+    "research/lanes/registry.json:frontier",
+    "codex/claim_state.json:C-RESIDUAL-NOVELTY HYPOTHESIS",
+    "codex/index.json",
+    "research/experiments/EXP-FRONTIER-36046077922/handoff.json",
+    "research/experiments/EXP-FRONTIER-36042599040/audit.json:PASS bounded FALSIFIED-IN-SETTING"
+  ],
+  "unresolved": [
+    "Whether deterministic compilation bypass achieves honest M_total f10/f100 Pareto dominance vs cold LLM and vs alias catalog+routing and vs TF-IDF RAG k5 on live heterogeneous mixed triple-channel tasks with trajectory-grouped CIs — untested, requires Intel+Runtime repair",
+    "Whether compilation breaks mixed 0/10 to >=4/10 with pooled coverage>=0.60 Wilson lower>=0.45 exceeding alias pooled 0.525 gap>=0.07 p<0.05 — untested, requires >=10 mixed triple-channel tasks",
+    "Whether hot-path guard-pass 0 tokens <200ms mean <100ms median vs LLM median >=3000ms Pareto holds with honest counters — untested, requires BrowserGym 1280x720 CDP timing",
+    "Whether calibration achieves UNKNOWN>=0.85 false_accept<=0.10 ECE<=0.15 upper<=0.18 and |rho_shuffled|<0.20 centered |mean|<0.05 std<0.15 with gap rho - |rho_shuffled|>0.35 on real Web data — untested",
+    "Whether code-approval leverage (compile-once + guard-verified replay) materially exceeds retrieval-diversity ceiling flagged as 21/40=0.525 and non-Pareto on synthetic — untested on live substrate, synthetic-to-live gap remains dominant validity threat",
+    "Substrate repair: install playwright browsergym-core agentlab display support for 1280x720 CDP AX>10; produce Intel WebGym 292k >=50 eTLD+1 or WebArena-Verified v2 192/36 manifest deterministic seed 42 with >=10 families Jaccard<0.30 mean<0.15; deploy Runtime single-worker sticky HS256+nginx WAL n_non304>=800 stratified honest counters TTL 60s"
+  ]
+}

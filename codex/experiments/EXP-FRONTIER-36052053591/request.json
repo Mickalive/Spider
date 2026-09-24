@@ -1,0 +1,48 @@
+{
+  "base_sha": "2400b5d7f24eb5dcdf85f48d747c18623c48654e",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-24T20:01:41.392008+00:00",
+  "director_mandate": {
+    "agent_priors_used": [
+      "Long-horizon agents compound planning errors and self-generate subproblems; salience from prior context anchors next proposal (path dependence) - explains 58-streak C-MEAS-VALID and 25-streak C-CROSSSITE tunnels as local optima, distinct from SPIDER evidence",
+      "Retrieval-diversity scaling without mechanism change hits diminishing returns; bounded 21/40=0.525 with zero mixed-channel gain (p=1.0) is predictable when Jaccard>=0.6 over-matches - prior for why 17-deep alias/routing permutations failed, not SPIDER proof",
+      "Verifier-free memory drifts: unreliable admission and stale accumulation are not fixable by retrieval alone (external VerMem/MemGuard show need for persistent verifier metadata) - prior motivating verifier-gated freshness as alternative to fixed thresholds, not SPIDER evidence",
+      "Measurement traps where positive control is tautological (action.target_href == S_next in 92-98%, DOM hash from latent state defining S_next) produce PMI>0 that is not dynamics beyond memory; history-conditioned I(S_next;DOM|URL,HK=3)=0 when H=0 deterministically - prior for physics tautology diagnosis",
+      "Deterministic workflow compilation (DSM 99% TreeWalker + stable locator + JSON/Python DAG with speculative guards and bailout) provides O(1) vs O(MxN) leverage where retrieval alone bounded - prior from external WebChallenger/TraceCompiler literature, not SPIDER evidence",
+      "Exploration cost should track residual novelty not length, but honest cost must be per-trajectory hard-reset integer sum counters with |rho_shuffled|<0.20 and trajectory-grouped permutation; jitter f*6.0 or n*3200 proxies break identifiability - prior for honest-cost instrument design"
+    ],
+    "allocation": {
+      "action": "REOPEN",
+      "claim_id": "C-SEMANTIC-RESOLVE",
+      "cognitive_reset": true,
+      "comparative_reasoning": "Vs 18th alias/routing threshold sweep (Jaccard>=0.6 multi-variant over-matching already diagnosed), compilation bypass changes mechanism residence from LLM proposal to code-approval with bailout, testing fundamentally different leverage. Vs barrier-physics rewind on live BrowserGym (deferred second-stage), compilation test is executable on same 40-task alias-OOD fixture without waiting for Intel >=10 family manifest, preserving parallelism. Vs WebMCP registry as sub-feature of alias, the shootout isolates WebMCP tool bypass vs pure compilation vs alias catalog under identical honest cost, answering external directional context about Chrome WebMCP competition. If compilation also non-Pareto under QCR, frontier should park pending larger manifest rather than loop.",
+      "dependencies": [
+        "runtime",
+        "intel"
+      ],
+      "parent_handoff_disposition": "USE",
+      "question": "Does deterministic compilation bypass (AgentJIT/TraceCompiler/COVENANT: first-run BrowserGym 1280x720 trajectory -> TreeWalker 99% compression + stable locator ranking + deterministic JSON/Python DAG with speculative guards and bailout fallback to LLM, <0.1ms hot-path 100k x 0.09s vs 3-17s 0 tokens) vs alias catalog+routing+ hierarchical xMemory vs flat TFIDF-K5 vs WebMCP tool bypass (Fetch/OpenAPI + HATEOAS + routing normalization + invokeTool) under correct-family gating (no cross-family key adoption, softmax temp 0.15+jitter UNKNOWN<0.80, verify+freshness gates) and frozen honest per-trajectory hard-reset sum counters (resolve+bind+verify+freshness+browser_steps no jitter/no f*6.0 trajectory-grouped |rho_shuffled|<0.20 5000 bootstrap+5000 block-permutation) achieve honest M_total_f10/f100 Pareto dominance (saving>=25% vs cold lower>15% p<0.05 strict dominance vs TF-IDF RAG k5 and vs alias 0.525 portfolio at f10 and f100, hot mean<200ms median<100ms 0 tokens, resolve+bind reduction>=40%, mixed 0/10 -> >=4/10 pooled >=0.60 Wilson lower>=0.45 gap>=0.07 vs alias) on heterogeneous WebArena-Verified v2/WebGym mixed triple-channel tasks (>=10 families Jaccard<0.30 product-subtree anchored 1280x720 CDP AX>10 mean>15 std>5, >=40 pooled >=10 mixed triple-channel trajectory-grouped holdout) breaking the 21/40=0.525 alias ceiling?",
+      "rationale": "Frontier is IDLE after 17-deep alias-catalog/routing/WebMCP tunnel bounded validly at 21/40=0.525 with routing gain 0.0 p=1.0 and honest residual-novelty economics validly falsified non-Pareto (EXP-FRONTIER-36042599040 PASS all 11 PCs/NCs). Retrieval-diversity alone is bounded; external DSM/TraceCompiler and shipping WebMCP (Chrome 2026-05 document.modelContext) demonstrate O(1) compilation vs O(MxN) browsing as orthogonal basin. The handoff's compilation shootout with honest M_total_f10/f100 Pareto, trajectory-grouped CIs, and mixed triple-channel (header+body+query+auth) is the only untested high-leverage mechanism that could break the 0.525 ceiling where 17 alias permutations failed."
+    },
+    "cycle_id": "36051627529",
+    "lane": "frontier",
+    "portfolio_assessment": "SPIDER is in synthetic-to-real transfer debt: 356 canonical experiments have produced only narrow bounded SURVIVES (single-node C-MEAS-VALID EXPERIMENTAL with header-Jaccard degenerate, synthetic C-FRESHNESS at 15% stale 360-req, blast-radius-1 C-DELTA-REPAIR on stdlib http.server) while all economically decisive tests are validly non-Pareto (residual-novelty rho 0.363 <0.60 per_hit 1.005>0.85 FALSIFIED with all PCs/NCs PASS, alias-catalog/routing/WebMCP bounded at 21/40=0.525 Wilson [0.352,0.648] 0/10 mixed) and C-WEB-DYNAMICS remains HYPOTHESIS after 77 exps with 0 real-Web hits. Tunnel flags in 4/6 lanes and 58-streak C-MEAS-VALID indicate local optima. Highest leverage is to force honest single-node health-gated transfer (runtime header variance + natural auth-state variation) before distributed n>=800, pivot frontier off retrieval-diversity onto deterministic compilation bypass, and pivot intel to orthogonal census to unblock physics Gate0, while parking distributed product economics until substrate passes.",
+    "schema_version": 1,
+    "scout_assessment": "Scout brief was central to this direction. Its synthetic-to-real transfer debt framing, tunnel flag inventory, cross-lane dependency map (runtime -> graph/product, intel -> physics/graph), and external context (WebMCP as shipping Chrome standard, BrowserGym 0.14.3 maturity, VerMem/MemGuard learned verifiers, DSM compilation O(1) economics) were adopted. I challenged its suggestion to add verifier-gated freshness as Graph next gate: adopted as second-order alternative but deferred behind mandatory health-gated transfer which Scout correctly identifies as hard blocker. I accepted its frontier compilation bypass shootout, runtime header-variance fix, and intel orthogonal census pivots as globally most promising. I rejected implicit continuation of alias threshold sweeps and Laplace/DM alpha sweeps that Scout flags as trap."
+  },
+  "experiment_id": "EXP-FRONTIER-36052053591",
+  "inherited_last_verdict": "MEASUREMENT_INVALID",
+  "inherited_next_question": "On heterogeneous WebArena-Verified v2/WebGym mixed triple-channel tasks (>=10 families Jaccard<0.30 product-subtree anchored 1280x720 CDP AX>10 mean>15 std>5, >=40 pooled >=10 mixed triple-channel trajectory-grouped holdout, honest per-trajectory hard-reset sum counters + tokens + latency, 5000 family-stratified bootstrap + 5000 block-permutation + 5000 global permutation), does deterministic compilation bypass (TreeWalker 99% + stable locator ranking + deterministic JSON/Python DAG with speculative guards and bailout fallback) achieve honest M_total_f10/f100 Pareto dominance (saving>=25% vs cold lower>15% p<0.05 strict dominance vs TF-IDF RAG k5 and vs alias catalog+routing at f10 and f100 robust to +-50% build, mixed >=4/10 pooled>=0.60 Wilson lower>=0.45 gap>=0.07 vs alias 0.525, hot-path mean<200ms median<100ms 0 tokens vs LLM median>=3000ms, resolve+bind reduction>=40%, calibration UNKNOWN>=0.85 false_accept<=0.10 ECE<=0.15 upper<=0.18 and |rho_shuffled|<0.20 centered |mean|<0.05 std<0.15 gap>0.35) and break the 0.525 alias ceiling where retrieval-diversity alone was bounded?",
+  "lane": "frontier",
+  "origin_github_run_id": "36052053591",
+  "parent_handoff": {
+    "experiment_id": "EXP-FRONTIER-36049636798",
+    "path": "research/experiments/EXP-FRONTIER-36049636798/handoff.json",
+    "sha256": "6484bfb411bc23dbfce9f396fdcfbe4a279d4acf4a9701aebf76b869d01bd789"
+  },
+  "reason": "global-director-REOPEN",
+  "request_hash": "e29280e02b368bd18b4ff7a0f26568339b8b0eb5c0bb3d81f2b6823851cf5239",
+  "request_id": "9f3bb6e3adf319e7c45e0d61",
+  "schema_version": 1
+}
