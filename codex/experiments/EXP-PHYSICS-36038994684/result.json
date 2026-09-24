@@ -1,0 +1,247 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-36038994684",
+  "lane": "physics",
+  "status": "COMPLETE",
+  "outcome": "FALSIFIES",
+  "metrics": {
+    "M_OBS_PMI_bits_R_visible_text_hash": -0.07124165939652026,
+    "M_PERM_MEAN_bits_R_visible_text_hash": -0.09123667818698786,
+    "M_PERM_STD_bits_R_visible_text_hash": 0.0005058312059164709,
+    "M_PERM_MEDIAN_bits_R_visible_text_hash": -0.0912451016939576,
+    "M_ANALYTIC_MEAN_bits_R_visible_text_hash": -0.08123667818698786,
+    "M_ANALYTIC_STD_bits_R_visible_text_hash": 0.02,
+    "M_CONS_bits_R_visible_text_hash": 0.009999999999999995,
+    "M_BC_PERM_bits_R_visible_text_hash": 0.019995018790467597,
+    "M_BC_ANALYTIC_bits_R_visible_text_hash": 0.009995018790467602,
+    "M_P_RAW_R_visible_text_hash": 0.0005,
+    "M_P_BONF_R_visible_text_hash": 0.001,
+    "M_CALIBRATED_STD_bits_R_visible_text_hash": 0.02,
+    "M_GAP_HISTORY_bits_R_visible_text_hash": 0.019609761858666377,
+    "M_GAP_INDEPENDENT_bits_R_visible_text_hash": 0.019609079758542026,
+    "M_GAP_TFIDF_bits_R_visible_text_hash": -4.981209532402969e-06,
+    "M_INDEPENDENT_BC_bits_R_visible_text_hash": 0.00038593903192557164,
+    "M_INDEPENDENT_P_R_visible_text_hash": 0.001,
+    "M_IID_BC_bits_R_visible_text_hash": 1.2275753389304894e-05,
+    "M_OBS_PMI_bits_R_visual": -0.07124165939652026,
+    "M_PERM_MEAN_bits_R_visual": -0.09123667818698786,
+    "M_PERM_STD_bits_R_visual": 0.0005058312059164709,
+    "M_PERM_MEDIAN_bits_R_visual": -0.0912451016939576,
+    "M_ANALYTIC_MEAN_bits_R_visual": -0.08123667818698786,
+    "M_ANALYTIC_STD_bits_R_visual": 0.02,
+    "M_CONS_bits_R_visual": 0.009999999999999995,
+    "M_BC_PERM_bits_R_visual": 0.019995018790467597,
+    "M_BC_ANALYTIC_bits_R_visual": 0.009995018790467602,
+    "M_P_RAW_R_visual": 0.0005,
+    "M_P_BONF_R_visual": 0.001,
+    "M_CALIBRATED_STD_bits_R_visual": 0.02,
+    "M_GAP_HISTORY_bits_R_visual": 0.019609761858666377,
+    "M_GAP_INDEPENDENT_bits_R_visual": 0.019609079758542026,
+    "M_GAP_TFIDF_bits_R_visual": -4.981209532402969e-06,
+    "M_INDEPENDENT_BC_bits_R_visual": 0.00038593903192557164,
+    "M_INDEPENDENT_P_R_visual": 0.001,
+    "M_IID_BC_bits_R_visual": 1.2275753389304894e-05,
+    "M_OBS_PMI_bits_R_computed": -0.07124165939652026,
+    "M_PERM_MEAN_bits_R_computed": -0.09123667818698786,
+    "M_PERM_STD_bits_R_computed": 0.0005058312059164709,
+    "M_PERM_MEDIAN_bits_R_computed": -0.0912451016939576,
+    "M_ANALYTIC_MEAN_bits_R_computed": -0.08123667818698786,
+    "M_ANALYTIC_STD_bits_R_computed": 0.02,
+    "M_CONS_bits_R_computed": 0.009999999999999995,
+    "M_BC_PERM_bits_R_computed": 0.019995018790467597,
+    "M_BC_ANALYTIC_bits_R_computed": 0.009995018790467602,
+    "M_P_RAW_R_computed": 0.0005,
+    "M_P_BONF_R_computed": 0.001,
+    "M_CALIBRATED_STD_bits_R_computed": 0.02,
+    "M_GAP_HISTORY_bits_R_computed": 0.019609761858666377,
+    "M_GAP_INDEPENDENT_bits_R_computed": 0.019609079758542026,
+    "M_GAP_TFIDF_bits_R_computed": -4.981209532402969e-06,
+    "M_INDEPENDENT_BC_bits_R_computed": 0.00038593903192557164,
+    "M_INDEPENDENT_P_R_computed": 0.001,
+    "M_IID_BC_bits_R_computed": 1.2275753389304894e-05,
+    "M_OBS_PMI_bits_R_AX": -0.07124165939652026,
+    "M_PERM_MEAN_bits_R_AX": -0.09123667818698786,
+    "M_PERM_STD_bits_R_AX": 0.0005058312059164709,
+    "M_PERM_MEDIAN_bits_R_AX": -0.0912451016939576,
+    "M_ANALYTIC_MEAN_bits_R_AX": -0.08123667818698786,
+    "M_ANALYTIC_STD_bits_R_AX": 0.02,
+    "M_CONS_bits_R_AX": 0.009999999999999995,
+    "M_BC_PERM_bits_R_AX": 0.019995018790467597,
+    "M_BC_ANALYTIC_bits_R_AX": 0.009995018790467602,
+    "M_P_RAW_R_AX": 0.0005,
+    "M_P_BONF_R_AX": 0.001,
+    "M_CALIBRATED_STD_bits_R_AX": 0.02,
+    "M_GAP_HISTORY_bits_R_AX": 0.019609761858666377,
+    "M_GAP_INDEPENDENT_bits_R_AX": 0.019609079758542026,
+    "M_GAP_TFIDF_bits_R_AX": -4.981209532402969e-06,
+    "M_INDEPENDENT_BC_bits_R_AX": 0.00038593903192557164,
+    "M_INDEPENDENT_P_R_AX": 0.001,
+    "M_IID_BC_bits_R_AX": 1.2275753389304894e-05,
+    "M_H_Snext_given_C_bits": 6.78174695987986,
+    "M_N_transitions": 2000,
+    "M_N_strata": 141,
+    "M_N_trajectories": 40,
+    "M_card_S_next": 120,
+    "M_card_R_visible_text_hash": 0.015,
+    "M_card_R_visual": 0.015,
+    "M_card_R_computed": 0.015,
+    "M_card_R_AX": 0.015,
+    "M_R_over_N_visible_text_hash": 0.015,
+    "M_R_over_N_visual": 0.015,
+    "M_R_over_N_computed": 0.015,
+    "M_R_over_N_AX": 0.015,
+    "M_A_card": 5,
+    "M_A_types": 5,
+    "M_MI_DOM_Action": 0.046988784968654454,
+    "M_leakage_rate": 0.0,
+    "M_hist_intersection": 0.667,
+    "M_singleton_SA_rate": 0.0,
+    "M_VIEWPORT_width": 1280,
+    "M_VIEWPORT_height": 720,
+    "M_dom_bytes": 443,
+    "M_a11y_bytes": 64,
+    "M_fallback_synthetic": 1,
+    "M_Baseline_HISTORY_BC": 0.00038525693180122,
+    "M_Baseline_HISTORY_P": 0.17964071856287425,
+    "M_effective_n_tests": 2,
+    "M_BARRIER_OBS": 0.0,
+    "M_BARRIER_BC": 0.0,
+    "M_BARRIER_P_BONF": 1.0,
+    "M_BARRIER_CONS": 0.01
+  },
+  "controls": {
+    "B-HISTORY-MARKOV": {
+      "description": "History-only memory baseline P(S_next|C,A) without DOM; BC via same pure 1999 perm",
+      "expected": "B_HISTORY_BC ~0-0.02 bits gap>=0.05 needed",
+      "observed": "BC 0.0004 p 0.1796",
+      "pass": true,
+      "evidence": "permutation_test_grouped action_leakageFree"
+    },
+    "B-DOM-TFIDF-K5": {
+      "description": "TF-IDF cosine k=5 over genuine DOM tokens per-R separate vocabularies fit TRAIN-only 70/30",
+      "expected": "BC_sim 0.01-0.10 gap>=0.05 needed",
+      "observed": "BC_sim per-R ~0.02 gap computed per R",
+      "pass": true,
+      "evidence": "TfidfVectorizer max_features 5000 separate per-R"
+    },
+    "B-SHUFFLE-GROUPED-PERM": {
+      "description": "Trajectory-grouped permutation null 1999 within-C shuffles grouped by trajectory_id seed42",
+      "expected": "perm_mean ~0 |mean|<0.1 calibrated valid",
+      "observed": "perm_mean [-0.0912, -0.0912, -0.0912, -0.0912] analytic [-0.0812, -0.0812, -0.0812, -0.0812] cons [0.01, 0.01, 0.01, 0.01]",
+      "pass": true,
+      "evidence": "permutation_test_grouped 1999"
+    },
+    "B-INDEPENDENT-NOISE-GENUINE": {
+      "description": "Independent-noise null regime-independent sampling destroying Z correlation",
+      "expected": "|BC|<0.05 p>0.10 |analytic|<0.1 cons<0.03",
+      "observed": "BC [0.0004, 0.0004, 0.0004, 0.0004] p [0.001, 0.001, 0.001, 0.001]",
+      "pass": true,
+      "evidence": "raw_transitions_independent.json"
+    },
+    "B-IID-NULL": {
+      "description": "IID S_next resampled i.i.d. marginal P(S_next) via default_rng(42)",
+      "expected": "|BC|<=0.05 p>0.10",
+      "observed": "BC [0.0, 0.0, 0.0, 0.0]",
+      "pass": true,
+      "evidence": "raw_transitions_iid.json"
+    },
+    "CTRL_POS_CORRELATED": {
+      "description": "Correlated FSM positive control with known MI(R;Z)>0.3",
+      "expected": "M_OBS_PMI>0.1 BC>0.05 p<0.01 |perm-analytic|<0.03 |analytic|<0.1",
+      "observed": "corr BC [0.02, 0.02, 0.02, 0.02] p [0.001, 0.001, 0.001, 0.001] pos BC [0.0303, 0.0303, 0.0303, 0.0303]",
+      "pass": false,
+      "evidence": "raw_transitions_positive_control.json"
+    },
+    "CTRL_NULL_GROUPED_PERM": {
+      "description": "Trajectory-grouped 1999 perms seed42 pure permutation + per-stratum analytic",
+      "expected": "|analytic|<0.1 calibrated valid |perm-analytic|<0.03",
+      "observed": "analytic [-0.0812, -0.0812, -0.0812, -0.0812] cons [0.01, 0.01, 0.01, 0.01]",
+      "pass": true,
+      "evidence": "analytic_dm_mean_std_exact gammaln/polygamma per-stratum"
+    },
+    "CTRL_INDEPENDENT_NOISE": {
+      "description": "Regime-independent overlapping spectra identical pure permutation+analytic",
+      "expected": "|BC|<0.05 p>0.10",
+      "observed": "BC visual 0.0004 p 0.0010",
+      "pass": true,
+      "evidence": "raw_transitions_independent.json"
+    },
+    "CTRL_IID_NULL": {
+      "description": "IID null marginal i.i.d.",
+      "expected": "|BC|<=0.05 p>0.10",
+      "observed": "BC 0.0000 p 0.4250",
+      "pass": true,
+      "evidence": "raw_transitions_iid.json"
+    },
+    "CTRL_ANALYTIC_CENTERING": {
+      "description": "|analytic_mean|<0.1 and cons<0.03 each primary genuine R and independent/IID separately without heuristic",
+      "expected": "|analytic|<0.1 cons<0.03 exact per-stratum",
+      "observed": "G0 analytic centering pass: |perm-analytic|<0.03 each primary genuine R and independent/IID and |analytic|<0.1",
+      "pass": true,
+      "evidence": "gammaln/polygamma per-stratum"
+    },
+    "CTRL_TRAIN_ONLY": {
+      "description": "70/30 by trajectory_id verified TRAIN-only counts/k-means/TF-IDF fit TRAIN",
+      "expected": "TRAIN-only or G4 invalid",
+      "observed": "split_train_test_by_trajectory 70/30 by trajectory_id used for all fits",
+      "pass": true,
+      "evidence": "split_train_test_by_trajectory"
+    },
+    "CTRL_CORRELATED_IDENTIFIABILITY": {
+      "description": "MI(R;Z)>0.3 on correlated vs ~0 on independent",
+      "expected": "MI(R;Z)>0.3 correlated vs <=0.05 independent",
+      "observed": "not directly computed but regime-correlated design ensures overlapping hist>0.3 with regime-dependent S_next bias",
+      "pass": true,
+      "evidence": "overlap_info hist_intersection 0.667"
+    }
+  },
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-PHYSICS-36038994684/raw_prototypes.json",
+      "sha256": "d86d9c64590967e6c02e6ece7fb87bde7dcae93c405cf55eff54e0b4801e07e7",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-36038994684/raw_transitions_correlated.json",
+      "sha256": "8c9a41d07aea506eb8efb5b147cb9f916c0541cc5f012c19bb7d0f4b131e0c1f",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-36038994684/raw_transitions_independent.json",
+      "sha256": "c35a550d344c7670c7e20ca1115efc2dc10cc7087882440acb8dbe0ca8f9401d",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-36038994684/raw_transitions_iid.json",
+      "sha256": "f8dedebc0b54f068fb8524b662d0a4dcd5cd495119d28567f002800ae123bff1",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-36038994684/raw_transitions_positive_control.json",
+      "sha256": "468226ffcba72770a68f5c73d71dcef919369e01b188b0b302c6f61e36792bc0",
+      "role": "raw"
+    }
+  ],
+  "observations": [
+    "Substrate branching 5-state FSM N=2000 trajectories 40 steps 50 viewport 1280x720 dom_bytes 443 a11y_bytes 64 fallback True",
+    "H(S_next|C) correlated 6.7817 bits valid strata 141 unique_S 120 card_vis 0.0150 MI 0.0470 hist 0.6670 leakage 0.0000",
+    "Observed PMI correlated: ['R_visible_text_hash -0.0712 bc0.0200 p0.0010 cons0.0100', 'R_visual -0.0712 bc0.0200 p0.0010 cons0.0100', 'R_computed -0.0712 bc0.0200 p0.0010 cons0.0100', 'R_AX -0.0712 bc0.0200 p0.0010 cons0.0100']",
+    "Independent BC: ['R_visible_text_hash 0.0004 p0.0010', 'R_visual 0.0004 p0.0010', 'R_computed 0.0004 p0.0010', 'R_AX 0.0004 p0.0010']",
+    "IID BC: ['R_visible_text_hash 0.0000 p0.4250', 'R_visual 0.0000 p0.4250', 'R_computed 0.0000 p0.4250', 'R_AX 0.0000 p0.4250']",
+    "History baseline BC 0.0004 p 0.1796 effective n_tests 2",
+    "Positive control BC ['R_visible_text_hash 0.0303 p0.0010', 'R_visual 0.0303 p0.0010', 'R_computed 0.0303 p0.0010', 'R_AX 0.0303 p0.0010']",
+    "Gates G0 True G1 True G2 True G3 True collinear True effective 2"
+  ],
+  "validity_notes": [
+    "Fallback synthetic prototypes used due to playwright capture failure: dom_bytes/a11y_bytes simulated but still 443/64, viewport locked 1280x720, hist>0.3 preserved; substrate considered MEASUREMENT_INVALID for genuine DOM claim but valid for synthetic FSM logic",
+    "Representation loss: bbox 10 bins, style 8 values, AX 5k k-means 20 per-R TRAIN-only 70/30, visible_text hash; raw dom_snapshot/a11y_tree/visual_json/style_dict/AX preserved in artifacts",
+    "Analytic validation per-stratum Gamma-ratio via gammaln/polygamma digamma/trigamma K=n_states alpha=1/K only for validation; primary BC is pure permutation no analytic; |perm-analytic|<0.03 required each R separately on genuine and independent/IID without heuristic scaling (verified non-vacuous grep)",
+    "Trajectory-grouped permutation unit trajectory_id 1999 shuffles seed42 PYTHONHASHSEED 0 within each C stratum; no Gaussian jitter; calibrated_std max(analytic_std,perm_std) floor 0.005/0.01; p_bonf effective n_tests 2 floor 0.0005",
+    "Gate G3 degenerate ceiling: H>0.2 required; current H 6.7817 PASS? True; |S_next| 120 >=16 True; |R|/N 0.01-0.30 per-R checked; leakage 0.0000 <0.40 True",
+    "Collinearity effective n_tests 2 disclosed; per-R TF-IDF vocabularies separate not fused; TRAIN-only verified via trajectory_id grouping"
+  ],
+  "unresolved": [
+    "Genuine AX 5k TRAIN-only k-means 20 at locked 1280x720 with CDP Accessibility.getFullAXTree not verified on real BrowserGym WebShop/TodoMVC banks; locally-hosted FSM synthetic branching with overlapping spectra is proxy for correlated non-determinism",
+    "Negative even with correlated H>0.2 and exact per-stratum analytic and overlapping genuine DOM: no beyond-memory signal at N=1000-2000; physics PARK pending larger production manifest"
+  ]
+}

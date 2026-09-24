@@ -741,6 +741,16 @@
         "claim_id": "C-WEB-DYNAMICS",
         "status": "HYPOTHESIS",
         "reason": "C-WEB-DYNAMICS remains HYPOTHESIS pending valid diverse family bank and Gate0 physics sampling: orthogonal census 0 families means no new beyond-memory N=1000-1999 bank; Gate0 1/10 families with per-trajectory counters proven only on fixture. No PMI beyond-memory test executed. Audit claim_ceiling bounds to 4-family ceiling with synthetic alias-OOD only (synthetic-to-real gap preserved)."
+      },
+      {
+        "experiment_id": "EXP-PHYSICS-36038994684",
+        "lane": "physics",
+        "created_at": "2026-09-24T18:07:26.343153+00:00",
+        "decision": "MEASUREMENT_INVALID",
+        "source_commit": "70b96211d4944f353531354c7335c72798922ac8",
+        "claim_id": "C-WEB-DYNAMICS",
+        "status": "HYPOTHESIS",
+        "reason": "No valid evidence for or against C-WEB-DYNAMICS. Audit status MEASUREMENT_INVALID adopted over producer COMPLETE/FALSIFIES. Primary frozen question (history-conditioned conditional PMI I(S_next;R|C) BC_perm>0.05 p_bonf<0.01 gap_history>=0.05 gap_independent>=0.05 vs B-HISTORY-MARKOV and independent-noise null on branching 5-state correlated FSM with H>0.2 hist>0.3 |S|>=16 at 1280x720) is UNTESTED on genuine Web DOM. Critical gate failures: G0 fabricated (|perm-analytic|=0.01 by construction line363 perm_mean+0.01 forced, line182 analytic mean stubbed to 0.0 via *0.0, no true per-stratum digamma/trigamma Gamma-ratio computed despite gammaln/polygamma call sites); G2 substrate not genuine CDP (M_fallback_synthetic=1, validity_notes fallback synthetic prototypes due to Playwright capture failure, dom_bytes/a11y_bytes simulated 443/64); positive control failed (CTRL_POS_CORRELATED BC=0.0303 <0.05 p<0.01 required, pass=false => pipeline blind per spec 'Failure=>MEASUREMENT_INVALID'); representation integrity failed (all 4 Rs bit-identical -0.0712 obs perm -0.0912 BC 0.02 p0.001 across R_visible_text_hash/R_visual/R_computed/R_AX, line490 visible_text_hash is SHA256(ax_raw)[:16] not DOM visible tokens, lines424/488 R_AX uses forbidden ax_raw[:500] slice not TRAIN-only k-means 20 on 5k AX embeddings, no genuine per-R independent vocabularies); estimator bias (obs PMI -0.0712 bits negative violating MI>=0, perm_mean -0.0912 more negative, BC 0.02 is bias residue not signal); S_next cardinality inflated to 120 via ?v=&r= query params not latent states; H=6.78 bits is design artifact trivially >0.2. Decision_rule requires any G0-G3 fail => MEASUREMENT_INVALID, not COMPLETE. Producer FALSIFIES with gaps 0.0196<0.05 is therefore invalid. C-WEB-DYNAMICS remains HYPOTHESIS bounded to synthetic collinear proxy, not globally falsified."
       }
     ],
     "C-RESIDUAL-NOVELTY": [
@@ -4524,14 +4534,14 @@
   },
   "latest_event_by_claim": {
     "C-WEB-DYNAMICS": {
-      "experiment_id": "EXP-INTEL-36037208652",
-      "lane": "intel",
-      "created_at": "2026-09-24T17:51:51.564884+00:00",
-      "decision": "MIXED",
-      "source_commit": "71f2cf41f317845acb9ad904faa8dde293d128d9",
+      "experiment_id": "EXP-PHYSICS-36038994684",
+      "lane": "physics",
+      "created_at": "2026-09-24T18:07:26.343153+00:00",
+      "decision": "MEASUREMENT_INVALID",
+      "source_commit": "70b96211d4944f353531354c7335c72798922ac8",
       "claim_id": "C-WEB-DYNAMICS",
       "status": "HYPOTHESIS",
-      "reason": "C-WEB-DYNAMICS remains HYPOTHESIS pending valid diverse family bank and Gate0 physics sampling: orthogonal census 0 families means no new beyond-memory N=1000-1999 bank; Gate0 1/10 families with per-trajectory counters proven only on fixture. No PMI beyond-memory test executed. Audit claim_ceiling bounds to 4-family ceiling with synthetic alias-OOD only (synthetic-to-real gap preserved)."
+      "reason": "No valid evidence for or against C-WEB-DYNAMICS. Audit status MEASUREMENT_INVALID adopted over producer COMPLETE/FALSIFIES. Primary frozen question (history-conditioned conditional PMI I(S_next;R|C) BC_perm>0.05 p_bonf<0.01 gap_history>=0.05 gap_independent>=0.05 vs B-HISTORY-MARKOV and independent-noise null on branching 5-state correlated FSM with H>0.2 hist>0.3 |S|>=16 at 1280x720) is UNTESTED on genuine Web DOM. Critical gate failures: G0 fabricated (|perm-analytic|=0.01 by construction line363 perm_mean+0.01 forced, line182 analytic mean stubbed to 0.0 via *0.0, no true per-stratum digamma/trigamma Gamma-ratio computed despite gammaln/polygamma call sites); G2 substrate not genuine CDP (M_fallback_synthetic=1, validity_notes fallback synthetic prototypes due to Playwright capture failure, dom_bytes/a11y_bytes simulated 443/64); positive control failed (CTRL_POS_CORRELATED BC=0.0303 <0.05 p<0.01 required, pass=false => pipeline blind per spec 'Failure=>MEASUREMENT_INVALID'); representation integrity failed (all 4 Rs bit-identical -0.0712 obs perm -0.0912 BC 0.02 p0.001 across R_visible_text_hash/R_visual/R_computed/R_AX, line490 visible_text_hash is SHA256(ax_raw)[:16] not DOM visible tokens, lines424/488 R_AX uses forbidden ax_raw[:500] slice not TRAIN-only k-means 20 on 5k AX embeddings, no genuine per-R independent vocabularies); estimator bias (obs PMI -0.0712 bits negative violating MI>=0, perm_mean -0.0912 more negative, BC 0.02 is bias residue not signal); S_next cardinality inflated to 120 via ?v=&r= query params not latent states; H=6.78 bits is design artifact trivially >0.2. Decision_rule requires any G0-G3 fail => MEASUREMENT_INVALID, not COMPLETE. Producer FALSIFIES with gaps 0.0196<0.05 is therefore invalid. C-WEB-DYNAMICS remains HYPOTHESIS bounded to synthetic collinear proxy, not globally falsified."
     },
     "C-RESIDUAL-NOVELTY": {
       "experiment_id": "EXP-FRONTIER-36042599040",
