@@ -1,0 +1,16 @@
+{
+ "total_tasks": 0,
+ "shopping_tasks": 0,
+ "families_ge3_shopping": 0,
+ "families_ge3_ids": [],
+ "family_size_histogram": {},
+ "families_ge3_all_sites_count": 0,
+ "product_page_families": [],
+ "product_page_tasks": 0,
+ "family_product_urls": {},
+ "family_start_urls": {},
+ "census_label": "WebGym-derived 292k/127k families",
+ "experiment_id": "EXP-INTEL-36037208652",
+ "provenance": "UNAVAILABLE HF_TOKEN absent 401 x2 (hf_webgym_manifest_attempts.json)",
+ "note": "When HF_TOKEN succeeds would sample >=50 distinct eTLD+1; currently UNAVAILABLE per MV5 exception"
+}

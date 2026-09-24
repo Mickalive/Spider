@@ -1,0 +1,8 @@
+REPOSITORY                                   TAG       DIGEST                                                                    IMAGE ID       CREATED        SIZE
+ghcr.io/github/gh-aw-mcpg                    latest    sha256:9be0a86220e807a0ecc89e53d7453468f7a53fbc6b3d1efd2299025ffe01d086   8fd5ed88dce2   7 days ago     181MB
+ghcr.io/github/gh-aw-firewall/agent          latest    sha256:1bacef0f405d77999d01d8c00cb731222531b3f43ef9dc8312c513d6d9038bb1   dc9d80ee1508   7 days ago     565MB
+ghcr.io/github/github-mcp-server             latest    sha256:508a0857ec762b1ab1cece29193345b501fab1dd9d1228a7b617062954cecac6   09777492cb75   8 days ago     46.9MB
+ghcr.io/dependabot/dependabot-updater-core   latest    sha256:9449e9908fd44ed006f2fbde2066eba314d45c564c765d50eaa1aedb96cabde0   8c87fce2da7e   8 days ago     828MB
+ghcr.io/github/gh-aw-firewall/api-proxy      latest    sha256:30ab6d3261dd95364281fa0b52ab78450e1c01aa074eccc3a8d4f04b12a6560b   008b8653cd89   9 days ago     209MB
+ghcr.io/github/gh-aw-firewall/squid          latest    sha256:cba5f56857e4869c4a00c1cce29c3056516cf1a746e18ce380753ecfbe40f112   ebc9c9e5ccbd   6 weeks ago    43.1MB
+am1n3e/webarena-verified-shopping            <none>    sha256:3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb   a5b6fb47ee9f   7 months ago   13.3GB

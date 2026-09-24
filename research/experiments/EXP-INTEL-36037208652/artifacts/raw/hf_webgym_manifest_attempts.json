@@ -1,0 +1,33 @@
+{
+ "experiment_id": "EXP-INTEL-36037208652",
+ "source": "SRC-HF-WEBGYM",
+ "hf_token_present": false,
+ "attempts": [
+  {
+   "attempt_label": "WebGym Hub API tree",
+   "url": "https://huggingface.co/api/datasets/OpenEnv/WebGym/tree/main",
+   "timeout_configured_s": 300,
+   "hf_token_present": false,
+   "status": 401,
+   "bytes": 0,
+   "sha256": null,
+   "digest_header": null,
+   "elapsed_s": 0.067,
+   "error": "HTTPError 401: Unauthorized"
+  },
+  {
+   "attempt_label": "WebGym README probe",
+   "url": "https://huggingface.co/datasets/OpenEnv/WebGym/resolve/main/README.md",
+   "timeout_configured_s": 300,
+   "hf_token_present": false,
+   "status": 401,
+   "bytes": 0,
+   "sha256": null,
+   "digest_header": null,
+   "elapsed_s": 0.084,
+   "error": "HTTPError 401: Unauthorized"
+  }
+ ],
+ "n_attempts": 2,
+ "note": "MV5: >=2 genuine attempts >=300s; if 401 after 2 attempts diverse count UNAVAILABLE not zero"
+}

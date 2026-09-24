@@ -1,0 +1,16 @@
+{
+ "total_tasks": 0,
+ "shopping_tasks": 0,
+ "families_ge3_shopping": 0,
+ "families_ge3_ids": [],
+ "family_size_histogram": {},
+ "families_ge3_all_sites_count": 0,
+ "product_page_families": [],
+ "product_page_tasks": 0,
+ "family_product_urls": {},
+ "family_start_urls": {},
+ "census_label": "WebMall/Mind2Web-2 BrowserGym loopback 130-task",
+ "experiment_id": "EXP-INTEL-36037208652",
+ "provenance": "UNAVAILABLE after 2 genuine HF attempts 404/401 logged; no manifest bytes SHAnull",
+ "note": "Orthogonal census A independent eTLD+1 hosting slice not fetchable without HF provision; logged UNAVAILABLE not zero"
+}

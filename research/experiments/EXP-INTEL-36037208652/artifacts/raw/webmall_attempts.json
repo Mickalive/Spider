@@ -1,0 +1,31 @@
+{
+ "experiment_id": "EXP-INTEL-36037208652",
+ "source": "SRC-WEBMALL",
+ "attempts": [
+  {
+   "attempt_label": "WebMall HF probe",
+   "url": "https://huggingface.co/api/datasets/WebMall/WebMall/tree/main",
+   "timeout_configured_s": 300,
+   "hf_token_present": false,
+   "status": 401,
+   "bytes": 0,
+   "sha256": null,
+   "digest_header": null,
+   "elapsed_s": 0.099,
+   "error": "HTTPError 401: Unauthorized"
+  },
+  {
+   "attempt_label": "WebMall README probe",
+   "url": "https://huggingface.co/datasets/WebMall/WebMall/resolve/main/README.md",
+   "timeout_configured_s": 300,
+   "hf_token_present": false,
+   "status": 401,
+   "bytes": 0,
+   "sha256": null,
+   "digest_header": null,
+   "elapsed_s": 0.062,
+   "error": "HTTPError 401: Unauthorized"
+  }
+ ],
+ "n_genuine_attempts": 2
+}

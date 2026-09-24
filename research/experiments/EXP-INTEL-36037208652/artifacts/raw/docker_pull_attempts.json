@@ -1,0 +1,33 @@
+{
+ "experiment_id": "EXP-INTEL-36037208652",
+ "source": "SRC-DOCKER-PULL",
+ "pull_attempts": [
+  {
+   "cmd": "docker pull am1n3e/webarena-verified-shopping@sha256:3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb",
+   "timeout_configured_s": 300,
+   "returncode": 0,
+   "stdout_tail": "docker.io/am1n3e/webarena-verified-shopping@sha256:3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb: Pulling from am1n3e/webarena-verified-shopping\nc65b6d59765c: Pulling fs layer\ne7aabb51d2b1: Pulling fs layer\n4f4fb700ef54: Pulling fs layer\nb055823521cb: Pulling fs layer\neb7578cf2e0d: Pulling fs layer\n673a2d1870a6: Pulling fs layer\n11937473430d: Pulling fs layer\nde55a3f5673d: Pulling fs layer\neb7578cf2e0d: Waiting\n673a2d1870a6: Waiting\n11937473430d: Waiting\nde55a3f5673d: Waiting\nb055823521cb: Waiting\n4f4fb700ef54: Verifying Checksum\n4f4fb700ef54: Download complete\nb055823521cb: Verifying Checksum\nb055823521cb: Download complete\neb7578cf2e0d: Verifying Checksum\neb7578cf2e0d: Download complete\n673a2d1870a6: Verifying Checksum\n673a2d1870a6: Download complete\n11937473430d: Download complete\nde55a3f5673d: Verifying Checksum\nde55a3f5673d: Download complete\ne7aabb51d2b1: Verifying Checksum\ne7aabb51d2b1: Download complete\nc65b6d59765c: Verifying Checksum\nc65b6d59765c: Download complete\nc65b6d59765c: Pull complete\ne7aabb51d2b1: Pull complete\n4f4fb700ef54: Pull complete\nb055823521cb: Pull complete\neb7578cf2e0d: Pull complete\n673a2d1870a6: Pull complete\n11937473430d: Pull complete\nde55a3f5673d: Pull complete\nDigest: sha256:3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb\nStatus: Downloaded newer image for am1n3e/webarena-verified-shopping@sha256:3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb\ndocker.io/am1n3e/webarena-verified-shopping@sha256:3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb\n",
+   "stderr_tail": "",
+   "elapsed_s": 161.165,
+   "error": null
+  },
+  {
+   "cmd": "docker pull am1n3e/webarena-verified-shopping@sha256:3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb",
+   "timeout_configured_s": 300,
+   "returncode": 0,
+   "stdout_tail": "docker.io/am1n3e/webarena-verified-shopping@sha256:3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb: Pulling from am1n3e/webarena-verified-shopping\nDigest: sha256:3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb\nStatus: Image is up to date for am1n3e/webarena-verified-shopping@sha256:3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb\ndocker.io/am1n3e/webarena-verified-shopping@sha256:3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb\n",
+   "stderr_tail": "",
+   "elapsed_s": 0.119,
+   "error": null
+  }
+ ],
+ "docker_images_digests": {
+  "cmd": "docker images --digests am1n3e/webarena-verified-shopping",
+  "timeout_configured_s": 120,
+  "returncode": 0,
+  "stdout_tail": "REPOSITORY                          TAG       DIGEST                                                                    IMAGE ID       CREATED        SIZE\nam1n3e/webarena-verified-shopping   <none>    sha256:3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb   a5b6fb47ee9f   7 months ago   13.3GB\n",
+  "stderr_tail": "",
+  "elapsed_s": 0.014,
+  "error": null
+ }
+}

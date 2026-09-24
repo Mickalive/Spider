@@ -1,0 +1,16 @@
+{
+ "experiment_id": "EXP-INTEL-36037208652",
+ "control_id": "PC-D",
+ "fixture_task_count": 6,
+ "families_ge3": 2,
+ "families_ge3_ids": [
+  901,
+  902
+ ],
+ "product_page_families": [
+  901,
+  902
+ ],
+ "pass": true,
+ "expected": "families_ge3 >=2 on fixture data"
+}

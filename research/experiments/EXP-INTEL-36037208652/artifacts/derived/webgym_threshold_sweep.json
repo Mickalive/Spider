@@ -1,0 +1,16 @@
+{
+ "experiment_id": "EXP-INTEL-36037208652",
+ "hf_token_present": false,
+ "note": "WebGym 292k manifest UNAVAILABLE after 2 genuine 401 attempts; threshold sweep at 0.818 and 0.9479 not computable; range>=0.05 gate UNAVAILABLE not falsified per MV5",
+ "thresholds": [
+  0.818,
+  0.9479
+ ],
+ "prevalence_at_0_818": null,
+ "prevalence_at_0_9479": null,
+ "range": null,
+ "range_gate": ">=0.05",
+ "pass": null,
+ "status": "UNAVAILABLE",
+ "evidence": "artifacts/raw/hf_webgym_manifest_attempts.json"
+}

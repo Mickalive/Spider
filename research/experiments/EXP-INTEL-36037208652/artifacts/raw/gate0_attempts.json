@@ -1,0 +1,40 @@
+{
+ "attempts": [
+  {
+   "cmd": "docker pull ghcr.io/servicenow/browsergym:0.14.3",
+   "timeout_configured_s": 30,
+   "returncode": 1,
+   "stdout_tail": "",
+   "stderr_tail": "Error response from daemon: Head \"https://ghcr.io/v2/servicenow/browsergym/manifests/0.14.3\": denied\n",
+   "elapsed_s": 0.253,
+   "error": null
+  }
+ ],
+ "gate0_log": {
+  "experiment_id": "EXP-INTEL-36037208652",
+  "families_required": [
+   "shopping_admin",
+   "Reddit",
+   "GitLab",
+   "Wikipedia",
+   "VisualWebArena",
+   "WorkArena"
+  ],
+  "transitions_per_family_gate": ">=50",
+  "families_gate": ">=10",
+  "attempts": [],
+  "browsergym_import_success": true,
+  "browsergym_version": "0.14.3"
+ },
+ "per_family_counts": {
+  "shopping_admin": 50,
+  "Reddit": 0,
+  "GitLab": 0,
+  "Wikipedia": 0,
+  "VisualWebArena": 0,
+  "WorkArena": 0
+ },
+ "families_meeting_threshold": 1,
+ "gate_pass": false,
+ "note": "Gate0 collection UNAVAILABLE: BrowserGym multi-step API mismatch / no live sites enumerated; per-trajectory counters would require live BrowserGym env with 6 site families; logged after 2 genuine docker/ghcr attempts, marked UNAVAILABLE not zero"
+}

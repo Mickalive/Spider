@@ -1,0 +1,84 @@
+{
+ "experiment_id": "EXP-INTEL-36020904615",
+ "measurement": "full_tree_multi_anchor_ax_consistency",
+ "families": [
+  136,
+  145,
+  196,
+  222
+ ],
+ "n_families": 4,
+ "frozen_gate_requires_families": 10,
+ "frozen_gate_family_set_available": false,
+ "n_captures_per_family": 3,
+ "viewport": {
+  "width": 1280,
+  "height": 720
+ },
+ "urls": {
+  "136": "http://localhost:7770/ostent-16gb-memory-card-stick-storage-for-sony-ps-vita-psv1000-2000-pch-z081-z161-z321-z641.html",
+  "145": "http://localhost:7770/tall-pink-taper-candles-4-piece-orange-colored-tapered-candles-gradient-candles-10-6-inches-tall-tie-dye-candle-set-large-dripless-long-burning-candlesticks-two-color-taper-candles-candlesticks.html",
+  "196": "http://localhost:7770/elmwood-inn-fine-teas-orange-vanilla-caffeine-free-fruit-infusion-16-ounce-pouch.html",
+  "222": "http://localhost:7770/6s-wireless-headphones-over-ear-noise-canceling-hi-fi-bass-foldable-stereo-wireless-kid-headsets-earbuds-with-built-in-mic-micro-sd-tf-fm-for-iphone-samsung-ipad-pc-black-gold.html"
+ },
+ "full_tree": {
+  "per_family": {
+   "136": 0.37448559670781895,
+   "145": 0.4401041666666667,
+   "196": 0.5417867435158501,
+   "222": 0.4606741573033708
+  },
+  "mean": 0.45426266604842663,
+  "variance": 0.004755471751318398,
+  "bootstrap_ci_95": {
+   "lower": 0.3960327368567069,
+   "upper": 0.5163660993035543
+  },
+  "bootstrap_B": 2000,
+  "bootstrap_unit": "family",
+  "shuffle_means_mean": 0.31108505612628257,
+  "shuffle_p": 0.0,
+  "shuffle_B": 2000,
+  "gap": 0.14317760992214407
+ },
+ "truncated_20": {
+  "per_family": {
+   "136": 0.021220159151193633,
+   "145": 0.027491408934707903,
+   "196": 0.030534351145038167,
+   "222": 0.029304029304029304
+  },
+  "mean": 0.02713748713374225
+ },
+ "delta_vs_truncated": 0.4271251789146844,
+ "nc2_shuffled_variant": {
+  "B": 500,
+  "delta_mean": 0.31097536359029665,
+  "delta_upper_95": 0.3196461580200629,
+  "gate_delta_lt_0_05": false
+ },
+ "diagnostics": {
+  "median_ax": 702.5,
+  "median_dom": 218149.0,
+  "min_ax": 667,
+  "min_dom": 198426,
+  "sha_before_after_identical_style_revert": true,
+  "sha_style_mutation_changed": true,
+  "grammar_hash_live": "273eafbcb817e8981f843581a724594665cabdd357b318c701251929ee9c83de",
+  "ax_mode": "CDP Accessibility.getFullAXTree"
+ },
+ "gates_on_constructible_set": {
+  "mean_ge_0_6": false,
+  "ci_lower_gt_0_5": false,
+  "shuffle_p_lt_0_05": true,
+  "gap_ge_0_20": false,
+  "variance_gt_0": true,
+  "delta_vs_truncated_ge_0_20": true,
+  "median_ax_gt_10": true,
+  "median_dom_ge_2000": true
+ },
+ "gates_on_frozen_ge10_family_set": {
+  "available": false,
+  "reason": "only 4 constructible product families exist in primary+Hard258 union; the frozen gate is defined on >=10 constructible families"
+ }
+}

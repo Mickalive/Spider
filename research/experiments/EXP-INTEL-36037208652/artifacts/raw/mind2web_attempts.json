@@ -1,0 +1,31 @@
+{
+ "experiment_id": "EXP-INTEL-36037208652",
+ "source": "SRC-MIND2WEB",
+ "attempts": [
+  {
+   "attempt_label": "Mind2Web HF tree",
+   "url": "https://huggingface.co/api/datasets/osunlp/Mind2Web/tree/main",
+   "timeout_configured_s": 300,
+   "hf_token_present": false,
+   "status": 200,
+   "bytes": 888,
+   "sha256": "df8bdabc1174db7e78f1d3570f0a85125370f929d7ea937ee31d45d70f8597e3",
+   "digest_header": null,
+   "elapsed_s": 0.091,
+   "error": null
+  },
+  {
+   "attempt_label": "Mind2Web README",
+   "url": "https://huggingface.co/datasets/osunlp/Mind2Web/resolve/main/README.md",
+   "timeout_configured_s": 300,
+   "hf_token_present": false,
+   "status": 200,
+   "bytes": 4308,
+   "sha256": "d2da20abbf17ac82f874d78ced28ceaaf3b15466011d3674deaa2c4597862a4a",
+   "digest_header": null,
+   "elapsed_s": 0.116,
+   "error": null
+  }
+ ],
+ "n_genuine_attempts": 2
+}
