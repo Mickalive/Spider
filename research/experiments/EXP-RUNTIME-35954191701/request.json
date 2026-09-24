@@ -1,0 +1,43 @@
+{
+  "base_sha": "1ca8c802977df57836ec5630a9916bc987b034ce",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-24T04:06:18.684421+00:00",
+  "director_mandate": {
+    "agent_priors_used": [
+      "Long-horizon agents accumulate path-dependence and planning-error compounding that dominates true Web dynamics \u2014 distinguished from SPIDER evidence: used to require honest novelty tracking before invoking low-dimensional physics; SPIDER evidence is 71 physics exps with negative log BF and rho_novelty 0.363<0.60, not the prior itself",
+      "Local optima and repeated parameterization (alias catalog + Jaccard>=0.6 + routing norm) yield diminishing returns; orthogonal levels of description beat next hyperparameter \u2014 distinguished from SPIDER evidence: used to justify pivot from 17-streak alias tunnel; SPIDER evidence is pooled 0.525<0.60 and 0/10 mixed with zero marginal gain",
+      "Verification/UNKNOWN calibration, not retrieval, is product bottleneck \u2014 pay cost of novelty only if verification prevents false accepts without exploding abstention \u2014 distinguished from SPIDER evidence: used to require TN>=0.85, FA<=0.10, precision>=0.85, ECE<=0.15 gates; SPIDER evidence is freshness TN fragile and product falsification on ECE/false_accept",
+      "Retrieval beating no-memory is not evidence of inheritance; deterministic replay of sanitized selectors mimics success \u2014 distinguished from SPIDER evidence: used to mandate cold vs instructions vs RAG vs SPIDER same model/tools/budget 15 steps; SPIDER evidence is early 69.6% reused hand-structured POC and Stagehand HIT/MISS confounds"
+    ],
+    "allocation": {
+      "action": "CONTINUE",
+      "claim_id": "C-MEAS-VALID",
+      "cognitive_reset": true,
+      "comparative_reasoning": "Vs distributed 2x gunicorn+nginx retry now: would reproduce same infinite-loop MEASUREMENT_INVALID, wasting cycle \u2014 single-node is necessary predecessor. Vs browser-native DSM/dom-distiller evaluation (TreeWalker 99% compression, MutationObserver <5ms): reusing external DSM duplicates already-local byte-preserving HIT but does not prove HS256/304 freshness semantics SPIDER needs; single-node HS256 gate is more discriminating for auth/session drift. Vs production CDN HIT design: bounded to nginx-class, lower leverage than fixing Flask HS256 health gate.",
+      "dependencies": [],
+      "parent_handoff_disposition": "SUPERSEDE",
+      "question": "After fixing single-node honesty gate (sys.path insert Path(__file__).parent, factory-pattern DB creation, Flask 127.0.0.1:19860 liveness before nginx 1.24.0:19851, Flask HS256 shared TESTBED_SECRET, n_non304>=800 stratified 400/endpoint with real If-None-Match/ETag->304, header-only Jaccard minus {Content-Length,ETag} de-confounded |r|<0.30, oracle-free greedy brotli->gzip MAX_DEPTH5 byte-identical, B=5000 trajectory-grouped |rho_shuffled|<0.20, 304 stratification verified via X-Worker-Pid>=2 distribution), does the HTTP fingerprint substrate maintain full-vector discrimination >0.5 (null FP<5%, valid vs expired Jaccard<0.5, header-only >0.5 and body-only >0.5 isolation) on single-node Flask/JWT before authorizing distributed 2x gunicorn+nginx shared-WAL round-robin?",
+      "rationale": "Runtime IDLE 52-streak C-MEAS-VALID, tunnel_flag true, last distributed HS256 infinite loop MEASUREMENT_INVALID (wsgi import, factory-pattern DB absent, flask not listening). Prior 3 narrow localhost SUPPORTS (960/960 byte-identical HIT/SWR/SIE/304, header-only full 1.0>body 0.0, body-only full 1.0>status 0.0) do not generalize to shared-WAL. Central blocker for Graph freshness VALIDATED and Physics Gate0 (CDP Accessibility.getFullAXTree 1280x720). Fixing single-node with explicit gates directly distinguishes infrastructure bug vs true discrimination failure and is required before any distributed retry. Highest marginal substrate value."
+    },
+    "cycle_id": "35953766700",
+    "lane": "runtime",
+    "portfolio_assessment": "324 experiments, evidence-rich substrate but product promise unproven. C-FRESHNESS has two synthetic SURVIVES (TN>=0.85 Wilson lower>0.75, FA<=0.10, per-class ECE<=0.15 on flat-JSON) but distributed n>=800 HS256 shared-WAL transfer remains MEASUREMENT_INVALID \u2014 ceiling EXPERIMENTAL not VALIDATED. C-MEAS-VALID closed 960/960 byte-identical nginx HIT locally but distributed Flask HS256 infinite-loop (wsgi import, factory-pattern DB) blocks Graph/Physics downstream. C-SEMANTIC-RESOLVE locked 17-streak alias catalog + routing + WebMCP at 20-21/40=0.525 pooled <0.60, mixed 0/10 header+body+query+auth with zero marginal routing gain \u2014 marginal information of 18th permutation ~0. C-WEB-DYNAMICS 71 exps, 0 real beyond-memory hits: synthetic Bayesian DM K12 passes C1+C3 but real BrowserGym WebShop/TodoMVC log BF -10 to -15 favoring memory, DOM R tautology, BC~0/rel_sep<200. C-PARAM-INHERIT 49 exps, 8 consecutive WebArena-Verified v2 family hold-out pilots MEASUREMENT_INVALID on kernel durability/honest cost \u2014 no EXECUTABLE>=0.75 or binding>=0.90 on live browser. C-RESIDUAL-NOVELTY/C-PRODUCT-ECON falsified per-hit (M_total_f10-L 1.005>0.85, rho 0.363<0.60) vs RAG-EMBED TAU0.30/Stagehand/WebMCP. Bottleneck is honest end-to-end residual-novelty Pareto on real BrowserGym 1280x720 WebArena-Verified Hard vs compiled O(1) DSM IR ($0.002-0.092) \u2014 substrate fixes must precede it. Sequencing single-node honesty gates before distributed/Pareto maximizes information gain; continuing trapped tunnels wastes cycles.",
+    "schema_version": 1,
+    "scout_assessment": "Scout brief was decisive but not authoritative. Adopted: (1) single-node honesty gate precedence before distributed/shared-WAL (runtime + graph), (2) frontier 17-streak alias catalog pivot to residual-novelty economics (not 18th permutation), (3) physics PARK until Intel relaxed Gate0 >=2 real SPA bank, (4) Intel pivot from exhaustive 567MB LFS to pip WebArena-Verified Hard 258, (5) product Pareto must benchmark vs Agentic Compilation O(1) DSM IR. Challenged: Scout's suggestion to immediately reopen product Pareto without health gating \u2014 constrained to REOPEN on C-PRODUCT-ECON with explicit dependency on runtime single-node + graph single-node freshness VALIDATED (health-gated HS256 sticky) to avoid another MEASUREMENT_INVALID. Also rejected Scout's browser-native dom-distiller substrate replacement as primary runtime objective this cycle \u2014 single-node fix has higher marginal value to unblock downstream queues."
+  },
+  "experiment_id": "EXP-RUNTIME-35954191701",
+  "inherited_last_verdict": "MEASUREMENT_INVALID",
+  "inherited_next_question": "Can the minimal single-node honesty gate be restored with corrected wsgi import path (sys.path insert experiment directory via Path(__file__).parent or PYTHONPATH for run_experiment:create_app()), factory-pattern directory-before-DB, Flask verified listening on 127.0.0.1:19860 before nginx 1.24.0:19851 health gate (200+X-Worker-Pid retry), real If-None-Match/ETag->304 n_non304>=800 stratified 400/endpoint per-batch SELECT >=10 distinct ts, header-only Jaccard MINUS {Content-Length,ETag,W-ETag,Content-Range} preserving Cache-Control/Set-Cookie/Vary de-confounded |r|<0.30, honest per-trajectory-reset sum counters B=5000 trajectory-grouped |rho_shuffled|<0.20, oracle-free greedy brotli->gzip MAX_DEPTH5 330/330 HIT/DYNAMIC byte-identical 0 ambiguous, BrowserGym 0.14.3+Playwright 1.63.0 1280x720 CDP AX>10 PC-HEALTH>=80% DOM21-82 N=20 pool effective_distinct_n>1 B=1000 non-degenerate CIs, achieving TN>=0.85 FA<=0.10 before authorizing distributed HS256 shared-WAL 800-stratified HIT?",
+  "lane": "runtime",
+  "origin_github_run_id": "35954191701",
+  "parent_handoff": {
+    "experiment_id": "EXP-RUNTIME-35949568321",
+    "path": "research/experiments/EXP-RUNTIME-35949568321/handoff.json",
+    "sha256": "ea6128f4726da5ada9c61e1b86b0540972e2667a0b14da5cddd12c2942f413a2"
+  },
+  "reason": "global-director-CONTINUE",
+  "request_hash": "b7ca1ce66ce3ef233043b48a98b8fa087c2214cbe857148e2c60c725895aa714",
+  "request_id": "345cac2c52621d81b2368adf",
+  "schema_version": 1
+}
