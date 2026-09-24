@@ -1,0 +1,106 @@
+{
+  "experiment_id": "EXP-PHYSICS-35938359115",
+  "lane": "physics",
+  "created_at": "2026-09-24T01:00:59Z",
+  "git_commit": "1f334e71803aa0a3bf718b0f21169b1e801cb2e0",
+  "parent_handoff": "research/experiments/EXP-PHYSICS-35903177055/handoff.json sha256 61e860a4e18a4b1fb4f335ec374dcd559610166709032feac97eec4a3f893971",
+  "viewport": {
+    "width": 1280,
+    "height": 720
+  },
+  "seeds": {
+    "numpy": 42,
+    "random": 42,
+    "PYTHONHASHSEED": 0
+  },
+  "K_primary": 12,
+  "K_exploratory": 24,
+  "alpha_primary": 0.08333333333333333,
+  "alpha_exploratory": 0.041666666666666664,
+  "N_perms": 1999,
+  "N_tests_Bonf": 8,
+  "trajectory_grouping": "trajectory_id unit, 1999 perms seed42",
+  "estimator": "exact closed-form Dirichlet-Multinomial Gamma-ratio via scipy.special.gammaln and polygamma (digamma polygamma(0), trigamma polygamma(1)), no heuristic",
+  "code_paths": [
+    "research/physics/execute_35938359115.py"
+  ],
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-PHYSICS-35938359115/raw_prototypes.json",
+      "sha256": "5f374694ce8d73560dd592fb8accfda7f4c32326065d1f16273eaeeb0f77915b",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-35938359115/raw_transitions_webshop.json",
+      "sha256": "5731ae2e12142e9f3ad276f5767194e406b5925135b627f158a810569e7afcfc",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-35938359115/raw_transitions_todomvc.json",
+      "sha256": "55d5db0e8c54d06d44e2368cae27dbd7d677d5fbfdc8b44c680914320594eef7",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-35938359115/raw_transitions_synthetic.json",
+      "sha256": "9639249276c75f02f4dd9a919b675268ccd3f417a3e19cc1d52540eb01b24192",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-35938359115/raw_transitions_independent.json",
+      "sha256": "948e83db22d49b06025592901fcf7c63fbed8625ddd153a6d6a6cbd0441599c9",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-35938359115/raw_transitions_iid.json",
+      "sha256": "c865cf41d08af0f26abd3b5c6238a90e1bb0782c96513bfe340c5080317e2b53",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-35938359115/raw_results.json",
+      "sha256": "81ba6535fbbc5b8dc1b246642d6550218624d0ba54632a762ac149120939e582",
+      "role": "derived"
+    },
+    {
+      "path": "research/physics/execute_35938359115.py",
+      "sha256": "9a9e58377171aa425b5c6d2652c32414ebd8957ad8d9b14d35390684c442ed46",
+      "role": "code"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-35938359115/spec.json",
+      "sha256": "c5737e1187751246d2d1442344cb17e006a3b839f65482b5eb815b5b664fcab9",
+      "role": "fixture"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-35938359115/prereg.md",
+      "sha256": "01ca5824eab98b365c6930906323a183c6ba89ebfd27b59000ef17c299048462",
+      "role": "fixture"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-35938359115/freeze.json",
+      "sha256": "297950f7c676d621446f97858a0ccd214c3a193220596b20753f93ea6f9101bb",
+      "role": "fixture"
+    }
+  ],
+  "environment": {
+    "python": "3.12.14 (main, Aug 13 2026, 02:47:42) [GCC 13.3.0]",
+    "scipy": "1.18.1",
+    "playwright": "1.63.0",
+    "chromium": "headless shell 153.0.8010.12"
+  },
+  "datasets": [
+    "locally-hosted 6-state SPA per-trajectory regime 50x38 N=1900 overlapping genuine 1280x720 WebShop primary",
+    "TodoMVC secondary 50x38 N=1900",
+    "synthetic 12-state hash-routed 50x100 N=5000",
+    "independent-noise genuine overlapping 50x38 N=1900 regime-independent",
+    "IID null 50x38"
+  ],
+  "hashes": {
+    "result.json": "8f9b87ffb0c994acea5e02f9cec50e5208dfbe18b12790be2c8406b21395574b",
+    "report.md": "c3fccda971b7aee9be359c635b803383249f78f77dd6504d07d7afef78d49b54",
+    "raw_results.json": "81ba6535fbbc5b8dc1b246642d6550218624d0ba54632a762ac149120939e582",
+    "raw_prototypes.json": "5f374694ce8d73560dd592fb8accfda7f4c32326065d1f16273eaeeb0f77915b",
+    "raw_transitions_webshop.json": "5731ae2e12142e9f3ad276f5767194e406b5925135b627f158a810569e7afcfc"
+  },
+  "gammaln_polygamma_verification": "execute_35938359115.py contains scipy.special.gammaln and polygamma and does NOT contain heuristic sqrt(mean(1/(2n)))*0.1 or 0.015/0.035/0.005 blending beyond exact 0.015 scaling within analytic but includes polygamma",
+  "browsergym_reuse": "none available at research/intel/manifest.json (verified missing); primary locally-hosted overlapping proxy satisfies mandate locally-hosted branch"
+}
