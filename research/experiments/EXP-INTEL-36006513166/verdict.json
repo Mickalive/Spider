@@ -2,34 +2,38 @@
   "schema_version": 1,
   "experiment_id": "EXP-INTEL-36006513166",
   "lane": "intel",
-  "decision": "FALSIFIED_IN_SETTING",
+  "decision": "MIXED",
   "claim_updates": [
     {
       "claim_id": "C-CROSSSITE",
       "status": "EXPERIMENTAL",
-      "reason": "H_A bounded FALSIFIED_IN_SETTING: deterministic sampling on BOTH primary (36 families_ge3) and shopping_admin fallback (42 families_ge3) censuses yields only 4 constructible product families [136,145,196,222], not >=10. However, the full-tree multi-anchor AX_consistency pipeline is VALIDATED (mean=0.6208, CI lower=0.5514>0.5, shuffle p=0.0<0.05, gap=0.2420, variance>0, delta_vs_truncated=0.5871). C-CROSSSITE advances from HYPOTHESIS to EXPERIMENTAL at the 4-family ceiling with full-tree validity — the fragment anchoring pipeline is repaired but the census substrate is the limiting factor."
+      "reason": "H_A_DURABLE_CENSUS_EXPANDED_V2 bounded FALSIFIED_IN_SETTING for >=10 gate: deterministic random.Random(35725763380).sample(sorted families_ge3,10) x2 recomputed on primary 36 families yields [191,180,162,197,153,213,163,137,136,222] and on fallback 42 families yields [268,257,250,274,288,244,277,241,237,253] (audit recomputed exact match), but only 4 distinct product families [136,145,196,222] have node_count>1 anchoring true and SHA before==after identical TRUE and after mutation != TRUE at 1280x720 CDP Accessibility.getFullAXTree (median AX 633.5 DOM 197353.5). Fallback contributes 0 additional product_page families (admin URLs). Full-tree multi-anchor AX_consistency SURVIVES on 4-family substrate only: mean 0.6208 CI [0.5514,0.6902] lower>0.5 shuffle mean 0.3789 p0.0 gap0.242 variance0.00765 delta_vs_truncated0.5871 all gates PASS per audit recomputed, but not demonstrated on >=10-family set. Census substrate is limiting factor, not pipeline. Status advances to EXPERIMENTAL at 4-family ceiling; >=10 hypothesis bounded rejected."
     },
     {
       "claim_id": "C-RESIDUAL-NOVELTY",
       "status": "EXPERIMENTAL",
-      "reason": "H_B SURVIVES: blind SOTA reproduction on 40-task alias-OOD confirms honest Pareto (DSM f10 22.6 USD $0.035/task vs ALIAS f10 30.1, F100 5.65 vs 7.53, |rho_shuffled|0.1592<0.20, HITL drop 0.50, WebMCP prevalence 0.725). However, all economics are synthetic work units (MAX_STEPS10, body-only render) — real browser/network/LLM cost not measured. C-RESIDUAL-NOVELTY remains EXPERIMENTAL at synthetic ceiling; requires real-cost Pareto to advance."
+      "reason": "H_B_SOTA_CEILING_HONEST_PARETO_V2 SURVIVES on synthetic 40-task alias-OOD only: blind reproduction recomputed DSM 0.75 [0.625,0.875] per-channel header1.0 body1.0 auth0.7 mixed0.3 vs SPIDER-ALIAS 0.925 [0.85,1.0] flat p0.626 vs TRACE0.25 BMEM0.0 COLD0.25, honest per-trajectory-reset sum-counter M_total_f10 DSM22.6 F1005.65 vs ALIAS30.1/7.53 vs WEBMCP28.0, |rho_shuffled|0.1592<0.20 rho_real0.8656, HITL drop0.50>=0.30, all B=2000 trajectory-grouped. Audit PASS confirms recomputed metrics. Economics remain synthetic work units (MAX_STEPS10 body-only) not real browser/network/LLM cost. Remains EXPERIMENTAL at synthetic ceiling."
     },
     {
       "claim_id": "C-PRODUCT-ECON",
       "status": "EXPERIMENTAL",
-      "reason": "H_B SURVIVES with honest M_total_f10/f100 Pareto and WebMCP prevalence 0.725 hybrid dispatch signal established. However, M_total is synthetic work units, not USD/wall-clock. Product can run Stagehand/WebMCP vs compilation Pareto but must use real browser/network/LLM cost to decide VALIDATED vs hybrid learned dispatch promotion. C-PRODUCT-ECON remains EXPERIMENTAL pending real-cost measurement."
+      "reason": "H_B SURVIVES for economics ceiling on synthetic alias-OOD: WebMCP prevalence 0.725 [0.575,0.85] amortized f10 2.9 f100 0.725, USD $0.0353 [0.0294,0.0411] total$1.41 n_patch30, honest M_total Pareto quantified with trajectory-grouped B=2000. M_total is synthetic work units not USD/wall-clock, WebMCP prevalence simulation-only, degenerate CIs [0,0] BMEM and [1,1] ROUTING/WEBMCP flagged per prereg 12.7 not valid width. Real WebArena product-family hold-out N>=120 with live browser/network/LLM cost not measured. Remains EXPERIMENTAL pending real-cost Pareto."
     }
   ],
-  "product_action": "Do NOT promote to Product Core. The 4-family census ceiling blocks Graph >=10-family hold-out. Next step: acquire orthogonal census (WebMall/Mind2Web-2 loopback or Mind2Web definition expansion) and HF_TOKEN for WebGym diverse-sample duplication CI. Intel can deliver the AX_consistency pipeline artifact (mean>=0.6, CI lower>0.5, p<0.05, gap>=0.20) as a shared substrate for runtime/graph, but the census substrate requires orthogonal source.",
+  "product_action": "Do NOT promote to Product Core. Intel delivers validated AX_consistency pipeline artifact but 4-family census ceiling blocks Graph >=10-family hold-out. No kernel code promotion; census artifacts remain experimental.",
   "promote_to_product": false,
-  "continue": true,
-  "next_question": "Can an orthogonal census (WebMall/Mind2Web-2 BrowserGym loopback, Mind2Web definition expansion shopping vs shopping_admin 404, or WebGym-derived families) deliver >=10 distinct product families constructible with the identical deterministic random.Random(35725763380).sample anchoring+SHA protocol at 1280x720 CDP, and can the full-tree multi-anchor AX_consistency pipeline be extended to product-subtree level across the expanded family set?",
-  "reason": "H_A bounded FALSIFIED_IN_SETTING (4-family ceiling confirmed on both primary and shopping_admin fallback) while H_B SURVIVES (blind SOTA reproduction with honest Pareto). AX_consistency pipeline VALIDATED but census substrate is the limiting factor. WebGym diverse UNAVAILABLE (HF_TOKEN absent). The frozen design's cognitive_reset orthogonal basin changes (shopping_admin fallback, full-tree multi-anchor) are confirmed to not escape the 4-family ceiling, directing next work to a genuinely orthogonal census. The full-tree AX_consistency pipeline is a deliverable artifact that unblocks downstream measurement validity.",
+  "continue": false,
+  "next_question": "Can an orthogonal census (WebMall/Mind2Web-2 BrowserGym loopback 130-task, Mind2Web definition expansion shopping vs shopping_admin 404, or WebGym-derived families) deliver >=10 distinct product families constructible with the identical deterministic random.Random(35725763380).sample anchoring+SHA protocol at 1280x720 CDP, and can the full-tree multi-anchor AX_consistency pipeline be extended to product-subtree level across the expanded family set?",
+  "reason": "Audit PASS with producer_claim_supported=false on H_A >=10 gate: measurement valid (MV1-MV4/MV6-MV9 PASS, MV5 UNAVAILABLE per exception with 2x401 logged) and recomputed metrics match producer (deterministic samples, 4 constructible families, AX_consistency mean0.6208 CI lower0.5514 p0.0 gap0.242 delta0.5871, blind SOTA coverages 0.75/0.25/0.0/0.925/1.0). Decision is MIXED per frozen three-way rule: H_A bounded FALSIFIED_IN_SETTING on both primary 812-task (36 families_ge3) and shopping_admin fallback (42 families_ge3, 182 tasks admin URLs) deterministically only 4 families, while H_B SURVIVES synthetic honest Pareto (DSM f10 22.6 vs ALIAS 30.1, |rho|<0.20). WebGym diverse ETL and threshold sweep remain UNAVAILABLE pending HF_TOKEN. AX pipeline repaired (full-tree beats truncated delta0.587) but census substrate is hard ceiling requiring genuinely orthogonal census not another probe of same pin. Provenance gaps (1 not 2 Docker attempts, HF logs parent-only, NC2 shuffled variant not separately measured) noted in audit required_fixes but do not invalidate core falsification.",
   "evidence_refs": [
-    "result.json",
-    "audit.json",
-    "artifacts/derived/ax_consistency_fulltree.json",
-    "artifacts/derived/deterministic_family_samples.json",
-    "artifacts/derived/sota_blind_results.jsonl"
+    "research/experiments/EXP-INTEL-36006513166/result.json:metrics M_A_MANIFEST_SHA256 d65275660814663375028e9017e1f929e3c38321041b125795e2713b52243d30 M_A_MANIFEST_BYTES 927596 M_A_CONSTRUCTIBLE_COUNT 4 M_AX_CONSISTENCY_MEAN 0.6208",
+    "research/experiments/EXP-INTEL-36006513166/result.json:controls B-DURABLE-HF PASS B-DURABLE-DOCKER PASS B-SHOPPING-ADMIN-FALLBACK FAIL",
+    "research/experiments/EXP-INTEL-36006513166/audit.json:status PASS claim_ceiling MAX JUSTIFIED H_A FALSIFIED_IN_SETTING bounded to 4 families H_B SURVIVES synthetic",
+    "research/experiments/EXP-INTEL-36006513166/audit.json:recomputed_metrics M_A_DETERMINISTIC_S1_PRIMARY [191,180,162,197,153,213,163,137,136,222] M_AX_CONSISTENCY_MEAN 0.6208 CI lower 0.5514",
+    "research/experiments/EXP-INTEL-36006513166/artifacts/derived/ax_consistency_fulltree.json sha 1690251d812e813f79b41433373a54edfa686e5dda6ebb928110e03193026b36",
+    "research/experiments/EXP-INTEL-36006513166/artifacts/derived/deterministic_family_samples.json sha 224ef654874d3bbbd3be475cebae53bda4251d4b27e34bbfe33c1959727f94ac",
+    "research/experiments/EXP-INTEL-36006513166/artifacts/derived/sota_blind_results.jsonl sha 3c5ab5afbaa3d28910dc0e6c3bcd77ed51262f028dc045e1df896324af386402",
+    "research/experiments/EXP-INTEL-36006513166/artifacts/derived/shopping_admin_census.json sha a9ede58ddb242716063f83b6fdf15e2140792784318eab588432000b376b059d",
+    "research/experiments/EXP-INTEL-36006513166/provenance.json:pip_freeze 264 lines BrowserGym-core 0.14.3 AgentLab 0.4.2 Playwright 1.63.0 viewport 1280x720"
   ]
 }
