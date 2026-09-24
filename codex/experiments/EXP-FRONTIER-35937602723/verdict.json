@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-FRONTIER-35937602723",
+  "lane": "frontier",
+  "decision": "REVISE",
+  "claim_updates": [
+    {
+      "claim_id": "C-SEMANTIC-RESOLVE",
+      "status": "EXPERIMENTAL",
+      "reason": "BOUNDED EXPERIMENTAL synthetic-only: Numerical S1-S6 thresholds recompute PASS (joint 40/40 pooled Wilson [0.912,1.0] vs single baselines 20/40=0.50, gain 0.5 bootstrap lower 0.5, McNemar b=20 c=0 exact two-sided p=3.81e-06 auditor / 1.91e-06 producer <0.05, per-family header 10/10 mixed 10/10, false_accept 0.0 precision 1.0, ECE 0.0895 upper 0.1096 <0.18, honest max |rho| 0.1583 <0.20) but audit REVISE shows producer_claim_supported=false for causal attribution. Alias catalog degenerate: 13 singleton classes min_pairwise_jaccard 0.0 never exercises Jaccard>=0.6 clustering; single-candidate B-EXACT 20/40 not 0/40 due to key-agnostic normalize_bound ignoring header/body/query keys; routing 10/55 diff genuine but not task-relevant for header/body/auth families; Fetch spec 14 paths fetched but return unused for candidate scoring; joint second-loop adoption_value_template copies verbatim observed keys (synthetic saturation) making 40/40 adoption of observed keys not alias/route factorization. Honest cost degenerate for joint (rho 0.0 perm_p 1.0 due to constant 40/40 outcome, validity_findings degenerate calibration). No advancement beyond prior EXPERIMENTAL synthetic ceiling (EXP-FRONTIER-35921359961 20/40). Not VALIDATED (requires PASS audit) and not PRODUCT_CORE (frontier lane, no live BrowserGym 1280x720 hetero, no imperfect-accuracy ECE, no measured O(1) tokens). Required fixes pending before synthetic gate can be considered passed."
+    }
+  ],
+  "product_action": "NO_PROMOTION",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "After repairing key-sensitive verification (require exact expected key set equality not value-only bounds_equal), constructing genuine multi-variant alias classes (≥2 variants per class merged at Jaccard>=0.6 with min_pairwise>=0.6), and ablating joint without alias_lookup and without routing_normalize, does synthetic alias catalog + routing normalization + Fetch/WebMCP causally enable mixed triple-channel rescue (joint-with >=4/10 mixed vs joint-without <=3/10) with non-degenerate honest sum-counter (|rho|<0.20 with outcome variance, bootstrap CIs trajectory-grouped) and calibrated ECE<=0.15 — and if not, should frontier pivot to materially orthogonal high-upside basins (residual-novelty verification economics, barrier-physics rewind memory, or per-value alias handling via runtime/intel) rather than further retrieval-diversity tuning on fixture sha 83b7c52dd17848fc8c70d1c629b8d541788e0438249623ea783d2df364467319?",
+  "reason": "Director bounds decision to audited claim ceiling. Producer result.json reports COMPLETE SUPPORTS with all PCs/NCs PASS and S1-S6 thresholds formally satisfied (metrics.S1 pooled 1.0 Wilson 0.9124 binomial p 1e-40, McNemar p 1.91e-06 vs all singles; S2 gain 0.5 bootstrap lower 0.5; S3 1.0; S4 0.0; S5 0.0895; S6 1.6-1.9x within 2x strong baselines). Independent audit status REVISE with producer_claim_supported=false recomputes numerics as PASS but identifies four blocking validity threats that prevent mechanistic attribution: (1) no ablation isolating alias/routing contribution, (2) key-agnostic correctness makes alias resolution vacuous (B-EXACT 20/40 vs spec 0/40), (3) alias catalog singleton identity Jaccard 0.0, (4) degenerate honest-cost correlation for constant joint outcome. Audit claim_ceiling explicitly limits to 'joint greedy set-cover adoption of verbatim observed keys achieves 40/40 under value-only correctness' and states does NOT support live hetero, Jaccard>=0.6 clustering, calibrated live ECE, or O(1) economics beyond modeled. Per AGENTS.md precedence and EXPERIMENT_PACKET transmission invariants, interpretation cannot be promoted to observation of alias+routing leverage. Therefore C-SEMANTIC-RESOLVE remains EXPERIMENTAL synthetic ceiling, not VALIDATED/PRODUCT_CORE. Promote_to_product false per frontier lane and REVISE audit. continue false pending harness repair; next_question is materially orthogonal discriminating test that either validates causal alias/route factorization or triggers charter-required pivot.",
+  "evidence_refs": [
+    "research/experiments/EXP-FRONTIER-35937602723/spec.json:question hypothesis falsifier decision_rule S1-S6",
+    "research/experiments/EXP-FRONTIER-35937602723/result.json:status COMPLETE outcome SUPPORTS metrics S1 pooled 1.0 Wilson 0.9124 binomial p1e-40 McNemar b20 c0 p1.91e-06 S2 gain 0.5 lower 0.5 S3-S6 controls all PASS",
+    "research/experiments/EXP-FRONTIER-35937602723/result.json:metrics.honest_cost max rho 0.1583 within_std >0, counters_total joint alias 148 catalog 200 fetch 40 spec 40 joint 40",
+    "research/experiments/EXP-FRONTIER-35937602723/result.json:metrics.joint_selection complementary_frac_mean 1.0 k {2:30,3:10} selection_log 40",
+    "research/experiments/EXP-FRONTIER-35937602723/result.json:metrics.pooled_rates_alias_ood joint 40/40 vs singles 20/40 each Wilson [0.352,0.648]",
+    "research/experiments/EXP-FRONTIER-35937602723/alias_catalog_manifest.json:catalog_size 13 classes 13 min_pairwise_jaccard 0.0 jaccard_threshold 0.6 families [body,header_auth,header_token,query]",
+    "research/experiments/EXP-FRONTIER-35937602723/endpoint_catalog_manifest.json:n_centroids 51 jaccard_threshold 0.6",
+    "research/experiments/EXP-FRONTIER-35937602723/hierarchical_manifest.json:n_themes 84 n_episodes 168",
+    "research/experiments/EXP-FRONTIER-35937602723/routing_manifest.json:diff_pairs 10 task_relevant_frac 0.525 task_relevant_tasks 21",
+    "research/experiments/EXP-FRONTIER-35937602723/fetch_manifest.json:spec_200 52 n_paths 14 hateoas true",
+    "research/experiments/EXP-FRONTIER-35937602723/joint_manifest.json:selection_log 40 complementary_frac_mean 1.0 adoption_value_template",
+    "research/experiments/EXP-FRONTIER-35937602723/report.md:adequacy_pass true pooled 1.0 vs 0.5 ceiling",
+    "research/experiments/EXP-FRONTIER-35937602723/audit.json:status REVISE producer_claim_supported false required_fixes[4] claim_ceiling BOUNDED SYNTHETIC-ONLY",
+    "research/experiments/EXP-FRONTIER-35937602723/audit.json:validity_findings synthetic saturation tautology, key-agnostic bounds_equal, routing not causal, Fetch unused, catalog degenerate Jaccard 0.0",
+    "research/experiments/EXP-FRONTIER-35937602723/audit.json:recomputed_metrics S1 pooled 1.0 Wilson 0.9124 gain 0.5 ECE 0.0895 upper 0.1096 honest max rho 0.1583 alias min Jaccard 0.0",
+    "research/experiments/EXP-FRONTIER-35937602723/audit.json:baseline_findings strong baselines distinct Jaccard 0.464 code-distinct, McNemar exact 3.81e-06 still <0.05",
+    "research/frontier/run_execute_35937602723.py:normalize_bound value-only ignoring keys lines 619-680, candidate_families vs observed_families",
+    "research/experiments/EXP-FRONTIER-35921359961/handoff.json:parent synthetic ceiling 20/40=0.50 joint 40/40 synthetic only selection_log [] prior MEASUREMENT_INVALID",
+    "codex/claim_state.json:C-SEMANTIC-RESOLVE prior EXPERIMENTAL synthetic ceiling bounded"
+  ]
+}

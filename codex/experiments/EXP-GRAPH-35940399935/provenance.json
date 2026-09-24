@@ -1,0 +1,78 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-35940399935",
+  "lane": "graph",
+  "github_run_id": "35940399935",
+  "github_run_attempt": 1,
+  "pre_execute_sha": "f0d149e0358f9586f3333d760c7c8a084a323b6e",
+  "post_execute_sha": "f0d149e0358f9586f3333d760c7c8a084a323b6e",
+  "base_sha": "dc48b3c70c01aa08544d83463c81d21cc1339881",
+  "frozen_hashes": {
+    "prereg.md": "9010e1fd644fa137a4f1768abb6643e37c3e924edba3efef3d5fac942fdc1999",
+    "request.json": "9b5ff151e316b5d03b48104281bb67016b75a70b3efaf37eb66f011b23b10e9d",
+    "spec.json": "6ad01edfb08c3bfc8e182a1d3e79495994eb56432eea44eae356c2c69a1d28f5"
+  },
+  "code_paths": [
+    "research/graph/freshness_detection/execute_single_resource_staleness.py",
+    "src/spider/kernel.py",
+    "src/spider/models.py",
+    "src/spider/registry.py"
+  ],
+  "code_hashes": {
+    "research/graph/freshness_detection/execute_single_resource_staleness.py": "ef8b3460ed9e3586e5e22ab5ce074aa41a117da48aa9660e904e68a2b31749ba",
+    "src/spider/kernel.py": "46929b3a951df48d7f9d1fd850871073c0d91c1868aa117e13d389fe274e8d61",
+    "src/spider/models.py": "338aaf4d7ba0e31f7a5fe8a47abdbb2ea52d9c1c4ef0ce014f2b809b9a2a9b78",
+    "src/spider/registry.py": "51fb440d3827f21cccb5f77ad17dc0e76ccdbc2d52d7b05044cd821bb8a9322c"
+  },
+  "environment": {
+    "python_version": "3.12.14",
+    "platform": "linux runnervmlun5p 6.17.0-1022-azure #22-Ubuntu SMP",
+    "server": "http.server.HTTPServer on 127.0.0.1 ephemeral port 46147, stdlib only",
+    "dependencies": ["stdlib http.server, urllib.request, hashlib, json, statistics, random, math"],
+    "no_docker": true,
+    "no_llm": true,
+    "no_browser": true,
+    "no_distributed": true
+  },
+  "datasets_fixtures": {
+    "synthetic_site": "locally-hosted single resource /resource/{id} flat JSON, stdlib http.server on 127.0.0.1 ephemeral",
+    "sampling": "staleness pool 210 (6 trajectories per drift family x10 req 5 fresh+5 stale DRIFT_POINT=6 =60 per family 30+30, plus 3 stable x10=30 fresh) total 120 fresh+90 stale stale_rate 0.4286; plus NC-NOISE-IMMUNITY 15 extra fresh trajectories (5 per churn variant x10=150 noise) total 360",
+    "families": "dom_drift: id int->str + phone Jaccard required-filtered <0.85; param_header_mutation: response-derived _template query_params detail->uid and X-Csrf-Token rotation; cache_expiry: ETag SHA256(canonical_json)[:16] changes + Cache-Control max-age 60->0; control stable no drift; noise_A phone p0.3, noise_B nickname p0.3, noise_C email null p0.2+phone p0.3",
+    "signals": "DOM tokens filter_required {id,name,email} via extract_field_types then required filtering, Jaccard threshold 0.85, ETag SHA256 filtered body[:16], Cache-Control max-age, endpoint_template response-derived _template field + header, confidence recalibrated 0.95 fresh/0.85 stale, honest constant sum-counter base 4 resolve+bind+verify+freshness+browser_steps0",
+    "ground_truth": "deterministic per request_number <DRIFT_POINT fresh else stale, 304 via If-None-Match when fresh ETag matches, marked not stale"
+  },
+  "execution_command": "python research/graph/freshness_detection/execute_single_resource_staleness.py",
+  "execution_time": "2026-09-24T00:57:15 frozen, executed 2026-09-24 manual EXECUTE, <10 min CPU, 360 HTTP requests, 5000 family-stratified trajectory-grouped bootstraps, 1000 trajectory-grouped rho permutations",
+  "artifacts": [
+    {"path": "research/experiments/EXP-GRAPH-35940399935/raw_evidence/execution_results.json", "sha256": "84f1678c388fb2b7ed0f6458d77abc57284102fd1806172ae82053276bb88002", "role": "raw"},
+    {"path": "research/experiments/EXP-GRAPH-35940399935/raw_evidence/request_logs.json", "sha256": "e8af984f87259745448828e5f0fd7b8420ccbd7e9fbfffec6ec00ef6ff87076b", "role": "raw"},
+    {"path": "research/experiments/EXP-GRAPH-35940399935/raw_evidence/metrics.json", "sha256": "84f824b9e3cc462f36645092b51214a049e4dd2523f4a2ed06e4ec850a5cf847", "role": "derived"},
+    {"path": "research/experiments/EXP-GRAPH-35940399935/raw_evidence/cost_logs.json", "sha256": "440806df77a0af05ee372cb06056437c5655211302e76a4351f2b9d1b807149a", "role": "derived"},
+    {"path": "research/experiments/EXP-GRAPH-35940399935/raw_evidence/bootstrap_ci.json", "sha256": "9cb508031e3c572e64da70ff62fef10616a9c95dbe1b573109036b64ddde6511", "role": "derived"},
+    {"path": "research/experiments/EXP-GRAPH-35940399935/raw_evidence/per_trajectory_cache.json", "sha256": "760183d77710b55c2a44fd3f288dd170c2c13a757915d82d499abcccafb65a0c", "role": "derived"},
+    {"path": "research/experiments/EXP-GRAPH-35940399935/raw_evidence/decision.json", "sha256": "fbc62ce22cf2bfc6bef1a52ce70d044e2fff2f19f85e014c1fa0a8a8ebfc2d3c", "role": "derived"},
+    {"path": "research/experiments/EXP-GRAPH-35940399935/raw_evidence/summary.json", "sha256": "0efd64241b1e9fadf31cb6a2bad5bcd0503a723cce0081abe66d16a3cce6d5e9", "role": "derived"},
+    {"path": "research/experiments/EXP-GRAPH-35940399935/result.json", "sha256": "pending", "role": "derived"},
+    {"path": "research/experiments/EXP-GRAPH-35940399935/report.md", "sha256": "pending", "role": "derived"},
+    {"path": "research/graph/freshness_detection/execute_single_resource_staleness.py", "sha256": "ef8b3460ed9e3586e5e22ab5ce074aa41a117da48aa9660e904e68a2b31749ba", "role": "code"},
+    {"path": "src/spider/kernel.py", "sha256": "46929b3a951df48d7f9d1fd850871073c0d91c1868aa117e13d389fe274e8d61", "role": "code"}
+  ],
+  "measurement_validity": {
+    "V1_DETERMINISTIC_VERIFICATION": "pass _matches exact equality on postconditions filtered without _template",
+    "V2_HONEST_SUM_COUNTER_CONSTANT": "pass constant integer 4 per request sum 1440 std 0 valid per V2 narrowing exempt from V5",
+    "V3_NO_JITTER_NO_PROXY": "pass all_int true no parity jitter n*3200 f*6 bijective proxy",
+    "V4_RHO_SHUFFLED_MAX_TRAJECTORY_GROUPED": "pass max 0.0 <0.20 trajectory-grouped 1000 perms shuffling whole trajectory blocks",
+    "V5_WITHIN_FAMILY_STD_OUTCOME": "pass min freshness std 0.5 >0 for drift families, stable/noise exempted, cost std exempted",
+    "V6_TRAJECTORY_GROUPED_BOOTSTRAP_5000": "pass 5000 family-stratified trajectory-grouped preserving proportions",
+    "V7_WILSON_CI": "pass z=1.96 lower 0.969 upper 0.0409",
+    "V8_ECE_CALIBRATION_RECALIBRATED": "pass global 0.0929 fresh 0.05 stale 0.15 prevalence-aware UNKNOWN 0.4286 in [0,0.50] and [0.3786,0.4986]",
+    "V9_SINGLE_RESOURCE_ISOLATION": "pass single resource /resource/{id} orthogonal families",
+    "V10_DETERMINISTIC_FRESHNESS_SIGNAL": "pass response-derived dom required-filtered Jaccard ETag SHA256 Cache-Control endpoint _template",
+    "V11_FAMILY_STRATIFIED_SAMPLING": "pass 30+30 per drift family 30 stable 50 per noise variant N=210+150",
+    "V12_LOCAL_SYNTHETIC_SITE": "pass stdlib http.server ephemeral no Docker",
+    "V13_GROUND_TRUTH_LOGGING": "pass every request logs ground_truth family request_number url body ETag Cache-Control threshold confidence _matches per_trajectory cache",
+    "V14_PER_TRAJECTORY_OBSERVED_CACHING_AND_RESPONSE_DERIVED_ENDPOINT": "pass per-trajectory observed 36 caches first valid of 3, response-derived _template vs cached response, 304 deterministic exercised",
+    "V15_ORTHOGONAL_LEVELS_AUDIT": "pass combined guard needed ablations fail B-JACCARD 0.6667 B-HEADER 0.3333, honest economics logged independently"
+  },
+  "notes": "Frozen inputs immutable per freeze.json 2026-09-24T00:57:15.257481+00:00 hashes prereg 9010e1fd request 9b5ff151 spec 6ad01edf. EXECUTE mode only, no design mutation after freeze. Five fixes implemented: honest constant counter without parity, trajectory-grouped max rho, NC-NOISE-IMMUNITY generation (150 noise), per-trajectory observed caching (first valid of 3), response-derived endpoint via _template. Confidence recalibrated 0.95/0.85 satisfiable and prevalence-aware UNKNOWN bound. No material fact in Actions log only. Stable metric/control ids reused verbatim for AUDIT."
+}
