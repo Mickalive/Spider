@@ -1,0 +1,252 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-35999358218",
+  "lane": "product",
+  "status": "MEASUREMENT_INVALID",
+  "producer_claim_supported": false,
+  "required_fixes": [
+    "Provision GHCR authorization for ghcr.io/servicenow/browsergym:0.14.3 AND OPENAI_API_KEY so PC5 second half, gpt-4o-mini 15-step Playwright (1280x720, CDP getFullAXTree 2000 nodes AX>10, playwright 1.63.0 importable) and rho_proxy_real pooled+per-stratum become measurable — file-proxy surrogation banned for SURVIVES per frozen falsifier clause 1; docker pull manifest unknown even after GH_TOKEN login must be resolved and playwright install verified before re-execute",
+    "Replace contaminated 192/36 fallback with contamination-free holdout: rebuild pools so value_set_A intersect B empty on ALL 36 families (currently 18/36 even-index families contaminated via rotation B[k]=A[(k+5)%10] pool-level and usage-level) OR stage WebArena-Verified Hard258 pip census; re-run fixture_checks.json until value_set_disjointness.pass=true at both pool and usage level and log hashes; frozen thresholds unchanged",
+    "Redesign NC1 shuffled null further: trajectory-grouped family-stratified block-permutation now yields rho_shuffled -0.1367 |.|<0.20 CI [-0.1696,0.0917] non-degenerate (fixes parent 0.778 degeneracy) but block_permutation_p 0.0724 <0.20 and rho_length_pooled -0.2871 plus per-stratum rho_length -0.4669 at n=0.5 and -0.3034 at n=1.0 exceed |0.20| on deterministic file-proxy counters — must break counter coupling to L/n (reused=max(0,L-n_novel*2), n_novel rounding) and verify per-stratum |rho_length|<0.20 |rho_shuffled|<0.20 p>=0.20 with B=5000 on REAL LLM+BrowserGym trajectories where MV6/MV8 measured, not deterministic counters",
+    "Complete rho_proxy_real and safety instrumentation: honest per-trajectory-reset sum counters at f=10/100 with real tokens require Docker BrowserGym; log rho_proxy_real pooled+per-stratum 5000 bootstrap, per-stratum |rho_shuffled_proxy|<0.20, DSM amortized $0.002-0.092 at f=10/100, and ST-WebAgentBench CuP non-inferior (>= best baseline -0.02) — all null in this run; cost_config frozen 50/15/180/10 vs staged 50/15/800/10 compile discrepancy must be reconciled",
+    "Keep single-node HS256 recipe durable and re-verify: /tmp/spider-runtime/shared.db WAL single-worker gunicorn 23.0.0 + nginx 1.24.0 $request_uri hash sticky + PyJWT 2.14.0 HS256 + If-None-Match/ETag W/body_sha conditional probe health-gated n_non304>=800 stratified 400/endpoint (currently 840=420/420 pass) — re-verify TN>=0.85, correlated probe fresh~1.0 at n0 vs ~0.5 stale saving>=30% accuracy>=0.90 vs seeded-42 random 0.53 delta>0.10, single upstream, jwt alg HS256 only",
+    "Re-execute full six-condition same-model experiment (B-COLD, B-RAG-EMBED-TAU030-QCR-K5, B-STAGEHAND-CACHE, B-DSM-O1-COMPILE, B-SGDR-AWM, P-SPIDER-ECON-PARETO) with same gpt-4o-mini 15-step Playwright budget/tools/viewport and honest per-trajectory-reset sum counters (no n*3200/f*6.0/jitter) plus 5000 family-stratified trajectory-grouped bootstrap and 5000 block-permutation to test primary gates: M_total saving >=25% vs COLD <=0.85x vs RAG at both f, browser+latency >=20% accuracy>=0.85, margin >=0.12 vs each baseline at both f, false_accept<=0.10 UNKNOWN>=0.85 ECE<=0.15 AUROC>=0.75 rho_novelty>=0.60 per-stratum"
+  ],
+  "validity_findings": [
+    {
+      "finding": "Producer MEASUREMENT_INVALID / INCONCLUSIVE classification is correct under frozen precedence; multiple independent clause-1 triggers fire before primary economics gates",
+      "severity": "critical",
+      "detail": "Frozen falsifier precedence: (1) any PC fails OR n_non304<800 stratified where substrate exercised OR sticky violated OR If-None-Match not exercised OR single-node HS256 not at /tmp/spider-runtime/shared.db WAL single-worker OR Docker BrowserGym 0.14.3 + gpt-4o-mini 15-step unavailable (rho_proxy_real unmeasurable) OR fixtures missing/contaminated OR bijective proxy OR degenerate metrics => MEASUREMENT_INVALID before economics; (2) |rho_shuffled|>=0.35 p<0.01 degenerate. Producer observes PC-SINGLE-NODE-ECON-PARETO-CORRELATED FAIL (PC2 value_set disjointness 18/36 + PC5 BrowserGym+LLM half FAIL), Docker FAIL, OPENAI FAIL, plus NC-SHUFFLE-ECON-PARETO FAIL on rho_length coupling. Any one sufficient. Producer correctly sets primary_claim_metrics null (unknown not zero) and baseline controls UNKNOWN/PARTIAL preserving RAW->OBSERVATION distinctness.",
+      "evidence_ref": "research/experiments/EXP-PRODUCT-35999358218/result.json -> status MEASUREMENT_INVALID outcome INCONCLUSIVE metrics.primary_claim_metrics null_reason, controls.PC-SINGLE-NODE-ECON-PARETO-CORRELATED status FAIL, controls.NC-SHUFFLE-ECON-PARETO status FAIL, spec.json falsifier (1)-(2), prereg.md section 9, artifacts/env_audit.json"
+    },
+    {
+      "finding": "TRAIN contamination violates family hold-out zero-overlap — PC2 composite FAIL, not silent fix-up",
+      "severity": "critical",
+      "detail": "Canonical 192/36 census sha 391e8f6cf167300cf223ebbb19cf5d2beed6568f5f84ac968ae88866a438a98b constructed with even family_idx rotation B[k]=A[(k+5)%10] shares A/B alphabets on 18/36 families (family_00,02,...,34). Fixture_checks shows pool_level_n_contaminated=18 and usage_level_n_contaminated=18 with intersections AAA0-AAA9 etc, cross_family_jaccard_max 0.0 on 630 pairs does NOT imply disjointness. Frozen MV2 requires value_set_A intersect B empty verified per family on all 36 families. Contamination triggers clause (1) independently of Docker/OPENAI. Producer staged byte-identical fixture without editing to force pass — correct per packet discipline.",
+      "evidence_ref": "research/experiments/EXP-PRODUCT-35999358218/artifacts/fixture_checks.json -> value_set_disjointness.pool_level_n_contaminated 18 usage_level 18 even_family_rotation_note, result.json controls.PC-SINGLE-NODE-ECON-PARETO-CORRELATED observed value_set DISJOINTNESS FAIL"
+    },
+    {
+      "finding": "Docker BrowserGym 0.14.3 and gpt-4o-mini 15-step unavailable — rho_proxy_real and LLM inheritance unmeasurable, clause 1 correctly fired",
+      "severity": "critical",
+      "detail": "Spec MV6/MV7 and PC5 require Docker ghcr.io/servicenow/browsergym:0.14.3 2000-node 1280x720 CDP getFullAXTree + gpt-4o-mini 15-step same model/tools/budget with rho_proxy_real>=0.50 pooled+per-stratum and per-stratum |rho_length|<0.20 |rho_shuffled|<0.20. Env audit: docker pull exit 1 'manifest unknown' even after docker login succeeded, docker images shows no servicenow/browsergym, playwright ModuleNotFoundError, browsergym pip wheel 1.5kB metapackage only, OPENAI_API_KEY ABSENT. Attempts_log confirms NOT RUN for B-COLD B-RAG etc, rho_proxy_real null pooled+per-stratum, safety CuP not measurable. Producer correctly reports claim economics NOT RUN and forbids file-proxy surrogation for SURVIVES per Director SUPERSEDE. Recomputed: openai_key_present false, browsergym_local_image false.",
+      "evidence_ref": "research/experiments/EXP-PRODUCT-35999358218/artifacts/env_audit.json -> docker_pull_browsergym exit 1 manifest unknown, browsergym_local_image false, playwright_importable exit 1, openai_key_present false; provenance.json environment.secrets OPENAI_API_KEY ABSENT GH_TOKEN present; artifacts/attempts_log.json"
+    },
+    {
+      "finding": "NC1 shuffled null degeneracy partially fixed at rho level but still FAIL on length coupling — deterministic counter property, not hypothesis evidence",
+      "severity": "critical",
+      "detail": "Current harness replaces parent degenerate within-trajectory re-sample with frozen trajectory-grouped family-stratified block-permutation of parameter_slots: rho_shuffled -0.1367 |.|<0.20 CI95 [-0.1696,0.0917] non-degenerate fixes parent 0.778 CI[0.709,0.830] p0.0002 degenerate threshold exceed. However block_permutation_p 0.0724 <0.20 and rho_length_pooled -0.2871 plus per-stratum rho_length -0.4669 at n=0.5 and -0.3034 at n=1.0 exceed |0.20|, plus empty strata 0.25/0.75 n=0. Recomputed via Spearman on 162 trajectories matches artifact. This is property of disclosed deterministic honest sum counter formula over contaminated census (reused=max(0, L-n_novel*2), n_novel rounding couples L/n to per_hit) — precisely why frozen design requires real LLM+BrowserGym trajectory-grouped measurement for null validity. Producer correctly marks NC1 FAIL (not degradation to falsification).",
+      "evidence_ref": "research/experiments/EXP-PRODUCT-35999358218/artifacts/null_controls.json -> NC1_SHUFFLED rho_shuffled -0.1367 CI -0.1696..0.0917 block_permutation_p 0.0724 per_stratum rho_length_shuffled -0.4669 -0.3034 pass false; result.json controls.NC-SHUFFLE-ECON-PARETO FAIL"
+    },
+    {
+      "finding": "Single-node HS256 sticky substrate half of PC5 correctly passes — bounded operational progress, not claim validation",
+      "severity": "medium",
+      "detail": "Substrate provisioned at /tmp/spider-runtime/shared.db WAL single-worker pid 61967, gunicorn 23.0.0, nginx 1.24.0 $request_uri consistent hash upstream 127.0.0.1:18929, PyJWT HS256 2.14.0, n_non304 840 stratified 420/420 (>=800 and >=400/endpoint), n_304 3/3, n_requests 846, If-None-Match exercised 846/846 fraction 1.0 errors 0, nginx_sticky_log_lines 1373 single upstream set, sqlite journal_mode WAL distinct_worker_pids [61967] single_worker true. Correlated probe n0 hit_rate 1.0 (150/150 304), n025 accuracy 1.0 stale 0.5 FA 0.0 saving 0.40 (4500/7500), random seed42 accuracy 0.4867 delta 0.5133 >0.10 saving>=30% accuracy>=0.90. Recomputed: 420+420=840 stratified_pass true, saving 1-4500/7500=0.40 correct. Solves parent blocker for this path but does NOT license SURVIVES due to missing LLM/BrowserGym and contamination.",
+      "evidence_ref": "research/experiments/EXP-PRODUCT-35999358218/artifacts/substrate_probe.json -> n_non304_total 840 stratified 420/420 if_none_match 1.0 sqlite single_worker true probe_correlated n0 1.0 saving 0.40 delta 0.513; artifacts/substrate_start.json health_direct ok alg HS256 journal wal"
+    },
+    {
+      "finding": "PC3 calibration non-vacuous passes as producer reports — verification pipeline discriminates on MockEnv but not yet on real LLM trajectories",
+      "severity": "medium",
+      "detail": "PC3 MockEnv MV10 (softmax temp0.15+jitter, wrong-bound p=0.15, EXEC rows) on n=1000: AUROC_verif_true 0.919459 >=0.75, AUROC_shuffled_null 0.481841 in [0.45,0.60], precision_verif 0.968253 >=0.80, forced_execute wrong_accept 0.169072 in [0.10,0.60], confidence_std 0.452886 >0.05, UNKNOWN_precision 0.982926, ECE 0.102633 <=0.15, 0 empty bins, n_exec 504 n_unknown 410. Recomputed AUROC true vs shuffled matches producer. Pass true indicates verification can discriminate when mechanism exists on MockEnv; does not transfer to real BrowserGym/LLM until MV6 measured.",
+      "evidence_ref": "research/experiments/EXP-PRODUCT-35999358218/artifacts/pc3_verify_calibration.json -> AUROC 0.919 vs 0.481 precision 0.968 conf_std 0.452 pass true"
+    },
+    {
+      "finding": "PC4 frozen-formula parity now passes (max_abs_diff 0.0 within 1e-6) but rho_proxy_real remains null — half gate only",
+      "severity": "medium",
+      "detail": "Spec PC4 requires honest per_hit within 1e-6 vs summed counters and rho_proxy_real logged pooled+per-stratum with 5000 bootstrap. Current run adds dedicated PC4 check: per_hit via (M_total-retrieval-distill/compile-auditor)/L equals summed counters max_abs_diff 0.0 on 192 disclosed tasks, parity_within_1e6 true, n_parity_rows 192. Fixes parent incomplete. However rho_proxy_real_pooled null and per-stratum null (requires real tokens) so PC5 still fails overall. Producer correctly notes parity PASS but rho_proxy NULL => PC composite still FAIL per precedence. No bijective n*3200/f*6.0/jitter detected.",
+      "evidence_ref": "research/experiments/EXP-PRODUCT-35999358218/result.json metrics.pc_diagnostics_non_claim PC4_frozen_formula_max_abs_diff 0.0 PC4_parity_within_1e6 true PC4_rho_proxy_real null; artifacts/null_controls.json PC4_FROZEN_FORMULA parity true rho null note; artifacts/metrics_summary.json"
+    },
+    {
+      "finding": "MV3 kernel dot-regex fix durable — PC2 sub-gate passes isolated",
+      "severity": "medium",
+      "detail": "src/spider/kernel.py staged at frozen patched sha d926279d5ee14a044a2f13b8abc09202df9f5adb9e86feaadeb61818a15f4038 regex r'\\$\\{[A-Za-z_][A-Za-z0-9_\\.]*\\}' vs head pre-patch 8af66ccf..., 5/5 dotted-path templates EXECUTABLE confidence>=0.80 via kernel.resolve, wrong-family resolve UNKNOWN. Unit tests 3/3 pass via PYTHONPATH=src. Evidence supports correct-family reconstruction gate isolated from contamination/BrowserGym gates.",
+      "evidence_ref": "research/experiments/EXP-PRODUCT-35999358218/artifacts/mv3_kernel_spot_check.json -> n_pass 5/5 confidence_all_ge_080 true family_gate_UNKNOWN true kernel_sha d926279d; provenance.json commits.execution_base_head ce852f..."
+    },
+    {
+      "finding": "Frozen hashes and transmission invariants preserved — no post-freeze drift, no filing-proxy economics for SURVIVES",
+      "severity": "info",
+      "detail": "Recomputed sha256 request 3479a809 spec d0a0411 prereg f8abd4e match freeze.json hashes frozen_at 2026-09-24T12:34:58Z. Provenance execution_base_head ce852f20930fe..., freeze 182490ea..., allocation 8fd586b..., git_status M src/spider/kernel.py untracked artifacts only no push. Producer keeps primary metrics null (not zero) under primary_claim_metrics with null_reason, diagnostics under _non_claim keys, respecting RAW->OBSERVATION->DERIVED->INTERPRETATION separation. No n*3200/f*6.0/jitter proxy. Baseline controls B-COLD etc correctly UNKNOWN not zero.",
+      "evidence_ref": "research/experiments/EXP-PRODUCT-35999358218/freeze.json hashes vs recomputed, provenance.json frozen_inputs matches, result.json primary_claim_metrics null, spec.json decision_rule"
+    },
+    {
+      "finding": "Cross-family orthogonality sub-gate passes but does not rescue holdout; cost_config discrepancy disclosed",
+      "severity": "info",
+      "detail": "Cross-family bigram Jaccard max 0.0 on 630 pairs <0.30 via A-pool first-slot definition passes. Orthogonality does not imply value_set disjointness — latter fails. Cost_config staged values 50/15/800/10 vs frozen expected 50/15/180/10 (compile_tokens 800 vs 180) — producer marks pass true but discrepancy is disclosed in fixture_checks cost_config expected field; amortized DSM $0.002-0.092 at f=10/100 cannot be computed without LLM tokens. sgdr_index representation loss disclosed: DOM-hash replaced by TRAIN post_state hash. Both correctly flagged as representation loss not hidden.",
+      "evidence_ref": "research/experiments/EXP-PRODUCT-35999358218/artifacts/fixture_checks.json -> cross_family_jaccard max 0.0 630 pairs pass true, cost_config values 50/15/800/10 expected 50/15/180/10, sgdr_index representation_note"
+    },
+    {
+      "finding": "Environment could not express primary effect — honest M_total Pareto and super-session untestable by construction",
+      "severity": "critical",
+      "detail": "Director question requires health-gated single-node PLUS Docker BrowserGym 0.14.3 2000-node 1280x720 CDP AX>10 + real gpt-4o-mini 15-step same model/tools/budget with honest per-trajectory-reset sum counters decomposed tokens vs browser+latency vs accuracy vs ST-WebAgentBench CuP safety at f=10/100. Both Docker and OPENAI gates blocked, Hard258 census absent, only file-proxy deterministic counters on contaminated 192/36 disclosed. Therefore capped at infrastructure failure: no tokens/browser/latency/accuracy/safety/CuP, no rho_proxy_real, no DSM amortized $, no Pareto saving or margin. Producer correctly reports per_hit_supersede_check NOT_MEASURABLE and null_reason; supersession of falsified per_hit 1.005>0.85 rho 0.363<0.60 remains bounded standing evidence only.",
+      "evidence_ref": "research/experiments/EXP-PRODUCT-35999358218/result.json metrics.primary_claim_metrics all null per_hit_supersede_check NOT_MEASURABLE, report.md section 3, spec.json question/hypothesis M_total Pareto clause, provenance.json pipeline"
+    }
+  ],
+  "baseline_findings": [
+    {
+      "baseline_id": "B-COLD",
+      "strength": "not_measured",
+      "expected": "Cold no-memory same gpt-4o-mini 15-step Playwright 1280x720, no retrieval/compile/probe/SGDR, honest sum 500 tok+2 browser_steps+50+120ms verify per step; M_total_f10 ~5497 latency ~7265ms flat vs n; lowest success baseline to beat by >=25% saving and >=0.12 margin; ST-WebAgentBench CuP baseline",
+      "observed": "NOT_RUN — OPENAI_API_KEY absent, Docker BrowserGym unavailable, playwright not importable. No gpt-4o-mini calls, no tokens/browser/latency/accuracy measured. Producer marks UNKNOWN per contract.",
+      "passes": false,
+      "issue": "Baseline economics and success rate unknown; cannot test saving >=25% or margin >=0.12 vs COLD nor safety non-inferior",
+      "evidence_ref": "research/experiments/EXP-PRODUCT-35999358218/result.json controls.B-COLD status UNKNOWN, artifacts/env_audit.json openai_key_present false, artifacts/attempts_log.json"
+    },
+    {
+      "baseline_id": "B-RAG-EMBED-TAU030-QCR-K5",
+      "strength": "not_measured",
+      "expected": "RAG semantic retrieval over Curated-A under QCR frozen-bank: WebArena-Verified TAU0.30 TFIDF Jaccard top-k k=5 (primary) verbatim bind verify fallback to COLD, Retrieval 200 tok+150ms, M_total_f10 ~3703 at n0 success ~0.65 CuP ~0.80 target <=0.85x and >=0.12 margin at f=10/100",
+      "observed": "Fixture bank staged qcr sha 8c69804b TAU0.30 630 pairs max 0.0 pass, dsm/sgdr staged, but no trajectory success/economics measured; no retrieval execution; M_total null",
+      "passes": false,
+      "issue": "Strongest retrieval baseline not exercised; Pareto ratio vs RAG unknown at both f=10/100; cannot supersede per_hit",
+      "evidence_ref": "research/experiments/EXP-PRODUCT-35999358218/result.json controls.B-RAG-EMBED-TAU030-QCR-K5 UNKNOWN, artifacts/fixture_checks.json qcr_bank_manifest staged true"
+    },
+    {
+      "baseline_id": "B-STAGEHAND-CACHE",
+      "strength": "partial_file_proxy_only",
+      "expected": "Stagehand DOM-hash selector cache without TTL 2x speedup ~30% cost: hit iff DOM identical (1.0 at n0 0 at n>=0.25 orthogonal), 50 tok+120ms+1 step hit miss 500 tok+2 steps; requires Docker BrowserGym 2000-node CDP AX for SURVIVES",
+      "observed": "PC1 exact-repeat sub-check PASS 5/5 hit_rate 1.0 per_hit 50 via disclosed file-proxy body/DOM hash (Docker AX unavailable). Full condition success/economics at f=10/100 NOT_RUN. File-proxy disclosed insufficient for SURVIVES per frozen no-surrogation rule.",
+      "passes": false,
+      "issue": "Cache-hit mechanics shown on file-proxy body hash, not BrowserGym AX heterogeneity; cannot test SPIDER correct-family reconstruction advantage where Stagehand misses at n>=0.25 orthogonal",
+      "evidence_ref": "research/experiments/EXP-PRODUCT-35999358218/artifacts/pc1_exact_repeat.json hit_rate 1.0 5/5 per_hit 50 pass true (disclosed file-proxy), result.json controls.B-STAGEHAND-CACHE status PARTIAL"
+    },
+    {
+      "baseline_id": "B-DSM-O1-COMPILE",
+      "strength": "not_measured",
+      "expected": "DSM O(1) compilation 714 sites /2147 tools 80-94% compile success amortized $0.002-0.092 at f=10/100 O(1) lookup 15 tok+tool 15 tok, M_total ~897 at n0, vulnerable to freshness staleness",
+      "observed": "dsm_registry staged 714/2147 pass from Curated-A TRAIN-only, compile success 80-94% required but DSM amortized $ logging impossible without LLM invocation; no real tool execution tokens; baseline NOT_RUN",
+      "passes": false,
+      "issue": "Compilation vs inheritance Pareto trade-off untestable; DSM $0.002-0.092 cannot be decomposed without real tokens",
+      "evidence_ref": "research/experiments/EXP-PRODUCT-35999358218/result.json controls.B-DSM-O1-COMPILE UNKNOWN, artifacts/fixture_checks.json dsm_registry 714/2147 pass"
+    },
+    {
+      "baseline_id": "B-SGDR-AWM",
+      "strength": "not_measured",
+      "expected": "SGDR state_key-indexed retrieval family+DOM_hash/state_key + intent 180 tok+150ms vs AWM workflow memory same QCR bank same honest counters",
+      "observed": "sgdr_index staged 36 state_key TRAIN-only pass but DOM-hash component substituted with TRAIN post_state hash (disclosed representation loss); cost_config 180 honored in config but no execution without gpt-4o-mini/BrowserGym; baseline NOT_RUN",
+      "passes": false,
+      "issue": "State-grounded retrieval advantage vs parameterization+probe untestable; retrieval-bound ceiling unknown",
+      "evidence_ref": "research/experiments/EXP-PRODUCT-35999358218/result.json controls.B-SGDR-AWM UNKNOWN, artifacts/fixture_checks.json sgdr_index representation_note"
+    },
+    {
+      "baseline_id": "P-SPIDER-ECON-PARETO",
+      "strength": "not_measured",
+      "expected": "PRIMARY SUT freshness-gated 0.95/0.85 Jaccard 0.85 + deterministic localized repair + correct-family reconstruction dot-regex + TTL 60s ETag W/body_sha 10tok+30ms health-gated n_non304>=800 stratified + verified_state MEA auditor softmax 0.15, M_total Pareto >=25% vs COLD <=0.85 vs RAG at both f margin >=0.12 vs each baseline rho>=0.60 AUROC>=0.75 safety non-inferior",
+      "observed": "Claim-level NOT_RUN (no gpt-4o-mini/BrowserGym). Substrate+kernel+correlated probe diagnostics observed on single-node; primary success/M_total/rho_proxy_real/calibration/safety remain null per contract not zero. Correlated probe substrate gate passed saving 0.40 accuracy 1.0 TN>=0.85.",
+      "passes": false,
+      "issue": "No LLM inheritance evidence; all primary gates (C1-C5 Pareto/margin/calibration/rho/safety plus super-session) remain unknown not falsified; honest sum counters on disclosed tasks are NC diagnostics only per MV6/MV8",
+      "evidence_ref": "research/experiments/EXP-PRODUCT-35999358218/result.json controls.P-SPIDER-ECON-PARETO UNKNOWN metrics.primary_claim_metrics null, artifacts/substrate_probe.json probe correlated pass"
+    }
+  ],
+  "recomputed_metrics": {
+    "substrate_n_non304_total": 840,
+    "substrate_n_non304_stratified_ep_a": 420,
+    "substrate_n_non304_stratified_ep_b": 420,
+    "substrate_n_304_stratified_ep_a": 3,
+    "substrate_n_304_stratified_ep_b": 3,
+    "substrate_n_requests": 846,
+    "substrate_if_none_match_fraction": 1.0,
+    "substrate_single_worker": true,
+    "substrate_journal_mode_wal": true,
+    "substrate_jwt_algs": ["HS256"],
+    "substrate_nginx_upstream_set": ["127.0.0.1:18929"],
+    "probe_correlated_n0_hit_rate": 1.0,
+    "probe_correlated_n0_total": 150,
+    "probe_correlated_n025_accuracy": 1.0,
+    "probe_correlated_n025_stale_fraction": 0.5,
+    "probe_correlated_n025_false_accept": 0.0,
+    "probe_correlated_token_saving": 0.4,
+    "probe_random_seed42_accuracy": 0.4866666666666667,
+    "probe_correlated_delta_vs_random": 0.5133333333333333,
+    "PC1_hit_rate": 1.0,
+    "PC1_n": 5,
+    "PC1_per_hit_tokens_on_hit": 50,
+    "PC3_AUROC_verif_true": 0.9194597379181557,
+    "PC3_AUROC_shuffled_null": 0.48184101226697573,
+    "PC3_precision_verif": 0.9682539682539683,
+    "PC3_forced_execute_wrong_accept_rate": 0.16907216494845362,
+    "PC3_confidence_std": 0.4528861339879617,
+    "PC3_UNKNOWN_precision": 0.9829268292682927,
+    "PC3_ECE_5bin": 0.10263369771787187,
+    "PC4_frozen_formula_max_abs_diff": 0.0,
+    "PC4_parity_within_1e6": true,
+    "PC4_rho_proxy_real_pooled": null,
+    "PC4_rho_proxy_real_per_stratum": {
+      "0.0": null,
+      "0.25": null,
+      "0.5": null,
+      "0.75": null,
+      "1.0": null
+    },
+    "MV3_kernel_dot_regex_n_pass": 5,
+    "MV3_kernel_dot_regex_n_total": 5,
+    "MV3_kernel_sha256": "d926279d5ee14a044a2f13b8abc09202df9f5adb9e86feaadeb61818a15f4038",
+    "cross_family_jaccard_max": 0.0,
+    "cross_family_jaccard_n_pairs": 630,
+    "NC1_rho_shuffled": -0.1367236964485896,
+    "NC1_null_rho_ci95": [-0.1696093896534687, 0.09173454606505668],
+    "NC1_block_permutation_p": 0.07238552289542091,
+    "NC1_rho_length_pooled": -0.2871341837663058,
+    "NC1_per_stratum_rho_length_shuffled": {
+      "0.0": -0.08407564886941842,
+      "0.25": null,
+      "0.5": -0.4668924464278881,
+      "0.75": null,
+      "1.0": -0.30340953960775696
+    },
+    "NC1_pass": false,
+    "NC2_AUROC": 0.47979166666666667,
+    "NC2_false_accept_rate": 0.104,
+    "NC2_pass": true,
+    "NC3_rho_novelty": 0.007890496086527815,
+    "NC3_R2": 4.3207724255034385e-05,
+    "NC3_pass": true,
+    "MAIN_pipeline_rho_novelty_diagnostic_only": 0.7620215299096192,
+    "fixture_value_set_pool_contaminated_families": 18,
+    "fixture_value_set_usage_contaminated_families": 18,
+    "fixture_tasks_sha256": "391e8f6cf167300cf223ebbb19cf5d2beed6568f5f84ac968ae88866a438a98b",
+    "fixture_qcr_sha256": "8c69804b249ec9c84cf05d86a21c7ebe7a31af5f8d45e50a4e6d477b449f9f58",
+    "dsm_registry": "714/2147",
+    "sgdr_index_n_state_key": 36,
+    "cost_config_staged": "50/15/800/10",
+    "cost_config_frozen": "50/15/180/10",
+    "frozen_hashes_preserved": true,
+    "bijective_proxy_detected": false,
+    "within_family_std_degenerate": false,
+    "rho_proxy_real_pooled": null,
+    "rho_proxy_real_per_stratum": null,
+    "primary_M_total_f10_f100": null,
+    "primary_success_margins": null,
+    "verification_AUROC_real_traj": null,
+    "safety_CuP": null
+  },
+  "claim_ceiling": "No update to C-PRODUCT-ECON: remains HYPOTHESIS. MEASUREMENT_INVALID is infrastructure/measurement-gate failure, not scientific falsification or support. Max justified bounded operational ceiling: single-node HS256 sticky $request_uri If-None-Match/ETag W/body_sha substrate CAN be provisioned health-gated at /tmp/spider-runtime/shared.db WAL single-worker gunicorn 23.0.0 + nginx 1.24.0 with n_non304 840 stratified 420/420 and correlated TTL 60s probe discriminating fresh (1.0 at n0) vs ~50% stale at n0.25 with accuracy 1.0 saving 0.40 FA 0.0 vs seeded-42 random 0.487 delta 0.513; PC1 exact-repeat 1.0 5/5 file-proxy; PC3 MockEnv calibration non-vacuous AUROC 0.919 vs 0.482 precision 0.968 conf_std 0.453 ECE 0.103; kernel dot-regex d926279d 5/5 correct-family UNKNOWN on wrong family durable; cross-family orthogonality max Jaccard 0.0 on 630 pairs; PC4 parity 0.0 within 1e-6 isolated. Does NOT support: any honest amortized M_total Pareto dominance (>=25% vs COLD <=0.85x vs RAG at f=10/100, browser+latency >=20% accuracy>=0.85), margin >=0.12 vs each baseline, rho_novelty>=0.60, rho_proxy_real>=0.50, AUROC>=0.75 on real trajectories, safety CuP non-inferior, or per_hit supersession — all remain unmeasured null due to GHCR manifest unknown, OPENAI_API_KEY absent, Hard258 absent, and 18/36 contamination. Parent bounded file-proxy economics (per_hit 1.005>0.85 at n0 rho 0.363<0.60; this run parent file-proxy 1.045 at n0 rho 0.472) stands as only economics evidence and remains falsified for per_hit gate.",
+  "evidence_refs": [
+    "research/experiments/EXP-PRODUCT-35999358218/request.json sha 3479a809de9cba7ee7d3a8aa66c1158bd230052d9c3a4c5f6ca48879f5b2469f",
+    "research/experiments/EXP-PRODUCT-35999358218/spec.json sha d0a0411ee16b8f7dc101b8ac0bd8f2288fd69572f9844a32a47f2867108889db",
+    "research/experiments/EXP-PRODUCT-35999358218/prereg.md sha f8abd4e51ab9df60f3bdab110efd42eed86f4958f512f7e445560ac045bebaf1",
+    "research/experiments/EXP-PRODUCT-35999358218/freeze.json frozen_at 2026-09-24T12:34:58.896476+00:00",
+    "research/experiments/EXP-PRODUCT-35999358218/result.json status MEASUREMENT_INVALID outcome INCONCLUSIVE",
+    "research/experiments/EXP-PRODUCT-35999358218/report.md sections 2-5",
+    "research/experiments/EXP-PRODUCT-35999358218/provenance.json execution_base_head ce852f20930fe0d762bb5b7f1a860163efadcf9d gunicorn 23.0.0 pyjwt 2.14.0 openai ABSENT docker manifest unknown",
+    "research/experiments/EXP-PRODUCT-35999358218/artifacts/env_audit.json sha 6b58758a7222ab0268d0977894bd473178c614e3fc1df18dfdbcbc36cad27d16",
+    "research/experiments/EXP-PRODUCT-35999358218/artifacts/fixture_checks.json sha 022fa85b6dab88ca03f3ec4bc0b16b67ef596ad094ff31993edc383e9c366506 pool_contam 18 usage_contam 18 cross_jaccard 0.0",
+    "research/experiments/EXP-PRODUCT-35999358218/artifacts/substrate_probe.json sha 5239c390fdfb6a8ae1c897b9fbba998af5caadb781469d1bc16cfe6443f96974 n_non304 840 stratified delta 0.513",
+    "research/experiments/EXP-PRODUCT-35999358218/artifacts/substrate_start.json sha 86615bbd0204657b3b29aab9561d051a0b2cf187adc35579e71b037d1dfd6c44",
+    "research/experiments/EXP-PRODUCT-35999358218/artifacts/pc1_exact_repeat.json sha 5c8bedf7283f700728484e1e3c1c52e27997b5558bc6a3d1595984eee7d905ca hit 1.0 5/5",
+    "research/experiments/EXP-PRODUCT-35999358218/artifacts/pc3_verify_calibration.json sha 8aa966fba95beaec7080a39e95dc11e0ddc255c87672761c75b9eca51173e730 AUROC 0.919",
+    "research/experiments/EXP-PRODUCT-35999358218/artifacts/mv3_kernel_spot_check.json sha 4c36e30b144bdb9ebb31c77cff653def459c30918cdd77e2865723f1c35f534d 5/5 dot-regex",
+    "research/experiments/EXP-PRODUCT-35999358218/artifacts/null_controls.json sha 22173094ada37a5568dd44015a9f0797968b7383b20ab3b23fb8389bb0e2f4ed NC1 rho -0.136 p0.072 length -0.287",
+    "research/experiments/EXP-PRODUCT-35999358218/artifacts/metrics_summary.json sha 6875e6f13c1e188acdbcf7e1fdcf9f164ab2b3e25f2b84c3ba2144f9c44f3cb1",
+    "research/experiments/EXP-PRODUCT-35999358218/artifacts/probe_traces.jsonl sha 8d991adb5a9a5a0e62eabcab679b4e11fa59feb6e143a2a9c5bd17bdeb616556",
+    "research/experiments/EXP-PRODUCT-35999358218/artifacts/attempts_log.json sha 36715358a6ffcfc03cacadc723a606333ca942fd00db5d76234b969fe728a5b4",
+    "research/experiments/EXP-PRODUCT-35999358218/fixtures/webarena_verified_v2_tasks_192_36.json sha 391e8f6cf167300cf223ebbb19cf5d2beed6568f5f84ac968ae88866a438a98b",
+    "research/experiments/EXP-PRODUCT-35999358218/fixtures/qcr_bank_manifest.json sha 8c69804b249ec9c84cf05d86a21c7ebe7a31af5f8d45e50a4e6d477b449f9f58",
+    "src/spider/kernel.py sha d926279d5ee14a044a2f13b8abc09202df9f5adb9e86feaadeb61818a15f4038 r'\\$\\{[A-Za-z_][A-Za-z0-9_\\.]*\\}'"
+  ],
+  "unresolved": [
+    "Whether GHCR authorization + OPENAI_API_KEY + playwright 1.63.0 install can unblock Docker BrowserGym 0.14.3 2000-node 1280x720 CDP AX>10 and gpt-4o-mini 15-step real-token measurement for rho_proxy_real pooled+per-stratum >=0.50, rho_length per-stratum, and honest M_total Pareto at f=10/100 decomposed tokens vs browser+latency vs accuracy vs safety CuP",
+    "Whether contamination-free holdout (Hard258 pip or rebuilt 192/36 with value_set_A intersect B empty on all 36 families TRAIN-only) can be staged without altering frozen Jaccard<0.30 threshold or L=8-14 family-specific invariants; current canonical fallback contaminated on 18/36 even families",
+    "Whether NC1 per-stratum |rho_length|<0.20 and |rho_shuffled|<0.20 p>=0.20 can be satisfied on real BrowserGym trajectories once deterministic counter coupling removed; current deterministic file-proxy rho_length -0.287 pooled -0.466 at 0.5 -0.303 at 1.0 indicates counter formula coupling, not LLM null validity",
+    "Whether PC4 rho_proxy_real per-stratum CIs and ST-WebAgentBench safety CuP non-inferior vs each baseline at f=10/100 plus DSM amortized $0.002-0.092 can be demonstrated once real tokens exist; cost_config 800 vs 180 discrepancy blocks exact DSM pricing",
+    "Full six-condition same-model success margins >=0.12 vs each baseline at both f=10/100, M_total Pareto dominance, correlated probe vs random delta on heterogeneous tasks, and per_hit-vs-Pareto SUPERSEDE clause remain untested end-to-end (null, not falsified); parent per_hit 1.005>0.85 rho 0.363<0.60 stands bounded"
+  ]
+}
