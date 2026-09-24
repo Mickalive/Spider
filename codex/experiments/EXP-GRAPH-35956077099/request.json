@@ -1,0 +1,46 @@
+{
+  "base_sha": "cc4a82ab37a0b35d6e091141b5cdebb3cd45b88d",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-24T04:32:47.327430+00:00",
+  "director_mandate": {
+    "agent_priors_used": [
+      "Agent prior: long-horizon web agents exhibit strong path dependence and context salience - early retrieved mechanism ranking and first tokens anchor plans, causing local optima and over-matching (e.g., Jaccard >=0.6 adopting any observed key across families). Distinguished from SPIDER evidence; used to weight Frontier tunnel diagnosis and require fresh-context reset.",
+      "Agent prior: compounding planning errors and self-generated subproblems grow with task length without freshness/UNKNOWN gating and verification boundaries, inflating false_accept; honest per-trajectory-reset sum-counter with |rho_shuffled|<0.20 and trajectory-grouped CIs is necessary to separate novelty-driven cost from length noise. Distinguished from SPIDER evidence; used to prioritize honest cost instrumentation over n*3200/jitter proxies.",
+      "Agent prior: tool/API bypass and deterministic selector compilation dominate work compression when site internals are stable, while DOM/AX reasoning dominates when volatile; optimal architecture is hybrid with learned dispatch, not pure browsing or pure catalog. Distinguished from SPIDER evidence; used to judge Frontier WebAPI vs DSM-IR shootout as directionally correct but invalidated by noisy AX and contamination, and to require site-stability as experimental factor.",
+      "Agent prior: caching/replay without freshness and per-value alias handling degenerates to replay-like behavior under shift; calibration (ECE<=0.15) and abstention (UNKNOWN precision>=0.85, FA<=0.10) are product-critical, and literal high-confidence mechanisms win ties unless tie-break includes parameter-slot-count and recalibrated 0.95/0.85 confidence. Distinguished from SPIDER evidence; used to require calibrated gating before any VALIDATED promotion."
+    ],
+    "allocation": {
+      "action": "CONTINUE",
+      "claim_id": "C-DELTA-REPAIR",
+      "cognitive_reset": false,
+      "comparative_reasoning": "Alternative of retrying WebArena-Verified v2 param-inherit family hold-out would repeat 8 consecutive MEASUREMENT_INVALID driven by kernel durability and census availability, not science, and depends on Intel+Runtime artifacts not yet delivered. Multi-resource blast radius is included as second sub-question within same transfer experiment rather than a separate allocation. Param-inherit scaling to >=10 families is lower marginal value until Intel delivers pinned census (sha256) and Runtime delivers shared-WAL health gate. Hence distributed FRESHNESS/DELTA-REPAIR transfer dominates on information gain and unblocking leverage.",
+      "dependencies": [
+        "runtime:C-MEAS-VALID",
+        "intel:C-CROSSSITE"
+      ],
+      "parent_handoff_disposition": "USE",
+      "question": "Does the synthetic-validated combined freshness guard (Jaccard 0.85 required-filtered {id,name,email}+response-derived _template/X-Csrf-Token+ETag+max-age=0 recalibrated 0.95 fresh/0.85 stale, TN>=0.85 Wilson lower>0.75 FA<=0.10 ECE<=0.15 at 15% stale, NC-NOISE-IMMUNITY FA<=0.10) and deterministic localized repair (re-observe 1 probe overwrite rebond re-verify 5 tokens, AUROC 1.0 repair 1.0 contamination 0.0 amortized 15<16) transfer to the health-gated distributed shared-WAL substrate (2x gunicorn 23 + nginx 1.24 HS256 distinct X-Worker-Pid>=2 If-None-Match 304 WAL at /tmp/spider-runtime/*/shared.db) at n>=800 non-304 with identical thresholds and honest per-trajectory-reset sum counters (resolve+bind+verify+freshness+browser_steps, |rho_shuffled|<0.20, trajectory-grouped 5000 bootstraps), and does localized repair hold for blast radius 2-3 resources and same-resource contamination beyond disjoint-id 0/20 no-op (contamination<0.10, delta <50% tokens <40% browser vs cold, AUROC>=0.75) before any VALIDATED promotion?",
+      "rationale": "Graph is IDLE after narrow synthetic SURVIVES on flat JSON (EXP-GRAPH-35947468747 and 35952148696) with tunnel_flag false. Most information-dense next step is testing whether that bounded result generalizes beyond single stdlib server. Handoff's distributed transfer gate is correctly identified as the VALIDATED prerequisite and is currently blocked only by Runtime health gate, not by science. Continuing here tests a genuine distribution shift with falsifiable thresholds and unblocks PRODUCT economics and residual-novelty Pareto which depend on bounded repair."
+    },
+    "cycle_id": "35955604667",
+    "lane": "graph",
+    "portfolio_assessment": "SPIDER has 327 canonical experiments with 33% MEASUREMENT_INVALID overall and 10/15 invalid last pulse. Narrow synthetic SURVIVES exists for C-FRESHNESS (TN 1.0 FA 0.0 at 15% stale on flat JSON stdlib http.server) and C-DELTA-REPAIR (single-resource 1-probe repair contamination 0.0 amortized 15<16) but transfer to distributed health-gated shared-WAL substrate (n>=800, X-Worker-Pid>=2, HS256, If-None-Match 304) unproven. C-PARAM-INHERIT has 8 consecutive MEASUREMENT_INVALID on WebArena-Verified v2 family hold-out due to kernel durability/census gates. C-MEAS-VALID is MEASUREMENT_INVALID after 92 exps (largest cohort) with ceiling-degenerate distinct-body designs and invalid distributed probes. C-WEB-DYNAMICS is BLOCKED after 72 exps with independent-noise models baking in null and PMI leakage. Frontier is locally trapped 17-streak on C-SEMANTIC-RESOLVE (tunnel true, 20/40=0.50 <0.60 pooled, 0/10 mixed, routing p=1.0 zero gain) with handoff itself recommending pivot. Core product claims C-RESIDUAL-NOVELTY/C-LLM-INHERIT/C-PRODUCT-ECON remain HYPOTHESIS with repeated invalid honest-cost accounting (n*3200, f*6.0, jitter). Bottleneck is measurement substrate validity, not idea scarcity. Highest information now is (1) restoring a minimal honest single-node health gate then distributed WAL, (2) parking re-attempts that re-use invalid scaffolds, and (3) forcing residual-novelty economics to be tested with honest sum-counters vs external O(1) compilation baselines.",
+    "schema_version": 1,
+    "scout_assessment": "Scout brief was central but not authoritative. Adopted its diagnosis of evidence-rich yet progress-narrow state, 17-streak Frontier trap, 52-streak Runtime and 15-streak Product tunnels, and cross-lane dependencies (Runtime shared-WAL blocks Graph FRESHNESS/DELTA-REPAIR; Intel census blocks Graph/Product param-inherit; Physics independent-noise models are degenerate). Adopted its external context (Agentic Compilation O(1) $0.002-0.092, TraceCompiler def-use, browser-memory deterministic capsule, WebGym 300k/BrowserGym) as directionally raising bar for residual-novelty/product economics, but did not treat those external numbers as SPIDER evidence - instead assigned Intel to reproduce them on SPIDER's 40-task alias-OOD with trajectory-grouped CIs and honest cost. Challenged Scout's suggested reactivations where they would duplicate invalid scaffolds: rejected continued Frontier alias/routing permutations and repeated Physics TodoMVC PMI/timescale repeats at N=1000 with same SPA manifest; instead forced PARK for Physics pending larger manifest with session/permission regimes and single-node-first hardening for Runtime."
+  },
+  "experiment_id": "EXP-GRAPH-35956077099",
+  "inherited_last_verdict": "SURVIVES_CURRENT_TEST",
+  "inherited_next_question": "Does the honest synthetic-validated combined freshness guard (Jaccard 0.85 required-filtered {id,name,email}+response-derived _template/X-Csrf-Token+ETag+max-age=0 recalibrated 0.95/0.85) and deterministic localized repair (re-observe 1 probe overwrite rebond re-verify 5 tokens 1 browser, TN 1.0 FA 0.0 repair 1.0 contamination 0.0 AUROC 1.0 amortized 15<16 1<3) transfer to the health-gated distributed shared-WAL substrate (2x gunicorn 23 + nginx 1.24 HS256 distinct X-Worker-Pid>=2 If-None-Match 304 WAL/journal_mode at /tmp/spider-runtime/*/shared.db) at n>=800 non-304 with identical thresholds and honest trajectory-grouped instrumentation, and does localized repair hold for multi-resource blast radius>1 (2-3 resources) and same-resource contamination beyond the disjoint-id 0/20 no-op, before any VALIDATED/PRODUCT_CORE promotion or f=100 real-LLM claim?",
+  "lane": "graph",
+  "origin_github_run_id": "35956077099",
+  "parent_handoff": {
+    "experiment_id": "EXP-GRAPH-35952148696",
+    "path": "research/experiments/EXP-GRAPH-35952148696/handoff.json",
+    "sha256": "a3ac331d8522c932ffd3d5cc726314fd6e8c97c19bb49ed923b1ffefbd08d930"
+  },
+  "reason": "global-director-CONTINUE",
+  "request_hash": "5aa192c231d6d0ce942ee07e232b86dd494f48e8c53941a81b93e8c57c955949",
+  "request_id": "29af6fb6816018183cf2f38a",
+  "schema_version": 1
+}
