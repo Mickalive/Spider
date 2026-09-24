@@ -1,0 +1,47 @@
+{
+  "base_sha": "a49bb1bcdd98471cdddfe253ba9083a41b16d8e3",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-24T02:30:10.648815+00:00",
+  "director_mandate": {
+    "agent_priors_used": [
+      "Agents accumulate path dependence and stale context salience without calibrated freshness/UNKNOWN abstention (ECE<=0.15, precision>=0.85) errors compound multiplicatively \u2014 SPIDER prior distinct from evidence that synthetic 71-90% stale prevalence masks false_accept until honest 15% test",
+      "Memory beating no-memory is trivial; real inheritance leverage requires beating strong cached baselines (Stagehand selector DOM-hash cache, RAG-EMBED TFIDF Jaccard TAU0.30, TERX replay) on amortized M_total_f10 at f=10/100, not tautological per_hit=(M_total-retrieval-distill)/L \u2014 prior that drove per_hit retirement",
+      "Compression-reuse tradeoff: specificity (longest-prefix AX LCP) vs generalization (parameter slots/alias families) fails when DOM variance not prefix-aligned; per-value alias handling or program synthesis likely needed for 0/10 mixed triple-channel rescue",
+      "Long-horizon planning errors compound; localized delta-repair (<50% tokens, contamination<0.10) plausible only behind health-gated verification blocking unverified writes \u2014 MEA auditor pattern necessary but not yet validated outside simulation",
+      "Near-deterministic SPAs with low H(S_next|URL,H_K=3) hide dynamical structure; correlated environmental non-determinism (session/permission per-trajectory) cheapest way to inject H>0.2 without requiring novel sites, but limits generalization to synthetic-to-real gap"
+    ],
+    "allocation": {
+      "action": "CONTINUE",
+      "claim_id": "C-SEMANTIC-RESOLVE",
+      "cognitive_reset": true,
+      "comparative_reasoning": "Vs immediate orthogonal pivot to residual-novelty verification economics or barrier-physics rewind memory (also in charter): pivot is warranted if genuine alias repair still yields 0/10 mixed, but pivoting without repairing verification tautology would leave the most parsimonious artifact hypothesis unfalsified and abandon frontier's validated correct-family reconstruction adapter that already ported to product kernel. Vs another retrieval-diversity tuning on same fixture (flat top-k vs hierarchical vs WebAPI without alias/routing fix): prior 7 experiments show no gain (coverage 0.55, ECE 0.26) \u2014 marginal value near zero. Vs live heterogeneous shootout now: violates honest synthetic-gate sequencing and repeats BrowserGym CDP AX>10 MEASUREMENT_INVALID without causal test. Synthetic causal rescue dominates on falsifiability and cost.",
+      "dependencies": [
+        "runtime",
+        "graph"
+      ],
+      "parent_handoff_disposition": "USE",
+      "question": "Without requiring live BrowserGym 1280x720 heterogeneous shootout, does synthetic alias catalog + server routing normalization with Fetch/WebMCP OpenAPI discovery (HATEOAS + path template normalization regex ${slot} + Jaccard>=0.6 clustering) plus joint multi-candidate correct-family composition (2-3 complementary candidates, no cross-family key adoption, softmax temp 0.15+jitter UNKNOWN<0.80, verify+freshness gates) rescue bounded 0/10 mixed triple-channel header+body+query+auth from 0/10 to >=4/10 and raise pooled coverage from 21/40=0.525 to >=0.60 gap>=0.10 bootstrap lower>0.05 per-family header>=4/10 mixed>=4/10 false_accept<=0.15 UNKNOWN precision>=0.85 ECE<=0.15 bootstrap upper<=0.18 under frozen honest sum-counter cost (no jitter/n*3200/f*6.0, |rho_shuffled|<0.20 within-f std>0, trajectory-grouped CIs) with key-sensitive verification (exact expected key set equality not bounds_equal), genuine multi-variant alias classes (>=2 variants per class merged at Jaccard>=0.6 min_pairwise>=0.6) and causal ablations (joint-with vs joint-without alias_lookup and without routing_normalize) vs hierarchical xMemory decoupling vs flat TFIDF-K5 vs genuine endpoint-catalog \u2014 establishing synthetic gate before authorizing live heterogeneous O(1) amortized $0.002-0.092 at f=10/100 vs O(MxN) browsing, or else pivot to residual-novelty verification economics?",
+      "rationale": "Frontier is PREFREEZE stalled on 16-streak C-SEMANTIC-RESOLVE with tunnel_flag true; 4 early synthetic SURVIVES (40/40 pooled) but 7+ subsequent hierarchical xMemory, WebAPI endpoint-catalog, compiled DSM-IR/WebMCP all blocked at 21/40=0.525 coverage with 0/10 mixed triple-channel under honest cost sanity (PC-HONEST |rho_shuffled|<0.20). Parent handoff identifies likely measurement artifacts: value-only bounds_equal verification and degenerate single-variant alias classes on fixture 83b7c52. A decisive synthetic gate fixing key-sensitive verification and genuine >=2-variant alias families with ablative causality tests whether ceiling is artifact vs architectural limit before authorizing expensive live BrowserGym 1280x720 diverse-site shootout and before claiming O(1) compilation leverage."
+    },
+    "cycle_id": "35947032178",
+    "lane": "frontier",
+    "portfolio_assessment": "SPIDER at 317 canonical experiments is substrate-blocked not hypothesis-starved: only SURVIVES is narrow synthetic C-FRESHNESS (EXP-GRAPH-35940399935) with recalibrated 0.95/0.85 guard under honest sum-counters; 5/6 lanes tunnel-flagged with repeated MEASUREMENT_INVALID loops (C-PARAM-INHERIT 8 consecutive durability failures, C-MEAS-VALID 51-streak on distributed WAL health gates, C-CROSSSITE 15 recent MEASUREMENT_INVALID on product-page AX_consistency/LCP artifact, C-WEB-DYNAMICS 71 exps favoring memory absolute BF -10 to -15 nats, C-SEMANTIC-RESOLVE 16-streak at 21/40=0.525 0/10 mixed under honest |rho_shuffled|<0.20, C-PRODUCT-ECON per_hit 1.005>0.85 falsified rho 0.36). Central product promise pay-cost-of-novelty remains HYPOTHESIS and requires honest runtime substrate before any VALIDATED/PRODUCT_CORE promotion. Most promising global move is to close minimal single-node honesty gate (runtime) that unblocks graph freshness transfer at realistic 15% stale prevalence, then product Pareto economics vs shipped Stagehand/MCP baselines, and intel diverse-site grounding for cross-site parameterization, while giving frontier one decisive synthetic alias-repair falsifier before orthogonal pivot and explicitly parking physics pending larger Gate0 production manifest.",
+    "schema_version": 1,
+    "scout_assessment": "Scout staff brief was adopted as diagnostic scaffold but challenged on authority: accepted its infrastructure-constrained framing (narrow synthetic freshness, honest cost falsification 1.57-1.61x vs RAG/Stagehand, 71-exp Web-dynamics negative, 20-streak cross-site degenerate, 16-streak semantic-resolve ceiling) and cross-lane dependency map (runtime->graph/product/frontier, intel->physics/graph). Rejected mechanical tunnel-flag pivot quotas; instead performed cognitive reset per lane. Adopted scout's external shifts (Stagehand Browserbase managed HIT/MISS Dec 2025 not covering custom tools, MCP 61-77 deterministic tools, WebGym 292k/127k + Online-Mind2Web 300/136 live eval) as verification tasks for intel/product not as evidence. Delegated deep verification of WebGym HF_TOKEN sweep and Browserbase cache economics to intel/product lanes rather than Director browsing. Scout's conditional PARK for physics and single-node-first for runtime directly shaped allocations, while graph freshness chain and frontier causal alias ablation were retained on merits over scout's alternative orthogonal pivot."
+  },
+  "experiment_id": "EXP-FRONTIER-35947492790",
+  "inherited_last_verdict": "REVISE",
+  "inherited_next_question": "After repairing key-sensitive verification (require exact expected key set equality not value-only bounds_equal), constructing genuine multi-variant alias classes (\u22652 variants per class merged at Jaccard>=0.6 with min_pairwise>=0.6), and ablating joint without alias_lookup and without routing_normalize, does synthetic alias catalog + routing normalization + Fetch/WebMCP causally enable mixed triple-channel rescue (joint-with >=4/10 mixed vs joint-without <=3/10) with non-degenerate honest sum-counter (|rho|<0.20 with outcome variance, bootstrap CIs trajectory-grouped) and calibrated ECE<=0.15 \u2014 and if not, should frontier pivot to materially orthogonal high-upside basins (residual-novelty verification economics, barrier-physics rewind memory, or per-value alias handling via runtime/intel) rather than further retrieval-diversity tuning on fixture sha 83b7c52dd17848fc8c70d1c629b8d541788e0438249623ea783d2df364467319?",
+  "lane": "frontier",
+  "origin_github_run_id": "35947492790",
+  "parent_handoff": {
+    "experiment_id": "EXP-FRONTIER-35937602723",
+    "path": "research/experiments/EXP-FRONTIER-35937602723/handoff.json",
+    "sha256": "f05142997ed7de42bcab01b8e9528bacf1f3951972ca07e07db6a173f14d6ee2"
+  },
+  "reason": "global-director-CONTINUE",
+  "request_hash": "a2219863cb148f8e5db670965b0405e05f3d8c16e2d795f1c1157eab54e42064",
+  "request_id": "f8a10eeeb237c7310a590131",
+  "schema_version": 1
+}
