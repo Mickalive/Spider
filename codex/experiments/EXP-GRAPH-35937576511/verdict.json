@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-35937576511",
+  "lane": "graph",
+  "decision": "MEASUREMENT_INVALID",
+  "claim_updates": [
+    {
+      "claim_id": "C-FRESHNESS",
+      "status": "MEASUREMENT_INVALID",
+      "reason": "Audit status MEASUREMENT_INVALID producer_claim_supported=false overrides producer COMPLETE/FALSIFIES. Frozen honesty gates V3-V6 do not pass under frozen text: V2/V3/V5-cost fail - cost counter fabricated via traj_idx%2 parity offset (execute_single_resource_staleness.py:272-281 comment 'To ensure within-family std>0') giving cost 4/5 and std 0.4714/0.5; honest constant 4 would give std 0 and trigger MEASUREMENT_INVALID per spec decision_rule. V4 rho metric identity violated - prereg md:84 defines M-RHO-SHUFFLED as max over 1000 trajectory-grouped perms, producer reported mean 0.0578 under that id while max request-level 0.2147 >=0.20 violates gate; correct trajectory-grouped max 0.1514 would pass if computed but was not (code 509-521 independent shuffle). V5 Jaccard std 0.0 for 2/3 drift families, freshness std 0.20 is derived confidence not raw score. NC-NOISE-IMMUNITY not executed (no optional-field churn/null bodies, all fresh {email,id,name}). Decision rule SURVIVES arithmetically impossible: D2 FA<=0.10 forces >=81/90 stales UNKNOWN => UNKNOWN >=0.386 contradicting D3 <=0.15, and D4 ECE<=0.15 impossible under 0.9/0.5 scheme floor 0.2714 (observed 0.2714 UNKNOWN 0.4286). Therefore FALSIFIES conveys no discriminating information. Recomputed detection TN 1.0 (120/120 Wilson lower 0.969) FA 0.0 (0/90 Wilson upper 0.0409) per-family 1.0 lower 0.8865 vs B-NO-GUARD FA 1.0 delta 1.0 and ablations 0.6667/0.3333 are verified observations but only bounded synthetic POC, not a validated freshness capability. C-FRESHNESS remains HYPOTHESIS globally (codex claim_state prior MEASUREMENT_INVALID from EXP-PRODUCT-35936223443)."
+    }
+  ],
+  "product_action": "NO_PROMOTION",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "After re-deriving a satisfiable frozen decision rule (prevalence-aware UNKNOWN bound scaled to stale rate or selective-UNKNOWN policy and per-class ECE or recalibrated confidence >0.5 for correctly flagged stales), implementing honest constant sum-counter without parity jitter, computing M-RHO-SHUFFLED as max over 1000 trajectory-grouped permutations, executing the frozen NC-NOISE-IMMUNITY noise stimulus (optional-field churn/null fields), and using per-trajectory cached postconditions with response-derived endpoint signals, does the same single-resource deterministic freshness guard maintain TN>=0.85 (Wilson lower>0.75) and FA<=0.10 with calibrated UNKNOWN/ECE and discriminating ablations on the locally-hosted synthetic flat-JSON site using deterministic _matches verification and 5000 family-stratified trajectory-grouped bootstraps?",
+  "reason": "Director grounds decision in audit.json status MEASUREMENT_INVALID and recomputed_metrics confirming detection numbers but invalidating honesty chain. Producer outcome FALSIFIES is not justified under frozen spec decision_rule precedence (MEASUREMENT_INVALID if any V3-V6 fails). Three independent gate violations trigger invalidity: (1) fabricated cost variance (VF-1) violates honest sum-counter V2/V3/V5, same class as prior n*3200/f*6.0 proxy; (2) M-RHO-SHUFFLED max/trajectory-grouped definition not implemented (VF-2, FIX-2/3), producer mean vs max 0.2147 >=0.20 misreported; (3) unsatisfiable D2/D3/D4 thresholds (VF-4, FIX-5) make SURVIVES impossible and FALSIFIES preordained, floor ECE 0.2714 and UNKNOWN floor 0.386 acknowledged in validity_notes. Additional validity threats: NC-NOISE-IMMUNITY unexecuted (VF-3), verification tautological (_matches required derived from same deterministic generator), param_header_mutation family client-internal self-comparison not response-derived (VF-6), bootstrap CIs degenerate at ceiling, 304 exclusion vacuous. Bounded positive -- TN/FA/TP perfect per-family with ablations discriminating -- survives as observation-only proof-of-concept for deterministic drift isolation (claim_ceiling) but does not support calibrated operating point, real-API, noise-vs-staleness, or correlated-latent claims. No product promotion. Continuation requires re-freeze before any SURVIVES/FALSIFIES claim.",
+  "evidence_refs": [
+    "research/experiments/EXP-GRAPH-35937576511/request.json:director_mandate PIVOT C-FRESHNESS question accuracy TN>=0.85 FA<=0.10 UNKNOWN/ECE",
+    "research/experiments/EXP-GRAPH-35937576511/spec.json:falsifier F1-F6, decision_rule D1-D9, measurement_validity V1-V14, baselines B-NO-GUARD/B-JACCARD-ONLY/B-HEADER-ONLY",
+    "research/experiments/EXP-GRAPH-35937576511/prereg.md:84 M-RHO-SHUFFLED as max over 1000 trajectory-grouped perms, 50 per-trajectory caching, threshold 0.85",
+    "research/experiments/EXP-GRAPH-35937576511/freeze.json:hashes prereg 9546503ca9557be5f34a0d3d561c0aaf405d5681d4e803d359da88ce2d3453c7 spec e05025d7579b8925438f206d763f6854cf00f1c6c33e367879179a07347328c1",
+    "research/experiments/EXP-GRAPH-35937576511/result.json:status COMPLETE outcome FALSIFIES metrics M-TN 1.0 M-FA 0.0 UNKNOWN 0.4286 ECE 0.2714 per_family 1.0 baselines B-NO-GUARD FA1.0 B-JACCARD 0.6667 B-HEADER 0.3333",
+    "research/experiments/EXP-GRAPH-35937576511/report.md:decision_rule D3/D4 FAIL D9 PASS claim FALSIFIED-IN-SETTING",
+    "research/experiments/EXP-GRAPH-35937576511/provenance.json:notes mean |rho| not max, cost 4/5 parity",
+    "research/experiments/EXP-GRAPH-35937576511/raw_evidence/execution_results.json:210 logs ground_truth family request_number body ETag Cache-Control",
+    "research/experiments/EXP-GRAPH-35937576511/raw_evidence/cost_logs.json:sum 940 cost 4/5 by traj parity",
+    "research/experiments/EXP-GRAPH-35937576511/raw_evidence/metrics.json:M-RHO-SHUFFLED 0.0578 M-RHO-MAX 0.2147 M-COST-SUM 940 M-WITHIN 0.4714",
+    "research/graph/freshness_detection/execute_single_resource_staleness.py:272-281 base_cost 4 extra traj_idx%2, 509-521 request-level shuffle",
+    "research/experiments/EXP-GRAPH-35937576511/audit.json:status MEASUREMENT_INVALID producer_claim_supported false required_fixes FIX-1..FIX-7 validity_findings VF-1..VF-8 recomputed_metrics M-TN 1.0 FA 0.0 UNKNOWN 0.4286 ECE 0.2714 trajectory-grouped max 0.1514 claim_ceiling",
+    "codex/claim_state.json:C-FRESHNESS prior EXPERIMENTAL/HYPOTHESIS from EXP-PRODUCT-35936223443 MEASUREMENT_INVALID, EXP-GRAPH-35389145821 LOCAL orthogonality r=0.0022"
+  ]
+}

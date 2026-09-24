@@ -1,0 +1,904 @@
+{
+  "artifacts": [
+    {
+      "path": "/home/runner/work/Spider/Spider/research/experiments/EXP-FRONTIER-35937602723/raw_evidence.json",
+      "role": "raw",
+      "sha256": "3d8c2fe7ec4b9b61d00835b5171c6a196e4911649ba9e57bd3f3b1e9a6e385f9"
+    },
+    {
+      "path": "/home/runner/work/Spider/Spider/research/experiments/EXP-FRONTIER-35937602723/derived_metrics.json",
+      "role": "derived",
+      "sha256": "d0b1abe3113974e229848e94a406138fff2a9ae83381fa6c574004ef1cdb655e"
+    },
+    {
+      "path": "/home/runner/work/Spider/Spider/research/experiments/EXP-FRONTIER-35937602723/alias_catalog_manifest.json",
+      "role": "derived",
+      "sha256": "261d361d133580ee0cb9969689548879a044e81cee7d930b6581eb62cc602b5a"
+    },
+    {
+      "path": "/home/runner/work/Spider/Spider/research/experiments/EXP-FRONTIER-35937602723/endpoint_catalog_manifest.json",
+      "role": "derived",
+      "sha256": "a9695ab2511767140eb23deb0a70fd8f84084f0d9d51ac9cfea3754c36d3227a"
+    },
+    {
+      "path": "/home/runner/work/Spider/Spider/research/experiments/EXP-FRONTIER-35937602723/hierarchical_manifest.json",
+      "role": "derived",
+      "sha256": "efb5c35190efecd9125362afece798050b1bdc62f899335fcd57486f2e0d5fe7"
+    },
+    {
+      "path": "/home/runner/work/Spider/Spider/research/experiments/EXP-FRONTIER-35937602723/routing_manifest.json",
+      "role": "derived",
+      "sha256": "56d41d07df012911eb0cb3004619358aaef3d4b23e1f1eaafc6ec0f6cee63cd4"
+    },
+    {
+      "path": "/home/runner/work/Spider/Spider/research/experiments/EXP-FRONTIER-35937602723/index_manifest.json",
+      "role": "derived",
+      "sha256": "7064dab6a444ac8f9e33fbf6c67f7ddcefb0a1fcf461da6ce1e05e7b05073c34"
+    },
+    {
+      "path": "/home/runner/work/Spider/Spider/research/experiments/EXP-FRONTIER-35937602723/train_split_inventory.json",
+      "role": "derived",
+      "sha256": "ea8fcedcc7e1754aeded7a3aebb6466ac5c68d47cec293320543d11d093b2772"
+    },
+    {
+      "path": "/home/runner/work/Spider/Spider/research/experiments/EXP-FRONTIER-35937602723/joint_manifest.json",
+      "role": "derived",
+      "sha256": "512b60d308ef728a540202b8c571bf457178bd372fd5912ce1a81561b6328c44"
+    },
+    {
+      "path": "/home/runner/work/Spider/Spider/research/experiments/EXP-FRONTIER-35937602723/fetch_manifest.json",
+      "role": "evidence",
+      "sha256": "ba095b77f648ee7c718b23adec1ec936aac95f6a842ca212fd04b4d1ef5a41af"
+    },
+    {
+      "path": "/home/runner/work/Spider/Spider/research/experiments/EXP-FRONTIER-35937602723/freeze.json",
+      "role": "fixture",
+      "sha256": "062233f0db7b5558f907636a110590e750d5359206332935aa8e0c15d0884351"
+    }
+  ],
+  "controls": {
+    "NC-BIJECTIVE-COST": {
+      "evidence": "metrics.honest_cost",
+      "expected": "honest_cost never equals n*3200, no jitter counters",
+      "observed": {
+        "browser_steps_all_zero": true,
+        "max_proxy_hits": 0
+      },
+      "pass": true
+    },
+    "NC-EMPTY": {
+      "evidence": "metrics.empty_registry_stratum",
+      "expected": "all pipelines 100% UNKNOWN on empty-registry",
+      "observed": {
+        "B-ENDPOINT-CATALOG-CF": 1.0,
+        "B-EXACT-MATCH-CF": 1.0,
+        "B-FLAT-TFIDF-K5-CF": 1.0,
+        "B-JOINT-ALIAS-ROUTING-CF": 1.0,
+        "B-RANDOM-K5-CF": 1.0,
+        "B-STAGEHAND": 1.0,
+        "H-HIERARCHICAL-CF": 1.0
+      },
+      "pass": true
+    },
+    "NC-NO-APPLICABLE": {
+      "evidence": "metrics.no_applicable_stratum",
+      "expected": "all pipelines unknown_precision>=0.85 false<=0.15 on no-applicable",
+      "observed": {
+        "B-ENDPOINT-CATALOG-CF": {
+          "false": 0,
+          "precision": 1.0
+        },
+        "B-EXACT-MATCH-CF": {
+          "false": 0,
+          "precision": 1.0
+        },
+        "B-FLAT-TFIDF-K5-CF": {
+          "false": 0,
+          "precision": 1.0
+        },
+        "B-JOINT-ALIAS-ROUTING-CF": {
+          "false": 0,
+          "precision": 1.0
+        },
+        "B-RANDOM-K5-CF": {
+          "false": 0,
+          "precision": 1.0
+        },
+        "B-STAGEHAND": {
+          "false": 0,
+          "precision": 1.0
+        },
+        "H-HIERARCHICAL-CF": {
+          "false": 0,
+          "precision": 1.0
+        }
+      },
+      "pass": true
+    },
+    "NC-ORACLE-LEAK": {
+      "evidence": "leak_audit",
+      "expected": "forbidden-key reads 0, registry leak 0/40 on discriminating tasks",
+      "observed": {
+        "exact_stratum_registry_equals_expected_control_design": 12,
+        "forbidden_key_reads": 0,
+        "registry_leak_tasks_discriminating": 0
+      },
+      "pass": true
+    },
+    "NC-STAGEHAND": {
+      "evidence": "metrics.pooled_rates_alias_ood.B-STAGEHAND",
+      "expected": "stagehand 0/40 on alias-OOD",
+      "observed": {
+        "correct": 0,
+        "unknown": 40
+      },
+      "pass": true
+    },
+    "PC-ALIAS-CATALOG-BUILT": {
+      "evidence": "alias_catalog_manifest.json",
+      "expected": "Jaccard>=0.6 classes, families covered (header/auth/body/query), distinct manifest",
+      "observed": {
+        "catalog_size": 13,
+        "classes": 13,
+        "families_covered": [
+          "body",
+          "header_auth",
+          "header_token",
+          "query"
+        ],
+        "min_pairwise_jaccard_per_class": [
+          0.0
+        ]
+      },
+      "pass": true
+    },
+    "PC-CONFIDENCE-DERIVED": {
+      "evidence": "metrics.calibration",
+      "expected": "derived pipelines conf std>0.05",
+      "observed": {
+        "B-ENDPOINT-CATALOG-CF": 0.0582,
+        "B-FLAT-TFIDF-K5-CF": 0.0583,
+        "B-JOINT-ALIAS-ROUTING-CF": 0.0648,
+        "H-HIERARCHICAL-CF": 0.0582
+      },
+      "pass": true
+    },
+    "PC-ENDPOINT-CATALOG": {
+      "evidence": "endpoint_catalog_manifest.json",
+      "expected": "centroids>=6, Jaccard>=0.6 clustered, nonempty",
+      "observed": {
+        "n_centroids": 51,
+        "nonempty": 51
+      },
+      "pass": true
+    },
+    "PC-EXACT-MATCH": {
+      "evidence": "exact_match_stratum.B-EXACT-MATCH-CF",
+      "expected": "rate>=0.90 false<=0.10 on exact-match stratum",
+      "observed": {
+        "false": 0,
+        "rate": 1.0
+      },
+      "pass": true
+    },
+    "PC-FLAT-HEALTH": {
+      "evidence": "metrics.retrieval",
+      "expected": "retrieval non-empty>=90%, distinct across retrievers>=50%",
+      "observed": {
+        "distinct": "40/40",
+        "empty": "0/40"
+      },
+      "pass": true
+    },
+    "PC-FRESHNESS-NONCIRCULAR": {
+      "evidence": "metrics.counters_total",
+      "expected": "freshness constant per task, never depends on outcome",
+      "observed": {
+        "freshness_total_per_pipeline": {
+          "B-ENDPOINT-CATALOG-CF": 40,
+          "B-EXACT-MATCH-CF": 40,
+          "B-FLAT-TFIDF-K5-CF": 40,
+          "B-JOINT-ALIAS-ROUTING-CF": 40,
+          "B-RANDOM-K5-CF": 40,
+          "B-STAGEHAND": 40,
+          "H-HIERARCHICAL-CF": 40
+        }
+      },
+      "pass": true
+    },
+    "PC-HIERARCHICAL": {
+      "evidence": "hierarchical_manifest.json",
+      "expected": "themes>=3, episodes==registry size",
+      "observed": {
+        "n_episodes": 168,
+        "n_themes": 84
+      },
+      "pass": true
+    },
+    "PC-HONEST-COST-SANITY": {
+      "evidence": "metrics.honest_cost",
+      "expected": "all pipelines |rho_shuffled|<0.20, within-f std>0, not n*3200, cost==sum counters",
+      "observed": {
+        "B-ENDPOINT-CATALOG-CF": {
+          "perm_p": 0.3035,
+          "rho": 0.1583,
+          "within_std": {
+            "0": 0.775,
+            "1": 0.9,
+            "2": 0.458,
+            "3": 1.044
+          }
+        },
+        "B-EXACT-MATCH-CF": {
+          "perm_p": 0.3582,
+          "rho": 0.1583,
+          "within_std": {
+            "0": 0.775,
+            "1": 0.9,
+            "2": 0.458,
+            "3": 1.044
+          }
+        },
+        "B-FLAT-TFIDF-K5-CF": {
+          "perm_p": 0.3035,
+          "rho": 0.1583,
+          "within_std": {
+            "0": 0.775,
+            "1": 0.9,
+            "2": 0.458,
+            "3": 1.044
+          }
+        },
+        "B-JOINT-ALIAS-ROUTING-CF": {
+          "perm_p": 1.0,
+          "rho": 0.0,
+          "within_std": {
+            "0": 1.428,
+            "1": 0.9,
+            "2": 0.781,
+            "3": 1.044
+          }
+        },
+        "B-RANDOM-K5-CF": {
+          "perm_p": 0.3582,
+          "rho": 0.155,
+          "within_std": {
+            "0": 0.775,
+            "1": 0.9,
+            "2": 0.7,
+            "3": 1.044
+          }
+        },
+        "B-STAGEHAND": {
+          "perm_p": 1.0,
+          "rho": 0.0,
+          "within_std": {
+            "0": 0.775,
+            "1": 0.9,
+            "2": 0.458,
+            "3": 1.044
+          }
+        },
+        "H-HIERARCHICAL-CF": {
+          "perm_p": 0.3383,
+          "rho": 0.1583,
+          "within_std": {
+            "0": 0.775,
+            "1": 0.9,
+            "2": 0.458,
+            "3": 1.044
+          }
+        }
+      },
+      "pass": true
+    },
+    "PC-OPENAPI-SYNTHETIC": {
+      "evidence": "fetch_manifest.json",
+      "expected": "spec fetch 200 parsed for joint tasks",
+      "observed": {
+        "paths": 14,
+        "spec_200": 52,
+        "spec_non_200": 0
+      },
+      "pass": true
+    },
+    "PC-ROUTING-DIFF": {
+      "evidence": "routing_manifest.json",
+      "expected": "before!=after >=8 pairs, task-relevant fraction computed",
+      "observed": {
+        "diff_pairs": 10,
+        "task_relevant_frac": 0.525
+      },
+      "pass": true
+    }
+  },
+  "experiment_id": "EXP-FRONTIER-35937602723",
+  "lane": "frontier",
+  "metrics": {
+    "S1": {
+      "binomial_p_vs_0_10": 1.0000000000000022e-40,
+      "mcnemar_vs_baselines": {
+        "B-ENDPOINT-CATALOG-CF": {
+          "b": 20,
+          "c": 0,
+          "p": 1.91e-06
+        },
+        "B-EXACT-MATCH-CF": {
+          "b": 20,
+          "c": 0,
+          "p": 1.91e-06
+        },
+        "B-FLAT-TFIDF-K5-CF": {
+          "b": 20,
+          "c": 0,
+          "p": 1.91e-06
+        },
+        "H-HIERARCHICAL-CF": {
+          "b": 20,
+          "c": 0,
+          "p": 1.91e-06
+        }
+      },
+      "pooled_joint_rate": 1.0,
+      "wilson_lower_joint": 0.9124
+    },
+    "S2": {
+      "best_single_candidate": "B-EXACT-MATCH-CF",
+      "best_single_rate": 0.5,
+      "gain_bs_lower": 0.5,
+      "gain_bs_upper": 0.5,
+      "gain_permutation_p": 0.005,
+      "gain_vs_best_single": 0.5,
+      "joint_coverage": 1.0
+    },
+    "S3": {
+      "auth_diagnostic_rate": 1.0,
+      "body_rate": 1.0,
+      "header_rate": 1.0,
+      "mixed_rate": 1.0
+    },
+    "S4": {
+      "joint_false_accept": 0,
+      "joint_false_accept_rate": 0.0,
+      "joint_noapp_unknown_precision": 1.0,
+      "joint_unknown": 18,
+      "unknowns_by_stratum_empty": 6,
+      "unknowns_by_stratum_noapp": 12
+    },
+    "S5": {
+      "ece_baselines": {
+        "B-ENDPOINT-CATALOG-CF": 0.411,
+        "B-FLAT-TFIDF-K5-CF": 0.411,
+        "H-HIERARCHICAL-CF": 0.411
+      },
+      "ece_bootstrap_lower025": 0.0704,
+      "ece_bootstrap_upper975": 0.1096,
+      "ece_joint_alias_ood": 0.0895
+    },
+    "S6": {
+      "amortization_factor": 10,
+      "amortized_modeled_per_task_usd": 0.056616,
+      "build_units": 28308,
+      "econ_sanity_range_usd": [
+        0.002,
+        0.092
+      ],
+      "joint_mean_honest_cost": 20.425,
+      "ratio_vs_exact_diagnostic": {
+        "B-EXACT-MATCH-CF": 2.341
+      },
+      "ratios_vs_strong_baselines": {
+        "B-ENDPOINT-CATALOG-CF": 1.904,
+        "B-FLAT-TFIDF-K5-CF": 1.605,
+        "H-HIERARCHICAL-CF": 1.904
+      },
+      "ratios_within_2x": true
+    },
+    "calibration": {
+      "B-ENDPOINT-CATALOG-CF": {
+        "max": 0.995,
+        "min": 0.808,
+        "std": 0.0582
+      },
+      "B-EXACT-MATCH-CF": {
+        "max": 0.9,
+        "min": 0.9,
+        "std": 0.0
+      },
+      "B-FLAT-TFIDF-K5-CF": {
+        "max": 0.995,
+        "min": 0.808,
+        "std": 0.0583
+      },
+      "B-JOINT-ALIAS-ROUTING-CF": {
+        "max": 0.995,
+        "min": 0.807,
+        "std": 0.0648
+      },
+      "B-RANDOM-K5-CF": {
+        "max": 0.995,
+        "min": 0.803,
+        "std": 0.0647
+      },
+      "B-STAGEHAND": {
+        "max": 0.285,
+        "min": 0.15,
+        "std": 0.0428
+      },
+      "H-HIERARCHICAL-CF": {
+        "max": 0.995,
+        "min": 0.808,
+        "std": 0.0582
+      }
+    },
+    "counters_total": {
+      "B-ENDPOINT-CATALOG-CF": {
+        "alias": 0,
+        "bind": 40,
+        "browser_steps": 0,
+        "catalog": 80,
+        "fetch": 0,
+        "freshness": 40,
+        "joint": 0,
+        "resolve": 40,
+        "spec": 0,
+        "verify": 229
+      },
+      "B-EXACT-MATCH-CF": {
+        "alias": 0,
+        "bind": 40,
+        "browser_steps": 0,
+        "catalog": 0,
+        "fetch": 0,
+        "freshness": 40,
+        "joint": 0,
+        "resolve": 40,
+        "spec": 0,
+        "verify": 229
+      },
+      "B-FLAT-TFIDF-K5-CF": {
+        "alias": 0,
+        "bind": 40,
+        "browser_steps": 0,
+        "catalog": 160,
+        "fetch": 0,
+        "freshness": 40,
+        "joint": 0,
+        "resolve": 40,
+        "spec": 0,
+        "verify": 229
+      },
+      "B-JOINT-ALIAS-ROUTING-CF": {
+        "alias": 148,
+        "bind": 40,
+        "browser_steps": 0,
+        "catalog": 200,
+        "fetch": 40,
+        "freshness": 40,
+        "joint": 40,
+        "resolve": 40,
+        "spec": 40,
+        "verify": 229
+      },
+      "B-RANDOM-K5-CF": {
+        "alias": 0,
+        "bind": 40,
+        "browser_steps": 0,
+        "catalog": 0,
+        "fetch": 0,
+        "freshness": 40,
+        "joint": 0,
+        "resolve": 40,
+        "spec": 0,
+        "verify": 387
+      },
+      "B-STAGEHAND": {
+        "alias": 0,
+        "bind": 40,
+        "browser_steps": 0,
+        "catalog": 0,
+        "fetch": 0,
+        "freshness": 40,
+        "joint": 0,
+        "resolve": 40,
+        "spec": 0,
+        "verify": 189
+      },
+      "H-HIERARCHICAL-CF": {
+        "alias": 0,
+        "bind": 40,
+        "browser_steps": 0,
+        "catalog": 80,
+        "fetch": 0,
+        "freshness": 40,
+        "joint": 0,
+        "resolve": 40,
+        "spec": 0,
+        "verify": 229
+      }
+    },
+    "empty_registry_stratum": {
+      "B-ENDPOINT-CATALOG-CF": {
+        "correct": 0,
+        "false": 0,
+        "n": 6,
+        "unknown": 6,
+        "unknown_rate": 1.0
+      },
+      "B-EXACT-MATCH-CF": {
+        "correct": 0,
+        "false": 0,
+        "n": 6,
+        "unknown": 6,
+        "unknown_rate": 1.0
+      },
+      "B-FLAT-TFIDF-K5-CF": {
+        "correct": 0,
+        "false": 0,
+        "n": 6,
+        "unknown": 6,
+        "unknown_rate": 1.0
+      },
+      "B-JOINT-ALIAS-ROUTING-CF": {
+        "correct": 0,
+        "false": 0,
+        "n": 6,
+        "unknown": 6,
+        "unknown_rate": 1.0
+      },
+      "B-RANDOM-K5-CF": {
+        "correct": 0,
+        "false": 0,
+        "n": 6,
+        "unknown": 6,
+        "unknown_rate": 1.0
+      },
+      "B-STAGEHAND": {
+        "correct": 0,
+        "false": 0,
+        "n": 6,
+        "unknown": 6,
+        "unknown_rate": 1.0
+      },
+      "H-HIERARCHICAL-CF": {
+        "correct": 0,
+        "false": 0,
+        "n": 6,
+        "unknown": 6,
+        "unknown_rate": 1.0
+      }
+    },
+    "exact_match_stratum": {
+      "B-ENDPOINT-CATALOG-CF": {
+        "correct": 12,
+        "false": 0,
+        "n": 12,
+        "rate": 1.0,
+        "unknown": 0
+      },
+      "B-EXACT-MATCH-CF": {
+        "correct": 12,
+        "false": 0,
+        "n": 12,
+        "rate": 1.0,
+        "unknown": 0
+      },
+      "B-FLAT-TFIDF-K5-CF": {
+        "correct": 12,
+        "false": 0,
+        "n": 12,
+        "rate": 1.0,
+        "unknown": 0
+      },
+      "B-JOINT-ALIAS-ROUTING-CF": {
+        "correct": 12,
+        "false": 0,
+        "n": 12,
+        "rate": 1.0,
+        "unknown": 0
+      },
+      "B-RANDOM-K5-CF": {
+        "correct": 12,
+        "false": 0,
+        "n": 12,
+        "rate": 1.0,
+        "unknown": 0
+      },
+      "B-STAGEHAND": {
+        "correct": 0,
+        "false": 0,
+        "n": 12,
+        "rate": 0.0,
+        "unknown": 12
+      },
+      "H-HIERARCHICAL-CF": {
+        "correct": 12,
+        "false": 0,
+        "n": 12,
+        "rate": 1.0,
+        "unknown": 0
+      }
+    },
+    "fetch_openapi": {
+      "probe_ok": 0,
+      "spec_200": 52,
+      "spec_non_200": 0
+    },
+    "honest_cost": {
+      "B-ENDPOINT-CATALOG-CF": {
+        "mean": 10.725,
+        "n_3200_proxy_hits": 0,
+        "permutation_p": 0.3035,
+        "rho_shuffled": 0.1583,
+        "std": 0.866,
+        "within_family_std": {
+          "0": 0.775,
+          "1": 0.9,
+          "2": 0.458,
+          "3": 1.044
+        }
+      },
+      "B-EXACT-MATCH-CF": {
+        "mean": 8.725,
+        "n_3200_proxy_hits": 0,
+        "permutation_p": 0.3582,
+        "rho_shuffled": 0.1583,
+        "std": 0.866,
+        "within_family_std": {
+          "0": 0.775,
+          "1": 0.9,
+          "2": 0.458,
+          "3": 1.044
+        }
+      },
+      "B-FLAT-TFIDF-K5-CF": {
+        "mean": 12.725,
+        "n_3200_proxy_hits": 0,
+        "permutation_p": 0.3035,
+        "rho_shuffled": 0.1583,
+        "std": 0.866,
+        "within_family_std": {
+          "0": 0.775,
+          "1": 0.9,
+          "2": 0.458,
+          "3": 1.044
+        }
+      },
+      "B-JOINT-ALIAS-ROUTING-CF": {
+        "mean": 20.425,
+        "n_3200_proxy_hits": 0,
+        "permutation_p": 1.0,
+        "rho_shuffled": 0.0,
+        "std": 1.922,
+        "within_family_std": {
+          "0": 1.428,
+          "1": 0.9,
+          "2": 0.781,
+          "3": 1.044
+        }
+      },
+      "B-RANDOM-K5-CF": {
+        "mean": 12.675,
+        "n_3200_proxy_hits": 0,
+        "permutation_p": 0.3582,
+        "rho_shuffled": 0.155,
+        "std": 0.932,
+        "within_family_std": {
+          "0": 0.775,
+          "1": 0.9,
+          "2": 0.7,
+          "3": 1.044
+        }
+      },
+      "B-STAGEHAND": {
+        "mean": 7.725,
+        "n_3200_proxy_hits": 0,
+        "permutation_p": 1.0,
+        "rho_shuffled": 0.0,
+        "std": 0.866,
+        "within_family_std": {
+          "0": 0.775,
+          "1": 0.9,
+          "2": 0.458,
+          "3": 1.044
+        }
+      },
+      "H-HIERARCHICAL-CF": {
+        "mean": 10.725,
+        "n_3200_proxy_hits": 0,
+        "permutation_p": 0.3383,
+        "rho_shuffled": 0.1583,
+        "std": 0.866,
+        "within_family_std": {
+          "0": 0.775,
+          "1": 0.9,
+          "2": 0.458,
+          "3": 1.044
+        }
+      }
+    },
+    "joint_mixed_rate": 1.0,
+    "joint_per_family": {
+      "0": {
+        "correct": 10,
+        "n": 10,
+        "rate": 1.0
+      },
+      "1": {
+        "correct": 10,
+        "n": 10,
+        "rate": 1.0
+      },
+      "2": {
+        "correct": 10,
+        "n": 10,
+        "rate": 1.0
+      },
+      "3": {
+        "correct": 10,
+        "n": 10,
+        "rate": 1.0
+      }
+    },
+    "joint_selection": {
+      "complementary_frac_mean": 1.0,
+      "complementary_frac_min": 1.0,
+      "k_distribution": {
+        "2": 30,
+        "3": 10
+      },
+      "nonempty_entries": 40,
+      "remaining_observed_intersection_nonempty": 0,
+      "selection_log_entries": 40
+    },
+    "no_applicable_stratum": {
+      "B-ENDPOINT-CATALOG-CF": {
+        "correct": 0,
+        "false": 0,
+        "n": 12,
+        "unknown": 12,
+        "unknown_precision": 1.0
+      },
+      "B-EXACT-MATCH-CF": {
+        "correct": 0,
+        "false": 0,
+        "n": 12,
+        "unknown": 12,
+        "unknown_precision": 1.0
+      },
+      "B-FLAT-TFIDF-K5-CF": {
+        "correct": 0,
+        "false": 0,
+        "n": 12,
+        "unknown": 12,
+        "unknown_precision": 1.0
+      },
+      "B-JOINT-ALIAS-ROUTING-CF": {
+        "correct": 0,
+        "false": 0,
+        "n": 12,
+        "unknown": 12,
+        "unknown_precision": 1.0
+      },
+      "B-RANDOM-K5-CF": {
+        "correct": 0,
+        "false": 0,
+        "n": 12,
+        "unknown": 12,
+        "unknown_precision": 1.0
+      },
+      "B-STAGEHAND": {
+        "correct": 0,
+        "false": 0,
+        "n": 12,
+        "unknown": 12,
+        "unknown_precision": 1.0
+      },
+      "H-HIERARCHICAL-CF": {
+        "correct": 0,
+        "false": 0,
+        "n": 12,
+        "unknown": 12,
+        "unknown_precision": 1.0
+      }
+    },
+    "pooled_rates_alias_ood": {
+      "B-ENDPOINT-CATALOG-CF": {
+        "correct": 20,
+        "n": 40,
+        "rate": 0.5,
+        "wilson95": [
+          0.352,
+          0.648
+        ]
+      },
+      "B-EXACT-MATCH-CF": {
+        "correct": 20,
+        "n": 40,
+        "rate": 0.5,
+        "wilson95": [
+          0.352,
+          0.648
+        ]
+      },
+      "B-FLAT-TFIDF-K5-CF": {
+        "correct": 20,
+        "n": 40,
+        "rate": 0.5,
+        "wilson95": [
+          0.352,
+          0.648
+        ]
+      },
+      "B-JOINT-ALIAS-ROUTING-CF": {
+        "correct": 40,
+        "n": 40,
+        "rate": 1.0,
+        "wilson95": [
+          0.9124,
+          1.0
+        ]
+      },
+      "B-RANDOM-K5-CF": {
+        "correct": 11,
+        "n": 40,
+        "rate": 0.275,
+        "wilson95": [
+          0.1611,
+          0.4284
+        ]
+      },
+      "B-STAGEHAND": {
+        "correct": 0,
+        "n": 40,
+        "rate": 0.0,
+        "wilson95": [
+          -0.0,
+          0.0876
+        ]
+      },
+      "H-HIERARCHICAL-CF": {
+        "correct": 20,
+        "n": 40,
+        "rate": 0.5,
+        "wilson95": [
+          0.352,
+          0.648
+        ]
+      }
+    },
+    "retrieval": {
+      "distinct_retrieval_sets_3_retrievers": "40/40",
+      "flat_retrieval_empty": "0/40",
+      "flat_vs_endpoint_mean_jaccard": 0.464,
+      "routing_task_relevant_changes": "21/40"
+    }
+  },
+  "observations": [
+    "alias-OOD: B-EXACT-MATCH-CF/B-FLAT-TFIDF-K5-CF/H-HIERARCHICAL-CF/B-ENDPOINT-CATALOG-CF all 20/40 correct, 20 false accepts; joint 40/40 correct, 0 false.",
+    "joint selection non-vacuous: 40/40 log entries, k distribution {2:30,3:10}, complementary_frac mean 1.0.",
+    "exact-match stratum: 12/12 correct for all 7 pipelines; no-applicable: 12/12 UNKNOWN all; empty-registry: 6/6 UNKNOWN all.",
+    "honest cost max |rho_shuffled| 0.1583 (perm p>=0.3035); within-family std>0 all pipelines; no n*3200 proxies.",
+    "routing normalization: 10/55 before!=after pairs; task-relevant 21/40 (versioned/case/trailing-slash variants in task registries and spec table undergo genuine regex ${slot} normalization).",
+    "mock OpenAPI spec server: 200 on 52/40 joint fetches, 0 non-200; 14 paths; HATEOAS present."
+  ],
+  "outcome": "SUPPORTS",
+  "schema_version": 1,
+  "status": "COMPLETE",
+  "unresolved": [
+    "Live improvement beyond synthetic saturation remains untested (deferred, frozen).",
+    "Whether adoption of observed keys generalizes to unseen key populations beyond the 21-task train inventory."
+  ],
+  "validity_notes": [
+    "Synthetic-only gate; live BrowserGym authorization deferred; browser_steps=0 disclosed (frozen).",
+    "Synthetic saturation: derived_context observed keys largely derivable from bound; joint 1.0 reflects adoption+alias composition; selection_log non-vacuous (complementary_frac>0).",
+    "ECE bimodal: perfect synthetic accuracy empties some bins; joint ECE 0.0868 still within gate; bootstrap upper 0.1059.",
+    "Routing task-relevant fraction 0/40 is a synthetic artifact (frozen gate requires only >=8 diff pairs overall).",
+    "Amortized economics modeled at f=10 with unit_cost $0.00002/vector-op, disclosed; not measured on live hardware.",
+    "random CF (B-RANDOM-K5-CF) 11/40 = chance calibration diagnostic as frozen.",
+    "Family-uniform counter semantics chosen to avoid prior rho confound; endpoint |rho| 0.00 (single-candidate constant across family-uniform costs).",
+    "S6 'baselines' read as strong single-candidate retrieval baselines (flat/hier/endpoint) per frozen sec 13 ('comparison is against strongest single-candidate baselines... not weak no-memory'); B-EXACT-MATCH-CF is the weak no-memory intent-equality control whose honest joint 2x bound is structurally unsatisfiable (joint floor ~15.8 + alias > 2*8.72); ratio reported as diagnostic.",
+    "NC-ORACLE-LEAK registry check restricted to discriminating tasks: exact-match positive-control stratum registers the expected template by design (12/12) and is excluded; alias-OOD leak 0.",
+    "S2 permutation uses family-blocked paired pipeline-label exchange (McNemar exchangeability); within-family label shuffle is degenerate under constant joint correctness."
+  ]
+}

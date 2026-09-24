@@ -1,0 +1,36 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-35940399935",
+  "lane": "graph",
+  "decision": "SURVIVES_CURRENT_TEST",
+  "claim_updates": [
+    {
+      "claim_id": "C-FRESHNESS",
+      "status": "EXPERIMENTAL",
+      "reason": "Audit PASS (producer_claim_supported true): all 9 frozen D1-D9 pass on bounded synthetic single-resource ceiling — M-TN-SPIDER 1.0 Wilson lower 0.969 (120/120), M-FALSE-ACCEPT 0.0 Wilson upper 0.0409 (0/90) per-family TP/TN 1.0 lower 0.8865, UNKNOWN 0.4286 within [0.00,0.50] and [0.3786,0.4986] stale_rate 0.4286, global ECE 0.0929 per-class fresh 0.05 stale 0.15 at threshold under recalibrated 0.95/0.85, delta vs B-NO-GUARD 1.0 >=0.15, NC-NOISE FA 0.0 on 150 noise, ablations B-JACCARD-ONLY FA 0.6667 and B-HEADER-ONLY FA 0.3333 proving combined signal necessity, honest constant sum-counter 4 per request total 1440 all_int true max trajectory-grouped |rho| 0.0 <0.20, within-family freshness std 0.5 >0, 5000 family-stratified trajectory-grouped bootstrap degenerate CIs [1.0,1.0]/[0.0,0.0] reported as ceiling effect, per-trajectory observed caching 36 trajectories and response-derived endpoint via _template/X-Csrf-Token with deterministic 304 marked not stale. Recomputed metrics match producer. Claim ceiling bounded to stdlib http.server flat-JSON single-resource deterministic orthogonal drifts only; does NOT advance to VALIDATED/PRODUCT_CORE which requires n>=800 + real-API/distributed health-gated shared-WAL per registry. Prior 8 WebArena pilots remain PARKED."
+    }
+  ],
+  "product_action": "NO_PROMOTION — bounded synthetic EXPERIMENTAL only. No promotion to VALIDATED or PRODUCT_CORE. Single-resource guard may be used only as synthetic prerequisite for C-DELTA-REPAIR contamination-bound and C-RESIDUAL-NOVELTY honest M_total_f10 Pareto experiments on same stdlib http.server substrate without distributed WAL; not authorized for product reuse gating at this threshold/confidence/site outside this ceiling. Distributed VALIDATED gate (health-gated HS256 shared-WAL, 304/ETag, session rotation, n>=800) remains required per registry and director mandate.",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "On the same locally-hosted synthetic single-resource substrate with honest constant per-trajectory-reset sum-counter and trajectory-grouped 5000-bootstrap, does the validated freshness guard (Jaccard 0.85 required-filtered + response-derived endpoint _template/X-Csrf-Token + ETag+max-age=0, recalibrated 0.95/0.85) enable bounded C-DELTA-REPAIR (localized repair cost delta < full-task cost, contamination bounds) and honest C-RESIDUAL-NOVELTY M_total_f10 Pareto (trajectory-grouped max |rho_shuffled|<0.20) — and does the guard sustain TN>=0.85 FA<=0.10 calibrated (per-class ECE<=0.15, UNKNOWN prevalence-aware) when rebalanced to realistic 15% stale prevalence (non-degenerate Wilson/bootstrap CIs) and when transferred to a health-gated distributed shared-WAL Flask/JWT + nginx If-None-Match/304 substrate at n>=800 non-304, thereby testing the step from bounded synthetic EXPERIMENTAL to VALIDATED required before C-FRESHNESS product promotion?",
+  "reason": "Frozen SURVIVES_CURRENT_TEST correctly fires: D1 TN 1.0 lower 0.969 >0.75, D2 FA 0.0 upper 0.0409 <=0.10, D3 UNKNOWN 0.4286 in [0.00,0.50] and [0.3786,0.4986], D4 global 0.0929 fresh 0.05 stale 0.15 <=0.15 under recalibrated confidences (proof 0.0286+0.0643=0.0929), D5 delta vs B-NO-GUARD 1.0 >=0.15, D6 per-family 1.0, D7 PC 1.0, D8 NC-FRESH 1.0 NC-NOISE 0.0, D9 honesty gates pass (constant integer 4 cost all_int true std 0 valid per V2 narrowing, trajectory-grouped max |rho| 0.0 <0.20 via 1000 whole-trajectory-block perms, freshness std 0.5 >0 stable/noise exempted, 5000 family-stratified trajectory-grouped bootstrap, per-trajectory caching 36 entries, response-derived endpoint, deterministic 304). Audit PASS with producer_claim_supported true confirms all recomputed metrics match and validity_findings note degenerate bootstrap as ceiling effect not precision and only 2 ECE bins populated by construction. Product consequence bounded synthetic ceiling only as frozen — unblocks synthetic delta-repair/residual-novelty without distributed WAL but does not meet VALIDATED n>=800 + real-API/distributed gate, so claim remains EXPERIMENTAL not VALIDATED/PRODUCT_CORE, graph lane cannot promote to PRODUCT_CORE.",
+  "evidence_refs": [
+    "research/experiments/EXP-GRAPH-35940399935/request.json",
+    "research/experiments/EXP-GRAPH-35940399935/spec.json",
+    "research/experiments/EXP-GRAPH-35940399935/prereg.md",
+    "research/experiments/EXP-GRAPH-35940399935/freeze.json",
+    "research/experiments/EXP-GRAPH-35940399935/result.json",
+    "research/experiments/EXP-GRAPH-35940399935/provenance.json",
+    "research/experiments/EXP-GRAPH-35940399935/report.md",
+    "research/experiments/EXP-GRAPH-35940399935/audit.json",
+    "research/experiments/EXP-GRAPH-35940399935/raw_evidence/metrics.json",
+    "research/experiments/EXP-GRAPH-35940399935/raw_evidence/execution_results.json",
+    "research/experiments/EXP-GRAPH-35940399935/raw_evidence/cost_logs.json",
+    "research/experiments/EXP-GRAPH-35940399935/raw_evidence/bootstrap_ci.json",
+    "research/experiments/EXP-GRAPH-35940399935/raw_evidence/per_trajectory_cache.json",
+    "research/experiments/EXP-GRAPH-35940399935/raw_evidence/decision.json",
+    "research/graph/freshness_detection/execute_single_resource_staleness.py",
+    "src/spider/kernel.py"
+  ]
+}

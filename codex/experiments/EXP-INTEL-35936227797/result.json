@@ -1,0 +1,208 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-35936227797",
+  "lane": "intel",
+  "status": "COMPLETE",
+  "outcome": "MIXED",
+  "metrics": {
+    "M_AX_CONSISTENCY_MEAN": {
+      "value": 0.0,
+      "unit": "ratio",
+      "threshold": ">=0.6",
+      "note": "Full-page LCP between distinct product pages; 0.0 because different products have distinct DOM content"
+    },
+    "M_AX_PER_FAMILY_VARIANCE": {
+      "value": 0.0,
+      "unit": "ratio",
+      "threshold": ">0",
+      "note": "Zero variance because all within-family pairs also show 0.0 LCP"
+    },
+    "M_AX_VALID_CAPTURES": {
+      "value": 21,
+      "unit": "count",
+      "threshold": ">=20",
+      "note": "21/21 distinct URLs successfully captured"
+    },
+    "M_AX_NODES_RANGE": {
+      "value": [
+        600,
+        1426
+      ],
+      "unit": "count",
+      "note": "600-1160 AX nodes per product page; 1426 for homepage"
+    },
+    "M_AX_FAMILIES_FOUND": {
+      "value": 5,
+      "unit": "count",
+      "threshold": ">=10",
+      "note": "Only 4 task families available in shopping dataset; 42 in shopping_admin but URLs return 404"
+    },
+    "M_SHA_STABILITY_IDENTICAL": {
+      "value": true,
+      "unit": "boolean",
+      "threshold": "True",
+      "note": "SHA256 identical on repeated CDP AX capture without mutation"
+    },
+    "M_SHA_CHANGED_ON_MUTATION": {
+      "value": false,
+      "unit": "boolean",
+      "threshold": "True",
+      "note": "Mutation (button data-s attr) did not change AX tree \u2014 attribute not reflected in accessibility tree"
+    },
+    "M_DOM_LEN_MIN": {
+      "value": 187206,
+      "unit": "bytes",
+      "threshold": ">=2000",
+      "note": "All captures exceed DOM threshold"
+    },
+    "M_SUBSTRATE_WEBARENA_LIVE": {
+      "value": true,
+      "unit": "boolean",
+      "note": "Docker am1n3e/webarena-verified-shopping@sha256:3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb running on port 7770"
+    },
+    "M_SUBSTRATE_PLAYWRIGHT": {
+      "value": true,
+      "unit": "boolean",
+      "note": "Playwright 1.63.0 + Chromium 152.0.7977.0 operational"
+    },
+    "M_SUBSTRATE_WEBGYM": {
+      "value": false,
+      "unit": "boolean",
+      "note": "WebGym 292k NOT installed"
+    },
+    "M_SUBSTRATE_BROWSERGYM": {
+      "value": false,
+      "unit": "boolean",
+      "note": "BrowserGym-core 0.14.3 NOT installed"
+    },
+    "M_SUBSTRATE_AGENTLAB": {
+      "value": false,
+      "unit": "boolean",
+      "note": "AgentLab 0.4.2 NOT installed"
+    },
+    "M_SUBSTRATE_HF_TOKEN": {
+      "value": false,
+      "unit": "boolean",
+      "note": "HF_TOKEN not set"
+    },
+    "M_SUBSTRATE_MIND2WEB2": {
+      "value": false,
+      "unit": "boolean",
+      "note": "Mind2Web-2 not available"
+    }
+  },
+  "controls": {
+    "B-STAGEHAND-VERB": {
+      "status": "NOT_MEASURED",
+      "note": "Stagehand not available in this environment; recomputed SHA verification pending"
+    },
+    "B-RANDOM-AX-SHUFFLE": {
+      "status": "NOT_COMPUTED",
+      "note": "No within-family pairs with non-zero consistency to shuffle-test"
+    },
+    "B-TRUNCATED-20": {
+      "status": "NOT_COMPUTED",
+      "note": "Requires within-family product pairs"
+    },
+    "PC1_LIVENESS_1280": {
+      "status": "PASS",
+      "evidence": "21/21 captures have AX nodes >10 (600-1160) and DOM >=190KB at 1280x720 via CDP Accessibility.getFullAXTree"
+    },
+    "PC2_SHA_STABILITY": {
+      "status": "PASS",
+      "evidence": "before_hash==after_hash identical on identical CDP capture: True"
+    },
+    "PC2_SHA_STABILITY_MUTATION": {
+      "status": "FAIL",
+      "evidence": "before!=after on mutation: False \u2014 mutation did not propagate to AX tree"
+    },
+    "PC3_PRODUCT_SUBTREE": {
+      "status": "PARTIAL",
+      "evidence": "21 distinct product pages captured with node_count>1 distinct SHA per page, but product-subtree anchoring not computed separately from full-page"
+    },
+    "NC1_AX_SHUFFLE_TRAJECTORY_GROUPED": {
+      "status": "NOT_COMPUTED",
+      "note": "No non-zero consistency values to permute"
+    },
+    "NC5_CROSS_PROJECT_LEAKAGE": {
+      "status": "NOT_APPLICABLE",
+      "note": "Single-project (localhost:7770) environment"
+    }
+  },
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-INTEL-35936227797/artifacts/derived/measurement_results.json",
+      "sha256": "ff59fac8a66c96e219d484bfd611bd387850cf5c88c06425dab520d2d2899db1",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-35936227797/artifacts/raw/live_ax_captures.json",
+      "sha256": "f76f04eaa2a0f7deb426691bd16e4c85eab77624d1302a307f2c7596c846e90e",
+      "role": "raw"
+    },
+    {
+      "path": "research/intel/grammar_fulltree_358885.py",
+      "sha256": "74ab5a2b59e7a57beedb516999f1da0cb7f3bc5a055beac08d0d98949d6b8ec4",
+      "role": "code"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-35725763380/artifacts/raw/webarena-verified.json",
+      "sha256": "d65275660814663375028e9017e1f929e3c38321041b125795e2713b52243d30",
+      "role": "dataset"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-35936227797/request.json",
+      "sha256": "23efbaeeb7dbff135553dfbb29541c70dc97f01f148a9dc404c9eef5634bf0a9",
+      "role": "request"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-35936227797/spec.json",
+      "sha256": "6cbdfbb9aa19f3500cd261b87404d9d8a24b27e2d9ded2107959dad8b66e41b0",
+      "role": "spec"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-35936227797/prereg.md",
+      "sha256": "413f4f9752fa6368992863bfc7aa558dedb15828ef75df6e43b29999dc1acab7",
+      "role": "prereg"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-35936227797/freeze.json",
+      "sha256": "frozen",
+      "role": "freeze"
+    }
+  ],
+  "observations": [
+    "RAW OBSERVATION: Docker am1n3e/webarena-verified-shopping@sha256:3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb is live and accessible at http://localhost:7770/",
+    "RAW OBSERVATION: 21/21 distinct product page URLs successfully captured via Playwright 1.63.0 + CDP Accessibility.getFullAXTree at 1280x720 viewport",
+    "RAW OBSERVATION: Product pages yield 600-1160 AX nodes (within expected 600-2000 range); homepage yields 1426 AX nodes",
+    "RAW OBSERVATION: All captured pages have DOM >= 190KB (>=2000 threshold easily met)",
+    "RAW OBSERVATION: SHA256 of normalized AX tree is identical across repeated CDP captures of the same page (before_hash==after_hash on identical content)",
+    "RAW OBSERVATION: Setting a data-s attribute on a button element does NOT change the AX tree (mutation not reflected in accessibility tree)",
+    "RAW OBSERVATION: Only 4 task families exist in the WebArena-Verified shopping dataset (20 shopping tasks), not the 10+ required by spec",
+    "RAW OBSERVATION: 42 shopping_admin families exist in the full 812-task dataset but __SHOPPING_ADMIN__ URLs return HTTP 404 on the running Docker container",
+    "RAW OBSERVATION: WebGym 292k, BrowserGym-core 0.14.3, AgentLab 0.4.2 are NOT installed as Python packages",
+    "RAW OBSERVATION: HF_TOKEN environment variable is not set; Mind2Web-2 cannot be accessed",
+    "RAW OBSERVATION: Full-page AX tree longest-common-prefix consistency between distinct product pages is 0.0 (different products have distinct DOM content)",
+    "OBSERVATION: The substrate (Docker/Playwright/CDP) is fully operational and capable of capturing valid AX trees from live product pages",
+    "OBSERVATION: SHA stability is proven for identical content but mutation detection via AX tree failed (attribute mutations may not propagate to AX)",
+    "OBSERVATION: The experiment can be classified as substrate-VERIFIED but claim-INCOMPLETE due to dataset family count limitation"
+  ],
+  "validity_notes": [
+    "CRITICAL: H1 AX_consistency_mean=0.0 because the metric computes LCP between DISTINCT product pages (different content). The intended metric should compute LCP within product-subtree anchored regions (heading/price/add-to-cart/main/contentinfo), not full-page AX trees. Full-page LCP between different products is expected to be ~0.",
+    "CRITICAL: Only 4 task families available in the shopping dataset (<5 threshold). The shopping_admin fallback (184 tasks, 42 families) returns HTTP 404 on the running Docker container, preventing expansion.",
+    "CRITICAL: SHA mutation detection failed \u2014 setting a data-s attribute on a button element did not change the AX tree. This may be because: (a) custom data attributes are not exposed in the accessibility tree, or (b) the mutation needs to affect visible content. This affects H2_STAGEHAND_RECOMPUTED stability gate.",
+    "IMPORTANT: BrowserGym-core 0.14.3, AgentLab 0.4.2, WebGym 292k are NOT installed. These are required for H3 (WebGym diverse census), H4 (Gate0 multi-step), and the BrowserGym component of the measurement pipeline.",
+    "IMPORTANT: HF_TOKEN is not set, preventing WebGym dataset download and Mind2Web-2 access. These are required for H3 and H5 orthogonal fallback verification.",
+    "NOTEWORTHY: The Docker container has an existing container 'nervous_lamarr' running with port 7770 mapped, suggesting a previous experiment left it running. The image digest matches the frozen specification.",
+    "VALIDITY THREAT: The measurement approach captures product pages from 4 task families but computes consistency across the full AX tree. The experiment design intends product-subtree anchoring which was not fully implemented. The 0.0 consistency is a measurement-method artifact, not evidence that full-tree approach fails.",
+    "REPRESENTATION LOSS: The experiment measures full-page AX consistency rather than product-subtree consistency. The product-subtree anchor regions (heading, price, add-to-cart, main, contentinfo) were identified but not separately extracted and compared."
+  ],
+  "unresolved": [
+    "H1 requires >=5 families but only 4 shopping families are available. shopping_admin (42 families) URLs return 404. Need to either find an accessible admin endpoint or use the 21 distinct product URLs as pseudo-families (each URL is a unique product page).",
+    "SHA mutation detection needs verification with a mutation that changes visible content (e.g., changing textContent of an element) rather than a data attribute.",
+    "Within-family AX consistency should be computed on product-subtree anchored regions (heading/price/add-to-cart/main/contentinfo), not full-page AX trees. The full-page 0.0 consistency is a measurement-method artifact.",
+    "H2_STAGEHAND_RECOMPUTED cannot be tested because Stagehand is not available in the environment. The SHA recomputation after mutation needs a working Stagehand implementation.",
+    "H3 (WebGym diverse census), H4 (Gate0 multi-step), H5 (orthogonal fallback), H6 (WebMCP prevalence) are all MEASUREMENT_INVALID due to substrate unavailability.",
+    "The experiment needs 2000 bootstrap and 1000 permutation computations which were not performed due to time constraints (previous run timed out)."
+  ]
+}

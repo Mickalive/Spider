@@ -1,0 +1,379 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-FRONTIER-35921359961",
+  "lane": "frontier",
+  "status": "MEASUREMENT_INVALID",
+  "outcome": "NOT_APPLICABLE",
+  "metrics": {
+    "B-EXACT-MATCH_pooled_correct_rate": {
+      "value": 0.5,
+      "unit": "rate",
+      "n": 40,
+      "correct": 20,
+      "wilson_low": 0.35199278797099753,
+      "wilson_high": 0.6480072120290025,
+      "binom_p_vs_0.10": 1.8718579354174017e-10
+    },
+    "B-EXACT-MATCH_coverage": {
+      "value": 0.5
+    },
+    "B-EXACT-MATCH_ece": {
+      "value": 0.23714285714285707
+    },
+    "B-EXACT-MATCH_per_family_header": {
+      "value": 10
+    },
+    "B-EXACT-MATCH_per_family_mixed": {
+      "value": 0
+    },
+    "B-FLAT-TFIDF-K5-CF_pooled_correct_rate": {
+      "value": 0.5,
+      "unit": "rate",
+      "n": 40,
+      "correct": 20,
+      "wilson_low": 0.35199278797099753,
+      "wilson_high": 0.6480072120290025,
+      "binom_p_vs_0.10": 1.8718579354174017e-10
+    },
+    "B-FLAT-TFIDF-K5-CF_coverage": {
+      "value": 0.5
+    },
+    "B-FLAT-TFIDF-K5-CF_ece": {
+      "value": 0.22575714285714285
+    },
+    "B-FLAT-TFIDF-K5-CF_per_family_header": {
+      "value": 10
+    },
+    "B-FLAT-TFIDF-K5-CF_per_family_mixed": {
+      "value": 0
+    },
+    "H-HIERARCHICAL-CF_pooled_correct_rate": {
+      "value": 0.5,
+      "unit": "rate",
+      "n": 40,
+      "correct": 20,
+      "wilson_low": 0.35199278797099753,
+      "wilson_high": 0.6480072120290025,
+      "binom_p_vs_0.10": 1.8718579354174017e-10
+    },
+    "H-HIERARCHICAL-CF_coverage": {
+      "value": 0.5
+    },
+    "H-HIERARCHICAL-CF_ece": {
+      "value": 0.22575714285714285
+    },
+    "H-HIERARCHICAL-CF_per_family_header": {
+      "value": 10
+    },
+    "H-HIERARCHICAL-CF_per_family_mixed": {
+      "value": 0
+    },
+    "B-COMPILED-DSM_pooled_correct_rate": {
+      "value": 0.5,
+      "unit": "rate",
+      "n": 40,
+      "correct": 20,
+      "wilson_low": 0.35199278797099753,
+      "wilson_high": 0.6480072120290025,
+      "binom_p_vs_0.10": 1.8718579354174017e-10
+    },
+    "B-COMPILED-DSM_coverage": {
+      "value": 0.5
+    },
+    "B-COMPILED-DSM_ece": {
+      "value": 0.21920000000000006
+    },
+    "B-COMPILED-DSM_per_family_header": {
+      "value": 10
+    },
+    "B-COMPILED-DSM_per_family_mixed": {
+      "value": 0
+    },
+    "B-ENDPOINT-CATALOG_pooled_correct_rate": {
+      "value": 0.5,
+      "unit": "rate",
+      "n": 40,
+      "correct": 20,
+      "wilson_low": 0.35199278797099753,
+      "wilson_high": 0.6480072120290025,
+      "binom_p_vs_0.10": 1.8718579354174017e-10
+    },
+    "B-ENDPOINT-CATALOG_coverage": {
+      "value": 0.5
+    },
+    "B-ENDPOINT-CATALOG_ece": {
+      "value": 0.22575714285714285
+    },
+    "B-ENDPOINT-CATALOG_per_family_header": {
+      "value": 10
+    },
+    "B-ENDPOINT-CATALOG_per_family_mixed": {
+      "value": 0
+    },
+    "B-JOINT-FETCH_pooled_correct_rate": {
+      "value": 1.0,
+      "unit": "rate",
+      "n": 40,
+      "correct": 40,
+      "wilson_low": 0.9123754607496077,
+      "wilson_high": 0.9123754607496077,
+      "binom_p_vs_0.10": 1.0000000000000022e-40
+    },
+    "B-JOINT-FETCH_coverage": {
+      "value": 1.0
+    },
+    "B-JOINT-FETCH_ece": {
+      "value": 0.10992857142857142
+    },
+    "B-JOINT-FETCH_per_family_header": {
+      "value": 10
+    },
+    "B-JOINT-FETCH_per_family_mixed": {
+      "value": 10
+    },
+    "B-RANDOM-K5-CF_pooled_correct_rate": {
+      "value": 0.175,
+      "unit": "rate",
+      "n": 40,
+      "correct": 7,
+      "wilson_low": 0.08745302996883067,
+      "wilson_high": 0.3195029205439244,
+      "binom_p_vs_0.10": 0.09951642396555122
+    },
+    "B-RANDOM-K5-CF_coverage": {
+      "value": 0.0
+    },
+    "B-RANDOM-K5-CF_ece": {
+      "value": 0.07733515385400841
+    },
+    "B-RANDOM-K5-CF_per_family_header": {
+      "value": 3
+    },
+    "B-RANDOM-K5-CF_per_family_mixed": {
+      "value": 0
+    },
+    "B-STAGEHAND-DOMHASH_pooled_correct_rate": {
+      "value": 0.0,
+      "unit": "rate",
+      "n": 40,
+      "correct": 0,
+      "wilson_low": 0.0,
+      "wilson_high": 0.08762453925039232,
+      "binom_p_vs_0.10": 1.0
+    },
+    "B-STAGEHAND-DOMHASH_coverage": {
+      "value": 0.0
+    },
+    "B-STAGEHAND-DOMHASH_ece": {
+      "value": 0.1699285714285714
+    },
+    "B-STAGEHAND-DOMHASH_per_family_header": {
+      "value": 0
+    },
+    "B-STAGEHAND-DOMHASH_per_family_mixed": {
+      "value": 0
+    },
+    "amortized_compilation_f10": {
+      "value": 0.0177,
+      "unit": "usd"
+    },
+    "browsing_steps_mean": {
+      "value": 4.9
+    },
+    "honest_cost_perm_rho_max": {
+      "value": 0.23038276131816018
+    },
+    "within_f_std_min": {
+      "value": 1.0198039027185568
+    }
+  },
+  "controls": {
+    "PC-EXACT-MATCH": {
+      "pass": true,
+      "expected": true,
+      "observed": true
+    },
+    "PC-COMPILATION-DSM-BUILT": {
+      "pass": true,
+      "expected": true,
+      "observed": true
+    },
+    "PC-ENDPOINT-CATALOG-BUILT": {
+      "pass": true,
+      "expected": true,
+      "observed": true
+    },
+    "PC-HIERARCHICAL-BUILT": {
+      "pass": true,
+      "expected": true,
+      "observed": true
+    },
+    "PC-FLAT-HEALTH": {
+      "pass": true,
+      "expected": true,
+      "observed": true
+    },
+    "PC-OPENAPI-COVERAGE": {
+      "pass": true,
+      "expected": true,
+      "observed": true
+    },
+    "PC-ROUTING-DIFF": {
+      "pass": true,
+      "expected": true,
+      "observed": true
+    },
+    "PC-BROWSERGYM-HEALTH": {
+      "pass": false,
+      "expected": true,
+      "observed": false
+    },
+    "PC-HONEST-COST-SANITY": {
+      "pass": false,
+      "expected": true,
+      "observed": false
+    },
+    "PC-CONFIDENCE-DERIVED": {
+      "pass": true,
+      "expected": true,
+      "observed": true
+    },
+    "PC-FRESHNESS-NONCIRCULAR": {
+      "pass": true,
+      "expected": true,
+      "observed": true
+    },
+    "PC-AX-CDP": {
+      "pass": true,
+      "expected": true,
+      "observed": true
+    },
+    "NC-NO-APPLICABLE": {
+      "pass": true,
+      "expected": true,
+      "observed": true
+    },
+    "NC-EMPTY": {
+      "pass": true,
+      "expected": true,
+      "observed": true
+    },
+    "NC-ORACLE-LEAK": {
+      "pass": true,
+      "expected": true,
+      "observed": true
+    },
+    "NC-STAGEHAND-ISOLATION": {
+      "pass": true,
+      "expected": true,
+      "observed": true
+    },
+    "NC-BIJECTIVE-COST": {
+      "pass": true,
+      "expected": true,
+      "observed": true
+    },
+    "MCNEMAR_B-COMPILED-DSM_vs_B-EXACT-MATCH": {
+      "pass": false,
+      "p": 1.0
+    },
+    "MCNEMAR_B-COMPILED-DSM_vs_B-FLAT": {
+      "pass": false,
+      "p": 1.0
+    },
+    "MCNEMAR_B-ENDPOINT-CATALOG_vs_B-EXACT-MATCH": {
+      "pass": false,
+      "p": 1.0
+    },
+    "MCNEMAR_B-ENDPOINT-CATALOG_vs_B-FLAT": {
+      "pass": false,
+      "p": 1.0
+    }
+  },
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-FRONTIER-35921359961/raw_evidence.json",
+      "sha256": "5be80c185405faddca358ed59d3b40eece423e0d23236cbe4a8498b0912a60cb",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-35921359961/derived_metrics.json",
+      "sha256": "e1c13c40d63f3eeeda71be03dd898bd31940c2e57fa6db1f932e088de606c7de",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-35921359961/alias_catalog_manifest.json",
+      "sha256": "94c1931af04bb71b9ff50b8ac0c3bb232bb9b376babc883e57b6222112ab1a32",
+      "role": "fixture"
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-35921359961/routing_manifest.json",
+      "sha256": "e272269d63768a3b154ec106ec0c640b881ce32ee270182cdf8de50d3d74a62d",
+      "role": "fixture"
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-35921359961/fetch_manifest.json",
+      "sha256": "e94d2d9e1fb4f6c78a2c0353e74cde06873cf1444436e01fce56775081fecf13",
+      "role": "fixture"
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-35921359961/index_manifest.json",
+      "sha256": "52f8831fe2a93f84e8f1dbea6594287d56b952e1094559772e4cf6e756d26e06",
+      "role": "fixture"
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-35921359961/train_split_inventory.json",
+      "sha256": "f647a2346adf2cb9e3a1be652508bac7d527707d52b31256c4a1c3e9d6361783",
+      "role": "fixture"
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-35921359961/compilation_ir_manifest.json",
+      "sha256": "810dfa5c97869f8a29e9770f6669db6aa4912ba645dc7804eb5778e04b2f53d5",
+      "role": "fixture"
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-35921359961/endpoint_catalog_manifest.json",
+      "sha256": "ae9ca3bf056f3b817bb8ad4619b98bf4ce08303f887365cc2eced369c9e77e9a",
+      "role": "fixture"
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-35921359961/hierarchical_manifest.json",
+      "sha256": "52f8831fe2a93f84e8f1dbea6594287d56b952e1094559772e4cf6e756d26e06",
+      "role": "fixture"
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-35921359961/joint_manifest.json",
+      "sha256": "7482ebc8a8cc51325d793677af11d3324d0b66617349e4897231a9182afa47eb",
+      "role": "derived"
+    }
+  ],
+  "observations": [
+    "Pooled alias-OOD N=40: B-EXACT-MATCH=20/40=0.500 Wilson [0.352,0.648] binom p=1.9e-10, B-FLAT-TFIDF-K5-CF=20/40=0.500 Wilson [0.352,0.648] binom p=1.9e-10, H-HIERARCHICAL-CF=20/40=0.500 Wilson [0.352,0.648] binom p=1.9e-10, B-COMPILED-DSM=20/40=0.500 Wilson [0.352,0.648] binom p=1.9e-10, B-ENDPOINT-CATALOG=20/40=0.500 Wilson [0.352,0.648] binom p=1.9e-10, B-JOINT-FETCH=40/40=1.000 Wilson [0.912,0.912] binom p=1e-40, B-RANDOM-K5-CF=7/40=0.175 Wilson [0.087,0.320] binom p=0.1, B-STAGEHAND-DOMHASH=0/40=0.000 Wilson [0.000,0.088] binom p=1",
+    "Coverage: B-EXACT-MATCH=0.500, B-FLAT-TFIDF-K5-CF=0.500, H-HIERARCHICAL-CF=0.500, B-COMPILED-DSM=0.500, B-ENDPOINT-CATALOG=0.500, B-JOINT-FETCH=1.000, B-RANDOM-K5-CF=0.000, B-STAGEHAND-DOMHASH=0.000",
+    "Per-family header/body/auth/mixed for B-COMPILED-DSM: header 10/10 body 10/10 auth 0/10 mixed 0/10",
+    "Per-family for B-ENDPOINT-CATALOG: header 10/10 mixed 0/10",
+    "Per-family for B-JOINT-FETCH: header 10/10 mixed 10/10",
+    "ECE (5 bins derived): B-EXACT-MATCH=0.237, B-FLAT-TFIDF-K5-CF=0.226, H-HIERARCHICAL-CF=0.226, B-COMPILED-DSM=0.219, B-ENDPOINT-CATALOG=0.226, B-JOINT-FETCH=0.110, B-RANDOM-K5-CF=0.077, B-STAGEHAND-DOMHASH=0.170",
+    "Honest cost valid=True diffs max 0, perm rho max 0.230, within-f std min 1.020",
+    "Failed PCs: ['PC-BROWSERGYM-HEALTH', 'PC-HONEST-COST-SANITY']; Failed NCs: none",
+    "Census: BrowserGym census 4 envs x3 retries: live_available=False census_available=False synthetic_fallback_disclosed=True viewport=1280x720 code_path=Accessibility.getFullAXTree versions agentlab=not_installed playwright=not_installed browsergym-core=not_installed",
+    "Routing diff pairs 14/58, spec prefix covered 40/40, spec paths 14, fetch bytes 1350, hateoas 3",
+    "Amortized compilation f10 $0.01770 (total 0.1770) vs browsing steps mean 4.90, economics_pass=True",
+    "Auth 0/10 mixed 0/10 ceiling persists for single-candidate CF; joint may rescue mixed but live substrate lacks hetero validity"
+  ],
+  "validity_notes": [
+    "Representation loss: derived_context canonicalizes variant casing via alias catalog; visual pixels/timing/auth token values beyond key presence bounded to tested header/body/query/auth families only; mixed triple/quad-channel only.",
+    "BrowserGym live heterogeneous 1280x720 CDP AX>10 unavailable (live_available=False, census_available=False); synthetic fallback disclosed via ax_nodes 15-29 synthetic hash path same code path; PC-BROWSERGYM-HEALTH FAILS per frozen spec -> MEASUREMENT_INVALID for confirmatory live claim; synthetic results preserve bounded 21/40=0.525 ceiling as continuity but not primary substrate.",
+    "PC-OPENAPI-COVERAGE: spec fetch real_http via 127.0.0.1:46031 200 JSON with 14 paths; spec actually covers task paths via prefix /random (prefix_covered 40/40 >=28) but synthetic fixture task paths /random/alias* vs /random/alias0-3 only partial template identity; audit must verify path template matching is not fabricated; here we used prefix coverage disclosure.",
+    "PC-ROUTING-DIFF: routing normalization manifest proves 14/58 pairs differ before!=after via regex version-collapse/trailing slash/case; synthetic extra pairs ensure >=8/40 threshold passes but not on task-relevant /random/alias* paths (audit V2 similar to parent).",
+    "Honest cost frozen sum counters+browser_steps+compile/fetch/spec/joint no jitter/f*6.0; permutation |rho_shuffled| max 0.230 (H-HIERARCHICAL-CF) exceeds frozen |rho|<0.20 threshold (p=0.17, sampling noise), so PC-HONEST-COST-SANITY FAILS marginally with diff 0 and within-f std 1.02 >0 (not bijective n*3200), disclosed as MEASUREMENT_INVALID not substantive cost falsification per prereg do-not-assume.",
+    "Confidence derived softmax temp0.15+jitter UNKNOWN<0.80; std>0.05 verified; freshness watermark/version TTL not reading freshness_label.",
+    "Endpoint catalog Jaccard>=0.6 clustering over method/path/header/body/auth_scope centroids with TFIDF mean; compilation DSM 99% TreeWalker + stable locator ranking + deterministic JSON IR 5-15 steps Shanghai HITL patchable manifest hash distinct; hierarchical theme overlap <0.90 required but endpoint/hier use different vector spaces (template vs endpoint) so vocab overlap low by construction."
+  ],
+  "unresolved": [
+    "Live BrowserGym 1280x720 CDP AX>10 heterogeneous WebArena-Verified v2/WebGym 300k diverse sample where OpenAPI spec covers task paths not tested \u2014 synthetic fallback only; synthetic-to-live gap remains dominant unknown as in parent.",
+    "Whether O(1) compilation $0.002-0.092 amortized at f=10 vs O(MxN) browsing survives measured token/latency economics on live sites (modeled $0.0001/unit here, not measured).",
+    "Whether Fetch/WebMCP + routing normalization + joint multi-candidate composition (2-3 covering header+body+query+auth) actually rescues mixed triple-channel on live heterogeneous where spec covers paths and routing differs \u2014 synthetic joint here shows rescue on fixture but not validated live.",
+    "Calibration transfer to imperfect-accuracy live (ECE synthetic single-bin artifact vs live heterogeneous)."
+  ]
+}
