@@ -40,7 +40,7 @@
       "decision": "MEASUREMENT_INVALID",
       "promote_to_product": false,
       "source_ref": "origin/lab2/frontier",
-      "source_ref_head": "d4aa405b097489d93612bd58e07c210b1f242356",
+      "source_ref_head": "730a0c2fd98c4f89a6d8249eaa7c694f9da994e6",
       "source_commit": "9cf80f63bd0f58287bbbf1526ca3432febca9492",
       "hashes": {
         "request.json": "dbadd1fc6298fab81a2ccd08632e720f5621ae6ab56fba31d3a732c2bf21a60e",
@@ -232,7 +232,7 @@
       "decision": "MEASUREMENT_INVALID",
       "promote_to_product": false,
       "source_ref": "origin/lab2/frontier",
-      "source_ref_head": "d4aa405b097489d93612bd58e07c210b1f242356",
+      "source_ref_head": "730a0c2fd98c4f89a6d8249eaa7c694f9da994e6",
       "source_commit": "f48d8baf8331e4a081fffa58aa3ad03e810a85d6",
       "hashes": {
         "request.json": "4fd8e220e5b0d682c402df1e674ef6147ab702e6cc34c73aff2514ae1f8746fd",
@@ -396,7 +396,7 @@
       "decision": "FALSIFIED-IN-SETTING",
       "promote_to_product": false,
       "source_ref": "origin/lab2/frontier",
-      "source_ref_head": "d4aa405b097489d93612bd58e07c210b1f242356",
+      "source_ref_head": "730a0c2fd98c4f89a6d8249eaa7c694f9da994e6",
       "source_commit": "dca0b76bab7b58b4be4a44eea380e811550330b2",
       "hashes": {
         "request.json": "fb3652d895740298ef1e10009db3916536de1e2aec8f662affc63ea1e155a0ae",
@@ -478,7 +478,7 @@
       "decision": "FALSIFIED-IN-SETTING",
       "promote_to_product": false,
       "source_ref": "origin/lab2/frontier",
-      "source_ref_head": "d4aa405b097489d93612bd58e07c210b1f242356",
+      "source_ref_head": "730a0c2fd98c4f89a6d8249eaa7c694f9da994e6",
       "source_commit": "d4353fcba3d3bb06d0f628cc54d9fbc111243db7",
       "hashes": {
         "request.json": "1b231c2b8bfde60e6ba3693de74a87b33e7d85aeabd091e87a057831e43366c5",
@@ -751,7 +751,7 @@
       "decision": "FALSIFIED-IN-SETTING",
       "promote_to_product": false,
       "source_ref": "origin/lab2/frontier",
-      "source_ref_head": "d4aa405b097489d93612bd58e07c210b1f242356",
+      "source_ref_head": "730a0c2fd98c4f89a6d8249eaa7c694f9da994e6",
       "source_commit": "22ccea04903ae256d363b8968b3c2a4690ef6057",
       "hashes": {
         "request.json": "c41a142a4c8e69b271678b4c32800520e0cb5293a1f1bccd2e9e4da1f0a63ac6",
@@ -861,7 +861,7 @@
       "decision": "SURVIVES_CURRENT_TEST",
       "promote_to_product": false,
       "source_ref": "origin/lab2/frontier",
-      "source_ref_head": "d4aa405b097489d93612bd58e07c210b1f242356",
+      "source_ref_head": "730a0c2fd98c4f89a6d8249eaa7c694f9da994e6",
       "source_commit": "8ae9ddc8f2025e7f38632b0eea3c02e62160f6a6",
       "hashes": {
         "request.json": "c307fca8608e2b9c1f7d246c67dfcbe0840173ae920aca112319e4ecede89c7f",
@@ -888,7 +888,7 @@
       "decision": "FALSIFIED-IN-SETTING",
       "promote_to_product": false,
       "source_ref": "origin/lab2/frontier",
-      "source_ref_head": "d4aa405b097489d93612bd58e07c210b1f242356",
+      "source_ref_head": "730a0c2fd98c4f89a6d8249eaa7c694f9da994e6",
       "source_commit": "be11b0bfedbf5382b271084e52a2a36f44de855b",
       "hashes": {
         "request.json": "7e41f131747af8a2a3b2ef8fbf911c5a86de89b3534b77271a209d9ef3d5ac80",
@@ -942,7 +942,7 @@
       "decision": "FALSIFIED-IN-SETTING",
       "promote_to_product": false,
       "source_ref": "origin/lab2/frontier",
-      "source_ref_head": "d4aa405b097489d93612bd58e07c210b1f242356",
+      "source_ref_head": "730a0c2fd98c4f89a6d8249eaa7c694f9da994e6",
       "source_commit": "111951aeb5f0c770376457836dc23e17b94e32e1",
       "hashes": {
         "request.json": "562ecee83cbc08a62295c677ad2d53909b81291c3806be0cd85cba15599e8526",
@@ -1511,7 +1511,7 @@
       "decision": "MEASUREMENT_INVALID",
       "promote_to_product": false,
       "source_ref": "origin/lab2/frontier",
-      "source_ref_head": "d4aa405b097489d93612bd58e07c210b1f242356",
+      "source_ref_head": "730a0c2fd98c4f89a6d8249eaa7c694f9da994e6",
       "source_commit": "ca9884ed23d6f4d05199f80d093ccab39a3ea420",
       "hashes": {
         "request.json": "44fc1148df1f4f750c29ef9fdee31b22cedb50bce3c12868c20f1297956b4845",
@@ -1946,7 +1946,7 @@
       "decision": "FALSIFIED-IN-SETTING",
       "promote_to_product": false,
       "source_ref": "origin/lab2/frontier",
-      "source_ref_head": "d4aa405b097489d93612bd58e07c210b1f242356",
+      "source_ref_head": "730a0c2fd98c4f89a6d8249eaa7c694f9da994e6",
       "source_commit": "636109afec367ad29acb94c1584fa6740c062169",
       "hashes": {
         "request.json": "b31258748fe218f9105e9df2914467bc9ff3d2e44d582fb7a2448391846d41a4",
@@ -2054,7 +2054,7 @@
       "decision": "FALSIFIED-IN-SETTING",
       "promote_to_product": false,
       "source_ref": "origin/lab2/frontier",
-      "source_ref_head": "d4aa405b097489d93612bd58e07c210b1f242356",
+      "source_ref_head": "730a0c2fd98c4f89a6d8249eaa7c694f9da994e6",
       "source_commit": "858edf9f6a14693e1c85d059c07365c13e1a2315",
       "hashes": {
         "request.json": "c426eaabcd14022130061e65d1bbb140d41ab22a9c81d28d0d5d4a9e0ae418d2",
@@ -2137,7 +2137,7 @@
       "decision": "FALSIFIED-IN-SETTING",
       "promote_to_product": false,
       "source_ref": "origin/lab2/frontier",
-      "source_ref_head": "d4aa405b097489d93612bd58e07c210b1f242356",
+      "source_ref_head": "730a0c2fd98c4f89a6d8249eaa7c694f9da994e6",
       "source_commit": "2916a7c97b2c2bc9299fe8644e4914dae54f99e9",
       "hashes": {
         "request.json": "f211fd104e0a2ce6c45dda252c283b4f991683522b2aa7ed2be2e21f621dbaab",
@@ -2191,7 +2191,7 @@
       "decision": "MEASUREMENT_INVALID",
       "promote_to_product": false,
       "source_ref": "origin/lab2/frontier",
-      "source_ref_head": "d4aa405b097489d93612bd58e07c210b1f242356",
+      "source_ref_head": "730a0c2fd98c4f89a6d8249eaa7c694f9da994e6",
       "source_commit": "57ca23d0c9a481288a3e30b836396e9c0880253f",
       "hashes": {
         "request.json": "0596702daeeb836a1e6e44e2e802b838a2e351b43edce59f44627f1ea3fdc839",
@@ -2245,7 +2245,7 @@
       "decision": "FALSIFIED-IN-SETTING \u2014 Frozen decision_rule triggers FALSIFIED-IN-SETTING: null control passes for both KDE (8/8) and kNN (8/8) at lambda=0, but CV \u22640.5 at lambda=1 fails for both KDE (max 0.5745 on type 4, 7/8 pass) and kNN (max 0.5750 on type 0, 7/8 pass). Positive controls pass strongly (KDE t=7.81 p=0.0007, kNN t=6.82 p=0.0012). The frozen rule requires ALL conditions for BOTH measures; CV failure on one type per measure is sufficient. The result is a valid scientific negative on per-type stability at 250/type, not measurement invalidity. Audit PASS confirms all recomputed metrics match producer. Claim ceiling bounded to: KDE and kNN achieve per-type null control (8/8 pass) where binned TV fails (4/8 pass), confirming the binned TV false-positive is estimator-specific; however, per-type CV stability \u22640.5 is not achieved at 250/type by either KDE (max 0.575, marginal) or kNN (max 0.755, substantial). All evidence remains synthetic 2D [0,1]^2 with 8 heterogeneous affine page types; no inference to real Web DOM dynamics warranted.",
       "promote_to_product": false,
       "source_ref": "origin/lab2/frontier",
-      "source_ref_head": "d4aa405b097489d93612bd58e07c210b1f242356",
+      "source_ref_head": "730a0c2fd98c4f89a6d8249eaa7c694f9da994e6",
       "source_commit": "5a4e556ee45cafa4bbed8846efc28f6cefa113b9",
       "hashes": {
         "request.json": "b84320774f42091c164f6f00e86a0dbc1a80c615ff79bee14715392124b52c9b",
@@ -3034,7 +3034,7 @@
       "decision": "MEASUREMENT_INVALID",
       "promote_to_product": false,
       "source_ref": "origin/lab2/frontier",
-      "source_ref_head": "d4aa405b097489d93612bd58e07c210b1f242356",
+      "source_ref_head": "730a0c2fd98c4f89a6d8249eaa7c694f9da994e6",
       "source_commit": "a4de5f75a516c0da50d5a6ef069cbc8dbb3949ea",
       "hashes": {
         "request.json": "8404e00d5823b999ba2fb8b91d27cd3c437c0cb1173503bf9ef60721d447edd1",
@@ -4174,7 +4174,7 @@
       "decision": "MEASUREMENT_INVALID",
       "promote_to_product": false,
       "source_ref": "origin/lab2/frontier",
-      "source_ref_head": "d4aa405b097489d93612bd58e07c210b1f242356",
+      "source_ref_head": "730a0c2fd98c4f89a6d8249eaa7c694f9da994e6",
       "source_commit": "da226f7149e87018afd43e6579eb36547ef7f160",
       "hashes": {
         "request.json": "0c7b22e87685530e1d5ca1f3dafecb7bb1751112605297f713f067cd7d04c005",
@@ -5919,7 +5919,7 @@
       "decision": "FALSIFIED-IN-SETTING (bundled frozen rule \u2014 spec contradiction bounded)",
       "promote_to_product": false,
       "source_ref": "origin/lab2/frontier",
-      "source_ref_head": "d4aa405b097489d93612bd58e07c210b1f242356",
+      "source_ref_head": "730a0c2fd98c4f89a6d8249eaa7c694f9da994e6",
       "source_commit": "332c6fe69ebfa29b5cc5b251ba4e72382e6251f0",
       "hashes": {
         "request.json": "482030f631b57e348726e98db9e8bf408d6258d686327fb1ab8fca7b24a602f8",
@@ -6219,7 +6219,7 @@
       "decision": "MEASUREMENT_INVALID",
       "promote_to_product": false,
       "source_ref": "origin/lab2/frontier",
-      "source_ref_head": "d4aa405b097489d93612bd58e07c210b1f242356",
+      "source_ref_head": "730a0c2fd98c4f89a6d8249eaa7c694f9da994e6",
       "source_commit": "dbc59208079f8e686a7166a1146758fdc520d81c",
       "hashes": {
         "request.json": "07113a78c28423b79a471c26b8e34388c4fbee5f3e4c099d35e819bc6bfb78a8",
@@ -6409,7 +6409,7 @@
       "decision": "SURVIVES_CURRENT_TEST",
       "promote_to_product": false,
       "source_ref": "origin/lab2/frontier",
-      "source_ref_head": "d4aa405b097489d93612bd58e07c210b1f242356",
+      "source_ref_head": "730a0c2fd98c4f89a6d8249eaa7c694f9da994e6",
       "source_commit": "ddf9ac679c05a4e78bb79b353545e52549f49309",
       "hashes": {
         "request.json": "5b84d9351344af2b3cdfa20dba3237ab46d253a6a4026b51f457370c4a5cc327",
@@ -6545,7 +6545,7 @@
       "decision": "SURVIVES_CURRENT_TEST",
       "promote_to_product": false,
       "source_ref": "origin/lab2/frontier",
-      "source_ref_head": "d4aa405b097489d93612bd58e07c210b1f242356",
+      "source_ref_head": "730a0c2fd98c4f89a6d8249eaa7c694f9da994e6",
       "source_commit": "0a8d4c0cb7efb0046ccbe658c7ca1c41f5d100d2",
       "hashes": {
         "request.json": "e781f6832208715625c7f23568355ff2496349fc961727566af2da456656fed3",
@@ -6681,7 +6681,7 @@
       "decision": "SURVIVES_CURRENT_TEST",
       "promote_to_product": false,
       "source_ref": "origin/lab2/frontier",
-      "source_ref_head": "d4aa405b097489d93612bd58e07c210b1f242356",
+      "source_ref_head": "730a0c2fd98c4f89a6d8249eaa7c694f9da994e6",
       "source_commit": "436d62d23bcbdc535ba9948481600eeae2b1dec0",
       "hashes": {
         "request.json": "7b9fb4f60e5e9570f5c71d5a80bfb7d67d8868e32708e8b8076c2a4b0648a3ce",
@@ -6763,7 +6763,7 @@
       "decision": "SURVIVES_CURRENT_TEST",
       "promote_to_product": false,
       "source_ref": "origin/lab2/frontier",
-      "source_ref_head": "d4aa405b097489d93612bd58e07c210b1f242356",
+      "source_ref_head": "730a0c2fd98c4f89a6d8249eaa7c694f9da994e6",
       "source_commit": "ba2035d7a21455d3ad7773da97b2c4f3cf7885b1",
       "hashes": {
         "request.json": "da9dfd8ffa68469c7ac01820d2fd74a7e7f16955c181e42c524a4a2ffb2aafe1",
@@ -6954,7 +6954,7 @@
       "decision": "MIXED",
       "promote_to_product": false,
       "source_ref": "origin/lab2/frontier",
-      "source_ref_head": "d4aa405b097489d93612bd58e07c210b1f242356",
+      "source_ref_head": "730a0c2fd98c4f89a6d8249eaa7c694f9da994e6",
       "source_commit": "ca6d0f60bf9d674db76c4dd98350239ec9b99fc8",
       "hashes": {
         "request.json": "e1de2994695629b68fa60f476667453ccd5a90beb454ee8920f7fd2b314c7407",
@@ -7090,7 +7090,7 @@
       "decision": "MIXED",
       "promote_to_product": false,
       "source_ref": "origin/lab2/frontier",
-      "source_ref_head": "d4aa405b097489d93612bd58e07c210b1f242356",
+      "source_ref_head": "730a0c2fd98c4f89a6d8249eaa7c694f9da994e6",
       "source_commit": "87e0410e20f31574a8245ea53aed9e5f05d9a4a7",
       "hashes": {
         "request.json": "ae653c915103ccdc2791816f827126d662812190b8609aebf3578464868ed855",
@@ -7227,7 +7227,7 @@
       "decision": "FALSIFIED-IN-SETTING",
       "promote_to_product": false,
       "source_ref": "origin/lab2/frontier",
-      "source_ref_head": "d4aa405b097489d93612bd58e07c210b1f242356",
+      "source_ref_head": "730a0c2fd98c4f89a6d8249eaa7c694f9da994e6",
       "source_commit": "7c767ed15ff4bea72e3cbdb835dbcc7af187a21a",
       "hashes": {
         "request.json": "3947d1e26d7a2c5bae94d06628b4f22e197aea33ca6669a08bfc5deb23dc1672",
@@ -7283,7 +7283,7 @@
       "decision": "MEASUREMENT_INVALID",
       "promote_to_product": false,
       "source_ref": "origin/lab2/frontier",
-      "source_ref_head": "d4aa405b097489d93612bd58e07c210b1f242356",
+      "source_ref_head": "730a0c2fd98c4f89a6d8249eaa7c694f9da994e6",
       "source_commit": "daf0ce3c3dc34a8e81a497de5dc53c5dd565674f",
       "hashes": {
         "request.json": "221ae9969371123ef62e2c112f4da599db3e9d271acae033457a433decf4e4a5",
@@ -7530,7 +7530,7 @@
       "decision": "MEASUREMENT_INVALID",
       "promote_to_product": false,
       "source_ref": "origin/lab2/frontier",
-      "source_ref_head": "d4aa405b097489d93612bd58e07c210b1f242356",
+      "source_ref_head": "730a0c2fd98c4f89a6d8249eaa7c694f9da994e6",
       "source_commit": "d94ee76f676807b884130eef296cb3204d4f6cc3",
       "hashes": {
         "request.json": "9bf24bd2ec015c18c80babcfad94f9395a538bcbc94af25d9900b2b38d052df2",
@@ -7693,7 +7693,7 @@
       "decision": "MEASUREMENT_INVALID",
       "promote_to_product": false,
       "source_ref": "origin/lab2/frontier",
-      "source_ref_head": "d4aa405b097489d93612bd58e07c210b1f242356",
+      "source_ref_head": "730a0c2fd98c4f89a6d8249eaa7c694f9da994e6",
       "source_commit": "756f922dd21b7fe71eae244ee8ca1cb2cf2a34a1",
       "hashes": {
         "request.json": "059952f8267d3d8a83b8ef03e85883d01a14e6562129cfc16c461f820ceec17e",
@@ -7803,7 +7803,7 @@
       "decision": "FALSIFIED-IN-SETTING",
       "promote_to_product": false,
       "source_ref": "origin/lab2/frontier",
-      "source_ref_head": "d4aa405b097489d93612bd58e07c210b1f242356",
+      "source_ref_head": "730a0c2fd98c4f89a6d8249eaa7c694f9da994e6",
       "source_commit": "d79f1b5edca01a3c87e65f44fc50158b280e5a83",
       "hashes": {
         "request.json": "398fde22062495d558abb69096b3ca3045e7dd64d1b1f2cc255078c52f7e6e0b",
@@ -8049,7 +8049,7 @@
       "decision": "SURVIVES_SYNTHETIC_BOUNDED",
       "promote_to_product": false,
       "source_ref": "origin/lab2/frontier",
-      "source_ref_head": "d4aa405b097489d93612bd58e07c210b1f242356",
+      "source_ref_head": "730a0c2fd98c4f89a6d8249eaa7c694f9da994e6",
       "source_commit": "1d58cb44fef1706742939405b480261c346afa71",
       "hashes": {
         "request.json": "a0060370fe38348bf3b59aa481430ea4788a8877a38a47d8391f740bd9ad04c2",
@@ -8160,7 +8160,7 @@
       "decision": "MEASUREMENT_INVALID",
       "promote_to_product": false,
       "source_ref": "origin/lab2/frontier",
-      "source_ref_head": "d4aa405b097489d93612bd58e07c210b1f242356",
+      "source_ref_head": "730a0c2fd98c4f89a6d8249eaa7c694f9da994e6",
       "source_commit": "87097c6574b886e6b1efa188e8bfc4b2bbf4a274",
       "hashes": {
         "request.json": "9e6c07063944f41a4f49b65fff8a0f9ee0e60adacfd7bec5348e6053f42c3f61",
@@ -8326,7 +8326,7 @@
       "decision": "MEASUREMENT_INVALID",
       "promote_to_product": false,
       "source_ref": "origin/lab2/frontier",
-      "source_ref_head": "d4aa405b097489d93612bd58e07c210b1f242356",
+      "source_ref_head": "730a0c2fd98c4f89a6d8249eaa7c694f9da994e6",
       "source_commit": "ce68eca9af283c29284ca26a909f899a29605e81",
       "hashes": {
         "request.json": "81bf00f1ba3d70ab27ac9f67fbe99208c0a595795f2b7cb6d824295841b1ba26",
@@ -8542,7 +8542,7 @@
       "decision": "REVISE",
       "promote_to_product": false,
       "source_ref": "origin/lab2/frontier",
-      "source_ref_head": "d4aa405b097489d93612bd58e07c210b1f242356",
+      "source_ref_head": "730a0c2fd98c4f89a6d8249eaa7c694f9da994e6",
       "source_commit": "5e2001367d5a5b43cc1fe2cedef02eab4e47e084",
       "hashes": {
         "request.json": "35ea0384ce49b63954c8b99e46cb682759f35e6e035c057dbec7fce71ff5c60c",
@@ -8812,7 +8812,7 @@
       "decision": "FALSIFIED-IN-SETTING",
       "promote_to_product": false,
       "source_ref": "origin/lab2/frontier",
-      "source_ref_head": "d4aa405b097489d93612bd58e07c210b1f242356",
+      "source_ref_head": "730a0c2fd98c4f89a6d8249eaa7c694f9da994e6",
       "source_commit": "81206e58269faa980c7bc1aacd438c7d153f4d45",
       "hashes": {
         "request.json": "355ca3200321039ac184e4cc12d18cd8e44e6a4cf4394788f77803a596bb1cd7",
