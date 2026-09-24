@@ -1,0 +1,97 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-35956094394",
+  "lane": "intel",
+  "github_run_id": "35956094394",
+  "github_run_attempt": "1",
+  "recorded_at": "2026-09-24T05:45:00Z",
+  "git": {
+    "head": "1a8f034872c20bcdfbdd0c8de55751f0195f862e",
+    "pre_execute_sha": "dbeff8bf3b53b6e547cacc9df0c1197e5f869881",
+    "branch_discipline": "no commits created by EXECUTE; research/intel and experiment artifacts left as working-tree changes"
+  },
+  "frozen_inputs": {
+    "request.json": "8bf79eb97b2d5507bed7ada74eae57056a62d65fbdc0d740783d7270bf5e70ae",
+    "spec.json": "93c7f6d93b24faeca9d3306d9e0fb5696eb91a9a5c397552e8d46f2b5d2f62b2",
+    "prereg.md": "bbc529679326be96225d53f1466564e4c272d19b6bf5fda587b17646e540afb6",
+    "freeze.json": "377334441816e57076bcc1c28d8d88e218468f2966ac30a6e24bf88f1ca41b36",
+    "immutability": "none of the frozen files were modified after freeze"
+  },
+  "environment": {
+    "docker_image_digest": "sha256:3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb",
+    "docker_image_digest_64hex": "3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb",
+    "docker_container": "quirky_ishizaka (webarena-verified-shopping), reachable http://localhost:7770/ HTTP 200",
+    "python": "3.12.14",
+    "pip_freeze_sha256": "31e19397f99100d3c81c3f57686428f893fbad3eae704749e0f1abb316d87e28",
+    "stack_packages": {
+      "browsergym-core": "0.14.3",
+      "agentlab": "0.4.2",
+      "playwright_pip": "1.63.0",
+      "playwright_cli": "1.63.0",
+      "chromium_build": "chromium-1243 (Chromium 153.0.8010.12)",
+      "flask": "3.1.3"
+    },
+    "viewport": "1280x720",
+    "headless": true,
+    "hf_token": "absent (logged false; all HF manifest attempts 401)"
+  },
+  "datasets": {
+    "webarena_verified_manifest": {
+      "path": "research/experiments/EXP-INTEL-35725763380/artifacts/raw/webarena-verified.json",
+      "sha256": "d65275660814663375028e9017e1f929e3c38321041b125795e2713b52243d30",
+      "bytes": 927596,
+      "pinned_source": "Docker am1n3e/webarena-verified-shopping@sha256:3e8cb9... + established local pinned copy (audit-verified prior identity)",
+      "cross_source_equality": "unavailable (HF 401; see hf_manifest_attempts.json)"
+    },
+    "synthetic_alias_ood_40": {
+      "path": "research/intel/synthetic_alias_ood_40.json",
+      "file_sha256": "6f42bc82cb1b6fb292320200ab0beb46694ceb260f16dd44d38e489ad9089205",
+      "artifact_sha256_self_declared": "69a7462c2054f8a55694c36e9dd6e1054090339f8f2513ff96d478af7553270c",
+      "generator": "research/intel/exp_35956094394_synth_gen.py (sha 5311a58113e50d00546547634aa239c45cf3dec659509580abd56eb63678c1b0)",
+      "seed": 360360,
+      "split": "40 tasks: 10 header_param, 10 body_param, 10 auth_param, 10 mixed_multi_channel + 1 pcb_toy",
+      "expiry_model": "seeded per-task Poisson session rotation rotp in {0.15,0.25,0.35}; rotation_step_lt retained as legacy field (superseded by rotp)",
+      "note": "artifact_sha256 field is a string-level schema hash (json.dumps without sha fields/newline), recomputed and matched; file_sha256 is the sha256sum value."
+    }
+  },
+  "code": {
+    "grammar_module": {"path": "research/intel/grammar_fulltree_358885.py", "sha256": "273eafbcb817e8981f843581a724594665cabdd357b318c701251929ee9c83de", "note": "fotorama dynamic-token pattern added to expanded set; live grammar hash recomputed at capture time"},
+    "module_a_probe": {"path": "research/intel/exp_35956094394_ax_probe.py", "sha256": "b7088d05fd697b2b90105bc3c233ec4999c808333571c81f1e91dfb8b568253f"},
+    "fixture_generator": {"path": "research/intel/exp_35956094394_synth_gen.py", "sha256": "5311a58113e50d00546547634aa239c45cf3dec659509580abd56eb63678c1b0"},
+    "blind_harness": {"path": "research/intel/exp_35956094394_blind_harness.py", "sha256": "a2077018314bed366133522f9ed1ea017575c5eff0de469fcaefca719ebc3239", "note": "determinism: re-run 2026-09-24 reproduced results byte-identically; prior log recorded sha ae7ea9e7ebc1e541ffc979fe2f7835a63617db2d8ae10160d75d04e35e5c224a (origin not re-derivable, disclosed in result.json unresolved)"},
+    "analysis": {"path": "research/intel/exp_35956094394_analysis.py", "sha256": "b290b313d0f0cb0f2e2ee47c5ab2c179cfacffe3182e76a5dd15c076a6075e8c", "note": "B=2000 trajectory-grouped bootstrap, PERMS=1000, seed 360361"},
+    "nc2_probe": {"path": "research/intel/exp_35956094394_nc2_probe.py", "sha256": "fd52088bfda8e061b8d086cb3e7aa7000b38c18d641e3c3fca690b44fb9f6e30", "note": "post-freeze NC2 empirical control; writes derived/truncation_control.json only"}
+  },
+  "measurement_method": {
+    "module_a": "CDP Accessibility.getFullAXTree (NOT browsersym snapshot fallback) + page.content(); outerHTML SHA256 with 9 base + expanded + body-regex dynamic-token stripping, recomputed AFTER content()+AX; stability = identical across reloads; mutation = changed after visible textContent edit of first of [.price, h1 span, .product-name, h1, .product-info-price .price]; anchored geometry via Runtime.evaluate",
+    "module_b": "deterministic simulated world; strict per-channel verification at verify time; MAX_STEPS=10 for every policy; honest per-trajectory counters resolve/bind/verify/freshness/browser; blind implementations from frozen prereg recipe text only",
+    "analysis": "trajectory-grouped bootstrap B=2000 percentile CI; within-family-stratum rho shuffle 1000 perms; family-label task-assignment permutation 1000 perms; NC3 ablation; NC2 empirical truncation probe on same grammar"
+  },
+  "commands": [
+    "python3 research/intel/exp_35956094394_ax_probe.py (Module A2 captures; protocol dump)",
+    "python3 research/intel/exp_35956094394_synth_gen.py (Module B0 fixture; deterministic seed 360360)",
+    "python3 research/intel/exp_35956094394_blind_harness.py (Module B1/B2; 327 rows)",
+    "python3 research/intel/exp_35956094394_analysis.py (Module B analysis)",
+    "python3 research/intel/exp_35956094394_nc2_probe.py (NC2 empirical truncation control)"
+  ],
+  "artifacts": {
+    "raw": [
+      {"path": "research/experiments/EXP-INTEL-35956094394/artifacts/raw/webarena_verified_pin.json", "sha256": "8a529cc8243a09d71fec6583427fbcd7ae35167b81659a695ee847d1100945df"},
+      {"path": "research/experiments/EXP-INTEL-35956094394/artifacts/raw/ax_captures.jsonl", "sha256": "61256b4fa8eac12ef4b44ddeab8691d6153d1488b6bc759f702dce8d99a1e415"},
+      {"path": "research/experiments/EXP-INTEL-35956094394/artifacts/raw/ax_protocol_dump.json", "sha256": "97b1ac8f17d80d99a18f7323f9f0068774e84156ac0f9d63616c54d78753e0a6"},
+      {"path": "research/experiments/EXP-INTEL-35956094394/artifacts/raw/hf_manifest_attempts.json", "sha256": "5cdc778703b1a34a528cf5a654363bcbd72594a7ea5403a0019568e659391597"},
+      {"path": "research/experiments/EXP-INTEL-35956094394/artifacts/raw/docker_hub_api_attempts.json", "sha256": "5d4b6955c86d880ed3ca493bbd6a1a9b8b6d5c245b3597e517a956420ff0a628"}
+    ],
+    "derived": [
+      {"path": "research/experiments/EXP-INTEL-35956094394/artifacts/derived/webarena_census.json", "sha256": "6fcdc04f442ac69caa7a5a5a8e1f4a58e936ea99d8b3fde13f6372b6f410f206"},
+      {"path": "research/experiments/EXP-INTEL-35956094394/artifacts/derived/ax_analysis.json", "sha256": "0b3cb4dfd9e24d839e335e452c02acf12bc1202ed0e91d1111eba8442249dc4f"},
+      {"path": "research/experiments/EXP-INTEL-35956094394/artifacts/derived/sota_blind_results.jsonl", "sha256": "3c5ab5afbaa3d28910dc0e6c3bcd77ed51262f028dc045e1df896324af386402"},
+      {"path": "research/experiments/EXP-INTEL-35956094394/artifacts/derived/sota_analysis.json", "sha256": "199570b64ae43c4f34f90297d2f649b3d92fd657682a1fdceeff81c969e45d88"},
+      {"path": "research/experiments/EXP-INTEL-35956094394/artifacts/derived/truncation_control.json", "sha256": "871808ab031ed0d3c43f4b720c9a2dabf383d2d256c9a1878161388c13f82c49"}
+    ]
+  },
+  "peers": {
+    "webarena_verified_pin_canonical_manifest": "research/experiments/EXP-INTEL-35725763380/artifacts/raw/webarena-verified.json (sha d65275660814663375028e9017e1f929e3c38321041b125795e2713b52243d30)",
+    "claims": ["C-CROSSSITE", "C-RESIDUAL-NOVELTY", "C-PRODUCT-ECON"]
+  }
+}

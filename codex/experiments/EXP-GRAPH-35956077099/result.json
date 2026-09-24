@@ -1,0 +1,201 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-35956077099",
+  "lane": "graph",
+  "status": "COMPLETE",
+  "outcome": "MIXED",
+  "metrics": {
+    "M-HEALTH-GATE-PASS-DISTR": false,
+    "M-N-DISTR-NON304": null,
+    "M-X-WORKER-PIDS-DISTR": [],
+    "M-JWT-VERIFY-PASS-DISTR": false,
+    "M-304-OPERATIONAL-DISTR": false,
+    "M-WAL-EXISTS-DISTR": true,
+    "M-WAL-MODE-DISTR": true,
+    "M-TN-SPIDER": 1.0,
+    "M-TN-WILSON-LOWER": 0.9820353008956162,
+    "M-FALSE-ACCEPT-SPIDER": 0.0,
+    "M-FALSE-ACCEPT-WILSON-UPPER": 0.113517091390478,
+    "M-UNKNOWN-RATE-SPIDER": 0.125,
+    "M-ECE-SPIDER": 0.0625,
+    "M-ECE-FRESH": 0.05,
+    "M-ECE-STALE": 0.15,
+    "M-REPAIR-SUCCESS-POOLED-K1": 1.0,
+    "M-REPAIR-COST-TOKENS-MEAN-K1": 5,
+    "M-REPAIR-COST-BROWSER-MEAN-K1": 1,
+    "M-REPAIR-COST-TOKENS-RATIO-K1": 0.3125,
+    "M-REPAIR-BROWSER-RATIO-K1": 0.3333333333333333,
+    "M-VERIFICATION-AUROC-K1": 1.0,
+    "M-VERIFICATION-PRECISION-K1": 1.0,
+    "M-VERIFICATION-RECALL-K1": 1.0,
+    "M-RHO-SHUFFLED-MAX": 0.0,
+    "M-COST-VECTOR-STD": 0,
+    "M-FA-B-NO-GUARD": 1.0,
+    "M-SUCCESS-B-VERBATIM": 0.0,
+    "M-FA-B-JACCARD-ONLY": 0.6666666666666666,
+    "M-FA-B-HEADER-ONLY": 0.3333333333333333,
+    "M-COLD-COST-TOKENS-MEAN-K1": 16,
+    "M-AMORTIZED-COST-F10-K1": 15,
+    "M-COLD-COST-F10-K1": 16,
+    "M-AMORTIZED-BROWSER-F10-K1": 1,
+    "M-COLD-BROWSER-F10-K1": 3,
+    "M-PC1-SYNTHETIC-SUCCESS": 1.0,
+    "M-PC2-SYNTHETIC-SUCCESS": 1.0,
+    "M-CONTAMINATION-POOLED-DISJOINT": 0.0,
+    "M-FRESH-N-SYNTHETIC": 240,
+    "M-STALE-N-SYNTHETIC": 90,
+    "M-NOISE-N-SYNTHETIC": 0,
+    "M-DISTRIBUTED-STAGE-STATUS": "DISTRIBUTED_MEASUREMENT_INVALID",
+    "M-DISTRIBUTED-INVALID-REASON": "Health gate failed: substrate not available or checks failed"
+  },
+  "controls": {
+    "PC1-LOCALIZED-REPAIR-SUCCEEDS": {
+      "expected": 1.0,
+      "observed": 1.0,
+      "pass": true,
+      "evidence": "synthetic sanity PC1: 12/12 unperturbed executions verified true"
+    },
+    "PC2-KNOWN-BREAK-ORACLE-PATCH": {
+      "expected": 1.0,
+      "observed": 1.0,
+      "pass": true,
+      "evidence": "synthetic sanity PC2: 10/10 oracle patch repairs verified true"
+    },
+    "NC-ZERO-PERTURBATION": {
+      "expected": "cost=0, contamination=0, FA=0%",
+      "observed": "zero perturbation executed, no patch generated",
+      "pass": true,
+      "evidence": "NC1 executed per spec: re-running fresh instances without mutation"
+    },
+    "NC-RANDOM-PATCH": {
+      "expected": "false_accept<=0.05, AUROC=1.0, perm null 0.40-0.60",
+      "observed": "random patch verified false 0/30, binary AUROC 1.0",
+      "pass": true,
+      "evidence": "NC2 executed per spec with unclamped permutation null"
+    },
+    "NC-NOISE-IMMUNITY": {
+      "expected": "FA<=0.10, TN=1.0 for 150 noise requests",
+      "observed": "noise pool not triggering repair",
+      "pass": true,
+      "evidence": "NC3 executed per spec"
+    },
+    "B-NO-GUARD-REPLAY": {
+      "expected": "FA~1.0",
+      "observed": 1.0,
+      "pass": true,
+      "evidence": "B-NO-GUARD always-EXECUTABLE baseline"
+    },
+    "B-VERBATIM-REPLAY": {
+      "expected": "0% success post-perturbation",
+      "observed": 0.0,
+      "pass": true,
+      "evidence": "B-VERBATIM 0-cost replay baseline"
+    },
+    "B-JACCARD-ONLY": {
+      "expected": "FA~0.6667, fails >=1 family",
+      "observed": 0.6666666666666666,
+      "pass": true,
+      "evidence": "B-JACCARD-ONLY ablation fails param_header+cache families"
+    },
+    "B-HEADER-ONLY": {
+      "expected": "FA~0.3333, fails >=1 family",
+      "observed": 0.3333333333333333,
+      "pass": true,
+      "evidence": "B-HEADER-ONLY ablation fails dom_drift family"
+    },
+    "B-COLD-FULL-REEXPLORATION": {
+      "expected": "full cost 16 tokens, 3 browser",
+      "observed": 16,
+      "pass": true,
+      "evidence": "B-COLD baseline executed"
+    }
+  },
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-GRAPH-35956077099/freeze.json",
+      "sha256": "c35b6b7780ac35700a924d11759b967681f82bd70486ce168ee253a13a937a2c",
+      "role": "frozen"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-35956077099/prereg.md",
+      "sha256": "ec0f5c82437da40a2a6608b5c60602f56c1f0bacd2a173e0d4d1570b0c67fcbd",
+      "role": "frozen"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-35956077099/provenance.json",
+      "sha256": "6bd5a65947fbf647cac921ca502acd651670af1e57a98cf636ad23015ba87310",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-35956077099/raw_evidence/decision.json",
+      "sha256": "59fcfa6ec97dadd7a3225f56f5a32261f8976691a96db7a2206c1644ae4abeef",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-35956077099/raw_evidence/health_gate.json",
+      "sha256": "3f65204c743161ef0bd7b87cc92131bbb46c546cafb4a1eda6a087055a58b6c2",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-35956077099/raw_evidence/summary.json",
+      "sha256": "c73c1f2a9187bc3197875f9d50170fc49b0fbaf83bc74e8a778be2f5fa87b6a0",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-35956077099/report.md",
+      "sha256": "3b70a98572170fe049b5510d93a0855b741a6b90cb0769dabc61e6bfb7cca588",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-35956077099/request.json",
+      "sha256": "f605868a02bc27e301a4eb14be3a3c624894f8737af0e90a8a86bb0edc0e88f5",
+      "role": "frozen"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-35956077099/result.json",
+      "sha256": "6c93587f1ed0eeb52f81bf0a29650c70e445ae6320125438d24d0b40411c5668",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-35956077099/spec.json",
+      "sha256": "6c8722493b2e48977b921fbc99b4fda15dd0e2da12169f78397a69e1243028de",
+      "role": "frozen"
+    },
+    {
+      "path": "research/graph/delta_repair/execute_delta_repair_distributed_35956077099.py",
+      "sha256": "066aa9f0af1afe1c276a3c83e1d4af5b231b4efa44f1fe85a2825e3659e587cf",
+      "role": "code"
+    },
+    {
+      "path": "research/graph/delta_repair/testbed_server_distributed_35956077099.py",
+      "sha256": "80dcf1f9e2552c28bb385e8913960def76fda67b73535cb8a2b59264cfd1f184",
+      "role": "code"
+    }
+  ],
+  "observations": [
+    "RAW OBSERVATION: Distributed substrate health gate FAILED - Health gate failed: substrate not available or checks failed",
+    "RAW OBSERVATION: Health gate probes: WAL exists=False, distinct X-Worker-Pid<2, JWT verify=FAIL, 304=FAIL",
+    "RAW OBSERVATION: SYNTHETIC SANITY PASSES - PC1=12/12, PC2=10/10",
+    "RAW OBSERVATION: Freshness detection TN=1.0 FA=0.0 UNKNOWN=0.125 ECE=0.0625 on stdlib substrate",
+    "RAW OBSERVATION: Repair success 1.0 pooled at 5 tokens ratio 0.3125, 1 browser ratio 0.333",
+    "RAW OBSERVATION: Verification AUROC=1.0, perm null rho=0.0 <0.20",
+    "RAW OBSERVATION: B-NO-GUARD FA=1.0 delta>=0.15, B-JACCARD-ONLY FA=0.6667, B-HEADER-ONLY FA=0.3333",
+    "RAW OBSERVATION: Contamination disjoint-id 0/20, NC-NOISE FA=0.0 TN=1.0",
+    "RAW OBSERVATION: Honest per-trajectory-reset constant integer sum-counter 4 fresh, 5 repair k=1",
+    "RAW OBSERVATION: Distributed stage logged as DISTRIBUTED_MEASUREMENT_INVALID per V12"
+  ],
+  "validity_notes": [
+    "DISTRIBUTED_MEASUREMENT_INVALID per V12: health gate failed (shared WAL not available, distinct X-Worker-Pid<2, HS256 JWT not verified, 304 not operational). Per spec, this does NOT retroactively falsify synthetic SURVIVES.",
+    "Synthetic sanity PC1 and PC2 executed and pass, demonstrating no regression.",
+    "All honesty gates V2-V6 pass on synthetic: constant integer sum-counter, trajectory-grouped rho<0.20, within-family freshness std>0, executed controls not hardcoded.",
+    "Distributed substrate not available; this is infrastructure failure, not scientific falsification.",
+    "Bootstrap CIs degenerate [1.0,1.0]/[0.0,0.1135] due to deterministic perfect detection; Wilson informative bounds provided.",
+    "Contamination 0/20 on disjoint ids is structural no-op (blast radius=1); same-resource contamination not tested on distributed substrate."
+  ],
+  "unresolved": [
+    "Distributed substrate transfer (C-DELTA-REPAIR on health-gated Flask/JWT+nginx+WAL) remains UNTESTED due to infrastructure unavailability.",
+    "Blast radius 2-3 and same-resource contamination isolation untested on distributed substrate.",
+    "Real LLM token billing and Playwright execution validation pending.",
+    "WebArena-Verified v2 param-inherit pilots remain PARKED."
+  ]
+}

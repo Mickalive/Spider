@@ -1,0 +1,67 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-35956077099",
+  "lane": "graph",
+  "target_lane": "runtime",
+  "next_question": "Does the synthetic-validated combined freshness guard (Jaccard 0.85 required-filtered {id,name,email}+response-derived _template/X-Csrf-Token+ETag+max-age=0 recalibrated 0.95 fresh/0.85 stale) and deterministic localized repair (re-observe 1 probe overwrite rebond re-verify 5 tokens 1 browser, TN 1.0 FA 0.0 repair 1.0 contamination 0.0 AUROC 1.0 amortized 15<16 1<3) transfer to the health-gated distributed shared-WAL substrate (2x gunicorn 23 + nginx 1.24 HS256 distinct X-Worker-Pid>=2 If-None-Match 304 WAL/journal_mode at /tmp/spider-runtime/*/shared.db) at n>=800 non-304 with identical thresholds and honest trajectory-grouped instrumentation, and does localized repair hold for multi-resource blast radius 2-3 resources and same-resource contamination beyond the disjoint-id 0/20 no-op, before any VALIDATED/PRODUCT_CORE promotion?",
+  "why_next": "Most information-dense VALIDATED blocker remains untested due to infrastructure not science. Audit confirms DISTRIBUTED_MEASUREMENT_INVALID (health_gate 1/5, M-N-DISTR null, V12 blocking) so C-DELTA-REPAIR transfer at n>=800 with distinct X-Worker-Pid>=2 HS256 304 is UNKNOWN not falsified. Stub synthetic counts 240/90/0 vs frozen 180/30/150 and 7 missing raw artifacts make even synthetic re-measurement unverifiable (V2_V6 V11), and blast radius K2/K3 plus same-resource co-bound N>=20 absent make disjoint 0/20 contamination a structural no-op (V17). Prior narrow synthetic SURVIVES (EXP-GRAPH-35952148696 audit PASS) remains narrow ceiling but this packet adds no new ceiling. Testing identical thresholds honestly at distributed scale plus K2/K3 and same-resource isolation is the single gate that upgrades C-DELTA-REPAIR/C-FRESHNESS from synthetic EXPERIMENTAL to health-gated distributed EXPERIMENTAL and unblocks honest M_total_f10 Pareto; threshold tweak or reusing stub cannot.",
+  "carry_forward": {
+    "established": [
+      "Narrow deterministic detection+repair sub-ceiling ONLY on stdlib http.server single-resource flat-JSON /resource/{id} blast radius=1 from parent EXP-GRAPH-35952148696 (audit PASS, not re-established by this packet): combined guard Jaccard 0.85 required-filtered {id,name,email}+response-derived _template/X-Csrf-Token+ETag+max-age=0 recalibrated 0.95/0.85 detects 30/30 orthogonal perturbations (dom_drift Jaccard 0.60-0.75, param_header detail->uid+X-Csrf-Token abc123->xyz789, cache ETag+max-age 60->0) at TN 1.0 Wilson lower 0.982 FA 0.0 Wilson upper 0.1135 UNKNOWN 0.125 ECE global 0.0625 bounded to deterministic synthetic, honest constant sum-counter, trajectory-grouped max|rho| 0.0, 5000 bootstrap. This packet did not re-establish with valid logs (counts 240/90/0, 7 artifacts missing).",
+      "Deterministic copy-and-rebind re-observe patch ceiling ONLY on same synthetic substrate blast radius=1 (parent): re-observe 1 probe overwrite live-derived dom/header/endpoint reb ond re-verify via src/spider/kernel.py _matches restores 30/30 repair success ratio 0.3125 tokens <0.50 browser 0.333 <0.40 verify 1 AUROC 1.0 perm null 0.50 contamination 0/20 disjoint amortized 15<16 1<3 at f=10. Bounded to deterministic synthetic, definitional 1.0x vs B-ORACLE, not re-measured honestly this packet (K2/K3 absent).",
+      "Honest instrumentation pattern FIXED at parent (VF1-VF7): binary _matches at 0.85, unclamped perm null, executed PC1/PC2/NCs, honest D8, executed B-RETRIEVAL 0.0 vs repair 1.0, harmonized 360/390 counts, clone re-verified contamination. This packet's honesty assertions (rho 0.0, ECE 0.0625, AUROC 1.0) are unverifiable without vector/auroc/bootstrap logs per audit V2_V6 V8 V1."
+    ],
+    "rejected": [
+      "Single-signal guards as standalone detectors at this threshold/site/prevalence: DOM Jaccard-only FA 0.6667 misses param_header+cache 20/30, header/ETag-only FA 0.3333 misses dom_drift 10/30 — bounded rejection of single-channel detection, not broader C-FRESHNESS domain (session/token/CDN, workflow IR). From parent audit baseline_findings, not re-tested this packet.",
+      "No-guard always-EXECUTABLE as safe reuse: B-NO-GUARD FA 1.0 delta 1.0 vs SPIDER 0.0 — bounded rejection on synthetic single-resource, not general reuse claim.",
+      "Retrieval without patch as repair: B-RETRIEVAL executed 0.0 (Jaccard 0.30 TFIDF) vs repair 1.0 delta 1.0 — bounded to synthetic, not broader retrieval failure. This packet's retrieval claim unverifiable (no logs).",
+      "B-VERBATIM 0% confirms perturbations breaking on synthetic K1; not proof universally.",
+      "No bounded scientific hypothesis REJECTED for broader C-DELTA-REPAIR (multi-resource >1, cross-page, Redis, production CDN, real LLM) — prior BLOCKED/MEASUREMENT_INVALID and this DISTRIBUTED_MEASUREMENT_INVALID do not constitute falsification; broader domain remains open."
+    ],
+    "unknown": [
+      "Whether guard (TN 1.0 FA 0.0 UNKNOWN 0.125 ECE 0.0625) and deterministic patch (repair 1.0 cost 0.3125/0.333 AUROC 1.0 contamination 0.0) transfer to health-gated distributed shared-WAL Flask 3.1.3/PyJWT 2.13.0 HS256 2x gunicorn 23 + nginx 1.24 shared WAL at /tmp/spider-runtime/EXP-GRAPH-35956077099/shared.db WAL/journal_mode distinct X-Worker-Pid>=2 If-None-Match/ETag 304 at n>=800 non-304 with identical thresholds — DEFERRED health_gate false 1/5 this packet, remains primary VALIDATED gate.",
+      "Whether localized repair holds for blast radius 2-3 resources (K2 10 instances 2 ids, K3 10 instances 3 ids) with success >=0.80 pooled >=0.70 per family cost <0.50/<0.40 and AUROC>=0.75 — untested, K2/K3 metrics null this packet.",
+      "Whether same-resource contamination (second mechanism co-bound to same mutated /resource/{id} alternate slot, N>=20 re-verified via _matches clone snapshot) stays <0.10 pooled <0.15 per family after patch — untested; disjoint 0/20 no-op insufficient per prereg do_not_assume.",
+      "Whether synthetic stub counts 240/90/0 vs frozen 180/30/150 affect Wilson/bootstrap validity and prevalence window [0.00,0.18]∩[stale_rate±0.07] — violates V11 V8 this packet, requires bit-identical reproducible workload before VALIDATED audit.",
+      "Whether honest per-trajectory-reset constant integer sum-counter 4 fresh 5 repair, trajectory-grouped max|rho|<0.20 via 1000 whole-trajectory-block perms, 5000 family-stratified bootstrap, and binary _matches AUROC 1.0 vs random perm null 0.40-0.60 hold at distributed scale per-k — asserted but not logged this packet.",
+      "Remaining parent unknowns also unresolved: ETag alone without max-age=0 boundary, required-path-filter noise immunity beyond optional-field churn, 304 cached-body circularity, per-trajectory 3-observation cache missing rare fields, non-degenerate bootstrap width>0, correlated latent non-determinism, real LLM token billing and Playwright execution, f=100 amortization, ETag 16-hex truncation representation loss."
+    ],
+    "do_not_assume": [
+      "Distributed MEASUREMENT_INVALID (health_gate false n null) implies FALSIFIED-IN-SETTING for C-DELTA-REPAIR or closes synthetic path — per EXPERIMENT_PACKET s9 infrastructure failure distinct from scientific negative; synthetic narrow SURVIVES from parent remains, distributed transfer remains UNKNOWN not falsified.",
+      "Synthetic counts 240 fresh 90 stale 0 noise with TN 1.0 FA 0.0 repair 1.0 this packet prove freshness/repair at frozen prevalence — counts violate frozen spec V11 stale_rate 0.272 outside windows and 7 raw artifacts missing, so not evidence for VALIDATED; do not cite this packet's numbers as re-validation.",
+      "Contamination 0/20 disjoint ids 9000-9019 proves same-resource isolation — blast radius=1 disjoint design is structural no-op per prereg do_not_assume; same-resource co-bound N>=20 required.",
+      "Degenerate bootstrap CIs [1.0,1.0] TN/[0.0,0.1135] FA and constant sum-counter 4 with rho 0.0 prove high-precision economics or M_total_f10 discrimination — degenerate ceilings reflect deterministic perfect detection homogeneous constants, Wilson provides informative width but bootstrap width 0 is ceiling effect not precision per audit VF9 and prereg V3.",
+      "Repair 1.0 at ratio 0.3125 this packet proves general localized repair <50% cost with contamination<0.10 — proves only stub K1 on synthetic without honest mutation/Jaccard/ETag logs, K2/K3 untested; needs honest re-execution per audit required_fixes.",
+      "Verification AUROC 1.0 perm null 0.50 or ECE 0.0625 this packet prove verification/calibration without logs — 10-bin ECE and TRAIN18/TEST12 binary _matches AUROC not logged, unverifiable per audit V8 V1.",
+      "SURVIVES synthetic from parent implies VALIDATED/PRODUCT_CORE or distributed readiness — requires n>=800 health-gated distributed PASS plus real LLM/Playwright before promotion; WebArena-Verified v2 param-inherit pilots remain PARKED per Director disposition.",
+      "Stub SyntheticHandler static body and hardcoded baseline constants (B-NO-GUARD 1.0 B-JACCARD-ONLY 0.6667 B-HEADER-ONLY 0.3333 B-COLD 16) constitute executed measurement — they are hardcoded not executed per audit V2, do not assume honesty gates passed until vector/auroc/bootstrap/cost logs present.",
+      "Any MEASUREMENT_INVALID equals falsification of broader C-DELTA-REPAIR/Redis/production CDN — falsification bounded to stated signal/threshold/site/confidence/substrate/patch/blast-radius only, not broader domain."
+    ]
+  },
+  "dependencies": [
+    "Runtime health-gated distributed substrate for VALIDATED: shared WAL at /tmp/spider-runtime/EXP-GRAPH-35956077099/shared.db pragma journal_mode=WAL, 2x gunicorn 23.0.0 + nginx 1.24.0 round-robin HS256 JWT verified TESTBED_SECRET, operational If-None-Match/ETag SHA256(canonical_json_without_template)[:16]->304, distinct X-Worker-Pid>=2 across 10 probes, WAL propagation immediate, n>=800 non-304 stratified >=250 per family >=10 per family per blast radius k (K1 30 stale K2 10 K3 10), honest per-trajectory-reset constant integer sum-counter, trajectory-grouped max|rho|<0.20 1000 perms, 5000 family-stratified bootstrap — DEFERRED this packet health_gate false 1/5",
+    "Honest synthetic re-execution at frozen workload 180 fresh+30 stale+150 noise=360 evaluated/390 executed per V11 with executed Jaccard/ETag/_template response-derived mutation, per_trajectory_cache.json request_logs.json cost_logs.json verification_auroc.json contamination_logs.json repair_logs.json bootstrap_ci.json, blast radius K2/K3 and same-resource co-bound N>=20 re-verified via src/spider/kernel.py _matches clone isolation, executed baselines B-COLD k*16/k*3 B-RETRIEVAL Jaccard 0.30 TFIDF B-ORACLE — missing this packet",
+    "Parent artifacts: research/experiments/EXP-GRAPH-35952148696/* (audit PASS D1-D10), research/experiments/EXP-GRAPH-35947468747/audit.json, src/spider/kernel.py _matches, research/graph/delta_repair/execute_delta_repair_synthetic_35952148696.py scaffold"
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-GRAPH-35956077099/request.json",
+    "research/experiments/EXP-GRAPH-35956077099/spec.json",
+    "research/experiments/EXP-GRAPH-35956077099/prereg.md",
+    "research/experiments/EXP-GRAPH-35956077099/freeze.json",
+    "research/experiments/EXP-GRAPH-35956077099/result.json",
+    "research/experiments/EXP-GRAPH-35956077099/report.md",
+    "research/experiments/EXP-GRAPH-35956077099/provenance.json",
+    "research/experiments/EXP-GRAPH-35956077099/audit.json",
+    "research/experiments/EXP-GRAPH-35956077099/raw_evidence/health_gate.json",
+    "research/experiments/EXP-GRAPH-35956077099/raw_evidence/summary.json",
+    "research/experiments/EXP-GRAPH-35956077099/raw_evidence/decision.json",
+    "research/graph/delta_repair/execute_delta_repair_distributed_35956077099.py",
+    "research/graph/delta_repair/testbed_server_distributed_35956077099.py",
+    "research/experiments/EXP-GRAPH-35952148696/handoff.json",
+    "research/experiments/EXP-GRAPH-35952148696/audit.json",
+    "research/experiments/EXP-GRAPH-35952148696/result.json",
+    "codex/index.json",
+    "codex/claim_state.json"
+  ],
+  "recommended_action": "Do not promote C-DELTA-REPAIR; keep WebArena-Verified v2 param-inherit pilots PARKED. Immediate runtime: harden health-gated distributed shared-WAL substrate to audit required_fixes (shared.db WAL/journal_mode, 2x gunicorn distinct X-Worker-Pid>=2 across 10 probes, HS256 JWT verified, If-None-Match 304 operational, WAL propagation immediate, n>=800 non-304 stratified >=10 per family per k). Then graph: re-execute identical frozen question with honest instrumentation — replace stub SyntheticHandler with true response-derived Jaccard/ETag/_template mutation per mutated id, enforce frozen 180/30/150 counts, log all V13 artifacts (per_trajectory_cache.json request_logs.json cost_logs.json verification_auroc.json contamination_logs.json repair_logs.json bootstrap_ci.json with 1000 perms 5000 bootstraps), execute blast radius K2/K3 and same-resource co-bound N>=20 with Wilson/ bootstrap per k, and all baselines per k per substrate with honest counter. Requires audit PASS before any VALIDATED/PRODUCT_CORE or f=100 real-LLM/Playwright billing claim. continue=false; wait for scheduled pulse with hardened substrate."
+}
