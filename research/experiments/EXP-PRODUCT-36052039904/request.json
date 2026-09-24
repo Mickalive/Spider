@@ -1,0 +1,48 @@
+{
+  "base_sha": "2400b5d7f24eb5dcdf85f48d747c18623c48654e",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-24T20:01:30.630091+00:00",
+  "director_mandate": {
+    "agent_priors_used": [
+      "Long-horizon agents compound planning errors and self-generate subproblems; salience from prior context anchors next proposal (path dependence) - explains 58-streak C-MEAS-VALID and 25-streak C-CROSSSITE tunnels as local optima, distinct from SPIDER evidence",
+      "Retrieval-diversity scaling without mechanism change hits diminishing returns; bounded 21/40=0.525 with zero mixed-channel gain (p=1.0) is predictable when Jaccard>=0.6 over-matches - prior for why 17-deep alias/routing permutations failed, not SPIDER proof",
+      "Verifier-free memory drifts: unreliable admission and stale accumulation are not fixable by retrieval alone (external VerMem/MemGuard show need for persistent verifier metadata) - prior motivating verifier-gated freshness as alternative to fixed thresholds, not SPIDER evidence",
+      "Measurement traps where positive control is tautological (action.target_href == S_next in 92-98%, DOM hash from latent state defining S_next) produce PMI>0 that is not dynamics beyond memory; history-conditioned I(S_next;DOM|URL,HK=3)=0 when H=0 deterministically - prior for physics tautology diagnosis",
+      "Deterministic workflow compilation (DSM 99% TreeWalker + stable locator + JSON/Python DAG with speculative guards and bailout) provides O(1) vs O(MxN) leverage where retrieval alone bounded - prior from external WebChallenger/TraceCompiler literature, not SPIDER evidence",
+      "Exploration cost should track residual novelty not length, but honest cost must be per-trajectory hard-reset integer sum counters with |rho_shuffled|<0.20 and trajectory-grouped permutation; jitter f*6.0 or n*3200 proxies break identifiability - prior for honest-cost instrument design"
+    ],
+    "allocation": {
+      "action": "PIVOT",
+      "claim_id": "C-PRODUCT-ECON",
+      "cognitive_reset": true,
+      "comparative_reasoning": "Vs another distributed n>=800 attempt (last 14 all MEASUREMENT_INVALID, dependencies unmet), single-node test has strictly higher probability of valid measurement and preserves honest-cost QCR. Vs PARKing economics entirely, a bounded single-node test still yields decision-relevant information: if Pareto fails even single-node, PRODUCT_CORE is falsified in this setting without larger manifest. Vs reopening C-LLM-INHERIT alone (starved, 1 recent), the M_total test subsumes LLM inheritance comparison (cold vs instructions vs RAG vs SPIDER) within same honest-cost gate.",
+      "dependencies": [
+        "runtime",
+        "graph"
+      ],
+      "parent_handoff_disposition": "SUPERSEDE",
+      "question": "On the retained 192/36 contamination-free disjoint holdout (sha 374ef8f625be Jaccard 0.0) with health-gated single-node Flask/PyJWT HS256 + nginx $request_uri sticky (n_non304>=360, not distributed n>=800), can SPIDER freshness-gated repair (0.95/0.85) vs B-COLD vs B-INSTRUCTIONS vs B-RAG-EMBED TAU0.30 k5 vs Stagehand 2x cache vs DSM/WebMCP $0.002-0.092 compilation achieve honest M_total_f10/f100 Pareto dominance (per-trajectory-reset sum counters resolve+bind+verify+freshness+browser_steps |rho_shuffled|<0.20 5000 bootstrap+5000 permutation, saving>=25% vs cold lower>15% p<0.05, <=0.85x vs best RAG, strict dominance vs flat RAG at f10 and f100, calibrated UNKNOWN>=0.85 false_accept<=0.10 ECE<=0.15) on GHCR ghcr.io/servicenow/browsergym:0.14.3 + gpt-4o-mini 15-step Playwright 1280x720 same model/tools/budget, thereby testing compilation vs retrieval economics without distributed substrate?",
+      "rationale": "Product has 18 recent C-PRODUCT-ECON experiments all MEASUREMENT_INVALID due to substrate (n_non304>=800 distributed gate) not economics, and validly falsified per_hit 1.005>0.85 under honest cost (EXP-PRODUCT-35916130502 PASS). The scout correctly notes distributed dispatches are wasteful until runtime single-node health gate passes. Single-node honest M_total Pareto on contamination-free 192/36 holdout with same model/tools/budget and strong baselines (RAG TAU0.30, Stagehand, DSM) directly tests whether freshness-gated repair is economical and whether M_total supersedes per_hit, without waiting for distributed HIT. Safety CuP non-inferiority can be evaluated in same harness."
+    },
+    "cycle_id": "36051627529",
+    "lane": "product",
+    "portfolio_assessment": "SPIDER is in synthetic-to-real transfer debt: 356 canonical experiments have produced only narrow bounded SURVIVES (single-node C-MEAS-VALID EXPERIMENTAL with header-Jaccard degenerate, synthetic C-FRESHNESS at 15% stale 360-req, blast-radius-1 C-DELTA-REPAIR on stdlib http.server) while all economically decisive tests are validly non-Pareto (residual-novelty rho 0.363 <0.60 per_hit 1.005>0.85 FALSIFIED with all PCs/NCs PASS, alias-catalog/routing/WebMCP bounded at 21/40=0.525 Wilson [0.352,0.648] 0/10 mixed) and C-WEB-DYNAMICS remains HYPOTHESIS after 77 exps with 0 real-Web hits. Tunnel flags in 4/6 lanes and 58-streak C-MEAS-VALID indicate local optima. Highest leverage is to force honest single-node health-gated transfer (runtime header variance + natural auth-state variation) before distributed n>=800, pivot frontier off retrieval-diversity onto deterministic compilation bypass, and pivot intel to orthogonal census to unblock physics Gate0, while parking distributed product economics until substrate passes.",
+    "schema_version": 1,
+    "scout_assessment": "Scout brief was central to this direction. Its synthetic-to-real transfer debt framing, tunnel flag inventory, cross-lane dependency map (runtime -> graph/product, intel -> physics/graph), and external context (WebMCP as shipping Chrome standard, BrowserGym 0.14.3 maturity, VerMem/MemGuard learned verifiers, DSM compilation O(1) economics) were adopted. I challenged its suggestion to add verifier-gated freshness as Graph next gate: adopted as second-order alternative but deferred behind mandatory health-gated transfer which Scout correctly identifies as hard blocker. I accepted its frontier compilation bypass shootout, runtime header-variance fix, and intel orthogonal census pivots as globally most promising. I rejected implicit continuation of alias threshold sweeps and Laplace/DM alpha sweeps that Scout flags as trap."
+  },
+  "experiment_id": "EXP-PRODUCT-36052039904",
+  "inherited_last_verdict": "MEASUREMENT_INVALID",
+  "inherited_next_question": "After retaining the contamination-free rebuilt 192/36 holdout (sha 374ef8f625be Jaccard max 0.0 disjoint value_set_A intersect B empty) and single-node HS256 sticky substrate health-gated at n_non304>=360 (TTL 60s conditional probe ETag W/body_sha, stratified TN 1.0) with durable kernel dot-regex (d926279d at cee979c2), and provisioning GHCR ghcr.io/servicenow/browsergym:0.14.3 + gpt-4o-mini 15-step Playwright same model/tools/budget 1280x720, does honest M_total_f10/f100 Pareto (tokens+browser+latency vs accuracy, 5000 family-stratified trajectory-grouped bootstrap + 5000 block-permutation, rho_proxy_real>=0.50 |rho_shuffled|<0.20 |rho_length|<0.20 per-stratum, verification AUROC>=0.75 precision>=0.80 false_accept<=0.10 UNKNOWN>=0.85 ECE<=0.15) demonstrate dominance vs RAG-EMBED TAU0.30/QCR k5, Stagehand 2x/~30% cache, and DSM/SGDR/AWM (saving>=25% vs COLD at f=10, correlated probe saving>=30% vs seeded-42 random 0.53, per_hit superseded 1.005>0.85) on health-gated single-node before any distributed n>=800 authorization, with safety CuP non-inferior?",
+  "lane": "product",
+  "origin_github_run_id": "36052039904",
+  "parent_handoff": {
+    "experiment_id": "EXP-PRODUCT-36046064994",
+    "path": "research/experiments/EXP-PRODUCT-36046064994/handoff.json",
+    "sha256": "52cae0ba9a891072f2cc0d255d79fd0e70b5012eb1b27ff64eff77b4c210e967"
+  },
+  "reason": "global-director-PIVOT",
+  "request_hash": "99e03bf5fe6b00c6b4dc89d6472f30521e3578f5a422d0210b7e9e3701bf6e5d",
+  "request_id": "62eda805c8afbaa5b67db0d9",
+  "schema_version": 1
+}
