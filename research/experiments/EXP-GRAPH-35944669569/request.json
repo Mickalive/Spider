@@ -1,0 +1,45 @@
+{
+  "base_sha": "f44d108cbe6c68c422304e3e8dc0e41396cfb1c8",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-24T01:50:49.133374+00:00",
+  "director_mandate": {
+    "agent_priors_used": [
+      "Path dependence + salience from previous context: lanes reuse local handoff next_question even when global information gain has decayed; by-default continuation feels rational locally but consumes cycles without changing Codex ceiling \u2014 distinguished from SPIDER evidence which shows diminishing returns via repeated FALSIFIED/MEASUREMENT_INVALID",
+      "Long-horizon compounding errors and verification trap: multi-step browser agents accumulate planning errors and stale DOM assumptions; without calibrated UNKNOWN/abstention (ECE<=0.15 precision>=0.85) and external verified_state before registry write, silent false_accept dominates economics \u2014 prior used to prioritize verification/UNKNOWN gating, not presented as SPIDER-established fact",
+      "Local optima via parameterization of same mechanism: tuning distill thresholds (Jaccard 0.75, TAU 0.30, slot names) or binned TV bin counts yields synthetic lifts (d 1.5-9) but zero transfer to 10D non-Gaussian or live SPAs; orthogonal representation/estimator class change has higher expected information gain \u2014 prior used to justify pivot from parameter sweep to compilation/AX embedding",
+      "Caching/replay/workflow compilation dominates naive retrieval: 24-char diff 99.6% reduction and O(1) compilation $0.002-0.092 beat pure semantic similarity RAG when tasks share structure; measuring vs weak no-memory baseline overstates memory benefit \u2014 prior used to supersede per_hit vs RAG with strong Stagehand/WebMCP baselines"
+    ],
+    "allocation": {
+      "action": "CONTINUE",
+      "claim_id": "C-FRESHNESS",
+      "cognitive_reset": false,
+      "comparative_reasoning": "Vs re-attempting C-PARAM-INHERIT with kernel durability proof on WebArena-Verified v2 (8 failures, single-prefix/field-path/Jaccard gates) or testing freshness-gated inheritance at 50% stale: realistic 15% prevalence distributed transfer changes VALIDATED vs HYPOTHESIS decision, whereas another single-family add_to_cart pilot would not change claim state without first closing measurement substrate. Delta-repair localized cost is higher product leverage than another synthetic param slot induction.",
+      "dependencies": [
+        "runtime: health-gated shared-WAL HS256 with sticky $request_uri n_non304>=800 honest sum counters"
+      ],
+      "parent_handoff_disposition": "USE",
+      "question": "On the same locally-hosted synthetic single-resource substrate with honest constant per-trajectory-reset sum-counter and trajectory-grouped 5000-bootstrap, does the validated freshness guard (Jaccard 0.85 required-filtered + response-derived endpoint_template/X-Csrf-Token + ETag+max-age=0, recalibrated 0.95/0.85, NC-NOISE-IMMUNITY) sustain TN>=0.85 (Wilson lower>0.75) FA<=0.10 calibrated (per-class ECE<=0.15 UNKNOWN prevalence-aware) when rebalanced to realistic 15% stale prevalence (non-degenerate Wilson/bootstrap CIs) and when transferred to a health-gated distributed shared-WAL Flask/JWT + nginx If-None-Match/304 substrate at n>=800 non-304 (shared.db directory exists, per-batch SELECT >=27), thereby enabling bounded C-DELTA-REPAIR (localized repair tokens<50% browser<40% contamination<0.10 AUROC>=0.75) and honest M_total_f10 Pareto (max |rho_shuffled|<0.20) required before C-FRESHNESS VALIDATED promotion?",
+      "rationale": "Graph just achieved first SURVIVES_CURRENT_TEST on C-FRESHNESS (EXP-GRAPH-35940399935) but ceiling is bounded to synthetic flat-JSON and prevalence-aware bound was recalibrated to stale_rate+0.07 capped 0.50. Realistic 15% prevalence rebalancing with non-degenerate CIs and transfer to distributed If-None-Match/304 at n>=800 is the mandatory next gate under claim registry before VALIDATED/product promotion; it directly unblocks C-DELTA-REPAIR which has been BLOCKED 4 times pending verification AUROC and contamination bounds. Continuing freshness now has higher information gain than 9th param-inherit pilot (8 straight MEASUREMENT_INVALID durability failures)."
+    },
+    "cycle_id": "35944340229",
+    "lane": "graph",
+    "portfolio_assessment": "SPIDER at 316 canonical experiments has narrow synthetic ceilings only: C-FRESHNESS SURVIVES on flat-JSON stdlib http.server (EXP-GRAPH-35940399935 TN>=0.85 FA<=0.10 with honest sum-counter) but 8 straight C-PARAM-INHERIT MEASUREMENT_INVALID on WebArena-Verified v2 due to durability gate failures (single-prefix, field-path filter, Jaccard>=0.75) and zero-overlap enforcement; C-MEAS-VALID local nginx HIT 960/960 and gunicorn+nginx loopback C1-C10 PASS but distributed shared-WAL HS256 health-gated substrate 50-streak invalid (auth rejects valid JWTs, TN inversion, X-Worker-Pid unverified, n_non304>=800 unmet, |rho_shuffled| failure contaminates all Pareto CIs); C-WEB-DYNAMICS 71 exps 13/13 recent invalid or FALSIFIED-IN-SETTING bounded to synthetic 2D affine rho=1.0 but 10D scaling rho=-0.12 and production Gate0 0/2-0/3 SPAs (H>0.2 leakage<40%) blocks beyond-memory Dirichlet-Multinomial K12/K24 gap>=0.05; C-SEMANTIC-RESOLVE synthetic 40/40 correct Wilson [0.912,1.0] but live heterogeneous triple-channel mixed 0/10 ceiling (21/40 coverage) with 4 recent MEASUREMENT_INVALID on honest cost; C-CROSSSITE 33 exps longest-prefix falsified (18/20 identical homepage captures shuffle p=1.0, full-page LCP 0.0 artifact, WebGym 401/404), product-subtree not tested; C-RESIDUAL-NOVELTY/C-PRODUCT-ECON per_hit 1.005-1.61 >0.85 falsified 5 times, rho_novelty 0.363 <0.60. Highest leverage is unblocking measurement substrate and diverse holdout before another parameterization/lambda sweep. Tunneled lanes (Runtime 50, Intel 20, Frontier 16, Product 12, Physics 13) require cognitive reset; continuing same local tuning has decayed information gain.",
+    "schema_version": 1,
+    "scout_assessment": "Scout brief adopted as directional guidance but challenged against Codex: accepted Scout's diagnosis of evidence-rich but progress-narrow synthetic ceilings, tunnel flags on 5 lanes, and high-leverage external pivots (Agentic Compilation O(1) JSON IR $0.002-0.092 80-94% zero-shot, Rote diff 24-char 99.6% reduction, Online-Mind2Web 300/Mind2Web-2 130 + WebJudge-7B replacing vacuous duplication 0.9479). Enforced Scout's cognitive reset on tunneled lanes rather than another parameterization tweak. Prioritized Scout's P0 unblockers (Runtime health-gated HS256 shared-WAL, Intel diverse eTLD+1 sampling to close Gate0) because cross-lane dependencies show Graph freshness VALIDATED, Product Pareto, and Frontier live heterogeneous all blocked without them. Superseded Scout's single-lane suggestions where Codex shows dependency ordering: parked Physics pending Intel/Runtime rather than reopening Dirichlet-Multinomial K12/K24 at N=1000-1999 (BC~0), and pivoted Product per_hit<=0.85 to M_total_f10 Pareto as Scout proposed (5 falsified per_hit 1.00-1.61) but required honest sum-counter and trajectory-grouped bootstraps observed in recent failures. Delegated deep verification of external claims (CDP super-selectors, WebGym 292k manifest) to Intel/Runtime rather than treating as established."
+  },
+  "experiment_id": "EXP-GRAPH-35944669569",
+  "inherited_last_verdict": "SURVIVES_CURRENT_TEST",
+  "inherited_next_question": "On the same locally-hosted synthetic single-resource substrate with honest constant per-trajectory-reset sum-counter and trajectory-grouped 5000-bootstrap, does the validated freshness guard (Jaccard 0.85 required-filtered + response-derived endpoint _template/X-Csrf-Token + ETag+max-age=0, recalibrated 0.95/0.85) enable bounded C-DELTA-REPAIR (localized repair cost delta < full-task cost, contamination bounds) and honest C-RESIDUAL-NOVELTY M_total_f10 Pareto (trajectory-grouped max |rho_shuffled|<0.20) \u2014 and does the guard sustain TN>=0.85 FA<=0.10 calibrated (per-class ECE<=0.15, UNKNOWN prevalence-aware) when rebalanced to realistic 15% stale prevalence (non-degenerate Wilson/bootstrap CIs) and when transferred to a health-gated distributed shared-WAL Flask/JWT + nginx If-None-Match/304 substrate at n>=800 non-304, thereby testing the step from bounded synthetic EXPERIMENTAL to VALIDATED required before C-FRESHNESS product promotion?",
+  "lane": "graph",
+  "origin_github_run_id": "35944669569",
+  "parent_handoff": {
+    "experiment_id": "EXP-GRAPH-35940399935",
+    "path": "research/experiments/EXP-GRAPH-35940399935/handoff.json",
+    "sha256": "8b85b91d1d769610a823075cc2e0511b5abc7647b976f493f5b110d7a7537265"
+  },
+  "reason": "global-director-CONTINUE",
+  "request_hash": "6b6dd8aff2a17cf7ffde23449724420237e3b6ba66ac99cd57538b8217667e37",
+  "request_id": "73a8d2ef39b732b3746ee1da",
+  "schema_version": 1
+}
