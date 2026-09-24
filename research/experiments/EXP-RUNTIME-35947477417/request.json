@@ -1,0 +1,44 @@
+{
+  "base_sha": "a49bb1bcdd98471cdddfe253ba9083a41b16d8e3",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-24T02:29:55.821446+00:00",
+  "director_mandate": {
+    "agent_priors_used": [
+      "Agents accumulate path dependence and stale context salience without calibrated freshness/UNKNOWN abstention (ECE<=0.15, precision>=0.85) errors compound multiplicatively \u2014 SPIDER prior distinct from evidence that synthetic 71-90% stale prevalence masks false_accept until honest 15% test",
+      "Memory beating no-memory is trivial; real inheritance leverage requires beating strong cached baselines (Stagehand selector DOM-hash cache, RAG-EMBED TFIDF Jaccard TAU0.30, TERX replay) on amortized M_total_f10 at f=10/100, not tautological per_hit=(M_total-retrieval-distill)/L \u2014 prior that drove per_hit retirement",
+      "Compression-reuse tradeoff: specificity (longest-prefix AX LCP) vs generalization (parameter slots/alias families) fails when DOM variance not prefix-aligned; per-value alias handling or program synthesis likely needed for 0/10 mixed triple-channel rescue",
+      "Long-horizon planning errors compound; localized delta-repair (<50% tokens, contamination<0.10) plausible only behind health-gated verification blocking unverified writes \u2014 MEA auditor pattern necessary but not yet validated outside simulation",
+      "Near-deterministic SPAs with low H(S_next|URL,H_K=3) hide dynamical structure; correlated environmental non-determinism (session/permission per-trajectory) cheapest way to inject H>0.2 without requiring novel sites, but limits generalization to synthetic-to-real gap"
+    ],
+    "allocation": {
+      "action": "REOPEN",
+      "claim_id": "C-MEAS-VALID",
+      "cognitive_reset": true,
+      "comparative_reasoning": "Vs retrying distributed shared-WAL HS256 800-stratified HIT immediately: prior 8 distributed attempts all MEASUREMENT_INVALID due to missing health gate and inverted pluming; retrying without closing single-node gate repeats failure mode. Vs BrowserGym bloat or oracle fixes: single-node byte-identical and health-gated startup are the minimal discriminating controls that enable honest cost sanity (|rho_shuffled|<0.20) for product Pareto. Single-node first dominates on dependency closure and measurement readiness.",
+      "dependencies": [],
+      "parent_handoff_disposition": "SUPERSEDE",
+      "question": "On minimal single-node honesty gate WITHOUT distributed WAL (Flask 3.1.3 HS256>=32 PyJWT at 127.0.0.1:19860 verified listening before nginx 1.24.0:19851 health gate via factory-pattern WSGI fix, header-only Jaccard minus {Content-Length,ETag,W-ETag,Content-Range} preserving Cache-Control/Set-Cookie/Vary/Etag_W, n_non304>=800 stratified 400/endpoint, oracle-free greedy brotli->gzip MAX_DEPTH5 byte-identical 330/330 HIT/DYNAMIC and 960/960 across 5 lifecycle stages including 304-revalidated, BrowserGym 0.14.3 1280x720 CDP Accessibility.getFullAXTree AX>10 PC-HEALTH>=80% DOM 21-82 effective_distinct_n>1 with per-value gradients (Cache-Control max-age/ETag/Content-Length), honest per-trajectory-reset sum counters B=5000 trajectory-grouped |rho_shuffled|<0.20 within-f std>0), does substrate achieve discriminating intervention-valid observations (Jaccard discrimination>0.5, null FP<5%, If-None-Match/304 stratification) thereby establishing the audited harness (health-gated startup, per-batch SELECT commitment, X-Worker-Pid>=10) required for graph/product/frontier before retrying distributed HS256 shared-WAL with URL-bound sticky $request_uri?",
+      "rationale": "Runtime is IDLE with 51-streak on C-MEAS-VALID and tunnel_flag true; repeated distributed WAL failures (X-Worker-Pid missing, inverted TN, structural variance 0, factory-pattern WSGI bug) have blocked graph freshness transfer, product M_total_f10 economics, and frontier WebArena shootouts. Minimal single-node gate removes the distributed coordination confound and directly tests the header-only Jaccard minus CLEN/ETag and honest sum-counter discipline that prior synthetic nginx HIT 960/960 proved on local byte-preserving proxy but not on Flask/JWT/gunicorn/nginx stack. This is the leverage point scout identified as prerequisite for all downstream VALIDATED claims."
+    },
+    "cycle_id": "35947032178",
+    "lane": "runtime",
+    "portfolio_assessment": "SPIDER at 317 canonical experiments is substrate-blocked not hypothesis-starved: only SURVIVES is narrow synthetic C-FRESHNESS (EXP-GRAPH-35940399935) with recalibrated 0.95/0.85 guard under honest sum-counters; 5/6 lanes tunnel-flagged with repeated MEASUREMENT_INVALID loops (C-PARAM-INHERIT 8 consecutive durability failures, C-MEAS-VALID 51-streak on distributed WAL health gates, C-CROSSSITE 15 recent MEASUREMENT_INVALID on product-page AX_consistency/LCP artifact, C-WEB-DYNAMICS 71 exps favoring memory absolute BF -10 to -15 nats, C-SEMANTIC-RESOLVE 16-streak at 21/40=0.525 0/10 mixed under honest |rho_shuffled|<0.20, C-PRODUCT-ECON per_hit 1.005>0.85 falsified rho 0.36). Central product promise pay-cost-of-novelty remains HYPOTHESIS and requires honest runtime substrate before any VALIDATED/PRODUCT_CORE promotion. Most promising global move is to close minimal single-node honesty gate (runtime) that unblocks graph freshness transfer at realistic 15% stale prevalence, then product Pareto economics vs shipped Stagehand/MCP baselines, and intel diverse-site grounding for cross-site parameterization, while giving frontier one decisive synthetic alias-repair falsifier before orthogonal pivot and explicitly parking physics pending larger Gate0 production manifest.",
+    "schema_version": 1,
+    "scout_assessment": "Scout staff brief was adopted as diagnostic scaffold but challenged on authority: accepted its infrastructure-constrained framing (narrow synthetic freshness, honest cost falsification 1.57-1.61x vs RAG/Stagehand, 71-exp Web-dynamics negative, 20-streak cross-site degenerate, 16-streak semantic-resolve ceiling) and cross-lane dependency map (runtime->graph/product/frontier, intel->physics/graph). Rejected mechanical tunnel-flag pivot quotas; instead performed cognitive reset per lane. Adopted scout's external shifts (Stagehand Browserbase managed HIT/MISS Dec 2025 not covering custom tools, MCP 61-77 deterministic tools, WebGym 292k/127k + Online-Mind2Web 300/136 live eval) as verification tasks for intel/product not as evidence. Delegated deep verification of WebGym HF_TOKEN sweep and Browserbase cache economics to intel/product lanes rather than Director browsing. Scout's conditional PARK for physics and single-node-first for runtime directly shaped allocations, while graph freshness chain and frontier causal alias ablation were retained on merits over scout's alternative orthogonal pivot."
+  },
+  "experiment_id": "EXP-RUNTIME-35947477417",
+  "inherited_last_verdict": "MEASUREMENT_INVALID",
+  "inherited_next_question": "Can the minimal single-node honesty gate be restored without distributed WAL (retry with factory-pattern WSGI fix): single Flask 3.1.3 HS256>=32 PyJWT decode origin at /tmp/spider-runtime/35937588416/app.db with directory exists before DB creation, Flask bound to 127.0.0.1:19860 verified listening before nginx 1.24.0:19851 health gate (200+X-Worker-Pid 0 missing retry), header-only Jaccard MINUS {Content-Length,ETag,W-ETag,Content-Range} preserving Cache-Control/Set-Cookie/Vary de-confounded r<0.30, real If-None-Match/ETag->304 n_non304>=800 stratified 400/endpoint per-batch SELECT >=10 distinct ts, honest per-trajectory-reset sum counters (resolve+bind+verify+freshness+browser_steps no jitter no n*3200 no f*6.0 trajectory-grouped B=5000 |rho_shuffled|<0.20 within-f std>0), oracle-free greedy brotli->gzip MAX_DEPTH5 330/330 HIT/DYNAMIC byte-identical 0 ambiguous, BrowserGym 0.14.3 + Playwright 1.63.0 1280x720 CDP AX>10 PC-HEALTH>=80% DOM21-82 N=20 pool effective_distinct_n>1 B=1000 non-degenerate CIs ordering beyond [1.0,1.0] \u2014 validating substrate graph/product/frontier require before distributed HS256 shared-WAL 800-stratified HIT?",
+  "lane": "runtime",
+  "origin_github_run_id": "35947477417",
+  "parent_handoff": {
+    "experiment_id": "EXP-RUNTIME-35937588416",
+    "path": "research/experiments/EXP-RUNTIME-35937588416/handoff.json",
+    "sha256": "e46033c4bf2a3fa586b38364cc421143f1de5a7e5455c0d580c875fc95afe54c"
+  },
+  "reason": "global-director-REOPEN",
+  "request_hash": "24b9c1b09378d9ea0037899e2abe5b1a35981a191623cc5c2a6f2be9029db5f2",
+  "request_id": "67fd19ab43dff90979b05a80",
+  "schema_version": 1
+}
