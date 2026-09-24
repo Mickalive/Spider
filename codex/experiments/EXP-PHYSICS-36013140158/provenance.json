@@ -1,0 +1,142 @@
+{
+  "experiment_id": "EXP-PHYSICS-36013140158",
+  "lane": "physics",
+  "request_hash": "b2fad57ec28cd91d12f78baaf33ed847149bb3394d9929195007e757e36e540e",
+  "spec_hash": "05a4c29c50d3f0e411e2b35e242b7bb820b74820c47d42acaf59b2e99a942895",
+  "prereg_hash": "07eebfff668ba8ee039400968967fbb7129d0a3f2958002c94759f510409d4ec",
+  "freeze_hash": {
+    "experiment_id": "EXP-PHYSICS-36013140158",
+    "frozen_at": "2026-09-24T14:34:39.021748+00:00",
+    "hashes": {
+      "prereg.md": "07eebfff668ba8ee039400968967fbb7129d0a3f2958002c94759f510409d4ec",
+      "request.json": "b2fad57ec28cd91d12f78baaf33ed847149bb3394d9929195007e757e36e540e",
+      "spec.json": "05a4c29c50d3f0e411e2b35e242b7bb820b74820c47d42acaf59b2e99a942895"
+    },
+    "schema_version": 1
+  },
+  "pre_execute_sha": "{\n  \"experiment_id\": \"EXP-PHYSICS-36013140158\",\n  \"github_run_id\": \"36013140158\",\n  \"pre_execute_sha\": \"a8b6ca8cc4e33b3fd2b1cd194df602ee453fd676\",\n  \"recorded_at\": \"2026-09-24T14:34:59.596487+00:00\",\n  \"schema_version\": 1\n}\n",
+  "execution_sha": "211f5ef1619e294e71a81869dea080b97b8cdbf8a1d174f381bb8a5d235e8d50",
+  "code_paths": [
+    "research/physics/execute_36013140158.py",
+    "research/physics/run_experiment.py"
+  ],
+  "environment": {
+    "python_version": "3.12.14 (main, Aug 13 2026, 02:47:42) [GCC 13.3.0]",
+    "numpy_version": "2.5.3",
+    "scipy_version": "1.18.1",
+    "platform": "linux",
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "seed": 42,
+    "playwright_version": "1.44 relaxed per audit",
+    "browsergym_version": "0.14.3",
+    "agentlab_version": "0.4.2"
+  },
+  "data_hashes": {
+    "research/experiments/EXP-PHYSICS-36013140158/raw_prototypes.json": "9573ebf17b93e7186c7a00f182f37117d800e932dfb87ef771c097488e9f4ee1",
+    "research/experiments/EXP-PHYSICS-36013140158/raw_transitions_webshop.json": "1d96d29c7076bfff2e12276c130baf7fb819cf5251e4e9ce6eec15c6ef5e86e6",
+    "research/experiments/EXP-PHYSICS-36013140158/raw_transitions_todomvc.json": "75116ff2c8df5d7a6f23ef421dd6af8bd61ab3bc5477c582b19137a2210a69f4",
+    "research/experiments/EXP-PHYSICS-36013140158/raw_transitions_synthetic.json": "2cfc6406b4286d9cd99a84e85b907e90ddabb08822691dad855e18bf3acc57e5",
+    "research/experiments/EXP-PHYSICS-36013140158/raw_transitions_independent.json": "efff9cdf53ee49f424646eddf8bd856ab914394d60c6a6b8a7b52ceccb66ff47",
+    "research/experiments/EXP-PHYSICS-36013140158/raw_transitions_iid.json": "03bd88435fe812af3792366a0b0a392e30cebba322664e251dc7ec967d3931bd",
+    "research/experiments/EXP-PHYSICS-36013140158/pip_attempt.log": "e98c4de7c7ba469b739d78931f9c5c324477cabddf3833e720e262b66a398518",
+    "research/experiments/EXP-PHYSICS-36013140158/raw_results.json": "b848ede17716e1a6539f51175273d00ecf4f8f7cd36a76e2470c11d58642c4a0",
+    "research/physics/execute_36013140158.py": "211f5ef1619e294e71a81869dea080b97b8cdbf8a1d174f381bb8a5d235e8d50",
+    "research/experiments/EXP-PHYSICS-36013140158/spec.json": "05a4c29c50d3f0e411e2b35e242b7bb820b74820c47d42acaf59b2e99a942895",
+    "research/experiments/EXP-PHYSICS-36013140158/prereg.md": "07eebfff668ba8ee039400968967fbb7129d0a3f2958002c94759f510409d4ec",
+    "research/experiments/EXP-PHYSICS-36013140158/freeze.json": "0e592df1f88f2cbecb2ab252f198c671c71e638d94470af7a0864148b49fdb22",
+    "research/experiments/EXP-PHYSICS-36013140158/request.json": "b2fad57ec28cd91d12f78baaf33ed847149bb3394d9929195007e757e36e540e",
+    "research/experiments/EXP-PHYSICS-36013140158/overlap_verification.json": "caa558637e3f4a8b61939effa3342da06dca04a283af2e7c2fbfded5e379fac6"
+  },
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-PHYSICS-36013140158/raw_prototypes.json",
+      "sha256": "9573ebf17b93e7186c7a00f182f37117d800e932dfb87ef771c097488e9f4ee1",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-36013140158/raw_transitions_webshop.json",
+      "sha256": "1d96d29c7076bfff2e12276c130baf7fb819cf5251e4e9ce6eec15c6ef5e86e6",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-36013140158/raw_transitions_todomvc.json",
+      "sha256": "75116ff2c8df5d7a6f23ef421dd6af8bd61ab3bc5477c582b19137a2210a69f4",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-36013140158/raw_transitions_synthetic.json",
+      "sha256": "2cfc6406b4286d9cd99a84e85b907e90ddabb08822691dad855e18bf3acc57e5",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-36013140158/raw_transitions_independent.json",
+      "sha256": "efff9cdf53ee49f424646eddf8bd856ab914394d60c6a6b8a7b52ceccb66ff47",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-36013140158/raw_transitions_iid.json",
+      "sha256": "03bd88435fe812af3792366a0b0a392e30cebba322664e251dc7ec967d3931bd",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-36013140158/pip_attempt.log",
+      "sha256": "e98c4de7c7ba469b739d78931f9c5c324477cabddf3833e720e262b66a398518",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-36013140158/raw_results.json",
+      "sha256": "b848ede17716e1a6539f51175273d00ecf4f8f7cd36a76e2470c11d58642c4a0",
+      "role": "derived"
+    },
+    {
+      "path": "research/physics/execute_36013140158.py",
+      "sha256": "211f5ef1619e294e71a81869dea080b97b8cdbf8a1d174f381bb8a5d235e8d50",
+      "role": "code"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-36013140158/spec.json",
+      "sha256": "05a4c29c50d3f0e411e2b35e242b7bb820b74820c47d42acaf59b2e99a942895",
+      "role": "fixture"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-36013140158/prereg.md",
+      "sha256": "07eebfff668ba8ee039400968967fbb7129d0a3f2958002c94759f510409d4ec",
+      "role": "fixture"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-36013140158/freeze.json",
+      "sha256": "0e592df1f88f2cbecb2ab252f198c671c71e638d94470af7a0864148b49fdb22",
+      "role": "fixture"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-36013140158/request.json",
+      "sha256": "b2fad57ec28cd91d12f78baaf33ed847149bb3394d9929195007e757e36e540e",
+      "role": "fixture"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-36013140158/overlap_verification.json",
+      "sha256": "caa558637e3f4a8b61939effa3342da06dca04a283af2e7c2fbfded5e379fac6",
+      "role": "derived"
+    }
+  ],
+  "pip_attempt_log": "Collecting browsergym-core==0.14.3\n  Using cached browsergym_core-0.14.3-py3-none-any.whl.metadata (1.2 kB)\nCollecting agentlab==0.4.2\n  Using cached agentlab-0.4.2-py3-none-any.whl.metadata (18 kB)\nCollecting playwright==1.44\n  Using cached playwright-1.44.0-py3-none-manylinux1_x86_64.whl.metadata (3.5 kB)\nCollecting beautifulsoup4>=4.12 (from browsergym-core==0.14.3)\n  Using cached beautifulsoup4-4.15.0-py3-none-any.whl.metadata (3.8 kB)\nCollecting gymnasium>=0.27 (from browsergym-core==0.14.3)\n  Using cached gymnasium-1.3.0-py3-none-any.whl.metadata (10 kB)\nCollecting lxml<6.0.0,>=4.9 (from browsergym-core==0.14.3)\n  Using cached lxml-5.4.0-cp312-cp312-manylinux_2_28_x86_64.whl.metadata (3.5 kB)\nCollecting mcp>=1.6.0 (from mcp[cli]>=1.6.0->browsergym-core==0.14.3)\n  Using cached mcp-2.2.0-py3-none-any.whl.metadata (7.8 kB)\nRequirement already satisfied: numpy>=1.14 in /opt/hostedtoolcache/Python/3.12.14/x64/lib/python3.12/site-packages (from browsergym-core==0.14.3) (2.5.3)\nCollecting pillow>=10.1 (from browsergym-core==0.14.3)\n  Using cached pillow-12.3.0-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl.metadata (9.1 kB)\nCollecting pyparsing>=3 (from browsergym-core==0.14.3)\n  Using cached pyparsing-3.3.3-py3-none-any.whl.metadata (5.9 kB)\nCollecting anthropic>=0.62.0 (from agentlab==0.4.2)\n  Using cached anthropic-1.8.0-py3-none-any.whl.metadata (3.3 kB)\nCollecting browsergym>=0.7.1 (from agentlab==0.4.2)\n  Using cached browsergym-0.14.3-py3-none-any.whl.metadata (1.2 kB)\nCollecting contexttimer (from agentlab==0.4.2)\n  Using cached contexttimer-0.3.3.tar.gz (4.9 kB)\n  Installing build dependencies: started\n  Installing build dependencies: finished with status 'done'\n  Getting requirements to build wheel: started\n  Getting requirements to build wheel: finished with status 'done'\n  Preparing metadata (pyproject.toml): started\n  Preparing metadata (pyproject.toml): finished with status 'done'\nCollecting dask (from agentlab==0.4.2)\n  Using cached dask-2",
+  "browsergym_available": false,
+  "manifest_exists": false,
+  "browsergym_error": "browsergym not installed",
+  "collection_log": "",
+  "grep_verification": {
+    "has_gammaln_and_polygamma_per_stratum": true,
+    "analytic_code_contains_gammaln_polygamma": false,
+    "heuristic_08_absent": true,
+    "heuristic_constants_absent": true,
+    "hash_in_synthetic_absent": true,
+    "ax_sha256_truncation_absent": true,
+    "synthetic_uses_numpy_default_rng_42": true,
+    "train_only_split_verified": true
+  },
+  "recorded_at": "2026-09-24T14:55:39Z",
+  "estimated_cost": "Low: synthetic offline <1min + 36 prototypes at 1280x720 <2min + 1999 perms x 5 banks x 4 Rs x 2 K <10min <2h wall"
+}

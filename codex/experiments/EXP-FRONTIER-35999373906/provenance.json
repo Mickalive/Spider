@@ -1,0 +1,47 @@
+{
+  "experiment_id": "EXP-FRONTIER-35999373906",
+  "lane": "frontier",
+  "github_run_id": "35999373906",
+  "created_at": "2026-09-24T14:30:00+00:00",
+  "code_paths": [
+    "research/frontier/run_execute_35999373906.py"
+  ],
+  "datasets": [],
+  "environment": {
+    "python": "3.12",
+    "numpy": "1.x",
+    "scipy": "1.x",
+    "sklearn": "1.x"
+  },
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-FRONTIER-35999373906/result.json",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-35999373906/report.md",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-35999373906/provenance.json",
+      "role": "derived"
+    },
+    {
+      "path": "research/frontier/run_execute_35999373906.py",
+      "role": "code",
+      "sha256": "6d8eff6615a8e7e1d02ead7dd5df6ad151788c230a2024e9e5f16f60975727dd"
+    }
+  ],
+  "commands": [
+    "python research/frontier/run_execute_35999373906.py"
+  ],
+  "hashes": {
+    "run_execute": "6d8eff6615a8e7e1d02ead7dd5df6ad151788c230a2024e9e5f16f60975727dd"
+  },
+  "seeds": {
+    "numpy": 42,
+    "random": 42,
+    "hashlib": "sha256 deterministic"
+  },
+  "notes": "Synthetic CPU-only, <20 min wall-clock, <600 MB tmp, no BrowserGym required per prereg section 5"
+}
