@@ -1,0 +1,105 @@
+{
+ "experiment_id": "EXP-INTEL-35999366789",
+ "viewport": "1280x720",
+ "ax_mode": "CDP Accessibility.getFullAXTree",
+ "web_product_captures": 12,
+ "pc_a_captures": 3,
+ "ax_nodes_median_web": 688,
+ "ax_nodes_min_web": 627,
+ "dom_bytes_median_web": 200413,
+ "dom_bytes_min_web": 195052,
+ "sha_stability_identical_web": [
+  true,
+  true,
+  true,
+  true,
+  true,
+  true,
+  true,
+  true,
+  true,
+  true,
+  true,
+  true
+ ],
+ "sha_mutation_changed_web": [
+  true,
+  true,
+  true,
+  true,
+  true,
+  true,
+  true,
+  true,
+  true,
+  true,
+  true,
+  true
+ ],
+ "sha_stability_identical_all_true": true,
+ "sha_mutation_changed_all_true": true,
+ "ax_nodes_median_pc_a": 17,
+ "dom_bytes_median_pc_a": 355,
+ "sha_pc_a_identical_all_true": true,
+ "sha_pc_a_mutated_all_true": true,
+ "anchored_geometry_via_evaluate_web_all5": 12,
+ "anchored_geometry_via_evaluate_web_total": 12,
+ "richer_bbox_via_evaluate": [
+  12,
+  12
+ ],
+ "max_anchor_subtree_node_counts": {
+  "fam136": {
+   "heading": 2,
+   "price": 6,
+   "add_to_cart": 2,
+   "main": 365,
+   "contentinfo": 31
+  },
+  "fam145": {
+   "heading": 2,
+   "price": 6,
+   "add_to_cart": 2,
+   "main": 290,
+   "contentinfo": 31
+  },
+  "fam196": {
+   "heading": 2,
+   "price": 6,
+   "add_to_cart": 2,
+   "main": 226,
+   "contentinfo": 31
+  },
+  "fam222": {
+   "heading": 2,
+   "price": 6,
+   "add_to_cart": 2,
+   "main": 249,
+   "contentinfo": 31
+  }
+ },
+ "constructible_families": [
+  "fam136",
+  "fam145",
+  "fam196",
+  "fam222"
+ ],
+ "constructible_count": 4,
+ "mv4_constructible_gate_10": false,
+ "non_product_sampled_families_recorded": [
+  137,
+  153,
+  162,
+  163,
+  180,
+  191,
+  197,
+  213
+ ],
+ "settings": {
+  "viewport": "1280x720",
+  "browser": "chromium",
+  "ax_mode": "CDP Accessibility.getFullAXTree"
+ },
+ "grammar_hash_live_last": "273eafbcb817e8981f843581a724594665cabdd357b318c701251929ee9c83de"
+}

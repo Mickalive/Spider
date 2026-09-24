@@ -1,0 +1,28 @@
+{
+ "experiment_id": "EXP-INTEL-35999366789",
+ "source": "SRC-DOCKER-PULL",
+ "pull_attempts": [
+  {
+   "attempt": 1,
+   "returncode": 0,
+   "cmd": "docker pull am1n3e/webarena-verified-shopping@sha256:3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb",
+   "stdout_tail": "docker.io/am1n3e/webarena-verified-shopping@sha256:3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb: Pulling from am1n3e/webarena-verified-shopping\nDigest: sha256:3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb\nStatus: Image is up to date for am1n3e/webarena-verified-shopping@sha256:3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb\ndocker.io/am1n3e/webarena-verified-shopping@sha256:3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb\n",
+   "stderr_tail": "",
+   "elapsed_s": 0.08
+  },
+  {
+   "attempt": 2,
+   "returncode": 0,
+   "cmd": "docker pull am1n3e/webarena-verified-shopping@sha256:3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb",
+   "stdout_tail": "docker.io/am1n3e/webarena-verified-shopping@sha256:3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb: Pulling from am1n3e/webarena-verified-shopping\nDigest: sha256:3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb\nStatus: Image is up to date for am1n3e/webarena-verified-shopping@sha256:3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb\ndocker.io/am1n3e/webarena-verified-shopping@sha256:3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb\n",
+   "stderr_tail": "",
+   "elapsed_s": 0.08
+  }
+ ],
+ "images_digests": {
+  "returncode": 0,
+  "stdout_tail": "REPOSITORY                          TAG       DIGEST                                                                    IMAGE ID       CREATED        SIZE\nam1n3e/webarena-verified-shopping   <none>    sha256:3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb   a5b6fb47ee9f   7 months ago   13.3GB\n",
+  "digest_shown": "sha256:3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb",
+  "digest_match": true
+ }
+}

@@ -1,0 +1,32 @@
+{
+ "experiment_id": "EXP-INTEL-35999366789",
+ "source": "SRC-HF",
+ "hf_token_present": false,
+ "attempts": [
+  {
+   "attempt_label": "webarena-verified.json raw",
+   "url": "https://huggingface.co/datasets/ServiceNow/WebArena-Verified/resolve/main/webarena-verified.json",
+   "hf_token_present": false,
+   "timeout_configured_s": 300,
+   "elapsed_s": 0.07,
+   "status": 401,
+   "bytes": 0,
+   "sha256": null,
+   "error": "HTTPError 401: Unauthorized",
+   "stderr": null
+  },
+  {
+   "attempt_label": "Hub API tree",
+   "url": "https://huggingface.co/api/datasets/ServiceNow/WebArena-Verified/tree/main",
+   "hf_token_present": false,
+   "timeout_configured_s": 300,
+   "elapsed_s": 0.04,
+   "status": 401,
+   "bytes": 0,
+   "sha256": null,
+   "error": "HTTPError 401: Unauthorized",
+   "stderr": null
+  }
+ ],
+ "expected_sha256": "d65275660814663375028e9017e1f929e3c38321041b125795e2713b52243d30"
+}

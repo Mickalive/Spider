@@ -1,0 +1,71 @@
+{
+ "experiment_id": "EXP-INTEL-35999366789",
+ "created_at": "2026-09-24T00:00:00+00:00",
+ "dataset": "WebArena-Verified v2",
+ "pinned_source": "ServiceNow/WebArena-Verified (HuggingFace), cross-checked against Docker am1n3e/webarena-verified-shopping@sha256:3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb",
+ "manifest_path": "/home/runner/work/Spider/Spider/research/experiments/EXP-INTEL-35725763380/artifacts/raw/webarena-verified.json",
+ "manifest_sha256": "d65275660814663375028e9017e1f929e3c38321041b125795e2713b52243d30",
+ "manifest_bytes": 927596,
+ "manifest_sha256_expected": "d65275660814663375028e9017e1f929e3c38321041b125795e2713b52243d30",
+ "byte_identical": true,
+ "cross_source_equality": "unavailable",
+ "cross_source_equality_reason": "HF 401 Unauthorized without HF_TOKEN on all genuine attempts this run (hf_token_present false); byte-identity asserted only against the established local pinned copy (sha matches audit-verified identity d6527566...).",
+ "docker_digest": "sha256:3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb",
+ "docker_digest_64hex": "3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb",
+ "docker_url": "docker.io/am1n3e/webarena-verified-shopping@sha256:3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb",
+ "docker_success": true,
+ "hf_success": false,
+ "attempts_log": {
+  "src_hf": {
+   "logs_path": "artifacts/raw/hf_manifest_attempts.json",
+   "n_attempts": 2,
+   "result": [
+    401,
+    401
+   ],
+   "hf_token_present": false
+  },
+  "src_hf_webgym": {
+   "logs_path": "artifacts/raw/hf_webgym_manifest_attempts.json",
+   "n_attempts": 2,
+   "result": [
+    401,
+    401
+   ],
+   "hf_token_present": false
+  },
+  "src_docker_hub_api": {
+   "logs_path": "artifacts/raw/docker_hub_api_attempts.json",
+   "n_attempts": 2,
+   "status": [
+    200,
+    200
+   ],
+   "digest_64hex_len": [
+    64,
+    64
+   ]
+  },
+  "src_docker_pull": {
+   "logs_path": "artifacts/raw/docker_pull_attempts.json",
+   "returncodes": [
+    0,
+    0
+   ],
+   "timeout": 300
+  },
+  "src_docker_images": {
+   "digest_shown": "sha256:3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb",
+   "digest_match": true
+  },
+  "health_check": {
+   "url": "http://localhost:7770/",
+   "attempts": 3,
+   "status": [
+    200,
+    200,
+    200
+   ]
+  }
+ }
+}

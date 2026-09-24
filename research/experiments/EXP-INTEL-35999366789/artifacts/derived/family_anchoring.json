@@ -1,0 +1,358 @@
+{
+ "fam136": {
+  "family": 136,
+  "product_urls_probed": [
+   "http://localhost:7770/ostent-16gb-memory-card-stick-storage-for-sony-ps-vita-psv1000-2000-pch-z081-z161-z321-z641.html",
+   "http://localhost:7770/mineralogie-all-natural-lip-gloss-ruby-rose.html",
+   "http://localhost:7770/sensodyne-repair-protect-whitening-toothpaste-with-fluoride-3-4-oz-pack-of-3.html"
+  ],
+  "n_probed": 3,
+  "per_url": [
+   {
+    "url": "http://localhost:7770/ostent-16gb-memory-card-stick-storage-for-sony-ps-vita-psv1000-2000-pch-z081-z161-z321-z641.html",
+    "anchoring_all_categories_gt1": true,
+    "node_counts": {
+     "heading": 2,
+     "price": 6,
+     "add_to_cart": 2,
+     "main": 365,
+     "contentinfo": 31
+    },
+    "present": {
+     "heading": true,
+     "price": true,
+     "add_to_cart": true,
+     "main": true,
+     "contentinfo": true
+    },
+    "sha_stability_identical": true,
+    "sha_mutation_changed": true
+   },
+   {
+    "url": "http://localhost:7770/mineralogie-all-natural-lip-gloss-ruby-rose.html",
+    "anchoring_all_categories_gt1": true,
+    "node_counts": {
+     "heading": 2,
+     "price": 6,
+     "add_to_cart": 2,
+     "main": 227,
+     "contentinfo": 31
+    },
+    "present": {
+     "heading": true,
+     "price": true,
+     "add_to_cart": true,
+     "main": true,
+     "contentinfo": true
+    },
+    "sha_stability_identical": true,
+    "sha_mutation_changed": true
+   },
+   {
+    "url": "http://localhost:7770/sensodyne-repair-protect-whitening-toothpaste-with-fluoride-3-4-oz-pack-of-3.html",
+    "anchoring_all_categories_gt1": true,
+    "node_counts": {
+     "heading": 2,
+     "price": 6,
+     "add_to_cart": 2,
+     "main": 216,
+     "contentinfo": 31
+    },
+    "present": {
+     "heading": true,
+     "price": true,
+     "add_to_cart": true,
+     "main": true,
+     "contentinfo": true
+    },
+    "sha_stability_identical": true,
+    "sha_mutation_changed": true
+   }
+  ],
+  "family_constructible": true,
+  "family_sha_identical_all": true,
+  "family_sha_mutated_all": true,
+  "anchoring_definition": "product-subtree anchoring via anchored Runtime.evaluate getBoundingClientRect scan (NOT AXNode bbox, Chromium153 0/16 fact); category root selectors: heading h1/.page-title/.product-name; price .price-box/.product-info-price/.price; add_to_cart #product-addtocart-button/.tocart/add-to-cart button; main main/.main/#maincontent; contentinfo footer/.contentinfo/.page-footer. node_count = element-node count of anchored subtree root (descendants+self)."
+ },
+ "fam145": {
+  "family": 145,
+  "product_urls_probed": [
+   "http://localhost:7770/tall-pink-taper-candles-4-piece-orange-colored-tapered-candles-gradient-candles-10-6-inches-tall-tie-dye-candle-set-large-dripless-long-burning-candlesticks-two-color-taper-candles-candlesticks.html",
+   "http://localhost:7770/spaas-white-taper-candles-4-pack-10-inch-tall-candles-scent-free-premium-wax-candle-sticks-8-hour-long-burning-white-candlesticks-for-home-decoration-wedding-holiday-and-parties.html",
+   "http://localhost:7770/ciclon-energy-drink-regular-24-cans-8-3oz.html"
+  ],
+  "n_probed": 3,
+  "per_url": [
+   {
+    "url": "http://localhost:7770/tall-pink-taper-candles-4-piece-orange-colored-tapered-candles-gradient-candles-10-6-inches-tall-tie-dye-candle-set-large-dripless-long-burning-candlesticks-two-color-taper-candles-candlesticks.html",
+    "anchoring_all_categories_gt1": true,
+    "node_counts": {
+     "heading": 2,
+     "price": 6,
+     "add_to_cart": 2,
+     "main": 290,
+     "contentinfo": 31
+    },
+    "present": {
+     "heading": true,
+     "price": true,
+     "add_to_cart": true,
+     "main": true,
+     "contentinfo": true
+    },
+    "sha_stability_identical": true,
+    "sha_mutation_changed": true
+   },
+   {
+    "url": "http://localhost:7770/spaas-white-taper-candles-4-pack-10-inch-tall-candles-scent-free-premium-wax-candle-sticks-8-hour-long-burning-white-candlesticks-for-home-decoration-wedding-holiday-and-parties.html",
+    "anchoring_all_categories_gt1": true,
+    "node_counts": {
+     "heading": 2,
+     "price": 6,
+     "add_to_cart": 2,
+     "main": 224,
+     "contentinfo": 31
+    },
+    "present": {
+     "heading": true,
+     "price": true,
+     "add_to_cart": true,
+     "main": true,
+     "contentinfo": true
+    },
+    "sha_stability_identical": true,
+    "sha_mutation_changed": true
+   },
+   {
+    "url": "http://localhost:7770/ciclon-energy-drink-regular-24-cans-8-3oz.html",
+    "anchoring_all_categories_gt1": true,
+    "node_counts": {
+     "heading": 2,
+     "price": 6,
+     "add_to_cart": 2,
+     "main": 217,
+     "contentinfo": 31
+    },
+    "present": {
+     "heading": true,
+     "price": true,
+     "add_to_cart": true,
+     "main": true,
+     "contentinfo": true
+    },
+    "sha_stability_identical": true,
+    "sha_mutation_changed": true
+   }
+  ],
+  "family_constructible": true,
+  "family_sha_identical_all": true,
+  "family_sha_mutated_all": true,
+  "anchoring_definition": "product-subtree anchoring via anchored Runtime.evaluate getBoundingClientRect scan (NOT AXNode bbox, Chromium153 0/16 fact); category root selectors: heading h1/.page-title/.product-name; price .price-box/.product-info-price/.price; add_to_cart #product-addtocart-button/.tocart/add-to-cart button; main main/.main/#maincontent; contentinfo footer/.contentinfo/.page-footer. node_count = element-node count of anchored subtree root (descendants+self)."
+ },
+ "fam196": {
+  "family": 196,
+  "product_urls_probed": [
+   "http://localhost:7770/elmwood-inn-fine-teas-orange-vanilla-caffeine-free-fruit-infusion-16-ounce-pouch.html",
+   "http://localhost:7770/skinit-decal-gaming-skin-compatible-with-xbox-one-s-console-and-controller-bundle-officially-licensed-nfl-baltimore-ravens-design.html",
+   "http://localhost:7770/sceptre-e195bd-srr-19-inch-720p-led-tv-true-black-2017.html"
+  ],
+  "n_probed": 3,
+  "per_url": [
+   {
+    "url": "http://localhost:7770/elmwood-inn-fine-teas-orange-vanilla-caffeine-free-fruit-infusion-16-ounce-pouch.html",
+    "anchoring_all_categories_gt1": true,
+    "node_counts": {
+     "heading": 2,
+     "price": 6,
+     "add_to_cart": 2,
+     "main": 226,
+     "contentinfo": 31
+    },
+    "present": {
+     "heading": true,
+     "price": true,
+     "add_to_cart": true,
+     "main": true,
+     "contentinfo": true
+    },
+    "sha_stability_identical": true,
+    "sha_mutation_changed": true
+   },
+   {
+    "url": "http://localhost:7770/skinit-decal-gaming-skin-compatible-with-xbox-one-s-console-and-controller-bundle-officially-licensed-nfl-baltimore-ravens-design.html",
+    "anchoring_all_categories_gt1": true,
+    "node_counts": {
+     "heading": 2,
+     "price": 6,
+     "add_to_cart": 2,
+     "main": 204,
+     "contentinfo": 31
+    },
+    "present": {
+     "heading": true,
+     "price": true,
+     "add_to_cart": true,
+     "main": true,
+     "contentinfo": true
+    },
+    "sha_stability_identical": true,
+    "sha_mutation_changed": true
+   },
+   {
+    "url": "http://localhost:7770/sceptre-e195bd-srr-19-inch-720p-led-tv-true-black-2017.html",
+    "anchoring_all_categories_gt1": true,
+    "node_counts": {
+     "heading": 2,
+     "price": 6,
+     "add_to_cart": 2,
+     "main": 210,
+     "contentinfo": 31
+    },
+    "present": {
+     "heading": true,
+     "price": true,
+     "add_to_cart": true,
+     "main": true,
+     "contentinfo": true
+    },
+    "sha_stability_identical": true,
+    "sha_mutation_changed": true
+   }
+  ],
+  "family_constructible": true,
+  "family_sha_identical_all": true,
+  "family_sha_mutated_all": true,
+  "anchoring_definition": "product-subtree anchoring via anchored Runtime.evaluate getBoundingClientRect scan (NOT AXNode bbox, Chromium153 0/16 fact); category root selectors: heading h1/.page-title/.product-name; price .price-box/.product-info-price/.price; add_to_cart #product-addtocart-button/.tocart/add-to-cart button; main main/.main/#maincontent; contentinfo footer/.contentinfo/.page-footer. node_count = element-node count of anchored subtree root (descendants+self)."
+ },
+ "fam222": {
+  "family": 222,
+  "product_urls_probed": [
+   "http://localhost:7770/6s-wireless-headphones-over-ear-noise-canceling-hi-fi-bass-foldable-stereo-wireless-kid-headsets-earbuds-with-built-in-mic-micro-sd-tf-fm-for-iphone-samsung-ipad-pc-black-gold.html",
+   "http://localhost:7770/fujifilm-finepix-z200fd-10mp-digital-camera-with-5x-optical-dual-image-stabilized-zoom-black.html",
+   "http://localhost:7770/3-pack-samsung-galaxy-s6-screen-protector-nearpow-tempered-glass-screen-protector-with-9h-hardness-crystal-clear-easy-bubble-free-installation-scratch-resist.html"
+  ],
+  "n_probed": 3,
+  "per_url": [
+   {
+    "url": "http://localhost:7770/6s-wireless-headphones-over-ear-noise-canceling-hi-fi-bass-foldable-stereo-wireless-kid-headsets-earbuds-with-built-in-mic-micro-sd-tf-fm-for-iphone-samsung-ipad-pc-black-gold.html",
+    "anchoring_all_categories_gt1": true,
+    "node_counts": {
+     "heading": 2,
+     "price": 6,
+     "add_to_cart": 2,
+     "main": 249,
+     "contentinfo": 31
+    },
+    "present": {
+     "heading": true,
+     "price": true,
+     "add_to_cart": true,
+     "main": true,
+     "contentinfo": true
+    },
+    "sha_stability_identical": true,
+    "sha_mutation_changed": true
+   },
+   {
+    "url": "http://localhost:7770/fujifilm-finepix-z200fd-10mp-digital-camera-with-5x-optical-dual-image-stabilized-zoom-black.html",
+    "anchoring_all_categories_gt1": true,
+    "node_counts": {
+     "heading": 2,
+     "price": 6,
+     "add_to_cart": 2,
+     "main": 247,
+     "contentinfo": 31
+    },
+    "present": {
+     "heading": true,
+     "price": true,
+     "add_to_cart": true,
+     "main": true,
+     "contentinfo": true
+    },
+    "sha_stability_identical": true,
+    "sha_mutation_changed": true
+   },
+   {
+    "url": "http://localhost:7770/3-pack-samsung-galaxy-s6-screen-protector-nearpow-tempered-glass-screen-protector-with-9h-hardness-crystal-clear-easy-bubble-free-installation-scratch-resist.html",
+    "anchoring_all_categories_gt1": true,
+    "node_counts": {
+     "heading": 2,
+     "price": 6,
+     "add_to_cart": 2,
+     "main": 225,
+     "contentinfo": 31
+    },
+    "present": {
+     "heading": true,
+     "price": true,
+     "add_to_cart": true,
+     "main": true,
+     "contentinfo": true
+    },
+    "sha_stability_identical": true,
+    "sha_mutation_changed": true
+   }
+  ],
+  "family_constructible": true,
+  "family_sha_identical_all": true,
+  "family_sha_mutated_all": true,
+  "anchoring_definition": "product-subtree anchoring via anchored Runtime.evaluate getBoundingClientRect scan (NOT AXNode bbox, Chromium153 0/16 fact); category root selectors: heading h1/.page-title/.product-name; price .price-box/.product-info-price/.price; add_to_cart #product-addtocart-button/.tocart/add-to-cart button; main main/.main/#maincontent; contentinfo footer/.contentinfo/.page-footer. node_count = element-node count of anchored subtree root (descendants+self)."
+ },
+ "fam137": {
+  "family": 137,
+  "product_urls_probed": [],
+  "n_probed": 0,
+  "family_constructible": false,
+  "reason": "No product-page start_urls in pinned census (all tasks start at __SHOPPING__ homepage / non-product paths). Homepage/template captures rejected by parent audit as product-page proxies (18/20 identical); not probed."
+ },
+ "fam153": {
+  "family": 153,
+  "product_urls_probed": [],
+  "n_probed": 0,
+  "family_constructible": false,
+  "reason": "No product-page start_urls in pinned census (all tasks start at __SHOPPING__ homepage / non-product paths). Homepage/template captures rejected by parent audit as product-page proxies (18/20 identical); not probed."
+ },
+ "fam162": {
+  "family": 162,
+  "product_urls_probed": [],
+  "n_probed": 0,
+  "family_constructible": false,
+  "reason": "No product-page start_urls in pinned census (all tasks start at __SHOPPING__ homepage / non-product paths). Homepage/template captures rejected by parent audit as product-page proxies (18/20 identical); not probed."
+ },
+ "fam163": {
+  "family": 163,
+  "product_urls_probed": [],
+  "n_probed": 0,
+  "family_constructible": false,
+  "reason": "No product-page start_urls in pinned census (all tasks start at __SHOPPING__ homepage / non-product paths). Homepage/template captures rejected by parent audit as product-page proxies (18/20 identical); not probed."
+ },
+ "fam180": {
+  "family": 180,
+  "product_urls_probed": [],
+  "n_probed": 0,
+  "family_constructible": false,
+  "reason": "No product-page start_urls in pinned census (all tasks start at __SHOPPING__ homepage / non-product paths). Homepage/template captures rejected by parent audit as product-page proxies (18/20 identical); not probed."
+ },
+ "fam191": {
+  "family": 191,
+  "product_urls_probed": [],
+  "n_probed": 0,
+  "family_constructible": false,
+  "reason": "No product-page start_urls in pinned census (all tasks start at __SHOPPING__ homepage / non-product paths). Homepage/template captures rejected by parent audit as product-page proxies (18/20 identical); not probed."
+ },
+ "fam197": {
+  "family": 197,
+  "product_urls_probed": [],
+  "n_probed": 0,
+  "family_constructible": false,
+  "reason": "No product-page start_urls in pinned census (all tasks start at __SHOPPING__ homepage / non-product paths). Homepage/template captures rejected by parent audit as product-page proxies (18/20 identical); not probed."
+ },
+ "fam213": {
+  "family": 213,
+  "product_urls_probed": [],
+  "n_probed": 0,
+  "family_constructible": false,
+  "reason": "No product-page start_urls in pinned census (all tasks start at __SHOPPING__ homepage / non-product paths). Homepage/template captures rejected by parent audit as product-page proxies (18/20 identical); not probed."
+ }
+}

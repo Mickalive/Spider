@@ -1,0 +1,30 @@
+{
+ "experiment_id": "EXP-INTEL-35999366789",
+ "module": "A3",
+ "source": "SRC-HF-WEBGYM (OpenEnv/WebGym 292k tasks/127k sites)",
+ "status": "UNAVAILABLE",
+ "status_reason": "HF_TOKEN absent (hf_token_present=false); 2 genuine attempts logged in artifacts/raw/hf_webgym_manifest_attempts.json with HTTP 401 on both; per prereg MV5, UNAVAILABLE with 2 logged attempts does NOT trigger MEASUREMENT_INVALID and is NOT assumed zero.",
+ "attempts": [
+  {
+   "label": "WebGym Hub API tree",
+   "status": 401,
+   "bytes": 0,
+   "sha256": null,
+   "elapsed_s": 0.07,
+   "error": "HTTPError 401: Unauthorized"
+  },
+  {
+   "label": "WebGym README probe",
+   "status": 401,
+   "bytes": 0,
+   "sha256": null,
+   "elapsed_s": 0.07,
+   "error": "HTTPError 401: Unauthorized"
+  }
+ ],
+ "diverse_etld_plus1_distinct": null,
+ "duplication_prevalence_ci": null,
+ "threshold_sweep_0818_09479": null,
+ "sweep_range": null,
+ "smallest_next_action": "Provide HF_TOKEN with access to OpenEnv/WebGym (gated repo read token) and re-run exp_35999366789_durable_sources.py A3 section; then run eTLD+1 sample >=50 with family-level B=2000 duplication CI and 0.818-0.9479 threshold sweep."
+}

@@ -1,0 +1,32 @@
+{
+ "experiment_id": "EXP-INTEL-35999366789",
+ "source": "SRC-HF-WEBGYM",
+ "hf_token_present": false,
+ "attempts": [
+  {
+   "attempt_label": "WebGym Hub API tree",
+   "url": "https://huggingface.co/api/datasets/OpenEnv/WebGym/tree/main",
+   "hf_token_present": false,
+   "timeout_configured_s": 300,
+   "elapsed_s": 0.07,
+   "status": 401,
+   "bytes": 0,
+   "sha256": null,
+   "error": "HTTPError 401: Unauthorized",
+   "stderr": null
+  },
+  {
+   "attempt_label": "WebGym README probe",
+   "url": "https://huggingface.co/datasets/OpenEnv/WebGym/resolve/main/README.md",
+   "hf_token_present": false,
+   "timeout_configured_s": 300,
+   "elapsed_s": 0.07,
+   "status": 401,
+   "bytes": 0,
+   "sha256": null,
+   "error": "HTTPError 401: Unauthorized",
+   "stderr": null
+  }
+ ],
+ "note": "WebGym 292k manifest (292k tasks/127k sites) is HF-gated; 2 genuine attempts logged."
+}
