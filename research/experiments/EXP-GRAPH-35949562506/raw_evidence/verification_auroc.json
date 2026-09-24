@@ -1,0 +1,29 @@
+{
+  "train": {
+    "auroc": 0.9938271604938271,
+    "precision": 0.9473684210526315,
+    "recall": 1.0,
+    "auroc_rand": 0.5497741664759289,
+    "false_accept": 0.0,
+    "fp": 1,
+    "tp": 18
+  },
+  "test": {
+    "auroc": 1.0,
+    "precision": 1.0,
+    "recall": 1.0,
+    "auroc_rand": 0.4802647440299077,
+    "false_accept": 0.0,
+    "fp": 0,
+    "tp": 12
+  },
+  "pooled": {
+    "auroc": 0.9966666666666667,
+    "precision": 0.967741935483871,
+    "recall": 1.0,
+    "auroc_rand": 0.5083459220263982,
+    "false_accept": 0.0,
+    "fp": 1,
+    "tp": 30
+  }
+}

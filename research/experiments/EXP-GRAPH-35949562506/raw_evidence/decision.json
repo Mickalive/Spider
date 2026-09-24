@@ -1,0 +1,177 @@
+{
+  "survives": true,
+  "falsified_in_setting": false,
+  "measurement_invalid": false,
+  "checks": {
+    "D1_PC1_1.0_PC2_0.90_per_family": true,
+    "D2_NC": true,
+    "D3_freshness_TN_FA_UNKNOWN_ECE": true,
+    "D3_details": {
+      "tn": 1.0,
+      "tn_lower": 0.9820353008956162,
+      "fa": 0.0,
+      "unk": 0.125,
+      "stale_rate": 0.125,
+      "ece_global": 0.06250000000000004,
+      "ece_fresh": 0.050000000000000044,
+      "ece_stale": 0.15000000000000002,
+      "D3_TN": true,
+      "D3_FA": true,
+      "D3_UNKNOWN": true,
+      "D3_ECE": true
+    },
+    "D4_repair_success": true,
+    "D4_details": {
+      "pooled_rate": 1.0,
+      "per_family": {
+        "dom_drift": {
+          "k": 10,
+          "n": 10,
+          "rate": 1.0,
+          "wilson_lower": 0.7224598312333834,
+          "wilson_upper": 1
+        },
+        "param_header_mutation": {
+          "k": 10,
+          "n": 10,
+          "rate": 1.0,
+          "wilson_lower": 0.7224598312333834,
+          "wilson_upper": 1
+        },
+        "cache_expiry": {
+          "k": 10,
+          "n": 10,
+          "rate": 1.0,
+          "wilson_lower": 0.7224598312333834,
+          "wilson_upper": 1
+        }
+      },
+      "pooled_ci": [
+        1.0,
+        1.0
+      ]
+    },
+    "D5_cost": true,
+    "D5_details": {
+      "token_ratio": 0.3125,
+      "browser_ratio": 0.3333333333333333,
+      "verify_mean": 1.0,
+      "token_ci": [
+        0.3125,
+        0.3125
+      ],
+      "browser_ci": [
+        0.3333333333333333,
+        0.3333333333333333
+      ]
+    },
+    "D6_contamination": true,
+    "D6_details": {
+      "contamination_rate": 0.0,
+      "wilson_upper": 0.1611301254949332,
+      "per_family": {
+        "dom_drift": {
+          "k": 0,
+          "n": 20,
+          "rate": 0,
+          "wilson_upper": 0.1611301254949332
+        },
+        "param_header_mutation": {
+          "k": 0,
+          "n": 20,
+          "rate": 0,
+          "wilson_upper": 0.1611301254949332
+        },
+        "cache_expiry": {
+          "k": 0,
+          "n": 20,
+          "rate": 0,
+          "wilson_upper": 0.1611301254949332
+        }
+      }
+    },
+    "D7_verification": true,
+    "D7_details": {
+      "test_auroc": 1.0,
+      "test_precision": 1.0,
+      "test_recall": 1.0,
+      "test_auroc_rand": 0.4802647440299077,
+      "delta": 0.5197352559700923
+    },
+    "D8_amortized": true,
+    "D8_details": {
+      "amortized_tokens": 15.0,
+      "cold_tokens": 16,
+      "amortized_browser": 11.0,
+      "cold_browser": 3
+    },
+    "D9_discriminating": true,
+    "D9_details": {
+      "no_guard_fa": 1.0,
+      "delta": 1.0,
+      "j_fa": 0.6666666666666666,
+      "h_fa": 0.3333333333333333
+    },
+    "D10_honesty": true,
+    "D10_details": {
+      "all_int": true,
+      "max_abs_rho": 0.0,
+      "mean_abs_rho": 0.0,
+      "observed_rho": 0.0,
+      "min_fresh_std": 0.5,
+      "per_traj_count": 33,
+      "response_derived": true,
+      "bootstrap_done": true
+    },
+    "overall_survives": true,
+    "overall_falsified": false,
+    "overall_measurement_invalid": false,
+    "N_ok": true,
+    "ci": {
+      "tn_95ci": [
+        1.0,
+        1.0
+      ],
+      "fa_95ci": [
+        0.0,
+        0.0
+      ],
+      "unk_95ci": [
+        0.125,
+        0.125
+      ],
+      "ece_95ci": [
+        0.0625,
+        0.0625
+      ],
+      "ece_fresh_95ci": [
+        0.05,
+        0.05
+      ],
+      "ece_stale_95ci": [
+        0.15,
+        0.15
+      ]
+    },
+    "repair_ci": {
+      "pooled_ci": [
+        1.0,
+        1.0
+      ],
+      "token_ci": [
+        0.3125,
+        0.3125
+      ],
+      "browser_ci": [
+        0.3333333333333333,
+        0.3333333333333333
+      ],
+      "contam_ci": [
+        0.0,
+        0.0
+      ]
+    }
+  },
+  "outcome": "SUPPORTS",
+  "status": "COMPLETE"
+}
