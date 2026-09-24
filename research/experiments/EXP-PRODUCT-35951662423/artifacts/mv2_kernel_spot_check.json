@@ -1,0 +1,31 @@
+{
+ "kernel_dot_regex_patched": true,
+ "kernel_sha256": "d926279d5ee14a044a2f13b8abc09202df9f5adb9e86feaadeb61818a15f4038",
+ "results": [
+  {
+   "check": "MV2a_kernel_dot_regex_patched",
+   "pass": true,
+   "detail": "line=_PARAMETER = re.compile(r\"\\$\\{([A-Za-z_][A-Za-z0-9_\\.]*)\\}\") char_class_contains_dot_escape=True sha256(kernel.py)=d926279d5ee14a044a2f13b8abc09202df9f5adb9e86feaadeb61818a15f4038"
+  },
+  {
+   "check": "MV2b_old_regex_would_fail_dot_slot",
+   "pass": true,
+   "detail": "old regex fullmatch('${family.id}') = None (dot unsupported pre-patch)"
+  },
+  {
+   "check": "MV2c_5of5_n0_EXECUTABLE_conf>=0.80",
+   "pass": true,
+   "detail": "executable=5/5 correctly_bound=5/5 conf=0.85 famA..famE"
+  },
+  {
+   "check": "MV2d_family_gate_abstains_on_unknown_family",
+   "pass": true,
+   "detail": "famX -> UNKNOWN (expected UNKNOWN)"
+  },
+  {
+   "check": "MV2e_low_confidence_not_EXECUTABLE",
+   "pass": true,
+   "detail": "conf0.5 -> EXPLORE (expected EXPLORE/UNKNOWN, not EXECUTABLE)"
+  }
+ ]
+}

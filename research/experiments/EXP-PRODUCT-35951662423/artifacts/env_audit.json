@@ -1,0 +1,64 @@
+{
+ "environment": {
+  "python": "Python 3.12.14",
+  "pip": "pip 26.2.1 from /opt/hostedtoolcache/Python/3.12.14/x64/lib/python3.12/site-packages/pip (python 3.12)",
+  "platform": "Linux runnervmlun5p 6.17.0-1022-azure #22-Ubuntu SMP Mon Jul 27 17:24:03 UTC 2026 x86_64 x86_64 x86_64 GNU/Linux",
+  "runner_user": "runner uid=1001",
+  "cores": "4",
+  "mem_gb": "15",
+  "disk_free_gb": "85G"
+ },
+ "scientific_stack": {
+  "numpy": "2.5.3",
+  "scipy": "1.18.1",
+  "sklearn": "1.9.1",
+  "pandas": "3.0.6",
+  "flask": "3.1.3",
+  "pyjwt": "2.15.0",
+  "gunicorn": "gunicorn (version 26.2.0)",
+  "requests": "2.34.2"
+ },
+ "substrate": {
+  "tmp_spider_runtime_exists": "no",
+  "shared_db_exists": "no",
+  "nginx": "nginx version: nginx/1.24.0 (Ubuntu)",
+  "docker": "Docker version 28.0.4, build b8034c0"
+ },
+ "llm_keys": {
+  "OPENAI_API_KEY_set": "no",
+  "other_key_hits": "HCA_CLOUD_PROVIDER\nAZURE_EXTENSION_DIR"
+ },
+ "browsergym": {
+  "pip_browsergym_available": "browsergym (0.14.3)\nAvailable versions: 0.14.3, 0.14.2, 0.14.1, 0.14.0, 0.13.4, 0.13.3, 0.13.2, 0.13.1, 0.13.0, 0.12.0, 0.11.3, 0.11.2, 0.11.1, 0.11.0, 0.10.2, 0.10.1, 0.10.0, 0.9.0, 0.8.1, 0.8.0, 0.7.1, 0.7.0, 0.6.4, 0.6.3, 0.6.2, 0.6.1, 0.6.0, 0.5.1, 0.5.0, 0.4.3, 0.4.2, 0.4.1, 0.4.0, 0.3.5, 0.3.4, 0.3.3, 0.3.2, 0.3.1, 0.3.0, 0.2.6, 0.2.5, 0.2.4, 0.2.3, 0.2.2, 0.2.1, 0.2.0",
+  "ghcr_browsergym_pull": "Error response from daemon: Head \"https://ghcr.io/v2/servicenow/browsergym/manifests/0.14.3\": denied",
+  "dockerhub_browsergym_pull": "Error response from daemon: pull access denied for browserless/browsergym, repository does not exist or may require 'docker login': denied: requested access to the resource is denied",
+  "local_images": "ghcr.io/github/gh-aw-firewall/agent:latest\nghcr.io/github/gh-aw-firewall/api-proxy:latest\nghcr.io/github/gh-aw-mcpg:latest\nghcr.io/dependabot/dependabot-updater-core:latest\nghcr.io/github/github-mcp-server:latest\nghcr.io/github/gh-aw-firewall/squid:latest"
+ },
+ "fixtures": {
+  "prior_qcr_bank_manifest": {
+   "path": "research/experiments/EXP-PRODUCT-35916130502/artifacts/qcr_bank_manifest.json",
+   "sha256": "8c69804b249ec9c84cf05d86a21c7ebe7a31af5f8d45e50a4e6d477b449f9f58"
+  },
+  "prior_webmcp_registry": {
+   "path": "research/experiments/EXP-PRODUCT-35916130502/artifacts/webmcp_registry.jsonl",
+   "sha256": "af3c18e5ef1904484c5d440353b327958bdcc909e72915b301724b9f49bcdb4c",
+   "counts": "lines 2147 sites 714"
+  },
+  "sgdr_index_search": "",
+  "prior_cost_config": "55fa25af079dffb372835487a31914f536ff907c0055c5e1dce86f707c2a3433"
+ },
+ "frozen_inputs": {
+  "prereg_md_sha": "49c6027fb72098f404fbba55c6dedd066e3ebe94def2d6bb220feb033f18be35",
+  "request_json_sha": "a4dfe5393c033560c2f34604dc3771b00ba7f3b2404a948428602136a735737d",
+  "spec_json_sha": "4225441b1f7018c400be45006815250d222504e9223187e5cc276cf6e22f6e4b"
+ },
+ "kernel": {
+  "kernel_py_sha_after_patch": "d926279d5ee14a044a2f13b8abc09202df9f5adb9e86feaadeb61818a15f4038",
+  "old_kernel_sha_reference": "46929b3a951df48d7f9d1fd850871073c0d91c1868aa117e13d389fe274e8d61 (pre-patch working tree before edit)",
+  "frozen_prereg_referenced_patch_sha_prefix": "d926279d"
+ },
+ "git": {
+  "head": "5930a02a8209e4d4f3944a2f52ba655df6137422",
+  "status": "M codex/index.json\n M src/spider/kernel.py\n?? research/experiments/EXP-PRODUCT-35951662423/artifacts/\n?? research/experiments/EXP-PRODUCT-35951662423/model_execute.json"
+ }
+}
