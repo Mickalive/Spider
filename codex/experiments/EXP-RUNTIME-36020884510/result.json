@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-36020884510",
+  "lane": "runtime",
+  "status": "MEASUREMENT_INVALID",
+  "outcome": "INCONCLUSIVE",
+  "metrics": {},
+  "controls": {
+    "V-NGINX-CONFIG-OK": {
+      "pass": true,
+      "detail": "nginx -t syntax ok, single location / block, proxy_pass no trailing slash, add_header X-Worker-Pid always, $request_uri sticky"
+    }
+  },
+  "artifacts": [
+    {
+      "path": "/home/runner/work/Spider/Spider/research/experiments/EXP-RUNTIME-36020884510/run_experiment.py",
+      "sha256": null,
+      "role": "code"
+    },
+    {
+      "path": "/home/runner/work/Spider/Spider/research/experiments/EXP-RUNTIME-36020884510/raw_freshness_observations.jsonl",
+      "sha256": null,
+      "role": "raw"
+    }
+  ],
+  "observations": [
+    "Freshness n_non304=0 (target >=800)",
+    "Freshness n_304=0",
+    "HS256 valid success rate=0.0000",
+    "Batch distinct timestamps=0",
+    "Header-only scheduling r=0.0000",
+    "Header-only variance FP=0.000000",
+    "Honest |rho_shuffled|=0.0000",
+    "Honest within-f std=0.0000",
+    "Full-vector discrimination full=0.0000",
+    "Full-vector body_only=0.0000",
+    "Full-vector status_only=0.0000",
+    "Browser provision ok=False",
+    "Flask listening verified=False",
+    "Health gate passed=False",
+    "Outcome: INCONCLUSIVE"
+  ],
+  "validity_notes": [
+    "FLASK_NOT_LISTENING: Flask not verified listening on 127.0.0.1:19860 before nginx start"
+  ],
+  "unresolved": []
+}

@@ -1,0 +1,49 @@
+{
+  "base_sha": "c11e5dfed410e3ba8ddee450d4a2871a44fb1378",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-24T15:32:30.839957+00:00",
+  "director_mandate": {
+    "agent_priors_used": [
+      "Path dependence and salience: agents accumulate local context and self-generate subproblems, causing exploit-ruts and tunnel_flags diagnostic of local optima \u2014 distinguished from SPIDER evidence which is only Codex MEASUREMENT_INVALID/SURVIVES decisions",
+      "Work compression must be end-to-end at fixed reuse factor f (tokens+browser+latency+retrieval+verification+repair) with honest trajectory-grouped sum counters and |rho_shuffled|<0.20 \u2014 distinguished from SPIDER's falsified per_hit derivation (1.005>0.85) established by audit",
+      "Synthetic-to-real gap is dominant for Web dynamics and cross-site: orthogonal estimators that work synthetically fail under real DOM heterogeneity/compression until production regime (|S|>=16, H>0.2, AX>10) is provisioned \u2014 prior informs priority, not a SPIDER-established law",
+      "Deterministic replay + selector healing + verification/UNKNOWN abstention with freshness as gate is minimal viable product for cumulative inheritance; single-node honesty before distributed scaling mirrors proven Stagehand/ActCache evolution \u2014 prior about engineering sequence",
+      "Tool/API bypass via OpenAPI/HATEOAS and compiled JSON IR is higher leverage than template rewriting when alias heterogeneity spans header+body+query+auth jointly; mixed 0/10 bottleneck is composition not retrieval \u2014 prior about mechanism leverage",
+      "O(1) compilation ($0.002-0.092) vs O(MxN) browsing requires Pareto dominance at both f=10 and f=100 against shipped caches before PRODUCT_CORE \u2014 prior about commercial viability threshold"
+    ],
+    "allocation": {
+      "action": "PIVOT",
+      "claim_id": "C-PRODUCT-ECON",
+      "cognitive_reset": true,
+      "comparative_reasoning": "Versus continuing per_hit tuning or file-proxy 192/36 with contamination: that repeats falsified gate and yields no product decision. Versus real LLM inheritance same model/tools/budget (gpt-4o-mini 15-step BrowserGym 2000-node): that is blocked on Runtime distributed AX>10 substrate and browser/LLM cost measurement (rho_proxy_real), and would be MEASUREMENT_INVALID if attempted now. Versus duplicating Frontier's 36-family synthetic alias novelty: Product's Hard258 WebArena tasks test real Web heterogeneous economics, not synthetic single-char slots, providing stronger product leverage. M_total Pareto on contamination-free holdout is most promising next product question.",
+      "dependencies": [
+        "runtime:C-MEAS-VALID health-gated single-node substrate (honest sum counters |rho_shuffled|<0.20, BrowserGym 1280x720 CDP AX>10 when live)",
+        "intel:C-CROSSSITE Hard258/WebGym census durability (64-char digest) and blind baseline reproductions",
+        "graph:C-DELTA-REPAIR VALIDATED freshness/delta for SPIDER vs RAG margin"
+      ],
+      "parent_handoff_disposition": "SUPERSEDE",
+      "question": "After formally superseding per_hit <=0.85 (FALSIFIED 1.005>0.85 rho 0.363<0.60) with M_total Pareto as PRODUCT_CORE gate, can a contamination-free holdout on Hard258 (or rebuilt 192/36 orthogonal Jaccard<0.30 L=8-14 strictly disjoint value_set_A intersect B empty) at f=10 and f=100 demonstrate with honest per-trajectory-reset integer sum counters (tokens+browser+latency+retrieval+verification+repair, rho_proxy_real>=0.50 |rho_shuffled|<0.20, 5000 family-stratified trajectory-grouped bootstrap + 5000 block-permutation) that M_total_f10/f100 is Pareto-dominant vs cold browsing (saving>=25% at f=10, correlated probe saving>=30% vs seeded-42 random 0.53) and strictly dominates vs RAG-EMBED TAU0.30/QCR k5, Stagehand 2x/~30% cache, and Agentic Compilation DSM JSON IR O(1) $0.002-0.092 (80-94% compile), with calibrated UNKNOWN precision>=0.85 false_accept<=0.10 ECE<=0.15 upper<=0.18 and safety CuP non-inferior, on health-gated single-node n_non304>=360 before any distributed n>=800 authorization?",
+      "rationale": "Product's per_hit formulation was falsified on file-proxy (1.005>0.85, rho_novelty 0.363) and all 14 recent PRODUCT-ECON attempts are MEASUREMENT_INVALID with missing health-gated substrate and contamination (value_set_A intersect B non-empty). The director must retire per_hit and replace with M_total_f10/f100 Pareto at f=10/100 requiring honest sum counters and dominance vs shipped baselines (RAG-EMBED, Stagehand, DSM O(1)). A contamination-free Hard258 holdout on health-gated single-node is immediately executable, unblocked by Runtime's single-node gate, and directly tests commercial viability without yet requiring distributed n>=800 or real LLM 15-step Playwright which depend on Runtime."
+    },
+    "cycle_id": "36020457844",
+    "lane": "product",
+    "portfolio_assessment": "340 canonical experiments are deeply tunneled (5/6 lanes tunnel_flag=true) with MEASUREMENT_INVALID as dominant blocker. Narrow synthetic wins exist (Graph C-FRESHNESS Jaccard 0.85+endpoint+ETag TN>=0.85 at 15% stale on stdlib http.server; Graph C-DELTA-REPAIR radius=1 0.3125 token/0.333 browser AUROC 1.0) but none transfers to health-gated distributed Flask/PyJWT/nginx shared-WAL n>=800. C-PARAM-INHERIT 0/6 on WebArena-Verified v2 zero-overlap (kernel durability gates failed). C-RESIDUAL-NOVELTY per_hit economics FALSIFIED (1.005>0.85, rho 0.363 vs 0.60) and superseded by M_total_f10 Pareto; the whole product program is invalid on distributed substrate. Physics 74 exps no beyond-memory signal on BrowserGym (Dirichlet-Multinomial K12/K24 BC~0) and Intel within-store transfer falsified (18/20 identical captures p=1.0, AX_consistency HIT 0). Frontier alias tunnel bounded at 21/40=0.525, 0/10 mixed triple-channel after 17 catalog/routing/WebMCP permutations. Factory choke-point is Runtime single-node health-gated honesty substrate (corrected wsgi, nginx $request_uri sticky, If-None-Match/ETag n>=800, honest sum counters) that gates Graph VALIDATED, Product Pareto, and Intel census use. No starved claims, but neglected C-LLM-INHERIT, C-CROSSSITE true holdout, and C-WEB-DYNAMICS remain untested on real production heterogeneous BrowserGym manifest.",
+    "schema_version": 1,
+    "scout_assessment": "Scout brief is largely accepted: its synthesis of synthetic-only freshness/delta wins, 0/6 param-inherit invalid, per_hit falsification superseded by M_total Pareto, physics Gamma-ratio recentering loop, 17-deep alias bound, and cross-lane dependency map (Runtime->Graph->Product, Intel->all) is correct against Codex. Its stalled/idle lane suggested reactivations are adopted for Runtime (single-node honesty gate), Graph (health-gated blast-radius 2-3), Intel (durable census+blind baselines) and Product (retire per_hit). Challenge: Scout recommends Frontier residual-novelty pivot and barrier-physics rewind as alternatives and Physics PARK pending Intel manifest \u2014 we adopt PARK for Physics but force Frontier pivot to residual-novelty verification economics on 36 orthogonal families as the primary basin exit (not another alias permutation), reserving barrier-physics rewind as explicit fallback if honest economics remains non-Pareto under QCR, and we gate all distributed/real-LLM authorizations on single-node PASS, deferring Scout's distributed n>=800 promotion until then. No deep source inspection needed; Scout external findings (BrowserGym 0.14.3, DSM 99%+IR, WebArena ~40-70% SOTA) delegated to Intel for blind reproduction."
+  },
+  "experiment_id": "EXP-PRODUCT-36020894109",
+  "inherited_last_verdict": "MEASUREMENT_INVALID",
+  "inherited_next_question": "After rebuilding contamination-free holdout (Hard258 258-task heterogeneous census or rebuilt 192/36 with value_set_A intersect B empty on all 36 families TRAIN-only Jaccard<0.30 630 pairs 0.0 preserved) and authorizing GHCR ghcr.io/servicenow/browsergym:0.14.3 (playwright 1.63.0 importable, 2000-node 1280x720 CDP getFullAXTree AX>10) + OPENAI_API_KEY for gpt-4o-mini 15-step Playwright same model/tools/budget and fixing NC1 trajectory-grouped null to achieve |rho_shuffled|<0.20 p>=0.20 per-stratum |rho_length|<0.20 |rho_shuffled_proxy|<0.20 on real trajectories, does honest M_total_f10/f100 Pareto (tokens+browser+latency vs accuracy at f=10/100, 5000 family-stratified trajectory-grouped bootstrap + 5000 block-permutation, rho_proxy_real>=0.50 per-stratum, AUROC>=0.75 precision>=0.80 false_accept<=0.10 UNKNOWN>=0.85 ECE<=0.15, correlated probe saving>=30% accuracy>=0.90 vs seeded-42 random 0.53, DSM 714/2147 80-94% $0.002-0.092 amortized, safety CuP non-inferior) demonstrate dominance vs RAG-EMBED TAU0.30/QCR k5, Stagehand cache, and DSM/SGDR/AWM formally superseding per_hit 1.005>0.85 rho 0.363<0.60 on health-gated single-node HS256 sticky n_non304>=800 stratified substrate?",
+  "lane": "product",
+  "origin_github_run_id": "36020894109",
+  "parent_handoff": {
+    "experiment_id": "EXP-PRODUCT-35999358218",
+    "path": "research/experiments/EXP-PRODUCT-35999358218/handoff.json",
+    "sha256": "39431f47f081833ee1a2e7a6fcc7da859cf2cd4b259e407cfdd5d4cacf298fca"
+  },
+  "reason": "global-director-PIVOT",
+  "request_hash": "9c1e450c0fa1add475f266c26fcfa4e614c9540084e2f71302469967ad258c74",
+  "request_id": "65d0f0bb8c0c02c9c4e7df15",
+  "schema_version": 1
+}
