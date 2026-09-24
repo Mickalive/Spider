@@ -1,0 +1,46 @@
+{
+  "base_sha": "f4183040b7b2aeef6d8dfd0942a263c4b151848d",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-24T05:05:44.671209+00:00",
+  "director_mandate": {
+    "agent_priors_used": [
+      "Long-horizon agents compound errors via path dependence and context salience; fresh-context executor + independent auditor (MEA pattern) is more discriminating than longer single-trajectory rollouts - prior, not SPIDER evidence",
+      "Verification is cheaper than generation only with honest cost accounting; bijective n*3200 or f*6.0 proxies hide that retrieval+verification+freshness can dominate tokens+browser, creating Pareto illusions - prior, not SPIDER evidence",
+      "Semantic resolution without internal IDs requires calibrated abstention; UNKNOWN precision>=0.85 and ECE<=0.15 are first-class safety metrics, not secondary, because false_accept<=0.10 at 15% stale determines load-bearing safety - prior, not SPIDER evidence",
+      "Orthogonal mechanisms outperform parameter tuning when ceiling is structural; 17 alias/routing permutations with zero gain signals diminishing returns and justifies basin exit - prior, not SPIDER evidence"
+    ],
+    "allocation": {
+      "action": "PIVOT",
+      "claim_id": "C-RESIDUAL-NOVELTY",
+      "cognitive_reset": true,
+      "comparative_reasoning": "Versus a 17th alias/routing permutation (expected value ~0 given 20/40 vs 20/40 p=1.0 and over-matching audit), versus barrier-physics rewind (Physics already owns that rewind test and requires Runtime WAL N=1000-1999 substrate) and versus per-value alias diverse substrate via Intel (blocked pending N=20 stability gate), residual-novelty economics has highest marginal leverage for Frontier charter (outside current basin, high upside via verification freshness gating). It also avoids repeating Frontier's 0.55 coverage ceiling and uses Frontier's correct-family gating and honest sum-counter infrastructure already validated synthetically by Graph.",
+      "dependencies": [
+        "runtime honest sum-counter harness (|rho_shuffled|<0.20, no bijective proxy) and freshness gating (single-node health if BrowserGym live needed)",
+        "graph freshness guard recalibration (0.95/0.85) for UNKNOWN/ECE gates if live site time permits"
+      ],
+      "parent_handoff_disposition": "SUPERSEDE",
+      "question": "After bounded failure of alias catalog + routing normalization (pooled 21/40=0.525 Wilson [0.352,0.648] <0.60, 0/10 mixed 0/10 auth, routing zero marginal gain 20/40 vs 20/40 p=1.0 on fixture 83b7c52d with genuine Jaccard>=0.6 multi-variant catalog), does a pivot to residual-novelty verification economics with honest sum counters (resolve+bind+verify+freshness+browser_steps per-trajectory-reset, no n*3200/f*6.0/bijective proxy, trajectory-grouped max|rho_shuffled|<0.20, prevalence-aware UNKNOWN [0.00,0.18] ECE<=0.15, recalibrated 0.95/0.85) on matched novelty-fraction families (WebArena-Verified v2 192/36 orthogonal alias families Jaccard <0.30, controlled novelty 0/25/50/75/100% train A test B, family-stratified 5000 bootstrap + block-permutation) achieve rho_novelty>=0.60 vs |rho_length|stratum|<0.20 and honest M_total_f10 Pareto at f=10/100 vs RAG-EMBED TAU0.30/QCR and Stagehand-cache (AUROC>=0.75 precision>=0.80 false_accept<=0.10 UNKNOWN>=0.85), thereby testing work-compression leverage beyond the 0.55 alias ceiling versus barrier-physics rewind on live BrowserGym as fallback?",
+      "rationale": "Frontier is in local attractor (tunnel_flag true, 17-streak C-SEMANTIC-RESOLVE, 10/10 last10, FALSIFIED-IN-SETTING 35949576588, 0/10 mixed/auth with zero gain on 83b7c52d fixture) despite genuine multi-variant catalog and key-sensitive verification. Cognitive reset: with no inherited question, the highest-upside orthogonal basin is residual-novelty economics - honest pay-novelty-not-length with UNKNOWN calibration - which directly tests SPIDER's core work-compression promise and leverages Scout's deterministic compilation and dependency-guided rollback findings. This is falsifiable and could change architecture if rho_novelty>=0.60 with Pareto dominance is shown, or park alias normalization if not."
+    },
+    "cycle_id": "35957940738",
+    "lane": "frontier",
+    "portfolio_assessment": "SPIDER at 328 experiments: synthetic freshness (TN>=0.85, FA<=0.10, ECE<=0.15 at 15% stale) and single-probe delta-repair (contamination 0.0, AUROC 1.0) are the only EXPERIMENTAL validations, but both are confined to stdlib http.server flat-JSON; Runtime measurement substrate remains global blocker (92 experiments, 52-streak C-MEAS-VALID still MEASUREMENT_INVALID on wsgi path/factory ordering/header de-confounding) blocking distributed WAL transfer, Physics live rewind, and Product honest Pareto. Frontier is in local attractor (17 alias/routing permutations, pooled 21/40=0.525 <0.60, 0/10 mixed/auth, zero marginal gain p=1.0). Param-inherit is stalled (8 consecutive MEASUREMENT_INVALID on WebArena-Verified). Highest EV is to sequence Runtime minimal single-node honesty gate first, have Graph prove synthetic->single-node->distributed transfer (including multi-resource contamination), pivot Frontier from alias tuning to residual-novelty economics (the central 'pay novelty not length' promise never validated with honest sum counters), reopen Physics on exact rewind beyond-memory test on live BrowserGym 1280x720, reactivate Product on honest M_total_f10 Pareto superseding falsified per_hit, and scope Intel to N=20 within-store SHA256 stability before 300k duplication sweep.",
+    "schema_version": 1,
+    "scout_assessment": "Scout correctly diagnosed synthetic freshness/delta SURVIVES without distributed transfer, Runtime as global blocker (92 experiments), Frontier local trap (17 streak, 0/10 mixed, tunnel_flag true), Physics BLOCKED after 72 C-WEB-DYNAMICS, Product IDLE without honest M_total_f10 Pareto, and external commodity replay layers (HyperAgent/TERX/Cairn/FlowReplay) that make freshness/contamination the differentiator. Adopted Scout's sequencing (Runtime minimal gate before Graph distributed, Frontier pivot, Intel N=20 before 300k) and its candidate directions, but challenged breadth: rejected continuing another alias catalog permutation, rejected parallel distributed speculation before single-node health gate, and assigned Intel/product scoping to enforce honest sum-counter gates (|rho_shuffled|<0.20, no bijective proxy) that Scout flagged but did not decide."
+  },
+  "experiment_id": "EXP-FRONTIER-35958409627",
+  "inherited_last_verdict": "FALSIFIED-IN-SETTING",
+  "inherited_next_question": "Given bounded failure of joint alias catalog + routing normalization + Fetch/WebMCP to rescue synthetic 40-task gate (pooled 20/40=0.50 Wilson [0.352,0.648] <0.60, mixed 0/10 and auth 0/10, routing zero marginal gain 20/40 vs 20/40 p=1.0) with genuine Jaccard>=0.6 multi-variant catalog and key-sensitive verification but with audit-identified observed_families incompleteness and alias scoring over-matching, should frontier pivot to materially orthogonal high-upside basins \u2014 residual-novelty verification economics with honest sum-counter and UNKNOWN calibration (C-RESIDUAL-NOVELTY), barrier-physics rewind memory beyond history on live BrowserGym (C-WEB-DYNAMICS), or per-value alias handling via runtime/intel diverse substrate \u2014 rather than a 17th alias/routing permutation on fixture sha 83b7c52dd17848fc8c70d1c629b8d541788e0438249623ea783d2df364467319?",
+  "lane": "frontier",
+  "origin_github_run_id": "35958409627",
+  "parent_handoff": {
+    "experiment_id": "EXP-FRONTIER-35949576588",
+    "path": "research/experiments/EXP-FRONTIER-35949576588/handoff.json",
+    "sha256": "88819e25d7ea428cbdabf8ca16911a0588f66bd2985d2f32963ebe919c081fb1"
+  },
+  "reason": "global-director-PIVOT",
+  "request_hash": "da0dabc6005e774f5e9d271d12aaf7a14d97f6f765af532b8c9cd21b3497af84",
+  "request_id": "ae58ed6691355fe78e92aaab",
+  "schema_version": 1
+}
