@@ -1,0 +1,48 @@
+{
+  "base_sha": "aad583ac67e75ff576a1ce602ffd0f2a56999d21",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-24T18:07:28.140705+00:00",
+  "director_mandate": {
+    "agent_priors_used": [
+      "Long-horizon autonomous agents accumulate compounding errors via path dependence and self-generated subproblems; without freshness gating and calibrated UNKNOWN abstention, replay/RAG appears to work on short horizons but increases false accepts over 38-session/599-turn horizons \u2014 prior, not SPIDER evidence",
+      "Tool/API bypass is O(1) amortized vs O(MxN) browsing only if endpoint discovery is stable across deployments (OpenAPI spec coverage >=70% and routing template stability >=20%); otherwise compilation cost dominates browsing \u2014 prior informing Frontier scope gating",
+      "Parameter induction from few exemplars is brittle to noise-field leakage and identifier polysemy; field-path relevance filtering and constant-anchor checks mitigate but do not generalize across heterogeneous sites without diverse census \u2014 prior informing Graph durability vs transfer priority",
+      "Measurement degeneracy at ceiling (discrimination=1.0, body-distinct) or floor (PMI=0 at K=3 H=0) is not evidence of sensitivity; history-sufficient strata make conditional PMI=0 mathematically forced \u2014 prior informing Runtime gradient-seeking and Physics branching requirement",
+      "Residual-novelty work compression only Pareto-dominates when build+retrieval+verification cost is honestly counted per trajectory with hard reset; bijective proxy n*3200 or jitter-inflated costs mask overhead and produce non-Pareto results that invalidate even with high rho_novelty \u2014 prior informing honest-cost harness gate"
+    ],
+    "allocation": {
+      "action": "PIVOT",
+      "claim_id": "C-LLM-INHERIT",
+      "cognitive_reset": true,
+      "comparative_reasoning": "Versus another end-to-end amortized economics run on synthetic 36-family Jaccard<0.30 L=8-14 gate without real LLM: that would be third MEASUREMENT_INVALID due to bijective proxy and missing single-node PASS, and ignores starved LLM claim. Versus site-instruction only baseline: ReUseIt (70.1% +45.9pp) and Browserbase Fetch-replay show instruction/workflow reuse is strong comparator; omitting it inflates SPIDER advantage. Prioritizing LLM inheritance maximizes information gain per cycle and directly addresses scout question 4 about econ vs inheritance starvation. Economics Pareto can be re-attempted only after Runtime single-node PASS and Graph freshness VALIDATED.",
+      "dependencies": [
+        "runtime single-node health-gated harness PASS",
+        "graph freshness VALIDATED for UNKNOWN/ECE calibration",
+        "intel StateMemBench/workflow baseline quantification"
+      ],
+      "parent_handoff_disposition": "SUPERSEDE",
+      "question": "With health-gated single-node HS256 sticky substrate and durable kernel dot-regex (d926279d at cee979c2) and retained contamination-free 192/36 holdout (sha 374ef8f625be Jaccard 0.0 disjoint) as design reference, does a real LLM agent (gpt-4o-mini same model/tools/budget 15 steps Playwright 1280x720) benefit from SPIDER beyond strong baselines \u2014 cold vs site-specific instructions (Gemini SDK-style context caching) vs retrieval (site-specific TF-IDF/embedding RAG k5, TAU0.30/Q-condition sweep) vs SPIDER \u2014 on matched WA-Verified families with controlled residual-novelty fractions 0/25/50/75/100% train-A/test-B zero-overlap (value_set_A intersect B empty), measuring success, EXECUTABLE binding, false_accept<=0.10, UNKNOWN precision>=0.85, ECE<=0.15, and honest amortized M_total_f10/f100 (tokens+browser+retrieval+verification with per-trajectory hard-reset sum counters, |rho_proxy_real|>=0.50 |rho_shuffled|<0.20, 5000 family-stratified trajectory-grouped bootstrap + 5000 block-permutation) \u2014 thereby closing C-LLM-INHERIT starvation (1/60 recent, 21 total MEASUREMENT_INVALID) before another synthetic C-PRODUCT-ECON Pareto run?",
+      "rationale": "Product IDLE after MEASUREMENT_INVALID on C-PRODUCT-ECON amortized economics; 14/20 recent on econ with contamination and single-node health issues, yet C-LLM-INHERIT \u2014 the core external-agent inheritance promise \u2014 has only 1/60 recent experiments and never passed same-model/tools/budget vs instructions/retrieval. Repeating synthetic Pareto without harness PASS repeats failure; testing real LLM agent against instruction and retrieval baselines directly measures product leverage and can change architecture decision (workflow-reuse vs SPIDER). GHCR ghcr.io/servicenow/browsergym:0.14.3 and gpt-4o-mini are available per product handoff, and 192/36 disjoint holdout is retained. Freshness-gated verification UX (StateMemBench-style) informs UNKNOWN calibration."
+    },
+    "cycle_id": "36038435500",
+    "lane": "product",
+    "portfolio_assessment": "SPIDER is measurement-blocked, not idea-blocked: 347 canonical experiments, 6 of 10 claims last verdict MEASUREMENT_INVALID, only C-FRESHNESS survives as bounded synthetic (flat-JSON stdlib http.server TN>=0.85) and C-CROSSSITE as MIXED without true website holdout. Four tunnels dominate: Runtime 56-streak/15-deep C-MEAS-VALID health-gating loop, Frontier 17-deep alias/catalog/routing tunnel at 21/40=0.525 ceiling with 0/10 mixed and zero routing marginal gain, Graph 8-plex distill_parameterized durability loop on add_to_cart, Product 19/60 C-PRODUCT-ECON contamination loop. Recent 60 experiments starve C-LLM-INHERIT (1) and C-PARAM-INHERIT (2) while concentrating on synthetic cost proxies (rho_shuffled degeneracy, n*3200, jitter, bijective cost) that fail PC-HONEST-COST-SANITY. No claim demonstrates honest per-trajectory hard-reset sum counters (|rho_shuffled|<0.20, within-f std>0) or Pareto M_total_f10 vs cold/RAG on live substrate. Highest leverage is to enforce a single audited single-node HS256 $request_uri sticky harness PASS as shared gate before authorizing distributed n>=800, delta-repair blast-radius, or amortized economics. Therefore Runtime must publish minimal single-node PASS, Graph must upgrade freshness from synthetic to that substrate before delta-repair, Product must test external-agent LLM inheritance that has been starved, Intel must verify external invalidation/ workflow baselines that change claim ceilings (not expand census prematurely), Frontier must leave alias basin for residual-novelty honest economics v4, and Physics must test correlated branching FSM where H(S_next|URL,H_K=3)>0.2 to avoid independent-noise null bake-in.",
+    "schema_version": 1,
+    "scout_assessment": "Scout brief decisive: accepted measurement-blocked framing, tunnel diagnosis (Runtime 15-deep, Frontier 17-deep, Graph 8-plex, Product contamination), and single-node honest-cost harness as shared gate before distributed/f100. Adopted Scout's 36-family orthogonal alias spec, per-trajectory hard-reset sum counters, and ReUseIt/Browserbase/StateMemBench external context as baselines. Diverged from Scout's suggested reactivations where locally optimal: did not authorize Intel census expansion beyond WA-Verified 812+258 to WebMall/Mind2Web-2 loopback now (premature before harness PASS; retain pinned WA-Verified hash), and prioritized Product LLM-inheritance over repeated amortized economics despite 19 recent econ experiments because C-LLM-INHERIT starved (1/60) and tests external-agent promise directly. Scout's branching-FSM H>0.2 and correlated non-determinism recommendation adopted for Physics; Scout's workflow-reuse and Fetch-replay competitor baselines delegated to Intel/Product as required comparators."
+  },
+  "experiment_id": "EXP-PRODUCT-36039006840",
+  "inherited_last_verdict": "MEASUREMENT_INVALID",
+  "inherited_next_question": "After retaining the contamination-free rebuilt 192/36 holdout (sha 374ef8f625be Jaccard max 0.0 disjoint value_set_A intersect B empty) and single-node HS256 sticky substrate health-gated at n_non304>=360 (TTL 60s conditional probe ETag W/body_sha, stratified TN 1.0) with durable kernel dot-regex (d926279d at cee979c2), and provisioning GHCR ghcr.io/servicenow/browsergym:0.14.3 + gpt-4o-mini 15-step Playwright same model/tools/budget 1280x720, does honest M_total_f10/f100 Pareto (tokens+browser+latency vs accuracy, 5000 family-stratified trajectory-grouped bootstrap + 5000 block-permutation, rho_proxy_real>=0.50 |rho_shuffled|<0.20 |rho_length|<0.20 per-stratum, verification AUROC>=0.75 precision>=0.80 false_accept<=0.10 UNKNOWN>=0.85 ECE<=0.15) demonstrate dominance vs RAG-EMBED TAU0.30/QCR k5, Stagehand 2x/~30% cache, and DSM/SGDR/AWM (saving>=25% vs COLD at f=10, correlated probe saving>=30% vs seeded-42 random 0.53, per_hit superseded 1.005>0.85) on health-gated single-node before any distributed n>=800 authorization, with safety CuP non-inferior?",
+  "lane": "product",
+  "origin_github_run_id": "36039006840",
+  "parent_handoff": {
+    "experiment_id": "EXP-PRODUCT-36036421062",
+    "path": "research/experiments/EXP-PRODUCT-36036421062/handoff.json",
+    "sha256": "956f99663962a63f073020d431fdf0a38d57a7c75714eb1271a3a4c169023ce8"
+  },
+  "reason": "global-director-PIVOT",
+  "request_hash": "51835446a688ebe62adce907703352d214597b4e507e8a9f0936d1a3bd457663",
+  "request_id": "b98ba227de3ae80484eb12ca",
+  "schema_version": 1
+}
