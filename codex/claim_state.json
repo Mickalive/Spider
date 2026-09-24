@@ -2885,6 +2885,16 @@
         "claim_id": "C-LLM-INHERIT",
         "status": "HYPOTHESIS",
         "reason": "Bounded FALSIFIED same setting: QCR frozen bank TFIDF Jaccard TAU 0.30 same ranker for all systems shows RAG-EMBED proportional retrievability at n0.25 while SPIDER parameterized binding is gated to UNKNOWN, so post-retrieval parameterized inheritance advantage (SPIDER/RAG <=0.85) not demonstrated under QCR. Audit finds RAG per_hit 203 < SPIDER 320 at n0.25, SPIDER does not beat retrievable RAG or TERX at partial novelty. No real LLM selection accuracy or real LLM cost measured. C-LLM-INHERIT remains HYPOTHESIS bounded; no evidence for cross-site LLM inheritance transfer on this census."
+      },
+      {
+        "experiment_id": "EXP-PRODUCT-35961222077",
+        "lane": "product",
+        "created_at": "2026-09-24T05:44:01.073030+00:00",
+        "decision": "MEASUREMENT_INVALID",
+        "source_commit": "3dcbf2b32f909a450f9ad471bc79083fb3d58067",
+        "claim_id": "C-LLM-INHERIT",
+        "status": "MEASUREMENT_INVALID",
+        "reason": "MEASUREMENT_INVALID per frozen falsifier precedence clause (1) and (2) - audit PASS confirms producer INCONCLUSIVE correct. Independent triggers: PC2 FAIL value_set_A intersect B non-empty on 18/36 even-index families (fixture_checks pool_level 18 usage_level 18 rotation B[k]=A[(k+5)%10] sha 391e8f6c violates MV2 zero-overlap), PC5 FAIL LLM half (Docker ghcr.io/servicenow/browsergym:0.14.3 pull denied no local image playwright ModuleNotFoundError browsergym 1.5kB metapackage only), OPENAI_API_KEY ABSENT so gpt-4o-mini 15-step Playwright same-model/tools/budget NOT RUN rho_proxy_real null unmeasurable, PC4 incomplete (no dedicated 1e-6 parity artifact), plus independent clause (2) NC1 degenerate null |rho_shuffled|=0.778 CI[0.709,0.830] block-permutation p=0.0002 exceeds |rho|>=0.35 p<0.01 threshold. Any one sufficient per spec prereg sec9. All primary claim metrics remain null (unknown not zero): success margins f10/f100 null, M_total_f10/f100 null, rho_novelty claim null, rho_proxy_real null, AUROC on real trajectories null. No file-proxy surrogation for SURVIVES per Director SUPERSEDE. This is infrastructure/measurement-gate failure not scientific falsification; C-LLM-INHERIT remains HYPOTHESIS bounded to prior file-proxy per_hit 1.045>0.85 rho 0.472<0.60 falsification; no promotion to EXPERIMENTAL or PRODUCT_CORE. Bounded operational ceiling only: single-node HS256 sticky substrate half passes."
       }
     ],
     "C-PRODUCT-ECON": [
@@ -4334,14 +4344,14 @@
       "reason": "Audit REVISE (producer_claim_supported=false) confirms Docker-pinned WebArena-Verified v2 durable artifact delivered but downgrades ceiling: single-source pin only (Docker Hub API 200 digest sha256:3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb len64, container quirky_ishizaka reachable HTTP200) with manifest sha d65275660814663375028e9017e1f929e3c38321041b125795e2713b52243d30 (927596 bytes) and census 812 tasks (192 shopping first-site, 182 shopping_admin, 36 families_ge3) yet only 4 product_page families [136,145,196,222] (7 product_page_tasks) constructible \u2014 frozen MV4 >=10 families not met (HIGH severity VF-MV4). Fragment pipeline repaired at 1280x720 via CDP Accessibility.getFullAXTree (BrowserGym-core 0.14.3, AgentLab 0.4.2, Playwright 1.63.0, Chromium 153.0.8010.12) median AX 698 (min626) median DOM 201305 (min195052) on 13 real product pages +3 synthetic, outerHTML SHA256 recomputed AFTER page.content()+AX with 9 base+expanded (fotorama\\d{6,})+body regex <body[^>]*>.*?</body> DOTALL live grammar hash 273eafbcb817e8981f843581a724594665cabdd357b318c701251929ee9c83de, SHA stability 16/16 both directions TRUE. Richer AX bbox false 0/16 is Chromium protocol fact (AXNode lacks boundingBox/computedStyle per ax_protocol_dump.json) with anchored Runtime.evaluate replacement 13/13. HF source failed 401x3 (HF_TOKEN absent) so cross-source byte-identity unavailable (VF-MV2 medium). Synthetic alias-OOD shows alias-aware transfer across channel heterogeneity (SPIDER-ALIAS 0.925 [0.85,1.0] flat p=0.626 vs DSM 0.75 [0.625,0.875] structured collapse) but world is synthetic deterministic MAX_STEPS10 strict per-channel verification so real website hold-out not measured (UNRES-REAL-HOLDOUT, VF-SYNTHETIC-WORLD-LIMIT high). WebGym 292k duplication/prevalence sweep null (HF 401). Not VALIDATED; EXPERIMENTAL at 4-family synthetic alias-heterogeneity ceiling only."
     },
     "C-LLM-INHERIT": {
-      "experiment_id": "EXP-PRODUCT-35797365772",
+      "experiment_id": "EXP-PRODUCT-35961222077",
       "lane": "product",
-      "created_at": "2026-09-22T23:26:06.237602+00:00",
-      "decision": "FALSIFIED",
-      "source_commit": "67c49b4217496749032df9276458cdedc6102c18",
+      "created_at": "2026-09-24T05:44:01.073030+00:00",
+      "decision": "MEASUREMENT_INVALID",
+      "source_commit": "3dcbf2b32f909a450f9ad471bc79083fb3d58067",
       "claim_id": "C-LLM-INHERIT",
-      "status": "HYPOTHESIS",
-      "reason": "Bounded FALSIFIED same setting: QCR frozen bank TFIDF Jaccard TAU 0.30 same ranker for all systems shows RAG-EMBED proportional retrievability at n0.25 while SPIDER parameterized binding is gated to UNKNOWN, so post-retrieval parameterized inheritance advantage (SPIDER/RAG <=0.85) not demonstrated under QCR. Audit finds RAG per_hit 203 < SPIDER 320 at n0.25, SPIDER does not beat retrievable RAG or TERX at partial novelty. No real LLM selection accuracy or real LLM cost measured. C-LLM-INHERIT remains HYPOTHESIS bounded; no evidence for cross-site LLM inheritance transfer on this census."
+      "status": "MEASUREMENT_INVALID",
+      "reason": "MEASUREMENT_INVALID per frozen falsifier precedence clause (1) and (2) - audit PASS confirms producer INCONCLUSIVE correct. Independent triggers: PC2 FAIL value_set_A intersect B non-empty on 18/36 even-index families (fixture_checks pool_level 18 usage_level 18 rotation B[k]=A[(k+5)%10] sha 391e8f6c violates MV2 zero-overlap), PC5 FAIL LLM half (Docker ghcr.io/servicenow/browsergym:0.14.3 pull denied no local image playwright ModuleNotFoundError browsergym 1.5kB metapackage only), OPENAI_API_KEY ABSENT so gpt-4o-mini 15-step Playwright same-model/tools/budget NOT RUN rho_proxy_real null unmeasurable, PC4 incomplete (no dedicated 1e-6 parity artifact), plus independent clause (2) NC1 degenerate null |rho_shuffled|=0.778 CI[0.709,0.830] block-permutation p=0.0002 exceeds |rho|>=0.35 p<0.01 threshold. Any one sufficient per spec prereg sec9. All primary claim metrics remain null (unknown not zero): success margins f10/f100 null, M_total_f10/f100 null, rho_novelty claim null, rho_proxy_real null, AUROC on real trajectories null. No file-proxy surrogation for SURVIVES per Director SUPERSEDE. This is infrastructure/measurement-gate failure not scientific falsification; C-LLM-INHERIT remains HYPOTHESIS bounded to prior file-proxy per_hit 1.045>0.85 rho 0.472<0.60 falsification; no promotion to EXPERIMENTAL or PRODUCT_CORE. Bounded operational ceiling only: single-node HS256 sticky substrate half passes."
     },
     "C-PRODUCT-ECON": {
       "experiment_id": "EXP-PRODUCT-35958402290",
