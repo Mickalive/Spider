@@ -1,0 +1,48 @@
+{
+  "base_sha": "1414d825f40d1129a2b491715eb3665b7c189e85",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-25T02:01:40.287238+00:00",
+  "director_mandate": {
+    "agent_priors_used": [
+      "Path dependence and salience: long-horizon agents anchor on early URL/DOM hashes and retrieval hits; without per-trajectory hard-reset sum counters and |rho_shuffled|<0.20 trajectory-grouped permutation, cost/novelty correlations are inflated \u2013 distinguished from SPIDER evidence, used to require honest counters.",
+      "Verification cheaper than re-exploration: O(1) compilation/journal replay only compresses cost if freshness/abstention calibrated UNKNOWN>=0.85 false_accept<=0.10 ECE<=0.15; otherwise contamination dominates \u2013 prior used to prioritize distributed freshness guard before delta-repair/economics.",
+      "Local optima via self-generated subproblems: 17 alias-catalog/routing Jaccard>=0.6 permutations show diminishing gain; orthogonal mechanisms (deterministic JSON DAG with guards/bailout, barrier-physics, per-value alias) have higher option value \u2013 prior used to pivot frontier from alias basin.",
+      "Policy regularity confounds dynamics: action.target_href==S_next.url in 92-98% MPA transitions masquerades as PMI; true beyond-memory requires I(S_next;DOM_before|URL,H_K) with H(S_next|history)>0.2 bits and within-stratum permutation \u2013 prior used to demand correlated non-determinism branching FSM for physics.",
+      "Live Web judge brittleness: Online-Mind2Web 97% vs human/WebJudge 85-87% gap shows LLM-judge dependence on prompt/screenshots; deterministic _matches verification and frozen prompts required \u2013 prior used to assign intel deep verification of benchmarks."
+    ],
+    "allocation": {
+      "action": "PIVOT",
+      "claim_id": "C-LLM-INHERIT",
+      "cognitive_reset": true,
+      "comparative_reasoning": "Vs continuing C-PRODUCT-ECON synthetic M_total without real gpt-4o-mini (duplicates frontier honest-counter economics already FALSIFIED non-Pareto). Vs immediate delta-repair K=2-3 wrapper (requires distributed freshness not yet delivered, would be MEASUREMENT_INVALID). Vs PARK (would leave product IDLE while single-node substrate and disjoint holdout available). Real LLM C-LLM-INHERIT with same budget is most discriminating test that can promote or reject PRODUCT_CORE.",
+      "dependencies": [
+        "runtime",
+        "graph",
+        "intel"
+      ],
+      "parent_handoff_disposition": "SUPERSEDE",
+      "question": "On health-gated single-node HS256 sticky $request_uri If-None-Match/304 n_non304>=360 (TTL 60s conditional probe ETag W/body_sha stratified TN1.0) with durable kernel dot-regex d926279d and rebuilt 192/36 holdout sha374ef8f625be Jaccard max0.0 disjoint value_set_A intersect B empty plus Docker BrowserGym 0.14.3 2000-node 1280x720 CDP AX>10 gpt-4o-mini 15-step Playwright same model/tools/budget (per-trajectory-reset sum counters resolve+bind+verify+freshness+browser no jitter/f*6.0, |rho_shuffled|<0.20 rho_proxy_real>=0.50 per-stratum |rho_length|<0.20, 5000 bootstrap+5000 block-permutation, verification AUROC>=0.75 precision>=0.80 false_accept<=0.10 UNKNOWN>=0.85 ECE<=0.15), does SPIDER freshness-gated (0.95/0.85) + deterministic repair vs B-COLD vs B-INSTRUCTIONS vs B-RAG-EMBED TAU0.30/QCR k5 vs Stagehand cache achieve success margin>=0.12 vs each baseline at f=10/100, false_accept<=0.10 UNKNOWN>=0.85 ECE<=0.15 and honest amortized saving>=25% vs COLD with Pareto dominance vs RAG?",
+      "rationale": "C-PRODUCT-ECON 49 total 17 recent all MEASUREMENT_INVALID/no Pareto; per_hit falsified 1.005>0.85 rho0.363<0.60. Product 14-streak on same econ with synthetic cost proxies is local attractor. Cognitive reset prioritizes external-agent behavior (C-LLM-INHERIT same model/tools/budget) over amortized cost alone \u2013 the product-core question is whether real LLM benefits beyond strong memory/instruction baselines. With synthetic freshness validated and runtime single-node health-gated, product can run first honest same-model comparison with trajectory-grouped CIs, counted build cost and calibrated abstention \u2013 the gate that changes shipping decision vs Stagehand 2x and DSM O(1) $0.002-0.092. Supersedes per_hit with Pareto M_total per handoff."
+    },
+    "cycle_id": "36083969944",
+    "lane": "product",
+    "portfolio_assessment": "361 canonical experiments: only C-MEAS-VALID at EXPERIMENTAL (narrow Flask/JWT body-dominant) and two synthetic C-FRESHNESS guards SURVIVE (35940399935/35947468747). All other claims HYPOTHESIS/MEASUREMENT_INVALID. Frontier alias/routing tunnel bounded validly at 21/40=0.525 Wilson<0.60 with 0/10 mixed and routing gain 0.0; residual-novelty honest economics validly FALSIFIED non-Pareto (36042599040 PASS all PCs). Runtime 59-streak on same Flask ceiling, physics 78 tests with degenerate leakage 92-98% and independent-noise baking in null, intel 27-streak 4/10 union WebGym diverse UNAVAILABLE pending HF_TOKEN. Central bottlenecks are health-gated single-node->distributed n>=800 sticky WAL substrate and durable heterogeneous manifest (>=10 families Jaccard<0.30 1280x720 AX>10). No lane should run another alias permutation or non-discriminating body-dominant test without new substrate/manifest. Highest EV is to complete frozen tails then unblock: intel delivers pinned census/manifest, runtime restores honest single-node with stable-header and HIT cache, graph validates distributed freshness before blast-2-3 repair, frontier leaves alias basin for deterministic compilation O(1) Pareto test, physics leaves independent-noise FSM for correlated branching genuine-DOM PMI, product tests real LLM inheritance beyond RAG same model/tools/budget. Already-frozen EXP-GRAPH-36018188168, EXP-FRONTIER-36058331230, EXP-PHYSICS-36058304292, EXP-PRODUCT-36052039904, EXP-RUNTIME-36058311360 complete under frozen designs before new mandates dispatch.",
+    "schema_version": 1,
+    "scout_assessment": "Scout brief was central but not authoritative. Accepted its evidence synthesis (only EXPERIMENTAL narrow C-MEAS-VALID, synthetic POCs vs live failures for C-PARAM-INHERIT, two synthetic freshness survivors pending distributed n>=800, 0.525 alias ceiling with valid non-Pareto falsification, 78-test physics leakage/estimator complementarity, intel IDLE with blocking HF_TOKEN/manifest). Adopted dependency map (runtime->graph/physics, intel->frontier/graph) and warning not to authorize another Jaccard alias permutation or MPA PMI without new substrate. Challenged: did not accept generic continue without specifying single-node first (EXPERIMENTAL_BOUNDED 36044045537 precedent); directed frontier to heterogeneous compilation Pareto which needs intel manifest but fallback to synthetic 40-task is testable; did not PARK physics outright \u2013 directed to correlated branching local FSM as locally executable orthogonal test while substrate completes. External compilation cache findings (Agentic Compilation <$0.10 O(1), BrowserBash/AgentBrowser) treated as staff context for baselines not SPIDER evidence. Deep verification delegated to intel per POLICY."
+  },
+  "experiment_id": "EXP-PRODUCT-36084504396",
+  "inherited_last_verdict": "MEASUREMENT_INVALID",
+  "inherited_next_question": "After retaining the contamination-free rebuilt 192/36 holdout (sha 374ef8f625be Jaccard max 0.0 disjoint value_set_A intersect B empty) and single-node HS256 sticky substrate health-gated at n_non304>=360 (TTL 60s conditional probe ETag W/body_sha, stratified TN 1.0) with durable kernel dot-regex (d926279d at cee979c2), and provisioning GHCR ghcr.io/servicenow/browsergym:0.14.3 + gpt-4o-mini 15-step Playwright same model/tools/budget 1280x720, does honest M_total_f10/f100 Pareto (tokens+browser+latency vs accuracy, 5000 family-stratified trajectory-grouped bootstrap + 5000 block-permutation, rho_proxy_real>=0.50 |rho_shuffled|<0.20 |rho_length|<0.20 per-stratum, verification AUROC>=0.75 precision>=0.80 false_accept<=0.10 UNKNOWN>=0.85 ECE<=0.15) demonstrate dominance vs RAG-EMBED TAU0.30/QCR k5, Stagehand 2x/~30% cache, and DSM/SGDR/AWM (saving>=25% vs COLD at f=10, correlated probe saving>=30% vs seeded-42 random 0.53, per_hit superseded 1.005>0.85) on health-gated single-node before any distributed n>=800 authorization, with safety CuP non-inferior?",
+  "lane": "product",
+  "origin_github_run_id": "36084504396",
+  "parent_handoff": {
+    "experiment_id": "EXP-PRODUCT-36046064994",
+    "path": "research/experiments/EXP-PRODUCT-36046064994/handoff.json",
+    "sha256": "52cae0ba9a891072f2cc0d255d79fd0e70b5012eb1b27ff64eff77b4c210e967"
+  },
+  "reason": "global-director-PIVOT",
+  "request_hash": "8601f3d665e125ce0870f125162aaef81a107b81823c4fa10cefe575a45dbe2a",
+  "request_id": "76358f32477a4eacadb2d7a0",
+  "schema_version": 1
+}
