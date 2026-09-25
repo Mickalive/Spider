@@ -1,0 +1,258 @@
+{
+ "denominator_ci95_latency_ms": [
+  -1.2344499684343435,
+  0.2
+ ],
+ "dominant_max_abs_rel_change": 0.11327390510073092,
+ "dominant_quantity": "cold_serving_cost",
+ "f_star_bytes": {
+  "build_cost": 35027.0,
+  "computable": true,
+  "denominator_per_reuse_saving": 954.4114583333334,
+  "f_star": 36.70010423090146,
+  "formula": "f* = (build_cost + verify_cost) / (serving_cost_cold - serving_cost_inherited)",
+  "numerator_onetime_cost": 35027.0,
+  "serving_cost_cold": 971.0989583333334,
+  "serving_cost_inherited": 16.6875,
+  "token_inputs": "NOT_APPLICABLE (no token parameter exists by construction)",
+  "unit": "bytes",
+  "verify_cost": 0.0
+ },
+ "f_star_ci95_latency_ms": null,
+ "f_star_counter_ops": {
+  "build_cost": 0.0,
+  "computable": false,
+  "denominator_per_reuse_saving": -15.083333333333336,
+  "f_star": null,
+  "formula": "f* = (build_cost + verify_cost) / (serving_cost_cold - serving_cost_inherited)",
+  "numerator_onetime_cost": 0.0,
+  "serving_cost_cold": 32.6875,
+  "serving_cost_inherited": 47.770833333333336,
+  "token_inputs": "NOT_APPLICABLE (no token parameter exists by construction)",
+  "unit": "counter_ops",
+  "verify_cost": 0.0
+ },
+ "f_star_ms": {
+  "build_cost": 1913.3279190000394,
+  "computable": false,
+  "denominator_per_reuse_saving": -0.53125,
+  "f_star": null,
+  "formula": "f* = (build_cost + verify_cost) / (serving_cost_cold - serving_cost_inherited)",
+  "numerator_onetime_cost": 2020.109376999244,
+  "serving_cost_cold": 24.505208333333332,
+  "serving_cost_inherited": 25.036458333333332,
+  "token_inputs": "NOT_APPLICABLE (no token parameter exists by construction)",
+  "unit": "ms",
+  "verify_cost": 106.78145799920458
+ },
+ "f_star_requests": {
+  "build_cost": 429.0,
+  "computable": false,
+  "denominator_per_reuse_saving": 0.0,
+  "f_star": null,
+  "formula": "f* = (build_cost + verify_cost) / (serving_cost_cold - serving_cost_inherited)",
+  "numerator_onetime_cost": 429.0,
+  "serving_cost_cold": 10.895833333333334,
+  "serving_cost_inherited": 10.895833333333334,
+  "token_inputs": "NOT_APPLICABLE (no token parameter exists by construction)",
+  "unit": "requests",
+  "verify_cost": 0.0
+ },
+ "formula": "f* = (build_cost + verify_cost) / (serving_cost_cold - serving_cost_inherited)",
+ "inputs_ms": {
+  "build_cost": 1913.3279190000394,
+  "cold_serving_cost": 24.505208333333332,
+  "inherited_serving_cost": 25.036458333333332,
+  "verify_cost": 106.78145799920458
+ },
+ "notes": [
+  "build/verify/serving are measured wall-clock and transfer work from this dry run",
+  "requests and counter_ops units are reported even when not computable (denominator ~0 or negative) because they show where the saving lives"
+ ],
+ "primary_f_star": 36.70010423090146,
+ "primary_sensitivity": {
+  "base": {
+   "build_cost": 35027.0,
+   "computable": true,
+   "denominator_per_reuse_saving": 954.4114583333334,
+   "f_star": 36.70010423090146,
+   "formula": "f* = (build_cost + verify_cost) / (serving_cost_cold - serving_cost_inherited)",
+   "numerator_onetime_cost": 35027.0,
+   "serving_cost_cold": 971.0989583333334,
+   "serving_cost_inherited": 16.6875,
+   "token_inputs": "NOT_APPLICABLE (no token parameter exists by construction)",
+   "unit": "bytes",
+   "verify_cost": 0.0
+  },
+  "delta": 0.1,
+  "dominant_max_abs_rel_change": 0.11327390510073092,
+  "dominant_quantity": "cold_serving_cost",
+  "per_input": {
+   "build_cost": {
+    "becomes_noncomputable": [],
+    "f_star_down": 33.03009380781131,
+    "f_star_up": 40.37011465399161,
+    "max_abs_rel_change": 0.10000000000000003,
+    "rel_change_down": -0.10000000000000003,
+    "rel_change_up": 0.10000000000000003,
+    "value": 35027.0
+   },
+   "cold_serving_cost": {
+    "becomes_noncomputable": [],
+    "f_star_down": 40.857268354739524,
+    "f_star_up": 33.310783334266176,
+    "max_abs_rel_change": 0.11327390510073092,
+    "rel_change_down": 0.11327390510073092,
+    "rel_change_up": -0.09235180574177981,
+    "value": 971.0989583333334
+   },
+   "inherited_serving_cost": {
+    "becomes_noncomputable": [],
+    "f_star_down": 36.63604757707523,
+    "f_star_up": 36.76438527802955,
+    "max_abs_rel_change": 0.0017515221952412448,
+    "rel_change_down": -0.001745407953699817,
+    "rel_change_up": 0.0017515221952412448,
+    "value": 16.6875
+   },
+   "verify_cost": {
+    "becomes_noncomputable": [],
+    "f_star_down": 36.70010423090146,
+    "f_star_up": 36.70010423090146,
+    "max_abs_rel_change": 0.0,
+    "rel_change_down": 0.0,
+    "rel_change_up": 0.0,
+    "value": 0.0
+   }
+  }
+ },
+ "primary_unit": "bytes",
+ "reuse_unit": "one executed trajectory (task) reusing the inherited family artifact",
+ "sensitivity_bytes": {
+  "base": {
+   "build_cost": 35027.0,
+   "computable": true,
+   "denominator_per_reuse_saving": 954.4114583333334,
+   "f_star": 36.70010423090146,
+   "formula": "f* = (build_cost + verify_cost) / (serving_cost_cold - serving_cost_inherited)",
+   "numerator_onetime_cost": 35027.0,
+   "serving_cost_cold": 971.0989583333334,
+   "serving_cost_inherited": 16.6875,
+   "token_inputs": "NOT_APPLICABLE (no token parameter exists by construction)",
+   "unit": "bytes",
+   "verify_cost": 0.0
+  },
+  "delta": 0.1,
+  "dominant_max_abs_rel_change": 0.11327390510073092,
+  "dominant_quantity": "cold_serving_cost",
+  "per_input": {
+   "build_cost": {
+    "becomes_noncomputable": [],
+    "f_star_down": 33.03009380781131,
+    "f_star_up": 40.37011465399161,
+    "max_abs_rel_change": 0.10000000000000003,
+    "rel_change_down": -0.10000000000000003,
+    "rel_change_up": 0.10000000000000003,
+    "value": 35027.0
+   },
+   "cold_serving_cost": {
+    "becomes_noncomputable": [],
+    "f_star_down": 40.857268354739524,
+    "f_star_up": 33.310783334266176,
+    "max_abs_rel_change": 0.11327390510073092,
+    "rel_change_down": 0.11327390510073092,
+    "rel_change_up": -0.09235180574177981,
+    "value": 971.0989583333334
+   },
+   "inherited_serving_cost": {
+    "becomes_noncomputable": [],
+    "f_star_down": 36.63604757707523,
+    "f_star_up": 36.76438527802955,
+    "max_abs_rel_change": 0.0017515221952412448,
+    "rel_change_down": -0.001745407953699817,
+    "rel_change_up": 0.0017515221952412448,
+    "value": 16.6875
+   },
+   "verify_cost": {
+    "becomes_noncomputable": [],
+    "f_star_down": 36.70010423090146,
+    "f_star_up": 36.70010423090146,
+    "max_abs_rel_change": 0.0,
+    "rel_change_down": 0.0,
+    "rel_change_up": 0.0,
+    "value": 0.0
+   }
+  }
+ },
+ "sensitivity_ms": {
+  "base": {
+   "build_cost": 1913.3279190000394,
+   "computable": false,
+   "denominator_per_reuse_saving": -0.53125,
+   "f_star": null,
+   "formula": "f* = (build_cost + verify_cost) / (serving_cost_cold - serving_cost_inherited)",
+   "numerator_onetime_cost": 2020.109376999244,
+   "serving_cost_cold": 24.505208333333332,
+   "serving_cost_inherited": 25.036458333333332,
+   "token_inputs": "NOT_APPLICABLE (no token parameter exists by construction)",
+   "unit": "ms",
+   "verify_cost": 106.78145799920458
+  },
+  "delta": 0.1,
+  "dominant_max_abs_rel_change": null,
+  "dominant_quantity": null,
+  "per_input": {
+   "build_cost": {
+    "becomes_noncomputable": [
+     "up",
+     "down"
+    ],
+    "f_star_down": null,
+    "f_star_up": null,
+    "max_abs_rel_change": null,
+    "rel_change_down": null,
+    "rel_change_up": null,
+    "value": 1913.3279190000394
+   },
+   "cold_serving_cost": {
+    "becomes_noncomputable": [
+     "down"
+    ],
+    "f_star_down": null,
+    "f_star_up": 1052.5400281787092,
+    "max_abs_rel_change": null,
+    "rel_change_down": null,
+    "rel_change_up": null,
+    "value": 24.505208333333332
+   },
+   "inherited_serving_cost": {
+    "becomes_noncomputable": [
+     "up"
+    ],
+    "f_star_down": 1024.1906532449295,
+    "f_star_up": null,
+    "max_abs_rel_change": null,
+    "rel_change_down": null,
+    "rel_change_up": null,
+    "value": 25.036458333333332
+   },
+   "verify_cost": {
+    "becomes_noncomputable": [
+     "up",
+     "down"
+    ],
+    "f_star_down": null,
+    "f_star_up": null,
+    "max_abs_rel_change": null,
+    "rel_change_down": null,
+    "rel_change_up": null,
+    "value": 106.78145799920458
+   }
+  }
+ },
+ "token_economics": {
+  "f_star_token": null,
+  "reason": "OPENAI_API_KEY absent; frozen spec forbids token counters/costs until a policy-model credential exists (UNKNOWN)",
+  "status": "NOT_APPLICABLE"
+ }
+}

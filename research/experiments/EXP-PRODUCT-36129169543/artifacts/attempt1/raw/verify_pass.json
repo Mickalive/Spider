@@ -1,0 +1,13 @@
+{
+ "auditor_checks": 36,
+ "auditor_passes": 36,
+ "phases": {
+  "auditor_ms": 23.24801699978707,
+  "freshness_probe_ms": 86.36960399962845
+ },
+ "probe_304_hits": 36,
+ "probe_payload_bytes": 0,
+ "probe_requests": 36,
+ "unit": "wall-clock milliseconds (measured, no token denominators)",
+ "verify_ms": 109.61762099941552
+}

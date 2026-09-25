@@ -1,0 +1,45 @@
+
+test_all_eight_counter_paths_non_zero_for_at_least_one_arm (test_eval_harness.ArmExecutionTests.test_all_eight_counter_paths_non_zero_for_at_least_one_arm) ... ok
+test_browser_steps_counter_equals_length (test_eval_harness.ArmExecutionTests.test_browser_steps_counter_equals_length) ... ok
+test_every_arm_produces_all_eight_counters_as_ints (test_eval_harness.ArmExecutionTests.test_every_arm_produces_all_eight_counters_as_ints) ... ok
+test_five_frozen_arms_present (test_eval_harness.ArmExecutionTests.test_five_frozen_arms_present) ... ok
+test_inherited_transfer_never_exceeds_cold (test_eval_harness.ArmExecutionTests.test_inherited_transfer_never_exceeds_cold) ... ok
+test_no_token_counters_exist (test_eval_harness.ArmExecutionTests.test_no_token_counters_exist) ... ok
+test_per_trajectory_hard_reset_no_accumulation (test_eval_harness.ArmExecutionTests.test_per_trajectory_hard_reset_no_accumulation) ... ok
+test_requests_counter_equals_length (test_eval_harness.ArmExecutionTests.test_requests_counter_equals_length) ... ok
+test_spider_only_arms_own_freshness_and_repair (test_eval_harness.ArmExecutionTests.test_spider_only_arms_own_freshness_and_repair) ... ok
+test_formula (test_eval_harness.BreakevenTests.test_formula) ... ok
+test_negative_denominator_not_computable (test_eval_harness.BreakevenTests.test_negative_denominator_not_computable) ... ok
+test_no_token_parameter_exists (test_eval_harness.BreakevenTests.test_no_token_parameter_exists) ... ok
+test_oat_sensitivity_identifies_dominant_quantity (test_eval_harness.BreakevenTests.test_oat_sensitivity_identifies_dominant_quantity) ... ok
+test_eight_frozen_counter_names (test_eval_harness.CounterTests.test_eight_frozen_counter_names) ... ok
+test_ledger_hard_reset (test_eval_harness.CounterTests.test_ledger_hard_reset) ... ok
+test_ledger_rejects_unknown_counter (test_eval_harness.CounterTests.test_ledger_rejects_unknown_counter) ... ok
+test_snapshot_values_are_integers (test_eval_harness.CounterTests.test_snapshot_values_are_integers) ... ok
+test_gate_decision_has_no_value_slot (test_eval_harness.GateTests.test_gate_decision_has_no_value_slot) ... ok
+test_live_gate_unknown_without_browser_and_credential (test_eval_harness.GateTests.test_live_gate_unknown_without_browser_and_credential) ... ok
+test_missing_capability_key_fails_closed (test_eval_harness.GateTests.test_missing_capability_key_fails_closed) ... ok
+test_probe_capabilities_is_fail_closed_on_probe_error (test_eval_harness.GateTests.test_probe_capabilities_is_fail_closed_on_probe_error) ... ok
+test_probe_reports_environment_truthfully (test_eval_harness.GateTests.test_probe_reports_environment_truthfully) ... ok
+test_scripted_gate_executable_when_substrate_present (test_eval_harness.GateTests.test_scripted_gate_executable_when_substrate_present) ... ok
+test_unknown_arm_records_carry_no_numbers (test_eval_harness.GateTests.test_unknown_arm_records_carry_no_numbers) ... ok
+test_unknown_mode_fails_closed (test_eval_harness.GateTests.test_unknown_mode_fails_closed) ... ok
+test_retrieval_hit_on_matching_site (test_eval_harness.RagArmTests.test_retrieval_hit_on_matching_site) ... ok
+test_tau_threshold_is_enforced (test_eval_harness.RagArmTests.test_tau_threshold_is_enforced) ... ok
+test_build_and_verify_inheritance_measured (test_eval_harness.SpiderMechanismTests.test_build_and_verify_inheritance_measured) ... ok
+test_integrity_check_detects_tampering (test_eval_harness.SpiderMechanismTests.test_integrity_check_detects_tampering) ... ok
+test_localized_repair_fires_on_stale_validator (test_eval_harness.SpiderMechanismTests.test_localized_repair_fires_on_stale_validator) ... ok
+test_spider_resolves_executable_and_binds (test_eval_harness.SpiderMechanismTests.test_spider_resolves_executable_and_binds) ... ok
+test_unknown_family_abstains_without_fabricated_counters (test_eval_harness.SpiderMechanismTests.test_unknown_family_abstains_without_fabricated_counters) ... ok
+test_block_permutation_p_value_range (test_eval_harness.StatisticsTests.test_block_permutation_p_value_range) ... ok
+test_bootstrap_ci_computes_and_orders (test_eval_harness.StatisticsTests.test_bootstrap_ci_computes_and_orders) ... ok
+test_paired_signflip_permutation (test_eval_harness.StatisticsTests.test_paired_signflip_permutation) ... ok
+test_spearman_monotone (test_eval_harness.StatisticsTests.test_spearman_monotone) ... ok
+test_invalidation_forces_abstention (test_kernel.KernelTests.test_invalidation_forces_abstention) ... ok
+test_parameterized_mechanism_binds_only_when_guarded (test_kernel.KernelTests.test_parameterized_mechanism_binds_only_when_guarded) ... ok
+test_unknown_is_default (test_kernel.KernelTests.test_unknown_is_default) ... ok
+
+----------------------------------------------------------------------
+Ran 39 tests in 0.046s
+
+OK

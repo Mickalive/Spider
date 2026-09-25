@@ -1,0 +1,336 @@
+{
+ "arm_phases": {
+  "B-COLD": {
+   "records": 192,
+   "secs": 4.837
+  },
+  "B-DETERMINISTIC-EXECUTOR": {
+   "records": 192,
+   "secs": 4.903
+  },
+  "B-INSTRUCTIONS": {
+   "records": 192,
+   "secs": 4.972
+  },
+  "B-RAG-EMBED": {
+   "records": 192,
+   "secs": 4.912
+  },
+  "P-SPIDER": {
+   "records": 192,
+   "secs": 5.198
+  }
+ },
+ "arm_summary": {
+  "B-COLD": {
+   "auditor_pass": 0,
+   "counter_ops_mean_per_trajectory": 32.6875,
+   "counters_mean_per_trajectory": {
+    "bind": 0,
+    "browser_steps": 10.895833333333334,
+    "freshness": 0,
+    "latency_ms": 24.505208333333332,
+    "repair": 0,
+    "requests": 10.895833333333334,
+    "resolve": 0,
+    "verify": 10.895833333333334
+   },
+   "counters_sum": {
+    "bind": 0,
+    "browser_steps": 2092,
+    "freshness": 0,
+    "latency_ms": 4705,
+    "repair": 0,
+    "requests": 2092,
+    "resolve": 0,
+    "verify": 2092
+   },
+   "gate_statuses": [
+    "EXECUTABLE"
+   ],
+   "integrity_failures": 0,
+   "latency_ms_total": 4705,
+   "n_executable": 192,
+   "n_records": 192,
+   "payload_bytes_mean": 971.0989583333334,
+   "payload_bytes_total": 186451,
+   "resolve_executable": 0,
+   "stale_repairs_total": 0
+  },
+  "B-DETERMINISTIC-EXECUTOR": {
+   "auditor_pass": 0,
+   "counter_ops_mean_per_trajectory": 34.6875,
+   "counters_mean_per_trajectory": {
+    "bind": 2,
+    "browser_steps": 10.895833333333334,
+    "freshness": 0,
+    "latency_ms": 24.875,
+    "repair": 0,
+    "requests": 10.895833333333334,
+    "resolve": 0,
+    "verify": 10.895833333333334
+   },
+   "counters_sum": {
+    "bind": 384,
+    "browser_steps": 2092,
+    "freshness": 0,
+    "latency_ms": 4776,
+    "repair": 0,
+    "requests": 2092,
+    "resolve": 0,
+    "verify": 2092
+   },
+   "gate_statuses": [
+    "EXECUTABLE"
+   ],
+   "integrity_failures": 0,
+   "latency_ms_total": 4776,
+   "n_executable": 192,
+   "n_records": 192,
+   "payload_bytes_mean": 971.0989583333334,
+   "payload_bytes_total": 186451,
+   "resolve_executable": 0,
+   "stale_repairs_total": 0
+  },
+  "B-INSTRUCTIONS": {
+   "auditor_pass": 0,
+   "counter_ops_mean_per_trajectory": 32.6875,
+   "counters_mean_per_trajectory": {
+    "bind": 0,
+    "browser_steps": 10.895833333333334,
+    "freshness": 0,
+    "latency_ms": 25.265625,
+    "repair": 0,
+    "requests": 10.895833333333334,
+    "resolve": 0,
+    "verify": 10.895833333333334
+   },
+   "counters_sum": {
+    "bind": 0,
+    "browser_steps": 2092,
+    "freshness": 0,
+    "latency_ms": 4851,
+    "repair": 0,
+    "requests": 2092,
+    "resolve": 0,
+    "verify": 2092
+   },
+   "gate_statuses": [
+    "EXECUTABLE"
+   ],
+   "integrity_failures": 0,
+   "latency_ms_total": 4851,
+   "n_executable": 192,
+   "n_records": 192,
+   "payload_bytes_mean": 971.0989583333334,
+   "payload_bytes_total": 186451,
+   "resolve_executable": 0,
+   "stale_repairs_total": 0
+  },
+  "B-RAG-EMBED": {
+   "auditor_pass": 0,
+   "counter_ops_mean_per_trajectory": 35.6875,
+   "counters_mean_per_trajectory": {
+    "bind": 2,
+    "browser_steps": 10.895833333333334,
+    "freshness": 0,
+    "latency_ms": 24.911458333333332,
+    "repair": 0,
+    "requests": 10.895833333333334,
+    "resolve": 1,
+    "verify": 10.895833333333334
+   },
+   "counters_sum": {
+    "bind": 384,
+    "browser_steps": 2092,
+    "freshness": 0,
+    "latency_ms": 4783,
+    "repair": 0,
+    "requests": 2092,
+    "resolve": 192,
+    "verify": 2092
+   },
+   "gate_statuses": [
+    "EXECUTABLE"
+   ],
+   "integrity_failures": 0,
+   "latency_ms_total": 4783,
+   "n_executable": 192,
+   "n_records": 192,
+   "payload_bytes_mean": 971.0989583333334,
+   "payload_bytes_total": 186451,
+   "resolve_executable": 0,
+   "stale_repairs_total": 0
+  },
+  "P-SPIDER": {
+   "auditor_pass": 192,
+   "counter_ops_mean_per_trajectory": 47.770833333333336,
+   "counters_mean_per_trajectory": {
+    "bind": 2,
+    "browser_steps": 10.895833333333334,
+    "freshness": 10.895833333333334,
+    "latency_ms": 25.036458333333332,
+    "repair": 0.1875,
+    "requests": 10.895833333333334,
+    "resolve": 1,
+    "verify": 11.895833333333334
+   },
+   "counters_sum": {
+    "bind": 384,
+    "browser_steps": 2092,
+    "freshness": 2092,
+    "latency_ms": 4807,
+    "repair": 36,
+    "requests": 2092,
+    "resolve": 192,
+    "verify": 2284
+   },
+   "gate_statuses": [
+    "EXECUTABLE"
+   ],
+   "integrity_failures": 0,
+   "latency_ms_total": 4807,
+   "n_executable": 192,
+   "n_records": 192,
+   "payload_bytes_mean": 16.6875,
+   "payload_bytes_total": 3204,
+   "resolve_executable": 192,
+   "stale_repairs_total": 36
+  }
+ },
+ "dependencies": {
+  "install": null,
+  "missing_pins": [],
+  "versions": {
+   "flask": "3.1.3",
+   "gunicorn": "23.0.0",
+   "pyjwt": "2.14.0"
+  }
+ },
+ "experiment_id": "EXP-PRODUCT-36129169543",
+ "finished_at": "2026-09-25T13:11:35Z",
+ "fixtures": {
+  "sha256": {
+   "qcr_bank_manifest.json": {
+    "expected_prereg": "8c69804b249ec9c84cf05d86a21c7ebe7a31af5f8d45e50a4e6d477b449f9f58",
+    "parent_source": "8c69804b249ec9c84cf05d86a21c7ebe7a31af5f8d45e50a4e6d477b449f9f58",
+    "staged": "8c69804b249ec9c84cf05d86a21c7ebe7a31af5f8d45e50a4e6d477b449f9f58"
+   },
+   "webarena_verified_v2_tasks_192_36_rebuilt.json": {
+    "expected_prereg": "101e481ddb610df9598b0e3e5650e8c163ec7cbdc4679c5efc1e31104b3074c5",
+    "parent_source": "101e481ddb610df9598b0e3e5650e8c163ec7cbdc4679c5efc1e31104b3074c5",
+    "staged": "101e481ddb610df9598b0e3e5650e8c163ec7cbdc4679c5efc1e31104b3074c5"
+   }
+  },
+  "staged": []
+ },
+ "kernel_observation": {
+  "dot_regex_present": false,
+  "note": "parent packet recorded uncommitted working-tree patch d926279d (dot-regex); this execute base has no such patch",
+  "working_tree_sha256": "46929b3a951df48d7f9d1fd850871073c0d91c1868aa117e13d389fe274e8d61"
+ },
+ "manifest_checks": {
+  "L_values": [
+   8,
+   9,
+   10,
+   11,
+   12,
+   13,
+   14
+  ],
+  "n_families": 36,
+  "n_tasks": 192,
+  "novelty_levels": [
+   0.0,
+   0.3333,
+   0.5,
+   0.6667,
+   1.0
+  ],
+  "single_L_per_family": true,
+  "single_template_per_family": true,
+  "slots_have_no_dotted_names": true
+ },
+ "null_control": {
+  "all_gates_pass": false,
+  "block_permutation_p": 0.9722055588882224,
+  "gates": {
+   "block_permutation_p": true,
+   "rho_length_all_strata": false,
+   "rho_shuffled": true
+  },
+  "id": "NC-SHUFFLED-FAMILY-STRATIFIED",
+  "rho_shuffled_median": -0.004476819295729788
+ },
+ "outcome_rule": "all three parts PASS -> SUPPORTS (instrument decidable, f* computable)",
+ "part_a": {
+  "PASS": true,
+  "all_eight_counter_paths_nonzero": true,
+  "eight_counter_paths_present": [
+   "resolve",
+   "bind",
+   "verify",
+   "freshness",
+   "repair",
+   "browser_steps",
+   "requests",
+   "latency_ms"
+  ],
+  "five_arms_implemented": true,
+  "gate_unknown_records_have_no_numbers": true,
+  "unit_tests_passed": true,
+  "zero_surrogate_fills": true
+ },
+ "part_b": {
+  "B": 5000,
+  "PASS": true,
+  "all_eight_counters_recorded_per_trajectory": true,
+  "all_five_arms_complete": true,
+  "bootstrap_and_permutation_compute": true,
+  "disclosure": "instrument correctness ONLY \u2014 not a scientific or product result",
+  "executable_by_arm": {
+   "B-COLD": 192,
+   "B-DETERMINISTIC-EXECUTOR": 192,
+   "B-INSTRUCTIONS": 192,
+   "B-RAG-EMBED": 192,
+   "P-SPIDER": 192
+  },
+  "health_gate_pass": true,
+  "n_records_total": 960,
+  "scripted_mode_executable": true,
+  "trace_request_rows": 21778,
+  "transport_errors": 0,
+  "unknown_gates_fire_for_live_mode": true,
+  "zero_crashes": true,
+  "zero_default_fills": true
+ },
+ "part_c": {
+  "PASS": true,
+  "dominant_quantity": "cold_serving_cost",
+  "f_star": 36.70010423090146,
+  "f_star_computed": true,
+  "formula": "f* = (build_cost + verify_cost) / (serving_cost_cold - serving_cost_inherited)",
+  "inputs_ms": {
+   "build_cost": 1913.3279190000394,
+   "cold_serving_cost": 24.505208333333332,
+   "inherited_serving_cost": 25.036458333333332,
+   "verify_cost": 106.78145799920458
+  },
+  "primary_unit": "bytes",
+  "token_economics_status": "NOT_APPLICABLE"
+ },
+ "started_at": "2026-09-25T13:10:54Z",
+ "status": "COMPLETE",
+ "unit_tests": {
+  "command": "PYTHONPATH=src python3 -m unittest discover -s tests -v",
+  "exit": 0,
+  "passed": true,
+  "tail": [
+   "Ran 39 tests in 0.046s",
+   "",
+   "OK"
+  ],
+  "tests_module": "tests/test_eval_harness.py (+ tests/test_kernel.py regression)"
+ }
+}

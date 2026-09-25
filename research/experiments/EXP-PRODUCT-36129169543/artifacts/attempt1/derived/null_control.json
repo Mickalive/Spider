@@ -1,0 +1,67 @@
+{
+ "B": 5000,
+ "all_gates_pass": false,
+ "block_permutation_p": 0.8066386722655469,
+ "block_permutation_p_gate": "p >= 0.20",
+ "expected_behavior": "shuffled correlations near zero; block-permutation p >= 0.20; no deterministic coupling from counter formulas",
+ "gates": {
+  "block_permutation_p": true,
+  "rho_length_all_strata": false,
+  "rho_shuffled": true
+ },
+ "id": "NC-SHUFFLED-FAMILY-STRATIFIED",
+ "n_rows": 192,
+ "rho_length_per_stratum": {
+  "0.0": {
+   "degenerate": false,
+   "distinct_L": 7,
+   "gate": "|rho_length| < 0.20",
+   "n": 45,
+   "pass": true,
+   "rho_length": -0.052425950403227985
+  },
+  "0.3333": {
+   "degenerate": false,
+   "distinct_L": 7,
+   "gate": "|rho_length| < 0.20",
+   "n": 9,
+   "pass": false,
+   "rho_length": -0.48055405875908547
+  },
+  "0.5": {
+   "degenerate": false,
+   "distinct_L": 7,
+   "gate": "|rho_length| < 0.20",
+   "n": 42,
+   "pass": true,
+   "rho_length": -0.10457299360942816
+  },
+  "0.6667": {
+   "degenerate": false,
+   "distinct_L": 7,
+   "gate": "|rho_length| < 0.20",
+   "n": 21,
+   "pass": false,
+   "rho_length": -0.49248468563577363
+  },
+  "1.0": {
+   "degenerate": false,
+   "distinct_L": 7,
+   "gate": "|rho_length| < 0.20",
+   "n": 75,
+   "pass": true,
+   "rho_length": 0.1699945142155292
+  }
+ },
+ "rho_length_pooled_diagnostic": -0.054073358491209166,
+ "rho_novelty_observed": 0.015713143993738715,
+ "rho_shuffled_ci95": [
+  -0.11945034696267562,
+  0.12298459565788258
+ ],
+ "rho_shuffled_gate": "|rho_shuffled| < 0.20",
+ "rho_shuffled_median": 0.0018473016720844107,
+ "seed": 42,
+ "statistic": "Delta = latency_ms(B-INSTRUCTIONS) - latency_ms(B-COLD) per trajectory",
+ "stratification": "family-blocked permutation; novelty-level strata for rho_length"
+}

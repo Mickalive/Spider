@@ -1,0 +1,236 @@
+{
+ "denominator_ci95_latency_ms": [
+  -0.7187864313471503,
+  1.0054507204773142
+ ],
+ "dominant_max_abs_rel_change": 0.09323584050527119,
+ "dominant_quantity": "build_cost",
+ "f_star_bytes": {
+  "build_cost": 35027.0,
+  "computable": true,
+  "denominator_per_reuse_saving": 971.0989583333334,
+  "f_star": 36.06944451893527,
+  "formula": "f* = (build_cost + verify_cost) / (serving_cost_cold - serving_cost_inherited)",
+  "numerator_onetime_cost": 35027.0,
+  "serving_cost_cold": 971.0989583333334,
+  "serving_cost_inherited": 0,
+  "token_inputs": "NOT_APPLICABLE (no token parameter exists by construction)",
+  "unit": "bytes",
+  "verify_cost": 0.0
+ },
+ "f_star_ci95_latency_ms": null,
+ "f_star_counter_ops": {
+  "build_cost": 0.0,
+  "computable": false,
+  "denominator_per_reuse_saving": -14.895833333333336,
+  "f_star": null,
+  "formula": "f* = (build_cost + verify_cost) / (serving_cost_cold - serving_cost_inherited)",
+  "numerator_onetime_cost": 0.0,
+  "serving_cost_cold": 32.6875,
+  "serving_cost_inherited": 47.583333333333336,
+  "token_inputs": "NOT_APPLICABLE (no token parameter exists by construction)",
+  "unit": "counter_ops",
+  "verify_cost": 0.0
+ },
+ "f_star_ms": {
+  "build_cost": 1510.9476699999504,
+  "computable": true,
+  "denominator_per_reuse_saving": 0.1145833333333357,
+  "f_star": 14143.115266903265,
+  "formula": "f* = (build_cost + verify_cost) / (serving_cost_cold - serving_cost_inherited)",
+  "numerator_onetime_cost": 1620.565290999366,
+  "serving_cost_cold": 24.838541666666668,
+  "serving_cost_inherited": 24.723958333333332,
+  "token_inputs": "NOT_APPLICABLE (no token parameter exists by construction)",
+  "unit": "ms",
+  "verify_cost": 109.61762099941552
+ },
+ "f_star_requests": {
+  "build_cost": 429.0,
+  "computable": false,
+  "denominator_per_reuse_saving": 0.0,
+  "f_star": null,
+  "formula": "f* = (build_cost + verify_cost) / (serving_cost_cold - serving_cost_inherited)",
+  "numerator_onetime_cost": 429.0,
+  "serving_cost_cold": 10.895833333333334,
+  "serving_cost_inherited": 10.895833333333334,
+  "token_inputs": "NOT_APPLICABLE (no token parameter exists by construction)",
+  "unit": "requests",
+  "verify_cost": 0.0
+ },
+ "formula": "f* = (build_cost + verify_cost) / (serving_cost_cold - serving_cost_inherited)",
+ "inputs_ms": {
+  "build_cost": 1510.9476699999504,
+  "cold_serving_cost": 24.838541666666668,
+  "inherited_serving_cost": 24.723958333333332,
+  "verify_cost": 109.61762099941552
+ },
+ "notes": [
+  "build/verify/serving are measured wall-clock and transfer work from this dry run",
+  "requests and counter_ops units are reported even when not computable (denominator ~0 or negative) because they show where the saving lives"
+ ],
+ "primary_f_star": 14143.115266903265,
+ "primary_sensitivity": {
+  "base": {
+   "build_cost": 1510.9476699999504,
+   "computable": true,
+   "denominator_per_reuse_saving": 0.1145833333333357,
+   "f_star": 14143.115266903265,
+   "formula": "f* = (build_cost + verify_cost) / (serving_cost_cold - serving_cost_inherited)",
+   "numerator_onetime_cost": 1620.565290999366,
+   "serving_cost_cold": 24.838541666666668,
+   "serving_cost_inherited": 24.723958333333332,
+   "token_inputs": "NOT_APPLICABLE (no token parameter exists by construction)",
+   "unit": "ms",
+   "verify_cost": 109.61762099941552
+  },
+  "delta": 0.1,
+  "dominant_max_abs_rel_change": 0.09323584050527119,
+  "dominant_quantity": "build_cost",
+  "per_input": {
+   "build_cost": {
+    "f_star_down": 12824.470027630608,
+    "f_star_up": 15461.760506175924,
+    "max_abs_rel_change": 0.09323584050527119,
+    "rel_change_down": -0.09323584050527105,
+    "rel_change_up": 0.09323584050527119,
+    "value": 1510.9476699999504
+   },
+   "cold_serving_cost": {
+    "f_star_down": null,
+    "f_star_up": 623.6691438602476,
+    "max_abs_rel_change": null,
+    "rel_change_down": null,
+    "rel_change_up": null,
+    "value": 24.838541666666668
+   },
+   "inherited_serving_cost": {
+    "f_star_down": 626.431519774266,
+    "f_star_up": null,
+    "max_abs_rel_change": null,
+    "rel_change_down": null,
+    "rel_change_up": null,
+    "value": 24.723958333333332
+   },
+   "verify_cost": {
+    "f_star_down": 14047.448979485596,
+    "f_star_up": 14238.781554320934,
+    "max_abs_rel_change": 0.006764159494728907,
+    "rel_change_down": -0.006764159494728907,
+    "rel_change_up": 0.006764159494728907,
+    "value": 109.61762099941552
+   }
+  }
+ },
+ "primary_unit": "ms",
+ "reuse_unit": "one executed trajectory (task) reusing the inherited family artifact",
+ "sensitivity_bytes": {
+  "base": {
+   "build_cost": 35027.0,
+   "computable": true,
+   "denominator_per_reuse_saving": 971.0989583333334,
+   "f_star": 36.06944451893527,
+   "formula": "f* = (build_cost + verify_cost) / (serving_cost_cold - serving_cost_inherited)",
+   "numerator_onetime_cost": 35027.0,
+   "serving_cost_cold": 971.0989583333334,
+   "serving_cost_inherited": 0,
+   "token_inputs": "NOT_APPLICABLE (no token parameter exists by construction)",
+   "unit": "bytes",
+   "verify_cost": 0.0
+  },
+  "delta": 0.1,
+  "dominant_max_abs_rel_change": 0.11111111111111105,
+  "dominant_quantity": "cold_serving_cost",
+  "per_input": {
+   "build_cost": {
+    "f_star_down": 32.46250006704174,
+    "f_star_up": 39.6763889708288,
+    "max_abs_rel_change": 0.10000000000000016,
+    "rel_change_down": -0.10000000000000016,
+    "rel_change_up": 0.10000000000000016,
+    "value": 35027.0
+   },
+   "cold_serving_cost": {
+    "f_star_down": 40.07716057659474,
+    "f_star_up": 32.79040410812297,
+    "max_abs_rel_change": 0.11111111111111105,
+    "rel_change_down": 0.11111111111111105,
+    "rel_change_up": -0.09090909090909098,
+    "value": 971.0989583333334
+   },
+   "inherited_serving_cost": {
+    "f_star_down": 36.06944451893527,
+    "f_star_up": 36.06944451893527,
+    "max_abs_rel_change": 0.0,
+    "rel_change_down": 0.0,
+    "rel_change_up": 0.0,
+    "value": 0
+   },
+   "verify_cost": {
+    "f_star_down": 36.06944451893527,
+    "f_star_up": 36.06944451893527,
+    "max_abs_rel_change": 0.0,
+    "rel_change_down": 0.0,
+    "rel_change_up": 0.0,
+    "value": 0.0
+   }
+  }
+ },
+ "sensitivity_ms": {
+  "base": {
+   "build_cost": 1510.9476699999504,
+   "computable": true,
+   "denominator_per_reuse_saving": 0.1145833333333357,
+   "f_star": 14143.115266903265,
+   "formula": "f* = (build_cost + verify_cost) / (serving_cost_cold - serving_cost_inherited)",
+   "numerator_onetime_cost": 1620.565290999366,
+   "serving_cost_cold": 24.838541666666668,
+   "serving_cost_inherited": 24.723958333333332,
+   "token_inputs": "NOT_APPLICABLE (no token parameter exists by construction)",
+   "unit": "ms",
+   "verify_cost": 109.61762099941552
+  },
+  "delta": 0.1,
+  "dominant_max_abs_rel_change": 0.09323584050527119,
+  "dominant_quantity": "build_cost",
+  "per_input": {
+   "build_cost": {
+    "f_star_down": 12824.470027630608,
+    "f_star_up": 15461.760506175924,
+    "max_abs_rel_change": 0.09323584050527119,
+    "rel_change_down": -0.09323584050527105,
+    "rel_change_up": 0.09323584050527119,
+    "value": 1510.9476699999504
+   },
+   "cold_serving_cost": {
+    "f_star_down": null,
+    "f_star_up": 623.6691438602476,
+    "max_abs_rel_change": null,
+    "rel_change_down": null,
+    "rel_change_up": null,
+    "value": 24.838541666666668
+   },
+   "inherited_serving_cost": {
+    "f_star_down": 626.431519774266,
+    "f_star_up": null,
+    "max_abs_rel_change": null,
+    "rel_change_down": null,
+    "rel_change_up": null,
+    "value": 24.723958333333332
+   },
+   "verify_cost": {
+    "f_star_down": 14047.448979485596,
+    "f_star_up": 14238.781554320934,
+    "max_abs_rel_change": 0.006764159494728907,
+    "rel_change_down": -0.006764159494728907,
+    "rel_change_up": 0.006764159494728907,
+    "value": 109.61762099941552
+   }
+  }
+ },
+ "token_economics": {
+  "f_star_token": null,
+  "reason": "OPENAI_API_KEY absent; frozen spec forbids token counters/costs until a policy-model credential exists (UNKNOWN)",
+  "status": "NOT_APPLICABLE"
+ }
+}

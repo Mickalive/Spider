@@ -1,0 +1,42 @@
+{
+ "TN_fresh": 1.0,
+ "errors": 0,
+ "etag_W_format_seen": true,
+ "gate_threshold": "n_non304>=360 total and >=180 per endpoint",
+ "health_gate_pass": true,
+ "hs256": true,
+ "if_none_match_exercised_fraction": 0.7857142857142857,
+ "n_304_stratified": {
+  "ep-a": 0,
+  "ep-b": 0
+ },
+ "n_non304_stratified": {
+  "ep-a": 200,
+  "ep-b": 200
+ },
+ "n_non304_total": 400,
+ "requests_issued": 700,
+ "single_worker": true,
+ "sticky_via_nginx": true,
+ "stratified_pass": true,
+ "structural": {
+  "distinct_worker_pids": [
+   103355
+  ],
+  "journal_mode": "wal",
+  "jwt_algs": [
+   "HS256"
+  ],
+  "nginx_sticky_lines": 702,
+  "nginx_upstreams": [
+   "127.0.0.1:18929"
+  ],
+  "req_log_rows": 700
+ },
+ "tn_fresh_hits": 150,
+ "tn_fresh_n": 150,
+ "tn_pass": true,
+ "tn_threshold": 0.85,
+ "wal": true,
+ "x_body_sha_seen": true
+}

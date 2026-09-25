@@ -1,0 +1,28 @@
+{
+ "attempt2_only_lines_written_to": "artifacts/raw/request_trace.jsonl",
+ "attempt2_rows": 10889,
+ "attempt2_rows_by_tag": {
+  "B-COLD": 2092,
+  "B-DETERMINISTIC-EXECUTOR": 2092,
+  "B-INSTRUCTIONS": 2092,
+  "B-RAG-EMBED": 2092,
+  "P-SPIDER": 2092,
+  "build": 393,
+  "verify": 36
+ },
+ "attempt2_transport_errors": 0,
+ "impact_on_measurements": "none: counters, CIs, bootstrap and permutation computations read in-memory trajectory records, not the trace file. Only metrics_summary.json fields trace_request_rows/transport_errors (derived from this file) were affected; both attempts had zero transport errors.",
+ "issue": "request_trace.jsonl from attempt 2 was appended to attempt 1's file because the archive step unlinked a wrong path (HERE/'raw/...' instead of HERE/'artifacts'/'raw/...').",
+ "metrics_summary_correction": {
+  "trace_request_rows_attempt2_only": 10889,
+  "trace_request_rows_reported": 21778,
+  "transport_errors_attempt2_only": 0,
+  "transport_errors_reported": 0
+ },
+ "verification": {
+  "attempt1_archived_lines": 10889,
+  "mixed_file_preserved_as": "artifacts/raw/request_trace_mixed_attempts12.jsonl",
+  "mixed_lines": 21778,
+  "mixed_prefix_equals_attempt1_archived": true
+ }
+}

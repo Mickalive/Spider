@@ -1,0 +1,190 @@
+{
+ "capability_details": {
+  "browsergym": "browsergym-core not installed",
+  "http_substrate": "health gate pass",
+  "playwright": "playwright not installed",
+  "policy_model": "OPENAI_API_KEY absent"
+ },
+ "live_browser_gate_by_arm": {
+  "B-COLD": "UNKNOWN",
+  "B-DETERMINISTIC-EXECUTOR": "UNKNOWN",
+  "B-INSTRUCTIONS": "UNKNOWN",
+  "B-RAG-EMBED": "UNKNOWN",
+  "P-SPIDER": "UNKNOWN"
+ },
+ "no_surrogate_or_default_fill": true,
+ "scripted_gate_by_arm": {
+  "B-COLD": "EXECUTABLE",
+  "B-DETERMINISTIC-EXECUTOR": "EXECUTABLE",
+  "B-INSTRUCTIONS": "EXECUTABLE",
+  "B-RAG-EMBED": "EXECUTABLE",
+  "P-SPIDER": "EXECUTABLE"
+ },
+ "unknown_demo_records": [
+  {
+   "arm_id": "B-COLD",
+   "counters": null,
+   "gate_status": "UNKNOWN",
+   "missing": [
+    "browsergym",
+    "playwright",
+    "policy_model"
+   ],
+   "payload_bytes": null
+  },
+  {
+   "arm_id": "B-COLD",
+   "counters": null,
+   "gate_status": "UNKNOWN",
+   "missing": [
+    "browsergym",
+    "playwright",
+    "policy_model"
+   ],
+   "payload_bytes": null
+  },
+  {
+   "arm_id": "B-COLD",
+   "counters": null,
+   "gate_status": "UNKNOWN",
+   "missing": [
+    "browsergym",
+    "playwright",
+    "policy_model"
+   ],
+   "payload_bytes": null
+  },
+  {
+   "arm_id": "B-INSTRUCTIONS",
+   "counters": null,
+   "gate_status": "UNKNOWN",
+   "missing": [
+    "browsergym",
+    "playwright",
+    "policy_model"
+   ],
+   "payload_bytes": null
+  },
+  {
+   "arm_id": "B-INSTRUCTIONS",
+   "counters": null,
+   "gate_status": "UNKNOWN",
+   "missing": [
+    "browsergym",
+    "playwright",
+    "policy_model"
+   ],
+   "payload_bytes": null
+  },
+  {
+   "arm_id": "B-INSTRUCTIONS",
+   "counters": null,
+   "gate_status": "UNKNOWN",
+   "missing": [
+    "browsergym",
+    "playwright",
+    "policy_model"
+   ],
+   "payload_bytes": null
+  },
+  {
+   "arm_id": "B-RAG-EMBED",
+   "counters": null,
+   "gate_status": "UNKNOWN",
+   "missing": [
+    "browsergym",
+    "playwright",
+    "policy_model"
+   ],
+   "payload_bytes": null
+  },
+  {
+   "arm_id": "B-RAG-EMBED",
+   "counters": null,
+   "gate_status": "UNKNOWN",
+   "missing": [
+    "browsergym",
+    "playwright",
+    "policy_model"
+   ],
+   "payload_bytes": null
+  },
+  {
+   "arm_id": "B-RAG-EMBED",
+   "counters": null,
+   "gate_status": "UNKNOWN",
+   "missing": [
+    "browsergym",
+    "playwright",
+    "policy_model"
+   ],
+   "payload_bytes": null
+  },
+  {
+   "arm_id": "B-DETERMINISTIC-EXECUTOR",
+   "counters": null,
+   "gate_status": "UNKNOWN",
+   "missing": [
+    "browsergym",
+    "playwright",
+    "policy_model"
+   ],
+   "payload_bytes": null
+  },
+  {
+   "arm_id": "B-DETERMINISTIC-EXECUTOR",
+   "counters": null,
+   "gate_status": "UNKNOWN",
+   "missing": [
+    "browsergym",
+    "playwright",
+    "policy_model"
+   ],
+   "payload_bytes": null
+  },
+  {
+   "arm_id": "B-DETERMINISTIC-EXECUTOR",
+   "counters": null,
+   "gate_status": "UNKNOWN",
+   "missing": [
+    "browsergym",
+    "playwright",
+    "policy_model"
+   ],
+   "payload_bytes": null
+  },
+  {
+   "arm_id": "P-SPIDER",
+   "counters": null,
+   "gate_status": "UNKNOWN",
+   "missing": [
+    "browsergym",
+    "playwright",
+    "policy_model"
+   ],
+   "payload_bytes": null
+  },
+  {
+   "arm_id": "P-SPIDER",
+   "counters": null,
+   "gate_status": "UNKNOWN",
+   "missing": [
+    "browsergym",
+    "playwright",
+    "policy_model"
+   ],
+   "payload_bytes": null
+  },
+  {
+   "arm_id": "P-SPIDER",
+   "counters": null,
+   "gate_status": "UNKNOWN",
+   "missing": [
+    "browsergym",
+    "playwright",
+    "policy_model"
+   ],
+   "payload_bytes": null
+  }
+ ]
+}

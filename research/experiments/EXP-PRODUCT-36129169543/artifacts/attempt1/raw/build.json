@@ -1,0 +1,14 @@
+{
+ "build_ms": 1510.9476699999504,
+ "family_mechanisms": 36,
+ "harvest_payload_bytes": 35027,
+ "harvest_requests": 393,
+ "mechanisms_distilled": 180,
+ "phases": {
+  "distill_ms": 122.9259510000702,
+  "harvest_ms": 1321.7214349997448,
+  "induction_ms": 66.22617799985164
+ },
+ "unit": "wall-clock milliseconds (measured, no token denominators)",
+ "validators_cached": 393
+}

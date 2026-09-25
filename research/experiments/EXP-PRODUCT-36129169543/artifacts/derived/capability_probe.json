@@ -1,0 +1,16 @@
+{
+ "available": {
+  "browsergym": false,
+  "http_substrate": true,
+  "playwright": false,
+  "policy_model": false
+ },
+ "details": {
+  "browsergym": "browsergym-core not installed",
+  "http_substrate": "health gate pass",
+  "playwright": "playwright not installed",
+  "policy_model": "OPENAI_API_KEY absent"
+ },
+ "policy": "fail-closed: absent/unproven capability => False",
+ "probed_at": "2026-09-25T13:10:57Z"
+}

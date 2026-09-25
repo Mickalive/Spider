@@ -1,0 +1,21 @@
+{
+ "bootstrap": {
+  "B": 5000,
+  "design": "family-stratified trajectory-grouped bootstrap",
+  "median": 953.4817708333333,
+  "n_valid": 5000,
+  "seed": 42
+ },
+ "denominator_bytes_per_reuse": 954.4114583333334,
+ "denominator_ci95_bytes": [
+  894.63046875,
+  1013.1736990918713
+ ],
+ "f_star_bytes": 36.70010423090146,
+ "f_star_bytes_ci95": [
+  34.571564610683666,
+  39.15247828406805
+ ],
+ "note": "Post-hoc uncertainty supplement for the primary (bytes) f*: paired family-stratified trajectory bootstrap, B=5000, seed=42, on attempt-2 trajectories. Computed after the run; not an input to any frozen gate.",
+ "numerator_bytes": 35027
+}

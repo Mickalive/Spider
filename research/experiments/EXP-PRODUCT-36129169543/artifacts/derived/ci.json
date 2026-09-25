@@ -1,0 +1,162 @@
+{
+ "B": 5000,
+ "comparisons": {
+  "B-COLD": {
+   "delta_latency_ms": {
+    "block_permutation_p": 0.018196360727854428,
+    "bootstrap_B": 5000,
+    "bootstrap_ci95": [
+     -1.2344499684343435,
+     0.2
+    ],
+    "bootstrap_n_valid": 5000,
+    "direction": "positive => P-SPIDER spent less than the baseline",
+    "observed_mean": -0.53125,
+    "unit": "ms"
+   },
+   "delta_payload_bytes": {
+    "block_permutation_p": 0.0001999600079984003,
+    "bootstrap_B": 5000,
+    "bootstrap_ci95": [
+     894.63046875,
+     1013.1736990918713
+    ],
+    "bootstrap_n_valid": 5000,
+    "direction": "positive => P-SPIDER spent less than the baseline",
+    "observed_mean": 954.4114583333334,
+    "unit": "bytes"
+   },
+   "delta_requests": {
+    "block_permutation_p": 1.0,
+    "bootstrap_B": 5000,
+    "bootstrap_ci95": [
+     0.0,
+     0.0
+    ],
+    "bootstrap_n_valid": 5000,
+    "direction": "positive => P-SPIDER spent less than the baseline",
+    "observed_mean": 0,
+    "unit": "requests"
+   },
+   "n_paired": 192
+  },
+  "B-DETERMINISTIC-EXECUTOR": {
+   "delta_latency_ms": {
+    "block_permutation_p": 0.4969006198760248,
+    "bootstrap_B": 5000,
+    "bootstrap_ci95": [
+     -0.775432286435571,
+     0.46875805412371124
+    ],
+    "bootstrap_n_valid": 5000,
+    "direction": "positive => P-SPIDER spent less than the baseline",
+    "observed_mean": -0.16145833333333334,
+    "unit": "ms"
+   },
+   "delta_payload_bytes": {
+    "block_permutation_p": 0.0001999600079984003,
+    "bootstrap_B": 5000,
+    "bootstrap_ci95": [
+     894.63046875,
+     1013.1736990918713
+    ],
+    "bootstrap_n_valid": 5000,
+    "direction": "positive => P-SPIDER spent less than the baseline",
+    "observed_mean": 954.4114583333334,
+    "unit": "bytes"
+   },
+   "delta_requests": {
+    "block_permutation_p": 1.0,
+    "bootstrap_B": 5000,
+    "bootstrap_ci95": [
+     0.0,
+     0.0
+    ],
+    "bootstrap_n_valid": 5000,
+    "direction": "positive => P-SPIDER spent less than the baseline",
+    "observed_mean": 0,
+    "unit": "requests"
+   },
+   "n_paired": 192
+  },
+  "B-INSTRUCTIONS": {
+   "delta_latency_ms": {
+    "block_permutation_p": 0.7966406718656269,
+    "bootstrap_B": 5000,
+    "bootstrap_ci95": [
+     -0.4974476439790576,
+     1.4767349244846204
+    ],
+    "bootstrap_n_valid": 5000,
+    "direction": "positive => P-SPIDER spent less than the baseline",
+    "observed_mean": 0.22916666666666666,
+    "unit": "ms"
+   },
+   "delta_payload_bytes": {
+    "block_permutation_p": 0.0001999600079984003,
+    "bootstrap_B": 5000,
+    "bootstrap_ci95": [
+     894.63046875,
+     1013.1736990918713
+    ],
+    "bootstrap_n_valid": 5000,
+    "direction": "positive => P-SPIDER spent less than the baseline",
+    "observed_mean": 954.4114583333334,
+    "unit": "bytes"
+   },
+   "delta_requests": {
+    "block_permutation_p": 1.0,
+    "bootstrap_B": 5000,
+    "bootstrap_ci95": [
+     0.0,
+     0.0
+    ],
+    "bootstrap_n_valid": 5000,
+    "direction": "positive => P-SPIDER spent less than the baseline",
+    "observed_mean": 0,
+    "unit": "requests"
+   },
+   "n_paired": 192
+  },
+  "B-RAG-EMBED": {
+   "delta_latency_ms": {
+    "block_permutation_p": 0.6068786242751449,
+    "bootstrap_B": 5000,
+    "bootstrap_ci95": [
+     -0.7732249537404177,
+     0.5625164473684208
+    ],
+    "bootstrap_n_valid": 5000,
+    "direction": "positive => P-SPIDER spent less than the baseline",
+    "observed_mean": -0.125,
+    "unit": "ms"
+   },
+   "delta_payload_bytes": {
+    "block_permutation_p": 0.0001999600079984003,
+    "bootstrap_B": 5000,
+    "bootstrap_ci95": [
+     894.63046875,
+     1013.1736990918713
+    ],
+    "bootstrap_n_valid": 5000,
+    "direction": "positive => P-SPIDER spent less than the baseline",
+    "observed_mean": 954.4114583333334,
+    "unit": "bytes"
+   },
+   "delta_requests": {
+    "block_permutation_p": 1.0,
+    "bootstrap_B": 5000,
+    "bootstrap_ci95": [
+     0.0,
+     0.0
+    ],
+    "bootstrap_n_valid": 5000,
+    "direction": "positive => P-SPIDER spent less than the baseline",
+    "observed_mean": 0,
+    "unit": "requests"
+   },
+   "n_paired": 192
+  }
+ },
+ "seed": 42
+}
