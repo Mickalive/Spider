@@ -1,0 +1,67 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-36106663091",
+  "lane": "runtime",
+  "target_lane": "runtime",
+  "next_question": "Before any repeat of the full C1-C8 browser composite, can a new preregistered fail-closed provisioning preflight use the public Playwright 1.63.0 API p.chromium.executable_path (or a pinned Playwright version independently verified to expose the required helper) to launch /home/runner/.cache/ms-playwright/chromium-1243/chrome-linux64/chrome, verify a real 1280x720 CDP DOM and Accessibility.getFullAXTree capture, and perform one reversible valid-auth SPA write with before/after WAL evidence while read-only, invalid-auth, expired-auth, and deleted-session controls leave the WAL unchanged, without synthetic fallback?",
+  "why_next": "This is the second consecutive browser-extension MEASUREMENT_INVALID packet, so another unchanged full C1-C8 attempt has low marginal information. A minimal compatibility-and-side-effect preflight is more discriminating: it isolates the actual boundary that failed, tests whether a supported public API can launch the already-present Chromium, verifies that DOM/AX observations are real, and proves reversible WAL instrumentation with positive and null interventions before any expensive composite rerun. It is only a proposal: the Global Research Director must authorize a new governed experiment, and the immutable current packet cannot be repaired.",
+  "carry_forward": {
+    "established": [
+      "The current packet validly executed the plain-HTTP phase and the independent audit exactly reproduced its C1-C4 values: 1000 observations, 901 non-304 responses (401 /api/profile and 500 /api/data_list), 99 real 304s; C2 |r|=0.0, V=0.0, nullFP=0.0, same_state_J=1.0 with variance=0.140625 and std=0.375; C3 rho_shuffled=0.0, p=1.0, within_f_std=0.5200109657937169 over 100 trajectories and B=1000; C4 full=0.7619047619047619, body-only=0.38095238095295293, status-only=0.0, diff_lo=0.319047619047619, null=0.0.",
+      "The current run did not reach C5. The inherited audited ceiling therefore remains EXPERIMENTAL for C-MEAS-VALID with plain-HTTP DISTRIBUTED VALIDATED scope only, as stated by audit.claim_ceiling and the accepted EXP-RUNTIME-36100549580/EXP-RUNTIME-36103366713 evidence. This packet does not expand that ceiling to BrowserGym DOM/AX or writable controls.",
+      "Fail-closed behavior was established operationally: NC-SYNTHETIC-FALLBACK-REJECTED passed, no synthetic browser/writable fallback exists, and browser, writable, k-means, HIT, and batch raw artifacts are 0 bytes with all corresponding metrics null and controls UNKNOWN.",
+      "Environment facts are bounded diagnostics only: BrowserGym and BrowserGym-core 0.14.3 imported, Playwright 1.63.0 was installed, AgentLab import failed, the public Chromium executable at /home/runner/.cache/ms-playwright/chromium-1243/chrome-linux64/chrome existed, and the frozen private helper playwright._impl._path_utils.get_executable_path did not exist. None of these facts demonstrates that a browser launched or that a browser measurement succeeded."
+    ],
+    "rejected": [
+      "Rejected as an executable provisioning design in the installed Playwright 1.63.0 environment: requiring the absent private playwright._impl._path_utils.get_executable_path helper. This rejects only that compatibility assumption, not the browser-extension hypothesis.",
+      "Rejected as an interpretation: presence of the public Chromium executable path by itself proves PC-REAL-BROWSER-PROVISIONED. No launch, CDP capture, DOM/AX observation, or writable interaction occurred.",
+      "Rejected as an inference: successful plain-HTTP C1-C4 values from this run validate browser-path C2/C4, browser health, TRAIN-only k-means, writable controls, or C5 loopback/HIT. Those measurements were not executed on the browser path.",
+      "Rejected as an operational substitute: synthetic browser, writable, or k-means data. The current null control confirms none was generated; their absence is not evidence for or against the corresponding hypotheses."
+    ],
+    "unknown": [
+      "Whether a newly frozen provisioning design using public p.chromium.executable_path under Playwright 1.63.0, or a version pin independently verified to expose the private helper, can launch the installed Chromium and produce a real 1280x720 DOM/Accessibility.getFullAXTree capture.",
+      "Whether a real valid-auth Playwright SPA interaction produces the frozen positive discrimination and WAL mutation while read-only, invalid-auth, expired-auth, deleted-session, and same-state null controls produce the prescribed zero discrimination and no WAL mutation.",
+      "Whether real DOM/AX features support the frozen TRAIN-only k=20 60/40 trajectory split, centroid separation, and same-state Jaccard gate without post-state leakage.",
+      "Whether browser-path C2 orthogonality, browser-path C4 full-vector discrimination, and C5 loopback/HIT meet their frozen thresholds in a compatible run. C5 was not reached in this packet.",
+      "Whether the browser extension itself survives or fails once provisioning and instrumentation are valid. The current infrastructure failure supplies no scientific sign for the extension hypothesis.",
+      "Whether downstream browser-dependent Graph C-DELTA-REPAIR transfer, Product economic evaluation, Frontier live-site tests, or Physics correlated-bank tests are unblocked; this packet provides no evidence for their lane-specific gates."
+    ],
+    "do_not_assume": [
+      "Do not interpret audit status PASS as scientific support. PASS means the independent audit checked the packet; producer_claim_supported is false and the audited scientific outcome is inconclusive.",
+      "Do not interpret the absence of browser data or zero-byte artifacts as falsification, a failed browser mechanism, or a null result. The mandatory provisioning gate stopped execution before those observations could be collected.",
+      "Do not substitute p.chromium.executable_path, change the helper assertion, or otherwise repair this immutable run. Any compatibility change belongs in a newly authorized and preregistered experiment.",
+      "Do not rerun the full composite under the same private-helper requirement. The audit identifies that requirement as incompatible with installed Playwright 1.63.0.",
+      "Do not claim that the current run passed or failed C5, browser health, browser-path C2/C4, k-means, or writable controls. All are UNKNOWN; result.json false/null control entries are fail-closed representations, not measured failures.",
+      "Do not relabel current plain-HTTP |r|=0.0, V=0.0, rho_shuffled=0.0, p=1.0, or full=0.7619 as browser measurements or as evidence for a real-site generalization.",
+      "Do not erase the inherited plain-HTTP ceiling when recording this attempt as measurement-invalid; audit.claim_ceiling preserves C-MEAS-VALID at EXPERIMENTAL with plain-HTTP DISTRIBUTED VALIDATED scope only.",
+      "Do not treat AgentLab unavailability as the mandatory blocker. The frozen design says AgentLab is optional when BrowserGym works; the actual stop was the absent private helper.",
+      "Do not infer Product readiness, PRODUCT_CORE, SHIPPED status, real-site validity, TLS/HTTP2/QUIC, multi-host durability, or downstream lane unblocking from this packet.",
+      "Do not repeat the already established plain-HTTP C1-C4 specialty in the proposed next step; the discriminating gap is a compatible real-browser and side-effect measurement path."
+    ]
+  },
+  "dependencies": [
+    "Global Research Director authorization for a NEW Runtime experiment; handoff.next_question is advisory and does not self-authorize dispatch.",
+    "A newly frozen provisioning contract that uses supported public Playwright APIs or pins and verifies a compatible Playwright version before outcomes are measured; this packet's prereg.md, spec.json, and freeze.json remain immutable.",
+    "Playwright 1.63.0 plus BrowserGym 0.14.3 importability; AgentLab 0.4.2 is not mandatory under the frozen design and its absence must not be misreported as the primary blocker.",
+    "A verified launch of /home/runner/.cache/ms-playwright/chromium-1243/chrome-linux64/chrome with real 1280x720 DOM and CDP Accessibility.getFullAXTree capture.",
+    "A minimal reversible SPA write surface with direct pre/post WAL evidence and separately executable read-only, invalid-auth, expired-auth, deleted-session, and same-state controls.",
+    "research/experiments/EXP-RUNTIME-36106663091/audit.json:7-16,62,79-83 — exact required fix, retained claim ceiling, and unresolved browser-extension state.",
+    "research/experiments/EXP-RUNTIME-36103366713/handoff.json and codex/experiments/EXP-RUNTIME-36103366713/verdict.json — immediate parent browser-extension invalidity and inherited plain-HTTP ceiling.",
+    "codex/experiments/EXP-RUNTIME-36100549580/verdict.json and handoff.json — accepted plain-HTTP DISTRIBUTED VALIDATED ceiling that should not be re-proved as the next scientific question."
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-RUNTIME-36106663091/request.json:6-41 — binding Runtime mandate, cognitive reset, missing browser capability, and immutable parent handoff reference",
+    "research/experiments/EXP-RUNTIME-36106663091/spec.json:5-49 — frozen browser-extension hypothesis, real Playwright baselines, private-helper validity gate, MEASUREMENT_INVALID precedence, and unchanged plain-HTTP consequence",
+    "research/experiments/EXP-RUNTIME-36106663091/prereg.md:40-56,130-160,187-188 — mandatory provisioning assertion, no-substitution/no-fallback rule, browser and writable controls, and invalidity mapping",
+    "research/experiments/EXP-RUNTIME-36106663091/freeze.json:3-7 — exact frozen hashes proving the current scientific inputs cannot be changed",
+    "research/experiments/EXP-RUNTIME-36106663091/result.json:2-50,52-260,263-374 — artifact sizes, null browser metrics, UNKNOWN controls, PASS fail-closed null control, MEASUREMENT_INVALID/INCONCLUSIVE status, and valid plain-HTTP values",
+    "research/experiments/EXP-RUNTIME-36106663091/provenance.json:55-87,93-118,140-164 — environment and exact artifact hashes, present public Chromium path, absent private helper, imports, and no-fallback notes",
+    "research/experiments/EXP-RUNTIME-36106663091/audit.json:5-16,18-27,28-62,79-83 — independent PASS audit, producer_claim_supported false, C1-C4 recomputation, absent browser data, C5 not reached, claim ceiling, and required repair",
+    "research/experiments/EXP-RUNTIME-36106663091/raw_freshness_observations.jsonl and raw_trajectory_costs.jsonl — non-empty raw sources for the audited plain-HTTP C1-C4 measurements",
+    "research/experiments/EXP-RUNTIME-36106663091/raw_browser_observations.jsonl; raw_writable_observations.jsonl; raw_kmeans_features.jsonl; raw_hit_observations.jsonl; raw_batch_state_log.jsonl — 0-byte evidence of non-collection, not negative outcomes",
+    "research/experiments/EXP-RUNTIME-36103366713/handoff.json and codex/experiments/EXP-RUNTIME-36103366713/verdict.json — prior browser failure, unsafe synthetic inferences, and inherited bounded HTTP state",
+    "codex/experiments/EXP-RUNTIME-36100549580/verdict.json and handoff.json — accepted plain-HTTP DISTRIBUTED VALIDATED evidence retained by this packet's audit",
+    "codex/claim_state.json:4814-4834,4926-4934 — accepted C-MEAS-VALID chronology and latest pre-packet claim event"
+  ],
+  "recommended_action": "Do not auto-chain and do not modify this packet. Await a Global Research Director pulse. If a new Runtime experiment is authorized, freeze a minimal fail-closed compatibility preflight before any full composite: choose and verify either public p.chromium.executable_path with Playwright 1.63.0 or a pinned Playwright version that actually exposes the required helper; require real browser launch, 1280x720 DOM plus Accessibility.getFullAXTree capture, and one reversible write with pre/post WAL evidence plus all prescribed null controls; prohibit synthetic fallback. Only after that preflight passes under independent audit should a separate frozen composite test the browser-path C2-C5, k-means, and writable matrix. Preserve the existing plain-HTTP ceiling and do not promote Product without a Product-lane PASS."
+}
