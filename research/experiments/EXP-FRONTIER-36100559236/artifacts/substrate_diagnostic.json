@@ -1,0 +1,40 @@
+{
+  "agentlab": false,
+  "browsergym": false,
+  "browsergym.core": false,
+  "browsergym_core_version": null,
+  "chromium_paths": [
+    "/usr/bin/chromium",
+    "/usr/bin/chromium-browser",
+    "/usr/bin/google-chrome"
+  ],
+  "chromium_present": true,
+  "coverage_adequate": false,
+  "diagnostic_mode": true,
+  "director_dependencies": [
+    "intel: WebChoreArena 532 + Hard258 + WebArena-Verified Hard 192/36 >=10 families Jaccard<0.30",
+    "runtime: health-gated HS256 sticky WAL n_non304>=360 single-node else >=800 distributed X-Worker-Pid>=10 If-None-Match/304 proxy_cache HIT",
+    "graph: freshness TN>=0.85 substrate repair",
+    "browsergym: 1280x720 CDP browsergym-core 0.14.3/playwright 1.63.0/agentlab 0.4.2"
+  ],
+  "elapsed_seconds": 0.0,
+  "experiment_id": "EXP-FRONTIER-36100559236",
+  "freshness_stale_probes": 0,
+  "freshness_tn": null,
+  "frozen_seed": 35725763380,
+  "graph_freshness_exists": false,
+  "heterogeneity_adequate": false,
+  "intel_diverse_manifest_exists": false,
+  "jaccard": null,
+  "live_available": false,
+  "manifest_families": 0,
+  "mixed_tasks": 0,
+  "n_non304": null,
+  "playwright": false,
+  "playwright_version": null,
+  "pooled_tasks": 0,
+  "pypi_reachable": true,
+  "runtime_wal_exists": false,
+  "substrate_adequate": false,
+  "x_worker_pid": null
+}

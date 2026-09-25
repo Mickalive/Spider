@@ -1,0 +1,7 @@
+{
+  "experiment_id": "EXP-FRONTIER-36100559236",
+  "note": "NOT_RUN substrate absent, WebMCP OpenAPI fetch not attempted",
+  "pass": false,
+  "required": 95,
+  "webmcp_coverage_pct": null
+}

@@ -1,0 +1,5 @@
+{
+  "experiment_id": "EXP-FRONTIER-36100559236",
+  "live_available": false,
+  "note": "Compilation pipeline not executed - heterogeneous manifest absent, TAU0.30+freshness gating not applied"
+}

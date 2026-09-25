@@ -1,0 +1,12 @@
+{
+  "experiment_id": "EXP-FRONTIER-36100559236",
+  "forbidden_reads": 0,
+  "gap": null,
+  "honest_cost_equals_sum": null,
+  "note": "NOT_RUN substrate absent, honest per-trajectory hard-reset counters not executed",
+  "per_trajectory": [],
+  "rho_proxy": null,
+  "trajectories": 0,
+  "within_family_std": null,
+  "zero_cells": null
+}

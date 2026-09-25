@@ -1,0 +1,9 @@
+{
+  "experiment_id": "EXP-FRONTIER-36100559236",
+  "freshness_tn": null,
+  "note": "NOT_RUN substrate absent, freshness TN not measured",
+  "pass": false,
+  "required_stale": 30,
+  "required_tn": 0.85,
+  "stale_probes": 0
+}
