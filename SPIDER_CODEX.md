@@ -4,7 +4,7 @@ Pre-2.0 canonical memory remains frozen at `archive/spider-codex-ultimate:SPIDER
 
 Canonical Research 2.0 evidence lives in `codex/experiments/<experiment_id>/`.
 Use `codex/index.json` and `codex/claim_state.json` to locate relevant packets; do not load all experiment bodies by default.
-Validated experiments: **384**. Coverage gaps: **0**. Quarantined packets: **2**.
+Validated experiments: **385**. Coverage gaps: **0**. Quarantined packets: **2**.
 
 ## Experiment index
 
@@ -394,6 +394,7 @@ Validated experiments: **384**. Coverage gaps: **0**. Quarantined packets: **2**
 | EXP-GRAPH-36106653880 | graph | MEASUREMENT_INVALID | MEASUREMENT_INVALID | C-DELTA-REPAIR | `a61f742df0d6` |
 | EXP-RUNTIME-36106663091 | runtime | PASS | MEASUREMENT_INVALID — the mandatory frozen Playwright 1.63.0 private-helper provisioning gate failed before browser capture; the current run validly recomputes only the executed plain-HTTP C1-C4 measurements, while C5 and all browser, writable, and k-means claims remain UNKNOWN and the audited prior plain-HTTP DISTRIBUTED VALIDATED ceiling is retained. | C-MEAS-VALID | `0ed94490f130` |
 | EXP-GRAPH-36118890504 | graph | MEASUREMENT_INVALID | MEASUREMENT_INVALID | C-PARAM-INHERIT | `39563f26f0f6` |
+| EXP-FRONTIER-36129180789 | frontier | REVISE | MEASUREMENT_INVALID | C-RESIDUAL-NOVELTY | `7b8bb3ffeb63` |
 
 ## Latest recorded claim events
 
@@ -408,7 +409,7 @@ These are chronological latest events, not an automatic truth ranking.
 | C-MEAS-VALID | MEASUREMENT_INVALID | EXP-RUNTIME-36106663091 | runtime |
 | C-PARAM-INHERIT | MEASUREMENT_INVALID | EXP-GRAPH-36118890504 | graph |
 | C-PRODUCT-ECON | MEASUREMENT_INVALID | EXP-PRODUCT-36095578013 | product |
-| C-RESIDUAL-NOVELTY | HYPOTHESIS | EXP-FRONTIER-36103384192 | frontier |
+| C-RESIDUAL-NOVELTY | HYPOTHESIS | EXP-FRONTIER-36129180789 | frontier |
 | C-SEMANTIC-RESOLVE | HYPOTHESIS | EXP-FRONTIER-36052053591 | frontier |
 | C-WEB-DYNAMICS | HYPOTHESIS | EXP-PHYSICS-36084494842 | physics |
 
