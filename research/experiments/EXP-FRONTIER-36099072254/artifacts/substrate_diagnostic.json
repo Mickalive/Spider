@@ -1,0 +1,32 @@
+{
+  "live_available": false,
+  "browsergym": false,
+  "browsergym.core": false,
+  "playwright": false,
+  "agentlab": false,
+  "intel_diverse_manifest_exists": false,
+  "manifest_families": 0,
+  "jaccard": null,
+  "pooled_tasks": 0,
+  "mixed_tasks": 0,
+  "runtime_wal_exists": false,
+  "x_worker_pid": null,
+  "n_non304": null,
+  "substrate_adequate": false,
+  "heterogeneity_adequate": false,
+  "coverage_adequate": false,
+  "chromium_present": true,
+  "pypi_reachable": false,
+  "browsergym_core_version": null,
+  "playwright_version": null,
+  "graph_freshness_exists": false,
+  "elapsed_seconds": 0.0,
+  "diagnostic_mode": true,
+  "experiment_id": "EXP-FRONTIER-36099072254",
+  "director_dependencies": [
+    "intel: WebChoreArena 532 + WebArena-Verified Hard 192/36 orthogonal holdout Jaccard<0.30",
+    "runtime: health-gated single-node HS256 sticky WAL n_non304>=360",
+    "graph: freshness TN>=0.85 substrate repair"
+  ],
+  "frozen_seed": 35725763380
+}
