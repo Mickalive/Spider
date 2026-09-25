@@ -4,7 +4,7 @@ Pre-2.0 canonical memory remains frozen at `archive/spider-codex-ultimate:SPIDER
 
 Canonical Research 2.0 evidence lives in `codex/experiments/<experiment_id>/`.
 Use `codex/index.json` and `codex/claim_state.json` to locate relevant packets; do not load all experiment bodies by default.
-Validated experiments: **386**. Coverage gaps: **0**. Quarantined packets: **2**.
+Validated experiments: **387**. Coverage gaps: **0**. Quarantined packets: **2**.
 
 ## Experiment index
 
@@ -390,6 +390,7 @@ Validated experiments: **386**. Coverage gaps: **0**. Quarantined packets: **2**
 | EXP-RUNTIME-36100549580 | runtime | PASS | SUPPORTS — DISTRIBUTED VALIDATED canonical shared-WAL real-cache gate (C-MEAS-VALID) on plain HTTP localhost | C-MEAS-VALID | `6dd3ce57cf07` |
 | EXP-FRONTIER-36100559236 | frontier | PASS | MEASUREMENT_INVALID | C-RESIDUAL-NOVELTY | `4eb8baef16a0` |
 | EXP-RUNTIME-36103366713 | runtime | MEASUREMENT_INVALID | MEASUREMENT_INVALID — BrowserGym CDP 1280x720 DOM/AX + writable-controls matrix extension not validated due to Playwright provisioning failure and synthetic fallback; distributed plain HTTP triple at /tmp/single.db replicates DISTRIBUTED VALIDATED | C-MEAS-VALID | `7c19fff4d070` |
+| EXP-INTEL-36103378878 | intel | REVISE | MEASUREMENT_INVALID | C-CROSSSITE | `c6fe6ecdc449` |
 | EXP-FRONTIER-36103384192 | frontier | PASS | MEASUREMENT_INVALID | C-RESIDUAL-NOVELTY | `9b29ecc23917` |
 | EXP-GRAPH-36106653880 | graph | MEASUREMENT_INVALID | MEASUREMENT_INVALID | C-DELTA-REPAIR | `a61f742df0d6` |
 | EXP-RUNTIME-36106663091 | runtime | PASS | MEASUREMENT_INVALID — the mandatory frozen Playwright 1.63.0 private-helper provisioning gate failed before browser capture; the current run validly recomputes only the executed plain-HTTP C1-C4 measurements, while C5 and all browser, writable, and k-means claims remain UNKNOWN and the audited prior plain-HTTP DISTRIBUTED VALIDATED ceiling is retained. | C-MEAS-VALID | `0ed94490f130` |
@@ -403,7 +404,7 @@ These are chronological latest events, not an automatic truth ranking.
 
 | Claim | Status | Experiment | Lane |
 |---|---|---|---|
-| C-CROSSSITE | HYPOTHESIS | EXP-INTEL-36095582115 | intel |
+| C-CROSSSITE | MEASUREMENT_INVALID | EXP-INTEL-36103378878 | intel |
 | C-DELTA-REPAIR | MEASUREMENT_INVALID | EXP-GRAPH-36106653880 | graph |
 | C-FRESHNESS | HYPOTHESIS | EXP-GRAPH-36132150213 | graph |
 | C-LLM-INHERIT | MEASUREMENT_INVALID | EXP-PRODUCT-36091881382 | product |
