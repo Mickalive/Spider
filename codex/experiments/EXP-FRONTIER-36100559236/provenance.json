@@ -1,0 +1,120 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-FRONTIER-36100559236",
+  "lane": "frontier",
+  "git_commit": "adb8a8b18487b989ccfa7e2ab89a17c191b2ee9d",
+  "github_run_id": "36100559236",
+  "frozen_at": "2026-09-25T05:59:29.991443+00:00",
+  "freeze_hashes": {
+    "prereg.md": "d03bb4f1a6892ac3365af92a07536477139859fcb62004d493f5d388871c6e5b",
+    "request.json": "7cc1494403f0e189e60fd6c10358ce128cc6236820c9ea803330d554b269d88c",
+    "spec.json": "af5c9a36795dce0cb08b2e7c88ecea12d19cf5ad87817aec50dc054e5e273e74"
+  },
+  "diagnostic_mode": true,
+  "live_available": false,
+  "substrate_diagnostic": {
+    "experiment_id": "EXP-FRONTIER-36100559236",
+    "live_available": false,
+    "browsergym": false,
+    "browsergym.core": false,
+    "playwright": false,
+    "agentlab": false,
+    "intel_diverse_manifest_exists": false,
+    "manifest_families": 0,
+    "jaccard": null,
+    "pooled_tasks": 0,
+    "mixed_tasks": 0,
+    "runtime_wal_exists": false,
+    "x_worker_pid": null,
+    "n_non304": null,
+    "substrate_adequate": false,
+    "heterogeneity_adequate": false,
+    "coverage_adequate": false,
+    "chromium_present": true,
+    "chromium_paths": [
+      "/usr/bin/chromium",
+      "/usr/bin/chromium-browser",
+      "/usr/bin/google-chrome"
+    ],
+    "pypi_reachable": true,
+    "browsergym_core_version": null,
+    "playwright_version": null,
+    "graph_freshness_exists": false,
+    "freshness_tn": null,
+    "freshness_stale_probes": 0,
+    "elapsed_seconds": 0.0,
+    "diagnostic_mode": true,
+    "director_dependencies": [
+      "intel: WebChoreArena 532 + Hard258 + WebArena-Verified Hard 192/36 >=10 families Jaccard<0.30",
+      "runtime: health-gated HS256 sticky WAL n_non304>=360 single-node else >=800 distributed X-Worker-Pid>=10 If-None-Match/304 proxy_cache HIT",
+      "graph: freshness TN>=0.85 substrate repair",
+      "browsergym: 1280x720 CDP browsergym-core 0.14.3/playwright 1.63.0/agentlab 0.4.2"
+    ],
+    "frozen_seed": 35725763380
+  },
+  "code_paths": [
+    "research/experiments/EXP-FRONTIER-36100559236/artifacts/substrate_diagnostic.json",
+    "research/experiments/EXP-FRONTIER-36100559236/artifacts/per_trajectory_traces.json",
+    "research/experiments/EXP-FRONTIER-36100559236/artifacts/honest_cost_audit.json",
+    "research/experiments/EXP-FRONTIER-36100559236/artifacts/freshness_gate_check.json",
+    "research/experiments/EXP-FRONTIER-36100559236/artifacts/compilation_pipeline_check.json",
+    "research/experiments/EXP-FRONTIER-36100559236/artifacts/webmcp_registry_check.json"
+  ],
+  "allowed_roots": [
+    "research/harness",
+    "research/frontier"
+  ],
+  "freeze_verified": true,
+  "environment": {
+    "python": "3.12.14",
+    "platform": "Linux-6.17.0-1022-azure-x86_64-with-glibc2.39",
+    "chromium_present": true,
+    "chromium_paths": [
+      "/usr/bin/chromium",
+      "/usr/bin/chromium-browser",
+      "/usr/bin/google-chrome"
+    ],
+    "browsergym_installed": false,
+    "playwright_installed": false,
+    "agentlab_installed": false,
+    "intel_manifest": false,
+    "runtime_wal": false,
+    "graph_freshness_exists": false,
+    "pypi_reachable": true
+  },
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-FRONTIER-36100559236/artifacts/substrate_diagnostic.json",
+      "sha256": "b4ccc55faa10c843efcab6a5bfcdcb92eecd312e36c6ee7941bad03ec3e60836",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-36100559236/artifacts/per_trajectory_traces.json",
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-36100559236/artifacts/honest_cost_audit.json",
+      "sha256": "1f163c33e9383a590e7d05adc009a1240bd3877fb5ac04233b882a028a739b2f",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-36100559236/artifacts/freshness_gate_check.json",
+      "sha256": "5789d05b7e8e4ddfc752a7270e060c575ba30171933868c0d50551de82f27771",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-36100559236/artifacts/compilation_pipeline_check.json",
+      "sha256": "3853592fe17834944dc9291fa6c20f7cd3882cd9fabd8968de0dfe31a88fcd13",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-36100559236/artifacts/webmcp_registry_check.json",
+      "sha256": "c35fb4594a9770c0fa2c2a5c831d8a66f48ddfa70b4877e1af759b82674563b9",
+      "role": "raw"
+    }
+  ],
+  "commands": [
+    "python3 /tmp/run_exec_fix.py (substrate diagnostic, no synthetic substitution per frozen measurement_validity[0])"
+  ]
+}

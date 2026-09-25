@@ -1,0 +1,73 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-FRONTIER-36100559236",
+  "lane": "frontier",
+  "status": "PASS",
+  "producer_claim_supported": false,
+  "required_fixes": [],
+  "validity_findings": [
+    "Producer correctly reports MEASUREMENT_INVALID due to substrate insufficiency -- all 4 Director-mandated dependencies (Intel heterogeneous manifest, Runtime health-gated WAL, BrowserGym 1280x720 CDP, Graph freshness gate) are absent per substrate_diagnostic.json live_available=false",
+    "All 8 positive controls (PC-HONEST-COST-SANITY, PC-WEBCHORE-MANIFEST-ORTHOGONAL, PC-TRAIN-TEST-DISJOINT, PC-CALIBRATION-DERIVED, PC-NOVELTY-MONOTONICITY, PC-BUILD-COST-ISOLATED, PC-BROWSERGYM-SUBSTRATE, PC-FRESHNESS-GATED-BAILOUT) and 6 null controls (NC-EMPTY-REGISTRY, NC-NO-APPLICABLE, NC-ORACLE-LEAK, NC-BIJECTIVE-COST, NC-SHUFFLED-NULL, NC-GUARD-SPECIFICITY) correctly reported NOT_RUN with evidence_ref to substrate_diagnostic.json -- no control silently marked PASS",
+    "Frozen measurement_validity clause 1 BINDING-RULE honored: synthetic 36-family Jaccard 0.0 disjoint fixture NOT substituted as heterogeneous evidence; producer explicitly states 'do not substitute synthetic disjoint alphabets as heterogeneous evidence per measurement_validity clause 1'",
+    "Prior bounded evidence preserved correctly: synthetic TAU0.30 non-Pareto (EXP-FRONTIER-36042599040 rho_novelty=0.4837 CI[0.410,0.552] <0.60, all 11 PCs/NCs PASS) bounded to synthetic Jaccard 0.0 gate; alias tunnel 21/40=0.525 Wilson [0.352,0.648] bounded to retrieval-diversity on WebArena-Verified v2 192/36 mix -- neither extended to heterogeneous WebChoreArena gate",
+    "No post-hoc retuning of frozen thresholds (rho_novelty>=0.60 lower>0.40 p<0.05, |rho_length|<0.20, ECE<=0.15, Pareto saving>=25% lower>15% p<0.05, gap>0.35, |rho_shuffled|<0.20 centered) after seeing substrate failure -- decision_rule remains frozen per freeze.json",
+    "Infrastructure failure correctly distinguished from scientific falsification per EXPERIMENT_PACKET.md section 9: outcome=NOT_APPLICABLE, status=MEASUREMENT_INVALID, validity_notes explicitly state 'not a scientific falsification; supports no SURVIVES/FALSIFIES inference per validity gate'",
+    "Freeze integrity verified: request.json, spec.json, prereg.md hashes match freeze.json exactly -- no post-freeze tampering"
+  ],
+  "baseline_findings": [
+    "No baselines executed (B-COLD-LLM, B-FLAT-RAG-K5, B-SPIDER-RESIDUAL, B-RANDOM-GATE) -- correctly reported as NOT_RUN via controls framework since all depend on substrate",
+    "BINDING-RULE for identical acceptance predicate, TAU0.30+freshness gating, per-trajectory hard-reset counters, 5000 bootstrap/block/global permutations, honest build cost vs calibrated UNKNOWN, coverage >=8/10 pooled>=40 per-family per-stratum N>=3 else N/A -- all untested due to substrate absence",
+    "Baseline integrity preserved: no post-hoc baseline substitution or weakening"
+  ],
+  "recomputed_metrics": {
+    "live_available": false,
+    "pooled": 0,
+    "mixed": 0,
+    "manifest_families": 0,
+    "substrate_adequate": false,
+    "heterogeneity_adequate": false,
+    "coverage_adequate": false,
+    "n_non304": null,
+    "x_worker_pid": null,
+    "browsergym_available": false,
+    "playwright_available": false,
+    "chromium_present": true,
+    "freshness_tn": null,
+    "freshness_stale_probes": 0,
+    "rho_novelty": null,
+    "rho_length_pooled": null,
+    "ece": null,
+    "unknown_precision": null,
+    "saving_f10_pct": null,
+    "webmcp_coverage_pct": null
+  },
+  "claim_ceiling": "C-RESIDUAL-NOVELTY remains HYPOTHESIS. Heterogeneous WebChoreArena 532 + Hard258 + WebArena-Verified Hard 192/36 L=8-14 gate remains UNTESTED. This diagnostic provides zero evidence for or against pay-novelty-not-length economics on heterogeneous tasks where compressible structure exists (human 50.2% vs GPT-5 48.3% gap). Prior bounded evidence unchanged: synthetic TAU0.30 Jaccard 0.0 non-Pareto rho 0.4837 (EXP-FRONTIER-36042599040 PASS all 11 PCs/NCs) and alias ceiling 21/40=0.525 (EXP-FRONTIER-36052053591 lineage) are the only valid ceilings. No SURVIVES/FALSIFIES inference is justified from MEASUREMENT_INVALID.",
+  "evidence_refs": [
+    "research/experiments/EXP-FRONTIER-36100559236/request.json (director_mandate PIVOT 36100194801, cognitive_reset true)",
+    "research/experiments/EXP-FRONTIER-36100559236/spec.json (frozen design with 8 PCs, 6 NCs, S1-S6 thresholds)",
+    "research/experiments/EXP-FRONTIER-36100559236/prereg.md (frozen preregistration)",
+    "research/experiments/EXP-FRONTIER-36100559236/freeze.json (hashes verified)",
+    "research/experiments/EXP-FRONTIER-36100559236/result.json (producer handoff MEASUREMENT_INVALID)",
+    "research/experiments/EXP-FRONTIER-36100559236/report.md (producer interpretation)",
+    "research/experiments/EXP-FRONTIER-36100559236/provenance.json (diagnostic_mode=true, substrate_diagnostic)",
+    "research/experiments/EXP-FRONTIER-36100559236/artifacts/substrate_diagnostic.json (live_available=false, all dependencies absent)",
+    "research/experiments/EXP-FRONTIER-36100559236/artifacts/freshness_gate_check.json (NOT_RUN, stale_probes=0 <30)",
+    "research/experiments/EXP-FRONTIER-36100559236/artifacts/honest_cost_audit.json (NOT_RUN, trajectories=0)",
+    "research/experiments/EXP-FRONTIER-36100559236/artifacts/per_trajectory_traces.json (empty [])",
+    "research/experiments/EXP-FRONTIER-36100559236/artifacts/compilation_pipeline_check.json (NOT_RUN)",
+    "research/experiments/EXP-FRONTIER-36100559236/artifacts/webmcp_registry_check.json (NOT_RUN)",
+    "codex/claim_state.json (C-RESIDUAL-NOVELTY not yet registered; C-WEB-DYNAMICS history shows repeated MEASUREMENT_INVALID/FALSIFIED-IN-SETTING on synthetic)",
+    "research/experiments/EXP-FRONTIER-36042599040/audit.json (synthetic TAU0.30 rho 0.4837 PASS all 11 PCs/NCs -- bounded synthetic ceiling)",
+    "research/experiments/EXP-FRONTIER-36099072254/handoff.json (parent MEASUREMENT_INVALID diagnostic, sha256 ef479f0)"
+  ],
+  "unresolved": [
+    "Whether Intel lane can produce WebChoreArena 532 + Hard258 + WebArena-Verified Hard 192/36 heterogeneous manifest with >=10 families pairwise Jaccard<0.30 mean<0.15 product-subtree depth>=2 at 1280x720 CDP AX>10 mean>15 std>5 DOM>=2000 per family raw N>=500 >=50/family TRAIN-only vocab isolation 0 leakage deterministic seed 35725763380",
+    "Whether Runtime lane can deploy health-gated HS256 sticky Flask + nginx WAL at /tmp/spider-runtime/shared.db achieving n_non304>=360 single-node (or >=800 distributed stratified >=80/family) X-Worker-Pid>=10 If-None-Match/304 proxy_cache HIT",
+    "Whether BrowserGym 0.14.3 / browsergym-core 0.14.3 / playwright 1.63.0 / agentlab 0.4.2 can be installed with system chromium providing 1280x720 CDP AX>10 DOM>=2000 for trajectory capture",
+    "Whether Graph freshness gate TN>=0.85 with >=30 stale probes can be validated on WebChoreArena cross-site sessions and TAU0.30+freshness-gated bailout achieves calibrated UNKNOWN precision>=0.85 ECE<=0.15",
+    "Whether honest residual-novelty verification economics with TAU0.30+freshness gating achieves SURVIVES thresholds (rho_novelty>=0.60 decoupled calibrated Pareto saving>=25% dominance vs cold/RAG at f10/f100 +-50% build) on live heterogeneous where compressible structure exists",
+    "Whether per-family per-stratum N>=3 coverage>=8/10 pooled>=40 can be maintained after TAU0.30+freshness gating on heterogeneous tasks",
+    "Whether larger manifest (WebGym 292k dedup >=50 eTLD+1 or WebArena-Verified Hard 192/36) covering natural Jaccard 0.30-0.60 overlap would reveal different economics if 10-family 1280x720 CDP gate passes",
+    "Global Research Director must verify Intel+Runtime+BrowserGym+Graph substrates PASS before authorizing next heterogeneous residual-novelty experiment -- per Director comparative_reasoning, continuing alias/routing permutations has VOI~0 (routing gain 0.0 p=1.0, 21/40 ceiling bounded)"
+  ]
+}
