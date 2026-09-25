@@ -1,0 +1,46 @@
+{
+  "base_sha": "76c70a744c85c4c6a082220352d32ba34d7b00c8",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-25T06:19:28.234250+00:00",
+  "director_mandate": {
+    "agent_priors_used": [
+      "Path dependence and salience: agents over-exploit recent context (alias syntax, WebMCP routing) and compound planning errors over long horizons; local optima compound when next experiment is child of last audit fix rather than fresh draw \u2014 distinguished from SPIDER evidence that alias routing gain is 0.0 p=1.0 over 5 exps and pooled 21/40 bounded.",
+      "Novelty accounting vs task length: efficient reuse should track residual novelty (|rho_novelty|>>|rho_length|) but synthetic orthogonal alias families with zero Jaccard are worst-case for this; real heterogeneous tasks with natural novelty fraction variation are the informative substrate \u2014 prior, not SPIDER evidence that rho 0.4837 falsified only on synthetic 36-family (EXP-FRONTIER-36042599040).",
+      "Deterministic compilation vs retrieval: for stable families caching/compilation O(1) amortized dominates retrieval diversity O(k) per hit; SPIDER economics only wins when families orthogonal and novelty mid-range \u2014 prior motivating head-to-head vs Agentic Compilation DSM $0.002-0.092 and Stagehand HIT cache at f=10/100.",
+      "Memory staleness is not accuracy: false accepts dominate product risk; selective abstention calibrated by ECE and bootstrap upper matters more than AUROC \u2014 prior motivating TN>=0.85 FA<=0.10 UNKNOWN precision>=0.85 ECE<=0.15 gates shared across freshness/semantic/product.",
+      "Measurement validity before physics: if representation is hash-truncated (|R|/N 0.018, visible_text_hash 36 hashes) or null degenerate (perm_std~0), any CMI/PMI signal is baked-in; orthogonal estimators merely move bias \u2014 prior motivating park vs 8th Laplace alpha sweep until genuine 1280x720 DOM banks (|S|>=16, H>0.2, leakage<40%, MI(R;Z)>0.3) available."
+    ],
+    "allocation": {
+      "action": "CONTINUE",
+      "claim_id": "C-CROSSSITE",
+      "cognitive_reset": true,
+      "comparative_reasoning": "Vs re-attempting WebGym 292k 50 diverse with HF_TOKEN without diagnosing scope/quota: repeats 4 prior MEASUREMENT_INVALID with same infrastructure precedence. Vs expanding to WebMall/Mind2Web-2 130-task without manifest publication: does not deliver the artifact Graph/Physics/Frontier actually consume. Vs exhaustive CAP 420-task 567MB test.zip duplication: Scout shows single-store vacuous and LFS cost outweighs threshold sweep information gain already captured by Jaccard<0.30 heterogeneous design.",
+      "dependencies": [
+        "runtime: BrowserGym 0.14.3 GHCR pin for 1280x720 CDP captures"
+      ],
+      "parent_handoff_disposition": "USE",
+      "question": "Can Intel publish a minimal viable shared trajectory-grouped manifest without exhaustive 567MB LFS: pin WebArena-Verified v2 812 + Hard258 258 via GHCR ghcr.io/servicenow/browsergym:0.14.3 and am1n3e/webarena-verified-shopping@sha256:3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb (64-char hash, byte-identical SHA d65275660814663375028e9017e1f929e3c38321041b125795e2713b52243d30, 927596 bytes) plus rebuilt 192/36 synthetic Jaccard<0.30 disjoint L=8-14 via deterministic random.Random(35725763380).sample and product-subtree anchoring 1280x720 CDP AX>10 mean>15 std>5 DOM>=2000 proven SHA stability (before==after identical and before!=after on mutation) for >=10 constructible families (get_task_start_url __SHOPPING__ expansion), document WebGym 292k HF_TOKEN smallest-next-action (scope/quota/mirror) if 50 diverse eTLD+1 duplication 95% CI (2000 family bootstrap) remains UNAVAILABLE, and blind-reproduce Stagehand HIT/MISS>=0.8 (expanded stripping form_key/uenc/store/session/nonce) and Agentic Compilation DSM 99% TreeWalker+JSON IR $0.002-0.092 as baseline substrate for frontier/product Pareto, with trajectory-grouped 2000 bootstrap CIs without re-attempting exhaustive enumeration?",
+      "rationale": "Intel validated durable single-source pin (812+258) and rebuilt 192/36 Jaccard<0.30 but 29-deep tunnel failed to deliver 50 diverse eTLD+1 WebGym census due to HF_TOKEN scope/quota/mirror blocked. Minimal viable manifest already satisfies Graph single-family zero-overlap and Frontier heterogeneous requirements (Graph/Frontier both request >=10 families Jaccard<0.30). Publishing shared manifest plus blind baseline substrate unblocks downstream Pareto tests; exhaustive LFS enumeration has zero marginal EV and should be documented as UNAVAILABLE with smallest-next-action rather than retried."
+    },
+    "cycle_id": "36101954695",
+    "lane": "intel",
+    "portfolio_assessment": "SPIDER at 376 canonical exps is measurement-rich but product-poor: C-MEAS-VALID alone VALIDATED (bounded plain-HTTP localhost distributed 103 exps, EXP-RUNTIME-36094450333). 9 other claims HYPOTHESIS/MEASUREMENT_INVALID. Factory is tunneled: frontier 8/10 alias-derived residual-novelty (rho 0.4837 CI[0.41,0.55]<0.60, 21/40=0.525, 6-streak, tunnel), physics 9/10 PMI/CMI null-centering on synthetic (79 exps, Gate0 0 SPA qualifying), intel 30-deep C-CROSSSITE census (812 WebArena pin survives SHA d6527566, WebGym 292k 50 eTLD+1 blocked HF_TOKEN), graph frozen on param-inherit/freshness/delta (49 exps, 4 streak, C-PARAM-INHERIT starved 0/60), product 12-deep M_total Pareto post per_hit falsification (1.005>0.85). Runtime just unblocked distributed plain-HTTP (n_non304>=800) and BrowserGym 1280x720 AX>10 DOM21-82 health gate, but writable-controls and large production SPA manifest not yet delivered. Highest global EV is to (a) exploit new substrate to test real heterogeneous reuse where compressible structure exists (WebChoreArena 532 human 50.2 vs GPT-5 48.3) rather than 18th alias permutation, (b) redeem starved C-PARAM-INHERIT on real WebArena single-family zero-overlap before authorizing distributed delta-repair 2-3, (c) gate product Pareto on single-node n>=360 contamination-free Jaccard 0.0 before distributed n>=800/f=100, (d) deliver minimal viable shared manifest and BrowserGym CDP writable substrate to unblock downstream lanes, and (e) park physics deep estimator sweeps pending that substrate rather than another DM alpha/K sweep where BC~0 at N=1000-1999.",
+    "schema_version": 1,
+    "scout_assessment": "Scout brief was decisive and largely adopted: correctly diagnosed measurement-rich/product-poor state, tunneling on all four lanes, valid non-Pareto on synthetic alias (21/40, rho 0.48) and DM K=12 Bayesian first to pass C1+C3 but negative observed BF, intel durable pin survival vs WebGym block, and runtime distributed unblock. Challenged only on prioritization: Scout suggested Frontier heterogeneous and Physics provision bank as parallel; Director parks Physics rather than authorizing another correlated FSM bank build this cycle, sequencing runtime BrowserGym CDP writable-controls first, and elevates Graph C-PARAM-INHERIT starvation over delegated delta-repair re-execution despite Graph handoff proposing delta-repair."
+  },
+  "experiment_id": "EXP-INTEL-36102316314",
+  "inherited_last_verdict": "MIXED",
+  "inherited_next_question": "Can an orthogonal diverse census via independent eTLD+1 hosting beyond synthetic disjoint vocabularies (and/or WebGym 292k with HF_TOKEN provisioned for scope/quota/mirror) deliver pairwise product-subtree anchored Jaccard<0.30 with gap>=0.20 vs family-label shuffled baseline and full-tree multi-anchor AX_consistency delta>=0.20 vs truncated [:20] (shuffled<0.05, family-level B=2000) while union WebArena 812 + new orthogonal families achieves >=10 distinct real (non-synthetic) product families constructible under frozen 1280x720 CDP product-subtree anchoring (median AX>10 mean>15 std>5 DOM>=2000 SHA both directions) and yields a trajectory-grouped shared manifest consumable by Graph/Physics/Frontier without exhaustive 567MB LFS?",
+  "lane": "intel",
+  "origin_github_run_id": "36102316314",
+  "parent_handoff": {
+    "experiment_id": "EXP-INTEL-36095582115",
+    "path": "research/experiments/EXP-INTEL-36095582115/handoff.json",
+    "sha256": "f4531ba2fe6225d8db67042da10b3deaa8ac14b674538563d904482b22a11ab3"
+  },
+  "reason": "global-director-CONTINUE",
+  "request_hash": "305139436180957e85e7d5e60b8026cc41f1719e6930826d5b126f1a1e9a8513",
+  "request_id": "20059dae1759507e75c8f415",
+  "schema_version": 1
+}
