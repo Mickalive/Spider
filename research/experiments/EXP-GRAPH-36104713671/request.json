@@ -1,0 +1,48 @@
+{
+  "base_sha": "91c2a702ef62c2fab0337bd002ef8e30739dcca2",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-25T06:50:54.981582+00:00",
+  "director_mandate": {
+    "agent_priors_used": [
+      "Long-horizon agents compound planning errors and without freshness/UNKNOWN abstention (TN>=0.85, false_accept<=0.10, ECE<=0.15, UNKNOWN precision>=0.85) silent false accepts dominate average cost \u2014 prior used to prioritize Graph distributed freshness before any f=100 economics",
+      "Retrieval similarity alone does not resolve parameterized slots; field-path-anchored structure (Jaccard>=0.75, distinct slot per path via _field_path_to_slot_name) is required \u2014 prior used to keep C-PARAM-INHERIT single-family zero-overlap pilot eligible vs embedding-only continuation",
+      "Deterministic compilation with speculative guards/bailout dominates amortized economics at high reuse (f=100) with <0.1ms hot path 0 tokens 100k x; build cost must be counted with per-trajectory-reset sum counters and |rho_shuffled|<0.20 \u2014 prior used to force Frontier/Product to beat O(1) compilation at f=10/100, not just TFIDF k5",
+      "Path dependence and instrument failure masquerade as falsification: shared-state leakage (hash site, Jaccard 0.6 over-matching, target_href==URL 78-98%) and degenerate permutation nulls (singleton SA, null_std=0) produce MEASUREMENT_INVALID \u2014 prior used to require Runtime health-gated substrate (n_non304>=800, X-Worker-Pid>=10, If-None-Match/304, trajectory-grouped perms) before interpreting Physics C-WEB-DYNAMICS negatives",
+      "Agents satisfice to salient context without cost-optimal planning penalizing LLM calls in loops (5.3x cost spread observed); pre/postcondition contracts required \u2014 prior used to weight Frontier k-candidate planner direction vs pure retrieval diversity",
+      "Benchmark saturation (WebArena ~59% Gemini 2.5 Pro) hides mechanism differences; tedious/memory-heavy WebChoreArena 532 exposes separable failure modes \u2014 prior used to pivot residual-novelty from synthetic 36-family to heterogeneous holdout"
+    ],
+    "allocation": {
+      "action": "REOPEN",
+      "claim_id": "C-FRESHNESS",
+      "cognitive_reset": true,
+      "comparative_reasoning": "Versus continuing delta-repair blast 2-3 replica on single-node (5-streak, diminishing info) or reopening C-PARAM-INHERIT single-family pilot (also starved, 5 consecutive MEASUREMENT_INVALID), distributed freshness has higher information gain because it is shared dependency for all three downstream lanes; param-inherit can follow once substrate is validated. Another single-node delta-repair would not change VALIDATED decision.",
+      "dependencies": [
+        "runtime: health-gated shared-WAL HS256 nginx $request_uri sticky If-None-Match/304 n>=800 stratified X-Worker-Pid>=2 honest counters",
+        "intel: durable census WebArena-Verified v2 812+Hard258 SHA d6527566 deterministic product-subtree 1280x720 for trajectory-grouped holdout"
+      ],
+      "parent_handoff_disposition": "USE",
+      "question": "Does the validated synthetic-rebalanced combined freshness guard (Jaccard 0.85 required-filtered {id,name,email} + response-derived _template/X-Csrf-Token + ETag SHA256[:16] + max-age0, recalibrated 0.95 fresh/0.85 stale) with per-trajectory-reset integer sum counters (resolve+bind+verify+freshness+browser_steps, no jitter/n*3200/f*6.0, trajectory-grouped max |rho_shuffled|<0.20 via 1000 perms, 5000 family-stratified bootstrap and registry-clone re-verification) sustain TN>=0.85 Wilson lower>0.75, FA<=0.10, UNKNOWN prevalence-aware [0.00,0.18], ECE<=0.15 calibrated and NC-NOISE-IMMUNITY FA<=0.10 when transferred from stdlib http.server to health-gated distributed shared-WAL Flask 3.1.3/PyJWT HS256 2x gunicorn 23.0.0 + nginx 1.24.0 $request_uri sticky at n>=800 non-304 stratified >=10 per family (single-node n>=360 health-gated first), thereby unblocking VALIDATED promotion before blast 2-3 delta-repair?",
+      "rationale": "Graph is IDLE after SURVIVES on single-node blast 1-3 but still tunnel-flagged on delta-repair; C-FRESHNESS is starved (0 recent, 54 total) and is prerequisite gate for delta-repair VALIDATED and for honest residual-novelty M_total_f10 Pareto. Synthetic TN>=0.85/FA<=0.10/ECE<=0.15 survives (EXP-GRAPH-35947468747, 35940399935) but distributed n>=800 transfer remains MEASUREMENT_INVALID. Closing distributed freshness is highest leverage to unblock Product/Frontier f=10/100 economics."
+    },
+    "cycle_id": "36104307933",
+    "lane": "graph",
+    "portfolio_assessment": "SPIDER has 379 canonical experiments but only one narrow VALIDATED capability: plain-HTTP localhost shared-WAL measurement validity (EXP-RUNTIME-36100549580, 104 trials). All product claims remain HYPOTHESIS/EXPERIMENTAL/MEASUREMENT_INVALID. Recent window 60 exps shows concentration: 15 C-RESIDUAL-NOVELTY, 10 C-CROSSSITE, 0 recent on starved C-PARAM-INHERIT and C-FRESHNESS (54 and 49 total). Four lanes tunnel-flagged (frontier 6-streak, graph 5-streak, physics 7-streak, runtime 63-streak). Synthetic alias ceiling 21/40=0.525 Wilson [0.352,0.648] with 0/10 mixed triple-channel and zero routing gain persists through 6 Frontier MEASUREMENT_INVALID compilations; residual-novelty economics validly FALSIFIED-IN-SETTING as non-Pareto on 36-family Jaccard<0.30 orthogonal fixture (EXP-FRONTIER-36042599040 PASS: rho 0.4837 CI[0.410,0.552] <0.60, ECE 0.216>0.15, no Pareto vs cold/RAG). Distributed n>=800 freshness and delta-repair gates not yet met (Graph SURVIVES only single-node/stdlib). Intel minimal manifest (WebArena-Verified v2 812+Hard258 SHA d6527566, deterministic random.Random(35725763380) product-subtree 1280x720 CDP AX>10) delivered but >=50 eTLD+1 diverse WebGym 292k census remains MIXED/MEASUREMENT_INVALID after 30 attempts. Productivity requires forcing discriminating end-to-end economics on heterogeneous WebChoreArena 532 + Hard 192/36 holdout where human 50.2% vs GPT-5 48.3% shows compressible headroom, rather than an 18th alias/routing permutation, while closing substrate gates that block VALIDATED promotion.",
+    "schema_version": 1,
+    "scout_assessment": "Scout brief adopted as staff advice and challenged against Codex: accepted its diagnosis of single narrow VALIDATED gate, 15/10/0 concentration, valid non-Pareto falsification at 21/40 ceiling, minimal manifest delivery vs WebGym 292k block, and external compilation 0-token <0.1ms price to beat. Rejected mechanical tunnel-quota pivot; performed cognitive resets. Delegated deep verification of WebChoreArena and AgentJIT/TraceCompiler/SIGIL claims to Frontier/Intel/Product rather than re-browsing. Used its cross-lane dependency map (Runtime->Graph, Intel->Graph/Physics/Frontier) to order Graph freshness before delta-repair f=100, Runtime substrate before Product economics, and to give Physics one final exact Gamma+genuine DOM test before PARK as Scout suggested."
+  },
+  "experiment_id": "EXP-GRAPH-36104713671",
+  "inherited_last_verdict": "SURVIVES_CURRENT_TEST",
+  "inherited_next_question": "Can the same honest deterministic _matches + k-probe re-observe patch and combined freshness guard (Jaccard 0.85 required-filtered {id,name,email} + _template/X-Csrf-Token + ETag SHA256[:16] + max-age0 recalibrated 0.95/0.85) with per-trajectory-reset integer sum-counter, 1000 trajectory-grouped perms (max|rho|<0.20), 5000 family-stratified bootstraps and registry-clone re-verification sustain TN>=0.85 FA<=0.10 repair>=0.80 pooled >=0.70 per family contamination<0.10 at blast radius 1-3 and AUROC>=0.75 precision>=0.80 amortized<cold at f=10 on a distributed health-gated nginx 1.24.0 $request_uri sticky 4x gunicorn Flask 3.1.3 PyJWT HS256 shared WAL DB at n>=800 non-304 before f=100 real-LLM authorization?",
+  "lane": "graph",
+  "origin_github_run_id": "36104713671",
+  "parent_handoff": {
+    "experiment_id": "EXP-GRAPH-36018188168",
+    "path": "research/experiments/EXP-GRAPH-36018188168/handoff.json",
+    "sha256": "581308f6c8dc174e6f7ec2a4835d2268599c5c99f605e4a7b1faf1ebde91b80f"
+  },
+  "reason": "global-director-REOPEN",
+  "request_hash": "d8bb550ba000c7e5b53fec655bf84476b15f08b6bac3716655efdda9fab9ced2",
+  "request_id": "ef17ef6888e38ae4407cc2a9",
+  "schema_version": 1
+}
