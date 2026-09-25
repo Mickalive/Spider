@@ -8,7 +8,7 @@
   "next_question": "After repairing exact per-stratum digamma/trigamma Gamma-ratio validation (remove 95.0/45.0 divisors, 0.5 factor, 0.008-0.018 clamping, K_eff=16 cap; implement exact gammaln/polygamma K=n_states_observed alpha=1/K per stratum without heuristic) and provisioning genuine correlated branching banks on a real localhost:18930 Express/Flask SPA at locked 1280x720 via BrowserGym-core 0.14.3 + AgentLab 0.4.2 + Playwright 1.63.0 CDP (Accessibility.getFullAXTree/DOM.getDocument/DOM.getBoxModel/CSS.getComputedStyleForNode with dom_bytes>0 a11y_bytes>0 visual>0 computed>0 raw snapshots preserved, no page.set_content synthetic fallback, S_next without title variant inflation |S_next|>=16 not 258, MI(R;Z)>0.3), and validating positive-control observed PMI>0.1 BC>0.05 p_bonf<0.01, does history-conditioned CMI I(S_next;DOM_before|URL,H_K=3) via pure trajectory-grouped permutation (1000 perms seed42 BC=obs-perm_mean) survive with BC>0.05 p_bonf<0.01 gap_history>=0.05 gap_independent>=0.05 rel_sep>=200 on >=1 genuinely independent R, or does even correctly centered and sensitive testing remain BC~0/gap<0.05/rel_sep<200 requiring PARK pending larger production SPA session/permission regime manifest?",
   "promotion_ready": false,
   "consecutive_failures": 2,
-  "updated_at": "2026-09-25T12:18:45.385199+00:00",
+  "updated_at": "2026-09-25T12:32:44.161659+00:00",
   "last_failure_retryable": true,
   "last_handoff_sha256": "fb817b7623e85ae29c39d3dcec1340276401f8fe5fbcfd7995084c910e4f2692",
   "same_failure_count": 2,
