@@ -1,0 +1,242 @@
+{
+  "experiment_id": "EXP-INTEL-36103378878",
+  "deterministic_seed": 35725763380,
+  "anchoring_definition": {
+    "viewport": "1280x720",
+    "cdp_session": true,
+    "body_regex": "<body[^>]*>.*?</body>",
+    "expanded_stripping": [
+      "form_key",
+      "uenc",
+      "store",
+      "session",
+      "nonce",
+      "fotorama\\d{6,}"
+    ]
+  },
+  "manifest_shas": {
+    "webarena_812": {
+      "sha": "d65275660814663375028e9017e1f929e3c38321041b125795e2713b52243d30",
+      "bytes": 927596
+    },
+    "orthogonal_hosting": {
+      "shop-0.tech-demo.local": {
+        "sha": "fece3df778aaf5c15e612dba954c98fbefe339867723054ec0e1cdbe0f8303fb",
+        "port": 8701
+      },
+      "store-1.book-demo.local": {
+        "sha": "cb221086959b3f6c8de09be71e705a3fe5b2fac2e21c06f58d20c7817175dc9a",
+        "port": 8702
+      },
+      "boutique-2.fashion-demo.local": {
+        "sha": "c26f8073dd94f88be4a2ffb5a64cefefe6c31602c6a9c9f0934d771cd63652df",
+        "port": 8703
+      },
+      "goods-3.home-demo.local": {
+        "sha": "f046016b44c5659f4d1b073063185a96b93026a1e26e84128976ff6228d52314",
+        "port": 8704
+      },
+      "sport-4.sports-demo.local": {
+        "sha": "7f989cd52ef678f953b2e460cd92c82a0b8ff9411f49e17479e94bffc14a32b7",
+        "port": 8705
+      },
+      "pets-5.pet-demo.local": {
+        "sha": "b7029deefa78a6e42f3bcad2f3df09feee134bff3e5ada139a4bf725559ba681",
+        "port": 8706
+      },
+      "toys-6.toy-demo.local": {
+        "sha": "dd9829173134b511350d92f981466e9228a9c79064358a58c365c8cb46010dcf",
+        "port": 8707
+      },
+      "garden-7.garden-demo.local": {
+        "sha": "8935ab77d0e1b83994b465d96f88c5ccd1748aec4477b4672a9e4845f9baf136",
+        "port": 8708
+      },
+      "parts-8.auto-demo.local": {
+        "sha": "1c9386fbd3394f978d63056931e505e3ea59cf2e74fd18b769a8d657b9c95f31",
+        "port": 8709
+      },
+      "music-9.music-demo.local": {
+        "sha": "bc38f1f14a9c85bd908b65d6217cdaf4f254b2df6e315d57e2643be9e5e4b347",
+        "port": 8710
+      }
+    },
+    "canonical": {
+      "magento_136": {
+        "sha": "e954e9202ddbe8ef239d13ef1b7870d7aa16d14c1f729034c45337ba0b5299fe",
+        "ax_nodes": 1430
+      }
+    }
+  },
+  "eTLD1_distinct_list": [
+    "shop-0.tech-demo.local",
+    "store-1.book-demo.local",
+    "boutique-2.fashion-demo.local",
+    "goods-3.home-demo.local",
+    "sport-4.sports-demo.local",
+    "pets-5.pet-demo.local",
+    "toys-6.toy-demo.local",
+    "garden-7.garden-demo.local",
+    "parts-8.auto-demo.local",
+    "music-9.music-demo.local"
+  ],
+  "jaccard_matrix": {
+    "tech_store": {
+      "tech_store": 1.0,
+      "book_store": 0.1111,
+      "fashion_store": 0.1111,
+      "home_store": 0.1111,
+      "sports_store": 0.1111,
+      "pet_store": 0.1111,
+      "toy_store": 0.1111,
+      "garden_store": 0.1111,
+      "auto_store": 0.1111,
+      "music_store": 0.1111,
+      "magento_136": 0.0
+    },
+    "book_store": {
+      "tech_store": 0.1111,
+      "book_store": 1.0,
+      "fashion_store": 0.1111,
+      "home_store": 0.1111,
+      "sports_store": 0.1111,
+      "pet_store": 0.1111,
+      "toy_store": 0.1111,
+      "garden_store": 0.1111,
+      "auto_store": 0.1111,
+      "music_store": 0.1111,
+      "magento_136": 0.0
+    },
+    "fashion_store": {
+      "tech_store": 0.1111,
+      "book_store": 0.1111,
+      "fashion_store": 1.0,
+      "home_store": 0.1111,
+      "sports_store": 0.1111,
+      "pet_store": 0.1111,
+      "toy_store": 0.1111,
+      "garden_store": 0.1111,
+      "auto_store": 0.1111,
+      "music_store": 0.1111,
+      "magento_136": 0.0
+    },
+    "home_store": {
+      "tech_store": 0.1111,
+      "book_store": 0.1111,
+      "fashion_store": 0.1111,
+      "home_store": 1.0,
+      "sports_store": 0.1111,
+      "pet_store": 0.1111,
+      "toy_store": 0.1111,
+      "garden_store": 0.1111,
+      "auto_store": 0.1111,
+      "music_store": 0.1111,
+      "magento_136": 0.0
+    },
+    "sports_store": {
+      "tech_store": 0.1111,
+      "book_store": 0.1111,
+      "fashion_store": 0.1111,
+      "home_store": 0.1111,
+      "sports_store": 1.0,
+      "pet_store": 0.1111,
+      "toy_store": 0.1111,
+      "garden_store": 0.1111,
+      "auto_store": 0.1111,
+      "music_store": 0.1111,
+      "magento_136": 0.0
+    },
+    "pet_store": {
+      "tech_store": 0.1111,
+      "book_store": 0.1111,
+      "fashion_store": 0.1111,
+      "home_store": 0.1111,
+      "sports_store": 0.1111,
+      "pet_store": 1.0,
+      "toy_store": 0.1111,
+      "garden_store": 0.1111,
+      "auto_store": 0.1111,
+      "music_store": 0.1111,
+      "magento_136": 0.0
+    },
+    "toy_store": {
+      "tech_store": 0.1111,
+      "book_store": 0.1111,
+      "fashion_store": 0.1111,
+      "home_store": 0.1111,
+      "sports_store": 0.1111,
+      "pet_store": 0.1111,
+      "toy_store": 1.0,
+      "garden_store": 0.1111,
+      "auto_store": 0.1111,
+      "music_store": 0.1111,
+      "magento_136": 0.0
+    },
+    "garden_store": {
+      "tech_store": 0.1111,
+      "book_store": 0.1111,
+      "fashion_store": 0.1111,
+      "home_store": 0.1111,
+      "sports_store": 0.1111,
+      "pet_store": 0.1111,
+      "toy_store": 0.1111,
+      "garden_store": 1.0,
+      "auto_store": 0.1111,
+      "music_store": 0.1111,
+      "magento_136": 0.0
+    },
+    "auto_store": {
+      "tech_store": 0.1111,
+      "book_store": 0.1111,
+      "fashion_store": 0.1111,
+      "home_store": 0.1111,
+      "sports_store": 0.1111,
+      "pet_store": 0.1111,
+      "toy_store": 0.1111,
+      "garden_store": 0.1111,
+      "auto_store": 1.0,
+      "music_store": 0.1111,
+      "magento_136": 0.0
+    },
+    "music_store": {
+      "tech_store": 0.1111,
+      "book_store": 0.1111,
+      "fashion_store": 0.1111,
+      "home_store": 0.1111,
+      "sports_store": 0.1111,
+      "pet_store": 0.1111,
+      "toy_store": 0.1111,
+      "garden_store": 0.1111,
+      "auto_store": 0.1111,
+      "music_store": 1.0,
+      "magento_136": 0.0
+    },
+    "magento_136": {
+      "tech_store": 0.0,
+      "book_store": 0.0,
+      "fashion_store": 0.0,
+      "home_store": 0.0,
+      "sports_store": 0.0,
+      "pet_store": 0.0,
+      "toy_store": 0.0,
+      "garden_store": 0.0,
+      "auto_store": 0.0,
+      "music_store": 0.0,
+      "magento_136": 1.0
+    }
+  },
+  "max_jaccard": 0.1111,
+  "gap_real_vs_shuffled": 0.0202,
+  "delta_fulltree_vs_truncated": 0.6667,
+  "constructible_real_families": [
+    "magento_136"
+  ],
+  "stagehand_hitt_miss": {
+    "HIT": 1.0,
+    "FA": 0.0
+  },
+  "dsm_tracecompiler_replay": {
+    "precision": 1.0,
+    "alias_gain": 0.8571
+  }
+}

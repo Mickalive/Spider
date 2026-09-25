@@ -1,0 +1,19 @@
+[
+  {
+    "hostname": "localhost",
+    "port": 7770,
+    "name": "magento_136",
+    "url": "http://localhost:7770/",
+    "sha_before": "e954e9202ddbe8ef239d13ef1b7870d7aa16d14c1f729034c45337ba0b5299fe",
+    "sha_after_mutation": "7015507eb1205256ffb7affa6eeaa26e7f8ff5d19289179c87ace4a84aa53efb",
+    "sha_before_equals_after": false,
+    "sha_changed": true,
+    "ax_tree_nodes": 1430,
+    "named_ax_nodes": 568,
+    "ax_text_content_length": 56764,
+    "dom_text_content_length": 56764,
+    "viewport": "1280x720",
+    "cdp_session": true,
+    "grammar_hash": "273eafbcb817e8981f843581a724594665cabdd357b318c701251929ee9c83de"
+  }
+]

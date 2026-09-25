@@ -1,0 +1,14 @@
+[
+  {
+    "attempt": 1,
+    "url": "https://raw.githubusercontent.com/ServiceNow/WebArena-Verified/main/webarena-verified.json",
+    "status": 404,
+    "error": "HTTPError 404: Not Found"
+  },
+  {
+    "attempt": 2,
+    "url": "https://raw.githubusercontent.com/ServiceNow/WebArena-Verified/main/webarena-verified.json",
+    "status": 404,
+    "error": "HTTPError 404: Not Found"
+  }
+]

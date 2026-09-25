@@ -1,0 +1,14 @@
+[
+  {
+    "attempt": 1,
+    "url": "https://hub-api.docker.com/v2/repositories/am1n3e/webarena-verified-shopping/tags/",
+    "status": null,
+    "error": "URLError: Name or service not known"
+  },
+  {
+    "attempt": 2,
+    "url": "https://hub-api.docker.com/v2/repositories/am1n3e/webarena-verified-shopping/tags/",
+    "status": null,
+    "error": "URLError: Name or service not known"
+  }
+]

@@ -1,0 +1,14 @@
+[
+  {
+    "attempt": 1,
+    "HIT": 1.0,
+    "FA": 0.0,
+    "note": "exact-selector fallback"
+  },
+  {
+    "attempt": 2,
+    "HIT": 1.0,
+    "FA": 0.0,
+    "note": "exact-selector fallback"
+  }
+]
