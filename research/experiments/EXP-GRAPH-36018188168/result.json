@@ -1,0 +1,396 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-36018188168",
+  "lane": "graph",
+  "status": "COMPLETE",
+  "outcome": "SUPPORTS",
+  "metrics": {
+    "M-SINGLE-TN-SPIDER": 1.0,
+    "M-SINGLE-TN-WILSON-LOWER": 0.987357,
+    "M-SINGLE-FA-SPIDER": 0.0,
+    "M-FALSE-ACCEPT-WILSON-UPPER": 0.07135,
+    "M-SINGLE-UNKNOWN-RATE": 0.142857,
+    "M-SINGLE-ECE-SPIDER": 0.064286,
+    "M-ECE-FRESH": 0.05,
+    "M-ECE-STALE": 0.15,
+    "M-SINGLE-STALE-RATE": 0.142857,
+    "M-SYNTH-TN-SPIDER": 1.0,
+    "M-SYNTH-FA-SPIDER": 0.0,
+    "M-SYNTH-UNKNOWN-RATE": 0.142857,
+    "M-SYNTH-ECE-SPIDER": 0.064286,
+    "M-SINGLE-N-NON304": 500,
+    "M-FRESH-N-SINGLE": 300,
+    "M-STALE-N-SINGLE-K1": 50,
+    "M-NOISE-N-SINGLE": 150,
+    "M-RHO-SHUFFLED-MAX": 0.0,
+    "M-RHO-SHUFFLED-MEAN": 0.0,
+    "M-COST-VECTOR-STD": 0.0,
+    "M-WITHIN-FAMILY-STD-MIN-FRESHNESS": 0.5,
+    "M-HEALTH-GATE-PASS-SINGLE": true,
+    "M-X-WORKER-PIDS-SINGLE": [
+      38534,
+      38535
+    ],
+    "M-JWT-VERIFY-PASS-SINGLE": true,
+    "M-304-OPERATIONAL-SINGLE": true,
+    "M-WAL-EXISTS-SINGLE": true,
+    "M-WAL-MODE-SINGLE": true,
+    "M-STICKY-CONSISTENT-SINGLE": true,
+    "M-SINGLE-REPAIR-SUCCESS-POOLED-K1": 1.0,
+    "M-SINGLE-REPAIR-SUCCESS-POOLED-WILSON-LOWER-K1": 0.886483,
+    "M-REPAIR-COST-TOKENS-MEAN-K1": 5.0,
+    "M-REPAIR-COST-TOKENS-RATIO-K1": 0.3125,
+    "M-REPAIR-BROWSER-MEAN-K1": 1.0,
+    "M-REPAIR-BROWSER-RATIO-K1": 0.333333,
+    "M-REPAIR-VERIFY-STEPS-MEAN-K1": 1.0,
+    "M-SINGLE-REPAIR-SUCCESS-PER-FAMILY-dom_drift-K1": 1.0,
+    "M-SINGLE-REPAIR-SUCCESS-PER-FAMILY-WILSON-LOWER-dom_drift-K1": 0.72246,
+    "M-SINGLE-REPAIR-SUCCESS-PER-FAMILY-param_header_mutation-K1": 1.0,
+    "M-SINGLE-REPAIR-SUCCESS-PER-FAMILY-WILSON-LOWER-param_header_mutation-K1": 0.72246,
+    "M-SINGLE-REPAIR-SUCCESS-PER-FAMILY-cache_expiry-K1": 1.0,
+    "M-SINGLE-REPAIR-SUCCESS-PER-FAMILY-WILSON-LOWER-cache_expiry-K1": 0.72246,
+    "M-BOOTSTRAP-POOLED-CI-LOWER-K1": 1.0,
+    "M-BOOTSTRAP-POOLED-CI-UPPER-K1": 1.0,
+    "M-BOOTSTRAP-TOKEN-CI-LOWER-K1": 5.0,
+    "M-BOOTSTRAP-TOKEN-CI-UPPER-K1": 5.0,
+    "M-BOOTSTRAP-BROWSER-CI-LOWER-K1": 1.0,
+    "M-BOOTSTRAP-BROWSER-CI-UPPER-K1": 1.0,
+    "M-AMORTIZED-COST-F10-K1": 15.0,
+    "M-COLD-COST-F10-K1": 16,
+    "M-AMORTIZED-BROWSER-F10-K1": 1.0,
+    "M-COLD-BROWSER-F10-K1": 3,
+    "M-CONTAMINATION-POOLED-DISJOINT-K1": 0.0,
+    "M-CONTAMINATION-POOLED-SAME-K1": 0.0,
+    "M-VERIFICATION-AUROC-K1": 1.0,
+    "M-VERIFICATION-AUROC-RANDOM-PERMUTED-K1": 0.498833,
+    "M-VERIFICATION-PRECISION-K1": 1.0,
+    "M-VERIFICATION-RECALL-K1": 1.0,
+    "M-SINGLE-REPAIR-SUCCESS-POOLED-K2": 1.0,
+    "M-SINGLE-REPAIR-SUCCESS-POOLED-WILSON-LOWER-K2": 0.72246,
+    "M-REPAIR-COST-TOKENS-MEAN-K2": 10.0,
+    "M-REPAIR-COST-TOKENS-RATIO-K2": 0.3125,
+    "M-REPAIR-BROWSER-MEAN-K2": 2.0,
+    "M-REPAIR-BROWSER-RATIO-K2": 0.333333,
+    "M-REPAIR-VERIFY-STEPS-MEAN-K2": 2.0,
+    "M-SINGLE-REPAIR-SUCCESS-PER-FAMILY-dom_drift-K2": 1.0,
+    "M-SINGLE-REPAIR-SUCCESS-PER-FAMILY-WILSON-LOWER-dom_drift-K2": 0.5101,
+    "M-SINGLE-REPAIR-SUCCESS-PER-FAMILY-param_header_mutation-K2": 1.0,
+    "M-SINGLE-REPAIR-SUCCESS-PER-FAMILY-WILSON-LOWER-param_header_mutation-K2": 0.438494,
+    "M-SINGLE-REPAIR-SUCCESS-PER-FAMILY-cache_expiry-K2": 1.0,
+    "M-SINGLE-REPAIR-SUCCESS-PER-FAMILY-WILSON-LOWER-cache_expiry-K2": 0.438494,
+    "M-BOOTSTRAP-POOLED-CI-LOWER-K2": 1.0,
+    "M-BOOTSTRAP-POOLED-CI-UPPER-K2": 1.0,
+    "M-BOOTSTRAP-TOKEN-CI-LOWER-K2": 10.0,
+    "M-BOOTSTRAP-TOKEN-CI-UPPER-K2": 10.0,
+    "M-BOOTSTRAP-BROWSER-CI-LOWER-K2": 2.0,
+    "M-BOOTSTRAP-BROWSER-CI-UPPER-K2": 2.0,
+    "M-AMORTIZED-COST-F10-K2": 20.0,
+    "M-COLD-COST-F10-K2": 32,
+    "M-AMORTIZED-BROWSER-F10-K2": 2.0,
+    "M-COLD-BROWSER-F10-K2": 6,
+    "M-CONTAMINATION-POOLED-DISJOINT-K2": 0.0,
+    "M-CONTAMINATION-POOLED-SAME-K2": 0.0,
+    "M-VERIFICATION-AUROC-K2": 1.0,
+    "M-VERIFICATION-AUROC-RANDOM-PERMUTED-K2": 0.49325,
+    "M-VERIFICATION-PRECISION-K2": 1.0,
+    "M-VERIFICATION-RECALL-K2": 1.0,
+    "M-SINGLE-REPAIR-SUCCESS-POOLED-K3": 1.0,
+    "M-SINGLE-REPAIR-SUCCESS-POOLED-WILSON-LOWER-K3": 0.72246,
+    "M-REPAIR-COST-TOKENS-MEAN-K3": 15.0,
+    "M-REPAIR-COST-TOKENS-RATIO-K3": 0.3125,
+    "M-REPAIR-BROWSER-MEAN-K3": 3.0,
+    "M-REPAIR-BROWSER-RATIO-K3": 0.333333,
+    "M-REPAIR-VERIFY-STEPS-MEAN-K3": 3.0,
+    "M-SINGLE-REPAIR-SUCCESS-PER-FAMILY-dom_drift-K3": 1.0,
+    "M-SINGLE-REPAIR-SUCCESS-PER-FAMILY-WILSON-LOWER-dom_drift-K3": 0.5101,
+    "M-SINGLE-REPAIR-SUCCESS-PER-FAMILY-param_header_mutation-K3": 1.0,
+    "M-SINGLE-REPAIR-SUCCESS-PER-FAMILY-WILSON-LOWER-param_header_mutation-K3": 0.438494,
+    "M-SINGLE-REPAIR-SUCCESS-PER-FAMILY-cache_expiry-K3": 1.0,
+    "M-SINGLE-REPAIR-SUCCESS-PER-FAMILY-WILSON-LOWER-cache_expiry-K3": 0.438494,
+    "M-BOOTSTRAP-POOLED-CI-LOWER-K3": 1.0,
+    "M-BOOTSTRAP-POOLED-CI-UPPER-K3": 1.0,
+    "M-BOOTSTRAP-TOKEN-CI-LOWER-K3": 15.0,
+    "M-BOOTSTRAP-TOKEN-CI-UPPER-K3": 15.0,
+    "M-BOOTSTRAP-BROWSER-CI-LOWER-K3": 3.0,
+    "M-BOOTSTRAP-BROWSER-CI-UPPER-K3": 3.0,
+    "M-AMORTIZED-COST-F10-K3": 25.0,
+    "M-COLD-COST-F10-K3": 48,
+    "M-AMORTIZED-BROWSER-F10-K3": 3.0,
+    "M-COLD-BROWSER-F10-K3": 9,
+    "M-CONTAMINATION-POOLED-DISJOINT-K3": 0.0,
+    "M-CONTAMINATION-POOLED-SAME-K3": 0.0,
+    "M-VERIFICATION-AUROC-K3": 1.0,
+    "M-VERIFICATION-AUROC-RANDOM-PERMUTED-K3": 0.49325,
+    "M-VERIFICATION-PRECISION-K3": 1.0,
+    "M-VERIFICATION-RECALL-K3": 1.0,
+    "M-FA-B-NO-GUARD": 1.0,
+    "M-FA-DELTA-SPIDER-VS-NO-GUARD": 1.0,
+    "M-SUCCESS-B-VERBATIM": 0.0,
+    "M-SUCCESS-B-RETRIEVAL-RAG": 0.0,
+    "M-SUCCESS-B-RETRIEVAL-DELTA": 1.0,
+    "M-COLD-COST-TOKENS-MEAN-K1": 16.0
+  },
+  "controls": {
+    "PC-LOCALIZED-REPAIR-SUCCEEDS": {
+      "id": "PC-LOCALIZED-REPAIR-SUCCEEDS",
+      "expected": "PC1 1.0 and PC2 >=0.90 per family per substrate (executed)",
+      "observed": {
+        "synthetic": {
+          "pc1": 1.0,
+          "pc2": {
+            "dom_drift": {
+              "n": 1,
+              "rate": 1.0
+            },
+            "param_header_mutation": {
+              "n": 1,
+              "rate": 1.0
+            },
+            "cache_expiry": {
+              "n": 1,
+              "rate": 1.0
+            }
+          }
+        },
+        "single": {
+          "pc1": null,
+          "pc2": {
+            "dom_drift": {
+              "n": 10,
+              "success": 10,
+              "rate": 1.0,
+              "wilson_lower": 0.7224598312333834,
+              "wilson_upper": 1.0
+            },
+            "param_header_mutation": {
+              "n": 10,
+              "success": 10,
+              "rate": 1.0,
+              "wilson_lower": 0.7224598312333834,
+              "wilson_upper": 1.0
+            },
+            "cache_expiry": {
+              "n": 10,
+              "success": 10,
+              "rate": 1.0,
+              "wilson_lower": 0.7224598312333834,
+              "wilson_upper": 1.0
+            }
+          }
+        }
+      },
+      "pass": true,
+      "evidence": "execute_pc1/execute_pc2 V13 logs in raw_evidence_synthetic.jsonl / raw_evidence_single.jsonl"
+    },
+    "NC-ZERO-AND-RANDOM-PATCH": {
+      "id": "NC-ZERO-AND-RANDOM-PATCH",
+      "expected": "NC1 cost 0 contamination 0; NC2 false_accept<=0.05 AUROC 1.0 perm 0.40-0.60 unclamped; NC-NOISE FA<=0.10",
+      "observed": {
+        "nc1_cost": 0,
+        "nc1_contam": 0,
+        "nc2_fa": 0.0,
+        "nc2_auroc": 1.0,
+        "nc2_perm_mean": 0.49886,
+        "noise_fa": 0.0
+      },
+      "pass": true,
+      "evidence": "execute_nc1/execute_random_patch logs; compute_auroc_prec 1000 perms unclamped"
+    },
+    "B-COLD-FULL-REEXPLORATION": {
+      "id": "B-COLD-FULL-REEXPLORATION",
+      "expected": "success>=0.90 at 16 tokens/3 browser k=1 (scaled k*16/k*3)",
+      "observed": {
+        "n": 12,
+        "success_rate": 1.0,
+        "tokens_mean": 16.0,
+        "browser_mean": 3.0
+      },
+      "pass": true,
+      "evidence": "execute_cold V13 logs"
+    },
+    "B-NO-GUARD-REPLAY": {
+      "id": "B-NO-GUARD-REPLAY",
+      "expected": "FA ~1.0 delta vs SPIDER >=0.15",
+      "observed": {
+        "fa": 1.0,
+        "delta_vs_spider": 1.0
+      },
+      "pass": true,
+      "evidence": "recomputed from raw first-stale-eval logs (no guard never flags)"
+    },
+    "B-VERBATIM-REPLAY": {
+      "id": "B-VERBATIM-REPLAY",
+      "expected": "0% success post-perturbation at 0 cost",
+      "observed": {
+        "success_rate": 0.0
+      },
+      "pass": true,
+      "evidence": "execute_verbatim executed replay"
+    },
+    "B-RETRIEVAL-RAG": {
+      "id": "B-RETRIEVAL-RAG",
+      "expected": "retrieval < repair by >=30pp pooled",
+      "observed": {
+        "retrieval_rate": 0.0,
+        "repair_pooled": 1.0,
+        "delta": 1.0
+      },
+      "pass": true,
+      "evidence": "execute_retrieval Jaccard 0.30 executed"
+    },
+    "B-JACCARD-ONLY": {
+      "id": "B-JACCARD-ONLY",
+      "expected": "fails >=1 family (TP<0.70)",
+      "observed": {
+        "dom_drift": {
+          "tp": 18,
+          "n": 18,
+          "rate": 1.0
+        },
+        "param_header_mutation": {
+          "tp": 0,
+          "n": 16,
+          "rate": 0.0
+        },
+        "cache_expiry": {
+          "tp": 0,
+          "n": 16,
+          "rate": 0.0
+        }
+      },
+      "pass": true,
+      "evidence": "recomputed from raw first-stale-eval jaccard_stale flags"
+    },
+    "B-HEADER-ONLY": {
+      "id": "B-HEADER-ONLY",
+      "expected": "fails >=1 family (TP<0.70)",
+      "observed": {
+        "dom_drift": {
+          "tp": 0,
+          "n": 18,
+          "rate": 0.0
+        },
+        "param_header_mutation": {
+          "tp": 16,
+          "n": 16,
+          "rate": 1.0
+        },
+        "cache_expiry": {
+          "tp": 16,
+          "n": 16,
+          "rate": 1.0
+        }
+      },
+      "pass": true,
+      "evidence": "recomputed from raw first-stale-eval header_stale flags"
+    },
+    "B-ORACLE-HAND-PATCH": {
+      "id": "B-ORACLE-HAND-PATCH",
+      "expected": "100% success at k*5 tokens/k browser per k",
+      "observed": {
+        "per_k_success": {
+          "1": 1.0,
+          "2": 1.0,
+          "3": 1.0
+        }
+      },
+      "pass": true,
+      "evidence": "measured repair == deterministic re-observe oracle on this deterministic site (definitional ceiling disclosed)"
+    }
+  },
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-GRAPH-36018188168/raw_evidence/raw_evidence_synthetic.jsonl",
+      "sha256": "d72d9bb7808f79320dcc1bfb56c082ee1075f9d5ad9df40e569c73e4c7deb75e",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-36018188168/raw_evidence/raw_evidence_single.jsonl",
+      "sha256": "8a78653e7eb6811aaad13606f3f727e12aa9b96778c1a95e7fcd60119951da4c",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-36018188168/raw_evidence/summary.json",
+      "sha256": "0f855177ade18aabe47af8062fac54c783c86de1ae5bb9df03a3f170dcad06ca",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-36018188168/raw_evidence/decision.json",
+      "sha256": "c5f063472477a01b207835cb86328b4d0c5e48502ad1528fe579afa282adae69",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-36018188168/raw_evidence/health_gate.json",
+      "sha256": "ca5480f124863f14316a55360420eca45fa42d085b1369506c19bf08eaf3281a",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-36018188168/raw_evidence/stage_synthetic.json",
+      "sha256": "7c5178951780f2f0f2868d40433a5d423d121b4fe65a26aac363c1ac930f9af4",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-36018188168/raw_evidence/stage_single.json",
+      "sha256": "09c84dc2d07f58562e54a2edd8ee12272c33c7df12f487a23567262147b0b3c0",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-36018188168/raw_evidence/raw_evidence_ALL.jsonl",
+      "sha256": "3f71054ac4ff55da2920e01f460fb9ba855064575cb8624c4ade9ec4af016d14",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-36018188168/raw_evidence/metrics_ALL.json",
+      "sha256": "ef6acda2d281368be12f8c1770a400541c76fc0bb8e283efd1d5abb085bdee7b",
+      "role": "derived"
+    }
+  ],
+  "observations": [
+    {
+      "id": "O1",
+      "text": "single-node health gate: worker_pids=[38534, 38535], n_distinct_workers=2, wal_mode=True, jwt_verified=True, has_304=True, sticky_consistent=True, read_after_write=True"
+    },
+    {
+      "id": "O2",
+      "text": "n_non304 single-node evaluated = 500 (fresh 300 + stale 50 + noise 150); synthetic = 360"
+    },
+    {
+      "id": "O3",
+      "text": "freshness single: TN 1.0000 [wilson lower 0.9874], FA 0.0000, UNKNOWN 0.1429 vs stale_rate 0.1429, ECE global 0.0643 fresh 0.0500 stale 0.1500"
+    },
+    {
+      "id": "O4",
+      "text": "repair pooled per k: k1=1.000 (n=30, wilson_lower 0.886); k2=1.000 (n=10, wilson_lower 0.722); k3=1.000 (n=10, wilson_lower 0.722)"
+    },
+    {
+      "id": "O5",
+      "text": "contamination per k: k1: disjoint 0.0000 (0/20), same-resource 0.0000 (0/30); k2: disjoint 0.0000 (0/20), same-resource 0.0000 (0/20); k3: disjoint 0.0000 (0/20), same-resource 0.0000 (0/30)"
+    },
+    {
+      "id": "O6",
+      "text": "verification per k on TEST: k1: AUROC 1.0000 precision 1.0000 perm_null 0.4988; k2: AUROC 1.0000 precision 1.0000 perm_null 0.4933; k3: AUROC 1.0000 precision 1.0000 perm_null 0.4933"
+    },
+    {
+      "id": "O7",
+      "text": "max|rho| trajectory-grouped = 0.0000 (1000 perms, n_traj=107); cost vector std = 0.0000"
+    },
+    {
+      "id": "O8",
+      "text": "synthetic sanity: PC1 1.000, PC2 per family {'dom_drift': 1.0, 'param_header_mutation': 1.0, 'cache_expiry': 1.0}, TN 1.0000 FA 0.0000 UNKNOWN 0.1429 ECE 0.0643, n_non304=360"
+    }
+  ],
+  "validity_notes": [
+    "Deterministic site: measured repair is definitionally identical to B-ORACLE re-observe (ratio 1.0x synthetic / 1.0x single-node); disclosed as ceiling.",
+    "Verify steps D8 gate uses per-probe verify steps (==1 per probe, <=2 per frozen satisfiability proof); total verify steps per repair = k are also reported (M-REPAIR-VERIFY-STEPS-MEAN-Kk).",
+    "N per family at K2/K3 is the frozen 10 total per k (dom 4 / param 3 / cache 3); per-family Wilson lower>0.39 threshold applies at blast radius=1 (10 per family) per frozen D6 text.",
+    "Bootstrap n_iter=5000 trajectory-grouped executed; degenerate flag = [True, True, True] (deterministic zero-variance ceiling, Wilson informative).",
+    "Drift instances run per-id request sequences (1..10 restarting at 1) because the app drifts at X-Request-Num>=6; per-trajectory observed caching is per (trajectory_id, rid).",
+    "n_non304 counts non-304 responses in the evaluated pool (fresh requests + stale instances + noise requests); construction/probe/control requests are additional executed requests not in the evaluated pool.",
+    "Synthetic stage uses stdlib http.server (family via X-Drift-Family header) \u2014 regression check only; primary gates are single-node."
+  ],
+  "unresolved": [
+    "Distributed n>=800 shared-WAL validation remains UNKNOWN (deferred until this single-node gate passes per spec product_consequence).",
+    "Real LLM token billing and Playwright execution untested (Product lane).",
+    "f=100 amortization untested; only f=10 frozen gate measured."
+  ]
+}

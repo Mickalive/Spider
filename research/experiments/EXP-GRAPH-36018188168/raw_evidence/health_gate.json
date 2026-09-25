@@ -1,0 +1,15 @@
+{
+  "db_exists": true,
+  "wal_mode": true,
+  "jwt_verified": true,
+  "auth_required": true,
+  "has_304": true,
+  "sticky_same_uri_consistent": true,
+  "n_distinct_workers": 2,
+  "worker_pids": [
+    38534,
+    38535
+  ],
+  "sticky_consistent": true,
+  "read_after_write_visible": true
+}
