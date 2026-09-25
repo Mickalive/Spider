@@ -1,0 +1,33 @@
+{
+  "experiment_id": "EXP-FRONTIER-36129180789",
+  "checks": {
+    "http_service": {
+      "available": false,
+      "flask_available": false,
+      "fastapi_available": false,
+      "required": "Local Flask/FastAPI test server for paired executor execution"
+    },
+    "runtime_capability_ledger": {
+      "ledger_exists": false,
+      "wal_exists": false,
+      "ledger_path": "/tmp/spider-runtime/capability_ledger.json",
+      "wal_path": "/tmp/spider-runtime/shared.db",
+      "ledger_content": null,
+      "certifies_distributed_bringup": false
+    },
+    "graph_freshness": {
+      "exists": false,
+      "path": "/home/runner/work/Spider/Spider/research/graph/state.json",
+      "freshness_tn": null,
+      "stale_probes": 0,
+      "tn_gate_pass": false,
+      "required": "TN >= 0.85 with >=30 stale probes for inherited arm's abstention measurement"
+    }
+  },
+  "summary": {
+    "live_available": false,
+    "http_service_available": false,
+    "runtime_ledger_certified": false,
+    "graph_freshness_adequate": false
+  }
+}
