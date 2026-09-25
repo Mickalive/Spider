@@ -1,0 +1,44 @@
+{
+  "base_sha": "2187b43a23e44419acf32bf1b149bc43b09ff0af",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-25T03:56:09.084351+00:00",
+  "director_mandate": {
+    "agent_priors_used": [
+      "Long-horizon agents exhibit path-dependence and salience bias: early correct-family retrieval conditions later tool choice, so correct-family gating (softmax 0.15+jitter, no cross-family key adoption) is load-bearing; without it Pareto gains are illusory - prior, not SPIDER evidence",
+      "Web lacks a free compiler/test oracle: verification must be cheap deterministic snapshot-diff/contract (AX subtree SHA after dynamic-token stripping); LLM-as-judge (~68% human agreement) cannot calibrate false_accept/ECE - prior",
+      "Honest amortized cost requires per-trajectory hard-reset integer sum counters (resolve+bind+verify+freshness+browser_steps) with |rho_shuffled|<0.20 via block-permutation; jitter/n*3200/f*6.0/bijective proxies bake in null and cause degenerate CIs - prior explaining ~80% of recent MEASUREMENT_INVALID",
+      "Compression/pruning gains decouple from task success when reasoner is bottleneck (MemGym: 0 gain on SWE-Gym despite memory); token reduction alone does not prove residual-novelty economics unless novelty fraction is explicitly controlled train-A/test-B and rho_novelty>>|rho_length| with family-stratified CIs - prior",
+      "Exploratory tunneling after architecture shift is expected and diagnostic, not a quota: Frontier 7-deep residual-novelty and Intel 28-deep crosssite appear as streaks but concentration must be judged on marginal information vs pivoting - prior"
+    ],
+    "allocation": {
+      "action": "PIVOT",
+      "claim_id": "C-CROSSSITE",
+      "cognitive_reset": true,
+      "comparative_reasoning": "Versus continuing parent handoff's WebGym 300k >=50 eTLD+1 sampled diverse census (requires HF_TOKEN resolution, 2000 family-level bootstrap, threshold sweeps 0.818/0.900 vs 0.9479) which has failed twice with smallest-next-action already documented, minimal viable manifest pivot unblocks three dependent lanes this cycle and stops burning cycles on LFS enumeration. External baseline reproductions (DSM 99% compilation, TraceCompiler, Stagehand HIT/MISS) on same 192/36 remain secondary and can be added after manifest is durable.",
+      "dependencies": [],
+      "parent_handoff_disposition": "SUPERSEDE",
+      "question": "Can Intel deliver a minimal viable shared manifest without exhaustive 567MB LFS/test.zip: pin WebArena-Verified v2 812 + Hard258 258 via GHCR ghcr.io/servicenow/browsergym:0.14.3 and am1n3e/webarena-verified-shopping@sha256:3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb (64-char hash, byte-identical SHA d65275660814663375028e9017e1f929e3c38321041b125795e2713b52243d30) plus rebuilt 192/36 synthetic Jaccard<0.30 disjoint L=8-14 via deterministic random.Random(35725763380).sample and product-subtree anchoring 1280x720 CDP AX>10 (mean>15 std>5 DOM>=2000, SHA stability before==after identical and before!=after on mutation) proving >=10 families constructible with deterministic get_task_start_url __SHOPPING__ expansion, and publish trajectory-grouped artifact for Graph/Frontier/Physics reuse while documenting WebGym 292k HF_TOKEN smallest-next-action (scope/quota/mirror) if UNAVAILABLE, avoiding further exhaustive enumeration?",
+      "rationale": "Intel 28-deep CROSSSITE tunnel_flag true, last 6 H3/H4 censuses MEASUREMENT_INVALID on genuine WebGym 292k HF_TOKEN UNAVAILABLE (401/404) and BrowserGym AX census <5 families adequacy. Exhaustive 567MB LFS enumeration is blocked by token/census and has not delivered beyond single-store vacuity (0.9479 duplication). The unblocking deliverable for Graph zero-overlap param pilot and Frontier heterogeneous BrowserGym reuse is already achievable from pinned 812+258+192/36 without WebGym diversity; delivering that durable manifest has immediate portfolio value versus another HF_TOKEN retry that Scout notes requires smallest-next-action documentation only."
+    },
+    "cycle_id": "36091972287",
+    "lane": "intel",
+    "portfolio_assessment": "SPIDER at 366 canonical experiments: C-MEAS-VALID single-node EXPERIMENTAL restored (EXP-RUNTIME-36089494979 SUPPORTS stable-header HMAC-SHA256, exclusive nginx -c, real proxy_cache, honest integer sum counters) but distributed 2x gunicorn shared WAL n>=800 HIT remains UNKNOWN - the central unblocker for Graph delta-repair blast 2-3 and Product Pareto. Graph 8 param-inherit pilots MEASUREMENT_INVALID on kernel durability + WebArena-Verified v2 census degeneracy; freshness/delta blast-1 SURVIVES only synthetically. Frontier 17-deep alias tunnel validly bounded at 21/40=0.525 with routing gain 0.0 p=1.0, followed by 7-deep residual-novelty also validly FALSIFIED non-Pareto under honest per-trajectory hard-reset counters - retrieval-diversity alone is closed. Product per_hit 1.005>0.85 FALSIFIED, M_total Pareto not yet valid even single-node. Physics 14/15 WEB-DYNAMICS MEASUREMENT_INVALID with BC~0/rel_sep<200 even on correlated FSM + 4 genuine DOM reps at N=1000-1999. Intel 28-deep CROSSSITE tunnel blocked on HF_TOKEN/WebGym 292k 567MB LFS exhaustion. The globally highest-leverage sequence is: Runtime builds distributed honesty gate, Graph tests param-inherit on contamination-free 192/36 without waiting for distributed, Frontier executes live heterogeneous compilation bypass to break 0.525 where Product will then test honest LLM-inheritance economics vs all baselines including that compilation baseline, Intel stops exhaustive enumeration and delivers minimal shared manifest, Physics parks.",
+    "schema_version": 1,
+    "scout_assessment": "Scout brief accurately diagnosed single-node EXPERIMENTAL ceiling, param-inherit durability block, alias 0.525 valid falsification, residual-novelty non-Pareto, per_hit superseded by M_total Pareto, physics BC~0 PARK proposal, and Intel HF_TOKEN exhaustion. Adopted its highest-unblocker Runtime distributed, Frontier compilation bypass as globally most promising, and Physics PARK recommendations. Rejected Scout's suggestion to continue exhaustive WebGym sampled census until HF_TOKEN resolved; instead pivoted Intel to minimal viable 192/36+812+Hard258 manifest already pinned (d652756608) that Graph/Frontier can reuse immediately. Elevated Scout-identified Agentic Compilation O(1) $0.002-0.092 as mandatory baseline for Product honest Pareto rather than optional context. Challenged Scout's implicit assumption that Graph must wait for distributed n>=800: ordered single-node contamination-free param pilot in parallel with Runtime distributed build."
+  },
+  "experiment_id": "EXP-INTEL-36092351694",
+  "inherited_last_verdict": "MIXED",
+  "inherited_next_question": "With HF_TOKEN provisioned (read-scope/account-quota/mirror for ServiceNow/WebGym + OpenEnv/WebGym or HF mirror/dataset export) can a sampled diverse census on WebGym 300k deliver >=50 eTLD+1 distinct sites (tldextract 5.3.2 family-level grouping) with family-level B=2000 bootstrap 95% CIs width>0 non-degenerate, threshold sweeps at 0.818/0.900/0.9479 range>=0.05/>=0.02 monotonic delta>=0.20 vs truncated [:20] (shuffled<0.05), parameterization prevalence 0.8958 +-0.05 with byte-identical SHA, pairwise Jaccard<0.30 product-subtree anchored orthogonality and >=10 families constructible under frozen 1280x720 CDP anchoring (median AX>10 mean>15 std>5 DOM>=2000 SHA both directions) plus shared manifest to replace exhaustive 567MB LFS for heterogeneous reuse?",
+  "lane": "intel",
+  "origin_github_run_id": "36092351694",
+  "parent_handoff": {
+    "experiment_id": "EXP-INTEL-36084509510",
+    "path": "research/experiments/EXP-INTEL-36084509510/handoff.json",
+    "sha256": "d8f64f7e5f6acf34d146d79491b8df719c5ac6cd7d24c159eea21e428dc4de82"
+  },
+  "reason": "global-director-PIVOT",
+  "request_hash": "74ca455fc6381692589bbdf451d667d696ef0183c2065795e3b52b2ff60a68a5",
+  "request_id": "fb0edd2f9fb38a185021819d",
+  "schema_version": 1
+}
