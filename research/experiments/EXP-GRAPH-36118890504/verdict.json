@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-36118890504",
+  "lane": "graph",
+  "decision": "MEASUREMENT_INVALID",
+  "claim_updates": [
+    {
+      "claim_id": "C-PARAM-INHERIT",
+      "status": "MEASUREMENT_INVALID",
+      "reason": "The independent audit found this packet measurement-invalid, not a valid scientific falsification. The frozen preconditions require auth:valid_token and resource:posts with GET /posts/${id}, while B supplies resource:users; the measured kernel uses exact resource matching and returns UNKNOWN on a mismatch. The substrate also rejects /posts/6..10, and the B run made zero HTTP requests. The only parameterized implementation was the harness substitute in run_experiment.py, while provenance records no durable kernel distill_parameterized capability. Controls are non-discriminating, the cold/literal/KNN comparisons are invalid under the audit, and the frozen D1-D4 thresholds are infeasible for the recorded 0.0 B cost and n=5; D2's SUPPORTS branch is unreachable. This packet therefore cannot support or reject C-PARAM-INHERIT, and its prior narrow synthetic EXPERIMENTAL ceiling remains unchanged."
+    }
+  ],
+  "product_action": "Do not promote: there is no independently validated durable kernel implementation and no valid A-to-B transfer measurement.",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "After a durable kernel-level distill_parameterized implementation is independently validated and a new packet is frozen with a resource-abstraction mechanism (generalized preconditions and an action template that can bind the B resource), valid isolated cold, literal, and retrieval baselines, satisfiable thresholds, and a separately audited HTTP substrate, can that kernel resolve, bind, execute, and verify the A-trained mechanism on disjoint B IDs with a predeclared non-degenerate success/cost margin and safe abstention on unrelated C?",
+  "reason": "Adjudicate against the frozen packet and independent audit rather than the producer outcome label. The raw result records successful A and C controls, but the claimed B transfer is not an observed mechanism execution: all five B cases are UNKNOWN with zero requests and zero cost. The resource-specific preconditions make the intended B path unreachable by construction, and the audit also finds an unearned kernel gate, invalid comparison baselines, and infeasible decision thresholds. Preserve this as bounded measurement-invalid evidence; do not promote, close the broader inheritance domain, or treat the producer's FALSIFIES label as a finding.",
+  "evidence_refs": [
+    "research/experiments/EXP-GRAPH-36118890504/audit.json: status=MEASUREMENT_INVALID; producer_claim_supported=false; validity_findings; baseline_findings; required_fixes; claim_ceiling",
+    "research/experiments/EXP-GRAPH-36118890504/result.json: metrics.B.parameterized_success_rate=0.0, B.cold_success_rate=1.0, B.literal_success_rate=0.0, B.knn_success_rate=0.0, B.parameterized_cost=0.0, C.false_accept_rate=0.0; controls; validity_notes",
+    "research/experiments/EXP-GRAPH-36118890504/raw_results.json: raw_results.test_B entries for IDs 6-10; decision_rule; raw_results.test_C",
+    "research/experiments/EXP-GRAPH-36118890504/provenance.json: kernel.has_distill_parameterized=false; measured kernel SHA 46929b3a951df48d7f9d1fd850871073c0d91c1868aa117e13d389fe274e8d61; substrate provenance",
+    "research/experiments/EXP-GRAPH-36118890504/prereg.md: §§5.3-5.5, 9, and 14; research/experiments/EXP-GRAPH-36118890504/spec.json: measurement-validity V1-V7 and decision rule D1-D5",
+    "research/experiments/EXP-GRAPH-36118890504/run_experiment.py:102-175; research/experiments/EXP-GRAPH-36118890504/substrate_app.py:116-118; src/spider/kernel.py:74-123",
+    "research/experiments/EXP-GRAPH-36118890504/request.json: director_mandate, parent_handoff, inherited_next_question, and allocation",
+    "research/experiments/EXP-GRAPH-36118890504/freeze.json: immutable request/spec/prereg hashes",
+    "research/experiments/EXP-GRAPH-36106653880/handoff.json: parent MEASUREMENT_INVALID state and runtime dependency",
+    "codex/index.json; codex/claim_state.json (C-PARAM-INHERIT); codex/experiments/EXP-PRODUCT-33528829801/; codex/experiments/EXP-PRODUCT-33741671686/"
+  ]
+}
