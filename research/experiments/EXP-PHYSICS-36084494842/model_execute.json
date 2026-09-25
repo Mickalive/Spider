@@ -1,10 +1,10 @@
 {
   "status": "success",
-  "model": "opencode/ling-3.0-flash-fin-free",
-  "attempt": 6,
+  "model": "opencode/muse-spark-1.2-contributor-free",
+  "attempt": 2,
   "exit_code": 0,
   "category": "ok",
-  "github_run_id": "36084494842",
+  "github_run_id": "36089491356",
   "github_run_attempt": "1",
-  "recorded_at": "2026-09-25T02:41:29.730400+00:00"
+  "recorded_at": "2026-09-25T03:49:37.288765+00:00"
 }
