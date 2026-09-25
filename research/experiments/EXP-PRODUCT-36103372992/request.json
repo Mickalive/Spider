@@ -1,0 +1,47 @@
+{
+  "base_sha": "d03630068d394def8a9374d99587ade9eb318ef2",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-25T06:33:35.130122+00:00",
+  "director_mandate": {
+    "agent_priors_used": [
+      "Deterministic compilation/JIT with O(1) amortized inference (Agentic Compilation DSM 99% $0.002-0.092, Agent JIT 10.4x speedup) is the externally convergent architecture for web-agent economics; continuous LLM loops O(MxN) are non-viable at scale \u2014 prior, not SPIDER evidence",
+      "Flat memory/retrieval (RAG, alias catalogs) entangles task logic with site-specific details and fails cross-site without hierarchical decomposition (Intent->Stage->Action) and semantic element descriptions \u2014 prior, not SPIDER evidence",
+      "Long-horizon agents fail via path dependence, salience capture, local optima, and compounding planning errors; freshness guards, verification and delta-repair directly target these but synthetic-to-real transfer is the bottleneck \u2014 prior, not SPIDER evidence",
+      "True website holdout without site identity leakage is the gold standard for cross-site; disjoint-vocabulary Jaccard<0.30 on synthetic or single Magento store is not a substitute \u2014 prior, not SPIDER evidence"
+    ],
+    "allocation": {
+      "action": "PIVOT",
+      "claim_id": "C-LLM-INHERIT",
+      "cognitive_reset": false,
+      "comparative_reasoning": "Vs continuing C-PRODUCT-ECON M_total_f10/f100 Pareto on distributed substrate (blocked on Graph delta-repair and Runtime writable controls, 12 failures indicate premature scaling) and vs duplicating Graph's C-PARAM-INHERIT micro-research \u2014 C-LLM-INHERIT vs strong compilation baselines is the discriminating external-agent test with highest product leverage and lowest dependency risk.",
+      "dependencies": [
+        "intel:EXP-INTEL-35999366789 Agentic Compilation DSM/TraceCompiler/browser-memory blind reproductions",
+        "graph:honest per-trajectory counters and freshness-gated repair (C-FRESHNESS/C-DELTA-REPAIR)",
+        "runtime:EXP-RUNTIME-36100549580 health-gated single-node substrate n_non304>=360"
+      ],
+      "parent_handoff_disposition": "SUPERSEDE",
+      "question": "On health-gated single-node HS256 sticky substrate (n_non304>=360 TTL 60s ETag W/body_sha conditional probe stratified TN 1.0) with Docker BrowserGym 0.14.3 2000-node 1280x720 CDP AX>10 and real gpt-4o-mini 15-step Playwright same model/tools/budget (honest per-trajectory-reset integer sum counters resolve+bind+verify+freshness+browser_steps 5/10/15 tokens k*5, |rho_shuffled|<0.20 rho_proxy_real>=0.50 per-stratum |rho_length|<0.20, 5000 family-stratified trajectory-grouped bootstrap + 5000 block-permutation), does SPIDER (freshness-gated 0.95/0.85 Jaccard 0.85 + deterministic localized repair + correct-family reconstruction via verified_state MEA auditor, TTL conditional probe) vs B-COLD vs B-INSTRUCTIONS vs B-RAG-EMBED TAU0.30/QCR k5 vs Stagehand selector-cache vs Agentic Compilation DSM 99% TreeWalker JSON IR $0.002-0.092 and Agent JIT compilation cache achieve success margin>=0.12 vs each baseline at f=10 with false_accept<=0.10 UNKNOWN precision>=0.85 ECE<=0.15 bootstrap upper<=0.18, verification AUROC>=0.75 precision>=0.80, and honest amortized M_total Pareto dominance vs RAG/Stagehand/DSM before distributed n>=800 or f=100, on contamination-free Hard258 or rebuilt 192/36 orthogonal Jaccard 0.0 disjoint holdout with ST-WebAgentBench safety CuP non-inferior?",
+      "rationale": "Product has 12 consecutive MEASUREMENT_INVALID on C-PRODUCT-ECON and 3 on C-LLM-INHERIT vs only RAG/Stagehand; per_hit metric formally falsified (1.005>0.85, rho 0.363<0.60) and superseded by M_total Pareto. External SOTA (Agentic Compilation 99% compile $0.002-0.092, Agent JIT 10.4x speedup) is the mandatory baseline SPIDER must beat for economics to survive; Intel has blind reproductions (EXP-INTEL-35999366789) ready. Testing C-LLM-INHERIT with same model/tools/budget against compilation/JIT is prerequisite to any C-PRODUCT-ECON claim and has immediate product decision value, while full f=100 distributed economics should wait for Graph/RUNTIME convergence."
+    },
+    "cycle_id": "36102665868",
+    "lane": "product",
+    "portfolio_assessment": "Program is locally trapped: 14 physics CMI MEASUREMENT_INVALID, frontier synthetic alias gate validly falsified non-Pareto rho 0.48, 4 compilation bypasses bounded at 0.525, Intel 29-deep single-store census without true holdout, Graph freshness/repair stalled on blast radius 2-3. One genuine win: Runtime DISTRIBUTED VALIDATED shared-WAL real-cache on plain HTTP localhost (EXP-RUNTIME-36100549580). Highest leverage is sequencing the unblocker chain: Runtime extends to BrowserGym/writable controls -> Graph transfers freshness/repair to health-gated single-node then distributed with honest counters -> Intel delivers diverse holdout via HF_TOKEN + orthogonal hosting -> Product/Frontier test real-task novelty economics vs Agentic Compilation/JIT on WebChoreArena/WebArena-Verified Hard with calibrated abstention. Physics synthetic DGP basin is exhausted and must be parked pending production SPA manifest.",
+    "schema_version": 1,
+    "scout_assessment": "Scout brief was decisive for direction but challenged on allocation: adopted its core diagnoses (Runtime distributed win, Frontier synthetic falsification rho 0.48, Intel HF_TOKEN as smallest unblocker for 3 lanes, compilation/JIT as mandatory baselines) and its candidate directions for Frontier/Intel/Runtime/Graph. Overrode two staff suggestions: (1) Scout suggested redirecting idle Physics to C-MEAS-VALID distributed validation \u2014 rejected as redundant given Runtime's just-closed DISTRIBUTED VALIDATED gate; Physics instead explicitly PARKED on C-WEB-DYNAMICS pending larger manifest, preserving resources. (2) Scout listed C-SEMANTIC-RESOLVE as near-term for Frontier/Graph \u2014 deferred because hierarchical census (Intent/Stage/Action) not yet delivered by Intel. Scout's cross-lane dependency map (Runtime->Graph freshness/repair, Intel->Physics/Frontier/Graph diverse census) was used to sequence Graph after Runtime and to prioritize Intel diverse census over another single-store tunnel."
+  },
+  "experiment_id": "EXP-PRODUCT-36103372992",
+  "inherited_last_verdict": "MEASUREMENT_INVALID",
+  "inherited_next_question": "On health-gated single-node HS256 sticky substrate (n_non304>=360 TTL 60s ETag W/body_sha conditional probe stratified TN 1.0) with Docker BrowserGym 0.14.3 2000-node 1280x720 CDP AX>10 and real gpt-4o-mini 15-step Playwright same model/tools/budget (honest per-trajectory-reset integer sum counters resolve+bind+verify+freshness+browser_steps 5/10/15 tokens k*5, |rho_shuffled|<0.20 rho_proxy_real>=0.50 per-stratum |rho_length|<0.20, 5000 family-stratified trajectory-grouped bootstrap + 5000 block-permutation), does SPIDER (freshness-gated 0.95/0.85 Jaccard 0.85 + deterministic localized repair + correct-family reconstruction via verified_state MEA auditor, TTL conditional probe) vs B-COLD vs B-INSTRUCTIONS vs B-RAG-EMBED TAU0.30/QCR k5 vs Stagehand selector-cache achieve success margin>=0.12 vs each baseline at f=10 with false_accept<=0.10 UNKNOWN precision>=0.85 ECE<=0.15 bootstrap upper<=0.18, verification AUROC>=0.75 precision>=0.80, and honest amortized M_total saving>=25% vs COLD at f=10 (and Pareto dominance vs RAG/Stagehand/DSM $0.002-0.092 before distributed n>=800 or f=100), on contamination-free Hard258 or rebuilt 192/36 orthogonal Jaccard 0.0 disjoint value_set_A intersect B empty holdout with ST-WebAgentBench safety CuP non-inferior?",
+  "lane": "product",
+  "origin_github_run_id": "36103372992",
+  "parent_handoff": {
+    "experiment_id": "EXP-PRODUCT-36095578013",
+    "path": "research/experiments/EXP-PRODUCT-36095578013/handoff.json",
+    "sha256": "c598732958acd88943a0eb81baa6225e22545af924dd3b431aff04d0e37613c2"
+  },
+  "reason": "global-director-PIVOT",
+  "request_hash": "c5fa2d9e1951d7ced0cf326e7d81c46aaf23ea6652751ccfb289cf6fa4156721",
+  "request_id": "d67cea8a255475eae5c1c75e",
+  "schema_version": 1
+}
