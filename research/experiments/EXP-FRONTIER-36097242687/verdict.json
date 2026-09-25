@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-FRONTIER-36097242687",
+  "lane": "frontier",
+  "decision": "MEASUREMENT_INVALID",
+  "claim_updates": [
+    {
+      "claim_id": "C-RESIDUAL-NOVELTY",
+      "status": "HYPOTHESIS",
+      "reason": "MEASUREMENT_INVALID diagnostic with audit PASS: live_available=false browsergym=false browsergym.core=false playwright=false agentlab=false intel_diverse_manifest_exists=false manifest_families=0 pooled_tasks=0 mixed_tasks=0 heterogeneity_adequate=false coverage_adequate=false substrate_adequate=false runtime_wal_exists=false x_worker_pid=null n_non304=null elapsed_seconds 0.0 diagnostic path. All 16 controls correctly NOT_RUN/FAIL per result.json controls (9 PCs FAIL/NOT_RUN manifest 0/10 Jaccard null, 7 NCs NOT_RUN, 5 baselines NOT_RUN) pc_all_pass=false nc_all_pass=false. Audit recomputed via importlib.util.find_spec + filesystem probes verifies exact match and frozen input integrity (request f1934c9ca5ce6d719a53b51e05ca10838bf66124535e3e2bfb4663a9fb532251, spec da13d7ee19958bdb3b4832a3e0f6e5c6677ee6dc52980dc1aa32a1c313fba19a, prereg 0306edc08b9b9f9fd2a2458cd08512b0995eb9d3641259dce8f70ffaac9e5843 all match freeze.json, parent_handoff 8f249a10b7fdba630f5d5572bcfb5331460980fe835aba37aa305ab003da245f) with no post-freeze tampering, chromium_present true pypi_reachable true installable confirms missing-install not network. No outcome-bearing measurements run; per_trajectory_traces.json empty [] sha256 4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945, honest_cost_audit trajectories_audited 0 diff null. Synthetic TAU0.30 36-family fixture correctly not substituted per frozen spec measurement_validity[0] BINDING-RULE. No evidence for or against WebChoreArena heterogeneous residual-novelty verification economics (rho_novelty>=0.60 vs |rho_length|<0.20, calibrated UNKNOWN/ECE, Pareto vs cold/RAG/WebMCP at f10/f100) on this gate; prior valid bounded negatives remain authoritative and are not superseded."
+    }
+  ],
+  "product_action": "none",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "After Intel (WebChoreArena 532 tedious/memory + WebArena-Verified Hard 192/36 >=10 families Jaccard<0.30 mean<0.15 AX>10 DOM>=2000) + Runtime health-gated HS256 sticky WAL (n_non304>=360 single-node else >=800 distributed X-Worker-Pid>=10 If-None-Match/304 proxy_cache HIT) + BrowserGym 1280x720 CDP (browsergym-core 0.14.3/playwright 1.63.0/agentlab) + Graph freshness TN>=0.85 substrate repair, does SPIDER residual-novelty verification economics with honest per-trajectory hard-reset TAU0.30+freshness-gated counters demonstrate rho_novelty>=0.60 lower>0.40 decoupled |rho_length|<0.20 calibrated UNKNOWN precision>=0.85 ECE<=0.15 and Pareto saving>=25% vs cold strict vs RAG k5 at f10/f100 on WebChoreArena heterogeneous trajectory-grouped holdout >=40 pooled >=10 mixed with 5000 bootstrap/block/global?",
+  "reason": "Audit PASS confirms MEASUREMENT_INVALID is correctly diagnosed infrastructure failure not scientific falsification: BrowserGym/CDP stack absent (importlib None for browsergym/browsergym.core/playwright/agentlab), Intel manifest 0/10 families Jaccard null pooled 0/40 mixed 0/10 coverage_adequate false heterogeneity_adequate false, Runtime WAL absent at /tmp/spider-runtime/shared.db X-Worker-Pid null n_non304 null, all 9 PCs FAIL/NOT_RUN and 7 NCs NOT_RUN and 5 baselines NOT_RUN, synthetic TAU0.30 fixture correctly preserved as bounded negative not live substitute, frozen decision_rule requires all PCs/NCs PASS + substrate_adequate for SURVIVES/FALSIFIES. With live_available=false elapsed 0.0s diagnostic_mode true experiment cannot support or falsify C-RESIDUAL-NOVELTY. Prior valid bounded negatives remain authoritative: 17-deep alias ceiling 21/40=0.525 Wilson [0.352,0.648] 0/10 mixed routing gain 0.0 p=1.0 and honest synthetic non-Pareto rho 0.4837 ECE 0.216 RAG dominance false under QCR all 11 PCs/NCs PASS (EXP-FRONTIER-36042599040 audit PASS). No product promotion authorized; frontier lane code remains outside src/spider/kernel. Must pause immediate chaining (continue=false) and await Global Research Director scheduled pulse after Intel delivers diverse manifest and Runtime deploys health-gated WAL and BrowserGym+freshness gates installed; retrying identical WebChoreArena heterogeneous shootout without substrate would repeat MEASUREMENT_INVALID diagnostic.",
+  "evidence_refs": [
+    "research/experiments/EXP-FRONTIER-36097242687/request.json sha256 f1934c9ca5ce6d719a53b51e05ca10838bf66124535e3e2bfb4663a9fb532251 director_mandate PIVOT C-RESIDUAL-NOVELTY cognitive_reset true SUPERSEDE",
+    "research/experiments/EXP-FRONTIER-36097242687/spec.json sha256 da13d7ee19958bdb3b4832a3e0f6e5c6677ee6dc52980dc1aa32a1c313fba19a",
+    "research/experiments/EXP-FRONTIER-36097242687/prereg.md sha256 0306edc08b9b9f9fd2a2458cd08512b0995eb9d3641259dce8f70ffaac9e5843",
+    "research/experiments/EXP-FRONTIER-36097242687/freeze.json frozen_at 2026-09-25T05:13:25.107308+00:00 hashes match prereg/request/spec",
+    "research/experiments/EXP-FRONTIER-36097242687/result.json status MEASUREMENT_INVALID outcome NOT_APPLICABLE metrics live_available false pooled 0 mixed 0 manifest_families 0 heterogeneity_adequate false coverage_adequate false substrate_adequate false controls pc_all_pass false nc_all_pass false",
+    "research/experiments/EXP-FRONTIER-36097242687/audit.json status PASS producer_claim_supported false claim_ceiling C-RESIDUAL-NOVELTY remains HYPOTHESIS required_fixes Intel/Runtime/BrowserGym/Graph validity_findings frozen inputs verified substrate absence recomputed PASS baseline_findings all NOT_RUN correctly recomputed_metrics live_available false manifest 0 pooled 0 mixed 0",
+    "research/experiments/EXP-FRONTIER-36097242687/report.md MEASUREMENT_INVALID diagnostic substrate table live_available false pooled 0 mixed 0 prior negatives preserved",
+    "research/experiments/EXP-FRONTIER-36097242687/provenance.json git_commit 23d0d6b090dff278f80e41a4b76ec7d05a77dcea github_run_id 36097242687 diagnostic_mode true live_available false freeze_hash matches freeze.json code_paths research/frontier/run_execute_36097242687.py elapsed 0.0",
+    "research/experiments/EXP-FRONTIER-36097242687/artifacts/substrate_diagnostic.json sha256 6a1e7fca5873ea4db2505f50c969d8cfa4f8ea884331e219060abb7309e00f7a live_available false manifest_families 0 pooled 0",
+    "research/experiments/EXP-FRONTIER-36097242687/artifacts/per_trajectory_traces.json sha256 4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945 empty []",
+    "research/experiments/EXP-FRONTIER-36097242687/artifacts/honest_cost_audit.json sha256 7a0a67bb2ec3dd360d2e9bb047b468ddb8d79fc20f508ee5ab96117f305bc71d trajectories_audited 0",
+    "research/experiments/EXP-FRONTIER-36097242687/artifacts/compilation_pipeline_check.json sha256 f93bdffdd63e17052bb7dc87b6ec21cb80b2dff88f730e65024d7f2587ad2394",
+    "research/experiments/EXP-FRONTIER-36095585747/handoff.json sha256 8f249a10b7fdba630f5d5572bcfb5331460980fe835aba37aa305ab003da245f parent_handoff verified",
+    "research/experiments/EXP-FRONTIER-36042599040/audit.json PASS all 11 PCs/NCs PASS rho 0.4837 CI[0.4102,0.5523] ECE 0.216 RAG dominance false bounded synthetic non-Pareto preserved not superseded",
+    "research/experiments/EXP-FRONTIER-36052053591 lineage alias ceiling 21/40=0.525 pooled 0/10 mixed routing gain 0.0 p=1.0",
+    "codex/claim_state.json C-RESIDUAL-NOVELTY HYPOTHESIS no VALIDATED",
+    "codex/index.json canonical index no promotion",
+    "research/lanes/registry.json frontier lane charter"
+  ]
+}
