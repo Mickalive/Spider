@@ -2,9 +2,9 @@
   "status": "failure",
   "model": "opencode/muse-spark-1.3-contributor-free",
   "attempt": 8,
-  "exit_code": 75,
-  "category": "transient-pool-exhausted",
-  "github_run_id": "36058296100",
+  "exit_code": 76,
+  "category": "output-missing-pool-exhausted",
+  "github_run_id": "36084489938",
   "github_run_attempt": "1",
-  "recorded_at": "2026-09-24T22:31:21.950388+00:00"
+  "recorded_at": "2026-09-25T02:31:42.359818+00:00"
 }
