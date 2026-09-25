@@ -1,0 +1,248 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-36018188168",
+  "lane": "graph",
+  "status": "PASS",
+  "producer_claim_supported": true,
+  "required_fixes": [],
+  "validity_findings": [
+    {
+      "id": "V1_DETERMINISTIC_VERIFICATION",
+      "severity": "pass",
+      "finding": "Verification uses src/spider/kernel.py _matches exact equality on required_slots, binary 1/0, TRAIN18/TEST12 frozen 0.85, perm null unclamped 0.498/0.493. Recomputed AUROC 1.0 on TEST per k (n=12/4/4 correct) matches producer; perm mean in [0.40,0.60] as required. No hash-injected scores.",
+      "evidence": "research/experiments/EXP-GRAPH-36018188168/raw_evidence/stage_single.json:instances[0].first_stale_evals[0]._matches via kernel.py; result.json:controls NC-ZERO-AND-RANDOM-PATCH nc2_perm_mean 0.49886; summary.json D10_details"
+    },
+    {
+      "id": "V2_HONEST_SUM_COUNTER_CONSTANT_PER_TRAJECTORY_RESET",
+      "severity": "pass-with-limitation",
+      "finding": "Per-trajectory-reset integer sum-counter resolve1+bind1+verify1+freshness1+browser0/1 per mutated id confirmed: tokens 5/10/15, browser 1/2/3, verify per probe 1, all integers, no jitter/n*3200/f*6/parity. Cost vector STD 0.0 within strata as expected for deterministic site. Producer disclosures correct.",
+      "evidence": "research/experiments/EXP-GRAPH-36018188168/raw_evidence/raw_evidence_single.jsonl cost fields; result.json M-COST-VECTOR-STD 0.0; provenance.json code hash 1bdec6bc"
+    },
+    {
+      "id": "V3_NO_JITTER_NO_PROXY",
+      "severity": "pass",
+      "finding": "No injected variance detected; cost vectors constant per stratum, no bijective proxy.",
+      "evidence": "result.json M-COST-VECTOR-STD 0.0; M-RHO-SHUFFLED-MAX 0.0"
+    },
+    {
+      "id": "V4_RHO_SHUFFLED_MAX_TRAJECTORY_GROUPED",
+      "severity": "pass-vacuous",
+      "finding": "max|rho| 0.0 via 1000 whole-trajectory-block perms passes <0.20 but is vacuous: zero cost variance makes Pearson undefined -> 0 by implementation, so test confirms no injected variance but cannot discriminate graded economics. Disclosed as limitation; per spec V3/V4 this is expected for deterministic constant costs and not a falsification.",
+      "evidence": "result.json M-RHO-SHUFFLED-MAX 0.0; summary.json D13_details max_abs_rho 0.0 mean 0.0 n_perm 1000; prereg 12 Remaining threats disclosed"
+    },
+    {
+      "id": "V5_WITHIN_FAMILY_STD_OUTCOME",
+      "severity": "pass",
+      "finding": "Within-family freshness std 0.5 per family per k >0 confirmed, provides discrimination; cost std excluded per spec.",
+      "evidence": "result.json M-WITHIN-FAMILY-STD-MIN-FRESHNESS 0.5; summary.json single.within_std"
+    },
+    {
+      "id": "V6_TRAJECTORY_GROUPED_BOOTSTRAP_5000",
+      "severity": "pass-degenerate",
+      "finding": "5000 family-stratified trajectory-grouped bootstrap executed per k, but CIs degenerate [1.0,1.0] for repair success and [5.0,5.0] etc for costs due to deterministic perfect success (ceiling effect). Producer correctly flags degenerate=True and uses Wilson for informative width. Bootstrap passes honesty gate per spec but provides no precision beyond Wilson.",
+      "evidence": "result.json M-BOOTSTRAP-POOLED-CI-LOWER-K1 1.0 UPPER 1.0; summary.json D6_D7_details bootstrap_pooled_ci; validity_notes degenerate flag [True,True,True]"
+    },
+    {
+      "id": "V7_WILSON_CI",
+      "severity": "pass",
+      "finding": "Wilson intervals recomputed: TN 300/300 lower 0.98735 matches 0.987357; FA 0/50 upper 0.07135 matches; repair K1 30/30 lower 0.88648 matches 0.886483; K1 per-family 10/10 lower 0.72246 matches; K2 pooled 10/10 lower 0.72246 matches; K2 per-family 4/4 lower 0.51009 and 3/3 lower 0.43849 match. Contamination 0/20 upper 0.1611, 0/30 upper 0.1135 match.",
+      "evidence": "result.json M-SINGLE-TN-WILSON-LOWER 0.987357 etc; summary.json D6_D7_details; recomputed via python wilson()"
+    },
+    {
+      "id": "V8_ECE_CALIBRATION_RECALIBRATED_PREVALENCE_AWARE",
+      "severity": "pass",
+      "finding": "ECE recomputed: with recalibrated 0.95 fresh /0.85 stale and perfect detection, global ECE 0.064285 = (300/350)*0.05 + (50/350)*0.15 matches producer 0.064286; fresh 0.05 stale 0.15 matches. <=0.15 threshold passes global and per-class.",
+      "evidence": "summary.json D5_details ece_global 0.0642857143 ece_fresh 0.05 ece_stale 0.15"
+    },
+    {
+      "id": "V9_SINGLE_RESOURCE_ISOLATION",
+      "severity": "pass",
+      "finding": "Single resource /resource/{id} flat JSON on both synthetic and single-node, contamination measured on N>=20 disjoint (9000-9019) and N>=20 same-resource co-bound (second mechanism alternate required_slots) via registry clone snapshot and _matches re-verification per k. Both 0.0 pooled pass <0.10; per-family point estimate 0.0 passes <0.15; Wilson uppers 0.277-0.390 at n=6-10 disclosed but not gated on.",
+      "evidence": "summary.json D9_details disjoint 0/20 same 0/30 K1 etc; stage_single.json instances contamination_flag 0"
+    },
+    {
+      "id": "V10_DETERMINISTIC_FRESHNESS_SIGNAL_RESPONSE_DERIVED",
+      "severity": "pass",
+      "finding": "Freshness stale = (jaccard<0.85) OR param_template_changed OR (etag_changed AND max-age 60->0) frozen 0.85, all response-derived (Jaccard from filtered {id,name,email}, _template, ETag, Cache-Control). Recomputed per first-stale-eval: dom_drift jaccard 0.5 triggers, param_header param_changed true, cache etag_changed+cache_expiry true; fresh jaccard 1.0 and no changes. Perfect discrimination as designed.",
+      "evidence": "raw_evidence_single.jsonl jaccard values; stage_single.json first_stale_evals jaccard 0.5 vs 1.0"
+    },
+    {
+      "id": "V11_FAMILY_STRATIFIED_SAMPLING_REBALANCED_HARMONIZED",
+      "severity": "pass-with-note",
+      "finding": "Evaluated pool n_non304 500 (300 fresh+50 stale K1-K3+150 noise) >=360 passes. Stratification: K1 10 per family (30) meets >=10; K2 total 10 (4/3/3) and K3 total 10 (4/3/3) are <10 per family but match frozen workload definition 'K2 10 total K3 10 total' per prereg 6 and spec question (K1 30 K2 10 K3 10). Spec measurement_validity V11 bullet overstates '>=10 per family per k' but producer validity_notes #3 correctly discloses and N_details marks N_ok true with per-family Wilson >0.39 gated only at K1. Accept as disclosed bounded power, not MEASUREMENT_INVALID.",
+      "evidence": "summary.json N_details per_family_per_k 1:{10,10,10} 2:{4,3,3} 3:{4,3,3}; spec.json measurement_validity V11 vs prereg md 6; validity_notes #3"
+    },
+    {
+      "id": "V12_HEALTH_GATED_SINGLE_NODE_SUBSTRATE",
+      "severity": "pass",
+      "finding": "Health gate true: WAL true (pragma journal_mode wal at /tmp/spider-runtime/single.db), HS256 verified (200 with token, 401 without), 304 operational (ETag round-trip), $request_uri sticky consistent (same URI 5x same pid, 20 URIs 2 distinct pids 38534/38535), read-after-write visible. n_non304 500 >=360. All 5 sub-checks pass per frozen D1.",
+      "evidence": "research/experiments/EXP-GRAPH-36018188168/raw_evidence/health_gate.json; result.json M-HEALTH-GATE-PASS-SINGLE true M-X-WORKER-PIDS-SINGLE [38534,38535] M-JWT-VERIFY-PASS-SINGLE true M-304-OPERATIONAL-SINGLE true M-WAL-MODE-SINGLE true M-STICKY-CONSISTENT-SINGLE true"
+    },
+    {
+      "id": "V13_GROUND_TRUTH_LOGGING",
+      "severity": "pass",
+      "finding": "Every request logged with ground_truth/family/trajectory_id/blast_radius/request_number/url/body/ETag/Cache-Control/X-Worker-Pid/threshold/confidence/_matches/cost per k to raw_evidence JSONL with SHA256 before metrics. Counts: synthetic 906, single 1526, ALL 2432 lines. Hashes logged per provenance.",
+      "evidence": "raw_evidence_single.jsonl 1526 lines; raw_evidence_synthetic.jsonl 906 lines; provenance.json artifacts hashes"
+    },
+    {
+      "id": "V14_PER_TRAJECTORY_OBSERVED_CACHING",
+      "severity": "pass",
+      "finding": "Cache per (trajectory_id, rid) from first 3 pre-drift requests observed, not global precomputed; repair patch derived from live response per mutated id via k probes.",
+      "evidence": "execute script dom_tokens_of/filter_required per trajectory; stage_single.json traj_id per instance"
+    },
+    {
+      "id": "V15_VERIFICATION_THRESHOLD_TRAIN_ONLY",
+      "severity": "pass",
+      "finding": "Threshold 0.85 calibrated on TRAIN18 (6 per family K1) evaluated on TEST12 (4 per family K1). Reported verification per k: K1 TEST 12/12 AUROC 1.0 perm 0.498, K2/K3 n=8 (4+4) AUROC 1.0 perm 0.493; K2/K3 use same frozen threshold but smaller n, disclosed, still vs unclamped perm null 0.40-0.60.",
+      "evidence": "stage_single.json is_train/is_test flags; summary.json D10_details n_correct 12/4/4"
+    },
+    {
+      "id": "V16_ORTHOGONAL_LEVELS_AND_SAME_RESOURCE_AUDIT",
+      "severity": "pass",
+      "finding": "Combined signal necessity shown: B-JACCARD-ONLY TP 18/18 dom 0/16 param 0/16 cache fails 2 families; B-HEADER-ONLY TP 0/18 dom 16/16 param 16/16 cache fails 1 family, both as expected. Blast radius 2-3 and same-resource contamination isolation tested and pass.",
+      "evidence": "result.json B-JACCARD-ONLY/B-HEADER-ONLY observed; summary.json D12_details"
+    },
+    {
+      "id": "V17_BLAST_RADIUS_AND_CONTAMINATION_ISOLATION",
+      "severity": "pass",
+      "finding": "Blast radius 2 (10 instances 2 ids) and 3 (10 instances 3 ids) each mutate k distinct ids per instance via SQLite WAL; contamination isolation via registry clone snapshot isolation and re-verification after patch via _matches passes on both disjoint and same-resource per k.",
+      "evidence": "summary.json D9_details per k 2:20+20 3:20+30; workload definition k2/k3 ids"
+    },
+    {
+      "id": "PROVENANCE_GAP_NGINX_VERSION",
+      "severity": "note",
+      "finding": "Provenance run.nginx empty string (version not captured) while spec requires nginx 1.24.0. Health gate X-Worker-Pid evidence compensates (distinct pids prove nginx sticky), but nginx version artifact and config not archived. Minor provenance gap, not measurement invalid.",
+      "evidence": "provenance.json run.nginx \"\"; health_gate.json worker_pids [38534,38535]"
+    },
+    {
+      "id": "DETERMINISTIC_ORACLE_CEILING",
+      "severity": "note",
+      "finding": "Deterministic flat-JSON site makes repair == B-ORACLE by definition (re-observe live bytes and overwrite). Cost ratio 1.0x synthetic/single disclosed. Claim is ceiling, not stochastic generalization; does not imply LLM heuristic or non-deterministic drift robustness.",
+      "evidence": "validity_notes #1; report.md deterministic site; result.json B-ORACLE-HAND-PATCH 1.0"
+    }
+  ],
+  "baseline_findings": [
+    {
+      "id": "B-COLD-FULL-REEXPLORATION",
+      "severity": "pass",
+      "finding": "Executed 12 cold trajectories success 1.0 at 16 tokens 3 browser K1 (scaled 32/6 K2, 48/9 K3). Repair beats by tokens 5<8 (0.3125<0.50) and browser 1<1.2 (0.333<0.40) per k, scaling correctly k*5/k*16 and k*1/k*3. Pass.",
+      "evidence": "result.json B-COLD-FULL-REEXPLORATION tokens_mean 16 browser 3; M-REPAIR-COST-TOKENS-RATIO-K1 0.3125 etc"
+    },
+    {
+      "id": "B-NO-GUARD-REPLAY",
+      "severity": "pass",
+      "finding": "No guard FA 1.0 (50/50 K1-K3 pooled equivalent) delta vs SPIDER 1.0 >=0.15 passes. UNKNOWN 0 outside prevalence window as expected. Discriminating.",
+      "evidence": "result.json M-FA-B-NO-GUARD 1.0 M-FA-DELTA-SPIDER-VS-NO-GUARD 1.0; summary.json D12_details no_guard_fa 1.0 delta 1.0"
+    },
+    {
+      "id": "B-VERBATIM-REPLAY",
+      "severity": "pass",
+      "finding": "Verbatim success 0.0 at 0 cost, proving perturbations are breaking. Pass.",
+      "evidence": "result.json M-SUCCESS-B-VERBATIM 0.0"
+    },
+    {
+      "id": "B-RETRIEVAL-RAG",
+      "severity": "pass",
+      "finding": "Executed Jaccard 0.30 retrieval 0.0 vs repair 1.0 delta 1.0 >=0.30, proving patch adds value beyond memory. Pass.",
+      "evidence": "result.json M-SUCCESS-B-RETRIEVAL-RAG 0.0 M-SUCCESS-B-RETRIEVAL-DELTA 1.0"
+    },
+    {
+      "id": "B-JACCARD-ONLY",
+      "severity": "pass",
+      "finding": "Jaccard-only TP 18/18 dom 1.0, 0/16 param, 0/16 cache -> fails 2 families, FA ~0.666 pooled, proving single-signal insufficiency. Pass.",
+      "evidence": "result.json B-JACCARD-ONLY dom 18/18 param 0/16 cache 0/16"
+    },
+    {
+      "id": "B-HEADER-ONLY",
+      "severity": "pass",
+      "finding": "Header-only TP 0/18 dom, 16/16 param, 16/16 cache -> fails dom family, FA ~0.333 pooled, proving combined signal required. Pass.",
+      "evidence": "result.json B-HEADER-ONLY dom 0/18 param 16/16 cache 16/16"
+    },
+    {
+      "id": "B-ORACLE-HAND-PATCH",
+      "severity": "pass-ceiling",
+      "finding": "Oracle 1.0 at k*5 tokens k*1 browser per k. Measured repair identical (1.0x) on this deterministic site; producer correctly discloses as definitional ceiling, not independent superiority.",
+      "evidence": "result.json B-ORACLE-HAND-PATCH per_k_success 1.0; validity_notes #1"
+    },
+    {
+      "id": "PC-LOCALIZED-REPAIR-SUCCEEDS",
+      "severity": "pass-with-note",
+      "finding": "PC1 unperturbed 1.0 single (n=12) and synthetic (n=1 per family) and PC2 oracle patch 1.0 per family K1 single (10/10 per family) passes >=0.90. Synthetic PC2 n=1 per family is underpowered but matches frozen synthetic sanity definition; single-node PC2 adequately powered.",
+      "evidence": "result.json PC-LOCALIZED-REPAIR-SUCCEEDS observed synthetic pc2 n=1 rate1.0 single pc1 1.0 pc2 10/10 per family"
+    },
+    {
+      "id": "NC-ZERO-AND-RANDOM-PATCH",
+      "severity": "pass",
+      "finding": "NC1 cost 0 contam 0 pass; NC2 false_accept 0.0 (0/30 stale K1 plus 10 K2 10 K3) <=0.05, AUROC 1.0, perm-shuffled 0.49886 within 0.40-0.60 unclamped; NC-NOISE 0/150 FA 0.0 <=0.10. All null controls executed, not hardcoded.",
+      "evidence": "result.json NC-ZERO-AND-RANDOM-PATCH nc2_fa 0.0 nc2_auroc 1.0 nc2_perm_mean 0.49886 noise_fa 0.0"
+    }
+  ],
+  "recomputed_metrics": {
+    "M-SINGLE-TN-SPIDER": 1.0,
+    "M-SINGLE-TN-WILSON-LOWER_recomputed": 0.9873565700022643,
+    "M-SINGLE-FA-SPIDER": 0.0,
+    "M-FALSE-ACCEPT-WILSON-UPPER_recomputed_0/50": 0.07135003417431873,
+    "M-SINGLE-UNKNOWN-RATE": 0.14285714285714285,
+    "M-SINGLE-STALE-RATE": 0.14285714285714285,
+    "M-SINGLE-ECE-SPIDER_recomputed": 0.06428571428571428,
+    "M-SINGLE-REPAIR-SUCCESS-POOLED-K1": 1.0,
+    "M-SINGLE-REPAIR-SUCCESS-POOLED-WILSON-LOWER-K1_recomputed_30/30": 0.8864829086095221,
+    "M-SINGLE-REPAIR-SUCCESS-PER-FAMILY-WILSON-LOWER_recomputed_10/10": 0.7224598312333834,
+    "M-SINGLE-REPAIR-SUCCESS-POOLED-K2_recomputed_10/10": 1.0,
+    "M-SINGLE-REPAIR-SUCCESS-POOLED-WILSON-LOWER-K2_recomputed_10/10": 0.7224598312333834,
+    "M-SINGLE-REPAIR-SUCCESS-PER-FAMILY-dom_drift-K2_recomputed_4/4_wilson_lower": 0.5100999795960008,
+    "M-SINGLE-REPAIR-SUCCESS-PER-FAMILY-param_header_mutation-K2_recomputed_3/3_wilson_lower": 0.43849391955098227,
+    "M-REPAIR-COST-TOKENS-RATIO-K1_recomputed_5/16": 0.3125,
+    "M-REPAIR-COST-TOKENS-RATIO-K2_recomputed_10/32": 0.3125,
+    "M-REPAIR-COST-TOKENS-RATIO-K3_recomputed_15/48": 0.3125,
+    "M-REPAIR-BROWSER-RATIO-K1_recomputed_1/3": 0.3333333333333333,
+    "M-CONTAMINATION-POOLED-DISJOINT-K1_recomputed_0/20_wilson_upper": 0.1611301254949332,
+    "M-CONTAMINATION-POOLED-SAME-K1_recomputed_0/30_wilson_upper": 0.113517091390478,
+    "M-CONTAMINATION-PER-FAMILY-SAME-K2-param_0/6_wilson_upper_recomputed": 0.3903430336530645,
+    "M-VERIFICATION-AUROC-K1": 1.0,
+    "M-VERIFICATION-AUROC-RANDOM-PERMUTED-K1_recomputed_mean": 0.4988333333333333,
+    "M-RHO-SHUFFLED-MAX": 0.0,
+    "M-COST-VECTOR-STD": 0.0,
+    "M-HEALTH-GATE-PASS-SINGLE": true,
+    "M-N-SINGLE-NON304": 500,
+    "M-X-WORKER-PIDS-SINGLE": [38534, 38535],
+    "B-JACCARD-ONLY_recomputed_TP_dom_18/18_param_0/16_cache_0/16": "match",
+    "B-HEADER-ONLY_recomputed_TP_dom_0/18_param_16/16_cache_16/16": "match",
+    "B-NO-GUARD_FA_recomputed": 1.0,
+    "B-VERBATIM_SUCCESS_recomputed": 0.0,
+    "B-RETRIEVAL_SUCCESS_recomputed": 0.0
+  },
+  "claim_ceiling": "MAX JUSTIFIED: C-DELTA-REPAIR bounded single-node transfer SURVIVES at deterministic flat-JSON single-resource /resource/{id} on health-gated single-node Flask 3.1.3/PyJWT 2.13.0 HS256 + nginx $request_uri sticky (2 workers, WAL at /tmp/spider-runtime/single.db, 304 operational, sticky consistent, HS256 verified) at n_non304=500 (300 fresh + 50 stale K1-K3 +150 noise, stale_rate 0.1428) with frozen guard Jaccard 0.85 required-filtered {id,name,email}+_template/X-Csrf-Token+ETag+max-age0 recalibrated 0.95/0.85, honest per-trajectory-reset integer sum-counter, trajectory-grouped 1000 perms and 5000 bootstraps (degenerate ceiling, Wilson informative), deterministic _matches and k-probe re-observe patch achieving repair 1.0 pooled (>=0.70 per family) at 5/10/15 tokens (ratio 0.3125<0.50) 1/2/3 browser (0.333<0.40) verify 1 per probe, contamination 0.0 on both disjoint (N=20) and same-resource co-bound (N=20-30) per k, verification AUROC 1.0 precision 1.0 perm null ~0.49-0.50, amortized 15<16 20<32 25<48 at f=10, discriminating vs no-guard delta 1.0 and single-signal ablations. Does NOT imply distributed n>=800 shared-WAL, f=100, real LLM token billing, Playwright, production CDN/session, correlated non-determinism, or any WebArena-scale site. Remains EXPERIMENTAL, not VALIDATED/PRODUCT_CORE per spec product_consequence_positive.",
+  "evidence_refs": [
+    "research/experiments/EXP-GRAPH-36018188168/request.json:director_mandate.question",
+    "research/experiments/EXP-GRAPH-36018188168/spec.json:decision_rule D1-D13",
+    "research/experiments/EXP-GRAPH-36018188168/prereg.md:sections 4,6,9,11",
+    "research/experiments/EXP-GRAPH-36018188168/result.json:metrics and controls",
+    "research/experiments/EXP-GRAPH-36018188168/report.md",
+    "research/experiments/EXP-GRAPH-36018188168/provenance.json:frozen_inputs, run Flask 3.1.3 PyJWT 2.13.0 gunicorn 23, code hashes",
+    "research/experiments/EXP-GRAPH-36018188168/raw_evidence/health_gate.json:sha256 ca5480f124863f14316a55360420eca45fa42d085b1369506c19bf08eaf3281a",
+    "research/experiments/EXP-GRAPH-36018188168/raw_evidence/summary.json:sha256 0f855177ade18aabe47af8062fac54c783c86de1ae5bb9df03a3f170dcad06ca",
+    "research/experiments/EXP-GRAPH-36018188168/raw_evidence/decision.json:sha256 c5f063472477a01b207835cb86328b4d0c5e48502ad1528fe579afa282adae69",
+    "research/experiments/EXP-GRAPH-36018188168/raw_evidence/raw_evidence_single.jsonl:sha256 8a78653e7eb6811aaad13606f3f727e12aa9b96778c1a95e7fcd60119951da4c lines 1526",
+    "research/experiments/EXP-GRAPH-36018188168/raw_evidence/raw_evidence_synthetic.jsonl:sha256 d72d9bb7808f79320dcc1bfb56c082ee1075f9d5ad9df40e569c73e4c7deb75e",
+    "research/experiments/EXP-GRAPH-36018188168/raw_evidence/stage_single.json:sha256 09c84dc2d07f58562e54a2edd8ee12272c33c7df12f487a23567262147b0b3c0 instances 50",
+    "research/experiments/EXP-GRAPH-36018188168/raw_evidence/metrics_ALL.json:sha256 ef6acda2d281368be12f8c1770a400541c76fc0bb8e283efd1d5abb085bdee7b",
+    "research/experiments/EXP-GRAPH-35952148696/handoff.json:parent synthetic SURVIVES narrow ceiling",
+    "research/experiments/EXP-GRAPH-35999336958/handoff.json:parent MEASUREMENT_INVALID with 9 required_fixes now addressed",
+    "src/spider/kernel.py:sha256 46929b3a951df48d7f9d1fd850871073c0d91c1868aa117e13d389fe274e8d61 _matches",
+    "research/graph/delta_repair/execute_delta_repair_single_node_36018188168.py:sha256 1bdec6bc0cd129aacbe0d4a934aeeea93c74e8b3505c33cbfadbd78175a29392",
+    "research/graph/delta_repair/flask_app_36018188168.py:sha256 727f68f294c3e759909527548eeebf64dece8b11c20133d784d5fdf44103b309"
+  ],
+  "unresolved": [
+    "Distributed n>=800 shared-WAL with distinct X-Worker-Pid>=2 and concurrent propagation not tested - deferred per spec.",
+    "Real LLM token billing and Playwright browser execution not tested; deterministic re-observe cost 1 per probe is synthetic token proxy.",
+    "f=100 amortization not measured; only f=10 frozen gate.",
+    "Per-family Wilson lower at K2/K3 with n=3-4 has limited power (lower 0.438-0.510); pooled n=10 lower 0.722 bounds precision.",
+    "Contamination per-family Wilson upper 0.277-0.390 at n=6-10 implies limited exclusion power for same-resource isolation; larger N needed for tight bound.",
+    "ETag truncation 16 hex, DOM tokens ignore value magnitudes/nested depth, endpoint template ignores param semantics, per-trajectory 3-obs cache may miss rare optional fields.",
+    "Correlated latent non-determinism where DOM_before correlates with latent state determining S_next untested; only independent deterministic drifts.",
+    "ETag change alone without max-age=0 and 304 cached-body verification circularity without external oracle untested.",
+    "Bootstrap degenerate ceiling means economics CI width 0; precision requires stochastic threshold or non-deterministic site.",
+    "Nginx version provenance empty and nginx config not archived; sticky proven via X-Worker-Pid but config artifact missing."
+  ]
+}

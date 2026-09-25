@@ -1,0 +1,71 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-36018188168",
+  "lane": "graph",
+  "target_lane": "graph",
+  "next_question": "Can the same honest deterministic _matches + k-probe re-observe patch and combined freshness guard (Jaccard 0.85 required-filtered {id,name,email} + _template/X-Csrf-Token + ETag SHA256[:16] + max-age0 recalibrated 0.95/0.85) with per-trajectory-reset integer sum-counter, 1000 trajectory-grouped perms (max|rho|<0.20), 5000 family-stratified bootstraps and registry-clone re-verification sustain TN>=0.85 FA<=0.10 repair>=0.80 pooled >=0.70 per family contamination<0.10 at blast radius 1-3 and AUROC>=0.75 precision>=0.80 amortized<cold at f=10 on a distributed health-gated nginx 1.24.0 $request_uri sticky 4x gunicorn Flask 3.1.3 PyJWT HS256 shared WAL DB at n>=800 non-304 before f=100 real-LLM authorization?",
+  "why_next": "Single-node health-gated transfer SURVIVES with honest instrumentation (audit PASS D1-D13, n_non304 500, TN 1.0 FA 0.0 repair 1.0 per k cost 0.3125/0.333 contamination 0.0 both sets) fixes all 9 prior MEASUREMENT_INVALID audit gaps and upgrades C-DELTA-REPAIR from synthetic-only to health-gated single-node EXPERIMENTAL. This was the Director-mandated gate before distributed validation. The next highest-information step per spec product_consequence_positive is to test the same frozen thresholds on a distributed nginx 1.24.0 + shared WAL Flask HS256 substrate at n>=800 non-304 (2+ workers per node, sticky, WAL/journal_mode, HS256, 304 operational) with identical honest counters and clone isolation; success would justify VALIDATED candidacy, failure would bound locality to single-node. f=100 LLM/Playwright billing and correlated non-determinism remain deferred until distributed gate passes.",
+  "carry_forward": {
+    "established": [
+      "C-DELTA-REPAIR bounded single-node transfer SURVIVES at deterministic flat-JSON single-resource /resource/{id} on health-gated single-node Flask 3.1.3/PyJWT 2.13.0 HS256 + nginx $request_uri sticky (2 gunicorn workers pids 38534/38535, WAL at /tmp/spider-runtime/single.db pragma WAL true, HS256 JWT verified, If-None-Match ETag SHA256(canonical_json_without_template)[:16] ->304 operational, $request_uri sticky consistent) at n_non304 500 (300 fresh +50 stale K1-K3 10/10/10 per family K1 4/3/3 per family K2/K3 +150 noise, stale_rate 0.1428) with frozen combined guard stale=(jaccard<0.85 OR param_template_changed OR etag_changed AND max-age0) Jaccard 0.85 required-filtered {id,name,email} recalibrated 0.95 fresh/0.85 stale: single-node freshness TN 1.0 Wilson lower 0.9874 >=0.85 FA 0.0 Wilson upper 0.0713 <=0.10 UNKNOWN 0.1428 in [0.00,0.18]∩[stale_rate±0.07] ECE global 0.0643 fresh 0.05 stale 0.15 <=0.15, synthetic sanity TN 1.0 FA 0.0 same, NC-NOISE FA 0.0 (0/150), audit recomputed matches (EXP-GRAPH-36018188168 audit PASS).",
+      "Deterministic k-probe re-observe patch via src/spider/kernel.py _matches exact equality on required_slots per mutated id achieves localized repair EXECUTABLE via _matches binary 1.0: K1 pooled 30/30 1.0 Wilson lower 0.886 per-family 10/10 lower 0.722, K2 pooled 10/10 1.0 lower 0.722 (per-family 4/4 lower 0.510 3/3 lower 0.438), K3 pooled 10/10 1.0 lower 0.722, tokens 5/16=0.3125 10/32=0.3125 15/48=0.3125 <0.50 browser 1/3 2/6 3/9=0.333 <0.40 verify 1 per probe <=2, B-ORACLE 1.0 at k*5/k*1 (1.0x definitional ceiling disclosed), B-VERBATIM 0.0 proves breaking, B-RETRIEVAL 0.0 delta 1.0 >=0.30, audit PASS.",
+      "Verification discrimination at frozen 0.85 TRAIN18/TEST12: AUROC 1.0 pooled per k TEST K1 12/12 K2/K3 8 correct, precision 1.0 recall 1.0 >=0.80 >=0.75, permutation-shuffled trajectory-grouped unclamped null 0.498 (K1) 0.493 (K2/K3) in [0.40,0.60], NC-RANDOM false_accept 0.0 <=0.05 AUROC 1.0, HONESTY V2 per-trajectory-reset integers no jitter/parity/bijective, V4 max|rho| 0.0 pass <0.20 but vacuous zero variance, V6 5000 family-stratified trajectory-grouped bootstrap executed degenerate [1.0,1.0]/[5.0,5.0] ceiling Wilson informative, audit V4 pass-vacuous V6 pass-degenerate.",
+      "Contamination isolation via registry clone snapshot and _matches re-verification: disjoint-id 0/20 pooled 0.0 Wilson upper 0.1611 (K1 same pooled 0/30 upper 0.1135) per k all 0.0 pooled <0.10 per-family point 0.0 <0.15 (Wilson 0.277-0.390 at n=3-6 disclosed), same-resource co-bound 0/30 K1 0/20 K2/K3 pooled 0.0, amortized f=10 honest 15<16 1<3 K1 20<32 2<6 K2 25<48 3<9 K3 <cold_k, orthogonal ablation discriminant B-JACCARD-ONLY fails 2 families B-HEADER-ONLY fails dom family proving combined signal required, audit PASS claim_ceiling EXPERIMENTAL not VALIDATED.",
+      "Health-gated substrate validity: D1 health_gate true D2 synthetic PC1 1.0 PC2 >=0.90 per family D3 single-node PC1 1.0 PC2 >=0.90 per family D4 NCs pass D5 freshness D6-D7 repair per k D8 cost D9 contamination both sets D10 verification D11 amortized D12 B-NO-GUARD delta 1.0 D13 honesty all true; synthetic sanity regression holds PC1 1.0 PC2 1.0 per family; no product promotion (graph lane).",
+      "Prior narrow synthetic-only ceiling remains base: stdlib http.server flat-JSON blast radius=1 combined guard detects 30/30 TN 1.0 FA 0.0 etc D1-D10 audit PASS EXP-GRAPH-35952148696 — extended to single-node with honest k*5 scaling."
+    ],
+    "rejected": [
+      "Single-channel freshness guard at this threshold/site: JACCARD-ONLY FA 0.666 pooled TP 18/18 dom 0/16 param 0/16 cache fails 2 families, HEADER-ONLY FA 0.333 pooled TP 0/18 dom 16/16 param 16/16 cache fails dom family — bounded rejection of standalone channel, not broader C-FRESHNESS (session/CDN/workflow).",
+      "No-guard always-EXECUTABLE as safe reuse: B-NO-GUARD FA 1.0 delta 1.0 vs SPIDER 0.0 UNKNOWN 0 outside window — bounded rejection on this substrate.",
+      "Retrieval without patch as repair: B-RETRIEVAL-RAG executed Jaccard 0.30 TFIDF 0.0 (0/30 K1) delta 1.0 vs repair 1.0 >=0.30 — bounded rejection on deterministic synthetic/single-node, not general retrieval failure.",
+      "No broader C-DELTA-REPAIR domain closed: multi-step workflows, cross-page, Redis, production CDN/session, real LLM heuristic, O(1) compilation, WebMCP routing not rejected; prior MEASUREMENT_INVALID 35999336958 is operational not falsification per packet s9."
+    ],
+    "unknown": [
+      "Whether same thresholds sustain on distributed health-gated nginx 1.24.0 + 4x gunicorn Flask HS256 shared WAL DB at n>=800 non-304 with concurrent propagation and distinct X-Worker-Pid per node — next gate, deferred per spec.",
+      "Whether honest amortized Pareto M_total_f10 preserves at f=100 (only f=10 measured 15/20/25 vs cold 16/32/48) and with real LLM token billing and Playwright browser steps vs synthetic 1 browser per probe proxy.",
+      "Whether verification AUROC/precision generalizes beyond deterministic binary _matches 1.0/0.0 to stochastic drifts, non-deterministic site, or graded confidence near threshold; per-family power at K2/K3 n=3-4 limited (Wilson lower 0.438) and contamination per-family Wilson upper 0.277-0.390 at n=6-10 limited exclusion.",
+      "Whether guard/repair detect correlated latent non-determinism where DOM_before correlates with latent state determining S_next — only independent deterministic orthogonal drifts tested (dom 0.60-0.75 param_header detail->uid+X-Csrf xyz cache ETag+max-age0).",
+      "Whether ETag change alone without max-age=0 and 304 cached-body circularity without external oracle and required-path-filter noise immunity generalize beyond tautological fresh noise (phone p0.3 nickname p0.3).",
+      "Whether production CDN, session/token expiration, SPA DOM depth, workflow IR cross-page mutations, or WebArena-scale site preserve same contamination <0.10 same-resource isolation."
+    ],
+    "do_not_assume": [
+      "Do not assume repair == B-ORACLE 1.0x (5/10/15 tokens vs cold 16/32/48) implies LLM-heuristic robustness: deterministic flat-JSON live-bytes overwrite is definitional ceiling; stochastic/non-deterministic drifts or LLM patch not tested.",
+      "Do not assume degenerate bootstrap CI [1.0,1.0] for repair success / [5.0,5.0] for tokens implies high-precision economics: on deterministic perfect success bootstrap is degenerate ceiling, Wilson provides informative width (e.g., 30/30 lower 0.886, 10/10 lower 0.722, 0/20 upper 0.161). Width>0 requires stochastic threshold or non-deterministic site.",
+      "Do not assume max|rho| 0.0 (<0.20) via 1000 whole-trajectory-block perms validates graded M_total economics: zero cost variance makes Pearson undefined->0 vacuous; test only confirms no injected bijective jitter/parity/n*3200, not discrimination across graded costs (audit V4 pass-vacuous).",
+      "Do not assume contamination 0.0 on 20 disjoint ids 9000-9019 proves tight same-resource isolation at scale: per-family n=3-6 yields Wilson upper 0.277-0.390; larger N needed for tight bound; audit V9/V17 note limited power.",
+      "Do not assume single-node 2-worker $request_uri sticky (pids 38534/38535) implies distributed WAL propagation or concurrent 4-worker multi-node sticky: single-node is near single-process; distributed shared-WAL remains UNKNOWN.",
+      "Do not assume freshness TN 1.0 FA 0.0 UNKNOWN 0.1428 ECE 0.064 generalizes to production CDN/session/CDN depth: representation loss disclosed — DOM tokens ignore magnitudes/nested depth, ETag truncated 16 hex, endpoint template ignores param semantics, per-trajectory cache 3 obs may miss rare fields, flat-JSON only.",
+      "Do not assume MEASUREMENT_INVALID parent 35999336958 falsifies C-DELTA-REPAIR: it is operational failure (9 required fixes) not scientific falsification; synthetic SURVIVES remains max prior ceiling and is now extended honestly to single-node EXPERIMENTAL but not VALIDATED.",
+      "Do not promote C-DELTA-REPAIR or C-FRESHNESS to VALIDATED/PRODUCT_CORE on this evidence: graph lane synthetic+single-node deterministic, audit PASS narrow ceiling explicitly NOT VALIDATED per spec; requires distributed n>=800 PASS plus real LLM/Playwright before PRODUCT_CORE.",
+      "Do not assume nginx version provenance gap is negligible: provenance.json run.nginx empty (version not captured) and nginx conf not archived; sticky proven via X-Worker-Pid but config artifact missing (audit PROVENANCE_GAP note).",
+      "Do not assume K2/K3 per-family Wilson lower 0.438-0.510 at n=3-4 is strong per-family guarantee: pooled n=10 lower 0.722 is the informative bound; per-family heterogeneity claim limited power."
+    ]
+  },
+  "dependencies": [
+    "Runtime C-MEAS-VALID single-node health gate hardening (WAL/journal_mode, HS256 JWT, 304 If-None-Match, $request_uri sticky) confirmed pass — must be maintained for distributed",
+    "EXP-GRAPH-35952148696 audit PASS D1-D10 narrow synthetic ceiling as base",
+    "src/spider/kernel.py _matches deterministic verification (sha 46929b3a951df48d7f9d1fd850871073c0d91c1868aa117e13d389fe274e8d61)",
+    "research/graph/delta_repair/execute_delta_repair_single_node_36018188168.py sha 1bdec6bc and flask_app_36018188168.py sha 727f68f for replication",
+    "Global Research Director authorization for distributed n>=800 shared-WAL experiment (new request with director_mandate)",
+    "Real LLM token billing and Playwright browser instrumentation (Product lane, deferred)"
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-GRAPH-36018188168/spec.json:decision_rule D1-D13 measurement_validity V1-V17",
+    "research/experiments/EXP-GRAPH-36018188168/prereg.md:sections 4 state representation 6 sampling 9 decision_rule 10 uncertainty",
+    "research/experiments/EXP-GRAPH-36018188168/result.json:metrics controls artifacts 9 lines observations O1-O8 validity_notes",
+    "research/experiments/EXP-GRAPH-36018188168/audit.json:status PASS producer_claim_supported true claim_ceiling recomputed_metrics validity_findings[17] baseline_findings[9] unresolved[10]",
+    "research/experiments/EXP-GRAPH-36018188168/report.md:ALL D1-D13 true derivation",
+    "research/experiments/EXP-GRAPH-36018188168/provenance.json:frozen_inputs code hashes run flask 3.1.3 pyjwt 2.13.0 gunicorn 23",
+    "research/experiments/EXP-GRAPH-36018188168/raw_evidence/health_gate.json:sha256 ca5480f124863f14316a55360420eca45fa42d085b1369506c19bf08eaf3281a",
+    "research/experiments/EXP-GRAPH-36018188168/raw_evidence/summary.json:sha256 0f855177ade18aabe47af8062fac54c783c86de1ae5bb9df03a3f170dcad06ca",
+    "research/experiments/EXP-GRAPH-36018188168/raw_evidence/decision.json:sha256 c5f063472477a01b207835cb86328b4d0c5e48502ad1528fe579afa282adae69",
+    "research/experiments/EXP-GRAPH-36018188168/raw_evidence/raw_evidence_single.jsonl:sha256 8a78653e7eb6811aaad13606f3f727e12aa9b96778c1a95e7fcd60119951da4c lines 1526",
+    "research/experiments/EXP-GRAPH-36018188168/raw_evidence/raw_evidence_synthetic.jsonl:sha256 d72d9bb7808f79320dcc1bfb56c082ee1075f9d5ad9df40e569c73e4c7deb75e",
+    "research/experiments/EXP-GRAPH-36018188168/raw_evidence/stage_single.json:sha256 09c84dc2d07f58562e54a2edd8ee12272c33c7df12f487a23567262147b0b3c0",
+    "research/experiments/EXP-GRAPH-35952148696/handoff.json:prior synthetic EXPERIMENTAL ceiling",
+    "research/experiments/EXP-GRAPH-35999336958/handoff.json:parent MEASUREMENT_INVALID 9 fixes now addressed",
+    "codex/claim_state.json:C-DELTA-REPAIR EXPERIMENTAL",
+    "codex/index.json:experiments lineage"
+  ],
+  "recommended_action": "Await Global Research Director authorization for distributed n>=800 shared-WAL validation: deploy nginx 1.24.0 $request_uri sticky in front of 4x gunicorn 23 Flask 3.1.3 PyJWT HS256 workers sharing single.db WAL/journal_mode synchronous NORMAL at /tmp/spider-runtime/shared.db, verify $request_uri sticky via X-Worker-Pid >=2 distinct pids, HS256 JWT, 304 ETag SHA256[:16] conditional GET, read-after-write, with same honest per-trajectory-reset integer sum-counter 1000 trajectory-grouped perms 5000 bootstraps TRAIN18/TEST12 clone isolation at n>=800 non-304 (stratified >=10 per family per k) and k*5 token scaling; do not alter frozen Jaccard 0.85 thresholds or recalibrated 0.95/0.85 confidences; report distributed vs single-node delta; defer f=100 real LLM/Playwright until distributed PASS; park graph C-DELTA-REPAIR at EXPERIMENTAL until then."
+}
