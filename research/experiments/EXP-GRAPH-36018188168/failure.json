@@ -4,8 +4,8 @@
   "message": "stage exited with code 76",
   "retryable": false,
   "fingerprint": "32fb61131a26107aaf831564",
-  "recorded_at": "2026-09-25T02:31:42.599563+00:00",
-  "github_run_id": "36084489938",
+  "recorded_at": "2026-09-25T05:13:37.979232+00:00",
+  "github_run_id": "36091871216",
   "github_run_attempt": "1",
   "control_revision": "373719f006bb73b9e36c60fcd18b32b6a7a71921a93c6008fa7c6be7e34a6ea7"
 }
