@@ -1,0 +1,177 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-36084509510",
+  "lane": "intel",
+  "status": "REVISE",
+  "producer_claim_supported": true,
+  "required_fixes": [
+    "Recompute M_AX_MEDIAN as statistical median (average of two middle values) = 707.0 not 716; M_DOM_MEDIAN = 202526.5 not 203748. Both still pass gates >10 / >=2000 but must be reported with correct definition. Evidence: artifacts/raw/ax_captures.jsonl 12 canonical captures [627,642,668,678,688,698,716,717,724,727,864,1160] median (698+716)/2=707.0; DOM [195052,198426,198904,199025,200413,201305,203748,204280,205490,230799,233918,261498] median (201305+203748)/2=202526.5 - see artifacts/derived/ax_analysis.json vs ax_consistency_fulltree.json diagnostic median 702.5 mismatch.",
+    "Correct decision_detail.param_ok and result.json M_PARAM_PREVALENCE interpretation: real-manifest prevalence is UNAVAILABLE (HF 401 x2), not PASS. PC-C synthetic 0.8958 (8958/10000, fixture sha 153331751e212c7fe9798a2e20c925be1adb6501dde92210b9c707f99ae7c82c) satisfies positive control only; MV6 real clause remains unmeasured per spec MV6 'Manifest bytes hashed before parsing' and prereg do_not_assume. Set param_ok=null/UNAVAILABLE with smallest next action HF_TOKEN scope/quota/mirror, not true. See artifacts/derived/pc_c_param_prevalence.json note and result.json validity_notes.",
+    "Clarify shared_diverse_manifest.json bootstrap_ci [0.396,0.516] is family-level B=2000 CI for full-tree AX_consistency on 4 families (mean 0.454 variance 0.00475) not duplication prevalence CI on WebGym diverse (which is UNAVAILABLE). Do not present as WebGym duplication CI width>0. Evidence: artifacts/derived/ax_consistency_fulltree.json bootstrap_ci_95 lower 0.3960327368567069 upper 0.5163660993035543 vs shared_diverse_manifest.json bootstrap_ci.",
+    "Ensure M_JACCARD_MAX_PAIRWISE/M_JACCARD_P95 0.5417/0.4611 are explicitly labeled DIAGNOSTIC_ON_AVAILABLE_FAMILIES (WebArena 136/145/196/222) not frozen MV7 Jaccard<0.30 gate on sampled WebGym diverse families (UNAVAILABLE HF 401). Producer correctly marks pass=null but report.md table should not imply gate decision on diagnostic.",
+    "No provenance fix required for freeze.json immutability: MV8a shared manifest path+sha256 correctly stored in provenance.json (dd96d083bd492af3d436136a302c7b846c1123b194ac63e9fde84819d6b9b890) per parent audit acceptance; freeze.json carries only frozen-input hashes (d7bca43d6c462a149e3a633e3206a10d437b296f4ce97a6bfe3fcb7c8cb62487). Document but do not mutate freeze.json."
+  ],
+  "validity_findings": [
+    {
+      "id": "MV1_DURABLE_ATTEMPTS",
+      "finding": "PASS - All durable sources have >=2 genuine attempts logged with timeout>=300s, URL/status/bytes/sha/digest: HF WebGym 6x401 (https://huggingface.co/api/datasets/ServiceNow/WebGym, OpenEnv/WebGym), HF WebArena 2x401, GitHub raw 2x200 byte-identical SHA d65275660814663375028e9017e1f929e3c38321041b125795e2713b52243d30 927596 bytes, GHCR 5 attempts (403 token scope + 200 token + 2x404 manifest + docker pull denied), Docker Hub 2x200 digest sha256:3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb matches docker images --digests. HF_TOKEN present false correctly logged with smallest next action scope/quota/mirror.",
+      "severity": "PASS",
+      "evidence": "artifacts/raw/hf_webgym_manifest_attempts.json (sha 9e5d9940b4ee41ef68204f2d57a17b7e160a0a7dca5e0e5db76f4d7b66e8f5e5), artifacts/raw/hf_webarena_attempts.json, artifacts/raw/github_cross_source_attempts.json, artifacts/raw/ghcr_browsergym_attempts.json, artifacts/raw/docker_hub_api_attempts.json"
+    },
+    {
+      "id": "MV2_BYTE_IDENTITY",
+      "finding": "PASS_PARTIAL_SINGLE_SOURCE - WebArena manifest byte-identical x2 via fresh GitHub raw 200 this experiment (sha d6527566... 927596 bytes) verified; Docker Hub digest 64-hex verified via Hub API 200 + docker images --digests a5b6fb47ee9f. GHCR BrowserGym 0.14.3 correctly UNAVAILABLE after 5 genuine 403/404/denied attempts, cross-source equality explicitly marked UNAVAILABLE not assumed equal per MV2 exception. Fresh verification logged in provenance.json frozen_inputs_verified_byte_identical true.",
+      "severity": "PASS",
+      "evidence": "artifacts/raw/github_cross_source_attempts.json (sha 7580a8926a378e1eb45ad1813a8adac76b160b1aabbb62b17bdad290cfea7957), artifacts/raw/webarena-verified-fresh.json (d65275660814663375028e9017e1f929e3c38321041b125795e2713b52243d30), artifacts/raw/docker_hub_api_attempts.json (digest 3e8cb9b945ea9...), provenance.json docker.images_digests"
+    },
+    {
+      "id": "MV3_SAMPLED_DIVERSE_50",
+      "finding": "UNAVAILABLE_NOT_FALSIFIED - Correctly handled per frozen exception: HF 401 x2 after >=300s attempts, diverse eTLD+1 count null UNAVAILABLE not zero, tldextract 5.3.2 pinned via pip freeze (tldextract_pin.json), smallest next action documented HF_TOKEN read-scope/account-quota/mirror for ServiceNow/WebGym + OpenEnv/WebGym. Does not trigger MEASUREMENT_INVALID. Evidence webgym_sampled_census.json correctly empty families_ge3=0 with provenance note.",
+      "severity": "PASS",
+      "evidence": "artifacts/raw/hf_webgym_manifest_attempts.json, artifacts/derived/webgym_sampled_census.json (c7ae9ecbf982bc3512908f668ca3e15405d8eedaf409ad838f41bad205ce8980), artifacts/raw/tldextract_pin.json, artifacts/raw/pip_freeze.txt (b68aff78fd35e30676b741c63d5a1571b641f91d19c63687ebc8445689b1d4ae)"
+    },
+    {
+      "id": "MV4_THRESHOLD_SWEEP_0818_0900_09479",
+      "finding": "UNAVAILABLE_NOT_FALSIFIED - Correctly per MV3 exception: sweep at 0.818/0.900/0.9479 null UNAVAILABLE when HF absent, not monotonic zero, with evidence webgym_threshold_sweep.json status UNAVAILABLE and validity_notes smallest next action. Vacuous single-store baseline 0.9479 correctly referenced as B-VACUOUS not beaten. Does not trigger MEASUREMENT_INVALID per decision_rule A exception.",
+      "severity": "PASS",
+      "evidence": "artifacts/derived/webgym_threshold_sweep.json (eb70aba73acc9ad4b8da4202e825d2d1233800142047bb42edb415416a786339), artifacts/derived/vacuous_single_store.json, artifacts/derived/shared_diverse_manifest.json threshold_sweep_table"
+    },
+    {
+      "id": "MV5_CONSTRUCTIBILITY_10FAM",
+      "finding": "PASS_MEASUREMENT_VALID_BUT_GATE_FAIL - Deterministic sampling executed exactly as specified on BOTH censuses: random.Random(35725763380).sample(sorted families_ge3,10) x2 S1==S2==[191,180,162,197,153,213,163,137,136,222] on primary 36 families, and ERROR ValueError Sample larger than population logged x2 on WebGym diverse empty families_ge3=0 (correct per MV5 EACH census). Fresh live CDP Accessibility.getFullAXTree at 1280x720 via cdp_session (no fallback snapshot), body regex <body[^>]*>.*?</body> DOTALL +9 base+expanded stripping via page.evaluate, SHA before==after TRUE 12/12 and mutated !=TRUE 12/12, anchoring heading/price/add-to-cart/main/contentinfo node_count>1 true on product probes, median>10 mean>15 std>5 DOM>=2000 proven. Constructible families =4 [136,145,196,222] (homepage families 137/153/162/163/180/191/197/213 correctly excluded is_product_page_probe false). Gate >=10 FAIL bounded, not measurement invalid. Recomputed median 707.0 mean 742.416 std 138.174 DOM median 202526.5 still pass liveness gates.",
+      "severity": "PASS",
+      "evidence": "artifacts/derived/deterministic_family_samples.json (3dd3cfa6c58e86ae5e1639430d49b33e0d8121f8609f530b1b68a7f57d99923a), artifacts/derived/family_anchoring.json (2f1479127c0becec650c263b45b947a8352fd6314b950f6de97ff2cbd93e35e8), artifacts/raw/ax_captures.jsonl (6d2f993476b3e91f8df572bd2cb91f41f7f8ccfac1e9fedfd93ed6c9293c8efd), provenance.json deterministic_samples"
+    },
+    {
+      "id": "MV6_PARAM_PREVALENCE_08958",
+      "finding": "REVISE_SYNTHETIC_ONLY - Real-manifest prevalence remains UNAVAILABLE; PC-C synthetic harness 0.8958 8958/10000 within +-0.05 passes positive control only. Producer sets decision_detail.param_ok true and M_PARAM_PREVALENCE pass=null but treats as GATE PASS via note 'MV3 exception pattern'; this overstates MV6 real clause. Frozen MV6 requires bytes hashed before parsing on sampled diverse bytes with byte-identical SHA; synthetic fixture sha 153331751e212c7fe9798a2e20c925be1adb6501dde92210b9c707f99ae7c82c does not satisfy. Must be reported as UNAVAILABLE with smallest next action HF_TOKEN, not as prevalence gate PASS. Does not alone trigger MEASUREMENT_INVALID per prereg do_not_assume but limits claim ceiling.",
+      "severity": "REVISE",
+      "evidence": "artifacts/derived/pc_c_param_prevalence.json (4c0a3562fa6eec271343b55607e2e521a008f1465ac7b695dc43e22ca69de4a1), artifacts/raw/pc_c_fixture.txt (153331751e212c7fe9798a2e20c925be1adb6501dde92210b9c707f99ae7c82c), result.json metrics.M_PARAM_PREVALENCE status UNAVAILABLE"
+    },
+    {
+      "id": "MV7_JACCARD_ORTHOGONALITY_030",
+      "finding": "UNAVAILABLE_FROZEN_GATE_DIAGNOSTIC_ONLY - Frozen gate defined on sampled WebGym diverse families UNAVAILABLE HF 401 correctly not falsified. Diagnostic pairwise Jaccard on available 4 WebArena families (full-tree multi-anchor expanded stripping) max 0.5417 p95 0.4611 violates <0.30 but same-family pairs excluded, not orthogonal on diverse; correctly marked DIAGNOSTIC not gate decision. Producer correctly sets M_JACCARD_ORTHOGONALITY null UNAVAILABLE. No truncation proxy used.",
+      "severity": "PASS",
+      "evidence": "artifacts/derived/ax_consistency_fulltree.json jaccard_orthogonality (ef4dd1a3a47991334a7d5d8ee1294606c839efe1d4273d94985e143bcf67065d), artifacts/derived/shared_diverse_manifest.json jaccard_matrix"
+    },
+    {
+      "id": "MV8_SHARED_MANIFEST_AND_DELTA",
+      "finding": "PASS_WITH_DELTA_FAIL - Shared manifest published at research/experiments/EXP-INTEL-36084509510/artifacts/derived/shared_diverse_manifest.json sha dd96d083bd492af3d436136a302c7b846c1123b194ac63e9fde84819d6b9b890 with deterministic S1/S2 per census, anchoring 1280x720 CDP, manifest SHAs (WebArena + WebGym null UNAVAILABLE), family histogram, bootstrap CI, sweep table UNAVAILABLE, Jaccard diagnostic, constructibility S1/S2, pip freeze + grammar hash + viewport. Path+sha256 stored in provenance.json (MV8a); freeze.json immutability correctly preserved per freeze discipline. Delta fulltree-vs-truncated quantitatively logged per required_fix #2: delta_real -0.4207 gate >=0.20 false, shuffled mean -0.3797 p95 0.0056 gate <0.05 true, truncated mean 0.875 variance 0 degenerate flagged, per-shuffle delta table logged. Delta inverted proves full-tree does NOT dominate truncated on 4-family substrate; frozen >=10-family gate remains undecided. Manifest bootstrap_ci mislabeled (see required_fixes) but provenance complete.",
+      "severity": "PASS",
+      "evidence": "artifacts/derived/shared_diverse_manifest.json, artifacts/derived/ax_consistency_fulltree.json delta_fulltree_vs_truncated, provenance.json shared_manifest"
+    },
+    {
+      "id": "MV9_PROVENANCE",
+      "finding": "PASS - All artifact path+sha256 stored in provenance.json with 25 entries, pip freeze 263 lines sha b68aff78fd35..., docker images --digests, GHCR/Docker Hub attempts, HF manifest sha/bytes or 401 logs, WebGym census json, per-family anchoring S1/S2, AX probe logs with grammar_fulltree hash live 273eafbcb817e8981f843581a724594665cabdd357b318c701251929ee9c83de body regex present, threshold sweep, param table, shared manifest. Versions BrowserGym-core 0.14.3 AgentLab 0.4.2 Playwright 1.63.0 viewport 1280x720 pinned correctly.",
+      "severity": "PASS",
+      "evidence": "provenance.json (environment pip_freeze_sha256 b68aff78..., grammar_hash_live 273eafbcb...), artifacts/raw/environment_pin.json, artifacts/raw/grammar_hash.json (667b86cd6cfad59a...)"
+    },
+    {
+      "id": "MEDIAN_REPORTING",
+      "finding": "Producer reports M_AX_MEDIAN 716 and M_DOM_MEDIAN 203748 as upper medians (element 7 of 12 sorted) not statistical median. Recomputed statistical median (average of 6th+7th sorted) is 707.0 for AX and 202526.5 for DOM from 12 canonical captures. Both still exceed gates >10 / >=2000 and do not change constructibility decision, but reporting should use standard definition and note method. ax_consistency_fulltree.json reports median_ax 702.5 (from consistency fresh captures) creating third value; all converge >10.",
+      "severity": "REVISE",
+      "evidence": "artifacts/raw/ax_captures.jsonl, artifacts/derived/ax_analysis.json ax_nodes_median_canonical 716, artifacts/derived/ax_consistency_fulltree.json diagnostics median_ax 702.5"
+    }
+  ],
+  "baseline_findings": [
+    {
+      "id": "B-DURABLE-PIN-812",
+      "finding": "PASS - WebArena-Verified v2 812 manifest SHA d65275660814663375028e9017e1f929e3c38321041b125795e2713b52243d30 927596 bytes byte-identical x2 via fresh GitHub raw 200 this experiment, families_ge3 36 ids verified, product families [136,145,196,222] 21 tasks, Docker Hub digest sha256:3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb 64-hex equality via Hub API 200 and docker images --digests a5b6fb47ee9f, container localhost:7770 HTTP 200, median AX>10 mean>15 std>5 DOM>=2000 SHA both directions true confirmed recomputed.",
+      "severity": "PASS",
+      "evidence": "artifacts/derived/webarena_census.json (1652d7ef7a894a4f7bb5c1e04b85e12bcd354c1c22d25b2589ebf3020a952a0c), artifacts/raw/github_cross_source_attempts.json, provenance.json docker"
+    },
+    {
+      "id": "B-WEBGYM-300K-SAMPLED-50",
+      "finding": "UNAVAILABLE_NOT_ZERO - Correct per MV3 exception: diverse eTLD+1 null UNAVAILABLE after 6 genuine 401 attempts (ServiceNow/WebGym 292k + OpenEnv/WebGym 127k + README probes), not falsified zero. tldextract 5.3.2 pinned. Smallest next action HF_TOKEN read-scope/account-quota/mirror documented. Shared manifest correctly records WebGym branches UNAVAILABLE.",
+      "severity": "PASS",
+      "evidence": "artifacts/raw/hf_webgym_manifest_attempts.json, artifacts/derived/webgym_sampled_census.json, artifacts/raw/tldextract_pin.json"
+    },
+    {
+      "id": "B-VACUOUS-SINGLE-STORE",
+      "finding": "REFERENCE_ONLY - Vacuous prevalence 0.9479 reference preserved (artifacts/derived/vacuous_single_store.json) but diverse sweep UNAVAILABLE so comparison not computable; correctly marked pass=null not falsified.",
+      "severity": "PASS",
+      "evidence": "artifacts/derived/vacuous_single_store.json (68655bfd8dfbc900...), result.json controls B-VACUOUS-SINGLE-STORE"
+    },
+    {
+      "id": "B-EXHAUSTIVE-LFS-567M",
+      "finding": "COST_REFERENCE_NOT_EXECUTED - Correctly not executed; logged as 5-7h 567MB reference per spec. Sampled path attempted and documented as UNAVAILABLE pending HF_TOKEN.",
+      "severity": "PASS",
+      "evidence": "result.json controls B-EXHAUSTIVE-LFS-567M, report.md"
+    },
+    {
+      "id": "B-TRUNCATED-VS-FULLTREE",
+      "finding": "FAIL_INVERTED_QUANTITATIVELY_LOGGED - Full-tree mean 0.454 CI [0.396,0.516] B=2000 family-level variance 0.0047 vs truncated [:20] mean 0.875 variance 0 CI [0.875,0.875] degenerate flagged gives delta -0.4207 <0.20 gate FAIL; shuffled mean -0.3797 p95 0.0056 (<0.05 PASS). Truncated mean per shuffle min 0.224 max 0.92 mean 0.834 logged. Proves truncated dominates full-tree on 4-family slug-URL substrate; frozen representation superiority gate fails bounded, not vacuous proxy but inverted dominance. Correctly marked pass=false; audit recomputed delta exact.",
+      "severity": "PASS",
+      "evidence": "artifacts/derived/ax_consistency_fulltree.json full_tree mean 0.45426266604842663, truncated_20 mean 0.875, delta_fulltree_vs_truncated delta_real -0.42073733395157337"
+    },
+    {
+      "id": "PC-DURABLE-SHA-FIXTURE-SWEEP-SANITY",
+      "finding": "PASS_PARTIAL - PC-A SHA fixture and synthetic AX liveness pass: median>10 mean>15 std>5 DOM>=2000 SHA before==after true 12/12 mutated !=true 12/12; PC-B sweep+Jaccard correctly UNAVAILABLE when HF fails (HF 401 x2 logged, not failed); PC-C synthetic 0.8958 passes within tolerance. Producer correctly marks PC overall pass true but must note PC-C is control only not real-manifest gate.",
+      "severity": "PASS",
+      "evidence": "artifacts/raw/ax_captures.jsonl, artifacts/derived/pc_c_param_prevalence.json, artifacts/derived/shared_diverse_manifest.json"
+    },
+    {
+      "id": "NC-SHUFFLED-SINGLESTORE-TRUNCATED",
+      "finding": "PASS_WITH_COMPONENT_FAIL - NC1 |rho_shuffled| 0.084 <0.20 PASS (B=1000 family-label shuffle); NC2 vacuous 0.9479 preserved reference only; NC3 real delta -0.420 <0.20 FAIL as above with shuffled <0.05 PASS. Overall null control correctly marked pass true for shuffle gap but delta component fails frozen gate.",
+      "severity": "PASS",
+      "evidence": "artifacts/derived/ax_consistency_fulltree.json nc1_family_label_shuffle rho_shuffled_abs_mean 0.0840994620019605, B-TRUNCATED findings"
+    }
+  ],
+  "recomputed_metrics": {
+    "M_MANIFEST_SHA_WEBARA": {"value": "d65275660814663375028e9017e1f929e3c38321041b125795e2713b52243d30", "producer": "d65275660814663375028e9017e1f929e3c38321041b125795e2713b52243d30", "match": true, "evidence": "artifacts/raw/github_cross_source_attempts.json 2x200 byte-identity true"},
+    "M_MANIFEST_SHA_WEBGYM": {"value": null, "status": "UNAVAILABLE", "producer": null, "match": true, "evidence": "artifacts/raw/hf_webgym_manifest_attempts.json 6x401"},
+    "M_CONSTRUCTIBLE_FAMILIES": {"value": 4, "families": [136, 145, 196, 222], "producer": 4, "match": true, "gate": ">=10", "pass": false, "recomputed_gate_pass": false, "evidence": "artifacts/derived/family_anchoring.json fam136/145/196/222 true, fam others false"},
+    "M_CONSTRUCTIBLE_FAMILIES_WEBARA_ONLY": {"value": 4, "producer": 4, "match": true},
+    "M_CONSTRUCTIBLE_FAMILIES_DIVERSE_ONLY": {"value": 0, "status": "UNAVAILABLE", "producer": 0, "match": true},
+    "M_AX_MEDIAN": {"recomputed_statistical_median": 707.0, "producer_reported": 716, "recomputed_sorted_canonical_ax": [627, 642, 668, 678, 688, 698, 716, 717, 724, 727, 864, 1160], "mean_of_middle_two": "(698+716)/2=707.0", "producer_upper_median": 716, "gate": ">10", "pass_recomputed": true, "match_exact": false, "delta": 9, "evidence": "artifacts/raw/ax_captures.jsonl 12 canonical"},
+    "M_AX_MEAN": {"value": 742.4166666666666, "producer": 742.4166666666666, "match": true, "gate": ">15", "pass": true},
+    "M_AX_STD": {"value": 138.17408001824688, "producer": 138.17408001824688, "match": true, "gate": ">5", "pass": true},
+    "M_DOM_MEDIAN": {"recomputed_statistical_median": 202526.5, "producer_reported": 203748, "recomputed_sorted_dom": [195052, 198426, 198904, 199025, 200413, 201305, 203748, 204280, 205490, 230799, 233918, 261498], "mean_of_middle_two": "(201305+203748)/2=202526.5", "producer_upper_median": 203748, "gate": ">=2000", "pass_recomputed": true, "match_exact": false, "evidence": "artifacts/raw/ax_captures.jsonl"},
+    "M_SHA_STABILITY_TRUE": {"value": true, "n": 12, "producer": true, "match": true, "evidence": "artifacts/raw/ax_captures.jsonl dual_impl_digest_match true 12/12"},
+    "M_SHA_MUTATION_SENSITIVITY": {"value": true, "n": 12, "producer": true, "match": true},
+    "M_DELTA_FULLTREE_VS_TRUNCATED": {"value": -0.42073733395157337, "producer": -0.42073733395157337, "match": true, "gate_real": ">=0.20", "pass_real": false, "shuffled_mean": -0.37975548127300196, "shuffled_p95": 0.005601951762712332, "gate_shuffled": "<0.05", "pass_shuffled": true, "evidence": "artifacts/derived/ax_consistency_fulltree.json"},
+    "M_JACCARD_MAX_PAIRWISE": {"value": 0.5417867435158501, "status": "DIAGNOSTIC_ON_AVAILABLE_FAMILIES", "producer": 0.5417867435158501, "match": true, "gate_frozen": "<0.30 on diverse UNAVAILABLE", "evidence": "artifacts/derived/ax_consistency_fulltree.json"},
+    "M_JACCARD_P95": {"value": 0.46113989637305697, "producer": 0.46113989637305697, "match": true},
+    "M_RHO_SHUFFLED": {"value": 0.0840994620019605, "producer": 0.0840994620019605, "match": true, "gate": "<0.20", "pass": true},
+    "M_WEBGYM_DIVERSE_ETLD": {"value": null, "status": "UNAVAILABLE", "producer": null, "match": true, "evidence": "artifacts/raw/hf_webgym_manifest_attempts.json"},
+    "M_WEBGYM_SWEEP_RANGE_0818_09479": {"value": null, "status": "UNAVAILABLE", "producer": null, "match": true},
+    "M_WEBGYM_SWEEP_RANGE_0900_09479": {"value": null, "status": "UNAVAILABLE", "producer": null, "match": true},
+    "M_PARAM_PREVALENCE": {"value_synthetic_pc_c": 0.8958, "real_value": null, "status": "UNAVAILABLE", "producer_status": "UNAVAILABLE", "recomputed_synthetic_within_tolerance": true, "producer_pc_c": 0.8958, "match": true, "evidence": "artifacts/derived/pc_c_param_prevalence.json"},
+    "M_SHARED_MANIFEST_PUBLISHED": {"path": "artifacts/derived/shared_diverse_manifest.json", "sha256": "dd96d083bd492af3d436136a302c7b846c1123b194ac63e9fde84819d6b9b890", "producer": "artifacts/derived/shared_diverse_manifest.json", "match": true},
+    "M_PRIMARY_CENSUS_FAMILIES_GE3": {"value": 36, "producer": 36, "match": true},
+    "M_HF_TOKEN_PROVISIONED": {"value": false, "producer": false, "match": true, "evidence": "artifacts/raw/hf_webgym_manifest_attempts.json hf_token_present false"}
+  },
+  "claim_ceiling": "H_SAMPLED_CENSUS_REPLACES_EXHAUSTIVE_REOPEN does NOT SURVIVE on attempted censuses; bounded MIXED: WebArena-Verified v2 812 durable pin survives single-node 1280x720 CDP (SHA d65275660814663375028e9017e1f929e3c38321041b125795e2713b52243d30, Docker digest sha256:3e8cb9b945ea9b..., 4/10 constructible product families [136,145,196,222] ceiling with anchoring true SHA both directions TRUE median AX>10 mean>15 std>5 DOM>=2000 at 1280x720, GHCR UNAVAILABLE correctly). WebGym 292k/127k sampled diverse census remains UNAVAILABLE pending HF_TOKEN read-scope/account-quota/mirror (6x401 fresh this experiment, not falsified). Threshold sweep 0.818/0.900/0.9479 UNAVAILABLE, range gates undecided, vacuous 0.9479 preserved reference only. Parameterization 0.8958 only synthetic control 8958/10000 passes, real-manifest prevalence unmeasured. Delta fulltree-vs-truncated inverted -0.4207 fails >=0.20 real (shuffled -0.379 p95 0.0056 passes) on 4-family substrate; full-tree does not dominate truncated here. Pairwise Jaccard diagnostic 0.5417 p95 0.4611 on 4 families does not satisfy frozen <0.30 on diverse families (UNAVAILABLE). Shared manifest published with deterministic seed 35725763380 S1==S2 per census and delta table but WebGym branches null. Sampled census does NOT replace exhaustive 567MB LFS/test.zip/CAP 420 for Graph N>=120 zero-overlap or Physics website-holdout banks; C-CROSSSITE stays HYPOTHESIS at 4-family single-node ceiling not distributed n>=800. Maximum justified advance is durable single-source pin + bounded ceiling + honest UNAVAILABLE documentation with smallest next action.",
+  "evidence_refs": [
+    "research/experiments/EXP-INTEL-36084509510/request.json (hash 300e8ccd615782c5de44d25321b5230978f28121bf0784eeff778cc261003f0c)",
+    "research/experiments/EXP-INTEL-36084509510/spec.json (hash 9e4eb4d32b2b5ad80045e8da7aeb3931aa62945eeb13c6756e7d2dd04fc5183d)",
+    "research/experiments/EXP-INTEL-36084509510/prereg.md (hash 2418fdeabe9040c898088d0ad4e6220b220329c03554a64c05c3fe142133f9d6)",
+    "research/experiments/EXP-INTEL-36084509510/freeze.json (hash d7bca43d6c462a149e3a633e3206a10d437b296f4ce97a6bfe3fcb7c8cb62487)",
+    "research/experiments/EXP-INTEL-36084509510/result.json",
+    "research/experiments/EXP-INTEL-36084509510/report.md",
+    "research/experiments/EXP-INTEL-36084509510/provenance.json (pip freeze sha b68aff78fd35e30676b741c63d5a1571b641f91d19c63687ebc8445689b1d4ae, grammar live 273eafbcb817e8981f843581a724594665cabdd357b318c701251929ee9c83de)",
+    "research/experiments/EXP-INTEL-36084509510/artifacts/raw/hf_webgym_manifest_attempts.json (sha 9e5d9940b4ee41ef68204f2d57a17b7e160a0a7dca5e0e5db76f4d7b66e8f5e5)",
+    "research/experiments/EXP-INTEL-36084509510/artifacts/raw/hf_webarena_attempts.json (sha 5410473045a05f5668916483734c395b927ede51c9ef310d434eb7e5fbcd829d)",
+    "research/experiments/EXP-INTEL-36084509510/artifacts/raw/github_cross_source_attempts.json (sha 7580a8926a378e1eb45ad1813a8adac76b160b1aabbb62b17bdad290cfea7957)",
+    "research/experiments/EXP-INTEL-36084509510/artifacts/raw/ghcr_browsergym_attempts.json (sha eda7a62596a7375553a85464975ba04169acdb32d95f083175a48ce4c59d06cd)",
+    "research/experiments/EXP-INTEL-36084509510/artifacts/raw/docker_hub_api_attempts.json (sha d41e5512e663c7c373d5845fae05642de6d9c03f6129e4371da7108094fa72ea)",
+    "research/experiments/EXP-INTEL-36084509510/artifacts/raw/ax_captures.jsonl (sha 6d2f993476b3e91f8df572bd2cb91f41f7f8ccfac1e9fedfd93ed6c9293c8efd)",
+    "research/experiments/EXP-INTEL-36084509510/artifacts/derived/ax_consistency_fulltree.json (sha ef4dd1a3a47991334a7d5d8ee1294606c839efe1d4273d94985e143bcf67065d)",
+    "research/experiments/EXP-INTEL-36084509510/artifacts/derived/deterministic_family_samples.json (sha 3dd3cfa6c58e86ae5e1639430d49b33e0d8121f8609f530b1b68a7f57d99923a)",
+    "research/experiments/EXP-INTEL-36084509510/artifacts/derived/family_anchoring.json (sha 2f1479127c0becec650c263b45b947a8352fd6314b950f6de97ff2cbd93e35e8)",
+    "research/experiments/EXP-INTEL-36084509510/artifacts/derived/webarena_census.json (sha 1652d7ef7a894a4f7bb5c1e04b85e12bcd354c1c22d25b2589ebf3020a952a0c)",
+    "research/experiments/EXP-INTEL-36084509510/artifacts/derived/shared_diverse_manifest.json (sha dd96d083bd492af3d436136a302c7b846c1123b194ac63e9fde84819d6b9b890)",
+    "research/experiments/EXP-INTEL-36084509510/artifacts/derived/webgym_sampled_census.json (sha c7ae9ecbf982bc3512908f668ca3e15405d8eedaf409ad838f41bad205ce8980)",
+    "research/experiments/EXP-INTEL-36084509510/artifacts/derived/pc_c_param_prevalence.json (sha 4c0a3562fa6eec271343b55607e2e521a008f1465ac7b695dc43e22ca69de4a1)",
+    "research/experiments/EXP-INTEL-36084509510/artifacts/raw/pip_freeze.txt (sha b68aff78fd35e30676b741c63d5a1571b641f91d19c63687ebc8445689b1d4ae)",
+    "research/experiments/EXP-INTEL-36084509510/artifacts/raw/webarena-verified-fresh.json (sha d65275660814663375028e9017e1f929e3c38321041b125795e2713b52243d30)",
+    "research/intel/grammar_fulltree_358885.py (sha 273eafbcb817e8981f843581a724594665cabdd357b318c701251929ee9c83de body regex present)"
+  ],
+  "unresolved": [
+    "WebGym 292k tasks / 127k sites diverse eTLD+1 census, B=2000 bootstrap 95% CI width>0, threshold sweep 0.818/0.900/0.9479 monotonic range>=0.05/>=0.02 and delta>=0.20 vs truncated, pairwise Jaccard<0.30 orthogonality, and real-manifest parameterization 0.8958 +-0.05 remain UNAVAILABLE pending HF_TOKEN provisioning - smallest next action HF_TOKEN read-scope/account-quota/mirror for ServiceNow/WebGym + OpenEnv/WebGym or HF mirror/dataset export then re-run frozen design with cognitive_reset true.",
+    "Whether union of WebArena 812 (36 families_ge3) plus HF_TOKEN-provisioned WebGym diverse families_ge3 yields >=10 distinct product families constructible under frozen anchoring (1280x720 CDP SHA both directions median>10 mean>15 std>5 DOM>=2000) with full-tree delta>=0.20 vs truncated and Jaccard<0.30 on genuine >=10-family product-page set - requires HF_TOKEN + orthogonal eTLD+1 hosting beyond 4-family Magento substrate; not falsified globally.",
+    "Whether GHCR BrowserGym-core 0.14.3 digest becomes cross-verifiable beyond Docker Hub single-source (GHCR 5x403/404/denied UNAVAILABLE this run) - cross-source equality explicitly not assumed equal per MV2.",
+    "Whether shared manifest with UNAVAILABLE WebGym branches can unblock Graph N>=120 zero-template-overlap param-inherit holdout and Physics website-holdout PMI banks without exhaustive 567MB LFS - published but unvalidated until diverse branch available.",
+    "Exact statistical median definition for AX/DOM should be standardized (average of two middle values for n even) to avoid 716/203748 upper-median vs 707.0/202526.5 statistical median discrepancy on future censuses."
+  ]
+}
