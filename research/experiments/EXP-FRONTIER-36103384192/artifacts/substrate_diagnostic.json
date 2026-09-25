@@ -1,0 +1,58 @@
+{
+  "experiment_id": "EXP-FRONTIER-36103384192",
+  "checks": {
+    "browsergym": {
+      "available": false,
+      "browsergym_core_version": "not_installed",
+      "playwright_version": "not_installed",
+      "agentlab_version": "not_installed",
+      "chromium_present": true,
+      "browsergym_import": false,
+      "playwright_import": false,
+      "agentlab_import": false
+    },
+    "runtime_wal": {
+      "exists": false,
+      "path": "/tmp/spider-runtime/shared.db",
+      "n_non304": null,
+      "x_worker_pid": null,
+      "health_gated": false
+    },
+    "intel_manifest": {
+      "exists": false,
+      "path": "/home/runner/work/Spider/Spider/research/intel/diverse_site_manifest.json",
+      "manifest_families": 0,
+      "jaccard_max": null,
+      "jaccard_mean": null,
+      "pooled_tasks": 0,
+      "mixed_tasks": 0
+    },
+    "graph_freshness": {
+      "exists": false,
+      "path": "/home/runner/work/Spider/Spider/research/graph/state.json",
+      "freshness_tn": null,
+      "stale_probes": 0,
+      "tn_gate_pass": false
+    },
+    "external_pareto": {
+      "agentic_compilation_dsm": {
+        "available": false,
+        "path": "/home/runner/work/Spider/Spider/research/intel/agentic_compilation_repro.json"
+      },
+      "agent_jit": {
+        "available": false,
+        "path": "/home/runner/work/Spider/Spider/research/intel/agent_jit_repro.json"
+      }
+    }
+  },
+  "summary": {
+    "live_available": false,
+    "substrate_adequate": false,
+    "heterogeneity_adequate": false,
+    "coverage_adequate": false,
+    "browsergym_available": false,
+    "runtime_wal_healthy": false,
+    "intel_manifest_adequate": false,
+    "graph_freshness_adequate": false
+  }
+}
