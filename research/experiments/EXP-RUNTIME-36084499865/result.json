@@ -1,0 +1,67 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-36084499865",
+  "lane": "runtime",
+  "status": "MEASUREMENT_INVALID",
+  "outcome": "INCONCLUSIVE",
+  "metrics": {},
+  "controls": {},
+  "artifacts": [
+    {
+      "path": "/home/runner/work/Spider/Spider/research/experiments/EXP-RUNTIME-36084499865/run_experiment.py",
+      "sha256": "5b03ea93af99fdcbf15e001daa18f2b2d2b621aec8dec95479b4e4d81e197fcd",
+      "role": "code"
+    },
+    {
+      "path": "/home/runner/work/Spider/Spider/research/experiments/EXP-RUNTIME-36084499865/raw_freshness_observations.jsonl",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "role": "raw"
+    },
+    {
+      "path": "/home/runner/work/Spider/Spider/research/experiments/EXP-RUNTIME-36084499865/raw_hit_observations.jsonl",
+      "sha256": "a69c364e192e9bb6513970bda2c535ac6381ed2463b4492cc2339e279db8816f",
+      "role": "raw"
+    },
+    {
+      "path": "/tmp/spider-runtime/36044045537/nginx.conf",
+      "sha256": null,
+      "role": "fixture"
+    },
+    {
+      "path": "/tmp/spider-runtime/36044045537/wsgi.py",
+      "sha256": null,
+      "role": "code"
+    },
+    {
+      "path": "/tmp/spider-runtime/36044045537/single.db",
+      "sha256": null,
+      "role": "raw"
+    },
+    {
+      "path": "/tmp/spider-runtime/36044045537/health_gate.log",
+      "sha256": null,
+      "role": "fixture"
+    }
+  ],
+  "observations": [
+    "Freshness n_non304=0 (target >=800)",
+    "Freshness per_ep_non304={}",
+    "HS256 valid success rate=0.0000 (target >=0.90)",
+    "Batch distinct timestamps=0 (target >=10)",
+    "Header-only Jaccard mean=0.0000 variance=0.000000 std=0.0000 (need var>0 std>0 mean<1.0)",
+    "Scheduling de-confounded |r|=0.0000 V=0.0000 (target <0.30)",
+    "Honest |rho_shuffled|=0.0000 p=0.0000 within_f_std=0.0000",
+    "Full-vector full=0.0000 body=0.0000 status=0.0000",
+    "HIT 0/0 byte-identical via nginx cache (greedy executed)",
+    "Loopback header drift=0.0000 body drift=0.0000 nullFP=0.0000",
+    "Health gate passed=False Flask listening=False",
+    "Stable header UUID-absence grep verified: True",
+    "Same-state Jaccard J==1.0: True",
+    "Outcome: INCONCLUSIVE Status: MEASUREMENT_INVALID"
+  ],
+  "validity_notes": [
+    "sudo available: nginx master started as root with user www-data workers; cache/temp dirs chowned www-data.",
+    "SYNTHETIC_MUTATION_OR_NONCE_PRESENT: uuid.uuid4() found in code"
+  ],
+  "unresolved": []
+}
