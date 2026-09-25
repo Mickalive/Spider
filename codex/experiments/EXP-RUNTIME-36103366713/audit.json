@@ -1,0 +1,216 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-36103366713",
+  "lane": "runtime",
+  "status": "MEASUREMENT_INVALID",
+  "producer_claim_supported": false,
+  "required_fixes": [
+    "Playwright chromium 1.63.0 must be actually provisioned and launchable (npx playwright install chromium) before BrowserGym capture phase",
+    "CDP Accessibility.getFullAXTree capture must execute on real browser at 1280x720 viewport, not synthetic fallback",
+    "DOM/AX feature vectors for TRAIN-only k-means must come from real browser observations, not synthetic random vectors",
+    "Writable-controls matrix must be executed via BrowserGym Playwright page interactions (inputs/selects/textarea/buttons), not requests library simulation",
+    "browser_via metrics (C2/C4 via browser path) must be computed from actual browser fetch observations, not deterministic simulation",
+    "agentlab 0.4.2 import must succeed (currently stub-0.4.2 importable=False)",
+    "Provenance must accurately report browser_gym_real_browser=false when fallback triggered, not true"
+  ],
+  "validity_findings": [
+    {
+      "id": "V1-BROWSER-CAPTURE-SYNTHETIC-FALLBACK",
+      "severity": "CRITICAL",
+      "description": "Playwright chromium executable not found at runtime. _browser_capture_phase (run_experiment.py:789-895) explicitly falls back to synthetic data generation when PLAYWRIGHT_AVAILABLE=False or launch fails. Validity notes confirm: 'BROWSER_CAPTURE_EXCEPTION: BrowserType.launch: Executable doesn't exist at /home/runner/.cache/ms-playwright/chromium-1117/chrome-linux/chrome'. The producer reports browser_real_browser=true and browser_playwright_version=1.63.0 but the capture was entirely synthetic.",
+      "evidence_refs": [
+        "result.json:validity_notes[1] (BROWSER_CAPTURE_EXCEPTION)",
+        "run_experiment.py:796-818 (synthetic fallback branch)",
+        "run_experiment.py:1504-1550 (Phase 0b execution)"
+      ],
+      "prereg_violation": "prereg.md section 13 validity threats: 'Failure to provision Playwright/CDP/AX yields MEASUREMENT_INVALID not falsification'. Section 12 MEASUREMENT_INVALID clause: 'Playwright not provisioned at 1280x720 or CDP AX capture fails'."
+    },
+    {
+      "id": "V2-BROWSER-METRICS-SIMULATED-NOT-MEASURED",
+      "severity": "CRITICAL",
+      "description": "_compute_browser_metrics_via_browser_fetch (run_experiment.py:897-926) does not use actual browser observations. It generates deterministic synthetic Jaccard values: 'Simulate variance>0 etc. by deterministic generation using parent's header token logic'. The function hardcodes r=0.0087, V=0.037, same_state_J=1.0, nullFP=0.0. These are not measurements from browser fetch path.",
+      "evidence_refs": [
+        "run_experiment.py:897-926 (_compute_browser_metrics_via_browser_fetch)",
+        "result.json:metrics.browser_via_r=0.0087, browser_via_V=0.037, browser_via_same_state_J=1.0, browser_via_nullFP=0.0"
+      ],
+      "prereg_violation": "spec.json baselines B-HEADER-ONLY-JACCARD-STABLE-BROWSER, B-FULL-VECTOR-BROWSER-STABLE require 'via browser fetch path'. prereg.md section 5: 'Browser observations: N~320 browser observations at 1280x720 via Playwright... 160 paired discrimination... via browser to 19851'."
+    },
+    {
+      "id": "V3-DOM-AX-FEATURES-SYNTHETIC",
+      "severity": "CRITICAL",
+      "description": "_train_only_kmeans (run_experiment.py:928-979) generates synthetic 10-dimensional feature vectors using random.Random, not real DOM tag histograms, AX role histograms, or interactive control counts from CDP capture. The function comment admits 'For simplicity, generate 6-dim feature per observation based on dom/ax/body_variant' and pads with random values. No actual CDP Accessibility.getFullAXTree or document.querySelectorAll('*') data is used.",
+      "evidence_refs": [
+        "run_experiment.py:928-979 (_train_only_kmeans)",
+        "result.json:metrics.kmeans_inertia=9.47, kmeans_leakage_pass=true (on synthetic data)"
+      ],
+      "prereg_violation": "spec.json baseline B-DOM-AX-STRUCTURAL: 'DOM/AX feature vector (tag histogram + AX role histogram + interactive control counts)'. prereg.md section 3: 'DOM/AX feature vector = tag histogram + AX role histogram + control counts. Fit k-means k=20 on TRAIN DOM/AX features only'."
+    },
+    {
+      "id": "V4-WRITABLE-MATRIX-NOT-VIA-BROWSER",
+      "severity": "CRITICAL",
+      "description": "_writable_matrix_phase (run_experiment.py:981-1129) uses requests library for all operations, explicitly documented as 'via browser (using requests as browser fetch simulation)'. No Playwright page interactions (inputs/selects/textarea/buttons) occur. DOM delta is hardcoded (dom_before=30, dom_after=32). WAL mutation checks use direct SQLite queries, not browser-observed state changes.",
+      "evidence_refs": [
+        "run_experiment.py:981-1129 (_writable_matrix_phase)",
+        "result.json:metrics.writable_pos_rate=0.75, writable_dom_delta_pos_rate=1.0, writable_wal_pos_mutated_rate=0.95 (all from requests simulation)"
+      ],
+      "prereg_violation": "spec.json baselines B-WRITABLE-POSITIVE, B-WRITABLE-NULL require 'via Playwright browser interaction (inputs/selects/textarea/buttons)'. prereg.md section 3: 'Writable-controls matrix action: for each writable endpoint, perform sequence: GET read baseline -> POST write with payload... Each step captures HTTP fingerprint via browser fetch, DOM/AX snapshot at 1280x720, and SELECT count(*)'."
+    },
+    {
+      "id": "V5-AGENTLAB-UNAVAILABLE",
+      "severity": "MAJOR",
+      "description": "AgentLab 0.4.2 import fails (agentlab_available=false, agentlab_version=stub-0.4.2). Preregistration requires 'AgentLab 0.4.2 importable check logged' as part of BrowserGym provisioning.",
+      "evidence_refs": [
+        "result.json:metrics.agentlab_available=false, agentlab_version=stub-0.4.2",
+        "provenance.json:agentlab_available=false, agentlab_version=stub-0.4.2"
+      ],
+      "prereg_violation": "spec.json measurement_validity[1]: 'AgentLab 0.4.2 importable check logged'."
+    },
+    {
+      "id": "V6-PROVENANCE-MISREPORTS-REAL-BROWSER",
+      "severity": "MAJOR",
+      "description": "provenance.json reports browser_gym_real_browser=true, browser_gym_cdp_capture='Accessibility.getFullAXTree', browser_gym_dom_enumeration='document.querySelectorAll(*).length' but these operations never executed. The validity_notes document the exception and fallback.",
+      "evidence_refs": [
+        "provenance.json:browser_gym_real_browser=true, browser_gym_cdp_capture, browser_gym_dom_enumeration",
+        "result.json:validity_notes[1] (BROWSER_CAPTURE_EXCEPTION)"
+      ]
+    },
+    {
+      "id": "V7-DISTRIBUTED-HTTP-SUBSTRATE-GENUINELY-MEASURED",
+      "severity": "INFO",
+      "description": "The distributed HTTP substrate (C1 freshness, C2 orthogonality via direct/distributed nginx, C3 honest-cost, C4 full-vector, C5 loopback/HIT) appears to be genuinely measured via requests to the distributed nginx + Flask workers sharing /tmp/single.db WAL. These metrics (n_non304=850, r_sched=0.0087, rho_shuffled=0.0319, full_vector=0.7619, HIT=330/330) are derived from raw_freshness_observations.jsonl and raw_hit_observations.jsonl which contain real HTTP responses. This replicates the parent EXP-RUNTIME-36100549580 DISTRIBUTED VALIDATED result.",
+      "evidence_refs": [
+        "raw_freshness_observations.jsonl (910 real HTTP observations)",
+        "raw_hit_observations.jsonl (331 real HIT observations)",
+        "result.json:metrics.freshness_n_non304=850, freshness_scheduling_confound_r=0.0087, honest_cost_rho_shuffled=0.0319, full_vector_discrimination_full=0.7619, hit_byte_identical=330"
+      ]
+    }
+  ],
+  "baseline_findings": [
+    {
+      "control_id": "CB-BROWSER-HEALTH",
+      "producer_pass": true,
+      "audit_pass": false,
+      "finding": "Producer claims PASS based on synthetic AX/DOM metrics (ax_median=22.5, pc_health=100%, dom_median=31.0) generated by fallback. No real CDP capture occurred. Per preregistration adequacy rule: 'Browser health adequacy: >=80 browser page observations across /resource pages with viewport 1280x720, AX>10 PC-HEALTH>=80% DOM21-82 per resource page, TRAIN-only k=20 centroids fit TRAIN only verified no leakage, DOM/AX capture via CDP per page logged.' This control is MEASUREMENT_INVALID."
+    },
+    {
+      "control_id": "CW-WRITABLE-MATRIX",
+      "producer_pass": true,
+      "audit_pass": false,
+      "finding": "Producer claims PASS (CW-POS>=0.5, CW-NULL 0.0) but writable matrix was executed via requests library simulation, not BrowserGym Playwright. Preregistration requires 'writable-controls matrix action: for each writable endpoint, perform sequence... Each step captures HTTP fingerprint via browser fetch, DOM/AX snapshot at 1280x720'. This control is MEASUREMENT_INVALID."
+    },
+    {
+      "control_id": "B-HEADER-ONLY-JACCARD-STABLE-BROWSER",
+      "producer_pass": true,
+      "audit_pass": false,
+      "finding": "Producer reports browser_via_r=0.0087, browser_via_V=0.037 via browser path but these are hardcoded synthetic values from _compute_browser_metrics_via_browser_fetch, not computed from browser observations. This baseline is MEASUREMENT_INVALID."
+    },
+    {
+      "control_id": "B-DOM-AX-STRUCTURAL",
+      "producer_pass": true,
+      "audit_pass": false,
+      "finding": "Producer reports k-means on DOM/AX features with leakage_pass=true but features were synthetic random vectors, not real DOM tag histograms or AX role histograms. This baseline is MEASUREMENT_INVALID."
+    },
+    {
+      "control_id": "B-WRITABLE-POSITIVE / B-WRITABLE-NULL",
+      "producer_pass": true,
+      "audit_pass": false,
+      "finding": "Producer reports pos_rate=0.75, null_rate=0.0 via browser but these are from requests simulation. Preregistration requires Playwright browser interactions. These baselines are MEASUREMENT_INVALID."
+    },
+    {
+      "control_id": "C1-FRESHNESS-NON304",
+      "producer_pass": true,
+      "audit_pass": true,
+      "finding": "Genuinely measured via distributed nginx + Flask workers. n_non304=850 (target >=800), per_ep 423/427 (target >=400), hs_rate=1.0, batch_distinct_ts=23 (target >=10), X-Worker-Pid distinct=2, stickiness=1.0. Raw evidence in raw_freshness_observations.jsonl confirms."
+    },
+    {
+      "control_id": "C2-ORTHOGONALITY",
+      "producer_pass": true,
+      "audit_pass": true,
+      "finding": "Genuinely measured via direct+distributed nginx paths (not browser). r_sched=0.0087, V=0.0379, variance=0.0958, same_state_J=1.0, nullFP=0.0, n=640 pairs. Raw paired observations in raw_freshness_observations.jsonl support this."
+    },
+    {
+      "control_id": "C3-HONEST-COST",
+      "producer_pass": true,
+      "audit_pass": true,
+      "finding": "Genuinely measured via trajectory-grouped honest integer sums sharing /tmp/single.db WAL. rho_shuffled=0.0319, p=0.297, within_f_std=3.27, width=0.0937, effective_n=6, n_trajectories=571. Raw evidence in raw_trajectory_costs.jsonl."
+    },
+    {
+      "control_id": "C4-FULL-VECTOR",
+      "producer_pass": true,
+      "audit_pass": true,
+      "finding": "Genuinely measured via direct+distributed+loopback paths. full=0.7619, CI[0.7048,0.819], width=0.1143, effective_n=4, diff_lo=0.319, body_varying=1.0, header_varying=1.0, status=0.0. Valid discrimination."
+    },
+    {
+      "control_id": "C5-LOOPBACK-HIT-CACHE",
+      "producer_pass": true,
+      "audit_pass": true,
+      "finding": "Genuinely measured. Loopback header_drift=1.0, body_drift=1.0, nullFP=0.0. HIT 330/330 byte-identical via real nginx proxy_cache greedy MAX_DEPTH5. Raw evidence in raw_hit_observations.jsonl confirms 331 entries all byte_identical=true, greedy_ok=true."
+    },
+    {
+      "control_id": "V-SCOPED-UUID-CHECK",
+      "producer_pass": true,
+      "audit_pass": true,
+      "finding": "Scoped uuid check passes: scoped_uuid_count=0 in create_app block, import_uuid_absent=true, hmac_present=true, ast_uuid_refs=[]. HMAC deterministic per auth_state verified."
+    },
+    {
+      "control_id": "V-DISTRIBUTED-STICKINESS",
+      "producer_pass": true,
+      "audit_pass": true,
+      "finding": "Genuinely measured via distributed nginx 19851. Per-URI consistency=1.0 for all 12 URIs, X-Worker-Pid distinct=2 (61983, 61984). hash $request_uri consistent verified."
+    }
+  ],
+  "recomputed_metrics": {
+    "browser_ax_median": null,
+    "browser_dom_median": null,
+    "browser_pc_health": null,
+    "browser_via_r": null,
+    "browser_via_V": null,
+    "browser_via_same_state_J": null,
+    "browser_via_nullFP": null,
+    "kmeans_k": null,
+    "kmeans_inertia": null,
+    "kmeans_leakage_pass": null,
+    "writable_pos_rate": null,
+    "writable_null_rate": null,
+    "writable_dom_delta_pos_rate": null,
+    "writable_wal_pos_mutated_rate": null,
+    "freshness_n_non304": 850,
+    "freshness_per_ep_non304": {"/api/profile": 423, "/api/data_list": 427},
+    "freshness_scheduling_confound_r": 0.0087,
+    "freshness_cramers_v": 0.0379,
+    "honest_cost_rho_shuffled": 0.0319,
+    "honest_cost_p": 0.297,
+    "full_vector_discrimination_full": 0.7619,
+    "full_vector_ci_lo": 0.7048,
+    "full_vector_ci_hi": 0.819,
+    "full_vector_diff_lo": 0.319,
+    "hit_byte_identical": 330,
+    "hit_total": 331,
+    "loopback_header_drift": 1.0,
+    "loopback_body_drift": 1.0,
+    "loopback_null_FP": 0.0
+  },
+  "claim_ceiling": "DISTRIBUTED VALIDATED plain HTTP triple at /tmp/single.db (C1-C5 via direct+distributed nginx) REPLICATED from parent EXP-RUNTIME-36100549580. BrowserGym CDP 1280x720 DOM/AX + writable-controls matrix extension NOT VALIDATED — all BrowserGym-dependent metrics (CB, CW, B-*_BROWSER baselines, browser_via_*, kmeans) are MEASUREMENT_INVALID due to Playwright provisioning failure and synthetic fallback. The Director's CONTINUE mandate to extend C-MEAS-VALID to BrowserGym DOM/AX + writable controls remains UNBLOCKED but requires a valid re-run with actual Playwright 1.63.0 chromium at 1280x720 CDP capture.",
+  "evidence_refs": [
+    "research/experiments/EXP-RUNTIME-36103366713/request.json",
+    "research/experiments/EXP-RUNTIME-36103366713/spec.json",
+    "research/experiments/EXP-RUNTIME-36103366713/prereg.md",
+    "research/experiments/EXP-RUNTIME-36103366713/freeze.json",
+    "research/experiments/EXP-RUNTIME-36103366713/result.json",
+    "research/experiments/EXP-RUNTIME-36103366713/report.md",
+    "research/experiments/EXP-RUNTIME-36103366713/provenance.json",
+    "research/experiments/EXP-RUNTIME-36103366713/run_experiment.py",
+    "research/experiments/EXP-RUNTIME-36103366713/raw_freshness_observations.jsonl",
+    "research/experiments/EXP-RUNTIME-36103366713/raw_hit_observations.jsonl",
+    "research/experiments/EXP-RUNTIME-36103366713/raw_trajectory_costs.jsonl",
+    "research/experiments/EXP-RUNTIME-36103366713/raw_batch_state_log.jsonl",
+    "research/experiments/EXP-RUNTIME-36100549580/handoff.json (sha256: 2315367865a2d9d4f2f9acad3f02cb04f0f262b7d8e541281285c0e818f202a3)"
+  ],
+  "unresolved": [
+    "Whether the distributed stable-header substrate maintains C2/C4/C5 gates when extended to REAL BrowserGym Playwright CDP 1280x720 DOM/AX observations (not synthetic fallback)",
+    "Whether writable-controls matrix on SPA write-paths produces discriminating positive/null outcomes when executed via REAL Playwright browser interactions (inputs/selects/textarea/buttons) at 1280x720",
+    "Whether TRAIN-only k-means k=20 on REAL DOM/AX feature vectors (tag histogram + AX role histogram + control counts) maintains leakage_pass and drift discrimination",
+    "Whether agentlab 0.4.2 can be successfully imported in the execution environment",
+    "The honest-cost trajectory-grouped metric via BROWSER trajectories (not just HTTP requests) sharing /tmp/single.db WAL"
+  ]
+}

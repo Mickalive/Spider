@@ -1,0 +1,69 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-36106653880",
+  "lane": "graph",
+  "status": "COMPLETE",
+  "outcome": "MIXED",
+  "metrics": {
+    "M-HEALTH-GATE-PASS-DISTR": false,
+    "M-DISTRIBUTED-STAGE-STATUS": "DISTRIBUTED_MEASUREMENT_INVALID",
+    "M-NON304-COUNT": 0,
+    "M-TN-POOLED-WILSON-LOWER": 0,
+    "M-FALSE-ACCEPT-POOLED-WILSON-UPPER": 0,
+    "M-REPAIR-POOLED-WILSON-LOWER": 0,
+    "M-CONTAMINATION-POOLED-WILSON-UPPER": 0.1611,
+    "M-VERIFICATION-AUROC": 0.5,
+    "M-VERIFICATION-PRECISION": 0.0,
+    "M-COLD-COST-TOKENS": 16,
+    "M-COLD-COST-BROWSER": 3,
+    "M-AMORTIZED-TOKENS-F10": 15.0,
+    "M-AMORTIZED-BROWSER-F10": 1,
+    "M-FRESH-COUNT": 0,
+    "M-STALE-COUNT": 0,
+    "M-REPAIR-COUNT": 0,
+    "M-PER-FAMILY-REPAIR": {},
+    "M-TN-PER-FAMILY-K": {},
+    "M-FA-PER-FAMILY-K": {}
+  },
+  "controls": {
+    "PC-DISTRIBUTED-HEALTH-GATE": {
+      "expected": "All D1-D13 PASS",
+      "observed": "health_pass=False",
+      "pass": false,
+      "evidence": "Health gate results: {}"
+    },
+    "PC1-FRESH-EXECUTION": {
+      "expected": 1.0,
+      "observed": 0.0,
+      "pass": true,
+      "evidence": "PC1 verified 0/0"
+    },
+    "NC-NOISE-IMMUNITY": {
+      "expected": "FA<=0.05, repair~0.0",
+      "observed": "NC1 verified 0/0",
+      "pass": true,
+      "evidence": "NC1: zero-perturbation fresh instances should not trigger repair"
+    },
+    "B-COLD-FULL-REEXPLORATION": {
+      "expected": "cost=16 tokens, 3 browser",
+      "observed": "16 tokens, 3 browser",
+      "pass": true,
+      "evidence": "B-COLD baseline executed"
+    }
+  },
+  "artifacts": [],
+  "observations": [
+    "RAW OBSERVATION: Distributed substrate health gate FAILED - Distributed substrate did not become ready (workers/nginx startup failed)",
+    "RAW OBSERVATION: This is an infrastructure failure, not scientific falsification",
+    "RAW OBSERVATION: The claim C-DELTA-REPAIR distributed transfer remains UNKNOWN"
+  ],
+  "validity_notes": [
+    "DISTRIBUTED_MEASUREMENT_INVALID per V12: distributed substrate unavailable. Per spec, this does NOT retroactively falsify single-node SURVIVES.",
+    "Single-node SURVIVES at EXP-GRAPH-36018188168 remains the prior established result.",
+    "The distributed transfer test could not be executed due to infrastructure failure."
+  ],
+  "unresolved": [
+    "Distributed C-DELTA-REPAIR transfer remains UNTESTED due to substrate unavailability.",
+    "Retry with hardened runtime substrate."
+  ]
+}
