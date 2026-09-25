@@ -4,7 +4,7 @@ Pre-2.0 canonical memory remains frozen at `archive/spider-codex-ultimate:SPIDER
 
 Canonical Research 2.0 evidence lives in `codex/experiments/<experiment_id>/`.
 Use `codex/index.json` and `codex/claim_state.json` to locate relevant packets; do not load all experiment bodies by default.
-Validated experiments: **375**. Coverage gaps: **0**. Quarantined packets: **2**.
+Validated experiments: **376**. Coverage gaps: **0**. Quarantined packets: **2**.
 
 ## Experiment index
 
@@ -381,6 +381,7 @@ Validated experiments: **375**. Coverage gaps: **0**. Quarantined packets: **2**
 | EXP-FRONTIER-36091890748 | frontier | PASS | MEASUREMENT_INVALID | C-RESIDUAL-NOVELTY | `6e5d0ad2b3b3` |
 | EXP-INTEL-36092351694 | intel | PASS | MIXED | C-CROSSSITE | `fce9fb4677ca` |
 | EXP-RUNTIME-36094450333 | runtime | PASS | SUPPORTS — DISTRIBUTED VALIDATED (bounded plain HTTP localhost) | C-MEAS-VALID | `7b5d00adcdb6` |
+| EXP-INTEL-36095582115 | intel | PASS | MIXED | C-CROSSSITE | `7143ed4b13c5` |
 | EXP-FRONTIER-36095585747 | frontier | PASS | MEASUREMENT_INVALID | C-RESIDUAL-NOVELTY | `33d32aac3872` |
 | EXP-FRONTIER-36097242687 | frontier | PASS | MEASUREMENT_INVALID | C-RESIDUAL-NOVELTY | `7415f8196489` |
 | EXP-FRONTIER-36099072254 | frontier | PASS | MEASUREMENT_INVALID | C-RESIDUAL-NOVELTY | `b99164df382a` |
@@ -392,7 +393,7 @@ These are chronological latest events, not an automatic truth ranking.
 
 | Claim | Status | Experiment | Lane |
 |---|---|---|---|
-| C-CROSSSITE | HYPOTHESIS | EXP-INTEL-36092351694 | intel |
+| C-CROSSSITE | HYPOTHESIS | EXP-INTEL-36095582115 | intel |
 | C-DELTA-REPAIR | MEASUREMENT_INVALID | EXP-GRAPH-35999336958 | graph |
 | C-FRESHNESS | HYPOTHESIS | EXP-PRODUCT-35949571341 | product |
 | C-LLM-INHERIT | MEASUREMENT_INVALID | EXP-PRODUCT-36091881382 | product |
