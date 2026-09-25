@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-36058324385",
+  "lane": "intel",
+  "decision": "MIXED — H_SAMPLED_CENSUS_REPLACES_EXHAUSTIVE does NOT SURVIVE on attempted censuses; durable single-source pin survives but union 4/10, WebGym diverse UNAVAILABLE pending HF_TOKEN, delta inverted fails gate",
+  "claim_updates": [
+    {
+      "claim_id": "C-CROSSSITE",
+      "status": "HYPOTHESIS",
+      "reason": "Bounded MIXED per frozen three-way rule after audit REVISE (producer_claim_supported=false). MV gating PASS (MV1 PASS, MV2 PASS_PARTIAL_SINGLE_SOURCE, MV3/MV4/MV7 UNAVAILABLE_CORRECTLY_GATED after 6x HF 401, MV5 PASS_MEASUREMENT_VALID_BUT_GATE_FAIL, MV8 PASS_WITH_DELTA_FAIL, MV9 PASS). Durable single-source WebArena-Verified v2 812 SHA d65275660814663375028e9017e1f929e3c38321041b125795e2713b52243d30 927596 bytes byte-identical x2 fresh + Docker Hub sha256:3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb survive. Union constructibility bounded to 4 families [136,145,196,222] under frozen product-subtree anchoring (median AX recomputed 707.0 >10, median DOM 202526.5 >=2000, SHA before==after 12/12) <10 FAIL. WebGym diverse >=50 eTLD+1, B=2000 bootstrap CI width>0, threshold sweep 0.818/0.900/0.9479 range>=0.05/>=0.02 monotonic, real-manifest param prevalence 0.8958, and Jaccard<0.30 product-subtree orthogonality remain UNTESTED (UNAVAILABLE after 2 genuine 401 per source) not falsified. Delta full-tree vs truncated [:20] inverted -0.4207 (fulltree 0.454 CI [0.396,0.516] vs truncated 0.875 degenerate) FAILS gate >=0.20. Shared manifest published but contains UNAVAILABLE branches. H does not replace exhaustive 567MB LFS on these censuses; global C-CROSSSITE remains HYPOTHESIS."
+    }
+  ],
+  "product_action": "BLOCK — do not promote; Graph N>=120 zero-template-overlap param-inherit holdout and Physics website-holdout PMI banks remain BLOCKED on 4-family ceiling; shared manifest with UNAVAILABLE WebGym branches is not a replacement for exhaustive 567MB LFS/CAP 420 enumeration",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "With HF_TOKEN provisioned (or alternative WebGym hosting) can the sampled diverse census achieve >=50 distinct eTLD+1 with family-level B=2000 bootstrap 95% CI width>0 non-degenerate, threshold sweep at 0.818/0.900/0.9479 monotonic with range 0.818-0.9479 >=0.05 and 0.900-0.9479 >=0.02 vs vacuous 0.9479, real-manifest parameterization prevalence 0.8958 +-0.05 with byte-identical SHA, pairwise Jaccard<0.30 product-subtree anchored orthogonality, and union >=10 distinct product families constructible under frozen SHA-anchoring (1280x720 CDP median AX>10 DOM>=2000 SHA both directions) with delta fulltree-vs-truncated >=0.20 vs shuffled <0.05, validating the shared manifest for heterogeneous reuse without exhaustive 567MB LFS?",
+  "reason": "Grounded in frozen spec.json d491946c42ccf0360723ac6cca66f21bbc1811367c84ad17831651bfc6cc85eb and prereg.md 4f5c357aa8be47918b1ae8eb9159594738ba6e58e9d560e3651a4742eb7dd7ad with independent audit.json REVISE (status REVISE, producer_claim_supported false, 4 required_fixes). MV gating passes per audit validity_findings (MV1 PASS 6x HF 401 +2x GitHub 200 +5x GHCR 403/404 +2x Docker Hub 200; MV2 PASS_PARTIAL_SINGLE_SOURCE SHA d6527566 927596 bytes + Docker 3e8cb9b9 64-hex; MV3/MV4/MV7 UNAVAILABLE_CORRECTLY_GATED; MV5 PASS_MEASUREMENT_VALID_BUT_GATE_FAIL 4 families [136,145,196,222] anchoring true SHA both directions 12/12 median AX 707.0/707 >10 DOM 202526.5 >=2000; MV8 PASS_WITH_DELTA_FAIL delta -0.4207 inverted; MV9 PASS). Recomputed metrics agree (M_CONSTRUCTIBLE_FAMILIES 4, M_MANIFEST_SHA_WEBARA true, M_AX_MEDIAN discrepancy 716 vs 707.0 but gate unchanged, M_DELTA -0.4207 exact). Frozen decision rule (A) MEASUREMENT_INVALID not triggered (MV4 exception for HF absent), (B) SURVIVES fails because union 4<10 and delta false and WebGym UNAVAILABLE, (C) MIXED applies (any module passes: durable pin, AX liveness, shared manifest) not global FALSIFIED because diverse/Jaccard/sweep are UNAVAILABLE not decided. Audit claim_ceiling explicitly bounds maximum justified ceiling to durable single-source pin + 4-family constructibility, with WebGym diverse/Jaccard/sweep/real param prevalence UNTESTED. Therefore C-CROSSSITE stays HYPOTHESIS at 4-family single-node 1280x720 CDP ceiling, no product promotion.",
+  "evidence_refs": [
+    "research/experiments/EXP-INTEL-36058324385/spec.json:d491946c42ccf0360723ac6cca66f21bbc1811367c84ad17831651bfc6cc85eb",
+    "research/experiments/EXP-INTEL-36058324385/prereg.md:4f5c357aa8be47918b1ae8eb9159594738ba6e58e9d560e3651a4742eb7dd7ad",
+    "research/experiments/EXP-INTEL-36058324385/freeze.json:c8fc614bb7982542d4181c86dd038eb4c1ddd2d91fd13b09955ebe3ec4e16985",
+    "research/experiments/EXP-INTEL-36058324385/result.json:status COMPLETE outcome MIXED metrics M_CONSTRUCTIBLE_FAMILIES 4 <10, M_MANIFEST_SHA_WEBARA true, M_WEBGYM_DIVERSE_ETLD null UNAVAILABLE, M_DELTA_FULLTREE_VS_TRUNCATED -0.4207 fail, M_SHARED_MANIFEST_PUBLISHED true",
+    "research/experiments/EXP-INTEL-36058324385/audit.json:status REVISE producer_claim_supported false recomputed_metrics M_CONSTRUCTIBLE_FAMILIES 4 agreement true M_AX_MEDIAN 707.0 vs 716 M_DOM_MEDIAN 202526.5 vs 203748 claim_ceiling 4-family bounded MIXED",
+    "research/experiments/EXP-INTEL-36058324385/provenance.json:pip_freeze_sha eb8f9bc6314eced8e9e1d7b32d96f41e9b967d0e3da876b107742b76047af53f browsergym-core 0.14.3 agentlab 0.4.2 playwright 1.63.0 viewport 1280x720",
+    "research/experiments/EXP-INTEL-36058324385/artifacts/raw/github_cross_source_attempts.json:sha d65275660814663375028e9017e1f929e3c38321041b125795e2713b52243d30 927596 bytes byte-identical x2 fresh 200",
+    "research/experiments/EXP-INTEL-36058324385/artifacts/raw/hf_webgym_manifest_attempts.json:6 attempts 401 hf_token_present false timeout 300s",
+    "research/experiments/EXP-INTEL-36058324385/artifacts/raw/docker_hub_api_attempts.json:digest sha256:3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb + docker images --digests a5b6fb47ee9f",
+    "research/experiments/EXP-INTEL-36058324385/artifacts/raw/ghcr_browsergym_attempts.json:5 attempts 403/404/denied UNAVAILABLE",
+    "research/experiments/EXP-INTEL-36058324385/artifacts/raw/ax_captures.jsonl:23 captures 12 canonical product median AX 707.0 DOM 202526.5 SHA both directions true",
+    "research/experiments/EXP-INTEL-36058324385/artifacts/derived/webarena_census.json:36 families_ge3 192 shopping 4 product_page [136,145,196,222]",
+    "research/experiments/EXP-INTEL-36058324385/artifacts/derived/family_anchoring.json:4 constructible families anchoring true",
+    "research/experiments/EXP-INTEL-36058324385/artifacts/derived/ax_consistency_fulltree.json:mean 0.45426266604842663 CI [0.3960327368567069,0.5163660993035543] variance 0.00475 delta -0.4207 truncated 0.875 degenerate JACCARD max 0.5417 diagnostic",
+    "research/experiments/EXP-INTEL-36058324385/artifacts/derived/shared_diverse_manifest.json:sha a360cf670d2d15ae path+sha256 in provenance.json",
+    "research/experiments/EXP-INTEL-36058324385/artifacts/derived/webgym_sampled_census.json:families_ge3 0 diverse UNAVAILABLE",
+    "research/experiments/EXP-INTEL-36058324385/artifacts/derived/webgym_threshold_sweep.json:thresholds 0.818/0.900/0.9479 all UNAVAILABLE",
+    "research/intel/grammar_fulltree_358885.py:sha 273eafbcb817e8981f843581a724594665cabdd357b318c701251929ee9c83de body regex DOTALL present",
+    "research/experiments/EXP-INTEL-36042590671/handoff.json:sha 6204a37a79f577feef40f3b674d39067224535e6a887ca0c940d47862111e8be parent MIXED 4-family ceiling"
+  ]
+}
