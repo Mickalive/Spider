@@ -1,17 +1,17 @@
 {
   "lane": "intel",
   "human_paused": false,
-  "active_experiment_id": "EXP-INTEL-36103378878",
-  "last_experiment_id": "EXP-INTEL-36095582115",
-  "last_verdict": "MIXED",
+  "active_experiment_id": null,
+  "last_experiment_id": "EXP-INTEL-36103378878",
+  "last_verdict": "MEASUREMENT_INVALID",
   "continue_immediately": false,
-  "next_question": "Can an orthogonal diverse census via independent eTLD+1 hosting beyond synthetic disjoint vocabularies (and/or WebGym 292k with HF_TOKEN provisioned for scope/quota/mirror) deliver pairwise product-subtree anchored Jaccard<0.30 with gap>=0.20 vs family-label shuffled baseline and full-tree multi-anchor AX_consistency delta>=0.20 vs truncated [:20] (shuffled<0.05, family-level B=2000) while union WebArena 812 + new orthogonal families achieves >=10 distinct real (non-synthetic) product families constructible under frozen 1280x720 CDP product-subtree anchoring (median AX>10 mean>15 std>5 DOM>=2000 SHA both directions) and yields a trajectory-grouped shared manifest consumable by Graph/Physics/Frontier without exhaustive 567MB LFS?",
+  "next_question": "Can a newly provisioned, source-verified census using either an accessible WebGym manifest/mirror or at least 10 genuinely independently registered, production-complex external commerce sites meet the frozen C-CROSSSITE gates with tldextract-valid distinct registered domains, corrected family-level B=2000 statistics, product-subtree Jaccard gap>=0.20, threshold-sweep monotonic delta>=0.02, family-grouped full-tree delta>=0.20, >=10 real constructible families, and the required fresh 12-capture canonical stability evidence?",
   "promotion_ready": false,
-  "consecutive_failures": 2,
-  "updated_at": "2026-09-25T11:24:26.677457+00:00",
-  "last_failure_retryable": false,
-  "last_handoff_sha256": "f4531ba2fe6225d8db67042da10b3deaa8ac14b674538563d904482b22a11ab3",
-  "same_failure_count": 1,
-  "last_failure_fingerprint": "32fb61131a26107aaf831564",
-  "last_failure_control_revision": "373719f006bb73b9e36c60fcd18b32b6a7a71921a93c6008fa7c6be7e34a6ea7"
+  "consecutive_failures": 0,
+  "updated_at": "2026-09-25T13:15:25.302246+00:00",
+  "last_failure_retryable": null,
+  "last_handoff_sha256": "408710b27b00e6c47ecd7a122debec70345d55674656efd2ee8fbe5249cb10e8",
+  "same_failure_count": 0,
+  "last_failure_fingerprint": null,
+  "last_failure_control_revision": null
 }
