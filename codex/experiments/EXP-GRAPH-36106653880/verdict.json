@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-36106653880",
+  "lane": "graph",
+  "decision": "MEASUREMENT_INVALID",
+  "claim_updates": [
+    {
+      "claim_id": "C-DELTA-REPAIR",
+      "status": "MEASUREMENT_INVALID",
+      "reason": "The current distributed-transfer transaction is measurement-invalid, not a scientific falsification. The independent audit records status=MEASUREMENT_INVALID and producer_claim_supported=false; provenance records substrate_started=false, health_gate_pass=false, and n_non304=0. No D1-D7 outcome, control, repair observation, contamination observation, verification score, or amortized-cost measurement was obtained. The audit also identifies the producer's COMPLETE/MIXED classification, zero/default metrics, leaked 0.1611 contamination value, and 15/1 amortized defaults as invalid representations of missing data. The prior health-gated single-node result from EXP-GRAPH-36018188168 remains the inherited EXPERIMENTAL ceiling; this packet does not establish distributed transfer, does not justify VALIDATED or PRODUCT_CORE, and does not close the broader C-DELTA-REPAIR domain."
+    }
+  ],
+  "product_action": "NO_PROMOTION",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "Can a minimal, durably provisioned C-PARAM-INHERIT A-to-B binding test on a separately validated real-task/browser substrate distinguish true mechanism transfer from replay or duplication on never-observed B, after the Runtime distributed-substrate failure is repaired, rather than spending another Graph cycle retrying the blocked distributed C-DELTA-REPAIR substrate?",
+  "reason": "Director adjudication is grounded in the frozen spec/prereg decision rule, producer evidence, provenance, raw evidence, and the independent audit. The audit reports that the distributed nginx/gunicorn/shared-WAL substrate did not become operational, so n_non304 stayed 0 and the health-gate positive control failed before the Graph workload. The frozen prereg maps substrate failure to BLOCKED/MEASUREMENT_INVALID rather than FALSIFIES; the missing transaction cannot be interpreted as a negative distributed result. The producer's COMPLETE/MIXED result and its displayed zero/default values are explicitly overturned by audit required_fixes 1-5. The only inherited scientific ceiling is the audited health-gated single-node C-DELTA-REPAIR result in EXP-GRAPH-36018188168, which remains bounded and non-product. The current packet therefore preserves that ceiling, records the distributed transfer as untested, authorizes no product promotion, and waits for a repaired substrate and Global Research Director direction rather than immediately repeating the same failed run.",
+  "evidence_refs": [
+    "research/experiments/EXP-GRAPH-36106653880/request.json:director_mandate.allocation,director_mandate.question,director_mandate.dependencies,parent_handoff",
+    "research/experiments/EXP-GRAPH-36106653880/spec.json:claim_ids,question,measurement_validity V9 V12,decision_rule D1-D7",
+    "research/experiments/EXP-GRAPH-36106653880/prereg.md:sections 3,6,8,13,14",
+    "research/experiments/EXP-GRAPH-36106653880/freeze.json:hashes",
+    "research/experiments/EXP-GRAPH-36106653880/result.json:status,outcome,metrics M-HEALTH-GATE-PASS-DISTR M-NON304-COUNT,observations,validity_notes,unresolved",
+    "research/experiments/EXP-GRAPH-36106653880/provenance.json:environment,execution.substrate_started,execution.health_gate_pass,execution.distributed_measurement_invalid,execution.n_non304",
+    "research/experiments/EXP-GRAPH-36106653880/report.md:summary,distributed substrate,decision rules,validity notes,conclusions",
+    "research/experiments/EXP-GRAPH-36106653880/audit.json:status MEASUREMENT_INVALID,producer_claim_supported false,required_fixes,validity_findings,baseline_findings,recomputed_metrics,claim_ceiling",
+    "research/experiments/EXP-GRAPH-36106653880/raw_evidence/summary.json:health_gate,distributed_status,n_non304,metrics",
+    "research/experiments/EXP-GRAPH-36106653880/raw_evidence/decision.json:decision MIXED,distributed_status",
+    "research/experiments/EXP-GRAPH-36106653880/provenance.json:code_paths",
+    "research/experiments/EXP-GRAPH-36018188168/audit.json:status PASS,claim_ceiling,recomputed_metrics",
+    "research/experiments/EXP-GRAPH-36018188168/handoff.json:carry_forward,established single-node ceiling",
+    "research/experiments/EXP-GRAPH-35952148696/audit.json:status PASS narrow synthetic ceiling",
+    "research/experiments/EXP-GRAPH-35999336958/audit.json:prior operational invalidity boundary",
+    "codex/claim_state.json:C-DELTA-REPAIR EXP-GRAPH-36018188168 EXPERIMENTAL",
+    "codex/index.json:EXP-GRAPH-36018188168 lineage",
+    "src/spider/kernel.py:_matches"
+  ]
+}

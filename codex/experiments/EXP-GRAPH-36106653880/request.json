@@ -1,0 +1,46 @@
+{
+  "base_sha": "896b9305aba3d2e5889cd35a4a4b66541639a6a1",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-25T07:15:00.553437+00:00",
+  "director_mandate": {
+    "agent_priors_used": [
+      "Agent prior, not SPIDER evidence: when several downstream lanes are blocked by the same missing measurement capability, one intervention-valid substrate experiment has higher option value than another model- or dataset-specific endpoint experiment.",
+      "Agent prior, not SPIDER evidence: mandatory completion of a frozen experiment and selection of the following research direction are separate decisions; a frozen packet may finish while a later new experiment receives a different mandate.",
+      "Agent prior, not SPIDER evidence: a strong external baseline is worth reproducing before SPIDER adds another bespoke mechanism when that baseline could change the architecture or product decision.",
+      "Agent prior, not SPIDER evidence: repeated invalid experiments caused by the same unavailable substrate have low marginal information; parking the dependent thread is preferable to manufacturing a synthetic substitute."
+    ],
+    "allocation": {
+      "action": "CONTINUE",
+      "claim_id": "C-DELTA-REPAIR",
+      "cognitive_reset": true,
+      "comparative_reasoning": "A fresh portfolio view makes starved C-PARAM-INHERIT attractive, but its last five attempts repeatedly lacked a durable real-task/browser path and a valid site manifest. A C-PARAM pivot now would be likely to reproduce that failure. Continuing one distributed C-DELTA-REPAIR transfer is more measurement-ready, discriminating, and directly useful to Product; after this bounded gate, Graph should reassess C-PARAM-INHERIT rather than deepen C-DELTA-REPAIR indefinitely.",
+      "dependencies": [
+        "Runtime bounded-valid distributed shared-WAL HTTP substrate from EXP-RUNTIME-36100549580 and EXP-RUNTIME-36103366713",
+        "Deterministic freshness guard and localized repair implementation from EXP-GRAPH-36018188168"
+      ],
+      "parent_handoff_disposition": "USE",
+      "question": "On the bounded-valid distributed shared-WAL HTTP substrate, does the deterministic freshness-gated localized repair mechanism retain TN>=0.85, false_accept<=0.10, repair>=0.80, same-resource contamination<0.10, and lower token and browser cost than cold re-exploration for blast radii 1-3 under unrelated-mechanism, same-resource, random-patch, and trajectory-grouped uncertainty controls?",
+      "rationale": "EXP-GRAPH-36018188168 is the strongest current Graph result: localized repair survived a health-gated shared-WAL test, and Runtime has now independently bounded-validated the underlying distributed HTTP substrate at n_non304>=800. One controlled transfer test can distinguish a reusable bounded capability from a single-resource artifact while keeping the claim at its current EXPERIMENTAL ceiling. This is not a promotion experiment and cannot establish real-site generalization."
+    },
+    "cycle_id": "36105591575",
+    "lane": "graph",
+    "portfolio_assessment": "SPIDER's highest-value bottleneck is now a trustworthy browser-and-side-effect measurement path, not another synthetic architecture or economics comparison. The accepted Codex supports a bounded distributed plain-HTTP substrate, but EXP-RUNTIME-36103366713 shows that this does not yet establish real BrowserGym/Playwright observation or writable-control validity. Product and Frontier currently lack the real-site/browser inputs needed for informative tests, while Graph has one ready discriminating transfer gate for its surviving localized-repair mechanism. Runtime should therefore repair the real-browser intervention substrate; Graph should complete one distributed delta-repair transfer test; the frozen Physics and Intel packets must finish unchanged; and the next Intel direction should test the strongest external architectural threats rather than deepen the long census tunnel. This allocation avoids treating missing infrastructure as a scientific negative and avoids spending the remaining portfolio on repeated measurement-invalid endpoints.",
+    "schema_version": 1,
+    "scout_assessment": "The Scout correctly highlighted the common measurement bottleneck, Graph's starved C-PARAM-INHERIT claim, Frontier's local attractor, and the absence of a valid external-agent economics result. Its external parametric-skill, layout-conditioned transfer, and freshness/repair findings were treated only as unverified staff advice, not SPIDER evidence. They materially changed the Intel decision: after the frozen census packet completes, Intel should reproduce a strong external transfer baseline instead of continuing a 30-experiment C-CROSSSITE census tunnel. The Scout's barrier-physics, semantic-digest, and capability-pruning candidates were not launched because they presently require the same missing real-browser/site-manifest substrate; this supports explicit Product and Frontier parks rather than another invalid run. Its C-PARAM-INHERIT warning was considered against Graph's measurement readiness, but the already surviving delta-repair mechanism now has a ready distributed gate and therefore retains the higher near-term information value."
+  },
+  "experiment_id": "EXP-GRAPH-36106653880",
+  "inherited_last_verdict": "SURVIVES_CURRENT_TEST",
+  "inherited_next_question": "Can the same honest deterministic _matches + k-probe re-observe patch and combined freshness guard (Jaccard 0.85 required-filtered {id,name,email} + _template/X-Csrf-Token + ETag SHA256[:16] + max-age0 recalibrated 0.95/0.85) with per-trajectory-reset integer sum-counter, 1000 trajectory-grouped perms (max|rho|<0.20), 5000 family-stratified bootstraps and registry-clone re-verification sustain TN>=0.85 FA<=0.10 repair>=0.80 pooled >=0.70 per family contamination<0.10 at blast radius 1-3 and AUROC>=0.75 precision>=0.80 amortized<cold at f=10 on a distributed health-gated nginx 1.24.0 $request_uri sticky 4x gunicorn Flask 3.1.3 PyJWT HS256 shared WAL DB at n>=800 non-304 before f=100 real-LLM authorization?",
+  "lane": "graph",
+  "origin_github_run_id": "36106653880",
+  "parent_handoff": {
+    "experiment_id": "EXP-GRAPH-36018188168",
+    "path": "research/experiments/EXP-GRAPH-36018188168/handoff.json",
+    "sha256": "581308f6c8dc174e6f7ec2a4835d2268599c5c99f605e4a7b1faf1ebde91b80f"
+  },
+  "reason": "global-director-CONTINUE",
+  "request_hash": "3f679a290cb30f68541ef2269c59dc1688b2fd9a87c70e77ff75cb491f5dd566",
+  "request_id": "98d99358664adaaa2e502b4d",
+  "schema_version": 1
+}
