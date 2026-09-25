@@ -1,0 +1,26 @@
+{
+ "experiment_id": "EXP-PRODUCT-36089498872",
+ "playwright_version": "1.63.0",
+ "playwright_expected_frozen": "1.63.0",
+ "playwright_launch": "FAILED: 'Page' object has no attribute 'accessibility'",
+ "playwright_ax_nodes_synthetic_60node_dom": null,
+ "playwright_ax_gt_10": null,
+ "browsergym_docker_image_present": false,
+ "docker_pull_result": {
+  "cmd": "docker pull ghcr.io/servicenow/browsergym:0.14.3",
+  "exit": 1,
+  "stdout": "",
+  "stderr": "Error response from daemon: Head \"https://ghcr.io/v2/servicenow/browsergym/manifests/0.14.3\": denied\n"
+ },
+ "ghcr_login": {
+  "cmd": "docker login ghcr.io -u runner --password-stdin",
+  "exit": 1,
+  "stdout": "",
+  "stderr": "Error: Cannot perform an interactive login from a non TTY device\n"
+ },
+ "rho_proxy_real": null,
+ "rho_proxy_real_note": "NULL: OPENAI_API_KEY absent; no real LLM tokens measurable",
+ "safety_CuP": null,
+ "safety_note": "NULL: ST-WebAgentBench CuP requires live BrowserGym pages + LLM execution",
+ "scope": "supplementary honesty signal only; does NOT satisfy frozen MV6 Docker BrowserGym 0.14.3 2000-node CDP getFullAXTree requirement"
+}

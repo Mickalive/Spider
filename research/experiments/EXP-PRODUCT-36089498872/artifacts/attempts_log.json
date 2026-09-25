@@ -1,0 +1,38 @@
+{
+ "experiment_id": "EXP-PRODUCT-36089498872",
+ "docker_browsergym": {
+  "cmd": "docker pull ghcr.io/servicenow/browsergym:0.14.3",
+  "result": {
+   "cmd": "docker pull ghcr.io/servicenow/browsergym:0.14.3",
+   "exit": 1,
+   "stdout": "",
+   "stderr": "Error response from daemon: Head \"https://ghcr.io/v2/servicenow/browsergym/manifests/0.14.3\": denied\n"
+  },
+  "login": {
+   "cmd": "docker login ghcr.io -u runner --password-stdin",
+   "exit": 1,
+   "stdout": "",
+   "stderr": "Error: Cannot perform an interactive login from a non TTY device\n"
+  },
+  "available": false,
+  "detail": "see docker_pull result + login; local image present only if servicenow/browsergym in docker images"
+ },
+ "openai_key": {
+  "present": false,
+  "detail": "ABSENT",
+  "gpt4o_mini_15step": "NOT RUN (OPENAI_API_KEY absent)"
+ },
+ "playwright": {
+  "version": "1.63.0",
+  "frozen_pin": "1.63.0",
+  "launch": "see browser_health",
+  "note": "chromium headless-shell downloaded on this runner"
+ },
+ "browsergym_pip": "MISSING: No package metadata was found for browsergym-core",
+ "kernel_patch": {
+  "working_tree_sha": "d926279d5ee14a044a2f13b8abc09202df9f5adb9e86feaadeb61818a15f4038",
+  "head_sha": "8af66ccfb6f848e1f89805e90a1f52683ee28f62c9dd7b97f9d2762390e7b386",
+  "durable_via_commit": false,
+  "note": "EXECUTE may not commit; durability across clean checkouts uncommitted"
+ }
+}

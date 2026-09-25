@@ -42,6 +42,36 @@ class KernelTests(unittest.TestCase):
         finally:
             td.cleanup()
 
+    def test_dotted_path_parameter_binds(self):
+        """MV3: dot-regex must bind dotted field-path slots and stay
+        UNKNOWN on wrong family. Pattern:
+        _PARAMETER = re.compile(r"\\$\\{([A-Za-z_][A-Za-z0-9_\\.]*)\\}")."""
+        td, reg, kernel = self.make_kernel()
+        try:
+            cases = [
+                ("family_00", "/api/items/${item.id}", "IT-77", "item.id"),
+                ("family_01", "/api/families/${family.id}/items", "fam_03", "family.id"),
+                ("family_02", "https://${site.name}/catalog", "shop07.example.com", "site.name"),
+                ("family_03", "/api/users/${user.profile.id}/profile", "u-9182", "user.profile.id"),
+                ("family_04", "/orders/${order.item.sku}/status", "SKU-42A", "order.item.sku"),
+            ]
+            import spider.kernel as kmod
+            self.assertEqual(kmod._PARAMETER.pattern, r"\$\{([A-Za-z_][A-Za-z0-9_\.]*)\}")
+            for fid, template, value, slot in cases:
+                reg.upsert(Mechanism(
+                    mechanism_id=f"m-{fid}", intent="browse",
+                    preconditions={"family_id": fid}, applicability_guards={"family_id": fid},
+                    action_template={"url": template},
+                    postconditions={"url": template.replace("${" + slot + "}", value)},
+                    parameter_slots=[slot], confidence=0.85))
+                r = kernel.resolve("browse", {"family_id": fid}, {slot: value})
+                self.assertEqual(r.status, ResolutionStatus.EXECUTABLE)
+                self.assertEqual(r.bound_action["url"], template.replace("${" + slot + "}", value))
+                wrong = kernel.resolve("browse", {"family_id": "family_99"}, {slot: value})
+                self.assertEqual(wrong.status, ResolutionStatus.UNKNOWN)
+        finally:
+            td.cleanup()
+
 
 if __name__ == "__main__":
     unittest.main()
