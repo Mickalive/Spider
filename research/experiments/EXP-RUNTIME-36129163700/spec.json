@@ -1,17 +1,133 @@
 {
+  "schema_version": 1,
+  "protocol_version": "SPIDER-RESEARCH-2",
   "experiment_id": "EXP-RUNTIME-36129163700",
   "lane": "runtime",
-  "claim_ids": [],
-  "question": "",
-  "hypothesis": "",
-  "falsifier": "",
-  "baselines": [],
-  "positive_control": "",
-  "null_control": "",
-  "measurement_validity": [],
-  "decision_rule": "",
-  "product_consequence_positive": "",
-  "product_consequence_negative": "",
-  "estimated_cost": "",
-  "expected_information_gain": ""
+  "claim_ids": ["C-MEAS-VALID"],
+  "provenance": {
+    "base_sha": "8bc01342a23fe7a24959d09d8e2556ba2966c7e8",
+    "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+    "parent_handoff_experiment_id": "EXP-RUNTIME-36106663091",
+    "parent_handoff_sha256": "213c6c57a9a089b2159cc0e9ce1819f0165b84a498119ab180cf537d737f87ce"
+  },
+  "question": "Under an explicitly non-vetoing execution order, does the already-certified distributed stable-header shared-WAL plain-HTTP substrate yield a pre-registered intervention-validity result for valid-auth writes and induced representation drift with arm-specific sensitivity and specificity, while independently determining whether a public-API Chromium can perform a real 1280x720 DOM/AX SPA write, whether a fail-closed capability ledger and one-command distributed-substrate bring-up contract can be published, and whether the implementation is durable at HEAD rather than only in the working tree?",
+  "hypothesis": "Primary Part A hypothesis (H1-A-INTERVENTION-VALIDITY): when the controlled session/write boundary and WAL capture are valid, the two planted positive arms (valid-auth marker write and valid-auth induced representation drift) will each be detected at a point rate >=0.90 with a two-sided 95% Wilson lower bound >=0.80, and each of the four matched null arms (read-only, invalid-auth, expired-auth, deleted-session) will have a false-positive rate <=0.10 with a two-sided 95% Wilson lower bound for specificity >=0.80. Part B is a separate capability hypothesis and is not assumed by Part A: a public Playwright API launch of the canonical Chromium, real CDP DOM and Accessibility.getFullAXTree capture, and a reversible valid-auth SPA write are AVAILABLE only if every frozen B gate passes. Part C is a contract hypothesis, not a scientific outcome: one same-run ledger and bring-up command must make capability state machine-readable and fail closed. A capability is durable only when its executable scope exists at HEAD with matching content; an uncommitted worktree reference is never measured as durable.",
+  "falsifier": "For Part A, after all validity gates pass, falsified-in-setting means any positive arm has point sensitivity <0.90 or Wilson lower bound <0.80, or any null arm has point specificity <0.90 or Wilson lower bound <0.80, with all 20 episodes in every arm complete and the scoring detector blind to the condition label. A failed substrate launch, unstable byte capture, missing auth-boundary implementation, missing raw episode, or recomputation mismatch is MEASUREMENT_INVALID or BLOCKED, not falsification. For Part B, failure of public-path resolution, real launch, DOM/AX capture, or the real SPA action is UNAVAILABLE, not falsification of Part A. For Part C, an unavailable required component or an unsatisfied HEAD durability check is a bounded contract/availability result, not a scientific negative and not a reason to erase a valid Part A result.",
+  "baselines": [
+    {
+      "id": "B-WAL-VECTOR",
+      "description": "Primary independent side-effect baseline: raw bytes of /tmp/single.db and /tmp/single.db-wal, length-framed and SHA-256 hashed as the frozen WAL vector; /tmp/single.db-shm is recorded but is not gating because shared-memory lock bytes are ephemeral. The detector compares pre/post vectors after a quiescence barrier and never receives the condition label.",
+      "expected": "P-WRITE and P-DRIFT change the vector; N-READ, N-INVALID, N-EXPIRED and N-DELETED do not."
+    },
+    {
+      "id": "B-LOGICAL-STATE",
+      "description": "Independent semantic baseline: read-only SQL projections of the controlled runtime_probe row and session validity before and after each action, plus the planted value. This separates a real server-state effect from a raw-file hash or cache artifact.",
+      "expected": "Positive readbacks equal the planted unique value; null arms preserve the pre-episode value and session boundary."
+    },
+    {
+      "id": "B-RESPONSE-FINGERPRINT",
+      "description": "Real-response baseline: SHA-256 of status, canonical response body, and sorted stable headers after excluding Date, Server, X-Worker-Pid, X-Cache, Age, Content-Length, ETag, W-ETag and Range; it is used to detect induced representation drift and to diagnose unexpected null drift.",
+      "expected": "P-DRIFT changes the representation fingerprint; same-state read-only repetitions do not."
+    },
+    {
+      "id": "B-STATUS-ONLY",
+      "description": "Deliberately weak diagnostic baseline that compares only HTTP status. It must not be used as the primary intervention detector because a 200/401 split can be a proxy for the assigned condition.",
+      "expected": "Reported for comparison; it may separate status but cannot satisfy the primary semantic-and-side-effect detector alone."
+    },
+    {
+      "id": "B-STATIC-REPEAT-NULL",
+      "description": "No-action capture control: two quiesced WAL-vector captures separated by the frozen 250 ms interval with no request or fixture write. Ten such pairs are required before the matrix.",
+      "expected": "All pairs are byte-identical; any unstable pair invalidates the capture method rather than becoming a false positive."
+    },
+    {
+      "id": "B-NO-SYNTHETIC-FALLBACK",
+      "description": "Negative control against fabricated observations: no synthetic DOM, AX tree, WAL delta, response, credential, package result or network result may be emitted as a substitute for a failed real probe.",
+      "expected": "Any synthetic fallback is MEASUREMENT_INVALID; unavailable facts remain UNAVAILABLE with an artifact and one unblocking action."
+    }
+  ],
+  "positive_control": "PC-A-VALID-WRITE (20 episodes): a valid HS256 token with a live sid is sent through nginx 19851 to POST /runtime/write with op=set_marker and a unique planted value; the independent detector must observe the planted value in a readback and a stable response, and the WAL vector is recorded as a separate side-effect outcome. PC-A-INDUCED-DRIFT (20 episodes): the same valid session sends op=set_representation with a unique planted value; the detector must observe the planted representation in a readback and a changed real response fingerprint, with WAL change recorded independently. PC-B-REAL-BROWSER: one real Chromium launch, DOM/AX capture and reversible valid-auth SPA write through the public API. PC-C-CONTRACT: one same-run machine-readable ledger plus one-command bring-up contract. Durability is not a positive control; it is a separate HEAD comparison.",
+  "null_control": "NC-A-READ-ONLY (20): valid-auth GET /runtime/read with no write operation. NC-A-INVALID-AUTH (20): POST /runtime/write with an invalid bearer token, expected 401 and no state/WAL change. NC-A-EXPIRED-AUTH (20): POST with a correctly signed but expired token, expected 401 and no state/WAL change. NC-A-DELETED-SESSION (20): a correctly signed token whose sid row was deleted during fixture setup before the pre-capture, expected 401/403 and no state/WAL change. NC-A-STATIC-CAPTURE: ten no-action capture pairs. NC-B-NO-SYNTHETIC: no fabricated browser or WAL observation. For every null, the false-positive detector is state_changed OR wal_vector_changed OR (for read-only) response_fingerprint_changed OR unauthorized write accepted; HTTP status alone is not the primary detector.",
+  "measurement_validity": [
+    {
+      "id": "V-SUBSTRATE-CERTIFICATE",
+      "scope": "Part A and Part C",
+      "expected": "The owned 2x gunicorn 23.0.0 workers bind 127.0.0.1:19860 and 127.0.0.1:19861, share the single SQLite WAL at /tmp/single.db with PRAGMA wal_autocheckpoint=0 for the measured window, and are fronted by exclusive nginx on 19851 with one hash $request_uri consistent upstream, real proxy_cache, authorization bypass, and X-Worker-Pid. The readiness contract certifies n_non304>=800 with >=400 per endpoint, distinct X-Worker-Pid>=2, per-URI stickiness>=0.90 over >10 URIs, and no missing worker header on 200 responses.",
+      "failure_class": "BLOCKED or MEASUREMENT_INVALID, never scientific falsification"
+    },
+    {
+      "id": "V-CAPTURE-STABILITY",
+      "scope": "Part A",
+      "expected": "Two no-action WAL captures 250 ms apart are identical before the matrix; every measured episode has a complete pre/post main-file and WAL-file byte capture with no checkpoint or compaction between captures; -shm is recorded diagnostically only.",
+      "failure_class": "MEASUREMENT_INVALID"
+    },
+    {
+      "id": "V-AUTH-SESSION-BOUNDARY",
+      "scope": "Part A and Part B",
+      "expected": "The controlled write route verifies HS256 signature and expiry and requires a live sessions row for sid; invalid, expired and deleted-session attempts return 401/403 before any UPDATE; fixture setup and teardown are outside the measured interval.",
+      "failure_class": "MEASUREMENT_INVALID"
+    },
+    {
+      "id": "V-A-MATRIX-COMPLETE",
+      "scope": "Part A",
+      "expected": "Exactly 20 independently labeled episodes are completed for each of P-WRITE, P-DRIFT, N-READ, N-INVALID, N-EXPIRED and N-DELETED; no retries, imputation, duplicate rows or condition-label leakage into the detector.",
+      "failure_class": "MEASUREMENT_INVALID or BLOCKED; a valid HTTP error with complete captures is scored as a valid false negative/positive, not missing data"
+    },
+    {
+      "id": "V-RECOMPUTE",
+      "scope": "Part A",
+      "expected": "An independent recomputation from raw episode JSONL reproduces every detector bit, numerator, denominator and Wilson interval with zero mismatches; raw observations precede derived metrics.",
+      "failure_class": "MEASUREMENT_INVALID"
+    },
+    {
+      "id": "V-B-PUBLIC-API",
+      "scope": "Part B",
+      "expected": "Only the documented Playwright public API is used: p.chromium.executable_path is preferred; if that public property is absent, public p.chromium.launch() without a private path is the only permitted equivalent and must be independently verified by its public launch receipt. Public launch/context options are recorded; no playwright._impl or other private helper is allowed. The resolved executable is recorded with path, version or file hash and is the canonical Chromium when available.",
+      "failure_class": "B=UNAVAILABLE, not falsification"
+    },
+    {
+      "id": "V-B-REAL-CAPTURE",
+      "scope": "Part B",
+      "expected": "A real 1280x720 Chromium context navigates to the served /runtime/browser surface; page.content(), the CDP DOM snapshot and Accessibility.getFullAXTree are nonempty, actual button interactions produce a server-state readback, and no direct API or synthetic DOM substitutes for the browser action.",
+      "failure_class": "B=UNAVAILABLE; synthetic substitution is MEASUREMENT_INVALID"
+    },
+    {
+      "id": "V-C-LEDGER-SCHEMA",
+      "scope": "Part C",
+      "expected": "capability_ledger.json has a versioned schema, same-run identity, HEAD/worktree provenance, redacted credentials, component status, required-versus-advisory scope, exact commands/ports/WAL schema/health checks/floors, evidence paths and hashes, freshness timestamps and one smallest unblocking action for every UNAVAILABLE component.",
+      "failure_class": "C=BLOCKED or UNAVAILABLE, never scientific falsification"
+    },
+    {
+      "id": "V-DUR-HEAD",
+      "scope": "Durability",
+      "expected": "The frozen executable durability scope is research/experiments/EXP-RUNTIME-36129163700/run_experiment.py and research/runtime/bringup.py; the declarative research/experiments/EXP-RUNTIME-36129163700/bringup_contract.json is also hash-recorded. For every executable path, HEAD contains the path and its blob/content hash equals the measured worktree file; generated/untracked capability files do not count as durable. A content-addressed export is REFERENCE_ONLY unless an authorized commit/merge path is documented.",
+      "failure_class": "DURABILITY=UNSATISFIABLE; no durable-measurement claim, but no falsification of Part A"
+    },
+    {
+      "id": "V-SECRET-REDACTION",
+      "scope": "Parts B and C",
+      "expected": "Raw artifacts and ledger contain credential presence and references, never secret values; public browser executable paths and package versions are recorded without private tokens.",
+      "failure_class": "MEASUREMENT_INVALID"
+    }
+  ],
+  "decision_rule": {
+    "primary_estimand": "The primary Part A estimand is the arm-constrained joint confusion-matrix result: sensitivity of P-WRITE and P-DRIFT and specificity of N-READ, N-INVALID, N-EXPIRED and N-DELETED, each computed over 20 frozen episodes with a two-sided 95% Wilson interval. Pooled sensitivity/specificity are descriptive only and cannot mask a failed arm.",
+    "part_A_support": "If V-SUBSTRATE-CERTIFICATE, V-CAPTURE-STABILITY, V-AUTH-SESSION-BOUNDARY, V-A-MATRIX-COMPLETE and V-RECOMPUTE pass, and each positive arm has point sensitivity >=0.90 with Wilson lower bound >=0.80, and each null arm has point specificity >=0.90 with Wilson lower bound >=0.80, with ci_hi>ci_lo, then A=SUPPORTS. This is bounded to the exact two-worker localhost shared-WAL fixture and does not validate browser, TLS, HTTP/2, multi-host or real-site behavior.",
+    "part_A_falsify": "If all Part A validity controls pass but any arm misses its point or lower-bound threshold, A=FALSIFIES in setting. The result must name the failed arm; no null may be relabeled as unavailable after seeing its value.",
+    "part_A_invalid_or_blocked": "A missing substrate, missing raw capture, unstable no-action capture, absent auth boundary, or recomputation mismatch is MEASUREMENT_INVALID; an unstartable prerequisite is BLOCKED. Neither is a negative scientific result. A valid HTTP error with complete raw captures remains a scored observation.",
+    "part_B": "B=AVAILABLE only if the public API path, real 1280x720 launch, DOM, Accessibility.getFullAXTree, real valid-auth SPA write, logical readback, reversible restore and all four null WAL checks pass. Any absent browser/dependency/launch/DOM/AX/action capability is B=UNAVAILABLE with exact artifact and one smallest action; B cannot veto A. A synthetic substitute or contract violation is MEASUREMENT_INVALID.",
+    "part_C": "C is a same-run machine-readable ledger plus one-command contract, with explicit required/advisory scopes. It may be AVAILABLE for runtime.A while optional browser, AgentLab, model-credential, HF or GHCR components are UNAVAILABLE. A required component failure makes the contract fail closed for the scope that requires it and is not a scientific falsification.",
+    "durability": "DURABILITY=SATISFIED only for capabilities in the frozen scope whose HEAD blobs match the measured files. If the required HEAD condition is false under the no-commit lane workflow, report UNSATISFIABLE and a content-addressed REFERENCE_ONLY receipt; the smallest sanctioned repair is an already-HEAD implementation or an authorized commit/merge workflow followed by a new run, never an in-place uncommitted measurement.",
+    "precedence": [
+      "A is primary and is evaluated independently of browser and optional capability probes.",
+      "B failure or UNAVAILABLE never changes A's raw evidence, derived metrics or validity status.",
+      "C failure never converts A into falsification; it only prevents downstream lanes from accepting the contract for the failed required scope.",
+      "A missing-data result cannot be reported as a null success; all missing fields remain null with an UNKNOWN control and a validity note.",
+      "A valid negative is COMPLETE with outcome FALSIFIES or MIXED; infrastructure failure is BLOCKED or MEASUREMENT_INVALID."
+    ],
+    "top_level_result_mapping": "If A was validly measured, producer status is COMPLETE even when B is UNAVAILABLE; A and B/C statuses remain separate fields and the unresolved browser fact is explicit. If A cannot start because the substrate is unavailable, status is BLOCKED and outcome is INCONCLUSIVE, not FALSIFIES. If raw A data exist but validity fails, status is MEASUREMENT_INVALID. No stage self-promotes C-MEAS-VALID to VALIDATED or PRODUCT_CORE."
+  },
+  "product_consequence_positive": "A bounded positive A result would make the distributed shared-WAL intervention matrix a candidate audited substrate for later Runtime/Graph/Product/Physics/Frontier preregistrations that explicitly require its controls; it would not by itself establish browser generalization, real-site validity, downstream scientific claims, Product Core, or shipping readiness. A B=AVAILABLE result would only establish a real public-API Chromium capability fact, and C=AVAILABLE would only establish a reusable same-run contract for declared required scopes. A later independent Director verdict is required for any registry or product change.",
+  "product_consequence_negative": "A valid Part A failure would bound the current stable-header shared-WAL/auth-session intervention mechanism as falsified in this exact setting and direct redesign toward an independently auditable session/write boundary or alternative side-effect oracle; it would not close the broader measurement-validity domain. B=UNAVAILABLE would leave browser-dependent questions UNKNOWN while preserving a valid A result. C or durability failure would block reuse of the affected contract/capability and require the exact recorded unblocking action; a worktree-only implementation must never be advertised as durable or measured as such.",
+  "estimated_cost": "Medium and bounded: one idempotent two-worker/nginx bring-up, a deterministic readiness certificate (target 850 non-304 observations with certified minimum 800 and 400 per endpoint), 120 Part A episodes across six arms, ten no-action capture pairs, one real-browser probe, one ledger/contract invocation, and a HEAD/worktree durability comparison. No full C1-C8 browser composite, k-means, TLS/HTTP2, multi-host or real-site benchmark is included. Browser/network/model credentials are optional capability probes unless a declared scope requires them.",
+  "expected_information_gain": "Very high and decision-relevant. It directly tests the registry next gate—writable/auth/session/drift controls—on the already-certified distributed plain-HTTP substrate while preventing a browser provisioning failure from destroying the measurement. A valid positive or valid negative can change the next substrate architecture and the set of lanes that may safely preregister a precondition. The same run also resolves the contradictory Codex capability probes and distinguishes a reproducible reference artifact from a HEAD-durable capability, information not obtainable by another full browser composite."
 }
