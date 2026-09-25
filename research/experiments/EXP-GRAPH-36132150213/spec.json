@@ -1,17 +1,126 @@
 {
   "experiment_id": "EXP-GRAPH-36132150213",
   "lane": "graph",
-  "claim_ids": [],
-  "question": "",
-  "hypothesis": "",
-  "falsifier": "",
-  "baselines": [],
-  "positive_control": "",
-  "null_control": "",
-  "measurement_validity": [],
-  "decision_rule": "",
-  "product_consequence_positive": "",
-  "product_consequence_negative": "",
-  "estimated_cost": "",
-  "expected_information_gain": ""
+  "claim_ids": ["C-FRESHNESS"],
+  "question": "On the certified distributed shared-WAL HTTP substrate (nginx 1.24.0 $request_uri sticky, 4x gunicorn Flask 3.1.3 PyJWT HS256, shared SQLite WAL, real If-None-Match/ETag 304, X-Worker-Pid spread verified) with Runtime's one-command bring-up contract as mandatory precondition, can the deterministic response-derived freshness guard (Jaccard 0.85 over required DOM fields, endpoint _template drift, X-Csrf-Token drift, ETag + Cache-Control max-age=0 signal) achieve true-negative rate >= 0.85 (Wilson lower > 0.75), calibrated false-accept rate <= 0.10, UNKNOWN precision >= 0.85, global and per-class ECE <= 0.15 (bootstrap upper <= 0.18), with non-degenerate trajectory-grouped uncertainty at ~15% stale prevalence, across session/token rotation, endpoint parameter/header mutation, and conditional-request 304 revalidation modalities, versus no-guard and single-signal baselines, with browser-observed DOM/AX validation ONLY if Runtime certifies a launchable Chromium at 1280x720 with CDP Accessibility.getFullAXTree?",
+  "hypothesis": "The deterministic multi-signal freshness guard (Jaccard 0.85 + endpoint template drift + X-Csrf-Token drift + ETag+Cache-Control max-age=0) will correctly classify fresh responses as EXECUTABLE (true-negative rate >= 0.85, Wilson lower > 0.75) and stale responses as UNKNOWN (false-accept rate <= 0.10) on the certified distributed substrate, with calibrated UNKNOWN precision >= 0.85 and ECE <= 0.15 globally and per-class. No-guard baseline will show false-accept rate ~1.0; single-signal baselines (Jaccard-only, header-only) will have higher false-accept or lower true-negative rates. The guard will discriminate across all three staleness modalities (session/token rotation, parameter/header mutation, 304 revalidation). Browser-observed DOM/AX validation is conditional on Runtime capability ledger certification.",
+  "falsifier": "The freshness guard fails to achieve ANY of the primary thresholds on the certified distributed substrate: true-negative rate Wilson lower <= 0.75, OR false-accept rate > 0.10, OR UNKNOWN precision < 0.85, OR global ECE > 0.15 (bootstrap upper > 0.18), OR per-class ECE > 0.15, OR trajectory-grouped uncertainty degenerate (max|rho| >= 0.20). OR the substrate fails to start (substrate_started=false) or health gate fails (health_gate_pass=false), in which case the experiment is MEASUREMENT_INVALID with the exact blocking artifact recorded — NOT a scientific negative.",
+  "baselines": {
+    "B-NO-GUARD": {
+      "id": "B-NO-GUARD",
+      "description": "No freshness guard: always returns EXECUTABLE regardless of response signals",
+      "implementation": "Resolver ignores all freshness signals; mechanism resolution depends only on preconditions, applicability guards, and confidence threshold",
+      "expected_behavior": "True-negative rate = 1.0 on fresh (trivially), false-accept rate = 1.0 on stale (always accepts stale as fresh), UNKNOWN precision = 0.0, ECE = maximal miscalibration"
+    },
+    "B-JACCARD-ONLY": {
+      "id": "B-JACCARD-ONLY",
+      "description": "Single-signal Jaccard guard: flags stale only when Jaccard similarity over required DOM fields drops below 0.85",
+      "implementation": "spider_stale = (jaccard < 0.85); ignores endpoint _template, X-Csrf-Token, ETag, Cache-Control",
+      "expected_behavior": "Moderate true-negative rate on fresh, high false-accept on parameter/header mutation and cache_expiry families (Jaccard unchanged), UNKNOWN precision < 0.85"
+    },
+    "B-HEADER-ONLY": {
+      "id": "B-HEADER-ONLY",
+      "description": "Single-signal header guard: flags stale on endpoint _template drift OR X-Csrf-Token drift OR (ETag change AND Cache-Control max-age=0)",
+      "implementation": "spider_stale = param_changed or csrf_changed or (etag_changed and cache_expiry); ignores Jaccard DOM similarity",
+      "expected_behavior": "Good on param_header_mutation and cache_expiry families, poor on dom_drift (DOM changes but headers stable), UNKNOWN precision may exceed 0.85 on some families but not all"
+    }
+  },
+  "positive_control": {
+    "id": "PC-FRESH-EXECUTION",
+    "description": "Fresh trajectories (stable family, noise families, req_num <= 3) must resolve EXECUTABLE with verified postconditions",
+    "expected_behavior": "Success rate = 1.0, all fresh requests return EXECUTABLE, verification passes, cost = 4 HTTP requests per trajectory",
+    "failure_mode": "If fresh execution fails, the substrate or guard logic is broken; experiment is MEASUREMENT_INVALID"
+  },
+  "null_control": {
+    "id": "NC-NOISE-IMMUNITY",
+    "description": "Noise families (noise_A_phone, noise_B_nickname, noise_C_null) with optional churn fields must NOT trigger freshness guard on fresh requests",
+    "expected_behavior": "False-accept rate <= 0.05 on noise families (Wilson upper), all resolve EXECUTABLE, zero contamination",
+    "failure_mode": "If noise triggers stale detection, guard is oversensitive to benign variation; experiment fails safety gate"
+  },
+  "measurement_validity": [
+    "V1_SUBSTRATE_STARTED: Distributed substrate MUST start successfully (nginx + 4x gunicorn workers + shared WAL SQLite). substrate_started=true logged as RAW OBSERVATION before any metric.",
+    "V2_HEALTH_GATE_PASS: Health gate MUST pass (WAL_MODE=wal, JWT_VERIFY_PASS, 304_OPERATIONAL, sticky_consistent with >=2 distinct X-Worker-Pid values, n_non304 >= 800). health_gate_pass=true logged as RAW OBSERVATION.",
+    "V3_N_NON304_FLOOR: Workload MUST achieve n_non304 >= 800 non-304 responses. Achieved n_non304 logged as RAW OBSERVATION.",
+    "V4_WORKER_PID_SPREAD: >=2 distinct X-Worker-Pid values across 20+ URIs verifying $request_uri sticky routing. Distinct count logged as RAW OBSERVATION.",
+    "V5_PREVALENCE: Stale prevalence approximately 15% (50 stale / ~350 fresh+stale total). Exact prevalence logged; no rebalancing without disclosure.",
+    "V6_HONEST_COST: Integer per-request sum-counter (4 for standard, 5 for probe). No jitter, proxy counters, or bijective parity masking. All costs trajectory-reset.",
+    "V7_TRAJECTORY_GROUPED_UNCERTAINTY: All permutations and bootstraps grouped by trajectory_id (family-stratified). max|rho| < 0.20 between cost and outcome under trajectory shuffle.",
+    "V8_DETERMINISTIC_VERIFICATION: _matches() exact equality on required postcondition slots. No simulated or mocked verification.",
+    "V9_REAL_SUBSTRATE: No synthetic alias fixtures, no jittered/proxy cost counters, no prevalence rebalancing without disclosure, no default-filled metrics. Every metric computed from raw evidence or explicitly UNKNOWN.",
+    "V10_BROWSER_CONDITIONAL: Browser-observed DOM/AX validation ONLY if Runtime capability ledger certifies launchable Chromium 1280x720 with CDP Accessibility.getFullAXTree. If not certified, browser quantities reported UNKNOWN with explicit reason.",
+    "V11_CONDITIONAL_304: 304 responses are FRESH by definition (guard returns EXECUTABLE, Jaccard=1.0). 304 operational verified in health gate.",
+    "V12_STALE_GROUND_TRUTH: Stale ground truth defined by drift families at req_num >= 6 (DRIFT_POINT). Fresh ground truth = stable/noise families + req_num < 6 on drift families. No label leakage from server to client."
+  ],
+  "decision_rule": {
+    "type": "conjunctive",
+    "conditions": [
+      {
+        "id": "D1_TN_WILSON_LOWER",
+        "metric": "M-TN-POOLED-WILSON-LOWER",
+        "threshold": "> 0.75",
+        "description": "Pooled true-negative rate Wilson lower bound must exceed 0.75 (point estimate >= 0.85)"
+      },
+      {
+        "id": "D2_FA_WILSON_UPPER",
+        "metric": "M-FALSE-ACCEPT-POOLED-WILSON-UPPER",
+        "threshold": "<= 0.10",
+        "description": "Pooled false-accept rate Wilson upper bound must not exceed 0.10"
+      },
+      {
+        "id": "D3_UNKNOWN_PRECISION",
+        "metric": "M-UNKNOWN-PRECISION-POOLED",
+        "threshold": ">= 0.85",
+        "description": "UNKNOWN precision (TP / (TP + FP) on stale) pooled must be >= 0.85"
+      },
+      {
+        "id": "D4_ECE_GLOBAL",
+        "metric": "M-ECE-GLOBAL",
+        "threshold": "<= 0.15",
+        "description": "Global Expected Calibration Error must be <= 0.15"
+      },
+      {
+        "id": "D5_ECE_GLOBAL_BOOTSTRAP_UPPER",
+        "metric": "M-ECE-GLOBAL-BOOTSTRAP-97.5",
+        "threshold": "<= 0.18",
+        "description": "Global ECE bootstrap 97.5th percentile must be <= 0.18"
+      },
+      {
+        "id": "D6_ECE_PER_CLASS",
+        "metric": "M-ECE-PER-CLASS-MAX",
+        "threshold": "<= 0.15",
+        "description": "Maximum per-class (fresh/stale) ECE must be <= 0.15"
+      },
+      {
+        "id": "D7_TRAJECTORY_RHO",
+        "metric": "M-MAX-ABS-RHO",
+        "threshold": "< 0.20",
+        "description": "Trajectory-grouped max absolute Pearson rho between cost and outcome under shuffle must be < 0.20"
+      },
+      {
+        "id": "D8_POSITIVE_CONTROL",
+        "metric": "M-PC-FRESH-SUCCESS-RATE",
+        "threshold": "== 1.0",
+        "description": "Positive control fresh execution success rate must be exactly 1.0"
+      },
+      {
+        "id": "D9_NULL_CONTROL",
+        "metric": "M-NC-NOISE-FA-WILSON-UPPER",
+        "threshold": "<= 0.05",
+        "description": "Null control noise family false-accept Wilson upper bound must be <= 0.05"
+      }
+    ],
+    "outcome_mapping": {
+      "ALL_PASS_SUBSTRATE_UP": "SUPPORTS",
+      "ANY_D1_D9_FAIL": "FALSIFIES",
+      "POSITIVE_CONTROL_FAIL": "MEASUREMENT_INVALID",
+      "NULL_CONTROL_FAIL": "FALSIFIES",
+      "SUBSTRATE_NOT_STARTED": "MEASUREMENT_INVALID",
+      "HEALTH_GATE_FAIL": "MEASUREMENT_INVALID",
+      "INCOMPLETE_DATA": "INCONCLUSIVE"
+    }
+  },
+  "product_consequence_positive": "C-FRESHNESS advances from HYPOTHESIS toward EXPERIMENTAL: deterministic multi-signal freshness guard achieves calibrated detection on certified distributed HTTP substrate. This unblocks C-DELTA-REPAIR (repair presupposes detection), calibrated abstention for C-SEMANTIC-RESOLVE, safe inherited execution for C-PARAM-INHERIT and C-LLM-INHERIT, and honest cost accounting for C-PRODUCT-ECON. Next gate: real browser DOM/AX validation (conditional), session/auth drift modalities, cross-site holdout.",
+  "product_consequence_negative": "C-FRESHNESS remains HYPOTHESIS or BLOCKED. The deterministic guard fails on the strongest reachable real substrate. Graph must either (a) redesign the freshness signal set (add DOM structural, timing, visual signals), (b) accept that HTTP-layer freshness is insufficient and browser-observed channel is mandatory (blocked on Runtime capability ledger), or (c) pivot to a different staleness detection approach. Downstream claims C-DELTA-REPAIR, C-SEMANTIC-RESOLVE, C-PARAM-INHERIT, C-LLM-INHERIT, C-PRODUCT-ECON remain dependency-gated. No product promotion of freshness-dependent capabilities.",
+  "estimated_cost": "Moderate: certified distributed substrate (nginx + 4x gunicorn + shared WAL), ~400 HTTP requests workload, 5000 bootstrap iterations trajectory-grouped, no LLM, no browser unless Runtime certifies. ~1-2 compute-hours.",
+  "expected_information_gain": "Very high: this is the program's starved safety gate (0 recent experiments across all owner lanes for C-FRESHNESS). A clean result changes whether ANY downstream inheritance claim is interpretable. Uses Runtime's retained distributed substrate validity ceiling; does not depend on broken Playwright or browser automation. Directly tests the missing modalities (session/token, param/header, 304) that prior distributed attempts could not measure."
 }
