@@ -1,0 +1,54 @@
+{
+  "experiment_id": "EXP-PRODUCT-36129169543",
+  "lane": "product",
+  "claim_ids": ["C-PRODUCT-ECON"],
+  "question": "What does SPIDER's honest end-to-end accounting need in order to become decidable, and what is the break-even reuse count on the work that can actually be measured today?",
+  "hypothesis": "An end-to-end evaluation harness with frozen arm set (SPIDER inheritance with freshness gating + localized repair, B-COLD, B-INSTRUCTIONS, B-RAG-EMBED k=5, deterministic compiled executor), per-trajectory hard-reset integer counters (resolve, bind, verify, freshness, repair, browser_steps, requests, latency), family-stratified trajectory-grouped bootstrap + block-permutation CIs, and a fail-closed arm gate (marks arm UNKNOWN when prerequisite capability absent) can be built, unit-tested, and dry-run on a deterministic scripted policy against the certified real distributed substrate. From the measurable non-token work (build, verification, serving costs), the break-even reuse count f* at which inherited execution's amortized build+verification cost is repaid can be computed, and the single measured quantity that most changes f* can be identified. Token-denominated economics are NOT_APPLICABLE and UNKNOWN until a policy-model credential exists.",
+  "falsifier": "Any of: (1) the harness cannot be built with all five arms and all eight counter paths executing without error on the deterministic scripted policy; (2) the dry-run on the certified distributed substrate fails to execute end-to-end for any arm; (3) the fail-closed gate does not correctly mark arms UNKNOWN when prerequisites are absent; (4) the break-even reuse count f* cannot be computed from measured non-token work; (5) the single quantity most changing f* cannot be identified. Token economics are explicitly excluded from falsification (declared NOT_APPLICABLE/UNKNOWN).",
+  "baselines": {
+    "B-COLD": "Cold exploration with no inherited knowledge; per-trajectory reset counters for all eight metrics",
+    "B-INSTRUCTIONS": "Static natural-language instructions only; no mechanism inheritance; same counter paths",
+    "B-RAG-EMBED": "Embedding-based retrieval (TAU=0.30, QCR k=5) with honest retrieval/verify counters; 200 token retrieval + 150ms verify cost model",
+    "B-DETERMINISTIC-EXECUTOR": "No-memory deterministic compiled executor (Frontier's null against SPIDER's premise); zero inheritance overhead, exact replay only; serves as primary control for inheritance value"
+  },
+  "positive_control": {
+    "id": "PC-INSTRUMENT-CORRECTNESS",
+    "description": "Deterministic scripted policy on certified distributed substrate executes all five arms through all eight counter paths end-to-end, with fail-closed gates marking arms UNKNOWN (never surrogate-filled, never default-filled) when prerequisites are absent. Proves instrument correctness only — NOT a scientific or product result.",
+    "expected_behavior": "All arms execute; counters increment per trajectory; bootstrap/permutation CIs compute; UNKNOWN gates fire correctly for missing BrowserGym/credentials; no arm crashes or surrogate-fills",
+    "pass_criteria": "100% arm execution completion; zero surrogate fills; zero default fills; all eight counter paths non-zero for at least one arm; family-stratified B=5000 bootstrap + B=5000 block-permutation CIs compute without error"
+  },
+  "null_control": {
+    "id": "NC-SHUFFLED-FAMILY-STRATIFIED",
+    "description": "Family-stratified trajectory-grouped block permutation (B=5000) on deterministic scripted policy trajectories to verify null distribution of counter deltas and correlation structure. Shuffled rho_shuffled and rho_length must satisfy |rho|<0.20 per stratum with block-permutation p>=0.20.",
+    "expected_behavior": "On deterministic scripted policy, shuffled correlations near zero; block-permutation p-values >=0.20; no deterministic coupling from counter formulas",
+    "pass_criteria": "|rho_shuffled|<0.20 per stratum; block_permutation p>=0.20 per stratum; |rho_length|<0.20 per stratum"
+  },
+  "measurement_validity": [
+    "Harness must execute on certified real distributed substrate (single-node HS256 sticky, n_non304>=360 stratified, TN>=0.85, WAL single-worker, ETag W/body_sha conditional probe) — already validated in EXP-PRODUCT-36095578013",
+    "All five arms must share identical model/tools/budget configuration (deterministic scripted policy for this experiment)",
+    "Per-trajectory hard reset: integer sum counters for resolve, bind, verify, freshness, repair, browser_steps, requests, latency — no jitter, no n*3200 bijective proxy, no f*6.0 scaling",
+    "Family-stratified trajectory-grouped bootstrap (B=5000) and block-permutation (B=5000) for all CIs",
+    "Fail-closed arm gate: any arm whose prerequisite capability is absent (BrowserGym, OPENAI_API_KEY, playwright, etc.) is marked UNKNOWN — never surrogate-filled, never default-filled",
+    "Token-denominated economics explicitly NOT_APPLICABLE and UNKNOWN — no token counters, no token costs, no token Pareto claims",
+    "Break-even reuse count f* computed ONLY from measurable non-token work: build cost (mechanism distillation + registry construction), verification cost (auditor + probe), serving cost (lookup + bind + conditional fetch)"
+  ],
+  "decision_rule": {
+    "part_a_harness": "PASS iff: all 5 arms implemented; all 8 counter paths increment per trajectory; fail-closed UNKNOWN gate implemented and tested; unit tests cover each arm + counter + gate; no surrogate/default fills in unit tests",
+    "part_b_dryrun": "PASS iff: deterministic scripted policy executes on certified distributed substrate; all 5 arms complete; all 8 counters recorded per trajectory; bootstrap/permutation CIs compute; UNKNOWN gates fire for BrowserGym/credentials; zero crashes; zero surrogate fills; result.json explicitly states 'instrument correctness ONLY — not a scientific or product result'",
+    "part_c_breakeven": "PASS iff: f* computed from measured build/verification/serving non-token work; single quantity most changing f* identified via sensitivity analysis; f* reported with explicit formula and measured inputs; token economics declared NOT_APPLICABLE/UNKNOWN",
+    "overall": "EXPERIMENT COMPLETE iff all three parts PASS. Outcome = SUPPORTS if instrument decidable and f* computable; FALSIFIES if any part fails validly; MEASUREMENT_INVALID if infrastructure failure (not scientific falsification)"
+  },
+  "product_consequence_positive": "If all three parts PASS: (1) Product obtains a frozen, unit-tested, dry-run-verified end-to-end accounting instrument that converts the next unblocking event (credential/substrate) into a run rather than an infrastructure cycle; (2) The break-even reuse count f* and its sensitivity are known — the decisive product number that the entire thesis turns on; (3) C-PRODUCT-ECON advances from HYPOTHESIS toward EXPERIMENTAL on instrument readiness (not economics result); (4) No PRODUCT_CORE promotion — this is an instrument deliverable, not an economics result; (5) The superseded full Pareto packet (EXP-PRODUCT-36095578013) remains superseded; no further full C-PRODUCT-ECON Pareto packet frozen until Runtime capability ledger reports usable policy model and certified browser",
+  "product_consequence_negative": "If any part FAILS validly (not infrastructure): (1) The specific failure mode is diagnosed (which arm, which counter, which gate, which substrate dependency); (2) The minimal fix is identified; (3) C-PRODUCT-ECON remains HYPOTHESIS with instrument gap documented; (4) Product lane does NOT retry full Pareto — the Director's mandate explicitly supersedes it; (5) Next cycle either retries the failed instrument component or PARKS product economics pending Runtime capability ledger",
+  "estimated_cost": {
+    "harness_build_hours": 4,
+    "unit_test_hours": 2,
+    "dryrun_substrate_hours": 1,
+    "breakeven_compute_hours": 1,
+    "total_estimate_hours": 8,
+    "no_llm_calls": true,
+    "no_browser_automation": true,
+    "no_external_credentials": true
+  },
+  "expected_information_gain": "HIGH — This is the smallest high-information experiment that can change a product decision. It delivers the decisive instrument (decidable accounting) and the decisive number (break-even f*) without requiring any unavailable credentials or substrates. Twelve consecutive MEASUREMENT_INVALID C-PRODUCT-ECON packets failed because they chased Pareto economics on absent substrate. This experiment computes the amortization denominator that all twelve tried to estimate indirectly. A valid negative (instrument gap found) is still decisive — it tells exactly what must be fixed before any economics measurement can be valid. Token economics correctly declared NOT_APPLICABLE/UNKNOWN avoids the credential trap."
+}

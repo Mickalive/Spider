@@ -1,0 +1,297 @@
+{
+ "schema_version": 1,
+ "experiment_id": "EXP-PRODUCT-36129169543",
+ "lane": "product",
+ "stage": "EXECUTE",
+ "github": {
+  "run_id": 36129169543,
+  "run_number": 1175,
+  "workflow": "Mickalive/Spider/.github/workflows/spider-lane.yml@refs/heads/main",
+  "event": "workflow_dispatch",
+  "repository": "Mickalive/Spider",
+  "workflow_sha": "8bc01342a23fe7a24959d09d8e2556ba2966c7e8",
+  "local_head": "c49119ab0dbc7896037dd32791740751f18d36fd",
+  "local_head_subject": "R2 product: execution base EXP-PRODUCT-36129169543"
+ },
+ "commits": {
+  "execution_base": "c49119ab0dbc7896037dd32791740751f18d36fd",
+  "freeze_commit": "876a15a6",
+  "allocation_commit": "2a9a5ffb",
+  "pre_existing_uncommitted_not_touched": [
+   "SPIDER_CODEX.md",
+   "codex/claim_state.json",
+   "codex/index.json"
+  ],
+  "kernel_dot_regex_patch_present": false,
+  "kernel_working_tree_sha256": "46929b3a951df48d7f9d1fd850871073c0d91c1868aa117e13d389fe274e8d61"
+ },
+ "frozen_design": {
+  "request.json": "8e21d1456b8390f1a89d87cfee2b0f3158757d81afe9987cc65ac6f4ecdaf703",
+  "spec.json": "788562e681fc2a7f7927a6216ea39e9f8ca42bf49276fe38f43497b28c267195",
+  "prereg.md": "e7e282bc86120f2b6c63c131af7c12db40733e8d6248f9e514cb708c0f594ac8",
+  "freeze.json": "506d3ee1aaeefdd2217b0f008a559802672e0018168fd181c45eee8670b3ca2e",
+  "immutable": true
+ },
+ "datasets_and_fixtures": {
+  "holdout_manifest": {
+   "path": "research/experiments/EXP-PRODUCT-36129169543/fixtures/webarena_verified_v2_tasks_192_36_rebuilt.json",
+   "sha256": "101e481ddb610df9598b0e3e5650e8c163ec7cbdc4679c5efc1e31104b3074c5",
+   "n_tasks": 192,
+   "n_families": 36,
+   "provenance": "inherited from parent EXP-PRODUCT-36095578013 fixtures (unchanged)"
+  },
+  "qcr_bank_manifest": {
+   "path": "research/experiments/EXP-PRODUCT-36129169543/fixtures/qcr_bank_manifest.json",
+   "sha256": "8c69804b249ec9c84cf05d86a21c7ebe7a31af5f8d45e50a4e6d477b449f9f58",
+   "provenance": "inherited from parent EXP-PRODUCT-36095578013 fixtures (unchanged)"
+  }
+ },
+ "code_paths": {
+  "harness": {
+   "path": "src/spider/eval_harness.py",
+   "sha256": "74f1163b7dd62021d6b2134b991bca7e367ce7587b777d903ec86dd62b8691b5",
+   "role": "Part A deliverable (registry-allowed code root)"
+  },
+  "unit_tests": {
+   "path": "tests/test_eval_harness.py",
+   "sha256": "29e409e28ea22b70967bac0a62319891b8b6281943d74558edbc15ebf4a4b477"
+  },
+  "runner": {
+   "path": "research/experiments/EXP-PRODUCT-36129169543/run_dryrun.py",
+   "sha256": "6f0d578527d30582eff7b54bb971cc7c0345fb0a95c4f3fe41c260df6776528d"
+  },
+  "substrate_app": {
+   "path": "research/experiments/EXP-PRODUCT-36129169543/run_dryrun.py",
+   "note": "substrate APP_PY/NGINX_CONF are generated inside the runner from the parent-certified EXP-PRODUCT-36095578013 service definition (HS256 sticky single-node), experiment-local secret spider-exp-36129169543-hs256-secret, ports 18929 (gunicorn) / 18930 (nginx), DB /tmp/spider-runtime/shared.db"
+  }
+ },
+ "environment": {
+  "python": "3.12.14",
+  "platform": "Linux-6.17.0-1022-azure-x86_64-with-glibc2.39",
+  "nginx": "1.24.0 (Ubuntu)",
+  "flask": "3.1.3",
+  "gunicorn": "23.0.0",
+  "pyjwt": "2.14.0",
+  "openai_api_key_present": false,
+  "browsergym_present": false,
+  "playwright_present": false,
+  "docker_present": true,
+  "installed_by": "dependency bootstrap inside runner; attempt 1 performed the installs (attempt 2 recorded install=null, missing_pins=[])"
+ },
+ "exact_commands": [
+  "PYTHONPATH=src python3 -m unittest discover -s tests -v",
+  "python3 research/experiments/EXP-PRODUCT-36129169543/run_dryrun.py"
+ ],
+ "attempts": [
+  {
+   "attempt": 1,
+   "part_a_pass": false,
+   "part_b_pass": true,
+   "part_c_pass": true,
+   "started_at": "2026-09-25T13:04:16Z",
+   "finished_at": "2026-09-25T13:04:56Z",
+   "disposition": "archived verbatim under artifacts/attempt1/; failed frozen Part A all_eight_counter_paths_nonzero (repair=0) due to bump-key defect; not discarded",
+   "metrics_summary_sha256": "75b3e0e71b35d6ae4b53b48ab083e1d826f393edf0497f53ebbfe98bb358f2d1",
+   "trajectories_sha256": "17a5c726cb8c58995afe81e69663ca6f5d651b45c7447f43bada2c7a87047348"
+  },
+  {
+   "attempt": 2,
+   "part_a_pass": true,
+   "part_b_pass": true,
+   "part_c_pass": true,
+   "started_at": "2026-09-25T13:10:54Z",
+   "finished_at": "2026-09-25T13:11:35Z",
+   "disposition": "reporting attempt; triggered by attempt-1 Part A defect fix only (no gate/threshold/statistic/control changes); no third attempt was run",
+   "metrics_summary_sha256": "ac18c5eac5a44e5ad3845b47a0b0a326a2c01de6244d5b71329c71e4957934fb"
+  }
+ ],
+ "post_hoc_supplements": [
+  {
+   "artifact": "research/experiments/EXP-PRODUCT-36129169543/artifacts/derived/f_bytes_ci_supplement.json",
+   "what": "paired family-stratified bootstrap CI for the primary bytes f* (B=5000, seed=42, attempt-2 trajectories)",
+   "why": "uncertainty quantification of the primary estimate; not an input to any frozen gate"
+  },
+  {
+   "artifact": "research/experiments/EXP-PRODUCT-36129169543/artifacts/raw/trace_file_correction.json",
+   "what": "verified byte-prefix split of the mixed attempt1+attempt2 request trace",
+   "why": "correct a raw-evidence hygiene defect (wrong unlink path in archival step); measurements never depended on the trace file"
+  },
+  {
+   "artifact": "research/experiments/EXP-PRODUCT-36129169543/artifacts/raw/request_trace_mixed_attempts12.jsonl",
+   "what": "original mixed trace preserved verbatim before splitting",
+   "why": "never destroy raw evidence"
+  }
+ ],
+ "material_artifacts": [
+  {
+   "path": "research/experiments/EXP-PRODUCT-36129169543/run_dryrun.py",
+   "sha256": "6f0d578527d30582eff7b54bb971cc7c0345fb0a95c4f3fe41c260df6776528d",
+   "role": "code"
+  },
+  {
+   "path": "src/spider/eval_harness.py",
+   "sha256": "74f1163b7dd62021d6b2134b991bca7e367ce7587b777d903ec86dd62b8691b5",
+   "role": "code"
+  },
+  {
+   "path": "tests/test_eval_harness.py",
+   "sha256": "29e409e28ea22b70967bac0a62319891b8b6281943d74558edbc15ebf4a4b477",
+   "role": "code"
+  },
+  {
+   "path": "research/experiments/EXP-PRODUCT-36129169543/artifacts/raw/trajectories.jsonl",
+   "sha256": "fa5bba83adee4d227c9a23fba9bf593daca0910b2d5a27bad93c71a100e6f3ea",
+   "role": "raw"
+  },
+  {
+   "path": "research/experiments/EXP-PRODUCT-36129169543/artifacts/raw/request_trace.jsonl",
+   "sha256": "fb0e5bb2c9d357b0c8ec62213b09c32a87731e6d284369b1f935c13a1e3e4b64",
+   "role": "raw"
+  },
+  {
+   "path": "research/experiments/EXP-PRODUCT-36129169543/artifacts/raw/request_trace_mixed_attempts12.jsonl",
+   "sha256": "cebd9fc4af35147d75ae736f869914103667102ce4513721d6a7b7019493ddfd",
+   "role": "raw"
+  },
+  {
+   "path": "research/experiments/EXP-PRODUCT-36129169543/artifacts/raw/health_gate_trace.jsonl",
+   "sha256": "8447856aba71a5b5c90c388546fb7b17f36188f3f566940c5abff135c6e61fa8",
+   "role": "raw"
+  },
+  {
+   "path": "research/experiments/EXP-PRODUCT-36129169543/artifacts/raw/build.json",
+   "sha256": "fb7e4cc12bc4348781dd6dc3352f4a3c1fbacee9ee778c411d60a937cb8b2b35",
+   "role": "raw"
+  },
+  {
+   "path": "research/experiments/EXP-PRODUCT-36129169543/artifacts/raw/verify_pass.json",
+   "sha256": "8f16d56e1d97a9d340190a6faeb03bcb26722cf06879ac1e845c4698df821a20",
+   "role": "raw"
+  },
+  {
+   "path": "research/experiments/EXP-PRODUCT-36129169543/artifacts/raw/staleness_injection.json",
+   "sha256": "d79cfdf83707fdff88a87e5e8a567bb9987c4b598db0e95dd3c93af34d7f966d",
+   "role": "raw"
+  },
+  {
+   "path": "research/experiments/EXP-PRODUCT-36129169543/artifacts/raw/unit_tests.txt",
+   "sha256": "abd8fc82f4cbc5b9667df1faf7424d9b1ccd00d00ff878421bb1ebc5231ad6e8",
+   "role": "raw"
+  },
+  {
+   "path": "research/experiments/EXP-PRODUCT-36129169543/artifacts/raw/substrate_start.json",
+   "sha256": "2851f0c625e475f80e110329de1d7fe33b1f7c2448db05786155e6cf43f7ef09",
+   "role": "raw"
+  },
+  {
+   "path": "research/experiments/EXP-PRODUCT-36129169543/artifacts/raw/trace_file_correction.json",
+   "sha256": "d6a40490f99d450a493c721c7ac240d2e7f55135c0b4bdcea29c2a8ba362209c",
+   "role": "raw"
+  },
+  {
+   "path": "research/experiments/EXP-PRODUCT-36129169543/artifacts/derived/metrics_summary.json",
+   "sha256": "ac18c5eac5a44e5ad3845b47a0b0a326a2c01de6244d5b71329c71e4957934fb",
+   "role": "derived"
+  },
+  {
+   "path": "research/experiments/EXP-PRODUCT-36129169543/artifacts/derived/breakeven.json",
+   "sha256": "7e90c935f7f32033b2049358dadb987366c3600d67a30d4b84124049ff6f39fc",
+   "role": "derived"
+  },
+  {
+   "path": "research/experiments/EXP-PRODUCT-36129169543/artifacts/derived/ci.json",
+   "sha256": "352d1faf0e6c2b423095085ea73b225303fd6bf8db51260059cc40473657cb61",
+   "role": "derived"
+  },
+  {
+   "path": "research/experiments/EXP-PRODUCT-36129169543/artifacts/derived/null_control.json",
+   "sha256": "4f0720f46ef637e9c986591f5e569c94b045b94f2dbcec45258577e8321168f8",
+   "role": "derived"
+  },
+  {
+   "path": "research/experiments/EXP-PRODUCT-36129169543/artifacts/derived/health_gate.json",
+   "sha256": "8293ffa106c4c94335471a1b95bf4692a7288e98a607075f7e5187faefe135e9",
+   "role": "derived"
+  },
+  {
+   "path": "research/experiments/EXP-PRODUCT-36129169543/artifacts/derived/gate_demo.json",
+   "sha256": "6ba1f383217a813bc282ff314afb9ce3a0b5c1e62091667bcb983cdeb84c35be",
+   "role": "derived"
+  },
+  {
+   "path": "research/experiments/EXP-PRODUCT-36129169543/artifacts/derived/capability_probe.json",
+   "sha256": "f98156367f0e5ee16ba246e0544fef78bdc08cc7902141a3cd1b607fb5b6e3a9",
+   "role": "derived"
+  },
+  {
+   "path": "research/experiments/EXP-PRODUCT-36129169543/artifacts/derived/f_bytes_ci_supplement.json",
+   "sha256": "836b4a297cf6382b114979accdb7bb583d1d277f4d5cbccbc6524bf39f7a687b",
+   "role": "derived"
+  },
+  {
+   "path": "research/experiments/EXP-PRODUCT-36129169543/artifacts/attempt1/raw/trajectories.jsonl",
+   "sha256": "17a5c726cb8c58995afe81e69663ca6f5d651b45c7447f43bada2c7a87047348",
+   "role": "raw"
+  },
+  {
+   "path": "research/experiments/EXP-PRODUCT-36129169543/artifacts/attempt1/derived/metrics_summary.json",
+   "sha256": "75b3e0e71b35d6ae4b53b48ab083e1d826f393edf0497f53ebbfe98bb358f2d1",
+   "role": "derived"
+  },
+  {
+   "path": "research/experiments/EXP-PRODUCT-36129169543/artifacts/attempt1/derived/null_control.json",
+   "sha256": "f51bfbefa7324a26f8ed3de4f6ecfdc8d00042d313070249a9924d2f9c93c42b",
+   "role": "derived"
+  },
+  {
+   "path": "research/experiments/EXP-PRODUCT-36129169543/fixtures/qcr_bank_manifest.json",
+   "sha256": "8c69804b249ec9c84cf05d86a21c7ebe7a31af5f8d45e50a4e6d477b449f9f58",
+   "role": "fixture"
+  },
+  {
+   "path": "research/experiments/EXP-PRODUCT-36129169543/fixtures/webarena_verified_v2_tasks_192_36_rebuilt.json",
+   "sha256": "101e481ddb610df9598b0e3e5650e8c163ec7cbdc4679c5efc1e31104b3074c5",
+   "role": "fixture"
+  },
+  {
+   "path": "research/experiments/EXP-PRODUCT-36129169543/request.json",
+   "sha256": "8e21d1456b8390f1a89d87cfee2b0f3158757d81afe9987cc65ac6f4ecdaf703",
+   "role": "design"
+  },
+  {
+   "path": "research/experiments/EXP-PRODUCT-36129169543/spec.json",
+   "sha256": "788562e681fc2a7f7927a6216ea39e9f8ca42bf49276fe38f43497b28c267195",
+   "role": "design"
+  },
+  {
+   "path": "research/experiments/EXP-PRODUCT-36129169543/prereg.md",
+   "sha256": "e7e282bc86120f2b6c63c131af7c12db40733e8d6248f9e514cb708c0f594ac8",
+   "role": "design"
+  },
+  {
+   "path": "research/experiments/EXP-PRODUCT-36129169543/freeze.json",
+   "sha256": "506d3ee1aaeefdd2217b0f008a559802672e0018168fd181c45eee8670b3ca2e",
+   "role": "design"
+  }
+ ],
+ "chain_of_custody": {
+  "chain": "RAW EVIDENCE -> OBSERVATION -> DERIVED MEASUREMENT -> INTERPRETATION -> (AUDIT) -> (DIRECTOR)",
+  "raw_under": "research/experiments/EXP-PRODUCT-36129169543/artifacts/raw",
+  "derived_under": "research/experiments/EXP-PRODUCT-36129169543/artifacts/derived",
+  "attempt1_archive": "research/experiments/EXP-PRODUCT-36129169543/artifacts/attempt1",
+  "interpretation_only_in": [
+   "result.json",
+   "report.md"
+  ],
+  "protected_files_untouched": [
+   "request.json",
+   "spec.json",
+   "prereg.md",
+   "freeze.json",
+   "execution_checkpoint.json",
+   "SPIDER_CODEX.md",
+   "codex/*"
+  ],
+  "git_operations": "none (no commit, push, add, switch or reset performed)"
+ }
+}
