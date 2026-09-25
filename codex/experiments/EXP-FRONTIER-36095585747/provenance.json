@@ -1,0 +1,61 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-FRONTIER-36095585747",
+  "lane": "frontier",
+  "executed_at": "2026-09-25T04:53:35.379816+00:00",
+  "git_commit": "9abb02d5b045a1c9610bbcb4073f0e104d19894c",
+  "github_run_id": "36095585747",
+  "frozen_inputs": {
+    "request.json": "1fd209511d0b83118f1f62925d19f3098e4ab1049443524ff9302351ce983608",
+    "spec.json": "8e518df325d3af3ca89557ceaba920aa1983efedb5c37003042620f151c83ec1",
+    "prereg.md": "89fda24813bbb1a2990243f2554668b7a8fe2173b334e5fe45b196df9628d8fe",
+    "freeze.json": "c8a665f81c6f926838bd4b6af1aa59fa3aac044af6b4d06b71c69fb8ac53e6e0"
+  },
+  "parent_handoff": {
+    "experiment_id": "EXP-FRONTIER-36091890748",
+    "path": "research/experiments/EXP-FRONTIER-36091890748/handoff.json",
+    "sha256": "877a77baa58b9dc886d2bad2c449ca06686a4ad379aacc4eeee541885dc55889"
+  },
+  "code_paths": [
+    "research/experiments/EXP-FRONTIER-36095585747/run_execute.py"
+  ],
+  "environment": {
+    "python_version": "3.12",
+    "platform": "linux",
+    "chromium_present": true,
+    "browsergym_available": false,
+    "playwright_available": false,
+    "agentlab_available": false,
+    "numpy_available": false,
+    "scipy_available": false,
+    "sklearn_available": false,
+    "flask_available": false,
+    "tiktoken_available": false
+  },
+  "artifacts": {
+    "substrate_diagnostic.json": {
+      "path": "artifacts/substrate_diagnostic.json",
+      "sha256": "8feefe8d563f18c8640217adff94f4bc40ac8ea0f913ce81a83bb19abc673f65"
+    },
+    "compilation_pipeline_check.json": {
+      "path": "artifacts/compilation_pipeline_check.json",
+      "sha256": "258e45c2cdbf1c7e29d20f727cfd3102f71ce82c1e7861e600078fd243fb6eb8"
+    },
+    "per_trajectory_traces.json": {
+      "path": "artifacts/per_trajectory_traces.json",
+      "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+    },
+    "honest_cost_audit.json": {
+      "path": "artifacts/honest_cost_audit.json",
+      "sha256": "46dc22630c6db31a4f4bdbae185dea2ebfa6c614e3f246659ddca4303a6bed69"
+    }
+  },
+  "elapsed_seconds": 0.125566,
+  "diagnostic_mode": true,
+  "live_available": false,
+  "required_fixes": [
+    "Intel diverse-site manifest >=10 families pairwise bigram Jaccard<0.30 mean<0.15 product-subtree anchored depth>=2 at 1280x720 CDP AX>10 mean>15 std>5 DOM>=2000, raw N>=500 >=50/family, TRAIN-only vocab isolation 0 leakage, trajectory-grouped holdout (WebGym 292k dedup >=50 eTLD+1 or WebArena-Verified Hard 192/36; reuse Hard258 where available)",
+    "Runtime health-gated single-worker sticky Flask HS256+nginx WAL at /tmp/spider-runtime/shared.db with sticky cookie, If-None-Match/ETag TTL 60s conditional probes, n_non304>=360 single-node else >=800 distributed stratified >=80/family, X-Worker-Pid>=10, honest per-trajectory hard-reset sum counters",
+    "BrowserGym 1280x720 CDP with AX>10 per page (browsergym-core 0.14.3 / playwright 1.63.0 / agentlab 0.4.2 pins; system chromium present), TreeWalker 99% fidelity, locator top-1 >=95%, guard <5ms, WebMCP OpenAPI fetch >=95%"
+  ]
+}
