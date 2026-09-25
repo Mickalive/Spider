@@ -1,0 +1,107 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-36132150213",
+  "artifact_role": "raw",
+  "kind": "read_only_preflight",
+  "recorded_at": "2026-09-25T12:34:59+00:00",
+  "execution_mode": "EXECUTE",
+  "outcome_measurement_attempted": false,
+  "frozen_input_verification": {
+    "freeze_path": "research/experiments/EXP-GRAPH-36132150213/freeze.json",
+    "expected_hashes": {
+      "request.json": "c3f698891f43bcb43a97c8cdd989dcef7d3ae69103778485e73263e92e8c5913",
+      "spec.json": "4e406c0b524075f55bac2554b739048f58ce1ac80060c911113ffdccf3759fe9",
+      "prereg.md": "1c56eb558605bf36b1a3e3f2f193b811ef17ad7cbfde1328df175bf60618fccf"
+    },
+    "observed_hashes": {
+      "request.json": "c3f698891f43bcb43a97c8cdd989dcef7d3ae69103778485e73263e92e8c5913",
+      "spec.json": "4e406c0b524075f55bac2554b739048f58ce1ac80060c911113ffdccf3759fe9",
+      "prereg.md": "1c56eb558605bf36b1a3e3f2f193b811ef17ad7cbfde1328df175bf60618fccf"
+    },
+    "verified": true
+  },
+  "prerequisite_checks": [
+    {
+      "id": "P1_RUNTIME_CAPABILITY_LEDGER",
+      "expected": "Machine-readable Runtime capability ledger certifying the distributed substrate and browser capabilities.",
+      "observed": "Expected Runtime experiment directory research/experiments/EXP-RUNTIME-36129163700 is absent; /tmp/spider-runtime/capability_ledger.json is absent; no repository artifact matching a capability ledger was found in the read-only search.",
+      "pass": false,
+      "blocking": true
+    },
+    {
+      "id": "P2_RUNTIME_ONE_COMMAND_BRINGUP",
+      "expected": "Machine-readable one-command contract that starts nginx 1.24.0 plus 4x gunicorn/Flask with shared SQLite WAL and exposes health-gate success criteria.",
+      "observed": "No bring-up contract was found in the expected Runtime experiment path or the checked temporary path. No bring-up command was invoked because no certified contract was available.",
+      "pass": false,
+      "blocking": true
+    },
+    {
+      "id": "P3_FOUR_WORKER_SUBSTRATE",
+      "expected": "4x gunicorn 23.0.0 workers, Flask 3.1.3, PyJWT HS256, shared SQLite WAL, nginx 1.24.0, and verified X-Worker-Pid spread.",
+      "observed": "Not started or measured. The preflight stopped before substrate launch because P1 and P2 failed.",
+      "pass": null,
+      "blocking": true
+    },
+    {
+      "id": "P4_BROWSER_CHANNEL_CERTIFICATION",
+      "expected": "Runtime ledger certification of launchable Chromium at 1280x720 with CDP Accessibility.getFullAXTree.",
+      "observed": "A Chromium executable is present at /usr/bin/chromium (version 153.0.8010.0), but no Runtime ledger certification was found; browser quantities therefore remain UNKNOWN and are not treated as validated.",
+      "pass": false,
+      "blocking": false
+    }
+  ],
+  "environment_observation": {
+    "python": "3.12.14 (main, Aug 13 2026, 02:47:42) [GCC 13.3.0]",
+    "platform": "linux",
+    "sqlite3": "3.45.1",
+    "flask": "3.1.3",
+    "pyjwt": "2.15.0",
+    "gunicorn": "23.0.0",
+    "nginx": "1.24.0",
+    "chromium": "153.0.8010.0",
+    "commands": {
+      "nginx": "/usr/sbin/nginx",
+      "gunicorn": "/opt/hostedtoolcache/Python/3.12.14/x64/bin/gunicorn",
+      "curl": "/usr/bin/curl",
+      "sqlite3": "/usr/bin/sqlite3",
+      "chromium": "/usr/bin/chromium",
+      "google-chrome": "/usr/bin/google-chrome",
+      "google-chrome-stable": "/usr/bin/google-chrome-stable"
+    }
+  },
+  "repository_observation": {
+    "head": "1e3aad3a99da65d69e37fac6341ce2370ba86a67",
+    "status_observed_before_output": [
+      " M SPIDER_CODEX.md",
+      " M codex/claim_state.json",
+      " M codex/index.json",
+      "?? codex/experiments/EXP-FRONTIER-36129180789/",
+      "?? research/experiments/EXP-GRAPH-36132150213/model_execute.json"
+    ],
+    "output_scope": "Only the target experiment packet outputs and its raw preflight evidence are written by this stage; existing unrelated modifications are not edited."
+  },
+  "search_scope": {
+    "repository_patterns_checked": [
+      "research/experiments/EXP-RUNTIME-36129163700",
+      "**/*ledger*",
+      "**/*bring*up*",
+      "**/*capabilit*"
+    ],
+    "temporary_paths_checked": [
+      "/tmp/spider-runtime/capability_ledger.json",
+      "/tmp/spider-runtime"
+    ],
+    "matching_runtime_contract_paths": []
+  },
+  "commands": [
+    "sha256sum research/experiments/EXP-GRAPH-36132150213/request.json research/experiments/EXP-GRAPH-36132150213/spec.json research/experiments/EXP-GRAPH-36132150213/prereg.md",
+    "python -c '<read-only path and executable preflight>'",
+    "nginx -v",
+    "gunicorn --version",
+    "chromium --version",
+    "git status --short",
+    "git rev-parse HEAD"
+  ],
+  "decision": "STOP_BEFORE_OUTCOME_MEASUREMENT",
+  "reason": "The frozen mandatory Runtime capability ledger and one-command 4-worker distributed-substrate bring-up contract are unavailable. The absence is an infrastructure precondition failure, not a scientific result."
+}
