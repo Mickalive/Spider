@@ -1,0 +1,976 @@
+{"phase": "healthgate", "ep": "ep-a", "rid": "res-ep-a-0", "status": 200, "etag": "W/\"46606f4e420b4c33\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 4.419, "error": null}
+{"phase": "healthgate304", "ep": "ep-a", "rid": "res-ep-a-0", "status": 304, "etag": "W/\"46606f4e420b4c33\"", "inm": "W/\"46606f4e420b4c33\"", "inm_sent": true, "latency_ms": 2.915, "error": null}
+{"phase": "healthgate", "ep": "ep-a", "rid": "res-ep-a-1", "status": 200, "etag": "W/\"d4e42485b86d30aa\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.905, "error": null}
+{"phase": "healthgate304", "ep": "ep-a", "rid": "res-ep-a-1", "status": 304, "etag": "W/\"d4e42485b86d30aa\"", "inm": "W/\"d4e42485b86d30aa\"", "inm_sent": true, "latency_ms": 2.825, "error": null}
+{"phase": "healthgate", "ep": "ep-a", "rid": "res-ep-a-2", "status": 200, "etag": "W/\"086100f292265127\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.96, "error": null}
+{"phase": "healthgate304", "ep": "ep-a", "rid": "res-ep-a-2", "status": 304, "etag": "W/\"086100f292265127\"", "inm": "W/\"086100f292265127\"", "inm_sent": true, "latency_ms": 2.668, "error": null}
+{"phase": "healthgate", "ep": "ep-a", "rid": "res-ep-a-3", "status": 200, "etag": "W/\"b5c01d589d917291\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.828, "error": null}
+{"phase": "healthgate", "ep": "ep-a", "rid": "res-ep-a-4", "status": 200, "etag": "W/\"cf6e3635d68921ff\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.972, "error": null}
+{"phase": "healthgate", "ep": "ep-a", "rid": "res-ep-a-5", "status": 200, "etag": "W/\"cd46ee2f83ef5dc8\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.583, "error": null}
+{"phase": "healthgate", "ep": "ep-a", "rid": "res-ep-a-6", "status": 200, "etag": "W/\"fa384d98be63facd\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.846, "error": null}
+{"phase": "healthgate", "ep": "ep-a", "rid": "res-ep-a-7", "status": 200, "etag": "W/\"07f0ee00105d6245\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.823, "error": null}
+{"phase": "healthgate", "ep": "ep-a", "rid": "res-ep-a-8", "status": 200, "etag": "W/\"55856d8728fbfe97\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.631, "error": null}
+{"phase": "healthgate", "ep": "ep-a", "rid": "res-ep-a-9", "status": 200, "etag": "W/\"b1d7dd85fec36d8f\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.925, "error": null}
+{"phase": "healthgate", "ep": "ep-a", "rid": "res-ep-a-10", "status": 200, "etag": "W/\"35f24532f85a3a83\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.419, "error": null}
+{"phase": "healthgate", "ep": "ep-a", "rid": "res-ep-a-11", "status": 200, "etag": "W/\"e02145831c8df4b0\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.363, "error": null}
+{"phase": "healthgate", "ep": "ep-a", "rid": "res-ep-a-12", "status": 200, "etag": "W/\"4497aa4546cc693b\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.52, "error": null}
+{"phase": "healthgate", "ep": "ep-a", "rid": "res-ep-a-13", "status": 200, "etag": "W/\"986ddb10093f0bdb\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.641, "error": null}
+{"phase": "healthgate", "ep": "ep-a", "rid": "res-ep-a-14", "status": 200, "etag": "W/\"b52fbc6b9b7968d3\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.606, "error": null}
+{"phase": "healthgate", "ep": "ep-a", "rid": "res-ep-a-15", "status": 200, "etag": "W/\"388a997dbb6ad10a\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 5.982, "error": null}
+{"phase": "healthgate", "ep": "ep-a", "rid": "res-ep-a-16", "status": 200, "etag": "W/\"40c5076d27bfaddd\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.468, "error": null}
+{"phase": "healthgate", "ep": "ep-a", "rid": "res-ep-a-17", "status": 200, "etag": "W/\"df9dd00266b0088d\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.735, "error": null}
+{"phase": "healthgate", "ep": "ep-a", "rid": "res-ep-a-18", "status": 200, "etag": "W/\"1d4eec6f6f622413\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.538, "error": null}
+{"phase": "healthgate", "ep": "ep-a", "rid": "res-ep-a-19", "status": 200, "etag": "W/\"575990e0e45e23e6\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.459, "error": null}
+{"phase": "healthgate", "ep": "ep-a", "rid": "res-ep-a-20", "status": 200, "etag": "W/\"960353808a88ace4\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.203, "error": null}
+{"phase": "healthgate", "ep": "ep-a", "rid": "res-ep-a-21", "status": 200, "etag": "W/\"7e81a59e91da937c\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.39, "error": null}
+{"phase": "healthgate", "ep": "ep-a", "rid": "res-ep-a-22", "status": 200, "etag": "W/\"292035af7894fa22\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.374, "error": null}
+{"phase": "healthgate", "ep": "ep-a", "rid": "res-ep-a-23", "status": 200, "etag": "W/\"11f7aaaae423b512\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.798, "error": null}
+{"phase": "healthgate", "ep": "ep-a", "rid": "res-ep-a-24", "status": 200, "etag": "W/\"5eec93f5eac5f852\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.58, "error": null}
+{"phase": "healthgate", "ep": "ep-a", "rid": "res-ep-a-25", "status": 200, "etag": "W/\"f79417cfd7b9c5e1\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.63, "error": null}
+{"phase": "healthgate", "ep": "ep-a", "rid": "res-ep-a-26", "status": 200, "etag": "W/\"1a3aad6f51786f10\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.542, "error": null}
+{"phase": "healthgate", "ep": "ep-a", "rid": "res-ep-a-27", "status": 200, "etag": "W/\"bfd23c084a28cb8a\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.715, "error": null}
+{"phase": "healthgate", "ep": "ep-a", "rid": "res-ep-a-28", "status": 200, "etag": "W/\"5c4d07585108e518\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.782, "error": null}
+{"phase": "healthgate", "ep": "ep-a", "rid": "res-ep-a-29", "status": 200, "etag": "W/\"2c4f91b852caabac\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.687, "error": null}
+{"phase": "healthgate", "ep": "ep-a", "rid": "res-ep-a-30", "status": 200, "etag": "W/\"31dc1aa69189e3f9\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.583, "error": null}
+{"phase": "healthgate", "ep": "ep-a", "rid": "res-ep-a-31", "status": 200, "etag": "W/\"682f5bec3e1b1982\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.631, "error": null}
+{"phase": "healthgate", "ep": "ep-a", "rid": "res-ep-a-32", "status": 200, "etag": "W/\"c1f4f0198ee40f6c\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.614, "error": null}
+{"phase": "healthgate", "ep": "ep-a", "rid": "res-ep-a-33", "status": 200, "etag": "W/\"ac4e6920f0f0211e\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.515, "error": null}
+{"phase": "healthgate", "ep": "ep-a", "rid": "res-ep-a-34", "status": 200, "etag": "W/\"1bc6f513eff472b5\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.58, "error": null}
+{"phase": "healthgate", "ep": "ep-a", "rid": "res-ep-a-35", "status": 200, "etag": "W/\"27bf9a85f06e69b2\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.72, "error": null}
+{"phase": "healthgate", "ep": "ep-a", "rid": "res-ep-a-36", "status": 200, "etag": "W/\"a955a5a6d520fbd3\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.908, "error": null}
+{"phase": "healthgate", "ep": "ep-a", "rid": "res-ep-a-37", "status": 200, "etag": "W/\"d237fde9150a84d6\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.947, "error": null}
+{"phase": "healthgate", "ep": "ep-a", "rid": "res-ep-a-38", "status": 200, "etag": "W/\"c10f872ef4314a6e\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 4.617, "error": null}
+{"phase": "healthgate", "ep": "ep-a", "rid": "res-ep-a-39", "status": 200, "etag": "W/\"d457dac0be475eb0\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.939, "error": null}
+{"phase": "healthgate", "ep": "ep-a", "rid": "res-ep-a-40", "status": 200, "etag": "W/\"4a993c5339ccfd1a\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.637, "error": null}
+{"phase": "healthgate", "ep": "ep-a", "rid": "res-ep-a-41", "status": 200, "etag": "W/\"8799645cfa7522db\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.485, "error": null}
+{"phase": "healthgate", "ep": "ep-a", "rid": "res-ep-a-42", "status": 200, "etag": "W/\"eb833ab3234f858f\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.418, "error": null}
+{"phase": "healthgate", "ep": "ep-a", "rid": "res-ep-a-43", "status": 200, "etag": "W/\"531c6616ce0fd224\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.515, "error": null}
+{"phase": "healthgate", "ep": "ep-a", "rid": "res-ep-a-44", "status": 200, "etag": "W/\"a0f5b983643856bd\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 6.305, "error": null}
+{"phase": "healthgate", "ep": "ep-a", "rid": "res-ep-a-45", "status": 200, "etag": "W/\"7dc0e24c9f4d2f1a\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.627, "error": null}
+{"phase": "healthgate", "ep": "ep-a", "rid": "res-ep-a-46", "status": 200, "etag": "W/\"247e53c12800883d\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.536, "error": null}
+{"phase": "healthgate", "ep": "ep-a", "rid": "res-ep-a-47", "status": 200, "etag": "W/\"ec797dc3ff7c7404\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.403, "error": null}
+{"phase": "healthgate", "ep": "ep-a", "rid": "res-ep-a-48", "status": 200, "etag": "W/\"c63c2ee986a2b631\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.51, "error": null}
+{"phase": "healthgate", "ep": "ep-a", "rid": "res-ep-a-49", "status": 200, "etag": "W/\"177b6a2a3c7292ff\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.366, "error": null}
+{"phase": "healthgate", "ep": "ep-a", "rid": "res-ep-a-50", "status": 200, "etag": "W/\"57ff2a695957dfaf\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.482, "error": null}
+{"phase": "healthgate", "ep": "ep-a", "rid": "res-ep-a-51", "status": 200, "etag": "W/\"d3c70a1a59677c80\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.293, "error": null}
+{"phase": "healthgate", "ep": "ep-a", "rid": "res-ep-a-52", "status": 200, "etag": "W/\"8b2d1da4dab58c96\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.364, "error": null}
+{"phase": "healthgate", "ep": "ep-a", "rid": "res-ep-a-53", "status": 200, "etag": "W/\"9e173963f3aeaf17\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.585, "error": null}
+{"phase": "healthgate", "ep": "ep-a", "rid": "res-ep-a-54", "status": 200, "etag": "W/\"a008874a69a305ca\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.707, "error": null}
+{"phase": "healthgate", "ep": "ep-a", "rid": "res-ep-a-55", "status": 200, "etag": "W/\"4a2f0b5cec66c8e7\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.753, "error": null}
+{"phase": "healthgate", "ep": "ep-a", "rid": "res-ep-a-56", "status": 200, "etag": "W/\"4e2e0f150c414f63\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.482, "error": null}
+{"phase": "healthgate", "ep": "ep-a", "rid": "res-ep-a-57", "status": 200, "etag": "W/\"9cc0922dc1075c68\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.667, "error": null}
+{"phase": "healthgate", "ep": "ep-a", "rid": "res-ep-a-58", "status": 200, "etag": "W/\"e92ec3c50e58af8d\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.368, "error": null}
+{"phase": "healthgate", "ep": "ep-a", "rid": "res-ep-a-59", "status": 200, "etag": "W/\"a62b675df52cf5c1\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.49, "error": null}
+{"phase": "healthgate", "ep": "ep-a", "rid": "res-ep-a-60", "status": 200, "etag": "W/\"86a93a664304bb48\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.759, "error": null}
+{"phase": "healthgate", "ep": "ep-a", "rid": "res-ep-a-61", "status": 200, "etag": "W/\"16155e6f7b7805b4\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.774, "error": null}
+{"phase": "healthgate", "ep": "ep-a", "rid": "res-ep-a-62", "status": 200, "etag": "W/\"203d3f93d1645439\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.404, "error": null}
+{"phase": "healthgate", "ep": "ep-a", "rid": "res-ep-a-63", "status": 200, "etag": "W/\"48d5902bb959b4f8\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.726, "error": null}
+{"phase": "healthgate", "ep": "ep-a", "rid": "res-ep-a-64", "status": 200, "etag": "W/\"59682be8f95a9bd9\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.454, "error": null}
+{"phase": "healthgate", "ep": "ep-a", "rid": "res-ep-a-65", "status": 200, "etag": "W/\"6c7fb1a5d7203c42\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.704, "error": null}
+{"phase": "healthgate", "ep": "ep-a", "rid": "res-ep-a-66", "status": 200, "etag": "W/\"d751eb25a65231e8\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.683, "error": null}
+{"phase": "healthgate", "ep": "ep-a", "rid": "res-ep-a-67", "status": 200, "etag": "W/\"e24651abf5bd2025\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.661, "error": null}
+{"phase": "healthgate", "ep": "ep-a", "rid": "res-ep-a-68", "status": 200, "etag": "W/\"24b8b82630109b91\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.445, "error": null}
+{"phase": "healthgate", "ep": "ep-a", "rid": "res-ep-a-69", "status": 200, "etag": "W/\"6af2ca8944e960af\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 4.273, "error": null}
+{"phase": "healthgate", "ep": "ep-a", "rid": "res-ep-a-70", "status": 200, "etag": "W/\"0749037d1363f3ce\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.624, "error": null}
+{"phase": "healthgate", "ep": "ep-a", "rid": "res-ep-a-71", "status": 200, "etag": "W/\"437dfd2ac83ea4db\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.624, "error": null}
+{"phase": "healthgate", "ep": "ep-a", "rid": "res-ep-a-72", "status": 200, "etag": "W/\"adac4707164157ea\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.501, "error": null}
+{"phase": "healthgate", "ep": "ep-a", "rid": "res-ep-a-73", "status": 200, "etag": "W/\"a68ebfc2cf5e78e8\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 5.904, "error": null}
+{"phase": "healthgate", "ep": "ep-a", "rid": "res-ep-a-74", "status": 200, "etag": "W/\"7cfe12fecf46d50f\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.766, "error": null}
+{"phase": "healthgate", "ep": "ep-a", "rid": "res-ep-a-75", "status": 200, "etag": "W/\"2661fcb2ca2b908b\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.352, "error": null}
+{"phase": "healthgate", "ep": "ep-a", "rid": "res-ep-a-76", "status": 200, "etag": "W/\"75c3051adf4f59f9\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.406, "error": null}
+{"phase": "healthgate", "ep": "ep-a", "rid": "res-ep-a-77", "status": 200, "etag": "W/\"ddb7345649928917\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.398, "error": null}
+{"phase": "healthgate", "ep": "ep-a", "rid": "res-ep-a-78", "status": 200, "etag": "W/\"11bd889391753932\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.584, "error": null}
+{"phase": "healthgate", "ep": "ep-a", "rid": "res-ep-a-79", "status": 200, "etag": "W/\"c47f52ca5d9f155c\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.513, "error": null}
+{"phase": "healthgate", "ep": "ep-a", "rid": "res-ep-a-80", "status": 200, "etag": "W/\"ad31ddfb70166d4d\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.495, "error": null}
+{"phase": "healthgate", "ep": "ep-a", "rid": "res-ep-a-81", "status": 200, "etag": "W/\"0e84e8a95b87a7e1\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.693, "error": null}
+{"phase": "healthgate", "ep": "ep-a", "rid": "res-ep-a-82", "status": 200, "etag": "W/\"bd91ade2a65e124c\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 4.389, "error": null}
+{"phase": "healthgate", "ep": "ep-a", "rid": "res-ep-a-83", "status": 200, "etag": "W/\"824f33c3f782c6a2\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.667, "error": null}
+{"phase": "healthgate", "ep": "ep-a", "rid": "res-ep-a-84", "status": 200, "etag": "W/\"9a9c727932327712\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.727, "error": null}
+{"phase": "healthgate", "ep": "ep-a", "rid": "res-ep-a-85", "status": 200, "etag": "W/\"6cdf433eaa28a0df\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.589, "error": null}
+{"phase": "healthgate", "ep": "ep-a", "rid": "res-ep-a-86", "status": 200, "etag": "W/\"f15b34bf17c0a5db\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.736, "error": null}
+{"phase": "healthgate", "ep": "ep-a", "rid": "res-ep-a-87", "status": 200, "etag": "W/\"29cdb3ea25cd1ed1\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.647, "error": null}
+{"phase": "healthgate", "ep": "ep-a", "rid": "res-ep-a-88", "status": 200, "etag": "W/\"4587c50427f80d45\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.524, "error": null}
+{"phase": "healthgate", "ep": "ep-a", "rid": "res-ep-a-89", "status": 200, "etag": "W/\"01f57b3a5347ab69\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.543, "error": null}
+{"phase": "healthgate", "ep": "ep-a", "rid": "res-ep-a-90", "status": 200, "etag": "W/\"3dfcf2b5ac9108cf\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.726, "error": null}
+{"phase": "healthgate", "ep": "ep-a", "rid": "res-ep-a-91", "status": 200, "etag": "W/\"2ef6b6168fca84cc\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.681, "error": null}
+{"phase": "healthgate", "ep": "ep-a", "rid": "res-ep-a-92", "status": 200, "etag": "W/\"66326f1fb478320a\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 4.144, "error": null}
+{"phase": "healthgate", "ep": "ep-a", "rid": "res-ep-a-93", "status": 200, "etag": "W/\"0c94537bea34ab0c\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.681, "error": null}
+{"phase": "healthgate", "ep": "ep-a", "rid": "res-ep-a-94", "status": 200, "etag": "W/\"5f76ac278174ccbe\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.888, "error": null}
+{"phase": "healthgate", "ep": "ep-a", "rid": "res-ep-a-95", "status": 200, "etag": "W/\"6bf63a7d2e36f02d\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.442, "error": null}
+{"phase": "healthgate", "ep": "ep-a", "rid": "res-ep-a-96", "status": 200, "etag": "W/\"8937d3953c68497b\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.434, "error": null}
+{"phase": "healthgate", "ep": "ep-a", "rid": "res-ep-a-97", "status": 200, "etag": "W/\"d710d17e589bf4b9\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.53, "error": null}
+{"phase": "healthgate", "ep": "ep-a", "rid": "res-ep-a-98", "status": 200, "etag": "W/\"965caea08b55e28d\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.907, "error": null}
+{"phase": "healthgate", "ep": "ep-a", "rid": "res-ep-a-99", "status": 200, "etag": "W/\"09b46e9eab2dbdd3\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.641, "error": null}
+{"phase": "healthgate", "ep": "ep-a", "rid": "res-ep-a-100", "status": 200, "etag": "W/\"a3d880c673ad1641\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.697, "error": null}
+{"phase": "healthgate", "ep": "ep-a", "rid": "res-ep-a-101", "status": 200, "etag": "W/\"267308adb717f626\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.902, "error": null}
+{"phase": "healthgate", "ep": "ep-a", "rid": "res-ep-a-102", "status": 200, "etag": "W/\"f11d914b8491ad1f\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 6.53, "error": null}
+{"phase": "healthgate", "ep": "ep-a", "rid": "res-ep-a-103", "status": 200, "etag": "W/\"c7c9a0282288b5c2\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.716, "error": null}
+{"phase": "healthgate", "ep": "ep-a", "rid": "res-ep-a-104", "status": 200, "etag": "W/\"4a5999daa0730934\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.758, "error": null}
+{"phase": "healthgate", "ep": "ep-a", "rid": "res-ep-a-105", "status": 200, "etag": "W/\"8e756bec3e41dbcb\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.53, "error": null}
+{"phase": "healthgate", "ep": "ep-a", "rid": "res-ep-a-106", "status": 200, "etag": "W/\"a4eaa2d00f4f5d53\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.959, "error": null}
+{"phase": "healthgate", "ep": "ep-a", "rid": "res-ep-a-107", "status": 200, "etag": "W/\"98ccbd8a87ffd009\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.625, "error": null}
+{"phase": "healthgate", "ep": "ep-a", "rid": "res-ep-a-108", "status": 200, "etag": "W/\"ad3061d366dac83f\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.612, "error": null}
+{"phase": "healthgate", "ep": "ep-a", "rid": "res-ep-a-109", "status": 200, "etag": "W/\"7c8002e9d6a0feb4\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.377, "error": null}
+{"phase": "healthgate", "ep": "ep-a", "rid": "res-ep-a-110", "status": 200, "etag": "W/\"16c26875aa666a35\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.626, "error": null}
+{"phase": "healthgate", "ep": "ep-a", "rid": "res-ep-a-111", "status": 200, "etag": "W/\"9b4915e65a7d2027\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.814, "error": null}
+{"phase": "healthgate", "ep": "ep-a", "rid": "res-ep-a-112", "status": 200, "etag": "W/\"6a99d911658e7982\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.732, "error": null}
+{"phase": "healthgate", "ep": "ep-a", "rid": "res-ep-a-113", "status": 200, "etag": "W/\"bc7c76bfb50a1673\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.578, "error": null}
+{"phase": "healthgate", "ep": "ep-a", "rid": "res-ep-a-114", "status": 200, "etag": "W/\"f6b104821435c5a6\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 4.007, "error": null}
+{"phase": "healthgate", "ep": "ep-a", "rid": "res-ep-a-115", "status": 200, "etag": "W/\"72b9d2694013d2ff\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.569, "error": null}
+{"phase": "healthgate", "ep": "ep-a", "rid": "res-ep-a-116", "status": 200, "etag": "W/\"5a7413a6e6fc7d6e\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.905, "error": null}
+{"phase": "healthgate", "ep": "ep-a", "rid": "res-ep-a-117", "status": 200, "etag": "W/\"d6a60a06cf51e674\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.43, "error": null}
+{"phase": "healthgate", "ep": "ep-a", "rid": "res-ep-a-118", "status": 200, "etag": "W/\"7c46b8aaf75c86cd\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.741, "error": null}
+{"phase": "healthgate", "ep": "ep-a", "rid": "res-ep-a-119", "status": 200, "etag": "W/\"cd4ae2a83920ff3d\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.574, "error": null}
+{"phase": "healthgate", "ep": "ep-a", "rid": "res-ep-a-120", "status": 200, "etag": "W/\"8b4fd2e7acc096d6\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.418, "error": null}
+{"phase": "healthgate", "ep": "ep-a", "rid": "res-ep-a-121", "status": 200, "etag": "W/\"88209d8495332a9a\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.611, "error": null}
+{"phase": "healthgate", "ep": "ep-a", "rid": "res-ep-a-122", "status": 200, "etag": "W/\"465a1e2302ea30b9\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.689, "error": null}
+{"phase": "healthgate", "ep": "ep-a", "rid": "res-ep-a-123", "status": 200, "etag": "W/\"b0421bca679109ad\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 4.471, "error": null}
+{"phase": "healthgate", "ep": "ep-a", "rid": "res-ep-a-124", "status": 200, "etag": "W/\"b3228ba2c9189f93\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.478, "error": null}
+{"phase": "healthgate", "ep": "ep-a", "rid": "res-ep-a-125", "status": 200, "etag": "W/\"e7aa120a1fc97301\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.391, "error": null}
+{"phase": "healthgate", "ep": "ep-a", "rid": "res-ep-a-126", "status": 200, "etag": "W/\"725ddcb74a02b157\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.568, "error": null}
+{"phase": "healthgate", "ep": "ep-a", "rid": "res-ep-a-127", "status": 200, "etag": "W/\"bb749e57211464cf\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.439, "error": null}
+{"phase": "healthgate", "ep": "ep-a", "rid": "res-ep-a-128", "status": 200, "etag": "W/\"9181fe83916e7fc7\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.804, "error": null}
+{"phase": "healthgate", "ep": "ep-a", "rid": "res-ep-a-129", "status": 200, "etag": "W/\"a48cbb2b8b9d2d1d\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.656, "error": null}
+{"phase": "healthgate", "ep": "ep-a", "rid": "res-ep-a-130", "status": 200, "etag": "W/\"13884f8de6068ed2\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.4, "error": null}
+{"phase": "healthgate", "ep": "ep-a", "rid": "res-ep-a-131", "status": 200, "etag": "W/\"9ba2d92fc7dfde21\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 6.214, "error": null}
+{"phase": "healthgate", "ep": "ep-a", "rid": "res-ep-a-132", "status": 200, "etag": "W/\"60bf3e5a794881f6\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.592, "error": null}
+{"phase": "healthgate", "ep": "ep-a", "rid": "res-ep-a-133", "status": 200, "etag": "W/\"0655fb19c0f03bf9\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.683, "error": null}
+{"phase": "healthgate", "ep": "ep-a", "rid": "res-ep-a-134", "status": 200, "etag": "W/\"93a24bd1414f2afb\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.592, "error": null}
+{"phase": "healthgate", "ep": "ep-a", "rid": "res-ep-a-135", "status": 200, "etag": "W/\"317aa3123423933b\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.541, "error": null}
+{"phase": "healthgate", "ep": "ep-a", "rid": "res-ep-a-136", "status": 200, "etag": "W/\"c95f542df0e0a787\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.756, "error": null}
+{"phase": "healthgate", "ep": "ep-a", "rid": "res-ep-a-137", "status": 200, "etag": "W/\"3f2c38085560780a\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.492, "error": null}
+{"phase": "healthgate", "ep": "ep-a", "rid": "res-ep-a-138", "status": 200, "etag": "W/\"34ba5b0e66d95055\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.485, "error": null}
+{"phase": "healthgate", "ep": "ep-a", "rid": "res-ep-a-139", "status": 200, "etag": "W/\"86f4c3651397e6c9\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.565, "error": null}
+{"phase": "healthgate", "ep": "ep-a", "rid": "res-ep-a-140", "status": 200, "etag": "W/\"eaf1a4446f8f8be9\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.621, "error": null}
+{"phase": "healthgate", "ep": "ep-a", "rid": "res-ep-a-141", "status": 200, "etag": "W/\"7a25a84ae3f53b9c\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.436, "error": null}
+{"phase": "healthgate", "ep": "ep-a", "rid": "res-ep-a-142", "status": 200, "etag": "W/\"0e71bf50fb4c85c6\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.454, "error": null}
+{"phase": "healthgate", "ep": "ep-a", "rid": "res-ep-a-143", "status": 200, "etag": "W/\"94c14fb19407ad4e\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.852, "error": null}
+{"phase": "healthgate", "ep": "ep-a", "rid": "res-ep-a-144", "status": 200, "etag": "W/\"55736e468c6a79d3\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.716, "error": null}
+{"phase": "healthgate", "ep": "ep-a", "rid": "res-ep-a-145", "status": 200, "etag": "W/\"b476d7972341cc38\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.54, "error": null}
+{"phase": "healthgate", "ep": "ep-a", "rid": "res-ep-a-146", "status": 200, "etag": "W/\"5031b6a354c94e1f\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.691, "error": null}
+{"phase": "healthgate", "ep": "ep-a", "rid": "res-ep-a-147", "status": 200, "etag": "W/\"094473426f489a5b\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.673, "error": null}
+{"phase": "healthgate", "ep": "ep-a", "rid": "res-ep-a-148", "status": 200, "etag": "W/\"8e101194a28892b5\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.5, "error": null}
+{"phase": "healthgate", "ep": "ep-a", "rid": "res-ep-a-149", "status": 200, "etag": "W/\"be2ccabc90d1dd8e\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.64, "error": null}
+{"phase": "healthgate", "ep": "ep-a", "rid": "res-ep-a-150", "status": 200, "etag": "W/\"e22f10202931f4a6\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.552, "error": null}
+{"phase": "healthgate", "ep": "ep-a", "rid": "res-ep-a-151", "status": 200, "etag": "W/\"d0bac1287ce0fe71\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.725, "error": null}
+{"phase": "healthgate", "ep": "ep-a", "rid": "res-ep-a-152", "status": 200, "etag": "W/\"84c70d0243fcb73c\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.706, "error": null}
+{"phase": "healthgate", "ep": "ep-a", "rid": "res-ep-a-153", "status": 200, "etag": "W/\"44faf6b03ebe49db\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.406, "error": null}
+{"phase": "healthgate", "ep": "ep-a", "rid": "res-ep-a-154", "status": 200, "etag": "W/\"824add3a48dda320\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.535, "error": null}
+{"phase": "healthgate", "ep": "ep-a", "rid": "res-ep-a-155", "status": 200, "etag": "W/\"45d39127277d690d\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.353, "error": null}
+{"phase": "healthgate", "ep": "ep-a", "rid": "res-ep-a-156", "status": 200, "etag": "W/\"db4d57be03414be3\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.669, "error": null}
+{"phase": "healthgate", "ep": "ep-a", "rid": "res-ep-a-157", "status": 200, "etag": "W/\"8031767559f3debc\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.385, "error": null}
+{"phase": "healthgate", "ep": "ep-a", "rid": "res-ep-a-158", "status": 200, "etag": "W/\"b5955dcb6be98d6c\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.59, "error": null}
+{"phase": "healthgate", "ep": "ep-a", "rid": "res-ep-a-159", "status": 200, "etag": "W/\"0c16a640e1b30171\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.27, "error": null}
+{"phase": "healthgate", "ep": "ep-a", "rid": "res-ep-a-160", "status": 200, "etag": "W/\"9f3ef38721e24366\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 5.971, "error": null}
+{"phase": "healthgate", "ep": "ep-a", "rid": "res-ep-a-161", "status": 200, "etag": "W/\"efe92124f67d616c\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.523, "error": null}
+{"phase": "healthgate", "ep": "ep-a", "rid": "res-ep-a-162", "status": 200, "etag": "W/\"3f771fdddd727d04\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.212, "error": null}
+{"phase": "healthgate", "ep": "ep-a", "rid": "res-ep-a-163", "status": 200, "etag": "W/\"6faf0bc9207a7e96\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.433, "error": null}
+{"phase": "healthgate", "ep": "ep-a", "rid": "res-ep-a-164", "status": 200, "etag": "W/\"5d73f83815c01e65\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 4.124, "error": null}
+{"phase": "healthgate", "ep": "ep-a", "rid": "res-ep-a-165", "status": 200, "etag": "W/\"a5ad5263025f35f1\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.325, "error": null}
+{"phase": "healthgate", "ep": "ep-a", "rid": "res-ep-a-166", "status": 200, "etag": "W/\"99147d146477322d\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.414, "error": null}
+{"phase": "healthgate", "ep": "ep-a", "rid": "res-ep-a-167", "status": 200, "etag": "W/\"b466041a41c3fdd8\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.515, "error": null}
+{"phase": "healthgate", "ep": "ep-a", "rid": "res-ep-a-168", "status": 200, "etag": "W/\"1a9fe4e7d6f336d9\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.686, "error": null}
+{"phase": "healthgate", "ep": "ep-a", "rid": "res-ep-a-169", "status": 200, "etag": "W/\"33d9b89e6d720497\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.657, "error": null}
+{"phase": "healthgate", "ep": "ep-a", "rid": "res-ep-a-170", "status": 200, "etag": "W/\"f0aebf33fc13ac5e\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.513, "error": null}
+{"phase": "healthgate", "ep": "ep-a", "rid": "res-ep-a-171", "status": 200, "etag": "W/\"cf0debff7b86f18f\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.643, "error": null}
+{"phase": "healthgate", "ep": "ep-a", "rid": "res-ep-a-172", "status": 200, "etag": "W/\"e1f32647e186c5d2\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.794, "error": null}
+{"phase": "healthgate", "ep": "ep-a", "rid": "res-ep-a-173", "status": 200, "etag": "W/\"fb9d5d5064165305\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.737, "error": null}
+{"phase": "healthgate", "ep": "ep-a", "rid": "res-ep-a-174", "status": 200, "etag": "W/\"2f367f79c45191ec\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.684, "error": null}
+{"phase": "healthgate", "ep": "ep-a", "rid": "res-ep-a-175", "status": 200, "etag": "W/\"a428a46886d44413\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.55, "error": null}
+{"phase": "healthgate", "ep": "ep-a", "rid": "res-ep-a-176", "status": 200, "etag": "W/\"9e14e4a95d7d2c4c\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.616, "error": null}
+{"phase": "healthgate", "ep": "ep-a", "rid": "res-ep-a-177", "status": 200, "etag": "W/\"ad17e1a2057e5eaf\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.326, "error": null}
+{"phase": "healthgate", "ep": "ep-a", "rid": "res-ep-a-178", "status": 200, "etag": "W/\"de8b2d627f32ad60\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.566, "error": null}
+{"phase": "healthgate", "ep": "ep-a", "rid": "res-ep-a-179", "status": 200, "etag": "W/\"12cdff056b1163e7\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.538, "error": null}
+{"phase": "healthgate", "ep": "ep-a", "rid": "res-ep-a-180", "status": 200, "etag": "W/\"2142886c9325c0cd\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.788, "error": null}
+{"phase": "healthgate", "ep": "ep-a", "rid": "res-ep-a-181", "status": 200, "etag": "W/\"73fca4bc5351255b\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.839, "error": null}
+{"phase": "healthgate", "ep": "ep-a", "rid": "res-ep-a-182", "status": 200, "etag": "W/\"b9ff1d8fda49ffdb\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.802, "error": null}
+{"phase": "healthgate", "ep": "ep-a", "rid": "res-ep-a-183", "status": 200, "etag": "W/\"78610951ea418843\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.513, "error": null}
+{"phase": "healthgate", "ep": "ep-a", "rid": "res-ep-a-184", "status": 200, "etag": "W/\"b5df2a2e72aa8896\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.363, "error": null}
+{"phase": "healthgate", "ep": "ep-a", "rid": "res-ep-a-185", "status": 200, "etag": "W/\"5ab0448fdd1d491f\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.456, "error": null}
+{"phase": "healthgate", "ep": "ep-a", "rid": "res-ep-a-186", "status": 200, "etag": "W/\"3ef91c7f2b682cd5\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.7, "error": null}
+{"phase": "healthgate", "ep": "ep-a", "rid": "res-ep-a-187", "status": 200, "etag": "W/\"c846b7b7be5f20b7\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.709, "error": null}
+{"phase": "healthgate", "ep": "ep-a", "rid": "res-ep-a-188", "status": 200, "etag": "W/\"bfca4a6dac3869e7\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.789, "error": null}
+{"phase": "healthgate", "ep": "ep-a", "rid": "res-ep-a-189", "status": 200, "etag": "W/\"1ffda5615c36db6c\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.687, "error": null}
+{"phase": "healthgate", "ep": "ep-a", "rid": "res-ep-a-190", "status": 200, "etag": "W/\"22882b13fa95a07e\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 5.135, "error": null}
+{"phase": "healthgate", "ep": "ep-a", "rid": "res-ep-a-191", "status": 200, "etag": "W/\"6c01329573b60537\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.432, "error": null}
+{"phase": "healthgate", "ep": "ep-a", "rid": "res-ep-a-192", "status": 200, "etag": "W/\"fafc07c4f5f4a25c\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.359, "error": null}
+{"phase": "healthgate", "ep": "ep-a", "rid": "res-ep-a-193", "status": 200, "etag": "W/\"e8baa1ea6c2a849e\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.448, "error": null}
+{"phase": "healthgate", "ep": "ep-a", "rid": "res-ep-a-194", "status": 200, "etag": "W/\"89603b178a5c9152\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.494, "error": null}
+{"phase": "healthgate", "ep": "ep-a", "rid": "res-ep-a-195", "status": 200, "etag": "W/\"044f4b869f36cf7d\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.329, "error": null}
+{"phase": "healthgate", "ep": "ep-a", "rid": "res-ep-a-196", "status": 200, "etag": "W/\"73041f94c1a6c761\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.23, "error": null}
+{"phase": "healthgate", "ep": "ep-a", "rid": "res-ep-a-197", "status": 200, "etag": "W/\"5042a4b049bfaf3f\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.788, "error": null}
+{"phase": "healthgate", "ep": "ep-a", "rid": "res-ep-a-198", "status": 200, "etag": "W/\"7e3417a606c49be9\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.348, "error": null}
+{"phase": "healthgate", "ep": "ep-a", "rid": "res-ep-a-199", "status": 200, "etag": "W/\"61ac761c1de5f416\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.321, "error": null}
+{"phase": "healthgate", "ep": "ep-b", "rid": "res-ep-b-0", "status": 200, "etag": "W/\"d4ebf6fc902b4d78\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.186, "error": null}
+{"phase": "healthgate304", "ep": "ep-b", "rid": "res-ep-b-0", "status": 304, "etag": "W/\"d4ebf6fc902b4d78\"", "inm": "W/\"d4ebf6fc902b4d78\"", "inm_sent": true, "latency_ms": 2.325, "error": null}
+{"phase": "healthgate", "ep": "ep-b", "rid": "res-ep-b-1", "status": 200, "etag": "W/\"10399b9cb8a4e4d0\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.312, "error": null}
+{"phase": "healthgate304", "ep": "ep-b", "rid": "res-ep-b-1", "status": 304, "etag": "W/\"10399b9cb8a4e4d0\"", "inm": "W/\"10399b9cb8a4e4d0\"", "inm_sent": true, "latency_ms": 2.885, "error": null}
+{"phase": "healthgate", "ep": "ep-b", "rid": "res-ep-b-2", "status": 200, "etag": "W/\"d1e03dda7512c072\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.603, "error": null}
+{"phase": "healthgate304", "ep": "ep-b", "rid": "res-ep-b-2", "status": 304, "etag": "W/\"d1e03dda7512c072\"", "inm": "W/\"d1e03dda7512c072\"", "inm_sent": true, "latency_ms": 2.904, "error": null}
+{"phase": "healthgate", "ep": "ep-b", "rid": "res-ep-b-3", "status": 200, "etag": "W/\"244d64f34210b0b8\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.557, "error": null}
+{"phase": "healthgate", "ep": "ep-b", "rid": "res-ep-b-4", "status": 200, "etag": "W/\"c4adcddf853d4359\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.496, "error": null}
+{"phase": "healthgate", "ep": "ep-b", "rid": "res-ep-b-5", "status": 200, "etag": "W/\"1bd5d2a80fcbb25f\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.464, "error": null}
+{"phase": "healthgate", "ep": "ep-b", "rid": "res-ep-b-6", "status": 200, "etag": "W/\"0e1878f02fc66841\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.59, "error": null}
+{"phase": "healthgate", "ep": "ep-b", "rid": "res-ep-b-7", "status": 200, "etag": "W/\"49246bccd2f2960c\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.59, "error": null}
+{"phase": "healthgate", "ep": "ep-b", "rid": "res-ep-b-8", "status": 200, "etag": "W/\"931c54c2d73f3982\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.432, "error": null}
+{"phase": "healthgate", "ep": "ep-b", "rid": "res-ep-b-9", "status": 200, "etag": "W/\"55241ec623fe7ac7\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.559, "error": null}
+{"phase": "healthgate", "ep": "ep-b", "rid": "res-ep-b-10", "status": 200, "etag": "W/\"4ac62d9cf30e425a\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.526, "error": null}
+{"phase": "healthgate", "ep": "ep-b", "rid": "res-ep-b-11", "status": 200, "etag": "W/\"d22c3a24ca3033a8\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.465, "error": null}
+{"phase": "healthgate", "ep": "ep-b", "rid": "res-ep-b-12", "status": 200, "etag": "W/\"421fe89cf57c50bc\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.787, "error": null}
+{"phase": "healthgate", "ep": "ep-b", "rid": "res-ep-b-13", "status": 200, "etag": "W/\"5ab0c42a74822dae\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.814, "error": null}
+{"phase": "healthgate", "ep": "ep-b", "rid": "res-ep-b-14", "status": 200, "etag": "W/\"130e54eb3192a1ad\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.464, "error": null}
+{"phase": "healthgate", "ep": "ep-b", "rid": "res-ep-b-15", "status": 200, "etag": "W/\"acab1756b4026d46\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.892, "error": null}
+{"phase": "healthgate", "ep": "ep-b", "rid": "res-ep-b-16", "status": 200, "etag": "W/\"635433d5a82c7ea1\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.281, "error": null}
+{"phase": "healthgate", "ep": "ep-b", "rid": "res-ep-b-17", "status": 200, "etag": "W/\"6bb6f378aec400ae\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.544, "error": null}
+{"phase": "healthgate", "ep": "ep-b", "rid": "res-ep-b-18", "status": 200, "etag": "W/\"0aed0576d6580a87\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 5.371, "error": null}
+{"phase": "healthgate", "ep": "ep-b", "rid": "res-ep-b-19", "status": 200, "etag": "W/\"1acada32e370ef5d\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.893, "error": null}
+{"phase": "healthgate", "ep": "ep-b", "rid": "res-ep-b-20", "status": 200, "etag": "W/\"40e30d21a5706231\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.514, "error": null}
+{"phase": "healthgate", "ep": "ep-b", "rid": "res-ep-b-21", "status": 200, "etag": "W/\"b39c32321bdc53d7\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.846, "error": null}
+{"phase": "healthgate", "ep": "ep-b", "rid": "res-ep-b-22", "status": 200, "etag": "W/\"b554b40b4d416cee\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.583, "error": null}
+{"phase": "healthgate", "ep": "ep-b", "rid": "res-ep-b-23", "status": 200, "etag": "W/\"b79e285e6be79bb7\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.43, "error": null}
+{"phase": "healthgate", "ep": "ep-b", "rid": "res-ep-b-24", "status": 200, "etag": "W/\"4e73884143c48fde\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.559, "error": null}
+{"phase": "healthgate", "ep": "ep-b", "rid": "res-ep-b-25", "status": 200, "etag": "W/\"f63091d5def61abf\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.739, "error": null}
+{"phase": "healthgate", "ep": "ep-b", "rid": "res-ep-b-26", "status": 200, "etag": "W/\"92c527739fa3a035\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.802, "error": null}
+{"phase": "healthgate", "ep": "ep-b", "rid": "res-ep-b-27", "status": 200, "etag": "W/\"68f94dd67a2dc0b2\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.522, "error": null}
+{"phase": "healthgate", "ep": "ep-b", "rid": "res-ep-b-28", "status": 200, "etag": "W/\"6f9ed402ac83c70c\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.451, "error": null}
+{"phase": "healthgate", "ep": "ep-b", "rid": "res-ep-b-29", "status": 200, "etag": "W/\"107a17bb64df25c8\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.605, "error": null}
+{"phase": "healthgate", "ep": "ep-b", "rid": "res-ep-b-30", "status": 200, "etag": "W/\"a136c3330cf6ffc7\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 4.083, "error": null}
+{"phase": "healthgate", "ep": "ep-b", "rid": "res-ep-b-31", "status": 200, "etag": "W/\"bca341951a2cd955\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.84, "error": null}
+{"phase": "healthgate", "ep": "ep-b", "rid": "res-ep-b-32", "status": 200, "etag": "W/\"b43fb1ba3bcaf133\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.644, "error": null}
+{"phase": "healthgate", "ep": "ep-b", "rid": "res-ep-b-33", "status": 200, "etag": "W/\"3b003cb27e35b6e4\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.65, "error": null}
+{"phase": "healthgate", "ep": "ep-b", "rid": "res-ep-b-34", "status": 200, "etag": "W/\"0effcca85b030dad\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.575, "error": null}
+{"phase": "healthgate", "ep": "ep-b", "rid": "res-ep-b-35", "status": 200, "etag": "W/\"7d8df2c3f5c13c51\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.695, "error": null}
+{"phase": "healthgate", "ep": "ep-b", "rid": "res-ep-b-36", "status": 200, "etag": "W/\"5bc4285d278b8a86\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.759, "error": null}
+{"phase": "healthgate", "ep": "ep-b", "rid": "res-ep-b-37", "status": 200, "etag": "W/\"2769c0f48ee383cc\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.613, "error": null}
+{"phase": "healthgate", "ep": "ep-b", "rid": "res-ep-b-38", "status": 200, "etag": "W/\"d1054140a477edc8\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.69, "error": null}
+{"phase": "healthgate", "ep": "ep-b", "rid": "res-ep-b-39", "status": 200, "etag": "W/\"0acbccc999b6c974\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.672, "error": null}
+{"phase": "healthgate", "ep": "ep-b", "rid": "res-ep-b-40", "status": 200, "etag": "W/\"f033df3a5fc05286\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.879, "error": null}
+{"phase": "healthgate", "ep": "ep-b", "rid": "res-ep-b-41", "status": 200, "etag": "W/\"7f350a0e1be561cb\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.59, "error": null}
+{"phase": "healthgate", "ep": "ep-b", "rid": "res-ep-b-42", "status": 200, "etag": "W/\"63fa4027555b3887\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.567, "error": null}
+{"phase": "healthgate", "ep": "ep-b", "rid": "res-ep-b-43", "status": 200, "etag": "W/\"ee58364c0f244c74\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.869, "error": null}
+{"phase": "healthgate", "ep": "ep-b", "rid": "res-ep-b-44", "status": 200, "etag": "W/\"dcaf9bcc468eca7a\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.969, "error": null}
+{"phase": "healthgate", "ep": "ep-b", "rid": "res-ep-b-45", "status": 200, "etag": "W/\"d590e1479d5c340c\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.465, "error": null}
+{"phase": "healthgate", "ep": "ep-b", "rid": "res-ep-b-46", "status": 200, "etag": "W/\"377d367922340e27\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.532, "error": null}
+{"phase": "healthgate", "ep": "ep-b", "rid": "res-ep-b-47", "status": 200, "etag": "W/\"facd0033086c2551\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 8.106, "error": null}
+{"phase": "healthgate", "ep": "ep-b", "rid": "res-ep-b-48", "status": 200, "etag": "W/\"1a73f59a86cc708f\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.515, "error": null}
+{"phase": "healthgate", "ep": "ep-b", "rid": "res-ep-b-49", "status": 200, "etag": "W/\"698d9f13f187e7f4\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.34, "error": null}
+{"phase": "healthgate", "ep": "ep-b", "rid": "res-ep-b-50", "status": 200, "etag": "W/\"4f2d2ad7814f2710\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.635, "error": null}
+{"phase": "healthgate", "ep": "ep-b", "rid": "res-ep-b-51", "status": 200, "etag": "W/\"59ae5373a1e60007\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.446, "error": null}
+{"phase": "healthgate", "ep": "ep-b", "rid": "res-ep-b-52", "status": 200, "etag": "W/\"eb4f71c90863dcc2\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.353, "error": null}
+{"phase": "healthgate", "ep": "ep-b", "rid": "res-ep-b-53", "status": 200, "etag": "W/\"b9253e21599a9690\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.545, "error": null}
+{"phase": "healthgate", "ep": "ep-b", "rid": "res-ep-b-54", "status": 200, "etag": "W/\"fbe8b5c4bd5da411\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.78, "error": null}
+{"phase": "healthgate", "ep": "ep-b", "rid": "res-ep-b-55", "status": 200, "etag": "W/\"6c31ec68b324471b\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.351, "error": null}
+{"phase": "healthgate", "ep": "ep-b", "rid": "res-ep-b-56", "status": 200, "etag": "W/\"7f6ee3e293d4b159\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.454, "error": null}
+{"phase": "healthgate", "ep": "ep-b", "rid": "res-ep-b-57", "status": 200, "etag": "W/\"b34790b4ad61dd04\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.497, "error": null}
+{"phase": "healthgate", "ep": "ep-b", "rid": "res-ep-b-58", "status": 200, "etag": "W/\"eeed2ba928ed8ca9\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.496, "error": null}
+{"phase": "healthgate", "ep": "ep-b", "rid": "res-ep-b-59", "status": 200, "etag": "W/\"3da47c560cfb2394\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 4.28, "error": null}
+{"phase": "healthgate", "ep": "ep-b", "rid": "res-ep-b-60", "status": 200, "etag": "W/\"abbe18f47ac9dcf1\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 4.009, "error": null}
+{"phase": "healthgate", "ep": "ep-b", "rid": "res-ep-b-61", "status": 200, "etag": "W/\"79ba6bcdf60e3b7c\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.785, "error": null}
+{"phase": "healthgate", "ep": "ep-b", "rid": "res-ep-b-62", "status": 200, "etag": "W/\"27b7bec3182de4da\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.328, "error": null}
+{"phase": "healthgate", "ep": "ep-b", "rid": "res-ep-b-63", "status": 200, "etag": "W/\"73853869eb99241c\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 4.286, "error": null}
+{"phase": "healthgate", "ep": "ep-b", "rid": "res-ep-b-64", "status": 200, "etag": "W/\"92548605abe958f2\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.341, "error": null}
+{"phase": "healthgate", "ep": "ep-b", "rid": "res-ep-b-65", "status": 200, "etag": "W/\"2c43dc65dc171328\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.277, "error": null}
+{"phase": "healthgate", "ep": "ep-b", "rid": "res-ep-b-66", "status": 200, "etag": "W/\"0ea98435ad94cc96\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.829, "error": null}
+{"phase": "healthgate", "ep": "ep-b", "rid": "res-ep-b-67", "status": 200, "etag": "W/\"f6a3f48002a7652c\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.414, "error": null}
+{"phase": "healthgate", "ep": "ep-b", "rid": "res-ep-b-68", "status": 200, "etag": "W/\"16e01c2f2b5fe78b\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.284, "error": null}
+{"phase": "healthgate", "ep": "ep-b", "rid": "res-ep-b-69", "status": 200, "etag": "W/\"b4e5d8208a318fcd\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.684, "error": null}
+{"phase": "healthgate", "ep": "ep-b", "rid": "res-ep-b-70", "status": 200, "etag": "W/\"859fea905ab8c864\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.504, "error": null}
+{"phase": "healthgate", "ep": "ep-b", "rid": "res-ep-b-71", "status": 200, "etag": "W/\"9af62e540b7eba7d\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.419, "error": null}
+{"phase": "healthgate", "ep": "ep-b", "rid": "res-ep-b-72", "status": 200, "etag": "W/\"e1ee2ade64432f7b\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.966, "error": null}
+{"phase": "healthgate", "ep": "ep-b", "rid": "res-ep-b-73", "status": 200, "etag": "W/\"06b6078b1fbead22\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.448, "error": null}
+{"phase": "healthgate", "ep": "ep-b", "rid": "res-ep-b-74", "status": 200, "etag": "W/\"1ab1f3c11a4616a3\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.41, "error": null}
+{"phase": "healthgate", "ep": "ep-b", "rid": "res-ep-b-75", "status": 200, "etag": "W/\"2e5d0feb22292952\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.558, "error": null}
+{"phase": "healthgate", "ep": "ep-b", "rid": "res-ep-b-76", "status": 200, "etag": "W/\"ef44f8197385cce7\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 7.469, "error": null}
+{"phase": "healthgate", "ep": "ep-b", "rid": "res-ep-b-77", "status": 200, "etag": "W/\"d1f80769b19b6962\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.584, "error": null}
+{"phase": "healthgate", "ep": "ep-b", "rid": "res-ep-b-78", "status": 200, "etag": "W/\"b3cec822766dd19a\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.491, "error": null}
+{"phase": "healthgate", "ep": "ep-b", "rid": "res-ep-b-79", "status": 200, "etag": "W/\"3a5194c60019eccf\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.944, "error": null}
+{"phase": "healthgate", "ep": "ep-b", "rid": "res-ep-b-80", "status": 200, "etag": "W/\"509874768d1a6cd6\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.794, "error": null}
+{"phase": "healthgate", "ep": "ep-b", "rid": "res-ep-b-81", "status": 200, "etag": "W/\"a20fbad93c03459f\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.707, "error": null}
+{"phase": "healthgate", "ep": "ep-b", "rid": "res-ep-b-82", "status": 200, "etag": "W/\"5dc879490ffd1654\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.641, "error": null}
+{"phase": "healthgate", "ep": "ep-b", "rid": "res-ep-b-83", "status": 200, "etag": "W/\"f2f9ba83b0c8506c\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.512, "error": null}
+{"phase": "healthgate", "ep": "ep-b", "rid": "res-ep-b-84", "status": 200, "etag": "W/\"729e471e076b8dfe\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.626, "error": null}
+{"phase": "healthgate", "ep": "ep-b", "rid": "res-ep-b-85", "status": 200, "etag": "W/\"3c3eb9c87c4b19c0\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.604, "error": null}
+{"phase": "healthgate", "ep": "ep-b", "rid": "res-ep-b-86", "status": 200, "etag": "W/\"843097e05b4155f2\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.761, "error": null}
+{"phase": "healthgate", "ep": "ep-b", "rid": "res-ep-b-87", "status": 200, "etag": "W/\"c67676b6f83f9d0d\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.77, "error": null}
+{"phase": "healthgate", "ep": "ep-b", "rid": "res-ep-b-88", "status": 200, "etag": "W/\"015e10d349f6ca48\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 4.307, "error": null}
+{"phase": "healthgate", "ep": "ep-b", "rid": "res-ep-b-89", "status": 200, "etag": "W/\"fee71e04792af7f7\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 4.009, "error": null}
+{"phase": "healthgate", "ep": "ep-b", "rid": "res-ep-b-90", "status": 200, "etag": "W/\"0f5c28c07640b882\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.749, "error": null}
+{"phase": "healthgate", "ep": "ep-b", "rid": "res-ep-b-91", "status": 200, "etag": "W/\"42b77fcef12d2471\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 4.442, "error": null}
+{"phase": "healthgate", "ep": "ep-b", "rid": "res-ep-b-92", "status": 200, "etag": "W/\"99bf95c1edd9430c\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 4.1, "error": null}
+{"phase": "healthgate", "ep": "ep-b", "rid": "res-ep-b-93", "status": 200, "etag": "W/\"ca737fa56577eebf\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 4.529, "error": null}
+{"phase": "healthgate", "ep": "ep-b", "rid": "res-ep-b-94", "status": 200, "etag": "W/\"a7a42d9b18f266d5\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.792, "error": null}
+{"phase": "healthgate", "ep": "ep-b", "rid": "res-ep-b-95", "status": 200, "etag": "W/\"52ed403f3deaf892\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 4.473, "error": null}
+{"phase": "healthgate", "ep": "ep-b", "rid": "res-ep-b-96", "status": 200, "etag": "W/\"766e0ac80acda98b\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.642, "error": null}
+{"phase": "healthgate", "ep": "ep-b", "rid": "res-ep-b-97", "status": 200, "etag": "W/\"8b2a3ebd4ad6a615\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.756, "error": null}
+{"phase": "healthgate", "ep": "ep-b", "rid": "res-ep-b-98", "status": 200, "etag": "W/\"5e57c5f24329a9f0\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.86, "error": null}
+{"phase": "healthgate", "ep": "ep-b", "rid": "res-ep-b-99", "status": 200, "etag": "W/\"a99d948da6765953\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 4.699, "error": null}
+{"phase": "healthgate", "ep": "ep-b", "rid": "res-ep-b-100", "status": 200, "etag": "W/\"20ebfc7ef8db5e88\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 4.664, "error": null}
+{"phase": "healthgate", "ep": "ep-b", "rid": "res-ep-b-101", "status": 200, "etag": "W/\"9236af1442412617\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 4.297, "error": null}
+{"phase": "healthgate", "ep": "ep-b", "rid": "res-ep-b-102", "status": 200, "etag": "W/\"1d60ec683489c3ce\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 7.011, "error": null}
+{"phase": "healthgate", "ep": "ep-b", "rid": "res-ep-b-103", "status": 200, "etag": "W/\"84db79dbf70ce3f8\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 4.257, "error": null}
+{"phase": "healthgate", "ep": "ep-b", "rid": "res-ep-b-104", "status": 200, "etag": "W/\"8c5bb92313109375\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 4.988, "error": null}
+{"phase": "healthgate", "ep": "ep-b", "rid": "res-ep-b-105", "status": 200, "etag": "W/\"cf0ecb538421c338\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 5.1, "error": null}
+{"phase": "healthgate", "ep": "ep-b", "rid": "res-ep-b-106", "status": 200, "etag": "W/\"79cb7b5bca390b50\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 4.572, "error": null}
+{"phase": "healthgate", "ep": "ep-b", "rid": "res-ep-b-107", "status": 200, "etag": "W/\"c9f308370df77f06\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 5.775, "error": null}
+{"phase": "healthgate", "ep": "ep-b", "rid": "res-ep-b-108", "status": 200, "etag": "W/\"3b140b42f2b80795\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 4.184, "error": null}
+{"phase": "healthgate", "ep": "ep-b", "rid": "res-ep-b-109", "status": 200, "etag": "W/\"533b18bc2d210db9\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.924, "error": null}
+{"phase": "healthgate", "ep": "ep-b", "rid": "res-ep-b-110", "status": 200, "etag": "W/\"f224bb2db7e85c3f\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 4.232, "error": null}
+{"phase": "healthgate", "ep": "ep-b", "rid": "res-ep-b-111", "status": 200, "etag": "W/\"33b7b5f86a79df23\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.759, "error": null}
+{"phase": "healthgate", "ep": "ep-b", "rid": "res-ep-b-112", "status": 200, "etag": "W/\"67baabcb5576881e\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.604, "error": null}
+{"phase": "healthgate", "ep": "ep-b", "rid": "res-ep-b-113", "status": 200, "etag": "W/\"aa3d4fe51a0f452e\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.834, "error": null}
+{"phase": "healthgate", "ep": "ep-b", "rid": "res-ep-b-114", "status": 200, "etag": "W/\"e5340f85b82edc4d\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.487, "error": null}
+{"phase": "healthgate", "ep": "ep-b", "rid": "res-ep-b-115", "status": 200, "etag": "W/\"502693444474948e\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.283, "error": null}
+{"phase": "healthgate", "ep": "ep-b", "rid": "res-ep-b-116", "status": 200, "etag": "W/\"5cbfe900fa4d87a6\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.225, "error": null}
+{"phase": "healthgate", "ep": "ep-b", "rid": "res-ep-b-117", "status": 200, "etag": "W/\"9c77e3d883385cec\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.455, "error": null}
+{"phase": "healthgate", "ep": "ep-b", "rid": "res-ep-b-118", "status": 200, "etag": "W/\"571e264405db9833\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.869, "error": null}
+{"phase": "healthgate", "ep": "ep-b", "rid": "res-ep-b-119", "status": 200, "etag": "W/\"0505329f7be2892a\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.392, "error": null}
+{"phase": "healthgate", "ep": "ep-b", "rid": "res-ep-b-120", "status": 200, "etag": "W/\"c9642ee0ff33c22d\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.405, "error": null}
+{"phase": "healthgate", "ep": "ep-b", "rid": "res-ep-b-121", "status": 200, "etag": "W/\"cbe39d22da28fb21\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.612, "error": null}
+{"phase": "healthgate", "ep": "ep-b", "rid": "res-ep-b-122", "status": 200, "etag": "W/\"dec8279ac856772b\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.637, "error": null}
+{"phase": "healthgate", "ep": "ep-b", "rid": "res-ep-b-123", "status": 200, "etag": "W/\"25013ced62605375\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.491, "error": null}
+{"phase": "healthgate", "ep": "ep-b", "rid": "res-ep-b-124", "status": 200, "etag": "W/\"c8409435df0b7a16\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.334, "error": null}
+{"phase": "healthgate", "ep": "ep-b", "rid": "res-ep-b-125", "status": 200, "etag": "W/\"72deebcf82a96a25\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.766, "error": null}
+{"phase": "healthgate", "ep": "ep-b", "rid": "res-ep-b-126", "status": 200, "etag": "W/\"6ebfe9071bf2622b\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.406, "error": null}
+{"phase": "healthgate", "ep": "ep-b", "rid": "res-ep-b-127", "status": 200, "etag": "W/\"5843515e2b4378df\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.692, "error": null}
+{"phase": "healthgate", "ep": "ep-b", "rid": "res-ep-b-128", "status": 200, "etag": "W/\"5f5a77450ec6e879\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.95, "error": null}
+{"phase": "healthgate", "ep": "ep-b", "rid": "res-ep-b-129", "status": 200, "etag": "W/\"732c45bce8654b25\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.818, "error": null}
+{"phase": "healthgate", "ep": "ep-b", "rid": "res-ep-b-130", "status": 200, "etag": "W/\"6b920ca462c6c333\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 5.51, "error": null}
+{"phase": "healthgate", "ep": "ep-b", "rid": "res-ep-b-131", "status": 200, "etag": "W/\"2a1747ab6aaebf8a\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 4.156, "error": null}
+{"phase": "healthgate", "ep": "ep-b", "rid": "res-ep-b-132", "status": 200, "etag": "W/\"ce5468d38617b686\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.829, "error": null}
+{"phase": "healthgate", "ep": "ep-b", "rid": "res-ep-b-133", "status": 200, "etag": "W/\"43113549e656ea6b\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.972, "error": null}
+{"phase": "healthgate", "ep": "ep-b", "rid": "res-ep-b-134", "status": 200, "etag": "W/\"bf7234d9e58476dc\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.856, "error": null}
+{"phase": "healthgate", "ep": "ep-b", "rid": "res-ep-b-135", "status": 200, "etag": "W/\"ac3f83e614e68d3c\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 4.286, "error": null}
+{"phase": "healthgate", "ep": "ep-b", "rid": "res-ep-b-136", "status": 200, "etag": "W/\"8a950ffb67e76f38\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 4.12, "error": null}
+{"phase": "healthgate", "ep": "ep-b", "rid": "res-ep-b-137", "status": 200, "etag": "W/\"2e791cd4df73742b\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.953, "error": null}
+{"phase": "healthgate", "ep": "ep-b", "rid": "res-ep-b-138", "status": 200, "etag": "W/\"5c64ada821b1f1a6\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.894, "error": null}
+{"phase": "healthgate", "ep": "ep-b", "rid": "res-ep-b-139", "status": 200, "etag": "W/\"10ead10de2df0edc\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.788, "error": null}
+{"phase": "healthgate", "ep": "ep-b", "rid": "res-ep-b-140", "status": 200, "etag": "W/\"065d11cfeabb0a4b\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.696, "error": null}
+{"phase": "healthgate", "ep": "ep-b", "rid": "res-ep-b-141", "status": 200, "etag": "W/\"1aae0902f6cd063f\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 6.386, "error": null}
+{"phase": "healthgate", "ep": "ep-b", "rid": "res-ep-b-142", "status": 200, "etag": "W/\"e4f278711a51f8c3\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.706, "error": null}
+{"phase": "healthgate", "ep": "ep-b", "rid": "res-ep-b-143", "status": 200, "etag": "W/\"24c82a2fec4b1ddb\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 4.184, "error": null}
+{"phase": "healthgate", "ep": "ep-b", "rid": "res-ep-b-144", "status": 200, "etag": "W/\"5edbc61539942c59\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.834, "error": null}
+{"phase": "healthgate", "ep": "ep-b", "rid": "res-ep-b-145", "status": 200, "etag": "W/\"6cb5e63dc9bc7c66\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 4.815, "error": null}
+{"phase": "healthgate", "ep": "ep-b", "rid": "res-ep-b-146", "status": 200, "etag": "W/\"f9c700c329d9494b\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 5.931, "error": null}
+{"phase": "healthgate", "ep": "ep-b", "rid": "res-ep-b-147", "status": 200, "etag": "W/\"e57af7ad3a59e747\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 4.35, "error": null}
+{"phase": "healthgate", "ep": "ep-b", "rid": "res-ep-b-148", "status": 200, "etag": "W/\"6f928f50b3f1d63e\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.918, "error": null}
+{"phase": "healthgate", "ep": "ep-b", "rid": "res-ep-b-149", "status": 200, "etag": "W/\"2aa4e1b0cea77b79\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.799, "error": null}
+{"phase": "healthgate", "ep": "ep-b", "rid": "res-ep-b-150", "status": 200, "etag": "W/\"d253ed6f76d3f38f\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.966, "error": null}
+{"phase": "healthgate", "ep": "ep-b", "rid": "res-ep-b-151", "status": 200, "etag": "W/\"ce947f117d6dc151\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 4.394, "error": null}
+{"phase": "healthgate", "ep": "ep-b", "rid": "res-ep-b-152", "status": 200, "etag": "W/\"61934521829ca77e\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 4.789, "error": null}
+{"phase": "healthgate", "ep": "ep-b", "rid": "res-ep-b-153", "status": 200, "etag": "W/\"64d023022d6c9219\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.878, "error": null}
+{"phase": "healthgate", "ep": "ep-b", "rid": "res-ep-b-154", "status": 200, "etag": "W/\"29af0e01c47caaab\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.883, "error": null}
+{"phase": "healthgate", "ep": "ep-b", "rid": "res-ep-b-155", "status": 200, "etag": "W/\"8beea24ef5a0ad61\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 6.745, "error": null}
+{"phase": "healthgate", "ep": "ep-b", "rid": "res-ep-b-156", "status": 200, "etag": "W/\"7f57c83ff4b2ef37\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 4.611, "error": null}
+{"phase": "healthgate", "ep": "ep-b", "rid": "res-ep-b-157", "status": 200, "etag": "W/\"7fd35024cb0c2fcb\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.914, "error": null}
+{"phase": "healthgate", "ep": "ep-b", "rid": "res-ep-b-158", "status": 200, "etag": "W/\"d30d4a11115c2b8f\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.704, "error": null}
+{"phase": "healthgate", "ep": "ep-b", "rid": "res-ep-b-159", "status": 200, "etag": "W/\"0f5054228d2928f5\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.585, "error": null}
+{"phase": "healthgate", "ep": "ep-b", "rid": "res-ep-b-160", "status": 200, "etag": "W/\"9d72058395d2c1ed\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.764, "error": null}
+{"phase": "healthgate", "ep": "ep-b", "rid": "res-ep-b-161", "status": 200, "etag": "W/\"f777c7407503efa2\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.606, "error": null}
+{"phase": "healthgate", "ep": "ep-b", "rid": "res-ep-b-162", "status": 200, "etag": "W/\"758879b9c6e7bc33\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.428, "error": null}
+{"phase": "healthgate", "ep": "ep-b", "rid": "res-ep-b-163", "status": 200, "etag": "W/\"6f5a3d2f8d2003e7\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 5.758, "error": null}
+{"phase": "healthgate", "ep": "ep-b", "rid": "res-ep-b-164", "status": 200, "etag": "W/\"fdfe34c75f418f5a\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.905, "error": null}
+{"phase": "healthgate", "ep": "ep-b", "rid": "res-ep-b-165", "status": 200, "etag": "W/\"1510c2b180d05f7c\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.507, "error": null}
+{"phase": "healthgate", "ep": "ep-b", "rid": "res-ep-b-166", "status": 200, "etag": "W/\"9647a0c6f696fa61\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.681, "error": null}
+{"phase": "healthgate", "ep": "ep-b", "rid": "res-ep-b-167", "status": 200, "etag": "W/\"a14cc34f6675f3af\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.809, "error": null}
+{"phase": "healthgate", "ep": "ep-b", "rid": "res-ep-b-168", "status": 200, "etag": "W/\"873a6cac54f427bb\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 4.043, "error": null}
+{"phase": "healthgate", "ep": "ep-b", "rid": "res-ep-b-169", "status": 200, "etag": "W/\"ad222ed23b5ec444\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.631, "error": null}
+{"phase": "healthgate", "ep": "ep-b", "rid": "res-ep-b-170", "status": 200, "etag": "W/\"89b8bb9cf350793f\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.6, "error": null}
+{"phase": "healthgate", "ep": "ep-b", "rid": "res-ep-b-171", "status": 200, "etag": "W/\"b324deb2f69d1eb6\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.835, "error": null}
+{"phase": "healthgate", "ep": "ep-b", "rid": "res-ep-b-172", "status": 200, "etag": "W/\"38690996e56446d5\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.384, "error": null}
+{"phase": "healthgate", "ep": "ep-b", "rid": "res-ep-b-173", "status": 200, "etag": "W/\"cb3f54da7738ccd1\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.469, "error": null}
+{"phase": "healthgate", "ep": "ep-b", "rid": "res-ep-b-174", "status": 200, "etag": "W/\"85dde8fc26485ea9\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.622, "error": null}
+{"phase": "healthgate", "ep": "ep-b", "rid": "res-ep-b-175", "status": 200, "etag": "W/\"7c5aea35459678a7\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.779, "error": null}
+{"phase": "healthgate", "ep": "ep-b", "rid": "res-ep-b-176", "status": 200, "etag": "W/\"c66fa5a77f6100c7\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 4.364, "error": null}
+{"phase": "healthgate", "ep": "ep-b", "rid": "res-ep-b-177", "status": 200, "etag": "W/\"7f269a853cec0f0e\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.877, "error": null}
+{"phase": "healthgate", "ep": "ep-b", "rid": "res-ep-b-178", "status": 200, "etag": "W/\"f53b7212441d4096\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.528, "error": null}
+{"phase": "healthgate", "ep": "ep-b", "rid": "res-ep-b-179", "status": 200, "etag": "W/\"91e2c618c2aa5eca\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 4.508, "error": null}
+{"phase": "healthgate", "ep": "ep-b", "rid": "res-ep-b-180", "status": 200, "etag": "W/\"87db7a452de159bc\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.954, "error": null}
+{"phase": "healthgate", "ep": "ep-b", "rid": "res-ep-b-181", "status": 200, "etag": "W/\"7d52ca15fe8bccf7\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 4.076, "error": null}
+{"phase": "healthgate", "ep": "ep-b", "rid": "res-ep-b-182", "status": 200, "etag": "W/\"31bb6dbdc6f6e8d5\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.695, "error": null}
+{"phase": "healthgate", "ep": "ep-b", "rid": "res-ep-b-183", "status": 200, "etag": "W/\"587e5e8e4103a711\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 6.234, "error": null}
+{"phase": "healthgate", "ep": "ep-b", "rid": "res-ep-b-184", "status": 200, "etag": "W/\"769609d976c6b6a1\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.684, "error": null}
+{"phase": "healthgate", "ep": "ep-b", "rid": "res-ep-b-185", "status": 200, "etag": "W/\"32a7316a78cdd8b9\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.565, "error": null}
+{"phase": "healthgate", "ep": "ep-b", "rid": "res-ep-b-186", "status": 200, "etag": "W/\"e1bc6b3c566f123d\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.756, "error": null}
+{"phase": "healthgate", "ep": "ep-b", "rid": "res-ep-b-187", "status": 200, "etag": "W/\"82bf5250d5cc99b0\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.62, "error": null}
+{"phase": "healthgate", "ep": "ep-b", "rid": "res-ep-b-188", "status": 200, "etag": "W/\"a6b87306fc1a8c80\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 4.122, "error": null}
+{"phase": "healthgate", "ep": "ep-b", "rid": "res-ep-b-189", "status": 200, "etag": "W/\"0f0d33d35fb312cd\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.648, "error": null}
+{"phase": "healthgate", "ep": "ep-b", "rid": "res-ep-b-190", "status": 200, "etag": "W/\"27a2554034890e7f\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.902, "error": null}
+{"phase": "healthgate", "ep": "ep-b", "rid": "res-ep-b-191", "status": 200, "etag": "W/\"797567006c25de8e\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.694, "error": null}
+{"phase": "healthgate", "ep": "ep-b", "rid": "res-ep-b-192", "status": 200, "etag": "W/\"2705329f1c97d98b\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.819, "error": null}
+{"phase": "healthgate", "ep": "ep-b", "rid": "res-ep-b-193", "status": 200, "etag": "W/\"d9a294ca6c3957fd\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.738, "error": null}
+{"phase": "healthgate", "ep": "ep-b", "rid": "res-ep-b-194", "status": 200, "etag": "W/\"4860f13417fcfc60\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.887, "error": null}
+{"phase": "healthgate", "ep": "ep-b", "rid": "res-ep-b-195", "status": 200, "etag": "W/\"1aafaf98c1a62eed\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.598, "error": null}
+{"phase": "healthgate", "ep": "ep-b", "rid": "res-ep-b-196", "status": 200, "etag": "W/\"6362baa7ce4a6965\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.723, "error": null}
+{"phase": "healthgate", "ep": "ep-b", "rid": "res-ep-b-197", "status": 200, "etag": "W/\"17fda8c1e40e4b58\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.686, "error": null}
+{"phase": "healthgate", "ep": "ep-b", "rid": "res-ep-b-198", "status": 200, "etag": "W/\"2e711e2f7003ebc7\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.524, "error": null}
+{"phase": "healthgate", "ep": "ep-b", "rid": "res-ep-b-199", "status": 200, "etag": "W/\"72e82c8dd2346284\"", "inm": "W/\"0000000000000000\"", "inm_sent": true, "latency_ms": 3.893, "error": null}
+{"phase": "fresh_init", "rid": "fresh-0", "status": 200, "etag": "W/\"e0835c20670038dd\"", "latency_ms": 3.888}
+{"phase": "fresh_init", "rid": "fresh-1", "status": 200, "etag": "W/\"d2f6f67e3a0bac52\"", "latency_ms": 3.873}
+{"phase": "fresh_init", "rid": "fresh-2", "status": 200, "etag": "W/\"11e55bc8d22b0cef\"", "latency_ms": 3.72}
+{"phase": "fresh_init", "rid": "fresh-3", "status": 200, "etag": "W/\"ab8fe04fe59b7e19\"", "latency_ms": 3.611}
+{"phase": "fresh_init", "rid": "fresh-4", "status": 200, "etag": "W/\"5a4ee478263ce2f1\"", "latency_ms": 3.935}
+{"phase": "fresh_init", "rid": "fresh-5", "status": 200, "etag": "W/\"9a1c716cc65559ab\"", "latency_ms": 3.432}
+{"phase": "fresh_init", "rid": "fresh-6", "status": 200, "etag": "W/\"95d768889e677396\"", "latency_ms": 3.598}
+{"phase": "fresh_init", "rid": "fresh-7", "status": 200, "etag": "W/\"ea7ddffb253bbcf5\"", "latency_ms": 3.778}
+{"phase": "fresh_init", "rid": "fresh-8", "status": 200, "etag": "W/\"0d544593fb359b92\"", "latency_ms": 3.518}
+{"phase": "fresh_init", "rid": "fresh-9", "status": 200, "etag": "W/\"938a5e260c6ab823\"", "latency_ms": 3.614}
+{"phase": "fresh_init", "rid": "fresh-10", "status": 200, "etag": "W/\"dfc66df4127cae53\"", "latency_ms": 3.724}
+{"phase": "fresh_init", "rid": "fresh-11", "status": 200, "etag": "W/\"65f373a87541ece7\"", "latency_ms": 8.149}
+{"phase": "fresh_init", "rid": "fresh-12", "status": 200, "etag": "W/\"e199e68ad20a5cfd\"", "latency_ms": 3.477}
+{"phase": "fresh_init", "rid": "fresh-13", "status": 200, "etag": "W/\"5e9a03ed45d45183\"", "latency_ms": 3.316}
+{"phase": "fresh_init", "rid": "fresh-14", "status": 200, "etag": "W/\"b044cdcf9717aa0f\"", "latency_ms": 4.406}
+{"phase": "fresh_init", "rid": "fresh-15", "status": 200, "etag": "W/\"14073102c9775c52\"", "latency_ms": 3.443}
+{"phase": "fresh_init", "rid": "fresh-16", "status": 200, "etag": "W/\"e16d6b7870be7f87\"", "latency_ms": 3.504}
+{"phase": "fresh_init", "rid": "fresh-17", "status": 200, "etag": "W/\"2480351af5e1251a\"", "latency_ms": 3.528}
+{"phase": "fresh_init", "rid": "fresh-18", "status": 200, "etag": "W/\"a98f1cbbae48d04c\"", "latency_ms": 3.601}
+{"phase": "fresh_init", "rid": "fresh-19", "status": 200, "etag": "W/\"7ddd754ad807ffa1\"", "latency_ms": 3.631}
+{"phase": "fresh_init", "rid": "fresh-20", "status": 200, "etag": "W/\"b37f59a7efa06f4a\"", "latency_ms": 3.341}
+{"phase": "fresh_init", "rid": "fresh-21", "status": 200, "etag": "W/\"7332477fe977a77e\"", "latency_ms": 3.373}
+{"phase": "fresh_init", "rid": "fresh-22", "status": 200, "etag": "W/\"43ffa337a657da56\"", "latency_ms": 3.489}
+{"phase": "fresh_init", "rid": "fresh-23", "status": 200, "etag": "W/\"649b03ad7cd89ef0\"", "latency_ms": 3.347}
+{"phase": "fresh_init", "rid": "fresh-24", "status": 200, "etag": "W/\"f1432e231032c3f9\"", "latency_ms": 3.567}
+{"phase": "fresh_init", "rid": "fresh-25", "status": 200, "etag": "W/\"e7c6069a91e9e26b\"", "latency_ms": 3.375}
+{"phase": "fresh_init", "rid": "fresh-26", "status": 200, "etag": "W/\"5b608c72d142ae3c\"", "latency_ms": 3.404}
+{"phase": "fresh_init", "rid": "fresh-27", "status": 200, "etag": "W/\"1c8de752d4f29512\"", "latency_ms": 3.699}
+{"phase": "fresh_init", "rid": "fresh-28", "status": 200, "etag": "W/\"58c4deda22075b60\"", "latency_ms": 4.204}
+{"phase": "fresh_init", "rid": "fresh-29", "status": 200, "etag": "W/\"88a5a6b3061f2dd9\"", "latency_ms": 3.534}
+{"phase": "fresh_init", "rid": "fresh-30", "status": 200, "etag": "W/\"dcb4ba209475621c\"", "latency_ms": 3.217}
+{"phase": "fresh_init", "rid": "fresh-31", "status": 200, "etag": "W/\"fe1ee3e7819d98bb\"", "latency_ms": 3.504}
+{"phase": "fresh_init", "rid": "fresh-32", "status": 200, "etag": "W/\"56f57fb05aa1a816\"", "latency_ms": 4.076}
+{"phase": "fresh_init", "rid": "fresh-33", "status": 200, "etag": "W/\"0953c93f981ecdd4\"", "latency_ms": 4.218}
+{"phase": "fresh_init", "rid": "fresh-34", "status": 200, "etag": "W/\"8ff9930e0eeee865\"", "latency_ms": 4.099}
+{"phase": "fresh_init", "rid": "fresh-35", "status": 200, "etag": "W/\"3df934063904d2d4\"", "latency_ms": 4.566}
+{"phase": "fresh_init", "rid": "fresh-36", "status": 200, "etag": "W/\"65aa46d38876d38e\"", "latency_ms": 4.195}
+{"phase": "fresh_init", "rid": "fresh-37", "status": 200, "etag": "W/\"354d4ffd1debd942\"", "latency_ms": 3.906}
+{"phase": "fresh_init", "rid": "fresh-38", "status": 200, "etag": "W/\"f3d740f578a6afe0\"", "latency_ms": 3.349}
+{"phase": "fresh_init", "rid": "fresh-39", "status": 200, "etag": "W/\"5c36b8439a4354cc\"", "latency_ms": 8.278}
+{"phase": "fresh_init", "rid": "fresh-40", "status": 200, "etag": "W/\"a960ff16b61eac51\"", "latency_ms": 3.486}
+{"phase": "fresh_init", "rid": "fresh-41", "status": 200, "etag": "W/\"6f53f6d5fb1da486\"", "latency_ms": 3.38}
+{"phase": "fresh_init", "rid": "fresh-42", "status": 200, "etag": "W/\"01f411f1d03eb629\"", "latency_ms": 3.432}
+{"phase": "fresh_init", "rid": "fresh-43", "status": 200, "etag": "W/\"c8ff7ae2b2dc1070\"", "latency_ms": 3.432}
+{"phase": "fresh_init", "rid": "fresh-44", "status": 200, "etag": "W/\"59d9f5b5c962fa62\"", "latency_ms": 3.278}
+{"phase": "fresh_init", "rid": "fresh-45", "status": 200, "etag": "W/\"962789eb63d0f120\"", "latency_ms": 3.279}
+{"phase": "fresh_init", "rid": "fresh-46", "status": 200, "etag": "W/\"065a79db9e575e09\"", "latency_ms": 3.435}
+{"phase": "fresh_init", "rid": "fresh-47", "status": 200, "etag": "W/\"433dda74b3fedadb\"", "latency_ms": 3.544}
+{"phase": "fresh_init", "rid": "fresh-48", "status": 200, "etag": "W/\"8a3f14f5111331b3\"", "latency_ms": 3.241}
+{"phase": "fresh_init", "rid": "fresh-49", "status": 200, "etag": "W/\"ae2c83cf9a97068b\"", "latency_ms": 3.18}
+{"phase": "fresh_init", "rid": "fresh-50", "status": 200, "etag": "W/\"8451b58366e09bec\"", "latency_ms": 3.237}
+{"phase": "fresh_init", "rid": "fresh-51", "status": 200, "etag": "W/\"5b5ceb4e68b20da8\"", "latency_ms": 3.676}
+{"phase": "fresh_init", "rid": "fresh-52", "status": 200, "etag": "W/\"d426491bf20a8aa8\"", "latency_ms": 3.229}
+{"phase": "fresh_init", "rid": "fresh-53", "status": 200, "etag": "W/\"adff5af6d1abe3a8\"", "latency_ms": 3.525}
+{"phase": "fresh_init", "rid": "fresh-54", "status": 200, "etag": "W/\"9bdad718d9dd24e5\"", "latency_ms": 3.189}
+{"phase": "fresh_init", "rid": "fresh-55", "status": 200, "etag": "W/\"1472e73e1e8af8ad\"", "latency_ms": 3.83}
+{"phase": "fresh_init", "rid": "fresh-56", "status": 200, "etag": "W/\"40e21a0577f09c33\"", "latency_ms": 3.689}
+{"phase": "fresh_init", "rid": "fresh-57", "status": 200, "etag": "W/\"6e88820c7a95faef\"", "latency_ms": 3.426}
+{"phase": "fresh_init", "rid": "fresh-58", "status": 200, "etag": "W/\"6e95654be2daaa4e\"", "latency_ms": 3.938}
+{"phase": "fresh_init", "rid": "fresh-59", "status": 200, "etag": "W/\"47e4535e37c5de1a\"", "latency_ms": 3.479}
+{"phase": "fresh_init", "rid": "fresh-60", "status": 200, "etag": "W/\"b252421e75b76167\"", "latency_ms": 3.402}
+{"phase": "fresh_init", "rid": "fresh-61", "status": 200, "etag": "W/\"4bdb25f155913440\"", "latency_ms": 3.687}
+{"phase": "fresh_init", "rid": "fresh-62", "status": 200, "etag": "W/\"96a4d4c4faf85a75\"", "latency_ms": 3.528}
+{"phase": "fresh_init", "rid": "fresh-63", "status": 200, "etag": "W/\"740668e3d2fcd6bf\"", "latency_ms": 3.669}
+{"phase": "fresh_init", "rid": "fresh-64", "status": 200, "etag": "W/\"3c1d86ff3b009be1\"", "latency_ms": 3.487}
+{"phase": "fresh_init", "rid": "fresh-65", "status": 200, "etag": "W/\"9499877e7bb5d697\"", "latency_ms": 3.591}
+{"phase": "fresh_init", "rid": "fresh-66", "status": 200, "etag": "W/\"47b285c6ffd5d5f8\"", "latency_ms": 3.781}
+{"phase": "fresh_init", "rid": "fresh-67", "status": 200, "etag": "W/\"88ddea09a8384a01\"", "latency_ms": 3.589}
+{"phase": "fresh_init", "rid": "fresh-68", "status": 200, "etag": "W/\"0735f60295f67280\"", "latency_ms": 6.853}
+{"phase": "fresh_init", "rid": "fresh-69", "status": 200, "etag": "W/\"9c75d77efca9d261\"", "latency_ms": 3.569}
+{"phase": "fresh_init", "rid": "fresh-70", "status": 200, "etag": "W/\"a5deb2c7dc6ee7a6\"", "latency_ms": 3.857}
+{"phase": "fresh_init", "rid": "fresh-71", "status": 200, "etag": "W/\"f37c9138c98a3b9e\"", "latency_ms": 3.774}
+{"phase": "fresh_init", "rid": "fresh-72", "status": 200, "etag": "W/\"43ccfca48eeae214\"", "latency_ms": 3.588}
+{"phase": "fresh_init", "rid": "fresh-73", "status": 200, "etag": "W/\"27804f28ab2a0a42\"", "latency_ms": 3.606}
+{"phase": "fresh_init", "rid": "fresh-74", "status": 200, "etag": "W/\"b51528a7e981ed01\"", "latency_ms": 3.832}
+{"phase": "fresh_init", "rid": "fresh-75", "status": 200, "etag": "W/\"f2c7c3a2009e350c\"", "latency_ms": 3.972}
+{"phase": "fresh_init", "rid": "fresh-76", "status": 200, "etag": "W/\"b9691c5c35fbb90d\"", "latency_ms": 3.767}
+{"phase": "fresh_init", "rid": "fresh-77", "status": 200, "etag": "W/\"4aad8338162f65fb\"", "latency_ms": 3.688}
+{"phase": "fresh_init", "rid": "fresh-78", "status": 200, "etag": "W/\"2f471cff3e1d5a46\"", "latency_ms": 3.674}
+{"phase": "fresh_init", "rid": "fresh-79", "status": 200, "etag": "W/\"b8534b9fcf86fcb5\"", "latency_ms": 3.543}
+{"phase": "fresh_init", "rid": "fresh-80", "status": 200, "etag": "W/\"46bbe335cb04fd2f\"", "latency_ms": 3.555}
+{"phase": "fresh_init", "rid": "fresh-81", "status": 200, "etag": "W/\"9e1e5057a4994827\"", "latency_ms": 3.456}
+{"phase": "fresh_init", "rid": "fresh-82", "status": 200, "etag": "W/\"70059e322286bad6\"", "latency_ms": 3.407}
+{"phase": "fresh_init", "rid": "fresh-83", "status": 200, "etag": "W/\"ae725cb3fe166320\"", "latency_ms": 3.414}
+{"phase": "fresh_init", "rid": "fresh-84", "status": 200, "etag": "W/\"058d5d7943c45e3b\"", "latency_ms": 3.945}
+{"phase": "fresh_init", "rid": "fresh-85", "status": 200, "etag": "W/\"3623cf05cb037b1b\"", "latency_ms": 3.604}
+{"phase": "fresh_init", "rid": "fresh-86", "status": 200, "etag": "W/\"391829d188c36066\"", "latency_ms": 3.411}
+{"phase": "fresh_init", "rid": "fresh-87", "status": 200, "etag": "W/\"3e6b6dc08c5336d2\"", "latency_ms": 3.809}
+{"phase": "fresh_init", "rid": "fresh-88", "status": 200, "etag": "W/\"b369f3c430c3ed8b\"", "latency_ms": 3.572}
+{"phase": "fresh_init", "rid": "fresh-89", "status": 200, "etag": "W/\"d8db7a95544f0051\"", "latency_ms": 3.895}
+{"phase": "fresh_init", "rid": "fresh-90", "status": 200, "etag": "W/\"57723016035bbbb2\"", "latency_ms": 3.558}
+{"phase": "fresh_init", "rid": "fresh-91", "status": 200, "etag": "W/\"f35756dc46a1455b\"", "latency_ms": 3.615}
+{"phase": "fresh_init", "rid": "fresh-92", "status": 200, "etag": "W/\"4d76c4dffbae0a43\"", "latency_ms": 3.561}
+{"phase": "fresh_init", "rid": "fresh-93", "status": 200, "etag": "W/\"21c1b7012c07aa8f\"", "latency_ms": 3.688}
+{"phase": "fresh_init", "rid": "fresh-94", "status": 200, "etag": "W/\"6e598061406f28be\"", "latency_ms": 3.64}
+{"phase": "fresh_init", "rid": "fresh-95", "status": 200, "etag": "W/\"2f0858542de0c099\"", "latency_ms": 4.961}
+{"phase": "fresh_init", "rid": "fresh-96", "status": 200, "etag": "W/\"e1b2c71a2e992c4f\"", "latency_ms": 4.807}
+{"phase": "fresh_init", "rid": "fresh-97", "status": 200, "etag": "W/\"25ee19b3b9163545\"", "latency_ms": 5.664}
+{"phase": "fresh_init", "rid": "fresh-98", "status": 200, "etag": "W/\"90246c3681584de2\"", "latency_ms": 3.66}
+{"phase": "fresh_init", "rid": "fresh-99", "status": 200, "etag": "W/\"da9f59deaf2ec765\"", "latency_ms": 3.616}
+{"phase": "fresh_init", "rid": "fresh-100", "status": 200, "etag": "W/\"39c12762ab0ce146\"", "latency_ms": 3.793}
+{"phase": "fresh_init", "rid": "fresh-101", "status": 200, "etag": "W/\"98d918049acf16fa\"", "latency_ms": 3.671}
+{"phase": "fresh_init", "rid": "fresh-102", "status": 200, "etag": "W/\"bfcea443ef26b7d9\"", "latency_ms": 3.847}
+{"phase": "fresh_init", "rid": "fresh-103", "status": 200, "etag": "W/\"7f1d78d0dd27b64f\"", "latency_ms": 3.959}
+{"phase": "fresh_init", "rid": "fresh-104", "status": 200, "etag": "W/\"3dc5c8eb17d4a01b\"", "latency_ms": 4.654}
+{"phase": "fresh_init", "rid": "fresh-105", "status": 200, "etag": "W/\"d1ff3ecefd8e5cfd\"", "latency_ms": 3.831}
+{"phase": "fresh_init", "rid": "fresh-106", "status": 200, "etag": "W/\"7dd02288cdd5d221\"", "latency_ms": 3.776}
+{"phase": "fresh_init", "rid": "fresh-107", "status": 200, "etag": "W/\"c5acb4f13a00a30c\"", "latency_ms": 3.558}
+{"phase": "fresh_init", "rid": "fresh-108", "status": 200, "etag": "W/\"8a6d84a8a5c4b2fa\"", "latency_ms": 3.827}
+{"phase": "fresh_init", "rid": "fresh-109", "status": 200, "etag": "W/\"c62a68fc1f642030\"", "latency_ms": 3.777}
+{"phase": "fresh_init", "rid": "fresh-110", "status": 200, "etag": "W/\"05349a585f6840ee\"", "latency_ms": 3.702}
+{"phase": "fresh_init", "rid": "fresh-111", "status": 200, "etag": "W/\"0464c8dc9d77804e\"", "latency_ms": 3.425}
+{"phase": "fresh_init", "rid": "fresh-112", "status": 200, "etag": "W/\"2bf72ccb4b9f5421\"", "latency_ms": 3.741}
+{"phase": "fresh_init", "rid": "fresh-113", "status": 200, "etag": "W/\"a62253e48b8d85d9\"", "latency_ms": 3.917}
+{"phase": "fresh_init", "rid": "fresh-114", "status": 200, "etag": "W/\"292d0f256d8cce1f\"", "latency_ms": 3.793}
+{"phase": "fresh_init", "rid": "fresh-115", "status": 200, "etag": "W/\"50204b22589d5b36\"", "latency_ms": 3.561}
+{"phase": "fresh_init", "rid": "fresh-116", "status": 200, "etag": "W/\"f7125c68f829e613\"", "latency_ms": 3.899}
+{"phase": "fresh_init", "rid": "fresh-117", "status": 200, "etag": "W/\"9a0e9c5fa378e846\"", "latency_ms": 3.789}
+{"phase": "fresh_init", "rid": "fresh-118", "status": 200, "etag": "W/\"7607c41956a56e5b\"", "latency_ms": 3.52}
+{"phase": "fresh_init", "rid": "fresh-119", "status": 200, "etag": "W/\"f33403c175213f00\"", "latency_ms": 3.667}
+{"phase": "fresh_init", "rid": "fresh-120", "status": 200, "etag": "W/\"01025466b189954d\"", "latency_ms": 4.008}
+{"phase": "fresh_init", "rid": "fresh-121", "status": 200, "etag": "W/\"9bfa6dda96ac3596\"", "latency_ms": 4.486}
+{"phase": "fresh_init", "rid": "fresh-122", "status": 200, "etag": "W/\"048df6a38de63de4\"", "latency_ms": 3.644}
+{"phase": "fresh_init", "rid": "fresh-123", "status": 200, "etag": "W/\"2b9e6d3ebda34248\"", "latency_ms": 4.009}
+{"phase": "fresh_init", "rid": "fresh-124", "status": 200, "etag": "W/\"a421ed08ba7b5509\"", "latency_ms": 3.818}
+{"phase": "fresh_init", "rid": "fresh-125", "status": 200, "etag": "W/\"a347b42c103aafcc\"", "latency_ms": 6.557}
+{"phase": "fresh_init", "rid": "fresh-126", "status": 200, "etag": "W/\"ee5909768d1064c7\"", "latency_ms": 3.763}
+{"phase": "fresh_init", "rid": "fresh-127", "status": 200, "etag": "W/\"b3b6adf3d41dbd0d\"", "latency_ms": 3.402}
+{"phase": "fresh_init", "rid": "fresh-128", "status": 200, "etag": "W/\"6ef15b07d8c60192\"", "latency_ms": 3.665}
+{"phase": "fresh_init", "rid": "fresh-129", "status": 200, "etag": "W/\"a01af353465f2489\"", "latency_ms": 3.435}
+{"phase": "fresh_init", "rid": "fresh-130", "status": 200, "etag": "W/\"5267ee1ee845155d\"", "latency_ms": 3.439}
+{"phase": "fresh_init", "rid": "fresh-131", "status": 200, "etag": "W/\"164ade5f2ac9f596\"", "latency_ms": 3.332}
+{"phase": "fresh_init", "rid": "fresh-132", "status": 200, "etag": "W/\"2676030b2ddf7e44\"", "latency_ms": 3.704}
+{"phase": "fresh_init", "rid": "fresh-133", "status": 200, "etag": "W/\"3661b1061d7064bb\"", "latency_ms": 5.347}
+{"phase": "fresh_init", "rid": "fresh-134", "status": 200, "etag": "W/\"bba18bb1980b356a\"", "latency_ms": 3.749}
+{"phase": "fresh_init", "rid": "fresh-135", "status": 200, "etag": "W/\"57fcaa990775b805\"", "latency_ms": 3.698}
+{"phase": "fresh_init", "rid": "fresh-136", "status": 200, "etag": "W/\"366b28370ceee71a\"", "latency_ms": 3.369}
+{"phase": "fresh_init", "rid": "fresh-137", "status": 200, "etag": "W/\"8be64d0e3919d5eb\"", "latency_ms": 3.635}
+{"phase": "fresh_init", "rid": "fresh-138", "status": 200, "etag": "W/\"d8b758fd2afa50a5\"", "latency_ms": 3.558}
+{"phase": "fresh_init", "rid": "fresh-139", "status": 200, "etag": "W/\"900ca32135f231dd\"", "latency_ms": 3.719}
+{"phase": "fresh_init", "rid": "fresh-140", "status": 200, "etag": "W/\"4d70ccc9e989df0a\"", "latency_ms": 4.003}
+{"phase": "fresh_init", "rid": "fresh-141", "status": 200, "etag": "W/\"0b2258e80cc79c90\"", "latency_ms": 3.784}
+{"phase": "fresh_init", "rid": "fresh-142", "status": 200, "etag": "W/\"87a59d96f2a2863b\"", "latency_ms": 3.653}
+{"phase": "fresh_init", "rid": "fresh-143", "status": 200, "etag": "W/\"80dc79e893b9f4ea\"", "latency_ms": 3.53}
+{"phase": "fresh_init", "rid": "fresh-144", "status": 200, "etag": "W/\"c803d7b01bb5e8ed\"", "latency_ms": 3.69}
+{"phase": "fresh_init", "rid": "fresh-145", "status": 200, "etag": "W/\"ccbe84a776476c19\"", "latency_ms": 3.919}
+{"phase": "fresh_init", "rid": "fresh-146", "status": 200, "etag": "W/\"e96362452d330e8d\"", "latency_ms": 3.993}
+{"phase": "fresh_init", "rid": "fresh-147", "status": 200, "etag": "W/\"bec5e3320fa69fcd\"", "latency_ms": 4.15}
+{"phase": "fresh_init", "rid": "fresh-148", "status": 200, "etag": "W/\"acbf7dba304f833c\"", "latency_ms": 3.533}
+{"phase": "fresh_init", "rid": "fresh-149", "status": 200, "etag": "W/\"ca30ffe476ffbdd9\"", "latency_ms": 3.65}
+{"phase": "n0_probe", "rid": "fresh-0", "status": 304, "inm": "W/\"e0835c20670038dd\"", "fresh_pred": true, "ground_truth_fresh": true, "latency_ms": 2.61, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n0_probe", "rid": "fresh-1", "status": 304, "inm": "W/\"d2f6f67e3a0bac52\"", "fresh_pred": true, "ground_truth_fresh": true, "latency_ms": 2.564, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n0_probe", "rid": "fresh-2", "status": 304, "inm": "W/\"11e55bc8d22b0cef\"", "fresh_pred": true, "ground_truth_fresh": true, "latency_ms": 2.7, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n0_probe", "rid": "fresh-3", "status": 304, "inm": "W/\"ab8fe04fe59b7e19\"", "fresh_pred": true, "ground_truth_fresh": true, "latency_ms": 2.967, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n0_probe", "rid": "fresh-4", "status": 304, "inm": "W/\"5a4ee478263ce2f1\"", "fresh_pred": true, "ground_truth_fresh": true, "latency_ms": 2.67, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n0_probe", "rid": "fresh-5", "status": 304, "inm": "W/\"9a1c716cc65559ab\"", "fresh_pred": true, "ground_truth_fresh": true, "latency_ms": 4.368, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n0_probe", "rid": "fresh-6", "status": 304, "inm": "W/\"95d768889e677396\"", "fresh_pred": true, "ground_truth_fresh": true, "latency_ms": 2.5, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n0_probe", "rid": "fresh-7", "status": 304, "inm": "W/\"ea7ddffb253bbcf5\"", "fresh_pred": true, "ground_truth_fresh": true, "latency_ms": 2.549, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n0_probe", "rid": "fresh-8", "status": 304, "inm": "W/\"0d544593fb359b92\"", "fresh_pred": true, "ground_truth_fresh": true, "latency_ms": 2.365, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n0_probe", "rid": "fresh-9", "status": 304, "inm": "W/\"938a5e260c6ab823\"", "fresh_pred": true, "ground_truth_fresh": true, "latency_ms": 2.528, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n0_probe", "rid": "fresh-10", "status": 304, "inm": "W/\"dfc66df4127cae53\"", "fresh_pred": true, "ground_truth_fresh": true, "latency_ms": 2.898, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n0_probe", "rid": "fresh-11", "status": 304, "inm": "W/\"65f373a87541ece7\"", "fresh_pred": true, "ground_truth_fresh": true, "latency_ms": 2.571, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n0_probe", "rid": "fresh-12", "status": 304, "inm": "W/\"e199e68ad20a5cfd\"", "fresh_pred": true, "ground_truth_fresh": true, "latency_ms": 2.561, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n0_probe", "rid": "fresh-13", "status": 304, "inm": "W/\"5e9a03ed45d45183\"", "fresh_pred": true, "ground_truth_fresh": true, "latency_ms": 2.632, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n0_probe", "rid": "fresh-14", "status": 304, "inm": "W/\"b044cdcf9717aa0f\"", "fresh_pred": true, "ground_truth_fresh": true, "latency_ms": 2.539, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n0_probe", "rid": "fresh-15", "status": 304, "inm": "W/\"14073102c9775c52\"", "fresh_pred": true, "ground_truth_fresh": true, "latency_ms": 2.502, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n0_probe", "rid": "fresh-16", "status": 304, "inm": "W/\"e16d6b7870be7f87\"", "fresh_pred": true, "ground_truth_fresh": true, "latency_ms": 2.463, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n0_probe", "rid": "fresh-17", "status": 304, "inm": "W/\"2480351af5e1251a\"", "fresh_pred": true, "ground_truth_fresh": true, "latency_ms": 2.469, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n0_probe", "rid": "fresh-18", "status": 304, "inm": "W/\"a98f1cbbae48d04c\"", "fresh_pred": true, "ground_truth_fresh": true, "latency_ms": 2.499, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n0_probe", "rid": "fresh-19", "status": 304, "inm": "W/\"7ddd754ad807ffa1\"", "fresh_pred": true, "ground_truth_fresh": true, "latency_ms": 2.9, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n0_probe", "rid": "fresh-20", "status": 304, "inm": "W/\"b37f59a7efa06f4a\"", "fresh_pred": true, "ground_truth_fresh": true, "latency_ms": 2.842, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n0_probe", "rid": "fresh-21", "status": 304, "inm": "W/\"7332477fe977a77e\"", "fresh_pred": true, "ground_truth_fresh": true, "latency_ms": 2.842, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n0_probe", "rid": "fresh-22", "status": 304, "inm": "W/\"43ffa337a657da56\"", "fresh_pred": true, "ground_truth_fresh": true, "latency_ms": 2.941, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n0_probe", "rid": "fresh-23", "status": 304, "inm": "W/\"649b03ad7cd89ef0\"", "fresh_pred": true, "ground_truth_fresh": true, "latency_ms": 2.841, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n0_probe", "rid": "fresh-24", "status": 304, "inm": "W/\"f1432e231032c3f9\"", "fresh_pred": true, "ground_truth_fresh": true, "latency_ms": 2.802, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n0_probe", "rid": "fresh-25", "status": 304, "inm": "W/\"e7c6069a91e9e26b\"", "fresh_pred": true, "ground_truth_fresh": true, "latency_ms": 2.771, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n0_probe", "rid": "fresh-26", "status": 304, "inm": "W/\"5b608c72d142ae3c\"", "fresh_pred": true, "ground_truth_fresh": true, "latency_ms": 2.535, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n0_probe", "rid": "fresh-27", "status": 304, "inm": "W/\"1c8de752d4f29512\"", "fresh_pred": true, "ground_truth_fresh": true, "latency_ms": 2.575, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n0_probe", "rid": "fresh-28", "status": 304, "inm": "W/\"58c4deda22075b60\"", "fresh_pred": true, "ground_truth_fresh": true, "latency_ms": 2.642, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n0_probe", "rid": "fresh-29", "status": 304, "inm": "W/\"88a5a6b3061f2dd9\"", "fresh_pred": true, "ground_truth_fresh": true, "latency_ms": 2.643, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n0_probe", "rid": "fresh-30", "status": 304, "inm": "W/\"dcb4ba209475621c\"", "fresh_pred": true, "ground_truth_fresh": true, "latency_ms": 2.659, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n0_probe", "rid": "fresh-31", "status": 304, "inm": "W/\"fe1ee3e7819d98bb\"", "fresh_pred": true, "ground_truth_fresh": true, "latency_ms": 2.545, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n0_probe", "rid": "fresh-32", "status": 304, "inm": "W/\"56f57fb05aa1a816\"", "fresh_pred": true, "ground_truth_fresh": true, "latency_ms": 2.759, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n0_probe", "rid": "fresh-33", "status": 304, "inm": "W/\"0953c93f981ecdd4\"", "fresh_pred": true, "ground_truth_fresh": true, "latency_ms": 2.568, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n0_probe", "rid": "fresh-34", "status": 304, "inm": "W/\"8ff9930e0eeee865\"", "fresh_pred": true, "ground_truth_fresh": true, "latency_ms": 2.459, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n0_probe", "rid": "fresh-35", "status": 304, "inm": "W/\"3df934063904d2d4\"", "fresh_pred": true, "ground_truth_fresh": true, "latency_ms": 2.45, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n0_probe", "rid": "fresh-36", "status": 304, "inm": "W/\"65aa46d38876d38e\"", "fresh_pred": true, "ground_truth_fresh": true, "latency_ms": 2.518, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n0_probe", "rid": "fresh-37", "status": 304, "inm": "W/\"354d4ffd1debd942\"", "fresh_pred": true, "ground_truth_fresh": true, "latency_ms": 2.84, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n0_probe", "rid": "fresh-38", "status": 304, "inm": "W/\"f3d740f578a6afe0\"", "fresh_pred": true, "ground_truth_fresh": true, "latency_ms": 2.573, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n0_probe", "rid": "fresh-39", "status": 304, "inm": "W/\"5c36b8439a4354cc\"", "fresh_pred": true, "ground_truth_fresh": true, "latency_ms": 2.659, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n0_probe", "rid": "fresh-40", "status": 304, "inm": "W/\"a960ff16b61eac51\"", "fresh_pred": true, "ground_truth_fresh": true, "latency_ms": 2.422, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n0_probe", "rid": "fresh-41", "status": 304, "inm": "W/\"6f53f6d5fb1da486\"", "fresh_pred": true, "ground_truth_fresh": true, "latency_ms": 2.551, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n0_probe", "rid": "fresh-42", "status": 304, "inm": "W/\"01f411f1d03eb629\"", "fresh_pred": true, "ground_truth_fresh": true, "latency_ms": 2.666, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n0_probe", "rid": "fresh-43", "status": 304, "inm": "W/\"c8ff7ae2b2dc1070\"", "fresh_pred": true, "ground_truth_fresh": true, "latency_ms": 2.552, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n0_probe", "rid": "fresh-44", "status": 304, "inm": "W/\"59d9f5b5c962fa62\"", "fresh_pred": true, "ground_truth_fresh": true, "latency_ms": 4.493, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n0_probe", "rid": "fresh-45", "status": 304, "inm": "W/\"962789eb63d0f120\"", "fresh_pred": true, "ground_truth_fresh": true, "latency_ms": 2.699, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n0_probe", "rid": "fresh-46", "status": 304, "inm": "W/\"065a79db9e575e09\"", "fresh_pred": true, "ground_truth_fresh": true, "latency_ms": 2.459, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n0_probe", "rid": "fresh-47", "status": 304, "inm": "W/\"433dda74b3fedadb\"", "fresh_pred": true, "ground_truth_fresh": true, "latency_ms": 2.521, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n0_probe", "rid": "fresh-48", "status": 304, "inm": "W/\"8a3f14f5111331b3\"", "fresh_pred": true, "ground_truth_fresh": true, "latency_ms": 2.578, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n0_probe", "rid": "fresh-49", "status": 304, "inm": "W/\"ae2c83cf9a97068b\"", "fresh_pred": true, "ground_truth_fresh": true, "latency_ms": 2.388, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n0_probe", "rid": "fresh-50", "status": 304, "inm": "W/\"8451b58366e09bec\"", "fresh_pred": true, "ground_truth_fresh": true, "latency_ms": 2.489, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n0_probe", "rid": "fresh-51", "status": 304, "inm": "W/\"5b5ceb4e68b20da8\"", "fresh_pred": true, "ground_truth_fresh": true, "latency_ms": 2.485, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n0_probe", "rid": "fresh-52", "status": 304, "inm": "W/\"d426491bf20a8aa8\"", "fresh_pred": true, "ground_truth_fresh": true, "latency_ms": 2.476, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n0_probe", "rid": "fresh-53", "status": 304, "inm": "W/\"adff5af6d1abe3a8\"", "fresh_pred": true, "ground_truth_fresh": true, "latency_ms": 2.442, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n0_probe", "rid": "fresh-54", "status": 304, "inm": "W/\"9bdad718d9dd24e5\"", "fresh_pred": true, "ground_truth_fresh": true, "latency_ms": 2.655, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n0_probe", "rid": "fresh-55", "status": 304, "inm": "W/\"1472e73e1e8af8ad\"", "fresh_pred": true, "ground_truth_fresh": true, "latency_ms": 2.444, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n0_probe", "rid": "fresh-56", "status": 304, "inm": "W/\"40e21a0577f09c33\"", "fresh_pred": true, "ground_truth_fresh": true, "latency_ms": 2.639, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n0_probe", "rid": "fresh-57", "status": 304, "inm": "W/\"6e88820c7a95faef\"", "fresh_pred": true, "ground_truth_fresh": true, "latency_ms": 2.553, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n0_probe", "rid": "fresh-58", "status": 304, "inm": "W/\"6e95654be2daaa4e\"", "fresh_pred": true, "ground_truth_fresh": true, "latency_ms": 2.523, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n0_probe", "rid": "fresh-59", "status": 304, "inm": "W/\"47e4535e37c5de1a\"", "fresh_pred": true, "ground_truth_fresh": true, "latency_ms": 2.527, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n0_probe", "rid": "fresh-60", "status": 304, "inm": "W/\"b252421e75b76167\"", "fresh_pred": true, "ground_truth_fresh": true, "latency_ms": 2.553, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n0_probe", "rid": "fresh-61", "status": 304, "inm": "W/\"4bdb25f155913440\"", "fresh_pred": true, "ground_truth_fresh": true, "latency_ms": 2.595, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n0_probe", "rid": "fresh-62", "status": 304, "inm": "W/\"96a4d4c4faf85a75\"", "fresh_pred": true, "ground_truth_fresh": true, "latency_ms": 2.462, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n0_probe", "rid": "fresh-63", "status": 304, "inm": "W/\"740668e3d2fcd6bf\"", "fresh_pred": true, "ground_truth_fresh": true, "latency_ms": 2.466, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n0_probe", "rid": "fresh-64", "status": 304, "inm": "W/\"3c1d86ff3b009be1\"", "fresh_pred": true, "ground_truth_fresh": true, "latency_ms": 2.386, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n0_probe", "rid": "fresh-65", "status": 304, "inm": "W/\"9499877e7bb5d697\"", "fresh_pred": true, "ground_truth_fresh": true, "latency_ms": 2.543, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n0_probe", "rid": "fresh-66", "status": 304, "inm": "W/\"47b285c6ffd5d5f8\"", "fresh_pred": true, "ground_truth_fresh": true, "latency_ms": 2.369, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n0_probe", "rid": "fresh-67", "status": 304, "inm": "W/\"88ddea09a8384a01\"", "fresh_pred": true, "ground_truth_fresh": true, "latency_ms": 2.4, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n0_probe", "rid": "fresh-68", "status": 304, "inm": "W/\"0735f60295f67280\"", "fresh_pred": true, "ground_truth_fresh": true, "latency_ms": 2.431, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n0_probe", "rid": "fresh-69", "status": 304, "inm": "W/\"9c75d77efca9d261\"", "fresh_pred": true, "ground_truth_fresh": true, "latency_ms": 2.389, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n0_probe", "rid": "fresh-70", "status": 304, "inm": "W/\"a5deb2c7dc6ee7a6\"", "fresh_pred": true, "ground_truth_fresh": true, "latency_ms": 2.608, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n0_probe", "rid": "fresh-71", "status": 304, "inm": "W/\"f37c9138c98a3b9e\"", "fresh_pred": true, "ground_truth_fresh": true, "latency_ms": 2.411, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n0_probe", "rid": "fresh-72", "status": 304, "inm": "W/\"43ccfca48eeae214\"", "fresh_pred": true, "ground_truth_fresh": true, "latency_ms": 2.416, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n0_probe", "rid": "fresh-73", "status": 304, "inm": "W/\"27804f28ab2a0a42\"", "fresh_pred": true, "ground_truth_fresh": true, "latency_ms": 2.413, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n0_probe", "rid": "fresh-74", "status": 304, "inm": "W/\"b51528a7e981ed01\"", "fresh_pred": true, "ground_truth_fresh": true, "latency_ms": 2.476, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n0_probe", "rid": "fresh-75", "status": 304, "inm": "W/\"f2c7c3a2009e350c\"", "fresh_pred": true, "ground_truth_fresh": true, "latency_ms": 2.988, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n0_probe", "rid": "fresh-76", "status": 304, "inm": "W/\"b9691c5c35fbb90d\"", "fresh_pred": true, "ground_truth_fresh": true, "latency_ms": 2.492, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n0_probe", "rid": "fresh-77", "status": 304, "inm": "W/\"4aad8338162f65fb\"", "fresh_pred": true, "ground_truth_fresh": true, "latency_ms": 2.44, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n0_probe", "rid": "fresh-78", "status": 304, "inm": "W/\"2f471cff3e1d5a46\"", "fresh_pred": true, "ground_truth_fresh": true, "latency_ms": 2.518, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n0_probe", "rid": "fresh-79", "status": 304, "inm": "W/\"b8534b9fcf86fcb5\"", "fresh_pred": true, "ground_truth_fresh": true, "latency_ms": 2.516, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n0_probe", "rid": "fresh-80", "status": 304, "inm": "W/\"46bbe335cb04fd2f\"", "fresh_pred": true, "ground_truth_fresh": true, "latency_ms": 2.456, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n0_probe", "rid": "fresh-81", "status": 304, "inm": "W/\"9e1e5057a4994827\"", "fresh_pred": true, "ground_truth_fresh": true, "latency_ms": 2.562, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n0_probe", "rid": "fresh-82", "status": 304, "inm": "W/\"70059e322286bad6\"", "fresh_pred": true, "ground_truth_fresh": true, "latency_ms": 2.481, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n0_probe", "rid": "fresh-83", "status": 304, "inm": "W/\"ae725cb3fe166320\"", "fresh_pred": true, "ground_truth_fresh": true, "latency_ms": 2.411, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n0_probe", "rid": "fresh-84", "status": 304, "inm": "W/\"058d5d7943c45e3b\"", "fresh_pred": true, "ground_truth_fresh": true, "latency_ms": 2.42, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n0_probe", "rid": "fresh-85", "status": 304, "inm": "W/\"3623cf05cb037b1b\"", "fresh_pred": true, "ground_truth_fresh": true, "latency_ms": 4.233, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n0_probe", "rid": "fresh-86", "status": 304, "inm": "W/\"391829d188c36066\"", "fresh_pred": true, "ground_truth_fresh": true, "latency_ms": 2.638, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n0_probe", "rid": "fresh-87", "status": 304, "inm": "W/\"3e6b6dc08c5336d2\"", "fresh_pred": true, "ground_truth_fresh": true, "latency_ms": 2.502, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n0_probe", "rid": "fresh-88", "status": 304, "inm": "W/\"b369f3c430c3ed8b\"", "fresh_pred": true, "ground_truth_fresh": true, "latency_ms": 2.428, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n0_probe", "rid": "fresh-89", "status": 304, "inm": "W/\"d8db7a95544f0051\"", "fresh_pred": true, "ground_truth_fresh": true, "latency_ms": 2.6, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n0_probe", "rid": "fresh-90", "status": 304, "inm": "W/\"57723016035bbbb2\"", "fresh_pred": true, "ground_truth_fresh": true, "latency_ms": 2.451, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n0_probe", "rid": "fresh-91", "status": 304, "inm": "W/\"f35756dc46a1455b\"", "fresh_pred": true, "ground_truth_fresh": true, "latency_ms": 2.656, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n0_probe", "rid": "fresh-92", "status": 304, "inm": "W/\"4d76c4dffbae0a43\"", "fresh_pred": true, "ground_truth_fresh": true, "latency_ms": 2.454, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n0_probe", "rid": "fresh-93", "status": 304, "inm": "W/\"21c1b7012c07aa8f\"", "fresh_pred": true, "ground_truth_fresh": true, "latency_ms": 2.355, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n0_probe", "rid": "fresh-94", "status": 304, "inm": "W/\"6e598061406f28be\"", "fresh_pred": true, "ground_truth_fresh": true, "latency_ms": 2.426, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n0_probe", "rid": "fresh-95", "status": 304, "inm": "W/\"2f0858542de0c099\"", "fresh_pred": true, "ground_truth_fresh": true, "latency_ms": 2.416, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n0_probe", "rid": "fresh-96", "status": 304, "inm": "W/\"e1b2c71a2e992c4f\"", "fresh_pred": true, "ground_truth_fresh": true, "latency_ms": 2.503, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n0_probe", "rid": "fresh-97", "status": 304, "inm": "W/\"25ee19b3b9163545\"", "fresh_pred": true, "ground_truth_fresh": true, "latency_ms": 2.361, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n0_probe", "rid": "fresh-98", "status": 304, "inm": "W/\"90246c3681584de2\"", "fresh_pred": true, "ground_truth_fresh": true, "latency_ms": 2.504, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n0_probe", "rid": "fresh-99", "status": 304, "inm": "W/\"da9f59deaf2ec765\"", "fresh_pred": true, "ground_truth_fresh": true, "latency_ms": 2.549, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n0_probe", "rid": "fresh-100", "status": 304, "inm": "W/\"39c12762ab0ce146\"", "fresh_pred": true, "ground_truth_fresh": true, "latency_ms": 2.462, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n0_probe", "rid": "fresh-101", "status": 304, "inm": "W/\"98d918049acf16fa\"", "fresh_pred": true, "ground_truth_fresh": true, "latency_ms": 2.542, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n0_probe", "rid": "fresh-102", "status": 304, "inm": "W/\"bfcea443ef26b7d9\"", "fresh_pred": true, "ground_truth_fresh": true, "latency_ms": 2.528, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n0_probe", "rid": "fresh-103", "status": 304, "inm": "W/\"7f1d78d0dd27b64f\"", "fresh_pred": true, "ground_truth_fresh": true, "latency_ms": 2.582, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n0_probe", "rid": "fresh-104", "status": 304, "inm": "W/\"3dc5c8eb17d4a01b\"", "fresh_pred": true, "ground_truth_fresh": true, "latency_ms": 2.51, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n0_probe", "rid": "fresh-105", "status": 304, "inm": "W/\"d1ff3ecefd8e5cfd\"", "fresh_pred": true, "ground_truth_fresh": true, "latency_ms": 2.33, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n0_probe", "rid": "fresh-106", "status": 304, "inm": "W/\"7dd02288cdd5d221\"", "fresh_pred": true, "ground_truth_fresh": true, "latency_ms": 2.469, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n0_probe", "rid": "fresh-107", "status": 304, "inm": "W/\"c5acb4f13a00a30c\"", "fresh_pred": true, "ground_truth_fresh": true, "latency_ms": 2.556, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n0_probe", "rid": "fresh-108", "status": 304, "inm": "W/\"8a6d84a8a5c4b2fa\"", "fresh_pred": true, "ground_truth_fresh": true, "latency_ms": 2.444, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n0_probe", "rid": "fresh-109", "status": 304, "inm": "W/\"c62a68fc1f642030\"", "fresh_pred": true, "ground_truth_fresh": true, "latency_ms": 2.702, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n0_probe", "rid": "fresh-110", "status": 304, "inm": "W/\"05349a585f6840ee\"", "fresh_pred": true, "ground_truth_fresh": true, "latency_ms": 2.514, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n0_probe", "rid": "fresh-111", "status": 304, "inm": "W/\"0464c8dc9d77804e\"", "fresh_pred": true, "ground_truth_fresh": true, "latency_ms": 2.646, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n0_probe", "rid": "fresh-112", "status": 304, "inm": "W/\"2bf72ccb4b9f5421\"", "fresh_pred": true, "ground_truth_fresh": true, "latency_ms": 2.494, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n0_probe", "rid": "fresh-113", "status": 304, "inm": "W/\"a62253e48b8d85d9\"", "fresh_pred": true, "ground_truth_fresh": true, "latency_ms": 2.855, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n0_probe", "rid": "fresh-114", "status": 304, "inm": "W/\"292d0f256d8cce1f\"", "fresh_pred": true, "ground_truth_fresh": true, "latency_ms": 2.863, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n0_probe", "rid": "fresh-115", "status": 304, "inm": "W/\"50204b22589d5b36\"", "fresh_pred": true, "ground_truth_fresh": true, "latency_ms": 2.605, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n0_probe", "rid": "fresh-116", "status": 304, "inm": "W/\"f7125c68f829e613\"", "fresh_pred": true, "ground_truth_fresh": true, "latency_ms": 2.51, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n0_probe", "rid": "fresh-117", "status": 304, "inm": "W/\"9a0e9c5fa378e846\"", "fresh_pred": true, "ground_truth_fresh": true, "latency_ms": 2.404, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n0_probe", "rid": "fresh-118", "status": 304, "inm": "W/\"7607c41956a56e5b\"", "fresh_pred": true, "ground_truth_fresh": true, "latency_ms": 2.611, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n0_probe", "rid": "fresh-119", "status": 304, "inm": "W/\"f33403c175213f00\"", "fresh_pred": true, "ground_truth_fresh": true, "latency_ms": 2.484, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n0_probe", "rid": "fresh-120", "status": 304, "inm": "W/\"01025466b189954d\"", "fresh_pred": true, "ground_truth_fresh": true, "latency_ms": 2.596, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n0_probe", "rid": "fresh-121", "status": 304, "inm": "W/\"9bfa6dda96ac3596\"", "fresh_pred": true, "ground_truth_fresh": true, "latency_ms": 2.512, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n0_probe", "rid": "fresh-122", "status": 304, "inm": "W/\"048df6a38de63de4\"", "fresh_pred": true, "ground_truth_fresh": true, "latency_ms": 2.513, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n0_probe", "rid": "fresh-123", "status": 304, "inm": "W/\"2b9e6d3ebda34248\"", "fresh_pred": true, "ground_truth_fresh": true, "latency_ms": 2.443, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n0_probe", "rid": "fresh-124", "status": 304, "inm": "W/\"a421ed08ba7b5509\"", "fresh_pred": true, "ground_truth_fresh": true, "latency_ms": 2.461, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n0_probe", "rid": "fresh-125", "status": 304, "inm": "W/\"a347b42c103aafcc\"", "fresh_pred": true, "ground_truth_fresh": true, "latency_ms": 2.369, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n0_probe", "rid": "fresh-126", "status": 304, "inm": "W/\"ee5909768d1064c7\"", "fresh_pred": true, "ground_truth_fresh": true, "latency_ms": 4.875, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n0_probe", "rid": "fresh-127", "status": 304, "inm": "W/\"b3b6adf3d41dbd0d\"", "fresh_pred": true, "ground_truth_fresh": true, "latency_ms": 2.664, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n0_probe", "rid": "fresh-128", "status": 304, "inm": "W/\"6ef15b07d8c60192\"", "fresh_pred": true, "ground_truth_fresh": true, "latency_ms": 2.398, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n0_probe", "rid": "fresh-129", "status": 304, "inm": "W/\"a01af353465f2489\"", "fresh_pred": true, "ground_truth_fresh": true, "latency_ms": 2.402, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n0_probe", "rid": "fresh-130", "status": 304, "inm": "W/\"5267ee1ee845155d\"", "fresh_pred": true, "ground_truth_fresh": true, "latency_ms": 2.475, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n0_probe", "rid": "fresh-131", "status": 304, "inm": "W/\"164ade5f2ac9f596\"", "fresh_pred": true, "ground_truth_fresh": true, "latency_ms": 2.418, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n0_probe", "rid": "fresh-132", "status": 304, "inm": "W/\"2676030b2ddf7e44\"", "fresh_pred": true, "ground_truth_fresh": true, "latency_ms": 4.302, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n0_probe", "rid": "fresh-133", "status": 304, "inm": "W/\"3661b1061d7064bb\"", "fresh_pred": true, "ground_truth_fresh": true, "latency_ms": 2.74, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n0_probe", "rid": "fresh-134", "status": 304, "inm": "W/\"bba18bb1980b356a\"", "fresh_pred": true, "ground_truth_fresh": true, "latency_ms": 2.701, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n0_probe", "rid": "fresh-135", "status": 304, "inm": "W/\"57fcaa990775b805\"", "fresh_pred": true, "ground_truth_fresh": true, "latency_ms": 2.813, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n0_probe", "rid": "fresh-136", "status": 304, "inm": "W/\"366b28370ceee71a\"", "fresh_pred": true, "ground_truth_fresh": true, "latency_ms": 2.795, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n0_probe", "rid": "fresh-137", "status": 304, "inm": "W/\"8be64d0e3919d5eb\"", "fresh_pred": true, "ground_truth_fresh": true, "latency_ms": 2.619, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n0_probe", "rid": "fresh-138", "status": 304, "inm": "W/\"d8b758fd2afa50a5\"", "fresh_pred": true, "ground_truth_fresh": true, "latency_ms": 2.748, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n0_probe", "rid": "fresh-139", "status": 304, "inm": "W/\"900ca32135f231dd\"", "fresh_pred": true, "ground_truth_fresh": true, "latency_ms": 2.71, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n0_probe", "rid": "fresh-140", "status": 304, "inm": "W/\"4d70ccc9e989df0a\"", "fresh_pred": true, "ground_truth_fresh": true, "latency_ms": 2.695, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n0_probe", "rid": "fresh-141", "status": 304, "inm": "W/\"0b2258e80cc79c90\"", "fresh_pred": true, "ground_truth_fresh": true, "latency_ms": 2.604, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n0_probe", "rid": "fresh-142", "status": 304, "inm": "W/\"87a59d96f2a2863b\"", "fresh_pred": true, "ground_truth_fresh": true, "latency_ms": 2.979, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n0_probe", "rid": "fresh-143", "status": 304, "inm": "W/\"80dc79e893b9f4ea\"", "fresh_pred": true, "ground_truth_fresh": true, "latency_ms": 2.571, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n0_probe", "rid": "fresh-144", "status": 304, "inm": "W/\"c803d7b01bb5e8ed\"", "fresh_pred": true, "ground_truth_fresh": true, "latency_ms": 2.53, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n0_probe", "rid": "fresh-145", "status": 304, "inm": "W/\"ccbe84a776476c19\"", "fresh_pred": true, "ground_truth_fresh": true, "latency_ms": 2.544, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n0_probe", "rid": "fresh-146", "status": 304, "inm": "W/\"e96362452d330e8d\"", "fresh_pred": true, "ground_truth_fresh": true, "latency_ms": 2.626, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n0_probe", "rid": "fresh-147", "status": 304, "inm": "W/\"bec5e3320fa69fcd\"", "fresh_pred": true, "ground_truth_fresh": true, "latency_ms": 2.706, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n0_probe", "rid": "fresh-148", "status": 304, "inm": "W/\"acbf7dba304f833c\"", "fresh_pred": true, "ground_truth_fresh": true, "latency_ms": 2.707, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n0_probe", "rid": "fresh-149", "status": 304, "inm": "W/\"ca30ffe476ffbdd9\"", "fresh_pred": true, "ground_truth_fresh": true, "latency_ms": 2.702, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n025_probe", "rid": "fresh-0", "status": 304, "inm": "W/\"e0835c20670038dd\"", "mutated": false, "ground_truth_fresh": true, "pred_fresh": true, "rand_pred_fresh": true, "latency_ms": 2.682, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n025_probe", "rid": "fresh-1", "status": 200, "inm": "W/\"d2f6f67e3a0bac52\"", "mutated": true, "ground_truth_fresh": false, "pred_fresh": false, "rand_pred_fresh": false, "latency_ms": 2.415, "probeHit": 0, "etagMatched": 0, "ttlValid": 0}
+{"phase": "n025_probe", "rid": "fresh-2", "status": 304, "inm": "W/\"11e55bc8d22b0cef\"", "mutated": false, "ground_truth_fresh": true, "pred_fresh": true, "rand_pred_fresh": false, "latency_ms": 2.427, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n025_probe", "rid": "fresh-3", "status": 304, "inm": "W/\"ab8fe04fe59b7e19\"", "mutated": false, "ground_truth_fresh": true, "pred_fresh": true, "rand_pred_fresh": false, "latency_ms": 2.454, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n025_probe", "rid": "fresh-4", "status": 304, "inm": "W/\"5a4ee478263ce2f1\"", "mutated": false, "ground_truth_fresh": true, "pred_fresh": true, "rand_pred_fresh": true, "latency_ms": 2.486, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n025_probe", "rid": "fresh-5", "status": 200, "inm": "W/\"9a1c716cc65559ab\"", "mutated": true, "ground_truth_fresh": false, "pred_fresh": false, "rand_pred_fresh": true, "latency_ms": 2.348, "probeHit": 0, "etagMatched": 0, "ttlValid": 0}
+{"phase": "n025_probe", "rid": "fresh-6", "status": 200, "inm": "W/\"95d768889e677396\"", "mutated": true, "ground_truth_fresh": false, "pred_fresh": false, "rand_pred_fresh": true, "latency_ms": 2.708, "probeHit": 0, "etagMatched": 0, "ttlValid": 0}
+{"phase": "n025_probe", "rid": "fresh-7", "status": 200, "inm": "W/\"ea7ddffb253bbcf5\"", "mutated": true, "ground_truth_fresh": false, "pred_fresh": false, "rand_pred_fresh": false, "latency_ms": 2.426, "probeHit": 0, "etagMatched": 0, "ttlValid": 0}
+{"phase": "n025_probe", "rid": "fresh-8", "status": 200, "inm": "W/\"0d544593fb359b92\"", "mutated": true, "ground_truth_fresh": false, "pred_fresh": false, "rand_pred_fresh": false, "latency_ms": 2.45, "probeHit": 0, "etagMatched": 0, "ttlValid": 0}
+{"phase": "n025_probe", "rid": "fresh-9", "status": 304, "inm": "W/\"938a5e260c6ab823\"", "mutated": false, "ground_truth_fresh": true, "pred_fresh": true, "rand_pred_fresh": false, "latency_ms": 2.388, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n025_probe", "rid": "fresh-10", "status": 200, "inm": "W/\"dfc66df4127cae53\"", "mutated": true, "ground_truth_fresh": false, "pred_fresh": false, "rand_pred_fresh": false, "latency_ms": 5.368, "probeHit": 0, "etagMatched": 0, "ttlValid": 0}
+{"phase": "n025_probe", "rid": "fresh-11", "status": 200, "inm": "W/\"65f373a87541ece7\"", "mutated": true, "ground_truth_fresh": false, "pred_fresh": false, "rand_pred_fresh": true, "latency_ms": 4.152, "probeHit": 0, "etagMatched": 0, "ttlValid": 0}
+{"phase": "n025_probe", "rid": "fresh-12", "status": 200, "inm": "W/\"e199e68ad20a5cfd\"", "mutated": true, "ground_truth_fresh": false, "pred_fresh": false, "rand_pred_fresh": false, "latency_ms": 2.724, "probeHit": 0, "etagMatched": 0, "ttlValid": 0}
+{"phase": "n025_probe", "rid": "fresh-13", "status": 200, "inm": "W/\"5e9a03ed45d45183\"", "mutated": true, "ground_truth_fresh": false, "pred_fresh": false, "rand_pred_fresh": false, "latency_ms": 2.551, "probeHit": 0, "etagMatched": 0, "ttlValid": 0}
+{"phase": "n025_probe", "rid": "fresh-14", "status": 304, "inm": "W/\"b044cdcf9717aa0f\"", "mutated": false, "ground_truth_fresh": true, "pred_fresh": true, "rand_pred_fresh": true, "latency_ms": 2.46, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n025_probe", "rid": "fresh-15", "status": 200, "inm": "W/\"14073102c9775c52\"", "mutated": true, "ground_truth_fresh": false, "pred_fresh": false, "rand_pred_fresh": true, "latency_ms": 2.447, "probeHit": 0, "etagMatched": 0, "ttlValid": 0}
+{"phase": "n025_probe", "rid": "fresh-16", "status": 304, "inm": "W/\"e16d6b7870be7f87\"", "mutated": false, "ground_truth_fresh": true, "pred_fresh": true, "rand_pred_fresh": false, "latency_ms": 2.342, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n025_probe", "rid": "fresh-17", "status": 304, "inm": "W/\"2480351af5e1251a\"", "mutated": false, "ground_truth_fresh": true, "pred_fresh": true, "rand_pred_fresh": true, "latency_ms": 3.183, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n025_probe", "rid": "fresh-18", "status": 304, "inm": "W/\"a98f1cbbae48d04c\"", "mutated": false, "ground_truth_fresh": true, "pred_fresh": true, "rand_pred_fresh": true, "latency_ms": 2.467, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n025_probe", "rid": "fresh-19", "status": 200, "inm": "W/\"7ddd754ad807ffa1\"", "mutated": true, "ground_truth_fresh": false, "pred_fresh": false, "rand_pred_fresh": false, "latency_ms": 2.328, "probeHit": 0, "etagMatched": 0, "ttlValid": 0}
+{"phase": "n025_probe", "rid": "fresh-20", "status": 200, "inm": "W/\"b37f59a7efa06f4a\"", "mutated": true, "ground_truth_fresh": false, "pred_fresh": false, "rand_pred_fresh": true, "latency_ms": 2.412, "probeHit": 0, "etagMatched": 0, "ttlValid": 0}
+{"phase": "n025_probe", "rid": "fresh-21", "status": 304, "inm": "W/\"7332477fe977a77e\"", "mutated": false, "ground_truth_fresh": true, "pred_fresh": true, "rand_pred_fresh": true, "latency_ms": 2.229, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n025_probe", "rid": "fresh-22", "status": 200, "inm": "W/\"43ffa337a657da56\"", "mutated": true, "ground_truth_fresh": false, "pred_fresh": false, "rand_pred_fresh": false, "latency_ms": 2.535, "probeHit": 0, "etagMatched": 0, "ttlValid": 0}
+{"phase": "n025_probe", "rid": "fresh-23", "status": 200, "inm": "W/\"649b03ad7cd89ef0\"", "mutated": true, "ground_truth_fresh": false, "pred_fresh": false, "rand_pred_fresh": false, "latency_ms": 2.437, "probeHit": 0, "etagMatched": 0, "ttlValid": 0}
+{"phase": "n025_probe", "rid": "fresh-24", "status": 200, "inm": "W/\"f1432e231032c3f9\"", "mutated": true, "ground_truth_fresh": false, "pred_fresh": false, "rand_pred_fresh": true, "latency_ms": 2.41, "probeHit": 0, "etagMatched": 0, "ttlValid": 0}
+{"phase": "n025_probe", "rid": "fresh-25", "status": 304, "inm": "W/\"e7c6069a91e9e26b\"", "mutated": false, "ground_truth_fresh": true, "pred_fresh": true, "rand_pred_fresh": false, "latency_ms": 2.705, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n025_probe", "rid": "fresh-26", "status": 200, "inm": "W/\"5b608c72d142ae3c\"", "mutated": true, "ground_truth_fresh": false, "pred_fresh": false, "rand_pred_fresh": false, "latency_ms": 2.491, "probeHit": 0, "etagMatched": 0, "ttlValid": 0}
+{"phase": "n025_probe", "rid": "fresh-27", "status": 200, "inm": "W/\"1c8de752d4f29512\"", "mutated": true, "ground_truth_fresh": false, "pred_fresh": false, "rand_pred_fresh": false, "latency_ms": 2.296, "probeHit": 0, "etagMatched": 0, "ttlValid": 0}
+{"phase": "n025_probe", "rid": "fresh-28", "status": 200, "inm": "W/\"58c4deda22075b60\"", "mutated": true, "ground_truth_fresh": false, "pred_fresh": false, "rand_pred_fresh": true, "latency_ms": 2.648, "probeHit": 0, "etagMatched": 0, "ttlValid": 0}
+{"phase": "n025_probe", "rid": "fresh-29", "status": 200, "inm": "W/\"88a5a6b3061f2dd9\"", "mutated": true, "ground_truth_fresh": false, "pred_fresh": false, "rand_pred_fresh": true, "latency_ms": 2.674, "probeHit": 0, "etagMatched": 0, "ttlValid": 0}
+{"phase": "n025_probe", "rid": "fresh-30", "status": 304, "inm": "W/\"dcb4ba209475621c\"", "mutated": false, "ground_truth_fresh": true, "pred_fresh": true, "rand_pred_fresh": true, "latency_ms": 2.653, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n025_probe", "rid": "fresh-31", "status": 304, "inm": "W/\"fe1ee3e7819d98bb\"", "mutated": false, "ground_truth_fresh": true, "pred_fresh": true, "rand_pred_fresh": true, "latency_ms": 2.446, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n025_probe", "rid": "fresh-32", "status": 304, "inm": "W/\"56f57fb05aa1a816\"", "mutated": false, "ground_truth_fresh": true, "pred_fresh": true, "rand_pred_fresh": true, "latency_ms": 2.385, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n025_probe", "rid": "fresh-33", "status": 200, "inm": "W/\"0953c93f981ecdd4\"", "mutated": true, "ground_truth_fresh": false, "pred_fresh": false, "rand_pred_fresh": true, "latency_ms": 3.452, "probeHit": 0, "etagMatched": 0, "ttlValid": 0}
+{"phase": "n025_probe", "rid": "fresh-34", "status": 304, "inm": "W/\"8ff9930e0eeee865\"", "mutated": false, "ground_truth_fresh": true, "pred_fresh": true, "rand_pred_fresh": false, "latency_ms": 2.679, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n025_probe", "rid": "fresh-35", "status": 200, "inm": "W/\"3df934063904d2d4\"", "mutated": true, "ground_truth_fresh": false, "pred_fresh": false, "rand_pred_fresh": true, "latency_ms": 2.588, "probeHit": 0, "etagMatched": 0, "ttlValid": 0}
+{"phase": "n025_probe", "rid": "fresh-36", "status": 304, "inm": "W/\"65aa46d38876d38e\"", "mutated": false, "ground_truth_fresh": true, "pred_fresh": true, "rand_pred_fresh": true, "latency_ms": 2.585, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n025_probe", "rid": "fresh-37", "status": 200, "inm": "W/\"354d4ffd1debd942\"", "mutated": true, "ground_truth_fresh": false, "pred_fresh": false, "rand_pred_fresh": true, "latency_ms": 2.62, "probeHit": 0, "etagMatched": 0, "ttlValid": 0}
+{"phase": "n025_probe", "rid": "fresh-38", "status": 304, "inm": "W/\"f3d740f578a6afe0\"", "mutated": false, "ground_truth_fresh": true, "pred_fresh": true, "rand_pred_fresh": true, "latency_ms": 2.359, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n025_probe", "rid": "fresh-39", "status": 304, "inm": "W/\"5c36b8439a4354cc\"", "mutated": false, "ground_truth_fresh": true, "pred_fresh": true, "rand_pred_fresh": true, "latency_ms": 2.376, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n025_probe", "rid": "fresh-40", "status": 304, "inm": "W/\"a960ff16b61eac51\"", "mutated": false, "ground_truth_fresh": true, "pred_fresh": true, "rand_pred_fresh": true, "latency_ms": 2.496, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n025_probe", "rid": "fresh-41", "status": 304, "inm": "W/\"6f53f6d5fb1da486\"", "mutated": false, "ground_truth_fresh": true, "pred_fresh": true, "rand_pred_fresh": false, "latency_ms": 2.553, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n025_probe", "rid": "fresh-42", "status": 304, "inm": "W/\"01f411f1d03eb629\"", "mutated": false, "ground_truth_fresh": true, "pred_fresh": true, "rand_pred_fresh": false, "latency_ms": 2.463, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n025_probe", "rid": "fresh-43", "status": 200, "inm": "W/\"c8ff7ae2b2dc1070\"", "mutated": true, "ground_truth_fresh": false, "pred_fresh": false, "rand_pred_fresh": false, "latency_ms": 2.479, "probeHit": 0, "etagMatched": 0, "ttlValid": 0}
+{"phase": "n025_probe", "rid": "fresh-44", "status": 200, "inm": "W/\"59d9f5b5c962fa62\"", "mutated": true, "ground_truth_fresh": false, "pred_fresh": false, "rand_pred_fresh": false, "latency_ms": 2.495, "probeHit": 0, "etagMatched": 0, "ttlValid": 0}
+{"phase": "n025_probe", "rid": "fresh-45", "status": 200, "inm": "W/\"962789eb63d0f120\"", "mutated": true, "ground_truth_fresh": false, "pred_fresh": false, "rand_pred_fresh": false, "latency_ms": 2.751, "probeHit": 0, "etagMatched": 0, "ttlValid": 0}
+{"phase": "n025_probe", "rid": "fresh-46", "status": 200, "inm": "W/\"065a79db9e575e09\"", "mutated": true, "ground_truth_fresh": false, "pred_fresh": false, "rand_pred_fresh": false, "latency_ms": 2.828, "probeHit": 0, "etagMatched": 0, "ttlValid": 0}
+{"phase": "n025_probe", "rid": "fresh-47", "status": 200, "inm": "W/\"433dda74b3fedadb\"", "mutated": true, "ground_truth_fresh": false, "pred_fresh": false, "rand_pred_fresh": false, "latency_ms": 2.696, "probeHit": 0, "etagMatched": 0, "ttlValid": 0}
+{"phase": "n025_probe", "rid": "fresh-48", "status": 200, "inm": "W/\"8a3f14f5111331b3\"", "mutated": true, "ground_truth_fresh": false, "pred_fresh": false, "rand_pred_fresh": true, "latency_ms": 2.627, "probeHit": 0, "etagMatched": 0, "ttlValid": 0}
+{"phase": "n025_probe", "rid": "fresh-49", "status": 304, "inm": "W/\"ae2c83cf9a97068b\"", "mutated": false, "ground_truth_fresh": true, "pred_fresh": true, "rand_pred_fresh": false, "latency_ms": 2.519, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n025_probe", "rid": "fresh-50", "status": 200, "inm": "W/\"8451b58366e09bec\"", "mutated": true, "ground_truth_fresh": false, "pred_fresh": false, "rand_pred_fresh": false, "latency_ms": 2.603, "probeHit": 0, "etagMatched": 0, "ttlValid": 0}
+{"phase": "n025_probe", "rid": "fresh-51", "status": 304, "inm": "W/\"5b5ceb4e68b20da8\"", "mutated": false, "ground_truth_fresh": true, "pred_fresh": true, "rand_pred_fresh": false, "latency_ms": 2.603, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n025_probe", "rid": "fresh-52", "status": 304, "inm": "W/\"d426491bf20a8aa8\"", "mutated": false, "ground_truth_fresh": true, "pred_fresh": true, "rand_pred_fresh": false, "latency_ms": 2.471, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n025_probe", "rid": "fresh-53", "status": 304, "inm": "W/\"adff5af6d1abe3a8\"", "mutated": false, "ground_truth_fresh": true, "pred_fresh": true, "rand_pred_fresh": true, "latency_ms": 2.666, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n025_probe", "rid": "fresh-54", "status": 200, "inm": "W/\"9bdad718d9dd24e5\"", "mutated": true, "ground_truth_fresh": false, "pred_fresh": false, "rand_pred_fresh": true, "latency_ms": 2.76, "probeHit": 0, "etagMatched": 0, "ttlValid": 0}
+{"phase": "n025_probe", "rid": "fresh-55", "status": 200, "inm": "W/\"1472e73e1e8af8ad\"", "mutated": true, "ground_truth_fresh": false, "pred_fresh": false, "rand_pred_fresh": true, "latency_ms": 2.824, "probeHit": 0, "etagMatched": 0, "ttlValid": 0}
+{"phase": "n025_probe", "rid": "fresh-56", "status": 200, "inm": "W/\"40e21a0577f09c33\"", "mutated": true, "ground_truth_fresh": false, "pred_fresh": false, "rand_pred_fresh": false, "latency_ms": 2.782, "probeHit": 0, "etagMatched": 0, "ttlValid": 0}
+{"phase": "n025_probe", "rid": "fresh-57", "status": 200, "inm": "W/\"6e88820c7a95faef\"", "mutated": true, "ground_truth_fresh": false, "pred_fresh": false, "rand_pred_fresh": true, "latency_ms": 2.667, "probeHit": 0, "etagMatched": 0, "ttlValid": 0}
+{"phase": "n025_probe", "rid": "fresh-58", "status": 200, "inm": "W/\"6e95654be2daaa4e\"", "mutated": true, "ground_truth_fresh": false, "pred_fresh": false, "rand_pred_fresh": false, "latency_ms": 2.699, "probeHit": 0, "etagMatched": 0, "ttlValid": 0}
+{"phase": "n025_probe", "rid": "fresh-59", "status": 200, "inm": "W/\"47e4535e37c5de1a\"", "mutated": true, "ground_truth_fresh": false, "pred_fresh": false, "rand_pred_fresh": false, "latency_ms": 2.58, "probeHit": 0, "etagMatched": 0, "ttlValid": 0}
+{"phase": "n025_probe", "rid": "fresh-60", "status": 304, "inm": "W/\"b252421e75b76167\"", "mutated": false, "ground_truth_fresh": true, "pred_fresh": true, "rand_pred_fresh": true, "latency_ms": 2.644, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n025_probe", "rid": "fresh-61", "status": 304, "inm": "W/\"4bdb25f155913440\"", "mutated": false, "ground_truth_fresh": true, "pred_fresh": true, "rand_pred_fresh": true, "latency_ms": 2.486, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n025_probe", "rid": "fresh-62", "status": 200, "inm": "W/\"96a4d4c4faf85a75\"", "mutated": true, "ground_truth_fresh": false, "pred_fresh": false, "rand_pred_fresh": true, "latency_ms": 2.627, "probeHit": 0, "etagMatched": 0, "ttlValid": 0}
+{"phase": "n025_probe", "rid": "fresh-63", "status": 304, "inm": "W/\"740668e3d2fcd6bf\"", "mutated": false, "ground_truth_fresh": true, "pred_fresh": true, "rand_pred_fresh": true, "latency_ms": 2.664, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n025_probe", "rid": "fresh-64", "status": 304, "inm": "W/\"3c1d86ff3b009be1\"", "mutated": false, "ground_truth_fresh": true, "pred_fresh": true, "rand_pred_fresh": true, "latency_ms": 6.894, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n025_probe", "rid": "fresh-65", "status": 304, "inm": "W/\"9499877e7bb5d697\"", "mutated": false, "ground_truth_fresh": true, "pred_fresh": true, "rand_pred_fresh": true, "latency_ms": 2.445, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n025_probe", "rid": "fresh-66", "status": 304, "inm": "W/\"47b285c6ffd5d5f8\"", "mutated": false, "ground_truth_fresh": true, "pred_fresh": true, "rand_pred_fresh": false, "latency_ms": 2.478, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n025_probe", "rid": "fresh-67", "status": 304, "inm": "W/\"88ddea09a8384a01\"", "mutated": false, "ground_truth_fresh": true, "pred_fresh": true, "rand_pred_fresh": false, "latency_ms": 2.479, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n025_probe", "rid": "fresh-68", "status": 200, "inm": "W/\"0735f60295f67280\"", "mutated": true, "ground_truth_fresh": false, "pred_fresh": false, "rand_pred_fresh": false, "latency_ms": 3.015, "probeHit": 0, "etagMatched": 0, "ttlValid": 0}
+{"phase": "n025_probe", "rid": "fresh-69", "status": 304, "inm": "W/\"9c75d77efca9d261\"", "mutated": false, "ground_truth_fresh": true, "pred_fresh": true, "rand_pred_fresh": false, "latency_ms": 2.624, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n025_probe", "rid": "fresh-70", "status": 200, "inm": "W/\"a5deb2c7dc6ee7a6\"", "mutated": true, "ground_truth_fresh": false, "pred_fresh": false, "rand_pred_fresh": false, "latency_ms": 2.517, "probeHit": 0, "etagMatched": 0, "ttlValid": 0}
+{"phase": "n025_probe", "rid": "fresh-71", "status": 200, "inm": "W/\"f37c9138c98a3b9e\"", "mutated": true, "ground_truth_fresh": false, "pred_fresh": false, "rand_pred_fresh": true, "latency_ms": 2.517, "probeHit": 0, "etagMatched": 0, "ttlValid": 0}
+{"phase": "n025_probe", "rid": "fresh-72", "status": 304, "inm": "W/\"43ccfca48eeae214\"", "mutated": false, "ground_truth_fresh": true, "pred_fresh": true, "rand_pred_fresh": true, "latency_ms": 2.417, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n025_probe", "rid": "fresh-73", "status": 200, "inm": "W/\"27804f28ab2a0a42\"", "mutated": true, "ground_truth_fresh": false, "pred_fresh": false, "rand_pred_fresh": false, "latency_ms": 2.526, "probeHit": 0, "etagMatched": 0, "ttlValid": 0}
+{"phase": "n025_probe", "rid": "fresh-74", "status": 304, "inm": "W/\"b51528a7e981ed01\"", "mutated": false, "ground_truth_fresh": true, "pred_fresh": true, "rand_pred_fresh": true, "latency_ms": 2.339, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n025_probe", "rid": "fresh-75", "status": 304, "inm": "W/\"f2c7c3a2009e350c\"", "mutated": false, "ground_truth_fresh": true, "pred_fresh": true, "rand_pred_fresh": false, "latency_ms": 2.445, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n025_probe", "rid": "fresh-76", "status": 304, "inm": "W/\"b9691c5c35fbb90d\"", "mutated": false, "ground_truth_fresh": true, "pred_fresh": true, "rand_pred_fresh": true, "latency_ms": 2.758, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n025_probe", "rid": "fresh-77", "status": 200, "inm": "W/\"4aad8338162f65fb\"", "mutated": true, "ground_truth_fresh": false, "pred_fresh": false, "rand_pred_fresh": false, "latency_ms": 2.463, "probeHit": 0, "etagMatched": 0, "ttlValid": 0}
+{"phase": "n025_probe", "rid": "fresh-78", "status": 304, "inm": "W/\"2f471cff3e1d5a46\"", "mutated": false, "ground_truth_fresh": true, "pred_fresh": true, "rand_pred_fresh": false, "latency_ms": 2.48, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n025_probe", "rid": "fresh-79", "status": 200, "inm": "W/\"b8534b9fcf86fcb5\"", "mutated": true, "ground_truth_fresh": false, "pred_fresh": false, "rand_pred_fresh": false, "latency_ms": 2.356, "probeHit": 0, "etagMatched": 0, "ttlValid": 0}
+{"phase": "n025_probe", "rid": "fresh-80", "status": 200, "inm": "W/\"46bbe335cb04fd2f\"", "mutated": true, "ground_truth_fresh": false, "pred_fresh": false, "rand_pred_fresh": true, "latency_ms": 2.579, "probeHit": 0, "etagMatched": 0, "ttlValid": 0}
+{"phase": "n025_probe", "rid": "fresh-81", "status": 304, "inm": "W/\"9e1e5057a4994827\"", "mutated": false, "ground_truth_fresh": true, "pred_fresh": true, "rand_pred_fresh": false, "latency_ms": 2.41, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n025_probe", "rid": "fresh-82", "status": 304, "inm": "W/\"70059e322286bad6\"", "mutated": false, "ground_truth_fresh": true, "pred_fresh": true, "rand_pred_fresh": true, "latency_ms": 2.418, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n025_probe", "rid": "fresh-83", "status": 304, "inm": "W/\"ae725cb3fe166320\"", "mutated": false, "ground_truth_fresh": true, "pred_fresh": true, "rand_pred_fresh": true, "latency_ms": 2.382, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n025_probe", "rid": "fresh-84", "status": 200, "inm": "W/\"058d5d7943c45e3b\"", "mutated": true, "ground_truth_fresh": false, "pred_fresh": false, "rand_pred_fresh": false, "latency_ms": 2.502, "probeHit": 0, "etagMatched": 0, "ttlValid": 0}
+{"phase": "n025_probe", "rid": "fresh-85", "status": 304, "inm": "W/\"3623cf05cb037b1b\"", "mutated": false, "ground_truth_fresh": true, "pred_fresh": true, "rand_pred_fresh": false, "latency_ms": 2.482, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n025_probe", "rid": "fresh-86", "status": 304, "inm": "W/\"391829d188c36066\"", "mutated": false, "ground_truth_fresh": true, "pred_fresh": true, "rand_pred_fresh": true, "latency_ms": 2.39, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n025_probe", "rid": "fresh-87", "status": 200, "inm": "W/\"3e6b6dc08c5336d2\"", "mutated": true, "ground_truth_fresh": false, "pred_fresh": false, "rand_pred_fresh": true, "latency_ms": 2.334, "probeHit": 0, "etagMatched": 0, "ttlValid": 0}
+{"phase": "n025_probe", "rid": "fresh-88", "status": 304, "inm": "W/\"b369f3c430c3ed8b\"", "mutated": false, "ground_truth_fresh": true, "pred_fresh": true, "rand_pred_fresh": false, "latency_ms": 2.283, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n025_probe", "rid": "fresh-89", "status": 200, "inm": "W/\"d8db7a95544f0051\"", "mutated": true, "ground_truth_fresh": false, "pred_fresh": false, "rand_pred_fresh": false, "latency_ms": 2.378, "probeHit": 0, "etagMatched": 0, "ttlValid": 0}
+{"phase": "n025_probe", "rid": "fresh-90", "status": 200, "inm": "W/\"57723016035bbbb2\"", "mutated": true, "ground_truth_fresh": false, "pred_fresh": false, "rand_pred_fresh": false, "latency_ms": 2.37, "probeHit": 0, "etagMatched": 0, "ttlValid": 0}
+{"phase": "n025_probe", "rid": "fresh-91", "status": 304, "inm": "W/\"f35756dc46a1455b\"", "mutated": false, "ground_truth_fresh": true, "pred_fresh": true, "rand_pred_fresh": true, "latency_ms": 2.245, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n025_probe", "rid": "fresh-92", "status": 304, "inm": "W/\"4d76c4dffbae0a43\"", "mutated": false, "ground_truth_fresh": true, "pred_fresh": true, "rand_pred_fresh": true, "latency_ms": 2.34, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n025_probe", "rid": "fresh-93", "status": 200, "inm": "W/\"21c1b7012c07aa8f\"", "mutated": true, "ground_truth_fresh": false, "pred_fresh": false, "rand_pred_fresh": false, "latency_ms": 2.468, "probeHit": 0, "etagMatched": 0, "ttlValid": 0}
+{"phase": "n025_probe", "rid": "fresh-94", "status": 200, "inm": "W/\"6e598061406f28be\"", "mutated": true, "ground_truth_fresh": false, "pred_fresh": false, "rand_pred_fresh": false, "latency_ms": 3.742, "probeHit": 0, "etagMatched": 0, "ttlValid": 0}
+{"phase": "n025_probe", "rid": "fresh-95", "status": 304, "inm": "W/\"2f0858542de0c099\"", "mutated": false, "ground_truth_fresh": true, "pred_fresh": true, "rand_pred_fresh": false, "latency_ms": 2.332, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n025_probe", "rid": "fresh-96", "status": 304, "inm": "W/\"e1b2c71a2e992c4f\"", "mutated": false, "ground_truth_fresh": true, "pred_fresh": true, "rand_pred_fresh": true, "latency_ms": 2.272, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n025_probe", "rid": "fresh-97", "status": 200, "inm": "W/\"25ee19b3b9163545\"", "mutated": true, "ground_truth_fresh": false, "pred_fresh": false, "rand_pred_fresh": true, "latency_ms": 2.843, "probeHit": 0, "etagMatched": 0, "ttlValid": 0}
+{"phase": "n025_probe", "rid": "fresh-98", "status": 304, "inm": "W/\"90246c3681584de2\"", "mutated": false, "ground_truth_fresh": true, "pred_fresh": true, "rand_pred_fresh": true, "latency_ms": 2.436, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n025_probe", "rid": "fresh-99", "status": 200, "inm": "W/\"da9f59deaf2ec765\"", "mutated": true, "ground_truth_fresh": false, "pred_fresh": false, "rand_pred_fresh": true, "latency_ms": 2.474, "probeHit": 0, "etagMatched": 0, "ttlValid": 0}
+{"phase": "n025_probe", "rid": "fresh-100", "status": 200, "inm": "W/\"39c12762ab0ce146\"", "mutated": true, "ground_truth_fresh": false, "pred_fresh": false, "rand_pred_fresh": false, "latency_ms": 2.465, "probeHit": 0, "etagMatched": 0, "ttlValid": 0}
+{"phase": "n025_probe", "rid": "fresh-101", "status": 304, "inm": "W/\"98d918049acf16fa\"", "mutated": false, "ground_truth_fresh": true, "pred_fresh": true, "rand_pred_fresh": true, "latency_ms": 2.718, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n025_probe", "rid": "fresh-102", "status": 304, "inm": "W/\"bfcea443ef26b7d9\"", "mutated": false, "ground_truth_fresh": true, "pred_fresh": true, "rand_pred_fresh": true, "latency_ms": 2.721, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n025_probe", "rid": "fresh-103", "status": 200, "inm": "W/\"7f1d78d0dd27b64f\"", "mutated": true, "ground_truth_fresh": false, "pred_fresh": false, "rand_pred_fresh": true, "latency_ms": 2.997, "probeHit": 0, "etagMatched": 0, "ttlValid": 0}
+{"phase": "n025_probe", "rid": "fresh-104", "status": 304, "inm": "W/\"3dc5c8eb17d4a01b\"", "mutated": false, "ground_truth_fresh": true, "pred_fresh": true, "rand_pred_fresh": false, "latency_ms": 2.818, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n025_probe", "rid": "fresh-105", "status": 200, "inm": "W/\"d1ff3ecefd8e5cfd\"", "mutated": true, "ground_truth_fresh": false, "pred_fresh": false, "rand_pred_fresh": true, "latency_ms": 2.618, "probeHit": 0, "etagMatched": 0, "ttlValid": 0}
+{"phase": "n025_probe", "rid": "fresh-106", "status": 200, "inm": "W/\"7dd02288cdd5d221\"", "mutated": true, "ground_truth_fresh": false, "pred_fresh": false, "rand_pred_fresh": false, "latency_ms": 2.725, "probeHit": 0, "etagMatched": 0, "ttlValid": 0}
+{"phase": "n025_probe", "rid": "fresh-107", "status": 200, "inm": "W/\"c5acb4f13a00a30c\"", "mutated": true, "ground_truth_fresh": false, "pred_fresh": false, "rand_pred_fresh": false, "latency_ms": 2.581, "probeHit": 0, "etagMatched": 0, "ttlValid": 0}
+{"phase": "n025_probe", "rid": "fresh-108", "status": 200, "inm": "W/\"8a6d84a8a5c4b2fa\"", "mutated": true, "ground_truth_fresh": false, "pred_fresh": false, "rand_pred_fresh": false, "latency_ms": 2.595, "probeHit": 0, "etagMatched": 0, "ttlValid": 0}
+{"phase": "n025_probe", "rid": "fresh-109", "status": 304, "inm": "W/\"c62a68fc1f642030\"", "mutated": false, "ground_truth_fresh": true, "pred_fresh": true, "rand_pred_fresh": true, "latency_ms": 2.436, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n025_probe", "rid": "fresh-110", "status": 304, "inm": "W/\"05349a585f6840ee\"", "mutated": false, "ground_truth_fresh": true, "pred_fresh": true, "rand_pred_fresh": true, "latency_ms": 2.498, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n025_probe", "rid": "fresh-111", "status": 200, "inm": "W/\"0464c8dc9d77804e\"", "mutated": true, "ground_truth_fresh": false, "pred_fresh": false, "rand_pred_fresh": false, "latency_ms": 2.568, "probeHit": 0, "etagMatched": 0, "ttlValid": 0}
+{"phase": "n025_probe", "rid": "fresh-112", "status": 200, "inm": "W/\"2bf72ccb4b9f5421\"", "mutated": true, "ground_truth_fresh": false, "pred_fresh": false, "rand_pred_fresh": true, "latency_ms": 2.59, "probeHit": 0, "etagMatched": 0, "ttlValid": 0}
+{"phase": "n025_probe", "rid": "fresh-113", "status": 200, "inm": "W/\"a62253e48b8d85d9\"", "mutated": true, "ground_truth_fresh": false, "pred_fresh": false, "rand_pred_fresh": false, "latency_ms": 2.703, "probeHit": 0, "etagMatched": 0, "ttlValid": 0}
+{"phase": "n025_probe", "rid": "fresh-114", "status": 200, "inm": "W/\"292d0f256d8cce1f\"", "mutated": true, "ground_truth_fresh": false, "pred_fresh": false, "rand_pred_fresh": true, "latency_ms": 2.491, "probeHit": 0, "etagMatched": 0, "ttlValid": 0}
+{"phase": "n025_probe", "rid": "fresh-115", "status": 304, "inm": "W/\"50204b22589d5b36\"", "mutated": false, "ground_truth_fresh": true, "pred_fresh": true, "rand_pred_fresh": true, "latency_ms": 2.539, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n025_probe", "rid": "fresh-116", "status": 304, "inm": "W/\"f7125c68f829e613\"", "mutated": false, "ground_truth_fresh": true, "pred_fresh": true, "rand_pred_fresh": false, "latency_ms": 2.477, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n025_probe", "rid": "fresh-117", "status": 200, "inm": "W/\"9a0e9c5fa378e846\"", "mutated": true, "ground_truth_fresh": false, "pred_fresh": false, "rand_pred_fresh": true, "latency_ms": 2.426, "probeHit": 0, "etagMatched": 0, "ttlValid": 0}
+{"phase": "n025_probe", "rid": "fresh-118", "status": 304, "inm": "W/\"7607c41956a56e5b\"", "mutated": false, "ground_truth_fresh": true, "pred_fresh": true, "rand_pred_fresh": true, "latency_ms": 2.535, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n025_probe", "rid": "fresh-119", "status": 304, "inm": "W/\"f33403c175213f00\"", "mutated": false, "ground_truth_fresh": true, "pred_fresh": true, "rand_pred_fresh": false, "latency_ms": 2.509, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n025_probe", "rid": "fresh-120", "status": 200, "inm": "W/\"01025466b189954d\"", "mutated": true, "ground_truth_fresh": false, "pred_fresh": false, "rand_pred_fresh": true, "latency_ms": 2.559, "probeHit": 0, "etagMatched": 0, "ttlValid": 0}
+{"phase": "n025_probe", "rid": "fresh-121", "status": 200, "inm": "W/\"9bfa6dda96ac3596\"", "mutated": true, "ground_truth_fresh": false, "pred_fresh": false, "rand_pred_fresh": true, "latency_ms": 2.574, "probeHit": 0, "etagMatched": 0, "ttlValid": 0}
+{"phase": "n025_probe", "rid": "fresh-122", "status": 304, "inm": "W/\"048df6a38de63de4\"", "mutated": false, "ground_truth_fresh": true, "pred_fresh": true, "rand_pred_fresh": true, "latency_ms": 4.057, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n025_probe", "rid": "fresh-123", "status": 304, "inm": "W/\"2b9e6d3ebda34248\"", "mutated": false, "ground_truth_fresh": true, "pred_fresh": true, "rand_pred_fresh": true, "latency_ms": 2.461, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n025_probe", "rid": "fresh-124", "status": 200, "inm": "W/\"a421ed08ba7b5509\"", "mutated": true, "ground_truth_fresh": false, "pred_fresh": false, "rand_pred_fresh": false, "latency_ms": 2.478, "probeHit": 0, "etagMatched": 0, "ttlValid": 0}
+{"phase": "n025_probe", "rid": "fresh-125", "status": 200, "inm": "W/\"a347b42c103aafcc\"", "mutated": true, "ground_truth_fresh": false, "pred_fresh": false, "rand_pred_fresh": false, "latency_ms": 2.633, "probeHit": 0, "etagMatched": 0, "ttlValid": 0}
+{"phase": "n025_probe", "rid": "fresh-126", "status": 200, "inm": "W/\"ee5909768d1064c7\"", "mutated": true, "ground_truth_fresh": false, "pred_fresh": false, "rand_pred_fresh": false, "latency_ms": 2.562, "probeHit": 0, "etagMatched": 0, "ttlValid": 0}
+{"phase": "n025_probe", "rid": "fresh-127", "status": 304, "inm": "W/\"b3b6adf3d41dbd0d\"", "mutated": false, "ground_truth_fresh": true, "pred_fresh": true, "rand_pred_fresh": true, "latency_ms": 2.518, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n025_probe", "rid": "fresh-128", "status": 304, "inm": "W/\"6ef15b07d8c60192\"", "mutated": false, "ground_truth_fresh": true, "pred_fresh": true, "rand_pred_fresh": true, "latency_ms": 2.549, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n025_probe", "rid": "fresh-129", "status": 200, "inm": "W/\"a01af353465f2489\"", "mutated": true, "ground_truth_fresh": false, "pred_fresh": false, "rand_pred_fresh": true, "latency_ms": 2.587, "probeHit": 0, "etagMatched": 0, "ttlValid": 0}
+{"phase": "n025_probe", "rid": "fresh-130", "status": 304, "inm": "W/\"5267ee1ee845155d\"", "mutated": false, "ground_truth_fresh": true, "pred_fresh": true, "rand_pred_fresh": false, "latency_ms": 2.563, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n025_probe", "rid": "fresh-131", "status": 304, "inm": "W/\"164ade5f2ac9f596\"", "mutated": false, "ground_truth_fresh": true, "pred_fresh": true, "rand_pred_fresh": false, "latency_ms": 2.579, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n025_probe", "rid": "fresh-132", "status": 304, "inm": "W/\"2676030b2ddf7e44\"", "mutated": false, "ground_truth_fresh": true, "pred_fresh": true, "rand_pred_fresh": true, "latency_ms": 2.377, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n025_probe", "rid": "fresh-133", "status": 304, "inm": "W/\"3661b1061d7064bb\"", "mutated": false, "ground_truth_fresh": true, "pred_fresh": true, "rand_pred_fresh": true, "latency_ms": 2.484, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n025_probe", "rid": "fresh-134", "status": 304, "inm": "W/\"bba18bb1980b356a\"", "mutated": false, "ground_truth_fresh": true, "pred_fresh": true, "rand_pred_fresh": false, "latency_ms": 2.366, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n025_probe", "rid": "fresh-135", "status": 304, "inm": "W/\"57fcaa990775b805\"", "mutated": false, "ground_truth_fresh": true, "pred_fresh": true, "rand_pred_fresh": false, "latency_ms": 2.515, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n025_probe", "rid": "fresh-136", "status": 304, "inm": "W/\"366b28370ceee71a\"", "mutated": false, "ground_truth_fresh": true, "pred_fresh": true, "rand_pred_fresh": false, "latency_ms": 2.48, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n025_probe", "rid": "fresh-137", "status": 304, "inm": "W/\"8be64d0e3919d5eb\"", "mutated": false, "ground_truth_fresh": true, "pred_fresh": true, "rand_pred_fresh": true, "latency_ms": 2.695, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n025_probe", "rid": "fresh-138", "status": 304, "inm": "W/\"d8b758fd2afa50a5\"", "mutated": false, "ground_truth_fresh": true, "pred_fresh": true, "rand_pred_fresh": true, "latency_ms": 2.514, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n025_probe", "rid": "fresh-139", "status": 200, "inm": "W/\"900ca32135f231dd\"", "mutated": true, "ground_truth_fresh": false, "pred_fresh": false, "rand_pred_fresh": false, "latency_ms": 2.552, "probeHit": 0, "etagMatched": 0, "ttlValid": 0}
+{"phase": "n025_probe", "rid": "fresh-140", "status": 200, "inm": "W/\"4d70ccc9e989df0a\"", "mutated": true, "ground_truth_fresh": false, "pred_fresh": false, "rand_pred_fresh": false, "latency_ms": 2.925, "probeHit": 0, "etagMatched": 0, "ttlValid": 0}
+{"phase": "n025_probe", "rid": "fresh-141", "status": 304, "inm": "W/\"0b2258e80cc79c90\"", "mutated": false, "ground_truth_fresh": true, "pred_fresh": true, "rand_pred_fresh": true, "latency_ms": 2.705, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n025_probe", "rid": "fresh-142", "status": 200, "inm": "W/\"87a59d96f2a2863b\"", "mutated": true, "ground_truth_fresh": false, "pred_fresh": false, "rand_pred_fresh": false, "latency_ms": 2.711, "probeHit": 0, "etagMatched": 0, "ttlValid": 0}
+{"phase": "n025_probe", "rid": "fresh-143", "status": 200, "inm": "W/\"80dc79e893b9f4ea\"", "mutated": true, "ground_truth_fresh": false, "pred_fresh": false, "rand_pred_fresh": true, "latency_ms": 3.043, "probeHit": 0, "etagMatched": 0, "ttlValid": 0}
+{"phase": "n025_probe", "rid": "fresh-144", "status": 200, "inm": "W/\"c803d7b01bb5e8ed\"", "mutated": true, "ground_truth_fresh": false, "pred_fresh": false, "rand_pred_fresh": false, "latency_ms": 2.739, "probeHit": 0, "etagMatched": 0, "ttlValid": 0}
+{"phase": "n025_probe", "rid": "fresh-145", "status": 304, "inm": "W/\"ccbe84a776476c19\"", "mutated": false, "ground_truth_fresh": true, "pred_fresh": true, "rand_pred_fresh": false, "latency_ms": 2.828, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n025_probe", "rid": "fresh-146", "status": 304, "inm": "W/\"e96362452d330e8d\"", "mutated": false, "ground_truth_fresh": true, "pred_fresh": true, "rand_pred_fresh": true, "latency_ms": 2.769, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "n025_probe", "rid": "fresh-147", "status": 200, "inm": "W/\"bec5e3320fa69fcd\"", "mutated": true, "ground_truth_fresh": false, "pred_fresh": false, "rand_pred_fresh": true, "latency_ms": 2.84, "probeHit": 0, "etagMatched": 0, "ttlValid": 0}
+{"phase": "n025_probe", "rid": "fresh-148", "status": 200, "inm": "W/\"acbf7dba304f833c\"", "mutated": true, "ground_truth_fresh": false, "pred_fresh": false, "rand_pred_fresh": false, "latency_ms": 2.83, "probeHit": 0, "etagMatched": 0, "ttlValid": 0}
+{"phase": "n025_probe", "rid": "fresh-149", "status": 304, "inm": "W/\"ca30ffe476ffbdd9\"", "mutated": false, "ground_truth_fresh": true, "pred_fresh": true, "rand_pred_fresh": false, "latency_ms": 2.714, "probeHit": 1, "etagMatched": 1, "ttlValid": 1}
+{"phase": "tn_contrast", "path": "sticky_nginx", "rid": "tn-sticky_nginx-0", "status": 304}
+{"phase": "tn_contrast", "path": "sticky_nginx", "rid": "tn-sticky_nginx-1", "status": 304}
+{"phase": "tn_contrast", "path": "sticky_nginx", "rid": "tn-sticky_nginx-2", "status": 304}
+{"phase": "tn_contrast", "path": "sticky_nginx", "rid": "tn-sticky_nginx-3", "status": 304}
+{"phase": "tn_contrast", "path": "sticky_nginx", "rid": "tn-sticky_nginx-4", "status": 304}
+{"phase": "tn_contrast", "path": "sticky_nginx", "rid": "tn-sticky_nginx-5", "status": 304}
+{"phase": "tn_contrast", "path": "sticky_nginx", "rid": "tn-sticky_nginx-6", "status": 304}
+{"phase": "tn_contrast", "path": "sticky_nginx", "rid": "tn-sticky_nginx-7", "status": 304}
+{"phase": "tn_contrast", "path": "sticky_nginx", "rid": "tn-sticky_nginx-8", "status": 304}
+{"phase": "tn_contrast", "path": "sticky_nginx", "rid": "tn-sticky_nginx-9", "status": 304}
+{"phase": "tn_contrast", "path": "sticky_nginx", "rid": "tn-sticky_nginx-10", "status": 304}
+{"phase": "tn_contrast", "path": "sticky_nginx", "rid": "tn-sticky_nginx-11", "status": 304}
+{"phase": "tn_contrast", "path": "sticky_nginx", "rid": "tn-sticky_nginx-12", "status": 304}
+{"phase": "tn_contrast", "path": "sticky_nginx", "rid": "tn-sticky_nginx-13", "status": 304}
+{"phase": "tn_contrast", "path": "sticky_nginx", "rid": "tn-sticky_nginx-14", "status": 304}
+{"phase": "tn_contrast", "path": "sticky_nginx", "rid": "tn-sticky_nginx-15", "status": 304}
+{"phase": "tn_contrast", "path": "sticky_nginx", "rid": "tn-sticky_nginx-16", "status": 304}
+{"phase": "tn_contrast", "path": "sticky_nginx", "rid": "tn-sticky_nginx-17", "status": 304}
+{"phase": "tn_contrast", "path": "sticky_nginx", "rid": "tn-sticky_nginx-18", "status": 304}
+{"phase": "tn_contrast", "path": "sticky_nginx", "rid": "tn-sticky_nginx-19", "status": 304}
+{"phase": "tn_contrast", "path": "sticky_nginx", "rid": "tn-sticky_nginx-20", "status": 304}
+{"phase": "tn_contrast", "path": "sticky_nginx", "rid": "tn-sticky_nginx-21", "status": 304}
+{"phase": "tn_contrast", "path": "sticky_nginx", "rid": "tn-sticky_nginx-22", "status": 304}
+{"phase": "tn_contrast", "path": "sticky_nginx", "rid": "tn-sticky_nginx-23", "status": 304}
+{"phase": "tn_contrast", "path": "sticky_nginx", "rid": "tn-sticky_nginx-24", "status": 304}
+{"phase": "tn_contrast", "path": "sticky_nginx", "rid": "tn-sticky_nginx-25", "status": 304}
+{"phase": "tn_contrast", "path": "sticky_nginx", "rid": "tn-sticky_nginx-26", "status": 304}
+{"phase": "tn_contrast", "path": "sticky_nginx", "rid": "tn-sticky_nginx-27", "status": 304}
+{"phase": "tn_contrast", "path": "sticky_nginx", "rid": "tn-sticky_nginx-28", "status": 304}
+{"phase": "tn_contrast", "path": "sticky_nginx", "rid": "tn-sticky_nginx-29", "status": 304}
+{"phase": "tn_contrast", "path": "sticky_nginx", "rid": "tn-sticky_nginx-30", "status": 304}
+{"phase": "tn_contrast", "path": "sticky_nginx", "rid": "tn-sticky_nginx-31", "status": 304}
+{"phase": "tn_contrast", "path": "sticky_nginx", "rid": "tn-sticky_nginx-32", "status": 304}
+{"phase": "tn_contrast", "path": "sticky_nginx", "rid": "tn-sticky_nginx-33", "status": 304}
+{"phase": "tn_contrast", "path": "sticky_nginx", "rid": "tn-sticky_nginx-34", "status": 304}
+{"phase": "tn_contrast", "path": "sticky_nginx", "rid": "tn-sticky_nginx-35", "status": 304}
+{"phase": "tn_contrast", "path": "sticky_nginx", "rid": "tn-sticky_nginx-36", "status": 304}
+{"phase": "tn_contrast", "path": "sticky_nginx", "rid": "tn-sticky_nginx-37", "status": 304}
+{"phase": "tn_contrast", "path": "sticky_nginx", "rid": "tn-sticky_nginx-38", "status": 304}
+{"phase": "tn_contrast", "path": "sticky_nginx", "rid": "tn-sticky_nginx-39", "status": 304}
+{"phase": "tn_contrast", "path": "sticky_nginx", "rid": "tn-sticky_nginx-40", "status": 304}
+{"phase": "tn_contrast", "path": "sticky_nginx", "rid": "tn-sticky_nginx-41", "status": 304}
+{"phase": "tn_contrast", "path": "sticky_nginx", "rid": "tn-sticky_nginx-42", "status": 304}
+{"phase": "tn_contrast", "path": "sticky_nginx", "rid": "tn-sticky_nginx-43", "status": 304}
+{"phase": "tn_contrast", "path": "sticky_nginx", "rid": "tn-sticky_nginx-44", "status": 304}
+{"phase": "tn_contrast", "path": "sticky_nginx", "rid": "tn-sticky_nginx-45", "status": 304}
+{"phase": "tn_contrast", "path": "sticky_nginx", "rid": "tn-sticky_nginx-46", "status": 304}
+{"phase": "tn_contrast", "path": "sticky_nginx", "rid": "tn-sticky_nginx-47", "status": 304}
+{"phase": "tn_contrast", "path": "sticky_nginx", "rid": "tn-sticky_nginx-48", "status": 304}
+{"phase": "tn_contrast", "path": "sticky_nginx", "rid": "tn-sticky_nginx-49", "status": 304}
+{"phase": "tn_contrast", "path": "sticky_nginx", "rid": "tn-sticky_nginx-50", "status": 304}
+{"phase": "tn_contrast", "path": "sticky_nginx", "rid": "tn-sticky_nginx-51", "status": 304}
+{"phase": "tn_contrast", "path": "sticky_nginx", "rid": "tn-sticky_nginx-52", "status": 304}
+{"phase": "tn_contrast", "path": "sticky_nginx", "rid": "tn-sticky_nginx-53", "status": 304}
+{"phase": "tn_contrast", "path": "sticky_nginx", "rid": "tn-sticky_nginx-54", "status": 304}
+{"phase": "tn_contrast", "path": "sticky_nginx", "rid": "tn-sticky_nginx-55", "status": 304}
+{"phase": "tn_contrast", "path": "sticky_nginx", "rid": "tn-sticky_nginx-56", "status": 304}
+{"phase": "tn_contrast", "path": "sticky_nginx", "rid": "tn-sticky_nginx-57", "status": 304}
+{"phase": "tn_contrast", "path": "sticky_nginx", "rid": "tn-sticky_nginx-58", "status": 304}
+{"phase": "tn_contrast", "path": "sticky_nginx", "rid": "tn-sticky_nginx-59", "status": 304}
+{"phase": "tn_contrast", "path": "direct_gunicorn", "rid": "tn-direct_gunicorn-0", "status": 304}
+{"phase": "tn_contrast", "path": "direct_gunicorn", "rid": "tn-direct_gunicorn-1", "status": 304}
+{"phase": "tn_contrast", "path": "direct_gunicorn", "rid": "tn-direct_gunicorn-2", "status": 304}
+{"phase": "tn_contrast", "path": "direct_gunicorn", "rid": "tn-direct_gunicorn-3", "status": 304}
+{"phase": "tn_contrast", "path": "direct_gunicorn", "rid": "tn-direct_gunicorn-4", "status": 304}
+{"phase": "tn_contrast", "path": "direct_gunicorn", "rid": "tn-direct_gunicorn-5", "status": 304}
+{"phase": "tn_contrast", "path": "direct_gunicorn", "rid": "tn-direct_gunicorn-6", "status": 304}
+{"phase": "tn_contrast", "path": "direct_gunicorn", "rid": "tn-direct_gunicorn-7", "status": 304}
+{"phase": "tn_contrast", "path": "direct_gunicorn", "rid": "tn-direct_gunicorn-8", "status": 304}
+{"phase": "tn_contrast", "path": "direct_gunicorn", "rid": "tn-direct_gunicorn-9", "status": 304}
+{"phase": "tn_contrast", "path": "direct_gunicorn", "rid": "tn-direct_gunicorn-10", "status": 304}
+{"phase": "tn_contrast", "path": "direct_gunicorn", "rid": "tn-direct_gunicorn-11", "status": 304}
+{"phase": "tn_contrast", "path": "direct_gunicorn", "rid": "tn-direct_gunicorn-12", "status": 304}
+{"phase": "tn_contrast", "path": "direct_gunicorn", "rid": "tn-direct_gunicorn-13", "status": 304}
+{"phase": "tn_contrast", "path": "direct_gunicorn", "rid": "tn-direct_gunicorn-14", "status": 304}
+{"phase": "tn_contrast", "path": "direct_gunicorn", "rid": "tn-direct_gunicorn-15", "status": 304}
+{"phase": "tn_contrast", "path": "direct_gunicorn", "rid": "tn-direct_gunicorn-16", "status": 304}
+{"phase": "tn_contrast", "path": "direct_gunicorn", "rid": "tn-direct_gunicorn-17", "status": 304}
+{"phase": "tn_contrast", "path": "direct_gunicorn", "rid": "tn-direct_gunicorn-18", "status": 304}
+{"phase": "tn_contrast", "path": "direct_gunicorn", "rid": "tn-direct_gunicorn-19", "status": 304}
+{"phase": "tn_contrast", "path": "direct_gunicorn", "rid": "tn-direct_gunicorn-20", "status": 304}
+{"phase": "tn_contrast", "path": "direct_gunicorn", "rid": "tn-direct_gunicorn-21", "status": 304}
+{"phase": "tn_contrast", "path": "direct_gunicorn", "rid": "tn-direct_gunicorn-22", "status": 304}
+{"phase": "tn_contrast", "path": "direct_gunicorn", "rid": "tn-direct_gunicorn-23", "status": 304}
+{"phase": "tn_contrast", "path": "direct_gunicorn", "rid": "tn-direct_gunicorn-24", "status": 304}
+{"phase": "tn_contrast", "path": "direct_gunicorn", "rid": "tn-direct_gunicorn-25", "status": 304}
+{"phase": "tn_contrast", "path": "direct_gunicorn", "rid": "tn-direct_gunicorn-26", "status": 304}
+{"phase": "tn_contrast", "path": "direct_gunicorn", "rid": "tn-direct_gunicorn-27", "status": 304}
+{"phase": "tn_contrast", "path": "direct_gunicorn", "rid": "tn-direct_gunicorn-28", "status": 304}
+{"phase": "tn_contrast", "path": "direct_gunicorn", "rid": "tn-direct_gunicorn-29", "status": 304}
+{"phase": "tn_contrast", "path": "direct_gunicorn", "rid": "tn-direct_gunicorn-30", "status": 304}
+{"phase": "tn_contrast", "path": "direct_gunicorn", "rid": "tn-direct_gunicorn-31", "status": 304}
+{"phase": "tn_contrast", "path": "direct_gunicorn", "rid": "tn-direct_gunicorn-32", "status": 304}
+{"phase": "tn_contrast", "path": "direct_gunicorn", "rid": "tn-direct_gunicorn-33", "status": 304}
+{"phase": "tn_contrast", "path": "direct_gunicorn", "rid": "tn-direct_gunicorn-34", "status": 304}
+{"phase": "tn_contrast", "path": "direct_gunicorn", "rid": "tn-direct_gunicorn-35", "status": 304}
+{"phase": "tn_contrast", "path": "direct_gunicorn", "rid": "tn-direct_gunicorn-36", "status": 304}
+{"phase": "tn_contrast", "path": "direct_gunicorn", "rid": "tn-direct_gunicorn-37", "status": 304}
+{"phase": "tn_contrast", "path": "direct_gunicorn", "rid": "tn-direct_gunicorn-38", "status": 304}
+{"phase": "tn_contrast", "path": "direct_gunicorn", "rid": "tn-direct_gunicorn-39", "status": 304}
+{"phase": "tn_contrast", "path": "direct_gunicorn", "rid": "tn-direct_gunicorn-40", "status": 304}
+{"phase": "tn_contrast", "path": "direct_gunicorn", "rid": "tn-direct_gunicorn-41", "status": 304}
+{"phase": "tn_contrast", "path": "direct_gunicorn", "rid": "tn-direct_gunicorn-42", "status": 304}
+{"phase": "tn_contrast", "path": "direct_gunicorn", "rid": "tn-direct_gunicorn-43", "status": 304}
+{"phase": "tn_contrast", "path": "direct_gunicorn", "rid": "tn-direct_gunicorn-44", "status": 304}
+{"phase": "tn_contrast", "path": "direct_gunicorn", "rid": "tn-direct_gunicorn-45", "status": 304}
+{"phase": "tn_contrast", "path": "direct_gunicorn", "rid": "tn-direct_gunicorn-46", "status": 304}
+{"phase": "tn_contrast", "path": "direct_gunicorn", "rid": "tn-direct_gunicorn-47", "status": 304}
+{"phase": "tn_contrast", "path": "direct_gunicorn", "rid": "tn-direct_gunicorn-48", "status": 304}
+{"phase": "tn_contrast", "path": "direct_gunicorn", "rid": "tn-direct_gunicorn-49", "status": 304}
+{"phase": "tn_contrast", "path": "direct_gunicorn", "rid": "tn-direct_gunicorn-50", "status": 304}
+{"phase": "tn_contrast", "path": "direct_gunicorn", "rid": "tn-direct_gunicorn-51", "status": 304}
+{"phase": "tn_contrast", "path": "direct_gunicorn", "rid": "tn-direct_gunicorn-52", "status": 304}
+{"phase": "tn_contrast", "path": "direct_gunicorn", "rid": "tn-direct_gunicorn-53", "status": 304}
+{"phase": "tn_contrast", "path": "direct_gunicorn", "rid": "tn-direct_gunicorn-54", "status": 304}
+{"phase": "tn_contrast", "path": "direct_gunicorn", "rid": "tn-direct_gunicorn-55", "status": 304}
+{"phase": "tn_contrast", "path": "direct_gunicorn", "rid": "tn-direct_gunicorn-56", "status": 304}
+{"phase": "tn_contrast", "path": "direct_gunicorn", "rid": "tn-direct_gunicorn-57", "status": 304}
+{"phase": "tn_contrast", "path": "direct_gunicorn", "rid": "tn-direct_gunicorn-58", "status": 304}
+{"phase": "tn_contrast", "path": "direct_gunicorn", "rid": "tn-direct_gunicorn-59", "status": 304}
