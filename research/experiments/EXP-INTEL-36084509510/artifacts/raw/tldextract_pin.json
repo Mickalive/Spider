@@ -1,0 +1,6 @@
+{
+ "experiment_id": "EXP-INTEL-36084509510",
+ "tldextract_version": "5.3.2",
+ "in_pip_freeze": true,
+ "method_note": "frozen MV3: eTLD+1 extraction via tldextract 5.3.2 pinned via pip freeze; family-level grouping = eTLD+1 site family. UNAVAILABLE until WebGym manifest acquirable (HF_TOKEN)."
+}

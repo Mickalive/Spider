@@ -1,0 +1,231 @@
+{
+ "experiment_id": "EXP-INTEL-36084509510",
+ "shared_manifest_schema": 1,
+ "deterministic_sampling": {
+  "seed": 35725763380,
+  "operator": "random.Random(35725763380).sample(sorted(families_ge3),10) executed twice with seed reset",
+  "per_census": {
+   "primary_webarena_verified_v2_812": {
+    "S1": [
+     191,
+     180,
+     162,
+     197,
+     153,
+     213,
+     163,
+     137,
+     136,
+     222
+    ],
+    "S2": [
+     191,
+     180,
+     162,
+     197,
+     153,
+     213,
+     163,
+     137,
+     136,
+     222
+    ],
+    "S1_equals_S2": true,
+    "families_ge3": 36
+   },
+   "WebGym_292k_127k_sampled_diverse": {
+    "S1": "ERROR: ValueError: Sample larger than population or is negative",
+    "S2": "ERROR: ValueError: Sample larger than population or is negative",
+    "S1_equals_S2": null,
+    "families_ge3": 0,
+    "status": "UNAVAILABLE_HF_401_LOGGED",
+    "smallest_next_action": "HF_TOKEN read-scope/account-quota/mirror for ServiceNow/WebGym + OpenEnv/WebGym"
+   }
+  }
+ },
+ "product_subtree_anchoring_definition": {
+  "viewport": "1280x720",
+  "ax_mode": "CDP Accessibility.getFullAXTree",
+  "selectors": {
+   "heading": [
+    "h1",
+    ".page-title",
+    ".product-name"
+   ],
+   "price": [
+    ".price-box",
+    ".product-info-price .price",
+    ".price",
+    ".product-info-price"
+   ],
+   "add_to_cart": [
+    "#product-addtocart-button",
+    ".tocart",
+    "button[title*=Cart]",
+    ".add-to-cart button"
+   ],
+   "main": [
+    "main",
+    ".main",
+    "#maincontent"
+   ],
+   "contentinfo": [
+    "footer",
+    ".contentinfo",
+    ".page-footer"
+   ]
+  },
+  "rule": "node_count_subtree > 1 for all five categories AND SHA stability both directions",
+  "sha_protocol": "body regex <body[^>]*>.*?</body> DOTALL + 9 base + expanded {form_key,uenc,store,session,nonce,fotorama\\d{6,},timestamp} stripping; SHA256 before==after TRUE and after visible mutation !=TRUE"
+ },
+ "manifest_shas": {
+  "webarena_verified_812": {
+   "sha256": "d65275660814663375028e9017e1f929e3c38321041b125795e2713b52243d30",
+   "bytes": 927596,
+   "verified_this_experiment": 2,
+   "source": "GitHub raw x2 (fresh this experiment)"
+  },
+  "webgym_292k_tasks": {
+   "sha256": null,
+   "bytes": null,
+   "status": "UNAVAILABLE_HF_401_LOGGED"
+  },
+  "webgym_127k_sites": {
+   "sha256": null,
+   "bytes": null,
+   "status": "UNAVAILABLE_HF_401_LOGGED"
+  },
+  "docker_hub_webarena_shopping": {
+   "digest": "sha256:3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb",
+   "hub_api_200": true
+  }
+ },
+ "etld_plus1": {
+  "extraction_method": "tldextract 5.3.2 pinned via pip freeze (MV3)",
+  "distinct_etld_plus1": null,
+  "status": "UNAVAILABLE_HF_401_LOGGED",
+  "list": [],
+  "smallest_next_action": "HF_TOKEN read-scope/account-quota/mirror for ServiceNow/WebGym + OpenEnv/WebGym"
+ },
+ "family_histogram": {
+  "3": 2,
+  "4": 1,
+  "5": 32,
+  "6": 1
+ },
+ "bootstrap_ci": {
+  "lower": 0.3960327368567069,
+  "upper": 0.5163660993035543
+ },
+ "threshold_sweep_table": {
+  "experiment_id": "EXP-INTEL-36084509510",
+  "hf_token_present": false,
+  "note": "WebGym 292k manifest UNAVAILABLE after 2 genuine 401 attempts this experiment; sweep not computable; per MV4 UNAVAILABLE not falsified",
+  "thresholds": [
+   0.818,
+   0.9,
+   0.9479
+  ],
+  "sweep_table": [
+   {
+    "threshold": 0.818,
+    "prevalence": null,
+    "ci_lower": null,
+    "ci_upper": null,
+    "status": "UNAVAILABLE"
+   },
+   {
+    "threshold": 0.9,
+    "prevalence": null,
+    "ci_lower": null,
+    "ci_upper": null,
+    "status": "UNAVAILABLE"
+   },
+   {
+    "threshold": 0.9479,
+    "prevalence": null,
+    "ci_lower": null,
+    "ci_upper": null,
+    "status": "UNAVAILABLE"
+   }
+  ],
+  "prevalence_at_0_818": null,
+  "prevalence_at_0_900": null,
+  "prevalence_at_0_9479": null,
+  "range_0_818_to_0_9479": null,
+  "range_gate": ">=0.05",
+  "range_0_900_to_0_9479": null,
+  "range_gate_0900": ">=0.02",
+  "monotonic": null,
+  "monotonic_gate": "prev@0.818 >= prev@0.900 >= prev@0.9479",
+  "status": "UNAVAILABLE",
+  "evidence": "artifacts/raw/hf_webgym_manifest_attempts.json"
+ },
+ "jaccard_matrix": {
+  "status": "DIAGNOSTIC_ON_AVAILABLE_FAMILIES",
+  "note": "MV7 frozen gate is on sampled WebGym diverse families (same families as MV3); those are UNAVAILABLE (HF 401 x2 fresh this experiment). Diagnostic matrix computed across the DISTINCT available constructible WebArena family token sets (full-tree multi-anchor, expanded stripping); same-family cross-capture pairs excluded from max/p95 (identical within-store template artifacts, not orthogonality evidence). Frozen gate not decided on this diagnostic.",
+  "families": [
+   136,
+   145,
+   196,
+   222
+  ],
+  "pairwise_jaccard_matrix": {
+   "136": {
+    "136": "identity-diagnostic",
+    "145": 0.3745,
+    "196": 0.4169,
+    "222": 0.4607
+   },
+   "145": {
+    "136": 0.3745,
+    "145": "identity-diagnostic",
+    "196": 0.4401,
+    "222": 0.4611
+   },
+   "196": {
+    "136": 0.4169,
+    "145": 0.4401,
+    "196": "identity-diagnostic",
+    "222": 0.5418
+   },
+   "222": {
+    "136": 0.4607,
+    "145": 0.4611,
+    "196": 0.5418,
+    "222": "identity-diagnostic"
+   }
+  },
+  "max_pairwise_across_families": 0.5417867435158501,
+  "p95_pairwise_across_families": 0.46113989637305697,
+  "tokenization": "role:name tokens of full AX tree built from CDP Accessibility.getFullAXTree; expanded stripping via grammar module"
+ },
+ "constructibility_per_family": {
+  "canonical": [
+   136,
+   145,
+   196,
+   222
+  ],
+  "constructible_families": [
+   136,
+   145,
+   196,
+   222
+  ],
+  "n_constructible": 4,
+  "gate": ">=10",
+  "anchoring_data": "artifacts/derived/family_anchoring.json"
+ },
+ "pip_freeze": {
+  "sha256": "b68aff78fd35e30676b741c63d5a1571b641f91d19c63687ebc8445689b1d4ae",
+  "view": "0.14.3",
+  "versions_match": true
+ },
+ "grammar_hash": "273eafbcb817e8981f843581a724594665cabdd357b318c701251929ee9c83de",
+ "viewport_versions": {
+  "viewport": "1280x720",
+  "playwright": "Version 1.63.0"
+ },
+ "published_from": "EXP-INTEL-36084509510"
+}

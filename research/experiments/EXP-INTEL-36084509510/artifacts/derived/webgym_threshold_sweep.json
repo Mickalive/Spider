@@ -1,0 +1,44 @@
+{
+ "experiment_id": "EXP-INTEL-36084509510",
+ "hf_token_present": false,
+ "note": "WebGym 292k manifest UNAVAILABLE after 2 genuine 401 attempts this experiment; sweep not computable; per MV4 UNAVAILABLE not falsified",
+ "thresholds": [
+  0.818,
+  0.9,
+  0.9479
+ ],
+ "sweep_table": [
+  {
+   "threshold": 0.818,
+   "prevalence": null,
+   "ci_lower": null,
+   "ci_upper": null,
+   "status": "UNAVAILABLE"
+  },
+  {
+   "threshold": 0.9,
+   "prevalence": null,
+   "ci_lower": null,
+   "ci_upper": null,
+   "status": "UNAVAILABLE"
+  },
+  {
+   "threshold": 0.9479,
+   "prevalence": null,
+   "ci_lower": null,
+   "ci_upper": null,
+   "status": "UNAVAILABLE"
+  }
+ ],
+ "prevalence_at_0_818": null,
+ "prevalence_at_0_900": null,
+ "prevalence_at_0_9479": null,
+ "range_0_818_to_0_9479": null,
+ "range_gate": ">=0.05",
+ "range_0_900_to_0_9479": null,
+ "range_gate_0900": ">=0.02",
+ "monotonic": null,
+ "monotonic_gate": "prev@0.818 >= prev@0.900 >= prev@0.9479",
+ "status": "UNAVAILABLE",
+ "evidence": "artifacts/raw/hf_webgym_manifest_attempts.json"
+}
