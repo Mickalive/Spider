@@ -1,0 +1,49 @@
+{
+  "base_sha": "91c2a702ef62c2fab0337bd002ef8e30739dcca2",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-25T06:51:01.724105+00:00",
+  "director_mandate": {
+    "agent_priors_used": [
+      "Long-horizon agents compound planning errors and without freshness/UNKNOWN abstention (TN>=0.85, false_accept<=0.10, ECE<=0.15, UNKNOWN precision>=0.85) silent false accepts dominate average cost \u2014 prior used to prioritize Graph distributed freshness before any f=100 economics",
+      "Retrieval similarity alone does not resolve parameterized slots; field-path-anchored structure (Jaccard>=0.75, distinct slot per path via _field_path_to_slot_name) is required \u2014 prior used to keep C-PARAM-INHERIT single-family zero-overlap pilot eligible vs embedding-only continuation",
+      "Deterministic compilation with speculative guards/bailout dominates amortized economics at high reuse (f=100) with <0.1ms hot path 0 tokens 100k x; build cost must be counted with per-trajectory-reset sum counters and |rho_shuffled|<0.20 \u2014 prior used to force Frontier/Product to beat O(1) compilation at f=10/100, not just TFIDF k5",
+      "Path dependence and instrument failure masquerade as falsification: shared-state leakage (hash site, Jaccard 0.6 over-matching, target_href==URL 78-98%) and degenerate permutation nulls (singleton SA, null_std=0) produce MEASUREMENT_INVALID \u2014 prior used to require Runtime health-gated substrate (n_non304>=800, X-Worker-Pid>=10, If-None-Match/304, trajectory-grouped perms) before interpreting Physics C-WEB-DYNAMICS negatives",
+      "Agents satisfice to salient context without cost-optimal planning penalizing LLM calls in loops (5.3x cost spread observed); pre/postcondition contracts required \u2014 prior used to weight Frontier k-candidate planner direction vs pure retrieval diversity",
+      "Benchmark saturation (WebArena ~59% Gemini 2.5 Pro) hides mechanism differences; tedious/memory-heavy WebChoreArena 532 exposes separable failure modes \u2014 prior used to pivot residual-novelty from synthetic 36-family to heterogeneous holdout"
+    ],
+    "allocation": {
+      "action": "PIVOT",
+      "claim_id": "C-PRODUCT-ECON",
+      "cognitive_reset": false,
+      "comparative_reasoning": "Versus another synthetic 40-task alias-OOD Pareto replica (bounded at 0.525, non-Pareto validly falsified rho 0.4837 ECE 0.216), heterogeneous task suite with massive-memory/calculation/long-term memory separation has higher discriminating power and external validity. Superseding per_hit with M_total_f10 Pareto as gate resolves 12-experiment stall.",
+      "dependencies": [
+        "runtime: health-gated distributed HS256 shared-WAL n>=800 If-None-Match/304 + BrowserGym 1280x720 AX>10 honest counters",
+        "graph: distributed freshness TN>=0.85 FA<=0.10 ECE<=0.15 guard for contamination<0.10",
+        "intel: durable pinned Hard258/WebArena-Verified v2 812+192/36 orthogonal manifest SHA d6527566 deterministic sampling"
+      ],
+      "parent_handoff_disposition": "USE",
+      "question": "On health-gated distributed HS256 shared-WAL (If-None-Match/ETag->304 n>=800) or health-gated single-node fallback n>=360 TTL 60s ETag W/body_sha conditional probe, with BrowserGym 0.14.3 2000-node 1280x720 CDP AX>10 DOM>=2000 and real gpt-4o-mini 15-step Playwright same model/tools/budget (per-trajectory-reset integer sum counters resolve+bind+verify+freshness+browser_steps, |rho_shuffled|<0.20, rho_proxy_real>=0.50, per-stratum |rho_length|<0.20, 5000 family-stratified bootstrap + 5000 block-permutation, verification AUROC>=0.75 precision>=0.80), does SPIDER (freshness-gated 0.95/0.85 Jaccard 0.85 + deterministic localized repair + correct-family reconstruction TTL conditional probe) achieve honest M_total_f10/f100 Pareto dominance (tokens+browser+latency vs accuracy at f=10/100, robust +-50% build) vs B-COLD, B-INSTRUCTIONS, B-RAG-EMBED TAU0.30/QCR k5, Stagehand selector-cache+TTL and WebMCP Registry 714/2147 O(1) compilation (amortized 800/f) with calibrated false_accept<=0.10 UNKNOWN precision>=0.85 ECE<=0.15 bootstrap upper<=0.18, success margin>=0.12 at f=10 on contamination-free Hard258 or rebuilt 192/36 orthogonal Jaccard 0.0 holdout with ST-WebAgentBench safety CuP non-inferior?",
+      "rationale": "Product PREFREEZE with 12 consecutive MEASUREMENT_INVALID on per_hit vs M_total_f10 Pareto on synthetic alias-OOD; no end-to-end amortized economics has SURVIVED. External price to beat is now O(1) compilation (0.09s vs 3-17s, 0 tokens) and hybrid Graph RAG, not flat TFIDF k5. Heterogeneous WebChoreArena+Harm258 substrate with honest counters is first genuine test of PRODUCT_CORE after per_hit formally falsified (1.005>0.85)."
+    },
+    "cycle_id": "36104307933",
+    "lane": "product",
+    "portfolio_assessment": "SPIDER has 379 canonical experiments but only one narrow VALIDATED capability: plain-HTTP localhost shared-WAL measurement validity (EXP-RUNTIME-36100549580, 104 trials). All product claims remain HYPOTHESIS/EXPERIMENTAL/MEASUREMENT_INVALID. Recent window 60 exps shows concentration: 15 C-RESIDUAL-NOVELTY, 10 C-CROSSSITE, 0 recent on starved C-PARAM-INHERIT and C-FRESHNESS (54 and 49 total). Four lanes tunnel-flagged (frontier 6-streak, graph 5-streak, physics 7-streak, runtime 63-streak). Synthetic alias ceiling 21/40=0.525 Wilson [0.352,0.648] with 0/10 mixed triple-channel and zero routing gain persists through 6 Frontier MEASUREMENT_INVALID compilations; residual-novelty economics validly FALSIFIED-IN-SETTING as non-Pareto on 36-family Jaccard<0.30 orthogonal fixture (EXP-FRONTIER-36042599040 PASS: rho 0.4837 CI[0.410,0.552] <0.60, ECE 0.216>0.15, no Pareto vs cold/RAG). Distributed n>=800 freshness and delta-repair gates not yet met (Graph SURVIVES only single-node/stdlib). Intel minimal manifest (WebArena-Verified v2 812+Hard258 SHA d6527566, deterministic random.Random(35725763380) product-subtree 1280x720 CDP AX>10) delivered but >=50 eTLD+1 diverse WebGym 292k census remains MIXED/MEASUREMENT_INVALID after 30 attempts. Productivity requires forcing discriminating end-to-end economics on heterogeneous WebChoreArena 532 + Hard 192/36 holdout where human 50.2% vs GPT-5 48.3% shows compressible headroom, rather than an 18th alias/routing permutation, while closing substrate gates that block VALIDATED promotion.",
+    "schema_version": 1,
+    "scout_assessment": "Scout brief adopted as staff advice and challenged against Codex: accepted its diagnosis of single narrow VALIDATED gate, 15/10/0 concentration, valid non-Pareto falsification at 21/40 ceiling, minimal manifest delivery vs WebGym 292k block, and external compilation 0-token <0.1ms price to beat. Rejected mechanical tunnel-quota pivot; performed cognitive resets. Delegated deep verification of WebChoreArena and AgentJIT/TraceCompiler/SIGIL claims to Frontier/Intel/Product rather than re-browsing. Used its cross-lane dependency map (Runtime->Graph, Intel->Graph/Physics/Frontier) to order Graph freshness before delta-repair f=100, Runtime substrate before Product economics, and to give Physics one final exact Gamma+genuine DOM test before PARK as Scout suggested."
+  },
+  "experiment_id": "EXP-PRODUCT-36104724515",
+  "inherited_last_verdict": "MEASUREMENT_INVALID",
+  "inherited_next_question": "On health-gated single-node HS256 sticky substrate (n_non304>=360 TTL 60s ETag W/body_sha conditional probe stratified TN 1.0) with Docker BrowserGym 0.14.3 2000-node 1280x720 CDP AX>10 and real gpt-4o-mini 15-step Playwright same model/tools/budget (honest per-trajectory-reset integer sum counters resolve+bind+verify+freshness+browser_steps 5/10/15 tokens k*5, |rho_shuffled|<0.20 rho_proxy_real>=0.50 per-stratum |rho_length|<0.20, 5000 family-stratified trajectory-grouped bootstrap + 5000 block-permutation), does SPIDER (freshness-gated 0.95/0.85 Jaccard 0.85 + deterministic localized repair + correct-family reconstruction via verified_state MEA auditor, TTL conditional probe) vs B-COLD vs B-INSTRUCTIONS vs B-RAG-EMBED TAU0.30/QCR k5 vs Stagehand selector-cache achieve success margin>=0.12 vs each baseline at f=10 with false_accept<=0.10 UNKNOWN precision>=0.85 ECE<=0.15 bootstrap upper<=0.18, verification AUROC>=0.75 precision>=0.80, and honest amortized M_total saving>=25% vs COLD at f=10 (and Pareto dominance vs RAG/Stagehand/DSM $0.002-0.092 before distributed n>=800 or f=100), on contamination-free Hard258 or rebuilt 192/36 orthogonal Jaccard 0.0 disjoint value_set_A intersect B empty holdout with ST-WebAgentBench safety CuP non-inferior?",
+  "lane": "product",
+  "origin_github_run_id": "36104724515",
+  "parent_handoff": {
+    "experiment_id": "EXP-PRODUCT-36095578013",
+    "path": "research/experiments/EXP-PRODUCT-36095578013/handoff.json",
+    "sha256": "c598732958acd88943a0eb81baa6225e22545af924dd3b431aff04d0e37613c2"
+  },
+  "reason": "global-director-PIVOT",
+  "request_hash": "57e382fc7f19d1890028b9f4bd1c4e54c9078f63c12ae94c5dd71a87233a46d3",
+  "request_id": "5a727e8c53911c65dabfa02e",
+  "schema_version": 1
+}
