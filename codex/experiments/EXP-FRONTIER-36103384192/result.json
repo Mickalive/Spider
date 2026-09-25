@@ -1,0 +1,172 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-FRONTIER-36103384192",
+  "lane": "frontier",
+  "status": "MEASUREMENT_INVALID",
+  "outcome": "NOT_APPLICABLE",
+  "metrics": {
+    "live_available": false,
+    "substrate_adequate": false,
+    "heterogeneity_adequate": false,
+    "coverage_adequate": false,
+    "pooled_tasks_available": 0,
+    "mixed_tasks_available": 0,
+    "manifest_families": 0,
+    "jaccard_max": null,
+    "jaccard_mean": null,
+    "freshness_tn": null,
+    "stale_probes": 0,
+    "n_non304": null,
+    "x_worker_pid": null,
+    "browsergym_available": false,
+    "runtime_wal_exists": false,
+    "intel_manifest_exists": false,
+    "graph_freshness_exists": false,
+    "external_dsm_available": false,
+    "external_jit_available": false,
+    "rho_novelty": null,
+    "rho_length_pooled": null,
+    "ece": null,
+    "unknown_precision": null,
+    "false_accept_rate": null,
+    "saving_f10_pct": null,
+    "saving_f100_pct": null,
+    "dominance_f10": null,
+    "dominance_f100": null,
+    "S1_pass": null,
+    "S2_pass": null,
+    "S3_pass": null,
+    "S4_pass": null,
+    "S5_pass": null,
+    "S6_pass": null,
+    "survives": null
+  },
+  "controls": {
+    "PC-BROWSERGYM-SUBSTRATE": {
+      "expected": "n_non304>=360 single-node else >=800 distributed X-Worker-Pid>=10 If-None-Match/304 proxy_cache HIT AX>10 DOM>=2000",
+      "observed": "browsergym_available=False core=not_installed playwright=not_installed agentlab=not_installed chromium=True",
+      "pass": false,
+      "evidence_ref": "substrate_diagnostic.json"
+    },
+    "PC-FRESHNESS-GATED-BAILOUT": {
+      "expected": "freshness TN>=0.85 with >=30 stale probes, bailout to UNKNOWN correctly, ECE upper and false_accept gated",
+      "observed": "freshness_tn=None stale_probes=0 tn_gate_pass=False",
+      "pass": false,
+      "evidence_ref": "substrate_diagnostic.json"
+    },
+    "PC-WEBCHORE-MANIFEST-ORTHOGONAL": {
+      "expected": "shared manifest >=10 families WebArena-Verified 812 + Hard258 + WebChoreArena 532 + Hard 192/36 L=8-14 Jaccard<0.30 mean<0.15 depth>=2 1280x720 AX>10 mean>15 std>5 DOM>=2000 raw >=500 >=50/family 0 leakage seed 35725763380+42",
+      "observed": "manifest_exists=False families=0 jaccard_max=N/A jaccard_mean=N/A pooled=0 mixed=0",
+      "pass": false,
+      "evidence_ref": "substrate_diagnostic.json"
+    },
+    "PC-BUILD-COST-ISOLATED": {
+      "expected": "build + f*per_task auditable frozen before outcomes actual offline vector/index/freshness ops TAU+freshness-gated",
+      "observed": "Build cost definition frozen in spec; cannot verify actual ops without live substrate",
+      "pass": true,
+      "evidence_ref": "spec.json measurement_validity"
+    },
+    "PC-HONEST-COST-SANITY": {
+      "expected": "diff 0 TAU+freshness-gated within-family std>0 zero_cells 0 gap rho_novelty-|rho_shuffled|>0.35 |rho_proxy|<0.60 |rho_shuffled|<0.20 centered |mean|<0.05 std<0.15",
+      "observed": "Cannot verify - requires live per-trajectory hard-reset integer sum counters with TAU+freshness mask",
+      "pass": false,
+      "evidence_ref": "NOT_RUN - substrate unavailable"
+    },
+    "PC-TRAIN-TEST-DISJOINT": {
+      "expected": "0 test-B resources/families in registry/index/DAG, 0 forbidden reads whole-trajectory holdout",
+      "observed": "Intel manifest available=False",
+      "pass": false,
+      "evidence_ref": "NOT_RUN - Intel manifest unavailable"
+    },
+    "PC-CALIBRATION-DERIVED": {
+      "expected": "confidence solely from actual TAU0.30+freshness softmax+jitter, std>0.05, 5 adaptive bins, imperfect accuracy 0.35-0.78 deterministic gated correctness",
+      "observed": "Cannot verify - requires live execution with TAU+freshness gating",
+      "pass": false,
+      "evidence_ref": "NOT_RUN - substrate unavailable"
+    },
+    "PC-NOVELTY-MONOTONICITY": {
+      "expected": "mean cost 100% >0% block p<0.05 d>0.8",
+      "observed": "Cannot verify - requires live execution with controlled novelty strata",
+      "pass": false,
+      "evidence_ref": "NOT_RUN - substrate unavailable"
+    },
+    "NC-EMPTY-REGISTRY": {
+      "expected": "N=6 empty registry -> UNKNOWN 100% precision 1.0 below TAU0.30",
+      "observed": "Cannot verify - requires live execution",
+      "pass": false,
+      "evidence_ref": "NOT_RUN - substrate unavailable"
+    },
+    "NC-NO-APPLICABLE": {
+      "expected": "N=12 OOD intents with no covering family, every pipeline UNKNOWN precision>=0.85 false<=0.15 TAU+freshness, gated reduction >=0.20 vs ungated",
+      "observed": "Cannot verify - requires live execution",
+      "pass": false,
+      "evidence_ref": "NOT_RUN - substrate unavailable"
+    },
+    "NC-ORACLE-LEAK": {
+      "expected": "derived_context allowed keys only URL/method/url_path/url_query/headers_observed/body_observed plus mechanism templates, AX snapshot hash, freshness contracts; must not contain residual_novelty_fraction/target_resource_id/length_label/expected_key_set, read count 0 trajectory-grouped",
+      "observed": "Cannot verify - requires live harness inspection",
+      "pass": false,
+      "evidence_ref": "NOT_RUN - substrate unavailable"
+    },
+    "NC-BIJECTIVE-COST": {
+      "expected": "honest cost not bijective with n*3200 nor f*6.0 nor TAU candidate-count proxy: gap>0.35 |rho_proxy|<0.60 gated",
+      "observed": "Cannot verify - requires live honest cost measurements",
+      "pass": false,
+      "evidence_ref": "NOT_RUN - substrate unavailable"
+    },
+    "NC-SHUFFLED-NULL": {
+      "expected": "global trajectory-grouped stratified permutation unit=trajectory family-stratified 5000 perms |rho_shuffled|<0.20 p>=0.20 centered |mean|<0.05 std<0.15; primary S1/S2 p-values use separate 5000 family-block permutation block=family unit=trajectory TAU+freshness-gated",
+      "observed": "Cannot verify - requires live execution and 5000 permutations",
+      "pass": false,
+      "evidence_ref": "NOT_RUN - substrate unavailable"
+    },
+    "NC-GUARD-SPECIFICITY": {
+      "expected": "shuffled guard+freshness ablation N>=12 shows precision drop >=30% vs real guards, discriminating not tautological",
+      "observed": "Cannot verify - requires live execution with guard ablation",
+      "pass": false,
+      "evidence_ref": "NOT_RUN - substrate unavailable"
+    }
+  },
+  "artifacts": [
+    {
+      "path": "artifacts/substrate_diagnostic.json",
+      "sha256": "621bfa6b844ea27e8d317f915efde477de8230fb2d5a7eb366343c480f5e6345",
+      "role": "raw"
+    }
+  ],
+  "observations": [
+    "Substrate check: browsergym_available=False (core=not_installed playwright=not_installed agentlab=not_installed chromium=True)",
+    "Runtime WAL: exists=False n_non304=None x_worker_pid=None",
+    "Intel manifest: exists=False families=0 pooled_tasks=0 mixed_tasks=0",
+    "Graph freshness: exists=False tn=None stale_probes=0",
+    "External Pareto: DSM_available=False JIT_available=False",
+    "Overall: live_available=False substrate_adequate=False heterogeneity_adequate=False coverage_adequate=False",
+    "Controls: all_pc_pass=False all_nc_pass=False (PCs/NCs requiring live substrate NOT_RUN)",
+    "Per frozen spec measurement_validity[0]: If Intel shared manifest unavailable or BrowserGym CDP or Runtime WAL insufficient -> declare live_available=false and MEASUREMENT_INVALID diagnostic without falsifying claim",
+    "Per frozen decision_rule: MEASUREMENT_INVALID if any PC or NC fails per thresholds above - no SURVIVES/FALSIFIES inference, distinguishes infrastructure/validity failure from scientific negative",
+    "Synthetic 36-family Jaccard 0.0 disjoint fixture NOT substituted as heterogeneous evidence per frozen spec BINDING-RULE"
+  ],
+  "validity_notes": [
+    "LIVE SUBSTRATE UNAVAILABLE: BrowserGym stack (browsergym-core 0.14.3, playwright 1.63.0, agentlab 0.4.2) not installed; chromium present but Python bindings absent",
+    "LIVE SUBSTRATE UNAVAILABLE: Runtime HS256 sticky WAL at /tmp/spider-runtime/shared.db not found; n_non304 health gate cannot be validated",
+    "LIVE SUBSTRATE UNAVAILABLE: Intel diverse site manifest at research/intel/diverse_site_manifest.json not found; cannot verify >=10 families Jaccard<0.30 mean<0.15 with AX>10 DOM>=2000",
+    "LIVE SUBSTRATE UNAVAILABLE: Graph freshness gate (research/graph/state.json) not found; TN>=0.85 with >=30 stale probes cannot be validated",
+    "LIVE SUBSTRATE UNAVAILABLE: External Pareto references (Agentic Compilation DSM reproduction, Agent JIT reproduction) not available at research/intel/",
+    "MEASUREMENT_INVALID is a validity gate outcome, not a scientific falsification. C-RESIDUAL-NOVELTY remains HYPOTHESIS untested on heterogeneous live gate.",
+    "Per director_mandate comparative_reasoning: continuing alias/routing permutations has VOI~0 (18th permutation, routing gain 0.0 p=1.0, 21/40 ceiling bounded); C-SEMANTIC-RESOLVE blocked pending Intel hierarchical census; C-WEB-DYNAMICS barrier physics PARKED pending diverse manifest. This experiment is the unblocked high-upside orthogonal test but requires substrate unblocking first.",
+    "Do not substitute synthetic 36-family TAU0.30 Jaccard 0.0 disjoint-alphabet fixture (EXP-FRONTIER-36042599040) for live heterogeneous WebChoreArena/WebArena-Verified gate - explicitly forbidden per spec measurement_validity[0] BINDING-RULE and prereg section 12.",
+    "Agent priors from director_mandate.agent_priors_used (compilation JIT 10.4x, path dependence |rho_shuffled|<0.20, hierarchical Intent->Stage->Action, human 50.2% vs GPT-5 48.3% unsaturated) are labeled general priors distinguished in validity_notes/do_not_assume; they cannot satisfy S1-S6 decision_rule thresholds."
+  ],
+  "unresolved": [
+    "S1 rho_novelty>=0.60 lower>0.40 p<0.05 TAU+freshness-gated on heterogeneous shared manifest",
+    "S2 pooled |rho_length|<0.20 upper<0.25 p>=0.05 decoupling",
+    "S3 per-stratum |rho_length|<0.20 upper<0.30 for every novelty stratum 0/25/50/75/100 and length-tertile",
+    "S4 calibration UNKNOWN precision>=0.85 false_accept<=0.10 ECE<=0.15 upper<=0.18 with freshness TN>=0.85",
+    "S5 Pareto M_total_SPIDER(f=10)<=0.75*M_total_COLD saving>=25% lower>15% p<0.05 strict dominance vs cold and vs flat RAG k5 at f=10/f=100 robust +-50% build, external DSM/JIT reference",
+    "S6 honest gap rho_novelty-|rho_shuffled|>0.35 |rho_proxy|<0.60 global |rho_shuffled|<0.20 centered |mean|<0.05 std<0.15",
+    "Intel diverse-site manifest delivery (WebGym 292k 50 eTLD+1 or WebArena-Verified Hard expanded)",
+    "Runtime health-gated single-worker sticky Flask HS256+nginx WAL deployment with n_non304>=360",
+    "BrowserGym 1280x720 CDP stack installation (browsergym-core 0.14.3 playwright 1.63.0 agentlab 0.4.2)",
+    "Graph freshness gate validation TN>=0.85 with >=30 stale probes on WebChoreArena cross-site sessions"
+  ]
+}

@@ -1,0 +1,43 @@
+{
+  "base_sha": "d03630068d394def8a9374d99587ade9eb318ef2",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-25T06:33:28.938439+00:00",
+  "director_mandate": {
+    "agent_priors_used": [
+      "Deterministic compilation/JIT with O(1) amortized inference (Agentic Compilation DSM 99% $0.002-0.092, Agent JIT 10.4x speedup) is the externally convergent architecture for web-agent economics; continuous LLM loops O(MxN) are non-viable at scale \u2014 prior, not SPIDER evidence",
+      "Flat memory/retrieval (RAG, alias catalogs) entangles task logic with site-specific details and fails cross-site without hierarchical decomposition (Intent->Stage->Action) and semantic element descriptions \u2014 prior, not SPIDER evidence",
+      "Long-horizon agents fail via path dependence, salience capture, local optima, and compounding planning errors; freshness guards, verification and delta-repair directly target these but synthetic-to-real transfer is the bottleneck \u2014 prior, not SPIDER evidence",
+      "True website holdout without site identity leakage is the gold standard for cross-site; disjoint-vocabulary Jaccard<0.30 on synthetic or single Magento store is not a substitute \u2014 prior, not SPIDER evidence"
+    ],
+    "allocation": {
+      "action": "CONTINUE",
+      "claim_id": "C-MEAS-VALID",
+      "cognitive_reset": true,
+      "comparative_reasoning": "Vs parking Runtime as idle (wastes strongest substrate momentum and blocks 3 lanes) and vs pivoting to C-FRESHNESS/C-DELTA-REPAIR directly (those are Graph's cumulative inheritance claims; Runtime's comparative advantage is substrate validity). Continuing C-MEAS-VALID beyond HTTP triple dominates because without discriminating writable controls, all downstream freshness/repair/product claims remain MEASUREMENT_INVALID.",
+      "dependencies": [],
+      "parent_handoff_disposition": "USE",
+      "question": "Does the distributed stable-header substrate (HMAC-SHA256 per auth_state, filtered MINUS {content-length,etag,w-etag,range}, greedy brotli->gzip MAX_DEPTH5, honest per-trajectory integer sums B=1000 via shared single.db WAL n>=800 hash $request_uri sticky, X-Worker-Pid>=2, If-None-Match/304 verified) maintain C2 orthogonality |r|<0.30 V<0.30 nullFP<=0.05, C4 full>0.5 full>max(body,status)+0.05 diff_lo>0 and C5 loopback/HIT validity when extended to BrowserGym Playwright CDP 1280x720 DOM accessibility tree observation (AX>10, DOM 21-82, TRAIN-only k-means 20) plus writable-controls matrix on SPA write-paths beyond the HTTP triple with discriminating positive/null outcomes (writable/auth/session/drift)?",
+      "rationale": "Runtime closed DISTRIBUTED VALIDATED on plain HTTP localhost (n_non304>=800 stratified, shared WAL, real proxy_cache HIT 330/330, honest counters). The next_gate for C-MEAS-VALID is writable/auth/session/drift controls must produce discriminating positive and null outcomes \u2014 currently UNKNOWN. Extending the validated stable-header + honest-counter substrate to real BrowserGym CDP DOM/AX and writable SPA write-paths is the highest-leverage unblocker for Graph freshness/repair transfer and Product end-to-end economics, and has clear falsifiable thresholds (C2/C4/C5)."
+    },
+    "cycle_id": "36102665868",
+    "lane": "runtime",
+    "portfolio_assessment": "Program is locally trapped: 14 physics CMI MEASUREMENT_INVALID, frontier synthetic alias gate validly falsified non-Pareto rho 0.48, 4 compilation bypasses bounded at 0.525, Intel 29-deep single-store census without true holdout, Graph freshness/repair stalled on blast radius 2-3. One genuine win: Runtime DISTRIBUTED VALIDATED shared-WAL real-cache on plain HTTP localhost (EXP-RUNTIME-36100549580). Highest leverage is sequencing the unblocker chain: Runtime extends to BrowserGym/writable controls -> Graph transfers freshness/repair to health-gated single-node then distributed with honest counters -> Intel delivers diverse holdout via HF_TOKEN + orthogonal hosting -> Product/Frontier test real-task novelty economics vs Agentic Compilation/JIT on WebChoreArena/WebArena-Verified Hard with calibrated abstention. Physics synthetic DGP basin is exhausted and must be parked pending production SPA manifest.",
+    "schema_version": 1,
+    "scout_assessment": "Scout brief was decisive for direction but challenged on allocation: adopted its core diagnoses (Runtime distributed win, Frontier synthetic falsification rho 0.48, Intel HF_TOKEN as smallest unblocker for 3 lanes, compilation/JIT as mandatory baselines) and its candidate directions for Frontier/Intel/Runtime/Graph. Overrode two staff suggestions: (1) Scout suggested redirecting idle Physics to C-MEAS-VALID distributed validation \u2014 rejected as redundant given Runtime's just-closed DISTRIBUTED VALIDATED gate; Physics instead explicitly PARKED on C-WEB-DYNAMICS pending larger manifest, preserving resources. (2) Scout listed C-SEMANTIC-RESOLVE as near-term for Frontier/Graph \u2014 deferred because hierarchical census (Intent/Stage/Action) not yet delivered by Intel. Scout's cross-lane dependency map (Runtime->Graph freshness/repair, Intel->Physics/Frontier/Graph diverse census) was used to sequence Graph after Runtime and to prioritize Intel diverse census over another single-store tunnel."
+  },
+  "experiment_id": "EXP-RUNTIME-36103366713",
+  "inherited_last_verdict": "SUPPORTS \u2014 DISTRIBUTED VALIDATED canonical shared-WAL real-cache gate (C-MEAS-VALID) on plain HTTP localhost",
+  "inherited_next_question": "Does the distributed stable-header substrate (HMAC-SHA256 per auth_state, filtered MINUS {content-length,etag,w-etag,range}, greedy brotli->gzip MAX_DEPTH5, honest per-trajectory integer sums B=1000 via shared single.db WAL n>=800 hash $request_uri sticky) maintain C2 orthogonality |r|<0.30 V<0.30 nullFP<=0.05, C4 full>0.5 full>max(body,status)+0.05 diff_lo>0 and C5 loopback/HIT validity when extended to BrowserGym Playwright CDP 1280x720 DOM accessibility tree observation (AX>10, DOM 21-82) plus writable-controls matrix on SPA write-paths beyond the HTTP triple?",
+  "lane": "runtime",
+  "origin_github_run_id": "36103366713",
+  "parent_handoff": {
+    "experiment_id": "EXP-RUNTIME-36100549580",
+    "path": "research/experiments/EXP-RUNTIME-36100549580/handoff.json",
+    "sha256": "2315367865a2d9d4f2f9acad3f02cb04f0f262b7d8e541281285c0e818f202a3"
+  },
+  "reason": "global-director-CONTINUE",
+  "request_hash": "00c2816ea551f02e2e841c1b2b790e10b99d9e5fdac7f4bb830b2b1fc6f82891",
+  "request_id": "4e4c576c317137ca066e5ff2",
+  "schema_version": 1
+}
