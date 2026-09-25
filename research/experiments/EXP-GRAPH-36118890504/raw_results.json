@@ -1,0 +1,369 @@
+{
+  "train_observations": [
+    {
+      "id": 1,
+      "action": {
+        "method": "GET",
+        "url": "/posts/1"
+      },
+      "next_state": {
+        "status": 200,
+        "body": {
+          "body": "Body 1",
+          "id": 1,
+          "title": "Post 1",
+          "userId": 1
+        }
+      }
+    },
+    {
+      "id": 2,
+      "action": {
+        "method": "GET",
+        "url": "/posts/2"
+      },
+      "next_state": {
+        "status": 200,
+        "body": {
+          "body": "Body 2",
+          "id": 2,
+          "title": "Post 2",
+          "userId": 2
+        }
+      }
+    },
+    {
+      "id": 3,
+      "action": {
+        "method": "GET",
+        "url": "/posts/3"
+      },
+      "next_state": {
+        "status": 200,
+        "body": {
+          "body": "Body 3",
+          "id": 3,
+          "title": "Post 3",
+          "userId": 3
+        }
+      }
+    },
+    {
+      "id": 4,
+      "action": {
+        "method": "GET",
+        "url": "/posts/4"
+      },
+      "next_state": {
+        "status": 200,
+        "body": {
+          "body": "Body 4",
+          "id": 4,
+          "title": "Post 4",
+          "userId": 4
+        }
+      }
+    },
+    {
+      "id": 5,
+      "action": {
+        "method": "GET",
+        "url": "/posts/5"
+      },
+      "next_state": {
+        "status": 200,
+        "body": {
+          "body": "Body 5",
+          "id": 5,
+          "title": "Post 5",
+          "userId": 5
+        }
+      }
+    }
+  ],
+  "param_mechanism": {
+    "mechanism_id": "param-fetch-resource-by-id-906d99c7",
+    "intent": "fetch resource by id",
+    "preconditions": {
+      "auth": "valid_token",
+      "resource": "posts"
+    },
+    "action_template": {
+      "method": "GET",
+      "url": "/posts/${id}"
+    },
+    "postconditions": {
+      "status": 200
+    },
+    "parameter_slots": [
+      "id"
+    ],
+    "auth_scope": null,
+    "freshness": {},
+    "applicability_guards": {},
+    "verification_rule": {},
+    "failure_boundary": {},
+    "repair_scope": {},
+    "evidence": [
+      "train-1",
+      "train-2",
+      "train-3",
+      "train-4",
+      "train-5"
+    ],
+    "confidence": 0.95,
+    "invalidated": false
+  },
+  "test_B": {
+    "param": {
+      "successes": 0,
+      "total": 5,
+      "total_requests": 0,
+      "details": [
+        {
+          "id": 6,
+          "success": false,
+          "resolution_status": "UNKNOWN",
+          "requests": 0
+        },
+        {
+          "id": 7,
+          "success": false,
+          "resolution_status": "UNKNOWN",
+          "requests": 0
+        },
+        {
+          "id": 8,
+          "success": false,
+          "resolution_status": "UNKNOWN",
+          "requests": 0
+        },
+        {
+          "id": 9,
+          "success": false,
+          "resolution_status": "UNKNOWN",
+          "requests": 0
+        },
+        {
+          "id": 10,
+          "success": false,
+          "resolution_status": "UNKNOWN",
+          "requests": 0
+        }
+      ]
+    },
+    "cold": {
+      "successes": 5,
+      "total": 5,
+      "total_requests": 5,
+      "details": [
+        {
+          "id": 6,
+          "success": true,
+          "requests": 1
+        },
+        {
+          "id": 7,
+          "success": true,
+          "requests": 1
+        },
+        {
+          "id": 8,
+          "success": true,
+          "requests": 1
+        },
+        {
+          "id": 9,
+          "success": true,
+          "requests": 1
+        },
+        {
+          "id": 10,
+          "success": true,
+          "requests": 1
+        }
+      ]
+    },
+    "literal": {
+      "successes": 0,
+      "total": 5,
+      "total_requests": 0,
+      "details": [
+        {
+          "id": 6,
+          "success": false,
+          "requests": 0,
+          "resolution": "UNKNOWN"
+        },
+        {
+          "id": 7,
+          "success": false,
+          "requests": 0,
+          "resolution": "UNKNOWN"
+        },
+        {
+          "id": 8,
+          "success": false,
+          "requests": 0,
+          "resolution": "UNKNOWN"
+        },
+        {
+          "id": 9,
+          "success": false,
+          "requests": 0,
+          "resolution": "UNKNOWN"
+        },
+        {
+          "id": 10,
+          "success": false,
+          "requests": 0,
+          "resolution": "UNKNOWN"
+        }
+      ]
+    },
+    "knn": {
+      "successes": 0,
+      "total": 5,
+      "total_requests": 5,
+      "details": [
+        {
+          "id": 6,
+          "success": false,
+          "requests": 1
+        },
+        {
+          "id": 7,
+          "success": false,
+          "requests": 1
+        },
+        {
+          "id": 8,
+          "success": false,
+          "requests": 1
+        },
+        {
+          "id": 9,
+          "success": false,
+          "requests": 1
+        },
+        {
+          "id": 10,
+          "success": false,
+          "requests": 1
+        }
+      ]
+    }
+  },
+  "null_control_C": {
+    "successes": 0,
+    "total": 5,
+    "total_requests": 0,
+    "details": [
+      {
+        "id": 11,
+        "success": false,
+        "resolution_status": "UNKNOWN",
+        "requests": 0
+      },
+      {
+        "id": 12,
+        "success": false,
+        "resolution_status": "UNKNOWN",
+        "requests": 0
+      },
+      {
+        "id": 13,
+        "success": false,
+        "resolution_status": "UNKNOWN",
+        "requests": 0
+      },
+      {
+        "id": 14,
+        "success": false,
+        "resolution_status": "UNKNOWN",
+        "requests": 0
+      },
+      {
+        "id": 15,
+        "success": false,
+        "resolution_status": "UNKNOWN",
+        "requests": 0
+      }
+    ]
+  },
+  "positive_control_A": {
+    "successes": 5,
+    "total": 5,
+    "total_requests": 5,
+    "details": [
+      {
+        "id": 1,
+        "success": true,
+        "requests": 1
+      },
+      {
+        "id": 2,
+        "success": true,
+        "requests": 1
+      },
+      {
+        "id": 3,
+        "success": true,
+        "requests": 1
+      },
+      {
+        "id": 4,
+        "success": true,
+        "requests": 1
+      },
+      {
+        "id": 5,
+        "success": true,
+        "requests": 1
+      }
+    ]
+  },
+  "metrics": {
+    "success_rate_B_param": 0.0,
+    "success_rate_B_cold": 1.0,
+    "success_rate_B_literal": 0.0,
+    "success_rate_B_knn": 0.0,
+    "cost_per_task_B_param": 0.0,
+    "cost_per_task_B_cold": 1.0,
+    "cost_per_task_B_literal": 0.0,
+    "cost_per_task_B_knn": 1.0,
+    "false_accept_rate_C_param": 0.0,
+    "success_rate_A_param_seen": 1.0
+  },
+  "decision_rule": {
+    "D1_success_B": {
+      "pass": false,
+      "param": 0.0,
+      "max_baseline": 1.0,
+      "threshold": "> max + 0.10"
+    },
+    "D2_cost_B": {
+      "pass": false,
+      "param": 0.0,
+      "min_baseline": 0.0,
+      "threshold": "< min * 0.80"
+    },
+    "D3_false_accept": {
+      "pass": true,
+      "value": 0.0,
+      "threshold": "<= 0.10"
+    },
+    "D4_positive_control": {
+      "pass": true,
+      "value": 1.0,
+      "threshold": "== 1.0"
+    },
+    "D5_null_control": {
+      "pass": true,
+      "value": 0.0,
+      "threshold": "== 0.0"
+    }
+  },
+  "outcome": "FALSIFIES",
+  "status": "COMPLETE"
+}
