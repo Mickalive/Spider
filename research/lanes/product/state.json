@@ -7,11 +7,11 @@
   "continue_immediately": false,
   "next_question": "On health-gated single-node HS256 sticky substrate (n_non304>=360 TTL 60s ETag W/body_sha conditional probe stratified TN 1.0) with Docker BrowserGym 0.14.3 2000-node 1280x720 CDP AX>10 and real gpt-4o-mini 15-step Playwright same model/tools/budget (honest per-trajectory-reset sum counters resolve+bind+verify+freshness+browser_steps, |rho_shuffled|<0.20 rho_proxy_real>=0.50 per-stratum |rho_length|<0.20, 5000 family-stratified bootstrap + 5000 block-permutation), does SPIDER (freshness-gated 0.95/0.85 Jaccard 0.85 + deterministic repair correct-family reconstruction, verified_state MEA auditor, TTL conditional probe) vs B-COLD vs B-INSTRUCTIONS vs B-RAG-EMBED TAU0.30/QCR k5 vs Stagehand cache achieve success margin>=0.12 vs each baseline at f=10 with false_accept<=0.10 UNKNOWN precision>=0.85 ECE<=0.15 bootstrap upper<=0.18, verification AUROC>=0.75 precision>=0.80, and honest amortized saving>=25% vs COLD at f=10 (and Pareto vs RAG/Stagehand/DSM $0.002-0.092) before any distributed n>=800 or f=100 Pareto claim, on contamination-free Hard258 or rebuilt 192/36 orthogonal Jaccard 0.0 disjoint value_set_A intersect B empty holdout?",
   "promotion_ready": false,
-  "consecutive_failures": 1,
-  "updated_at": "2026-09-25T05:55:06.296124+00:00",
+  "consecutive_failures": 2,
+  "updated_at": "2026-09-25T06:11:15.272363+00:00",
   "last_failure_retryable": false,
   "last_handoff_sha256": "a2e412fc58c5692a18987a33d65fddb5316da0e8ba9861ca56d59accf59b6217",
   "same_failure_count": 1,
-  "last_failure_fingerprint": "32fb61131a26107aaf831564",
+  "last_failure_fingerprint": "4e86163a136e1a9616abd065",
   "last_failure_control_revision": "373719f006bb73b9e36c60fcd18b32b6a7a71921a93c6008fa7c6be7e34a6ea7"
 }
