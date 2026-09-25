@@ -1,0 +1,146 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-36095578013",
+  "lane": "product",
+  "status": "MEASUREMENT_INVALID",
+  "producer_claim_supported": false,
+  "required_fixes": [
+    "GHCR authorization for ghcr.io/servicenow/browsergym:0.14.3 (pull denied; no image available)",
+    "OPENAI_API_KEY provisioned in environment for real gpt-4o-mini 15-step tokens",
+    "playwright 1.63.0 binaries installed (currently MISSING)",
+    "kernel.py dot-regex fix committed durable to HEAD (cee979c2-equivalent; working-tree d926279d vs HEAD 8af66ccf)",
+    "NC1 deterministic coupling (rho_length -0.287, block_permutation p 0.072) re-measured on real BrowserGym trajectories where per-stratum |rho_length|<0.20 gate applies",
+    "ST-WebAgentBench CuP safety split staged with live BrowserGym pages"
+  ],
+  "validity_findings": [
+    {
+      "id": "VF-1",
+      "finding": "Four independent MEASUREMENT_INVALID gates triggered per frozen falsifier precedence (spec.json falsifier items 1-2, prereg.md §7, result.json validity_notes VN-1): (a) GHCR pull denied for BrowserGym 0.14.3 (OBS-1, env_audit.json), (b) OPENAI_API_KEY absent (OBS-2), (c) playwright 1.63.0 MISSING (OBS-3), (d) kernel dot-regex not committed durable (OBS-4, mv3_durable_via_commit false). Per contract, infrastructure failure is not scientific falsification; outcome INCONCLUSIVE is correct."
+    },
+    {
+      "id": "VF-2",
+      "finding": "No file-proxy surrogation was used for any SURVIVES gate (C1-C5). All claim-level metrics requiring BrowserGym tokens (success margins, M_total Pareto vs COLD/RAG at f=10, accuracy>=0.85, browser+latency>=20%, AUROC real, rho_proxy_real per-stratum, CuP safety) are explicit null with reasons in result.json metrics.claim_level_metrics_requiring_browser_tokens. This respects EXPERIMENT_PACKET mandatory-key semantics and frozen precedence forbidding surrogation."
+    },
+    {
+      "id": "VF-3",
+      "finding": "MV1/MV2 contamination-free holdout PASSES: rebuilt webarena_verified_v2_tasks_192_36_rebuilt.json sha 101e481d staged, value_set_A intersect B empty on ALL 36 families (0/36 pool+usage), cross-family bigram Jaccard max 0.0 on 630 pairs via qcr_bank_manifest sha 8c69804b TAU0.30, L 8-14 family-constant within family orthogonal to n. Hard258 not staged (webarena_verified pip package absent) — fallback to rebuilt 192/36 is frozen-allowable per spec.json MV1."
+    },
+    {
+      "id": "VF-4",
+      "finding": "MV3 kernel dot-regex functional PASS (5/5 n0 EXECUTABLE confidence>=0.80, family-gate UNKNOWN on wrong family) but durability gate FAILS: working-tree sha d926279d has dot-regex, HEAD sha 8af66ccf lacks it; commit_made false per provenance.json. EXECUTE workflow forbids git commit; requires director-authorized commit before promotion. This is an independent MEASUREMENT_INVALID trigger per falsifier (1)."
+    },
+    {
+      "id": "VF-5",
+      "finding": "MV4 single-node HS256 sticky substrate health gate PASSES: n_non304 400 stratified (200/ep-a, 200/ep-b) >=360/180, TN_fresh 1.0 TN_sticky 1.0, If-None-Match fraction 1.0 (406/406), errors 0, WAL single-worker, JWT HS256, nginx 1.24.0 $request_uri sticky. Re-measured this packet; prior 400 not sufficient without re-measurement per spec."
+    },
+    {
+      "id": "VF-6",
+      "finding": "MV5 correlated TTL/ETag freshness probe PASSES on substrate: n0 hit_rate 1.0 (150/150 304), n0.25 accuracy 1.0 false_accept 0.0, TN_fresh 1.0 TN_sticky 1.0, saving 0.40 vs full-fetch, delta vs seeded-42 random 0.53 = 0.407 > 0.10. Synthetic driver disclosed (deterministic revision counter)."
+    },
+    {
+      "id": "VF-7",
+      "finding": "MV6 Docker BrowserGym 0.14.3 2000-node 1280x720 CDP AX>10 BLOCKED: GHCR pull denied, no image, AX>10 not logged, rho_proxy_real null. MV7 same model/tools/budget gpt-4o-mini 15-step BLOCKED: OPENAI_API_KEY absent, playwright MISSING. Both trigger MEASUREMENT_INVALID per falsifier (1)."
+    },
+    {
+      "id": "VF-8",
+      "finding": "MV8 honest amortized sum counters k*5 5/10/15 honored PASS on diagnostics (probe 10 vs retrieval 200 vs verify 50), but claim Pareto gates (C4) are null — real browser+LLM trajectory costs unmeasured. Bounded-ceiling economics (saving 0.669 vs COLD, ratio 1.506 vs RAG) are honest sum counters only, NOT compared to frozen C4 thresholds for SURVIVES per result.json validity_notes VN-2, VN-5."
+    },
+    {
+      "id": "VF-9",
+      "finding": "NC-SHUFFLE-ECON FAILS at bounded ceiling: NC1 rho_shuffled -0.137 (|.|<0.20 OK) but block_permutation p 0.072 FAIL <0.20, rho_length pooled -0.287 FAIL |.|>=0.20, per-stratum rho_length -0.084 to -0.657 all FAIL |.|>=0.20. Coupling from honest-counter construction reused=max(0,L-n_novel*2) disclosed; must break on real trajectories per UNR-6. NC2/NC3 PASS, NC4 delta 0.407 logged, rho_proxy_real null."
+    },
+    {
+      "id": "VF-10",
+      "finding": "PC-SINGLE-NODE-ECON-CORRELATED half-PASS: substrate checks (PC1 file-proxy half, PC2, PC4, PC5 substrate) PASS; Browser/LLM checks (PC1 Docker AX>10 half, PC3 real BrowserGym, PC5 BrowserGym replication, rho_proxy_real, CuP) NOT TESTABLE → UNKNOWN. MV10 calibration on MockEnv PASS (AUROC 0.871 vs shuffled 0.468) but does NOT transfer to gpt-4o-mini per OBS-11, VN-7."
+    },
+    {
+      "id": "VF-11",
+      "finding": "MV11 statistics machinery intact (B=5000 family-stratified trajectory-grouped bootstrap + block-permutation) but NC1 coupling FAIL at ceiling. MV12 abstention repair MEA auditor diagnostic PASS on MockEnv but CuP safety null (ST-WebAgentBench not staged)."
+    },
+    {
+      "id": "VF-12",
+      "finding": "Frozen inputs byte-identical verified: request.json, spec.json, prereg.md match freeze.json hashes. No frozen file modified by EXECUTE. Kernel change in working-tree (allowed code root) but not committed to HEAD."
+    }
+  ],
+  "baseline_findings": [
+    {
+      "baseline_id": "B-COLD",
+      "finding": "Bounded-ceiling honest counters only: M_total_f10 5992.7 tokens, browser calls 21.8, per_hit 550.0, resolve 0.0. No claim success/accuracy measured on BrowserGym trajectories — explicit null UNKNOWN per precedence. Denominator for margin>=0.12 and saving>=25% at f=10 unmeasured on real trajectories."
+    },
+    {
+      "baseline_id": "B-INSTRUCTIONS",
+      "finding": "Bounded-ceiling: M_total_f10 6101.7 tokens, per_hit 560.0, resolve 0.0. Same model/tools/budget as SPIDER. Real success null."
+    },
+    {
+      "baseline_id": "B-RAG-EMBED-TAU030-QCR-K5",
+      "finding": "Bounded-ceiling: M_total_f10 1315.1 tokens, per_hit 103.9, resolve 0.234. SPIDER/RAG ratio 1.506 CI[1.48,1.53] >0.85 is honest-counter diagnostic, not Pareto proof. Real success null."
+    },
+    {
+      "baseline_id": "B-STAGEHAND-CACHE",
+      "finding": "Bounded-ceiling: M_total_f10 4719.3, resolve 0.234. PC1 exact-repeat hit_rate 1.0 (5/5) file-proxy half only; Docker real AX>10 not measured. Real success null."
+    },
+    {
+      "baseline_id": "P-SPIDER-ECON",
+      "finding": "Bounded-ceiling honest counters: M_total_f10 1981.1 vs COLD 5992.7 saving 0.669 CI[0.652,0.687] meets 25% diagnostic but SPIDER/RAG ratio 1.506 >0.85 FAIL diagnostic at f=10. resolve_rate 1.0 vs 0.234. rho_novelty 0.762 diagnostic. Probe saving 0.40 delta 0.407 PASS substrate only. Real BrowserGym success/accuracy/CuP/AUROC null."
+    }
+  ],
+  "recomputed_metrics": {
+    "mv1_holdout_sha256": "101e481ddb610df9598b0e3e5650e8c163ec7cbdc4679c5efc1e31104b3074c5",
+    "mv1_value_set_disjoint_all_families": true,
+    "mv2_cross_family_jaccard_max": 0.0,
+    "mv2_cross_family_jaccard_n_pairs": 630,
+    "mv3_kernel_spot_check_5_of_5": true,
+    "mv3_durable_via_commit": false,
+    "mv4_n_non304_total": 400,
+    "mv4_n_non304_stratified": {"ep-a": 200, "ep-b": 200},
+    "mv4_TN_fresh": 1.0,
+    "mv4_TN_sticky": 1.0,
+    "mv4_correlated_delta_vs_random": 0.4066666666666666,
+    "pc1_exact_repeat_file_proxy_hit_rate": 1.0,
+    "pc3_verify_calibration_AUROC_true": 0.8714066060789105,
+    "pc3_verify_calibration_AUROC_shuffled": 0.4680678729304522,
+    "pc3_precision_verif": 0.9490835030549898,
+    "pc4_frozen_formula_max_abs_diff": 5.684341886080802e-14,
+    "bounded_ceiling_saving_vs_COLD_f10": 0.6694159568920564,
+    "bounded_ceiling_saving_vs_COLD_f10_CI95": [0.6520424126542673, 0.687224057013732],
+    "bounded_ceiling_ratio_vs_RAG_f10": 1.5064158415841584,
+    "bounded_ceiling_ratio_vs_RAG_f10_CI95": [1.479572104505246, 1.5306356174842528],
+    "bounded_ceiling_browser_latency_saving_vs_COLD": 0.4940072375839585,
+    "bounded_ceiling_rho_novelty_pooled": 0.7620215299096192,
+    "bounded_ceiling_rho_length_pooled": -0.2871341837663058,
+    "NC1_rho_shuffled": -0.1367236964485896,
+    "NC1_block_permutation_p": 0.07238552289542091,
+    "NC1_rho_length_pooled": -0.2871341837663058,
+    "NC1_per_stratum_rho_length_range": [-0.657, -0.084],
+    "NC2_UNKNOWN_rate": 0.654,
+    "NC3_R2": 4.3207724255034385e-05,
+    "k5_token_accounting_verified": true
+  },
+  "claim_ceiling": "MEASUREMENT_INVALID — no claim update for C-PRODUCT-ECON. The experiment correctly triggers MEASUREMENT_INVALID via four independent infrastructure gates (GHCR denied, OPENAI_API_KEY absent, playwright MISSING, kernel not durable) per frozen falsifier precedence. Bounded-ceiling diagnostics on contamination-free holdout with honest k*5 counters show SPIDER M_total_f10 saving 0.669 vs COLD (CI excludes 0) but SPIDER/RAG ratio 1.506 >0.85 FAILS Pareto diagnostic; NC1 deterministic coupling fails statistics gate (rho_length -0.287, p 0.072). These diagnostics are honest sum counters only and do NOT satisfy SURVIVES gates C1-C5 which require real BrowserGym gpt-4o-mini 15-step trajectories with rho_proxy_real>=0.50 per-stratum, AUROC>=0.75, calibration, CuP non-inferior. Claim remains HYPOTHESIS bounded; no promotion. Re-execution on provisioned substrate with committed kernel and NC1 coupling re-measured on real trajectories required before any f=100 or distributed n>=800 claim.",
+  "evidence_refs": [
+    "research/experiments/EXP-PRODUCT-36095578013/result.json",
+    "research/experiments/EXP-PRODUCT-36095578013/report.md",
+    "research/experiments/EXP-PRODUCT-36095578013/provenance.json",
+    "research/experiments/EXP-PRODUCT-36095578013/artifacts/env_audit.json",
+    "research/experiments/EXP-PRODUCT-36095578013/artifacts/browser_health.json",
+    "research/experiments/EXP-PRODUCT-36095578013/artifacts/substrate_probe.json",
+    "research/experiments/EXP-PRODUCT-36095578013/artifacts/fixture_checks.json",
+    "research/experiments/EXP-PRODUCT-36095578013/artifacts/mv3_kernel_spot_check.json",
+    "research/experiments/EXP-PRODUCT-36095578013/artifacts/pc1_exact_repeat.json",
+    "research/experiments/EXP-PRODUCT-36095578013/artifacts/pc3_verify_calibration.json",
+    "research/experiments/EXP-PRODUCT-36095578013/artifacts/economics.json",
+    "research/experiments/EXP-PRODUCT-36095578013/artifacts/null_controls.json",
+    "research/experiments/EXP-PRODUCT-36095578013/artifacts/economics_per_trajectory.csv",
+    "research/experiments/EXP-PRODUCT-36095578013/fixtures/webarena_verified_v2_tasks_192_36_rebuilt.json",
+    "research/experiments/EXP-PRODUCT-36095578013/fixtures/qcr_bank_manifest.json",
+    "research/experiments/EXP-PRODUCT-36095578013/fixtures/cost_config.json"
+  ],
+  "unresolved": [
+    "UNR-1: Does SPIDER achieve success margin>=0.12 vs EACH baseline (B-COLD/B-INSTRUCTIONS/B-RAG-k5/B-STAGEHAND) with real BrowserGym 0.14.3 2000-node 1280x720 gpt-4o-mini 15-step Playwright trajectories at f=10 with calibration false_accept<=0.10 UNKNOWN>=0.85 ECE<=0.15? Unmeasurable: GHCR image denied, OPENAI_API_KEY absent, playwright missing.",
+    "UNR-2: Is honest amortized M_total_f10 saving>=25% vs COLD and browser+latency>=20% with accuracy>=0.85 and Pareto ratio<=0.85 vs RAG/Stagehand/DSM $0.002-0.092 and rho_proxy_real>=0.50 per-stratum with |rho_length|<0.20 on real browser+LLM trajectories with k*5 5/10/15? Bounded ceiling saving 0.669 vs RAG ratio 1.506 diagnostic but real browser/LLM gates unmeasured.",
+    "UNR-3: Kernel durability: working-tree dot-regex d926279d must be committed to HEAD (cee979c2-equivalent) so clean checkout satisfies MV3. Current HEAD 8af66ccf lacks dot; EXECUTE workflow forbids commit; requires director-authorized commit before promotion.",
+    "UNR-4: Single-node substrate health gate meets n>=360 this packet (400 200/200 TN1.0) but is this stable across clean checkout before distributed n>=800? Re-verified this packet but requires persistence; prior 400 not sufficient without re-measurement per spec.",
+    "UNR-5: ST-WebAgentBench CuP safety non-inferior (delta >= -0.02) and DSM compilation Pareto where site overlap >0 remain unmeasured; requires live pages + heterogeneous census (Hard258) with site overlap >0.",
+    "UNR-6: NC1 deterministic coupling (p 0.072, rho_length -0.287): is the coupling intrinsic to L/n structure in rebuilt 192/36 or an artifact of honest-counter model reused=max(0,L-n_novel*2)? Requires real-trajectory re-measurement with browser tokens where |rho_shuffled|<0.20 p>=0.20 per-stratum gates apply."
+  ]
+}
