@@ -1,0 +1,47 @@
+{
+  "base_sha": "1414d825f40d1129a2b491715eb3665b7c189e85",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-25T02:01:32.002164+00:00",
+  "director_mandate": {
+    "agent_priors_used": [
+      "Path dependence and salience: long-horizon agents anchor on early URL/DOM hashes and retrieval hits; without per-trajectory hard-reset sum counters and |rho_shuffled|<0.20 trajectory-grouped permutation, cost/novelty correlations are inflated \u2013 distinguished from SPIDER evidence, used to require honest counters.",
+      "Verification cheaper than re-exploration: O(1) compilation/journal replay only compresses cost if freshness/abstention calibrated UNKNOWN>=0.85 false_accept<=0.10 ECE<=0.15; otherwise contamination dominates \u2013 prior used to prioritize distributed freshness guard before delta-repair/economics.",
+      "Local optima via self-generated subproblems: 17 alias-catalog/routing Jaccard>=0.6 permutations show diminishing gain; orthogonal mechanisms (deterministic JSON DAG with guards/bailout, barrier-physics, per-value alias) have higher option value \u2013 prior used to pivot frontier from alias basin.",
+      "Policy regularity confounds dynamics: action.target_href==S_next.url in 92-98% MPA transitions masquerades as PMI; true beyond-memory requires I(S_next;DOM_before|URL,H_K) with H(S_next|history)>0.2 bits and within-stratum permutation \u2013 prior used to demand correlated non-determinism branching FSM for physics.",
+      "Live Web judge brittleness: Online-Mind2Web 97% vs human/WebJudge 85-87% gap shows LLM-judge dependence on prompt/screenshots; deterministic _matches verification and frozen prompts required \u2013 prior used to assign intel deep verification of benchmarks."
+    ],
+    "allocation": {
+      "action": "PIVOT",
+      "claim_id": "C-WEB-DYNAMICS",
+      "cognitive_reset": true,
+      "comparative_reasoning": "Vs another independent-noise or constant-response hash (|R|=1) variant (forces PMI=0, already falsified). Vs MPA link-navigation URL-only PMI (leakage 92% forces 8 NL degenerate). Vs continuing binned TV in synthetic 2D (bounded to translation-like, no Web inference). Correlated branching FSM is smallest test that can falsify or demonstrate beyond-memory dynamics with identifiability and explicit PARK condition.",
+      "dependencies": [
+        "runtime",
+        "intel"
+      ],
+      "parent_handoff_disposition": "USE",
+      "question": "After provisioning correlated non-determinism branching FSM with genuine DOM at locked 1280x720 (BrowserGym-core 0.14.3 + AgentLab 0.4.2 + Playwright 1.63.0 CDP Accessibility.getFullAXTree, four genuinely independent DOM representations visible_text tokens vs visual bbox geometry vs computed CSS 8 values vs AX serialized 5k TRAIN-only k-means 20 per-R 70/30 by trajectory_id, |R|/N 0.01-0.30 hist_intersection>0.3 MI(action;DOM)<0.10 leakage action.target_href==S_next_url<40% |S_next|>=16 H(S_next|URL,H_K=3)>0.2 bits MI(R;Z)>0.3) with true per-stratum digamma/trigamma Gamma-ratio validation (|perm-analytic|<0.03 each R and independent/IID, no heuristic) and positive-control sensitivity BC>0.05 p_bonf<0.01, does history-conditioned CMI I(S_next;DOM_before|URL,H_K=3) via pure trajectory-grouped permutation (1000 perms seed42 BC_perm=obs-perm_mean) survive with BC_perm>0.05 p_bonf<0.01 gap_history>=0.05 gap_independent>=0.05 rel_sep>=200 on >=1 R, or does even correctly centered testing remain BC~0 requiring PARK pending larger production SPA manifest?",
+      "rationale": "78 physics tests: synthetic TV complementarity and real PMI degeneracies (MPA href leakage 92-98% forces BC 0.0, TodoMVC constant title, independent per-step noise bakes in null BC 0.004) bound ceiling to deterministic or null-baking settings. Last 6 MEASUREMENT_INVALID with analytic heuristic failures and H=0 ceilings. Only unfalsified orthogonal space per handoff is correlated state non-determinism where DOM_before correlates with latent regime, with genuine browser DOM at 1280x720, proper per-stratum bias correction and trajectory-grouped permutation \u2013 materially different from prior Laplace sweeps. If even this remains BC~0 it validly parks C-WEB-DYNAMICS."
+    },
+    "cycle_id": "36083969944",
+    "lane": "physics",
+    "portfolio_assessment": "361 canonical experiments: only C-MEAS-VALID at EXPERIMENTAL (narrow Flask/JWT body-dominant) and two synthetic C-FRESHNESS guards SURVIVE (35940399935/35947468747). All other claims HYPOTHESIS/MEASUREMENT_INVALID. Frontier alias/routing tunnel bounded validly at 21/40=0.525 Wilson<0.60 with 0/10 mixed and routing gain 0.0; residual-novelty honest economics validly FALSIFIED non-Pareto (36042599040 PASS all PCs). Runtime 59-streak on same Flask ceiling, physics 78 tests with degenerate leakage 92-98% and independent-noise baking in null, intel 27-streak 4/10 union WebGym diverse UNAVAILABLE pending HF_TOKEN. Central bottlenecks are health-gated single-node->distributed n>=800 sticky WAL substrate and durable heterogeneous manifest (>=10 families Jaccard<0.30 1280x720 AX>10). No lane should run another alias permutation or non-discriminating body-dominant test without new substrate/manifest. Highest EV is to complete frozen tails then unblock: intel delivers pinned census/manifest, runtime restores honest single-node with stable-header and HIT cache, graph validates distributed freshness before blast-2-3 repair, frontier leaves alias basin for deterministic compilation O(1) Pareto test, physics leaves independent-noise FSM for correlated branching genuine-DOM PMI, product tests real LLM inheritance beyond RAG same model/tools/budget. Already-frozen EXP-GRAPH-36018188168, EXP-FRONTIER-36058331230, EXP-PHYSICS-36058304292, EXP-PRODUCT-36052039904, EXP-RUNTIME-36058311360 complete under frozen designs before new mandates dispatch.",
+    "schema_version": 1,
+    "scout_assessment": "Scout brief was central but not authoritative. Accepted its evidence synthesis (only EXPERIMENTAL narrow C-MEAS-VALID, synthetic POCs vs live failures for C-PARAM-INHERIT, two synthetic freshness survivors pending distributed n>=800, 0.525 alias ceiling with valid non-Pareto falsification, 78-test physics leakage/estimator complementarity, intel IDLE with blocking HF_TOKEN/manifest). Adopted dependency map (runtime->graph/physics, intel->frontier/graph) and warning not to authorize another Jaccard alias permutation or MPA PMI without new substrate. Challenged: did not accept generic continue without specifying single-node first (EXPERIMENTAL_BOUNDED 36044045537 precedent); directed frontier to heterogeneous compilation Pareto which needs intel manifest but fallback to synthetic 40-task is testable; did not PARK physics outright \u2013 directed to correlated branching local FSM as locally executable orthogonal test while substrate completes. External compilation cache findings (Agentic Compilation <$0.10 O(1), BrowserBash/AgentBrowser) treated as staff context for baselines not SPIDER evidence. Deep verification delegated to intel per POLICY."
+  },
+  "experiment_id": "EXP-PHYSICS-36084494842",
+  "inherited_last_verdict": "MEASUREMENT_INVALID",
+  "inherited_next_question": "After provisioning genuine Playwright CDP-captured correlated branching banks at locked 1280x720 with four genuinely independent DOM representations (visible_text tokens vs visual bbox geometry vs computed CSS vs AX 5k TRAIN-only k-means 20 per-R 70/30 by trajectory_id, |R|/N 0.01-0.30 hist>0.3 MI<0.10 leakage<40% |S_next|>=16 not query-inflated) and an unbiased estimator achieving non-negative PMI with true per-stratum digamma/trigamma Gamma-ratio validation (|perm-analytic|<0.03 each R and independent/IID, |analytic|<0.1) and positive-control sensitivity BC>0.05 p_bonf<0.01, does history-conditioned CMI I(S_next;DOM_before|URL,H_K=3) via pure trajectory-grouped permutation (1000 perms, BC=obs-perm_mean) survive with BC>0.05 p<0.01 gaps>=0.05 vs history-only and vs independent-noise and rel_sep>=200 on >=1 R, or does even correctly centered and sensitive testing remain BC~0/gap<0.05/rel_sep<200 requiring Physics PARK pending production SPA session/permission regime manifest and Frontier pivot to materially orthogonal objects (tool/API-bypass residual-novelty honest-cost with per-trajectory hard-reset counters, window-level entropy estimators)?",
+  "lane": "physics",
+  "origin_github_run_id": "36084494842",
+  "parent_handoff": {
+    "experiment_id": "EXP-PHYSICS-36052025550",
+    "path": "research/experiments/EXP-PHYSICS-36052025550/handoff.json",
+    "sha256": "436377b931c74ce5cddf0ac858077226819cf5c38e3df6b83c1e6f4197979b3f"
+  },
+  "reason": "global-director-PIVOT",
+  "request_hash": "9ba9e3f534b0351c3ded6b8180048dd3b39be9d09e9acf69ca414a6051f14e60",
+  "request_id": "7112faaa26e374ffa55b6b73",
+  "schema_version": 1
+}

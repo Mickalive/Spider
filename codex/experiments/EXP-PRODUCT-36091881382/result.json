@@ -1,0 +1,218 @@
+{
+ "schema_version": 1,
+ "experiment_id": "EXP-PRODUCT-36091881382",
+ "lane": "product",
+ "status": "MEASUREMENT_INVALID",
+ "outcome": "INCONCLUSIVE",
+ "metrics": {
+  "fixtures": {
+   "mv1_holdout_sha256": "101e481ddb610df9598b0e3e5650e8c163ec7cbdc4679c5efc1e31104b3074c5",
+   "mv1_value_set_A_intersect_B_contaminated_slots": 0,
+   "mv1_demo_vs_testB_usage_contaminated_families": [],
+   "mv1_pass": true,
+   "mv2_cross_family_bigram_jaccard_n_pairs": 630,
+   "mv2_cross_family_bigram_jaccard_max": 0.0,
+   "mv2_pass": true,
+   "n_families": 36,
+   "n_tasks": 192,
+   "L_family_specific_constant_within_family": true,
+   "qcr_bank_manifest_sha256": "8c69804b249ec9c84cf05d86a21c7ebe7a31af5f8d45e50a4e6d477b449f9f58",
+   "cost_config_sha256": "3328c6c119876be2fb0aef30721dcd8c7219333b28a84cf9d6bca4657bb15700",
+   "hard258_census_staged": false
+  },
+  "kernel_mv3": {
+   "mv3_dot_regex_in_code": "\\$\\{([A-Za-z_][A-Za-z0-9_\\.]*)\\}",
+   "mv3_regex_matches_frozen": true,
+   "mv3_spot_check_n_pass": 5,
+   "mv3_spot_check_n_total": 5,
+   "mv3_spot_check_pass": true,
+   "mv3_family_gate_UNKNOWN_on_wrong_family": true,
+   "mv3_working_tree_sha256": "d926279d5ee14a044a2f13b8abc09202df9f5adb9e86feaadeb61818a15f4038",
+   "mv3_head_sha256": "8af66ccfb6f848e1f89805e90a1f52683ee28f62c9dd7b97f9d2762390e7b386",
+   "mv3_durable_via_commit": false
+  },
+  "substrate_mv4": {
+   "mv4_n_non304_stratified": {"ep-a": 200, "ep-b": 200},
+   "mv4_n_non304_total": 400,
+   "mv4_health_gate_pass": true,
+   "mv4_errors": 0,
+   "mv4_if_none_match_exercised_fraction": 1.0,
+   "mv4_n0_hit_rate_304": 1.0,
+   "mv4_n025_accuracy": 1.0,
+   "mv4_n025_false_accept_rate": 0.0,
+   "mv4_TN_fresh": 1.0,
+   "mv4_correlated_delta_vs_random": 0.4066666666666666,
+   "mv4_TN_contrast_sticky_vs_direct": {"sticky_nginx": 1.0, "direct_gunicorn": 1.0},
+   "mv4_sqlite_journal_mode": "wal",
+   "mv4_sqlite_single_worker": true,
+   "mv4_sqlite_jwt_algs": ["HS256"],
+   "mv4_nginx_upstream_set": ["127.0.0.1:18929"],
+   "mv4_sticky_log_lines": 1053
+  },
+  "pc1_exact_repeat": {"n": 5, "hits": 5, "hit_rate": 1.0, "pass": true,
+                        "note": "file-proxy DOM-hash half of PC1; Docker BrowserGym 2000-node AX half blocked"},
+  "pc3_verify_calibration": {
+   "AUROC_verif_true": 0.8714066060789105,
+   "AUROC_shuffled_null": 0.4680678729304522,
+   "precision_verif": 0.9490835030549898,
+   "forced_execute_wrong_accept_rate": 0.16071428571428573,
+   "confidence_std": 0.45428299686875,
+   "UNKNOWN_precision": 0.9837209302325581,
+   "ECE_5bin": 0.10695537008804719,
+   "pass": true
+  },
+  "bounded_ceiling_economics_diagnostics": {
+   "disclosure": "honest per-trajectory-reset sum counters on rebuilt contamination-free holdout; bounded single-node ceiling, NOT claim economics for SURVIVES",
+   "M_total_f10_tokens_mean": {"B-COLD": 5992.708333333333, "B-INSTRUCTIONS": 6101.666666666667, "B-RAG-EMBED-TAU030-QCR-K5": 1315.1041666666667, "B-STAGEHAND-CACHE": 4719.270833333333, "P-SPIDER-LLM-INHERIT": 1981.09375},
+   "saving_vs_COLD_f10": 0.6694159568920564,
+   "saving_vs_COLD_f10_CI95": [0.6520424126542673, 0.687224057013732],
+   "ratio_vs_RAG_f10": 1.5064158415841584,
+   "ratio_vs_RAG_f10_CI95": [1.479572104505246, 1.5306356174842528],
+   "browser_latency_saving_vs_COLD": 0.4940072375839585,
+   "resolve_rate": {"B-COLD": 0.0, "B-INSTRUCTIONS": 0.0, "B-RAG-EMBED-TAU030-QCR-K5": 0.234375, "B-STAGEHAND-CACHE": 0.234375, "P-SPIDER-LLM-INHERIT": 1.0},
+   "rho_novelty_pooled": 0.7620215299096192,
+   "rho_length_pooled": -0.2871341837663058,
+   "rho_length_gate_note": "|rho_length|>=0.20 -> deterministic NC1 statistics gate FAIL at bounded ceiling (same coupling as parent EXP-PRODUCT-36089498872)"
+  },
+  "null_controls_deterministic": {
+   "NC1_rho_shuffled": -0.1367236964485896,
+   "NC1_block_permutation_p": 0.07238552289542091,
+   "NC1_rho_length_pooled": -0.2871341837663058,
+   "NC1_pass": false,
+   "NC1b_nonexistent_family_UNKNOWN_rate": 1.0,
+   "NC1c_shuffled_execute_AUROC": 0.4629780037606115,
+   "NC2_UNKNOWN_rate_random_keys": 0.654,
+   "NC2_pass": true,
+   "NC3_length_const_R2": 4.3207724255034385e-05,
+   "NC3_pass": true,
+   "NC4_ttl_correlated_vs_random_delta": 0.4066666666666666,
+   "PC4_frozen_formula_max_abs_diff": 5.684341886080802e-14,
+   "PC4_parity_within_1e6": true
+  },
+  "claim_level_metrics_requiring_browser_tokens": {
+   "c1_success_margin_vs_each_baseline": null,
+   "c2_ece_real_trajectories": null,
+   "c3_auroc_real_execute": null,
+   "c4_amortized_saving_real_browser": null,
+   "c5_rho_proxy_real_pooled": null,
+   "c5_rho_proxy_real_per_stratum": {"0.0": null, "0.25": null, "0.5": null, "0.75": null, "1.0": null},
+   "rho_proxy_real_shuffled": null,
+   "note": "explicit null: Docker BrowserGym 0.14.3 absent (GHCR pull denied) and OPENAI_API_KEY absent; frozen precedence forbids file-proxy surrogation for these gates"
+  }
+ },
+ "controls": {
+  "PC-SINGLE-NODE-LLM-INHERIT-CORRELATED": {
+   "id": "PC-SINGLE-NODE-LLM-INHERIT-CORRELATED",
+   "expected_behavior": "MV4 health gate n_non304>=360 stratified TN>=0.85 If-None-Match fraction 1.0 errors 0 on single-node HS256 sticky substrate; correlated TTL freshness ~1.0 vs random ~0.5; C1 margins require real BrowserGym 0.14.3 gpt-4o-mini trajectories",
+   "observed_behavior": "Substrate half PASS: n_non304 400 (200/ep-a, 200/ep-b), TN_fresh 1.0, n025 accuracy 1.0, false_accept 0.0, delta_vs_random 0.407, WAL single-worker HS256, sticky log 1053 lines upstream {127.0.0.1:18929}, errors 0. Browser/LLM half NOT TESTABLE (GHCR pull denied; OPENAI_API_KEY absent).",
+   "pass_fail": "UNKNOWN",
+   "evidence_refs": [
+    "research/experiments/EXP-PRODUCT-36091881382/artifacts/substrate_probe.json::n_non304_stratified",
+    "research/experiments/EXP-PRODUCT-36091881382/artifacts/substrate_probe.json::probe_correlated",
+    "research/experiments/EXP-PRODUCT-36091881382/artifacts/attempts_log.json::docker_browsergym",
+    "research/experiments/EXP-PRODUCT-36091881382/artifacts/browser_health.json::docker_pull_result"
+   ]
+  },
+  "NC-SHUFFLE-LLM-INHERIT": {
+   "id": "NC-SHUFFLE-LLM-INHERIT",
+   "expected_behavior": "|rho_shuffled|<0.20, block-permutation p>=0.20, per-stratum |rho_length|<0.20, NC2 false_accept>=0.10 or |rho|<0.25, NC3 R2<0.15, NC4 ablation deltas",
+   "observed_behavior": "Deterministic counters: rho_shuffled -0.137 (|.|<0.20 OK), block-permutation p 0.072 (FAIL <0.20), rho_length pooled -0.287 (FAIL |.|>=0.20), NC2 UNKNOWN_rate 0.654 false_accept 0.346 AUROC 0.462, NC3 R2 4.3e-5, NC4 delta 0.407. Real-trajectory NC1 unmeasured (browser/LLM blocked).",
+   "pass_fail": "FAIL",
+   "evidence_refs": [
+    "research/experiments/EXP-PRODUCT-36091881382/artifacts/null_controls.json::NC1_SHUFFLED",
+    "research/experiments/EXP-PRODUCT-36091881382/artifacts/economics.json::rho_diagnostics"
+   ]
+  },
+  "B-COLD": {
+   "id": "B-COLD",
+   "expected_behavior": "Full exploration every step; claim margin C1 (SPIDER margin>=0.12) requires real trajectories",
+   "observed_behavior": "Bounded-ceiling counters: M_total_f10 5992.7 tokens, 21.8 browser-equivalent calls, per_hit 550.0, resolve 0.0",
+   "pass_fail": "UNKNOWN",
+   "evidence_refs": ["research/experiments/EXP-PRODUCT-36091881382/artifacts/economics.json::conditions.B-COLD"]
+  },
+  "B-INSTRUCTIONS": {
+   "id": "B-INSTRUCTIONS",
+   "expected_behavior": "COLD + site-instructions token overhead L*10; claim margin C1 requires real trajectories",
+   "observed_behavior": "Bounded-ceiling counters: M_total_f10 6101.7 tokens, per_hit 560.0, resolve 0.0",
+   "pass_fail": "UNKNOWN",
+   "evidence_refs": ["research/experiments/EXP-PRODUCT-36091881382/artifacts/economics.json::conditions.B-INSTRUCTIONS"]
+  },
+  "B-RAG-EMBED-TAU030-QCR-K5": {
+   "id": "B-RAG-EMBED-TAU030-QCR-K5",
+   "expected_behavior": "Retrieval 200 tokens + verbatim replay; miss -> COLD fallback; claim margin C1 requires real trajectories",
+   "observed_behavior": "Bounded-ceiling counters: M_total_f10 1315.1 tokens, per_hit 103.9, resolve 0.234",
+   "pass_fail": "UNKNOWN",
+   "evidence_refs": ["research/experiments/EXP-PRODUCT-36091881382/artifacts/economics.json::conditions.B-RAG-EMBED-TAU030-QCR-K5"]
+  },
+  "B-STAGEHAND-CACHE": {
+   "id": "B-STAGEHAND-CACHE",
+   "expected_behavior": "Exact-repeat cache n==0 only, else COLD fallback; PC1 hit_rate 1.0; claim margin C1 requires real trajectories",
+   "observed_behavior": "Bounded-ceiling counters: M_total_f10 4719.3 tokens, resolve 0.234; PC1 exact-repeat hit_rate 1.0 (5/5) on substrate file-proxy half",
+   "pass_fail": "UNKNOWN",
+   "evidence_refs": [
+    "research/experiments/EXP-PRODUCT-36091881382/artifacts/economics.json::conditions.B-STAGEHAND-CACHE",
+    "research/experiments/EXP-PRODUCT-36091881382/artifacts/pc1_exact_repeat.json"
+   ]
+  }
+ },
+ "artifacts": [
+  {"path": "research/experiments/EXP-PRODUCT-36091881382/fixtures/webarena_verified_v2_tasks_192_36_rebuilt.json", "sha256": "101e481ddb610df9598b0e3e5650e8c163ec7cbdc4679c5efc1e31104b3074c5", "role": "fixture"},
+  {"path": "research/experiments/EXP-PRODUCT-36091881382/fixtures/qcr_bank_manifest.json", "sha256": "8c69804b249ec9c84cf05d86a21c7ebe7a31af5f8d45e50a4e6d477b449f9f58", "role": "fixture"},
+  {"path": "research/experiments/EXP-PRODUCT-36091881382/fixtures/cost_config.json", "sha256": "3328c6c119876be2fb0aef30721dcd8c7219333b28a84cf9d6bca4657bb15700", "role": "fixture"},
+  {"path": "research/experiments/EXP-PRODUCT-36091881382/run_experiment.py", "sha256": "86a1b0e3ee1fd08a0ff115e1eb3cfb321e103a47d312d1b3d22796fdb56d82c6", "role": "code"},
+  {"path": "src/spider/kernel.py", "sha256": "d926279d5ee14a044a2f13b8abc09202df9f5adb9e86feaadeb61818a15f4038", "role": "code"},
+  {"path": "tests/test_kernel.py", "sha256": "aab76afd0bec0f7f95b9a1bbb44be6fce882d8351fadf10ae08bc1fc8adff850", "role": "code"},
+  {"path": "research/experiments/EXP-PRODUCT-36091881382/artifacts/env_audit.json", "sha256": "ee3888e9eee9c1e7fbb5ac5aaea46f68e5e801ff7087779e7ae820302f54a479", "role": "raw"},
+  {"path": "research/experiments/EXP-PRODUCT-36091881382/artifacts/substrate_start.json", "sha256": "9931f3fdb0b31e111dae6b16d6b50195a068c6025c435f5908b8c25d23f47ec2", "role": "raw"},
+  {"path": "research/experiments/EXP-PRODUCT-36091881382/artifacts/substrate_probe.json", "sha256": "7f7a9126d52efd9fcd989da0b8ff5612847fa0414694f84af467d33b2a864889", "role": "raw"},
+  {"path": "research/experiments/EXP-PRODUCT-36091881382/artifacts/probe_traces.jsonl", "sha256": "7c7fc8ce0ce26768128572d34cc789a53400f85396c1ffc5006bd2a0239047b5", "role": "raw"},
+  {"path": "research/experiments/EXP-PRODUCT-36091881382/artifacts/browser_health.json", "sha256": "26374132b3b28dcdbaab878ed6852cdb8dbeb029921b38b6e2c77ed127abf93a", "role": "raw"},
+  {"path": "research/experiments/EXP-PRODUCT-36091881382/artifacts/attempts_log.json", "sha256": "eb17c0dcd5099671fb0ba90e7189e97fb0270b2f138d9d1e497ebbadb39c8143", "role": "raw"},
+  {"path": "research/experiments/EXP-PRODUCT-36091881382/artifacts/fixture_checks.json", "sha256": "d0070f0f05344dfc740f84b47699371ee5c4ee70f16f46ad3b6d248b9906649d", "role": "derived"},
+  {"path": "research/experiments/EXP-PRODUCT-36091881382/artifacts/mv3_kernel_spot_check.json", "sha256": "7a00c85b0f15a60e335e0c089cc98d847c8a7f8b122d274058be1a13b562ed0c", "role": "derived"},
+  {"path": "research/experiments/EXP-PRODUCT-36091881382/artifacts/pc1_exact_repeat.json", "sha256": "f04e8b8d7a19c3048cc85b74fc9a99a07a4e136e90b167297e2c30dc7092d6d5", "role": "derived"},
+  {"path": "research/experiments/EXP-PRODUCT-36091881382/artifacts/pc3_verify_calibration.json", "sha256": "c1dced7608471b67bf9ca4d02c70768f1ab92b542654ca6ea9392f3a36002851", "role": "derived"},
+  {"path": "research/experiments/EXP-PRODUCT-36091881382/artifacts/economics.json", "sha256": "caee46855d483202421d2cea93763437bfa8e49c52eda6e53463779671153034", "role": "derived"},
+  {"path": "research/experiments/EXP-PRODUCT-36091881382/artifacts/economics_per_trajectory.csv", "sha256": "5e4830c57dc4bbf60ed6732475ae30b784a46a4176feba20b6cc545d09660c1a", "role": "derived"},
+  {"path": "research/experiments/EXP-PRODUCT-36091881382/artifacts/null_controls.json", "sha256": "f72b24df9ba322b5156a3c48a78656793a11dd1bed00ae966b20fadd81a9a638", "role": "derived"},
+  {"path": "research/experiments/EXP-PRODUCT-36091881382/artifacts/nc_trajectory_counters.json", "sha256": "2dfc222836c5f869f2e521ad885b115305d43aed30307a9f4e89d45bd2f2c8e6", "role": "derived"},
+  {"path": "research/experiments/EXP-PRODUCT-36091881382/artifacts/metrics_summary.json", "sha256": "5574ab5cf1936344b1ea4c62609ee95d670e333fb3d274393add3752b7f84eec", "role": "derived"}
+ ],
+ "observations": [
+  "OBS-1: docker pull ghcr.io/servicenow/browsergym:0.14.3 -> exit 1 stderr 'Error response from daemon: Head \"https://ghcr.io/v2/servicenow/browsergym/manifests/0.14.3\": denied'; docker login ghcr.io -u runner --password-stdin -> exit 1 'Cannot perform an interactive login from a non TTY device'; no browsergym image in docker images (browser_health.json docker_pull_result, ghcr_login, attempts_log.docker_browsergym)",
+  "OBS-2: OPENAI_API_KEY absent from environment (env_audit.json openai_key_present false); no real gpt-4o-mini 15-step tokens measurable (browser_health.json rho_proxy_real null)",
+  "OBS-3: playwright not installed (pip import MISSING; frozen pin 1.63.0 unmet); browsergym-core package metadata absent; playwright chromium launch not attempted (browser_health.json playwright_launch FAILED)",
+  "OBS-4: kernel.py working-tree sha d926279d differs from HEAD sha 8af66ccf; git show HEAD:src/spider/kernel.py line 12 contains r'\\$\\{([A-Za-z_][A-Za-z0-9_]*)\\}' (no dot support) while working tree contains frozen r'\\$\\{([A-Za-z_][A-Za-z0-9_\\.]*)\\}' (env_audit.json kernel_sha256_working_tree/kernel_sha256_head; attempts_log.kernel_patch)",
+  "OBS-5: frozen fixture staged byte-identical sha 101e481d (192 tasks / 36 families; L 8-14 family-specific constant); deterministic local rebuild 84b362c2 content-identical except experiment_id; qcr 8c69804b tau 0.30; cost_config 50/10 honored (fixture_checks.json staged_artifacts)",
+  "OBS-6: value_set_A intersect B empty on all 36 families: 0 contaminated slots; demo-vs-testB usage contamination 0 families; 630-pair cross-family first-slot bigram Jaccard max 0.0 nonzero 0 (fixture_checks.json value_set_disjointness, cross_family_jaccard)",
+  "OBS-7: substrate health gate measured on this packet: n_non304 400 = 200/ep-a + 200/ep-b, errors 0, If-None-Match fraction 1.0 (406/406), stratified_pass true (substrate_probe.json)",
+  "OBS-8: correlated freshness measured: n0 (150 probes) 304-hit rate 1.0; n0.25 (150 probes, 75 mutated) accuracy 1.0, false_accept 0.0, TN_fresh 1.0; seeded Random(42) coin baseline accuracy 0.593; delta correlated-vs-random 0.407 (substrate_probe.json probe_correlated/probe_random_seed42/probe_correlated_delta_vs_random)",
+  "OBS-9: TN contrast via nginx sticky path equals direct gunicorn path (60/60 TN 1.0 each); nginx access sticky log 1053 lines, upstream set exactly {127.0.0.1:18929} (substrate_probe.json TN_contrast_sticky_vs_direct, nginx_sticky_log_lines, nginx_upstream_set)",
+  "OBS-10: shared.db journal_mode WAL, distinct worker_pid count 1, jwt_algs exactly [HS256], n_log 1096 (745 200 / 351 304) (substrate_probe.json sqlite)",
+  "OBS-11: MV3 5/5 dotted-slot resolve EXECUTABLE with exact bound URL and family-gate UNKNOWN on wrong family; kernel unittest suite 4/4 pass incl. new dotted-slots test (mv3_kernel_spot_check.json; tests/test_kernel.py)",
+  "OBS-12: PC3 MockEnv calibration: AUROC true 0.871, AUROC shuffled 0.468, precision 0.949, forced-execute wrong-accept 0.161, confidence std 0.454, UNKNOWN precision 0.984, ECE 0.107, 0 empty bins (pc3_verify_calibration.json)",
+  "OBS-13: deterministic honest-counter economics on 192 trajectories: SPIDER M_total_f10 1981.1 tokens vs COLD 5992.7 (saving 0.669), INSTRUCTIONS 6101.7, RAG 1315.1 (SPIDER/RAG ratio 1.506), STAGEHAND 4719.3; SPIDER resolve rate 1.0 vs RAG 0.234; browser-latency saving 0.494; rho_novelty pooled 0.762, rho_length pooled -0.287 (economics.json conditions/gaps/rho_diagnostics)",
+  "OBS-14: NC1 deterministic: rho_shuffled -0.137, block-permutation p 0.072, per-family shuffled rhos spread wide (-0.92 to 1.0); NC2 UNKNOWN_rate 0.654 AUROC 0.462; NC3 R2 4.3e-5; PC4 frozen-formula max abs diff 5.7e-14 <= 1e-6 (null_controls.json)"
+ ],
+ "validity_notes": [
+  "VN-1: Per frozen precedence (spec.json decision_rule / prereg.md section 5), MEASUREMENT_INVALID applies if any PC fails OR n_non304<360 OR health gate fails OR BrowserGym 0.14.3 absent OR OPENAI gpt-4o-mini absent OR kernel not committed durable — irrespective of economics margins. BrowserGym absent (OBS-1), OPENAI absent (OBS-2), kernel durability unmet (OBS-4) each independently trigger MEASUREMENT_INVALID. Infrastructure/substrate failure is NOT scientific falsification; outcome INCONCLUSIVE.",
+  "VN-2: File-proxy surrogation is prohibited by the frozen design for claim gates; no proxy per_hit, no n*3200, no seeded-42 staleness proxy was used to fabricate C1-C5 claim metrics. All claim-level metrics are explicit null (metrics.claim_level_metrics_requiring_browser_tokens).",
+  "VN-3: MV3 functional half (dot-regex + 5/5 spot check + family gating) PASSES on the working tree, but the frozen gate requires the kernel committed durable; EXECUTE runs are forbidden from committing, so mv3_durable_via_commit=false. A clean checkout of HEAD lacks the dot-regex (OBS-4).",
+  "VN-4: Deterministic NC1 gate FAILS at the bounded ceiling (rho_length pooled -0.287, block-permutation p 0.072) — an observed cost structure, not an infra failure; same coupling as parent EXP-PRODUCT-36089498872 (handoff.json). Whether this vanishes with real BrowserGym trajectories (where novel steps carry real browser+tokens) is unknown and gated by MV6/MV7.",
+  "VN-5: Values in metrics.bounded_ceiling_economics_diagnostics are honest sum counters on the rebuilt 192/36 holdout (single-node task-level model) and are NOT claim economics for SURVIVES; they cannot be compared to the frozen C4 gates (accuracy>=0.85, latency>=20%, saving>=25% against real browser+LLM flows).",
+  "VN-6: MV1 fallback to rebuilt 192/36 holdout (frozen-allowable): webarena_verified pip package absent in this environment so the Hard258/812 census manifest could not be staged (hard258_census_staged false; fixture_checks.json census.hard258.error).",
+  "VN-7: Representation loss: single-node substrate n=400 (200/endpoint) is the frozen n>=360 minimum for this REOPEN; distributed shared-WAL n>=800 remains unfrozen scope. Latencies measured on localhost do not represent WAN/real-site network.",
+  "VN-8: sklearn/pandas absent from pinned stack; not required by any frozen PC in this packet (numpy/scipy suffice for bootstrap/permutation/spearman); pins_pass true gated on gunicorn 23.0.0 + PyJWT 2.14.0 (env_audit.json pins).",
+  "VN-9: probe_correlated reference: substrate 'fresh' ground truth is deterministic resource mutation by revision counter (body hash ETag), a synthetic freshness driver; real-world rate-of-change distribution is not modeled (spec MV5 ceiling).",
+  "VN-10: Per-family rho_novelty ~1.0 in the deterministic counters reflects the honest-counter construction (novelty strictly increases per-hit token cost); this is a diagnostics artifact at the bounded ceiling and was NOT used to claim the frozen C5 rho_novelty>=0.60 on real trajectories (economics.json rho_diagnostics.note).",
+  "VN-11: run_experiment.py for this packet is the audited parent harness (EXP-PRODUCT-36089498872) with only packet identifiers changed (EXP_ID, JWT secret, docstring); measurement machinery is otherwise byte-identical to the parent's, preserving comparability.",
+  "VN-12: frozen inputs remain byte-identical: request.json 8ef87270..., spec.json afec9c54..., prereg.md 1e67c0f9... match freeze.json hashes; no frozen file was modified by EXECUTE."
+ ],
+ "unresolved": [
+  "UNR-1: Does SPIDER achieve success margin>=0.12 vs each of B-COLD/B-INSTRUCTIONS/B-RAG-EMBED-TAU030-QCR-K5/B-STAGEHAND-CACHE with real BrowserGym 0.14.3 gpt-4o-mini 15-step trajectories at f=10? Required but unmeasurable: BrowserGym image (GHCR pull denied) and OPENAI_API_KEY.",
+  "UNR-2: Is rho_proxy_real>=0.50 per-stratum with |rho_length|<0.20 satisfied when per-step cost carries real browser+LLM tokens? Deterministic counters show rho_length -0.287 (fail) but proxy fidelity is unmeasurable here.",
+  "UNR-3: Kernel durability: working-tree dot-regex (d926279d) must be committed to HEAD so a clean checkout satisfies MV3. Current HEAD (8af66ccf) lacks the dot-regex; EXECUTE is not authorized to commit.",
+  "UNR-4: Hard258/812 census manifest (webarena_verified package) not staged; MV1 fallback holdout used. Package installation would resolve.",
+  "UNR-5: NC1 gating failure at bounded ceiling (p 0.072, rho_length -0.287): is the coupling intrinsic to L/n structure in the rebuilt 192/36 holdout or an artifact of the honest-counter model? Requires real-trajectory measurement."
+ ]
+}
