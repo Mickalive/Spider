@@ -1,0 +1,5332 @@
+{
+ "experiment_id": "EXP-INTEL-36095582115",
+ "census_label": "synthetic_192_36",
+ "total_tasks": 192,
+ "shopping_tasks": 192,
+ "families_ge3_shopping": 36,
+ "families_ge3_ids": [
+  501,
+  502,
+  503,
+  504,
+  505,
+  506,
+  507,
+  508,
+  509,
+  510,
+  511,
+  512,
+  513,
+  514,
+  515,
+  516,
+  517,
+  518,
+  519,
+  520,
+  521,
+  522,
+  523,
+  524,
+  525,
+  526,
+  527,
+  528,
+  529,
+  530,
+  531,
+  532,
+  533,
+  534,
+  535,
+  536
+ ],
+ "family_size_histogram": {
+  "5": 24,
+  "6": 12
+ },
+ "families_ge3_all_sites_count": 36,
+ "product_page_families": [
+  501,
+  502,
+  503,
+  504,
+  505,
+  506,
+  507,
+  508,
+  509,
+  510,
+  511,
+  512,
+  513,
+  514,
+  515,
+  516,
+  517,
+  518,
+  519,
+  520,
+  521,
+  522,
+  523,
+  524,
+  525,
+  526,
+  527,
+  528,
+  529,
+  530,
+  531,
+  532,
+  533,
+  534,
+  535,
+  536
+ ],
+ "product_page_tasks": 192,
+ "family_product_urls": {
+  "501": [
+   "http://127.0.0.1:8898/synthetic/501/product-0.html",
+   "http://127.0.0.1:8898/synthetic/501/product-1.html",
+   "http://127.0.0.1:8898/synthetic/501/product-2.html",
+   "http://127.0.0.1:8898/synthetic/501/product-3.html",
+   "http://127.0.0.1:8898/synthetic/501/product-4.html",
+   "http://127.0.0.1:8898/synthetic/501/product-5.html"
+  ],
+  "502": [
+   "http://127.0.0.1:8898/synthetic/502/product-0.html",
+   "http://127.0.0.1:8898/synthetic/502/product-1.html",
+   "http://127.0.0.1:8898/synthetic/502/product-2.html",
+   "http://127.0.0.1:8898/synthetic/502/product-3.html",
+   "http://127.0.0.1:8898/synthetic/502/product-4.html",
+   "http://127.0.0.1:8898/synthetic/502/product-5.html"
+  ],
+  "503": [
+   "http://127.0.0.1:8898/synthetic/503/product-0.html",
+   "http://127.0.0.1:8898/synthetic/503/product-1.html",
+   "http://127.0.0.1:8898/synthetic/503/product-2.html",
+   "http://127.0.0.1:8898/synthetic/503/product-3.html",
+   "http://127.0.0.1:8898/synthetic/503/product-4.html",
+   "http://127.0.0.1:8898/synthetic/503/product-5.html"
+  ],
+  "504": [
+   "http://127.0.0.1:8898/synthetic/504/product-0.html",
+   "http://127.0.0.1:8898/synthetic/504/product-1.html",
+   "http://127.0.0.1:8898/synthetic/504/product-2.html",
+   "http://127.0.0.1:8898/synthetic/504/product-3.html",
+   "http://127.0.0.1:8898/synthetic/504/product-4.html",
+   "http://127.0.0.1:8898/synthetic/504/product-5.html"
+  ],
+  "505": [
+   "http://127.0.0.1:8898/synthetic/505/product-0.html",
+   "http://127.0.0.1:8898/synthetic/505/product-1.html",
+   "http://127.0.0.1:8898/synthetic/505/product-2.html",
+   "http://127.0.0.1:8898/synthetic/505/product-3.html",
+   "http://127.0.0.1:8898/synthetic/505/product-4.html",
+   "http://127.0.0.1:8898/synthetic/505/product-5.html"
+  ],
+  "506": [
+   "http://127.0.0.1:8898/synthetic/506/product-0.html",
+   "http://127.0.0.1:8898/synthetic/506/product-1.html",
+   "http://127.0.0.1:8898/synthetic/506/product-2.html",
+   "http://127.0.0.1:8898/synthetic/506/product-3.html",
+   "http://127.0.0.1:8898/synthetic/506/product-4.html",
+   "http://127.0.0.1:8898/synthetic/506/product-5.html"
+  ],
+  "507": [
+   "http://127.0.0.1:8898/synthetic/507/product-0.html",
+   "http://127.0.0.1:8898/synthetic/507/product-1.html",
+   "http://127.0.0.1:8898/synthetic/507/product-2.html",
+   "http://127.0.0.1:8898/synthetic/507/product-3.html",
+   "http://127.0.0.1:8898/synthetic/507/product-4.html",
+   "http://127.0.0.1:8898/synthetic/507/product-5.html"
+  ],
+  "508": [
+   "http://127.0.0.1:8898/synthetic/508/product-0.html",
+   "http://127.0.0.1:8898/synthetic/508/product-1.html",
+   "http://127.0.0.1:8898/synthetic/508/product-2.html",
+   "http://127.0.0.1:8898/synthetic/508/product-3.html",
+   "http://127.0.0.1:8898/synthetic/508/product-4.html",
+   "http://127.0.0.1:8898/synthetic/508/product-5.html"
+  ],
+  "509": [
+   "http://127.0.0.1:8898/synthetic/509/product-0.html",
+   "http://127.0.0.1:8898/synthetic/509/product-1.html",
+   "http://127.0.0.1:8898/synthetic/509/product-2.html",
+   "http://127.0.0.1:8898/synthetic/509/product-3.html",
+   "http://127.0.0.1:8898/synthetic/509/product-4.html",
+   "http://127.0.0.1:8898/synthetic/509/product-5.html"
+  ],
+  "510": [
+   "http://127.0.0.1:8898/synthetic/510/product-0.html",
+   "http://127.0.0.1:8898/synthetic/510/product-1.html",
+   "http://127.0.0.1:8898/synthetic/510/product-2.html",
+   "http://127.0.0.1:8898/synthetic/510/product-3.html",
+   "http://127.0.0.1:8898/synthetic/510/product-4.html",
+   "http://127.0.0.1:8898/synthetic/510/product-5.html"
+  ],
+  "511": [
+   "http://127.0.0.1:8898/synthetic/511/product-0.html",
+   "http://127.0.0.1:8898/synthetic/511/product-1.html",
+   "http://127.0.0.1:8898/synthetic/511/product-2.html",
+   "http://127.0.0.1:8898/synthetic/511/product-3.html",
+   "http://127.0.0.1:8898/synthetic/511/product-4.html",
+   "http://127.0.0.1:8898/synthetic/511/product-5.html"
+  ],
+  "512": [
+   "http://127.0.0.1:8898/synthetic/512/product-0.html",
+   "http://127.0.0.1:8898/synthetic/512/product-1.html",
+   "http://127.0.0.1:8898/synthetic/512/product-2.html",
+   "http://127.0.0.1:8898/synthetic/512/product-3.html",
+   "http://127.0.0.1:8898/synthetic/512/product-4.html",
+   "http://127.0.0.1:8898/synthetic/512/product-5.html"
+  ],
+  "513": [
+   "http://127.0.0.1:8898/synthetic/513/product-0.html",
+   "http://127.0.0.1:8898/synthetic/513/product-1.html",
+   "http://127.0.0.1:8898/synthetic/513/product-2.html",
+   "http://127.0.0.1:8898/synthetic/513/product-3.html",
+   "http://127.0.0.1:8898/synthetic/513/product-4.html"
+  ],
+  "514": [
+   "http://127.0.0.1:8898/synthetic/514/product-0.html",
+   "http://127.0.0.1:8898/synthetic/514/product-1.html",
+   "http://127.0.0.1:8898/synthetic/514/product-2.html",
+   "http://127.0.0.1:8898/synthetic/514/product-3.html",
+   "http://127.0.0.1:8898/synthetic/514/product-4.html"
+  ],
+  "515": [
+   "http://127.0.0.1:8898/synthetic/515/product-0.html",
+   "http://127.0.0.1:8898/synthetic/515/product-1.html",
+   "http://127.0.0.1:8898/synthetic/515/product-2.html",
+   "http://127.0.0.1:8898/synthetic/515/product-3.html",
+   "http://127.0.0.1:8898/synthetic/515/product-4.html"
+  ],
+  "516": [
+   "http://127.0.0.1:8898/synthetic/516/product-0.html",
+   "http://127.0.0.1:8898/synthetic/516/product-1.html",
+   "http://127.0.0.1:8898/synthetic/516/product-2.html",
+   "http://127.0.0.1:8898/synthetic/516/product-3.html",
+   "http://127.0.0.1:8898/synthetic/516/product-4.html"
+  ],
+  "517": [
+   "http://127.0.0.1:8898/synthetic/517/product-0.html",
+   "http://127.0.0.1:8898/synthetic/517/product-1.html",
+   "http://127.0.0.1:8898/synthetic/517/product-2.html",
+   "http://127.0.0.1:8898/synthetic/517/product-3.html",
+   "http://127.0.0.1:8898/synthetic/517/product-4.html"
+  ],
+  "518": [
+   "http://127.0.0.1:8898/synthetic/518/product-0.html",
+   "http://127.0.0.1:8898/synthetic/518/product-1.html",
+   "http://127.0.0.1:8898/synthetic/518/product-2.html",
+   "http://127.0.0.1:8898/synthetic/518/product-3.html",
+   "http://127.0.0.1:8898/synthetic/518/product-4.html"
+  ],
+  "519": [
+   "http://127.0.0.1:8898/synthetic/519/product-0.html",
+   "http://127.0.0.1:8898/synthetic/519/product-1.html",
+   "http://127.0.0.1:8898/synthetic/519/product-2.html",
+   "http://127.0.0.1:8898/synthetic/519/product-3.html",
+   "http://127.0.0.1:8898/synthetic/519/product-4.html"
+  ],
+  "520": [
+   "http://127.0.0.1:8898/synthetic/520/product-0.html",
+   "http://127.0.0.1:8898/synthetic/520/product-1.html",
+   "http://127.0.0.1:8898/synthetic/520/product-2.html",
+   "http://127.0.0.1:8898/synthetic/520/product-3.html",
+   "http://127.0.0.1:8898/synthetic/520/product-4.html"
+  ],
+  "521": [
+   "http://127.0.0.1:8898/synthetic/521/product-0.html",
+   "http://127.0.0.1:8898/synthetic/521/product-1.html",
+   "http://127.0.0.1:8898/synthetic/521/product-2.html",
+   "http://127.0.0.1:8898/synthetic/521/product-3.html",
+   "http://127.0.0.1:8898/synthetic/521/product-4.html"
+  ],
+  "522": [
+   "http://127.0.0.1:8898/synthetic/522/product-0.html",
+   "http://127.0.0.1:8898/synthetic/522/product-1.html",
+   "http://127.0.0.1:8898/synthetic/522/product-2.html",
+   "http://127.0.0.1:8898/synthetic/522/product-3.html",
+   "http://127.0.0.1:8898/synthetic/522/product-4.html"
+  ],
+  "523": [
+   "http://127.0.0.1:8898/synthetic/523/product-0.html",
+   "http://127.0.0.1:8898/synthetic/523/product-1.html",
+   "http://127.0.0.1:8898/synthetic/523/product-2.html",
+   "http://127.0.0.1:8898/synthetic/523/product-3.html",
+   "http://127.0.0.1:8898/synthetic/523/product-4.html"
+  ],
+  "524": [
+   "http://127.0.0.1:8898/synthetic/524/product-0.html",
+   "http://127.0.0.1:8898/synthetic/524/product-1.html",
+   "http://127.0.0.1:8898/synthetic/524/product-2.html",
+   "http://127.0.0.1:8898/synthetic/524/product-3.html",
+   "http://127.0.0.1:8898/synthetic/524/product-4.html"
+  ],
+  "525": [
+   "http://127.0.0.1:8898/synthetic/525/product-0.html",
+   "http://127.0.0.1:8898/synthetic/525/product-1.html",
+   "http://127.0.0.1:8898/synthetic/525/product-2.html",
+   "http://127.0.0.1:8898/synthetic/525/product-3.html",
+   "http://127.0.0.1:8898/synthetic/525/product-4.html"
+  ],
+  "526": [
+   "http://127.0.0.1:8898/synthetic/526/product-0.html",
+   "http://127.0.0.1:8898/synthetic/526/product-1.html",
+   "http://127.0.0.1:8898/synthetic/526/product-2.html",
+   "http://127.0.0.1:8898/synthetic/526/product-3.html",
+   "http://127.0.0.1:8898/synthetic/526/product-4.html"
+  ],
+  "527": [
+   "http://127.0.0.1:8898/synthetic/527/product-0.html",
+   "http://127.0.0.1:8898/synthetic/527/product-1.html",
+   "http://127.0.0.1:8898/synthetic/527/product-2.html",
+   "http://127.0.0.1:8898/synthetic/527/product-3.html",
+   "http://127.0.0.1:8898/synthetic/527/product-4.html"
+  ],
+  "528": [
+   "http://127.0.0.1:8898/synthetic/528/product-0.html",
+   "http://127.0.0.1:8898/synthetic/528/product-1.html",
+   "http://127.0.0.1:8898/synthetic/528/product-2.html",
+   "http://127.0.0.1:8898/synthetic/528/product-3.html",
+   "http://127.0.0.1:8898/synthetic/528/product-4.html"
+  ],
+  "529": [
+   "http://127.0.0.1:8898/synthetic/529/product-0.html",
+   "http://127.0.0.1:8898/synthetic/529/product-1.html",
+   "http://127.0.0.1:8898/synthetic/529/product-2.html",
+   "http://127.0.0.1:8898/synthetic/529/product-3.html",
+   "http://127.0.0.1:8898/synthetic/529/product-4.html"
+  ],
+  "530": [
+   "http://127.0.0.1:8898/synthetic/530/product-0.html",
+   "http://127.0.0.1:8898/synthetic/530/product-1.html",
+   "http://127.0.0.1:8898/synthetic/530/product-2.html",
+   "http://127.0.0.1:8898/synthetic/530/product-3.html",
+   "http://127.0.0.1:8898/synthetic/530/product-4.html"
+  ],
+  "531": [
+   "http://127.0.0.1:8898/synthetic/531/product-0.html",
+   "http://127.0.0.1:8898/synthetic/531/product-1.html",
+   "http://127.0.0.1:8898/synthetic/531/product-2.html",
+   "http://127.0.0.1:8898/synthetic/531/product-3.html",
+   "http://127.0.0.1:8898/synthetic/531/product-4.html"
+  ],
+  "532": [
+   "http://127.0.0.1:8898/synthetic/532/product-0.html",
+   "http://127.0.0.1:8898/synthetic/532/product-1.html",
+   "http://127.0.0.1:8898/synthetic/532/product-2.html",
+   "http://127.0.0.1:8898/synthetic/532/product-3.html",
+   "http://127.0.0.1:8898/synthetic/532/product-4.html"
+  ],
+  "533": [
+   "http://127.0.0.1:8898/synthetic/533/product-0.html",
+   "http://127.0.0.1:8898/synthetic/533/product-1.html",
+   "http://127.0.0.1:8898/synthetic/533/product-2.html",
+   "http://127.0.0.1:8898/synthetic/533/product-3.html",
+   "http://127.0.0.1:8898/synthetic/533/product-4.html"
+  ],
+  "534": [
+   "http://127.0.0.1:8898/synthetic/534/product-0.html",
+   "http://127.0.0.1:8898/synthetic/534/product-1.html",
+   "http://127.0.0.1:8898/synthetic/534/product-2.html",
+   "http://127.0.0.1:8898/synthetic/534/product-3.html",
+   "http://127.0.0.1:8898/synthetic/534/product-4.html"
+  ],
+  "535": [
+   "http://127.0.0.1:8898/synthetic/535/product-0.html",
+   "http://127.0.0.1:8898/synthetic/535/product-1.html",
+   "http://127.0.0.1:8898/synthetic/535/product-2.html",
+   "http://127.0.0.1:8898/synthetic/535/product-3.html",
+   "http://127.0.0.1:8898/synthetic/535/product-4.html"
+  ],
+  "536": [
+   "http://127.0.0.1:8898/synthetic/536/product-0.html",
+   "http://127.0.0.1:8898/synthetic/536/product-1.html",
+   "http://127.0.0.1:8898/synthetic/536/product-2.html",
+   "http://127.0.0.1:8898/synthetic/536/product-3.html",
+   "http://127.0.0.1:8898/synthetic/536/product-4.html"
+  ]
+ },
+ "family_start_urls": {
+  "501": "http://127.0.0.1:8898/synthetic/501/product-0.html",
+  "502": "http://127.0.0.1:8898/synthetic/502/product-0.html",
+  "503": "http://127.0.0.1:8898/synthetic/503/product-0.html",
+  "504": "http://127.0.0.1:8898/synthetic/504/product-0.html",
+  "505": "http://127.0.0.1:8898/synthetic/505/product-0.html",
+  "506": "http://127.0.0.1:8898/synthetic/506/product-0.html",
+  "507": "http://127.0.0.1:8898/synthetic/507/product-0.html",
+  "508": "http://127.0.0.1:8898/synthetic/508/product-0.html",
+  "509": "http://127.0.0.1:8898/synthetic/509/product-0.html",
+  "510": "http://127.0.0.1:8898/synthetic/510/product-0.html",
+  "511": "http://127.0.0.1:8898/synthetic/511/product-0.html",
+  "512": "http://127.0.0.1:8898/synthetic/512/product-0.html",
+  "513": "http://127.0.0.1:8898/synthetic/513/product-0.html",
+  "514": "http://127.0.0.1:8898/synthetic/514/product-0.html",
+  "515": "http://127.0.0.1:8898/synthetic/515/product-0.html",
+  "516": "http://127.0.0.1:8898/synthetic/516/product-0.html",
+  "517": "http://127.0.0.1:8898/synthetic/517/product-0.html",
+  "518": "http://127.0.0.1:8898/synthetic/518/product-0.html",
+  "519": "http://127.0.0.1:8898/synthetic/519/product-0.html",
+  "520": "http://127.0.0.1:8898/synthetic/520/product-0.html",
+  "521": "http://127.0.0.1:8898/synthetic/521/product-0.html",
+  "522": "http://127.0.0.1:8898/synthetic/522/product-0.html",
+  "523": "http://127.0.0.1:8898/synthetic/523/product-0.html",
+  "524": "http://127.0.0.1:8898/synthetic/524/product-0.html",
+  "525": "http://127.0.0.1:8898/synthetic/525/product-0.html",
+  "526": "http://127.0.0.1:8898/synthetic/526/product-0.html",
+  "527": "http://127.0.0.1:8898/synthetic/527/product-0.html",
+  "528": "http://127.0.0.1:8898/synthetic/528/product-0.html",
+  "529": "http://127.0.0.1:8898/synthetic/529/product-0.html",
+  "530": "http://127.0.0.1:8898/synthetic/530/product-0.html",
+  "531": "http://127.0.0.1:8898/synthetic/531/product-0.html",
+  "532": "http://127.0.0.1:8898/synthetic/532/product-0.html",
+  "533": "http://127.0.0.1:8898/synthetic/533/product-0.html",
+  "534": "http://127.0.0.1:8898/synthetic/534/product-0.html",
+  "535": "http://127.0.0.1:8898/synthetic/535/product-0.html",
+  "536": "http://127.0.0.1:8898/synthetic/536/product-0.html"
+ },
+ "synthetic_L_per_family": {
+  "501": 8,
+  "502": 9,
+  "503": 10,
+  "504": 11,
+  "505": 12,
+  "506": 13,
+  "507": 14,
+  "508": 8,
+  "509": 9,
+  "510": 10,
+  "511": 11,
+  "512": 12,
+  "513": 13,
+  "514": 14,
+  "515": 8,
+  "516": 9,
+  "517": 10,
+  "518": 11,
+  "519": 12,
+  "520": 13,
+  "521": 14,
+  "522": 8,
+  "523": 9,
+  "524": 10,
+  "525": 11,
+  "526": 12,
+  "527": 13,
+  "528": 14,
+  "529": 8,
+  "530": 9,
+  "531": 10,
+  "532": 11,
+  "533": 12,
+  "534": 13,
+  "535": 14,
+  "536": 8
+ },
+ "synthetic_token_sets": {
+  "501": [
+   "t501_0",
+   "t501_1",
+   "t501_2",
+   "t501_3",
+   "t501_4",
+   "t501_5",
+   "t501_6",
+   "t501_7"
+  ],
+  "502": [
+   "t502_0",
+   "t502_1",
+   "t502_2",
+   "t502_3",
+   "t502_4",
+   "t502_5",
+   "t502_6",
+   "t502_7",
+   "t502_8"
+  ],
+  "503": [
+   "t503_0",
+   "t503_1",
+   "t503_2",
+   "t503_3",
+   "t503_4",
+   "t503_5",
+   "t503_6",
+   "t503_7",
+   "t503_8",
+   "t503_9"
+  ],
+  "504": [
+   "t504_0",
+   "t504_1",
+   "t504_2",
+   "t504_3",
+   "t504_4",
+   "t504_5",
+   "t504_6",
+   "t504_7",
+   "t504_8",
+   "t504_9",
+   "t504_10"
+  ],
+  "505": [
+   "t505_0",
+   "t505_1",
+   "t505_2",
+   "t505_3",
+   "t505_4",
+   "t505_5",
+   "t505_6",
+   "t505_7",
+   "t505_8",
+   "t505_9",
+   "t505_10",
+   "t505_11"
+  ],
+  "506": [
+   "t506_0",
+   "t506_1",
+   "t506_2",
+   "t506_3",
+   "t506_4",
+   "t506_5",
+   "t506_6",
+   "t506_7",
+   "t506_8",
+   "t506_9",
+   "t506_10",
+   "t506_11",
+   "t506_12"
+  ],
+  "507": [
+   "t507_0",
+   "t507_1",
+   "t507_2",
+   "t507_3",
+   "t507_4",
+   "t507_5",
+   "t507_6",
+   "t507_7",
+   "t507_8",
+   "t507_9",
+   "t507_10",
+   "t507_11",
+   "t507_12",
+   "t507_13"
+  ],
+  "508": [
+   "t508_0",
+   "t508_1",
+   "t508_2",
+   "t508_3",
+   "t508_4",
+   "t508_5",
+   "t508_6",
+   "t508_7"
+  ],
+  "509": [
+   "t509_0",
+   "t509_1",
+   "t509_2",
+   "t509_3",
+   "t509_4",
+   "t509_5",
+   "t509_6",
+   "t509_7",
+   "t509_8"
+  ],
+  "510": [
+   "t510_0",
+   "t510_1",
+   "t510_2",
+   "t510_3",
+   "t510_4",
+   "t510_5",
+   "t510_6",
+   "t510_7",
+   "t510_8",
+   "t510_9"
+  ],
+  "511": [
+   "t511_0",
+   "t511_1",
+   "t511_2",
+   "t511_3",
+   "t511_4",
+   "t511_5",
+   "t511_6",
+   "t511_7",
+   "t511_8",
+   "t511_9",
+   "t511_10"
+  ],
+  "512": [
+   "t512_0",
+   "t512_1",
+   "t512_2",
+   "t512_3",
+   "t512_4",
+   "t512_5",
+   "t512_6",
+   "t512_7",
+   "t512_8",
+   "t512_9",
+   "t512_10",
+   "t512_11"
+  ],
+  "513": [
+   "t513_0",
+   "t513_1",
+   "t513_2",
+   "t513_3",
+   "t513_4",
+   "t513_5",
+   "t513_6",
+   "t513_7",
+   "t513_8",
+   "t513_9",
+   "t513_10",
+   "t513_11",
+   "t513_12"
+  ],
+  "514": [
+   "t514_0",
+   "t514_1",
+   "t514_2",
+   "t514_3",
+   "t514_4",
+   "t514_5",
+   "t514_6",
+   "t514_7",
+   "t514_8",
+   "t514_9",
+   "t514_10",
+   "t514_11",
+   "t514_12",
+   "t514_13"
+  ],
+  "515": [
+   "t515_0",
+   "t515_1",
+   "t515_2",
+   "t515_3",
+   "t515_4",
+   "t515_5",
+   "t515_6",
+   "t515_7"
+  ],
+  "516": [
+   "t516_0",
+   "t516_1",
+   "t516_2",
+   "t516_3",
+   "t516_4",
+   "t516_5",
+   "t516_6",
+   "t516_7",
+   "t516_8"
+  ],
+  "517": [
+   "t517_0",
+   "t517_1",
+   "t517_2",
+   "t517_3",
+   "t517_4",
+   "t517_5",
+   "t517_6",
+   "t517_7",
+   "t517_8",
+   "t517_9"
+  ],
+  "518": [
+   "t518_0",
+   "t518_1",
+   "t518_2",
+   "t518_3",
+   "t518_4",
+   "t518_5",
+   "t518_6",
+   "t518_7",
+   "t518_8",
+   "t518_9",
+   "t518_10"
+  ],
+  "519": [
+   "t519_0",
+   "t519_1",
+   "t519_2",
+   "t519_3",
+   "t519_4",
+   "t519_5",
+   "t519_6",
+   "t519_7",
+   "t519_8",
+   "t519_9",
+   "t519_10",
+   "t519_11"
+  ],
+  "520": [
+   "t520_0",
+   "t520_1",
+   "t520_2",
+   "t520_3",
+   "t520_4",
+   "t520_5",
+   "t520_6",
+   "t520_7",
+   "t520_8",
+   "t520_9",
+   "t520_10",
+   "t520_11",
+   "t520_12"
+  ],
+  "521": [
+   "t521_0",
+   "t521_1",
+   "t521_2",
+   "t521_3",
+   "t521_4",
+   "t521_5",
+   "t521_6",
+   "t521_7",
+   "t521_8",
+   "t521_9",
+   "t521_10",
+   "t521_11",
+   "t521_12",
+   "t521_13"
+  ],
+  "522": [
+   "t522_0",
+   "t522_1",
+   "t522_2",
+   "t522_3",
+   "t522_4",
+   "t522_5",
+   "t522_6",
+   "t522_7"
+  ],
+  "523": [
+   "t523_0",
+   "t523_1",
+   "t523_2",
+   "t523_3",
+   "t523_4",
+   "t523_5",
+   "t523_6",
+   "t523_7",
+   "t523_8"
+  ],
+  "524": [
+   "t524_0",
+   "t524_1",
+   "t524_2",
+   "t524_3",
+   "t524_4",
+   "t524_5",
+   "t524_6",
+   "t524_7",
+   "t524_8",
+   "t524_9"
+  ],
+  "525": [
+   "t525_0",
+   "t525_1",
+   "t525_2",
+   "t525_3",
+   "t525_4",
+   "t525_5",
+   "t525_6",
+   "t525_7",
+   "t525_8",
+   "t525_9",
+   "t525_10"
+  ],
+  "526": [
+   "t526_0",
+   "t526_1",
+   "t526_2",
+   "t526_3",
+   "t526_4",
+   "t526_5",
+   "t526_6",
+   "t526_7",
+   "t526_8",
+   "t526_9",
+   "t526_10",
+   "t526_11"
+  ],
+  "527": [
+   "t527_0",
+   "t527_1",
+   "t527_2",
+   "t527_3",
+   "t527_4",
+   "t527_5",
+   "t527_6",
+   "t527_7",
+   "t527_8",
+   "t527_9",
+   "t527_10",
+   "t527_11",
+   "t527_12"
+  ],
+  "528": [
+   "t528_0",
+   "t528_1",
+   "t528_2",
+   "t528_3",
+   "t528_4",
+   "t528_5",
+   "t528_6",
+   "t528_7",
+   "t528_8",
+   "t528_9",
+   "t528_10",
+   "t528_11",
+   "t528_12",
+   "t528_13"
+  ],
+  "529": [
+   "t529_0",
+   "t529_1",
+   "t529_2",
+   "t529_3",
+   "t529_4",
+   "t529_5",
+   "t529_6",
+   "t529_7"
+  ],
+  "530": [
+   "t530_0",
+   "t530_1",
+   "t530_2",
+   "t530_3",
+   "t530_4",
+   "t530_5",
+   "t530_6",
+   "t530_7",
+   "t530_8"
+  ],
+  "531": [
+   "t531_0",
+   "t531_1",
+   "t531_2",
+   "t531_3",
+   "t531_4",
+   "t531_5",
+   "t531_6",
+   "t531_7",
+   "t531_8",
+   "t531_9"
+  ],
+  "532": [
+   "t532_0",
+   "t532_1",
+   "t532_2",
+   "t532_3",
+   "t532_4",
+   "t532_5",
+   "t532_6",
+   "t532_7",
+   "t532_8",
+   "t532_9",
+   "t532_10"
+  ],
+  "533": [
+   "t533_0",
+   "t533_1",
+   "t533_2",
+   "t533_3",
+   "t533_4",
+   "t533_5",
+   "t533_6",
+   "t533_7",
+   "t533_8",
+   "t533_9",
+   "t533_10",
+   "t533_11"
+  ],
+  "534": [
+   "t534_0",
+   "t534_1",
+   "t534_2",
+   "t534_3",
+   "t534_4",
+   "t534_5",
+   "t534_6",
+   "t534_7",
+   "t534_8",
+   "t534_9",
+   "t534_10",
+   "t534_11",
+   "t534_12"
+  ],
+  "535": [
+   "t535_0",
+   "t535_1",
+   "t535_2",
+   "t535_3",
+   "t535_4",
+   "t535_5",
+   "t535_6",
+   "t535_7",
+   "t535_8",
+   "t535_9",
+   "t535_10",
+   "t535_11",
+   "t535_12",
+   "t535_13"
+  ],
+  "536": [
+   "t536_0",
+   "t536_1",
+   "t536_2",
+   "t536_3",
+   "t536_4",
+   "t536_5",
+   "t536_6",
+   "t536_7"
+  ]
+ },
+ "synthetic_manifest_sha256": "9ec7eb29ebc51b3f71bf24643d458894651795745aa5c54ecc0639983c8817a5",
+ "synthetic_manifest_bytes": 23711,
+ "pairwise_jaccard": {
+  "max": 0.0,
+  "p95": 0.0,
+  "mean": 0.0,
+  "matrix": [
+   {
+    "pair": [
+     501,
+     502
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     501,
+     503
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     501,
+     504
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     501,
+     505
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     501,
+     506
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     501,
+     507
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     501,
+     508
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     501,
+     509
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     501,
+     510
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     501,
+     511
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     501,
+     512
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     501,
+     513
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     501,
+     514
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     501,
+     515
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     501,
+     516
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     501,
+     517
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     501,
+     518
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     501,
+     519
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     501,
+     520
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     501,
+     521
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     501,
+     522
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     501,
+     523
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     501,
+     524
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     501,
+     525
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     501,
+     526
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     501,
+     527
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     501,
+     528
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     501,
+     529
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     501,
+     530
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     501,
+     531
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     501,
+     532
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     501,
+     533
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     501,
+     534
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     501,
+     535
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     501,
+     536
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     502,
+     503
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     502,
+     504
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     502,
+     505
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     502,
+     506
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     502,
+     507
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     502,
+     508
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     502,
+     509
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     502,
+     510
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     502,
+     511
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     502,
+     512
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     502,
+     513
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     502,
+     514
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     502,
+     515
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     502,
+     516
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     502,
+     517
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     502,
+     518
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     502,
+     519
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     502,
+     520
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     502,
+     521
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     502,
+     522
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     502,
+     523
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     502,
+     524
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     502,
+     525
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     502,
+     526
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     502,
+     527
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     502,
+     528
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     502,
+     529
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     502,
+     530
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     502,
+     531
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     502,
+     532
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     502,
+     533
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     502,
+     534
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     502,
+     535
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     502,
+     536
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     503,
+     504
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     503,
+     505
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     503,
+     506
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     503,
+     507
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     503,
+     508
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     503,
+     509
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     503,
+     510
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     503,
+     511
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     503,
+     512
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     503,
+     513
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     503,
+     514
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     503,
+     515
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     503,
+     516
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     503,
+     517
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     503,
+     518
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     503,
+     519
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     503,
+     520
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     503,
+     521
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     503,
+     522
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     503,
+     523
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     503,
+     524
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     503,
+     525
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     503,
+     526
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     503,
+     527
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     503,
+     528
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     503,
+     529
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     503,
+     530
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     503,
+     531
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     503,
+     532
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     503,
+     533
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     503,
+     534
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     503,
+     535
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     503,
+     536
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     504,
+     505
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     504,
+     506
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     504,
+     507
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     504,
+     508
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     504,
+     509
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     504,
+     510
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     504,
+     511
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     504,
+     512
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     504,
+     513
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     504,
+     514
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     504,
+     515
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     504,
+     516
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     504,
+     517
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     504,
+     518
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     504,
+     519
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     504,
+     520
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     504,
+     521
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     504,
+     522
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     504,
+     523
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     504,
+     524
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     504,
+     525
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     504,
+     526
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     504,
+     527
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     504,
+     528
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     504,
+     529
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     504,
+     530
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     504,
+     531
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     504,
+     532
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     504,
+     533
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     504,
+     534
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     504,
+     535
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     504,
+     536
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     505,
+     506
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     505,
+     507
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     505,
+     508
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     505,
+     509
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     505,
+     510
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     505,
+     511
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     505,
+     512
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     505,
+     513
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     505,
+     514
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     505,
+     515
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     505,
+     516
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     505,
+     517
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     505,
+     518
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     505,
+     519
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     505,
+     520
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     505,
+     521
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     505,
+     522
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     505,
+     523
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     505,
+     524
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     505,
+     525
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     505,
+     526
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     505,
+     527
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     505,
+     528
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     505,
+     529
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     505,
+     530
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     505,
+     531
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     505,
+     532
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     505,
+     533
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     505,
+     534
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     505,
+     535
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     505,
+     536
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     506,
+     507
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     506,
+     508
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     506,
+     509
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     506,
+     510
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     506,
+     511
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     506,
+     512
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     506,
+     513
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     506,
+     514
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     506,
+     515
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     506,
+     516
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     506,
+     517
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     506,
+     518
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     506,
+     519
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     506,
+     520
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     506,
+     521
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     506,
+     522
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     506,
+     523
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     506,
+     524
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     506,
+     525
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     506,
+     526
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     506,
+     527
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     506,
+     528
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     506,
+     529
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     506,
+     530
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     506,
+     531
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     506,
+     532
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     506,
+     533
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     506,
+     534
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     506,
+     535
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     506,
+     536
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     507,
+     508
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     507,
+     509
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     507,
+     510
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     507,
+     511
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     507,
+     512
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     507,
+     513
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     507,
+     514
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     507,
+     515
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     507,
+     516
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     507,
+     517
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     507,
+     518
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     507,
+     519
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     507,
+     520
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     507,
+     521
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     507,
+     522
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     507,
+     523
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     507,
+     524
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     507,
+     525
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     507,
+     526
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     507,
+     527
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     507,
+     528
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     507,
+     529
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     507,
+     530
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     507,
+     531
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     507,
+     532
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     507,
+     533
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     507,
+     534
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     507,
+     535
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     507,
+     536
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     508,
+     509
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     508,
+     510
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     508,
+     511
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     508,
+     512
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     508,
+     513
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     508,
+     514
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     508,
+     515
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     508,
+     516
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     508,
+     517
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     508,
+     518
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     508,
+     519
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     508,
+     520
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     508,
+     521
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     508,
+     522
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     508,
+     523
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     508,
+     524
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     508,
+     525
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     508,
+     526
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     508,
+     527
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     508,
+     528
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     508,
+     529
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     508,
+     530
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     508,
+     531
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     508,
+     532
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     508,
+     533
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     508,
+     534
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     508,
+     535
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     508,
+     536
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     509,
+     510
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     509,
+     511
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     509,
+     512
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     509,
+     513
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     509,
+     514
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     509,
+     515
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     509,
+     516
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     509,
+     517
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     509,
+     518
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     509,
+     519
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     509,
+     520
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     509,
+     521
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     509,
+     522
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     509,
+     523
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     509,
+     524
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     509,
+     525
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     509,
+     526
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     509,
+     527
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     509,
+     528
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     509,
+     529
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     509,
+     530
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     509,
+     531
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     509,
+     532
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     509,
+     533
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     509,
+     534
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     509,
+     535
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     509,
+     536
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     510,
+     511
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     510,
+     512
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     510,
+     513
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     510,
+     514
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     510,
+     515
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     510,
+     516
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     510,
+     517
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     510,
+     518
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     510,
+     519
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     510,
+     520
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     510,
+     521
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     510,
+     522
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     510,
+     523
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     510,
+     524
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     510,
+     525
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     510,
+     526
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     510,
+     527
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     510,
+     528
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     510,
+     529
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     510,
+     530
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     510,
+     531
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     510,
+     532
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     510,
+     533
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     510,
+     534
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     510,
+     535
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     510,
+     536
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     511,
+     512
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     511,
+     513
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     511,
+     514
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     511,
+     515
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     511,
+     516
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     511,
+     517
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     511,
+     518
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     511,
+     519
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     511,
+     520
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     511,
+     521
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     511,
+     522
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     511,
+     523
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     511,
+     524
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     511,
+     525
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     511,
+     526
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     511,
+     527
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     511,
+     528
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     511,
+     529
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     511,
+     530
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     511,
+     531
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     511,
+     532
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     511,
+     533
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     511,
+     534
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     511,
+     535
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     511,
+     536
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     512,
+     513
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     512,
+     514
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     512,
+     515
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     512,
+     516
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     512,
+     517
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     512,
+     518
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     512,
+     519
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     512,
+     520
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     512,
+     521
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     512,
+     522
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     512,
+     523
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     512,
+     524
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     512,
+     525
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     512,
+     526
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     512,
+     527
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     512,
+     528
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     512,
+     529
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     512,
+     530
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     512,
+     531
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     512,
+     532
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     512,
+     533
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     512,
+     534
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     512,
+     535
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     512,
+     536
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     513,
+     514
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     513,
+     515
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     513,
+     516
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     513,
+     517
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     513,
+     518
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     513,
+     519
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     513,
+     520
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     513,
+     521
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     513,
+     522
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     513,
+     523
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     513,
+     524
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     513,
+     525
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     513,
+     526
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     513,
+     527
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     513,
+     528
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     513,
+     529
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     513,
+     530
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     513,
+     531
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     513,
+     532
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     513,
+     533
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     513,
+     534
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     513,
+     535
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     513,
+     536
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     514,
+     515
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     514,
+     516
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     514,
+     517
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     514,
+     518
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     514,
+     519
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     514,
+     520
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     514,
+     521
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     514,
+     522
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     514,
+     523
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     514,
+     524
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     514,
+     525
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     514,
+     526
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     514,
+     527
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     514,
+     528
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     514,
+     529
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     514,
+     530
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     514,
+     531
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     514,
+     532
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     514,
+     533
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     514,
+     534
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     514,
+     535
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     514,
+     536
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     515,
+     516
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     515,
+     517
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     515,
+     518
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     515,
+     519
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     515,
+     520
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     515,
+     521
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     515,
+     522
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     515,
+     523
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     515,
+     524
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     515,
+     525
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     515,
+     526
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     515,
+     527
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     515,
+     528
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     515,
+     529
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     515,
+     530
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     515,
+     531
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     515,
+     532
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     515,
+     533
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     515,
+     534
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     515,
+     535
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     515,
+     536
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     516,
+     517
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     516,
+     518
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     516,
+     519
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     516,
+     520
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     516,
+     521
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     516,
+     522
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     516,
+     523
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     516,
+     524
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     516,
+     525
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     516,
+     526
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     516,
+     527
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     516,
+     528
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     516,
+     529
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     516,
+     530
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     516,
+     531
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     516,
+     532
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     516,
+     533
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     516,
+     534
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     516,
+     535
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     516,
+     536
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     517,
+     518
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     517,
+     519
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     517,
+     520
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     517,
+     521
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     517,
+     522
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     517,
+     523
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     517,
+     524
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     517,
+     525
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     517,
+     526
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     517,
+     527
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     517,
+     528
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     517,
+     529
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     517,
+     530
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     517,
+     531
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     517,
+     532
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     517,
+     533
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     517,
+     534
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     517,
+     535
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     517,
+     536
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     518,
+     519
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     518,
+     520
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     518,
+     521
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     518,
+     522
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     518,
+     523
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     518,
+     524
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     518,
+     525
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     518,
+     526
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     518,
+     527
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     518,
+     528
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     518,
+     529
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     518,
+     530
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     518,
+     531
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     518,
+     532
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     518,
+     533
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     518,
+     534
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     518,
+     535
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     518,
+     536
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     519,
+     520
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     519,
+     521
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     519,
+     522
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     519,
+     523
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     519,
+     524
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     519,
+     525
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     519,
+     526
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     519,
+     527
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     519,
+     528
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     519,
+     529
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     519,
+     530
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     519,
+     531
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     519,
+     532
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     519,
+     533
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     519,
+     534
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     519,
+     535
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     519,
+     536
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     520,
+     521
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     520,
+     522
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     520,
+     523
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     520,
+     524
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     520,
+     525
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     520,
+     526
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     520,
+     527
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     520,
+     528
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     520,
+     529
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     520,
+     530
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     520,
+     531
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     520,
+     532
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     520,
+     533
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     520,
+     534
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     520,
+     535
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     520,
+     536
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     521,
+     522
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     521,
+     523
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     521,
+     524
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     521,
+     525
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     521,
+     526
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     521,
+     527
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     521,
+     528
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     521,
+     529
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     521,
+     530
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     521,
+     531
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     521,
+     532
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     521,
+     533
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     521,
+     534
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     521,
+     535
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     521,
+     536
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     522,
+     523
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     522,
+     524
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     522,
+     525
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     522,
+     526
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     522,
+     527
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     522,
+     528
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     522,
+     529
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     522,
+     530
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     522,
+     531
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     522,
+     532
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     522,
+     533
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     522,
+     534
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     522,
+     535
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     522,
+     536
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     523,
+     524
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     523,
+     525
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     523,
+     526
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     523,
+     527
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     523,
+     528
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     523,
+     529
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     523,
+     530
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     523,
+     531
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     523,
+     532
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     523,
+     533
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     523,
+     534
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     523,
+     535
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     523,
+     536
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     524,
+     525
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     524,
+     526
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     524,
+     527
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     524,
+     528
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     524,
+     529
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     524,
+     530
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     524,
+     531
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     524,
+     532
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     524,
+     533
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     524,
+     534
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     524,
+     535
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     524,
+     536
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     525,
+     526
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     525,
+     527
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     525,
+     528
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     525,
+     529
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     525,
+     530
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     525,
+     531
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     525,
+     532
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     525,
+     533
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     525,
+     534
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     525,
+     535
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     525,
+     536
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     526,
+     527
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     526,
+     528
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     526,
+     529
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     526,
+     530
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     526,
+     531
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     526,
+     532
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     526,
+     533
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     526,
+     534
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     526,
+     535
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     526,
+     536
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     527,
+     528
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     527,
+     529
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     527,
+     530
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     527,
+     531
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     527,
+     532
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     527,
+     533
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     527,
+     534
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     527,
+     535
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     527,
+     536
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     528,
+     529
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     528,
+     530
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     528,
+     531
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     528,
+     532
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     528,
+     533
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     528,
+     534
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     528,
+     535
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     528,
+     536
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     529,
+     530
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     529,
+     531
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     529,
+     532
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     529,
+     533
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     529,
+     534
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     529,
+     535
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     529,
+     536
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     530,
+     531
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     530,
+     532
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     530,
+     533
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     530,
+     534
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     530,
+     535
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     530,
+     536
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     531,
+     532
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     531,
+     533
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     531,
+     534
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     531,
+     535
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     531,
+     536
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     532,
+     533
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     532,
+     534
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     532,
+     535
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     532,
+     536
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     533,
+     534
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     533,
+     535
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     533,
+     536
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     534,
+     535
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     534,
+     536
+    ],
+    "jaccard": 0.0
+   },
+   {
+    "pair": [
+     535,
+     536
+    ],
+    "jaccard": 0.0
+   }
+  ]
+ },
+ "shuffled_baseline": {
+  "B": 1000,
+  "shuffled_mean": 0.0,
+  "gap_real_minus_shuffled": 0.0,
+  "shuffled_means_sample": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ],
+  "expected_gap_gate": ">=0.20"
+ },
+ "disjoint_proof": "L=8-14 per family via 8+(idx%7), tokens t{fid}_{j} disjoint across families, no token appears in two families => pairwise Jaccard=0.0 <0.30",
+ "note": "Rebuilt synthetic diversity without LFS, deterministic, product-subtree anchored, full-tree expanded stripping {form_key,uenc,store,session,nonce,fotorama\\d{6,},timestamp} + DOTALL body regex <body[^>]*>.*?</body>"
+}

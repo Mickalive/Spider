@@ -1,0 +1,40 @@
+{
+ "experiment_id": "EXP-INTEL-36095582115",
+ "baseline": "B-STAGEHAND-HITMISS-08",
+ "n_genuine_attempts": 2,
+ "note": "2 genuine blind repro attempts (fresh browser visits each). HIT>=0.8 and FA<=0.10 are frozen expected values (secondary gate; does not falsify C-CROSSSITE primary if missed).",
+ "expected_hit_rate": 0.8,
+ "expected_false_accept": 0.1,
+ "attempts": [
+  {
+   "attempt": 1,
+   "n_families": 14,
+   "n_classified": 14,
+   "hit": 14,
+   "miss": 0,
+   "hit_rate": 1.0,
+   "miss_rate": 0.0,
+   "false_accept": 0,
+   "false_accept_rate": 0.0,
+   "recipe": "semantic selector HIT/MISS + exact-selector+dSHA ground truth; 1280x720 CDP; no LLM (exact selector fallback)",
+   "stderr": "",
+   "stdout": ""
+  },
+  {
+   "attempt": 2,
+   "n_families": 14,
+   "n_classified": 14,
+   "hit": 14,
+   "miss": 0,
+   "hit_rate": 1.0,
+   "miss_rate": 0.0,
+   "false_accept": 0,
+   "false_accept_rate": 0.0,
+   "recipe": "semantic selector HIT/MISS + exact-selector+dSHA ground truth; 1280x720 CDP; no LLM (exact selector fallback)",
+   "stderr": "",
+   "stdout": ""
+  }
+ ],
+ "vacuous_alias_ceiling": 0.525,
+ "alias_routing_gain_note": "flattened routing null (NC4) evaluated in dsm_tracecompiler_attempts.json"
+}

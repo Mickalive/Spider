@@ -1,0 +1,261 @@
+{
+ "experiment_id": "EXP-INTEL-36095582115",
+ "baseline": "B-DSM-TRACECOMPILER-0993",
+ "n_genuine_attempts": 2,
+ "recipe": "deterministic TreeWalker + DAG + guards, 0 tokens, no LLM; DSM replay rate and TraceCompiler precision computed on constructible-family traces (synthetic token sets + webarena slug tokens)",
+ "expected_dsm_replay": 0.99,
+ "expected_tracecompiler_precision": [
+  0.928,
+  0.993
+ ],
+ "note": "Secondary baseline substrate; not reaching 0.99/0.928 does NOT falsify C-CROSSSITE (frozen), reported as observed bounded ceiling.",
+ "attempts": [
+  {
+   "attempt": 1,
+   "n_traces": 14,
+   "replay_rate": 1.0,
+   "precision": 1.0,
+   "mean_guard_s_per_op": 2e-07,
+   "total_ops": 815,
+   "zero_tokens": true,
+   "tokens_used": 0,
+   "alias_tfidf_k5_accuracy": 0.1429,
+   "alias_ceiling": 0.525,
+   "compilation_gain_vs_alias": 0.8571,
+   "per_family": [
+    {
+     "family": 136,
+     "domain": "webarena",
+     "compiled_ir_ok": true,
+     "ops": 55,
+     "guard_s": 2e-05
+    },
+    {
+     "family": 145,
+     "domain": "webarena",
+     "compiled_ir_ok": true,
+     "ops": 55,
+     "guard_s": 1.6e-05
+    },
+    {
+     "family": 196,
+     "domain": "webarena",
+     "compiled_ir_ok": true,
+     "ops": 55,
+     "guard_s": 1.2e-05
+    },
+    {
+     "family": 222,
+     "domain": "webarena",
+     "compiled_ir_ok": true,
+     "ops": 55,
+     "guard_s": 1.1e-05
+    },
+    {
+     "family": 502,
+     "domain": "synthetic",
+     "compiled_ir_ok": true,
+     "ops": 50,
+     "guard_s": 1.2e-05
+    },
+    {
+     "family": 503,
+     "domain": "synthetic",
+     "compiled_ir_ok": true,
+     "ops": 55,
+     "guard_s": 1.2e-05
+    },
+    {
+     "family": 508,
+     "domain": "synthetic",
+     "compiled_ir_ok": true,
+     "ops": 45,
+     "guard_s": 1e-05
+    },
+    {
+     "family": 514,
+     "domain": "synthetic",
+     "compiled_ir_ok": true,
+     "ops": 75,
+     "guard_s": 1.3e-05
+    },
+    {
+     "family": 515,
+     "domain": "synthetic",
+     "compiled_ir_ok": true,
+     "ops": 45,
+     "guard_s": 9e-06
+    },
+    {
+     "family": 520,
+     "domain": "synthetic",
+     "compiled_ir_ok": true,
+     "ops": 70,
+     "guard_s": 1.3e-05
+    },
+    {
+     "family": 523,
+     "domain": "synthetic",
+     "compiled_ir_ok": true,
+     "ops": 50,
+     "guard_s": 1e-05
+    },
+    {
+     "family": 526,
+     "domain": "synthetic",
+     "compiled_ir_ok": true,
+     "ops": 65,
+     "guard_s": 1.2e-05
+    },
+    {
+     "family": 533,
+     "domain": "synthetic",
+     "compiled_ir_ok": true,
+     "ops": 65,
+     "guard_s": 1.2e-05
+    },
+    {
+     "family": 535,
+     "domain": "synthetic",
+     "compiled_ir_ok": true,
+     "ops": 75,
+     "guard_s": 1.3e-05
+    }
+   ],
+   "stdout": "",
+   "stderr": ""
+  },
+  {
+   "attempt": 2,
+   "n_traces": 14,
+   "replay_rate": 1.0,
+   "precision": 1.0,
+   "mean_guard_s_per_op": 2e-07,
+   "total_ops": 815,
+   "zero_tokens": true,
+   "tokens_used": 0,
+   "alias_tfidf_k5_accuracy": 0.1429,
+   "alias_ceiling": 0.525,
+   "compilation_gain_vs_alias": 0.8571,
+   "per_family": [
+    {
+     "family": 136,
+     "domain": "webarena",
+     "compiled_ir_ok": true,
+     "ops": 55,
+     "guard_s": 1.3e-05
+    },
+    {
+     "family": 145,
+     "domain": "webarena",
+     "compiled_ir_ok": true,
+     "ops": 55,
+     "guard_s": 1.3e-05
+    },
+    {
+     "family": 196,
+     "domain": "webarena",
+     "compiled_ir_ok": true,
+     "ops": 55,
+     "guard_s": 1.1e-05
+    },
+    {
+     "family": 222,
+     "domain": "webarena",
+     "compiled_ir_ok": true,
+     "ops": 55,
+     "guard_s": 1.1e-05
+    },
+    {
+     "family": 502,
+     "domain": "synthetic",
+     "compiled_ir_ok": true,
+     "ops": 50,
+     "guard_s": 1.1e-05
+    },
+    {
+     "family": 503,
+     "domain": "synthetic",
+     "compiled_ir_ok": true,
+     "ops": 55,
+     "guard_s": 1.1e-05
+    },
+    {
+     "family": 508,
+     "domain": "synthetic",
+     "compiled_ir_ok": true,
+     "ops": 45,
+     "guard_s": 1e-05
+    },
+    {
+     "family": 514,
+     "domain": "synthetic",
+     "compiled_ir_ok": true,
+     "ops": 75,
+     "guard_s": 1.3e-05
+    },
+    {
+     "family": 515,
+     "domain": "synthetic",
+     "compiled_ir_ok": true,
+     "ops": 45,
+     "guard_s": 9e-06
+    },
+    {
+     "family": 520,
+     "domain": "synthetic",
+     "compiled_ir_ok": true,
+     "ops": 70,
+     "guard_s": 4.1e-05
+    },
+    {
+     "family": 523,
+     "domain": "synthetic",
+     "compiled_ir_ok": true,
+     "ops": 50,
+     "guard_s": 1.2e-05
+    },
+    {
+     "family": 526,
+     "domain": "synthetic",
+     "compiled_ir_ok": true,
+     "ops": 65,
+     "guard_s": 1.2e-05
+    },
+    {
+     "family": 533,
+     "domain": "synthetic",
+     "compiled_ir_ok": true,
+     "ops": 65,
+     "guard_s": 1.3e-05
+    },
+    {
+     "family": 535,
+     "domain": "synthetic",
+     "compiled_ir_ok": true,
+     "ops": 75,
+     "guard_s": 1.3e-05
+    }
+   ],
+   "stdout": "",
+   "stderr": ""
+  }
+ ],
+ "alias_routing_note": "NC4: flattened TFIDF-K5 routing vs diversity-capped catalog (alias 0.525 ceiling). gain=DSM replay - alias; gain>=0.10 => Pareto, else MIXED non-Pareto per EXP-INTEL-36042599040.",
+ "families": [
+  136,
+  145,
+  196,
+  222,
+  502,
+  503,
+  508,
+  514,
+  515,
+  520,
+  523,
+  526,
+  533,
+  535
+ ]
+}

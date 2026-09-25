@@ -1,0 +1,48 @@
+{
+ "experiment_id": "EXP-INTEL-36095582115",
+ "source": "SRC-DOCKER-HUB-API",
+ "expected_digest": "sha256:3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb",
+ "hub_api_attempts": [
+  {
+   "attempt_label": "Hub API tags attempt 1",
+   "url": "https://hub.docker.com/v2/repositories/am1n3e/webarena-verified-shopping/tags",
+   "timeout_configured_s": 300,
+   "hf_token_present": false,
+   "status": 200,
+   "bytes": 1690,
+   "sha256": "b230ce4b35298504d23a94a2eebf915d48df4d9e2cb14e66e3b91fe24072ca23",
+   "digest_header": null,
+   "elapsed_s": 0.078,
+   "error": null
+  },
+  {
+   "attempt_label": "Hub API tags attempt 2",
+   "url": "https://hub.docker.com/v2/repositories/am1n3e/webarena-verified-shopping/tags",
+   "timeout_configured_s": 300,
+   "hf_token_present": false,
+   "status": 200,
+   "bytes": 1690,
+   "sha256": "b230ce4b35298504d23a94a2eebf915d48df4d9e2cb14e66e3b91fe24072ca23",
+   "digest_header": null,
+   "elapsed_s": 0.069,
+   "error": null
+  }
+ ],
+ "hub_latest_digest": "sha256:3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb",
+ "digest": "sha256:3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb",
+ "digest_64hex": "3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb",
+ "digest_64hex_len": 64,
+ "digest_64hex_valid": true,
+ "digest_expected_match": true,
+ "docker_images_digests": {
+  "cmd": "docker images --digests am1n3e/webarena-verified-shopping",
+  "timeout_configured_s": 120,
+  "returncode": 0,
+  "stdout_tail": "REPOSITORY                          TAG       DIGEST                                                                    IMAGE ID       CREATED        SIZE\nam1n3e/webarena-verified-shopping   <none>    sha256:3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb   a5b6fb47ee9f   7 months ago   13.3GB\n",
+  "stderr_tail": "",
+  "elapsed_s": 0.018,
+  "error": null
+ },
+ "n_genuine_attempts": 2,
+ "docker_pull_attempts": 0
+}

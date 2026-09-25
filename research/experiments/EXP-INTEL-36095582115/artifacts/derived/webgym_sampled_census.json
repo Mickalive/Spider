@@ -1,0 +1,15 @@
+{
+ "experiment_id": "EXP-INTEL-36095582115",
+ "census_label": "WebGym_292k_127k_sampled_diverse",
+ "provenance": "UNAVAILABLE HF_TOKEN absent 401 x2 (hf_webgym_manifest_attempts.json, fresh this experiment)",
+ "total_tasks": null,
+ "shopping_tasks": null,
+ "families_ge3_shopping": 0,
+ "families_ge3_ids": [],
+ "product_page_families": [],
+ "note": "Would sample >=50 distinct eTLD+1 when HF_TOKEN succeeds; UNAVAILABLE per MV3/MV6",
+ "families_ge3_shopping_count": 0,
+ "etld_extraction_method": "tldextract 5.3.2 or publicsuffix list version pinned via pip freeze (frozen MV3)",
+ "families_ge3_shopping_count_status": "UNAVAILABLE_HF_401_LOGGED",
+ "smallest_next_action": "HF_TOKEN token scope/quota/mirror: request HF_TOKEN read-scope on ServiceNow/WebGym + OpenEnv/WebGym, confirm account quota ok, or use an HF mirror/dataset export; then re-run frozen design with cognitive_reset true."
+}

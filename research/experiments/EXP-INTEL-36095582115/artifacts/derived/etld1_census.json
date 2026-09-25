@@ -1,0 +1,10 @@
+{
+ "experiment_id": "EXP-INTEL-36095582115",
+ "census_label": "etld_plus1_webgym_sampled",
+ "status": "UNAVAILABLE",
+ "reason": "WebGym 292k/127k manifest UNAVAILABLE after 2 genuine 401 attempts x2 sources this experiment (hf_webgym_manifest_attempts.json)",
+ "distinct_etld1": null,
+ "distinct_count": null,
+ "tldextract_version": null,
+ "note": "When HF_TOKEN provisioned: sample task URLs and count distinct eTLD+1 via tldextract.extract(registered_domain) with gate >=50; UNAVAILABLE is not zero and not falsification per MV6"
+}

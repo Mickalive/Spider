@@ -1,0 +1,17 @@
+{
+ "experiment_id": "EXP-INTEL-36095582115",
+ "url": "http://localhost:7770/",
+ "probe": {
+  "attempt_label": "localhost:7770 homepage",
+  "url": "http://localhost:7770/",
+  "timeout_configured_s": 300,
+  "hf_token_present": false,
+  "status": 200,
+  "bytes": 164391,
+  "sha256": "ce13e8d6f949e06c17cce634b5d319c4ed3dc6a73a2c62506049137b145ededc",
+  "digest_header": null,
+  "elapsed_s": 0.057,
+  "error": null
+ },
+ "host_port_mapping": "7770:80 (container nginx listen 80; exposure via -p 7770:80)"
+}
