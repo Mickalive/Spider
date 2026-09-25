@@ -1,0 +1,221 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-FRONTIER-36089506922",
+  "lane": "frontier",
+  "status": "PASS",
+  "producer_claim_supported": false,
+  "required_fixes": [
+    "Intel lane: deliver diverse-site manifest at research/intel/diverse_site_manifest.json or data/webgym_292k or data/webarena_verified with >=10 families pairwise bigram Jaccard<0.30 mean<0.15 product-subtree anchored depth>=2, 1280x720 CDP AX>10 mean>15 std>5 DOM>=2000 per family, raw N>=500 >=50/family sibling 299a300 dedup, TRAIN-only vocab isolation 0 leakage, deterministic seed 42, trajectory-grouped holdout - currently manifest_families=0, no JSON under research/intel with non-empty families, no WebGym/WebArena dirs",
+    "Runtime lane: deploy health-gated single-worker sticky Flask HS256+nginx WAL at /tmp/spider-runtime/shared.db with sticky cookie, If-None-Match/ETag TTL 60s conditional probes, n_non304>=360 single-node else >=800 distributed stratified >=80/family, X-Worker-Pid>=10, honest per-trajectory hard-reset sum counters (resolve+bind+verify+freshness+browser_steps+tokens+latency) - currently WAL absent, n_non304=null, X-Worker-Pid=null, 304-handling null",
+    "Frontier EXECUTE: install BrowserGym stack (browsergym-core 0.14.3 + playwright 1.63.0 + agentlab 0.4.2 pins; chromium/firefox binaries already present on PATH, PyPI reachable 200) once Intel+Runtime gates pass, then execute full frozen shootout: TreeWalker 99% fidelity, stable locator ranking top-1>=95%, DAG codegen SQLite INSERT OR IGNORE, guard <5ms bailout 100% on N>=6 injections, WebMCP Fetch/OpenAPI+HATEOAS+routing normalization+invokeTool >=95%, all 7 PCs + 7 NCs + 6 baselines with 5000 family-stratified bootstrap + 5000 block-permutation (block=family unit=trajectory) + 5000 global permutation, honest M_total_f10/f100 Pareto, mixed >=4/10 pooled>=0.60 gap>=0.07 calibration UNKNOWN>=0.85 false<=0.10 ECE<=0.15"
+  ],
+  "validity_findings": [
+    "Frozen input integrity independently recomputed and verified: sha256(prereg.md)=c6aa50f2f749fab1f7c142df713c6b61c4313be2a2e6a28984f7ed46b2936ac1, sha256(request.json)=a715fa645f746c5db1a5d0b11f17fef47f0ceff1c501e71d030ba13b4e0d81ee, sha256(spec.json)=4ba34e9bcbc97099e3d21ea9b4e67964018f8586045a013f370d938cb4e7d642 all match freeze.json exactly; parent handoff sha256 5e5812f96cc6f3d5552638096a3a084085a94aa6f77ccc5f33fb40fe34e83c08 matches request.json parent_handoff.sha256 - no frozen design tampering",
+    "Substrate absence independently recomputed via importlib.util.find_spec and filesystem probes: browsergym=False, browsergym.core=False, playwright=False, agentlab=False, numpy/scipy/sklearn/flask/tiktoken all False in python3 3.12.14; research/intel/diverse_site_manifest.json absent, data/webgym_292k absent, data/webarena_verified absent, no JSON under research/intel declares non-empty families, /tmp/spider-runtime/shared.db absent => n_non304=null X-Worker-Pid=null If-None-Match null - confirms producer metrics live_available=false browsergym_available=false intel_diverse_manifest_exists=false runtime_wal_exists=false manifest_families=0 pooled_tasks=0 mixed_tasks=0 heterogeneity_adequate=false coverage_adequate=false substrate_adequate=false. Audit sha256 for artifacts/substrate_diagnostic.json 09ba572b31c46fb2dc56076b3bb37f908006c66a78d5c0d5ea346674a737554c independently matches result.json artifacts list",
+    "Positive controls correctly classified per frozen decision_rule: PC-ORTHOGONAL-HETEROGENEOUS-MANIFEST correctly FAIL (0 families <10, Jaccard null), PC-BROWSERGYM-SUBSTRATE correctly FAIL (all CDP modules absent, WAL absent), remaining PCs PC-COMPILATION-PIPELINE, PC-HONEST-COST-SANITY, PC-TRAIN-TEST-DISJOINT, PC-CALIBRATION-DERIVED, PC-WEBMCP-REGISTRY correctly NOT_RUN (no DOM/trajectories to exercise TreeWalker fidelity, locator top-1, DAG exec, SQLite round-trip, guard <5ms, bailout injection, per-trajectory hard-reset diff==0 std>0 gap>0.35, disjoint audit, calibration strata, OpenAPI fetch >=95%). pc_all_pass=false is justified; no PC incorrectly marked PASS",
+    "Null controls correctly classified: all 7 NCs correctly NOT_RUN - NC-EMPTY-COMPILE, NC-WEBMCP-EMPTY (no registries to test 100% UNKNOWN fallback), NC-NO-APPLICABLE-MIXED (mixed_tasks=0 <10 cannot evaluate UNKNOWN>=0.85 false<=0.15), NC-ORACLE-LEAK (no derived_context to audit forbidden reads), NC-BIJECTIVE-COST (no honest counters to test gap>0.35 |rho_proxy|<0.60), NC-SHUFFLED-NULL (no trajectories for 5000 global/block perms |rho_shuffled|<0.20 centered), NC-GUARD-SPECIFICITY (no guard pipeline to ablate drop>=30%). nc_all_pass=false is justified; no NC incorrectly marked PASS",
+    "No synthetic substitution attack: synthetic TAU0.30 36-family fixture exists under research/experiments/EXP-FRONTIER-36042599040/artifacts but producer correctly preserved it as bounded negative evidence only (result.json validity_notes[3], provenance datasets_fixtures_checked synthetic present NOT used, artifacts/substrate_diagnostic.json synthetic_fixtures_present_not_used) per frozen spec measurement_validity[0] and spec BINDING-RULE - correctly avoided conflating disjoint-alphabet Jaccard 0.0 fixture with live heterogeneous Jaccard 0.30-0.60 gate. Honest disclosure prevents leakage/measurement-trap false falsification",
+    "Measurement validity correctly triggers MEASUREMENT_INVALID not FALSIFIES: frozen decision_rule requires all PCs PASS and all NCs PASS and manifest >=10 pooled>=40 mixed>=10 n_non304>=360 BrowserGym/CDP DOM>=2000 AX>10 etc. With 2 PCs FAIL and 5 PCs + 7 NCs NOT_RUN and manifest 0/10 pooled 0/40 mixed 0/10, producer correctly assigned status=MEASUREMENT_INVALID outcome=NOT_APPLICABLE (validity_notes[0-1]) - infrastructure failure correctly distinguished from scientific falsification; unfolds in 0.06365s diagnostic path consistent with frozen estimated_cost 0.035s-style CPU-only",
+    "Representation/cost/leakage controls preserved but unevaluated: TreeWalker discards style/computed layout/visual pixels, locator tier discards volatile XPath, guard set limited to 3 predicates (URL regex/DOM hash/auth presence), WebMCP HATEOAS limited to link extraction, Jaccard<0.30 isolates factorization - all disclosed per prereg section 3 and spec measurement_validity; honest per-trajectory hard-reset sum counters (resolve+bind+verify+freshness+browser_steps+tokens+latency) with trajectory-grouped holdout and TRAIN-only vocab isolation 0 leakage not testable without manifest - correctly marked NOT_RUN rather than fabricated; no evidence of tautological DOM hash encoding state_id (MI 107-198%), target_href==url leakage, or |R|=1 degeneracy because no data to compute - correctly not recorded as PASS",
+    "Provenance and determinism intact: provenance.json records git branch lab2/frontier head c98c1eee56fa1a573e4e399d06f4b5e3d0834bd0 pre_execute_sha 174e27ab23150a1e90326496c5f474eff2f36a00 no commits/amends/pushes/resets, code_paths limited to research/harness research/frontier per registry allowed_code_roots, seed discipline RandomState(42) + hashlib.sha256 not Python hash preserved, per_trajectory_traces.json checked-empty [] sha256 37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570, provenance artifact hashes match result.json list (substrate 09ba57..., compilation 7a18b1..., honest_cost ac142b..., diagnostic 85a232..., run_execute d23b1b...) - no hidden state mutation",
+    "Attempted recompute of material metrics confirms null/zero: live_available false, chromium_present true, pypi_reachable true (200) but browsergym_core_available false, elapsed 0.064s, treewalker_fidelity null, locator_top1 null, guard_eval_ms null, webmcp_fetch_rate null, within_family_std null, zero_cells null, diff_sum null - all consistent with no observable heterogeneity to express S1-S4 thresholds (S1 Pareto saving>=25% lower>15% dominance vs alias/RAG/WebMCP, S2 mixed >=4/10 pooled>=0.60 Wilson lower>=0.45 gap>=0.07, S3 token/latency <200ms median <100ms resolve+bind >=40%, S4 UNKNOWN>=0.85 false<=0.10 ECE<=0.15 |rho_shuffled|<0.20). No metric was computable that was omitted; no hidden positive signal suppressed",
+    "Target/split/sampling integrity: no target integrity to recompute (pooled_tasks=0 mixed_tasks=0), no sampling bias beyond manifest absence, no representation integrity violation on live BrowserGym 1280x720 CDP AX>10 DOM>=2000 because substrate never instantiated - correctly declared heterogeneity_adequate=false. Controls strength appropriately maximal per spec (TAU0.30 topology gate, correct-family exact key-set equality, softmax temp 0.15 + jitter 0.02 UNKNOWN<0.80, guard bailout) but strength irrelevant when substrate absent",
+    "No baseline strength overstatement: producer explicitly preserves 17-deep alias catalog+routing bounded ceiling 21/40=0.525 Wilson [0.375,0.671] 0/10 mixed routing gain 0.0 p=1.0 and synthetic TAU0.30 FALSIFIED-IN-SETTING rho 0.4837 ECE 0.216 as established bounded negatives (validity_notes[2]) without overstating them as live evidence. Agent priors from director_mandate correctly labeled as priors not SPIDER evidence"
+  ],
+  "baseline_findings": [
+    "B-COLD-LLM (ID B-COLD-LLM): NOT_RUN - verified no trajectories, substrate missing (no manifest, no BrowserGym, no Runtime WAL). No cold LLM cost to compare for M_total Pareto; correctly not fabricated via formula n*3200/f*6.0",
+    "B-ALIAS-CATALOG-ROUTING (ID B-ALIAS-CATALOG-ROUTING): NOT_RUN - no trajectories, synthetic TAU0.30 fixture forbidden as live evidence per frozen spec. Prior ceiling 21/40=0.525 pooled 0/10 mixed routing gain 0.0 correctly preserved as bounded history not live measurement; no attempt to rescue via Jaccard>=0.6 over-matching",
+    "B-FLAT-RAG-K5 (ID B-FLAT-RAG-K5): NOT_RUN - no train-A corpus, no trajectories, TAU0.30 gate unevaluated. TFIDF k5 strong baseline correctly not approximated with synthetic alphabets",
+    "B-WEBMCP-TOOL-BYPASS (ID B-WEBMCP-TOOL-BYPASS): NOT_RUN - no WebMCP registry (depends on BrowserGym/CDP and manifest), Fetch/OpenAPI+HATEOAS+routing normalization+invokeTool pipeline not built. WebMCP competition to compilation remains untested on live gate; PC-WEBMCP-REGISTRY correctly NOT_RUN not falsely PASS",
+    "B-COMPILE-BYPASS PRIMARY (ID B-COMPILE-BYPASS): NOT_RUN - BrowserGym/CDP missing, deterministic compilation bypass (TreeWalker 99% + stable locator ranking data-testid>role+name>text>XPath + JSON/Python DAG parameter slots from >=3 demos + speculative guards URL/DOM-hash/auth + bailout fallback + SQLite INSERT OR IGNORE) not executed; hot-path 0 tokens 0.09s vs 3-17s LLM unmeasured; honest M_total build+f*per_task unevaluated",
+    "B-TERX-REPLAY (ID B-TERX-REPLAY): NOT_RUN - no trajectories, ablation for guard+bailout value vs naive deterministic CDP replay not executed",
+    "No baseline comparison possible: all economics (M_total_f10/f100 with +-50% build sensitivity, strict dominance CI lower>0), coverage (pooled/mixed Wilson), latency, calibration metrics are null/false explicitly indicating absence not negative result. Bind rule (identical acceptance predicate header+body+query+auth canonicalized, same model budget, same verify+freshness, same per-trajectory hard-reset counters, same 5000 family-stratified bootstrap + 5000 block-permutation + 5000 global permutation, trajectory-grouped holdout, TRAIN-only vocab) correctly preserved in design but not exercised - no baseline strength misrepresented"
+  ],
+  "recomputed_metrics": {
+    "live_available": {
+      "producer_value": false,
+      "audit_value": false,
+      "method": "importlib.util.find_spec browsergym/browsergym.core/playwright/agentlab + filesystem probes for Intel manifests and Runtime WAL + hash verification vs freeze.json",
+      "verdict": "PASS - exact match"
+    },
+    "browsergym_available": {
+      "producer_value": false,
+      "audit_value": false,
+      "detail": "all 4 modules find_spec returns None in python3 3.12.14; chromium binaries present on PATH but not sufficient",
+      "verdict": "PASS"
+    },
+    "browsergym_core_available": {
+      "producer_value": false,
+      "audit_value": false,
+      "verdict": "PASS"
+    },
+    "playwright_available": {
+      "producer_value": false,
+      "audit_value": false,
+      "verdict": "PASS"
+    },
+    "manifest_families": {
+      "producer_value": 0,
+      "audit_value": 0,
+      "threshold": ">=10",
+      "verdict": "FAIL -> MEASUREMENT_INVALID (correctly flagged)"
+    },
+    "manifest_jaccard_mean": {
+      "producer_value": null,
+      "audit_value": null,
+      "threshold": "mean<0.15 pairwise <0.30",
+      "verdict": "UNAVAILABLE - no manifest"
+    },
+    "manifest_jaccard_max": {
+      "producer_value": null,
+      "audit_value": null,
+      "verdict": "UNAVAILABLE"
+    },
+    "pooled_tasks": {
+      "producer_value": 0,
+      "audit_value": 0,
+      "threshold": ">=40",
+      "verdict": "FAIL -> MEASUREMENT_INVALID"
+    },
+    "mixed_tasks": {
+      "producer_value": 0,
+      "audit_value": 0,
+      "threshold": ">=10",
+      "verdict": "FAIL -> MEASUREMENT_INVALID"
+    },
+    "heterogeneity_adequate": {
+      "producer_value": false,
+      "audit_value": false,
+      "verdict": "PASS"
+    },
+    "coverage_adequate": {
+      "producer_value": false,
+      "audit_value": false,
+      "verdict": "PASS"
+    },
+    "substrate_adequate": {
+      "producer_value": false,
+      "audit_value": false,
+      "verdict": "PASS"
+    },
+    "runtime_wal_exists": {
+      "producer_value": false,
+      "audit_value": false,
+      "path": "/tmp/spider-runtime/shared.db",
+      "verdict": "PASS"
+    },
+    "x_worker_pid": {
+      "producer_value": null,
+      "audit_value": null,
+      "threshold": ">=10",
+      "verdict": "UNAVAILABLE"
+    },
+    "n_non304": {
+      "producer_value": null,
+      "audit_value": null,
+      "threshold": ">=360 single-node else >=800 distributed",
+      "verdict": "UNAVAILABLE"
+    },
+    "treewalker_fidelity": {
+      "producer_value": null,
+      "audit_value": null,
+      "threshold": ">=0.90",
+      "verdict": "UNAVAILABLE - NOT_RUN"
+    },
+    "locator_top1": {
+      "producer_value": null,
+      "audit_value": null,
+      "threshold": ">=0.95",
+      "verdict": "UNAVAILABLE - NOT_RUN"
+    },
+    "guard_eval_ms": {
+      "producer_value": null,
+      "audit_value": null,
+      "threshold": "<5ms",
+      "verdict": "UNAVAILABLE"
+    },
+    "webmcp_fetch_rate": {
+      "producer_value": null,
+      "audit_value": null,
+      "threshold": ">=0.95",
+      "verdict": "UNAVAILABLE"
+    },
+    "frozen_inputs_integrity": {
+      "producer_value": true,
+      "audit_value": true,
+      "hashes_verified": "prereg c6aa50f2..., request a715fa64..., spec 4ba34e9b... match freeze.json; parent handoff 5e5812f9... matches",
+      "verdict": "PASS"
+    },
+    "elapsed_seconds": {
+      "producer_value": 0.06365,
+      "audit_value": 0.063672,
+      "expected_diagnostic": "~0.035s CPU-only",
+      "verdict": "PASS - within diagnostic path"
+    },
+    "pc_all_pass": {
+      "producer_value": false,
+      "audit_value": false,
+      "verdict": "PASS"
+    },
+    "nc_all_pass": {
+      "producer_value": false,
+      "audit_value": false,
+      "verdict": "PASS"
+    },
+    "s1_pareto": {
+      "producer_value": false,
+      "audit_value": false,
+      "note": "unevaluated not failed - no data for M_total_f10 saving>=25% lower>15% p<0.05 dominance vs alias/RAG/WebMCP at f10/f100 +-50% build",
+      "verdict": "UNEVALUATED"
+    },
+    "s2_mixed_breakthrough": {
+      "producer_value": false,
+      "audit_value": false,
+      "note": "unevaluated - no mixed triple-channel data for >=4/10 pooled>=0.60 Wilson lower>=0.45 gap>=0.07",
+      "verdict": "UNEVALUATED"
+    },
+    "s3_latency_pareto": {
+      "producer_value": false,
+      "audit_value": false,
+      "note": "unevaluated - no latency/tokens/resolve+bind counters",
+      "verdict": "UNEVALUATED"
+    },
+    "s4_calibration": {
+      "producer_value": false,
+      "audit_value": false,
+      "note": "unevaluated - no UNKNOWN precision>=0.85 false<=0.10 ECE<=0.15 |rho_shuffled|<0.20",
+      "verdict": "UNEVALUATED"
+    }
+  },
+  "claim_ceiling": "C-RESIDUAL-NOVELTY remains HYPOTHESIS. No new evidence for or against deterministic compilation bypass (TreeWalker 99% + stable locator ranking + JSON/Python DAG with guards/bailout + SQLite canonical compile 0 tokens 0.09s hot-path) vs alias catalog+routing vs TFIDF-K5 vs WebMCP OpenAPI on live heterogeneous mixed triple-channel gate. Prior ceilings preserved and not superseded: (1) alias-catalog/routing/hierarchical xMemory bounded at 21/40=0.525 pooled Wilson [0.375,0.671] <0.60 0/10 mixed routing gain 0.0 p=1.0 (EXP-FRONTIER-36052053591 lineage, parent handoff 5e5812f9...); (2) honest residual-novelty economics validly FALSIFIED-IN-SETTING non-Pareto under QCR on 36-family orthogonal disjoint-alphabet TAU0.30 synthetic gate with all 11 PCs/NCs PASS (EXP-FRONTIER-36042599040 audit PASS: rho 0.4837 CI[0.4102,0.5523] <0.60 ECE 0.216>0.15 RAG dominance false at f10/f100). This MEASUREMENT_INVALID diagnostic provides no product promotion and no inference to BrowserGym 1280x720 CDP AX>10 DOM>=2000 mixed triple-channel heterogeneity; compilation bypass shootout remains UNTESTED on live gate. Maximum justified claim is diagnostic - substrate absent.",
+  "evidence_refs": [
+    "research/experiments/EXP-FRONTIER-36089506922/request.json sha256 a715fa645f746c5db1a5d0b11f17fef47f0ceff1c501e71d030ba13b4e0d81ee",
+    "research/experiments/EXP-FRONTIER-36089506922/spec.json sha256 4ba34e9bcbc97099e3d21ea9b4e67964018f8586045a013f370d938cb4e7d642",
+    "research/experiments/EXP-FRONTIER-36089506922/prereg.md sha256 c6aa50f2f749fab1f7c142df713c6b61c4313be2a2e6a28984f7ed46b2936ac1",
+    "research/experiments/EXP-FRONTIER-36089506922/freeze.json sha256 66c7f23bf86a9959ac2d6111d6758b48cdd37993561c2d10e21136440d386d07 (hashes field 68d...)",
+    "research/experiments/EXP-FRONTIER-36089506922/result.json sha256 25e791f69da74406a6cda82143f87bf34459d1ed27774f6cda1b613f54da1706",
+    "research/experiments/EXP-FRONTIER-36089506922/report.md sha256 e1846875946e7d2a7cde13bd1d7f68d11f7d5d1198db064cb0960a2d2ac73881",
+    "research/experiments/EXP-FRONTIER-36089506922/provenance.json sha256 c366f840f56db14dd5d5bf144be7b2240eca0888a29f5c015f00145bd75da6e0",
+    "research/experiments/EXP-FRONTIER-36089506922/artifacts/substrate_diagnostic.json sha256 09ba572b31c46fb2dc56076b3bb37f908006c66a78d5c0d5ea346674a737554c",
+    "research/experiments/EXP-FRONTIER-36089506922/artifacts/compilation_pipeline_check.json sha256 7a18b1fa20e986294f5fde65d3b965874cc93eb50f53a48be8505eb7f340976a",
+    "research/experiments/EXP-FRONTIER-36089506922/artifacts/per_trajectory_traces.json sha256 37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570 (checked-empty [])",
+    "research/experiments/EXP-FRONTIER-36089506922/artifacts/honest_cost_audit.json sha256 ac142b18acb25afc4c690b341a9932e9de7aaf15ce9dde31618c73cf1d1cd0ec",
+    "research/experiments/EXP-FRONTIER-36089506922/execution_diagnostic_summary.json sha256 85a2321ebed3a0fe42130787ecf15b6d74301bbea9e16d45da1256af97c8e980",
+    "research/frontier/run_execute_36089506922.py sha256 d23b1b9dea68f997ddc982cfcdfc13c938d0f9190e8fb7b169a89c63fdc73853",
+    "research/experiments/EXP-FRONTIER-36052053591/handoff.json sha256 5e5812f96cc6f3d5552638096a3a084085a94aa6f77ccc5f33fb40fe34e83c08 (parent_handoff)",
+    "research/experiments/EXP-FRONTIER-36042599040/audit.json sha256 19300c9c... (bounded synthetic FALSIFIED-IN-SETTING preserved)",
+    "codex/claim_state.json (C-RESIDUAL-NOVELTY and C-WEB-DYNAMICS events - no VALIDATED claim; C-FRESHNESS only narrow synthetic survival)",
+    "research/lanes/registry.json (frontier lane charter search outside current solution basin)"
+  ],
+  "unresolved": [
+    "S1: Does B-COMPILE-BYPASS honest M_total_f10/f100 achieve Pareto dominance vs B-COLD-LLM vs B-ALIAS-CATALOG-ROUTING vs B-FLAT-RAG-K5 vs B-WEBMCP-TOOL-BYPASS with saving>=25% vs cold lower>15% p<0.05 strict dominance at f10 and f100 robust to +-50% build cost on live heterogeneous mixed triple-channel gate? (untested - substrate missing)",
+    "S2: Does mixed triple-channel accuracy move from 0/10 to >=4/10 and pooled coverage to >=0.60 Wilson lower>=0.45 with gap>=0.07 vs alias 0.525 and vs WebMCP pooled where WebMCP measured? (untested - pooled 0 mixed 0)",
+    "S3: Do O(1) amortized economics survive measured token/latency/browser-step audit (hot-path mean <200ms median <100ms 0 tokens vs LLM median >=3000ms, resolve+bind reduction >=40% vs alias) with per-trajectory hard-reset counters? (untested)",
+    "S4: Does calibration reach UNKNOWN precision>=0.85 false_accept<=0.10 ECE<=0.15 upper<=0.18 and global/block |rho_shuffled|<0.20 p>=0.20 centered |mean|<0.05 std<0.15 gap rho-|rho_shuffled|>0.35 on real DOM/AX heterogeneity? (untested)",
+    "Whether WebMCP Fetch/OpenAPI+HATEOAS+routing normalization+invokeTool >=95% coverage validity gate holds on real task paths and whether WebMCP vs compilation head-to-head Pareto differs (Chrome WebMCP shipping competition remains prior not evidence)",
+    "Whether larger Intel manifest (WebGym 292k dedup >=50 eTLD+1 or WebArena-Verified Hard 192/36 Hard258 reuse covering Jaccard 0.30-0.60 natural overlap) or richer representations (visual/computed-style, accessibility tree >10 nodes) would reveal different economics if compilation fails at 10-family 1280x720 CDP gate",
+    "Whether Runtime single-worker sticky health-gated n_non304>=360/800 stratified with X-Worker-Pid>=10 If-None-Match/304 and Graph blast-radius health gates can pass before distributed n>=800 f=100 authorization per portfolio_assessment",
+    "Whether barrier-physics rewind (history-conditioned BC PMI) belongs to Physics lane and becomes testable after Runtime health gate closes (per Director comparative_reasoning PARK pending substrate)",
+    "Whether deterministic compilation bypass with speculative guards + bailout fallback is distinguishable from tautological DOM-hash/state_id encoding (MI 107-198%) or action->own-request tautology and passes guard specificity drop>=30% ablation on live data"
+  ]
+}
