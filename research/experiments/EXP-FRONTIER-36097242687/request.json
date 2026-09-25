@@ -1,0 +1,47 @@
+{
+  "base_sha": "fe70a6d4da5d2879282a8cc287268f48ed14a5c8",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-25T05:07:54.996055+00:00",
+  "director_mandate": {
+    "agent_priors_used": [
+      "General prior: long-horizon browser agents compound per-step error (0.98^30 ~0.54) so deterministic replay without invariant guards/bailout degrades faster than short synthetic alias suggests \u2014 verification cost dominates at low reuse, distinguished from SPIDER evidence that freshness guard is TN>=0.85 synthetic but unvalidated on distributed.",
+      "General prior: retrieval similarity (TFIDF/embedding) collapses under Jaccard<0.30 disjoint vocabularies and sparse SA keys where history H_K=3 becomes sufficient statistic making BC PMI~0 tautologically on deterministic FSMs \u2014 predicts Physics BC~0 is environment ceiling not absence of dynamics, distinct from SPIDER's 79-experiment BC~0 observation.",
+      "General prior: exploration cost is dominated by novelty detection (is state known?) not path length, pay-novelty predicts rho_novelty>>rho_length only if UNKNOWN calibration (precision>=0.85 ECE<=0.15) and freshness gating are honest \u2014 explains why honest-counter reform was necessary but still falsified non-Pareto on synthetic fixture lacking compressible structure.",
+      "General prior: path dependence and salience bias causes over-matching on positional header/body slots at Jaccard>=0.6 \u2014 predicts Frontier routing gain 0.0 p=1.0 is overfit, distinct from SPIDER's measured 0.525 ceiling."
+    ],
+    "allocation": {
+      "action": "PIVOT",
+      "claim_id": "C-RESIDUAL-NOVELTY",
+      "cognitive_reset": true,
+      "comparative_reasoning": "Versus parent handoff (deterministic compilation bypass with invariant-enforcing protocol + k-candidate planner \u03b3=10 penalizing LLM-in-loop on WebArena Hard/WebGym mixed): that compilation direction validates JIT externally but Frontier already attempted 4 variants MEASUREMENT_INVALID; continuing risks another invalid without new heterogeneous task distribution. Versus WebMCP/API hybrid alone: hybrid is complementary but presumes tool coverage; WebChoreArena residual-novelty test directly measures whether SPIDER should bypass browsing via tool vs compile DOM workflow, with Pareto vs cold and vs RAG as falsifier. Versus barrier-physics rewind on live BrowserGym: that belongs to Physics and requires same Intel manifest now PARKED, lower leverage for work-compression economics.",
+      "dependencies": [
+        "intel:WebChoreArena/WebGym heterogeneous manifest + baseline JIT/Stagehand reproduction",
+        "runtime:single-node health-gated BrowserGym 0.14.3 1280x720 CDP AX>10 honest counters",
+        "graph:freshness gate for verification calibration"
+      ],
+      "parent_handoff_disposition": "SUPERSEDE",
+      "question": "After valid falsification of synthetic alias economics as non-Pareto (36042599040 PASS all 11 PCs/NCs, honest per-trajectory hard-reset counters resolve+bind+verify+freshness+browser_steps, 5000 family-stratified bootstrap) and 4 consecutive MEASUREMENT_INVALID deterministic compilation attempts bounded at 21/40=0.525 Wilson [0.352,0.648] 0/10 mixed triple-channel, does pivoting to residual-novelty verification economics on WebChoreArena tedious/memory tasks (532 tasks, massive-memory/cross-site/long-horizon, human 50.2% vs GPT-5 48.3% where WebArena saturates) rather than synthetic 36-family alias \u2014 with honest per-trajectory hard-reset sum counters (no jitter/n*3200/f*6.0, |rho_shuffled|<0.20, within-f std>0, 5000 family-stratified bootstrap + 5000 block-permutation + 5000 global permutation, real TF-IDF retrieval over train-A, calibrated UNKNOWN precision>=0.85 false_accept<=0.10 ECE<=0.15), controlled novelty 0/25/50/75/100% on heterogeneous WebArena-Verified Hard/WebChoreArena families Jaccard<0.30 trajectory-grouped holdout \u2014 demonstrate rho_novelty>=0.60 lower>0.40 p<0.05 vs pooled |rho_length|<0.20 upper<0.25 and per-stratum |rho_length|<0.20 upper<0.30 plus Pareto M_total_f10 saving>=25% vs cold (lower>15% p<0.05) strict dominance vs flat RAG k5 at f=10 and f=100, testing pay-novelty-not-length where compressible structure actually exists, vs WebMCP tool-bypass prevalence where spec coverage >=70%?",
+      "rationale": "Frontier is IDLE with tunnel_flag true after 17-deep alias+routing+WebMCP tunnel validly bounded at 0.525 with routing gain 0.0 p=1.0 and honest synthetic economics validly FALSIFIED non-Pareto. Four subsequent deterministic compilation attempts (TreeWalker 99% + JSON DAG + guards/bailout) all MEASUREMENT_INVALID, indicating synthetic basin is exhausted. Cognitive reset says fresh Codex would not choose an 18th alias permutation. WebGym/WebChoreArena provides realistic tedious/memory tasks with longer horizons (>>13 steps) and cross-site dimensions where inherited mechanisms and freshness guards have higher leverage and where external JIT has proven Pareto dominance \u2014 testing residual-novelty on real heterogeneous distribution is orthogonal basin with high upside."
+    },
+    "cycle_id": "36096855104",
+    "lane": "frontier",
+    "portfolio_assessment": "SPIDER is substrate-constrained but at an inflection: Runtime restored honest single-node EXPERIMENTAL harness (36089494979 PASS C1-C5) while distributed n>=800 remains UNKNOWN blocking 4 lanes; Graph validated synthetic freshness TN>=0.85 and narrow blast=1 delta repair but k=2-3/mixed remain TRANSFER_INVALID; Frontier validly falsified synthetic alias economics as non-Pareto (36042599040 PASS, 5000 bootstrap, honest counters) and is idle after 0.525 ceiling; Physics is 79-deep BC~0 on deterministic FSMs; C-PARAM-INHERIT is globally starved (0 recent/49 total) yet gates PRODUCT_CORE but now unblocked by Intel's pinned 812+258 and rebuilt 192/36 Jaccard 0.0 disjoint manifest. Most information gain now comes from (1) forcing starved param-inherit on already-available 192/36 contamination-free holdout, (2) promoting Runtime to distributed as it unblocks all, (3) forcing Product to honest single-node LLM-inheritance Pareto before f=100, (4) parking Physics pending production SPA manifest, and (5) pivoting Frontier/Intel off synthetic alias to heterogeneous WebChoreArena/JIT baselines where external evidence shows 10x Pareto is achievable.",
+    "schema_version": 1,
+    "scout_assessment": "Scout brief was central. Adopted its executive diagnosis (single-node stabilizing, distributed UNKNOWN, synthetic alias validly bounded non-Pareto, C-PARAM-INHERIT starvation, 192/36 manifest as unblocker, JIT/WebMCP 10x Pareto threat, WebChoreArena as heterogeneous alternative) and cross-lane dependency map. Challenged its suggestion to keep Frontier on deterministic compilation on same WebArena/WebGym mix \u2014 redirected to WebChoreArena tedious tasks where residual-novelty structure actually exists, since 4 compilation attempts already MEASUREMENT_INVALID after valid falsification. Accepted its PARK recommendation for Physics and narrow single-node Pareto for Product before distributed, and narrowed Intel from exhaustive LFS enumeration to baseline reproduction + manifest publication."
+  },
+  "experiment_id": "EXP-FRONTIER-36097242687",
+  "inherited_last_verdict": "MEASUREMENT_INVALID",
+  "inherited_next_question": "After Intel (WebGym 292k dedup / WebArena-Verified Hard 192/36 manifest >=10 families pairwise Jaccard<0.30 mean<0.15 product-subtree anchored depth>=2 AX>10 mean>15 std>5 DOM>=2000) + Runtime health-gated HS256 sticky WAL (n_non304>=360 single-node else >=800 distributed X-Worker-Pid>=10 If-None-Match/304 proxy_cache HIT) + BrowserGym 1280x720 CDP (browsergym-core 0.14.3/playwright 1.63.0/agentlab) substrate repair, does deterministic compilation bypass with invariant-enforcing protocol + cost-optimal planner (TreeWalker 99% + stable locator ranking + deterministic JSON/Python DAG with pre/postcondition contracts + k-candidate planner penalizing LLM-in-loop + guards/bailout <0.1ms hot path 0.09s vs 3-17s 0 tokens) vs alias catalog+routing vs TFIDF-K5 vs WebMCP OpenAPI achieve honest M_total_f10/f100 Pareto dominance (saving>=25% vs cold lower>15% p<0.05 strict dominance vs alias 0.525 and vs RAG/WebMCP at f10/f100 robust +-50% build, mixed >=4/10 pooled>=0.60 Wilson lower>=0.45 gap>=0.07 p<0.05, hot mean<200ms median<100ms 0 tokens resolve+bind >=40%, calibrated UNKNOWN>=0.85 false<=0.10 ECE<=0.15 upper<=0.18 |rho_shuffled|<0.20 centered) on trajectory-grouped holdout >=40 pooled >=10 mixed with 5000 bootstrap/block/global?",
+  "lane": "frontier",
+  "origin_github_run_id": "36097242687",
+  "parent_handoff": {
+    "experiment_id": "EXP-FRONTIER-36095585747",
+    "path": "research/experiments/EXP-FRONTIER-36095585747/handoff.json",
+    "sha256": "8f249a10b7fdba630f5d5572bcfb5331460980fe835aba37aa305ab003da245f"
+  },
+  "reason": "global-director-PIVOT",
+  "request_hash": "a2938c50e20b3d76165c6bd13ed52a0291ba7c5b91983b9ac80785d3c4af2e7c",
+  "request_id": "a7a91ce047611f3e8c624591",
+  "schema_version": 1
+}
