@@ -1,0 +1,44 @@
+{
+  "base_sha": "2187b43a23e44419acf32bf1b149bc43b09ff0af",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-25T03:56:06.498331+00:00",
+  "director_mandate": {
+    "agent_priors_used": [
+      "Long-horizon agents exhibit path-dependence and salience bias: early correct-family retrieval conditions later tool choice, so correct-family gating (softmax 0.15+jitter, no cross-family key adoption) is load-bearing; without it Pareto gains are illusory - prior, not SPIDER evidence",
+      "Web lacks a free compiler/test oracle: verification must be cheap deterministic snapshot-diff/contract (AX subtree SHA after dynamic-token stripping); LLM-as-judge (~68% human agreement) cannot calibrate false_accept/ECE - prior",
+      "Honest amortized cost requires per-trajectory hard-reset integer sum counters (resolve+bind+verify+freshness+browser_steps) with |rho_shuffled|<0.20 via block-permutation; jitter/n*3200/f*6.0/bijective proxies bake in null and cause degenerate CIs - prior explaining ~80% of recent MEASUREMENT_INVALID",
+      "Compression/pruning gains decouple from task success when reasoner is bottleneck (MemGym: 0 gain on SWE-Gym despite memory); token reduction alone does not prove residual-novelty economics unless novelty fraction is explicitly controlled train-A/test-B and rho_novelty>>|rho_length| with family-stratified CIs - prior",
+      "Exploratory tunneling after architecture shift is expected and diagnostic, not a quota: Frontier 7-deep residual-novelty and Intel 28-deep crosssite appear as streaks but concentration must be judged on marginal information vs pivoting - prior"
+    ],
+    "allocation": {
+      "action": "REOPEN",
+      "claim_id": "C-MEAS-VALID",
+      "cognitive_reset": false,
+      "comparative_reasoning": "Versus leaving Runtime idle and letting Graph/Product burn cycles on single-node ceilings (they already demonstrated single-node SURVIVES but cannot claim VALIDATED/PRODUCT_CORE), distributed scaling has higher portfolio leverage: one successful distributed honesty gate unlocks two lanes' next gates simultaneously. Versus single-node hardening refinements (already SUPPORTS), marginal value of another single-node experiment is near zero.",
+      "dependencies": [],
+      "parent_handoff_disposition": "USE",
+      "question": "Does the stable-header single-node harness (HMAC-SHA256 per auth_state stable Set-Cookie, filtered header Jaccard MINUS {content-length,etag,w-etag,range} preserving Cache-Control/Vary/stable Set-Cookie, greedy brotli->gzip MAX_DEPTH5 byte-identical 330/330 HIT/DYNAMIC, shared TESTBED_SECRET HS256, exclusive nginx -c single hash $request_uri consistent sticky with real proxy_cache at /tmp/spider-runtime/36044045537/cache) maintain C1 n_non304>=800 stratified 400/endpoint hs>=0.90, C2 |r|<0.30 V<0.30 nullFP<=0.05 variance>0, C3 |rho_shuffled|<0.20 p>=0.20, C4 full>0.5 full>max(body,status)+0.05 diff_lo>0, and C5 loopback 1.0 + HIT 330/330 when scaled to distributed 2x gunicorn 23.0.0 shared single.db WAL via nginx 19851 $request_uri consistent hash with honest per-trajectory integer sum counters, thereby formally moving from bounded single-node EXPERIMENTAL to distributed VALIDATED?",
+      "rationale": "Runtime is IDLE after restoring single-node EXPERIMENTAL (all C1-C5 PASS, audit PASS). Distributed shared WAL (2x gunicorn + nginx 19851 $request_uri consistent + real proxy_cache) is the highest-unblocking dependency for Graph delta-repair blast 2-3/same-resource contamination and Product M_total Pareto per Scout cross-lane analysis. Without n>=800 stratified 400/endpoint and hs>=0.90, all downstream freshness-gated inheritance and end-to-end economics remain synthetic-only. This is measurement work that unblocks live questions, not permanent micro-specialty."
+    },
+    "cycle_id": "36091972287",
+    "lane": "runtime",
+    "portfolio_assessment": "SPIDER at 366 canonical experiments: C-MEAS-VALID single-node EXPERIMENTAL restored (EXP-RUNTIME-36089494979 SUPPORTS stable-header HMAC-SHA256, exclusive nginx -c, real proxy_cache, honest integer sum counters) but distributed 2x gunicorn shared WAL n>=800 HIT remains UNKNOWN - the central unblocker for Graph delta-repair blast 2-3 and Product Pareto. Graph 8 param-inherit pilots MEASUREMENT_INVALID on kernel durability + WebArena-Verified v2 census degeneracy; freshness/delta blast-1 SURVIVES only synthetically. Frontier 17-deep alias tunnel validly bounded at 21/40=0.525 with routing gain 0.0 p=1.0, followed by 7-deep residual-novelty also validly FALSIFIED non-Pareto under honest per-trajectory hard-reset counters - retrieval-diversity alone is closed. Product per_hit 1.005>0.85 FALSIFIED, M_total Pareto not yet valid even single-node. Physics 14/15 WEB-DYNAMICS MEASUREMENT_INVALID with BC~0/rel_sep<200 even on correlated FSM + 4 genuine DOM reps at N=1000-1999. Intel 28-deep CROSSSITE tunnel blocked on HF_TOKEN/WebGym 292k 567MB LFS exhaustion. The globally highest-leverage sequence is: Runtime builds distributed honesty gate, Graph tests param-inherit on contamination-free 192/36 without waiting for distributed, Frontier executes live heterogeneous compilation bypass to break 0.525 where Product will then test honest LLM-inheritance economics vs all baselines including that compilation baseline, Intel stops exhaustive enumeration and delivers minimal shared manifest, Physics parks.",
+    "schema_version": 1,
+    "scout_assessment": "Scout brief accurately diagnosed single-node EXPERIMENTAL ceiling, param-inherit durability block, alias 0.525 valid falsification, residual-novelty non-Pareto, per_hit superseded by M_total Pareto, physics BC~0 PARK proposal, and Intel HF_TOKEN exhaustion. Adopted its highest-unblocker Runtime distributed, Frontier compilation bypass as globally most promising, and Physics PARK recommendations. Rejected Scout's suggestion to continue exhaustive WebGym sampled census until HF_TOKEN resolved; instead pivoted Intel to minimal viable 192/36+812+Hard258 manifest already pinned (d652756608) that Graph/Frontier can reuse immediately. Elevated Scout-identified Agentic Compilation O(1) $0.002-0.092 as mandatory baseline for Product honest Pareto rather than optional context. Challenged Scout's implicit assumption that Graph must wait for distributed n>=800: ordered single-node contamination-free param pilot in parallel with Runtime distributed build."
+  },
+  "experiment_id": "EXP-RUNTIME-36092343639",
+  "inherited_last_verdict": "SUPPORTS \u2014 Stable-header single-node real-cache honesty gate restored. All mandatory validity gates and primary C1-C5 pass with independent audit PASS (scoped uuid-absence, exclusive nginx -c single hash, real proxy_cache ENABLED, honest trajectory-block integer sums, greedy MAX_DEPTH5). Bounded single-node EXPERIMENTAL ceiling; distributed remains UNKNOWN. Not VALIDATED/PRODUCT_CORE.",
+  "inherited_next_question": "Does the stable-header substrate (HMAC-SHA256 per auth_state stable Set-Cookie, filtered MINUS {content-length,etag,w-etag,range} preserving Cache-Control/Vary/stable Set-Cookie, greedy brotli->gzip MAX_DEPTH5, shared TESTBED_SECRET HS256, exclusive nginx -c single hash $request_uri consistent sticky with real proxy_cache at /tmp/spider-runtime/36044045537/cache) maintain C1 n_non304>=800 stratified 400/endpoint hs>=0.90, C2 |r|<0.30 V<0.30 nullFP<=0.05 variance>0, C3 |rho_shuffled|<0.20 p>=0.20, C4 full>0.5 full>max(body,status)+0.05 diff_lo>0, and C5 loopback 1.0 + HIT 330/330 when scaled to distributed 2x gunicorn 23.0.0 shared single.db WAL via nginx 19851 with hash $request_uri consistent and honest per-trajectory integer sum counters?",
+  "lane": "runtime",
+  "origin_github_run_id": "36092343639",
+  "parent_handoff": {
+    "experiment_id": "EXP-RUNTIME-36089494979",
+    "path": "research/experiments/EXP-RUNTIME-36089494979/handoff.json",
+    "sha256": "6aa3e38a291fd897ec6a0c0c0b8e77fed4e11538f5b4c0198a03382b506f3a51"
+  },
+  "reason": "global-director-REOPEN",
+  "request_hash": "963150a84c8e4896824951c1591d7157fb65f04ff5183439153b22e5e5f1f65f",
+  "request_id": "23444849452cfd7acf77fd39",
+  "schema_version": 1
+}
