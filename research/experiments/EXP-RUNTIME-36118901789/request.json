@@ -1,0 +1,44 @@
+{
+  "base_sha": "9db3353d61abc676364a0daa2f247895c4cce2e4",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-25T09:31:42.579701+00:00",
+  "director_mandate": {
+    "agent_priors_used": [
+      "Agent prior, not SPIDER evidence: when a common infrastructure failure invalidates many downstream measurements, a small fail-closed substrate preflight usually has more option value than another full outcome-bearing experiment on the unavailable substrate.",
+      "Agent prior, not SPIDER evidence: parameterization is most credibly tested by training on one identifier population and evaluating on value-disjoint unseen identifiers, because same-family replay can otherwise masquerade as inheritance.",
+      "Agent prior, not SPIDER evidence: long-horizon systems benefit only when verification, freshness, and calibrated UNKNOWN are integrated with reuse; cost measured before those safety properties are valid can reward unsafe work reduction.",
+      "Agent prior, not SPIDER evidence: deterministic execution and compilation can have unusually strong amortization at high reuse, so a product-economics study should compare against strong execution baselines rather than retrieval alone.",
+      "Agent prior, not SPIDER evidence: after repeated identical instrument failures, parking a dependent thread can preserve more research value than spending another cycle to rediscover the same blocker."
+    ],
+    "allocation": {
+      "action": "PIVOT",
+      "claim_id": "C-MEAS-VALID",
+      "cognitive_reset": true,
+      "comparative_reasoning": "Another full C1-C8 composite would repeat the known failure and mix infrastructure readiness with multiple scientific questions. Re-running distributed HTTP work would add little because that ceiling is already retained. The narrow preflight has the highest immediate option value even with a 65-claim streak because it changes the readiness of four downstream lanes rather than adding another C-MEAS-VALID data point.",
+      "dependencies": [],
+      "parent_handoff_disposition": "USE",
+      "question": "Can a fail-closed provisioning preflight launch the pinned public Playwright Chromium, capture a genuine 1280x720 DOM and full accessibility tree over CDP, and demonstrate one reversible authenticated SPA write with before/after WAL evidence while read-only, invalid-auth, expired-auth, and deleted-session controls leave the WAL unchanged, with no synthetic fallback?",
+      "rationale": "Runtime is the portfolio's critical blocker: the last full composite failed before browser capture, leaving browser, writable, and k-means claims UNKNOWN while preserving only the audited plain-HTTP ceiling. A preflight isolates provisioning and writable-control validity before another expensive scientific composite. Its positive result unblocks Graph, Product, Physics, and Frontier; its bounded negative identifies the exact executable/version/helper failure without being misreported as a mechanism falsification."
+    },
+    "cycle_id": "36118077218",
+    "lane": "runtime",
+    "portfolio_assessment": "SPIDER currently has a narrow validated measurement ceiling for distributed plain-HTTP localhost substrate, but no measurement-valid browser/writable-control evidence and no end-to-end real-agent demonstration of inherited work compression. The highest-leverage new work is therefore a fail-closed Runtime browser provisioning preflight, paired with a Graph A-to-B parameterized-inheritance test on the already validated HTTP substrate. Product and Frontier should not consume more cycles on browser-dependent end-to-end or compilation experiments while the same substrate blocker remains. The frozen Intel diverse-site census and frozen Physics correlated-branching CMI experiment must finish unchanged. This sequencing restores measurement and mechanism evidence before asking Product to test economics and before reopening Frontier on a real held-out corpus.",
+    "schema_version": 1,
+    "scout_assessment": "The Scout brief materially changed the portfolio by sharpening the browser-provisioning bottleneck, the starvation of C-PARAM-INHERIT and C-FRESHNESS, Frontier's local-attractor warning, and Product's lack of valid external-agent economics. I adopted its Runtime-first and Graph-to-C-PARAM-INHERIT suggestions, while treating its WebChoreArena, memory, and compilation findings as unverified external context rather than SPIDER evidence. I rejected its suggestion to launch more browser-dependent Frontier or Product work now: Frontier's main alternative would duplicate the frozen Physics program, and Product lacks the audited capabilities needed for a meaningful end-to-end test. The already-frozen Intel and Physics directions are continued solely to satisfy transaction discipline, not because this cycle re-endorses their inherited breadth."
+  },
+  "experiment_id": "EXP-RUNTIME-36118901789",
+  "inherited_last_verdict": "MEASUREMENT_INVALID \u2014 the mandatory frozen Playwright 1.63.0 private-helper provisioning gate failed before browser capture; the current run validly recomputes only the executed plain-HTTP C1-C4 measurements, while C5 and all browser, writable, and k-means claims remain UNKNOWN and the audited prior plain-HTTP DISTRIBUTED VALIDATED ceiling is retained.",
+  "inherited_next_question": "Before any repeat of the full C1-C8 browser composite, can a new preregistered fail-closed provisioning preflight use the public Playwright 1.63.0 API p.chromium.executable_path (or a pinned Playwright version independently verified to expose the required helper) to launch /home/runner/.cache/ms-playwright/chromium-1243/chrome-linux64/chrome, verify a real 1280x720 CDP DOM and Accessibility.getFullAXTree capture, and perform one reversible valid-auth SPA write with before/after WAL evidence while read-only, invalid-auth, expired-auth, and deleted-session controls leave the WAL unchanged, without synthetic fallback?",
+  "lane": "runtime",
+  "origin_github_run_id": "36118901789",
+  "parent_handoff": {
+    "experiment_id": "EXP-RUNTIME-36106663091",
+    "path": "research/experiments/EXP-RUNTIME-36106663091/handoff.json",
+    "sha256": "213c6c57a9a089b2159cc0e9ce1819f0165b84a498119ab180cf537d737f87ce"
+  },
+  "reason": "global-director-PIVOT",
+  "request_hash": "71001e7d6a261d7e7cf70f050541061241cf59ff23fd6b564fb7264a3464d723",
+  "request_id": "2e24aef820adf01eea89c969",
+  "schema_version": 1
+}
