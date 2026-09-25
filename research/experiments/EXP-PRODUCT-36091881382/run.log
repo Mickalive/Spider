@@ -1,0 +1,13 @@
+[1/9] env audit
+[2/9] fixture staging + rebuild + frozen checks
+[3/9] MV3 kernel dot-regex spot-check
+[4/9] provision single-node substrate
+[5/9] probe loops (health gate n>=360 + correlated freshness)
+[6/9] PC1 / PC3
+[7/9] five-condition economics (bounded ceiling)
+[8/9] null controls + PC4 parity
+[9/9] browser health + attempts + stop substrate
+{
+ "elapsed_s": 12.4
+}
+DONE

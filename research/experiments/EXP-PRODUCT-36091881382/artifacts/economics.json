@@ -1,0 +1,336 @@
+{
+ "experiment_id": "EXP-PRODUCT-36091881382",
+ "conditions": {
+  "B-COLD": {
+   "key": "COLD",
+   "M_total_f10_tokens_mean": 5992.708333333333,
+   "M_total_f100_tokens_mean": 5992.708333333333,
+   "M_browser_calls_mean": 21.791666666666668,
+   "M_latency_ms_mean": 12203.333333333334,
+   "M_per_hit_mean": 550.0,
+   "resolve_rate": 0.0,
+   "fixed_amort_per_f": {
+    "f10": 0.0,
+    "f100": 0.0
+   },
+   "retrieval_tool_subtracted": 0.0
+  },
+  "B-INSTRUCTIONS": {
+   "key": "INST",
+   "M_total_f10_tokens_mean": 6101.666666666667,
+   "M_total_f100_tokens_mean": 6101.666666666667,
+   "M_browser_calls_mean": 21.791666666666668,
+   "M_latency_ms_mean": 12203.333333333334,
+   "M_per_hit_mean": 560.0,
+   "resolve_rate": 0.0,
+   "fixed_amort_per_f": {
+    "f10": 0.0,
+    "f100": 0.0
+   },
+   "retrieval_tool_subtracted": 0.0
+  },
+  "B-RAG-EMBED-TAU030-QCR-K5": {
+   "key": "RAG",
+   "M_total_f10_tokens_mean": 1315.1041666666667,
+   "M_total_f100_tokens_mean": 1315.1041666666667,
+   "M_browser_calls_mean": 10.895833333333334,
+   "M_latency_ms_mean": 2595,
+   "M_per_hit_mean": 103.92512435481186,
+   "resolve_rate": 0.234375,
+   "fixed_amort_per_f": {
+    "f10": 0.0,
+    "f100": 0.0
+   },
+   "retrieval_tool_subtracted": 200
+  },
+  "B-STAGEHAND-CACHE": {
+   "key": "STAGEHAND",
+   "M_total_f10_tokens_mean": 4719.270833333333,
+   "M_total_f100_tokens_mean": 4719.270833333333,
+   "M_browser_calls_mean": 19.244791666666668,
+   "M_latency_ms_mean": 9656.458333333334,
+   "M_per_hit_mean": 432.8125,
+   "resolve_rate": 0.234375,
+   "fixed_amort_per_f": {
+    "f10": 0.0,
+    "f100": 0.0
+   },
+   "retrieval_tool_subtracted": 0.0
+  },
+  "P-SPIDER-LLM-INHERIT": {
+   "key": "SPIDER",
+   "M_total_f10_tokens_mean": 1981.09375,
+   "M_total_f100_tokens_mean": 1891.09375,
+   "M_browser_calls_mean": 13.208333333333334,
+   "M_latency_ms_mean": 3992.890625,
+   "M_per_hit_mean": 168.55787586256338,
+   "resolve_rate": 1.0,
+   "fixed_amort_per_f": {
+    "f10": 100.0,
+    "f100": 10.0
+   },
+   "retrieval_tool_subtracted": 0.0
+  }
+ },
+ "f_levels": [
+  10,
+  100
+ ],
+ "disclosure": "honest per-trajectory-reset sum counters on rebuilt contamination-free holdout; bounded single-node ceiling, NOT claim economics for SURVIVES (BrowserGym/LLM gates blocked)",
+ "gaps": {
+  "saving_vs_COLD_f10": 0.6694159568920564,
+  "saving_vs_COLD_f100": 0.6844342082391796,
+  "ratio_vs_RAG_f10": 1.5064158415841584,
+  "ratio_vs_RAG_f100": 1.437980198019802,
+  "ratio_vs_INSTRUCTIONS_f10": 0.32468075662387325,
+  "ratio_vs_STAGEHAND_f10": 0.4197881028584042,
+  "browser_latency_saving_vs_COLD": 0.4940072375839585,
+  "resolve_margin_vs_COLD": 1.0,
+  "resolve_margin_vs_INST": 1.0,
+  "resolve_margin_vs_RAG": 0.765625,
+  "resolve_margin_vs_STAGEHAND": 0.765625,
+  "saving_vs_COLD_f10_CI95": [
+   0.6520424126542673,
+   0.687224057013732
+  ],
+  "ratio_vs_RAG_f10_CI95": [
+   1.479572104505246,
+   1.5306356174842528
+  ]
+ },
+ "rho_diagnostics": {
+  "rho_novelty_pooled": 0.7620215299096192,
+  "rho_novelty_CI95": [
+   0.6885563493002301,
+   0.8229741180088116
+  ],
+  "rho_length_pooled": -0.2871341837663058,
+  "per_family_rho_novelty": {
+   "family_00": {
+    "n": 6,
+    "rho_novelty": 0.9999999999999999
+   },
+   "family_01": {
+    "n": 6,
+    "rho_novelty": 0.9999999999999999
+   },
+   "family_02": {
+    "n": 6,
+    "rho_novelty": 1.0
+   },
+   "family_03": {
+    "n": 6,
+    "rho_novelty": 1.0000000000000002
+   },
+   "family_04": {
+    "n": 6,
+    "rho_novelty": 0.9999999999999999
+   },
+   "family_05": {
+    "n": 6,
+    "rho_novelty": 0.9999999999999999
+   },
+   "family_06": {
+    "n": 6,
+    "rho_novelty": 1.0
+   },
+   "family_07": {
+    "n": 6,
+    "rho_novelty": 1.0000000000000002
+   },
+   "family_08": {
+    "n": 6,
+    "rho_novelty": 0.9999999999999999
+   },
+   "family_09": {
+    "n": 6,
+    "rho_novelty": 0.9999999999999999
+   },
+   "family_10": {
+    "n": 6,
+    "rho_novelty": 1.0
+   },
+   "family_11": {
+    "n": 6,
+    "rho_novelty": 1.0000000000000002
+   },
+   "family_12": {
+    "n": 5,
+    "rho_novelty": 1.0
+   },
+   "family_13": {
+    "n": 5,
+    "rho_novelty": 1.0
+   },
+   "family_14": {
+    "n": 5,
+    "rho_novelty": 1.0000000000000002
+   },
+   "family_15": {
+    "n": 5,
+    "rho_novelty": 1.0
+   },
+   "family_16": {
+    "n": 5,
+    "rho_novelty": 1.0
+   },
+   "family_17": {
+    "n": 5,
+    "rho_novelty": 1.0
+   },
+   "family_18": {
+    "n": 5,
+    "rho_novelty": 1.0000000000000002
+   },
+   "family_19": {
+    "n": 5,
+    "rho_novelty": 1.0
+   },
+   "family_20": {
+    "n": 5,
+    "rho_novelty": 1.0
+   },
+   "family_21": {
+    "n": 5,
+    "rho_novelty": 1.0
+   },
+   "family_22": {
+    "n": 5,
+    "rho_novelty": 1.0000000000000002
+   },
+   "family_23": {
+    "n": 5,
+    "rho_novelty": 1.0
+   },
+   "family_24": {
+    "n": 5,
+    "rho_novelty": 1.0
+   },
+   "family_25": {
+    "n": 5,
+    "rho_novelty": 1.0
+   },
+   "family_26": {
+    "n": 5,
+    "rho_novelty": 1.0000000000000002
+   },
+   "family_27": {
+    "n": 5,
+    "rho_novelty": 1.0
+   },
+   "family_28": {
+    "n": 5,
+    "rho_novelty": 1.0
+   },
+   "family_29": {
+    "n": 5,
+    "rho_novelty": 1.0
+   },
+   "family_30": {
+    "n": 5,
+    "rho_novelty": 1.0000000000000002
+   },
+   "family_31": {
+    "n": 5,
+    "rho_novelty": 1.0
+   },
+   "family_32": {
+    "n": 5,
+    "rho_novelty": 1.0
+   },
+   "family_33": {
+    "n": 5,
+    "rho_novelty": 1.0
+   },
+   "family_34": {
+    "n": 5,
+    "rho_novelty": 1.0000000000000002
+   },
+   "family_35": {
+    "n": 5,
+    "rho_novelty": 1.0
+   }
+  },
+  "per_novelty_level": {
+   "0.0": {
+    "n": 45,
+    "realized_values_in_bin": [
+     0.0
+    ],
+    "rho_novelty": null,
+    "rho_novelty_null_reason": "n near-constant within novelty bin by construction",
+    "rho_length": -1.0,
+    "mean_per_hit": 74.31046731046732
+   },
+   "0.25": {
+    "n": 9,
+    "realized_values_in_bin": [
+     0.3333
+    ],
+    "rho_novelty": null,
+    "rho_novelty_null_reason": "n near-constant within novelty bin by construction",
+    "rho_length": -1.0000000000000002,
+    "mean_per_hit": 161.46079229412564
+   },
+   "0.5": {
+    "n": 42,
+    "realized_values_in_bin": [
+     0.5
+    ],
+    "rho_novelty": null,
+    "rho_novelty_null_reason": "n near-constant within novelty bin by construction",
+    "rho_length": -1.0,
+    "mean_per_hit": 165.67947264375834
+   },
+   "0.75": {
+    "n": 21,
+    "realized_values_in_bin": [
+     0.6667
+    ],
+    "rho_novelty": null,
+    "rho_novelty_null_reason": "n near-constant within novelty bin by construction",
+    "rho_length": -1.0,
+    "mean_per_hit": 247.68288589717162
+   },
+   "1.0": {
+    "n": 75,
+    "realized_values_in_bin": [
+     1.0
+    ],
+    "rho_novelty": null,
+    "rho_novelty_null_reason": "n near-constant within novelty bin by construction",
+    "rho_length": -0.3696912347221675,
+    "mean_per_hit": 229.76379176379177
+   }
+  },
+  "note": "bounded-ceiling diagnostics on honest file-proxy counters, not claim inference"
+ },
+ "per_hit_check": {
+  "0.0": {
+   "n": 45,
+   "realized_values_in_bin": [
+    0.0
+   ],
+   "mean_per_hit_tokens": 74.31046731046732,
+   "mean_per_hit_normalized_vs_COLD_step": 0.13510994056448603,
+   "ci95_normalized": [
+    0.13364888661530608,
+    0.13657099451366597
+   ],
+   "unit_note": "normalized = raw_tokens/550 (COLD per-step); secondary diagnostic"
+  },
+  "0.25": {
+   "n": 9,
+   "realized_values_in_bin": [
+    0.3333
+   ],
+   "mean_per_hit_tokens": 161.46079229412564,
+   "mean_per_hit_normalized_vs_COLD_step": 0.2935650768984102,
+   "ci95_normalized": [
+    0.2708004298871226,
+    0.3163297239096978
+   ],
+   "unit_note": "normalized = raw_tokens/550 (COLD per-step); secondary diagnostic"
+  }
+ }
+}

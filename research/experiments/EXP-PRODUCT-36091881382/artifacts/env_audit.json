@@ -1,0 +1,76 @@
+{
+ "experiment_id": "EXP-PRODUCT-36091881382",
+ "checked_at": "2026-09-25T04:00:12Z",
+ "pins": {
+  "gunicorn": "23.0.0",
+  "jwt": "2.14.0",
+  "flask": "3.1.3",
+  "numpy": "2.5.3",
+  "scipy": "1.18.1",
+  "sklearn": "MISSING: No module named 'sklearn'",
+  "pandas": "MISSING: No module named 'pandas'",
+  "playwright": "MISSING: No module named 'playwright'"
+ },
+ "pin_expectations": {
+  "gunicorn": "23.0.0",
+  "jwt": "2.14.0",
+  "playwright": "1.63.0"
+ },
+ "pins_pass": true,
+ "gunicorn": {
+  "cmd": "/opt/hostedtoolcache/Python/3.12.14/x64/bin/python -m gunicorn --version",
+  "exit": 0,
+  "stdout": "gunicorn (version 23.0.0)\n",
+  "stderr": ""
+ },
+ "nginx_version": {
+  "cmd": "nginx -v",
+  "exit": 0,
+  "stdout": "",
+  "stderr": "nginx version: nginx/1.24.0 (Ubuntu)\n"
+ },
+ "docker_version": {
+  "cmd": "docker --version",
+  "exit": 0,
+  "stdout": "Docker version 28.0.4, build b8034c0\n",
+  "stderr": ""
+ },
+ "python": "3.12.14 (main, Aug 13 2026, 02:47:42) [GCC 13.3.0]",
+ "openai_key_present": false,
+ "openai_key_note": "ABSENT",
+ "ghcr_login": {
+  "cmd": "docker login ghcr.io -u runner --password-stdin",
+  "exit": 1,
+  "stdout": "",
+  "stderr": "Error: Cannot perform an interactive login from a non TTY device\n"
+ },
+ "docker_pull_browsergym": {
+  "cmd": "docker pull ghcr.io/servicenow/browsergym:0.14.3",
+  "exit": 1,
+  "stdout": "",
+  "stderr": "Error response from daemon: Head \"https://ghcr.io/v2/servicenow/browsergym/manifests/0.14.3\": denied\n"
+ },
+ "docker_images": {
+  "cmd": "docker images",
+  "exit": 0,
+  "stdout": "REPOSITORY                                   TAG       IMAGE ID       CREATED       SIZE\nghcr.io/github/gh-aw-mcpg                    latest    8fd5ed88dce2   7 days ago    181MB\nghcr.io/github/gh-aw-firewall/agent          latest    dc9d80ee1508   8 days ago    565MB\nghcr.io/github/github-mcp-server             latest    09777492cb75   8 days ago    46.9MB\nghcr.io/dependabot/dependabot-updater-core   latest    8c87fce2da7e   8 days ago    828MB\nghcr.io/github/gh-aw-firewall/api-proxy      latest    008b8653cd89   10 days ago   209MB\nghcr.io/github/gh-aw-firewall/squid          latest    ebc9c9e5ccbd   6 weeks ago   43.1MB\n",
+  "stderr": ""
+ },
+ "browsergym_local_image": false,
+ "browsergym_core_error": "MISSING: No package metadata was found for browsergym-core",
+ "kernel_sha256_working_tree": "d926279d5ee14a044a2f13b8abc09202df9f5adb9e86feaadeb61818a15f4038",
+ "kernel_sha256_head": "8af66ccfb6f848e1f89805e90a1f52683ee28f62c9dd7b97f9d2762390e7b386",
+ "kernel_patch_durable_via_commit": false,
+ "git_head": {
+  "cmd": "git rev-parse HEAD",
+  "exit": 0,
+  "stdout": "92128dcfcc839d244f9e06608099e10f7e79a8eb\n",
+  "stderr": ""
+ },
+ "git_status": {
+  "cmd": "git status --porcelain",
+  "exit": 0,
+  "stdout": " M SPIDER_CODEX.md\n M codex/claim_state.json\n M codex/index.json\n M src/spider/kernel.py\n M tests/test_kernel.py\n?? codex/experiments/EXP-RUNTIME-36089494979/\n?? research/experiments/EXP-PRODUCT-36091881382/model_execute.json\n?? research/experiments/EXP-PRODUCT-36091881382/run.log\n?? research/experiments/EXP-PRODUCT-36091881382/run_experiment.py\n",
+  "stderr": ""
+ }
+}
