@@ -1,0 +1,255 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-FRONTIER-36091890748",
+  "lane": "frontier",
+  "status": "MEASUREMENT_INVALID",
+  "outcome": "NOT_APPLICABLE",
+  "metrics": {
+    "schema_version": 1,
+    "experiment_id": "EXP-FRONTIER-36091890748",
+    "lane": "frontier",
+    "live_available": false,
+    "browsergym_available": false,
+    "browsergym_core_available": false,
+    "playwright_available": false,
+    "agentlab_available": false,
+    "chromium_available": true,
+    "pypi_reachable": true,
+    "pypi_error": null,
+    "browsergym_core_installable": true,
+    "playwright_installable": true,
+    "intel_diverse_manifest_exists": false,
+    "intel_manifest_path": null,
+    "manifest_families": 0,
+    "manifest_jaccard_mean": null,
+    "manifest_jaccard_max": null,
+    "webgym_292k_exists": false,
+    "webarena_verified_exists": false,
+    "webarena_verified_hard_exists": false,
+    "runtime_wal_exists": false,
+    "runtime_wal_path": "/tmp/spider-runtime/shared.db",
+    "x_worker_pid": null,
+    "n_non304": null,
+    "if_none_match_304_handled": null,
+    "heterogeneity_adequate": false,
+    "coverage_adequate": false,
+    "substrate_adequate": false,
+    "pooled_tasks": 0,
+    "mixed_tasks": 0,
+    "treewalker_fidelity": null,
+    "locator_top1": null,
+    "guard_eval_ms": null,
+    "webmcp_fetch_rate": null,
+    "frozen_inputs_integrity": true,
+    "elapsed_seconds": 0.090153
+  },
+  "controls": {
+    "positive_controls": {
+      "PC-COMPILATION-PIPELINE": {
+        "status": "NOT_RUN",
+        "expected": "TreeWalker >=90% nodes retained fidelity (postcondition equality round-trip), locator top-1 >=95%, DAG codegen exec succeeds, SQLite INSERT OR IGNORE round-trip, invariant pre/postcondition contracts enforce ordering (precondition guard rejects shuffled tool order, postcondition fails on skipped step in N>=6 injections), cost-optimal k-candidate planner selects deterministic loop over LLM-in-loop variant (planner cost delta >0 verifies penalty), guard <5ms, bailout 100% on N>=6 injections, build ops counted instrumentation",
+        "observed": "No DOM to compress / no locator ranking / no DAG codegen without BrowserGym 1280x720 CDP capture and Intel manifest",
+        "pass": false,
+        "reason": "BrowserGym/CDP capture unavailable and manifest absent"
+      },
+      "PC-HONEST-COST-SANITY": {
+        "status": "NOT_RUN",
+        "expected": "Executed honest cost == sum(resolve+bind+verify+freshness+browser_steps+tokens+latency) per trajectory hard-reset diff==0, within-family std>0, not bijective with n*3200/f*6.0 proxies gap>0.35 |rho_proxy|<0.60",
+        "observed": "No trajectories captured -> no per-trajectory hard-reset sum counters to audit",
+        "pass": false,
+        "reason": "No trajectories captured"
+      },
+      "PC-ORTHOGONAL-HETEROGENEOUS-MANIFEST": {
+        "status": "FAIL",
+        "expected": "Intel manifest >=10 families pairwise bigram Jaccard<0.30 mean<0.15 product-subtree anchored depth>=2 1280x720 CDP AX>10 mean>15 std>5 DOM>=2000, raw N>=500 >=50/family, TRAIN-only vocab isolation 0 leakage, deterministic seed 42, trajectory-grouped holdout",
+        "observed": "manifest_families=0 <10; Jaccard mean/max null; no research/intel/diverse_site_manifest.json; no data/webgym_292k; no data/webarena_verified; no data/webarena_verified_hard",
+        "pass": false,
+        "reason": "manifest_families=0 <10, Jaccard null"
+      },
+      "PC-TRAIN-TEST-DISJOINT": {
+        "status": "NOT_RUN",
+        "expected": "0 test-B families in train-A catalog/index/compiled DAG/WebMCP registry; 0 forbidden reads via static harness inspection; trajectory-grouped holdout",
+        "observed": "No manifest and no trajectories -> no train-A/test-B split to verify",
+        "pass": false,
+        "reason": "No manifest and no trajectories"
+      },
+      "PC-CALIBRATION-DERIVED": {
+        "status": "NOT_RUN",
+        "expected": "Confidence derived solely from actual retrieval/compilation guard scores, std>0.05, imperfect accuracy 0.35-0.78, 5 adaptive bins, UNKNOWN>=0.85 false_accept<=0.10 ECE<=0.15 evaluable",
+        "observed": "No live data -> no confidence scores, no calibration strata",
+        "pass": false,
+        "reason": "No live data"
+      },
+      "PC-BROWSERGYM-SUBSTRATE": {
+        "status": "FAIL",
+        "expected": "BrowserGym 1280x720 CDP single-worker sticky, AX>10 validated >=80% tasks, DOM>=2000, Runtime X-Worker-Pid>=10 n_non304>=360 single-node else >=800 distributed, If-None-Match/ETag 304 handling; else diagnostic MEASUREMENT_INVALID",
+        "observed": "browsergym=False browsergym.core=False playwright=False agentlab=False; runtime_wal_exists=False (n_non304/X-Worker-Pid not measurable); chromium/google-chrome binaries present and PyPI reachable (browsergym-core 0.14.3, playwright 1.63.0 installable in principle)",
+        "pass": false,
+        "reason": "browsergym/playwright/agentlab absent, Runtime WAL absent, manifest absent"
+      },
+      "PC-WEBMCP-REGISTRY": {
+        "status": "NOT_RUN",
+        "expected": "Fetch OpenAPI spec covers task paths >=95% (spec fetch 200 JSON), HATEOAS links followed, routing normalization before!=after on >=20% pairs, invokeTool executable",
+        "observed": "No WebMCP registry built - depends on BrowserGym/CDP substrate and manifest",
+        "pass": false,
+        "reason": "No WebMCP registry - substrate missing"
+      },
+      "PC-FRESHNESS-GATED-BAILOUT": {
+        "status": "NOT_RUN",
+        "expected": "TN>=0.85 on stale-triggered bailout probes (freshness gate forces UNKNOWN on stale trajectories), trajectory-grouped 5000 bootstrap CI",
+        "observed": "No trajectories captured -> no freshness bailout to evaluate",
+        "pass": false,
+        "reason": "No trajectories captured"
+      }
+    },
+    "null_controls": {
+      "NC-EMPTY-COMPILE": {
+        "status": "NOT_RUN",
+        "expected": "Empty compilation registry (no compiled DAGs) N=6 -> 100% UNKNOWN fallback to cold LLM precision 1.0 no false accepts verifies compilation not hallucinating",
+        "observed": "No compilation pipeline to exercise empty-registry behavior",
+        "pass": false,
+        "reason": "No compilation pipeline"
+      },
+      "NC-WEBMCP-EMPTY": {
+        "status": "NOT_RUN",
+        "expected": "Empty WebMCP registry (no OpenAPI/HATEOAS) N=6 -> 100% UNKNOWN fallback precision 1.0",
+        "observed": "No WebMCP registry to exercise empty behavior",
+        "pass": false,
+        "reason": "No WebMCP registry"
+      },
+      "NC-NO-APPLICABLE-MIXED": {
+        "status": "NOT_RUN",
+        "expected": "On no-applicable stratum N=12 OOD mixed triple-channel intents with no covering family, every pipeline (alias, RAG, WebMCP, compilation with invariant protocol) UNKNOWN precision>=0.85 false_accept<=0.15 at UNKNOWN<0.80 with guard bailout, gated reduction >=0.20 vs ungated",
+        "observed": "No mixed triple-channel tasks available (mixed=0 <10)",
+        "pass": false,
+        "reason": "No mixed triple-channel tasks"
+      },
+      "NC-ORACLE-LEAK": {
+        "status": "NOT_RUN",
+        "expected": "0 forbidden-key reads (mixed triple expected values, novelty_fraction, length_label, expected_key_set, target_resource_id), trajectory-grouped preserved",
+        "observed": "No derived_context generated, no pipelines executed -> nothing to audit",
+        "pass": false,
+        "reason": "No live data to audit"
+      },
+      "NC-BIJECTIVE-COST": {
+        "status": "NOT_RUN",
+        "expected": "Executed honest cost not bijective with novelty proxy n*3200 / length f*6.0 / TAU count proxy: gap rho_novelty - |rho_shuffled|>0.35 and |rho| vs proxy <0.60 honest counters not formula",
+        "observed": "No honest counters executed",
+        "pass": false,
+        "reason": "No honest counters executed"
+      },
+      "NC-SHUFFLED-NULL": {
+        "status": "NOT_RUN",
+        "expected": "Global trajectory-grouped stratified permutation (unit=trajectory stratified by family 5000 perms) for shuffled novelty and shuffled length each |rho_shuffled|<0.20 p>=0.20 centered |mean|<0.05 std<0.15; primary S1/S2 p-values use separate 5000 family-block permutation (block=family)",
+        "observed": "No trajectories for permutation nulls",
+        "pass": false,
+        "reason": "No trajectories for permutation"
+      },
+      "NC-GUARD-SPECIFICITY": {
+        "status": "NOT_RUN",
+        "expected": "Random guard ablation (shuffled guard conditions + shuffled invariant contracts) N>=12 calibration shows guard precision drop >=30% and false_accept increase vs real guards proving discriminating not tautological applies to compilation invariant protocol and WebMCP tool bypass",
+        "observed": "No guard pipeline to ablate",
+        "pass": false,
+        "reason": "No guard pipeline"
+      },
+      "NC-PLANNER-COST-SENSITIVITY": {
+        "status": "NOT_RUN",
+        "expected": "LLM-in-loop penalty >0 verifying planner non-degenerate (cost-optimal k-candidate planner selects minimal amortized M_total among k deterministic candidates, LLM-in-loop candidates dominated)",
+        "observed": "No planner pipeline to test cost sensitivity",
+        "pass": false,
+        "reason": "No planner pipeline"
+      }
+    },
+    "baselines": {
+      "B-COLD-LLM": {
+        "status": "NOT_RUN",
+        "reason": "No trajectories - substrate missing (no manifest, no BrowserGym, no Runtime WAL)"
+      },
+      "B-ALIAS-CATALOG-ROUTING": {
+        "status": "NOT_RUN",
+        "reason": "No trajectories and synthetic TAU0.30 fixture forbidden as live evidence by frozen spec"
+      },
+      "B-FLAT-RAG-K5": {
+        "status": "NOT_RUN",
+        "reason": "No train-A corpus, no trajectories"
+      },
+      "B-WEBMCP-TOOL-BYPASS": {
+        "status": "NOT_RUN",
+        "reason": "No WebMCP registry - depends on BrowserGym/CDP and manifest"
+      },
+      "B-COMPILE-BYPASS": {
+        "status": "NOT_RUN",
+        "reason": "BrowserGym/CDP missing - primary compilation pipeline not executed"
+      },
+      "B-TERX-REPLAY": {
+        "status": "NOT_RUN",
+        "reason": "No trajectories - substrate missing"
+      }
+    },
+    "pc_all_pass": false,
+    "nc_all_pass": false,
+    "s1_pareto": false,
+    "s2_mixed_breakthrough": false,
+    "s3_latency_pareto": false,
+    "s4_calibration": false
+  },
+  "artifacts": [
+    {
+      "path": "artifacts/substrate_diagnostic.json",
+      "sha256": "782ac225fd64abdefdb297937b7f5dfa2e3ac57e5718ff77afc721ee158b9a60",
+      "role": "raw"
+    },
+    {
+      "path": "artifacts/compilation_pipeline_check.json",
+      "sha256": "1000988012728cf42218dc8f318a70962684722356d9ea8749e704aa9966df0b",
+      "role": "raw"
+    },
+    {
+      "path": "artifacts/per_trajectory_traces.json",
+      "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+      "role": "raw"
+    },
+    {
+      "path": "artifacts/honest_cost_audit.json",
+      "sha256": "ae9c50976326c6c805cde81b09f7ce64057756983425731dc0d5f3997c421cb8",
+      "role": "raw"
+    }
+  ],
+  "observations": [
+    "Frozen input integrity verified: request.json, spec.json, prereg.md hashes match freeze.json exactly",
+    "Parent handoff EXP-FRONTIER-36089506922 hash verified (sha256: 493473f8a687d197cdf25dee54f6b34ba3d70171ffa47cbd4f82a9506823a2b0)",
+    "BrowserGym/CDP stack unavailable: browsergym=False browsergym.core=False playwright=False agentlab=False",
+    "System chromium binaries present and PyPI reachable (browsergym-core 0.14.3, playwright 1.63.0 installable in principle)",
+    "Intel diverse-site manifest absent: no research/intel/diverse_site_manifest.json, no data/webgym_292k, no data/webarena_verified, no data/webarena_verified_hard",
+    "Manifest families=0 (<10 required), Jaccard mean/max=null, heterogeneity_adequate=false",
+    "Runtime WAL absent at /tmp/spider-runtime/shared.db (runtime_wal_exists=false)",
+    "No trajectories captured -> pooled_tasks=0 (<40 required), mixed_tasks=0 (<10 required), coverage_adequate=false",
+    "All 7 positive controls NOT_RUN (6) or FAIL (1: PC-ORTHOGONAL-HETEROGENEOUS-MANIFEST, PC-BROWSERGYM-SUBSTRATE)",
+    "All 8 null controls NOT_RUN (substrate dependent)",
+    "All 6 baselines NOT_RUN (substrate dependent)",
+    "Synthetic TAU0.30 fixtures from EXP-FRONTIER-36042599040 present but explicitly forbidden as live evidence per frozen spec (measurement_validity[0])",
+    "Prior valid bounded negatives preserved: EXP-FRONTIER-36042599040 (audit PASS, all 11 PCs/NCs PASS) honest residual-novelty economics FALSIFIED-IN-SETTING on synthetic 36-family TAU0.30 gate (rho 0.4837 CI[0.4102,0.5523] <0.60, ECE 0.216 >0.15, RAG dominance false); EXP-FRONTIER-36052053591 alias ceiling 21/40=0.525 with routing gain 0.0; EXP-FRONTIER-36089506922 substrate diagnostic only, compilation/WebMCP shootout UNTESTED on live heterogeneous gate",
+    "Agent priors from director_mandate.agent_priors_used (path dependence 0.525 plateau, planning horizon error, amortization ceiling, JIT-Compiler 59%->25%, DOM TreeWalker 99% pruning, O(MxN) crisis, Chrome WebMCP shipping, etc.) are labeled general priors not SPIDER evidence, cannot satisfy S1-S4"
+  ],
+  "validity_notes": [
+    "MEASUREMENT_INVALID due to substrate inadequacy per frozen decision_rule: BrowserGym/CDP unavailable, Intel manifest <10 families, Runtime WAL absent, pooled<40, mixed<10",
+    "This is an infrastructure/substrate failure, NOT a scientific falsification of C-RESIDUAL-NOVELTY",
+    "Frozen spec explicitly mandates: 'If BrowserGym/CDP or Intel diverse manifest unavailable or n_non304 stratified insufficient, declare live_available=false and MEASUREMENT_INVALID diagnostic (0.035s-style) without falsifying claim — do not substitute synthetic disjoint alphabets (36-family TAU0.30 fixture) as live evidence'",
+    "No outcome-bearing measurements were run; all controls/baselines correctly recorded as NOT_RUN or FAIL with reasons",
+    "Prior valid bounded negatives on synthetic gates (EXP-FRONTIER-36042599040, EXP-FRONTIER-36052053591) are preserved and not superseded by this diagnostic",
+    "The compilation bypass shootout (B-COMPILE-BYPASS with invariant protocol + cost-optimal planner vs WebMCP tool bypass vs alias/RAG) remains UNTESTED on live heterogeneous mixed triple-channel gate",
+    "Substrate repair required per required_fixes before any valid test of S1-S4 can occur",
+    "Honest per-trajectory hard-reset sum counters (resolve+bind+verify+freshness+browser_steps+tokens+latency) and trajectory-grouped 5000 bootstrap/block-permutation/global-permutation cannot be computed without live trajectories",
+    "No representation loss to disclose for live data since no live data was captured; synthetic TAU0.30 representation loss (disjoint alphabets, Jaccard 0.0 not natural 0.30-0.60 overlap) disclosed in parent handoff do_not_assume"
+  ],
+  "unresolved": [
+    "Whether deterministic compilation bypass achieves honest M_total_f10/f100 Pareto dominance vs cold LLM and vs alias catalog+routing and vs TF-IDF RAG k5 and vs WebMCP tool bypass on live heterogeneous mixed triple-channel tasks with trajectory-grouped CIs (saving>=25% vs cold lower>15% p<0.05 strict dominance at f10/f100 robust +-50% build) — untested, requires Intel+Runtime repair",
+    "Whether compilation breaks alias 21/40=0.525 ceiling via mixed triple-channel >=4/10 success on mixed subset with pooled coverage>=0.60 Wilson lower>=0.45 gap>=0.07 p<0.05 vs alias 0.525 and vs WebMCP pooled — untested, requires >=10 mixed tasks trajectory-grouped exact binomial with 5000 family-stratified bootstrap + 5000 block-permutation",
+    "Whether hot-path guard-pass 0 tokens <200ms mean <100ms median vs LLM median >=3000ms Pareto holds with honest per-trajectory hard-reset counters and resolve+bind reduction >=40% vs alias — untested, requires BrowserGym 1280x720 CDP timing and TreeWalker 99% fidelity locator top-1>=95% guard <5ms WebMCP fetch >=95%",
+    "Whether calibration achieves UNKNOWN precision>=0.85 false_accept<=0.10 ECE<=0.15 upper<=0.18 and global/block |rho_shuffled|<0.20 p>=0.20 centered |mean|<0.05 std<0.15 gap rho - |rho_shuffled|>0.35 with guard specificity drop>=30% on real DOM/AX heterogeneity (5000 family-stratified bootstrap + block-permutation + global permutation) — untested",
+    "Whether WebMCP Fetch/OpenAPI+HATEOAS+routing normalization+invokeTool achieves competitive Pareto vs compilation or whether DOM compilation has higher leverage (Chrome WebMCP shipping competition) — untested on live heterogeneous gate",
+    "Whether per-type CV stability <=0.5, null centering |rho_shuffled|<0.20, and guard precision hold at >=10-family live scale under trajectory-grouped permutation and TRAIN-only vocab isolation (AX>10 mean>15 std>5 DOM>=2000)",
+    "Whether larger Intel manifest (>=50 eTLD+1 families WebGym 292k dedup or WebArena-Verified v2 192/36 50+ eTLD+1) or richer representations (visual/computed-style, accessibility tree >10 nodes) would reveal different economics if compilation fails at 10-family scale",
+    "Whether Runtime single-worker sticky health-gated n_non304>=360 single-node else >=800 stratified with X-Worker-Pid>=10 If-None-Match/304 handling and honest per-trajectory hard-reset sum counters can pass before distributed f=100 authorization per portfolio_assessment"
+  ]
+}

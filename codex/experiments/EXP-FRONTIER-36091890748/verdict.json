@@ -1,0 +1,34 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-FRONTIER-36091890748",
+  "lane": "frontier",
+  "decision": "MEASUREMENT_INVALID",
+  "claim_updates": [
+    {
+      "claim_id": "C-RESIDUAL-NOVELTY",
+      "status": "HYPOTHESIS",
+      "reason": "MEASUREMENT_INVALID diagnostic with audit PASS: live_available=false browsergym_available=false browsergym_core_available=false playwright_available=false agentlab_available=false intel_diverse_manifest_exists=false manifest_families=0 pooled_tasks=0 mixed_tasks=0 heterogeneity_adequate=false coverage_adequate=false substrate_adequate=false runtime_wal_exists=false elapsed_seconds 0.090153 diagnostic path. All 7 PCs correctly NOT_RUN (5) or FAIL (PC-ORTHOGONAL-HETEROGENEOUS-MANIFEST 0/10, PC-BROWSERGYM-SUBSTRATE) and all 8 NCs NOT_RUN and all 6 baselines NOT_RUN per result.json:controls pc_all_pass=false nc_all_pass=false. Audit recomputed via importlib/filesystem probes verifies exact match and frozen input integrity (request 5c1ba853..., spec 93a21e54..., prereg 4a6e55ac..., parent handoff 493473f8...) with no post-freeze tampering. No outcome-bearing measurements run; per_trajectory_traces.json empty, honest per-trajectory hard-reset sum counters and 5000 family-stratified bootstrap + 5000 block-permutation + 5000 global permutation unevaluated. Synthetic TAU0.30 36-family fixture correctly not substituted per frozen validity. No evidence for or against deterministic compilation bypass with invariant protocol + cost-optimal planner vs alias/RAG/WebMCP on live heterogeneous gate. Prior ceilings preserved: alias 21/40=0.525 pooled 0/10 mixed (EXP-FRONTIER-36052053591 lineage) and synthetic non-Pareto rho 0.4837 CI[0.4102,0.5523] ECE 0.216 RAG dominance false (EXP-FRONTIER-36042599040 audit PASS all 11 PCs/NCs). C-RESIDUAL-NOVELTY remains HYPOTHESIS."
+    }
+  ],
+  "product_action": "none",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "After Intel (WebGym 292k dedup / WebArena-Verified Hard 192/36 manifest >=10 families pairwise Jaccard<0.30 mean<0.15 product-subtree anchored depth>=2 AX>10 mean>15 std>5 DOM>=2000) + Runtime health-gated HS256 sticky WAL (n_non304>=360 single-node else >=800 distributed X-Worker-Pid>=10 If-None-Match/304 proxy_cache HIT) + BrowserGym 1280x720 CDP (browsergym-core 0.14.3/playwright 1.63.0/agentlab) substrate repair, does deterministic compilation bypass with invariant-enforcing protocol + cost-optimal planner (TreeWalker 99% + stable locator ranking + deterministic JSON/Python DAG with pre/postcondition contracts + k-candidate planner penalizing LLM-in-loop + guards/bailout <0.1ms hot path 0.09s vs 3-17s 0 tokens) vs alias catalog+routing vs TFIDF-K5 vs WebMCP OpenAPI achieve honest M_total_f10/f100 Pareto dominance (saving>=25% vs cold lower>15% p<0.05 strict dominance vs alias 0.525 and vs RAG/WebMCP at f10/f100 robust +-50% build, mixed >=4/10 pooled>=0.60 Wilson lower>=0.45 gap>=0.07 p<0.05, hot mean<200ms median<100ms 0 tokens resolve+bind >=40%, calibrated UNKNOWN>=0.85 false<=0.10 ECE<=0.15 upper<=0.18 |rho_shuffled|<0.20 centered) on trajectory-grouped holdout >=40 pooled >=10 mixed with 5000 bootstrap/block/global?",
+  "reason": "Audit PASS confirms MEASUREMENT_INVALID is correctly diagnosed infrastructure failure not scientific falsification: BrowserGym/CDP stack absent (importlib None for browsergym/browsergym.core/playwright/agentlab), Intel manifest 0/10 families Jaccard null, Runtime WAL absent at /tmp/spider-runtime/shared.db, pooled 0/40 mixed 0/10, 2 PCs FAIL 6 PCs NOT_RUN 8 NCs NOT_RUN 6 baselines NOT_RUN, synthetic fixture correctly preserved as bounded negative not live substitute. Frozen decision_rule requires all PCs/NCs PASS + substrate_adequate for SURVIVES/FALSIFIES; with substrate_adequate=false the experiment cannot support or falsify C-RESIDUAL-NOVELTY. Prior valid bounded negatives remain authoritative: 17-deep alias ceiling 21/40=0.525 Wilson [0.352,0.648] 0/10 mixed routing gain 0.0 p=1.0 and honest synthetic non-Pareto rho 0.4837 ECE 0.216 under QCR all 11 PCs/NCs PASS (EXP-FRONTIER-36042599040). No product promotion authorized. Frontier must pause immediate chaining and await Global Research Director scheduled pulse after Intel+Runtime health gates PASS; retrying identical compilation/WebMCP shootout without substrate reinstall would repeat MEASUREMENT_INVALID.",
+  "evidence_refs": [
+    "research/experiments/EXP-FRONTIER-36091890748/request.json sha256 5c1ba8534794b0408bbc857e31558065dbb54639ec426c41a2578483b5c7d669",
+    "research/experiments/EXP-FRONTIER-36091890748/spec.json sha256 93a21e5489509649886b32d59cd592dab8082e4a5cc9a0b4049cb10f544d42a5",
+    "research/experiments/EXP-FRONTIER-36091890748/prereg.md sha256 4a6e55acd262d1b4f0abaebda8593c638fbabc8317f5097de3a67e727b366224",
+    "research/experiments/EXP-FRONTIER-36091890748/freeze.json sha256 c8a665f81c6f926838bd4b6af1aa59fa3aac044af6b4d06b71c69fb8ac53e6e0",
+    "research/experiments/EXP-FRONTIER-36091890748/result.json sha256 55202dccfd4e33e1a539352157744bab7e8a3eeba1f37aa60e684228a9257b04 status MEASUREMENT_INVALID outcome NOT_APPLICABLE live_available false pooled 0 mixed 0",
+    "research/experiments/EXP-FRONTIER-36091890748/audit.json sha256 PASS producer_claim_supported false claim_ceiling C-RESIDUAL-NOVELTY remains HYPOTHESIS required_fixes Intel/Runtime/BrowserGym",
+    "research/experiments/EXP-FRONTIER-36091890748/artifacts/substrate_diagnostic.json sha256 782ac225fd64abdefdb297937b7f5dfa2e3ac57e5718ff77afc721ee158b9a60",
+    "research/experiments/EXP-FRONTIER-36091890748/artifacts/per_trajectory_traces.json sha256 37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570 empty []",
+    "research/experiments/EXP-FRONTIER-36091890748/artifacts/honest_cost_audit.json sha256 ae9c50976326c6c805cde81b09f7ce64057756983425731dc0d5f3997c421cb8 trajectories_audited 0",
+    "research/experiments/EXP-FRONTIER-36091890748/provenance.json sha256 bf5924b4dd292e569c96a14abbbefdb8b8e1fcda97f8aca4cda6ba179ff1e955 frozen_inputs_integrity true",
+    "research/experiments/EXP-FRONTIER-36089506922/handoff.json sha256 493473f8a687d197cdf25dee54f6b34ba3d70171ffa47cbd4f82a9506823a2b0 parent_handoff verified",
+    "research/experiments/EXP-FRONTIER-36042599040/audit.json audit PASS all 11 PCs/NCs PASS rho 0.4837 CI[0.4102,0.5523] ECE 0.216 RAG dominance false bounded non-Pareto preserved",
+    "codex/claim_state.json C-RESIDUAL-NOVELTY HYPOTHESIS across frontier no VALIDATED",
+    "codex/index.json canonical experiment packet index no promotion"
+  ]
+}

@@ -1,0 +1,156 @@
+{
+ "experiment_id": "EXP-INTEL-36092351694",
+ "created_at": "2026-09-25T04:28:44+00:00",
+ "github_run_id": "36092351694",
+ "pre_execute_sha": "945bc8aa36acbe05200aee7678ece1c80d065e8e",
+ "request_hash": "fcf7dece9a67fdf1e07a95700efad1f26d5fa0ddd40eb5d3047935c13ea1e8ad",
+ "spec_hash": "0f3b76d724808181f508159a8db7c48303be73ef9b75c03d7f347414eeeb6939",
+ "prereg_hash": "c1ef0ef8c3c468ed053edcfbfc6f28b8d2a5ecd0215f726f7433212780eec9b5",
+ "freeze_hash": "d7bca43d6c462a149e3a633e3206a10d437b296f4ce97a6bfe3fcb7c8cb62487",
+ "environment": {
+  "experiment_id": "EXP-INTEL-36092351694",
+  "pip_freeze_sha256": "33a250f50791526fc7a8ca7fb2007dd4f6c4376346113565de3ec75150a52cf6",
+  "pip_freeze_lines": 263,
+  "pip_freeze_nonempty": true,
+  "playwright_version": "Version 1.63.0",
+  "viewport": "1280x720",
+  "browsergym_core": "0.14.3",
+  "agentlab": "0.4.2",
+  "playwright": "1.63.0",
+  "versions_match": true
+ },
+ "grammar": {
+  "path": "research/intel/grammar_fulltree_358885.py",
+  "sha256": "273eafbcb817e8981f843581a724594665cabdd357b318c701251929ee9c83de"
+ },
+ "artifacts": [
+  {
+   "path": "research/experiments/EXP-INTEL-36092351694/artifacts/raw/github_cross_source_attempts.json",
+   "sha256": "e94e915d87fa7625a84c7cd95bb846601fce5f44accfe8812e429ab0733717c6",
+   "role": "raw"
+  },
+  {
+   "path": "research/experiments/EXP-INTEL-36092351694/artifacts/raw/ghcr_browsergym_attempts.json",
+   "sha256": "ceb4335329f9232cce60cad601fcd93eeaa92604e4acafbbe57b42e8d8b48e51",
+   "role": "raw"
+  },
+  {
+   "path": "research/experiments/EXP-INTEL-36092351694/artifacts/raw/docker_hub_api_attempts.json",
+   "sha256": "d4b5033045ac690d185a4ce1fabf0985f06fe47e8a54787d2c60a5f9496cf83f",
+   "role": "raw"
+  },
+  {
+   "path": "research/experiments/EXP-INTEL-36092351694/artifacts/raw/hf_webgym_manifest_attempts.json",
+   "sha256": "5db4dbcb5819477c568024f40e111e0294fcdfc98a567b9f9cdd78c18f76dd15",
+   "role": "raw"
+  },
+  {
+   "path": "research/experiments/EXP-INTEL-36092351694/artifacts/raw/hf_webarena_attempts.json",
+   "sha256": "44ef9578ff92084eeeacf50b39a08ffef2c3cfcd2374d3df8d854fac9ec3a533",
+   "role": "raw"
+  },
+  {
+   "path": "research/experiments/EXP-INTEL-36092351694/artifacts/raw/pip_freeze.txt",
+   "sha256": "33a250f50791526fc7a8ca7fb2007dd4f6c4376346113565de3ec75150a52cf6",
+   "role": "raw"
+  },
+  {
+   "path": "research/experiments/EXP-INTEL-36092351694/artifacts/raw/environment_pin.json",
+   "sha256": "101fd3b713c8630950f7e181864836f39d2fadfbe01a2929caecae1abda4d7c9",
+   "role": "raw"
+  },
+  {
+   "path": "research/experiments/EXP-INTEL-36092351694/artifacts/raw/grammar_hash.json",
+   "sha256": "667b86cd6cfad59a630b1dea418f7fc0a1a18ec8de5e8f665c255c7fe0ca5103",
+   "role": "raw"
+  },
+  {
+   "path": "research/experiments/EXP-INTEL-36092351694/artifacts/raw/tldextract_pin.json",
+   "sha256": "18e138561ec5e8a21e110834f47e98949157fdc055d277da2754d19a6d58b653",
+   "role": "raw"
+  },
+  {
+   "path": "research/experiments/EXP-INTEL-36092351694/artifacts/raw/ax_captures.jsonl",
+   "sha256": "685226cc5af849e61c9fa34f1625ab281588cd62d6b33e98d0c96ce2bec91d5c",
+   "role": "raw"
+  },
+  {
+   "path": "research/experiments/EXP-INTEL-36092351694/artifacts/raw/ax_captures_consistency_fresh.jsonl",
+   "sha256": "9e1eb10e6338bc478c5c088642740eb6dd842aff4e00dce6220bc29cf0eea21a",
+   "role": "raw"
+  },
+  {
+   "path": "research/experiments/EXP-INTEL-36092351694/artifacts/raw/container_orchestration.json",
+   "sha256": "16924c27c0e2b68ba87c5d5b461585f959a52597eb8faf1d3d2c9f69c0ee9593",
+   "role": "raw"
+  },
+  {
+   "path": "research/experiments/EXP-INTEL-36092351694/artifacts/raw/container_health.json",
+   "sha256": "1c106d227a771a24fc97fffcdc2ba989c6e7a9825dcab71ae8a483e3bfe19e39",
+   "role": "raw"
+  },
+  {
+   "path": "research/experiments/EXP-INTEL-36092351694/artifacts/derived/webarena_census.json",
+   "sha256": "9ddb9d9b1795124d5b6d02fbcc878f12a02446f7b9c7ca7c77762b26f72d74b6",
+   "role": "derived"
+  },
+  {
+   "path": "research/experiments/EXP-INTEL-36092351694/artifacts/derived/webgym_sampled_census.json",
+   "sha256": "ee8da1e0b91f72113695b5b7c5d8ad7a28025f1be24affdbced9e1d821bd242c",
+   "role": "derived"
+  },
+  {
+   "path": "research/experiments/EXP-INTEL-36092351694/artifacts/derived/synthetic_192_36_census.json",
+   "sha256": "dfc6036af02c0a0fb5900624028db16b6ec3736c1749a0ec1f9dadecacfe409b",
+   "role": "derived"
+  },
+  {
+   "path": "research/experiments/EXP-INTEL-36092351694/artifacts/derived/hard258_census.json",
+   "sha256": "03ea1349774636f5d2a31e24426a1c68b4d85b34071edc2c0e2118609b58f64f",
+   "role": "derived"
+  },
+  {
+   "path": "research/experiments/EXP-INTEL-36092351694/artifacts/derived/deterministic_family_samples.json",
+   "sha256": "7e8cc7ef01044f60b42e14045b1e75a62eff60bf0013b3636d112e6d881f7b73",
+   "role": "derived"
+  },
+  {
+   "path": "research/experiments/EXP-INTEL-36092351694/artifacts/derived/family_anchoring.json",
+   "sha256": "49fae90f92a21ce9cde0c3b6eba228badbee72176ded17cc578133ea53a9cafe",
+   "role": "derived"
+  },
+  {
+   "path": "research/experiments/EXP-INTEL-36092351694/artifacts/derived/ax_analysis.json",
+   "sha256": "ab2db129279a86d8221b975cd3aa885a75e73f4476c13243baf4a87448148a8a",
+   "role": "derived"
+  },
+  {
+   "path": "research/experiments/EXP-INTEL-36092351694/artifacts/derived/ax_consistency_fulltree.json",
+   "sha256": "bae6c34577fc4463a73d57b88c3c4cbafe66f89256f72501fbcff028f5e82f9f",
+   "role": "derived"
+  },
+  {
+   "path": "research/experiments/EXP-INTEL-36092351694/artifacts/derived/shared_minimal_manifest.json",
+   "sha256": "b19d6f4a3173a1ff02a1a4f483b2f39fdd9b51a64269423215807adf54df6132",
+   "role": "derived"
+  },
+  {
+   "path": "research/experiments/EXP-INTEL-36092351694/artifacts/derived/pc_c_param_prevalence.json",
+   "sha256": "79d7d8ecdac52264207524530dfa5a37b487124ce2aa39b7aad0bbd1276a2703",
+   "role": "derived"
+  },
+  {
+   "path": "research/experiments/EXP-INTEL-36092351694/artifacts/derived/webgym_threshold_sweep.json",
+   "sha256": "684c489a2a7a220e1f0e28a18c46e18a6101ab6d4f90d22cd84cd834a421558f",
+   "role": "derived"
+  },
+  {
+   "path": "research/experiments/EXP-INTEL-36092351694/artifacts/derived/vacuous_single_store.json",
+   "sha256": "c4264f685843b15961ad6209fadcd2f5af2fcc3fe2469c535bff28da496f80d1",
+   "role": "derived"
+  }
+ ],
+ "commands": [
+  "/opt/hostedtoolcache/Python/3.12.14/x64/bin/python research/intel/exp_36092351694_execute.py"
+ ]
+}
