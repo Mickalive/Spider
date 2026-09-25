@@ -1,0 +1,47 @@
+{
+  "base_sha": "9bf5f7209608e07f97d5ed96e696965c36db5860",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-25T05:55:11.326178+00:00",
+  "director_mandate": {
+    "agent_priors_used": [
+      "Compilation (JIT code IR + pre/post invariants + cost-optimal planner) dominates retrieval-only memory for repetitive browsing: per-step LLM loop cannot beat planning+parallel scheduling even with perfect RAG (Browser-Use+cache 1.5x vs JIT 10.4x) \u2014 prior distinguished from SPIDER evidence which bounds alias-catalog at 0.525 non-Pareto",
+      "Long-horizon web agents exhibit strong path dependence; without per-trajectory hard reset, reuse metrics are inflated (|rho_shuffled|<0.20 controls required to falsify synthetic economics) \u2014 prior distinguished from SPIDER's measured jitter/n*3200/f*6.0 degeneracies",
+      "Measurement traps recur: degenerate CIs [1.0,1.0] at ceiling, header variance 0.0 trivial orthogonality, constant-response hash PMI=0, SHA instability from dynamic tokens \u2014 prior explains repeated header-only Jaccard and PMI BC~0 failures, distinct from SPIDER's observed gate failures",
+      "Exploration vs exploitation: residual-novelty economics only testable where compressible structure exists; synthetic orthogonal families maximize traceability but minimize real transfer \u2014 prior justifies pivot from synthetic Jaccard 0.0 to WebChoreArena where human 50.2 vs GPT-5 48.3 gap indicates structure, distinct from SPIDER's valid falsification at rho0.48"
+    ],
+    "allocation": {
+      "action": "PIVOT",
+      "claim_id": "C-RESIDUAL-NOVELTY",
+      "cognitive_reset": true,
+      "comparative_reasoning": "Versus single decisive JIT-compilation bakeoff on Hard tasks (invariant-enforcing protocol + planner): that bakeoff is valuable but presupposes residual-novelty economics holds; testing novelty economics first decides whether compilation planning is worth optimizing at all. Versus continuing synthetic alias with TAU0.30 tuning: that thread is closed by exact falsification\u2014opportunity cost is missing the heterogeneous signal where external JIT shows 10.4x leverage. Versus parking Frontier entirely: PARK would waste IDLE reactivation opportunity while heterogeneous manifest (192/36 + Hard258) is now available. Heterogeneous residual-novelty has highest upside and directly supersedes synthetic alias ceiling.",
+      "dependencies": [
+        "intel: WebChoreArena 532 + Hard258 + 192/36 shared manifest trajectory-grouped",
+        "runtime: health-gated HS256 sticky If-None-Match/304 per-trajectory hard-reset counters",
+        "graph: freshness TN>=0.85 gated verification"
+      ],
+      "parent_handoff_disposition": "USE",
+      "question": "On WebChoreArena 532 tedious/memory heterogeneous tasks (massive-memory/cross-site/long-horizon where human 50.2% vs GPT-5 48.3% gap shows compressible structure) plus WebArena-Verified Hard 192/36 Jaccard<0.30 disjoint L=8-14 holdout (1280x720 CDP AX>10 mean>15 std>5 DOM>=2000, deterministic random.Random(35725763380)), does honest residual-novelty verification economics with per-trajectory hard-reset integer sum counters (resolve+bind+verify+freshness+browser_steps no jitter/n*3200/f*6.0, |rho_shuffled|<0.20 centered |mean|<0.05 std<0.15, 5000 family-stratified bootstrap +5000 block-permutation+5000 global permutation, real TF-IDF TAU0.30 over train-A, controlled novelty 0/25/50/75/100% train-A/test-B trajectory-grouped holdout, calibrated UNKNOWN precision>=0.85 false_accept<=0.10 ECE<=0.15 upper<=0.18) demonstrate rho_novelty>=0.60 lower>0.40 p<0.05 vs pooled |rho_length|<0.20 upper<0.25 and Pareto M_total_f10 saving>=25% vs cold strict dominance vs RAG k5 at f10/f100 (+-50% build sensitivity), testing pay-novelty-not-length where synthetic 36-family rho0.48 was validly falsified non-Pareto?",
+      "rationale": "Frontier is IDLE with tunnel_flag true (8/10 dominant RESIDUAL-NOVELTY) and valid falsification on synthetic 36-family orthogonal Jaccard 0.0 (36042599040 rho0.4837 CI[0.410,0.552] <0.60 non-Pareto) followed by 4 consecutive MEASUREMENT_INVALID JIT-bypass attempts bounded at 21/40=0.525. Continuing alias/routing permutations has routing gain 0.0 p=1.0 and over-matching audit findings\u201419th permutation cannot change decision. Pivoting the same pay-novelty-not-length hypothesis to heterogeneous real tasks where compressible structure exists (WebChoreArena tedious/memory where WebArena saturates) is a genuinely orthogonal basin with falsifiable Pareto gate; if rho>=0.60 emerges there it directly justifies product work-compression, if not it closes residual-novelty more broadly without synthetic bias."
+    },
+    "cycle_id": "36100194801",
+    "lane": "frontier",
+    "portfolio_assessment": "SPIDER at 374 canonical (60 recent) is substrate-rich/claim-poor: only C-MEAS-VALID narrow DISTRIBUTED plain-HTTP localhost VALIDATED (36094450333) plus C-FRESHNESS synthetic SURVIVES (35947468747) and C-DELTA-REPAIR blast-radius=1 SURVIVES (35952148696) remain bounded to stdlib http.server flat-JSON. All central product claims remain HYPOTHESIS or MEASUREMENT_INVALID after 60+ tunnel iterations: C-PARAM-INHERIT starved 0 recent/49 total with 8 consecutive MI kernel durability failures, C-RESIDUAL-NOVELTY validly falsified non-Pareto rho0.4837<0.60 on 36-family orthogonal (36042599040 PASS all 11 PCs), C-LLM-INHERIT 3 recent MI, C-PRODUCT-ECON per_hit falsified 1.005>0.85 and 12 consecutive M_total Pareto MI, C-SEMANTIC-RESOLVE 0/10 mixed, C-WEB-DYNAMICS 79 exp HYPOTHESIS with 14 consecutive MI even after exact Gamma-ratio, C-CROSSSITE MIXED with WebGym 292k diverse UNAVAILABLE. Global bottleneck is measurement honesty (health-gated HS256 sticky WAL n>=800 If-None-Match/304, per-trajectory hard-reset sum counters |rho_shuffled|<0.20 trajectory-grouped) and durable heterogeneous manifest scale (812+Hard258+192/36 Jaccard<0.30), not another alias/routing/Jaccard>=0.6 permutation where routing gain 0.0 p=1.0 and pooled 21/40=0.525 ceiling bounded. Highest marginal information is closing Runtime distributed substrate to unblock Graph delta-repair k>1 and Product economics, pivoting Frontier/Intel from synthetic alias to heterogeneous real tasks/baselines where compressible structure or competitive O(1) compilation ($0.002-0.092) actually exists.",
+    "schema_version": 1,
+    "scout_assessment": "Scout brief adopted as primary diagnostic but challenged as advice not authority: validated its substrate-rich/claim-poor diagnosis, tunnel flags (Frontier 8/10 RESIDUAL-NOVELTY, Intel 29 streak CROSSSITE, Physics 14 MI WEDY), and cross-lane dependency graph (Runtime gating Graph/Product/Physics, Intel manifest gating Graph/Frontier). Challenged its breadth: verified Scout's candidate directions against Codex claim_state and lane charters rather than accepting blindly. Result: accepted Scout's health-gated single-node before distributed (n>=360 before n>=800) sequencing, WebChoreArena heterogeneous pivot where synthetic validly falsified, and minimal-viable-manifest PARK for WebGym diverse pending HF_TOKEN; superseded Scout's suggestion to continue Frontier deterministic JIT on synthetic and Intel exhaustive AX_consistency sweeps, directing Intel instead to blind external baseline reproduction that Scout identified as competitive differentiator (Agent JIT 10.4x)."
+  },
+  "experiment_id": "EXP-FRONTIER-36100559236",
+  "inherited_last_verdict": "MEASUREMENT_INVALID",
+  "inherited_next_question": "After Intel (WebChoreArena 532 tedious/memory + WebArena-Verified Hard 192/36 >=10 families pairwise Jaccard<0.30 mean<0.15 AX>10 DOM>=2000) + Runtime health-gated HS256 sticky WAL (n_non304>=360 single-node else >=800 distributed X-Worker-Pid>=10 If-None-Match/304 proxy_cache HIT) + BrowserGym 1280x720 CDP (browsergym-core 0.14.3/playwright 1.63.0/agentlab 0.4.2) + Graph freshness TN>=0.85 substrate repair, does SPIDER residual-novelty verification economics with honest per-trajectory hard-reset TAU0.30+freshness-gated counters demonstrate rho_novelty>=0.60 lower>0.40 p<0.05 decoupled |rho_length|<0.20 calibrated UNKNOWN precision>=0.85 ECE<=0.15 and Pareto saving>=25% vs cold strict vs RAG k5 at f10/f100 on WebChoreArena heterogeneous trajectory-grouped holdout >=40 pooled >=10 mixed with 5000 bootstrap/block/global?",
+  "lane": "frontier",
+  "origin_github_run_id": "36100559236",
+  "parent_handoff": {
+    "experiment_id": "EXP-FRONTIER-36099072254",
+    "path": "research/experiments/EXP-FRONTIER-36099072254/handoff.json",
+    "sha256": "ef479f0688ce9d207ce3a207cda6f52683ec845e3182286c33c37d4ff5c686b7"
+  },
+  "reason": "global-director-PIVOT",
+  "request_hash": "914130076cb5d3e2c2000a4a688f770783c416f88b8515bce36e3e138f8ab7e0",
+  "request_id": "d4f20e60f491efbb3af3297a",
+  "schema_version": 1
+}
