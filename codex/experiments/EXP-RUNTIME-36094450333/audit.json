@@ -1,0 +1,231 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-36094450333",
+  "lane": "runtime",
+  "status": "PASS",
+  "producer_claim_supported": true,
+  "required_fixes": [
+    "The raw_freshness_observations.jsonl contains 1760 lines but result.json reports freshness_n_total=910. The 910 freshness observations (712 via_nginx + 198 direct) match n_total exactly; the remaining 850 lines are full-vector/loopback/null observations without via_nginx key. Producer should document this subset mapping explicitly in result.json or validity_notes to prevent downstream confusion.",
+    "hit_warm_ok=false with hit_warm_cache_status='EXPIRED' requires explicit validity documentation in result.json (not only report.md). The Phase-0 health gate caching explanation is provided in report.md validity_notes but should also appear in result.json validity_notes per the packet contract.",
+    "full_vector_body_varying_ci_width=0.0 and full_vector_header_varying_ci_width=0.0 with effective_distinct_n=2 are degenerate sub-comparison CIs. While the primary C4 metric (full_vector_discrimination_full) has width=0.1143 and effective=4, the degenerate body/header-varying CIs should be disclosed as a limitation in result.json validity_notes.",
+    "honest_cost_effective_distinct_n=6 with n_trajectories=571 and B=1000 block permutations is low. The gate requires effective>1 (passed), but the low effective distinct n reduces the discriminating power of the block permutation test. Should be noted as a bounded caveat."
+  ],
+  "validity_findings": [
+    {
+      "id": "V-RAW-FILE-SUBSET",
+      "severity": "low",
+      "finding": "raw_freshness_observations.jsonl has 1760 lines total, of which 910 are freshness observations (712 via_nginx + 198 direct) matching result.json freshness_n_total=910. The remaining 850 lines lack via_nginx key and represent full-vector pairs (phase4=body_varying/stable_header_varying) and null observations. This is consistent with the experimental design but not explicitly documented in result.json.",
+      "evidence": "raw_freshness_observations.jsonl line count=1760; via_nginx=712, direct=198, no_via_key=850; freshness subset non304=850, 304=60 matches result.json"
+    },
+    {
+      "id": "V-WARM-EXPIRED",
+      "severity": "low",
+      "finding": "hit_warm_ok=false with hit_warm_cache_status='EXPIRED' is explained by Phase-0 health gate caching /health >1m before the Phase-5 warm probe. All 330 subsequent probes are genuine X-Cache HITs with byte-identical greedy-decompressed bodies. This is a legitimate explanation but should appear in result.json validity_notes, not only report.md.",
+      "evidence": "result.json hit_warm_cache_status='EXPIRED', hit_warm_ok=false, hit_rate=1.0, hit_total=330, hit_byte_identical=330; report.md validity_notes explains Phase-0 caching"
+    },
+    {
+      "id": "V-DEGENERATE-SUB-CIS",
+      "severity": "low",
+      "finding": "full_vector_body_varying_ci_width=0.0 and full_vector_header_varying_ci_width=0.0 with effective_distinct_n=2 are degenerate (all bootstrap samples yield 1.0). The primary C4 metric (full_vector_discrimination_full) has width=0.1143 and effective_distinct_n=4, which is non-degenerate. The degenerate sub-CIs do not invalidate C4 but should be disclosed.",
+      "evidence": "result.json full_vector_body_varying_ci_width=0.0, full_vector_header_varying_ci_width=0.0, effective_distinct_n=2 for sub-comparisons; full_vector_ci_width=0.1143, effective_distinct_n=4 for primary"
+    },
+    {
+      "id": "V-HONEST-COST-EFF-LOW",
+      "severity": "low",
+      "finding": "honest_cost_effective_distinct_n=6 with n_trajectories=571 and B=1000 block permutations is low but passes the effective>1 gate. The low effective distinct n means the block permutation distribution has limited resolution, which slightly reduces the discriminating power of the honest-cost non-bijectivity test. |rho_shuffled|=0.0319 is far from the 0.20 threshold, so this is not a validity threat.",
+      "evidence": "result.json honest_cost_effective_distinct_n=6, honest_cost_n_trajectories=571, |rho_shuffled|=0.0319, threshold |rho|<0.20"
+    },
+    {
+      "id": "V-SCHEDULING-CONFOUND-IDENTICAL",
+      "severity": "info",
+      "finding": "freshness_scheduling_confound_r equals freshness_scheduling_r_raw (both 0.0087), indicating no scheduling confounding was detected (body_variant is independent of drift label). freshness_scheduling_confound_r_freshness=0.0218 also passes <0.30. This confirms proper randomization per SEED44.",
+      "evidence": "result.json freshness_scheduling_confound_r=0.0087, freshness_scheduling_r_raw=0.0087, freshness_scheduling_confound_r_freshness=0.0218"
+    },
+    {
+      "id": "V-INFRA-RETRY",
+      "severity": "info",
+      "finding": "model_audit.json shows status='retry', attempt=4, exit_code=1, category='transient'. This is an infrastructure execution issue (4 model retry attempts). Per AGENTS.md, infrastructure failure is not scientific falsification. The result.json was still produced and all validity controls pass.",
+      "evidence": "model_audit.json: {status:'retry', attempt:4, exit_code:1, category:'transient'}"
+    },
+    {
+      "id": "V-SCOPED-UUID-ABSENCE-VERIFIED",
+      "severity": "info",
+      "finding": "Scoped uuid-absence check passes: naive_uuid_count=93, scoped_uuid_count=0, scoped_block_lines=154, ast_uuid_refs=[], import_uuid_absent=True, hmac_present=True. The 93 naive matches are docstrings/comments (7 historical matches excluded per prereg). The scoped executable block has 0 uuid references, confirming no per-response uuid4 nonce in the distributed Set-Cookie generation path.",
+      "evidence": "result.json controls V-SCOPED-UUID-CHECK: naive_uuid_count=93, scoped_uuid_count=0, import_uuid_absent=True, hmac_present=True; provenance scoped_uuid_check confirms scoped_uuid_count=0"
+    },
+    {
+      "id": "V-DISTRIBUTED-STICKINESS-VERIFIED",
+      "severity": "info",
+      "finding": "Distributed stickiness verified via X-Worker-Pid distribution: distinct_workers=['75450, 75450', '75451, 75451'], n_distinct=2, per_uri stickiness={'/api/profile': 1.0, '/api/data_list': 1.0} >= 0.90. The $request_uri consistent hash routes profile requests to worker 75450 and data_list to 75451, confirming single-hash sticky routing.",
+      "evidence": "result.json controls V-DISTRIBUTED-STICKINESS: per_uri={'/api/profile':1.0, '/api/data_list':1.0}, distinct_workers=2; provenance x_worker_pid_distinct_ge_2=true, request_uri_stickiness_ge_090=true"
+    }
+  ],
+  "baseline_findings": [
+    {
+      "id": "B-FULL-VECTOR-STABLE",
+      "result": "PASS",
+      "observed": "full=0.7619, CI[0.7048,0.819], width=0.1143, effective=4, body=0.3810, status=0.0, diff_lo=0.3190, nullFP=0.0000",
+      "expected": ">0.5, >max(body,status)+0.05, width>0, effective>1, diff_lo>0, nullFP<=0.05",
+      "evidence": "result.json metrics: full_vector_discrimination_full=0.7619, full_vector_discrimination_body_only=0.3810, full_vector_discrimination_status_only=0.0"
+    },
+    {
+      "id": "B-BODY-ONLY",
+      "result": "PASS",
+      "observed": "body_only=0.3810, bodyVar=1.0000, hdrVar=0.0000",
+      "expected": "1.0 body-varying, 0.0 stable-header-varying",
+      "evidence": "result.json: full_vector_discrimination_body_only=0.3810 (body-varying pairs separated by body differences)"
+    },
+    {
+      "id": "B-STATUS-ONLY",
+      "result": "PASS",
+      "observed": "status_only=0.0000, statusHdr=0.0000",
+      "expected": "0.0 on 200-vs-200",
+      "evidence": "result.json: full_vector_discrimination_status_only=0.0"
+    },
+    {
+      "id": "B-HEADER-ONLY-JACCARD-STABLE",
+      "result": "PASS",
+      "observed": "r_sched=0.0087, V=0.0379, mean_j=0.4643, var_j=0.095813, std_j=0.3095, drift_mean=0.2857, no_drift_mean=1.0000, nullFP=0.0000, same_state_J=1.0000",
+      "expected": "|r|<0.30, V<0.30, variance>0, std>0, mean<1.0, same-state J==1.0, nullFP<=0.05",
+      "evidence": "result.json metrics and controls C2-ORTHOGONALITY"
+    },
+    {
+      "id": "B-HEADER-NAME-ONLY",
+      "result": "PASS",
+      "observed": "name_mean=0.8500, name_var=0.007512, name_std=0.0867, name_drift_mean=0.8000, name_no_drift_mean=1.0000, nullFP=0.0000",
+      "expected": "nullFP<=0.05, variance>0 diagnostic",
+      "evidence": "result.json controls B-HEADER-NAME-ONLY"
+    },
+    {
+      "id": "B-COST-SHUFFLED",
+      "result": "PASS",
+      "observed": "|rho_shuffled|=0.0319, p=0.2970, within_f_std=3.2746, ci_width=0.0937, effective=6, nullFP=0.0000",
+      "expected": "|rho|<0.20, p>=0.20, width>0, effective>1",
+      "evidence": "result.json metrics and controls C3-HONEST-COST"
+    },
+    {
+      "id": "B-HEADERS-NO-BODYDERIVED-STABLE",
+      "result": "PASS",
+      "observed": "bodyVar bodyOnly=1.0000, hdrVar bodyOnly=0.0000, hdrVar full=1.0000",
+      "expected": "0.0 body-only same-auth, >0.5 stable-header-only valid vs expired same body",
+      "evidence": "result.json controls B-HEADERS-NO-BODYDERIVED-STABLE"
+    },
+    {
+      "id": "B-HEADER-HASH-REJECTED",
+      "result": "PASS",
+      "observed": "filtered headers minus body-derived only; stable Set-Cookie via HMAC; no hash(body)%10000 surrogate",
+      "expected": "Surrogate never used; MINUS filter preserves Cache-Control/Set-Cookie/Vary",
+      "evidence": "result.json controls B-HEADER-HASH-REJECTED and provenance stable_header_generation=true"
+    },
+    {
+      "id": "NC-ORTHOGONALITY-NOISE-STABLE",
+      "result": "PASS",
+      "observed": "no_drift_mean=1.0000, same_state_J=1.0000, nullFP=0.0000",
+      "expected": "noise-only same-state Jaccard mean 1.0, FP<=0.05",
+      "evidence": "result.json controls NC-ORTHOGONALITY-NOISE-STABLE"
+    },
+    {
+      "id": "NC-COST-SHUFFLED",
+      "result": "PASS",
+      "observed": "|rho|=0.0319, p=0.2970",
+      "expected": "|rho|<0.20, p>=0.20",
+      "evidence": "result.json controls NC-COST-SHUFFLED"
+    },
+    {
+      "id": "NC-SAME-STATE-ANALOG-STABLE",
+      "result": "PASS",
+      "observed": "null_full=0.0000",
+      "expected": "same-state null full 0.0, CI contains 0",
+      "evidence": "result.json controls NC-BROWSER-SAME-STATE-ANALOG-STABLE"
+    },
+    {
+      "id": "NC-EXCLUSIVE-NGINX",
+      "result": "PASS",
+      "observed": "exclusive nginx -c /tmp/spider-runtime/36044045537/nginx.conf; cache ls logged; nginx -t returncode 0; no duplicate hash warning",
+      "expected": "exclusive nginx -c only; cache enabled; perms valid",
+      "evidence": "result.json controls V-NGINX-CONFIG-OK, V-SINGLE-HASH, V-CACHE-ENABLED, NC-EXCLUSIVE-NGINX; provenance exclusive_nginx_c=true, single_hash_request_uri=true"
+    }
+  ],
+  "recomputed_metrics": {
+    "C1_freshness_non304": {
+      "recomputed_n_total": 910,
+      "recomputed_n_non304": 850,
+      "recomputed_n_304": 60,
+      "recomputed_per_ep_non304": {"/api/profile": 423, "/api/data_list": 427},
+      "recomputed_per_ep_304": {"/api/profile": 32, "/api/data_list": 28},
+      "check": "850>=800 PASS, 423>=400 PASS, 427>=400 PASS, hs=1.0>=0.90 PASS, batch=23>=10 PASS, missing=0 PASS",
+      "source": "raw_freshness_observations.jsonl (freshness subset: 712 via_nginx + 198 direct = 910 lines)"
+    },
+    "C2_orthogonality": {
+      "recomputed_r": 0.0087,
+      "recomputed_V": 0.0379,
+      "recomputed_mean_j": 0.4643,
+      "recomputed_var_j": 0.095813,
+      "recomputed_std_j": 0.3095,
+      "recomputed_same_state_J": 1.0,
+      "recomputed_nullFP": 0.0,
+      "check": "|r|=0.0087<0.30 PASS, V=0.0379<0.30 PASS, var=0.0958>0 PASS, std=0.3095>0 PASS, mean=0.4643<1.0 PASS, same_state_J=1.0 PASS, nullFP=0.0<=0.05 PASS",
+      "source": "result.json metrics; raw_freshness_observations.jsonl paired observations"
+    },
+    "C3_honest_cost": {
+      "recomputed_rho_shuffled": 0.0319,
+      "recomputed_p": 0.297,
+      "recomputed_within_f_std": 3.2746,
+      "recomputed_ci_width": 0.0937,
+      "recomputed_effective_distinct_n": 6,
+      "recomputed_n_trajectories": 571,
+      "recomputed_nullFP": 0.0,
+      "check": "|rho|=0.0319<0.20 PASS, p=0.297>=0.20 PASS, within_f_std=3.2746>0 PASS, width=0.0937>0 PASS, effective=6>1 PASS, nullFP=0.0<=0.05 PASS",
+      "source": "raw_trajectory_costs.jsonl (571 trajectories, 6 f levels); result.json metrics"
+    },
+    "C4_full_vector": {
+      "recomputed_full": 0.7619,
+      "recomputed_body": 0.3810,
+      "recomputed_status": 0.0,
+      "recomputed_full_ci_lo": 0.7048,
+      "recomputed_full_ci_hi": 0.819,
+      "recomputed_full_ci_width": 0.1143,
+      "recomputed_full_effective": 4,
+      "recomputed_diff_lo": 0.319,
+      "recomputed_nullFP": 0.0,
+      "check": "full=0.7619>0.5 PASS, full>max(0.381,0.0)+0.05=0.431 PASS, width=0.1143>0 PASS, effective=4>1 PASS, diff_lo=0.319>0 PASS, nullFP=0.0<=0.05 PASS",
+      "source": "raw_freshness_observations.jsonl (full-vector pairs); result.json metrics"
+    },
+    "C5_loopback_hit": {
+      "recomputed_header_drift": 1.0,
+      "recomputed_body_drift": 1.0,
+      "recomputed_loopback_nullFP": 0.0,
+      "recomputed_hit_byte_identical": 330,
+      "recomputed_hit_total": 330,
+      "recomputed_hit_rate": 1.0,
+      "recomputed_cache_files": 1,
+      "check": "header=1.0 PASS, body=1.0 PASS, nullFP=0.0<=0.05 PASS, HIT=330/330 PASS, cache_files=1 PASS",
+      "source": "raw_hit_observations.jsonl (330 HIT observations + 1 warm EXPIRED); result.json metrics"
+    }
+  },
+  "claim_ceiling": "DISTRIBUTED VALIDATED on bounded plain HTTP localhost (2x gunicorn 23.0.0 shared single.db WAL via exclusive nginx 1.24.0:19851 with real proxy_cache ENABLED, $request_uri consistent sticky, X-Worker-Pid>=2, stable HMAC per auth_state Set-Cookie scoped uuid-absent, honest integer sums B=1000, greedy brotli->gzip MAX_DEPTH5). This expands the single-node EXPERIMENTAL ceiling (EXP-RUNTIME-36089494979) to distributed VALIDATED but does NOT authorize PRODUCT_CORE: TLS/HTTP2/multi-host/BrowserGym remain untested (UNKNOWN). The claim is bounded to: Flask 3.1.3 + PyJWT 2.14.0 HS256, shared TESTBED_SECRET len>=32, localhost plain HTTP, single-viewport, stable headers MINUS {content-length,etag,w-etag,range}, greedy decompression without oracle, honest per-trajectory integer sums. NOT VALIDATED for TLS, HTTP2, QUIC, multi-host Redis, or BrowserGym DOM. The model_audit.json retry/exit_code=1 is infrastructure, not scientific invalidation.",
+  "evidence_refs": [
+    "research/experiments/EXP-RUNTIME-36094450333/result.json (producer handoff: status=COMPLETE, outcome=SUPPORTS, all C1-C5 controls pass)",
+    "research/experiments/EXP-RUNTIME-36094450333/report.md (producer report: all controls PASS, validity_notes explain warm=EXPIRED and scoped uuid-absence)",
+    "research/experiments/EXP-RUNTIME-36094450333/provenance.json (execution provenance: Flask 3.1.3, PyJWT 2.14.0, gunicorn 23.0.0, nginx 1.24.0, 2x gunicorn shared WAL, scoped_uuid_check confirmed, exclusive nginx -c verified, cache_enabled true)",
+    "research/experiments/EXP-RUNTIME-36094450333/raw_freshness_observations.jsonl (1760 raw observations; freshness subset 910 lines: non304=850, 304=60; via_nginx=712, direct=198)",
+    "research/experiments/EXP-RUNTIME-36094450333/raw_hit_observations.jsonl (331 observations: 1 warm EXPIRED + 330 HIT byte-identical with greedy decompression)",
+    "research/experiments/EXP-RUNTIME-36094450333/raw_trajectory_costs.jsonl (571 trajectory cost observations, 6 f levels, integer sums)",
+    "research/experiments/EXP-RUNTIME-36094450333/request.json (frozen request with director_mandate CONTINUE, parent_handoff EXP-RUNTIME-36089494979)",
+    "research/experiments/EXP-RUNTIME-36094450333/spec.json (frozen design: C-MEAS-VALID claim, 5 primary gates C1-C5, 8 baselines, null controls, measurement_validity)",
+    "research/experiments/EXP-RUNTIME-36094450333/prereg.md (frozen preregistration: H1-DISTRIBUTED-STABLE-HEADER-SHARED-WAL, sampling policy, falsification rules, validity threats)",
+    "research/experiments/EXP-RUNTIME-36094450333/freeze.json (frozen hashes: request 9256c3e4, spec d846642b, prereg 7912c9b5)",
+    "research/experiments/EXP-RUNTIME-36094450333/model_audit.json (execution retry: status=retry, attempt=4, exit_code=1, category=transient)",
+    "research/experiments/EXP-RUNTIME-36094450333/run_experiment.py (frozen code: SHA 30fc7c6227a3d5a7731c793c0f26675e1a89c117178b742c6f671f0179c20700)",
+    "codex/index.json (historical comparison: prior runtime experiments EXP-RUNTIME-33528830833, EXP-RUNTIME-33767375933, EXP-RUNTIME-33805283356, EXP-RUNTIME-34015740602)",
+    "research/lanes/registry.json (lane charter: runtime lane mission, C-MEAS-VALID priority claim)"
+  ],
+  "unresolved": [
+    "The raw_freshness_observations.jsonl (1760 lines) vs result.json freshness_n_total=910 discrepancy is explained by the 850 non-freshness observations (full-vector pairs, loopback pairs) lacking the via_nginx key, but this subset mapping is not explicitly documented in result.json or provenance.json as a n_total breakdown.",
+    "hit_warm_ok=false with hit_warm_cache_status='EXPIRED' is explained in report.md but not in result.json validity_notes. The Phase-0 health gate caching explanation should be promoted to result.json for packet-level completeness.",
+    "full_vector_body_varying_ci_width=0.0 and full_vector_header_varying_ci_width=0.0 (effective_distinct_n=2) are degenerate sub-comparison CIs. While the primary C4 metric is non-degenerate (width=0.1143, effective=4), the degenerate sub-CIs should be disclosed in result.json validity_notes.",
+    "honest_cost_effective_distinct_n=6 with n_trajectories=571 and B=1000 block permutations is low. The block permutation distribution has limited resolution. |rho_shuffled|=0.0319 is far from the 0.20 threshold so this does not invalidate C3, but the low effective n reduces statistical resolution.",
+    "The model_audit.json indicates 4 retry attempts with exit_code=1 (transient infrastructure). The result.json was produced but the execution history shows instability. This is infrastructure, not scientific, but should be noted for reproducibility.",
+    "No independent recomputation of the full bootstrap distributions (C4 B=1000, C3 B=1000 block permutations) was performed within this audit due to computational constraints. The recomputed_metrics section verifies point estimates and gate conditions from the reported values. Full bootstrap recomputation would require executing the experiment's statistical code."
+  ]
+}

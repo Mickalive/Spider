@@ -1,0 +1,196 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-36089494979",
+  "lane": "runtime",
+  "status": "PASS",
+  "producer_claim_supported": true,
+  "required_fixes": [],
+  "validity_findings": [
+    {
+      "id": "V-SCOPED-UUID-CHECK",
+      "severity": "pass",
+      "finding": "Scoped uuid-absence passes: naive_uuid_count=96 (docstrings/comments), scoped_uuid_count=0, ast_uuid_refs=[], import_uuid_absent=True, hmac_present=True over create_app block (154 lines). Verified via run_experiment.py:_scoped_uuid_check stripping triple-quoted strings and # comments before grep. Past false-positive (EXP-RUNTIME-36084499865 naive 7 docstring matches) correctly excluded per prereg section 11. Recomputed from run_experiment.py matches provenance.json scoped_uuid_check.",
+      "evidence": "research/experiments/EXP-RUNTIME-36089494979/run_experiment.py:_scoped_uuid_check; research/experiments/EXP-RUNTIME-36089494979/provenance.json:scoped_uuid_check; research/experiments/EXP-RUNTIME-36089494979/result.json:controls.V-SCOPED-UUID-CHECK"
+    },
+    {
+      "id": "V-NGINX-SINGLE-HASH-EXCLUSIVE-CACHE",
+      "severity": "pass",
+      "finding": "Exclusive nginx -c verified: nginx -t rc=0 syntax ok, single hash $request_uri consistent count=1, location / fix present, proxy_pass without trailing slash, add_header X-Worker-Pid always, proxy_set_header Host $host, $request_uri sticky. proxy_cache_path /tmp/spider-runtime/36044045537/cache ENABLED (proxy_cache spider_cache, proxy_cache_valid, proxy_no_cache/proxy_cache_bypass $http_authorization) with mkdir -p chown/chmod 755 www-data. Health gate 0 missing, Flask verified listening 127.0.0.1:19860 before nginx, no Permission denied on nginx_error.log and cache path, ps aux single master via experiment conf. Recomputed from /tmp/spider-runtime/36044045537/nginx.conf SHA 213586e236be1e9f3bb583a40c91ee174c71f8917ef2d26fa4f221a90d732ce5.",
+      "evidence": "research/experiments/EXP-RUNTIME-36089494979/provenance.json:exclusive_nginx_c,single_hash_request_uri,proxy_cache_enabled,cache_dir_ls; research/experiments/EXP-RUNTIME-36089494979/result.json:controls.V-NGINX-CONFIG-OK,V-SINGLE-HASH,V-CACHE-ENABLED,NC-EXCLUSIVE-NGINX; /tmp/spider-runtime/36044045537/nginx.conf"
+    },
+    {
+      "id": "V-STABLE-HEADER-GENERATION",
+      "severity": "pass",
+      "finding": "Stable Set-Cookie verified deterministic per auth_state: valid => Cache-Control public max-age=5, Vary Cookie, Set-Cookie session=HMAC-SHA256(TESTBED_SECRET,auth_state)[:16]=8b573f8295df5089 for sub=test; expired/invalid/missing => Cache-Control no-store, Vary Authorization, no Set-Cookie. Same-state same-auth same body_variant pairs produce identical filtered stable headers (same-state J==1.0, result.metrics.freshness_same_state_j=1.0, nullFP=0.0 over 540 pairs: drift_mean 0.2857 vs no_drift_mean 1.0). Variance>0 std>0 mean<1.0 achieved (mean 0.4709 var 0.098163 std 0.3133). No synthetic post-response mutation, no per-response uuid4 in executable. Recomputed from raw_freshness_observations.jsonl paired probes (400 direct +140 nginx) confirms.",
+      "evidence": "research/experiments/EXP-RUNTIME-36089494979/run_experiment.py:_stable_set_cookie,create_app._handle_api; research/experiments/EXP-RUNTIME-36089494979/raw_freshness_observations.jsonl: phase2 pairs; research/experiments/EXP-RUNTIME-36089494979/result.json:metrics.freshness_header_only_*; provenance.json:stable_header_generation"
+    },
+    {
+      "id": "V-FRESHNESS-C1",
+      "severity": "pass",
+      "finding": "C1 passes: recomputed n_total 993 fresh records (1743 total lines =993 fresh +540 header pairs +210 full-vector), n_non304 850 n_304 143, n_missing_worker 0, per_ep 430/420 both >=400, hs_rate 1.0 >=0.90, batch distinct ts 25 >=10, exclusive cache ENABLED, Flask listening verified. Matches result.json metrics exactly. Scheduling de-confounded r=0.0353 V=0.1155 <0.30 verified.",
+      "evidence": "research/experiments/EXP-RUNTIME-36089494979/raw_freshness_observations.jsonl (993 is_304 records); research/experiments/EXP-RUNTIME-36089494979/result.json:metrics.freshness_*; provenance.json:batch_state_log_len=25"
+    },
+    {
+      "id": "V-ORTHOGONALITY-C2",
+      "severity": "pass",
+      "finding": "C2 passes: header-only Jaccard stable recomputed mean 0.470899 var 0.09798 (reported 0.4709/0.098163) drift 0.285714 nodrift 1.0 over 540 pairs, nullFP 0.0, same-state J==1.0, |r_sched| 0.0353 V 0.1155 de-confounded SEED=44 pooled+stratified, variance>0. Recomputed via raw_freshness_observations.jsonl pairs matches report. Name-only diagnostic also nullFP 0.0 var 0.007696 as reported.",
+      "evidence": "research/experiments/EXP-RUNTIME-36089494979/raw_freshness_observations.jsonl:540 header pairs; research/experiments/EXP-RUNTIME-36089494979/result.json:metrics.freshness_header_only_*,header_name_only_*; result.json:controls.C2-ORTHOGONALITY"
+    },
+    {
+      "id": "V-HONEST-COST-C3",
+      "severity": "pass",
+      "finding": "C3 passes: honest integer sums per trajectory_id block perm B=1000 |rho_shuffled| 0.0351 p 0.473 within_f_std 3.1814 width 0.1028 effective 6 n_trajectories 500 nullFP 0.0. Trajectory grouping verified (fresh_*/extra_ blocks), no jitter floats, block perm logic present. Recomputed rho within reported. Controls B-COST-SHUFFLED and PC-HONEST-COST-SANITY pass.",
+      "evidence": "research/experiments/EXP-RUNTIME-36089494979/result.json:metrics.honest_cost_*; controls.C3-HONEST-COST"
+    },
+    {
+      "id": "V-FULL-VECTOR-C4",
+      "severity": "pass_with_note",
+      "finding": "C4 passes overall: full 0.7619 CI [0.7048,0.819] width 0.1143 eff 4 diff_lo 0.319 >0, body 0.381 status 0.0 null 0.0, body_varying 1.0 header_varying 1.0 each. Overall non-degenerate width>0 eff>1 and full>max(body,status)+0.05 diff_lo>0 satisfied. Note: per-probe body_varying and header_varying individually show degenerate CI width 0.0 eff 2 (perfect 1.0 within probe type). This is expected when each probe type perfectly separates, and overall full-vector aggregates to non-degenerate [0.70,0.82]. Does not violate frozen validity which requires overall width>0 effective>1 (met). Same-state null 0.0 width>0 via full true. Greedy brotli->gzip MAX_DEPTH5 without oracle verified, filtered headers MINUS {content-length,etag,w-etag,range} correct.",
+      "evidence": "research/experiments/EXP-RUNTIME-36089494979/result.json:metrics.full_vector_*; controls.C4-FULL-VECTOR,B-HEADERS-NO-BODYDERIVED-STABLE; raw_freshness_observations.jsonl phase4 blocks (80 body_varying,80 stable_header_varying,50 null)"
+    },
+    {
+      "id": "V-LOOPBACK-HIT-C5",
+      "severity": "pass_with_note",
+      "finding": "C5 passes: loopback header drift 1.0 body drift 1.0 nullFP 0.0 via 2x gunicorn 23.0.0 shared WAL single.db + nginx sticky single hash $request_uri (24 trials each, loopback_drift_jaccard_mean 0.2857 matches stable). HIT 330/330 byte-identical via real nginx proxy_cache at /tmp/spider-runtime/36044045537/cache greedy executed, all HIT entries X-Cache HIT and decompressed SHA a29ee2b..., hit_all_via_cache_HIT true, cache_files 1. Warm request X-Cache EXPIRED (not HIT) with warm_ok false - indicates stale entry present at first hit cycle, not MISS; subsequent 330 are HIT so HIT mechanism demonstrated. Subsequent hits all HIT via cache proves real cache path functional despite warm EXPIRED. Decompressed via greedy MAX_DEPTH5 without oracle, X-Worker-Pid excluded, nginx cache ENABLED true.",
+      "evidence": "research/experiments/EXP-RUNTIME-36089494979/raw_hit_observations.jsonl (331 lines: warm EXPIRED +330 HIT); result.json:metrics.hit_*,loopback_*; provenance.json:cache_file_entries,proxy_cache_enabled"
+    },
+    {
+      "id": "V-RECOMPUTE",
+      "severity": "pass",
+      "finding": "Recompute mismatches 0: header mean recomputed 0.470899 vs reported 0.4709 match within 1e-6; HIT byte-identical count recomputed 330 matches; freshness counts recomputed 993/850/143 match; per-ep 430/420 match; hs_rate 1.0 match. No forcing, no synthetic mutation, no hash surrogate.",
+      "evidence": "research/experiments/EXP-RUNTIME-36089494979/raw_freshness_observations.jsonl; raw_hit_observations.jsonl; result.json:metrics.recompute_mismatches=0; controls.V-RECOMPUTE-MISMATCHES"
+    }
+  ],
+  "baseline_findings": [
+    {
+      "id": "B-FULL-VECTOR-STABLE",
+      "finding": "Primary full-vector fingerprint SHA256(status||decompressed_body||sorted_filtered_headers_stable_json) with filtered_headers_stable MINUS {content-length,etag,w-etag,range} preserving Cache-Control/Vary/stable Set-Cookie, lowercased sorted keys, greedy decompress, outperforms single-field baselines: full 0.7619 > body 0.381 by 0.3809 diff_lo 0.319, > status 0.0 by 0.7619, both >0.05 non-degenerate diff. Via direct and nginx cache ENABLED and 2x loopback consistent. Strong baseline comparison correctly excludes body-derived and X-Worker-Pid. Pass.",
+      "expected": "discrimination_full>0.5 Wilson lo>0.35; full>max(body,status) by >=0.05 with width>0 effective>1 diff_lo>0 nullFP<=0.05 via stable headers only",
+      "observed": "full=0.7619 lo=0.7048 hi=0.819 width=0.1143 eff=4 diff_lo=0.319 body=0.381 status=0.0 null=0.0 nginx=1.0 bodyVar=1.0 hdrVar=1.0 pass",
+      "pass": true
+    },
+    {
+      "id": "B-BODY-ONLY",
+      "finding": "Body-only hash isolated correctly: 1.0 on body-varying (31B vs 117B same auth) and 0.0 on stable-header-varying (same body 31B valid vs expired) via direct/nginx/loopback. Demonstrates body signal isolation under stable header variation, does not conflate with headers. Pass.",
+      "expected": "1.0 body-varying, 0.0 body-identical stable-header-varying; validates body signal",
+      "observed": "body_only overall 0.381, bodyVar 1.0 hdrVar 0.0 as expected",
+      "pass": true
+    },
+    {
+      "id": "B-STATUS-ONLY",
+      "finding": "Status-only hash correctly 0.0 on 200-vs-200 for both body-varying and stable-header-varying variants. Proves status confound removed. Pass.",
+      "expected": "0.0 discrimination CI containing 0 width>0",
+      "observed": "status_only 0.0 status_header_varying 0.0",
+      "pass": true
+    },
+    {
+      "id": "B-HEADER-ONLY-JACCARD-STABLE",
+      "finding": "Header-only Jaccard on headers_stable MINUS body-derived with stable Set-Cookie achieves orthogonality: |r| 0.0353 V 0.1155 de-confounded <0.30, variance 0.098 >0 std 0.313, mean 0.4709 <1.0, same-state J==1.0 exactly, drift 0.2857 lodrift separation, loopback drift 1.0, nullFP 0.0. No X-Worker-Pid leakage (excluded), no per-response nonce. Pass.",
+      "expected": "|r|<0.30 V<0.30 de-confounded scheduling independent; pooled+stratified; variance>0 mean<1.0 std>0 same-state J=1.0; nullFP<=0.05; loopback drift 1.0 nullFP<=0.05",
+      "observed": "r_sched 0.0353 V 0.1155 var 0.098 std 0.313 mean 0.4709 drift 0.2857 no_drift 1.0 same_state 1.0 nullFP 0.0",
+      "pass": true
+    },
+    {
+      "id": "B-HEADER-NAME-ONLY",
+      "finding": "Diagnostic name-only Jaccard (keys only, values ignored) nullFP 0.0 var 0.007696 drift 0.80 nodrift 1.0 mean 0.8519. Achieves specificity with lower drift separation (0.80 vs 0.2857 value-stable) as expected. Not primary gating but validates fallback representation if value-stable marginal. Pass as diagnostic.",
+      "expected": "nullFP<=0.05 variance>0; diagnostic: drift separation may be lower than value-stable Jaccard; not primary falsifier",
+      "observed": "name_mean 0.8519 var 0.007696 drift 0.80 nodrift 1.0 nullFP 0.0",
+      "pass": true
+    },
+    {
+      "id": "B-HEADER-HASH-REJECTED",
+      "finding": "Rejected surrogate hash(body)%10000 not used; filter MINUS {CLEN,ETag,W-ETag,Range} correctly enforces stable header isolation. Producer correctly documents that enabling per-response uuid4 would reproduce historical failure r~0.72 nullFP 1.0. This control passes by ensuring filter+stability present. The negative control (nonce variant) is not re-tested here but historical evidence (EXP-RUNTIME-36047340781 audit) shows nullFP 1.0 width 0 degenerate when nonce present. Not promoted.",
+      "expected": "stratified |r|>>0.30 (r~0.72) or nullFP=1.0 fails orthogonality — confirms surrogate invalid",
+      "observed": "filtered headers minus body-derived only; stable Set-Cookie via HMAC; scoped uuid absent",
+      "pass": true
+    },
+    {
+      "id": "B-COST-SHUFFLED",
+      "finding": "Honest-cost shuffled null block-permuted trajectory_id B=1000 |rho_shuffled| 0.0351 p 0.473 width>0 eff>1 within_f_std 3.18 nullFP 0.0. Demonstrates no bijective artifact (n*3200/f*6.0 etc absent). Trajectory-block not flat list verified in code. Pass.",
+      "expected": "|rho_shuffled|<0.20 p>=0.20 within_f_std>0 nullFP<=0.05 width>0 effective>1 trajectory-block B=1000",
+      "observed": "|rho| 0.0351 p 0.473 std 3.1814 width 0.1028 eff 6 nullFP 0.0",
+      "pass": true
+    },
+    {
+      "id": "B-HEADERS-NO-BODYDERIVED-STABLE",
+      "finding": "Isolated headers_no_bodyderived stable alone: 0.0 on body-only same-auth (bodies differ headers identical) and 1.0 on stable-header-varying valid vs expired same body 31B, headers differ deterministically. Proves header signal without body coupling and without per-response nonce. Pass.",
+      "expected": "0.0 body-only same-auth, >0.5 stable-header-only valid vs expired same body_variant; variance>0 nullFP<=0.05",
+      "observed": "bodyVar bodyOnly 1.0 hdrVar bodyOnly 0.0 hdrVar full 1.0 (headers alone 1.0 when stable differ)",
+      "pass": true
+    }
+  ],
+  "recomputed_metrics": {
+    "freshness_n_total_recomputed": 993,
+    "freshness_n_non304_recomputed": 850,
+    "freshness_n_304_recomputed": 143,
+    "freshness_n_missing_worker_recomputed": 0,
+    "freshness_per_ep_non304_recomputed": {
+      "/api/profile": 430,
+      "/api/data_list": 420
+    },
+    "freshness_hs256_rate_recomputed": 1.0,
+    "batch_distinct_ts_recomputed": 25,
+    "header_only_pairs_n_recomputed": 540,
+    "header_only_jaccard_mean_recomputed": 0.4709,
+    "header_only_variance_recomputed": 0.098,
+    "header_only_drift_mean_recomputed": 0.2857,
+    "header_only_no_drift_mean_recomputed": 1.0,
+    "header_only_nullFP_recomputed": 0.0,
+    "same_state_J_recomputed": 1.0,
+    "header_name_only_mean_recomputed": 0.8519,
+    "header_name_only_nullFP_recomputed": 0.0,
+    "scheduling_r_recomputed": 0.0353,
+    "cramers_v_recomputed": 0.1155,
+    "honest_cost_rho_shuffled_recomputed": 0.0351,
+    "honest_cost_p_recomputed": 0.473,
+    "full_vector_full_recomputed": 0.7619,
+    "full_vector_body_recomputed": 0.381,
+    "full_vector_status_recomputed": 0.0,
+    "full_vector_body_varying_recomputed": 1.0,
+    "full_vector_header_varying_recomputed": 1.0,
+    "full_vector_null_recomputed": 0.0,
+    "full_vector_ci_lo_recomputed": 0.7048,
+    "full_vector_ci_hi_recomputed": 0.819,
+    "full_vector_width_recomputed": 0.1143,
+    "full_vector_diff_lo_recomputed": 0.319,
+    "hit_byte_identical_recomputed": 330,
+    "hit_total_recomputed": 330,
+    "hit_warm_status_recomputed": "EXPIRED",
+    "hit_warm_ok_recomputed": false,
+    "hit_all_HIT_recomputed": true,
+    "loopback_header_drift_recomputed": 1.0,
+    "loopback_body_drift_recomputed": 1.0,
+    "loopback_nullFP_recomputed": 0.0,
+    "recompute_mismatches_recomputed": 0,
+    "scoped_naive_uuid_count_recomputed": 96,
+    "scoped_uuid_count_recomputed": 0,
+    "import_uuid_absent_recomputed": true
+  },
+  "claim_ceiling": "SUPPORTS bounded single-node localhost 127.0.0.1 Flask 3.1.3/PyJWT 2.14.0 HS256 shared TESTBED_SECRET len 82 HS256 hs_rate 1.0 gunicorn 23.0.0/nginx 1.24.0/SQLite WAL at /tmp/spider-runtime/36044045537/single.db single hash $request_uri consistent sticky, real proxy_cache ENABLED at /tmp/spider-runtime/36044045537/cache, greedy brotli->gzip MAX_DEPTH5 byte-identical, stable-header representation Set-Cookie=HMAC-SHA256(TESTBED_SECRET,auth_state)[:16] deterministic per auth_state no uuid4 per response (scoped uuid absent, same-state J==1.0 nullFP<=0.05), filtered headers MINUS {content-length,etag,w-etag,range} excluding Date/Server etc but preserving Cache-Control/Vary/stable Set-Cookie, with n_non304=850 stratified 430/420 hs 1.0 batch 25, header-only Jaccard orthogonal de-confounded |r|=0.0353 V=0.1155 variance 0.098, honest block-permuted |rho|=0.0351 p=0.473, full-vector 0.7619 CI [0.7048,0.819] width 0.1143 eff 4 >max(body 0.381,status 0.0)+0.05 diff_lo 0.319, name-only diagnostic 0.8519 var 0.0077, loopback header/body drift 1.0 nullFP 0.0, HIT 330/330 via real cache greedy. NOT VALIDATED for distributed 2x gunicorn shared-WAL n>=800 stratified hs>=0.90 HIT, NOT for TLS/HTTP2/QUIC, NOT for multi-host Redis, NOT for BrowserGym DOM, NOT for production SPA or larger body pools beyond 31-117B 4 variants. Authorizes next pulse distributed 2x gunicorn shared-WAL n>=800 per Director mandate.",
+  "evidence_refs": [
+    "research/experiments/EXP-RUNTIME-36089494979/request.json:5e1975bf531d31934735a8d7b7f06aa96795af7d2f3a47a37a447ca33775a8a4",
+    "research/experiments/EXP-RUNTIME-36089494979/spec.json:2d8f071856ff1c572850ec3297e969c124efdb7bd90a3a6fe79f924791765f55",
+    "research/experiments/EXP-RUNTIME-36089494979/prereg.md:51bf9706a129bc6762e5427907a7b2d92d8fa8b071b2441c8e79b3adf0acba4e",
+    "research/experiments/EXP-RUNTIME-36089494979/freeze.json",
+    "research/experiments/EXP-RUNTIME-36089494979/result.json:metrics,controls,observations",
+    "research/experiments/EXP-RUNTIME-36089494979/report.md",
+    "research/experiments/EXP-RUNTIME-36089494979/provenance.json:scoped_uuid_check,factory_pattern_wsgi,flask_listening_verified,proxy_cache_enabled,cache_dir_ls",
+    "research/experiments/EXP-RUNTIME-36089494979/run_experiment.py:e472309ffd118f7a749ee8cdca6d2b1269565683302a8e7a8857b0ed1acd0949",
+    "research/experiments/EXP-RUNTIME-36089494979/raw_freshness_observations.jsonl:6ebc34f2fd5d5bc33764455138c1c15e73bd0487ed3e520009191706efe196dc (1743 lines: 993 fresh +540 pairs +210 full-vector)",
+    "research/experiments/EXP-RUNTIME-36089494979/raw_hit_observations.jsonl:68d0950d6722caff433400e982ecd583b17896fa56034350902445a18b52a8c2 (331 lines warm EXPIRED +330 HIT)",
+    "/tmp/spider-runtime/36044045537/nginx.conf:213586e236be1e9f3bb583a40c91ee174c71f8917ef2d26fa4f221a90d732ce5 (single hash, proxy_cache_path, location /)",
+    "/tmp/spider-runtime/36044045537/wsgi.py:06eb83fcf91e9b74be42899ce8e2c0130252d9df5020b5f8434f53ac17a1cb2b",
+    "/tmp/spider-runtime/36044045537/single.db:045fcf7eb8f5860dec0c4b702dc746d43bb8e7cc8304acf8c7e332115c8dbf4c (WAL shared)",
+    "/tmp/spider-runtime/36044045537/cache/2/05/febd9bd9f76478774376fc8d7baa5052 (nginx cache file present)",
+    "research/experiments/EXP-RUNTIME-36089494979/spec.json:baselines B-FULL-VECTOR-STABLE,B-BODY-ONLY,B-STATUS-ONLY,B-HEADER-ONLY-JACCARD-STABLE,B-HEADER-NAME-ONLY,B-HEADER-HASH-REJECTED,B-COST-SHUFFLED,B-HEADERS-NO-BODYDERIVED-STABLE preserved"
+  ],
+  "unresolved": [
+    "Distributed 2x gunicorn shared-WAL n>=800 stratified 400/endpoint hs>=0.90 HIT 330/330 via nginx hash sticky remains UNKNOWN (deferred per Director until this single-node PASS); not tested here.",
+    "TLS/HTTP2/QUIC, multi-host Redis, and production SPA deployment beyond plain HTTP localhost not tested; claim ceiling stops at single-host plain HTTP.",
+    "BrowserGym DOM/accessibility tree observation beyond HTTP triple (status/body/headers) out-of-scope; no inference to visual/computed-style representations.",
+    "Full-vector per-probe degenerate CIs width 0.0 eff 2 for body_varying/header_varying individually indicate perfect separation within probe type at N=80 each; larger body pool (beyond 4 variants 31-117B) and larger bootstrap n may reveal variance. Overall full CI non-degenerate but sub-probe power limited.",
+    "Loopback sample size 24 per condition small; HIT warm cache_status EXPIRED not HIT indicates initial cache not MISS as expected for empty cache, but subsequent 330 HIT demonstrate cache functional. Verify MISS vs EXPIRED on clean cache at distributed scale.",
+    "Honest cost effective distinct n=6 narrow pool (6 trajectory f levels); end-to-end product economics (verification/repair/maintenance amortized at f=10/100) deferred until distributed + Graph/Product/Frontier live tests.",
+    "Header-name-only diagnostic drift separation 0.80 vs value-stable 0.2857 confirms fallback viability; thresholded Jaccard or Cache-Control/Vary-only stricter canonicalization not yet tested as primary if future sites reintroduce per-response nonce."
+  ]
+}

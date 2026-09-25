@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-FRONTIER-36046077922",
+  "lane": "frontier",
+  "decision": "MEASUREMENT_INVALID",
+  "claim_updates": [
+    {
+      "claim_id": "C-WEB-DYNAMICS",
+      "status": "HYPOTHESIS",
+      "reason": "MEASUREMENT_INVALID with audit-confirmed infrastructure failure: BrowserGym import ModuleNotFoundError (audit recomputed find_spec None), Intel diverse-site manifest absent (metrics intel_families=0 intel_jaccard_max=1.0 intel_product_subtree=false, recomputed data/ and research/intel/ ENOENT, provenance.json intel_manifest families_count 0), Runtime substrate absent (/tmp/spider-runtime/shared.db ENOENT, n_non304_stratified=0, provenance.json runtime_substrate n_non304_stratified 0). All 8 controls correctly reported not_run pass=null evidence_ref=dependency_unavailable with no synthetic fallback. Frozen decision_rule precedence MEASUREMENT_INVALID over SURVIVES/FALSIFIED correctly applied per spec measurement_validity[5] and audit V2. Audit status MEASUREMENT_INVALID producer_claim_supported=false, V1-V4/V6 pass V5 info minor, baseline_findings not_run, recomputed_metrics null confirm no BC PMI/gap/rel_sep computable. No new evidence for C-WEB-DYNAMICS; claim remains HYPOTHESIS per codex/claim_state.json, and history-conditioned BC PMI>0.05 Bonferroni p<0.01 gap>=0.05 over TF-IDF k5 rel_sep>=200 on live BrowserGym 1280x720 CDP AX>10 remains UNTESTED on this substrate. Prior ceilings unchanged: alias-catalog 21/40=0.525, residual-novelty non-Pareto validly FALSIFIED (EXP-FRONTIER-36042599040 audit PASS), Physics Dirichlet-Multinomial BC~0 companions unchanged."
+    }
+  ],
+  "product_action": "no_promotion",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "On live BrowserGym 1280x720 CDP AX>10 heterogeneous sites with Intel diverse-site manifest (≥10 families Jaccard<0.30 product-subtree anchored 1280x720, deterministic seed 42) and Runtime health-gated single-worker sticky substrate (n_non304≥800 stratified, trajectory-grouped |rho_shuffled|<0.20, honest sum counters, If-None-Match/ETag TTL 60s), does history-conditioned bias-corrected PMI I(S_next;DOM_before|S_before URL,H_K) with trajectory-grouped permutation (1000 perms within (URL,H_K) strata, Bonferroni p<0.01) exceed TF-IDF k5 by gap>=0.05 bits with BC PMI>0.05 and rel_sep>=200 (>=70% strata BC>0.02, >=2/3 sites BC>0.05), revealing predictive structure beyond memory, or does even orthogonal exactly-centered testing remain BC~0/rel_sep<200 indicating PARK pending larger manifest (>=50 eTLD+1 families, production SPAs, richer visual representations)?",
+  "reason": "Director adjudicates MEASUREMENT_INVALID per independent audit (audit.json status MEASUREMENT_INVALID producer_claim_supported false): V1 pass frozen transmission invariants preserved (request 787ed1cc, spec d4e2f1ec, prereg a38765 independently recomputed; parent handoff EXP-FRONTIER-36042599040 SUPERSEDE correctly referenced), V2 pass producer correctly preserves RAW->INTERPRETATION distinction reporting MEASUREMENT_INVALID NOT_APPLICABLE with all 8 controls not_run pass=null and no synthetic extrapolation, V3 pass independent recomputation confirms BrowserGym ModuleNotFoundError find_spec None, Intel manifest absent, Runtime WAL absent, Physics PARK true, V4 pass representation/binding correctly not claimed (live_available false, B-TFIDF-K5/B-URL-ONLY/B-SPIDER-HISTORY-PMI-PRIMARY/B-SHUFFLE-NULL not computed), V5 info minor provenance freeze.json hash duplication non-material, V6 pass no claim inflation (report.md does not falsify C-WEB-DYNAMICS). Frozen measurement_validity[5] and decision_rule require ANY PC/NC fail including unmet dependencies => MEASUREMENT_INVALID precedence, no SURVIVES/FALSIFIED permitted. No PRODUCT_CORE promotion authorized (frontier lane, audit MEASUREMENT_INVALID, synthetic-proxy no LLM tokens/browser work). Global direction single-node honesty gate mandates substrate repair before valid orthogonal barrier-physics rewind; 18th alias/routing permutation VOI~0 per director comparative_reasoning.",
+  "evidence_refs": [
+    "research/experiments/EXP-FRONTIER-36046077922/request.json:787ed1ccfe3326d32e1fbbd3d2280127a61d0a59e27c206f326a49dc4ec387d3",
+    "research/experiments/EXP-FRONTIER-36046077922/spec.json:d4e2f1ec257be9f1b0fbeacacb84b8e76a97bd53b06277f7ffe1665b942afbbe",
+    "research/experiments/EXP-FRONTIER-36046077922/prereg.md:a3876539e863164913db68e095c4c5e7f4f6ae4882c2dde36d48a88003ddf964",
+    "research/experiments/EXP-FRONTIER-36046077922/freeze.json",
+    "research/experiments/EXP-FRONTIER-36046077922/result.json:1f83d9ee9b7bca534683c7fd8be07557ff931eceb64a60798a8c720aeb8e37c1",
+    "research/experiments/EXP-FRONTIER-36046077922/report.md",
+    "research/experiments/EXP-FRONTIER-36046077922/provenance.json",
+    "research/experiments/EXP-FRONTIER-36046077922/audit.json:status MEASUREMENT_INVALID producer_claim_supported false validity_findings V1-V6 baseline_findings B-TFIDF-K5 B-URL-ONLY B-SPIDER-HISTORY-PMI-PRIMARY B-SHUFFLE-NULL recomputed_metrics claim_ceiling",
+    "research/frontier/run_execute_36046077922.py:check_browsergym check_intel_manifest check_runtime_substrate",
+    "research/experiments/EXP-FRONTIER-36042599040/handoff.json:sha256:a2d980fdc6020619b1a8b73afa1423e017b2897b00e0ce27b53069a8855e4650",
+    "research/experiments/EXP-FRONTIER-36042599040/verdict.json:decision FALSIFIED-IN-SETTING claim C-RESIDUAL-NOVELTY HYPOTHESIS audit PASS",
+    "codex/claim_state.json:C-WEB-DYNAMICS HYPOTHESIS",
+    "codex/index.json"
+  ]
+}

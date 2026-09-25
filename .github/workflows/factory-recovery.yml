@@ -1,0 +1,64 @@
+name: SPIDER R2 Factory Recovery
+run-name: Factory recovery ${{ github.run_id }}
+
+on:
+  workflow_run:
+    workflows: ["SPIDER R2 Factory Pulse"]
+    types: [completed]
+  schedule:
+    - cron: "*/5 * * * *"
+  workflow_dispatch:
+
+permissions:
+  actions: write
+  contents: read
+
+concurrency:
+  group: spider-r2-factory-recovery
+  cancel-in-progress: true
+
+jobs:
+  recover:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Recover latest failed strategic control cycle
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          LATEST=$(gh run list --workflow=factory-pulse.yml --limit 1             --json databaseId,status,conclusion,headSha,createdAt)
+          COUNT=$(jq 'length' <<<"$LATEST")
+          [[ "$COUNT" -eq 1 ]] || { echo "SPIDER_FACTORY_RECOVERY_NO_RUN"; exit 0; }
+
+          SOURCE_RUN=$(jq -r '.[0].databaseId' <<<"$LATEST")
+          SOURCE_STATUS=$(jq -r '.[0].status' <<<"$LATEST")
+          SOURCE_CONCLUSION=$(jq -r '.[0].conclusion // ""' <<<"$LATEST")
+          SOURCE_SHA=$(jq -r '.[0].headSha' <<<"$LATEST")
+
+          # Never race a live Factory and never retry success/cancellation.
+          # Cancellation normally means a fresher direction cycle superseded it.
+          if [[ "$SOURCE_STATUS" != "completed" ]]; then
+            echo "SPIDER_FACTORY_RECOVERY_ACTIVE source_run=$SOURCE_RUN status=$SOURCE_STATUS"
+            exit 0
+          fi
+          case "$SOURCE_CONCLUSION" in
+            failure|timed_out|action_required|startup_failure) ;;
+            *)
+              echo "SPIDER_FACTORY_RECOVERY_NOT_NEEDED source_run=$SOURCE_RUN conclusion=$SOURCE_CONCLUSION"
+              exit 0
+              ;;
+          esac
+
+          FAILURES=$(gh run list --workflow=factory-pulse.yml --limit 50             --json conclusion,headSha             | jq --arg sha "$SOURCE_SHA"               '[.[] | select(.headSha==$sha and (.conclusion=="failure" or .conclusion=="timed_out" or .conclusion=="action_required" or .conclusion=="startup_failure"))] | length')
+
+          if [[ "$FAILURES" -ge 3 ]]; then
+            echo "::error::SPIDER_FACTORY_RECOVERY_CIRCUIT_OPEN source_run=$SOURCE_RUN head=$SOURCE_SHA failures=$FAILURES"
+            exit 0
+          fi
+
+          echo "SPIDER_FACTORY_RECOVERY_RETRY source_run=$SOURCE_RUN conclusion=$SOURCE_CONCLUSION head=$SOURCE_SHA failures=$FAILURES"
+          gh workflow run factory-pulse.yml --ref main

@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-FRONTIER-36097242687",
+  "lane": "frontier",
+  "git_commit": "23d0d6b090dff278f80e41a4b76ec7d05a77dcea",
+  "github_run_id": "36097242687",
+  "diagnostic_mode": true,
+  "live_available": false,
+  "substrate_diagnostic": {
+    "live_available": false,
+    "browsergym": false,
+    "browsergym.core": false,
+    "playwright": false,
+    "agentlab": false,
+    "intel_diverse_manifest_exists": false,
+    "manifest_families": 0,
+    "jaccard": null,
+    "pooled_tasks": 0,
+    "mixed_tasks": 0,
+    "runtime_wal_exists": false,
+    "x_worker_pid": null,
+    "n_non304": null,
+    "substrate_adequate": false,
+    "heterogeneity_adequate": false,
+    "coverage_adequate": false,
+    "chromium_present": true,
+    "pypi_reachable": true,
+    "browsergym_core_version": null,
+    "playwright_version": null,
+    "elapsed_seconds": 0.0,
+    "diagnostic_mode": true
+  },
+  "code_paths": [
+    "research/frontier/run_execute_36097242687.py"
+  ],
+  "freeze_hash": {
+    "prereg.md": "0306edc08b9b9f9fd2a2458cd08512b0995eb9d3641259dce8f70ffaac9e5843",
+    "request.json": "f1934c9ca5ce6d719a53b51e05ca10838bf66124535e3e2bfb4663a9fb532251",
+    "spec.json": "da13d7ee19958bdb3b4832a3e0f6e5c6677ee6dc52980dc1aa32a1c313fba19a"
+  },
+  "environment": {
+    "python": "3.12.14 (main, Aug 13 2026, 02:47:42) [GCC 13.3.0]",
+    "numpy": "2.5.3",
+    "scipy": "1.13.0"
+  }
+}

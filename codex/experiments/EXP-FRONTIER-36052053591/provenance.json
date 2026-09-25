@@ -1,0 +1,105 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-FRONTIER-36052053591",
+  "lane": "frontier",
+  "github_run_id": "36052053591",
+  "github_run_attempt": "1",
+  "base_sha": "2400b5d7f24eb5dcdf85f48d747c18623c48654e",
+  "head_sha": "7448dbcb3fe8269a9f0ff119b1e94e5c84f2e512",
+  "branch": "lab2/frontier",
+  "created_at": "2026-09-24T20:01:41.392008+00:00",
+  "frozen_at": "2026-09-24T20:04:41.071818+00:00",
+  "frozen_inputs": {
+    "request.json": {
+      "sha256": "7d1b3531d34e58e03b32512396c43c5581c0383fb000b9ead1107dbb34ff541c",
+      "hash_expected": "7d1b3531d34e58e03b32512396c43c5581c0383fb000b9ead1107dbb34ff541c"
+    },
+    "spec.json": {
+      "sha256": "7c6dbabb79245d89343d06e1c68c9299a1b91b586e163ef5a498059e9007d71d",
+      "hash_expected": "7c6dbabb79245d89343d06e1c68c9299a1b91b586e163ef5a498059e9007d71d"
+    },
+    "prereg.md": {
+      "sha256": "e9550dec90bfd365faa9f13ba3212807ee99ba9d55aa9dc4e1c0cb59516b059e",
+      "hash_expected": "e9550dec90bfd365faa9f13ba3212807ee99ba9d55aa9dc4e1c0cb59516b059e"
+    },
+    "freeze.json": {
+      "sha256": "75be8c5aceb9fbb7f04165014e37bf3ca98508e0855590f52eba486c16bc2b02"
+    }
+  },
+  "code_paths": {
+    "allowed_roots": [
+      "research/harness",
+      "research/frontier"
+    ],
+    "executed_harness": "research/experiments/EXP-FRONTIER-36052053591/artifacts/substrate_diagnostic.json + inline diagnostic",
+    "kernel_paths_tested": [
+      "research/frontier/*",
+      "research/experiments/EXP-FRONTIER-36052053591/*"
+    ],
+    "product_code_roots_not_modified": true
+  },
+  "environment": {
+    "python_version": "3.12.14",
+    "platform": "Linux-6.17.0-1022-azure-x86_64-with-glibc2.39",
+    "packages": "",
+    "browsergym_available": false,
+    "playwright_available": false,
+    "data_directories": {
+      "data/webgym_292k": false,
+      "data/webarena_verified": false,
+      "research/intel/diverse_site_manifest.json": false,
+      "/tmp/spider-runtime/shared.db": false
+    }
+  },
+  "datasets_fixtures": {
+    "primary_manifest": "WebArena-Verified v2 192/36 or WebGym 292k dedup manifest >=10 families pairwise Jaccard<0.30 product-subtree anchored depth>=2 at 1280x720 CDP AX>10 mean>15 std>5 (REQUIRED, NOT FOUND)",
+    "fallback_synthetic": "Prior synthetic 36-family TAU0.30 fixture remains bounded negative evidence, not used as live substitute per measurement_validity[0]",
+    "trajectory_holdout": "trajectory-grouped holdout whole trajectories of test families never indexed - not executed due to missing manifest"
+  },
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-FRONTIER-36052053591/artifacts/substrate_diagnostic.json",
+      "sha256": "999091e631256d8fe2afe12df781b0bfbe0971bd6e217dc91af837c1e1224317",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-36052053591/artifacts/compilation_pipeline_check.json",
+      "sha256": "291fbe9f5979d18a817cc7ba8868db11fb83976277620e46a8482af6bf674646",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-36052053591/artifacts/per_trajectory_traces.json",
+      "sha256": "f8192d2a014b7bb33bbde48d7cb73011bcc682ad43f9af5583dfdf45bc21567c",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-36052053591/artifacts/honest_cost_audit.json",
+      "sha256": "b604e67dbd8e25e75670d3db5a38d6dcd432fc0b2db625808fa9c4edfdd24307",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-36052053591/result.json",
+      "sha256": "0701ef0f9a55b120d439d5107a4c933cbaf2c652f7011b6895d820c8bf90c3cb",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-36052053591/report.md",
+      "sha256": "34a68841b58721577c6195ca31ab9641c9ddc694f2bed8bd610008bd2c2028b0",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-36052053591/provenance.json",
+      "sha256": "52946e60fa255266aa9f564c697c8f5fdd77b0350f3bc314e241b569259a503b",
+      "role": "derived"
+    }
+  ],
+  "commands": [
+    "python -c \"import browsergym\" -> ModuleNotFoundError",
+    "python -c \"import playwright\" -> ModuleNotFoundError",
+    "ls data/webgym_292k -> not found",
+    "ls research/intel/diverse_site_manifest.json -> not found",
+    "ls /tmp/spider-runtime/shared.db -> not found"
+  ],
+  "reproduction": "To reproduce MEASUREMENT_INVALID diagnostic: python3 research/experiments/EXP-FRONTIER-36052053591/artifacts/substrate_diagnostic.json generation via inline diagnostic (see report.md). Live reproduction requires: pip install playwright browsergym-core agentlab; playwright install chromium; produce Intel manifest via research/intel deterministic sampling seed 42 on WebGym 292k >=50 eTLD+1; deploy Runtime single-worker sticky WAL at /tmp/spider-runtime/shared.db with n_non304>=800 stratified; rerun frozen design per spec measurement_validity with 5000 bootstrap+5000 block-permutation+5000 global permutation.",
+  "git_status_porcelain": "?? research/experiments/EXP-FRONTIER-36052053591/artifacts/\n?? research/experiments/EXP-FRONTIER-36052053591/model_execute.json\n?? research/experiments/EXP-FRONTIER-36052053591/result.json"
+}

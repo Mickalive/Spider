@@ -1,0 +1,61 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-FRONTIER-36046077922",
+  "github_run_id": "36046077922",
+  "commit_sha": "39618590f35110ea383ba2b893e1e568233af4c6",
+  "executed_at": "2026-09-24T19:19:59.082038Z",
+  "duration_seconds": 0.03507494926452637,
+  "environment": {
+    "python_version": "3.12.14 (main, Aug 13 2026, 02:47:42) [GCC 13.3.0]",
+    "numpy_version": "2.5.3",
+    "playwright_available": false,
+    "browsergym_cdp_available": false
+  },
+  "dependencies_checked": {
+    "browsergym": {
+      "available": false,
+      "playwright_version": null,
+      "browsergym_core_version": null,
+      "agentlab_version": null,
+      "cdp_available": false,
+      "error": "BrowserGym import failed: ModuleNotFoundError: No module named 'browsergym'"
+    },
+    "intel_manifest": {
+      "available": false,
+      "families_count": 0,
+      "jaccard_max": 1.0,
+      "jaccard_mean": 1.0,
+      "product_subtree_anchored": false,
+      "source": null,
+      "deterministic_seed": 42,
+      "error": "No Intel diverse-site manifest found at expected paths"
+    },
+    "runtime_substrate": {
+      "available": false,
+      "flask_hs256": false,
+      "nginx": false,
+      "shared_wal": false,
+      "sticky_cookie": false,
+      "etag_conditional_probes": false,
+      "n_non304_stratified": 0,
+      "honest_sum_counters": false,
+      "trajectory_grouped_rho_shuffled": null,
+      "per_trajectory_hard_reset": false,
+      "error": "No Runtime substrate found at expected paths"
+    },
+    "physics_park": {
+      "parked": true,
+      "note": "Per director_mandate.dependencies: physics PARK confirmed"
+    }
+  },
+  "code_paths": [
+    "research/frontier/run_execute_36046077922.py"
+  ],
+  "frozen_inputs": {
+    "request.json": "787ed1ccfe3326d32e1fbbd3d2280127a61d0a59e27c206f326a49dc4ec387d3",
+    "spec.json": "d4e2f1ec257be9f1b0fbeacacb84b8e76a97bd53b06277f7ffe1665b942afbbe",
+    "prereg.md": "a3876539e863164913db68e095c4c5e7f4f6ae4882c2dde36d48a88003ddf964",
+    "freeze.json": "d4e2f1ec257be9f1b0fbeacacb84b8e76a97bd53b06277f7ffe1665b942afbbe"
+  },
+  "artifacts": []
+}

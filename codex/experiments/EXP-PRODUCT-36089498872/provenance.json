@@ -1,0 +1,74 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-36089498872",
+  "producer": {
+    "role": "EXECUTE",
+    "model_id": "opencode/big-pickle",
+    "source": "frozen request/spec/prereg/freeze in research/experiments/EXP-PRODUCT-36089498872/"
+  },
+  "github": {
+    "repo": "servicenow/Spider",
+    "workflow_run": "github-actions Runner (hosted, linux, Python 3.12.14 toolchain at /opt/hostedtoolcache/Python/3.12.14/x64/bin/python3)",
+    "git_head_sha256": "8af66ccfb6f848e1f89805e90a1f52683ee28f62c9dd7b97f9d2762390e7b386",
+    "kernel_patch_working_tree_sha256": "d926279d5ee14a044a2f13b8abc09202df9f5adb9e86feaadeb61818a15f4038",
+    "patch_applied": "src/spider/kernel.py: _PARAMETER = re.compile(r'\\$\\{([A-Za-z_][A-Za-z0-9_\\.]*)\\}') ; tests/test_kernel.py extended (test_dotted_path_parameter_binds); unittest 4/4 OK",
+    "commit_made": false,
+    "commit_note": "EXECUTE workflow forbids git commit/push; MV3 durability gate is pending a director-authorized commit."
+  },
+  "frozen_inputs": {
+    "request.json": "e22a635ac38855838cc87a7bc9f4176589511ab59dac186a0cb4de2916e7d67a",
+    "spec.json": "c0371de214edf4145bc6fc65203f583ce6348d56ec5896fc68ef8e4156c696f3",
+    "prereg.md": "62b71a80125d9c04e83eabdb388ac1eaaf785bf91893835b87576c8e3f85bbc7",
+    "freeze.json": "verified before execution (hashes matched)"
+  },
+  "environment": {
+    "python": "3.12.14",
+    "pins": {"gunicorn": "23.0.0", "jwt": "2.14.0", "flask": "3.1.3", "numpy": "2.5.3", "scipy": "1.18.1", "sklearn": "1.9.1", "pandas": "3.0.6", "playwright": "1.63.0", "chromium-headless-shell": "v1243"},
+    "pins_pass": true,
+    "openai_api_key": "ABSENT",
+    "browsergym_docker_image": "ghcr.io/servicenow/browsergym:0.14.3 - pull DENIED (exit 1 'denied'; docker login non-TTY denied)",
+    "webarena_verified_package": "ABSENT from site-packages (Hard258 not staged)",
+    "substrate": "single-node gunicorn 23.0.0 + nginx, WAL shared.db at /tmp/spider-runtime, HS256-only JWT, sticky/direct TN paths"
+  },
+  "code_path": {
+    "harness": "research/experiments/EXP-PRODUCT-36089498872/run_experiment.py (sha256 e0c7f3e85348d5479326fe76cb116de5ca3b42260d23ea2c95d503b2ad75135f)",
+    "patched_kernel": "src/spider/kernel.py",
+    "patched_tests": "tests/test_kernel.py"
+  },
+  "fixtures": {
+    "canonical_contaminated_source": "research/experiments/EXP-PRODUCT-35999358218/fixtures/webarena_verified_v2_tasks_192_36.json (sha256 391e8f6cf167300cf223ebbb19cf5d2beed6568f5f84ac968ae88866a438a98b)",
+    "frozen_rebuilt_holdout_staged": "research/experiments/EXP-PRODUCT-36046064994/fixtures/webarena_verified_v2_tasks_192_36_rebuilt.json (sha256 101e481ddb610df9598b0e3e5650e8c163ec7cbdc4679c5efc1e31104b3074c5)",
+    "local_rebuild_diagnostic": "sha256 fa70b5b2eeb4baedb665018e5f05475b6a782c0258cc9d5bcb1ffef49cb90c01 - content-identical to frozen except experiment_id metadata field",
+    "qcr_bank_manifest": "fixtures/qcr_bank_manifest.json (sha256 8c69804b249ec9c84cf05d86a21c7ebe7a31af5f8d45e50a4e6d477b449f9f58)",
+    "cost_config": "fixtures/cost_config.json (sha256 46f3357d897e91667999ab739274b1e802f24a5e9813093c655d6c846fb9f68a)"
+  },
+  "material_artifacts": [
+    {"path": "research/experiments/EXP-PRODUCT-36089498872/artifacts/env_audit.json", "sha256": "084c9e48e65faf7bdf68e59c6e47210de2257dec7d8fafe88938a17447dd36e8", "role": "raw"},
+    {"path": "research/experiments/EXP-PRODUCT-36089498872/artifacts/fixture_checks.json", "sha256": "0b6c7df4dca00de0faae1458c464ae445d07b3752c1ea4a975a5d33ba00326b7", "role": "derived"},
+    {"path": "research/experiments/EXP-PRODUCT-36089498872/artifacts/mv3_kernel_spot_check.json", "sha256": "317aa13b6c0fe8506fbbb0cc6b1176adc1ee40f3371673ed4cfbd0e668b15007", "role": "derived"},
+    {"path": "research/experiments/EXP-PRODUCT-36089498872/artifacts/substrate_start.json", "sha256": "f69313de3423855df6070cbc53e8048a4b3993e05e3ac627c7f9826195de9502", "role": "raw"},
+    {"path": "research/experiments/EXP-PRODUCT-36089498872/artifacts/substrate_probe.json", "sha256": "d6e1a6be3cf0a513a8d51288d996978e63a093be74725423a83337e40e2064a7", "role": "raw"},
+    {"path": "research/experiments/EXP-PRODUCT-36089498872/artifacts/probe_traces.jsonl", "sha256": null, "role": "raw"},
+    {"path": "research/experiments/EXP-PRODUCT-36089498872/artifacts/pc1_exact_repeat.json", "sha256": "b23b044584dd07666f881904adcc3d135db566035d13c92a2663f5dec3e35095", "role": "derived"},
+    {"path": "research/experiments/EXP-PRODUCT-36089498872/artifacts/pc3_verify_calibration.json", "sha256": "4dd54ab2367743b470b42134d16d60ad2dcfbd2695823b59f698b1f2537bfbc4", "role": "derived"},
+    {"path": "research/experiments/EXP-PRODUCT-36089498872/artifacts/economics.json", "sha256": "e008c7a34f234a32a6268eac99adc52bab51b7434a2a30d34a0178f237ae4b6a", "role": "derived"},
+    {"path": "research/experiments/EXP-PRODUCT-36089498872/artifacts/economics_per_trajectory.csv", "sha256": "5e4830c57dc4bbf60ed6732475ae30b784a46a4176feba20b6cc545d09660c1a", "role": "raw"},
+    {"path": "research/experiments/EXP-PRODUCT-36089498872/artifacts/null_controls.json", "sha256": "2da8f29af6b8e51a629e790c862ad12d52fcb726c9cbfd4cad4fcc250c6e3d58", "role": "derived"},
+    {"path": "research/experiments/EXP-PRODUCT-36089498872/artifacts/nc_trajectory_counters.json", "sha256": "2dfc222836c5f869f2e521ad885b115305d43aed30307a9f4e89d45bd2f2c8e6", "role": "raw"},
+    {"path": "research/experiments/EXP-PRODUCT-36089498872/artifacts/browser_health.json", "sha256": "e8525acff427a766a8664918e0ae8f3a2cddcf202b085637147b7c745feea083", "role": "raw"},
+    {"path": "research/experiments/EXP-PRODUCT-36089498872/artifacts/attempts_log.json", "sha256": "422ab48c404fc45ce8f31fed9fa66cb2d447af56b9d9ac82cf4f23f421d10f7a", "role": "raw"},
+    {"path": "research/experiments/EXP-PRODUCT-36089498872/artifacts/metrics_summary.json", "sha256": "4d001c67f056b151e9a205568017e5d9f6d60f134de5d59a3297fa251da98fa8", "role": "derived"},
+    {"path": "research/experiments/EXP-PRODUCT-36089498872/fixtures/webarena_verified_v2_tasks_192_36_rebuilt.json", "sha256": "101e481ddb610df9598b0e3e5650e8c163ec7cbdc4679c5efc1e31104b3074c5", "role": "fixture"}
+  ],
+  "reproduction_commands": [
+    "/opt/hostedtoolcache/Python/3.12.14/x64/bin/python3 research/experiments/EXP-PRODUCT-36089498872/run_experiment.py",
+    "/opt/hostedtoolcache/Python/3.12.14/x64/bin/python3 -m unittest tests.test_kernel -v"
+  ],
+  "limitations": [
+    "No git commit made (workflow rule) - kernel durability re-hash deferred.",
+    "BrowserGym image pull denied; docker login non-TTY; OPENAI_API_KEY absent - MV6/rho_proxy_real/safety NULL.",
+    "playwright 1.63.0 removed Page.accessibility() - frozen supplementary AX check fails; primary MV6 uses CDP getFullAXTree (unexecutable without image).",
+    "webarena_verified package absent - Hard258 census not staged.",
+    "Bounded proxy economics (ratio_vs_RAG 1.5064 > 0.85) are diagnostics; claim inference requires MV6."
+  ]
+}

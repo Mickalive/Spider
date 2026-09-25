@@ -1,0 +1,46 @@
+{
+  "base_sha": "3576c4abddb2eaee153d385bf6bf4be1828975b5",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-24T15:10:42.999075+00:00",
+  "director_mandate": {
+    "agent_priors_used": [
+      "Path dependence and local-optima salience: >10 consecutive experiments on same synthetic generator have sharply diminishing marginal information gain; honest pipeline audit with trajectory-grouped permutation is higher leverage than 18th parameterization variant - used to force Frontier basin break (general prior, not SPIDER evidence)",
+      "Verification cheaper than generation but calibration dominates safety: ECE<=0.15, UNKNOWN precision>=0.85, false_accept<=0.10 must gate inheritance; prefer UNKNOWN over unsafe reuse - used to require freshness guard before delta-repair and residual-novelty (general prior)",
+      "Long-horizon agents accumulate compounding planning errors; memory compression and decoupled hierarchical retrieval outperform flat trajectory replay - used to prioritize retrieval complementarity vs literal param fix (general prior)",
+      "Zero-variance or bijective dependent variables produce tautological or forced-zero effects (|R|=1 forces I=0, n*3200 formula forces rho, H=0 forces PMI=0) masquerading as falsification; frequency baselines and shuffled-block permutation |rho_shuffled|<0.20 discriminate - used to diagnose MEASUREMENT_INVALID across 100/338 exps (general prior)",
+      "Exploration/exploitation and opportunity cost: another experiment in a bounded thread is low priority if neither positive nor negative result can change architectural/product decision - used to PARK/Pivot tunneled C-PRODUCT-ECON Pareto without substrate (general prior)"
+    ],
+    "allocation": {
+      "action": "CONTINUE",
+      "claim_id": "C-DELTA-REPAIR",
+      "cognitive_reset": false,
+      "comparative_reasoning": "Alternative was retry durable WebArena-Verified v2 param-inherit pilot (6 consecutive MEASUREMENT_INVALID 35793560957-35932480731 despite kernel fixes, pinned hash missing, EXECUTABLE>=0.75 not achieved). Marginal info of 7th identical single-family add_to_cart pilot is near zero without first fixing substrate and census contamination. C-LLM-INHERIT narrow LLM pilot is valuable but blocked on same substrate and would inherit same measurement invalidity. Freshness/delta single-node honesty gate has clear falsifier (TN Wilson lower>0.75 vs 0.667 baseline) and unblocks all downstream Graph/Product residual-novelty work, thus outranks param-inherit retry this cycle.",
+      "dependencies": [
+        "runtime"
+      ],
+      "parent_handoff_disposition": "USE",
+      "question": "Can an honest re-execution deploying actual nginx 1.24.0 $request_uri sticky in front of 2x gunicorn 23 Flask 3.1.3 PyJWT HS256 workers sharing WAL DB at /tmp/spider-runtime/single.db, with per-request deterministic _matches verification, per-trajectory-reset integer sum-counter (resolve1+bind1+verify1+freshness1+browser0/1 per mutated id), TRAIN18/TEST12 AUROC at frozen 0.85 vs unclamped 1000 trajectory-grouped perm null, 5000 family-stratified trajectory-grouped bootstrap, and registry-clone re-verification for both disjoint and same-resource contamination, achieve TN>=0.85 FA<=0.10 repair>=0.80 pooled >=0.70 per family contamination<0.10 at blast radius 1-3 (K1 30 stale, K2 10, K3 10, N>=20 unrelated) on health-gated single-node substrate with n_non304>=360, before any distributed n>=800 or f=100 authorization?",
+      "rationale": "Graph is PREFREEZE but its parent handoff is the only measurement-valid path from synthetic SURVIVES (EXP-GRAPH-35947468747 TN>=0.85, EXP-GRAPH-35952148696 delta 0.3125 AUROC1.0 contamination 0.0) to VALIDATED. C-FRESHNESS orthogonality at delta 0.15 is the sole replicated PASS; delta-repair is gated on that freshness guard with honest sum-counter and deterministic _matches. Distributed shared-WAL remains unproven and blocked by TN 0.667 session non-replication. Health-gated single-node gate directly tests the step from bounded synthetic EXPERIMENTAL to single-node VALIDATED required before honest residual-novelty M_total_f10 Pareto can be attempted. Central to cumulative inheritance and product leverage."
+    },
+    "cycle_id": "36017334761",
+    "lane": "graph",
+    "portfolio_assessment": "SPIDER has 338 canonical experiments but 7/10 claims MEASUREMENT_INVALID (100 invalid). Only narrow synthetic survivors exist: C-FRESHNESS orthogonality at delta 0.15 (r 0.002-0.046) and TN>=0.85 at 15% stale on flat-JSON stdlib http.server (EXP-GRAPH-35940399935/35947468747) and C-DELTA-REPAIR synthetic localized repair 0.3125 token ratio (EXP-GRAPH-35952148696). No VALIDATED substrate: C-MEAS-VALID 93 exps tunnel 53-deep with CDN double-brotli root cause, closest Flask+PyJWT HS256 0.833-1.0 but body-dominated; C-PARAM-INHERIT 6 consecutive invalid add_to_cart pilots; C-CROSSSITE census 192/36 duplication 0.9479 but AX_consistency 0.2857 invalid with REUSED trees; C-RESIDUAL-NOVELTY zero honest M_total_f10 measurements; Frontier 17-deep alias catalog bounded 21/40=0.525 0/10 mixed zero routing gain; Physics 13/13 C-WEB-DYNAMICS with forced-zero |R|=1/H=0 settings. Highest leverage is break invalid\u2192retry loop via health-gated single-node HS256 sticky $request_uri If-None-Match/304 honesty gate (n_non304>=360) before any distributed n>=800 or f=100 LLM authorization, while forcing basin breaks on tunneled lanes. Product economics cannot be honestly measured until graph kernel durability and intel census contamination are unblocked.",
+    "schema_version": 1,
+    "scout_assessment": "Scout brief accurately diagnosed tunnel vs novelty choice and 7/10 MEASUREMENT_INVALID with single-node vs distributed gap as central blocker. Accepted scout's health-gated single-node honesty gate before distributed scale, Frontier 17-deep bounded ceiling (21/40 p=1.0 zero gain), Runtime 53-deep CDN double-encoding diagnosis, and Intel AX_consistency unmeasured as highest unblock. Challenged scout's suggestion to immediately authorize distributed n>=800 or per-hit Pareto at scale: deferred distributed transfer and f=100 LLM until single-node gate passes with deterministic _matches, per-trajectory-reset sum counters, and contamination<0.10. Challenged scout's implicit Frontier continue of alias/routing/WebMCP: explicitly pivoted to residual-novelty economics synthetic gate with honest cost, not 18th variant. Assigned deep verification of WebGym 300k/WebMCP/O(1) compilation claims to Intel after scout's shallow external review, not taken as SPIDER evidence."
+  },
+  "experiment_id": "EXP-GRAPH-36018188168",
+  "inherited_last_verdict": "MEASUREMENT_INVALID",
+  "inherited_next_question": "Can an honest re-execution deploying actual nginx 1.24.0 $request_uri sticky in front of 2x gunicorn 23 Flask 3.1.3 PyJWT HS256 workers sharing WAL DB at /tmp/spider-runtime/EXP-GRAPH-35999336958/single.db, with per-request deterministic _matches verification, per-trajectory-reset integer sum-counter (resolve1+bind1+verify1+freshness1+browser0/1 per mutated id, k*5 tokens 5/10/15), TRAIN18/TEST12 AUROC at frozen 0.85 vs unclamped 1000 trajectory-grouped perm null, 5000 family-stratified trajectory-grouped bootstrap, and registry-clone re-verification for both disjoint and same-resource contamination, achieve TN>=0.85 FA<=0.10 repair>=0.80 pooled >=0.70 per family contamination<0.10 at blast radius 1-3 (K1 30 stale 10 per family, K2 10, K3 10) on the health-gated single-node substrate with n_non304>=360, before any distributed n>=800 shared-WAL or f=100 real-LLM authorization?",
+  "lane": "graph",
+  "origin_github_run_id": "36018188168",
+  "parent_handoff": {
+    "experiment_id": "EXP-GRAPH-35999336958",
+    "path": "research/experiments/EXP-GRAPH-35999336958/handoff.json",
+    "sha256": "6e292657ef8b671d95b6f40e23953736a7cdcca1be4c048f2abc4782d5479748"
+  },
+  "reason": "global-director-CONTINUE",
+  "request_hash": "fb3ea2647138956207e2c34ff21a0e4fc313b68103d8f3d8c55f25c8dff64240",
+  "request_id": "aae44973220c83c21011580c",
+  "schema_version": 1
+}

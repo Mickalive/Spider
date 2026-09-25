@@ -86,6 +86,12 @@ def main() -> None:
     lane_registry = load("research/lanes/registry.json")["lanes"]
     claim_registry = {c["id"]: c for c in load("research/claims/registry.json")["claims"]}
     index = load("codex/index.json").get("experiments", {})
+    quarantine = load("codex/quarantine.json")
+    quarantine_by_id = {
+        item.get("experiment_id"): item
+        for item in quarantine
+        if item.get("experiment_id")
+    }
     claim_state = load("codex/claim_state.json")
     latest_claim_events = claim_state.get("latest_event_by_claim", {})
 
@@ -189,6 +195,12 @@ def main() -> None:
             ),
         )
 
+        state_last_id = state.get("last_experiment_id")
+        state_last_quarantine = quarantine_by_id.get(state_last_id)
+        canonical_last = lane_entries[-1] if lane_entries else None
+        canonical_last_id = canonical_last.get("experiment_id") if canonical_last else None
+        canonical_last_decision = canonical_last.get("decision") if canonical_last else None
+
         lanes[lane] = {
             "mission": cfg.get("mission"),
             "priority_claims": priority,
@@ -197,9 +209,18 @@ def main() -> None:
             "active_has_portfolio_mandate": active_has_portfolio_mandate,
             "last_failure_retryable": state.get("last_failure_retryable"),
             "same_failure_count": state.get("same_failure_count", 0),
-            "last_experiment_id": state.get("last_experiment_id"),
-            "last_verdict": state.get("last_verdict"),
-            "parent_handoff_proposal": state.get("next_question"),
+            # Direction must reason from accepted evidence. Preserve the lane's
+            # raw operational pointer separately when it points at quarantine.
+            "last_experiment_id": canonical_last_id,
+            "last_verdict": canonical_last_decision,
+            "lane_state_last_experiment_id": state_last_id,
+            "lane_state_last_quarantined": bool(state_last_quarantine),
+            "lane_state_last_quarantine_reason": (
+                state_last_quarantine.get("error") if state_last_quarantine else None
+            ),
+            "parent_handoff_proposal": (
+                None if state_last_quarantine else state.get("next_question")
+            ),
             "continue_requested": bool(state.get("continue_immediately", False)),
             "last_claim": last_claim,
             "claim_streak": streak,
@@ -221,6 +242,7 @@ def main() -> None:
         ),
         "global": {
             "canonical_experiments": len(experiments),
+            "quarantined_experiments": len(quarantine_by_id),
             "recent_window": args.recent_window,
             "recent_experiments": len(recent_global),
             "starved_claims": starved_claims,

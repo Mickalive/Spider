@@ -4,7 +4,7 @@ Pre-2.0 canonical memory remains frozen at `archive/spider-codex-ultimate:SPIDER
 
 Canonical Research 2.0 evidence lives in `codex/experiments/<experiment_id>/`.
 Use `codex/index.json` and `codex/claim_state.json` to locate relevant packets; do not load all experiment bodies by default.
-Validated experiments: **338**. Coverage gaps: **0**. Quarantined packets: **1**.
+Validated experiments: **379**. Coverage gaps: **0**. Quarantined packets: **2**.
 
 ## Experiment index
 
@@ -348,6 +348,47 @@ Validated experiments: **338**. Coverage gaps: **0**. Quarantined packets: **1**
 | EXP-INTEL-35999366789 | intel | PASS | MIXED | C-CROSSSITE, C-RESIDUAL-NOVELTY, C-PRODUCT-ECON | `17c28f5b2ee9` |
 | EXP-FRONTIER-35999373906 | frontier | MEASUREMENT_INVALID | MEASUREMENT_INVALID | C-RESIDUAL-NOVELTY | `de86fb12fc10` |
 | EXP-RUNTIME-36004383518 | runtime | MEASUREMENT_INVALID | MEASUREMENT_INVALID | C-MEAS-VALID | `0c041724baa2` |
+| EXP-PHYSICS-36013140158 | physics | MEASUREMENT_INVALID | MEASUREMENT_INVALID | C-WEB-DYNAMICS | `998f3ef911d1` |
+| EXP-RUNTIME-36013149664 | runtime | MEASUREMENT_INVALID | MEASUREMENT_INVALID | C-MEAS-VALID | `37efb7c025d3` |
+| EXP-GRAPH-36018188168 | graph | PASS | SURVIVES_CURRENT_TEST | C-DELTA-REPAIR | `333b54f36b1d` |
+| EXP-FRONTIER-36018230359 | frontier | MEASUREMENT_INVALID | MEASUREMENT_INVALID | C-RESIDUAL-NOVELTY | `c651c8f9d86a` |
+| EXP-RUNTIME-36020884510 | runtime | MEASUREMENT_INVALID | MEASUREMENT_INVALID | C-MEAS-VALID | `651b726363b1` |
+| EXP-PRODUCT-36020894109 | product | MEASUREMENT_INVALID | MEASUREMENT_INVALID | C-PRODUCT-ECON | `f50726bca9dd` |
+| EXP-INTEL-36020904615 | intel | PASS | MIXED | C-CROSSSITE, C-PRODUCT-ECON, C-RESIDUAL-NOVELTY | `d2ec81b3eead` |
+| EXP-RUNTIME-36030564009 | runtime | MEASUREMENT_INVALID | MEASUREMENT_INVALID | C-MEAS-VALID | `d6eb12aa3673` |
+| EXP-RUNTIME-36033919138 | runtime | MEASUREMENT_INVALID | MEASUREMENT_INVALID | C-MEAS-VALID | `00b0148f0d82` |
+| EXP-FRONTIER-36033935647 | frontier | MEASUREMENT_INVALID | MEASUREMENT_INVALID | C-RESIDUAL-NOVELTY | `67050f01369b` |
+| EXP-PRODUCT-36036421062 | product | PASS | MEASUREMENT_INVALID | C-PRODUCT-ECON | `1973aba861c0` |
+| EXP-INTEL-36037208652 | intel | REVISE | MIXED | C-CROSSSITE, C-MEAS-VALID, C-WEB-DYNAMICS | `71f2cf41f317` |
+| EXP-FRONTIER-36037217518 | frontier | FAIL | FALSIFIED-IN-SETTING | C-RESIDUAL-NOVELTY | `fa10fbe798a7` |
+| EXP-PHYSICS-36038994684 | physics | MEASUREMENT_INVALID | MEASUREMENT_INVALID | C-WEB-DYNAMICS | `70b96211d494` |
+| EXP-INTEL-36042590671 | intel | REVISE | MIXED | C-CROSSSITE | `14a6459a29ef` |
+| EXP-FRONTIER-36042599040 | frontier | PASS | FALSIFIED-IN-SETTING | C-RESIDUAL-NOVELTY | `1abfc09bcd5b` |
+| EXP-RUNTIME-36044045537 | runtime | REVISE | EXPERIMENTAL_BOUNDED — C-MEAS-VALID survives frozen C1-C4 thresholds on single-node honesty gate (C1 n_non304=850>=800 stratified 422/428 hs_rate=1.0 batch_ts=26; C3 |rho_shuffled|=0.0397 p=0.374 within_f_std=4.468 width=0.1143 effective=6 nullFP=0.0; C4 full=0.7619 CI[0.7048,0.8190] width=0.1143 effective=4 >0.5 and full>body(0.381)+0.05 diff_lo=0.3143 nullFP=0.0) with exclusive nginx -c, factory WSGI, shared TESTBED_SECRET and health-gate 0 missing verified, but audit REVISE downgrades producer SUPPORTS to bounded EXPERIMENTAL due to construct-validity threats: C2 header-only Jaccard variance=0.0 mean=1.0 constant (r=0.0 trivial by implementation, headers invariant to auth drift), C4 margin driven by synthetic post-response header mutation not natural auth-state header variation, C5 secondary FAIL header_drift=0.9583<1.0, HIT 330/330 in-memory only with proxy_cache_disabled=true, nginx duplicate hash warning. Claim ceiling remains single-node localhost EXPERIMENTAL, not VALIDATED/PRODUCT_CORE; distributed shared-WAL n>=800 HIT remains UNKNOWN. | C-MEAS-VALID | `88f6c08cd3cd` |
+| EXP-PRODUCT-36046064994 | product | PASS | MEASUREMENT_INVALID | C-PRODUCT-ECON | `8870887a6940` |
+| EXP-FRONTIER-36046077922 | frontier | MEASUREMENT_INVALID | MEASUREMENT_INVALID | C-WEB-DYNAMICS | `a64da165000e` |
+| EXP-RUNTIME-36047340781 | runtime | PASS | FALSIFIED-IN-SETTING | C-MEAS-VALID | `33041786df99` |
+| EXP-FRONTIER-36049636798 | frontier | MEASUREMENT_INVALID | MEASUREMENT_INVALID | C-RESIDUAL-NOVELTY | `debe94de9781` |
+| EXP-PHYSICS-36052025550 | physics | MEASUREMENT_INVALID | MEASUREMENT_INVALID | C-WEB-DYNAMICS | `d134291129e8` |
+| EXP-FRONTIER-36052053591 | frontier | PASS | MEASUREMENT_INVALID | C-SEMANTIC-RESOLVE | `a44d80c206e7` |
+| EXP-INTEL-36058324385 | intel | REVISE | MIXED — H_SAMPLED_CENSUS_REPLACES_EXHAUSTIVE does NOT SURVIVE on attempted censuses; durable single-source pin survives but union 4/10, WebGym diverse UNAVAILABLE pending HF_TOKEN, delta inverted fails gate | C-CROSSSITE | `e5f53e7c8be8` |
+| EXP-PHYSICS-36084494842 | physics | MEASUREMENT_INVALID | MEASUREMENT_INVALID | C-WEB-DYNAMICS | `417b39b15b18` |
+| EXP-RUNTIME-36084499865 | runtime | MEASUREMENT_INVALID | MEASUREMENT_INVALID | C-MEAS-VALID | `cfd479c8d84c` |
+| EXP-INTEL-36084509510 | intel | REVISE | MIXED | C-CROSSSITE | `a088f9ffcd23` |
+| EXP-PRODUCT-36089498872 | product | MEASUREMENT_INVALID | MEASUREMENT_INVALID | C-LLM-INHERIT | `f53a5da1b7c2` |
+| EXP-RUNTIME-36089494979 | runtime | PASS | SUPPORTS — Stable-header single-node real-cache honesty gate restored. All mandatory validity gates and primary C1-C5 pass with independent audit PASS (scoped uuid-absence, exclusive nginx -c single hash, real proxy_cache ENABLED, honest trajectory-block integer sums, greedy MAX_DEPTH5). Bounded single-node EXPERIMENTAL ceiling; distributed remains UNKNOWN. Not VALIDATED/PRODUCT_CORE. | C-MEAS-VALID | `575ce3f98dc3` |
+| EXP-FRONTIER-36089506922 | frontier | PASS | MEASUREMENT_INVALID | C-RESIDUAL-NOVELTY | `3e0eb4f6240d` |
+| EXP-PRODUCT-36091881382 | product | MEASUREMENT_INVALID | MEASUREMENT_INVALID | C-LLM-INHERIT | `d91ba36800e6` |
+| EXP-FRONTIER-36091890748 | frontier | PASS | MEASUREMENT_INVALID | C-RESIDUAL-NOVELTY | `6e5d0ad2b3b3` |
+| EXP-INTEL-36092351694 | intel | PASS | MIXED | C-CROSSSITE | `fce9fb4677ca` |
+| EXP-RUNTIME-36094450333 | runtime | PASS | SUPPORTS — DISTRIBUTED VALIDATED (bounded plain HTTP localhost) | C-MEAS-VALID | `7b5d00adcdb6` |
+| EXP-PRODUCT-36095578013 | product | MEASUREMENT_INVALID | MEASUREMENT_INVALID | C-PRODUCT-ECON | `4748e7c91b19` |
+| EXP-INTEL-36095582115 | intel | PASS | MIXED | C-CROSSSITE | `7143ed4b13c5` |
+| EXP-FRONTIER-36095585747 | frontier | PASS | MEASUREMENT_INVALID | C-RESIDUAL-NOVELTY | `33d32aac3872` |
+| EXP-FRONTIER-36097242687 | frontier | PASS | MEASUREMENT_INVALID | C-RESIDUAL-NOVELTY | `7415f8196489` |
+| EXP-FRONTIER-36099072254 | frontier | PASS | MEASUREMENT_INVALID | C-RESIDUAL-NOVELTY | `b99164df382a` |
+| EXP-RUNTIME-36100549580 | runtime | PASS | SUPPORTS — DISTRIBUTED VALIDATED canonical shared-WAL real-cache gate (C-MEAS-VALID) on plain HTTP localhost | C-MEAS-VALID | `6dd3ce57cf07` |
+| EXP-FRONTIER-36100559236 | frontier | PASS | MEASUREMENT_INVALID | C-RESIDUAL-NOVELTY | `4eb8baef16a0` |
 
 ## Latest recorded claim events
 
@@ -355,16 +396,16 @@ These are chronological latest events, not an automatic truth ranking.
 
 | Claim | Status | Experiment | Lane |
 |---|---|---|---|
-| C-CROSSSITE | EXPERIMENTAL | EXP-INTEL-35999366789 | intel |
-| C-DELTA-REPAIR | MEASUREMENT_INVALID | EXP-GRAPH-35999336958 | graph |
+| C-CROSSSITE | HYPOTHESIS | EXP-INTEL-36095582115 | intel |
+| C-DELTA-REPAIR | EXPERIMENTAL | EXP-GRAPH-36018188168 | graph |
 | C-FRESHNESS | HYPOTHESIS | EXP-PRODUCT-35949571341 | product |
-| C-LLM-INHERIT | MEASUREMENT_INVALID | EXP-PRODUCT-35961222077 | product |
-| C-MEAS-VALID | MEASUREMENT_INVALID | EXP-RUNTIME-36004383518 | runtime |
+| C-LLM-INHERIT | MEASUREMENT_INVALID | EXP-PRODUCT-36091881382 | product |
+| C-MEAS-VALID | VALIDATED | EXP-RUNTIME-36100549580 | runtime |
 | C-PARAM-INHERIT | MEASUREMENT_INVALID | EXP-GRAPH-35932480731 | graph |
-| C-PRODUCT-ECON | HYPOTHESIS | EXP-INTEL-35999366789 | intel |
-| C-RESIDUAL-NOVELTY | MEASUREMENT_INVALID | EXP-FRONTIER-35999373906 | frontier |
-| C-SEMANTIC-RESOLVE | EXPERIMENTAL | EXP-FRONTIER-35949576588 | frontier |
-| C-WEB-DYNAMICS | HYPOTHESIS | EXP-PHYSICS-35958392024 | physics |
+| C-PRODUCT-ECON | MEASUREMENT_INVALID | EXP-PRODUCT-36095578013 | product |
+| C-RESIDUAL-NOVELTY | HYPOTHESIS | EXP-FRONTIER-36100559236 | frontier |
+| C-SEMANTIC-RESOLVE | HYPOTHESIS | EXP-FRONTIER-36052053591 | frontier |
+| C-WEB-DYNAMICS | HYPOTHESIS | EXP-PHYSICS-36084494842 | physics |
 
 ## Integrity accounting
 

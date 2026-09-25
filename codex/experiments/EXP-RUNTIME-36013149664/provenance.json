@@ -1,0 +1,44 @@
+{
+  "experiment_id": "EXP-RUNTIME-36013149664",
+  "github_run_id": 36013149664,
+  "base_sha": "02ad0bfb98ddba93d8aa3ff67e1eac983084e19c",
+  "request_hash": "a7da7aa7a63e17c7da513e1eb956b99d66281f03a1c6c6dbb5d3c22260b833ba",
+  "env": {
+    "python": "3.12.14 (main, Aug 13 2026, 02:47:42) [GCC 13.3.0]",
+    "flask": "3.1.3",
+    "pyjwt": "2.14.0",
+    "gunicorn": "23.0.0",
+    "nginx": "1.24.0",
+    "requests": "2.34.2",
+    "sqlite3": "3.45.1",
+    "brotli": "available",
+    "gzip": "available",
+    "scipy": "1.18.1",
+    "playwright": "not available (secondary/disclosed)"
+  },
+  "ports": {
+    "flask": 19860,
+    "nginx": 19851
+  },
+  "seed": 44,
+  "db_path": "/tmp/spider-runtime/36013149664/app.db",
+  "hs256_secret_sha256": "3fbf808d9c2dcfb00c6cb1544fa610228e0567d13fc67f6847fd159d77d72e40",
+  "hs256_secret_len": 62,
+  "n_observations": 0,
+  "n_hit_observations": 0,
+  "n_browser_observations": 0,
+  "batch_state_log": [],
+  "factory_pattern_wsgi": true,
+  "flask_listening_verified": true,
+  "health_gate_verified": false,
+  "wsgi_sys_path_insert": true,
+  "jwt_decode_at_origin": true,
+  "single_nginx_location": true,
+  "freeze_hashes": {
+    "request.json": "d57750a2c72e7282acb4c8ee22914eee006ee5e4592f84a4d5c33f048ccb2e17",
+    "spec.json": "49b3bab8839a281098b4986bd856d6965fd8cbad64e969b4aa93077db0d4b034",
+    "prereg.md": "f7133d41ca14fd0ccebc78518373f30a853990294840e952ed803c8e428afc19"
+  },
+  "scope": "single-node only - no distributed WAL, no 2x gunicorn, no paid CDN",
+  "created_at": "2026-09-24T15:19:26.367942+00:00"
+}

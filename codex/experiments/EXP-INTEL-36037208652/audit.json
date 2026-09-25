@@ -1,0 +1,245 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-36037208652",
+  "lane": "intel",
+  "status": "REVISE",
+  "producer_claim_supported": false,
+  "required_fixes": [
+    "Rotation-insensitive/freshness-gated Stagehand SHA variant not implemented (frozen MV6 requires explicit test; marked UNAVAILABLE/null). Without this variant, HIT>=0.8 gate cannot be evaluated on its intended path; current 0.775 is bounded by mixed-channel 0.4 ceiling.",
+    "Gate0 multi-step collection UNAVAILABLE on live BrowserGym sites (GHCR manifest 404 x2, docker pull denied x2). Fixture proves counter logic (PC-D PASS) but does not satisfy frozen requirement: >=50 transitions/family on >=10 families across shopping_admin, Reddit, GitLab, Wikipedia, VisualWebArena, WorkArena with per-trajectory counters and leakage <0.40.",
+    "WebGym 292k diverse eTLD+1 duplication CI and threshold sweep UNAVAILABLE (HF_TOKEN absent, 2x401 logged). Per MV5 exception this does not trigger MEASUREMENT_INVALID, but H_A cannot SURVIVE without at least one orthogonal census achieving >=10 families AND WebGym clause (PASS or documented UNAVAILABLE). Orthogonal union 0 families means WebGym UNAVAILABLE cannot compensate.",
+    "AX full-tree captures reused from prior experiment (EXP-INTEL-36020904615) because Docker container not live this run. Disclosed as validity_note but constitutes representation loss: fresh live CDP Accessibility.getFullAXTree at 1280x720 on canonical families 136/145/196/222 not re-executed. Grammar hash matches (273eafbcb live) and gates pass on reused captures, but frozen MV3 requires live probe.",
+    "NC2 shuffled-variant delta 0.3110 FAILS gate_delta_lt_0.05 (B=500). Structural floor ~0.31 from coverage-ratio truncation means the frozen null control cannot be falsified under literal token-reassignment. Requires Director/audit adjudication of frozen wording (literal vs mutation-sensitivity).",
+    "Cross-source byte-identity HF vs Docker manifest remains UNAVAILABLE (HF 401 x2). Single-source Docker suffices per prereg but cross-source verification is a durability gap for Codex acceptance.",
+    "Environment drift: pip_freeze 238 lines (vs prior 263), tldextract missing. Core versions (browsergym-core 0.14.3, agentlab 0.4.2, playwright 1.63.0) match but drift should be resolved for reproducibility."
+  ],
+  "validity_findings": [
+    "MV1 PASS: All durable sources logged >=2 genuine attempts with URL, HTTP status/returncode, bytes, sha256, 64-char digest check, timeout 300s, stderr/stdout tails. HF WebArena 401x2, HF Hard258 401+200 (GitHub fallback 200x2), HF WebGym 401x2, GHCR 6 attempts (anon 403, authed 200, manifest 404x2, pull denied x2), Docker Hub 4 attempts (Hub API 200x3, pull x2), GitHub raw 4 attempts 200x2. Orthogonal WebMall/Mind2Web/WebGym 2 each. All logged in artifacts/raw/*attempts.json.",
+    "MV2 PASS with single-source disclosure: Primary manifest SHA d6527566 byte-identical via GitHub raw 2x (artifacts/raw/github_cross_source_attempts.json). Docker digest sha256:3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb verified via Hub API 200x3 (artifacts/raw/docker_hub_api_attempts.json). GHCR 64-hex digest UNAVAILABLE (manifest 404) correctly not assumed equal. Cross-source HF vs Docker equality explicitly UNAVAILABLE, not falsified.",
+    "MV3 PASS with reuse disclosure: pip_freeze 238 lines sha af78453f nonempty; browsergym-core 0.14.3, agentlab 0.4.2, playwright 1.63.0, viewport 1280x720 verified. CDP Accessibility.getFullAXTree required. Grammar hash live 273eafbcb matches parent. Body regex <body[^>]*>.*?</body> DOTALL + 9 base + expanded stripping {form_key,uenc,store,session,nonce,timestamp,fotorama\\d{6,}} present. Truncated [:20] computed for delta 0.4271 PASS. However, fresh live CDP probe NOT re-executed this run (docker not live); prior ax_captures.jsonl (12 canonical, median AX717 DOM203748) reused byte-identical with fresh environment_pin.json. This is honest reuse disclosed, but representation loss for a fresh EXECUTE.",
+    "MV4 PASS: Deterministic sampling executed exactly twice per census as random.Random(35725763380).sample(sorted_families_ge3,10) with seed reset logged S1==S2 on primary (10 ids, 2 product_page) and hard258 (10 ids, 2 product_page). Orthogonal censuses (empty sets) logged S1/S2 as ValueError strings with n_unique=0, not fabricated families. Per-family anchoring json preserved from prior family_anchoring.json (4 families anchoring true SHA both directions TRUE). Without orthogonal >=10 gate FAIL correctly reported.",
+    "MV5 WebGym diverse clause correctly defaults to UNAVAILABLE not MEASUREMENT_INVALID: HF_TOKEN absent, 2x401 attempts >=300s logged (hf_webgym_manifest_attempts.json). PC-C UNAVAILABLE. Sweep range null correctly not fabricated. Family bootstrap B=2000 not computed due manifest unavailable but width diagnostic not fabricated.",
+    "MV6 PASS with variant gap: Stagehand expanded stripping ablation logged (lift 0.775, pre 0.0, post 0.775, per-channel breakdown). Rotation-insensitive/freshness-gated SHA variant NOT separately implemented - disclosed as null variant in M_STAGEHAND_HIT_ROTATION_INSENSITIVE, not hidden. Full-DOM SHA instability tautology not used as MISS. However, frozen spec explicitly requires variant test; absence is validity finding.",
+    "MV7 PASS with UNAVAILABLE handling: BrowserGym import success but live multi-step collection UNAVAILABLE after 2 genuine GHCR/docker attempts (manifest denied). Per-trajectory-reset counters documented with family labels, per-family counts (fixture: shopping_admin 50), deterministic seeds logged. Leakage <0.40 not measured due substrate UNAVAILABLE, logged not zero per MV1. PC-D fixture 2 families proves counter logic.",
+    "MV8 PASS: Every artifact path+sha256 in provenance.json and result.json:artifacts (31 raw/derived + 3 code/fixtures). Request/spec/prereg/freeze hashes, pip freeze hash nonempty, docker images --digests, GHCR/Docker Hub attempts, HF manifest 401 logs, orthogonal census provenance (manifests, histograms, S1/S2), Hard258 census sha, anchoring json, ax captures/probe logs, threshold sweep table, AX_consistency fulltree json, Stagehand stripping delta, Gate0 per-family counts. No missing provenance for durability/AX/Gate0 paths.",
+    "Degenerate CIs correctly flagged: BMEM [0,0] and ROUTING/WebMCP [1,1] variance 0 flagged as invalid width per prereg 12.7, not counted as high-precision. DSM coverage 0.75 [0.625,0.875] interior non-degenerate.",
+    "Homepage probes excluded from constructibility per frozen MV4 despite satisfying anchors (heading2 price4 add_to_cart2 main485 contentinfo31). Counting them would be measurement fraud per prior audit 18/20 identical rejection. Correctly excluded.",
+    "Harness byte-identity verified: sha b11ea9700c7190f1fb7ef6f169af1f5da4d04dd6d52ae631376cc3c51f59ff21 409 rows (327 blind + 82 Stagehand) byte-identical across experiments.",
+    "Synthetic alias-OOD 40-task (seed 360360 sha 6f42bc82) is orthogonal estimator benchmark, not real DOM heterogeneity. Real WebArena hold-out transfer remains unknown until Graph runs N>=120 hold-out with this census."
+  ],
+  "baseline_findings": [
+    "B-DURABLE-PIN-812: PASS. Manifest SHA d65275660814663375028e9017e1f929e3c38321041b125795e2713b52243d30 byte-identical x2 (GitHub raw). Docker Hub am1n3e/webarena-verified-shopping@sha256:3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb Hub API 200x3 digest match true. Docker pull logged. SRC_DOCKER_SUCCESS true (GHCR UNAVAILABLE after 6 genuine attempts; single-source suffices per prereg).",
+    "B-ORTHO-WEBMALL-MIND2WEB-130: UNAVAILABLE. 2 genuine HF attempts 404/401 logged (webmall_attempts.json). 0 families_ge3, 0 product_page families. Deterministic S1/S2 on empty set logged error. Correctly UNAVAILABLE not zero.",
+    "B-ORTHO-MIND2WEB-EXPANSION: UNAVAILABLE. 2 genuine HF attempts on osunlp/Mind2Web: tree 200 (888 bytes), README 200 (4308 bytes) but no distinct manifest for shopping vs shopping_admin expansion. 0 families expansion. UNAVAILABLE logged.",
+    "B-WEBGYM-292K-DIVERSE: UNAVAILABLE. HF_TOKEN absent, 2x401 logged. Diverse count null, CI null, sweep null. Correctly UNAVAILABLE per MV5 exception, not zero/falsified.",
+    "B-TRUNCATED-20: MIXED. delta_vs_truncated=0.4271 PASS >=0.20 (full-tree non-vacuous). NC2 shuffled-variant delta_mean=0.3110 B=500 gate_delta_lt_0.05 FAIL. Structural floor ~0.31 disclosed - null cannot be falsified under literal token-reassignment operationalization.",
+    "B-BROWSERGYM-GATE0-MULTISTEP: UNAVAILABLE. BrowserGym import success but live multi-step collection UNAVAILABLE after 2 genuine GHCR/docker attempts (ghcr_browsergym_attempts.json). Fixture per-family 1/6 meets threshold (shopping_admin 50), leakage null UNAVAILABLE. Counter logic proven on PC-D fixture.",
+    "B-STAGEHAND-SELECTOR: PARTIAL. HIT_post 0.775 [0.625,0.9] 31/40 FAIL >=0.8. HIT_pre 0.0 PASS <0.4. Lift 0.775 PASS >=0.40. Per-channel: header1.0 auth1.0 body0.7 mixed0.4 (mixed 0.4 ceiling). Rotation-insensitive variant not implemented (UNAVAILABLE). Bounded by mixed-channel ceiling.",
+    "B-COLD-LLM: PASS. COLD coverage 0.25 floor, M_total_f10 38.0 highest cost. Reference not gating H_A.",
+    "PC-SYNTHETIC-FIXTURE-TOY-STAGEHAND-WEBGYM-GATE0-SANITY: MIXED. PC-A canonical 12 captures median AX717 min627 DOM203748 min195052 SHA both TRUE PASS; fixture DOM384 <2000 anchors_gt1_all FALSE disclosed. AX_consistency on 4 families mean0.454 FAIL gates but delta PASS. PC-B DSM toy/Stagehand toy 1.0 PASS. PC-C UNAVAILABLE (HF 401) not failed. PC-D fixture families_ge3 2 PASS.",
+    "NC-SHUFFLED-TRUNCATION-STAGEHAND-GATE0-AX: MIXED. NC1 |rho_shuffled|=0.1936 PASS <0.20 p_real_vs_shuffled 0.0. NC2 shuffled delta 0.311 FAIL. NC3 lift 0.775 PASS. NC4 shuffled mean 0.311 <<0.6 PASS but p=0.0 not >0.05 ambiguous. NC5 shuffled leakage UNAVAILABLE correctly distinguished. All trajectory-grouped family-level."
+  ],
+  "recomputed_metrics": {
+    "M_CONSTRUCTIBLE_FAMILIES": {
+      "value": 4,
+      "gate": ">=10",
+      "pass": false,
+      "families": ["fam136", "fam145", "fam196", "fam222"],
+      "union": 4,
+      "orthogonal_union": 0,
+      "evidence": "artifacts/derived/census_summary.json; artifacts/derived/deterministic_family_samples.json; artifacts/derived/family_anchoring.json",
+      "audit_note": "Matches producer. Primary 4 product_page families, Hard258 adds 0 new (subset), orthogonal censuses 0. Deterministic sampling S1==S2 verified on primary/hard258. Union unique product_page families = 4."
+    },
+    "M_CONSTRUCTIBLE_FAMILIES_ORTHO_ONLY": {
+      "value": 0,
+      "gate": ">=10 orthogonal alone",
+      "pass": false,
+      "orthogonal_webmall": 0,
+      "orthogonal_mind2web_expansion": 0,
+      "orthogonal_webgym": 0,
+      "evidence": "artifacts/derived/orthogonal_webmall_census.json; artifacts/derived/orthogonal_mind2web_expansion_census.json; artifacts/derived/orthogonal_webgym_derived_census.json",
+      "audit_note": "Matches producer. All three orthogonal censuses UNAVAILABLE after 2 genuine attempts each (401/404). Empty families_ge3, empty product_page_families. Honest UNAVAILABLE not zero."
+    },
+    "M_AX_CONSISTENCY_MEAN": {
+      "value": 0.45426266604842663,
+      "gate": ">=0.6",
+      "pass": false,
+      "n_families": 4,
+      "frozen_gate_family_set_available": false,
+      "evidence": "artifacts/derived/ax_consistency_fulltree.json",
+      "audit_note": "Matches producer. Computed on 4 constructible families (max available). Mean 0.454 < 0.6 gate. Frozen gate requires >=10 families - unavailable on this substrate."
+    },
+    "M_AX_CONSISTENCY_CI_LOWER": {
+      "value": 0.3960327368567069,
+      "ci": [0.3960327368567069, 0.5163660993035543],
+      "B": 2000,
+      "unit": "family",
+      "gate": ">0.5",
+      "pass": false,
+      "evidence": "artifacts/derived/ax_consistency_fulltree.json",
+      "audit_note": "Matches producer. Bootstrap 95% CI lower 0.396 <= 0.5 gate. Family-level unit correct per prereg."
+    },
+    "M_AX_SHUFFLE_P": {
+      "value": 0.0,
+      "shuffle_mean": 0.31108505612628257,
+      "B": 2000,
+      "gate": "<0.05",
+      "pass": true,
+      "evidence": "artifacts/derived/ax_consistency_fulltree.json",
+      "audit_note": "Matches producer. Shuffle p=0.0 distinguishes real from chance. Family-level B=2000 correct."
+    },
+    "M_AX_GAP": {
+      "value": 0.14317760992214407,
+      "gate": ">=0.20",
+      "pass": false,
+      "evidence": "artifacts/derived/ax_consistency_fulltree.json",
+      "audit_note": "Matches producer. Gap 0.143 < 0.20 gate. Shuffle mean 0.311 reveals structural floor."
+    },
+    "M_AX_DELTA_TRUNCATED": {
+      "value": 0.4271251789146844,
+      "truncated_mean": 0.02713748713374225,
+      "gate": ">=0.20",
+      "pass": true,
+      "evidence": "artifacts/derived/ax_consistency_fulltree.json",
+      "audit_note": "Matches producer. Full-tree adds 0.427 vs [:20] truncated, confirming full-tree non-vacuous. NC2 shuffled variant delta 0.311 FAILS <0.05 gate - structural floor."
+    },
+    "M_AX_VARIANCE": {
+      "value": 0.004755471751318398,
+      "gate": ">0",
+      "pass": true,
+      "evidence": "artifacts/derived/ax_consistency_fulltree.json",
+      "audit_note": "Matches producer. Variance > 0 (non-degenerate)."
+    },
+    "M_STAGEHAND_HIT_POST_STRIP": {
+      "value": 0.775,
+      "ci": [0.625, 0.9],
+      "hits": 31,
+      "n": 40,
+      "gate": ">=0.80",
+      "pass": false,
+      "evidence": "artifacts/derived/stagehand_strip_delta.json",
+      "audit_note": "Matches producer. HIT 0.775 < 0.80 gate. CI [0.625, 0.9] includes 0.8 but point estimate fails. Per-channel mixed 0.4 ceiling bounds maximum."
+    },
+    "M_STAGEHAND_HIT_PRE_STRIP": {
+      "value": 0.0,
+      "hits": 0,
+      "n": 40,
+      "gate": "<0.40",
+      "pass": true,
+      "evidence": "artifacts/derived/stagehand_strip_delta.json",
+      "audit_note": "Matches producer. Pre-strip 0.0 confirms stripping load-bearing."
+    },
+    "M_STAGEHAND_LIFT": {
+      "value": 0.775,
+      "gate": ">=0.40",
+      "pass": true,
+      "per_channel": {
+        "auth": {"hit": 1.0, "n": 10},
+        "body": {"hit": 0.7, "n": 10},
+        "header": {"hit": 1.0, "n": 10},
+        "header-body-auth": {"hit": 0.4, "n": 10}
+      },
+      "evidence": "artifacts/derived/stagehand_strip_delta.json",
+      "audit_note": "Matches producer. Lift 0.775 >= 0.40 PASS. Mixed channel 0.4 is ceiling."
+    },
+    "M_STAGEHAND_HIT_ROTATION_INSENSITIVE": {
+      "value": null,
+      "status": "UNAVAILABLE",
+      "reason": "Rotation-insensitive/freshness-gated SHA variant not implemented as distinct code path. Frozen MV6 requires explicit test. Current HIT_post 0.775 without variant already below gate; variant would still be bounded by mixed 0.4 ceiling.",
+      "gate": ">=0.8 variant",
+      "pass": null,
+      "evidence": "artifacts/derived/stagehand_strip_delta.json",
+      "audit_note": "Producer disclosed as UNAVAILABLE. This is a frozen requirement gap, not infrastructure failure."
+    },
+    "M_GATE0_TRANSITIONS_PER_FAMILY": {
+      "value": {"shopping_admin": 50, "Reddit": 0, "GitLab": 0, "Wikipedia": 0, "VisualWebArena": 0, "WorkArena": 0},
+      "gate": ">=50 each on >=10 families",
+      "pass": false,
+      "families_meeting_threshold": 1,
+      "total_families_probed": 6,
+      "evidence": "artifacts/derived/gate0_per_family.json; artifacts/raw/gate0_attempts.json",
+      "audit_note": "Matches producer. Only fixture shopping_admin meets 50 (PC-D). Live BrowserGym UNAVAILABLE (GHCR manifest 404, pull denied). Leakage not measured. Frozen gate requires >=10 families live."
+    },
+    "M_GATE0_FAMILIES_MEETING_THRESHOLD": {
+      "value": 1,
+      "gate": ">=10",
+      "pass": false,
+      "evidence": "artifacts/derived/gate0_per_family.json",
+      "audit_note": "Matches producer. 1/10 families."
+    },
+    "M_GATE0_LEAKAGE_VALID_ONLY": {
+      "value": null,
+      "status": "UNAVAILABLE",
+      "reason": "Leakage <0.40 requires live BrowserGym transitions; substrate UNAVAILABLE after 2 genuine docker/ghcr attempts, logged not zero.",
+      "gate": "<0.40",
+      "pass": null,
+      "evidence": "artifacts/raw/gate0_attempts.json",
+      "audit_note": "Correctly UNAVAILABLE per MV1/MV7."
+    },
+    "M_RHO_SHUFFLED": {
+      "value": 0.1936,
+      "abs_mean": 0.1936,
+      "rho_real": 0.8739,
+      "p_real_vs_shuffled": 0.0,
+      "gate": "|rho_shuffled|<0.20",
+      "pass": true,
+      "evidence": "artifacts/derived/sota_analysis.json",
+      "audit_note": "Matches producer. Honest sum-counters verified (|rho_shuffled|<0.20)."
+    },
+    "M_HARD258_FAMILIES_GE3": {
+      "value": 11,
+      "families_ge3_ids": [101, 136, 139, 145, 154, 155, 160, 169, 191, 194, 208],
+      "product_page_families": [136, 145],
+      "gate": "diagnostic >=10 for hard slice",
+      "pass": true,
+      "evidence": "artifacts/derived/hard258_census.json",
+      "audit_note": "Matches producer. Hard258 11 families_ge3, 2 product_page (subset of primary 4). Task_ids subset of base true."
+    }
+  },
+  "claim_ceiling": "C-CROSSSITE remains bounded to HYPOTHESIS/EXPERIMENTAL at 4-family ceiling (families [136,145,196,222] from pinned WebArena-Verified v2 812 + Hard258 258 union). No orthogonal census (WebMall/Mind2Web-2 130-task, Mind2Web shopping vs shopping_admin 404 expansion, WebGym-derived 292k) yielded any constructible product families under frozen protocol (all UNAVAILABLE after 2 genuine 401/404 attempts). Full-tree multi-anchor AX_consistency fails frozen gates on available 4-family set (mean 0.454 < 0.6, CI lower 0.396 < 0.5, gap 0.143 < 0.20). Stagehand HIT 0.775 < 0.80 gate; rotation-insensitive variant not tested (frozen MV6 gap). Gate0 multi-step collection UNAVAILABLE on live sites (1/10 families fixture-only). WebGym diverse eTLD+1 duplication CI and sweep 0.818-0.9479 UNAVAILABLE (HF_TOKEN absent). The 23-deep C-CROSSSITE tunnel continues. C-MEAS-VALID and C-WEB-DYNAMICS remain HYPOTHESIS pending valid diverse census and Gate0 substrate. The producer's MIXED outcome is correct per frozen decision rule (bounded FALSIFIED triple not fully satisfied due to WebGym UNAVAILABLE exception and some modules passing), but no claim advances toward EXPERIMENTAL/VALIDATED.",
+  "evidence_refs": [
+    "research/experiments/EXP-INTEL-36037208652/request.json",
+    "research/experiments/EXP-INTEL-36037208652/spec.json",
+    "research/experiments/EXP-INTEL-36037208652/prereg.md",
+    "research/experiments/EXP-INTEL-36037208652/freeze.json",
+    "research/experiments/EXP-INTEL-36037208652/result.json",
+    "research/experiments/EXP-INTEL-36037208652/report.md",
+    "research/experiments/EXP-INTEL-36037208652/provenance.json",
+    "research/experiments/EXP-INTEL-36037208652/artifacts/raw/hf_manifest_attempts.json",
+    "research/experiments/EXP-INTEL-36037208652/artifacts/raw/hf_hard258_attempts.json",
+    "research/experiments/EXP-INTEL-36037208652/artifacts/raw/hf_webgym_manifest_attempts.json",
+    "research/experiments/EXP-INTEL-36037208652/artifacts/raw/ghcr_browsergym_attempts.json",
+    "research/experiments/EXP-INTEL-36037208652/artifacts/raw/docker_hub_api_attempts.json",
+    "research/experiments/EXP-INTEL-36037208652/artifacts/raw/docker_pull_attempts.json",
+    "research/experiments/EXP-INTEL-36037208652/artifacts/raw/github_cross_source_attempts.json",
+    "research/experiments/EXP-INTEL-36037208652/artifacts/raw/webmall_attempts.json",
+    "research/experiments/EXP-INTEL-36037208652/artifacts/raw/mind2web_attempts.json",
+    "research/experiments/EXP-INTEL-36037208652/artifacts/raw/orthogonal_census_provenance.json",
+    "research/experiments/EXP-INTEL-36037208652/artifacts/raw/environment_pin.json",
+    "research/experiments/EXP-INTEL-36037208652/artifacts/raw/pip_freeze.txt",
+    "research/experiments/EXP-INTEL-36037208652/artifacts/derived/webarena_census.json",
+    "research/experiments/EXP-INTEL-36037208652/artifacts/derived/hard258_census.json",
+    "research/experiments/EXP-INTEL-36037208652/artifacts/derived/deterministic_family_samples.json",
+    "research/experiments/EXP-INTEL-36037208652/artifacts/derived/census_summary.json",
+    "research/experiments/EXP-INTEL-36037208652/artifacts/derived/orthogonal_webmall_census.json",
+    "research/experiments/EXP-INTEL-36037208652/artifacts/derived/orthogonal_mind2web_expansion_census.json",
+    "research/experiments/EXP-INTEL-36037208652/artifacts/derived/orthogonal_webgym_derived_census.json",
+    "research/experiments/EXP-INTEL-36037208652/artifacts/derived/ax_consistency_fulltree.json",
+    "research/experiments/EXP-INTEL-36037208652/artifacts/derived/family_anchoring.json",
+    "research/experiments/EXP-INTEL-36037208652/artifacts/derived/stagehand_strip_delta.json",
+    "research/experiments/EXP-INTEL-36037208652/artifacts/derived/gate0_per_family.json",
+    "research/experiments/EXP-INTEL-36037208652/artifacts/derived/webgym_threshold_sweep.json",
+    "research/experiments/EXP-INTEL-36037208652/artifacts/derived/sota_analysis.json"
+  ],
+  "unresolved": [
+    "Whether >=10 constructible product families exist in any census orthogonal to pinned WebArena-Verified v2 812 and its Hard258 slice beyond attempted WebMall/Mind2Web-2 130-task and Mind2Web 404 expansion and WebGym-derived 292k families with HF_TOKEN - requires HF_TOKEN-provisioned fetch or independent eTLD+1 hosting beyond current 2x401/404 attempts.",
+    "Whether full-tree multi-anchor AX_consistency reaches mean>=0.6 CI lower>0.5 gap>=0.20 on a genuine >=10-family product_page set (frozen gate unavailable on 4-family slug-URL substrate; substrate sensitivity to catalog-id vs slug-URL unresolved - parent EXP-INTEL-36020904615 achieved 0.6208 on catalog-id substrate).",
+    "WebGym 292k diverse eTLD+1 duplication CI and threshold sweep 0.818-0.9479 pending HF_TOKEN - needs 292k manifest with family-level grouping and B=2000 bootstrap.",
+    "Correct NC2 shuffled-variant operationalization that can be falsified (delta<0.05) without structural floor ~0.31 from coverage-ratio truncation - requires Director/audit adjudication of frozen wording (literal token-reassignment vs mutation-sensitivity).",
+    "Stagehand HIT 0.775 vs gate 0.80: whether rotation-insensitive relevant-subtree or +1 hit (32/40) variant clears HIT>=0.8, or 0.775 is true ceiling under alias rotation (mixed 0.4 drives shortfall).",
+    "Cross-source byte-identity Docker vs HF manifest remains unverifiable without HF_TOKEN (HF 401 x2).",
+    "Real production Stagehand ~2x/30% economics on live Magento (not synthetic) - requires browser path latency/token measurement outside deterministic harness.",
+    "C-CROSSSITE beyond 4-family single-store ceiling and physics Gate0 >=50 transitions/family on >=10 families across 6 site families - remains blocked until orthogonal census with independent hosting delivers >=10 families.",
+    "Fresh live CDP Accessibility.getFullAXTree at 1280x720 on canonical families 136/145/196/222 not re-executed this run (docker not live); prior captures reused with fresh env pin. For Codex acceptance of reused AX substrate, fresh live probe is required."
+  ]
+}
