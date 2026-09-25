@@ -1,0 +1,102 @@
+{
+  "experiment_id": "EXP-FRONTIER-36095585747",
+  "timestamp": "2026-09-25T04:53:35.379816+00:00",
+  "live_available": false,
+  "browsergym_available": false,
+  "browsergym_core_available": false,
+  "playwright_available": false,
+  "agentlab_available": false,
+  "chromium_present": true,
+  "browsers_checked": {
+    "chromium": true,
+    "chromium-browser": true,
+    "google-chrome": true,
+    "google-chrome-stable": true,
+    "firefox": true
+  },
+  "modules_checked": {
+    "browsergym": false,
+    "browsergym.core": false,
+    "playwright": false,
+    "agentlab": false,
+    "numpy": false,
+    "scipy": false,
+    "sklearn": false,
+    "flask": false,
+    "tiktoken": false
+  },
+  "pypi_reachable": true,
+  "pypi_error": null,
+  "paths_checked": {
+    "intel_diverse_manifest": {
+      "exists": false,
+      "path": "/home/runner/work/Spider/Spider/research/intel/diverse_site_manifest.json"
+    },
+    "webgym_292k": {
+      "exists": false,
+      "path": "/home/runner/work/Spider/Spider/data/webgym_292k"
+    },
+    "webarena_verified": {
+      "exists": false,
+      "path": "/home/runner/work/Spider/Spider/data/webarena_verified"
+    },
+    "webarena_verified_hard": {
+      "exists": false,
+      "path": "/home/runner/work/Spider/Spider/data/webarena_verified_hard"
+    }
+  },
+  "intel_manifest_found": null,
+  "intel_manifest_candidates_scanned": [],
+  "synthetic_fixtures_present_not_used": [
+    "/home/runner/work/Spider/Spider/research/experiments/EXP-FRONTIER-36042599040/artifacts/bootstrap_permutation_nulls.json",
+    "/home/runner/work/Spider/Spider/research/experiments/EXP-FRONTIER-36042599040/artifacts/confidences.json",
+    "/home/runner/work/Spider/Spider/research/experiments/EXP-FRONTIER-36042599040/artifacts/family_manifest.json",
+    "/home/runner/work/Spider/Spider/research/experiments/EXP-FRONTIER-36042599040/artifacts/per_trajectory_traces.json"
+  ],
+  "manifest_families": 0,
+  "manifest_jaccard_mean": null,
+  "manifest_jaccard_max": null,
+  "runtime_wal_exists": false,
+  "runtime_wal_path": "/tmp/spider-runtime/shared.db",
+  "x_worker_pid": null,
+  "n_non304": null,
+  "if_none_match_304_handled": null,
+  "heterogeneity_adequate": false,
+  "coverage_adequate": false,
+  "substrate_adequate": false,
+  "pooled_tasks": 0,
+  "mixed_tasks": 0,
+  "treewalker_fidelity": null,
+  "locator_top1": null,
+  "guard_eval_ms": null,
+  "webmcp_fetch_rate": null,
+  "frozen_inputs_integrity": true,
+  "integrity_detail": {
+    "prereg.md": {
+      "expected": "89fda24813bbb1a2990243f2554668b7a8fe2173b334e5fe45b196df9628d8fe",
+      "actual": "89fda24813bbb1a2990243f2554668b7a8fe2173b334e5fe45b196df9628d8fe",
+      "match": true
+    },
+    "request.json": {
+      "expected": "1fd209511d0b83118f1f62925d19f3098e4ab1049443524ff9302351ce983608",
+      "actual": "1fd209511d0b83118f1f62925d19f3098e4ab1049443524ff9302351ce983608",
+      "match": true
+    },
+    "spec.json": {
+      "expected": "8e518df325d3af3ca89557ceaba920aa1983efedb5c37003042620f151c83ec1",
+      "actual": "8e518df325d3af3ca89557ceaba920aa1983efedb5c37003042620f151c83ec1",
+      "match": true
+    },
+    "parent_handoff": {
+      "path": "research/experiments/EXP-FRONTIER-36091890748/handoff.json",
+      "match": true,
+      "expected": "877a77baa58b9dc886d2bad2c449ca06686a4ad379aacc4eeee541885dc55889"
+    }
+  },
+  "required_fixes": [
+    "Intel diverse-site manifest >=10 families pairwise bigram Jaccard<0.30 mean<0.15 product-subtree anchored depth>=2 at 1280x720 CDP AX>10 mean>15 std>5 DOM>=2000, raw N>=500 >=50/family, TRAIN-only vocab isolation 0 leakage, trajectory-grouped holdout (WebGym 292k dedup >=50 eTLD+1 or WebArena-Verified Hard 192/36; reuse Hard258 where available)",
+    "Runtime health-gated single-worker sticky Flask HS256+nginx WAL at /tmp/spider-runtime/shared.db with sticky cookie, If-None-Match/ETag TTL 60s conditional probes, n_non304>=360 single-node else >=800 distributed stratified >=80/family, X-Worker-Pid>=10, honest per-trajectory hard-reset sum counters",
+    "BrowserGym 1280x720 CDP with AX>10 per page (browsergym-core 0.14.3 / playwright 1.63.0 / agentlab 0.4.2 pins; system chromium present), TreeWalker 99% fidelity, locator top-1 >=95%, guard <5ms, WebMCP OpenAPI fetch >=95%"
+  ],
+  "elapsed_seconds": 0.124237
+}

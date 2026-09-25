@@ -1,0 +1,8 @@
+{
+  "experiment_id": "EXP-FRONTIER-36095585747",
+  "trajectories_audited": 0,
+  "diff_sum": null,
+  "within_family_std": null,
+  "zero_cells": null,
+  "note": "No trajectories captured - honest per-trajectory hard-reset sum counters not executable without substrate"
+}
