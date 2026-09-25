@@ -1,0 +1,156 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-36084499865",
+  "lane": "runtime",
+  "status": "MEASUREMENT_INVALID",
+  "producer_claim_supported": false,
+  "required_fixes": [
+    "Fix self-test false-positive: `if \"uuid.uuid4\" in code_text` matches 7 docstring/comment occurrences describing the removed nonce (lines 9,13,83,557 etc) and triggers early MEASUREMENT_INVALID with 0 observations. Scope check to executable code only (exclude comments/docstrings and require `import uuid` or `uuid.` in Flask header path) or grep Flask header generation section only.",
+    "Re-execute full experiment after fix to obtain n_non304>=800 stratified 400/endpoint hs>=0.90 batch>=10 with Flask verified listening 127.0.0.1:19860 and nginx -c exclusive single hash $request_uri consistent real proxy_cache ENABLED. Current n_observations=0 n_non304=0 health_gate_verified=false flask_listening_verified=false provides 0 samples for C1-C5.",
+    "Validate health-gate and Flask startup path end-to-end before interpreting C2-C5. Early exit prevented Phases 1-5; no Phase logs beyond self-check.",
+    "Retain stable-header generation code already present (hmac.new deterministic per auth_state, no uuid import, no per-response entropy) — do not revert to nonce. Verify with code grep hmac present + import uuid absent + observed same-state J==1.0 variance>0 after rerun."
+  ],
+  "validity_findings": [
+    {
+      "id": "V-SELF-CHECK-FALSE-POSITIVE",
+      "severity": "critical",
+      "finding": "Producer validity_notes SYNTHETIC_MUTATION_OR_NONCE_PRESENT due to `uuid.uuid4` string match is false positive. run_experiment.py contains 0 executable uses of uuid; `uuid` occurs 28 times only in docstrings/comments describing the deleted nonce (lines 9,13,83,557,631,636,1399,1433,1439) plus the self-check itself. No `import uuid` in file. Actual Set-Cookie uses hmac.new(TESTBED_SECRET, auth_state) deterministic per auth_state as required. The early return at line 634-638 aborts before Flask/nginx startup, so all downstream validity gates untested.",
+      "evidence": "research/experiments/EXP-RUNTIME-36084499865/run_experiment.py:634-643 self-check; grep count 7 for uuid.uuid4 all in comments/docstrings; `import uuid` absent; _stable_set_cookie at line 82-84 uses hmac only; result.json validity_notes SYNTHETIC_MUTATION_OR_NONCE_PRESENT",
+      "impact": "MEASUREMENT_INVALID is correctly classified as invalid measurement but for misattributed reason. Infrastructure/logic failure, not scientific falsification of H1-STABLE-HEADER-SINGLE-NODE."
+    },
+    {
+      "id": "V-NO-DATA-COLLECTED",
+      "severity": "critical",
+      "finding": "Zero observations retained: raw_freshness_observations.jsonl 0 lines (sha e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855 empty), raw_hit_observations.jsonl contains only placeholder {\"hit_total\":0}. provenance.json n_observations=0 batch_state_log_len=0 flask_listening_verified=false health_gate_verified=false. All frozen gates C1 n_non304>=800 hs>=0.90 batch>=10, C2 |r|<0.30 V<0.30 variance>0 same-state J==1.0 nullFP<=0.05, C3 |rho|<0.20 block B=1000, C4 full>0.5 >max+0.05 width>0 diff_lo>0, C5 loopback 1.0 HIT 330/330 are untested. Cannot compute any derived measurement.",
+      "evidence": "research/experiments/EXP-RUNTIME-36084499865/result.json observations n_non304=0 hs=0 batch=0 header J 0 variance 0 health false; provenance.json n_observations 0 flask_listening_verified false health_gate_verified false; raw_freshness_observations.jsonl empty; raw_hit_observations.jsonl hit_total 0",
+      "impact": "No evidence for or against H1. Frozen falsifier cannot be evaluated. No ceiling change authorized."
+    },
+    {
+      "id": "V-ENVIRONMENT-DEPLOYABLE-BUT-UNTESTED",
+      "severity": "high",
+      "finding": "Stable-header representation as coded IS deployable and could express the tested effect if execution completed: filtered_headers_stable MINUS {content-length,etag,w-etag,range} with stable HMAC token, lowercased sorted keys, greedy brotli->gzip MAX_DEPTH5, exclusive nginx -c single hash $request_uri consistent with real proxy_cache_path /tmp/spider-runtime/36044045537/cache are correctly implemented. Environment ceiling not violated; failure is early abort before socket bind, not per-response nonce contamination.",
+      "evidence": "research/experiments/EXP-RUNTIME-36084499865/run_experiment.py:243-259 filter, 50-52 BODY_DERIVED, 82-84 _stable_set_cookie hmac, 306-371 _write_nginx_conf single hash assert, 436-463 greedy decompress, provenance cache_dir /tmp/spider-runtime/36044045537/cache proxy_cache_enabled true",
+      "impact": "Stable-header hypothesis remains plausible and testable after fix; current failure does not bound achievable nullFP or drift discrimination."
+    },
+    {
+      "id": "V-PROVENANCE-CONSISTENT-WITH-ABORT",
+      "severity": "medium",
+      "finding": "Provenance correctly records abort state: hs256_secret_len 82 hs256_secret_sha256 2b23..., factory_pattern_wsgi true wsgi_sys_path_insert true single_hash true proxy_cache_enabled true but flask_listening_verified false health_gate_verified false cache_dir_exists false cache_file_count_sudo 0. Matches early exit before Phase 0. No silent contradiction between provenance and raw artifacts.",
+      "evidence": "research/experiments/EXP-RUNTIME-36084499865/provenance.json flask_listening_verified false health_gate_verified false cache_dir_exists false n_observations 0",
+      "impact": "No provenance leakage or misreporting; audit can trace failure to deterministic code path."
+    },
+    {
+      "id": "V-LEAKAGE-NOT-TESTED",
+      "severity": "medium",
+      "finding": "Leakage checks (X-Worker-Pid exclusion, Date/Server etc, Content-Length/ETag/Range body-derived exclusion) are correctly coded but never exercised on live traffic due to abort. No evidence of leakage in this run; prior parent audit leakage concerns remain open for stable-header rerun.",
+      "evidence": "research/experiments/EXP-RUNTIME-36084499865/run_experiment.py:50-53 EXCLUDED_HEADERS includes X-Worker-Pid, 52 BODY_DERIVED_KEYS, filter_headers logic",
+      "impact": "Cannot validate header isolation; requires rerun with live paired probes."
+    }
+  ],
+  "baseline_findings": [
+    {
+      "id": "B-FULL-VECTOR-STABLE",
+      "expected": "discrimination_full>0.5 full>max(body,status)+0.05 width>0 nullFP<=0.05 via stable headers",
+      "observed": "not executed: metrics full_vector_discrimination_full=0 not collected",
+      "pass": false,
+      "notes": "B-FULL-VECTOR-STABLE untested due to early abort. Prior parent 36047340781 showed full 1.0 degenerate width 0 nullFP 1.0 with nonce; stable rerun needed to test non-degenerate claim."
+    },
+    {
+      "id": "B-BODY-ONLY",
+      "expected": "1.0 body-varying 0.0 stable-header-varying",
+      "observed": "not executed",
+      "pass": false,
+      "notes": "Untested. Would validate body isolation after stable fix."
+    },
+    {
+      "id": "B-STATUS-ONLY",
+      "expected": "0.0 discrimination CI containing 0 width>0",
+      "observed": "not executed",
+      "pass": false,
+      "notes": "Untested."
+    },
+    {
+      "id": "B-HEADER-ONLY-JACCARD-STABLE",
+      "expected": "|r|<0.30 V<0.30 variance>0 std>0 mean<1.0 same-state J==1.0 nullFP<=0.05",
+      "observed": "not executed: header_only_jaccard_mean 0 variance 0 same_state_J true in result.json is default not measured",
+      "pass": false,
+      "notes": "Primary orthogonality claim untested. Frozen validity requires same-state J==1.0 observed on live pairs; no pairs collected."
+    },
+    {
+      "id": "B-HEADER-NAME-ONLY",
+      "expected": "nullFP<=0.05 diagnostic",
+      "observed": "not executed",
+      "pass": false,
+      "notes": "Diagnostic fallback untested."
+    },
+    {
+      "id": "B-HEADER-HASH-REJECTED",
+      "expected": "fail orthogonality proves filter necessity",
+      "observed": "not executed",
+      "pass": false,
+      "notes": "Rejected surrogate not exercised."
+    },
+    {
+      "id": "B-COST-SHUFFLED",
+      "expected": "|rho_shuffled|<0.20 p>=0.20 block B=1000",
+      "observed": "not executed: |rho|=0 p=0 within_f_std 0 indicates defaults",
+      "pass": false,
+      "notes": "Honest integer sum block perm untested."
+    },
+    {
+      "id": "B-HEADERS-NO-BODYDERIVED-STABLE",
+      "expected": "0 body-only >0.5 stable-header-only",
+      "observed": "not executed",
+      "pass": false,
+      "notes": "Isolation check untested."
+    }
+  ],
+  "recomputed_metrics": {
+    "freshness_n_non304_recomputed": 0,
+    "freshness_n_non304_reported": 0,
+    "freshness_n_304_recomputed": 0,
+    "freshness_hs_rate_recomputed": 0.0,
+    "freshness_batch_distinct_ts_recomputed": 0,
+    "header_only_jaccard_mean_recomputed": 0.0,
+    "header_only_variance_recomputed": 0.0,
+    "hit_byte_identical_recomputed": 0,
+    "hit_total_recomputed": 0,
+    "loopback_header_drift_recomputed": 0.0,
+    "raw_freshness_lines": 0,
+    "raw_freshness_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "raw_hit_sha256": "a69c364e192e9bb6513970bda2c535ac6381ed2463b4492cc2339e279db8816f",
+    "run_experiment_sha256": "5b03ea93af99fdcbf15e001daa18f2b2d2b621aec8dec95479b4e4d81e197fcd",
+    "provenance_n_observations": 0,
+    "provenance_flask_listening": false,
+    "provenance_health_gate": false,
+    "uuid_executable_uses": 0,
+    "uuid_comment_occurrences": 7,
+    "stable_hmac_present": true,
+    "import_uuid_present": false,
+    "recompute_mismatches": 0,
+    "notes": "Recomputation matches producer: all metrics 0/null due to early abort. No divergence. Verifies producer result.json is consistent with empty raw artifacts; the inconsistency is the misattributed uuid validity_note, not metric arithmetic."
+  },
+  "claim_ceiling": "No justified ceiling change. C-MEAS-VALID remains FALSIFIED-IN-SETTING for natural-header per-response nonce representation as established by EXP-RUNTIME-36047340781 (header-only nullFP 1.0 full width 0 loopback nullFP 1.0). H1-STABLE-HEADER-SINGLE-NODE remains UNKNOWN (untested) — stable HMAC per-auth-state representation is correctly implemented but never exercised. Single-node honest substrate with real proxy_cache ENABLED remains blocked. Distributed 2x gunicorn shared-WAL n>=800 stratified 400/endpoint hs>=0.90 HIT 330/330 remains UNKNOWN and NOT authorized until stable-header single-node PASS with validity passing (factory WSGI, exclusive nginx -c single hash no warning, flask listening health 0 missing, hs>=0.90, de-confounded |r|<0.30 V<0.30 variance>0 std>0 mean<1.0 same-state J==1.0 nullFP<=0.05, honest block B=1000 |rho|<0.20 p>=0.20, full>max+0.05 width>0 diff_lo>0, loopback 1.0 nullFP<=0.05 HIT 330/330 greedy). Do not promote beyond single-node even after future PASS.",
+  "evidence_refs": [
+    "research/experiments/EXP-RUNTIME-36084499865/request.json:4ff214 director_mandate stable-header exclude uuid4 nonce restore nullFP<=0.05 while retaining |r|<0.30 V<0.30 variance>0 full>max+0.05",
+    "research/experiments/EXP-RUNTIME-36084499865/spec.json:482b5b frozen H1-STABLE-HEADER decision_rule C1-C5 gates validity MINUS filter stable Set-Cookie HMAC",
+    "research/experiments/EXP-RUNTIME-36084499865/prereg.md:fe59c7 prereg C2 stable J==1.0 nullFP<=0.05 C4 width>0 diff_lo>0 C5 HIT 330/330 gating",
+    "research/experiments/EXP-RUNTIME-36084499865/freeze.json:fe59c7/cd1f",
+    "research/experiments/EXP-RUNTIME-36084499865/result.json:MEASUREMENT_INVALID INCONCLUSIVE n_non304 0 hs 0 batch 0 header J 0 variance 0 health false validity_notes uuid found",
+    "research/experiments/EXP-RUNTIME-36084499865/report.md:MEASUREMENT_INVALID interpretation stable HMAC described",
+    "research/experiments/EXP-RUNTIME-36084499865/provenance.json:n_observations 0 flask_listening_verified false health_gate_verified false cache_dir_exists false proxy_cache_enabled true hs_len 82",
+    "research/experiments/EXP-RUNTIME-36084499865/run_experiment.py:5b03ea sha; lines 82-84 _stable_set_cookie hmac deterministic, 50-53 EXCLUDED, 52 BODY_DERIVED, 243-259 filter, 306-371 nginx single hash, 436-463 greedy MAX_DEPTH5, 634-643 false-positive uuid check abort",
+    "research/experiments/EXP-RUNTIME-36084499865/raw_freshness_observations.jsonl:e3b0c44 0 lines empty",
+    "research/experiments/EXP-RUNTIME-36084499865/raw_hit_observations.jsonl:a69c36 placeholder 0/0",
+    "research/experiments/EXP-RUNTIME-36047340781/handoff.json:62247a FALSIFIED-IN-SETTING parent establishes infra C1/C3 PASS but header detectors nullFP 1.0 requires stable-header rerun with NEW execution",
+    "research/experiments/EXP-RUNTIME-36084499865/execution_checkpoint.json:pre_execute_sha cd1f79"
+  ],
+  "unresolved": [
+    "Whether stable Set-Cookie HMAC per auth_state restores header-only Jaccard nullFP<=0.05 width>0 while retaining |r|<0.30 V<0.30 variance>0 — requires rerun after self-check fix with live paired valid vs expired same body_variant probes.",
+    "Whether header-name-only or Cache-Control/Vary-only diagnostic achieves nullFP<=0.05 if value-stable still marginal.",
+    "Whether full-vector SHA(status||body||stable_headers) achieves non-degenerate full>max(body,status)+0.05 diff_lo>0 nullFP<=0.05 on both body-varying and stable-header-varying sets via direct+nginx-cache+2x loopback.",
+    "Whether 2x gunicorn loopback header/body drift 1.0 nullFP<=0.05 and HIT 330/330 via real nginx cache path greedy hold with stable headers.",
+    "Whether honest integer sum trajectory-block B=1000 achieves |rho|<0.20 p>=0.20 width>0 effective>1 after stable fix.",
+    "Whether n_non304>=800 stratified 400/endpoint hs>=0.90 batch>=10 with exclusive nginx -c single hash real cache is achievable with stable headers (prior 850 with nonce suggests yes but unproven with abort)."
+  ]
+}

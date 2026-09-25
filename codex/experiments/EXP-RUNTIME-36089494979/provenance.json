@@ -1,0 +1,112 @@
+{
+  "experiment_id": "EXP-RUNTIME-36089494979",
+  "github_run_id": 36089494979,
+  "claim_id": "C-MEAS-VALID",
+  "lane": "runtime",
+  "base_sha": "69b83b1f63f636ac0098b7d59b84ce0f918bcbf6",
+  "request_hash": "7a2616762f8df3c37a8c2c00d7a1a72e1e282fba677e1bd1d03c29d58f1f4af2",
+  "spec_hash": "2d8f071856ff1c572850ec3297e969c124efdb7bd90a3a6fe79f924791765f55",
+  "prereg_hash": "51bf9706a129bc6762e5427907a7b2d92d8fa8b071b2441c8e79b3adf0acba4e",
+  "env": {
+    "python": "3.12.14 (main, Aug 13 2026, 02:47:42) [GCC 13.3.0]",
+    "flask": "3.1.3",
+    "pyjwt": "2.14.0",
+    "gunicorn": "23.0.0",
+    "nginx": "1.24.0",
+    "requests": "2.34.2",
+    "sqlite3": "3.45.1",
+    "brotli": "available",
+    "gzip": "available",
+    "scipy": "1.18.1"
+  },
+  "ports": {
+    "flask": 19860,
+    "nginx": 19851
+  },
+  "seed": 44,
+  "db_path": "/tmp/spider-runtime/36044045537/single.db",
+  "hs256_secret_sha256": "2b23d7955be7a23ca497d66d0890cb4a3ff4400909f545012db667af8267f78d",
+  "hs256_secret_len": 82,
+  "n_observations": 1743,
+  "batch_state_log": [
+    {
+      "batch": 0,
+      "count": 1,
+      "timestamp": 1790307563.4084203
+    },
+    {
+      "batch": 1,
+      "count": 1,
+      "timestamp": 1790307564.8472865
+    },
+    {
+      "batch": 2,
+      "count": 1,
+      "timestamp": 1790307565.5642054
+    },
+    {
+      "batch": 3,
+      "count": 1,
+      "timestamp": 1790307566.2988467
+    },
+    {
+      "batch": 4,
+      "count": 1,
+      "timestamp": 1790307566.9360034
+    }
+  ],
+  "batch_state_log_len": 25,
+  "factory_pattern_wsgi": true,
+  "flask_listening_verified": true,
+  "health_gate_verified": true,
+  "scoped_uuid_check": {
+    "naive_uuid_count": 96,
+    "scoped_uuid_count": 0,
+    "scoped_block_lines": 154,
+    "ast_uuid_refs": [],
+    "import_uuid_absent": true,
+    "hmac_present": true,
+    "scoped_check_pass": true
+  },
+  "wsgi_sys_path_insert": true,
+  "jwt_decode_at_origin": true,
+  "single_nginx_location": true,
+  "nginx_proxy_pass_no_trailing_slash": true,
+  "nginx_add_header_x_worker_pid_always": true,
+  "nginx_request_uri_sticky": true,
+  "health_gate_attempts": 30,
+  "exclusive_nginx_c": true,
+  "single_hash_request_uri": true,
+  "no_load_balancing_method_redefined": true,
+  "proxy_cache_enabled": true,
+  "proxy_temp_path": "/tmp/spider-runtime/36044045537/temp",
+  "proxy_no_cache_authorization": true,
+  "proxy_cache_bypass_authorization": true,
+  "cache_dir": "/tmp/spider-runtime/36044045537/cache",
+  "cache_dir_ls": "total 12\ndrwxr-xr-x 3 www-data www-data 4096 Sep 25 03:36 .\ndrwxr-xr-x 5 runner   runner   4096 Sep 25 03:40 ..\ndrwx------ 3 www-data www-data 4096 Sep 25 03:36 2\n",
+  "cache_dir_exists": true,
+  "nginx_user": "www-data",
+  "use_sudo_nginx": true,
+  "stable_header_generation": true,
+  "uuid_absence_grep_scoped": true,
+  "natural_auth_state_headers": true,
+  "synthetic_header_mutation": false,
+  "freeze_hashes": {
+    "request.json": "5e1975bf531d31934735a8d7b7f06aa96795af7d2f3a47a37a447ca33775a8a4",
+    "spec.json": "2d8f071856ff1c572850ec3297e969c124efdb7bd90a3a6fe79f924791765f55",
+    "prereg.md": "51bf9706a129bc6762e5427907a7b2d92d8fa8b071b2441c8e79b3adf0acba4e"
+  },
+  "scope": "single-node primary only with STABLE auth-state headers (HMAC deterministic per auth_state, NO uuid4 per response, scoped uuid-absence check excluding docstrings/comments) and real nginx proxy_cache ENABLED at /tmp/spider-runtime/36044045537/cache; distributed 2x shared-WAL n>=800 deferred until SUPPORTS",
+  "created_at": "2026-09-25T03:40:42.653672+00:00",
+  "run_experiment_sha256": "e472309ffd118f7a749ee8cdca6d2b1269565683302a8e7a8857b0ed1acd0949",
+  "wsgi_sha256": "06eb83fcf91e9b74be42899ce8e2c0130252d9df5020b5f8434f53ac17a1cb2b",
+  "nginx_conf_sha256": "213586e236be1e9f3bb583a40c91ee174c71f8917ef2d26fa4f221a90d732ce5",
+  "raw_freshness_sha256": "6ebc34f2fd5d5bc33764455138c1c15e73bd0487ed3e520009191706efe196dc",
+  "raw_hit_sha256": "68d0950d6722caff433400e982ecd583b17896fa56034350902445a18b52a8c2",
+  "db_sha256": "045fcf7eb8f5860dec0c4b702dc746d43bb8e7cc8304acf8c7e332115c8dbf4c",
+  "health_gate_log_sha256": "2141c8daf0604aae9eba60e519b4e93f3063af4e00ee9a6060a084b6e0b63bb2",
+  "cache_file_count_sudo": 1,
+  "cache_file_entries": [
+    "/tmp/spider-runtime/36044045537/cache/2/05/febd9bd9f76478774376fc8d7baa5052"
+  ]
+}

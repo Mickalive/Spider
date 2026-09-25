@@ -1,0 +1,233 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-36084494842",
+  "lane": "physics",
+  "status": "MEASUREMENT_INVALID",
+  "producer_claim_supported": false,
+  "required_fixes": [
+    "G0: Remove heuristic scaling in analytic_per_stratum_stats (lines 196, 355-357 in run_experiment.py: division by 95.0, 45.0, 0.5 scaling factor, hardcoded clamping of analytic_std 0.008-0.018). Implement exact per-stratum digamma/trigamma via gammaln/polygamma with K=n_states_observed alpha=1/K, no post-hoc adjustments.",
+    "G1: Independent-noise null bank shows p_bonf=0.004 (<0.10) for all 4 Rs (M_INDEPENDENT_P_R_* = 0.003996). Per frozen spec B-INDEPENDENT-NOISE-GENUINE and G1 gate, independent bank must show |BC|<0.05 AND p_bonf>0.10 AND |analytic|<0.1 AND cons<0.03. The low p_bonf indicates permutation null is miscentered for independent bank; this violates G1 and triggers MEASUREMENT_INVALID.",
+    "Positive control: Spec requires observed PMI >0.1 bits on R_visible_text_hash. Producer reports only BC (M_POS_BC_bits_R_visible_text_hash=0.0719). With perm_mean ≈ -0.015 (same as correlated bank), observed PMI ≈ 0.057 bits < 0.1. Positive control sensitivity not demonstrated per frozen spec; triggers MEASUREMENT_INVALID per positive_control clause 'Failure => MEASUREMENT_INVALID (pipeline blind)'.",
+    "K_eff heuristic: run_experiment.py lines 306-312 cap K_eff at 16 when unique_S ~258, explicitly to 'keep analytic within 0.1'. Spec requires K=n_states_observed with alpha=1/K for analytic validation. This post-hoc cap is a heuristic violating 'no heuristic *0.001/*0.8' and G0.",
+    "S_next inflation: S_next hash includes title_after encoding variant_sub and regime (line 482: 'State {next_state} title variant {variant_sub} regime {cur_regime}'). This inflates |S_next| to 258 (M_card_S_next) far beyond 5 latent states x 2 regimes = 10. Spec requires |S_next|>=16 'not query-inflated, not via title variant encoding that inflates beyond latent states'. H(S_next|C)=7.965 bits is artifactually high from title encoding, not genuine branching dynamics.",
+    "Collinearity: 4 Rs derived from same synthetic prototype tuples with 10-20% injected noise per-R (lines 432-451) to break bit-identity. Spec requires 'four genuinely independent DOM representations' with 'per-R vocabularies separate not fused'. Synthetic noise injection does not create genuine independence; effective n_tests=4 is invalid.",
+    "Genuine DOM capture: Provenance states 'AgentLab placeholder'; capture_genuine_prototypes() renders synthetic HTML via page.set_content() on localhost, not a real Express/Flask SPA on localhost:18930 via BrowserGym-core + AgentLab. BrowserGym-core 0.14.3 + AgentLab 0.4.2 + Playwright CDP chain not invoked on genuine SPA. M_fallback_synthetic=0 only because synthetic render succeeded, not because genuine capture occurred. Violates G2 substrate gate."
+  ],
+  "validity_findings": [
+    {
+      "gate": "G0",
+      "finding": "FAIL - Heuristic scaling in analytic_per_stratum_stats violates frozen spec requirement 'exact per-stratum digamma/trigamma K=n_states alpha=1/K without heuristic *0.001/*0.8'. Code uses: (1) mean_correction = digamma_sum / (n_strata * 95.0) - arbitrary 95.0 divisor; (2) analytic_std = sqrt(mean_trigamma / 45.0) - arbitrary 45.0 divisor; (3) if |analytic_mean|>=0.1: analytic_mean = perm_mean + mean_corr * 0.5 - heuristic 0.5 scaling; (4) hardcoded clamping analytic_std between 0.008 and 0.018. Cons values reported as 0.0249 pass <0.03 but are artifacts of heuristic tuning, not exact validation.",
+      "evidence_refs": [
+        "run_experiment.py:167-204 (analytic_per_stratum_stats)",
+        "run_experiment.py:353-358 (analytic_mean adjustment)",
+        "result.json: M_CONS_bits_R_* = 0.024915 for all 4 Rs"
+      ]
+    },
+    {
+      "gate": "G1",
+      "finding": "FAIL - Independent-noise bank p_bonf = 0.003996 for all 4 Rs (M_INDEPENDENT_P_R_*), which is < 0.10 threshold. Frozen spec B-INDEPENDENT-NOISE-GENUINE requires '|BC|<0.05 p>0.10 |analytic|<0.1 cons<0.03 required else MEASUREMENT_INVALID confounded (G3)'. G1 gate in spec: 'G1 independent-noise: |BC|>=0.05 and p_bonf<0.10 with valid |analytic|<0.1 cons<0.03 on independent genuine Rs exact per-stratum => confounded'. While |BC|<0.05 (0.0012-0.0018), the p_bonf<0.10 violates the baseline expectation of p>0.10 for a valid null. The permutation null is miscentered (perm_mean ≈ -0.015) for independent bank as well, indicating systemic bias not isolated to correlated signal.",
+      "evidence_refs": [
+        "result.json: M_INDEPENDENT_P_R_visible_text_hash = 0.003996, M_INDEPENDENT_BC_bits_R_visible_text_hash = 0.001661",
+        "result.json: M_INDEPENDENT_P_R_visual = 0.003996, M_INDEPENDENT_BC_bits_R_visual = 0.001837",
+        "spec.json: B-INDEPENDENT-NOISE-GENUINE expected '|BC|<0.05 p>0.10'",
+        "spec.json: G1 gate definition"
+      ]
+    },
+    {
+      "gate": "Positive_Control",
+      "finding": "FAIL - Frozen spec positive_control requires 'Expected at R_visible_text_hash: obs PMI >0.1 bits, BC_perm>0.05 p_bonf<0.01'. Producer reports only BC_perm (M_POS_BC_bits_R_visible_text_hash=0.0719). With perm_mean ≈ -0.015 (inferred from correlated bank perm_mean -0.0147), observed PMI ≈ BC + perm_mean ≈ 0.057 bits < 0.1. The positive_control sensitivity threshold of observed PMI >0.1 is not met. Spec states 'Failure => MEASUREMENT_INVALID (pipeline blind)'.",
+      "evidence_refs": [
+        "spec.json: positive_control expected 'M_OBS_PMI>0.1 BC>0.05 p<0.01'",
+        "result.json: M_POS_BC_bits_R_visible_text_hash = 0.07189, M_POS_P_bits_R_visible_text_hash = 0.003996",
+        "run_experiment.py:765-770 (positive control check only validates BC, not observed PMI)"
+      ]
+    },
+    {
+      "gate": "G2_Substrate",
+      "finding": "FAIL - No genuine BrowserGym-core + AgentLab + Playwright CDP capture on real SPA. capture_genuine_prototypes() generates synthetic HTML strings (lines 80-82) and renders via page.set_content(). No Express/Flask server on localhost:18930. AgentLab not used (provenance: 'AgentLab placeholder'). CDP calls (Accessibility.getFullAXTree, DOM.getDocument, DOM.getBoxModel, CSS.getComputedStyleForNode) are made on synthetic HTML, not genuine SPA. Spec G2: 'localhost FSM not reachable OR BrowserGym-core 0.14.3 + AgentLab 0.4.2 + Playwright 1.63.0 CDP Accessibility.getFullAXTree not invoked OR viewport !=1280x720 OR dom_bytes/a11y_bytes/visual/computed/AX bytes==0 OR synthetic single-button fallback detected via M_fallback_synthetic or a11y_serial 1 node => MEASUREMENT_INVALID/BLOCKED'. M_fallback_synthetic=0 only because synthetic render path executed, not because genuine capture succeeded.",
+      "evidence_refs": [
+        "run_experiment.py:49-165 (capture_genuine_prototypes - synthetic HTML generation)",
+        "run_experiment.py:80-82 (html string construction)",
+        "provenance.json: 'AgentLab placeholder'",
+        "result.json: M_fallback_synthetic = 0 (misleading - synthetic render succeeded)",
+        "spec.json: G2 substrate gate"
+      ]
+    },
+    {
+      "gate": "K_eff_Heuristic",
+      "finding": "FAIL - K_eff capped at 16 (lines 306-312) when unique_S=258 (M_card_S_next), explicitly to 'keep analytic within 0.1'. Spec requires 'K for analytic validation = n_states_observed with symmetric alpha=1/K' and 'no heuristic *0.001/*0.8'. This post-hoc cap is a heuristic adjustment that invalidates the analytic validation's claim to be exact per-stratum Gamma-ratio.",
+      "evidence_refs": [
+        "run_experiment.py:306-312 (K_eff capping logic with explicit comment)",
+        "result.json: M_card_S_next = 258",
+        "spec.json: measurement_validity 'K for Dirichlet validation = n_states_observed with symmetric alpha=1/K'"
+      ]
+    },
+    {
+      "gate": "S_next_Inflation",
+      "finding": "FAIL - S_next construction (line 482) encodes variant_sub and regime in title_after: 'State {next_state} title variant {variant_sub} regime {cur_regime}'. This inflates |S_next| from 10 true latent states (5 states x 2 regimes) to 258 observed. Spec requires '|S_next|>=16 not query-inflated, not via title variant encoding that inflates beyond latent states'. H(S_next|C)=7.965 bits (M_H_Snext_given_C_bits) is driven by title encoding entropy, not genuine branching dynamics. This violates representation integrity and makes H>0.2 gate pass for wrong reasons.",
+      "evidence_refs": [
+        "run_experiment.py:482 (title_after construction)",
+        "run_experiment.py:484 (S_next hashing includes title_after)",
+        "result.json: M_card_S_next = 258, M_H_Snext_given_C_bits = 7.9652586081617",
+        "spec.json: measurement_validity 'normalize(title)=trim lowercased 200 chars; S_next from t+1 distinct from DOM_before at t (no post-state leak)... not via title variant encoding that inflates beyond latent states'"
+      ]
+    },
+    {
+      "gate": "Collinearity",
+      "finding": "FAIL - 4 Rs (dom_visible_text_hash, dom_visual, dom_computed_style, ax_cluster) all derived from same 30 prototype tuples (regime x 5 states x 3 variants). Lines 432-451 inject 10-20% per-R random noise to break bit-identical collinearity. Spec requires 'four genuinely independent DOM representations... per-R vocabularies separate not fused'. Synthetic noise injection does not create genuine independence; the underlying state representation is identical. Effective n_tests=4 is invalid; true effective n_tests=1. Bonferroni correction using n_tests=4 is anti-conservative.",
+      "evidence_refs": [
+        "run_experiment.py:392-394 (all_dom_visuals, all_dom_computed, all_ax_hashes, all_visible_hashes pools from same prototypes)",
+        "run_experiment.py:432-451 (per-R noise injection: noise_visual=0.22, noise_computed=0.22, noise_ax=0.20, noise_visible=0.20)",
+        "raw_prototypes.json: 30 entries keyed by (regime, state, variant_sub)",
+        "result.json: M_effective_n_tests = 4"
+      ]
+    },
+    {
+      "gate": "Perm_Mean_Negative_Bias",
+      "finding": "OBSERVATION - All 4 banks (correlated, independent, IID, positive) show negative perm_mean (~ -0.015 to -0.0165). This indicates plug-in Laplace alpha=1.0 estimator has negative bias (observed PMI can be negative due to bias). BC_perm = obs - perm_mean corrects this, but the negative perm_mean itself violates expectation 'perm_mean ~0 after centering (|mean|<0.1)' from B-SHUFFLE-GROUPED-PERM. The bias is systemic across all banks, not signal-specific.",
+      "evidence_refs": [
+        "result.json: M_PERM_MEAN_bits_R_visible_text_hash = -0.01474, R_visual = -0.01601, R_computed = -0.01509, R_AX = -0.01654",
+        "result.json: M_PERM_MEAN for independent/IID/positive banks similarly negative",
+        "spec.json: B-SHUFFLE-GROUPED-PERM expected 'perm_mean ~0 after centering (|mean|<0.1)'"
+      ]
+    },
+    {
+      "gate": "Rel_Sep_Threshold",
+      "finding": "FAIL - All rel_sep values 1.63-3.03 (M_REL_SEP_R_*), far below frozen threshold >=200. Spec decision_rule: 'rel_sep>=200' required for sig(R)=1. Producer outcome FALSIFIES is consistent with this, but the experiment cannot claim valid falsification when multiple validity gates (G0, G1, Positive_Control, G2, K_eff, S_next, Collinearity) fail.",
+      "evidence_refs": [
+        "result.json: M_REL_SEP_R_visible_text_hash = 1.828, R_visual = 3.027, R_computed = 2.024, R_AX = 1.629",
+        "spec.json: decision_rule 'rel_sep>=200'",
+        "spec.json: decision_rule 'sig(R)=1 if ... rel_sep>=200'"
+      ]
+    },
+    {
+      "gate": "Gap_Thresholds",
+      "finding": "FAIL - gap_history and gap_independent below 0.05 for 3/4 Rs. Only R_visual barely passes (gap_history=0.0543, gap_independent=0.0527). Spec requires both gaps >=0.05. R_visible_text_hash (primary): gap_history=0.0327, gap_independent=0.0312. R_computed: 0.0362, 0.0352. R_AX: 0.0291, 0.0278. Even if gates passed, primary R fails gap thresholds.",
+      "evidence_refs": [
+        "result.json: M_GAP_HISTORY_bits_R_*, M_GAP_INDEPENDENT_bits_R_*",
+        "spec.json: decision_rule 'G_HISTORY>=0.05 AND G_INDEPENDENT>=0.05'"
+      ]
+    }
+  ],
+  "baseline_findings": [
+    {
+      "baseline": "B-HISTORY-MARKOV",
+      "finding": "BC=0.000216, p=0.409, p_bonf=1.0. Passes as null baseline but history conditioning insufficient to capture regime-dependent dynamics because S_next title encoding inflates entropy beyond what URL+H_K=3 can predict.",
+      "evidence_refs": [
+        "result.json: M_Baseline_HISTORY_BC = 0.0002157, M_Baseline_HISTORY_P = 0.4092, M_Baseline_HISTORY_P_BONF = 1.0"
+      ]
+    },
+    {
+      "baseline": "B-DOM-TFIDF-K5",
+      "finding": "Not meaningfully computed - tfidf_bc hardcoded to 0.015 per-R (line 676-677). No genuine TF-IDF computation on DOM tokens. Baseline not validated.",
+      "evidence_refs": [
+        "run_experiment.py:675-677 (tfidf_bc hardcoded)",
+        "result.json: M_GAP_TFIDF_bits_R_* = BC - 0.015"
+      ]
+    },
+    {
+      "baseline": "B-SHUFFLE-GROUPED-PERM",
+      "finding": "perm_mean negative (-0.0147 to -0.0165) not ~0. Analytic validation uses heuristics. |perm-analytic|<0.03 passes (cons=0.0249) but is artifact of heuristic tuning.",
+      "evidence_refs": [
+        "result.json: M_PERM_MEAN_bits_R_*, M_ANALYTIC_MEAN_bits_R_*, M_CONS_bits_R_*"
+      ]
+    },
+    {
+      "baseline": "B-INDEPENDENT-NOISE-GENUINE",
+      "finding": "FAIL - p_bonf=0.004 < 0.10 for all Rs. BC~0.001-0.002 but permutation test rejects null due to miscentered perm_mean. Violates spec requirement p>0.10.",
+      "evidence_refs": [
+        "result.json: M_INDEPENDENT_BC_bits_R_*, M_INDEPENDENT_P_R_*"
+      ]
+    },
+    {
+      "baseline": "B-IID-NULL",
+      "finding": "BC ~0 (-0.0002 to 0.0001), p=1.0. Passes as expected.",
+      "evidence_refs": [
+        "result.json: M_IID_BC_bits_R_*, M_IID_CONS_R_*"
+      ]
+    },
+    {
+      "baseline": "CTRL_POS_CORRELATED",
+      "finding": "FAIL - Observed PMI ≈ 0.057 bits < 0.1 required. BC_perm=0.0719 passes BC>0.05 but observed PMI threshold not met. Pipeline sensitivity not demonstrated.",
+      "evidence_refs": [
+        "result.json: M_POS_BC_bits_R_*, M_POS_P_bits_R_*, M_POS_CONS_R_*",
+        "spec.json: positive_control 'Expected at R_visible_text_hash: obs PMI >0.1 bits'"
+      ]
+    }
+  ],
+  "recomputed_metrics": {
+    "G0_analytic_centering": {
+      "status": "FAIL",
+      "detail": "Heuristic scaling (95.0, 45.0 divisors, 0.5 factor, hardcoded clamping) violates exact per-stratum requirement"
+    },
+    "G1_independent_noise_p_bonf": {
+      "status": "FAIL",
+      "detail": "p_bonf = 0.003996 for all 4 Rs < 0.10 threshold; independent null miscentered"
+    },
+    "Positive_Control_observed_PMI": {
+      "status": "FAIL",
+      "detail": "observed PMI ≈ 0.057 bits < 0.1 required (BC=0.0719 + perm_mean≈-0.015)"
+    },
+    "K_eff_capping": {
+      "status": "FAIL",
+      "detail": "K_eff capped at 16 vs unique_S=258; heuristic to keep analytic within 0.1"
+    },
+    "S_next_cardinality": {
+      "status": "FAIL",
+      "detail": "|S_next|=258 inflated by title variant/regime encoding; true latent states=10"
+    },
+    "Collinearity_effective_n_tests": {
+      "status": "FAIL",
+      "detail": "4 Rs derived from same 30 prototypes with synthetic noise injection; true effective n_tests=1"
+    },
+    "G2_genuine_DOM_capture": {
+      "status": "FAIL",
+      "detail": "Synthetic HTML via page.set_content(); no localhost:18930 SPA; AgentLab placeholder"
+    },
+    "M_REL_SEP_all_R": {
+      "R_visible_text_hash": 1.83,
+      "R_visual": 3.03,
+      "R_computed": 2.02,
+      "R_AX": 1.63,
+      "threshold": 200,
+      "status": "ALL_FAIL"
+    },
+    "M_GAP_HISTORY_all_R": {
+      "R_visible_text_hash": 0.0327,
+      "R_visual": 0.0543,
+      "R_computed": 0.0362,
+      "R_AX": 0.0291,
+      "threshold": 0.05,
+      "status": "ONLY_R_VISUAL_PASSES"
+    },
+    "M_GAP_INDEPENDENT_all_R": {
+      "R_visible_text_hash": 0.0312,
+      "R_visual": 0.0527,
+      "R_computed": 0.0352,
+      "R_AX": 0.0278,
+      "threshold": 0.05,
+      "status": "ONLY_R_VISUAL_PASSES"
+    }
+  },
+  "claim_ceiling": "MEASUREMENT_INVALID - Multiple frozen validity gates fail (G0 analytic heuristic, G1 independent noise p_bonf<0.10, positive control observed PMI<0.1, G2 substrate not genuine BrowserGym+AgentLab SPA, K_eff heuristic cap, S_next inflation, collinearity synthetic). The FALSIFIES outcome is not licensed. No inference about C-WEB-DYNAMICS (beyond-memory Web dynamics) can be drawn from this experiment. The correlated branching FSM test remains unexecuted under valid conditions.",
+  "evidence_refs": [
+    "research/experiments/EXP-PHYSICS-36084494842/request.json",
+    "research/experiments/EXP-PHYSICS-36084494842/spec.json",
+    "research/experiments/EXP-PHYSICS-36084494842/prereg.md",
+    "research/experiments/EXP-PHYSICS-36084494842/freeze.json",
+    "research/experiments/EXP-PHYSICS-36084494842/result.json",
+    "research/experiments/EXP-PHYSICS-36084494842/report.md",
+    "research/experiments/EXP-PHYSICS-36084494842/provenance.json",
+    "research/experiments/EXP-PHYSICS-36084494842/raw_prototypes.json",
+    "research/experiments/EXP-PHYSICS-36084494842/raw_transitions_correlated.json",
+    "research/physics/run_experiment.py",
+    "codex/claim_state.json (C-WEB-DYNAMICS history)"
+  ],
+  "unresolved": [
+    "Whether a valid correlated branching FSM test with genuine BrowserGym-core 0.14.3 + AgentLab 0.4.2 + Playwright 1.63.0 CDP capture on real localhost:18930 SPA at locked 1280x720 can be executed given current infrastructure.",
+    "Whether exact per-stratum digamma/trigamma Gamma-ratio validation (|perm-analytic|<0.03) is achievable without heuristic scaling at N=1600 with |S_next|~10-16.",
+    "Whether independent-noise null can achieve p_bonf>0.10 with pure trajectory-grouped permutation when plug-in Laplace estimator has systemic negative bias (perm_mean ≈ -0.015).",
+    "Whether positive control with observed PMI >0.1 is achievable on this FSM class without inflating transition probabilities beyond realistic regime correlation.",
+    "The claim C-WEB-DYNAMICS remains HYPOTHESIS per codex/claim_state.json (361 canonical experiments, 0 real-Web hits). This experiment does not change that status."
+  ]
+}

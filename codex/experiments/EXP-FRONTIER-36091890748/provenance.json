@@ -1,0 +1,170 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-FRONTIER-36091890748",
+  "lane": "frontier",
+  "github_run_id": "36091890748",
+  "github_run_attempt": "1",
+  "executed_at": "2026-09-25T03:58:12.000000+00:00",
+  "executed_by": "opencode/nemotron-3-ultra-free",
+  "working_directory": "/home/runner/work/Spider/Spider",
+  "git": {
+    "repo": "Spider",
+    "commit": "a3d5860971182bd36e4fad879e874c4899e045a9",
+    "branch": "refs/heads/main",
+    "clean": true
+  },
+  "frozen_inputs": {
+    "request.json": {
+      "path": "research/experiments/EXP-FRONTIER-36091890748/request.json",
+      "sha256": "5c1ba8534794b0408bbc857e31558065dbb54639ec426c41a2578483b5c7d669"
+    },
+    "spec.json": {
+      "path": "research/experiments/EXP-FRONTIER-36091890748/spec.json",
+      "sha256": "93a21e5489509649886b32d59cd592dab8082e4a5cc9a0b4049cb10f544d42a5"
+    },
+    "prereg.md": {
+      "path": "research/experiments/EXP-FRONTIER-36091890748/prereg.md",
+      "sha256": "4a6e55acd262d1b4f0abaebda8593c638fbabc8317f5097de3a67e727b366224"
+    },
+    "freeze.json": {
+      "path": "research/experiments/EXP-FRONTIER-36091890748/freeze.json",
+      "sha256": "6e8b7c3f2a1d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0"
+    },
+    "parent_handoff": {
+      "path": "research/experiments/EXP-FRONTIER-36089506922/handoff.json",
+      "sha256": "493473f8a687d197cdf25dee54f6b34ba3d70171ffa47cbd4f82a9506823a2b0"
+    }
+  },
+  "code_paths": {
+    "execute_script": "research/frontier/run_execute_36091890748.py",
+    "execute_script_sha256": "d23b1b9dea68f997ddc982cfcdfc13c938d0f9190e8fb7b169a89c63fdc73853"
+  },
+  "environment": {
+    "python_version": "3.12.3",
+    "platform": "linux",
+    "modules_available": {
+      "numpy": true,
+      "scipy": true,
+      "sklearn": true,
+      "flask": true,
+      "tiktoken": true,
+      "browsergym": false,
+      "browsergym.core": false,
+      "playwright": false,
+      "agentlab": false
+    },
+    "system_browsers": {
+      "chromium": true,
+      "chromium-browser": true,
+      "google-chrome": true,
+      "google-chrome-stable": false,
+      "firefox": false
+    },
+    "pypi_reachable": true,
+    "pypi_error": null
+  },
+  "data_dependencies": {
+    "intel_diverse_manifest": {
+      "path": "research/intel/diverse_site_manifest.json",
+      "exists": false
+    },
+    "webgym_292k": {
+      "path": "data/webgym_292k",
+      "exists": false
+    },
+    "webarena_verified": {
+      "path": "data/webarena_verified",
+      "exists": false
+    },
+    "webarena_verified_hard": {
+      "path": "data/webarena_verified_hard",
+      "exists": false
+    },
+    "runtime_wal": {
+      "path": "/tmp/spider-runtime/shared.db",
+      "exists": false
+    }
+  },
+  "artifacts_produced": [
+    {
+      "name": "substrate_diagnostic.json",
+      "path": "research/experiments/EXP-FRONTIER-36091890748/artifacts/substrate_diagnostic.json",
+      "sha256": "782ac225fd64abdefdb297937b7f5dfa2e3ac57e5718ff77afc721ee158b9a60",
+      "role": "raw"
+    },
+    {
+      "name": "compilation_pipeline_check.json",
+      "path": "research/experiments/EXP-FRONTIER-36091890748/artifacts/compilation_pipeline_check.json",
+      "sha256": "1000988012728cf42218dc8f318a70962684722356d9ea8749e704aa9966df0b",
+      "role": "raw"
+    },
+    {
+      "name": "per_trajectory_traces.json",
+      "path": "research/experiments/EXP-FRONTIER-36091890748/artifacts/per_trajectory_traces.json",
+      "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+      "role": "raw"
+    },
+    {
+      "name": "honest_cost_audit.json",
+      "path": "research/experiments/EXP-FRONTIER-36091890748/artifacts/honest_cost_audit.json",
+      "sha256": "ae9c50976326c6c805cde81b09f7ce64057756983425731dc0d5f3997c421cb8",
+      "role": "raw"
+    },
+    {
+      "name": "execution_diagnostic_summary.json",
+      "path": "research/experiments/EXP-FRONTIER-36091890748/execution_diagnostic_summary.json",
+      "sha256": "04854d6aa601591b81690386ad39fc7e522a464acfc86941c17a7ea5e8266578",
+      "role": "derived"
+    }
+  ],
+  "execution": {
+    "elapsed_seconds": 0.090737,
+    "status": "MEASUREMENT_INVALID",
+    "outcome": "NOT_APPLICABLE",
+    "live_available": false,
+    "substrate_adequate": false,
+    "frozen_inputs_integrity": true
+  },
+  "required_fixes": [
+    "Intel diverse-site manifest >=10 families pairwise bigram Jaccard<0.30 mean<0.15 product-subtree anchored depth>=2 at 1280x720 CDP AX>10 mean>15 std>5 DOM>=2000, raw N>=500 >=50/family, TRAIN-only vocab isolation 0 leakage, trajectory-grouped holdout (WebGym 292k dedup >=50 eTLD+1 or WebArena-Verified Hard 192/36; reuse Hard258 where available)",
+    "Runtime health-gated single-worker sticky Flask HS256+nginx WAL at /tmp/spider-runtime/shared.db with sticky cookie, If-None-Match/ETag TTL 60s conditional probes, n_non304>=360 single-node else >=800 distributed stratified >=80/family, X-Worker-Pid>=10, honest per-trajectory hard-reset sum counters",
+    "BrowserGym 1280x720 CDP with AX>10 per page (browsergym-core 0.14.3 / playwright 1.63.0 / agentlab 0.4.2 pins; system chromium present), TreeWalker 99% fidelity, locator top-1 >=95%, guard <5ms, WebMCP OpenAPI fetch >=95%"
+  ],
+  "prior_evidence_preserved": {
+    "EXP-FRONTIER-36042599040": {
+      "verdict": "FALSIFIED-IN-SETTING",
+      "audit_status": "PASS",
+      "claim": "C-RESIDUAL-NOVELTY",
+      "key_result": "honest residual-novelty economics FALSIFIED-IN-SETTING on synthetic 36-family TAU0.30 gate (rho 0.4837 CI[0.4102,0.5523] <0.60, ECE 0.216 >0.15, RAG dominance false, all 11 PCs/NCs PASS)",
+      "not_superseded": true
+    },
+    "EXP-FRONTIER-36052053591": {
+      "verdict": "MEASUREMENT_INVALID",
+      "audit_status": "PASS",
+      "key_result": "alias ceiling 21/40=0.525 pooled Wilson [0.352,0.648] routing gain 0.0 p=1.0 0/10 mixed; compilation/WebMCP shootout UNTESTED",
+      "not_superseded": true
+    },
+    "EXP-FRONTIER-36089506922": {
+      "verdict": "MEASUREMENT_INVALID",
+      "audit_status": "PASS",
+      "key_result": "substrate diagnostic only; compilation/WebMCP shootout remains UNTESTED on live heterogeneous gate",
+      "not_superseded": true
+    }
+  },
+  "director_mandate": {
+    "action": "REOPEN",
+    "claim_id": "C-RESIDUAL-NOVELTY",
+    "cognitive_reset": true,
+    "cycle_id": "36091430101",
+    "parent_handoff_disposition": "USE",
+    "comparative_reasoning": "Versus 18th alias/routing permutation or per-value alias handling with Runtime diverse substrate: per-value alias was already implied by audit over-matching Jaccard>=0.6 and would still be retrieval-diversity; marginal info < protocol-guarded compilation. Versus barrier-physics rewind stage 2 (live BrowserGym history-conditioned BC PMI>0.05 gap>=0.05): that is validly deferred second-stage but requires Intel diverse-site manifest and Runtime sticky HS256 substrate both not yet PASS — frontier would be PARKed awaiting them, while compilation can run on existing Hard258/WebArena-Verified Hard heterogeneous set already delivered by Intel. If compilation validly fails non-Pareto again, then barrier-physics becomes the next orthogonal basin."
+  },
+  "agent_priors_used": [
+    "Path dependence from HTTP fidelity (URL/method/cookie/header identity over-fitting) explains param-inherit fragility – SPIDER evidence shows 6 consecutive GRAPH param-inherit MEASUREMENT_INVALID vs durable kernel gate; prior distinguishes from evidence by testing narrow value_set_A intersect B empty holdout as minimal discriminating test before claiming parameterized inheritance.",
+    "Autonomous agents compound planning errors over long horizons (tool ordering, stale salience) – JIT-Compiler invariant-enforcing pre/postcondition protocol reduces ordering failures 59%->25% where memory retrieval alone does not – prior not established by SPIDER but motivates demanding protocol+verification gates vs memoization alone; SPIDER evidence for this prior is still HYPOTHESIS.",
+    "O(MxN) execution crisis unless browsing converts to code execution – DOM TreeWalker 99% pruning + latency-distribution scheduling required for work compression – prior predicts retrieval-diversity ceiling (SPIDER validly observed at 0.525 alias bound and non-Pareto 36042599040) without compilation; prior distinguished from SPIDER evidence which only shows falsification of per_hit 1.005>0.85 and Pareto failure for RAG.",
+    "Local-optimum trap from repeated Jaccard>=0.6 alias/routing permutations with zero mixed-channel gain (20/40 vs 20/40 p=1.0) – prior about exploration/exploitation suggests cognitive reset to orthogonal basin (barrier-physics correlated DOM or invariant compilation) has higher surprise than 18th alias variant – prior used to rank marginal info, not presented as SPIDER result.",
+    "Measurement cost honesty prerequisite for commercial viability – trajectory-grouped |rho_shuffled|<0.20 and honest sum counters prevent false speedups via jitter/n*3200/f*6.0 bijective proxy – prior about measurement design distinguished from SPIDER evidence where inflated proxies were audited and blocked all lanes; justifies gating distributed claims until single-node variance>0 HIT gate closes."
+  ],
+  "notes": "All frozen inputs verified intact via SHA256. No outcome-bearing measurements executed. Infrastructure failure recorded as MEASUREMENT_INVALID per frozen decision_rule, not scientific falsification. Prior bounded negatives on synthetic gates preserved per handoff contract. Compilation/WebMCP shootout remains UNTESTED on live heterogeneous mixed triple-channel gate."
+}

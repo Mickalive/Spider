@@ -1,0 +1,95 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-36018188168",
+  "lane": "graph",
+  "run": {
+    "date": "2026-09-25T06:35:55+0000",
+    "platform": "linux",
+    "python": "3.12.14",
+    "nginx": "",
+    "gunicorn": "23",
+    "flask": "3.1.3",
+    "pyjwt": "2.13.0",
+    "sqlite_journal_mode": true
+  },
+  "frozen_inputs": {
+    "request.json_sha256": "fdc56a4d895d36a2da18d973b94b0bc94a12867d4db1909c75404a96f836bde5",
+    "spec.json_sha256": "cb3989523a2bcfba02b16216f8b3584628f624e3b77f99c59961dd3d6dcf9c1a",
+    "prereg.md_sha256": "8559b06fc4d86069961841084eb7ba2793ded63a4c8d176ac0e0c320279add2b"
+  },
+  "code": [
+    {
+      "path": "research/graph/delta_repair/execute_delta_repair_single_node_36018188168.py",
+      "sha256": "1bdec6bc0cd129aacbe0d4a934aeeea93c74e8b3505c33cbfadbd78175a29392"
+    },
+    {
+      "path": "research/graph/delta_repair/flask_app_36018188168.py",
+      "sha256": "727f68f294c3e759909527548eeebf64dece8b11c20133d784d5fdf44103b309"
+    },
+    {
+      "path": "src/spider/kernel.py",
+      "sha256": "46929b3a951df48d7f9d1fd850871073c0d91c1868aa117e13d389fe274e8d61"
+    }
+  ],
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-GRAPH-36018188168/raw_evidence/raw_evidence_synthetic.jsonl",
+      "sha256": "d72d9bb7808f79320dcc1bfb56c082ee1075f9d5ad9df40e569c73e4c7deb75e",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-36018188168/raw_evidence/raw_evidence_single.jsonl",
+      "sha256": "8a78653e7eb6811aaad13606f3f727e12aa9b96778c1a95e7fcd60119951da4c",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-36018188168/raw_evidence/summary.json",
+      "sha256": "0f855177ade18aabe47af8062fac54c783c86de1ae5bb9df03a3f170dcad06ca",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-36018188168/raw_evidence/decision.json",
+      "sha256": "c5f063472477a01b207835cb86328b4d0c5e48502ad1528fe579afa282adae69",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-36018188168/raw_evidence/health_gate.json",
+      "sha256": "ca5480f124863f14316a55360420eca45fa42d085b1369506c19bf08eaf3281a",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-36018188168/raw_evidence/stage_synthetic.json",
+      "sha256": "7c5178951780f2f0f2868d40433a5d423d121b4fe65a26aac363c1ac930f9af4",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-36018188168/raw_evidence/stage_single.json",
+      "sha256": "09c84dc2d07f58562e54a2edd8ee12272c33c7df12f487a23567262147b0b3c0",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-36018188168/raw_evidence/raw_evidence_ALL.jsonl",
+      "sha256": "3f71054ac4ff55da2920e01f460fb9ba855064575cb8624c4ade9ec4af016d14",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-36018188168/raw_evidence/metrics_ALL.json",
+      "sha256": "ef6acda2d281368be12f8c1770a400541c76fc0bb8e283efd1d5abb085bdee7b",
+      "role": "derived"
+    }
+  ],
+  "decision": {
+    "status": "COMPLETE",
+    "frozen_verdict": "SURVIVES_CURRENT_TEST",
+    "outcome": "SUPPORTS",
+    "reason": "ALL D1-D13 hold"
+  },
+  "commands": [
+    "python3 research/graph/delta_repair/execute_delta_repair_single_node_36018188168.py"
+  ],
+  "unresolved": [
+    "Distributed n>=800 shared-WAL validation remains UNKNOWN (deferred until this single-node gate passes per spec product_consequence).",
+    "Real LLM token billing and Playwright execution untested (Product lane).",
+    "f=100 amortization untested; only f=10 frozen gate measured."
+  ]
+}
