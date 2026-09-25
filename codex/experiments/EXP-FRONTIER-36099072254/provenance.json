@@ -1,0 +1,139 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-FRONTIER-36099072254",
+  "lane": "frontier",
+  "git_commit": "f9833559a58ba449078ea35eac242f5403036f9f",
+  "github_run_id": "36099072254",
+  "frozen_at": "2026-09-25T05:37:43.750133+00:00",
+  "freeze_hashes": {
+    "prereg.md": "a44a265c03bebebd836cc0b912beef77682f2181b2d8799f74e91692bac9b682",
+    "request.json": "b8957021fb74cd23af4eafced336cab7d5a107568c97d2d075bbbe343e5be53d",
+    "spec.json": "a5d2512a4bd1d07acc249b9594fcd8d8219ae203cebf706f949cd7a2a6984ba6"
+  },
+  "diagnostic_mode": true,
+  "live_available": false,
+  "substrate_diagnostic": {
+    "live_available": false,
+    "browsergym": false,
+    "browsergym.core": false,
+    "playwright": false,
+    "agentlab": false,
+    "intel_diverse_manifest_exists": false,
+    "manifest_families": 0,
+    "jaccard": null,
+    "pooled_tasks": 0,
+    "mixed_tasks": 0,
+    "runtime_wal_exists": false,
+    "x_worker_pid": null,
+    "n_non304": null,
+    "substrate_adequate": false,
+    "heterogeneity_adequate": false,
+    "coverage_adequate": false,
+    "chromium_present": true,
+    "pypi_reachable": false,
+    "browsergym_core_version": null,
+    "playwright_version": null,
+    "graph_freshness_exists": false,
+    "elapsed_seconds": 0.0,
+    "diagnostic_mode": true,
+    "experiment_id": "EXP-FRONTIER-36099072254",
+    "director_dependencies": [
+      "intel: WebChoreArena 532 + WebArena-Verified Hard 192/36 orthogonal holdout Jaccard<0.30",
+      "runtime: health-gated single-node HS256 sticky WAL n_non304>=360",
+      "graph: freshness TN>=0.85 substrate repair"
+    ],
+    "frozen_seed": 35725763380
+  },
+  "code_paths": [
+    "research/frontier/run_execute_36099072254.py (not executed - substrate absent)",
+    "research/experiments/EXP-FRONTIER-36099072254/artifacts/substrate_diagnostic.json"
+  ],
+  "allowed_roots": [
+    "research/harness",
+    "research/frontier"
+  ],
+  "freeze_verified": true,
+  "environment": {
+    "python": "3.12.14 (main, Aug 13 2026, 02:47:42) [GCC 13.3.0]",
+    "platform": "linux",
+    "chromium_present": true,
+    "chromium_paths": [
+      "/usr/bin/chromium",
+      "/usr/bin/chromium-browser",
+      "/usr/bin/google-chrome"
+    ],
+    "browsergym_installed": false,
+    "playwright_installed": false,
+    "agentlab_installed": false,
+    "intel_manifest": false,
+    "runtime_wal": false
+  },
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-FRONTIER-36099072254/artifacts/substrate_diagnostic.json",
+      "sha256": "414635428e3f05d2ad724f0e4e25cbc7ebbeea9aefc1999402caa6a52397e223",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-36099072254/artifacts/per_trajectory_traces.json",
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-36099072254/artifacts/honest_cost_audit.json",
+      "sha256": "0b8beff4e6ff247f409857527b335d36847f6e0232e1c7bb5faedd763e9a9f35",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-36099072254/artifacts/compilation_pipeline_check.json",
+      "sha256": "f93bdffdd63e17052bb7dc87b6ec21cb80b2dff88f730e65024d7f2587ad2394",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-36099072254/artifacts/freshness_gate_check.json",
+      "sha256": "9e7c9a8ad20de58b354c519a1ea5fedaa5285e524b427a60aed4ab406b169cdb",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-36099072254/artifacts/webmcp_registry_check.json",
+      "sha256": "57d14fe50c36d734daf27144bb162cc9f19100efd7ecb4ce6947ae03be5994fe",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-36099072254/result.json",
+      "sha256": "078a262f682c4ff5a085c10182ed8946854097ead47688ce31d8169f675e8a99",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-36099072254/report.md",
+      "sha256": "30e4ec80887050b7e19b272a72329196325c524c7668899beca6e01a3f9260eb",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-36099072254/request.json",
+      "sha256": "b8957021fb74cd23af4eafced336cab7d5a107568c97d2d075bbbe343e5be53d",
+      "role": "fixture"
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-36099072254/spec.json",
+      "sha256": "a5d2512a4bd1d07acc249b9594fcd8d8219ae203cebf706f949cd7a2a6984ba6",
+      "role": "fixture"
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-36099072254/prereg.md",
+      "sha256": "a44a265c03bebebd836cc0b912beef77682f2181b2d8799f74e91692bac9b682",
+      "role": "fixture"
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-36099072254/freeze.json",
+      "sha256": "0cd80f8fa0ca0f6c5913f7452b02e6a26657dd007581bb31d4072e52811b0c27",
+      "role": "fixture"
+    }
+  ],
+  "commands": [
+    "python3 /tmp/run_diag2.py  # substrate diagnostic - no outcome-bearing measurement",
+    "cat research/experiments/EXP-FRONTIER-36099072254/result.json",
+    "cat research/experiments/EXP-FRONTIER-36099072254/artifacts/substrate_diagnostic.json"
+  ],
+  "created_at": "2026-09-25T05:41:26.422665+00:00"
+}
