@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-36018188168",
+  "lane": "graph",
+  "decision": "SURVIVES_CURRENT_TEST",
+  "claim_updates": [
+    {
+      "claim_id": "C-DELTA-REPAIR",
+      "status": "EXPERIMENTAL",
+      "reason": "Bounded single-node transfer SURVIVES with honest instrumentation per frozen D1-D13: audit PASS producer_claim_supported true recomputed metrics match. Health-gated single-node Flask 3.1.3/PyJWT 2.13.0 HS256 + nginx $request_uri sticky (2 workers 38534/38535, WAL true, HS256 verified, 304 operational, sticky consistent, n_non304 500 >=360) sustains freshness TN 1.0 Wilson lower 0.9874 >=0.85 lower>0.75 FA 0.0 <=0.10 UNKNOWN 0.1428 in [0.00,0.18]∩[stale_rate±0.07] ECE 0.064 global 0.05/0.15 per-class <=0.15 calibrated, discriminating vs B-NO-GUARD FA 1.0 delta 1.0 >=0.15 and single-signal ablations each fail >=1 family (JACCARD-ONLY 0/16 param/cache, HEADER-ONLY 0/18 dom). Localized k-probe re-observe patch via src/spider/kernel.py _matches exact equality achieves repair 30/30 K1 pooled 1.0 Wilson lower 0.886 >=0.80 pooled >=0.70 per family (10/10 lower 0.722) and 10/10 K2 pooled 1.0 lower 0.722 and 10/10 K3 pooled 1.0 lower 0.722, cost 5/16=0.3125 10/32=0.3125 15/48=0.3125 <0.50 tokens browser 1/3 2/6 3/9=0.333 <0.40 verify 1 per probe <=2, contamination 0/20 disjoint and 0/30 same-resource K1 (0/20 both sets K2/K3) pooled <0.10 per-family point 0.0 <0.15, verification AUROC 1.0 TEST per k precision 1.0 >=0.80 at frozen 0.85 perm null unclamped 0.498/0.493 in [0.40,0.60], amortized f=10 15<16 20<32 25<48 <cold_k and 1<3 2<6 3<9, D13 honesty gates pass with disclosure: V2 honest per-trajectory-reset integers 5/10/15 no jitter, V4 max|rho| 0.0 via 1000 whole-trajectory-block perms passes <0.20 but vacuous zero variance, V6 5000 family-stratified trajectory-grouped bootstrap degenerate [1.0,1.0] ceiling Wilson informative, per audit V4 pass-vacuous V6 pass-degenerate V11 pass-with-note K2/K3 4/3/3 <10 per family but matches frozen K-total definition. This upgrades ceiling from synthetic-only EXPERIMENTAL (EXP-GRAPH-35952148696) to health-gated single-node EXPERIMENTAL; does NOT imply VALIDATED/PRODUCT_CORE—requires distributed n>=800 PASS plus real LLM/Playwright per spec product_consequence."
+    }
+  ],
+  "product_action": "NO_PROMOTION",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "Can the same honest deterministic _matches + k-probe re-observe patch and combined freshness guard (Jaccard 0.85 required-filtered {id,name,email} + _template/X-Csrf-Token + ETag SHA256[:16] + max-age0 recalibrated 0.95/0.85) with per-trajectory-reset integer sum-counter, 1000 trajectory-grouped perms (max|rho|<0.20), 5000 family-stratified bootstraps and registry-clone re-verification sustain TN>=0.85 FA<=0.10 repair>=0.80 pooled >=0.70 per family contamination<0.10 at blast radius 1-3 and AUROC>=0.75 precision>=0.80 amortized<cold at f=10 on a distributed health-gated nginx 1.24.0 $request_uri sticky 4x gunicorn Flask 3.1.3 PyJWT HS256 shared WAL DB at n>=800 non-304 before f=100 real-LLM authorization?",
+  "reason": "Grounded in frozen spec.json:decision_rule D1-D13 and prereg.md §§9/11, producer result.json SUPPORTS metrics (M-SINGLE-TN 1.0 FA 0.0, M-SINGLE-REPAIR-SUCCESS-POOLED-K1/K2/K3 1.0, cost ratios 0.3125/0.333, contamination 0.0 both sets, AUROC 1.0 per k) and independent audit.json PASS producer_claim_supported true with recomputed Wilson/ECE/ro/ratios matching producer and validity_findings V1 pass V2 pass-with-limitation V3 pass V4 pass-vacuous V5 pass V6 pass-degenerate V7 pass V8 pass V9 pass V10 pass V11 pass-with-note V12 pass V13-17 pass plus baseline_findings all pass (ceiling disclosed). All 9 parent MEASUREMENT_INVALID required fixes (EXP-GRAPH-35999336958) are addressed: actual nginx sticky distinct pids, _matches binary verification TRAIN18/TEST12 unclamped, k*5 scaling 5/10/15, honest counter, 1000 perms/5000 bootstraps, both contamination sets, health-gated WAL/HS256/304/n>=360 reconciliation (500 vs 500+). Limitations disclosed do not invalidate SURVIVES: degenerate bootstraps, vacuous rho via zero variance, deterministic oracle ceiling, K2/K3 per-family n=3-4 limited power, nginx version provenance empty but sticky proven. No product promotion per graph lane and PRODUCT_CORE requires distributed + LLM evidence.",
+  "evidence_refs": [
+    "research/experiments/EXP-GRAPH-36018188168/request.json:director_mandate.question",
+    "research/experiments/EXP-GRAPH-36018188168/spec.json:decision_rule D1-D13 measurement_validity V1-V17",
+    "research/experiments/EXP-GRAPH-36018188168/prereg.md:sections 6 9 11 12",
+    "research/experiments/EXP-GRAPH-36018188168/freeze.json:hashes",
+    "research/experiments/EXP-GRAPH-36018188168/result.json:metrics M-SINGLE-TN-SPIDER 1.0 M-SINGLE-FA-SPIDER 0.0 M-SINGLE-REPAIR-SUCCESS-POOLED-K1 1.0 K2 1.0 K3 1.0 M-CONTAMINATION-POOLED-DISJOINT-K1 0.0 M-CONTAMINATION-POOLED-SAME-K1 0.0 M-VERIFICATION-AUROC-K1 1.0 controls PC NC B-*",
+    "research/experiments/EXP-GRAPH-36018188168/audit.json:status PASS producer_claim_supported true validity_findings V1-V17 baseline_findings claim_ceiling evidence_refs",
+    "research/experiments/EXP-GRAPH-36018188168/provenance.json:frozen_inputs run flask 3.1.3 pyjwt 2.13.0 gunicorn 23 code hashes",
+    "research/experiments/EXP-GRAPH-36018188168/raw_evidence/health_gate.json:sha256 ca5480f124863f14316a55360420eca45fa42d085b1369506c19bf08eaf3281a worker_pids [38534,38535] WAL true HS256 true 304 true sticky true",
+    "research/experiments/EXP-GRAPH-36018188168/raw_evidence/summary.json:sha256 0f855177ade18aabe47af8062fac54c783c86de1ae5bb9df03a3f170dcad06ca D1-D13 true",
+    "research/experiments/EXP-GRAPH-36018188168/raw_evidence/raw_evidence_single.jsonl:sha256 8a78653e7eb6811aaad13606f3f727e12aa9b96778c1a95e7fcd60119951da4c lines 1526",
+    "research/experiments/EXP-GRAPH-36018188168/raw_evidence/raw_evidence_synthetic.jsonl:sha256 d72d9bb7808f79320dcc1bfb56c082ee1075f9d5ad9df40e569c73e4c7deb75e",
+    "research/experiments/EXP-GRAPH-36018188168/raw_evidence/stage_single.json:sha256 09c84dc2d07f58562e54a2edd8ee12272c33c7df12f487a23567262147b0b3c0",
+    "src/spider/kernel.py:sha256 46929b3a951df48d7f9d1fd850871073c0d91c1868aa117e13d389fe274e8d61 _matches",
+    "research/experiments/EXP-GRAPH-35952148696/handoff.json:prior synthetic SURVIVES narrow ceiling audit PASS",
+    "research/experiments/EXP-GRAPH-35999336958/verdict.json:MEASUREMENT_INVALID 9 required_fixes",
+    "research/experiments/EXP-GRAPH-35999336958/handoff.json:carry_forward do_not_assume",
+    "codex/claim_state.json:C-DELTA-REPAIR EXPERIMENTAL synthetic"
+  ]
+}
