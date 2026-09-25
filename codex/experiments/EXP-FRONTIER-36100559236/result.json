@@ -1,0 +1,176 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-FRONTIER-36100559236",
+  "lane": "frontier",
+  "status": "MEASUREMENT_INVALID",
+  "outcome": "NOT_APPLICABLE",
+  "metrics": {
+    "live_available": false,
+    "pooled": 0,
+    "mixed": 0,
+    "manifest_families": 0,
+    "substrate_adequate": false,
+    "heterogeneity_adequate": false,
+    "coverage_adequate": false,
+    "n_non304": null,
+    "x_worker_pid": null,
+    "browsergym_available": false,
+    "playwright_available": false,
+    "chromium_present": true,
+    "freshness_tn": null,
+    "freshness_stale_probes": 0,
+    "rho_novelty": null,
+    "rho_length_pooled": null,
+    "ece": null,
+    "unknown_precision": null,
+    "saving_f10_pct": null,
+    "webmcp_coverage_pct": null
+  },
+  "controls": {
+    "PC-HONEST-COST-SANITY": {
+      "expected": "honest==sum diff0 TAU+freshness-gated within-f std>0 zero_cells 0 gap>0.35 |rho_proxy|<0.60 |rho_shuffled|<0.20 centered |mean|<0.05 std<0.15 operation traces with per-op integers and TAU+freshness mask logged forbidden-read 0",
+      "observed": "NOT_RUN substrate absent, honest per-trajectory hard-reset counters not executed",
+      "pass": false,
+      "evidence_ref": "research/experiments/EXP-FRONTIER-36100559236/artifacts/substrate_diagnostic.json"
+    },
+    "PC-WEBCHORE-MANIFEST-ORTHOGONAL": {
+      "expected": ">=10 families WebChoreArena 532 + WebArena-Verified Hard 192/36 L=8-14 + Hard258 pairwise Jaccard<0.30 mean<0.15 product-subtree depth>=2 1280x720 CDP AX>10 mean>15 std>5 DOM>=2000 per family raw N>=500 >=50/family TRAIN-only vocab isolation 0 leakage deterministic seed 35725763380",
+      "observed": "NOT_RUN intel_diverse_manifest_exists=False manifest_families=0 <10 required",
+      "pass": false,
+      "evidence_ref": "research/experiments/EXP-FRONTIER-36100559236/artifacts/substrate_diagnostic.json"
+    },
+    "PC-TRAIN-TEST-DISJOINT": {
+      "expected": "0 test-B resources/families in train-A registry/catalog/index/compiled DAG 0 forbidden reads via static harness inspection whole-trajectory holdout",
+      "observed": "NOT_RUN substrate absent, trajectory-grouped holdout not constructed",
+      "pass": false,
+      "evidence_ref": "research/experiments/EXP-FRONTIER-36100559236/artifacts/substrate_diagnostic.json"
+    },
+    "PC-CALIBRATION-DERIVED": {
+      "expected": "confidence derived solely from actual TF-IDF TAU0.30+freshness scores via softmax temp 0.15+jitter 0.02 std>0.05 5 adaptive bins imperfect accuracy 0.35-0.78 deterministic TAU+freshness-gated correctness",
+      "observed": "NOT_RUN substrate absent, derived confidence not computed",
+      "pass": false,
+      "evidence_ref": "research/experiments/EXP-FRONTIER-36100559236/artifacts/substrate_diagnostic.json"
+    },
+    "PC-NOVELTY-MONOTONICITY": {
+      "expected": "mean executed cost 100% >0% block p<0.05 d>0.8",
+      "observed": "NOT_RUN substrate absent, monotonicity not measured",
+      "pass": false,
+      "evidence_ref": "research/experiments/EXP-FRONTIER-36100559236/artifacts/substrate_diagnostic.json"
+    },
+    "PC-BUILD-COST-ISOLATED": {
+      "expected": "M_total(f)=build+f*per_task with auditable offline vector/index ops frozen before outcomes",
+      "observed": "NOT_RUN substrate absent, build ops not counted",
+      "pass": false,
+      "evidence_ref": "research/experiments/EXP-FRONTIER-36100559236/artifacts/substrate_diagnostic.json"
+    },
+    "PC-BROWSERGYM-SUBSTRATE": {
+      "expected": "BrowserGym 0.14.3 1280x720 CDP n_non304>=360 single-node else >=800 distributed X-Worker-Pid>=10 If-None-Match/304 proxy_cache HIT AX>10 mean>15 std>5 DOM>=2000",
+      "observed": "NOT_RUN browsergym=False browsergym.core=False playwright=False agentlab=False n_non304=None X-Worker-Pid=None chromium_present=True",
+      "pass": false,
+      "evidence_ref": "research/experiments/EXP-FRONTIER-36100559236/artifacts/substrate_diagnostic.json"
+    },
+    "PC-FRESHNESS-GATED-BAILOUT": {
+      "expected": "freshness TN>=0.85 with >=30 stale probes bailout to UNKNOWN correctly ECE upper and false_accept gated",
+      "observed": "NOT_RUN substrate absent, freshness TN not measured, stale_probes=0 <30 required",
+      "pass": false,
+      "evidence_ref": "research/experiments/EXP-FRONTIER-36100559236/artifacts/freshness_gate_check.json"
+    },
+    "NC-EMPTY-REGISTRY": {
+      "expected": "N=6 empty registry -> UNKNOWN 100% precision=1.0 below TAU0.30",
+      "observed": "NOT_RUN substrate absent",
+      "pass": false,
+      "evidence_ref": "research/experiments/EXP-FRONTIER-36100559236/artifacts/substrate_diagnostic.json"
+    },
+    "NC-NO-APPLICABLE": {
+      "expected": "N=12 OOD intents with no covering family every pipeline UNKNOWN precision>=0.85 false_accept<=0.15 at UNKNOWN<0.80 TAU+freshness-gated gated reduction >=0.20 vs ungated",
+      "observed": "NOT_RUN substrate absent",
+      "pass": false,
+      "evidence_ref": "research/experiments/EXP-FRONTIER-36100559236/artifacts/substrate_diagnostic.json"
+    },
+    "NC-ORACLE-LEAK": {
+      "expected": "derived_context allowed keys only URL/method/url_path/url_query/headers_observed/body_observed plus mechanism templates AX snapshot hash freshness contracts must not contain residual_novelty_fraction/target_resource_id/length_label/expected_key_set forbidden-key read count==0 trajectory-grouped",
+      "observed": "NOT_RUN substrate absent",
+      "pass": false,
+      "evidence_ref": "research/experiments/EXP-FRONTIER-36100559236/artifacts/substrate_diagnostic.json"
+    },
+    "NC-BIJECTIVE-COST": {
+      "expected": "not bijective with n*3200 nor f*6.0 nor TAU candidate-count proxy: gap rho_novelty-|rho_shuffled|>0.35 and |rho_proxy|<0.60 all proxies TAU+freshness-gated",
+      "observed": "NOT_RUN substrate absent, bijective proxy not measured",
+      "pass": false,
+      "evidence_ref": "research/experiments/EXP-FRONTIER-36100559236/artifacts/substrate_diagnostic.json"
+    },
+    "NC-SHUFFLED-NULL": {
+      "expected": "global trajectory-grouped stratified permutation unit=trajectory stratified by family 5000 perms for shuffled novelty and shuffled length each |rho_shuffled|<0.20 p>=0.20 centered |mean|<0.05 std<0.15; primary S1/S2 p-values use separate 5000 family-block permutation block=family unit=trajectory TAU+freshness-gated",
+      "observed": "NOT_RUN substrate absent, 5000 global +5000 block perms not run",
+      "pass": false,
+      "evidence_ref": "research/experiments/EXP-FRONTIER-36100559236/artifacts/substrate_diagnostic.json"
+    },
+    "NC-GUARD-SPECIFICITY": {
+      "expected": "shuffled guard+freshness ablation N>=12 shows precision drop >=30% and false_accept increase vs real guards discriminating not tautological",
+      "observed": "NOT_RUN substrate absent, guard specificity ablation not run",
+      "pass": false,
+      "evidence_ref": "research/experiments/EXP-FRONTIER-36100559236/artifacts/substrate_diagnostic.json"
+    }
+  },
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-FRONTIER-36100559236/artifacts/substrate_diagnostic.json",
+      "sha256": "b4ccc55faa10c843efcab6a5bfcdcb92eecd312e36c6ee7941bad03ec3e60836",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-36100559236/artifacts/per_trajectory_traces.json",
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-36100559236/artifacts/honest_cost_audit.json",
+      "sha256": "1f163c33e9383a590e7d05adc009a1240bd3877fb5ac04233b882a028a739b2f",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-36100559236/artifacts/freshness_gate_check.json",
+      "sha256": "5789d05b7e8e4ddfc752a7270e060c575ba30171933868c0d50551de82f27771",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-36100559236/artifacts/compilation_pipeline_check.json",
+      "sha256": "3853592fe17834944dc9291fa6c20f7cd3882cd9fabd8968de0dfe31a88fcd13",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-36100559236/artifacts/webmcp_registry_check.json",
+      "sha256": "c35fb4594a9770c0fa2c2a5c831d8a66f48ddfa70b4877e1af759b82674563b9",
+      "role": "raw"
+    }
+  ],
+  "observations": [
+    "Substrate diagnostic: live_available=false browsergym=False browsergym.core=False playwright=False agentlab=False intel_diverse_manifest_exists=False manifest_families=0 jaccard=null pooled_tasks=0 (<40 required) mixed_tasks=0 (<10 required) runtime_wal_exists=False x_worker_pid=None n_non304=None substrate_adequate=false heterogeneity_adequate=false coverage_adequate=false chromium_present=True pypi_reachable=True",
+    "No outcome-bearing measurements run; all 8 PCs and 6 NCs NOT_RUN; per_trajectory_traces empty [] honest counters not validated; TAU0.30+freshness gating not applied",
+    "Prior synthetic TAU0.30 FALSIFIED-IN-SETTING (EXP-FRONTIER-36042599040 PASS all 11 PCs/NCs: rho_novelty 0.4837 CI[0.410,0.552] <0.60 ECE 0.216>0.15 RAG dominance false on 36-family orthogonal Jaccard 0.0 gate) remains bounded synthetic negative not extended to heterogeneous WebChoreArena 532 gate",
+    "Prior alias tunnel 21/40=0.525 Wilson [0.352,0.648] (EXP-FRONTIER-36052053591 lineage) with 0/10 mixed triple-channel preserved not superseded by this diagnostic",
+    "Parent diagnostic MEASUREMENT_INVALID EXP-FRONTIER-36099072254 (substrate absent live_available false 0.0s) preserved as parent; Director PIVOT SUPERSEDE cognitive_reset true continuity maintained for this retry EXP-FRONTIER-36100559236",
+    "Frozen design integrity verified: request.json spec.json prereg.md match freeze.json hashes exactly; Codex claim C-RESIDUAL-NOVELTY remains HYPOTHESIS",
+    "WebChoreArena heterogeneous gate requires Intel diverse manifest (WebChoreArena 532 + WebArena-Verified Hard 192/36 >=10 families Jaccard<0.30 mean<0.15 AX>10 DOM>=2000) + Runtime health-gated single-worker sticky HS256 WAL n_non304>=360 X-Worker-Pid>=10 + Graph freshness TN>=0.85 + BrowserGym 1280x720 CDP AX>10 DOM>=2000 \u2014 none satisfied, do not substitute synthetic 36-family Jaccard 0.0 disjoint alphabets as heterogeneous evidence per measurement_validity clause 1"
+  ],
+  "validity_notes": [
+    "MEASUREMENT_INVALID due to substrate insufficiency (BrowserGym stack, Intel heterogeneous manifest, Runtime WAL, Graph freshness gate) \u2014 not a scientific falsification; supports no SURVIVES/FALSIFIES inference per validity gate",
+    "Prior valid synthetic non-Pareto (EXP-FRONTIER-36042599040 rho 0.4837 all 11 PCs/NCs PASS) bounded to synthetic Jaccard 0.0 disjoint-alphabet gate; does not imply live heterogeneous WebChoreArena outcome where compressible structure exists (human 50.2% vs GPT-5 48.3% unsaturated)",
+    "Alias tunnel 21/40=0.525 bounded to retrieval-diversity on WebArena-Verified v2 192/36 mix; compilation bypass with invariant protocol remains UNTESTED on live heterogeneous gate",
+    "C-RESIDUAL-NOVELTY hypothesis remains HYPOTHESIS; this diagnostic provides zero evidence for or against it on heterogeneous WebChoreArena gate; frozen 17-deep alias tunnel and synthetic TAU0.30 non-Pareto remain the only bounded evidence",
+    "Per Director mandate PIVOT SUPERSEDE cognitive_reset true (allocation.comparative_reasoning): continuing alias/routing permutations on same WebArena/WebGym mix VOI~0; WebChoreArena heterogeneous is orthogonal basin but substrate not yet available per dependencies intel/runtime/graph",
+    "Do not cite synthetic honest counters or tautological rho 0.8998/0.8117 saving 34.53% as evidence; do not substitute synthetic disjoint alphabets as heterogeneous evidence per explicit frozen prohibition",
+    "Agent priors from director_mandate.agent_priors_used (compilation dominance, path dependence, measurement traps, exploration vs exploitation) labeled priors not SPIDER evidence per measurement_validity clause 5 and must not satisfy S1-S6 decision_rule thresholds",
+    "All 14 controls NOT_RUN => MEASUREMENT_INVALID; distinguishes infrastructure failure from negative scientific result per EXPERIMENT_PACKET.md failure transmission",
+    "No BrowserGym 1280x720 CDP traces collected; no TF-IDF TAU0.30 retrieval executed; no 5000 bootstrap/block/global permutations run; no ECE/precision/M_total computed"
+  ],
+  "unresolved": [
+    "Whether WebChoreArena 532 tedious/memory + WebArena-Verified Hard 192/36 heterogeneous Jaccard<0.30 mean<0.15 manifest can be produced by Intel lane with deterministic seed 35725763380 and TRAIN-only vocab isolation",
+    "Whether Runtime single-worker sticky HS256+nginx WAL can achieve n_non304>=360 single-node (or >=800 distributed) X-Worker-Pid>=10 If-None-Match/304 proxy_cache HIT at 1280x720 CDP",
+    "Whether BrowserGym 0.14.3 / browsergym-core 0.14.3 / playwright 1.63.0 / agentlab 0.4.2 can be installed with system chromium and provide 1280x720 CDP AX>10 DOM>=2000 for trajectory capture",
+    "Whether Graph freshness gate TN>=0.85 with >=30 stale probes can be validated on WebChoreArena cross-site sessions and TAU0.30+freshness-gated bailout achieves calibrated UNKNOWN precision>=0.85 ECE<=0.15",
+    "Whether honest residual-novelty verification economics with TAU0.30+freshness gating achieves SURVIVES thresholds (rho_novelty>=0.60 decoupled calibrated Pareto saving>=25% dominance vs cold/RAG at f10/f100 +-50% build) on live heterogeneous where compressible structure exists",
+    "Whether per-family per-stratum N>=3 coverage>=8/10 pooled>=40 can be maintained after TAU0.30+freshness gating on heterogeneous tasks",
+    "Whether larger manifest (WebGym 292k dedup >=50 eTLD+1 or WebArena-Verified Hard 192/36) covering natural Jaccard 0.30-0.60 overlap would reveal different economics if 10-family 1280x720 CDP gate passes"
+  ]
+}

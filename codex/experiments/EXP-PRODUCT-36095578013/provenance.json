@@ -1,0 +1,112 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-36095578013",
+  "producer": {
+    "role": "EXECUTE",
+    "model_id": "opencode/muse-spark-1.2-contributor-free",
+    "source": "frozen request/spec/prereg/freeze in research/experiments/EXP-PRODUCT-36095578013/ (REOPEN C-PRODUCT-ECON, cognitive_reset false, parent_handoff USE EXP-PRODUCT-36091881382)"
+  },
+  "github": {
+    "repo": "servicenow/Spider",
+    "workflow_run": "github-actions Runner (hosted, linux, Python 3.12.14 toolchain at /opt/hostedtoolcache/Python/3.12.14/x64/bin/python)",
+    "github_run_id": "36095578013",
+    "github_run_attempt": "1",
+    "git_head_commit": "807b642da02d2b1b8b08bfecc972b53563843dc2",
+    "kernel_at_head_sha256": "8af66ccfb6f848e1f89805e90a1f52683ee28f62c9dd7b97f9d2762390e7b386",
+    "kernel_working_tree_sha256": "d926279d5ee14a044a2f13b8abc09202df9f5adb9e86feaadeb61818a15f4038",
+    "patch_applied": "src/spider/kernel.py: _PARAMETER = re.compile(r'\\$\\{([A-Za-z_][A-Za-z0-9_\\.]*)\\}') (dot-regex with capture group, frozen spec rendering without parens matches same language; verified 5/5 EXECUTABLE confidence>=0.80); tests/test_kernel 3/3 OK PYTHONPATH=src",
+    "commit_made": false,
+    "commit_note": "EXECUTE workflow forbids git commit/push/switch/reset per instructions; MV3 durability gate requires HEAD==working-tree (cee979c2-equivalent) pending director-authorized commit; working-tree fix verified but HEAD still lacks dot support"
+  },
+  "frozen_inputs": {
+    "request.json": "33fb2ce5e28952033d9b02e177950396de0d3bcf7727b477e2d2a02b031b6f92",
+    "spec.json": "397ffc124ea4a02e4adf0ecbbf6d06a74192649da06f35e066f1b3980c6c90c0",
+    "prereg.md": "190a9f8a5eac3f2616a8c54249d0d0a39abc94d2b82f55b5aebb170a2d5e14a8",
+    "freeze.json": "33fb2ce5e28952033d9b02e177950396de0d3bcf7727b477e2d2a02b031b6f92/397ffc124ea4a02e4adf0ecbbf6d06a74192649da06f35e066f1b3980c6c90c0/190a9f8a5eac3f2616a8c54249d0d0a39abc94d2b82f55b5aebb170a2d5e14a8 (byte-identical, frozen_at 2026-09-25T04:47:47.996330+00:00)",
+    "request_hash_verified": true,
+    "spec_hash_verified": true,
+    "prereg_hash_verified": true
+  },
+  "environment": {
+    "python": "3.12.14",
+    "platform": "linux",
+    "pins": {
+      "gunicorn": "23.0.0",
+      "jwt": "2.14.0",
+      "flask": "3.1.3",
+      "numpy": "MISSING: No module named 'numpy'",
+      "scipy": "MISSING: No module named 'scipy'",
+      "sklearn": "MISSING: No module named 'sklearn'",
+      "pandas": "MISSING: No module named 'pandas'",
+      "playwright": "MISSING: No module named 'playwright'",
+      "nginx": "1.24.0"
+    },
+    "pins_pass": true,
+    "pin_expectations": {"gunicorn": "23.0.0", "jwt": "2.14.0", "playwright": "1.63.0"},
+    "openai_api_key": "ABSENT",
+    "openai_key_note": "OPENAI_API_KEY absent from environment; no real gpt-4o-mini 15-step tokens measurable; rho_proxy_real per-stratum null",
+    "browsergym_docker_image": "ghcr.io/servicenow/browsergym:0.14.3 - pull DENIED exit 1 Head https://ghcr.io/v2/servicenow/browsergym/manifests/0.14.3: denied; docker login ghcr.io non-TTY denied; docker images shows no browsergym image",
+    "webarena_verified_package": "ABSENT from site-packages (Hard258/812 census not staged, ST-WebAgentBench not staged)",
+    "substrate": "single-node gunicorn 23.0.0 single-worker HS256 PyJWT 2.14.0 WAL shared.db at /tmp/spider-runtime/shared.db + nginx 1.24.0 $request_uri consistent-hash sticky; re-measured this packet n_non304 400 200/200 TN1.0",
+    "docker_version": "Docker version 28.0.4, build b8034c0"
+  },
+  "code_path": {
+    "harness": "research/experiments/EXP-PRODUCT-36095578013/run_experiment.py (sha256 3fa56fcd437269441a1d6ea123ab7563a33fe0a1f93da0700dd2b8b17937976c; parent audited harness EXP-PRODUCT-36091881382 with packet identifiers changed: EXP_ID, JWT secret, SUT ID P-SPIDER-ECON, PC/NC ids)",
+    "patched_kernel": "src/spider/kernel.py (working-tree sha d926279d, HEAD sha 8af66ccf, durable false)",
+    "patched_tests": "tests/test_kernel.py (sha256 ff9c1561c4169d306fba56d52442546a3bbfdab11d3ab56c51d7369309e9c0b6; 3/3 unittest pass with PYTHONPATH=src)",
+    "kernel_verification": "python3 src/spider/kernel.py dotted-slot 5/5 EXECUTABLE via kernel.resolve + family gating confidence 0.85 (mv3_kernel_spot_check.json)",
+    "independent_verification": "honest per-trajectory-reset sum counters verified via PC4 frozen-formula max_abs_diff 5.68e-14 within 1e-6 (null_controls.json PC4_FROZEN_FORMULA)"
+  },
+  "fixtures": {
+    "canonical_contaminated_source": "research/experiments/EXP-PRODUCT-35999358218/fixtures/webarena_verified_v2_tasks_192_36.json (sha 391e8f6cf167300cf223ebbb19cf5d2beed6568f5f84ac968ae88866a438a98b) - not staged, for rebuild diagnostic only",
+    "frozen_rebuilt_holdout_staged": "research/experiments/EXP-PRODUCT-36095578013/fixtures/webarena_verified_v2_tasks_192_36_rebuilt.json (sha 101e481ddb610df9598b0e3e5650e8c163ec7cbdc4679c5efc1e31104b3074c5; 192 tasks /36 families L 8-14 family-specific constant within family orthogonal to n)",
+    "qcr_bank_manifest": "research/experiments/EXP-PRODUCT-36095578013/fixtures/qcr_bank_manifest.json (sha 8c69804b249ec9c84cf05d86a21c7ebe7a31af5f8d45e50a4e6d477b449f9f58; TAU0.30 cross-family Jaccard max 0.0 on 630 pairs)",
+    "cost_config": "research/experiments/EXP-PRODUCT-36095578013/fixtures/cost_config.json (sha 07b65f10a0036819eb4bb593b050f1aff46731c8822af1b64143fa9162bdf273; k*5 5/10/15 honored)",
+    "local_rebuild_diagnostic": "metrics_summary.json fixtures.census.local_rebuild_produced_sha256 21b528532987d0287e7dbf7e542a180dc936a618303b8e69a882b932919067a8 content-identical to frozen except experiment_id metadata",
+    "contamination_disjoint_verified": "value_set_A intersect B empty on ALL 36 families 0/36 pool+usage pass (fixture_checks.json)",
+    "hard258_census": "not staged (webarena_verified pip package ABSENT); fallback per MV1 allowed",
+    "st_webagentbench": "not staged (requires live BrowserGym pages; CuP null)"
+  },
+  "material_artifacts": [
+    {"path": "research/experiments/EXP-PRODUCT-36095578013/artifacts/env_audit.json", "sha256": "d905d681155457814f651723b618b8af5fdb6978a8f37ad7f28366b396efc8a4", "role": "raw"},
+    {"path": "research/experiments/EXP-PRODUCT-36095578013/artifacts/fixture_checks.json", "sha256": "bb86ab983fd132d9fb4172cce11eda49021ff00162c50ac931bf0bdf0abacd4b", "role": "derived"},
+    {"path": "research/experiments/EXP-PRODUCT-36095578013/artifacts/mv3_kernel_spot_check.json", "sha256": "ade90fe14e1655d505a03dc07333c675d71f52c4b2379466d8aaf1a4a6d08cd8", "role": "derived"},
+    {"path": "research/experiments/EXP-PRODUCT-36095578013/artifacts/substrate_start.json", "sha256": "720820f4fc36a71867bdfba2c38d1e5a1f8aa1a1be9a2c7a3d1c8b948374afe1", "role": "raw"},
+    {"path": "research/experiments/EXP-PRODUCT-36095578013/artifacts/substrate_probe.json", "sha256": "bdf399bab4c776db9cc66e914f40200569d31855c61f08a7d5aee08c51912d74", "role": "raw"},
+    {"path": "research/experiments/EXP-PRODUCT-36095578013/artifacts/probe_traces.jsonl", "sha256": "6ade74b2c635d208a2a401abc8018550697a4e0812f7478fb720aa7001d1e4b5", "role": "raw"},
+    {"path": "research/experiments/EXP-PRODUCT-36095578013/artifacts/browser_health.json", "sha256": "500b251fbaeace0a45ecf6ef5cf55d7919704ab7d6e84cd2857042fc80475203", "role": "raw"},
+    {"path": "research/experiments/EXP-PRODUCT-36095578013/artifacts/attempts_log.json", "sha256": "f7069a1b2644057fdb71ba5757f527ff7e042c1956fe1da08c1302e873760963", "role": "raw"},
+    {"path": "research/experiments/EXP-PRODUCT-36095578013/artifacts/pc1_exact_repeat.json", "sha256": "cc417a6967925e69590c40aeaf3a9417a713c9c761f5875ea688a3e26fe73b15", "role": "derived"},
+    {"path": "research/experiments/EXP-PRODUCT-36095578013/artifacts/pc3_verify_calibration.json", "sha256": "734130f0320917f0908f9360e94041717515cf8970d77d94f06b8c4f83b7a322", "role": "derived"},
+    {"path": "research/experiments/EXP-PRODUCT-36095578013/artifacts/economics.json", "sha256": "ddf8d59e1f09f79bf47d7cc4da5652db6dca0ca2935d9ac6b1487432e305fc86", "role": "derived"},
+    {"path": "research/experiments/EXP-PRODUCT-36095578013/artifacts/economics_per_trajectory.csv", "sha256": "5e4830c57dc4bbf60ed6732475ae30b784a46a4176feba20b6cc545d09660c1a", "role": "raw"},
+    {"path": "research/experiments/EXP-PRODUCT-36095578013/artifacts/null_controls.json", "sha256": "f48b464d59f795c3bba0e3e2c8bb1a1451a4a84d7c8805288ea7761b0edf768d", "role": "derived"},
+    {"path": "research/experiments/EXP-PRODUCT-36095578013/artifacts/nc_trajectory_counters.json", "sha256": "2dfc222836c5f869f2e521ad885b115305d43aed30307a9f4e89d45bd2f2c8e6", "role": "raw"},
+    {"path": "research/experiments/EXP-PRODUCT-36095578013/artifacts/metrics_summary.json", "sha256": "b331c6f02933dc368c6512d22f5166e45c9dcdee6494314a8b8e65f8a87ece6f", "role": "derived"},
+    {"path": "research/experiments/EXP-PRODUCT-36095578013/fixtures/webarena_verified_v2_tasks_192_36_rebuilt.json", "sha256": "101e481ddb610df9598b0e3e5650e8c163ec7cbdc4679c5efc1e31104b3074c5", "role": "fixture"},
+    {"path": "research/experiments/EXP-PRODUCT-36095578013/result.json", "sha256": "2ab5435397f7314d86aed3db39928c2d2deba2c6e40e85b403235518b9a1b5aa", "role": "producer-handoff"},
+    {"path": "research/experiments/EXP-PRODUCT-36095578013/report.md", "sha256": "57da094151c9b5caf4ee2799c877df4a24c51eb5dac4471491aaf00870728d84", "role": "producer-handoff"}
+  ],
+  "reproduction_commands": [
+    "python3 research/experiments/EXP-PRODUCT-36095578013/run_experiment.py  (honest substrate + probe + economics + nulls; re-provisions /tmp/spider-runtime/shared.db WAL single-worker gunicorn 23.0.0 nginx 1.24.0; elapsed ~12s)",
+    "PYTHONPATH=src python3 -m unittest tests.test_kernel -v  (3/3 OK, dotted-slot verified via kernel.resolve)",
+    "python3 -c \"import re; assert open('src/spider/kernel.py').read().count('A-Za-z0-9_\\\\.')==1\" (kernel dot-regex check)",
+    "sha256sum research/experiments/EXP-PRODUCT-36095578013/fixtures/webarena_verified_v2_tasks_192_36_rebuilt.json (expect 101e481d)",
+    "sha256sum research/experiments/EXP-PRODUCT-36095578013/fixtures/qcr_bank_manifest.json (expect 8c69804b)"
+  ],
+  "prior_experiments_referenced": [
+    {"experiment_id": "EXP-PRODUCT-36091881382", "path": "research/experiments/EXP-PRODUCT-36091881382/handoff.json", "sha256": "a2e412fc58c5692a18987a33d65fddb5316da0e8ba9861ca56d59accf59b6217", "outcome": "MEASUREMENT_INVALID", "note": "parent handoff (request.json parent_handoff); same honest M_total Pareto question; substrate PASS 400 TN1.0 probe delta 0.407 retained as established but re-measured this packet; kernel functional PASS 5/5 but durable false retained"},
+    {"experiment_id": "EXP-PRODUCT-36046064994", "path": "research/experiments/EXP-PRODUCT-36046064994/fixtures/webarena_verified_v2_tasks_192_36_rebuilt.json", "sha256": "101e481ddb610df9598b0e3e5650e8c163ec7cbdc4679c5efc1e31104b3074c5", "outcome": null, "note": "source of frozen rebuilt holdout (byte-identical staging, 0/36 disjoint)"},
+    {"experiment_id": "EXP-PRODUCT-35999358218", "path": "research/experiments/EXP-PRODUCT-35999358218/fixtures/webarena_verified_v2_tasks_192_36.json", "sha256": "391e8f6cf167300cf223ebbb19cf5d2beed6568f5f84ac968ae88866a438a98b", "outcome": null, "note": "canonical contaminated source for rebuild diagnostic (18/36 contaminated)"}
+  ],
+  "limitations": [
+    "No git commit made per workflow forbidding git commit/push/switch/reset — kernel durability MV3 false (HEAD 8af66ccf lacks dot, working-tree d926279d has dot); requires director-authorized commit before promotion",
+    "BrowserGym image pull HEAD https://ghcr.io/v2/servicenow/browsergym/manifests/0.14.3 denied even after docker login non-TTY attempt; OPENAI_API_KEY absent; playwright 1.63.0 not installed — MV6/MV7/rho_proxy_real per-stratum/CuP safety all null; no file-proxy surrogation",
+    "webarena_verified pip package absent — Hard258/812 census and ST-WebAgentBench safety split not staged; MV1 fallback to rebuilt 192/36 allowed per spec; CuP non-inferior remains unknown",
+    "Bounded-ceiling economics saving 0.669 vs COLD and ratio 1.506 vs RAG are honest sum counters on contamination-free holdout with k*5 5/10/15 honored but are NOT claim inference for SURVIVES; real browser+LLM token trajectory costs unmeasured",
+    "Deterministic NC1 coupling at bounded ceiling (rho_length -0.287, block_permutation p 0.072) reflects honest-counter construction reused=max(0,L-n_novel*2); must be re-measured on real trajectories where per-stratum gates |rho_length|<0.20 apply",
+    "Single-node n=400 is frozen minimum; distributed n>=800 shared-WAL remains out of scope and unfrozen per prereg"
+  ],
+  "product_lane_authorized_code_roots": ["src", "tests", "sdk", "pyproject.toml"],
+  "code_changes_this_execute": ["src/spider/kernel.py: _PARAMETER dot-regex fixed to r'\\$\\{([A-Za-z_][A-Za-z0-9_\\.]*)\\}' (working-tree sha d926279d verified, HEAD still 8af66ccf)"]
+}

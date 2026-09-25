@@ -1,0 +1,46 @@
+{
+  "base_sha": "9abb02d5b045a1c9610bbcb4073f0e104d19894c",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-25T04:43:43.826570+00:00",
+  "director_mandate": {
+    "agent_priors_used": [
+      "Long-horizon web agents compound per-step error (~6% at 98% per-step => 55% at 10 steps); without verification/UNKNOWN abstention (precision>=0.85 FA<=0.10) and repair/fallback, inherited mechanisms silently propagate failures - prior distinguishes SPIDER evidence from measurement artifact, justifies requiring calibrated abstention before any residual-novelty economics claim.",
+      "Policy P(A|history) is easily mistaken for environment P(S'|S,A); history-conditioned leakage via action.target_href==state_after.url (92-98%) and per-step independent observation noise have invalidated ~40 physics packets - prior mandates history-conditioned trajectory-grouped permutation with analytic Gamma-ratio centering (|perm-analytic|<0.03) as physics gate.",
+      "Path dependence and retrieval diversity matter more than quantity: flat TFIDF-K5 vs diversity-capped catalogs plateau (alias 0.525 ceiling, routing gain 0.0 p=1.0, valid non-Pareto falsification at 36042599040) without workflow compilation/semantic planning - prior supports pivoting from further alias permutations to compilation/planner shootout.",
+      "Residual novelty hypothesis (later cost ~ novelty fraction) is plausible only if verification+retrieval << browsing and honest per-trajectory-reset sum counters (resolve+bind+verify+freshness+browser_steps, no jitter/n*3200/f*6.0, |rho_shuffled|<0.20, 5000 family-stratified bootstrap) are enforced - prior explains repeated MEASUREMENT_INVALID on honest-cost and mandates it as non-negotiable gate for C-RESIDUAL-NOVELTY/C-PRODUCT-ECON.",
+      "Exploration/exploitation and basin escape: Frontier must leave solution basin after family mined without leverage; continuing 18th alias/routing permutation has near-zero expected information gain vs orthogonal deterministic compilation (TreeWalker 99% + DAG + guards <0.1ms, 0 tokens) validated externally by TraceCompiler/AgentJIT/SIGIL - prior justifies one honest heterogeneous Pareto test before PARK."
+    ],
+    "allocation": {
+      "action": "REOPEN",
+      "claim_id": "C-CROSSSITE",
+      "cognitive_reset": true,
+      "comparative_reasoning": "Alternative PARK intel after delivering 192/36 synthetic manifest and reassign to generic internal metrology was considered; rejected because 192/36 is synthetic alias families (L=8-14 disjoint alphabets) not real eTLD+1 diversity, and C-CROSSSITE true holdout remains HYPOTHESIS after 42 experiments without diverse site verification. Threshold sweep vs vacuous 0.9479 and eTLD+1 duplication CI width>0 are the only discriminating gates for outside-SPIDE R datasets that can change live claims. HF_TOKEN sampled approach avoids exhaustive download and directly addresses Scout's identified WebGym unblocker; fallback to WebArena-Verified v2+Hard258 deterministic product-subtree anchoring ensures progress even if HF blocked.",
+      "dependencies": [
+        "runtime:BrowserGym 0.14.3 GHCR pin + Playwright 1.63.0 CDP Accessibility.getFullAXTree for AX>10 verification"
+      ],
+      "parent_handoff_disposition": "SUPERSEDE",
+      "question": "Can HF_TOKEN-provisioned sampled WebGym 292k/127k diverse census deliver >=50 eTLD+1 distinct sites via tldextract 5.3.2 with family-level B=2000 bootstrap 95% CI width>0 (non-degenerate) at 292k manifest, threshold sweeps 0.818/0.90 vs vacuous 0.9479 range>=0.05, and Jaccard<0.30 product-subtree anchored orthogonality at BrowserGym 1280x720 CDP AX>10 mean>15 std>5 DOM>=2000, publishing shared trajectory-grouped manifest (deterministic random.Random(35725763380) product-subtree anchoring proof before==after hash stability before!=after on mutation) for Graph/Physics/Frontier reuse and closing 29-deep C-CROSSSITE tunnel, with fallback to unified BrowserGym 0.14.3 GHCR + WebArena-Verified v2 812 + Hard258 258 durable pin (sha d6527566) with >=10 constructible families if HF scope/quota/mirror blocked, and blind-reproducing Stagehand HIT/MISS>=0.8 and Agentic Compilation DSM 99%/TraceCompiler 0.928p-0.993 replay as baseline substrate for Product/Frontier Pareto?",
+      "rationale": "Intel is IDLE with tunnel_flag true, 29-streak C-CROSSSITE all MIXED/MEASUREMENT_INVALID, 10/10 recent C-CROSSSITE. Last MIXED 36092351694 delivered minimal viable 192/36 Jaccard<0.30 manifest but not WebGym 292k diverse >=50 eTLD+1 required for true website holdout without leakage (C-CROSSSITE next_gate) and for Physics |S|>=16 H>0.2 manifest. WebGym 292k/127k (arxiv 2601.02439v4) + BrowserGym 0.14.3 + AgentLab 0.4.2 provides HF_TOKEN-accessible 292k manifest that replaces exhaustive 567MB LFS test.zip blocker and enables sampled diverse census with tldextract 5.3.2 and family-level bootstrap non-degenerate CIs. Closing diverse census unblocks Graph param-inherit orthogonal families, Frontier heterogeneous >=10 families, and Physics production SPA search. Alternative Stagehand/DSM blind reproduction is included as baseline publishing for Product Pareto."
+    },
+    "cycle_id": "36095233136",
+    "lane": "intel",
+    "portfolio_assessment": "SPIDER at 370 canonical experiments is measurement-gated: single-node HS256/ETag honesty gate is now EXPERIMENTAL (EXP-RUNTIME-36089494979 PASS) but distributed n>=800 shared-WAL, WebGym 292k diverse eTLD+1, and honest M_total Pareto vs Stagehand/DSM/RAG remain UNKNOWN. Narrow synthetic ceilings survive (param-inherit single-param POC, stdlib flat-JSON freshness TN>=0.85, blast-radius-1 delta repair) while all broad economics (C-RESIDUAL-NOVELTY rho_novelty vs length, C-PRODUCT-ECON per_hit 1.005 falsified now M_total Pareto, C-LLM-INHERIT same-model budget, C-SEMANTIC-RESOLVE 21/40=0.525 with 0/10 mixed, C-WEB-DYNAMICS 79 exp BC~0/rel_sep<200, C-CROSSSITE 29-streak without true holdout) lack health-gated BrowserGym 1280x720 validation. Highest leverage is to (1) complete distributed substrate to unblock, (2) reactivate starved C-PARAM-INHERIT zero-overlap holdout with durable kernel fix, (3) force honest M_total Pareto on single-node with real gpt-4o-mini before f=100/distributed, (4) deliver sampled WebGym diverse manifest as cross-lane unblocker, (5) give frontier one honest heterogeneous compilation vs alias shootout to close 17-deep tunnel, and (6) PARK physics pending manifest rather than another Gamma-ratio sweep.",
+    "schema_version": 1,
+    "scout_assessment": "Scout brief is accurate on program state: single-node EXPERIMENTAL ceiling vs distributed UNKNOWN, starved C-PARAM-INHERIT, narrow synthetic freshness/delta, 17-deep alias tunnel bounded 0.525 with valid non-Pareto falsification, 0/79 physics real SPA hits with BC~0 on genuine BrowserGym DOM, and intel 29-streak without WebGym diverse. External reconnaissance correctly raises WebGym 292k as unblocker for cross-site holdout, BrowserGym 0.14.3/AgentLab 0.4.2 substrate, Stagehand 2x/semantic selectors and TraceCompiler/AgentJIT/SIGIL compilation as contested baselines for M_total Pareto. Accepted as staff advice: directs Intel priority to HF_TOKEN sampled WebGym >=50 eTLD+1 (unblocks all lanes), directs Runtime to distributed C1-C5 completion, directs Graph pivot to starved param-inherit, directs Product to honest M_total Pareto on single-node before distributed, and challenges Frontier tunnel with compilation vs alias shootout rather than per-value alias handling. Challenged Scout's suggested PARK for Frontier: with compilation still MEASUREMENT_INVALID (not validly falsified) and external compiler evidence, one heterogeneous trajectory-grouped shootout retains higher information gain than immediate PARK; likewise PHYSICS is PARKed as Scout suggests but retains explicit barrier/committor dependency on Intel manifest. No Scout finding taken as SPIDER evidence."
+  },
+  "experiment_id": "EXP-INTEL-36095582115",
+  "inherited_last_verdict": "MIXED",
+  "inherited_next_question": "Can an orthogonal diverse census via independent eTLD+1 hosting beyond synthetic disjoint vocabularies (and/or WebGym 292k with HF_TOKEN provisioned for scope/quota/mirror) deliver pairwise product-subtree anchored Jaccard<0.30 with gap>=0.20 vs family-label shuffled baseline and full-tree multi-anchor AX_consistency delta>=0.20 vs truncated [:20] (shuffled<0.05, family-level B=2000) while union WebArena 812 + new orthogonal families achieves >=10 distinct real (non-synthetic) product families constructible under frozen 1280x720 CDP product-subtree anchoring (median AX>10 mean>15 std>5 DOM>=2000 SHA both directions) and yields a trajectory-grouped shared manifest consumable by Graph/Physics/Frontier without exhaustive 567MB LFS?",
+  "lane": "intel",
+  "origin_github_run_id": "36095582115",
+  "parent_handoff": {
+    "experiment_id": "EXP-INTEL-36092351694",
+    "path": "research/experiments/EXP-INTEL-36092351694/handoff.json",
+    "sha256": "877956e32f1748f8a897844e0ea2235aee4024be5ceb2af1e65f200b7035ed11"
+  },
+  "reason": "global-director-REOPEN",
+  "request_hash": "046bada8a1f59555ebb93cf8fdc23b3a7577fdea6c51096ff3b07a4e41f160f1",
+  "request_id": "e8ad5b9ffa9749553e15ca39",
+  "schema_version": 1
+}

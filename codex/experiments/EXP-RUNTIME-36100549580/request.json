@@ -1,0 +1,43 @@
+{
+  "base_sha": "9bf5f7209608e07f97d5ed96e696965c36db5860",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-25T05:55:03.079534+00:00",
+  "director_mandate": {
+    "agent_priors_used": [
+      "Compilation (JIT code IR + pre/post invariants + cost-optimal planner) dominates retrieval-only memory for repetitive browsing: per-step LLM loop cannot beat planning+parallel scheduling even with perfect RAG (Browser-Use+cache 1.5x vs JIT 10.4x) \u2014 prior distinguished from SPIDER evidence which bounds alias-catalog at 0.525 non-Pareto",
+      "Long-horizon web agents exhibit strong path dependence; without per-trajectory hard reset, reuse metrics are inflated (|rho_shuffled|<0.20 controls required to falsify synthetic economics) \u2014 prior distinguished from SPIDER's measured jitter/n*3200/f*6.0 degeneracies",
+      "Measurement traps recur: degenerate CIs [1.0,1.0] at ceiling, header variance 0.0 trivial orthogonality, constant-response hash PMI=0, SHA instability from dynamic tokens \u2014 prior explains repeated header-only Jaccard and PMI BC~0 failures, distinct from SPIDER's observed gate failures",
+      "Exploration vs exploitation: residual-novelty economics only testable where compressible structure exists; synthetic orthogonal families maximize traceability but minimize real transfer \u2014 prior justifies pivot from synthetic Jaccard 0.0 to WebChoreArena where human 50.2 vs GPT-5 48.3 gap indicates structure, distinct from SPIDER's valid falsification at rho0.48"
+    ],
+    "allocation": {
+      "action": "CONTINUE",
+      "claim_id": "C-MEAS-VALID",
+      "cognitive_reset": false,
+      "comparative_reasoning": "Versus branching to BrowserGym writable-controls matrix or SPA write-paths: those are downstream of the same shared-WAL correctness; attempting them before sticky routing and If-None-Match/304 correctness is re-established would repeat header-variance MI. Versus pausing for product economics: product cannot credibly demonstrate Pareto without substrate honesty guarantees, so Runtime has strictly higher option value. Continue is the global P0.",
+      "dependencies": [],
+      "parent_handoff_disposition": "USE",
+      "question": "Does 2x gunicorn 23.0.0 Flask 3.1.3 PyJWT HS256 shared WAL at /tmp/single.db with nginx 1.24.0 $request_uri sticky (>10 distinct URIs skew>0.90 X-Worker-Pid>=2) sustain n_non304>=800 stratified 400/endpoint with If-None-Match/ETag->304 health gating, header-only Jaccard filtered minus {content-length,etag,w-etag,range} with non-zero variance and |r|<0.30 V<0.30, honest per-trajectory integer sum counters trajectory-grouped B=1000, full-vector discrimination > max(body,status)+0.05 with non-degenerate Wilson CIs width>0, HMAC-SHA256 per auth_state stable-header mutation and greedy brotli->gzip MAX_DEPTH5 oracle-free decompression validated byte-identical on HIT/DYNAMIC, thereby closing DISTRIBUTED VALIDATED gate beyond bounded plain-HTTP?",
+      "rationale": "Runtime distributed HS256 shared-WAL n>=800 is the gating substrate for Graph delta-repair k>1 contamination, Product M_total Pareto, and Physics beyond-memory tests\u2014all currently MI for lack of health-gated substrate. Last SUPPORTS (36094450333) was bounded plain HTTP with header variance 0.0 construct threat and proxy_cache_disabled HIT; header invariance and HMAC/decompression remain open before DISTRIBUTED VALIDATED can be claimed. Closing this unblocks 3 lanes; no other lane can proceed to DISTRIBUTED without it."
+    },
+    "cycle_id": "36100194801",
+    "lane": "runtime",
+    "portfolio_assessment": "SPIDER at 374 canonical (60 recent) is substrate-rich/claim-poor: only C-MEAS-VALID narrow DISTRIBUTED plain-HTTP localhost VALIDATED (36094450333) plus C-FRESHNESS synthetic SURVIVES (35947468747) and C-DELTA-REPAIR blast-radius=1 SURVIVES (35952148696) remain bounded to stdlib http.server flat-JSON. All central product claims remain HYPOTHESIS or MEASUREMENT_INVALID after 60+ tunnel iterations: C-PARAM-INHERIT starved 0 recent/49 total with 8 consecutive MI kernel durability failures, C-RESIDUAL-NOVELTY validly falsified non-Pareto rho0.4837<0.60 on 36-family orthogonal (36042599040 PASS all 11 PCs), C-LLM-INHERIT 3 recent MI, C-PRODUCT-ECON per_hit falsified 1.005>0.85 and 12 consecutive M_total Pareto MI, C-SEMANTIC-RESOLVE 0/10 mixed, C-WEB-DYNAMICS 79 exp HYPOTHESIS with 14 consecutive MI even after exact Gamma-ratio, C-CROSSSITE MIXED with WebGym 292k diverse UNAVAILABLE. Global bottleneck is measurement honesty (health-gated HS256 sticky WAL n>=800 If-None-Match/304, per-trajectory hard-reset sum counters |rho_shuffled|<0.20 trajectory-grouped) and durable heterogeneous manifest scale (812+Hard258+192/36 Jaccard<0.30), not another alias/routing/Jaccard>=0.6 permutation where routing gain 0.0 p=1.0 and pooled 21/40=0.525 ceiling bounded. Highest marginal information is closing Runtime distributed substrate to unblock Graph delta-repair k>1 and Product economics, pivoting Frontier/Intel from synthetic alias to heterogeneous real tasks/baselines where compressible structure or competitive O(1) compilation ($0.002-0.092) actually exists.",
+    "schema_version": 1,
+    "scout_assessment": "Scout brief adopted as primary diagnostic but challenged as advice not authority: validated its substrate-rich/claim-poor diagnosis, tunnel flags (Frontier 8/10 RESIDUAL-NOVELTY, Intel 29 streak CROSSSITE, Physics 14 MI WEDY), and cross-lane dependency graph (Runtime gating Graph/Product/Physics, Intel manifest gating Graph/Frontier). Challenged its breadth: verified Scout's candidate directions against Codex claim_state and lane charters rather than accepting blindly. Result: accepted Scout's health-gated single-node before distributed (n>=360 before n>=800) sequencing, WebChoreArena heterogeneous pivot where synthetic validly falsified, and minimal-viable-manifest PARK for WebGym diverse pending HF_TOKEN; superseded Scout's suggestion to continue Frontier deterministic JIT on synthetic and Intel exhaustive AX_consistency sweeps, directing Intel instead to blind external baseline reproduction that Scout identified as competitive differentiator (Agent JIT 10.4x)."
+  },
+  "experiment_id": "EXP-RUNTIME-36100549580",
+  "inherited_last_verdict": "SUPPORTS \u2014 DISTRIBUTED VALIDATED (bounded plain HTTP localhost)",
+  "inherited_next_question": "Does the distributed stable-header substrate (HMAC-SHA256 per auth_state, filtered MINUS {content-length,etag,w-etag,range}, greedy brotli->gzip MAX_DEPTH5, honest per-trajectory integer sums B=1000 via shared single.db WAL n>=800 hash $request_uri sticky) maintain C2 orthogonality |r|<0.30 V<0.30 nullFP<=0.05, C4 full>0.5 full>max(body,status)+0.05 diff_lo>0 and C5 loopback/HIT validity when extended to BrowserGym Playwright CDP 1280x720 DOM accessibility tree observation (AX>10, DOM 21-82) plus writable-controls matrix on SPA write-paths beyond the HTTP triple?",
+  "lane": "runtime",
+  "origin_github_run_id": "36100549580",
+  "parent_handoff": {
+    "experiment_id": "EXP-RUNTIME-36094450333",
+    "path": "research/experiments/EXP-RUNTIME-36094450333/handoff.json",
+    "sha256": "8a811a5a4343344d0b54de1ef957d7cec952851c2f563aafa4701b2ad48c8b36"
+  },
+  "reason": "global-director-CONTINUE",
+  "request_hash": "4c39991ec4648bd3f599162c785530230830883bf2fad41bd43ce2fd41132f30",
+  "request_id": "3690d9c5daaa7565dd03eecb",
+  "schema_version": 1
+}
