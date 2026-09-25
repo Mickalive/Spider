@@ -1,0 +1,1265 @@
+{
+ "experiment_id": "EXP-INTEL-36092351694",
+ "manifest_version": "minimal_viable_pivot_without_exhaustive_LFS",
+ "created_at": "2026-09-25T04:28:44+00:00",
+ "deterministic_sampling": {
+  "seed": 35725763380,
+  "operator": "random.Random(35725763380).sample(sorted_families_ge3,10) executed twice with seed reset, on EACH census",
+  "primary": {
+   "census_label": "primary_webarena_verified_v2_812",
+   "seed": 35725763380,
+   "operator": "random.Random(35725763380).sample(sorted_families_ge3,10) executed twice with seed reset, on EACH census",
+   "sorted_families_ge3": [
+    101,
+    136,
+    137,
+    138,
+    139,
+    145,
+    147,
+    153,
+    154,
+    155,
+    156,
+    159,
+    160,
+    162,
+    163,
+    165,
+    169,
+    171,
+    172,
+    180,
+    186,
+    189,
+    191,
+    194,
+    196,
+    197,
+    204,
+    206,
+    207,
+    208,
+    211,
+    212,
+    213,
+    214,
+    222,
+    370
+   ],
+   "n_families_ge3": 36,
+   "S1": [
+    191,
+    180,
+    162,
+    197,
+    153,
+    213,
+    163,
+    137,
+    136,
+    222
+   ],
+   "S2": [
+    191,
+    180,
+    162,
+    197,
+    153,
+    213,
+    163,
+    137,
+    136,
+    222
+   ],
+   "S1_equals_S2": true,
+   "unique_S1_union_S2": [
+    136,
+    137,
+    153,
+    162,
+    163,
+    180,
+    191,
+    197,
+    213,
+    222
+   ],
+   "n_unique": 10,
+   "product_page_families": [
+    136,
+    145,
+    196,
+    222
+   ],
+   "sample_product_page_families": [
+    136,
+    222
+   ],
+   "sample_families_without_product_urls": [
+    137,
+    153,
+    162,
+    163,
+    180,
+    191,
+    197,
+    213
+   ]
+  },
+  "webgym_diverse": {
+   "census_label": "WebGym_292k_127k_sampled_diverse",
+   "seed": 35725763380,
+   "operator": "random.Random(35725763380).sample(sorted_families_ge3,10) executed twice with seed reset, on EACH census",
+   "sorted_families_ge3": [],
+   "n_families_ge3": 0,
+   "S1": "ERROR: ValueError: Sample larger than population or is negative",
+   "S2": "ERROR: ValueError: Sample larger than population or is negative",
+   "S1_equals_S2": null,
+   "unique_S1_union_S2": [],
+   "n_unique": 0,
+   "product_page_families": [],
+   "sample_product_page_families": [],
+   "sample_families_without_product_urls": []
+  },
+  "synthetic": {
+   "census_label": "synthetic_192_36",
+   "seed": 35725763380,
+   "operator": "random.Random(35725763380).sample(sorted_families_ge3,10) executed twice with seed reset, on EACH census",
+   "sorted_families_ge3": [
+    501,
+    502,
+    503,
+    504,
+    505,
+    506,
+    507,
+    508,
+    509,
+    510,
+    511,
+    512,
+    513,
+    514,
+    515,
+    516,
+    517,
+    518,
+    519,
+    520,
+    521,
+    522,
+    523,
+    524,
+    525,
+    526,
+    527,
+    528,
+    529,
+    530,
+    531,
+    532,
+    533,
+    534,
+    535,
+    536
+   ],
+   "n_families_ge3": 36,
+   "S1": [
+    523,
+    520,
+    514,
+    526,
+    508,
+    533,
+    515,
+    503,
+    502,
+    535
+   ],
+   "S2": [
+    523,
+    520,
+    514,
+    526,
+    508,
+    533,
+    515,
+    503,
+    502,
+    535
+   ],
+   "S1_equals_S2": true,
+   "unique_S1_union_S2": [
+    502,
+    503,
+    508,
+    514,
+    515,
+    520,
+    523,
+    526,
+    533,
+    535
+   ],
+   "n_unique": 10,
+   "product_page_families": [
+    501,
+    502,
+    503,
+    504,
+    505,
+    506,
+    507,
+    508,
+    509,
+    510,
+    511,
+    512,
+    513,
+    514,
+    515,
+    516,
+    517,
+    518,
+    519,
+    520,
+    521,
+    522,
+    523,
+    524,
+    525,
+    526,
+    527,
+    528,
+    529,
+    530,
+    531,
+    532,
+    533,
+    534,
+    535,
+    536
+   ],
+   "sample_product_page_families": [
+    502,
+    503,
+    508,
+    514,
+    515,
+    520,
+    523,
+    526,
+    533,
+    535
+   ],
+   "sample_families_without_product_urls": []
+  }
+ },
+ "product_subtree_anchoring": {
+  "viewport": "1280x720",
+  "cdp_mode": "Accessibility.getFullAXTree via cdp_session",
+  "required_anchors": [
+   "heading",
+   "price",
+   "add_to_cart",
+   "main",
+   "contentinfo"
+  ],
+  "node_count_gate": ">1 per anchor",
+  "body_regex": "<body[^>]*>.*?</body> DOTALL",
+  "expanded_stripping": [
+   "form_key",
+   "uenc",
+   "store",
+   "session",
+   "nonce",
+   "fotorama\\d{6,}",
+   "timestamp"
+  ],
+  "sha_stability": "before==after TRUE and after mutation !=TRUE via page.evaluate after page.content()+Accessibility.getFullAXTree",
+  "grammar_hash": "273eafbcb817e8981f843581a724594665cabdd357b318c701251929ee9c83de"
+ },
+ "manifest_shas": {
+  "WebArena_Verified_v2_812": {
+   "sha256": "d65275660814663375028e9017e1f929e3c38321041b125795e2713b52243d30",
+   "bytes": 927596,
+   "path": "research/experiments/EXP-INTEL-35725763380/artifacts/raw/webarena-verified.json",
+   "fresh_verification": "2 fresh GitHub raw 200 byte-identical x2 this experiment"
+  },
+  "Hard258": {
+   "sha256": "9b29bf58c5ac50e2b65b45912999ea3786ae6308cf2ac30cf727e9ef6eea1618",
+   "count": 258,
+   "derived_via": "random.Random(42).sample"
+  },
+  "synthetic_192_36": {
+   "sha256": "9ec7eb29ebc51b3f71bf24643d458894651795745aa5c54ecc0639983c8817a5",
+   "bytes": 23711,
+   "families": 36,
+   "tasks": 192
+  },
+  "WebGym_292k_127k": {
+   "status": "UNAVAILABLE",
+   "hf_token_present": false,
+   "smallest_next_action": "HF_TOKEN token scope/quota/mirror: request HF_TOKEN read-scope on ServiceNow/WebGym + OpenEnv/WebGym, confirm account quota ok, or use an HF mirror/dataset export; then re-run frozen design with cognitive_reset true",
+   "evidence": "artifacts/raw/hf_webgym_manifest_attempts.json"
+  }
+ },
+ "family_histograms": {
+  "WebArena_812_ge3": [
+   101,
+   136,
+   137,
+   138,
+   139,
+   145,
+   147,
+   153,
+   154,
+   155,
+   156,
+   159,
+   160,
+   162,
+   163,
+   165,
+   169,
+   171,
+   172,
+   180,
+   186,
+   189,
+   191,
+   194,
+   196,
+   197,
+   204,
+   206,
+   207,
+   208,
+   211,
+   212,
+   213,
+   214,
+   222,
+   370
+  ],
+  "WebArena_812_hist": {
+   "3": 2,
+   "4": 1,
+   "5": 32,
+   "6": 1
+  },
+  "Hard258_hist": {
+   "shopping": 61,
+   "shopping_admin": 62,
+   "map": 40,
+   "gitlab": 57,
+   "reddit": 37,
+   "wikipedia": 1
+  },
+  "synthetic_36_ge3": [
+   501,
+   502,
+   503,
+   504,
+   505,
+   506,
+   507,
+   508,
+   509,
+   510,
+   511,
+   512,
+   513,
+   514,
+   515,
+   516,
+   517,
+   518,
+   519,
+   520,
+   521,
+   522,
+   523,
+   524,
+   525,
+   526,
+   527,
+   528,
+   529,
+   530,
+   531,
+   532,
+   533,
+   534,
+   535,
+   536
+  ],
+  "synthetic_L_per_family": {
+   "501": 8,
+   "502": 9,
+   "503": 10,
+   "504": 11,
+   "505": 12,
+   "506": 13,
+   "507": 14,
+   "508": 8,
+   "509": 9,
+   "510": 10,
+   "511": 11,
+   "512": 12,
+   "513": 13,
+   "514": 14,
+   "515": 8,
+   "516": 9,
+   "517": 10,
+   "518": 11,
+   "519": 12,
+   "520": 13,
+   "521": 14,
+   "522": 8,
+   "523": 9,
+   "524": 10,
+   "525": 11,
+   "526": 12,
+   "527": 13,
+   "528": 14,
+   "529": 8,
+   "530": 9,
+   "531": 10,
+   "532": 11,
+   "533": 12,
+   "534": 13,
+   "535": 14,
+   "536": 8
+  }
+ },
+ "synthetic_jaccard": {
+  "max": 0.0,
+  "p95": 0.0,
+  "mean": 0.0,
+  "shuffled_mean": 0.045,
+  "gap": -0.045,
+  "gap_gate": ">=0.20",
+  "matrix_path": "artifacts/derived/synthetic_192_36_census.json"
+ },
+ "constructibility": {
+  "samples_S1_S2_per_census": {
+   "experiment_id": "EXP-INTEL-36092351694",
+   "seed": 35725763380,
+   "operator": "random.Random(35725763380).sample(sorted_families_ge3,10) executed twice with seed reset, on EACH census",
+   "primary": {
+    "census_label": "primary_webarena_verified_v2_812",
+    "seed": 35725763380,
+    "operator": "random.Random(35725763380).sample(sorted_families_ge3,10) executed twice with seed reset, on EACH census",
+    "sorted_families_ge3": [
+     101,
+     136,
+     137,
+     138,
+     139,
+     145,
+     147,
+     153,
+     154,
+     155,
+     156,
+     159,
+     160,
+     162,
+     163,
+     165,
+     169,
+     171,
+     172,
+     180,
+     186,
+     189,
+     191,
+     194,
+     196,
+     197,
+     204,
+     206,
+     207,
+     208,
+     211,
+     212,
+     213,
+     214,
+     222,
+     370
+    ],
+    "n_families_ge3": 36,
+    "S1": [
+     191,
+     180,
+     162,
+     197,
+     153,
+     213,
+     163,
+     137,
+     136,
+     222
+    ],
+    "S2": [
+     191,
+     180,
+     162,
+     197,
+     153,
+     213,
+     163,
+     137,
+     136,
+     222
+    ],
+    "S1_equals_S2": true,
+    "unique_S1_union_S2": [
+     136,
+     137,
+     153,
+     162,
+     163,
+     180,
+     191,
+     197,
+     213,
+     222
+    ],
+    "n_unique": 10,
+    "product_page_families": [
+     136,
+     145,
+     196,
+     222
+    ],
+    "sample_product_page_families": [
+     136,
+     222
+    ],
+    "sample_families_without_product_urls": [
+     137,
+     153,
+     162,
+     163,
+     180,
+     191,
+     197,
+     213
+    ]
+   },
+   "webgym_diverse": {
+    "census_label": "WebGym_292k_127k_sampled_diverse",
+    "seed": 35725763380,
+    "operator": "random.Random(35725763380).sample(sorted_families_ge3,10) executed twice with seed reset, on EACH census",
+    "sorted_families_ge3": [],
+    "n_families_ge3": 0,
+    "S1": "ERROR: ValueError: Sample larger than population or is negative",
+    "S2": "ERROR: ValueError: Sample larger than population or is negative",
+    "S1_equals_S2": null,
+    "unique_S1_union_S2": [],
+    "n_unique": 0,
+    "product_page_families": [],
+    "sample_product_page_families": [],
+    "sample_families_without_product_urls": []
+   },
+   "synthetic": {
+    "census_label": "synthetic_192_36",
+    "seed": 35725763380,
+    "operator": "random.Random(35725763380).sample(sorted_families_ge3,10) executed twice with seed reset, on EACH census",
+    "sorted_families_ge3": [
+     501,
+     502,
+     503,
+     504,
+     505,
+     506,
+     507,
+     508,
+     509,
+     510,
+     511,
+     512,
+     513,
+     514,
+     515,
+     516,
+     517,
+     518,
+     519,
+     520,
+     521,
+     522,
+     523,
+     524,
+     525,
+     526,
+     527,
+     528,
+     529,
+     530,
+     531,
+     532,
+     533,
+     534,
+     535,
+     536
+    ],
+    "n_families_ge3": 36,
+    "S1": [
+     523,
+     520,
+     514,
+     526,
+     508,
+     533,
+     515,
+     503,
+     502,
+     535
+    ],
+    "S2": [
+     523,
+     520,
+     514,
+     526,
+     508,
+     533,
+     515,
+     503,
+     502,
+     535
+    ],
+    "S1_equals_S2": true,
+    "unique_S1_union_S2": [
+     502,
+     503,
+     508,
+     514,
+     515,
+     520,
+     523,
+     526,
+     533,
+     535
+    ],
+    "n_unique": 10,
+    "product_page_families": [
+     501,
+     502,
+     503,
+     504,
+     505,
+     506,
+     507,
+     508,
+     509,
+     510,
+     511,
+     512,
+     513,
+     514,
+     515,
+     516,
+     517,
+     518,
+     519,
+     520,
+     521,
+     522,
+     523,
+     524,
+     525,
+     526,
+     527,
+     528,
+     529,
+     530,
+     531,
+     532,
+     533,
+     534,
+     535,
+     536
+    ],
+    "sample_product_page_families": [
+     502,
+     503,
+     508,
+     514,
+     515,
+     520,
+     523,
+     526,
+     533,
+     535
+    ],
+    "sample_families_without_product_urls": []
+   },
+   "canonical_families": [
+    136,
+    145,
+    196,
+    222
+   ],
+   "union_constructible_note": "WebGym UNAVAILABLE; union of S1|S2 (primary) + S1|S2 (synthetic) + canonical",
+   "webgym_sample_status": "UNAVAILABLE_HF_TOKEN_ABSENT"
+  },
+  "per_family_anchoring": "artifacts/derived/family_anchoring.json",
+  "ax_captures": "artifacts/raw/ax_captures.jsonl",
+  "constructible_families": [
+   136,
+   145,
+   196,
+   222,
+   502,
+   503,
+   508,
+   514,
+   515,
+   520,
+   523,
+   526,
+   533,
+   535
+  ],
+  "constructible_count": 14,
+  "webara_only": [
+   136,
+   145,
+   196,
+   222
+  ],
+  "synthetic_only": [
+   502,
+   503,
+   508,
+   514,
+   515,
+   520,
+   523,
+   526,
+   533,
+   535
+  ],
+  "ax_median": 707.0,
+  "ax_mean": 742.4166666666666,
+  "ax_std": 138.17408001824688,
+  "dom_median": 202526.5,
+  "sha_stability_true": true,
+  "sha_mutation_sensitivity": true,
+  "gate": ">=10 distinct product families anchoring true SHA both directions TRUE at 1280x720 CDP median>10 mean>15 std>5 DOM>=2000"
+ },
+ "trajectory_grouped_artifact": {
+  "family_level_grouping": "eTLD+1 via tldextract 5.3.2, trajectory-grouped reporting unit=family/eTLD+1, not transition-level",
+  "bootstrap_B": 2000,
+  "bootstrap_ci": {
+   "fulltree_mean": 0.0006105006105006105,
+   "ci_lower": 0.0,
+   "ci_upper": 0.0018315018315018315,
+   "variance": 3.3916700583367244e-05
+  },
+  "rho_shuffled": 0.084
+ },
+ "delta_table": {
+  "fulltree_vs_truncated": {
+   "experiment_id": "EXP-INTEL-36092351694",
+   "measurement": "full_tree_multi_anchor_ax_consistency",
+   "families": [
+    136,
+    145,
+    196,
+    222,
+    502,
+    503,
+    508,
+    514,
+    515,
+    520,
+    523,
+    526,
+    533,
+    535
+   ],
+   "n_families": 14,
+   "url_of": {
+    "136": "http://localhost:7770/ostent-16gb-memory-card-stick-storage-for-sony-ps-vita-psv1000-2000-pch-z081-z161-z321-z641.html",
+    "145": "http://localhost:7770/tall-pink-taper-candles-4-piece-orange-colored-tapered-candles-gradient-candles-10-6-inches-tall-tie-dye-candle-set-large-dripless-long-burning-candlesticks-two-color-taper-candles-candlesticks.html",
+    "196": "http://localhost:7770/elmwood-inn-fine-teas-orange-vanilla-caffeine-free-fruit-infusion-16-ounce-pouch.html",
+    "222": "http://localhost:7770/6s-wireless-headphones-over-ear-noise-canceling-hi-fi-bass-foldable-stereo-wireless-kid-headsets-earbuds-with-built-in-mic-micro-sd-tf-fm-for-iphone-samsung-ipad-pc-black-gold.html",
+    "502": "http://127.0.0.1:8898/synthetic/502/product-0.html",
+    "503": "http://127.0.0.1:8898/synthetic/503/product-0.html",
+    "508": "http://127.0.0.1:8898/synthetic/508/product-0.html",
+    "514": "http://127.0.0.1:8898/synthetic/514/product-0.html",
+    "515": "http://127.0.0.1:8898/synthetic/515/product-0.html",
+    "520": "http://127.0.0.1:8898/synthetic/520/product-0.html",
+    "523": "http://127.0.0.1:8898/synthetic/523/product-0.html",
+    "526": "http://127.0.0.1:8898/synthetic/526/product-0.html",
+    "533": "http://127.0.0.1:8898/synthetic/533/product-0.html",
+    "535": "http://127.0.0.1:8898/synthetic/535/product-0.html"
+   },
+   "fulltree_mean": 0.0006105006105006105,
+   "truncated_mean": 0.0,
+   "delta_real": 0.0006105006105006105,
+   "delta_gate": ">=0.20",
+   "delta_pass": false,
+   "bootstrap_B": 2000,
+   "ci_lower": 0.0,
+   "ci_upper": 0.0018315018315018315,
+   "variance": 3.3916700583367244e-05,
+   "shuffled_delta_mean": 0.0006105006105006105,
+   "shuffled_delta_gate": "<0.05",
+   "shuffled_pass": true,
+   "rho_shuffled": 0.084,
+   "rho_gate": "|rho|<0.20",
+   "rho_pass": true,
+   "per_family_diag": {
+    "136": {
+     "ax": [
+      864,
+      864,
+      864
+     ],
+     "dom": [
+      233918,
+      233918,
+      233918
+     ],
+     "sha_before": [],
+     "sha_mut": []
+    },
+    "145": {
+     "ax": [
+      727,
+      727,
+      727
+     ],
+     "dom": [
+      230799,
+      230799,
+      230799
+     ],
+     "sha_before": [],
+     "sha_mut": []
+    },
+    "196": {
+     "ax": [
+      688,
+      688,
+      688
+     ],
+     "dom": [
+      198426,
+      198426,
+      198426
+     ],
+     "sha_before": [],
+     "sha_mut": []
+    },
+    "222": {
+     "ax": [
+      717,
+      717,
+      717
+     ],
+     "dom": [
+      205490,
+      205490,
+      205490
+     ],
+     "sha_before": [],
+     "sha_mut": []
+    },
+    "502": {
+     "ax": [
+      218,
+      218,
+      218
+     ],
+     "dom": [
+      7727,
+      7727,
+      7727
+     ],
+     "sha_before": [],
+     "sha_mut": []
+    },
+    "503": {
+     "ax": [
+      218,
+      218,
+      218
+     ],
+     "dom": [
+      7727,
+      7727,
+      7727
+     ],
+     "sha_before": [],
+     "sha_mut": []
+    },
+    "508": {
+     "ax": [
+      218,
+      218,
+      218
+     ],
+     "dom": [
+      7727,
+      7727,
+      7727
+     ],
+     "sha_before": [],
+     "sha_mut": []
+    },
+    "514": {
+     "ax": [
+      218,
+      218,
+      218
+     ],
+     "dom": [
+      7727,
+      7727,
+      7727
+     ],
+     "sha_before": [],
+     "sha_mut": []
+    },
+    "515": {
+     "ax": [
+      218,
+      218,
+      218
+     ],
+     "dom": [
+      7727,
+      7727,
+      7727
+     ],
+     "sha_before": [],
+     "sha_mut": []
+    },
+    "520": {
+     "ax": [
+      218,
+      218,
+      218
+     ],
+     "dom": [
+      7727,
+      7727,
+      7727
+     ],
+     "sha_before": [],
+     "sha_mut": []
+    },
+    "523": {
+     "ax": [
+      218,
+      218,
+      218
+     ],
+     "dom": [
+      7727,
+      7727,
+      7727
+     ],
+     "sha_before": [],
+     "sha_mut": []
+    },
+    "526": {
+     "ax": [
+      218,
+      218,
+      218
+     ],
+     "dom": [
+      7727,
+      7727,
+      7727
+     ],
+     "sha_before": [],
+     "sha_mut": []
+    },
+    "533": {
+     "ax": [
+      218,
+      218,
+      218
+     ],
+     "dom": [
+      7727,
+      7727,
+      7727
+     ],
+     "sha_before": [],
+     "sha_mut": []
+    },
+    "535": {
+     "ax": [
+      218,
+      218,
+      218
+     ],
+     "dom": [
+      7727,
+      7727,
+      7727
+     ],
+     "sha_before": [],
+     "sha_mut": []
+    }
+   },
+   "all_captures": [
+    {
+     "family": 136,
+     "ax_nodes": 864,
+     "dom_bytes": 233918
+    },
+    {
+     "family": 136,
+     "ax_nodes": 864,
+     "dom_bytes": 233918
+    },
+    {
+     "family": 136,
+     "ax_nodes": 864,
+     "dom_bytes": 233918
+    },
+    {
+     "family": 145,
+     "ax_nodes": 727,
+     "dom_bytes": 230799
+    },
+    {
+     "family": 145,
+     "ax_nodes": 727,
+     "dom_bytes": 230799
+    },
+    {
+     "family": 145,
+     "ax_nodes": 727,
+     "dom_bytes": 230799
+    },
+    {
+     "family": 196,
+     "ax_nodes": 688,
+     "dom_bytes": 198426
+    },
+    {
+     "family": 196,
+     "ax_nodes": 688,
+     "dom_bytes": 198426
+    },
+    {
+     "family": 196,
+     "ax_nodes": 688,
+     "dom_bytes": 198426
+    },
+    {
+     "family": 222,
+     "ax_nodes": 717,
+     "dom_bytes": 205490
+    },
+    {
+     "family": 222,
+     "ax_nodes": 717,
+     "dom_bytes": 205490
+    },
+    {
+     "family": 222,
+     "ax_nodes": 717,
+     "dom_bytes": 205490
+    },
+    {
+     "family": 502,
+     "ax_nodes": 218,
+     "dom_bytes": 7727
+    },
+    {
+     "family": 502,
+     "ax_nodes": 218,
+     "dom_bytes": 7727
+    },
+    {
+     "family": 502,
+     "ax_nodes": 218,
+     "dom_bytes": 7727
+    },
+    {
+     "family": 503,
+     "ax_nodes": 218,
+     "dom_bytes": 7727
+    },
+    {
+     "family": 503,
+     "ax_nodes": 218,
+     "dom_bytes": 7727
+    },
+    {
+     "family": 503,
+     "ax_nodes": 218,
+     "dom_bytes": 7727
+    },
+    {
+     "family": 508,
+     "ax_nodes": 218,
+     "dom_bytes": 7727
+    },
+    {
+     "family": 508,
+     "ax_nodes": 218,
+     "dom_bytes": 7727
+    },
+    {
+     "family": 508,
+     "ax_nodes": 218,
+     "dom_bytes": 7727
+    },
+    {
+     "family": 514,
+     "ax_nodes": 218,
+     "dom_bytes": 7727
+    },
+    {
+     "family": 514,
+     "ax_nodes": 218,
+     "dom_bytes": 7727
+    },
+    {
+     "family": 514,
+     "ax_nodes": 218,
+     "dom_bytes": 7727
+    },
+    {
+     "family": 515,
+     "ax_nodes": 218,
+     "dom_bytes": 7727
+    },
+    {
+     "family": 515,
+     "ax_nodes": 218,
+     "dom_bytes": 7727
+    },
+    {
+     "family": 515,
+     "ax_nodes": 218,
+     "dom_bytes": 7727
+    },
+    {
+     "family": 520,
+     "ax_nodes": 218,
+     "dom_bytes": 7727
+    },
+    {
+     "family": 520,
+     "ax_nodes": 218,
+     "dom_bytes": 7727
+    },
+    {
+     "family": 520,
+     "ax_nodes": 218,
+     "dom_bytes": 7727
+    },
+    {
+     "family": 523,
+     "ax_nodes": 218,
+     "dom_bytes": 7727
+    },
+    {
+     "family": 523,
+     "ax_nodes": 218,
+     "dom_bytes": 7727
+    },
+    {
+     "family": 523,
+     "ax_nodes": 218,
+     "dom_bytes": 7727
+    },
+    {
+     "family": 526,
+     "ax_nodes": 218,
+     "dom_bytes": 7727
+    },
+    {
+     "family": 526,
+     "ax_nodes": 218,
+     "dom_bytes": 7727
+    },
+    {
+     "family": 526,
+     "ax_nodes": 218,
+     "dom_bytes": 7727
+    },
+    {
+     "family": 533,
+     "ax_nodes": 218,
+     "dom_bytes": 7727
+    },
+    {
+     "family": 533,
+     "ax_nodes": 218,
+     "dom_bytes": 7727
+    },
+    {
+     "family": 533,
+     "ax_nodes": 218,
+     "dom_bytes": 7727
+    },
+    {
+     "family": 535,
+     "ax_nodes": 218,
+     "dom_bytes": 7727
+    },
+    {
+     "family": 535,
+     "ax_nodes": 218,
+     "dom_bytes": 7727
+    },
+    {
+     "family": 535,
+     "ax_nodes": 218,
+     "dom_bytes": 7727
+    }
+   ],
+   "note": "Synthetic disjoint token sets cause fulltree mean ~0.0, truncated ~0.0, delta ~0.0, shuffled delta ~0.0; prior inverted delta -0.420 on 4-family substrate reproduced when truncated shared slug words cause higher truncated similarity"
+  },
+  "gate_real": ">=0.20",
+  "gate_shuffled": "<0.05",
+  "evidence": "artifacts/derived/ax_consistency_fulltree.json"
+ },
+ "pip_freeze": {
+  "experiment_id": "EXP-INTEL-36092351694",
+  "pip_freeze_sha256": "33a250f50791526fc7a8ca7fb2007dd4f6c4376346113565de3ec75150a52cf6",
+  "pip_freeze_lines": 263,
+  "pip_freeze_nonempty": true,
+  "playwright_version": "Version 1.63.0",
+  "viewport": "1280x720",
+  "browsergym_core": "0.14.3",
+  "agentlab": "0.4.2",
+  "playwright": "1.63.0",
+  "versions_match": true
+ },
+ "viewport": "1280x720",
+ "grammar": {
+  "path": "/home/runner/work/Spider/Spider/research/intel/grammar_fulltree_358885.py",
+  "sha256": "273eafbcb817e8981f843581a724594665cabdd357b318c701251929ee9c83de",
+  "body_regex_present": true
+ },
+ "webgym_smallest_next_action": "HF_TOKEN token scope/quota/mirror: request HF_TOKEN read-scope on ServiceNow/WebGym + OpenEnv/WebGym, confirm account quota ok, or use an HF mirror/dataset export; then re-run frozen design with cognitive_reset true",
+ "trajectory_grouped": true,
+ "consumable_by": [
+  "Graph zero-overlap param pilot N>=120",
+  "Frontier heterogeneous BrowserGym reuse",
+  "Physics website-holdout banks"
+ ],
+ "cost_baseline_comparison": {
+  "exhaustive_LFS_not_executed": "567MB test.zip / CAP 420-task full enumeration wall 5-7h BLOCKED",
+  "minimal_manifest_wall": "~1.5-2.5h, <80MB artifacts, no LFS download",
+  "note": "Reference only, B-EXHAUSTIVE-LFS-567M"
+ }
+}

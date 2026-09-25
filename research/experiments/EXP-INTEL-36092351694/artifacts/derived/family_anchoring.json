@@ -1,0 +1,1024 @@
+{
+ "fam136": {
+  "family": 136,
+  "product_urls_probed": [
+   "http://localhost:7770/ostent-16gb-memory-card-stick-storage-for-sony-ps-vita-psv1000-2000-pch-z081-z161-z321-z641.html",
+   "http://localhost:7770/mineralogie-all-natural-lip-gloss-ruby-rose.html",
+   "http://localhost:7770/sandgrens-swedish-handmade-wooden-clog-sandal-copenhagen.html"
+  ],
+  "n_product_probes": 3,
+  "home_urls_probed": [],
+  "n_home_probes": 0,
+  "per_product_url": [
+   {
+    "url": "http://localhost:7770/ostent-16gb-memory-card-stick-storage-for-sony-ps-vita-psv1000-2000-pch-z081-z161-z321-z641.html",
+    "census": "primary_webarena_verified_v2_812",
+    "anchoring_all_categories_gt1": true,
+    "node_counts": {
+     "heading": 2,
+     "price": 6,
+     "add_to_cart": 2,
+     "main": 365,
+     "contentinfo": 31
+    },
+    "present": {
+     "heading": true,
+     "price": true,
+     "add_to_cart": true,
+     "main": true,
+     "contentinfo": true
+    },
+    "sha_stability_identical": true,
+    "sha_mutation_changed": true,
+    "ax_nodes": 864,
+    "dom_bytes": 233918
+   },
+   {
+    "url": "http://localhost:7770/mineralogie-all-natural-lip-gloss-ruby-rose.html",
+    "census": "primary_webarena_verified_v2_812",
+    "anchoring_all_categories_gt1": true,
+    "node_counts": {
+     "heading": 2,
+     "price": 6,
+     "add_to_cart": 2,
+     "main": 227,
+     "contentinfo": 31
+    },
+    "present": {
+     "heading": true,
+     "price": true,
+     "add_to_cart": true,
+     "main": true,
+     "contentinfo": true
+    },
+    "sha_stability_identical": true,
+    "sha_mutation_changed": true,
+    "ax_nodes": 668,
+    "dom_bytes": 200413
+   },
+   {
+    "url": "http://localhost:7770/sandgrens-swedish-handmade-wooden-clog-sandal-copenhagen.html",
+    "census": "primary_webarena_verified_v2_812",
+    "anchoring_all_categories_gt1": true,
+    "node_counts": {
+     "heading": 2,
+     "price": 6,
+     "add_to_cart": 2,
+     "main": 578,
+     "contentinfo": 31
+    },
+    "present": {
+     "heading": true,
+     "price": true,
+     "add_to_cart": true,
+     "main": true,
+     "contentinfo": true
+    },
+    "sha_stability_identical": true,
+    "sha_mutation_changed": true,
+    "ax_nodes": 1160,
+    "dom_bytes": 261498
+   }
+  ],
+  "per_home_url": [],
+  "family_constructible": true,
+  "classification_rule": "frozen MV5: constructible requires >=1 product_page probe with heading/price/add-to-cart/main/contentinfo node_count>1 AND SHA stability both directions (identical on reload, changed on visible mutation)"
+ },
+ "fam137": {
+  "family": 137,
+  "product_urls_probed": [],
+  "n_product_probes": 0,
+  "home_urls_probed": [
+   "http://localhost:7770/"
+  ],
+  "n_home_probes": 1,
+  "per_product_url": [],
+  "per_home_url": [
+   {
+    "url": "http://localhost:7770/",
+    "census": "primary_webarena_verified_v2_812",
+    "is_product_page_probe": false,
+    "anchoring_all_categories_gt1": true,
+    "node_counts": {
+     "heading": 2,
+     "price": 4,
+     "add_to_cart": 2,
+     "main": 485,
+     "contentinfo": 31
+    },
+    "present": {
+     "heading": true,
+     "price": true,
+     "add_to_cart": true,
+     "main": true,
+     "contentinfo": true
+    },
+    "sha_stability_identical": true,
+    "sha_mutation_changed": true,
+    "ax_nodes": 1426,
+    "dom_bytes": 251734
+   }
+  ],
+  "family_constructible": false,
+  "classification_rule": "frozen MV5: constructible requires >=1 product_page probe with heading/price/add-to-cart/main/contentinfo node_count>1 AND SHA stability both directions (identical on reload, changed on visible mutation)",
+  "reason": "No product-page start_url in this census for this family; only the expanded __SHOPPING__ homepage start URL exists. Homepage probe recorded as raw evidence and is NOT counted (frozen MV5 requires a product_page probe)."
+ },
+ "fam145": {
+  "family": 145,
+  "product_urls_probed": [
+   "http://localhost:7770/tall-pink-taper-candles-4-piece-orange-colored-tapered-candles-gradient-candles-10-6-inches-tall-tie-dye-candle-set-large-dripless-long-burning-candlesticks-two-color-taper-candles-candlesticks.html",
+   "http://localhost:7770/spaas-white-taper-candles-4-pack-10-inch-tall-candles-scent-free-premium-wax-candle-sticks-8-hour-long-burning-white-candlesticks-for-home-decoration-wedding-holiday-and-parties.html",
+   "http://localhost:7770/white-starfish-wall-candle-sconces-set-of-2-beach-decor-ocean-themed-wall-mount-candleholders-nautical-style-beach-bathroom-decor-coastal-farmhouse-seashell-candle-holders.html"
+  ],
+  "n_product_probes": 3,
+  "home_urls_probed": [],
+  "n_home_probes": 0,
+  "per_product_url": [
+   {
+    "url": "http://localhost:7770/tall-pink-taper-candles-4-piece-orange-colored-tapered-candles-gradient-candles-10-6-inches-tall-tie-dye-candle-set-large-dripless-long-burning-candlesticks-two-color-taper-candles-candlesticks.html",
+    "census": "primary_webarena_verified_v2_812",
+    "anchoring_all_categories_gt1": true,
+    "node_counts": {
+     "heading": 2,
+     "price": 6,
+     "add_to_cart": 2,
+     "main": 290,
+     "contentinfo": 31
+    },
+    "present": {
+     "heading": true,
+     "price": true,
+     "add_to_cart": true,
+     "main": true,
+     "contentinfo": true
+    },
+    "sha_stability_identical": true,
+    "sha_mutation_changed": true,
+    "ax_nodes": 727,
+    "dom_bytes": 230799
+   },
+   {
+    "url": "http://localhost:7770/spaas-white-taper-candles-4-pack-10-inch-tall-candles-scent-free-premium-wax-candle-sticks-8-hour-long-burning-white-candlesticks-for-home-decoration-wedding-holiday-and-parties.html",
+    "census": "primary_webarena_verified_v2_812",
+    "anchoring_all_categories_gt1": true,
+    "node_counts": {
+     "heading": 2,
+     "price": 6,
+     "add_to_cart": 2,
+     "main": 224,
+     "contentinfo": 31
+    },
+    "present": {
+     "heading": true,
+     "price": true,
+     "add_to_cart": true,
+     "main": true,
+     "contentinfo": true
+    },
+    "sha_stability_identical": true,
+    "sha_mutation_changed": true,
+    "ax_nodes": 678,
+    "dom_bytes": 199025
+   },
+   {
+    "url": "http://localhost:7770/white-starfish-wall-candle-sconces-set-of-2-beach-decor-ocean-themed-wall-mount-candleholders-nautical-style-beach-bathroom-decor-coastal-farmhouse-seashell-candle-holders.html",
+    "census": "primary_webarena_verified_v2_812",
+    "anchoring_all_categories_gt1": true,
+    "node_counts": {
+     "heading": 2,
+     "price": 6,
+     "add_to_cart": 2,
+     "main": 248,
+     "contentinfo": 31
+    },
+    "present": {
+     "heading": true,
+     "price": true,
+     "add_to_cart": true,
+     "main": true,
+     "contentinfo": true
+    },
+    "sha_stability_identical": true,
+    "sha_mutation_changed": true,
+    "ax_nodes": 724,
+    "dom_bytes": 203748
+   }
+  ],
+  "per_home_url": [],
+  "family_constructible": true,
+  "classification_rule": "frozen MV5: constructible requires >=1 product_page probe with heading/price/add-to-cart/main/contentinfo node_count>1 AND SHA stability both directions (identical on reload, changed on visible mutation)"
+ },
+ "fam153": {
+  "family": 153,
+  "product_urls_probed": [],
+  "n_product_probes": 0,
+  "home_urls_probed": [
+   "http://localhost:7770/"
+  ],
+  "n_home_probes": 1,
+  "per_product_url": [],
+  "per_home_url": [
+   {
+    "url": "http://localhost:7770/",
+    "census": "primary_webarena_verified_v2_812",
+    "is_product_page_probe": false,
+    "anchoring_all_categories_gt1": true,
+    "node_counts": {
+     "heading": 2,
+     "price": 4,
+     "add_to_cart": 2,
+     "main": 485,
+     "contentinfo": 31
+    },
+    "present": {
+     "heading": true,
+     "price": true,
+     "add_to_cart": true,
+     "main": true,
+     "contentinfo": true
+    },
+    "sha_stability_identical": true,
+    "sha_mutation_changed": true,
+    "ax_nodes": 1426,
+    "dom_bytes": 251734
+   }
+  ],
+  "family_constructible": false,
+  "classification_rule": "frozen MV5: constructible requires >=1 product_page probe with heading/price/add-to-cart/main/contentinfo node_count>1 AND SHA stability both directions (identical on reload, changed on visible mutation)",
+  "reason": "No product-page start_url in this census for this family; only the expanded __SHOPPING__ homepage start URL exists. Homepage probe recorded as raw evidence and is NOT counted (frozen MV5 requires a product_page probe)."
+ },
+ "fam162": {
+  "family": 162,
+  "product_urls_probed": [],
+  "n_product_probes": 0,
+  "home_urls_probed": [
+   "http://localhost:7770/"
+  ],
+  "n_home_probes": 1,
+  "per_product_url": [],
+  "per_home_url": [
+   {
+    "url": "http://localhost:7770/",
+    "census": "primary_webarena_verified_v2_812",
+    "is_product_page_probe": false,
+    "anchoring_all_categories_gt1": true,
+    "node_counts": {
+     "heading": 2,
+     "price": 4,
+     "add_to_cart": 2,
+     "main": 485,
+     "contentinfo": 31
+    },
+    "present": {
+     "heading": true,
+     "price": true,
+     "add_to_cart": true,
+     "main": true,
+     "contentinfo": true
+    },
+    "sha_stability_identical": true,
+    "sha_mutation_changed": true,
+    "ax_nodes": 1426,
+    "dom_bytes": 251734
+   }
+  ],
+  "family_constructible": false,
+  "classification_rule": "frozen MV5: constructible requires >=1 product_page probe with heading/price/add-to-cart/main/contentinfo node_count>1 AND SHA stability both directions (identical on reload, changed on visible mutation)",
+  "reason": "No product-page start_url in this census for this family; only the expanded __SHOPPING__ homepage start URL exists. Homepage probe recorded as raw evidence and is NOT counted (frozen MV5 requires a product_page probe)."
+ },
+ "fam163": {
+  "family": 163,
+  "product_urls_probed": [],
+  "n_product_probes": 0,
+  "home_urls_probed": [
+   "http://localhost:7770/"
+  ],
+  "n_home_probes": 1,
+  "per_product_url": [],
+  "per_home_url": [
+   {
+    "url": "http://localhost:7770/",
+    "census": "primary_webarena_verified_v2_812",
+    "is_product_page_probe": false,
+    "anchoring_all_categories_gt1": true,
+    "node_counts": {
+     "heading": 2,
+     "price": 4,
+     "add_to_cart": 2,
+     "main": 485,
+     "contentinfo": 31
+    },
+    "present": {
+     "heading": true,
+     "price": true,
+     "add_to_cart": true,
+     "main": true,
+     "contentinfo": true
+    },
+    "sha_stability_identical": true,
+    "sha_mutation_changed": true,
+    "ax_nodes": 1426,
+    "dom_bytes": 251734
+   }
+  ],
+  "family_constructible": false,
+  "classification_rule": "frozen MV5: constructible requires >=1 product_page probe with heading/price/add-to-cart/main/contentinfo node_count>1 AND SHA stability both directions (identical on reload, changed on visible mutation)",
+  "reason": "No product-page start_url in this census for this family; only the expanded __SHOPPING__ homepage start URL exists. Homepage probe recorded as raw evidence and is NOT counted (frozen MV5 requires a product_page probe)."
+ },
+ "fam180": {
+  "family": 180,
+  "product_urls_probed": [],
+  "n_product_probes": 0,
+  "home_urls_probed": [
+   "http://localhost:7770/"
+  ],
+  "n_home_probes": 1,
+  "per_product_url": [],
+  "per_home_url": [
+   {
+    "url": "http://localhost:7770/",
+    "census": "primary_webarena_verified_v2_812",
+    "is_product_page_probe": false,
+    "anchoring_all_categories_gt1": true,
+    "node_counts": {
+     "heading": 2,
+     "price": 4,
+     "add_to_cart": 2,
+     "main": 485,
+     "contentinfo": 31
+    },
+    "present": {
+     "heading": true,
+     "price": true,
+     "add_to_cart": true,
+     "main": true,
+     "contentinfo": true
+    },
+    "sha_stability_identical": true,
+    "sha_mutation_changed": true,
+    "ax_nodes": 1426,
+    "dom_bytes": 251734
+   }
+  ],
+  "family_constructible": false,
+  "classification_rule": "frozen MV5: constructible requires >=1 product_page probe with heading/price/add-to-cart/main/contentinfo node_count>1 AND SHA stability both directions (identical on reload, changed on visible mutation)",
+  "reason": "No product-page start_url in this census for this family; only the expanded __SHOPPING__ homepage start URL exists. Homepage probe recorded as raw evidence and is NOT counted (frozen MV5 requires a product_page probe)."
+ },
+ "fam191": {
+  "family": 191,
+  "product_urls_probed": [],
+  "n_product_probes": 0,
+  "home_urls_probed": [
+   "http://localhost:7770/"
+  ],
+  "n_home_probes": 1,
+  "per_product_url": [],
+  "per_home_url": [
+   {
+    "url": "http://localhost:7770/",
+    "census": "primary_webarena_verified_v2_812",
+    "is_product_page_probe": false,
+    "anchoring_all_categories_gt1": true,
+    "node_counts": {
+     "heading": 2,
+     "price": 4,
+     "add_to_cart": 2,
+     "main": 485,
+     "contentinfo": 31
+    },
+    "present": {
+     "heading": true,
+     "price": true,
+     "add_to_cart": true,
+     "main": true,
+     "contentinfo": true
+    },
+    "sha_stability_identical": true,
+    "sha_mutation_changed": true,
+    "ax_nodes": 1426,
+    "dom_bytes": 251734
+   }
+  ],
+  "family_constructible": false,
+  "classification_rule": "frozen MV5: constructible requires >=1 product_page probe with heading/price/add-to-cart/main/contentinfo node_count>1 AND SHA stability both directions (identical on reload, changed on visible mutation)",
+  "reason": "No product-page start_url in this census for this family; only the expanded __SHOPPING__ homepage start URL exists. Homepage probe recorded as raw evidence and is NOT counted (frozen MV5 requires a product_page probe)."
+ },
+ "fam196": {
+  "family": 196,
+  "product_urls_probed": [
+   "http://localhost:7770/elmwood-inn-fine-teas-orange-vanilla-caffeine-free-fruit-infusion-16-ounce-pouch.html",
+   "http://localhost:7770/skinit-decal-gaming-skin-compatible-with-xbox-one-s-console-and-controller-bundle-officially-licensed-nfl-baltimore-ravens-design.html",
+   "http://localhost:7770/sceptre-e195bd-srr-19-inch-720p-led-tv-true-black-2017.html"
+  ],
+  "n_product_probes": 3,
+  "home_urls_probed": [],
+  "n_home_probes": 0,
+  "per_product_url": [
+   {
+    "url": "http://localhost:7770/elmwood-inn-fine-teas-orange-vanilla-caffeine-free-fruit-infusion-16-ounce-pouch.html",
+    "census": "primary_webarena_verified_v2_812",
+    "anchoring_all_categories_gt1": true,
+    "node_counts": {
+     "heading": 2,
+     "price": 6,
+     "add_to_cart": 2,
+     "main": 226,
+     "contentinfo": 31
+    },
+    "present": {
+     "heading": true,
+     "price": true,
+     "add_to_cart": true,
+     "main": true,
+     "contentinfo": true
+    },
+    "sha_stability_identical": true,
+    "sha_mutation_changed": true,
+    "ax_nodes": 688,
+    "dom_bytes": 198426
+   },
+   {
+    "url": "http://localhost:7770/skinit-decal-gaming-skin-compatible-with-xbox-one-s-console-and-controller-bundle-officially-licensed-nfl-baltimore-ravens-design.html",
+    "census": "primary_webarena_verified_v2_812",
+    "anchoring_all_categories_gt1": true,
+    "node_counts": {
+     "heading": 2,
+     "price": 6,
+     "add_to_cart": 2,
+     "main": 204,
+     "contentinfo": 31
+    },
+    "present": {
+     "heading": true,
+     "price": true,
+     "add_to_cart": true,
+     "main": true,
+     "contentinfo": true
+    },
+    "sha_stability_identical": true,
+    "sha_mutation_changed": true,
+    "ax_nodes": 627,
+    "dom_bytes": 198904
+   },
+   {
+    "url": "http://localhost:7770/sceptre-e195bd-srr-19-inch-720p-led-tv-true-black-2017.html",
+    "census": "primary_webarena_verified_v2_812",
+    "anchoring_all_categories_gt1": true,
+    "node_counts": {
+     "heading": 2,
+     "price": 6,
+     "add_to_cart": 2,
+     "main": 210,
+     "contentinfo": 31
+    },
+    "present": {
+     "heading": true,
+     "price": true,
+     "add_to_cart": true,
+     "main": true,
+     "contentinfo": true
+    },
+    "sha_stability_identical": true,
+    "sha_mutation_changed": true,
+    "ax_nodes": 642,
+    "dom_bytes": 195052
+   }
+  ],
+  "per_home_url": [],
+  "family_constructible": true,
+  "classification_rule": "frozen MV5: constructible requires >=1 product_page probe with heading/price/add-to-cart/main/contentinfo node_count>1 AND SHA stability both directions (identical on reload, changed on visible mutation)"
+ },
+ "fam197": {
+  "family": 197,
+  "product_urls_probed": [],
+  "n_product_probes": 0,
+  "home_urls_probed": [
+   "http://localhost:7770/"
+  ],
+  "n_home_probes": 1,
+  "per_product_url": [],
+  "per_home_url": [
+   {
+    "url": "http://localhost:7770/",
+    "census": "primary_webarena_verified_v2_812",
+    "is_product_page_probe": false,
+    "anchoring_all_categories_gt1": true,
+    "node_counts": {
+     "heading": 2,
+     "price": 4,
+     "add_to_cart": 2,
+     "main": 485,
+     "contentinfo": 31
+    },
+    "present": {
+     "heading": true,
+     "price": true,
+     "add_to_cart": true,
+     "main": true,
+     "contentinfo": true
+    },
+    "sha_stability_identical": true,
+    "sha_mutation_changed": true,
+    "ax_nodes": 1426,
+    "dom_bytes": 251734
+   }
+  ],
+  "family_constructible": false,
+  "classification_rule": "frozen MV5: constructible requires >=1 product_page probe with heading/price/add-to-cart/main/contentinfo node_count>1 AND SHA stability both directions (identical on reload, changed on visible mutation)",
+  "reason": "No product-page start_url in this census for this family; only the expanded __SHOPPING__ homepage start URL exists. Homepage probe recorded as raw evidence and is NOT counted (frozen MV5 requires a product_page probe)."
+ },
+ "fam213": {
+  "family": 213,
+  "product_urls_probed": [],
+  "n_product_probes": 0,
+  "home_urls_probed": [
+   "http://localhost:7770/"
+  ],
+  "n_home_probes": 1,
+  "per_product_url": [],
+  "per_home_url": [
+   {
+    "url": "http://localhost:7770/",
+    "census": "primary_webarena_verified_v2_812",
+    "is_product_page_probe": false,
+    "anchoring_all_categories_gt1": true,
+    "node_counts": {
+     "heading": 2,
+     "price": 4,
+     "add_to_cart": 2,
+     "main": 485,
+     "contentinfo": 31
+    },
+    "present": {
+     "heading": true,
+     "price": true,
+     "add_to_cart": true,
+     "main": true,
+     "contentinfo": true
+    },
+    "sha_stability_identical": true,
+    "sha_mutation_changed": true,
+    "ax_nodes": 1426,
+    "dom_bytes": 251734
+   }
+  ],
+  "family_constructible": false,
+  "classification_rule": "frozen MV5: constructible requires >=1 product_page probe with heading/price/add-to-cart/main/contentinfo node_count>1 AND SHA stability both directions (identical on reload, changed on visible mutation)",
+  "reason": "No product-page start_url in this census for this family; only the expanded __SHOPPING__ homepage start URL exists. Homepage probe recorded as raw evidence and is NOT counted (frozen MV5 requires a product_page probe)."
+ },
+ "fam222": {
+  "family": 222,
+  "product_urls_probed": [
+   "http://localhost:7770/6s-wireless-headphones-over-ear-noise-canceling-hi-fi-bass-foldable-stereo-wireless-kid-headsets-earbuds-with-built-in-mic-micro-sd-tf-fm-for-iphone-samsung-ipad-pc-black-gold.html",
+   "http://localhost:7770/fujifilm-finepix-z200fd-10mp-digital-camera-with-5x-optical-dual-image-stabilized-zoom-black.html",
+   "http://localhost:7770/3-pack-samsung-galaxy-s6-screen-protector-nearpow-tempered-glass-screen-protector-with-9h-hardness-crystal-clear-easy-bubble-free-installation-scratch-resist.html"
+  ],
+  "n_product_probes": 3,
+  "home_urls_probed": [],
+  "n_home_probes": 0,
+  "per_product_url": [
+   {
+    "url": "http://localhost:7770/6s-wireless-headphones-over-ear-noise-canceling-hi-fi-bass-foldable-stereo-wireless-kid-headsets-earbuds-with-built-in-mic-micro-sd-tf-fm-for-iphone-samsung-ipad-pc-black-gold.html",
+    "census": "primary_webarena_verified_v2_812",
+    "anchoring_all_categories_gt1": true,
+    "node_counts": {
+     "heading": 2,
+     "price": 6,
+     "add_to_cart": 2,
+     "main": 249,
+     "contentinfo": 31
+    },
+    "present": {
+     "heading": true,
+     "price": true,
+     "add_to_cart": true,
+     "main": true,
+     "contentinfo": true
+    },
+    "sha_stability_identical": true,
+    "sha_mutation_changed": true,
+    "ax_nodes": 717,
+    "dom_bytes": 205490
+   },
+   {
+    "url": "http://localhost:7770/fujifilm-finepix-z200fd-10mp-digital-camera-with-5x-optical-dual-image-stabilized-zoom-black.html",
+    "census": "primary_webarena_verified_v2_812",
+    "anchoring_all_categories_gt1": true,
+    "node_counts": {
+     "heading": 2,
+     "price": 6,
+     "add_to_cart": 2,
+     "main": 247,
+     "contentinfo": 31
+    },
+    "present": {
+     "heading": true,
+     "price": true,
+     "add_to_cart": true,
+     "main": true,
+     "contentinfo": true
+    },
+    "sha_stability_identical": true,
+    "sha_mutation_changed": true,
+    "ax_nodes": 716,
+    "dom_bytes": 204280
+   },
+   {
+    "url": "http://localhost:7770/3-pack-samsung-galaxy-s6-screen-protector-nearpow-tempered-glass-screen-protector-with-9h-hardness-crystal-clear-easy-bubble-free-installation-scratch-resist.html",
+    "census": "primary_webarena_verified_v2_812",
+    "anchoring_all_categories_gt1": true,
+    "node_counts": {
+     "heading": 2,
+     "price": 6,
+     "add_to_cart": 2,
+     "main": 225,
+     "contentinfo": 31
+    },
+    "present": {
+     "heading": true,
+     "price": true,
+     "add_to_cart": true,
+     "main": true,
+     "contentinfo": true
+    },
+    "sha_stability_identical": true,
+    "sha_mutation_changed": true,
+    "ax_nodes": 698,
+    "dom_bytes": 201305
+   }
+  ],
+  "per_home_url": [],
+  "family_constructible": true,
+  "classification_rule": "frozen MV5: constructible requires >=1 product_page probe with heading/price/add-to-cart/main/contentinfo node_count>1 AND SHA stability both directions (identical on reload, changed on visible mutation)"
+ },
+ "fam502": {
+  "family": 502,
+  "product_urls_probed": [
+   "http://127.0.0.1:8898/synthetic/502/product-0.html"
+  ],
+  "n_product_probes": 1,
+  "home_urls_probed": [],
+  "n_home_probes": 0,
+  "per_product_url": [
+   {
+    "url": "http://127.0.0.1:8898/synthetic/502/product-0.html",
+    "census": "synthetic_192_36",
+    "anchoring_all_categories_gt1": true,
+    "node_counts": {
+     "heading": 3,
+     "price": 3,
+     "add_to_cart": 3,
+     "main": 84,
+     "contentinfo": 5
+    },
+    "present": {
+     "heading": true,
+     "price": true,
+     "add_to_cart": true,
+     "main": true,
+     "contentinfo": true
+    },
+    "sha_stability_identical": true,
+    "sha_mutation_changed": true,
+    "ax_nodes": 218,
+    "dom_bytes": 7727
+   }
+  ],
+  "per_home_url": [],
+  "family_constructible": true,
+  "classification_rule": "frozen MV5: constructible requires >=1 product_page probe with heading/price/add-to-cart/main/contentinfo node_count>1 AND SHA stability both directions (identical on reload, changed on visible mutation)"
+ },
+ "fam503": {
+  "family": 503,
+  "product_urls_probed": [
+   "http://127.0.0.1:8898/synthetic/503/product-0.html"
+  ],
+  "n_product_probes": 1,
+  "home_urls_probed": [],
+  "n_home_probes": 0,
+  "per_product_url": [
+   {
+    "url": "http://127.0.0.1:8898/synthetic/503/product-0.html",
+    "census": "synthetic_192_36",
+    "anchoring_all_categories_gt1": true,
+    "node_counts": {
+     "heading": 3,
+     "price": 3,
+     "add_to_cart": 3,
+     "main": 84,
+     "contentinfo": 5
+    },
+    "present": {
+     "heading": true,
+     "price": true,
+     "add_to_cart": true,
+     "main": true,
+     "contentinfo": true
+    },
+    "sha_stability_identical": true,
+    "sha_mutation_changed": true,
+    "ax_nodes": 218,
+    "dom_bytes": 7727
+   }
+  ],
+  "per_home_url": [],
+  "family_constructible": true,
+  "classification_rule": "frozen MV5: constructible requires >=1 product_page probe with heading/price/add-to-cart/main/contentinfo node_count>1 AND SHA stability both directions (identical on reload, changed on visible mutation)"
+ },
+ "fam508": {
+  "family": 508,
+  "product_urls_probed": [
+   "http://127.0.0.1:8898/synthetic/508/product-0.html"
+  ],
+  "n_product_probes": 1,
+  "home_urls_probed": [],
+  "n_home_probes": 0,
+  "per_product_url": [
+   {
+    "url": "http://127.0.0.1:8898/synthetic/508/product-0.html",
+    "census": "synthetic_192_36",
+    "anchoring_all_categories_gt1": true,
+    "node_counts": {
+     "heading": 3,
+     "price": 3,
+     "add_to_cart": 3,
+     "main": 84,
+     "contentinfo": 5
+    },
+    "present": {
+     "heading": true,
+     "price": true,
+     "add_to_cart": true,
+     "main": true,
+     "contentinfo": true
+    },
+    "sha_stability_identical": true,
+    "sha_mutation_changed": true,
+    "ax_nodes": 218,
+    "dom_bytes": 7727
+   }
+  ],
+  "per_home_url": [],
+  "family_constructible": true,
+  "classification_rule": "frozen MV5: constructible requires >=1 product_page probe with heading/price/add-to-cart/main/contentinfo node_count>1 AND SHA stability both directions (identical on reload, changed on visible mutation)"
+ },
+ "fam514": {
+  "family": 514,
+  "product_urls_probed": [
+   "http://127.0.0.1:8898/synthetic/514/product-0.html"
+  ],
+  "n_product_probes": 1,
+  "home_urls_probed": [],
+  "n_home_probes": 0,
+  "per_product_url": [
+   {
+    "url": "http://127.0.0.1:8898/synthetic/514/product-0.html",
+    "census": "synthetic_192_36",
+    "anchoring_all_categories_gt1": true,
+    "node_counts": {
+     "heading": 3,
+     "price": 3,
+     "add_to_cart": 3,
+     "main": 84,
+     "contentinfo": 5
+    },
+    "present": {
+     "heading": true,
+     "price": true,
+     "add_to_cart": true,
+     "main": true,
+     "contentinfo": true
+    },
+    "sha_stability_identical": true,
+    "sha_mutation_changed": true,
+    "ax_nodes": 218,
+    "dom_bytes": 7727
+   }
+  ],
+  "per_home_url": [],
+  "family_constructible": true,
+  "classification_rule": "frozen MV5: constructible requires >=1 product_page probe with heading/price/add-to-cart/main/contentinfo node_count>1 AND SHA stability both directions (identical on reload, changed on visible mutation)"
+ },
+ "fam515": {
+  "family": 515,
+  "product_urls_probed": [
+   "http://127.0.0.1:8898/synthetic/515/product-0.html"
+  ],
+  "n_product_probes": 1,
+  "home_urls_probed": [],
+  "n_home_probes": 0,
+  "per_product_url": [
+   {
+    "url": "http://127.0.0.1:8898/synthetic/515/product-0.html",
+    "census": "synthetic_192_36",
+    "anchoring_all_categories_gt1": true,
+    "node_counts": {
+     "heading": 3,
+     "price": 3,
+     "add_to_cart": 3,
+     "main": 84,
+     "contentinfo": 5
+    },
+    "present": {
+     "heading": true,
+     "price": true,
+     "add_to_cart": true,
+     "main": true,
+     "contentinfo": true
+    },
+    "sha_stability_identical": true,
+    "sha_mutation_changed": true,
+    "ax_nodes": 218,
+    "dom_bytes": 7727
+   }
+  ],
+  "per_home_url": [],
+  "family_constructible": true,
+  "classification_rule": "frozen MV5: constructible requires >=1 product_page probe with heading/price/add-to-cart/main/contentinfo node_count>1 AND SHA stability both directions (identical on reload, changed on visible mutation)"
+ },
+ "fam520": {
+  "family": 520,
+  "product_urls_probed": [
+   "http://127.0.0.1:8898/synthetic/520/product-0.html"
+  ],
+  "n_product_probes": 1,
+  "home_urls_probed": [],
+  "n_home_probes": 0,
+  "per_product_url": [
+   {
+    "url": "http://127.0.0.1:8898/synthetic/520/product-0.html",
+    "census": "synthetic_192_36",
+    "anchoring_all_categories_gt1": true,
+    "node_counts": {
+     "heading": 3,
+     "price": 3,
+     "add_to_cart": 3,
+     "main": 84,
+     "contentinfo": 5
+    },
+    "present": {
+     "heading": true,
+     "price": true,
+     "add_to_cart": true,
+     "main": true,
+     "contentinfo": true
+    },
+    "sha_stability_identical": true,
+    "sha_mutation_changed": true,
+    "ax_nodes": 218,
+    "dom_bytes": 7727
+   }
+  ],
+  "per_home_url": [],
+  "family_constructible": true,
+  "classification_rule": "frozen MV5: constructible requires >=1 product_page probe with heading/price/add-to-cart/main/contentinfo node_count>1 AND SHA stability both directions (identical on reload, changed on visible mutation)"
+ },
+ "fam523": {
+  "family": 523,
+  "product_urls_probed": [
+   "http://127.0.0.1:8898/synthetic/523/product-0.html"
+  ],
+  "n_product_probes": 1,
+  "home_urls_probed": [],
+  "n_home_probes": 0,
+  "per_product_url": [
+   {
+    "url": "http://127.0.0.1:8898/synthetic/523/product-0.html",
+    "census": "synthetic_192_36",
+    "anchoring_all_categories_gt1": true,
+    "node_counts": {
+     "heading": 3,
+     "price": 3,
+     "add_to_cart": 3,
+     "main": 84,
+     "contentinfo": 5
+    },
+    "present": {
+     "heading": true,
+     "price": true,
+     "add_to_cart": true,
+     "main": true,
+     "contentinfo": true
+    },
+    "sha_stability_identical": true,
+    "sha_mutation_changed": true,
+    "ax_nodes": 218,
+    "dom_bytes": 7727
+   }
+  ],
+  "per_home_url": [],
+  "family_constructible": true,
+  "classification_rule": "frozen MV5: constructible requires >=1 product_page probe with heading/price/add-to-cart/main/contentinfo node_count>1 AND SHA stability both directions (identical on reload, changed on visible mutation)"
+ },
+ "fam526": {
+  "family": 526,
+  "product_urls_probed": [
+   "http://127.0.0.1:8898/synthetic/526/product-0.html"
+  ],
+  "n_product_probes": 1,
+  "home_urls_probed": [],
+  "n_home_probes": 0,
+  "per_product_url": [
+   {
+    "url": "http://127.0.0.1:8898/synthetic/526/product-0.html",
+    "census": "synthetic_192_36",
+    "anchoring_all_categories_gt1": true,
+    "node_counts": {
+     "heading": 3,
+     "price": 3,
+     "add_to_cart": 3,
+     "main": 84,
+     "contentinfo": 5
+    },
+    "present": {
+     "heading": true,
+     "price": true,
+     "add_to_cart": true,
+     "main": true,
+     "contentinfo": true
+    },
+    "sha_stability_identical": true,
+    "sha_mutation_changed": true,
+    "ax_nodes": 218,
+    "dom_bytes": 7727
+   }
+  ],
+  "per_home_url": [],
+  "family_constructible": true,
+  "classification_rule": "frozen MV5: constructible requires >=1 product_page probe with heading/price/add-to-cart/main/contentinfo node_count>1 AND SHA stability both directions (identical on reload, changed on visible mutation)"
+ },
+ "fam533": {
+  "family": 533,
+  "product_urls_probed": [
+   "http://127.0.0.1:8898/synthetic/533/product-0.html"
+  ],
+  "n_product_probes": 1,
+  "home_urls_probed": [],
+  "n_home_probes": 0,
+  "per_product_url": [
+   {
+    "url": "http://127.0.0.1:8898/synthetic/533/product-0.html",
+    "census": "synthetic_192_36",
+    "anchoring_all_categories_gt1": true,
+    "node_counts": {
+     "heading": 3,
+     "price": 3,
+     "add_to_cart": 3,
+     "main": 84,
+     "contentinfo": 5
+    },
+    "present": {
+     "heading": true,
+     "price": true,
+     "add_to_cart": true,
+     "main": true,
+     "contentinfo": true
+    },
+    "sha_stability_identical": true,
+    "sha_mutation_changed": true,
+    "ax_nodes": 218,
+    "dom_bytes": 7727
+   }
+  ],
+  "per_home_url": [],
+  "family_constructible": true,
+  "classification_rule": "frozen MV5: constructible requires >=1 product_page probe with heading/price/add-to-cart/main/contentinfo node_count>1 AND SHA stability both directions (identical on reload, changed on visible mutation)"
+ },
+ "fam535": {
+  "family": 535,
+  "product_urls_probed": [
+   "http://127.0.0.1:8898/synthetic/535/product-0.html"
+  ],
+  "n_product_probes": 1,
+  "home_urls_probed": [],
+  "n_home_probes": 0,
+  "per_product_url": [
+   {
+    "url": "http://127.0.0.1:8898/synthetic/535/product-0.html",
+    "census": "synthetic_192_36",
+    "anchoring_all_categories_gt1": true,
+    "node_counts": {
+     "heading": 3,
+     "price": 3,
+     "add_to_cart": 3,
+     "main": 84,
+     "contentinfo": 5
+    },
+    "present": {
+     "heading": true,
+     "price": true,
+     "add_to_cart": true,
+     "main": true,
+     "contentinfo": true
+    },
+    "sha_stability_identical": true,
+    "sha_mutation_changed": true,
+    "ax_nodes": 218,
+    "dom_bytes": 7727
+   }
+  ],
+  "per_home_url": [],
+  "family_constructible": true,
+  "classification_rule": "frozen MV5: constructible requires >=1 product_page probe with heading/price/add-to-cart/main/contentinfo node_count>1 AND SHA stability both directions (identical on reload, changed on visible mutation)"
+ }
+}

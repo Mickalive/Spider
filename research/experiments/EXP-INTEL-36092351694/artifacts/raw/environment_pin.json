@@ -1,0 +1,12 @@
+{
+ "experiment_id": "EXP-INTEL-36092351694",
+ "pip_freeze_sha256": "33a250f50791526fc7a8ca7fb2007dd4f6c4376346113565de3ec75150a52cf6",
+ "pip_freeze_lines": 263,
+ "pip_freeze_nonempty": true,
+ "playwright_version": "Version 1.63.0",
+ "viewport": "1280x720",
+ "browsergym_core": "0.14.3",
+ "agentlab": "0.4.2",
+ "playwright": "1.63.0",
+ "versions_match": true
+}

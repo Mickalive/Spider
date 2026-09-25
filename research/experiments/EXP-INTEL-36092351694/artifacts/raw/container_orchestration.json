@@ -1,0 +1,55 @@
+{
+ "experiment_id": "EXP-INTEL-36092351694",
+ "source": "SRC-DOCKER-CONTAINER-ORCH",
+ "expected_digest": "sha256:3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb",
+ "docker_pull_attempts": [
+  {
+   "cmd": "docker pull am1n3e/webarena-verified-shopping@sha256:3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb",
+   "timeout_configured_s": 1800,
+   "returncode": 0,
+   "stdout_tail": "docker.io/am1n3e/webarena-verified-shopping@sha256:3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb: Pulling from am1n3e/webarena-verified-shopping\nDigest: sha256:3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb\nStatus: Image is up to date for am1n3e/webarena-verified-shopping@sha256:3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb\ndocker.io/am1n3e/webarena-verified-shopping@sha256:3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb\n",
+   "stderr_tail": "",
+   "elapsed_s": 0.037,
+   "error": null
+  }
+ ],
+ "image_present": true,
+ "docker_images_digests": {
+  "cmd": "docker images --digests am1n3e/webarena-verified-shopping",
+  "timeout_configured_s": 120,
+  "returncode": 0,
+  "stdout_tail": "REPOSITORY                          TAG       DIGEST                                                                    IMAGE ID       CREATED        SIZE\nam1n3e/webarena-verified-shopping   <none>    sha256:3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb   a5b6fb47ee9f   7 months ago   13.3GB\n",
+  "stderr_tail": "",
+  "elapsed_s": 0.016,
+  "error": null
+ },
+ "poll_cycles": 0,
+ "docker_run_attempts": [
+  {
+   "cmd": "docker ps --filter name=... (idempotent skip)",
+   "note": "container already running",
+   "returncode": 0,
+   "error": null
+  }
+ ],
+ "container_health": {
+  "attempt_label": "localhost:7770 homepage",
+  "url": "http://localhost:7770/",
+  "timeout_configured_s": 300,
+  "hf_token_present": false,
+  "status": 200,
+  "bytes": 164391,
+  "sha256": "1b66f4948db31bc630db974548f19c4268cd0b4da608f6bfede246b671f68015",
+  "digest_header": null,
+  "elapsed_s": 0.042,
+  "error": null
+ },
+ "container_health_polls": [
+  {
+   "status": 200,
+   "error": null,
+   "elapsed_s": 0.042
+  }
+ ],
+ "container_health_ready": true
+}

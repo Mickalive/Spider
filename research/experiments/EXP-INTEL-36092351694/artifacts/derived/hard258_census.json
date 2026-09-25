@@ -1,0 +1,16 @@
+{
+ "experiment_id": "EXP-INTEL-36092351694",
+ "derived_from": "WebArena-Verified v2 812 SHA d652...",
+ "derivation": "random.Random(42).sample(base,258) deterministic",
+ "count": 258,
+ "site_histogram": {
+  "shopping": 61,
+  "shopping_admin": 62,
+  "map": 40,
+  "gitlab": 57,
+  "reddit": 37,
+  "wikipedia": 1
+ },
+ "manifest_sha256": "9b29bf58c5ac50e2b65b45912999ea3786ae6308cf2ac30cf727e9ef6eea1618",
+ "note": "Hard258 reproducibly derived from same base, histogram preserved, no additional network fetch"
+}
