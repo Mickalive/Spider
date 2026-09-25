@@ -4,7 +4,7 @@ Pre-2.0 canonical memory remains frozen at `archive/spider-codex-ultimate:SPIDER
 
 Canonical Research 2.0 evidence lives in `codex/experiments/<experiment_id>/`.
 Use `codex/index.json` and `codex/claim_state.json` to locate relevant packets; do not load all experiment bodies by default.
-Validated experiments: **365**. Coverage gaps: **0**. Quarantined packets: **2**.
+Validated experiments: **366**. Coverage gaps: **0**. Quarantined packets: **2**.
 
 ## Experiment index
 
@@ -374,6 +374,7 @@ Validated experiments: **365**. Coverage gaps: **0**. Quarantined packets: **2**
 | EXP-RUNTIME-36084499865 | runtime | MEASUREMENT_INVALID | MEASUREMENT_INVALID | C-MEAS-VALID | `cfd479c8d84c` |
 | EXP-INTEL-36084509510 | intel | REVISE | MIXED | C-CROSSSITE | `a088f9ffcd23` |
 | EXP-PRODUCT-36089498872 | product | MEASUREMENT_INVALID | MEASUREMENT_INVALID | C-LLM-INHERIT | `f53a5da1b7c2` |
+| EXP-RUNTIME-36089494979 | runtime | PASS | SUPPORTS — Stable-header single-node real-cache honesty gate restored. All mandatory validity gates and primary C1-C5 pass with independent audit PASS (scoped uuid-absence, exclusive nginx -c single hash, real proxy_cache ENABLED, honest trajectory-block integer sums, greedy MAX_DEPTH5). Bounded single-node EXPERIMENTAL ceiling; distributed remains UNKNOWN. Not VALIDATED/PRODUCT_CORE. | C-MEAS-VALID | `575ce3f98dc3` |
 | EXP-FRONTIER-36089506922 | frontier | PASS | MEASUREMENT_INVALID | C-RESIDUAL-NOVELTY | `3e0eb4f6240d` |
 
 ## Latest recorded claim events
@@ -386,7 +387,7 @@ These are chronological latest events, not an automatic truth ranking.
 | C-DELTA-REPAIR | MEASUREMENT_INVALID | EXP-GRAPH-35999336958 | graph |
 | C-FRESHNESS | HYPOTHESIS | EXP-PRODUCT-35949571341 | product |
 | C-LLM-INHERIT | MEASUREMENT_INVALID | EXP-PRODUCT-36089498872 | product |
-| C-MEAS-VALID | MEASUREMENT_INVALID | EXP-RUNTIME-36084499865 | runtime |
+| C-MEAS-VALID | EXPERIMENTAL | EXP-RUNTIME-36089494979 | runtime |
 | C-PARAM-INHERIT | MEASUREMENT_INVALID | EXP-GRAPH-35932480731 | graph |
 | C-PRODUCT-ECON | HYPOTHESIS | EXP-PRODUCT-36046064994 | product |
 | C-RESIDUAL-NOVELTY | HYPOTHESIS | EXP-FRONTIER-36089506922 | frontier |
