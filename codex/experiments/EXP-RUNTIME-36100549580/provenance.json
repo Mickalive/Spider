@@ -1,0 +1,133 @@
+{
+  "experiment_id": "EXP-RUNTIME-36100549580",
+  "github_run_id": "36094450333",
+  "claim_id": "C-MEAS-VALID",
+  "lane": "runtime",
+  "base_sha": "1500a8eb06f84ee77f2305f397dc8513b9c472e9",
+  "request_hash": "9256c3e49b999040a6ca6d64a03237dc04f1addd4f4d330f16c2242bd269dceb",
+  "spec_hash": "d846642b2a6aeb6b0c74ccf70fb265dc1b5733d2ff10a84465f7986828fb1fff",
+  "prereg_hash": "7912c9b5a0bafdddc3de692d52c5f2cdaa24fa1b6e5d321173386c53de683a38",
+  "env": {
+    "python": "3.12.14 (main, Aug 13 2026, 02:47:42) [GCC 13.3.0]",
+    "flask": "3.1.3",
+    "pyjwt": "2.14.0",
+    "gunicorn": "23.0.0",
+    "nginx": "1.24.0",
+    "requests": "2.34.2",
+    "sqlite3": "3.45.1",
+    "brotli": "available",
+    "gzip": "available",
+    "scipy": "1.18.1"
+  },
+  "ports": {
+    "flask_19860": 19860,
+    "flask_19861": 19861,
+    "nginx": 19851
+  },
+  "seed": 44,
+  "db_path": "/tmp/single.db",
+  "hs256_secret_sha256": "2b23d7955be7a23ca497d66d0890cb4a3ff4400909f545012db667af8267f78d",
+  "hs256_secret_len": 82,
+  "n_observations": 1760,
+  "batch_state_log": [
+    {
+      "batch": 0,
+      "count": 1,
+      "timestamp": 1790316274.4063196
+    },
+    {
+      "batch": 1,
+      "count": 1,
+      "timestamp": 1790316274.8490086
+    },
+    {
+      "batch": 2,
+      "count": 1,
+      "timestamp": 1790316275.3169973
+    },
+    {
+      "batch": 3,
+      "count": 1,
+      "timestamp": 1790316275.7644715
+    },
+    {
+      "batch": 4,
+      "count": 1,
+      "timestamp": 1790316276.25085
+    }
+  ],
+  "batch_state_log_len": 23,
+  "factory_pattern_wsgi": true,
+  "flask_listening_verified": true,
+  "health_gate_verified": true,
+  "scoped_uuid_check": {
+    "naive_uuid_count": 93,
+    "scoped_uuid_count": 0,
+    "scoped_block_lines": 154,
+    "ast_uuid_refs": [],
+    "import_uuid_absent": true,
+    "hmac_present": true,
+    "scoped_check_pass": true
+  },
+  "wsgi_sys_path_insert": true,
+  "jwt_decode_at_origin": true,
+  "distributed_2x_gunicorn_shared_wal": true,
+  "upstream_servers": [
+    "127.0.0.1:19860",
+    "127.0.0.1:19861"
+  ],
+  "upstream_2_servers_verified": true,
+  "x_worker_pid_distinct_ge_2": true,
+  "x_worker_pid_distinct_observed": [
+    "58540, 58540",
+    "58541, 58541"
+  ],
+  "request_uri_stickiness_ge_090": true,
+  "request_uri_stickiness_per_uri": {
+    "/api/profile": 1.0,
+    "/api/data_list": 1.0
+  },
+  "shared_db_wal_single": true,
+  "per_batch_select_distinct_ts_ge_10": true,
+  "single_nginx_location": true,
+  "nginx_proxy_pass_no_trailing_slash": true,
+  "nginx_add_header_x_worker_pid_always": true,
+  "nginx_request_uri_sticky": true,
+  "health_gate_attempts": 30,
+  "exclusive_nginx_c": true,
+  "single_hash_request_uri": true,
+  "no_load_balancing_method_redefined": true,
+  "proxy_cache_enabled": true,
+  "proxy_temp_path": "/tmp/single.db.temp",
+  "proxy_no_cache_authorization": true,
+  "proxy_cache_bypass_authorization": true,
+  "cache_dir": "/tmp/single.db.cache",
+  "cache_dir_ls": "total 12\ndrwxr-xr-x  3 www-data www-data 4096 Sep 25 06:04 .\ndrwxrwxrwt 17 root     root     4096 Sep 25 06:05 ..\ndrwx------  3 www-data www-data 4096 Sep 25 06:04 2\n",
+  "cache_dir_exists": true,
+  "nginx_user": "www-data",
+  "use_sudo_nginx": true,
+  "stable_header_generation": true,
+  "uuid_absence_grep_scoped": true,
+  "natural_auth_state_headers": true,
+  "synthetic_header_mutation": false,
+  "freeze_hashes": {
+    "request.json": "9256c3e49b999040a6ca6d64a03237dc04f1addd4f4d330f16c2242bd269dceb",
+    "spec.json": "d846642b2a6aeb6b0c74ccf70fb265dc1b5733d2ff10a84465f7986828fb1fff",
+    "prereg.md": "7912c9b5a0bafdddc3de692d52c5f2cdaa24fa1b6e5d321173386c53de683a38"
+  },
+  "scope": "DISTRIBUTED primary: 2x gunicorn 23.0.0 workers binding 127.0.0.1:19860 AND 127.0.0.1:19861 sharing single SQLite WAL at /tmp/single.db (check_same_thread=False factory def create_app() + wsgi Path(__file__).parent) fronted by exclusive nginx 1.24.0:19851 -c single hash $request_uri consistent sticky upstream 2 servers with real proxy_cache ENABLED at /tmp/single.db.cache; STABLE auth-state headers (HMAC deterministic per auth_state, NO uuid4 per response, scoped uuid-absence check excluding docstrings/comments); X-Worker-Pid distinct >=2 and $request_uri stickiness >=0.90 validated; plain HTTP localhost only \u2014 TLS/HTTP2/multi-host/BrowserGym NOT tested",
+  "created_at": "2026-09-25T06:05:23.765479+00:00",
+  "run_experiment_sha256": "a2210df391146099bf773da54dcfc009511f21062b5809ee848ea873f6d84c76",
+  "wsgi_sha256": "87fe017a99b42c2d64f581465a14eeb8d16b03fa7625052c6b5f5d75bdc6f261",
+  "nginx_conf_sha256": "a83f0103318a5e32986f6ae76d9f9a82817d2028980798fed0d055d1b8b28acc",
+  "raw_freshness_sha256": "042a0ef7d2eea469a496b42c4709b907bee9f10970c18d57d822d60fa047e0d8",
+  "raw_hit_sha256": "5357f31bbaa82e204555f1d8853e048ce8901f768e111c8006216d8a8b8f2a1b",
+  "raw_trajectory_costs_sha256": "c67b0797a98bb64f6f6a13f134ddcbfeaa042f4dcf10446268ee63cb2ff4c806",
+  "batch_state_log_sha256": "5e05fb6c6bb27c9f1cc56c794f080ffcff86f98f6f76bc739e289069dcd88899",
+  "db_sha256": "a1dae618908bd330265c60818cd61b1fb2364932d96ae36e9ff67a289177f8c0",
+  "health_gate_log_sha256": "a4980b6f29e3a3184d43886029547803f7763c05b28cf0d52804c8adfce5fb92",
+  "cache_file_count_sudo": 1,
+  "cache_file_entries": [
+    "/tmp/single.db.cache/2/05/febd9bd9f76478774376fc8d7baa5052"
+  ]
+}
