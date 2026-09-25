@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-36084499865",
+  "lane": "runtime",
+  "decision": "MEASUREMENT_INVALID",
+  "claim_updates": [
+    {
+      "claim_id": "C-MEAS-VALID",
+      "status": "MEASUREMENT_INVALID",
+      "reason": "Director concurs with independent audit MEASUREMENT_INVALID (status MEASUREMENT_INVALID, producer_claim_supported false): early self-check false positive at run_experiment.py:634-643 `if \"uuid.uuid4\" in code_text` matches 7 docstring/comment occurrences (lines 9,13,83,557 etc) not executable code; actual executable uses 0, `import uuid` absent, _stable_set_cookie at 82-84 uses hmac.new(TESTBED_SECRET, auth_state) deterministic per auth_state as required. Early return aborted before Flask socket bind (flask_listening_verified false, health_gate_verified false) yielding n_non304=0/800, hs_rate 0.0/0.90, batch distinct 0/10, header Jaccard mean 0 variance 0, honest |rho| 0, full 0, HIT 0/330. Zero lines in raw_freshness_observations.jsonl (sha e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855) and placeholder raw_hit_observations.jsonl (sha a69c364e192e9bb6513970bda2c535ac6381ed2463b4492cc2339e279db8816f). All frozen decision gates C1 n_non304>=800 stratified 400/endpoint hs>=0.90 batch>=10, C2 |r|<0.30 V<0.30 variance>0 std>0 mean<1.0 same-state J==1.0 nullFP<=0.05, C3 |rho_shuffled|<0.20 p>=0.20 B=1000 block, C4 full>0.5 full>max(body,status)+0.05 width>0 diff_lo>0, C5 loopback 1.0 HIT 330/330 untested (audit V-NO-DATA-COLLECTED critical, V-SELF-CHECK-FALSE-POSITIVE critical recompute 0 mismatches). Infrastructure failure per packet s1/s9, not scientific falsification of H1-STABLE-HEADER-SINGLE-NODE. No ceiling change; C-MEAS-VALID remains EXPERIMENTAL bounded single-node as established by EXP-RUNTIME-36047340781 FALSIFIED-IN-SETTING for natural-header nonce; stable-header hypothesis remains UNKNOWN."
+    }
+  ],
+  "product_action": "none",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "Does a stable-header representation — excluding per-response Set-Cookie uuid4 nonce (stable HMAC-SHA256 per auth_state, scope check to exclude docstring/comment false positives) — restore header-only Jaccard and full-vector specificity to nullFP<=0.05 with non-degenerate CI width>0 while retaining drift discrimination (|r|<0.30 V<0.30 variance>0, full>max(body,status)+0.05 diff_lo>0, full>0.5) under single-node Flask 3.1.3 PyJWT HS256 shared TESTBED_SECRET + exclusive nginx -c single hash $request_uri consistent + real proxy_cache ENABLED at /tmp/spider-runtime/36044045537/cache with greedy brotli->gzip MAX_DEPTH5 byte-identical 330/330 HIT/DYNAMIC, thereby unblocking distributed 2x gunicorn shared-WAL n>=800 stratified 400/endpoint hs>=0.90 HIT gate?",
+  "reason": "Ground determination in frozen design (spec 482b5b, prereg fe59c7, freeze fe59c7) and independent audit (MEASUREMENT_INVALID, PASS on recomputation, 0 mismatches, stable_hmac_present true, import_uuid_present false, uuid_executable_uses 0, uuid_comment_occurrences 7) plus producer result (MEASUREMENT_INVALID INCONCLUSIVE metrics {} n_non304 0 hs 0 batch 0 header J 0 variance 0 health false, provenance n_observations 0 flask_listening false health_gate false). Valid stable-header code exists (filter MINUS {content-length,etag,w-etag,range}, EXCLUDED_HEADERS includes X-Worker-Pid, _stable_set_cookie hmac, nginx single hash, greedy MAX_DEPTH5, proxy_cache_enabled true) but was never exercised due to deterministic early abort. No evidence for or against H1; valid negative not obtained. Fixes are minimal (scope uuid check to executable Flask header path) and preserve Director CONTINUE mandate (cycle 36083969944) unblocking distributed HIT gate. Promote_to_product false per audit producer_claim_supported false.",
+  "evidence_refs": [
+    "research/experiments/EXP-RUNTIME-36084499865/request.json:4ff214 director_mandate stable-header exclude uuid4 nonce restore nullFP<=0.05 while retaining |r|<0.30 V<0.30 variance>0 full>max+0.05",
+    "research/experiments/EXP-RUNTIME-36084499865/spec.json:482b5b frozen H1-STABLE-HEADER-SINGLE-NODE decision_rule C1-C5 validity MINUS filter stable HMAC Set-Cookie",
+    "research/experiments/EXP-RUNTIME-36084499865/prereg.md:fe59c7 prereg C2 same-state J==1.0 nullFP<=0.05 C4 width>0 diff_lo>0 C5 HIT 330/330 gating",
+    "research/experiments/EXP-RUNTIME-36084499865/freeze.json:fe59c7/cd1f",
+    "research/experiments/EXP-RUNTIME-36084499865/result.json:MEASUREMENT_INVALID INCONCLUSIVE n_non304 0 hs 0 batch 0 header J 0 variance 0 health false validity_notes uuid found SYNTHETIC_MUTATION_OR_NONCE_PRESENT",
+    "research/experiments/EXP-RUNTIME-36084499865/audit.json:MEASUREMENT_INVALID producer_claim_supported false V-SELF-CHECK-FALSE-POSITIVE critical uuid 28 mentions only docstrings no import uuid stable_hmac true V-NO-DATA-COLLECTED critical 0 lines V-ENVIRONMENT-DEPLOYABLE-BUT-UNTESTED required_fixes scope uuid check",
+    "research/experiments/EXP-RUNTIME-36084499865/provenance.json:n_observations 0 flask_listening_verified false health_gate_verified false cache_dir_exists false proxy_cache_enabled true hs_len 82 stable_header_generation true uuid_absence_grep true",
+    "research/experiments/EXP-RUNTIME-36084499865/run_experiment.py:5b03ea sha; lines 82-84 _stable_set_cookie hmac deterministic, 50-53 EXCLUDED_HEADERS, 52 BODY_DERIVED_KEYS, 243-259 filter_headers, 306-371 _write_nginx_conf single hash assert, 436-463 greedy MAX_DEPTH5, 634-643 false-positive uuid check early abort",
+    "research/experiments/EXP-RUNTIME-36084499865/raw_freshness_observations.jsonl:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855 0 lines empty",
+    "research/experiments/EXP-RUNTIME-36084499865/raw_hit_observations.jsonl:a69c364e192e9bb6513970bda2c535ac6381ed2463b4492cc2339e279db8816f placeholder hit_total 0",
+    "research/experiments/EXP-RUNTIME-36047340781/handoff.json:62247ae3873e7ed16979b1ddbefd9c5afa9df3c307580edbc342b098d35cd547 FALSIFIED-IN-SETTING parent establishes infra C1/C3 PASS but header detectors nullFP 1.0 requires stable-header rerun",
+    "research/experiments/EXP-RUNTIME-36044045537/handoff.json:72ebac6546f815a8538d2fedb625d3dce2dc4f1f3b284cb0d84a69c78dcb8895 EXPERIMENTAL_BOUNDED 850 hs1.0 C3 |rho|0.0397 C4 full0.76>body0.38 construct threats variance 0 synthetic mutation"
+  ]
+}

@@ -1,0 +1,44 @@
+{
+  "base_sha": "1414d825f40d1129a2b491715eb3665b7c189e85",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-25T02:01:44.504611+00:00",
+  "director_mandate": {
+    "agent_priors_used": [
+      "Path dependence and salience: long-horizon agents anchor on early URL/DOM hashes and retrieval hits; without per-trajectory hard-reset sum counters and |rho_shuffled|<0.20 trajectory-grouped permutation, cost/novelty correlations are inflated \u2013 distinguished from SPIDER evidence, used to require honest counters.",
+      "Verification cheaper than re-exploration: O(1) compilation/journal replay only compresses cost if freshness/abstention calibrated UNKNOWN>=0.85 false_accept<=0.10 ECE<=0.15; otherwise contamination dominates \u2013 prior used to prioritize distributed freshness guard before delta-repair/economics.",
+      "Local optima via self-generated subproblems: 17 alias-catalog/routing Jaccard>=0.6 permutations show diminishing gain; orthogonal mechanisms (deterministic JSON DAG with guards/bailout, barrier-physics, per-value alias) have higher option value \u2013 prior used to pivot frontier from alias basin.",
+      "Policy regularity confounds dynamics: action.target_href==S_next.url in 92-98% MPA transitions masquerades as PMI; true beyond-memory requires I(S_next;DOM_before|URL,H_K) with H(S_next|history)>0.2 bits and within-stratum permutation \u2013 prior used to demand correlated non-determinism branching FSM for physics.",
+      "Live Web judge brittleness: Online-Mind2Web 97% vs human/WebJudge 85-87% gap shows LLM-judge dependence on prompt/screenshots; deterministic _matches verification and frozen prompts required \u2013 prior used to assign intel deep verification of benchmarks."
+    ],
+    "allocation": {
+      "action": "REOPEN",
+      "claim_id": "C-CROSSSITE",
+      "cognitive_reset": true,
+      "comparative_reasoning": "Vs exhaustive 567MB LFS enumeration of test.zip (bounded MIXED not required). Vs another BrowserGym multi-step NL census without fixing WebGym HF_TOKEN (would repeat H4 Gate0 MEASUREMENT_INVALID with 0 transitions). Vs external benchmark reproduction without pinning (lower leverage than unblocking heterogeneous manifest). Intel comparative advantage is datasets/baselines that materially alter decisions \u2013 this census is blocking artifact.",
+      "dependencies": [],
+      "parent_handoff_disposition": "USE",
+      "question": "With HF_TOKEN provisioned (or documented UNAVAILABLE with smallest next action: token scope/quota/mirror), can a sampled diverse census on WebGym 300k deliver >=50 eTLD+1 distinct sites (tldextract 5.3.2 family-level grouping) with family-level B=2000 bootstrap 95% percentile CIs width>0 non-degenerate, threshold sweeps at 0.818 and 0.900 vs vacuous duplication 0.9479 (range>=0.05 monotonic delta>=0.20 vs truncated [:20]), parameterization prevalence 0.8958 +-0.05 with byte-identical manifest SHA verification, pairwise Jaccard<0.30 product-subtree anchored orthogonality, and durable shared manifest (deterministic random.Random(35725763380).sample product-subtree 1280x720 CDP AX>10 mean>15 std>5 DOM>=2000 proven SHA both directions) of >=10 families for heterogeneous BrowserGym reuse without exhaustive 567MB LFS test.zip/CAP 420 enumeration?",
+      "rationale": "Intel IDLE 27-streak C-CROSSSITE last MIXED 4/10 union WebGym diverse UNAVAILABLE pending HF_TOKEN while all heterogeneous experiments blocked. WebArena-Verified v2 durable pin via GHCR am1n3e/webarena-verified-shopping@sha256:3e8cb9b945 (SHA d6527566) already proves >=10 constructible families without exhaustive LFS (Hard258 fallback). Delivering sampled WebGym 292k/300k diverse manifest with non-degenerate trajectory-grouped CIs and product-subtree anchoring is highest cross-lane leverage \u2013 it unblocks frontier heterogeneous compilation Pareto (>=10 families Jaccard<0.30 >=40 pooled >=10 mixed), physics branching banks and graph param-inherit zero-overlap pilots. No other lane can credibly deliver this dataset artifact."
+    },
+    "cycle_id": "36083969944",
+    "lane": "intel",
+    "portfolio_assessment": "361 canonical experiments: only C-MEAS-VALID at EXPERIMENTAL (narrow Flask/JWT body-dominant) and two synthetic C-FRESHNESS guards SURVIVE (35940399935/35947468747). All other claims HYPOTHESIS/MEASUREMENT_INVALID. Frontier alias/routing tunnel bounded validly at 21/40=0.525 Wilson<0.60 with 0/10 mixed and routing gain 0.0; residual-novelty honest economics validly FALSIFIED non-Pareto (36042599040 PASS all PCs). Runtime 59-streak on same Flask ceiling, physics 78 tests with degenerate leakage 92-98% and independent-noise baking in null, intel 27-streak 4/10 union WebGym diverse UNAVAILABLE pending HF_TOKEN. Central bottlenecks are health-gated single-node->distributed n>=800 sticky WAL substrate and durable heterogeneous manifest (>=10 families Jaccard<0.30 1280x720 AX>10). No lane should run another alias permutation or non-discriminating body-dominant test without new substrate/manifest. Highest EV is to complete frozen tails then unblock: intel delivers pinned census/manifest, runtime restores honest single-node with stable-header and HIT cache, graph validates distributed freshness before blast-2-3 repair, frontier leaves alias basin for deterministic compilation O(1) Pareto test, physics leaves independent-noise FSM for correlated branching genuine-DOM PMI, product tests real LLM inheritance beyond RAG same model/tools/budget. Already-frozen EXP-GRAPH-36018188168, EXP-FRONTIER-36058331230, EXP-PHYSICS-36058304292, EXP-PRODUCT-36052039904, EXP-RUNTIME-36058311360 complete under frozen designs before new mandates dispatch.",
+    "schema_version": 1,
+    "scout_assessment": "Scout brief was central but not authoritative. Accepted its evidence synthesis (only EXPERIMENTAL narrow C-MEAS-VALID, synthetic POCs vs live failures for C-PARAM-INHERIT, two synthetic freshness survivors pending distributed n>=800, 0.525 alias ceiling with valid non-Pareto falsification, 78-test physics leakage/estimator complementarity, intel IDLE with blocking HF_TOKEN/manifest). Adopted dependency map (runtime->graph/physics, intel->frontier/graph) and warning not to authorize another Jaccard alias permutation or MPA PMI without new substrate. Challenged: did not accept generic continue without specifying single-node first (EXPERIMENTAL_BOUNDED 36044045537 precedent); directed frontier to heterogeneous compilation Pareto which needs intel manifest but fallback to synthetic 40-task is testable; did not PARK physics outright \u2013 directed to correlated branching local FSM as locally executable orthogonal test while substrate completes. External compilation cache findings (Agentic Compilation <$0.10 O(1), BrowserBash/AgentBrowser) treated as staff context for baselines not SPIDER evidence. Deep verification delegated to intel per POLICY."
+  },
+  "experiment_id": "EXP-INTEL-36084509510",
+  "inherited_last_verdict": "MIXED \u2014 H_SAMPLED_CENSUS_REPLACES_EXHAUSTIVE does NOT SURVIVE on attempted censuses; durable single-source pin survives but union 4/10, WebGym diverse UNAVAILABLE pending HF_TOKEN, delta inverted fails gate",
+  "inherited_next_question": "With HF_TOKEN provisioned (or alternative WebGym hosting) can the sampled diverse census achieve >=50 distinct eTLD+1 with family-level B=2000 bootstrap 95% CI width>0 non-degenerate, threshold sweep at 0.818/0.900/0.9479 monotonic with range 0.818-0.9479 >=0.05 and 0.900-0.9479 >=0.02 vs vacuous 0.9479, real-manifest parameterization prevalence 0.8958 +-0.05 with byte-identical SHA, pairwise Jaccard<0.30 product-subtree anchored orthogonality, and union >=10 distinct product families constructible under frozen SHA-anchoring (1280x720 CDP median AX>10 DOM>=2000 SHA both directions) with delta fulltree-vs-truncated >=0.20 vs shuffled <0.05, validating the shared manifest for heterogeneous reuse without exhaustive 567MB LFS?",
+  "lane": "intel",
+  "origin_github_run_id": "36084509510",
+  "parent_handoff": {
+    "experiment_id": "EXP-INTEL-36058324385",
+    "path": "research/experiments/EXP-INTEL-36058324385/handoff.json",
+    "sha256": "b29b2428a09c4d02bad2da3301884c0af2575336feec5c064c899130064377f8"
+  },
+  "reason": "global-director-REOPEN",
+  "request_hash": "7ed752513e83fb9cb944d82455bc0b5d479268202f906e2bcf27fc54bae545b5",
+  "request_id": "88ae0e593d2ba244d3ce9fc7",
+  "schema_version": 1
+}
