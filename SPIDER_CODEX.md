@@ -4,7 +4,7 @@ Pre-2.0 canonical memory remains frozen at `archive/spider-codex-ultimate:SPIDER
 
 Canonical Research 2.0 evidence lives in `codex/experiments/<experiment_id>/`.
 Use `codex/index.json` and `codex/claim_state.json` to locate relevant packets; do not load all experiment bodies by default.
-Validated experiments: **381**. Coverage gaps: **0**. Quarantined packets: **2**.
+Validated experiments: **382**. Coverage gaps: **0**. Quarantined packets: **2**.
 
 ## Experiment index
 
@@ -391,6 +391,7 @@ Validated experiments: **381**. Coverage gaps: **0**. Quarantined packets: **2**
 | EXP-FRONTIER-36100559236 | frontier | PASS | MEASUREMENT_INVALID | C-RESIDUAL-NOVELTY | `4eb8baef16a0` |
 | EXP-RUNTIME-36103366713 | runtime | MEASUREMENT_INVALID | MEASUREMENT_INVALID — BrowserGym CDP 1280x720 DOM/AX + writable-controls matrix extension not validated due to Playwright provisioning failure and synthetic fallback; distributed plain HTTP triple at /tmp/single.db replicates DISTRIBUTED VALIDATED | C-MEAS-VALID | `7c19fff4d070` |
 | EXP-FRONTIER-36103384192 | frontier | PASS | MEASUREMENT_INVALID | C-RESIDUAL-NOVELTY | `9b29ecc23917` |
+| EXP-GRAPH-36106653880 | graph | MEASUREMENT_INVALID | MEASUREMENT_INVALID | C-DELTA-REPAIR | `a61f742df0d6` |
 
 ## Latest recorded claim events
 
@@ -399,7 +400,7 @@ These are chronological latest events, not an automatic truth ranking.
 | Claim | Status | Experiment | Lane |
 |---|---|---|---|
 | C-CROSSSITE | HYPOTHESIS | EXP-INTEL-36095582115 | intel |
-| C-DELTA-REPAIR | EXPERIMENTAL | EXP-GRAPH-36018188168 | graph |
+| C-DELTA-REPAIR | MEASUREMENT_INVALID | EXP-GRAPH-36106653880 | graph |
 | C-FRESHNESS | HYPOTHESIS | EXP-PRODUCT-35949571341 | product |
 | C-LLM-INHERIT | MEASUREMENT_INVALID | EXP-PRODUCT-36091881382 | product |
 | C-MEAS-VALID | MEASUREMENT_INVALID | EXP-RUNTIME-36103366713 | runtime |
