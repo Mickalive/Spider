@@ -4,7 +4,7 @@ Pre-2.0 canonical memory remains frozen at `archive/spider-codex-ultimate:SPIDER
 
 Canonical Research 2.0 evidence lives in `codex/experiments/<experiment_id>/`.
 Use `codex/index.json` and `codex/claim_state.json` to locate relevant packets; do not load all experiment bodies by default.
-Validated experiments: **376**. Coverage gaps: **0**. Quarantined packets: **2**.
+Validated experiments: **377**. Coverage gaps: **0**. Quarantined packets: **2**.
 
 ## Experiment index
 
@@ -385,6 +385,7 @@ Validated experiments: **376**. Coverage gaps: **0**. Quarantined packets: **2**
 | EXP-FRONTIER-36095585747 | frontier | PASS | MEASUREMENT_INVALID | C-RESIDUAL-NOVELTY | `33d32aac3872` |
 | EXP-FRONTIER-36097242687 | frontier | PASS | MEASUREMENT_INVALID | C-RESIDUAL-NOVELTY | `7415f8196489` |
 | EXP-FRONTIER-36099072254 | frontier | PASS | MEASUREMENT_INVALID | C-RESIDUAL-NOVELTY | `b99164df382a` |
+| EXP-RUNTIME-36100549580 | runtime | PASS | SUPPORTS — DISTRIBUTED VALIDATED canonical shared-WAL real-cache gate (C-MEAS-VALID) on plain HTTP localhost | C-MEAS-VALID | `6dd3ce57cf07` |
 | EXP-FRONTIER-36100559236 | frontier | PASS | MEASUREMENT_INVALID | C-RESIDUAL-NOVELTY | `4eb8baef16a0` |
 
 ## Latest recorded claim events
@@ -397,7 +398,7 @@ These are chronological latest events, not an automatic truth ranking.
 | C-DELTA-REPAIR | MEASUREMENT_INVALID | EXP-GRAPH-35999336958 | graph |
 | C-FRESHNESS | HYPOTHESIS | EXP-PRODUCT-35949571341 | product |
 | C-LLM-INHERIT | MEASUREMENT_INVALID | EXP-PRODUCT-36091881382 | product |
-| C-MEAS-VALID | VALIDATED | EXP-RUNTIME-36094450333 | runtime |
+| C-MEAS-VALID | VALIDATED | EXP-RUNTIME-36100549580 | runtime |
 | C-PARAM-INHERIT | MEASUREMENT_INVALID | EXP-GRAPH-35932480731 | graph |
 | C-PRODUCT-ECON | HYPOTHESIS | EXP-PRODUCT-36046064994 | product |
 | C-RESIDUAL-NOVELTY | HYPOTHESIS | EXP-FRONTIER-36100559236 | frontier |
