@@ -1,0 +1,176 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-36132150213",
+  "lane": "graph",
+  "status": "MEASUREMENT_INVALID",
+  "outcome": "NOT_APPLICABLE",
+  "github_run_id": "36132150213",
+  "github_run_attempt": "1",
+  "timestamp": "2026-09-25T12:34:59+00:00",
+  "execution_mode": "EXECUTE",
+  "measurement_status": "NO_OUTCOME_MEASUREMENT",
+  "git": {
+    "base_sha": "f805b140c52e9a5dc6ea3dff0d3206d71ee7c8c1",
+    "head_sha_observed": "1e3aad3a99da65d69e37fac6341ce2370ba86a67",
+    "pre_execute_sha": "9211a4c781b43593e0fa2b5a06d7158e021d242f",
+    "branch": null,
+    "status_observed_before_outputs": [
+      " M SPIDER_CODEX.md",
+      " M codex/claim_state.json",
+      " M codex/index.json",
+      "?? codex/experiments/EXP-FRONTIER-36129180789/",
+      "?? research/experiments/EXP-GRAPH-36132150213/model_execute.json"
+    ],
+    "target_output_status_observed_after_write": [
+      "?? research/experiments/EXP-GRAPH-36132150213/model_execute.json",
+      "?? research/experiments/EXP-GRAPH-36132150213/raw_evidence/",
+      "?? research/experiments/EXP-GRAPH-36132150213/report.md",
+      "?? research/experiments/EXP-GRAPH-36132150213/result.json",
+      "?? research/experiments/EXP-GRAPH-36132150213/provenance.json",
+      "?? research/experiments/EXP-GRAPH-36132150213/failure.json"
+    ],
+    "unrelated_changes_edited": false,
+    "note": "The pre-existing Codex and SPIDER_CODEX modifications were observed before this stage and were not changed."
+  },
+  "frozen_inputs": {
+    "freeze_manifest": "research/experiments/EXP-GRAPH-36132150213/freeze.json",
+    "verified": true,
+    "hashes": {
+      "request.json": "c3f698891f43bcb43a97c8cdd989dcef7d3ae69103778485e73263e92e8c5913",
+      "spec.json": "4e406c0b524075f55bac2554b739048f58ce1ac80060c911113ffdccf3759fe9",
+      "prereg.md": "1c56eb558605bf36b1a3e3f2f193b811ef17ad7cbfde1328df175bf60618fccf",
+      "freeze.json": "b0a151030023838c061673403bb168b1685661bd8f52045da0867dbd6f051ce7"
+    },
+    "immutable_inputs_modified": false
+  },
+  "preflight": {
+    "path": "research/experiments/EXP-GRAPH-36132150213/raw_evidence/preflight.json",
+    "sha256": "f4c75b7c143ecdaf8371c531cd2dffb0e74a64372f95ed063d0a8a009122d20b",
+    "kind": "read_only_preflight",
+    "outcome_measurement_attempted": false,
+    "expected_runtime_experiment": "EXP-RUNTIME-36129163700",
+    "capability_ledger_found": false,
+    "one_command_bringup_contract_found": false,
+    "substrate_started": null,
+    "health_gate_pass": null,
+    "n_non304": null,
+    "n_distinct_workers": null,
+    "browser_certified": false,
+    "blocking_reason": "The mandatory Runtime capability ledger and one-command 4-worker distributed-substrate contract are unavailable; no certified bring-up command exists to invoke."
+  },
+  "environment": {
+    "python": "3.12.14 (main, Aug 13 2026, 02:47:42) [GCC 13.3.0]",
+    "platform": "linux",
+    "sqlite3": "3.45.1",
+    "flask": "3.1.3",
+    "pyjwt": "2.15.0",
+    "gunicorn": "23.0.0",
+    "nginx": "1.24.0",
+    "chromium_executable": "/usr/bin/chromium",
+    "chromium_version": "153.0.8010.0",
+    "browser_launch_certified": false,
+    "binary_presence_is_not_capability_certification": true
+  },
+  "datasets_fixtures": {
+    "used": false,
+    "paths": [],
+    "reason": "The outcome-bearing workload was not started because the mandatory Runtime contract was absent. No synthetic alias fixture, prior Graph measurement, or proxy cost fixture was substituted."
+  },
+  "code_paths": {
+    "new_experiment_code": [],
+    "modified_code": [],
+    "frozen_reproduction_paths_declared_by_prereg": [
+      "research/graph/delta_repair/flask_app_distributed_36106653880.py",
+      "research/graph/delta_repair/nginx_distributed.conf",
+      "src/spider/kernel.py"
+    ],
+    "note": "The declared reproduction paths were not run or modified in this blocked preflight."
+  },
+  "seeds": {
+    "trajectory_seed": null,
+    "bootstrap_seed": null,
+    "permutation_seed": null,
+    "reason": "No statistical measurement was run."
+  },
+  "commands": [
+    "sha256sum research/experiments/EXP-GRAPH-36132150213/request.json research/experiments/EXP-GRAPH-36132150213/spec.json research/experiments/EXP-GRAPH-36132150213/prereg.md",
+    "read-only Python pathlib/importlib/shutil preflight for expected Runtime contract paths and installed executables",
+    "nginx -v",
+    "gunicorn --version",
+    "chromium --version",
+    "git status --short",
+    "git rev-parse HEAD"
+  ],
+  "artifacts": {
+    "raw_evidence": {
+      "path": "research/experiments/EXP-GRAPH-36132150213/raw_evidence/preflight.json",
+      "sha256": "f4c75b7c143ecdaf8371c531cd2dffb0e74a64372f95ed063d0a8a009122d20b"
+    },
+    "result": {
+      "path": "research/experiments/EXP-GRAPH-36132150213/result.json",
+      "sha256": "e7c964168cee312c27a998a088804d7a660852e0fd09a19da9dfe232b351d05a"
+    },
+    "report": {
+      "path": "research/experiments/EXP-GRAPH-36132150213/report.md",
+      "sha256": "b3979f3667491181708c102c70b0a4a1c4842ced686da24d0a329ba870a6adca"
+    },
+    "execution_checkpoint": {
+      "path": "research/experiments/EXP-GRAPH-36132150213/execution_checkpoint.json",
+      "sha256": "be46501846393b1ead84214359774b8751b8500a2be7093c7b583a3aea5c0110"
+    },
+    "prior_executor_diagnostic": {
+      "path": "research/experiments/EXP-GRAPH-36132150213/model_execute.json",
+      "sha256": "46b9a5a98c5df76944907915ddf52d8a2ce90686507517441640b2a51673552d"
+    },
+    "failure_diagnostic": {
+      "path": "research/experiments/EXP-GRAPH-36132150213/failure.json",
+      "sha256": "c5786beb2e550d4fbfa73d884c9d1ecaa6fc859a6e8a396ae5acbf37ba313036"
+    }
+  },
+  "external_evidence": [
+    {
+      "path": "codex/experiments/EXP-RUNTIME-36100549580/result.json",
+      "sha256": "fbc22774f1ba1cec3d2d585abb1802eceb10165273ff6d8707eb5c67804b921b",
+      "use": "Bounded 2x plain-HTTP Runtime reference; not a substitute for the required 4x/ledger contract."
+    },
+    {
+      "path": "codex/experiments/EXP-RUNTIME-36100549580/provenance.json",
+      "sha256": "f3f41150d83198c647f5e71818e30ce0287430e01ea48c35fee08f6c12f9ed6d",
+      "use": "Runtime environment and 2x scope reference."
+    },
+    {
+      "path": "codex/experiments/EXP-RUNTIME-36094450333/provenance.json",
+      "sha256": "e5f331267d759274db3f4c03b2ef9eebe27429d58776d7b7757ee11a9c792fae",
+      "use": "Runtime bounded-scope reference."
+    },
+    {
+      "path": "codex/experiments/EXP-GRAPH-36106653880/result.json",
+      "sha256": "a3baa62d031d946fad5d2a2eed94fb995e9d06f64813fab53b9f8838a10fda88",
+      "use": "Prior distributed Graph measurement-invalid precedent; not reused as evidence."
+    },
+    {
+      "path": "codex/experiments/EXP-GRAPH-36106653880/audit.json",
+      "sha256": "ae8c91b34b7c9b8b03eae895e2e5e8e5957eec92ec0d9b88e2997bf0529948a8",
+      "use": "Independent audit precedent; not reused as evidence."
+    }
+  ],
+  "measurement_evidence": {
+    "raw_request_evidence": null,
+    "health_gate_evidence": null,
+    "decision_evidence": null,
+    "derived_metrics": null,
+    "reason": "No outcome-bearing execution was started."
+  },
+  "validity": {
+    "mandatory_runtime_contract_present": false,
+    "mandatory_runtime_contract_certified": false,
+    "frozen_design_preserved": true,
+    "scientific_falsification": false,
+    "claim_update_authorized": false
+  },
+  "required_unblock": [
+    "Publish a machine-readable Runtime capability ledger that certifies the distributed substrate and conditionally certifies the browser channel.",
+    "Publish and certify a one-command bring-up contract for nginx 1.24.0, 4x gunicorn 23.0.0/Flask 3.1.3, PyJWT HS256, shared SQLite WAL, real If-None-Match/ETag 304, and X-Worker-Pid health checks.",
+    "Retry EXP-GRAPH-36132150213 exactly as frozen after the contract is available; do not fill missing metrics or weaken validity gates."
+  ]
+}

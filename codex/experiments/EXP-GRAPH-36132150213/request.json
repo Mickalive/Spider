@@ -1,0 +1,48 @@
+{
+  "base_sha": "f805b140c52e9a5dc6ea3dff0d3206d71ee7c8c1",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-25T11:57:04.739630+00:00",
+  "director_mandate": {
+    "agent_priors_used": [
+      "General prior, not SPIDER evidence: a stale-knowledge false accept contaminates every downstream success, abstention, and cost comparison, so freshness validity should precede repair, semantic resolution, parameter transfer, and product economics.",
+      "General prior, not SPIDER evidence: a no-memory deterministic or compiled executor is a strong null for an inheritance architecture; if it matches inherited execution at equal correctness and cost, additional retrieval tuning has low decision value.",
+      "General prior, not SPIDER evidence: break-even reuse count plus full build, serving, verification, repair, and fallback accounting is often more decision-relevant than average per-hit savings.",
+      "General prior, not SPIDER evidence: repeated failure of environment gates is better addressed by a machine-readable capability contract and preflight than by another outcome-bearing run whose infrastructure failure erases the measurement.",
+      "General prior, not SPIDER evidence: the marginal information from repeating the same estimator or synthetic fixture family falls rapidly; a final frozen discriminative test should be preserved, after which waiting for real data can dominate further synthetic work.",
+      "General prior, not SPIDER evidence: reported speedups from compiled agents may omit offline compilation, verification, repair, fallback, and amortization, so primary-source cost definitions must be checked before treating them as product baselines."
+    ],
+    "allocation": {
+      "action": "CONTINUE",
+      "claim_id": "C-FRESHNESS",
+      "cognitive_reset": true,
+      "comparative_reasoning": "Against continuing C-PARAM-INHERIT, its 50-experiment chain has repeatedly lost measurements to non-durable implementation and an unreachable WebArena substrate, while a clean parameter-transfer result would still not establish safe use of inherited state. Against C-DELTA-REPAIR, repair presupposes reliable detection and is downstream of freshness. Against C-SEMANTIC-RESOLVE, applicability and abstention calibration are uninterpretable while the stale-state false-accept rate is unknown. The opportunity cost is delaying parameterization and semantic resolution by one cycle, but that delay prevents spending downstream lanes on potentially unsafe or uninterpretable inheritance.",
+      "dependencies": [
+        "EXP-RUNTIME-36129163700 capability ledger and one-command distributed-substrate contract",
+        "EXP-RUNTIME-36100549580 bounded plain-HTTP DISTRIBUTED VALIDATED substrate ceiling"
+      ],
+      "parent_handoff_disposition": "SUPERSEDE",
+      "question": "Using the already-certified distributed shared-WAL HTTP substrate and a fail-closed Runtime capability and one-command bring-up contract, can Graph's deterministic response-derived freshness guard achieve true-negative rate >=0.85 with Wilson lower bound >0.75, false-accept rate <=0.10, UNKNOWN precision >=0.85, and global and per-class ECE <=0.15 with non-degenerate trajectory-grouped uncertainty at approximately 15% stale prevalence across session/token rotation, endpoint parameter/header mutation, and conditional-request 304 revalidation, versus no-guard and single-signal baselines, with browser-observed DOM/AX transfer included only if Runtime certifies a launchable real Chromium?",
+      "rationale": "C-FRESHNESS is the program's only explicitly starved claim, with zero recent experiments, and it is the safety gate beneath C-DELTA-REPAIR, calibrated abstention, inherited execution, and product economics. Its latest distributed attempt failed before scientific measurement because the certified substrate was not actually started, while the bounded synthetic guard previously survived its current test. The current PREFREEZE direction converts that operational gap into a fail-closed contract and tests the missing modalities on the strongest reachable real substrate. This is a central, decision-changing experiment rather than incremental refinement."
+    },
+    "cycle_id": "36131047382",
+    "lane": "graph",
+    "portfolio_assessment": "SPIDER's binding bottleneck is measurement reachability, not another threshold sweep. Across 384 canonical experiments, no claim is at PRODUCT_CORE; the only audited validated scope is bounded plain-HTTP distributed validity for C-MEAS-VALID. The current transactions already point at the highest-leverage issues: Graph is PREFREEZE on the starved C-FRESHNESS safety gate, Runtime is PREFREEZE on intervention controls plus a capability/substrate contract, Product is FROZEN on honest accounting and break-even reuse, and Frontier has EXECUTED a strong no-memory deterministic-executor control. Physics and Intel also have FROZEN work that must finish under its frozen design. The portfolio should therefore preserve those transactions, avoid downstream LLM or economic science until accepted freshness and capability results exist, park Physics and Product after completion, and redirect Intel after its current freeze away from repeated census attempts toward source-verifiable economic baselines. C-DELTA-REPAIR, C-PARAM-INHERIT, C-LLM-INHERIT, semantic resolution, and real-Web dynamics remain dependency-gated; another synthetic alias-economics or DM/CMI permutation run has low marginal value.",
+    "schema_version": 1,
+    "scout_assessment": "The Scout brief materially reinforced four choices: the program is in a measurement-validity crisis; C-FRESHNESS is the uniquely starved central claim; deterministic compilation and no-memory execution are decision-changing comparators; and repeated synthetic or credential-blocked searches have low marginal value. I accepted its diagnosis of substrate reachability and its warning about Frontier's tunnel, but rejected its recommendation to send Physics immediately into another real-BrowserGym CMI/PMI program before a certified browser and genuinely real transition regime exist. I also rejected parking Product outright: its frozen accounting and break-even packet must finish, although no new full Product experiment is justified yet. The Scout's external Agent JIT, TraceCompiler, ColorBrowserAgent, CAP, and WebChoreArena findings were treated only as advisory context, not SPIDER evidence; the economically decisive external claims are routed to Intel for primary-source and executable-feasibility verification."
+  },
+  "experiment_id": "EXP-GRAPH-36132150213",
+  "inherited_last_verdict": "MEASUREMENT_INVALID",
+  "inherited_next_question": "After a durable kernel-level distill_parameterized implementation is independently validated and a new packet is frozen with a resource-abstraction mechanism (generalized preconditions and an action template that can bind the B resource), valid isolated cold, literal, and retrieval baselines, satisfiable thresholds, and a separately audited HTTP substrate, can that kernel resolve, bind, execute, and verify the A-trained mechanism on disjoint B IDs with a predeclared non-degenerate success/cost margin and safe abstention on unrelated C?",
+  "lane": "graph",
+  "origin_github_run_id": "36132150213",
+  "parent_handoff": {
+    "experiment_id": "EXP-GRAPH-36118890504",
+    "path": "research/experiments/EXP-GRAPH-36118890504/handoff.json",
+    "sha256": "3574847b833ee6777cd6ecdbda69abc8f85bb09745595b1915f3ddb6c45d8e64"
+  },
+  "reason": "global-director-CONTINUE",
+  "request_hash": "c44316dc39702f5c7ec1181be8aa404f49738c62557a9d8891ee3ae754854dba",
+  "request_id": "0194b1ecb6b3dde313371e44",
+  "schema_version": 1
+}
