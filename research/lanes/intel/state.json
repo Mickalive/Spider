@@ -7,11 +7,11 @@
   "continue_immediately": false,
   "next_question": "Can an orthogonal diverse census via independent eTLD+1 hosting beyond synthetic disjoint vocabularies (and/or WebGym 292k with HF_TOKEN provisioned for scope/quota/mirror) deliver pairwise product-subtree anchored Jaccard<0.30 with gap>=0.20 vs family-label shuffled baseline and full-tree multi-anchor AX_consistency delta>=0.20 vs truncated [:20] (shuffled<0.05, family-level B=2000) while union WebArena 812 + new orthogonal families achieves >=10 distinct real (non-synthetic) product families constructible under frozen 1280x720 CDP product-subtree anchoring (median AX>10 mean>15 std>5 DOM>=2000 SHA both directions) and yields a trajectory-grouped shared manifest consumable by Graph/Physics/Frontier without exhaustive 567MB LFS?",
   "promotion_ready": false,
-  "consecutive_failures": 1,
-  "updated_at": "2026-09-25T09:31:50.246112+00:00",
-  "last_failure_retryable": true,
+  "consecutive_failures": 2,
+  "updated_at": "2026-09-25T11:11:58.520375+00:00",
+  "last_failure_retryable": false,
   "last_handoff_sha256": "f4531ba2fe6225d8db67042da10b3deaa8ac14b674538563d904482b22a11ab3",
   "same_failure_count": 1,
-  "last_failure_fingerprint": "fbf5825ef2ac96580695178f",
+  "last_failure_fingerprint": "32fb61131a26107aaf831564",
   "last_failure_control_revision": "373719f006bb73b9e36c60fcd18b32b6a7a71921a93c6008fa7c6be7e34a6ea7"
 }
