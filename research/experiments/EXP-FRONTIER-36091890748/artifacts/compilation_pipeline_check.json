@@ -1,0 +1,32 @@
+{
+  "experiment_id": "EXP-FRONTIER-36091890748",
+  "treewalker_compression": {
+    "status": "NOT_RUN",
+    "reason": "no DOM available (BrowserGym/CDP absent)"
+  },
+  "stable_locator_ranking": {
+    "status": "NOT_RUN",
+    "reason": "no DOM/capture available"
+  },
+  "dag_codegen": {
+    "status": "NOT_RUN",
+    "reason": "no demonstrations to compile (manifest absent)"
+  },
+  "sqlite_round_trip": {
+    "status": "NOT_RUN",
+    "reason": "no DAG produced"
+  },
+  "guard_evaluation": {
+    "status": "NOT_RUN",
+    "reason": "no compiled DAGs"
+  },
+  "bailout_injection": {
+    "status": "NOT_RUN",
+    "reason": "no guard pipeline"
+  },
+  "webmcp_openapi_fetch": {
+    "status": "NOT_RUN",
+    "reason": "no registry, no manifest"
+  },
+  "honest_build_cost_counted": false
+}
