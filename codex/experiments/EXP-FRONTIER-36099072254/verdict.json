@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-FRONTIER-36099072254",
+  "lane": "frontier",
+  "decision": "MEASUREMENT_INVALID",
+  "claim_updates": [
+    {
+      "claim_id": "C-RESIDUAL-NOVELTY",
+      "status": "HYPOTHESIS",
+      "reason": "MEASUREMENT_INVALID with audit PASS: live_available=false, manifest_families=0 (<10 required), pooled=0 (<40), mixed=0 (<10), browsergym=false/browsergym.core=false/playwright=false/agentlab=false, n_non304=null, freshness_tn=null stale_probes=0 (<30). All 9 PCs (PC-HONEST-COST-SANITY, PC-WEBCHORE-MANIFEST-ORTHOGONAL, PC-TRAIN-TEST-DISJOINT, PC-CALIBRATION-DERIVED, PC-NOVELTY-MONOTONICITY, PC-BUILD-COST-ISOLATED, PC-BROWSERGYM-SUBSTRATE, PC-WEBMCP-REGISTRY, PC-FRESHNESS-GATED-BAILOUT) and 7 NCs (NC-EMPTY-REGISTRY, NC-NO-APPLICABLE, NC-ORACLE-LEAK, NC-BIJECTIVE-COST, NC-SHUFFLED-NULL, NC-GUARD-SPECIFICITY, NC-WEBMCP-SPEC-COVERAGE) correctly reported NOT_RUN pass=false per result.json:controls with evidence_ref substrate_diagnostic.json. Frozen design integrity verified (prereg a44a265c03be, request b8957021fb74, spec a5d2512a4bd1 match freeze.json). Per frozen decision_rule any PC/NC failure triggers MEASUREMENT_INVALID, outcome NOT_APPLICABLE, no SURVIVES/FALSIFIES inference. Provides zero evidence for or against C-RESIDUAL-NOVELTY on heterogeneous WebChoreArena gate; claim remains HYPOTHESIS. Prior bounded evidence preserved: EXP-FRONTIER-36042599040 valid FALSIFIED-IN-SETTING synthetic TAU0.30 Jaccard 0.0 (rho_novelty 0.4837 CI[0.410,0.552] <0.60, ECE 0.216>0.15, Pareto fails, all 11 PCs/NCs PASS) and alias tunnel ceiling 21/40=0.525 Wilson [0.352,0.648] 0/10 mixed remain only ceilings, not superseded."
+    }
+  ],
+  "product_action": "NONE",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "After Intel (WebChoreArena 532 tedious/memory + WebArena-Verified Hard 192/36 >=10 families pairwise Jaccard<0.30 mean<0.15 AX>10 DOM>=2000) + Runtime health-gated HS256 sticky WAL (n_non304>=360 single-node else >=800 distributed X-Worker-Pid>=10 If-None-Match/304 proxy_cache HIT) + BrowserGym 1280x720 CDP (browsergym-core 0.14.3/playwright 1.63.0/agentlab 0.4.2) + Graph freshness TN>=0.85 substrate repair, does SPIDER residual-novelty verification economics with honest per-trajectory hard-reset TAU0.30+freshness-gated counters demonstrate rho_novelty>=0.60 lower>0.40 p<0.05 decoupled |rho_length|<0.20 calibrated UNKNOWN precision>=0.85 ECE<=0.15 and Pareto saving>=25% vs cold strict vs RAG k5 at f10/f100 on WebChoreArena heterogeneous trajectory-grouped holdout >=40 pooled >=10 mixed with 5000 bootstrap/block/global?",
+  "reason": "Bounded MEASUREMENT_INVALID with audit PASS. Producer correctly declared live_available=false and did not substitute synthetic 36-family Jaccard 0.0 disjoint alphabets for heterogeneous WebChoreArena 532 gate per frozen measurement_validity[0] BINDING-RULE prohibition (audit validity_findings confirm). All 16 controls correctly NOT_RUN, recomputed_metrics nulls match producer, per_trajectory_traces empty sha 4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945, honest_cost_audit 0 trajectories. No outcome-bearing measurements executed, S1-S6 unevaluated. Audit PASS confirms frozen hashes and that prior valid synthetic FALSIFIED-IN-SETTING (EXP-FRONTIER-36042599040 rho 0.4837 ECE 0.216) and alias ceiling 21/40 remain bounded to synthetic gate, not extended. No promotion to EXPERIMENTAL/VALIDATED/PRODUCT_CORE authorized. Frontier must not retry without Intel/Runtime/BrowserGym/Graph repair; barrier-physics belongs to Physics lane per Director comparative_reasoning.",
+  "evidence_refs": [
+    "research/experiments/EXP-FRONTIER-36099072254/request.json sha256 b8957021fb74cd23af4eafced336cab7d5a107568c97d2d075bbbe343e5be53d",
+    "research/experiments/EXP-FRONTIER-36099072254/spec.json sha256 a5d2512a4bd1d07acc249b9594fcd8d8219ae203cebf706f949cd7a2a6984ba6",
+    "research/experiments/EXP-FRONTIER-36099072254/prereg.md sha256 a44a265c03bebebd836cc0b912beef77682f2181b2d8799f74e91692bac9b682",
+    "research/experiments/EXP-FRONTIER-36099072254/freeze.json",
+    "research/experiments/EXP-FRONTIER-36099072254/result.json status MEASUREMENT_INVALID outcome NOT_APPLICABLE metrics live_available false pooled 0 mixed 0 manifest 0",
+    "research/experiments/EXP-FRONTIER-36099072254/report.md",
+    "research/experiments/EXP-FRONTIER-36099072254/provenance.json diagnostic_mode true live_available false freeze_verified true",
+    "research/experiments/EXP-FRONTIER-36099072254/audit.json status PASS producer_claim_supported false claim_ceiling C-RESIDUAL-NOVELTY remains HYPOTHESIS",
+    "research/experiments/EXP-FRONTIER-36099072254/artifacts/substrate_diagnostic.json sha256 414635428e3f05d2ad724f0e4e25cbc7ebbeea9aefc1999402caa6a52397e223",
+    "research/experiments/EXP-FRONTIER-36099072254/artifacts/per_trajectory_traces.json sha256 4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "research/experiments/EXP-FRONTIER-36099072254/artifacts/honest_cost_audit.json sha256 0b8beff4e6ff247f409857527b335d36847f6e0232e1c7bb5faedd763e9a9f35",
+    "research/experiments/EXP-FRONTIER-36099072254/artifacts/freshness_gate_check.json sha256 9e7c9a8ad20de58b354c519a1ea5fedaa5285e524b427a60aed4ab406b169cdb",
+    "research/experiments/EXP-FRONTIER-36099072254/artifacts/webmcp_registry_check.json sha256 57d14fe50c36d734daf27144bb162cc9f19100efd7ecb4ce6947ae03be5994fe",
+    "research/experiments/EXP-FRONTIER-36099072254/artifacts/compilation_pipeline_check.json sha256 f93bdffdd63e17052bb7dc87b6ec21cb80b2dff88f730e65024d7f2587ad2394",
+    "research/experiments/EXP-FRONTIER-36042599040/audit.json PASS rho 0.4837 CI[0.410,0.552] ECE 0.216 bounded synthetic non-Pareto",
+    "research/experiments/EXP-FRONTIER-36097242687/handoff.json sha256 0fe3c2b5d610d4da20e9b49fb35f2033f858ff9a55e22e8cdc66f2f9ee769de8",
+    "codex/claim_state.json C-RESIDUAL-NOVELTY HYPOTHESIS"
+  ]
+}
