@@ -1,0 +1,228 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-FRONTIER-36097242687",
+  "lane": "frontier",
+  "status": "PASS",
+  "producer_claim_supported": false,
+  "required_fixes": [
+    "Intel lane: deliver heterogeneous manifest WebChoreArena 532 tedious/memory + WebArena-Verified Hard 192/36 combined >=10 families pairwise canonical bigram Jaccard<0.30 mean<0.15 product-subtree anchored depth>=2 at 1280x720 CDP AX>10 mean>15 std>5 DOM>=2000 per family raw N>=500 >=50/family sibling 299a300 dedup TRAIN-only vocab isolation 0 leakage deterministic seed 35725763380 trajectory-grouped holdout - currently manifest_families=0 jaccard=null pooled_tasks=0 mixed_tasks=0 heterogeneity_adequate=false coverage_adequate=false no research/intel/diverse_site_manifest.json no data/webgym_292k no data/webarena_verified_hard (auditor filesystem probes and importlib reproduce live_available=false)",
+    "Runtime lane: deploy health-gated single-worker sticky Flask HS256+nginx WAL at /tmp/spider-runtime/shared.db with sticky cookie If-None-Match/ETag HS256 TTL 60s conditional probes n_non304>=360 single-node else >=800 distributed stratified >=80/family X-Worker-Pid>=10 If-None-Match/304 proxy_cache HIT honest per-trajectory hard-reset sum counters resolve+bind+verify+freshness+browser_steps+tokens+latency - currently WAL absent /tmp/spider-runtime absent n_non304=null X-Worker-Pid=null substrate_adequate=false (auditor sqlite probe + ls confirms absent)",
+    "Frontier EXECUTE: install BrowserGym stack browsergym-core 0.14.3 + playwright 1.63.0 + agentlab 0.4.2 pins (system chromium present true on /usr/bin/chromium, PyPI reachable true installable in principle) once Intel+Runtime gates pass then execute full frozen shootout: executed honest per-trajectory hard-reset sum counters TAU0.30+freshness-gated (resolve+bind+verify+freshness+browser_steps TAU0.30 topology gate logged + freshness TN>=0.85 gate) real TF-IDF TAU0.30 over train-A intents+templates softmax temp 0.15 + deterministic hashlib.sha256(task_id) jitter 0.02 UNKNOWN<0.80 TAU+freshness deterministic correctness exact key-set equality after alias resolution all 5 baselines (B-COLD-LLM B-FLAT-RAG-K5 B-SPIDER-RESIDUAL B-WEBMCP-TOOL-BYPASS B-RANDOM-GATE) with 5000 family-stratified trajectory-grouped bootstrap + 5000 family-block permutation (block=family unit=trajectory) + 5000 global permutation honest M_total_f10/f100 Pareto saving>=25% lower>15% dominance CI lower>0 at f10/f100 +-50% build sensitivity conditional WebMCP head-to-head where coverage>=70% calibration UNKNOWN precision>=0.85 false_accept<=0.10 ECE<=0.15 upper<=0.18 |rho_shuffled|<0.20 centered |mean|<0.05 std<0.15 gap>0.35 S1-S6 with coverage >=8/10 pooled>=40 per-stratum N>=30 per-family N>=3",
+    "Graph lane: validate freshness gate TN>=0.85 with >=30 stale probes for bailout to UNKNOWN correctly and ECE upper gating (Graph C-FRESHNESS dependency) - currently not validated, freshness_tn null"
+  ],
+  "validity_findings": [
+    "Frozen input integrity independently recomputed and verified: sha256(request.json)=f1934c9ca5ce6d719a53b51e05ca10838bf66124535e3e2bfb4663a9fb532251 sha256(spec.json)=da13d7ee19958bdb3b4832a3e0f6e5c6677ee6dc52980dc1aa32a1c313fba19a sha256(prereg.md)=0306edc08b9b9f9fd2a2458cd08512b0995eb9d3641259dce8f70ffaac9e5843 all match freeze.json hashes exactly; freeze.json frozen_at 2026-09-25T05:13:25.107308+00:00 records those three; parent_handoff sha256 8f249a10b7fdba630f5d5572bcfb5331460980fe835aba37aa305ab003da245f matches request.json parent_handoff.sha256 - no frozen design tampering, no post-freeze re-design, director_mandate PIVOT SUPERSEDE cognitive_reset true preserved",
+    "Substrate absence independently recomputed via importlib.util.find_spec and filesystem probes matches producer substrate_diagnostic.json exactly: browsergym None (ModuleNotFoundError) browsergym.core None playwright None agentlab None, research/intel/diverse_site_manifest.json absent data/webgym_292k absent data/webarena_verified_hard absent /tmp/spider-runtime/shared.db absent => producer metrics live_available=false browsergym=false browsergym.core=false playwright=false agentlab=false intel_diverse_manifest_exists=false manifest_families=0 jaccard=null pooled_tasks=0 (<40) mixed_tasks=0 (<10) runtime_wal_exists=false x_worker_pid=null n_non304=null heterogeneity_adequate=false coverage_adequate=false substrate_adequate=false confirmed; system chromium_present true (binary /usr/bin/chromium exists) pypi_reachable true but not installed confirms missing-install not network failure, consistent with diagnostic path elapsed_seconds 0.0",
+    "Positive controls correctly classified per frozen decision_rule requiring all PCs PASS else MEASUREMENT_INVALID: PC-HONEST-COST-SANITY correctly FAIL/NOT_RUN (0 trajectories cannot test honest==sum diff0 std>0 per family/novelty cell zero_cells==0 no fixup gap>0.35 |rho_proxy|<0.60 TAU+freshness-gated |rho_shuffled|<0.20 centered |mean|<0.05) PC-WEBCHORE-MANIFEST-ORTHOGONAL correctly FAIL (manifest_families 0 <10 Jaccard null) PC-BROWSERGYM-SUBSTRATE correctly FAIL (all CDP modules absent WAL absent) remaining PCs PC-TRAIN-TEST-DISJOINT PC-CALIBRATION-DERIVED PC-NOVELTY-MONOTONICITY PC-BUILD-COST-ISOLATED PC-WEBMCP-REGISTRY PC-FRESHNESS-GATED-BAILOUT correctly NOT_RUN (no DOM/trajectories to exercise derived_context isolation 0 forbidden reads, deterministic TAU+freshness correctness, monotonicity d>0.8, auditable build ops, OpenAPI fetch >=95%, freshness TN>=0.85). pc_all_pass=false justified; no PC incorrectly marked PASS",
+    "Null controls correctly classified: all 7 NCs correctly NOT_RUN/FAIL - NC-EMPTY-REGISTRY N=6 empty registry 100% UNKNOWN not tested NC-NO-APPLICABLE N=12 OOD intents precision>=0.85 false<=0.15 gated reduction >=0.20 TAU+freshness not tested NC-ORACLE-LEAK 0 forbidden reads catalog never reads B trajectory-grouped disjoint not tested NC-BIJECTIVE-COST gap>0.35 |rho_proxy|<0.60 for n*3200 f*6.0 TAU-count proxies not tested NC-SHUFFLED-NULL global+block 5000 |rho_shuffled|<0.20 p>=0.20 centered |mean|<0.05 std<0.15 TAU+freshness-gated not tested NC-GUARD-SPECIFICITY shuffled guard/freshness ablation drop>=30% not tested NC-WEBMCP-SPEC-COVERAGE coverage >=70% vs <70% stratified not tested. nc_all_pass=false justified; no NC incorrectly PASS",
+    "No synthetic substitution attack: spec measurement_validity[0] explicitly forbids substituting synthetic 36-family Jaccard 0.0 disjoint-alphabet fixture (288-504 chars, 540 pooled synthetic) for heterogeneous WebChoreArena 532 Jaccard<0.30 natural vocabularies. Producer correctly did not substitute - per_trajectory_traces.json empty [] sha256 4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945 honest_cost_audit trajectories_audited 0 substrate_diagnostic synthetic_fixtures not used. Audit verified no hidden synthetic execution in research/frontier/run_execute_36097242687.py - code path after freeze check immediately enters substrate_diagnostic and exits with sys.exit(0) before any outcome-bearing TF-IDF retrieval or per-trajectory cost computation. Honest disclosure prevents leakage/measurement-trap false falsification",
+    "Measurement validity correctly triggers MEASUREMENT_INVALID not SUPPORTS/FALSIFIES: frozen decision_rule requires all PCs PASS + all NCs PASS + manifest >=10 Jaccard<0.30 mean<0.15 pooled>=40 mixed>=10 n_non304>=360 BrowserGym 1280x720 CDP AX>10 DOM>=2000 TreeWalker fidelity locator fetch freshness etc. With manifest 0/10 pooled 0/40 mixed 0/10 substrate_adequate false, producer correctly assigned status=MEASUREMENT_INVALID outcome=NOT_APPLICABLE (validity_notes explicitly distinguish infrastructure failure from scientific falsification per EXPERIMENT_PACKET mandatory-key semantics). No outcome-bearing measurements were run (elapsed_seconds 0.0 diagnostic path <0.1s); per_trajectory_traces empty honest_cost_audit 0 diff_sum null provenance diagnostic_mode true live_available false",
+    "Representation/cost/leakage controls preserved but unevaluated: derived_context isolation (ONLY mechanism template strings + observed key sets canonical sorted after alias resolution + train-A registry + CDP AX hash + freshness contracts + OpenAPI specs, MUST NOT contain residual_novelty_fraction/length_label/target_resource_id/expected_key_set) correctly marked NOT_RUN rather than fabricated; honest per-trajectory hard-reset sum counters resolve+bind+verify+freshness+browser_steps with TAU0.30+freshness mask logged correctly NOT_RUN; trajectory-grouped holdout TRAIN-only vocab isolation 0 forbidden reads via static harness inspection correctly NOT_RUN; guard set limited to freshness+URL+DOM precondition not full permission lattice and DOM style/layout discarded disclosed per prereg section 3 spec measurement_validity; no evidence of tautological visible_text_hash/state_id MI 107-198% or action target_href==url 92-98% leakage or bijective n*3200/f*6.0 proxy because no data to compute - correctly not recorded as PASS",
+    "Provenance and determinism intact: provenance.json records github_run_id 36097242687 git_commit 23d0d6b090dff278f80e41a4b76ec7d05a77dcea diagnostic_mode true live_available false freeze_hash matches freeze.json, code_paths limited to research/frontier/run_execute_36097242687.py per lane registry allowed_code_roots research/harness research/frontier, seed discipline numpy.random.RandomState(42)+random.Random(35725763380)+hashlib.sha256 not Python hash() preserved per spec/prereg, artifacts hashes match result.json (substrate 6a1e7fca5873ea4db2505f50c969d8cfa4f8ea884331e219060abb7309e00f7a per_trajectory 4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945 honest_cost 7a0a67bb2ec3dd360d2e9bb047b468ddb8d79fc20f508ee5ab96117f305bc71d compilation f93bdffdd63e17052bb7dc87b6ec21cb80b2dff88f730e65024d7f2587ad2394). Environment python 3.12.14 numpy 2.5.3 scipy 1.13.0 correctly reported; chromium_present true pypi_reachable true consistent; execution_checkpoint.json pre_execute_sha recorded; model_design success muse-spark-1.2 model_execute nemotron-3-ultra attempt4 exit0",
+    "Attempted recomputation of material metrics confirms null/zero: live_available false, chromium_present true, pypi_reachable true, browsergym false, manifest_families 0, pooled_tasks 0, mixed_tasks 0, jaccard null, substrate_adequate false - all consistent with no observable heterogeneity to express S1 rho_novelty>=0.60 lower>0.40 p<0.05 S2 pooled |rho_length|<0.20 upper<0.25 p>=0.05 S3 per-stratum |rho_length|<0.20 upper<0.30 N>=30 S4 UNKNOWN precision>=0.85 false<=0.10 ECE<=0.15 upper<=0.18 S5 Pareto saving>=25% lower>15% strict dominance vs RAG k5 and vs WebMCP at f10/f100 +-50% build S6 gap>0.35 |rho_proxy|<0.60 |rho_shuffled|<0.20 centered. No metric computable that was omitted; no hidden positive signal suppressed; honest cost audit vs bijective proxy unevaluated not omitted. Producer did not rename disputed metric/control identifiers - all IDs preserved verbatim for traceability",
+    "Target/split/sampling integrity: no target integrity to recompute (pooled_tasks=0 mixed_tasks=0 cannot evaluate header+body+query+auth+memory exact key-set equality correctness), no sampling bias beyond manifest absence, no representation integrity violation on live BrowserGym 1280x720 CDP AX>10 DOM>=2000 because substrate never instantiated - correctly declared heterogeneity_adequate=false coverage_adequate=false; controls strength appropriately maximal per spec (TAU0.30 topology gate candidates <0.30 counted for resolve only, correct-family exact equality after alias resolution softmax temp 0.15 + jitter 0.02 UNKNOWN<0.80 verify+freshness gates family-stratified 5000 bootstrap + 5000 block-perm + 5000 global) but strength irrelevant when substrate absent - no overstatement. Leakage checks: auditor verified run_execute_36097242687.py contains no import of novelty_fraction/length_label/expected_key_set in derived_context construction; static forbidden-read check correctly NOT_RUN not bypassed",
+    "No baseline strength overstatement: producer explicitly preserves 17-deep alias catalog+routing bounded ceiling 21/40=0.525 pooled Wilson [0.352,0.648] 0/10 mixed routing gain 0.0 p=1.0 and synthetic TAU0.30 FALSIFIED-IN-SETTING rho 0.4837 CI[0.4102,0.5523] ECE 0.216 all 11 PCs/NCs PASS (EXP-FRONTIER-36042599040) as established bounded negatives without overstating them as heterogeneous evidence; agent priors from director_mandate agent_priors_used (per-step error 0.98^30, retrieval collapse Jaccard<0.30 BC~0, verification cost dominance, path dependence Jaccard>=0.6 routing 0.0) correctly labeled as general priors not SPIDER evidence per spec measurement_validity disclosure and prereg section 10"
+  ],
+  "baseline_findings": [
+    "B-COLD-LLM (ID B-COLD-LLM): NOT_RUN - verified no trajectories substrate missing (no manifest no BrowserGym no Runtime WAL). No cold LLM browsing cost to compare for M_total Pareto saving>=25% vs cold lower>15%; correctly not fabricated via formula n*3200/f*6.0 or jitter; paired per-task design trajectory-grouped holdout preserved in spec but unevaluated",
+    "B-FLAT-RAG-K5 (ID B-FLAT-RAG-K5): NOT_RUN - no train-A corpus no trajectories TF-IDF k=5 cosine TAU0.30 topology-gated correct-family exact key-set equality unevaluated. Strong flat retrieval baseline correctly not approximated with synthetic alphabets; honest counters topology+freshness-gated not computed",
+    "B-SPIDER-RESIDUAL (ID B-SPIDER-RESIDUAL) PRIMARY: NOT_RUN - SPIDER parameterized mechanism inheritance fit train-A only on heterogeneous WebChoreArena/WebArena-Verified families not executed; resolve+bind via catalog/parameter slots fresh TAU0.30+freshness-gated verify+freshness+browser_steps per-trajectory hard-reset honest sum counter not measured; S1-S6 (rho>=0.60 decoupled calibrated Pareto gap>0.35) unevaluated",
+    "B-WEBMCP-TOOL-BYPASS (ID B-WEBMCP-TOOL-BYPASS): NOT_RUN - no WebMCP registry (depends on BrowserGym/CDP and manifest) Fetch OpenAPI spec + HATEOAS link extraction + routing normalization + invokeTool deterministic tool call pipeline not built; OpenAPI fetch >=95% threshold unevaluated correctly not marked PASS; spec coverage >=70% head-to-head vs SPIDER conditional dominance at f10/f100 unevaluated; BINDING-RULE compliance (same correct-family gating softmax temp 0.15 jitter 0.02 UNKNOWN<0.80 TAU+freshness headers honest counters) correctly frozen but not exercised",
+    "B-RANDOM-GATE (ID B-RANDOM-GATE): NOT_RUN - random ranking control with same TAU0.30+freshness plumbing but hash-seeded shuffle not executed; chance precision/ECE null calibration not measured; correctly preserved as null calibration requirement",
+    "BINDING-RULE compliance: All pipelines share identical acceptance predicate (exact expected key-set equality canonicalized after alias resolution, mixed header+body+query+auth plus cross-site memory where applicable), same softmax temp 0.15 deterministic jitter, same UNKNOWN<0.80 gate (except COLD always attempts), same verify+freshness executed TAU0.30+freshness-gated, same trajectory-grouped bootstrap 5000 / block-permutation 5000 (block=family unit=trajectory) + global 5000 for NC centering, honest executed sum only with TAU+freshness mask logged - correctly frozen in prereg/spec but not exercised; no baseline strength misrepresented; economics/accuracy/latency/calibration metrics all null indicating absence not negative result. Prior alias 0.525 ceiling and synthetic rho 0.4837 correctly preserved as bounded history not live measurement"
+  ],
+  "recomputed_metrics": {
+    "live_available": {
+      "producer_value": false,
+      "audit_value": false,
+      "method": "importlib.util.find_spec browsergym/browsergym.core/playwright/agentlab + filesystem probes research/intel/diverse_site_manifest.json data/webgym_292k data/webarena_verified_hard /tmp/spider-runtime/shared.db + hash verification vs freeze.json",
+      "verdict": "PASS - exact match"
+    },
+    "browsergym_available": {
+      "producer_value": false,
+      "audit_value": false,
+      "detail": "find_spec returns None/ModuleNotFoundError in audit python 3.12.14; system chromium binaries present but not sufficient; PyPI reachable but not installed",
+      "verdict": "PASS"
+    },
+    "browsergym_core_available": {
+      "producer_value": false,
+      "audit_value": false,
+      "verdict": "PASS"
+    },
+    "playwright_available": {
+      "producer_value": false,
+      "audit_value": false,
+      "verdict": "PASS"
+    },
+    "agentlab_available": {
+      "producer_value": false,
+      "audit_value": false,
+      "verdict": "PASS"
+    },
+    "chromium_present": {
+      "producer_value": true,
+      "audit_value": true,
+      "detail": "/usr/bin/chromium exists; artifact substrate_diagnostic chromium_present true",
+      "verdict": "PASS"
+    },
+    "pypi_reachable": {
+      "producer_value": true,
+      "audit_value": true,
+      "detail": "PyPI reachable true per substring substrate_diagnostic and pip index probe in run_execute; browsergym-core 0.14.3 playwright 1.63.0 installable in principle",
+      "verdict": "PASS"
+    },
+    "intel_diverse_manifest_exists": {
+      "producer_value": false,
+      "audit_value": false,
+      "verdict": "PASS"
+    },
+    "manifest_families": {
+      "producer_value": 0,
+      "audit_value": 0,
+      "threshold": ">=10 families WebChoreArena 532 + WebArena-Verified Hard 192/36",
+      "verdict": "FAIL -> MEASUREMENT_INVALID (correctly flagged)"
+    },
+    "manifest_jaccard_max": {
+      "producer_value": null,
+      "audit_value": null,
+      "threshold": "max<0.30 mean<0.15",
+      "verdict": "UNAVAILABLE - no manifest"
+    },
+    "pooled_tasks": {
+      "producer_value": 0,
+      "audit_value": 0,
+      "threshold": ">=40",
+      "verdict": "FAIL -> MEASUREMENT_INVALID"
+    },
+    "mixed_tasks": {
+      "producer_value": 0,
+      "audit_value": 0,
+      "threshold": ">=10",
+      "verdict": "FAIL -> MEASUREMENT_INVALID"
+    },
+    "heterogeneity_adequate": {
+      "producer_value": false,
+      "audit_value": false,
+      "verdict": "PASS"
+    },
+    "coverage_adequate": {
+      "producer_value": false,
+      "audit_value": false,
+      "verdict": "PASS"
+    },
+    "substrate_adequate": {
+      "producer_value": false,
+      "audit_value": false,
+      "verdict": "PASS - agrees infrastructure failure not falsification"
+    },
+    "runtime_wal_exists": {
+      "producer_value": false,
+      "audit_value": false,
+      "path": "/tmp/spider-runtime/shared.db",
+      "verdict": "PASS"
+    },
+    "x_worker_pid": {
+      "producer_value": null,
+      "audit_value": null,
+      "threshold": ">=10",
+      "verdict": "UNAVAILABLE"
+    },
+    "n_non304": {
+      "producer_value": null,
+      "audit_value": null,
+      "threshold": ">=360 single-node else >=800 distributed",
+      "verdict": "UNAVAILABLE"
+    },
+    "frozen_inputs_integrity": {
+      "producer_value": true,
+      "audit_value": true,
+      "hashes_verified": "prereg 0306edc08b9b9f9fd2a2458cd08512b0995eb9d3641259dce8f70ffaac9e5843 request f1934c9ca5ce6d719a53b51e05ca10838bf66124535e3e2bfb4663a9fb532251 spec da13d7ee19958bdb3b4832a3e0f6e5c6677ee6dc52980dc1aa32a1c313fba19a match freeze.json; parent_handoff 8f249a10b7fdba630f5d5572bcfb5331460980fe835aba37aa305ab003da245f matches",
+      "verdict": "PASS"
+    },
+    "elapsed_seconds": {
+      "producer_value": 0.0,
+      "audit_value": 0.0,
+      "expected_diagnostic": "~0.06-0.13s CPU-only diagnostic (spec estimates <5 min CPU-only, sibling 0.124s)",
+      "verdict": "PASS - within diagnostic path, no hidden compute"
+    },
+    "pc_all_pass": {
+      "producer_value": false,
+      "audit_value": false,
+      "verdict": "PASS - correctly FAIL"
+    },
+    "nc_all_pass": {
+      "producer_value": false,
+      "audit_value": false,
+      "verdict": "PASS - correctly FAIL"
+    },
+    "rho_novelty": {
+      "producer_value": null,
+      "audit_value": null,
+      "threshold": ">=0.60 lower>0.40 block p<0.05 TAU+freshness-gated S1",
+      "verdict": "UNEVALUATED - no trajectories"
+    },
+    "rho_length_pooled": {
+      "producer_value": null,
+      "audit_value": null,
+      "threshold": "|rho|<0.20 upper<0.25 block p>=0.05 S2",
+      "verdict": "UNEVALUATED"
+    },
+    "rho_length_per_stratum": {
+      "producer_value": null,
+      "audit_value": null,
+      "threshold": "per-stratum |rho|<0.20 upper<0.30 N>=30 S3",
+      "verdict": "UNEVALUATED"
+    },
+    "ece": {
+      "producer_value": null,
+      "audit_value": null,
+      "threshold": "<=0.15 upper<=0.18 S4",
+      "verdict": "UNEVALUATED"
+    },
+    "saving_f10_pct": {
+      "producer_value": null,
+      "audit_value": null,
+      "threshold": ">=25% lower>15% p<0.05 strict dominance vs cold and vs RAG k5 at f10/f100 S5",
+      "verdict": "UNEVALUATED"
+    },
+    "gap_rho_vs_shuffled": {
+      "producer_value": null,
+      "audit_value": null,
+      "threshold": ">0.35 S6",
+      "verdict": "UNEVALUATED"
+    }
+  },
+  "claim_ceiling": "C-RESIDUAL-NOVELTY remains HYPOTHESIS. No new evidence for or against residual-novelty verification economics on heterogeneous WebChoreArena tedious/memory + WebArena-Verified Hard mixed gate. Prior ceilings preserved and not superseded: (1) alias catalog+routing+hierarchical xMemory bounded at 21/40=0.525 pooled Wilson [0.352,0.648] 0/10 mixed routing gain 0.0 p=1.0 (17-deep tunnel, frontier ceiling); (2) honest residual-novelty economics validly FALSIFIED-IN-SETTING non-Pareto under QCR on 36-family orthogonal disjoint-alphabet TAU0.30 synthetic gate with all 11 PCs/NCs PASS (EXP-FRONTIER-36042599040 audit PASS: rho_novelty 0.4837 CI[0.4102,0.5523] <0.60 ECE 0.216 >0.15 RAG dominance false at f10/f100). This MEASUREMENT_INVALID diagnostic (live_available=false browsergym false manifest 0/10 pooled 0/40 substrate_adequate false elapsed 0.0s diagnostic_mode true) provides zero heterogeneous evidence, zero product promotion, and zero inference to BrowserGym 1280x720 CDP AX>10 DOM>=2000 heterogeneity, freshness TN>=0.85, WebMCP prevalence or Pareto dominance. Maximum justified claim is infrastructure diagnostic - substrate absent per dependencies intel:WebChoreArena/WebGym manifest + runtime:single-node health-gated BrowserGym 0.14.3 1280x720 CDP AX>10 + graph:freshness gate, pending larger Intel manifest and Runtime single-node n>=360 health gate before distributed n>=800.",
+  "evidence_refs": [
+    "research/experiments/EXP-FRONTIER-36097242687/request.json sha256 f1934c9ca5ce6d719a53b51e05ca10838bf66124535e3e2bfb4663a9fb532251 (director_mandate PIVOT C-RESIDUAL-NOVELTY cognitive_reset true SUPERSEDE)",
+    "research/experiments/EXP-FRONTIER-36097242687/spec.json sha256 da13d7ee19958bdb3b4832a3e0f6e5c6677ee6dc52980dc1aa32a1c313fba19a",
+    "research/experiments/EXP-FRONTIER-36097242687/prereg.md sha256 0306edc08b9b9f9fd2a2458cd08512b0995eb9d3641259dce8f70ffaac9e5843",
+    "research/experiments/EXP-FRONTIER-36097242687/freeze.json sha256 0306edc08b9b9f9fd2a2458cd08512b0995eb9d3641259dce8f70ffaac9e5843 etc (hashes field matches prereg/request/spec)",
+    "research/experiments/EXP-FRONTIER-36097242687/result.json (status MEASUREMENT_INVALID outcome NOT_APPLICABLE metrics pooled 0 mixed 0 manifest_families 0 live_available false)",
+    "research/experiments/EXP-FRONTIER-36097242687/report.md (MEASUREMENT_INVALID diagnostic substrate table, prior negatives preserved)",
+    "research/experiments/EXP-FRONTIER-36097242687/provenance.json (github_run_id 36097242687 git_commit 23d0d6b090dff278f80e41a4b76ec7d05a77dcea diagnostic_mode true live_available false freeze_hash matches freeze.json code_paths research/frontier/run_execute_36097242687.py)",
+    "research/experiments/EXP-FRONTIER-36097242687/artifacts/substrate_diagnostic.json sha256 6a1e7fca5873ea4db2505f50c969d8cfa4f8ea884331e219060abb7309e00f7a (live_available false browsergym false manifest_families 0 pooled_tasks 0)",
+    "research/experiments/EXP-FRONTIER-36097242687/artifacts/per_trajectory_traces.json sha256 4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945 (empty [])",
+    "research/experiments/EXP-FRONTIER-36097242687/artifacts/honest_cost_audit.json sha256 7a0a67bb2ec3dd360d2e9bb047b468ddb8d79fc20f508ee5ab96117f305bc71d (trajectories_audited 0)",
+    "research/experiments/EXP-FRONTIER-36097242687/artifacts/compilation_pipeline_check.json sha256 f93bdffdd63e17052bb7dc87b6ec21cb80b2dff88f730e65024d7f2587ad2394 (checked false substrate not available)",
+    "research/experiments/EXP-FRONTIER-36097242687/execution_checkpoint.json (pre_execute_sha 2fcfaf9cd93022e9fdd3834978321ec196641558)",
+    "research/frontier/run_execute_36097242687.py sha256 recomputed via file_sha matches artifacts/result hashes (freeze verified then substrate probe then MEASUREMENT_INVALID exit)",
+    "research/experiments/EXP-FRONTIER-36095585747/handoff.json sha256 8f249a10b7fdba630f5d5572bcfb5331460980fe835aba37aa305ab003da245f (parent_handoff verified)",
+    "research/experiments/EXP-FRONTIER-36095585747/audit.json PASS (sibling diagnostic: substrate absence independently reproduced, MEASUREMENT_INVALID correctly diagnosed, synthetic not substituted)",
+    "research/experiments/EXP-FRONTIER-36042599040/audit.json PASS (bounded synthetic FALSIFIED-IN-SETTING preserved: rho 0.4837 ECE 0.216 RAG dominance false all 11 PCs/NCs PASS - not superseded)",
+    "research/experiments/EXP-FRONTIER-36052053591 lineage + EXP-FRONTIER-36089506922 lineage alias ceiling 21/40=0.525 pooled 0/10 mixed (retrieval-diversity ceiling preserved)",
+    "codex/claim_state.json (C-RESIDUAL-NOVELTY HYPOTHESIS across all frontier runs; no VALIDATED; last valid EXP-FRONTIER-36042599040 FALSIFIED-IN-SETTING)",
+    "codex/index.json (canonical experiment packet index, no promotion)",
+    "research/lanes/registry.json (frontier lane charter: search outside current solution basin, allowed_code_roots research/harness research/frontier)"
+  ],
+  "unresolved": [
+    "S1 rho_novelty>=0.60 lower>0.40 p<0.05 TAU+freshness-gated vs pooled and per-stratum |rho_length|<0.20 decoupling S2/S3 on heterogeneous WebChoreArena 532 (unevaluated - substrate missing, per_trajectory_traces empty, no Spearman bootstrap/block permutation computed)",
+    "S4 calibration UNKNOWN precision>=0.85 false_accept<=0.10 ECE<=0.15 upper<=0.18 with derived confidence std>0.05 imperfect accuracy 0.35-0.78 freshness TN>=0.85 on >=30 stale probes (unevaluated)",
+    "S5 Pareto M_total SPIDER(f10)<=0.75*M_total COLD saving>=25% lower>15% p<0.05 strict dominance vs flat RAG k5 at f10 and f100 robust +-50% build sensitivity with honest TAU+freshness-gated build = actual offline vector/index ops 108+ frozen (unevaluated)",
+    "S5b conditional WebMCP head-to-head Pareto where spec coverage >=70% (PC-WEBMCP-REGISTRY >=95% fetch) vs prevalence reporting where coverage<70% (unevaluated - WebMCP registry not built, coverage null)",
+    "S6 honest gap rho_novelty - |rho_shuffled|>0.35 and |rho_proxy|<0.60 including TAU candidate-count proxy and global |rho_shuffled|<0.20 p>=0.20 centered |mean|<0.05 std<0.15 5000 global + 5000 block perms TAU+freshness-gated (unevaluated)",
+    "Whether larger Intel manifest (WebGym 292k dedup >=50 eTLD+1 or WebArena-Verified Hard 192/36) covering natural Jaccard 0.30-0.60 overlap or richer representations (visual/computed-style, accessibility tree >10 nodes, network-response payload) would reveal different economics if heterogeneous gate fails at 10-family 1280x720 CDP gate",
+    "Whether Runtime single-worker sticky health-gated n_non304>=360 single-node else >=800 distributed stratified >=80/family with X-Worker-Pid>=10 If-None-Match/304 handling proxy_cache HIT counting honest per-trajectory hard-reset sum counters can pass before distributed n>=800 f=100 authorization per director portfolio_assessment",
+    "Whether Graph freshness gate TN>=0.85 can be validated on WebChoreArena cross-site sessions for bailout to UNKNOWN and whether deterministic compilation bypass with invariant protocol + cost-optimal planner (TreeWalker 99% + stable locator tier + JSON/Python DAG + pre/postcondition contracts + k-candidate planner + guards/bailout <0.1ms) is distinguishable from tautological DOM-hash or bijective n*3200 proxy on live heterogeneous heterogeneity"
+  ]
+}
