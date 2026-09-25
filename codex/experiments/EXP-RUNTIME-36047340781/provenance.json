@@ -1,0 +1,101 @@
+{
+  "experiment_id": "EXP-RUNTIME-36047340781",
+  "github_run_id": 36047340781,
+  "claim_id": "C-MEAS-VALID",
+  "lane": "runtime",
+  "base_sha": null,
+  "request_hash": "0899ef6e08c4eccb51d2f46e98c9d26b8b3b9e7766790aa41b6ad474236e6686",
+  "spec_hash": "4f257867a26dd4fa3b835605471e68c9e4833acba39d2df34fb61f8743debe63",
+  "prereg_hash": "1be8510e5ad0be68ee24324005f52ae8b9b1522cf2a1de2e105c769d1f088684",
+  "env": {
+    "python": "3.12.14 (main, Aug 13 2026, 02:47:42) [GCC 13.3.0]",
+    "flask": "3.1.3",
+    "pyjwt": "2.14.0",
+    "gunicorn": "23.0.0",
+    "nginx": "1.24.0",
+    "requests": "2.34.2",
+    "sqlite3": "3.45.1",
+    "brotli": "available",
+    "gzip": "available",
+    "scipy": "1.18.1"
+  },
+  "ports": {
+    "flask": 19860,
+    "nginx": 19851
+  },
+  "seed": 44,
+  "db_path": "/tmp/spider-runtime/36044045537/single.db",
+  "hs256_secret_sha256": "2b23d7955be7a23ca497d66d0890cb4a3ff4400909f545012db667af8267f78d",
+  "hs256_secret_len": 82,
+  "n_observations": 1767,
+  "batch_state_log": [
+    {
+      "batch": 0,
+      "count": 1,
+      "timestamp": 1790280877.1832936
+    },
+    {
+      "batch": 1,
+      "count": 1,
+      "timestamp": 1790280877.6486099
+    },
+    {
+      "batch": 2,
+      "count": 1,
+      "timestamp": 1790280878.1381953
+    },
+    {
+      "batch": 3,
+      "count": 1,
+      "timestamp": 1790280878.5900621
+    },
+    {
+      "batch": 4,
+      "count": 1,
+      "timestamp": 1790280879.0820143
+    }
+  ],
+  "batch_state_log_len": 25,
+  "factory_pattern_wsgi": true,
+  "flask_listening_verified": true,
+  "health_gate_verified": true,
+  "wsgi_sys_path_insert": true,
+  "jwt_decode_at_origin": true,
+  "single_nginx_location": true,
+  "nginx_proxy_pass_no_trailing_slash": true,
+  "nginx_add_header_x_worker_pid_always": true,
+  "nginx_request_uri_sticky": true,
+  "health_gate_attempts": 30,
+  "exclusive_nginx_c": true,
+  "single_hash_request_uri": true,
+  "no_load_balancing_method_redefined": true,
+  "proxy_cache_enabled": true,
+  "proxy_temp_path": "/tmp/spider-runtime/36044045537/temp",
+  "proxy_no_cache_authorization": true,
+  "proxy_cache_bypass_authorization": true,
+  "cache_dir": "/tmp/spider-runtime/36044045537/cache",
+  "cache_dir_ls": "total 12\ndrwxr-xr-x 3 www-data www-data 4096 Sep 24 20:07 .\ndrwxr-xr-x 5 runner   runner   4096 Sep 24 20:15 ..\ndrwx------ 3 www-data www-data 4096 Sep 24 20:07 2\n",
+  "cache_dir_exists": true,
+  "nginx_user": "www-data",
+  "use_sudo_nginx": true,
+  "natural_auth_state_headers": true,
+  "synthetic_header_mutation": false,
+  "freeze_hashes": {
+    "request.json": "0899ef6e08c4eccb51d2f46e98c9d26b8b3b9e7766790aa41b6ad474236e6686",
+    "spec.json": "4f257867a26dd4fa3b835605471e68c9e4833acba39d2df34fb61f8743debe63",
+    "prereg.md": "1be8510e5ad0be68ee24324005f52ae8b9b1522cf2a1de2e105c769d1f088684"
+  },
+  "scope": "single-node primary only with natural auth-state headers and real nginx proxy_cache ENABLED at /tmp/spider-runtime/36044045537/cache; distributed 2x shared-WAL n>=800 deferred until SUPPORTS",
+  "created_at": "2026-09-24T20:15:23.418684+00:00",
+  "run_experiment_sha256": "de9468d94a3fcf8bf1ce9fc750d0e514fa0711c3cac872b0b1c487993e5eecc8",
+  "wsgi_sha256": "06eb83fcf91e9b74be42899ce8e2c0130252d9df5020b5f8434f53ac17a1cb2b",
+  "nginx_conf_sha256": "213586e236be1e9f3bb583a40c91ee174c71f8917ef2d26fa4f221a90d732ce5",
+  "raw_freshness_sha256": "cc024392bfbe0c9ebc34c8e197f2f5e1900e61190832f49b851f819202740660",
+  "raw_hit_sha256": "5357f31bbaa82e204555f1d8853e048ce8901f768e111c8006216d8a8b8f2a1b",
+  "db_sha256": "8ff4e515b3a8bc1854f4cfe485d97c4af5d3d384199fcc6fc28710aa748fa3ce",
+  "health_gate_log_sha256": "d989ce01707b59d190371fe44843c12639e695ae37b69d43762af24342dbe301",
+  "cache_file_count_sudo": 1,
+  "cache_file_entries": [
+    "/tmp/spider-runtime/36044045537/cache/2/05/febd9bd9f76478774376fc8d7baa5052"
+  ]
+}
