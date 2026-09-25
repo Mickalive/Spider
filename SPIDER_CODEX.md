@@ -4,7 +4,7 @@ Pre-2.0 canonical memory remains frozen at `archive/spider-codex-ultimate:SPIDER
 
 Canonical Research 2.0 evidence lives in `codex/experiments/<experiment_id>/`.
 Use `codex/index.json` and `codex/claim_state.json` to locate relevant packets; do not load all experiment bodies by default.
-Validated experiments: **370**. Coverage gaps: **0**. Quarantined packets: **2**.
+Validated experiments: **378**. Coverage gaps: **0**. Quarantined packets: **2**.
 
 ## Experiment index
 
@@ -380,6 +380,14 @@ Validated experiments: **370**. Coverage gaps: **0**. Quarantined packets: **2**
 | EXP-PRODUCT-36091881382 | product | MEASUREMENT_INVALID | MEASUREMENT_INVALID | C-LLM-INHERIT | `d91ba36800e6` |
 | EXP-FRONTIER-36091890748 | frontier | PASS | MEASUREMENT_INVALID | C-RESIDUAL-NOVELTY | `6e5d0ad2b3b3` |
 | EXP-INTEL-36092351694 | intel | PASS | MIXED | C-CROSSSITE | `fce9fb4677ca` |
+| EXP-RUNTIME-36094450333 | runtime | PASS | SUPPORTS — DISTRIBUTED VALIDATED (bounded plain HTTP localhost) | C-MEAS-VALID | `7b5d00adcdb6` |
+| EXP-PRODUCT-36095578013 | product | MEASUREMENT_INVALID | MEASUREMENT_INVALID | C-PRODUCT-ECON | `4748e7c91b19` |
+| EXP-INTEL-36095582115 | intel | PASS | MIXED | C-CROSSSITE | `7143ed4b13c5` |
+| EXP-FRONTIER-36095585747 | frontier | PASS | MEASUREMENT_INVALID | C-RESIDUAL-NOVELTY | `33d32aac3872` |
+| EXP-FRONTIER-36097242687 | frontier | PASS | MEASUREMENT_INVALID | C-RESIDUAL-NOVELTY | `7415f8196489` |
+| EXP-FRONTIER-36099072254 | frontier | PASS | MEASUREMENT_INVALID | C-RESIDUAL-NOVELTY | `b99164df382a` |
+| EXP-RUNTIME-36100549580 | runtime | PASS | SUPPORTS — DISTRIBUTED VALIDATED canonical shared-WAL real-cache gate (C-MEAS-VALID) on plain HTTP localhost | C-MEAS-VALID | `6dd3ce57cf07` |
+| EXP-FRONTIER-36100559236 | frontier | PASS | MEASUREMENT_INVALID | C-RESIDUAL-NOVELTY | `4eb8baef16a0` |
 
 ## Latest recorded claim events
 
@@ -387,14 +395,14 @@ These are chronological latest events, not an automatic truth ranking.
 
 | Claim | Status | Experiment | Lane |
 |---|---|---|---|
-| C-CROSSSITE | HYPOTHESIS | EXP-INTEL-36092351694 | intel |
+| C-CROSSSITE | HYPOTHESIS | EXP-INTEL-36095582115 | intel |
 | C-DELTA-REPAIR | MEASUREMENT_INVALID | EXP-GRAPH-35999336958 | graph |
 | C-FRESHNESS | HYPOTHESIS | EXP-PRODUCT-35949571341 | product |
 | C-LLM-INHERIT | MEASUREMENT_INVALID | EXP-PRODUCT-36091881382 | product |
-| C-MEAS-VALID | EXPERIMENTAL | EXP-RUNTIME-36089494979 | runtime |
+| C-MEAS-VALID | VALIDATED | EXP-RUNTIME-36100549580 | runtime |
 | C-PARAM-INHERIT | MEASUREMENT_INVALID | EXP-GRAPH-35932480731 | graph |
-| C-PRODUCT-ECON | HYPOTHESIS | EXP-PRODUCT-36046064994 | product |
-| C-RESIDUAL-NOVELTY | HYPOTHESIS | EXP-FRONTIER-36091890748 | frontier |
+| C-PRODUCT-ECON | MEASUREMENT_INVALID | EXP-PRODUCT-36095578013 | product |
+| C-RESIDUAL-NOVELTY | HYPOTHESIS | EXP-FRONTIER-36100559236 | frontier |
 | C-SEMANTIC-RESOLVE | HYPOTHESIS | EXP-FRONTIER-36052053591 | frontier |
 | C-WEB-DYNAMICS | HYPOTHESIS | EXP-PHYSICS-36084494842 | physics |
 
