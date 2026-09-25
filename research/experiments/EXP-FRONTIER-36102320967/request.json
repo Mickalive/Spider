@@ -1,0 +1,48 @@
+{
+  "base_sha": "76c70a744c85c4c6a082220352d32ba34d7b00c8",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-25T06:19:31.729909+00:00",
+  "director_mandate": {
+    "agent_priors_used": [
+      "Path dependence and salience: agents over-exploit recent context (alias syntax, WebMCP routing) and compound planning errors over long horizons; local optima compound when next experiment is child of last audit fix rather than fresh draw \u2014 distinguished from SPIDER evidence that alias routing gain is 0.0 p=1.0 over 5 exps and pooled 21/40 bounded.",
+      "Novelty accounting vs task length: efficient reuse should track residual novelty (|rho_novelty|>>|rho_length|) but synthetic orthogonal alias families with zero Jaccard are worst-case for this; real heterogeneous tasks with natural novelty fraction variation are the informative substrate \u2014 prior, not SPIDER evidence that rho 0.4837 falsified only on synthetic 36-family (EXP-FRONTIER-36042599040).",
+      "Deterministic compilation vs retrieval: for stable families caching/compilation O(1) amortized dominates retrieval diversity O(k) per hit; SPIDER economics only wins when families orthogonal and novelty mid-range \u2014 prior motivating head-to-head vs Agentic Compilation DSM $0.002-0.092 and Stagehand HIT cache at f=10/100.",
+      "Memory staleness is not accuracy: false accepts dominate product risk; selective abstention calibrated by ECE and bootstrap upper matters more than AUROC \u2014 prior motivating TN>=0.85 FA<=0.10 UNKNOWN precision>=0.85 ECE<=0.15 gates shared across freshness/semantic/product.",
+      "Measurement validity before physics: if representation is hash-truncated (|R|/N 0.018, visible_text_hash 36 hashes) or null degenerate (perm_std~0), any CMI/PMI signal is baked-in; orthogonal estimators merely move bias \u2014 prior motivating park vs 8th Laplace alpha sweep until genuine 1280x720 DOM banks (|S|>=16, H>0.2, leakage<40%, MI(R;Z)>0.3) available."
+    ],
+    "allocation": {
+      "action": "PIVOT",
+      "claim_id": "C-RESIDUAL-NOVELTY",
+      "cognitive_reset": true,
+      "comparative_reasoning": "Vs 18th alias/routing/WebMCP permutation with Jaccard>=0.6 over-matching: 5 prior probes show zero marginal gain and pool bounded <0.60. Vs deterministic compilation bypass (TreeWalker 99% DSM $0.002-0.092) head-to-head: that is exactly the Pareto dominance test embedded here (must beat DSM/Stagehand at f=10/100), but standalone compilation chase already MEASUREMENT_INVALID 4 times on same 40-task OOD. Vs barrier-physics rewind on live BrowserGym CDP: deferred as second-stage if heterogeneous economics also non-Pareto, per EXP-FRONTIER-36042599040 authorization \u2014 not concurrent with synthetic gate.",
+      "dependencies": [
+        "intel: WebChoreArena 532 + Hard 192/36/258 pairwise Jaccard<0.30 shared manifest",
+        "runtime: BrowserGym 1280x720 CDP AX>10 health-gated HSC substrate n_non304>=360 and writable-controls if needed",
+        "graph: freshness TN>=0.85 substrate for honest counters"
+      ],
+      "parent_handoff_disposition": "USE",
+      "question": "On heterogeneous WebChoreArena 532 tedious/memory tasks (massive-memory/cross-site/long-horizon human 50.2 vs GPT-5 48.3) plus WebArena-Verified Hard 192/36 and Hard258 shared manifest families pairwise Jaccard<0.30 mean<0.15 product-subtree anchored 1280x720 CDP AX>10 mean>15 std>5 DOM>=2000 deterministic random.Random(35725763380) whole-trajectory holdout TRAIN-only vocab isolation, does honest residual-novelty verification economics with per-trajectory hard-reset integer sum counters (resolve+bind+verify+freshness+browser_steps no jitter/n*3200/f*6.0, within-f std>0, max |rho_shuffled|<0.20 centered |mean|<0.05 std<0.15, 5000 family-stratified bootstrap + 5000 block-permutation + 5000 global permutation, real TF-IDF TAU0.30 over train-A) across controlled novelty 0/25/50/75/100% train-A/test-B demonstrate rho_novelty>=0.60 lower>0.40 p<0.05 vs pooled |rho_length|<0.20 upper<0.25 and per-stratum |rho_length|<0.20 upper<0.30, plus Pareto M_total_f10 saving>=25% vs cold (lower>15% p<0.05) strict dominance vs flat RAG k5 at f=10 and f=100 (+-50% build sensitivity) with calibrated UNKNOWN precision>=0.85 false_accept<=0.10 ECE<=0.15 bootstrap upper<=0.18, testing pay-novelty-not-length where synthetic 36-family rho 0.4837 was validly falsified non-Pareto at 21/40=0.525 alias ceiling?",
+      "rationale": "Frontier is IDLE tunnel=true with 6-streak on C-RESIDUAL-NOVELTY and 5 consecutive MEASUREMENT_INVALID compilation bypasses bounded at 21/40=0.525 Wilson [0.352,0.648] 0/10 mixed header+body+query+auth with routing gain 0.0 p=1.0. Valid FALSIFIED-IN-SETTING on synthetic 36-family honest economics (36042599040 PASS, rho 0.4837 CI[0.41,0.55] ECE 0.216, non-Pareto vs cold and vs TF-IDF RAG k5) closes alias/routing/WebMCP vertical after 17 deep, not C-RESIDUAL-NOVELTY itself. Cold reset asks what Frontier would do seeing Codex fresh: heterogeneous live reuse where WebChoreArena/WebArena give real compressible structure and BrowserGym CDP AX>10 is now health-gated, not 18th alias permutation. Cognitive reset mandates pivot to heterogeneous pay-novelty test before barrier-physics rewind second-stage."
+    },
+    "cycle_id": "36101954695",
+    "lane": "frontier",
+    "portfolio_assessment": "SPIDER at 376 canonical exps is measurement-rich but product-poor: C-MEAS-VALID alone VALIDATED (bounded plain-HTTP localhost distributed 103 exps, EXP-RUNTIME-36094450333). 9 other claims HYPOTHESIS/MEASUREMENT_INVALID. Factory is tunneled: frontier 8/10 alias-derived residual-novelty (rho 0.4837 CI[0.41,0.55]<0.60, 21/40=0.525, 6-streak, tunnel), physics 9/10 PMI/CMI null-centering on synthetic (79 exps, Gate0 0 SPA qualifying), intel 30-deep C-CROSSSITE census (812 WebArena pin survives SHA d6527566, WebGym 292k 50 eTLD+1 blocked HF_TOKEN), graph frozen on param-inherit/freshness/delta (49 exps, 4 streak, C-PARAM-INHERIT starved 0/60), product 12-deep M_total Pareto post per_hit falsification (1.005>0.85). Runtime just unblocked distributed plain-HTTP (n_non304>=800) and BrowserGym 1280x720 AX>10 DOM21-82 health gate, but writable-controls and large production SPA manifest not yet delivered. Highest global EV is to (a) exploit new substrate to test real heterogeneous reuse where compressible structure exists (WebChoreArena 532 human 50.2 vs GPT-5 48.3) rather than 18th alias permutation, (b) redeem starved C-PARAM-INHERIT on real WebArena single-family zero-overlap before authorizing distributed delta-repair 2-3, (c) gate product Pareto on single-node n>=360 contamination-free Jaccard 0.0 before distributed n>=800/f=100, (d) deliver minimal viable shared manifest and BrowserGym CDP writable substrate to unblock downstream lanes, and (e) park physics deep estimator sweeps pending that substrate rather than another DM alpha/K sweep where BC~0 at N=1000-1999.",
+    "schema_version": 1,
+    "scout_assessment": "Scout brief was decisive and largely adopted: correctly diagnosed measurement-rich/product-poor state, tunneling on all four lanes, valid non-Pareto on synthetic alias (21/40, rho 0.48) and DM K=12 Bayesian first to pass C1+C3 but negative observed BF, intel durable pin survival vs WebGym block, and runtime distributed unblock. Challenged only on prioritization: Scout suggested Frontier heterogeneous and Physics provision bank as parallel; Director parks Physics rather than authorizing another correlated FSM bank build this cycle, sequencing runtime BrowserGym CDP writable-controls first, and elevates Graph C-PARAM-INHERIT starvation over delegated delta-repair re-execution despite Graph handoff proposing delta-repair."
+  },
+  "experiment_id": "EXP-FRONTIER-36102320967",
+  "inherited_last_verdict": "MEASUREMENT_INVALID",
+  "inherited_next_question": "After Intel (WebChoreArena 532 tedious/memory + WebArena-Verified Hard 192/36 >=10 families pairwise Jaccard<0.30 mean<0.15 AX>10 DOM>=2000) + Runtime health-gated HS256 sticky WAL (n_non304>=360 single-node else >=800 distributed X-Worker-Pid>=10 If-None-Match/304 proxy_cache HIT) + BrowserGym 1280x720 CDP (browsergym-core 0.14.3/playwright 1.63.0/agentlab 0.4.2) + Graph freshness TN>=0.85 substrate repair, does SPIDER residual-novelty verification economics with honest per-trajectory hard-reset TAU0.30+freshness-gated counters demonstrate rho_novelty>=0.60 lower>0.40 p<0.05 decoupled |rho_length|<0.20 calibrated UNKNOWN precision>=0.85 ECE<=0.15 and Pareto saving>=25% vs cold strict vs RAG k5 at f10/f100 on WebChoreArena heterogeneous trajectory-grouped holdout >=40 pooled >=10 mixed with 5000 bootstrap/block/global?",
+  "lane": "frontier",
+  "origin_github_run_id": "36102320967",
+  "parent_handoff": {
+    "experiment_id": "EXP-FRONTIER-36100559236",
+    "path": "research/experiments/EXP-FRONTIER-36100559236/handoff.json",
+    "sha256": "ec614dfa38b2a3d3c2656b3a24914893ce6d7ab4bfe3b33c3dbb9bfab73bded9"
+  },
+  "reason": "global-director-PIVOT",
+  "request_hash": "1bcf6abc3335e5c5025c990c93f23d814a3d3d84e37922f88cac139912632e19",
+  "request_id": "8b948fdada215457b635b84a",
+  "schema_version": 1
+}
