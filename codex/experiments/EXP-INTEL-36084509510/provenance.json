@@ -1,0 +1,292 @@
+{
+ "experiment_id": "EXP-INTEL-36084509510",
+ "schema_version": 1,
+ "frozen_inputs": {
+  "request.json": "300e8ccd615782c5de44d25321b5230978f28121bf0784eeff778cc261003f0c",
+  "spec.json": "9e4eb4d32b2b5ad80045e8da7aeb3931aa62945eeb13c6756e7d2dd04fc5183d",
+  "prereg.md": "2418fdeabe9040c898088d0ad4e6220b220329c03554a64c05c3fe142133f9d6",
+  "freeze.json": "d7bca43d6c462a149e3a633e3206a10d437b296f4ce97a6bfe3fcb7c8cb62487"
+ },
+ "frozen_inputs_verified_byte_identical": true,
+ "environment": {
+  "experiment_id": "EXP-INTEL-36084509510",
+  "pip_freeze_sha256": "b68aff78fd35e30676b741c63d5a1571b641f91d19c63687ebc8445689b1d4ae",
+  "pip_freeze_lines": 263,
+  "pip_freeze_nonempty": true,
+  "playwright_version": "Version 1.63.0",
+  "viewport": "1280x720",
+  "browsergym_core": "0.14.3",
+  "agentlab": "0.4.2",
+  "playwright": "1.63.0",
+  "versions_match": true
+ },
+ "docker": {
+  "hub_digest": "sha256:3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb",
+  "expected": "sha256:3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb",
+  "container_http": 200,
+  "images_digests": {
+   "cmd": "docker images --digests am1n3e/webarena-verified-shopping",
+   "timeout_configured_s": 120,
+   "returncode": 0,
+   "stdout_tail": "REPOSITORY                          TAG       DIGEST                                                                    IMAGE ID       CREATED        SIZE\nam1n3e/webarena-verified-shopping   <none>    sha256:3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb   a5b6fb47ee9f   7 months ago   13.3GB\n",
+   "stderr_tail": "",
+   "elapsed_s": 0.014,
+   "error": null
+  },
+  "orchestration": "artifacts/raw/container_orchestration.json"
+ },
+ "durable_attempts": {
+  "hf_webgym": "artifacts/raw/hf_webgym_manifest_attempts.json",
+  "hf_webarena": "artifacts/raw/hf_webarena_attempts.json",
+  "github_cross_source": "artifacts/raw/github_cross_source_attempts.json",
+  "ghcr": "artifacts/raw/ghcr_browsergym_attempts.json",
+  "docker_hub": "artifacts/raw/docker_hub_api_attempts.json"
+ },
+ "shared_manifest": {
+  "path": "research/experiments/EXP-INTEL-36084509510/artifacts/derived/shared_diverse_manifest.json",
+  "sha256": "dd96d083bd492af3d436136a302c7b846c1123b194ac63e9fde84819d6b9b890"
+ },
+ "artifacts": [
+  {
+   "path": "research/experiments/EXP-INTEL-36084509510/artifacts/raw/container_health.json",
+   "sha256": "28bb1769bf58c01528c4ed368ee87dab96c84efaff245b74fb6877721b0f9189"
+  },
+  {
+   "path": "research/experiments/EXP-INTEL-36084509510/artifacts/raw/container_orchestration.json",
+   "sha256": "22e692df1be843cb88f9fb10ba3621b451e21f26a1dda0e03ccb1bdc6302e22b"
+  },
+  {
+   "path": "research/experiments/EXP-INTEL-36084509510/artifacts/raw/docker_hub_api_attempts.json",
+   "sha256": "d41e5512e663c7c373d5845fae05642de6d9c03f6129e4371da7108094fa72ea"
+  },
+  {
+   "path": "research/experiments/EXP-INTEL-36084509510/artifacts/raw/environment_pin.json",
+   "sha256": "bfe09a7929f6132966b510a9f3565a519e481edba00ae8041f9db95b981a9747"
+  },
+  {
+   "path": "research/experiments/EXP-INTEL-36084509510/artifacts/raw/ghcr_browsergym_attempts.json",
+   "sha256": "eda7a62596a7375553a85464975ba04169acdb32d95f083175a48ce4c59d06cd"
+  },
+  {
+   "path": "research/experiments/EXP-INTEL-36084509510/artifacts/raw/github_cross_source_attempts.json",
+   "sha256": "7580a8926a378e1eb45ad1813a8adac76b160b1aabbb62b17bdad290cfea7957"
+  },
+  {
+   "path": "research/experiments/EXP-INTEL-36084509510/artifacts/raw/grammar_hash.json",
+   "sha256": "667b86cd6cfad59a630b1dea418f7fc0a1a18ec8de5e8f665c255c7fe0ca5103"
+  },
+  {
+   "path": "research/experiments/EXP-INTEL-36084509510/artifacts/raw/hf_webarena_attempts.json",
+   "sha256": "5410473045a05f5668916483734c395b927ede51c9ef310d434eb7e5fbcd829d"
+  },
+  {
+   "path": "research/experiments/EXP-INTEL-36084509510/artifacts/raw/hf_webgym_manifest_attempts.json",
+   "sha256": "9e5d9940b4ee41ef68204f2d57a17b7e160a0a7dca5e0e5db76f4d7b66e8f5e5"
+  },
+  {
+   "path": "research/experiments/EXP-INTEL-36084509510/artifacts/raw/orthogonal_census_provenance.json",
+   "sha256": "78e4718ca57e26e0039ca9a6eb23e19524a31811e1a860ba7ef4729bb559f349"
+  },
+  {
+   "path": "research/experiments/EXP-INTEL-36084509510/artifacts/raw/tldextract_pin.json",
+   "sha256": "a6295b1da9cab5eba34a538227b9a3f745ea7ec34d2810f205c24e4839626457"
+  },
+  {
+   "path": "research/experiments/EXP-INTEL-36084509510/artifacts/raw/webarena-verified-fresh.json",
+   "sha256": "d65275660814663375028e9017e1f929e3c38321041b125795e2713b52243d30"
+  },
+  {
+   "path": "research/experiments/EXP-INTEL-36084509510/artifacts/raw/pc_c_fixture.txt",
+   "sha256": "153331751e212c7fe9798a2e20c925be1adb6501dde92210b9c707f99ae7c82c"
+  },
+  {
+   "path": "research/experiments/EXP-INTEL-36084509510/artifacts/raw/pip_freeze.txt",
+   "sha256": "b68aff78fd35e30676b741c63d5a1571b641f91d19c63687ebc8445689b1d4ae"
+  },
+  {
+   "path": "research/experiments/EXP-INTEL-36084509510/artifacts/raw/ax_captures.jsonl",
+   "sha256": "6d2f993476b3e91f8df572bd2cb91f41f7f8ccfac1e9fedfd93ed6c9293c8efd"
+  },
+  {
+   "path": "research/experiments/EXP-INTEL-36084509510/artifacts/raw/ax_captures_consistency_fresh.jsonl",
+   "sha256": "b76c774d948f5f1b686e17c4138d046fff258a0d9947e5f5c33305dca51c2002"
+  },
+  {
+   "path": "research/experiments/EXP-INTEL-36084509510/artifacts/derived/ax_analysis.json",
+   "sha256": "38c9eabd1d8b758cfd600bc7ef4fd285474275ebf289c35f90f9131da866f580"
+  },
+  {
+   "path": "research/experiments/EXP-INTEL-36084509510/artifacts/derived/ax_consistency_fulltree.json",
+   "sha256": "ef4dd1a3a47991334a7d5d8ee1294606c839efe1d4273d94985e143bcf67065d"
+  },
+  {
+   "path": "research/experiments/EXP-INTEL-36084509510/artifacts/derived/deterministic_family_samples.json",
+   "sha256": "3dd3cfa6c58e86ae5e1639430d49b33e0d8121f8609f530b1b68a7f57d99923a"
+  },
+  {
+   "path": "research/experiments/EXP-INTEL-36084509510/artifacts/derived/family_anchoring.json",
+   "sha256": "2f1479127c0becec650c263b45b947a8352fd6314b950f6de97ff2cbd93e35e8"
+  },
+  {
+   "path": "research/experiments/EXP-INTEL-36084509510/artifacts/derived/pc_c_param_prevalence.json",
+   "sha256": "4c0a3562fa6eec271343b55607e2e521a008f1465ac7b695dc43e22ca69de4a1"
+  },
+  {
+   "path": "research/experiments/EXP-INTEL-36084509510/artifacts/derived/shared_diverse_manifest.json",
+   "sha256": "dd96d083bd492af3d436136a302c7b846c1123b194ac63e9fde84819d6b9b890"
+  },
+  {
+   "path": "research/experiments/EXP-INTEL-36084509510/artifacts/derived/vacuous_single_store.json",
+   "sha256": "68655bfd8dfbc9005f4577f23f424acb5d23282d5dc7f8a9013078bf0f18e540"
+  },
+  {
+   "path": "research/experiments/EXP-INTEL-36084509510/artifacts/derived/webarena_census.json",
+   "sha256": "1652d7ef7a894a4f7bb5c1e04b85e12bcd354c1c22d25b2589ebf3020a952a0c"
+  },
+  {
+   "path": "research/experiments/EXP-INTEL-36084509510/artifacts/derived/webgym_sampled_census.json",
+   "sha256": "c7ae9ecbf982bc3512908f668ca3e15405d8eedaf409ad838f41bad205ce8980"
+  },
+  {
+   "path": "research/experiments/EXP-INTEL-36084509510/artifacts/derived/webgym_threshold_sweep.json",
+   "sha256": "eb70aba73acc9ad4b8da4202e825d2d1233800142047bb42edb415416a786339"
+  }
+ ],
+ "grammar_hash_live": {
+  "path": "/home/runner/work/Spider/Spider/research/intel/grammar_fulltree_358885.py",
+  "sha256": "273eafbcb817e8981f843581a724594665cabdd357b318c701251929ee9c83de",
+  "body_regex_present": true,
+  "grammar_hash_live_at_execute": "273eafbcb817e8981f843581a724594665cabdd357b318c701251929ee9c83de"
+ },
+ "deterministic_samples": {
+  "experiment_id": "EXP-INTEL-36084509510",
+  "seed": 35725763380,
+  "operator": "random.Random(35725763380).sample(sorted(families_ge3),10) executed twice with seed reset, on EACH census",
+  "primary": {
+   "census_label": "primary_webarena_verified_v2_812",
+   "seed": 35725763380,
+   "operator": "random.Random(35725763380).sample(sorted_families_ge3,10) executed twice with seed reset, on EACH census",
+   "sorted_families_ge3": [
+    101,
+    136,
+    137,
+    138,
+    139,
+    145,
+    147,
+    153,
+    154,
+    155,
+    156,
+    159,
+    160,
+    162,
+    163,
+    165,
+    169,
+    171,
+    172,
+    180,
+    186,
+    189,
+    191,
+    194,
+    196,
+    197,
+    204,
+    206,
+    207,
+    208,
+    211,
+    212,
+    213,
+    214,
+    222,
+    370
+   ],
+   "n_families_ge3": 36,
+   "S1": [
+    191,
+    180,
+    162,
+    197,
+    153,
+    213,
+    163,
+    137,
+    136,
+    222
+   ],
+   "S2": [
+    191,
+    180,
+    162,
+    197,
+    153,
+    213,
+    163,
+    137,
+    136,
+    222
+   ],
+   "S1_equals_S2": true,
+   "unique_S1_union_S2": [
+    136,
+    137,
+    153,
+    162,
+    163,
+    180,
+    191,
+    197,
+    213,
+    222
+   ],
+   "n_unique": 10,
+   "product_page_families": [
+    136,
+    145,
+    196,
+    222
+   ],
+   "sample_product_page_families": [
+    136,
+    222
+   ],
+   "sample_families_without_product_urls": [
+    137,
+    153,
+    162,
+    163,
+    180,
+    191,
+    197,
+    213
+   ]
+  },
+  "webgym_diverse": {
+   "census_label": "WebGym_292k_127k_sampled_diverse",
+   "seed": 35725763380,
+   "operator": "random.Random(35725763380).sample(sorted_families_ge3,10) executed twice with seed reset, on EACH census",
+   "sorted_families_ge3": [],
+   "n_families_ge3": 0,
+   "S1": "ERROR: ValueError: Sample larger than population or is negative",
+   "S2": "ERROR: ValueError: Sample larger than population or is negative",
+   "S1_equals_S2": null,
+   "unique_S1_union_S2": [],
+   "n_unique": 0,
+   "product_page_families": [],
+   "sample_product_page_families": [],
+   "sample_families_without_product_urls": []
+  },
+  "canonical_families": [
+   136,
+   145,
+   196,
+   222
+  ],
+  "union_constructible_note": "WebGym UNAVAILABLE; union of S1|S2 (primary) + canonical",
+  "webgym_sample_status": "UNAVAILABLE_HF_TOKEN_ABSENT"
+ },
+ "note": "Fresh live CDP probe at 1280x720 CDP Accessibility.getFullAXTree; no reused captures. freeze.json is immutable and carries only frozen-input hashes (freeze discipline); the shared-manifest path+sha256 mandated by MV8a is stored here in provenance.json, which is the EXECUTE-owned provenance file."
+}
