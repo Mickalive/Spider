@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-36118890504",
+  "git_commit": "d14f4f8798326799c4622ee8ad7988006ab869a9",
+  "base_sha": "9db3353d61abc676364a0daa2f247895c4cce2e4",
+  "substrate": {
+    "type": "Flask 3.1.3 + PyJWT 2.13.0 HS256",
+    "port": 18928,
+    "jitter_ms": "50-150",
+    "validated_by": "Runtime EXP-RUNTIME-33902315583 pattern"
+  },
+  "kernel": {
+    "path": "src/spider/kernel.py",
+    "sha256": "46929b3a951df48d7f9d1fd850871073c0d91c1868aa117e13d389fe274e8d61",
+    "has_distill_parameterized": false
+  },
+  "registry_path": "/home/runner/work/Spider/Spider/research/experiments/EXP-GRAPH-36118890504/registry.jsonl",
+  "results_path": "/home/runner/work/Spider/Spider/research/experiments/EXP-GRAPH-36118890504/raw_results.json",
+  "python_version": "3.12.14 (main, Aug 13 2026, 02:47:42) [GCC 13.3.0]",
+  "dependencies": {
+    "flask": "3.1.3",
+    "pyjwt": "2.13.0",
+    "requests": "2.34.2"
+  }
+}
