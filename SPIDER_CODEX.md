@@ -4,7 +4,7 @@ Pre-2.0 canonical memory remains frozen at `archive/spider-codex-ultimate:SPIDER
 
 Canonical Research 2.0 evidence lives in `codex/experiments/<experiment_id>/`.
 Use `codex/index.json` and `codex/claim_state.json` to locate relevant packets; do not load all experiment bodies by default.
-Validated experiments: **390**. Coverage gaps: **0**. Quarantined packets: **2**.
+Validated experiments: **391**. Coverage gaps: **0**. Quarantined packets: **2**.
 
 ## Experiment index
 
@@ -400,6 +400,7 @@ Validated experiments: **390**. Coverage gaps: **0**. Quarantined packets: **2**
 | EXP-GRAPH-36132150213 | graph | PASS | MEASUREMENT_INVALID | C-FRESHNESS | `6a72f03353a8` |
 | EXP-PRODUCT-36249064252 | product | PASS | ACCEPT_MECHANISM_IN_SETTING_COMPOUND_GATE_FAIL_ECONOMIC_HALF_NON_IDENTIFYING | C-PARAM-INHERIT | `61eb4fb53675` |
 | EXP-INTEL-36249068574 | intel | REVISE | INTEL verification complete (MV1-MV6 PASS): verified external deterministic-compilation literature specifies the no-memory deterministic executor baseline (MV6) and published cross-site evidence favors hierarchical Intent/Stage/Action over flat fragment reuse on benchmarks; however, task distribution incomparability (MV3 PARTIAL) and compilation-vs-inheritance conflation mean the external convergence does not constitute a clean falsification of SPIDER's compilation-bypass direction per the frozen decision_rule. Producer outcome misclassified (MIXED) relative to spec; audit ceiling bounds claims. Claims updated conservatively. | C-PRODUCT-ECON, C-CROSSSITE, C-RESIDUAL-NOVELTY | `a076102f078b` |
+| EXP-FRONTIER-36249071934 | frontier | REVISE | BOUNDED_PARTIAL_POSITIVE_ON_THE_IDENTIFIED_LEG_ONLY: the no-memory deopt ratchet beats always-deopting cold exploration at matched correctness on this plan family (C_d=38.6 < C_c=72.0 abstract units/episode, paired bootstrap -33.4, CI95 [-34.0,-32.4]) and at all five swept novelty rates; the shipped incumbent kernel is confirmed non-executable under the preregistered configuration (0 of 1200 EXECUTABLE resolutions, 0 mechanisms executed, C_i == C_c exactly); the inherited-vs-no-memory leg is NOT IDENTIFIED, so the frozen falsifier is NOT triggered. Audit status is REVISE with producer_claim_supported=false, therefore C-RESIDUAL-NOVELTY moves HYPOTHESIS -> EXPERIMENTAL at the audited ceiling DEOPT_RATCHET_BEATS_COLD_ON_THIS_PLAN_FAMILY with INHERITED_LEG_NOT_IDENTIFIED, and no product promotion is authorized. | C-RESIDUAL-NOVELTY | `ee64af0393bf` |
 
 ## Latest recorded claim events
 
@@ -414,7 +415,7 @@ These are chronological latest events, not an automatic truth ranking.
 | C-MEAS-VALID | MEASUREMENT_INVALID | EXP-RUNTIME-36106663091 | runtime |
 | C-PARAM-INHERIT | EXPERIMENTAL | EXP-PRODUCT-36249064252 | product |
 | C-PRODUCT-ECON | HYPOTHESIS | EXP-INTEL-36249068574 | intel |
-| C-RESIDUAL-NOVELTY | HYPOTHESIS | EXP-INTEL-36249068574 | intel |
+| C-RESIDUAL-NOVELTY | EXPERIMENTAL | EXP-FRONTIER-36249071934 | frontier |
 | C-SEMANTIC-RESOLVE | HYPOTHESIS | EXP-FRONTIER-36052053591 | frontier |
 | C-WEB-DYNAMICS | HYPOTHESIS | EXP-PHYSICS-36084494842 | physics |
 
