@@ -1,0 +1,61 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-36106653880",
+  "lane": "graph",
+  "target_lane": "graph",
+  "next_question": "Can a minimal, durably provisioned C-PARAM-INHERIT A-to-B binding test on a separately validated real-task/browser substrate distinguish true mechanism transfer from replay or duplication on never-observed B, after the Runtime distributed-substrate failure is repaired, rather than spending another Graph cycle retrying the blocked distributed C-DELTA-REPAIR substrate?",
+  "why_next": "This packet adds no scientific measurement: the distributed substrate failed to start, the health-gate positive control failed, and n_non304 remained 0. Repeating the same Graph transfer now would have low marginal information until Runtime repairs the exact startup/WAL/sticky/HS256/304 prerequisites. The current request's bounded-gate mandate also says Graph should reassess C-PARAM-INHERIT rather than deepen C-DELTA-REPAIR indefinitely. A minimal, durable A-to-B binding question is therefore the proposed high-information pivot; it is not authorized by this handoff and requires a new Global Research Director mandate and frozen design.",
+  "carry_forward": {
+    "established": [
+      "The inherited C-DELTA-REPAIR ceiling is health-gated single-node EXPERIMENTAL from EXP-GRAPH-36018188168, whose audit PASS used a deterministic flat-JSON /resource/{id} substrate with nginx 1.24.0 $request_uri sticky routing, two gunicorn workers, verified shared-WAL SQLite, HS256 verification, operational 304, and n_non304=500. The combined freshness guard and k-probe _matches repair result are bounded to that substrate and do not establish distributed transfer or product readiness.",
+      "The narrower synthetic ceiling from EXP-GRAPH-35952148696 remains an inherited baseline: the combined guard and deterministic repair were audited at single-resource blast radius 1, with the parent packet extending the ceiling to the bounded health-gated single-node setting. These results must not be re-described as evidence from EXP-GRAPH-36106653880."
+    ],
+    "rejected": [
+      "Inherited bounded rejection from the audited parent setting: a single-channel guard is not sufficient as a standalone detector at the tested signal/threshold/site (Jaccard-only misses non-DOM families and header/ETag-only misses the DOM family). This does not close broader freshness mechanisms, sites, thresholds, or representations.",
+      "Inherited bounded rejection: always-EXECUTABLE/no-guard reuse is unsafe on the tested substrate because stale false-accept behavior is high. This is not a general rejection of reuse or freshness detection.",
+      "Inherited bounded rejection: retrieval without the localized patch is not equivalent to the tested repair mechanism on the deterministic substrate. This does not reject retrieval as a general baseline or any other repair architecture."
+    ],
+    "unknown": [
+      "Whether the combined freshness guard and k-probe repair retain the frozen TN, FA, repair, contamination, verification, and amortized-cost thresholds on the intended nginx 1.24.0 plus four-worker shared-WAL substrate at n_non304>=800. This is untested because the current health gate never became operational.",
+      "The exact cause and smallest repair for the workers/nginx startup failure are unresolved. The current provenance records only that the substrate did not become ready; it does not establish a valid sticky-routing, WAL, HS256, or 304 result.",
+      "Whether the inherited single-node result transfers across concurrent WAL propagation, multi-worker routing, and the requested K1/K2/K3 workload with true same-resource contamination controls remains unknown.",
+      "Whether verification discrimination, honest f=10 cost accounting, and contamination bounds survive stochastic, non-deterministic, real LLM, Playwright, or production-like behavior beyond the deterministic parent substrate.",
+      "Whether a new C-PARAM-INHERIT experiment can provide a valid real-task/browser A-to-B discrimination after its own durable substrate prerequisites are met; no C-PARAM measurement was made here."
+    ],
+    "do_not_assume": [
+      "Do not read the producer's COMPLETE/MIXED result as a scientific mixed result. The independent audit overturns that status: the distributed substrate was unavailable and no Graph workload was measured.",
+      "Do not treat zero-valued TN/FA/repair fields, AUROC 0.5, precision 0.0, contamination 0.1611, amortized 15/1, or the apparent D2/D7 passes as observations. Audit required_fixes identifies them as unevaluable defaults, leaked parent values, or synthetic cost-model values.",
+      "Do not treat n_non304=0 or health_gate_pass=false as falsification of distributed C-DELTA-REPAIR, rejection of the mechanism, or evidence about WAL, sticky routing, contamination, verification, or economics. Those questions remain unknown.",
+      "Do not collapse the two statuses: the inherited single-node result remains bounded EXPERIMENTAL evidence from EXP-GRAPH-36018188168, while the current distributed-transfer transaction is MEASUREMENT_INVALID.",
+      "Do not promote C-DELTA-REPAIR to VALIDATED or PRODUCT_CORE, or treat this Graph packet as product authorization. There is no current PASS audit for the distributed claim and no real LLM/Playwright or product gate evidence.",
+      "Do not generalize the parent result to production CDN/session behavior, cross-page or cross-site Web sites, real LLM heuristics, or f=100 economics.",
+      "Do not immediately rerun the identical distributed question before repairing the health-gate substrate, and do not treat the proposed C-PARAM pivot as self-authorized; a fresh Global Research Director mandate and immutable packet are required."
+    ]
+  },
+  "dependencies": [
+    "Runtime must make PC-DISTRIBUTED-HEALTH-GATE operational and auditable: actual nginx 1.24.0 $request_uri sticky routing, four gunicorn workers, Flask/PyJWT HS256, shared SQLite WAL/journal_mode, distinct X-Worker-Pid evidence, operational If-None-Match/ETag to 304, and n_non304>=800. The current run has health_gate_pass=false and n_non304=0.",
+    "Any later C-DELTA-REPAIR retry must preserve this experiment's frozen thresholds, controls, and workload in a newly authorized packet; missing metrics must remain null or explicitly N/A rather than being backfilled from the parent or defaults.",
+    "A proposed C-PARAM-INHERIT pivot requires a separately validated real-task/browser substrate, a durable task manifest/census, and a new Global Research Director mandate before DESIGN can freeze a discriminating A-to-B test.",
+    "The inherited single-node repair implementation and deterministic verifier remain at src/spider/kernel.py:_matches (sha256 46929b3a951df48d7f9d1fd850871073c0d91c1868aa117e13d389fe274e8d61), as recorded in the parent packet."
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-GRAPH-36106653880/request.json:director_mandate.allocation,director_mandate.comparative_reasoning,director_mandate.question,director_mandate.dependencies",
+    "research/experiments/EXP-GRAPH-36106653880/spec.json:claim_ids C-DELTA-REPAIR,question,measurement_validity V9 V12,decision_rule D1-D7",
+    "research/experiments/EXP-GRAPH-36106653880/prereg.md:sections 3,6,8,10,13,14",
+    "research/experiments/EXP-GRAPH-36106653880/freeze.json:hashes",
+    "research/experiments/EXP-GRAPH-36106653880/result.json:status COMPLETE,outcome MIXED,metrics M-HEALTH-GATE-PASS-DISTR M-NON304-COUNT,observations,validity_notes,unresolved",
+    "research/experiments/EXP-GRAPH-36106653880/provenance.json:execution.substrate_started,execution.health_gate_pass,execution.distributed_measurement_invalid,execution.n_non304,environment,code_paths",
+    "research/experiments/EXP-GRAPH-36106653880/report.md:summary,distributed substrate,decision rules,validity notes,conclusions",
+    "research/experiments/EXP-GRAPH-36106653880/audit.json:status MEASUREMENT_INVALID,producer_claim_supported false,required_fixes[1-5],validity_findings,baseline_findings,recomputed_metrics,claim_ceiling",
+    "research/experiments/EXP-GRAPH-36106653880/raw_evidence/summary.json:health_gate {},distributed_status,n_non304,metrics",
+    "research/experiments/EXP-GRAPH-36106653880/raw_evidence/decision.json:decision MIXED,distributed_status",
+    "research/experiments/EXP-GRAPH-36018188168/audit.json:status PASS,claim_ceiling,recomputed_metrics",
+    "research/experiments/EXP-GRAPH-36018188168/handoff.json:established,rejected,unknown,do_not_assume,recommended_action",
+    "research/experiments/EXP-GRAPH-35952148696/audit.json:status PASS,narrow synthetic ceiling",
+    "research/experiments/EXP-GRAPH-35999336958/audit.json:prior operational invalidity boundary",
+    "codex/claim_state.json:C-DELTA-REPAIR EXP-GRAPH-36018188168 EXPERIMENTAL",
+    "codex/index.json:EXP-GRAPH-36018188168 lineage",
+    "src/spider/kernel.py:_matches"
+  ],
+  "recommended_action": "Do not promote C-DELTA-REPAIR and do not immediately chain another identical distributed run. Preserve the current packet as MEASUREMENT_INVALID, wait for Runtime to repair and independently validate the distributed health-gate substrate, and wait for Global Research Director direction. The proposed next Graph question is the minimal durable C-PARAM-INHERIT A-to-B binding test, but it requires a new mandate and frozen packet; if the Global Director instead re-authorizes C-DELTA-REPAIR, first require an operational PC-DISTRIBUTED-HEALTH-GATE and n_non304>=800 before any outcome-bearing measurement."
+}

@@ -1,0 +1,84 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-36106663091",
+  "lane": "runtime",
+  "status": "PASS",
+  "producer_claim_supported": false,
+  "required_fixes": [
+    "The frozen provisioning gate requires `playwright._impl._path_utils.get_executable_path` helper which is absent in Playwright 1.63.0; a subsequent governed experiment must either (a) preregister a provisioning design compatible with the installed Playwright API (using public `p.chromium.executable_path`) or (b) pin a Playwright version where the private helper exists. This immutable run cannot relax the helper requirement."
+  ],
+  "validity_findings": [
+    "Plain HTTP substrate (C1-C4, C3 honest-cost) replicated the parent EXP-RUNTIME-33528830833 canonical results without regression: C1 n_non304=901 (>=800), per-endpoint 401/500 (>=400), 99 real 304s; C2 header-only Jaccard |r|=0.0 (<0.30), V=0.0 (<0.30), nullFP=0.0 (<=0.05), variance>0, std>0, mean<1.0, same_state_J=1.0; C3 honest-cost rho_shuffled=0.0 (<0.20), p=1.0 (>=0.20), within_f_std>0; C4 full=0.7619 (>0.5), full>max(body,status)+0.05 (0.7619>0.381+0.05), diff_lo=0.319>0, null=0.0. All recomputed from raw_freshness_observations.jsonl and raw_trajectory_costs.jsonl match producer metrics exactly.",
+    "Browser provisioning gate failed at the mandatory frozen assertion: `playwright._impl._path_utils.get_executable_path` helper is unavailable in Playwright 1.63.0. The official Chromium executable path (/home/runner/.cache/ms-playwright/chromium-1243/chrome-linux64/chrome) was verified present but the frozen packet explicitly prohibits substituting the public path for the private helper. This is an infrastructure failure, not a scientific falsification.",
+    "No browser-dependent metrics were collected: all browser_* metrics are null, all browser-dependent controls are UNKNOWN, raw_browser_observations.jsonl, raw_writable_observations.jsonl, raw_kmeans_features.jsonl, raw_hit_observations.jsonl are empty (0 bytes, sha256 e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855). Absence is correctly recorded as infrastructure failure, not negative scientific result.",
+    "Null control NC-SYNTHETIC-FALLBACK-REJECTED passed: the runner contains no synthetic browser/writable fallback branch; the infrastructure failure was reported as MEASUREMENT_INVALID without generating simulated metrics.",
+    "C5 loopback/HIT phase was never reached because browser phase aborted; the infrastructure was not restarted for loopback/HIT after browser failure, consistent with the frozen decision rule requiring all C1-C8 to pass for SUPPORTS.",
+    "Measurement validity summary correctly reports: browser_real_playwright=false, cdp_ax_per_page=false, dom_per_page=false, viewport_both_checks=false, kmeans_strict_split=false, real_feature_vectors=false, writable_real_interactions=false, wal_direct_counts=false, no_post_state_leakage=false, native_path_helper_available=false."
+  ],
+  "baseline_findings": [
+    "B-DISTRIBUTED-HTTP-TRIPLE: Plain HTTP C1-C4 replicated successfully from parent EXP-RUNTIME-33528830833. C5 (loopback/HIT) not executed due to browser phase abort. Control status UNKNOWN (correctly, since browser-path C2/C4 and C5 were not reached).",
+    "B-BROWSER-DOM-AX-STRUCTURAL: UNKNOWN - browser health capture never executed.",
+    "B-WRITABLE-POSITIVE and all B-WRITABLE-NULL-* controls: UNKNOWN - writable matrix never executed.",
+    "B-TRAIN-ONLY-KMEANS: UNKNOWN - k-means on real DOM/AX features never executed.",
+    "B-HEADER-ONLY-JACCARD-STABLE-BROWSER: UNKNOWN - browser fetch path C2 never executed.",
+    "B-FULL-VECTOR-BROWSER: UNKNOWN - browser fetch path C4 never executed.",
+    "PC-REAL-BROWSER-PROVISIONED: UNKNOWN - provisioning failed at mandatory private helper check; official executable path verified but frozen gate requires private helper.",
+    "NC-SYNTHETIC-FALLBACK-REJECTED: PASS - no synthetic fallback present in runner."
+  ],
+  "recomputed_metrics": {
+    "freshness_n_total": 1000,
+    "freshness_n_non304": 901,
+    "freshness_n_304": 99,
+    "freshness_per_endpoint_non304": {
+      "/api/profile": 401,
+      "/api/data_list": 500
+    },
+    "freshness_hs_rate": 1.0,
+    "freshness_batch_count": 1,
+    "freshness_stickiness_min": 1.0,
+    "freshness_worker_distinct": 2,
+    "freshness_x_worker_missing": 0,
+    "header_only_jaccard_plain_n_pairs": 160,
+    "header_only_jaccard_plain_jaccard_mean": 0.625,
+    "header_only_jaccard_plain_jaccard_std": 0.375,
+    "header_only_jaccard_plain_jaccard_variance": 0.140625,
+    "header_only_jaccard_plain_jaccard_r": 0.0,
+    "header_only_jaccard_plain_jaccard_v": 0.0,
+    "header_only_jaccard_plain_jaccard_nullFP": 0.0,
+    "header_only_jaccard_plain_same_state_J": 1.0,
+    "full_vector_plain_n_pairs": 210,
+    "full_vector_plain_full": 0.7619047619047619,
+    "full_vector_plain_body_only": 0.38095238095238093,
+    "full_vector_plain_status_only": 0.0,
+    "full_vector_plain_diff_lo": 0.319047619047619,
+    "full_vector_plain_null": 0.0,
+    "honest_cost_n_trajectories": 100,
+    "honest_cost_rho_observed": 0.0,
+    "honest_cost_rho_shuffled": 0.0,
+    "honest_cost_p_value": 1.0,
+    "honest_cost_within_f_std": 0.5200109657937169,
+    "honest_cost_permutations_B": 1000
+  },
+  "claim_ceiling": "C-MEAS-VALID remains at EXPERIMENTAL with plain-HTTP DISTRIBUTED VALIDATED ceiling only. The BrowserGym DISTRIBUTED VALIDATED ceiling is NOT achieved. Browser-dependent lanes (Graph C-DELTA-REPAIR k>1 transfer, Product M_total Pareto, Frontier live-site, Physics correlated banks) remain blocked. The frozen provisioning gate failure is an infrastructure boundary, not a scientific falsification of the browser-extension hypothesis.",
+  "evidence_refs": [
+    "research/experiments/EXP-RUNTIME-36106663091/request.json",
+    "research/experiments/EXP-RUNTIME-36106663091/spec.json",
+    "research/experiments/EXP-RUNTIME-36106663091/prereg.md",
+    "research/experiments/EXP-RUNTIME-36106663091/freeze.json",
+    "research/experiments/EXP-RUNTIME-36106663091/result.json",
+    "research/experiments/EXP-RUNTIME-36106663091/report.md",
+    "research/experiments/EXP-RUNTIME-36106663091/provenance.json",
+    "research/experiments/EXP-RUNTIME-36106663091/run_experiment.py",
+    "research/experiments/EXP-RUNTIME-36106663091/raw_freshness_observations.jsonl",
+    "research/experiments/EXP-RUNTIME-36106663091/raw_trajectory_costs.jsonl",
+    "research/experiments/EXP-RUNTIME-36106663091/raw_browser_observations.jsonl",
+    "research/experiments/EXP-RUNTIME-36106663091/raw_writable_observations.jsonl",
+    "research/experiments/EXP-RUNTIME-36106663091/raw_kmeans_features.jsonl",
+    "research/experiments/EXP-RUNTIME-36106663091/raw_hit_observations.jsonl"
+  ],
+  "unresolved": [
+    "Whether the distributed stable-header substrate can maintain C1-C5 gates when extended to real BrowserGym/Playwright CDP observation and writable controls remains UNKNOWN - this experiment did not test it due to infrastructure failure at the frozen provisioning gate.",
+    "A subsequent governed experiment must resolve the Playwright provisioning design (private helper vs public executable_path) before the browser extension hypothesis can be tested.",
+    "The parent handoff (EXP-RUNTIME-36103366713) noted the same browser extension failure; this is the second consecutive MEASUREMENT_INVALID on the browser thread. The Director mandate's cognitive_reset and CONTINUE allocation explicitly anticipated this risk."
+  ]
+}

@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-36132150213",
+  "lane": "graph",
+  "status": "PASS",
+  "producer_claim_supported": false,
+  "required_fixes": [
+    "Runtime must publish and certify a machine-readable capability ledger for the 4-worker distributed substrate (nginx 1.24.0, 4x gunicorn 23.0.0/Flask 3.1.3, PyJWT HS256, shared SQLite WAL, real If-None-Match/ETag 304, X-Worker-Pid health checks).",
+    "Runtime must publish and certify a one-command bring-up contract that starts the full distributed stack and exposes health-gate success criteria.",
+    "After the above are available, retry EXP-GRAPH-36132150213 exactly as frozen — do not change thresholds, signals, controls, workload, or validity gates."
+  ],
+  "validity_findings": [
+    "The producer correctly stopped at the mandatory V1/V2 validity gates (substrate_started, health_gate_pass) because the frozen Runtime dependency was unavailable. This is a valid MEASUREMENT_INVALID result per the frozen decision rule: 'SUBSTRATE_NOT_STARTED -> MEASUREMENT_INVALID', 'HEALTH_GATE_FAIL -> MEASUREMENT_INVALID'.",
+    "No outcome-bearing measurement was attempted. All primary metrics (M-TN-POOLED-WILSON-LOWER, M-FALSE-ACCEPT-POOLED-WILSON-UPPER, M-UNKNOWN-PRECISION-POOLED, M-ECE-GLOBAL, M-ECE-GLOBAL-BOOTSTRAP-97.5, M-ECE-PER-CLASS-MAX, M-MAX-ABS-RHO) and control metrics (M-PC-FRESH-SUCCESS-RATE, M-NC-NOISE-FA-WILSON-UPPER) are correctly reported as null — not zero, not default-filled, not substituted from prior runs.",
+    "All controls (PC-FRESH-EXECUTION, NC-NOISE-IMMUNITY, B-NO-GUARD, B-JACCARD-ONLY, B-HEADER-ONLY, B-COLD) are correctly reported as NOT_RUN with pass=null, preserving their frozen identities. No control is marked as scientifically failed.",
+    "Frozen input hashes (request.json, spec.json, prereg.md) match freeze.json exactly. No frozen file was modified after freeze.json creation.",
+    "The accepted Runtime evidence (EXP-RUNTIME-36100549580, EXP-RUNTIME-36094450333) documents a bounded 2x plain-HTTP setup and does not certify the required 4x/ledger contract. The producer correctly did not substitute it for the frozen Graph substrate requirement.",
+    "The prior distributed Graph result (EXP-GRAPH-36106653880) is measurement-invalid and was correctly not reused as scientific evidence.",
+    "Chromium is present but no Runtime ledger certification for 1280x720 + CDP Accessibility.getFullAXTree was found; browser quantities correctly remain UNKNOWN with explicit reason (not treated as a failed scientific arm).",
+    "No synthetic alias fixtures, jittered/proxy cost counters, prevalence rebalancing, or default-filled metrics were used — all no-go rules from prereg.md section 15 were respected."
+  ],
+  "baseline_findings": [
+    "Baselines B-NO-GUARD, B-JACCARD-ONLY, B-HEADER-ONLY, B-COLD are frozen matched-log or execution baselines that require the raw workload evidence from the certified substrate. Since no workload was started, they correctly remain NOT_RUN with pass=null. No baseline comparison was possible or attempted.",
+    "The frozen design specifies these baselines are computed from the same logged responses to ensure matched comparison. This design integrity is preserved — no separate execution or synthetic computation was substituted."
+  ],
+  "recomputed_metrics": {},
+  "claim_ceiling": "C-FRESHNESS remains at HYPOTHESIS. This experiment produced no scientific measurement on the frozen claim because the mandatory distributed substrate was unavailable. The prior single-node SURVIVES result (EXP-GRAPH-35949562506 on stdlib http.server) remains the only surviving evidence ceiling for C-FRESHNESS, but it does not satisfy the current frozen design's distributed substrate, modality, or calibration requirements.",
+  "evidence_refs": [
+    "research/experiments/EXP-GRAPH-36132150213/request.json",
+    "research/experiments/EXP-GRAPH-36132150213/spec.json",
+    "research/experiments/EXP-GRAPH-36132150213/prereg.md",
+    "research/experiments/EXP-GRAPH-36132150213/freeze.json",
+    "research/experiments/EXP-GRAPH-36132150213/result.json",
+    "research/experiments/EXP-GRAPH-36132150213/report.md",
+    "research/experiments/EXP-GRAPH-36132150213/provenance.json",
+    "research/experiments/EXP-GRAPH-36132150213/raw_evidence/preflight.json",
+    "research/experiments/EXP-GRAPH-36132150213/execution_checkpoint.json",
+    "research/experiments/EXP-GRAPH-36132150213/model_execute.json",
+    "codex/experiments/EXP-RUNTIME-36100549580/result.json",
+    "codex/experiments/EXP-RUNTIME-36100549580/provenance.json",
+    "codex/experiments/EXP-RUNTIME-36094450333/provenance.json",
+    "codex/experiments/EXP-GRAPH-36106653880/result.json",
+    "codex/experiments/EXP-GRAPH-36106653880/audit.json"
+  ],
+  "unresolved": [
+    "Whether the deterministic freshness guard satisfies D1-D9 on a certified 4-worker nginx/gunicorn/Flask shared-WAL substrate remains unknown — no scientific measurement was possible.",
+    "Whether Runtime can provide the exact machine-readable capability ledger and one-command 4-worker bring-up contract required by the frozen request remains unresolved.",
+    "Whether Runtime can certify a launchable 1280x720 Chromium with CDP Accessibility.getFullAXTree remains unresolved; browser-channel quantities are UNKNOWN.",
+    "The smallest unblocking action is for Runtime to publish and certify the capability ledger plus one-command 4-worker bring-up contract, then this exact frozen experiment should be retried without changing thresholds, signals, controls, or workload.",
+    "The prior distributed Graph packet EXP-GRAPH-36106653880 remains non-reusable measurement-invalid evidence; it is not a substitute for this run."
+  ]
+}

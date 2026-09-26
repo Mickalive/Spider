@@ -1,0 +1,75 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-36118890504",
+  "lane": "graph",
+  "status": "COMPLETE",
+  "outcome": "FALSIFIES",
+  "metrics": {
+    "success_rate_B_param": 0.0,
+    "success_rate_B_cold": 1.0,
+    "success_rate_B_literal": 0.0,
+    "success_rate_B_knn": 0.0,
+    "cost_per_task_B_param": 0.0,
+    "cost_per_task_B_cold": 1.0,
+    "cost_per_task_B_literal": 0.0,
+    "cost_per_task_B_knn": 1.0,
+    "false_accept_rate_C_param": 0.0,
+    "success_rate_A_param_seen": 1.0
+  },
+  "controls": {
+    "PC-A-SEEN": {
+      "expected": "success_rate = 1.0, cost_per_task = 1, false_accept_rate = 0.0",
+      "observed": "success_rate = 1.0000, cost_per_task = 1.0000, false_accept_rate = 0.0",
+      "pass": true,
+      "evidence_ref": "raw_results.json:positive_control"
+    },
+    "NC-UNRELATED-RESOURCE": {
+      "expected": "resolution = UNKNOWN/EXPLORE, false_accept_rate = 0.0",
+      "observed": "false_accept_rate = 0.0000, resolutions = ['UNKNOWN', 'UNKNOWN', 'UNKNOWN', 'UNKNOWN', 'UNKNOWN']",
+      "pass": true,
+      "evidence_ref": "raw_results.json:null_control"
+    }
+  },
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-GRAPH-36118890504/substrate_app.py",
+      "role": "code"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-36118890504/run_experiment.py",
+      "role": "code"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-36118890504/raw_results.json",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-36118890504/registry.jsonl",
+      "role": "derived"
+    }
+  ],
+  "observations": [
+    "Train phase: 5 observations on resource A (ids [1, 2, 3, 4, 5])",
+    "Parameterized mechanism induced: param-fetch-resource-by-id-906d99c7 with slots ['id']",
+    "Test phase resource B: param=0/5, cold=5/5, literal=0/5, knn=0/5",
+    "Null control resource C: 0/5 false accepts",
+    "Positive control resource A: 5/5 success"
+  ],
+  "validity_notes": [
+    "V1_SUBSTRATE: Using Flask/JWT substrate per Runtime EXP-RUNTIME-33902315583 pattern; not independently re-validated in this run",
+    "V2_DISJOINT_IDS: Train IDs {1, 2, 3, 4, 5} \u2229 Test IDs {6, 7, 8, 9, 10} = \u2205 \u2192 True",
+    "V3_ISOMORPHIC_ACTION: A (GET /posts/{id}) and B (GET /users/{id}) both GET, single {id} param, JSON with id field",
+    "V4_HONEST_COST: All HTTP requests logged including failed/exploratory; no hidden caching",
+    "V5_NO_LEAKAGE: Mechanism induction uses only resource A observations; test contexts for B don't reveal B structure during induction",
+    "V6_DETERMINISTIC_EXECUTION: Substrate responses are deterministic for same (resource, id)",
+    "V7_VERIFICATION_REAL: kernel.verify() checks actual response status against postconditions",
+    "KERNEL_DISTILL_PARAMETERIZED: SpiderKernel has distill_parameterized = False (harness-level induction used instead)",
+    "  NOTE: Frozen design spec section 14 claims 'No new code required \u2014 uses existing kernel/registry' but kernel lacks distill_parameterized. Harness-level induction used per prereg section 5.3. This is a design discrepancy, not a measurement failure for the transfer hypothesis."
+  ],
+  "unresolved": [
+    "Kernel distill_parameterized not durably committed to src/spider/kernel.py (harness-level only)",
+    "Single-node substrate only; distributed transfer not tested",
+    "No LLM-driven mechanism distillation tested ('learn on A' half of C-PARAM-INHERIT)",
+    "Only 5 IDs per resource; limited statistical power"
+  ]
+}

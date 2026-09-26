@@ -1,0 +1,56 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-36106653880",
+  "lane": "graph",
+  "github_run_id": "36106653880",
+  "github_run_attempt": "1",
+  "base_sha": "896b9305aba3d2e5889cd35a4a4b66541639a6a1",
+  "start_time": "2026-09-25T08:05:39.151698+00:00",
+  "end_time": "2026-09-25T08:05:39.151710+00:00",
+  "environment": {
+    "python": "3.12.14 (main, Aug 13 2026, 02:47:42) [GCC 13.3.0]",
+    "flask": "3.1.3",
+    "pyjwt": "2.15.0",
+    "gunicorn": "26.2.0",
+    "nginx": "1.24.0",
+    "sqlite": "3.x"
+  },
+  "code_paths": [
+    "research/graph/delta_repair/flask_app_distributed_36106653880.py",
+    "research/graph/delta_repair/nginx_distributed.conf",
+    "research/graph/delta_repair/execute_delta_repair_distributed_36106653880.py",
+    "src/spider/kernel.py",
+    "research/experiments/EXP-GRAPH-36106653880/request.json",
+    "research/experiments/EXP-GRAPH-36106653880/spec.json",
+    "research/experiments/EXP-GRAPH-36106653880/prereg.md",
+    "research/experiments/EXP-GRAPH-36106653880/freeze.json"
+  ],
+  "frozen_hashes": {
+    "request.json": "ad183db64689c8082bba683ec7f9aaf696cd47bc9d299b4e8d99c365b3e8f8d",
+    "spec.json": "c25c2441f2d54a8c411d843307207e8d2e8646b413c996a5b6fecf920a6a56b2",
+    "prereg.md": "f4f5505d0c4aca826d3c97d3b587bd3038deeb20c6c93ca8e98650bcc52d41a6",
+    "freeze.json": "581308f6c8dc174e6f7ec2a4835d2268599c5c99f605e4a7b1faf1ebde91b80f"
+  },
+  "execution": {
+    "substrate_started": false,
+    "health_gate_pass": false,
+    "distributed_measurement_invalid": true,
+    "distributed_invalid_reason": "Distributed substrate did not become ready (workers/nginx startup failed)",
+    "n_non304": 0,
+    "repair_count": 0,
+    "repair_ok": 0,
+    "n_worker_processes": 4
+  },
+  "dependencies": [
+    "runtime:EXP-RUNTIME-36100549580:D1-D13 health gate",
+    "graph:EXP-GRAPH-36018188168:SURVIVES_CURRENT_TEST single-node",
+    "src/spider/kernel.py:_matches (sha 46929b3a951df48d7f9d1fd850871073c0d91c1868aa117e13d389fe274e8d61)"
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-GRAPH-36106653880/result.json",
+    "research/experiments/EXP-GRAPH-36106653880/report.md",
+    "research/experiments/EXP-GRAPH-36106653880/provenance.json",
+    "research/graph/delta_repair/flask_app_distributed_36106653880.py",
+    "research/graph/delta_repair/nginx_distributed.conf"
+  ]
+}

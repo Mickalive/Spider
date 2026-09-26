@@ -1,0 +1,60 @@
+{
+  "experiment_id": "EXP-FRONTIER-36129180789",
+  "lane": "frontier",
+  "claim_ids": ["C-RESIDUAL-NOVELTY"],
+  "question": "Does inherited execution actually pay for itself against the strongest available alternative, a no-memory deterministic executor compiled from the current observation alone, when both are held to identical verification and identical honest non-token work accounting? On matched task families with a controlled novelty fraction, using a paired within-task design so that both executors face the identical starting state, does the inherited-mechanism executor reduce observation, request and verification work relative to the no-memory deterministic executor by an amount that tracks residual novelty (correlation >= 0.60 with bootstrap lower > 0.40 and p < 0.05), rather than full task length (pooled absolute correlation < 0.20 and per-stratum absolute correlation < 0.20 with upper < 0.30), with an inheritance-ablation arm (emptied registry) as the mandatory null, and with a pre-declared decision rule that if the no-memory executor matches or beats inherited execution at matched correctness and equal or lower amortized cost, then SPIDER's central premise is FALSIFIED-IN-SETTING and the architecture must change?",
+  "hypothesis": "Inherited execution with SPIDER's registry reduces honest per-trajectory work (observation + network requests + verification) compared to a no-memory deterministic executor, and this reduction correlates with residual novelty fraction (rho_novelty >= 0.60) rather than full task length (|rho_length| < 0.20). The no-memory executor will require re-deriving the action plan from scratch on each task, incurring higher observation and verification cost, while the inherited executor reuses validated mechanisms.",
+  "falsifier": "The no-memory deterministic executor achieves matched or better correctness than the inherited executor at equal or lower amortized honest cost (observation + network + verification counters) across matched task families with controlled novelty fractions. If this occurs, C-RESIDUAL-NOVELTY, C-PRODUCT-ECON, and the compilation priors are jointly falsified and the architecture must change.",
+  "baselines": [
+    {
+      "id": "B-NO-MEMORY-DETERMINISTIC",
+      "description": "No-memory deterministic executor: compiles action plan from current observation alone (no registry, no memory). For each task, derives the HTTP request directly from derived_context (url, method, headers, body, query) without any inherited mechanisms. This is the primary control representing the strongest alternative to inheritance.",
+      "type": "primary_control"
+    },
+    {
+      "id": "B-INHERITED-SPIDER",
+      "description": "Inherited SPIDER executor: uses SpiderKernel with a populated MechanismRegistry containing validated mechanisms from prior observation. Resolves mechanisms via preconditions/applicability guards, binds parameters, and executes.",
+      "type": "treatment"
+    },
+    {
+      "id": "B-COLD-EXPLORATION",
+      "description": "Cold exploration baseline: no registry, no compilation, agent must explore from scratch (simulated as maximum cost: full observation + request + verification on every step). Serves as upper bound for comparison.",
+      "type": "upper_bound"
+    }
+  ],
+  "positive_control": {
+    "id": "PC-EXACT-MATCH",
+    "description": "On exact-match tasks (registry contains literal mechanism matching intent and preconditions), both executors should achieve EXECUTABLE with correct bound_action. Inherited executor should have lower cost (fewer verification steps). No-memory executor must re-derive the same request from observation.",
+    "expected": "Both executors achieve >= 0.90 correct rate, false_accept <= 0.10. Inherited executor honest cost <= no-memory executor honest cost.",
+    "threshold": "correct_rate >= 0.90 AND false_accept_rate <= 0.10 AND inherited_cost <= nomemory_cost"
+  },
+  "null_control": {
+    "id": "NC-INHERITANCE-ABLATION",
+    "description": "Inheritance-ablation arm: SpiderKernel with an EMPTIED registry (no mechanisms). Must return UNKNOWN for all tasks. This is the mandatory null control - if this arm produces EXECUTABLE resolutions, there is a leakage bug. Honest cost should equal cold exploration upper bound (no mechanisms to reuse).",
+    "expected": "100% UNKNOWN, precision = 1.0 for UNKNOWN, honest cost equals B-COLD-EXPLORATION upper bound.",
+    "threshold": "unknown_rate == 1.0 AND false_accept_rate == 0.0"
+  },
+  "measurement_validity": [
+    "SUBSTRATE HONESTY: If real HTTP service unavailable, Runtime capability ledger not certifying browser, or paired executors cannot produce discriminating verification outcomes -> declare live_available=false and MEASUREMENT_INVALID diagnostic. DO NOT substitute synthetic fixtures, jittered counters, or n*3200/f*6.0 proxies. Record finding and stop.",
+    "PAIRED DESIGN: Both executors face identical starting derived_context (same observation). Task families have controlled novelty fractions (0%, 25%, 50%, 75%, 100%) measured by Jaccard similarity of derived_context to nearest training mechanism template. Per-family N>=30, N>=3 per stratum, coverage >=8/10 families, pooled >=40 tasks.",
+    "HONEST COUNTERS: Per-trajectory hard-reset integer sum counters for: resolve_ops, bind_ops, verify_ops, freshness_checks, network_requests, browser_steps. TAU0.30 topology gate (Jaccard < 0.30 to nearest training template) + freshness TN>=0.85 gate (from Graph C-FRESHNESS). No jitter, no f*6.0 proxy, no token surrogate. Token dimension declared NOT_APPLICABLE -> reported UNKNOWN.",
+    "NO LEAKAGE: derived_context contains ONLY observable state (url, method, url_path, url_query, headers_observed, body_observed, dom_ax_hash, ax_nodes_count, freshness_watermark, version, viewport_observed). FORBIDDEN: residual_novelty_fraction, target_resource_id, length_label, expected_key_set, any oracle information. Static audit must show 0 test-B resource reads.",
+    "CORRECT FAMILY GATING: Exact key-set equality after alias resolution. TRAIN-only vocab isolation (0 leakage). Whole-trajectory holdout disjoint families. Softmax temp 0.15 + deterministic hashlib.sha256(task_id) jitter 0.02 for confidence derivation. UNKNOWN threshold <0.80 triggers verify+freshness gates.",
+    "STATISTICAL RIGOR: 5000 family-stratified bootstrap (unit=trajectory) for rho_novelty CI. 5000 family-block permutation (block=family, unit=trajectory) for S1/S2 p-values. 5000 global trajectory-grouped stratified permutation for NC-SHUFFLED-NULL (|rho_shuffled|<0.20 centered |mean|<0.05 std<0.15). Within-family std>0 naturally else MEASUREMENT_INVALID. Freshness TN>=0.85 requires >=30 stale probes. Coverage >=8/10 families, per-stratum N>=3, pooled>=40."
+  ],
+  "decision_rule": {
+    "S1_residual_novelty_correlation": "rho_novelty >= 0.60 (Spearman) with bootstrap lower CI > 0.40 and permutation p < 0.05 (family-block, 5000 perms, TAU+freshness-gated). Correlation between honest cost reduction (nomemory_cost - inherited_cost) and residual_novelty_fraction.",
+    "S2_length_decoupling_pooled": "Pooled absolute Spearman correlation |rho_length| < 0.20 with upper CI < 0.25 and permutation p >= 0.05. Correlation between honest cost reduction and full task length (number of steps).",
+    "S3_length_decoupling_per_stratum": "Per-stratum |rho_length| < 0.20 with upper CI < 0.30 for EVERY novelty stratum (0%, 25%, 50%, 75%, 100%) AND every length tertile. N>=30 per family, N>=3 per stratum.",
+    "S4_calibration": "UNKNOWN precision >= 0.85, false_accept <= 0.10, ECE <= 0.15 upper <= 0.18. With freshness TN>=0.85 (>=30 stale probes derived), softmax temp 0.15 jitter 0.02, imperfect accuracy 0.35-0.78.",
+    "S5_pareto_dominance": "M_total_SPIDER(f=10) <= 0.75 * M_total_COLD (saving >= 25%, lower > 15%, p < 0.05) strict dominance vs cold AND vs flat RAG k5 at f=10 and f=100, robust to +-50% build cost sensitivity. External reference vs blind-reproduced Agentic Compilation DSM / Agent JIT where Intel artifacts available. Build cost = actual offline vector/index/freshness ops (TAU+freshness-gated, frozen before outcomes).",
+    "S6_honest_gap": "rho_novelty - |rho_shuffled| > 0.35 AND |rho_proxy| < 0.60 (TAU candidate-count proxy) AND global |rho_shuffled| < 0.20 (permutation p >= 0.20) centered |mean| < 0.05 std < 0.15, within-family std > 0, zero_cells = 0. 5000 global + 5000 block perms, TAU+freshness-gated.",
+    "FALSIFIED_IN_SETTING_TRIGGER": "If no-memory executor matches or beats inherited executor at matched correctness (correct_rate_no_memory >= correct_rate_inherited - 0.05) AND equal or lower amortized honest cost (cost_no_memory <= cost_inherited * 1.05) -> FALSIFIED-IN-SETTING. Architecture must change.",
+    "ALL_SURVIVE": "SURVIVES_CURRENT_TEST only if S1-S6 ALL pass AND FALSIFIED_IN_SETTING_TRIGGER is FALSE.",
+    "MEASUREMENT_INVALID": "If live_available=false OR any PC/NC fails per thresholds above OR substrate cannot support paired executors with discriminating verification outcomes. This is a validity gate, not a scientific negative."
+  },
+  "product_consequence_positive": "C-RESIDUAL-NOVELTY advances to EXPERIMENTAL. SPIDER's core premise (pay cost of novelty, not full task) survives the strongest null (no-memory deterministic executor). Enables product promotion of residual-novelty economics for external agent inheritance. Justifies continued investment in mechanism registry, parameterization, and semantic resolution.",
+  "product_consequence_negative": "C-RESIDUAL-NOVELTY is FALSIFIED-IN-SETTING. SPIDER's central premise fails against the no-memory deterministic executor. C-PRODUCT-ECON and compilation priors are jointly moot. Architecture MUST change - either pivot to deterministic compilation (AgentJIT/COVENANT-style) or abandon cumulative inheritance as primary value proposition. Frontier lane PARKs C-RESIDUAL-NOVELTY per director comparative_reasoning and pivots to remaining orthogonal basins.",
+  "estimated_cost": "Low. Requires only a real HTTP service (can be local Flask/FastAPI test server) and two executors. No BrowserGym, no public Web corpus, no policy model, no LLM calls. ~50-100 tasks x 2 executors x 3 arms = ~300-600 trajectories. Compute: minutes on CPU.",
+  "expected_information_gain": "Maximum. This is the decisive experiment that SPIDER has never run: testing the central premise against the strongest null (no-memory executor). A valid negative (FALSIFIED-IN-SETTING) would redirect the entire architecture. A valid positive would finally validate the core economic claim. Either outcome materially changes SPIDER's direction."
+}

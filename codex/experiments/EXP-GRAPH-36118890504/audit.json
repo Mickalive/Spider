@@ -1,0 +1,139 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-36118890504",
+  "lane": "graph",
+  "status": "MEASUREMENT_INVALID",
+  "producer_claim_supported": false,
+  "required_fixes": [
+    "1. Measure the claim object, not a substitute: commit distill_parameterized() durably to src/spider/kernel.py and induce the parameterized mechanism through it before outcome-bearing B measurement. The kernel at the provenance commit (sha256 46929b3a951df48d7f9d1fd850871073c0d91c1868aa117e13d389fe274e8d61) has no distill_parameterized; provenance.json records has_distill_parameterized=false and kernel.py's distill() docstring states parameter induction 'must earn that capability through C-PARAM-INHERIT'. The harness-level distill_parameterized_harness (run_experiment.py:102-175) substitutes a bespoke object; prior C-PARAM-INHERIT audits (codex/claim_state.json EXP-GRAPH-35876306030, EXP-GRAPH-35918640311, EXP-GRAPH-35932480731) treated this same kernel state as a binding gate failure.",
+    "2. Make the transfer hypothesis satisfiable by the frozen mechanism definition, or re-freeze: prereg 5.3 induces preconditions {auth:valid_token, resource:posts} and template GET /posts/${id}, while prereg 5.4 tests on context {resource:users}. kernel._matches is exact key/value equality and resolve() returns UNKNOWN with no candidates on any non-matching context (kernel.py:93-110), so UNKNOWN on B is deterministic. Even if preconditions matched, _bind would produce /posts/6..10, which the substrate rejects (posts only 1..5; substrate_app.py:116-118). The falsifier ('cannot resolve/bind/execute/verify on resource B at all') is therefore unreachable-as-evidence: it is satisfied by the design itself regardless of any capability of parameter-slot mechanisms. Generalize preconditions and/or parameterize the base path (e.g. /${resource}/${id}) before re-freezing.",
+    "3. Implement B-COLD per its frozen expected_behavior ('Low success rate, high cost (many HTTP requests), zero false accepts'; spec.json baselines.B-COLD): a cold agent must explore candidate endpoints. The current implementation hardcodes the correct base path (run_experiment.py:260 base_url = '/users' for B) and succeeds 5/5 in one direct request each — an oracle baseline, not cold exploration.",
+    "4. Fix the decision rule so SUPPORTS is reachable: with cold at 1.0, D1_SUCCESS_B requires success_rate_B_param > 1.10 (impossible for any rate); with literal at cost 0.0, D2_COST_B requires cost_per_task_B_param < 0.0 (impossible for any count). The conjunctive rule can never pass, so ANY_FAIL -> FALSIFIES is structurally forced and the outcome carries no information about the hypothesis. A mechanism that never executes (resolution UNKNOWN, 0 HTTP) must be scored INCONCLUSIVE on those tasks, not counted as 0-cost 'success'; otherwise D2 rewards non-execution.",
+    "5. B-LITERAL-REPLAY must actually attempt the exact replay on resource B (frozen: 'agent attempts exact replay on resource B... zero cost if it fails fast') and must run with a registry containing ONLY literal mechanisms. The run resolved UNKNOWN with 0 HTTP for all 5 tasks (no replay was attempted; report.md section 6.2 claim 'Replays exact /posts/1' contradicts raw_results.json which records 0 requests), and the literal baseline executed after the parameterized mechanism was upserted (main() order run_experiment.py:435,445) so its registry contained 6 mechanisms including the param mechanism (registry.jsonl).",
+    "6. Implement B-RETRIEVAL-KNN as frozen ('Embed intent+context, retrieve top-k from resource A observations, adapt action template naively') or rename and re-freeze the actual weak behavior: the current code uses train_observations[0].action with a string replace /posts/ -> /users/ (run_experiment.py:351-364), yielding GET /users/1 — identifier 1 is outside B's exclusive 6..10 space, so success is guaranteed 0.0% and there is no embedding, retrieval, or top-k.",
+    "7. Satisfy V1_SUBSTRATE for the artifact actually used: Runtime validated Flask 3.1.3 + PyJWT 2.13.0 HS256 on port 18927 (EXP-RUNTIME-33902315583, audit PASS) and port 18928 (EXP-RUNTIME-34015740602, audit REVISE with producer claim not supported) against /api-data profile endpoints with 4 auth states — not this new /posts /users /comments app, which the producer's own validity note says was 'not independently re-validated in this run' (run_experiment.py:531). Remove the false 'deterministic jitter' claim (substrate_app.py:39-42 uses unseeded random.uniform per request) and retain substrate-side per-request logs so V4_HONEST_COST is independently verifiable rather than harness self-reported.",
+    "8. Encode the outcome honestly: result.json status=COMPLETE/outcome=FALSIFIES transmits a non-discriminating measurement as a scientific falsification. Per EXPERIMENT_PACKET.md, design/substrate invalidity must never be encoded as falsification; the packet should use the INCONCLUSIVE/MEASUREMENT_INVALID semantics and document the degenerate baselines and unsatisfiable decision thresholds in validity_notes."
+  ],
+  "validity_findings": [
+    {
+      "id": "VF1",
+      "severity": "high",
+      "finding": "Claim object not measured: the experiment induces the parameterized mechanism with a harness-level function (run_experiment.py:102-175) because src/spider/kernel.py at provenance commit d14f4f87 (sha256 46929b3a... verified at HEAD also) has no distill_parameterized. C-PARAM-INHERIT is a claim about kernel mechanism capability; the measured object is experiment-local code, so neither the observed failure nor any success could be attributed to the kernel.",
+      "evidence": "research/experiments/EXP-GRAPH-36118890504/provenance.json (kernel.sha256, has_distill_parameterized=false); src/spider/kernel.py (distill() literal-only docstring; no distill_parameterized symbol); run_experiment.py:102-175; report.md:137-141; prior binding-gate audits in codex/claim_state.json (EXP-GRAPH-35876306030, EXP-GRAPH-35918640311, EXP-GRAPH-35932480731)",
+      "impact": "Zero scientific evidence about the kernel's parameterization capability is produced by this run; the producer's FALSIFIES cannot bear on C-PARAM-INHERIT as claimed."
+    },
+    {
+      "id": "VF2",
+      "severity": "high",
+      "finding": "Transfer failure is a design tautology: prereg 5.3 fixes preconditions {auth:valid_token, resource:posts} and template GET /posts/${id}; prereg 5.4 tests context {resource:users}; kernel._matches is exact equality and resolve() returns UNKNOWN for any non-matching context (kernel.py:93-110). All 5 param test-B resolutions are UNKNOWN with 0 HTTP — the mechanism never executes on B because the design forbids it. Even with matching preconditions, the bound path /posts/${id} could not serve B (substrate serves /users/{id} only for 6..10, /posts/{id} only for 1..5).",
+      "evidence": "research/experiments/EXP-GRAPH-36118890504/prereg.md:50-71 (5.3/5.4); raw_results.json test_B.param.details (all UNKNOWN, 0 requests); kernel.py:14-20 (_matches), 93-123 (resolve); substrate_app.py:113-126",
+      "impact": "Observed 0% success on B is determined by the frozen design before any run; it cannot discriminate 'parameter induction fails to transfer' from 'this mechanism encoding cannot express transfer'."
+    },
+    {
+      "id": "VF3",
+      "severity": "high",
+      "finding": "Decision instrument is degenerate: D1_SUCCESS_B (success_rate_B_param > max baseline + 0.10) is unsatisfiable because the oracle cold baseline fixed max at 1.0 (1.0 + 0.10 = 1.10 > maximum possible success rate); D2_COST_B (cost < min baseline x 0.80) is unsatisfiable because the do-nothing literal baseline fixed min at 0.0 (0.0 x 0.80 = 0.0, and cost < 0.0 is impossible). Therefore the frozen ANY_FAIL -> FALSIFIES outcome is forced for every conceivable mechanism outcome; the run cannot possibly yield SUPPORTS and hence cannot scientifically falsify either.",
+      "evidence": "research/experiments/EXP-GRAPH-36118890504/raw_results.json decision_rule (D1 max_baseline 1.0 threshold >1.10; D2 min_baseline 0.0 threshold <0.0); spec.json decision_rule (D1, D2); run_experiment.py:476-522",
+      "impact": "The FALSIFIES outcome is an artifact of the test instrument, not evidence about parameterized transfer."
+    },
+    {
+      "id": "VF4",
+      "severity": "high",
+      "finding": "B-COLD baseline contradicts its own frozen expected_behavior: spec.json defines B-COLD as 'agent must explore', expected 'Low success rate, high cost (many HTTP requests), zero false accepts', but run_cold_baseline hardcodes the correct endpoint mapping (base_url = '/users' for B, run_experiment.py:260) and succeeds 5/5 with exactly 1 request per task. The 'cold' agent is given the answer it is supposed to discover.",
+      "evidence": "research/experiments/EXP-GRAPH-36118890504/spec.json:8-13 (B-COLD); run_experiment.py:257-287; raw_results.json test_B.cold (5/5, 1 request each)",
+      "impact": "Inflates the best-baseline success to the ceiling (1.0), which combined with VF3 makes D1 impossible; also misrepresents baseline strength to the reader."
+    },
+    {
+      "id": "VF5",
+      "severity": "medium",
+      "finding": "B-LITERAL-REPLAY never replays: frozen behavior is 'agent attempts exact replay on resource B... zero cost if it fails fast', but all 5 tasks resolved UNKNOWN with 0 HTTP requests (raw_results.json test_B.literal), because the literal mechanisms' precondition {resource:posts} fails exact-match against context {resource:users} before any execution. report.md section 6.2 ('Replays exact /posts/1 etc.') misdescribes the raw evidence. The baseline also ran with a contaminated registry: the parameterized mechanism was upserted before the literal baseline executed (run_experiment.py:435 vs 445), so registry.jsonl held 6 mechanisms (5 literal + 1 param), violating the frozen 'Registry contains only literal mechanisms from resource A (no parameter slots)' condition.",
+      "evidence": "research/experiments/EXP-GRAPH-36118890504/raw_results.json test_B.literal.details (resolution UNKNOWN, requests 0); registry.jsonl (6 lines incl. param-fetch-resource-by-id-906d99c7); run_experiment.py:290-331, 435, 445; report.md:168",
+      "impact": "The 0.0 cost of the literal baseline is 'did nothing', not 'failed fast'; D2's cost reference is a do-nothing baseline, and baseline isolation (empty-of-param registry) is violated."
+    },
+    {
+      "id": "VF6",
+      "severity": "medium",
+      "finding": "B-RETRIEVAL-KNN is not the frozen KNN baseline: frozen implementation is 'Embed intent+context, retrieve top-k from resource A observations, adapt action template naively (string replace)'; the implementation takes train_observations[0].action and string-replaces the path, producing GET /users/1 (run_experiment.py:351-364). Identifier 1 is not in B's exclusive test space (6..10), so all 5 probes 404 — success is guaranteed 0% independent of any retrieval quality; no embedding, retrieval, or top-k exists.",
+      "evidence": "research/experiments/EXP-GRAPH-36118890504/spec.json:19-23 (B-RETRIEVAL-KNN); run_experiment.py:334-386; raw_results.json test_B.knn (0/5, 1 request each); substrate_app.py:124-125 (/users only 6..10)",
+      "impact": "Baseline strength is misrepresented; the D1 success reference point and the 'beat all three baselines' framing are distorted by a baseline that cannot succeed by construction."
+    },
+    {
+      "id": "VF7",
+      "severity": "low",
+      "finding": "V1_SUBSTRATE only pattern-level for the artifact used: the substrate is a new Flask app (endpoints /posts, /users, /comments, port 18928) whose own validity note says it was 'not independently re-validated in this run' (run_experiment.py:531). The validated Runtime ceilings attach to /api-data profile endpoints: EXP-RUNTIME-33902315583 (port 18927, audit PASS) and EXP-RUNTIME-34015740602 (port 18928, audit REVISE with producer claim not supported). The 'deterministic jitter' comment (substrate_app.py:39-42) is false: random.uniform is unseeded, so latency is stochastic per request; response bodies are deterministic, so V6 in the strict response sense holds, but the deterministic-fingerprint component of V1 is not met. No substrate-side request log exists, so V4_HONEST_COST is only harness self-report.",
+      "evidence": "research/experiments/EXP-GRAPH-36118890504/substrate_app.py:32-42,113-139; run_experiment.py:531; codex/experiments/EXP-RUNTIME-33902315583/audit.json (PASS, port 18927); codex/experiments/EXP-RUNTIME-34015740602/audit.json (REVISE, producer_claim_supported=false, port 18928); artifacts list in result.json (no request logs)",
+      "impact": "V1 as frozen ('verified by Runtime lane... or equivalent') is only partially satisfied; reproducibility is limited and one of the two cited Runtime precedents did not pass its own audit."
+    },
+    {
+      "id": "VF8",
+      "severity": "low",
+      "finding": "Controls pass but are non-discriminating: NC-UNRELATED-RESOURCE passes (false_accept_rate_C_param 0.0, all UNKNOWN) for the same exact-match precondition refusal that blocks the B test — the null control cannot distinguish 'mechanism is safely abstaining' from 'mechanism is useless off its train resource'. PC-A-SEEN passes (success_rate_A_param_seen 1.0, 1 request per task) but only demonstrates the harness+registry+resolve pipeline on the train resource, consistent with the mechanism having memorized resource A's path.",
+      "evidence": "research/experiments/EXP-GRAPH-36118890504/raw_results.json null_control_C.details (all UNKNOWN), positive_control_A.details (5/5, 1 request each); result.json controls",
+      "impact": "Control passes do not add measuring power to the invalid B test; they are consistent but trivially satisfied."
+    }
+  ],
+  "baseline_findings": [
+    {
+      "id": "B-COLD",
+      "expected_behavior_frozen": "Low success rate, high cost (many HTTP requests), zero false accepts; agent must explore (spec.json:8-13)",
+      "observed": "success_rate_B_cold = 1.0, cost_per_task_B_cold = 1.0 (5/5, exactly 1 direct request per task; raw_results.json test_B.cold)",
+      "finding": "Oracle baseline: implementation hardcodes the correct base path /users (run_experiment.py:260), so the 'cold' agent never explores and succeeds at the ceiling. Contradicts its frozen expected_behavior and makes D1_SUCCESS_B mathematically unsatisfiable (max baseline = 1.0 requires param > 1.10)."
+    },
+    {
+      "id": "B-LITERAL-REPLAY",
+      "expected_behavior_frozen": "Agent attempts exact replay on resource B; zero success, zero cost if it fails fast (spec.json:14-18)",
+      "observed": "success_rate_B_literal = 0.0, cost_per_task_B_literal = 0.0 (0 requests any task; raw_results.json test_B.literal)",
+      "finding": "No replay was attempted: all resolutions UNKNOWN via exact precondition mismatch. Frozen 'Registry contains only literal mechanisms from resource A (no parameter slots)' violated — the parameterized mechanism was already in the registry (registry.jsonl, 6 entries). Cost 0.0 reflects non-execution, not failure; report narrative 'Replays exact /posts/1' contradicts raw evidence."
+    },
+    {
+      "id": "B-RETRIEVAL-KNN",
+      "expected_behavior_frozen": "Embed intent+context, retrieve top-k, adapt template naively; moderate success if structure similar (spec.json:19-23)",
+      "observed": "success_rate_B_knn = 0.0, cost_per_task_B_knn = 1.0 (1 request per task; raw_results.json test_B.knn)",
+      "finding": "Not implemented as frozen: no embedding/retrieval/top-k; probes fixed GET /users/1 where 1 is outside B's valid 6..10, so success is guaranteed 0% by construction (run_experiment.py:351-364; substrate_app.py:124-125)."
+    },
+    {
+      "id": "DECISION-RULE-B",
+      "expected_behavior_frozen": "Conjunctive D1-D5; ALL_PASS -> SUPPORTS, ANY_FAIL -> FALSIFIES (spec.json:46-87)",
+      "observed": "D1 fail (0.0 > 1.10 false), D2 fail (0.0 < 0.0 false), D3/D4/D5 pass; outcome FALSIFIES (raw_results.json decision_rule)",
+      "finding": "D1 and D2 are unsatisfiable for ANY mechanism outcome given B-COLD=1.0 and B-LITERAL-REPLAY cost=0.0. FALSIFIES is structurally forced; the run cannot support the hypothesis under any possible parameterized-mechanism behavior, and therefore cannot falsify it either. The three baselines as implemented cannot serve as discriminating reference points."
+    }
+  ],
+  "recomputed_metrics": {
+    "success_rate_B_param": 0.0,
+    "success_rate_B_cold": 1.0,
+    "success_rate_B_literal": 0.0,
+    "success_rate_B_knn": 0.0,
+    "cost_per_task_B_param": 0.0,
+    "cost_per_task_B_cold": 1.0,
+    "cost_per_task_B_literal": 0.0,
+    "cost_per_task_B_knn": 1.0,
+    "false_accept_rate_C_param": 0.0,
+    "success_rate_A_param_seen": 1.0
+  },
+  "claim_ceiling": "Producer's FALSIFIES ceiling is not justified. Maximum justified ceiling: C-PARAM-INHERIT remains at the prior narrow EXPERIMENTAL synthetic in-kernel ceiling — EXP-PRODUCT-33528829801 (10/10 same-resource unseen single-char identifiers on the kernel POC) — plus the historical record that the kernel's parameterized induction has never been durably committed and no valid A-to-B cross-resource measurement exists (codex/claim_state.json events through EXP-GRAPH-35932480731). This packet adds no evidence for or against cross-resource parameterized transfer: the kernel capability itself was not measured, the frozen mechanism could not express the transfer by construction (VF2), the baselines and decision thresholds force FALSIFIES regardless of mechanism quality (VF3/VF4/VF5), and the two remaining supplier findings are authentication-context/registry details (VF5) and a mislabeled KNN baseline (VF6). 'Product must not promote parameterized mechanisms' remains the existing bound (claim stays non-VALIDATED); it is not newly established by this run.",
+  "evidence_refs": [
+    "research/experiments/EXP-GRAPH-36118890504/raw_results.json (raw evidence; all recomputed metrics derived from test_B, null_control_C, positive_control_A)",
+    "research/experiments/EXP-GRAPH-36118890504/result.json (producer status=COMPLETE, outcome=FALSIFIES, metrics, controls, validity_notes)",
+    "research/experiments/EXP-GRAPH-36118890504/provenance.json (git_commit d14f4f87, kernel.sha256 46929b3a951df48d7f9d1fd850871073c0d91c1868aa117e13d389fe274e8d61, kernel.has_distill_parameterized=false, substrate 'validated_by ... pattern')",
+    "research/experiments/EXP-GRAPH-36118890504/run_experiment.py (distill_parameterized_harness 102-175; run_cold_baseline 257-287; run_literal_replay_baseline 290-331; run_knn_retrieval_baseline 334-386; decision rule 473-562)",
+    "research/experiments/EXP-GRAPH-36118890504/substrate_app.py (unseeded jitter 39-42; auth 95-106; /posts 113-118; /users 121-126; /comments 129-139)",
+    "research/experiments/EXP-GRAPH-36118890504/registry.jsonl (6 mechanisms: 5 literal obs-*, 1 param-fetch-resource-by-id-906d99c7 with precondition resource:posts and template /posts/${id})",
+    "research/experiments/EXP-GRAPH-36118890504/spec.json (B-COLD expected_behavior 8-13; B-LITERAL-REPLAY 14-18; B-RETRIEVAL-KNN 19-23; measurement_validity V1-V7 37-45; decision_rule D1-D5 46-87)",
+    "research/experiments/EXP-GRAPH-36118890504/prereg.md (5.3 induction mechanism preconditions/template 50-62; 5.4 B test context 64-71; 5.5 baselines 73-78; 14 kernel dependency 174-178)",
+    "research/experiments/EXP-GRAPH-36118890504/report.md (6.2 'Replays exact /posts/1' contradicts raw evidence 167-169; 5.2 design discrepancy 137-141; consequences section 186-201)",
+    "research/experiments/EXP-GRAPH-36118890504/freeze.json (frozen hashes verified: prereg.md 61a1d79542d75405ac29575c49f04b35e8d31fb581c7e63d1e82bfb81dc6c041, request.json e6c4a7c9d6fa5eba2991e057fdd44805b08e0c8c6fd6cab996a7f37538a5e4c0, spec.json 79f85102d6999d377b208e03f02c26bbfdfb41eb5c1dfdda631b6cbf8e3d576b — all MATCH on disk)",
+    "research/experiments/EXP-GRAPH-36118890504/execution_checkpoint.json (pre_execute_sha 0498c654dbdf28f98b806bbf648d84a143c785aa = freeze commit; chain allocate cc49e1ed -> freeze 0498c654 -> execution base d14f4f87 -> execute 9bd62445 verified in git)",
+    "src/spider/kernel.py at HEAD (sha256 46929b3a951df48d7f9d1fd850871073c0d91c1868aa117e13d389fe274e8d61, identical at provenance commit d14f4f87): no distill_parameterized; _matches exact equality; resolve() UNKNOWN on non-matching context (93-110); distill() literal-only (74-91)",
+    "codex/claim_state.json (C-PARAM-INHERIT history: EXP-PRODUCT-33528829801 EXPERIMENTAL narrow synthetic ceiling; EXP-GRAPH-35876306030 / EXP-GRAPH-35918640311 / EXP-GRAPH-35932480731 MEASUREMENT_INVALID with kernel-gate reason; kernel sha 46929b3a previously verified as literal-only 132/133 lines)",
+    "codex/experiments/EXP-RUNTIME-33902315583/audit.json (PASS; port 18927; 4 auth states; /api-data)",
+    "codex/experiments/EXP-RUNTIME-34015740602/audit.json (REVISE, producer_claim_supported=false; port 18928; 4 auth states)"
+  ],
+  "unresolved": [
+    "Whether a mechanism with generalized preconditions and a parameterized base path (e.g., /${resource}/${id}) would transfer from A to B: untested by this packet; the UNKNOWN-only B observations cannot answer it, and the harness never exercised binding/execution/verification on B (0 HTTP requests).",
+    "Whether kernel exact-match precondition semantics are intended to support cross-dimension generalization at all: kernel.py distill() docstring explicitly defers parameter induction to C-PARAM-INHERIT; no design evidence in this packet resolves the intended generalization mechanism.",
+    "EXP-RUNTIME-34015740602's audit REVISE reasons were not fully examined here; only its claim_ceiling port attestation (18928) was used to check the substrate comment.",
+    "V4_HONEST_COST is only harness self-report: no substrate-side request logs were emitted, so request counts cannot be independently verified from raw evidence.",
+    "model_audit.json is untracked in git (git status ??), so the producer's orchestration self-log is not part of the committed packet.",
+    "Statistical power: 5 IDs per resource with zero-variance outcomes (all-or-nothing conditions) provide no confidence bounds for any of the rate metrics; not remediable within this design."
+  ]
+}

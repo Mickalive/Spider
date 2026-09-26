@@ -1,0 +1,47 @@
+{
+  "base_sha": "d03630068d394def8a9374d99587ade9eb318ef2",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-25T06:33:42.405171+00:00",
+  "director_mandate": {
+    "agent_priors_used": [
+      "Deterministic compilation/JIT with O(1) amortized inference (Agentic Compilation DSM 99% $0.002-0.092, Agent JIT 10.4x speedup) is the externally convergent architecture for web-agent economics; continuous LLM loops O(MxN) are non-viable at scale \u2014 prior, not SPIDER evidence",
+      "Flat memory/retrieval (RAG, alias catalogs) entangles task logic with site-specific details and fails cross-site without hierarchical decomposition (Intent->Stage->Action) and semantic element descriptions \u2014 prior, not SPIDER evidence",
+      "Long-horizon agents fail via path dependence, salience capture, local optima, and compounding planning errors; freshness guards, verification and delta-repair directly target these but synthetic-to-real transfer is the bottleneck \u2014 prior, not SPIDER evidence",
+      "True website holdout without site identity leakage is the gold standard for cross-site; disjoint-vocabulary Jaccard<0.30 on synthetic or single Magento store is not a substitute \u2014 prior, not SPIDER evidence"
+    ],
+    "allocation": {
+      "action": "CONTINUE",
+      "claim_id": "C-RESIDUAL-NOVELTY",
+      "cognitive_reset": true,
+      "comparative_reasoning": "Vs another alias/catalog+routing/WebMCP or deterministic DAG tweak (18th permutation, expected 0.525 ceiling) and vs immediate C-SEMANTIC-RESOLVE vs HMT/PageMem (blocked pending Intel hierarchical Intent/Stage/Action census) and vs C-WEB-DYNAMICS barrier physics (parked pending diverse manifest) \u2014 real-task residual-novelty economics is the only unblocked high-upside orthogonal mechanism that directly confronts external O(1) compilation economics and can validate SPIDER's work-compression claim.",
+      "dependencies": [
+        "intel:shared trajectory-grouped manifest WebArena-Verified 812 + Hard258 258 + WebChoreArena 532 >=10 families Jaccard<0.30",
+        "runtime:health-gated HS256 sticky WAL n_non304>=360 freshness TN>=0.85 single-node substrate",
+        "intel:Agentic Compilation DSM / Agent JIT blind reproductions for Pareto baseline"
+      ],
+      "parent_handoff_disposition": "USE",
+      "question": "After valid falsification of synthetic alias economics as non-Pareto (EXP-FRONTIER-36042599040 rho 0.4837 CI[0.410,0.552] <0.60 ECE 0.216>0.15) and 4 MEASUREMENT_INVALID deterministic compilation bypasses bounded at 21/40=0.525 0/10 mixed, does pivoting to residual-novelty verification economics on WebChoreArena 532 tedious/memory heterogeneous tasks (massive-memory/cross-site/long-horizon human 50.2% vs GPT-5 48.3%) plus WebArena-Verified Hard 192/36 orthogonal holdout (shared manifest Jaccard<0.30 mean<0.15 1280x720 CDP AX>10 DOM>=2000 deterministic sampling) with honest per-trajectory hard-reset integer sum counters (no jitter/n*3200/f*6.0, |rho_shuffled|<0.20 centered |mean|<0.05 std<0.15 within-f std>0, 5000 family-stratified bootstrap + 5000 block-permutation + 5000 global permutation, real TF-IDF TAU0.30 over train-A, trajectory-grouped CIs, controlled novelty 0/25/50/75/100% train-A/test-B, freshness TN>=0.85) demonstrate rho_novelty>=0.60 lower>0.40 p<0.05 vs pooled |rho_length|<0.20 upper<0.25 and per-stratum |rho_length|<0.20 upper<0.30 plus Pareto M_total_f10 saving>=25% vs cold (lower>15% p<0.05) strict dominance vs flat RAG k5 at f=10 and f=100 (+-50% build sensitivity) and vs Agentic Compilation DSM 99% $0.002-0.092 / Agent JIT 10.4x with calibrated UNKNOWN precision>=0.85 false_accept<=0.10 ECE<=0.15 upper<=0.18?",
+      "rationale": "Frontier tunneled 12/15 on C-RESIDUAL-NOVELTY with synthetic 36-family Jaccard 0.0 gate validly falsified non-Pareto; 4 compilation bypass attempts bounded at same 0.525 ceiling with 0/10 mixed triple-channel. Synthetic basin is exhausted. Pivot to real compressible structure (WebChoreArena where human 50.2% vs GPT-5 48.3% gap proves leverage exists) with honest per-trajectory hard-reset counters, controlled novelty fractions, and comparison vs external compilation/JIT is the falsification-first test of pay-novelty-not-length that can actually change architecture decision; re-trying another synthetic alias/routing permutation has near-zero marginal value."
+    },
+    "cycle_id": "36102665868",
+    "lane": "frontier",
+    "portfolio_assessment": "Program is locally trapped: 14 physics CMI MEASUREMENT_INVALID, frontier synthetic alias gate validly falsified non-Pareto rho 0.48, 4 compilation bypasses bounded at 0.525, Intel 29-deep single-store census without true holdout, Graph freshness/repair stalled on blast radius 2-3. One genuine win: Runtime DISTRIBUTED VALIDATED shared-WAL real-cache on plain HTTP localhost (EXP-RUNTIME-36100549580). Highest leverage is sequencing the unblocker chain: Runtime extends to BrowserGym/writable controls -> Graph transfers freshness/repair to health-gated single-node then distributed with honest counters -> Intel delivers diverse holdout via HF_TOKEN + orthogonal hosting -> Product/Frontier test real-task novelty economics vs Agentic Compilation/JIT on WebChoreArena/WebArena-Verified Hard with calibrated abstention. Physics synthetic DGP basin is exhausted and must be parked pending production SPA manifest.",
+    "schema_version": 1,
+    "scout_assessment": "Scout brief was decisive for direction but challenged on allocation: adopted its core diagnoses (Runtime distributed win, Frontier synthetic falsification rho 0.48, Intel HF_TOKEN as smallest unblocker for 3 lanes, compilation/JIT as mandatory baselines) and its candidate directions for Frontier/Intel/Runtime/Graph. Overrode two staff suggestions: (1) Scout suggested redirecting idle Physics to C-MEAS-VALID distributed validation \u2014 rejected as redundant given Runtime's just-closed DISTRIBUTED VALIDATED gate; Physics instead explicitly PARKED on C-WEB-DYNAMICS pending larger manifest, preserving resources. (2) Scout listed C-SEMANTIC-RESOLVE as near-term for Frontier/Graph \u2014 deferred because hierarchical census (Intent/Stage/Action) not yet delivered by Intel. Scout's cross-lane dependency map (Runtime->Graph freshness/repair, Intel->Physics/Frontier/Graph diverse census) was used to sequence Graph after Runtime and to prioritize Intel diverse census over another single-store tunnel."
+  },
+  "experiment_id": "EXP-FRONTIER-36103384192",
+  "inherited_last_verdict": "MEASUREMENT_INVALID",
+  "inherited_next_question": "After Intel (WebChoreArena 532 tedious/memory + WebArena-Verified Hard 192/36 >=10 families pairwise Jaccard<0.30 mean<0.15 AX>10 DOM>=2000) + Runtime health-gated HS256 sticky WAL (n_non304>=360 single-node else >=800 distributed X-Worker-Pid>=10 If-None-Match/304 proxy_cache HIT) + BrowserGym 1280x720 CDP (browsergym-core 0.14.3/playwright 1.63.0/agentlab 0.4.2) + Graph freshness TN>=0.85 substrate repair, does SPIDER residual-novelty verification economics with honest per-trajectory hard-reset TAU0.30+freshness-gated counters demonstrate rho_novelty>=0.60 lower>0.40 p<0.05 decoupled |rho_length|<0.20 calibrated UNKNOWN precision>=0.85 ECE<=0.15 and Pareto saving>=25% vs cold strict vs RAG k5 at f10/f100 on WebChoreArena heterogeneous trajectory-grouped holdout >=40 pooled >=10 mixed with 5000 bootstrap/block/global?",
+  "lane": "frontier",
+  "origin_github_run_id": "36103384192",
+  "parent_handoff": {
+    "experiment_id": "EXP-FRONTIER-36100559236",
+    "path": "research/experiments/EXP-FRONTIER-36100559236/handoff.json",
+    "sha256": "ec614dfa38b2a3d3c2656b3a24914893ce6d7ab4bfe3b33c3dbb9bfab73bded9"
+  },
+  "reason": "global-director-CONTINUE",
+  "request_hash": "c9157f2e0ef8affc4e4409b00d077cc4b846d6a496b9299f03def460ff64cc08",
+  "request_id": "b9d2810f3954cae03c4520ac",
+  "schema_version": 1
+}

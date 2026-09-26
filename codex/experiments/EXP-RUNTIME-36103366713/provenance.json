@@ -1,0 +1,163 @@
+{
+  "experiment_id": "EXP-RUNTIME-36103366713",
+  "github_run_id": "36103366713",
+  "claim_id": "C-MEAS-VALID",
+  "lane": "runtime",
+  "base_sha": "d03630068d394def8a9374d99587ade9eb318ef2",
+  "request_hash": "b21a8faa2edfa0d98ee99110b898defd722ddb62f8d185821b8961794c4aa15b",
+  "spec_hash": "d133d99e7eaf9b70cecc3b7057e0d9f7c22f9bdcbb50f384fefc989bbc2407f7",
+  "prereg_hash": "9184b529288d6352c525b22a418be3794ceed668be56de8839cbf5128bf71129",
+  "env": {
+    "python": "3.12.14 (main, Aug 13 2026, 02:47:42) [GCC 13.3.0]",
+    "flask": "3.1.3",
+    "pyjwt": "2.14.0",
+    "gunicorn": "23.0.0",
+    "nginx": "1.24.0",
+    "requests": "2.34.2",
+    "sqlite3": "3.45.1",
+    "brotli": "available",
+    "gzip": "available",
+    "scipy": "1.18.1"
+  },
+  "ports": {
+    "flask_19860": 19860,
+    "flask_19861": 19861,
+    "nginx": 19851
+  },
+  "seed": 44,
+  "db_path": "/tmp/single.db",
+  "hs256_secret_sha256": "2b23d7955be7a23ca497d66d0890cb4a3ff4400909f545012db667af8267f78d",
+  "hs256_secret_len": 82,
+  "n_observations": 1770,
+  "batch_state_log": [
+    {
+      "batch": 0,
+      "count": 1,
+      "timestamp": 1790319021.3233945
+    },
+    {
+      "batch": 1,
+      "count": 1,
+      "timestamp": 1790319021.974942
+    },
+    {
+      "batch": 2,
+      "count": 1,
+      "timestamp": 1790319022.457762
+    },
+    {
+      "batch": 3,
+      "count": 1,
+      "timestamp": 1790319022.9642112
+    },
+    {
+      "batch": 4,
+      "count": 1,
+      "timestamp": 1790319023.5729802
+    }
+  ],
+  "batch_state_log_len": 23,
+  "factory_pattern_wsgi": true,
+  "flask_listening_verified": true,
+  "health_gate_verified": true,
+  "scoped_uuid_check": {
+    "naive_uuid_count": 93,
+    "scoped_uuid_count": 0,
+    "scoped_block_lines": 307,
+    "ast_uuid_refs": [],
+    "import_uuid_absent": true,
+    "hmac_present": true,
+    "scoped_check_pass": true
+  },
+  "wsgi_sys_path_insert": true,
+  "jwt_decode_at_origin": true,
+  "distributed_2x_gunicorn_shared_wal": true,
+  "upstream_servers": [
+    "127.0.0.1:19860",
+    "127.0.0.1:19861"
+  ],
+  "upstream_2_servers_verified": true,
+  "x_worker_pid_distinct_ge_2": true,
+  "x_worker_pid_distinct_observed": [
+    "61983, 61983",
+    "61984, 61984"
+  ],
+  "request_uri_stickiness_ge_090": true,
+  "request_uri_stickiness_per_uri": {
+    "/api/profile?uid=0": 1.0,
+    "/api/profile?uid=1": 1.0,
+    "/api/profile?uid=2": 1.0,
+    "/api/profile?uid=3": 1.0,
+    "/api/profile?uid=4": 1.0,
+    "/api/profile?uid=5": 1.0,
+    "/api/data_list?uid=0": 1.0,
+    "/api/data_list?uid=1": 1.0,
+    "/api/data_list?uid=2": 1.0,
+    "/api/data_list?uid=3": 1.0,
+    "/api/data_list?uid=4": 1.0,
+    "/api/data_list?uid=5": 1.0
+  },
+  "shared_db_wal_single": true,
+  "per_batch_select_distinct_ts_ge_10": true,
+  "single_nginx_location": true,
+  "nginx_proxy_pass_no_trailing_slash": true,
+  "nginx_add_header_x_worker_pid_always": true,
+  "nginx_request_uri_sticky": true,
+  "health_gate_attempts": 30,
+  "exclusive_nginx_c": true,
+  "single_hash_request_uri": true,
+  "no_load_balancing_method_redefined": true,
+  "proxy_cache_enabled": true,
+  "proxy_temp_path": "/tmp/single.db.temp",
+  "proxy_no_cache_authorization": true,
+  "proxy_cache_bypass_authorization": true,
+  "cache_dir": "/tmp/single.db.cache",
+  "cache_dir_ls": "total 56\ndrwxr-xr-x   3 www-data www-data  4096 Sep 25 06:47 .\ndrwxrwxrwt 980 root     root     45056 Sep 25 06:51 ..\ndrwx------   3 www-data www-data  4096 Sep 25 06:47 2\n",
+  "cache_dir_exists": true,
+  "nginx_user": "www-data",
+  "use_sudo_nginx": true,
+  "stable_header_generation": true,
+  "uuid_absence_grep_scoped": true,
+  "natural_auth_state_headers": true,
+  "synthetic_header_mutation": false,
+  "browser_gym_playwright_version": "1.63.0",
+  "browser_gym_viewport": [
+    1280,
+    720
+  ],
+  "browser_gym_viewport_ok": true,
+  "browser_gym_ax_median": 22.5,
+  "browser_gym_pc_health": 1.0,
+  "browser_gym_dom_median": 31.0,
+  "browser_gym_real_browser": true,
+  "browser_gym_cdp_capture": "Accessibility.getFullAXTree",
+  "browser_gym_dom_enumeration": "document.querySelectorAll('*').length",
+  "agentlab_available": false,
+  "agentlab_version": "stub-0.4.2",
+  "train_only_kmeans_k": 20,
+  "train_only_kmeans_inertia": 9.473662411787322,
+  "train_only_kmeans_leakage_pass": true,
+  "writable_pos_rate": 0.75,
+  "writable_null_rate": 0.0,
+  "writable_wal_mutated": 0.95,
+  "freeze_hashes": {
+    "request.json": "b21a8faa2edfa0d98ee99110b898defd722ddb62f8d185821b8961794c4aa15b",
+    "spec.json": "d133d99e7eaf9b70cecc3b7057e0d9f7c22f9bdcbb50f384fefc989bbc2407f7",
+    "prereg.md": "9184b529288d6352c525b22a418be3794ceed668be56de8839cbf5128bf71129"
+  },
+  "scope": "DISTRIBUTED BrowserGym CDP 1280x720: 2x gunicorn 23.0.0 workers binding 127.0.0.1:19860 AND 127.0.0.1:19861 sharing single SQLite WAL at /tmp/single.db (check_same_thread=False factory def create_app() + wsgi Path(__file__).parent) fronted by exclusive nginx 1.24.0:19851 -c single hash $request_uri consistent sticky upstream 2 servers with real proxy_cache ENABLED at /tmp/single.db.cache; STABLE auth-state headers (HMAC deterministic per auth_state, NO uuid4 per response, scoped uuid-absence check excluding docstrings/comments); X-Worker-Pid distinct >=2 and $request_uri stickiness >=0.90 validated via browser path; Playwright 1.63.0 chromium at 1280x720 viewportSize verified cdpSession.send Accessibility.getFullAXTree AX capture DOM querySelectorAll('*').length + TRAIN-only k-means k=20 no leakage + writable-controls matrix on SPA write-paths; plain HTTP localhost distributed + BrowserGym DOM/AX + writable SPA at same origin \u2014 TLS/HTTP2/multi-host Redis beyond single-host /tmp/single.db remain UNKNOWN",
+  "created_at": "2026-09-25T06:51:22.454564+00:00",
+  "run_experiment_sha256": "d559009ae5d456f344a31ddef633c34c48f46f303fab3cd6f25c24bc87bf09db",
+  "wsgi_sha256": "87fe017a99b42c2d64f581465a14eeb8d16b03fa7625052c6b5f5d75bdc6f261",
+  "nginx_conf_sha256": "a83f0103318a5e32986f6ae76d9f9a82817d2028980798fed0d055d1b8b28acc",
+  "raw_freshness_sha256": "26ad3e67f9e6d6da09477ce7554a489b066c5a942685638916a1506a4743cb21",
+  "raw_hit_sha256": "5357f31bbaa82e204555f1d8853e048ce8901f768e111c8006216d8a8b8f2a1b",
+  "raw_trajectory_costs_sha256": "c67b0797a98bb64f6f6a13f134ddcbfeaa042f4dcf10446268ee63cb2ff4c806",
+  "batch_state_log_sha256": "0dd83527c9af65602c6d37ee614ef1c1a4021be880e3efcd4bf2f4afde0ab81f",
+  "db_sha256": "560a394b4b5e3f6554b5025b3a13fefe5908dc38cd83375f25e77c707b3a63a7",
+  "health_gate_log_sha256": "daf4ab30c903c221a6f34e059a49b42d0fc310ea3f576b320b171c93f40aedf7",
+  "cache_file_count_sudo": 1,
+  "cache_file_entries": [
+    "/tmp/single.db.cache/2/05/febd9bd9f76478774376fc8d7baa5052"
+  ]
+}

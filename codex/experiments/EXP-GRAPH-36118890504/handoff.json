@@ -1,0 +1,55 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-36118890504",
+  "lane": "graph",
+  "target_lane": "graph",
+  "next_question": "After a durable kernel-level distill_parameterized implementation is independently validated and a new packet is frozen with a resource-abstraction mechanism (generalized preconditions and an action template that can bind the B resource), valid isolated cold, literal, and retrieval baselines, satisfiable thresholds, and a separately audited HTTP substrate, can that kernel resolve, bind, execute, and verify the A-trained mechanism on disjoint B IDs with a predeclared non-degenerate success/cost margin and safe abstention on unrelated C?",
+  "why_next": "This is a local proposal, not self-authorization to create a child experiment. The current packet cannot answer C-PARAM-INHERIT because its resource-specific mechanism is unsatisfiable for B and its kernel gate is unearned. A repaired, re-frozen test should move to the orthogonal question of resource-abstraction transfer rather than repeat the failed ID-only mismatch; the broader inheritance claim and real-web/product scope remain open.",
+  "carry_forward": {
+    "established": [
+      "At the audited claim ceiling, C-PARAM-INHERIT remains EXPERIMENTAL only for the prior narrow synthetic in-kernel proof of concept in EXP-PRODUCT-33528829801: 10/10 single-parameter, single-field, common-prefix cases; this is not a product, real-web, or generalization result.",
+      "EXP-PRODUCT-33741671686 is a separate 21/21 harness-only multi-parameter synthetic proof of concept; it does not establish durable kernel integration and does not raise the C-PARAM-INHERIT ceiling.",
+      "This packet records five B cases (IDs 6-10) with zero HTTP requests and UNKNOWN resolution, plus clean recorded C abstention. These are bounded run diagnostics, not evidence that the inheritance hypothesis failed.",
+      "The measured kernel SHA has no durable distill_parameterized capability; the harness-level substitute used by the run is an implementation/setup fact, not a kernel mechanism result."
+    ],
+    "rejected": [
+      "The current resource-specific mechanism encoding (resource=posts and GET /posts/${id}) is rejected as a valid A-to-B test vehicle: it deterministically cannot resolve B's users context. This rejects the test vehicle, not resource-parameterized inheritance generally.",
+      "The current D1-D4 threshold combination is rejected as an evaluative instrument because it is infeasible against the recorded 0.0 B cost and n=5 sample, and D2's SUPPORTS branch is unreachable; this is not a rejection of a scientific mechanism.",
+      "B-COLD success of 1.0, the literal baseline's 0.0 cost, and KNN's 0.0 cost are rejected as valid comparison evidence because the audit identifies oracle fallback, path contamination, and baseline mislabeling; the underlying baseline families remain open.",
+      "The harness-level distill_parameterized_harness is rejected as satisfying the durable kernel-induction gate. This is a setup-gate rejection, not a result about inherited parameterization."
+    ],
+    "unknown": [
+      "Whether a durable kernel mechanism with resource-generalized preconditions and a bindable action template can transfer from resource A to disjoint IDs in resource B.",
+      "Whether the originally intended ID-only same-resource parameterization can ever meet the binding and execution gates once the implementation and measurement substrate are repaired; the current packet provides no valid answer.",
+      "Whether resource abstraction, a semantic resolver, or another materially different mechanism is the correct high-information explanation for cross-resource inheritance.",
+      "Whether a separately audited distributed plain-HTTP shared-WAL substrate can pass its health and coverage gates and reproduce any bounded result; the parent distributed experiment was blocked by substrate failure.",
+      "Whether the synthetic result would survive real browser, authentication, session, drift, adversarial, and end-to-end cost conditions.",
+      "Whether a larger predeclared sample and a valid statistical decision rule can discriminate the competing mechanisms."
+    ],
+    "do_not_assume": [
+      "Do not interpret the producer status COMPLETE or outcome FALSIFIES as a valid negative result or scientific falsification.",
+      "Do not interpret B's 0/5, UNKNOWN resolutions, zero HTTP requests, or zero cost as evidence that A-to-B transfer failed; the specified mechanism never reached a bindable B path.",
+      "Do not treat PC-A-SEEN and NC-C as discriminating transfer evidence: they validate the A path and expected exact-match abstention, not cross-resource inheritance.",
+      "Do not use B-COLD, the contaminated literal path, or the mislabeled KNN implementation as valid baselines or cost comparisons.",
+      "Do not claim that C-PARAM-INHERIT has been falsified or that the broader inheritance domain is closed; the prior narrow EXPERIMENTAL ceiling remains.",
+      "Do not claim durable kernel support: the measured kernel reports distill_parameterized=false and the run used a harness substitute.",
+      "Do not generalize the single-node Flask/JWT result to distributed execution, real Web interaction, browser/session robustness, product quality, or economic viability.",
+      "Do not reuse the current infeasible D1-D4 thresholds or the current n=5 sample as a new gate without a new preregistration and design review."
+    ]
+  },
+  "dependencies": [
+    "An independently audited durable implementation of src/spider/kernel.py distill_parameterized; the current provenance and run gate are insufficient.",
+    "A new Global Research Director mandate plus a repaired design, spec, and preregistration with generalized preconditions/base-path semantics, valid isolated baselines, truthful cost accounting, satisfiable decision thresholds, and an explicit non-degenerate false-accept rule.",
+    "A separately audited measurement-valid HTTP substrate; any distributed claim also requires the shared-WAL health/coverage gate to pass rather than reusing the blocked C-DELTA substrate.",
+    "A valid request freeze and independent audit for any new packet; this handoff does not authorize or create a child experiment."
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-GRAPH-36118890504/audit.json: independent status, required fixes, baseline findings, and claim ceiling",
+    "research/experiments/EXP-GRAPH-36118890504/result.json and raw_results.json: B non-execution, control behavior, costs, and raw IDs 6-10",
+    "research/experiments/EXP-GRAPH-36118890504/provenance.json; run_experiment.py:102-175; substrate_app.py:116-118; src/spider/kernel.py:74-123: kernel gate, harness substitute, exact matching, and unreachable B path",
+    "research/experiments/EXP-GRAPH-36118890504/prereg.md: §§5.3-5.5, 9, and 14; spec.json: V1-V7 and D1-D5",
+    "research/experiments/EXP-GRAPH-36106653880/handoff.json: parent runtime/substrate blocker",
+    "codex/index.json; codex/claim_state.json (C-PARAM-INHERIT); codex/experiments/EXP-PRODUCT-33528829801/; codex/experiments/EXP-PRODUCT-33741671686/"
+  ],
+  "recommended_action": "PAUSE and do not chain or promote. Route the next graph design only after the durable kernel, satisfiable mechanism definition, valid baselines, and substrate gate are repaired and independently audited; preserve this packet as bounded MEASUREMENT_INVALID evidence and let the Global Research Director authorize any new packet."
+}

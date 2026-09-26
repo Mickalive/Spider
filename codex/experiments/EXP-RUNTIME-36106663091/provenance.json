@@ -1,0 +1,165 @@
+{
+  "artifacts": [
+    {
+      "bytes": 2070658,
+      "path": "raw_freshness_observations.jsonl",
+      "role": "raw",
+      "sha256": "3154fa73427716ba9cb860f5d7efe794127f33549067fd91e967e6393c864dcb"
+    },
+    {
+      "bytes": 0,
+      "path": "raw_browser_observations.jsonl",
+      "role": "raw",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 0,
+      "path": "raw_writable_observations.jsonl",
+      "role": "raw",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 0,
+      "path": "raw_kmeans_features.jsonl",
+      "role": "raw",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 6784,
+      "path": "raw_trajectory_costs.jsonl",
+      "role": "raw",
+      "sha256": "e85cd4280b1280c7bc07745ab25e2e7ee269711d3c4fc6bdf02fe281a1ff3e1c"
+    },
+    {
+      "bytes": 0,
+      "path": "raw_hit_observations.jsonl",
+      "role": "raw",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 0,
+      "path": "raw_batch_state_log.jsonl",
+      "role": "raw",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 95947,
+      "path": "run_experiment.py",
+      "role": "code",
+      "sha256": "365513a7146987c76ccb9c3eb596178ebd819f8f9a841d8c91f44a8588eddf59"
+    },
+    {
+      "bytes": 1166,
+      "path": "/tmp/single.db.nginx.conf",
+      "role": "fixture",
+      "sha256": "7bd0629e428c0bb7fe9b376c21beaa63e939429b9756ad868b836dd761a097ad"
+    },
+    {
+      "bytes": 122,
+      "path": "/tmp/wsgi.py",
+      "role": "fixture",
+      "sha256": "b3a4ad0576e9213553cb0a8dfe0d556bd8df5a2d5da424f203e11c06eaf4d59b"
+    },
+    {
+      "bytes": 24576,
+      "path": "/tmp/single.db",
+      "role": "fixture",
+      "sha256": "0bb67e5f12b79f85be7611ecaed2d71166f9605939bce82caf80c821ccf3f03b"
+    }
+  ],
+  "base_sha": "896b9305aba3d2e5889cd35a4a4b66541639a6a1",
+  "branch": "lab2/runtime",
+  "browser_runtime": {
+    "agentlab_attempted": true,
+    "agentlab_available": false,
+    "agentlab_error": "ModuleNotFoundError(\"No module named 'agentlab'\")",
+    "browsergym_core_import": true,
+    "browsergym_import": true,
+    "browsergym_version": "0.14.3",
+    "compatibility_adapter_used": false,
+    "native_path_helper": null,
+    "native_path_helper_available": false,
+    "native_path_helper_error": "required get_executable_path helper is absent",
+    "nginx_started": true,
+    "official_executable_path": "/home/runner/.cache/ms-playwright/chromium-1243/chrome-linux64/chrome",
+    "playwright_version": "1.63.0",
+    "token_creation": "HS256 with stable subject/session; no secret recorded in artifacts"
+  },
+  "claim_id": "C-MEAS-VALID",
+  "code": {
+    "path": "research/experiments/EXP-RUNTIME-36106663091/run_experiment.py",
+    "sha256": "365513a7146987c76ccb9c3eb596178ebd819f8f9a841d8c91f44a8588eddf59"
+  },
+  "commands": [
+    "sudo -n rm -f -- /tmp/single.db.nginx.error.log",
+    "sudo -n rm -rf -- /tmp/single.db.cache",
+    "write /tmp/single.db.nginx.conf",
+    "gunicorn --workers 1 --bind 127.0.0.1:19860 --access-logfile - --error-logfile - wsgi:application",
+    "gunicorn --workers 1 --bind 127.0.0.1:19861 --access-logfile - --error-logfile - wsgi:application",
+    "sudo -n nginx -t -c /tmp/single.db.nginx.conf",
+    "sudo -n nginx -c /tmp/single.db.nginx.conf",
+    "sudo -n nginx -s stop -c /tmp/single.db.nginx.conf"
+  ],
+  "created_at": "2026-09-25T08:14:42.459233+00:00",
+  "environment": {
+    "Flask": "3.1.3",
+    "PyJWT": "2.14.0",
+    "brotli": "1.2.0",
+    "browsergym": "0.14.3",
+    "browsergym-core": "0.14.3",
+    "gunicorn": "23.0.0",
+    "node": "v22.23.2",
+    "numpy": "2.5.3",
+    "playwright": "1.63.0",
+    "python": "3.12.14",
+    "requests": "2.34.2",
+    "scikit-learn": "1.9.1",
+    "scipy": "1.18.1"
+  },
+  "experiment_id": "EXP-RUNTIME-36106663091",
+  "fixtures": [
+    {
+      "bytes": 1166,
+      "path": "/tmp/single.db.nginx.conf",
+      "role": "fixture",
+      "sha256": "7bd0629e428c0bb7fe9b376c21beaa63e939429b9756ad868b836dd761a097ad"
+    },
+    {
+      "bytes": 122,
+      "path": "/tmp/wsgi.py",
+      "role": "fixture",
+      "sha256": "b3a4ad0576e9213553cb0a8dfe0d556bd8df5a2d5da424f203e11c06eaf4d59b"
+    },
+    {
+      "bytes": 24576,
+      "path": "/tmp/single.db",
+      "role": "fixture",
+      "sha256": "0bb67e5f12b79f85be7611ecaed2d71166f9605939bce82caf80c821ccf3f03b"
+    }
+  ],
+  "frozen_inputs": {
+    "prereg.md": "8e93b00a6911d4386c1265d3fdf93348f6c4de77ac1207262e06b90fd9a9fda7",
+    "request.json": "0b03a94baec1e7100cd0aa2d3d6098195c8f1b998237d296ee7f28365bafdf6f",
+    "spec.json": "816d2812ef16742e705a8c600fc56d2af1980824f4aae5c08f7f72e346329c20"
+  },
+  "git_at_end": {
+    "branch": "lab2/runtime",
+    "head": "903ddb5f0b86991a4b51b2b8b48275c1cc92399b",
+    "status": "?? model_execute.json\n?? provenance.json\n?? raw_batch_state_log.jsonl\n?? raw_browser_observations.jsonl\n?? raw_freshness_observations.jsonl\n?? raw_hit_observations.jsonl\n?? raw_kmeans_features.jsonl\n?? raw_trajectory_costs.jsonl\n?? raw_writable_observations.jsonl\n?? report.md\n?? result.json\n?? run_experiment.py"
+  },
+  "github_run_id": "36106663091",
+  "lane": "runtime",
+  "reproduction_notes": [
+    "The runner is fail-closed and contains no synthetic browser/writable fallback.",
+    "The exact frozen playwright._impl._path_utils.get_executable_path helper is mandatory; the public executable path is diagnostic only and is not substituted if the helper is absent.",
+    "agentlab import was attempted and was unavailable; the frozen packet says it is not required when BrowserGym works."
+  ],
+  "schema_version": 1,
+  "seeds": {
+    "SEED": 44,
+    "honest_cost_permutations_B": 1000,
+    "numpy_seed": 44,
+    "sklearn_random_state": 44
+  },
+  "source_commit": "903ddb5f0b86991a4b51b2b8b48275c1cc92399b"
+}

@@ -1,0 +1,60 @@
+{
+  "experiment_id": "EXP-GRAPH-36106653880",
+  "lane": "graph",
+  "claim_ids": ["C-DELTA-REPAIR"],
+  "question": "On the bounded-valid distributed shared-WAL HTTP substrate (nginx 1.24.0 $request_uri sticky 4x gunicorn Flask 3.1.3 PyJWT HS256 shared WAL DB at n>=800 non-304), does the deterministic freshness-gated localized repair mechanism (Jaccard 0.85 required-filtered {id,name,email} + _template/X-Csrf-Token + ETag SHA256[:16] + max-age0, recalibrated 0.95 fresh / 0.85 stale confidence, k-probe re-observe via _matches exact equality on required_slots) retain TN>=0.85, false_accept<=0.10, repair>=0.80, pooled repair>=0.70, same-resource contamination<0.10 per family, and lower token/browser cost than cold re-exploration at f=10 for blast radii 1-3 under trajectory-grouped uncertainty controls?",
+  "hypothesis": "The single-node SURVIVES_CURRENT_TEST result (EXP-GRAPH-36018188168) transfers to the distributed substrate with equivalent thresholds because the combined freshness guard (Jaccard + template/header + ETag+max-age0) and k-probe _matches repair are deterministic and substrate-independent; concurrent WAL propagation and multi-worker sticky routing do not degrade the guard/repair signals beyond the single-node operational envelope.",
+  "falsifier": "Any of: (1) TN < 0.85 Wilson lower bound on fresh requests; (2) false_accept > 0.10 Wilson upper bound on stale requests; (3) pooled repair < 0.70 Wilson lower bound; (4) same-resource contamination >= 0.10 Wilson upper bound per family; (5) token cost >= cold_k or browser cost >= cold_browser at f=10 for any blast radius K1/K2/K3; (6) verification AUROC < 0.75 or precision < 0.80 on TEST split; (7) permutation max|rho| >= 0.20 or bootstrap CIs degenerate without stochastic threshold.",
+  "baselines": {
+    "B-COLD": {"description": "Cold re-exploration from scratch: full k*5 probe tokens (16/32/48 for K1/K2/K3) and k browser steps (3/6/9) per blast radius, no guard, no repair, no registry lookup", "expected": "token_cost=cold_k, browser_cost=cold_browser, repair=0.0, TN=0.0, FA=1.0"},
+    "B-NO-GUARD": {"description": "Always EXECUTABLE without freshness guard: k-probe repair attempted on all requests regardless of staleness", "expected": "repair~1.0 but FA=1.0 on stale, token_cost=k*5, contamination_high"},
+    "B-ORACLE": {"description": "Definitional ceiling: perfect freshness oracle + perfect k-probe repair (same as SPIDER but with ground-truth stale/fresh labels)", "expected": "TN=1.0, FA=0.0, repair=1.0, token_cost=k*5, browser_cost=k, disclosed_as_ceiling"},
+    "B-VERBATIM": {"description": "Literal route replay: exact cached action sequence replayed without adaptation", "expected": "repair=0.0 on any drift, FA=0.0 but TN undefined"},
+    "B-RETRIEVAL": {"description": "Retrieval/RAG without patch: semantic retrieval of similar trajectories (TF-IDF Jaccard 0.30) but no k-probe re-observe patch execution", "expected": "repair_delta_vs_SPIDER >= 0.30 (SPIDER repair - retrieval repair >= 0.30)"}
+  },
+  "positive_control": {
+    "id": "PC-DISTRIBUTED-HEALTH-GATE",
+    "description": "Runtime distributed substrate health gate from EXP-RUNTIME-36100549580: nginx 1.24.0 $request_uri sticky, 4x gunicorn workers, Flask 3.1.3 PyJWT HS256, shared WAL /tmp/spider-runtime/shared.db, n_non304>=800, If-None-Match/ETag->304 operational, X-Worker-Pid>=2 distinct per node, header-only Jaccard filtered minus {content-length,etag,w-etag,range} with non-zero variance |r|<0.30 V<0.30, full-vector discrimination > max(body,status)+0.05, HMAC-SHA256 per auth_state stable-header mutation",
+    "expected": "All D1-D13 health gate criteria PASS on distributed substrate before Graph repair test begins"
+  },
+  "null_control": {
+    "id": "NC-NOISE",
+    "description": "Noise-only drift family: synthetic flat-JSON /resource/{id} with independent random perturbation on phone (p=0.3) and nickname (p=0.3) fields that are NOT in required_slots {id,name,email} and do not affect template/header/ETag signals; should yield FA<=0.05 and repair~0.0",
+    "expected": "FA <= 0.05 Wilson upper, repair ~ 0.0, contamination ~ 0.0"
+  },
+  "measurement_validity": [
+    "V1: Per-trajectory-reset integer sum counters (no jitter, no parity, no bijective n*3200) for tokens, browser_steps, verify_calls — honest cost accounting",
+    "V2: 1000 trajectory-grouped whole-block permutations (max|rho| < 0.20) for cost correlation test — tests graded economics discrimination, not vacuous zero-variance",
+    "V3: 5000 family-stratified trajectory-grouped bootstraps for repair/FA/TN CIs — Wilson intervals for binomial, percentile for continuous",
+    "V4: Registry clone snapshot isolation: disjoint-id contamination test (20 unseen IDs 9000-9019) re-verified via _matches after each blast radius",
+    "V5: Same-resource co-bound contamination: K1 fresh requests on same IDs after repair must not accumulate false state",
+    "V6: Verification discrimination: TRAIN 18 / TEST 12 split frozen, AUROC>=0.75 precision>=0.80 on TEST, permutation-shuffled null AUROC in [0.40,0.60]",
+    "V7: Honest amortized Pareto at f=10: M_total_f10 tokens < cold_k and browser < cold_browser for all K1/K2/K3",
+    "V8: Orthogonal ablation discriminant: B-JACCARD-ONLY and B-HEADER-ONLY must fail at least 2 families each (proving combined signal required)",
+    "V9: Substrate continuity: nginx version captured, config archived, X-Worker-Pid sticky proven, WAL journal_mode verified, HS256 JWT verified, 304 If-None-Match operational",
+    "V10: No leakage of target into predictors: stale/fresh labels derived only from guard signals, never from ground-truth drift labels",
+    "V11: Split integrity: guard thresholds (Jaccard 0.85, conf 0.95/0.85) frozen from single-node, not re-calibrated on distributed data",
+    "V12: Representation integrity: DOM tokens ignore magnitudes/nested depth, ETag truncated 16 hex, endpoint template ignores param semantics, per-trajectory cache 3 obs — losses documented"
+  ],
+  "decision_rule": {
+    "primary": "ALL of D1-D7 must PASS for SURVIVES_CURRENT_TEST; any single FAIL -> FALSIFIES; measurement validity failure -> MEASUREMENT_INVALID",
+    "D1": "Freshness TN >= 0.85 Wilson lower bound on fresh requests (n_fresh >= 100 per family per blast radius)",
+    "D2": "Freshness FA <= 0.10 Wilson upper bound on stale requests (n_stale >= 30 per family per blast radius)",
+    "D3": "Pooled repair >= 0.70 Wilson lower bound across all blast radii K1/K2/K3",
+    "D4": "Per-family repair >= 0.70 Wilson lower bound for each family (K1: dom, param_header, cache; K2/K3: param_header, cache) at each blast radius",
+    "D5": "Same-resource contamination < 0.10 Wilson upper bound per family (disjoint-id 20 IDs + same-resource co-bound)",
+    "D6": "Verification AUROC >= 0.75 AND precision >= 0.80 on frozen TEST12 split, permutation null AUROC in [0.40,0.60]",
+    "D7": "Honest amortized Pareto at f=10: tokens < cold_k (16/32/48) AND browser < cold_browser (3/6/9) for all K1/K2/K3",
+    "secondary": {
+      "ECE": "Global ECE <= 0.15, fresh ECE <= 0.05, stale ECE <= 0.15",
+      "permutation_rho": "max|rho| < 0.20 via 1000 trajectory-grouped perms (non-vacuous: cost variance > 0 required)",
+      "bootstrap_informative": "Wilson CI width > 0 for repair/FA/TN (degenerate [1.0,1.0] flagged as ceiling not precision)",
+      "ablation": "B-JACCARD-ONLY FAILS >=2 families, B-HEADER-ONLY FAILS >=2 families",
+      "cost_scaling": "k*5 token scaling and k browser steps verified per blast radius K1=1, K2=2, K3=3"
+    }
+  },
+  "product_consequence_positive": "C-DELTA-REPAIR upgraded from single-node EXPERIMENTAL to distributed EXPERIMENTAL (VALIDATED candidacy). Enables Product lane to integrate distributed delta-repair into kernel with confidence. Does NOT authorize PRODUCT_CORE or SHIPPED — requires real LLM/Playwright at f=100 and cross-site holdout first.",
+  "product_consequence_negative": "C-DELTA-REPAIR bounded to single-node health-gated substrate only. Distributed WAL propagation, concurrent multi-worker sticky routing, or nginx load balancing degrades guard/repair below thresholds. Graph lane parks C-DELTA-REPAIR at single-node EXPERIMENTAL and reassesses C-PARAM-INHERIT per Director mandate.",
+  "estimated_cost": "Runtime substrate: ~20 min nginx+4xgunicorn Flask+WAL startup + ~30 min n>=800 non-304 collection. Graph repair test: ~15 min execution. Total ~65 min wall-clock. Compute: 4 gunicorn workers + nginx + shared WAL SQLite. No LLM/API calls (synthetic proxy).",
+  "expected_information_gain": "High: discriminates whether deterministic freshness+repair mechanism is substrate-portable or single-node artifact. Binary gate for C-DELTA-REPAIR claim ceiling. Directly informs Product integration readiness. Controls isolate WAL propagation vs sticky routing vs guard signal degradation."
+}

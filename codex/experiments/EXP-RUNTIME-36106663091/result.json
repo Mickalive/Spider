@@ -1,0 +1,375 @@
+{
+  "artifacts": [
+    {
+      "bytes": 2070658,
+      "path": "raw_freshness_observations.jsonl",
+      "role": "raw",
+      "sha256": "3154fa73427716ba9cb860f5d7efe794127f33549067fd91e967e6393c864dcb"
+    },
+    {
+      "bytes": 0,
+      "path": "raw_browser_observations.jsonl",
+      "role": "raw",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 0,
+      "path": "raw_writable_observations.jsonl",
+      "role": "raw",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 0,
+      "path": "raw_kmeans_features.jsonl",
+      "role": "raw",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 6784,
+      "path": "raw_trajectory_costs.jsonl",
+      "role": "raw",
+      "sha256": "e85cd4280b1280c7bc07745ab25e2e7ee269711d3c4fc6bdf02fe281a1ff3e1c"
+    },
+    {
+      "bytes": 0,
+      "path": "raw_hit_observations.jsonl",
+      "role": "raw",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 0,
+      "path": "raw_batch_state_log.jsonl",
+      "role": "raw",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 95947,
+      "path": "run_experiment.py",
+      "role": "code",
+      "sha256": "365513a7146987c76ccb9c3eb596178ebd819f8f9a841d8c91f44a8588eddf59"
+    }
+  ],
+  "controls": {
+    "B-BROWSER-DOM-AX-STRUCTURAL": {
+      "evidence_refs": [
+        "research/experiments/EXP-RUNTIME-36106663091/raw_browser_observations.jsonl"
+      ],
+      "expected": "AX median >10, PC_HEALTH>=0.80, DOM median [21,82], viewport 1280x720",
+      "note": "",
+      "observed": {
+        "browser_health_ax_median": null,
+        "browser_health_dom_median": null,
+        "browser_health_pc_health": null,
+        "browser_health_viewport_ok": null
+      },
+      "pass": null,
+      "status": "UNKNOWN"
+    },
+    "B-DISTRIBUTED-HTTP-TRIPLE": {
+      "evidence_refs": [
+        "research/experiments/EXP-RUNTIME-36106663091/raw_freshness_observations.jsonl",
+        "research/experiments/EXP-RUNTIME-36106663091/raw_browser_observations.jsonl",
+        "research/experiments/EXP-RUNTIME-36106663091/raw_writable_observations.jsonl",
+        "research/experiments/EXP-RUNTIME-36106663091/raw_kmeans_features.jsonl",
+        "research/experiments/EXP-RUNTIME-36106663091/raw_trajectory_costs.jsonl",
+        "research/experiments/EXP-RUNTIME-36106663091/raw_hit_observations.jsonl"
+      ],
+      "expected": "C1-C5 distributed/browser-path replication",
+      "note": "Unknown unless every C1-C5 phase completed.",
+      "observed": {
+        "C1": false,
+        "C2": false,
+        "C3": false,
+        "C4": false,
+        "C5": false
+      },
+      "pass": null,
+      "status": "UNKNOWN"
+    },
+    "B-FULL-VECTOR-BROWSER": {
+      "evidence_refs": [
+        "research/experiments/EXP-RUNTIME-36106663091/raw_browser_observations.jsonl"
+      ],
+      "expected": "full>0.5, full>max(body,status)+0.05, diff_lo>0, null=0",
+      "note": "",
+      "observed": {
+        "browser_full_vector_body_only": null,
+        "browser_full_vector_diff_lo": null,
+        "browser_full_vector_full": null,
+        "browser_full_vector_null": null,
+        "browser_full_vector_status_only": null
+      },
+      "pass": null,
+      "status": "UNKNOWN"
+    },
+    "B-HEADER-ONLY-JACCARD-STABLE-BROWSER": {
+      "evidence_refs": [
+        "research/experiments/EXP-RUNTIME-36106663091/raw_browser_observations.jsonl"
+      ],
+      "expected": "|r|<0.30, V<0.30, nullFP<=0.05, same-state J=1",
+      "note": "",
+      "observed": {
+        "browser_header_only_jaccard_mean": null,
+        "browser_header_only_jaccard_nullFP": null,
+        "browser_header_only_jaccard_r": null,
+        "browser_header_only_jaccard_same_state_J": null,
+        "browser_header_only_jaccard_v": null
+      },
+      "pass": null,
+      "status": "UNKNOWN"
+    },
+    "B-TRAIN-ONLY-KMEANS": {
+      "evidence_refs": [
+        "research/experiments/EXP-RUNTIME-36106663091/raw_kmeans_features.jsonl",
+        "research/experiments/EXP-RUNTIME-36106663091/raw_browser_observations.jsonl"
+      ],
+      "expected": "k=20, strict 60/40 trajectory split, leakage_pass",
+      "note": "",
+      "observed": {
+        "browser_kmeans_centroid_diff": null,
+        "browser_kmeans_leakage_pass": null,
+        "browser_kmeans_n_test": null,
+        "browser_kmeans_n_train": null,
+        "browser_kmeans_same_state_J": null
+      },
+      "pass": null,
+      "status": "UNKNOWN"
+    },
+    "B-WRITABLE-NULL-DELETED-SESSION": {
+      "evidence_refs": [
+        "research/experiments/EXP-RUNTIME-36106663091/raw_writable_observations.jsonl"
+      ],
+      "expected": "401, 0.0 discrimination, 0 DOM delta, WAL unchanged",
+      "note": "",
+      "observed": {
+        "discrimination_rate": null,
+        "dom_delta_mean": null,
+        "wal_mutated": null
+      },
+      "pass": null,
+      "status": "UNKNOWN"
+    },
+    "B-WRITABLE-NULL-EXPIRED-AUTH": {
+      "evidence_refs": [
+        "research/experiments/EXP-RUNTIME-36106663091/raw_writable_observations.jsonl"
+      ],
+      "expected": "0.0 discrimination, 0 DOM delta, WAL unchanged",
+      "note": "",
+      "observed": {
+        "discrimination_rate": null,
+        "dom_delta_mean": null,
+        "wal_mutated": null
+      },
+      "pass": null,
+      "status": "UNKNOWN"
+    },
+    "B-WRITABLE-NULL-INVALID-AUTH": {
+      "evidence_refs": [
+        "research/experiments/EXP-RUNTIME-36106663091/raw_writable_observations.jsonl"
+      ],
+      "expected": "0.0 discrimination, 0 DOM delta, WAL unchanged",
+      "note": "",
+      "observed": {
+        "discrimination_rate": null,
+        "dom_delta_mean": null,
+        "wal_mutated": null
+      },
+      "pass": null,
+      "status": "UNKNOWN"
+    },
+    "B-WRITABLE-NULL-READONLY": {
+      "evidence_refs": [
+        "research/experiments/EXP-RUNTIME-36106663091/raw_writable_observations.jsonl"
+      ],
+      "expected": "0.0 discrimination, 0 DOM delta, WAL unchanged",
+      "note": "",
+      "observed": {
+        "discrimination_rate": null,
+        "dom_delta_mean": null,
+        "wal_mutated": null
+      },
+      "pass": null,
+      "status": "UNKNOWN"
+    },
+    "B-WRITABLE-NULL-SAME-STATE": {
+      "evidence_refs": [
+        "research/experiments/EXP-RUNTIME-36106663091/raw_writable_observations.jsonl"
+      ],
+      "expected": "0.0 discrimination, 0 DOM delta, WAL unchanged",
+      "note": "",
+      "observed": {
+        "discrimination_rate": null,
+        "dom_delta_mean": null,
+        "wal_mutated": null
+      },
+      "pass": null,
+      "status": "UNKNOWN"
+    },
+    "B-WRITABLE-POSITIVE": {
+      "evidence_refs": [
+        "research/experiments/EXP-RUNTIME-36106663091/raw_writable_observations.jsonl"
+      ],
+      "expected": "positive discrimination >=0.5, DOM_delta>0, WAL mutation",
+      "note": "",
+      "observed": {
+        "writable_dom_delta_pos_rate": null,
+        "writable_pos_rate": null,
+        "writable_wal_pos_mutated_rate": null
+      },
+      "pass": null,
+      "status": "UNKNOWN"
+    },
+    "NC-SYNTHETIC-FALLBACK-REJECTED": {
+      "evidence_refs": [
+        "research/experiments/EXP-RUNTIME-36106663091/run_experiment.py"
+      ],
+      "expected": "No synthetic browser/writable fallback; fail closed",
+      "note": "The runner has no synthetic fallback branch; any browser setup error is reported as infrastructure failure.",
+      "observed": {
+        "fallback_triggered": false,
+        "real_page_interactions": false,
+        "real_playwright_capture": false
+      },
+      "pass": true,
+      "status": "PASS"
+    },
+    "PC-REAL-BROWSER-PROVISIONED": {
+      "evidence_refs": [
+        "research/experiments/EXP-RUNTIME-36106663091/raw_browser_observations.jsonl",
+        "research/experiments/EXP-RUNTIME-36106663091/provenance.json"
+      ],
+      "expected": "Playwright 1.63.0 Chromium + BrowserGym 0.14.3 + exact native path helper + real capture",
+      "note": "UNKNOWN when mandatory provisioning aborts before capture.",
+      "observed": {
+        "agentlab_attempted": true,
+        "agentlab_available": false,
+        "agentlab_error": "ModuleNotFoundError(\"No module named 'agentlab'\")",
+        "browsergym_core_import": true,
+        "browsergym_import": true,
+        "browsergym_version": "0.14.3",
+        "compatibility_adapter_used": false,
+        "native_path_helper": null,
+        "native_path_helper_available": false,
+        "native_path_helper_error": "required get_executable_path helper is absent",
+        "nginx_started": true,
+        "official_executable_path": "/home/runner/.cache/ms-playwright/chromium-1243/chrome-linux64/chrome",
+        "playwright_version": "1.63.0",
+        "token_creation": "HS256 with stable subject/session; no secret recorded in artifacts"
+      },
+      "pass": null,
+      "status": "UNKNOWN"
+    }
+  },
+  "experiment_id": "EXP-RUNTIME-36106663091",
+  "lane": "runtime",
+  "metrics": {
+    "browser_full_vector_body_only": null,
+    "browser_full_vector_diff_lo": null,
+    "browser_full_vector_full": null,
+    "browser_full_vector_n_pairs": null,
+    "browser_full_vector_null": null,
+    "browser_full_vector_status_only": null,
+    "browser_header_only_jaccard_mean": null,
+    "browser_header_only_jaccard_nullFP": null,
+    "browser_header_only_jaccard_r": null,
+    "browser_header_only_jaccard_same_state_J": null,
+    "browser_header_only_jaccard_std": null,
+    "browser_header_only_jaccard_v": null,
+    "browser_header_only_jaccard_variance": null,
+    "browser_health_ax_max": null,
+    "browser_health_ax_median": null,
+    "browser_health_ax_min": null,
+    "browser_health_dom_max": null,
+    "browser_health_dom_median": null,
+    "browser_health_dom_min": null,
+    "browser_health_n": null,
+    "browser_health_pc_health": null,
+    "browser_health_viewport_ok": null,
+    "browser_kmeans_centroid_diff": null,
+    "browser_kmeans_feature_dimension": null,
+    "browser_kmeans_leakage_pass": null,
+    "browser_kmeans_n_test": null,
+    "browser_kmeans_n_train": null,
+    "browser_kmeans_same_state_J": null,
+    "freshness_batch_count": 1,
+    "freshness_hs_rate": 1.0,
+    "freshness_n_304": 99,
+    "freshness_n_non304": 901,
+    "freshness_n_total": 1000,
+    "freshness_per_endpoint_non304": {
+      "/api/data_list": 500,
+      "/api/profile": 401
+    },
+    "freshness_stickiness_by_endpoint": [
+      {
+        "distinct": 1,
+        "endpoint": "/api/profile",
+        "n": 100,
+        "pids": {
+          "87717": 100
+        },
+        "ratio": 1.0
+      },
+      {
+        "distinct": 1,
+        "endpoint": "/api/data_list",
+        "n": 100,
+        "pids": {
+          "87716": 100
+        },
+        "ratio": 1.0
+      }
+    ],
+    "freshness_stickiness_min": 1.0,
+    "freshness_worker_distinct": 2,
+    "freshness_x_worker_missing": 0,
+    "full_vector_plain_body_only": 0.38095238095238093,
+    "full_vector_plain_diff_lo": 0.319047619047619,
+    "full_vector_plain_full": 0.7619047619047619,
+    "full_vector_plain_n_pairs": 210,
+    "full_vector_plain_null": 0.0,
+    "full_vector_plain_status_only": 0.0,
+    "header_only_jaccard_plain_jaccard_mean": 0.625,
+    "header_only_jaccard_plain_jaccard_nullFP": 0.0,
+    "header_only_jaccard_plain_jaccard_r": 0.0,
+    "header_only_jaccard_plain_jaccard_std": 0.375,
+    "header_only_jaccard_plain_jaccard_v": 0.0,
+    "header_only_jaccard_plain_jaccard_variance": 0.140625,
+    "header_only_jaccard_plain_n_pairs": 160,
+    "header_only_jaccard_plain_same_state_J": 1.0,
+    "honest_cost_n_trajectories": 100,
+    "honest_cost_p_value": 1.0,
+    "honest_cost_permutations_B": 1000,
+    "honest_cost_rho_observed": 0.0,
+    "honest_cost_rho_shuffled": 0.0,
+    "honest_cost_within_f_std": 0.5200109657937169,
+    "writable_dom_delta_pos_rate": null,
+    "writable_nullFP": null,
+    "writable_null_dom_delta": null,
+    "writable_null_n": null,
+    "writable_null_rates": null,
+    "writable_null_wal_mutated": null,
+    "writable_pos_rate": null,
+    "writable_positive_n": null,
+    "writable_wal_pos_mutated_rate": null
+  },
+  "observations": [
+    "Two gunicorn origins and the exclusive nginx reverse proxy became ready on the frozen ports.",
+    "Per-URI nginx requests produced stable worker assignment across the two origins.",
+    "C1 captured 1000 plain HTTP observations through nginx, including 99 real 304 responses.",
+    "Plain HTTP C2 paired observations: 160.",
+    "Honest cost grouped 100 trajectories and performed 1000 trajectory-level permutations."
+  ],
+  "outcome": "INCONCLUSIVE",
+  "schema_version": 1,
+  "status": "MEASUREMENT_INVALID",
+  "unresolved": [
+    "A later governed experiment would need a preregistered provisioning design compatible with the installed Playwright API; this immutable run cannot relax the helper requirement."
+  ],
+  "validity_notes": [
+    "Execution halted or was marked invalid because a required substrate/measurement operation failed: InfrastructureFailure('frozen Playwright provisioning gate failed: playwright._impl._path_utils.get_executable_path is unavailable')",
+    "Mandatory frozen Playwright provisioning failed because the exact required playwright._impl._path_utils.get_executable_path helper was unavailable; the diagnostic public executable path was not substituted.",
+    "Infrastructure failure: InfrastructureFailure('frozen Playwright provisioning gate failed: playwright._impl._path_utils.get_executable_path is unavailable')",
+    "Validity summary: {\"browser_gym_import\": true, \"browser_real_playwright\": false, \"cdp_ax_per_page\": false, \"database_wal_created\": true, \"dom_per_page\": false, \"honest_cost_B1000\": true, \"infrastructure_error\": true, \"kmeans_strict_split\": false, \"native_path_helper_available\": false, \"nginx_enabled\": true, \"no_post_state_leakage\": false, \"official_executable_path_verified\": true, \"real_feature_vectors\": false, \"seed_44\": true, \"two_gunicorn_origins\": true, \"viewport_both_checks\": false, \"wal_direct_counts\": false, \"writable_real_interactions\": false}"
+  ]
+}

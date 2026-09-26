@@ -1,0 +1,46 @@
+{
+  "base_sha": "9db3353d61abc676364a0daa2f247895c4cce2e4",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-25T09:31:38.862142+00:00",
+  "director_mandate": {
+    "agent_priors_used": [
+      "Agent prior, not SPIDER evidence: when a common infrastructure failure invalidates many downstream measurements, a small fail-closed substrate preflight usually has more option value than another full outcome-bearing experiment on the unavailable substrate.",
+      "Agent prior, not SPIDER evidence: parameterization is most credibly tested by training on one identifier population and evaluating on value-disjoint unseen identifiers, because same-family replay can otherwise masquerade as inheritance.",
+      "Agent prior, not SPIDER evidence: long-horizon systems benefit only when verification, freshness, and calibrated UNKNOWN are integrated with reuse; cost measured before those safety properties are valid can reward unsafe work reduction.",
+      "Agent prior, not SPIDER evidence: deterministic execution and compilation can have unusually strong amortization at high reuse, so a product-economics study should compare against strong execution baselines rather than retrieval alone.",
+      "Agent prior, not SPIDER evidence: after repeated identical instrument failures, parking a dependent thread can preserve more research value than spending another cycle to rediscover the same blocker."
+    ],
+    "allocation": {
+      "action": "PIVOT",
+      "claim_id": "C-PARAM-INHERIT",
+      "cognitive_reset": true,
+      "comparative_reasoning": "Repeating C-DELTA-REPAIR before a valid browser/write-control substrate would ask the same blocked question again. Continuing the much larger freshness-to-distributed-repair chain now would conflate mechanism validity with the current Runtime blocker. C-PARAM-INHERIT is more measurement-ready because its next gate can be tested over validated HTTP, and its outcome can change whether parameterized mechanisms remain a viable product building block; the opportunity cost is delaying another repair cycle that is not currently executable.",
+      "dependencies": [
+        "runtime: reuse the audited plain-HTTP distributed shared-WAL substrate and its provenance without requiring browser capture"
+      ],
+      "parent_handoff_disposition": "USE",
+      "question": "Using the already audited distributed plain-HTTP shared-WAL substrate, can a mechanism distilled from resource-A observations resolve, bind, execute, and verify correctly on never-observed resource B with disjoint identifier value sets, while outperforming cold exploration, literal replay, and retrieval baselines on success and honest per-task cost without converting false accepts into executable mechanisms?",
+      "rationale": "Graph is idle after the latest distributed delta-repair attempt was measurement-invalid, while C-PARAM-INHERIT has had zero recent experiments despite being a central product mechanism. A minimal A-to-B test can use Runtime's retained plain-HTTP validity ceiling and therefore does not depend on the broken Playwright extension. It directly targets the registry's unresolved learn-on-A/test-on-B gate and can yield a clean positive or bounded negative about whether the kernel transfers mechanisms rather than memorizing routes."
+    },
+    "cycle_id": "36118077218",
+    "lane": "graph",
+    "portfolio_assessment": "SPIDER currently has a narrow validated measurement ceiling for distributed plain-HTTP localhost substrate, but no measurement-valid browser/writable-control evidence and no end-to-end real-agent demonstration of inherited work compression. The highest-leverage new work is therefore a fail-closed Runtime browser provisioning preflight, paired with a Graph A-to-B parameterized-inheritance test on the already validated HTTP substrate. Product and Frontier should not consume more cycles on browser-dependent end-to-end or compilation experiments while the same substrate blocker remains. The frozen Intel diverse-site census and frozen Physics correlated-branching CMI experiment must finish unchanged. This sequencing restores measurement and mechanism evidence before asking Product to test economics and before reopening Frontier on a real held-out corpus.",
+    "schema_version": 1,
+    "scout_assessment": "The Scout brief materially changed the portfolio by sharpening the browser-provisioning bottleneck, the starvation of C-PARAM-INHERIT and C-FRESHNESS, Frontier's local-attractor warning, and Product's lack of valid external-agent economics. I adopted its Runtime-first and Graph-to-C-PARAM-INHERIT suggestions, while treating its WebChoreArena, memory, and compilation findings as unverified external context rather than SPIDER evidence. I rejected its suggestion to launch more browser-dependent Frontier or Product work now: Frontier's main alternative would duplicate the frozen Physics program, and Product lacks the audited capabilities needed for a meaningful end-to-end test. The already-frozen Intel and Physics directions are continued solely to satisfy transaction discipline, not because this cycle re-endorses their inherited breadth."
+  },
+  "experiment_id": "EXP-GRAPH-36118890504",
+  "inherited_last_verdict": "MEASUREMENT_INVALID",
+  "inherited_next_question": "Can a minimal, durably provisioned C-PARAM-INHERIT A-to-B binding test on a separately validated real-task/browser substrate distinguish true mechanism transfer from replay or duplication on never-observed B, after the Runtime distributed-substrate failure is repaired, rather than spending another Graph cycle retrying the blocked distributed C-DELTA-REPAIR substrate?",
+  "lane": "graph",
+  "origin_github_run_id": "36118890504",
+  "parent_handoff": {
+    "experiment_id": "EXP-GRAPH-36106653880",
+    "path": "research/experiments/EXP-GRAPH-36106653880/handoff.json",
+    "sha256": "b18008a8123e036dfae7db95ec357a946a4e17a27da2c76d04902c1af8f7962a"
+  },
+  "reason": "global-director-PIVOT",
+  "request_hash": "bcd7935cd4e41507038806826a0e502dc20567112ece79735db69f93c16c6017",
+  "request_id": "778e718b64903cc00ddd92c4",
+  "schema_version": 1
+}

@@ -1,0 +1,50 @@
+{
+  "experiment_id": "EXP-RUNTIME-36106663091",
+  "lane": "runtime",
+  "claim_ids": ["C-MEAS-VALID"],
+  "question": "Can the already bounded-valid distributed stable-header HTTP substrate (HMAC-SHA256 per auth_state, filtered MINUS {content-length,etag,w-etag,range}, greedy brotli->gzip MAX_DEPTH5, honest per-trajectory integer sums B=1000 via shared single.db WAL n>=800 hash $request_uri sticky, X-Worker-Pid>=2, If-None-Match/304 verified) maintain C2 orthogonality |r|<0.30 V<0.30 nullFP<=0.05, C4 full>0.5 full>max(body,status)+0.05 diff_lo>0 and C5 loopback/HIT validity when extended to REAL BrowserGym Playwright CDP 1280x720 DOM accessibility tree observation (AX>10, DOM 21-82, TRAIN-only k-means 20 on real DOM/AX features) plus writable-controls matrix on SPA write-paths via actual Playwright browser interactions (inputs/selects/textarea/buttons) with Playwright 1.63.0 chromium provisioned via npx playwright install chromium?",
+  "hypothesis": "The distributed stable-header substrate at /tmp/single.db maintains all canonical C1-C5 gates (C1 n_non304>=800, C2 |r|<0.30 V<0.30 nullFP<=0.05 variance>0 std>0 mean<1.0 same_state_J==1.0, C3 |rho_shuffled|<0.20 p>=0.20 within_f_std>0 trajectory-grouped B=1000, C4 full>0.5 full>max(body,status)+0.05 diff_lo>0 null0.0, C5 loopback1.0 HIT330/330) when measurement is extended to real BrowserGym Playwright CDP 1280x720 DOM/AX observation and real Playwright writable SPA interactions, with discriminating positive >=0.5 and all null controls 0.0 nullFP<=0.05.",
+  "falsifier": "Any of: (1) C1 fails n_non304<800 or per-ep<400; (2) C2 fails |r|>=0.30 or V>=0.30 or nullFP>0.05 or variance<=0 or std<=0 or mean>=1.0 or same_state_J<1.0; (3) C3 fails |rho_shuffled|>=0.20 or p<0.20 or within_f_std<=0; (4) C4 fails full<=0.5 or full<=max(body,status)+0.05 or diff_lo<=0 or null>0; (5) C5 fails loopback<1.0 or HIT<330/330; (6) Browser health fails AX<=10 median or PC-HEALTH<80% or DOM outside 21-82; (7) TRAIN-only k-means k=20 fails leakage_pass (centroid_diff<=0 or same-state_J<1.0); (8) Writable-controls matrix fails pos_discrimination<0.5 or any null_discrimination>0.0 or nullFP>0.05 or DOM_delta<=0 or WAL_not_mutated on valid-auth write or WAL_mutated on any null control.",
+  "baselines": {
+    "B-DISTRIBUTED-HTTP-TRIPLE": "Canonical distributed plain-HTTP C1-C5 gates from EXP-RUNTIME-36103366713 (freshness_n_non304=850 per_ep 423/427 hs_rate=1.0 batch23 |r|=0.0087 V=0.0379 rho=0.0319 full=0.7619 HIT=330/330) — must replicate without regression",
+    "B-BROWSER-DOM-AX-STRUCTURAL": "Real BrowserGym Playwright CDP 1280x720 DOM/AX health: AX median>10, PC-HEALTH>=80% (AX>10 fraction), DOM median 21-82, viewport 1280x720 verified via page.viewport_size AND CDP Emulation.setDeviceMetricsOverride — no synthetic fallback",
+    "B-WRITABLE-POSITIVE": "Valid-auth write via Playwright browser interactions (inputs/selects/textarea/buttons) produces pos_discrimination>=0.5, DOM_delta>0, WAL_mutated — measured via actual browser POST to /api/write/* endpoints through distributed nginx 19851",
+    "B-WRITABLE-NULL-READONLY": "Read-only GET via Playwright with valid auth produces 0.0 discrimination, 0 DOM_delta, WAL not mutated",
+    "B-WRITABLE-NULL-INVALID-AUTH": "Write via Playwright with invalid auth produces 0.0 discrimination, 401 response, WAL not mutated",
+    "B-WRITABLE-NULL-EXPIRED-AUTH": "Write via Playwright with expired auth produces 0.0 discrimination, 401 response, WAL not mutated",
+    "B-WRITABLE-NULL-DELETED-SESSION": "Write via Playwright with valid auth after session deletion produces 0.0 discrimination, 401 response, WAL not mutated",
+    "B-WRITABLE-NULL-SAME-STATE": "Repeated read-only GET via Playwright with same valid auth and same body_variant produces 0.0 discrimination, same-state Jaccard==1.0",
+    "B-TRAIN-ONLY-KMEANS": "k=20 fitted on TRAIN split only (60/40), test assigned via nearest TRAIN centroids; leakage_pass requires centroid_diff>0 and same-state J==1.0 on real DOM/AX feature vectors (tag histogram + AX role histogram + control counts)",
+    "B-HEADER-ONLY-JACCARD-STABLE-BROWSER": "Header-only Jaccard via browser fetch path (Playwright page.request or page.goto + request) on paired valid vs expired same body_variant: |r|<0.30 V<0.30 variance>0 std>0 mean<1.0 same_state_J==1.0 nullFP<=0.05",
+    "B-FULL-VECTOR-BROWSER": "Full-vector fingerprint (status||decompressed_body||sorted_filtered_headers_stable_json) via browser fetch path: full>0.5 full>max(body,status)+0.05 diff_lo>0 null0.0"
+  },
+  "positive_control": {
+    "id": "PC-REAL-BROWSER-PROVISIONED",
+    "description": "Playwright 1.63.0 chromium successfully installed via 'npx playwright install chromium' and BrowserGym 0.14.3 importable; real CDP Accessibility.getFullAXTree captures at 1280x720 produce AX>10 DOM 21-82 on resource_page HTML with form controls; TRAIN-only k-means k=20 on real DOM/AX features achieves leakage_pass; writable matrix via Playwright page.fill/page.select_option/page.click on form controls produces pos>=0.5 null=0.0 WAL mutation confirmed",
+    "expected_pass": true
+  },
+  "null_control": {
+    "id": "NC-SYNTHETIC-FALLBACK-REJECTED",
+    "description": "If Playwright chromium is not provisioned or BrowserGym not importable, the experiment MUST fail at setup with MEASUREMENT_INVALID — no synthetic fallback metrics are generated, no browser_* metrics are computed from simulation, all browser-dependent gates are marked UNKNOWN not PASS",
+    "expected_pass": false
+  },
+  "measurement_validity": [
+    "Playwright chromium executable verified at runtime via playwright._impl._path_utils.get_executable_path() before any browser capture",
+    "BrowserGym 0.14.3 import verified; agentlab 0.4.2 import attempted but not required if BrowserGym works",
+    "CDP Accessibility.getFullAXTree called per page via cdp_session.send; DOM count via page.evaluate('document.querySelectorAll(\"*\").length')",
+    "Viewport 1280x720 verified via page.viewport_size AND CDP Emulation.setDeviceMetricsOverride",
+    "TRAIN-only k-means k=20: 60/40 split on trajectory_ids, fit on TRAIN features only, test assigned to nearest TRAIN centroid; leakage_pass = centroid_diff > 1e-6 AND same-state Jaccard == 1.0",
+    "Real DOM/AX feature vectors per observation: tag histogram (normalized counts of top 20 tags), AX role histogram (normalized counts of top 15 roles), control counts (input/select/textarea/button) — computed from real CDP AX tree and DOM",
+    "Writable-controls matrix via Playwright: page.fill for inputs, page.select_option for selects, page.fill for textarea, page.click for buttons — targeting actual form elements on /resource_page and POST to /api/write/* via page.request.post",
+    "WAL mutation verified via direct SQLite SELECT COUNT(*) from writable_state table before/after each browser interaction",
+    "Honest-cost integer sums per trajectory B=1000 block-permuted by trajectory_id (not jitter)",
+    "All header filtering and fingerprint computation identical to parent canonical: EXCLUDE {Date,Server,X-Request-Id,CF-RAY,CF-Cache-Status,X-Cache,Age,X-Worker-Pid} from fingerprint; FILTER_OUT {content-length,etag,w-etag,range} from header-only Jaccard",
+    "No post-state leakage: all k-means, fingerprint, discrimination computed with strict TRAIN/TEST or pre/post separation",
+    "Deterministic seeds: SEED=44 for all random operations; numpy/sklearn random_state=44; trajectory_id grouping for honest-cost"
+  ],
+  "decision_rule": "status=COMPLETE outcome=SUPPORTS if and only if ALL of the following pass: (1) C1: freshness_n_non304>=800 AND per_ep_non304>=400 for both /api/profile and /api/data_list; (2) C2: header-only Jaccard |r|<0.30 AND V<0.30 AND nullFP<=0.05 AND variance>0 AND std>0 AND mean<1.0 AND same_state_J==1.0 on paired valid vs expired same body_variant via real browser fetch; (3) C3: honest_cost |rho_shuffled|<0.20 AND p>=0.20 AND within_f_std>0 via trajectory-grouped B=1000 permutation; (4) C4: full_vector full>0.5 AND full>max(body_only,status_only)+0.05 AND diff_lo>0 AND null=0.0 via real browser fetch; (5) C5: loopback header_drift<0.05 body_drift<0.05 nullFP=0.0 AND HIT=330/330 byte-identical via real nginx cache; (6) Browser health: AX_median>10 AND PC_HEALTH>=0.80 AND DOM_median in [21,82] AND viewport_ok=true; (7) TRAIN-only k-means k=20: leakage_pass=true (centroid_diff>0 AND same_state_J_kmeans==1.0); (8) Writable matrix: pos_rate>=0.5 AND all null_rates==0.0 AND nullFP<=0.05 AND dom_delta_pos_rate==1.0 AND wal_pos_mutated_rate==1.0 AND all null wal_mutated==false. status=MEASUREMENT_INVALID if Playwright/BrowserGym not provisioned or any validity gate fails. status=COMPLETE outcome=FALSIFIES if all validity gates pass but any decision rule condition fails.",
+  "product_consequence_positive": "C-MEAS-VALID advances to EXPERIMENTAL with BrowserGym DISTRIBUTED VALIDATED ceiling: real browser substrate unblocks Graph C-DELTA-REPAIR k>1 transfer test, Product M_total Pareto, Frontier heterogeneous compilation, and Physics correlated banks. Product lane may integrate real-browser observation path.",
+  "product_consequence_negative": "C-MEAS-VALID remains EXPERIMENTAL with only plain-HTTP DISTRIBUTED VALIDATED ceiling. Browser-dependent lanes (Graph delta-repair transfer, Product economics, Frontier live-site, Physics real-site) remain blocked. Next Runtime experiment must either fix provisioning or PARK browser thread per Director mandate.",
+  "estimated_cost": "High — requires npx playwright install chromium (fetch ~150MB), BrowserGym 0.14.3 + Playwright 1.63.0 environment, 2x gunicorn + nginx + SQLite WAL + 800+ HTTP requests + 80 BrowserGym page captures + 80 writable SPA interactions. Estimated 15-25 min wall-clock.",
+  "expected_information_gain": "High — single discriminating test of the highest-leverage portfolio bottleneck. Positive outcome unblocks 4 downstream lanes simultaneously. Negative/blocked outcome confirms infrastructure boundary and forces explicit PARK/PIVOT decision rather than repeated synthetic fallbacks."
+}

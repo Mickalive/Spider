@@ -1,0 +1,206 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-FRONTIER-36129180789",
+  "lane": "frontier",
+  "status": "REVISE",
+  "producer_claim_supported": false,
+  "required_fixes": [
+    "CONTROL ENCODING (packet semantics, mandatory): result.json controls[*].pass must not be the boolean false for PC-EXACT-MATCH, NC-INHERITANCE-ABLATION, NC-ORACLE-LEAK, NC-BIJECTIVE-COST, NC-SHUFFLED-NULL, NC-GUARD-SPECIFICITY, all of which carry observed='NOT_RUN - substrate unavailable'. Record not-run controls with pass=null (or 'NOT_RUN') plus an explicit not_run_reason, so a downstream consumer cannot read six executed control failures where zero controls were executed. observations[4] 'Controls: all_pc_pass=False all_nc_pass=False' must be restated as not-evaluated. No scientific information is lost: frozen spec.json decision_rule.MEASUREMENT_INVALID is already triggered by live_available=false alone, independently of every control.",
+    "FALSE SUBSTRATE OBSERVATION (material): result.json metrics.http_service_available=false, validity_notes[0] 'No Flask or FastAPI installed for local HTTP test server' and unresolved[9] 'Local HTTP test server (Flask/FastAPI) deployment' present a probe definition as an environment fact. research/frontier/run_execute_36129180789.py hardcodes http_service_available = flask_available or fastapi_available. In the identical environment (python 3.12.14, flask_available=false and fastapi_available=false both re-confirmed by audit) a real HTTP service is reachable with zero third-party packages via http.server + socketserver + urllib.request, with completed GET and POST round trips (audit recomputation, evidence_refs A-PROBE). Frozen spec.json estimated_cost reads 'Requires only a real HTTP service (can be local Flask/FastAPI test server)' - permissive, not a pip-package requirement. The http_service_available leg must be corrected and the 'install Flask/FastAPI' unblocker withdrawn from the handoff; carrying it forward would direct a cycle at a non-blocker.",
+    "NON-REPRODUCIBLE PROBE PATH: result.json metrics.graph_freshness_exists=false was produced by searching ROOT/research/graph/state.json, a path that exists nowhere in the repository (research/graph/ does not exist; find -type d -name graph returns nothing) and that is not referenced by any Graph-lane packet. The repository's actual C-FRESHNESS gate artifacts are research/experiments/EXP-FRONTIER-36100559236/artifacts/freshness_gate_check.json and research/experiments/EXP-FRONTIER-36099072254/artifacts/freshness_gate_check.json, both recording freshness_tn=null, stale_probes=0, pass=false, reason 'substrate absent'. The producer's conclusion (freshness gate unsatisfied) is independently corroborated and correct, but the evidence path and field names must be restated against those real artifacts so the leg is comparable to prior packets instead of being a search for a self-invented filename.",
+    "PROVENANCE OVER-DECLARATION: provenance.json seeds declares numpy=42 and random=35725763380, but numpy is not installed in this environment and research/frontier/run_execute_36129180789.py imports neither numpy nor random; no such seed could have been consumed. Remove the seeds block or mark it unused. Also add the GitHub run identity the contract asks for (github_run_id 36129180789, run attempt '1' per execution_checkpoint.json and model_execute.json) and a package/OS manifest beyond 'python 3.12.14'.",
+    "UNSTATED NON-IMPLEMENTATION: result.json implies only that controls did not run, but never states that neither executor arm (B-INHERITED-SPIDER, B-NO-MEMORY-DETERMINISTIC) nor the task-family generator, the registry construction, the honest-cost counter instrumentation or the S1-S6 statistics were ever implemented. research/frontier/run_execute_36129180789.py contains only substrate probes; its status=COMPLETE / outcome=INCONCLUSIVE branch is unreachable dead code. This must be stated so no downstream stage infers attempted-but-failed measurement.",
+    "CAUSE MIS-ATTRIBUTION: NC-ORACLE-LEAK is a static audit (0 forbidden keys in derived_context, 0 test-B reads) and requires no live substrate. It is reported 'NOT_RUN - substrate unavailable'. Restate the cause as NOT_APPLICABLE / no executor implemented. The frozen forbidden-key list in spec.json measurement_validity[3] is inspectable in the frozen inputs and is not violated there.",
+    "MANDATE PRECEDENCE (director ruling required, not a producer edit): request.json director_mandate states 'Browser-observed DOM and accessibility quantities are reported only if Runtime's capability ledger certifies a launchable browser, and the study otherwise declares itself bounded to the real HTTP service' - a conditional reporting rule - and 'It is also reachable: it needs a real service and two executors, not a public-Web corpus and not a policy model.' The adopted Scout assessment in the same mandate requires the browser probe to be NON-VETOING. research/frontier/run_execute_36129180789.py instead AND-gates runtime_ledger_exists AND ledger.distributed_bringup_certified into live_available, converting a non-vetoing browser condition into a whole-experiment veto and additionally requiring a distributed bring-up certificate for what spec.json estimated_cost scopes to 'minutes on CPU'. Per AGENTS.md precedence the exact immutable request.json outranks spec.json. The defect originates in DESIGN (prereg.md 4.1 'If ANY substrate is unavailable -> ... STOP') and EXECUTE implemented the frozen text faithfully, so it is not EXECUTE misconduct; the successor packet must not inherit the ledger leg as a hard gate without an explicit director ruling.",
+    "IDENTIFIABILITY RULING REQUIRED BEFORE ANY SUCCESSOR REUSES THE FALSIFIER: see baseline_findings B1 (B-NO-MEMORY-DETERMINISTIC input-output degeneracy) and B2 (B-INHERITED-SPIDER inexpressible under SpiderKernel defaults, min_confidence=0.8 vs distill() confidence=0.5). As frozen, the design could not have licensed the FALSIFIED_IN_SETTING_TRIGGER architecture conclusion even had the substrate been available. A successor needs a new preregistration under a new mandate; the frozen files must not be edited."
+  ],
+  "validity_findings": [
+    "FREEZE INTEGRITY VERIFIED INDEPENDENTLY: recomputed sha256 of research/experiments/EXP-FRONTIER-36129180789/prereg.md = 80fbfaa8a575d092682ae5c43b87a5ab01e7d253ae1f299691f5b61eba260767, request.json = a496c5e2556bc8265029a68446c4864610f758c32d3f4580947000c02b2f47ce, spec.json = ac66e99cca0bfed43e0ee70b2f3a47ba6983de0848927a4b3659759ab57b0f17, all matching freeze.json (frozen_at 2026-09-25T11:32:07.696373+00:00). No post-freeze tampering of frozen inputs.",
+    "ARTIFACT HASH VERIFIED: artifacts/substrate_diagnostic.json recomputes to a136d2ce1c2468c861ca3ac59f9469af8fb6c5517624bf225bd6f8cf12dd60d1, matching result.json artifacts[0].sha256, provenance.json substrate_diagnostic_sha256 and provenance.json artifacts[0].sha256.",
+    "PARENT REFERENCE VERIFIED: request.json parent_handoff research/experiments/EXP-FRONTIER-36103384192/handoff.json recomputes to b02ae149fc490b8e988d31771723189d968184a89af88f62832042fb6d5f5a42, matching the declared sha256. The carried-forward retrieval-diversity/alias ceiling 21/40=0.525 pooled Wilson [0.352,0.648] with 0/10 mixed routing gain 0.0 is directly traceable to that handoff.",
+    "SCIENTIFIC HANDLING IS CORRECT AND MUST BE PRESERVED: result.json status=MEASUREMENT_INVALID with outcome=NOT_APPLICABLE is the right epistemic class, all 27 S-metric fields plus falsified_in_setting_trigger and survives_current_test are null rather than surrogate-filled, validity_notes[3] states explicitly that this is a validity gate and not scientific falsification, and the producer correctly refused the forbidden substitutions named in spec.json measurement_validity[0] and prereg.md 10 (synthetic 36-family Jaccard 0.0 fixture, jittered counters, n*3200/f*6.0 proxies, token surrogates). Token cost is declared NOT_APPLICABLE and reported UNKNOWN per mandate, never proxy-filled. All 11 mandatory result.json keys are present; no mandatory key was omitted.",
+    "MATERIAL FINDING - FALSE SUBSTRATE OBSERVATION: result.json metrics.http_service_available=false does not report that a real HTTP service is unavailable; it reports that two specific pip packages are not importable. The frozen requirement is 'a real HTTP service', and spec.json estimated_cost says 'can be local Flask/FastAPI test server'. Audit recomputation in the same environment (python 3.12.14) shows http.server, socketserver and urllib.request all importable and a real HTTP service booting and completing GET /healthz, GET /api/items/42 and POST /api/items round trips. This is a DERIVED MEASUREMENT reported as a RAW OBSERVATION, and it is the one leg of the halt that is demonstrably not an environment constraint.",
+    "MATERIAL FINDING - MANDATE VIOLATED BY THE VETO STRUCTURE: request.json director_mandate makes the Runtime capability ledger a condition on reporting browser-observed DOM/AX quantities and directs that the study 'otherwise declares itself bounded to the real HTTP service'; the mandate's own estimate is 'reachable: it needs a real service and two executors'. run_execute_36129180789.py computes live_available as a 6-way AND including runtime ledger existence, ledger.distributed_bringup_certified, graph freshness existence and freshness TN>=0.85 with >=30 stale probes. The veto therefore rests substantially on conditions the binding higher-precedence request did not impose, and the producer adopted the vetoing reading of spec.json measurement_validity[0] ('Runtime capability ledger not certifying browser') without recording the non-vetoing reading or the basis for choosing between them. The undisclosed interpretive narrowing is itself the finding.",
+    "MATERIAL FINDING - PROBE PATH IS SELF-INVENTED AND NOW LAUNDERED: research/graph/state.json is referenced only by Frontier-produced files (run_execute_36103384192.py, run_execute_36129180789.py, and their own diagnostics/reports/audits). No Graph-lane experiment directory exists in the repository (ls research/experiments | grep GRAPH returns nothing) and research/claims/registry.json still records C-FRESHNESS as status HYPOTHESIS with owner_lanes [graph, runtime, product] and next_gate 'session/token/DOM/endpoint/permission drift with false-accept measurement'. The gate has never been produced by its owning lane. The prior audit of EXP-FRONTIER-36103384192 recorded 'Graph freshness research/graph/state.json absent' as a verified environment fact, so an invented path has now been attested twice without anyone checking that the path was ever real. The substantive conclusion survives; the evidence does not.",
+    "MATERIAL FINDING - NOT_RUN RECORDED AS CONTROL FAILURE: all six controls carry machine-readable \"pass\": false while observed reads 'NOT_RUN - substrate unavailable', and observations[4] emits 'all_pc_pass=False all_nc_pass=False'. This is the exact collapse the packet contract forbids: a missing measurement encoded as a negative control result. I note the house precedent (EXP-FRONTIER-36103384192, EXP-FRONTIER-36100559236, EXP-FRONTIER-36099072254, EXP-FRONTIER-36097242687 all encode NOT_RUN controls as pass=false and all four audits returned PASS); I depart from that precedent deliberately, because the contract's mandatory-key semantics give null/[] /{} a distinct meaning precisely to prevent this, and because a verdict or Codex sync that reads controls[*].pass will record six failed controls as an established negative about the harness.",
+    "PROVENANCE DEFECT: provenance.json seeds.numpy=42 and seeds.random=35725763380 are false records - numpy is not installed (importlib.util.find_spec('numpy') is None) and run_execute_36129180789.py imports neither numpy nor random, so no seed was consumed. environment records only python 3.12.14 with no OS or package manifest. The contract's github run id is absent from provenance.json although execution_checkpoint.json and model_execute.json both carry github_run_id 36129180789 attempt 1. Benign note: provenance git_commit b92d41ff19dac92cc269c57aa5aa213cd3ee4cb7 is the execution base and is a genuine ancestor of current HEAD 9565506b170dfd82420e243b9ec342c57ada9e4d ('R2 frontier: execute EXP-FRONTIER-36129180789'); the embedded git_status shows artifacts and the execute script untracked at run time, and both are now tracked, so durability was delivered by the orchestrator rather than the lane. I record this as a note, not a defect.",
+    "NO SCIENTIFIC INSTRUMENT EXISTS IN THIS PACKET: run_execute_36129180789.py performs only three filesystem/import probes. There is no implementation of B-INHERITED-SPIDER, B-NO-MEMORY-DETERMINISTIC, the C-Ablation arm, task families, novelty control, registry construction, honest-cost counter instrumentation, bootstrap or permutation. Its else-branch (status=COMPLETE, outcome=INCONCLUSIVE) is unreachable dead code, and subprocess/sys are imported unused. This is consistent with the frozen halt clause, so it is not a discipline failure, but it establishes that the packet contains zero evidence bearing on S1-S6 or FALSIFIED_IN_SETTING_TRIGGER.",
+    "MINOR IDENTITY DRIFT ON A FROZEN LABEL: report.md line 59 describes the prior EXP-FRONTIER-36042599040 result as 'FALSIFIED-IN-SETTING'. FALSIFIED_IN_SETTING_TRIGGER is this packet's frozen trigger; EXP-FRONTIER-36042599040's own outcome is FALSIFIES (status COMPLETE) arising from S1 failure. I independently verified the transcribed numbers are exact - rho_novelty 0.4837 ci95 [0.4102,0.5523] p 0.0002, ece 0.2161 with 11/11 controls pass and status COMPLETE/outcome FALSIFIES - so only the borrowed label is at fault. The report's claim of 'all 11 PCs/NCs PASS' for that experiment is accurate.",
+    "MINOR: result.json metrics re-embeds schema_version and experiment_id, which are packet identity fields rather than metrics, inside the metrics object.",
+    "CODEX STATE NOT YET SYNCED: codex/index.json, codex/claim_state.json and codex/coverage_gaps.json contain zero references to EXP-FRONTIER-36129180789, so there is no Codex state to reconcile and no circularity with this audit. codex/claim_state.json latest_event_by_claim.C-RESIDUAL-NOVELTY remains EXP-FRONTIER-36103384192, MEASUREMENT_INVALID, status HYPOTHESIS, source_commit 9b29ecc23917a13a36c19de4c099262ae30116d6."
+  ],
+  "baseline_findings": [
+    "B1 - MATERIAL DESIGN DEFECT, B-NO-MEMORY-DETERMINISTIC IS INPUT-OUTPUT DEGENERATE: spec.json baselines[0] defines the arm as deriving 'the HTTP request directly from derived_context (url, method, headers, body, query)', while spec.json measurement_validity[3] defines derived_context to contain url, method, url_path, url_query, headers_observed, body_observed. The arm's output is therefore a projection of its own input. Under the frozen honest-cost counter set in prereg.md 4.4 (resolve_ops, bind_ops, verify_ops, freshness_checks, network_requests, browser_steps), B-NO-MEMORY-DETERMINISTIC structurally incurs 0 resolve_ops, 0 bind_ops and 0 freshness_checks because it has no registry, no parameter slots and no freshness machinery, while B-INHERITED-SPIDER must pay all three. The frozen FALSIFIED_IN_SETTING_TRIGGER (correct_rate_no_memory >= correct_rate_inherited - 0.05 AND cost_no_memory <= cost_inherited * 1.05) is consequently close to forced by construction and cannot separate 'inheritance does not pay for itself' from 'the counter set charges memory-lookup operations that a direct compiler does not need'. A FALSIFIED_IN_SETTING result from this design would be an artifact of the cost definition, and would not license the architecture conclusion in spec.json product_consequence_negative.",
+    "B2 - MATERIAL DESIGN DEFECT, THE TREATMENT ARM IS INEXPRESSIBLE UNDER THE IN-REPO KERNEL DEFAULTS (audit-recomputed): spec.json baselines[1] defines B-INHERITED-SPIDER as SpiderKernel with a populated MechanismRegistry containing validated mechanisms from prior observation. I exercised the real in-repo kernel: SpiderKernel.__init__ carries default min_confidence=0.8 (src/spider/kernel.py:59); the kernel's only in-repo mechanism-construction path from observations, distill(), hard-assigns confidence=0.5 (src/spider/kernel.py); resolve() consequently returns EXPLORE and never EXECUTABLE for every kernel-distilled mechanism. Resolution flips to EXECUTABLE only when confidence is externally hand-raised to 0.9, a value the kernel never assigns. Consequences: (a) a registry built only from kernel-produced mechanisms makes B-INHERITED-SPIDER behaviorally identical to the C-Ablation arm that NC-INHERITANCE-ABLATION requires to be 100% UNKNOWN, firing the trigger's correctness clause trivially; (b) a registry hand-seeded at confidence>=0.8 injects an experimenter-chosen value that inheritance never produced, contaminating S4's precision/ECE requirement and colliding with prereg.md measurement_validity[5]'s '<0.80 UNKNOWN threshold', which is a different abstention rule from the kernel's min_confidence=0.8 EXPLORE gate. The frozen design specifies no mechanism for producing Arm A's registry, and the producer's substrate diagnostic never probed the kernel at all - despite AGENTS.md branch/scope permitting research/frontier and research/harness code roots and prior Frontier executions in this lane already importing spider.registry.MechanismRegistry. An available, decisive substrate went unreported.",
+    "B3 - B-COLD-EXPLORATION IS AN ASSUMPTION, NOT A MEASURED ARM: spec.json baselines[2] defines it as 'simulated as maximum cost: full observation + request + verification on every step', i.e. a stipulated number. NC-INHERITANCE-ABLATION's frozen threshold 'honest cost equals B-COLD-EXPLORATION upper bound' is therefore circular - it tests agreement with an assumption rather than measuring an arm - and S5's Pareto denominator M_total_COLD inherits the same defect for the 0.75 comparison.",
+    "B4 - BASELINE STRENGTH UNASSESSABLE: all three arms are NOT_RUN, correctly not claimed as executed, not compared and not ordered. No packet in the repository licenses an ordering among B-NO-MEMORY-DETERMINISTIC, B-INHERITED-SPIDER and B-COLD-EXPLORATION, and the bounded prior evidence (synthetic rho 0.4837 CI[0.410,0.552] with RAG dominance false, EXP-FRONTIER-36042599040) is on a different axis (retrieval vs inheritance) and on a synthetic TAU0.30 Jaccard 0.0 gate. Relative baseline strength remains UNKNOWN and must not be assumed in either direction.",
+    "B5 - THE EXTERNAL COMPILATION BASELINE IS STILL ABSENT: spec.json decision_rule S5 requires an 'External reference vs blind-reproduced Agentic Compilation DSM / Agent JIT where Intel artifacts available'. No Intel artifacts exist in this repository (research/intel does not exist), so this comparator is N/A. The producer correctly did not surrogate-fill it from the director_mandate.agent_priors_used figures, which remain labelled general priors and not SPIDER evidence. This is compliant, and it means the strongest external alternative to inheritance is still unrepresented in any SPIDER measurement."
+  ],
+  "recomputed_metrics": {
+    "recomputation_scope": "Audit-side recomputation of the packet's VALIDITY and feasibility claims only. No outcome-bearing measurement of S1-S6 or FALSIFIED_IN_SETTING_TRIGGER was performed, and none is possible from this packet. Producer metric and control identifiers are preserved verbatim; where I dispute a value I say so rather than renaming the field.",
+    "live_available": {
+      "producer_value": false,
+      "audit_value": false,
+      "agreement": "AGREE on the boolean, DISAGREE on the derivation",
+      "note": "The outcome (nothing was measured) is correct and the halt was procedurally compliant with prereg.md 4.1. The stated cause is not: the composite is an AND over gates the binding request.json did not impose, and its http_service_available conjunct is a false observation. Under prereg.md 4.1 the experiment remains halted, so the zero-information outcome stands even though two of the three reported blockers are mis-derived."
+    },
+    "http_service_available": {
+      "producer_value": false,
+      "audit_value": null,
+      "audit_finding": "NOT REPRODUCIBLE AS AN ENVIRONMENT FACT. The producer measured flask_available or fastapi_available, not the availability of a real HTTP service. The honest value for the field as named is UNKNOWN, not false.",
+      "flask_available": false,
+      "fastapi_available": false,
+      "http_server_importable": true,
+      "socketserver_importable": true,
+      "urllib_request_importable": true,
+      "recomputed_real_http_roundtrip": true,
+      "recomputed_http_detail": "ThreadingHTTPServer on 127.0.0.1 bound and served; GET /healthz -> {\"status\":\"ready\"}; GET /api/items/42 -> {\"ok\":true,\"id\":\"42\",\"items\":[1,2,3]}; POST /api/items -> {\"ok\":true,\"echo\":{\"q\":\"x\"}}",
+      "frozen_text": "spec.json estimated_cost: 'Requires only a real HTTP service (can be local Flask/FastAPI test server)'",
+      "verdict": "http_service_available=false is a probe-definition artifact, not an environment constraint. A real HTTP service is reachable in the identical environment with zero third-party packages."
+    },
+    "runtime_ledger_certified": {
+      "producer_value": false,
+      "audit_value": false,
+      "runtime_ledger_exists": false,
+      "runtime_wal_exists": false,
+      "agreement": "AGREE",
+      "note": "The filesystem facts are correct. The dispute is with using this leg as a whole-experiment veto: request.json director_mandate makes the ledger a condition on reporting browser-observed DOM/AX quantities only, and the adopted Scout assessment requires the browser probe to be non-vetoing. The frozen spec.json estimated_cost scopes the run to 'minutes on CPU' with no distributed requirement, so requiring ledger.distributed_bringup_certified is stronger than any frozen text."
+    },
+    "graph_freshness_adequate": {
+      "producer_value": false,
+      "audit_value": false,
+      "freshness_tn": null,
+      "stale_probes": 0,
+      "agreement": "AGREE on the value, DISAGREE on the evidence",
+      "producer_probe_path": "/home/runner/work/Spider/Spider/research/graph/state.json",
+      "producer_probe_path_exists": false,
+      "research_graph_directory_exists": false,
+      "path_referenced_only_by_frontier_produced_files": true,
+      "canonical_artifacts_recomputed": {
+        "research/experiments/EXP-FRONTIER-36100559236/artifacts/freshness_gate_check.json": {
+          "freshness_tn": null,
+          "stale_probes": 0,
+          "required_stale": 30,
+          "required_tn": 0.85,
+          "pass": false,
+          "note": "NOT_RUN substrate absent, freshness TN not measured"
+        },
+        "research/experiments/EXP-FRONTIER-36099072254/artifacts/freshness_gate_check.json": {
+          "tn": null,
+          "stale_probes": 0,
+          "required": 30,
+          "pass": false,
+          "reason": "substrate absent"
+        }
+      },
+      "verdict": "The conclusion is independently corroborated at real repository paths, so C-FRESHNESS TN>=0.85 with >=30 stale probes is genuinely unestablished program-wide. The producer's graph_freshness_exists=false is nevertheless not a reproducible fact, and the diagnostic cannot be compared against prior packets."
+    },
+    "freeze_hashes_verified": true,
+    "freeze_hashes_recomputed": {
+      "prereg.md": "80fbfaa8a575d092682ae5c43b87a5ab01e7d253ae1f299691f5b61eba260767",
+      "request.json": "a496c5e2556bc8265029a68446c4864610f758c32d3f4580947000c02b2f47ce",
+      "spec.json": "ac66e99cca0bfed43e0ee70b2f3a47ba6983de0848927a4b3659759ab57b0f17"
+    },
+    "substrate_diagnostic_sha256": "a136d2ce1c2468c861ca3ac59f9469af8fb6c5517624bf225bd6f8cf12dd60d1",
+    "substrate_diagnostic_sha256_verified": true,
+    "parent_handoff_sha256_verified": "b02ae149fc490b8e988d31771723189d968184a89af88f62832042fb6d5f5a42",
+    "all_pc_pass": {
+      "producer_value": false,
+      "audit_value": null,
+      "audit_finding": "NOT EVALUATED. No positive control was executed. The producer's false is an artifact of evaluating pass on controls whose observed is NOT_RUN; it must be null."
+    },
+    "all_nc_pass": {
+      "producer_value": false,
+      "audit_value": null,
+      "audit_finding": "NOT EVALUATED. No null control was executed. Same defect as all_pc_pass."
+    },
+    "controls_executed": 0,
+    "controls_not_run": 6,
+    "controls_passed": 0,
+    "controls_failed": 0,
+    "control_identifiers_preserved": [
+      "PC-EXACT-MATCH",
+      "NC-INHERITANCE-ABLATION",
+      "NC-ORACLE-LEAK",
+      "NC-BIJECTIVE-COST",
+      "NC-SHUFFLED-NULL",
+      "NC-GUARD-SPECIFICITY"
+    ],
+    "treatment_substrate_probe_B2": {
+      "spider_kernel_importable": true,
+      "spider_kernel_path": "src/spider/kernel.py",
+      "mechanism_registry_importable": true,
+      "mechanism_registry_path": "src/spider/registry.py",
+      "default_min_confidence": 0.8,
+      "distill_assigned_confidence": 0.5,
+      "resolve_status_with_kernel_distilled_mechanism": "EXPLORE",
+      "resolve_status_with_confidence_0_9": "EXECUTABLE",
+      "resolve_status_with_empty_params": "UNKNOWN",
+      "empty_registry_status_matches_NC_INHERITANCE_ABLATION": true,
+      "conclusion": "B-INHERITED-SPIDER cannot reach EXECUTABLE using mechanisms the kernel itself distils; NC-INHERITANCE-ABLATION's UNKNOWN expectation is satisfied by the empty registry. This substrate was present in the repository and was never probed by the producer."
+    },
+    "frozen_statistics_feasibility": {
+      "numpy_available": false,
+      "spearman_implemented_without_numpy": true,
+      "permutations": 5000,
+      "n": 300,
+      "elapsed_seconds": 0.79,
+      "conclusion": "The frozen S1/S2/S6 machinery (5000 family-stratified bootstrap plus 5000 family-block permutation) is feasible on CPU in pure Python at the frozen sample sizes. No statistical-compute blocker exists, which also confirms provenance.json seeds.numpy=42 could not have been consumed."
+    },
+    "rho_novelty": null,
+    "rho_novelty_bootstrap_lower": null,
+    "rho_novelty_permutation_p": null,
+    "rho_length_pooled": null,
+    "rho_length_per_stratum": null,
+    "unknown_precision": null,
+    "false_accept_rate": null,
+    "ece": null,
+    "saving_f10_pct": null,
+    "saving_f100_pct": null,
+    "honest_gap": null,
+    "rho_proxy": null,
+    "S1_pass": null,
+    "S2_pass": null,
+    "S3_pass": null,
+    "S4_pass": null,
+    "S5_pass": null,
+    "S6_pass": null,
+    "falsified_in_setting_trigger": null,
+    "survives_current_test": null,
+    "token_cost": "NOT_APPLICABLE",
+    "token_cost_reported_as": "UNKNOWN",
+    "unmeasured_metrics_note": "The null values above are the producer's, confirmed by audit: no S1-S6 metric, no honest-cost counter, no baseline arm and no correctness measurement exists anywhere in this packet. They are explicitly NOT recomputed and NOT estimated."
+  },
+  "claim_ceiling": "C-RESIDUAL-NOVELTY remains HYPOTHESIS, unchanged. EXP-FRONTIER-36129180789 provides zero evidence for or against pay-novelty-not-length, and zero evidence about the decisive question the mandate posed - whether inherited execution pays for itself against a no-memory deterministic executor (B-NO-MEMORY-DETERMINISTIC). MEASUREMENT_INVALID here is a validity-gate outcome and is explicitly NOT evidence for FALSIFIED_IN_SETTING_TRIGGER, NOT a falsification, and NOT a bounded negative on the architecture. The ceiling is blocked twice over, and the second block is the more important for the successor: (1) no measurement exists - 0 controls executed, all 27 S-metric fields null, neither executor arm implemented; (2) even with a fully available substrate, the frozen design could not have licensed a FALSIFIED_IN_SETTING conclusion, because B-NO-MEMORY-DETERMINISTIC is handed the complete HTTP request inside derived_context and therefore structurally scores zero resolve_ops, bind_ops and freshness_checks under the frozen prereg.md 4.4 counter set, and because B-INHERITED-SPIDER cannot reach EXECUTABLE under the in-repo kernel's own defaults (min_confidence=0.8 versus distill() confidence=0.5) without an experimenter-injected confidence value. The frozen instrument is not merely unrun; as written it is non-identifying. A successor experiment therefore requires a new preregistration under a new director mandate that fixes the arm symmetry, defines how the treatment registry is produced, and reconciles the two abstention rules - it may not be authorized as a re-run of this frozen transaction, and the frozen files must not be edited. Prior bounded ceilings are unchanged and are NOT strengthened by this packet: the synthetic 36-family TAU0.30 Jaccard 0.0 non-Pareto result rho_novelty 0.4837 ci95 [0.4102,0.5523] p 0.0002, ece 0.2161 with 11/11 controls pass, status COMPLETE outcome FALSIFIES (EXP-FRONTIER-36042599040) remains bounded to that synthetic gate; the retrieval-diversity/alias ceiling 21/40=0.525 pooled Wilson [0.352,0.648] with 0/10 mixed routing gain 0.0 remains traceable to request.json parent_handoff EXP-FRONTIER-36103384192/handoff.json. No promotion to EXPERIMENTAL, no PRODUCT_CORE, no Product Core or Shipped status, and no architecture-change conclusion is justified. Because producer_claim_supported=false here is a statement about the packet's stated blocker account and its blocker-to-conclusion transfer, and explicitly NOT a statement that the underlying hypothesis is false.",
+  "evidence_refs": [
+    "research/experiments/EXP-FRONTIER-36129180789/freeze.json frozen_at 2026-09-25T11:32:07.696373+00:00; sha256 of prereg.md/request.json/spec.json independently recomputed and all three match - freeze integrity verified",
+    "research/experiments/EXP-FRONTIER-36129180789/result.json status MEASUREMENT_INVALID outcome NOT_APPLICABLE; metrics.http_service_available=false (disputed, see recomputed_metrics); metrics.graph_freshness_exists=false (non-reproducible probe path); all 6 controls pass=false with observed NOT_RUN; observations[4] all_pc_pass=False all_nc_pass=False; mandatory keys all present",
+    "research/experiments/EXP-FRONTIER-36129180789/spec.json baselines[0] B-NO-MEMORY-DETERMINISTIC 'derives the HTTP request directly from derived_context (url, method, headers, body, query)'; baselines[1] B-INHERITED-SPIDER; baselines[2] B-COLD-EXPLORATION 'simulated as maximum cost'; measurement_validity[3] derived_context key list; measurement_validity[0] SUBSTRATE HONESTY clause; decision_rule.FALSIFIED_IN_SETTING_TRIGGER; decision_rule.S5; estimated_cost 'Requires only a real HTTP service (can be local Flask/FastAPI test server)'",
+    "research/experiments/EXP-FRONTIER-36129180789/prereg.md section 4.1 Substrate Requirements (Hard Gates) 'If ANY substrate is unavailable -> live_available = false -> MEASUREMENT_INVALID diagnostic. STOP'; section 4.4 honest-cost counter set resolve_ops/bind_ops/verify_ops/freshness_checks/network_requests/browser_steps; section 5 PC-EXACT-MATCH and NC-INHERITANCE-ABLATION/NC-ORACLE-LEAK/NC-BIJECTIVE-COST/NC-SHUFFLED-NULL/NC-GUARD-SPECIFICITY thresholds; section 6 FALSIFIED-IN-SETTING trigger; section 10 Forbidden Substitutions",
+    "research/experiments/EXP-FRONTIER-36129180789/provenance.json seeds.numpy=42 and seeds.random=35725763380 declared but unconsumable; environment python 3.12.14 only; no github_run_id; git_commit b92d41ff19dac92cc269c57aa5aa213cd3ee4cb7 verified as an ancestor of HEAD 9565506b170dfd82420e243b9ec342c57ada9e4d",
+    "research/experiments/EXP-FRONTIER-36129180789/artifacts/substrate_diagnostic.json sha256 a136d2ce1c2468c861ca3ac59f9469af8fb6c5517624bf225bd6f8cf12dd60d1 recomputed and matching; contains no measurement, only three availability probes",
+    "research/experiments/EXP-FRONTIER-36129180789/report.md lines 22 and 59 and 90: the halt, the borrowed FALSIFIED-IN-SETTING label for EXP-FRONTIER-36042599040, and the three-gate stop",
+    "research/frontier/run_execute_36129180789.py (tracked, research/frontier is an allowed_code_root per research/lanes/registry.json): http_service_available = flask_available or fastapi_available; graph_freshness_path = ROOT/research/graph/state.json; live_available as 6-way AND including distributed_bringup_certified and freshness_gate_pass; no executor, task family, counter or statistics implementation; unreachable else-branch; no numpy/random import",
+    "A-PROBE (audit-side, run outside the repository, nothing written into any producer path): importlib.util.find_spec in the experiment environment -> flask False, fastapi False, uvicorn False, aiohttp False, requests False, httpx False, numpy False, scipy False, pandas False, playwright False, http.server True, socketserver True, urllib.request True; ThreadingHTTPServer real round trip succeeded on GET/POST",
+    "B-PROBE (audit-side): src/spider/kernel.py:52 class SpiderKernel, :59 __init__(registry, min_confidence=0.8); distill() assigns confidence=0.5; resolve() returns EXPLORE for a kernel-distilled mechanism, EXECUTABLE only at confidence 0.9, UNKNOWN with empty params; src/spider/registry.py:10 class MechanismRegistry; empty-registry resolve matches NC-INHERITANCE-ABLATION expectation",
+    "C-PROBE (audit-side): pure-Python Spearman with 5000 permutations at N=300 completed in 0.79s with numpy absent, confirming the frozen statistics are feasible and that provenance seeds.numpy=42 could not have been consumed",
+    "research/experiments/EXP-FRONTIER-36103384192/handoff.json sha256 b02ae149fc490b8e988d31771723189d968184a89af88f62832042fb6d5f5a42 recomputed and matching request.json parent_handoff; source of the 21/40=0.525 Wilson [0.352,0.648] 0/10 mixed carried-forward ceiling",
+    "research/experiments/EXP-FRONTIER-36103384192/audit.json status PASS producer_claim_supported false; precedent for recording NOT_RUN controls as pass=false, and precedent for attesting research/graph/state.json absence without establishing that the path was ever real - both departed from deliberately in this audit",
+    "research/experiments/EXP-FRONTIER-36100559236/artifacts/freshness_gate_check.json freshness_tn null, stale_probes 0, required_tn 0.85, required_stale 30, pass false, 'NOT_RUN substrate absent'",
+    "research/experiments/EXP-FRONTIER-36099072254/artifacts/freshness_gate_check.json tn null, stale_probes 0, required 30, pass false, 'substrate absent'",
+    "research/experiments/EXP-FRONTIER-36042599040/result.json status COMPLETE outcome FALSIFIES, 11/11 controls pass, rho_novelty 0.4837 ci95 [0.4102,0.5523] p 0.0002, ece 0.2161 - the report's transcription verified exact, bounded to the synthetic TAU0.30 Jaccard 0.0 gate and not strengthened here",
+    "research/claims/registry.json C-FRESHNESS status HYPOTHESIS, owner_lanes [graph, runtime, product], next_gate 'session/token/DOM/endpoint/permission drift with false-accept measurement'; C-RESIDUAL-NOVELTY priority claim of the frontier lane",
+    "research/lanes/registry.json frontier mission and allowed_code_roots [research/harness, research/frontier]; research/harness does not exist",
+    "codex/claim_state.json latest_event_by_claim.C-RESIDUAL-NOVELTY = EXP-FRONTIER-36103384192, MEASUREMENT_INVALID, status HYPOTHESIS, source_commit 9b29ecc23917a13a36c19de4c099262ae30116d6; zero references to EXP-FRONTIER-36129180789 in codex/index.json, codex/claim_state.json or codex/coverage_gaps.json (not yet synced, no circularity)",
+    "research/experiments/EXP-FRONTIER-36129180789/request.json director_mandate.allocation.question: browser-observed DOM and accessibility quantities are reported only if Runtime's capability ledger certifies a launchable browser and the study otherwise declares itself bounded to the real HTTP service; 'It is also reachable: it needs a real service and two executors, not a public-Web corpus and not a policy model'; scout_assessment: the browser probe must be NON-VETOING - both are higher precedence than spec.json under AGENTS.md precedence item 5 and both contradict the AND-gate actually implemented",
+    "research/experiments/EXP-FRONTIER-36129180789/execution_checkpoint.json github_run_id 36129180789 pre_execute_sha c8261026c8e234f4f09332dcc0823bd113ae61fc; model_execute.json opencode/nemotron-3-ultra-free attempt 4 exit_code 0"
+  ],
+  "unresolved": [
+    "Whether the frozen design's task-family substrate is reachable with zero third-party packages: the mandate requires >=10 families with pairwise Jaccard < 0.30 and mean < 0.15, N >= 30 per family, pooled >= 40, and 5 controlled novelty strata. I demonstrated only that a single simple real HTTP service is reachable; I did not build or assess the 10-family substrate and make no claim about it. This is an audit-side open question, not producer work, and not an instruction to re-run.",
+    "Whether the Runtime capability ledger and distributed bring-up contract are intended to gate a single-node localhost paired-executor study at all. This is a director-level scope question created by the tension between request.json director_mandate (non-vetoing browser condition) and spec.json measurement_validity[0] / prereg.md 4.1 (hard gate). I do not resolve it; I record that the higher-precedence text does not impose the veto the producer implemented.",
+    "Whether C-FRESHNESS TN >= 0.85 with >= 30 stale probes is reachable at all in this program, given that no Graph-lane experiment directory exists, C-FRESHNESS is still HYPOTHESIS in research/claims/registry.json, and the two canonical freshness artifacts both record 'substrate absent'. The gate this experiment depends on has never been produced by its owning lane.",
+    "Whether the frozen FALSIFIED_IN_SETTING_TRIGGER can be re-specified to be identifying without a new preregistration. My finding is that it cannot be repaired in place: prereg.md is frozen and any post-freeze change is exploratory. Resolving this requires a new mandate and a new preregistration, not an edit and not a re-run.",
+    "How the kernel's min_confidence=0.8 EXPLORE gate and prereg.md measurement_validity[5]'s '<0.80 UNKNOWN threshold' should be reconciled for S4 calibration. Both encode an abstention rule at 0.80 but they are different rules (EXPLORE vs UNKNOWN) and the frozen design never states which governs the calibration and ECE computation.",
+    "Whether the next Frontier cycle should spend a cycle on a re-specified no-memory-executor falsifier or redirect. That decision belongs to the Global Research Director under research/portfolio/POLICY.md; this audit records only that the current frozen instrument is non-identifying and that the blocker account it carries is partly false."
+  ]
+}
