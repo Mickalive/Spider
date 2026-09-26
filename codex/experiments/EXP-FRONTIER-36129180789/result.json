@@ -1,0 +1,148 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-FRONTIER-36129180789",
+  "lane": "frontier",
+  "status": "MEASUREMENT_INVALID",
+  "outcome": "NOT_APPLICABLE",
+  "metrics": {
+    "schema_version": 1,
+    "experiment_id": "EXP-FRONTIER-36129180789",
+    "live_available": false,
+    "http_service_available": false,
+    "runtime_ledger_certified": false,
+    "graph_freshness_adequate": false,
+    "freshness_tn": null,
+    "stale_probes": 0,
+    "flask_available": false,
+    "fastapi_available": false,
+    "runtime_ledger_exists": false,
+    "runtime_wal_exists": false,
+    "graph_freshness_exists": false,
+    "rho_novelty": null,
+    "rho_novelty_bootstrap_lower": null,
+    "rho_novelty_permutation_p": null,
+    "rho_length_pooled": null,
+    "rho_length_pooled_upper_ci": null,
+    "rho_length_pooled_permutation_p": null,
+    "rho_length_per_stratum": null,
+    "unknown_precision": null,
+    "false_accept_rate": null,
+    "ece": null,
+    "ece_upper": null,
+    "saving_f10_pct": null,
+    "saving_f100_pct": null,
+    "dominance_f10": null,
+    "dominance_f100": null,
+    "honest_gap": null,
+    "rho_shuffled_global": null,
+    "rho_shuffled_mean": null,
+    "rho_shuffled_std": null,
+    "rho_proxy": null,
+    "S1_pass": null,
+    "S2_pass": null,
+    "S3_pass": null,
+    "S4_pass": null,
+    "S5_pass": null,
+    "S6_pass": null,
+    "falsified_in_setting_trigger": null,
+    "survives_current_test": null,
+    "token_cost": "NOT_APPLICABLE",
+    "token_cost_reported_as": "UNKNOWN"
+  },
+  "controls": {
+    "PC-EXACT-MATCH": {
+      "id": "PC-EXACT-MATCH",
+      "description": "On exact-match tasks (registry contains literal mechanism matching intent and preconditions), both executors should achieve EXECUTABLE with correct bound_action. Inherited executor should have lower cost (fewer verification steps). No-memory executor must re-derive the same request from observation.",
+      "expected": "Both executors achieve >= 0.90 correct rate, false_accept <= 0.10. Inherited executor honest cost <= no-memory executor honest cost.",
+      "threshold": "correct_rate >= 0.90 AND false_accept_rate <= 0.10 AND inherited_cost <= nomemory_cost",
+      "observed": "NOT_RUN - substrate unavailable",
+      "pass": false,
+      "evidence_ref": "substrate_diagnostic.json"
+    },
+    "NC-INHERITANCE-ABLATION": {
+      "id": "NC-INHERITANCE-ABLATION",
+      "description": "Inheritance-ablation arm: SpiderKernel with an EMPTIED registry (no mechanisms). Must return UNKNOWN for all tasks. This is the mandatory null control - if this arm produces EXECUTABLE resolutions, there is a leakage bug. Honest cost should equal cold exploration upper bound (no mechanisms to reuse).",
+      "expected": "100% UNKNOWN, precision = 1.0 for UNKNOWN, honest cost equals B-COLD-EXPLORATION upper bound.",
+      "threshold": "unknown_rate == 1.0 AND false_accept_rate == 0.0",
+      "observed": "NOT_RUN - substrate unavailable",
+      "pass": false,
+      "evidence_ref": "substrate_diagnostic.json"
+    },
+    "NC-ORACLE-LEAK": {
+      "id": "NC-ORACLE-LEAK",
+      "description": "Static audit: derived_context contains ZERO forbidden keys (residual_novelty_fraction, target_resource_id, length_label, expected_key_set). Read count of test-B resources = 0.",
+      "expected": "0 forbidden keys, 0 test-B reads",
+      "threshold": "0 forbidden keys, 0 test-B reads",
+      "observed": "NOT_RUN - substrate unavailable",
+      "pass": false,
+      "evidence_ref": "substrate_diagnostic.json"
+    },
+    "NC-BIJECTIVE-COST": {
+      "id": "NC-BIJECTIVE-COST",
+      "description": "Honest cost not bijective with n*3200 or f*6.0 or TAU candidate-count proxy.",
+      "expected": "gap > 0.35, |rho_proxy| < 0.60 (gated)",
+      "threshold": "gap > 0.35, |rho_proxy| < 0.60 (gated)",
+      "observed": "NOT_RUN - substrate unavailable",
+      "pass": false,
+      "evidence_ref": "substrate_diagnostic.json"
+    },
+    "NC-SHUFFLED-NULL": {
+      "id": "NC-SHUFFLED-NULL",
+      "description": "Global trajectory-grouped stratified permutation (5000 perms): |rho_shuffled| < 0.20, centered |mean| < 0.05, std < 0.15.",
+      "expected": "All three conditions",
+      "threshold": "All three conditions",
+      "observed": "NOT_RUN - substrate unavailable",
+      "pass": false,
+      "evidence_ref": "substrate_diagnostic.json"
+    },
+    "NC-GUARD-SPECIFICITY": {
+      "id": "NC-GUARD-SPECIFICITY",
+      "description": "Shuffled guard + freshness ablation (N >= 12): precision drop >= 30% vs real guards.",
+      "expected": "drop >= 0.30, discriminating not tautological",
+      "threshold": "drop >= 0.30, discriminating not tautological",
+      "observed": "NOT_RUN - substrate unavailable",
+      "pass": false,
+      "evidence_ref": "substrate_diagnostic.json"
+    }
+  },
+  "artifacts": [
+    {
+      "path": "artifacts/substrate_diagnostic.json",
+      "sha256": "a136d2ce1c2468c861ca3ac59f9469af8fb6c5517624bf225bd6f8cf12dd60d1",
+      "role": "raw"
+    }
+  ],
+  "observations": [
+    "Substrate check: HTTP service (Flask/FastAPI) available=False (flask=False, fastapi=False)",
+    "Runtime capability ledger: exists=False WAL_exists=False distributed_bringup_certified=False",
+    "Graph C-FRESHNESS: exists=False freshness_tn=None stale_probes=0 tn_gate_pass=False",
+    "Overall: live_available=False",
+    "Controls: all_pc_pass=False all_nc_pass=False (all controls NOT_RUN - substrate unavailable)",
+    "Per frozen spec measurement_validity[0]: If real HTTP service unavailable, Runtime capability ledger not certifying browser, or paired executors cannot produce discriminating verification outcomes -> declare live_available=false and MEASUREMENT_INVALID diagnostic. DO NOT substitute synthetic fixtures, jittered counters, or n*3200/f*6.0 proxies. Record finding and stop.",
+    "Per frozen decision_rule: MEASUREMENT_INVALID if live_available=false OR any PC/NC fails per thresholds above. This is a validity gate, not a scientific negative.",
+    "Token dimension declared NOT_APPLICABLE (no policy model credential) -> reported UNKNOWN per mandate.",
+    "Browser quantities only reported if Runtime capability ledger certifies launchable browser (not certified)."
+  ],
+  "validity_notes": [
+    "LIVE SUBSTRATE UNAVAILABLE: No Flask or FastAPI installed for local HTTP test server",
+    "LIVE SUBSTRATE UNAVAILABLE: Runtime capability ledger at /tmp/spider-runtime/capability_ledger.json not found; distributed-substrate bring-up contract not certified",
+    "LIVE SUBSTRATE UNAVAILABLE: Graph C-FRESHNESS gate at research/graph/state.json not found; TN>=0.85 with >=30 stale probes cannot be validated",
+    "MEASUREMENT_INVALID is a validity gate outcome, not a scientific falsification. C-RESIDUAL-NOVELTY remains HYPOTHESIS untested against the no-memory deterministic executor.",
+    "Per director_mandate: This experiment needs a real service and two executors, not a public-Web corpus and not a policy model. The dependencies (Runtime ledger, Graph freshness) are hard gates.",
+    "Per director_mandate comparative_reasoning: The synthetic 36-family Jaccard 0.0 fixture (EXP-FRONTIER-36042599040) is explicitly NOT a substitute for this live heterogeneous test.",
+    "Agent priors from director_mandate.agent_priors_used are labeled general priors; they cannot satisfy S1-S6 decision_rule thresholds.",
+    "No policy-model credential available (OPENAI_API_KEY absent, HF_TOKEN absent) -> token dimension correctly declared NOT_APPLICABLE and reported UNKNOWN, never surrogate-filled."
+  ],
+  "unresolved": [
+    "S1: rho_novelty >= 0.60 with bootstrap lower > 0.40 and permutation p < 0.05 (TAU+freshness-gated)",
+    "S2: Pooled |rho_length| < 0.20 with upper CI < 0.25 and permutation p >= 0.05",
+    "S3: Per-stratum |rho_length| < 0.20 with upper CI < 0.30 for EVERY novelty stratum (0%, 25%, 50%, 75%, 100%) AND every length tertile",
+    "S4: UNKNOWN precision >= 0.85, false_accept <= 0.10, ECE <= 0.15 upper <= 0.18 with freshness TN>=0.85",
+    "S5: Pareto M_total_SPIDER(f=10) <= 0.75 * M_total_COLD (saving >= 25%, lower > 15%, p < 0.05) strict dominance vs cold AND vs flat RAG k5 at f=10 and f=100, robust to +-50% build cost",
+    "S6: rho_novelty - |rho_shuffled| > 0.35 AND |rho_proxy| < 0.60 AND global |rho_shuffled| < 0.20 (p >= 0.20) centered |mean| < 0.05 std < 0.15, within-family std > 0, zero_cells = 0",
+    "FALSIFIED_IN_SETTING_TRIGGER: no-memory executor matches or beats inherited at matched correctness (correct_rate_no_memory >= correct_rate_inherited - 0.05) AND equal or lower amortized honest cost (cost_no_memory <= cost_inherited * 1.05)",
+    "Runtime capability ledger deployment with distributed-substrate bring-up certification",
+    "Graph C-FRESHNESS gate validation with TN>=0.85 and >=30 stale probes",
+    "Local HTTP test server (Flask/FastAPI) deployment"
+  ]
+}

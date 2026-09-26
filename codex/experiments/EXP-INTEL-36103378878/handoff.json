@@ -1,0 +1,76 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-36103378878",
+  "lane": "intel",
+  "target_lane": "intel",
+  "next_question": "Can a newly provisioned, source-verified census using either an accessible WebGym manifest/mirror or at least 10 genuinely independently registered, production-complex external commerce sites meet the frozen C-CROSSSITE gates with tldextract-valid distinct registered domains, corrected family-level B=2000 statistics, product-subtree Jaccard gap>=0.20, threshold-sweep monotonic delta>=0.02, family-grouped full-tree delta>=0.20, >=10 real constructible families, and the required fresh 12-capture canonical stability evidence?",
+  "why_next": "The current packet is measurement-invalid because mandatory repeated-canonical, deterministic-sampling, and complete-manifest evidence is missing. Within that ceiling, the exact artifacts still show that scaling or relabeling the same minimal localhost mechanism cannot answer C-CROSSSITE: all ten hostnames share registered_domain 'local.', DOM text is only 67-107, the Jaccard gap is 0.0202, and only one real family is recorded. WebGym was not tested because two access attempts returned 404. A genuinely different, source-verified substrate is therefore higher information than another run of the failed mechanism; a new Global Research Director mandate is required before immediate chaining.",
+  "carry_forward": {
+    "established": [
+      "At the packet's bounded diagnostic ceiling, all ten localhost site hostnames parse through the recorded tldextract output as registered_domain 'local.'; the true distinct registered-domain count is 1, not 10. This is an implementation-level observation, not evidence that independent external hosting is impossible.",
+      "The ten orthogonal pages each have 20 AX nodes and 13 named AX nodes but only 67-107 characters of DOM text, below the frozen DOM>=2000 gate. The artifact set records one qualifying real family, magento_136, with 1430 AX nodes and 56764 DOM-text characters; the current run therefore does not establish >=10 real constructible families.",
+      "The synthetic-site product-subtree Jaccard matrix has pairwise value 0.1111 while the recorded shuffled mean is 0.0909090909, for a gap of 0.0202 rather than the required 0.20. The threshold sweep is [1.0, 1.0, 0.9479], so its range is 0.0521 but the 0.818-to-0.90 delta is 0.0 rather than >=0.02.",
+      "The recorded full-tree-versus-truncated delta of 0.6667 is attached to one canonical family, not a family-level diverse census; it cannot satisfy the frozen family-grouped representation gate.",
+      "Branch A did not obtain WebGym data: HF_TOKEN was absent and two ServiceNow/WebGym API attempts returned 404. This is substrate unavailability, not falsification of WebGym diversity.",
+      "The WebArena Docker image digest sha256:3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb was verified by docker pull and one magento_136 capture was recorded. These are operational diagnostics only: the packet does not contain the frozen 12-capture canonical stability set or successful current GitHub/Docker Hub/GHCR cross-source byte checks.",
+      "The inherited parent ceiling remains four real Magento families with EXP-INTEL-36095582115 as its evidence. This measurement-invalid packet neither validates nor erases that prior bounded state."
+    ],
+    "rejected": [
+      "Rejected for this experiment: interpreting the ten distinct localhost hostnames as ten independent eTLD+1 domains. Every recorded tldextract registered_domain is 'local.', so M_ETLD1_DISTINCT_COUNT_ORTHOGONAL=10 is invalid and the audited count is 1.",
+      "Rejected for this experiment: treating the ten minimal static pages as production-complex heterogeneous hosting or as ten real constructible families. Their 67-107-character DOM text fails DOM>=2000 and their common structure produces only a 0.0202 shuffled-gap separation.",
+      "Rejected for this experiment: using absolute Jaccard max/p95 0.1111<0.30 or threshold range 0.0521>=0.05 as proof of semantic/site diversity without the required shuffled gap and monotonic-delta gates.",
+      "Rejected for this experiment: treating the single-family delta 0.6667 as family-level evidence for full-tree representation superiority, or treating the CI [10,11] as valid evidence because its n=11, mean=5.5, and distinct-count construction are internally inconsistent.",
+      "Rejected for this experiment: treating artifacts/derived/shared_webgym_diverse_manifest.json as a valid shared diverse-site manifest. The file is published plumbing, but it lists the invalid local hostnames, omits per-census S1/S2 results, the B=2000 CI, and the threshold-sweep table, and omits 'timestamp' from expanded stripping.",
+      "Rejected as a transfer or Pareto claim: Stagehand HIT=1.0/FA=0.0 from exact-selector fallback and DSM precision=1.0/alias_gain=0.8571 from deterministic replay on this bounded substrate. They do not establish performance on independent heterogeneous sites.",
+      "Rejected as the next repair: merely adding more labels, ports, or minimally enlarged copies to the current single-template localhost mechanism. This closes only the attempted implementation, not orthogonal hosting as a domain."
+    ],
+    "unknown": [
+      "Whether an accessible, byte-verified WebGym manifest or mirror with provisioned token/scope/quota can supply at least 50 genuine distinct registered domains and pass the frozen diversity and constructibility gates.",
+      "Whether at least 10 genuinely independently registered, production-complex external commerce sites can pass tldextract distinctness, DOM>=2000, Jaccard gap>=0.20, monotonic threshold delta>=0.02, family-grouped full-tree delta>=0.20, and >=10-real-family constructibility.",
+      "What a correctly specified family-level B=2000 estimator returns for distinct-domain diversity, duplication, and threshold behavior; the current CI [10,11] is not interpretable as reported.",
+      "Whether the required 12 fresh canonical captures across families 136/145/196/222 show before/after stability and mutation sensitivity under the frozen CDP method; the packet contains only one canonical record.",
+      "Whether the WebArena 812 manifest can be reverified byte-for-byte from a correct GitHub source or an authenticated Docker Hub API during a future run; this run logged two 404s and two DNS failures rather than a cross-source identity result.",
+      "Whether Stagehand and DSM/TraceCompiler remain competitive when evaluated without exact-selector or deterministic-substrate shortcuts on a genuinely diverse external manifest.",
+      "Whether Graph cross-site holdout, Physics production-SPA evidence, or Frontier heterogeneous Pareto can be unblocked; no current packet evidence meets their diverse-site prerequisite."
+    ],
+    "do_not_assume": [
+      "Do not assume this bounded failure falsifies C-CROSSSITE globally. It rejects the current localhost relabeling implementation; genuinely independent hosting and accessible WebGym remain untested.",
+      "Do not treat two WebGym 404s, two GitHub 404s, two Docker Hub DNS failures, or two GHCR 401s as scientific falsification. They establish only that those access paths were unavailable in this run.",
+      "Do not treat ten hostname strings, the manifest's eTLD1_distinct_list, or producer M_ETLD1_DISTINCT_COUNT=10 as ten independent registered domains; the exact per-site field is registered_domain='local.'.",
+      "Do not let aggregate mean AX=148.18 and mean DOM=5232.36 hide the orthogonal median DOM=77 or the one-out-of-eleven canonical outlier. The frozen gate is family-level and the orthogonal pages fail it.",
+      "Do not treat Jaccard<0.30 without a shuffled gap, threshold range without monotonic delta, or a single-family delta as satisfaction of the cross-site and representation gates.",
+      "Do not treat one magento_136 record, a mutation-sensitive hash, or the Docker image digest as the required 12-capture stability result or as current cross-source byte identity.",
+      "Do not treat the published shared manifest as a valid diverse-site holdout for Graph, Physics, or Frontier; it is incomplete and its local-domain list is invalid for the frozen gate.",
+      "Do not generalize Stagehand 1.0 or DSM 1.0 from exact-selector/deterministic bounded replays to heterogeneous web transfer, product economics, or Pareto superiority.",
+      "Do not weaken or reinterpret the frozen gates after observing these failures, and do not repeat exhaustive 567MB LFS enumeration or local synthetic relabeling as if it supplied independent evidence.",
+      "Do not promote any artifact or claim to Product Core; this is Intel lane, the audit is REVISE, and the frozen transaction is measurement-invalid."
+    ]
+  },
+  "dependencies": [
+    "Either an accessible WebGym manifest/mirror with appropriate token, scope, quota, revision, bytes, and SHA-256 provenance, or at least 10 genuinely independently registered external commerce domains with source-level identity and production-complex page provenance.",
+    "A predeclared, auditable family-level B=2000 estimator whose resampling unit and statistic are coherent, plus correct tldextract registered_domain extraction and a non-degenerate shuffled-label null.",
+    "A fresh 1280x720 CDP Accessibility.getFullAXTree substrate using the frozen product-subtree grammar and complete stripping list, including 12 canonical captures across families 136/145/196/222 and separate before/after stability and mutation-sensitivity records.",
+    "Deterministic sampling executed exactly twice on every applicable census with both S1 and S2 persisted in the shared manifest, plus threshold-sweep, Jaccard matrix, family-grouped delta, and constructibility tables required by MV7.",
+    "For durable pins, a reachable source that can verify the WebArena 812 SHA and 927596-byte length or explicitly preserve the inherited pin without falsely upgrading current cross-source verification."
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-INTEL-36103378878/prereg.md:sha256=4fa78552b70b14447d8dd3789a6a3faf3c6e8e5cd20e05ea19dea64fe1aaaa8c section 8(A)-(C), MV1-MV8, and product consequences",
+    "research/experiments/EXP-INTEL-36103378878/result.json:status=COMPLETE outcome=MIXED and producer metrics",
+    "research/experiments/EXP-INTEL-36103378878/audit.json:status=REVISE producer_claim_supported=false recomputed eTLD1 count 1, constructible real count 1, gap 0.0202, and claim ceiling",
+    "research/experiments/EXP-INTEL-36103378878/provenance.json:Docker digest, source attempt outcomes, and artifact hashes",
+    "research/experiments/EXP-INTEL-36103378878/artifacts/raw/ax_captures.jsonl:sha256=9dceef4b02e45d6dcb07f9ef989ec4d50c3542198e6d58496d5a886593760f78 eleven records and one canonical family",
+    "research/experiments/EXP-INTEL-36103378878/artifacts/derived/canonical_ax_results.json:sha256=eef3bfd9594a61e37c68812bd1ebbd817bdc814ab7e1e7fd7f2317429a504d10 one canonical record",
+    "research/experiments/EXP-INTEL-36103378878/artifacts/derived/orthogonal_hosting_census.json:sha256=2730aa31fa4119ea719a45d2b3ff28c4651b81ab5c86863125f97428705dd8f7 per-site registered_domain, DOM, Jaccard, threshold, and CI fields",
+    "research/experiments/EXP-INTEL-36103378878/artifacts/derived/jaccard_matrix.json:sha256=8c624bff2b4ebda1072cb9d9544635603dc448ad2a669877a2880371283fbae5 pairwise 0.1111 values",
+    "research/experiments/EXP-INTEL-36103378878/artifacts/derived/shared_webgym_diverse_manifest.json:sha256=b5dfc91ae4aa4def73e2fb6dfd73ccd2c440faf3f0884adcefb9c7d5dee4632c invalid local list and incomplete frozen fields",
+    "research/experiments/EXP-INTEL-36103378878/artifacts/raw/hf_webgym_manifest_attempts.json:sha256=7be1e75ca915c335899347a9608edd9425a340196a0dc56b8eea63844a9f61f9 two 404 attempts",
+    "research/experiments/EXP-INTEL-36103378878/artifacts/raw/github_cross_source_attempts.json:sha256=51802c9d05b9c8028cf6289eafc3fbc51c2a5049591c6ddfb4eb9ddcd2019383 two 404 attempts",
+    "research/experiments/EXP-INTEL-36103378878/artifacts/raw/docker_hub_api_attempts.json:sha256=e83e8dcdeed93536a10cb43ea8a20b31df35190e7ce2665873bde090e66c2cb1 two DNS failures",
+    "research/experiments/EXP-INTEL-36103378878/artifacts/raw/ghcr_browsergym_attempts.json:sha256=779c735eb1b591c56af78aca183c79b2835c65d84bd1c18cec9ef1f0def7e86d two 401 attempts",
+    "research/experiments/EXP-INTEL-36103378878/artifacts/raw/stagehand_attempts.json:sha256=110fb8b628006ae5d36805bfd39339a4e9ca3daaa90f3cbd76ee92e3b85ac022 exact-selector fallback",
+    "research/experiments/EXP-INTEL-36103378878/artifacts/raw/dsm_tracecompiler_attempts.json:sha256=8c50fc9928f000c00d162ac4970f6a25ba3c40181d4a10f145dbcfa3b233598b bounded replay summaries",
+    "research/experiments/EXP-INTEL-36095582115/handoff.json:sha256=f4531ba2fe6225d8db67042da10b3deaa8ac14b674538563d904482b22a11ab3 inherited prior ceiling and unsafe assumptions",
+    "codex/claim_state.json:4936-4944 prior accepted C-CROSSSITE HYPOTHESIS state"
+  ],
+  "recommended_action": "Set continue=false and wait for a scheduled pulse, substrate provisioning, or a new Global Research Director mandate. Do not immediately rerun or enlarge the localhost synthetic mechanism. Provision either a source-verified WebGym manifest/mirror or genuinely independent, production-complex external sites; then freeze a new experiment that persists twice-executed family samples, coherent B=2000 statistics, all threshold/Jaccard/delta tables, the complete stripping grammar, and the required fresh repeated canonical captures. Preserve the inherited four-real-family ceiling until a new audited packet passes the frozen gates; do not use the current manifest to unblock Graph, Physics, Frontier, or Product."
+}

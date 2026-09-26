@@ -1,0 +1,805 @@
+{
+ "schema_version": 1,
+ "experiment_id": "EXP-PRODUCT-36129169543",
+ "lane": "product",
+ "status": "COMPLETE",
+ "outcome": "SUPPORTS",
+ "metrics": {
+  "disclosure": "instrument correctness ONLY — not a scientific or product result",
+  "frozen_decision_table_applied": {
+   "frozen_rule": "EXPERIMENT COMPLETE iff all three parts PASS. Outcome = SUPPORTS if instrument decidable and f* computable; FALSIFIES if any part fails validly; MEASUREMENT_INVALID if infrastructure failure (not scientific falsification)",
+   "part_a": "PASS",
+   "part_b": "PASS",
+   "part_c": "PASS",
+   "resulting_status": "COMPLETE",
+   "resulting_outcome": "SUPPORTS",
+   "scope": "instrument decidable and f* computable; this is not an economics result and not a PRODUCT_CORE promotion"
+  },
+  "part_a": {
+   "PASS": true,
+   "all_eight_counter_paths_nonzero": true,
+   "eight_counter_paths_present": [
+    "resolve",
+    "bind",
+    "verify",
+    "freshness",
+    "repair",
+    "browser_steps",
+    "requests",
+    "latency_ms"
+   ],
+   "five_arms_implemented": true,
+   "gate_unknown_records_have_no_numbers": true,
+   "unit_tests_passed": true,
+   "zero_surrogate_fills": true,
+   "unit_tests": {
+    "command": "PYTHONPATH=src python3 -m unittest discover -s tests -v",
+    "exit": 0,
+    "passed": true,
+    "tail": [
+     "Ran 39 tests in 0.046s",
+     "",
+     "OK"
+    ],
+    "tests_module": "tests/test_eval_harness.py (+ tests/test_kernel.py regression)"
+   },
+   "attempt_1_recorded": {
+    "all_eight_counter_paths_nonzero": false,
+    "part_a_pass": false,
+    "cause": "staleness injection posted /api/admin/bump/<bare rid> while the substrate serves ep-A resources under the ep-a: key; the bump hit a different key, P-SPIDER repair stayed 0",
+    "fix": "bump f\"ep-a:{rid}\" exactly as the parent's own run_experiment.py does; no gate, threshold, statistic or control was changed",
+    "archive": "artifacts/attempt1/"
+   },
+   "attempt_2_recorded": {
+    "PASS": true,
+    "all_eight_counter_paths_nonzero": true,
+    "eight_counter_paths_present": [
+     "resolve",
+     "bind",
+     "verify",
+     "freshness",
+     "repair",
+     "browser_steps",
+     "requests",
+     "latency_ms"
+    ],
+    "five_arms_implemented": true,
+    "gate_unknown_records_have_no_numbers": true,
+    "unit_tests_passed": true,
+    "zero_surrogate_fills": true
+   }
+  },
+  "part_b": {
+   "B": 5000,
+   "PASS": true,
+   "all_eight_counters_recorded_per_trajectory": true,
+   "all_five_arms_complete": true,
+   "bootstrap_and_permutation_compute": true,
+   "executable_by_arm": {
+    "B-COLD": 192,
+    "B-DETERMINISTIC-EXECUTOR": 192,
+    "B-INSTRUCTIONS": 192,
+    "B-RAG-EMBED": 192,
+    "P-SPIDER": 192
+   },
+   "health_gate_pass": true,
+   "n_records_total": 960,
+   "scripted_mode_executable": true,
+   "trace_request_rows": 21778,
+   "transport_errors": 0,
+   "unknown_gates_fire_for_live_mode": true,
+   "zero_crashes": true,
+   "zero_default_fills": true,
+   "disclosure": "instrument correctness ONLY — not a scientific or product result",
+   "trace_rows_attempt2_only": 10889,
+   "trace_rows_note": "metrics_summary.json trace_request_rows=21778 counts the un-truncated mixed attempt1+attempt2 trace file; artifacts/raw/trace_file_correction.json documents the verified split. Attempt-2-only rows = 10889, transport errors = 0.",
+   "health_gate": {
+    "health_gate_pass": true,
+    "n_non304_total": 400,
+    "n_non304_stratified": {
+     "ep-a": 200,
+     "ep-b": 200
+    },
+    "TN_fresh": 1.0,
+    "requests_issued": 700,
+    "hs256": true,
+    "sticky_via_nginx": true,
+    "single_worker": true,
+    "etag_W_format_seen": true,
+    "stratified_pass": true
+   },
+   "arm_phases": {
+    "B-COLD": {
+     "records": 192,
+     "secs": 4.837
+    },
+    "B-DETERMINISTIC-EXECUTOR": {
+     "records": 192,
+     "secs": 4.903
+    },
+    "B-INSTRUCTIONS": {
+     "records": 192,
+     "secs": 4.972
+    },
+    "B-RAG-EMBED": {
+     "records": 192,
+     "secs": 4.912
+    },
+    "P-SPIDER": {
+     "records": 192,
+     "secs": 5.198
+    }
+   },
+   "counters_by_arm": {
+    "B-COLD": {
+     "bind": 0,
+     "browser_steps": 2092,
+     "freshness": 0,
+     "latency_ms": 4705,
+     "repair": 0,
+     "requests": 2092,
+     "resolve": 0,
+     "verify": 2092
+    },
+    "B-DETERMINISTIC-EXECUTOR": {
+     "bind": 384,
+     "browser_steps": 2092,
+     "freshness": 0,
+     "latency_ms": 4776,
+     "repair": 0,
+     "requests": 2092,
+     "resolve": 0,
+     "verify": 2092
+    },
+    "B-INSTRUCTIONS": {
+     "bind": 0,
+     "browser_steps": 2092,
+     "freshness": 0,
+     "latency_ms": 4851,
+     "repair": 0,
+     "requests": 2092,
+     "resolve": 0,
+     "verify": 2092
+    },
+    "B-RAG-EMBED": {
+     "bind": 384,
+     "browser_steps": 2092,
+     "freshness": 0,
+     "latency_ms": 4783,
+     "repair": 0,
+     "requests": 2092,
+     "resolve": 192,
+     "verify": 2092
+    },
+    "P-SPIDER": {
+     "bind": 384,
+     "browser_steps": 2092,
+     "freshness": 2092,
+     "latency_ms": 4807,
+     "repair": 36,
+     "requests": 2092,
+     "resolve": 192,
+     "verify": 2284
+    }
+   },
+   "payload_bytes_totals": {
+    "B-COLD": 186451,
+    "B-DETERMINISTIC-EXECUTOR": 186451,
+    "B-INSTRUCTIONS": 186451,
+    "B-RAG-EMBED": 186451,
+    "P-SPIDER": 3204
+   },
+   "integrity_failures_total": 0,
+   "paired_ci_P_SPIDER_minus_baseline": {
+    "B-COLD": {
+     "n_paired": 192,
+     "delta_payload_bytes": {
+      "observed_mean": 954.4114583333334,
+      "bootstrap_ci95": [
+       894.63046875,
+       1013.1736990918713
+      ],
+      "block_permutation_p": 0.0001999600079984003
+     },
+     "delta_requests": {
+      "observed_mean": 0,
+      "bootstrap_ci95": [
+       0.0,
+       0.0
+      ],
+      "block_permutation_p": 1.0
+     },
+     "delta_latency_ms": {
+      "observed_mean": -0.53125,
+      "bootstrap_ci95": [
+       -1.2344499684343435,
+       0.2
+      ],
+      "block_permutation_p": 0.018196360727854428
+     },
+     "direction": "positive => P-SPIDER spent less than the baseline"
+    },
+    "B-INSTRUCTIONS": {
+     "n_paired": 192,
+     "delta_payload_bytes": {
+      "observed_mean": 954.4114583333334,
+      "bootstrap_ci95": [
+       894.63046875,
+       1013.1736990918713
+      ],
+      "block_permutation_p": 0.0001999600079984003
+     },
+     "delta_requests": {
+      "observed_mean": 0,
+      "bootstrap_ci95": [
+       0.0,
+       0.0
+      ],
+      "block_permutation_p": 1.0
+     },
+     "delta_latency_ms": {
+      "observed_mean": 0.22916666666666666,
+      "bootstrap_ci95": [
+       -0.4974476439790576,
+       1.4767349244846204
+      ],
+      "block_permutation_p": 0.7966406718656269
+     },
+     "direction": "positive => P-SPIDER spent less than the baseline"
+    },
+    "B-RAG-EMBED": {
+     "n_paired": 192,
+     "delta_payload_bytes": {
+      "observed_mean": 954.4114583333334,
+      "bootstrap_ci95": [
+       894.63046875,
+       1013.1736990918713
+      ],
+      "block_permutation_p": 0.0001999600079984003
+     },
+     "delta_requests": {
+      "observed_mean": 0,
+      "bootstrap_ci95": [
+       0.0,
+       0.0
+      ],
+      "block_permutation_p": 1.0
+     },
+     "delta_latency_ms": {
+      "observed_mean": -0.125,
+      "bootstrap_ci95": [
+       -0.7732249537404177,
+       0.5625164473684208
+      ],
+      "block_permutation_p": 0.6068786242751449
+     },
+     "direction": "positive => P-SPIDER spent less than the baseline"
+    },
+    "B-DETERMINISTIC-EXECUTOR": {
+     "n_paired": 192,
+     "delta_payload_bytes": {
+      "observed_mean": 954.4114583333334,
+      "bootstrap_ci95": [
+       894.63046875,
+       1013.1736990918713
+      ],
+      "block_permutation_p": 0.0001999600079984003
+     },
+     "delta_requests": {
+      "observed_mean": 0,
+      "bootstrap_ci95": [
+       0.0,
+       0.0
+      ],
+      "block_permutation_p": 1.0
+     },
+     "delta_latency_ms": {
+      "observed_mean": -0.16145833333333334,
+      "bootstrap_ci95": [
+       -0.775432286435571,
+       0.46875805412371124
+      ],
+      "block_permutation_p": 0.4969006198760248
+     },
+     "direction": "positive => P-SPIDER spent less than the baseline"
+    }
+   },
+   "seed": 42
+  },
+  "part_c": {
+   "PASS": true,
+   "formula": "f* = (build_cost + verify_cost) / (serving_cost_cold - serving_cost_inherited)",
+   "primary_unit": "bytes",
+   "primary_f_star": 36.70010423090146,
+   "f_star_bytes": {
+    "build_cost": 35027.0,
+    "computable": true,
+    "denominator_per_reuse_saving": 954.4114583333334,
+    "f_star": 36.70010423090146,
+    "formula": "f* = (build_cost + verify_cost) / (serving_cost_cold - serving_cost_inherited)",
+    "numerator_onetime_cost": 35027.0,
+    "serving_cost_cold": 971.0989583333334,
+    "serving_cost_inherited": 16.6875,
+    "token_inputs": "NOT_APPLICABLE (no token parameter exists by construction)",
+    "unit": "bytes",
+    "verify_cost": 0.0
+   },
+   "f_star_bytes_ci95_supplement": {
+    "f_star": 36.70010423090146,
+    "ci95": [
+     34.571564610683666,
+     39.15247828406805
+    ],
+    "denominator_bytes_per_reuse": 954.4114583333334,
+    "denominator_ci95_bytes": [
+     894.63046875,
+     1013.1736990918713
+    ],
+    "note": "Post-hoc uncertainty supplement for the primary (bytes) f*: paired family-stratified trajectory bootstrap, B=5000, seed=42, on attempt-2 trajectories. Computed after the run; not an input to any frozen gate."
+   },
+   "f_star_latency_ms": {
+    "attempt_2_computable": false,
+    "attempt_2_denominator_ms": -0.53125,
+    "attempt_2_denominator_ci95": [
+     -1.2344499684343435,
+     0.2
+    ],
+    "attempt_1_point_estimate": 14143.115266903265,
+    "attempt_1_denominator_ms": 0.1145833333333357,
+    "attempt_1_denominator_ci95": [
+     -0.7187864313471503,
+     1.0054507204773142
+    ],
+    "verdict": "NOT IDENTIFIABLE on this substrate: denominator CI spans 0 in both attempts (attempt1 [-0.719, 1.005] ms, attempt2 [-1.234, 0.200] ms)"
+   },
+   "inputs_ms_attempt2": {
+    "build_cost": 1913.3279190000394,
+    "cold_serving_cost": 24.505208333333332,
+    "inherited_serving_cost": 25.036458333333332,
+    "verify_cost": 106.78145799920458
+   },
+   "inputs_bytes_attempt2": {
+    "build_cost": 35027.0,
+    "verify_cost": 0.0,
+    "serving_cost_cold": 971.0989583333334,
+    "serving_cost_inherited": 16.6875
+   },
+   "sensitivity_primary_unit": {
+    "method": "one-at-a-time +/-10% on each measured input",
+    "dominant_quantity": "cold_serving_cost",
+    "dominant_max_abs_rel_change": 0.11327390510073092,
+    "per_input": {
+     "build_cost": {
+      "becomes_noncomputable": [],
+      "f_star_down": 33.03009380781131,
+      "f_star_up": 40.37011465399161,
+      "max_abs_rel_change": 0.10000000000000003,
+      "rel_change_down": -0.10000000000000003,
+      "rel_change_up": 0.10000000000000003,
+      "value": 35027.0
+     },
+     "cold_serving_cost": {
+      "becomes_noncomputable": [],
+      "f_star_down": 40.857268354739524,
+      "f_star_up": 33.310783334266176,
+      "max_abs_rel_change": 0.11327390510073092,
+      "rel_change_down": 0.11327390510073092,
+      "rel_change_up": -0.09235180574177981,
+      "value": 971.0989583333334
+     },
+     "inherited_serving_cost": {
+      "becomes_noncomputable": [],
+      "f_star_down": 36.63604757707523,
+      "f_star_up": 36.76438527802955,
+      "max_abs_rel_change": 0.0017515221952412448,
+      "rel_change_down": -0.001745407953699817,
+      "rel_change_up": 0.0017515221952412448,
+      "value": 16.6875
+     },
+     "verify_cost": {
+      "becomes_noncomputable": [],
+      "f_star_down": 36.70010423090146,
+      "f_star_up": 36.70010423090146,
+      "max_abs_rel_change": 0.0,
+      "rel_change_down": 0.0,
+      "rel_change_up": 0.0,
+      "value": 0.0
+     }
+    }
+   },
+   "sensitivity_latency_ms_attempt2": {
+    "note": "attempt-2 f*_ms base not computable (denominator negative), so OAT rel-changes are undefined; attempt-1 base computable and flagged cold_serving_cost/denominator dominance after the side-drop fix",
+    "dominant_quantity": null
+   },
+   "build_raw": {
+    "build_ms": 1913.3279190000394,
+    "family_mechanisms": 36,
+    "harvest_payload_bytes": 35027,
+    "harvest_requests": 393,
+    "mechanisms_distilled": 180,
+    "phases": {
+     "distill_ms": 471.532174999993,
+     "harvest_ms": 1350.3296839999166,
+     "induction_ms": 91.38947400060715
+    },
+    "unit": "wall-clock milliseconds (measured, no token denominators)",
+    "validators_cached": 393
+   },
+   "verify_raw": {
+    "auditor_checks": 36,
+    "auditor_passes": 36,
+    "phases": {
+     "auditor_ms": 22.569111999473535,
+     "freshness_probe_ms": 84.21234599973104
+    },
+    "probe_304_hits": 36,
+    "probe_payload_bytes": 0,
+    "probe_requests": 36,
+    "unit": "wall-clock milliseconds (measured, no token denominators)",
+    "verify_ms": 106.78145799920458
+   },
+   "token_economics": {
+    "status": "NOT_APPLICABLE",
+    "unknown": true,
+    "reason": "no policy-model credential (OPENAI_API_KEY absent); no token parameter exists in the harness by construction"
+   }
+  }
+ },
+ "controls": {
+  "PC-INSTRUMENT-CORRECTNESS": {
+   "expected_behavior": "All five arms execute end-to-end on the certified substrate; counters increment per trajectory; bootstrap/permutation CIs compute; UNKNOWN gates fire for missing BrowserGym/credentials; no arm crashes or surrogate-fills; all eight counter paths non-zero for at least one arm",
+   "observed_behavior": "attempt2: 5/5 arms x 192/192 trajectories executed; eight counters recorded per trajectory; all eight counter paths non-zero across arms (repair=36 on P-SPIDER); B=5000 bootstrap + B=5000 block permutation computed; live-mode gate UNKNOWN for all five arms with counters=null (no fills); scripted gate EXECUTABLE; 0 crashes, 0 transport errors, 0 surrogate/default fills, 0 integrity failures",
+   "pass": true,
+   "evidence": [
+    "artifacts/derived/metrics_summary.json",
+    "artifacts/derived/gate_demo.json",
+    "artifacts/raw/unit_tests.txt",
+    "artifacts/raw/trajectories.jsonl",
+    "artifacts/raw/trace_file_correction.json"
+   ],
+   "note": "proves instrument correctness only — NOT a scientific or product result"
+  },
+  "NC-SHUFFLED-FAMILY-STRATIFIED": {
+   "frozen_text": "Family-stratified trajectory-grouped block permutation (B=5000) on deterministic scripted policy trajectories to verify null distribution of counter deltas and correlation structure. Shuffled rho_shuffled and rho_length must satisfy |rho|<0.20 per stratum with block-permutation p>=0.20.",
+   "statistic": "Delta = latency_ms(B-INSTRUCTIONS) - latency_ms(B-COLD) per trajectory",
+   "reading_shuffled_null": {
+    "interpretation": "the frozen sentence's 'Shuffled ... must satisfy' governs the shuffled/null-distribution values of both correlations (matches spec expected_behavior 'shuffled correlations near zero; block-permutation p-values >=0.20')",
+    "rho_shuffled_median": -0.004476819295729788,
+    "rho_shuffled_ci95": [
+     -0.13004473590522928,
+     0.11809202545769679
+    ],
+    "per_stratum_rho_length_shuffled_median": {
+     "0.0": -0.0005549202982882411,
+     "0.3333": -0.008698612507990264,
+     "0.5": -0.006193306087491084,
+     "0.6667": -0.0024088259040651845,
+     "1.0": -0.000643364603631396
+    },
+    "block_permutation_p": 0.9722055588882224,
+    "gates": {
+     "abs_rho_shuffled_lt_0.20": true,
+     "abs_shuffled_rho_length_all_strata_lt_0.20": true,
+     "block_permutation_p_ge_0.20": true
+    },
+    "pass": true
+   },
+   "reading_observed_rho_length": {
+    "interpretation": "stricter reading: the gate applies to the observed per-stratum correlation of Delta with trajectory length L",
+    "attempt_2_observed_per_stratum": {
+     "0.0": {
+      "n": 45,
+      "rho_length": 0.3815161129564732,
+      "pass": false,
+      "rho_length_perm_p": 0.008998200359928014
+     },
+     "0.3333": {
+      "n": 9,
+      "rho_length": -0.14787641263583448,
+      "pass": true,
+      "rho_length_perm_p": 0.7012597480503899
+     },
+     "0.5": {
+      "n": 42,
+      "rho_length": 0.2692327509204318,
+      "pass": false,
+      "rho_length_perm_p": 0.08438312337532493
+     },
+     "0.6667": {
+      "n": 21,
+      "rho_length": 0.26806791132382557,
+      "pass": false,
+      "rho_length_perm_p": 0.22955408918216358
+     },
+     "1.0": {
+      "n": 75,
+      "rho_length": 0.005395489516817844,
+      "pass": true,
+      "rho_length_perm_p": 0.9640071985602879
+     }
+    },
+    "attempt_2_failing_strata": [
+     "0.0",
+     "0.5",
+     "0.6667"
+    ],
+    "attempt_2_pooled_rho_length": 0.1696662341708176,
+    "attempt_1_observed_per_stratum": {
+     "0.0": {
+      "n": 45,
+      "rho_length": -0.052425950403227985,
+      "pass": true
+     },
+     "0.3333": {
+      "n": 9,
+      "rho_length": -0.48055405875908547,
+      "pass": false
+     },
+     "0.5": {
+      "n": 42,
+      "rho_length": -0.10457299360942816,
+      "pass": true
+     },
+     "0.6667": {
+      "n": 21,
+      "rho_length": -0.49248468563577363,
+      "pass": false
+     },
+     "1.0": {
+      "n": 75,
+      "rho_length": 0.1699945142155292,
+      "pass": true
+     }
+    },
+    "attempt_1_failing_strata": [
+     "0.3333",
+     "0.6667"
+    ],
+    "attempt_1_pooled_rho_length": -0.054073358491209166,
+    "pass": false
+   },
+   "cross_attempt_comparison": "same task->(L, rid) mapping in both attempts, yet failing strata differ (attempt1: 0.3333/0.6667 both negative; attempt2: 0.0/0.5/0.6667 all positive) and per-stratum signs flip; deterministic formula coupling would reproduce exactly",
+   "pass": "MIXED",
+   "pass_detail": "shuffled-null reading PASS; stricter observed-rho reading FAIL in 3/5 strata (attempt2) and 2/5 (attempt1)",
+   "role_in_frozen_decision": "controls are not part of spec.decision_rule.overall; the frozen table (PASS/PASS/PASS -> SUPPORTS) does not condition on NC; the MIXED result is disclosed here and bounds interpretation (see validity_notes)",
+   "evidence": [
+    "artifacts/derived/null_control.json",
+    "artifacts/attempt1/derived/null_control.json"
+   ],
+   "no_rerun_for_nc": "exactly two attempts exist; attempt2 was triggered by the frozen Part A counter-path failure (repair=0), not by NC; no third attempt was made and neither attempt was discarded"
+  },
+  "B-COLD": {
+   "role": "baseline — absolute cold-exploration cost with per-trajectory hard-reset counters",
+   "expected_behavior": "executes 192/192 trajectories; fetches every resource; zero inheritance overhead counters",
+   "observed_behavior": "192/192 executed; requests=2092, verify=2092, resolve=0, bind=0, freshness=0, repair=0; payload_bytes_total=186451",
+   "pass": true,
+   "evidence": [
+    "artifacts/derived/metrics_summary.json",
+    "artifacts/derived/ci.json"
+   ]
+  },
+  "B-INSTRUCTIONS": {
+   "role": "baseline — static natural-language instructions only; also the reference arm of the NC statistic (Delta = latency_ms(B-INSTRUCTIONS) - latency_ms(B-COLD))",
+   "expected_behavior": "executes 192/192; same work as COLD (identical request count) so NC Delta is pure measurement noise",
+   "observed_behavior": "192/192 executed; requests=2092 identical to B-COLD; payload_bytes_total=186451; paired latency delta vs COLD observed_mean=0.229 ms, bootstrap CI [-0.497, 1.477] (spans 0)",
+   "pass": true,
+   "evidence": [
+    "artifacts/derived/ci.json",
+    "artifacts/derived/null_control.json"
+   ]
+  },
+  "B-RAG-EMBED": {
+   "role": "baseline — TF-IDF retrieval TAU=0.30, QCR k=5 with honest retrieval/verify counters",
+   "expected_behavior": "executes 192/192; resolve>=1 per trajectory; retrieval charges measured (non-model) work",
+   "observed_behavior": "192/192 executed; resolve=192, bind=384; requests=2092; payload_bytes_total=186451",
+   "pass": true,
+   "evidence": [
+    "artifacts/derived/metrics_summary.json"
+   ],
+   "deviation_note": "spec arm text mentions '200 token retrieval + 150ms verify cost model'; not instantiated: token economics are frozen NOT_APPLICABLE/UNKNOWN and measurement_validity forbids synthetic jitter/proxies. RAG latency here is honest measured local retrieval time, i.e. relative to other arms its latency_ms is under-claimed by an un-modeled constant if the spec text were taken literally. See validity_notes."
+  },
+  "B-DETERMINISTIC-EXECUTOR": {
+   "role": "baseline — no-memory deterministic compiled executor (Frontier's null against SPIDER's premise); primary control for inheritance value",
+   "expected_behavior": "executes 192/192 with bind counters but zero resolve/freshness/repair (no inheritance overhead)",
+   "observed_behavior": "192/192 executed; bind=384, resolve=0, freshness=0, repair=0, requests=2092; payload_bytes_total=186451; paired payload delta vs P-SPIDER identical to COLD's (894.63, 1013.17) CI",
+   "pass": true,
+   "evidence": [
+    "artifacts/derived/metrics_summary.json",
+    "artifacts/derived/ci.json"
+   ]
+  }
+ },
+ "artifacts": [
+  {
+   "path": "research/experiments/EXP-PRODUCT-36129169543/run_dryrun.py",
+   "sha256": "6f0d578527d30582eff7b54bb971cc7c0345fb0a95c4f3fe41c260df6776528d",
+   "role": "code"
+  },
+  {
+   "path": "src/spider/eval_harness.py",
+   "sha256": "74f1163b7dd62021d6b2134b991bca7e367ce7587b777d903ec86dd62b8691b5",
+   "role": "code"
+  },
+  {
+   "path": "tests/test_eval_harness.py",
+   "sha256": "29e409e28ea22b70967bac0a62319891b8b6281943d74558edbc15ebf4a4b477",
+   "role": "code"
+  },
+  {
+   "path": "research/experiments/EXP-PRODUCT-36129169543/artifacts/raw/trajectories.jsonl",
+   "sha256": "fa5bba83adee4d227c9a23fba9bf593daca0910b2d5a27bad93c71a100e6f3ea",
+   "role": "raw"
+  },
+  {
+   "path": "research/experiments/EXP-PRODUCT-36129169543/artifacts/raw/request_trace.jsonl",
+   "sha256": "fb0e5bb2c9d357b0c8ec62213b09c32a87731e6d284369b1f935c13a1e3e4b64",
+   "role": "raw"
+  },
+  {
+   "path": "research/experiments/EXP-PRODUCT-36129169543/artifacts/raw/request_trace_mixed_attempts12.jsonl",
+   "sha256": "cebd9fc4af35147d75ae736f869914103667102ce4513721d6a7b7019493ddfd",
+   "role": "raw"
+  },
+  {
+   "path": "research/experiments/EXP-PRODUCT-36129169543/artifacts/raw/health_gate_trace.jsonl",
+   "sha256": "8447856aba71a5b5c90c388546fb7b17f36188f3f566940c5abff135c6e61fa8",
+   "role": "raw"
+  },
+  {
+   "path": "research/experiments/EXP-PRODUCT-36129169543/artifacts/raw/build.json",
+   "sha256": "fb7e4cc12bc4348781dd6dc3352f4a3c1fbacee9ee778c411d60a937cb8b2b35",
+   "role": "raw"
+  },
+  {
+   "path": "research/experiments/EXP-PRODUCT-36129169543/artifacts/raw/verify_pass.json",
+   "sha256": "8f16d56e1d97a9d340190a6faeb03bcb26722cf06879ac1e845c4698df821a20",
+   "role": "raw"
+  },
+  {
+   "path": "research/experiments/EXP-PRODUCT-36129169543/artifacts/raw/staleness_injection.json",
+   "sha256": "d79cfdf83707fdff88a87e5e8a567bb9987c4b598db0e95dd3c93af34d7f966d",
+   "role": "raw"
+  },
+  {
+   "path": "research/experiments/EXP-PRODUCT-36129169543/artifacts/raw/unit_tests.txt",
+   "sha256": "abd8fc82f4cbc5b9667df1faf7424d9b1ccd00d00ff878421bb1ebc5231ad6e8",
+   "role": "raw"
+  },
+  {
+   "path": "research/experiments/EXP-PRODUCT-36129169543/artifacts/raw/substrate_start.json",
+   "sha256": "2851f0c625e475f80e110329de1d7fe33b1f7c2448db05786155e6cf43f7ef09",
+   "role": "raw"
+  },
+  {
+   "path": "research/experiments/EXP-PRODUCT-36129169543/artifacts/raw/trace_file_correction.json",
+   "sha256": "d6a40490f99d450a493c721c7ac240d2e7f55135c0b4bdcea29c2a8ba362209c",
+   "role": "raw"
+  },
+  {
+   "path": "research/experiments/EXP-PRODUCT-36129169543/artifacts/derived/metrics_summary.json",
+   "sha256": "ac18c5eac5a44e5ad3845b47a0b0a326a2c01de6244d5b71329c71e4957934fb",
+   "role": "derived"
+  },
+  {
+   "path": "research/experiments/EXP-PRODUCT-36129169543/artifacts/derived/breakeven.json",
+   "sha256": "7e90c935f7f32033b2049358dadb987366c3600d67a30d4b84124049ff6f39fc",
+   "role": "derived"
+  },
+  {
+   "path": "research/experiments/EXP-PRODUCT-36129169543/artifacts/derived/ci.json",
+   "sha256": "352d1faf0e6c2b423095085ea73b225303fd6bf8db51260059cc40473657cb61",
+   "role": "derived"
+  },
+  {
+   "path": "research/experiments/EXP-PRODUCT-36129169543/artifacts/derived/null_control.json",
+   "sha256": "4f0720f46ef637e9c986591f5e569c94b045b94f2dbcec45258577e8321168f8",
+   "role": "derived"
+  },
+  {
+   "path": "research/experiments/EXP-PRODUCT-36129169543/artifacts/derived/health_gate.json",
+   "sha256": "8293ffa106c4c94335471a1b95bf4692a7288e98a607075f7e5187faefe135e9",
+   "role": "derived"
+  },
+  {
+   "path": "research/experiments/EXP-PRODUCT-36129169543/artifacts/derived/gate_demo.json",
+   "sha256": "6ba1f383217a813bc282ff314afb9ce3a0b5c1e62091667bcb983cdeb84c35be",
+   "role": "derived"
+  },
+  {
+   "path": "research/experiments/EXP-PRODUCT-36129169543/artifacts/derived/capability_probe.json",
+   "sha256": "f98156367f0e5ee16ba246e0544fef78bdc08cc7902141a3cd1b607fb5b6e3a9",
+   "role": "derived"
+  },
+  {
+   "path": "research/experiments/EXP-PRODUCT-36129169543/artifacts/derived/f_bytes_ci_supplement.json",
+   "sha256": "836b4a297cf6382b114979accdb7bb583d1d277f4d5cbccbc6524bf39f7a687b",
+   "role": "derived"
+  },
+  {
+   "path": "research/experiments/EXP-PRODUCT-36129169543/artifacts/attempt1/raw/trajectories.jsonl",
+   "sha256": "17a5c726cb8c58995afe81e69663ca6f5d651b45c7447f43bada2c7a87047348",
+   "role": "raw"
+  },
+  {
+   "path": "research/experiments/EXP-PRODUCT-36129169543/artifacts/attempt1/derived/metrics_summary.json",
+   "sha256": "75b3e0e71b35d6ae4b53b48ab083e1d826f393edf0497f53ebbfe98bb358f2d1",
+   "role": "derived"
+  },
+  {
+   "path": "research/experiments/EXP-PRODUCT-36129169543/artifacts/attempt1/derived/null_control.json",
+   "sha256": "f51bfbefa7324a26f8ed3de4f6ecfdc8d00042d313070249a9924d2f9c93c42b",
+   "role": "derived"
+  },
+  {
+   "path": "research/experiments/EXP-PRODUCT-36129169543/fixtures/qcr_bank_manifest.json",
+   "sha256": "8c69804b249ec9c84cf05d86a21c7ebe7a31af5f8d45e50a4e6d477b449f9f58",
+   "role": "fixture"
+  },
+  {
+   "path": "research/experiments/EXP-PRODUCT-36129169543/fixtures/webarena_verified_v2_tasks_192_36_rebuilt.json",
+   "sha256": "101e481ddb610df9598b0e3e5650e8c163ec7cbdc4679c5efc1e31104b3074c5",
+   "role": "fixture"
+  },
+  {
+   "path": "research/experiments/EXP-PRODUCT-36129169543/request.json",
+   "sha256": "8e21d1456b8390f1a89d87cfee2b0f3158757d81afe9987cc65ac6f4ecdaf703",
+   "role": "design"
+  },
+  {
+   "path": "research/experiments/EXP-PRODUCT-36129169543/spec.json",
+   "sha256": "788562e681fc2a7f7927a6216ea39e9f8ca42bf49276fe38f43497b28c267195",
+   "role": "design"
+  },
+  {
+   "path": "research/experiments/EXP-PRODUCT-36129169543/prereg.md",
+   "sha256": "e7e282bc86120f2b6c63c131af7c12db40733e8d6248f9e514cb708c0f594ac8",
+   "role": "design"
+  },
+  {
+   "path": "research/experiments/EXP-PRODUCT-36129169543/freeze.json",
+   "sha256": "506d3ee1aaeefdd2217b0f008a559802672e0018168fd181c45eee8670b3ca2e",
+   "role": "design"
+  }
+ ],
+ "observations": [
+  "Attempt 2 executed all five arms to completion: 192/192 trajectories each, 960 records total, deterministic scripted policy, wall-clock ~4.8-5.2 s per arm.",
+  "All eight counter paths recorded per trajectory for all arms; non-zero across arms: resolve=192 (RAG, SPIDER), bind=384 (RAG, SPIDER, DET), verify=2092/2284, freshness=2092 (SPIDER), repair=36 (SPIDER), browser_steps=2092, requests=2092, latency_ms sum ~4700-4850 per arm.",
+  "Staleness injection bumped 36 step-0 resources (all families with max novelty>0) under the ep-a: substrate key; P-SPIDER consequently performed 36 localized repairs.",
+  "Health gate passed: 400 non-304 responses (200/endpoint >=180 each), TN_fresh=1.0 (>=0.85), HS256, nginx sticky, single worker, W/ ETag format seen; 700 probe requests.",
+  "Fail-closed gate: in live_browser mode all five arms are UNKNOWN with missing=[browsergym, playwright, policy_model] and counters=null, payload_bytes=null; in scripted mode all five arms EXECUTABLE. No surrogate or default fills.",
+  "Paired CIs (P-SPIDER minus baseline, B=5000 bootstrap + B=5000 block permutation, seed 42): payload_bytes saved 954.41/reuse, CI [894.63, 1013.17], p=0.0002 against every baseline; requests delta exactly 0, CI [0,0], p=1.0; latency_ms delta vs COLD -0.531 ms, CI [-1.234, 0.200] (spans 0).",
+  "Attempt-1 latency_ms delta vs COLD +0.115 ms with CI [-0.719, 1.005] (spans 0) — same conclusion: no identifiable ms-level serving saving on this localhost substrate.",
+  "f* bytes: numerator 35027 bytes (build 35027 + verify probe payload 0), denominator 954.41 bytes/reuse, f*=36.7001; post-hoc paired family bootstrap CI for f*: [34.57, 39.15].",
+  "OAT +/-10% sensitivity on the primary unit identifies cold_serving_cost as dominant (max |rel change| 0.113), above build_cost (0.100), inherited_serving_cost (0.002), verify_cost (0.000).",
+  "Attempt 1 (archived): Part A recorded all_eight_counter_paths_nonzero=false because repair stayed 0 — the staleness injection bumped bare rids while the substrate serves ep-a: keys; the exact fix mirrors the parent packet's own bump call. No gate, threshold or statistic changed between attempts.",
+  "NC shuffled-null values: rho_shuffled median -0.0045 (attempt2) / +0.0018 (attempt1); family-blocked permutation p=0.972 (attempt2) / 0.807 (attempt1); per-stratum shuffled rho_length medians all |rho|<0.02.",
+  "NC observed per-stratum rho_length(Delta, L): attempt2 fails |rho|<0.20 in strata 0.0 (rho=0.382, n=45, trajectory-permutation p=0.009), 0.5 (0.269, n=42, p=0.084), 0.6667 (0.268, n=21, p=0.23); attempt1 failed 0.3333 (-0.481, n=9) and 0.6667 (-0.492, n=21); pooled rho_length +0.170 (attempt2) / -0.054 (attempt1).",
+  "request_trace.jsonl from attempt 2 was initially appended to attempt 1's file (archive step unlinked a wrong path); the mixed file's first 10889 lines byte-match the attempt-1 archive, boundary verified, split recorded in trace_file_correction.json; counter/CI computations never read the trace file.",
+  "Kernel working tree at execute base has no dot-regex patch (sha256 46929b3a...); parent packet recorded uncommitted patch d926279d — no dotted parameter slots exist in the fixtures, so the harness does not depend on it.",
+  "Unit tests: 39 tests, exit 0, 'Ran 39 tests ... OK' (artifacts/raw/unit_tests.txt), covering each arm, each counter path, hard reset, UNKNOWN gate, no-fill behavior, bootstrap/permutation, f* and sensitivity.",
+  "Zero transport errors and zero substrate integrity failures (response body-sha/ETag mismatch) in both attempts; 10889 attempt-2 trace rows (393 build, 36 verify, 5x2092 trajectory)."
+ ],
+ "validity_notes": [
+  "instrument correctness ONLY — not a scientific or product result — result.json outcome SUPPORTS only the frozen decision row 'instrument decidable, f* computable'; it is not an economics result, not a PRODUCT_CORE promotion and not a claim that inheritance pays off in production.",
+  "Exactly two attempts exist. Attempt 1 is fully archived under artifacts/attempt1/; it failed the frozen Part A counter-path criterion (repair=0) due to an implementation defect in the staleness injection (substrate key prefix), which was fixed to mirror the parent packet's bump call. No run was discarded; attempt 2 is the reporting attempt. Neither attempt was re-run to chase the null control.",
+  "NC-SHUFFLED-FAMILY-STRATIFIED's frozen sentence is genuinely ambiguous ('Shuffled rho_shuffled and rho_length must satisfy |rho|<0.20 per stratum'): both defensible readings were evaluated and reported separately — shuffled-null reading PASS, observed-rho reading FAIL in 3/5 strata (attempt2). Verdict MIXED; no silent preference was applied. The cross-attempt sign instability and the fact that latency_ms is measured (not formula-derived) argue against deterministic counter-formula coupling, but the literal observed-data gate failure stands as recorded.",
+  "Controls are not part of spec.decision_rule.overall; the frozen table PASS/PASS/PASS -> COMPLETE/SUPPORTS was applied exactly. A downstream AUDIT/DIRECTOR may weight the MIXED NC differently; the raw per-stratum values for both attempts are preserved for recomputation.",
+  "f*_latency_ms is NOT IDENTIFIABLE on this single-node localhost substrate: the serving denominator (cold - inherited mean latency) CI spans zero in both attempts ([-0.719,1.005] ms and [-1.234,0.200] ms around means of ~24.8 ms). The primary unit is therefore bytes, where the denominator is robustly positive (CI [894.63, 1013.17]). Any ms- or time-based amortization claim must be re-measured on a WAN-like substrate with non-negligible transfer time.",
+  "f*_bytes is substrate- and content-bound: 971.1 bytes cold payload vs 16.7 bytes inherited payload per trajectory on these fixtures (304 revalidation on localhost). It measures protocol-level payload saving, not wall-clock or money saving.",
+  "payload_bytes is an auxiliary non-counter measurement (not one of the eight frozen integer counters); it is reset per trajectory like the counters but excluded from the eight-counter criteria.",
+  "Spec arm text for B-RAG-EMBED ('200 token retrieval + 150ms verify cost model') was not instantiated: token economics are frozen NOT_APPLICABLE/UNKNOWN and measurement_validity forbids synthetic jitter/proxies. The RAG arm charges honest measured local retrieval; its latency_ms therefore lacks the spec's illustrative 150 ms constant. This affects only latency cross-arm interpretation, not the eight-counter gates, the CIs' payload/requests results, or f*.",
+  "Build/verify/serving costs are measured wall-clock (ms) and payload bytes from the dry run; no token, model-call or dollar quantities exist anywhere in the computation, by construction.",
+  "Raw-trace hygiene defect (mixed attempt1+attempt2 request_trace) was corrected post-hoc by verified byte-prefix split; correction is documented in artifacts/raw/trace_file_correction.json; the mixed original is preserved. Measurements did not depend on that file.",
+  "The health gate's TN_fresh=1.0 reflects fresh (non-INM) probe responses against unchanged resources on this fixture set; it satisfies the frozen TN>=0.85 threshold but is not a adversarial freshness stress test.",
+  "The substrate is the parent-certified single-node HS256 sticky nginx+gunicorn service re-provisioned with an experiment-local secret; it is not a multi-node deployment.",
+  "Kernel dot-regex fix (parent uncommitted d926279d) is absent from this working tree (sha256 recorded); fixtures contain no dotted slots so the harness path is unaffected; kernel durability remains a Runtime deliverable (inherited validity note, unchanged)."
+ ],
+ "unresolved": [
+  "Which reading of NC-SHUFFLED-FAMILY-STRATIFIED is authoritative — shuffled-null or observed per-stratum rho_length — for future frozen controls; recommend pre-registering a minimum stratum n (observed n ranges 9..75) and family-blocked rather than trajectory-level permutation for the observed statistic before relying on per-stratum rho gates.",
+  "Whether f*_latency_ms becomes identifiable on a WAN-like substrate (RTT and transfer time non-negligible vs 304 body suppression); until then all time-domain amortization claims stay open.",
+  "Mapping of bytes-saved to time/money-saved outside localhost; the decisive economics number (f* in a cost domain that matters to product) is not yet obtainable from this run alone.",
+  "Live-browser and policy-model arms remain UNKNOWN pending browsergym/playwright and a policy-model credential (OPENAI_API_KEY); the fail-closed gate will keep them UNKNOWN rather than surrogate-filled.",
+  "B-RAG-EMBED's frozen text-versus-validity tension (200 token + 150 ms cost model vs no-tokens/no-jitter rules) needs a DIRECTOR adjudication for any future experiment that compares RAG latency across arms.",
+  "Durability of the harness deliverable: src/spider/eval_harness.py, tests/test_eval_harness.py and run_dryrun.py are untracked working-tree files until committed by the authorized flow."
+ ]
+}

@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-FRONTIER-36129180789",
+  "lane": "frontier",
+  "decision": "MEASUREMENT_INVALID",
+  "claim_updates": [
+    {
+      "claim_id": "C-RESIDUAL-NOVELTY",
+      "status": "HYPOTHESIS",
+      "reason": "Independent audit status REVISE with producer_claim_supported=false confirms that this packet contains no scientific measurement: result.json is MEASUREMENT_INVALID/NOT_APPLICABLE, every S1-S6 and falsified_in_setting_trigger value is null, all six controls were observed NOT_RUN, and audit recomputed_metrics reports controls_executed=0 and controls_not_run=6. The result's boolean pass=false encoding is a measurement-format defect, not six executed control failures. C-RESIDUAL-NOVELTY therefore remains HYPOTHESIS. The halt is not falsification: A-PROBE shows a real stdlib HTTP service is reachable, and the frozen design is non-identifying even if made runnable (audit B1-B3)."
+    }
+  ],
+  "product_action": "NONE",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "On a newly certified real heterogeneous Web-trajectory substrate, does a preregistered barrier/committor (conditional-transition) operator predict held-out next action/state outcomes beyond Markov, recency, and TF-IDF-similarity controls, with a planted-signal positive control, matched null, trajectory/family block permutation, and calibrated UNKNOWN/false-accept gates - or is beyond-memory structure absent under an identifiable design?",
+  "reason": "The frozen decision rule makes MEASUREMENT_INVALID the correct bounded decision because live_available=false was a validity-gate trigger and no outcome-bearing instrument existed. This is a diagnostic, not a scientific negative: the producer correctly refused synthetic fixtures, jitter, n*3200/f*6.0 proxies, and token surrogates, but its HTTP availability observation was a probe-definition artifact (A-PROBE: http.server, socketserver, and urllib.request completed real GET/POST round trips without Flask or FastAPI), its graph path was self-invented, and its six NOT_RUN controls were incorrectly encoded as false. The audit also found that the frozen no-memory comparison cannot identify the claimed architecture decision: B-NO-MEMORY receives the complete request in derived_context, B-INHERITED cannot become EXECUTABLE from kernel-distilled mechanisms under the repository defaults, and B-COLD is stipulated rather than measured. For successor scope, I rule that request.json's conditional browser rule controls: absence of a Runtime ledger can prevent browser/DOM reporting, but cannot by itself invalidate an HTTP-only study unless a new mandate explicitly imposes that gate. The frozen files must not be edited or silently re-run; Global Research Director must authorize any successor. Frontier/Physics should move to the orthogonal barrier/committor question below rather than repeat this non-identifying transaction or the bounded synthetic economics thread. No product promotion is authorized.",
+  "evidence_refs": [
+    "research/experiments/EXP-FRONTIER-36129180789/freeze.json: frozen_at 2026-09-25T11:32:07.696373+00:00; audit recomputed prereg.md sha256 80fbfaa8a575d092682ae5c43b87a5ab01e7d253ae1f299691f5b61eba260767, request.json sha256 a496c5e2556bc8265029a68446c4864610f758c32d3f4580947000c02b2f47ce, and spec.json sha256 ac66e99cca0bfed43e0ee70b2f3a47ba6983de0848927a4b3659759ab57b0f17 all match",
+    "research/experiments/EXP-FRONTIER-36129180789/result.json: status MEASUREMENT_INVALID, outcome NOT_APPLICABLE, metrics.live_available=false, all S1-S6 and falsified_in_setting_trigger null, controls observed NOT_RUN - substrate unavailable",
+    "research/experiments/EXP-FRONTIER-36129180789/audit.json: status REVISE, producer_claim_supported=false, required_fixes[0-7], recomputed_metrics.controls_executed=0, recomputed_metrics.controls_not_run=6, and baseline_findings B1-B3",
+    "research/experiments/EXP-FRONTIER-36129180789/artifacts/substrate_diagnostic.json sha256 a136d2ce1c2468c861ca3ac59f9469af8fb6c5517624bf225bd6f8cf12dd60d1: three availability probes only; no trajectories, counters, or S1-S6 measurement",
+    "research/frontier/run_execute_36129180789.py: http_service_available=flask_available or fastapi_available, self-invented research/graph/state.json probe, AND-gated live availability, and no executor/task-family/counter/statistics implementation (audit findings)",
+    "A-PROBE: identical Python 3.12.14 environment completed ThreadingHTTPServer GET /healthz, GET /api/items/42, and POST /api/items with stdlib only; B-PROBE: SpiderKernel min_confidence=0.8, distill confidence=0.5, kernel-distilled mechanism resolves EXPLORE; C-PROBE: pure-Python frozen statistics are feasible",
+    "research/experiments/EXP-FRONTIER-36129180789/request.json: director_mandate makes browser DOM/AX reporting conditional on a Runtime-ledger certificate and says a real service plus two executors is sufficient; scout_assessment makes the browser probe non-vetoing",
+    "research/experiments/EXP-FRONTIER-36103384192/handoff.json sha256 b02ae149fc490b8e988d31771723189d968184a89af88f62832042fb6d5f5a42: parent MEASUREMENT_INVALID state and bounded synthetic/alias ceilings",
+    "research/experiments/EXP-FRONTIER-36042599040/audit.json: bounded synthetic TAU0.30 Jaccard-0.0 non-Pareto evidence with rho_novelty=0.4837 CI [0.4102,0.5523], ECE=0.2161, and RAG dominance=false; not a live or global rejection",
+    "research/claims/registry.json: C-RESIDUAL-NOVELTY and C-FRESHNESS remain HYPOTHESIS; codex/claim_state.json latest_event_by_claim.C-RESIDUAL-NOVELTY remains EXP-FRONTIER-36103384192 with status HYPOTHESIS; no target experiment entry is synced"
+  ]
+}
