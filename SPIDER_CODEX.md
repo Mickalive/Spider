@@ -4,7 +4,7 @@ Pre-2.0 canonical memory remains frozen at `archive/spider-codex-ultimate:SPIDER
 
 Canonical Research 2.0 evidence lives in `codex/experiments/<experiment_id>/`.
 Use `codex/index.json` and `codex/claim_state.json` to locate relevant packets; do not load all experiment bodies by default.
-Validated experiments: **389**. Coverage gaps: **0**. Quarantined packets: **2**.
+Validated experiments: **390**. Coverage gaps: **0**. Quarantined packets: **2**.
 
 ## Experiment index
 
@@ -398,6 +398,7 @@ Validated experiments: **389**. Coverage gaps: **0**. Quarantined packets: **2**
 | EXP-PRODUCT-36129169543 | product | PASS | ACCEPT_INSTRUMENT_READINESS_ONLY | C-PRODUCT-ECON | `5e692f1f4634` |
 | EXP-FRONTIER-36129180789 | frontier | REVISE | MEASUREMENT_INVALID | C-RESIDUAL-NOVELTY | `7b8bb3ffeb63` |
 | EXP-GRAPH-36132150213 | graph | PASS | MEASUREMENT_INVALID | C-FRESHNESS | `6a72f03353a8` |
+| EXP-PRODUCT-36249064252 | product | PASS | ACCEPT_MECHANISM_IN_SETTING_COMPOUND_GATE_FAIL_ECONOMIC_HALF_NON_IDENTIFYING | C-PARAM-INHERIT | `61eb4fb53675` |
 | EXP-INTEL-36249068574 | intel | REVISE | INTEL verification complete (MV1-MV6 PASS): verified external deterministic-compilation literature specifies the no-memory deterministic executor baseline (MV6) and published cross-site evidence favors hierarchical Intent/Stage/Action over flat fragment reuse on benchmarks; however, task distribution incomparability (MV3 PARTIAL) and compilation-vs-inheritance conflation mean the external convergence does not constitute a clean falsification of SPIDER's compilation-bypass direction per the frozen decision_rule. Producer outcome misclassified (MIXED) relative to spec; audit ceiling bounds claims. Claims updated conservatively. | C-PRODUCT-ECON, C-CROSSSITE, C-RESIDUAL-NOVELTY | `a076102f078b` |
 
 ## Latest recorded claim events
@@ -411,7 +412,7 @@ These are chronological latest events, not an automatic truth ranking.
 | C-FRESHNESS | HYPOTHESIS | EXP-GRAPH-36132150213 | graph |
 | C-LLM-INHERIT | MEASUREMENT_INVALID | EXP-PRODUCT-36091881382 | product |
 | C-MEAS-VALID | MEASUREMENT_INVALID | EXP-RUNTIME-36106663091 | runtime |
-| C-PARAM-INHERIT | MEASUREMENT_INVALID | EXP-GRAPH-36118890504 | graph |
+| C-PARAM-INHERIT | EXPERIMENTAL | EXP-PRODUCT-36249064252 | product |
 | C-PRODUCT-ECON | HYPOTHESIS | EXP-INTEL-36249068574 | intel |
 | C-RESIDUAL-NOVELTY | HYPOTHESIS | EXP-INTEL-36249068574 | intel |
 | C-SEMANTIC-RESOLVE | HYPOTHESIS | EXP-FRONTIER-36052053591 | frontier |
