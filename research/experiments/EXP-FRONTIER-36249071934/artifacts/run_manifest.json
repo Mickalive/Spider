@@ -1,0 +1,43 @@
+{
+  "artifact_sha256": {
+    "availability_probe.json": "30ab5b1c652479cb375d45329a867c50851ce022fad855429f64065954d27302",
+    "control_spans_nc_zero_determinism.jsonl": "a8390782effe31bd0412aed4505810fa780d5bf42b2d8de04f78467439ec0ccd",
+    "control_spans_pc_exact_replay.jsonl": "d16973dda4acb642b8cc395702a7663b95edf5cd078d1c0237ce036ca3003fef",
+    "control_spans_pc_witnessed_determinism.jsonl": "71ac3800d1a2e51aeb8c4c1082eb560b7b97eb4e6b291b8c081251923f19c538",
+    "controls.json": "8a2b92bd927438c861cf1561757e39313bf06525e2b017b7e401728856d4945f",
+    "derived_metrics.json": "c127065b8d7d39e8cdbcfbdf14dca649627a9f0b3db99cd7fee9f615dd09e7d2",
+    "episodes_cold-exploration.jsonl": "6871ddac7411d0d3f1478a65b7c315376523b79e6cb234143ce058fb534701bb",
+    "episodes_inherited-spider.jsonl": "dc2b04fe502dfe1c65c2778a2bae474b716465efb3b5e4f387c28ed71c3fe6b4",
+    "episodes_no-memory-deterministic.jsonl": "2369bde197056271809dd3877c8ddb857b63d650da3cf60004e13bcab0eb30b7",
+    "kernel_probe.json": "5d3e35a3756d324cc2202fd3296797553021ae23d15d5e86a94a02ef8db7e783",
+    "matched_task_instances_check.json": "4dfe5829acf7f2a427d38633b982b79b07e17f22e7cdb05dbf2b383710417a05",
+    "sensitivity_novelty_sweep.json": "aacb76444fd6222ddb40418ead398ed56e893aaf5a8d3987cf7c2f6766ef3d5c",
+    "spans_cold-exploration.jsonl": "7c97a55b94fc8355514e9a87a81dea2ac24b0532f8012daf834677dee61d06d5",
+    "spans_inherited-spider.jsonl": "ad5fd3519cbc0bc299b986c864ff45b50ba83d8373a251ab0079bd315054fd43",
+    "spans_no-memory-deterministic.jsonl": "af5c4291927cee9febc05835ebb6881647355d1255f72c13eb3590b5e45a363b",
+    "substrate_determinism_check.json": "e23ba2360a00c826d9182fe99cff3719d7c899b61d2eef911bcd0dd1f884c00c"
+  },
+  "code_paths": [
+    "research/frontier/substrate_deterministic_http.py",
+    "research/frontier/taskplan.py",
+    "research/frontier/measure.py",
+    "research/frontier/arms/__init__.py",
+    "research/frontier/arms/common.py",
+    "research/frontier/arms/deopt_ratchet.py",
+    "research/frontier/arms/inherited_spider.py",
+    "research/frontier/arms/cold_exploration.py",
+    "research/frontier/run_experiment_EXP_FRONTIER_36249071934.py"
+  ],
+  "cwd": "/home/runner/work/Spider/Spider",
+  "experiment_id": "EXP-FRONTIER-36249071934",
+  "git_head": "e178d5b18b5a935c39a4815cad21a952fb054a5c",
+  "git_status_porcelain": "?? research/experiments/EXP-FRONTIER-36249071934/artifacts/\n?? research/experiments/EXP-FRONTIER-36249071934/model_execute.json\n?? research/frontier/__init__.py\n?? research/frontier/arms/\n?? research/frontier/measure.py\n?? research/frontier/run_experiment_EXP_FRONTIER_36249071934.py\n?? research/frontier/substrate_deterministic_http.py\n?? research/frontier/taskplan.py",
+  "platform": "Linux-6.17.0-1022-azure-x86_64-with-glibc2.39",
+  "python": "3.12.14 (main, Aug 13 2026, 02:47:42) [GCC 13.3.0]",
+  "shipped_kernel_imported_unmodified": [
+    "src/spider/kernel.py",
+    "src/spider/models.py",
+    "src/spider/registry.py"
+  ],
+  "wall_time_seconds": 559.185
+}

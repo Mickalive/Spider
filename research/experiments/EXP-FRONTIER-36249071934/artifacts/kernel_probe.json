@@ -1,0 +1,26 @@
+{
+  "diagnostic_note": "min_confidence=0.5 is a DIAGNOSTIC probe showing the binding constraint is the confidence gate, not applicability. No arm uses it.",
+  "diagnostic_resolve_at_min_confidence_0_5_status": "EXECUTABLE",
+  "distill_confidence": 0.5,
+  "distill_populates_applicability_guards": false,
+  "distill_populates_failure_boundary": false,
+  "distill_populates_freshness": false,
+  "distill_populates_parameter_slots": false,
+  "distill_populates_repair_scope": false,
+  "distill_populates_verification_rule": false,
+  "kernel_min_confidence": 0.8,
+  "registry_empty_after_distill_no_upsert": true,
+  "registry_empty_before_distill": true,
+  "resolve_exact_confidence": 0.5,
+  "resolve_exact_intent_and_preconditions_reason": "candidate exists but confidence is below execution threshold",
+  "resolve_exact_intent_and_preconditions_status": "EXPLORE",
+  "resolve_paraphrased_intent_status": "UNKNOWN",
+  "shipped_confidence_literals": [
+    [
+      "src/spider/kernel.py",
+      0.5
+    ]
+  ],
+  "shipped_has_distill_parameterized": false,
+  "verify_returns": true
+}

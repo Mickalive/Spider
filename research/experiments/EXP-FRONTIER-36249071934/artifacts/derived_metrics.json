@@ -1,0 +1,2342 @@
+{
+  "arms": {
+    "B-COLD-EXPLORATION": {
+      "compile_events_per_episode": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "compiled_replays_per_episode": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "decision_path_counts": {
+        "DEOPT_TO_MODEL_UNKNOWN": 1200
+      },
+      "determinism": {
+        "determinism_fraction": 0.5833333333333334,
+        "deterministic_spans": 700,
+        "rule": "span signature identical across >=2 episodes (prereg.md 7.1)",
+        "total_spans": 1200,
+        "wilson_ci95": [
+          0.5552167229809802,
+          0.6109181102518974
+        ]
+      },
+      "determinism_fraction_by_episode_10_20_30_40_50": {
+        "10": 0.5238095238095238,
+        "20": 0.5238095238095238,
+        "30": 0.5238095238095238,
+        "40": 0.5238095238095238,
+        "50": 0.5238095238095238
+      },
+      "determinism_histogram_of_witness_counts": {
+        "1": 500,
+        "50": 700
+      },
+      "determinism_vs_compilability": {
+        "compilable_given_deterministic": 0.0,
+        "compiled_share_of_all_spans": 0.0,
+        "deterministic_but_deopted": 700,
+        "deterministic_but_deopted_by_role_workitem": {
+          "create_resource|2": 50,
+          "create_resource|3": 50,
+          "delete_resource|2": 50,
+          "delete_resource|3": 50,
+          "entry_point|0": 50,
+          "entry_point|1": 50,
+          "entry_point|2": 50,
+          "entry_point|3": 50,
+          "list_resources|2": 50,
+          "list_resources|3": 50,
+          "read_resource|2": 50,
+          "read_resource|3": 50,
+          "update_resource|2": 50,
+          "update_resource|3": 50
+        },
+        "deterministic_but_deopted_cache_ambiguous": 0,
+        "deterministic_but_deopted_cache_entry_absent": 700,
+        "deterministic_fraction": 0.5833333333333334,
+        "deterministic_occurrences": 700,
+        "served_by_compiled_replay": 0,
+        "total_span_occurrences": 1200
+      },
+      "episode_amortized_cost_units": [
+        72.0,
+        72.0,
+        72.0,
+        72.0,
+        72.0,
+        72.0,
+        72.0,
+        72.0,
+        72.0,
+        72.0,
+        72.0,
+        72.0,
+        72.0,
+        72.0,
+        72.0,
+        72.0,
+        72.0,
+        72.0,
+        72.0,
+        72.0,
+        72.0,
+        72.0,
+        72.0,
+        72.0,
+        72.0,
+        72.0,
+        72.0,
+        72.0,
+        72.0,
+        72.0,
+        72.0,
+        72.0,
+        72.0,
+        72.0,
+        72.0,
+        72.0,
+        72.0,
+        72.0,
+        72.0,
+        72.0,
+        72.0,
+        72.0,
+        72.0,
+        72.0,
+        72.0,
+        72.0,
+        72.0,
+        72.0,
+        72.0,
+        72.0
+      ],
+      "learning_curve": [
+        {
+          "cumulative_determinism_fraction": 0.5238095238095238,
+          "cumulative_deterministic_unique_spans": 11,
+          "cumulative_unique_spans": 21,
+          "episode": 1,
+          "episode_deterministic_unique_spans": 11,
+          "episode_unique_spans": 21
+        },
+        {
+          "cumulative_determinism_fraction": 0.5238095238095238,
+          "cumulative_deterministic_unique_spans": 22,
+          "cumulative_unique_spans": 42,
+          "episode": 2,
+          "episode_deterministic_unique_spans": 11,
+          "episode_unique_spans": 21
+        },
+        {
+          "cumulative_determinism_fraction": 0.5238095238095238,
+          "cumulative_deterministic_unique_spans": 33,
+          "cumulative_unique_spans": 63,
+          "episode": 3,
+          "episode_deterministic_unique_spans": 11,
+          "episode_unique_spans": 21
+        },
+        {
+          "cumulative_determinism_fraction": 0.5238095238095238,
+          "cumulative_deterministic_unique_spans": 44,
+          "cumulative_unique_spans": 84,
+          "episode": 4,
+          "episode_deterministic_unique_spans": 11,
+          "episode_unique_spans": 21
+        },
+        {
+          "cumulative_determinism_fraction": 0.5238095238095238,
+          "cumulative_deterministic_unique_spans": 55,
+          "cumulative_unique_spans": 105,
+          "episode": 5,
+          "episode_deterministic_unique_spans": 11,
+          "episode_unique_spans": 21
+        },
+        {
+          "cumulative_determinism_fraction": 0.5238095238095238,
+          "cumulative_deterministic_unique_spans": 66,
+          "cumulative_unique_spans": 126,
+          "episode": 6,
+          "episode_deterministic_unique_spans": 11,
+          "episode_unique_spans": 21
+        },
+        {
+          "cumulative_determinism_fraction": 0.5238095238095238,
+          "cumulative_deterministic_unique_spans": 77,
+          "cumulative_unique_spans": 147,
+          "episode": 7,
+          "episode_deterministic_unique_spans": 11,
+          "episode_unique_spans": 21
+        },
+        {
+          "cumulative_determinism_fraction": 0.5238095238095238,
+          "cumulative_deterministic_unique_spans": 88,
+          "cumulative_unique_spans": 168,
+          "episode": 8,
+          "episode_deterministic_unique_spans": 11,
+          "episode_unique_spans": 21
+        },
+        {
+          "cumulative_determinism_fraction": 0.5238095238095238,
+          "cumulative_deterministic_unique_spans": 99,
+          "cumulative_unique_spans": 189,
+          "episode": 9,
+          "episode_deterministic_unique_spans": 11,
+          "episode_unique_spans": 21
+        },
+        {
+          "cumulative_determinism_fraction": 0.5238095238095238,
+          "cumulative_deterministic_unique_spans": 110,
+          "cumulative_unique_spans": 210,
+          "episode": 10,
+          "episode_deterministic_unique_spans": 11,
+          "episode_unique_spans": 21
+        },
+        {
+          "cumulative_determinism_fraction": 0.5238095238095238,
+          "cumulative_deterministic_unique_spans": 121,
+          "cumulative_unique_spans": 231,
+          "episode": 11,
+          "episode_deterministic_unique_spans": 11,
+          "episode_unique_spans": 21
+        },
+        {
+          "cumulative_determinism_fraction": 0.5238095238095238,
+          "cumulative_deterministic_unique_spans": 132,
+          "cumulative_unique_spans": 252,
+          "episode": 12,
+          "episode_deterministic_unique_spans": 11,
+          "episode_unique_spans": 21
+        },
+        {
+          "cumulative_determinism_fraction": 0.5238095238095238,
+          "cumulative_deterministic_unique_spans": 143,
+          "cumulative_unique_spans": 273,
+          "episode": 13,
+          "episode_deterministic_unique_spans": 11,
+          "episode_unique_spans": 21
+        },
+        {
+          "cumulative_determinism_fraction": 0.5238095238095238,
+          "cumulative_deterministic_unique_spans": 154,
+          "cumulative_unique_spans": 294,
+          "episode": 14,
+          "episode_deterministic_unique_spans": 11,
+          "episode_unique_spans": 21
+        },
+        {
+          "cumulative_determinism_fraction": 0.5238095238095238,
+          "cumulative_deterministic_unique_spans": 165,
+          "cumulative_unique_spans": 315,
+          "episode": 15,
+          "episode_deterministic_unique_spans": 11,
+          "episode_unique_spans": 21
+        },
+        {
+          "cumulative_determinism_fraction": 0.5238095238095238,
+          "cumulative_deterministic_unique_spans": 176,
+          "cumulative_unique_spans": 336,
+          "episode": 16,
+          "episode_deterministic_unique_spans": 11,
+          "episode_unique_spans": 21
+        },
+        {
+          "cumulative_determinism_fraction": 0.5238095238095238,
+          "cumulative_deterministic_unique_spans": 187,
+          "cumulative_unique_spans": 357,
+          "episode": 17,
+          "episode_deterministic_unique_spans": 11,
+          "episode_unique_spans": 21
+        },
+        {
+          "cumulative_determinism_fraction": 0.5238095238095238,
+          "cumulative_deterministic_unique_spans": 198,
+          "cumulative_unique_spans": 378,
+          "episode": 18,
+          "episode_deterministic_unique_spans": 11,
+          "episode_unique_spans": 21
+        },
+        {
+          "cumulative_determinism_fraction": 0.5238095238095238,
+          "cumulative_deterministic_unique_spans": 209,
+          "cumulative_unique_spans": 399,
+          "episode": 19,
+          "episode_deterministic_unique_spans": 11,
+          "episode_unique_spans": 21
+        },
+        {
+          "cumulative_determinism_fraction": 0.5238095238095238,
+          "cumulative_deterministic_unique_spans": 220,
+          "cumulative_unique_spans": 420,
+          "episode": 20,
+          "episode_deterministic_unique_spans": 11,
+          "episode_unique_spans": 21
+        },
+        {
+          "cumulative_determinism_fraction": 0.5238095238095238,
+          "cumulative_deterministic_unique_spans": 231,
+          "cumulative_unique_spans": 441,
+          "episode": 21,
+          "episode_deterministic_unique_spans": 11,
+          "episode_unique_spans": 21
+        },
+        {
+          "cumulative_determinism_fraction": 0.5238095238095238,
+          "cumulative_deterministic_unique_spans": 242,
+          "cumulative_unique_spans": 462,
+          "episode": 22,
+          "episode_deterministic_unique_spans": 11,
+          "episode_unique_spans": 21
+        },
+        {
+          "cumulative_determinism_fraction": 0.5238095238095238,
+          "cumulative_deterministic_unique_spans": 253,
+          "cumulative_unique_spans": 483,
+          "episode": 23,
+          "episode_deterministic_unique_spans": 11,
+          "episode_unique_spans": 21
+        },
+        {
+          "cumulative_determinism_fraction": 0.5238095238095238,
+          "cumulative_deterministic_unique_spans": 264,
+          "cumulative_unique_spans": 504,
+          "episode": 24,
+          "episode_deterministic_unique_spans": 11,
+          "episode_unique_spans": 21
+        },
+        {
+          "cumulative_determinism_fraction": 0.5238095238095238,
+          "cumulative_deterministic_unique_spans": 275,
+          "cumulative_unique_spans": 525,
+          "episode": 25,
+          "episode_deterministic_unique_spans": 11,
+          "episode_unique_spans": 21
+        },
+        {
+          "cumulative_determinism_fraction": 0.5238095238095238,
+          "cumulative_deterministic_unique_spans": 286,
+          "cumulative_unique_spans": 546,
+          "episode": 26,
+          "episode_deterministic_unique_spans": 11,
+          "episode_unique_spans": 21
+        },
+        {
+          "cumulative_determinism_fraction": 0.5238095238095238,
+          "cumulative_deterministic_unique_spans": 297,
+          "cumulative_unique_spans": 567,
+          "episode": 27,
+          "episode_deterministic_unique_spans": 11,
+          "episode_unique_spans": 21
+        },
+        {
+          "cumulative_determinism_fraction": 0.5238095238095238,
+          "cumulative_deterministic_unique_spans": 308,
+          "cumulative_unique_spans": 588,
+          "episode": 28,
+          "episode_deterministic_unique_spans": 11,
+          "episode_unique_spans": 21
+        },
+        {
+          "cumulative_determinism_fraction": 0.5238095238095238,
+          "cumulative_deterministic_unique_spans": 319,
+          "cumulative_unique_spans": 609,
+          "episode": 29,
+          "episode_deterministic_unique_spans": 11,
+          "episode_unique_spans": 21
+        },
+        {
+          "cumulative_determinism_fraction": 0.5238095238095238,
+          "cumulative_deterministic_unique_spans": 330,
+          "cumulative_unique_spans": 630,
+          "episode": 30,
+          "episode_deterministic_unique_spans": 11,
+          "episode_unique_spans": 21
+        },
+        {
+          "cumulative_determinism_fraction": 0.5238095238095238,
+          "cumulative_deterministic_unique_spans": 341,
+          "cumulative_unique_spans": 651,
+          "episode": 31,
+          "episode_deterministic_unique_spans": 11,
+          "episode_unique_spans": 21
+        },
+        {
+          "cumulative_determinism_fraction": 0.5238095238095238,
+          "cumulative_deterministic_unique_spans": 352,
+          "cumulative_unique_spans": 672,
+          "episode": 32,
+          "episode_deterministic_unique_spans": 11,
+          "episode_unique_spans": 21
+        },
+        {
+          "cumulative_determinism_fraction": 0.5238095238095238,
+          "cumulative_deterministic_unique_spans": 363,
+          "cumulative_unique_spans": 693,
+          "episode": 33,
+          "episode_deterministic_unique_spans": 11,
+          "episode_unique_spans": 21
+        },
+        {
+          "cumulative_determinism_fraction": 0.5238095238095238,
+          "cumulative_deterministic_unique_spans": 374,
+          "cumulative_unique_spans": 714,
+          "episode": 34,
+          "episode_deterministic_unique_spans": 11,
+          "episode_unique_spans": 21
+        },
+        {
+          "cumulative_determinism_fraction": 0.5238095238095238,
+          "cumulative_deterministic_unique_spans": 385,
+          "cumulative_unique_spans": 735,
+          "episode": 35,
+          "episode_deterministic_unique_spans": 11,
+          "episode_unique_spans": 21
+        },
+        {
+          "cumulative_determinism_fraction": 0.5238095238095238,
+          "cumulative_deterministic_unique_spans": 396,
+          "cumulative_unique_spans": 756,
+          "episode": 36,
+          "episode_deterministic_unique_spans": 11,
+          "episode_unique_spans": 21
+        },
+        {
+          "cumulative_determinism_fraction": 0.5238095238095238,
+          "cumulative_deterministic_unique_spans": 407,
+          "cumulative_unique_spans": 777,
+          "episode": 37,
+          "episode_deterministic_unique_spans": 11,
+          "episode_unique_spans": 21
+        },
+        {
+          "cumulative_determinism_fraction": 0.5238095238095238,
+          "cumulative_deterministic_unique_spans": 418,
+          "cumulative_unique_spans": 798,
+          "episode": 38,
+          "episode_deterministic_unique_spans": 11,
+          "episode_unique_spans": 21
+        },
+        {
+          "cumulative_determinism_fraction": 0.5238095238095238,
+          "cumulative_deterministic_unique_spans": 429,
+          "cumulative_unique_spans": 819,
+          "episode": 39,
+          "episode_deterministic_unique_spans": 11,
+          "episode_unique_spans": 21
+        },
+        {
+          "cumulative_determinism_fraction": 0.5238095238095238,
+          "cumulative_deterministic_unique_spans": 440,
+          "cumulative_unique_spans": 840,
+          "episode": 40,
+          "episode_deterministic_unique_spans": 11,
+          "episode_unique_spans": 21
+        },
+        {
+          "cumulative_determinism_fraction": 0.5238095238095238,
+          "cumulative_deterministic_unique_spans": 451,
+          "cumulative_unique_spans": 861,
+          "episode": 41,
+          "episode_deterministic_unique_spans": 11,
+          "episode_unique_spans": 21
+        },
+        {
+          "cumulative_determinism_fraction": 0.5238095238095238,
+          "cumulative_deterministic_unique_spans": 462,
+          "cumulative_unique_spans": 882,
+          "episode": 42,
+          "episode_deterministic_unique_spans": 11,
+          "episode_unique_spans": 21
+        },
+        {
+          "cumulative_determinism_fraction": 0.5238095238095238,
+          "cumulative_deterministic_unique_spans": 473,
+          "cumulative_unique_spans": 903,
+          "episode": 43,
+          "episode_deterministic_unique_spans": 11,
+          "episode_unique_spans": 21
+        },
+        {
+          "cumulative_determinism_fraction": 0.5238095238095238,
+          "cumulative_deterministic_unique_spans": 484,
+          "cumulative_unique_spans": 924,
+          "episode": 44,
+          "episode_deterministic_unique_spans": 11,
+          "episode_unique_spans": 21
+        },
+        {
+          "cumulative_determinism_fraction": 0.5238095238095238,
+          "cumulative_deterministic_unique_spans": 495,
+          "cumulative_unique_spans": 945,
+          "episode": 45,
+          "episode_deterministic_unique_spans": 11,
+          "episode_unique_spans": 21
+        },
+        {
+          "cumulative_determinism_fraction": 0.5238095238095238,
+          "cumulative_deterministic_unique_spans": 506,
+          "cumulative_unique_spans": 966,
+          "episode": 46,
+          "episode_deterministic_unique_spans": 11,
+          "episode_unique_spans": 21
+        },
+        {
+          "cumulative_determinism_fraction": 0.5238095238095238,
+          "cumulative_deterministic_unique_spans": 517,
+          "cumulative_unique_spans": 987,
+          "episode": 47,
+          "episode_deterministic_unique_spans": 11,
+          "episode_unique_spans": 21
+        },
+        {
+          "cumulative_determinism_fraction": 0.5238095238095238,
+          "cumulative_deterministic_unique_spans": 528,
+          "cumulative_unique_spans": 1008,
+          "episode": 48,
+          "episode_deterministic_unique_spans": 11,
+          "episode_unique_spans": 21
+        },
+        {
+          "cumulative_determinism_fraction": 0.5238095238095238,
+          "cumulative_deterministic_unique_spans": 539,
+          "cumulative_unique_spans": 1029,
+          "episode": 49,
+          "episode_deterministic_unique_spans": 11,
+          "episode_unique_spans": 21
+        },
+        {
+          "cumulative_determinism_fraction": 0.5238095238095238,
+          "cumulative_deterministic_unique_spans": 550,
+          "cumulative_unique_spans": 1050,
+          "episode": 50,
+          "episode_deterministic_unique_spans": 11,
+          "episode_unique_spans": 21
+        }
+      ],
+      "ledger": {
+        "amortized_cost_units_per_episode": 72.0,
+        "compile_units": 0,
+        "component_detail": {
+          "execution": 1200,
+          "machinery": 1200,
+          "model": 1200,
+          "resolve_calls": 1200,
+          "resolve_unknown": 1200
+        },
+        "episodes": 50,
+        "execution_units": 1200,
+        "machinery_units": 1200,
+        "model_units": 1200,
+        "total_units": 3600
+      },
+      "model_calls_per_episode": [
+        24,
+        24,
+        24,
+        24,
+        24,
+        24,
+        24,
+        24,
+        24,
+        24,
+        24,
+        24,
+        24,
+        24,
+        24,
+        24,
+        24,
+        24,
+        24,
+        24,
+        24,
+        24,
+        24,
+        24,
+        24,
+        24,
+        24,
+        24,
+        24,
+        24,
+        24,
+        24,
+        24,
+        24,
+        24,
+        24,
+        24,
+        24,
+        24,
+        24,
+        24,
+        24,
+        24,
+        24,
+        24,
+        24,
+        24,
+        24,
+        24,
+        24
+      ],
+      "residual_novelty": {
+        "model_calls_by_arm": {
+          "B-COLD-EXPLORATION": 1200
+        },
+        "tiers": {
+          "never_seen": {
+            "compiled_replays": 0,
+            "model_calls": 511,
+            "spans": 511
+          },
+          "seen_multiple": {
+            "compiled_replays": 0,
+            "model_calls": 675,
+            "spans": 675
+          },
+          "seen_once": {
+            "compiled_replays": 0,
+            "model_calls": 14,
+            "spans": 14
+          }
+        }
+      },
+      "span_signature_diversity": 511,
+      "success_episodes": 50,
+      "success_rate": 1.0
+    },
+    "B-INHERITED-SPIDER": {
+      "compile_events_per_episode": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "compiled_replays_per_episode": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "decision_path_counts": {
+        "DEOPT_TO_MODEL_EXPLORE": 689,
+        "DEOPT_TO_MODEL_UNKNOWN": 511
+      },
+      "determinism": {
+        "determinism_fraction": 0.5833333333333334,
+        "deterministic_spans": 700,
+        "rule": "span signature identical across >=2 episodes (prereg.md 7.1)",
+        "total_spans": 1200,
+        "wilson_ci95": [
+          0.5552167229809802,
+          0.6109181102518974
+        ]
+      },
+      "determinism_fraction_by_episode_10_20_30_40_50": {
+        "10": 0.5238095238095238,
+        "20": 0.5238095238095238,
+        "30": 0.5238095238095238,
+        "40": 0.5238095238095238,
+        "50": 0.5238095238095238
+      },
+      "determinism_histogram_of_witness_counts": {
+        "1": 500,
+        "50": 700
+      },
+      "determinism_vs_compilability": {
+        "compilable_given_deterministic": 0.0,
+        "compiled_share_of_all_spans": 0.0,
+        "deterministic_but_deopted": 700,
+        "deterministic_but_deopted_by_role_workitem": {
+          "create_resource|2": 50,
+          "create_resource|3": 50,
+          "delete_resource|2": 50,
+          "delete_resource|3": 50,
+          "entry_point|0": 50,
+          "entry_point|1": 50,
+          "entry_point|2": 50,
+          "entry_point|3": 50,
+          "list_resources|2": 50,
+          "list_resources|3": 50,
+          "read_resource|2": 50,
+          "read_resource|3": 50,
+          "update_resource|2": 50,
+          "update_resource|3": 50
+        },
+        "deterministic_but_deopted_cache_ambiguous": 0,
+        "deterministic_but_deopted_cache_entry_absent": 700,
+        "deterministic_fraction": 0.5833333333333334,
+        "deterministic_occurrences": 700,
+        "served_by_compiled_replay": 0,
+        "total_span_occurrences": 1200
+      },
+      "distill_calls": 24,
+      "episode_amortized_cost_units": [
+        72.0,
+        72.0,
+        72.0,
+        72.0,
+        72.0,
+        72.0,
+        72.0,
+        72.0,
+        72.0,
+        72.0,
+        72.0,
+        72.0,
+        72.0,
+        72.0,
+        72.0,
+        72.0,
+        72.0,
+        72.0,
+        72.0,
+        72.0,
+        72.0,
+        72.0,
+        72.0,
+        72.0,
+        72.0,
+        72.0,
+        72.0,
+        72.0,
+        72.0,
+        72.0,
+        72.0,
+        72.0,
+        72.0,
+        72.0,
+        72.0,
+        72.0,
+        72.0,
+        72.0,
+        72.0,
+        72.0,
+        72.0,
+        72.0,
+        72.0,
+        72.0,
+        72.0,
+        72.0,
+        72.0,
+        72.0,
+        72.0,
+        72.0
+      ],
+      "kernel_config": {
+        "kernel_class": "SpiderKernel",
+        "kernel_module": "spider.kernel",
+        "min_confidence": 0.8,
+        "registry_path": "/tmp/spider-inherit-wakfm1_u/registry.jsonl"
+      },
+      "learning_curve": [
+        {
+          "cumulative_determinism_fraction": 0.5238095238095238,
+          "cumulative_deterministic_unique_spans": 11,
+          "cumulative_unique_spans": 21,
+          "episode": 1,
+          "episode_deterministic_unique_spans": 11,
+          "episode_unique_spans": 21
+        },
+        {
+          "cumulative_determinism_fraction": 0.5238095238095238,
+          "cumulative_deterministic_unique_spans": 22,
+          "cumulative_unique_spans": 42,
+          "episode": 2,
+          "episode_deterministic_unique_spans": 11,
+          "episode_unique_spans": 21
+        },
+        {
+          "cumulative_determinism_fraction": 0.5238095238095238,
+          "cumulative_deterministic_unique_spans": 33,
+          "cumulative_unique_spans": 63,
+          "episode": 3,
+          "episode_deterministic_unique_spans": 11,
+          "episode_unique_spans": 21
+        },
+        {
+          "cumulative_determinism_fraction": 0.5238095238095238,
+          "cumulative_deterministic_unique_spans": 44,
+          "cumulative_unique_spans": 84,
+          "episode": 4,
+          "episode_deterministic_unique_spans": 11,
+          "episode_unique_spans": 21
+        },
+        {
+          "cumulative_determinism_fraction": 0.5238095238095238,
+          "cumulative_deterministic_unique_spans": 55,
+          "cumulative_unique_spans": 105,
+          "episode": 5,
+          "episode_deterministic_unique_spans": 11,
+          "episode_unique_spans": 21
+        },
+        {
+          "cumulative_determinism_fraction": 0.5238095238095238,
+          "cumulative_deterministic_unique_spans": 66,
+          "cumulative_unique_spans": 126,
+          "episode": 6,
+          "episode_deterministic_unique_spans": 11,
+          "episode_unique_spans": 21
+        },
+        {
+          "cumulative_determinism_fraction": 0.5238095238095238,
+          "cumulative_deterministic_unique_spans": 77,
+          "cumulative_unique_spans": 147,
+          "episode": 7,
+          "episode_deterministic_unique_spans": 11,
+          "episode_unique_spans": 21
+        },
+        {
+          "cumulative_determinism_fraction": 0.5238095238095238,
+          "cumulative_deterministic_unique_spans": 88,
+          "cumulative_unique_spans": 168,
+          "episode": 8,
+          "episode_deterministic_unique_spans": 11,
+          "episode_unique_spans": 21
+        },
+        {
+          "cumulative_determinism_fraction": 0.5238095238095238,
+          "cumulative_deterministic_unique_spans": 99,
+          "cumulative_unique_spans": 189,
+          "episode": 9,
+          "episode_deterministic_unique_spans": 11,
+          "episode_unique_spans": 21
+        },
+        {
+          "cumulative_determinism_fraction": 0.5238095238095238,
+          "cumulative_deterministic_unique_spans": 110,
+          "cumulative_unique_spans": 210,
+          "episode": 10,
+          "episode_deterministic_unique_spans": 11,
+          "episode_unique_spans": 21
+        },
+        {
+          "cumulative_determinism_fraction": 0.5238095238095238,
+          "cumulative_deterministic_unique_spans": 121,
+          "cumulative_unique_spans": 231,
+          "episode": 11,
+          "episode_deterministic_unique_spans": 11,
+          "episode_unique_spans": 21
+        },
+        {
+          "cumulative_determinism_fraction": 0.5238095238095238,
+          "cumulative_deterministic_unique_spans": 132,
+          "cumulative_unique_spans": 252,
+          "episode": 12,
+          "episode_deterministic_unique_spans": 11,
+          "episode_unique_spans": 21
+        },
+        {
+          "cumulative_determinism_fraction": 0.5238095238095238,
+          "cumulative_deterministic_unique_spans": 143,
+          "cumulative_unique_spans": 273,
+          "episode": 13,
+          "episode_deterministic_unique_spans": 11,
+          "episode_unique_spans": 21
+        },
+        {
+          "cumulative_determinism_fraction": 0.5238095238095238,
+          "cumulative_deterministic_unique_spans": 154,
+          "cumulative_unique_spans": 294,
+          "episode": 14,
+          "episode_deterministic_unique_spans": 11,
+          "episode_unique_spans": 21
+        },
+        {
+          "cumulative_determinism_fraction": 0.5238095238095238,
+          "cumulative_deterministic_unique_spans": 165,
+          "cumulative_unique_spans": 315,
+          "episode": 15,
+          "episode_deterministic_unique_spans": 11,
+          "episode_unique_spans": 21
+        },
+        {
+          "cumulative_determinism_fraction": 0.5238095238095238,
+          "cumulative_deterministic_unique_spans": 176,
+          "cumulative_unique_spans": 336,
+          "episode": 16,
+          "episode_deterministic_unique_spans": 11,
+          "episode_unique_spans": 21
+        },
+        {
+          "cumulative_determinism_fraction": 0.5238095238095238,
+          "cumulative_deterministic_unique_spans": 187,
+          "cumulative_unique_spans": 357,
+          "episode": 17,
+          "episode_deterministic_unique_spans": 11,
+          "episode_unique_spans": 21
+        },
+        {
+          "cumulative_determinism_fraction": 0.5238095238095238,
+          "cumulative_deterministic_unique_spans": 198,
+          "cumulative_unique_spans": 378,
+          "episode": 18,
+          "episode_deterministic_unique_spans": 11,
+          "episode_unique_spans": 21
+        },
+        {
+          "cumulative_determinism_fraction": 0.5238095238095238,
+          "cumulative_deterministic_unique_spans": 209,
+          "cumulative_unique_spans": 399,
+          "episode": 19,
+          "episode_deterministic_unique_spans": 11,
+          "episode_unique_spans": 21
+        },
+        {
+          "cumulative_determinism_fraction": 0.5238095238095238,
+          "cumulative_deterministic_unique_spans": 220,
+          "cumulative_unique_spans": 420,
+          "episode": 20,
+          "episode_deterministic_unique_spans": 11,
+          "episode_unique_spans": 21
+        },
+        {
+          "cumulative_determinism_fraction": 0.5238095238095238,
+          "cumulative_deterministic_unique_spans": 231,
+          "cumulative_unique_spans": 441,
+          "episode": 21,
+          "episode_deterministic_unique_spans": 11,
+          "episode_unique_spans": 21
+        },
+        {
+          "cumulative_determinism_fraction": 0.5238095238095238,
+          "cumulative_deterministic_unique_spans": 242,
+          "cumulative_unique_spans": 462,
+          "episode": 22,
+          "episode_deterministic_unique_spans": 11,
+          "episode_unique_spans": 21
+        },
+        {
+          "cumulative_determinism_fraction": 0.5238095238095238,
+          "cumulative_deterministic_unique_spans": 253,
+          "cumulative_unique_spans": 483,
+          "episode": 23,
+          "episode_deterministic_unique_spans": 11,
+          "episode_unique_spans": 21
+        },
+        {
+          "cumulative_determinism_fraction": 0.5238095238095238,
+          "cumulative_deterministic_unique_spans": 264,
+          "cumulative_unique_spans": 504,
+          "episode": 24,
+          "episode_deterministic_unique_spans": 11,
+          "episode_unique_spans": 21
+        },
+        {
+          "cumulative_determinism_fraction": 0.5238095238095238,
+          "cumulative_deterministic_unique_spans": 275,
+          "cumulative_unique_spans": 525,
+          "episode": 25,
+          "episode_deterministic_unique_spans": 11,
+          "episode_unique_spans": 21
+        },
+        {
+          "cumulative_determinism_fraction": 0.5238095238095238,
+          "cumulative_deterministic_unique_spans": 286,
+          "cumulative_unique_spans": 546,
+          "episode": 26,
+          "episode_deterministic_unique_spans": 11,
+          "episode_unique_spans": 21
+        },
+        {
+          "cumulative_determinism_fraction": 0.5238095238095238,
+          "cumulative_deterministic_unique_spans": 297,
+          "cumulative_unique_spans": 567,
+          "episode": 27,
+          "episode_deterministic_unique_spans": 11,
+          "episode_unique_spans": 21
+        },
+        {
+          "cumulative_determinism_fraction": 0.5238095238095238,
+          "cumulative_deterministic_unique_spans": 308,
+          "cumulative_unique_spans": 588,
+          "episode": 28,
+          "episode_deterministic_unique_spans": 11,
+          "episode_unique_spans": 21
+        },
+        {
+          "cumulative_determinism_fraction": 0.5238095238095238,
+          "cumulative_deterministic_unique_spans": 319,
+          "cumulative_unique_spans": 609,
+          "episode": 29,
+          "episode_deterministic_unique_spans": 11,
+          "episode_unique_spans": 21
+        },
+        {
+          "cumulative_determinism_fraction": 0.5238095238095238,
+          "cumulative_deterministic_unique_spans": 330,
+          "cumulative_unique_spans": 630,
+          "episode": 30,
+          "episode_deterministic_unique_spans": 11,
+          "episode_unique_spans": 21
+        },
+        {
+          "cumulative_determinism_fraction": 0.5238095238095238,
+          "cumulative_deterministic_unique_spans": 341,
+          "cumulative_unique_spans": 651,
+          "episode": 31,
+          "episode_deterministic_unique_spans": 11,
+          "episode_unique_spans": 21
+        },
+        {
+          "cumulative_determinism_fraction": 0.5238095238095238,
+          "cumulative_deterministic_unique_spans": 352,
+          "cumulative_unique_spans": 672,
+          "episode": 32,
+          "episode_deterministic_unique_spans": 11,
+          "episode_unique_spans": 21
+        },
+        {
+          "cumulative_determinism_fraction": 0.5238095238095238,
+          "cumulative_deterministic_unique_spans": 363,
+          "cumulative_unique_spans": 693,
+          "episode": 33,
+          "episode_deterministic_unique_spans": 11,
+          "episode_unique_spans": 21
+        },
+        {
+          "cumulative_determinism_fraction": 0.5238095238095238,
+          "cumulative_deterministic_unique_spans": 374,
+          "cumulative_unique_spans": 714,
+          "episode": 34,
+          "episode_deterministic_unique_spans": 11,
+          "episode_unique_spans": 21
+        },
+        {
+          "cumulative_determinism_fraction": 0.5238095238095238,
+          "cumulative_deterministic_unique_spans": 385,
+          "cumulative_unique_spans": 735,
+          "episode": 35,
+          "episode_deterministic_unique_spans": 11,
+          "episode_unique_spans": 21
+        },
+        {
+          "cumulative_determinism_fraction": 0.5238095238095238,
+          "cumulative_deterministic_unique_spans": 396,
+          "cumulative_unique_spans": 756,
+          "episode": 36,
+          "episode_deterministic_unique_spans": 11,
+          "episode_unique_spans": 21
+        },
+        {
+          "cumulative_determinism_fraction": 0.5238095238095238,
+          "cumulative_deterministic_unique_spans": 407,
+          "cumulative_unique_spans": 777,
+          "episode": 37,
+          "episode_deterministic_unique_spans": 11,
+          "episode_unique_spans": 21
+        },
+        {
+          "cumulative_determinism_fraction": 0.5238095238095238,
+          "cumulative_deterministic_unique_spans": 418,
+          "cumulative_unique_spans": 798,
+          "episode": 38,
+          "episode_deterministic_unique_spans": 11,
+          "episode_unique_spans": 21
+        },
+        {
+          "cumulative_determinism_fraction": 0.5238095238095238,
+          "cumulative_deterministic_unique_spans": 429,
+          "cumulative_unique_spans": 819,
+          "episode": 39,
+          "episode_deterministic_unique_spans": 11,
+          "episode_unique_spans": 21
+        },
+        {
+          "cumulative_determinism_fraction": 0.5238095238095238,
+          "cumulative_deterministic_unique_spans": 440,
+          "cumulative_unique_spans": 840,
+          "episode": 40,
+          "episode_deterministic_unique_spans": 11,
+          "episode_unique_spans": 21
+        },
+        {
+          "cumulative_determinism_fraction": 0.5238095238095238,
+          "cumulative_deterministic_unique_spans": 451,
+          "cumulative_unique_spans": 861,
+          "episode": 41,
+          "episode_deterministic_unique_spans": 11,
+          "episode_unique_spans": 21
+        },
+        {
+          "cumulative_determinism_fraction": 0.5238095238095238,
+          "cumulative_deterministic_unique_spans": 462,
+          "cumulative_unique_spans": 882,
+          "episode": 42,
+          "episode_deterministic_unique_spans": 11,
+          "episode_unique_spans": 21
+        },
+        {
+          "cumulative_determinism_fraction": 0.5238095238095238,
+          "cumulative_deterministic_unique_spans": 473,
+          "cumulative_unique_spans": 903,
+          "episode": 43,
+          "episode_deterministic_unique_spans": 11,
+          "episode_unique_spans": 21
+        },
+        {
+          "cumulative_determinism_fraction": 0.5238095238095238,
+          "cumulative_deterministic_unique_spans": 484,
+          "cumulative_unique_spans": 924,
+          "episode": 44,
+          "episode_deterministic_unique_spans": 11,
+          "episode_unique_spans": 21
+        },
+        {
+          "cumulative_determinism_fraction": 0.5238095238095238,
+          "cumulative_deterministic_unique_spans": 495,
+          "cumulative_unique_spans": 945,
+          "episode": 45,
+          "episode_deterministic_unique_spans": 11,
+          "episode_unique_spans": 21
+        },
+        {
+          "cumulative_determinism_fraction": 0.5238095238095238,
+          "cumulative_deterministic_unique_spans": 506,
+          "cumulative_unique_spans": 966,
+          "episode": 46,
+          "episode_deterministic_unique_spans": 11,
+          "episode_unique_spans": 21
+        },
+        {
+          "cumulative_determinism_fraction": 0.5238095238095238,
+          "cumulative_deterministic_unique_spans": 517,
+          "cumulative_unique_spans": 987,
+          "episode": 47,
+          "episode_deterministic_unique_spans": 11,
+          "episode_unique_spans": 21
+        },
+        {
+          "cumulative_determinism_fraction": 0.5238095238095238,
+          "cumulative_deterministic_unique_spans": 528,
+          "cumulative_unique_spans": 1008,
+          "episode": 48,
+          "episode_deterministic_unique_spans": 11,
+          "episode_unique_spans": 21
+        },
+        {
+          "cumulative_determinism_fraction": 0.5238095238095238,
+          "cumulative_deterministic_unique_spans": 539,
+          "cumulative_unique_spans": 1029,
+          "episode": 49,
+          "episode_deterministic_unique_spans": 11,
+          "episode_unique_spans": 21
+        },
+        {
+          "cumulative_determinism_fraction": 0.5238095238095238,
+          "cumulative_deterministic_unique_spans": 550,
+          "cumulative_unique_spans": 1050,
+          "episode": 50,
+          "episode_deterministic_unique_spans": 11,
+          "episode_unique_spans": 21
+        }
+      ],
+      "ledger": {
+        "amortized_cost_units_per_episode": 72.0,
+        "compile_units": 0,
+        "component_detail": {
+          "distill_calls": 24,
+          "execution": 1200,
+          "machinery": 1200,
+          "model": 1200,
+          "resolve_calls": 1200,
+          "resolve_explore": 689,
+          "resolve_unknown": 511
+        },
+        "episodes": 50,
+        "execution_units": 1200,
+        "machinery_units": 1200,
+        "model_units": 1200,
+        "total_units": 3600
+      },
+      "mechanisms_distilled": 24,
+      "model_calls_per_episode": [
+        24,
+        24,
+        24,
+        24,
+        24,
+        24,
+        24,
+        24,
+        24,
+        24,
+        24,
+        24,
+        24,
+        24,
+        24,
+        24,
+        24,
+        24,
+        24,
+        24,
+        24,
+        24,
+        24,
+        24,
+        24,
+        24,
+        24,
+        24,
+        24,
+        24,
+        24,
+        24,
+        24,
+        24,
+        24,
+        24,
+        24,
+        24,
+        24,
+        24,
+        24,
+        24,
+        24,
+        24,
+        24,
+        24,
+        24,
+        24,
+        24,
+        24
+      ],
+      "registry_after_run": {
+        "any_above_gate": false,
+        "applicability_guards_nonempty": 0,
+        "confidences": [
+          0.5
+        ],
+        "count": 24,
+        "failure_boundary_nonempty": 0,
+        "freshness_nonempty": 0,
+        "min_confidence_gate": 0.8,
+        "parameter_slots_nonempty": 0,
+        "repair_scope_nonempty": 0,
+        "sample": [
+          {
+            "action_template": {
+              "body": {
+                "title": "title-001",
+                "value": 1
+              },
+              "method": "PUT",
+              "path": "/resources/r-001-0"
+            },
+            "applicability_guards": {},
+            "auth_scope": null,
+            "confidence": 0.5,
+            "evidence": [
+              "04884bc998321e29"
+            ],
+            "failure_boundary": {},
+            "freshness": {},
+            "intent": "create_resource",
+            "invalidated": false,
+            "mechanism_id": "obs-04884bc998321e29",
+            "parameter_slots": [],
+            "postconditions": {
+              "last_method": "PUT",
+              "last_path": "/resources/r-001-0",
+              "store_keys": [
+                "r-001-0"
+              ],
+              "store_size": 1
+            },
+            "preconditions": {
+              "last_method": "GET",
+              "last_path": "/",
+              "store_keys": [],
+              "store_size": 0
+            },
+            "repair_scope": {},
+            "verification_rule": {}
+          },
+          {
+            "action_template": {
+              "body": null,
+              "method": "GET",
+              "path": "/resources"
+            },
+            "applicability_guards": {},
+            "auth_scope": null,
+            "confidence": 0.5,
+            "evidence": [
+              "18586b3b9763918d"
+            ],
+            "failure_boundary": {},
+            "freshness": {},
+            "intent": "list_resources",
+            "invalidated": false,
+            "mechanism_id": "obs-18586b3b9763918d",
+            "parameter_slots": [],
+            "postconditions": {
+              "last_method": "GET",
+              "last_path": "/resources",
+              "store_keys": [
+                "s-const-3"
+              ],
+              "store_size": 1
+            },
+            "preconditions": {
+              "last_method": "PATCH",
+              "last_path": "/resources/s-const-3",
+              "store_keys": [
+                "s-const-3"
+              ],
+              "store_size": 1
+            },
+            "repair_scope": {},
+            "verification_rule": {}
+          }
+        ],
+        "verification_rule_nonempty": 0
+      },
+      "residual_novelty": {
+        "model_calls_by_arm": {
+          "B-INHERITED-SPIDER": 1200
+        },
+        "tiers": {
+          "never_seen": {
+            "compiled_replays": 0,
+            "model_calls": 511,
+            "spans": 511
+          },
+          "seen_multiple": {
+            "compiled_replays": 0,
+            "model_calls": 675,
+            "spans": 675
+          },
+          "seen_once": {
+            "compiled_replays": 0,
+            "model_calls": 14,
+            "spans": 14
+          }
+        }
+      },
+      "span_signature_diversity": 511,
+      "success_episodes": 50,
+      "success_rate": 1.0
+    },
+    "B-NO-MEMORY-DETERMINISTIC": {
+      "ambiguous_cache_keys": 1,
+      "ambiguous_state_keys_detail": [
+        {
+          "first_request": {
+            "body": {
+              "title": "title-001",
+              "value": 1
+            },
+            "method": "PUT",
+            "path": "/resources/r-001-0"
+          },
+          "state_sig": "b03911b76e267ec97449c98fc6871612b249c6049b6665d289f0455a385a93b9",
+          "witnesses": 1
+        }
+      ],
+      "compile_events_per_episode": [
+        0,
+        10,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "compiled_cache_entries": 511,
+      "compiled_complete_at_episode": 2,
+      "compiled_entries": 10,
+      "compiled_replays_per_episode": [
+        0,
+        0,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10
+      ],
+      "conflicts_detected": 1,
+      "decision_path_counts": {
+        "COMPILED_REPLAY": 480,
+        "DEOPT_TO_MODEL": 720
+      },
+      "determinism": {
+        "determinism_fraction": 0.5833333333333334,
+        "deterministic_spans": 700,
+        "rule": "span signature identical across >=2 episodes (prereg.md 7.1)",
+        "total_spans": 1200,
+        "wilson_ci95": [
+          0.5552167229809802,
+          0.6109181102518974
+        ]
+      },
+      "determinism_fraction_by_episode_10_20_30_40_50": {
+        "10": 0.5238095238095238,
+        "20": 0.5238095238095238,
+        "30": 0.5238095238095238,
+        "40": 0.5238095238095238,
+        "50": 0.5238095238095238
+      },
+      "determinism_histogram_of_witness_counts": {
+        "1": 500,
+        "50": 700
+      },
+      "determinism_vs_compilability": {
+        "compilable_given_deterministic": 0.6857142857142857,
+        "compiled_share_of_all_spans": 0.4,
+        "deterministic_but_deopted": 220,
+        "deterministic_but_deopted_by_role_workitem": {
+          "create_resource|2": 50,
+          "create_resource|3": 50,
+          "delete_resource|2": 2,
+          "delete_resource|3": 2,
+          "entry_point|0": 2,
+          "entry_point|1": 50,
+          "entry_point|2": 50,
+          "entry_point|3": 2,
+          "list_resources|2": 2,
+          "list_resources|3": 2,
+          "read_resource|2": 2,
+          "read_resource|3": 2,
+          "update_resource|2": 2,
+          "update_resource|3": 2
+        },
+        "deterministic_but_deopted_cache_ambiguous": 100,
+        "deterministic_but_deopted_cache_entry_absent": 120,
+        "deterministic_fraction": 0.5833333333333334,
+        "deterministic_occurrences": 700,
+        "served_by_compiled_replay": 480,
+        "total_span_occurrences": 1200
+      },
+      "episode_amortized_cost_units": [
+        48.0,
+        58.0,
+        38.0,
+        38.0,
+        38.0,
+        38.0,
+        38.0,
+        38.0,
+        38.0,
+        38.0,
+        38.0,
+        38.0,
+        38.0,
+        38.0,
+        38.0,
+        38.0,
+        38.0,
+        38.0,
+        38.0,
+        38.0,
+        38.0,
+        38.0,
+        38.0,
+        38.0,
+        38.0,
+        38.0,
+        38.0,
+        38.0,
+        38.0,
+        38.0,
+        38.0,
+        38.0,
+        38.0,
+        38.0,
+        38.0,
+        38.0,
+        38.0,
+        38.0,
+        38.0,
+        38.0,
+        38.0,
+        38.0,
+        38.0,
+        38.0,
+        38.0,
+        38.0,
+        38.0,
+        38.0,
+        38.0,
+        38.0
+      ],
+      "learning_curve": [
+        {
+          "cumulative_determinism_fraction": 0.5238095238095238,
+          "cumulative_deterministic_unique_spans": 11,
+          "cumulative_unique_spans": 21,
+          "episode": 1,
+          "episode_deterministic_unique_spans": 11,
+          "episode_unique_spans": 21
+        },
+        {
+          "cumulative_determinism_fraction": 0.5238095238095238,
+          "cumulative_deterministic_unique_spans": 22,
+          "cumulative_unique_spans": 42,
+          "episode": 2,
+          "episode_deterministic_unique_spans": 11,
+          "episode_unique_spans": 21
+        },
+        {
+          "cumulative_determinism_fraction": 0.5238095238095238,
+          "cumulative_deterministic_unique_spans": 33,
+          "cumulative_unique_spans": 63,
+          "episode": 3,
+          "episode_deterministic_unique_spans": 11,
+          "episode_unique_spans": 21
+        },
+        {
+          "cumulative_determinism_fraction": 0.5238095238095238,
+          "cumulative_deterministic_unique_spans": 44,
+          "cumulative_unique_spans": 84,
+          "episode": 4,
+          "episode_deterministic_unique_spans": 11,
+          "episode_unique_spans": 21
+        },
+        {
+          "cumulative_determinism_fraction": 0.5238095238095238,
+          "cumulative_deterministic_unique_spans": 55,
+          "cumulative_unique_spans": 105,
+          "episode": 5,
+          "episode_deterministic_unique_spans": 11,
+          "episode_unique_spans": 21
+        },
+        {
+          "cumulative_determinism_fraction": 0.5238095238095238,
+          "cumulative_deterministic_unique_spans": 66,
+          "cumulative_unique_spans": 126,
+          "episode": 6,
+          "episode_deterministic_unique_spans": 11,
+          "episode_unique_spans": 21
+        },
+        {
+          "cumulative_determinism_fraction": 0.5238095238095238,
+          "cumulative_deterministic_unique_spans": 77,
+          "cumulative_unique_spans": 147,
+          "episode": 7,
+          "episode_deterministic_unique_spans": 11,
+          "episode_unique_spans": 21
+        },
+        {
+          "cumulative_determinism_fraction": 0.5238095238095238,
+          "cumulative_deterministic_unique_spans": 88,
+          "cumulative_unique_spans": 168,
+          "episode": 8,
+          "episode_deterministic_unique_spans": 11,
+          "episode_unique_spans": 21
+        },
+        {
+          "cumulative_determinism_fraction": 0.5238095238095238,
+          "cumulative_deterministic_unique_spans": 99,
+          "cumulative_unique_spans": 189,
+          "episode": 9,
+          "episode_deterministic_unique_spans": 11,
+          "episode_unique_spans": 21
+        },
+        {
+          "cumulative_determinism_fraction": 0.5238095238095238,
+          "cumulative_deterministic_unique_spans": 110,
+          "cumulative_unique_spans": 210,
+          "episode": 10,
+          "episode_deterministic_unique_spans": 11,
+          "episode_unique_spans": 21
+        },
+        {
+          "cumulative_determinism_fraction": 0.5238095238095238,
+          "cumulative_deterministic_unique_spans": 121,
+          "cumulative_unique_spans": 231,
+          "episode": 11,
+          "episode_deterministic_unique_spans": 11,
+          "episode_unique_spans": 21
+        },
+        {
+          "cumulative_determinism_fraction": 0.5238095238095238,
+          "cumulative_deterministic_unique_spans": 132,
+          "cumulative_unique_spans": 252,
+          "episode": 12,
+          "episode_deterministic_unique_spans": 11,
+          "episode_unique_spans": 21
+        },
+        {
+          "cumulative_determinism_fraction": 0.5238095238095238,
+          "cumulative_deterministic_unique_spans": 143,
+          "cumulative_unique_spans": 273,
+          "episode": 13,
+          "episode_deterministic_unique_spans": 11,
+          "episode_unique_spans": 21
+        },
+        {
+          "cumulative_determinism_fraction": 0.5238095238095238,
+          "cumulative_deterministic_unique_spans": 154,
+          "cumulative_unique_spans": 294,
+          "episode": 14,
+          "episode_deterministic_unique_spans": 11,
+          "episode_unique_spans": 21
+        },
+        {
+          "cumulative_determinism_fraction": 0.5238095238095238,
+          "cumulative_deterministic_unique_spans": 165,
+          "cumulative_unique_spans": 315,
+          "episode": 15,
+          "episode_deterministic_unique_spans": 11,
+          "episode_unique_spans": 21
+        },
+        {
+          "cumulative_determinism_fraction": 0.5238095238095238,
+          "cumulative_deterministic_unique_spans": 176,
+          "cumulative_unique_spans": 336,
+          "episode": 16,
+          "episode_deterministic_unique_spans": 11,
+          "episode_unique_spans": 21
+        },
+        {
+          "cumulative_determinism_fraction": 0.5238095238095238,
+          "cumulative_deterministic_unique_spans": 187,
+          "cumulative_unique_spans": 357,
+          "episode": 17,
+          "episode_deterministic_unique_spans": 11,
+          "episode_unique_spans": 21
+        },
+        {
+          "cumulative_determinism_fraction": 0.5238095238095238,
+          "cumulative_deterministic_unique_spans": 198,
+          "cumulative_unique_spans": 378,
+          "episode": 18,
+          "episode_deterministic_unique_spans": 11,
+          "episode_unique_spans": 21
+        },
+        {
+          "cumulative_determinism_fraction": 0.5238095238095238,
+          "cumulative_deterministic_unique_spans": 209,
+          "cumulative_unique_spans": 399,
+          "episode": 19,
+          "episode_deterministic_unique_spans": 11,
+          "episode_unique_spans": 21
+        },
+        {
+          "cumulative_determinism_fraction": 0.5238095238095238,
+          "cumulative_deterministic_unique_spans": 220,
+          "cumulative_unique_spans": 420,
+          "episode": 20,
+          "episode_deterministic_unique_spans": 11,
+          "episode_unique_spans": 21
+        },
+        {
+          "cumulative_determinism_fraction": 0.5238095238095238,
+          "cumulative_deterministic_unique_spans": 231,
+          "cumulative_unique_spans": 441,
+          "episode": 21,
+          "episode_deterministic_unique_spans": 11,
+          "episode_unique_spans": 21
+        },
+        {
+          "cumulative_determinism_fraction": 0.5238095238095238,
+          "cumulative_deterministic_unique_spans": 242,
+          "cumulative_unique_spans": 462,
+          "episode": 22,
+          "episode_deterministic_unique_spans": 11,
+          "episode_unique_spans": 21
+        },
+        {
+          "cumulative_determinism_fraction": 0.5238095238095238,
+          "cumulative_deterministic_unique_spans": 253,
+          "cumulative_unique_spans": 483,
+          "episode": 23,
+          "episode_deterministic_unique_spans": 11,
+          "episode_unique_spans": 21
+        },
+        {
+          "cumulative_determinism_fraction": 0.5238095238095238,
+          "cumulative_deterministic_unique_spans": 264,
+          "cumulative_unique_spans": 504,
+          "episode": 24,
+          "episode_deterministic_unique_spans": 11,
+          "episode_unique_spans": 21
+        },
+        {
+          "cumulative_determinism_fraction": 0.5238095238095238,
+          "cumulative_deterministic_unique_spans": 275,
+          "cumulative_unique_spans": 525,
+          "episode": 25,
+          "episode_deterministic_unique_spans": 11,
+          "episode_unique_spans": 21
+        },
+        {
+          "cumulative_determinism_fraction": 0.5238095238095238,
+          "cumulative_deterministic_unique_spans": 286,
+          "cumulative_unique_spans": 546,
+          "episode": 26,
+          "episode_deterministic_unique_spans": 11,
+          "episode_unique_spans": 21
+        },
+        {
+          "cumulative_determinism_fraction": 0.5238095238095238,
+          "cumulative_deterministic_unique_spans": 297,
+          "cumulative_unique_spans": 567,
+          "episode": 27,
+          "episode_deterministic_unique_spans": 11,
+          "episode_unique_spans": 21
+        },
+        {
+          "cumulative_determinism_fraction": 0.5238095238095238,
+          "cumulative_deterministic_unique_spans": 308,
+          "cumulative_unique_spans": 588,
+          "episode": 28,
+          "episode_deterministic_unique_spans": 11,
+          "episode_unique_spans": 21
+        },
+        {
+          "cumulative_determinism_fraction": 0.5238095238095238,
+          "cumulative_deterministic_unique_spans": 319,
+          "cumulative_unique_spans": 609,
+          "episode": 29,
+          "episode_deterministic_unique_spans": 11,
+          "episode_unique_spans": 21
+        },
+        {
+          "cumulative_determinism_fraction": 0.5238095238095238,
+          "cumulative_deterministic_unique_spans": 330,
+          "cumulative_unique_spans": 630,
+          "episode": 30,
+          "episode_deterministic_unique_spans": 11,
+          "episode_unique_spans": 21
+        },
+        {
+          "cumulative_determinism_fraction": 0.5238095238095238,
+          "cumulative_deterministic_unique_spans": 341,
+          "cumulative_unique_spans": 651,
+          "episode": 31,
+          "episode_deterministic_unique_spans": 11,
+          "episode_unique_spans": 21
+        },
+        {
+          "cumulative_determinism_fraction": 0.5238095238095238,
+          "cumulative_deterministic_unique_spans": 352,
+          "cumulative_unique_spans": 672,
+          "episode": 32,
+          "episode_deterministic_unique_spans": 11,
+          "episode_unique_spans": 21
+        },
+        {
+          "cumulative_determinism_fraction": 0.5238095238095238,
+          "cumulative_deterministic_unique_spans": 363,
+          "cumulative_unique_spans": 693,
+          "episode": 33,
+          "episode_deterministic_unique_spans": 11,
+          "episode_unique_spans": 21
+        },
+        {
+          "cumulative_determinism_fraction": 0.5238095238095238,
+          "cumulative_deterministic_unique_spans": 374,
+          "cumulative_unique_spans": 714,
+          "episode": 34,
+          "episode_deterministic_unique_spans": 11,
+          "episode_unique_spans": 21
+        },
+        {
+          "cumulative_determinism_fraction": 0.5238095238095238,
+          "cumulative_deterministic_unique_spans": 385,
+          "cumulative_unique_spans": 735,
+          "episode": 35,
+          "episode_deterministic_unique_spans": 11,
+          "episode_unique_spans": 21
+        },
+        {
+          "cumulative_determinism_fraction": 0.5238095238095238,
+          "cumulative_deterministic_unique_spans": 396,
+          "cumulative_unique_spans": 756,
+          "episode": 36,
+          "episode_deterministic_unique_spans": 11,
+          "episode_unique_spans": 21
+        },
+        {
+          "cumulative_determinism_fraction": 0.5238095238095238,
+          "cumulative_deterministic_unique_spans": 407,
+          "cumulative_unique_spans": 777,
+          "episode": 37,
+          "episode_deterministic_unique_spans": 11,
+          "episode_unique_spans": 21
+        },
+        {
+          "cumulative_determinism_fraction": 0.5238095238095238,
+          "cumulative_deterministic_unique_spans": 418,
+          "cumulative_unique_spans": 798,
+          "episode": 38,
+          "episode_deterministic_unique_spans": 11,
+          "episode_unique_spans": 21
+        },
+        {
+          "cumulative_determinism_fraction": 0.5238095238095238,
+          "cumulative_deterministic_unique_spans": 429,
+          "cumulative_unique_spans": 819,
+          "episode": 39,
+          "episode_deterministic_unique_spans": 11,
+          "episode_unique_spans": 21
+        },
+        {
+          "cumulative_determinism_fraction": 0.5238095238095238,
+          "cumulative_deterministic_unique_spans": 440,
+          "cumulative_unique_spans": 840,
+          "episode": 40,
+          "episode_deterministic_unique_spans": 11,
+          "episode_unique_spans": 21
+        },
+        {
+          "cumulative_determinism_fraction": 0.5238095238095238,
+          "cumulative_deterministic_unique_spans": 451,
+          "cumulative_unique_spans": 861,
+          "episode": 41,
+          "episode_deterministic_unique_spans": 11,
+          "episode_unique_spans": 21
+        },
+        {
+          "cumulative_determinism_fraction": 0.5238095238095238,
+          "cumulative_deterministic_unique_spans": 462,
+          "cumulative_unique_spans": 882,
+          "episode": 42,
+          "episode_deterministic_unique_spans": 11,
+          "episode_unique_spans": 21
+        },
+        {
+          "cumulative_determinism_fraction": 0.5238095238095238,
+          "cumulative_deterministic_unique_spans": 473,
+          "cumulative_unique_spans": 903,
+          "episode": 43,
+          "episode_deterministic_unique_spans": 11,
+          "episode_unique_spans": 21
+        },
+        {
+          "cumulative_determinism_fraction": 0.5238095238095238,
+          "cumulative_deterministic_unique_spans": 484,
+          "cumulative_unique_spans": 924,
+          "episode": 44,
+          "episode_deterministic_unique_spans": 11,
+          "episode_unique_spans": 21
+        },
+        {
+          "cumulative_determinism_fraction": 0.5238095238095238,
+          "cumulative_deterministic_unique_spans": 495,
+          "cumulative_unique_spans": 945,
+          "episode": 45,
+          "episode_deterministic_unique_spans": 11,
+          "episode_unique_spans": 21
+        },
+        {
+          "cumulative_determinism_fraction": 0.5238095238095238,
+          "cumulative_deterministic_unique_spans": 506,
+          "cumulative_unique_spans": 966,
+          "episode": 46,
+          "episode_deterministic_unique_spans": 11,
+          "episode_unique_spans": 21
+        },
+        {
+          "cumulative_determinism_fraction": 0.5238095238095238,
+          "cumulative_deterministic_unique_spans": 517,
+          "cumulative_unique_spans": 987,
+          "episode": 47,
+          "episode_deterministic_unique_spans": 11,
+          "episode_unique_spans": 21
+        },
+        {
+          "cumulative_determinism_fraction": 0.5238095238095238,
+          "cumulative_deterministic_unique_spans": 528,
+          "cumulative_unique_spans": 1008,
+          "episode": 48,
+          "episode_deterministic_unique_spans": 11,
+          "episode_unique_spans": 21
+        },
+        {
+          "cumulative_determinism_fraction": 0.5238095238095238,
+          "cumulative_deterministic_unique_spans": 539,
+          "cumulative_unique_spans": 1029,
+          "episode": 49,
+          "episode_deterministic_unique_spans": 11,
+          "episode_unique_spans": 21
+        },
+        {
+          "cumulative_determinism_fraction": 0.5238095238095238,
+          "cumulative_deterministic_unique_spans": 550,
+          "cumulative_unique_spans": 1050,
+          "episode": 50,
+          "episode_deterministic_unique_spans": 11,
+          "episode_unique_spans": 21
+        }
+      ],
+      "ledger": {
+        "amortized_cost_units_per_episode": 38.6,
+        "compile_units": 10,
+        "component_detail": {
+          "cache_key_conflicts": 1,
+          "compile": 10,
+          "compiled_replays": 480,
+          "execution": 1200,
+          "model": 720,
+          "spans_compiled": 10
+        },
+        "episodes": 50,
+        "execution_units": 1200,
+        "machinery_units": 0,
+        "model_units": 720,
+        "total_units": 1930
+      },
+      "model_calls_per_episode": [
+        24,
+        24,
+        14,
+        14,
+        14,
+        14,
+        14,
+        14,
+        14,
+        14,
+        14,
+        14,
+        14,
+        14,
+        14,
+        14,
+        14,
+        14,
+        14,
+        14,
+        14,
+        14,
+        14,
+        14,
+        14,
+        14,
+        14,
+        14,
+        14,
+        14,
+        14,
+        14,
+        14,
+        14,
+        14,
+        14,
+        14,
+        14,
+        14,
+        14,
+        14,
+        14,
+        14,
+        14,
+        14,
+        14,
+        14,
+        14,
+        14,
+        14
+      ],
+      "model_calls_strictly_after_compile_complete": 672,
+      "residual_novelty": {
+        "model_calls_by_arm": {
+          "B-NO-MEMORY-DETERMINISTIC": 720
+        },
+        "tiers": {
+          "never_seen": {
+            "compiled_replays": 0,
+            "model_calls": 511,
+            "spans": 511
+          },
+          "seen_multiple": {
+            "compiled_replays": 480,
+            "model_calls": 195,
+            "spans": 675
+          },
+          "seen_once": {
+            "compiled_replays": 0,
+            "model_calls": 14,
+            "spans": 14
+          }
+        }
+      },
+      "span_signature_diversity": 511,
+      "success_episodes": 50,
+      "success_rate": 1.0
+    }
+  },
+  "cost_differences_bootstrap": {
+    "deopt_minus_cold": {
+      "ci95": [
+        -34.0,
+        -32.4
+      ],
+      "mean_difference_units": -33.4,
+      "n_episodes_paired": 50,
+      "p_two_sided_bootstrap": 0.0,
+      "resamples": 10000,
+      "seed": 20260926
+    },
+    "deopt_minus_inherited": {
+      "ci95": [
+        -34.0,
+        -32.4
+      ],
+      "mean_difference_units": -33.4,
+      "n_episodes_paired": 50,
+      "p_two_sided_bootstrap": 0.0,
+      "resamples": 10000,
+      "seed": 20260926
+    }
+  },
+  "decision_rule": {
+    "classification": "DEOPT_DOMINATES",
+    "failing_arms": [],
+    "matched_correctness": true,
+    "rule_trace": {
+      "costs": {
+        "B-COLD-EXPLORATION": 72.0,
+        "B-INHERITED-SPIDER": 72.0,
+        "B-NO-MEMORY-DETERMINISTIC": 38.6
+      },
+      "deopt_less_cold": true,
+      "deopt_less_inherited": true,
+      "success_rates": {
+        "B-COLD-EXPLORATION": 1.0,
+        "B-INHERITED-SPIDER": 1.0,
+        "B-NO-MEMORY-DETERMINISTIC": 1.0
+      },
+      "success_threshold": 0.95,
+      "tie_relative_threshold": 0.05
+    }
+  },
+  "design": {
+    "bootstrap_resamples": 10000,
+    "bootstrap_seed": 20260926,
+    "cost_units": {
+      "compile": 1,
+      "execution": 1,
+      "machinery": 1,
+      "model": 1
+    },
+    "episodes_per_arm": 50,
+    "expected_codes": {
+      "create_resource": 201,
+      "delete_resource": 200,
+      "entry_point": 200,
+      "list_resources": 200,
+      "read_resource": 200,
+      "update_resource": 200
+    },
+    "main_novelty_rate": 0.5,
+    "spans_per_episode": 24,
+    "success_threshold": 0.95,
+    "tie_relative_threshold": 0.05
+  },
+  "experiment_id": "EXP-FRONTIER-36249071934",
+  "generated_at_unix": 1790438255,
+  "matched_task_instances_check": {
+    "all_arms_observed_identical_task_instances": true,
+    "arms": [
+      "B-NO-MEMORY-DETERMINISTIC",
+      "B-INHERITED-SPIDER",
+      "B-COLD-EXPLORATION"
+    ],
+    "identical_signature_code_bodyhash": 1200,
+    "per_arm_span_counts": {
+      "B-COLD-EXPLORATION": 1200,
+      "B-INHERITED-SPIDER": 1200,
+      "B-NO-MEMORY-DETERMINISTIC": 1200
+    },
+    "shared_episode_index_keys": 1200
+  },
+  "primary_estimand": {
+    "measurement_arm": "B-NO-MEMORY-DETERMINISTIC",
+    "name": "per_span_witnessed_determinism_fraction",
+    "note": "Identical arm-plan and identical task instances across all three arms, so the span population is the same; the deopt arm is used as the measurement instrument because it is the only arm whose action selection is not gated by the incumbent kernel.",
+    "per_arm_cross_check": {
+      "B-COLD-EXPLORATION": 0.5833333333333334,
+      "B-INHERITED-SPIDER": 0.5833333333333334,
+      "B-NO-MEMORY-DETERMINISTIC": 0.5833333333333334
+    },
+    "prereg_H1_met": false,
+    "prereg_H1_threshold": 0.7,
+    "value": 0.5833333333333334,
+    "wilson_ci95": [
+      0.5552167229809802,
+      0.6109181102518974
+    ]
+  }
+}

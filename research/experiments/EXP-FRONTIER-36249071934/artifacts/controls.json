@@ -1,0 +1,367 @@
+{
+  "NC-EMPTY-REGISTRY": {
+    "expected": "inherited kernel returns UNKNOWN for every span when the registry is emptied",
+    "id": "NC-EMPTY-REGISTRY",
+    "observed": {
+      "kernel_config": {
+        "kernel_class": "SpiderKernel",
+        "min_confidence": 0.8,
+        "registry_path": "/tmp/spider-cold-7k1s19mq/registry.jsonl",
+        "registry_size": 0
+      },
+      "registry_empty": true,
+      "registry_size": 0,
+      "resolution_status_counts": {
+        "UNKNOWN": 24
+      },
+      "spans": 24
+    },
+    "pass": true,
+    "role": "additional_control_measured_not_decision_gating"
+  },
+  "NC-ZERO-DETERMINISM": {
+    "expected": "determinism_fraction=0.0, model_calls = all spans every episode, cost_ratio_vs_cold >= 1.0",
+    "id": "NC-ZERO-DETERMINISM",
+    "note": "The two cost ratios differ ONLY by the prereg.md 6.2 inheritance-machinery unit, which the deopt ratchet structurally never pays and the cold reference arm pays once per span. The PASS judgement uses the literal prereg.md 7.2 three-component formula; the machinery-inclusive ratio is reported alongside so the auditor can re-judge.",
+    "observed": {
+      "amortized_cost_units_per_episode": 48.0,
+      "amortized_cost_units_per_episode_prereg_7_2_three_term": 48.0,
+      "compile_units": 0,
+      "cost_ratio_vs_cold_machinery_inclusive": 0.6666666666666666,
+      "cost_ratio_vs_cold_prereg_7_2_three_term": 1.0,
+      "determinism_fraction": 0.0,
+      "deterministic_spans": 0,
+      "ledger": {
+        "amortized_cost_units_per_episode": 48.0,
+        "compile_units": 0,
+        "component_detail": {
+          "cache_key_conflicts": 1,
+          "execution": 1200,
+          "model": 1200
+        },
+        "episodes": 50,
+        "execution_units": 1200,
+        "machinery_units": 0,
+        "model_units": 1200,
+        "total_units": 2400
+      },
+      "model_calls_total": 1200,
+      "reference_cold_amortized_cost_units_per_episode": 72.0,
+      "reference_cold_amortized_cost_units_per_episode_prereg_7_2_three_term": 48.0,
+      "success_rate": 1.0,
+      "total_spans": 1200,
+      "total_spans_executed": 1200,
+      "unique_span_signatures": 1200
+    },
+    "pass": true,
+    "role": "null_control"
+  },
+  "PC-EXACT-REPLAY": {
+    "expected": "inherited kernel achieves EXECUTABLE with zero novel decisions on an exact mechanism match",
+    "id": "PC-EXACT-REPLAY",
+    "note": "mechanisms_distilled=24, distill_calls=24. A FAIL here is an observation about the shipped kernel's executability, not about inheritance economics.",
+    "observed": {
+      "episodes": 2,
+      "kernel_config": {
+        "kernel_class": "SpiderKernel",
+        "kernel_module": "spider.kernel",
+        "min_confidence": 0.8,
+        "registry_path": "/tmp/spider-inherit-0_3spnel/registry.jsonl"
+      },
+      "model_calls_episode_1": 24,
+      "model_calls_episode_2": 24,
+      "novel_decisions_episode_2": 24,
+      "registry": {
+        "any_above_gate": false,
+        "applicability_guards_nonempty": 0,
+        "confidences": [
+          0.5
+        ],
+        "count": 24,
+        "failure_boundary_nonempty": 0,
+        "freshness_nonempty": 0,
+        "min_confidence_gate": 0.8,
+        "parameter_slots_nonempty": 0,
+        "repair_scope_nonempty": 0,
+        "sample": [
+          {
+            "action_template": {
+              "body": {
+                "value": 9003
+              },
+              "method": "PATCH",
+              "path": "/resources/s-const-3"
+            },
+            "applicability_guards": {},
+            "auth_scope": null,
+            "confidence": 0.5,
+            "evidence": [
+              "09a03cbd329bc7cf"
+            ],
+            "failure_boundary": {},
+            "freshness": {},
+            "intent": "update_resource",
+            "invalidated": false,
+            "mechanism_id": "obs-09a03cbd329bc7cf",
+            "parameter_slots": [],
+            "postconditions": {
+              "last_method": "PATCH",
+              "last_path": "/resources/s-const-3",
+              "store_keys": [
+                "s-const-3"
+              ],
+              "store_size": 1
+            },
+            "preconditions": {
+              "last_method": "GET",
+              "last_path": "/resources/s-const-3",
+              "store_keys": [
+                "s-const-3"
+              ],
+              "store_size": 1
+            },
+            "repair_scope": {},
+            "verification_rule": {}
+          },
+          {
+            "action_template": {
+              "body": null,
+              "method": "GET",
+              "path": "/resources"
+            },
+            "applicability_guards": {},
+            "auth_scope": null,
+            "confidence": 0.5,
+            "evidence": [
+              "0b166e0fb38ae310"
+            ],
+            "failure_boundary": {},
+            "freshness": {},
+            "intent": "list_resources",
+            "invalidated": false,
+            "mechanism_id": "obs-0b166e0fb38ae310",
+            "parameter_slots": [],
+            "postconditions": {
+              "last_method": "GET",
+              "last_path": "/resources",
+              "store_keys": [
+                "s-const-3"
+              ],
+              "store_size": 1
+            },
+            "preconditions": {
+              "last_method": "PATCH",
+              "last_path": "/resources/s-const-3",
+              "store_keys": [
+                "s-const-3"
+              ],
+              "store_size": 1
+            },
+            "repair_scope": {},
+            "verification_rule": {}
+          }
+        ],
+        "verification_rule_nonempty": 0
+      },
+      "resolution_status_counts": {
+        "EXPLORE": 27,
+        "UNKNOWN": 21
+      },
+      "spans": 48
+    },
+    "pass": false,
+    "role": "additional_control_measured_not_decision_gating"
+  },
+  "PC-WITNESSED-DETERMINISM": {
+    "expected": "determinism_fraction=1.0, model_calls_after_compile=0, amortised cost -> compile+execution only",
+    "id": "PC-WITNESSED-DETERMINISM",
+    "note": "spec.json positive_control says 'compile all spans on first episode' while prereg.md 6.1 step 2 requires >=2 witnesses. Under the prereg rule compilation completes during episode 2, so episode 2 still deopts. Both the literal reading (model_calls_episodes_2_to_50) and the compilation-complete reading (model_calls_strictly_after_compile_complete) are reported; the PASS judgement uses the prereg.md 6.1 rule because prereg.md 8.1 is the frozen pass criterion.",
+    "observed": {
+      "ambiguous_state_key_detail": [
+        {
+          "first_request": {
+            "body": {
+              "title": "title-const",
+              "value": 0
+            },
+            "method": "PUT",
+            "path": "/resources/s-const-0"
+          },
+          "spans_touching_key": [
+            [
+              1,
+              1,
+              "create_resource",
+              "PUT",
+              "/resources/s-const-0"
+            ],
+            [
+              1,
+              7,
+              "create_resource",
+              "PUT",
+              "/resources/s-const-1"
+            ],
+            [
+              1,
+              13,
+              "create_resource",
+              "PUT",
+              "/resources/s-const-2"
+            ],
+            [
+              1,
+              19,
+              "create_resource",
+              "PUT",
+              "/resources/s-const-3"
+            ],
+            [
+              2,
+              1,
+              "create_resource",
+              "PUT",
+              "/resources/s-const-0"
+            ],
+            [
+              2,
+              7,
+              "create_resource",
+              "PUT",
+              "/resources/s-const-1"
+            ],
+            [
+              2,
+              13,
+              "create_resource",
+              "PUT",
+              "/resources/s-const-2"
+            ],
+            [
+              2,
+              19,
+              "create_resource",
+              "PUT",
+              "/resources/s-const-3"
+            ],
+            [
+              3,
+              1,
+              "create_resource",
+              "PUT",
+              "/resources/s-const-0"
+            ],
+            [
+              3,
+              7,
+              "create_resource",
+              "PUT",
+              "/resources/s-const-1"
+            ],
+            [
+              3,
+              13,
+              "create_resource",
+              "PUT",
+              "/resources/s-const-2"
+            ],
+            [
+              3,
+              19,
+              "create_resource",
+              "PUT",
+              "/resources/s-const-3"
+            ]
+          ],
+          "state_sig": "b03911b76e267ec97449c98fc6871612b249c6049b6665d289f0455a385a93b9",
+          "witnesses": 50
+        }
+      ],
+      "ambiguous_state_keys": 1,
+      "amortized_cost_units_per_episode": 29.2,
+      "compiled_complete_at_episode": 2,
+      "compiled_state_keys": 20,
+      "cumulative_determinism_fraction_by_episode_10": 1.0,
+      "determinism_fraction": 1.0,
+      "deterministic_spans": 1200,
+      "ledger": {
+        "amortized_cost_units_per_episode": 29.2,
+        "compile_units": 20,
+        "component_detail": {
+          "cache_key_conflicts": 1,
+          "compile": 20,
+          "compiled_replays": 960,
+          "execution": 1200,
+          "model": 240,
+          "spans_compiled": 20
+        },
+        "episodes": 50,
+        "execution_units": 1200,
+        "machinery_units": 0,
+        "model_units": 240,
+        "total_units": 1460
+      },
+      "model_calls_episodes_2_to_50_literal": 216,
+      "model_calls_per_episode": [
+        24,
+        24,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4
+      ],
+      "model_calls_per_episode_steady_state": [
+        4
+      ],
+      "model_calls_strictly_after_compile_complete": 192,
+      "success_rate": 1.0,
+      "total_spans": 1200
+    },
+    "pass": false,
+    "role": "positive_control"
+  }
+}

@@ -1,0 +1,80 @@
+{
+  "all_probes_deterministic": true,
+  "identical_request_round_trips": 800,
+  "n_probes": 8,
+  "probes": {
+    "DELETE /resources/alpha (delete existing)": {
+      "deterministic": true,
+      "repeats": 100,
+      "request": "DELETE /resources/alpha",
+      "status_codes": [
+        200
+      ],
+      "unique_response_body_hashes": 1
+    },
+    "GET /": {
+      "deterministic": true,
+      "repeats": 100,
+      "request": "GET /",
+      "status_codes": [
+        200
+      ],
+      "unique_response_body_hashes": 1
+    },
+    "GET /resources": {
+      "deterministic": true,
+      "repeats": 100,
+      "request": "GET /resources",
+      "status_codes": [
+        200
+      ],
+      "unique_response_body_hashes": 1
+    },
+    "GET /resources (list non-empty)": {
+      "deterministic": true,
+      "repeats": 100,
+      "request": "GET /resources",
+      "status_codes": [
+        200
+      ],
+      "unique_response_body_hashes": 1
+    },
+    "GET /resources/alpha (read after delete)": {
+      "deterministic": true,
+      "repeats": 100,
+      "request": "GET /resources/alpha",
+      "status_codes": [
+        404
+      ],
+      "unique_response_body_hashes": 1
+    },
+    "GET /resources/alpha (read existing)": {
+      "deterministic": true,
+      "repeats": 100,
+      "request": "GET /resources/alpha",
+      "status_codes": [
+        200
+      ],
+      "unique_response_body_hashes": 1
+    },
+    "PATCH /resources/alpha (update existing)": {
+      "deterministic": true,
+      "repeats": 100,
+      "request": "PATCH /resources/alpha",
+      "status_codes": [
+        200
+      ],
+      "unique_response_body_hashes": 1
+    },
+    "PUT /resources/alpha (create)": {
+      "deterministic": true,
+      "repeats": 100,
+      "request": "PUT /resources/alpha",
+      "status_codes": [
+        201
+      ],
+      "unique_response_body_hashes": 1
+    }
+  },
+  "repeats_per_probe": 100
+}

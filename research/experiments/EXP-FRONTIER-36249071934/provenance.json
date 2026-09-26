@@ -1,0 +1,363 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-FRONTIER-36249071934",
+  "lane": "frontier",
+  "stage": "EXECUTE",
+  "produced_at": "2026-09-26T16:14:46.465145Z",
+  "claim_ids": [
+    "C-RESIDUAL-NOVELTY"
+  ],
+  "github": {
+    "run_id": "36249071934",
+    "repository": "Mickalive/Spider",
+    "workflow": "SPIDER R2 Lane",
+    "event_name": "workflow_dispatch",
+    "actor": "github-actions[bot]",
+    "run_sha_env": "2f0310424190f4b0245164f6ad3cde49c742e3b6",
+    "request_base_sha": "2f0310424190f4b0245164f6ad3cde49c742e3b6",
+    "pre_execute_checkpoint_sha": "1246dea8cd4e7bd4251f85609a1e4775ea1e1126",
+    "execution_head_sha": "e178d5b18b5a935c39a4815cad21a952fb054a5c",
+    "note": "the run is workflow_dispatch on branch lab2/frontier; execution_head_sha is the HEAD actually on disk during measurement, which differs from both the request base sha and the pre-execute checkpoint sha"
+  },
+  "git": {
+    "branch": "lab2/frontier",
+    "head": "e178d5b18b5a935c39a4815cad21a952fb054a5c",
+    "remote_origin": "https://github.com/Mickalive/Spider",
+    "commit_created_by_this_stage": false,
+    "branch_or_history_operations_performed": [],
+    "working_tree_state_at_end_of_run": [
+      "?? research/experiments/EXP-FRONTIER-36249071934/artifacts/",
+      "?? research/experiments/EXP-FRONTIER-36249071934/model_execute.json",
+      "?? research/frontier/__init__.py",
+      "?? research/frontier/arms/",
+      "?? research/frontier/measure.py",
+      "?? research/frontier/run_experiment_EXP_FRONTIER_36249071934.py",
+      "?? research/frontier/substrate_deterministic_http.py",
+      "?? research/frontier/taskplan.py"
+    ],
+    "scope_note": "frontier allowed_code_root is research/frontier (research/harness unused). research/experiments/EXP-FRONTIER-36249071934/ was written only by the factory. src/spider/ was read and imported, never modified. .github/, .opencode/, SPIDER_CODEX.md, other lanes and other experiments were not touched."
+  },
+  "frozen_inputs_verified": {
+    "freeze_json": "research/experiments/EXP-FRONTIER-36249071934/freeze.json",
+    "verified_before_execution": true,
+    "verified_after_execution": true,
+    "hashes": {
+      "prereg.md": "96627a9de0993b0b31a8183e761d2ecafebe9f29006f222d4098e26d264999c0",
+      "request.json": "a8e62c29148047fb86763ea45916abc33c87c01e2530eec24cd6b8979e16e1c7",
+      "spec.json": "7db7ee2e783d77523912a75012640e5c5622572930cd7c2ccc4858c7d0a51dc1"
+    },
+    "mutated_by_this_stage": false
+  },
+  "parent_handoff_reference": {
+    "experiment_id": "EXP-FRONTIER-36129180789",
+    "path": "research/experiments/EXP-FRONTIER-36129180789/handoff.json",
+    "sha256": "3d1a056b0d8d997305f21d6694f36b2ead7cdd569d8e9b5976a25505deea28e2"
+  },
+  "environment": {
+    "python": "3.12.14 (main, Aug 13 2026, 02:47:42) [GCC 13.3.0]",
+    "python_version_short": "3.12.14",
+    "platform": "Linux-6.17.0-1022-azure-x86_64-with-glibc2.39",
+    "libc": "glibc 2.39",
+    "cwd": "/home/runner/work/Spider/Spider",
+    "containerized": true,
+    "host": "Azure Linux x86_64 GitHub-hosted runner",
+    "network_access_required_at_runtime": false,
+    "third_party_python_packages_installed": []
+  },
+  "substrate": {
+    "kind": "self-authored Python-stdlib ThreadingHTTPServer bound to 127.0.0.1 on an ephemeral port",
+    "deterministic_by_construction": true,
+    "randomness_in_bodies_or_headers": false,
+    "volatile_headers_excluded_from_signature": [
+      "Date",
+      "Server",
+      "Host",
+      "Content-Length"
+    ],
+    "idempotency_check": "8 request shapes x 100 identical repeats = 800 round trips, all identical",
+    "flask_importable": false,
+    "fastapi_importable": false,
+    "browsergym_importable": false,
+    "playwright_importable": false,
+    "openai_importable": false,
+    "env_OPENAI_API_KEY_present": false,
+    "env_HF_TOKEN_present": false,
+    "docker_cli_available": true,
+    "docker_used": false,
+    "model_provider": "none; the prereg.md 12 oracle is a deterministic perfect-policy function"
+  },
+  "datasets_and_fixtures": {
+    "external_datasets": [],
+    "fixture": "research/frontier/taskplan.py",
+    "fixture_description": "5 preregistered intents x 4 work items x 6 steps = 24 spans per episode, 50 episodes, target novelty rate 0.50, constant control nonce rule",
+    "fixture_is_experimenter_authored": true,
+    "task_instances_identical_across_arms": true,
+    "matched_instance_evidence": "research/experiments/EXP-FRONTIER-36249071934/artifacts/matched_task_instances_check.json"
+  },
+  "code_paths": [
+    {
+      "path": "research/frontier/substrate_deterministic_http.py",
+      "sha256": "e0e2e9b525bc9ad80628b30f2cf9d565ade8ce726134069e0497109208993790"
+    },
+    {
+      "path": "research/frontier/taskplan.py",
+      "sha256": "8875a05b54761f96a92cea8d3ec43bd6886347b5e04ef81d594d65d53f910816"
+    },
+    {
+      "path": "research/frontier/measure.py",
+      "sha256": "23de4343555bd5072c4b9ab6851ab35bd4ff068a8bbf81ca8fe81843af4392eb"
+    },
+    {
+      "path": "research/frontier/__init__.py",
+      "sha256": "6f340d857fb445fd9d78f20276bb6b81dcd41a66dc785439e7b2395709a96045"
+    },
+    {
+      "path": "research/frontier/arms/__init__.py",
+      "sha256": "5c495d05c818d933b9944946c8cff5db52e7adcf44afaa52f8407ce31a2edafe"
+    },
+    {
+      "path": "research/frontier/arms/common.py",
+      "sha256": "d9ceeb6a6bfee1bac7fcd8b65f9403dd616c171c52cfccc654b20c9f75185af6"
+    },
+    {
+      "path": "research/frontier/arms/deopt_ratchet.py",
+      "sha256": "0c09a680a0dbde2488fdb9cf94632a9d70af135ab6351a7912401840063f3aee"
+    },
+    {
+      "path": "research/frontier/arms/inherited_spider.py",
+      "sha256": "3acbf544f43968e59b10362eee78f173431f494e6a22151ff3577e2029542a6a"
+    },
+    {
+      "path": "research/frontier/arms/cold_exploration.py",
+      "sha256": "628b9645f4d5817ff7e74cc31d29470e4ad5dfa33158f7ebca64e4f61bc42e7b"
+    },
+    {
+      "path": "research/frontier/run_experiment_EXP_FRONTIER_36249071934.py",
+      "sha256": "5229dd43a82a89c1643496316027de48853f3a9361eb9742c77c496554d5d789"
+    },
+    {
+      "path": "research/frontier/build_result_EXP_FRONTIER_36249071934.py",
+      "sha256": "2a318804cc5ca362cfc49428a3942e3ddf6e16e37ec1a01db53f03b73063affc"
+    },
+    {
+      "path": "research/frontier/build_provenance_EXP_FRONTIER_36249071934.py",
+      "sha256": "4fc6f49a81fd8951723be54a4e44ecd75ae29a9ee6b86739edc88d2a1bd6d315"
+    }
+  ],
+  "shipped_code_imported_unmodified": [
+    {
+      "path": "src/spider/kernel.py",
+      "sha256": "46929b3a951df48d7f9d1fd850871073c0d91c1868aa117e13d389fe274e8d61"
+    },
+    {
+      "path": "src/spider/models.py",
+      "sha256": "338aaf4d7ba0e31f7a5fe8a47abdbb2ea52d9c1c4ef0ce014f2b809b9a2a9b78"
+    },
+    {
+      "path": "src/spider/registry.py",
+      "sha256": "51fb440d3827f21cccb5f77ad17dc0e76ccdbc2d52d7b05044cd821bb8a9322c"
+    }
+  ],
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-FRONTIER-36249071934/artifacts/availability_probe.json",
+      "sha256": "30ab5b1c652479cb375d45329a867c50851ce022fad855429f64065954d27302",
+      "role": "raw",
+      "bytes": 848
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-36249071934/artifacts/control_spans_nc_zero_determinism.jsonl",
+      "sha256": "a8390782effe31bd0412aed4505810fa780d5bf42b2d8de04f78467439ec0ccd",
+      "role": "raw",
+      "bytes": 855576
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-36249071934/artifacts/control_spans_pc_exact_replay.jsonl",
+      "sha256": "d16973dda4acb642b8cc395702a7663b95edf5cd078d1c0237ce036ca3003fef",
+      "role": "raw",
+      "bytes": 40231
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-36249071934/artifacts/control_spans_pc_witnessed_determinism.jsonl",
+      "sha256": "71ac3800d1a2e51aeb8c4c1082eb560b7b97eb4e6b291b8c081251923f19c538",
+      "role": "raw",
+      "bytes": 855712
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-36249071934/artifacts/controls.json",
+      "sha256": "8a2b92bd927438c861cf1561757e39313bf06525e2b017b7e401728856d4945f",
+      "role": "derived",
+      "bytes": 10441
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-36249071934/artifacts/derived_metrics.json",
+      "sha256": "c127065b8d7d39e8cdbcfbdf14dca649627a9f0b3db99cd7fee9f615dd09e7d2",
+      "role": "derived",
+      "bytes": 67813
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-36249071934/artifacts/episodes_cold-exploration.jsonl",
+      "sha256": "6871ddac7411d0d3f1478a65b7c315376523b79e6cb234143ce058fb534701bb",
+      "role": "raw",
+      "bytes": 7791
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-36249071934/artifacts/episodes_inherited-spider.jsonl",
+      "sha256": "dc2b04fe502dfe1c65c2778a2bae474b716465efb3b5e4f387c28ed71c3fe6b4",
+      "role": "raw",
+      "bytes": 7841
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-36249071934/artifacts/episodes_no-memory-deterministic.jsonl",
+      "sha256": "2369bde197056271809dd3877c8ddb857b63d650da3cf60004e13bcab0eb30b7",
+      "role": "raw",
+      "bytes": 7940
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-36249071934/artifacts/kernel_probe.json",
+      "sha256": "5d3e35a3756d324cc2202fd3296797553021ae23d15d5e86a94a02ef8db7e783",
+      "role": "raw",
+      "bytes": 1078
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-36249071934/artifacts/matched_task_instances_check.json",
+      "sha256": "4dfe5829acf7f2a427d38633b982b79b07e17f22e7cdb05dbf2b383710417a05",
+      "role": "derived",
+      "bytes": 374
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-36249071934/artifacts/sensitivity_novelty_sweep.json",
+      "sha256": "aacb76444fd6222ddb40418ead398ed56e893aaf5a8d3987cf7c2f6766ef3d5c",
+      "role": "derived",
+      "bytes": 3184
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-36249071934/artifacts/spans_cold-exploration.jsonl",
+      "sha256": "7c97a55b94fc8355514e9a87a81dea2ac24b0532f8012daf834677dee61d06d5",
+      "role": "raw",
+      "bytes": 883088
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-36249071934/artifacts/spans_inherited-spider.jsonl",
+      "sha256": "ad5fd3519cbc0bc299b986c864ff45b50ba83d8373a251ab0079bd315054fd43",
+      "role": "raw",
+      "bytes": 1011293
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-36249071934/artifacts/spans_no-memory-deterministic.jsonl",
+      "sha256": "af5c4291927cee9febc05835ebb6881647355d1255f72c13eb3590b5e45a363b",
+      "role": "raw",
+      "bytes": 854489
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-36249071934/artifacts/substrate_determinism_check.json",
+      "sha256": "e23ba2360a00c826d9182fe99cff3719d7c899b61d2eef911bcd0dd1f884c00c",
+      "role": "raw",
+      "bytes": 1900
+    }
+  ],
+  "stage_outputs": [
+    {
+      "path": "research/experiments/EXP-FRONTIER-36249071934/result.json",
+      "sha256": "251080a201fd6ae3924d91cf2cfa45fc3ae1c8b8e72cbf6e8ee62fedf58d56b3",
+      "role": "producer_handoff"
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-36249071934/report.md",
+      "sha256": "e12d004dc291adc2c08a5c746d02d48664eb04fa9ba5813edfd7200c61123265",
+      "role": "explanatory"
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-36249071934/provenance.json",
+      "sha256": null,
+      "role": "provenance",
+      "note": "self; cannot hash itself"
+    }
+  ],
+  "commands": [
+    {
+      "command": "python3 research/frontier/run_experiment_EXP_FRONTIER_36249071934.py",
+      "purpose": "execute all arms, all controls and the sensitivity sweep; write artifacts/",
+      "wall_time_seconds": 559.185,
+      "note": "re-running regenerates every artifact; the ephemeral substrate port and the wall time differ between runs, everything else is deterministic given the same code"
+    },
+    {
+      "command": "python3 research/frontier/build_result_EXP_FRONTIER_36249071934.py",
+      "purpose": "project already-measured artifact numbers into result.json; performs no measurement"
+    },
+    {
+      "command": "python3 research/frontier/build_provenance_EXP_FRONTIER_36249071934.py",
+      "purpose": "assemble provenance.json; performs no measurement"
+    }
+  ],
+  "determinism_and_randomness": {
+    "arm_action_selection": "deterministic",
+    "model_oracle": "deterministic perfect policy (prereg.md 12)",
+    "only_randomness_in_the_pipeline": "paired bootstrap resampling of episode costs",
+    "bootstrap_seed": 20260926,
+    "bootstrap_resamples": 10000,
+    "rng": "python random.Random(seed), stdlib Mersenne Twister",
+    "expected_run_to_run_variation": "only wall_time_seconds and the ephemeral substrate port"
+  },
+  "integrity": {
+    "artifact_hashes_recomputed_and_verified_at_stage_end": 16,
+    "artifact_hashes_mismatched": [],
+    "frozen_input_hashes_reverified_at_stage_end": true,
+    "self_reported_by": "EXECUTE producer; the independent AUDIT must recompute independently"
+  },
+  "measurement_scope": {
+    "primary_spans_executed": 3600,
+    "control_spans_executed": 2448,
+    "sweep_spans_executed": 4800,
+    "episodes": {
+      "primary": 150,
+      "pc_witnessed_determinism": 50,
+      "nc_zero_determinism": 50,
+      "pc_exact_replay": 2,
+      "nc_empty_registry": 1,
+      "sweep": 200
+    },
+    "model_oracle_invocations": {
+      "primary_arms": 3120,
+      "primary_breakdown": {
+        "B-NO-MEMORY-DETERMINISTIC": 720,
+        "B-INHERITED-SPIDER": 1200,
+        "B-COLD-EXPLORATION": 1200
+      },
+      "controls": 1440,
+      "control_breakdown": {
+        "PC-WITNESSED-DETERMINISM": 240,
+        "NC-ZERO-DETERMINISM": 1200,
+        "PC-EXACT-REPLAY": 0,
+        "NC-EMPTY-REGISTRY": 0
+      },
+      "sweep": 3882,
+      "total": 8442,
+      "note": "PC-EXACT-REPLAY made 0 oracle invocations because every one of its 48 spans was resolved by the shipped kernel rather than deopt-to-agent; that control therefore measures the kernel's decision path, not the oracle"
+    },
+    "real_llm_calls": 0,
+    "browser_sessions": 0,
+    "docker_invocations": 0,
+    "http_round_trips_against_the_substrate": 10848,
+    "http_round_trips_note": "3600 primary + 2448 control + 4800 sweep = 10848 span executions, each one a real request over a real socket; in addition the substrate idempotency check issued 800 requests that are not part of any arm"
+  },
+  "reproduction": {
+    "expected_to_reproduce": "all metrics exactly",
+    "preconditions": [
+      "checkout HEAD e178d5b18b5a935c39a4815cad21a952fb054a5c, or any commit whose research/frontier/ files hash as recorded in code_paths",
+      "python 3.12 or compatible stdlib only",
+      "no network, no API key, no browser, no docker required",
+      "127.0.0.1 loopback must be bindable"
+    ],
+    "known_nondeterminism": [
+      "wall_time_seconds",
+      "ephemeral substrate port",
+      "git_status_porcelain"
+    ]
+  },
+  "limitations_of_this_provenance": [
+    "This provenance is producer-written and self-reported. It records how the numbers in result.json were produced; it does not attest that the design was adequate.",
+    "The docker CLI was present in the environment although the frozen measurement_validity text says 'no docker'. It was deliberately unused; the experiment is stdlib-only. Recorded so the auditor does not have to re-derive the availability facts.",
+    "No artifact hash in this file was produced by an independent party."
+  ]
+}

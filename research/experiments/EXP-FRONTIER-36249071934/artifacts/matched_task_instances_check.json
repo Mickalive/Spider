@@ -1,0 +1,15 @@
+{
+  "all_arms_observed_identical_task_instances": true,
+  "arms": [
+    "B-NO-MEMORY-DETERMINISTIC",
+    "B-INHERITED-SPIDER",
+    "B-COLD-EXPLORATION"
+  ],
+  "identical_signature_code_bodyhash": 1200,
+  "per_arm_span_counts": {
+    "B-COLD-EXPLORATION": 1200,
+    "B-INHERITED-SPIDER": 1200,
+    "B-NO-MEMORY-DETERMINISTIC": 1200
+  },
+  "shared_episode_index_keys": 1200
+}

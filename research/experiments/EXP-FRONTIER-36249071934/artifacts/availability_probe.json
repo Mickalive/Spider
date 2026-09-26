@@ -1,0 +1,25 @@
+{
+  "browsergym_importable": false,
+  "docker_cli_available": true,
+  "env_ANTHROPIC_API_KEY_present": false,
+  "env_GEMINI_API_KEY_present": false,
+  "env_HF_TOKEN_present": false,
+  "env_OPENAI_API_KEY_present": false,
+  "fastapi_importable": false,
+  "flask_importable": false,
+  "openai_importable": false,
+  "platform": "Linux-6.17.0-1022-azure-x86_64-with-glibc2.39",
+  "playwright_importable": false,
+  "python": "3.12.14 (main, Aug 13 2026, 02:47:42) [GCC 13.3.0]",
+  "python_version": "3.12.14",
+  "stdlib_http_get_body": {
+    "entry": "/",
+    "resources": 0,
+    "server": "spider-frontier-deterministic-substrate/1.0.0"
+  },
+  "stdlib_http_get_status": 200,
+  "stdlib_http_httpserver": true,
+  "stdlib_http_post_supported": true,
+  "stdlib_http_put_status": 201,
+  "substrate_banner": "spider-frontier-deterministic-substrate/1.0.0"
+}
