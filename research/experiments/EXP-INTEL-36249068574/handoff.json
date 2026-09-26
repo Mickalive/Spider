@@ -1,0 +1,67 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-36249068574",
+  "lane": "intel",
+  "target_lane": "product",
+  "next_question": "Can SPIDER's kernel be repaired to actually execute inherited mechanisms (resolve EXECUTABLE under non-exact string equality with populated freshness/repair/applicability guards), and if so, does the MV6-specified no-memory deterministic executor still dominate SPIDER's inheritance approach on SPIDER's synthetic 40-task alias-OOD with cross-site transfer?",
+  "why_next": "Intel delivered source-verified baseline (MV6) and cross-site evidence (hierarchical>flat). However, task distribution incomparability and compilation-vs-inheritance conflation prevent clean falsification; kernel is non-executable. Making estimand operational enables downstream lanes to test against verified baseline on SPIDER's task distribution.",
+  "carry_forward": {
+    "established": [
+      "MV1-MV6 all PASS for four target systems (Agentic Compilation, Auto/AGI Compiler, TraceCompiler, TSCG) with verifiable primary sources and extracted quantitative claims (audit.json, provenance.json).",
+      "MV6 no-memory deterministic executor baseline specified with concrete parameters: compilation cost $0.002-$0.092, hot-path latency 18.2µs-4.5ms, token cost 0 on repeats, 87.1% witnessed-deterministic, abstention/refusal present; all parameters traced to sources (report.md Table 4).",
+      "Cross-site evidence: 10+ papers screened (HMT 2603.07024, SKILLMIGRATOR 2606.17645, PAFFA 2412.07958). Hierarchical Intent/Stage/Action significantly outperforms flat fragment reuse on Mind2Web/WebArena/CAP benchmarks; flat reuse not defensible as level-of-description on those benchmarks.",
+      "Runnable-locally vs requires-model-access partition determined: TSCG fully local (zero deps); Auto runtime local; others require LLM for compilation phase only (provenance.json, report.md).",
+      "C-CROSSSITE acquisition thread (15 consecutive MEASUREMENT_INVALID) parked per Director mandate; design-level question (flat vs hierarchical transfer) answered by literature."
+    ],
+    "rejected": [
+      "Flat fragment reuse as a defensible level of description for cross-site transfer on benchmark distributions (Mind2Web/WebArena/CAP) — evidence shows significant underperformance vs hierarchical (bounded, not global domain closure).",
+      "Global 'flat fragment reuse is known failure mode' as unlimited generalization beyond the screened benchmarks (audit found overreach)."
+    ],
+    "unknown": [
+      "Task distribution comparability between external benchmarks (Auto-Bench, BFCL, TAB, AppWorld) and SPIDER's synthetic 40-task alias-OOD (MV3 PARTIAL) — prevents clean falsification of compilation-bypass direction.",
+      "Whether external compilation systems that use behavioral recording/compilation constitute 'without inherited mechanisms' (compilation-vs-inheritance conflation) as defined for SPIDER's C-RESIDUAL-NOVELTY.",
+      "Whether SPIDER kernel can be repaired to execute inherited mechanisms (resolve EXECUTABLE with non-exact string equality and populated freshness/repair/applicability guards).",
+      "Cross-site evidence validity on production web agents with real browser interaction (benchmarks only).",
+      "Exact Auto per-compilation overhead in production (marginal cost per item reported).",
+      "Generalizability of TraceCompiler refusal behavior to SPIDER use cases.",
+      "Precision of MV6 parameter calibration to SPIDER's task distribution (parameters from external benchmarks)."
+    ],
+    "do_not_assume": [
+      "Do not assume task distributions are comparable — treat external cost profiles as strong baseline specification only until validated on SPIDER's alias-OOD.",
+      "Do not assume external convergence falsifies SPIDER's direction; falsification is blocked by MV3 PARTIAL and compilation-vs-inheritance conflation.",
+      "Do not assume SPIDER's kernel is executable — portfolio_assessment shows min_confidence mismatch (distill returns 0.5, min 0.8) and resolve never returns EXECUTABLE; make execution semantics operational first.",
+      "Do not conflate 'compilation' with 'bypass' or assume all compilation implies no inheritance — distinguish recording/compilation from pure compilation-bypass.",
+      "Do not generalize cross-site finding 'hierarchical>flat' beyond benchmark datasets (Mind2Web/WebArena/CAP) without SPIDER-specific validation.",
+      "Do not retry C-CROSSSITE external census acquisition without external hosting/WebGym census and without new evidence; thread is parked.",
+      "Do not treat single-point estimates as bounds with uncertainty — MV6 parameters are point estimates from papers with no reported CIs.",
+      "Do not spend Frontier/Product budgets on comparing against non-operational SPIDER baseline; use MV6-specified no-memory deterministic executor as the strong baseline to test against once kernel execution is operational."
+    ]
+  },
+  "dependencies": [
+    "MV6 no-memory deterministic executor baseline specification (report.md) — required by Frontier and Product as strong baseline once kernel executable.",
+    "Cross-site evidence assessment (MV5) — required for Graph/Frontier to pivot to hierarchical Intent/Stage/Action if continuing inheritance work.",
+    "Kernel repair capability (Product/Graph) to make resolve() return EXECUTABLE with non-exact string equality and populated freshness/repair/applicability/verification_rule/failure_boundary fields.",
+    "Deferred: WebChoreArena/WebArena-Verified compatibility (blocked on BrowserGym/CDP substrate, absent; scheduled dependency).",
+    "Parked: C-CROSSSITE external-census acquisition (requires external hosting or accessible WebGym census)."
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-INTEL-36249068574/request.json",
+    "research/experiments/EXP-INTEL-36249068574/spec.json",
+    "research/experiments/EXP-INTEL-36249068574/prereg.md",
+    "research/experiments/EXP-INTEL-36249068574/freeze.json",
+    "research/experiments/EXP-INTEL-36249068574/result.json",
+    "research/experiments/EXP-INTEL-36249068574/audit.json",
+    "research/experiments/EXP-INTEL-36249068574/report.md",
+    "research/experiments/EXP-INTEL-36249068574/provenance.json",
+    "arXiv:2604.09718",
+    "arXiv:2607.04542",
+    "arXiv:2608.02680",
+    "arXiv:2605.04107",
+    "arXiv:2604.05150",
+    "arXiv:2603.07024",
+    "arXiv:2606.17645",
+    "arXiv:2412.07958",
+    "research/experiments/EXP-INTEL-36103378878/handoff.json"
+  ],
+  "recommended_action": "PRODUCT lane: repair kernel execution semantics (resolve EXECUTABLE gating, populate Mechanism fields: freshness/repair_scope/applicability_guards/verification_rule/failure_boundary) to make estimand operational. FRONTIER/PRODUCT: adopt MV6-specified no-memory deterministic executor as strong baseline for testing once kernel is executable; validate on SPIDER's synthetic 40-task alias-OOD. GRAPH/FRONTIER: pivot to hierarchical Intent/Stage/Action (per MV5) if pursuing cross-site inheritance. INTEL: remain parked on C-CROSSSITE acquisition until external hosting/WebGym census exists; no further acquisition attempts in this cycle."
+}
