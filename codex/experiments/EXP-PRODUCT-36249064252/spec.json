@@ -1,0 +1,55 @@
+{
+  "experiment_id": "EXP-PRODUCT-36249064252",
+  "lane": "product",
+  "claim_ids": ["C-PARAM-INHERIT"],
+  "question": "Does a durable, committed, unit-tested parameter-induction capability in the product kernel (src/spider/kernel.py) let a mechanism distilled from resource-A observations resolve, bind, execute and verify correctly on never-observed resource B whose identifier value set is disjoint from A, at a success rate and honest per-task cost that beat cold exploration, literal replay and retrieval baselines by a family-stratified margin with bounded uncertainty?",
+  "hypothesis": "A kernel-integrated distill_parameterized() that induces parameter slots from resource-A observations will produce mechanisms that resolve to EXECUTABLE on never-observed resource-B identifiers (disjoint value sets) with success_rate >= 0.80, abstention_precision >= 0.85, false_accept_rate <= 0.10, ECE <= 0.15, and amortized_cost_ratio <= 0.85 vs. the best baseline (cold, literal replay, retrieval) at matched correctness.",
+  "falsifier": "If A->B transfer on disjoint identifier value sets cannot achieve (success_rate >= 0.80 AND abstention_precision >= 0.85 AND false_accept_rate <= 0.10 AND ECE <= 0.15 AND amortized_cost_ratio <= 0.85) against cold exploration, literal replay, and retrieval baselines at matched correctness, then parameterized inheritance is FALSIFIED-IN-SETTING as SPIDER's central mechanism and the architecture must change to non-inheriting alternatives.",
+  "baselines": [
+    {
+      "id": "B-COLD",
+      "description": "Cold exploration: no inherited mechanism, agent must discover action from scratch on each task",
+      "implementation": "resolve() returns UNKNOWN for all intents; each task pays full discovery cost"
+    },
+    {
+      "id": "B-LITERAL-REPLAY",
+      "description": "Literal mechanism replay: exact mechanism from resource-A observation replayed on resource-B (expected to fail due to identifier mismatch)",
+      "implementation": "distill() creates literal mechanism (confidence=0.5) from resource-A; resolve() on resource-B returns EXPLORE (confidence < min_confidence) or UNKNOWN"
+    },
+    {
+      "id": "B-RETRIEVAL-K5",
+      "description": "Retrieval baseline: semantic embedding retrieval of top-k=5 similar prior observations, then parameter binding via string matching",
+      "implementation": "Embed resource-A observations; retrieve top-5 for resource-B intent; bind parameters via heuristic slot matching; execute if confidence threshold met"
+    }
+  ],
+  "positive_control": {
+    "id": "PC-SAME-RESOURCE",
+    "description": "Parameterized mechanism induced from resource-A tested on additional resource-A identifiers (same resource, held-out identifiers)",
+    "expected": "success_rate >= 0.95, binding_accuracy >= 0.95, cost_ratio <= 0.50 vs B-COLD",
+    "purpose": "Verifies the induction and binding pipeline works when identifier distribution matches training"
+  },
+  "null_control": {
+    "id": "NC-SHUFFLED-INTENT",
+    "description": "Shuffled intent labels: parameter induction runs on resource-A observations with randomly permuted intent labels; transfer tested on resource-B",
+    "expected": "success_rate <= 0.10, abstention_precision >= 0.90 (mostly UNKNOWN), cost_ratio >= 1.0 vs B-COLD",
+    "purpose": "Verifies that any transfer success requires genuine intent-structured parameter induction, not spurious pattern matching"
+  },
+  "measurement_validity": [
+    "Substrate: locally-served HTTP server (stdlib http.server or Flask) with real ETag/304 conditional responses and session-scoped state (Bearer token or cookie). No browser, no docker, no LLM key required.",
+    "Resource A and Resource B have disjoint identifier value sets (e.g., A: /items/1..100, B: /products/SKU-A..SKU-Z). Identifiers are opaque strings with no semantic overlap.",
+    "Observations for resource-A collected by executing real HTTP requests against the server; observations include state (auth/session), action (method/path/body), next_state (response), success.",
+    "Parameter induction uses only resource-A observations. Resource-B identifiers are NEVER observed during induction.",
+    "Success measured by: HTTP 2xx + postcondition match (verified via kernel.verify()). Cost measured by: HTTP requests, bytes transferred, wall-clock latency, kernel resolve/execute calls.",
+    "Abstention precision = TN / (TN + FP) where TN=correctly returned UNKNOWN/EXPLORE for unlearned intents, FP=incorrectly returned EXECUTABLE for unlearned intents.",
+    "False accept rate = FP / (FP + TN) where FP=EXECUTABLE on unlearned/incorrect intent.",
+    "ECE (Expected Calibration Error) computed over confidence bins for EXECUTABLE resolutions.",
+    "Amortized cost = (induction_cost + N_transfer * transfer_cost) / N_transfer vs baseline_cost_per_task.",
+    "Family stratification: tasks grouped by intent family (e.g., CRUD families). Margin computed per family with B=5000 bootstrap.",
+    "Incumbent reference curve: shipped kernel (distill confidence=0.5, min_confidence=0.8) measured on same substrate/tasks; expected: 0% EXECUTABLE for any distilled mechanism."
+  ],
+  "decision_rule": "PASS (SUPPORTS) iff ALL of the following hold on resource-B transfer tasks (n >= 50 per family, >= 3 families): (1) success_rate >= 0.80; (2) abstention_precision >= 0.85; (3) false_accept_rate <= 0.10; (4) ECE <= 0.15; (5) amortized_cost_ratio <= 0.85 vs best baseline at matched correctness; (6) positive control passes; (7) null control passes. FAIL (FALSIFIES) if any condition fails. MIXED if positive/null controls pass but transfer conditions partially fail. MEASUREMENT_INVALID if substrate/server failures prevent valid observation collection.",
+  "product_consequence_positive": "C-PARAM-INHERIT advances toward VALIDATED. Kernel-integrated parameterized inheritance becomes a promotable Product Core capability. Enables downstream C-FRESHNESS, C-DELTA-REPAIR, C-RESIDUAL-NOVELTY, C-LLM-INHERIT measurements on a real mechanism.",
+  "product_consequence_negative": "C-PARAM-INHERIT is FALSIFIED-IN-SETTING. The accumulating architecture (parameterized inheritance as central mechanism) is rejected. Product must pivot to non-inheriting alternatives (e.g., deterministic compilation, pure retrieval, LLM-only). Resources reallocated to Frontier/Intel for orthogonal mechanism search.",
+  "estimated_cost": "~2000 HTTP requests per run (50 tasks x 3 families x ~13 requests/task including induction). Stdlib-only server. ~5-10 minutes wall-clock. No GPU, no external API keys.",
+  "expected_information_gain": "High. This is the hinge experiment for the entire program. A valid PASS establishes the first durable, kernel-integrated parameterized inheritance mechanism with measured transfer on disjoint identifiers. A valid FAIL falsifies the core architectural bet and forces a program-level pivot. Either outcome changes the claim status and product direction decisively."
+}

@@ -1,0 +1,239 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-36249068574",
+  "lane": "intel",
+  "environment": {
+    "platform": "linux",
+    "working_directory": "/home/runner/work/Spider/Spider",
+    "git_base_sha": "2f0310424190f4b0245164f6ad3cde49c742e3b6",
+    "github_run_id": "36249068574",
+    "request_id": "d68a5813732321a896158345",
+    "request_hash": "5a816ed45e06baf0066e07de35a752af27af74b2e1d505c67755846409835eb6",
+    "freeze_hash": "3fd275c23b849d939c7b5aff568497c7af433399326fc165a8615bb6dd1315f0",
+    "prereg_hash": "93ebfb51809901d15613285ff2b1db54653996bb250c8b50af8056d8517abc83",
+    "request_input_hash": "319ece0f99660e127028ca4ae311fac327ef81ea71a63b93316c2a8b9052341a"
+  },
+  "code_paths": [
+    {
+      "path": "src/spider/kernel.py",
+      "description": "SPIDER inheritance kernel — distilled to 132-line literal-replay stub with min_confidence=0.8 but distill returns confidence=0.5",
+      "status": "Diagnosed (not modified)",
+      "evidence": "request.json director_mandate portfolio_assessment"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-36249068574/",
+      "description": "Experiment directory containing all canonical packet files",
+      "status": "Active"
+    }
+  ],
+  "datasets_fixtures": [
+    {
+      "name": "Auto-Bench",
+      "source": "arXiv:2607.04542",
+      "description": "560 recorded frontier-agent spans across 4 task families, 87.1% witnessed-deterministic",
+      "runnable_locally": false,
+      "requires": "Rust toolchain, wasmtime sandbox, SDK shims"
+    },
+    {
+      "name": "BFCL (Berkeley Function Calling Leaderboard)",
+      "source": "arXiv:2604.05150, arXiv:2605.04107",
+      "description": "400 function-calling tasks for compiled AI evaluation; external validation for TSCG",
+      "runnable_locally": false,
+      "requires": "LLM API access"
+    },
+    {
+      "name": "TAB (Tool-Agentic Bench)",
+      "source": "arXiv:2605.04107",
+      "description": "~19,000 API calls across 12 models, 5 scenarios",
+      "runnable_locally": false,
+      "requires": "12 model endpoints"
+    },
+    {
+      "name": "DocILE",
+      "source": "arXiv:2604.05150",
+      "description": "5,680 invoices for document intelligence evaluation",
+      "runnable_locally": false,
+      "requires": "LLM API access"
+    },
+    {
+      "name": "Mind2Web",
+      "source": "arXiv:2603.07024, arXiv:2606.17645",
+      "description": "Cross-site web agent benchmark used for hierarchical memory evaluation",
+      "runnable_locally": false,
+      "requires": "Browser automation"
+    },
+    {
+      "name": "WebArena",
+      "source": "arXiv:2603.07024, arXiv:2606.17645",
+      "description": "Cross-site web agent benchmark used for hierarchical memory evaluation",
+      "runnable_locally": false,
+      "requires": "Browser automation"
+    },
+    {
+      "name": "AppWorld",
+      "source": "arXiv:2608.02680",
+      "description": "Deterministic simulator for TraceCompiler evaluation",
+      "runnable_locally": false,
+      "requires": "TraceCompiler release"
+    }
+  ],
+  "external_sources": [
+    {
+      "id": "SRC-AGENTIC-COMPILATION",
+      "type": "paper",
+      "identifier": "arXiv:2604.09718v2",
+      "title": "Agentic Compilation: Mitigating the LLM Rerun Crisis for Minimized-Inference-Cost Web Automation",
+      "url": "https://arxiv.org/html/2604.09718v2",
+      "accessed": "2026-09-26T14:36:41Z",
+      "search_query": "Agentic Compilation LLM rerun crisis deterministic compilation web automation",
+      "claims_extracted": ["per-compilation costs $0.002-$0.092", "one-shot LLM compilation", "deterministic JSON blueprint", "Lazy Replanning architecture", "DSM context preparation"]
+    },
+    {
+      "id": "SRC-AUTO-AGI-COMPILER",
+      "type": "paper",
+      "identifier": "arXiv:2607.04542v1",
+      "title": "Auto: The AGI Compiler",
+      "url": "https://arxiv.org/html/2607.04542v1",
+      "code_url": "https://github.com/RightNow-AI/auto",
+      "accessed": "2026-09-26T14:36:41Z",
+      "search_query": "Auto AGI Compiler witnessed determinism frontier agent spans",
+      "claims_extracted": ["87.1% witnessed-deterministic on 560 spans", "3/4 task families 100.0%", "6.4x cost reduction", "96.9% parity", "18.2µs in-process latency"]
+    },
+    {
+      "id": "SRC-TRACECOMPILER",
+      "type": "paper",
+      "identifier": "arXiv:2608.02680v1",
+      "title": "TraceCompiler: Skill-Guided Mining and Compilation of LLM Agent Traces into Mostly Deterministic Workflows",
+      "url": "https://arxiv.org/html/2608.02680v1",
+      "doi": "https://doi.org/10.48550/arXiv.2608.02680",
+      "accessed": "2026-09-26T14:36:41Z",
+      "search_query": "TraceCompiler skill-guided mining compilation LLM agent traces deterministic",
+      "claims_extracted": ["0.928 precision 0.943 recall on 15775 def-use edges", "0.992 blind precision on 250 edges", "Venmo 34→11 API calls", "15/21 leave-one-out", "refusal to compile under-determined"]
+    },
+    {
+      "id": "SRC-TSCG",
+      "type": "paper",
+      "identifier": "arXiv:2605.04107v1",
+      "title": "TSCG: Deterministic Tool-Schema Compilation for Agentic LLM Deployments",
+      "url": "https://arxiv.org/html/2605.04107v1",
+      "code_url": "https://github.com/SKZL-AI/tscg",
+      "accessed": "2026-09-26T14:36:41Z",
+      "search_query": "TSCG deterministic tool-schema compilation LLM agent deployments",
+      "claims_extracted": ["≥51% formal compression bound", "50-72% token savings", "Phi-4 0→84.4% accuracy", "BFCL ARR 108-181%", "19000 API calls 12 models", "zero dependencies"]
+    },
+    {
+      "id": "SRC-COMPILED-AI",
+      "type": "paper",
+      "identifier": "arXiv:2604.05150v2",
+      "title": "Compiled AI: Deterministic Code Generation for LLM-Based Workflow Automation",
+      "url": "https://arxiv.org/html/2604.05150",
+      "accessed": "2026-09-26T14:36:41Z",
+      "search_query": "Compiled AI deterministic code generation LLM workflow automation",
+      "claims_extracted": ["57x token efficiency", "450x latency reduction", "$555 vs $22000 TCO", "96% task completion zero execution tokens", "KILE 80.0% LIR 80.4%"]
+    },
+    {
+      "id": "SRC-HMT",
+      "type": "paper",
+      "identifier": "arXiv:2603.07024",
+      "title": "Enhancing Web Agents with a Hierarchical Memory Tree",
+      "url": "https://arxiv.org/html/2603.07024v1",
+      "accessed": "2026-09-26T14:36:41Z",
+      "search_query": "Hierarchical Memory Tree web agents cross-site flat memory intention-execution entanglement",
+      "claims_extracted": ["Intent-Stage-Action hierarchy", "significantly outperforms flat-memory on Mind2Web/WebArena", "intention-execution entanglement", "cross-website improvements"]
+    },
+    {
+      "id": "SRC-SKILLMIGRATOR",
+      "type": "paper",
+      "identifier": "arXiv:2606.17645v1",
+      "title": "Beyond Domains: Reusing Web Skills via Transferable Interaction Patterns",
+      "url": "https://arxiv.org/html/2606.17645v1",
+      "accessed": "2026-09-26T14:36:41Z",
+      "search_query": "SkillMigrator transferable interaction patterns cross-domain web skills layout matching",
+      "claims_extracted": ["TIP tuple (intent + operation template + slot schema + structural sketch)", "8-10% LLM-action reduction", "layout structure matching", "cross-task cross-website cross-domain"]
+    },
+    {
+      "id": "SRC-PAFFA",
+      "type": "paper",
+      "identifier": "arXiv:2412.07958",
+      "title": "PAFFA: Premeditated Actions For Fast Agents",
+      "url": "https://arxiv.org/html/2412.07958v1",
+      "accessed": "2026-09-26T14:36:41Z",
+      "search_query": "PAFFA premeditated actions fast agents action API library hierarchical",
+      "claims_extracted": ["Action API Library of reusable functions", "hierarchical organization by page-level operations", "cross-website step accuracy 0.357→0.510"]
+    },
+    {
+      "id": "SRC-TSCG-RAG",
+      "type": "paper",
+      "identifier": "arXiv:2605.26165v1",
+      "title": "Tool-Schema Compression Enables Agentic RAG Under Constrained Context Budgets",
+      "url": "https://arxiv.org/html/2605.26165",
+      "accessed": "2026-09-26T14:36:41Z",
+      "search_query": "Tool-schema compression agentic RAG context budget TSCG",
+      "claims_extracted": ["binary enablement effect", "JSON overflow at ~494 tools", "+20.5pp EM gain at 8K context", "compressed schemas operational beyond 800 tools"]
+    }
+  ],
+  "search_documentation": {
+    "date": "2026-09-26",
+    "tools": ["websearch (deep mode)", "webfetch"],
+    "queries": [
+      "Agentic Compilation deterministic compilation LLM witnessed determinism paper 2024 2025",
+      "TraceCompiler compiler deterministic execution verification paper GitHub",
+      "AutoCompiler AGI Compiler deterministic workflow compilation LLM paper",
+      "tool-schema compression LLM function calling compression ratio deterministic 2024 2025",
+      "cross-site transfer web agents hierarchical Intent Stage Action flat fragment reuse paper survey"
+    ],
+    "results_count": 45,
+    "primary_sources_located": 8,
+    "note": "All five search queries returned primary sources (peer-reviewed papers on arXiv) for each target system. Additional supplementary sources (arXiv:2605.26165 for TSCG RAG evaluation) were discovered during follow-up searches."
+  },
+  "commands_executed": [
+    "websearch --query 'Agentic Compilation deterministic compilation LLM witnessed determinism paper 2024 2025' --type deep",
+    "websearch --query 'TraceCompiler compiler deterministic execution verification paper GitHub' --type deep",
+    "websearch --query 'AutoCompiler AGI Compiler deterministic workflow compilation LLM paper' --type deep",
+    "websearch --query 'tool-schema compression LLM function calling compression ratio deterministic 2024 2025' --type deep",
+    "websearch --query 'cross-site transfer web agents hierarchical Intent Stage Action flat fragment reuse paper survey' --type deep"
+  ],
+  "environment_limitations": [
+    "No LLM API access available — external system evaluation is based on paper reading and web search, not local execution",
+    "No browser automation available — cross-site evidence is from published benchmarks, not live testing",
+    "No Docker/container runtime available — WebArena Docker image assessment based on published artifacts only",
+    "Network access limited to HTTP requests to public APIs (arXiv, GitHub, DOI resolvers)"
+  ],
+  "measurement_validity": {
+    "MV1": "PASS — All four primary sources located with permanent identifiers (arXiv IDs)",
+    "MV2": "PASS — Quantitative claims extracted with exact citations (section/table/figure where applicable)",
+    "MV3": "PARTIAL — Task distribution comparability assessed; external benchmarks differ from SPIDER's alias-OOD",
+    "MV4": "PASS — Runnable-locally vs requires-model-access partition determined for all four systems",
+    "MV5": "PASS — Cross-site evidence check screened 10+ papers; clear determination: hierarchical necessary, flat known failure mode",
+    "MV6": "PASS — Recommended strong baseline specified with concrete parameters traced to verified sources"
+  },
+  "related_experiments": {
+    "parent_handoff": "EXP-INTEL-36103378878 (handoff.json, sha256=408710b27b00e6c47ecd7a122debec70345d55674656efd2ee8fbe5249cb10e8)",
+    "downstream_dependencies": [
+      "EXP-FRONTIER-36042599040 (C-RESIDUAL-NOVELTY, PASS, rho 0.4837 ECE 0.216)",
+      "EXP-PRODUCT-36129169543 (C-PARAM-INHERIT)",
+      "EXP-GRAPH-36132150213 (P1_RUNTIME_CAPABILITY_LEDGER, P2_RUNTIME_ONE_COMMAND_BRINGUP, both pass=false)"
+    ],
+    "codex_references": [
+      "codex/index.json — prior experiments referencing Agentic Compilation, TraceCompiler, DSM, compilation baselines",
+      "codex/claim_state.json — C-PRODUCT-ECON HYPOTHESIS, C-CROSSSITE HYPOTHESIS, C-RESIDUAL-NOVELTY HYPOTHESIS/MEASUREMENT_INVALID history"
+    ]
+  },
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-INTEL-36249068574/result.json",
+      "role": "derived",
+      "description": "Structured measurements and execution status per EXPERIMENT_PACKET.md contract"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-36249068574/report.md",
+      "role": "derived",
+      "description": "Human-readable interpretation bounded by measurements"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-36249068574/provenance.json",
+      "role": "derived",
+      "description": "Provenance chain: commits, run ids, datasets, code paths, environment"
+    }
+  ]
+}
