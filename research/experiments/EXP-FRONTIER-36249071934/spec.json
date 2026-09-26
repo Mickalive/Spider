@@ -1,17 +1,49 @@
 {
   "experiment_id": "EXP-FRONTIER-36249071934",
   "lane": "frontier",
-  "claim_ids": [],
-  "question": "",
-  "hypothesis": "",
-  "falsifier": "",
-  "baselines": [],
-  "positive_control": "",
-  "null_control": "",
-  "measurement_validity": [],
-  "decision_rule": "",
-  "product_consequence_positive": "",
-  "product_consequence_negative": "",
-  "estimated_cost": "",
-  "expected_information_gain": ""
+  "claim_ids": ["C-RESIDUAL-NOVELTY"],
+  "question": "On a real, reachable, deterministic local substrate with no browser, no docker, and no LLM key, what is the measured per-span witnessed-determinism fraction of a task execution, and does a no-memory compiled executor with a selective deopt-to-agent ratchet (compile the witnessed-deterministic spans, hand the residual to a model, recompile as the residual shrinks) achieve lower amortized end-to-end cost than inherited-mechanism execution at matched correctness, with the inheritance-ablation arm (emptied registry) as the mandatory null and the incumbent shipped kernel as an additional arm?",
+  "hypothesis": "A no-memory compiled executor with a deopt-to-agent ratchet will achieve lower amortized end-to-end cost than SPIDER's inherited-mechanism execution at matched correctness on a deterministic local substrate, because the per-span witnessed-determinism fraction is high enough that compiling deterministic spans and only deferring genuinely novel spans to a model is more efficient than maintaining a full inheritance infrastructure.",
+  "falsifier": "If the no-memory deopt-to-agent executor matches or beats inherited-mechanism execution at matched correctness and equal or lower amortized cost, then SPIDER's central premise (that cumulative inheritance infrastructure pays for itself) is FALSIFIED-IN-SETTING and the architecture must change to non-inheriting execution.",
+  "baselines": {
+    "B-INHERITED-SPIDER": "Current SPIDER kernel with distilled mechanisms in registry (src/spider/kernel.py) - the incumbent shipped kernel",
+    "B-NO-MEMORY-DETERMINISTIC": "No-memory deterministic executor: compiles witnessed-deterministic spans, deopts residual spans to a model oracle, recompiles as residual shrinks (ratchet). This is the primary test arm.",
+    "B-COLD-EXPLORATION": "Cold exploration with empty registry (inheritance ablation) - MANDATORY NULL CONTROL. Same substrate, same tasks, no inherited mechanisms."
+  },
+  "positive_control": {
+    "id": "PC-WITNESSED-DETERMINISM",
+    "description": "Synthetic task with 100% witnessed-deterministic spans (all spans repeat identically across episodes). The deopt ratchet should compile all spans on first episode and achieve zero model calls thereafter. Expected: 1.0 determinism fraction, amortized cost approaches compile-only cost.",
+    "expected_outcome": "determinism_fraction=1.0, model_calls_after_compile=0, cost_ratio_vs_cold < 0.1"
+  },
+  "null_control": {
+    "id": "NC-ZERO-DETERMINISM",
+    "description": "Synthetic task with 0% witnessed-deterministic spans (every span is unique per episode). The deopt ratchet should never compile, always deopt to model. Expected: 0.0 determinism fraction, cost equals cold exploration plus compile overhead.",
+    "expected_outcome": "determinism_fraction=0.0, model_calls_per_episode=all_spans, cost_ratio_vs_cold >= 1.0"
+  },
+  "measurement_validity": {
+    "substrate": "Real, reachable, deterministic local HTTP service (stdlib only, no Flask/FastAPI/BrowserGym/docker/Chromium). A-PROBE from parent handoff demonstrated stdlib HTTP service works.",
+    "availability_observation": "Infrastructure availability recorded as observation with explicit smallest-next-action, not as blocking falsifier. If substrate unavailable, record exact failure and smallest unblocker.",
+    "per_span_unit": "Measurement at individual work-span level (not task-family aggregate). A span = contiguous sequence of actions with identical state-action signature across episodes.",
+    "determinism_definition": "A span is witnessed-deterministic if its (state, action, next_state) tuple is identical across >=2 episodes with the same intent. Determinism fraction = deterministic_spans / total_spans.",
+    "cost_accounting": "Amortized end-to-end cost = (compile_cost + sum(model_call_costs) + sum(execution_costs)) / episodes. Model call cost measured in abstract units (1 unit per deopt invocation). Execution cost = 1 unit per span executed. Compile cost = 1 unit per unique span compiled.",
+    "correctness_criterion": "Task success rate must be >= 0.95 for all arms. Matched correctness enforced by only comparing arms that achieve >= 0.95 success.",
+    "residual_novelty_tracking": "Report determinism fraction as function of episode index (learning curve) and as function of span novelty (first-seen vs repeated)."
+  },
+  "decision_rule": {
+    "primary": "Three-way outcome on amortized cost at matched correctness (success >= 0.95) over 50 episodes:\n  - DEOPT_DOMINATES: deopt_ratchet_cost < inherited_cost AND deopt_ratchet_cost < cold_cost\n  - DEOPT_TIES: |deopt_ratchet_cost - inherited_cost| <= 0.05 * max(deopt_ratchet_cost, inherited_cost) AND both < cold_cost\n  - DEOPT_LOSES: deopt_ratchet_cost >= inherited_cost OR cold_cost <= min(deopt_ratchet_cost, inherited_cost)\n\nFalsifier trigger: If DEOPT_DOMINATES or DEOPT_TIES, then FALSIFIED-IN-SETTING for SPIDER's central premise.",
+    "secondary": [
+      "Report per-span determinism distribution (histogram, mean, median, CI) across episodes",
+      "Report determinism fraction vs episode index (learning curve)",
+      "Report residual-novelty dependence: cost breakdown by span novelty tier (never-seen, seen-once, seen-multiple)",
+      "Report infrastructure availability as observation with smallest-next-action if any component fails"
+    ]
+  },
+  "product_consequence_positive": "If DEOPT_DOMINATES or DEOPT_TIES: SPIDER's central inheritance premise is falsified in this setting. Architecture must pivot to non-inheriting compiled execution with deopt ratchet. Product kernel would be replaced by a compile+deopt runtime. C-RESIDUAL-NOVELTY claim updated to REJECTED or SUPERSEDED.",
+  "product_consequence_negative": "If DEOPT_LOSES: Inherited-mechanism execution remains justified. The deopt ratchet is a valid baseline but not superior. C-RESIDUAL-NOVELTY remains HYPOTHESIS/EXPERIMENTAL. Next experiment should test whether inherited mechanisms provide value on top of compiled deterministic spans (hybrid architecture).",
+  "estimated_cost": {
+    "compute": "Low - pure Python, stdlib HTTP, no external APIs, no browser, no LLM calls (model oracle simulated)",
+    "wall_time": "~5 minutes for 50 episodes x 3 arms x ~20 spans/episode",
+    "human_review": "None required"
+  },
+  "expected_information_gain": "High - this is the first experiment testing the deopt ratchet architecture against SPIDER's inheritance architecture at the per-span level on a real substrate. The three-way decision rule directly addresses whether cumulative inheritance infrastructure pays for itself. A valid negative (DEOPT_DOMINATES/TIES) would be the most informative result in the program to date."
 }
