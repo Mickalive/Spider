@@ -1,0 +1,353 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-36272373909",
+  "lane": "graph",
+  "status": "MEASUREMENT_INVALID",
+  "producer_claim_supported": false,
+  "required_fixes": [
+    "The pre-declared falsifier in spec.json.falsifier and prereg.md section 3 must NOT be treated as triggered. Two conditions named in the frozen spec.json.decision_rule.outcomes.MEASUREMENT_INVALID were met (PC-EXACT-MATCH did not pass, NC-NO-APPLICABLE did not pass), and prereg.md sections 8.1/8.2/9 state that PC or NC failure yields MEASUREMENT_INVALID. result.json encodes status=COMPLETE / outcome=FALSIFIES and overrides that frozen mapping in result.json.validity_notes; the runner itself (artifacts/experiment_runner.py:780-784) contains no MEASUREMENT_INVALID branch at all. A re-adjudication must apply the frozen mapping, not the ex-post one.",
+    "PC-EXACT-MATCH must be encoded as NOT MEASURED, not as a failed observation. 0 of the 60 goals in raw_evidence/goal_generation.json are a verbatim distillation intent, so the control has zero trials. artifacts/experiment_runner.py:762-766 guards the computation with `if inc_verbatim:`, which never fires. result.json.controls['PC-EXACT-MATCH'].observed ('Incumbent EXECUTABLE rate = 0.0 on verbatim goals') and report.md section 4.3 ('0/12 verbatim tasks') assert a denominator of 12 that exists nowhere in raw_evidence. Per EXPERIMENT_PACKET section 1 this must be null/unknown, not a fabricated observation.",
+    "The primary metric must be redefined or the experiment re-frozen. result.json.metrics.*.abstention_adjusted_accuracy is computed from `correct`, which artifacts/experiment_runner.py:376-390 defines as 'the executed bound action returned the status code implied by its HTTP method'. The mechanism's own postconditions are never consulted. This does not measure correct applicable-mechanism binding. Either re-freeze with a mechanism-identity-based correctness definition, or explicitly re-label the metric and withdraw every claim that rests on it.",
+    "B-INTERNAL-ID-LOOKUP must be re-implemented as the oracle the spec declares, or the spec's oracle reference must be withdrawn. artifacts/experiment_runner.py:163-209 never reads mechanism_id or fragment_id; it builds a keyword map from the public `intent` strings and returns the first goal token found, including stopwords such as 'a'. result.json.controls and report.md section 2.4 both describe this arm as 'Oracle: uses internal mechanism IDs (cheating upper bound)'. report.md section 6 item 4 additionally states the arm 'maps goals to mechanisms by keyword without checking preconditions properly', which is factually wrong: lines 191-194 do check preconditions and guards.",
+    "The ECE estimator must have a closed top bin. artifacts/experiment_runner.py:489-493 uses `lower <= p < upper`, so p_applicable == 1.0 falls in no bin. B-RANDOM-ROLE and B-INTERNAL-ID-LOOKUP set p_applicable = 1.0 on all 60 rows (experiment_runner.py:105, 200), so all 60 observations are dropped and result.json reports ece_global = 0.0000 for both arms. Audit recomputation with a closed top bin gives 0.7500 (B-RANDOM-ROLE) and 0.8333 (B-INTERNAL-ID-LOOKUP). Those two reported values are measurement artifacts and must not be cited downstream as evidence of calibration.",
+    "Secondary gates 6 and 7 must be recomputed and re-adjudicated. result.json.metrics.secondary_gate_evaluation.candidate_beats_random_role=true and candidate_beats_lexical_overlap=true assert prereg.md section 9 gates 6-7 ('binomial test p < 0.01, family-blocked bootstrap'), but artifacts/experiment_runner.py:753-759 contains the comment 'For now, just print metrics for null comparisons' and computes no test statistic; report.md section 5 renders both as a bare checkmark. Audit recomputation on the producer's own reported counts fails both: candidate 24/60 vs B-RANDOM-ROLE 15/60 gives two-proportion p=0.0794 and exact McNemar p=0.1078 with family-blocked bootstrap 95% CI [-0.2333, 0.5667]; candidate 24/60 vs B-LEXICAL-OVERLAP 16/60 gives two-proportion p=0.1213 and family-blocked bootstrap 95% CI [0.0000, 0.3333].",
+    "V2/V10 must be re-measured with the statistic the prereg names, or the 'disjoint vocabulary' assertion must be withdrawn. raw_evidence/goal_generation.json.max_overlap = 0.25 is goal-token-set versus the UNION of all five intent token sets (artifacts/goal_generator.py:170-185), which mechanically dilutes the number. The prereg criterion is per-goal vocabulary disjointness from the distillation intents: audit recomputation gives max 0.6667 ('fetch a post by id' vs 'retrieve a post by id'), mean 0.3231, and 38 of 60 goals above the prereg's own 0.3 threshold; 50 of 60 share at least one token with their target intent. The prereg's stated smallest-next-action ('if > 0.3, regenerate with new seed') was therefore triggered and not executed.",
+    "V3 'identical starting state' must be implemented or withdrawn. artifacts/experiment_runner.py:560 calls reset_state() once before task creation; all 60 tasks and all 5 arms then share one mutable in-memory server (artifacts/http_server.py:17-23). prereg.md section 11 promised 'Fresh in-memory state per task; server restarted between families'. Neither happened, no per-task state snapshot or hash exists, and the paired arms therefore do not observe identical starting state. Audit could bound the likely impact (the only real mutation is POST /users, because artifacts/http_server.py:103-107 checks required-field KEYS so the literal values '${name}'/'${email}' pass) but could not demonstrate it is nil from the packet.",
+    "The candidate implementation must match the frozen design or the deviation must be recorded. prereg.md section 6 item 3 specifies a 'Learned calibration head (logistic regression on similarity + precondition features)'. artifacts/candidate_resolver.py:148 implements an untrained fixed sigmoid, p = 1/(1+exp(-10*(cos-0.3))), with no fitting of any kind. This is material: threshold 0.5 is equivalent to cosine >= 0.3, and the minimum observed candidate p_applicable is 0.4214, so the gate fired on 1 of 60 tasks. The calibration portion of the primary gate was fixed by construction, not measured.",
+    "Task accounting must be corrected in any republication. prereg.md section 7.1 states 100 task instances; report.md section 2.3 states '20 goals x 5 families = 100 task instances (60 in-distribution + 20 OOD)'. raw_evidence/task_results.jsonl contains 300 rows = 60 tasks x 5 arms, of which 40 are in-distribution (20 paraphrased, 10 composite, 10 underspecified) and 20 are OOD.",
+    "OBS-INCUMBENT-FLOOR must exist as a record. prereg.md section 11 mandates it ('recorded as OBS-INCUMBENT-FLOOR') but raw_evidence/preconditions.json contains only the four declared keys (OBS-HAS-DISTILL-PARAMETERIZED, OBS-REGISTRY-NON-EMPTY, OBS-HTTP-RESPONSIVE, OBS-GOAL-GEN-INDEPENDENCE).",
+    "provenance.json must be corrected. frozen_inputs['freeze.json'].sha256 is a53e74aa0f7f33e4f508f6595f3a2691588857f021a7c6733006729e82c15611, which is prereg.md's hash; the actual freeze.json hash is 85eaf9d4b67c31a749153031fc3e959d48f71c213755983b1ce3305309c939c3. provenance.json.random_seeds lists torch=42 but no torch seed is set anywhere in artifacts/experiment_runner.py, and artifacts/http_server.py:109 uses unseeded uuid.uuid4(), so prereg.md section 15's 'All randomness seeded' is not accurate. No environment lockfile, no pinned model revision, and no embedding-model artifact hash exist, so the numeric embedding results are not reproducible from the packet alone.",
+    "Prereg.md section 15's 'Frozen code: Candidate resolver, goal generator, HTTP server hashed at freeze time' was not executed. freeze.json contains no artifact hashes, and the mtimes of artifacts/candidate_resolver.py (21:27:24), artifacts/goal_generator.py (21:27:04) and artifacts/http_server.py (21:26:41) all postdate freeze.json (21:23:08). Their hashes appear only in result.json.artifacts, so the resolver code is not bound to the frozen transaction.",
+    "A-INCUMBENT's false-accept Wilson interval must be null, not [0.0, 0.0]. With zero EXECUTABLE trials the quantity is undefined; artifacts/experiment_runner.py:446 returns (0, 0) and result.json reports false_accept_wilson_lower = false_accept_wilson_upper = 0.0, encoding an undefined value as a zero-width interval."
+  ],
+  "validity_findings": [
+    {
+      "id": "VF-01",
+      "severity": "fatal",
+      "validity_id": "primary metric construct validity (spec.json.decision_rule.primary, prereg.md 7.2)",
+      "finding": "The frozen primary metric does not measure the frozen construct. prereg.md 7.2 defines `correct` as 'EXECUTABLE + bound_action produces expected postconditions when executed on HTTP server' in the context of correct applicable-mechanism binding. artifacts/experiment_runner.py:381-388 derives expected_status from bound_action['method'] (200 / 201 / 204) and ignores the selected mechanism's postconditions entirely, so any arm that binds a wrong-but-executable mechanism is scored correct and any arm that binds the right mechanism is scored incorrect if its template cannot execute. Audit cross-tabulation of raw_evidence/task_results.jsonl over all 300 rows shows `correct` is a deterministic function of which mechanism was selected: create-a-new-user 33/33 correct, list-photos 32/32 correct, update-a-comment 0/91, retrieve-a-post-by-id 0/35, delete-an-album 0/48. The metric measures fixture executability, not semantic resolution.",
+      "consequence": "result.json reports A-CANDIDATE abstention_adjusted_accuracy = 0.400 and false_accept_rate = 0.593. Audit decomposition of the same 59 A-CANDIDATE EXECUTABLE rows shows 57 (0.966) bound the family-correct mechanism, of which 24 scored correct and 33 scored incorrect, and those 33 are exactly the three mechanisms whose action_template contains an unbindable ${...} placeholder (delete-an-album 12, update-a-comment 12, retrieve-a-post-by-id 9). The reported false-accept rate is therefore dominated by the fixture's unbindable placeholders, not by resolver error. B-RANDOM-ROLE is credited with 15 'correct' while selecting the family-correct mechanism on only 2/20 paraphrased goals and 10/60 overall, i.e. its 0.250 accuracy exceeds the 0.2 chance rate for reasons unrelated to binding.",
+      "raw_evidence": "raw_evidence/task_results.jsonl, artifacts/experiment_runner.py:365-408, raw_evidence/fixture.json"
+    },
+    {
+      "id": "VF-02",
+      "severity": "fatal",
+      "validity_id": "spec.json.decision_rule.outcomes.MEASUREMENT_INVALID / prereg.md 8.1, 8.2, 9",
+      "finding": "The frozen MEASUREMENT_INVALID condition was met and was overridden ex post. spec.json.decision_rule.outcomes.MEASUREMENT_INVALID reads 'Any V1-V11 violated, PC-EXACT-MATCH fails, NC-NO-APPLICABLE fails, or CI degenerate (width >= 0.30)'. prereg.md 8.1 and 8.2 each state 'Failure -> MEASUREMENT_INVALID'. Both controls are recorded pass=false in result.json.controls. result.json nonetheless reports status=COMPLETE, outcome=FALSIFIES, and result.json.validity_notes asserts the PC failure 'is expected behavior of incumbent (confidence floor), not a measurement validity violation'. The runner has no MEASUREMENT_INVALID code path (artifacts/experiment_runner.py:780-784: outcome is SURVIVES if primary_pass else FALSIFIES).",
+      "consequence": "A structural guarantee of falsification was converted into a scientific falsification. The frozen document is also internally contradictory here (prereg.md 11 calls the same confidence floor 'the measured reference floor, not a bug'), and the producer resolved that contradiction in the direction that yields a claim rejection rather than surfacing it.",
+      "raw_evidence": "spec.json.decision_rule.outcomes, prereg.md sections 8.1/8.2/9/11, result.json.controls, result.json.validity_notes, artifacts/experiment_runner.py:761-784"
+    },
+    {
+      "id": "VF-03",
+      "severity": "fatal",
+      "validity_id": "PC-EXACT-MATCH (spec.json.positive_control)",
+      "finding": "The positive control was never run, but is reported as a measured failure. The goal set in raw_evidence/goal_generation.json contains 0 verbatim distillation intents (audit count: 0 of 60). artifacts/experiment_runner.py:762-766 computes PC-EXACT-MATCH only `if inc_verbatim:`, a condition that is never satisfied, so no PC measurement exists in any artifact. result.json.controls['PC-EXACT-MATCH'].observed asserts 'Incumbent EXECUTABLE rate = 0.0 on verbatim goals' and report.md 4.3 asserts '0/12 verbatim tasks'; the denominator 12 appears in no raw evidence.",
+      "consequence": "A control that verifies 'the fixture and measurement pipeline work' is the sole guard against a broken pipeline, and it is precisely the control that was never executed. The pipeline was in fact broken (VF-01), and the unexecuted control is the one check that would have exposed it.",
+      "raw_evidence": "raw_evidence/goal_generation.json, raw_evidence/task_results.jsonl, artifacts/experiment_runner.py:761-766, result.json.controls['PC-EXACT-MATCH']"
+    },
+    {
+      "id": "VF-04",
+      "severity": "major",
+      "validity_id": "V2 / V10 (spec.json.measurement_validity)",
+      "finding": "V10 is satisfied only in a diluted form and the prereg threshold was applied to the wrong statistic. prereg.md 4.3 and 11 set the criterion as goal-generator versus distillation-intent vocabulary disjointness with token Jaccard < 0.3. artifacts/goal_generator.py:170-185 computes each goal's Jaccard against the UNION of all five intent token sets, which mechanically caps the value. Audit recomputation of the statistic the prereg names: max per-goal Jaccard against any single intent = 0.6667 ('fetch a post by id' vs 'retrieve a post by id'), mean Jaccard against the goal's own family target intent = 0.3231, and 38 of 60 goals exceed 0.3 against their own target intent. 50 of 60 goals share at least one token with their target intent. The generator is a hard-coded template list (artifacts/goal_generator.py:23-134) whose resource nouns are identical to the distillation intents'.",
+      "consequence": "result.json.observations asserts 'OBS-GOAL-GEN-INDEPENDENCE: true' and result.json.validity_notes asserts 'V10 satisfied ... max token overlap measured at 0.25'. The prereg's declared smallest-next-action for this precondition ('if > 0.3, regenerate with new seed') was triggered and not executed. Every arm saw goals that are near-synonymous one-to-one paraphrases of the five distillation intents, one per resource family.",
+      "raw_evidence": "raw_evidence/goal_generation.json, raw_evidence/preconditions.json, artifacts/goal_generator.py:23-134 and 170-185"
+    },
+    {
+      "id": "VF-05",
+      "severity": "major",
+      "validity_id": "V3 paired within-task design (spec.json.measurement_validity) / prereg.md 11",
+      "finding": "Arm order randomization is real, but the 'identical starting state' half of V3 is not implemented. Audit confirms all 60 tasks carry exactly 5 arm records and 43 distinct arm orderings occur across tasks, so order randomization and pairing are genuine. However artifacts/experiment_runner.py:560 calls reset_state() exactly once, before task creation, and all 60 tasks share one mutable module-global in-memory dict (artifacts/http_server.py:17-23). prereg.md 11 promised 'Fresh in-memory state per task; server restarted between families'. No per-task state snapshot or hash exists in any artifact.",
+      "consequence": "Arms within a task are not independent: an arm that mutates state changes what later arms in the shuffled order observe. Audit could bound the likely magnitude (the only real mutation is POST /users, which succeeds because artifacts/http_server.py:103-107 validates required-field KEYS so the literal values '${name}'/'${email}' pass; the other three mechanisms 404 on their literal '${id}' path segments and do not mutate), but the packet contains no evidence sufficient to demonstrate the impact is nil rather than merely small.",
+      "raw_evidence": "artifacts/experiment_runner.py:559-560 and 662-671, artifacts/http_server.py:17-23 and 103-107, raw_evidence/task_results.jsonl"
+    },
+    {
+      "id": "VF-06",
+      "severity": "major",
+      "validity_id": "ECE estimator (prereg.md 7.3)",
+      "finding": "The top ECE bin is half-open, so p_applicable == 1.0 is silently discarded. artifacts/experiment_runner.py:489-493 selects `lower <= (p_applicable or confidence) < upper` over edges [0, 0.2, 0.4, 0.6, 0.8, 1.0]. B-RANDOM-ROLE (experiment_runner.py:105) and B-INTERNAL-ID-LOOKUP (experiment_runner.py:200) hard-code p_applicable = 1.0 on every row, so all 60 observations fall outside every bin. result.json reports ece_global = 0.0 and ece_global_bootstrap_upper = 0.0 for both arms, and report.md 4.1 presents 0.000 as their calibration.",
+      "consequence": "Audit recomputation with a closed top bin gives ece_global = 0.7500 for B-RANDOM-ROLE and 0.8333 for B-INTERNAL-ID-LOOKUP. These are the two worst-calibrated arms in the packet, reported as perfectly calibrated. A-CANDIDATE is unaffected (audit count: 0 of 60 candidate rows dropped; min p_applicable = 0.4214, max = 0.9982), and its reported ece_global = 0.5197 reproduces exactly. Because the primary ECE gate is applied only to the candidate, the gate outcome is unchanged, but the null-arm ECE values must not be cited downstream.",
+      "raw_evidence": "artifacts/experiment_runner.py:482-501 and 105/200, derived_evidence/metrics.json, result.json.metrics['B-RANDOM-ROLE'].ece_global"
+    },
+    {
+      "id": "VF-07",
+      "severity": "major",
+      "validity_id": "prereg.md 6 (candidate resolver design) / V7 frozen thresholds",
+      "finding": "The candidate's applicability gate is not the frozen design and is structurally incapable of abstaining on this fixture. prereg.md 6 item 3 specifies a 'Learned calibration head (logistic regression on similarity + precondition features)'. artifacts/candidate_resolver.py:148 implements p_applicable = 1/(1+exp(-10*(best_sim - 0.3))), a fixed untrained sigmoid with no fitted parameters. The frozen threshold of 0.5 is therefore algebraically equivalent to cosine similarity >= 0.3.",
+      "consequence": "Audit recomputation: candidate p_applicable ranges 0.4214 to 0.9982, and exactly 1 of 60 tasks falls below threshold (task-022, goal 'schedule a post', OOD, p = 0.4214). A-CANDIDATE therefore abstained on 1/20 OOD goals and 0/40 in-distribution goals; B-RANDOM-ROLE, B-LEXICAL-OVERLAP and B-INTERNAL-ID-LOOKUP abstained 0/60. The false-accept, UNKNOWN-precision and ECE conditions of the primary gate were decided by the threshold's construction rather than by any property of semantic resolution, and they could not have been passed by any resolver on this fixture.",
+      "raw_evidence": "artifacts/candidate_resolver.py:44-49 and 146-157, raw_evidence/task_results.jsonl, prereg.md section 6"
+    },
+    {
+      "id": "VF-08",
+      "severity": "major",
+      "validity_id": "unknown_precision metric identity (prereg.md 7.3) / prereg.md 13 no-metric-substitution",
+      "finding": "The producer's unknown_precision is not the preregistered quantity. prereg.md 7.3 defines UNKNOWN precision = TRUE_UNKNOWN / (TRUE_UNKNOWN + FALSE_UNKNOWN) where FALSE_UNKNOWN is 'incorrectly abstained on in-distribution', i.e. the denominator includes in-distribution abstentions. artifacts/experiment_runner.py:434-438 computes it over OOD tasks only, which is the OOD abstention rate (recall), not a precision.",
+      "consequence": "result.json.metrics.*.unknown_precision values (A-CANDIDATE 0.05, A-INCUMBENT 1.0, all nulls 0.0) and the control strings in result.json.controls['NC-NO-APPLICABLE'] are OOD abstention rates under a different name. Here the substitution is not favourable to the candidate (it has zero in-distribution abstentions, so the preregistered denominator would not have lowered its score), but the metric identity is wrong and the prereg's no-substitution rule (prereg.md 13 item 2) is violated on its face.",
+      "raw_evidence": "prereg.md section 7.3, artifacts/experiment_runner.py:433-438, result.json.metrics"
+    },
+    {
+      "id": "VF-09",
+      "severity": "major",
+      "validity_id": "NC-NO-APPLICABLE (spec.json.null_control)",
+      "finding": "NC-NO-APPLICABLE is unsatisfiable by construction and the producer nonetheless used its failure as evidence about the candidate. prereg.md 8.2 requires 'All arms return UNKNOWN; UNKNOWN precision >= 0.85, false-accept = 0.0' across the 20 OOD goals, and 'Failure -> MEASUREMENT_INVALID'. But B-RANDOM-ROLE, B-LEXICAL-OVERLAP and B-INTERNAL-ID-LOOKUP are null controls that by construction never abstain (experiment_runner.py:99-113, 145-150, 197-201), so a perfect abstention score from them is logically impossible. The producer records the failure (result.json.controls['NC-NO-APPLICABLE'].pass = false) and then reads it as 'reflects poor OOD calibration of candidate and null arms, not fixture failure' (result.json.validity_notes).",
+      "consequence": "A structurally impossible control was treated as (a) a validity trigger that was then set aside and (b) a source of scientific information about the candidate. Under the frozen mapping it is a validity trigger only.",
+      "raw_evidence": "prereg.md section 8.2, spec.json.null_control, result.json.controls['NC-NO-APPLICABLE'], result.json.validity_notes, artifacts/experiment_runner.py:768-778"
+    },
+    {
+      "id": "VF-10",
+      "severity": "major",
+      "validity_id": "incumbent arm as comparison reference (spec.json.decision_rule.primary condition 1)",
+      "finding": "The comparison target is empty by construction, not by measurement. Audit independently probed the shipped kernel at the executing commit (audit probe over src/spider/kernel.py with MechanismRegistry): shipped_has_distill_parameterized = False; distill() emits confidence = 0.5 and parameter_slots = [] for all 5 mechanisms; with all template slots supplied, resolve() returns EXPLORE (confidence 0.5) for all 5 verbatim intents; with no params it returns UNKNOWN for 4 and EXPLORE for 'list photos'; EXECUTABLE requires min_confidence <= 0.5, and the frozen configuration is min_confidence = 0.8. A-INCUMBENT therefore emits 0 EXECUTABLE and 60 UNKNOWN by code-level certainty, and 0 EXPLORE.",
+      "consequence": "Primary gate condition 1 (candidate_acc_lower_gt_incumbent_acc_upper, 0.2857 > 0.0602) is satisfied by any arm that emits a single EXECUTABLE decision and carries no information about semantic resolution. This is the same degeneracy the Codex already recorded for EXP-FRONTIER-36249071934 ('0 of 1200 EXECUTABLE resolutions ... C_i == C_c exactly', whose audit recorded the comparison leg as NOT IDENTIFIED), and the same pathology the director_mandate's own first agent prior names. Audit also notes that the incumbent's exact-intent path was never observed in the experiment (VF-03): result.json.observations states 'resolve status for exact intent = UNKNOWN (confidence below threshold)', which is wrong for 1 of 5 intents ('list photos' yields EXPLORE) and unobserved for all 5.",
+      "raw_evidence": "src/spider/kernel.py:70-118, raw_evidence/fixture.json (min_confidence 0.8, distill_confidence 0.5), raw_evidence/task_results.jsonl, codex/index.json EXP-FRONTIER-36249071934, request.json.director_mandate.allocation.agent_priors_used[0]"
+    },
+    {
+      "id": "VF-11",
+      "severity": "major",
+      "validity_id": "prereg.md 15 / freeze.json artifact binding",
+      "finding": "The measurement code is not bound to the frozen transaction. prereg.md 15 states 'Frozen code: Candidate resolver, goal generator, HTTP server hashed at freeze time'. freeze.json contains hashes for prereg.md, request.json and spec.json only. The mtimes of artifacts/candidate_resolver.py (2026-09-26T21:27:24Z), artifacts/goal_generator.py (21:27:04Z), artifacts/http_server.py (21:26:41Z) and artifacts/experiment_runner.py (21:32:19Z) all postdate freeze.json (21:23:08Z). Their hashes appear only in result.json.artifacts, which is producer-authored and post-freeze.",
+      "consequence": "The candidate resolver that produced the numbers is not the object the freeze certified, so no outcome-bearing code is independently anchored to the pre-registration. Audit does confirm that the frozen inputs themselves are unmodified (git diff against HEAD is empty for prereg.md, request.json, spec.json, freeze.json; each recorded hash matches the file on disk).",
+      "raw_evidence": "freeze.json, prereg.md section 15, result.json.artifacts, file mtimes in research/experiments/EXP-GRAPH-36272373909/"
+    },
+    {
+      "id": "VF-12",
+      "severity": "minor",
+      "validity_id": "provenance.json integrity (EXPERIMENT_PACKET section 5)",
+      "finding": "Three provenance defects. (a) provenance.json.frozen_inputs['freeze.json'].sha256 = a53e74aa0f7f33e4f508f6595f3a2691588857f021a7c6733006729e82c15611 is prereg.md's hash; the actual freeze.json hash is 85eaf9d4b67c31a749153031fc3e959d48f71c213755983b1ce3305309c939c3. (b) provenance.json.random_seeds lists torch = 42, but artifacts/experiment_runner.py sets only random.seed(42) and np.random.seed(42) and never imports or seeds torch; artifacts/http_server.py:109 uses unseeded uuid.uuid4(), contradicting prereg.md 15's 'All randomness seeded'. (c) The embedding model is unpinned: the local cache holds models--sentence-transformers--all-MiniLM-L6-v2 with sentence-transformers 6.1.0 / torch 2.14.0+cu130 installed, there is no environment lockfile, no model revision hash, and no model artifact in result.json.artifacts, so the numeric p_applicable values in raw_evidence/task_results.jsonl are not reproducible from the packet.",
+      "consequence": "Reproduction of the candidate's similarity values is not possible from the recorded provenance alone. Note this does not affect the direction of any finding above, all of which are recomputed from raw_evidence/task_results.jsonl and src/spider/kernel.py.",
+      "raw_evidence": "provenance.json.frozen_inputs and random_seeds, artifacts/experiment_runner.py:534-537, artifacts/http_server.py:109, prereg.md section 15"
+    },
+    {
+      "id": "VF-13",
+      "severity": "minor",
+      "validity_id": "task construction (prereg.md 7.1) / prereg.md 7.2 context delivery",
+      "finding": "Task accounting is wrong in both the preregistration and the report, and the per-task context is decorative. prereg.md 7.1 specifies 100 task instances; report.md 2.3 states '20 goals x 5 families = 100 task instances (60 in-distribution + 20 OOD)'. raw_evidence/task_results.jsonl contains 300 rows = 60 tasks x 5 arms, comprising 20 paraphrased, 10 composite, 10 underspecified and 20 OOD (40 in-distribution, not 60). Separately, artifacts/experiment_runner.py:348-351 injects family-specific target resource ids (post_id, comment_id, album_id, photo_id) into each task context, but every mechanism has parameter_slots = [] and artifacts/candidate_resolver.py:78-93 derives parameters only from parameter_slots, so those ids never reach binding; the incumbent kernel uses context solely for precondition matching.",
+      "consequence": "The prereg's 'resource-specific context (e.g., target ID for retrieval)' was not delivered to any arm, which compounds VF-01: with empty parameter_slots, four of five mechanisms are structurally unexecutable, and the reported primary metric is dominated by that structural fact.",
+      "raw_evidence": "prereg.md section 7.1, report.md section 2.3, raw_evidence/task_results.jsonl, artifacts/experiment_runner.py:310-362, artifacts/candidate_resolver.py:78-93"
+    },
+    {
+      "id": "VF-14",
+      "severity": "minor",
+      "validity_id": "V11 preconditions as observations (spec.json.measurement_validity)",
+      "finding": "The ordering guarantee holds but one mandated record is missing and one observation is inaccurate. Audit confirms the precondition write (artifacts/experiment_runner.py:604-606) precedes the arm loop (662-671), so 'recorded before any resolver runs' is satisfied in code order. However prereg.md 11 requires the incumbent floor to be 'recorded as OBS-INCUMBENT-FLOOR' and raw_evidence/preconditions.json contains only the four declared keys. Separately, raw_evidence/preconditions.json's OBS-GOAL-GEN-INDEPENDENCE.detail is the literal string 'To be computed' while a value is present alongside it, and its `value: true` is the assertion max_overlap < 0.3 under the diluted statistic of VF-04.",
+      "raw_evidence": "raw_evidence/preconditions.json, prereg.md sections 10 and 11, artifacts/experiment_runner.py:572-606"
+    },
+    {
+      "id": "VF-15",
+      "severity": "minor",
+      "validity_id": "statistical reporting hygiene (EXPERIMENT_PACKET section 1 mandatory-key semantics)",
+      "finding": "An undefined quantity is reported as a measured value. A-INCUMBENT has zero EXECUTABLE trials, so its false-accept rate is 0/0; artifacts/experiment_runner.py:446 special-cases this to (0, 0) and result.json reports A-INCUMBENT.false_accept_rate = 0.0 with false_accept_wilson_lower = false_accept_wilson_upper = 0.0, a zero-width interval on an undefined quantity. The same applies in substance to A-CANDIDATE.ece_unknown_bootstrap_upper = 0.4214, which is a family-blocked bootstrap 97.5% upper bound computed on a single UNKNOWN row and therefore equals the point estimate exactly, i.e. it is a degenerate interval presented as an uncertainty estimate.",
+      "raw_evidence": "artifacts/experiment_runner.py:446 and 515-531, result.json.metrics['A-INCUMBENT'], result.json.metrics['A-CANDIDATE'].ece_unknown_bootstrap_upper"
+    },
+    {
+      "id": "VF-16",
+      "severity": "informational",
+      "validity_id": "integrity of the transmitted packet (EXPERIMENT_PACKET sections 1, 4, 5)",
+      "finding": "Everything that is present checks out. All 9 artifact sha256 values in result.json.artifacts and provenance.json.artifacts match the files on disk exactly. The three frozen-input hashes in freeze.json match prereg.md, request.json and spec.json, and git diff against HEAD shows no post-freeze modification of any frozen input. result.json.metrics reproduces derived_evidence/metrics.json for all five arms with differences at 4-decimal rounding only (no substantive disagreement, audit-verified key by key). raw_evidence/task_results.jsonl has exactly 300 well-formed records covering 60 tasks x 5 arms with no missing arm on any task. result.json.observations contains no interpretations smuggled in as observations beyond the VF-10 exact-intent inaccuracy noted above.",
+      "consequence": "This is an honest, well-transmitted execution of a defective design. The producer did not fabricate raw data; the failures are in construct validity, control execution, gate adjudication and metric identity, not in evidence fabrication.",
+      "raw_evidence": "research/experiments/EXP-GRAPH-36272373909/{freeze.json,result.json,provenance.json,derived_evidence/metrics.json,raw_evidence/*}"
+    }
+  ],
+  "baseline_findings": [
+    {
+      "id": "BF-01",
+      "baseline_id": "B-LEXICAL-OVERLAP",
+      "declared_role": "strong_null (spec.json.baselines[2])",
+      "finding": "The strong null is not discriminated by the fixture on the task the claim is about. Audit recomputation of mechanism-selection accuracy on the 20 unseen paraphrased goals: A-CANDIDATE 20/20 = 1.000 (Wilson 95% [0.839, 1.000]) and B-LEXICAL-OVERLAP 20/20 = 1.000 (Wilson 95% [0.839, 1.000]). On the full 60-goal set B-LEXICAL-OVERLAP selects the family-correct mechanism on 49/60 versus A-CANDIDATE's 58/60. The null's advantage in the reported metric comes entirely from the mechanism-executability confound of VF-01, not from any residual semantic gap.",
+      "consequence": "The packet contains no evidence that semantic resolution beats trivial lexical overlap on 5-way, shared-resource-noun mechanism selection, which is precisely the discriminating comparison prereg.md section 9 gates 6-7 exist to make. report.md 10 item 6 notices the null's 16/60 without noticing that it ties the candidate on the 20 goals that matter.",
+      "audit_measurements": {
+        "_definition": "AUDIT-DERIVED count of decisions that bound the mechanism matching the goal's own resource family. Not a producer metric and not a substitute for one; see recomputed_metrics['AUDIT-DERIVED: mechanism_selection_accuracy'].",
+        "selection_accuracy_on_20_paraphrased_goals": {"A-CANDIDATE": "20/20", "B-LEXICAL-OVERLAP": "20/20", "B-INTERNAL-ID-LOOKUP": "12/20", "B-RANDOM-ROLE": "2/20", "A-INCUMBENT": "0/20"},
+        "selection_accuracy_on_all_60_goals": {"A-CANDIDATE": "58/60", "B-LEXICAL-OVERLAP": "49/60", "B-INTERNAL-ID-LOOKUP": "30/60", "B-RANDOM-ROLE": "10/60", "A-INCUMBENT": "0/60"}
+      }
+    },
+    {
+      "id": "BF-02",
+      "baseline_id": "B-INTERNAL-ID-LOOKUP",
+      "declared_role": "strong_null / oracle upper bound (spec.json.baselines[3]: 'Resolver assumes access to internal mechanism_id or fragment_id ... This is an oracle upper-bound')",
+      "finding": "The arm is not an oracle. artifacts/experiment_runner.py:163-209 constructs InternalIdLookupResolver from the public registry view and never reads mechanism_id or fragment_id; it maps the first occurrence of each intent word into a keyword table and returns the mechanism whose first matching goal token is found, iterating goal tokens in order and breaking on the first hit. The substring 'a' from 'create a new user' therefore captures any goal containing the article 'a'. The arm also does check preconditions and guards (lines 191-194), contradicting report.md 6 item 4's stated explanation for its weakness.",
+      "consequence": "The packet's declared upper-bound reference is a degenerate stopword-matching heuristic, and result.json.controls['B-INTERNAL-ID-LOOKUP'] and report.md 2.4 both describe it as using internal ids it never touches. Two consequences follow. First, the packet has no valid oracle ceiling, so 'how hard is this task' is unestablished. Second, secondary gate 8 (candidate_no_internal_id_access) is marked pass=true on a comparison against an arm that also has no internal-id access, so the gate is vacuous rather than satisfied. The arm's 0.1667 abstention_adjusted_accuracy in result.json is an artifact of this mis-implementation and must not be read as an oracle result.",
+      "audit_measurements": {"selection_accuracy_paraphrased_20_goals": 0.12, "abstentions_total_60_goals": 0, "ece_global_recomputed_closed_top_bin": 0.8333, "ece_global_as_reported": 0.0}
+    },
+    {
+      "id": "BF-03",
+      "baseline_id": "B-RANDOM-ROLE",
+      "declared_role": "null_control (spec.json.baselines[1])",
+      "finding": "The chance-level null scores 0.250 abstention_adjusted_accuracy against a 5-mechanism registry whose chance rate is 0.200, and the excess is a fixture artifact rather than chance. Audit decomposition: B-RANDOM-ROLE selected the family-correct mechanism on only 2/20 paraphrased goals and 10/60 goals overall (chance-consistent), yet was credited with 15 'correct' because two of the five templates happen to execute successfully regardless of the goal (create-a-new-user 33/33, list-photos 32/32 across all arms). result.json.controls['B-RANDOM-ROLE'].observed repeats the 0.25 figure without this decomposition, and its null_control role is unverified in the metric that matters.",
+      "consequence": "The null's apparent competence inflates the measured difficulty of the task in the producer's favour and simultaneously deflates the candidate-vs-null contrast that the decision rule turns on. It also means the reported 0.250 is not evidence that the null 'behaves as expected' (report.md 6 item 4).",
+      "audit_measurements": {"selection_accuracy_paraphrased_20_goals": 0.02, "selection_accuracy_all_60_goals": 0.1, "abstentions_total_60_goals": 0, "ece_global_recomputed_closed_top_bin": 0.75, "ece_global_as_reported": 0.0}
+    },
+    {
+      "id": "BF-04",
+      "baseline_id": "A-INCUMBENT",
+      "declared_role": "incumbent_reference (spec.json.baselines[0])",
+      "finding": "The reference floor is a code fact, not a measured baseline, and it is reported as if it were a measurement. Independent audit probe of src/spider/kernel.py at the executing commit: distill() returns confidence 0.5 with parameter_slots []; resolve() requires exact intent equality AND all template slots present in params; it returns EXPLORE at confidence 0.5 whenever a candidate is found; EXECUTABLE is reachable only at min_confidence <= 0.5. The frozen configuration is min_confidence = 0.8, so 0 EXECUTABLE is arithmetically certain. Additionally, resolve() drops any mechanism with unfilled template slots before the confidence check, which is why exact-intent behaviour is UNKNOWN for 4 of 5 intents and EXPLORE for 'list photos' when no params are supplied, and EXPLORE for all 5 when they are.",
+      "consequence": "Primary gate condition 1 is a comparison against an arm that is identical to a null by construction. The Codex has already recorded this exact degeneracy for EXP-FRONTIER-36249071934 and its audit declined to treat the resulting comparison as identified. result.json.observations' claim about exact-intent resolve status is both unobserved in this run (0 verbatim tasks, VF-03) and inaccurate for 1 of 5 intents.",
+      "audit_measurements": {
+        "shipped_has_distill_parameterized": false,
+        "distill_confidence": 0.5,
+        "min_confidence": 0.8,
+        "probed_exact_intent_status_all_5_with_slots_bound": "EXPLORE x5, EXECUTABLE 0",
+        "probed_exact_intent_status_all_5_without_params": "UNKNOWN x4, EXPLORE x1, EXECUTABLE 0",
+        "probed_min_confidence_required_for_executable": 0.5,
+        "executable_resolutions_observed_in_experiment": 0
+      }
+    },
+    {
+      "id": "BF-05",
+      "baseline_id": "A-CANDIDATE",
+      "declared_role": "candidate resolver (prereg.md 5-6)",
+      "finding": "The candidate arm's own reported numbers are arithmetically correct but measure fixture executability rather than resolution quality. All of result.json's rate arithmetic for A-CANDIDATE reproduces exactly from raw_evidence/task_results.jsonl (abstention_adjusted_accuracy 0.4, false_accept_rate 0.5932, unknown_precision 0.05). Audit decomposition of its 59 EXECUTABLE rows: 57 (0.966) bound the family-correct mechanism, 24 scored correct and 33 scored incorrect, and the 33 are exactly delete-an-album (12), update-a-comment (12) and retrieve-a-post-by-id (9), the three mechanisms whose templates carry unbindable placeholders. Its one abstention (task-022, 'schedule a post') came from a fixed untrained sigmoid, not from a learned gate.",
+      "consequence": "The candidate's genuine positive signal on the claim's actual question (57/59 mechanism selection, 20/20 paraphrased) is invisible in the reported primary metric, and its reported calibration failure is largely an artifact of the fixture. Any downstream use of A-CANDIDATE's 0.400/0.593/0.052 numbers as evidence about semantic resolution would be wrong in both directions.",
+      "audit_measurements": {"executable_rows": 59, "bound_family_correct_mechanism": 57, "scored_correct": 24, "scored_incorrect_despite_correct_mechanism": 33, "abstentions_total": 1, "abstentions_on_20_ood": 1}
+    }
+  ],
+  "recomputed_metrics": {
+    "_provenance": "All values below were recomputed by the independent auditor from raw_evidence/task_results.jsonl (300 rows), raw_evidence/fixture.json, raw_evidence/goal_generation.json, derived_evidence/metrics.json, artifacts/experiment_runner.py, artifacts/candidate_resolver.py and src/spider/kernel.py. Producer metric, control and gate identifiers are preserved verbatim. A-CANDIDATE/A-INCUMBENT/B-RANDOM-ROLE/B-LEXICAL-OVERLAP/B-INTERNAL-ID-LOOKUP are the producer's arm ids from result.json.metrics; PC-EXACT-MATCH and NC-NO-APPLICABLE are the producer's control ids. Entries prefixed AUDIT-DERIVED are additional measurements the producer did not compute; they are new quantities, not corrections or renamings of producer metrics.",
+    "reproduction_of_producer_rates": {
+      "verdict": "REPRODUCED. Every rate in result.json.metrics recomputes exactly from raw evidence; result.json also reproduces derived_evidence/metrics.json for all five arms with 4-decimal rounding differences only.",
+      "A-INCUMBENT": {"n_tasks": 60, "executable_correct": 0, "executable_incorrect": 0, "unknown": 60, "explore": 0, "abstention_adjusted_accuracy": 0.0, "abstention_adj_acc_wilson_lower": 0.0, "abstention_adj_acc_wilson_upper": 0.060174, "false_accept_rate": null, "false_accept_rate_note": "0/0, undefined; result.json encodes 0.0", "false_accept_wilson_lower": null, "false_accept_wilson_upper": null, "unknown_precision_as_implemented_ood_abstention_rate": 1.0, "unknown_precision_wilson_lower": 0.83887, "unknown_precision_wilson_upper": 1.0, "ece_global": 0.0, "matches_producer": true},
+      "A-CANDIDATE": {"n_tasks": 60, "executable_correct": 24, "executable_incorrect": 35, "unknown": 1, "explore": 0, "abstention_adjusted_accuracy": 0.4, "abstention_adj_acc_wilson_lower": 0.285693, "abstention_adj_acc_wilson_upper": 0.526342, "false_accept_rate": 0.59322, "false_accept_wilson_lower": 0.465932, "false_accept_wilson_upper": 0.709112, "unknown_precision_as_implemented_ood_abstention_rate": 0.05, "unknown_precision_wilson_lower": 0.008881, "unknown_precision_wilson_upper": 0.236136, "ece_global": 0.519717, "ece_per_class": {"executable": 0.521383, "unknown": 0.421405}, "candidate_p_applicable_min": 0.421405, "candidate_p_applicable_max": 0.998154, "candidate_rows_below_frozen_threshold_0_5": 1, "ece_rows_dropped_by_bin_boundary": 0, "matches_producer": true},
+      "B-RANDOM-ROLE": {"n_tasks": 60, "executable_correct": 15, "executable_incorrect": 45, "unknown": 0, "explore": 0, "abstention_adjusted_accuracy": 0.25, "abstention_adj_acc_wilson_lower": 0.157764, "abstention_adj_acc_wilson_upper": 0.372323, "false_accept_rate": 0.75, "false_accept_wilson_lower": 0.627677, "false_accept_wilson_upper": 0.842236, "unknown_precision_as_implemented_ood_abstention_rate": 0.0, "unknown_precision_wilson_lower": 0.0, "unknown_precision_wilson_upper": 0.16113, "ece_global_as_reported": 0.0, "ece_global_recomputed_closed_top_bin": 0.75, "ece_rows_dropped_by_bin_boundary": 60, "matches_producer": "rates yes; ece_global 0.0 is a binning artifact"},
+      "B-LEXICAL-OVERLAP": {"n_tasks": 60, "executable_correct": 16, "executable_incorrect": 44, "unknown": 0, "explore": 0, "abstention_adjusted_accuracy": 0.266667, "abstention_adj_acc_wilson_lower": 0.171325, "abstention_adj_acc_wilson_upper": 0.39009, "false_accept_rate": 0.733333, "false_accept_wilson_lower": 0.60991, "false_accept_wilson_upper": 0.828675, "unknown_precision_as_implemented_ood_abstention_rate": 0.0, "unknown_precision_wilson_lower": 0.0, "unknown_precision_wilson_upper": 0.16113, "ece_global": 0.183558, "ece_rows_dropped_by_bin_boundary": 0, "matches_producer": true},
+      "B-INTERNAL-ID-LOOKUP": {"n_tasks": 60, "executable_correct": 10, "executable_incorrect": 50, "unknown": 0, "explore": 0, "abstention_adjusted_accuracy": 0.166667, "abstention_adj_acc_wilson_lower": 0.093131, "abstention_adj_acc_wilson_upper": 0.280319, "false_accept_rate": 0.833333, "false_accept_wilson_lower": 0.719681, "false_accept_wilson_upper": 0.906869, "unknown_precision_as_implemented_ood_abstention_rate": 0.0, "unknown_precision_wilson_lower": 0.0, "unknown_precision_wilson_upper": 0.16113, "ece_global_as_reported": 0.0, "ece_global_recomputed_closed_top_bin": 0.833333, "ece_rows_dropped_by_bin_boundary": 60, "matches_producer": "rates yes; ece_global 0.0 is a binning artifact"}
+    },
+    "primary_gate_evaluation_recomputed": {
+      "candidate_acc_lower_gt_incumbent_acc_upper": {"producer": true, "recomputed": true, "audit_note": "arithmetically true but uninformative: the incumbent arm is empty by code construction (see baseline_findings BF-04 and validity_findings VF-10), so this condition is satisfied by any arm emitting one EXECUTABLE decision"},
+      "candidate_fa_upper_le_010": {"producer": false, "recomputed": false, "recomputed_value": 0.709112, "audit_note": "directionally correct, but the false-accept rate is dominated by unbindable ${...} placeholders (VF-01), not by wrong mechanism choice"},
+      "candidate_unk_prec_lower_ge_085": {"producer": false, "recomputed": false, "recomputed_value": 0.008881, "audit_note": "the gate is decided by the frozen sigmoid threshold being algebraically equivalent to cosine >= 0.3, which no goal in this fixture falls below except one (VF-07); also computed on a substituted metric (VF-08)"},
+      "candidate_ece_global_boot_upper_le_018": {"producer": false, "recomputed": false, "recomputed_value": 0.939482, "audit_note": "ECE reproduces exactly and the gate direction is robust, but correctness inside the ECE is the HTTP-status proxy of VF-01, so 0.5197 is as much a statement about the fixture as about the resolver"},
+      "candidate_per_class_ece_boot_upper_le_018": {"producer": false, "recomputed": false, "recomputed_executable_upper": 0.948262, "recomputed_unknown_upper": 0.421405, "audit_note": "the UNKNOWN per-class bootstrap upper equals its point estimate because it is computed on a single row (VF-15)"},
+      "all_primary_pass": {"producer": false, "recomputed": false}
+    },
+    "secondary_gate_evaluation_recomputed": {
+      "candidate_beats_random_role": {
+        "producer": true,
+        "recomputed": false,
+        "prereg_criterion": "binomial test p < 0.01, family-blocked bootstrap (prereg.md section 9 gate 6)",
+        "two_proportion_p_on_producer_counts_24_60_vs_15_60": 0.0794,
+        "mcnemar_exact_p": 0.1078,
+        "mcnemar_discordant_b_c": "b=17, c=8, n_disc=25",
+        "family_blocked_bootstrap_95ci_of_difference": [-0.2333, 0.5667],
+        "family_blocked_bootstrap_p_difference_gt_0": 0.6821,
+        "audit_note": "no test was computed by the producer at all (artifacts/experiment_runner.py:753-759 prints counts only), and every audit-computed test fails the preregistered p<0.01 criterion. The family-blocked interval includes zero."
+      },
+      "candidate_beats_lexical_overlap": {
+        "producer": true,
+        "recomputed": false,
+        "prereg_criterion": "binomial test p < 0.01, family-blocked bootstrap (prereg.md section 9 gate 7)",
+        "two_proportion_p_on_producer_counts_24_60_vs_16_60": 0.1213,
+        "mcnemar_exact_p": 0.0078,
+        "mcnemar_discordant_b_c": "b=8, c=0, n_disc=8",
+        "family_blocked_bootstrap_95ci_of_difference": [0.0, 0.3333],
+        "family_blocked_bootstrap_p_difference_gt_0": 0.9262,
+        "audit_note": "the two-proportion test fails p<0.01; exact McNemar on the paired design reaches 0.0078, but the prereg's family-blocked bootstrap lower bound is exactly 0.0, i.e. it does not exclude no-difference. Gate is at best ambiguous and is not the pass the producer recorded."
+      },
+      "candidate_no_internal_id_access": {
+        "producer": true,
+        "recomputed": true,
+        "audit_note": "V9 does hold for A-CANDIDATE: create_resolver_from_registry (artifacts/candidate_resolver.py:172-185) constructs MechanismView from public fields only, and run_distillation (artifacts/experiment_runner.py:296-307) returns a public-only view. But the gate is vacuous as a comparison, because B-INTERNAL-ID-LOOKUP also never receives an internal id (BF-02), so 'the candidate does not use internal ids' is decided against an arm that cannot use them either."
+      },
+      "pc_exact_match_pass": {
+        "producer": false,
+        "recomputed": "NOT MEASURED",
+        "audit_note": "0 of 60 goals are verbatim distillation intents; the producer's PC block is unreachable code. The producer's claimed '0/12 verbatim tasks' denominator does not exist. Correct encoding is null, not false (VF-03)."
+      },
+      "nc_no_applicable_pass": {
+        "producer": false,
+        "recomputed": false,
+        "audit_note": "the failure is real as recorded, but the control is unsatisfiable by construction because the three null arms never abstain (VF-09), and under the frozen mapping an NC failure yields MEASUREMENT_INVALID, not a falsification."
+      }
+    },
+    "AUDIT-DERIVED: incumbent_reference_curve_independently_probed": {
+      "method": "independent probe of src/spider/kernel.py at the executing commit, MechanismRegistry with the experiment's five distillation Observations, min_confidence 0.8, in an out-of-tree scratch directory",
+      "shipped_has_distill_parameterized": false,
+      "distill_confidence_emitted": 0.5,
+      "parameter_slots_emitted": [],
+      "applicability_guards_emitted": {},
+      "registry_size": 5,
+      "exact_intent_with_all_slots_bound": {"EXPLORE": 5, "EXECUTABLE": 0, "UNKNOWN": 0},
+      "exact_intent_without_params": {"UNKNOWN": 4, "EXPLORE": 1, "EXECUTABLE": 0, "note": "list photos is the only slot-free template and yields EXPLORE; the other four are dropped before the confidence check because their template slots are unfilled"},
+      "paraphrased_intent": {"UNKNOWN": 5, "EXPLORE": 0, "EXECUTABLE": 0},
+      "min_confidence_sweep": {"0.8": "EXPLORE", "0.5": "EXECUTABLE", "0.4": "EXECUTABLE", "0.0": "EXECUTABLE"},
+      "min_confidence_required_for_executable": 0.5,
+      "conclusion": "The incumbent's 0 EXECUTABLE is a code-level certainty under min_confidence 0.8, not an empirical baseline. This reproduces and independently confirms the Codex-recorded EXP-FRONTIER-36249071934 finding (0 of 1200 EXECUTABLE, C_i == C_c exactly) by a different method."
+    },
+    "AUDIT-DERIVED: mechanism_selection_accuracy": {
+      "_definition": "NOT a producer metric and not a substitute for one. This is a new measurement the producer did not compute: the fraction of an arm's decisions that bound the mechanism matching the goal's own resource family, derived from mechanism_intent in raw_evidence/task_results.jsonl against the one-mechanism-per-family fixture in raw_evidence/fixture.json. It exists because result.json's `correct` field measures HTTP executability rather than mechanism identity (VF-01). It is reported to show what the raw evidence does and does not support, and it must not be read as a corrected version of abstention_adjusted_accuracy, which remains the frozen metric with the frozen value 0.4 for A-CANDIDATE.",
+      "paraphrased_20_goals": {"A-CANDIDATE": "20/20", "B-LEXICAL-OVERLAP": "20/20", "B-INTERNAL-ID-LOOKUP": "12/20", "B-RANDOM-ROLE": "2/20", "A-INCUMBENT": "0/20"},
+      "underspecified_10_goals": {"A-CANDIDATE": "10/10", "B-LEXICAL-OVERLAP": "8/10", "B-INTERNAL-ID-LOOKUP": "6/10", "B-RANDOM-ROLE": "2/10", "A-INCUMBENT": "0/10"},
+      "composite_10_goals": {"A-CANDIDATE": "8/10", "B-LEXICAL-OVERLAP": "8/10", "B-INTERNAL-ID-LOOKUP": "5/10", "B-RANDOM-ROLE": "2/10", "A-INCUMBENT": "0/10"},
+      "ood_20_goals_correct_behaviour_is_abstention": {"abstentions": {"A-INCUMBENT": "20/20", "A-CANDIDATE": "1/20", "B-LEXICAL-OVERLAP": "0/20", "B-RANDOM-ROLE": "0/20", "B-INTERNAL-ID-LOOKUP": "0/20"}},
+      "all_60_goals": {"A-CANDIDATE": "58/60", "B-LEXICAL-OVERLAP": "49/60", "B-INTERNAL-ID-LOOKUP": "30/60", "B-RANDOM-ROLE": "10/60", "A-INCUMBENT": "0/60"},
+      "mcnemar_exact_on_selection_paraphrased_20_goals": {"A-CANDIDATE_vs_B-LEXICAL-OVERLAP": {"b": 10, "c": 1, "p": 0.0117}, "A-CANDIDATE_vs_B-RANDOM-ROLE": {"b": 10, "c": 1, "p": 0.0117, "note": "computed over paraphrased goals only; over all 60 goals A-CANDIDATE vs B-RANDOM-ROLE is b=49, c=1, p<0.0001"}},
+      "interpretation": "On the claim's own question, the candidate is at ceiling and the strong lexical null is at the same ceiling, so the fixture does not discriminate semantic resolution from lexical overlap. On OOD abstention the candidate is at 1/20 and the incumbent at 20/20. Neither of these is the frozen metric, and neither was preregistered."
+    },
+    "AUDIT-DERIVED: goal_intent_vocabulary_coupling": {
+      "_definition": "NOT a producer metric. Recomputation of the V2/V10 independence statistic against the criterion prereg.md 4.3 and 11 actually names (per-goal vocabulary disjointness from the distillation intents, token Jaccard < 0.3), versus the diluted union-token statistic that artifacts/goal_generator.py:170-185 computes and that result.json reports as max_overlap 0.25.",
+      "reported_max_overlap_goal_vs_union_of_all_intent_tokens": 0.25,
+      "recomputed_max_goal_vs_any_single_intent": 0.6667,
+      "recomputed_max_goal_vs_own_family_target_intent": 0.6667,
+      "recomputed_mean_goal_vs_own_family_target_intent": 0.3231,
+      "goals_above_prereg_0_3_threshold_vs_own_target": "38/60",
+      "goals_sharing_at_least_one_token_with_own_target": "50/60",
+      "worst_offenders": {"fetch a post by id": 0.6667, "register a new user": 0.6, "make a new user account": 0.5, "modify a comment": 0.5, "edit a comment": 0.5, "change a comment": 0.5, "revise a comment": 0.5, "find a comment": 0.5}
+    },
+    "AUDIT-DERIVED: fixture_and_design_shape": {
+      "mechanisms_in_registry": 5,
+      "mechanisms_with_unbindable_placeholders": 4,
+      "mechanisms_whose_template_executes_successfully": 2,
+      "mechanisms_per_resource_family": 1,
+      "crud_operations_per_family_in_http_app": 4,
+      "mechanism_coverage_of_http_surface": "5 of 20 endpoints; one operation per family",
+      "distinct_effective_class_labels": 5,
+      "goal_types": {"paraphrased": 20, "composite": 10, "underspecified": 10, "ood": 20},
+      "tasks_actual": 60,
+      "tasks_stated_in_prereg_7_1": 100,
+      "tasks_stated_in_report_2_3": "100 (and '60 in-distribution + 20 OOD', which is also wrong; actual is 40 + 20)",
+      "raw_rows": 300,
+      "rows_per_arm": 60,
+      "distinct_arm_orderings_across_tasks": 43,
+      "shared_mutable_server_state_resets": 1,
+      "per_task_state_reset": false,
+      "per_family_server_restart": false,
+      "per_task_context_target_ids_reaching_parameter_binding": 0,
+      "family_blocks_for_bootstrap": 5,
+      "note": "The binding problem is a 5-way choice in which every goal shares its family noun with its target mechanism, and in which the two templates that can execute carry all of the reported signal."
+    }
+  },
+  "claim_ceiling": "MAXIMUM JUSTIFIED CLAIM CEILING: C-SEMANTIC-RESOLVE remains at its pre-experiment registry status HYPOTHESIS (research/claims/registry.json: status HYPOTHESIS, next_gate 'unseen-goal resolution with applicability/abstention calibration'), with two new narrowly-bounded observations attached. The producer's claimed ceiling, that C-SEMANTIC-RESOLVE's mechanism-level premise is FALSIFIED-IN-SETTING and semantic resolution is abandoned as an architectural component in favour of explicit goal annotation or full re-exploration (spec.json.falsifier, report.md section 8, provenance.json.validity.claim_update_authorized = true), is NOT justified. producer_claim_supported = false. (1) NOT ESTABLISHED, and the strongest thing the raw evidence actually supports: on a stdlib-only 5-family HTTP fixture with a 5-mechanism frozen registry, a MiniLM-cosine resolver bound the family-matching mechanism on 57 of 59 EXECUTABLE decisions and on 20 of 20 unseen paraphrased goals, while a max-token-Jaccard null bound the same mechanism on 20 of 20. Goal-to-mechanism selection on this fixture is therefore trivially achievable and is NOT shown to require semantics rather than lexical overlap. (2) NOT ESTABLISHED: that semantic resolution is uncalibrated in general. The single frozen sigmoid gate 1/(1+exp(-10*(cos-0.3))) at threshold 0.5 is algebraically equivalent to cosine >= 0.3, and only 1 of 60 tasks fell below it, so the false-accept, UNKNOWN-precision and ECE conditions of the primary gate were fixed by the gate's construction before any arm ran; the reported candidate false_accept_rate 0.5932 is, per audit decomposition, produced by unbindable ${...} placeholders in 4 of 5 mechanisms with parameter_slots = [] rather than by wrong mechanism choice. (3) ESTABLISHED AND INDEPENDENTLY CONFIRMED (code-level, not behavioural): the shipped SpiderKernel at the executing commit cannot return EXECUTABLE after its own distill(); distill emits confidence 0.5 against min_confidence 0.8 and EXECUTABLE is unreachable at any min_confidence above 0.5, so A-INCUMBENT's 0.000 abstention_adjusted_accuracy is a certainty of the code and not a measured reference floor. Any comparison against A-INCUMBENT is unidentified, consistent with the Codex-recorded EXP-FRONTIER-36249071934 audit treatment of the same degeneracy. (4) The pre-declared falsifier was NOT validly triggered: spec.json.decision_rule.outcomes.MEASUREMENT_INVALID and prereg.md 8.1/8.2/9 name PC-EXACT-MATCH failure and NC-NO-APPLICABLE failure as MEASUREMENT_INVALID conditions, both controls failed (PC in fact was never run at all, with zero verbatim tasks, and its reported '0/12' denominator is unsupported), and the packet's own primary metric does not measure the frozen construct. Under the binding contract this is MEASUREMENT_INVALID, not a scientific falsification. (5) DOWNSTREAM UNSAFE TO ASSUME: that B-INTERNAL-ID-LOOKUP is an oracle ceiling (it never accesses mechanism_id and is a stopword-matching heuristic); that A-CANDIDATE's 0.400 or false_accept_rate 0.5932 characterise semantic resolution (both are fixture-executability artifacts); that B-RANDOM-ROLE and B-INTERNAL-ID-LOOKUP have ece_global 0.000 (both are binning-boundary artifacts; recomputed 0.7500 and 0.8333); that the goal generator is vocabulary-disjoint (max coupling to its own target intent is 0.6667, mean 0.3231, 38 of 60 above the prereg threshold); that the two recorded secondary-gate passes reflect a performed test (no test was computed, and audit recomputation fails both). (6) The cheapest discriminating next test, which this packet does not supply, is a mechanism-identity-based correctness metric over a registry with per-family parameter slots actually bound, an executed verbatim positive control, an oracle arm that really holds internal ids, and enough mechanism/verb variety that max-token-Jaccard cannot reach ceiling. Until that exists, C-SEMANTIC-RESOLVE is HYPOTHESIS with an unresolved calibration question, and no architectural component should be abandoned on this evidence.",
+  "evidence_refs": [
+    "research/experiments/EXP-GRAPH-36272373909/request.json (director_mandate.allocation.agent_priors_used[0] names the empty-treatment-arm pathology; director_mandate.portfolio_assessment records the Frontier probe)",
+    "research/experiments/EXP-GRAPH-36272373909/spec.json (baselines, positive_control PC-EXACT-MATCH, null_control NC-NO-APPLICABLE, measurement_validity V1-V11, decision_rule.primary/secondary/outcomes, falsifier)",
+    "research/experiments/EXP-GRAPH-36272373909/prereg.md (sections 3 falsifier, 4.3 independence, 6 candidate design, 7.1-7.4 measurement protocol, 8.1-8.2 controls, 9 outcome mapping, 11 validity threats, 13 no-go rules, 15 independence/provenance)",
+    "research/experiments/EXP-GRAPH-36272373909/freeze.json (frozen_at 2026-09-26T21:23:08.636856+00:00; prereg.md a53e74aa0f7f33e4f508f6595f3a2691588857f021a7c6733006729e82c15611, request.json f4ebb40d66da0d95d8080816743aa22053e1a8126b35d143b208f2df82340bbf, spec.json eb0079fd0de3d29b0ad63c9755f5f77aa4ffedb4ef10fa4dddf8b6b05158532f; all three verified unmodified by git diff against HEAD)",
+    "research/experiments/EXP-GRAPH-36272373909/result.json (status COMPLETE, outcome FALSIFIES, metrics for A-INCUMBENT/A-CANDIDATE/B-RANDOM-ROLE/B-LEXICAL-OVERLAP/B-INTERNAL-ID-LOOKUP, controls PC-EXACT-MATCH/NC-NO-APPLICABLE/B-RANDOM-ROLE/B-LEXICAL-OVERLAP/B-INTERNAL-ID-LOOKUP, primary_gate_evaluation, secondary_gate_evaluation)",
+    "research/experiments/EXP-GRAPH-36272373909/report.md (section 4.3 '0/12 verbatim tasks'; section 5 secondary gates as bare checkmarks; section 6 item 4 incorrect explanation of B-INTERNAL-ID-LOOKUP; section 7 'Not Violated' list; section 8 consequences; section 2.3 task accounting)",
+    "research/experiments/EXP-GRAPH-36272373909/provenance.json (frozen_inputs['freeze.json'].sha256 is prereg.md's hash; random_seeds lists an unseeded torch; no lockfile, no model revision)",
+    "research/experiments/EXP-GRAPH-36272373909/raw_evidence/task_results.jsonl (sha256 51e3b79d5d656a4f86d6eb1f66e5fca4b78b871471c263cc69fe5f4307d4856e; 300 rows = 60 tasks x 5 arms; primary recomputation source)",
+    "research/experiments/EXP-GRAPH-36272373909/raw_evidence/fixture.json (sha256 f69a7a1c2fca3a1bb02a068e2b9f2d11bfae2787f36683e5f0f99a39b5edc82b; 5 mechanisms, all parameter_slots [], 4 with unbindable placeholders, min_confidence 0.8, distill_confidence 0.5)",
+    "research/experiments/EXP-GRAPH-36272373909/raw_evidence/goal_generation.json (sha256 ed81beeb2ee3f144a27918924204be180b0b607cda2908228a9e5e31560fc790; 60 hard-coded goals, 0 verbatim intents, max_overlap 0.25 as a union-token statistic)",
+    "research/experiments/EXP-GRAPH-36272373909/raw_evidence/preconditions.json (sha256 fbb9d87341c34da70266cc328216ed1dd046f142fb06391373af38e50b6b6279; four OBS keys, OBS-INCUMBENT-FLOOR absent, OBS-GOAL-GEN-INDEPENDENCE.detail 'To be computed')",
+    "research/experiments/EXP-GRAPH-36272373909/derived_evidence/metrics.json (sha256 239bfab97d450711c513f9495a04e2416384d4fb4293ff538ce580d0dacc97ff; reproduces result.json at 4dp rounding only)",
+    "research/experiments/EXP-GRAPH-36272373909/artifacts/experiment_runner.py (sha256 b154bdaf1b88ea77ecc76710186c45f79a5b8b071bd63147a2762c0db81c0945; lines 365-408 status-based correctness, 433-438 substituted unknown_precision, 482-501 half-open ECE bins, 515-531 5-cluster bootstrap, 559-560 single state reset, 605-606 precondition write, 662-671 arm loop, 753-759 untested secondary gates, 761-766 unreachable PC, 768-778 unsatisfiable NC, 780-784 no MEASUREMENT_INVALID branch)",
+    "research/experiments/EXP-GRAPH-36272373909/artifacts/candidate_resolver.py (sha256 5b97896abf180a0f580af8ebd70199e087619d4a61a502465be1e989e501e346; line 148 untrained fixed sigmoid, lines 78-93 parameter extraction from empty parameter_slots, lines 172-185 public-only MechanismView satisfying V9)",
+    "research/experiments/EXP-GRAPH-36272373909/artifacts/goal_generator.py (sha256 dd41517b18b4275e86bf06b27c380ba10dda5c263be515a371fe7363df76e751; lines 23-134 hard-coded templates, lines 170-185 union-token Jaccard)",
+    "research/experiments/EXP-GRAPH-36272373909/artifacts/http_server.py (sha256 45605502efe9afc7a88b01e616fb82a13846cec1d3fef6a7940f3f92dde6078c; lines 17-23 shared mutable state, lines 103-107 key-only field validation, line 109 unseeded uuid4)",
+    "src/spider/kernel.py (distill emits confidence 0.5 and parameter_slots []; resolve requires exact intent equality and all template slots filled, then returns EXPLORE below min_confidence; independently probed by the auditor for A-INCUMBENT's reference curve)",
+    "src/spider/models.py and src/spider/registry.py (Mechanism defaults, MechanismRegistry JSONL persistence at /tmp/spider_registry_36272373909.jsonl)",
+    "research/claims/registry.json (C-SEMANTIC-RESOLVE: status HYPOTHESIS, owner_lanes graph/product/frontier, next_gate 'unseen-goal resolution with applicability/abstention calibration')",
+    "codex/index.json and codex/claim_state.json (EXP-FRONTIER-36249071934 audit_status REVISE, decision recording 0 of 1200 EXECUTABLE and C_i == C_c exactly with the comparison leg NOT IDENTIFIED; EXP-GRAPH-34409639346 SUPPORTED bounded at synthetic in-kernel POC level; EXP-FRONTIER-36052053591 MEASUREMENT_INVALID leaving C-SEMANTIC-RESOLVE at HYPOTHESIS; EXP-GRAPH-36132150213 MEASUREMENT_INVALID parent handoff)",
+    "AGENTS.md and research/EXPERIMENT_PACKET.md (binding transmission contract, mandatory-key semantics, audit.json required shape)"
+  ],
+  "unresolved": [
+    "Whether the mis-scored candidate decisions (33 of 59) would be reclassified as correct under a mechanism-identity correctness metric, or whether the HTTP postcondition check was intended as an additional execution gate on top of binding correctness. The prereg's wording in 7.2 is ambiguous between the two, and the ambiguity is exactly what the outcome turned on. The auditor cannot settle it from the packet; a re-frozen spec must disambiguate it.",
+    "Why the fixture registers only one mechanism per resource family when the HTTP application exposes four CRUD operations per family. The packet gives no rationale, and this choice is what makes the task a 5-way choice and lets the lexical null reach ceiling.",
+    "Whether a resolver with genuinely learned calibration and per-family parameter slots bound would pass the frozen false-accept and ECE gates on this same fixture. The one abstention observed came from a fixed untrained sigmoid, so the packet contains no evidence about learned calibration in either direction.",
+    "Whether the applicability gate could have abstained at all under any threshold available to a resolver on MiniLM similarities of this fixture, where the observed range is 0.4214 to 0.9982. A threshold sweep over the recorded p_applicable values was not preregistered and the auditor did not perform one, because it would be a post-hoc analysis on a single run.",
+    "Whether the shared mutable server state actually altered any recorded outcome. The only identified mutation is POST /users (33 'correct' create-a-new-user results), and nothing in any arm reads GET /users, so the impact is probably nil, but the packet has no per-task state hash and the auditor could not demonstrate nil rather than merely small.",
+    "Whether the sentence-transformers all-MiniLM-L6-v2 revision used at execution time is recoverable. The local cache at ~/.cache/huggingface/hub/models--sentence-transformers--all-MiniLM-L6-v2 exists and sentence-transformers 6.1.0 / torch 2.14.0+cu130 are installed, but no revision hash, lockfile or model artifact hash was recorded, so the p_applicable column is not independently reproducible.",
+    "Whether the prior EXP-GRAPH-34409639346 SUPPORTED decision (kernel does not perform semantic aliasing resolution, bounded to 10 synthetic intent-template pairs at confidence 0.9) and this experiment's finding that selection is trivially achievable by lexical overlap are consistent, or whether they point to different regimes. The auditor did not re-open that packet; it is flagged for the Director because both bear on C-SEMANTIC-RESOLVE and appear to have been measured with different fixture strength.",
+    "Whether the Director's dependency assumptions survived: provenance.json.validity.mandatory_runtime_contract_present = true is asserted with no supporting evidence path, and the mandate's Product dependency (a committed parameterized induction path usable as a declared comparison arm) was never available, which is why OBS-HAS-DISTILL-PARAMETERIZED is false and why four of five mechanisms are unbindable. Whether a parameterized path exists anywhere in the current tree is outside this packet and outside this audit's mandate."
+  ]
+}
