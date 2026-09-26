@@ -1,0 +1,1658 @@
+{
+  "B-LITERAL-REPLAY": {
+    "abstention_precision": 1.0,
+    "false_accept_rate": 0.0,
+    "false_positives": 0,
+    "n_probes": 60,
+    "probes": [
+      {
+        "collection": "items",
+        "false_accept": false,
+        "intent": "archive",
+        "kind": "unlearned",
+        "mechanism_id": null,
+        "role": "owner",
+        "status": "UNKNOWN"
+      },
+      {
+        "collection": "products",
+        "false_accept": false,
+        "intent": "archive",
+        "kind": "unlearned",
+        "mechanism_id": null,
+        "role": "owner",
+        "status": "UNKNOWN"
+      },
+      {
+        "collection": "items",
+        "false_accept": false,
+        "intent": "archive",
+        "kind": "unlearned",
+        "mechanism_id": null,
+        "role": "viewer",
+        "status": "UNKNOWN"
+      },
+      {
+        "collection": "products",
+        "false_accept": false,
+        "intent": "archive",
+        "kind": "unlearned",
+        "mechanism_id": null,
+        "role": "viewer",
+        "status": "UNKNOWN"
+      },
+      {
+        "collection": "items",
+        "false_accept": false,
+        "intent": "merge",
+        "kind": "unlearned",
+        "mechanism_id": null,
+        "role": "owner",
+        "status": "UNKNOWN"
+      },
+      {
+        "collection": "products",
+        "false_accept": false,
+        "intent": "merge",
+        "kind": "unlearned",
+        "mechanism_id": null,
+        "role": "owner",
+        "status": "UNKNOWN"
+      },
+      {
+        "collection": "items",
+        "false_accept": false,
+        "intent": "merge",
+        "kind": "unlearned",
+        "mechanism_id": null,
+        "role": "viewer",
+        "status": "UNKNOWN"
+      },
+      {
+        "collection": "products",
+        "false_accept": false,
+        "intent": "merge",
+        "kind": "unlearned",
+        "mechanism_id": null,
+        "role": "viewer",
+        "status": "UNKNOWN"
+      },
+      {
+        "collection": "items",
+        "false_accept": false,
+        "intent": "export",
+        "kind": "unlearned",
+        "mechanism_id": null,
+        "role": "owner",
+        "status": "UNKNOWN"
+      },
+      {
+        "collection": "products",
+        "false_accept": false,
+        "intent": "export",
+        "kind": "unlearned",
+        "mechanism_id": null,
+        "role": "owner",
+        "status": "UNKNOWN"
+      },
+      {
+        "collection": "items",
+        "false_accept": false,
+        "intent": "export",
+        "kind": "unlearned",
+        "mechanism_id": null,
+        "role": "viewer",
+        "status": "UNKNOWN"
+      },
+      {
+        "collection": "products",
+        "false_accept": false,
+        "intent": "export",
+        "kind": "unlearned",
+        "mechanism_id": null,
+        "role": "viewer",
+        "status": "UNKNOWN"
+      },
+      {
+        "collection": "items",
+        "false_accept": false,
+        "intent": "refund",
+        "kind": "unlearned",
+        "mechanism_id": null,
+        "role": "owner",
+        "status": "UNKNOWN"
+      },
+      {
+        "collection": "products",
+        "false_accept": false,
+        "intent": "refund",
+        "kind": "unlearned",
+        "mechanism_id": null,
+        "role": "owner",
+        "status": "UNKNOWN"
+      },
+      {
+        "collection": "items",
+        "false_accept": false,
+        "intent": "refund",
+        "kind": "unlearned",
+        "mechanism_id": null,
+        "role": "viewer",
+        "status": "UNKNOWN"
+      },
+      {
+        "collection": "products",
+        "false_accept": false,
+        "intent": "refund",
+        "kind": "unlearned",
+        "mechanism_id": null,
+        "role": "viewer",
+        "status": "UNKNOWN"
+      },
+      {
+        "collection": "items",
+        "false_accept": false,
+        "intent": "purge",
+        "kind": "unlearned",
+        "mechanism_id": null,
+        "role": "owner",
+        "status": "UNKNOWN"
+      },
+      {
+        "collection": "products",
+        "false_accept": false,
+        "intent": "purge",
+        "kind": "unlearned",
+        "mechanism_id": null,
+        "role": "owner",
+        "status": "UNKNOWN"
+      },
+      {
+        "collection": "items",
+        "false_accept": false,
+        "intent": "purge",
+        "kind": "unlearned",
+        "mechanism_id": null,
+        "role": "viewer",
+        "status": "UNKNOWN"
+      },
+      {
+        "collection": "products",
+        "false_accept": false,
+        "intent": "purge",
+        "kind": "unlearned",
+        "mechanism_id": null,
+        "role": "viewer",
+        "status": "UNKNOWN"
+      },
+      {
+        "collection": "items",
+        "false_accept": false,
+        "intent": "reindex",
+        "kind": "unlearned",
+        "mechanism_id": null,
+        "role": "owner",
+        "status": "UNKNOWN"
+      },
+      {
+        "collection": "products",
+        "false_accept": false,
+        "intent": "reindex",
+        "kind": "unlearned",
+        "mechanism_id": null,
+        "role": "owner",
+        "status": "UNKNOWN"
+      },
+      {
+        "collection": "items",
+        "false_accept": false,
+        "intent": "reindex",
+        "kind": "unlearned",
+        "mechanism_id": null,
+        "role": "viewer",
+        "status": "UNKNOWN"
+      },
+      {
+        "collection": "products",
+        "false_accept": false,
+        "intent": "reindex",
+        "kind": "unlearned",
+        "mechanism_id": null,
+        "role": "viewer",
+        "status": "UNKNOWN"
+      },
+      {
+        "collection": "items",
+        "false_accept": false,
+        "intent": "clone",
+        "kind": "unlearned",
+        "mechanism_id": null,
+        "role": "owner",
+        "status": "UNKNOWN"
+      },
+      {
+        "collection": "products",
+        "false_accept": false,
+        "intent": "clone",
+        "kind": "unlearned",
+        "mechanism_id": null,
+        "role": "owner",
+        "status": "UNKNOWN"
+      },
+      {
+        "collection": "items",
+        "false_accept": false,
+        "intent": "clone",
+        "kind": "unlearned",
+        "mechanism_id": null,
+        "role": "viewer",
+        "status": "UNKNOWN"
+      },
+      {
+        "collection": "products",
+        "false_accept": false,
+        "intent": "clone",
+        "kind": "unlearned",
+        "mechanism_id": null,
+        "role": "viewer",
+        "status": "UNKNOWN"
+      },
+      {
+        "collection": "items",
+        "false_accept": false,
+        "intent": "reserve",
+        "kind": "unlearned",
+        "mechanism_id": null,
+        "role": "owner",
+        "status": "UNKNOWN"
+      },
+      {
+        "collection": "products",
+        "false_accept": false,
+        "intent": "reserve",
+        "kind": "unlearned",
+        "mechanism_id": null,
+        "role": "owner",
+        "status": "UNKNOWN"
+      },
+      {
+        "collection": "items",
+        "false_accept": false,
+        "intent": "reserve",
+        "kind": "unlearned",
+        "mechanism_id": null,
+        "role": "viewer",
+        "status": "UNKNOWN"
+      },
+      {
+        "collection": "products",
+        "false_accept": false,
+        "intent": "reserve",
+        "kind": "unlearned",
+        "mechanism_id": null,
+        "role": "viewer",
+        "status": "UNKNOWN"
+      },
+      {
+        "collection": "items",
+        "false_accept": false,
+        "intent": "annotate",
+        "kind": "unlearned",
+        "mechanism_id": null,
+        "role": "owner",
+        "status": "UNKNOWN"
+      },
+      {
+        "collection": "products",
+        "false_accept": false,
+        "intent": "annotate",
+        "kind": "unlearned",
+        "mechanism_id": null,
+        "role": "owner",
+        "status": "UNKNOWN"
+      },
+      {
+        "collection": "items",
+        "false_accept": false,
+        "intent": "annotate",
+        "kind": "unlearned",
+        "mechanism_id": null,
+        "role": "viewer",
+        "status": "UNKNOWN"
+      },
+      {
+        "collection": "products",
+        "false_accept": false,
+        "intent": "annotate",
+        "kind": "unlearned",
+        "mechanism_id": null,
+        "role": "viewer",
+        "status": "UNKNOWN"
+      },
+      {
+        "collection": "items",
+        "false_accept": false,
+        "intent": "snapshot",
+        "kind": "unlearned",
+        "mechanism_id": null,
+        "role": "owner",
+        "status": "UNKNOWN"
+      },
+      {
+        "collection": "products",
+        "false_accept": false,
+        "intent": "snapshot",
+        "kind": "unlearned",
+        "mechanism_id": null,
+        "role": "owner",
+        "status": "UNKNOWN"
+      },
+      {
+        "collection": "items",
+        "false_accept": false,
+        "intent": "snapshot",
+        "kind": "unlearned",
+        "mechanism_id": null,
+        "role": "viewer",
+        "status": "UNKNOWN"
+      },
+      {
+        "collection": "products",
+        "false_accept": false,
+        "intent": "snapshot",
+        "kind": "unlearned",
+        "mechanism_id": null,
+        "role": "viewer",
+        "status": "UNKNOWN"
+      },
+      {
+        "collection": "items",
+        "false_accept": false,
+        "intent": "read-all",
+        "kind": "prefix_collision",
+        "mechanism_id": null,
+        "role": "owner",
+        "status": "UNKNOWN"
+      },
+      {
+        "collection": "products",
+        "false_accept": false,
+        "intent": "read-all",
+        "kind": "prefix_collision",
+        "mechanism_id": null,
+        "role": "owner",
+        "status": "UNKNOWN"
+      },
+      {
+        "collection": "items",
+        "false_accept": false,
+        "intent": "read-all",
+        "kind": "prefix_collision",
+        "mechanism_id": null,
+        "role": "viewer",
+        "status": "UNKNOWN"
+      },
+      {
+        "collection": "products",
+        "false_accept": false,
+        "intent": "read-all",
+        "kind": "prefix_collision",
+        "mechanism_id": null,
+        "role": "viewer",
+        "status": "UNKNOWN"
+      },
+      {
+        "collection": "items",
+        "false_accept": false,
+        "intent": "delete-batch",
+        "kind": "prefix_collision",
+        "mechanism_id": null,
+        "role": "owner",
+        "status": "UNKNOWN"
+      },
+      {
+        "collection": "products",
+        "false_accept": false,
+        "intent": "delete-batch",
+        "kind": "prefix_collision",
+        "mechanism_id": null,
+        "role": "owner",
+        "status": "UNKNOWN"
+      },
+      {
+        "collection": "items",
+        "false_accept": false,
+        "intent": "delete-batch",
+        "kind": "prefix_collision",
+        "mechanism_id": null,
+        "role": "viewer",
+        "status": "UNKNOWN"
+      },
+      {
+        "collection": "products",
+        "false_accept": false,
+        "intent": "delete-batch",
+        "kind": "prefix_collision",
+        "mechanism_id": null,
+        "role": "viewer",
+        "status": "UNKNOWN"
+      },
+      {
+        "collection": "items",
+        "false_accept": false,
+        "intent": "create-bulk",
+        "kind": "prefix_collision",
+        "mechanism_id": null,
+        "role": "owner",
+        "status": "UNKNOWN"
+      },
+      {
+        "collection": "products",
+        "false_accept": false,
+        "intent": "create-bulk",
+        "kind": "prefix_collision",
+        "mechanism_id": null,
+        "role": "owner",
+        "status": "UNKNOWN"
+      },
+      {
+        "collection": "items",
+        "false_accept": false,
+        "intent": "create-bulk",
+        "kind": "prefix_collision",
+        "mechanism_id": null,
+        "role": "viewer",
+        "status": "UNKNOWN"
+      },
+      {
+        "collection": "products",
+        "false_accept": false,
+        "intent": "create-bulk",
+        "kind": "prefix_collision",
+        "mechanism_id": null,
+        "role": "viewer",
+        "status": "UNKNOWN"
+      },
+      {
+        "collection": "items",
+        "false_accept": false,
+        "intent": "list-all",
+        "kind": "prefix_collision",
+        "mechanism_id": null,
+        "role": "owner",
+        "status": "UNKNOWN"
+      },
+      {
+        "collection": "products",
+        "false_accept": false,
+        "intent": "list-all",
+        "kind": "prefix_collision",
+        "mechanism_id": null,
+        "role": "owner",
+        "status": "UNKNOWN"
+      },
+      {
+        "collection": "items",
+        "false_accept": false,
+        "intent": "list-all",
+        "kind": "prefix_collision",
+        "mechanism_id": null,
+        "role": "viewer",
+        "status": "UNKNOWN"
+      },
+      {
+        "collection": "products",
+        "false_accept": false,
+        "intent": "list-all",
+        "kind": "prefix_collision",
+        "mechanism_id": null,
+        "role": "viewer",
+        "status": "UNKNOWN"
+      },
+      {
+        "collection": "items",
+        "false_accept": false,
+        "intent": "update-partial",
+        "kind": "prefix_collision",
+        "mechanism_id": null,
+        "role": "owner",
+        "status": "UNKNOWN"
+      },
+      {
+        "collection": "products",
+        "false_accept": false,
+        "intent": "update-partial",
+        "kind": "prefix_collision",
+        "mechanism_id": null,
+        "role": "owner",
+        "status": "UNKNOWN"
+      },
+      {
+        "collection": "items",
+        "false_accept": false,
+        "intent": "update-partial",
+        "kind": "prefix_collision",
+        "mechanism_id": null,
+        "role": "viewer",
+        "status": "UNKNOWN"
+      },
+      {
+        "collection": "products",
+        "false_accept": false,
+        "intent": "update-partial",
+        "kind": "prefix_collision",
+        "mechanism_id": null,
+        "role": "viewer",
+        "status": "UNKNOWN"
+      }
+    ],
+    "status_histogram": {
+      "UNKNOWN": 60
+    },
+    "true_negatives": 60
+  },
+  "NC-SHUFFLED-INTENT": {
+    "abstention_precision": 1.0,
+    "false_accept_rate": 0.0,
+    "false_positives": 0,
+    "n_probes": 60,
+    "probes": [
+      {
+        "collection": "items",
+        "false_accept": false,
+        "intent": "archive",
+        "kind": "unlearned",
+        "mechanism_id": null,
+        "role": "owner",
+        "status": "UNKNOWN"
+      },
+      {
+        "collection": "products",
+        "false_accept": false,
+        "intent": "archive",
+        "kind": "unlearned",
+        "mechanism_id": null,
+        "role": "owner",
+        "status": "UNKNOWN"
+      },
+      {
+        "collection": "items",
+        "false_accept": false,
+        "intent": "archive",
+        "kind": "unlearned",
+        "mechanism_id": null,
+        "role": "viewer",
+        "status": "UNKNOWN"
+      },
+      {
+        "collection": "products",
+        "false_accept": false,
+        "intent": "archive",
+        "kind": "unlearned",
+        "mechanism_id": null,
+        "role": "viewer",
+        "status": "UNKNOWN"
+      },
+      {
+        "collection": "items",
+        "false_accept": false,
+        "intent": "merge",
+        "kind": "unlearned",
+        "mechanism_id": null,
+        "role": "owner",
+        "status": "UNKNOWN"
+      },
+      {
+        "collection": "products",
+        "false_accept": false,
+        "intent": "merge",
+        "kind": "unlearned",
+        "mechanism_id": null,
+        "role": "owner",
+        "status": "UNKNOWN"
+      },
+      {
+        "collection": "items",
+        "false_accept": false,
+        "intent": "merge",
+        "kind": "unlearned",
+        "mechanism_id": null,
+        "role": "viewer",
+        "status": "UNKNOWN"
+      },
+      {
+        "collection": "products",
+        "false_accept": false,
+        "intent": "merge",
+        "kind": "unlearned",
+        "mechanism_id": null,
+        "role": "viewer",
+        "status": "UNKNOWN"
+      },
+      {
+        "collection": "items",
+        "false_accept": false,
+        "intent": "export",
+        "kind": "unlearned",
+        "mechanism_id": null,
+        "role": "owner",
+        "status": "UNKNOWN"
+      },
+      {
+        "collection": "products",
+        "false_accept": false,
+        "intent": "export",
+        "kind": "unlearned",
+        "mechanism_id": null,
+        "role": "owner",
+        "status": "UNKNOWN"
+      },
+      {
+        "collection": "items",
+        "false_accept": false,
+        "intent": "export",
+        "kind": "unlearned",
+        "mechanism_id": null,
+        "role": "viewer",
+        "status": "UNKNOWN"
+      },
+      {
+        "collection": "products",
+        "false_accept": false,
+        "intent": "export",
+        "kind": "unlearned",
+        "mechanism_id": null,
+        "role": "viewer",
+        "status": "UNKNOWN"
+      },
+      {
+        "collection": "items",
+        "false_accept": false,
+        "intent": "refund",
+        "kind": "unlearned",
+        "mechanism_id": null,
+        "role": "owner",
+        "status": "UNKNOWN"
+      },
+      {
+        "collection": "products",
+        "false_accept": false,
+        "intent": "refund",
+        "kind": "unlearned",
+        "mechanism_id": null,
+        "role": "owner",
+        "status": "UNKNOWN"
+      },
+      {
+        "collection": "items",
+        "false_accept": false,
+        "intent": "refund",
+        "kind": "unlearned",
+        "mechanism_id": null,
+        "role": "viewer",
+        "status": "UNKNOWN"
+      },
+      {
+        "collection": "products",
+        "false_accept": false,
+        "intent": "refund",
+        "kind": "unlearned",
+        "mechanism_id": null,
+        "role": "viewer",
+        "status": "UNKNOWN"
+      },
+      {
+        "collection": "items",
+        "false_accept": false,
+        "intent": "purge",
+        "kind": "unlearned",
+        "mechanism_id": null,
+        "role": "owner",
+        "status": "UNKNOWN"
+      },
+      {
+        "collection": "products",
+        "false_accept": false,
+        "intent": "purge",
+        "kind": "unlearned",
+        "mechanism_id": null,
+        "role": "owner",
+        "status": "UNKNOWN"
+      },
+      {
+        "collection": "items",
+        "false_accept": false,
+        "intent": "purge",
+        "kind": "unlearned",
+        "mechanism_id": null,
+        "role": "viewer",
+        "status": "UNKNOWN"
+      },
+      {
+        "collection": "products",
+        "false_accept": false,
+        "intent": "purge",
+        "kind": "unlearned",
+        "mechanism_id": null,
+        "role": "viewer",
+        "status": "UNKNOWN"
+      },
+      {
+        "collection": "items",
+        "false_accept": false,
+        "intent": "reindex",
+        "kind": "unlearned",
+        "mechanism_id": null,
+        "role": "owner",
+        "status": "UNKNOWN"
+      },
+      {
+        "collection": "products",
+        "false_accept": false,
+        "intent": "reindex",
+        "kind": "unlearned",
+        "mechanism_id": null,
+        "role": "owner",
+        "status": "UNKNOWN"
+      },
+      {
+        "collection": "items",
+        "false_accept": false,
+        "intent": "reindex",
+        "kind": "unlearned",
+        "mechanism_id": null,
+        "role": "viewer",
+        "status": "UNKNOWN"
+      },
+      {
+        "collection": "products",
+        "false_accept": false,
+        "intent": "reindex",
+        "kind": "unlearned",
+        "mechanism_id": null,
+        "role": "viewer",
+        "status": "UNKNOWN"
+      },
+      {
+        "collection": "items",
+        "false_accept": false,
+        "intent": "clone",
+        "kind": "unlearned",
+        "mechanism_id": null,
+        "role": "owner",
+        "status": "UNKNOWN"
+      },
+      {
+        "collection": "products",
+        "false_accept": false,
+        "intent": "clone",
+        "kind": "unlearned",
+        "mechanism_id": null,
+        "role": "owner",
+        "status": "UNKNOWN"
+      },
+      {
+        "collection": "items",
+        "false_accept": false,
+        "intent": "clone",
+        "kind": "unlearned",
+        "mechanism_id": null,
+        "role": "viewer",
+        "status": "UNKNOWN"
+      },
+      {
+        "collection": "products",
+        "false_accept": false,
+        "intent": "clone",
+        "kind": "unlearned",
+        "mechanism_id": null,
+        "role": "viewer",
+        "status": "UNKNOWN"
+      },
+      {
+        "collection": "items",
+        "false_accept": false,
+        "intent": "reserve",
+        "kind": "unlearned",
+        "mechanism_id": null,
+        "role": "owner",
+        "status": "UNKNOWN"
+      },
+      {
+        "collection": "products",
+        "false_accept": false,
+        "intent": "reserve",
+        "kind": "unlearned",
+        "mechanism_id": null,
+        "role": "owner",
+        "status": "UNKNOWN"
+      },
+      {
+        "collection": "items",
+        "false_accept": false,
+        "intent": "reserve",
+        "kind": "unlearned",
+        "mechanism_id": null,
+        "role": "viewer",
+        "status": "UNKNOWN"
+      },
+      {
+        "collection": "products",
+        "false_accept": false,
+        "intent": "reserve",
+        "kind": "unlearned",
+        "mechanism_id": null,
+        "role": "viewer",
+        "status": "UNKNOWN"
+      },
+      {
+        "collection": "items",
+        "false_accept": false,
+        "intent": "annotate",
+        "kind": "unlearned",
+        "mechanism_id": null,
+        "role": "owner",
+        "status": "UNKNOWN"
+      },
+      {
+        "collection": "products",
+        "false_accept": false,
+        "intent": "annotate",
+        "kind": "unlearned",
+        "mechanism_id": null,
+        "role": "owner",
+        "status": "UNKNOWN"
+      },
+      {
+        "collection": "items",
+        "false_accept": false,
+        "intent": "annotate",
+        "kind": "unlearned",
+        "mechanism_id": null,
+        "role": "viewer",
+        "status": "UNKNOWN"
+      },
+      {
+        "collection": "products",
+        "false_accept": false,
+        "intent": "annotate",
+        "kind": "unlearned",
+        "mechanism_id": null,
+        "role": "viewer",
+        "status": "UNKNOWN"
+      },
+      {
+        "collection": "items",
+        "false_accept": false,
+        "intent": "snapshot",
+        "kind": "unlearned",
+        "mechanism_id": null,
+        "role": "owner",
+        "status": "UNKNOWN"
+      },
+      {
+        "collection": "products",
+        "false_accept": false,
+        "intent": "snapshot",
+        "kind": "unlearned",
+        "mechanism_id": null,
+        "role": "owner",
+        "status": "UNKNOWN"
+      },
+      {
+        "collection": "items",
+        "false_accept": false,
+        "intent": "snapshot",
+        "kind": "unlearned",
+        "mechanism_id": null,
+        "role": "viewer",
+        "status": "UNKNOWN"
+      },
+      {
+        "collection": "products",
+        "false_accept": false,
+        "intent": "snapshot",
+        "kind": "unlearned",
+        "mechanism_id": null,
+        "role": "viewer",
+        "status": "UNKNOWN"
+      },
+      {
+        "collection": "items",
+        "false_accept": false,
+        "intent": "read-all",
+        "kind": "prefix_collision",
+        "mechanism_id": null,
+        "role": "owner",
+        "status": "UNKNOWN"
+      },
+      {
+        "collection": "products",
+        "false_accept": false,
+        "intent": "read-all",
+        "kind": "prefix_collision",
+        "mechanism_id": null,
+        "role": "owner",
+        "status": "UNKNOWN"
+      },
+      {
+        "collection": "items",
+        "false_accept": false,
+        "intent": "read-all",
+        "kind": "prefix_collision",
+        "mechanism_id": null,
+        "role": "viewer",
+        "status": "UNKNOWN"
+      },
+      {
+        "collection": "products",
+        "false_accept": false,
+        "intent": "read-all",
+        "kind": "prefix_collision",
+        "mechanism_id": null,
+        "role": "viewer",
+        "status": "UNKNOWN"
+      },
+      {
+        "collection": "items",
+        "false_accept": false,
+        "intent": "delete-batch",
+        "kind": "prefix_collision",
+        "mechanism_id": null,
+        "role": "owner",
+        "status": "UNKNOWN"
+      },
+      {
+        "collection": "products",
+        "false_accept": false,
+        "intent": "delete-batch",
+        "kind": "prefix_collision",
+        "mechanism_id": null,
+        "role": "owner",
+        "status": "UNKNOWN"
+      },
+      {
+        "collection": "items",
+        "false_accept": false,
+        "intent": "delete-batch",
+        "kind": "prefix_collision",
+        "mechanism_id": null,
+        "role": "viewer",
+        "status": "UNKNOWN"
+      },
+      {
+        "collection": "products",
+        "false_accept": false,
+        "intent": "delete-batch",
+        "kind": "prefix_collision",
+        "mechanism_id": null,
+        "role": "viewer",
+        "status": "UNKNOWN"
+      },
+      {
+        "collection": "items",
+        "false_accept": false,
+        "intent": "create-bulk",
+        "kind": "prefix_collision",
+        "mechanism_id": null,
+        "role": "owner",
+        "status": "UNKNOWN"
+      },
+      {
+        "collection": "products",
+        "false_accept": false,
+        "intent": "create-bulk",
+        "kind": "prefix_collision",
+        "mechanism_id": null,
+        "role": "owner",
+        "status": "UNKNOWN"
+      },
+      {
+        "collection": "items",
+        "false_accept": false,
+        "intent": "create-bulk",
+        "kind": "prefix_collision",
+        "mechanism_id": null,
+        "role": "viewer",
+        "status": "UNKNOWN"
+      },
+      {
+        "collection": "products",
+        "false_accept": false,
+        "intent": "create-bulk",
+        "kind": "prefix_collision",
+        "mechanism_id": null,
+        "role": "viewer",
+        "status": "UNKNOWN"
+      },
+      {
+        "collection": "items",
+        "false_accept": false,
+        "intent": "list-all",
+        "kind": "prefix_collision",
+        "mechanism_id": null,
+        "role": "owner",
+        "status": "UNKNOWN"
+      },
+      {
+        "collection": "products",
+        "false_accept": false,
+        "intent": "list-all",
+        "kind": "prefix_collision",
+        "mechanism_id": null,
+        "role": "owner",
+        "status": "UNKNOWN"
+      },
+      {
+        "collection": "items",
+        "false_accept": false,
+        "intent": "list-all",
+        "kind": "prefix_collision",
+        "mechanism_id": null,
+        "role": "viewer",
+        "status": "UNKNOWN"
+      },
+      {
+        "collection": "products",
+        "false_accept": false,
+        "intent": "list-all",
+        "kind": "prefix_collision",
+        "mechanism_id": null,
+        "role": "viewer",
+        "status": "UNKNOWN"
+      },
+      {
+        "collection": "items",
+        "false_accept": false,
+        "intent": "update-partial",
+        "kind": "prefix_collision",
+        "mechanism_id": null,
+        "role": "owner",
+        "status": "UNKNOWN"
+      },
+      {
+        "collection": "products",
+        "false_accept": false,
+        "intent": "update-partial",
+        "kind": "prefix_collision",
+        "mechanism_id": null,
+        "role": "owner",
+        "status": "UNKNOWN"
+      },
+      {
+        "collection": "items",
+        "false_accept": false,
+        "intent": "update-partial",
+        "kind": "prefix_collision",
+        "mechanism_id": null,
+        "role": "viewer",
+        "status": "UNKNOWN"
+      },
+      {
+        "collection": "products",
+        "false_accept": false,
+        "intent": "update-partial",
+        "kind": "prefix_collision",
+        "mechanism_id": null,
+        "role": "viewer",
+        "status": "UNKNOWN"
+      }
+    ],
+    "status_histogram": {
+      "UNKNOWN": 60
+    },
+    "true_negatives": 60
+  },
+  "PARAM-INHERIT": {
+    "abstention_precision": 1.0,
+    "false_accept_rate": 0.0,
+    "false_positives": 0,
+    "n_probes": 60,
+    "probes": [
+      {
+        "collection": "items",
+        "false_accept": false,
+        "intent": "archive",
+        "kind": "unlearned",
+        "mechanism_id": null,
+        "role": "owner",
+        "status": "UNKNOWN"
+      },
+      {
+        "collection": "products",
+        "false_accept": false,
+        "intent": "archive",
+        "kind": "unlearned",
+        "mechanism_id": null,
+        "role": "owner",
+        "status": "UNKNOWN"
+      },
+      {
+        "collection": "items",
+        "false_accept": false,
+        "intent": "archive",
+        "kind": "unlearned",
+        "mechanism_id": null,
+        "role": "viewer",
+        "status": "UNKNOWN"
+      },
+      {
+        "collection": "products",
+        "false_accept": false,
+        "intent": "archive",
+        "kind": "unlearned",
+        "mechanism_id": null,
+        "role": "viewer",
+        "status": "UNKNOWN"
+      },
+      {
+        "collection": "items",
+        "false_accept": false,
+        "intent": "merge",
+        "kind": "unlearned",
+        "mechanism_id": null,
+        "role": "owner",
+        "status": "UNKNOWN"
+      },
+      {
+        "collection": "products",
+        "false_accept": false,
+        "intent": "merge",
+        "kind": "unlearned",
+        "mechanism_id": null,
+        "role": "owner",
+        "status": "UNKNOWN"
+      },
+      {
+        "collection": "items",
+        "false_accept": false,
+        "intent": "merge",
+        "kind": "unlearned",
+        "mechanism_id": null,
+        "role": "viewer",
+        "status": "UNKNOWN"
+      },
+      {
+        "collection": "products",
+        "false_accept": false,
+        "intent": "merge",
+        "kind": "unlearned",
+        "mechanism_id": null,
+        "role": "viewer",
+        "status": "UNKNOWN"
+      },
+      {
+        "collection": "items",
+        "false_accept": false,
+        "intent": "export",
+        "kind": "unlearned",
+        "mechanism_id": null,
+        "role": "owner",
+        "status": "UNKNOWN"
+      },
+      {
+        "collection": "products",
+        "false_accept": false,
+        "intent": "export",
+        "kind": "unlearned",
+        "mechanism_id": null,
+        "role": "owner",
+        "status": "UNKNOWN"
+      },
+      {
+        "collection": "items",
+        "false_accept": false,
+        "intent": "export",
+        "kind": "unlearned",
+        "mechanism_id": null,
+        "role": "viewer",
+        "status": "UNKNOWN"
+      },
+      {
+        "collection": "products",
+        "false_accept": false,
+        "intent": "export",
+        "kind": "unlearned",
+        "mechanism_id": null,
+        "role": "viewer",
+        "status": "UNKNOWN"
+      },
+      {
+        "collection": "items",
+        "false_accept": false,
+        "intent": "refund",
+        "kind": "unlearned",
+        "mechanism_id": null,
+        "role": "owner",
+        "status": "UNKNOWN"
+      },
+      {
+        "collection": "products",
+        "false_accept": false,
+        "intent": "refund",
+        "kind": "unlearned",
+        "mechanism_id": null,
+        "role": "owner",
+        "status": "UNKNOWN"
+      },
+      {
+        "collection": "items",
+        "false_accept": false,
+        "intent": "refund",
+        "kind": "unlearned",
+        "mechanism_id": null,
+        "role": "viewer",
+        "status": "UNKNOWN"
+      },
+      {
+        "collection": "products",
+        "false_accept": false,
+        "intent": "refund",
+        "kind": "unlearned",
+        "mechanism_id": null,
+        "role": "viewer",
+        "status": "UNKNOWN"
+      },
+      {
+        "collection": "items",
+        "false_accept": false,
+        "intent": "purge",
+        "kind": "unlearned",
+        "mechanism_id": null,
+        "role": "owner",
+        "status": "UNKNOWN"
+      },
+      {
+        "collection": "products",
+        "false_accept": false,
+        "intent": "purge",
+        "kind": "unlearned",
+        "mechanism_id": null,
+        "role": "owner",
+        "status": "UNKNOWN"
+      },
+      {
+        "collection": "items",
+        "false_accept": false,
+        "intent": "purge",
+        "kind": "unlearned",
+        "mechanism_id": null,
+        "role": "viewer",
+        "status": "UNKNOWN"
+      },
+      {
+        "collection": "products",
+        "false_accept": false,
+        "intent": "purge",
+        "kind": "unlearned",
+        "mechanism_id": null,
+        "role": "viewer",
+        "status": "UNKNOWN"
+      },
+      {
+        "collection": "items",
+        "false_accept": false,
+        "intent": "reindex",
+        "kind": "unlearned",
+        "mechanism_id": null,
+        "role": "owner",
+        "status": "UNKNOWN"
+      },
+      {
+        "collection": "products",
+        "false_accept": false,
+        "intent": "reindex",
+        "kind": "unlearned",
+        "mechanism_id": null,
+        "role": "owner",
+        "status": "UNKNOWN"
+      },
+      {
+        "collection": "items",
+        "false_accept": false,
+        "intent": "reindex",
+        "kind": "unlearned",
+        "mechanism_id": null,
+        "role": "viewer",
+        "status": "UNKNOWN"
+      },
+      {
+        "collection": "products",
+        "false_accept": false,
+        "intent": "reindex",
+        "kind": "unlearned",
+        "mechanism_id": null,
+        "role": "viewer",
+        "status": "UNKNOWN"
+      },
+      {
+        "collection": "items",
+        "false_accept": false,
+        "intent": "clone",
+        "kind": "unlearned",
+        "mechanism_id": null,
+        "role": "owner",
+        "status": "UNKNOWN"
+      },
+      {
+        "collection": "products",
+        "false_accept": false,
+        "intent": "clone",
+        "kind": "unlearned",
+        "mechanism_id": null,
+        "role": "owner",
+        "status": "UNKNOWN"
+      },
+      {
+        "collection": "items",
+        "false_accept": false,
+        "intent": "clone",
+        "kind": "unlearned",
+        "mechanism_id": null,
+        "role": "viewer",
+        "status": "UNKNOWN"
+      },
+      {
+        "collection": "products",
+        "false_accept": false,
+        "intent": "clone",
+        "kind": "unlearned",
+        "mechanism_id": null,
+        "role": "viewer",
+        "status": "UNKNOWN"
+      },
+      {
+        "collection": "items",
+        "false_accept": false,
+        "intent": "reserve",
+        "kind": "unlearned",
+        "mechanism_id": null,
+        "role": "owner",
+        "status": "UNKNOWN"
+      },
+      {
+        "collection": "products",
+        "false_accept": false,
+        "intent": "reserve",
+        "kind": "unlearned",
+        "mechanism_id": null,
+        "role": "owner",
+        "status": "UNKNOWN"
+      },
+      {
+        "collection": "items",
+        "false_accept": false,
+        "intent": "reserve",
+        "kind": "unlearned",
+        "mechanism_id": null,
+        "role": "viewer",
+        "status": "UNKNOWN"
+      },
+      {
+        "collection": "products",
+        "false_accept": false,
+        "intent": "reserve",
+        "kind": "unlearned",
+        "mechanism_id": null,
+        "role": "viewer",
+        "status": "UNKNOWN"
+      },
+      {
+        "collection": "items",
+        "false_accept": false,
+        "intent": "annotate",
+        "kind": "unlearned",
+        "mechanism_id": null,
+        "role": "owner",
+        "status": "UNKNOWN"
+      },
+      {
+        "collection": "products",
+        "false_accept": false,
+        "intent": "annotate",
+        "kind": "unlearned",
+        "mechanism_id": null,
+        "role": "owner",
+        "status": "UNKNOWN"
+      },
+      {
+        "collection": "items",
+        "false_accept": false,
+        "intent": "annotate",
+        "kind": "unlearned",
+        "mechanism_id": null,
+        "role": "viewer",
+        "status": "UNKNOWN"
+      },
+      {
+        "collection": "products",
+        "false_accept": false,
+        "intent": "annotate",
+        "kind": "unlearned",
+        "mechanism_id": null,
+        "role": "viewer",
+        "status": "UNKNOWN"
+      },
+      {
+        "collection": "items",
+        "false_accept": false,
+        "intent": "snapshot",
+        "kind": "unlearned",
+        "mechanism_id": null,
+        "role": "owner",
+        "status": "UNKNOWN"
+      },
+      {
+        "collection": "products",
+        "false_accept": false,
+        "intent": "snapshot",
+        "kind": "unlearned",
+        "mechanism_id": null,
+        "role": "owner",
+        "status": "UNKNOWN"
+      },
+      {
+        "collection": "items",
+        "false_accept": false,
+        "intent": "snapshot",
+        "kind": "unlearned",
+        "mechanism_id": null,
+        "role": "viewer",
+        "status": "UNKNOWN"
+      },
+      {
+        "collection": "products",
+        "false_accept": false,
+        "intent": "snapshot",
+        "kind": "unlearned",
+        "mechanism_id": null,
+        "role": "viewer",
+        "status": "UNKNOWN"
+      },
+      {
+        "collection": "items",
+        "false_accept": false,
+        "intent": "read-all",
+        "kind": "prefix_collision",
+        "mechanism_id": null,
+        "role": "owner",
+        "status": "UNKNOWN"
+      },
+      {
+        "collection": "products",
+        "false_accept": false,
+        "intent": "read-all",
+        "kind": "prefix_collision",
+        "mechanism_id": null,
+        "role": "owner",
+        "status": "UNKNOWN"
+      },
+      {
+        "collection": "items",
+        "false_accept": false,
+        "intent": "read-all",
+        "kind": "prefix_collision",
+        "mechanism_id": null,
+        "role": "viewer",
+        "status": "UNKNOWN"
+      },
+      {
+        "collection": "products",
+        "false_accept": false,
+        "intent": "read-all",
+        "kind": "prefix_collision",
+        "mechanism_id": null,
+        "role": "viewer",
+        "status": "UNKNOWN"
+      },
+      {
+        "collection": "items",
+        "false_accept": false,
+        "intent": "delete-batch",
+        "kind": "prefix_collision",
+        "mechanism_id": null,
+        "role": "owner",
+        "status": "UNKNOWN"
+      },
+      {
+        "collection": "products",
+        "false_accept": false,
+        "intent": "delete-batch",
+        "kind": "prefix_collision",
+        "mechanism_id": null,
+        "role": "owner",
+        "status": "UNKNOWN"
+      },
+      {
+        "collection": "items",
+        "false_accept": false,
+        "intent": "delete-batch",
+        "kind": "prefix_collision",
+        "mechanism_id": null,
+        "role": "viewer",
+        "status": "UNKNOWN"
+      },
+      {
+        "collection": "products",
+        "false_accept": false,
+        "intent": "delete-batch",
+        "kind": "prefix_collision",
+        "mechanism_id": null,
+        "role": "viewer",
+        "status": "UNKNOWN"
+      },
+      {
+        "collection": "items",
+        "false_accept": false,
+        "intent": "create-bulk",
+        "kind": "prefix_collision",
+        "mechanism_id": null,
+        "role": "owner",
+        "status": "UNKNOWN"
+      },
+      {
+        "collection": "products",
+        "false_accept": false,
+        "intent": "create-bulk",
+        "kind": "prefix_collision",
+        "mechanism_id": null,
+        "role": "owner",
+        "status": "UNKNOWN"
+      },
+      {
+        "collection": "items",
+        "false_accept": false,
+        "intent": "create-bulk",
+        "kind": "prefix_collision",
+        "mechanism_id": null,
+        "role": "viewer",
+        "status": "UNKNOWN"
+      },
+      {
+        "collection": "products",
+        "false_accept": false,
+        "intent": "create-bulk",
+        "kind": "prefix_collision",
+        "mechanism_id": null,
+        "role": "viewer",
+        "status": "UNKNOWN"
+      },
+      {
+        "collection": "items",
+        "false_accept": false,
+        "intent": "list-all",
+        "kind": "prefix_collision",
+        "mechanism_id": null,
+        "role": "owner",
+        "status": "UNKNOWN"
+      },
+      {
+        "collection": "products",
+        "false_accept": false,
+        "intent": "list-all",
+        "kind": "prefix_collision",
+        "mechanism_id": null,
+        "role": "owner",
+        "status": "UNKNOWN"
+      },
+      {
+        "collection": "items",
+        "false_accept": false,
+        "intent": "list-all",
+        "kind": "prefix_collision",
+        "mechanism_id": null,
+        "role": "viewer",
+        "status": "UNKNOWN"
+      },
+      {
+        "collection": "products",
+        "false_accept": false,
+        "intent": "list-all",
+        "kind": "prefix_collision",
+        "mechanism_id": null,
+        "role": "viewer",
+        "status": "UNKNOWN"
+      },
+      {
+        "collection": "items",
+        "false_accept": false,
+        "intent": "update-partial",
+        "kind": "prefix_collision",
+        "mechanism_id": null,
+        "role": "owner",
+        "status": "UNKNOWN"
+      },
+      {
+        "collection": "products",
+        "false_accept": false,
+        "intent": "update-partial",
+        "kind": "prefix_collision",
+        "mechanism_id": null,
+        "role": "owner",
+        "status": "UNKNOWN"
+      },
+      {
+        "collection": "items",
+        "false_accept": false,
+        "intent": "update-partial",
+        "kind": "prefix_collision",
+        "mechanism_id": null,
+        "role": "viewer",
+        "status": "UNKNOWN"
+      },
+      {
+        "collection": "products",
+        "false_accept": false,
+        "intent": "update-partial",
+        "kind": "prefix_collision",
+        "mechanism_id": null,
+        "role": "viewer",
+        "status": "UNKNOWN"
+      }
+    ],
+    "status_histogram": {
+      "UNKNOWN": 60
+    },
+    "true_negatives": 60
+  }
+}

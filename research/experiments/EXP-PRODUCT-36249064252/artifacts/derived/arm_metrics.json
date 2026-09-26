@@ -1,0 +1,1457 @@
+{
+  "arms": {
+    "B-COLD": {
+      "amortized_request_bytes_per_task": 20.30666666666667,
+      "amortized_requests_per_task": 1.2133333333333334,
+      "amortized_response_bytes_per_task": 269.68,
+      "amortized_wall_ms_per_task": 0.9368067666522014,
+      "binding_accuracy": null,
+      "ece": {
+        "bins": [],
+        "ece": null,
+        "n": 0
+      },
+      "end_to_end_success_rate": 1.0,
+      "induction_requests_global": 0.0,
+      "induction_requests_per_family": 0.0,
+      "kernel_calls_per_task": 0.0,
+      "mechanism_success_rate": 0.0,
+      "n": 150,
+      "n_executed_by_mechanism": 0,
+      "n_fallback_used": 150,
+      "own_requests_per_task": 0.0,
+      "per_family": {
+        "crud-read": {
+          "amortized_request_bytes_per_task": 0.0,
+          "amortized_requests_per_task": 1.0,
+          "amortized_response_bytes_per_task": 125.32,
+          "amortized_wall_ms_per_task": 0.6691056799809303,
+          "binding_accuracy": null,
+          "ece": {
+            "bins": [],
+            "ece": null,
+            "n": 0
+          },
+          "end_to_end_success_rate": 1.0,
+          "kernel_calls_per_task": 0.0,
+          "mechanism_success_rate": 0.0,
+          "n": 50,
+          "n_executed_by_mechanism": 0,
+          "n_fallback_used": 50,
+          "own_requests_per_task": 0.0,
+          "postcondition_ok_rate": 0.0,
+          "resolution_histogram": {
+            "UNKNOWN": 50
+          },
+          "semantic_correct_rate": 0.0,
+          "verified_rate": 0.0
+        },
+        "crud-write": {
+          "amortized_request_bytes_per_task": 60.92,
+          "amortized_requests_per_task": 1.64,
+          "amortized_response_bytes_per_task": 162.88,
+          "amortized_wall_ms_per_task": 1.4175643399721594,
+          "binding_accuracy": null,
+          "ece": {
+            "bins": [],
+            "ece": null,
+            "n": 0
+          },
+          "end_to_end_success_rate": 1.0,
+          "kernel_calls_per_task": 0.0,
+          "mechanism_success_rate": 0.0,
+          "n": 50,
+          "n_executed_by_mechanism": 0,
+          "n_fallback_used": 50,
+          "own_requests_per_task": 0.0,
+          "postcondition_ok_rate": 0.0,
+          "resolution_histogram": {
+            "UNKNOWN": 50
+          },
+          "semantic_correct_rate": 0.0,
+          "verified_rate": 0.0
+        },
+        "query": {
+          "amortized_request_bytes_per_task": 0.0,
+          "amortized_requests_per_task": 1.0,
+          "amortized_response_bytes_per_task": 520.84,
+          "amortized_wall_ms_per_task": 0.7237502800035145,
+          "binding_accuracy": null,
+          "ece": {
+            "bins": [],
+            "ece": null,
+            "n": 0
+          },
+          "end_to_end_success_rate": 1.0,
+          "kernel_calls_per_task": 0.0,
+          "mechanism_success_rate": 0.0,
+          "n": 50,
+          "n_executed_by_mechanism": 0,
+          "n_fallback_used": 50,
+          "own_requests_per_task": 0.0,
+          "postcondition_ok_rate": 0.0,
+          "resolution_histogram": {
+            "UNKNOWN": 50
+          },
+          "semantic_correct_rate": 0.0,
+          "verified_rate": 0.0
+        }
+      },
+      "postcondition_ok_rate": 0.0,
+      "resolution_histogram": {
+        "UNKNOWN": 150
+      },
+      "semantic_correct_rate": 0.0,
+      "verified_rate": 0.0
+    },
+    "B-COLD-DOC": {
+      "amortized_request_bytes_per_task": 0.0,
+      "amortized_requests_per_task": 1.34,
+      "amortized_response_bytes_per_task": 268.0,
+      "amortized_wall_ms_per_task": 0.9856639400065129,
+      "binding_accuracy": 0.6666666666666666,
+      "ece": {
+        "bins": [
+          {
+            "bin": [
+              0.0,
+              0.1
+            ],
+            "empirical_accuracy": 0.0,
+            "gap": 0.0,
+            "mean_confidence": 0.0,
+            "n": 150
+          }
+        ],
+        "ece": 0.0,
+        "n": 150
+      },
+      "end_to_end_success_rate": 0.3333333333333333,
+      "induction_requests_global": 0.0,
+      "induction_requests_per_family": 0.0,
+      "kernel_calls_per_task": 0.0,
+      "mechanism_success_rate": 0.0,
+      "n": 150,
+      "n_executed_by_mechanism": 150,
+      "n_fallback_used": 50,
+      "own_requests_per_task": 1.0,
+      "per_family": {
+        "crud-read": {
+          "amortized_request_bytes_per_task": 0.0,
+          "amortized_requests_per_task": 1.0066666666666666,
+          "amortized_response_bytes_per_task": 127.17333333333335,
+          "amortized_wall_ms_per_task": 0.6766471600167279,
+          "binding_accuracy": 1.0,
+          "ece": {
+            "bins": [
+              {
+                "bin": [
+                  0.0,
+                  0.1
+                ],
+                "empirical_accuracy": 0.0,
+                "gap": 0.0,
+                "mean_confidence": 0.0,
+                "n": 50
+              }
+            ],
+            "ece": 0.0,
+            "n": 50
+          },
+          "end_to_end_success_rate": 0.0,
+          "kernel_calls_per_task": 0.0,
+          "mechanism_success_rate": 0.0,
+          "n": 50,
+          "n_executed_by_mechanism": 50,
+          "n_fallback_used": 0,
+          "own_requests_per_task": 1.0,
+          "postcondition_ok_rate": 1.0,
+          "resolution_histogram": {
+            "UNKNOWN": 50
+          },
+          "semantic_correct_rate": 1.0,
+          "verified_rate": 1.0
+        },
+        "crud-write": {
+          "amortized_request_bytes_per_task": 0.0,
+          "amortized_requests_per_task": 1.0066666666666666,
+          "amortized_response_bytes_per_task": 117.13333333333333,
+          "amortized_wall_ms_per_task": 0.6872906799435441,
+          "binding_accuracy": 1.0,
+          "ece": {
+            "bins": [
+              {
+                "bin": [
+                  0.0,
+                  0.1
+                ],
+                "empirical_accuracy": 0.0,
+                "gap": 0.0,
+                "mean_confidence": 0.0,
+                "n": 50
+              }
+            ],
+            "ece": 0.0,
+            "n": 50
+          },
+          "end_to_end_success_rate": 0.0,
+          "kernel_calls_per_task": 0.0,
+          "mechanism_success_rate": 0.0,
+          "n": 50,
+          "n_executed_by_mechanism": 50,
+          "n_fallback_used": 0,
+          "own_requests_per_task": 1.0,
+          "postcondition_ok_rate": 1.0,
+          "resolution_histogram": {
+            "UNKNOWN": 50
+          },
+          "semantic_correct_rate": 1.0,
+          "verified_rate": 1.0
+        },
+        "query": {
+          "amortized_request_bytes_per_task": 0.0,
+          "amortized_requests_per_task": 2.006666666666667,
+          "amortized_response_bytes_per_task": 559.6933333333334,
+          "amortized_wall_ms_per_task": 1.593053980059267,
+          "binding_accuracy": 0.0,
+          "ece": {
+            "bins": [
+              {
+                "bin": [
+                  0.0,
+                  0.1
+                ],
+                "empirical_accuracy": 0.0,
+                "gap": 0.0,
+                "mean_confidence": 0.0,
+                "n": 50
+              }
+            ],
+            "ece": 0.0,
+            "n": 50
+          },
+          "end_to_end_success_rate": 1.0,
+          "kernel_calls_per_task": 0.0,
+          "mechanism_success_rate": 0.0,
+          "n": 50,
+          "n_executed_by_mechanism": 50,
+          "n_fallback_used": 50,
+          "own_requests_per_task": 1.0,
+          "postcondition_ok_rate": 0.0,
+          "resolution_histogram": {
+            "UNKNOWN": 50
+          },
+          "semantic_correct_rate": 0.0,
+          "verified_rate": 0.0
+        }
+      },
+      "postcondition_ok_rate": 0.6666666666666666,
+      "resolution_histogram": {
+        "UNKNOWN": 150
+      },
+      "semantic_correct_rate": 0.6666666666666666,
+      "verified_rate": 0.6666666666666666
+    },
+    "B-LITERAL-REPLAY": {
+      "amortized_request_bytes_per_task": 20.30666666666667,
+      "amortized_requests_per_task": 1.2133333333333334,
+      "amortized_response_bytes_per_task": 269.68,
+      "amortized_wall_ms_per_task": 1.2274525133549712,
+      "binding_accuracy": null,
+      "ece": {
+        "bins": [],
+        "ece": null,
+        "n": 0
+      },
+      "end_to_end_success_rate": 1.0,
+      "induction_requests_global": 0.0,
+      "induction_requests_per_family": 0.0,
+      "kernel_calls_per_task": 1.0,
+      "mechanism_success_rate": 0.0,
+      "n": 150,
+      "n_executed_by_mechanism": 0,
+      "n_fallback_used": 150,
+      "own_requests_per_task": 0.0,
+      "per_family": {
+        "crud-read": {
+          "amortized_request_bytes_per_task": 0.0,
+          "amortized_requests_per_task": 1.0,
+          "amortized_response_bytes_per_task": 125.32,
+          "amortized_wall_ms_per_task": 1.143681280045712,
+          "binding_accuracy": null,
+          "ece": {
+            "bins": [],
+            "ece": null,
+            "n": 0
+          },
+          "end_to_end_success_rate": 1.0,
+          "kernel_calls_per_task": 1.0,
+          "mechanism_success_rate": 0.0,
+          "n": 50,
+          "n_executed_by_mechanism": 0,
+          "n_fallback_used": 50,
+          "own_requests_per_task": 0.0,
+          "postcondition_ok_rate": 0.0,
+          "resolution_histogram": {
+            "UNKNOWN": 50
+          },
+          "semantic_correct_rate": 0.0,
+          "verified_rate": 0.0
+        },
+        "crud-write": {
+          "amortized_request_bytes_per_task": 60.92,
+          "amortized_requests_per_task": 1.64,
+          "amortized_response_bytes_per_task": 162.88,
+          "amortized_wall_ms_per_task": 1.579156560028423,
+          "binding_accuracy": null,
+          "ece": {
+            "bins": [],
+            "ece": null,
+            "n": 0
+          },
+          "end_to_end_success_rate": 1.0,
+          "kernel_calls_per_task": 1.0,
+          "mechanism_success_rate": 0.0,
+          "n": 50,
+          "n_executed_by_mechanism": 0,
+          "n_fallback_used": 50,
+          "own_requests_per_task": 0.0,
+          "postcondition_ok_rate": 0.0,
+          "resolution_histogram": {
+            "UNKNOWN": 50
+          },
+          "semantic_correct_rate": 0.0,
+          "verified_rate": 0.0
+        },
+        "query": {
+          "amortized_request_bytes_per_task": 0.0,
+          "amortized_requests_per_task": 1.0,
+          "amortized_response_bytes_per_task": 520.84,
+          "amortized_wall_ms_per_task": 0.9595196999907785,
+          "binding_accuracy": null,
+          "ece": {
+            "bins": [],
+            "ece": null,
+            "n": 0
+          },
+          "end_to_end_success_rate": 1.0,
+          "kernel_calls_per_task": 1.0,
+          "mechanism_success_rate": 0.0,
+          "n": 50,
+          "n_executed_by_mechanism": 0,
+          "n_fallback_used": 50,
+          "own_requests_per_task": 0.0,
+          "postcondition_ok_rate": 0.0,
+          "resolution_histogram": {
+            "UNKNOWN": 50
+          },
+          "semantic_correct_rate": 0.0,
+          "verified_rate": 0.0
+        }
+      },
+      "postcondition_ok_rate": 0.0,
+      "resolution_histogram": {
+        "UNKNOWN": 150
+      },
+      "semantic_correct_rate": 0.0,
+      "verified_rate": 0.0
+    },
+    "B-LITERAL-REPLAY-FORCED": {
+      "amortized_request_bytes_per_task": 28.946666666666665,
+      "amortized_requests_per_task": 2.2133333333333334,
+      "amortized_response_bytes_per_task": 323.9533333333333,
+      "amortized_wall_ms_per_task": 1.978430333332047,
+      "binding_accuracy": 0.0,
+      "ece": {
+        "bins": [
+          {
+            "bin": [
+              0.0,
+              0.1
+            ],
+            "empirical_accuracy": 0.0,
+            "gap": 0.0,
+            "mean_confidence": 0.0,
+            "n": 150
+          }
+        ],
+        "ece": 0.0,
+        "n": 150
+      },
+      "end_to_end_success_rate": 1.0,
+      "induction_requests_global": 0.0,
+      "induction_requests_per_family": 0.0,
+      "kernel_calls_per_task": 2.0,
+      "mechanism_success_rate": 0.0,
+      "n": 150,
+      "n_executed_by_mechanism": 150,
+      "n_fallback_used": 150,
+      "own_requests_per_task": 1.0,
+      "per_family": {
+        "crud-read": {
+          "amortized_request_bytes_per_task": 0.0,
+          "amortized_requests_per_task": 2.0,
+          "amortized_response_bytes_per_task": 163.32,
+          "amortized_wall_ms_per_task": 1.7506560199763044,
+          "binding_accuracy": 0.0,
+          "ece": {
+            "bins": [
+              {
+                "bin": [
+                  0.0,
+                  0.1
+                ],
+                "empirical_accuracy": 0.0,
+                "gap": 0.0,
+                "mean_confidence": 0.0,
+                "n": 50
+              }
+            ],
+            "ece": 0.0,
+            "n": 50
+          },
+          "end_to_end_success_rate": 1.0,
+          "kernel_calls_per_task": 2.0,
+          "mechanism_success_rate": 0.0,
+          "n": 50,
+          "n_executed_by_mechanism": 50,
+          "n_fallback_used": 50,
+          "own_requests_per_task": 1.0,
+          "postcondition_ok_rate": 0.0,
+          "resolution_histogram": {
+            "UNKNOWN": 50
+          },
+          "semantic_correct_rate": 0.0,
+          "verified_rate": 0.0
+        },
+        "crud-write": {
+          "amortized_request_bytes_per_task": 86.84,
+          "amortized_requests_per_task": 2.64,
+          "amortized_response_bytes_per_task": 240.7,
+          "amortized_wall_ms_per_task": 2.4056031000236544,
+          "binding_accuracy": 0.0,
+          "ece": {
+            "bins": [
+              {
+                "bin": [
+                  0.0,
+                  0.1
+                ],
+                "empirical_accuracy": 0.0,
+                "gap": 0.0,
+                "mean_confidence": 0.0,
+                "n": 50
+              }
+            ],
+            "ece": 0.0,
+            "n": 50
+          },
+          "end_to_end_success_rate": 1.0,
+          "kernel_calls_per_task": 2.0,
+          "mechanism_success_rate": 0.0,
+          "n": 50,
+          "n_executed_by_mechanism": 50,
+          "n_fallback_used": 50,
+          "own_requests_per_task": 1.0,
+          "postcondition_ok_rate": 0.4,
+          "resolution_histogram": {
+            "UNKNOWN": 50
+          },
+          "semantic_correct_rate": 0.0,
+          "verified_rate": 0.4
+        },
+        "query": {
+          "amortized_request_bytes_per_task": 0.0,
+          "amortized_requests_per_task": 2.0,
+          "amortized_response_bytes_per_task": 567.84,
+          "amortized_wall_ms_per_task": 1.7790318799961824,
+          "binding_accuracy": 0.0,
+          "ece": {
+            "bins": [
+              {
+                "bin": [
+                  0.0,
+                  0.1
+                ],
+                "empirical_accuracy": 0.0,
+                "gap": 0.0,
+                "mean_confidence": 0.0,
+                "n": 50
+              }
+            ],
+            "ece": 0.0,
+            "n": 50
+          },
+          "end_to_end_success_rate": 1.0,
+          "kernel_calls_per_task": 2.0,
+          "mechanism_success_rate": 0.0,
+          "n": 50,
+          "n_executed_by_mechanism": 50,
+          "n_fallback_used": 50,
+          "own_requests_per_task": 1.0,
+          "postcondition_ok_rate": 0.0,
+          "resolution_histogram": {
+            "UNKNOWN": 50
+          },
+          "semantic_correct_rate": 0.0,
+          "verified_rate": 0.0
+        }
+      },
+      "postcondition_ok_rate": 0.13333333333333333,
+      "resolution_histogram": {
+        "UNKNOWN": 150
+      },
+      "semantic_correct_rate": 0.0,
+      "verified_rate": 0.13333333333333333
+    },
+    "B-RETRIEVAL-K5": {
+      "amortized_request_bytes_per_task": 20.30666666666667,
+      "amortized_requests_per_task": 1.2133333333333334,
+      "amortized_response_bytes_per_task": 269.68,
+      "amortized_wall_ms_per_task": 2.2932745266492325,
+      "binding_accuracy": null,
+      "ece": {
+        "bins": [],
+        "ece": null,
+        "n": 0
+      },
+      "end_to_end_success_rate": 1.0,
+      "induction_requests_global": 0.0,
+      "induction_requests_per_family": 0.0,
+      "kernel_calls_per_task": 0.0,
+      "mechanism_success_rate": 0.0,
+      "n": 150,
+      "n_executed_by_mechanism": 0,
+      "n_fallback_used": 150,
+      "own_requests_per_task": 0.0,
+      "per_family": {
+        "crud-read": {
+          "amortized_request_bytes_per_task": 0.0,
+          "amortized_requests_per_task": 1.0,
+          "amortized_response_bytes_per_task": 125.32,
+          "amortized_wall_ms_per_task": 2.1148940399871208,
+          "binding_accuracy": null,
+          "ece": {
+            "bins": [],
+            "ece": null,
+            "n": 0
+          },
+          "end_to_end_success_rate": 1.0,
+          "kernel_calls_per_task": 0.0,
+          "mechanism_success_rate": 0.0,
+          "n": 50,
+          "n_executed_by_mechanism": 0,
+          "n_fallback_used": 50,
+          "own_requests_per_task": 0.0,
+          "postcondition_ok_rate": 0.0,
+          "resolution_histogram": {
+            "EXPLORE": 50
+          },
+          "semantic_correct_rate": 0.0,
+          "verified_rate": 0.0
+        },
+        "crud-write": {
+          "amortized_request_bytes_per_task": 60.92,
+          "amortized_requests_per_task": 1.64,
+          "amortized_response_bytes_per_task": 162.88,
+          "amortized_wall_ms_per_task": 2.587623099971097,
+          "binding_accuracy": null,
+          "ece": {
+            "bins": [],
+            "ece": null,
+            "n": 0
+          },
+          "end_to_end_success_rate": 1.0,
+          "kernel_calls_per_task": 0.0,
+          "mechanism_success_rate": 0.0,
+          "n": 50,
+          "n_executed_by_mechanism": 0,
+          "n_fallback_used": 50,
+          "own_requests_per_task": 0.0,
+          "postcondition_ok_rate": 0.0,
+          "resolution_histogram": {
+            "EXPLORE": 50
+          },
+          "semantic_correct_rate": 0.0,
+          "verified_rate": 0.0
+        },
+        "query": {
+          "amortized_request_bytes_per_task": 0.0,
+          "amortized_requests_per_task": 1.0,
+          "amortized_response_bytes_per_task": 520.84,
+          "amortized_wall_ms_per_task": 2.1773064399894793,
+          "binding_accuracy": null,
+          "ece": {
+            "bins": [],
+            "ece": null,
+            "n": 0
+          },
+          "end_to_end_success_rate": 1.0,
+          "kernel_calls_per_task": 0.0,
+          "mechanism_success_rate": 0.0,
+          "n": 50,
+          "n_executed_by_mechanism": 0,
+          "n_fallback_used": 50,
+          "own_requests_per_task": 0.0,
+          "postcondition_ok_rate": 0.0,
+          "resolution_histogram": {
+            "EXPLORE": 50
+          },
+          "semantic_correct_rate": 0.0,
+          "verified_rate": 0.0
+        }
+      },
+      "postcondition_ok_rate": 0.0,
+      "resolution_histogram": {
+        "EXPLORE": 150
+      },
+      "semantic_correct_rate": 0.0,
+      "verified_rate": 0.0
+    },
+    "B-RETRIEVAL-K5-SLOT": {
+      "amortized_request_bytes_per_task": 20.30666666666667,
+      "amortized_requests_per_task": 1.2133333333333334,
+      "amortized_response_bytes_per_task": 269.68,
+      "amortized_wall_ms_per_task": 2.254827006660586,
+      "binding_accuracy": null,
+      "ece": {
+        "bins": [],
+        "ece": null,
+        "n": 0
+      },
+      "end_to_end_success_rate": 1.0,
+      "induction_requests_global": 0.0,
+      "induction_requests_per_family": 0.0,
+      "kernel_calls_per_task": 0.0,
+      "mechanism_success_rate": 0.0,
+      "n": 150,
+      "n_executed_by_mechanism": 0,
+      "n_fallback_used": 150,
+      "own_requests_per_task": 0.0,
+      "per_family": {
+        "crud-read": {
+          "amortized_request_bytes_per_task": 0.0,
+          "amortized_requests_per_task": 1.0,
+          "amortized_response_bytes_per_task": 125.32,
+          "amortized_wall_ms_per_task": 2.0763430199713184,
+          "binding_accuracy": null,
+          "ece": {
+            "bins": [],
+            "ece": null,
+            "n": 0
+          },
+          "end_to_end_success_rate": 1.0,
+          "kernel_calls_per_task": 0.0,
+          "mechanism_success_rate": 0.0,
+          "n": 50,
+          "n_executed_by_mechanism": 0,
+          "n_fallback_used": 50,
+          "own_requests_per_task": 0.0,
+          "postcondition_ok_rate": 0.0,
+          "resolution_histogram": {
+            "EXPLORE": 50
+          },
+          "semantic_correct_rate": 0.0,
+          "verified_rate": 0.0
+        },
+        "crud-write": {
+          "amortized_request_bytes_per_task": 60.92,
+          "amortized_requests_per_task": 1.64,
+          "amortized_response_bytes_per_task": 162.88,
+          "amortized_wall_ms_per_task": 2.5799815799837233,
+          "binding_accuracy": null,
+          "ece": {
+            "bins": [],
+            "ece": null,
+            "n": 0
+          },
+          "end_to_end_success_rate": 1.0,
+          "kernel_calls_per_task": 0.0,
+          "mechanism_success_rate": 0.0,
+          "n": 50,
+          "n_executed_by_mechanism": 0,
+          "n_fallback_used": 50,
+          "own_requests_per_task": 0.0,
+          "postcondition_ok_rate": 0.0,
+          "resolution_histogram": {
+            "EXPLORE": 50
+          },
+          "semantic_correct_rate": 0.0,
+          "verified_rate": 0.0
+        },
+        "query": {
+          "amortized_request_bytes_per_task": 0.0,
+          "amortized_requests_per_task": 1.0,
+          "amortized_response_bytes_per_task": 520.84,
+          "amortized_wall_ms_per_task": 2.1081564200267167,
+          "binding_accuracy": null,
+          "ece": {
+            "bins": [],
+            "ece": null,
+            "n": 0
+          },
+          "end_to_end_success_rate": 1.0,
+          "kernel_calls_per_task": 0.0,
+          "mechanism_success_rate": 0.0,
+          "n": 50,
+          "n_executed_by_mechanism": 0,
+          "n_fallback_used": 50,
+          "own_requests_per_task": 0.0,
+          "postcondition_ok_rate": 0.0,
+          "resolution_histogram": {
+            "EXPLORE": 50
+          },
+          "semantic_correct_rate": 0.0,
+          "verified_rate": 0.0
+        }
+      },
+      "postcondition_ok_rate": 0.0,
+      "resolution_histogram": {
+        "EXPLORE": 150
+      },
+      "semantic_correct_rate": 0.0,
+      "verified_rate": 0.0
+    },
+    "NC-SHUFFLED-INTENT": {
+      "amortized_request_bytes_per_task": 20.30666666666667,
+      "amortized_requests_per_task": 1.2133333333333334,
+      "amortized_response_bytes_per_task": 269.68,
+      "amortized_wall_ms_per_task": 1.0318110799865583,
+      "binding_accuracy": null,
+      "ece": {
+        "bins": [],
+        "ece": null,
+        "n": 0
+      },
+      "end_to_end_success_rate": 1.0,
+      "induction_requests_global": 0.0,
+      "induction_requests_per_family": 0.0,
+      "kernel_calls_per_task": 1.0,
+      "mechanism_success_rate": 0.0,
+      "n": 150,
+      "n_executed_by_mechanism": 0,
+      "n_fallback_used": 150,
+      "own_requests_per_task": 0.0,
+      "per_family": {
+        "crud-read": {
+          "amortized_request_bytes_per_task": 0.0,
+          "amortized_requests_per_task": 1.0,
+          "amortized_response_bytes_per_task": 125.32,
+          "amortized_wall_ms_per_task": 0.8380885799851967,
+          "binding_accuracy": null,
+          "ece": {
+            "bins": [],
+            "ece": null,
+            "n": 0
+          },
+          "end_to_end_success_rate": 1.0,
+          "kernel_calls_per_task": 1.0,
+          "mechanism_success_rate": 0.0,
+          "n": 50,
+          "n_executed_by_mechanism": 0,
+          "n_fallback_used": 50,
+          "own_requests_per_task": 0.0,
+          "postcondition_ok_rate": 0.0,
+          "resolution_histogram": {
+            "UNKNOWN": 50
+          },
+          "semantic_correct_rate": 0.0,
+          "verified_rate": 0.0
+        },
+        "crud-write": {
+          "amortized_request_bytes_per_task": 60.92,
+          "amortized_requests_per_task": 1.64,
+          "amortized_response_bytes_per_task": 162.88,
+          "amortized_wall_ms_per_task": 1.3592535399948247,
+          "binding_accuracy": null,
+          "ece": {
+            "bins": [],
+            "ece": null,
+            "n": 0
+          },
+          "end_to_end_success_rate": 1.0,
+          "kernel_calls_per_task": 1.0,
+          "mechanism_success_rate": 0.0,
+          "n": 50,
+          "n_executed_by_mechanism": 0,
+          "n_fallback_used": 50,
+          "own_requests_per_task": 0.0,
+          "postcondition_ok_rate": 0.0,
+          "resolution_histogram": {
+            "UNKNOWN": 50
+          },
+          "semantic_correct_rate": 0.0,
+          "verified_rate": 0.0
+        },
+        "query": {
+          "amortized_request_bytes_per_task": 0.0,
+          "amortized_requests_per_task": 1.0,
+          "amortized_response_bytes_per_task": 520.84,
+          "amortized_wall_ms_per_task": 0.8980911199796537,
+          "binding_accuracy": null,
+          "ece": {
+            "bins": [],
+            "ece": null,
+            "n": 0
+          },
+          "end_to_end_success_rate": 1.0,
+          "kernel_calls_per_task": 1.0,
+          "mechanism_success_rate": 0.0,
+          "n": 50,
+          "n_executed_by_mechanism": 0,
+          "n_fallback_used": 50,
+          "own_requests_per_task": 0.0,
+          "postcondition_ok_rate": 0.0,
+          "resolution_histogram": {
+            "UNKNOWN": 50
+          },
+          "semantic_correct_rate": 0.0,
+          "verified_rate": 0.0
+        }
+      },
+      "postcondition_ok_rate": 0.0,
+      "resolution_histogram": {
+        "UNKNOWN": 150
+      },
+      "semantic_correct_rate": 0.0,
+      "verified_rate": 0.0
+    },
+    "PARAM-INHERIT": {
+      "amortized_request_bytes_per_task": 0.0,
+      "amortized_requests_per_task": 1.0,
+      "amortized_response_bytes_per_task": 253.81333333333333,
+      "amortized_wall_ms_per_task": 1.1509098199985601,
+      "binding_accuracy": 1.0,
+      "ece": {
+        "bins": [
+          {
+            "bin": [
+              0.9,
+              1.0
+            ],
+            "empirical_accuracy": 1.0,
+            "gap": 0.04347800000000002,
+            "mean_confidence": 0.956522,
+            "n": 150
+          }
+        ],
+        "ece": 0.04347800000000002,
+        "n": 150
+      },
+      "end_to_end_success_rate": 1.0,
+      "induction_requests_global": 100,
+      "induction_requests_per_family": 33.333333333333336,
+      "kernel_calls_per_task": 2.0,
+      "mechanism_success_rate": 1.0,
+      "n": 150,
+      "n_executed_by_mechanism": 150,
+      "n_fallback_used": 0,
+      "own_requests_per_task": 1.0,
+      "per_family": {
+        "crud-read": {
+          "amortized_request_bytes_per_task": 0.0,
+          "amortized_requests_per_task": 1.0,
+          "amortized_response_bytes_per_task": 125.32,
+          "amortized_wall_ms_per_task": 1.1326140800156281,
+          "binding_accuracy": 1.0,
+          "ece": {
+            "bins": [
+              {
+                "bin": [
+                  0.9,
+                  1.0
+                ],
+                "empirical_accuracy": 1.0,
+                "gap": 0.04347800000000002,
+                "mean_confidence": 0.956522,
+                "n": 50
+              }
+            ],
+            "ece": 0.04347800000000002,
+            "n": 50
+          },
+          "end_to_end_success_rate": 1.0,
+          "kernel_calls_per_task": 2.0,
+          "mechanism_success_rate": 1.0,
+          "n": 50,
+          "n_executed_by_mechanism": 50,
+          "n_fallback_used": 0,
+          "own_requests_per_task": 1.0,
+          "postcondition_ok_rate": 1.0,
+          "resolution_histogram": {
+            "EXECUTABLE": 50
+          },
+          "semantic_correct_rate": 1.0,
+          "verified_rate": 1.0
+        },
+        "crud-write": {
+          "amortized_request_bytes_per_task": 0.0,
+          "amortized_requests_per_task": 1.0,
+          "amortized_response_bytes_per_task": 115.28,
+          "amortized_wall_ms_per_task": 1.1435020399767382,
+          "binding_accuracy": 1.0,
+          "ece": {
+            "bins": [
+              {
+                "bin": [
+                  0.9,
+                  1.0
+                ],
+                "empirical_accuracy": 1.0,
+                "gap": 0.04347800000000002,
+                "mean_confidence": 0.956522,
+                "n": 50
+              }
+            ],
+            "ece": 0.04347800000000002,
+            "n": 50
+          },
+          "end_to_end_success_rate": 1.0,
+          "kernel_calls_per_task": 2.0,
+          "mechanism_success_rate": 1.0,
+          "n": 50,
+          "n_executed_by_mechanism": 50,
+          "n_fallback_used": 0,
+          "own_requests_per_task": 1.0,
+          "postcondition_ok_rate": 1.0,
+          "resolution_histogram": {
+            "EXECUTABLE": 50
+          },
+          "semantic_correct_rate": 1.0,
+          "verified_rate": 1.0
+        },
+        "query": {
+          "amortized_request_bytes_per_task": 0.0,
+          "amortized_requests_per_task": 1.0,
+          "amortized_response_bytes_per_task": 520.84,
+          "amortized_wall_ms_per_task": 1.176613340003314,
+          "binding_accuracy": 1.0,
+          "ece": {
+            "bins": [
+              {
+                "bin": [
+                  0.9,
+                  1.0
+                ],
+                "empirical_accuracy": 1.0,
+                "gap": 0.04347800000000002,
+                "mean_confidence": 0.956522,
+                "n": 50
+              }
+            ],
+            "ece": 0.04347800000000002,
+            "n": 50
+          },
+          "end_to_end_success_rate": 1.0,
+          "kernel_calls_per_task": 2.0,
+          "mechanism_success_rate": 1.0,
+          "n": 50,
+          "n_executed_by_mechanism": 50,
+          "n_fallback_used": 0,
+          "own_requests_per_task": 1.0,
+          "postcondition_ok_rate": 1.0,
+          "resolution_histogram": {
+            "EXECUTABLE": 50
+          },
+          "semantic_correct_rate": 1.0,
+          "verified_rate": 1.0
+        }
+      },
+      "postcondition_ok_rate": 1.0,
+      "resolution_histogram": {
+        "EXECUTABLE": 150
+      },
+      "semantic_correct_rate": 1.0,
+      "verified_rate": 1.0
+    }
+  },
+  "best_baseline_at_matched_correctness": "B-COLD",
+  "best_baseline_cost_ratio_per_family": {
+    "crud-read": {
+      "baseline_amortized_requests_per_task": 1.0,
+      "induction_requests_amortized": 33.333333333333336,
+      "ratio": 1.666666666666667,
+      "treatment_amortized_requests_per_task": 1.666666666666667
+    },
+    "crud-write": {
+      "baseline_amortized_requests_per_task": 1.64,
+      "induction_requests_amortized": 33.333333333333336,
+      "ratio": 1.0162601626016263,
+      "treatment_amortized_requests_per_task": 1.666666666666667
+    },
+    "query": {
+      "baseline_amortized_requests_per_task": 1.0,
+      "induction_requests_amortized": 33.333333333333336,
+      "ratio": 1.666666666666667,
+      "treatment_amortized_requests_per_task": 1.666666666666667
+    }
+  },
+  "break_even_n_requests": {
+    "induction_requests_global": 100,
+    "note": "N such that induction/N + treatment_transfer <= 0.85 * baseline. None means the treatment can never reach the 0.85 target against that baseline at any N, because it is not cheaper per task.",
+    "per_family": {
+      "crud-read": {
+        "B-COLD": null,
+        "B-LITERAL-REPLAY": null,
+        "B-RETRIEVAL-K5": null
+      },
+      "crud-write": {
+        "B-COLD": 253.80710659898483,
+        "B-LITERAL-REPLAY": 253.80710659898483,
+        "B-RETRIEVAL-K5": 253.80710659898483
+      },
+      "query": {
+        "B-COLD": null,
+        "B-LITERAL-REPLAY": null,
+        "B-RETRIEVAL-K5": null
+      }
+    }
+  },
+  "cost_ratios_vs_param": {
+    "B-COLD": {
+      "crud-read": {
+        "baseline_amortized_requests_per_task": 1.0,
+        "induction_requests_amortized": 33.333333333333336,
+        "ratio": 1.666666666666667,
+        "treatment_amortized_requests_per_task": 1.666666666666667
+      },
+      "crud-write": {
+        "baseline_amortized_requests_per_task": 1.64,
+        "induction_requests_amortized": 33.333333333333336,
+        "ratio": 1.0162601626016263,
+        "treatment_amortized_requests_per_task": 1.666666666666667
+      },
+      "query": {
+        "baseline_amortized_requests_per_task": 1.0,
+        "induction_requests_amortized": 33.333333333333336,
+        "ratio": 1.666666666666667,
+        "treatment_amortized_requests_per_task": 1.666666666666667
+      }
+    },
+    "B-COLD-DOC": {
+      "crud-read": {
+        "baseline_amortized_requests_per_task": 1.0066666666666666,
+        "induction_requests_amortized": 33.333333333333336,
+        "ratio": 1.6556291390728481,
+        "treatment_amortized_requests_per_task": 1.666666666666667
+      },
+      "crud-write": {
+        "baseline_amortized_requests_per_task": 1.0066666666666666,
+        "induction_requests_amortized": 33.333333333333336,
+        "ratio": 1.6556291390728481,
+        "treatment_amortized_requests_per_task": 1.666666666666667
+      },
+      "query": {
+        "baseline_amortized_requests_per_task": 2.006666666666667,
+        "induction_requests_amortized": 33.333333333333336,
+        "ratio": 0.8305647840531563,
+        "treatment_amortized_requests_per_task": 1.666666666666667
+      }
+    },
+    "B-LITERAL-REPLAY": {
+      "crud-read": {
+        "baseline_amortized_requests_per_task": 1.0,
+        "induction_requests_amortized": 33.333333333333336,
+        "ratio": 1.666666666666667,
+        "treatment_amortized_requests_per_task": 1.666666666666667
+      },
+      "crud-write": {
+        "baseline_amortized_requests_per_task": 1.64,
+        "induction_requests_amortized": 33.333333333333336,
+        "ratio": 1.0162601626016263,
+        "treatment_amortized_requests_per_task": 1.666666666666667
+      },
+      "query": {
+        "baseline_amortized_requests_per_task": 1.0,
+        "induction_requests_amortized": 33.333333333333336,
+        "ratio": 1.666666666666667,
+        "treatment_amortized_requests_per_task": 1.666666666666667
+      }
+    },
+    "B-LITERAL-REPLAY-FORCED": {
+      "crud-read": {
+        "baseline_amortized_requests_per_task": 2.0,
+        "induction_requests_amortized": 33.333333333333336,
+        "ratio": 0.8333333333333335,
+        "treatment_amortized_requests_per_task": 1.666666666666667
+      },
+      "crud-write": {
+        "baseline_amortized_requests_per_task": 2.64,
+        "induction_requests_amortized": 33.333333333333336,
+        "ratio": 0.6313131313131314,
+        "treatment_amortized_requests_per_task": 1.666666666666667
+      },
+      "query": {
+        "baseline_amortized_requests_per_task": 2.0,
+        "induction_requests_amortized": 33.333333333333336,
+        "ratio": 0.8333333333333335,
+        "treatment_amortized_requests_per_task": 1.666666666666667
+      }
+    },
+    "B-RETRIEVAL-K5": {
+      "crud-read": {
+        "baseline_amortized_requests_per_task": 1.0,
+        "induction_requests_amortized": 33.333333333333336,
+        "ratio": 1.666666666666667,
+        "treatment_amortized_requests_per_task": 1.666666666666667
+      },
+      "crud-write": {
+        "baseline_amortized_requests_per_task": 1.64,
+        "induction_requests_amortized": 33.333333333333336,
+        "ratio": 1.0162601626016263,
+        "treatment_amortized_requests_per_task": 1.666666666666667
+      },
+      "query": {
+        "baseline_amortized_requests_per_task": 1.0,
+        "induction_requests_amortized": 33.333333333333336,
+        "ratio": 1.666666666666667,
+        "treatment_amortized_requests_per_task": 1.666666666666667
+      }
+    },
+    "B-RETRIEVAL-K5-SLOT": {
+      "crud-read": {
+        "baseline_amortized_requests_per_task": 1.0,
+        "induction_requests_amortized": 33.333333333333336,
+        "ratio": 1.666666666666667,
+        "treatment_amortized_requests_per_task": 1.666666666666667
+      },
+      "crud-write": {
+        "baseline_amortized_requests_per_task": 1.64,
+        "induction_requests_amortized": 33.333333333333336,
+        "ratio": 1.0162601626016263,
+        "treatment_amortized_requests_per_task": 1.666666666666667
+      },
+      "query": {
+        "baseline_amortized_requests_per_task": 1.0,
+        "induction_requests_amortized": 33.333333333333336,
+        "ratio": 1.666666666666667,
+        "treatment_amortized_requests_per_task": 1.666666666666667
+      }
+    },
+    "NC-SHUFFLED-INTENT": {
+      "crud-read": {
+        "baseline_amortized_requests_per_task": 1.0,
+        "induction_requests_amortized": 33.333333333333336,
+        "ratio": 1.666666666666667,
+        "treatment_amortized_requests_per_task": 1.666666666666667
+      },
+      "crud-write": {
+        "baseline_amortized_requests_per_task": 1.64,
+        "induction_requests_amortized": 33.333333333333336,
+        "ratio": 1.0162601626016263,
+        "treatment_amortized_requests_per_task": 1.666666666666667
+      },
+      "query": {
+        "baseline_amortized_requests_per_task": 1.0,
+        "induction_requests_amortized": 33.333333333333336,
+        "ratio": 1.666666666666667,
+        "treatment_amortized_requests_per_task": 1.666666666666667
+      }
+    }
+  },
+  "cost_rule": "own + cold_fallback_when_unsolved",
+  "families": [
+    "crud-write",
+    "crud-read",
+    "query"
+  ],
+  "induction_requests_total": 100,
+  "matched_correctness_eligible_baselines": [
+    "B-COLD",
+    "B-LITERAL-REPLAY",
+    "B-RETRIEVAL-K5"
+  ],
+  "matched_correctness_tolerance": 0.05,
+  "n_a_training_observations": 100,
+  "n_b_transfer_tasks": 150,
+  "n_pc_tasks": 100,
+  "param_family_bootstrap_amortized_requests": {
+    "crud-read": {
+      "bootstrap_b": 5000,
+      "bootstrap_valid_resamples": 5000,
+      "ci95": [
+        1.0,
+        1.0
+      ],
+      "n": 50,
+      "point": 1.0
+    },
+    "crud-write": {
+      "bootstrap_b": 5000,
+      "bootstrap_valid_resamples": 5000,
+      "ci95": [
+        1.0,
+        1.0
+      ],
+      "n": 50,
+      "point": 1.0
+    },
+    "query": {
+      "bootstrap_b": 5000,
+      "bootstrap_valid_resamples": 5000,
+      "ci95": [
+        1.0,
+        1.0
+      ],
+      "n": 50,
+      "point": 1.0
+    }
+  },
+  "param_family_bootstrap_success_rate": {
+    "crud-read": {
+      "bootstrap_b": 5000,
+      "bootstrap_valid_resamples": 5000,
+      "ci95": [
+        1.0,
+        1.0
+      ],
+      "n": 50,
+      "point": 1.0
+    },
+    "crud-write": {
+      "bootstrap_b": 5000,
+      "bootstrap_valid_resamples": 5000,
+      "ci95": [
+        1.0,
+        1.0
+      ],
+      "n": 50,
+      "point": 1.0
+    },
+    "query": {
+      "bootstrap_b": 5000,
+      "bootstrap_valid_resamples": 5000,
+      "ci95": [
+        1.0,
+        1.0
+      ],
+      "n": 50,
+      "point": 1.0
+    }
+  },
+  "pooled_ece": {
+    "bins": [
+      {
+        "bin": [
+          0.0,
+          0.1
+        ],
+        "empirical_accuracy": 0.0,
+        "gap": 0.0,
+        "mean_confidence": 0.0,
+        "n": 300
+      },
+      {
+        "bin": [
+          0.9,
+          1.0
+        ],
+        "empirical_accuracy": 1.0,
+        "gap": 0.04347800000000002,
+        "mean_confidence": 0.956522,
+        "n": 250
+      }
+    ],
+    "ece": 0.01976272727272728,
+    "n": 550
+  },
+  "positive_control": {
+    "B-COLD": {
+      "amortized_request_bytes_per_task": 0.0,
+      "amortized_requests_per_task": 1.0,
+      "amortized_response_bytes_per_task": 321.28,
+      "amortized_wall_ms_per_task": 0.6801608100249723,
+      "binding_accuracy": null,
+      "ece": {
+        "bins": [],
+        "ece": null,
+        "n": 0
+      },
+      "end_to_end_success_rate": 1.0,
+      "kernel_calls_per_task": 0.0,
+      "mechanism_success_rate": 0.0,
+      "n": 100,
+      "n_executed_by_mechanism": 0,
+      "n_fallback_used": 100,
+      "own_requests_per_task": 0.0,
+      "per_family": {
+        "crud-read": {
+          "amortized_request_bytes_per_task": 0.0,
+          "amortized_requests_per_task": 1.0,
+          "amortized_response_bytes_per_task": 124.3,
+          "amortized_wall_ms_per_task": 0.6547757200314663,
+          "binding_accuracy": null,
+          "ece": {
+            "bins": [],
+            "ece": null,
+            "n": 0
+          },
+          "end_to_end_success_rate": 1.0,
+          "kernel_calls_per_task": 0.0,
+          "mechanism_success_rate": 0.0,
+          "n": 50,
+          "n_executed_by_mechanism": 0,
+          "n_fallback_used": 50,
+          "own_requests_per_task": 0.0,
+          "postcondition_ok_rate": 0.0,
+          "resolution_histogram": {
+            "UNKNOWN": 50
+          },
+          "semantic_correct_rate": 0.0,
+          "verified_rate": 0.0
+        },
+        "crud-write": {
+          "n": 0
+        },
+        "query": {
+          "amortized_request_bytes_per_task": 0.0,
+          "amortized_requests_per_task": 1.0,
+          "amortized_response_bytes_per_task": 518.26,
+          "amortized_wall_ms_per_task": 0.7055459000184783,
+          "binding_accuracy": null,
+          "ece": {
+            "bins": [],
+            "ece": null,
+            "n": 0
+          },
+          "end_to_end_success_rate": 1.0,
+          "kernel_calls_per_task": 0.0,
+          "mechanism_success_rate": 0.0,
+          "n": 50,
+          "n_executed_by_mechanism": 0,
+          "n_fallback_used": 50,
+          "own_requests_per_task": 0.0,
+          "postcondition_ok_rate": 0.0,
+          "resolution_histogram": {
+            "UNKNOWN": 50
+          },
+          "semantic_correct_rate": 0.0,
+          "verified_rate": 0.0
+        }
+      },
+      "postcondition_ok_rate": 0.0,
+      "resolution_histogram": {
+        "UNKNOWN": 100
+      },
+      "semantic_correct_rate": 0.0,
+      "verified_rate": 0.0
+    },
+    "PARAM-INHERIT": {
+      "amortized_request_bytes_per_task": 0.0,
+      "amortized_requests_per_task": 1.0,
+      "amortized_response_bytes_per_task": 321.28,
+      "amortized_wall_ms_per_task": 1.093085289994633,
+      "binding_accuracy": 1.0,
+      "ece": {
+        "bins": [
+          {
+            "bin": [
+              0.9,
+              1.0
+            ],
+            "empirical_accuracy": 1.0,
+            "gap": 0.04347800000000002,
+            "mean_confidence": 0.956522,
+            "n": 100
+          }
+        ],
+        "ece": 0.04347800000000002,
+        "n": 100
+      },
+      "end_to_end_success_rate": 1.0,
+      "kernel_calls_per_task": 2.0,
+      "mechanism_success_rate": 1.0,
+      "n": 100,
+      "n_executed_by_mechanism": 100,
+      "n_fallback_used": 0,
+      "own_requests_per_task": 1.0,
+      "per_family": {
+        "crud-read": {
+          "amortized_request_bytes_per_task": 0.0,
+          "amortized_requests_per_task": 1.0,
+          "amortized_response_bytes_per_task": 124.3,
+          "amortized_wall_ms_per_task": 1.0546480799894198,
+          "binding_accuracy": 1.0,
+          "ece": {
+            "bins": [
+              {
+                "bin": [
+                  0.9,
+                  1.0
+                ],
+                "empirical_accuracy": 1.0,
+                "gap": 0.04347800000000002,
+                "mean_confidence": 0.956522,
+                "n": 50
+              }
+            ],
+            "ece": 0.04347800000000002,
+            "n": 50
+          },
+          "end_to_end_success_rate": 1.0,
+          "kernel_calls_per_task": 2.0,
+          "mechanism_success_rate": 1.0,
+          "n": 50,
+          "n_executed_by_mechanism": 50,
+          "n_fallback_used": 0,
+          "own_requests_per_task": 1.0,
+          "postcondition_ok_rate": 1.0,
+          "resolution_histogram": {
+            "EXECUTABLE": 50
+          },
+          "semantic_correct_rate": 1.0,
+          "verified_rate": 1.0
+        },
+        "crud-write": {
+          "n": 0
+        },
+        "query": {
+          "amortized_request_bytes_per_task": 0.0,
+          "amortized_requests_per_task": 1.0,
+          "amortized_response_bytes_per_task": 518.26,
+          "amortized_wall_ms_per_task": 1.1315224999998463,
+          "binding_accuracy": 1.0,
+          "ece": {
+            "bins": [
+              {
+                "bin": [
+                  0.9,
+                  1.0
+                ],
+                "empirical_accuracy": 1.0,
+                "gap": 0.04347800000000002,
+                "mean_confidence": 0.956522,
+                "n": 50
+              }
+            ],
+            "ece": 0.04347800000000002,
+            "n": 50
+          },
+          "end_to_end_success_rate": 1.0,
+          "kernel_calls_per_task": 2.0,
+          "mechanism_success_rate": 1.0,
+          "n": 50,
+          "n_executed_by_mechanism": 50,
+          "n_fallback_used": 0,
+          "own_requests_per_task": 1.0,
+          "postcondition_ok_rate": 1.0,
+          "resolution_histogram": {
+            "EXECUTABLE": 50
+          },
+          "semantic_correct_rate": 1.0,
+          "verified_rate": 1.0
+        }
+      },
+      "postcondition_ok_rate": 1.0,
+      "resolution_histogram": {
+        "EXECUTABLE": 100
+      },
+      "semantic_correct_rate": 1.0,
+      "verified_rate": 1.0
+    },
+    "cost_ratio_vs_b_cold": 2.0,
+    "n_tasks": 100,
+    "transfer_only_cost_ratio_vs_b_cold": 1.0
+  },
+  "seed": 20260926
+}

@@ -1,0 +1,25 @@
+test_invalidation_forces_abstention (test_kernel.KernelTests.test_invalidation_forces_abstention) ... ok
+test_parameterized_mechanism_binds_only_when_guarded (test_kernel.KernelTests.test_parameterized_mechanism_binds_only_when_guarded) ... ok
+test_unknown_is_default (test_kernel.KernelTests.test_unknown_is_default) ... ok
+test_confidence_is_evidence_derived_and_not_hardcoded (test_kernel.ParameterInductionTests.test_confidence_is_evidence_derived_and_not_hardcoded) ... ok
+test_constant_authorization_header_is_still_redacted (test_kernel.ParameterInductionTests.test_constant_authorization_header_is_still_redacted) ... ok
+test_failed_observations_are_never_induced (test_kernel.ParameterInductionTests.test_failed_observations_are_never_induced) ... ok
+test_full_value_identifier_is_not_double_prefixed (test_kernel.ParameterInductionTests.test_full_value_identifier_is_not_double_prefixed) ... ok
+test_group_with_no_variation_produces_no_transferable_mechanism (test_kernel.ParameterInductionTests.test_group_with_no_variation_produces_no_transferable_mechanism) ... ok
+test_integer_valued_slot_round_trips_without_stringification (test_kernel.ParameterInductionTests.test_integer_valued_slot_round_trips_without_stringification) ... ok
+test_kernel_method_registers_mechanisms_and_resolves_on_unseen_identifier (test_kernel.ParameterInductionTests.test_kernel_method_registers_mechanisms_and_resolves_on_unseen_identifier) ... ok
+test_learned_mechanism_does_not_resolve_unlearned_intent (test_kernel.ParameterInductionTests.test_learned_mechanism_does_not_resolve_unlearned_intent) ... ok
+test_multi_param_induction_links_varying_context (test_kernel.ParameterInductionTests.test_multi_param_induction_links_varying_context) ... ok
+test_noise_fields_are_not_induced (test_kernel.ParameterInductionTests.test_noise_fields_are_not_induced) ... ok
+test_parameterized_mechanism_wins_tie_against_literal (test_kernel.ParameterInductionTests.test_parameterized_mechanism_wins_tie_against_literal) ... ok
+test_secret_header_becomes_slot_not_stored_value (test_kernel.ParameterInductionTests.test_secret_header_becomes_slot_not_stored_value) ... ok
+test_shared_url_prefix_is_spliced_and_reproduces_every_action (test_kernel.ParameterInductionTests.test_shared_url_prefix_is_spliced_and_reproduces_every_action) ... ok
+test_single_collection_group_refuses_to_generalize_the_collection (test_kernel.ParameterInductionTests.test_single_collection_group_refuses_to_generalize_the_collection) ... ok
+test_single_param_induction (test_kernel.ParameterInductionTests.test_single_param_induction) ... ok
+test_unlinked_varying_context_field_is_dropped (test_kernel.ParameterInductionTests.test_unlinked_varying_context_field_is_dropped) ... ok
+test_unrelated_evidence_yields_no_slots_and_no_mechanism (test_kernel.ParameterInductionTests.test_unrelated_evidence_yields_no_slots_and_no_mechanism) ... ok
+
+----------------------------------------------------------------------
+Ran 20 tests in 0.042s
+
+OK

@@ -1,0 +1,11 @@
+{
+  "EXP-PRODUCT-36249064252/arms.py": "60b656d9ad1939ebcea2b77bd284bee5e9d6c5314f1d470f1f83105e634a2ade",
+  "EXP-PRODUCT-36249064252/incumbent_probe.py": "09615f5051ce2a1c261e600479a5e6c76fe5c12599153ada31bf026f9f689434",
+  "EXP-PRODUCT-36249064252/run_experiment.py": "e7a1507407d868c8cd302a85a5a6748db2954df54ef63117d806619064815f24",
+  "EXP-PRODUCT-36249064252/substrate.py": "dfd9f3f59982bbeae962d85491c3b80bf267936b60e7b187abe2cc2a061d6487",
+  "src/spider/__init__.py": "ea9c113b6f54839921f7a721e5fb9ad3f72866406d29fea9819d8cf35d21df50",
+  "src/spider/kernel.py": "ac1cbdd92342d32369f4dcdbe3e58ce688c07d2690f252b66bfb3c84212f6501",
+  "src/spider/models.py": "338aaf4d7ba0e31f7a5fe8a47abdbb2ea52d9c1c4ef0ce014f2b809b9a2a9b78",
+  "src/spider/registry.py": "51fb440d3827f21cccb5f77ad17dc0e76ccdbc2d52d7b05044cd821bb8a9322c",
+  "tests/test_kernel.py": "efcd6649b2379ec2e2327adad635cbecbec251c830aeaad591a839033ce627e9"
+}

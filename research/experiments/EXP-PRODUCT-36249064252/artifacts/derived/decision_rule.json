@@ -1,0 +1,89 @@
+{
+  "conditions": {
+    "D1_success_rate_ge_0.80_all_families": {
+      "pass": true,
+      "threshold": 0.8,
+      "value": {
+        "crud-read": 1.0,
+        "crud-write": 1.0,
+        "query": 1.0
+      }
+    },
+    "D2_abstention_precision_ge_0.85": {
+      "pass": true,
+      "threshold": 0.85,
+      "value": 1.0
+    },
+    "D3_false_accept_rate_le_0.10": {
+      "pass": true,
+      "threshold": 0.1,
+      "value": 0.0
+    },
+    "D4_ece_le_0.15": {
+      "pass": true,
+      "threshold": 0.15,
+      "value": 0.04347800000000002
+    },
+    "D5_amortized_cost_ratio_le_0.85": {
+      "best_baseline": "B-COLD",
+      "pass": false,
+      "threshold": 0.85,
+      "value": {
+        "crud-read": {
+          "baseline_amortized_requests_per_task": 1.0,
+          "induction_requests_amortized": 33.333333333333336,
+          "ratio": 1.666666666666667,
+          "treatment_amortized_requests_per_task": 1.666666666666667
+        },
+        "crud-write": {
+          "baseline_amortized_requests_per_task": 1.64,
+          "induction_requests_amortized": 33.333333333333336,
+          "ratio": 1.0162601626016263,
+          "treatment_amortized_requests_per_task": 1.666666666666667
+        },
+        "query": {
+          "baseline_amortized_requests_per_task": 1.0,
+          "induction_requests_amortized": 33.333333333333336,
+          "ratio": 1.666666666666667,
+          "treatment_amortized_requests_per_task": 1.666666666666667
+        }
+      }
+    },
+    "D6_positive_control": {
+      "expected": "success_rate >= 0.95, binding_accuracy >= 0.95, cost_ratio <= 0.50 vs B-COLD",
+      "pass": false,
+      "value": {
+        "binding_accuracy": 1.0,
+        "cost_ratio_vs_b_cold": 2.0,
+        "mechanism_success_rate": 1.0
+      }
+    },
+    "D7_null_control": {
+      "expected": "success_rate <= 0.10, abstention_precision >= 0.90, cost_ratio >= 1.0 vs B-COLD",
+      "pass": true,
+      "value": {
+        "abstention_precision": 1.0,
+        "amortized_requests_per_task": 1.2133333333333334,
+        "b_cold_amortized_requests_per_task": 1.2133333333333334,
+        "cost_ratio_vs_b_cold": 1.0,
+        "mechanism_success_rate": 0.0,
+        "mechanisms_induced": 4
+      }
+    }
+  },
+  "conditions_failed": [
+    "D5_amortized_cost_ratio_le_0.85",
+    "D6_positive_control"
+  ],
+  "conditions_passed": [
+    "D1_success_rate_ge_0.80_all_families",
+    "D2_abstention_precision_ge_0.85",
+    "D3_false_accept_rate_le_0.10",
+    "D4_ece_le_0.15",
+    "D7_null_control"
+  ],
+  "controls_pass": false,
+  "frozen_decision_rule": "PASS (SUPPORTS) iff ALL of the following hold on resource-B transfer tasks (n >= 50 per family, >= 3 families): (1) success_rate >= 0.80; (2) abstention_precision >= 0.85; (3) false_accept_rate <= 0.10; (4) ECE <= 0.15; (5) amortized_cost_ratio <= 0.85 vs best baseline at matched correctness; (6) positive control passes; (7) null control passes. FAIL (FALSIFIES) if any condition fails. MIXED if positive/null controls pass but transfer conditions partially fail. MEASUREMENT_INVALID if substrate/server failures prevent valid observation collection.",
+  "rule_outcome": "FAIL (FALSIFIES)",
+  "transfer_conditions_pass": false
+}

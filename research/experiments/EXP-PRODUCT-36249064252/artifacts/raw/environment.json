@@ -1,0 +1,21 @@
+{
+  "preconditions": {
+    "browser_available": false,
+    "browsergym_importable": false,
+    "docker_available": true,
+    "flask_available": false,
+    "network_scope": "127.0.0.1 only, stdlib http.server on an ephemeral port",
+    "numpy_available": false,
+    "openai_api_key_present": false,
+    "platform": "Linux-6.17.0-1022-azure-x86_64-with-glibc2.39",
+    "pytest_available": false,
+    "python": "3.12.14"
+  },
+  "substrate_base_url": "http://127.0.0.1:46147",
+  "unit_tests": {
+    "passed": true,
+    "returncode": 0,
+    "summary": "OK"
+  },
+  "wall_clock_seconds": 3.007
+}
