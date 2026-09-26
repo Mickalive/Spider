@@ -1,0 +1,132 @@
+{
+  "mechanism_registry": [
+    {
+      "intent": "update a comment",
+      "preconditions": {
+        "auth_token": "present"
+      },
+      "action_template": {
+        "body": {
+          "body": "${body}"
+        },
+        "method": "PUT",
+        "url": "/comments/${comment_id}"
+      },
+      "postconditions": {
+        "status": 200
+      },
+      "confidence": 0.5,
+      "parameter_slots": [],
+      "applicability_guards": {}
+    },
+    {
+      "intent": "retrieve a post by id",
+      "preconditions": {
+        "auth_token": "present"
+      },
+      "action_template": {
+        "method": "GET",
+        "url": "/posts/${post_id}"
+      },
+      "postconditions": {
+        "status": 200
+      },
+      "confidence": 0.5,
+      "parameter_slots": [],
+      "applicability_guards": {}
+    },
+    {
+      "intent": "list photos",
+      "preconditions": {
+        "auth_token": "present"
+      },
+      "action_template": {
+        "method": "GET",
+        "url": "/photos"
+      },
+      "postconditions": {
+        "status": 200
+      },
+      "confidence": 0.5,
+      "parameter_slots": [],
+      "applicability_guards": {}
+    },
+    {
+      "intent": "create a new user",
+      "preconditions": {
+        "auth_token": "present"
+      },
+      "action_template": {
+        "body": {
+          "email": "${email}",
+          "name": "${name}"
+        },
+        "method": "POST",
+        "url": "/users"
+      },
+      "postconditions": {
+        "status": 201
+      },
+      "confidence": 0.5,
+      "parameter_slots": [],
+      "applicability_guards": {}
+    },
+    {
+      "intent": "delete an album",
+      "preconditions": {
+        "auth_token": "present"
+      },
+      "action_template": {
+        "method": "DELETE",
+        "url": "/albums/${album_id}"
+      },
+      "postconditions": {
+        "status": 204
+      },
+      "confidence": 0.5,
+      "parameter_slots": [],
+      "applicability_guards": {}
+    }
+  ],
+  "distillation_intents": [
+    "create a new user",
+    "retrieve a post by id",
+    "update a comment",
+    "delete an album",
+    "list photos"
+  ],
+  "http_endpoints": {
+    "users": [
+      "GET",
+      "POST",
+      "PUT",
+      "DELETE"
+    ],
+    "posts": [
+      "GET",
+      "POST",
+      "PUT",
+      "DELETE"
+    ],
+    "comments": [
+      "GET",
+      "POST",
+      "PUT",
+      "DELETE"
+    ],
+    "albums": [
+      "GET",
+      "POST",
+      "PUT",
+      "DELETE"
+    ],
+    "photos": [
+      "GET",
+      "POST",
+      "PUT",
+      "DELETE"
+    ]
+  },
+  "min_confidence": 0.8,
+  "distill_confidence": 0.5
+}

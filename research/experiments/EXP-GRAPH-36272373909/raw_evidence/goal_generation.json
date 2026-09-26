@@ -1,0 +1,436 @@
+{
+  "seed": 42,
+  "distillation_intents": [
+    "create a new user",
+    "retrieve a post by id",
+    "update a comment",
+    "delete an album",
+    "list photos"
+  ],
+  "goals": [
+    {
+      "family": "users",
+      "type": "paraphrased",
+      "wording": "add a user",
+      "template_id": 0
+    },
+    {
+      "family": "users",
+      "type": "paraphrased",
+      "wording": "register a new user",
+      "template_id": 1
+    },
+    {
+      "family": "users",
+      "type": "paraphrased",
+      "wording": "sign up a user",
+      "template_id": 2
+    },
+    {
+      "family": "users",
+      "type": "paraphrased",
+      "wording": "make a new user account",
+      "template_id": 3
+    },
+    {
+      "family": "users",
+      "type": "composite",
+      "wording": "create a user and then retrieve their profile",
+      "template_id": 0
+    },
+    {
+      "family": "users",
+      "type": "composite",
+      "wording": "add two users and list them",
+      "template_id": 1
+    },
+    {
+      "family": "users",
+      "type": "underspecified",
+      "wording": "get the latest user",
+      "template_id": 0
+    },
+    {
+      "family": "users",
+      "type": "underspecified",
+      "wording": "find a user",
+      "template_id": 1
+    },
+    {
+      "family": "users",
+      "type": "ood",
+      "wording": "archive a user",
+      "template_id": 0
+    },
+    {
+      "family": "users",
+      "type": "ood",
+      "wording": "ban a user",
+      "template_id": 1
+    },
+    {
+      "family": "users",
+      "type": "ood",
+      "wording": "merge two users",
+      "template_id": 2
+    },
+    {
+      "family": "users",
+      "type": "ood",
+      "wording": "export all users",
+      "template_id": 3
+    },
+    {
+      "family": "posts",
+      "type": "paraphrased",
+      "wording": "fetch a post by id",
+      "template_id": 0
+    },
+    {
+      "family": "posts",
+      "type": "paraphrased",
+      "wording": "get a specific post",
+      "template_id": 1
+    },
+    {
+      "family": "posts",
+      "type": "paraphrased",
+      "wording": "look up a post",
+      "template_id": 2
+    },
+    {
+      "family": "posts",
+      "type": "paraphrased",
+      "wording": "read a post",
+      "template_id": 3
+    },
+    {
+      "family": "posts",
+      "type": "composite",
+      "wording": "create a post and then update it",
+      "template_id": 0
+    },
+    {
+      "family": "posts",
+      "type": "composite",
+      "wording": "get a post and its comments",
+      "template_id": 1
+    },
+    {
+      "family": "posts",
+      "type": "underspecified",
+      "wording": "show me the newest post",
+      "template_id": 0
+    },
+    {
+      "family": "posts",
+      "type": "underspecified",
+      "wording": "find a post",
+      "template_id": 1
+    },
+    {
+      "family": "posts",
+      "type": "ood",
+      "wording": "archive a post",
+      "template_id": 0
+    },
+    {
+      "family": "posts",
+      "type": "ood",
+      "wording": "publish a post",
+      "template_id": 1
+    },
+    {
+      "family": "posts",
+      "type": "ood",
+      "wording": "schedule a post",
+      "template_id": 2
+    },
+    {
+      "family": "posts",
+      "type": "ood",
+      "wording": "duplicate a post",
+      "template_id": 3
+    },
+    {
+      "family": "comments",
+      "type": "paraphrased",
+      "wording": "modify a comment",
+      "template_id": 0
+    },
+    {
+      "family": "comments",
+      "type": "paraphrased",
+      "wording": "edit a comment",
+      "template_id": 1
+    },
+    {
+      "family": "comments",
+      "type": "paraphrased",
+      "wording": "change a comment",
+      "template_id": 2
+    },
+    {
+      "family": "comments",
+      "type": "paraphrased",
+      "wording": "revise a comment",
+      "template_id": 3
+    },
+    {
+      "family": "comments",
+      "type": "composite",
+      "wording": "update a comment and then delete it",
+      "template_id": 0
+    },
+    {
+      "family": "comments",
+      "type": "composite",
+      "wording": "add a comment to a post and edit it",
+      "template_id": 1
+    },
+    {
+      "family": "comments",
+      "type": "underspecified",
+      "wording": "get the latest comment",
+      "template_id": 0
+    },
+    {
+      "family": "comments",
+      "type": "underspecified",
+      "wording": "find a comment",
+      "template_id": 1
+    },
+    {
+      "family": "comments",
+      "type": "ood",
+      "wording": "archive a comment",
+      "template_id": 0
+    },
+    {
+      "family": "comments",
+      "type": "ood",
+      "wording": "pin a comment",
+      "template_id": 1
+    },
+    {
+      "family": "comments",
+      "type": "ood",
+      "wording": "hide a comment",
+      "template_id": 2
+    },
+    {
+      "family": "comments",
+      "type": "ood",
+      "wording": "report a comment",
+      "template_id": 3
+    },
+    {
+      "family": "albums",
+      "type": "paraphrased",
+      "wording": "remove an album",
+      "template_id": 0
+    },
+    {
+      "family": "albums",
+      "type": "paraphrased",
+      "wording": "erase an album",
+      "template_id": 1
+    },
+    {
+      "family": "albums",
+      "type": "paraphrased",
+      "wording": "discard an album",
+      "template_id": 2
+    },
+    {
+      "family": "albums",
+      "type": "paraphrased",
+      "wording": "get rid of an album",
+      "template_id": 3
+    },
+    {
+      "family": "albums",
+      "type": "composite",
+      "wording": "delete an album and its photos",
+      "template_id": 0
+    },
+    {
+      "family": "albums",
+      "type": "composite",
+      "wording": "create an album then delete it",
+      "template_id": 1
+    },
+    {
+      "family": "albums",
+      "type": "underspecified",
+      "wording": "get the latest album",
+      "template_id": 0
+    },
+    {
+      "family": "albums",
+      "type": "underspecified",
+      "wording": "find an album",
+      "template_id": 1
+    },
+    {
+      "family": "albums",
+      "type": "ood",
+      "wording": "archive an album",
+      "template_id": 0
+    },
+    {
+      "family": "albums",
+      "type": "ood",
+      "wording": "share an album",
+      "template_id": 1
+    },
+    {
+      "family": "albums",
+      "type": "ood",
+      "wording": "merge albums",
+      "template_id": 2
+    },
+    {
+      "family": "albums",
+      "type": "ood",
+      "wording": "download an album",
+      "template_id": 3
+    },
+    {
+      "family": "photos",
+      "type": "paraphrased",
+      "wording": "show photos",
+      "template_id": 0
+    },
+    {
+      "family": "photos",
+      "type": "paraphrased",
+      "wording": "display photos",
+      "template_id": 1
+    },
+    {
+      "family": "photos",
+      "type": "paraphrased",
+      "wording": "get all photos",
+      "template_id": 2
+    },
+    {
+      "family": "photos",
+      "type": "paraphrased",
+      "wording": "view photos",
+      "template_id": 3
+    },
+    {
+      "family": "photos",
+      "type": "composite",
+      "wording": "list photos in an album and download them",
+      "template_id": 0
+    },
+    {
+      "family": "photos",
+      "type": "composite",
+      "wording": "add a photo then list all photos",
+      "template_id": 1
+    },
+    {
+      "family": "photos",
+      "type": "underspecified",
+      "wording": "get the latest photo",
+      "template_id": 0
+    },
+    {
+      "family": "photos",
+      "type": "underspecified",
+      "wording": "find a photo",
+      "template_id": 1
+    },
+    {
+      "family": "photos",
+      "type": "ood",
+      "wording": "archive a photo",
+      "template_id": 0
+    },
+    {
+      "family": "photos",
+      "type": "ood",
+      "wording": "edit a photo",
+      "template_id": 1
+    },
+    {
+      "family": "photos",
+      "type": "ood",
+      "wording": "rotate a photo",
+      "template_id": 2
+    },
+    {
+      "family": "photos",
+      "type": "ood",
+      "wording": "crop a photo",
+      "template_id": 3
+    }
+  ],
+  "vocabulary_overlap": {
+    "add a user": 0.125,
+    "register a new user": 0.1875,
+    "sign up a user": 0.11764705882352941,
+    "make a new user account": 0.17647058823529413,
+    "create a user and then retrieve their profile": 0.21052631578947367,
+    "add two users and list them": 0.05,
+    "get the latest user": 0.05555555555555555,
+    "find a user": 0.125,
+    "archive a user": 0.125,
+    "ban a user": 0.125,
+    "merge two users": 0.0,
+    "export all users": 0.0,
+    "fetch a post by id": 0.25,
+    "get a specific post": 0.11764705882352941,
+    "look up a post": 0.11764705882352941,
+    "read a post": 0.125,
+    "create a post and then update it": 0.2222222222222222,
+    "get a post and its comments": 0.10526315789473684,
+    "show me the newest post": 0.05263157894736842,
+    "find a post": 0.125,
+    "archive a post": 0.125,
+    "publish a post": 0.125,
+    "schedule a post": 0.125,
+    "duplicate a post": 0.125,
+    "modify a comment": 0.125,
+    "edit a comment": 0.125,
+    "change a comment": 0.125,
+    "revise a comment": 0.125,
+    "update a comment and then delete it": 0.2222222222222222,
+    "add a comment to a post and edit it": 0.15,
+    "get the latest comment": 0.05555555555555555,
+    "find a comment": 0.125,
+    "archive a comment": 0.125,
+    "pin a comment": 0.125,
+    "hide a comment": 0.125,
+    "report a comment": 0.125,
+    "remove an album": 0.125,
+    "erase an album": 0.125,
+    "discard an album": 0.125,
+    "get rid of an album": 0.1111111111111111,
+    "delete an album and its photos": 0.23529411764705882,
+    "create an album then delete it": 0.23529411764705882,
+    "get the latest album": 0.05555555555555555,
+    "find an album": 0.125,
+    "archive an album": 0.125,
+    "share an album": 0.125,
+    "merge albums": 0.0,
+    "download an album": 0.125,
+    "show photos": 0.0625,
+    "display photos": 0.0625,
+    "get all photos": 0.058823529411764705,
+    "view photos": 0.0625,
+    "list photos in an album and download them": 0.21052631578947367,
+    "add a photo then list all photos": 0.15789473684210525,
+    "get the latest photo": 0.0,
+    "find a photo": 0.058823529411764705,
+    "archive a photo": 0.058823529411764705,
+    "edit a photo": 0.058823529411764705,
+    "rotate a photo": 0.058823529411764705,
+    "crop a photo": 0.058823529411764705
+  },
+  "max_overlap": 0.25,
+  "mean_overlap": 0.1147834250659328
+}
