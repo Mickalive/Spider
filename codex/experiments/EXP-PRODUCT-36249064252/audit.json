@@ -1,0 +1,159 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-36249064252",
+  "lane": "product",
+  "status": "PASS",
+  "producer_claim_supported": true,
+  "required_fixes": [],
+  "validity_findings": [
+    "Substrate substitution (prereg section 2 named Flask; stdlib http.server used instead): Disclosed in validity_notes, self-test verified ETag/304, session-scoped bodies, 401/403, CRUD behaviour before any arm ran. No evidence this substitution affected the mechanism-level measurements.",
+    "Cost dynamic range limitation: On this substrate, cold exploration (B-COLD) already achieves 1.0 HTTP request per task for crud-read and query families because the first generic REST candidate (GET /{collection}/{id} and GET /{collection}?q={q}&limit={limit}) matches the substrate's API exactly. This makes the amortized cost ratio target (≤0.85) unreachable for ANY system on read/query families, including a perfect one. This is a validity threat to the ECONOMIC conclusion (D5, D6 cost half) but not to the MECHANISM capability conclusion (D1-D4, D7).",
+    "Positive control cost criterion (D6 cost_ratio ≤ 0.50 vs B-COLD) is not discriminating on this substrate: B-COLD also costs 1.0 request per task on the positive control task set (held-out resource-A identifiers), so no system can achieve ≤0.50. The producer correctly identifies this in validity_notes. The positive control's substantive halves (mechanism_success_rate=1.0, binding_accuracy=1.0) pass cleanly.",
+    "Single confidence value for treatment: All 150 treatment resolutions emit confidence=0.956522, so treatment ECE is a single-bin quantity (bin [0.9, 1.0], n=150, gap=0.0435). The pooled all-arm ECE (0.0198, n=550, two bins) is the more informative calibration number and is reported alongside. This is disclosed in validity_notes.",
+    "Out-of-support generalization: The collection slot was only ever observed holding {items, tags} during induction. Binding it to products (a third, unobserved value) is extrapolation, not interpolation. Disclosed in validity_notes.",
+    "Low n for family-stratified inference: 50 tasks per family yields degenerate bootstrap CIs [1.0, 1.0]. No population-level generalization beyond these task constructions is claimed. Disclosed in validity_notes.",
+    "Harness-level measurement, not end-to-end agent evaluation: No model, browser, network egress, or external dataset was used. This measures the kernel's inheritance path in a controlled harness. Disclosed in validity_notes.",
+    "Three product defects found and fixed during execution (string-only slot alignment, credential leak on constant path, volatile session metadata promoted to precondition). Each is covered by a unit test. These are product behaviour changes inside the lane's authorized code root (src/, tests/) and are part of what was measured. Disclosed in validity_notes."
+  ],
+  "baseline_findings": [
+    "B-COLD (cold exploration) is a STRONG baseline, not a strawman: Its fixed generic REST candidate policy happens to match the substrate's API on the first try for read (GET /{collection}/{id}) and query (GET /{collection}?q={q}&limit={limit}), yielding 1.0 HTTP request per task. For write, it takes 1.64 requests on average (candidates: POST /{collection}, PUT /{collection}/{id}, DELETE /{collection}/{id}, ...). This is a substrate artifact, not a baseline weakness.",
+    "The three preregistered baselines (B-COLD, B-LITERAL-REPLAY, B-RETRIEVAL-K5) all have mechanism_success_rate=0.0 and end_to_end_success_rate=1.0 (achieved entirely via cold fallback). B-COLD is correctly selected as the best baseline at matched correctness (end_to_end_success ≥ 0.80 in all families, within 0.05 tolerance of treatment's end_to_end_success).",
+    "Baseline competence floor (0.80) and matched correctness tolerance (0.05) are correctly applied and make the D5 test HARDER for the treatment, never easier. B-COLD-DOC (documented executor) fails competence floor on crud-write and crud-read (0.0 end-to-end success) and is correctly excluded from D5 denominator. B-LITERAL-REPLAY-FORCED and B-RETRIEVAL-K5-SLOT are diagnostics, not preregistered baselines, correctly excluded.",
+    "Null control (NC-SHUFFLED-INTENT) passes: mechanism_success_rate=0.0, abstention_precision=1.0, cost_ratio_vs_B-COLD=1.0. Confirms transfer requires genuine intent structure, not spurious pattern matching.",
+    "Incumbent reference curve matches prereg expectation exactly: shipped kernel has no distill_parameterized, distill confidence=0.5 < min_confidence=0.8, resolves same-intent to EXPLORE, paraphrased intent to UNKNOWN, 0% EXECUTABLE on resource-B with 0 HTTP requests. Quantifies the 'SPIDER doesn't work' baseline as intended."
+  ],
+  "recomputed_metrics": {
+    "treatment_mechanism_success_rate_by_family": {
+      "crud-write": 1.0,
+      "crud-read": 1.0,
+      "query": 1.0
+    },
+    "treatment_binding_accuracy": 1.0,
+    "treatment_fallback_used_tasks": 0,
+    "treatment_n_transfer_tasks": 150,
+    "treatment_own_http_requests_per_task": 1.0,
+    "treatment_amortized_requests_per_task": 1.0,
+    "treatment_amortized_requests_per_task_by_family": {
+      "crud-write": 1.0,
+      "crud-read": 1.0,
+      "query": 1.0
+    },
+    "abstention_precision": 1.0,
+    "false_accept_rate": 0.0,
+    "n_negative_probes": 60,
+    "ece_treatment": 0.043478,
+    "ece_treatment_n": 150,
+    "ece_pooled_all_arms": 0.019763,
+    "ece_pooled_n": 550,
+    "induction_requests_total": 100,
+    "amortized_cost_ratio_vs_best_baseline": {
+      "crud-write": 1.01626,
+      "crud-read": 1.66667,
+      "query": 1.66667
+    },
+    "amortized_cost_ratio_vs_b_cold_by_family": {
+      "crud-write": 1.01626,
+      "crud-read": 1.66667,
+      "query": 1.66667
+    },
+    "break_even_n_requests_vs_b_cold": {
+      "crud-write": 253.81,
+      "crud-read": null,
+      "query": null
+    },
+    "baseline_amortized_requests_per_task": {
+      "B-COLD": 1.21333,
+      "B-COLD-DOC": 1.34,
+      "B-LITERAL-REPLAY": 1.21333,
+      "B-LITERAL-REPLAY-FORCED": 2.21333,
+      "B-RETRIEVAL-K5": 1.21333,
+      "B-RETRIEVAL-K5-SLOT": 1.21333,
+      "NC-SHUFFLED-INTENT": 1.21333,
+      "PARAM-INHERIT": 1.0
+    },
+    "baseline_mechanism_success_rate": {
+      "B-COLD": 0.0,
+      "B-COLD-DOC": 0.0,
+      "B-LITERAL-REPLAY": 0.0,
+      "B-LITERAL-REPLAY-FORCED": 0.0,
+      "B-RETRIEVAL-K5": 0.0,
+      "B-RETRIEVAL-K5-SLOT": 0.0,
+      "NC-SHUFFLED-INTENT": 0.0,
+      "PARAM-INHERIT": 1.0
+    },
+    "baseline_end_to_end_success_rate": {
+      "B-COLD": 1.0,
+      "B-COLD-DOC": 0.33333,
+      "B-LITERAL-REPLAY": 1.0,
+      "B-LITERAL-REPLAY-FORCED": 1.0,
+      "B-RETRIEVAL-K5": 1.0,
+      "B-RETRIEVAL-K5-SLOT": 1.0,
+      "NC-SHUFFLED-INTENT": 1.0,
+      "PARAM-INHERIT": 1.0
+    },
+    "bootstrap_success_rate_ci95_by_family": {
+      "crud-write": [1.0, 1.0],
+      "crud-read": [1.0, 1.0],
+      "query": [1.0, 1.0]
+    },
+    "bootstrap_b": 5000,
+    "incumbent_resource_b_executable_fraction": 0.0,
+    "incumbent_resource_b_http_requests": 0,
+    "incumbent_same_intent_resolution": {
+      "confidence": 0.5,
+      "reason": "candidate exists but confidence is below execution threshold",
+      "status": "EXPLORE"
+    },
+    "incumbent_paraphrased_intent_resolution": {
+      "reason": "no applicable validated mechanism",
+      "status": "UNKNOWN"
+    },
+    "incumbent_has_distill_parameterized": false,
+    "positive_control": {
+      "mechanism_success_rate": 1.0,
+      "binding_accuracy": 1.0,
+      "cost_ratio_vs_b_cold": 2.0,
+      "transfer_only_cost_ratio_vs_b_cold": 1.0,
+      "n_tasks": 100
+    },
+    "null_control": {
+      "mechanism_success_rate": 0.0,
+      "abstention_precision": 1.0,
+      "cost_ratio_vs_b_cold": 1.0,
+      "mechanisms_induced": 4
+    }
+  },
+  "claim_ceiling": "C-PARAM-INHERIT mechanism capability ESTABLISHED in this setting: kernel-integrated distill_parameterized induces transferable mechanisms that correctly bind to never-observed resource-B identifiers (disjoint value sets) with success_rate=1.0, binding_accuracy=1.0, abstention_precision=1.0, false_accept_rate=0.0, ECE=0.043 across 150 transfer tasks (50 per family, 3 families). The economic case (amortized_cost_ratio ≤ 0.85 vs best baseline at matched correctness) is NOT established on this substrate because the cold baseline already operates at the per-task optimum (1.0 HTTP request) for crud-read and query families, leaving no per-task saving to amortize the 100-request induction bill. The positive control cost criterion (≤0.50 vs B-COLD) is similarly non-discriminating on this substrate. The falsification is BOUNDED to this substrate's economics; a substrate with genuine discovery cost (e.g., multi-step auth, pagination, schema discovery) would be needed to separate intrinsic economic failure from substrate artifact. The mechanism itself works and meets all correctness/safety thresholds.",
+  "evidence_refs": [
+    "research/experiments/EXP-PRODUCT-36249064252/result.json",
+    "research/experiments/EXP-PRODUCT-36249064252/report.md",
+    "research/experiments/EXP-PRODUCT-36249064252/provenance.json",
+    "research/experiments/EXP-PRODUCT-36249064252/artifacts/derived/decision_rule.json",
+    "research/experiments/EXP-PRODUCT-36249064252/artifacts/derived/arm_metrics.json",
+    "research/experiments/EXP-PRODUCT-36249064252/artifacts/derived/controls.json",
+    "research/experiments/EXP-PRODUCT-36249064252/artifacts/raw/arm_PARAM-INHERIT.json",
+    "research/experiments/EXP-PRODUCT-36249064252/artifacts/raw/arm_B-COLD.json",
+    "research/experiments/EXP-PRODUCT-36249064252/artifacts/raw/arm_PC-SAME-RESOURCE_PARAM.json",
+    "research/experiments/EXP-PRODUCT-36249064252/artifacts/raw/arm_PC-SAME-RESOURCE_B-COLD.json",
+    "research/experiments/EXP-PRODUCT-36249064252/artifacts/raw/arm_NC-SHUFFLED-INTENT.json",
+    "research/experiments/EXP-PRODUCT-36249064252/artifacts/raw/negative_probes.json",
+    "research/experiments/EXP-PRODUCT-36249064252/artifacts/raw/induced_mechanisms.json",
+    "research/experiments/EXP-PRODUCT-36249064252/artifacts/raw/incumbent_reference_curve.json",
+    "research/experiments/EXP-PRODUCT-36249064252/artifacts/raw/environment.json",
+    "research/experiments/EXP-PRODUCT-36249064252/artifacts/raw/unit_tests.txt",
+    "research/experiments/EXP-PRODUCT-36249064252/substrate.py",
+    "research/experiments/EXP-PRODUCT-36249064252/arms.py",
+    "research/experiments/EXP-PRODUCT-36249064252/run_experiment.py",
+    "src/spider/kernel.py",
+    "tests/test_kernel.py"
+  ],
+  "unresolved": [
+    "Whether the economic failure is intrinsic to parameter inheritance or an artifact of this substrate's low cold-baseline cost is not settled here. Measured break-even is 254 transfer tasks on crud-write and unreachable on crud-read and query; a substrate with genuine discovery cost (multi-step flows, pagination, schema drift) would be needed to separate the two.",
+    "The D6 positive control cost criterion (≤0.50 vs B-COLD) is not discriminating on this substrate and no substitute was substituted for it. A follow-up needs either a substrate with real discovery cost or a prereg that treats the cost half of the positive control as expected-to-fail.",
+    "Parameter inheritance beyond one collection dimension is untested: the induced slots cover collection, id, q, limit and auth_token only. Whether the same machinery spans schemas with different field names, nested bodies, or multi-step flows is unknown.",
+    "Whether the mechanism abstains correctly when a slot is bound outside the observed support is untested in the failure direction; this run only shows that it does not abstain and does succeed on a third collection value (products).",
+    "Repair on binding or execution failure (C-DELTA-REPAIR) was explicitly out of scope and remains unmeasured. The fallback path used here is harness-level cold exploration, not a kernel repair capability.",
+    "Staleness and freshness (C-FRESHNESS) were not exercised. The mechanism records evidence-scope metadata including observed_distinct_identifiers=2 for the list intent, which reflects the repeated list actions rather than a freshness assessment.",
+    "Cross-site transfer (C-CROSSSITE), LLM distillation (C-LLM-INHERIT), and real-browser economics (C-PRODUCT-ECON) remain out of scope and unmeasured."
+  ]
+}
