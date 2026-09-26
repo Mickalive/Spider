@@ -1,0 +1,178 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-36272389571",
+  "lane": "intel",
+  "executed_at": "2026-09-26T22:00:00.000000+00:00",
+  "git": {
+    "commit": "9f9439d7fd161eea7b85f9f18cf2c87163fb492d",
+    "branch": "main",
+    "repo": "Spider"
+  },
+  "environment": {
+    "platform": "linux",
+    "python_version": "3.11+",
+    "tools_used": ["webfetch (arXiv HTML)", "grep", "read"]
+  },
+  "primary_sources_accessed": [
+    {
+      "arxiv_id": "2604.09718",
+      "title": "Agentic Compilation: Mitigating the LLM Rerun Crisis for Minimized-Inference-Cost Web Automation",
+      "html_url": "https://arxiv.org/html/2604.09718v2",
+      "pdf_url": "https://arxiv.org/pdf/2604.09718",
+      "accessed_at": "2026-09-26",
+      "system_name_per_spec": "AgentJIT"
+    },
+    {
+      "arxiv_id": "2607.04542",
+      "title": "Auto: The AGI Compiler",
+      "html_url": "https://arxiv.org/html/2607.04542v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.04542",
+      "accessed_at": "2026-09-26",
+      "system_name_per_spec": "TraceCompiler"
+    },
+    {
+      "arxiv_id": "2608.02680",
+      "title": "TraceCompiler: Skill-Guided Mining and Compilation of LLM Agent Traces into Mostly Deterministic Workflows",
+      "html_url": "https://arxiv.org/html/2608.02680v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.02680",
+      "accessed_at": "2026-09-26",
+      "system_name_per_spec": "COVENANT"
+    },
+    {
+      "arxiv_id": "2605.04107",
+      "title": "TSCG: Deterministic Tool-Schema Compilation for Agentic LLM Deployments",
+      "html_url": "https://arxiv.org/html/2605.04107v1",
+      "pdf_url": "https://arxiv.org/pdf/2605.04107",
+      "accessed_at": "2026-09-26",
+      "system_name_per_spec": "Auto/AGI Compiler (part A)"
+    },
+    {
+      "arxiv_id": "2604.05150",
+      "title": "Compiled AI: Deterministic Code Generation for LLM-Based Workflow Automation",
+      "html_url": "https://arxiv.org/html/2604.05150v2",
+      "pdf_url": "https://arxiv.org/pdf/2604.05150",
+      "accessed_at": "2026-09-26",
+      "system_name_per_spec": "Auto/AGI Compiler (part B)"
+    }
+  ],
+  "code_repositories_verified": [
+    {
+      "name": "RightNow-AI/auto",
+      "url": "https://github.com/RightNow-AI/auto",
+      "language": "Rust",
+      "license": "Apache-2.0",
+      "stars": 122,
+      "verified_for": "Auto (arXiv:2607.04542) runnability"
+    },
+    {
+      "name": "SKZL-AI/tscg",
+      "url": "https://github.com/SKZL-AI/tscg",
+      "language": "TypeScript",
+      "license": "MIT",
+      "stars": 24,
+      "verified_for": "TSCG (arXiv:2605.04107) runnability"
+    }
+  ],
+  "prior_packet_referenced": {
+    "experiment_id": "EXP-INTEL-36249068574",
+    "path": "research/experiments/EXP-INTEL-36249068574",
+    "artifacts_used": [
+      "result.json (metrics for MV1-MV6, TSCG values)",
+      "report.md (Table 4 MV6 baseline, cross-site evidence)",
+      "handoff.json (carry_forward established/rejected/unknown/do_not_assume)"
+    ]
+  },
+  "frozen_inputs": {
+    "request.json": {
+      "path": "research/experiments/EXP-INTEL-36272389571/request.json",
+      "sha256": "01d43c79b4fadb1812c4e64a4e2ea01c42fc38cad6ffeb949ca04580ad192ef0"
+    },
+    "spec.json": {
+      "path": "research/experiments/EXP-INTEL-36272389571/spec.json",
+      "sha256": "be25d1e250bfd956db7bdd9b7a7c74251f460c37dd476e8ec2557bd2e5a11a97"
+    },
+    "prereg.md": {
+      "path": "research/experiments/EXP-INTEL-36272389571/prereg.md",
+      "sha256": "58f1844048364d426451d8e0d2e83529dfeed0c6af28686e8990dc15b3f8c46b"
+    },
+    "freeze.json": {
+      "path": "research/experiments/EXP-INTEL-36272389571/freeze.json",
+      "sha256": "auto-generated-at-freeze"
+    }
+  },
+  "outputs_produced": [
+    {
+      "path": "research/experiments/EXP-INTEL-36272389571/result.json",
+      "role": "producer_handoff",
+      "description": "Canonical experiment result with metrics, controls, observations, validity notes, unresolved"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-36272389571/report.md",
+      "role": "human_readable_report",
+      "description": "Detailed execution report with system-by-system extractions, control results, decision rule assessment"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-36272389571/provenance.json",
+      "role": "provenance_record",
+      "description": "Reproducibility metadata: sources, repos, environment, frozen input hashes"
+    }
+  ],
+  "extraction_methodology": {
+    "approach": "Source-verified extraction from primary sources (arXiv HTML versions) per MV1-MV6 gates",
+    "mv1_compliance": "All extractions include verbatim quotes with section/table/figure references from primary sources",
+    "mv2_compliance": "Runnability verified via GitHub repo inspection (RightNow-AI/auto, SKZL-AI/tscg) and paper claims; not independent execution",
+    "mv3_compliance": "Task distribution comparability explicitly assessed for each system vs SPIDER's synthetic 40-task alias-OOD (locally-served multi-endpoint HTTP with parameterized identifiers)",
+    "mv4_compliance": "Compilation-vs-inheritance distinction maintained; conflations explicitly flagged for each system",
+    "mv5_compliance": "Regime boundaries extracted as numerical thresholds where reported; COVENANT explicitly states 'no net efficiency result' recorded as absent",
+    "mv6_compliance": "Staleness/forgetting/maintenance recorded as reported values or 'not reported' (not assumed zero)"
+  },
+  "null_control_execution": {
+    "method": "Full-text search of all five paper HTML versions for three fabricated claim strings",
+    "claims_tested": [
+      "zero-shot open-vocabulary goal resolution with <5% error rate",
+      "automatic cross-site transfer without any site-specific configuration",
+      "forgetting/staleness maintenance cost <1% of build cost"
+    ],
+    "result": "Zero occurrences in all five papers",
+    "tool": "Browser find / grep on HTML content"
+  },
+  "positive_control_execution": {
+    "method": "Re-extraction of MV6 no-memory deterministic executor parameters from same primary sources used in EXP-INTEL-36249068574",
+    "parameters_verified": [
+      "Compilation cost $0.002-$0.092 (AgentJIT Table 1)",
+      "Hot-path latency 18.2µs-4.5ms (Auto Table 3, Compiled AI Table 1)",
+      "Token cost per repeat 0 (TSCG Abstract, Compiled AI Table 1)",
+      "Witnessed-determinism 87.1% (Auto Table 1)",
+      "Abstention/refusal present (Auto gate-refused, COVENANT refusal, Compiled AI validation)"
+    ],
+    "result": "All parameters match prior extraction within stated precision"
+  },
+  "decision_rule_evaluation": {
+    "c1_addressing_open_nl": {
+      "status": "SATISFIED",
+      "evidence": "AgentJIT (arXiv:2604.09718) achieves open NL goal resolution via one-shot LLM compilation with published error rate 80-94% compilation success (Table 2)"
+    },
+    "c2_regime_boundaries_extractable": {
+      "status": "SATISFIED",
+      "evidence": "3+ systems with numerical thresholds: AgentJIT (reuse M=500, cost $0.002-$0.092, O(M×N)→O(1)); TraceCompiler/Auto (K=8, 87.1%, 6.4x, 48.9% silent wrongness); Compiled AI (break-even n=17, 57x/450x/40x gains)"
+    },
+    "c3_comparability_assessed": {
+      "status": "SATISFIED",
+      "evidence": "All 5 systems explicitly assessed vs SPIDER alias-OOD; all INCOMPARABLE on key dimensions"
+    },
+    "c4_runnability_verified": {
+      "status": "NOT SATISFIED",
+      "evidence": "Only 2/5 systems runnable without LLM key/browser/docker: TSCG (arXiv:2605.04107) and TSCG (prior packet). AgentJIT, TraceCompiler/Auto, COVENANT/TraceCompiler, Compiled AI all require LLM access."
+    },
+    "c5_conflation_flagged": {
+      "status": "SATISFIED",
+      "evidence": "All conflations explicitly identified: AgentJIT (CLEAN), TraceCompiler/Auto (CONFLATION), COVENANT/TraceCompiler (CONFLATION), TSCG (CLEAN), Compiled AI (MOSTLY CLEAN), TSCG prior (CLEAN)"
+    },
+    "overall_outcome": "MIXED (C1 satisfied but C4 fails)"
+  },
+  "artifact_hashes": {
+    "result.json": "pending-compute",
+    "report.md": "pending-compute",
+    "provenance.json": "pending-compute"
+  }
+}
