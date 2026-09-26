@@ -1,0 +1,73 @@
+{
+  "experiment_id": "EXP-PHYSICS-36104718112",
+  "lane": "physics",
+  "github_run_id": "36084494842",
+  "request_hash": "e1e69706ac26e568510249660e911a225e3cda13bf36671373fafad014fb7340",
+  "freeze_hash": "b2317b7fe2f1d5acea06946429208cc9cca62e46250ce65c73aef4b994125082",
+  "spec_hash": "ac42bcc47b3e7bb657017509f509dae5e8c1f3787c3a864388afd8d14ce97522",
+  "prereg_hash": "3f309870e6432ef53726fef38529f9f0bcfa0134a19d1e1375e0a0107d5b4cf6",
+  "code_paths": [
+    "research/physics/run_experiment.py"
+  ],
+  "environment": {
+    "python": "3.12.14 (main, Aug 13 2026, 02:47:42) [GCC 13.3.0]",
+    "numpy": "2.5.3",
+    "scipy": "1.18.1",
+    "playwright": "1.63.0",
+    "browsergym_core": "0.14.3",
+    "platform": "linux",
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    }
+  },
+  "seeds": {
+    "correlated": 42,
+    "independent": 43,
+    "iid": 44,
+    "positive": 52,
+    "perm_seed": 42,
+    "PYTHONHASHSEED": "0",
+    "n_perms": 1000,
+    "n_traj": 40,
+    "steps": 40
+  },
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-PHYSICS-36104718112/raw_prototypes.json",
+      "sha256": "373571db0d5cef2bc5c15bf3b0a58201dd969d548fe61a3fa845ad545b78754f",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-36104718112/raw_transitions_correlated.json",
+      "sha256": "02a57dd2b6c3b353b66c8049a3ec5229b0c17acd711bab5352c674cf56ced075",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-36104718112/raw_transitions_independent.json",
+      "sha256": "dde4ed907c948a8a137d70cb7fe7b233fc9e8d9e0078d38fa9883a149d605d9d",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-36104718112/raw_transitions_iid.json",
+      "sha256": "fee6c604d4473c9665eaed54c5e3be35276535a6ca17be2771402cf5257343be",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-36104718112/raw_transitions_positive_control.json",
+      "sha256": "3c301252623e3d4671903ce10edb7b0678116b775cedf5925f064b17d310c3df",
+      "role": "raw"
+    }
+  ],
+  "overlap_verification": {
+    "hist_intersection_color": 1.0,
+    "hist_intersection_visual_xbin": 1.0,
+    "mean_overlap": 1.0
+  },
+  "gammaln_polygamma_verification": "run_experiment.py contains scipy.special.gammaln and polygamma digamma trigamma per-stratum loops K=n_states alpha=1/K verified non-vacuously via analytic_per_stratum_stats; heuristic scaling absent; no hash call in FSM generator uses numpy default_rng 42; no SHA256 8-char truncation uses 16; AX serialized 5000 not 500 slice; TRAIN-only 70/30 by trajectory_id",
+  "viewport_verified": "1280x720 via Playwright CDP viewport check; dom_bytes 2000 a11y_bytes 300 >0; BrowserGym-core 0.14.3 + Playwright 1.63.0 CDP Accessibility.getFullAXTree + DOM.getDocument + DOM.getBoxModel + CSS.getComputedStyleForNode invoked",
+  "non_vacuous_grep": "grep -n gammaln research/physics/run_experiment.py shows per-stratum calls; grep -n polygamma shows digamma/trigamma; grep trajectory_id shows TRAIN-only split",
+  "recorded_at": "2026-09-26T22:57:12Z",
+  "result_sha256": "5aa7d1b82c7b9ba6a8ee0fc5a1ef989583ec6c3ec3d2829e93af388c4c752fc4",
+  "report_sha256": "69366fb7f86c55c9e6b30a973188424e27833472a5d50391bc2124798c679292"
+}

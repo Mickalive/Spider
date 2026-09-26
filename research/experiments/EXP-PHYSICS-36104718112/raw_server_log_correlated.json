@@ -1,0 +1,8500 @@
+{
+ "M_fallback_synthetic": 0,
+ "N_raw_snapshots": 11,
+ "N_transitions": 1600,
+ "action_rng": "default_rng(42 + 7919*0)",
+ "action_rng_disjoint_from_server": true,
+ "bank": "correlated",
+ "marginal_view_p_for_iid_bank": [
+  0.07375,
+  0.068125,
+  0.0725,
+  0.06625,
+  0.0625,
+  0.063125,
+  0.05875,
+  0.04875,
+  0.049375,
+  0.045,
+  0.049375,
+  0.06375,
+  0.06,
+  0.07625,
+  0.068125,
+  0.074375
+ ],
+ "measurement_endpoint_use": "/api/measure read once per trajectory AFTER collection for ground-truth regime/sid logging and once at session start; never used to drive an action or a wait condition",
+ "n_trajectories": 40,
+ "raw_snapshot_rule": "traj==0 and step<8, or step==0 and traj in {1,2,3}",
+ "server_log": [
+  {
+   "index": 0,
+   "log": [
+    {
+     "next": 2,
+     "primitive": "click",
+     "view": 1
+    },
+    {
+     "next": 1,
+     "primitive": "select",
+     "view": 2
+    },
+    {
+     "next": 15,
+     "primitive": "fill",
+     "view": 1
+    },
+    {
+     "next": 0,
+     "primitive": "hover",
+     "view": 15
+    },
+    {
+     "next": 1,
+     "primitive": "hover",
+     "view": 0
+    },
+    {
+     "next": 0,
+     "primitive": "type",
+     "view": 1
+    },
+    {
+     "next": 2,
+     "primitive": "click",
+     "view": 0
+    },
+    {
+     "next": 0,
+     "primitive": "select",
+     "view": 2
+    },
+    {
+     "next": 1,
+     "primitive": "submit",
+     "view": 0
+    },
+    {
+     "next": 3,
+     "primitive": "click",
+     "view": 1
+    },
+    {
+     "next": 1,
+     "primitive": "fill",
+     "view": 3
+    },
+    {
+     "next": 0,
+     "primitive": "type",
+     "view": 1
+    },
+    {
+     "next": 14,
+     "primitive": "select",
+     "view": 0
+    },
+    {
+     "next": 13,
+     "primitive": "select",
+     "view": 14
+    },
+    {
+     "next": 11,
+     "primitive": "select",
+     "view": 13
+    },
+    {
+     "next": 10,
+     "primitive": "select",
+     "view": 11
+    },
+    {
+     "next": 9,
+     "primitive": "fill",
+     "view": 10
+    },
+    {
+     "next": 11,
+     "primitive": "click",
+     "view": 9
+    },
+    {
+     "next": 9,
+     "primitive": "type",
+     "view": 11
+    },
+    {
+     "next": 10,
+     "primitive": "hover",
+     "view": 9
+    },
+    {
+     "next": 8,
+     "primitive": "fill",
+     "view": 10
+    },
+    {
+     "next": 9,
+     "primitive": "hover",
+     "view": 8
+    },
+    {
+     "next": 10,
+     "primitive": "hover",
+     "view": 9
+    },
+    {
+     "next": 11,
+     "primitive": "submit",
+     "view": 10
+    },
+    {
+     "next": 9,
+     "primitive": "type",
+     "view": 11
+    },
+    {
+     "next": 8,
+     "primitive": "select",
+     "view": 9
+    },
+    {
+     "next": 6,
+     "primitive": "fill",
+     "view": 8
+    },
+    {
+     "next": 8,
+     "primitive": "hover",
+     "view": 6
+    },
+    {
+     "next": 7,
+     "primitive": "select",
+     "view": 8
+    },
+    {
+     "next": 5,
+     "primitive": "fill",
+     "view": 7
+    },
+    {
+     "next": 7,
+     "primitive": "hover",
+     "view": 5
+    },
+    {
+     "next": 8,
+     "primitive": "hover",
+     "view": 7
+    },
+    {
+     "next": 10,
+     "primitive": "hover",
+     "view": 8
+    },
+    {
+     "next": 11,
+     "primitive": "submit",
+     "view": 10
+    },
+    {
+     "next": 13,
+     "primitive": "click",
+     "view": 11
+    },
+    {
+     "next": 12,
+     "primitive": "fill",
+     "view": 13
+    },
+    {
+     "next": 11,
+     "primitive": "type",
+     "view": 12
+    },
+    {
+     "next": 13,
+     "primitive": "click",
+     "view": 11
+    },
+    {
+     "next": 12,
+     "primitive": "type",
+     "view": 13
+    },
+    {
+     "next": 11,
+     "primitive": "select",
+     "view": 12
+    },
+    {
+     "next": 12,
+     "primitive": "submit",
+     "view": 11
+    },
+    {
+     "next": 11,
+     "primitive": "fill",
+     "view": 12
+    }
+   ],
+   "regime": "A",
+   "sid": "sess-00000",
+   "steps": 42
+  },
+  {
+   "index": 1,
+   "log": [
+    {
+     "next": 15,
+     "primitive": "click",
+     "view": 12
+    },
+    {
+     "next": 13,
+     "primitive": "select",
+     "view": 15
+    },
+    {
+     "next": 10,
+     "primitive": "select",
+     "view": 13
+    },
+    {
+     "next": 13,
+     "primitive": "hover",
+     "view": 10
+    },
+    {
+     "next": 0,
+     "primitive": "click",
+     "view": 13
+    },
+    {
+     "next": 13,
+     "primitive": "type",
+     "view": 0
+    },
+    {
+     "next": 0,
+     "primitive": "hover",
+     "view": 13
+    },
+    {
+     "next": 13,
+     "primitive": "type",
+     "view": 0
+    },
+    {
+     "next": 10,
+     "primitive": "select",
+     "view": 13
+    },
+    {
+     "next": 8,
+     "primitive": "select",
+     "view": 10
+    },
+    {
+     "next": 10,
+     "primitive": "hover",
+     "view": 8
+    },
+    {
+     "next": 8,
+     "primitive": "select",
+     "view": 10
+    },
+    {
+     "next": 10,
+     "primitive": "submit",
+     "view": 8
+    },
+    {
+     "next": 12,
+     "primitive": "hover",
+     "view": 10
+    },
+    {
+     "next": 14,
+     "primitive": "hover",
+     "view": 12
+    },
+    {
+     "next": 0,
+     "primitive": "hover",
+     "view": 14
+    },
+    {
+     "next": 2,
+     "primitive": "click",
+     "view": 0
+    },
+    {
+     "next": 0,
+     "primitive": "fill",
+     "view": 2
+    },
+    {
+     "next": 2,
+     "primitive": "click",
+     "view": 0
+    },
+    {
+     "next": 15,
+     "primitive": "select",
+     "view": 2
+    },
+    {
+     "next": 12,
+     "primitive": "select",
+     "view": 15
+    },
+    {
+     "next": 9,
+     "primitive": "type",
+     "view": 12
+    },
+    {
+     "next": 6,
+     "primitive": "select",
+     "view": 9
+    },
+    {
+     "next": 9,
+     "primitive": "hover",
+     "view": 6
+    },
+    {
+     "next": 6,
+     "primitive": "type",
+     "view": 9
+    },
+    {
+     "next": 9,
+     "primitive": "hover",
+     "view": 6
+    },
+    {
+     "next": 12,
+     "primitive": "submit",
+     "view": 9
+    },
+    {
+     "next": 9,
+     "primitive": "type",
+     "view": 12
+    },
+    {
+     "next": 12,
+     "primitive": "hover",
+     "view": 9
+    },
+    {
+     "next": 15,
+     "primitive": "click",
+     "view": 12
+    },
+    {
+     "next": 2,
+     "primitive": "hover",
+     "view": 15
+    },
+    {
+     "next": 0,
+     "primitive": "select",
+     "view": 2
+    },
+    {
+     "next": 3,
+     "primitive": "submit",
+     "view": 0
+    },
+    {
+     "next": 6,
+     "primitive": "hover",
+     "view": 3
+    },
+    {
+     "next": 9,
+     "primitive": "click",
+     "view": 6
+    },
+    {
+     "next": 7,
+     "primitive": "select",
+     "view": 9
+    },
+    {
+     "next": 9,
+     "primitive": "hover",
+     "view": 7
+    },
+    {
+     "next": 11,
+     "primitive": "submit",
+     "view": 9
+    },
+    {
+     "next": 13,
+     "primitive": "submit",
+     "view": 11
+    },
+    {
+     "next": 10,
+     "primitive": "fill",
+     "view": 13
+    },
+    {
+     "next": 7,
+     "primitive": "select",
+     "view": 10
+    }
+   ],
+   "regime": "B",
+   "sid": "sess-00001",
+   "steps": 41
+  },
+  {
+   "index": 2,
+   "log": [
+    {
+     "next": 7,
+     "primitive": "type",
+     "view": 10
+    },
+    {
+     "next": 10,
+     "primitive": "hover",
+     "view": 7
+    },
+    {
+     "next": 13,
+     "primitive": "click",
+     "view": 10
+    },
+    {
+     "next": 11,
+     "primitive": "select",
+     "view": 13
+    },
+    {
+     "next": 8,
+     "primitive": "fill",
+     "view": 11
+    },
+    {
+     "next": 6,
+     "primitive": "select",
+     "view": 8
+    },
+    {
+     "next": 9,
+     "primitive": "click",
+     "view": 6
+    },
+    {
+     "next": 11,
+     "primitive": "submit",
+     "view": 9
+    },
+    {
+     "next": 9,
+     "primitive": "select",
+     "view": 11
+    },
+    {
+     "next": 7,
+     "primitive": "select",
+     "view": 9
+    },
+    {
+     "next": 10,
+     "primitive": "hover",
+     "view": 7
+    },
+    {
+     "next": 8,
+     "primitive": "select",
+     "view": 10
+    },
+    {
+     "next": 6,
+     "primitive": "type",
+     "view": 8
+    },
+    {
+     "next": 9,
+     "primitive": "hover",
+     "view": 6
+    },
+    {
+     "next": 6,
+     "primitive": "type",
+     "view": 9
+    },
+    {
+     "next": 9,
+     "primitive": "submit",
+     "view": 6
+    },
+    {
+     "next": 12,
+     "primitive": "submit",
+     "view": 9
+    },
+    {
+     "next": 9,
+     "primitive": "select",
+     "view": 12
+    },
+    {
+     "next": 7,
+     "primitive": "fill",
+     "view": 9
+    },
+    {
+     "next": 10,
+     "primitive": "click",
+     "view": 7
+    },
+    {
+     "next": 7,
+     "primitive": "select",
+     "view": 10
+    },
+    {
+     "next": 9,
+     "primitive": "submit",
+     "view": 7
+    },
+    {
+     "next": 6,
+     "primitive": "select",
+     "view": 9
+    },
+    {
+     "next": 9,
+     "primitive": "click",
+     "view": 6
+    },
+    {
+     "next": 6,
+     "primitive": "select",
+     "view": 9
+    },
+    {
+     "next": 4,
+     "primitive": "select",
+     "view": 6
+    },
+    {
+     "next": 2,
+     "primitive": "select",
+     "view": 4
+    },
+    {
+     "next": 15,
+     "primitive": "fill",
+     "view": 2
+    },
+    {
+     "next": 2,
+     "primitive": "hover",
+     "view": 15
+    },
+    {
+     "next": 15,
+     "primitive": "select",
+     "view": 2
+    },
+    {
+     "next": 1,
+     "primitive": "submit",
+     "view": 15
+    },
+    {
+     "next": 15,
+     "primitive": "select",
+     "view": 1
+    },
+    {
+     "next": 13,
+     "primitive": "fill",
+     "view": 15
+    },
+    {
+     "next": 0,
+     "primitive": "hover",
+     "view": 13
+    },
+    {
+     "next": 14,
+     "primitive": "fill",
+     "view": 0
+    },
+    {
+     "next": 0,
+     "primitive": "hover",
+     "view": 14
+    },
+    {
+     "next": 14,
+     "primitive": "fill",
+     "view": 0
+    },
+    {
+     "next": 0,
+     "primitive": "hover",
+     "view": 14
+    },
+    {
+     "next": 2,
+     "primitive": "click",
+     "view": 0
+    },
+    {
+     "next": 5,
+     "primitive": "click",
+     "view": 2
+    },
+    {
+     "next": 8,
+     "primitive": "submit",
+     "view": 5
+    },
+    {
+     "next": 11,
+     "primitive": "click",
+     "view": 8
+    }
+   ],
+   "regime": "B",
+   "sid": "sess-00002",
+   "steps": 42
+  },
+  {
+   "index": 3,
+   "log": [
+    {
+     "next": 8,
+     "primitive": "hover",
+     "view": 7
+    },
+    {
+     "next": 6,
+     "primitive": "select",
+     "view": 8
+    },
+    {
+     "next": 5,
+     "primitive": "fill",
+     "view": 6
+    },
+    {
+     "next": 6,
+     "primitive": "hover",
+     "view": 5
+    },
+    {
+     "next": 5,
+     "primitive": "type",
+     "view": 6
+    },
+    {
+     "next": 7,
+     "primitive": "hover",
+     "view": 5
+    },
+    {
+     "next": 5,
+     "primitive": "fill",
+     "view": 7
+    },
+    {
+     "next": 6,
+     "primitive": "click",
+     "view": 5
+    },
+    {
+     "next": 4,
+     "primitive": "select",
+     "view": 6
+    },
+    {
+     "next": 3,
+     "primitive": "fill",
+     "view": 4
+    },
+    {
+     "next": 1,
+     "primitive": "fill",
+     "view": 3
+    },
+    {
+     "next": 0,
+     "primitive": "fill",
+     "view": 1
+    },
+    {
+     "next": 15,
+     "primitive": "fill",
+     "view": 0
+    },
+    {
+     "next": 1,
+     "primitive": "click",
+     "view": 15
+    },
+    {
+     "next": 0,
+     "primitive": "fill",
+     "view": 1
+    },
+    {
+     "next": 15,
+     "primitive": "select",
+     "view": 0
+    },
+    {
+     "next": 0,
+     "primitive": "submit",
+     "view": 15
+    },
+    {
+     "next": 14,
+     "primitive": "fill",
+     "view": 0
+    },
+    {
+     "next": 0,
+     "primitive": "click",
+     "view": 14
+    },
+    {
+     "next": 1,
+     "primitive": "hover",
+     "view": 0
+    },
+    {
+     "next": 3,
+     "primitive": "hover",
+     "view": 1
+    },
+    {
+     "next": 1,
+     "primitive": "type",
+     "view": 3
+    },
+    {
+     "next": 3,
+     "primitive": "submit",
+     "view": 1
+    },
+    {
+     "next": 4,
+     "primitive": "submit",
+     "view": 3
+    },
+    {
+     "next": 5,
+     "primitive": "hover",
+     "view": 4
+    },
+    {
+     "next": 3,
+     "primitive": "type",
+     "view": 5
+    },
+    {
+     "next": 1,
+     "primitive": "type",
+     "view": 3
+    },
+    {
+     "next": 3,
+     "primitive": "click",
+     "view": 1
+    },
+    {
+     "next": 4,
+     "primitive": "submit",
+     "view": 3
+    },
+    {
+     "next": 3,
+     "primitive": "select",
+     "view": 4
+    },
+    {
+     "next": 5,
+     "primitive": "click",
+     "view": 3
+    },
+    {
+     "next": 4,
+     "primitive": "type",
+     "view": 5
+    },
+    {
+     "next": 6,
+     "primitive": "submit",
+     "view": 4
+    },
+    {
+     "next": 5,
+     "primitive": "type",
+     "view": 6
+    },
+    {
+     "next": 7,
+     "primitive": "submit",
+     "view": 5
+    },
+    {
+     "next": 8,
+     "primitive": "hover",
+     "view": 7
+    },
+    {
+     "next": 7,
+     "primitive": "fill",
+     "view": 8
+    },
+    {
+     "next": 8,
+     "primitive": "hover",
+     "view": 7
+    },
+    {
+     "next": 9,
+     "primitive": "click",
+     "view": 8
+    },
+    {
+     "next": 8,
+     "primitive": "fill",
+     "view": 9
+    },
+    {
+     "next": 7,
+     "primitive": "fill",
+     "view": 8
+    },
+    {
+     "next": 5,
+     "primitive": "select",
+     "view": 7
+    }
+   ],
+   "regime": "A",
+   "sid": "sess-00003",
+   "steps": 42
+  },
+  {
+   "index": 4,
+   "log": [
+    {
+     "next": 3,
+     "primitive": "type",
+     "view": 6
+    },
+    {
+     "next": 0,
+     "primitive": "fill",
+     "view": 3
+    },
+    {
+     "next": 2,
+     "primitive": "hover",
+     "view": 0
+    },
+    {
+     "next": 4,
+     "primitive": "hover",
+     "view": 2
+    },
+    {
+     "next": 7,
+     "primitive": "hover",
+     "view": 4
+    },
+    {
+     "next": 5,
+     "primitive": "select",
+     "view": 7
+    },
+    {
+     "next": 8,
+     "primitive": "hover",
+     "view": 5
+    },
+    {
+     "next": 11,
+     "primitive": "submit",
+     "view": 8
+    },
+    {
+     "next": 13,
+     "primitive": "submit",
+     "view": 11
+    },
+    {
+     "next": 0,
+     "primitive": "hover",
+     "view": 13
+    },
+    {
+     "next": 2,
+     "primitive": "click",
+     "view": 0
+    },
+    {
+     "next": 5,
+     "primitive": "click",
+     "view": 2
+    },
+    {
+     "next": 7,
+     "primitive": "click",
+     "view": 5
+    },
+    {
+     "next": 5,
+     "primitive": "select",
+     "view": 7
+    },
+    {
+     "next": 2,
+     "primitive": "select",
+     "view": 5
+    },
+    {
+     "next": 0,
+     "primitive": "select",
+     "view": 2
+    },
+    {
+     "next": 2,
+     "primitive": "hover",
+     "view": 0
+    },
+    {
+     "next": 15,
+     "primitive": "select",
+     "view": 2
+    },
+    {
+     "next": 2,
+     "primitive": "click",
+     "view": 15
+    },
+    {
+     "next": 15,
+     "primitive": "type",
+     "view": 2
+    },
+    {
+     "next": 12,
+     "primitive": "fill",
+     "view": 15
+    },
+    {
+     "next": 10,
+     "primitive": "type",
+     "view": 12
+    },
+    {
+     "next": 13,
+     "primitive": "click",
+     "view": 10
+    },
+    {
+     "next": 15,
+     "primitive": "hover",
+     "view": 13
+    },
+    {
+     "next": 13,
+     "primitive": "select",
+     "view": 15
+    },
+    {
+     "next": 0,
+     "primitive": "hover",
+     "view": 13
+    },
+    {
+     "next": 3,
+     "primitive": "hover",
+     "view": 0
+    },
+    {
+     "next": 5,
+     "primitive": "click",
+     "view": 3
+    },
+    {
+     "next": 7,
+     "primitive": "hover",
+     "view": 5
+    },
+    {
+     "next": 9,
+     "primitive": "submit",
+     "view": 7
+    },
+    {
+     "next": 12,
+     "primitive": "submit",
+     "view": 9
+    },
+    {
+     "next": 9,
+     "primitive": "select",
+     "view": 12
+    },
+    {
+     "next": 6,
+     "primitive": "fill",
+     "view": 9
+    },
+    {
+     "next": 3,
+     "primitive": "fill",
+     "view": 6
+    },
+    {
+     "next": 6,
+     "primitive": "hover",
+     "view": 3
+    },
+    {
+     "next": 4,
+     "primitive": "type",
+     "view": 6
+    },
+    {
+     "next": 6,
+     "primitive": "click",
+     "view": 4
+    },
+    {
+     "next": 8,
+     "primitive": "hover",
+     "view": 6
+    },
+    {
+     "next": 10,
+     "primitive": "click",
+     "view": 8
+    },
+    {
+     "next": 13,
+     "primitive": "hover",
+     "view": 10
+    },
+    {
+     "next": 11,
+     "primitive": "type",
+     "view": 13
+    }
+   ],
+   "regime": "B",
+   "sid": "sess-00004",
+   "steps": 41
+  },
+  {
+   "index": 5,
+   "log": [
+    {
+     "next": 14,
+     "primitive": "hover",
+     "view": 13
+    },
+    {
+     "next": 12,
+     "primitive": "type",
+     "view": 14
+    },
+    {
+     "next": 14,
+     "primitive": "hover",
+     "view": 12
+    },
+    {
+     "next": 12,
+     "primitive": "select",
+     "view": 14
+    },
+    {
+     "next": 13,
+     "primitive": "hover",
+     "view": 12
+    },
+    {
+     "next": 15,
+     "primitive": "submit",
+     "view": 13
+    },
+    {
+     "next": 13,
+     "primitive": "select",
+     "view": 15
+    },
+    {
+     "next": 11,
+     "primitive": "type",
+     "view": 13
+    },
+    {
+     "next": 13,
+     "primitive": "submit",
+     "view": 11
+    },
+    {
+     "next": 12,
+     "primitive": "select",
+     "view": 13
+    },
+    {
+     "next": 14,
+     "primitive": "submit",
+     "view": 12
+    },
+    {
+     "next": 12,
+     "primitive": "select",
+     "view": 14
+    },
+    {
+     "next": 11,
+     "primitive": "select",
+     "view": 12
+    },
+    {
+     "next": 12,
+     "primitive": "hover",
+     "view": 11
+    },
+    {
+     "next": 11,
+     "primitive": "select",
+     "view": 12
+    },
+    {
+     "next": 13,
+     "primitive": "submit",
+     "view": 11
+    },
+    {
+     "next": 15,
+     "primitive": "click",
+     "view": 13
+    },
+    {
+     "next": 1,
+     "primitive": "click",
+     "view": 15
+    },
+    {
+     "next": 2,
+     "primitive": "hover",
+     "view": 1
+    },
+    {
+     "next": 0,
+     "primitive": "type",
+     "view": 2
+    },
+    {
+     "next": 1,
+     "primitive": "click",
+     "view": 0
+    },
+    {
+     "next": 3,
+     "primitive": "hover",
+     "view": 1
+    },
+    {
+     "next": 1,
+     "primitive": "select",
+     "view": 3
+    },
+    {
+     "next": 3,
+     "primitive": "submit",
+     "view": 1
+    },
+    {
+     "next": 1,
+     "primitive": "select",
+     "view": 3
+    },
+    {
+     "next": 2,
+     "primitive": "submit",
+     "view": 1
+    },
+    {
+     "next": 0,
+     "primitive": "select",
+     "view": 2
+    },
+    {
+     "next": 14,
+     "primitive": "fill",
+     "view": 0
+    },
+    {
+     "next": 12,
+     "primitive": "fill",
+     "view": 14
+    },
+    {
+     "next": 14,
+     "primitive": "submit",
+     "view": 12
+    },
+    {
+     "next": 0,
+     "primitive": "hover",
+     "view": 14
+    },
+    {
+     "next": 14,
+     "primitive": "type",
+     "view": 0
+    },
+    {
+     "next": 0,
+     "primitive": "click",
+     "view": 14
+    },
+    {
+     "next": 15,
+     "primitive": "select",
+     "view": 0
+    },
+    {
+     "next": 0,
+     "primitive": "hover",
+     "view": 15
+    },
+    {
+     "next": 14,
+     "primitive": "select",
+     "view": 0
+    },
+    {
+     "next": 13,
+     "primitive": "fill",
+     "view": 14
+    },
+    {
+     "next": 15,
+     "primitive": "hover",
+     "view": 13
+    },
+    {
+     "next": 0,
+     "primitive": "submit",
+     "view": 15
+    },
+    {
+     "next": 15,
+     "primitive": "fill",
+     "view": 0
+    }
+   ],
+   "regime": "A",
+   "sid": "sess-00005",
+   "steps": 40
+  },
+  {
+   "index": 6,
+   "log": [
+    {
+     "next": 3,
+     "primitive": "click",
+     "view": 1
+    },
+    {
+     "next": 1,
+     "primitive": "fill",
+     "view": 3
+    },
+    {
+     "next": 4,
+     "primitive": "click",
+     "view": 1
+    },
+    {
+     "next": 1,
+     "primitive": "fill",
+     "view": 4
+    },
+    {
+     "next": 14,
+     "primitive": "fill",
+     "view": 1
+    },
+    {
+     "next": 0,
+     "primitive": "click",
+     "view": 14
+    },
+    {
+     "next": 13,
+     "primitive": "select",
+     "view": 0
+    },
+    {
+     "next": 0,
+     "primitive": "hover",
+     "view": 13
+    },
+    {
+     "next": 14,
+     "primitive": "select",
+     "view": 0
+    },
+    {
+     "next": 1,
+     "primitive": "click",
+     "view": 14
+    },
+    {
+     "next": 4,
+     "primitive": "submit",
+     "view": 1
+    },
+    {
+     "next": 6,
+     "primitive": "hover",
+     "view": 4
+    },
+    {
+     "next": 8,
+     "primitive": "submit",
+     "view": 6
+    },
+    {
+     "next": 10,
+     "primitive": "submit",
+     "view": 8
+    },
+    {
+     "next": 8,
+     "primitive": "fill",
+     "view": 10
+    },
+    {
+     "next": 11,
+     "primitive": "click",
+     "view": 8
+    },
+    {
+     "next": 8,
+     "primitive": "select",
+     "view": 11
+    },
+    {
+     "next": 10,
+     "primitive": "click",
+     "view": 8
+    },
+    {
+     "next": 13,
+     "primitive": "submit",
+     "view": 10
+    },
+    {
+     "next": 11,
+     "primitive": "fill",
+     "view": 13
+    },
+    {
+     "next": 9,
+     "primitive": "select",
+     "view": 11
+    },
+    {
+     "next": 11,
+     "primitive": "submit",
+     "view": 9
+    },
+    {
+     "next": 13,
+     "primitive": "submit",
+     "view": 11
+    },
+    {
+     "next": 10,
+     "primitive": "type",
+     "view": 13
+    },
+    {
+     "next": 8,
+     "primitive": "type",
+     "view": 10
+    },
+    {
+     "next": 6,
+     "primitive": "fill",
+     "view": 8
+    },
+    {
+     "next": 8,
+     "primitive": "hover",
+     "view": 6
+    },
+    {
+     "next": 11,
+     "primitive": "hover",
+     "view": 8
+    },
+    {
+     "next": 8,
+     "primitive": "fill",
+     "view": 11
+    },
+    {
+     "next": 6,
+     "primitive": "fill",
+     "view": 8
+    },
+    {
+     "next": 9,
+     "primitive": "submit",
+     "view": 6
+    },
+    {
+     "next": 11,
+     "primitive": "click",
+     "view": 9
+    },
+    {
+     "next": 13,
+     "primitive": "click",
+     "view": 11
+    },
+    {
+     "next": 11,
+     "primitive": "type",
+     "view": 13
+    },
+    {
+     "next": 14,
+     "primitive": "hover",
+     "view": 11
+    },
+    {
+     "next": 0,
+     "primitive": "hover",
+     "view": 14
+    },
+    {
+     "next": 2,
+     "primitive": "hover",
+     "view": 0
+    },
+    {
+     "next": 15,
+     "primitive": "select",
+     "view": 2
+    },
+    {
+     "next": 1,
+     "primitive": "click",
+     "view": 15
+    },
+    {
+     "next": 3,
+     "primitive": "click",
+     "view": 1
+    }
+   ],
+   "regime": "B",
+   "sid": "sess-00006",
+   "steps": 40
+  },
+  {
+   "index": 7,
+   "log": [
+    {
+     "next": 13,
+     "primitive": "submit",
+     "view": 11
+    },
+    {
+     "next": 14,
+     "primitive": "hover",
+     "view": 13
+    },
+    {
+     "next": 13,
+     "primitive": "select",
+     "view": 14
+    },
+    {
+     "next": 14,
+     "primitive": "hover",
+     "view": 13
+    },
+    {
+     "next": 0,
+     "primitive": "hover",
+     "view": 14
+    },
+    {
+     "next": 14,
+     "primitive": "type",
+     "view": 0
+    },
+    {
+     "next": 0,
+     "primitive": "click",
+     "view": 14
+    },
+    {
+     "next": 15,
+     "primitive": "fill",
+     "view": 0
+    },
+    {
+     "next": 14,
+     "primitive": "fill",
+     "view": 15
+    },
+    {
+     "next": 0,
+     "primitive": "hover",
+     "view": 14
+    },
+    {
+     "next": 14,
+     "primitive": "select",
+     "view": 0
+    },
+    {
+     "next": 0,
+     "primitive": "submit",
+     "view": 14
+    },
+    {
+     "next": 14,
+     "primitive": "type",
+     "view": 0
+    },
+    {
+     "next": 0,
+     "primitive": "submit",
+     "view": 14
+    },
+    {
+     "next": 15,
+     "primitive": "fill",
+     "view": 0
+    },
+    {
+     "next": 13,
+     "primitive": "fill",
+     "view": 15
+    },
+    {
+     "next": 11,
+     "primitive": "type",
+     "view": 13
+    },
+    {
+     "next": 12,
+     "primitive": "hover",
+     "view": 11
+    },
+    {
+     "next": 14,
+     "primitive": "submit",
+     "view": 12
+    },
+    {
+     "next": 15,
+     "primitive": "click",
+     "view": 14
+    },
+    {
+     "next": 1,
+     "primitive": "hover",
+     "view": 15
+    },
+    {
+     "next": 0,
+     "primitive": "select",
+     "view": 1
+    },
+    {
+     "next": 2,
+     "primitive": "click",
+     "view": 0
+    },
+    {
+     "next": 1,
+     "primitive": "type",
+     "view": 2
+    },
+    {
+     "next": 0,
+     "primitive": "fill",
+     "view": 1
+    },
+    {
+     "next": 2,
+     "primitive": "click",
+     "view": 0
+    },
+    {
+     "next": 3,
+     "primitive": "submit",
+     "view": 2
+    },
+    {
+     "next": 2,
+     "primitive": "fill",
+     "view": 3
+    },
+    {
+     "next": 4,
+     "primitive": "submit",
+     "view": 2
+    },
+    {
+     "next": 5,
+     "primitive": "click",
+     "view": 4
+    },
+    {
+     "next": 4,
+     "primitive": "fill",
+     "view": 5
+    },
+    {
+     "next": 2,
+     "primitive": "select",
+     "view": 4
+    },
+    {
+     "next": 3,
+     "primitive": "click",
+     "view": 2
+    },
+    {
+     "next": 4,
+     "primitive": "submit",
+     "view": 3
+    },
+    {
+     "next": 5,
+     "primitive": "submit",
+     "view": 4
+    },
+    {
+     "next": 3,
+     "primitive": "fill",
+     "view": 5
+    },
+    {
+     "next": 1,
+     "primitive": "select",
+     "view": 3
+    },
+    {
+     "next": 15,
+     "primitive": "select",
+     "view": 1
+    },
+    {
+     "next": 14,
+     "primitive": "type",
+     "view": 15
+    },
+    {
+     "next": 13,
+     "primitive": "select",
+     "view": 14
+    }
+   ],
+   "regime": "A",
+   "sid": "sess-00007",
+   "steps": 40
+  },
+  {
+   "index": 8,
+   "log": [
+    {
+     "next": 5,
+     "primitive": "submit",
+     "view": 3
+    },
+    {
+     "next": 7,
+     "primitive": "click",
+     "view": 5
+    },
+    {
+     "next": 5,
+     "primitive": "fill",
+     "view": 7
+    },
+    {
+     "next": 2,
+     "primitive": "type",
+     "view": 5
+    },
+    {
+     "next": 0,
+     "primitive": "type",
+     "view": 2
+    },
+    {
+     "next": 2,
+     "primitive": "submit",
+     "view": 0
+    },
+    {
+     "next": 4,
+     "primitive": "submit",
+     "view": 2
+    },
+    {
+     "next": 6,
+     "primitive": "click",
+     "view": 4
+    },
+    {
+     "next": 8,
+     "primitive": "click",
+     "view": 6
+    },
+    {
+     "next": 6,
+     "primitive": "fill",
+     "view": 8
+    },
+    {
+     "next": 3,
+     "primitive": "fill",
+     "view": 6
+    },
+    {
+     "next": 6,
+     "primitive": "hover",
+     "view": 3
+    },
+    {
+     "next": 9,
+     "primitive": "submit",
+     "view": 6
+    },
+    {
+     "next": 7,
+     "primitive": "select",
+     "view": 9
+    },
+    {
+     "next": 10,
+     "primitive": "hover",
+     "view": 7
+    },
+    {
+     "next": 7,
+     "primitive": "select",
+     "view": 10
+    },
+    {
+     "next": 5,
+     "primitive": "type",
+     "view": 7
+    },
+    {
+     "next": 7,
+     "primitive": "submit",
+     "view": 5
+    },
+    {
+     "next": 10,
+     "primitive": "submit",
+     "view": 7
+    },
+    {
+     "next": 7,
+     "primitive": "type",
+     "view": 10
+    },
+    {
+     "next": 5,
+     "primitive": "fill",
+     "view": 7
+    },
+    {
+     "next": 8,
+     "primitive": "submit",
+     "view": 5
+    },
+    {
+     "next": 6,
+     "primitive": "fill",
+     "view": 8
+    },
+    {
+     "next": 4,
+     "primitive": "fill",
+     "view": 6
+    },
+    {
+     "next": 1,
+     "primitive": "type",
+     "view": 4
+    },
+    {
+     "next": 3,
+     "primitive": "submit",
+     "view": 1
+    },
+    {
+     "next": 0,
+     "primitive": "type",
+     "view": 3
+    },
+    {
+     "next": 13,
+     "primitive": "type",
+     "view": 0
+    },
+    {
+     "next": 0,
+     "primitive": "submit",
+     "view": 13
+    },
+    {
+     "next": 2,
+     "primitive": "click",
+     "view": 0
+    },
+    {
+     "next": 15,
+     "primitive": "fill",
+     "view": 2
+    },
+    {
+     "next": 2,
+     "primitive": "click",
+     "view": 15
+    },
+    {
+     "next": 4,
+     "primitive": "submit",
+     "view": 2
+    },
+    {
+     "next": 7,
+     "primitive": "hover",
+     "view": 4
+    },
+    {
+     "next": 5,
+     "primitive": "type",
+     "view": 7
+    },
+    {
+     "next": 3,
+     "primitive": "type",
+     "view": 5
+    },
+    {
+     "next": 5,
+     "primitive": "click",
+     "view": 3
+    },
+    {
+     "next": 3,
+     "primitive": "type",
+     "view": 5
+    },
+    {
+     "next": 6,
+     "primitive": "click",
+     "view": 3
+    },
+    {
+     "next": 4,
+     "primitive": "select",
+     "view": 6
+    }
+   ],
+   "regime": "B",
+   "sid": "sess-00008",
+   "steps": 40
+  },
+  {
+   "index": 9,
+   "log": [
+    {
+     "next": 14,
+     "primitive": "type",
+     "view": 1
+    },
+    {
+     "next": 12,
+     "primitive": "type",
+     "view": 14
+    },
+    {
+     "next": 14,
+     "primitive": "submit",
+     "view": 12
+    },
+    {
+     "next": 11,
+     "primitive": "type",
+     "view": 14
+    },
+    {
+     "next": 14,
+     "primitive": "click",
+     "view": 11
+    },
+    {
+     "next": 11,
+     "primitive": "fill",
+     "view": 14
+    },
+    {
+     "next": 13,
+     "primitive": "hover",
+     "view": 11
+    },
+    {
+     "next": 0,
+     "primitive": "submit",
+     "view": 13
+    },
+    {
+     "next": 2,
+     "primitive": "click",
+     "view": 0
+    },
+    {
+     "next": 15,
+     "primitive": "select",
+     "view": 2
+    },
+    {
+     "next": 1,
+     "primitive": "hover",
+     "view": 15
+    },
+    {
+     "next": 14,
+     "primitive": "fill",
+     "view": 1
+    },
+    {
+     "next": 1,
+     "primitive": "hover",
+     "view": 14
+    },
+    {
+     "next": 3,
+     "primitive": "hover",
+     "view": 1
+    },
+    {
+     "next": 1,
+     "primitive": "type",
+     "view": 3
+    },
+    {
+     "next": 3,
+     "primitive": "click",
+     "view": 1
+    },
+    {
+     "next": 1,
+     "primitive": "select",
+     "view": 3
+    },
+    {
+     "next": 15,
+     "primitive": "select",
+     "view": 1
+    },
+    {
+     "next": 2,
+     "primitive": "hover",
+     "view": 15
+    },
+    {
+     "next": 4,
+     "primitive": "submit",
+     "view": 2
+    },
+    {
+     "next": 6,
+     "primitive": "click",
+     "view": 4
+    },
+    {
+     "next": 4,
+     "primitive": "type",
+     "view": 6
+    },
+    {
+     "next": 2,
+     "primitive": "type",
+     "view": 4
+    },
+    {
+     "next": 4,
+     "primitive": "submit",
+     "view": 2
+    },
+    {
+     "next": 6,
+     "primitive": "click",
+     "view": 4
+    },
+    {
+     "next": 8,
+     "primitive": "click",
+     "view": 6
+    },
+    {
+     "next": 10,
+     "primitive": "click",
+     "view": 8
+    },
+    {
+     "next": 8,
+     "primitive": "select",
+     "view": 10
+    },
+    {
+     "next": 6,
+     "primitive": "type",
+     "view": 8
+    },
+    {
+     "next": 9,
+     "primitive": "click",
+     "view": 6
+    },
+    {
+     "next": 7,
+     "primitive": "select",
+     "view": 9
+    },
+    {
+     "next": 9,
+     "primitive": "submit",
+     "view": 7
+    },
+    {
+     "next": 11,
+     "primitive": "hover",
+     "view": 9
+    },
+    {
+     "next": 9,
+     "primitive": "fill",
+     "view": 11
+    },
+    {
+     "next": 6,
+     "primitive": "select",
+     "view": 9
+    },
+    {
+     "next": 4,
+     "primitive": "type",
+     "view": 6
+    },
+    {
+     "next": 7,
+     "primitive": "click",
+     "view": 4
+    },
+    {
+     "next": 10,
+     "primitive": "submit",
+     "view": 7
+    },
+    {
+     "next": 13,
+     "primitive": "submit",
+     "view": 10
+    },
+    {
+     "next": 15,
+     "primitive": "submit",
+     "view": 13
+    }
+   ],
+   "regime": "B",
+   "sid": "sess-00009",
+   "steps": 40
+  },
+  {
+   "index": 10,
+   "log": [
+    {
+     "next": 6,
+     "primitive": "type",
+     "view": 8
+    },
+    {
+     "next": 4,
+     "primitive": "select",
+     "view": 6
+    },
+    {
+     "next": 5,
+     "primitive": "submit",
+     "view": 4
+    },
+    {
+     "next": 3,
+     "primitive": "type",
+     "view": 5
+    },
+    {
+     "next": 4,
+     "primitive": "hover",
+     "view": 3
+    },
+    {
+     "next": 3,
+     "primitive": "fill",
+     "view": 4
+    },
+    {
+     "next": 5,
+     "primitive": "hover",
+     "view": 3
+    },
+    {
+     "next": 7,
+     "primitive": "hover",
+     "view": 5
+    },
+    {
+     "next": 9,
+     "primitive": "click",
+     "view": 7
+    },
+    {
+     "next": 7,
+     "primitive": "type",
+     "view": 9
+    },
+    {
+     "next": 8,
+     "primitive": "click",
+     "view": 7
+    },
+    {
+     "next": 9,
+     "primitive": "submit",
+     "view": 8
+    },
+    {
+     "next": 11,
+     "primitive": "submit",
+     "view": 9
+    },
+    {
+     "next": 13,
+     "primitive": "submit",
+     "view": 11
+    },
+    {
+     "next": 15,
+     "primitive": "click",
+     "view": 13
+    },
+    {
+     "next": 1,
+     "primitive": "click",
+     "view": 15
+    },
+    {
+     "next": 15,
+     "primitive": "select",
+     "view": 1
+    },
+    {
+     "next": 13,
+     "primitive": "type",
+     "view": 15
+    },
+    {
+     "next": 14,
+     "primitive": "click",
+     "view": 13
+    },
+    {
+     "next": 0,
+     "primitive": "submit",
+     "view": 14
+    },
+    {
+     "next": 14,
+     "primitive": "fill",
+     "view": 0
+    },
+    {
+     "next": 12,
+     "primitive": "type",
+     "view": 14
+    },
+    {
+     "next": 10,
+     "primitive": "select",
+     "view": 12
+    },
+    {
+     "next": 9,
+     "primitive": "select",
+     "view": 10
+    },
+    {
+     "next": 8,
+     "primitive": "fill",
+     "view": 9
+    },
+    {
+     "next": 10,
+     "primitive": "hover",
+     "view": 8
+    },
+    {
+     "next": 12,
+     "primitive": "submit",
+     "view": 10
+    },
+    {
+     "next": 11,
+     "primitive": "type",
+     "view": 12
+    },
+    {
+     "next": 9,
+     "primitive": "select",
+     "view": 11
+    },
+    {
+     "next": 10,
+     "primitive": "click",
+     "view": 9
+    },
+    {
+     "next": 9,
+     "primitive": "select",
+     "view": 10
+    },
+    {
+     "next": 11,
+     "primitive": "click",
+     "view": 9
+    },
+    {
+     "next": 10,
+     "primitive": "select",
+     "view": 11
+    },
+    {
+     "next": 8,
+     "primitive": "select",
+     "view": 10
+    },
+    {
+     "next": 9,
+     "primitive": "click",
+     "view": 8
+    },
+    {
+     "next": 10,
+     "primitive": "hover",
+     "view": 9
+    },
+    {
+     "next": 12,
+     "primitive": "click",
+     "view": 10
+    },
+    {
+     "next": 11,
+     "primitive": "fill",
+     "view": 12
+    },
+    {
+     "next": 10,
+     "primitive": "type",
+     "view": 11
+    },
+    {
+     "next": 12,
+     "primitive": "click",
+     "view": 10
+    },
+    {
+     "next": 13,
+     "primitive": "hover",
+     "view": 12
+    }
+   ],
+   "regime": "A",
+   "sid": "sess-00010",
+   "steps": 41
+  },
+  {
+   "index": 11,
+   "log": [
+    {
+     "next": 13,
+     "primitive": "type",
+     "view": 15
+    },
+    {
+     "next": 0,
+     "primitive": "submit",
+     "view": 13
+    },
+    {
+     "next": 3,
+     "primitive": "click",
+     "view": 0
+    },
+    {
+     "next": 5,
+     "primitive": "hover",
+     "view": 3
+    },
+    {
+     "next": 3,
+     "primitive": "fill",
+     "view": 5
+    },
+    {
+     "next": 0,
+     "primitive": "fill",
+     "view": 3
+    },
+    {
+     "next": 2,
+     "primitive": "hover",
+     "view": 0
+    },
+    {
+     "next": 4,
+     "primitive": "submit",
+     "view": 2
+    },
+    {
+     "next": 1,
+     "primitive": "type",
+     "view": 4
+    },
+    {
+     "next": 15,
+     "primitive": "fill",
+     "view": 1
+    },
+    {
+     "next": 1,
+     "primitive": "submit",
+     "view": 15
+    },
+    {
+     "next": 15,
+     "primitive": "type",
+     "view": 1
+    },
+    {
+     "next": 13,
+     "primitive": "type",
+     "view": 15
+    },
+    {
+     "next": 0,
+     "primitive": "hover",
+     "view": 13
+    },
+    {
+     "next": 3,
+     "primitive": "click",
+     "view": 0
+    },
+    {
+     "next": 0,
+     "primitive": "fill",
+     "view": 3
+    },
+    {
+     "next": 14,
+     "primitive": "fill",
+     "view": 0
+    },
+    {
+     "next": 0,
+     "primitive": "click",
+     "view": 14
+    },
+    {
+     "next": 14,
+     "primitive": "fill",
+     "view": 0
+    },
+    {
+     "next": 11,
+     "primitive": "type",
+     "view": 14
+    },
+    {
+     "next": 14,
+     "primitive": "click",
+     "view": 11
+    },
+    {
+     "next": 11,
+     "primitive": "select",
+     "view": 14
+    },
+    {
+     "next": 14,
+     "primitive": "click",
+     "view": 11
+    },
+    {
+     "next": 11,
+     "primitive": "select",
+     "view": 14
+    },
+    {
+     "next": 13,
+     "primitive": "hover",
+     "view": 11
+    },
+    {
+     "next": 15,
+     "primitive": "click",
+     "view": 13
+    },
+    {
+     "next": 12,
+     "primitive": "type",
+     "view": 15
+    },
+    {
+     "next": 14,
+     "primitive": "click",
+     "view": 12
+    },
+    {
+     "next": 12,
+     "primitive": "fill",
+     "view": 14
+    },
+    {
+     "next": 15,
+     "primitive": "submit",
+     "view": 12
+    },
+    {
+     "next": 13,
+     "primitive": "type",
+     "view": 15
+    },
+    {
+     "next": 10,
+     "primitive": "select",
+     "view": 13
+    },
+    {
+     "next": 7,
+     "primitive": "select",
+     "view": 10
+    },
+    {
+     "next": 10,
+     "primitive": "hover",
+     "view": 7
+    },
+    {
+     "next": 12,
+     "primitive": "hover",
+     "view": 10
+    },
+    {
+     "next": 10,
+     "primitive": "fill",
+     "view": 12
+    },
+    {
+     "next": 8,
+     "primitive": "select",
+     "view": 10
+    },
+    {
+     "next": 5,
+     "primitive": "type",
+     "view": 8
+    },
+    {
+     "next": 7,
+     "primitive": "click",
+     "view": 5
+    },
+    {
+     "next": 5,
+     "primitive": "fill",
+     "view": 7
+    },
+    {
+     "next": 7,
+     "primitive": "click",
+     "view": 5
+    }
+   ],
+   "regime": "B",
+   "sid": "sess-00011",
+   "steps": 41
+  },
+  {
+   "index": 12,
+   "log": [
+    {
+     "next": 13,
+     "primitive": "submit",
+     "view": 11
+    },
+    {
+     "next": 11,
+     "primitive": "select",
+     "view": 13
+    },
+    {
+     "next": 13,
+     "primitive": "submit",
+     "view": 11
+    },
+    {
+     "next": 12,
+     "primitive": "select",
+     "view": 13
+    },
+    {
+     "next": 13,
+     "primitive": "hover",
+     "view": 12
+    },
+    {
+     "next": 14,
+     "primitive": "submit",
+     "view": 13
+    },
+    {
+     "next": 0,
+     "primitive": "hover",
+     "view": 14
+    },
+    {
+     "next": 14,
+     "primitive": "fill",
+     "view": 0
+    },
+    {
+     "next": 13,
+     "primitive": "select",
+     "view": 14
+    },
+    {
+     "next": 11,
+     "primitive": "fill",
+     "view": 13
+    },
+    {
+     "next": 10,
+     "primitive": "type",
+     "view": 11
+    },
+    {
+     "next": 9,
+     "primitive": "type",
+     "view": 10
+    },
+    {
+     "next": 7,
+     "primitive": "select",
+     "view": 9
+    },
+    {
+     "next": 6,
+     "primitive": "fill",
+     "view": 7
+    },
+    {
+     "next": 8,
+     "primitive": "submit",
+     "view": 6
+    },
+    {
+     "next": 9,
+     "primitive": "hover",
+     "view": 8
+    },
+    {
+     "next": 11,
+     "primitive": "click",
+     "view": 9
+    },
+    {
+     "next": 12,
+     "primitive": "hover",
+     "view": 11
+    },
+    {
+     "next": 11,
+     "primitive": "type",
+     "view": 12
+    },
+    {
+     "next": 13,
+     "primitive": "hover",
+     "view": 11
+    },
+    {
+     "next": 15,
+     "primitive": "click",
+     "view": 13
+    },
+    {
+     "next": 13,
+     "primitive": "fill",
+     "view": 15
+    },
+    {
+     "next": 12,
+     "primitive": "type",
+     "view": 13
+    },
+    {
+     "next": 11,
+     "primitive": "type",
+     "view": 12
+    },
+    {
+     "next": 12,
+     "primitive": "submit",
+     "view": 11
+    },
+    {
+     "next": 14,
+     "primitive": "hover",
+     "view": 12
+    },
+    {
+     "next": 12,
+     "primitive": "fill",
+     "view": 14
+    },
+    {
+     "next": 14,
+     "primitive": "hover",
+     "view": 12
+    },
+    {
+     "next": 0,
+     "primitive": "submit",
+     "view": 14
+    },
+    {
+     "next": 2,
+     "primitive": "submit",
+     "view": 0
+    },
+    {
+     "next": 4,
+     "primitive": "submit",
+     "view": 2
+    },
+    {
+     "next": 3,
+     "primitive": "type",
+     "view": 4
+    },
+    {
+     "next": 1,
+     "primitive": "select",
+     "view": 3
+    },
+    {
+     "next": 15,
+     "primitive": "type",
+     "view": 1
+    },
+    {
+     "next": 13,
+     "primitive": "select",
+     "view": 15
+    },
+    {
+     "next": 12,
+     "primitive": "type",
+     "view": 13
+    },
+    {
+     "next": 13,
+     "primitive": "click",
+     "view": 12
+    },
+    {
+     "next": 11,
+     "primitive": "type",
+     "view": 13
+    },
+    {
+     "next": 13,
+     "primitive": "click",
+     "view": 11
+    },
+    {
+     "next": 14,
+     "primitive": "hover",
+     "view": 13
+    },
+    {
+     "next": 13,
+     "primitive": "fill",
+     "view": 14
+    }
+   ],
+   "regime": "A",
+   "sid": "sess-00012",
+   "steps": 41
+  },
+  {
+   "index": 13,
+   "log": [
+    {
+     "next": 15,
+     "primitive": "hover",
+     "view": 12
+    },
+    {
+     "next": 2,
+     "primitive": "click",
+     "view": 15
+    },
+    {
+     "next": 4,
+     "primitive": "submit",
+     "view": 2
+    },
+    {
+     "next": 1,
+     "primitive": "select",
+     "view": 4
+    },
+    {
+     "next": 3,
+     "primitive": "submit",
+     "view": 1
+    },
+    {
+     "next": 5,
+     "primitive": "submit",
+     "view": 3
+    },
+    {
+     "next": 2,
+     "primitive": "type",
+     "view": 5
+    },
+    {
+     "next": 5,
+     "primitive": "click",
+     "view": 2
+    },
+    {
+     "next": 2,
+     "primitive": "type",
+     "view": 5
+    },
+    {
+     "next": 15,
+     "primitive": "type",
+     "view": 2
+    },
+    {
+     "next": 13,
+     "primitive": "fill",
+     "view": 15
+    },
+    {
+     "next": 0,
+     "primitive": "click",
+     "view": 13
+    },
+    {
+     "next": 2,
+     "primitive": "click",
+     "view": 0
+    },
+    {
+     "next": 4,
+     "primitive": "submit",
+     "view": 2
+    },
+    {
+     "next": 1,
+     "primitive": "fill",
+     "view": 4
+    },
+    {
+     "next": 3,
+     "primitive": "click",
+     "view": 1
+    },
+    {
+     "next": 5,
+     "primitive": "hover",
+     "view": 3
+    },
+    {
+     "next": 8,
+     "primitive": "click",
+     "view": 5
+    },
+    {
+     "next": 6,
+     "primitive": "fill",
+     "view": 8
+    },
+    {
+     "next": 9,
+     "primitive": "click",
+     "view": 6
+    },
+    {
+     "next": 6,
+     "primitive": "select",
+     "view": 9
+    },
+    {
+     "next": 8,
+     "primitive": "click",
+     "view": 6
+    },
+    {
+     "next": 11,
+     "primitive": "submit",
+     "view": 8
+    },
+    {
+     "next": 14,
+     "primitive": "submit",
+     "view": 11
+    },
+    {
+     "next": 12,
+     "primitive": "select",
+     "view": 14
+    },
+    {
+     "next": 15,
+     "primitive": "click",
+     "view": 12
+    },
+    {
+     "next": 1,
+     "primitive": "hover",
+     "view": 15
+    },
+    {
+     "next": 15,
+     "primitive": "fill",
+     "view": 1
+    },
+    {
+     "next": 13,
+     "primitive": "fill",
+     "view": 15
+    },
+    {
+     "next": 11,
+     "primitive": "select",
+     "view": 13
+    },
+    {
+     "next": 9,
+     "primitive": "select",
+     "view": 11
+    },
+    {
+     "next": 11,
+     "primitive": "hover",
+     "view": 9
+    },
+    {
+     "next": 8,
+     "primitive": "select",
+     "view": 11
+    },
+    {
+     "next": 10,
+     "primitive": "submit",
+     "view": 8
+    },
+    {
+     "next": 8,
+     "primitive": "type",
+     "view": 10
+    },
+    {
+     "next": 5,
+     "primitive": "fill",
+     "view": 8
+    },
+    {
+     "next": 2,
+     "primitive": "select",
+     "view": 5
+    },
+    {
+     "next": 0,
+     "primitive": "type",
+     "view": 2
+    },
+    {
+     "next": 13,
+     "primitive": "select",
+     "view": 0
+    },
+    {
+     "next": 10,
+     "primitive": "type",
+     "view": 13
+    }
+   ],
+   "regime": "B",
+   "sid": "sess-00013",
+   "steps": 40
+  },
+  {
+   "index": 14,
+   "log": [
+    {
+     "next": 10,
+     "primitive": "fill",
+     "view": 11
+    },
+    {
+     "next": 11,
+     "primitive": "click",
+     "view": 10
+    },
+    {
+     "next": 13,
+     "primitive": "hover",
+     "view": 11
+    },
+    {
+     "next": 15,
+     "primitive": "submit",
+     "view": 13
+    },
+    {
+     "next": 13,
+     "primitive": "type",
+     "view": 15
+    },
+    {
+     "next": 15,
+     "primitive": "submit",
+     "view": 13
+    },
+    {
+     "next": 1,
+     "primitive": "submit",
+     "view": 15
+    },
+    {
+     "next": 2,
+     "primitive": "submit",
+     "view": 1
+    },
+    {
+     "next": 1,
+     "primitive": "fill",
+     "view": 2
+    },
+    {
+     "next": 0,
+     "primitive": "fill",
+     "view": 1
+    },
+    {
+     "next": 15,
+     "primitive": "type",
+     "view": 0
+    },
+    {
+     "next": 1,
+     "primitive": "hover",
+     "view": 15
+    },
+    {
+     "next": 2,
+     "primitive": "submit",
+     "view": 1
+    },
+    {
+     "next": 3,
+     "primitive": "click",
+     "view": 2
+    },
+    {
+     "next": 4,
+     "primitive": "click",
+     "view": 3
+    },
+    {
+     "next": 6,
+     "primitive": "hover",
+     "view": 4
+    },
+    {
+     "next": 4,
+     "primitive": "type",
+     "view": 6
+    },
+    {
+     "next": 2,
+     "primitive": "fill",
+     "view": 4
+    },
+    {
+     "next": 3,
+     "primitive": "hover",
+     "view": 2
+    },
+    {
+     "next": 1,
+     "primitive": "type",
+     "view": 3
+    },
+    {
+     "next": 2,
+     "primitive": "click",
+     "view": 1
+    },
+    {
+     "next": 4,
+     "primitive": "click",
+     "view": 2
+    },
+    {
+     "next": 3,
+     "primitive": "type",
+     "view": 4
+    },
+    {
+     "next": 4,
+     "primitive": "click",
+     "view": 3
+    },
+    {
+     "next": 5,
+     "primitive": "click",
+     "view": 4
+    },
+    {
+     "next": 7,
+     "primitive": "hover",
+     "view": 5
+    },
+    {
+     "next": 5,
+     "primitive": "type",
+     "view": 7
+    },
+    {
+     "next": 4,
+     "primitive": "select",
+     "view": 5
+    },
+    {
+     "next": 6,
+     "primitive": "click",
+     "view": 4
+    },
+    {
+     "next": 4,
+     "primitive": "type",
+     "view": 6
+    },
+    {
+     "next": 3,
+     "primitive": "type",
+     "view": 4
+    },
+    {
+     "next": 2,
+     "primitive": "select",
+     "view": 3
+    },
+    {
+     "next": 0,
+     "primitive": "type",
+     "view": 2
+    },
+    {
+     "next": 2,
+     "primitive": "submit",
+     "view": 0
+    },
+    {
+     "next": 0,
+     "primitive": "type",
+     "view": 2
+    },
+    {
+     "next": 2,
+     "primitive": "submit",
+     "view": 0
+    },
+    {
+     "next": 1,
+     "primitive": "select",
+     "view": 2
+    },
+    {
+     "next": 0,
+     "primitive": "fill",
+     "view": 1
+    },
+    {
+     "next": 15,
+     "primitive": "select",
+     "view": 0
+    },
+    {
+     "next": 14,
+     "primitive": "fill",
+     "view": 15
+    },
+    {
+     "next": 13,
+     "primitive": "fill",
+     "view": 14
+    }
+   ],
+   "regime": "A",
+   "sid": "sess-00014",
+   "steps": 41
+  },
+  {
+   "index": 15,
+   "log": [
+    {
+     "next": 11,
+     "primitive": "fill",
+     "view": 12
+    },
+    {
+     "next": 10,
+     "primitive": "select",
+     "view": 11
+    },
+    {
+     "next": 8,
+     "primitive": "select",
+     "view": 10
+    },
+    {
+     "next": 10,
+     "primitive": "click",
+     "view": 8
+    },
+    {
+     "next": 8,
+     "primitive": "select",
+     "view": 10
+    },
+    {
+     "next": 7,
+     "primitive": "fill",
+     "view": 8
+    },
+    {
+     "next": 9,
+     "primitive": "submit",
+     "view": 7
+    },
+    {
+     "next": 7,
+     "primitive": "fill",
+     "view": 9
+    },
+    {
+     "next": 6,
+     "primitive": "type",
+     "view": 7
+    },
+    {
+     "next": 4,
+     "primitive": "type",
+     "view": 6
+    },
+    {
+     "next": 2,
+     "primitive": "type",
+     "view": 4
+    },
+    {
+     "next": 3,
+     "primitive": "hover",
+     "view": 2
+    },
+    {
+     "next": 2,
+     "primitive": "select",
+     "view": 3
+    },
+    {
+     "next": 4,
+     "primitive": "hover",
+     "view": 2
+    },
+    {
+     "next": 2,
+     "primitive": "select",
+     "view": 4
+    },
+    {
+     "next": 4,
+     "primitive": "hover",
+     "view": 2
+    },
+    {
+     "next": 2,
+     "primitive": "fill",
+     "view": 4
+    },
+    {
+     "next": 3,
+     "primitive": "submit",
+     "view": 2
+    },
+    {
+     "next": 4,
+     "primitive": "submit",
+     "view": 3
+    },
+    {
+     "next": 6,
+     "primitive": "click",
+     "view": 4
+    },
+    {
+     "next": 7,
+     "primitive": "click",
+     "view": 6
+    },
+    {
+     "next": 9,
+     "primitive": "hover",
+     "view": 7
+    },
+    {
+     "next": 11,
+     "primitive": "hover",
+     "view": 9
+    },
+    {
+     "next": 13,
+     "primitive": "click",
+     "view": 11
+    },
+    {
+     "next": 15,
+     "primitive": "hover",
+     "view": 13
+    },
+    {
+     "next": 14,
+     "primitive": "fill",
+     "view": 15
+    },
+    {
+     "next": 0,
+     "primitive": "submit",
+     "view": 14
+    },
+    {
+     "next": 2,
+     "primitive": "hover",
+     "view": 0
+    },
+    {
+     "next": 3,
+     "primitive": "hover",
+     "view": 2
+    },
+    {
+     "next": 2,
+     "primitive": "fill",
+     "view": 3
+    },
+    {
+     "next": 3,
+     "primitive": "hover",
+     "view": 2
+    },
+    {
+     "next": 2,
+     "primitive": "select",
+     "view": 3
+    },
+    {
+     "next": 4,
+     "primitive": "submit",
+     "view": 2
+    },
+    {
+     "next": 5,
+     "primitive": "hover",
+     "view": 4
+    },
+    {
+     "next": 6,
+     "primitive": "hover",
+     "view": 5
+    },
+    {
+     "next": 7,
+     "primitive": "submit",
+     "view": 6
+    },
+    {
+     "next": 6,
+     "primitive": "select",
+     "view": 7
+    },
+    {
+     "next": 8,
+     "primitive": "submit",
+     "view": 6
+    },
+    {
+     "next": 10,
+     "primitive": "submit",
+     "view": 8
+    },
+    {
+     "next": 9,
+     "primitive": "select",
+     "view": 10
+    },
+    {
+     "next": 7,
+     "primitive": "type",
+     "view": 9
+    }
+   ],
+   "regime": "A",
+   "sid": "sess-00015",
+   "steps": 41
+  },
+  {
+   "index": 16,
+   "log": [
+    {
+     "next": 6,
+     "primitive": "select",
+     "view": 8
+    },
+    {
+     "next": 4,
+     "primitive": "type",
+     "view": 6
+    },
+    {
+     "next": 2,
+     "primitive": "type",
+     "view": 4
+    },
+    {
+     "next": 4,
+     "primitive": "hover",
+     "view": 2
+    },
+    {
+     "next": 2,
+     "primitive": "select",
+     "view": 4
+    },
+    {
+     "next": 5,
+     "primitive": "submit",
+     "view": 2
+    },
+    {
+     "next": 8,
+     "primitive": "hover",
+     "view": 5
+    },
+    {
+     "next": 6,
+     "primitive": "fill",
+     "view": 8
+    },
+    {
+     "next": 4,
+     "primitive": "type",
+     "view": 6
+    },
+    {
+     "next": 2,
+     "primitive": "type",
+     "view": 4
+    },
+    {
+     "next": 5,
+     "primitive": "hover",
+     "view": 2
+    },
+    {
+     "next": 3,
+     "primitive": "fill",
+     "view": 5
+    },
+    {
+     "next": 5,
+     "primitive": "submit",
+     "view": 3
+    },
+    {
+     "next": 3,
+     "primitive": "select",
+     "view": 5
+    },
+    {
+     "next": 1,
+     "primitive": "fill",
+     "view": 3
+    },
+    {
+     "next": 15,
+     "primitive": "fill",
+     "view": 1
+    },
+    {
+     "next": 12,
+     "primitive": "select",
+     "view": 15
+    },
+    {
+     "next": 10,
+     "primitive": "fill",
+     "view": 12
+    },
+    {
+     "next": 12,
+     "primitive": "click",
+     "view": 10
+    },
+    {
+     "next": 15,
+     "primitive": "submit",
+     "view": 12
+    },
+    {
+     "next": 1,
+     "primitive": "submit",
+     "view": 15
+    },
+    {
+     "next": 14,
+     "primitive": "select",
+     "view": 1
+    },
+    {
+     "next": 1,
+     "primitive": "click",
+     "view": 14
+    },
+    {
+     "next": 3,
+     "primitive": "submit",
+     "view": 1
+    },
+    {
+     "next": 1,
+     "primitive": "fill",
+     "view": 3
+    },
+    {
+     "next": 14,
+     "primitive": "select",
+     "view": 1
+    },
+    {
+     "next": 11,
+     "primitive": "fill",
+     "view": 14
+    },
+    {
+     "next": 9,
+     "primitive": "type",
+     "view": 11
+    },
+    {
+     "next": 7,
+     "primitive": "type",
+     "view": 9
+    },
+    {
+     "next": 10,
+     "primitive": "click",
+     "view": 7
+    },
+    {
+     "next": 8,
+     "primitive": "type",
+     "view": 10
+    },
+    {
+     "next": 5,
+     "primitive": "fill",
+     "view": 8
+    },
+    {
+     "next": 2,
+     "primitive": "fill",
+     "view": 5
+    },
+    {
+     "next": 5,
+     "primitive": "click",
+     "view": 2
+    },
+    {
+     "next": 2,
+     "primitive": "fill",
+     "view": 5
+    },
+    {
+     "next": 0,
+     "primitive": "select",
+     "view": 2
+    },
+    {
+     "next": 14,
+     "primitive": "fill",
+     "view": 0
+    },
+    {
+     "next": 0,
+     "primitive": "click",
+     "view": 14
+    },
+    {
+     "next": 13,
+     "primitive": "fill",
+     "view": 0
+    },
+    {
+     "next": 10,
+     "primitive": "type",
+     "view": 13
+    }
+   ],
+   "regime": "B",
+   "sid": "sess-00016",
+   "steps": 40
+  },
+  {
+   "index": 17,
+   "log": [
+    {
+     "next": 1,
+     "primitive": "select",
+     "view": 2
+    },
+    {
+     "next": 2,
+     "primitive": "click",
+     "view": 1
+    },
+    {
+     "next": 0,
+     "primitive": "type",
+     "view": 2
+    },
+    {
+     "next": 15,
+     "primitive": "type",
+     "view": 0
+    },
+    {
+     "next": 0,
+     "primitive": "submit",
+     "view": 15
+    },
+    {
+     "next": 15,
+     "primitive": "select",
+     "view": 0
+    },
+    {
+     "next": 1,
+     "primitive": "hover",
+     "view": 15
+    },
+    {
+     "next": 15,
+     "primitive": "fill",
+     "view": 1
+    },
+    {
+     "next": 1,
+     "primitive": "hover",
+     "view": 15
+    },
+    {
+     "next": 0,
+     "primitive": "select",
+     "view": 1
+    },
+    {
+     "next": 14,
+     "primitive": "type",
+     "view": 0
+    },
+    {
+     "next": 13,
+     "primitive": "select",
+     "view": 14
+    },
+    {
+     "next": 12,
+     "primitive": "type",
+     "view": 13
+    },
+    {
+     "next": 10,
+     "primitive": "type",
+     "view": 12
+    },
+    {
+     "next": 12,
+     "primitive": "click",
+     "view": 10
+    },
+    {
+     "next": 14,
+     "primitive": "submit",
+     "view": 12
+    },
+    {
+     "next": 13,
+     "primitive": "select",
+     "view": 14
+    },
+    {
+     "next": 12,
+     "primitive": "fill",
+     "view": 13
+    },
+    {
+     "next": 13,
+     "primitive": "click",
+     "view": 12
+    },
+    {
+     "next": 14,
+     "primitive": "click",
+     "view": 13
+    },
+    {
+     "next": 13,
+     "primitive": "fill",
+     "view": 14
+    },
+    {
+     "next": 11,
+     "primitive": "fill",
+     "view": 13
+    },
+    {
+     "next": 13,
+     "primitive": "submit",
+     "view": 11
+    },
+    {
+     "next": 14,
+     "primitive": "submit",
+     "view": 13
+    },
+    {
+     "next": 15,
+     "primitive": "click",
+     "view": 14
+    },
+    {
+     "next": 14,
+     "primitive": "fill",
+     "view": 15
+    },
+    {
+     "next": 15,
+     "primitive": "click",
+     "view": 14
+    },
+    {
+     "next": 13,
+     "primitive": "fill",
+     "view": 15
+    },
+    {
+     "next": 14,
+     "primitive": "hover",
+     "view": 13
+    },
+    {
+     "next": 15,
+     "primitive": "hover",
+     "view": 14
+    },
+    {
+     "next": 13,
+     "primitive": "select",
+     "view": 15
+    },
+    {
+     "next": 11,
+     "primitive": "fill",
+     "view": 13
+    },
+    {
+     "next": 9,
+     "primitive": "select",
+     "view": 11
+    },
+    {
+     "next": 7,
+     "primitive": "select",
+     "view": 9
+    },
+    {
+     "next": 5,
+     "primitive": "type",
+     "view": 7
+    },
+    {
+     "next": 7,
+     "primitive": "hover",
+     "view": 5
+    },
+    {
+     "next": 5,
+     "primitive": "select",
+     "view": 7
+    },
+    {
+     "next": 4,
+     "primitive": "fill",
+     "view": 5
+    },
+    {
+     "next": 6,
+     "primitive": "hover",
+     "view": 4
+    },
+    {
+     "next": 7,
+     "primitive": "submit",
+     "view": 6
+    },
+    {
+     "next": 6,
+     "primitive": "fill",
+     "view": 7
+    }
+   ],
+   "regime": "A",
+   "sid": "sess-00017",
+   "steps": 41
+  },
+  {
+   "index": 18,
+   "log": [
+    {
+     "next": 14,
+     "primitive": "click",
+     "view": 13
+    },
+    {
+     "next": 12,
+     "primitive": "type",
+     "view": 14
+    },
+    {
+     "next": 10,
+     "primitive": "type",
+     "view": 12
+    },
+    {
+     "next": 12,
+     "primitive": "click",
+     "view": 10
+    },
+    {
+     "next": 10,
+     "primitive": "select",
+     "view": 12
+    },
+    {
+     "next": 11,
+     "primitive": "click",
+     "view": 10
+    },
+    {
+     "next": 10,
+     "primitive": "select",
+     "view": 11
+    },
+    {
+     "next": 11,
+     "primitive": "click",
+     "view": 10
+    },
+    {
+     "next": 12,
+     "primitive": "hover",
+     "view": 11
+    },
+    {
+     "next": 10,
+     "primitive": "fill",
+     "view": 12
+    },
+    {
+     "next": 8,
+     "primitive": "select",
+     "view": 10
+    },
+    {
+     "next": 9,
+     "primitive": "hover",
+     "view": 8
+    },
+    {
+     "next": 7,
+     "primitive": "type",
+     "view": 9
+    },
+    {
+     "next": 5,
+     "primitive": "select",
+     "view": 7
+    },
+    {
+     "next": 6,
+     "primitive": "submit",
+     "view": 5
+    },
+    {
+     "next": 4,
+     "primitive": "select",
+     "view": 6
+    },
+    {
+     "next": 2,
+     "primitive": "select",
+     "view": 4
+    },
+    {
+     "next": 3,
+     "primitive": "hover",
+     "view": 2
+    },
+    {
+     "next": 2,
+     "primitive": "select",
+     "view": 3
+    },
+    {
+     "next": 1,
+     "primitive": "type",
+     "view": 2
+    },
+    {
+     "next": 15,
+     "primitive": "select",
+     "view": 1
+    },
+    {
+     "next": 13,
+     "primitive": "select",
+     "view": 15
+    },
+    {
+     "next": 14,
+     "primitive": "hover",
+     "view": 13
+    },
+    {
+     "next": 12,
+     "primitive": "fill",
+     "view": 14
+    },
+    {
+     "next": 13,
+     "primitive": "submit",
+     "view": 12
+    },
+    {
+     "next": 11,
+     "primitive": "select",
+     "view": 13
+    },
+    {
+     "next": 13,
+     "primitive": "hover",
+     "view": 11
+    },
+    {
+     "next": 12,
+     "primitive": "fill",
+     "view": 13
+    },
+    {
+     "next": 14,
+     "primitive": "submit",
+     "view": 12
+    },
+    {
+     "next": 0,
+     "primitive": "submit",
+     "view": 14
+    },
+    {
+     "next": 1,
+     "primitive": "click",
+     "view": 0
+    },
+    {
+     "next": 0,
+     "primitive": "type",
+     "view": 1
+    },
+    {
+     "next": 1,
+     "primitive": "click",
+     "view": 0
+    },
+    {
+     "next": 2,
+     "primitive": "click",
+     "view": 1
+    },
+    {
+     "next": 0,
+     "primitive": "type",
+     "view": 2
+    },
+    {
+     "next": 15,
+     "primitive": "fill",
+     "view": 0
+    },
+    {
+     "next": 1,
+     "primitive": "hover",
+     "view": 15
+    },
+    {
+     "next": 0,
+     "primitive": "select",
+     "view": 1
+    },
+    {
+     "next": 1,
+     "primitive": "hover",
+     "view": 0
+    },
+    {
+     "next": 3,
+     "primitive": "click",
+     "view": 1
+    },
+    {
+     "next": 1,
+     "primitive": "select",
+     "view": 3
+    }
+   ],
+   "regime": "A",
+   "sid": "sess-00018",
+   "steps": 41
+  },
+  {
+   "index": 21,
+   "log": [
+    {
+     "next": 8,
+     "primitive": "submit",
+     "view": 7
+    },
+    {
+     "next": 7,
+     "primitive": "fill",
+     "view": 8
+    },
+    {
+     "next": 5,
+     "primitive": "type",
+     "view": 7
+    },
+    {
+     "next": 3,
+     "primitive": "type",
+     "view": 5
+    },
+    {
+     "next": 5,
+     "primitive": "hover",
+     "view": 3
+    },
+    {
+     "next": 3,
+     "primitive": "select",
+     "view": 5
+    },
+    {
+     "next": 2,
+     "primitive": "fill",
+     "view": 3
+    },
+    {
+     "next": 4,
+     "primitive": "hover",
+     "view": 2
+    },
+    {
+     "next": 6,
+     "primitive": "click",
+     "view": 4
+    },
+    {
+     "next": 7,
+     "primitive": "hover",
+     "view": 6
+    },
+    {
+     "next": 5,
+     "primitive": "fill",
+     "view": 7
+    },
+    {
+     "next": 4,
+     "primitive": "type",
+     "view": 5
+    },
+    {
+     "next": 5,
+     "primitive": "click",
+     "view": 4
+    },
+    {
+     "next": 4,
+     "primitive": "select",
+     "view": 5
+    },
+    {
+     "next": 2,
+     "primitive": "type",
+     "view": 4
+    },
+    {
+     "next": 0,
+     "primitive": "type",
+     "view": 2
+    },
+    {
+     "next": 2,
+     "primitive": "hover",
+     "view": 0
+    },
+    {
+     "next": 4,
+     "primitive": "click",
+     "view": 2
+    },
+    {
+     "next": 5,
+     "primitive": "submit",
+     "view": 4
+    },
+    {
+     "next": 4,
+     "primitive": "type",
+     "view": 5
+    },
+    {
+     "next": 2,
+     "primitive": "type",
+     "view": 4
+    },
+    {
+     "next": 1,
+     "primitive": "fill",
+     "view": 2
+    },
+    {
+     "next": 3,
+     "primitive": "click",
+     "view": 1
+    },
+    {
+     "next": 4,
+     "primitive": "click",
+     "view": 3
+    },
+    {
+     "next": 5,
+     "primitive": "hover",
+     "view": 4
+    },
+    {
+     "next": 3,
+     "primitive": "fill",
+     "view": 5
+    },
+    {
+     "next": 5,
+     "primitive": "click",
+     "view": 3
+    },
+    {
+     "next": 4,
+     "primitive": "select",
+     "view": 5
+    },
+    {
+     "next": 2,
+     "primitive": "fill",
+     "view": 4
+    },
+    {
+     "next": 4,
+     "primitive": "click",
+     "view": 2
+    },
+    {
+     "next": 5,
+     "primitive": "click",
+     "view": 4
+    },
+    {
+     "next": 7,
+     "primitive": "hover",
+     "view": 5
+    },
+    {
+     "next": 5,
+     "primitive": "select",
+     "view": 7
+    },
+    {
+     "next": 7,
+     "primitive": "hover",
+     "view": 5
+    },
+    {
+     "next": 5,
+     "primitive": "select",
+     "view": 7
+    },
+    {
+     "next": 7,
+     "primitive": "hover",
+     "view": 5
+    },
+    {
+     "next": 8,
+     "primitive": "submit",
+     "view": 7
+    },
+    {
+     "next": 7,
+     "primitive": "type",
+     "view": 8
+    },
+    {
+     "next": 9,
+     "primitive": "hover",
+     "view": 7
+    },
+    {
+     "next": 10,
+     "primitive": "submit",
+     "view": 9
+    },
+    {
+     "next": 12,
+     "primitive": "hover",
+     "view": 10
+    }
+   ],
+   "regime": "A",
+   "sid": "sess-00021",
+   "steps": 41
+  },
+  {
+   "index": 24,
+   "log": [
+    {
+     "next": 11,
+     "primitive": "click",
+     "view": 8
+    },
+    {
+     "next": 13,
+     "primitive": "submit",
+     "view": 11
+    },
+    {
+     "next": 10,
+     "primitive": "fill",
+     "view": 13
+    },
+    {
+     "next": 7,
+     "primitive": "type",
+     "view": 10
+    },
+    {
+     "next": 4,
+     "primitive": "select",
+     "view": 7
+    },
+    {
+     "next": 1,
+     "primitive": "select",
+     "view": 4
+    },
+    {
+     "next": 15,
+     "primitive": "fill",
+     "view": 1
+    },
+    {
+     "next": 2,
+     "primitive": "click",
+     "view": 15
+    },
+    {
+     "next": 5,
+     "primitive": "hover",
+     "view": 2
+    },
+    {
+     "next": 3,
+     "primitive": "type",
+     "view": 5
+    },
+    {
+     "next": 6,
+     "primitive": "hover",
+     "view": 3
+    },
+    {
+     "next": 8,
+     "primitive": "click",
+     "view": 6
+    },
+    {
+     "next": 5,
+     "primitive": "type",
+     "view": 8
+    },
+    {
+     "next": 3,
+     "primitive": "select",
+     "view": 5
+    },
+    {
+     "next": 5,
+     "primitive": "submit",
+     "view": 3
+    },
+    {
+     "next": 2,
+     "primitive": "select",
+     "view": 5
+    },
+    {
+     "next": 15,
+     "primitive": "type",
+     "view": 2
+    },
+    {
+     "next": 2,
+     "primitive": "click",
+     "view": 15
+    },
+    {
+     "next": 5,
+     "primitive": "click",
+     "view": 2
+    },
+    {
+     "next": 2,
+     "primitive": "fill",
+     "view": 5
+    },
+    {
+     "next": 15,
+     "primitive": "type",
+     "view": 2
+    },
+    {
+     "next": 2,
+     "primitive": "click",
+     "view": 15
+    },
+    {
+     "next": 15,
+     "primitive": "fill",
+     "view": 2
+    },
+    {
+     "next": 1,
+     "primitive": "click",
+     "view": 15
+    },
+    {
+     "next": 15,
+     "primitive": "fill",
+     "view": 1
+    },
+    {
+     "next": 13,
+     "primitive": "fill",
+     "view": 15
+    },
+    {
+     "next": 15,
+     "primitive": "click",
+     "view": 13
+    },
+    {
+     "next": 12,
+     "primitive": "select",
+     "view": 15
+    },
+    {
+     "next": 10,
+     "primitive": "type",
+     "view": 12
+    },
+    {
+     "next": 8,
+     "primitive": "type",
+     "view": 10
+    },
+    {
+     "next": 10,
+     "primitive": "click",
+     "view": 8
+    },
+    {
+     "next": 12,
+     "primitive": "submit",
+     "view": 10
+    },
+    {
+     "next": 15,
+     "primitive": "submit",
+     "view": 12
+    },
+    {
+     "next": 2,
+     "primitive": "hover",
+     "view": 15
+    },
+    {
+     "next": 5,
+     "primitive": "click",
+     "view": 2
+    },
+    {
+     "next": 3,
+     "primitive": "type",
+     "view": 5
+    },
+    {
+     "next": 1,
+     "primitive": "select",
+     "view": 3
+    },
+    {
+     "next": 15,
+     "primitive": "select",
+     "view": 1
+    },
+    {
+     "next": 1,
+     "primitive": "submit",
+     "view": 15
+    },
+    {
+     "next": 4,
+     "primitive": "click",
+     "view": 1
+    },
+    {
+     "next": 1,
+     "primitive": "type",
+     "view": 4
+    }
+   ],
+   "regime": "B",
+   "sid": "sess-00024",
+   "steps": 41
+  },
+  {
+   "index": 25,
+   "log": [
+    {
+     "next": 6,
+     "primitive": "submit",
+     "view": 5
+    },
+    {
+     "next": 5,
+     "primitive": "fill",
+     "view": 6
+    },
+    {
+     "next": 4,
+     "primitive": "type",
+     "view": 5
+    },
+    {
+     "next": 5,
+     "primitive": "click",
+     "view": 4
+    },
+    {
+     "next": 6,
+     "primitive": "click",
+     "view": 5
+    },
+    {
+     "next": 8,
+     "primitive": "click",
+     "view": 6
+    },
+    {
+     "next": 9,
+     "primitive": "click",
+     "view": 8
+    },
+    {
+     "next": 11,
+     "primitive": "click",
+     "view": 9
+    },
+    {
+     "next": 10,
+     "primitive": "select",
+     "view": 11
+    },
+    {
+     "next": 9,
+     "primitive": "fill",
+     "view": 10
+    },
+    {
+     "next": 7,
+     "primitive": "type",
+     "view": 9
+    },
+    {
+     "next": 6,
+     "primitive": "select",
+     "view": 7
+    },
+    {
+     "next": 4,
+     "primitive": "type",
+     "view": 6
+    },
+    {
+     "next": 5,
+     "primitive": "submit",
+     "view": 4
+    },
+    {
+     "next": 7,
+     "primitive": "submit",
+     "view": 5
+    },
+    {
+     "next": 5,
+     "primitive": "type",
+     "view": 7
+    },
+    {
+     "next": 7,
+     "primitive": "submit",
+     "view": 5
+    },
+    {
+     "next": 9,
+     "primitive": "click",
+     "view": 7
+    },
+    {
+     "next": 8,
+     "primitive": "select",
+     "view": 9
+    },
+    {
+     "next": 6,
+     "primitive": "select",
+     "view": 8
+    },
+    {
+     "next": 4,
+     "primitive": "type",
+     "view": 6
+    },
+    {
+     "next": 2,
+     "primitive": "type",
+     "view": 4
+    },
+    {
+     "next": 3,
+     "primitive": "click",
+     "view": 2
+    },
+    {
+     "next": 1,
+     "primitive": "select",
+     "view": 3
+    },
+    {
+     "next": 15,
+     "primitive": "type",
+     "view": 1
+    },
+    {
+     "next": 14,
+     "primitive": "select",
+     "view": 15
+    },
+    {
+     "next": 13,
+     "primitive": "select",
+     "view": 14
+    },
+    {
+     "next": 12,
+     "primitive": "type",
+     "view": 13
+    },
+    {
+     "next": 13,
+     "primitive": "hover",
+     "view": 12
+    },
+    {
+     "next": 15,
+     "primitive": "click",
+     "view": 13
+    },
+    {
+     "next": 0,
+     "primitive": "hover",
+     "view": 15
+    },
+    {
+     "next": 2,
+     "primitive": "submit",
+     "view": 0
+    },
+    {
+     "next": 3,
+     "primitive": "click",
+     "view": 2
+    },
+    {
+     "next": 5,
+     "primitive": "click",
+     "view": 3
+    },
+    {
+     "next": 3,
+     "primitive": "select",
+     "view": 5
+    },
+    {
+     "next": 2,
+     "primitive": "fill",
+     "view": 3
+    },
+    {
+     "next": 1,
+     "primitive": "fill",
+     "view": 2
+    },
+    {
+     "next": 15,
+     "primitive": "select",
+     "view": 1
+    },
+    {
+     "next": 13,
+     "primitive": "fill",
+     "view": 15
+    },
+    {
+     "next": 11,
+     "primitive": "fill",
+     "view": 13
+    }
+   ],
+   "regime": "A",
+   "sid": "sess-00025",
+   "steps": 40
+  },
+  {
+   "index": 26,
+   "log": [
+    {
+     "next": 3,
+     "primitive": "click",
+     "view": 2
+    },
+    {
+     "next": 2,
+     "primitive": "type",
+     "view": 3
+    },
+    {
+     "next": 4,
+     "primitive": "hover",
+     "view": 2
+    },
+    {
+     "next": 6,
+     "primitive": "click",
+     "view": 4
+    },
+    {
+     "next": 4,
+     "primitive": "select",
+     "view": 6
+    },
+    {
+     "next": 3,
+     "primitive": "select",
+     "view": 4
+    },
+    {
+     "next": 4,
+     "primitive": "click",
+     "view": 3
+    },
+    {
+     "next": 5,
+     "primitive": "submit",
+     "view": 4
+    },
+    {
+     "next": 6,
+     "primitive": "click",
+     "view": 5
+    },
+    {
+     "next": 8,
+     "primitive": "submit",
+     "view": 6
+    },
+    {
+     "next": 10,
+     "primitive": "click",
+     "view": 8
+    },
+    {
+     "next": 8,
+     "primitive": "select",
+     "view": 10
+    },
+    {
+     "next": 7,
+     "primitive": "fill",
+     "view": 8
+    },
+    {
+     "next": 6,
+     "primitive": "type",
+     "view": 7
+    },
+    {
+     "next": 5,
+     "primitive": "select",
+     "view": 6
+    },
+    {
+     "next": 3,
+     "primitive": "fill",
+     "view": 5
+    },
+    {
+     "next": 2,
+     "primitive": "fill",
+     "view": 3
+    },
+    {
+     "next": 4,
+     "primitive": "click",
+     "view": 2
+    },
+    {
+     "next": 5,
+     "primitive": "click",
+     "view": 4
+    },
+    {
+     "next": 4,
+     "primitive": "fill",
+     "view": 5
+    },
+    {
+     "next": 6,
+     "primitive": "click",
+     "view": 4
+    },
+    {
+     "next": 7,
+     "primitive": "click",
+     "view": 6
+    },
+    {
+     "next": 9,
+     "primitive": "submit",
+     "view": 7
+    },
+    {
+     "next": 7,
+     "primitive": "type",
+     "view": 9
+    },
+    {
+     "next": 9,
+     "primitive": "hover",
+     "view": 7
+    },
+    {
+     "next": 8,
+     "primitive": "select",
+     "view": 9
+    },
+    {
+     "next": 10,
+     "primitive": "hover",
+     "view": 8
+    },
+    {
+     "next": 12,
+     "primitive": "submit",
+     "view": 10
+    },
+    {
+     "next": 14,
+     "primitive": "hover",
+     "view": 12
+    },
+    {
+     "next": 0,
+     "primitive": "click",
+     "view": 14
+    },
+    {
+     "next": 14,
+     "primitive": "select",
+     "view": 0
+    },
+    {
+     "next": 0,
+     "primitive": "submit",
+     "view": 14
+    },
+    {
+     "next": 2,
+     "primitive": "hover",
+     "view": 0
+    },
+    {
+     "next": 0,
+     "primitive": "type",
+     "view": 2
+    },
+    {
+     "next": 15,
+     "primitive": "fill",
+     "view": 0
+    },
+    {
+     "next": 0,
+     "primitive": "hover",
+     "view": 15
+    },
+    {
+     "next": 2,
+     "primitive": "hover",
+     "view": 0
+    },
+    {
+     "next": 1,
+     "primitive": "fill",
+     "view": 2
+    },
+    {
+     "next": 15,
+     "primitive": "select",
+     "view": 1
+    },
+    {
+     "next": 0,
+     "primitive": "submit",
+     "view": 15
+    },
+    {
+     "next": 14,
+     "primitive": "fill",
+     "view": 0
+    }
+   ],
+   "regime": "A",
+   "sid": "sess-00026",
+   "steps": 41
+  },
+  {
+   "index": 27,
+   "log": [
+    {
+     "next": 13,
+     "primitive": "type",
+     "view": 14
+    },
+    {
+     "next": 11,
+     "primitive": "fill",
+     "view": 13
+    },
+    {
+     "next": 13,
+     "primitive": "hover",
+     "view": 11
+    },
+    {
+     "next": 14,
+     "primitive": "click",
+     "view": 13
+    },
+    {
+     "next": 0,
+     "primitive": "submit",
+     "view": 14
+    },
+    {
+     "next": 15,
+     "primitive": "type",
+     "view": 0
+    },
+    {
+     "next": 13,
+     "primitive": "fill",
+     "view": 15
+    },
+    {
+     "next": 14,
+     "primitive": "submit",
+     "view": 13
+    },
+    {
+     "next": 15,
+     "primitive": "hover",
+     "view": 14
+    },
+    {
+     "next": 14,
+     "primitive": "fill",
+     "view": 15
+    },
+    {
+     "next": 12,
+     "primitive": "fill",
+     "view": 14
+    },
+    {
+     "next": 11,
+     "primitive": "select",
+     "view": 12
+    },
+    {
+     "next": 12,
+     "primitive": "submit",
+     "view": 11
+    },
+    {
+     "next": 11,
+     "primitive": "fill",
+     "view": 12
+    },
+    {
+     "next": 12,
+     "primitive": "hover",
+     "view": 11
+    },
+    {
+     "next": 11,
+     "primitive": "type",
+     "view": 12
+    },
+    {
+     "next": 12,
+     "primitive": "click",
+     "view": 11
+    },
+    {
+     "next": 13,
+     "primitive": "click",
+     "view": 12
+    },
+    {
+     "next": 15,
+     "primitive": "hover",
+     "view": 13
+    },
+    {
+     "next": 13,
+     "primitive": "fill",
+     "view": 15
+    },
+    {
+     "next": 12,
+     "primitive": "select",
+     "view": 13
+    },
+    {
+     "next": 13,
+     "primitive": "hover",
+     "view": 12
+    },
+    {
+     "next": 15,
+     "primitive": "hover",
+     "view": 13
+    },
+    {
+     "next": 14,
+     "primitive": "type",
+     "view": 15
+    },
+    {
+     "next": 15,
+     "primitive": "hover",
+     "view": 14
+    },
+    {
+     "next": 0,
+     "primitive": "click",
+     "view": 15
+    },
+    {
+     "next": 1,
+     "primitive": "click",
+     "view": 0
+    },
+    {
+     "next": 0,
+     "primitive": "type",
+     "view": 1
+    },
+    {
+     "next": 1,
+     "primitive": "click",
+     "view": 0
+    },
+    {
+     "next": 0,
+     "primitive": "type",
+     "view": 1
+    },
+    {
+     "next": 1,
+     "primitive": "submit",
+     "view": 0
+    },
+    {
+     "next": 3,
+     "primitive": "click",
+     "view": 1
+    },
+    {
+     "next": 5,
+     "primitive": "submit",
+     "view": 3
+    },
+    {
+     "next": 4,
+     "primitive": "fill",
+     "view": 5
+    },
+    {
+     "next": 6,
+     "primitive": "hover",
+     "view": 4
+    },
+    {
+     "next": 4,
+     "primitive": "select",
+     "view": 6
+    },
+    {
+     "next": 3,
+     "primitive": "fill",
+     "view": 4
+    },
+    {
+     "next": 5,
+     "primitive": "hover",
+     "view": 3
+    },
+    {
+     "next": 3,
+     "primitive": "fill",
+     "view": 5
+    },
+    {
+     "next": 2,
+     "primitive": "type",
+     "view": 3
+    },
+    {
+     "next": 3,
+     "primitive": "hover",
+     "view": 2
+    }
+   ],
+   "regime": "A",
+   "sid": "sess-00027",
+   "steps": 41
+  },
+  {
+   "index": 28,
+   "log": [
+    {
+     "next": 14,
+     "primitive": "click",
+     "view": 12
+    },
+    {
+     "next": 1,
+     "primitive": "hover",
+     "view": 14
+    },
+    {
+     "next": 15,
+     "primitive": "type",
+     "view": 1
+    },
+    {
+     "next": 2,
+     "primitive": "submit",
+     "view": 15
+    },
+    {
+     "next": 0,
+     "primitive": "type",
+     "view": 2
+    },
+    {
+     "next": 13,
+     "primitive": "fill",
+     "view": 0
+    },
+    {
+     "next": 11,
+     "primitive": "fill",
+     "view": 13
+    },
+    {
+     "next": 14,
+     "primitive": "submit",
+     "view": 11
+    },
+    {
+     "next": 12,
+     "primitive": "type",
+     "view": 14
+    },
+    {
+     "next": 14,
+     "primitive": "click",
+     "view": 12
+    },
+    {
+     "next": 1,
+     "primitive": "submit",
+     "view": 14
+    },
+    {
+     "next": 4,
+     "primitive": "hover",
+     "view": 1
+    },
+    {
+     "next": 6,
+     "primitive": "hover",
+     "view": 4
+    },
+    {
+     "next": 9,
+     "primitive": "hover",
+     "view": 6
+    },
+    {
+     "next": 11,
+     "primitive": "click",
+     "view": 9
+    },
+    {
+     "next": 13,
+     "primitive": "submit",
+     "view": 11
+    },
+    {
+     "next": 0,
+     "primitive": "click",
+     "view": 13
+    },
+    {
+     "next": 14,
+     "primitive": "fill",
+     "view": 0
+    },
+    {
+     "next": 0,
+     "primitive": "hover",
+     "view": 14
+    },
+    {
+     "next": 14,
+     "primitive": "fill",
+     "view": 0
+    },
+    {
+     "next": 11,
+     "primitive": "fill",
+     "view": 14
+    },
+    {
+     "next": 9,
+     "primitive": "select",
+     "view": 11
+    },
+    {
+     "next": 6,
+     "primitive": "fill",
+     "view": 9
+    },
+    {
+     "next": 4,
+     "primitive": "fill",
+     "view": 6
+    },
+    {
+     "next": 2,
+     "primitive": "fill",
+     "view": 4
+    },
+    {
+     "next": 0,
+     "primitive": "fill",
+     "view": 2
+    },
+    {
+     "next": 13,
+     "primitive": "fill",
+     "view": 0
+    },
+    {
+     "next": 15,
+     "primitive": "submit",
+     "view": 13
+    },
+    {
+     "next": 2,
+     "primitive": "submit",
+     "view": 15
+    },
+    {
+     "next": 0,
+     "primitive": "select",
+     "view": 2
+    },
+    {
+     "next": 2,
+     "primitive": "hover",
+     "view": 0
+    },
+    {
+     "next": 0,
+     "primitive": "fill",
+     "view": 2
+    },
+    {
+     "next": 3,
+     "primitive": "submit",
+     "view": 0
+    },
+    {
+     "next": 5,
+     "primitive": "hover",
+     "view": 3
+    },
+    {
+     "next": 3,
+     "primitive": "fill",
+     "view": 5
+    },
+    {
+     "next": 1,
+     "primitive": "fill",
+     "view": 3
+    },
+    {
+     "next": 15,
+     "primitive": "fill",
+     "view": 1
+    },
+    {
+     "next": 1,
+     "primitive": "hover",
+     "view": 15
+    },
+    {
+     "next": 3,
+     "primitive": "hover",
+     "view": 1
+    },
+    {
+     "next": 1,
+     "primitive": "type",
+     "view": 3
+    },
+    {
+     "next": 15,
+     "primitive": "fill",
+     "view": 1
+    }
+   ],
+   "regime": "B",
+   "sid": "sess-00028",
+   "steps": 41
+  },
+  {
+   "index": 29,
+   "log": [
+    {
+     "next": 8,
+     "primitive": "select",
+     "view": 10
+    },
+    {
+     "next": 6,
+     "primitive": "select",
+     "view": 8
+    },
+    {
+     "next": 5,
+     "primitive": "fill",
+     "view": 6
+    },
+    {
+     "next": 3,
+     "primitive": "type",
+     "view": 5
+    },
+    {
+     "next": 5,
+     "primitive": "click",
+     "view": 3
+    },
+    {
+     "next": 4,
+     "primitive": "type",
+     "view": 5
+    },
+    {
+     "next": 3,
+     "primitive": "type",
+     "view": 4
+    },
+    {
+     "next": 1,
+     "primitive": "fill",
+     "view": 3
+    },
+    {
+     "next": 15,
+     "primitive": "select",
+     "view": 1
+    },
+    {
+     "next": 13,
+     "primitive": "fill",
+     "view": 15
+    },
+    {
+     "next": 14,
+     "primitive": "submit",
+     "view": 13
+    },
+    {
+     "next": 12,
+     "primitive": "select",
+     "view": 14
+    },
+    {
+     "next": 14,
+     "primitive": "submit",
+     "view": 12
+    },
+    {
+     "next": 15,
+     "primitive": "submit",
+     "view": 14
+    },
+    {
+     "next": 14,
+     "primitive": "fill",
+     "view": 15
+    },
+    {
+     "next": 13,
+     "primitive": "type",
+     "view": 14
+    },
+    {
+     "next": 15,
+     "primitive": "hover",
+     "view": 13
+    },
+    {
+     "next": 1,
+     "primitive": "hover",
+     "view": 15
+    },
+    {
+     "next": 2,
+     "primitive": "click",
+     "view": 1
+    },
+    {
+     "next": 4,
+     "primitive": "click",
+     "view": 2
+    },
+    {
+     "next": 5,
+     "primitive": "click",
+     "view": 4
+    },
+    {
+     "next": 7,
+     "primitive": "click",
+     "view": 5
+    },
+    {
+     "next": 5,
+     "primitive": "type",
+     "view": 7
+    },
+    {
+     "next": 4,
+     "primitive": "type",
+     "view": 5
+    },
+    {
+     "next": 2,
+     "primitive": "select",
+     "view": 4
+    },
+    {
+     "next": 4,
+     "primitive": "click",
+     "view": 2
+    },
+    {
+     "next": 6,
+     "primitive": "click",
+     "view": 4
+    },
+    {
+     "next": 8,
+     "primitive": "submit",
+     "view": 6
+    },
+    {
+     "next": 7,
+     "primitive": "fill",
+     "view": 8
+    },
+    {
+     "next": 9,
+     "primitive": "hover",
+     "view": 7
+    },
+    {
+     "next": 10,
+     "primitive": "hover",
+     "view": 9
+    },
+    {
+     "next": 12,
+     "primitive": "submit",
+     "view": 10
+    },
+    {
+     "next": 11,
+     "primitive": "select",
+     "view": 12
+    },
+    {
+     "next": 12,
+     "primitive": "submit",
+     "view": 11
+    },
+    {
+     "next": 14,
+     "primitive": "click",
+     "view": 12
+    },
+    {
+     "next": 12,
+     "primitive": "select",
+     "view": 14
+    },
+    {
+     "next": 11,
+     "primitive": "type",
+     "view": 12
+    },
+    {
+     "next": 12,
+     "primitive": "click",
+     "view": 11
+    },
+    {
+     "next": 14,
+     "primitive": "hover",
+     "view": 12
+    },
+    {
+     "next": 12,
+     "primitive": "select",
+     "view": 14
+    }
+   ],
+   "regime": "A",
+   "sid": "sess-00029",
+   "steps": 40
+  },
+  {
+   "index": 30,
+   "log": [
+    {
+     "next": 4,
+     "primitive": "select",
+     "view": 6
+    },
+    {
+     "next": 1,
+     "primitive": "type",
+     "view": 4
+    },
+    {
+     "next": 3,
+     "primitive": "hover",
+     "view": 1
+    },
+    {
+     "next": 6,
+     "primitive": "hover",
+     "view": 3
+    },
+    {
+     "next": 3,
+     "primitive": "select",
+     "view": 6
+    },
+    {
+     "next": 6,
+     "primitive": "click",
+     "view": 3
+    },
+    {
+     "next": 9,
+     "primitive": "submit",
+     "view": 6
+    },
+    {
+     "next": 7,
+     "primitive": "fill",
+     "view": 9
+    },
+    {
+     "next": 4,
+     "primitive": "select",
+     "view": 7
+    },
+    {
+     "next": 6,
+     "primitive": "click",
+     "view": 4
+    },
+    {
+     "next": 3,
+     "primitive": "fill",
+     "view": 6
+    },
+    {
+     "next": 6,
+     "primitive": "hover",
+     "view": 3
+    },
+    {
+     "next": 3,
+     "primitive": "fill",
+     "view": 6
+    },
+    {
+     "next": 1,
+     "primitive": "type",
+     "view": 3
+    },
+    {
+     "next": 3,
+     "primitive": "click",
+     "view": 1
+    },
+    {
+     "next": 0,
+     "primitive": "type",
+     "view": 3
+    },
+    {
+     "next": 2,
+     "primitive": "hover",
+     "view": 0
+    },
+    {
+     "next": 0,
+     "primitive": "select",
+     "view": 2
+    },
+    {
+     "next": 2,
+     "primitive": "hover",
+     "view": 0
+    },
+    {
+     "next": 5,
+     "primitive": "submit",
+     "view": 2
+    },
+    {
+     "next": 3,
+     "primitive": "select",
+     "view": 5
+    },
+    {
+     "next": 0,
+     "primitive": "select",
+     "view": 3
+    },
+    {
+     "next": 2,
+     "primitive": "click",
+     "view": 0
+    },
+    {
+     "next": 15,
+     "primitive": "select",
+     "view": 2
+    },
+    {
+     "next": 13,
+     "primitive": "select",
+     "view": 15
+    },
+    {
+     "next": 15,
+     "primitive": "hover",
+     "view": 13
+    },
+    {
+     "next": 13,
+     "primitive": "type",
+     "view": 15
+    },
+    {
+     "next": 10,
+     "primitive": "fill",
+     "view": 13
+    },
+    {
+     "next": 13,
+     "primitive": "hover",
+     "view": 10
+    },
+    {
+     "next": 0,
+     "primitive": "click",
+     "view": 13
+    },
+    {
+     "next": 13,
+     "primitive": "select",
+     "view": 0
+    },
+    {
+     "next": 15,
+     "primitive": "submit",
+     "view": 13
+    },
+    {
+     "next": 12,
+     "primitive": "select",
+     "view": 15
+    },
+    {
+     "next": 9,
+     "primitive": "fill",
+     "view": 12
+    },
+    {
+     "next": 12,
+     "primitive": "hover",
+     "view": 9
+    },
+    {
+     "next": 14,
+     "primitive": "click",
+     "view": 12
+    },
+    {
+     "next": 11,
+     "primitive": "select",
+     "view": 14
+    },
+    {
+     "next": 14,
+     "primitive": "click",
+     "view": 11
+    },
+    {
+     "next": 1,
+     "primitive": "hover",
+     "view": 14
+    },
+    {
+     "next": 15,
+     "primitive": "type",
+     "view": 1
+    }
+   ],
+   "regime": "B",
+   "sid": "sess-00030",
+   "steps": 40
+  },
+  {
+   "index": 31,
+   "log": [
+    {
+     "next": 12,
+     "primitive": "type",
+     "view": 13
+    },
+    {
+     "next": 11,
+     "primitive": "type",
+     "view": 12
+    },
+    {
+     "next": 10,
+     "primitive": "type",
+     "view": 11
+    },
+    {
+     "next": 9,
+     "primitive": "fill",
+     "view": 10
+    },
+    {
+     "next": 11,
+     "primitive": "submit",
+     "view": 9
+    },
+    {
+     "next": 9,
+     "primitive": "type",
+     "view": 11
+    },
+    {
+     "next": 8,
+     "primitive": "select",
+     "view": 9
+    },
+    {
+     "next": 7,
+     "primitive": "type",
+     "view": 8
+    },
+    {
+     "next": 5,
+     "primitive": "fill",
+     "view": 7
+    },
+    {
+     "next": 6,
+     "primitive": "click",
+     "view": 5
+    },
+    {
+     "next": 5,
+     "primitive": "fill",
+     "view": 6
+    },
+    {
+     "next": 7,
+     "primitive": "hover",
+     "view": 5
+    },
+    {
+     "next": 6,
+     "primitive": "type",
+     "view": 7
+    },
+    {
+     "next": 8,
+     "primitive": "hover",
+     "view": 6
+    },
+    {
+     "next": 10,
+     "primitive": "submit",
+     "view": 8
+    },
+    {
+     "next": 11,
+     "primitive": "click",
+     "view": 10
+    },
+    {
+     "next": 10,
+     "primitive": "type",
+     "view": 11
+    },
+    {
+     "next": 8,
+     "primitive": "select",
+     "view": 10
+    },
+    {
+     "next": 9,
+     "primitive": "click",
+     "view": 8
+    },
+    {
+     "next": 10,
+     "primitive": "hover",
+     "view": 9
+    },
+    {
+     "next": 11,
+     "primitive": "hover",
+     "view": 10
+    },
+    {
+     "next": 13,
+     "primitive": "hover",
+     "view": 11
+    },
+    {
+     "next": 12,
+     "primitive": "type",
+     "view": 13
+    },
+    {
+     "next": 13,
+     "primitive": "click",
+     "view": 12
+    },
+    {
+     "next": 14,
+     "primitive": "submit",
+     "view": 13
+    },
+    {
+     "next": 15,
+     "primitive": "submit",
+     "view": 14
+    },
+    {
+     "next": 1,
+     "primitive": "submit",
+     "view": 15
+    },
+    {
+     "next": 0,
+     "primitive": "type",
+     "view": 1
+    },
+    {
+     "next": 15,
+     "primitive": "type",
+     "view": 0
+    },
+    {
+     "next": 1,
+     "primitive": "click",
+     "view": 15
+    },
+    {
+     "next": 0,
+     "primitive": "fill",
+     "view": 1
+    },
+    {
+     "next": 1,
+     "primitive": "submit",
+     "view": 0
+    },
+    {
+     "next": 3,
+     "primitive": "submit",
+     "view": 1
+    },
+    {
+     "next": 4,
+     "primitive": "submit",
+     "view": 3
+    },
+    {
+     "next": 5,
+     "primitive": "submit",
+     "view": 4
+    },
+    {
+     "next": 7,
+     "primitive": "hover",
+     "view": 5
+    },
+    {
+     "next": 6,
+     "primitive": "type",
+     "view": 7
+    },
+    {
+     "next": 7,
+     "primitive": "hover",
+     "view": 6
+    },
+    {
+     "next": 6,
+     "primitive": "fill",
+     "view": 7
+    },
+    {
+     "next": 5,
+     "primitive": "select",
+     "view": 6
+    },
+    {
+     "next": 7,
+     "primitive": "hover",
+     "view": 5
+    }
+   ],
+   "regime": "A",
+   "sid": "sess-00031",
+   "steps": 41
+  },
+  {
+   "index": 32,
+   "log": [
+    {
+     "next": 10,
+     "primitive": "click",
+     "view": 8
+    },
+    {
+     "next": 13,
+     "primitive": "click",
+     "view": 10
+    },
+    {
+     "next": 0,
+     "primitive": "submit",
+     "view": 13
+    },
+    {
+     "next": 2,
+     "primitive": "submit",
+     "view": 0
+    },
+    {
+     "next": 0,
+     "primitive": "type",
+     "view": 2
+    },
+    {
+     "next": 13,
+     "primitive": "type",
+     "view": 0
+    },
+    {
+     "next": 11,
+     "primitive": "type",
+     "view": 13
+    },
+    {
+     "next": 8,
+     "primitive": "fill",
+     "view": 11
+    },
+    {
+     "next": 6,
+     "primitive": "fill",
+     "view": 8
+    },
+    {
+     "next": 3,
+     "primitive": "fill",
+     "view": 6
+    },
+    {
+     "next": 6,
+     "primitive": "hover",
+     "view": 3
+    },
+    {
+     "next": 3,
+     "primitive": "select",
+     "view": 6
+    },
+    {
+     "next": 0,
+     "primitive": "select",
+     "view": 3
+    },
+    {
+     "next": 13,
+     "primitive": "select",
+     "view": 0
+    },
+    {
+     "next": 10,
+     "primitive": "fill",
+     "view": 13
+    },
+    {
+     "next": 12,
+     "primitive": "hover",
+     "view": 10
+    },
+    {
+     "next": 14,
+     "primitive": "click",
+     "view": 12
+    },
+    {
+     "next": 11,
+     "primitive": "select",
+     "view": 14
+    },
+    {
+     "next": 14,
+     "primitive": "hover",
+     "view": 11
+    },
+    {
+     "next": 11,
+     "primitive": "select",
+     "view": 14
+    },
+    {
+     "next": 8,
+     "primitive": "fill",
+     "view": 11
+    },
+    {
+     "next": 5,
+     "primitive": "type",
+     "view": 8
+    },
+    {
+     "next": 7,
+     "primitive": "hover",
+     "view": 5
+    },
+    {
+     "next": 4,
+     "primitive": "type",
+     "view": 7
+    },
+    {
+     "next": 1,
+     "primitive": "type",
+     "view": 4
+    },
+    {
+     "next": 4,
+     "primitive": "hover",
+     "view": 1
+    },
+    {
+     "next": 6,
+     "primitive": "submit",
+     "view": 4
+    },
+    {
+     "next": 9,
+     "primitive": "hover",
+     "view": 6
+    },
+    {
+     "next": 6,
+     "primitive": "fill",
+     "view": 9
+    },
+    {
+     "next": 4,
+     "primitive": "select",
+     "view": 6
+    },
+    {
+     "next": 2,
+     "primitive": "select",
+     "view": 4
+    },
+    {
+     "next": 0,
+     "primitive": "type",
+     "view": 2
+    },
+    {
+     "next": 3,
+     "primitive": "hover",
+     "view": 0
+    },
+    {
+     "next": 1,
+     "primitive": "fill",
+     "view": 3
+    },
+    {
+     "next": 4,
+     "primitive": "hover",
+     "view": 1
+    },
+    {
+     "next": 2,
+     "primitive": "type",
+     "view": 4
+    },
+    {
+     "next": 5,
+     "primitive": "submit",
+     "view": 2
+    },
+    {
+     "next": 3,
+     "primitive": "fill",
+     "view": 5
+    },
+    {
+     "next": 5,
+     "primitive": "click",
+     "view": 3
+    },
+    {
+     "next": 3,
+     "primitive": "type",
+     "view": 5
+    },
+    {
+     "next": 5,
+     "primitive": "hover",
+     "view": 3
+    },
+    {
+     "next": 8,
+     "primitive": "hover",
+     "view": 5
+    }
+   ],
+   "regime": "B",
+   "sid": "sess-00032",
+   "steps": 42
+  },
+  {
+   "index": 33,
+   "log": [
+    {
+     "next": 5,
+     "primitive": "fill",
+     "view": 7
+    },
+    {
+     "next": 8,
+     "primitive": "hover",
+     "view": 5
+    },
+    {
+     "next": 6,
+     "primitive": "type",
+     "view": 8
+    },
+    {
+     "next": 4,
+     "primitive": "fill",
+     "view": 6
+    },
+    {
+     "next": 1,
+     "primitive": "fill",
+     "view": 4
+    },
+    {
+     "next": 3,
+     "primitive": "click",
+     "view": 1
+    },
+    {
+     "next": 5,
+     "primitive": "click",
+     "view": 3
+    },
+    {
+     "next": 8,
+     "primitive": "hover",
+     "view": 5
+    },
+    {
+     "next": 6,
+     "primitive": "type",
+     "view": 8
+    },
+    {
+     "next": 3,
+     "primitive": "type",
+     "view": 6
+    },
+    {
+     "next": 1,
+     "primitive": "fill",
+     "view": 3
+    },
+    {
+     "next": 15,
+     "primitive": "fill",
+     "view": 1
+    },
+    {
+     "next": 2,
+     "primitive": "hover",
+     "view": 15
+    },
+    {
+     "next": 5,
+     "primitive": "submit",
+     "view": 2
+    },
+    {
+     "next": 7,
+     "primitive": "click",
+     "view": 5
+    },
+    {
+     "next": 10,
+     "primitive": "hover",
+     "view": 7
+    },
+    {
+     "next": 12,
+     "primitive": "submit",
+     "view": 10
+    },
+    {
+     "next": 15,
+     "primitive": "submit",
+     "view": 12
+    },
+    {
+     "next": 2,
+     "primitive": "submit",
+     "view": 15
+    },
+    {
+     "next": 4,
+     "primitive": "click",
+     "view": 2
+    },
+    {
+     "next": 2,
+     "primitive": "fill",
+     "view": 4
+    },
+    {
+     "next": 15,
+     "primitive": "type",
+     "view": 2
+    },
+    {
+     "next": 12,
+     "primitive": "select",
+     "view": 15
+    },
+    {
+     "next": 15,
+     "primitive": "hover",
+     "view": 12
+    },
+    {
+     "next": 2,
+     "primitive": "hover",
+     "view": 15
+    },
+    {
+     "next": 4,
+     "primitive": "submit",
+     "view": 2
+    },
+    {
+     "next": 6,
+     "primitive": "click",
+     "view": 4
+    },
+    {
+     "next": 4,
+     "primitive": "fill",
+     "view": 6
+    },
+    {
+     "next": 1,
+     "primitive": "fill",
+     "view": 4
+    },
+    {
+     "next": 4,
+     "primitive": "click",
+     "view": 1
+    },
+    {
+     "next": 6,
+     "primitive": "hover",
+     "view": 4
+    },
+    {
+     "next": 8,
+     "primitive": "submit",
+     "view": 6
+    },
+    {
+     "next": 11,
+     "primitive": "submit",
+     "view": 8
+    },
+    {
+     "next": 9,
+     "primitive": "select",
+     "view": 11
+    },
+    {
+     "next": 6,
+     "primitive": "fill",
+     "view": 9
+    },
+    {
+     "next": 3,
+     "primitive": "fill",
+     "view": 6
+    },
+    {
+     "next": 0,
+     "primitive": "select",
+     "view": 3
+    },
+    {
+     "next": 13,
+     "primitive": "type",
+     "view": 0
+    },
+    {
+     "next": 11,
+     "primitive": "select",
+     "view": 13
+    },
+    {
+     "next": 9,
+     "primitive": "fill",
+     "view": 11
+    }
+   ],
+   "regime": "B",
+   "sid": "sess-00033",
+   "steps": 40
+  },
+  {
+   "index": 34,
+   "log": [
+    {
+     "next": 5,
+     "primitive": "type",
+     "view": 7
+    },
+    {
+     "next": 6,
+     "primitive": "hover",
+     "view": 5
+    },
+    {
+     "next": 4,
+     "primitive": "type",
+     "view": 6
+    },
+    {
+     "next": 3,
+     "primitive": "select",
+     "view": 4
+    },
+    {
+     "next": 2,
+     "primitive": "fill",
+     "view": 3
+    },
+    {
+     "next": 0,
+     "primitive": "type",
+     "view": 2
+    },
+    {
+     "next": 14,
+     "primitive": "fill",
+     "view": 0
+    },
+    {
+     "next": 12,
+     "primitive": "select",
+     "view": 14
+    },
+    {
+     "next": 14,
+     "primitive": "submit",
+     "view": 12
+    },
+    {
+     "next": 13,
+     "primitive": "type",
+     "view": 14
+    },
+    {
+     "next": 12,
+     "primitive": "fill",
+     "view": 13
+    },
+    {
+     "next": 10,
+     "primitive": "select",
+     "view": 12
+    },
+    {
+     "next": 12,
+     "primitive": "hover",
+     "view": 10
+    },
+    {
+     "next": 11,
+     "primitive": "type",
+     "view": 12
+    },
+    {
+     "next": 13,
+     "primitive": "hover",
+     "view": 11
+    },
+    {
+     "next": 15,
+     "primitive": "click",
+     "view": 13
+    },
+    {
+     "next": 0,
+     "primitive": "click",
+     "view": 15
+    },
+    {
+     "next": 14,
+     "primitive": "fill",
+     "view": 0
+    },
+    {
+     "next": 12,
+     "primitive": "select",
+     "view": 14
+    },
+    {
+     "next": 11,
+     "primitive": "select",
+     "view": 12
+    },
+    {
+     "next": 13,
+     "primitive": "hover",
+     "view": 11
+    },
+    {
+     "next": 12,
+     "primitive": "fill",
+     "view": 13
+    },
+    {
+     "next": 10,
+     "primitive": "fill",
+     "view": 12
+    },
+    {
+     "next": 8,
+     "primitive": "type",
+     "view": 10
+    },
+    {
+     "next": 6,
+     "primitive": "fill",
+     "view": 8
+    },
+    {
+     "next": 7,
+     "primitive": "hover",
+     "view": 6
+    },
+    {
+     "next": 5,
+     "primitive": "type",
+     "view": 7
+    },
+    {
+     "next": 7,
+     "primitive": "click",
+     "view": 5
+    },
+    {
+     "next": 5,
+     "primitive": "type",
+     "view": 7
+    },
+    {
+     "next": 7,
+     "primitive": "click",
+     "view": 5
+    },
+    {
+     "next": 9,
+     "primitive": "submit",
+     "view": 7
+    },
+    {
+     "next": 7,
+     "primitive": "select",
+     "view": 9
+    },
+    {
+     "next": 5,
+     "primitive": "select",
+     "view": 7
+    },
+    {
+     "next": 4,
+     "primitive": "type",
+     "view": 5
+    },
+    {
+     "next": 2,
+     "primitive": "select",
+     "view": 4
+    },
+    {
+     "next": 1,
+     "primitive": "fill",
+     "view": 2
+    },
+    {
+     "next": 2,
+     "primitive": "hover",
+     "view": 1
+    },
+    {
+     "next": 3,
+     "primitive": "click",
+     "view": 2
+    },
+    {
+     "next": 4,
+     "primitive": "click",
+     "view": 3
+    },
+    {
+     "next": 5,
+     "primitive": "submit",
+     "view": 4
+    },
+    {
+     "next": 6,
+     "primitive": "click",
+     "view": 5
+    }
+   ],
+   "regime": "A",
+   "sid": "sess-00034",
+   "steps": 41
+  },
+  {
+   "index": 35,
+   "log": [
+    {
+     "next": 1,
+     "primitive": "fill",
+     "view": 3
+    },
+    {
+     "next": 15,
+     "primitive": "select",
+     "view": 1
+    },
+    {
+     "next": 13,
+     "primitive": "type",
+     "view": 15
+    },
+    {
+     "next": 15,
+     "primitive": "hover",
+     "view": 13
+    },
+    {
+     "next": 14,
+     "primitive": "type",
+     "view": 15
+    },
+    {
+     "next": 12,
+     "primitive": "type",
+     "view": 14
+    },
+    {
+     "next": 11,
+     "primitive": "type",
+     "view": 12
+    },
+    {
+     "next": 12,
+     "primitive": "hover",
+     "view": 11
+    },
+    {
+     "next": 13,
+     "primitive": "hover",
+     "view": 12
+    },
+    {
+     "next": 14,
+     "primitive": "submit",
+     "view": 13
+    },
+    {
+     "next": 13,
+     "primitive": "type",
+     "view": 14
+    },
+    {
+     "next": 15,
+     "primitive": "submit",
+     "view": 13
+    },
+    {
+     "next": 0,
+     "primitive": "hover",
+     "view": 15
+    },
+    {
+     "next": 1,
+     "primitive": "click",
+     "view": 0
+    },
+    {
+     "next": 15,
+     "primitive": "select",
+     "view": 1
+    },
+    {
+     "next": 13,
+     "primitive": "fill",
+     "view": 15
+    },
+    {
+     "next": 14,
+     "primitive": "click",
+     "view": 13
+    },
+    {
+     "next": 0,
+     "primitive": "submit",
+     "view": 14
+    },
+    {
+     "next": 14,
+     "primitive": "fill",
+     "view": 0
+    },
+    {
+     "next": 13,
+     "primitive": "fill",
+     "view": 14
+    },
+    {
+     "next": 11,
+     "primitive": "select",
+     "view": 13
+    },
+    {
+     "next": 12,
+     "primitive": "submit",
+     "view": 11
+    },
+    {
+     "next": 11,
+     "primitive": "type",
+     "view": 12
+    },
+    {
+     "next": 12,
+     "primitive": "hover",
+     "view": 11
+    },
+    {
+     "next": 10,
+     "primitive": "select",
+     "view": 12
+    },
+    {
+     "next": 12,
+     "primitive": "submit",
+     "view": 10
+    },
+    {
+     "next": 13,
+     "primitive": "click",
+     "view": 12
+    },
+    {
+     "next": 14,
+     "primitive": "click",
+     "view": 13
+    },
+    {
+     "next": 0,
+     "primitive": "hover",
+     "view": 14
+    },
+    {
+     "next": 15,
+     "primitive": "type",
+     "view": 0
+    },
+    {
+     "next": 0,
+     "primitive": "click",
+     "view": 15
+    },
+    {
+     "next": 2,
+     "primitive": "hover",
+     "view": 0
+    },
+    {
+     "next": 3,
+     "primitive": "click",
+     "view": 2
+    },
+    {
+     "next": 1,
+     "primitive": "type",
+     "view": 3
+    },
+    {
+     "next": 0,
+     "primitive": "select",
+     "view": 1
+    },
+    {
+     "next": 15,
+     "primitive": "select",
+     "view": 0
+    },
+    {
+     "next": 14,
+     "primitive": "select",
+     "view": 15
+    },
+    {
+     "next": 12,
+     "primitive": "fill",
+     "view": 14
+    },
+    {
+     "next": 10,
+     "primitive": "select",
+     "view": 12
+    },
+    {
+     "next": 12,
+     "primitive": "click",
+     "view": 10
+    },
+    {
+     "next": 11,
+     "primitive": "type",
+     "view": 12
+    }
+   ],
+   "regime": "A",
+   "sid": "sess-00035",
+   "steps": 41
+  },
+  {
+   "index": 36,
+   "log": [
+    {
+     "next": 0,
+     "primitive": "select",
+     "view": 1
+    },
+    {
+     "next": 14,
+     "primitive": "select",
+     "view": 0
+    },
+    {
+     "next": 15,
+     "primitive": "hover",
+     "view": 14
+    },
+    {
+     "next": 14,
+     "primitive": "select",
+     "view": 15
+    },
+    {
+     "next": 0,
+     "primitive": "hover",
+     "view": 14
+    },
+    {
+     "next": 1,
+     "primitive": "click",
+     "view": 0
+    },
+    {
+     "next": 0,
+     "primitive": "type",
+     "view": 1
+    },
+    {
+     "next": 2,
+     "primitive": "submit",
+     "view": 0
+    },
+    {
+     "next": 3,
+     "primitive": "click",
+     "view": 2
+    },
+    {
+     "next": 2,
+     "primitive": "fill",
+     "view": 3
+    },
+    {
+     "next": 3,
+     "primitive": "submit",
+     "view": 2
+    },
+    {
+     "next": 2,
+     "primitive": "type",
+     "view": 3
+    },
+    {
+     "next": 4,
+     "primitive": "hover",
+     "view": 2
+    },
+    {
+     "next": 6,
+     "primitive": "click",
+     "view": 4
+    },
+    {
+     "next": 4,
+     "primitive": "type",
+     "view": 6
+    },
+    {
+     "next": 3,
+     "primitive": "fill",
+     "view": 4
+    },
+    {
+     "next": 4,
+     "primitive": "submit",
+     "view": 3
+    },
+    {
+     "next": 3,
+     "primitive": "select",
+     "view": 4
+    },
+    {
+     "next": 1,
+     "primitive": "fill",
+     "view": 3
+    },
+    {
+     "next": 3,
+     "primitive": "click",
+     "view": 1
+    },
+    {
+     "next": 2,
+     "primitive": "select",
+     "view": 3
+    },
+    {
+     "next": 4,
+     "primitive": "hover",
+     "view": 2
+    },
+    {
+     "next": 2,
+     "primitive": "select",
+     "view": 4
+    },
+    {
+     "next": 1,
+     "primitive": "type",
+     "view": 2
+    },
+    {
+     "next": 15,
+     "primitive": "fill",
+     "view": 1
+    },
+    {
+     "next": 14,
+     "primitive": "select",
+     "view": 15
+    },
+    {
+     "next": 15,
+     "primitive": "submit",
+     "view": 14
+    },
+    {
+     "next": 1,
+     "primitive": "submit",
+     "view": 15
+    },
+    {
+     "next": 2,
+     "primitive": "hover",
+     "view": 1
+    },
+    {
+     "next": 0,
+     "primitive": "type",
+     "view": 2
+    },
+    {
+     "next": 14,
+     "primitive": "fill",
+     "view": 0
+    },
+    {
+     "next": 15,
+     "primitive": "hover",
+     "view": 14
+    },
+    {
+     "next": 13,
+     "primitive": "select",
+     "view": 15
+    },
+    {
+     "next": 12,
+     "primitive": "type",
+     "view": 13
+    },
+    {
+     "next": 11,
+     "primitive": "type",
+     "view": 12
+    },
+    {
+     "next": 13,
+     "primitive": "submit",
+     "view": 11
+    },
+    {
+     "next": 12,
+     "primitive": "select",
+     "view": 13
+    },
+    {
+     "next": 10,
+     "primitive": "fill",
+     "view": 12
+    },
+    {
+     "next": 11,
+     "primitive": "hover",
+     "view": 10
+    },
+    {
+     "next": 12,
+     "primitive": "hover",
+     "view": 11
+    }
+   ],
+   "regime": "A",
+   "sid": "sess-00036",
+   "steps": 40
+  },
+  {
+   "index": 37,
+   "log": [
+    {
+     "next": 10,
+     "primitive": "click",
+     "view": 8
+    },
+    {
+     "next": 11,
+     "primitive": "submit",
+     "view": 10
+    },
+    {
+     "next": 9,
+     "primitive": "fill",
+     "view": 11
+    },
+    {
+     "next": 7,
+     "primitive": "type",
+     "view": 9
+    },
+    {
+     "next": 6,
+     "primitive": "type",
+     "view": 7
+    },
+    {
+     "next": 7,
+     "primitive": "submit",
+     "view": 6
+    },
+    {
+     "next": 5,
+     "primitive": "select",
+     "view": 7
+    },
+    {
+     "next": 6,
+     "primitive": "click",
+     "view": 5
+    },
+    {
+     "next": 5,
+     "primitive": "select",
+     "view": 6
+    },
+    {
+     "next": 7,
+     "primitive": "hover",
+     "view": 5
+    },
+    {
+     "next": 8,
+     "primitive": "hover",
+     "view": 7
+    },
+    {
+     "next": 6,
+     "primitive": "select",
+     "view": 8
+    },
+    {
+     "next": 7,
+     "primitive": "hover",
+     "view": 6
+    },
+    {
+     "next": 8,
+     "primitive": "hover",
+     "view": 7
+    },
+    {
+     "next": 6,
+     "primitive": "select",
+     "view": 8
+    },
+    {
+     "next": 4,
+     "primitive": "fill",
+     "view": 6
+    },
+    {
+     "next": 3,
+     "primitive": "type",
+     "view": 4
+    },
+    {
+     "next": 1,
+     "primitive": "fill",
+     "view": 3
+    },
+    {
+     "next": 2,
+     "primitive": "submit",
+     "view": 1
+    },
+    {
+     "next": 0,
+     "primitive": "select",
+     "view": 2
+    },
+    {
+     "next": 1,
+     "primitive": "hover",
+     "view": 0
+    },
+    {
+     "next": 0,
+     "primitive": "fill",
+     "view": 1
+    },
+    {
+     "next": 2,
+     "primitive": "click",
+     "view": 0
+    },
+    {
+     "next": 4,
+     "primitive": "click",
+     "view": 2
+    },
+    {
+     "next": 2,
+     "primitive": "fill",
+     "view": 4
+    },
+    {
+     "next": 4,
+     "primitive": "submit",
+     "view": 2
+    },
+    {
+     "next": 3,
+     "primitive": "type",
+     "view": 4
+    },
+    {
+     "next": 1,
+     "primitive": "type",
+     "view": 3
+    },
+    {
+     "next": 0,
+     "primitive": "select",
+     "view": 1
+    },
+    {
+     "next": 14,
+     "primitive": "select",
+     "view": 0
+    },
+    {
+     "next": 13,
+     "primitive": "fill",
+     "view": 14
+    },
+    {
+     "next": 14,
+     "primitive": "click",
+     "view": 13
+    },
+    {
+     "next": 15,
+     "primitive": "hover",
+     "view": 14
+    },
+    {
+     "next": 0,
+     "primitive": "hover",
+     "view": 15
+    },
+    {
+     "next": 15,
+     "primitive": "type",
+     "view": 0
+    },
+    {
+     "next": 0,
+     "primitive": "submit",
+     "view": 15
+    },
+    {
+     "next": 1,
+     "primitive": "hover",
+     "view": 0
+    },
+    {
+     "next": 2,
+     "primitive": "hover",
+     "view": 1
+    },
+    {
+     "next": 3,
+     "primitive": "click",
+     "view": 2
+    },
+    {
+     "next": 4,
+     "primitive": "click",
+     "view": 3
+    },
+    {
+     "next": 6,
+     "primitive": "hover",
+     "view": 4
+    }
+   ],
+   "regime": "A",
+   "sid": "sess-00037",
+   "steps": 41
+  },
+  {
+   "index": 38,
+   "log": [
+    {
+     "next": 1,
+     "primitive": "click",
+     "view": 14
+    },
+    {
+     "next": 4,
+     "primitive": "click",
+     "view": 1
+    },
+    {
+     "next": 7,
+     "primitive": "hover",
+     "view": 4
+    },
+    {
+     "next": 10,
+     "primitive": "submit",
+     "view": 7
+    },
+    {
+     "next": 8,
+     "primitive": "fill",
+     "view": 10
+    },
+    {
+     "next": 11,
+     "primitive": "click",
+     "view": 8
+    },
+    {
+     "next": 13,
+     "primitive": "submit",
+     "view": 11
+    },
+    {
+     "next": 15,
+     "primitive": "hover",
+     "view": 13
+    },
+    {
+     "next": 13,
+     "primitive": "type",
+     "view": 15
+    },
+    {
+     "next": 10,
+     "primitive": "fill",
+     "view": 13
+    },
+    {
+     "next": 8,
+     "primitive": "type",
+     "view": 10
+    },
+    {
+     "next": 11,
+     "primitive": "hover",
+     "view": 8
+    },
+    {
+     "next": 13,
+     "primitive": "hover",
+     "view": 11
+    },
+    {
+     "next": 0,
+     "primitive": "hover",
+     "view": 13
+    },
+    {
+     "next": 13,
+     "primitive": "type",
+     "view": 0
+    },
+    {
+     "next": 10,
+     "primitive": "type",
+     "view": 13
+    },
+    {
+     "next": 7,
+     "primitive": "type",
+     "view": 10
+    },
+    {
+     "next": 10,
+     "primitive": "hover",
+     "view": 7
+    },
+    {
+     "next": 8,
+     "primitive": "select",
+     "view": 10
+    },
+    {
+     "next": 5,
+     "primitive": "fill",
+     "view": 8
+    },
+    {
+     "next": 2,
+     "primitive": "fill",
+     "view": 5
+    },
+    {
+     "next": 0,
+     "primitive": "type",
+     "view": 2
+    },
+    {
+     "next": 2,
+     "primitive": "submit",
+     "view": 0
+    },
+    {
+     "next": 4,
+     "primitive": "hover",
+     "view": 2
+    },
+    {
+     "next": 1,
+     "primitive": "type",
+     "view": 4
+    },
+    {
+     "next": 4,
+     "primitive": "hover",
+     "view": 1
+    },
+    {
+     "next": 6,
+     "primitive": "submit",
+     "view": 4
+    },
+    {
+     "next": 4,
+     "primitive": "fill",
+     "view": 6
+    },
+    {
+     "next": 7,
+     "primitive": "submit",
+     "view": 4
+    },
+    {
+     "next": 4,
+     "primitive": "type",
+     "view": 7
+    },
+    {
+     "next": 1,
+     "primitive": "type",
+     "view": 4
+    },
+    {
+     "next": 3,
+     "primitive": "submit",
+     "view": 1
+    },
+    {
+     "next": 1,
+     "primitive": "fill",
+     "view": 3
+    },
+    {
+     "next": 14,
+     "primitive": "type",
+     "view": 1
+    },
+    {
+     "next": 11,
+     "primitive": "select",
+     "view": 14
+    },
+    {
+     "next": 14,
+     "primitive": "submit",
+     "view": 11
+    },
+    {
+     "next": 12,
+     "primitive": "fill",
+     "view": 14
+    },
+    {
+     "next": 10,
+     "primitive": "fill",
+     "view": 12
+    },
+    {
+     "next": 8,
+     "primitive": "fill",
+     "view": 10
+    },
+    {
+     "next": 11,
+     "primitive": "click",
+     "view": 8
+    },
+    {
+     "next": 14,
+     "primitive": "submit",
+     "view": 11
+    }
+   ],
+   "regime": "B",
+   "sid": "sess-00038",
+   "steps": 41
+  },
+  {
+   "index": 39,
+   "log": [
+    {
+     "next": 15,
+     "primitive": "type",
+     "view": 1
+    },
+    {
+     "next": 1,
+     "primitive": "submit",
+     "view": 15
+    },
+    {
+     "next": 3,
+     "primitive": "submit",
+     "view": 1
+    },
+    {
+     "next": 5,
+     "primitive": "submit",
+     "view": 3
+    },
+    {
+     "next": 7,
+     "primitive": "submit",
+     "view": 5
+    },
+    {
+     "next": 9,
+     "primitive": "click",
+     "view": 7
+    },
+    {
+     "next": 11,
+     "primitive": "hover",
+     "view": 9
+    },
+    {
+     "next": 9,
+     "primitive": "type",
+     "view": 11
+    },
+    {
+     "next": 11,
+     "primitive": "click",
+     "view": 9
+    },
+    {
+     "next": 12,
+     "primitive": "submit",
+     "view": 11
+    },
+    {
+     "next": 13,
+     "primitive": "click",
+     "view": 12
+    },
+    {
+     "next": 12,
+     "primitive": "fill",
+     "view": 13
+    },
+    {
+     "next": 13,
+     "primitive": "submit",
+     "view": 12
+    },
+    {
+     "next": 11,
+     "primitive": "select",
+     "view": 13
+    },
+    {
+     "next": 10,
+     "primitive": "fill",
+     "view": 11
+    },
+    {
+     "next": 8,
+     "primitive": "select",
+     "view": 10
+    },
+    {
+     "next": 6,
+     "primitive": "fill",
+     "view": 8
+    },
+    {
+     "next": 7,
+     "primitive": "hover",
+     "view": 6
+    },
+    {
+     "next": 5,
+     "primitive": "type",
+     "view": 7
+    },
+    {
+     "next": 7,
+     "primitive": "hover",
+     "view": 5
+    },
+    {
+     "next": 5,
+     "primitive": "type",
+     "view": 7
+    },
+    {
+     "next": 3,
+     "primitive": "type",
+     "view": 5
+    },
+    {
+     "next": 2,
+     "primitive": "fill",
+     "view": 3
+    },
+    {
+     "next": 1,
+     "primitive": "select",
+     "view": 2
+    },
+    {
+     "next": 3,
+     "primitive": "submit",
+     "view": 1
+    },
+    {
+     "next": 1,
+     "primitive": "select",
+     "view": 3
+    },
+    {
+     "next": 15,
+     "primitive": "select",
+     "view": 1
+    },
+    {
+     "next": 13,
+     "primitive": "type",
+     "view": 15
+    },
+    {
+     "next": 14,
+     "primitive": "submit",
+     "view": 13
+    },
+    {
+     "next": 12,
+     "primitive": "select",
+     "view": 14
+    },
+    {
+     "next": 13,
+     "primitive": "hover",
+     "view": 12
+    },
+    {
+     "next": 15,
+     "primitive": "submit",
+     "view": 13
+    },
+    {
+     "next": 1,
+     "primitive": "submit",
+     "view": 15
+    },
+    {
+     "next": 15,
+     "primitive": "fill",
+     "view": 1
+    },
+    {
+     "next": 1,
+     "primitive": "submit",
+     "view": 15
+    },
+    {
+     "next": 2,
+     "primitive": "click",
+     "view": 1
+    },
+    {
+     "next": 3,
+     "primitive": "hover",
+     "view": 2
+    },
+    {
+     "next": 1,
+     "primitive": "fill",
+     "view": 3
+    },
+    {
+     "next": 2,
+     "primitive": "submit",
+     "view": 1
+    },
+    {
+     "next": 0,
+     "primitive": "type",
+     "view": 2
+    }
+   ],
+   "regime": "A",
+   "sid": "sess-00039",
+   "steps": 40
+  },
+  {
+   "index": 40,
+   "log": [
+    {
+     "next": 12,
+     "primitive": "select",
+     "view": 13
+    },
+    {
+     "next": 11,
+     "primitive": "fill",
+     "view": 12
+    },
+    {
+     "next": 9,
+     "primitive": "type",
+     "view": 11
+    },
+    {
+     "next": 11,
+     "primitive": "hover",
+     "view": 9
+    },
+    {
+     "next": 12,
+     "primitive": "click",
+     "view": 11
+    },
+    {
+     "next": 13,
+     "primitive": "click",
+     "view": 12
+    },
+    {
+     "next": 11,
+     "primitive": "type",
+     "view": 13
+    },
+    {
+     "next": 9,
+     "primitive": "type",
+     "view": 11
+    },
+    {
+     "next": 8,
+     "primitive": "select",
+     "view": 9
+    },
+    {
+     "next": 9,
+     "primitive": "click",
+     "view": 8
+    },
+    {
+     "next": 10,
+     "primitive": "submit",
+     "view": 9
+    },
+    {
+     "next": 11,
+     "primitive": "click",
+     "view": 10
+    },
+    {
+     "next": 12,
+     "primitive": "click",
+     "view": 11
+    },
+    {
+     "next": 14,
+     "primitive": "submit",
+     "view": 12
+    },
+    {
+     "next": 13,
+     "primitive": "fill",
+     "view": 14
+    },
+    {
+     "next": 14,
+     "primitive": "click",
+     "view": 13
+    },
+    {
+     "next": 12,
+     "primitive": "type",
+     "view": 14
+    },
+    {
+     "next": 14,
+     "primitive": "hover",
+     "view": 12
+    },
+    {
+     "next": 15,
+     "primitive": "submit",
+     "view": 14
+    },
+    {
+     "next": 14,
+     "primitive": "fill",
+     "view": 15
+    },
+    {
+     "next": 12,
+     "primitive": "select",
+     "view": 14
+    },
+    {
+     "next": 13,
+     "primitive": "submit",
+     "view": 12
+    },
+    {
+     "next": 14,
+     "primitive": "click",
+     "view": 13
+    },
+    {
+     "next": 15,
+     "primitive": "click",
+     "view": 14
+    },
+    {
+     "next": 13,
+     "primitive": "type",
+     "view": 15
+    },
+    {
+     "next": 15,
+     "primitive": "click",
+     "view": 13
+    },
+    {
+     "next": 14,
+     "primitive": "fill",
+     "view": 15
+    },
+    {
+     "next": 0,
+     "primitive": "hover",
+     "view": 14
+    },
+    {
+     "next": 15,
+     "primitive": "select",
+     "view": 0
+    },
+    {
+     "next": 0,
+     "primitive": "click",
+     "view": 15
+    },
+    {
+     "next": 15,
+     "primitive": "type",
+     "view": 0
+    },
+    {
+     "next": 13,
+     "primitive": "select",
+     "view": 15
+    },
+    {
+     "next": 14,
+     "primitive": "hover",
+     "view": 13
+    },
+    {
+     "next": 0,
+     "primitive": "submit",
+     "view": 14
+    },
+    {
+     "next": 15,
+     "primitive": "type",
+     "view": 0
+    },
+    {
+     "next": 0,
+     "primitive": "submit",
+     "view": 15
+    },
+    {
+     "next": 2,
+     "primitive": "hover",
+     "view": 0
+    },
+    {
+     "next": 4,
+     "primitive": "hover",
+     "view": 2
+    },
+    {
+     "next": 6,
+     "primitive": "submit",
+     "view": 4
+    },
+    {
+     "next": 8,
+     "primitive": "hover",
+     "view": 6
+    }
+   ],
+   "regime": "A",
+   "sid": "sess-00040",
+   "steps": 40
+  },
+  {
+   "index": 41,
+   "log": [
+    {
+     "next": 15,
+     "primitive": "click",
+     "view": 13
+    },
+    {
+     "next": 1,
+     "primitive": "click",
+     "view": 15
+    },
+    {
+     "next": 4,
+     "primitive": "submit",
+     "view": 1
+    },
+    {
+     "next": 7,
+     "primitive": "click",
+     "view": 4
+    },
+    {
+     "next": 10,
+     "primitive": "hover",
+     "view": 7
+    },
+    {
+     "next": 8,
+     "primitive": "type",
+     "view": 10
+    },
+    {
+     "next": 10,
+     "primitive": "click",
+     "view": 8
+    },
+    {
+     "next": 12,
+     "primitive": "click",
+     "view": 10
+    },
+    {
+     "next": 15,
+     "primitive": "click",
+     "view": 12
+    },
+    {
+     "next": 13,
+     "primitive": "fill",
+     "view": 15
+    },
+    {
+     "next": 0,
+     "primitive": "submit",
+     "view": 13
+    },
+    {
+     "next": 3,
+     "primitive": "hover",
+     "view": 0
+    },
+    {
+     "next": 6,
+     "primitive": "click",
+     "view": 3
+    },
+    {
+     "next": 8,
+     "primitive": "submit",
+     "view": 6
+    },
+    {
+     "next": 11,
+     "primitive": "hover",
+     "view": 8
+    },
+    {
+     "next": 13,
+     "primitive": "hover",
+     "view": 11
+    },
+    {
+     "next": 11,
+     "primitive": "fill",
+     "view": 13
+    },
+    {
+     "next": 8,
+     "primitive": "select",
+     "view": 11
+    },
+    {
+     "next": 11,
+     "primitive": "hover",
+     "view": 8
+    },
+    {
+     "next": 9,
+     "primitive": "type",
+     "view": 11
+    },
+    {
+     "next": 6,
+     "primitive": "fill",
+     "view": 9
+    },
+    {
+     "next": 8,
+     "primitive": "submit",
+     "view": 6
+    },
+    {
+     "next": 11,
+     "primitive": "submit",
+     "view": 8
+    },
+    {
+     "next": 13,
+     "primitive": "submit",
+     "view": 11
+    },
+    {
+     "next": 11,
+     "primitive": "fill",
+     "view": 13
+    },
+    {
+     "next": 13,
+     "primitive": "submit",
+     "view": 11
+    },
+    {
+     "next": 11,
+     "primitive": "type",
+     "view": 13
+    },
+    {
+     "next": 14,
+     "primitive": "hover",
+     "view": 11
+    },
+    {
+     "next": 11,
+     "primitive": "type",
+     "view": 14
+    },
+    {
+     "next": 9,
+     "primitive": "select",
+     "view": 11
+    },
+    {
+     "next": 12,
+     "primitive": "hover",
+     "view": 9
+    },
+    {
+     "next": 14,
+     "primitive": "submit",
+     "view": 12
+    },
+    {
+     "next": 12,
+     "primitive": "select",
+     "view": 14
+    },
+    {
+     "next": 14,
+     "primitive": "submit",
+     "view": 12
+    },
+    {
+     "next": 0,
+     "primitive": "submit",
+     "view": 14
+    },
+    {
+     "next": 14,
+     "primitive": "type",
+     "view": 0
+    },
+    {
+     "next": 1,
+     "primitive": "hover",
+     "view": 14
+    },
+    {
+     "next": 4,
+     "primitive": "click",
+     "view": 1
+    },
+    {
+     "next": 6,
+     "primitive": "hover",
+     "view": 4
+    },
+    {
+     "next": 8,
+     "primitive": "hover",
+     "view": 6
+    }
+   ],
+   "regime": "B",
+   "sid": "sess-00041",
+   "steps": 40
+  },
+  {
+   "index": 42,
+   "log": [
+    {
+     "next": 2,
+     "primitive": "type",
+     "view": 4
+    },
+    {
+     "next": 15,
+     "primitive": "select",
+     "view": 2
+    },
+    {
+     "next": 1,
+     "primitive": "submit",
+     "view": 15
+    },
+    {
+     "next": 3,
+     "primitive": "click",
+     "view": 1
+    },
+    {
+     "next": 1,
+     "primitive": "fill",
+     "view": 3
+    },
+    {
+     "next": 4,
+     "primitive": "click",
+     "view": 1
+    },
+    {
+     "next": 7,
+     "primitive": "submit",
+     "view": 4
+    },
+    {
+     "next": 9,
+     "primitive": "click",
+     "view": 7
+    },
+    {
+     "next": 12,
+     "primitive": "click",
+     "view": 9
+    },
+    {
+     "next": 10,
+     "primitive": "type",
+     "view": 12
+    },
+    {
+     "next": 12,
+     "primitive": "click",
+     "view": 10
+    },
+    {
+     "next": 14,
+     "primitive": "click",
+     "view": 12
+    },
+    {
+     "next": 12,
+     "primitive": "type",
+     "view": 14
+    },
+    {
+     "next": 15,
+     "primitive": "submit",
+     "view": 12
+    },
+    {
+     "next": 13,
+     "primitive": "select",
+     "view": 15
+    },
+    {
+     "next": 0,
+     "primitive": "click",
+     "view": 13
+    },
+    {
+     "next": 2,
+     "primitive": "click",
+     "view": 0
+    },
+    {
+     "next": 5,
+     "primitive": "click",
+     "view": 2
+    },
+    {
+     "next": 3,
+     "primitive": "select",
+     "view": 5
+    },
+    {
+     "next": 0,
+     "primitive": "fill",
+     "view": 3
+    },
+    {
+     "next": 2,
+     "primitive": "hover",
+     "view": 0
+    },
+    {
+     "next": 4,
+     "primitive": "submit",
+     "view": 2
+    },
+    {
+     "next": 7,
+     "primitive": "click",
+     "view": 4
+    },
+    {
+     "next": 5,
+     "primitive": "fill",
+     "view": 7
+    },
+    {
+     "next": 8,
+     "primitive": "submit",
+     "view": 5
+    },
+    {
+     "next": 5,
+     "primitive": "fill",
+     "view": 8
+    },
+    {
+     "next": 2,
+     "primitive": "select",
+     "view": 5
+    },
+    {
+     "next": 15,
+     "primitive": "type",
+     "view": 2
+    },
+    {
+     "next": 1,
+     "primitive": "hover",
+     "view": 15
+    },
+    {
+     "next": 3,
+     "primitive": "click",
+     "view": 1
+    },
+    {
+     "next": 5,
+     "primitive": "submit",
+     "view": 3
+    },
+    {
+     "next": 3,
+     "primitive": "type",
+     "view": 5
+    },
+    {
+     "next": 1,
+     "primitive": "fill",
+     "view": 3
+    },
+    {
+     "next": 14,
+     "primitive": "fill",
+     "view": 1
+    },
+    {
+     "next": 0,
+     "primitive": "hover",
+     "view": 14
+    },
+    {
+     "next": 3,
+     "primitive": "click",
+     "view": 0
+    },
+    {
+     "next": 1,
+     "primitive": "type",
+     "view": 3
+    },
+    {
+     "next": 15,
+     "primitive": "select",
+     "view": 1
+    },
+    {
+     "next": 12,
+     "primitive": "type",
+     "view": 15
+    },
+    {
+     "next": 10,
+     "primitive": "type",
+     "view": 12
+    }
+   ],
+   "regime": "B",
+   "sid": "sess-00042",
+   "steps": 40
+  },
+  {
+   "index": 43,
+   "log": [
+    {
+     "next": 13,
+     "primitive": "submit",
+     "view": 10
+    },
+    {
+     "next": 0,
+     "primitive": "submit",
+     "view": 13
+    },
+    {
+     "next": 2,
+     "primitive": "submit",
+     "view": 0
+    },
+    {
+     "next": 15,
+     "primitive": "type",
+     "view": 2
+    },
+    {
+     "next": 12,
+     "primitive": "fill",
+     "view": 15
+    },
+    {
+     "next": 14,
+     "primitive": "hover",
+     "view": 12
+    },
+    {
+     "next": 11,
+     "primitive": "type",
+     "view": 14
+    },
+    {
+     "next": 13,
+     "primitive": "hover",
+     "view": 11
+    },
+    {
+     "next": 10,
+     "primitive": "fill",
+     "view": 13
+    },
+    {
+     "next": 8,
+     "primitive": "type",
+     "view": 10
+    },
+    {
+     "next": 5,
+     "primitive": "type",
+     "view": 8
+    },
+    {
+     "next": 8,
+     "primitive": "click",
+     "view": 5
+    },
+    {
+     "next": 10,
+     "primitive": "hover",
+     "view": 8
+    },
+    {
+     "next": 7,
+     "primitive": "select",
+     "view": 10
+    },
+    {
+     "next": 4,
+     "primitive": "select",
+     "view": 7
+    },
+    {
+     "next": 6,
+     "primitive": "click",
+     "view": 4
+    },
+    {
+     "next": 9,
+     "primitive": "submit",
+     "view": 6
+    },
+    {
+     "next": 6,
+     "primitive": "fill",
+     "view": 9
+    },
+    {
+     "next": 3,
+     "primitive": "select",
+     "view": 6
+    },
+    {
+     "next": 6,
+     "primitive": "click",
+     "view": 3
+    },
+    {
+     "next": 3,
+     "primitive": "fill",
+     "view": 6
+    },
+    {
+     "next": 6,
+     "primitive": "submit",
+     "view": 3
+    },
+    {
+     "next": 8,
+     "primitive": "submit",
+     "view": 6
+    },
+    {
+     "next": 5,
+     "primitive": "fill",
+     "view": 8
+    },
+    {
+     "next": 7,
+     "primitive": "hover",
+     "view": 5
+    },
+    {
+     "next": 5,
+     "primitive": "fill",
+     "view": 7
+    },
+    {
+     "next": 8,
+     "primitive": "submit",
+     "view": 5
+    },
+    {
+     "next": 6,
+     "primitive": "select",
+     "view": 8
+    },
+    {
+     "next": 9,
+     "primitive": "click",
+     "view": 6
+    },
+    {
+     "next": 7,
+     "primitive": "type",
+     "view": 9
+    },
+    {
+     "next": 9,
+     "primitive": "click",
+     "view": 7
+    },
+    {
+     "next": 7,
+     "primitive": "select",
+     "view": 9
+    },
+    {
+     "next": 9,
+     "primitive": "hover",
+     "view": 7
+    },
+    {
+     "next": 12,
+     "primitive": "hover",
+     "view": 9
+    },
+    {
+     "next": 14,
+     "primitive": "click",
+     "view": 12
+    },
+    {
+     "next": 11,
+     "primitive": "select",
+     "view": 14
+    },
+    {
+     "next": 13,
+     "primitive": "click",
+     "view": 11
+    },
+    {
+     "next": 10,
+     "primitive": "fill",
+     "view": 13
+    },
+    {
+     "next": 8,
+     "primitive": "select",
+     "view": 10
+    },
+    {
+     "next": 5,
+     "primitive": "type",
+     "view": 8
+    },
+    {
+     "next": 2,
+     "primitive": "select",
+     "view": 5
+    }
+   ],
+   "regime": "B",
+   "sid": "sess-00043",
+   "steps": 41
+  }
+ ],
+ "start_view_rng": "default_rng(42 + 1000*0)",
+ "steps_per_trajectory": 40,
+ "viewport_probes_unique": [
+  [
+   1280,
+   720,
+   1
+  ]
+ ]
+}

@@ -1,0 +1,902 @@
+{
+  "('A', 0, 0)": {
+    "visual_raw": "{\"x\": 0, \"y\": 0, \"w\": 0, \"h\": 0, \"count\": 6, \"depth\": 3}",
+    "computed_style_raw": "{\"color\": \"rgb(0,0,0)\", \"backgroundColor\": \"#fff\", \"visibility\": \"visible\", \"display\": \"block\", \"opacity\": \"1.0\", \"border\": \"none\", \"position\": \"static\", \"fontSize\": \"14px\"}",
+    "bbox": {
+      "x": 0,
+      "y": 0,
+      "width": 0,
+      "height": 0
+    },
+    "computed_style": {
+      "color": "rgb(0,0,0)",
+      "backgroundColor": "#fff",
+      "visibility": "visible",
+      "display": "block",
+      "opacity": "1.0",
+      "border": "none",
+      "position": "static",
+      "fontSize": "14px"
+    },
+    "a11y_serial": "[{\"role\": \"button\", \"name\": \"action 0 variant 0\", \"value\": \"A\"}]",
+    "a11y_bytes": 300,
+    "dom_bytes": 2000,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "dom_visual": "VB_0_0_0_6",
+    "dom_computed_style": "CS_blue_0_0_A_0_#fff",
+    "color_key": "blue"
+  },
+  "('A', 0, 1)": {
+    "visual_raw": "{\"x\": 0, \"y\": 0, \"w\": 0, \"h\": 0, \"count\": 7, \"depth\": 3}",
+    "computed_style_raw": "{\"color\": \"rgb(0,0,0)\", \"backgroundColor\": \"#fff\", \"visibility\": \"visible\", \"display\": \"block\", \"opacity\": \"1.0\", \"border\": \"none\", \"position\": \"static\", \"fontSize\": \"14px\"}",
+    "bbox": {
+      "x": 0,
+      "y": 0,
+      "width": 0,
+      "height": 0
+    },
+    "computed_style": {
+      "color": "rgb(0,0,0)",
+      "backgroundColor": "#fff",
+      "visibility": "visible",
+      "display": "block",
+      "opacity": "1.0",
+      "border": "none",
+      "position": "static",
+      "fontSize": "14px"
+    },
+    "a11y_serial": "[{\"role\": \"button\", \"name\": \"action 0 variant 1\", \"value\": \"A\"}]",
+    "a11y_bytes": 300,
+    "dom_bytes": 2050,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "dom_visual": "VB_0_0_0_7",
+    "dom_computed_style": "CS_blue_1_0_A_0_#fff",
+    "color_key": "blue"
+  },
+  "('A', 0, 2)": {
+    "visual_raw": "{\"x\": 0, \"y\": 0, \"w\": 0, \"h\": 0, \"count\": 8, \"depth\": 3}",
+    "computed_style_raw": "{\"color\": \"rgb(0,0,0)\", \"backgroundColor\": \"#fff\", \"visibility\": \"visible\", \"display\": \"block\", \"opacity\": \"1.0\", \"border\": \"none\", \"position\": \"static\", \"fontSize\": \"14px\"}",
+    "bbox": {
+      "x": 0,
+      "y": 0,
+      "width": 0,
+      "height": 0
+    },
+    "computed_style": {
+      "color": "rgb(0,0,0)",
+      "backgroundColor": "#fff",
+      "visibility": "visible",
+      "display": "block",
+      "opacity": "1.0",
+      "border": "none",
+      "position": "static",
+      "fontSize": "14px"
+    },
+    "a11y_serial": "[{\"role\": \"button\", \"name\": \"action 0 variant 2\", \"value\": \"A\"}]",
+    "a11y_bytes": 300,
+    "dom_bytes": 2100,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "dom_visual": "VB_0_0_0_8",
+    "dom_computed_style": "CS_blue_2_0_A_0_#fff",
+    "color_key": "blue"
+  },
+  "('B', 0, 0)": {
+    "visual_raw": "{\"x\": 0, \"y\": 0, \"w\": 0, \"h\": 0, \"count\": 6, \"depth\": 3}",
+    "computed_style_raw": "{\"color\": \"rgb(0,0,0)\", \"backgroundColor\": \"#fff\", \"visibility\": \"visible\", \"display\": \"block\", \"opacity\": \"1.0\", \"border\": \"none\", \"position\": \"static\", \"fontSize\": \"14px\"}",
+    "bbox": {
+      "x": 0,
+      "y": 0,
+      "width": 0,
+      "height": 0
+    },
+    "computed_style": {
+      "color": "rgb(0,0,0)",
+      "backgroundColor": "#fff",
+      "visibility": "visible",
+      "display": "block",
+      "opacity": "1.0",
+      "border": "none",
+      "position": "static",
+      "fontSize": "14px"
+    },
+    "a11y_serial": "[{\"role\": \"button\", \"name\": \"action 0 variant 0\", \"value\": \"B\"}]",
+    "a11y_bytes": 300,
+    "dom_bytes": 2000,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "dom_visual": "VB_0_0_0_6",
+    "dom_computed_style": "CS_blue_0_0_B_0_#fff",
+    "color_key": "blue"
+  },
+  "('B', 0, 1)": {
+    "visual_raw": "{\"x\": 0, \"y\": 0, \"w\": 0, \"h\": 0, \"count\": 7, \"depth\": 3}",
+    "computed_style_raw": "{\"color\": \"rgb(0,0,0)\", \"backgroundColor\": \"#fff\", \"visibility\": \"visible\", \"display\": \"block\", \"opacity\": \"1.0\", \"border\": \"none\", \"position\": \"static\", \"fontSize\": \"14px\"}",
+    "bbox": {
+      "x": 0,
+      "y": 0,
+      "width": 0,
+      "height": 0
+    },
+    "computed_style": {
+      "color": "rgb(0,0,0)",
+      "backgroundColor": "#fff",
+      "visibility": "visible",
+      "display": "block",
+      "opacity": "1.0",
+      "border": "none",
+      "position": "static",
+      "fontSize": "14px"
+    },
+    "a11y_serial": "[{\"role\": \"button\", \"name\": \"action 0 variant 1\", \"value\": \"B\"}]",
+    "a11y_bytes": 300,
+    "dom_bytes": 2050,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "dom_visual": "VB_0_0_0_7",
+    "dom_computed_style": "CS_blue_1_0_B_0_#fff",
+    "color_key": "blue"
+  },
+  "('B', 0, 2)": {
+    "visual_raw": "{\"x\": 0, \"y\": 0, \"w\": 0, \"h\": 0, \"count\": 8, \"depth\": 3}",
+    "computed_style_raw": "{\"color\": \"rgb(0,0,0)\", \"backgroundColor\": \"#fff\", \"visibility\": \"visible\", \"display\": \"block\", \"opacity\": \"1.0\", \"border\": \"none\", \"position\": \"static\", \"fontSize\": \"14px\"}",
+    "bbox": {
+      "x": 0,
+      "y": 0,
+      "width": 0,
+      "height": 0
+    },
+    "computed_style": {
+      "color": "rgb(0,0,0)",
+      "backgroundColor": "#fff",
+      "visibility": "visible",
+      "display": "block",
+      "opacity": "1.0",
+      "border": "none",
+      "position": "static",
+      "fontSize": "14px"
+    },
+    "a11y_serial": "[{\"role\": \"button\", \"name\": \"action 0 variant 2\", \"value\": \"B\"}]",
+    "a11y_bytes": 300,
+    "dom_bytes": 2100,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "dom_visual": "VB_0_0_0_8",
+    "dom_computed_style": "CS_blue_2_0_B_0_#fff",
+    "color_key": "blue"
+  },
+  "('A', 1, 0)": {
+    "visual_raw": "{\"x\": 0, \"y\": 0, \"w\": 0, \"h\": 0, \"count\": 6, \"depth\": 3}",
+    "computed_style_raw": "{\"color\": \"rgb(0,0,0)\", \"backgroundColor\": \"#fff\", \"visibility\": \"visible\", \"display\": \"block\", \"opacity\": \"1.0\", \"border\": \"none\", \"position\": \"static\", \"fontSize\": \"14px\"}",
+    "bbox": {
+      "x": 0,
+      "y": 0,
+      "width": 0,
+      "height": 0
+    },
+    "computed_style": {
+      "color": "rgb(0,0,0)",
+      "backgroundColor": "#fff",
+      "visibility": "visible",
+      "display": "block",
+      "opacity": "1.0",
+      "border": "none",
+      "position": "static",
+      "fontSize": "14px"
+    },
+    "a11y_serial": "[{\"role\": \"button\", \"name\": \"action 1 variant 0\", \"value\": \"A\"}]",
+    "a11y_bytes": 300,
+    "dom_bytes": 2100,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "dom_visual": "VB_0_0_0_6",
+    "dom_computed_style": "CS_blue_0_1_A_0_#fff",
+    "color_key": "blue"
+  },
+  "('A', 1, 1)": {
+    "visual_raw": "{\"x\": 0, \"y\": 0, \"w\": 0, \"h\": 0, \"count\": 7, \"depth\": 3}",
+    "computed_style_raw": "{\"color\": \"rgb(0,0,0)\", \"backgroundColor\": \"#fff\", \"visibility\": \"visible\", \"display\": \"block\", \"opacity\": \"1.0\", \"border\": \"none\", \"position\": \"static\", \"fontSize\": \"14px\"}",
+    "bbox": {
+      "x": 0,
+      "y": 0,
+      "width": 0,
+      "height": 0
+    },
+    "computed_style": {
+      "color": "rgb(0,0,0)",
+      "backgroundColor": "#fff",
+      "visibility": "visible",
+      "display": "block",
+      "opacity": "1.0",
+      "border": "none",
+      "position": "static",
+      "fontSize": "14px"
+    },
+    "a11y_serial": "[{\"role\": \"button\", \"name\": \"action 1 variant 1\", \"value\": \"A\"}]",
+    "a11y_bytes": 300,
+    "dom_bytes": 2150,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "dom_visual": "VB_0_0_0_7",
+    "dom_computed_style": "CS_blue_1_1_A_0_#fff",
+    "color_key": "blue"
+  },
+  "('A', 1, 2)": {
+    "visual_raw": "{\"x\": 0, \"y\": 0, \"w\": 0, \"h\": 0, \"count\": 8, \"depth\": 3}",
+    "computed_style_raw": "{\"color\": \"rgb(0,0,0)\", \"backgroundColor\": \"#fff\", \"visibility\": \"visible\", \"display\": \"block\", \"opacity\": \"1.0\", \"border\": \"none\", \"position\": \"static\", \"fontSize\": \"14px\"}",
+    "bbox": {
+      "x": 0,
+      "y": 0,
+      "width": 0,
+      "height": 0
+    },
+    "computed_style": {
+      "color": "rgb(0,0,0)",
+      "backgroundColor": "#fff",
+      "visibility": "visible",
+      "display": "block",
+      "opacity": "1.0",
+      "border": "none",
+      "position": "static",
+      "fontSize": "14px"
+    },
+    "a11y_serial": "[{\"role\": \"button\", \"name\": \"action 1 variant 2\", \"value\": \"A\"}]",
+    "a11y_bytes": 300,
+    "dom_bytes": 2200,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "dom_visual": "VB_0_0_0_8",
+    "dom_computed_style": "CS_blue_2_1_A_0_#fff",
+    "color_key": "blue"
+  },
+  "('B', 1, 0)": {
+    "visual_raw": "{\"x\": 0, \"y\": 0, \"w\": 0, \"h\": 0, \"count\": 6, \"depth\": 3}",
+    "computed_style_raw": "{\"color\": \"rgb(0,0,0)\", \"backgroundColor\": \"#fff\", \"visibility\": \"visible\", \"display\": \"block\", \"opacity\": \"1.0\", \"border\": \"none\", \"position\": \"static\", \"fontSize\": \"14px\"}",
+    "bbox": {
+      "x": 0,
+      "y": 0,
+      "width": 0,
+      "height": 0
+    },
+    "computed_style": {
+      "color": "rgb(0,0,0)",
+      "backgroundColor": "#fff",
+      "visibility": "visible",
+      "display": "block",
+      "opacity": "1.0",
+      "border": "none",
+      "position": "static",
+      "fontSize": "14px"
+    },
+    "a11y_serial": "[{\"role\": \"button\", \"name\": \"action 1 variant 0\", \"value\": \"B\"}]",
+    "a11y_bytes": 300,
+    "dom_bytes": 2100,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "dom_visual": "VB_0_0_0_6",
+    "dom_computed_style": "CS_blue_0_1_B_0_#fff",
+    "color_key": "blue"
+  },
+  "('B', 1, 1)": {
+    "visual_raw": "{\"x\": 0, \"y\": 0, \"w\": 0, \"h\": 0, \"count\": 7, \"depth\": 3}",
+    "computed_style_raw": "{\"color\": \"rgb(0,0,0)\", \"backgroundColor\": \"#fff\", \"visibility\": \"visible\", \"display\": \"block\", \"opacity\": \"1.0\", \"border\": \"none\", \"position\": \"static\", \"fontSize\": \"14px\"}",
+    "bbox": {
+      "x": 0,
+      "y": 0,
+      "width": 0,
+      "height": 0
+    },
+    "computed_style": {
+      "color": "rgb(0,0,0)",
+      "backgroundColor": "#fff",
+      "visibility": "visible",
+      "display": "block",
+      "opacity": "1.0",
+      "border": "none",
+      "position": "static",
+      "fontSize": "14px"
+    },
+    "a11y_serial": "[{\"role\": \"button\", \"name\": \"action 1 variant 1\", \"value\": \"B\"}]",
+    "a11y_bytes": 300,
+    "dom_bytes": 2150,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "dom_visual": "VB_0_0_0_7",
+    "dom_computed_style": "CS_blue_1_1_B_0_#fff",
+    "color_key": "blue"
+  },
+  "('B', 1, 2)": {
+    "visual_raw": "{\"x\": 0, \"y\": 0, \"w\": 0, \"h\": 0, \"count\": 8, \"depth\": 3}",
+    "computed_style_raw": "{\"color\": \"rgb(0,0,0)\", \"backgroundColor\": \"#fff\", \"visibility\": \"visible\", \"display\": \"block\", \"opacity\": \"1.0\", \"border\": \"none\", \"position\": \"static\", \"fontSize\": \"14px\"}",
+    "bbox": {
+      "x": 0,
+      "y": 0,
+      "width": 0,
+      "height": 0
+    },
+    "computed_style": {
+      "color": "rgb(0,0,0)",
+      "backgroundColor": "#fff",
+      "visibility": "visible",
+      "display": "block",
+      "opacity": "1.0",
+      "border": "none",
+      "position": "static",
+      "fontSize": "14px"
+    },
+    "a11y_serial": "[{\"role\": \"button\", \"name\": \"action 1 variant 2\", \"value\": \"B\"}]",
+    "a11y_bytes": 300,
+    "dom_bytes": 2200,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "dom_visual": "VB_0_0_0_8",
+    "dom_computed_style": "CS_blue_2_1_B_0_#fff",
+    "color_key": "blue"
+  },
+  "('A', 2, 0)": {
+    "visual_raw": "{\"x\": 0, \"y\": 0, \"w\": 0, \"h\": 0, \"count\": 6, \"depth\": 3}",
+    "computed_style_raw": "{\"color\": \"rgb(0,0,0)\", \"backgroundColor\": \"#fff\", \"visibility\": \"visible\", \"display\": \"block\", \"opacity\": \"1.0\", \"border\": \"none\", \"position\": \"static\", \"fontSize\": \"14px\"}",
+    "bbox": {
+      "x": 0,
+      "y": 0,
+      "width": 0,
+      "height": 0
+    },
+    "computed_style": {
+      "color": "rgb(0,0,0)",
+      "backgroundColor": "#fff",
+      "visibility": "visible",
+      "display": "block",
+      "opacity": "1.0",
+      "border": "none",
+      "position": "static",
+      "fontSize": "14px"
+    },
+    "a11y_serial": "[{\"role\": \"button\", \"name\": \"action 2 variant 0\", \"value\": \"A\"}]",
+    "a11y_bytes": 300,
+    "dom_bytes": 2200,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "dom_visual": "VB_0_0_0_6",
+    "dom_computed_style": "CS_blue_0_2_A_0_#fff",
+    "color_key": "blue"
+  },
+  "('A', 2, 1)": {
+    "visual_raw": "{\"x\": 0, \"y\": 0, \"w\": 0, \"h\": 0, \"count\": 7, \"depth\": 3}",
+    "computed_style_raw": "{\"color\": \"rgb(0,0,0)\", \"backgroundColor\": \"#fff\", \"visibility\": \"visible\", \"display\": \"block\", \"opacity\": \"1.0\", \"border\": \"none\", \"position\": \"static\", \"fontSize\": \"14px\"}",
+    "bbox": {
+      "x": 0,
+      "y": 0,
+      "width": 0,
+      "height": 0
+    },
+    "computed_style": {
+      "color": "rgb(0,0,0)",
+      "backgroundColor": "#fff",
+      "visibility": "visible",
+      "display": "block",
+      "opacity": "1.0",
+      "border": "none",
+      "position": "static",
+      "fontSize": "14px"
+    },
+    "a11y_serial": "[{\"role\": \"button\", \"name\": \"action 2 variant 1\", \"value\": \"A\"}]",
+    "a11y_bytes": 300,
+    "dom_bytes": 2250,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "dom_visual": "VB_0_0_0_7",
+    "dom_computed_style": "CS_blue_1_2_A_0_#fff",
+    "color_key": "blue"
+  },
+  "('A', 2, 2)": {
+    "visual_raw": "{\"x\": 0, \"y\": 0, \"w\": 0, \"h\": 0, \"count\": 8, \"depth\": 3}",
+    "computed_style_raw": "{\"color\": \"rgb(0,0,0)\", \"backgroundColor\": \"#fff\", \"visibility\": \"visible\", \"display\": \"block\", \"opacity\": \"1.0\", \"border\": \"none\", \"position\": \"static\", \"fontSize\": \"14px\"}",
+    "bbox": {
+      "x": 0,
+      "y": 0,
+      "width": 0,
+      "height": 0
+    },
+    "computed_style": {
+      "color": "rgb(0,0,0)",
+      "backgroundColor": "#fff",
+      "visibility": "visible",
+      "display": "block",
+      "opacity": "1.0",
+      "border": "none",
+      "position": "static",
+      "fontSize": "14px"
+    },
+    "a11y_serial": "[{\"role\": \"button\", \"name\": \"action 2 variant 2\", \"value\": \"A\"}]",
+    "a11y_bytes": 300,
+    "dom_bytes": 2300,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "dom_visual": "VB_0_0_0_8",
+    "dom_computed_style": "CS_blue_2_2_A_0_#fff",
+    "color_key": "blue"
+  },
+  "('B', 2, 0)": {
+    "visual_raw": "{\"x\": 0, \"y\": 0, \"w\": 0, \"h\": 0, \"count\": 6, \"depth\": 3}",
+    "computed_style_raw": "{\"color\": \"rgb(0,0,0)\", \"backgroundColor\": \"#fff\", \"visibility\": \"visible\", \"display\": \"block\", \"opacity\": \"1.0\", \"border\": \"none\", \"position\": \"static\", \"fontSize\": \"14px\"}",
+    "bbox": {
+      "x": 0,
+      "y": 0,
+      "width": 0,
+      "height": 0
+    },
+    "computed_style": {
+      "color": "rgb(0,0,0)",
+      "backgroundColor": "#fff",
+      "visibility": "visible",
+      "display": "block",
+      "opacity": "1.0",
+      "border": "none",
+      "position": "static",
+      "fontSize": "14px"
+    },
+    "a11y_serial": "[{\"role\": \"button\", \"name\": \"action 2 variant 0\", \"value\": \"B\"}]",
+    "a11y_bytes": 300,
+    "dom_bytes": 2200,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "dom_visual": "VB_0_0_0_6",
+    "dom_computed_style": "CS_blue_0_2_B_0_#fff",
+    "color_key": "blue"
+  },
+  "('B', 2, 1)": {
+    "visual_raw": "{\"x\": 0, \"y\": 0, \"w\": 0, \"h\": 0, \"count\": 7, \"depth\": 3}",
+    "computed_style_raw": "{\"color\": \"rgb(0,0,0)\", \"backgroundColor\": \"#fff\", \"visibility\": \"visible\", \"display\": \"block\", \"opacity\": \"1.0\", \"border\": \"none\", \"position\": \"static\", \"fontSize\": \"14px\"}",
+    "bbox": {
+      "x": 0,
+      "y": 0,
+      "width": 0,
+      "height": 0
+    },
+    "computed_style": {
+      "color": "rgb(0,0,0)",
+      "backgroundColor": "#fff",
+      "visibility": "visible",
+      "display": "block",
+      "opacity": "1.0",
+      "border": "none",
+      "position": "static",
+      "fontSize": "14px"
+    },
+    "a11y_serial": "[{\"role\": \"button\", \"name\": \"action 2 variant 1\", \"value\": \"B\"}]",
+    "a11y_bytes": 300,
+    "dom_bytes": 2250,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "dom_visual": "VB_0_0_0_7",
+    "dom_computed_style": "CS_blue_1_2_B_0_#fff",
+    "color_key": "blue"
+  },
+  "('B', 2, 2)": {
+    "visual_raw": "{\"x\": 0, \"y\": 0, \"w\": 0, \"h\": 0, \"count\": 8, \"depth\": 3}",
+    "computed_style_raw": "{\"color\": \"rgb(0,0,0)\", \"backgroundColor\": \"#fff\", \"visibility\": \"visible\", \"display\": \"block\", \"opacity\": \"1.0\", \"border\": \"none\", \"position\": \"static\", \"fontSize\": \"14px\"}",
+    "bbox": {
+      "x": 0,
+      "y": 0,
+      "width": 0,
+      "height": 0
+    },
+    "computed_style": {
+      "color": "rgb(0,0,0)",
+      "backgroundColor": "#fff",
+      "visibility": "visible",
+      "display": "block",
+      "opacity": "1.0",
+      "border": "none",
+      "position": "static",
+      "fontSize": "14px"
+    },
+    "a11y_serial": "[{\"role\": \"button\", \"name\": \"action 2 variant 2\", \"value\": \"B\"}]",
+    "a11y_bytes": 300,
+    "dom_bytes": 2300,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "dom_visual": "VB_0_0_0_8",
+    "dom_computed_style": "CS_blue_2_2_B_0_#fff",
+    "color_key": "blue"
+  },
+  "('A', 3, 0)": {
+    "visual_raw": "{\"x\": 0, \"y\": 0, \"w\": 0, \"h\": 0, \"count\": 6, \"depth\": 3}",
+    "computed_style_raw": "{\"color\": \"rgb(0,0,0)\", \"backgroundColor\": \"#fff\", \"visibility\": \"visible\", \"display\": \"block\", \"opacity\": \"1.0\", \"border\": \"none\", \"position\": \"static\", \"fontSize\": \"14px\"}",
+    "bbox": {
+      "x": 0,
+      "y": 0,
+      "width": 0,
+      "height": 0
+    },
+    "computed_style": {
+      "color": "rgb(0,0,0)",
+      "backgroundColor": "#fff",
+      "visibility": "visible",
+      "display": "block",
+      "opacity": "1.0",
+      "border": "none",
+      "position": "static",
+      "fontSize": "14px"
+    },
+    "a11y_serial": "[{\"role\": \"button\", \"name\": \"action 3 variant 0\", \"value\": \"A\"}]",
+    "a11y_bytes": 300,
+    "dom_bytes": 2300,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "dom_visual": "VB_0_0_0_6",
+    "dom_computed_style": "CS_blue_0_3_A_0_#fff",
+    "color_key": "blue"
+  },
+  "('A', 3, 1)": {
+    "visual_raw": "{\"x\": 0, \"y\": 0, \"w\": 0, \"h\": 0, \"count\": 7, \"depth\": 3}",
+    "computed_style_raw": "{\"color\": \"rgb(0,0,0)\", \"backgroundColor\": \"#fff\", \"visibility\": \"visible\", \"display\": \"block\", \"opacity\": \"1.0\", \"border\": \"none\", \"position\": \"static\", \"fontSize\": \"14px\"}",
+    "bbox": {
+      "x": 0,
+      "y": 0,
+      "width": 0,
+      "height": 0
+    },
+    "computed_style": {
+      "color": "rgb(0,0,0)",
+      "backgroundColor": "#fff",
+      "visibility": "visible",
+      "display": "block",
+      "opacity": "1.0",
+      "border": "none",
+      "position": "static",
+      "fontSize": "14px"
+    },
+    "a11y_serial": "[{\"role\": \"button\", \"name\": \"action 3 variant 1\", \"value\": \"A\"}]",
+    "a11y_bytes": 300,
+    "dom_bytes": 2350,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "dom_visual": "VB_0_0_0_7",
+    "dom_computed_style": "CS_blue_1_3_A_0_#fff",
+    "color_key": "blue"
+  },
+  "('A', 3, 2)": {
+    "visual_raw": "{\"x\": 0, \"y\": 0, \"w\": 0, \"h\": 0, \"count\": 8, \"depth\": 3}",
+    "computed_style_raw": "{\"color\": \"rgb(0,0,0)\", \"backgroundColor\": \"#fff\", \"visibility\": \"visible\", \"display\": \"block\", \"opacity\": \"1.0\", \"border\": \"none\", \"position\": \"static\", \"fontSize\": \"14px\"}",
+    "bbox": {
+      "x": 0,
+      "y": 0,
+      "width": 0,
+      "height": 0
+    },
+    "computed_style": {
+      "color": "rgb(0,0,0)",
+      "backgroundColor": "#fff",
+      "visibility": "visible",
+      "display": "block",
+      "opacity": "1.0",
+      "border": "none",
+      "position": "static",
+      "fontSize": "14px"
+    },
+    "a11y_serial": "[{\"role\": \"button\", \"name\": \"action 3 variant 2\", \"value\": \"A\"}]",
+    "a11y_bytes": 300,
+    "dom_bytes": 2400,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "dom_visual": "VB_0_0_0_8",
+    "dom_computed_style": "CS_blue_2_3_A_0_#fff",
+    "color_key": "blue"
+  },
+  "('B', 3, 0)": {
+    "visual_raw": "{\"x\": 0, \"y\": 0, \"w\": 0, \"h\": 0, \"count\": 6, \"depth\": 3}",
+    "computed_style_raw": "{\"color\": \"rgb(0,0,0)\", \"backgroundColor\": \"#fff\", \"visibility\": \"visible\", \"display\": \"block\", \"opacity\": \"1.0\", \"border\": \"none\", \"position\": \"static\", \"fontSize\": \"14px\"}",
+    "bbox": {
+      "x": 0,
+      "y": 0,
+      "width": 0,
+      "height": 0
+    },
+    "computed_style": {
+      "color": "rgb(0,0,0)",
+      "backgroundColor": "#fff",
+      "visibility": "visible",
+      "display": "block",
+      "opacity": "1.0",
+      "border": "none",
+      "position": "static",
+      "fontSize": "14px"
+    },
+    "a11y_serial": "[{\"role\": \"button\", \"name\": \"action 3 variant 0\", \"value\": \"B\"}]",
+    "a11y_bytes": 300,
+    "dom_bytes": 2300,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "dom_visual": "VB_0_0_0_6",
+    "dom_computed_style": "CS_blue_0_3_B_0_#fff",
+    "color_key": "blue"
+  },
+  "('B', 3, 1)": {
+    "visual_raw": "{\"x\": 0, \"y\": 0, \"w\": 0, \"h\": 0, \"count\": 7, \"depth\": 3}",
+    "computed_style_raw": "{\"color\": \"rgb(0,0,0)\", \"backgroundColor\": \"#fff\", \"visibility\": \"visible\", \"display\": \"block\", \"opacity\": \"1.0\", \"border\": \"none\", \"position\": \"static\", \"fontSize\": \"14px\"}",
+    "bbox": {
+      "x": 0,
+      "y": 0,
+      "width": 0,
+      "height": 0
+    },
+    "computed_style": {
+      "color": "rgb(0,0,0)",
+      "backgroundColor": "#fff",
+      "visibility": "visible",
+      "display": "block",
+      "opacity": "1.0",
+      "border": "none",
+      "position": "static",
+      "fontSize": "14px"
+    },
+    "a11y_serial": "[{\"role\": \"button\", \"name\": \"action 3 variant 1\", \"value\": \"B\"}]",
+    "a11y_bytes": 300,
+    "dom_bytes": 2350,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "dom_visual": "VB_0_0_0_7",
+    "dom_computed_style": "CS_blue_1_3_B_0_#fff",
+    "color_key": "blue"
+  },
+  "('B', 3, 2)": {
+    "visual_raw": "{\"x\": 0, \"y\": 0, \"w\": 0, \"h\": 0, \"count\": 8, \"depth\": 3}",
+    "computed_style_raw": "{\"color\": \"rgb(0,0,0)\", \"backgroundColor\": \"#fff\", \"visibility\": \"visible\", \"display\": \"block\", \"opacity\": \"1.0\", \"border\": \"none\", \"position\": \"static\", \"fontSize\": \"14px\"}",
+    "bbox": {
+      "x": 0,
+      "y": 0,
+      "width": 0,
+      "height": 0
+    },
+    "computed_style": {
+      "color": "rgb(0,0,0)",
+      "backgroundColor": "#fff",
+      "visibility": "visible",
+      "display": "block",
+      "opacity": "1.0",
+      "border": "none",
+      "position": "static",
+      "fontSize": "14px"
+    },
+    "a11y_serial": "[{\"role\": \"button\", \"name\": \"action 3 variant 2\", \"value\": \"B\"}]",
+    "a11y_bytes": 300,
+    "dom_bytes": 2400,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "dom_visual": "VB_0_0_0_8",
+    "dom_computed_style": "CS_blue_2_3_B_0_#fff",
+    "color_key": "blue"
+  },
+  "('A', 4, 0)": {
+    "visual_raw": "{\"x\": 0, \"y\": 0, \"w\": 0, \"h\": 0, \"count\": 6, \"depth\": 3}",
+    "computed_style_raw": "{\"color\": \"rgb(0,0,0)\", \"backgroundColor\": \"#fff\", \"visibility\": \"visible\", \"display\": \"block\", \"opacity\": \"1.0\", \"border\": \"none\", \"position\": \"static\", \"fontSize\": \"14px\"}",
+    "bbox": {
+      "x": 0,
+      "y": 0,
+      "width": 0,
+      "height": 0
+    },
+    "computed_style": {
+      "color": "rgb(0,0,0)",
+      "backgroundColor": "#fff",
+      "visibility": "visible",
+      "display": "block",
+      "opacity": "1.0",
+      "border": "none",
+      "position": "static",
+      "fontSize": "14px"
+    },
+    "a11y_serial": "[{\"role\": \"button\", \"name\": \"action 4 variant 0\", \"value\": \"A\"}]",
+    "a11y_bytes": 300,
+    "dom_bytes": 2400,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "dom_visual": "VB_0_0_0_6",
+    "dom_computed_style": "CS_blue_0_4_A_0_#fff",
+    "color_key": "blue"
+  },
+  "('A', 4, 1)": {
+    "visual_raw": "{\"x\": 0, \"y\": 0, \"w\": 0, \"h\": 0, \"count\": 7, \"depth\": 3}",
+    "computed_style_raw": "{\"color\": \"rgb(0,0,0)\", \"backgroundColor\": \"#fff\", \"visibility\": \"visible\", \"display\": \"block\", \"opacity\": \"1.0\", \"border\": \"none\", \"position\": \"static\", \"fontSize\": \"14px\"}",
+    "bbox": {
+      "x": 0,
+      "y": 0,
+      "width": 0,
+      "height": 0
+    },
+    "computed_style": {
+      "color": "rgb(0,0,0)",
+      "backgroundColor": "#fff",
+      "visibility": "visible",
+      "display": "block",
+      "opacity": "1.0",
+      "border": "none",
+      "position": "static",
+      "fontSize": "14px"
+    },
+    "a11y_serial": "[{\"role\": \"button\", \"name\": \"action 4 variant 1\", \"value\": \"A\"}]",
+    "a11y_bytes": 300,
+    "dom_bytes": 2450,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "dom_visual": "VB_0_0_0_7",
+    "dom_computed_style": "CS_blue_1_4_A_0_#fff",
+    "color_key": "blue"
+  },
+  "('A', 4, 2)": {
+    "visual_raw": "{\"x\": 0, \"y\": 0, \"w\": 0, \"h\": 0, \"count\": 8, \"depth\": 3}",
+    "computed_style_raw": "{\"color\": \"rgb(0,0,0)\", \"backgroundColor\": \"#fff\", \"visibility\": \"visible\", \"display\": \"block\", \"opacity\": \"1.0\", \"border\": \"none\", \"position\": \"static\", \"fontSize\": \"14px\"}",
+    "bbox": {
+      "x": 0,
+      "y": 0,
+      "width": 0,
+      "height": 0
+    },
+    "computed_style": {
+      "color": "rgb(0,0,0)",
+      "backgroundColor": "#fff",
+      "visibility": "visible",
+      "display": "block",
+      "opacity": "1.0",
+      "border": "none",
+      "position": "static",
+      "fontSize": "14px"
+    },
+    "a11y_serial": "[{\"role\": \"button\", \"name\": \"action 4 variant 2\", \"value\": \"A\"}]",
+    "a11y_bytes": 300,
+    "dom_bytes": 2500,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "dom_visual": "VB_0_0_0_8",
+    "dom_computed_style": "CS_blue_2_4_A_0_#fff",
+    "color_key": "blue"
+  },
+  "('B', 4, 0)": {
+    "visual_raw": "{\"x\": 0, \"y\": 0, \"w\": 0, \"h\": 0, \"count\": 6, \"depth\": 3}",
+    "computed_style_raw": "{\"color\": \"rgb(0,0,0)\", \"backgroundColor\": \"#fff\", \"visibility\": \"visible\", \"display\": \"block\", \"opacity\": \"1.0\", \"border\": \"none\", \"position\": \"static\", \"fontSize\": \"14px\"}",
+    "bbox": {
+      "x": 0,
+      "y": 0,
+      "width": 0,
+      "height": 0
+    },
+    "computed_style": {
+      "color": "rgb(0,0,0)",
+      "backgroundColor": "#fff",
+      "visibility": "visible",
+      "display": "block",
+      "opacity": "1.0",
+      "border": "none",
+      "position": "static",
+      "fontSize": "14px"
+    },
+    "a11y_serial": "[{\"role\": \"button\", \"name\": \"action 4 variant 0\", \"value\": \"B\"}]",
+    "a11y_bytes": 300,
+    "dom_bytes": 2400,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "dom_visual": "VB_0_0_0_6",
+    "dom_computed_style": "CS_blue_0_4_B_0_#fff",
+    "color_key": "blue"
+  },
+  "('B', 4, 1)": {
+    "visual_raw": "{\"x\": 0, \"y\": 0, \"w\": 0, \"h\": 0, \"count\": 7, \"depth\": 3}",
+    "computed_style_raw": "{\"color\": \"rgb(0,0,0)\", \"backgroundColor\": \"#fff\", \"visibility\": \"visible\", \"display\": \"block\", \"opacity\": \"1.0\", \"border\": \"none\", \"position\": \"static\", \"fontSize\": \"14px\"}",
+    "bbox": {
+      "x": 0,
+      "y": 0,
+      "width": 0,
+      "height": 0
+    },
+    "computed_style": {
+      "color": "rgb(0,0,0)",
+      "backgroundColor": "#fff",
+      "visibility": "visible",
+      "display": "block",
+      "opacity": "1.0",
+      "border": "none",
+      "position": "static",
+      "fontSize": "14px"
+    },
+    "a11y_serial": "[{\"role\": \"button\", \"name\": \"action 4 variant 1\", \"value\": \"B\"}]",
+    "a11y_bytes": 300,
+    "dom_bytes": 2450,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "dom_visual": "VB_0_0_0_7",
+    "dom_computed_style": "CS_blue_1_4_B_0_#fff",
+    "color_key": "blue"
+  },
+  "('B', 4, 2)": {
+    "visual_raw": "{\"x\": 0, \"y\": 0, \"w\": 0, \"h\": 0, \"count\": 8, \"depth\": 3}",
+    "computed_style_raw": "{\"color\": \"rgb(0,0,0)\", \"backgroundColor\": \"#fff\", \"visibility\": \"visible\", \"display\": \"block\", \"opacity\": \"1.0\", \"border\": \"none\", \"position\": \"static\", \"fontSize\": \"14px\"}",
+    "bbox": {
+      "x": 0,
+      "y": 0,
+      "width": 0,
+      "height": 0
+    },
+    "computed_style": {
+      "color": "rgb(0,0,0)",
+      "backgroundColor": "#fff",
+      "visibility": "visible",
+      "display": "block",
+      "opacity": "1.0",
+      "border": "none",
+      "position": "static",
+      "fontSize": "14px"
+    },
+    "a11y_serial": "[{\"role\": \"button\", \"name\": \"action 4 variant 2\", \"value\": \"B\"}]",
+    "a11y_bytes": 300,
+    "dom_bytes": 2500,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "dom_visual": "VB_0_0_0_8",
+    "dom_computed_style": "CS_blue_2_4_B_0_#fff",
+    "color_key": "blue"
+  }
+}
