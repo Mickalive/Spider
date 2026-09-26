@@ -1,0 +1,302 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-FRONTIER-36249071934",
+  "lane": "frontier",
+  "status": "REVISE",
+  "producer_claim_supported": false,
+  "required_fixes": [
+    "The inherited-mechanism arm (B-INHERITED-SPIDER) must be made executable under the preregistered configuration before any architecture verdict on C-RESIDUAL-NOVELTY is possible. The current comparison measures 'shipped kernel plus perfect-model deopt on every span' (C_i = 72.0) against 'no-memory compile+deopt' (C_d = 38.6), not working inheritance vs. deopt ratchet.",
+    "The primary estimand (per_span_witnessed_determinism_fraction = 0.5833) must not be promoted as a claim-level number about real agent work. It is a property of the experimenter-authored task plan at the pre-declared novelty rate nu=0.50. The sweep shows the same experiment yields 1.0 down to 0.1667 across the declared grid. Only the rung (relative arm ordering at fixed novelty, and monotone novelty->determinism relation) is informative.",
+    "The Wilson 95% CI [0.555, 0.611] treats 1200 span occurrences as independent Bernoulli trials, but spans within an episode share work item and store state. The true sampling unit is the episode (n=50), not the span. A cluster-corrected interval would be wider; the sweep across 5 novelty rates is the stronger evidence for how the fraction moves.",
+    "The frozen decision rule's DEOPT_DOMINATES classification is mechanically correct but scientifically narrow. The C_d < C_i leg is not identified. The producer correctly reports falsifier_triggered=false and outcome=MIXED. The Director must not read the mechanical classification as a falsification of SPIDER's inheritance premise.",
+    "PC-WITNESSED-DETERMINISM control has a spec/prereg inconsistency: spec.json positive_control says 'compile all spans on first episode' and 'model_calls_after_compile=0', while prereg.md 6.1 step 2 requires >=2 witnesses and prereg.md 8.1 reads 'model_calls_after_episode_1 = 0'. Under the prereg rule compilation completes during episode 2, so episode 2 still deopts. The PASS/FAIL judgement used the prereg.md 8.1 criterion under the prereg.md 6.1 rule (FAIL: 216 model calls in episodes 2-50). The specification was not edited to remove the ambiguity; this must be resolved in any successor experiment.",
+    "The cost model uses preregistered abstract units (1 per compile, deopt, execution, machinery). No token, latency, wall-clock, or dollar measurement exists. The model oracle is a deterministic perfect-policy function, so deopt-to-agent is idealised. A real model call would be less reliable and differently priced; the deopt arm's advantage is an upper bound relative to a real model."
+  ],
+  "validity_findings": [
+    {
+      "id": "V1_INHERITED_LEG_NOT_IDENTIFIED",
+      "severity": "CRITICAL",
+      "description": "The frozen three-way comparison's inherited leg (B-INHERITED-SPIDER) executed zero mechanisms across 1200 spans. The incumbent arm's cost (72.0 units/episode) is exactly equal to the mandatory null control B-COLD-EXPLORATION (72.0). The only difference between the two arms is a registry the incumbent can never use. The C_d < C_i contrast cannot separate 'inheritance is uneconomic' from 'the shipped kernel cannot execute'. This is the same identifiability defect recorded in the parent handoff (audit findings B1/B2 for EXP-FRONTIER-36129180789) and was not repaired in prereg.md 6.2, which restates min_confidence=0.8 verbatim.",
+      "evidence_refs": [
+        "result.json.metrics.inherited_arm_operational.executable_resolutions_total=0",
+        "result.json.metrics.inherited_arm_operational.mechanisms_executed_total=0",
+        "result.json.metrics.inherited_arm_operational.registry_confidences=[0.5]",
+        "result.json.metrics.inherited_arm_operational.min_confidence=0.8",
+        "result.json.metrics.kernel_direct_probe.resolve_exact_intent_and_preconditions_status=EXPLORE",
+        "result.json.metrics.kernel_direct_probe.resolve_exact_intent_and_preconditions_reason=candidate exists but confidence is below execution threshold"
+      ]
+    },
+    {
+      "id": "V2_GENERATOR_RELATIVE_ESTIMAND",
+      "severity": "HIGH",
+      "description": "The per_span_witnessed_determinism_fraction (0.5833, Wilson CI [0.555, 0.611]) is a property of the pre-declared task generator mixture at novelty rate 0.50, not an identified constant of real agent work. The sensitivity sweep (metrics.determinism_vs_target_novelty_rate_sweep) shows realized determinism fractions of {1.0, 0.7917, 0.5833, 0.375, 0.1667} across the pre-declared grid {0.00, 0.25, 0.50, 0.75, 1.00}. The headline fraction must not be promoted to a claim-level number. Only the rung (relative arm ordering at fixed novelty, and the monotone relation) is informative.",
+      "evidence_refs": [
+        "result.json.metrics.primary_estimand.value=0.5833333333333334",
+        "result.json.metrics.primary_estimand.measurement_validity_caveat",
+        "result.json.metrics.determinism_vs_target_novelty_rate_sweep",
+        "prereg.md section 5.2: task generator's residual-novelty rate never fixed"
+      ]
+    },
+    {
+      "id": "V3_COST_MODEL_ABSTRACT_NOT_ECONOMIC",
+      "severity": "HIGH",
+      "description": "The cost model uses preregistered abstract units with no token, latency, wall-clock, or dollar measurement. token_denominated_cost and browser_or_dom_measurements are null. The model oracle is a deterministic perfect-policy function (cost = 1 unit per call regardless of quality). A real model call would be less reliable and differently priced. The deopt arm's measured advantage is an idealised upper bound relative to real model pricing and reliability.",
+      "evidence_refs": [
+        "result.json.metrics.token_denominated_cost=null",
+        "result.json.metrics.browser_or_dom_measurements=null",
+        "common.py ModelOracle docstring: 'simulated perfect model... Cost = 1 unit per call regardless of model quality'",
+        "prereg.md 12: 'Model oracle = deterministic function returning correct action for given state'"
+      ]
+    },
+    {
+      "id": "V4_ASYMMETRIC_INFORMATION_TO_ARMS",
+      "severity": "MEDIUM",
+      "description": "The deopt ratchet (Arm A) is given only the substrate world state and its own last request; the oracle is given the remaining task plan, which is what a perfect model handed the goal would have to infer. This asymmetry is conservative with respect to the treatment arm (it weakens Arm A), but it means the deopt arm is not solving the same inference problem as a real model would. The parent audit recorded this as defect B1 (direct compiler input derived from derived_context); this implementation is the opposite (no derived_context given to treatment arm).",
+      "evidence_refs": [
+        "common.py ModelOracle docstring: 'The oracle is given the remaining task plan... The compile+deopt arm is deliberately NOT given the plan'",
+        "deopt_ratchet.py observable_state_sig uses only store and last_request",
+        "result.json.validity_notes entry on asymmetric information"
+      ]
+    },
+    {
+      "id": "V5_WILSON_CI_CLUSTERING",
+      "severity": "MEDIUM",
+      "description": "The Wilson 95% CI for determinism_fraction treats 1200 span occurrences as independent, but spans within one episode share a work item and a store state. The true sampling unit is the episode (n=50), not the span. The reported CI is therefore narrower than a cluster-corrected interval would be. The sweep across 5 novelty rates, which re-runs the whole experiment, provides stronger evidence about how the fraction moves.",
+      "evidence_refs": [
+        "result.json.metrics.primary_estimand.wilson_ci95=[0.555, 0.611]",
+        "measure.py determinism() uses Wilson on span occurrences",
+        "result.json.validity_notes entry on Wilson CI rigour"
+      ]
+    },
+    {
+      "id": "V6_PC_WITNESSED_DETERMINISM_SPEC_PREREG_INCONSISTENCY",
+      "severity": "MEDIUM",
+      "description": "spec.json positive_control says 'compile all spans on first episode' and 'model_calls_after_compile=0', while prereg.md 6.1 step 2 requires >=2 witnesses and prereg.md 8.1 reads 'model_calls_after_episode_1 = 0'. Under the prereg rule compilation completes during episode 2, so episode 2 still deopts. Both readings are reported (model_calls_episodes_2_to_50_literal=216, model_calls_strictly_after_compile_complete=192); PASS/FAIL uses prereg.md 8.1 under prereg.md 6.1. The specification was not edited to remove the ambiguity.",
+      "evidence_refs": [
+        "spec.json positive_control.expected_outcome",
+        "prereg.md 6.1 step 2 and 8.1 pass criterion",
+        "result.json.controls.PC-WITNESSED-DETERMINISM.observed.model_calls_episodes_2_to_50_literal=216",
+        "result.json.frozen_design_deviations DEV-unresolvable-by-EXECUTE"
+      ]
+    },
+    {
+      "id": "V7_SUBSTRATE_REPRESENTATION_LOSS",
+      "severity": "HIGH",
+      "description": "The substrate is a self-authored, single-machine, stateless-per-episode CRUD service with no DOM, no accessibility tree, no cross-site state, no authentication, no rate limiting, no partial failure, no non-determinism, and no adversarial content. Success rate 1.0 in all three arms reflects a perfectly deterministic substrate, not robust agent behaviour. Generalization to live heterogeneous Web work is a separate claim (C-CROSSSITE / C-WEB-DYNAMICS) and is explicitly not tested here per prereg.md 12.",
+      "evidence_refs": [
+        "result.json.validity_notes entry on representation loss",
+        "prereg.md 12 validity threats table",
+        "substrate_deterministic_http.py: single in-memory store, no persistence, no concurrency beyond threading"
+      ]
+    },
+    {
+      "id": "V8_TASK_PLAN_EXPERIMENTER_AUTHORED",
+      "severity": "HIGH",
+      "description": "The five intents are the ones prereg.md 5.2 names, but the concrete endpoints, the four-work-item episode structure, and the 24-span episode length are this execution's operationalisation of a preregistered sketch. They are fixed in code before any arm ran (taskplan.py) and every arm uses the identical plan, so the arm comparison is internally sound, but the absolute numbers are properties of this operationalisation. The per-span determinism fraction of REAL agent work remains unmeasured.",
+      "evidence_refs": [
+        "result.json.validity_notes entry on task plan",
+        "taskplan.py: WORK_ITEMS_PER_EPISODE=4, STEP_SEQUENCE of 6 steps, MAIN_NOVELTY_RATE=0.50",
+        "result.json.unresolved entry on per-span determinism of real agent work"
+      ]
+    }
+  ],
+  "baseline_findings": [
+    {
+      "id": "B1_INHERITED_KERNEL_NON_EXECUTABLE",
+      "description": "The shipped SpiderKernel (src/spider/kernel.py) under the preregistered configuration (distill confidence=0.5, min_confidence=0.8) cannot execute any distilled mechanism. Over 1200 resolve calls: 689 EXPLORE, 511 UNKNOWN, 0 EXECUTABLE, 0 mechanisms executed. All 24 distilled mechanisms have confidence 0.5 and empty parameter_slots, freshness, applicability_guards, verification_rule, repair_scope, failure_boundary. The kernel has no distill_parameterized. A diagnostic resolve at min_confidence=0.5 returns EXECUTABLE and verify() returns True, confirming the blocking constraint is the confidence gate plus exact-intent string equality.",
+      "status": "CONFIRMED",
+      "evidence_refs": [
+        "result.json.metrics.inherited_arm_operational",
+        "result.json.metrics.kernel_direct_probe",
+        "artifacts/kernel_probe.json",
+        "artifacts/controls.json PC-EXACT-REPLAY (0/48 EXECUTABLE)",
+        "src/spider/kernel.py lines 74-91 (distill confidence=0.5), line 59 (min_confidence=0.8)"
+      ]
+    },
+    {
+      "id": "B2_COLD_ABLATION_MATCHES_INHERITED_COST",
+      "description": "B-COLD-EXPLORATION (empty registry) and B-INHERITED-SPIDER (populated but unusable registry) have identical amortized cost: 72.0 units/episode. Both pay 1 machinery unit per span (resolve call) + 1 model unit per span (deopt) + 1 execution unit per span. The machinery charge is conservative against the treatment arm (it is also charged to the mandatory null control). The NC-ZERO-DETERMINISM control confirms this: on the literal prereg.md 7.2 three-term formula, its cost ratio vs cold = 1.0.",
+      "status": "CONFIRMED",
+      "evidence_refs": [
+        "result.json.metrics.amortized_cost_units_per_episode.B-INHERITED-SPIDER=72.0",
+        "result.json.metrics.amortized_cost_units_per_episode.B-COLD-EXPLORATION=72.0",
+        "result.json.metrics.amortized_cost_breakdown for both arms",
+        "result.json.controls.NC-ZERO-DETERMINISM.observed.cost_ratio_vs_cold_prereg_7_2_three_term=1.0"
+      ]
+    },
+    {
+      "id": "B3_DEOPT_RATCHET_BEATS_COLD_AT_ALL_NOVELTY_RATES",
+      "description": "The deopt ratchet (B-NO-MEMORY-DETERMINISTIC) is cheaper than cold exploration (B-COLD-EXPLORATION) at every swept novelty rate: deopt_minus_cold = {-41.0, -36.75, -32.5, -28.25, -24.85} for target_novelty_rate = {0.00, 0.25, 0.50, 0.75, 1.00}. This is a clean within-design comparison (same oracle, same substrate, same tasks, same success rate). The paired bootstrap confirms deopt - cold = -33.4, CI95 [-34.0, -32.4], p=0.0 at the main novelty rate 0.50.",
+      "status": "CONFIRMED",
+      "evidence_refs": [
+        "result.json.metrics.determinism_vs_target_novelty_rate_sweep",
+        "result.json.metrics.cost_difference_bootstrap.deopt_minus_cold",
+        "result.json.metrics.amortized_cost_units_per_episode.B-NO-MEMORY-DETERMINISTIC=38.6",
+        "result.json.metrics.amortized_cost_units_per_episode.B-COLD-EXPLORATION=72.0"
+      ]
+    },
+    {
+      "id": "B4_COMPILABILITY_GAP_QUANTIFIED",
+      "description": "700 of 1200 span occurrences (0.5833) met the witnessed-determinism rule, but only 480 (0.6857 of deterministic occurrences) were actually served from compiled replay. The 220-occurrence gap splits exactly: 100 where state key recurred but mapped to >1 correct action (create_resource of episode-invariant work items), 100 where state key never recurred (entry_point following episode-specific create), and 20 that are the first two witnesses of each remaining key (prereg.md 6.1 witness threshold). This decomposition was independently recomputed from the raw span records (artifacts/spans_no-memory-deterministic.jsonl).",
+      "status": "CONFIRMED",
+      "evidence_refs": [
+        "result.json.metrics.compilability_boundary",
+        "result.json.metrics.compilability_boundary.deterministic_but_deopted_exact_split",
+        "artifacts/spans_no-memory-deterministic.jsonl (sha256: af5c4291927cee9febc05835ebb6881647355d1255f72c13eb3590b5e45a363b)"
+      ]
+    },
+    {
+      "id": "B5_PC_WITNESSED_DETERMINISM_PURE_FORM",
+      "description": "In the PC-WITNESSED-DETERMINISM control, the same compilation mechanism appears in its purest form: determinism_fraction=1.0, 20 state keys compiled, and model calls settle at exactly 4 per episode (one per work item) because all four work items present an identical observable state but require four different correct actions. The no-memory state->action table provably cannot disambiguate them without parameter induction, which prereg.md 6.1 forbids in this arm. The control's FAIL is an instrument result, not a failed hypothesis.",
+      "status": "CONFIRMED",
+      "evidence_refs": [
+        "result.json.controls.PC-WITNESSED-DETERMINISM",
+        "artifacts/controls.json PC-WITNESSED-DETERMINISM",
+        "result.json.validity_notes entry on PC-WITNESSED-DETERMINISM failure"
+      ]
+    },
+    {
+      "id": "B6_NC_ZERO_DETERMINISM_PASSES",
+      "description": "NC-ZERO-DETERMINISM passes on the literal prereg.md 7.2 three-component formula: determinism_fraction=0.0, cost_ratio_vs_cold=1.0. The machinery-inclusive ratio is 0.6667 because the deopt ratchet structurally never pays the machinery cost. Both are reported; PASS uses the literal formula as preregistered.",
+      "status": "CONFIRMED",
+      "evidence_refs": [
+        "result.json.controls.NC-ZERO-DETERMINISM",
+        "artifacts/controls.json NC-ZERO-DETERMINISM"
+      ]
+    },
+    {
+      "id": "B7_SUBSTRATE_DETERMINISM_VERIFIED",
+      "description": "Substrate idempotency was verified as prereg.md 12 requires: 8 distinct request shapes, 100 identical repeats each (800 round trips), every shape returning exactly one distinct response-body hash and one status code, with destructive verbs exercised on their success path.",
+      "status": "CONFIRMED",
+      "evidence_refs": [
+        "result.json.metrics.substrate_determinism_check",
+        "artifacts/substrate_determinism_check.json (sha256: e23ba2360a00c826d9182fe99cff3719d7c899b61d2eef911bcd0dd1f884c00c)",
+        "substrate_deterministic_http.py _DETERMINISM_CASES and determinism_check()"
+      ]
+    }
+  ],
+  "recomputed_metrics": {
+    "primary_estimand": {
+      "name": "per_span_witnessed_determinism_fraction",
+      "value": 0.5833333333333334,
+      "deterministic_span_occurrences": 700,
+      "total_span_occurrences": 1200,
+      "wilson_ci95": [
+        0.5552167229809802,
+        0.6109181102518974
+      ],
+      "per_arm_cross_check": {
+        "B-COLD-EXPLORATION": 0.5833333333333334,
+        "B-INHERITED-SPIDER": 0.5833333333333334,
+        "B-NO-MEMORY-DETERMINISTIC": 0.5833333333333334
+      },
+      "note": "Recomputed from artifacts/spans_no-memory-deterministic.jsonl witness counts per signature across 50 episodes. All three arms observed identical span populations (matched_task_instances_check.json confirms cross-arm identity)."
+    },
+    "determinism_fraction_by_episode": {
+      "10": 0.5238095238095238,
+      "20": 0.5238095238095238,
+      "30": 0.5238095238095238,
+      "40": 0.5238095238095238,
+      "50": 0.5238095238095238
+    },
+    "amortized_cost_units_per_episode": {
+      "B-NO-MEMORY-DETERMINISTIC": 38.6,
+      "B-INHERITED-SPIDER": 72.0,
+      "B-COLD-EXPLORATION": 72.0
+    },
+    "amortized_cost_breakdown": {
+      "B-NO-MEMORY-DETERMINISTIC": {
+        "compile_units": 10,
+        "machinery_units": 0,
+        "model_units": 720,
+        "execution_units": 1200,
+        "total_units": 1930
+      },
+      "B-INHERITED-SPIDER": {
+        "compile_units": 0,
+        "machinery_units": 1200,
+        "model_units": 1200,
+        "execution_units": 1200,
+        "total_units": 3600
+      },
+      "B-COLD-EXPLORATION": {
+        "compile_units": 0,
+        "machinery_units": 1200,
+        "model_units": 1200,
+        "execution_units": 1200,
+        "total_units": 3600
+      }
+    },
+    "success_rate": {
+      "B-NO-MEMORY-DETERMINISTIC": 1.0,
+      "B-INHERITED-SPIDER": 1.0,
+      "B-COLD-EXPLORATION": 1.0
+    },
+    "decision_rule_outcome": "DEOPT_DOMINATES",
+    "decision_rule_matched_correctness": true,
+    "cost_difference_bootstrap": {
+      "deopt_minus_cold": {
+        "mean_difference_units": -33.4,
+        "ci95": [-34.0, -32.4],
+        "p_two_sided_bootstrap": 0.0
+      },
+      "deopt_minus_inherited": {
+        "mean_difference_units": -33.4,
+        "ci95": [-34.0, -32.4],
+        "p_two_sided_bootstrap": 0.0
+      }
+    },
+    "compilability_boundary": {
+      "deterministic_occurrences": 700,
+      "served_by_compiled_replay": 480,
+      "deterministic_but_deopted": 220,
+      "compilable_given_deterministic": 0.6857142857142857,
+      "compiled_share_of_all_spans": 0.4
+    },
+    "deopt_arm_operational": {
+      "compiled_state_keys": 10,
+      "observed_state_keys": 511,
+      "compilation_completed_at_episode": 2,
+      "model_calls_per_episode_steady_state": [14],
+      "compiled_replays_total": 480
+    }
+  },
+  "claim_ceiling": "On this specific substrate with this experimenter-authored task plan at novelty_rate=0.50, a no-memory compiled executor with a selective deopt-to-agent ratchet achieves lower amortized abstract cost than always-deopting (C_d=38.6 < C_c=72.0, matched correctness 1.0). The comparison against inherited-mechanism execution is NOT IDENTIFIED because the shipped kernel executed zero mechanisms under the preregistered configuration. The primary estimand (per-span witnessed-determinism fraction = 0.5833) is a property of the task generator, not an identified constant of real agent work. The frozen falsifier (DEOPT_DOMINATES/DEOPT_TIES -> FALSIFIED-IN-SETTING) is NOT triggered because its discriminating premise (identified comparison against executable inherited arm) is not met. SPIDER's central inheritance premise is neither falsified nor validated by this experiment. Maximum justified claim: DEOPT_RATCHET_BEATS_COLD_ON_THIS_PLAN_FAMILY; INHERITED_LEG_NOT_IDENTIFIED.",
+  "evidence_refs": [
+    "research/experiments/EXP-FRONTIER-36249071934/result.json",
+    "research/experiments/EXP-FRONTIER-36249071934/report.md",
+    "research/experiments/EXP-FRONTIER-36249071934/provenance.json",
+    "research/experiments/EXP-FRONTIER-36249071934/artifacts/spans_no-memory-deterministic.jsonl",
+    "research/experiments/EXP-FRONTIER-36249071934/artifacts/spans_inherited-spider.jsonl",
+    "research/experiments/EXP-FRONTIER-36249071934/artifacts/spans_cold-exploration.jsonl",
+    "research/experiments/EXP-FRONTIER-36249071934/artifacts/controls.json",
+    "research/experiments/EXP-FRONTIER-36249071934/artifacts/kernel_probe.json",
+    "research/experiments/EXP-FRONTIER-36249071934/artifacts/matched_task_instances_check.json",
+    "research/experiments/EXP-FRONTIER-36249071934/artifacts/sensitivity_novelty_sweep.json",
+    "research/experiments/EXP-FRONTIER-36249071934/artifacts/derived_metrics.json",
+    "research/experiments/EXP-FRONTIER-36249071934/spec.json",
+    "research/experiments/EXP-FRONTIER-36249071934/prereg.md",
+    "research/experiments/EXP-FRONTIER-36249071934/freeze.json",
+    "research/experiments/EXP-FRONTIER-36129180789/handoff.json",
+    "src/spider/kernel.py",
+    "research/frontier/arms/deopt_ratchet.py",
+    "research/frontier/arms/inherited_spider.py",
+    "research/frontier/arms/cold_exploration.py",
+    "research/frontier/arms/common.py",
+    "research/frontier/measure.py",
+    "research/frontier/taskplan.py",
+    "research/frontier/substrate_deterministic_http.py"
+  ],
+  "unresolved": [
+    "Whether inherited-mechanism execution is economically superior, inferior, or indistinguishable to a no-memory compiled executor. The experiment contains no observation of working inheritance. A successor must make B-INHERITED-SPIDER executable (e.g., by lowering min_confidence to <=0.5 or giving distill() a real confidence model) before any architecture verdict is possible.",
+    "The per-span witnessed-determinism fraction of REAL agent work remains unmeasured. The value 0.5833 is a property of an experimenter-authored task plan at a pre-declared novelty rate. A successor on a captured real Web trajectory distribution is the only design that can turn it into a claim-level number.",
+    "Whether the compilability gap generalises: 0.6857 of deterministic occurrences were compilable and 0.4 of all spans served from compiled entries. The measured causes were: observationally identical but goal-distinct state key (100 occurrences), state keys that never recurred due to episode-specific previous request (100 occurrences), and the 2-witness compilation rule (20 occurrences). Unknown how much of real work is of each kind.",
+    "Whether the deopt ratchet's advantage survives a non-ideal model. The oracle was a deterministic perfect policy at fixed unit price, so the measured cost saving is an upper bound relative to real model calls and unknown relative to real model pricing.",
+    "Whether the inherited arm would be cost-competitive once executable. The registry holds 24 mechanisms that match intent and preconditions exactly; they are blocked by a single scalar gate. Nothing in this run indicates what their execution would cost, because none was executed.",
+    "The external convergent-compilation numbers in the director mandate (Auto witnessed-determinism 87.1% of 560 spans, etc.) were NOT imported and not compared against anything here. They remain unverified agent priors; only an Intel artifact could license that comparison.",
+    "Whether C-SEMANTIC-RESOLVE is structurally unreachable is consistent with but not established by this run: the kernel probe shows a paraphrased intent resolving UNKNOWN, but the experiment was not designed to test semantic resolution and only one paraphrase was probed.",
+    "Whether DEOPT_TIES and DEOPT_LOSES branches of the frozen rule are reachable at all on this substrate. The incumbent arm's cost is pinned to the null's cost by total non-executability, which no novelty setting can change.",
+    "The confidence gap (0.5 vs 0.8) is a single scalar in the shipped kernel, but whether SPIDER's architecture should be changed in response is a Director decision that this producer does not make and does not recommend here.",
+    "Whether a cluster-corrected CI for determinism_fraction would change the inference. The Wilson CI assumes independent span occurrences; the true sampling unit is the episode (n=50)."
+  ]
+}

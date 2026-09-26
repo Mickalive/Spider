@@ -1,0 +1,490 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-36249064252",
+  "lane": "product",
+  "status": "COMPLETE",
+  "outcome": "FALSIFIES",
+  "metrics": {
+    "treatment_mechanism_success_rate_by_family": {
+      "crud-write": 1.0,
+      "crud-read": 1.0,
+      "query": 1.0
+    },
+    "treatment_end_to_end_success_rate_by_family": {
+      "crud-write": 1.0,
+      "crud-read": 1.0,
+      "query": 1.0
+    },
+    "treatment_binding_accuracy": 1.0,
+    "treatment_fallback_used_tasks": 0,
+    "treatment_n_transfer_tasks": 150,
+    "treatment_own_http_requests_per_task": 1.0,
+    "treatment_amortized_requests_per_task": 1.0,
+    "treatment_amortized_requests_per_task_by_family": {
+      "crud-write": 1.0,
+      "crud-read": 1.0,
+      "query": 1.0
+    },
+    "treatment_amortized_response_bytes_per_task": 253.81333333333333,
+    "treatment_wall_ms_per_task": 1.1509098199985601,
+    "treatment_kernel_calls_per_task": 2.0,
+    "abstention_precision": 1.0,
+    "false_accept_rate": 0.0,
+    "n_negative_probes": 60,
+    "ece_treatment": 0.04347800000000002,
+    "ece_treatment_n": 150,
+    "ece_pooled_all_arms": 0.01976272727272728,
+    "ece_pooled_n": 550,
+    "induction_requests_total": 100,
+    "amortized_cost_ratio_vs_best_baseline": {
+      "crud-write": 1.0162601626016263,
+      "crud-read": 1.666666666666667,
+      "query": 1.666666666666667
+    },
+    "amortized_cost_ratio_vs_b_cold_by_family": {
+      "crud-write": 1.0162601626016263,
+      "crud-read": 1.666666666666667,
+      "query": 1.666666666666667
+    },
+    "break_even_n_requests_vs_b_cold": {
+      "crud-write": 253.80710659898483,
+      "crud-read": null,
+      "query": null
+    },
+    "baseline_amortized_requests_per_task": {
+      "B-COLD": 1.2133333333333334,
+      "B-COLD-DOC": 1.34,
+      "B-LITERAL-REPLAY": 1.2133333333333334,
+      "B-LITERAL-REPLAY-FORCED": 2.2133333333333334,
+      "B-RETRIEVAL-K5": 1.2133333333333334,
+      "B-RETRIEVAL-K5-SLOT": 1.2133333333333334,
+      "NC-SHUFFLED-INTENT": 1.2133333333333334,
+      "PARAM-INHERIT": 1.0
+    },
+    "baseline_mechanism_success_rate": {
+      "B-COLD": 0.0,
+      "B-COLD-DOC": 0.0,
+      "B-LITERAL-REPLAY": 0.0,
+      "B-LITERAL-REPLAY-FORCED": 0.0,
+      "B-RETRIEVAL-K5": 0.0,
+      "B-RETRIEVAL-K5-SLOT": 0.0,
+      "NC-SHUFFLED-INTENT": 0.0,
+      "PARAM-INHERIT": 1.0
+    },
+    "baseline_end_to_end_success_rate": {
+      "B-COLD": 1.0,
+      "B-COLD-DOC": 0.3333333333333333,
+      "B-LITERAL-REPLAY": 1.0,
+      "B-LITERAL-REPLAY-FORCED": 1.0,
+      "B-RETRIEVAL-K5": 1.0,
+      "B-RETRIEVAL-K5-SLOT": 1.0,
+      "NC-SHUFFLED-INTENT": 1.0,
+      "PARAM-INHERIT": 1.0
+    },
+    "bootstrap_success_rate_ci95_by_family": {
+      "crud-write": [
+        1.0,
+        1.0
+      ],
+      "crud-read": [
+        1.0,
+        1.0
+      ],
+      "query": [
+        1.0,
+        1.0
+      ]
+    },
+    "bootstrap_b": 5000,
+    "incumbent_resource_b_executable_fraction": 0.0,
+    "incumbent_resource_b_http_requests": 0,
+    "incumbent_same_intent_resolution": {
+      "confidence": 0.5,
+      "reason": "candidate exists but confidence is below execution threshold",
+      "status": "EXPLORE"
+    },
+    "incumbent_paraphrased_intent_resolution": {
+      "reason": "no applicable validated mechanism",
+      "status": "UNKNOWN"
+    },
+    "incumbent_has_distill_parameterized": false,
+    "units": {
+      "success_rate": "fraction of tasks",
+      "requests_per_task": "HTTP requests",
+      "bytes_per_task": "response bytes",
+      "wall_ms_per_task": "milliseconds",
+      "ece": "expected calibration error, unitless",
+      "amortized_cost_ratio": "unitless ratio",
+      "break_even_n": "number of transfer tasks"
+    }
+  },
+  "controls": {
+    "PC-SAME-RESOURCE": {
+      "expected": "success_rate >= 0.95, binding_accuracy >= 0.95, cost_ratio <= 0.50 vs B-COLD (prereg 5.1)",
+      "observed": {
+        "success_rate": 1.0,
+        "binding_accuracy": 1.0,
+        "amortized_requests_per_task": 1.0,
+        "b_cold_amortized_requests_per_task": 1.0,
+        "cost_ratio_vs_b_cold": 2.0,
+        "transfer_only_cost_ratio_vs_b_cold": 1.0,
+        "n_tasks": 100
+      },
+      "status": "FAIL",
+      "which_half_failed": "cost only; the correctness and binding halves are 1.0",
+      "evidence": [
+        "artifacts/raw/arm_PC-SAME-RESOURCE_PARAM.json",
+        "artifacts/raw/arm_PC-SAME-RESOURCE_B-COLD.json",
+        "artifacts/derived/decision_rule.json#D6_positive_control"
+      ]
+    },
+    "NC-SHUFFLED-INTENT": {
+      "expected": "success_rate <= 0.10, abstention_precision >= 0.90, cost_ratio >= 1.0 vs B-COLD (prereg 5.2)",
+      "observed": {
+        "mechanism_success_rate": 0.0,
+        "abstention_precision": 1.0,
+        "cost_ratio_vs_b_cold": 1.0,
+        "mechanisms_induced": 4,
+        "end_to_end_success_rate_with_cold_fallback": 1.0
+      },
+      "status": "PASS",
+      "evidence": [
+        "artifacts/raw/arm_NC-SHUFFLED-INTENT.json",
+        "artifacts/raw/null_control_mechanisms.json",
+        "artifacts/derived/decision_rule.json#D7_null_control"
+      ]
+    },
+    "B-COLD": {
+      "expected": "UNKNOWN for all intents; full discovery cost (prereg 4.2)",
+      "observed": {
+        "mechanism_success_rate": 0.0,
+        "end_to_end_success_rate": 1.0,
+        "amortized_requests_per_task": 1.2133333333333334
+      },
+      "status": "BASELINE_ELIGIBLE_D5",
+      "evidence": [
+        "artifacts/raw/arm_B-COLD.json"
+      ]
+    },
+    "B-LITERAL-REPLAY": {
+      "expected": "EXPLORE (confidence 0.5 < 0.8) or UNKNOWN; no identifier transfer (prereg 4.2)",
+      "observed": {
+        "mechanism_success_rate": 0.0,
+        "end_to_end_success_rate": 1.0,
+        "amortized_requests_per_task": 1.2133333333333334
+      },
+      "status": "BASELINE_ELIGIBLE_D5",
+      "evidence": [
+        "artifacts/raw/arm_B-LITERAL-REPLAY.json",
+        "artifacts/raw/literal_mechanisms.json"
+      ]
+    },
+    "B-RETRIEVAL-K5": {
+      "expected": "top-5 embedding retrieval plus heuristic slot matching; executable if match confidence >= threshold (prereg 4.2)",
+      "observed": {
+        "mechanism_success_rate": 0.0,
+        "end_to_end_success_rate": 1.0,
+        "amortized_requests_per_task": 1.2133333333333334
+      },
+      "status": "BASELINE_ELIGIBLE_D5",
+      "evidence": [
+        "artifacts/raw/arm_B-RETRIEVAL-K5.json"
+      ]
+    },
+    "B-RETRIEVAL-K5-SLOT": {
+      "expected": "diagnostic (not a prereg 4.2 baseline): retrieval plus align_parameters slot filling on the retrieved template",
+      "observed": {
+        "mechanism_success_rate": 0.0,
+        "amortized_requests_per_task": 1.2133333333333334
+      },
+      "status": "DIAGNOSTIC_NOT_USED_AS_DENOMINATOR",
+      "evidence": [
+        "artifacts/raw/arm_B-RETRIEVAL-K5-SLOT.json"
+      ]
+    },
+    "B-LITERAL-REPLAY-FORCED": {
+      "expected": "diagnostic: force execution of the literal resource-A mechanism on resource-B with a working credential, isolating identifier transfer from authorization",
+      "observed": {
+        "mechanism_success_rate": 0.0,
+        "binding_accuracy": 0.0,
+        "end_to_end_success_rate": 1.0,
+        "amortized_requests_per_task": 2.2133333333333334
+      },
+      "status": "DIAGNOSTIC_NOT_USED_AS_DENOMINATOR",
+      "evidence": [
+        "artifacts/raw/arm_B-LITERAL-REPLAY-FORCED.json"
+      ]
+    },
+    "B-COLD-DOC": {
+      "expected": "diagnostic: cold arm driven by the frozen documented executor rather than re-implemented cold exploration",
+      "observed": {
+        "end_to_end_success_rate": 0.3333333333333333,
+        "amortized_requests_per_task": 1.34,
+        "end_to_end_success_rate_by_family": {
+          "crud-write": 0.0,
+          "crud-read": 0.0,
+          "query": 1.0
+        }
+      },
+      "status": "DIAGNOSTIC_INCOMPETENT_EXCLUDED_FROM_D5",
+      "evidence": [
+        "artifacts/raw/arm_B-COLD-DOC.json"
+      ]
+    },
+    "NEGATIVE-PROBES": {
+      "expected": "abstention_precision >= 0.85, false_accept_rate <= 0.10 (prereg 4.3)",
+      "observed": {
+        "n_probes": 60,
+        "unlearned_intent_probes": 40,
+        "prefix_collision_probes": 20,
+        "abstentions": 60,
+        "false_accepts": 0,
+        "abstention_precision": 1.0,
+        "false_accept_rate": 0.0
+      },
+      "status": "PASS",
+      "evidence": [
+        "artifacts/raw/negative_probes.json"
+      ]
+    },
+    "INCUMBENT-REFERENCE-CURVE": {
+      "expected": "prereg 6: 0 percent EXECUTABLE for any distilled mechanism on any resource",
+      "observed": {
+        "has_distill_parameterized": false,
+        "distill_confidence": 0.5,
+        "min_confidence": 0.8,
+        "same_intent_resolution": {
+          "confidence": 0.5,
+          "reason": "candidate exists but confidence is below execution threshold",
+          "status": "EXPLORE"
+        },
+        "paraphrased_intent_resolution": {
+          "reason": "no applicable validated mechanism",
+          "status": "UNKNOWN"
+        },
+        "resource_b_executable_fraction": 0.0,
+        "resource_b_http_requests": 0,
+        "unpopulated_fields": {
+          "applicability_guards": {},
+          "failure_boundary": {},
+          "freshness": {},
+          "repair_scope": {},
+          "verification_rule": {}
+        }
+      },
+      "status": "MATCHES_PREREG_EXPECTATION",
+      "evidence": [
+        "artifacts/raw/incumbent_reference_curve.json"
+      ]
+    },
+    "UNIT-TESTS": {
+      "expected": "product-lane code change is tested (prereg 8, harness-substitute mitigation)",
+      "observed": {
+        "tests": 20,
+        "returncode": 0,
+        "summary": "OK",
+        "runner": "python3 -m unittest discover -s tests"
+      },
+      "status": "PASS",
+      "evidence": [
+        "artifacts/raw/unit_tests.txt"
+      ]
+    }
+  },
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-PRODUCT-36249064252/artifacts/raw/a_observations.json",
+      "sha256": "b4d7ac32ebbefa5599510852e9f54e7d22c3e1094c63af46a3c9b14f0af07d45",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-36249064252/artifacts/raw/induced_mechanisms.json",
+      "sha256": "dda76d9988d96a7a00e5e62918f88a7cff86423a624dca81fe44ea8106ffbb2a",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-36249064252/artifacts/raw/literal_mechanisms.json",
+      "sha256": "9ea9791bb46bb56083a6278914c64a032ca06cd2861b04c488679018c8b3f7cf",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-36249064252/artifacts/raw/null_control_mechanisms.json",
+      "sha256": "eed2a0d719c2de7f6377931750e012b3cf5172b75de02f6b34c396373a8d2b66",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-36249064252/artifacts/raw/negative_probes.json",
+      "sha256": "954c8c5db504c9994bcc1dbc7f953937d39a5c390f46006a72e57ca2ac4d734d",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-36249064252/artifacts/raw/incumbent_reference_curve.json",
+      "sha256": "dbeddf9653aade3266d555d56da030cf83f700767b84f224b2e0bf7a71a74e7a",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-36249064252/artifacts/raw/arm_PARAM-INHERIT.json",
+      "sha256": "26b885df12d0a3320adad6049bf8b510c79e2b0d453651d5e4df2238cda593d5",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-36249064252/artifacts/raw/arm_B-COLD.json",
+      "sha256": "64c94c6d0ac5f34fbed660bf10b8a0eba922d85dcca346316b1a192487124331",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-36249064252/artifacts/raw/arm_B-LITERAL-REPLAY.json",
+      "sha256": "0bb0f54ef3211caed654458b65f966187a10afe4372157c7c749143587760753",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-36249064252/artifacts/raw/arm_B-RETRIEVAL-K5.json",
+      "sha256": "fee82e660c64f376afbc33c5ecde948af2d114dc455521d6081dfcd592da3854",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-36249064252/artifacts/raw/arm_B-RETRIEVAL-K5-SLOT.json",
+      "sha256": "0cf2d62a0cb7d14bd590f3ced8b61f65032b9475fb7a5363cb39c96f14fe0760",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-36249064252/artifacts/raw/arm_B-LITERAL-REPLAY-FORCED.json",
+      "sha256": "3f8e9f6b837f31d18b24278a654437791c0720062697d06682655046b6f95fcb",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-36249064252/artifacts/raw/arm_B-COLD-DOC.json",
+      "sha256": "f62fa36c21b3d21d74237382455c3a9ce52857dd519f9da8c46c5d41a41b9838",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-36249064252/artifacts/raw/arm_NC-SHUFFLED-INTENT.json",
+      "sha256": "181279c432b6dbd48c037af6e0791812fc81cfa7134fd6b253b955a99f86bb7a",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-36249064252/artifacts/raw/arm_PC-SAME-RESOURCE_PARAM.json",
+      "sha256": "befaf38bf572e7be769807e42b1b7cb5e7f2acc8bc92b4601959e9ac6d1282c0",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-36249064252/artifacts/raw/arm_PC-SAME-RESOURCE_B-COLD.json",
+      "sha256": "d5d4a5b8964d34adc6dde62818fc63bbf6c7f908926bea5154b365d7e23eeec3",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-36249064252/artifacts/raw/preconditions.json",
+      "sha256": "5c040246d6a18cae4d5569ccff374e8a63194302839e7cb5fc7a1095192c8eca",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-36249064252/artifacts/raw/environment.json",
+      "sha256": "4fd91753d9510c9c8220caae8f8c6eeea8a2042129560ede1dfe48af41df6ee8",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-36249064252/artifacts/raw/unit_tests.txt",
+      "sha256": "39f1cbcff3f9c9c17ce77bd215c34a8fdb65a720bf39ece793d02b5c649d6bf3",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-36249064252/artifacts/raw/code_hashes.json",
+      "sha256": "35b911c0e09bb9d181beca0db5948b7e769a8337eed1645346f504dd326522c4",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-36249064252/artifacts/derived/arm_metrics.json",
+      "sha256": "0e291b098262a25dcf1cfe349cc722aec5c0e2c8ff9ae72e7e3c4e8c69eeebb8",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-36249064252/artifacts/derived/controls.json",
+      "sha256": "7c5098da28eedb6623733e01af137e30ef436add6d96c8e98bacf4e7e45e35cc",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-36249064252/artifacts/derived/decision_rule.json",
+      "sha256": "e2ece1d82ed2303f18133ef86905397b85a26c3adf1a75f8bb3083886d7b9345",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-36249064252/substrate.py",
+      "sha256": "dfd9f3f59982bbeae962d85491c3b80bf267936b60e7b187abe2cc2a061d6487",
+      "role": "fixture"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-36249064252/arms.py",
+      "sha256": "60b656d9ad1939ebcea2b77bd284bee5e9d6c5314f1d470f1f83105e634a2ade",
+      "role": "fixture"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-36249064252/incumbent_probe.py",
+      "sha256": "09615f5051ce2a1c261e600479a5e6c76fe5c12599153ada31bf026f9f689434",
+      "role": "fixture"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-36249064252/run_experiment.py",
+      "sha256": "e7a1507407d868c8cd302a85a5a6748db2954df54ef63117d806619064815f24",
+      "role": "code"
+    },
+    {
+      "path": "src/spider/kernel.py",
+      "sha256": "ac1cbdd92342d32369f4dcdbe3e58ce688c07d2690f252b66bfb3c84212f6501",
+      "role": "code"
+    },
+    {
+      "path": "src/spider/models.py",
+      "sha256": "338aaf4d7ba0e31f7a5fe8a47abdbb2ea52d9c1c4ef0ce014f2b809b9a2a9b78",
+      "role": "code"
+    },
+    {
+      "path": "src/spider/registry.py",
+      "sha256": "51fb440d3827f21cccb5f77ad17dc0e76ccdbc2d52d7b05044cd821bb8a9322c",
+      "role": "code"
+    },
+    {
+      "path": "src/spider/__init__.py",
+      "sha256": "ea9c113b6f54839921f7a721e5fb9ad3f72866406d29fea9819d8cf35d21df50",
+      "role": "code"
+    },
+    {
+      "path": "tests/test_kernel.py",
+      "sha256": "efcd6649b2379ec2e2327adad635cbecbec251c830aeaad591a839033ce627e9",
+      "role": "code"
+    }
+  ],
+  "observations": [
+    "100 successful resource-A observations (5 collection-neutral intents x 20 identifiers across items/tags) were induced into exactly 5 parameter-slot mechanisms, one per intent, each with confidence 0.956522 (Beta(2,1) posterior mean 0.9565217 x leave-one-out consistency 1.0).",
+    "Each induced mechanism exposes a slot for the varying collection plus the per-task identifier, and the list mechanism additionally exposes q and limit; every durable template contains ${auth_token} and no bearer-token literal.",
+    "The literal incumbent-style mechanisms distilled from the same evidence embed the literal resource-A bearer token in their persisted action_template, expose no parameter slots, and carry the hardcoded confidence 0.5.",
+    "On 150 resource-B transfer tasks whose identifiers never appear in the induction evidence, the treatment executed a bound mechanism on 150/150 tasks, with binding accuracy 1.0, postcondition pass 1.0 and kernel verification pass 1.0.",
+    "The treatment used a cold fallback on 0 of 150 resource-B tasks and issued exactly 1.0 HTTP request per task in every family.",
+    "Every resolution the treatment issued on resource B was EXECUTABLE; no EXPLORE or UNKNOWN resolution occurred on a transfer task.",
+    "60 negative probes (40 unlearned-intent probes over 2 collections and 2 roles, plus 20 prefix-collision probes) all resolved UNKNOWN with 0 false accepts.",
+    "The null control (intent labels permuted across all observations) induced 4 mechanisms whose mechanism success rate on resource B was 0.0, with abstention precision 1.0 and cost equal to B-COLD (ratio 1.0).",
+    "The positive control on held-out resource-A identifiers reached mechanism success 1.0 and binding accuracy 1.0 at 1.0 HTTP request per task, while the B-COLD arm on those same tasks also cost 1.0 request per task.",
+    "The documented-executor cold arm (B-COLD-DOC) achieved end-to-end success 1.0 on the query family and 0.0 on both crud-write and crud-read, for 0.333 overall.",
+    "The forced literal replay arm was given a valid working credential and still achieved binding accuracy 0.0 and mechanism success 0.0 on resource B; its end-to-end success of 1.0 came entirely from cold fallback.",
+    "The committed incumbent kernel has no distill_parameterized, reports distill confidence 0.5 against min_confidence 0.8, resolves same-intent to EXPLORE and paraphrased intent to UNKNOWN, and produced executable fraction 0.0 with 0 HTTP requests on the resource-B probe."
+  ],
+  "validity_notes": [
+    "Substrate substitution, disclosed: prereg 8 named Flask and this environment has no flask, so the substrate is stdlib http.server on 127.0.0.1 with an ephemeral port. The API surface, status codes, auth failures, session-scoped bodies and ETag/304 behaviour were verified by a self-test recorded before the arms ran.",
+    "Representation loss, disclosed: the training corpus contains only items and tags, so the collection slot's only observed values are {items, tags}. Transfer to products is an extrapolation to a third, unobserved value of that slot, and the measured success on products is out-of-support generalization rather than interpolation.",
+    "The list training actions repeat their (q, limit) pairs within each collection, so two resource-A observations per intent share an evidence id. The observation count is 100 but the distinct-evidence count is lower; this does not affect the leave-one-out result, which reached 1.0 consistency.",
+    "Cost dynamic-range limitation, disclosed: on this substrate cold exploration already costs 1.0 HTTP request per read and per query, so there is no per-task saving for the treatment to amortize its 100-request induction bill against on those families. The 0.85 amortization target is unreachable there for any system, including a correct one.",
+    "D6 has the same limitation on the positive-control task set, where B-COLD also costs 1.0 request per task, so the cost_ratio <= 0.50 half of the positive control cannot be met by any system on this substrate. Its correctness and binding halves are 1.0.",
+    "The treatment's confidence is a single value (0.956522) across all 150 executed transfer tasks, so the treatment ECE is a single-bin quantity and carries little information about calibration resolution; the pooled all-arm ECE (0.019763 over n=550) is the more informative calibration number and is reported alongside.",
+    "The 150 transfer tasks are 3 intents x 50 tasks, so per-family success rates are exact counts out of 50 and the family-stratified bootstrap CI is degenerate at [1.0, 1.0]. No population-level generalization beyond these task constructions is claimed.",
+    "No model, browser, network egress or external dataset was used. This is a controlled harness measurement of the kernel's inheritance path, not an end-to-end web agent evaluation.",
+    "Three product-code defects were found and fixed during execution, before the reported run: string-only slot alignment that could not represent integer-valued query parameters, verbatim copying of a constant Authorization header into a durable template, and volatile session metadata being promoted to a hard precondition. Each fix is covered by a unit test in tests/test_kernel.py; they are product behaviour changes inside the lane's authorized code root and are part of what was measured.",
+    "The D5 denominator is restricted to the three baselines prereg 4.2 declares and matched on the prereg 4.3 task-level success_rate, with an additional requirement that the baseline be competent (end-to-end success >= 0.80) in every family. Both restrictions make the D5 test harder for the treatment, not easier."
+  ],
+  "unresolved": [
+    "Whether the economic failure is intrinsic to parameter inheritance or an artifact of this substrate's low cold-baseline cost is not settled here. Measured break-even is 254 transfer tasks on crud-write and unreachable on crud-read and query; a substrate with a genuine discovery cost would be needed to separate the two.",
+    "The D6 cost criterion is not discriminating on this substrate and no substitute was substituted for it. A follow-up needs either a substrate with real discovery cost or a prereg that treats the cost half of the positive control as expected-to-fail.",
+    "Parameter inheritance beyond one collection dimension is untested: the induced slots cover collection, id, q, limit and auth_token only. Whether the same machinery spans schemas with different field names, nested bodies or multi-step flows is unknown.",
+    "Whether the mechanism abstains correctly when a slot is bound outside the observed support is untested in the failure direction; this run only shows that it does not abstain and does succeed on a third collection value.",
+    "Repair on binding or execution failure (C-DELTA-REPAIR) was explicitly out of scope and remains unmeasured. The fallback path used here is harness-level cold exploration, not a kernel repair capability.",
+    "Staleness and freshness (C-FRESHNESS) were not exercised. The mechanism records evidence-scope metadata including observed_distinct_identifiers=2 for the list intent, which reflects the repeated list actions rather than a freshness assessment."
+  ]
+}
