@@ -1,0 +1,50 @@
+{
+  "Null_R_visible_text_hash": {
+    "perm_mean": 0.8134123302570017,
+    "perm_std": 3.3306690738754696e-16,
+    "obs_cmi": 0.8134123302570013,
+    "p_raw": 1.0
+  },
+  "Null_R_visual": {
+    "perm_mean": 0.8134123302570017,
+    "perm_std": 3.3306690738754696e-16,
+    "obs_cmi": 0.8134123302570013,
+    "p_raw": 1.0
+  },
+  "Null_R_computed_style": {
+    "perm_mean": 0.8134123302570017,
+    "perm_std": 3.3306690738754696e-16,
+    "obs_cmi": 0.8134123302570013,
+    "p_raw": 1.0
+  },
+  "Null_R_AX": {
+    "perm_mean": 0.8134123302570017,
+    "perm_std": 3.3306690738754696e-16,
+    "obs_cmi": 0.8134123302570013,
+    "p_raw": 1.0
+  },
+  "Positive_R_visible_text_hash": {
+    "perm_mean": 0.7606006392528275,
+    "perm_std": 0.0,
+    "obs_cmi": 0.7606006392528275,
+    "p_raw": 1.0
+  },
+  "Positive_R_visual": {
+    "perm_mean": 0.7606006392528275,
+    "perm_std": 0.0,
+    "obs_cmi": 0.7606006392528275,
+    "p_raw": 1.0
+  },
+  "Positive_R_computed_style": {
+    "perm_mean": 0.7606006392528275,
+    "perm_std": 0.0,
+    "obs_cmi": 0.7606006392528275,
+    "p_raw": 1.0
+  },
+  "Positive_R_AX": {
+    "perm_mean": 0.7606006392528275,
+    "perm_std": 0.0,
+    "obs_cmi": 0.7606006392528275,
+    "p_raw": 1.0
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "Null_R_visible_text_hash": {
+    "analytic_mean": 5.092262718862476,
+    "analytic_std": 1.3303196591223716
+  },
+  "Null_R_visual": {
+    "analytic_mean": 5.092262718862476,
+    "analytic_std": 1.3303196591223716
+  },
+  "Null_R_computed_style": {
+    "analytic_mean": 5.092262718862476,
+    "analytic_std": 1.3303196591223716
+  },
+  "Null_R_AX": {
+    "analytic_mean": 5.092262718862476,
+    "analytic_std": 1.3303196591223716
+  },
+  "Positive_R_visible_text_hash": {
+    "analytic_mean": 3.8095066467026184,
+    "analytic_std": 1.30279118139431
+  },
+  "Positive_R_visual": {
+    "analytic_mean": 3.8095066467026184,
+    "analytic_std": 1.30279118139431
+  },
+  "Positive_R_computed_style": {
+    "analytic_mean": 3.8095066467026184,
+    "analytic_std": 1.30279118139431
+  },
+  "Positive_R_AX": {
+    "analytic_mean": 3.8095066467026184,
+    "analytic_std": 1.30279118139431
+  }
+}
