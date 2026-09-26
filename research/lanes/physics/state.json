@@ -1,17 +1,17 @@
 {
   "lane": "physics",
   "human_paused": false,
-  "active_experiment_id": "EXP-PHYSICS-36104718112",
-  "last_experiment_id": "EXP-PHYSICS-36084494842",
+  "active_experiment_id": null,
+  "last_experiment_id": "EXP-PHYSICS-36104718112",
   "last_verdict": "MEASUREMENT_INVALID",
   "continue_immediately": false,
-  "next_question": "After repairing exact per-stratum digamma/trigamma Gamma-ratio validation (remove 95.0/45.0 divisors, 0.5 factor, 0.008-0.018 clamping, K_eff=16 cap; implement exact gammaln/polygamma K=n_states_observed alpha=1/K per stratum without heuristic) and provisioning genuine correlated branching banks on a real localhost:18930 Express/Flask SPA at locked 1280x720 via BrowserGym-core 0.14.3 + AgentLab 0.4.2 + Playwright 1.63.0 CDP (Accessibility.getFullAXTree/DOM.getDocument/DOM.getBoxModel/CSS.getComputedStyleForNode with dom_bytes>0 a11y_bytes>0 visual>0 computed>0 raw snapshots preserved, no page.set_content synthetic fallback, S_next without title variant inflation |S_next|>=16 not 258, MI(R;Z)>0.3), and validating positive-control observed PMI>0.1 BC>0.05 p_bonf<0.01, does history-conditioned CMI I(S_next;DOM_before|URL,H_K=3) via pure trajectory-grouped permutation (1000 perms seed42 BC=obs-perm_mean) survive with BC>0.05 p_bonf<0.01 gap_history>=0.05 gap_independent>=0.05 rel_sep>=200 on >=1 genuinely independent R, or does even correctly centered and sensitive testing remain BC~0/gap<0.05/rel_sep<200 requiring PARK pending larger production SPA session/permission regime manifest?",
+  "next_question": "Before any further C-WEB-DYNAMICS claim: can the physics apparatus return the correct verdict on banks whose ground truth is known by construction and whose substrate invariants are externally verifiable? Concretely, browser-free: (a) implement the G0 analytic as the representation-dependent null expectation E[PMI] = sum_c p(c)*[digamma(K*alpha) - digamma(N_c + K*alpha) + sum_i(digamma(n_i + alpha) - digamma(alpha))]/ln(2) with K = n_states_observed and alpha = 1/K per stratum, or delete G0 and replace it with constructive calibration; (b) use a non-negative estimator whose two entropies share one state-space support (Miller-Madow / NSB / exact Dirichlet-Multinomial plug-in) so the difference cannot go negative, and compute H(S_next|C) with K = n_states_observed instead of K_HIST=3; (c) require the frozen null to be valid, i.e. a regime-independent bank matched in marginals must return p_bonf > 0.10 and |BC| < 0.05, while a bank where a regime is injected through a channel that is NOT a copy of the latent state must return p_bonf < 0.01 and BC > 0.05 with gap >= 0.05; and only if both banks return the correct verdict, is there a different mathematical object to measure on a locally served SPA with a server-side ground-truth transition log and hashed raw CDP payloads, namely non-Markovian structure -- does H(S_{t+k} | S_t, URL_t, regime-history) decay more slowly than a matched order-(k-1) Markov null for k >= 2 (relaxation-time / long-memory signature) at calibrated p_bonf < 0.01 with gap >= 0.05? A pointwise conditional-PMI sweep on the current synthetic-FSM facade, with label-encoded observables and a code-asserted CDP chain, cannot answer this and must not be repeated.",
   "promotion_ready": false,
-  "consecutive_failures": 3,
-  "updated_at": "2026-09-26T21:17:08.354520+00:00",
-  "last_failure_retryable": false,
-  "last_handoff_sha256": "fb817b7623e85ae29c39d3dcec1340276401f8fe5fbcfd7995084c910e4f2692",
-  "same_failure_count": 1,
-  "last_failure_fingerprint": "32fb61131a26107aaf831564",
-  "last_failure_control_revision": "373719f006bb73b9e36c60fcd18b32b6a7a71921a93c6008fa7c6be7e34a6ea7"
+  "consecutive_failures": 0,
+  "updated_at": "2026-09-26T23:12:37.290899+00:00",
+  "last_failure_retryable": null,
+  "last_handoff_sha256": "2550acaffdf630de183d21dee8087d79b8d37bd24731af81f7bee14967ac5dc4",
+  "same_failure_count": 0,
+  "last_failure_fingerprint": null,
+  "last_failure_control_revision": null
 }
