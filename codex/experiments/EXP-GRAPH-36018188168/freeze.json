@@ -1,0 +1,10 @@
+{
+  "experiment_id": "EXP-GRAPH-36018188168",
+  "frozen_at": "2026-09-24T15:15:10.386011+00:00",
+  "hashes": {
+    "prereg.md": "8559b06fc4d86069961841084eb7ba2793ded63a4c8d176ac0e0c320279add2b",
+    "request.json": "fdc56a4d895d36a2da18d973b94b0bc94a12867d4db1909c75404a96f836bde5",
+    "spec.json": "cb3989523a2bcfba02b16216f8b3584628f624e3b77f99c59961dd3d6dcf9c1a"
+  },
+  "schema_version": 1
+}

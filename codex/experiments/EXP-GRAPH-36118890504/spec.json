@@ -1,0 +1,92 @@
+{
+  "experiment_id": "EXP-GRAPH-36118890504",
+  "lane": "graph",
+  "claim_ids": ["C-PARAM-INHERIT"],
+  "question": "Using a validated plain-HTTP substrate, can a mechanism distilled from resource-A observations resolve, bind, execute, and verify correctly on never-observed resource B with disjoint identifier value sets, while outperforming cold exploration, literal replay, and retrieval baselines on success and honest per-task cost without converting false accepts into executable mechanisms?",
+  "hypothesis": "A parameterized mechanism induced from successful observations on resource A (e.g., GET /posts/{id} for ids 1..5) will transfer to resource B (e.g., GET /users/{id} for ids 6..10, disjoint ID space) achieving higher success rate and lower honest per-task cost than cold exploration, literal replay, and retrieval baselines, with false accept rate below 0.10 on unrelated resource C.",
+  "falsifier": "The parameterized mechanism fails to exceed ALL THREE baselines (cold, literal replay, retrieval) on either success rate OR honest per-task cost on resource B, OR its false accept rate on unrelated resource C exceeds 0.10, OR it cannot resolve/bind/execute/verify on resource B at all.",
+  "baselines": {
+    "B-COLD": {
+      "description": "Cold exploration: no prior knowledge, agent must discover the correct endpoint and parameter binding from scratch for each task on resource B",
+      "implementation": "Empty registry, agent receives only intent and context, must explore to find working action",
+      "expected_behavior": "Low success rate, high cost (many HTTP requests), zero false accepts (no mechanism to falsely accept)"
+    },
+    "B-LITERAL-REPLAY": {
+      "description": "Literal replay: exact observed action from resource A replayed verbatim on resource B",
+      "implementation": "Registry contains only literal mechanisms from resource A (no parameter slots), agent attempts exact replay on resource B",
+      "expected_behavior": "Zero success rate on resource B (different endpoint path), zero cost if it fails fast, zero false accepts"
+    },
+    "B-RETRIEVAL-KNN": {
+      "description": "K-nearest-neighbor retrieval over prior observations: find most similar observation to current context and reuse its action",
+      "implementation": "Embed intent+context, retrieve top-k from resource A observations, adapt action template naively (string replace)",
+      "expected_behavior": "Moderate success if endpoint structure is similar, moderate cost, potential false accepts if retrieval matches wrong resource"
+    }
+  },
+  "positive_control": {
+    "id": "PC-A-SEEN",
+    "description": "Parameterized mechanism induced from resource A must resolve, bind, execute, and verify correctly on resource A seen identifiers (ids 1..5)",
+    "expected_behavior": "Success rate = 1.0, cost_per_task = 1 HTTP request, false_accept_rate = 0.0",
+    "failure_mode": "If positive control fails, the mechanism induction or substrate is broken; experiment is MEASUREMENT_INVALID"
+  },
+  "null_control": {
+    "id": "NC-UNRELATED-RESOURCE",
+    "description": "Parameterized mechanism induced from resource A must NOT resolve to EXECUTABLE on unrelated resource C (e.g., POST /comments with different action schema)",
+    "expected_behavior": "Resolution status = UNKNOWN or EXPLORE, false_accept_rate = 0.0",
+    "failure_mode": "If mechanism resolves EXECUTABLE on resource C, false accept contamination is confirmed; experiment fails its safety gate"
+  },
+  "measurement_validity": [
+    "V1_SUBSTRATE: Substrate must be a validated plain-HTTP observation/execution layer with deterministic fingerprinting, verified by Runtime lane (EXP-RUNTIME-33902315583 or equivalent). No browser, Playwright, or LLM policy required for this measurement.",
+    "V2_DISJOINT_IDS: Resource A training IDs (1..5) and resource B test IDs (6..10) must be value-disjoint. No identifier overlap in training vs test.",
+    "V3_ISOMORPHIC_ACTION: Resource A and B must share isomorphic action templates (same HTTP method, same parameter slot structure, same response schema shape) differing only in base path and ID space.",
+    "V4_HONEST_COST: Cost accounting must include all HTTP requests made (including failed/exploratory ones), not just successful executions. No hidden retries or cached responses.",
+    "V5_NO_LEAKAGE: Resource B test contexts must not contain any information about resource B's endpoint structure during mechanism induction phase. Induction sees only resource A.",
+    "V6_DETERMINISTIC_EXECUTION: Substrate must execute identically for identical inputs. No stochasticity in server responses for same (resource, id) pair.",
+    "V7_VERIFICATION_REAL: verify() must check actual HTTP response state against mechanism postconditions, not simulated or mocked state."
+  ],
+  "decision_rule": {
+    "type": "conjunctive",
+    "conditions": [
+      {
+        "id": "D1_SUCCESS_B",
+        "metric": "success_rate_B_param",
+        "threshold": "> max(success_rate_B_cold, success_rate_B_literal, success_rate_B_knn) + 0.10",
+        "description": "Parameterized mechanism success rate on resource B must exceed all three baselines by at least 10 percentage points"
+      },
+      {
+        "id": "D2_COST_B",
+        "metric": "cost_per_task_B_param",
+        "threshold": "< min(cost_per_task_B_cold, cost_per_task_B_literal, cost_per_task_B_knn) * 0.80",
+        "description": "Parameterized mechanism honest per-task cost on resource B must be at least 20% lower than the best baseline"
+      },
+      {
+        "id": "D3_FALSE_ACCEPT",
+        "metric": "false_accept_rate_C_param",
+        "threshold": "<= 0.10",
+        "description": "Parameterized mechanism false accept rate on unrelated resource C must not exceed 10%"
+      },
+      {
+        "id": "D4_POSITIVE_CONTROL",
+        "metric": "success_rate_A_param_seen",
+        "threshold": "== 1.0",
+        "description": "Positive control must pass perfectly on resource A seen identifiers"
+      },
+      {
+        "id": "D5_NULL_CONTROL",
+        "metric": "false_accept_rate_C_param",
+        "threshold": "== 0.0",
+        "description": "Null control must have zero false accepts on unrelated resource C (stronger than D3)"
+      }
+    ],
+    "outcome_mapping": {
+      "ALL_PASS": "SUPPORTS",
+      "ANY_FAIL": "FALSIFIES",
+      "POSITIVE_CONTROL_FAIL": "MEASUREMENT_INVALID",
+      "NULL_CONTROL_FAIL": "FALSIFIES",
+      "INCOMPLETE_DATA": "INCONCLUSIVE"
+    }
+  },
+  "product_consequence_positive": "C-PARAM-INHERIT advances toward VALIDATED: parameterized mechanism transfer across disjoint identifier spaces is demonstrated on validated HTTP substrate. Enables Product to build parameterized inheritance into external-agent kernel. Next gate: real-web DOM/auth/session/drift transfer and LLM distillation half of C-PARAM-INHERIT.",
+  "product_consequence_negative": "C-PARAM-INHERIT remains at synthetic POC ceiling (EXPERIMENTAL or BLOCKED). Parameterized transfer across disjoint ID spaces fails on validated HTTP substrate, suggesting the mechanism induction or binding logic is fundamentally limited. Product must not promote parameterized mechanisms. Graph must either fix induction/binding or pivot to alternative transfer mechanism.",
+  "estimated_cost": "Low: single-node Flask/JWT substrate (validated by Runtime), ~200 HTTP requests total (3 resources * 5 IDs * 2 conditions + baselines), no LLM, no browser, no distributed infra. <0.5 compute-hour.",
+  "expected_information_gain": "Very high: directly tests the registry's unresolved learn-on-A/test-on-B gate for C-PARAM-INHERIT. A clean positive or bounded negative changes whether parameterized mechanisms remain a viable product building block. Uses Runtime's retained plain-HTTP validity ceiling; does not depend on broken Playwright extension or distributed WAL."
+}
