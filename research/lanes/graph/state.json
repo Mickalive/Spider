@@ -1,17 +1,17 @@
 {
   "lane": "graph",
   "human_paused": false,
-  "active_experiment_id": "EXP-GRAPH-36272373909",
-  "last_experiment_id": "EXP-GRAPH-36132150213",
+  "active_experiment_id": null,
+  "last_experiment_id": "EXP-GRAPH-36272373909",
   "last_verdict": "MEASUREMENT_INVALID",
   "continue_immediately": false,
-  "next_question": "Once Runtime publishes and independently certifies a machine-readable capability ledger plus a one-command bring-up contract for the frozen 4-worker substrate (nginx 1.24.0 $request_uri sticky, 4x gunicorn 23.0.0 / Flask 3.1.3, PyJWT HS256, shared SQLite WAL, real If-None-Match/ETag 304, X-Worker-Pid spread >= 2, n_non304 >= 800) and, separately, certifies a launchable Chromium at 1280x720 with CDP Accessibility.getFullAXTree, does re-execution of the exact frozen EXP-GRAPH-36132150213 design \u2014 with no change to thresholds, signals, controls, baselines, workload or validity gates V1-V12 \u2014 produce the required raw observations substrate_started=true and health_gate_pass=true and then let the deterministic four-signal guard (Jaccard 0.85 over required DOM fields, endpoint _template drift, X-Csrf-Token drift, ETag with Cache-Control max-age=0) satisfy D1-D9 at approximately 15% stale prevalence with non-degenerate trajectory-grouped uncertainty across session/token rotation, endpoint parameter/header mutation and conditional-request 304 revalidation, discriminating against the B-NO-GUARD, B-JACCARD-ONLY and B-HEADER-ONLY matched-log baselines; and, if Runtime never certifies that contract, what is the smallest remaining real, non-mock, non-synthetic HTTP substrate on which C-FRESHNESS can still be discriminated without weakening any of V1-V12, given that two consecutive distributed Graph packets (EXP-GRAPH-36106653880 and this one) have now been lost to the same substrate-reachability class?",
+  "next_question": "On a stdlib-only, locally served, multi-endpoint HTTP application in which every mechanism in the frozen registry has its parameter slots actually bound so that every action template executes and no unbindable placeholder is left in any template, and in which the registry carries several mechanisms per resource family across multiple verbs so that a five-way shared-resource-noun choice is not the whole task, with (i) the primary metric redefined in the preregistration as mechanism-identity binding correctness and HTTP postcondition execution demoted to a separate and separately thresholded verification measure so the prereg.md 7.2 ambiguity is closed before freeze, (ii) a verbatim positive control that is actually executed and reported with its true denominator, (iii) an oracle arm that really holds mechanism_id/fragment_id plus a declared statement of what the difficulty ceiling is, (iv) a closed-top-bin ECE estimator and the preregistered UNKNOWN-precision definition rather than a substituted OOD abstention rate, (v) per-task server state reset with a logged per-task state hash so the identical-starting-state half of V3 is implemented rather than asserted, (vi) candidate resolver, goal generator and server code hashed into freeze.json rather than only into producer-authored result.json, and (vii) a degeneracy screen executed and logged before any candidate arm runs confirming both that the lexical-overlap null sits strictly below a preregistered headroom threshold on the frozen goal set and that the comparison leg is non-empty, either an incumbent arm run at min_confidence at or below 0.5 (the value an independent audit probe found to be the minimum for EXECUTABLE) or an explicitly substituted non-empty reference: does a fitted applicability gate over bound parameter slots reach mechanism-identity accuracy above the lexical-overlap and random nulls with paired, family-blocked uncertainty, and does it hold pooled false-accept at most 0.10, UNKNOWN precision at least 0.85 and global and per-class ECE at most 0.15 with bootstrap upper at most 0.18 when the calibration quantity is actually fitted rather than fixed by construction, so that abstention is measured instead of algebraically determined? And in the same packet, declare explicitly which regime C-SEMANTIC-RESOLVE is being measured in - kernel-level aliasing over a small set of synthetic intent-template pairs, the bounded EXP-GRAPH-34409639346 regime at EXPERIMENTAL with 0/10 aliased-first, versus natural-language goal-to-mechanism binding over a real multi-endpoint application - so the two prior ceilings measured at very different fixture strengths stop being read as compatible, and record every precondition as an observation with a smallest next action rather than as a blocking falsifier.",
   "promotion_ready": false,
-  "consecutive_failures": 1,
-  "updated_at": "2026-09-26T21:17:15.578642+00:00",
-  "last_failure_retryable": false,
-  "last_handoff_sha256": "8ab182b0b72dae9d4c4037272ad105e932d967a9152006c3c60e0a706963808e",
-  "same_failure_count": 1,
-  "last_failure_fingerprint": "3b9ff5e4e9e73f23e368efb4",
-  "last_failure_control_revision": "373719f006bb73b9e36c60fcd18b32b6a7a71921a93c6008fa7c6be7e34a6ea7"
+  "consecutive_failures": 0,
+  "updated_at": "2026-09-26T21:57:55.831486+00:00",
+  "last_failure_retryable": null,
+  "last_handoff_sha256": "5b5e4e6897e1f2784b754925237fcbc694532a908ef9f29b855898c5cfb3439c",
+  "same_failure_count": 0,
+  "last_failure_fingerprint": null,
+  "last_failure_control_revision": null
 }
