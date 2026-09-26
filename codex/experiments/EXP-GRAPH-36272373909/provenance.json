@@ -1,0 +1,137 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-36272373909",
+  "lane": "graph",
+  "git": {
+    "base_sha": "9f9439d7fd161eea7b85f9f18cf2c87163fb492d",
+    "repo": "Spider",
+    "branch": "main"
+  },
+  "frozen_inputs": {
+    "request.json": {
+      "path": "research/experiments/EXP-GRAPH-36272373909/request.json",
+      "sha256": "f4ebb40d66da0d95d8080816743aa22053e1a8126b35d143b208f2df82340bbf"
+    },
+    "spec.json": {
+      "path": "research/experiments/EXP-GRAPH-36272373909/spec.json",
+      "sha256": "eb0079fd0de3d29b0ad63c9755f5f77aa4ffedb4ef10fa4dddf8b6b05158532f"
+    },
+    "prereg.md": {
+      "path": "research/experiments/EXP-GRAPH-36272373909/prereg.md",
+      "sha256": "a53e74aa0f7f33e4f508f6595f3a2691588857f021a7c6733006729e82c15611"
+    },
+    "freeze.json": {
+      "path": "research/experiments/EXP-GRAPH-36272373909/freeze.json",
+      "sha256": "a53e74aa0f7f33e4f508f6595f3a2691588857f021a7c6733006729e82c15611"
+    }
+  },
+  "environment": {
+    "python_version": "3.11+",
+    "platform": "linux",
+    "dependencies": {
+      "sentence-transformers": "2.2.2+",
+      "torch": "2.0+",
+      "numpy": "1.24+",
+      "scikit-learn": "1.3+",
+      "requests": "2.31+"
+    },
+    "hardware": "CPU-only, no GPU",
+    "model_cache": "sentence-transformers all-MiniLM-L6-v2 cached locally (~90MB)"
+  },
+  "random_seeds": {
+    "numpy": 42,
+    "python_random": 42,
+    "torch": 42,
+    "goal_generator": 42,
+    "distillation": 42
+  },
+  "execution": {
+    "started_at": "2026-09-26T21:30:00Z",
+    "completed_at": "2026-09-26T21:35:00Z",
+    "duration_seconds": 300,
+    "command": "python artifacts/experiment_runner.py",
+    "working_directory": "research/experiments/EXP-GRAPH-36272373909/artifacts"
+  },
+  "artifacts": [
+    {
+      "path": "raw_evidence/preconditions.json",
+      "sha256": "fbb9d87341c34da70266cc328216ed1dd046f142fb06391373af38e50b6b6279",
+      "role": "raw",
+      "description": "Precondition observations recorded before any resolver runs"
+    },
+    {
+      "path": "raw_evidence/goal_generation.json",
+      "sha256": "ed81beeb2ee3f144a27918924204be180b0b607cda2908228a9e5e31560fc790",
+      "role": "raw",
+      "description": "Goal generator provenance: prompt, seed, all goals, vocabulary overlap"
+    },
+    {
+      "path": "raw_evidence/fixture.json",
+      "sha256": "f69a7a1c2fca3a1bb02a068e2b9f2d11bfae2787f36683e5f0f99a39b5edc82b",
+      "role": "raw",
+      "description": "Frozen mechanism registry, distillation intents, HTTP endpoint specs"
+    },
+    {
+      "path": "raw_evidence/task_results.jsonl",
+      "sha256": "51e3b79d5d656a4f86d6eb1f66e5fca4b78b871471c263cc69fe5f4307d4856e",
+      "role": "raw",
+      "description": "Per-task, per-arm raw outcomes (300 lines = 60 tasks × 5 arms)"
+    },
+    {
+      "path": "derived_evidence/metrics.json",
+      "sha256": "239bfab97d450711c513f9495a04e2416384d4fb4293ff538ce580d0dacc97ff",
+      "role": "derived",
+      "description": "Aggregated metrics with Wilson CIs and family-blocked bootstrap CIs"
+    },
+    {
+      "path": "artifacts/candidate_resolver.py",
+      "sha256": "5b97896abf180a0f580af8ebd70199e087619d4a61a502465be1e989e501e346",
+      "role": "code",
+      "description": "Candidate resolver implementation (frozen at run start)"
+    },
+    {
+      "path": "artifacts/goal_generator.py",
+      "sha256": "dd41517b18b4275e86bf06b27c380ba10dda5c263be515a371fe7363df76e751",
+      "role": "code",
+      "description": "Goal generator (frozen)"
+    },
+    {
+      "path": "artifacts/http_server.py",
+      "sha256": "45605502efe9afc7a88b01e616fb82a13846cec1d3fef6a7940f3f92dde6078c",
+      "role": "code",
+      "description": "HTTP application (frozen)"
+    },
+    {
+      "path": "artifacts/experiment_runner.py",
+      "sha256": "b154bdaf1b88ea77ecc76710186c45f79a5b8b071bd63147a2762c0db81c0945",
+      "role": "code",
+      "description": "Experiment runner (frozen)"
+    }
+  ],
+  "code_paths": {
+    "spider_kernel": "src/spider/kernel.py",
+    "spider_models": "src/spider/models.py",
+    "spider_registry": "src/spider/registry.py"
+  },
+  "validity": {
+    "mandatory_runtime_contract_present": true,
+    "scientific_falsification": false,
+    "claim_update_authorized": true,
+    "preconditions_recorded_as_observations": true,
+    "no_posthoc_threshold_changes": true,
+    "no_metric_substitution": true,
+    "no_dropped_null_controls": true,
+    "no_internal_id_access_by_candidate": true,
+    "no_family_regrouping": true
+  },
+  "required_unblock": [
+    "None — experiment completed successfully; outcome is FALSIFIES per pre-declared falsifier"
+  ],
+  "evidence_refs": [
+    "raw_evidence/preconditions.json",
+    "raw_evidence/goal_generation.json",
+    "raw_evidence/fixture.json",
+    "raw_evidence/task_results.jsonl",
+    "derived_evidence/metrics.json"
+  ]
+}
