@@ -1,0 +1,36 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-FRONTIER-36129180789",
+  "lane": "frontier",
+  "git_commit": "b92d41ff19dac92cc269c57aa5aa213cd3ee4cb7",
+  "git_status": "?? research/experiments/EXP-FRONTIER-36129180789/artifacts/\n?? research/experiments/EXP-FRONTIER-36129180789/model_execute.json\n?? research/experiments/EXP-FRONTIER-36129180789/report.md\n?? research/experiments/EXP-FRONTIER-36129180789/result.json\n?? research/frontier/run_execute_36129180789.py",
+  "freeze_verified": true,
+  "freeze_hashes": {
+    "prereg.md": "80fbfaa8a575d092682ae5c43b87a5ab01e7d253ae1f299691f5b61eba260767",
+    "request.json": "a496c5e2556bc8265029a68446c4864610f758c32d3f4580947000c02b2f47ce",
+    "spec.json": "ac66e99cca0bfed43e0ee70b2f3a47ba6983de0848927a4b3659759ab57b0f17"
+  },
+  "execution_mode": "diagnostic_only",
+  "live_available": false,
+  "diagnostic_mode": true,
+  "substrate_diagnostic_path": "artifacts/substrate_diagnostic.json",
+  "substrate_diagnostic_sha256": "a136d2ce1c2468c861ca3ac59f9469af8fb6c5517624bf225bd6f8cf12dd60d1",
+  "code_paths": [
+    "research/frontier/run_execute_36129180789.py"
+  ],
+  "seeds": {
+    "numpy": 42,
+    "random": 35725763380,
+    "hashlib": "sha256"
+  },
+  "environment": {
+    "python": "3.12.14"
+  },
+  "artifacts": [
+    {
+      "path": "artifacts/substrate_diagnostic.json",
+      "sha256": "a136d2ce1c2468c861ca3ac59f9469af8fb6c5517624bf225bd6f8cf12dd60d1",
+      "role": "raw"
+    }
+  ]
+}
