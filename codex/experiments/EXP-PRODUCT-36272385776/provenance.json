@@ -1,0 +1,70 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-36272385776",
+  "lane": "product",
+  "github_run_id": "36272385776",
+  "github_run_attempt": "1",
+  "recorded_at": "2026-09-26T21:50:00.000000+00:00",
+  "frozen_inputs": {
+    "request.json": "f512a4d1bb678a129ab7f9b0963696dfb4dd696207c891f68bb071f57dca25e5",
+    "spec.json": "efbd58b45fe43b8a90aa78529a8c7713bc8994796f123c97e3a6c85ce4e75f4b",
+    "prereg.md": "091e7f3035c480c55d9005b4180bdc32848c48c8349a7a73e38f520221c4b78c",
+    "freeze.json": "3f0f9d6d7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e0f1a2b"
+  },
+  "code_paths": {
+    "src/spider/kernel.py": "c7b818eb555ef323e45549dc08d5d76a980bf1ecb8c338752439c20b9b167ddb",
+    "src/spider/__init__.py": "da010bfd32cd3f446d6a34c52e2a284c76adee8196983dafbb9a9a7cedd6bd04",
+    "src/spider/models.py": "338aaf4d7ba0e31f7a5fe8a47abdbb2ea52d9c1c4ef0ce014f2b809b9a2a9b78",
+    "src/spider/registry.py": "51fb440d3827f21cccb5f77ad17dc0e76ccdbc2d52d7b05044cd821bb8a9322c",
+    "tests/test_kernel.py": "e3896a26023159f41db10073dbc714be7769f4fed0ba60690b174605e1a793a9"
+  },
+  "experiment_code_paths": {
+    "research/experiments/EXP-PRODUCT-36272385776/substrate.py": "d3fe358ed68d38a0cf5ecd2c0dbabb943c8f9f5f531755fa2580cbeffbb20f26",
+    "research/experiments/EXP-PRODUCT-36272385776/run_experiment.py": "90d46b1683595c8d8ee0caedea959b49d77ac118d672caf75d9101fe28221277"
+  },
+  "environment": {
+    "python_version": "3.12.14",
+    "os": "linux",
+    "browser_available": false,
+    "browsergym_importable": false,
+    "openai_api_key": null,
+    "substrate": "stdlib http.server on 127.0.0.1"
+  },
+  "preconditions": {
+    "distill_parameterized_present_at_freeze": true,
+    "distill_parameterized_present_at_execute": true,
+    "identifier_overlap_a_b": 0,
+    "substrate_verified_by_selftest": true,
+    "unit_tests_passing": true
+  },
+  "reproduction_commands": [
+    "python -m unittest tests.test_kernel -v",
+    "python research/experiments/EXP-PRODUCT-36272385776/run_experiment.py",
+    "python -c \"from spider import SpiderKernel, align_parameters; import inspect; print(\"distill_parameterized\" in inspect.getsource(SpiderKernel))\""
+  ],
+  "durability_measurement": {
+    "method": "git diff + symbol presence check + test presence check",
+    "kernel_symbols_verified": true,
+    "tests_contain_distill_parameterized": true,
+    "promotion_rule_pre_declared": true,
+    "kernel_symbols": [
+      "distill_parameterized",
+      "SpiderKernel.distill_parameterized",
+      "align_parameters"
+    ]
+  },
+  "integrity": {
+    "frozen_inputs_unmodified": true,
+    "scope_violation": false,
+    "credential_handling": "No live credentials in any durable mechanism template; ${auth_token} placeholder used"
+  },
+  "prior_evidence_relied_on": [
+    "codex/experiments/EXP-PRODUCT-36249064252/result.json",
+    "codex/experiments/EXP-PRODUCT-36249064252/verdict.json",
+    "codex/experiments/EXP-PRODUCT-36249064252/handoff.json",
+    "research/experiments/EXP-PRODUCT-36249064252/substrate.py",
+    "codex/index.json",
+    "codex/claim_state.json",
+    "research/claims/registry.json"
+  ]
+}

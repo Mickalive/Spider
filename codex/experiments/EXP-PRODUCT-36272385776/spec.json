@@ -1,0 +1,57 @@
+{
+  "experiment_id": "EXP-PRODUCT-36272385776",
+  "lane": "product",
+  "claim_ids": ["C-PARAM-INHERIT"],
+  "question": "On a substrate that imposes genuine cold-discovery cost (multi-step auth, pagination, schema discovery) such that B-COLD provably costs >1 request per task and the amortization comparison has dynamic range, does the durable kernel distill_parameterized reach amortized_cost_ratio <= 0.85 against B-COLD, B-LITERAL-REPLAY, and B-RETRIEVAL-K5 at matched end-to-end success, breaking even within a preregistered maximum number of transfer tasks, while abstaining with false_accept_rate <= 0.10 when a slot is bound outside the observed support, under thresholds derived from the substrate's measured baseline cost and frozen before any arm runs?",
+  "hypothesis": "A kernel-integrated distill_parameterized() that induces parameter slots from resource-A observations will produce mechanisms that resolve to EXECUTABLE on never-observed resource-B identifiers (disjoint value sets) with success_rate >= 0.80, abstention_precision >= 0.85, false_accept_rate <= 0.10, ECE <= 0.15, amortized_cost_ratio <= 0.85 vs. best baseline at matched correctness, and break_even_transfer_tasks <= N_MAX (preregistered), where all cost thresholds are derived from the measured B-COLD baseline cost on this substrate before freeze.",
+  "falsifier": "If on resource-B transfer tasks (n>=50 per family, >=3 families): (1) success_rate < 0.80 OR (2) abstention_precision < 0.85 OR (3) false_accept_rate > 0.10 OR (4) ECE > 0.15 OR (5) amortized_cost_ratio > 0.85 vs best baseline at matched correctness OR (6) break_even_transfer_tasks > N_MAX AND positive control passes AND null control passes, then parameterized inheritance is FALSIFIED-IN-SETTING as SPIDER's central mechanism and the architecture must change to non-inheriting alternatives. Separately, if the durability measurement shows the parameterized induction capability (distill_parameterized, SpiderKernel.distill_parameterized, align_parameters, and their unit tests) is absent from src/spider/kernel.py and tests/test_kernel.py at the verdict-creating commit, the packet fails regardless of transfer outcomes.",
+  "baselines": [
+    {
+      "id": "B-COLD",
+      "description": "Cold exploration: no inherited mechanism; agent must perform full discovery (multi-step auth, schema discovery, pagination) on each task",
+      "implementation": "resolve() returns UNKNOWN for all intents; each task pays full discovery cost including auth handshake, endpoint enumeration, and pagination traversal"
+    },
+    {
+      "id": "B-LITERAL-REPLAY",
+      "description": "Literal mechanism replay: exact mechanism from resource-A observation replayed on resource-B (expected to fail due to identifier/schema mismatch)",
+      "implementation": "distill() creates literal mechanism (confidence=0.5) from resource-A; resolve() on resource-B returns EXPLORE (confidence < min_confidence) or UNKNOWN; no parameter binding"
+    },
+    {
+      "id": "B-RETRIEVAL-K5",
+      "description": "Retrieval baseline: semantic embedding retrieval of top-k=5 similar prior observations, then heuristic parameter binding",
+      "implementation": "Embed resource-A observations; retrieve top-5 for resource-B intent; bind parameters via string matching on path/query/body; execute if confidence threshold met"
+    }
+  ],
+  "positive_control": {
+    "id": "PC-SAME-RESOURCE",
+    "description": "Parameterized mechanism induced from resource-A tested on additional held-out resource-A identifiers (same resource, same schema, disjoint identifier split)",
+    "expected": "success_rate >= 0.95, binding_accuracy >= 0.95, cost_ratio <= 0.50 vs B-COLD, break_even <= 10",
+    "purpose": "Verifies the induction and binding pipeline works when identifier distribution and schema match training"
+  },
+  "null_control": {
+    "id": "NC-SHUFFLED-INTENT",
+    "description": "Shuffled intent labels: parameter induction runs on resource-A observations with randomly permuted intent labels; transfer tested on resource-B",
+    "expected": "success_rate <= 0.10, abstention_precision >= 0.90, cost_ratio >= 1.0 vs B-COLD",
+    "purpose": "Verifies that any transfer success requires genuine intent-structured parameter induction, not spurious pattern matching"
+  },
+  "measurement_validity": [
+    "Substrate: locally-served HTTP server with (a) multi-step authentication (login -> token -> authenticated requests), (b) paginated list endpoints (10 items/page), (c) schema requiring endpoint/method/body discovery from observations. No browser, no docker, no LLM key, no external network.",
+    "Resource A (training): /api/v1/items with identifiers item-1..item-200. Resource B (transfer): /api/v1/products with identifiers SKU-A..SKU-Z and PROD-100..PROD-199. Disjoint identifier value sets verified by automated check.",
+    "Observations for resource-A collected by executing real HTTP requests against the server; observations include state (auth tokens, session), action (method/path/body with identifiers), next_state (response), success.",
+    "Parameter induction uses ONLY resource-A observations. Resource-B identifiers and schema are NEVER observed during induction.",
+    "Success measured by: HTTP 2xx + postcondition match (verified via kernel.verify()). Cost measured by: HTTP requests (including auth handshake, pagination, schema discovery), bytes transferred, wall-clock latency, kernel resolve/execute/verify calls.",
+    "Abstention precision = TN / (TN + FP) where TN=correctly returned UNKNOWN/EXPLORE for unlearned/out-of-support intents, FP=incorrectly returned EXECUTABLE for unlearned/out-of-support intents.",
+    "False accept rate = FP / (FP + TN) where FP=EXECUTABLE on unlearned/incorrect intent or out-of-support slot binding.",
+    "ECE computed over confidence bins for EXECUTABLE resolutions.",
+    "Amortized cost = (induction_cost + N_transfer * transfer_cost) / N_transfer vs baseline_cost_per_task. Induction cost includes all resource-A observation collection. Transfer cost includes per-task HTTP requests and kernel calls.",
+    "Break-even: smallest N where cumulative treatment cost <= cumulative baseline cost. N_MAX preregistered before freeze.",
+    "Family stratification: tasks grouped by intent family (CRUD-write, CRUD-read, query/list). Margin computed per family with B=5000 bootstrap.",
+    "Incumbent reference curve: shipped kernel (distill confidence=0.5, min_confidence=0.8) measured on same substrate/tasks; expected: 0% EXECUTABLE for any distilled mechanism.",
+    "Durability measurement: at verdict commit, verify src/spider/kernel.py contains distill_parameterized, SpiderKernel.distill_parameterized, align_parameters, and tests/test_kernel.py contains corresponding unit tests; verify promotion rule was pre-declared and satisfied."
+  ],
+  "decision_rule": "PASS (SUPPORTS) iff ALL of the following hold on resource-B transfer tasks (n >= 50 per family, >= 3 families): (1) success_rate >= 0.80; (2) abstention_precision >= 0.85; (3) false_accept_rate <= 0.10; (4) ECE <= 0.15; (5) amortized_cost_ratio <= 0.85 vs best baseline at matched correctness; (6) break_even_transfer_tasks <= N_MAX; (7) positive control passes; (8) null control passes; (9) durability measurement passes (capability present at verdict commit, promotion rule pre-declared and satisfied). FAIL (FALSIFIES) if any condition fails. MIXED if positive/null controls and durability pass but transfer conditions partially fail. MEASUREMENT_INVALID if substrate/server failures prevent valid observation collection.",
+  "product_consequence_positive": "C-PARAM-INHERIT advances toward VALIDATED. Kernel-integrated parameterized inheritance becomes a promotable Product Core capability with demonstrated economics on a substrate with real discovery cost. Enables downstream C-FRESHNESS, C-DELTA-REPAIR, C-RESIDUAL-NOVELTY, C-LLM-INHERIT measurements on a real, durable mechanism.",
+  "product_consequence_negative": "C-PARAM-INHERIT is FALSIFIED-IN-SETTING. The accumulating architecture (parameterized inheritance as central mechanism) is rejected on a substrate where the economics had dynamic range to be measured. Product must pivot to non-inheriting alternatives (deterministic compilation, pure retrieval, LLM-only). Resources reallocated to Frontier/Intel for orthogonal mechanism search.",
+  "estimated_cost": "~5000-10000 HTTP requests per run (induction: 100 obs * ~20 requests/obs for auth+pagination+schema; transfer: 150 tasks * ~15 requests/task). Stdlib-only server. ~10-20 minutes wall-clock. No GPU, no external API keys.",
+  "expected_information_gain": "Critical. This is the decisive economic measurement for the entire program. Previous experiment established mechanism capability (success 1.0, binding 1.0) but on a substrate with zero cold-baseline dynamic range (B-COLD=1.0 req/task). This experiment tests whether the mechanism amortizes where cold discovery has real cost. A valid PASS establishes economically viable parameterized inheritance; a valid FAIL falsifies the core architectural bet. The durability co-measurement ensures the mechanism survives the promotion gate. Either outcome changes claim status and product direction decisively."
+}
