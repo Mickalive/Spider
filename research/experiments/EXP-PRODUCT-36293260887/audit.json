@@ -1,0 +1,258 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-36293260887",
+  "lane": "product",
+  "status": "PASS",
+  "producer_claim_supported": false,
+  "required_fixes": [
+    "F2 (bound-path pattern /api/v1/<collection>/<slot>) is unsatisfiable on the frozen substrate and contradicts prereg T1 which pins the collection; must be restated or deleted",
+    "F6 (break_even > N_MAX) is an algebraic identity (N_MAX formula equals break-even formula); cannot fire at any data and N_MAX was never frozen pre-experiment per prereg section 8.4",
+    "F9 (null arm cost_ratio_vs_bcold >= 1.0) penalizes correct abstention at zero requests; must be restated as an abstention-cost claim, not a ratio threshold",
+    "Decision rule condition 5 ('matched end-to-end success') has no referent because B-LITERAL-REPLAY and B-RETRIEVAL-K5 both measure task success 0.0; requires baselines that succeed",
+    "Substrate supplies only 126 resource-B identifiers (42/family), below preregistered n >= 50 (F12); substrate must be extended or n-per-family reduced in a revised prereg",
+    "Prereg section 5 orders kernel fixes committed before freeze, but scripts/check_scope.py:124-126 and scripts/freeze_experiment.py:79-82 make this unsatisfiable in every lane; control plane needs a build stage or kernel fixes must move to execute stage",
+    "Prereg section 8.4 requires N_MAX frozen in spec.json or freeze.json before freeze; it is absent from both"
+  ],
+  "validity_findings": [
+    "DURABILITY UNMET: The mandate's central requirement is a DURABLE, committed, hash-verified capability. git diff 244dd5bd..HEAD -- src/ tests/ is empty; the corrected kernel exists only in the working tree (598 lines kernel.py, 206 lines test_kernel.py, 633 insertions). No commit mechanism is authorized for this lane. Durability is UNMEASURED and must not be inferred.",
+    "SUBSTRATE DESIGN MISMATCH: The frozen substrate (sha256 d3fe358e...) matches the prereg-declared digest but its actual surface does NOT provide the endpoints prereg section 7 declares (/api/v1/schema, /api/v1/items/*, /api/v1/products/*, Bearer token issuance, pagination with Link headers). The real surface is /{collection}/{id}, ?q=, ?limit=, GET / index, three static tokens with TOKEN_EXPIRY=100 on a monotone store. The digest check is not a design audit.",
+    "REPRESENTATION LOSS - B-COLD: Prereg section 7 names /api/v1/schema, ?page=N&page_size=K with Link headers, /api/v1/items/*. None exist. B-COLD was mapped onto GET / index for verb discovery plus ?limit= listing for existence confirmation. It is genuinely executed and counted but is not the procedure the prereg described.",
+    "REPRESENTATION LOSS - B-RETRIEVAL-K5: No model key or embedding service available; a deterministic hashed character-n-gram bag of intent+state was substituted for semantic embeddings. This weakens the retrieval baseline and is a declared substitution.",
+    "REPRESENTATION LOSS - FAMILY DIVERSITY: Prereg section 9.1 asks for three families with distinct endpoint structures. The substrate offers two collections and four item-level verbs; the three families differ only by VERB and intent namespace, not by URL shape (all share /{collection}/{id}).",
+    "PROTOCOL AMENDMENT A1 (TOKEN RE-AUTH): TOKEN_EXPIRY=100 with no issuance endpoint forced a stand-in where a 401 clears the request budget and each re-auth is charged as one real HTTP request. Disclosed before outcome inspection. B-COLD pays periodic re-auth and keeps honest dynamic range.",
+    "PROTOCOL AMENDMENT A2 (VERB EXECUTION): An early runner draft supplied the task family's verb instead of the resolved mechanism's verb, silently rescuing the null arm to a false 1.0 success. Found and corrected during execution; the reported NC-SHUFFLED-INTENT-FORCED success of 0.3333 is trustworthy only because of this correction.",
+    "SINGLE-COLLECTION TRAINING IS THE STRUCTURAL CAUSE OF PINNING: The 50 induction identifiers all live in one collection ('items'), so the collection segment is constant across the entire training set. A segment that never varies carries no evidence that it SHOULD vary, so prefix-preserving induction pins it. The Treatment 0.0000 result is a property of single-collection training, not evidence that prefix preservation is wrong.",
+    "DESIGN DEFECT F2: Requires bound path /api/v1/<collection>/<slot> on a substrate with no /api/v1 prefix; also contradicts T1 which pins the collection (/api/v1/items/${id}) while F2 requires it to vary.",
+    "DESIGN DEFECT F6: N_MAX = ceil(induction_cost/(mean_bcold - treatment)) and break-even is the smallest n with amortized ratio <= 1.0. These are the same expression; verified numerically at 50 == 50. The clause is an identity and cannot fire. N_MAX was also never frozen.",
+    "DESIGN DEFECT F9: Requires the null arm's cost ratio against B-COLD to be >= 1.0. A correctly abstaining arm issues zero requests, so this threshold penalizes correct abstention.",
+    "DESIGN DEFECT MATCHED SUCCESS: Decision rule condition 5 requires treatment to beat baselines 'at matched end-to-end success' while prereg section 8.5 expects literal-replay and retrieval baselines to fail (task success 0.0). Two of three baselines have 0.0 success; the comparison has no referent.",
+    "SAMPLE SIZE F12: Prereg requires n >= 50 per family for ALL arms. PC-SAME-RESOURCE reaches 50/family. Every resource-B arm reaches 42/family (126 identifiers / 3 families). This is a substrate capacity limit, not a design choice.",
+    "ECE SINGLE-BIN: Every task resolves through one mechanism at one confidence value, so expected calibration error is structurally 0.0 and carries no calibration information.",
+    "CONFIDENCE CAN REACH 1.0: On a deterministic substrate with 100% support and 100% template consistency, add-one support leaves confidence at exactly 1.0. The value is computed, not hardcoded, but the substrate cannot exercise the low-confidence regime.",
+    "INDUCTION SUPPORT / LEAKAGE SEPARATION: Substrate exposes 200 resource-A identifiers. Indices 0-149 are PC-SAME-RESOURCE held-out set (50/family, disjoint index ranges); indices 150-199 are induction training set (50 distinct identifiers, reused across 3 families for 150 observations). Held-out set is index-disjoint from training set; resource-A and resource-B namespaces are disjoint by construction. The 1.0000 resource-B transfer result (identity-slot variant) is not identifier leakage."
+  ],
+  "baseline_findings": [
+    {
+      "control_id": "PC-SAME-RESOURCE",
+      "finding": "PASS. Achieves 1.0000 success rate on n=150 (50/family), CI [1.0000, 1.0000], through distill_parameterized (not hand-built Mechanism). Induced template /items/${id} preserves non-empty prefix. This verifies the induction+resolution pipeline works when URL prefix is preserved and intent namespace matches.",
+      "evidence_refs": [
+        "raw_evidence/task_results.jsonl",
+        "raw_evidence/mechanisms.json",
+        "raw_evidence/derived.json"
+      ]
+    },
+    {
+      "control_id": "NC-SHUFFLED-INTENT",
+      "finding": "PARTIAL on preregistered criterion. Satisfies transfer_success <= 0.10 (observed 0.0000) and abstention_precision >= 0.90 (observed 1.0000). FAILS cost_ratio_vs_bcold >= 1.0 (observed 0.0000) which is UNSATISFIABLE for a correctly abstaining arm. The null control itself behaves correctly: induced confidences 0.38/0.40/0.44 vs 0.8 threshold, abstains on 126/126 tasks at 0 requests. With min_confidence gate bypassed (NC-SHUFFLED-INTENT-FORCED), the same mechanisms return HTTP 200 on 100%, apply wrong verb on 84/126, achieve 0.3333 task success.",
+      "evidence_refs": [
+        "raw_evidence/task_results.jsonl",
+        "raw_evidence/probe_results.jsonl",
+        "raw_evidence/mechanisms.json"
+      ]
+    },
+    {
+      "control_id": "B-COLD",
+      "finding": "PASS. Per-task executed discovery: multi-step auth (simulated via budget clear), verb/schema discovery (GET / index), existence confirmation, filtered listing (?limit=100), then target verb. Mean 4.0794 requests/task (CI [4.0159, 4.1587]), task success 1.0000. This is the FIRST time in the program a cold baseline has genuine dynamic range (vs treatment 1.0159). Pagination traversal and schema discovery mapped onto substrate's ACTUAL surface because prereg-named endpoints do not exist.",
+      "evidence_refs": [
+        "raw_evidence/task_results.jsonl",
+        "raw_evidence/substrate_surface_probe.json",
+        "raw_evidence/derived.json"
+      ]
+    },
+    {
+      "control_id": "B-LITERAL-REPLAY",
+      "finding": "FAIL AS COMPARATOR. Replays resource-A action_template literally on resource-B without parameter binding. Mean 1.0159 requests/task, HTTP 200 on 100% of tasks, but task success 0.0000. It is CHEAPER than the treatment and silently acts on the wrong entity (e.g., GET /items/PROD-100 returns 200 with items data, not products data). Cannot support 'matched end-to-end success' comparison because there is no non-zero success rate to match.",
+      "evidence_refs": [
+        "raw_evidence/task_results.jsonl",
+        "raw_evidence/derived.json"
+      ]
+    },
+    {
+      "control_id": "B-RETRIEVAL-K5",
+      "finding": "FAIL AS COMPARATOR. Top-5 nearest resource-A observations by hashed n-gram similarity (semantic embedding substitute), executed literally on resource-B. Mean 2.2857 requests/task, HTTP OK 0.7063, task success 0.0000. The hashed n-gram stand-in is a disclosed representation loss that weakens this baseline. With 0.0 task success, it cannot support 'matched end-to-end success'.",
+      "evidence_refs": [
+        "raw_evidence/task_results.jsonl",
+        "raw_evidence/derived.json"
+      ]
+    }
+  ],
+  "recomputed_metrics": {
+    "pc_same_resource_success_rate": {
+      "value": 1.0,
+      "ci": { "point": 1.0, "ci_low": 1.0, "ci_high": 1.0, "B": 5000, "n_strata": 3 },
+      "unit": "ratio",
+      "n": 150,
+      "n_per_family": { "delete": 50, "read": 50, "update": 50 },
+      "matches_producer": true
+    },
+    "pc_same_resource_prefix_preserved": {
+      "value": true,
+      "unit": "boolean",
+      "induced_templates": [ "/items/${id}" ],
+      "matches_producer": true
+    },
+    "treatment_success_rate": {
+      "value": 0.0,
+      "ci": { "point": 0.0, "ci_low": 0.0, "ci_high": 0.0, "B": 5000, "n_strata": 3 },
+      "unit": "ratio",
+      "n": 126,
+      "n_per_family": { "delete": 42, "read": 42, "update": 42 },
+      "bound_path_examples": [ "/items/PROD-100", "/items/PROD-101" ],
+      "matches_producer": true
+    },
+    "treatment_identity_slot_success_rate": {
+      "value": 1.0,
+      "ci": { "point": 1.0, "ci_low": 1.0, "ci_high": 1.0, "B": 5000, "n_strata": 3 },
+      "unit": "ratio",
+      "n": 126,
+      "n_per_family": { "delete": 42, "read": 42, "update": 42 },
+      "description": "Same induction with collection as declared identity slot; template /${collection}/${id}",
+      "matches_producer": true
+    },
+    "treatment_amortized_cost_ratio_vs_bcold": {
+      "value": 0.5447470817120622,
+      "unit": "ratio",
+      "threshold": 0.85,
+      "matches_producer": true,
+      "note": "PASS against B-COLD. induction_cost=152, treatment_cost=1.0159, bcold_cost=4.0794, n=126"
+    },
+    "treatment_amortized_cost_ratio_vs_literal_replay": {
+      "value": 2.1875,
+      "unit": "ratio",
+      "threshold": 0.85,
+      "matches_producer": true,
+      "note": "FAIL. But literal_replay task success is 0.0; comparison at 'matched success' has no referent"
+    },
+    "treatment_amortized_cost_ratio_vs_retrieval_k5": {
+      "value": 0.9722222222222222,
+      "unit": "ratio",
+      "threshold": 0.85,
+      "matches_producer": true,
+      "note": "FAIL. But retrieval_k5 task success is 0.0; comparison at 'matched success' has no referent"
+    },
+    "treatment_break_even_transfer_tasks": {
+      "value": 50,
+      "unit": "transfer_tasks",
+      "n_max_frozen": null,
+      "matches_producer": true,
+      "note": "Derived at execute, not frozen. Algebraic identity with N_MAX formula (F6 vacuous)"
+    },
+    "nc_shuffled_transfer_success": {
+      "value": 0.0,
+      "ci": { "point": 0.0, "ci_low": 0.0, "ci_high": 0.0, "B": 5000, "n_strata": 3 },
+      "unit": "ratio",
+      "n": 126,
+      "matches_producer": true
+    },
+    "nc_shuffled_abstention_precision": {
+      "value": 1.0,
+      "unit": "ratio",
+      "definition": "1 - false_accept_rate over 60 negative probes",
+      "matches_producer": true
+    },
+    "nc_shuffled_cost_ratio_vs_bcold": {
+      "value": 0.0,
+      "unit": "ratio",
+      "threshold": 1.0,
+      "matches_producer": true,
+      "note": "UNSATISFIABLE for correctly abstaining arm"
+    },
+    "bcold_mean_requests_per_task": {
+      "value": 4.079365079365079,
+      "ci": { "point": 4.079365079365079, "ci_low": 4.015873015873016, "ci_high": 4.158730158730159, "B": 5000, "n_strata": 3 },
+      "unit": "http_requests",
+      "matches_producer": true
+    },
+    "literal_replay_mean_requests_per_task": {
+      "value": 1.0158730158730158,
+      "ci": { "point": 1.0158730158730158, "ci_low": 1.0, "ci_high": 1.0476190476190477, "B": 5000, "n_strata": 3 },
+      "unit": "http_requests",
+      "matches_producer": true
+    },
+    "retrieval_k5_mean_requests_per_task": {
+      "value": 2.2857142857142856,
+      "ci": { "point": 2.2857142857142856, "ci_low": 2.1825396825396823, "ci_high": 2.373015873015873, "B": 5000, "n_strata": 3 },
+      "unit": "http_requests",
+      "matches_producer": true
+    },
+    "induction_cost_total": {
+      "value": 152,
+      "unit": "http_requests",
+      "measured": true,
+      "matches_producer": true
+    },
+    "n_max_frozen": {
+      "value": null,
+      "unit": "transfer_tasks",
+      "note": "ABSENT from both spec.json and freeze.json; prereg section 8.4 requires it frozen pre-experiment",
+      "matches_producer": true
+    },
+    "n_max_derived_at_execute": {
+      "value": 50,
+      "unit": "transfer_tasks",
+      "prereg_formula": "ceil(induction_cost / (mean_bcold_cost - treatment_cost_per_task))",
+      "matches_producer": true
+    },
+    "false_accept_rate": {
+      "value": 0.5,
+      "unit": "ratio",
+      "n_probes": 60,
+      "by_kind": {
+        "Treatment|out_of_support_binding": { "executed": 20, "n": 20 },
+        "Treatment|malformed_params": { "executed": 10, "n": 20 },
+        "Treatment|invalid_intent": { "executed": 0, "n": 20 },
+        "Treatment-IDENTITY-SLOT|out_of_support_binding": { "executed": 20, "n": 20 },
+        "Treatment-IDENTITY-SLOT|malformed_params": { "executed": 10, "n": 20 },
+        "Treatment-IDENTITY-SLOT|invalid_intent": { "executed": 0, "n": 20 },
+        "NC-SHUFFLED-INTENT|out_of_support_binding": { "executed": 0, "n": 20 },
+        "NC-SHUFFLED-INTENT|malformed_params": { "executed": 0, "n": 20 },
+        "NC-SHUFFLED-INTENT|invalid_intent": { "executed": 0, "n": 20 }
+      },
+      "matches_producer": true
+    },
+    "abstention_precision": {
+      "value": 0.5,
+      "unit": "ratio",
+      "note": "For Treatment and Treatment-IDENTITY-SLOT arms; NC-SHUFFLED-INTENT is 1.0",
+      "matches_producer": true
+    },
+    "ece_treatment": {
+      "value": 0.0,
+      "unit": "float",
+      "n_bins_effective": 1,
+      "note": "Single bin: every task resolves through one mechanism at one confidence value; structurally 0.0",
+      "matches_producer": true
+    }
+  },
+  "claim_ceiling": "A corrected, prefix-preserving parameter-induction pipeline (distill_parameterized, _build_action_template calling _strip_common_prefix, intent-namespace resolution, derived confidence) exists in the working tree and reaches EXECUTABLE through distill_parameterized, verified by 10/10 tests. On this substrate: (1) Induction from a single-collection training set pins the collection segment; the prereg-named Treatment binds /items/${id} and achieves 0.0000 end-to-end success on 126 never-observed resource-B identifiers. (2) When the resource collection is induced as a DECLARED identity slot, the SAME pipeline transfers exactly: 1.0000 success, CI [1.0000, 1.0000], on the same 126 identifiers at 1.0159 requests/task. (3) Against an executed B-COLD at 4.0794 requests/task, the identity-slot mechanism reaches amortized ratio ~0.55, break-even at 50 tasks (126 executed). (4) The min_confidence gate is load-bearing for safety: null arm abstains 126/126; gate bypass yields 66.7% wrong-verb actions. NOT established: durability (nothing committed); any transfer claim at the prereg's /api/v1 bound-path pattern (substrate cannot produce); any cost comparison against B-LITERAL-REPLAY or B-RETRIEVAL-K5 at matched end-to-end success (both baselines score 0.0 task success); anything about real Web APIs, browsers, model tokens, latency, or cross-site transfer.",
+  "evidence_refs": [
+    "research/experiments/EXP-PRODUCT-36293260887/request.json",
+    "research/experiments/EXP-PRODUCT-36293260887/spec.json",
+    "research/experiments/EXP-PRODUCT-36293260887/prereg.md",
+    "research/experiments/EXP-PRODUCT-36293260887/freeze.json",
+    "research/experiments/EXP-PRODUCT-36293260887/result.json",
+    "research/experiments/EXP-PRODUCT-36293260887/report.md",
+    "research/experiments/EXP-PRODUCT-36293260887/provenance.json",
+    "research/experiments/EXP-PRODUCT-36293260887/raw_evidence/substrate_surface_probe.json",
+    "research/experiments/EXP-PRODUCT-36293260887/raw_evidence/observations.jsonl",
+    "research/experiments/EXP-PRODUCT-36293260887/raw_evidence/task_results.jsonl",
+    "research/experiments/EXP-PRODUCT-36293260887/raw_evidence/probe_results.jsonl",
+    "research/experiments/EXP-PRODUCT-36293260887/raw_evidence/mechanisms.json",
+    "research/experiments/EXP-PRODUCT-36293260887/raw_evidence/derived.json",
+    "research/experiments/EXP-PRODUCT-36293260887/src/spider/kernel.py (working tree, uncommitted, sha256 d64a4bf40d00f6f9d569832f2a014dfe99e7736b7aa708aa8f040a50d0c92ef0)",
+    "research/experiments/EXP-PRODUCT-36293260887/tests/test_kernel.py (working tree, uncommitted, sha256 a2918babb2e80078166561238191f344b7d11e99f018c898320f53368443db64)",
+    "research/experiments/EXP-PRODUCT-36272385776/substrate.py (sha256 d3fe358ed68d38a0cf5ecd2c0dbabb943c8f9f5f531755fa2580cbeffbb20f26)"
+  ],
+  "unresolved": [
+    "Durability is untested and untestable in this lane. The corrected kernel is not committed and no commit is authorized; the mandate's central DURABLE requirement is neither established nor refuted.",
+    "Whether prefix-preserving induction can transfer across resources WITHOUT a declared identity slot is answered negatively here on one substrate with single-collection training. Generalization of that negative to real Web APIs is not established.",
+    "Why the parent packet (EXP-PRODUCT-36272385776) recorded transfer success 1.0 at kernel sha256 ac1cbdd9... while the same function family at c7b818eb... provably emitted a prefix-free template remains unresolved; this run did not attempt to reconcile the two artifacts.",
+    "Whether the six mechanisms the parent packet induced from permuted intent labels would have produced wrong-verb actions is partially answered: a shuffled-intent mechanism applies the wrong verb on 84/126 tasks, but on this substrate rather than theirs.",
+    "N_MAX remains unfrozen. Any future comparison of break-even against a pre-registered constant requires the constant to exist before the arms run.",
+    "Whether B-RETRIEVAL-K5 would discriminate with a real semantic embedding is untested; the hashed-n-gram stand-in may be too weak to represent the baseline the prereg intended.",
+    "Whether a 42-per-family resource-B sample is sufficient, and what the correct power analysis is for the transfer-success metric, is not established.",
+    "C-PRODUCT-ECON, C-LLM-INHERIT, C-RESIDUAL-NOVELTY, C-FRESHNESS, C-DELTA-REPAIR and C-CROSSSITE were not measured here and their dependence on a durable inheritance capability is unchanged.",
+    "The control-plane defect (build-before-freeze unsatisfiable in every lane) is a program-level issue verified independently in EXP-GRAPH-36287167610 and EXP-INTEL-36293264917. It blocks ALL future product-lane prereg with build steps until fixed.",
+    "The substrate digest check in freeze is not a design audit. A surface contract test in the freeze gate is needed to prevent silent design mismatches."
+  ]
+}
