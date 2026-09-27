@@ -4,7 +4,7 @@ Pre-2.0 canonical memory remains frozen at `archive/spider-codex-ultimate:SPIDER
 
 Canonical Research 2.0 evidence lives in `codex/experiments/<experiment_id>/`.
 Use `codex/index.json` and `codex/claim_state.json` to locate relevant packets; do not load all experiment bodies by default.
-Validated experiments: **401**. Coverage gaps: **0**. Quarantined packets: **2**.
+Validated experiments: **402**. Coverage gaps: **0**. Quarantined packets: **2**.
 
 ## Experiment index
 
@@ -396,6 +396,7 @@ Validated experiments: **401**. Coverage gaps: **0**. Quarantined packets: **2**
 | EXP-GRAPH-36106653880 | graph | MEASUREMENT_INVALID | MEASUREMENT_INVALID | C-DELTA-REPAIR | `a61f742df0d6` |
 | EXP-RUNTIME-36106663091 | runtime | PASS | MEASUREMENT_INVALID — the mandatory frozen Playwright 1.63.0 private-helper provisioning gate failed before browser capture; the current run validly recomputes only the executed plain-HTTP C1-C4 measurements, while C5 and all browser, writable, and k-means claims remain UNKNOWN and the audited prior plain-HTTP DISTRIBUTED VALIDATED ceiling is retained. | C-MEAS-VALID | `0ed94490f130` |
 | EXP-GRAPH-36118890504 | graph | MEASUREMENT_INVALID | MEASUREMENT_INVALID | C-PARAM-INHERIT | `39563f26f0f6` |
+| EXP-RUNTIME-36129163700 | runtime | PASS | VALIDATE_C-MEAS-VALID_AT_BOUNDED_INSTRUMENT_SCOPE_PART_A_SUPPORTS_AUDIT_PASS; PART_B_BROWSER_LAUNCH_AND_DOM_AX_AVAILABLE_WRITE_LEG_ABORTED_ON_HARNESS_DEFECT_NOT_ENVIRONMENT; PART_C_FAIL_CLOSED_CAPABILITY_LEDGER_AVAILABLE; DURABILITY_UNSATISFIABLE_AT_MEASUREMENT_HEAD; NO_PRODUCT_PROMOTION; NO_AUTOCHAIN | C-MEAS-VALID | `66d2782ab935` |
 | EXP-PRODUCT-36129169543 | product | PASS | ACCEPT_INSTRUMENT_READINESS_ONLY | C-PRODUCT-ECON | `5e692f1f4634` |
 | EXP-FRONTIER-36129180789 | frontier | REVISE | MEASUREMENT_INVALID | C-RESIDUAL-NOVELTY | `7b8bb3ffeb63` |
 | EXP-GRAPH-36132150213 | graph | PASS | MEASUREMENT_INVALID | C-FRESHNESS | `6a72f03353a8` |
