@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-36287170603",
+  "lane": "physics",
+  "git": {
+    "commit": "f79f14729c4239cb7d7e9539294a8417f65f0fe3",
+    "branch": "lab2/physics",
+    "repo_root": "/home/runner/work/Spider/Spider"
+  },
+  "environment": {
+    "python_version": "3.12.14 (main, Aug 13 2026, 02:47:42) [GCC 13.3.0]",
+    "platform": "Linux-6.17.0-1022-azure-x86_64-with-glibc2.39",
+    "numpy_version": "2.5.3"
+  },
+  "seeds": {
+    "global_seed": 44,
+    "server_seed": 44,
+    "ivc_seed": 44
+  },
+  "artifacts": {
+    "intervention_validity_contract.py": "/home/runner/work/Spider/Spider/research/experiments/EXP-PHYSICS-36287170603/intervention_validity_contract.py",
+    "estimators.py": "/home/runner/work/Spider/Spider/research/experiments/EXP-PHYSICS-36287170603/estimators.py",
+    "substrate.py": "/home/runner/work/Spider/Spider/research/experiments/EXP-PHYSICS-36287170603/substrate.py",
+    "preregistered_channels.json": "/home/runner/work/Spider/Spider/research/experiments/EXP-PHYSICS-36287170603/preregistered_channels.json",
+    "ground_truth_log.jsonl": "/home/runner/work/Spider/Spider/research/experiments/EXP-PHYSICS-36287170603/ground_truth_log.jsonl",
+    "contract_results.json": "/home/runner/work/Spider/Spider/research/experiments/EXP-PHYSICS-36287170603/contract_results.json",
+    "code_path_hash.txt": "/home/runner/work/Spider/Spider/research/experiments/EXP-PHYSICS-36287170603/code_path_hash.txt",
+    "result.json": "/home/runner/work/Spider/Spider/research/experiments/EXP-PHYSICS-36287170603/result.json",
+    "report.md": "/home/runner/work/Spider/Spider/research/experiments/EXP-PHYSICS-36287170603/report.md"
+  },
+  "code_paths": [
+    "research/experiments/EXP-PHYSICS-36287170603/intervention_validity_contract.py",
+    "research/experiments/EXP-PHYSICS-36287170603/estimators.py",
+    "research/experiments/EXP-PHYSICS-36287170603/substrate.py",
+    "research/experiments/EXP-PHYSICS-36287170603/run_experiment.py"
+  ],
+  "frozen_inputs": {
+    "request.json": "research/experiments/EXP-PHYSICS-36287170603/request.json",
+    "spec.json": "research/experiments/EXP-PHYSICS-36287170603/spec.json",
+    "prereg.md": "research/experiments/EXP-PHYSICS-36287170603/prereg.md",
+    "freeze.json": "research/experiments/EXP-PHYSICS-36287170603/freeze.json"
+  },
+  "execution_details": {
+    "server_port": 18888,
+    "n_trajectories": 200,
+    "n_steps": 10,
+    "n_regimes": 2,
+    "states_per_regime": 8,
+    "total_transitions": 2200,
+    "code_path_hash": "6afce2f1bc17196934ec6ce650b1c9f769e0dcf5b3c702f25b8e1f38839f14ea"
+  }
+}

@@ -1,0 +1,408 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-36129163700",
+  "lane": "runtime",
+  "status": "COMPLETE",
+  "outcome": "SUPPORTS",
+  "metrics": {
+    "part_A_verdict": "SUPPORTS",
+    "part_A_arm_metrics": {
+      "P-WRITE": {
+        "estimand": "sensitivity",
+        "k": 20,
+        "n": 20,
+        "point_rate": 1.0,
+        "wilson_ci_lo": 0.8388748419471806,
+        "wilson_ci_hi": 1.0
+      },
+      "P-DRIFT": {
+        "estimand": "sensitivity",
+        "k": 20,
+        "n": 20,
+        "point_rate": 1.0,
+        "wilson_ci_lo": 0.8388748419471806,
+        "wilson_ci_hi": 1.0
+      },
+      "N-READ": {
+        "estimand": "specificity",
+        "k": 20,
+        "n": 20,
+        "point_rate": 1.0,
+        "wilson_ci_lo": 0.8388748419471806,
+        "wilson_ci_hi": 1.0
+      },
+      "N-INVALID": {
+        "estimand": "specificity",
+        "k": 20,
+        "n": 20,
+        "point_rate": 1.0,
+        "wilson_ci_lo": 0.8388748419471806,
+        "wilson_ci_hi": 1.0
+      },
+      "N-EXPIRED": {
+        "estimand": "specificity",
+        "k": 20,
+        "n": 20,
+        "point_rate": 1.0,
+        "wilson_ci_lo": 0.8388748419471806,
+        "wilson_ci_hi": 1.0
+      },
+      "N-DELETED": {
+        "estimand": "specificity",
+        "k": 20,
+        "n": 20,
+        "point_rate": 1.0,
+        "wilson_ci_lo": 0.8388748419471806,
+        "wilson_ci_hi": 1.0
+      }
+    },
+    "part_A_pooled_descriptive": {
+      "pooled_sensitivity_point": 1.0,
+      "pooled_specificity_point": 1.0,
+      "note": "descriptive only; cannot override a failed individual arm"
+    },
+    "part_A_thresholds": {
+      "point_min": 0.9,
+      "wilson_lo_min": 0.8
+    },
+    "part_A_wilson_z": 1.959963984540054,
+    "readiness_n_total": null,
+    "readiness_n_non304": null,
+    "readiness_n_304": null,
+    "readiness_per_ep_non304": null,
+    "readiness_distinct_x_worker_pid": null,
+    "readiness_min_per_uri_stickiness": null,
+    "readiness_n_missing_worker_on_200": null,
+    "capture_stability_pairs_identical": "10/10",
+    "part_B_status": "UNAVAILABLE",
+    "part_C_status": "AVAILABLE",
+    "durability_status": "UNSATISFIABLE",
+    "hs256_secret_sha256": "3d581d20eeef92806f3626b62603fab637663d834cfb74f9c4a67439288b3ca1",
+    "hs256_secret_len": 122
+  },
+  "controls": {
+    "V-NGINX-CONFIG-OK": {
+      "pass": true,
+      "expected": "nginx -t exclusive -c rc=0 no warning no duplicate hash",
+      "observed": "nginx: the configuration file /tmp/single.db.nginx.conf syntax is ok\nnginx: configuration file /tmp/single.db.nginx.conf test is successful"
+    },
+    "V-SINGLE-HASH": {
+      "pass": true,
+      "expected": "exactly one 'hash $request_uri consistent;'",
+      "observed": "count=1"
+    },
+    "V-CACHE-ENABLED": {
+      "pass": true,
+      "expected": "proxy_cache spider_cache active directives",
+      "observed": "proxy_cache_path+proxy_cache+proxy_cache_valid+proxy_temp_path+bypass present"
+    },
+    "NC-CACHE-DISABLED-REJECTED": {
+      "pass": true,
+      "expected": "cache ENABLED",
+      "observed": "cache enabled"
+    },
+    "NC-EXCLUSIVE-NGINX": {
+      "pass": true,
+      "expected": "exactly one nginx master via -c /tmp/single.db.nginx.conf",
+      "observed": "1 master(s): root       49055  0.0  0.0  21452  1720 ?        Ss   03:34   0:00 nginx: master process nginx -c /tmp/single.db.nginx.conf"
+    },
+    "V-FLASK-LISTENING": {
+      "pass": true,
+      "expected": "BOTH Flask 127.0.0.1:19860 AND 127.0.0.1:19861 verified listening socket retry 30s",
+      "observed": "[{'port': 19860, 'listening': True}, {'port': 19861, 'listening': True}]"
+    },
+    "V-HEALTH-GATE": {
+      "pass": true,
+      "expected": "health-gate 0 missing X-Worker-Pid on 200s via distributed nginx 19851 + BOTH origins",
+      "observed": "nginx:1 attempts missing_on_200=0; origin60_ok=True; origin61_ok=True"
+    },
+    "V-NGINX-NO-PERMISSION-DENIED": {
+      "pass": true,
+      "expected": "0 Permission denied on proxy AND /tmp/single.db.cache",
+      "observed": "nginx_error.log clean"
+    },
+    "V-UPSTREAM-2-SERVERS": {
+      "pass": true,
+      "expected": "upstream block defines 2 servers 127.0.0.1:19860 and 127.0.0.1:19861 with hash $request_uri consistent",
+      "observed": "server directives count=2"
+    },
+    "DIAG-CACHE-MISS-THEN-HIT": {
+      "pass": true,
+      "expected": "real proxy_cache yields MISS then HIT on an unauthenticated 200 surface",
+      "observed": "[{\"leg\": 1, \"status\": 200, \"x_cache\": \"MISS\"}, {\"leg\": 2, \"status\": 200, \"x_cache\": \"HIT\"}]",
+      "evidence": "artifacts/A-READINESS-CERTIFICATE.json#cache_corroboration"
+    },
+    "V-SUBSTRATE-CERTIFICATE": {
+      "pass": false,
+      "expected": "2x gunicorn 23.0.0 @19860/19861 share /tmp/single.db WAL (wal_autocheckpoint=0); exclusive nginx 19851; one hash $request_uri consistent; real proxy_cache; auth bypass; X-Worker-Pid; readiness floors n_non304>=800, >=400/endpoint, distinct workers>=2, stickiness>=0.90 over >10 URIs, no missing worker header on 200s",
+      "observed": "{}",
+      "evidence": "artifacts/A-READINESS-CERTIFICATE.json"
+    },
+    "V-CAPTURE-STABILITY": {
+      "pass": true,
+      "expected": "ten no-action WAL-vector pairs 250 ms apart all byte-identical",
+      "observed": "10/10 pairs byte-identical",
+      "evidence": "artifacts/A-CAPTURE-STABILITY.jsonl"
+    },
+    "V-AUTH-SESSION-BOUNDARY": {
+      "pass": true,
+      "expected": "controlled write route verifies HS256 signature+expiry and requires a live sessions row; invalid/expired/deleted attempts return 401/403 before any UPDATE",
+      "observed": "{\"P-WRITE\": {\"statuses\": [200], \"violations\": 0}, \"P-DRIFT\": {\"statuses\": [200], \"violations\": 0}, \"N-INVALID\": {\"statuses\": [401], \"violations\": 0}, \"N-EXPIRED\": {\"statuses\": [401], \"violations\": 0}, \"N-DELETED\": {\"statuses\": [403], \"violations\": 0}}",
+      "evidence": "artifacts/A-EPISODE-LEDGER.jsonl"
+    },
+    "V-A-MATRIX-COMPLETE": {
+      "pass": true,
+      "expected": "exactly 20 complete episodes per arm across P-WRITE/P-DRIFT/N-READ/N-INVALID/N-EXPIRED/N-DELETED; no retries or imputations",
+      "observed": "{\"P-WRITE\": {\"n_complete\": 20, \"n_scored\": 20}, \"P-DRIFT\": {\"n_complete\": 20, \"n_scored\": 20}, \"N-READ\": {\"n_complete\": 20, \"n_scored\": 20}, \"N-INVALID\": {\"n_complete\": 20, \"n_scored\": 20}, \"N-EXPIRED\": {\"n_complete\": 20, \"n_scored\": 20}, \"N-DELETED\": {\"n_complete\": 20, \"n_scored\": 20}}",
+      "evidence": "artifacts/A-EPISODE-LEDGER.jsonl"
+    },
+    "V-RECOMPUTE": {
+      "pass": true,
+      "expected": "independent recomputation from raw episode JSONL reproduces every detector bit, numerator, denominator and Wilson interval with zero mismatches",
+      "observed": "{}",
+      "evidence": "artifacts/A-RECOMPUTE-CHECK.json"
+    },
+    "V-B-PUBLIC-API": {
+      "pass": true,
+      "expected": "only documented Playwright public API; p.chromium.executable_path preferred; no playwright._impl or private helper",
+      "observed": "{\"status\": \"AVAILABLE\", \"executable_path\": \"/home/runner/.cache/ms-playwright/chromium-1243/chrome-linux64/chrome\", \"is_canonical_path\": true, \"executable_sha256\": \"8c599d43aec53f2460a31ae2f4af6bd863f8258b34ff519564bc5d4726bfaa1e\", \"playwright_package\": \"playwright 1.63.0 (pip)\", \"api_used\": \"sync_playwright().start().chromium.executable_path (public)\"}",
+      "evidence": "artifacts/B-PLAYWRIGHT-CAPABILITY.json"
+    },
+    "V-B-REAL-CAPTURE": {
+      "pass": true,
+      "expected": "real 1280x720 Chromium; nonempty page.content(), CDP DOM snapshot and Accessibility.getFullAXTree; real valid-auth SPA write; no synthetic substitute",
+      "observed": "{\"status\": \"AVAILABLE\", \"page_content_bytes\": 2385, \"cdp_dom_snapshot_nodes\": 28, \"ax_tree_nodes\": 30, \"ax_tree_nodes_with_role\": 30}",
+      "evidence": "artifacts/B-DOM-AX-CAPTURE.json"
+    },
+    "V-C-LEDGER-SCHEMA": {
+      "pass": true,
+      "expected": "versioned schema, same-run identity, HEAD/worktree provenance, redacted credentials, component status, required-vs-advisory scope, exact commands/ports/WAL schema/health floors, evidence paths+hashes, freshness, one smallest unblocking action per UNAVAILABLE component",
+      "observed": "ledger_written=True schema_complete=True",
+      "evidence": "artifacts/capability_ledger.json"
+    },
+    "V-DUR-HEAD": {
+      "pass": false,
+      "expected": "frozen executable scope present at HEAD with matching content hash",
+      "observed": "[{\"path\": \"research/experiments/EXP-RUNTIME-36129163700/run_experiment.py\", \"head_matches_worktree\": false}, {\"path\": \"research/runtime/bringup.py\", \"head_matches_worktree\": false}, {\"path\": \"research/experiments/EXP-RUNTIME-36129163700/bringup_contract.json\", \"head_matches_worktree\": false}]",
+      "evidence": "artifacts/D-DURABILITY-CHECK.json"
+    },
+    "V-SECRET-REDACTION": {
+      "pass": true,
+      "expected": "raw artifacts and ledger contain credential presence and references, never secret values",
+      "observed": "TESTBED_SECRET appears in no artifact; recorded only as SHA-256+length; tokens recorded as token_class + redacted sid_ref; policy-model capability records env-key presence booleans only",
+      "evidence": "artifacts/A-EPISODE-LEDGER.jsonl; artifacts/capability_ledger.json"
+    },
+    "B-WAL-VECTOR": {
+      "pass": true,
+      "expected": "P-WRITE and P-DRIFT change the vector; N-READ/N-INVALID/N-EXPIRED/N-DELETED do not",
+      "observed": "per-episode vector_changed bits in A-WAL-VECTOR-BEFORE-AFTER.jsonl; arm-level: {\"P-WRITE\": 1.0, \"P-DRIFT\": 1.0, \"N-READ\": 1.0, \"N-INVALID\": 1.0, \"N-EXPIRED\": 1.0, \"N-DELETED\": 1.0}",
+      "evidence": "artifacts/A-WAL-VECTOR-BEFORE-AFTER.jsonl"
+    },
+    "B-LOGICAL-STATE": {
+      "pass": true,
+      "expected": "positive readbacks equal the planted unique value; null arms preserve the pre-episode value and session boundary",
+      "observed": "pre/post logical projections per episode in A-EPISODE-LEDGER.jsonl",
+      "evidence": "artifacts/A-EPISODE-LEDGER.jsonl"
+    },
+    "B-RESPONSE-FINGERPRINT": {
+      "pass": true,
+      "expected": "P-DRIFT changes the representation fingerprint; same-state read-only repetitions do not",
+      "observed": "per-episode fingerprint_changed bits in A-RESPONSE-FINGERPRINTS.jsonl",
+      "evidence": "artifacts/A-RESPONSE-FINGERPRINTS.jsonl"
+    },
+    "B-STATUS-ONLY": {
+      "pass": null,
+      "expected": "deliberately weak diagnostic; reported for comparison, never the primary detector",
+      "observed": "status-only separation is a proxy for the assigned condition; primary detector is semantic+side-effect",
+      "evidence": "artifacts/A-EPISODE-LEDGER.jsonl"
+    },
+    "B-STATIC-REPEAT-NULL": {
+      "pass": true,
+      "expected": "all ten no-action pairs byte-identical",
+      "observed": "10/10 identical",
+      "evidence": "artifacts/A-CAPTURE-STABILITY.jsonl"
+    },
+    "B-NO-SYNTHETIC-FALLBACK": {
+      "pass": true,
+      "expected": "no synthetic DOM/AX/WAL/response/credential/package/network result substituted for a failed real probe",
+      "observed": "every unavailable fact is recorded UNAVAILABLE/ERROR with evidence and one smallest unblocking action; no fabricated observation exists in any artifact",
+      "evidence": "artifacts/B-PLAYWRIGHT-CAPABILITY.json; artifacts/capability_ledger.json"
+    },
+    "PC-A-VALID-WRITE": {
+      "pass": true,
+      "expected": "20/20 valid-auth marker writes detected via independent readback + WAL side effect",
+      "observed": "k=20/20",
+      "evidence": "artifacts/A-DERIVED-METRICS.json"
+    },
+    "PC-A-INDUCED-DRIFT": {
+      "pass": true,
+      "expected": "20/20 valid-auth representation drifts detected via readback + changed real response fingerprint",
+      "observed": "k=20/20",
+      "evidence": "artifacts/A-DERIVED-METRICS.json"
+    },
+    "PC-B-REAL-BROWSER": {
+      "pass": false,
+      "expected": "one real Chromium launch, DOM/AX capture and reversible valid-auth SPA write through the public API",
+      "observed": "UNAVAILABLE",
+      "evidence": "artifacts/B-PLAYWRIGHT-CAPABILITY.json"
+    },
+    "PC-C-CONTRACT": {
+      "pass": true,
+      "expected": "one same-run machine-readable ledger plus one-command bring-up contract",
+      "observed": "AVAILABLE",
+      "evidence": "artifacts/C-BRINGUP-CONTRACT.json"
+    },
+    "NC-A-READ-ONLY": {
+      "pass": true,
+      "expected": "0/20 false positives (no state change, no WAL change, no unauthorized write)",
+      "observed": "specificity=1.0 k=20/20",
+      "evidence": "artifacts/A-DERIVED-METRICS.json"
+    },
+    "NC-A-INVALID-AUTH": {
+      "pass": true,
+      "expected": "0/20 false positives (no state change, no WAL change, no unauthorized write)",
+      "observed": "specificity=1.0 k=20/20",
+      "evidence": "artifacts/A-DERIVED-METRICS.json"
+    },
+    "NC-A-EXPIRED-AUTH": {
+      "pass": true,
+      "expected": "0/20 false positives (no state change, no WAL change, no unauthorized write)",
+      "observed": "specificity=1.0 k=20/20",
+      "evidence": "artifacts/A-DERIVED-METRICS.json"
+    },
+    "NC-A-DELETED-SESSION": {
+      "pass": true,
+      "expected": "0/20 false positives (no state change, no WAL change, no unauthorized write)",
+      "observed": "specificity=1.0 k=20/20",
+      "evidence": "artifacts/A-DERIVED-METRICS.json"
+    },
+    "NC-A-STATIC-CAPTURE": {
+      "pass": true,
+      "expected": "ten no-action capture pairs byte-identical",
+      "observed": "10/10 identical",
+      "evidence": "artifacts/A-CAPTURE-STABILITY.jsonl"
+    },
+    "NC-B-NO-SYNTHETIC": {
+      "pass": true,
+      "expected": "no fabricated browser or WAL observation",
+      "observed": "all browser/WAL facts derive from real captures or are explicitly UNAVAILABLE",
+      "evidence": "artifacts/B-WAL-EVIDENCE.jsonl; artifacts/B-DOM-AX-CAPTURE.json"
+    }
+  },
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-RUNTIME-36129163700/artifacts/A-EPISODE-LEDGER.jsonl",
+      "sha256": "11d4832f68d5e2c8c294eaa28b4c0ad1017e4ed1973fdabca59fcf90fe7143a2",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-RUNTIME-36129163700/artifacts/A-WAL-VECTOR-BEFORE-AFTER.jsonl",
+      "sha256": "e8f989701a15af03f19ba3ef3356451bb334a1ae1810db9607b4073cbe4efbc0",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-RUNTIME-36129163700/artifacts/A-RESPONSE-FINGERPRINTS.jsonl",
+      "sha256": "0a2cc2fc6b17bffe0c2ba47a49b772964789a70afdf39d7d78f1c816f4f42bcb",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-RUNTIME-36129163700/artifacts/A-DETECTOR-OUTPUT.jsonl",
+      "sha256": "08c660c39032e4244d1eebdff01e46a57cad61e28dfb631fc4fc6eb399d66820",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-RUNTIME-36129163700/artifacts/A-CAPTURE-STABILITY.jsonl",
+      "sha256": "ac48864f4f2af127e35ab92a68684d74cc9e43fc396fd3492629d5520df8f0b7",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-RUNTIME-36129163700/artifacts/A-SEEDED-ORDER.json",
+      "sha256": "ec3e6f8063c2f4980759f7b832128b3fe53af0fff82a8100fc4b9e79fddaf5fd",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-RUNTIME-36129163700/artifacts/A-READINESS-CERTIFICATE.json",
+      "sha256": "ab3266d89b64c024f00ed6f7d6e5e23e432c954ac143875891db7ace6a959613",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-RUNTIME-36129163700/artifacts/A-DERIVED-METRICS.json",
+      "sha256": "bbfdb765be81a6263f909238c569e52f3cc99528fa8cf237836d8d727546af4f",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-RUNTIME-36129163700/artifacts/A-RECOMPUTE-CHECK.json",
+      "sha256": "fb6716519f97e69af37b6ac4ab932e2ac46fb32742f85a30085b0fb559b6892a",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-RUNTIME-36129163700/artifacts/B-PLAYWRIGHT-CAPABILITY.json",
+      "sha256": "c1a8ef899905c7ce0a1fb4d7c753f8ae873e887f921c014d8720cf11a80d09fa",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-RUNTIME-36129163700/artifacts/B-DOM-AX-CAPTURE.json",
+      "sha256": "ace872afe8b6c4941b2d89d3fcce11cf64b7be4f1e65daf836f26bade034a4e7",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-RUNTIME-36129163700/artifacts/B-WAL-EVIDENCE.jsonl",
+      "sha256": null,
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-RUNTIME-36129163700/artifacts/capability_ledger.json",
+      "sha256": "ed08255ab08820e8cd1c956371229e751c7a0d12de402e36f1bae22c43f3ff1d",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-RUNTIME-36129163700/artifacts/C-BRINGUP-CONTRACT.json",
+      "sha256": "376a0337f979d9e063f2fbbdc4cede82f920b44bb4b5b557b8fb625d9b7bd6c8",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-RUNTIME-36129163700/artifacts/D-DURABILITY-CHECK.json",
+      "sha256": "50c708befc91e06ea122431e9f993f5041f6422b81aa2f82ddb6a26af06392d0",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-RUNTIME-36129163700/run_experiment.py",
+      "sha256": "0c0e323dffaad781d33e7f024a43fed0eb77227c9968c0633d2f566b59256507",
+      "role": "code"
+    },
+    {
+      "path": "research/runtime/bringup.py",
+      "sha256": null,
+      "role": "code"
+    },
+    {
+      "path": "research/experiments/EXP-RUNTIME-36129163700/bringup_contract.json",
+      "sha256": "d947bf5974565da9d9bce2a8b97a8d0f4e10f2fb61657f1db7f1a538277d162e",
+      "role": "fixture"
+    }
+  ],
+  "observations": [
+    "Readiness certificate: n_total=None n_non304=None n_304=None per_ep=None distinct_workers=None min_stickiness=None missing_on_200=None",
+    "Capture stability: 10/10 no-action WAL-vector pairs byte-identical over the frozen 250 ms interval",
+    "Part A matrix: 120 episodes executed (20 per arm x 6 arms) in the seeded order archived at artifacts/A-SEEDED-ORDER.json",
+    "Part A verdict: SUPPORTS \u2014 P-WRITE: 1.0 [0.8388748419471806, 1.0]; P-DRIFT: 1.0 [0.8388748419471806, 1.0]; N-READ: 1.0 [0.8388748419471806, 1.0]; N-INVALID: 1.0 [0.8388748419471806, 1.0]; N-EXPIRED: 1.0 [0.8388748419471806, 1.0]; N-DELETED: 1.0 [0.8388748419471806, 1.0]",
+    "Part B (non-vetoing): UNAVAILABLE",
+    "Part C contract: AVAILABLE",
+    "Durability: UNSATISFIABLE (REFERENCE_ONLY)"
+  ],
+  "validity_notes": [
+    "sudo available: nginx master started as root with user www-data workers; cache/temp dirs chowned www-data."
+  ],
+  "unresolved": [],
+  "part_A_status": "SUPPORTS",
+  "part_B_status": "UNAVAILABLE",
+  "part_C_status": "AVAILABLE",
+  "durability_status": "UNSATISFIABLE",
+  "claim_ids": [
+    "C-MEAS-VALID"
+  ],
+  "run_id": "36129163700",
+  "base_sha": "8bc01342a23fe7a24959d09d8e2556ba2966c7e8",
+  "head_sha": "ebb9db201c50b8473814b4404e78ec3a43c70fe2",
+  "no_promotion": "this packet does not promote C-MEAS-VALID to VALIDATED or PRODUCT_CORE; a later independent Director verdict is required"
+}
