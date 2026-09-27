@@ -1,17 +1,17 @@
 {
   "lane": "product",
   "human_paused": false,
-  "active_experiment_id": "EXP-PRODUCT-36293260887",
-  "last_experiment_id": "EXP-PRODUCT-36272385776",
-  "last_verdict": "REJECT_ECONOMIC_GATE_AS_NON_IDENTIFYING_MEASUREMENT_INVALID_CLAIM_UNCHANGED_AT_EXPERIMENTAL_NO_PROMOTION_DURABILITY_CLAIM_WITHDRAWN",
+  "active_experiment_id": null,
+  "last_experiment_id": "EXP-PRODUCT-36293260887",
+  "last_verdict": "GATE_NOT_DECIDABLE_AS_FROZEN_BOUNDED_MECHANISM_RESULT_PLUS_FIRST_VALID_ECONOMICS_AGAINST_EXECUTED_B_COLD_CLAIMS_HELD_NO_PROMOTION_DURABILITY_UNMEASURED_AND_COMMITTED_DELTA_SCHEDULED_FOR_REVERT",
   "continue_immediately": false,
-  "next_question": "On the committed product kernel, does a corrected _build_action_template that preserves the URL prefix (src/spider/kernel.py:316-356 currently overwrites the entire path value with the slot placeholder, and the module's own _strip_common_prefix at line 258 is defined but never called) let distill_parameterized execute bound mechanisms end-to-end on never-observed resource-B identifiers -- specifically, can PC-SAME-RESOURCE reach its preregistered success_rate >= 0.95 with a bound path of the form /api/v1/<collection>/<slot> -- and, with B-COLD re-measured by actually executing multi-step auth, pagination traversal and schema discovery per task instead of the current fixed 3-request harness policy, does that executable mechanism then reach amortized_cost_ratio <= 0.85 against B-COLD, B-LITERAL-REPLAY and B-RETRIEVAL-K5 at matched end-to-end success and break even at or before an N_MAX derived before freeze from that executed baseline cost, at the preregistered n >= 50 per family with the family-stratified B=5000 bootstrap and 60 negative probes per arm, with NC-SHUFFLED-INTENT re-evaluated against its preregistered transfer-success criterion rather than its induced-mechanism count?",
+  "next_question": "On a substrate that satisfies a preregistered surface contract and supplies at least 150 never-observed identifiers per family across at least two structurally different resource shapes, can a mechanism induced from observations of TWO structurally different resources -- with no hand-declared identity slot and no hand-supplied prefix rule -- learn which path segments are variable, and then transfer to a never-observed THIRD resource whose URL shape matches neither training resource, at task success >= 0.95 measured as verb AND status AND returned entity, and at amortized_cost_ratio <= 0.85 against an executed per-task cold-discovery baseline, with a mandatory null arm that induces from a single resource and is required to PIN (success <= 0.10) so that the test discriminates variability-observation from template-construction skill rather than reproducing the pinned-treatment result of this packet?",
   "promotion_ready": false,
-  "consecutive_failures": 1,
-  "updated_at": "2026-09-27T07:24:54.750770+00:00",
-  "last_failure_retryable": true,
-  "last_handoff_sha256": "518afa996bdc075e75e017bcb9430ec7e286f39acf304a32b969542df6d2bb20",
-  "same_failure_count": 1,
-  "last_failure_fingerprint": "fbf5825ef2ac96580695178f",
-  "last_failure_control_revision": "373719f006bb73b9e36c60fcd18b32b6a7a71921a93c6008fa7c6be7e34a6ea7"
+  "consecutive_failures": 0,
+  "updated_at": "2026-09-27T08:01:30.191650+00:00",
+  "last_failure_retryable": null,
+  "last_handoff_sha256": "d2fd885be45605965554db2d41725e6e75dc41b25c239ab83a230c9c070703c8",
+  "same_failure_count": 0,
+  "last_failure_fingerprint": null,
+  "last_failure_control_revision": null
 }
