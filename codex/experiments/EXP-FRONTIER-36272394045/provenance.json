@@ -1,0 +1,297 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-FRONTIER-36272394045",
+  "lane": "frontier",
+  "stage": "EXECUTE",
+  "produced_at": "2026-09-27T01:27:28.709039+00:00",
+  "environment": {
+    "python": "3.12.14 (main, Aug 13 2026, 02:47:42) [GCC 13.3.0]",
+    "git_head": "a9a0ce105a7a5f07103d99eff51339636695100d",
+    "git_head_subject": "R2 frontier: execution base EXP-FRONTIER-36272394045",
+    "git_branch": "lab2/frontier",
+    "git_status_porcelain": [
+      "M SPIDER_CODEX.md",
+      " M codex/claim_state.json",
+      " M codex/index.json",
+      " M research/experiments/EXP-FRONTIER-36272394045/model_execute.json",
+      " M research/frontier/substrate_deterministic_http.py",
+      "?? codex/experiments/EXP-GRAPH-36272373909/",
+      "?? codex/experiments/EXP-INTEL-36272389571/",
+      "?? codex/experiments/EXP-PHYSICS-36104718112/",
+      "?? codex/experiments/EXP-PHYSICS-36279239922/",
+      "?? codex/experiments/EXP-PRODUCT-36272385776/",
+      "?? research/experiments/EXP-FRONTIER-36272394045/artifacts/",
+      "?? research/experiments/EXP-FRONTIER-36272394045/provenance.json",
+      "?? research/experiments/EXP-FRONTIER-36272394045/report.md",
+      "?? research/experiments/EXP-FRONTIER-36272394045/result.json",
+      "?? research/frontier/_run_output_36272394045.json",
+      "?? research/frontier/arms/conditioned_no_memory.py",
+      "?? research/frontier/episodegen_36272394045.py",
+      "?? research/frontier/run_execute_36272394045.py",
+      "?? research/frontier/test_conditioned_no_memory_36272394045.py"
+    ],
+    "platform": "linux",
+    "network_access": false,
+    "model_calls": 0,
+    "external_datasets": [],
+    "notes": "self-contained deterministic Python; the only substrate is a local stdlib ThreadingHTTPServer on 127.0.0.1. No model, no browser, no network, no external dataset. Git state is reported for context only; this stage performed no commit, push, branch switch or reset."
+  },
+  "frozen_inputs": {
+    "freeze_json": "research/experiments/EXP-FRONTIER-36272394045/freeze.json",
+    "recomputed_sha256_match": true,
+    "hashes": {
+      "prereg.md": "b186f766c6e455dd91e9f2a2042d82b3e679567ec9f15c3e235556f3d8756d93",
+      "request.json": "d6a289700665aee89245f38e5c6bbd3885c5a14b91fd8ba6f53c784b3876b3b3",
+      "spec.json": "09a3031a38d7a96de286f828658fec332460797d525ed1d27387d8481217338c"
+    }
+  },
+  "parent_packet": {
+    "experiment_id": "EXP-FRONTIER-36249071934",
+    "referenced_via": "request.json.parent_handoff and spec/prereg baseline values",
+    "raw_artifact": "research/experiments/EXP-FRONTIER-36249071934/artifacts/spans_no-memory-deterministic.jsonl",
+    "raw_artifact_sha256": "af5c4291927cee9febc05835ebb6881647355d1255f72c13eb3590b5e45a363b",
+    "replication_field_for_field_identical": true,
+    "n_rows_compared": 1200,
+    "n_field_mismatches": 0
+  },
+  "code": {
+    "modified_by_this_stage": [
+      "research/frontier/substrate_deterministic_http.py",
+      "research/frontier/episodegen_36272394045.py",
+      "research/frontier/arms/conditioned_no_memory.py",
+      "research/frontier/run_execute_36272394045.py",
+      "research/frontier/test_conditioned_no_memory_36272394045.py"
+    ],
+    "unmodified_but_load_bearing": [
+      "research/frontier/taskplan.py",
+      "research/frontier/arms/deopt_ratchet.py",
+      "research/frontier/arms/cold_exploration.py",
+      "research/frontier/arms/common.py"
+    ],
+    "sha256": {
+      "research/frontier/run_execute_36272394045.py": "5ec057aaca79b9a9049bd83d023b10a723fce3579b69caea06b7ed9cebf9fb40",
+      "research/frontier/episodegen_36272394045.py": "5f81a9d652e22e3497c6a3effca1d84845c7557093b30e24d7089254f0b3ec78",
+      "research/frontier/arms/conditioned_no_memory.py": "212b0e89f37f099251207580fdb6752af17d7fa8a3de5c543f80d0d466e41ee7",
+      "research/frontier/test_conditioned_no_memory_36272394045.py": "98e7aecea5a57b5add2191d95ecd4d4c2339e1b4f7af36eb15212c9713555cd4",
+      "research/frontier/substrate_deterministic_http.py": "c85af2154959dff837918fcb2497a36cfde043727ac78f70b48f8a1b4efad428",
+      "research/frontier/taskplan.py": "8875a05b54761f96a92cea8d3ec43bd6886347b5e04ef81d594d65d53f910816",
+      "research/frontier/arms/deopt_ratchet.py": "0c09a680a0dbde2488fdb9cf94632a9d70af135ab6351a7912401840063f3aee",
+      "research/frontier/arms/cold_exploration.py": "628b9645f4d5817ff7e74cc31d29470e4ad5dfa33158f7ebca64e4f61bc42e7b",
+      "research/frontier/arms/common.py": "d9ceeb6a6bfee1bac7fcd8b65f9403dd616c171c52cfccc654b20c9f75185af6"
+    },
+    "substrate_modifications_declared": [
+      "disable_nagle_algorithm = True on the stdlib handler (transport only; fixes the ~24 req/s ceiling that caused the prior exit 66 and exit 124 stage failures; no response byte changes)",
+      "do_PUT treats a missing request body as an empty object, matching the pre-existing do_PATCH behaviour, instead of raising and dropping the keep-alive connection",
+      "opt-in capability mint: PUT /resources/{rid}?mint=1 sets a server-side last_mint and a response header; the response body is byte-identical to the same PUT without ?mint=1; token-gated GET ?t= and GET ?view=; deterministic per-episode handle from MINT_SALT and the substrate episode counter; substrate.reset() advances the counter"
+    ],
+    "default_substrate_behaviour_unchanged": "verified: 8 request shapes x 100 repeats give exactly 1 response body hash and 1 status code per shape (artifacts/substrate_idempotency.json); the class-(iii) mint and token query parameters are inert unless explicitly requested; no parent task-plan request uses them."
+  },
+  "fixtures_and_constants": {
+    "novelty_grid": [
+      0.0,
+      0.25,
+      0.5,
+      0.75,
+      1.0
+    ],
+    "episodes_per_novelty_rate_per_arm": 50,
+    "mint_salt": "014630eeab62b06a",
+    "mint_salt_note": "MINT_SALT is the frozen salt for the opt-in capability mint; token = <episode_counter:08x><sha256(MINT_SALT|counter)[:8]>",
+    "bootstrap_seed": 36272394045,
+    "bootstrap_resamples": 5000,
+    "bootstrap_unit": "episode",
+    "generator_config_artifact": "artifacts/task_generator_config.json"
+  },
+  "reproduction": {
+    "commands": [
+      "cd /home/runner/work/Spider/Spider",
+      "python3 -m research.frontier.test_conditioned_no_memory_36272394045",
+      "python3 -m research.frontier.run_execute_36272394045"
+    ],
+    "determinism": "the substrate, task generator, bootstrap and all arms are deterministic; re-running the runner overwrites the artifacts byte-identically. bootstrap seed is fixed at 36272394045.",
+    "runtime": {
+      "wall_clock_seconds": 22.9,
+      "total_substrate_requests": 35600
+    },
+    "prior_failed_attempts_not_evidence": {
+      "path": "research/experiments/EXP-FRONTIER-36272394045/artifacts/substrate_determinism_check.json",
+      "why": "left behind by the prior EXECUTE attempt recorded in failure.json (exit 66) and model_execute.json (exit 124); NOT used as evidence by this run. This run's own idempotency evidence is substrate_idempotency.json."
+    }
+  },
+  "material_artifacts": [
+    {
+      "path": "research/experiments/EXP-FRONTIER-36272394045/artifacts/classification_B-NO-MEMORY-DETERMINISTIC.jsonl",
+      "sha256": "06beda98295a7641ce9221c7541b2c068ee9c68b14b3d7d88095e61f158b8ba9",
+      "bytes": 4432473
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-36272394045/artifacts/classification_NC-UNIQUE-STATES.jsonl",
+      "sha256": "031c39d2a156bc8207e90359cc463f9a0e893a1ce0c037439ed62d2f063c551f",
+      "bytes": 874288
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-36272394045/artifacts/classification_PC-PLANTED-DISAMBIGUATION.jsonl",
+      "sha256": "ea0af4db6848d96f2a64ba2f9dcc068cca6353128eff495159518819b533822c",
+      "bytes": 873678
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-36272394045/artifacts/conditioned_arm_statelessness_test.json",
+      "sha256": "71353657c369b6b70cdae9c5252b942d538efc66ff49711c982474cd47aec3cf",
+      "bytes": 3971
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-36272394045/artifacts/correctness_invariance.json",
+      "sha256": "9a5d1df7c80160a7da0b54df04a7d317d7bcde5f3b4790d7b9f6cbb90d55cbff",
+      "bytes": 23874
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-36272394045/artifacts/costs_B-COLD-EXPLORATION.jsonl",
+      "sha256": "4980ee5566165380fc3cc856e743b6364d0fd0b9577b21739b0a17a2b744b92d",
+      "bytes": 68165
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-36272394045/artifacts/costs_B-NO-MEMORY-CONDITIONED-NARROW.jsonl",
+      "sha256": "fb7e7109858e02719e60f2e6a03a673ca95adec57ab4ae13b15d528a2f76fb45",
+      "bytes": 63210
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-36272394045/artifacts/costs_B-NO-MEMORY-CONDITIONED.jsonl",
+      "sha256": "38de836b1e4cfed2c1a2171df1183d1d1f906a38f7d2aa2d938a001bee40cf02",
+      "bytes": 61460
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-36272394045/artifacts/costs_B-NO-MEMORY-DETERMINISTIC.jsonl",
+      "sha256": "fc66cb261b07b46f5ecd65de9894eab71e1d3d2228667a7b08c95c78b16c1b36",
+      "bytes": 70799
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-36272394045/artifacts/costs_NC-UNIQUE-STATES-CONDITIONED.jsonl",
+      "sha256": "bc50dfb37b23dea0e1e006cb33bd9b575a854b6c83d9d404d22ba93d06cb4b77",
+      "bytes": 11352
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-36272394045/artifacts/costs_NC-UNIQUE-STATES.jsonl",
+      "sha256": "d302e968d6b72e056f00f711a1e7a85eadf5d07fa2f2e2ee71cc934c5c068b30",
+      "bytes": 12412
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-36272394045/artifacts/costs_PC-PLANTED-DISAMBIGUATION-CONDITIONED.jsonl",
+      "sha256": "3ff7876877b0083c8c51a77fa8bc54b5cefccf6c6a4e8afadebdd7b0a7ce8bf2",
+      "bytes": 11802
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-36272394045/artifacts/costs_PC-PLANTED-DISAMBIGUATION.jsonl",
+      "sha256": "d3fda5a8e14d81452f2ff719caeb436d4ea1282c328eb607631a2b1995dfa132",
+      "bytes": 12966
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-36272394045/artifacts/costs_REPL-REFERENCE-PARENT-IDENTICAL.jsonl",
+      "sha256": "17d383cfdfbd6193478d8fea4ab80c9c16f4ede554a99278472be22d13c861da",
+      "bytes": 72082
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-36272394045/artifacts/nc_verification.json",
+      "sha256": "b5c37b5cf3d6e3ab1a99b8c7d3b429cd31aa62daf0a8726dd908bf39222057f7",
+      "bytes": 2655
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-36272394045/artifacts/pc_verification.json",
+      "sha256": "f8f346d9f8761021b84fe4753e80c049fd617c3931f78c00552e07898da89d57",
+      "bytes": 1597
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-36272394045/artifacts/reference_false_compile.json",
+      "sha256": "67f0b94020e926333dd88bcc2709b13dfbe53c53c69f0315c08624b6bfcf37b7",
+      "bytes": 6381
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-36272394045/artifacts/spans_B-COLD-EXPLORATION.jsonl",
+      "sha256": "a0ac3c90a7eb95a4deaf7d8f2adfcf76b9f334b4869b37fd8bc3d31afa9cb754",
+      "bytes": 8626768
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-36272394045/artifacts/spans_B-NO-MEMORY-CONDITIONED-NARROW.jsonl",
+      "sha256": "1e86730ba733ba6029d1b74b99dece243787f1d14f29c4b905a37c6587c8e8ac",
+      "bytes": 5986920
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-36272394045/artifacts/spans_B-NO-MEMORY-CONDITIONED.jsonl",
+      "sha256": "278d9a2058bd301f40b28727a2552e66f795298965336fa7361219525d2d5d5b",
+      "bytes": 7008912
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-36272394045/artifacts/spans_B-NO-MEMORY-DETERMINISTIC.jsonl",
+      "sha256": "6b8e9c6d3910f2522a0ebbb8ac13005c27d663ff087e1dc62fb39468687259af",
+      "bytes": 8469486
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-36272394045/artifacts/spans_NC-UNIQUE-STATES.jsonl",
+      "sha256": "059599addd2e20cfd70e60da9b489180fdfbd52ef93e6445b236a02654d12a94",
+      "bytes": 1697601
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-36272394045/artifacts/spans_PC-PLANTED-DISAMBIGUATION-CONDITIONED.jsonl",
+      "sha256": "8e000cb8b6c282f0b730495e2dd83f7d9ae7e9aaa315f07d3d3d6d64d20d33ca",
+      "bytes": 1418307
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-36272394045/artifacts/spans_PC-PLANTED-DISAMBIGUATION.jsonl",
+      "sha256": "643261f45b9157fea8b02ee80e462525760135d26671018162ffc49a7affcd51",
+      "bytes": 1687051
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-36272394045/artifacts/spans_REPL-REFERENCE-PARENT-IDENTICAL.jsonl",
+      "sha256": "f8f565ac911b33a4122e6f6b340c6bf49b3110d9ebd9dbdb330f3d0a16165e54",
+      "bytes": 1694251
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-36272394045/artifacts/substrate_idempotency.json",
+      "sha256": "e23ba2360a00c826d9182fe99cff3719d7c899b61d2eef911bcd0dd1f884c00c",
+      "bytes": 1900
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-36272394045/artifacts/summary_0.00.json",
+      "sha256": "44f9f1ffef026dc9d6360c0008176a86ad6faa3e0936e5e7c7f6474ef31c82e7",
+      "bytes": 7539
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-36272394045/artifacts/summary_0.25.json",
+      "sha256": "fa1090439769e3ff8c1b82b6740208e342b5106d19a075505915597e5e60914b",
+      "bytes": 7527
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-36272394045/artifacts/summary_0.50.json",
+      "sha256": "286f8bd51efce74f58581ffbf7857939ea47d56e504e31b07ad13ee8689fce2c",
+      "bytes": 7551
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-36272394045/artifacts/summary_0.75.json",
+      "sha256": "cfbabadebbdeea77520137a94f86ba627c1b1409088ab1f4a71654eff642c402",
+      "bytes": 7549
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-36272394045/artifacts/summary_1.00.json",
+      "sha256": "f6daac6d93dea107381e86008522186e0cec7c3387f4bc92439083a59c5ebef0",
+      "bytes": 7455
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-36272394045/artifacts/task_generator_config.json",
+      "sha256": "948885a10d1a954f954ce5205cb88aae7c8cabbc9060c606ec49cd03d0e174a6",
+      "bytes": 2692
+    },
+    {
+      "path": "research/frontier/_run_output_36272394045.json",
+      "sha256": "da33507db8733337dd54201a819f71117ad274e3d6d0c7964d558ccc9e2fc121"
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-36272394045/result.json",
+      "sha256": "b02bc6f598da812544ae67bc187d5c68b97718f93f15f88598ebaa3ed2ada58d"
+    }
+  ],
+  "evidence_chain": {
+    "raw_evidence": "research/experiments/EXP-FRONTIER-36272394045/artifacts/ (per-arm span and cost JSONL, per-span classification JSONL, idempotency, replication, PC/NC verification, control checks)",
+    "derived_measurements": "research/frontier/_run_output_36272394045.json (derived section) and artifacts/summary_*.json",
+    "interpretation": "result.json observations / validity_notes / unresolved, and report.md",
+    "note": "raw span evidence is never rewritten by the derived layer; result.json metrics are read from the derived output and are not hand-transcribed."
+  }
+}

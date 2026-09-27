@@ -1,0 +1,141 @@
+{
+  "experiment_id": "EXP-GRAPH-36279237023",
+  "lane": "graph",
+  "claim_ids": [
+    "C-SEMANTIC-RESOLVE"
+  ],
+  "question": "On a stdlib-only, locally served, multi-endpoint, multi-verb HTTP application in which every registered mechanism's parameter slots are actually bound so that every action template executes, can a fitted applicability gate over bound parameter slots resolve natural-language goals to applicable mechanisms without internal ids, above lexical-overlap and random nulls, while holding pooled false-accept at most 0.10, UNKNOWN precision at least 0.85, and global and per-class ECE at most 0.15 with bootstrap upper at most 0.18 when the calibration quantity is actually fitted rather than fixed by construction?",
+  "hypothesis": "A fitted applicability gate operating on mechanisms with bound parameter slots will achieve mechanism-identity binding accuracy strictly above the lexical-overlap and random nulls, with calibrated abstention that achieves UNKNOWN precision >= 0.85 and ECE <= 0.15, demonstrating that semantic resolution is achievable without internal mechanism identifiers.",
+  "falsifier": "The fitted resolver fails to exceed the lexical-overlap null on mechanism-identity binding accuracy with paired family-blocked uncertainty, OR the pooled false-accept rate exceeds 0.10, OR UNKNOWN precision falls below 0.85, OR global ECE exceeds 0.15 (bootstrap upper > 0.18), OR per-class ECE exceeds 0.15 (bootstrap upper > 0.18), OR the calibration gate is not fitted (i.e., abstention is algebraically determined rather than measured).",
+  "baselines": [
+    {
+      "id": "B-LEXICAL-OVERLAP",
+      "description": "Max token Jaccard similarity between goal and mechanism intent strings, selecting the mechanism with highest overlap. No embeddings, no learned components.",
+      "expected_behavior": "Strong baseline that reached ceiling (20/20) on paraphrased goals in the previous defective fixture. Must sit strictly below the preregistered headroom threshold on the frozen goal set."
+    },
+    {
+      "id": "B-RANDOM-ROLE",
+      "description": "Selects a mechanism uniformly at random from those whose declared role matches the goal's inferred role (create/read/update/delete). Role inferred by keyword matching on the goal.",
+      "expected_behavior": "Chance-level baseline conditional on role. Expected mechanism-identity accuracy approximately 1/(mechanisms_per_role)."
+    },
+    {
+      "id": "B-INTERNAL-ID-ORACLE",
+      "description": "Oracle arm that receives the true mechanism_id and fragment_id for each goal and returns the corresponding mechanism. This establishes the difficulty ceiling for the frozen goal set and fixture.",
+      "expected_behavior": "Mechanism-identity accuracy = 1.0 by construction. Declared difficulty ceiling: if this oracle achieves < 1.0 on mechanism-identity binding, the fixture is defective and the experiment is MEASUREMENT_INVALID."
+    }
+  ],
+  "positive_control": {
+    "id": "PC-VERBATIM-INTENT",
+    "description": "Goals that are verbatim copies of the distillation intents used to create the mechanisms. The resolver must achieve mechanism-identity accuracy = 1.0 on these goals, establishing that the resolver can perfectly recover mechanisms when the goal matches the training intent exactly.",
+    "expected_behavior": "Mechanism-identity accuracy = 1.0, false_accept = 0.0, UNKNOWN precision = 1.0, ECE = 0.0. Denominator must be > 0 and explicitly reported. Failure of this control triggers MEASUREMENT_INVALID per decision_rule."
+  },
+  "null_control": {
+    "id": "NC-NO-APPLICABLE",
+    "description": "Goals for which no mechanism in the registry is applicable (e.g., goals targeting resource families or operations not present in the registry). The resolver must abstain on all such goals.",
+    "expected_behavior": "Abstention rate = 1.0, UNKNOWN precision = 1.0 (vacuously), false_accept = 0.0. Denominator must be > 0 and explicitly reported. Failure triggers MEASUREMENT_INVALID per decision_rule."
+  },
+  "measurement_validity": [
+    "V1-CONSTRUCT-VALIDITY: Primary metric is mechanism-identity binding correctness (selected mechanism_id == target mechanism_id), NOT HTTP postcondition execution. HTTP execution is a separate, separately thresholded verification measure.",
+    "V2-POSITIVE-CONTROL-EXECUTED: PC-VERBATIM-INTENT runs on every task and its denominator is logged. Zero denominator -> MEASUREMENT_INVALID.",
+    "V3-ORACLE-CEILING: B-INTERNAL-ID-ORACLE must achieve mechanism-identity accuracy = 1.0. If < 1.0, the fixture is defective -> MEASUREMENT_INVALID.",
+    "V4-CALIBRATION-FITTED: The applicability gate's calibration mapping (score -> p_applicable) must be a fitted function (e.g., logistic regression on held-out validation data), not a fixed algebraic transform. The fitted parameters must be logged and hashed into freeze.json.",
+    "V5-CLOSED-TOP-BIN-ECE: ECE estimator uses closed top bin [0.9, 1.0] inclusive. No rows dropped. Half-open bin defect from previous experiment is explicitly excluded.",
+    "V6-UNKNOWN-PRECISION-DEFINED: UNKNOWN precision = TP_abstain / (TP_abstain + FP_abstain) where TP_abstain = goals where no mechanism applies AND resolver abstains, FP_abstain = goals where a mechanism applies BUT resolver abstains. NOT OOD abstention rate.",
+    "V7-PER-TASK-STATE-RESET: Server state is fully reset before each task. Per-task state hash (SHA256 of serialized server state) is logged. Identical starting state for all arms on a given task.",
+    "V8-DEGENERACY-SCREEN: Before any candidate arm runs, a degeneracy screen is executed and logged: (a) B-LEXICAL-OVERLAP mechanism-identity accuracy on the frozen goal set must be strictly below the preregistered headroom threshold (default 0.90). (b) Comparison leg (A-INCUMBENT at min_confidence <= 0.5 or explicitly substituted non-empty reference) must have > 0 EXECUTABLE decisions. Both conditions must PASS for experiment to proceed; otherwise MEASUREMENT_INVALID.",
+    "V9-CODE-HASHED-INTO-FREEZE: Candidate resolver, goal generator, HTTP server, and experiment runner code hashes are recorded in freeze.json, not only in post-freeze result.json.",
+    "V10-FAMILY-BLOCKED-UNCERTAINTY: Uncertainty intervals for mechanism-identity accuracy use paired bootstrap resampling with family as the blocking unit (goals sharing a resource family are resampled together).",
+    "V11-FIXTURE-DISCRIMINATION: Registry contains >1 mechanism per resource family across multiple verbs (CREATE/READ/UPDATE/DELETE). Every mechanism's parameter_slots are non-empty and bound at execution time. No unbindable ${...} placeholders remain in any action_template."
+  ],
+  "decision_rule": {
+    "primary_metric": "mechanism_identity_accuracy",
+    "primary_threshold": {
+      "comparison": "paired_family_blocked_bootstrap",
+      "nulls": ["B-LEXICAL-OVERLAP", "B-RANDOM-ROLE"],
+      "alpha": 0.05,
+      "direction": "greater",
+      "headroom_threshold": 0.90
+    },
+    "secondary_gates": [
+      {
+        "name": "pooled_false_accept",
+        "metric": "false_accept_rate",
+        "threshold": 0.10,
+        "direction": "less_equal",
+        "pooling": "all_goals"
+      },
+      {
+        "name": "unknown_precision",
+        "metric": "unknown_precision",
+        "threshold": 0.85,
+        "direction": "greater_equal",
+        "definition": "TP_abstain / (TP_abstain + FP_abstain) where TP_abstain = no-mechanism-applies AND abstain, FP_abstain = mechanism-applies AND abstain"
+      },
+      {
+        "name": "ece_global",
+        "metric": "ece_global",
+        "threshold": 0.15,
+        "direction": "less_equal",
+        "estimator": "closed_top_bin_10_bins",
+        "bootstrap_upper_bound": 0.18
+      },
+      {
+        "name": "ece_per_class",
+        "metric": "ece_per_class_max",
+        "threshold": 0.15,
+        "direction": "less_equal",
+        "estimator": "closed_top_bin_10_bins_per_class",
+        "bootstrap_upper_bound": 0.18
+      },
+      {
+        "name": "calibration_fitted",
+        "metric": "calibration_is_fitted",
+        "threshold": true,
+        "direction": "equals",
+        "check": "calibration parameters learned on held-out validation split, not fixed algebraic transform"
+      },
+      {
+        "name": "degeneracy_screen_passed",
+        "metric": "degeneracy_screen_pass",
+        "threshold": true,
+        "direction": "equals",
+        "check": "lexical_null_below_headroom AND comparison_leg_nonempty"
+      },
+      {
+        "name": "positive_control_pass",
+        "metric": "pc_verbatim_accuracy",
+        "threshold": 1.0,
+        "direction": "equals",
+        "check": "denominator > 0"
+      },
+      {
+        "name": "oracle_ceiling_pass",
+        "metric": "oracle_accuracy",
+        "threshold": 1.0,
+        "direction": "equals"
+      },
+      {
+        "name": "null_control_pass",
+        "metric": "nc_abstention_rate",
+        "threshold": 1.0,
+        "direction": "equals",
+        "check": "denominator > 0"
+      }
+    ],
+    "outcomes": {
+      "SUPPORTS": "All primary and secondary gates PASS",
+      "FALSIFIES": "Primary gate FAILS (resolver does not exceed lexical-overlap and random nulls with paired family-blocked uncertainty) OR any secondary gate FAILS",
+      "MEASUREMENT_INVALID": "Any measurement_validity condition V1-V11 FAILS, OR PC-VERBATIM-INTENT denominator = 0, OR B-INTERNAL-ID-ORACLE accuracy < 1.0, OR degeneracy screen FAILS, OR calibration not fitted, OR code not hashed into freeze.json, OR per-task state hash not logged"
+    }
+  },
+  "product_consequence_positive": "C-SEMANTIC-RESOLVE advances from HYPOTHESIS to EXPERIMENTAL. Semantic resolution without internal IDs is validated on a discriminating fixture. This unblocks C-LLM-INHERIT, C-CROSSSITE, and C-PRODUCT-ECON which depend on addressable inheritance. Product can proceed with semantic resolution as a load-bearing component.",
+  "product_consequence_negative": "C-SEMANTIC-RESOLVE remains at HYPOTHESIS. The specific resolver architecture (fitted applicability gate over bound parameter slots) is rejected as insufficient for the claimed operating regime. Next cycle must either: (a) strengthen the resolver (e.g., richer goal encoding, structured parameter binding), (b) change the fixture to a regime where the current resolver could succeed, or (c) pivot to a different resolution mechanism. The claim is not retired; the domain remains open.",
+  "estimated_cost": {
+    "model_calls": 0,
+    "browser_interactions": 0,
+    "network_requests": 600,
+    "estimated_wall_clock_seconds": 120,
+    "compute_notes": "Stdlib-only HTTP server, sentence-transformers embedding (all-MiniLM-L6-v2, cached), logistic calibration on CPU. No LLM calls, no browser."
+  },
+  "expected_information_gain": "High. This experiment directly tests the load-bearing C-SEMANTIC-RESOLVE claim on a discriminating fixture that fixes all construct-validity defects from the previous MEASUREMENT_INVALID packet. A PASS would be the first valid evidence that semantic resolution works above strong nulls with calibrated abstention. A valid FALSIFIES would bound the current resolver architecture and force a pivot. Either outcome changes the claim status and product trajectory."
+}

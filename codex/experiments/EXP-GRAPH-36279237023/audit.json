@@ -1,0 +1,262 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-36279237023",
+  "lane": "graph",
+  "status": "MEASUREMENT_INVALID",
+  "producer_claim_supported": false,
+  "required_fixes": [
+    "V9_CODE_HASHED_INTO_FREEZE: freeze.json must hash all outcome-bearing code (candidate_resolver.py, goal_generator.py, http_server.py, experiment_runner.py, metric_estimators.py, fixture_def.py) at freeze time. The current freezer (scripts/freeze_experiment.py) is outside the graph lane's allowed_code_roots and only hashes design documents. This is a structural defect that makes any execution of this frozen design MEASUREMENT_INVALID by construction.",
+    "False-accept metric denominator/numerator pairing must be fixed in the preregistration before freeze. The frozen spec names 'pooled false-accept rate' but does not specify which of the four defensible readings (R1-R4) is authoritative. The coded implementation uses R4 for A-CANDIDATE and R2 for other arms, making the gate verdict interpretation-dependent.",
+    "Calibration gate inertness: the fitted gate never fires (threshold 0.02, all 52 applicable goals have p_applicable > 0.67). All 28 abstentions come from the parameter slot filler, not the gate. This means ECE and UNKNOWN-precision gates measure the uncalibrated slot filler, not the fitted gate. A negative class (OOD goals) must be included in calibration fitting to make the gate active on safety-relevant failures.",
+    "V8(a) degeneracy screen is structurally non-binding: B-LEXICAL-OVERLAP never abstains, so its accuracy on all 80 goals is capped at 52/80 = 0.65 < 0.90 for any lexical selector. The screen passes by construction, not because the null is weak. The headroom threshold must be recomputed on applicable goals only, or the screen must use a different null.",
+    "Applicable goal count discrepancy: prereg.md §3.3 states 60 applicable goals but the frozen fixture yields 52 (20 paraphrased + 10 underspecified + 10 composite + 12 verbatim = 52). The 20 OOD goals are correctly not applicable. All denominators depend on this count.",
+    "The candidate executes on 11/20 OOD goals (goals with no applicable mechanism) at mean p_applicable 0.78. These false accepts carry no weight in primary metric (applicable-only), no weight in false-accept under R1, and no weight in ECE (gate fitted only on applicable goals). The metric suite is blind to the most product-relevant failure mode."
+  ],
+  "validity_findings": [
+    {
+      "id": "VF-01",
+      "severity": "fatal",
+      "category": "measurement_validity",
+      "finding": "V9_CODE_HASHED_INTO_FREEZE fails. freeze.json contains hashes for only 3 design documents (prereg.md, request.json, spec.json) and 0 code files. The freezer (scripts/freeze_experiment.py at commit 7f5879fc) is outside the graph lane's allowed_code_roots and cannot be modified by this lane. freeze.json is immutable. Therefore no compliant execution of this frozen design was possible. The frozen decision rule evaluates V1-V11 first and short-circuits to MEASUREMENT_INVALID.",
+      "evidence_refs": [
+        "freeze.json",
+        "result.json.frozen_decision_rule_evaluation.measurement_validity_conditions.V9_CODE_HASHED_INTO_FREEZE",
+        "provenance.json.frozen_inputs.v9_defect"
+      ]
+    },
+    {
+      "id": "VF-02",
+      "severity": "major",
+      "category": "construct_validity",
+      "finding": "The calibrated applicability gate is formally fitted (logistic regression on held-out validation, parameters move across independent refits with w_spread=1.12) but is INERT at the selected threshold (0.02). All 52 applicable goals have p_applicable in [0.6785, 0.9468], so 0 of 52 fall below threshold. All 28 candidate abstentions carry abstain_reason='unfilled_parameter_slots', not gate threshold. Therefore: (a) ECE_global=0.2030 and ECE_per_class_max=0.7885 score the slot filler's abstentions against gate confidences the gate never acted on; (b) UNKNOWN_precision=0.6071 (17 TP_abstain / 11 FP_abstain) measures slot-filler behavior; (c) the gate costs accuracy on underspecified goals (0/10) and buys nothing against false accepts.",
+      "evidence_refs": [
+        "derived_evidence/calibration.json.threshold (0.02) and p_min (0.6785)",
+        "result.json.metrics.calibration_gate_fired_on_n_applicable_goals (0)",
+        "result.json.observations OBS-08, OBS-09"
+      ]
+    },
+    {
+      "id": "VF-03",
+      "severity": "major",
+      "category": "metric_definition",
+      "finding": "The 'pooled false-accept rate' metric has an undefined numerator/denominator pairing in the frozen spec. Four defensible readings exist: R1 (wrong executions on applicable / applicable goals), R2 (wrong executions on all 80 / all 80), R3 (wrong executions on applicable / applicable & executable), R4 (wrong executions on all 80 / applicable goals). The coded value uses R4 for A-CANDIDATE (0.3077) and R2 for other arms. Under R1, candidate passes (0.0962) and lexical fails (0.3077). Under R2/R3/R4, candidate fails. The gate verdict is interpretation-dependent. This ambiguity is disclosed in result.json.metrics.false_accept_rate_reading_audit but not repaired.",
+      "evidence_refs": [
+        "spec.json decision_rule.secondary_gates[0] (pooled_false_accept)",
+        "result.json.metrics.false_accept_rate_reading_audit",
+        "report.md §5"
+      ]
+    },
+    {
+      "id": "VF-04",
+      "severity": "major",
+      "category": "representation_validity",
+      "finding": "V8(a) degeneracy screen uses all 80 goals including 28 with no applicable mechanism. B-LEXICAL-OVERLAP never abstains, so it is scored incorrect on all 28 by construction, capping its accuracy at 52/80=0.65. The headroom threshold 0.90 is therefore impossible to fail for any lexical selector on this fixture. The screen passes by structural artifact, not because the lexical null is weak. The lexical null's applicable-only accuracy is 0.6923 (36/52), including 12/12 verbatim and 15/20 paraphrased — a substantially stronger baseline than the screen detects.",
+      "evidence_refs": [
+        "prereg.md §5.3 V8(a)",
+        "derived_evidence/degeneracy_screen.json.lexical_overlap.structural_cap_on_all80 (0.65)",
+        "derived_evidence/degeneracy_screen.json.lexical_overlap.accuracy_applicable_only (0.6923)"
+      ]
+    },
+    {
+      "id": "VF-05",
+      "severity": "major",
+      "category": "fixture_validity",
+      "finding": "Applicable goal count inconsistency: prereg.md §3.3 table sums to 60 'applicable' (20 paraphrased + 10 underspecified + 10 composite + 12 verbatim = 52) but states 60. The 20 OOD goals are correctly no-applicable. The actual applicable count is 52. All denominators in metrics, calibration split, and gates depend on this number. The calibration fit excluded 28 goals (20 OOD + 8 no_applicable) as 'no defined positive label', which is correct, but the prereg's arithmetic is inconsistent.",
+      "evidence_refs": [
+        "prereg.md §3.3 goal table",
+        "derived_evidence/calibration.json.split.excluded_from_fitting (n=28)",
+        "result.json.metrics.mechanism_identity_accuracy_denominator (52)"
+      ]
+    },
+    {
+      "id": "VF-06",
+      "severity": "major",
+      "category": "safety_gap",
+      "finding": "The candidate executes on 11/20 OOD goals (no applicable mechanism) with mean p_applicable=0.78. These false accepts are invisible to: (a) primary metric (applicable-only denominator), (b) false-accept gate under R1 (numerator restricted to applicable), (c) ECE gates (calibration fitted only on applicable goals). The metric suite has no gate that penalizes confident execution against non-existent mechanisms. This is a structural gap in the frozen measurement design.",
+      "evidence_refs": [
+        "result.json.observations OBS-10",
+        "result.json.metrics.arms['A-CANDIDATE'].per_category.ood (executable=11, n=20)",
+        "report.md §6"
+      ]
+    },
+    {
+      "id": "VF-07",
+      "severity": "minor",
+      "category": "control_validity",
+      "finding": "PC-VERBATIM-INTENT passes its decision gate (accuracy=1.0, denominator=12) but misses its descriptive expectation: ECE=0.0532 vs expected 0.0. All 12 verbatim goals have cos=1.0 which maps through the fitted gate to p=0.9468, not 1.0. UNKNOWN_precision=1.0 is vacuous (arm never abstains on verbatim). NC-NO-APPLICABLE passes (8/8 abstained) but all 8 abstentions come from slot filler ('unfilled_parameter_slots'), not the calibrated gate (gate abstained on 0 of 8). A-INCUMBENT leg is empty (0/80 EXECUTABLE) by code certainty: kernel.py:resolve() requires exact intent match AND all template slots in params; V11 fixture gives non-empty parameter_slots; arm supplies params={}. The prereg's expectation that incumbent has parameter_slots=[] contradicts V11.",
+      "evidence_refs": [
+        "result.json.controls.PC-VERBATIM-INTENT",
+        "result.json.controls.NC-NO-APPLICABLE",
+        "result.json.controls.A-INCUMBENT",
+        "report.md §7"
+      ]
+    },
+    {
+      "id": "VF-08",
+      "severity": "informational",
+      "category": "measurement_hygiene",
+      "finding": "The run achieves byte-reproducibility (two independent executions produce identical raw_evidence/task_results.jsonl and derived_evidence/*), verified per-task state reset (single state hash across 80 tasks), 78 distinct arm orderings (exceeds frozen minimum 43), and zero rows dropped by estimators. These are operational improvements over the parent experiment EXP-GRAPH-36272373909 but are not evidence about C-SEMANTIC-RESOLVE.",
+      "evidence_refs": [
+        "result.json.observations OBS-01 through OBS-05",
+        "provenance.json.reproducibility"
+      ]
+    }
+  ],
+  "baseline_findings": [
+    {
+      "baseline_id": "B-LEXICAL-OVERLAP",
+      "finding": "Stronger than anticipated. On applicable goals: 0.6923 (36/52) including 12/12 verbatim, 15/20 paraphrased, 5/10 underspecified, 4/10 composite. Ties the candidate exactly on the primary metric (difference=0.0, p=0.5943). Contingency: both correct 29, candidate-only 7, lexical-only 7, neither 9. The exact tie is a compositional cancellation: candidate wins on paraphrased (+4) and composite (+1), loses on underspecified (-5). The V8(a) screen cannot detect this strength because it is capped at 0.65 on all-80 goals.",
+      "evidence_refs": [
+        "result.json.metrics.mechanism_identity_accuracy_by_arm.B-LEXICAL-OVERLAP",
+        "result.json.metrics.mechanism_identity_accuracy_by_category.B-LEXICAL-OVERLAP",
+        "result.json.metrics.primary_candidate_vs_lexical_contingency",
+        "result.json.metrics.primary_tie_decomposition_vs_lexical"
+      ]
+    },
+    {
+      "baseline_id": "B-RANDOM-ROLE",
+      "finding": "Weaker than chance. Expected ~0.20 (1/5 mechanisms per role) but achieves 0.1346 (7/52). Keyword role inference sometimes picks wrong role or no role. Candidate exceeds this null (p=0.0) but this is a low bar.",
+      "evidence_refs": [
+        "result.json.metrics.mechanism_identity_accuracy_by_arm.B-RANDOM-ROLE",
+        "result.json.metrics.primary.vs_B-RANDOM-ROLE"
+      ]
+    },
+    {
+      "baseline_id": "A-REFERENCE-EMBEDARGMAX",
+      "finding": "Declared substitute comparison leg (non-empty, 80/80 EXECUTABLE). Scores 0.8654 (45/52) on primary metric — substantially above candidate (0.6923) and lexical (0.6923). The candidate's correct set is a strict subset of this arm's: 36 shared, 0 candidate-only, 9 argmax-only. The entire deficit is on underspecified goals (candidate 0/10, argmax 9/10). On paraphrased and composite, candidate ties argmax. The uncalibrated, never-abstaining baseline beats the fitted-gate resolver because every candidate abstention costs a mechanism-identity point (abstention=incorrect per prereg 6.1) while buying nothing against false-accept.",
+      "evidence_refs": [
+        "result.json.metrics.mechanism_identity_accuracy_by_arm.A-REFERENCE-EMBEDARGMAX",
+        "result.json.metrics.primary_candidate_vs_uncalibrated_argmax_contingency",
+        "report.md §3"
+      ]
+    },
+    {
+      "baseline_id": "B-INTERNAL-ID-ORACLE",
+      "finding": "Achieves 1.0 on 52 applicable goals and abstains on all 28 no-applicable goals. Difficulty ceiling is reachable; candidate's 0.6923 is a real gap to a reachable ceiling, not an artifact of an unsolvable fixture.",
+      "evidence_refs": [
+        "result.json.controls.B-INTERNAL-ID-ORACLE",
+        "result.json.metrics.mechanism_identity_accuracy_by_arm.B-INTERNAL-ID-ORACLE"
+      ]
+    }
+  ],
+  "recomputed_metrics": {
+    "mechanism_identity_accuracy": {
+      "A-CANDIDATE": 0.6923076923076923,
+      "A-INCUMBENT": 0.0,
+      "A-REFERENCE-EMBEDARGMAX": 0.8653846153846154,
+      "B-INTERNAL-ID-ORACLE": 1.0,
+      "B-LEXICAL-OVERLAP": 0.6923076923076923,
+      "B-RANDOM-ROLE": 0.1346153846153846
+    },
+    "primary_gate": {
+      "difference_vs_lexical": 0.0,
+      "one_sided_lower_95_vs_lexical": -0.06521739130434778,
+      "p_one_sided_vs_lexical": 0.5943,
+      "passes_vs_lexical": false,
+      "passes_vs_random_role": true,
+      "note": "Paired family-blocked bootstrap (10k resamples, 5 blocks), alpha=0.05 one-sided. Exact tie in pooled rate; contingency shows offsetting per-category effects."
+    },
+    "secondary_gates": {
+      "pooled_false_accept": {
+        "coded_value": 0.3076923076923077,
+        "threshold": 0.1,
+        "pass": false,
+        "interpretation_dependent": true,
+        "readings": {
+          "R1_wrong_applicable_over_applicable": 0.09615384615384616,
+          "R2_wrong_all80_over_all80": 0.2,
+          "R3_wrong_applicable_over_applicable_executable": 0.12195121951219512,
+          "R4_coded_wrong_all80_over_applicable": 0.3076923076923077
+        }
+      },
+      "unknown_precision": {
+        "observed": 0.6071428571428571,
+        "threshold": 0.85,
+        "pass": false,
+        "TP_abstain": 17,
+        "FP_abstain": 11,
+        "note": "All 11 FP_abstain are underspecified goals where a mechanism applies but slot filler abstains; gate never abstains."
+      },
+      "ece_global": {
+        "observed": 0.20300062609719383,
+        "threshold": 0.15,
+        "bootstrap_upper_95": 0.28520324800935126,
+        "bootstrap_upper_threshold": 0.18,
+        "pass": false,
+        "note": "Driven by 11 ABSTAIN rows (slot filler) scored against gate confidences in [0.68, 0.91]. EXECUTABLE-only ECE = 0.1319 (passes point threshold but bootstrap upper 0.2208 > 0.18)."
+      },
+      "ece_per_class_max": {
+        "observed": 0.7884632613791012,
+        "threshold": 0.15,
+        "bootstrap_upper_95": 0.8388053668469421,
+        "bootstrap_upper_threshold": 0.18,
+        "pass": false,
+        "note": "ABSTAIN class ECE=0.7885 (n=11). EXECUTABLE class ECE=0.1319 (n=41)."
+      },
+      "calibration_fitted": {
+        "observed": true,
+        "threshold": true,
+        "pass": true,
+        "w": 2.6927439442486354,
+        "b": 0.18530383624882538,
+        "w_spread_across_refits": 1.1229604465147536
+      },
+      "degeneracy_screen_passed": {
+        "observed": true,
+        "threshold": true,
+        "pass": true,
+        "note": "Screen passes but V8(a) is structurally non-binding (lexical capped at 0.65 on all-80). Substitute leg A-REFERENCE-EMBEDARGMAX has 80/80 EXECUTABLE."
+      },
+      "positive_control_pass": {
+        "observed": 1.0,
+        "threshold": 1.0,
+        "denominator": 12,
+        "pass": true
+      },
+      "oracle_ceiling_pass": {
+        "observed": 1.0,
+        "threshold": 1.0,
+        "pass": true
+      },
+      "null_control_pass": {
+        "observed": 1.0,
+        "threshold": 1.0,
+        "denominator": 8,
+        "pass": true
+      }
+    },
+    "verification_measure_http_execution_success_rate": {
+      "A-CANDIDATE": 1.0,
+      "A-REFERENCE-EMBEDARGMAX": 1.0,
+      "B-INTERNAL-ID-ORACLE": 1.0,
+      "B-LEXICAL-OVERLAP": 1.0,
+      "B-RANDOM-ROLE": 1.0,
+      "note": "All EXECUTABLE decisions return 2xx/3xx. HTTP execution is a separate verification measure per V1."
+    }
+  },
+  "claim_ceiling": "The frozen experiment design cannot support C-SEMANTIC-RESOLVE at any claim status above HYPOTHESIS. The measurement transaction is MEASUREMENT_INVALID due to V9 failure (code not hashed into freeze.json). Even ignoring V9, the candidate fails the primary gate (does not exceed lexical-overlap null) and fails 4 of 9 secondary gates. The calibrated gate is inert and the metric suite has structural gaps (V8(a) non-binding, OOD false accepts invisible, false-accept denominator ambiguous). The strongest justified statement is: 'On this fixture, a fitted logistic gate over embedding cosine with a generic slot filler does not exceed a lexical-overlap null on mechanism-identity binding accuracy, and the gate never fires — all abstentions come from slot-filling failures.' This is a bounded negative result about this specific resolver architecture on this specific fixture, not a general refutation of semantic resolution.",
+  "evidence_refs": [
+    "request.json",
+    "spec.json",
+    "prereg.md",
+    "freeze.json",
+    "result.json",
+    "report.md",
+    "provenance.json",
+    "derived_evidence/degeneracy_screen.json",
+    "derived_evidence/calibration.json",
+    "derived_evidence/metrics.json",
+    "derived_evidence/gate_table.json",
+    "raw_evidence/task_results.jsonl",
+    "raw_evidence/degeneracy_screen_per_goal.jsonl",
+    "artifacts/fixture.json",
+    "artifacts/goals.json"
+  ],
+  "unresolved": [
+    "Whether a re-designed experiment with code hashed into freeze.json, a non-inert calibration gate (including negative class), a fixed false-accept denominator, and a binding degeneracy screen could validly test C-SEMANTIC-RESOLVE.",
+    "Whether the 0.15 ECE / 0.85 UNKNOWN-precision / 0.10 false-accept targets are reachable by any abstaining design on this fixture, given that abstention is uncalibrated (slot filler) while non-abstention is scored for confidence.",
+    "Whether the applicable goal count should be 52 (actual) or 60 (prereg arithmetic) and whether the 20 OOD goals should have been included in calibration fitting with a negative label.",
+    "Whether the primary metric should score abstention as incorrect (current prereg 6.1) or exclude abstentions from the denominator, given that the candidate's main failure mode on underspecified goals is abstention (0/10) while lexical gets 5/10 by guessing.",
+    "Whether the incumbent arm (A-INCUMBENT) can ever be a valid comparison leg given that the incumbent kernel lacks parameterized induction and the fixture requires bound parameter slots (V11)."
+  ]
+}
