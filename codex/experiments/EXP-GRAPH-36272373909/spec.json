@@ -1,0 +1,110 @@
+{
+  "experiment_id": "EXP-GRAPH-36272373909",
+  "lane": "graph",
+  "claim_ids": ["C-SEMANTIC-RESOLVE"],
+  "question": "On a stdlib-only real locally-served multi-endpoint HTTP application with genuinely distinct resource instances and goal wordings produced by a generator independent of the intent strings used at distillation, with that independence disclosed and provenance-traceable, and using a paired within-task design in which every candidate resolver and the incumbent shipped spider.kernel.SpiderKernel observe the identical starting state and the identical frozen mechanism fixture: (a) what is the incumbent's reference resolution curve, measured rather than assumed — recording shipped_has_distill_parameterized, the shipped distill confidence against min_confidence, resolve status for exact and for paraphrased intent, and the number of EXECUTABLE resolutions attainable from the committed kernel alone, probed at the executing commit; (b) does any candidate goal-to-mechanism resolver convert unseen natural-language goals into correct applicable-mechanism bindings at a rate beating the incumbent and three strong nulls — random-role, lexical-overlap-only and internal-id-lookup — with family-blocked, trajectory-grouped uncertainty and non-degenerate interval width; and (c) does its applicability gate abstain with pooled false-accept at most 0.10, UNKNOWN precision at least 0.85 and global and per-class ECE at most 0.15 with bootstrap upper at most 0.18, at a confidence threshold frozen before any arm runs?",
+  "hypothesis": "A candidate resolver that performs semantic goal-to-mechanism resolution (beyond exact intent string matching) can achieve higher abstention-adjusted accuracy than the incumbent SpiderKernel and three strong null baselines on unseen natural-language goals, while maintaining calibrated abstention (false-accept ≤ 0.10, UNKNOWN precision ≥ 0.85, ECE ≤ 0.15). The incumbent SpiderKernel, which only supports exact intent matching and has no parameterized induction (distill confidence=0.5 < min_confidence=0.8), will resolve 0 EXECUTABLE for paraphrased goals and serve as a well-characterized reference floor.",
+  "falsifier": "If no candidate resolver beats the incumbent's abstention-adjusted accuracy at bounded false-accept (≤ 0.10), C-SEMANTIC-RESOLVE's mechanism-level premise is FALSIFIED-IN-SETTING and semantic resolution is abandoned as an architectural component in favour of explicit goal annotation or full re-exploration.",
+  "baselines": [
+    {
+      "id": "B-INCUMBENT",
+      "name": "Incumbent SpiderKernel (exact intent matching only)",
+      "description": "Shipped spider.kernel.SpiderKernel with min_confidence=0.8, distill() producing literal mechanisms at confidence=0.5, resolve() requiring exact intent string equality. No distill_parameterized method exists. Expected: 0 EXECUTABLE for paraphrased goals, EXECUTABLE only for verbatim intent matches.",
+      "type": "incumbent_reference"
+    },
+    {
+      "id": "B-RANDOM-ROLE",
+      "name": "Random role assignment null",
+      "description": "Resolver assigns goals to mechanisms uniformly at random from the registry, ignoring goal semantics entirely. Controls for chance-level binding.",
+      "type": "null_control"
+    },
+    {
+      "id": "B-LEXICAL-OVERLAP",
+      "name": "Lexical overlap only resolver",
+      "description": "Resolver selects mechanism by maximum token/Jaccard overlap between goal wording and mechanism intent string, with no semantic understanding. Controls for superficial string matching.",
+      "type": "strong_null"
+    },
+    {
+      "id": "B-INTERNAL-ID-LOOKUP",
+      "name": "Internal ID lookup resolver",
+      "description": "Resolver assumes access to internal mechanism_id or fragment_id (which a real external agent would not have). Controls for cheating via internal identifiers rather than semantic resolution. This is an oracle upper-bound that should not be available to real agents.",
+      "type": "strong_null"
+    }
+  ],
+  "positive_control": {
+    "id": "PC-EXACT-MATCH",
+    "name": "Verbatim intent match",
+    "description": "For goals that exactly match a mechanism's intent string (verbatim), the incumbent should achieve EXECUTABLE resolution. This verifies the fixture and measurement pipeline work. Expected: 1.0 EXECUTABLE rate on verbatim goals.",
+    "expected_pass": true,
+    "type": "positive_control"
+  },
+  "null_control": {
+    "id": "NC-NO-APPLICABLE",
+    "name": "No applicable mechanism",
+    "description": "Goals for which no mechanism exists in the registry (out-of-distribution intents). All resolvers should return UNKNOWN/ABSTAIN. Expected: UNKNOWN precision ≥ 0.85, false-accept = 0.0.",
+    "expected_pass": true,
+    "type": "null_control"
+  },
+  "measurement_validity": [
+    "V1: Real HTTP substrate — stdlib-only http.server with multiple distinct endpoints serving different resource types (e.g., /users, /posts, /comments, /albums, /photos), each with independent state.",
+    "V2: Independent goal generator — goal wordings produced by a separate LLM prompt / template system that never sees the distillation intent strings. Provenance trace: generator prompt, seed, and output logged before any resolver runs.",
+    "V3: Paired within-task design — every resolver arm (incumbent + 3 nulls + candidate) receives identical starting state, identical frozen mechanism registry, identical goal. Order randomized per task.",
+    "V4: Family-blocked uncertainty — tasks grouped by resource family (users/posts/comments/albums/photos); bootstrap resamples at family level (not task level) to account for within-family correlation.",
+    "V5: Trajectory-grouped uncertainty — if multi-step tasks are used, resampling unit is the full trajectory, not individual steps.",
+    "V6: Non-degenerate interval width — Wilson 95% CI width < 0.30 for primary metrics; bootstrap CI for ECE upper bound < 0.18.",
+    "V7: Confidence threshold frozen — min_confidence and any resolver-specific thresholds fixed in prereg before any arm executes.",
+    "V8: Mechanism fixture frozen — registry populated once from a fixed distillation pass on a fixed seed; same registry used for all arms.",
+    "V9: No internal ID leakage — candidate resolver and nulls receive only (goal, context, mechanism registry with intent/preconditions/action_template/postconditions). No mechanism_id, fragment_id, or internal indices exposed.",
+    "V10: Distillation independence — distillation intent strings and goal generator use disjoint vocabularies/templates; overlap measured and reported.",
+    "V11: Preconditions as observations — every precondition (e.g., 'distill_parameterized exists', 'registry non-empty', 'HTTP server responsive') recorded as OBSERVATION with smallest-next-action, never as blocking falsifier."
+  ],
+  "decision_rule": {
+    "primary": "Candidate resolver beats incumbent on abstention-adjusted accuracy (EXECUTABLE correct / (EXECUTABLE correct + EXECUTABLE incorrect + UNKNOWN)) with 95% Wilson lower bound > incumbent's upper bound, AND candidate false-accept ≤ 0.10 (Wilson upper ≤ 0.10), AND candidate UNKNOWN precision ≥ 0.85 (Wilson lower ≥ 0.85), AND candidate global ECE ≤ 0.15 (bootstrap 97.5% upper ≤ 0.18), AND candidate per-class ECE ≤ 0.15 (bootstrap 97.5% upper ≤ 0.18).",
+    "secondary": [
+      "Candidate beats B-RANDOM-ROLE on EXECUTABLE correct rate (binomial test p < 0.01, family-blocked bootstrap).",
+      "Candidate beats B-LEXICAL-OVERLAP on EXECUTABLE correct rate (binomial test p < 0.01, family-blocked bootstrap).",
+      "Candidate does not rely on B-INTERNAL-ID-LOOKUP oracle (verified by V9).",
+      "PC-EXACT-MATCH passes (incumbent EXECUTABLE ≥ 0.95 on verbatim goals).",
+      "NC-NO-APPLICABLE passes (all arms UNKNOWN precision ≥ 0.85, false-accept = 0.0)."
+    ],
+    "outcomes": {
+      "SURVIVES": "All primary and secondary conditions met.",
+      "FALSIFIES": "Primary condition fails (no candidate beats incumbent at bounded false-accept/calibration) — triggers pre-declared falsifier.",
+      "MIXED": "Candidate beats incumbent on accuracy but fails calibration gates, or beats some nulls but not all.",
+      "MEASUREMENT_INVALID": "Any V1-V11 violated, PC-EXACT-MATCH fails, NC-NO-APPLICABLE fails, or CI degenerate (width ≥ 0.30)."
+    }
+  },
+  "product_consequence_positive": "Candidate resolver with calibrated abstention becomes promotable component. Unblocks C-LLM-INHERIT (external agent can use semantic resolution), C-CROSSSITE (goal resolution independent of site-specific IDs), and C-PRODUCT-ECON (resolver cost amortized over tasks). Graph lane delivers a semantic resolution module to Product lane with verified calibration.",
+  "product_consequence_negative": "C-SEMANTIC-RESOLVE mechanism-level premise FALSIFIED-IN-SETTING. Semantic resolution abandoned as architectural component. Product must rely on explicit goal annotation (user provides mechanism_id) or full re-exploration for every task. Graph lane pivots to goal annotation interfaces and exploration economics.",
+  "estimated_cost": {
+    "http_server_setup_minutes": 10,
+    "fixture_generation_minutes": 15,
+    "resolver_implementation_minutes": 30,
+    "measurement_runs_minutes": 20,
+    "total_estimate_minutes": 75,
+    "compute": "CPU-only, no GPU, no external API calls"
+  },
+  "expected_information_gain": "High. This experiment converts the largest uncertainty in the program (whether semantic resolution without internal IDs is viable) into a measurement. A positive result unlocks three downstream claim designs. A clean negative retires a component before further budget is spent. The incumbent reference curve is currently unknown (assumed, not measured) and the three nulls have never been tested against a real HTTP fixture.",
+  "preconditions_recorded_as_observations": [
+    {
+      "precondition": "distill_parameterized exists in committed kernel at executing commit",
+      "observation_key": "OBS-HAS-DISTILL-PARAMETERIZED",
+      "smallest_next_action_if_false": "Record false; proceed with incumbent-only measurement (B-INCUMBENT reference curve). Candidate resolver must supply its own parameterized mechanisms."
+    },
+    {
+      "precondition": "Registry non-empty after distillation pass",
+      "observation_key": "OBS-REGISTRY-NON-EMPTY",
+      "smallest_next_action_if_false": "Record zero; debug distillation fixture; abort if unfixable in 10 min."
+    },
+    {
+      "precondition": "HTTP server responsive on all endpoints",
+      "observation_key": "OBS-HTTP-RESPONSIVE",
+      "smallest_next_action_if_false": "Record failure; restart server; abort if unrecoverable in 5 min."
+    },
+    {
+      "precondition": "Goal generator produces disjoint vocabulary from distillation intents",
+      "observation_key": "OBS-GOAL-GEN-INDEPENDENCE",
+      "smallest_next_action_if_false": "Record overlap ratio; if > 0.3 token overlap, regenerate with new seed; abort if persistent."
+    }
+  ]
+}
