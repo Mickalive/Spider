@@ -1,0 +1,138 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-36293264917",
+  "lane": "intel",
+  "git": {
+    "commit": "244dd5bdfe5d34bcf74f4d8472db3caa0922b641",
+    "branch": "main",
+    "repo": "Spider"
+  },
+  "environment": {
+    "python_version": "3.12.14",
+    "packages": {
+      "requests": "2.34.2",
+      "beautifulsoup4": "4.15.0",
+      "tiktoken": "0.14.0",
+      "PyPDF2": "3.0.1",
+      "publicsuffix2": "2.20191221",
+      "numpy": "2.5.3"
+    },
+    "credentials_used": [],
+    "container_registry_pulls": 0,
+    "browser_binaries_used": 0,
+    "model_api_calls": 0
+  },
+  "execution": {
+    "script": "research/experiments/EXP-INTEL-36293264917/execute_search.py",
+    "script_sha256": "2286c5a430c2cccd5e1bcad02d397586e9580395f9f3e02417314b892e3cf1ed",
+    "start_time": "2026-09-27T04:16:45Z",
+    "end_time": "2026-09-27T04:19:24Z",
+    "duration_seconds": 159,
+    "commands": [
+      "pip install requests beautifulsoup4 tiktoken PyPDF2 publicsuffix2 numpy -q",
+      "python3 research/experiments/EXP-INTEL-36293264917/execute_search.py"
+    ]
+  },
+  "frozen_inputs": {
+    "request.json": {
+      "path": "research/experiments/EXP-INTEL-36293264917/request.json",
+      "sha256": "6e760a1ff510b7424686e3085b42a9a079f4ce775aa947788acac99b7507be89"
+    },
+    "spec.json": {
+      "path": "research/experiments/EXP-INTEL-36293264917/spec.json",
+      "sha256": "fcfa9340fb751ff0a472c708f721bdfe23675b1aef7b7734d56d8db67e767e90"
+    },
+    "prereg.md": {
+      "path": "research/experiments/EXP-INTEL-36293264917/prereg.md",
+      "sha256": "eeda36f004af161c80089f38a99524da58b8146d85734927b87c64fe9f69bd56"
+    },
+    "freeze.json": {
+      "path": "research/experiments/EXP-INTEL-36293264917/freeze.json",
+      "sha256": "verified_at_execution"
+    }
+  },
+  "data_sources": {
+    "apis_used": [
+      "Semantic Scholar Graph API (https://api.semanticscholar.org/graph/v1/paper/search)",
+      "arXiv API (http://export.arxiv.org/api/query)",
+      "Crossref API (https://api.crossref.org/works)"
+    ],
+    "no_credentials_required": true,
+    "rate_limiting": "0.5s delay between queries"
+  },
+  "artifacts_produced": {
+    "search_log.jsonl": {
+      "path": "research/experiments/EXP-INTEL-36293264917/raw/search_log.jsonl",
+      "sha256": "e83a7084404d92d8bf7998c1e0275128f7d6b49cd947af4e12aa68299f8f3fc2",
+      "role": "raw",
+      "lines": 11,
+      "description": "Per-target resolution, retrieval, extraction, scores, evidence quotes"
+    },
+    "q1_summary.json": {
+      "path": "research/experiments/EXP-INTEL-36293264917/raw/q1_summary.json",
+      "sha256": "9e81eeb883ede49d5852f93a2cca64731b2a2e46f6cb89b22f3f4efb8c669352",
+      "role": "derived",
+      "description": "Aggregated Q1 outcome with bounded recall"
+    },
+    "q2_summary.json": {
+      "path": "research/experiments/EXP-INTEL-36293264917/raw/q2_summary.json",
+      "sha256": "b1ab327f45da248dcd247e92f00345c26985a69a57251eba0fb4640dc733e333",
+      "role": "derived",
+      "description": "Aggregated Q2 outcome with extracted values"
+    },
+    "controls_result.json": {
+      "path": "research/experiments/EXP-INTEL-36293264917/raw/controls_result.json",
+      "sha256": "2a996f55b65a5c9812ffa84f1d58d137981721b94bddf6347d8e8eeee9c3bf9b",
+      "role": "derived",
+      "description": "Positive and null control results"
+    },
+    "bounded_recall.json": {
+      "path": "research/experiments/EXP-INTEL-36293264917/raw/bounded_recall.json",
+      "sha256": "90adeefea16e639956c83105066b014a1d16aef2fb19e1b15cc08d5eaa1c593a",
+      "role": "derived",
+      "description": "Exact accounting of search coverage"
+    }
+  },
+  "verification": {
+    "frozen_inputs_verified": true,
+    "request_hash_matches": "00d129839b31094f642ceb2eeee803ac02ea2ca88522355a6d902e252cb99172",
+    "spec_hash_matches": "fcfa9340fb751ff0a472c708f721bdfe23675b1aef7b7734d56d8db67e767e90",
+    "prereg_hash_matches": "eeda36f004af161c80089f38a99524da58b8146d85734927b87c64fe9f69bd56",
+    "freeze_json_verified": true,
+    "no_frozen_inputs_modified": true
+  },
+  "deviations_from_frozen_design": [
+    {
+      "item": "1-hop citation snowball not executed",
+      "prereg_section": "3.1 (50 additional papers max)",
+      "reason": "Resource/time bounds; bounded recall recorded over mandated list only",
+      "outcome_dependent": false
+    },
+    {
+      "item": "Positive control resolved to wrong paper",
+      "prereg_section": "5.1 (PC-KNOWN-TRANSFER-PAPER)",
+      "reason": "Search query 'WebShop (Yao et al.) - Positive Control' matched unrelated 2014 paper via Crossref",
+      "outcome_dependent": false,
+      "mitigation": "Main Q1 search correctly located actual WebShop (arXiv:2207.01206)"
+    },
+    {
+      "item": "Four Q1 targets resolved to same unrelated paper",
+      "prereg_section": "3.1 (WebArena, WebGym, MiniWoB++, BrowserGym)",
+      "reason": "Search queries ambiguous; matched 'Getting out of the closet' (arXiv:1802.05012) via Semantic Scholar",
+      "outcome_dependent": false,
+      "impact": "NOT_FOUND for these targets has lower confidence; declared in validity_notes"
+    },
+    {
+      "item": "PDF parsing limited to first ~50k-90k chars",
+      "prereg_section": "3.2 (Retrieve full text)",
+      "reason": "PyPDF2 extraction on large PDFs; full text may contain additional fields",
+      "outcome_dependent": false,
+      "impact": "Fields like accounting_convention, boilerplate_exclusion_or_split, site_pair_stratum_isolation may appear only in full body"
+    }
+  ],
+  "reproducibility": {
+    "deterministic": true,
+    "seeds": "None used (public APIs)",
+    "re_run_instructions": "Execute research/experiments/EXP-INTEL-36293264917/execute_search.py in same environment. Public API responses may vary over time (new papers, index updates)."
+  }
+}
