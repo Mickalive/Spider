@@ -1,17 +1,76 @@
 {
   "experiment_id": "EXP-RUNTIME-36293257855",
   "lane": "runtime",
-  "claim_ids": [],
-  "question": "",
-  "hypothesis": "",
-  "falsifier": "",
-  "baselines": [],
-  "positive_control": "",
-  "null_control": "",
-  "measurement_validity": [],
-  "decision_rule": "",
-  "product_consequence_positive": "",
-  "product_consequence_negative": "",
-  "estimated_cost": "",
-  "expected_information_gain": ""
+  "claim_ids": ["C-MEAS-VALID"],
+  "question": "Now that the WAL-byte plus logical-projection plus response-fingerprint intervention oracle is VALIDATED against a planted surface on plain-HTTP, does that same oracle reach arm-constrained point sensitivity and specificity at or above 0.90 with two-sided 95 percent Wilson lower bound at or above 0.80 and non-degenerate intervals, when BOTH bounding confounds of the current scope are broken at once: (i) AUTHORSHIP, by implementing the intervention surface and its auth/session boundary in a module separate from the scorer so the detector never shares an author with the ground-truth provider, and (ii) TRANSPORT, by driving the full valid-auth SPA write, the reversible restore, and the read-only, invalid-auth, expired-auth and deleted-session nulls through the already-demonstrated public-API Chromium path (p.chromium.executable_path launch of the recorded chromium-1243 executable at sha256 8c599d43aec53f2460a31ae2f4af6bd863f8258b34ff519564bc5d4726bfaa1e, playwright 1.63.0 via pip, real 1280x720 CDP DOM plus Accessibility.getFullAXTree) instead of the plain-HTTP client path, with real button clicks as the ONLY write mechanism, mandatory before/after WAL byte evidence, and no synthetic fallback?",
+  "hypothesis": "The composite intervention oracle (WAL-byte vector hash + SQL logical projection + stable-header response fingerprint) maintains arm-constrained discrimination (point sensitivity/specificity >= 0.90, Wilson 95% lower bound >= 0.80, non-degenerate confidence intervals) when (a) the intervention surface and auth/session boundary are authored in a separate module from the scorer, and (b) episodes execute through a real Chromium browser via Playwright public API with real button clicks, rather than through the plain-HTTP client.",
+  "falsifier": "Any of the six arms (P-WRITE, P-DRIFT, N-READ, N-INVALID, N-EXPIRED, N-DELETED) yields point sensitivity/specificity < 0.90, OR Wilson 95% lower bound < 0.80, OR degenerate confidence interval (ci_hi <= ci_lo), OR the detector produces a false positive on any null arm, OR the positive-control planted intervention fails to be detected (sensitivity < 1.0 on positive-control arm).",
+  "baselines": {
+    "B-PLAIN-HTTP-VALIDATED": {
+      "description": "The validated plain-HTTP oracle from EXP-RUNTIME-36129163700 Part A: 6 arms x 20 episodes, all arms point=1.0, Wilson95=[0.8389, 1.0], all intervals non-degenerate, arm-blind detector, independent recomputation zero mismatches.",
+      "source_experiment": "EXP-RUNTIME-36129163700",
+      "metrics": {
+        "sensitivity_point": 1.0,
+        "sensitivity_wilson_lo": 0.8388748419471806,
+        "specificity_point": 1.0,
+        "specificity_wilson_lo": 0.8388748419471806,
+        "arms": 6,
+        "episodes_per_arm": 20
+      }
+    }
+  },
+  "positive_control": {
+    "id": "PC-BROWSER-WRITE-PLANTED",
+    "description": "A planted valid-auth SPA write episode executed through Chromium where the button click triggers a server-side UPDATE that mutates the WAL. The intervention surface (in separate module) records the expected logical projection change. The detector MUST detect this (sensitivity = 1.0) to confirm oracle power is preserved in the new condition.",
+    "expected_behavior": "detected = true, pre/post WAL vector hash differs, logical projection matches planted value",
+    "arms": ["P-WRITE"],
+    "episodes": 20
+  },
+  "null_control": {
+    "id": "NC-BROWSER-NULL-MATRIX",
+    "description": "Four null arms executed through Chromium with real button clicks (or navigation for read-only) that must NOT mutate the WAL: N-READ (valid-auth read-only), N-INVALID (invalid-auth), N-EXPIRED (expired-auth), N-DELETED (deleted-session). Each must yield specificity = 1.0 (0 false positives).",
+    "expected_behavior": "detected = false, pre/post WAL vector hash byte-identical, logical projection unchanged",
+    "arms": ["N-READ", "N-INVALID", "N-EXPIRED", "N-DELETED"],
+    "episodes_per_arm": 20
+  },
+  "measurement_validity": {
+    "authorship_separation": "Intervention surface (Flask app factory, routes, auth/session boundary, WAL schema) implemented in research/runtime/intervention_surface.py. Scorer (detector) implemented in research/runtime/oracle_scorer.py. No shared authorship: intervention_surface.py does not import oracle_scorer.py and vice versa. Ground-truth provider is the intervention surface module; detector is the oracle_scorer module.",
+    "transport": "Playwright 1.63.0 sync API only. p.chromium.executable_path resolves to /home/runner/.cache/ms-playwright/chromium-1243/chrome-linux64/chrome (sha256 8c599d43aec53f2460a31ae2f4af6bd863f8258b34ff519564bc5d4726bfaa1e). Viewport 1280x720. CDP DOM.getDocument(depth=-1, pierce=True) + Accessibility.getFullAXTree captured per episode. Real button clicks via page.locator(...).click() as ONLY write mechanism. No synthetic HTTP client fallback.",
+    "wal_evidence": "Mandatory before/after WAL byte vector capture for every episode. Vector = length-framed SHA-256 over /tmp/single.db plus /tmp/single.db-wal. Captured inside the measured interval with 50ms quiescence. Fixture setup/teardown outside measured interval.",
+    "arm_blind_scoring": "Episode order pre-seeded and archived (A-SEEDED-ORDER.json). Detector runs on arm-blind episodes (A-DETECTOR-OUTPUT.jsonl) before arm labels are joined. Independent recomputation check (A-RECOMPUTE-CHECK.json) with zero_mismatches required.",
+    "no_synthetic_fallback": "Any failed real probe (browser launch, navigation, click, WAL capture) records UNAVAILABLE/ERROR with evidence and smallest unblocking action. No synthetic substitute ever stands in for a failed real measurement.",
+    "rng": "Fresh per-case RNG with recorded seeds for episode ordering, token generation, and any stochasticity. No code path branches on estimator id.",
+    "capability_ledger": "One-command bring-up contract (research/runtime/bringup.py + bringup_contract.json) with fail-closed capability ledger. Required scopes: CAP-CHROMIUM-LAUNCH, CAP-WAL-SUBSTRATE, CAP-NGINX-PROXY. BrowserGym, AgentLab, policy-model credentials, GHCR explicitly listed as UNAVAILABLE required scopes if design needs them."
+  },
+  "decision_rule": {
+    "top_level_result_mapping": {
+      "SUPPORTS": "All six arms meet: point >= 0.90 AND wilson_lo >= 0.80 AND ci_hi > ci_lo. Positive control (PC-BROWSER-WRITE-PLANTED) sensitivity = 1.0. Null control (NC-BROWSER-NULL-MATRIX) all four arms specificity = 1.0. Independent recomputation zero_mismatches = true. Capability ledger all required scopes PASS.",
+      "FALSIFIES": "Any arm fails point >= 0.90 OR wilson_lo >= 0.80 OR ci_hi > ci_lo, OR positive control sensitivity < 1.0, OR any null arm specificity < 1.0, OR independent recomputation zero_mismatches = false.",
+      "MIXED": "Not used; this is a gate experiment with binary gate criteria.",
+      "INCONCLUSIVE": "Infrastructure failure prevents completing all 120 episodes (6 arms x 20) OR capability ledger required scope FAIL OR mandatory WAL evidence missing for any episode.",
+      "MEASUREMENT_INVALID": "Authorship separation violated (shared imports/module), OR synthetic fallback used for any failed probe, OR pre_null_logical NameError not repaired before freeze, OR detector shares code with intervention surface, OR WAL evidence captured outside measured interval."
+    },
+    "arm_thresholds": {
+      "point_min": 0.90,
+      "wilson_lo_min": 0.80,
+      "non_degenerate": true
+    },
+    "positive_control_threshold": {
+      "sensitivity": 1.0
+    },
+    "null_control_threshold": {
+      "specificity": 1.0
+    },
+    "recomputation_requirement": "zero_mismatches = true",
+    "capability_ledger_requirement": "all required scopes PASS"
+  },
+  "product_consequence_positive": "C-MEAS-VALID ceiling expands from 'plain-HTTP planted surface, same-author same-transport' to 'authorship-separated intervention surface + real Chromium transport with real button clicks'. This unblocks downstream lanes (Graph C-FRESHNESS, C-DELTA-REPAIR; Physics statistical contract certification) to preregister 'measurement-valid substrate' as a precondition they can actually rely on. The one-command bring-up contract and capability ledger become a reusable, fail-closed prerequisite for any lane needing writable controls and real DOM/AX observation.",
+  "product_consequence_negative": "C-MEAS-VALID remains bounded to plain-HTTP same-author scope. Downstream lanes cannot inherit the substrate as measurement-valid. C-FRESHNESS and C-DELTA-REPAIR remain stalled. Physics must certify statistical contract on a substrate that has not crossed the transport boundary. The program must either (a) invest in hardening the transport/authorship boundary, or (b) accept that the measurement instrument is not portable and redesign the oracle for a narrower but transportable scope.",
+  "estimated_cost": {
+    "browser_launches": 120,
+    "episodes": 120,
+    "estimated_wall_clock_minutes": 45,
+    "infrastructure": "2x gunicorn + exclusive nginx + SQLite WAL (same as validated substrate), Playwright Chromium 153.0.8010.12"
+  },
+  "expected_information_gain": "High. This is the single untested step between the current bounded VALIDATED result and any downstream lane being able to preregister the substrate. Crossing both authorship and transport boundaries simultaneously tests whether the discrimination is a property of the oracle itself rather than of the fixture/transport. A positive result unblocks three claims (C-MEAS-VALID expansion, C-FRESHNESS, C-DELTA-REPAIR). A negative result identifies which boundary (or both) breaks the oracle, guiding targeted repair rather than substrate accumulation."
 }
