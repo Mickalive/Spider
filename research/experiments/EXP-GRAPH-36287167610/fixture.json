@@ -1,0 +1,243 @@
+[
+  {
+    "mechanism_id": "mech_users_create",
+    "intent": "create a new user",
+    "parameter_slots": [
+      "user_id",
+      "name",
+      "email"
+    ],
+    "action_template": "CREATE /users/{user_id}",
+    "role": "create",
+    "family": "users",
+    "verb": "CREATE"
+  },
+  {
+    "mechanism_id": "mech_users_read",
+    "intent": "retrieve a user by id",
+    "parameter_slots": [
+      "user_id"
+    ],
+    "action_template": "READ /users/{user_id}",
+    "role": "read",
+    "family": "users",
+    "verb": "READ"
+  },
+  {
+    "mechanism_id": "mech_users_update",
+    "intent": "update a user",
+    "parameter_slots": [
+      "user_id",
+      "name",
+      "email"
+    ],
+    "action_template": "UPDATE /users/{user_id}",
+    "role": "update",
+    "family": "users",
+    "verb": "UPDATE"
+  },
+  {
+    "mechanism_id": "mech_users_delete",
+    "intent": "delete a user",
+    "parameter_slots": [
+      "user_id"
+    ],
+    "action_template": "DELETE /users/{user_id}",
+    "role": "delete",
+    "family": "users",
+    "verb": "DELETE"
+  },
+  {
+    "mechanism_id": "mech_posts_create",
+    "intent": "create a new post",
+    "parameter_slots": [
+      "post_id",
+      "title",
+      "body",
+      "user_id"
+    ],
+    "action_template": "CREATE /posts/{post_id}",
+    "role": "create",
+    "family": "posts",
+    "verb": "CREATE"
+  },
+  {
+    "mechanism_id": "mech_posts_read",
+    "intent": "retrieve a post by id",
+    "parameter_slots": [
+      "post_id"
+    ],
+    "action_template": "READ /posts/{post_id}",
+    "role": "read",
+    "family": "posts",
+    "verb": "READ"
+  },
+  {
+    "mechanism_id": "mech_posts_update",
+    "intent": "update a post",
+    "parameter_slots": [
+      "post_id",
+      "title",
+      "body"
+    ],
+    "action_template": "UPDATE /posts/{post_id}",
+    "role": "update",
+    "family": "posts",
+    "verb": "UPDATE"
+  },
+  {
+    "mechanism_id": "mech_posts_delete",
+    "intent": "delete a post",
+    "parameter_slots": [
+      "post_id"
+    ],
+    "action_template": "DELETE /posts/{post_id}",
+    "role": "delete",
+    "family": "posts",
+    "verb": "DELETE"
+  },
+  {
+    "mechanism_id": "mech_comments_create",
+    "intent": "create a new comment",
+    "parameter_slots": [
+      "comment_id",
+      "post_id",
+      "user_id",
+      "body"
+    ],
+    "action_template": "CREATE /comments/{comment_id}",
+    "role": "create",
+    "family": "comments",
+    "verb": "CREATE"
+  },
+  {
+    "mechanism_id": "mech_comments_read",
+    "intent": "retrieve a comment by id",
+    "parameter_slots": [
+      "comment_id"
+    ],
+    "action_template": "READ /comments/{comment_id}",
+    "role": "read",
+    "family": "comments",
+    "verb": "READ"
+  },
+  {
+    "mechanism_id": "mech_comments_update",
+    "intent": "update a comment",
+    "parameter_slots": [
+      "comment_id",
+      "body"
+    ],
+    "action_template": "UPDATE /comments/{comment_id}",
+    "role": "update",
+    "family": "comments",
+    "verb": "UPDATE"
+  },
+  {
+    "mechanism_id": "mech_comments_delete",
+    "intent": "delete a comment",
+    "parameter_slots": [
+      "comment_id"
+    ],
+    "action_template": "DELETE /comments/{comment_id}",
+    "role": "delete",
+    "family": "comments",
+    "verb": "DELETE"
+  },
+  {
+    "mechanism_id": "mech_albums_create",
+    "intent": "create a new album",
+    "parameter_slots": [
+      "album_id",
+      "title",
+      "user_id"
+    ],
+    "action_template": "CREATE /albums/{album_id}",
+    "role": "create",
+    "family": "albums",
+    "verb": "CREATE"
+  },
+  {
+    "mechanism_id": "mech_albums_read",
+    "intent": "retrieve an album by id",
+    "parameter_slots": [
+      "album_id"
+    ],
+    "action_template": "READ /albums/{album_id}",
+    "role": "read",
+    "family": "albums",
+    "verb": "READ"
+  },
+  {
+    "mechanism_id": "mech_albums_update",
+    "intent": "update an album",
+    "parameter_slots": [
+      "album_id",
+      "title"
+    ],
+    "action_template": "UPDATE /albums/{album_id}",
+    "role": "update",
+    "family": "albums",
+    "verb": "UPDATE"
+  },
+  {
+    "mechanism_id": "mech_albums_delete",
+    "intent": "delete an album",
+    "parameter_slots": [
+      "album_id"
+    ],
+    "action_template": "DELETE /albums/{album_id}",
+    "role": "delete",
+    "family": "albums",
+    "verb": "DELETE"
+  },
+  {
+    "mechanism_id": "mech_photos_create",
+    "intent": "create a new photo",
+    "parameter_slots": [
+      "photo_id",
+      "album_id",
+      "title",
+      "url"
+    ],
+    "action_template": "CREATE /photos/{photo_id}",
+    "role": "create",
+    "family": "photos",
+    "verb": "CREATE"
+  },
+  {
+    "mechanism_id": "mech_photos_read",
+    "intent": "retrieve a photo by id",
+    "parameter_slots": [
+      "photo_id"
+    ],
+    "action_template": "READ /photos/{photo_id}",
+    "role": "read",
+    "family": "photos",
+    "verb": "READ"
+  },
+  {
+    "mechanism_id": "mech_photos_update",
+    "intent": "update a photo",
+    "parameter_slots": [
+      "photo_id",
+      "title",
+      "url"
+    ],
+    "action_template": "UPDATE /photos/{photo_id}",
+    "role": "update",
+    "family": "photos",
+    "verb": "UPDATE"
+  },
+  {
+    "mechanism_id": "mech_photos_delete",
+    "intent": "delete a photo",
+    "parameter_slots": [
+      "photo_id"
+    ],
+    "action_template": "DELETE /photos/{photo_id}",
+    "role": "delete",
+    "family": "photos",
+    "verb": "DELETE"
+  }
+]

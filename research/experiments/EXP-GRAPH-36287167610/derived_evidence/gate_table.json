@@ -1,0 +1,16 @@
+{
+  "measurement_validity": false,
+  "primary_gate_vs_lexical": true,
+  "primary_gate_vs_random": true,
+  "pooled_false_accept": false,
+  "coverage_selective_risk": false,
+  "unknown_precision": true,
+  "ece_global": false,
+  "ece_per_class": false,
+  "calibration_fitted": true,
+  "degeneracy_screen": true,
+  "positive_control": true,
+  "oracle_ceiling": true,
+  "null_control": false,
+  "instrument_dynamic_range": false
+}

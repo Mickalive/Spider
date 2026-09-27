@@ -1,0 +1,976 @@
+[
+  {
+    "goal_id": "goal_001",
+    "text": "create a new user",
+    "target_mechanism_id": "mech_users_create",
+    "category": "verbatim",
+    "applicable": true,
+    "required_parameters": [
+      "user_id",
+      "name",
+      "email"
+    ],
+    "family": "users",
+    "verb": "CREATE"
+  },
+  {
+    "goal_id": "goal_002",
+    "text": "create a new post",
+    "target_mechanism_id": "mech_posts_create",
+    "category": "verbatim",
+    "applicable": true,
+    "required_parameters": [
+      "post_id",
+      "title",
+      "body",
+      "user_id"
+    ],
+    "family": "posts",
+    "verb": "CREATE"
+  },
+  {
+    "goal_id": "goal_003",
+    "text": "delete a post",
+    "target_mechanism_id": "mech_posts_delete",
+    "category": "verbatim",
+    "applicable": true,
+    "required_parameters": [
+      "post_id"
+    ],
+    "family": "posts",
+    "verb": "DELETE"
+  },
+  {
+    "goal_id": "goal_004",
+    "text": "retrieve a photo by id",
+    "target_mechanism_id": "mech_photos_read",
+    "category": "verbatim",
+    "applicable": true,
+    "required_parameters": [
+      "photo_id"
+    ],
+    "family": "photos",
+    "verb": "READ"
+  },
+  {
+    "goal_id": "goal_005",
+    "text": "delete a photo",
+    "target_mechanism_id": "mech_photos_delete",
+    "category": "verbatim",
+    "applicable": true,
+    "required_parameters": [
+      "photo_id"
+    ],
+    "family": "photos",
+    "verb": "DELETE"
+  },
+  {
+    "goal_id": "goal_006",
+    "text": "retrieve a post by id",
+    "target_mechanism_id": "mech_posts_read",
+    "category": "verbatim",
+    "applicable": true,
+    "required_parameters": [
+      "post_id"
+    ],
+    "family": "posts",
+    "verb": "READ"
+  },
+  {
+    "goal_id": "goal_007",
+    "text": "retrieve a user by id",
+    "target_mechanism_id": "mech_users_read",
+    "category": "verbatim",
+    "applicable": true,
+    "required_parameters": [
+      "user_id"
+    ],
+    "family": "users",
+    "verb": "READ"
+  },
+  {
+    "goal_id": "goal_008",
+    "text": "create a new photo",
+    "target_mechanism_id": "mech_photos_create",
+    "category": "verbatim",
+    "applicable": true,
+    "required_parameters": [
+      "photo_id",
+      "album_id",
+      "title",
+      "url"
+    ],
+    "family": "photos",
+    "verb": "CREATE"
+  },
+  {
+    "goal_id": "goal_009",
+    "text": "update a comment",
+    "target_mechanism_id": "mech_comments_update",
+    "category": "verbatim",
+    "applicable": true,
+    "required_parameters": [
+      "comment_id",
+      "body"
+    ],
+    "family": "comments",
+    "verb": "UPDATE"
+  },
+  {
+    "goal_id": "goal_010",
+    "text": "create a new comment",
+    "target_mechanism_id": "mech_comments_create",
+    "category": "verbatim",
+    "applicable": true,
+    "required_parameters": [
+      "comment_id",
+      "post_id",
+      "user_id",
+      "body"
+    ],
+    "family": "comments",
+    "verb": "CREATE"
+  },
+  {
+    "goal_id": "goal_011",
+    "text": "delete a user",
+    "target_mechanism_id": "mech_users_delete",
+    "category": "verbatim",
+    "applicable": true,
+    "required_parameters": [
+      "user_id"
+    ],
+    "family": "users",
+    "verb": "DELETE"
+  },
+  {
+    "goal_id": "goal_012",
+    "text": "update an album",
+    "target_mechanism_id": "mech_albums_update",
+    "category": "verbatim",
+    "applicable": true,
+    "required_parameters": [
+      "album_id",
+      "title"
+    ],
+    "family": "albums",
+    "verb": "UPDATE"
+  },
+  {
+    "goal_id": "goal_013",
+    "text": "get an album by id",
+    "target_mechanism_id": "mech_albums_read",
+    "category": "paraphrased",
+    "applicable": true,
+    "required_parameters": [
+      "album_id"
+    ],
+    "family": "albums",
+    "verb": "READ"
+  },
+  {
+    "goal_id": "goal_014",
+    "text": "fetch a comment using its id",
+    "target_mechanism_id": "mech_comments_read",
+    "category": "paraphrased",
+    "applicable": true,
+    "required_parameters": [
+      "comment_id"
+    ],
+    "family": "comments",
+    "verb": "READ"
+  },
+  {
+    "goal_id": "goal_015",
+    "text": "add a new comment",
+    "target_mechanism_id": "mech_comments_create",
+    "category": "paraphrased",
+    "applicable": true,
+    "required_parameters": [
+      "comment_id",
+      "post_id",
+      "user_id",
+      "body"
+    ],
+    "family": "comments",
+    "verb": "CREATE"
+  },
+  {
+    "goal_id": "goal_016",
+    "text": "change a photo's metadata",
+    "target_mechanism_id": "mech_photos_update",
+    "category": "paraphrased",
+    "applicable": true,
+    "required_parameters": [
+      "photo_id",
+      "title",
+      "url"
+    ],
+    "family": "photos",
+    "verb": "UPDATE"
+  },
+  {
+    "goal_id": "goal_017",
+    "text": "create a new photo entry",
+    "target_mechanism_id": "mech_photos_create",
+    "category": "paraphrased",
+    "applicable": true,
+    "required_parameters": [
+      "photo_id",
+      "album_id",
+      "title",
+      "url"
+    ],
+    "family": "photos",
+    "verb": "CREATE"
+  },
+  {
+    "goal_id": "goal_018",
+    "text": "remove an album",
+    "target_mechanism_id": "mech_albums_delete",
+    "category": "paraphrased",
+    "applicable": true,
+    "required_parameters": [
+      "album_id"
+    ],
+    "family": "albums",
+    "verb": "DELETE"
+  },
+  {
+    "goal_id": "goal_019",
+    "text": "edit a comment",
+    "target_mechanism_id": "mech_comments_update",
+    "category": "paraphrased",
+    "applicable": true,
+    "required_parameters": [
+      "comment_id",
+      "body"
+    ],
+    "family": "comments",
+    "verb": "UPDATE"
+  },
+  {
+    "goal_id": "goal_020",
+    "text": "modify a post's content",
+    "target_mechanism_id": "mech_posts_update",
+    "category": "paraphrased",
+    "applicable": true,
+    "required_parameters": [
+      "post_id",
+      "title",
+      "body"
+    ],
+    "family": "posts",
+    "verb": "UPDATE"
+  },
+  {
+    "goal_id": "goal_021",
+    "text": "make a new user profile",
+    "target_mechanism_id": "mech_users_create",
+    "category": "paraphrased",
+    "applicable": true,
+    "required_parameters": [
+      "user_id",
+      "name",
+      "email"
+    ],
+    "family": "users",
+    "verb": "CREATE"
+  },
+  {
+    "goal_id": "goal_022",
+    "text": "remove a photo",
+    "target_mechanism_id": "mech_photos_delete",
+    "category": "paraphrased",
+    "applicable": true,
+    "required_parameters": [
+      "photo_id"
+    ],
+    "family": "photos",
+    "verb": "DELETE"
+  },
+  {
+    "goal_id": "goal_023",
+    "text": "modify album title",
+    "target_mechanism_id": "mech_albums_update",
+    "category": "paraphrased",
+    "applicable": true,
+    "required_parameters": [
+      "album_id",
+      "title"
+    ],
+    "family": "albums",
+    "verb": "UPDATE"
+  },
+  {
+    "goal_id": "goal_024",
+    "text": "post a comment on a post",
+    "target_mechanism_id": "mech_comments_create",
+    "category": "paraphrased",
+    "applicable": true,
+    "required_parameters": [
+      "comment_id",
+      "post_id",
+      "user_id",
+      "body"
+    ],
+    "family": "comments",
+    "verb": "CREATE"
+  },
+  {
+    "goal_id": "goal_025",
+    "text": "fetch album details",
+    "target_mechanism_id": "mech_albums_read",
+    "category": "paraphrased",
+    "applicable": true,
+    "required_parameters": [
+      "album_id"
+    ],
+    "family": "albums",
+    "verb": "READ"
+  },
+  {
+    "goal_id": "goal_026",
+    "text": "retrieve a post using id",
+    "target_mechanism_id": "mech_posts_read",
+    "category": "paraphrased",
+    "applicable": true,
+    "required_parameters": [
+      "post_id"
+    ],
+    "family": "posts",
+    "verb": "READ"
+  },
+  {
+    "goal_id": "goal_027",
+    "text": "edit a user's details",
+    "target_mechanism_id": "mech_users_update",
+    "category": "paraphrased",
+    "applicable": true,
+    "required_parameters": [
+      "user_id",
+      "name",
+      "email"
+    ],
+    "family": "users",
+    "verb": "UPDATE"
+  },
+  {
+    "goal_id": "goal_028",
+    "text": "change a post's title and body",
+    "target_mechanism_id": "mech_posts_update",
+    "category": "paraphrased",
+    "applicable": true,
+    "required_parameters": [
+      "post_id",
+      "title",
+      "body"
+    ],
+    "family": "posts",
+    "verb": "UPDATE"
+  },
+  {
+    "goal_id": "goal_029",
+    "text": "get a photo by id",
+    "target_mechanism_id": "mech_photos_read",
+    "category": "paraphrased",
+    "applicable": true,
+    "required_parameters": [
+      "photo_id"
+    ],
+    "family": "photos",
+    "verb": "READ"
+  },
+  {
+    "goal_id": "goal_030",
+    "text": "remove a comment",
+    "target_mechanism_id": "mech_comments_delete",
+    "category": "paraphrased",
+    "applicable": true,
+    "required_parameters": [
+      "comment_id"
+    ],
+    "family": "comments",
+    "verb": "DELETE"
+  },
+  {
+    "goal_id": "goal_031",
+    "text": "delete a blog post",
+    "target_mechanism_id": "mech_posts_delete",
+    "category": "paraphrased",
+    "applicable": true,
+    "required_parameters": [
+      "post_id"
+    ],
+    "family": "posts",
+    "verb": "DELETE"
+  },
+  {
+    "goal_id": "goal_032",
+    "text": "write a comment",
+    "target_mechanism_id": "mech_comments_create",
+    "category": "paraphrased",
+    "applicable": true,
+    "required_parameters": [
+      "comment_id",
+      "post_id",
+      "user_id",
+      "body"
+    ],
+    "family": "comments",
+    "verb": "CREATE"
+  },
+  {
+    "goal_id": "goal_033",
+    "text": "create a new album",
+    "target_mechanism_id": "mech_albums_create",
+    "category": "underspecified",
+    "applicable": true,
+    "required_parameters": [
+      "album_id",
+      "title",
+      "user_id"
+    ],
+    "family": "albums",
+    "verb": "CREATE"
+  },
+  {
+    "goal_id": "goal_034",
+    "text": "update a user",
+    "target_mechanism_id": "mech_users_update",
+    "category": "underspecified",
+    "applicable": true,
+    "required_parameters": [
+      "user_id",
+      "name",
+      "email"
+    ],
+    "family": "users",
+    "verb": "UPDATE"
+  },
+  {
+    "goal_id": "goal_035",
+    "text": "update an album",
+    "target_mechanism_id": "mech_albums_update",
+    "category": "underspecified",
+    "applicable": true,
+    "required_parameters": [
+      "album_id",
+      "title"
+    ],
+    "family": "albums",
+    "verb": "UPDATE"
+  },
+  {
+    "goal_id": "goal_036",
+    "text": "create a new user",
+    "target_mechanism_id": "mech_users_create",
+    "category": "underspecified",
+    "applicable": true,
+    "required_parameters": [
+      "user_id",
+      "name",
+      "email"
+    ],
+    "family": "users",
+    "verb": "CREATE"
+  },
+  {
+    "goal_id": "goal_037",
+    "text": "update a post",
+    "target_mechanism_id": "mech_posts_update",
+    "category": "underspecified",
+    "applicable": true,
+    "required_parameters": [
+      "post_id",
+      "title",
+      "body"
+    ],
+    "family": "posts",
+    "verb": "UPDATE"
+  },
+  {
+    "goal_id": "goal_038",
+    "text": "create a new post",
+    "target_mechanism_id": "mech_posts_create",
+    "category": "underspecified",
+    "applicable": true,
+    "required_parameters": [
+      "post_id",
+      "title",
+      "body",
+      "user_id"
+    ],
+    "family": "posts",
+    "verb": "CREATE"
+  },
+  {
+    "goal_id": "goal_039",
+    "text": "retrieve an album by id",
+    "target_mechanism_id": "mech_albums_read",
+    "category": "underspecified",
+    "applicable": true,
+    "required_parameters": [
+      "album_id"
+    ],
+    "family": "albums",
+    "verb": "READ"
+  },
+  {
+    "goal_id": "goal_040",
+    "text": "update a comment",
+    "target_mechanism_id": "mech_comments_update",
+    "category": "underspecified",
+    "applicable": true,
+    "required_parameters": [
+      "comment_id",
+      "body"
+    ],
+    "family": "comments",
+    "verb": "UPDATE"
+  },
+  {
+    "goal_id": "goal_041",
+    "text": "create a new photo",
+    "target_mechanism_id": "mech_photos_create",
+    "category": "underspecified",
+    "applicable": true,
+    "required_parameters": [
+      "photo_id",
+      "album_id",
+      "title",
+      "url"
+    ],
+    "family": "photos",
+    "verb": "CREATE"
+  },
+  {
+    "goal_id": "goal_042",
+    "text": "update a photo",
+    "target_mechanism_id": "mech_photos_update",
+    "category": "underspecified",
+    "applicable": true,
+    "required_parameters": [
+      "photo_id",
+      "title",
+      "url"
+    ],
+    "family": "photos",
+    "verb": "UPDATE"
+  },
+  {
+    "goal_id": "goal_043",
+    "text": "read a albums and create a related comments",
+    "target_mechanism_id": "mech_albums_read",
+    "category": "composite",
+    "applicable": true,
+    "required_parameters": [
+      "album_id"
+    ],
+    "family": "albums",
+    "verb": "READ"
+  },
+  {
+    "goal_id": "goal_044",
+    "text": "update a comments then read it",
+    "target_mechanism_id": "mech_comments_update",
+    "category": "composite",
+    "applicable": true,
+    "required_parameters": [
+      "comment_id",
+      "body"
+    ],
+    "family": "comments",
+    "verb": "UPDATE"
+  },
+  {
+    "goal_id": "goal_045",
+    "text": "create a photos, update it, then delete it",
+    "target_mechanism_id": "mech_photos_create",
+    "category": "composite",
+    "applicable": true,
+    "required_parameters": [
+      "photo_id",
+      "album_id",
+      "title",
+      "url"
+    ],
+    "family": "photos",
+    "verb": "CREATE"
+  },
+  {
+    "goal_id": "goal_046",
+    "text": "read a comments and create a related posts",
+    "target_mechanism_id": "mech_comments_read",
+    "category": "composite",
+    "applicable": true,
+    "required_parameters": [
+      "comment_id"
+    ],
+    "family": "comments",
+    "verb": "READ"
+  },
+  {
+    "goal_id": "goal_047",
+    "text": "read a photos and create a related albums",
+    "target_mechanism_id": "mech_photos_read",
+    "category": "composite",
+    "applicable": true,
+    "required_parameters": [
+      "photo_id"
+    ],
+    "family": "photos",
+    "verb": "READ"
+  },
+  {
+    "goal_id": "goal_048",
+    "text": "update a albums then read it",
+    "target_mechanism_id": "mech_albums_update",
+    "category": "composite",
+    "applicable": true,
+    "required_parameters": [
+      "album_id",
+      "title"
+    ],
+    "family": "albums",
+    "verb": "UPDATE"
+  },
+  {
+    "goal_id": "goal_049",
+    "text": "create a posts, update it, then delete it",
+    "target_mechanism_id": "mech_posts_create",
+    "category": "composite",
+    "applicable": true,
+    "required_parameters": [
+      "post_id",
+      "title",
+      "body",
+      "user_id"
+    ],
+    "family": "posts",
+    "verb": "CREATE"
+  },
+  {
+    "goal_id": "goal_050",
+    "text": "create a photos, update it, then delete it",
+    "target_mechanism_id": "mech_photos_create",
+    "category": "composite",
+    "applicable": true,
+    "required_parameters": [
+      "photo_id",
+      "album_id",
+      "title",
+      "url"
+    ],
+    "family": "photos",
+    "verb": "CREATE"
+  },
+  {
+    "goal_id": "goal_051",
+    "text": "update a albums then read it",
+    "target_mechanism_id": "mech_albums_update",
+    "category": "composite",
+    "applicable": true,
+    "required_parameters": [
+      "album_id",
+      "title"
+    ],
+    "family": "albums",
+    "verb": "UPDATE"
+  },
+  {
+    "goal_id": "goal_052",
+    "text": "create a photos and then read it",
+    "target_mechanism_id": "mech_photos_create",
+    "category": "composite",
+    "applicable": true,
+    "required_parameters": [
+      "photo_id",
+      "album_id",
+      "title",
+      "url"
+    ],
+    "family": "photos",
+    "verb": "CREATE"
+  },
+  {
+    "goal_id": "goal_053",
+    "text": "list photos in an album",
+    "target_mechanism_id": "",
+    "category": "no_applicable",
+    "applicable": false,
+    "required_parameters": [],
+    "family": "",
+    "verb": ""
+  },
+  {
+    "goal_id": "goal_054",
+    "text": "get comments for a post",
+    "target_mechanism_id": "",
+    "category": "no_applicable",
+    "applicable": false,
+    "required_parameters": [],
+    "family": "",
+    "verb": ""
+  },
+  {
+    "goal_id": "goal_055",
+    "text": "generate report",
+    "target_mechanism_id": "",
+    "category": "no_applicable",
+    "applicable": false,
+    "required_parameters": [],
+    "family": "",
+    "verb": ""
+  },
+  {
+    "goal_id": "goal_056",
+    "text": "block a user",
+    "target_mechanism_id": "",
+    "category": "no_applicable",
+    "applicable": false,
+    "required_parameters": [],
+    "family": "",
+    "verb": ""
+  },
+  {
+    "goal_id": "goal_057",
+    "text": "verify email address",
+    "target_mechanism_id": "",
+    "category": "no_applicable",
+    "applicable": false,
+    "required_parameters": [],
+    "family": "",
+    "verb": ""
+  },
+  {
+    "goal_id": "goal_058",
+    "text": "add a like to a post",
+    "target_mechanism_id": "",
+    "category": "no_applicable",
+    "applicable": false,
+    "required_parameters": [],
+    "family": "",
+    "verb": ""
+  },
+  {
+    "goal_id": "goal_059",
+    "text": "search for users by email",
+    "target_mechanism_id": "",
+    "category": "no_applicable",
+    "applicable": false,
+    "required_parameters": [],
+    "family": "",
+    "verb": ""
+  },
+  {
+    "goal_id": "goal_060",
+    "text": "list all posts by a user",
+    "target_mechanism_id": "",
+    "category": "no_applicable",
+    "applicable": false,
+    "required_parameters": [],
+    "family": "",
+    "verb": ""
+  },
+  {
+    "goal_id": "goal_061",
+    "text": "export user data",
+    "target_mechanism_id": "",
+    "category": "no_applicable",
+    "applicable": false,
+    "required_parameters": [],
+    "family": "",
+    "verb": ""
+  },
+  {
+    "goal_id": "goal_062",
+    "text": "import users from csv",
+    "target_mechanism_id": "",
+    "category": "no_applicable",
+    "applicable": false,
+    "required_parameters": [],
+    "family": "",
+    "verb": ""
+  },
+  {
+    "goal_id": "goal_063",
+    "text": "logout current session",
+    "target_mechanism_id": "",
+    "category": "no_applicable",
+    "applicable": false,
+    "required_parameters": [],
+    "family": "",
+    "verb": ""
+  },
+  {
+    "goal_id": "goal_064",
+    "text": "follow a user",
+    "target_mechanism_id": "",
+    "category": "no_applicable",
+    "applicable": false,
+    "required_parameters": [],
+    "family": "",
+    "verb": ""
+  },
+  {
+    "goal_id": "goal_065",
+    "text": "create a tag for a post",
+    "target_mechanism_id": "",
+    "category": "no_applicable",
+    "applicable": false,
+    "required_parameters": [],
+    "family": "",
+    "verb": ""
+  },
+  {
+    "goal_id": "goal_066",
+    "text": "change user password",
+    "target_mechanism_id": "",
+    "category": "no_applicable",
+    "applicable": false,
+    "required_parameters": [],
+    "family": "",
+    "verb": ""
+  },
+  {
+    "goal_id": "goal_067",
+    "text": "find posts containing a keyword",
+    "target_mechanism_id": "",
+    "category": "no_applicable",
+    "applicable": false,
+    "required_parameters": [],
+    "family": "",
+    "verb": ""
+  },
+  {
+    "goal_id": "goal_068",
+    "text": "get recent activity feed",
+    "target_mechanism_id": "",
+    "category": "no_applicable",
+    "applicable": false,
+    "required_parameters": [],
+    "family": "",
+    "verb": ""
+  },
+  {
+    "goal_id": "goal_069",
+    "text": "count users in the system",
+    "target_mechanism_id": "",
+    "category": "no_applicable",
+    "applicable": false,
+    "required_parameters": [],
+    "family": "",
+    "verb": ""
+  },
+  {
+    "goal_id": "goal_070",
+    "text": "send notification to user",
+    "target_mechanism_id": "",
+    "category": "no_applicable",
+    "applicable": false,
+    "required_parameters": [],
+    "family": "",
+    "verb": ""
+  },
+  {
+    "goal_id": "goal_071",
+    "text": "login as a user",
+    "target_mechanism_id": "",
+    "category": "no_applicable",
+    "applicable": false,
+    "required_parameters": [],
+    "family": "",
+    "verb": ""
+  },
+  {
+    "goal_id": "goal_072",
+    "text": "backup the database",
+    "target_mechanism_id": "",
+    "category": "no_applicable",
+    "applicable": false,
+    "required_parameters": [],
+    "family": "",
+    "verb": ""
+  },
+  {
+    "goal_id": "goal_073",
+    "text": "export all user data to a file",
+    "target_mechanism_id": "",
+    "category": "ood_paraphrase",
+    "applicable": false,
+    "required_parameters": [],
+    "family": "",
+    "verb": ""
+  },
+  {
+    "goal_id": "goal_074",
+    "text": "list all photos inside an album",
+    "target_mechanism_id": "",
+    "category": "ood_paraphrase",
+    "applicable": false,
+    "required_parameters": [],
+    "family": "",
+    "verb": ""
+  },
+  {
+    "goal_id": "goal_075",
+    "text": "find users by their email address",
+    "target_mechanism_id": "",
+    "category": "ood_paraphrase",
+    "applicable": false,
+    "required_parameters": [],
+    "family": "",
+    "verb": ""
+  },
+  {
+    "goal_id": "goal_076",
+    "text": "search posts for a specific keyword",
+    "target_mechanism_id": "",
+    "category": "ood_paraphrase",
+    "applicable": false,
+    "required_parameters": [],
+    "family": "",
+    "verb": ""
+  },
+  {
+    "goal_id": "goal_077",
+    "text": "retrieve comments belonging to a post",
+    "target_mechanism_id": "",
+    "category": "ood_paraphrase",
+    "applicable": false,
+    "required_parameters": [],
+    "family": "",
+    "verb": ""
+  },
+  {
+    "goal_id": "goal_078",
+    "text": "show all posts written by a specific user",
+    "target_mechanism_id": "",
+    "category": "ood_paraphrase",
+    "applicable": false,
+    "required_parameters": [],
+    "family": "",
+    "verb": ""
+  },
+  {
+    "goal_id": "goal_079",
+    "text": "get the latest activity feed",
+    "target_mechanism_id": "",
+    "category": "ood_paraphrase",
+    "applicable": false,
+    "required_parameters": [],
+    "family": "",
+    "verb": ""
+  },
+  {
+    "goal_id": "goal_080",
+    "text": "count how many users exist",
+    "target_mechanism_id": "",
+    "category": "ood_paraphrase",
+    "applicable": false,
+    "required_parameters": [],
+    "family": "",
+    "verb": ""
+  }
+]

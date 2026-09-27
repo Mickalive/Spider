@@ -1,0 +1,154 @@
+{
+  "mechanism_identity_accuracy_applicable": {
+    "A-CANDIDATE": 0.9285714285714286,
+    "B-LEXICAL-OVERLAP": 0.5714285714285714,
+    "B-RANDOM-ROLE": 0.07142857142857142,
+    "B-EMBEDDING-ARGMAX": 0.9285714285714286,
+    "B-INTERNAL-ID-ORACLE": 1.0
+  },
+  "primary_bootstrap": {
+    "obs_diff": 0.3571428571428572,
+    "ci_lower": 0.08333333333333337,
+    "ci_upper": 0.6923076923076923,
+    "pass": true
+  },
+  "primary_bootstrap_vs_random": {
+    "obs_diff": 0.8571428571428572,
+    "ci_lower": 0.6666666666666666,
+    "ci_upper": 1.0,
+    "pass": true
+  },
+  "pooled_false_accept_rate": {
+    "A-CANDIDATE": 0.3870967741935484,
+    "threshold": 0.1,
+    "pass": false
+  },
+  "coverage_selective_risk": {
+    "coverage": 0.4423076923076923,
+    "selective_risk": 0.17391304347826086,
+    "reference_selective_risk": 0.13461538461538458,
+    "coverage_pass": false,
+    "selective_risk_pass": true,
+    "overall_pass": false
+  },
+  "unknown_precision": {
+    "value": 1.0,
+    "tp_abstain": 14,
+    "fp_abstain": 0,
+    "threshold": 0.85,
+    "pass": true
+  },
+  "ece_global": {
+    "value": 0.2582759711891413,
+    "threshold": 0.15,
+    "pass": false
+  },
+  "ece_per_class": {
+    "values": {
+      "DEFER": 0.21180874364716668,
+      "EXECUTABLE": 0.25113031556529386,
+      "UNKNOWN": 0.39751580783299034
+    },
+    "max": 0.39751580783299034,
+    "threshold": 0.15,
+    "pass": false
+  },
+  "calibration_is_fitted": {
+    "value": true,
+    "pass": true
+  },
+  "degeneracy_screen_pass": {
+    "value": true,
+    "pass": true
+  },
+  "pc_verbatim_accuracy": {
+    "value": 1.0,
+    "denominator": 12,
+    "pass": true
+  },
+  "oracle_accuracy": {
+    "value": 1.0,
+    "pass": true
+  },
+  "nc_abstention_rate": {
+    "value": 0.5,
+    "denominator": 28,
+    "pass": false
+  },
+  "gate_fires_on_both_classes": {
+    "applicable_abstain_fraction": 0.0,
+    "no_applicable_abstain_fraction": 0.6,
+    "applicable_pass": false,
+    "no_applicable_pass": true,
+    "pass": false
+  },
+  "contingency_candidate_vs_lexical": {
+    "both_correct": 33,
+    "candidate_only": 12,
+    "lexical_only": 0,
+    "neither": 7
+  },
+  "contingency_candidate_vs_embedding": {
+    "both_correct": 45,
+    "candidate_only": 0,
+    "embedding_only": 0,
+    "neither": 7
+  },
+  "paraphrase_performance": {
+    "candidate": 18,
+    "lexical": 11,
+    "embedding": 18,
+    "total": 20
+  },
+  "no_applicable_executions": {
+    "total_no_applicable": 28,
+    "executable_count": 8,
+    "details": [
+      {
+        "goal_id": "goal_053",
+        "p_applicable": 0.5922214984893799,
+        "mechanism_id": "mech_albums_read"
+      },
+      {
+        "goal_id": "goal_054",
+        "p_applicable": 0.6450273990631104,
+        "mechanism_id": "mech_comments_read"
+      },
+      {
+        "goal_id": "goal_056",
+        "p_applicable": 0.564917266368866,
+        "mechanism_id": "mech_users_delete"
+      },
+      {
+        "goal_id": "goal_059",
+        "p_applicable": 0.49119484424591064,
+        "mechanism_id": "mech_users_read"
+      },
+      {
+        "goal_id": "goal_060",
+        "p_applicable": 0.5124936699867249,
+        "mechanism_id": "mech_users_read"
+      },
+      {
+        "goal_id": "goal_074",
+        "p_applicable": 0.5690937042236328,
+        "mechanism_id": "mech_albums_read"
+      },
+      {
+        "goal_id": "goal_075",
+        "p_applicable": 0.536538302898407,
+        "mechanism_id": "mech_users_read"
+      },
+      {
+        "goal_id": "goal_077",
+        "p_applicable": 0.6964040398597717,
+        "mechanism_id": "mech_comments_read"
+      }
+    ]
+  },
+  "calibration_gate_fired_on_applicable": {
+    "total_applicable": 52,
+    "gate_fired_count": 0,
+    "gate_fired_fraction": 0.0
+  }
+}

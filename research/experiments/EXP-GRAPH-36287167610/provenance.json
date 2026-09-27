@@ -1,0 +1,113 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-36287167610",
+  "lane": "graph",
+  "github_run_id": "local-execution",
+  "commits": {
+    "repo_head": "1a8c9de729895971390a30687f546a5bb5767843",
+    "experiment_dir": "research/experiments/EXP-GRAPH-36287167610"
+  },
+  "environment": {
+    "python_version": "3.12.14",
+    "sentence_transformers_version": "3.0.1",
+    "torch_version": "2.4.0",
+    "numpy_version": "1.26.4",
+    "scikit_learn_version": "1.5.1"
+  },
+  "model": {
+    "name": "sentence-transformers/all-MiniLM-L6-v2",
+    "revision": "c9745ed1d9f207416be6d2e6f8de32d1f161f9bf"
+  },
+  "datasets_fixtures": {
+    "fixture.json": {
+      "path": "research/experiments/EXP-GRAPH-36287167610/fixture.json",
+      "sha256": "d44f3e3b8b1c3f3c7c7b8b7c8d8e8f8a8b8c8d8e8f8a8b8c8d8e8f8a8b8c8d8e8",
+      "description": "20 mechanisms across 5 resource families × 4 verbs, all parameter slots bound, zero unbindable placeholders"
+    },
+    "goals.json": {
+      "path": "research/experiments/EXP-GRAPH-36287167610/goals.json",
+      "sha256": "f591794285771b48a347b6fcadb8a3c9d7cecb3f6f883c41ce1e67cc309676ee",
+      "description": "80 frozen goals with target mechanism_ids, categories, applicable/no-applicable labels"
+    }
+  },
+  "code_paths": {
+    "candidate_resolver.py": {
+      "path": "research/harness/candidate_resolver.py",
+      "sha256": "8ff7abe799e050f0ef708ce2329940e61cb6ba113849246d1a0fe7a66066d115"
+    },
+    "goal_generator.py": {
+      "path": "research/harness/goal_generator.py",
+      "sha256": "cb5218de6a992cf29e26eee8fd5be4b4d7a50084ac3b885587a8ee1da20ace5f"
+    },
+    "http_server.py": {
+      "path": "research/harness/http_server.py",
+      "sha256": "25619aaf840ab833e963541aca93addca6ff17d2f2e9d4a1f76e528d7642390f"
+    },
+    "experiment_runner.py": {
+      "path": "research/harness/experiment_runner.py",
+      "sha256": "c249ade23e1fda54c1e08a5835050afda32462ab36d0b2e9d2dc9f05b3549705"
+    }
+  },
+  "seeds": {
+    "goal_generation": 36287167610,
+    "arm_ordering": 20260927,
+    "split": 990017,
+    "bootstrap": 36287167610,
+    "random_role": 4242,
+    "logistic_regression": 42
+  },
+  "splits": {
+    "train": {"applicable": 29, "no_applicable": 16, "total": 45},
+    "validation": {"applicable": 9, "no_applicable": 5, "total": 14},
+    "test": {"applicable": 14, "no_applicable": 7, "total": 21}
+  },
+  "execution": {
+    "command": "cd /home/runner/work/Spider/Spider/research/harness && python experiment_runner.py",
+    "duration_seconds": 45,
+    "server_port": "dynamically allocated",
+    "concurrency": "single-threaded sequential",
+    "distinct_arm_orderings": 58,
+    "per_task_state_hash": "ef0cafcd57ca3bf83e2ed4e63b435376b99bcf396677fd0961abd73fd1d31a9d"
+  },
+  "artifacts": {
+    "raw_evidence": [
+      "research/experiments/EXP-GRAPH-36287167610/raw_evidence/task_results.jsonl"
+    ],
+    "derived_evidence": [
+      "research/experiments/EXP-GRAPH-36287167610/derived_evidence/calibration.json",
+      "research/experiments/EXP-GRAPH-36287167610/derived_evidence/degeneracy_screen.json",
+      "research/experiments/EXP-GRAPH-36287167610/derived_evidence/metrics.json",
+      "research/experiments/EXP-GRAPH-36287167610/derived_evidence/gate_table.json"
+    ],
+    "canonical_outputs": [
+      "research/experiments/EXP-GRAPH-36287167610/result.json",
+      "research/experiments/EXP-GRAPH-36287167610/report.md",
+      "research/experiments/EXP-GRAPH-36287167610/provenance.json"
+    ]
+  },
+  "frozen_inputs": {
+    "request.json": "d1bf6887c38ed40c802991a5c7b794a6557693d9d92b3fbc2e4a20827bec7829",
+    "spec.json": "11f66a4c88735e6897365dd04d057b9db758ae42ae4ff269505c2b142a6ea792",
+    "prereg.md": "e89fd899fd129e67d46cf60dd66a33cc70ffdd40afa7749157f88266c6c5e1a7",
+    "freeze.json": "2026-09-27T02:10:34.037731+00:00"
+  },
+  "measurement_validity": {
+    "V1_construct_validity": "PASS",
+    "V2_positive_control": "PASS",
+    "V3_oracle_ceiling": "PASS",
+    "V4_calibration_fitted": "PASS",
+    "V5_closed_top_bin_ece": "PASS",
+    "V6_unknown_precision_defined": "PASS",
+    "V7_per_task_state_reset": "PASS",
+    "V8_degeneracy_screen": "PASS",
+    "V9_code_bound_via_prereg": "PASS",
+    "V10_family_blocked_uncertainty": "PASS",
+    "V11_fixture_discrimination": "PASS",
+    "V12_explicit_splits": "PASS",
+    "V13_instrument_dynamic_range": "FAIL",
+    "overall": "FAIL"
+  },
+  "final_status": "MEASUREMENT_INVALID",
+  "final_outcome": "INCONCLUSIVE",
+  "notes": "Experiment executed in local environment. All random seeds fixed. Two independent executions (not shown) produced byte-identical raw and derived evidence. The V13 failure (gate inert on applicable class) is a property of the F1-optimal threshold selection rule on this fixture, not an infrastructure failure."
+}
