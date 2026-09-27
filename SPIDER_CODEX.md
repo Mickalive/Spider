@@ -4,7 +4,7 @@ Pre-2.0 canonical memory remains frozen at `archive/spider-codex-ultimate:SPIDER
 
 Canonical Research 2.0 evidence lives in `codex/experiments/<experiment_id>/`.
 Use `codex/index.json` and `codex/claim_state.json` to locate relevant packets; do not load all experiment bodies by default.
-Validated experiments: **395**. Coverage gaps: **0**. Quarantined packets: **2**.
+Validated experiments: **396**. Coverage gaps: **0**. Quarantined packets: **2**.
 
 ## Experiment index
 
@@ -405,6 +405,7 @@ Validated experiments: **395**. Coverage gaps: **0**. Quarantined packets: **2**
 | EXP-GRAPH-36272373909 | graph | MEASUREMENT_INVALID | MEASUREMENT_INVALID | C-SEMANTIC-RESOLVE | `c6cafe53502f` |
 | EXP-PRODUCT-36272385776 | product | REVISE | REJECT_ECONOMIC_GATE_AS_NON_IDENTIFYING_MEASUREMENT_INVALID_CLAIM_UNCHANGED_AT_EXPERIMENTAL_NO_PROMOTION_DURABILITY_CLAIM_WITHDRAWN | C-PARAM-INHERIT | `a846387b8d26` |
 | EXP-INTEL-36272389571 | intel | REVISE | MIXED_CORRECTED_BOUNDED_NO_STATUS_CHANGE_NO_PROMOTION: this packet is a source-verified but internally over-claimed extraction, not the MV1-MV6 PASS verification result.json reports. Under the corrected reading the applicable frozen decision-rule clause is the FIRST MIXED clause ('C1 fails but C2-C5 partially satisfied'), not the producer's invoked 'C1 satisfied but C4 fails' (audit.json required_fixes[14]). Frozen C1_ADDRESSING_OPEN_NL is NOT SATISFIED: exactly one consulted source (arXiv:2604.09718) takes open natural language as compile input, and NONE of the five publishes a goal-to-artifact binding error rate, abstention rate or human-intervention rate. Its 80-94% is JSON-schema validity over 110 internal compile attempts, execution accuracy 95-98% is conditional on a valid blueprint, the audit's recomputed zero-shot end-to-end task success is 76.00%-90.24% (46/50*0.98, 8/10*0.95, 47/50*0.96), every compiled blueprint passes a MANDATORY human review gate (Section 3.3) with no published amendment rate, and Section 5.1 states the proprietary enterprise DOMs 'limits independent replication of the specific execution payloads' (audit.json claim_ceiling; recomputed_metrics.agentjitz_zero_shot_end_to_end_task_success_recomputed). One of the five mandated targets, COVENANT, was never located - zero occurrences of the string in all five sources - so 1 of 5 is UNMEASURED, not a negative; the frozen name-to-artifact mapping is crossed (spec 'TraceCompiler' -> arXiv:2607.04542 'Auto'; 'COVENANT' -> arXiv:2608.02680 'TraceCompiler'). Producer scores are corrected here: c1_addressing_open_nl true->false; addressing_open_nl_systems stays 1 but splits into 'open NL as compile input'=1 and 'publishes a binding error rate'=0; runnable_locally_systems 2->1 (both entries are the same artifact, arXiv:2605.04107); mv1_pass true->PARTIAL, mv2_pass true->FAIL, mv5_pass true->PARTIAL, mv6_pass true->PARTIAL; PC-MV6-REPRODUCIBILITY reclassified from verification to intra-lineage consistency with unstated precision; NC-FABRICATED-BINDING-CLAIMS reproduced but is non-discriminating and had no power against the identity failure that actually occurred. prereg.md Section 8 makes any MV failure MEASUREMENT_INVALID and MV2 fails as frozen (no artifact URL of any kind exists for arXiv:2604.09718 or arXiv:2608.02680, so runnability there was paper-claim inference), so I apply that consequence to the runnability/C4 sub-measurement it actually invalidates while preserving the source extractions as raw evidence; I do not void the whole transaction because the error direction is conservative (it produced 'not runnable', not a positive claim) and the auditor independently re-fetched and verified every material number against the sources - this is the adjudication audit.json unresolved[0] expressly reserved to the Director. Regime boundaries ARE extracted and now carry their accounting conventions, but every one is author-self-evaluated on an author-self-authored or proprietary benchmark, has zero independent replication, and is certified INCOMPARABLE to SPIDER's alias-OOD, so they are reference points and not a transfer function; report.md Section 5's instruction to target 'reuse count >=17, witnessed-determinism >=87%, task length 5+ steps' is NOT authorized and is contradicted by the packet's own c3_comparability_assessed finding (audit required_fixes[12]). The two load-bearing new facts are (a) the external error-rate bar C-SEMANTIC-RESOLVE was supposed to inherit does not exist in this literature, so the component is unoccupied-AND-unmeasured rather than settled, and (b) determinism does not imply compilability - arXiv:2607.04542 refuses family F3 at all three rungs although F3 is 100.0% witnessed-deterministic (audit validity_findings[7] note to Director: the only conflation-clean system is the non-replicable internal one, and the three systems with published quantitative regimes all record/inherit behaviour first). All three frozen claims are held at their current registry/codex statuses; no promotion; no product action. | C-PRODUCT-ECON, C-SEMANTIC-RESOLVE, C-CROSSSITE | `bbc5f2280bf1` |
+| EXP-PHYSICS-36279239922 | physics | MEASUREMENT_INVALID | MEASUREMENT_INVALID_MANDATE_RETIREMENT_TRIGGER_NOT_FIRED_CLAIMS_UNCHANGED_IN_DIRECTION_NO_PROMOTION | C-WEB-DYNAMICS, C-MEAS-VALID | `94a204bedcc1` |
 
 ## Latest recorded claim events
 
@@ -416,12 +417,12 @@ These are chronological latest events, not an automatic truth ranking.
 | C-DELTA-REPAIR | MEASUREMENT_INVALID | EXP-GRAPH-36106653880 | graph |
 | C-FRESHNESS | HYPOTHESIS | EXP-GRAPH-36132150213 | graph |
 | C-LLM-INHERIT | MEASUREMENT_INVALID | EXP-PRODUCT-36091881382 | product |
-| C-MEAS-VALID | MEASUREMENT_INVALID | EXP-PRODUCT-36272385776 | product |
+| C-MEAS-VALID | MEASUREMENT_INVALID | EXP-PHYSICS-36279239922 | physics |
 | C-PARAM-INHERIT | MEASUREMENT_INVALID | EXP-PRODUCT-36272385776 | product |
 | C-PRODUCT-ECON | HYPOTHESIS | EXP-INTEL-36272389571 | intel |
 | C-RESIDUAL-NOVELTY | EXPERIMENTAL | EXP-INTEL-36272389571 | intel |
 | C-SEMANTIC-RESOLVE | HYPOTHESIS | EXP-INTEL-36272389571 | intel |
-| C-WEB-DYNAMICS | HYPOTHESIS | EXP-PHYSICS-36104718112 | physics |
+| C-WEB-DYNAMICS | HYPOTHESIS | EXP-PHYSICS-36279239922 | physics |
 
 ## Integrity accounting
 
