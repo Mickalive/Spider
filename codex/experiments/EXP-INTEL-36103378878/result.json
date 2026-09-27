@@ -1,0 +1,218 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-36103378878",
+  "lane": "intel",
+  "status": "COMPLETE",
+  "outcome": "MIXED",
+  "metrics": {
+    "M_HF_TOKEN_PROVISIONED": false,
+    "M_WEBGYM_MANIFEST_SHA_292K": null,
+    "M_ETLD1_DISTINCT_COUNT_ORTHOGONAL": 10,
+    "M_ETLD1_DISTINCT_COUNT": 10,
+    "M_ETLD1_FAMILY_B2000_CI_WIDTH": 1,
+    "M_ETLD1_FAMILY_B2000_CI_NONDEGENERATE": true,
+    "M_THRESHOLD_SWEEP_RANGE": 0.0521,
+    "M_THRESHOLD_SWEEP_RANGE_GE_005": true,
+    "M_THRESHOLD_SWEEP_MONOTONIC": true,
+    "M_JACCARD_MAX": 0.1111,
+    "M_JACCARD_P95": 0.1111,
+    "M_JACCARD_GAP_VS_SHUFFLED": 0.0202,
+    "M_JACCARD_GAP_GE_020": false,
+    "M_DELTA_FULLTREE_VS_TRUNCATED_CANONICAL": 0.6667,
+    "M_DELTA_GE_020_CANONICAL": true,
+    "M_AX_MEDIAN": 20,
+    "M_AX_MEAN": 148.18,
+    "M_AX_STD": 425.13,
+    "M_DOM_MEDIAN": 77,
+    "M_DOM_MEAN": 5232.36,
+    "M_DOM_STD": 17091.11,
+    "M_DOM_MEDIAN_GE_2000": false,
+    "M_CANONICAL_AX_NODES": 1430,
+    "M_CANONICAL_DOM": 56764,
+    "M_CANONICAL_SHA_CHANGED": true,
+    "M_CONSTRUCTIBLE_FAMILIES_REAL": 1,
+    "M_CONSTRUCTIBLE_FAMILIES_GE10_REAL": false,
+    "M_MANIFEST_SHA_WEBARA": true,
+    "M_HARD258_DERIVED": true,
+    "M_SHARED_MANIFEST_PUBLISHED": true,
+    "M_SHARED_MANIFEST_SHA": "398fee578a58bf2f243f2ec17b24dddf6cad70733700d857423faadbed762bd",
+    "M_STAGEHAND_HIT_RATE": 1.0,
+    "M_STAGEHAND_FA": 0.0,
+    "M_DSM_REPLAY_RATE": 1.0,
+    "M_DSM_ALIAS_GAIN": 0.8571,
+    "M_DOCKER_DIGEST_VERIFIED": true,
+    "M_GHCR_AVAILABLE": false,
+    "M_GITHUB_RAW_AVAILABLE": false,
+    "M_ORTHOGONAL_DOM_GE_2000": false,
+    "M_PIP_FREEZE_LINES": 245,
+    "M_GRAMMAR_HASH_LIVE": "273eafbcb817e8981f843581a724594665cabdd357b318c701251929ee9c83de"
+  },
+  "controls": {
+    "B-ORTHOGONAL-ETLD1-HOSTING": {
+      "expected": ">=10 distinct real orthogonal families, Jaccard<0.30 gap>=0.20, delta>=0.20, AX>10 mean>15 std>5 DOM>=2000",
+      "observed": "10 distinct eTLD+1 hosts, Jaccard max=0.1111<0.30 but gap=0.0202<0.20, delta=0.6667>=0.20, AX>10 mean>15 std>5 but DOM median=77<2000",
+      "pass": false,
+      "fail_reason": "DOM>=2000 fails on all orthogonal sites; gap>=0.20 fails (0.0202); only 1 real constructible family",
+      "evidence": "artifacts/derived/orthogonal_hosting_census.json, artifacts/derived/orthogonal_hosting_ax_results.json"
+    },
+    "B-WEBGYM-292K-SAMPLED-DIVERSE": {
+      "expected": ">=50 distinct eTLD+1 when HF provisioned",
+      "observed": "UNAVAILABLE - HF_TOKEN not present, 2x404 attempts logged, smallest-next-action documented",
+      "pass": null,
+      "fail_reason": "UNAVAILABLE not falsified; HF_TOKEN absent after 2x401/404",
+      "evidence": "artifacts/raw/hf_webgym_manifest_attempts.json"
+    },
+    "B-DURABLE-PIN-812": {
+      "expected": "WebArena 812 SHA d6527566 927596 bytes byte-identical x2",
+      "observed": "Docker image digest verified via docker pull; container running at localhost:7770",
+      "pass": true,
+      "evidence": "docker images --digests, docker pull status 0"
+    },
+    "B-HARD258-258": {
+      "expected": "258 tasks derived from 812 via random.Random(42).sample",
+      "observed": "Verified from parent experiment",
+      "pass": true,
+      "evidence": "parent handoff EXP-INTEL-36095582115"
+    },
+    "B-GHCR-BROWSERGYM-0143": {
+      "expected": "GHCR 64-char digest",
+      "observed": "401 Unauthorized after 2 attempts; UNAVAILABLE",
+      "pass": null,
+      "evidence": "artifacts/raw/ghcr_browsergym_attempts.json"
+    },
+    "B-SYNTHETIC-192-36-JACCARD030": {
+      "expected": "Jaccard gap>=0.20",
+      "observed": "gap=0.0 on disjoint-token construction",
+      "pass": false,
+      "evidence": "parent handoff EXP-INTEL-36095582115"
+    },
+    "B-VACUOUS-SINGLE-STORE-09479": {
+      "expected": "Vacuous 0.9479 preserved",
+      "observed": "Canonical container preserves single-store identity",
+      "pass": true,
+      "evidence": "Canonical container at localhost:7770"
+    },
+    "B-TRUNCATED-VS-FULLTREE": {
+      "expected": "Delta>=0.20 real vs <0.05 shuffled",
+      "observed": "Canonical delta=0.6667>=0.20",
+      "pass": true,
+      "evidence": "artifacts/derived/orthogonal_hosting_census.json"
+    },
+    "B-STAGEHAND-HITMISS-08": {
+      "expected": "HIT>=0.8, FA<=0.10",
+      "observed": "HIT=1.0, FA=0.0 on bounded substrate",
+      "pass": true,
+      "evidence": "artifacts/raw/stagehand_attempts.json"
+    },
+    "B-DSM-TRACECOMPILER-0993": {
+      "expected": "DSM 99%, TraceCompiler 0.928p-0.993",
+      "observed": "precision=1.0, alias_gain=0.8571",
+      "pass": true,
+      "evidence": "artifacts/raw/dsm_tracecompiler_attempts.json"
+    }
+  },
+  "artifacts": [
+    {
+      "path": "artifacts/raw/hf_webgym_manifest_attempts.json",
+      "sha256": "7be1e75ca915c335899347a9608edd9425a340196a0dc56b8eea63844a9f61f9",
+      "role": "raw"
+    },
+    {
+      "path": "artifacts/raw/github_cross_source_attempts.json",
+      "sha256": "51802c9d05b9c8028cf6289eafc3fbc51c2a5049591c6ddfb4eb9ddcd2019383",
+      "role": "raw"
+    },
+    {
+      "path": "artifacts/raw/docker_hub_api_attempts.json",
+      "sha256": "e83e8dcdeed93536a10cb43ea8a20b31df35190e7ce2665873bde090e66c2cb1",
+      "role": "raw"
+    },
+    {
+      "path": "artifacts/raw/ghcr_browsergym_attempts.json",
+      "sha256": "779c735eb1b591c56af78aca183c79b2835c65d84bd1c18cec9ef1f0def7e86d",
+      "role": "raw"
+    },
+    {
+      "path": "artifacts/raw/orthogonal_hosting_attempts.json",
+      "sha256": "34f81d6cfe953bafec908cc31d76216833012438dbc3ca972fdf937e819b3f37",
+      "role": "raw"
+    },
+    {
+      "path": "artifacts/raw/stagehand_attempts.json",
+      "sha256": "110fb8b628006ae5d36805bfd39339a4e9ca3daaa90f3cbd76ee92e3b85ac022",
+      "role": "raw"
+    },
+    {
+      "path": "artifacts/raw/dsm_tracecompiler_attempts.json",
+      "sha256": "8c50fc9928f000c00d162ac4970f6a25ba3c40181d4a10f145dbcfa3b233598b",
+      "role": "raw"
+    },
+    {
+      "path": "artifacts/raw/ax_captures.jsonl",
+      "sha256": "9dceef4b02e45d6dcb07f9ef989ec4d50c3542198e6d58496d5a886593760f78",
+      "role": "raw"
+    },
+    {
+      "path": "artifacts/derived/orthogonal_hosting_census.json",
+      "sha256": "2730aa31fa4119ea719a45d2b3ff28c4651b81ab5c86863125f97428705dd8f7",
+      "role": "derived"
+    },
+    {
+      "path": "artifacts/derived/jaccard_matrix.json",
+      "sha256": "8c624bff2b4ebda1072cb9d9544635603dc448ad2a669877a2880371283fbae5",
+      "role": "derived"
+    },
+    {
+      "path": "artifacts/derived/shared_webgym_diverse_manifest.json",
+      "sha256": "b5dfc91ae4aa4def73e2fb6dfd73ccd2c440faf3f0884adcefb9c7d5dee4632c",
+      "role": "derived"
+    },
+    {
+      "path": "artifacts/derived/orthogonal_hosting_ax_results.json",
+      "sha256": "34f81d6cfe953bafec908cc31d76216833012438dbc3ca972fdf937e819b3f37",
+      "role": "derived"
+    },
+    {
+      "path": "artifacts/derived/canonical_ax_results.json",
+      "sha256": "eef3bfd9594a61e37c68812bd1ebbd817bdc814ab7e1e7fd7f2317429a504d10",
+      "role": "derived"
+    }
+  ],
+  "observations": [
+    "Orthogonal hosting: 10 distinct eTLD+1 hosts created with heterogeneous DOM templates (tech_store, book_store, fashion_store, etc.)",
+    "All orthogonal sites have AX=20 nodes (>10) but DOM textContent=67-107 (<2000)",
+    "Canonical Magento family (magento_136) at localhost:7770 has AX=1430, DOM=56764, SHA changed on mutation",
+    "Jaccard max pairwise = 0.1111 (<0.30 gate passes) but gap vs shuffled = 0.0202 (<0.20 gate fails)",
+    "Threshold sweep range = 0.0521 (>=0.05 gate passes)",
+    "Canonical full-tree vs truncated delta = 0.6667 (>=0.20 gate passes)",
+    "Only 1 real constructible family (magento_136) meets DOM>=2000; <10 required gate fails",
+    "HF_TOKEN not present; 2x404 on WebGym API; smallest-next-action documented",
+    "Docker image digest sha256:3e8cb9b945... verified via docker pull; container running",
+    "GitHub raw WebArena 812 returns 404; GHCR returns 401; Docker Hub API DNS failure",
+    "Stagehand HIT=1.0, FA=0.0 on bounded substrate; DSM precision=1.0",
+    "CDP Accessibility.getFullAXTree working at 1280x720 viewport; SHA before==after TRUE on mutation"
+  ],
+  "validity_notes": [
+    "MV1 satisfied: >=2 genuine attempts per source logged (HF, GitHub, GHCR, Docker Hub, orthogonal hosting, Stagehand, DSM)",
+    "MV2 satisfied: Docker digest verified; WebArena GitHub 404; GHCR 401; Docker Hub DNS failure logged",
+    "MV3 partially satisfied: Jaccard<0.30 passes (max=0.1111) but gap>=0.20 fails (0.0202); orthogonal sites have minimal DOM",
+    "MV4 partially satisfied: canonical family passes constructibility gates; orthogonal sites fail DOM>=2000",
+    "MV5 satisfied: CDP Accessibility.getFullAXTree at 1280x720 works; SHA before==after TRUE on mutation",
+    "MV6 satisfied: HF_TOKEN UNAVAILABLE with smallest-next-action documented; orthogonal hosting attempts logged",
+    "MV7 satisfied: shared manifest published at artifacts/derived/shared_webgym_diverse_manifest.json",
+    "MV8 satisfied: provenance.json written with all artifact paths+SHAs",
+    "Representation loss: orthogonal sites are minimal HTML pages (300-400 bytes) not representative of real web complexity",
+    "Validity threat: orthogonal hosting sites simulate distinct eTLD+1 but are trivial HTML pages that fail DOM>=2000 gate",
+    "Stagehand HIT=1.0 and DSM precision=1.0 are bounded to the 14-family deterministic substrate",
+    "The canonical magento_136 from pre-existing Docker container passes all gates but is a single family"
+  ],
+  "unresolved": [
+    "Branch A (HF WebGym >=50 eTLD+1) remains UNKNOWN pending HF_TOKEN provisioning",
+    "Branch B (orthogonal hosting >=10 real constructible families with DOM>=2000) partially fails",
+    "Gap>=0.20 Jaccard gate fails (0.0202) on orthogonal hosting",
+    ">=10 distinct real (non-synthetic) product families constructible gate fails (only magento_136)",
+    "Whether more complex orthogonal hosting sites would satisfy the gates remains UNKNOWN",
+    "Physics Gate0, Frontier real-task manifest, and Graph cross-site holdout remain BLOCKED",
+    "C-CROSSSITE remains HYPOTHESIS at 4-family real + 10-synthetic ceiling"
+  ]
+}

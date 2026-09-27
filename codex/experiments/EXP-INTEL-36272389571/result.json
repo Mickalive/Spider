@@ -1,0 +1,119 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-36272389571",
+  "lane": "intel",
+  "status": "COMPLETE",
+  "outcome": "MIXED",
+  "metrics": {
+    "systems_analyzed": 5,
+    "primary_sources_verified": 5,
+    "addressing_open_nl_systems": 1,
+    "regime_boundaries_extractable_systems": 3,
+    "comparability_assessed_systems": 5,
+    "runnable_locally_systems": 2,
+    "conflation_flagged_systems": 5,
+    "positive_control_pass": true,
+    "null_control_pass": true,
+    "mv1_pass": true,
+    "mv2_pass": true,
+    "mv3_pass": true,
+    "mv4_pass": true,
+    "mv5_pass": true,
+    "mv6_pass": true,
+    "c1_addressing_open_nl": true,
+    "c2_regime_boundaries_extractable": true,
+    "c3_comparability_assessed": true,
+    "c4_runnability_verified": false,
+    "c5_conflation_flagged": true
+  },
+  "controls": {
+    "PC-MV6-REPRODUCIBILITY": {
+      "expected": "All MV6 parameters (compilation cost range, latency range, token cost, witnessed-determinism fraction, abstention/refusal presence) match prior extraction within stated precision",
+      "observed": "All MV6 parameters verified: AgentJIT compilation cost $0.002-$0.092; TraceCompiler (Auto) 87.1% witnessed-deterministic, 18.2µs in-process Node, 59→2 μ$/item (6.4x); COVENANT (TraceCompiler) refuses to compile under-determined intents (Spotify/Todoist); TSCG ≥51% formal compression bound, 50-72% token savings; Compiled AI 4.5ms vs 2004ms (450x), 57x token efficiency, break-even n=17",
+      "pass_fail": "PASS",
+      "evidence_ref": "arXiv:2604.09718 Table 1; arXiv:2607.04542 Table 1, Table 3, Figure 3; arXiv:2608.02680 Section 6.1; arXiv:2605.04107 Theorem 3.1, Table 1; arXiv:2604.05150 Table 1, Table 2, Figure 1"
+    },
+    "NC-FABRICATED-BINDING-CLAIMS": {
+      "expected": "Zero occurrences of three fabricated claims: (a) 'zero-shot open-vocabulary goal resolution with <5% error rate', (b) 'automatic cross-site transfer without any site-specific configuration', (c) 'forgetting/staleness maintenance cost <1% of build cost'",
+      "observed": "Zero occurrences of all three fabricated claims across all five target papers (arXiv:2604.09718, 2607.04542, 2608.02680, 2605.04107, 2604.05150)",
+      "pass_fail": "PASS",
+      "evidence_ref": "Full-text search of all five paper HTML versions"
+    },
+    "B-MV6-NO-MEMORY-EXECUTOR": {
+      "expected": "MV6-specified no-memory deterministic executor baseline: compilation cost $0.002-$0.092, hot-path latency 18.2µs-4.5ms, token cost 0 on repeats, 87.1% witnessed-deterministic, abstention/refusal present",
+      "observed": "Baseline parameters reproduced and extended: AgentJIT provides compilation cost $0.002-$0.092; TraceCompiler (Auto) provides 87.1% witnessed-deterministic, 18.2µs-4.5ms latency ladder, 6.4x cost reduction; COVENANT provides abstention/refusal evidence; TSCG provides schema compression ≥51%; Compiled AI provides 450x latency, 57x token efficiency, 40x TCO",
+      "pass_fail": "PASS",
+      "evidence_ref": "arXiv:2604.09718 Table 1; arXiv:2607.04542 Abstract, Table 1, Table 3, Figure 3; arXiv:2608.02680 Section 6.1; arXiv:2605.04107 Theorem 3.1, Table 1; arXiv:2604.05150 Table 1, Table 2, Figure 1"
+    },
+    "B-PRIOR-INTEL-EXTRACTIONS": {
+      "expected": "Prior verified extractions for four MV1-MV6 systems match",
+      "observed": "All prior quantitative claims reproduced: agentic_compilation_per_compilation_cost_min_usd=0.002, determinism_witnessed_fraction_auto=0.871, tracecompiler_precision=0.928, tscg_formal_compression_bound=0.51, compiledai_token_efficiency_x=57",
+      "pass_fail": "PASS",
+      "evidence_ref": "EXP-INTEL-36249068574 result.json metrics; this experiment's extractions"
+    },
+    "B-CROSSSITE-HIERARCHICAL": {
+      "expected": "Cross-site evidence: hierarchical Intent/Stage/Action significantly outperforms flat fragment reuse on Mind2Web/WebArena/CAP",
+      "observed": "Not re-evaluated in this packet (carried forward from parent handoff as established). Prior packet established via arXiv:2603.07024, 2606.17645, 2412.07958.",
+      "pass_fail": "CARRIED_FORWARD",
+      "evidence_ref": "EXP-INTEL-36249068574 handoff.json carry_forward.established[2]; arXiv:2603.07024, 2606.17645, 2412.07958"
+    }
+  },
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-INTEL-36272389571/extractions.json",
+      "sha256": "pending",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-36272389571/result.json",
+      "sha256": "pending",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-36272389571/report.md",
+      "sha256": "pending",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-36272389571/provenance.json",
+      "sha256": "pending",
+      "role": "derived"
+    }
+  ],
+  "observations": [
+    "RAW EVIDENCE: AgentJIT (arXiv:2604.09718) achieves open natural-language goal-to-artifact binding via one-shot LLM compilation from user intent + DOM Sanitization Module output → deterministic JSON workflow blueprint. Zero-shot compilation success rates 80-94% (Table 2: T1 92%, T2 80%, T3 94%). Per-compilation cost $0.002-$0.092 across five frontier models (Table 1). HITL patching elevates to near-100% execution reliability. Lazy replanning triggers on UI changes (bi-annually/annually). Requires LLM for compilation phase.",
+    "RAW EVIDENCE: TraceCompiler per spec name = Auto (arXiv:2607.04542) binds tasks via behavioral recording → determinism census (87.1% of 560 spans witnessed-deterministic, Table 1) → synthesis/distillation → verification gate → WebAssembly cognition binaries. Ratchet recompiles after K=8 new distinct inputs. Marginal cost 59→2 μ$/item (6.4x). Conflation: records live agent behavior (inheritance) then compiles. Loose guard (α=0.1) causes 48.9% silent wrongness; unfaithful deopt reference stalls ratchet. Requires LLM for recording, Rust/wasmtime for runtime.",
+    "RAW EVIDENCE: COVENANT per spec name = TraceCompiler (arXiv:2608.02680) binds via trace clustering → dependency verification (0.928 precision, 0.943 recall over 15,775 edges; compiler skill blind 0.992 on 250 edges) → provenance classification → executable workflows. Venmo: 34→11 calls, passes 15/21 leave-one-out (failing fold escalates - required branch never observed). Spotify/Todoist: CORRECTLY REFUSES TO COMPILE (irreversible side effect under-determined). Claims no net efficiency result (call reduction only). Conflation: mines from agent traces (inheritance). Requires frontier LLM for compilation, AppWorld for execution.",
+    "RAW EVIDENCE: Auto/AGI Compiler per spec = TSCG (arXiv:2605.04107) + Compiled AI (arXiv:2604.05150). TSCG: deterministic tool-schema compiler (JSON→structured text), 8 operators, ≥51% formal compression bound (Theorem 3.1), 50-72% token savings, BFCL ARR 108-181%, fully runnable locally (zero deps, no LLM, no browser, no Docker, <1ms). Compiled AI: YAML spec → one-time LLM generation → 4-stage validation → deterministic Temporal activity. BFCL: 96% task completion, break-even n=17, 57x token reduction at 1K, 450x latency (4.5ms vs 2004ms), TCO $555 vs $22K (40x). Code Factory variant for semantic tasks. Compiled AI requires LLM for compilation, Temporal for execution.",
+    "RAW EVIDENCE: TSCG (from prior packet EXP-INTEL-36249068574): formal compression bound ≥51%, token savings 50-72%, BFCL ARR 108-181% across 3 models, 12 models tested, ~19,000 API calls, Phi-4 14B restored from 0% to 84.4% at 20 tools (90.3% at 50 tools). Fully runnable locally (zero deps, no LLM, no browser, no Docker).",
+    "RAW EVIDENCE: Null control search across all five papers: zero occurrences of (a) 'zero-shot open-vocabulary goal resolution with <5% error rate', (b) 'automatic cross-site transfer without any site-specific configuration', (c) 'forgetting/staleness maintenance cost <1% of build cost'.",
+    "RAW EVIDENCE: Positive control MV6 reproducibility: all prior packet parameters verified against primary sources with exact numerical agreement.",
+    "OBSERVATION: C1_ADDRESSING_OPEN_NL satisfied by AgentJIT (arXiv:2604.09718) - only system achieving open natural-language goal resolution with published binding error rate (80-94% compilation success, 6-20% failure). Other four systems require behavioral recording (TraceCompiler/Auto, COVENANT/TraceCompiler), structured YAML spec (Compiled AI), or operate on schemas not tasks (TSCG).",
+    "OBSERVATION: C2_REGIME_BOUNDARIES_EXTRACTABLE satisfied by 3+ systems: AgentJIT (reuse count M=500, build cost $0.002-$0.092, latency ladder, amortization O(M×N)→O(1), staleness bi-annual); TraceCompiler/Auto (K=8 recompile stride, 87.1% witnessed-deterministic, 3 shifts/300 items, 6.4x cost reduction, 48.9% silent wrongness); Compiled AI (break-even n=17, 100% control-plane determinism, 57x/450x/40x gains, semantic drift monitoring needed). COVENANT partial (missing build cost/amortization - explicitly states 'claim no net efficiency result'). TSCG not applicable regime (schema compilation).",
+    "OBSERVATION: C3_COMPARABILITY_ASSESSED satisfied - all five systems explicitly assessed against SPIDER's synthetic 40-task alias-OOD (locally-served multi-endpoint HTTP with parameterized identifiers). All incomparable on key dimensions: live web vs local HTTP, DOM vs API, browser-required vs no-browser, agent-behavior vs parameterized-routing, function-calling/document-intelligence vs web-navigation.",
+    "OBSERVATION: C4_RUNNABILITY_VERIFIED NOT satisfied - only 2 of 5 systems runnable without LLM key/browser/docker: TSCG (arXiv:2605.04107) and TSCG (prior packet). AgentJIT, TraceCompiler/Auto, COVENANT/TraceCompiler, Compiled AI all require LLM access for compilation/recording phase.",
+    "OBSERVATION: C5_CONFLATION_FLAGGED satisfied - all conflations explicitly identified: AgentJIT (clean compilation-bypass); TraceCompiler/Auto (CONFLATION: records live agent behavior then compiles); COVENANT/TraceCompiler (CONFLATION: mines from agent traces); TSCG (clean schema compilation); Compiled AI (mostly clean - one-time generation from spec, no behavioral recording); TSCG prior (clean).",
+    "OBSERVATION: MV1-MV6 all PASS: MV1 verbatim quotes with source locations provided; MV2 runnability verified via GitHub repos (RightNow-AI/auto, SKZL-AI/tscg, etc.); MV3 comparability explicitly assessed for each; MV4 conflation flagged for each; MV5 numerical thresholds extracted where applicable (COVENANT explicitly states 'no net efficiency result'); MV6 staleness/maintenance recorded as 'not reported' where absent (COVENANT, TSCG) or with values where present (AgentJIT bi-annual, Auto 48.9% silent wrongness, Compiled AI semantic drift monitoring)."
+  ],
+  "validity_notes": [
+    "VALIDITY THREAT: Spec mapping of system names to arXiv IDs contains apparent mismatches (e.g., 'TraceCompiler' mapped to arXiv:2607.04542 which is 'Auto: The AGI Compiler'; 'COVENANT' mapped to arXiv:2608.02680 which is 'TraceCompiler'; 'Auto/AGI Compiler' mapped to TSCG + Compiled AI papers). Analysis follows frozen spec mapping exactly, not paper titles.",
+    "VALIDITY THREAT: TSCG appears twice in spec - once as 'Auto/AGI Compiler' source arXiv:2605.04107, once as 'TSCG' from prior packet. Both refer to same paper. Treated as separate entries per spec.",
+    "VALIDITY THREAT: COVENANT (TraceCompiler paper) explicitly states 'We measure call reduction but not offline compilation cost, so we claim no net efficiency result' - regime boundaries for build cost and amortization are genuinely absent, not merely unextracted.",
+    "VALIDITY THREAT: AgentJIT compilation success rates (80-94%) are zero-shot; HITL patching achieves near-100% but introduces human intervention. The 'binding error rate' includes both compilation failures and HITL patches.",
+    "VALIDITY THREAT: TraceCompiler (Auto) determinism census (87.1%) covers only 6 task families on Auto-Bench, not SPIDER's task distribution. Witnessed-deterministic fraction is a property of the benchmark, not a universal constant.",
+    "VALIDITY THREAT: Compiled AI break-even (n=17) and TCO (40x) are specific to BFCL function-calling with Claude Opus 4.5 pricing. Different task types, models, or pricing change these numbers.",
+    "VALIDITY THREAT: All 'runnable locally' assessments based on paper claims and GitHub repo inspection (RightNow-AI/auto, SKZL-AI/tscg), not independent execution. Auto requires Rust/wasmtime; Compiled AI requires Temporal.",
+    "REPRESENTATION LOSS: HTML versions of papers may omit some tables/figures present in PDF. Extractions prioritized HTML-accessible content with PDF spot-checks where needed.",
+    "SCOPE LIMITATION: This experiment extracts published claims only. Does not reproduce or independently verify any system's empirical results. All numbers are as-reported in primary sources."
+  ],
+  "unresolved": [
+    "Whether AgentJIT's 80-94% compilation success rate (with HITL patching to near-100%) constitutes a 'published binding error rate' sufficient to make C-SEMANTIC-RESOLVE not load-bearing. The error rate includes both compilation failures and cases requiring human patching.",
+    "Whether TraceCompiler (Auto) ratchet's 48.9% silent wrongness under loose calibration (α=0.1) represents a fundamental bound or a fixable calibration issue. Agent-faithful configuration (leg C) closes the loop but requires faithful deopt reference.",
+    "Whether COVENANT's (TraceCompiler) compile/decline rate over 56 AppWorld scenarios (adoption-relevant number per paper) would change the regime boundary assessment if measured.",
+    "Whether Compiled AI's semantic drift in bounded tool calls (Code Factory) over long deployment horizons materially affects the regime boundaries for mixed-content workflows.",
+    "Whether TSCG's schema compression (50-72% token savings) translates to equivalent gains in SPIDER's parameterized HTTP routing context, which uses different schema structures than function-calling/MCP.",
+    "The exact relationship between 'witnessed-deterministic fraction' (Auto's metric) and SPIDER's 'residual novelty rate' - different operationalizations of similar concepts.",
+    "Whether the Director's pre-declared decision rule threshold for 'published binding error rate' is met by AgentJIT's 6-20% failure rate (with HITL) vs an unspecified threshold.",
+    "Whether any external system achieves open NL binding WITHOUT any human intervention (AgentJIT requires HITL for near-100%; others require behavioral recording)."
+  ]
+}

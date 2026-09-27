@@ -1,0 +1,425 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-36249064252",
+  "lane": "product",
+  "claim_ids": [
+    "C-PARAM-INHERIT"
+  ],
+  "stage": "EXECUTE",
+  "github": {
+    "run_id": "36249064252",
+    "run_attempt": "1",
+    "workflow": "SPIDER R2 Lane",
+    "repository": "Mickalive/Spider",
+    "sha_at_run": "2f0310424190f4b0245164f6ad3cde49c742e3b6"
+  },
+  "commits": {
+    "execution_base_sha": "43fdfa9c39f3f97989c4f446c33183ff779eb9b3",
+    "execution_base_subject": "R2 product: execution base EXP-PRODUCT-36249064252",
+    "freeze_sha": "74c2690d",
+    "allocation_sha": "a3343ef7",
+    "working_tree_at_write_time": "modified: src/spider/kernel.py, src/spider/__init__.py, tests/test_kernel.py; untracked: experiment fixtures, harness and artifacts. No commit, push, branch switch or reset was performed by this stage."
+  },
+  "frozen_inputs": {
+    "freeze_file": "research/experiments/EXP-PRODUCT-36249064252/freeze.json",
+    "frozen_at": "2026-09-26T14:44:55.808175+00:00",
+    "hashes_declared": {
+      "prereg.md": "d3c04206e0eb640f51f9b703bc35b2292d4b4a0bc2b55296f225bd9a18ebe130",
+      "request.json": "aa3eba105f5b7bf00b5b05162fd1f1233ee6c46693b195aeaa60aee3e076fade",
+      "spec.json": "af16effda8568b326fe32ef30c4ae276f257c9c805cdfde5e8df048c8de95fce"
+    },
+    "hashes_reverified_at_execute_time": {
+      "prereg.md": "d3c04206e0eb640f51f9b703bc35b2292d4b4a0bc2b55296f225bd9a18ebe130",
+      "request.json": "aa3eba105f5b7bf00b5b05162fd1f1233ee6c46693b195aeaa60aee3e076fade",
+      "spec.json": "af16effda8568b326fe32ef30c4ae276f257c9c805cdfde5e8df048c8de95fce"
+    },
+    "frozen_inputs_unmodified": true
+  },
+  "code_paths": {
+    "product_code_modified_in_scope": [
+      {
+        "path": "src/spider/kernel.py",
+        "sha256": "ac1cbdd92342d32369f4dcdbe3e58ce688c07d2690f252b66bfb3c84212f6501",
+        "role": "code"
+      },
+      {
+        "path": "src/spider/__init__.py",
+        "sha256": "ea9c113b6f54839921f7a721e5fb9ad3f72866406d29fea9819d8cf35d21df50",
+        "role": "code"
+      },
+      {
+        "path": "tests/test_kernel.py",
+        "sha256": "efcd6649b2379ec2e2327adad635cbecbec251c830aeaad591a839033ce627e9",
+        "role": "code"
+      }
+    ],
+    "product_code_read_only": [
+      {
+        "path": "src/spider/models.py",
+        "sha256": "338aaf4d7ba0e31f7a5fe8a47abdbb2ea52d9c1c4ef0ce014f2b809b9a2a9b78",
+        "role": "code"
+      },
+      {
+        "path": "src/spider/registry.py",
+        "sha256": "51fb440d3827f21cccb5f77ad17dc0e76ccdbc2d52d7b05044cd821bb8a9322c",
+        "role": "code"
+      }
+    ],
+    "experiment_harness": [
+      {
+        "path": "research/experiments/EXP-PRODUCT-36249064252/substrate.py",
+        "sha256": "dfd9f3f59982bbeae962d85491c3b80bf267936b60e7b187abe2cc2a061d6487",
+        "role": "fixture"
+      },
+      {
+        "path": "research/experiments/EXP-PRODUCT-36249064252/arms.py",
+        "sha256": "60b656d9ad1939ebcea2b77bd284bee5e9d6c5314f1d470f1f83105e634a2ade",
+        "role": "fixture"
+      },
+      {
+        "path": "research/experiments/EXP-PRODUCT-36249064252/incumbent_probe.py",
+        "sha256": "09615f5051ce2a1c261e600479a5e6c76fe5c12599153ada31bf026f9f689434",
+        "role": "fixture"
+      },
+      {
+        "path": "research/experiments/EXP-PRODUCT-36249064252/run_experiment.py",
+        "sha256": "e7a1507407d868c8cd302a85a5a6748db2954df54ef63117d806619064815f24",
+        "role": "code"
+      }
+    ],
+    "authorized_code_roots_per_lane_registry": [
+      "src",
+      "tests",
+      "sdk",
+      "pyproject.toml"
+    ],
+    "scope_compliance": "All product-code edits are inside src/ and tests/. No constitutional file, Codex file, lane registry, workflow or other lane was modified. SPIDER_CODEX.md was read only."
+  },
+  "kernel_added_api": [
+    "spider.kernel.distill_parameterized(observations) -> list[Mechanism]",
+    "SpiderKernel.distill_parameterized(observations, register=True) -> list[Mechanism]",
+    "spider.kernel.align_parameters(template, observed, params=None) -> dict | None",
+    "spider: align_parameters, distill_parameterized re-exported from src/spider/__init__.py"
+  ],
+  "fixtures": {
+    "substrate": {
+      "description": "stdlib http.server ThreadingHTTPServer bound to 127.0.0.1 on an ephemeral port, seeded deterministically per run",
+      "resource_a": {
+        "collections": [
+          "items",
+          "tags"
+        ],
+        "identifiers": "item-1..item-100, tag-1..tag-100",
+        "labels": "catalog-default"
+      },
+      "resource_b": {
+        "collection": "products",
+        "identifiers": "SKU-A..SKU-Z, PROD-100..PROD-199",
+        "seeded_for_reads": "SKU-S..SKU-Z and PROD-100..PROD-141"
+      },
+      "identifier_overlap_a_b": [],
+      "auth": {
+        "tok-owner-a": "owner",
+        "tok-viewer-a": "viewer",
+        "tok-owner-b": "owner"
+      },
+      "behaviours_exercised": [
+        "401 without token",
+        "403 for viewer on write",
+        "201 create",
+        "200 read",
+        "304 conditional GET via ETag",
+        "session-scoped response bodies and ETags",
+        "CRUD plus substring list",
+        "GET / api index"
+      ],
+      "self_test": "passed before any arm ran; see artifacts/raw/environment.json and the substrate section of report.md"
+    },
+    "train_split": "100 observations, 5 intents x 20 identifiers (10 items + 10 tags)",
+    "transfer_split": "150 tasks on resource B: 50 crud-write, 50 crud-read, 50 query",
+    "positive_control_split": "100 tasks on held-out resource-A identifiers (item-11..item-20, tag-11..tag-20)"
+  },
+  "environment": {
+    "python": "3.12.14",
+    "platform": "Linux-6.17.0-1022-azure-x86_64-with-glibc2.39",
+    "recorded_preconditions": {
+      "browser_available": false,
+      "browsergym_importable": false,
+      "docker_available": true,
+      "flask_available": false,
+      "network_scope": "127.0.0.1 only, stdlib http.server on an ephemeral port",
+      "numpy_available": false,
+      "openai_api_key_present": false,
+      "platform": "Linux-6.17.0-1022-azure-x86_64-with-glibc2.39",
+      "pytest_available": false,
+      "python": "3.12.14"
+    },
+    "substrate_base_url_at_run": "http://127.0.0.1:46147",
+    "wall_clock_seconds": 3.007,
+    "deviations_from_prereg": [
+      "prereg 8 names a deterministic Flask server; flask is not installed in this environment, so stdlib http.server was used. The substitution and its self-test are recorded as a validity note in result.json."
+    ]
+  },
+  "measurement_parameters": {
+    "seed": 20260926,
+    "cost_rule": "own requests plus cold fallback when the mechanism did not solve the task; the same rule is applied to every arm including the treatment",
+    "primary_cost_scalar": "HTTP requests",
+    "secondary_cost_scalars": [
+      "response bytes",
+      "wall milliseconds",
+      "kernel calls"
+    ],
+    "induction_requests_total": 100,
+    "induction_allocation": "the single 100-request induction bill is split equally across the 3 families for the per-family frozen ratio; the global view is reported alongside",
+    "matched_correctness_tolerance": 0.05,
+    "matched_correctness_definition": "prereg 4.3 task-level success_rate (HTTP 2xx plus verified postcondition), not a mechanism-attributed rate",
+    "d5_denominator_pool": [
+      "B-COLD",
+      "B-LITERAL-REPLAY",
+      "B-RETRIEVAL-K5"
+    ],
+    "d5_competence_floor": 0.8,
+    "bootstrap": {
+      "B": 5000,
+      "stratified_by": "family",
+      "seed": 20260926
+    }
+  },
+  "reproduction_commands": [
+    {
+      "step": "product unit tests",
+      "command": "PYTHONPATH=src python3 -m unittest discover -s tests -v",
+      "observed": "Ran 20 tests, OK, returncode 0",
+      "artifact": "artifacts/raw/unit_tests.txt"
+    },
+    {
+      "step": "incumbent reference curve (must run against the committed kernel)",
+      "command": "PYTHONPATH=src python3 research/experiments/EXP-PRODUCT-36249064252/incumbent_probe.py",
+      "observed": "extracted the committed kernel via git show at 43fdfa9c and recorded its behaviour",
+      "artifact": "artifacts/raw/incumbent_reference_curve.json"
+    },
+    {
+      "step": "full experiment",
+      "command": "PYTHONPATH=src:research/experiments/EXP-PRODUCT-36249064252 python3 research/experiments/EXP-PRODUCT-36249064252/run_experiment.py",
+      "observed": "completed in 3.007 s wall clock, wrote all raw and derived artifacts",
+      "artifact": "artifacts/derived/decision_rule.json"
+    }
+  ],
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-PRODUCT-36249064252/result.json",
+      "role": "producer-result"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-36249064252/report.md",
+      "role": "producer-report"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-36249064252/provenance.json",
+      "role": "producer-provenance"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-36249064252/artifacts/derived/arm_metrics.json",
+      "sha256": "0e291b098262a25dcf1cfe349cc722aec5c0e2c8ff9ae72e7e3c4e8c69eeebb8",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-36249064252/artifacts/derived/controls.json",
+      "sha256": "7c5098da28eedb6623733e01af137e30ef436add6d96c8e98bacf4e7e45e35cc",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-36249064252/artifacts/derived/decision_rule.json",
+      "sha256": "e2ece1d82ed2303f18133ef86905397b85a26c3adf1a75f8bb3083886d7b9345",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-36249064252/artifacts/fixture/empty.jsonl",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "role": "other"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-36249064252/artifacts/fixture/empty_pc.jsonl",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "role": "other"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-36249064252/artifacts/fixture/literal_mechanisms.jsonl",
+      "sha256": "445fa79b4eff5db584da61a9b35d429bb652ab7f7552a5d9d3796329835a7ec5",
+      "role": "other"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-36249064252/artifacts/fixture/literal_mechanisms_forced.jsonl",
+      "sha256": "445fa79b4eff5db584da61a9b35d429bb652ab7f7552a5d9d3796329835a7ec5",
+      "role": "other"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-36249064252/artifacts/fixture/null_mechanisms.jsonl",
+      "sha256": "fa3032f04bda716bbf6e531fc44aa649699bdaa9c01a8cc533b81e008017f6bf",
+      "role": "other"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-36249064252/artifacts/fixture/null_mechanisms_run.jsonl",
+      "sha256": "db1a8be11612564e13ea5526a88b6f5365927a49fc7f13f026ad7efbd455efd4",
+      "role": "other"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-36249064252/artifacts/fixture/param_mechanisms.jsonl",
+      "sha256": "b80b81b681e04e8010130af4c3a65d0aee1c350a46eef56d5b44ec6be38fb15d",
+      "role": "other"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-36249064252/artifacts/fixture/param_mechanisms_pc.jsonl",
+      "sha256": "b80b81b681e04e8010130af4c3a65d0aee1c350a46eef56d5b44ec6be38fb15d",
+      "role": "other"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-36249064252/artifacts/fixture/probe_literal.jsonl",
+      "sha256": "445fa79b4eff5db584da61a9b35d429bb652ab7f7552a5d9d3796329835a7ec5",
+      "role": "other"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-36249064252/artifacts/fixture/probe_null.jsonl",
+      "sha256": "db1a8be11612564e13ea5526a88b6f5365927a49fc7f13f026ad7efbd455efd4",
+      "role": "other"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-36249064252/artifacts/fixture/probe_param.jsonl",
+      "sha256": "b80b81b681e04e8010130af4c3a65d0aee1c350a46eef56d5b44ec6be38fb15d",
+      "role": "other"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-36249064252/artifacts/fixture/train_mechanisms.jsonl",
+      "sha256": "b7db76c84aee54acfd11101a6cbed63e28a77c9c52c5c283a27f731a5f430a64",
+      "role": "other"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-36249064252/artifacts/raw/a_observations.json",
+      "sha256": "b4d7ac32ebbefa5599510852e9f54e7d22c3e1094c63af46a3c9b14f0af07d45",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-36249064252/artifacts/raw/arm_B-COLD-DOC.json",
+      "sha256": "f62fa36c21b3d21d74237382455c3a9ce52857dd519f9da8c46c5d41a41b9838",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-36249064252/artifacts/raw/arm_B-COLD.json",
+      "sha256": "64c94c6d0ac5f34fbed660bf10b8a0eba922d85dcca346316b1a192487124331",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-36249064252/artifacts/raw/arm_B-LITERAL-REPLAY-FORCED.json",
+      "sha256": "3f8e9f6b837f31d18b24278a654437791c0720062697d06682655046b6f95fcb",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-36249064252/artifacts/raw/arm_B-LITERAL-REPLAY.json",
+      "sha256": "0bb0f54ef3211caed654458b65f966187a10afe4372157c7c749143587760753",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-36249064252/artifacts/raw/arm_B-RETRIEVAL-K5-SLOT.json",
+      "sha256": "0cf2d62a0cb7d14bd590f3ced8b61f65032b9475fb7a5363cb39c96f14fe0760",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-36249064252/artifacts/raw/arm_B-RETRIEVAL-K5.json",
+      "sha256": "fee82e660c64f376afbc33c5ecde948af2d114dc455521d6081dfcd592da3854",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-36249064252/artifacts/raw/arm_NC-SHUFFLED-INTENT.json",
+      "sha256": "181279c432b6dbd48c037af6e0791812fc81cfa7134fd6b253b955a99f86bb7a",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-36249064252/artifacts/raw/arm_PARAM-INHERIT.json",
+      "sha256": "26b885df12d0a3320adad6049bf8b510c79e2b0d453651d5e4df2238cda593d5",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-36249064252/artifacts/raw/arm_PC-SAME-RESOURCE_B-COLD.json",
+      "sha256": "d5d4a5b8964d34adc6dde62818fc63bbf6c7f908926bea5154b365d7e23eeec3",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-36249064252/artifacts/raw/arm_PC-SAME-RESOURCE_PARAM.json",
+      "sha256": "befaf38bf572e7be769807e42b1b7cb5e7f2acc8bc92b4601959e9ac6d1282c0",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-36249064252/artifacts/raw/code_hashes.json",
+      "sha256": "35b911c0e09bb9d181beca0db5948b7e769a8337eed1645346f504dd326522c4",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-36249064252/artifacts/raw/environment.json",
+      "sha256": "4fd91753d9510c9c8220caae8f8c6eeea8a2042129560ede1dfe48af41df6ee8",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-36249064252/artifacts/raw/incumbent_reference_curve.json",
+      "sha256": "dbeddf9653aade3266d555d56da030cf83f700767b84f224b2e0bf7a71a74e7a",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-36249064252/artifacts/raw/induced_mechanisms.json",
+      "sha256": "dda76d9988d96a7a00e5e62918f88a7cff86423a624dca81fe44ea8106ffbb2a",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-36249064252/artifacts/raw/literal_mechanisms.json",
+      "sha256": "9ea9791bb46bb56083a6278914c64a032ca06cd2861b04c488679018c8b3f7cf",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-36249064252/artifacts/raw/negative_probes.json",
+      "sha256": "954c8c5db504c9994bcc1dbc7f953937d39a5c390f46006a72e57ca2ac4d734d",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-36249064252/artifacts/raw/null_control_mechanisms.json",
+      "sha256": "eed2a0d719c2de7f6377931750e012b3cf5172b75de02f6b34c396373a8d2b66",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-36249064252/artifacts/raw/preconditions.json",
+      "sha256": "5c040246d6a18cae4d5569ccff374e8a63194302839e7cb5fc7a1095192c8eca",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-36249064252/artifacts/raw/unit_tests.txt",
+      "sha256": "39f1cbcff3f9c9c17ce77bd215c34a8fdb65a720bf39ece793d02b5c649d6bf3",
+      "role": "raw"
+    }
+  ],
+  "inputs_read_not_modified": [
+    "AGENTS.md",
+    "SPIDER_MASTER_PROMPT.md",
+    "SPIDER_ARCHITECTURE_RESEARCH2.md",
+    "research/EXPERIMENT_PACKET.md",
+    "research/lanes/registry.json",
+    "codex/index.json",
+    "codex/claim_state.json",
+    "codex/experiments/EXP-GRAPH-36118890504/",
+    "SPIDER_CODEX.md (read only; never written by any stage)"
+  ],
+  "prior_evidence_relied_on": {
+    "experiment_id": "EXP-GRAPH-36118890504",
+    "status_at_read_time": "MEASUREMENT_INVALID",
+    "used_for": [
+      "confirming the committed kernel exposes no distill_parameterized, so the treatment had to be built in src/spider/kernel.py",
+      "avoiding the substrate, harness-substitute and invalid-control failure modes this audit identified",
+      "forcing real execution of every treatment task rather than a paper claim"
+    ],
+    "explicitly_not_inherited": "its negative-sounding wording about inheritance failing; that experiment was measurement-invalid, and this packet re-measures the capability from scratch"
+  },
+  "integrity": {
+    "frozen_files_modified": false,
+    "codex_modified": false,
+    "git_operations_performed": [],
+    "secrets_persisted_by_treatment": false,
+    "credential_handling_note": "The treatment persists ${auth_token} and never a token literal. The literal incumbent mechanisms do persist the resource-A bearer token; that is a recorded observation about the incumbent, and no live credential appears in any treatment artifact."
+  }
+}

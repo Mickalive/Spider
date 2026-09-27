@@ -1,0 +1,384 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-36279239922",
+  "lane": "physics",
+  "status": "MEASUREMENT_INVALID",
+  "producer_claim_supported": false,
+  "required_fixes": [
+    "REPORTING (material to the record, not to the verdict): result.json.metrics is not a faithful serialisation of the producer's own durable derived artifacts. Across all 8 (bank, channel) cells, M_OBS_CMI_bits and M_PERM_MEAN_bits are reported as exactly 0.0 while permutation_results.json and independent recomputation both give 0.8134123302570013 (Null) / 0.7606006392528275 (Positive); M_ANALYTIC_STD_bits is reported as 0.0 while analytic_null_stats.json gives 1.3303196591223716 (Null) / 1.30279118139431 (Positive); M_PERM_STD_bits is reported as 0.0 on the Null bank while the artifact gives 3.3306690738754696e-16; M_H_Snext_given_C_bits is reported as 0.0 while the artifact-consistent value is 0.813412 (Null) / 0.760601 (Positive). M_CONS_bits and M_ANALYTIC_MEAN_bits ARE faithful, which is precisely what conceals the inconsistency. Gate outcomes G0/G1/G2/G3 recompute identically from the artifacts, so no gate verdict changes; but result.json observations[1] and report.md sections 3.1/3.2 describe the positive bank as showing 'zero detectable signal', which is a misreading of the record. The instrument in fact registered 0.76-0.81 bits of conditional mutual information that it could not separate from its own permutation null. Those are different claims.",
+    "EXECUTED-CODE DISCLOSURE (material): the producer's stated mechanism for the zero result is false and must be retracted rather than carried into handoff.json. execute_calibration_v3.py:199-213 guards every stratum with 'if stratum not in K_per_stratum: continue' (line 207), but K_per_stratum is keyed by the C-stratum alone (built at lines 351-355) while the R-conditioned term is keyed by (C, R) (line 268). A (C, R) tuple is therefore never a key of K_per_stratum, so 0 of 468 (C, R) cells resolve and H(S_next|C,R) is identically 0.0 for every channel, every bank and every permutation. The executed statistic is definitionally H(S_next|C). result.json validity_notes[1] and report.md section 4.2 attribute this to sparse sub-strata and a shared-support plug-in; the term was never computed at all, and the sparsity argument is quantitatively wrong (10-22 of ~460 (C,R) cells do hold 2+ members).",
+    "EVIDENCE INTEGRITY (material): the committed raw evidence does not contain the data that was measured. run_permutation_test uses t.copy() (shallow, line 280) and then writes into permuted[idx]['R'][R_channel] (line 288), which is the same dict object as the source transition's 'R', so all 1000 permutations overwrite the source bank in place. Because the banks are serialised after all metrics (lines 491-495), raw_transitions_null_bank.json and raw_transitions_positive_bank.json carry permuted R values on precisely the evaluation rows: 744/1920 (38.8%) Null TEST-row R cells and 256/1920 (13.3%) Positive TEST-row R cells differ from regenerated data, while 0/4480 TRAIN cells differ and every S_next/cur_state/action/regime/url_before field is bit-identical. No future stage may treat these files as the measured treatment variable; they are derived, not raw, and are labelled role=raw in result.json artifacts.",
+    "DESIGN DEFECT DISCLOSURE (material to the retirement decision): two of the three failing gates were unsatisfiable by construction, so the CALIBRATED branch of the frozen decision_rule was unreachable before execution and this was not a discriminating test. (a) G2: the planted regime information is mean I(next;regime|s,a) = 0.019899 bits (max over the 25 (s,a) cells 0.065026 bits), so the CMI gap attributable to regime injection is 0.70 x 0.019899 = 0.013929 bits, and even the single most regime-discriminative cell yields 0.70 x 0.065026 = 0.045518 bits, below the required 0.05. (b) G3: R is generated as a deterministic function of (regime, cur_state, action) truncated to 16 bits, forcing MI(R;latent) toward H(latent) = log2(5) = 2.3219 bits against a required < 0.9; this holds for the frozen prereg.md 4.2 table and for the executed variant, and only the never-implemented XOR prose of prereg.md 4.1 could have satisfied it. report.md section 5 and result.json product-consequence language must not present the gate failures as a property of the paradigm.",
+    "CONFOUND DISCLOSURE (material): the two banks are not matched in the R-channel relabel noise rate (executed Null 0.40/0.35, Positive 0.30/0.25, versus the frozen 0.10/0.08), so P(R|C) differs between banks. Because I(S_next;R|C) = q * [I(next;action|s) + I(next;regime|s,a)] with mean I(next;action|s) = 0.620386 bits, the nuisance mismatch alone contributes 0.10 x 0.620386 = 0.062039 bits to the BC gap, which already exceeds the 0.05 gate threshold and is 4.5x the planted regime signal. Any instrument sensitive to the action term would have reported a 'gap' whose majority (82%) is caused by an unmatched nuisance parameter rather than by the regime injection G2 exists to test. G2 is confounded, not merely underpowered. spec.json baselines.B-INDEPENDENT-REGIME-NULL asserts 'Marginal P(S_next|C) is identical across regimes by construction'; the S_next part holds, the P(R|C) part does not.",
+    "ROOT-CAUSE CORRECTION (material): report.md sections 3.1 and 4.2 and result.json validity_notes[0] attribute the 3.81-5.09 bit analytic and the 3.05-4.28 consistency gap to 'too many strata with too few samples' and assert this is 'a design-level issue, not an implementation bug'. The primary cause is structural: compute_analytic_null (line 219) has no representation parameter and its body never references R, with a single call site 'compute_analytic_null(test_trans, C_key_fn, K_ps, alpha_ps)' (line 372), so the G0 statistic is representation-invariant by construction and analytic_null_stats.json records bit-identical values across all four R channels. The numeric scale is set by the arbitrary Dirichlet concentration alpha = 1/K, not by stratum count: the frozen digamma expression evaluates to -1.20, +3.13, +10.34, +14.67, +18.99 bits at N_c = 3 for K = 1..5, and 219 of 436 Null strata have K = 1 where it contributes -1.20 bits each. No stratum-count or K-distribution diagnostic was reported.",
+    "FROZEN-STATE-SPACE ERROR PROPAGATED: prereg.md section 9 threat 3 and report.md section 4.3 threat 3 both state 'K_observed ~ 15-20'. S_next = sha256(f'{url(next_state)}|State {next_state}|{next_state//2}')[:16] is a deterministic function of next_state alone, so the bank contains exactly 5 distinct S_next values and max K_observed = 5 (auditor recomputed: Null {K=1: 219, 2: 117, 3: 60, 4: 32, 5: 8}; Positive {1: 216, 2: 123, 3: 77, 4: 24, 5: 6}; global unique S_next = 5). The prereg's alpha = 1/K plug-in is therefore degenerate on half the strata. The producer neither reported the K distribution nor flagged the discrepancy; report.md repeats the incorrect value.",
+    "FROZEN CONTROL NOT EXECUTED: B-HISTORY-MARKOV was frozen as a required control (prereg.md section 6 control table, section 8 artifact list) and was never computed. result.json controls.B-HISTORY-MARKOV.observed is {} and the frozen artifact raw_transitions_history_baseline.json is absent from the directory. The omission is disclosed in the control description ('not computed separately in this run'), but the frozen design was not executed as written, and the packet therefore cannot distinguish a zero primary result from a history-only account. spec.json baselines.B-HISTORY-MARKOV expected 'gap to primary > 0.05 if regime signal is beyond-history' is untestable here.",
+    "UNDISCLOSED CODE DEVIATIONS (material to reproduction): prereg.md section 13 forbids changing the R channels after freeze. The executed R channels deviate from the frozen specification in hash length (4 hex chars, not the frozen 16), relabel noise rate (0.40/0.35 Null, 0.30/0.25 Positive, not the frozen 0.10/0.08), construction (base = f'vis:{regime_step}:{latent_sig}' hashed to 4 chars at lines 84-119, i.e. a deterministic function of (regime, cur_state, action), not the XOR stochastic mixing channel of prereg.md section 4.1), and regime assignment (Positive switches every 10 steps within trajectory, line 143, not 'fixed per trajectory' as frozen). provenance.json discloses the hash length, the noise rates and the regime switching, but the packet never reconciles any of them with the No-Drift Clause, and no post-freeze deviation record exists. Note also that prereg.md is internally self-contradictory: its section 4.1 prose specifies XOR mixing while its section 4.2 table specifies SHA256('vis:{cur_state}:{action}:{regime}')[:16], which is itself a deterministic copy of the latent state.",
+    "UNDECLARED CLAMP, INERT THIS RUN: execute_calibration_v3.py:271 returns 'max(0.0, cmi), H_C, H_CR'. No clamp is declared in prereg.md section 4.3, which instead asserts a mathematical guarantee that H(S_next|C) >= H(S_next|C,R). The auditor verified the clamp did not bind in this run (unclamped H(S_next|C) - H(S_next|C,R) = 0.813412 Null / 0.760601 Positive, both positive, because H(S_next|C,R) was already 0 from the key-lookup defect), and it also did not bind under a prereg-conformant repair of that lookup. It is therefore not a cause of the reported zeros, but it is an undeclared modification of the estimator and a latent hazard: its sign behaviour depends on an undeclared choice about which K to attach to a (C,R) sub-stratum, and prereg.md section 4.3's stated non-negativity guarantee is not a property of this plug-in with a fixed alpha = 1/K on both sides.",
+    "UNREPORTED TRUNCATION AND NON-RELOADABLE EVIDENCE: only 301/480 (62.7%) Null and 296/480 (61.7%) Positive TEST transitions enter the metric; 166 and 160 TEST strata respectively are singletons dropped by 'if len(S_next_list) < 2: continue' (line 206), and further strata are dropped by the K_per_stratum guard (line 207) because C-keys are fitted on TRAIN. The evaluation set is silently reduced to ~62% with no disclosure in result.json or report.md. Separately, the 'C' field is serialised as a JSON array while being used as a hashable tuple stratum key, so raw_transitions_*.json cannot be reloaded as analysis input without re-tupleing C; this is a round-trip defect, not corruption, and is noted so that no future stage mistakes the resulting type mismatch for evidence tampering.",
+    "PROVENANCE ACCURACY: provenance.json execution_details.seeds reports permutation_rng_seed 10000 and kernel_rng_seed 1000, but the code uses default_rng(SEED+10000) = 10042 and default_rng(SEED+1000) = 1042. The audit runner environment is python 3.12.14 / numpy 2.5.3 / scipy 1.18.1 against the recorded numpy 1.26.4 / scipy 1.13.0, so provenance validity_checks_performed 'Deterministic reproduction: Re-run with same seeds yields identical results - VERIFIED' is verified only across a numpy major-version boundary, not in the recorded environment. Bank-level regeneration is bit-identical on S_next, cur_state, action, regime and url_before, so the substantive findings are version-robust, but the claim as written overstates what was checked. provenance.json also carries three 'sha256': 'pending' entries for result.json, report.md and provenance.json itself, while a separate hashes block does record their true digests.",
+    "ITERATION HISTORY UNRECORDED: the experiment directory contains execute_calibration.py, execute_calibration_v2.py and execute_calibration_v3.py, but provenance.json code_paths names only v3. The v1 and v2 instruments left no artifacts, and the packet therefore cannot show whether the R-conditioned-entropy defect is version-specific or has been present throughout. The freeze covers request.json, spec.json and prereg.md but not code, so this is not a freeze violation; it is an unrecorded post-freeze adaptation channel that the next stage must not assume away.",
+    "NOT A FIX LIST: nothing in this array is a recipe for obtaining PASS. Per prereg.md section 13 and SPIDER_MASTER_PROMPT section 19, any re-measurement requires a new preregistration with a pre-registered power calculation against the planted effect size, a falsifiable representation-dependence check on the analytic, a matched-noise positive control, and a non-degenerate estimator whose output provably varies with the representation. This packet cannot be repaired in place and must not be re-run under its existing freeze."
+  ],
+  "validity_findings": [
+    {
+      "id": "V1",
+      "severity": "decisive",
+      "class": "measurement validity / treatment not read",
+      "finding": "The primary estimator never computed the R-conditioned entropy. compute_conditional_entropy (execute_calibration_v3.py:199-213) skips every stratum failing 'if stratum not in K_per_stratum: continue' (line 207). K_per_stratum is keyed by the C-stratum alone (get_K_per_stratum, lines 351-355) but the R-conditioned term is keyed by (C, R) (CR_key_fn, line 268), so a (C, R) tuple is never a key of K_per_stratum. Auditor recomputation: 0 of 468 (C, R) cells resolve in the C-keyed map on the Positive TEST set, and H(S_next|C,R) returns exactly 0.0 for every channel and bank.",
+      "consequence": "M_OBS_CMI_bits is definitionally H(S_next|C) - 0, a function of C alone. The representation R enters the computation nowhere. Any permutation of R leaves the statistic bit-identical, which is exactly what the durable artifact records: obs_cmi equals perm_mean to 4e-16 with perm_std in {0.0, 3.33e-16} on all 8 (bank, channel) cells. The minimum attainable p_raw is (1+1000)/(1000+1) = 1.0 for any dataset, so G2's requirement p_bonf < 0.01 is mathematically unreachable under the executed code, independently of any data.",
+      "producer_claim_disputed": "result.json validity_notes[1] and report.md section 4.2 state the DM plug-in 'yields identical entropy H(S_next|C) = H(S_next|C,R) for all R channels' because 'sub-strata (C,R) have too few samples (often 1)'. This is an interpretation, not an observation, and it is falsified: the term was never estimated. The sparsity rationale is also quantitatively wrong, since 10-22 of ~460 (C,R) cells do hold 2+ members (20-46 transitions).",
+      "evidence": "research/experiments/EXP-PHYSICS-36279239922/execute_calibration_v3.py:199-213,266-271,351-355; permutation_results.json (obs_cmi == perm_mean on all 8 cells); auditor recomputation in /tmp/opencode/audit362 (scratch, no producer file modified)"
+    },
+    {
+      "id": "V2",
+      "severity": "decisive",
+      "class": "control validity / zero dynamic range",
+      "finding": "G1 (B-INDEPENDENT-REGIME-NULL) cannot fail. Because the statistic is R-invariant (V1), any input whatsoever yields obs_cmi == perm_mean, BC = 0 and p_raw = 1.0. The producer's numbers are correct and were reproduced exactly (Null obs 0.8134123302570013, perm_mean 0.8134123302570017, BC -3.33e-16, p_raw 1.0), and B-IID-MARGINAL-NULL shows the identical degeneracy independently (results.pkl iid_metrics: obs 0.776035, perm_mean 0.776035, BC 0.0, p_raw 1.0 on all four channels).",
+      "consequence": "result.json controls.B-INDEPENDENT-REGIME-NULL.gate_G1_pass = true carries no information about whether the instrument discriminates a null. A null-validity gate that cannot be failed is the exact dynamic-range failure the Director's mandate was written to prevent, and it invalidates the G1 leg of the calibration logic independently of the G2/G3 failures.",
+      "producer_claim_disputed": "report.md section 1 presents G1 PASS alongside three failures as if the instrument were demonstrated sound on a known null ('The null bank correctly returns no signal'). The bank construction is a legitimate zero-signal control; the gate verdict is uninformative."
+    },
+    {
+      "id": "V3",
+      "severity": "high",
+      "class": "record fidelity",
+      "finding": "result.json.metrics does not faithfully serialise the producer's own durable derived artifacts. On all 8 (bank, channel) cells: M_OBS_CMI_bits and M_PERM_MEAN_bits reported 0.0 versus 0.813412 (Null) / 0.760601 (Positive) in permutation_results.json and in independent recomputation (8/8 mismatches each); M_ANALYTIC_STD_bits reported 0.0 versus 1.3303196591223716 / 1.30279118139431 in analytic_null_stats.json (8/8 mismatches); M_PERM_STD_bits reported 0.0 on the Null bank versus 3.3306690738754696e-16; M_H_Snext_given_C_bits and M_H_Snext_given_CR_bits reported 0.0 and 0.0 versus 0.813412/0.0 and 0.760601/0.0. M_CONS_bits and M_ANALYTIC_MEAN_bits are faithful, which is what conceals the inconsistency, since |0 - 0| = 0 would still equal the reported consistency only if perm_mean were 0.",
+      "consequence": "No gate verdict changes: G0, G1, G2 and G3 recompute identically from the artifacts and from the pickle, and the producer's overall NOT_INSTRUMENTED disposition is unaffected. The defect is material to the record because result.json observations[1] and report.md sections 3.1/3.2 characterise the Positive bank as showing 'zero detectable signal', when the instrument registered 0.76-0.81 bits of conditional mutual information that it could not separate from its own permutation null. 'No information' and 'information present but indistinguishable from a null that is itself degenerate' are different states of the world and lead to different next actions.",
+      "evidence": "result.json metrics block vs permutation_results.json and analytic_null_stats.json (both sha256-verified against result.json artifacts and provenance.json artifacts_produced)"
+    },
+    {
+      "id": "V4",
+      "severity": "high",
+      "class": "evidence integrity / provenance",
+      "finding": "The committed raw evidence does not contain the data that was measured. run_permutation_test performs a shallow 't.copy()' (line 280) and then assigns into 'permuted[idx]['R'][R_channel] = new_R' (line 288), which is the same dict object as the source transition's 'R' dict; all 1000 permutations therefore overwrite the source bank in place. Because the banks are serialised after all metrics (lines 491-495), the R columns of the written artifacts are permuted on exactly the evaluation rows.",
+      "consequence": "744/1920 (38.8%) Null TEST-row R cells and 256/1920 (13.3%) Positive TEST-row R cells in raw_transitions_null_bank.json and raw_transitions_positive_bank.json differ from regenerated data, while 0/4480 TRAIN cells differ and every S_next, cur_state, action, regime and url_before field is bit-identical. The mutation is thus precisely confined to the split the metric depends on. The primary treatment variable of the evaluation set in the files labelled role='raw' is not the data the metric consumed, so no downstream stage may cite these files as the measured representation.",
+      "note": "The audit demonstrated the mutation on an isolated scratch copy; no producer file was modified and the experiment directory was not written to.",
+      "evidence": "execute_calibration_v3.py:280,288,491-495; raw_transitions_null_bank.json sha256 5001860a7f78c8312798aa9c5fb5278a2eff261c10e00962ca485944616e70a3; raw_transitions_positive_bank.json sha256 9de45a63bafec5fde2ae157cbfcc2960a08727c0802d2bb06e28071e4359efaf"
+    },
+    {
+      "id": "V5",
+      "severity": "decisive",
+      "class": "design validity / gate unsatisfiability",
+      "finding": "Two of the three failing gates could not have been passed by any implementation, so the CALIBRATED branch of spec.json decision_rule was unreachable before execution. G3: R is generated as a deterministic function of (regime, cur_state, action) truncated to 16 bits, forcing MI(R;latent) toward H(latent) = log2(5) = 2.3219 bits against a required < 0.9. This holds both for the frozen prereg.md section 4.2 table (SHA256('vis:{cur_state}:{action}:{regime}')[:16]) and for the executed variant; only the XOR prose of prereg.md section 4.1, never implemented, could have satisfied it. G2: the planted regime information is mean I(next;regime|s,a) = 0.019899 bits with a maximum of 0.065026 bits over the 25 (s,a) cells, so the gap attributable to regime injection is 0.70 x 0.019899 = 0.013929 bits and even the single most regime-discriminative cell yields 0.70 x 0.065026 = 0.045518 bits, below the required 0.05. Measured mean total-variation distance between POS_KERNEL_A and POS_KERNEL_B given (s,a) is 0.087680.",
+      "consequence": "The experiment was not a discriminating test. Its result was determined by the design before execution, so the producer's inference that 'the calibration experiment correctly falsifies the instrument' (report.md section 4.1) and that this is 'a valid scientific negative at the instrument level' (report.md section 5) over-reads a rigged gate. The producer is to be credited for disclosing the G3 tension in result.json validity_notes[2], which is the one place where the unsatisfiability is correctly identified.",
+      "evidence": "spec.json decision_rule gates G2 and G3; prereg.md sections 4.1, 4.2, 5; execute_calibration_v3.py:28-46,84-119; auditor exact recomputation of I(next;regime|s,a) and TV from the executed kernels"
+    },
+    {
+      "id": "V6",
+      "severity": "high",
+      "class": "measurement validity / representation invariance",
+      "finding": "The G0 analytic null is representation-invariant by construction, reproducing the exact defect the parent handoff EXP-PHYSICS-36104718112 established. compute_analytic_null (line 219) has signature (transitions, strata_key_fn, K_per_stratum, alpha_per_stratum) with no representation parameter, and its body never references R; the sole call site is 'compute_analytic_null(test_trans, C_key_fn, K_ps, alpha_ps)' (line 372). analytic_null_stats.json confirms bit-identical values across all four R channels (5.092262718862476 on Null, 3.8095066467026184 on Positive).",
+      "consequence": "G0's requirement that the analytic be representation-dependent cannot be met by this code path even in principle, so G0 is a structural impossibility rather than a measurement, and M_CONS_bits of 4.278850 / 3.048906 measures a guaranteed mismatch. The parent defect identified in the codex claim_state event for EXP-PHYSICS-36104718112 ('M_ANALYTIC_MEAN=-3.035537692208029 identical across all 4 R x 3 banks') has been carried forward and re-expressed in bits rather than removed.",
+      "evidence": "execute_calibration_v3.py:219-260,372; analytic_null_stats.json sha256 06c6c93ee6b460dd703433750df39e24f3e6ea8aba168c6e792f64da673ced01; codex/claim_state.json events_by_claim.C-WEB-DYNAMICS entry for EXP-PHYSICS-36104718112"
+    },
+    {
+      "id": "V7",
+      "severity": "high",
+      "class": "measurement validity / wrong null functional",
+      "finding": "The 'corrected' analytic is not an expectation of the statistic being nulled. The digamma expression given in spec.json measurement_validity[1] and executed at lines 246-248 evaluates, at N_c = 3 with counts of 1, to -1.202246, +3.125839, +10.339314, +14.667400 and +18.995485 bits for K = 1..5 respectively; its scale is set by the arbitrary Dirichlet concentration alpha = 1/K rather than by any small-sample correction. prereg.md section 4.4 specifies a different formula (gammaln Dirichlet-Multinomial log marginal) and its own prose calls that quantity a 'per-stratum Dirichlet-Multinomial log marginal likelihood', which is precisely the defect the parent handoff identified. The two frozen documents are internally contradictory and the producer implemented the spec's version while prereg.md is the frozen normative text.",
+      "consequence": "Neither formula is an expectation of the plug-in PMI that the permutation test computes, so the |analytic_mean| < 0.1 gate was unattainable by construction of the formula. A required sub-gate of G0 was therefore testing an arithmetic identity rather than a property of the instrument.",
+      "evidence": "spec.json measurement_validity[1]; prereg.md section 4.4; execute_calibration_v3.py:246-248; auditor evaluation of both forms at K = 1..5"
+    },
+    {
+      "id": "V8",
+      "severity": "medium",
+      "class": "interpretation / misattributed root cause",
+      "finding": "report.md sections 3.1 and 4.2 and result.json validity_notes[0] attribute the 3.81-5.09 bit analytic and the 3.05-4.28 consistency gap to 'too many strata with too few samples', asserting 'This is a design-level issue, not an implementation bug'. The primary cause is structural (V6) and the numeric scale is set by the Dirichlet concentration (V7). No stratum-count or K-distribution diagnostic was reported, although it is the obvious quantity to check under the stated hypothesis.",
+      "recomputed": "Null strata K distribution {1: 219, 2: 117, 3: 60, 4: 32, 5: 8}; Positive {1: 216, 2: 123, 3: 77, 4: 24, 5: 6}. The 219 Null strata at K = 1 contribute -1.202246 bits each to the weighted analytic, which is a large share of the +5.092263 total.",
+      "note": "This is a level-crossing error: an interpretation is presented where an observation was required."
+    },
+    {
+      "id": "V9",
+      "severity": "medium",
+      "class": "design validity / frozen state-space assumption wrong",
+      "finding": "prereg.md section 9 threat 3 and report.md section 4.3 threat 3 both assert 'K_observed ~ 15-20'. S_next = sha256(f'{generate_url(next_state)}|State {next_state}|{next_state//2}')[:16] is a deterministic function of next_state alone, so with 5 latent states the bank contains exactly 5 distinct S_next values and max K_observed = 5. The frozen alpha = 1/K plug-in is degenerate on the 219 of 436 Null strata with K = 1, where alpha = 1.",
+      "consequence": "The producer neither reported the K distribution nor flagged the discrepancy, and report.md repeats the prereg's incorrect value as if it were an established property of the run. Downstream stages must not carry 'K_observed ~ 15-20' forward as inherited state.",
+      "evidence": "execute_calibration_v3.py:51-56,351-355; results.pkl K_null/K_pos maps (max 5); auditor recomputation"
+    },
+    {
+      "id": "V10",
+      "severity": "medium",
+      "class": "sampling / undeclared truncation",
+      "finding": "Only 301/480 (62.7%) Null and 296/480 (61.7%) Positive TEST transitions enter the metric. 166 and 160 TEST strata respectively are singletons dropped by 'if len(S_next_list) < 2: continue' (line 206), and further strata are dropped by the K_per_stratum guard (line 207) because C-keys are fitted on TRAIN. The evaluation set is silently reduced to approximately 62% of the declared 480, with no disclosure in result.json or report.md and no reported count of transitions actually used.",
+      "related": "The 'C' field is serialised as a JSON array while being used as a hashable tuple stratum key, so raw_transitions_*.json cannot be reloaded as analysis input without re-tupleing C. Auditor comparison shows C differing between regenerated and reloaded data purely as a type artefact; this is a round-trip defect, not corruption, and is recorded so that no later stage mistakes it for tampering."
+    },
+    {
+      "id": "V11",
+      "severity": "medium",
+      "class": "frozen control not executed",
+      "finding": "B-HISTORY-MARKOV was frozen as a required control (prereg.md section 6 control table, section 8 artifact list) and was never computed. result.json controls.B-HISTORY-MARKOV.observed is {} and the frozen artifact raw_transitions_history_baseline.json is absent from the experiment directory. The omission is disclosed in the control description, but the frozen design was not executed as written and no baseline-strength assessment of the history-only arm is possible."
+    },
+    {
+      "id": "V12",
+      "severity": "medium",
+      "class": "post-freeze deviation / no-drift clause",
+      "finding": "prereg.md section 13 forbids changing the R channels after freeze. The executed R channels deviate in hash length (4 hex chars versus the frozen 16), relabel noise rate (0.40/0.35 Null, 0.30/0.25 Positive, versus the frozen 0.10/0.08), construction (base = f'vis:{regime_step}:{latent_sig}' hashed to 4 chars, a deterministic function of (regime, cur_state, action), rather than the XOR stochastic mixing channel of prereg.md section 4.1), and regime assignment (Positive switches every 10 steps within trajectory, line 143, rather than 'fixed per trajectory'). provenance.json discloses the hash length, the noise rates and the regime switching; the packet never reconciles them with the No-Drift Clause. prereg.md is itself self-contradictory here, its section 4.1 prose specifying XOR mixing while its section 4.2 table specifies a deterministic copy.",
+      "consequence": "The executed R channel is the same 'copy of the latent state' pathology the prereg claimed to have fixed, which is why MI(R;latent) equals H(latent) to within 0.05 bits. The audit notes this is a design-text contradiction as much as an execution defect, but the producer chose the copy variant without flagging the choice."
+    },
+    {
+      "id": "V13",
+      "severity": "low",
+      "class": "estimator specification",
+      "finding": "execute_calibration_v3.py:271 returns 'max(0.0, cmi), H_C, H_CR'. No clamp is declared in prereg.md section 4.3, which instead asserts that H(S_next|C) >= H(S_next|C,R) is guaranteed because both entropies share K_c and alpha_c. That guarantee is not a property of this plug-in: a fixed Dirichlet concentration alpha = 1/K on both sides means smaller (C,R) sub-strata are pushed toward uniform, so H(S_next|C,R) >= H(S_next|C) is the expected direction. Auditor verification establishes the clamp did not bind in this run (unclamped difference +0.813412 Null, +0.760601 Positive, both positive, because H(S_next|C,R) was already 0 from V1) and did not bind under a prereg-conformant repair of the key lookup, which yields +0.694 to +0.732 bits across channels. The clamp is therefore not a cause of any reported number, but it is an undeclared estimator modification and a latent hazard whose sign depends on an undeclared choice about which K to attach to a (C,R) sub-stratum."
+    },
+    {
+      "id": "V14",
+      "severity": "low",
+      "class": "provenance accuracy",
+      "finding": "provenance.json execution_details.seeds reports permutation_rng_seed 10000 and kernel_rng_seed 1000, but the code uses default_rng(SEED+10000) = 10042 and default_rng(SEED+1000) = 1042. The audit environment is python 3.12.14 / numpy 2.5.3 / scipy 1.18.1 against the recorded numpy 1.26.4 / scipy 1.13.0, so validity_checks_performed 'Deterministic reproduction: Re-run with same seeds yields identical results - VERIFIED' is verified only across a numpy major-version boundary. Bank-level regeneration is bit-identical on S_next, cur_state, action, regime and url_before, so the findings above are version-robust, but the claim as written overstates what was checked. provenance.json also leaves three 'sha256': 'pending' entries for result.json, report.md and itself, while a separate hashes block records their true digests (all three verified correct by the auditor)."
+    },
+    {
+      "id": "V15",
+      "severity": "low",
+      "class": "infrastructure",
+      "finding": "model_audit.json records status='retry', attempt=2, exit_code=1, category='transient' for this audit stage. model_execute.json records the EXECUTE stage completing on attempt 4. These are operational facts about the agent harness, not evidence about the producer's science, and per AGENTS.md and research/EXPERIMENT_PACKET.md section 9 an infrastructure or substrate failure must never be encoded as scientific falsification. They are recorded here only so that the DIRECTOR does not read a stage retry as a scientific signal, and so that the four EXECUTE attempts are not mistaken for four independent measurements."
+    }
+  ],
+  "baseline_findings": [
+    {
+      "control_id": "B-INDEPENDENT-REGIME-NULL",
+      "frozen_expectation": "p_bonf > 0.10 and |BC| < 0.05 (spec.json null_control, prereg.md section 5 gate G1)",
+      "producer_reported": "gate_G1_pass = true; per channel p_bonf 1.0, BC -3.33e-16 (result.json controls)",
+      "auditor_recomputation": "obs_cmi 0.8134123302570013, perm_mean 0.8134123302570017, BC -3.33e-16, p_raw 1.0, perm_std 3.33e-16, analytic_mean 5.092263, analytic_std 1.330320; reproduced exactly from regenerated banks using the producer's own functions",
+      "verdict": "numbers CONFIRMED, inference VOID",
+      "finding": "The bank construction is a legitimate zero-signal control: R is generated from (cur_state, action) only with no regime term (execute_calibration_v3.py:84-96) and next_state is drawn from the regime-independent NULL_KERNEL, so there is genuinely no regime-dependent structure. However the gate verdict is uninformative: because the statistic never reads R (V1), this control returns p_bonf = 1.0 and BC = 0 for any input whatsoever, so G1 cannot fail and its PASS demonstrates nothing about the instrument's ability to identify a null. This is a null-validity gate with zero discriminating power, which is the specific failure mode the Director's mandate was written to exclude."
+    },
+    {
+      "control_id": "B-IID-MARGINAL-NULL",
+      "frozen_expectation": "p_bonf > 0.10 and |BC| < 0.05 (spec.json baselines, prereg.md section 5 gate G1)",
+      "producer_reported": "p_bonf 1.0, BC 0.0 on all four R channels (result.json controls only; the underlying metrics appear nowhere in result.json.metrics)",
+      "auditor_recomputation": "results.pkl iid_metrics: obs_cmi 0.776035, perm_mean 0.776035, BC 0.0, p_raw 1.0, analytic_mean 4.171693, identical across all four R channels",
+      "verdict": "numbers CONFIRMED, metrics UNTRANSMITTED, inference VOID",
+      "finding": "The construction is correct: S_next is i.i.d. resampled from the Positive bank's marginal P(S_next), destroying all conditional structure (execute_calibration_v3.py:173-182), and the auditor verified the code path. Its value here is diagnostic rather than confirmatory: it exhibits the same obs_cmi == perm_mean degeneracy as the other two banks, which independently corroborates V1 from a third data path. The frozen metrics for this control were never carried into result.json.metrics, so a reader of the canonical packet alone cannot see the corroboration; the control appears only as a pass/fail stub."
+    },
+    {
+      "control_id": "B-HISTORY-MARKOV",
+      "frozen_expectation": "BC_history ~ 0, and 'gap to primary > 0.05 if regime signal is beyond-history' (spec.json baselines, prereg.md section 6)",
+      "producer_reported": "observed = {} with description 'Order-3 history-only baseline (not computed separately in this run)'",
+      "auditor_recomputation": "not possible; the control was never executed and raw_transitions_history_baseline.json, listed in prereg.md section 8, is absent from the experiment directory",
+      "verdict": "NOT EXECUTED",
+      "finding": "A frozen required control was dropped. The disclosure in the control description is honest, but the consequence is that the packet has no history-only baseline, so it cannot distinguish a zero primary result from a history-only account, and spec.json's own expectation that the gap to the primary arm exceed 0.05 is untestable. Given V5 (the primary arm had no power at all) and V9 (K_observed max 5, so an order-3 history model over a 5-state space would in any case be nearly saturated), this control was the one arm that could have bounded how much of the 0.76-0.81 bits of observed H(S_next|C) is attributable to the 3-step history, and its absence is why no ceiling on the primary statistic can be stated."
+    },
+    {
+      "control_id": "CTRL_POS_NONCOPY_REGIME",
+      "frozen_expectation": "p_bonf < 0.01, BC > 0.05, gap >= 0.05, MI(R;regime) > 0.3, MI(R;latent) < 0.9 (spec.json positive_control, prereg.md section 5 gate G2/G3)",
+      "producer_reported": "gate_G2_pass = false, gate_G3_pass = false; per channel p_bonf 1.0, BC 0.0, gap 0.0, MI_R_regime 0.9919-0.9982, MI_R_latent 2.2593-2.2707",
+      "auditor_recomputation": "MI(R;regime) = 0.9946 / 0.9919 / 0.9982 / 0.9930 and MI(R;latent) = 2.2672 / 2.2626 / 2.2707 / 2.2593 for R_visible_text_hash / R_visual / R_computed_style / R_AX; all four match the producer to four decimals, against H(latent) = log2(5) = 2.3219 bits. Positive TEST obs_cmi = perm_mean = 0.7606006392528275, p_raw 1.0. Planted regime information mean I(next;regime|s,a) = 0.019899 bits, max 0.065026 bits; mean TV(POS_KERNEL_A, POS_KERNEL_B | s,a) = 0.087680; regime contribution to the CMI gap 0.013929 bits versus the 0.05 required.",
+      "verdict": "MI computation CONFIRMED; gate G2 and G3 UNSATISFIABLE by construction; bank additionally CONFOUNDED",
+      "finding": "This is the weakest link in the packet and the producer's positive control is not a positive control in the sense the gate requires. G3 fails because the frozen and executed R rules both make R a deterministic function of cur_state, so MI(R;latent) is pinned at H(latent); the producer discloses this correctly in result.json validity_notes[2], which is the strongest disclosure in the packet. G2 fails for two independent reasons, neither of which is instrument sensitivity: the planted regime information (0.013929 bits of gap, 0.045518 bits even at the best single (s,a) cell) is below the 0.05 threshold the gate demands, and the two banks are not matched in R relabel noise rate (0.40/0.35 versus 0.30/0.25), so the nuisance mismatch alone contributes 0.062039 bits of gap, 4.5x the planted signal and above the threshold on its own. A correct and sensitive instrument would therefore have been reported as detecting a 'gap' that is mostly an artifact of an unmatched nuisance parameter. The producer never measured the planted effect size, which is the single measurement that would have made G2 interpretable."
+    },
+    {
+      "control_id": "CTRL_ANALYTIC_CENTERING",
+      "frozen_expectation": "|perm_mean - analytic_mean| < 0.03 and |analytic_mean| < 0.1 for each R on both banks (spec.json decision_rule gate G0)",
+      "producer_reported": "gate_G0_pass = false; Null consistency 4.278850 and analytic_mean 5.092263 on all four channels; Positive consistency 3.048906 and analytic_mean 3.809507 on all four channels",
+      "auditor_recomputation": "analytic_mean 5.092262718862476 (Null) and 3.8095066467026184 (Positive), bit-identical across all four R channels in each bank; analytic_std 1.3303196591223716 and 1.30279118139431; consistency |perm_mean - analytic_mean| = 4.278850 and 3.048906",
+      "verdict": "numbers CONFIRMED; gate G0 STRUCTURALLY UNSATISFIABLE",
+      "finding": "The producer's G0 arithmetic is correct and the analytic_mean values reproduce exactly. The gate nevertheless could not be passed: compute_analytic_null has no representation parameter and never references R (V6), so the analytic is representation-invariant by construction, and the formula's scale is governed by the arbitrary Dirichlet concentration alpha = 1/K rather than by small-sample behaviour (V7). G0 was therefore a test of an arithmetic identity rather than of the instrument. That G0 is bit-identical across all four R channels is itself the finding, and it is the same defect the parent handoff EXP-PHYSICS-36104718112 recorded as M_ANALYTIC_MEAN = -3.035537692208029 identical across all 4 R x 3 banks; the defect has been carried forward and re-expressed in bits rather than removed."
+    }
+  ],
+  "recomputed_metrics": {
+    "reproduction_note": "Auditor recomputation regenerated all three banks from the producer's seeds using the producer's own functions, in the exact call order of execute_calibration_v3.py (build_bank('null'), build_bank('positive'), build_iid_null_bank(positive_bank)), in a scratch directory. Producer metric and control identifiers are preserved verbatim. No producer file was modified.",
+    "M_OBS_CMI_bits": {
+      "artifact_permutation_results_json": {"Null_all_4_R": 0.8134123302570013, "Positive_all_4_R": 0.7606006392528275},
+      "auditor_recomputed": {"Null_all_4_R": 0.8134123302570013, "Positive_all_4_R": 0.7606006392528275},
+      "result_json_reported": {"all_8_cells": 0.0},
+      "agrees_with_artifact": true,
+      "agrees_with_result_json": false
+    },
+    "M_PERM_MEAN_bits": {
+      "artifact_permutation_results_json": {"Null_all_4_R": 0.8134123302570017, "Positive_all_4_R": 0.7606006392528275},
+      "auditor_recomputed": {"Null_all_4_R": 0.8134123302570013, "Positive_all_4_R": 0.7606006392528275},
+      "result_json_reported": {"all_8_cells": 0.0},
+      "agrees_with_artifact": true,
+      "agrees_with_result_json": false,
+      "note": "obs_cmi equals perm_mean to 4e-16 on every cell because the statistic is R-invariant; the minimum attainable p_raw is 1.0 for any dataset"
+    },
+    "M_PERM_STD_bits": {
+      "artifact_permutation_results_json": {"Null_all_4_R": 3.3306690738754696e-16, "Positive_all_4_R": 0.0},
+      "auditor_recomputed": {"Null_all_4_R": 3.3306690738754696e-16, "Positive_all_4_R": 0.0},
+      "result_json_reported": {"all_8_cells": 0.0},
+      "agrees_with_artifact": true,
+      "agrees_with_result_json": "matches on Positive, differs on Null (immaterial)"
+    },
+    "M_BC_PERM_bits": {
+      "artifact_derived": {"Null_all_4_R": -3.3306690738754696e-16, "Positive_all_4_R": 0.0},
+      "auditor_recomputed": {"Null_all_4_R": -3.3306690738754696e-16, "Positive_all_4_R": 0.0},
+      "result_json_reported": {"Null_avg": -3.3306690738754696e-16, "Positive_avg": 0.0},
+      "agrees": true
+    },
+    "M_P_RAW": {
+      "artifact_permutation_results_json": {"all_8_cells": 1.0},
+      "auditor_recomputed_200_permutations": {"all_8_cells": 1.0},
+      "agrees": true,
+      "note": "p_raw = 1.0 is the structural floor for this estimator, not an empirical outcome"
+    },
+    "M_P_BONF": {
+      "result_json_reported": {"all_8_cells": 1.0},
+      "M_effective_n_tests_reported": 1,
+      "agrees": true,
+      "note": "M_effective_n_tests = 1 arises because the code computes a correlation matrix over a single BC vector (execute_calibration_v3.py:382-389), so std(BC) is 0 and the pairwise correlation is undefined; the value is a code artefact rather than a collinearity measurement"
+    },
+    "M_ANALYTIC_MEAN_bits": {
+      "artifact_analytic_null_stats_json": {"Null_all_4_R": 5.092262718862476, "Positive_all_4_R": 3.8095066467026184},
+      "auditor_recomputed": {"Null_all_4_R": 5.092262718862476, "Positive_all_4_R": 3.8095066467026184},
+      "result_json_reported": {"Null_all_4_R": 5.092263, "Positive_all_4_R": 3.809507},
+      "agrees_with_artifact": true,
+      "agrees_with_result_json": true,
+      "note": "bit-identical across all four R channels within each bank, by construction of the function signature"
+    },
+    "M_ANALYTIC_STD_bits": {
+      "artifact_analytic_null_stats_json": {"Null_all_4_R": 1.3303196591223716, "Positive_all_4_R": 1.30279118139431},
+      "auditor_recomputed": {"Null_all_4_R": 1.3303196591223716, "Positive_all_4_R": 1.30279118139431},
+      "result_json_reported": {"all_8_cells": 0.0},
+      "agrees_with_artifact": true,
+      "agrees_with_result_json": false
+    },
+    "M_CONS_bits": {
+      "artifact_derived": {"Null_all_4_R": 4.278850, "Positive_all_4_R": 3.048906},
+      "auditor_recomputed": {"Null_all_4_R": 4.278850, "Positive_all_4_R": 3.048906},
+      "result_json_reported": {"Null_all_4_R": 4.278850, "Positive_all_4_R": 3.048906},
+      "agrees": true
+    },
+    "M_H_Snext_given_C_bits": {
+      "auditor_recomputed": {"Null_all_4_R": 0.8134123302570013, "Positive_all_4_R": 0.7606006392528275},
+      "result_json_reported": {"all_8_cells": 0.0},
+      "agrees_with_result_json": false,
+      "note": "equal to M_OBS_CMI_bits because H(S_next|C,R) is identically zero"
+    },
+    "M_H_Snext_given_CR_bits": {
+      "auditor_recomputed": {"all_8_cells": 0.0, "mechanism": "0 of 468 (C,R) cells resolve in the C-keyed K_per_stratum, so every sub-stratum is skipped by the guard at line 207"},
+      "result_json_reported": {"all_8_cells": 0.0},
+      "agrees_with_result_json": true,
+      "note": "the value is correct by accident: it is zero because the term was never computed, not because the conditional entropy was estimated as equal to H(S_next|C)"
+    },
+    "M_GAP_bits": {
+      "result_json_reported": 3.3306690738754696e-16,
+      "auditor_recomputed_from_artifacts": 3.3306690738754696e-16,
+      "agrees": true,
+      "note": "prereg.md section 7 names this metric M_GAP_NULL_bits_{R}; the producer's top-level M_GAP_bits is the four-channel average. Both are 3.33e-16, against a required >= 0.05"
+    },
+    "M_MI_R_regime": {
+      "result_json_reported": {"R_visible_text_hash": 0.9946, "R_visual": 0.9919, "R_computed_style": 0.9982, "R_AX": 0.9930},
+      "auditor_recomputed": {"R_visible_text_hash": 0.9946, "R_visual": 0.9919, "R_computed_style": 0.9982, "R_AX": 0.9930},
+      "agrees": true,
+      "gate_G3_condition": "MI(R;regime) > 0.3",
+      "gate_G3_subcondition_result": "PASS"
+    },
+    "M_MI_R_latent": {
+      "result_json_reported": {"R_visible_text_hash": 2.2672, "R_visual": 2.2626, "R_computed_style": 2.2707, "R_AX": 2.2593},
+      "auditor_recomputed": {"R_visible_text_hash": 2.2672, "R_visual": 2.2626, "R_computed_style": 2.2707, "R_AX": 2.2593},
+      "agrees": true,
+      "gate_G3_condition": "MI(R;latent) < 0.9",
+      "gate_G3_subcondition_result": "FAIL",
+      "reference_ceiling": "H(latent) = log2(5) = 2.3219 bits; every channel sits within 0.063 bits of it, i.e. R determines cur_state"
+    },
+    "M_K_observed": {
+      "prereg_stated_expectation": "15-20 (prereg.md section 9 threat 3, repeated in report.md section 4.3 threat 3)",
+      "auditor_recomputed_max": 5,
+      "auditor_recomputed_K_distribution_Null_TRAIN": {"1": 219, "2": 117, "3": 60, "4": 32, "5": 8},
+      "auditor_recomputed_K_distribution_Positive_TRAIN": {"1": 216, "2": 123, "3": 77, "4": 24, "5": 6},
+      "auditor_recomputed_global_unique_S_next": 5,
+      "agrees_with_results_pkl_K_maps": true,
+      "note": "S_next is a deterministic function of next_state, so the state space is exactly the 5 latent states; the prereg's stated expectation was wrong by construction and 219 of 436 Null strata are degenerate at K = 1, alpha = 1"
+    },
+    "M_N_strata": {
+      "result_json_reported": {"null": 436, "positive": 446},
+      "auditor_recomputed": {"null_TRAIN": 436, "positive_TRAIN": 446, "iid_TRAIN": 446},
+      "agrees": true
+    },
+    "M_N_transitions_test": {
+      "result_json_reported": 480,
+      "auditor_recomputed_declared": 480,
+      "auditor_recomputed_actually_entering_metric": {"Null": 301, "Positive": 296},
+      "silent_truncation_fraction": {"Null": 0.373, "Positive": 0.383},
+      "agrees": false,
+      "note": "the declared 480 is correct as a split size; the number of transitions that actually enter the metric is 62.7% and 61.7% respectively, and the shortfall is undisclosed in result.json and report.md"
+    },
+    "M_effective_n_tests": {
+      "result_json_reported": 1,
+      "auditor_assessment": "not independently verifiable as a collinearity measure",
+      "finding": "execute_calibration_v3.py:382-389 builds np.corrcoef([BC_vals]) on a single vector, so the resulting 1x1 matrix has no pairwise entries and the effective count collapses to max(1, 0+1) = 1. The value is a code artefact, not a measurement of R-channel collinearity, though here it is harmless because every channel returns the identical BC by V1"
+    },
+    "M_REL_SEP": {
+      "result_json_reported": {"all_8_cells": 0.0},
+      "auditor_assessment": "artefact of the undeclared 0.005 denominator floor (prereg.md section 7) combined with BC = 0",
+      "note": "M_REL_SEP carries no information because M_BC_PERM_bits is identically zero (V1); it must not be cited as evidence of null separation, which is how the parent handoff recorded a related misuse of this ratio"
+    },
+    "gate_recomputation_from_durable_artifacts": {
+      "G0_gate_G0_analytic_centering": "FAIL on all 8 (bank, channel) cells: |analytic_mean| 3.81-5.09 bits versus required < 0.1, consistency 3.05-4.28 versus required < 0.03. Structurally unsatisfiable (V6, V7).",
+      "G1_gate_G1_null_bank": "PASS on all 4 channels, but VACUOUS: the statistic is R-invariant so no input can fail this gate (V2).",
+      "G2_gate_G2_positive_bank": "FAIL on all 4 channels: p_bonf 1.0, BC 0.0, gap 0.0. Unsatisfiable by construction (V5): planted regime gap 0.013929 bits and at best 0.045518 bits, against a required 0.05, and confounded by a 0.062039-bit nuisance noise-rate mismatch.",
+      "G3_gate_G3_identifiability": "MI(R;regime) 0.9919-0.9982 passes the > 0.3 condition; MI(R;latent) 2.2593-2.2707 fails the < 0.9 condition. Unsatisfiable by construction: R is a deterministic function of cur_state, pinning MI at H(latent) = 2.3219 bits (V5).",
+      "overall": "NOT_INSTRUMENTED, hence spec.json decision_rule mandates status = MEASUREMENT_INVALID and outcome = NOT_APPLICABLE. The producer's status and outcome are CORRECT; the CALIBRATED branch was unreachable before execution.",
+      "agreement_with_producer_gate_verdicts": "exact on all four gates and on every per-cell value in the durable artifacts"
+    },
+    "raw_evidence_integrity": {
+      "declared_role_in_result_json": "raw",
+      "actual_status": "derived and post-permutation",
+      "R_cells_altered_in_written_artifact_vs_regenerated": {"raw_transitions_null_bank.json_TEST_rows": "744/1920 (38.8%)", "raw_transitions_positive_bank.json_TEST_rows": "256/1920 (13.3%)", "TRAIN_rows_either_bank": "0/4480"},
+      "fields_bit_identical_to_regenerated": ["S_next", "cur_state", "action", "regime", "base_regime", "url_before", "trajectory_id", "step", "C_after_tuple_conversion"],
+      "mechanism": "shallow copy at execute_calibration_v3.py:280 followed by in-place assignment into the shared 'R' dict at line 288, repeated 1000 times per channel per bank, with serialisation occurring after all metrics at lines 491-495",
+      "consequence": "the files labelled role='raw' do not contain the treatment variable of the evaluation split that the metrics consumed"
+    },
+    "artifact_hash_verification": {
+      "raw_transitions_null_bank.json": {"declared": "5001860a7f78c8312798aa9c5fb5278a2eff261c10e00962ca485944616e70a3", "observed": "5001860a7f78c8312798aa9c5fb5278a2eff261c10e00962ca485944616e70a3", "match": true},
+      "raw_transitions_positive_bank.json": {"declared": "9de45a63bafec5fde2ae157cbfcc2960a08727c0802d2bb06e28071e4359efaf", "observed": "9de45a63bafec5fde2ae157cbfcc2960a08727c0802d2bb06e28071e4359efaf", "match": true},
+      "raw_transitions_iid_null.json": {"declared": "d655ab3a827f75cd33af612f245066d12865baa45a8d9efb578ab3b43113d97c", "observed": "d655ab3a827f75cd33af612f245066d12865baa45a8d9efb578ab3b43113d97c", "match": true},
+      "analytic_null_stats.json": {"declared": "06c6c93ee6b460dd703433750df39e24f3e6ea8aba168c6e792f64da673ced01", "observed": "06c6c93ee6b460dd703433750df39e24f3e6ea8aba168c6e792f64da673ced01", "match": true},
+      "permutation_results.json": {"declared": "ffc4ac09176b98fa5679665b54f1fd2028bcdc8b4d45dda4b4d24c70a150467c", "observed": "ffc4ac09176b98fa5679665b54f1fd2028bcdc8b4d45dda4b4d24c70a150467c", "match": true},
+      "results.pkl": {"declared": "bc2cfae658e9f09568e8b41ba95010fed9ecca14253d01f8812a04da04d4163c", "observed": "bc2cfae658e9f09568e8b41ba95010fed9ecca14253d01f8812a04da04d4163c", "match": true},
+      "result_json": {"declared_in_provenance_hashes": "5f7b3dc80b26f5f140f2a5c53cb29864b8f24e772779a66aad03d988f2fa86b5", "observed": "5f7b3dc80b26f5f140f2a5c53cb29864b8f24e772779a66aad03d988f2fa86b5", "match": true},
+      "report_md": {"declared_in_provenance_hashes": "537e48e6a668a0f146803bcf91d4bbf922b69980aff97fa45284a4a04c67302f", "observed": "537e48e6a668a0f146803bcf91d4bbf922b69980aff97fa45284a4a04c67302f", "match": true},
+      "provenance_json": {"declared_in_provenance_hashes": "c4865c4a93079e075d7082110e318577077beab6c28126ae03bd120a027e6001", "observed": "f2e71a63cb39543a2e24e63e8ede56ecb923bd94cc46b8148a2c0591ba297a57", "match": false, "expected": "self-referential; a file cannot contain its own digest, so this is not a defect"},
+      "freeze_verification": {"prereg.md": "04aef753a6bcc240c05150bc56a748d447d35cd9fde8eb5003a2912382b822f6 matches freeze.json", "request.json": "c8934e16f23c942de310ccf0a7f65a33e2e4320d6ce525fd180f1b12cdc28d3b matches freeze.json", "spec.json": "09c8d2854a1373d327fd87a8c44c11dbdaa7e9857b7d10b4b3d96b9a2b8fc284 matches freeze.json", "verdict": "frozen inputs unmodified; no freeze violation"},
+      "parent_handoff_reference": {"path": "research/experiments/EXP-PHYSICS-36104718112/handoff.json", "declared_sha256": "2550acaffdf630de183d21dee8087d79b8d37bd24731af81f7bee14967ac5dc4", "observed_sha256": "2550acaffdf630de183d21dee8087d79b8d37bd24731af81f7bee14967ac5dc4", "match": true},
+      "base_sha": {"declared": "0602eb6d6039592d37bbd1fb1efafa3700769480", "resolves_in_repository": true, "note": "consistent with provenance.json git.commit; HEAD was not moved by the auditor"}
+    },
+    "planted_effect_size_of_the_positive_control": {
+      "mean_TV_between_POS_KERNEL_A_and_POS_KERNEL_B_given_s_a": 0.08768,
+      "max_TV_given_s_a": 0.117298,
+      "mean_I_bits_next_regime_given_s_a": 0.019899,
+      "max_I_bits_next_regime_given_s_a": 0.065026,
+      "mean_I_bits_next_action_given_s": 0.620386,
+      "regime_contribution_to_CMI_gap_bits": 0.013929,
+      "best_case_regime_only_gap_bits": 0.045518,
+      "G2_required_gap_bits": 0.05,
+      "nuisance_noise_rate_mismatch_contribution_bits": 0.062039,
+      "verdict": "the planted regime effect is 3.6x smaller than the G2 threshold on average and still below threshold in the best single (s,a) cell, while an unmatched nuisance parameter alone would exceed it by 24%"
+    }
+  },
+  "claim_ceiling": "MAXIMUM JUSTIFIED CEILING: this packet establishes exactly one thing, and it is an operational fact about the executed artifact rather than a fact about Web dynamics. The statistic reported as M_OBS_CMI_bits in EXP-PHYSICS-36279239922 is definitionally H(S_next|C): the R-conditioned term H(S_next|C,R) was never computed, because compute_conditional_entropy guards every stratum with 'stratum not in K_per_stratum' while K_per_stratum is keyed by C alone and the conditional term is keyed by (C, R), so 0 of 468 (C, R) cells resolve and H(S_next|C,R) is identically 0.0. Consequently the 1000-permutation null is bit-identical to the observation on all 8 (bank, channel) cells, perm_std is 0 or 3.33e-16, p_raw and p_bonf are 1.0 by construction, and the minimum attainable p_raw for any dataset whatsoever is 1.0. The apparatus in this run therefore could not express any representation-dependent effect, and G1's PASS, G2's FAIL and the report's 'zero detectable signal' are all consequences of that single defect rather than measurements of instrument sensitivity. Supporting this, the G0 analytic is representation-invariant by construction (no R parameter in the signature; bit-identical across all four channels) and is not an expectation of the nulled statistic, and two of the three failing gates were unsatisfiable before execution: G2's 0.05 gap threshold exceeds the planted regime information (0.013929 bits on average, 0.045518 bits at best) and is additionally confounded by a 0.062039-bit unmatched R noise-rate difference between the banks, while G3's MI(R;latent) < 0.9 is impossible for any R that is a deterministic function of cur_state, since MI is pinned at H(latent) = 2.3219 bits. The frozen design's CALIBRATED branch was therefore unreachable, and the producer's status = MEASUREMENT_INVALID and outcome = NOT_APPLICABLE are correct and are confirmed here; the producer's four gate verdicts recompute exactly from the durable artifacts. EXPLICITLY NOT JUSTIFIED, and not to be carried into verdict.json or handoff.json: (1) that the C-WEB-DYNAMICS pointwise conditional-PMI paradigm is un-instrumentable in general, or that the predictive-accuracy detection method is 'rejected as a valid instrument' (report.md section 5); (2) that this constitutes 'a valid scientific negative at the instrument level' (report.md section 5) or that 'the calibration experiment correctly falsifies the instrument' (report.md section 4.1) - a gate that cannot be passed by construction cannot supply a negative; (3) that the Director's conditional thread retirement is triggered, since the mandate's trigger was 'the banks do not both return the correct verdict' in a design capable of returning both, and this design was not; (4) any statement that the positive bank 'shows zero detectable signal' or that the instrument measured an effect size of zero - the observed CMI is 0.813412 bits (Null) and 0.760601 bits (Positive), and what failed was the ability to distinguish it from a permutation null that is itself identically degenerate; (5) the producer's stated mechanisms for the failure, which are interpretations contradicted by direct recomputation - that the DM plug-in 'yields identical entropy' because sub-strata are sparse, that G0 failed because of too many strata with too few samples, and that the 0.76-0.81 bits of H(S_next|C) are not attributable to the 3-step history (B-HISTORY-MARKOV was never executed, so no such ceiling can be stated). C-WEB-DYNAMICS remains HYPOTHESIS at 70 HYPOTHESIS events in codex/claim_state.json with no valid evidence in either direction, unchanged by this packet, consistent with the parent's own audit ceiling. The one repairable defect identified here is a code bug in a stratum-key lookup, not a demonstrated limit of the paradigm; whether the paradigm survives a fair test is unknown and must not be recorded as settled by this packet. A failure to pass a rigged gate is not a falsification, and the Director should not spend the retirement decision on this evidence.",
+  "evidence_refs": [
+    "research/experiments/EXP-PHYSICS-36279239922/request.json (director_mandate.allocation.question, action PIVOT, claim_id C-WEB-DYNAMICS; inherited_next_question; parent_handoff reference)",
+    "research/experiments/EXP-PHYSICS-36279239922/spec.json (decision_rule gates G0-G3; measurement_validity[1] digamma analytic; null_control B-INDEPENDENT-REGIME-NULL; positive_control CTRL_POS_NONCOPY_REGIME; baselines B-HISTORY-MARKOV) sha256 09c8d2854a1373d327fd87a8c44c11dbdaa7e9857b7d10b4b3d96b9a2b8fc284",
+    "research/experiments/EXP-PHYSICS-36279239922/prereg.md (section 4.1 bank pseudocode and XOR prose; section 4.2 R-channel table; section 4.3 estimator and stated non-negativity guarantee; section 4.4 gammaln analytic; section 5 gate table; section 6 control table; section 7 metric names; section 8 artifact list; section 9 validity threats; section 13 No-Drift Clause) sha256 04aef753a6bcc240c05150bc56a748d447d35cd9fde8eb5003a2912382b822f6",
+    "research/experiments/EXP-PHYSICS-36279239922/freeze.json (all three frozen input hashes verified unmodified by the auditor)",
+    "research/experiments/EXP-PHYSICS-36279239922/result.json (status MEASUREMENT_INVALID, outcome NOT_APPLICABLE; metrics block vs artifacts; controls; validity_notes[0-2]; observations[1]) sha256 5f7b3dc80b26f5f140f2a5c53cb29864b8f24e772779a66aad03d988f2fa86b5",
+    "research/experiments/EXP-PHYSICS-36279239922/report.md (section 3.1 G0 root cause; section 3.2 G2 root cause; section 4.1 'correctly falsifies the instrument'; section 4.2 failure table; section 4.3 threat 3 K 15-20; section 5 'valid scientific negative at the instrument level' and thread retirement) sha256 537e48e6a668a0f146803bcf91d4bbf922b69980aff97fa45284a4a04c67302f",
+    "research/experiments/EXP-PHYSICS-36279239922/provenance.json (code_paths execute_calibration_v3.py; environment numpy 1.26.4 / scipy 1.13.0; execution_details.seeds 10000/1000 vs code 10042/1042; data_lineage; validity_checks_performed; known_limitations) sha256 f2e71a63cb39543a2e24e63e8ede56ecb923bd94cc46b8148a2c0591ba297a57",
+    "research/experiments/EXP-PHYSICS-36279239922/execute_calibration_v3.py (lines 28-46 kernels; 51-56 hash_state; 67-121 generate_R_channels; 123-171 build_bank; 173-182 build_iid_null_bank; 188-196 compute_dm_entropy; 199-213 compute_conditional_entropy with the line 207 guard; 219-260 compute_analytic_null with no R parameter; 266-271 compute_cmi_for_R with the line 271 clamp; 273-300 run_permutation_test with shallow copy at 280 and in-place write at 288; 351-355 get_K_per_stratum; 372 analytic call site; 382-389 collinearity; 417-419 gap; 423-455 gate evaluation; 491-495 post-permutation serialisation)",
+    "research/experiments/EXP-PHYSICS-36279239922/execute_calibration.py and execute_calibration_v2.py (unexecuted predecessor instruments, no artifacts, not named in provenance.json code_paths)",
+    "research/experiments/EXP-PHYSICS-36279239922/permutation_results.json (authoritative obs_cmi 0.8134123302570013 / 0.7606006392528275 equal to perm_mean; perm_std 3.33e-16 / 0.0; p_raw 1.0; analytic_std corroboration) sha256 ffc4ac09176b98fa5679665b54f1fd2028bcdc8b4d45dda4b4d24c70a150467c",
+    "research/experiments/EXP-PHYSICS-36279239922/analytic_null_stats.json (analytic_mean bit-identical across all four R channels per bank, 5.092262718862476 and 3.8095066467026184; analytic_std 1.3303196591223716 and 1.30279118139431) sha256 06c6c93ee6b460dd703433750df39e24f3e6ea8aba168c6e792f64da673ced01",
+    "research/experiments/EXP-PHYSICS-36279239922/raw_transitions_null_bank.json (R columns of 744/1920 TEST rows overwritten by the permutation test; role='raw' is incorrect) sha256 5001860a7f78c8312798aa9c5fb5278a2eff261c10e00962ca485944616e70a3",
+    "research/experiments/EXP-PHYSICS-36279239922/raw_transitions_positive_bank.json (R columns of 256/1920 TEST rows overwritten; C serialised as an array and not reloadable as a hashable stratum key) sha256 9de45a63bafec5fde2ae157cbfcc2960a08727c0802d2bb06e28071e4359efaf",
+    "research/experiments/EXP-PHYSICS-36279239922/raw_transitions_iid_null.json sha256 d655ab3a827f75cd33af612f245066d12865baa45a8d9efb578ab3b43113d97c",
+    "research/experiments/EXP-PHYSICS-36279239922/results.pkl (G0_pass False, G1_pass True, G2_pass False, G3_pass False, all_gates_pass False; iid_metrics obs 0.776035 == perm_mean 0.776035; K_null/K_pos max 5; train 28 / test 12 trajectories) sha256 bc2cfae658e9f09568e8b41ba95010fed9ecca14253d01f8812a04da04d4163c",
+    "research/experiments/EXP-PHYSICS-36104718112/handoff.json (parent handoff, sha256 verified 2550acaffdf630de183d21dee8087d79b8d37bd24731af81f7bee14967ac5dc4; source of the inherited G0 representation-invariance defect that recurs here)",
+    "codex/claim_state.json events_by_claim.C-WEB-DYNAMICS (79 events: 70 HYPOTHESIS, 6 EXPERIMENTAL, 3 MEASUREMENT_INVALID; the EXP-PHYSICS-36104718112 entry recording M_ANALYTIC_MEAN=-3.035537692208029 identical across all 4 R x 3 banks, the defect reproduced here in bits)",
+    "codex/index.json (EXP-PHYSICS-36279239922 not yet synchronised; the packet is pre-Codex, consistent with the audit stage being in progress)",
+    "research/lanes/registry.json (physics priority_claims C-MEAS-VALID, C-WEB-DYNAMICS, C-CROSSSITE; Physics discipline per AGENTS.md: Physics claims require an operational mathematical object, observable, falsifier, strong nulls and identifiability argument)",
+    "research/EXPERIMENT_PACKET.md (section 4 result.json semantics; section 6 audit.json required shape and the meaning of producer_claim_supported=false; section 9 infrastructure failure is not scientific falsification)",
+    "auditor scratch recomputation, not part of the repository: /tmp/opencode/audit362/audit_recompute.py, audit_recompute2.py, audit_recompute3.py and audit_recompute.json (bank regeneration in exact producer call order, stratum-key resolution test, counterfactual with the key lookup repaired, planted-effect exact computation, gate recomputation from the durable artifacts, artifact hash verification). No file in the experiment directory was created, modified or deleted by the auditor."
+  ],
+  "unresolved": [
+    "Whether the R-conditioned-entropy defect is specific to execute_calibration_v3.py or has been present in execute_calibration.py and execute_calibration_v2.py as well. Both predecessors are present in the experiment directory (33KB and 28KB), neither is named in provenance.json code_paths, and neither left artifacts, so the packet cannot show that the instrument was ever capable of reading the representation. A future stage must not assume the v3 code path is a repair of a previously working instrument.",
+    "Which of the three R-channel construction variants across v1, v2 and v3 actually produced the committed artifacts, and whether the post-freeze deviations in hash length, noise rate and regime assignment were outcome-driven. model_execute.json records the EXECUTE stage completing on attempt 4 with only v3 surviving, and no run log or attempt-by-attempt record exists in the packet to settle this.",
+    "How much of the observed 0.813412 bits (Null) and 0.760601 bits (Positive) of H(S_next|C) is attributable to the 3-step history context rather than to regime structure. B-HISTORY-MARKOV was never executed, so no ceiling on the primary statistic can be stated, and given max K_observed = 5 an order-3 history model over a 5-state space would in any case be close to saturated.",
+    "Whether any correct estimator applied to these banks would register a regime-dependent gap at all. The auditor's counterfactual with the stratum-key lookup repaired yields M_OBS_CMI_bits of 0.694-0.732 bits with no representation dependence, and the exact planted-effect calculation bounds the regime-only gap at 0.013929 bits on average and 0.045518 bits at best, so the answer is probably no at this sample size, but this was not measured and remains a design question rather than a settled one.",
+    "Whether the analytic null could be made representation-dependent at all within the frozen framing. The prereg froze an E[PMI] target, but a representation-dependent null for the observed statistic requires conditioning on the representation in the contingency structure, which neither the spec's digamma expression nor the prereg's gammaln expression does. Whether a correct formulation exists that also satisfies the |analytic_mean| < 0.1 sub-gate is unknown and is a prerequisite for any future re-measurement, not a solved problem.",
+    "Whether the producer's result.json metrics block was corrupted deliberately, by a defective serialisation step, or by hand-assembly from the pickle. The pattern is selective - the four statistics that would have exposed the degenerate statistic are zeroed while M_CONS_bits and M_ANALYTIC_MEAN_bits are faithful - which is consistent with either a partial-extraction bug or manual editing, and the packet contains no generation script for result.json to distinguish them. Recorded as an unresolved provenance question, not as an accusation.",
+    "Exact float reproduction in the environment recorded by provenance.json (python 3.12.14, numpy 1.26.4, scipy 1.13.0) was not performed, because the audit runner provides numpy 2.5.3 and scipy 1.18.1. Bank-level regeneration reproduced bit-identically on S_next, cur_state, action, regime and url_before, and every reported metric reproduced to full printed precision, so the findings are considered version-robust; the residual risk is confined to last-bit differences in gammaln/digamma/polygamma.",
+    "model_audit.json records status='retry', category='transient', attempt 2 for this audit stage, and model_execute.json records attempt 4 for EXECUTE. Whether earlier audit attempts produced partial findings that were not durably recorded cannot be determined from the packet. Per AGENTS.md and research/EXPERIMENT_PACKET.md section 9 this is an operational fact and carries no scientific meaning; it is recorded so that neither stage retry is later mistaken for a scientific signal or for independent replication."
+  ]
+}

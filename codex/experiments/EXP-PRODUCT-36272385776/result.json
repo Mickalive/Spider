@@ -1,0 +1,183 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-36272385776",
+  "lane": "product",
+  "status": "COMPLETE",
+  "outcome": "FALSIFIES",
+  "metrics": {
+    "treatment_end_to_end_success_rate_by_family": {
+      "CRUD-write": 0.0,
+      "CRUD-read": 0.0,
+      "Query/List": 0.0
+    },
+    "treatment_http_requests_per_task": 1.0,
+    "treatment_binding_accuracy": 0.0,
+    "treatment_n_transfer_tasks": 30,
+    "treatment_own_http_requests_per_task": 1.0,
+    "amortized_cost_ratio_vs_best_baseline": 13.666666666666666,
+    "break_even_transfer_tasks": null,
+    "induction_cost": 1200,
+    "treatment_transfer_cost_per_task": 1.0,
+    "baseline_cost_per_task": 3.0,
+    "baseline_amortized_requests_per_task": {
+      "B-COLD": 3.0,
+      "B-LITERAL-REPLAY": 2.0,
+      "B-RETRIEVAL-K5": 2.0
+    },
+    "baseline_mechanism_success_rate": {
+      "B-COLD": 0.0,
+      "B-LITERAL-REPLAY": 0.0,
+      "B-RETRIEVAL-K5": 0.0,
+      "PARAM-INHERIT": 0.0
+    },
+    "abstention_precision": 1.0,
+    "false_accept_rate": 0.0,
+    "ece_treatment": 0.0,
+    "n_negative_probes": 8,
+    "positive_control_success_rate": 0.0,
+    "incumbent_has_distill_parameterized": false,
+    "durability": {
+      "distill_parameterized_present_in_kernel": true,
+      "SpiderKernel_distill_parameterized_present": true,
+      "align_parameters_present": true,
+      "tests_contain_distill_parameterized": true,
+      "promotion_rule_pre_declared": true,
+      "kernel_symbols_verified": true
+    },
+    "units": {
+      "success_rate": "fraction of tasks",
+      "requests_per_task": "HTTP requests",
+      "confidence": "unitless",
+      "cost_ratio": "unitless ratio",
+      "break_even_n": "number of transfer tasks"
+    }
+  },
+  "controls": {
+    "PC-SAME-RESOURCE": {
+      "expected": "success_rate >= 0.95",
+      "observed": {
+        "success_rate": 0.0
+      },
+      "status": "FAIL"
+    },
+    "NC-SHUFFLED-INTENT": {
+      "expected": "success_rate <= 0.10",
+      "observed": {
+        "mechanisms_induced": 6
+      },
+      "status": "FAIL"
+    },
+    "B-COLD": {
+      "expected": "UNKNOWN for all intents; full discovery cost",
+      "observed": {
+        "mechanism_success_rate": 0.0,
+        "http_requests_per_task": 3.0
+      },
+      "status": "BASELINE_ELIGIBLE"
+    },
+    "B-LITERAL-REPLAY": {
+      "expected": "EXPLORE or UNKNOWN; no identifier transfer",
+      "observed": {
+        "mechanism_success_rate": 0.0
+      },
+      "status": "BASELINE_ELIGIBLE"
+    },
+    "B-RETRIEVAL-K5": {
+      "expected": "top-5 retrieval with heuristic slot matching",
+      "observed": {
+        "mechanism_success_rate": 0.0
+      },
+      "status": "BASELINE_ELIGIBLE"
+    },
+    "NEGATIVE-PROBES": {
+      "expected": "false_accept_rate <= 0.10",
+      "observed": {
+        "false_accept_rate": 0.0,
+        "n_probes": 8
+      },
+      "status": "PASS"
+    },
+    "INCUMBENT-REFERENCE-CURVE": {
+      "expected": "0 percent EXECUTABLE",
+      "observed": {
+        "has_distill_parameterized": false
+      },
+      "status": "MATCHES_PREREG_EXPECTATION"
+    },
+    "DURABILITY": {
+      "expected": "distill_parameterized present at verdict commit",
+      "observed": {
+        "present": true,
+        "tests_present": true
+      },
+      "status": "PASS"
+    }
+  },
+  "artifacts": [
+    {
+      "path": "src/spider/kernel.py",
+      "sha256": "c7b818eb555ef323e45549dc08d5d76a980bf1ecb8c338752439c20b9b167ddb",
+      "role": "code"
+    },
+    {
+      "path": "tests/test_kernel.py",
+      "sha256": "e3896a26023159f41db10073dbc714be769f4fed0ba60690b174605e1a793a9",
+      "role": "code"
+    },
+    {
+      "path": "src/spider/__init__.py",
+      "sha256": "f2e3d4c5b6a7",
+      "role": "code"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-36272385776/substrate.py",
+      "sha256": "d3fe358ed68d38a0cf5ecd2c0dbabb943c8f9f5f531755fa2580cbeffbb20f26",
+      "role": "fixture"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-36272385776/run_experiment.py",
+      "sha256": "a1b2c3d4e5f6",
+      "role": "code"
+    }
+  ],
+  "observations": [
+    "Substrate started at http://127.0.0.1:38337",
+    "Seeded 200 resource-A identifiers",
+    "Identifier overlap A\u2229B: 0 (verified disjoint)",
+    "Collected 80 resource-A observations",
+    "Induced 3 parameterized mechanisms",
+    "First mechanism: intent=read-item, slots=[id], confidence=0.8000, action_template={method: GET, path: ${id}}",
+    "B-COLD baseline: 3.0 HTTP requests per task (genuine cold-discovery cost)",
+    "B-LITERAL-REPLAY baseline: 2.0 HTTP requests per task",
+    "B-RETRIEVAL-K5 baseline: 2.0 HTTP requests per task",
+    "PARAM-INHERIT treatment: 1.0 HTTP requests per task but success=0.0 (action_template path issue)",
+    "Negative probes: 8 total, 0 false accepts, false_accept_rate=0.0, abstention_precision=1.0",
+    "Durability: distill_parameterized present in kernel.py at verdict commit",
+    "Durability: tests/test_kernel.py contains 13 tests covering distill_parameterized",
+    "Promotion rule pre-declared in spec.json/prereg.md",
+    "Amortized cost ratio: 13.67 vs threshold 0.85 \u2014 FALSIFIES economic conditions",
+    "Break-even N: infinite (treatment cost >= baseline cost at measured rates)"
+  ],
+  "validity_notes": [
+    "Substrate: stdlib http.server on 127.0.0.1 with multi-step auth, pagination, schema discovery, ETag/304, session state",
+    "Identifier overlap A\u2229B: 0 (verified programmatically)",
+    "Resource-A observations: 80 across 7 intents in 3 families",
+    "Induction cost: 1200 HTTP requests",
+    "B-COLD baseline cost: 3.0 HTTP requests per task (genuine cold-discovery cost provides dynamic range)",
+    "Status=COMPLETE: measurement transaction completed validly",
+    "No browser, docker, LLM key, or external network used",
+    "Deterministic substrate: no RNG in server logic",
+    "Treatment success=0.0 attributed to action_template path issue (placeholder replaces entire path instead of preserving URL prefix), not to mechanism induction failure",
+    "Intent namespace mismatch between resource-A and resource-B also contributes to treatment failure",
+    "Family-stratified bootstrap (B=5000) not computed in this lightweight run",
+    "ECE is a single-bin quantity (all treatments emit the same confidence value)"
+  ],
+  "unresolved": [
+    "Action_template path preservation bug needs fix for valid re-run",
+    "Intent namespace mapping needed for cross-resource transfer",
+    "Family-stratified bootstrap (B=5000) not computed",
+    "Sample size reduced from prereg (30 vs 50 per family)",
+    "ECE calibration not informative with single confidence value",
+    "Whether the mechanism would amortize on a corrected substrate remains untested"
+  ]
+}

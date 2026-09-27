@@ -1,0 +1,281 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-36279237023",
+  "lane": "graph",
+  "stage": "EXECUTE",
+  "generated_by": "SPIDER Research 2.0 graph lane EXECUTE agent",
+  "claim_under_test": "C-SEMANTIC-RESOLVE",
+
+  "ci": {
+    "github_repository": "Mickalive/Spider",
+    "github_run_id": "36279237023",
+    "github_run_attempt": "1",
+    "github_workflow": "SPIDER R2 Lane",
+    "github_sha_env": "0602eb6d6039592d37bbd1fb1efafa3700769480",
+    "note": "GITHUB_SHA in the environment (0602eb6d) is the workflow-triggering ref. The execution base commit actually checked out for this experiment is the HEAD observed in the workspace, 7f5879fc, whose subject is 'R2 graph: execution base EXP-GRAPH-36279237023'. Both are recorded because they differ, and an auditor reproducing this run needs to know which tree the code came from."
+  },
+
+  "commits": {
+    "execution_base_head": "7f5879fc39eab2cd0d5c4da844547dea4976c807",
+    "execution_base_subject": "R2 graph: execution base EXP-GRAPH-36279237023",
+    "execution_base_date": "2026-09-26T23:28:28Z",
+    "incumbent_sources_last_commit": {
+      "commit": "1e6f32b3",
+      "subject": "r2: bind parameters safely inside action templates",
+      "paths": "src/spider/kernel.py, src/spider/registry.py, src/spider/models.py"
+    },
+    "note": "No commit was created for this execution. All producer-written files are untracked working-tree files under research/experiments/EXP-GRAPH-36279237023/."
+  },
+
+  "frozen_inputs": {
+    "immutability_statement": "The three frozen design documents and freeze.json were read only. They were not modified at any point during EXECUTE. Verified by recomputing sha256 at execution time and by git status showing no diff against HEAD.",
+    "files": [
+      {
+        "path": "research/experiments/EXP-GRAPH-36279237023/prereg.md",
+        "sha256_recorded_in_freeze": "0c95744647f7aa9943e14de5db7c758e1d45ea152a961f424aab6f610ac66657",
+        "sha256_recomputed_at_execution": "0c95744647f7aa9943e14de5db7c758e1d45ea152a961f424aab6f610ac66657",
+        "match": true
+      },
+      {
+        "path": "research/experiments/EXP-GRAPH-36279237023/spec.json",
+        "sha256_recorded_in_freeze": "0151912409917e9098ff691df04b71097e769740bddc30d7bfd7e8862802fcd5",
+        "sha256_recomputed_at_execution": "0151912409917e9098ff691df04b71097e769740bddc30d7bfd7e8862802fcd5",
+        "match": true
+      },
+      {
+        "path": "research/experiments/EXP-GRAPH-36279237023/request.json",
+        "sha256_recorded_in_freeze": "d482a1898b243f6bdeec5870ca70993fe64a811dd3e9b1a99cd32e2064bd8b3d",
+        "sha256_recomputed_at_execution": "d482a1898b243f6bdeec5870ca70993fe64a811dd3e9b1a99cd32e2064bd8b3d",
+        "match": true
+      },
+      {
+        "path": "research/experiments/EXP-GRAPH-36279237023/freeze.json",
+        "sha256_recomputed_at_execution": "af28ab0edf30f2ceb9010a06947ff35efd148d8ec7c8890ad3d67e0f9bd0040a",
+        "recorded_in_itself": false,
+        "note": "freeze.json is not self-hashed; its digest is recorded here for the auditor's convenience only."
+      }
+    ],
+    "v9_defect": {
+      "statement": "V9 requires outcome-bearing code to be hashed into the freeze. freeze.json hashes exactly three files, none of them code.",
+      "cause": "scripts/freeze_experiment.py at the execution base commit hashes only prereg.md, request.json and spec.json. That file is outside the graph lane's allowed code roots, so the lane could not repair it, and freeze.json is immutable, so no compliant execution of this design was possible.",
+      "consequence": "V9_CODE_HASHED_INTO_FREEZE fails; the frozen decision rule maps this to status=MEASUREMENT_INVALID, outcome=INCONCLUSIVE.",
+      "not_claimed": "The per-file sha256 values in result.json.artifacts and in this file are POST-FREEZE measurements. They are recorded so an auditor can verify which code produced the evidence. They are explicitly NOT offered as satisfying V9 and they do not retroactively bind the code to the frozen design."
+    }
+  },
+
+  "datasets_and_fixtures": {
+    "fixture": {
+      "path": "research/experiments/EXP-GRAPH-36279237023/artifacts/fixture.json",
+      "sha256": "f7350717d22ee9e291b02a141d80de2c6ee690aabb5b05f7a3fe5c6a1bbfe93e",
+      "description": "20 mechanisms over 5 resource families (users, posts, comments, photos, albums), 20 HTTP endpoints, 4 verbs per family, frozen natural-language intents, non-empty parameter_slots and action_templates per V11."
+    },
+    "goals": {
+      "path": "research/experiments/EXP-GRAPH-36279237023/artifacts/goals.json",
+      "sha256": "867b34a379df45b4f1cfbc0f2284b1a160cbc7e265c378cf8acbb9de63890072",
+      "description": "80 deterministic goals in 6 categories: verbatim 12, paraphrased 20, underspecified 10, composite 10, ood 20, no_applicable 8. 52 goals have at least one applicable mechanism.",
+      "generation": "pure function of seed 36279237023; no external data, no LLM, no network."
+    },
+    "external_data": "none. The experiment is fully self-contained and offline apart from the local embedding model.",
+    "external_network_access": "none to the Web. The only HTTP traffic is loopback to the locally started stdlib HTTP application on 127.0.0.1."
+  },
+
+  "models": [
+    {
+      "role": "embedding model for the candidate resolver and the declared substitute leg",
+      "model_name": "sentence-transformers/all-MiniLM-L6-v2",
+      "embedding_dim": 384,
+      "loaded_from": "local Hugging Face cache; no download performed during execution",
+      "local_cache_path": "/home/runner/.cache/huggingface/hub/models--sentence-transformers--all-MiniLM-L6-v2",
+      "snapshot_file_count": 11,
+      "snapshot_file_set_sha256": "f2c926d7315f0d89dab11936f813240d7b10904a500892313b8db263882aa38c",
+      "fingerprint_recorded_in": "derived_evidence/calibration.json .embedding",
+      "limitations": "single embedding model, no ensemble, no cross-model replication. The fitted coefficients w=2.6927 and b=0.1853 are specific to this checkpoint."
+    }
+  ],
+
+  "code_paths": {
+    "producer_written": [
+      {
+        "path": "research/experiments/EXP-GRAPH-36279237023/artifacts/fixture_def.py",
+        "sha256": "4c193abb9f20ac4e2e81231ddd7efb043c5ff896eb46cf1d628190b03b697f4f",
+        "role": "frozen fixture definition"
+      },
+      {
+        "path": "research/experiments/EXP-GRAPH-36279237023/artifacts/goal_generator.py",
+        "sha256": "3c4121f5cf1c484803c96810a1909e2c786cec1ce3ec8bfcf011df55d7cbfd4d",
+        "role": "deterministic 80-goal generator"
+      },
+      {
+        "path": "research/experiments/EXP-GRAPH-36279237023/artifacts/http_server.py",
+        "sha256": "2738e3990f0716b44eff8f6e559a6cff9db97747b92ba040cc09ae3ebbd62f17",
+        "role": "stdlib-only 20-endpoint HTTP application with canonical state hash and reset"
+      },
+      {
+        "path": "research/experiments/EXP-GRAPH-36279237023/artifacts/candidate_resolver.py",
+        "sha256": "ef33487cc21ad68f0d98d12192027b6e7557435d9969936f5e68c81f6a93353e",
+        "role": "A-CANDIDATE, B-LEXICAL-OVERLAP, B-RANDOM-ROLE, A-REFERENCE-EMBEDARGMAX, A-INCUMBENT adapter, and the non-calibrated parameter slot filler"
+      },
+      {
+        "path": "research/experiments/EXP-GRAPH-36279237023/artifacts/metric_estimators.py",
+        "sha256": "7bf88ee6dee0ab9deaab1f62b4db29e179073aceb79412b1b15ee9310062b48a",
+        "role": "frozen ECE, UNKNOWN-precision and paired family-blocked bootstrap estimators, plus their unit tests executed as the V5/V6 precondition"
+      },
+      {
+        "path": "research/experiments/EXP-GRAPH-36279237023/artifacts/experiment_runner.py",
+        "sha256": "70db93951d0d2ffa5b47db33fd934be0a1a973113a9e795315ac210bc2ee7003",
+        "role": "phase-ordered runner: degeneracy screen, calibration fit, six arms, metric emission"
+      },
+      {
+        "path": "research/experiments/EXP-GRAPH-36279237023/artifacts/write_packet.py",
+        "sha256": "see result.json.artifacts",
+        "role": "derives the frozen gate table from derived evidence and emits result.json and gate_table.json; re-runs no measurement"
+      }
+    ],
+    "read_only_dependencies": [
+      {
+        "path": "src/spider/kernel.py",
+        "role": "incumbent resolver, invoked only through the A-INCUMBENT adapter"
+      },
+      {
+        "path": "src/spider/registry.py",
+        "role": "incumbent mechanism registry"
+      },
+      {
+        "path": "src/spider/models.py",
+        "role": "incumbent model types"
+      }
+    ],
+    "scope_statement": "All producer writes are confined to research/experiments/EXP-GRAPH-36279237023/. No file outside that directory was created, modified or deleted. SPIDER_CODEX.md, codex/, .github/, .opencode/, the constitutional documents, other lanes and other experiments were not touched. No git commit, push, branch switch, reset or force operation was performed."
+  },
+
+  "environment": {
+    "os": "Linux-6.17.0-1022-azure-x86_64-with-glibc2.39",
+    "python": "3.12.14 (main, Aug 13 2026, 02:47:42) [GCC 13.3.0]",
+    "cpu_count": 4,
+    "memory_gb": 15,
+    "packages": {
+      "sentence-transformers": "6.1.0",
+      "torch": "2.14.0+cu130",
+      "transformers": "5.17.0",
+      "numpy": "2.5.3",
+      "scikit-learn": "1.9.1",
+      "scipy": "1.18.1"
+    },
+    "notes": [
+      "The application substrate is stdlib-only http.server; scikit-learn is used solely for the logistic fit inside the frozen calibration step, and scipy/numpy for the frozen bootstrap and ECE estimators.",
+      "sklearn emits FutureWarnings about the penalty deprecation on the logistic fit. They are harmless, do not change the fitted coefficients, and did not alter any measurement."
+    ]
+  },
+
+  "seeds": {
+    "goal_generation": 36279237023,
+    "arm_order": 20260926,
+    "calibration_split": 990017,
+    "random_role_arm": 4242,
+    "bootstrap": 36279237023,
+    "statement": "Every stochastic element in the design is seeded from one of these five values. There is no unseeded randomness anywhere in the runner, which is why the run is byte-reproducible."
+  },
+
+  "commands": {
+    "note": "Exact commands are included because they materially affect reproduction.",
+    "primary": "python3 research/experiments/EXP-GRAPH-36279237023/artifacts/experiment_runner.py --exp-dir research/experiments/EXP-GRAPH-36279237023",
+    "packet_emission": "python3 research/experiments/EXP-GRAPH-36279237023/artifacts/write_packet.py",
+    "observed_output": {
+      "ok": true,
+      "rows": 480,
+      "wall_clock_s": 8.7,
+      "exit_code": 0
+    },
+    "http_substrate": "started in-process on 127.0.0.1 on an ephemeral port by experiment_runner.py; not a separately invoked service",
+    "prior_failed_attempt": {
+      "record": "research/experiments/EXP-GRAPH-36279237023/model_execute.json",
+      "exit_code": 124,
+      "meaning": "timeout. This is a prior infrastructure failure, retained as history. The present execution completed successfully and is not affected by it."
+    }
+  },
+
+  "reproducibility": {
+    "claim": "Two independent full executions of experiment_runner.py produced byte-identical raw_evidence/task_results.jsonl and byte-identical derived_evidence/*.",
+    "only_varying_field": "derived_evidence/metrics.json .wall_clock_seconds",
+    "state_hash_across_all_80_tasks": "89172fdef25be36870d3bbd5fa90a6655a1e4ab8da73799b40d9d746aebe1cb8",
+    "distinct_arm_orderings": 78,
+    "significance": "This directly repairs the reproducibility defect recorded against the parent experiment EXP-GRAPH-36272373909, whose unseeded uuid4 made its numbers irreproducible. It is an operational improvement to the measurement substrate, not evidence about C-SEMANTIC-RESOLVE."
+  },
+
+  "material_artifacts": [
+    {
+      "path": "research/experiments/EXP-GRAPH-36279237023/raw_evidence/task_results.jsonl",
+      "sha256": "f3f92d9278e7b561e2f11dc1ca8a1db0fed5b0940c8f41995d39f7009318e819",
+      "role": "raw",
+      "rows": 480
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-36279237023/raw_evidence/goals_flat.jsonl",
+      "sha256": "6b2652ae873940d0b74bc74949378824372ea5bdf7beffefc0b1cd440e99aa4b",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-36279237023/raw_evidence/degeneracy_screen_per_goal.jsonl",
+      "sha256": "43a437652801b9a95a32347eda9f2d931fe1ec76fce08e2f5c5b37701fede030",
+      "role": "raw",
+      "note": "written before any candidate arm ran"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-36279237023/derived_evidence/phase0_preconditions.json",
+      "sha256": "a984e64a753cebc6add16737deca4922913f0e67a7b846846d6d7014fede1d27",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-36279237023/derived_evidence/phase1_validity_preconditions.json",
+      "sha256": "d804f448c141ccb23b8a4b92e48d6ef1e69a6c7c40c78daa802bb90331cc0d61",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-36279237023/derived_evidence/degeneracy_screen.json",
+      "sha256": "fca0b49ef1158f1f6324d3bd8d000ee0cc8f59ff9d122f37159a8e8ae0713668",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-36279237023/derived_evidence/calibration.json",
+      "sha256": "9b58f1527310bca5a3e35bbdc987481a5771b5f8d007f3704da0128cccefe395",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-36279237023/derived_evidence/metrics.json",
+      "sha256": "0731a97138528dd7d02afeff86816272465b62b131a0add439544dff9c7e38c1",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-36279237023/derived_evidence/design_facts.json",
+      "sha256": "01ff419d76696fcd10382fa892387a57e21aeb26e8ecb8b32e0a09e9c9d9c260",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-36279237023/derived_evidence/gate_table.json",
+      "sha256": "see result.json.artifacts",
+      "role": "derived",
+      "note": "machine-derived frozen gate table, emitted by write_packet.py before result.json"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-36279237023/result.json",
+      "role": "packet"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-36279237023/report.md",
+      "role": "packet"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-36279237023/provenance.json",
+      "role": "packet"
+    }
+  ],
+
+  "inherited_state": {
+    "parent_experiment": "EXP-GRAPH-36272373909",
+    "parent_handoff": "research/experiments/EXP-GRAPH-36272373909/handoff.json",
+    "claims_read": "SPIDER_CODEX.md and codex/claim_state.json for C-SEMANTIC-RESOLVE and C-KERNEL-CONSTRAINT",
+    "used_here": "The parent's finding that the incumbent cannot return EXECUTABLE under exact intent matching with empty parameters is reproduced independently as OBS-12, and the parent's reproducibility defect is repaired as recorded above.",
+    "not_imported": "No parent narrative was imported as evidence. Every number in this packet was re-derived from raw_evidence/task_results.jsonl produced by this run.",
+    "codex_mutation_statement": "SPIDER_CODEX.md and codex/ were read only. They were not edited, regenerated, appended to or formatted. Codex synchronization is owned by the canonical Codex step, not by this lane."
+  }
+}

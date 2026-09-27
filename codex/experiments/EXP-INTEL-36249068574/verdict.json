@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-36249068574",
+  "lane": "intel",
+  "decision": "INTEL verification complete (MV1-MV6 PASS): verified external deterministic-compilation literature specifies the no-memory deterministic executor baseline (MV6) and published cross-site evidence favors hierarchical Intent/Stage/Action over flat fragment reuse on benchmarks; however, task distribution incomparability (MV3 PARTIAL) and compilation-vs-inheritance conflation mean the external convergence does not constitute a clean falsification of SPIDER's compilation-bypass direction per the frozen decision_rule. Producer outcome misclassified (MIXED) relative to spec; audit ceiling bounds claims. Claims updated conservatively.",
+  "claim_updates": [
+    {
+      "claim_id": "C-PRODUCT-ECON",
+      "status": "HYPOTHESIS",
+      "reason": "Intel delivered a source-verified baseline specification (MV6) with concrete parameters for a no-memory deterministic executor, but task distributions are not comparable to SPIDER's alias-OOD and SPIDER's current kernel is a non-executable stub (portfolio_assessment). No operational validation performed; comparison remains theoretical. Status unchanged from HYPOTHESIS; baseline made available for downstream lanes."
+    },
+    {
+      "claim_id": "C-CROSSSITE",
+      "status": "HYPOTHESIS",
+      "reason": "Bounded cross-site evidence (HMT 2603.07024, SKILLMIGRATOR 2606.17645, PAFFA 2412.07958) screened 10+ papers: hierarchical Intent/Stage/Action significantly outperforms flat fragment reuse on Mind2Web/WebArena/CAP benchmarks. Evidence supports hierarchical necessity, but overgeneralizing to 'known failure mode' is not justified; determination is benchmark-bounded. Acquisition thread (15 consecutive MEASUREMENT_INVALID) is parked per Director mandate; design-level question answered by literature. Claim remains HYPOTHESIS at SPIDER operational level (no new external census executed)."
+    },
+    {
+      "claim_id": "C-RESIDUAL-NOVELTY",
+      "status": "HYPOTHESIS",
+      "reason": "External convergence exists on other domains but task distributions are incomparable (MV3 PARTIAL) and SPIDER's internal baseline is non-operational. Downstream Frontier must test against the MV6-specified no-memory deterministic executor on SPIDER's task distribution; no falsification/validation of C-RESIDUAL-NOVELTY by this Intel verification."
+    }
+  ],
+  "product_action": "NONE",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "Can SPIDER's kernel be repaired to actually execute inherited mechanisms (resolve EXECUTABLE under non-exact string equality with populated freshness/repair/applicability guards), and if so, does the MV6-specified no-memory deterministic executor still dominate SPIDER's inheritance approach on SPIDER's synthetic 40-task alias-OOD with cross-site transfer?",
+  "reason": "Verification complete (all MV1-MV6 PASS) but falsification blocked by distribution incomparability and compilation-vs-inheritance conflation; also SPIDER kernel is non-executable (min_confidence mismatch). Next highest-information step is to make the estimand operational (repair kernel execution semantics) so downstream lanes can test against the verified baseline on SPIDER's task distribution. C-CROSSSITE acquisition remains parked; design-level answer (hierarchical > flat) recorded.",
+  "evidence_refs": [
+    "research/experiments/EXP-INTEL-36249068574/request.json",
+    "research/experiments/EXP-INTEL-36249068574/spec.json",
+    "research/experiments/EXP-INTEL-36249068574/prereg.md",
+    "research/experiments/EXP-INTEL-36249068574/freeze.json",
+    "research/experiments/EXP-INTEL-36249068574/result.json",
+    "research/experiments/EXP-INTEL-36249068574/audit.json",
+    "research/experiments/EXP-INTEL-36249068574/report.md",
+    "research/experiments/EXP-INTEL-36249068574/provenance.json",
+    "arXiv:2604.09718",
+    "arXiv:2607.04542",
+    "arXiv:2608.02680",
+    "arXiv:2605.04107",
+    "arXiv:2604.05150",
+    "arXiv:2603.07024",
+    "arXiv:2606.17645",
+    "arXiv:2412.07958",
+    "codex/claim_state.json",
+    "research/experiments/EXP-INTEL-36103378878/handoff.json"
+  ]
+}

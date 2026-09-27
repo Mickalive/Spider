@@ -1,0 +1,140 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-36279239922",
+  "lane": "physics",
+  "executed_at": "2026-09-26T23:45:00.000000+00:00",
+  "git": {
+    "commit": "0602eb6d6039592d37bbd1fb1efafa3700769480",
+    "repo": "Spider",
+    "branch": "main"
+  },
+  "environment": {
+    "python_version": "3.12.14",
+    "numpy_version": "1.26.4",
+    "scipy_version": "1.13.0",
+    "platform": "linux",
+    "runner": "GitHub Actions hosted runner"
+  },
+  "code_paths": [
+    "research/experiments/EXP-PHYSICS-36279239922/execute_calibration_v3.py"
+  ],
+  "frozen_inputs": {
+    "request.json": "c8934e16f23c942de310ccf0a7f65a33e2e4320d6ce525fd180f1b12cdc28d3b",
+    "spec.json": "09c8d2854a1373d327fd87a8c44c11dbdaa7e9857b7d10b4b3d96b9a2b8fc284",
+    "prereg.md": "04aef753a6bcc240c05150bc56a748d447d35cd9fde8eb5003a2912382b822f6",
+    "freeze.json": "b2317b7fe2f1d5acea06946429208cc9cca62e46250ce65c73aef4b994125082"
+  },
+  "artifacts_produced": [
+    {
+      "path": "raw_transitions_null_bank.json",
+      "sha256": "5001860a7f78c8312798aa9c5fb5278a2eff261c10e00962ca485944616e70a3",
+      "role": "raw",
+      "description": "B-INDEPENDENT-REGIME-NULL bank: 1600 transitions, regime-independent, matched marginals"
+    },
+    {
+      "path": "raw_transitions_positive_bank.json",
+      "sha256": "9de45a63bafec5fde2ae157cbfcc2960a08727c0802d2bb06e28071e4359efaf",
+      "role": "raw",
+      "description": "CTRL_POS_NONCOPY_REGIME bank: 1600 transitions, regime-injected through non-copy channel"
+    },
+    {
+      "path": "raw_transitions_iid_null.json",
+      "sha256": "d655ab3a827f75cd33af612f245066d12865baa45a8d9efb578ab3b43113d97c",
+      "role": "raw",
+      "description": "B-IID-MARGINAL-NULL bank: IID resampled S_next from positive bank marginal"
+    },
+    {
+      "path": "analytic_null_stats.json",
+      "sha256": "06c6c93ee6b460dd703433750df39e24f3e6ea8aba168c6e792f64da673ced01",
+      "role": "derived",
+      "description": "Per-stratum analytic null E[PMI] and std (digamma formula) for null and positive banks"
+    },
+    {
+      "path": "permutation_results.json",
+      "sha256": "ffc4ac09176b98fa5679665b54f1fd2028bcdc8b4d45dda4b4d24c70a150467c",
+      "role": "derived",
+      "description": "Permutation test summary: perm_mean, perm_std, obs_cmi, p_raw per channel per bank"
+    },
+    {
+      "path": "results.pkl",
+      "sha256": "bc2cfae658e9f09568e8b41ba95010fed9ecca14253d01f8812a04da04d4163c",
+      "role": "derived",
+      "description": "Complete results object with all metrics, gate details, and intermediate values"
+    },
+    {
+      "path": "result.json",
+      "sha256": "pending",
+      "role": "canonical",
+      "description": "Producer handoff — canonical result packet"
+    },
+    {
+      "path": "report.md",
+      "sha256": "pending",
+      "role": "canonical",
+      "description": "Human-readable report and interpretation"
+    },
+    {
+      "path": "provenance.json",
+      "sha256": "pending",
+      "role": "canonical",
+      "description": "Provenance and reproducibility metadata"
+    }
+  ],
+  "execution_details": {
+    "command": "python research/experiments/EXP-PHYSICS-36279239922/execute_calibration_v3.py",
+    "working_directory": "/home/runner/work/Spider/Spider",
+    "duration_seconds": 45,
+    "peak_memory_mb": 120,
+    "seeds": {
+      "numpy_seed": 42,
+      "pythonhashseed": 0,
+      "permutation_rng_seed": 10000,
+      "split_rng_seed": 42,
+      "kernel_rng_seed": 1000
+    },
+    "design_parameters": {
+      "n_trajectories": 40,
+      "n_steps": 40,
+      "n_states": 5,
+      "n_actions": 5,
+      "n_regimes": 2,
+      "history_length": 3,
+      "train_fraction": 0.7,
+      "n_permutations": 1000,
+      "hash_length_r_channels": 4,
+      "hash_length_s_next": 16
+    }
+  },
+  "data_lineage": {
+    "null_bank_generation": "build_bank('null') with NULL_KERNEL (same for both regimes), R from (cur_state, action) only, noise_rate=0.40",
+    "positive_bank_generation": "build_bank('positive') with POS_KERNEL_A/B (different per regime), regime switches every 10 steps, R from stochastic mixing (regime primary), noise_rate=0.30",
+    "iid_null_bank_generation": "Resampled S_next from positive bank marginal P(S_next)",
+    "train_test_split": "70/30 by trajectory_id, numpy.default_rng(42).permutation",
+    "strata_construction": "C = (URL_before_norm, H_K=3) on TRAIN only",
+    "k_alpha_fitting": "K = n_states_observed per stratum on TRAIN, alpha = 1/K",
+    "entropy_estimation": "Exact Dirichlet-Multinomial plug-in with shared K,alpha per stratum",
+    "analytic_null": "E[PMI] = sum_c p(c)[digamma(K*alpha) - digamma(N_c+K*alpha) + sum_i(digamma(n_i+alpha)-digamma(alpha))]/ln(2)",
+    "permutation_test": "1000 trajectory-grouped shuffles within C strata, seed 42",
+    "bonferroni": "Effective n_tests from pairwise BC correlation < 0.95 (result: 1)"
+  },
+  "validity_checks_performed": [
+    "G0: Analytic centering |perm_mean - analytic_mean| < 0.03 and |analytic_mean| < 0.1 — FAILED",
+    "G1: Null bank p_bonf > 0.10 and |BC| < 0.05 — PASSED",
+    "G2: Positive bank p_bonf < 0.01 and BC > 0.05 and gap >= 0.05 — FAILED",
+    "G3: MI(R;regime) > 0.3 and MI(R;latent_state_index) < 0.9 — FAILED",
+    "Non-negative CMI: H(S_next|C) >= H(S_next|C,R) by construction (shared K,alpha) — VERIFIED",
+    "TRAIN/TEST separation: All fitting on TRAIN only, metrics on TEST — VERIFIED",
+    "Deterministic reproduction: Re-run with same seeds yields identical results — VERIFIED"
+  ],
+  "known_limitations": [
+    "Analytic null bias: With ~440 strata and ~2.5 samples/stratum, E[PMI] formula yields 3-5 bits instead of ~0. This is a fundamental property of the digamma formula at small N_c, not a bug.",
+    "Estimator sensitivity: DM plug-in with shared support yields zero BC on positive bank because sub-strata (C,R) have insufficient samples for conditional entropy to differ from marginal entropy.",
+    "Identifiability tension: Frozen R generation requires regime signal in R, but with only 5 latent states, any hash preserving regime signal also preserves latent state signal (MI ≈ 2.3 bits).",
+    "No genuine DOM/browser/CP measurements: Purely synthetic banks as mandated by Director for calibration-first approach."
+  ],
+  "hashes": {
+    "result_json": "5f7b3dc80b26f5f140f2a5c53cb29864b8f24e772779a66aad03d988f2fa86b5",
+    "report_md": "537e48e6a668a0f146803bcf91d4bbf922b69980aff97fa45284a4a04c67302f",
+    "provenance_json": "c4865c4a93079e075d7082110e318577077beab6c28126ae03bd120a027e6001"
+  }
+}

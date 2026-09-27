@@ -1,0 +1,128 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-36129169543",
+  "lane": "product",
+  "status": "PASS",
+  "producer_claim_supported": true,
+  "required_fixes": [],
+  "validity_findings": [
+    "Part A harness build & unit test: PASS on attempt 2. The attempt-1 failure (all_eight_counter_paths_nonzero=false because repair=0) was a legitimate implementation defect in staleness injection (bumping bare rids while substrate serves ep-a: keys). The fix mirrors the parent packet's own bump call exactly. No gate, threshold, statistic, or control was changed between attempts. Attempt 1 is fully archived; attempt 2 is the reporting attempt. Unit tests: 39 tests, exit 0, all pass, covering each arm, each counter, hard reset, UNKNOWN gate, no-fill behavior, bootstrap/permutation, f* and sensitivity. Zero surrogate/default fills confirmed.",
+    "Part B dry-run on certified substrate: PASS. Health gate passes all frozen criteria: n_non304=400 stratified (200/endpoint ≥180), TN_fresh=1.0 (≥0.85), HS256, WAL, nginx sticky, single worker, ETag W/\"body_sha\" seen. All 5 arms × 192 trajectories = 960 records. All 8 counters recorded per trajectory for EXECUTABLE arms. Family-stratified trajectory-grouped bootstrap B=5000 and block-permutation B=5000 compute without error (seed=42). UNKNOWN gates fire correctly for live_browser mode (all 5 arms UNKNOWN with counters=null, payload_bytes=null, missing=[browsergym, playwright, policy_model]); scripted mode EXECUTABLE. Zero crashes, zero transport errors, zero integrity failures, zero surrogate fills, zero default fills. Result.json explicitly discloses 'instrument correctness ONLY — not a scientific or product result'.",
+    "Part C break-even reuse count f*: PASS. Primary unit = bytes (the only identifiable unit on this substrate). f*_bytes = 36.7001, formula f* = (build_cost + verify_cost) / (serving_cost_cold - serving_cost_inherited) with measured inputs: build_cost=35027 bytes (harvest_payload_bytes), verify_cost=0 bytes (probe_payload_bytes, all 36 probes 304), serving_cost_cold=971.099 bytes/trajectory, serving_cost_inherited=16.688 bytes/trajectory. Post-hoc paired family-stratified bootstrap CI for f*: [34.57, 39.15] (denominator CI [894.63, 1013.17] bytes, strictly positive). OAT ±10% sensitivity identifies cold_serving_cost as dominant quantity (max |rel change| 0.113), above build_cost (0.100), inherited_serving_cost (0.002), verify_cost (0.000). Token economics correctly NOT_APPLICABLE/UNKNOWN — no token parameter exists by construction.",
+    "f*_latency_ms is NOT IDENTIFIABLE on this single-node localhost substrate: serving denominator (cold - inherited) CI spans zero in both attempts (attempt 1: +0.115 ms, CI [-0.719, 1.005]; attempt 2: -0.531 ms, CI [-1.234, 0.200]). This is expected — 304 body suppression saves bytes but not measurable round-trip time on localhost. Any time-domain amortization claim must be re-measured on a WAN-like substrate.",
+    "f*_bytes is substrate- and content-bound: measures protocol-level payload saving (971.1 B cold vs 16.7 B inherited per trajectory via 304 revalidation on localhost). It does not measure wall-clock, token, or monetary saving. The mapping from bytes-saved to time/money-saved outside localhost is unresolved.",
+    "B-RAG-EMBED arm's frozen spec text ('200 token retrieval + 150ms verify cost model') was NOT instantiated — token economics are frozen NOT_APPLICABLE/UNKNOWN and measurement_validity forbids synthetic jitter/proxies. The RAG arm charges honest measured local retrieval time only. This affects only latency cross-arm interpretation, not the eight-counter gates, payload/requests CIs, or f* (which uses bytes as primary unit).",
+    "NC-SHUFFLED-FAMILY-STRATIFIED: frozen sentence is genuinely ambiguous ('Shuffled rho_shuffled and rho_length must satisfy |rho|<0.20 per stratum'). Both defensible readings evaluated and reported separately: (a) shuffled-null reading PASS (rho_shuffled median -0.0045, per-stratum shuffled rho_length all |rho|<0.02, block_permutation p=0.972); (b) observed-rho reading FAIL in 3/5 strata (attempt 2: strata 0.0 rho=0.382 n=45 perm_p=0.009, 0.5 rho=0.269 n=42 p=0.084, 0.6667 rho=0.268 n=21 p=0.23; attempt 1 failed different strata with opposite signs: 0.3333 rho=-0.481, 0.6667 rho=-0.492). Cross-attempt sign instability and the fact that latency_ms is measured (not formula-derived) argue against deterministic counter-formula coupling, but the literal observed-data gate failure stands as recorded. Controls are NOT part of the frozen decision_rule.overall; the MIXED result is disclosed and bounds interpretation.",
+    "Exactly two attempts exist. Attempt 1 archived verbatim; attempt 2 triggered solely by the Part A counter-path defect fix. Neither attempt was discarded and no third attempt was run. The NC result did not trigger any re-run.",
+    "Raw trace hygiene defect: attempt-2 request_trace.jsonl appended to attempt-1 file due to wrong unlink path in archival step. Verified byte-prefix split (first 10889 lines match attempt-1 archive), correction documented in artifacts/raw/trace_file_correction.json. Counter/CI computations never read the trace file — zero impact on measurements.",
+    "Kernel dot-regex patch (parent uncommitted d926279d) absent from this working tree (sha256 46929b3a...). Fixtures contain no dotted slots so harness path unaffected. Kernel durability remains a Runtime deliverable (inherited do-not-assume note, unchanged)."
+  ],
+  "baseline_findings": [
+    "B-COLD: Absolute cold-exploration baseline. 192/192 trajectories executed. Requests=2092, verify=2092, resolve=0, bind=0, freshness=0, repair=0. Payload_bytes_total=186451. Serves as the primary cost reference.",
+    "B-INSTRUCTIONS: Static instructions baseline. 192/192 executed. Identical request count to B-COLD (2092) — this is the reference arm for the NC statistic (Delta = latency_ms(B-INSTRUCTIONS) - latency_ms(B-COLD) per trajectory). Paired latency delta vs COLD observed_mean=0.229 ms, bootstrap CI [-0.497, 1.477] spans 0, confirming the statistic is measurement noise under the null.",
+    "B-RAG-EMBED: TF-IDF retrieval TAU=0.30, QCR k=5 with honest counters. 192/192 executed. resolve=192, bind=384, requests=2092. Payload_bytes_total=186451 (no payload saving vs COLD because retrieval does not change request pattern on this substrate). Latency_ms=4783 (honest local retrieval time; frozen '150ms verify cost model' not instantiated per validity note).",
+    "B-DETERMINISTIC-EXECUTOR: No-memory deterministic compiled executor (Frontier's null against SPIDER's premise). 192/192 executed. bind=384, resolve=0, freshness=0, repair=0, requests=2092. Payload_bytes_total=186451. Paired payload delta vs P-SPIDER identical to COLD's (CI [894.63, 1013.17], p=0.0002), confirming payload saving is entirely from 304 body suppression, not from compilation bypass."
+  ],
+  "recomputed_metrics": {
+    "part_a": {
+      "five_arms_implemented": true,
+      "eight_counter_paths_present": ["resolve", "bind", "verify", "freshness", "repair", "browser_steps", "requests", "latency_ms"],
+      "all_eight_counter_paths_nonzero": true,
+      "unit_tests_passed": true,
+      "zero_surrogate_fills": true,
+      "gate_unknown_records_have_no_numbers": true,
+      "PASS": true
+    },
+    "part_b": {
+      "health_gate_pass": true,
+      "n_non304_total": 400,
+      "n_non304_stratified": {"ep-a": 200, "ep-b": 200},
+      "TN_fresh": 1.0,
+      "all_five_arms_complete": true,
+      "executable_by_arm": {"B-COLD": 192, "B-DETERMINISTIC-EXECUTOR": 192, "B-INSTRUCTIONS": 192, "B-RAG-EMBED": 192, "P-SPIDER": 192},
+      "all_eight_counters_recorded_per_trajectory": true,
+      "bootstrap_and_permutation_compute": true,
+      "B": 5000,
+      "unknown_gates_fire_for_live_mode": true,
+      "scripted_mode_executable": true,
+      "trace_request_rows_attempt2_only": 10889,
+      "transport_errors": 0,
+      "zero_crashes": true,
+      "zero_default_fills": true,
+      "PASS": true
+    },
+    "part_c": {
+      "f_star_computed": true,
+      "primary_unit": "bytes",
+      "f_star": 36.70010423090146,
+      "dominant_quantity": "cold_serving_cost",
+      "formula": "f* = (build_cost + verify_cost) / (serving_cost_cold - serving_cost_inherited)",
+      "inputs_bytes": {
+        "build_cost": 35027.0,
+        "verify_cost": 0.0,
+        "serving_cost_cold": 971.0989583333334,
+        "serving_cost_inherited": 16.6875
+      },
+      "denominator_bytes_per_reuse": 954.4114583333334,
+      "denominator_ci95_bytes": [894.63046875, 1013.1736990918713],
+      "f_star_ci95_bytes": [34.571564610683666, 39.15247828406805],
+      "sensitivity_primary_unit": {
+        "dominant_quantity": "cold_serving_cost",
+        "dominant_max_abs_rel_change": 0.11327390510073092,
+        "per_input": {
+          "build_cost": {"max_abs_rel_change": 0.10000000000000003},
+          "cold_serving_cost": {"max_abs_rel_change": 0.11327390510073092},
+          "inherited_serving_cost": {"max_abs_rel_change": 0.0017515221952412448},
+          "verify_cost": {"max_abs_rel_change": 0.0}
+        }
+      },
+      "token_economics_status": "NOT_APPLICABLE",
+      "PASS": true
+    },
+    "controls": {
+      "PC-INSTRUMENT-CORRECTNESS": {"pass": true},
+      "NC-SHUFFLED-FAMILY-STRATIFIED": {
+        "shuffled_null_reading": {"pass": true, "rho_shuffled_median": -0.004476819295729788, "block_permutation_p": 0.9722055588882224},
+        "observed_rho_length_reading": {"pass": false, "failing_strata_attempt2": ["0.0", "0.5", "0.6667"], "failing_strata_attempt1": ["0.3333", "0.6667"], "cross_attempt_sign_instability": true},
+        "overall": "MIXED"
+      }
+    },
+    "paired_ci_P_SPIDER_vs_baselines": {
+      "B-COLD": {"delta_payload_bytes": {"observed_mean": 954.4114583333334, "bootstrap_ci95": [894.63046875, 1013.1736990918713], "block_permutation_p": 0.0001999600079984003}, "delta_requests": {"observed_mean": 0, "block_permutation_p": 1.0}, "delta_latency_ms": {"observed_mean": -0.53125, "bootstrap_ci95": [-1.2344499684343435, 0.2], "block_permutation_p": 0.018196360727854428}},
+      "B-INSTRUCTIONS": {"delta_payload_bytes": {"observed_mean": 954.4114583333334, "bootstrap_ci95": [894.63046875, 1013.1736990918713], "block_permutation_p": 0.0001999600079984003}, "delta_requests": {"observed_mean": 0, "block_permutation_p": 1.0}, "delta_latency_ms": {"observed_mean": 0.22916666666666666, "bootstrap_ci95": [-0.4974476439790576, 1.4767349244846204], "block_permutation_p": 0.7966406718656269}},
+      "B-RAG-EMBED": {"delta_payload_bytes": {"observed_mean": 954.4114583333334, "bootstrap_ci95": [894.63046875, 1013.1736990918713], "block_permutation_p": 0.0001999600079984003}, "delta_requests": {"observed_mean": 0, "block_permutation_p": 1.0}, "delta_latency_ms": {"observed_mean": -0.125, "bootstrap_ci95": [-0.7732249537404177, 0.5625164473684208], "block_permutation_p": 0.6068786242751449}},
+      "B-DETERMINISTIC-EXECUTOR": {"delta_payload_bytes": {"observed_mean": 954.4114583333334, "bootstrap_ci95": [894.63046875, 1013.1736990918713], "block_permutation_p": 0.0001999600079984003}, "delta_requests": {"observed_mean": 0, "block_permutation_p": 1.0}, "delta_latency_ms": {"observed_mean": -0.16145833333333334, "bootstrap_ci95": [-0.775432286435571, 0.46875805412371124], "block_permutation_p": 0.4969006198760248}}
+    }
+  },
+  "claim_ceiling": "Instrument decidable and break-even reuse count f* computable in bytes on the certified single-node localhost substrate. This is NOT an economics result, NOT a PRODUCT_CORE promotion, and NOT evidence that inheritance pays off in production. Token economics are NOT_APPLICABLE/UNKNOWN. f*_latency_ms is NOT IDENTIFIABLE on this substrate (denominator CI spans zero). The payload-bytes f*=36.7 [34.6, 39.2] measures protocol-level 304 body-suppression saving only. C-PRODUCT-ECON may advance from HYPOTHESIS toward EXPERIMENTAL on instrument readiness only, per the frozen decision rule. No Pareto dominance, success margin, accuracy, or safety claims are supported.",
+  "evidence_refs": [
+    "research/experiments/EXP-PRODUCT-36129169543/result.json",
+    "research/experiments/EXP-PRODUCT-36129169543/report.md",
+    "research/experiments/EXP-PRODUCT-36129169543/provenance.json",
+    "research/experiments/EXP-PRODUCT-36129169543/artifacts/derived/metrics_summary.json",
+    "research/experiments/EXP-PRODUCT-36129169543/artifacts/derived/breakeven.json",
+    "research/experiments/EXP-PRODUCT-36129169543/artifacts/derived/ci.json",
+    "research/experiments/EXP-PRODUCT-36129169543/artifacts/derived/null_control.json",
+    "research/experiments/EXP-PRODUCT-36129169543/artifacts/derived/health_gate.json",
+    "research/experiments/EXP-PRODUCT-36129169543/artifacts/derived/gate_demo.json",
+    "research/experiments/EXP-PRODUCT-36129169543/artifacts/derived/f_bytes_ci_supplement.json",
+    "research/experiments/EXP-PRODUCT-36129169543/artifacts/raw/build.json",
+    "research/experiments/EXP-PRODUCT-36129169543/artifacts/raw/verify_pass.json",
+    "research/experiments/EXP-PRODUCT-36129169543/artifacts/raw/staleness_injection.json",
+    "research/experiments/EXP-PRODUCT-36129169543/artifacts/raw/trace_file_correction.json",
+    "research/experiments/EXP-PRODUCT-36129169543/artifacts/raw/unit_tests.txt",
+    "research/experiments/EXP-PRODUCT-36129169543/artifacts/attempt1/derived/null_control.json",
+    "research/experiments/EXP-PRODUCT-36129169543/freeze.json",
+    "research/experiments/EXP-PRODUCT-36129169543/spec.json",
+    "research/experiments/EXP-PRODUCT-36129169543/prereg.md",
+    "research/experiments/EXP-PRODUCT-36129169543/request.json"
+  ],
+  "unresolved": [
+    "Which reading of NC-SHUFFLED-FAMILY-STRATIFIED is authoritative for future frozen controls — shuffled-null or observed per-stratum rho_length. Recommend pre-registering a minimum stratum n (observed n ranges 9..75) and family-blocked rather than trajectory-level permutation for the observed statistic before relying on per-stratum rho gates.",
+    "Whether f*_latency_ms becomes identifiable on a WAN-like substrate (RTT and transfer time non-negligible vs 304 body suppression); until then all time-domain amortization claims stay open.",
+    "Mapping of bytes-saved to time/money-saved outside localhost; the decisive economics number (f* in a cost domain that matters to product) is not yet obtainable from this run alone.",
+    "Live-browser and policy-model arms remain UNKNOWN pending browsergym/playwright and a policy-model credential (OPENAI_API_KEY); the fail-closed gate will keep them UNKNOWN rather than surrogate-filled.",
+    "B-RAG-EMBED's frozen text-versus-validity tension (200 token + 150 ms cost model vs no-tokens/no-jitter rules) needs a DIRECTOR adjudication for any future experiment that compares RAG latency across arms.",
+    "Durability of the harness deliverable: src/spider/eval_harness.py, tests/test_eval_harness.py and run_dryrun.py are untracked working-tree files until committed by the authorized flow."
+  ]
+}

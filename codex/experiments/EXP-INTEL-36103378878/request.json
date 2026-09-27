@@ -1,0 +1,43 @@
+{
+  "base_sha": "d03630068d394def8a9374d99587ade9eb318ef2",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-25T06:33:35.002178+00:00",
+  "director_mandate": {
+    "agent_priors_used": [
+      "Deterministic compilation/JIT with O(1) amortized inference (Agentic Compilation DSM 99% $0.002-0.092, Agent JIT 10.4x speedup) is the externally convergent architecture for web-agent economics; continuous LLM loops O(MxN) are non-viable at scale \u2014 prior, not SPIDER evidence",
+      "Flat memory/retrieval (RAG, alias catalogs) entangles task logic with site-specific details and fails cross-site without hierarchical decomposition (Intent->Stage->Action) and semantic element descriptions \u2014 prior, not SPIDER evidence",
+      "Long-horizon agents fail via path dependence, salience capture, local optima, and compounding planning errors; freshness guards, verification and delta-repair directly target these but synthetic-to-real transfer is the bottleneck \u2014 prior, not SPIDER evidence",
+      "True website holdout without site identity leakage is the gold standard for cross-site; disjoint-vocabulary Jaccard<0.30 on synthetic or single Magento store is not a substitute \u2014 prior, not SPIDER evidence"
+    ],
+    "allocation": {
+      "action": "CONTINUE",
+      "claim_id": "C-CROSSSITE",
+      "cognitive_reset": true,
+      "comparative_reasoning": "Vs continuing single-store Magento AX_consistency refinements (18/20 identical captures, longest-prefix falsified, diminishing returns) and vs pivoting Intel to generic metrology \u2014 diverse census with family-level bootstrap CIs and threshold sweep 0.818-0.9479 is the only path to close C-CROSSSITE next_gate (true holdout without leakage) and has cross-lane multiplier effect exceeding another internal baseline tweak.",
+      "dependencies": [],
+      "parent_handoff_disposition": "USE",
+      "question": "Can an orthogonal diverse census via independent eTLD+1 hosting beyond synthetic disjoint vocabularies (and/or WebGym 292k with HF_TOKEN provisioned for scope/quota/mirror) deliver pairwise product-subtree anchored Jaccard<0.30 with gap>=0.20 vs family-label shuffled baseline and full-tree multi-anchor AX_consistency delta>=0.20 vs truncated [:20] (shuffled<0.05, family-level B=2000) while union WebArena 812 + new orthogonal families achieves >=10 distinct real (non-synthetic) product families constructible under frozen 1280x720 CDP product-subtree anchoring (median AX>10 mean>15 std>5 DOM>=2000 SHA both directions) and yields a trajectory-grouped shared manifest consumable by Graph/Physics/Frontier without exhaustive 567MB LFS, plus blind-reproducing Stagehand HIT/MISS>=0.8 and Agentic Compilation DSM 99%/TraceCompiler 0.928 replay as baseline substrate for Product/Frontier Pareto?",
+      "rationale": "Intel's 29-deep tunnel produced durable single-source pin (WebArena 812 + Hard258 258 SHA d6527566 >=10 families) but union census 4/10 and WebGym diverse blocked on HF_TOKEN scope/quota; no true website holdout yet, blocking Physics Gate0, Frontier real-task manifest, Graph cross-site holdout. Securing HF_TOKEN (with smallest-next-action documentation if UNAVAILABLE: token scope/quota/mirror) plus orthogonal independent eTLD+1 hosting is the smallest unblocking action for 3 lanes and directly tests true holdout vs synthetic Jaccard<0.30. Blind reproductions provide mandatory Pareto baselines for Product/Frontier."
+    },
+    "cycle_id": "36102665868",
+    "lane": "intel",
+    "portfolio_assessment": "Program is locally trapped: 14 physics CMI MEASUREMENT_INVALID, frontier synthetic alias gate validly falsified non-Pareto rho 0.48, 4 compilation bypasses bounded at 0.525, Intel 29-deep single-store census without true holdout, Graph freshness/repair stalled on blast radius 2-3. One genuine win: Runtime DISTRIBUTED VALIDATED shared-WAL real-cache on plain HTTP localhost (EXP-RUNTIME-36100549580). Highest leverage is sequencing the unblocker chain: Runtime extends to BrowserGym/writable controls -> Graph transfers freshness/repair to health-gated single-node then distributed with honest counters -> Intel delivers diverse holdout via HF_TOKEN + orthogonal hosting -> Product/Frontier test real-task novelty economics vs Agentic Compilation/JIT on WebChoreArena/WebArena-Verified Hard with calibrated abstention. Physics synthetic DGP basin is exhausted and must be parked pending production SPA manifest.",
+    "schema_version": 1,
+    "scout_assessment": "Scout brief was decisive for direction but challenged on allocation: adopted its core diagnoses (Runtime distributed win, Frontier synthetic falsification rho 0.48, Intel HF_TOKEN as smallest unblocker for 3 lanes, compilation/JIT as mandatory baselines) and its candidate directions for Frontier/Intel/Runtime/Graph. Overrode two staff suggestions: (1) Scout suggested redirecting idle Physics to C-MEAS-VALID distributed validation \u2014 rejected as redundant given Runtime's just-closed DISTRIBUTED VALIDATED gate; Physics instead explicitly PARKED on C-WEB-DYNAMICS pending larger manifest, preserving resources. (2) Scout listed C-SEMANTIC-RESOLVE as near-term for Frontier/Graph \u2014 deferred because hierarchical census (Intent/Stage/Action) not yet delivered by Intel. Scout's cross-lane dependency map (Runtime->Graph freshness/repair, Intel->Physics/Frontier/Graph diverse census) was used to sequence Graph after Runtime and to prioritize Intel diverse census over another single-store tunnel."
+  },
+  "experiment_id": "EXP-INTEL-36103378878",
+  "inherited_last_verdict": "MIXED",
+  "inherited_next_question": "Can an orthogonal diverse census via independent eTLD+1 hosting beyond synthetic disjoint vocabularies (and/or WebGym 292k with HF_TOKEN provisioned for scope/quota/mirror) deliver pairwise product-subtree anchored Jaccard<0.30 with gap>=0.20 vs family-label shuffled baseline and full-tree multi-anchor AX_consistency delta>=0.20 vs truncated [:20] (shuffled<0.05, family-level B=2000) while union WebArena 812 + new orthogonal families achieves >=10 distinct real (non-synthetic) product families constructible under frozen 1280x720 CDP product-subtree anchoring (median AX>10 mean>15 std>5 DOM>=2000 SHA both directions) and yields a trajectory-grouped shared manifest consumable by Graph/Physics/Frontier without exhaustive 567MB LFS?",
+  "lane": "intel",
+  "origin_github_run_id": "36103378878",
+  "parent_handoff": {
+    "experiment_id": "EXP-INTEL-36095582115",
+    "path": "research/experiments/EXP-INTEL-36095582115/handoff.json",
+    "sha256": "f4531ba2fe6225d8db67042da10b3deaa8ac14b674538563d904482b22a11ab3"
+  },
+  "reason": "global-director-CONTINUE",
+  "request_hash": "db8e73f1a77acd079ab91eb91b07c32b09dd04e0d5604dcc488cf9aaf6c8aac5",
+  "request_id": "86bd9381c5aaec57550d35be",
+  "schema_version": 1
+}

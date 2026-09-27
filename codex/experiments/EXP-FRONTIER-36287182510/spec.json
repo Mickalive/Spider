@@ -1,0 +1,76 @@
+{
+  "experiment_id": "EXP-FRONTIER-36287182510",
+  "lane": "frontier",
+  "claim_ids": ["C-RESIDUAL-NOVELTY"],
+  "question": "Holding the residual's three-class decomposition fixed (sigma_1=merely-novel, sigma_2=epistemically-blocked, sigma_3=observation-absent) and the novelty grid fixed {0.00, 0.25, 0.50, 0.75, 1.00}, does an identified WITHIN-EPISODE scratchpad arm -- propagating only values it read from its own earlier response bodies, inducing no parameters, compiling nothing across episodes, retaining nothing between episodes -- close the observation-absent class (sigma_3), and does a cross-episode compiled arm whose cache key includes the induced binding close what remains, so that the minimum persistent state required to close the residual is quantified rather than asserted, with span-level action correctness against the shared declared plan action as the primary endpoint?",
+  "hypothesis": "The observation-absent class (sigma_3 = 0.1000) is closed by within-episode value propagation alone (no cross-episode compilation needed), while the epistemically-blocked class (sigma_2 = 0.2228 pooled) requires cross-episode compilation whose cache key binds the propagated value. The within-episode scratchpad arm will achieve span-level action correctness on class-(iii) spans that matches or approaches the ratchet's 0.9833 but at lower amortized cost (no compile/machinery units). The cross-episode compiled arm with binding-key in its cache key will close the residual at or below the parent's 38.6 threshold. Persistent cross-episode inheritance is therefore not necessary; a scoped within-episode scratchpad suffices for the observation-absent share, and the minimum persistent state is a cache keyed on (observable state + induced binding).",
+  "falsifier": "If the within-episode scratchpad arm reaches the ratchet's 0.9833 span-level action correctness at or below its amortized cost on the declared novelty grid, then persistent cross-episode inherited parameterization is not necessary to close the residual. Conversely, if neither the scratchpad nor the cross-episode compiled arm with binding key closes the residual at or below the 38.6 threshold, the minimum persistent state remains unidentified and the architecture commitment stands.",
+  "baselines": {
+    "B-COLD-EXPLORATION": "Cold exploration with model oracle every span. Cost: 72.0 units/episode (parent measured). Span-level correctness: 1.0 by construction (oracle is perfect). No memory, no compilation.",
+    "B-NO-MEMORY-DETERMINISTIC": "Deopt ratchet (parent reference). Compiles spans after 2 witnesses on (world_store_snapshot, last_request_method, last_request_path). Cost: 38.6 units/episode (parent three-term ledger). Span-level correctness: 0.9833 (80 false compiles on class-(iii) spans). Cache key excludes capability handle.",
+    "B-NO-MEMORY-CONDITIONED-WIDE": "Goal-conditioned no-memory arm (parent treatment). Pure function of (observable_state_sig, goal_prefix_wide). Cost: 48.0 units/episode (parent three-term ledger). Span-level correctness: 0.8500 all-occurrences, 0.9189-1.0000 deterministic. Cannot supply capability handle because it never appears in conditioning context.",
+    "B-NO-MEMORY-CONDITIONED-NARROW": "Goal-conditioned narrow prefix (role+key only). Declared sensitivity. Cost: ~48.0 units/episode. Span-level correctness: 0.5667 (parent measured)."
+  },
+  "positive_control": {
+    "id": "PC-PLANTED-DISAMBIGUATION",
+    "description": "200 planted spans where the correct action is goal-distinct but observation-identical (create_resource from empty store with different resource identities). The within-episode scratchpad and cross-episode compiled arm must close 200/200. The ratchet compiles 0/200 because the state key is identical. This validates that the scratchpad's value propagation disambiguates the exact failure mode the parent PC measured.",
+    "expected": "scratchpad_closure = 200/200, compiled_closure = 200/200, ratchet_closure = 0/200"
+  },
+  "null_control": {
+    "id": "NC-UNIQUE-STATES",
+    "description": "Episodes where every span carries a world-store uniqueness nonce (per prereg.md 13, nonce in the world store snapshot, not request path). Under the authoritative goal-aware class-(ii) rule, sigma_2 must be 0. The scratchpad and compiled arms must not introduce spurious class-(ii) labels on truly unique states.",
+    "expected": "sigma_2 == 0 under goal-aware rule; scratchpad and compiled arms produce no false class-(ii) on unique states"
+  },
+  "measurement_validity": {
+    "substrate": "Python stdlib ThreadingHTTPServer on 127.0.0.1 with disable_nagle_algorithm=True. Same verified substrate as parent (35600 requests, 22.9s, determinism_check 800 identical round trips). MODIFICATION: capability handle returned in response BODY (not only header) for class-(iii) spans, so the handle is an observable channel. No browser, docker, model key, or network.",
+    "span_definition": "Frozen 6-tuple: (method, path, normalized_headers, normalized_body, response_code, response_body_hash). Normalized headers exclude volatile transport headers (Date, Server, Host, Content-Length, Connection, User-Agent, Accept-Encoding). Body is canonical JSON.",
+    "classification_protocol": "Prereg.md section 8 three-way protocol, in order: (1) class (iii) -- correct action depends on binding key absent from observable state AND goal prefix; (2) class (ii) -- observable state key recurred with different correct action (goal-aware rule: state key + goal intent); (3) class (i) -- everything else. Mutually exclusive and exhaustive. The authoritative class-(ii) rule is the goal-aware reading from parent prereg.md 7.3/10.1, not the literal step-2 rule.",
+    "novelty_grid": [0.0, 0.25, 0.5, 0.75, 1.0],
+    "task_generator": {
+      "base": "research/frontier/taskplan.py (unmodified parent generator, sha256 8875a05b54761f96a92cea8d3ec43bd6886347b5e04ef81d594d65d53f910816)",
+      "class_iii_fraction": 0.10,
+      "class_iii_mechanism": "Planted work items (3 of every 10) mint a capability handle on create_resource. The handle is returned in the RESPONSE BODY (field 'capability_handle') as well as header. The read_resource and list_resources steps of planted work items require the handle as query parameter (?t=<handle>, ?view=<handle>). The handle is a deterministic function of (MINT_SALT, episode_counter). It is NOT a function of the resource store, request path, resource identity, or plan. The only channel carrying it is the mint response body.",
+      "goal_prefix_wide": "intent, step, work_item, key, body, novel, token_required (handle value NEVER included)",
+      "goal_prefix_narrow": "intent, key only",
+      "episodes_per_rate_per_arm": 50,
+      "spans_per_episode": 24
+    },
+    "arms": {
+      "WITHIN_EPISODE_SCRATCHPAD": "Propagates only values read from its own earlier response bodies within the current episode. Induces no parameters. Compiles nothing across episodes. Retains nothing between episodes. Decision is a pure function of (observable_state_sig, goal_prefix, scratchpad_values). Cost: 1 model unit per span (oracle call for non-scratchpad spans), 1 execution unit per span. No compile, no machinery units.",
+      "CROSS_EPISODE_COMPILED_BINDING": "Cross-episode compiled replay cache whose key is (observable_state_sig, induced_binding_key). Compiles a span after 2 witnesses with the same (state_sig, binding_key) -> action mapping. Retains compiled spans across episodes. On cache hit, replays the bound action (including the binding key). Cost: 1 compile unit per unique (state_sig, binding_key), 1 machinery unit per span served from cache (resolve+bind+verify), 1 execution unit per span. No model calls for compiled spans.",
+      "B-NO-MEMORY-DETERMINISTIC": "Parent reference arm, unmodified. Cache key: (world_store_snapshot, last_request_method, last_request_path). No binding key.",
+      "B-NO-MEMORY-CONDITIONED-WIDE": "Parent treatment arm, unmodified. Pure function of (observable_state_sig, goal_prefix_wide). No scratchpad, no compilation.",
+      "B-COLD-EXPLORATION": "Parent cold arm, unmodified. Oracle every span."
+    },
+    "primary_metrics": [
+      "span_level_action_correctness: fraction of span occurrences where the arm's emitted (method, path, body) exactly matches the declared plan action bound at execution time (shared ground truth, identical for all arms)",
+      "class_iii_closure_rate: fraction of class-(iii) span occurrences closed correctly by each arm",
+      "amortized_cost_units_per_episode: (compile + machinery + model + execution) / episodes on the parent's three-term ledger basis",
+      "headroom_closed: (sigma_2 + sigma_3) - residual_after_arm, per novelty rate"
+    ],
+    "primary_endpoint": "span_level_action_correctness (NOT goal-state success, which was 1.000 for all arms including one wrong on 43.3% of spans)"
+  },
+  "decision_rule": {
+    "cost_basis": "Parent's three-term compile + model + execution ledger (compile=1 per unique span, model=1 per oracle call, execution=1 per span). Machinery=1 per span for arms that perform cross-episode resolution (compiled arm). Scratchpad has machinery=0. This is the basis the 38.6 threshold was derived on. Declared identically in this spec and prereg before freeze.",
+    "class_ii_rule": "Goal-aware: a state key is class (ii) if it recurs with a different correct action FOR THE SAME GOAL INTENT. The literal step-2 rule (any different action) is rejected as it conflates goal-distinct spans with true epistemic blocking.",
+    "clause_1_label": "RESIDUAL_NOT_ZERO (replaces parent's contradictory FALSIFIES_INHERITANCE_NICHE / 'inheritance niche remains' conflict). If sigma_2 CI95 upper < 0.01 at all five novelty rates -> RESIDUAL_NOT_ZERO triggers -> INCONCLUSIVE. If sigma_2 CI95 upper >= 0.01 at any rate -> residual is not zero -> clause 1 does not fire.",
+    "clause_2": "Treatment arm (within-episode scratchpad) must achieve: (a) span_level_action_correctness >= 0.9833 (ratchet's correctness) AND (b) amortized_cost <= 38.6 (parent threshold) on the three-term ledger. If both hold -> SCRATCHPAD_SUFFICES (persistent inheritance not necessary). If only (a) holds -> SCRATCHPAD_CORRECT_BUT_COSTLY. If neither holds -> clause 2 does not fire.",
+    "clause_3": "Cross-episode compiled arm with binding key must achieve: (a) span_level_action_correctness >= 0.9833 AND (b) amortized_cost <= 38.6. If both hold -> BINDING_KEY_COMPILATION_SUFFICES. If only (a) holds -> BINDING_COMPILATION_CORRECT_BUT_COSTLY.",
+    "outcome_mapping": {
+      "SCRATCHPAD_SUFFICES": "Within-episode propagation alone closes the residual; persistent cross-episode inheritance is not necessary.",
+      "SCRATCHPAD_CORRECT_BUT_COSTLY": "Scratchpad achieves correctness but exceeds cost threshold; persistent inheritance may still have economic niche.",
+      "BINDING_KEY_COMPILATION_SUFFICES": "Cross-episode compilation with binding key in cache key closes residual at threshold; minimum persistent state is (state + binding).",
+      "BINDING_COMPILATION_CORRECT_BUT_COSTLY": "Binding-key compilation achieves correctness but exceeds cost threshold.",
+      "NEITHER_TRIGGERED": "INCONCLUSIVE -- no falsifier fired, residual remains open, minimum persistent state unidentified."
+    }
+  },
+  "product_consequence_positive": "If SCRATCHPAD_SUFFICES or BINDING_KEY_COMPILATION_SUFFICES: SPIDER's central architectural commitment (persistent cross-episode inherited parameterization) is not necessary for the observation-absent class, and the minimum persistent state is quantified as a cache keyed on (observable state + induced binding). This could narrow or drop persistent cross-episode inheritance for a measurable share of work. C-RESIDUAL-NOVELTY advances toward VALIDATED with a bounded ceiling (this plan family, this substrate). Product scope: a within-episode scratchpad mechanism could replace persistent inheritance for class-(iii) spans.",
+  "product_consequence_negative": "If NEITHER_TRIGGERED: The minimum persistent state required to close the residual remains unidentified. The residual decomposition (0.3228 pooled headroom) stands as an upper bound. Persistent cross-episode inheritance remains the only characterized mechanism for the epistemically-blocked class. C-RESIDUAL-NOVELTY remains HYPOTHESIS/EXPERIMENTAL. No product scope change.",
+  "estimated_cost": {
+    "substrate_requests": 35600,
+    "wall_clock_seconds": 25,
+    "model_calls": 0,
+    "compute": "stdlib HTTP only, single machine"
+  },
+  "expected_information_gain": "This experiment changes the level of description from conditioning-vs-inheritance to MEMORY-SCOPE (none / within-episode / cross-episode with binding key). It is the only experiment in the program whose outcome can license narrowing or dropping the persistent cross-episode inheritance architecture. The asymmetric payoff justifies the cycle: a positive result changes the architectural commitment; a negative result quantifies the minimum persistent state rather than leaving it asserted."
+}

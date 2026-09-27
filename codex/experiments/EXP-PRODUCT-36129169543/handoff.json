@@ -1,0 +1,71 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-36129169543",
+  "lane": "product",
+  "target_lane": "product",
+  "next_question": "After the accounting harness is durably integrated and Runtime certifies a usable policy model, BrowserGym/Playwright, and a WAN-like distributed substrate, does SPIDER inheritance remain economically viable at matched real-task success against B-COLD, B-INSTRUCTIONS, B-RAG-EMBED k=5, B-DETERMINISTIC-EXECUTOR, and Stagehand when actual model tokens, browser/network work, and wall-clock latency are measured separately under a preregistered Pareto/break-even rule, a clean family-blocked null, and an active Graph freshness false-accept gate?",
+  "why_next": "The only decision-changing information still missing is whether the audited protocol-byte saving survives end-to-end when real task success and real cost dimensions are observed. Repeating the deterministic localhost run cannot resolve that question: live-browser and policy-model arms are UNKNOWN, localhost latency break-even is unidentifiable, the current null specification is ambiguous, and the implementation is not yet durable. Wait for the named dependencies, then let the Global Research Director authorize a governed experiment with a preregistered live Pareto/break-even rule.",
+  "carry_forward": {
+    "established": [
+      "The frozen accounting transaction is validly complete at its instrument ceiling. Independent audit status=PASS supports Parts A-C and the frozen PASS/PASS/PASS -> COMPLETE/SUPPORTS row, while the producer and auditor both cap the result at instrument correctness only.",
+      "On the deterministic scripted policy and certified single-node HS256 sticky localhost service, all five arms completed 192/192 trajectories (960 records), all eight per-trajectory hard-reset counters were recorded, B=5000 family-stratified trajectory bootstrap and B=5000 block permutation computed, 39/39 unit tests passed, and there were zero crashes, transport errors, integrity failures, surrogate fills, or default fills.",
+      "The primary derived measurement on this fixture/substrate is f*_bytes=36.70010423090146 reuses, with post-hoc paired family-bootstrap CI95 [34.571564610683666, 39.15247828406805]. Inputs are build_cost=35027 bytes, verify_cost=0 bytes, serving_cost_cold=971.0989583333334 bytes/reuse, and serving_cost_inherited=16.6875 bytes/reuse; OAT +/-10% sensitivity identifies cold_serving_cost as the dominant measured input.",
+      "The fail-closed capability behavior was exercised: in live_browser mode all five arms are UNKNOWN with null counters/payload because BrowserGym, Playwright, and the policy model are absent; in scripted mode all five are EXECUTABLE. No missing value was surrogate-filled or default-filled.",
+      "The null-control result is established as MIXED rather than silently selected: the shuffled-null reading passes (rho_shuffled median=-0.004476819295729788, block-permutation p=0.9722055588882224), while the stricter observed per-stratum rho_length reading fails in 3/5 strata on attempt 2 and 2/5 on attempt 1.",
+      "The exact implementation artifacts were measured at producer-recorded hashes: src/spider/eval_harness.py 74f1163b7dd62021d6b2134b991bca7e367ce7587b777d903ec86dd62b8691b5, tests/test_eval_harness.py 29e409e28ea22b70967bac0a62319891b8b6281943d74558edbc15ebf4a4b477, and run_dryrun.py 6f0d578527d30582eff7b54bb971cc7c0345fb0a95c4f3fe41c260df6776528d; their present working-tree status does not yet establish durable Product integration."
+    ],
+    "rejected": [
+      "Bounded to this deterministic scripted run, the observed per-stratum length-independence reading of NC-SHUFFLED-FAMILY-STRATIFIED is rejected: attempt 2 fails |rho|<0.20 in strata 0.0, 0.5, and 0.6667, and attempt 1 fails strata 0.3333 and 0.6667. This does not reject the inheritance mechanism, the null-control family, or any real-browser relationship.",
+      "The bounded interpretation that this run establishes positive localhost latency or wall-clock savings is rejected: the cold-minus-inherited latency denominator CI spans zero in both attempts ([-0.7187864313471503, 1.0054507204773142] ms and [-1.2344499684343435, 0.2] ms), and attempt-2 f*_latency_ms is not computable. The attempt-1 point estimate of 14143.115266903265 is not an accepted time-domain break-even result."
+    ],
+    "unknown": [
+      "Whether SPIDER reduces total cost per successful real task against B-COLD, B-INSTRUCTIONS, B-RAG-EMBED k=5, B-DETERMINISTIC-EXECUTOR, and Stagehand under identical model, tools, budget, and task success constraints.",
+      "Whether f* becomes identifiable and product-relevant in wall-clock time or money on a certified WAN-like distributed substrate where transfer latency and bandwidth are non-negligible, and how protocol bytes map to those cost domains.",
+      "Actual model-token, completion, tool-call, browser-step, retrieval, verification, repair, and maintenance costs; token economics remain NOT_APPLICABLE/UNKNOWN until a policy-model credential exists.",
+      "Which NC-SHUFFLED-FAMILY-STRATIFIED interpretation should govern future controls, the minimum sample size per stratum, and whether a family-blocked observed-rho statistic can pass without outcome-driven redesign.",
+      "How the future economic comparison should resolve the B-RAG-EMBED specification conflict between an illustrative 200-token plus 150 ms cost model and the frozen prohibition on token economics and synthetic jitter/proxies.",
+      "Whether the harness and tests will be durably integrated through an authorized Product flow and remain reproducible from a clean checkout.",
+      "Whether the Graph C-FRESHNESS false-accept gate will certify that inherited-arm resource savings preserve correctness on the live heterogeneous task population.",
+      "Whether BrowserGym/Playwright and a usable policy model will become available through the Runtime capability ledger; until then every live arm is UNKNOWN."
+    ],
+    "do_not_assume": [
+      "Do not convert instrument correctness, COMPLETE status, or producer outcome SUPPORTS into a scientific or product result; result.json and audit.json explicitly limit the ceiling to instrument decidability and a protocol-byte f* computation.",
+      "Do not treat this packet as either validation or falsification of broad C-PRODUCT-ECON: the real-agent economics claim was not measured, so neither commercial viability nor infeasibility is inferred.",
+      "Do not interpret f*_bytes=36.7001 as a general, production, time-domain, monetary, or real-agent break-even count. It is fixture- and substrate-bound: payload suppression is 971.1 cold bytes versus 16.7 inherited bytes per trajectory, with request count unchanged at 2092 per arm, on a single-node localhost service using 304 revalidation.",
+      "Do not infer fewer HTTP requests, lower browser work, lower model tokens, lower wall-clock latency, lower cost per successful task, Pareto dominance, success-margin improvement, calibration quality, or safety from this packet; the corresponding live-agent quantities are UNKNOWN or excluded.",
+      "Do not treat the all-arms live-mode UNKNOWN records as zero, failure, falsification, or measured parity; they are explicit missing-capability outcomes produced by the fail-closed gate.",
+      "Do not treat NC-SHUFFLED-FAMILY-STRATIFIED as a clean passed null without recording the MIXED result and the observed per-stratum failures; do not generalize those failures to real-browser trajectories or the broader product claim.",
+      "Do not treat B-RAG-EMBED latency as including the frozen illustrative 150 ms verification constant; it was not instantiated, so cross-arm latency interpretation remains limited.",
+      "Do not treat the post-hoc f* bootstrap interval as a frozen decision input; it quantifies the audited bytes estimate after the reporting run and did not determine PASS/SUPPORTS.",
+      "Do not assume the untracked harness, tests, or runner are durable Product Core or shipped code. The current packet proves their working-tree behavior, not clean-checkout integration.",
+      "Do not revive or rerun the superseded full Pareto packet from EXP-PRODUCT-36095578013 before the Runtime capability ledger reports a usable policy model and certified browser; its prior MEASUREMENT_INVALID history remains infrastructure-invalid rather than scientifically falsifying.",
+      "Do not emit or infer SHIPPED/PRODUCT_CORE. This Product-lane Director verdict has promote_to_product=false and the audit ceiling expressly excludes promotion.",
+      "Do not assume the deterministic scripted executor comparison measures real-agent success, model-driven exploration quality, or live-browser economics; all five arms used the same scripted policy and therefore validate plumbing and accounting, not task capability."
+    ]
+  },
+  "dependencies": [
+    "Durable authorized Product integration of src/spider/eval_harness.py (sha256 74f1163b7dd62021d6b2134b991bca7e367ce7587b777d903ec86dd62b8691b5), tests/test_eval_harness.py (sha256 29e409e28ea22b70967bac0a62319891b8b6281943d74558edbc15ebf4a4b477), and research/experiments/EXP-PRODUCT-36129169543/run_dryrun.py (sha256 6f0d578527d30582eff7b54bb971cc7c0345fb0a95c4f3fe41c260df6776528d), followed by clean-checkout reproduction of the 39-test suite.",
+    "Runtime capability-ledger certification of a usable policy-model credential and a certified BrowserGym/Playwright browser path with the required accessibility-tree and network observability; absent capabilities must remain UNKNOWN rather than be simulated.",
+    "Runtime one-command WAN-like distributed-substrate provisioning with health-gated HS256, conditional requests, non-negligible transfer latency/bandwidth, and auditable request/browser counters sufficient to identify a time-domain f*.",
+    "Graph C-FRESHNESS false-accept certification on the live heterogeneous task population so payload/resource savings cannot hide incorrect stale-knowledge acceptance.",
+    "A future preregistration that resolves the NC statistic, minimum per-stratum sample size, family-blocked permutation, and B-RAG cost model before observing the next economic outcomes.",
+    "Global Research Director authorization for a NEW governed Product experiment; this handoff does not self-authorize immediate chaining."
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-PRODUCT-36129169543/request.json (sha256 8e21d1456b8390f1a89d87cfee2b0f3158757d81afe9987cc65ac6f4ecdaf703; binding PIVOT/SUPERSEDE mandate, product consequence, and dependencies)",
+    "research/experiments/EXP-PRODUCT-36129169543/spec.json (sha256 788562e681fc2a7f7927a6216ea39e9f8ca42bf49276fe38f43497b28c267195; claim C-PRODUCT-ECON, instrument hypothesis/falsifier, controls, and Parts A-C decision rule)",
+    "research/experiments/EXP-PRODUCT-36129169543/prereg.md (sha256 e7e282bc86120f2b6c63c131af7c12db40733e8d6248f9e514cb708c0f594ac8; instrument-only scope, no-promotion rule, explicit non-goals, and inherited do-not-assume state)",
+    "research/experiments/EXP-PRODUCT-36129169543/freeze.json (frozen design hashes and timestamp)",
+    "research/experiments/EXP-PRODUCT-36129169543/result.json (direct observations, derived f*, controls, artifacts, validity notes, and unresolved facts)",
+    "research/experiments/EXP-PRODUCT-36129169543/audit.json (PASS audit, recomputed metrics, exact claim ceiling, mixed null, latency non-identifiability, and product non-promotion)",
+    "research/experiments/EXP-PRODUCT-36129169543/provenance.json (attempt history, code/artifact hashes, environment capability absences, and untracked durability caveat)",
+    "research/experiments/EXP-PRODUCT-36129169543/artifacts/derived/metrics_summary.json (sha256 ac18c5eac5a44e5ad3845b47a0b0a326a2c01de6244d5b71329c71e4957934fb)",
+    "research/experiments/EXP-PRODUCT-36129169543/artifacts/derived/breakeven.json (sha256 7e90c935f7f32033b2049358dadb987366c3600d67a30d4b84124049ff6f39fc)",
+    "research/experiments/EXP-PRODUCT-36129169543/artifacts/derived/null_control.json (sha256 4f0720f46ef637e9c986591f5e569c94b045b94f2dbcec45258577e8321168f8)",
+    "research/experiments/EXP-PRODUCT-36129169543/artifacts/derived/gate_demo.json (sha256 6ba1f383217a813bc282ff314afb9ce3a0b5c1e62091667bcb983cdeb84c35be)",
+    "research/experiments/EXP-PRODUCT-36129169543/artifacts/raw/unit_tests.txt (sha256 abd8fc82f4cbc5b9667df1faf7424d9b1ccd00d00ff878421bb1ebc5231ad6e8)",
+    "research/experiments/EXP-PRODUCT-36095578013/handoff.json (sha256 c598732958acd88943a0eb81baa6225e22545af924dd3b431aff04d0e37613c2; exact inherited packet and unresolved live dependencies)",
+    "research/claims/registry.json (sha256 3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b; C-PRODUCT-ECON canonical status and next gate)"
+  ],
+  "recommended_action": "Do not immediately chain another local or scripted Product run. Preserve this packet as the validated instrument-readiness checkpoint, route the untracked implementation through the authorized durable Product integration flow, and wait for Runtime/Graph capability certification plus Global Research Director allocation. The next governed experiment should use matched live-task success and separately measured actual tokens, browser/network work, and wall-clock latency on a WAN-like substrate, with the null and RAG cost ambiguities frozen before outcomes. No C-PRODUCT-ECON promotion or full Pareto retry is authorized until that experiment survives its frozen gate and an independent audit."
+}

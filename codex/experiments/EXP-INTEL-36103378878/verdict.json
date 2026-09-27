@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-36103378878",
+  "lane": "intel",
+  "decision": "MEASUREMENT_INVALID",
+  "claim_updates": [
+    {
+      "claim_id": "C-CROSSSITE",
+      "status": "MEASUREMENT_INVALID",
+      "reason": "The frozen preregistration section 8(A) gives mandatory validity gates precedence over scientific outcomes. Those gates are not met by the exact packet evidence: artifacts/raw/ax_captures.jsonl contains 11 records total, comprising ten localhost synthetic pages and one magento_136 record, while the frozen MV4/MV5 contract requires 12 fresh canonical captures across families 136/145/196/222 plus stability evidence; artifacts/derived/canonical_ax_results.json likewise contains only one record. The required twice-executed deterministic family samples are not present in any artifact, and artifacts/derived/shared_webgym_diverse_manifest.json records only the seed rather than S1/S2 results per census, omits the B=2000 CI and threshold-sweep table, and omits 'timestamp' from its expanded-stripping list. The independent audit is REVISE with producer_claim_supported=false, so it cannot authorize VALIDATED status. The audit and artifacts still support a bounded implementation-level finding: tldextract yields one registered_domain ('local.') rather than ten, orthogonal DOM text is 67-107, only one recorded real family meets DOM>=2000, Jaccard gap is 0.0202, and threshold-sweep delta is 0.0. Those facts reject the local relabeling implementation but do not decide whether genuinely independent external hosting or an accessible WebGym census would pass."
+    }
+  ],
+  "product_action": "none",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "Can a newly provisioned, source-verified census using either an accessible WebGym manifest/mirror or at least 10 genuinely independently registered, production-complex external commerce sites meet the frozen C-CROSSSITE gates with tldextract-valid distinct registered domains, corrected family-level B=2000 statistics, product-subtree Jaccard gap>=0.20, threshold-sweep monotonic delta>=0.02, family-grouped full-tree delta>=0.20, >=10 real constructible families, and the required fresh 12-capture canonical stability evidence?",
+  "reason": "MEASUREMENT_INVALID under frozen preregistration section 8(A), not a global falsification of C-CROSSSITE. The packet lacks mandatory MV4/MV5 repeated canonical evidence and mandatory MV7/MV8 per-census sampling/statistics/manifest content. The exact raw and derived evidence also shows that the implemented ten-site branch is not independent eTLD+1 hosting: every host is under registered_domain 'local.', the pages are 67-107 DOM-text characters, the Jaccard gap is only 0.0202, and only magento_136 is a recorded real constructible family. WebGym is unavailable after two 404 attempts and must not be treated as scientifically falsified. The Docker digest and one canonical capture are operational evidence only; they do not satisfy the frozen stability, cross-source, or family-level gates. No Product-lane promotion is authorized, and immediate chaining is inappropriate until a new source or substrate is provisioned.",
+  "evidence_refs": [
+    "research/experiments/EXP-INTEL-36103378878/request.json:director_mandate.allocation.claim_id=C-CROSSSITE and parent_handoff",
+    "research/experiments/EXP-INTEL-36103378878/spec.json:sha256=dd5f0be8a227065134282172f1fd58fbc0281be1d2413eea02745d75fecc3ebd decision_rule and measurement_validity MV4/MV5/MV7/MV8",
+    "research/experiments/EXP-INTEL-36103378878/prereg.md:sha256=4fa78552b70b14447d8dd3789a6a3faf3c6e8e5cd20e05ea19dea64fe1aaaa8c section 8(A)-(C), lines 172-180",
+    "research/experiments/EXP-INTEL-36103378878/freeze.json:frozen request/spec/prereg hashes",
+    "research/experiments/EXP-INTEL-36103378878/result.json:status=COMPLETE outcome=MIXED metrics and controls; producer interpretation corrected by audit",
+    "research/experiments/EXP-INTEL-36103378878/audit.json:status=REVISE producer_claim_supported=false required_fixes claim_ceiling and recomputed_metrics",
+    "research/experiments/EXP-INTEL-36103378878/provenance.json:docker_digest_verified, source attempt outcomes, and artifact hashes",
+    "research/experiments/EXP-INTEL-36103378878/artifacts/raw/ax_captures.jsonl:sha256=9dceef4b02e45d6dcb07f9ef989ec4d50c3542198e6d58496d5a886593760f78 lines 1-11 only one canonical record",
+    "research/experiments/EXP-INTEL-36103378878/artifacts/derived/canonical_ax_results.json:sha256=eef3bfd9594a61e37c68812bd1ebbd817bdc814ab7e1e7fd7f2317429a504d10 one magento_136 record",
+    "research/experiments/EXP-INTEL-36103378878/artifacts/derived/orthogonal_hosting_census.json:sha256=2730aa31fa4119ea719a45d2b3ff28c4651b81ab5c86863125f97428705dd8f7 registered_domain, DOM, Jaccard, threshold, and CI fields",
+    "research/experiments/EXP-INTEL-36103378878/artifacts/derived/jaccard_matrix.json:sha256=8c624bff2b4ebda1072cb9d9544635603dc448ad2a669877a2880371283fbae5 pairwise values",
+    "research/experiments/EXP-INTEL-36103378878/artifacts/derived/shared_webgym_diverse_manifest.json:sha256=b5dfc91ae4aa4def73e2fb6dfd73ccd2c440faf3f0884adcefb9c7d5dee4632c missing per-census S1/S2, CI, and threshold-sweep content",
+    "research/experiments/EXP-INTEL-36103378878/artifacts/raw/hf_webgym_manifest_attempts.json:sha256=7be1e75ca915c335899347a9608edd9425a340196a0dc56b8eea63844a9f61f9 two 404 attempts",
+    "research/experiments/EXP-INTEL-36103378878/artifacts/raw/github_cross_source_attempts.json:sha256=51802c9d05b9c8028cf6289eafc3fbc51c2a5049591c6ddfb4eb9ddcd2019383 two 404 attempts",
+    "research/experiments/EXP-INTEL-36103378878/artifacts/raw/docker_hub_api_attempts.json:sha256=e83e8dcdeed93536a10cb43ea8a20b31df35190e7ce2665873bde090e66c2cb1 two DNS failures",
+    "research/experiments/EXP-INTEL-36103378878/artifacts/raw/ghcr_browsergym_attempts.json:sha256=779c735eb1b591c56af78aca183c79b2835c65d84bd1c18cec9ef1f0def7e86d two 401 attempts",
+    "research/experiments/EXP-INTEL-36103378878/artifacts/raw/stagehand_attempts.json:sha256=110fb8b628006ae5d36805bfd39339a4e9ca3daaa90f3cbd76ee92e3b85ac022 exact-selector fallback",
+    "research/experiments/EXP-INTEL-36103378878/artifacts/raw/dsm_tracecompiler_attempts.json:sha256=8c50fc9928f000c00d162ac4970f6a25ba3c40181d4a10f145dbcfa3b233598b bounded replay summaries",
+    "research/experiments/EXP-INTEL-36095582115/handoff.json:sha256=f4531ba2fe6225d8db67042da10b3deaa8ac14b674538563d904482b22a11ab3 inherited four-family ceiling and scope boundaries",
+    "codex/claim_state.json:4936-4944 prior C-CROSSSITE status HYPOTHESIS from EXP-INTEL-36095582115"
+  ]
+}

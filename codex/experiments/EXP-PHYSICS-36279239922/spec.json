@@ -1,0 +1,108 @@
+{
+  "experiment_id": "EXP-PHYSICS-36279239922",
+  "lane": "physics",
+  "claim_ids": ["C-WEB-DYNAMICS", "C-MEAS-VALID"],
+  "question": "Can the physics apparatus return the correct verdict on constructed calibration banks whose ground truth is known by construction? Concretely: (a) a regime-independent bank matched in marginals must return p_bonf > 0.10 and |BC| < 0.05; (b) a bank where a regime is injected through a channel that is NOT a copy of the latent state must return p_bonf < 0.01, BC > 0.05, and gap >= 0.05 over the regime-independent null. Only if BOTH banks return the correct verdict is the instrument considered calibrated for any later Web-dynamics question.",
+  "hypothesis": "H1 (instrument calibration): The corrected apparatus — using a representation-dependent analytic null E[PMI] = sum_c p(c)[digamma(K*alpha) - digamma(N_c + K*alpha) + sum_i(digamma(n_i + alpha) - digamma(alpha))]/ln(2) with K = n_states_observed and alpha = 1/K per stratum, together with a non-negative entropy estimator (exact Dirichlet-Multinomial plug-in) whose two entropies share one state-space support — will produce opposite, correct verdicts on the two calibration banks: the regime-independent null bank returns p_bonf > 0.10 and |BC| < 0.05; the non-copy regime-injected positive bank returns p_bonf < 0.01, BC > 0.05, and gap >= 0.05. H0: At least one bank returns the wrong verdict (null bank p_bonf <= 0.10 or |BC| >= 0.05, or positive bank p_bonf >= 0.01 or BC <= 0.05 or gap < 0.05). In that case the C-WEB-DYNAMICS measurement paradigm is not instrumented and the thread is retired.",
+  "falsifier": "The regime-independent calibration bank (constructed to have zero regime-dependent structure by design, with matched marginals across regimes) returns p_bonf <= 0.10 or |BC| >= 0.05; OR the non-copy regime-injected calibration bank (constructed with a regime signal injected through a channel that is provably not a deterministic function of the latent state) returns p_bonf >= 0.01 or BC <= 0.05 or gap < 0.05. Either failure means the instrument cannot reliably distinguish signal from null on known-ground-truth banks, and no later Web-dynamics claim from this paradigm is interpretable.",
+  "baselines": {
+    "B-INDEPENDENT-REGIME-NULL": {
+      "description": "Regime-independent bank: next_state depends only on (cur_state, action); regime label is assigned independently of the transition kernel and the observable R is generated from cur_state + action only (no regime information). Marginal P(S_next|C) is identical across regimes by construction.",
+      "expected": "p_bonf > 0.10, |BC| < 0.05, BC ~ 0",
+      "identity": "B-INDEPENDENT-REGIME-NULL"
+    },
+    "B-IID-MARGINAL-NULL": {
+      "description": "IID resampled S_next from the marginal P(S_next) of the correlated bank, destroying all conditional structure. Standard i.i.d. null.",
+      "expected": "p_bonf > 0.10, |BC| < 0.05",
+      "identity": "B-IID-MARGINAL-NULL"
+    },
+    "B-HISTORY-MARKOV": {
+      "description": "Order-3 history-only baseline P(S_next | C, A) without DOM representation R. Measures how much predictive power is in history alone.",
+      "expected": "BC_history ~ 0, gap to primary > 0.05 if regime signal is beyond-history",
+      "identity": "B-HISTORY-MARKOV"
+    }
+  },
+  "positive_control": {
+    "description": "Non-copy regime-injected bank: next_state depends on (cur_state, action, regime) where regime is a latent variable. The observable R is generated from a channel that correlates with regime but is NOT a deterministic copy of the latent state index. Specifically: R = f(cur_state, action, regime) + noise, where the regime-dependence is through a stochastic mixing channel that preserves MI(R; regime) > 0.3 but MI(R; latent_state_index) is bounded away from 1.0.",
+    "expected": "p_bonf < 0.01, BC > 0.05, gap over B-INDEPENDENT-REGIME-NULL >= 0.05, MI(R; regime) > 0.3, MI(R; latent_state) < 0.9",
+    "identity": "CTRL_POS_NONCOPY_REGIME"
+  },
+  "null_control": {
+    "description": "Regime-independent bank matched in marginals: identical P(S_next|C,A) across regimes, identical P(R|C,A) across regimes, regime label is independent noise. This is the primary null control for the calibration gate.",
+    "expected": "p_bonf > 0.10, |BC| < 0.05",
+    "identity": "B-INDEPENDENT-REGIME-NULL"
+  },
+  "measurement_validity": [
+    "No browser, no CDP, no Playwright, no network calls — purely in-process synthetic banks with known generative structure",
+    "Representation-dependent analytic null: E[PMI] = sum_c p(c)[digamma(K*alpha) - digamma(N_c + K*alpha) + sum_i(digamma(n_i + alpha) - gammaln(alpha))]/ln(2) with K = n_states_observed (not fixed K_HIST=3), alpha = 1/K per stratum, computed via gammaln/polygamma without heuristic scaling, divisors, or clamping",
+    "Non-negative entropy estimator: exact Dirichlet-Multinomial plug-in for H(S_next|C) and H(S_next|C,R) with shared state-space support K = n_states_observed. The difference H(S_next|C) - H(S_next|C,R) is guaranteed >= 0 by construction (both entropies over same support with same alpha)",
+    "K = n_states_observed (count of unique S_next in the bank), not a fixed historical constant. Alpha = 1/K per stratum.",
+    "Permutation test: 1000 trajectory-grouped shuffles within each C stratum, seed 42, PYTHONHASHSEED=0. p_bonf = min(1.0, p_raw * n_effective_tests) with floor 0.001",
+    "TRAIN/TEST split: 70/30 by trajectory_id, all fitting (strata, vocabularies, K, alpha) on TRAIN only",
+    "Collinearity check: effective_n_tests = number of representation channels with pairwise BC correlation < 0.95; disclosed and used for Bonferroni",
+    "Analytic centering gate G0: |perm_mean - analytic_mean| < 0.03 AND |analytic_mean| < 0.1 for each primary R on BOTH calibration banks. If G0 fails on either bank, the experiment is MEASUREMENT_INVALID"
+  ],
+  "decision_rule": {
+    "gate_G0_analytic_centering": "|perm_mean - analytic_mean| < 0.03 and |analytic_mean| < 0.1 for each R on BOTH banks (REQUIRED for validity)",
+    "gate_G1_null_bank": "B-INDEPENDENT-REGIME-NULL: p_bonf > 0.10 AND |BC| < 0.05 (REQUIRED)",
+    "gate_G2_positive_bank": "CTRL_POS_NONCOPY_REGIME: p_bonf < 0.01 AND BC > 0.05 AND (BC_positive - BC_null) >= 0.05 (REQUIRED)",
+    "gate_G3_identifiability": "CTRL_POS_NONCOPY_REGIME: MI(R; regime) > 0.3 AND MI(R; latent_state_index) < 0.9 (confirms non-copy channel)",
+    "verdict": {
+      "CALIBRATED": "All gates G0, G1, G2, G3 PASS on both banks -> status=COMPLETE, outcome=SUPPORTS. Instrument is calibrated; a later packet may ask the non-Markovian relaxation-time question.",
+      "NOT_INSTRUMENTED": "Any gate fails on either bank -> status=MEASUREMENT_INVALID, outcome=NOT_APPLICABLE. C-WEB-DYNAMICS measurement paradigm is not instrumented; thread is retired per Director mandate. No further pointwise conditional-PMI sweeps on synthetic FSM facade."
+    }
+  },
+  "product_consequence_positive": "Instrument calibration established. The physics apparatus can reliably distinguish a known null from a known positive on constructed banks. This enables a subsequent experiment (requiring Runtime substrate) to test whether H(S_{t+k} | S_t, URL_t, regime-history) decays more slowly than a matched order-(k-1) Markov null for k >= 2 on a locally served SPA with server-side ground-truth transition log (non-Markovian / relaxation-time signature). C-WEB-DYNAMICS remains HYPOTHESIS but the measurement pathway is now valid.",
+  "product_consequence_negative": "Instrument calibration failed. The C-WEB-DYNAMICS measurement paradigm (pointwise conditional PMI on synthetic FSM facade with current estimator/analytic/null design) cannot return correct verdicts on known ground truth. The thread is RETIRED rather than repaired a ninth time. No further Physics cycles on this paradigm. C-WEB-DYNAMICS remains HYPOTHESIS in the registry but the predictive-accuracy/pointwise-PMI detection method is rejected as a valid instrument. Future Physics work on C-WEB-DYNAMICS must pursue orthogonal detection methods (effect factorization, barriers, timescales, geometry, multiscale dynamics, or other measurable mechanisms per registry next_gate).",
+  "estimated_cost": {
+    "compute_seconds": 30,
+    "model_calls": 0,
+    "browser_interactions": 0,
+    "network_requests": 0,
+    "storage_mb": 10
+  },
+  "expected_information_gain": "Binary, high-stakes instrument verdict. A PASS converts 80 invalid experiments into a validated instrument and unlocks the non-Markovian question. A FAIL honestly retires a paradigm that has consumed 80 experiments with zero valid positives, freeing capacity for orthogonal Physics programs. Either outcome is decisive and changes the program trajectory.",
+  "design_metadata": {
+    "director_mandate": "PIVOT on C-WEB-DYNAMICS with cognitive_reset=true",
+    "parent_handoff": "EXP-PHYSICS-36104718112",
+    "inherited_established": [
+      "G0 analytic is representation-invariant and bit-identical across all R (-3.0355 nats)",
+      "Primary estimator produces negative PMI (mismatched support Laplace entropies)",
+      "B-INDEPENDENT-NOISE-GENUINE fails (p=0.004 where ground truth is zero)",
+      "Four R channels are one label channel with four noise rates (0.20-0.22)",
+      "Observable is deterministic copy of latent state (sha256 of 'action {state} variant {v} regime {r}')",
+      "Capture path fabricates DOM/a11y in success branch (has_cdp=True asserted, CDP discarded)",
+      "No genuine CDP measurement has ever occurred in this code path"
+    ],
+    "inherited_rejected": [
+      "Any inference about C-WEB-DYNAMICS from previous packets",
+      "G0 exactness gate as implemented (normalized log marginal likelihood in nats, not E[PMI] in bits)",
+      "M_fallback_synthetic=0 / provenance CDP sentence as evidence of genuine capture",
+      "Positive control CTRL_POS_CORRELATED as sensitivity certificate (different kernel, different noise, negative PMI)",
+      "BC 0.0295-0.0875 with p=0.004 as detected beyond-memory effect",
+      "M_REL_SEP < 200 as evidence of null effect (denominator is invalid G0 std)",
+      "Audit's K_eff=16-cap finding as the defect (real defect: K=3 used for H(S_next|C) with 15 states)",
+      "That PARK condition fired (mandate conditioned PARK on correctly centered test; antecedent never occurred)"
+    ],
+    "inherited_unknown": [
+      "Whether any genuine-DOM Web-dynamics effect is measurable on intervention-valid substrate",
+      "Whether correctly implemented representation-dependent analytic + non-negative estimator returns correct verdicts on calibration banks",
+      "Why independent-noise bank yields p=0.004 while IID yields p=0.75-1.0",
+      "Whether regime can be injected through non-copy channel with MI(R;Z)>0.3 and non-degenerate |R|/N",
+      "Whether non-Markovian structure exists in real Web state sequences (H(S_{t+k}|S_t,URL_t,regime-history) decay)",
+      "Whether effect factorization is measurable"
+    ],
+    "inherited_do_not_assume": [
+      "C-WEB-DYNAMICS is falsified, closed, or experimentally unsupported (remains HYPOTHESIS)",
+      "p=0.004 indicates signal (identical p on null-by-construction bank)",
+      "Negative M_OBS_PMI is observational fact (estimator defect: mismatched support)",
+      "MI(R;Z)>0.3, H>0.2, |S_next|>=16, hist_intersection>0.3 are identifiability evidence (generator properties)",
+      "Four R are independent evidences (single label channel, four noise rates)",
+      "Gammaln/polygamma call sites constitute validation (they compute log marginal likelihood, not E[PMI])",
+      "Viewport/dom_bytes/a11y_bytes/provenance prove genuine capture (success branch fabricates)",
+      "M_REL_SEP against threshold 200 as null-effect argument (invalid denominator)",
+      "Audit's K_eff=16-cap fix (executed path used K_eff=15; real defect is K=3 for H(S_next|C))",
+      "Rerunning run_experiment.py unchanged or after restoring server reachability will help (fabrication is in success path)"
+    ]
+  }
+}

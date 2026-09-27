@@ -1,0 +1,77 @@
+{
+  "experiment_id": "EXP-RUNTIME-36129163700",
+  "github_run_id": "36129163700",
+  "github_run_note": "re-execution of the frozen packet after infrastructure failure of the prior attempt (failure.json: stage execute, exit 76, category EXECUTION_FAILURE); frozen inputs unchanged",
+  "claim_id": "C-MEAS-VALID",
+  "lane": "runtime",
+  "base_sha": "8bc01342a23fe7a24959d09d8e2556ba2966c7e8",
+  "head_sha": "ebb9db201c50b8473814b4404e78ec3a43c70fe2",
+  "request_hash": "241efb5bdaa2ad5fff8b595975074ab842956242cf1f246d4907212d44f2a3f8",
+  "spec_hash": "9a82acc3389bc9ef9f2989413d964d5e866117adb57f6234228cad45708dbf57",
+  "prereg_hash": "9f2ced098adc93c9870370f3fc0f8266c57e335bf6cdc72eacb832a2cfe56973",
+  "env": {
+    "python": "3.12.14 (main, Aug 13 2026, 02:47:42) [GCC 13.3.0]",
+    "flask": "3.1.3",
+    "pyjwt": "2.15.0",
+    "requests": "2.34.2",
+    "gunicorn": "23.0.0",
+    "nginx": "1.24.0",
+    "sqlite3": "3.45.1",
+    "playwright": "1.63.0"
+  },
+  "ports": {
+    "gunicorn_upstreams": [
+      "127.0.0.1:19860",
+      "127.0.0.1:19861"
+    ],
+    "nginx": 19851
+  },
+  "seed": 36129163700,
+  "db_path": "/tmp/single.db",
+  "wal_autocheckpoint": 0,
+  "hs256_secret_sha256": "3d581d20eeef92806f3626b62603fab637663d834cfb74f9c4a67439288b3ca1",
+  "hs256_secret_len": 122,
+  "code_paths": [
+    "research/experiments/EXP-RUNTIME-36129163700/run_experiment.py",
+    "research/experiments/EXP-RUNTIME-36129163700/bringup_contract.json",
+    "research/runtime/bringup.py",
+    "research/experiments/EXP-RUNTIME-36129163700/recompute_check.py"
+  ],
+  "run_lock": "/tmp/spider-runtime-EXP-RUNTIME-36129163700.lock",
+  "canonical_paths": [
+    "/tmp/single.db",
+    "/tmp/single.db-wal",
+    "/tmp/single.db-shm",
+    "/tmp/single.db.nginx.conf",
+    "/tmp/single.db.cache",
+    "/tmp/single.db.temp",
+    "/tmp/spider-runtime-EXP-RUNTIME-36129163700.lock"
+  ],
+  "exact_commands": [
+    "python research/experiments/EXP-RUNTIME-36129163700/run_experiment.py",
+    "python -m research.runtime.bringup --config research/experiments/EXP-RUNTIME-36129163700/bringup_contract.json --ledger research/experiments/EXP-RUNTIME-36129163700/artifacts/capability_ledger.json",
+    "python research/experiments/EXP-RUNTIME-36129163700/recompute_check.py"
+  ],
+  "artifact_hashes": {
+    "A-EPISODE-LEDGER.jsonl": "11d4832f68d5e2c8c294eaa28b4c0ad1017e4ed1973fdabca59fcf90fe7143a2",
+    "A-WAL-VECTOR-BEFORE-AFTER.jsonl": "e8f989701a15af03f19ba3ef3356451bb334a1ae1810db9607b4073cbe4efbc0",
+    "A-RESPONSE-FINGERPRINTS.jsonl": "0a2cc2fc6b17bffe0c2ba47a49b772964789a70afdf39d7d78f1c816f4f42bcb",
+    "A-DETECTOR-OUTPUT.jsonl": "08c660c39032e4244d1eebdff01e46a57cad61e28dfb631fc4fc6eb399d66820",
+    "A-CAPTURE-STABILITY.jsonl": "ac48864f4f2af127e35ab92a68684d74cc9e43fc396fd3492629d5520df8f0b7",
+    "A-READINESS-CERTIFICATE.json": "ab3266d89b64c024f00ed6f7d6e5e23e432c954ac143875891db7ace6a959613",
+    "A-DERIVED-METRICS.json": "bbfdb765be81a6263f909238c569e52f3cc99528fa8cf237836d8d727546af4f",
+    "A-RECOMPUTE-CHECK.json": "fb6716519f97e69af37b6ac4ab932e2ac46fb32742f85a30085b0fb559b6892a",
+    "B-PLAYWRIGHT-CAPABILITY.json": "c1a8ef899905c7ce0a1fb4d7c753f8ae873e887f921c014d8720cf11a80d09fa",
+    "B-DOM-AX-CAPTURE.json": "ace872afe8b6c4941b2d89d3fcce11cf64b7be4f1e65daf836f26bade034a4e7",
+    "B-WAL-EVIDENCE.jsonl": null,
+    "capability_ledger.json": "ed08255ab08820e8cd1c956371229e751c7a0d12de402e36f1bae22c43f3ff1d",
+    "C-BRINGUP-CONTRACT.json": "376a0337f979d9e063f2fbbdc4cede82f920b44bb4b5b557b8fb625d9b7bd6c8",
+    "D-DURABILITY-CHECK.json": "50c708befc91e06ea122431e9f993f5041f6422b81aa2f82ddb6a26af06392d0"
+  },
+  "part_A_verdict": "SUPPORTS",
+  "part_B_status": "UNAVAILABLE",
+  "part_C_status": "AVAILABLE",
+  "durability_status": "UNSATISFIABLE",
+  "recompute": null,
+  "created_at": "2026-09-27T03:34:42.799393+00:00"
+}

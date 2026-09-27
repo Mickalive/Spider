@@ -1,0 +1,156 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-36287179392",
+  "lane": "intel",
+  "status": "REVISE",
+  "producer_claim_supported": true,
+  "required_fixes": [
+    "The frozen primary metric (AGF) and frozen null control (NC-SHUFFLED-HOST) form an algebraic identity: AGF = sum_K (T_K^2 - sum_s n_{s,K}^2) / (2 * total_signatures) is invariant under any permutation of eTLD+1 labels because sum_s n_{s,K}^2 is symmetric in the host index. The null distribution has exactly 1 distinct value (std=0) and equals the observed point estimate bitwise. This is a design defect in the frozen estimator/null pair, not a scientific result. Future C-CROSSSITE designs must use a statistic that is NOT invariant to host relabelling, paired with a null built on a permutation that IS.",
+    "The frozen positive control PC-SYNTHETIC-ALIAS threshold AGF > 0.8 is arithmetically unreachable on the frozen 2-host design. Under the frozen AGF definition with n signatures per host and all keys distinct and matched 1:1, matched instances = n, total signatures = 2n, so AGF = 0.5 exactly. The observed 0.583 exceeds this only due to duplicated keys. The positive control's stated purpose (pipeline sensitivity) IS confirmed by Jaccard=1.0 and powered null comparisons, but the frozen numeric threshold is a design defect and must not be read as a sensitivity failure.",
+    "The pre-registered site sample has significant selection bias: 5 of 20 hosts yielded <2 pages and are NOT_MEASURED. Four of these (npmjs.com, sourceforge.net, stackoverflow.com) were blocked at the host edge by the frozen User-Agent (HTTP 403/418 on homepage and robots.txt), and crates.io is client-rendered with zero same-origin anchors in raw HTML. The surviving 15 hosts skew toward documentation, reference, and foundation sites. This is a property of the frozen sample and User-Agent, not a negative result about the unmeasured sites, but it limits generalization of any prevalence finding.",
+    "Three of 20 frozen base URLs redirected to a different host (gitlab.com -> about.gitlab.com, linuxfoundation.org -> www.linuxfoundation.org, readthedocs.io -> about.readthedocs.com), so those entries measured corporate marketing sites rather than the developer platforms named in prereg §5.2. The frozen sample is immutable so this was correctly not corrected, but it is a fidelity deviation from the intended sample.",
+    "Six of 20 frozen 'eTLD+1' labels are not registrable domains (docs.python.org -> python.org, en.wikipedia.org -> wikipedia.org, news.ycombinator.com -> ycombinator.com, developer.mozilla.org -> mozilla.org, dockerhub.io -> docker.com, readthedocs.io -> readthedocs.com). The frozen labels were used as the bootstrap/shuffle unit as specified, but this means the resampling unit does not correspond to organizational boundaries in all cases.",
+    "The AGF metric is unbounded above (one signature can match on every host pair), so the value 83.51 is not a fraction in [0,1] despite prereg §7.3 calling it a 'fraction'. It cannot be compared to any externally reported prevalence number without that accounting convention.",
+    "The typed-slot parameterization heuristic inflates matching: any single-segment path templates to /{slug}, so structurally unlike sites can share a template. 66.1% of signatures carry at least one typed slot. This affects both observed and null populations.",
+    "B-A11Y-TREE is the preregistered approximation from semantic HTML/ARIA, not a browser accessibility tree. It is a lower bound on true accessibility-tree cost, so the measured 22.0x token ratio is an UPPER bound on the real advantage over a true accessibility tree."
+  ],
+  "validity_findings": [
+    "The frozen primary clause is UNEVALUABLE, not false. Both comparisons (AGF_point > null_p95 AND AGF_CI_lower > null_p95) reduce to 83.51083467094703 > 83.51083467094703. The frozen null std = 0 exactly. metrics.decision_rule_evaluation.primary_evaluable = false, primary_satisfied = null. This is correctly reported in result.json.",
+    "The frozen validity sub-condition 'null_std > 0' fails by algebraic necessity. The other two validity sub-conditions pass: AGF_CI_width = 79.96 > 0, and n_sites_ge_2pages = 15 >= 10. Validity is PARTIALLY failed, not fully failed.",
+    "No infrastructure or substrate failure occurred: 0 of 155 pages failed extraction, all 177 HTTP requests completed (with recorded status codes), no credentials/browser/model API were required. The measurement transaction completed validly (status=COMPLETE).",
+    "The bootstrap CI for AGF has nonzero width (79.96) because resampling eTLD+1 hosts with replacement changes the signature multiset composition. This is a property of the bootstrap (which resamples hosts), not the frozen null (which permutes labels on the fixed host set).",
+    "The producer's independent brute-force recomputation of AGF and pairwise Jaccard over all 105 host pairs reproduced matched=416218, total=4984, AGF=83.510834670947, mean Jaccard=0.126721042325 exactly. Two consecutive analysis runs produced byte-identical derived/metrics.json. The computation is deterministic and verified.",
+    "The supplementary NC-SIG-REASSIGN null (permuting the pooled signature multiset across hosts while preserving per-host counts and global multiset) has demonstrated power: 869 distinct AGF values over 1000 permutations (vs 1 for frozen null), std=0.19. This is a valid randomisation test for 'does the grouping of signatures into hosts carry structure beyond the shared vocabulary?' and it is correctly labelled as non-frozen and decision-not-used.",
+    "The positive control sensitivity is confirmed by two independent powered comparisons: (a) mean pairwise Jaccard = 1.0 (identical signature sets) exceeds NC-SIG-REASSIGN Jaccard p95 = 0.818; (b) AGF = 0.583 exceeds NC-SIG-REASSIGN AGF p95 = 0.500. The 4-host extension further confirms the pipeline discriminates unrelated structure (5/5 unrelated pairs Jaccard=0.0).",
+    "The cost measurement is valid and strongly satisfied: paired bootstrap 95% CI upper bounds for (minimal - full_dom) and (minimal - a11y) are strictly negative (-22,824 and -8,932 tokens respectively). Minimal representation is smaller than full DOM on 155/155 observations and smaller than a11y on 150/155 observations. Cost clause passes with substantial margin."
+  ],
+  "baseline_findings": [
+    "B-RAW-HTML: mean 151,741 bytes / 52,020 tokens per observation. Minimal is smaller on 155/155 observations (mean -148,940 bytes, -51,257 tokens). This is a valid lower bound on bytes fetched.",
+    "B-FULL-DOM: mean 145,141 bytes / 50,907 tokens (full serialized DOM outerHTML). Minimal is smaller on 155/155 observations (66.7x token ratio, 51.8x byte ratio). This is a valid upper bound on observation cost.",
+    "B-A11Y-TREE: mean 48,693 bytes / 16,794 tokens (semantic HTML + ARIA approximation). Minimal is smaller on 150/155 observations (22.0x token ratio, 17.4x byte ratio). This is the preregistered approximation; it is a LOWER bound on true browser accessibility tree cost, so the 22.0x advantage is an UPPER bound on the real advantage.",
+    "All three baselines were computed on the exact same 155 observations as the minimal representation, enabling valid paired comparison. The tokenizer convention (cl100k_base, n_vocab=100277) is shared across all four representations, so ratios are tokenizer-robust.",
+    "The cost result is the only frozen decision-relevant finding that is both valid and evaluable. It establishes a per-observation cost floor of 763 tokens / 2,801 bytes (mean) for HTTP-observable structural extraction on real public sites."
+  ],
+  "recomputed_metrics": {
+    "frozen_primary_metric": {
+      "agf_point_estimate": 83.51083467094703,
+      "agf_matched_signature_instances": 416218,
+      "agf_total_signatures": 4984,
+      "agf_matched_distinct_keys": 67,
+      "agf_bootstrap_ci_lower": 40.71757879515943,
+      "agf_bootstrap_ci_upper": 120.68243493798464,
+      "agf_bootstrap_ci_width": 79.9648561428252,
+      "agf_bootstrap_n_replicates": 10000,
+      "agf_resampling_unit": "etld1_host",
+      "pairwise_jaccard_mean": 0.1267210423253033,
+      "pairwise_jaccard_max": 0.2549019607843137,
+      "pairwise_jaccard_n_pairs": 105,
+      "pairwise_jaccard_n_pairs_nonzero": 104,
+      "verification": "Independent brute-force recomputation over all 105 host pairs reproduced exactly. Two consecutive analysis runs byte-identical (sha256 16988cff779096d0b4c982d8ed22ace99d55bdba74c2ee4984fcc32a4da5867f)."
+    },
+    "frozen_null_NC_SHUFFLED_HOST": {
+      "n_permutations": 1000,
+      "mean": 83.51083467094703,
+      "std": 0.0,
+      "min": 83.51083467094703,
+      "p50": 83.51083467094703,
+      "p95": 83.51083467094703,
+      "p99": 83.51083467094703,
+      "max": 83.51083467094703,
+      "n_distinct_values": 1,
+      "jaccard_mean": 0.1267210423253033,
+      "jaccard_std": 0.0,
+      "jaccard_n_distinct_values": 1,
+      "observed_equals_null_p95_bitwise": true,
+      "verification": "200 independent label permutations counted by producer: 1 distinct AGF value. Algebraic proof: AGF depends on sum_s n_{s,K}^2 which is symmetric under host permutation."
+    },
+    "powered_null_NC_SIG_REASSIGN_not_frozen": {
+      "note": "Non-frozen, decision-not-used. Permutes pooled signature multiset across hosts preserving per-host counts and global multiset exactly.",
+      "n_permutations": 1000,
+      "agf_mean": 101.79945525682183,
+      "agf_std": 0.19345684094637847,
+      "agf_p95": 102.09313804173355,
+      "agf_min": 101.1233948635634,
+      "agf_max": 102.36276083467095,
+      "agf_n_distinct_values": 869,
+      "jaccard_mean": 0.36764843182994383,
+      "jaccard_std": 0.005868270226273742,
+      "jaccard_p95": 0.37740084088184633,
+      "observed_agf_exceeds_null_p95": false,
+      "observed_agf_minus_null_p95": -18.58230337078652,
+      "observed_jaccard_exceeds_null_p95": false,
+      "observed_jaccard_minus_null_p95": -0.250679507556543,
+      "interpretation": "Observed cross-site sharing is 18.58 AGF units and 0.251 Jaccard units BELOW the powered null p95. The measured sharing is at or below what a random re-partition of the same template vocabulary produces. This does NOT show absence of reusable task structure (the statistic cannot distinguish boilerplate from task structure), but it shows the frozen AGF magnitude is not evidence FOR prevalence."
+    },
+    "cost_per_observation_mean": {
+      "n_observations": 155,
+      "bytes_raw": 151741.4129032258,
+      "bytes_full_dom": 145140.81935483872,
+      "bytes_a11y": 48693.051612903226,
+      "bytes_minimal": 2801.1870967741934,
+      "tokens_raw": 52020.348387096776,
+      "tokens_full_dom": 50907.33548387097,
+      "tokens_a11y": 16793.670967741935,
+      "tokens_minimal": 763.058064516129,
+      "tokenizer": "cl100k_base (n_vocab 100277)",
+      "verification": "Paired bootstrap 95% CI upper bounds strictly negative: tokens_minimal - tokens_full_dom CI upper = -22,824; tokens_minimal - tokens_a11y CI upper = -8,932."
+    },
+    "cost_paired_differences": {
+      "tokens_minimal_minus_full_dom_mean": -50144.27741935484,
+      "tokens_minimal_minus_full_dom_ci_upper": -22823.814833333337,
+      "tokens_minimal_minus_a11y_mean": -16030.612903225807,
+      "tokens_minimal_minus_a11y_ci_upper": -8932.249000000002,
+      "fraction_observations_minimal_smaller_than_full_dom": 1.0,
+      "fraction_observations_minimal_smaller_than_a11y": 0.967741935483871,
+      "verification": "Recomputed from per_observation rows; paired differences and bootstrap CIs match producer."
+    },
+    "decomposition_of_agf_not_frozen": {
+      "n_distinct_shared_keys": 67,
+      "top1_key_share_of_matched_instances": 0.49556722678980725,
+      "top4_key_share_of_matched_instances": 0.8736359311706846,
+      "by_host_coverage_matched_instance_share": {
+        "shared_by_exactly_2_of_15_hosts": 0.0032555055283529305,
+        "shared_by_3_to_5_hosts": 0.03185590243574281,
+        "shared_by_6_to_10_hosts": 0.5310966849103115,
+        "shared_by_11_to_15_hosts": 0.43379190712559285
+      },
+      "fraction_shared_by_at_most_5_of_15_hosts": 0.03511140796409574,
+      "list_signature_share_of_all_signatures": 0.6739566613162119,
+      "list_signature_share_of_all_matched_instances": 0.9725240138581224,
+      "agf_within_type": {
+        "list": 120.50669842214946,
+        "action": 19.29520295202952,
+        "search": 15.958333333333334,
+        "detail": 12.891666666666667,
+        "form": 4.568965517241379,
+        "nav": 2.1301969365426694,
+        "pagination": 0.11538461538461539
+      },
+      "interpretation": "97.25% of all matched instances come from 'list' signatures (ul/ol/table/div-children containers). 96.49% come from keys shared by 6+ of 15 hosts. Only 3.51% from keys shared by 2-5 hosts (the site-pair-specific regime a cross-site inheritance product would monetise). The top key 'list(ul, /{slug}/{slug})' alone accounts for 49.6% of matched instances. The frozen AGF primarily measures that the Web is built from <ul> elements, not that it contains reusable task structure."
+    }
+  },
+  "claim_ceiling": "C-CROSSSITE cost half ESTABLISHED at experimental level: minimal HTTP+HTML structural representation costs 763 tokens / 2,801 bytes per observation (n=155, 15 hosts), 22.0x-68.2x smaller in tokens than accessibility-tree approximation, full DOM, and raw HTML, with paired bootstrap 95% CI upper bounds strictly negative. C-CROSSSITE prevalence half NOT ESTABLISHED: the frozen estimator/null pair is an algebraic identity (null std=0), making the primary clause unevaluable. Supplementary powered-null analysis (NC-SIG-REASSIGN) places observed sharing 18.6 AGF units and 0.25 Jaccard units BELOW random re-partitioning of the same boilerplate vocabulary. The decomposition shows 97.3% of matched instances are generic list boilerplate shared by 6+ hosts; only 3.5% from site-pair-specific regime. This is evidence against the specific mechanism the frozen statistic can see, but NOT a bounded negative on C-CROSSSITE because the statistic cannot distinguish reusable task structure from shared HTML boilerplate. The experiment converts the cost side from HYPOTHESIS to EXPERIMENTAL with measured floor; the prevalence side remains HYPOTHESIS (unmeasured, not falsified). No external baseline bar is produced for prevalence. The 5 unmeasured hosts (4 blocked by frozen User-Agent, 1 client-rendered) and 3 redirect deviations are NOT_MEASURED with exact blocking artefacts per portfolio directive G1.",
+  "evidence_refs": [
+    "research/experiments/EXP-INTEL-36287179392/result.json (producer handoff)",
+    "research/experiments/EXP-INTEL-36287179392/report.md (producer interpretation)",
+    "research/experiments/EXP-INTEL-36287179392/provenance.json (reproduction metadata)",
+    "research/experiments/EXP-INTEL-36287179392/freeze.json (frozen input hashes)",
+    "research/experiments/EXP-INTEL-36287179392/spec.json (frozen design)",
+    "research/experiments/EXP-INTEL-36287179392/prereg.md (frozen preregistration)",
+    "research/experiments/EXP-INTEL-36287179392/derived/metrics.json (sha256 16988cff779096d0b4c982d8ed22ace99d55bdba74c2ee4984fcc32a4da5867f)",
+    "research/experiments/EXP-INTEL-36287179392/raw/raw_responses.jsonl (sha256 064b9ba6e6a0ef2b6c162ff2f8fec9a01ce4d27986fc2c98e449f415fcf4f8a0)",
+    "research/experiments/EXP-INTEL-36287179392/raw/extracted_structures.jsonl (sha256 079de565d033768831fbd5115eeee4a11cc3824df94e36560263fc64646eeb74)",
+    "research/experiments/EXP-INTEL-36287179392/raw/control_structures.json (sha256 cdf401fc0708dac64e733565b72b381366623f944d48c85a2850751039ca5a90)",
+    "research/experiments/EXP-INTEL-36287179392/raw/fetch_manifest.json (sha256 b098a58e23435a39b5513c699bdf72915315aeda52e889c1c5eef1037b14cf54)",
+    "research/intel/exp_36287179392_pipeline.py (sha256 f0470652d3e9a49c9b2a59a8d571239a1d0c35dd5f3fc88c2858d678c38e0fe8)",
+    "research/intel/exp_36287179392_analyze.py (sha256 9848677bd1c59946ba8a8535f51460f904f63a8ca2cd88be42423a988b04ddf5)"
+  ],
+  "unresolved": [
+    "Whether real cross-site alias-generalizable *task* structure (as opposed to HTML boilerplate) exists at all in a form SPIDER could inherit remains open. The supplementary powered-null direction is suggestive but the statistic cannot separate reusable task structure from shared boilerplate.",
+    "The measured cost floor is for HTTP-observable structure only. The corresponding floor for client-rendered sites is NOT_MEASURED (blocking artefact: absence of browser binary and zero same-origin anchors in crates.io raw HTML). Smallest unblocking action: a credential-free rendering substrate, or explicit decision to bound product thesis to static-HTML sites.",
+    "Whether the 4 User-Agent-blocked hosts (npmjs.com, sourceforge.net, stackoverflow.com) and 2 zero-anchor hosts (crates.io, kernel.org) would change the prevalence decomposition is unknown. The frozen prereg forbids adaptive sampling, so this was not probed with alternative User-Agents or renderers.",
+    "The NC-SIG-REASSIGN null construction (preserving per-host counts and global multiset) is one defensible randomisation among several. It was constructed by the producer, not the frozen design. AUDIT confirms its validity as a test of 'does host grouping carry information beyond the shared vocabulary?', but its choice should be independently confirmed before any lane re-scopes on its direction.",
+    "The typed-slot parameterization heuristic (any single-segment path -> /{slug}) is known to inflate matching across structurally unlike sites. 66.1% of signatures carry >=1 typed slot. A more conservative template extraction (e.g., requiring >=2 segments or semantic role) would reduce the boilerplate share but was not tested.",
+    "No external baseline number is produced for prevalence by this packet, so the director_mandate question about setting SPIDER's external baseline set by measurement rather than reported numbers is addressed only for the observation-cost side (3 internal baselines measured on same 155 observations)."
+  ]
+}

@@ -1,0 +1,834 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-FRONTIER-36249071934",
+  "lane": "frontier",
+  "status": "COMPLETE",
+  "outcome": "MIXED",
+  "claim_ids": [
+    "C-RESIDUAL-NOVELTY"
+  ],
+  "metrics": {
+    "primary_estimand": {
+      "name": "per_span_witnessed_determinism_fraction",
+      "definition": "prereg.md 7.1: span occurrences whose frozen 6-tuple signature (method, path, normalized_headers, normalized_body, response_code, response_body_hash) is witnessed in >=2 distinct episodes, divided by all span occurrences",
+      "value": 0.5833333333333334,
+      "deterministic_span_occurrences": 700,
+      "total_span_occurrences": 1200,
+      "wilson_ci95": [
+        0.5552167229809802,
+        0.6109181102518974
+      ],
+      "measurement_arm": "B-NO-MEMORY-DETERMINISTIC",
+      "identical_in_all_three_arms": true,
+      "per_arm_cross_check": {
+        "B-COLD-EXPLORATION": 0.5833333333333334,
+        "B-INHERITED-SPIDER": 0.5833333333333334,
+        "B-NO-MEMORY-DETERMINISTIC": 0.5833333333333334
+      },
+      "prereg_H1_threshold": 0.7,
+      "prereg_H1_met": false,
+      "measurement_validity_caveat": "the frozen design does not fix the task generator's novelty rate, so this value is a property of the pre-declared mixture (see metrics.determinism_vs_target_novelty_rate_sweep), not an identified constant of real agent work"
+    },
+    "determinism_fraction_by_episode_checkpoints": {
+      "10": 0.5238095238095238,
+      "20": 0.5238095238095238,
+      "30": 0.5238095238095238,
+      "40": 0.5238095238095238,
+      "50": 0.5238095238095238
+    },
+    "determinism_witness_count_histogram": {
+      "1": 500,
+      "50": 700
+    },
+    "span_signature_diversity": 511,
+    "determinism_vs_target_novelty_rate_sweep": [
+      {
+        "target_novelty_rate": 0.0,
+        "realized_determinism_fraction": 1.0,
+        "unique_span_signatures": 21,
+        "deopt_amortized_cost": 31.0,
+        "cold_amortized_cost": 72.0,
+        "deopt_minus_cold": -41.0
+      },
+      {
+        "target_novelty_rate": 0.25,
+        "realized_determinism_fraction": 0.7916666666666666,
+        "unique_span_signatures": 116,
+        "deopt_amortized_cost": 35.25,
+        "cold_amortized_cost": 72.0,
+        "deopt_minus_cold": -36.75
+      },
+      {
+        "target_novelty_rate": 0.5,
+        "realized_determinism_fraction": 0.5833333333333334,
+        "unique_span_signatures": 211,
+        "deopt_amortized_cost": 39.5,
+        "cold_amortized_cost": 72.0,
+        "deopt_minus_cold": -32.5
+      },
+      {
+        "target_novelty_rate": 0.75,
+        "realized_determinism_fraction": 0.375,
+        "unique_span_signatures": 306,
+        "deopt_amortized_cost": 43.75,
+        "cold_amortized_cost": 72.0,
+        "deopt_minus_cold": -28.25
+      },
+      {
+        "target_novelty_rate": 1.0,
+        "realized_determinism_fraction": 0.16666666666666666,
+        "unique_span_signatures": 401,
+        "deopt_amortized_cost": 47.15,
+        "cold_amortized_cost": 72.0,
+        "deopt_minus_cold": -24.85
+      }
+    ],
+    "determinism_vs_target_novelty_rate_sweep_status": "non_decision_gating_addition_beyond_frozen_250_episode_contract",
+    "compilability_boundary": {
+      "deterministic_occurrences": 700,
+      "served_by_compiled_replay": 480,
+      "deterministic_but_deopted": 220,
+      "compilable_given_deterministic": 0.6857142857142857,
+      "compiled_share_of_all_spans": 0.4,
+      "deterministic_but_deopted_cache_ambiguous": 100,
+      "deterministic_but_deopted_cache_entry_absent": 120,
+      "deterministic_but_deopted_by_role_workitem": {
+        "create_resource|2": 50,
+        "create_resource|3": 50,
+        "delete_resource|2": 2,
+        "delete_resource|3": 2,
+        "entry_point|0": 2,
+        "entry_point|1": 50,
+        "entry_point|2": 50,
+        "entry_point|3": 2,
+        "list_resources|2": 2,
+        "list_resources|3": 2,
+        "read_resource|2": 2,
+        "read_resource|3": 2,
+        "update_resource|2": 2,
+        "update_resource|3": 2
+      },
+      "ambiguous_state_keys": 1,
+      "cache_key_conflicts_detected": 1,
+      "deterministic_but_deopted_exact_split": {
+        "refused_because_state_key_ambiguous": 100,
+        "refused_because_state_key_never_recurs": 100,
+        "refused_because_witness_count_below_2": 20,
+        "check": "sums to deterministic_but_deopted=220; recomputed independently from artifacts/spans_no-memory-deterministic.jsonl by cross-tabulating (signature witnessed in >=2 episodes) x (decision_path) x (state-key recurrence)",
+        "by_role_workitem_ambiguous": {
+          "create_resource|2": 50,
+          "create_resource|3": 50
+        },
+        "by_role_workitem_never_recurs": {
+          "entry_point|1": 50,
+          "entry_point|2": 50
+        },
+        "by_role_workitem_witness_buildup": {
+          "entry_point|0": 2,
+          "entry_point|3": 2,
+          "list_resources|2": 2,
+          "list_resources|3": 2,
+          "read_resource|2": 2,
+          "read_resource|3": 2,
+          "update_resource|2": 2,
+          "update_resource|3": 2,
+          "delete_resource|2": 2,
+          "delete_resource|3": 2
+        },
+        "note": "in the main run only work items 2 and 3 use episode-invariant resource paths, so only their create_resource spans are witnessed-deterministic; work items 0 and 1 are given episode-specific paths (r-<episode>-<item>) and their create spans have a witness count of exactly 1 and are therefore not deterministic at all"
+      }
+    },
+    "amortized_cost_units_per_episode": {
+      "B-NO-MEMORY-DETERMINISTIC": 38.6,
+      "B-INHERITED-SPIDER": 72.0,
+      "B-COLD-EXPLORATION": 72.0,
+      "unit_definition": "prereg.md 7.2 abstract units: 1 per unique span compiled, 1 per deopt-to-model invocation, 1 per span executed, plus the prereg.md 6.2 inheritance-machinery bundle (1 per resolve+bind+verify+freshness span) for arms that perform one"
+    },
+    "amortized_cost_breakdown": {
+      "B-NO-MEMORY-DETERMINISTIC": {
+        "amortized_cost_units_per_episode": 38.6,
+        "compile_units": 10,
+        "machinery_units": 0,
+        "model_units": 720,
+        "execution_units": 1200,
+        "total_units": 1930,
+        "component_detail": {
+          "cache_key_conflicts": 1,
+          "compile": 10,
+          "compiled_replays": 480,
+          "execution": 1200,
+          "model": 720,
+          "spans_compiled": 10
+        }
+      },
+      "B-INHERITED-SPIDER": {
+        "amortized_cost_units_per_episode": 72.0,
+        "compile_units": 0,
+        "machinery_units": 1200,
+        "model_units": 1200,
+        "execution_units": 1200,
+        "total_units": 3600,
+        "component_detail": {
+          "distill_calls": 24,
+          "execution": 1200,
+          "machinery": 1200,
+          "model": 1200,
+          "resolve_calls": 1200,
+          "resolve_explore": 689,
+          "resolve_unknown": 511
+        }
+      },
+      "B-COLD-EXPLORATION": {
+        "amortized_cost_units_per_episode": 72.0,
+        "compile_units": 0,
+        "machinery_units": 1200,
+        "model_units": 1200,
+        "execution_units": 1200,
+        "total_units": 3600,
+        "component_detail": {
+          "execution": 1200,
+          "machinery": 1200,
+          "model": 1200,
+          "resolve_calls": 1200,
+          "resolve_unknown": 1200
+        }
+      }
+    },
+    "success_rate": {
+      "B-NO-MEMORY-DETERMINISTIC": 1.0,
+      "B-INHERITED-SPIDER": 1.0,
+      "B-COLD-EXPLORATION": 1.0,
+      "definition": "prereg.md 7.3: every step returned its expected status code AND the final resource store matched the goal state (empty)"
+    },
+    "decision_rule_outcome": "DEOPT_DOMINATES",
+    "decision_rule_matched_correctness": true,
+    "decision_rule_rule_trace": {
+      "costs": {
+        "B-COLD-EXPLORATION": 72.0,
+        "B-INHERITED-SPIDER": 72.0,
+        "B-NO-MEMORY-DETERMINISTIC": 38.6
+      },
+      "deopt_less_cold": true,
+      "deopt_less_inherited": true,
+      "success_rates": {
+        "B-COLD-EXPLORATION": 1.0,
+        "B-INHERITED-SPIDER": 1.0,
+        "B-NO-MEMORY-DETERMINISTIC": 1.0
+      },
+      "success_threshold": 0.95,
+      "tie_relative_threshold": 0.05
+    },
+    "cost_difference_bootstrap": {
+      "deopt_minus_cold": {
+        "ci95": [
+          -34.0,
+          -32.4
+        ],
+        "mean_difference_units": -33.4,
+        "n_episodes_paired": 50,
+        "p_two_sided_bootstrap": 0.0,
+        "resamples": 10000,
+        "seed": 20260926
+      },
+      "deopt_minus_inherited": {
+        "ci95": [
+          -34.0,
+          -32.4
+        ],
+        "mean_difference_units": -33.4,
+        "n_episodes_paired": 50,
+        "p_two_sided_bootstrap": 0.0,
+        "resamples": 10000,
+        "seed": 20260926
+      }
+    },
+    "residual_novelty_cost_by_tier_deopt_arm": {
+      "never_seen": {
+        "compiled_replays": 0,
+        "model_calls": 511,
+        "spans": 511
+      },
+      "seen_multiple": {
+        "compiled_replays": 480,
+        "model_calls": 195,
+        "spans": 675
+      },
+      "seen_once": {
+        "compiled_replays": 0,
+        "model_calls": 14,
+        "spans": 14
+      }
+    },
+    "residual_novelty_tier_definition": "prereg.md 7.4: tier assigned from the number of distinct episodes that had already witnessed the span signature before this execution (0 -> never_seen, 1 -> seen_once, >=2 -> seen_multiple)",
+    "deopt_arm_operational": {
+      "compiled_state_keys": 10,
+      "observed_state_keys": 511,
+      "compilation_completed_at_episode": 2,
+      "model_calls_per_episode_first_six": [
+        24,
+        24,
+        14,
+        14,
+        14,
+        14
+      ],
+      "model_calls_per_episode_steady_state": [
+        14
+      ],
+      "compiled_replays_total": 480,
+      "witness_threshold_for_compilation": 2
+    },
+    "inherited_arm_operational": {
+      "kernel_class": "SpiderKernel",
+      "kernel_module": "spider.kernel",
+      "min_confidence": 0.8,
+      "mechanisms_distilled_from_episode_1": 24,
+      "distill_calls": 24,
+      "registry_size_after_run": 24,
+      "registry_confidences": [
+        0.5
+      ],
+      "registry_any_mechanism_at_or_above_gate": false,
+      "mechanisms_with_parameter_slots": 0,
+      "mechanisms_with_freshness": 0,
+      "mechanisms_with_applicability_guards": 0,
+      "mechanisms_with_verification_rule": 0,
+      "mechanisms_with_repair_scope": 0,
+      "mechanisms_with_failure_boundary": 0,
+      "resolve_calls": 1200,
+      "resolve_status_counts": {
+        "DEOPT_TO_MODEL_EXPLORE": 689,
+        "DEOPT_TO_MODEL_UNKNOWN": 511
+      },
+      "executable_resolutions_total": 0,
+      "mechanisms_executed_total": 0,
+      "bind_calls": 0,
+      "verify_calls": 0,
+      "freshness_checks": 0,
+      "model_calls_total": 1200
+    },
+    "kernel_direct_probe": {
+      "distill_confidence": 0.5,
+      "kernel_min_confidence": 0.8,
+      "resolve_exact_intent_and_preconditions_status": "EXPLORE",
+      "resolve_exact_intent_and_preconditions_reason": "candidate exists but confidence is below execution threshold",
+      "resolve_paraphrased_intent_status": "UNKNOWN",
+      "diagnostic_resolve_at_min_confidence_0_5_status": "EXECUTABLE",
+      "verify_returns_on_distilled_mechanism": true,
+      "shipped_confidence_literals": [
+        [
+          "src/spider/kernel.py",
+          0.5
+        ]
+      ],
+      "shipped_has_distill_parameterized": false,
+      "distill_populates_freshness": false,
+      "distill_populates_applicability_guards": false,
+      "distill_populates_verification_rule": false,
+      "distill_populates_repair_scope": false,
+      "distill_populates_failure_boundary": false,
+      "note": "min_confidence=0.5 is a diagnostic probe only; no arm used it"
+    },
+    "substrate_determinism_check": {
+      "repeats_per_probe": 100,
+      "n_probes": 8,
+      "identical_request_round_trips": 800,
+      "all_probes_deterministic": true
+    },
+    "substrate_availability": {
+      "stdlib_http_service_reachable": true,
+      "stdlib_http_get_status": 200,
+      "stdlib_http_put_status": 201,
+      "flask_importable": false,
+      "fastapi_importable": false,
+      "browsergym_importable": false,
+      "playwright_importable": false,
+      "openai_importable": false,
+      "env_OPENAI_API_KEY_present": false,
+      "env_HF_TOKEN_present": false,
+      "docker_cli_available": true
+    },
+    "token_denominated_cost": null,
+    "browser_or_dom_measurements": null
+  },
+  "controls": {
+    "PC-WITNESSED-DETERMINISM": {
+      "role": "positive_control",
+      "expected": "determinism_fraction=1.0, model_calls_after_compile=0, amortised cost -> compile+execution only",
+      "pass": false,
+      "observed": {
+        "determinism_fraction": 1.0,
+        "cumulative_determinism_fraction_by_episode_10": 1.0,
+        "compiled_state_keys": 20,
+        "model_calls_per_episode_steady_state": [
+          4
+        ],
+        "model_calls_episodes_2_to_50_literal": 216,
+        "compiled_complete_at_episode": 2,
+        "model_calls_strictly_after_compile_complete": 192,
+        "ambiguous_state_keys": 1,
+        "ambiguous_state_key_detail": [
+          {
+            "first_request": {
+              "body": {
+                "title": "title-const",
+                "value": 0
+              },
+              "method": "PUT",
+              "path": "/resources/s-const-0"
+            },
+            "spans_touching_key": [
+              [
+                1,
+                1,
+                "create_resource",
+                "PUT",
+                "/resources/s-const-0"
+              ],
+              [
+                1,
+                7,
+                "create_resource",
+                "PUT",
+                "/resources/s-const-1"
+              ],
+              [
+                1,
+                13,
+                "create_resource",
+                "PUT",
+                "/resources/s-const-2"
+              ],
+              [
+                1,
+                19,
+                "create_resource",
+                "PUT",
+                "/resources/s-const-3"
+              ],
+              [
+                2,
+                1,
+                "create_resource",
+                "PUT",
+                "/resources/s-const-0"
+              ],
+              [
+                2,
+                7,
+                "create_resource",
+                "PUT",
+                "/resources/s-const-1"
+              ],
+              [
+                2,
+                13,
+                "create_resource",
+                "PUT",
+                "/resources/s-const-2"
+              ],
+              [
+                2,
+                19,
+                "create_resource",
+                "PUT",
+                "/resources/s-const-3"
+              ],
+              [
+                3,
+                1,
+                "create_resource",
+                "PUT",
+                "/resources/s-const-0"
+              ],
+              [
+                3,
+                7,
+                "create_resource",
+                "PUT",
+                "/resources/s-const-1"
+              ],
+              [
+                3,
+                13,
+                "create_resource",
+                "PUT",
+                "/resources/s-const-2"
+              ],
+              [
+                3,
+                19,
+                "create_resource",
+                "PUT",
+                "/resources/s-const-3"
+              ]
+            ],
+            "state_sig": "b03911b76e267ec97449c98fc6871612b249c6049b6665d289f0455a385a93b9",
+            "witnesses": 50
+          }
+        ],
+        "amortized_cost_units_per_episode": 29.2,
+        "success_rate": 1.0
+      },
+      "why_failed": "prereg.md 8.1 requires determinism_fraction >= 0.99 by episode 10 (OBSERVED 1.0, satisfied) AND zero model calls after episode 1 (OBSERVED 4 model calls in every episode from episode 3 onward, so 216 model calls across episodes 2-50). The residual 4 deopts per episode are one create_resource span per work item: all four work items present the identical observable state (empty store, last request GET /) but require four different correct actions, so the no-memory state->action table flags the key ambiguous and refuses to compile it, exactly as prereg.md 6.1 requires (no parameter induction).",
+      "evidence_refs": [
+        "research/experiments/EXP-FRONTIER-36249071934/artifacts/control_spans_pc_witnessed_determinism.jsonl",
+        "research/experiments/EXP-FRONTIER-36249071934/artifacts/controls.json"
+      ]
+    },
+    "NC-ZERO-DETERMINISM": {
+      "role": "null_control",
+      "expected": "determinism_fraction=0.0, model_calls = all spans every episode, cost_ratio_vs_cold >= 1.0",
+      "pass": true,
+      "observed": {
+        "determinism_fraction": 0.0,
+        "deterministic_spans": 0,
+        "total_spans": 1200,
+        "unique_span_signatures": 1200,
+        "model_calls_total": 1200,
+        "total_spans_executed": 1200,
+        "compile_units": 0,
+        "amortized_cost_units_per_episode": 48.0,
+        "reference_cold_amortized_cost_units_per_episode": 72.0,
+        "cost_ratio_vs_cold_prereg_7_2_three_term": 1.0,
+        "cost_ratio_vs_cold_machinery_inclusive": 0.6666666666666666,
+        "success_rate": 1.0
+      },
+      "note": "The two cost ratios differ ONLY by the prereg.md 6.2 inheritance-machinery unit, which the deopt ratchet structurally never pays and the cold reference arm pays once per span. The PASS judgement uses the literal prereg.md 7.2 three-component formula; the machinery-inclusive ratio is reported alongside so the auditor can re-judge.",
+      "evidence_refs": [
+        "research/experiments/EXP-FRONTIER-36249071934/artifacts/control_spans_nc_zero_determinism.jsonl",
+        "research/experiments/EXP-FRONTIER-36249071934/artifacts/controls.json"
+      ]
+    },
+    "PC-EXACT-REPLAY": {
+      "role": "additional_control_measured_not_decision_gating",
+      "expected": "inherited kernel achieves EXECUTABLE with zero novel decisions on an exact mechanism match",
+      "pass": false,
+      "observed": {
+        "episodes": 2,
+        "spans": 48,
+        "resolution_status_counts": {
+          "EXPLORE": 27,
+          "UNKNOWN": 21
+        },
+        "model_calls_episode_1": 24,
+        "model_calls_episode_2": 24,
+        "novel_decisions_episode_2": 24,
+        "registry": {
+          "any_above_gate": false,
+          "applicability_guards_nonempty": 0,
+          "confidences": [
+            0.5
+          ],
+          "count": 24,
+          "failure_boundary_nonempty": 0,
+          "freshness_nonempty": 0,
+          "min_confidence_gate": 0.8,
+          "parameter_slots_nonempty": 0,
+          "repair_scope_nonempty": 0,
+          "verification_rule_nonempty": 0
+        },
+        "kernel_config": {
+          "kernel_class": "SpiderKernel",
+          "kernel_module": "spider.kernel",
+          "min_confidence": 0.8,
+          "registry_path": "/tmp/spider-inherit-0_3spnel/registry.jsonl"
+        }
+      },
+      "why_failed": "0 of 48 spans resolved EXECUTABLE. 27 resolved EXPLORE with reason 'candidate exists but confidence is below execution threshold' and 21 resolved UNKNOWN. The registry held 24 mechanisms, all at confidence 0.5, against a shipped min_confidence gate of 0.8, so no distilled mechanism can ever be executed. All 24 spans of episode 2 were novel model decisions. This is a measured property of the shipped kernel under the exact configuration prereg.md 6.2 mandates, not a property of inheritance economics.",
+      "note": "mechanisms_distilled=24, distill_calls=24. A FAIL here is an observation about the shipped kernel's executability, not about inheritance economics.",
+      "evidence_refs": [
+        "research/experiments/EXP-FRONTIER-36249071934/artifacts/control_spans_pc_exact_replay.jsonl",
+        "research/experiments/EXP-FRONTIER-36249071934/artifacts/kernel_probe.json"
+      ]
+    },
+    "NC-EMPTY-REGISTRY": {
+      "role": "additional_control_measured_not_decision_gating",
+      "expected": "inherited kernel returns UNKNOWN for every span when the registry is emptied",
+      "pass": true,
+      "observed": {
+        "kernel_config": {
+          "kernel_class": "SpiderKernel",
+          "min_confidence": 0.8,
+          "registry_path": "/tmp/spider-cold-7k1s19mq/registry.jsonl",
+          "registry_size": 0
+        },
+        "registry_empty": true,
+        "registry_size": 0,
+        "resolution_status_counts": {
+          "UNKNOWN": 24
+        },
+        "spans": 24
+      },
+      "evidence_refs": [
+        "research/experiments/EXP-FRONTIER-36249071934/artifacts/controls.json",
+        "research/experiments/EXP-FRONTIER-36249071934/artifacts/derived_metrics.json"
+      ]
+    }
+  },
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-FRONTIER-36249071934/artifacts/availability_probe.json",
+      "sha256": "30ab5b1c652479cb375d45329a867c50851ce022fad855429f64065954d27302",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-36249071934/artifacts/substrate_determinism_check.json",
+      "sha256": "e23ba2360a00c826d9182fe99cff3719d7c899b61d2eef911bcd0dd1f884c00c",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-36249071934/artifacts/kernel_probe.json",
+      "sha256": "5d3e35a3756d324cc2202fd3296797553021ae23d15d5e86a94a02ef8db7e783",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-36249071934/artifacts/spans_no-memory-deterministic.jsonl",
+      "sha256": "af5c4291927cee9febc05835ebb6881647355d1255f72c13eb3590b5e45a363b",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-36249071934/artifacts/spans_inherited-spider.jsonl",
+      "sha256": "ad5fd3519cbc0bc299b986c864ff45b50ba83d8373a251ab0079bd315054fd43",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-36249071934/artifacts/spans_cold-exploration.jsonl",
+      "sha256": "7c97a55b94fc8355514e9a87a81dea2ac24b0532f8012daf834677dee61d06d5",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-36249071934/artifacts/episodes_no-memory-deterministic.jsonl",
+      "sha256": "2369bde197056271809dd3877c8ddb857b63d650da3cf60004e13bcab0eb30b7",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-36249071934/artifacts/episodes_inherited-spider.jsonl",
+      "sha256": "dc2b04fe502dfe1c65c2778a2bae474b716465efb3b5e4f387c28ed71c3fe6b4",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-36249071934/artifacts/episodes_cold-exploration.jsonl",
+      "sha256": "6871ddac7411d0d3f1478a65b7c315376523b79e6cb234143ce058fb534701bb",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-36249071934/artifacts/control_spans_pc_witnessed_determinism.jsonl",
+      "sha256": "71ac3800d1a2e51aeb8c4c1082eb560b7b97eb4e6b291b8c081251923f19c538",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-36249071934/artifacts/control_spans_nc_zero_determinism.jsonl",
+      "sha256": "a8390782effe31bd0412aed4505810fa780d5bf42b2d8de04f78467439ec0ccd",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-36249071934/artifacts/control_spans_pc_exact_replay.jsonl",
+      "sha256": "d16973dda4acb642b8cc395702a7663b95edf5cd078d1c0237ce036ca3003fef",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-36249071934/artifacts/matched_task_instances_check.json",
+      "sha256": "4dfe5829acf7f2a427d38633b982b79b07e17f22e7cdb05dbf2b383710417a05",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-36249071934/artifacts/controls.json",
+      "sha256": "8a2b92bd927438c861cf1561757e39313bf06525e2b017b7e401728856d4945f",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-36249071934/artifacts/sensitivity_novelty_sweep.json",
+      "sha256": "aacb76444fd6222ddb40418ead398ed56e893aaf5a8d3987cf7c2f6766ef3d5c",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-36249071934/artifacts/derived_metrics.json",
+      "sha256": "c127065b8d7d39e8cdbcfbdf14dca649627a9f0b3db99cd7fee9f615dd09e7d2",
+      "role": "derived"
+    },
+    {
+      "path": "research/frontier/substrate_deterministic_http.py",
+      "sha256": "e0e2e9b525bc9ad80628b30f2cf9d565ade8ce726134069e0497109208993790",
+      "role": "code",
+      "note": "measurement code executed by this experiment"
+    },
+    {
+      "path": "research/frontier/taskplan.py",
+      "sha256": "8875a05b54761f96a92cea8d3ec43bd6886347b5e04ef81d594d65d53f910816",
+      "role": "code",
+      "note": "measurement code executed by this experiment"
+    },
+    {
+      "path": "research/frontier/measure.py",
+      "sha256": "23de4343555bd5072c4b9ab6851ab35bd4ff068a8bbf81ca8fe81843af4392eb",
+      "role": "code",
+      "note": "measurement code executed by this experiment"
+    },
+    {
+      "path": "research/frontier/arms/__init__.py",
+      "sha256": "5c495d05c818d933b9944946c8cff5db52e7adcf44afaa52f8407ce31a2edafe",
+      "role": "code",
+      "note": "measurement code executed by this experiment"
+    },
+    {
+      "path": "research/frontier/arms/common.py",
+      "sha256": "d9ceeb6a6bfee1bac7fcd8b65f9403dd616c171c52cfccc654b20c9f75185af6",
+      "role": "code",
+      "note": "measurement code executed by this experiment"
+    },
+    {
+      "path": "research/frontier/arms/deopt_ratchet.py",
+      "sha256": "0c09a680a0dbde2488fdb9cf94632a9d70af135ab6351a7912401840063f3aee",
+      "role": "code",
+      "note": "measurement code executed by this experiment"
+    },
+    {
+      "path": "research/frontier/arms/inherited_spider.py",
+      "sha256": "3acbf544f43968e59b10362eee78f173431f494e6a22151ff3577e2029542a6a",
+      "role": "code",
+      "note": "measurement code executed by this experiment"
+    },
+    {
+      "path": "research/frontier/arms/cold_exploration.py",
+      "sha256": "628b9645f4d5817ff7e74cc31d29470e4ad5dfa33158f7ebca64e4f61bc42e7b",
+      "role": "code",
+      "note": "measurement code executed by this experiment"
+    },
+    {
+      "path": "research/frontier/run_experiment_EXP_FRONTIER_36249071934.py",
+      "sha256": "5229dd43a82a89c1643496316027de48853f3a9361eb9742c77c496554d5d789",
+      "role": "code",
+      "note": "measurement code executed by this experiment"
+    },
+    {
+      "path": "research/frontier/__init__.py",
+      "sha256": "6f340d857fb445fd9d78f20276bb6b81dcd41a66dc785439e7b2395709a96045",
+      "role": "code",
+      "note": "packet assembly tool; performs no measurement"
+    },
+    {
+      "path": "research/frontier/build_result_EXP_FRONTIER_36249071934.py",
+      "sha256": "2a318804cc5ca362cfc49428a3942e3ddf6e16e37ec1a01db53f03b73063affc",
+      "role": "code",
+      "note": "packet assembly tool; performs no measurement"
+    },
+    {
+      "path": "research/frontier/build_provenance_EXP_FRONTIER_36249071934.py",
+      "sha256": "4fc6f49a81fd8951723be54a4e44ecd75ae29a9ee6b86739edc88d2a1bd6d315",
+      "role": "code",
+      "note": "packet assembly tool; performs no measurement"
+    },
+    {
+      "path": "src/spider/kernel.py",
+      "sha256": "46929b3a951df48d7f9d1fd850871073c0d91c1868aa117e13d389fe274e8d61",
+      "role": "code",
+      "note": "shipped incumbent kernel, imported unmodified by B-INHERITED-SPIDER"
+    },
+    {
+      "path": "src/spider/models.py",
+      "sha256": "338aaf4d7ba0e31f7a5fe8a47abdbb2ea52d9c1c4ef0ce014f2b809b9a2a9b78",
+      "role": "code",
+      "note": "shipped incumbent kernel, imported unmodified by B-INHERITED-SPIDER"
+    },
+    {
+      "path": "src/spider/registry.py",
+      "sha256": "51fb440d3827f21cccb5f77ad17dc0e76ccdbc2d52d7b05044cd821bb8a9322c",
+      "role": "code",
+      "note": "shipped incumbent kernel, imported unmodified by B-INHERITED-SPIDER"
+    }
+  ],
+  "observations": [
+    "The frozen substrate was available and reachable: a Python-stdlib ThreadingHTTPServer bound to 127.0.0.1 served real HTTP/1.1 keep-alive GET/PUT/PATCH/DELETE round trips with no Flask, FastAPI, BrowserGym, Playwright, Chromium, docker or LLM credential. Every one of the three arms executed all 1200 of its spans over real sockets (3600 substrate requests in the main comparison, plus 4800 in the non-decision-gating sweep).",
+    "Substrate idempotency was verified as prereg.md 12 requires: 8 distinct request shapes, 100 identical repeats each (800 round trips), every shape returning exactly one distinct response-body hash and one status code, with the destructive verbs exercised on their success path rather than only on 404.",
+    "All three arms observed the identical span population: for all 1200 shared (episode, index) keys the span signature, HTTP status code and response-body hash are equal across B-NO-MEMORY-DETERMINISTIC, B-INHERITED-SPIDER and B-COLD-EXPLORATION. The measured per-span determinism fraction is therefore identical (0.5833333333333334) in all three arms.",
+    "The shipped incumbent kernel was imported unmodified from src/spider/ and used with the configuration prereg.md 6.2 mandates. SpiderKernel.distill() returned mechanisms at confidence 0.5 while SpiderKernel.__init__ sets min_confidence 0.8. Across 1200 resolve calls on a registry of 24 distilled mechanisms, 689 returned EXPLORE and 511 returned UNKNOWN; zero returned EXECUTABLE and zero mechanisms were executed, so bind/verify/freshness were never reached.",
+    "The only confidence literal anywhere in src/spider/ is 0.5 in src/spider/kernel.py, and src/spider/ contains no distill_parameterized. distill() left parameter_slots, freshness, applicability_guards, verification_rule, repair_scope and failure_boundary empty on every one of the 24 mechanisms.",
+    "A diagnostic resolve at min_confidence 0.5 (no arm used it) returned EXECUTABLE on the exact intent and preconditions, and SpiderKernel.verify() returned True for the same mechanism. The blocking constraint observed here is the confidence gate plus exact-intent string equality, not applicability matching and not verification.",
+    "A paraphrased intent ('create a new resource on the server') resolved UNKNOWN against a registry holding an exact mechanism for 'create_resource'.",
+    "The no-memory deopt ratchet compiled 10 of the 511 observed (world-state, last-request) keys and served 480 of 1200 span occurrences by compiled replay. Its model calls fell from 24 per episode in episodes 1-2 to 14 per episode from episode 3 onward and stayed there.",
+    "700 of 1200 span occurrences (0.5833333333333334) met the prereg.md 7.1 witnessed-determinism rule, but only 480 of those 700 (0.6857142857142857) were actually served from a compiled entry. The 220-occurrence gap splits exactly as follows, recomputed independently from the raw span records: 100 occurrences where the observable state key recurred but mapped to more than one correct action, so the executor conservatively refused to compile it (the create_resource spans of the two episode-invariant work items); 100 occurrences where the observable state key itself never recurred because it contained an episode-specific previous request (the entry-point fetch that follows an episode-specific create); and 20 occurrences that are simply the first two witnesses of each remaining key, which by the prereg.md 6.1 rule must deopt before compilation.",
+    "In the PC-WITNESSED-DETERMINISM control the same mechanism appears in its purest form: determinism_fraction reached 1.0, 20 state keys compiled, and model calls settled at exactly 4 per episode, one per work item, because all four work items present an identical observable state but require four different correct actions.",
+    "The witness-count histogram is strictly bimodal: 500 span occurrences were witnessed in exactly one episode and 700 in all 50. There were no occurrences with an intermediate witness count.",
+    "Sweeping the pre-declared target novelty rate over {0.00, 0.25, 0.50, 0.75, 1.00} produced realized determinism fractions {1.0, 0.7917, 0.5833, 0.375, 0.1667} and deopt-minus-cold cost differences {-41.0, -36.75, -32.5, -28.25, -24.85} abstract units per episode. The deopt ratchet was cheaper than cold exploration at every swept novelty rate.",
+    "The docker CLI is present in this environment (docker --version exits 0). It was recorded but not used; the experiment is stdlib-only and depended on no container, browser or model credential.",
+    "No infrastructure component required by the frozen design was unavailable, so no availability observation blocked any measurement and no smallest-next-action is required for this experiment."
+  ],
+  "validity_notes": [
+    "MEASUREMENT VALIDITY: the measurement transaction completed. The substrate was available, all three primary arms and all four controls ran to 50/50/50 and 50/50/2/1 episodes as preregistered, all 3600 main-comparison spans executed over real sockets, and every preregistered metric in prereg.md 11.1/11.2 was computed. status is COMPLETE.",
+    "PRIMARY ESTIMAND IS GENERATOR-RELATIVE, NOT AN IDENTIFIED CONSTANT: prereg.md 5.2 fixes the five intents, the span signature and the episode structure but never fixes the task generator's residual-novelty rate, which is the dominant free parameter of the whole design. The headline 0.5833333333333334 is therefore a property of the pre-declared mixture (novelty rate 0.50, chosen before execution as the neutral midpoint of the {0, 0.25, 0.50, 0.75, 1.00} grid so that the point estimate is neither a floor nor a ceiling and favours neither arm). The sweep shows the same experiment yields 1.0 down to 0.1667 across that grid. The determinism fraction must not be read as a measured property of real agent work; only the RUNGS (relative ordering of arms at fixed novelty, and the monotone relation between novelty and realized determinism) are informative.",
+    "THE THREE-WAY COMPARISON'S INHERITED LEG IS NOT IDENTIFIED, AND THE FROZEN DECISION RULE CANNOT DETECT THIS: prereg.md 6.2 mandates the shipped SpiderKernel with distill() at confidence 0.5 and min_confidence 0.8. Under that exact configuration the incumbent arm executed zero mechanisms across 1200 spans, so C_i measures 'shipped kernel plus perfect-model deopt on every span', not inherited-mechanism execution. Because C_i (72.0) came out exactly equal to the mandatory null C_c (72.0), the only difference between the incumbent arm and inheritance ablation is a registry the incumbent can never use, and the rule's DEOPT_DOMINATES condition is satisfied largely through the C_d < C_c leg. The C_d < C_c leg IS a clean within-design comparison (same oracle, same substrate, same tasks, same success rate); the C_d < C_i leg is not. This is the same identifiability defect the parent handoff recorded as audit findings B1/B2 for EXP-FRONTIER-36129180789, and prereg.md 6.2 re-states min_confidence 0.8 verbatim rather than repairing it.",
+    "COST MODEL IS A PREREGISTERED ABSTRACT UNIT, NOT A MEASURED ECONOMIC QUANTITY: 1 unit per compile, per deopt, per span executed, per inheritance-machinery bundle. No token, latency, wall-clock or dollar measurement exists. token_denominated_cost and browser_or_dom_measurements are null because no policy-model credential and no browser were present. The model oracle is a deterministic perfect-policy function (prereg.md 12), so deopt-to-agent is idealised: it always returns the correct action at a fixed unit price. A real model call would be less reliable and differently priced, and the deopt arm's advantage is measured only against that idealisation.",
+    "ASYMMETRIC INFORMATION GIVEN TO THE TWO ARMS: the deopt ratchet is given only the substrate world state and its own last request; the oracle is given the remaining task plan, which is what a perfect model handed the goal would have to infer. This asymmetry is conservative with respect to the treatment arm. It is the opposite of parent-audit defect B1 and is stated so the auditor can confirm the instrument was not handed the derived context.",
+    "PREREG.md 7.2 / 6.2 COST-CLAUSE RECONCILIATION: prereg.md 7.2 defines amortized_cost over exactly three components while prereg.md 6.2 adds a per-span inheritance-machinery cost for the incumbent arm. Both clauses are honoured by carrying a fourth component, machinery, set to 1 unit per span for any arm that performs a resolve and 0 for an arm that does not; setting machinery to 0 reduces the ledger back to the literal three-term formula. The machinery component is charged to the mandatory null control as well as to the incumbent, so the comparison is conservative against the treatment arm. It is also the entire reason NC-ZERO-DETERMINISM has two different cost ratios (1.0 on the literal prereg.md 7.2 formula, 0.6666666666666666 machinery-inclusive); both are reported and the control's PASS judgement uses the literal formula.",
+    "PC-WITNESSED-DETERMINISM FAILURE IS AN INSTRUMENT RESULT, NOT A FAILED HYPOTHESIS: the control's determinism component reached 1.0 by episode 10 as required; only the 'zero model calls after episode 1' component failed, and it failed because four work items are observationally identical yet goal-distinct, which a no-memory state->action table provably cannot disambiguate without parameter induction. prereg.md 6.1 forbids parameter induction in this arm, so the failure is a property of the preregistered architecture, not of the substrate or the instrumentation.",
+    "SPEC/PREREG INTERNAL INCONSISTENCY (not resolvable by EXECUTE): spec.json positive_control says 'compile all spans on first episode' and 'model_calls_after_compile=0', while prereg.md 6.1 step 2 requires >=2 witnesses and prereg.md 8.1's pass criterion reads 'model_calls_after_episode_1 = 0'. Under the prereg rule compilation completes during episode 2, so episode 2 still deopts. Both readings are reported in controls.PC-WITNESSED-DETERMINISM (model_calls_episodes_2_to_50_literal = 216 and model_calls_strictly_after_compile_complete = 192); the PASS/FAIL judgement uses the prereg.md 8.1 criterion evaluated under the prereg.md 6.1 rule. The specification was not edited to remove the ambiguity.",
+    "PC-EXACT-REPLAY IS DECISION-GATING FOR NOTHING BY DESIGN: prereg.md 8.3 declares it 'measured but not decision-gating'. Its failure is reported as a measured property of the shipped kernel. It is the direct, pre-declared instrument check on the incumbent arm and the strongest single reason the DEOPT_DOMINATES classification must not be read as an architecture verdict.",
+    "RIGOUR OF THE DETERMINISM CI: the Wilson interval treats the 1200 span occurrences as independent Bernoulli trials, but spans inside one episode share a work item and a store state, so the true sampling unit is the episode, not the span. The reported CI is therefore narrower than a cluster-corrected interval would be. The sweep, which re-runs the whole experiment at five different novelty rates, is the stronger evidence about how the fraction moves.",
+    "ONE ADDITION BEYOND THE FROZEN SAMPLE CONTRACT: prereg.md 9 fixes 250 episodes (5 arms x 50). All 250 decision-bearing episodes were run exactly as frozen. In addition, a non-decision-gating sensitivity sweep of 5 points x 2 arms x 20 episodes x 24 spans = 4800 spans was run to locate the ratchet's behaviour across novelty, because the frozen design leaves the novelty rate unspecified. It cannot change the frozen three-way classification, which was computed only from the frozen 150 primary-episode arm runs. metrics.determinism_vs_target_novelty_rate_sweep_status records this as an addition, not a substitution.",
+    "REPRESENTATION LOSS: the substrate is a self-authored, single-machine, stateless-per-episode CRUD service with no DOM, no accessibility tree, no cross-site state, no authentication, no rate limiting, no partial failure, no non-determinism and no adversarial content. Success rate 1.0 in all three arms therefore reflects a perfectly deterministic substrate, not robust agent behaviour. Generalization to live heterogeneous Web work is a separate claim (C-CROSSSITE / C-WEB-DYNAMICS) and is explicitly not tested here, per prereg.md 12.",
+    "TASK PLAN IS SYNTHETIC AND EXPERIMENTER-AUTHORED: the five intents are the ones prereg.md 5.2 names, but the concrete endpoints, the four-work-item episode structure and the 24-span episode length are this execution's operationalisation of a preregistered sketch. They are fixed in code before any arm ran (research/frontier/taskplan.py) and every arm uses the identical plan, so the arm comparison is internally sound, but the absolute numbers are properties of this operationalisation.",
+    "RESOLVED FROM THE PARENT HANDOFF: the parent recorded that 'no real local HTTP service was available' as a probe-definition defect and that a repaired rerun could not establish a no-memory advantage. The first half is now settled positively and measured (a real stdlib HTTP service served 3600 main-comparison requests plus 4800 sweep requests with full idempotency). The second half is confirmed and quantified: the inherited arm's amortised cost is exactly equal to the inheritance-ablation null, and PC-EXACT-REPLAY returns 0 EXECUTABLE resolutions.",
+    "NOT DONE AND NOT CLAIMED: no Product code was modified, no code was promoted, no claim was self-promoted, no frozen input was edited. This packet is a producer handoff; the claim ceiling belongs to the independent AUDIT and the bounded decision belongs to the lane DIRECTOR."
+  ],
+  "unresolved": [
+    "Whether inherited-mechanism execution is economically superior, inferior or indistinguishable to a no-memory compiled executor CANNOT be settled by this experiment. The incumbent arm executed zero mechanisms, so the experiment contains no observation of working inheritance. A successor must make B-INHERITED-SPIDER executable before any architecture verdict is possible.",
+    "The minimum change that would make the incumbent arm executable is itself unresolved and now has two measured candidates that this lane is not authorized to choose between: lowering SpiderKernel's min_confidence to at most 0.5 (the diagnostic probe in artifacts/kernel_probe.json returns EXECUTABLE at 0.5), or giving distill() a real confidence model. Neither is a scientific finding of this experiment and neither may be applied to a frozen comparison without a new mandate.",
+    "The per-span witnessed-determinism fraction of REAL agent work remains unmeasured. The value here (0.5833333333333334) is a property of an experimenter-authored task plan. A successor on a captured real Web trajectory distribution is the only design that can turn it into a claim-level number.",
+    "Whether C-SEMANTIC-RESOLVE is structurally unreachable is consistent with, but not established by, this run: the kernel probe shows a paraphrased intent resolving UNKNOWN, but the experiment was not designed to test semantic resolution and only one paraphrase was probed.",
+    "Whether the compilability gap generalises is open. Here 0.6857142857142857 of deterministic span occurrences were compilable and 0.4 of all spans were served from compiled entries. The measured causes were: an observationally identical but goal-distinct state key (100 occurrences), state keys that never recurred because they embed an episode-specific previous request (100 occurrences), and the preregistered 2-witness compilation rule (20 occurrences). It is unknown how much of real work is of each kind.",
+    "Whether the deopt ratchet's advantage survives a non-ideal model is unknown. The oracle was a deterministic perfect policy at a fixed unit price, so the measured cost saving is an upper bound relative to a real model call and an unknown relative to real model pricing.",
+    "Whether the inherited arm would be cost-competitive once executable is unknown. The registry does hold 24 mechanisms that match intent and preconditions exactly; they are blocked by a single scalar gate. Nothing in this run indicates what their execution would cost, because none was executed.",
+    "The external convergent-compilation numbers in the director mandate (Auto witnessed-determinism 87.1% of 560 spans and related figures) were NOT imported and were not compared against anything here. They remain unverified agent priors; only an Intel artifact could license that comparison.",
+    "The novelty-rate axis was swept over the five preregistered-grid points only. The ratchet was cheaper than cold at all five, so the break-even novelty rate was not located inside [0, 1]; whether an architecture exists that loses at some novelty rate on this plan family is unknown.",
+    "Whether the DEOPT_TIES and DEOPT_LOSES branches of the frozen rule are reachable at all on this substrate is unknown, because the incumbent arm's cost is pinned to the null's cost by a mechanism (total non-executability) that no novelty setting can change.",
+    "The confidence gap 0.5 versus 0.8 is a single scalar in the shipped kernel, but whether SPIDER's architecture should be changed in response is a Director decision that this producer does not make and does not recommend here."
+  ],
+  "decision_rule_outcome": "DEOPT_DOMINATES",
+  "falsifier_triggered": false,
+  "falsifier_note": "prereg.md 10 / H3: DEOPT_DOMINATES would nominally trigger FALSIFIED-IN-SETTING for SPIDER's central inheritance premise. The producer reports the trigger as NOT triggered, because its discriminating premise is not met by this instrument: the incumbent arm executed 0 of 1200 spans through inheritance, so the comparison cannot separate 'inheritance is uneconomic' from 'the shipped kernel cannot execute'. The parent handoff's do_not_assume against reading this trigger as a no-memory advantage is respected. The auditor and the lane Director own this decision; the producer does not self-promote it.",
+  "hypothesis_statuses": {
+    "H1_per_span_determinism_ge_0_70": {
+      "met": false,
+      "measured_value": 0.5833333333333334,
+      "threshold": 0.7
+    },
+    "H2_deopt_cheaper_than_both_at_matched_correctness": {
+      "met_as_computed": true,
+      "clean_leg_C_d_lt_C_c": true,
+      "identified_leg_C_d_lt_C_i": false,
+      "note": "C_i equals C_c exactly because the incumbent arm executed no mechanism; the C_d vs C_i contrast is not identified"
+    },
+    "H3_falsifier_trigger": {
+      "triggered": false,
+      "reason": "precondition of H3 is an identified comparison between an executable inherited arm and the deopt arm; the incumbent arm is not executable under the preregistered configuration"
+    }
+  },
+  "frozen_design_deviations": [
+    {
+      "id": "DEV-1",
+      "kind": "addition_not_substitution",
+      "detail": "Non-decision-gating novelty-rate sensitivity sweep (5 points x 2 arms x 20 episodes) added because prereg.md 5.2 does not fix the task generator's novelty rate, which determines the primary estimand. The frozen 250 decision-bearing episodes were run unchanged and the frozen three-way classification was computed only from them."
+    },
+    {
+      "id": "DEV-2",
+      "kind": "documented_implementation_choice",
+      "detail": "prereg.md 6.1 does not specify how a no-memory executor locates a compiled span without invoking a model. Implemented as a (world state, executor's own last request) key, with a conservative refusal to compile any key that ever maps to two different correct actions. No plan, step index or goal is given to this arm, so the choice weakens rather than strengthens the treatment arm."
+    },
+    {
+      "id": "DEV-3",
+      "kind": "documented_implementation_choice",
+      "detail": "prereg.md 7.2 (three cost components) and prereg.md 6.2 (per-span inheritance machinery) reconciled by a fourth ledger component 'machinery' set to 1 unit per span only for arms that perform a resolve. Both readings are reported where they differ."
+    },
+    {
+      "id": "DEV-4",
+      "kind": "control_task_realisation",
+      "detail": "prereg.md 8.2 requires a task in which NO span repeats. The plan family contains an instance-independent entry-point fetch, so NC-ZERO-DETERMINISM additionally forces a per-episode query nonce on every span, as prereg.md 8.2 itself prescribes ('unique path/query/body per episode')."
+    },
+    {
+      "id": "DEV-5",
+      "kind": "module_beyond_prereg_section_15",
+      "detail": "research/frontier/taskplan.py and research/frontier/build_result_*.py added inside frontier's allowed_code_root research/frontier. The first holds the pre-declared task structure, the novelty-rate constant and the control nonce rule, so those choices are inspectable in code rather than hidden in the runner; the second only projects already-measured numbers into result.json."
+    }
+  ]
+}

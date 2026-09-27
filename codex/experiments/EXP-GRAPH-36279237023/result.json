@@ -1,0 +1,1637 @@
+{
+  "artifacts": [
+    {
+      "description": "frozen fixture definition (20 mechanisms, 20 endpoints)",
+      "path": "research/experiments/EXP-GRAPH-36279237023/artifacts/fixture_def.py",
+      "role": "code",
+      "sha256": "4c193abb9f20ac4e2e81231ddd7efb043c5ff896eb46cf1d628190b03b697f4f"
+    },
+    {
+      "description": "deterministic 80-goal generator",
+      "path": "research/experiments/EXP-GRAPH-36279237023/artifacts/goal_generator.py",
+      "role": "code",
+      "sha256": "3c4121f5cf1c484803c96810a1909e2c786cec1ce3ec8bfcf011df55d7cbfd4d"
+    },
+    {
+      "description": "stdlib-only 20-endpoint HTTP application with state hash",
+      "path": "research/experiments/EXP-GRAPH-36279237023/artifacts/http_server.py",
+      "role": "code",
+      "sha256": "2738e3990f0716b44eff8f6e559a6cff9db97747b92ba040cc09ae3ebbd62f17"
+    },
+    {
+      "description": "A-CANDIDATE, all null baselines, incumbent adapter, slot filler",
+      "path": "research/experiments/EXP-GRAPH-36279237023/artifacts/candidate_resolver.py",
+      "role": "code",
+      "sha256": "ef33487cc21ad68f0d98d12192027b6e7557435d9969936f5e68c81f6a93353e"
+    },
+    {
+      "description": "frozen ECE / UNKNOWN-precision / bootstrap estimators + unit tests",
+      "path": "research/experiments/EXP-GRAPH-36279237023/artifacts/metric_estimators.py",
+      "role": "code",
+      "sha256": "7bf88ee6dee0ab9deaab1f62b4db29e179073aceb79412b1b15ee9310062b48a"
+    },
+    {
+      "description": "phase-ordered runner: screen -> calibration -> arms -> metrics",
+      "path": "research/experiments/EXP-GRAPH-36279237023/artifacts/experiment_runner.py",
+      "role": "code",
+      "sha256": "70db93951d0d2ffa5b47db33fd934be0a1a973113a9e795315ac210bc2ee7003"
+    },
+    {
+      "description": "derives this packet's frozen gate table from derived evidence; runs no measurement",
+      "path": "research/experiments/EXP-GRAPH-36279237023/artifacts/write_packet.py",
+      "role": "code",
+      "sha256": "03395308a40defbd40df15911d759bac3c1898680a7244f663ef1854a75c5ff0"
+    },
+    {
+      "description": "20 mechanisms with intents, parameter_slots, action_templates",
+      "path": "research/experiments/EXP-GRAPH-36279237023/artifacts/fixture.json",
+      "role": "fixture",
+      "sha256": "f7350717d22ee9e291b02a141d80de2c6ee690aabb5b05f7a3fe5c6a1bbfe93e"
+    },
+    {
+      "description": "80 goals with target mechanism_ids and the declared 60-goal ambiguity",
+      "path": "research/experiments/EXP-GRAPH-36279237023/artifacts/goals.json",
+      "role": "fixture",
+      "sha256": "867b34a379df45b4f1cfbc0f2284b1a160cbc7e265c378cf8acbb9de63890072"
+    },
+    {
+      "description": "480 rows = 80 tasks x 6 arms, one JSON object per (task, arm)",
+      "path": "research/experiments/EXP-GRAPH-36279237023/raw_evidence/task_results.jsonl",
+      "role": "raw",
+      "sha256": "f3f92d9278e7b561e2f11dc1ca8a1db0fed5b0940c8f41995d39f7009318e819"
+    },
+    {
+      "description": "the 80 goals as executed",
+      "path": "research/experiments/EXP-GRAPH-36279237023/raw_evidence/goals_flat.jsonl",
+      "role": "raw",
+      "sha256": "6b2652ae873940d0b74bc74949378824372ea5bdf7beffefc0b1cd440e99aa4b"
+    },
+    {
+      "description": "per-goal screen rows, written before any candidate arm",
+      "path": "research/experiments/EXP-GRAPH-36279237023/raw_evidence/degeneracy_screen_per_goal.jsonl",
+      "role": "raw",
+      "sha256": "43a437652801b9a95a32347eda9f2d931fe1ec76fce08e2f5c5b37701fede030"
+    },
+    {
+      "description": "estimator unit tests, fixture integrity, goal independence",
+      "path": "research/experiments/EXP-GRAPH-36279237023/derived_evidence/phase0_preconditions.json",
+      "role": "derived",
+      "sha256": "a984e64a753cebc6add16737deca4922913f0e67a7b846846d6d7014fede1d27"
+    },
+    {
+      "description": "V9 freeze-hash check, frozen-input hash verification",
+      "path": "research/experiments/EXP-GRAPH-36279237023/derived_evidence/phase1_validity_preconditions.json",
+      "role": "derived",
+      "sha256": "d804f448c141ccb23b8a4b92e48d6ef1e69a6c7c40c78daa802bb90331cc0d61"
+    },
+    {
+      "description": "V8 screen output incl. substitute-leg declaration",
+      "path": "research/experiments/EXP-GRAPH-36279237023/derived_evidence/degeneracy_screen.json",
+      "role": "derived",
+      "sha256": "fca0b49ef1158f1f6324d3bd8d000ee0cc8f59ff9d122f37159a8e8ae0713668"
+    },
+    {
+      "description": "fitted gate, split, threshold sweep, seed refits, model fingerprint",
+      "path": "research/experiments/EXP-GRAPH-36279237023/derived_evidence/calibration.json",
+      "role": "derived",
+      "sha256": "9b58f1527310bca5a3e35bbdc987481a5771b5f8d007f3704da0128cccefe395"
+    },
+    {
+      "description": "all arm metrics, bootstraps, ECE bins, per-category breakdown",
+      "path": "research/experiments/EXP-GRAPH-36279237023/derived_evidence/metrics.json",
+      "role": "derived",
+      "sha256": "0731a97138528dd7d02afeff86816272465b62b131a0add439544dff9c7e38c1"
+    },
+    {
+      "description": "state hashes, arm orderings, seeds, counts",
+      "path": "research/experiments/EXP-GRAPH-36279237023/derived_evidence/design_facts.json",
+      "role": "derived",
+      "sha256": "01ff419d76696fcd10382fa892387a57e21aeb26e8ecb8b32e0a09e9c9d9c260"
+    },
+    {
+      "description": "machine-derived frozen gate table (this script's output, written before result.json)",
+      "path": "research/experiments/EXP-GRAPH-36279237023/derived_evidence/gate_table.json",
+      "role": "derived",
+      "sha256": "e361034d6d1d7a6810a0bf7a0c2a19113eeb2b92a0e8a0ea7552c8fd3f67f2e0"
+    }
+  ],
+  "controls": {
+    "A-CANDIDATE": {
+      "evidence": [
+        "derived_evidence/metrics.json",
+        "raw_evidence/task_results.jsonl"
+      ],
+      "expected": "A fitted applicability gate operating on mechanisms with bound parameter slots will achieve mechanism-identity binding accuracy strictly above the lexical-overlap and random nulls, with calibrated abstention that achieves UNKNOWN precision >= 0.85 and ECE <= 0.15, demonstrating that semantic resolution is achievable without internal mechanism identifiers.",
+      "observed": {
+        "ece_global": 0.203001,
+        "ece_per_class_max": 0.788463,
+        "false_accept_rate": 0.307692,
+        "mechanism_identity_accuracy": 0.692308,
+        "unknown_precision": 0.607143
+      },
+      "role": "candidate_under_test",
+      "verdict": "FALSIFIED_ON_ITS_OWN_TERMS",
+      "verdict_detail": "the candidate does not exceed the lexical null (difference exactly 0.0, one-sided lower 95% -0.0652, p 0.594), and four of the nine secondary gates fail on their own thresholds. This verdict is recorded but is NOT the packet's status, because the frozen gate order evaluates measurement validity first and V9 fails."
+    },
+    "A-INCUMBENT": {
+      "evidence": [
+        "raw_evidence/task_results.jsonl (arm=A-INCUMBENT)",
+        "raw_evidence/degeneracy_screen_per_goal.jsonl (arm=A-INCUMBENT)"
+      ],
+      "expected": "prereg 4.2 expected EXECUTABLE on all applicable goals at min_confidence 0.5",
+      "observed": {
+        "executable_count": 0,
+        "false_accept_rate": null,
+        "mechanism_identity_accuracy": 0.0,
+        "n_goals": 80,
+        "status_counts": {
+          "UNKNOWN": 80
+        }
+      },
+      "role": "incumbent_reference_leg",
+      "verdict": "EMPTY_LEG",
+      "verdict_detail": "0 of 80 EXECUTABLE; all 80 UNKNOWN. This is a code-level certainty, not a measured floor: kernel.py:resolve() requires exact intent-string equality AND all template slots present in the supplied params, V11 forbids empty parameter_slots, and this arm supplies params={}. The prereg's own expectation that the incumbent's mechanisms carry parameter_slots=[] is contradicted by V11 inside the same frozen document."
+    },
+    "A-REFERENCE-EMBEDARGMAX": {
+      "evidence": [
+        "raw_evidence/task_results.jsonl (arm=A-REFERENCE-EMBEDARGMAX)"
+      ],
+      "expected": "prereg 11: declared non-empty substitute when the incumbent leg is empty",
+      "observed": {
+        "executable_count": 80,
+        "false_accept_rate": 0.4375,
+        "mechanism_identity_accuracy_applicable": 0.865385,
+        "unknown_precision": 1.0
+      },
+      "role": "declared_substitute_comparison_leg",
+      "verdict": "PASS_AS_SUBSTITUTE_AND_STRONGER_THAN_THE_CANDIDATE",
+      "verdict_detail": "non-empty (80 of 80 EXECUTABLE) as required, and it scores 0.8654 on the frozen primary metric against the candidate's 0.6923. The uncalibrated, never-abstaining resolver beats the fitted-gate resolver, because every abstention the candidate makes costs it a mechanism-identity point under prereg 6.1 while buying nothing against the pooled false-accept gate. This is the single most decision-relevant number in the packet."
+    },
+    "B-INTERNAL-ID-ORACLE": {
+      "evidence": [
+        "raw_evidence/task_results.jsonl (arm=B-INTERNAL-ID-ORACLE)"
+      ],
+      "expected": "Mechanism-identity accuracy = 1.0 by construction. Declared difficulty ceiling: if this oracle achieves < 1.0 on mechanism-identity binding, the fixture is defective and the experiment is MEASUREMENT_INVALID.",
+      "observed": {
+        "abstained_on_no_applicable_goals": 28,
+        "mechanism_identity_accuracy_applicable": 1.0,
+        "n_applicable": 52
+      },
+      "role": "oracle_difficulty_ceiling",
+      "verdict": "PASS",
+      "verdict_detail": "1.0 on all 52 applicable goals and abstention on all 28 goals with no applicable mechanism. The declared difficulty ceiling is therefore 1.0 and the fixture admits a perfect resolver, so the candidate's 0.6923 is a real gap to a reachable ceiling, not an artefact of an unsolvable fixture."
+    },
+    "B-LEXICAL-OVERLAP": {
+      "evidence": [
+        "raw_evidence/task_results.jsonl (arm=B-LEXICAL-OVERLAP)",
+        "derived_evidence/degeneracy_screen.json"
+      ],
+      "expected": "strong baseline; must sit strictly below the 0.90 headroom threshold on the frozen goal set",
+      "observed": {
+        "below_threshold_as_frozen": true,
+        "false_accept_rate": 0.55,
+        "headroom_threshold": 0.9,
+        "mechanism_identity_accuracy_all80": 0.45,
+        "mechanism_identity_accuracy_applicable": 0.692308
+      },
+      "role": "baseline_null",
+      "verdict": "PASS_AS_SCREEN_CONDITION_BUT_WEAK_AS_A_NULL",
+      "verdict_detail": "the frozen screen condition (V8a, all-80 accuracy < 0.90) passes, but the applicable-only accuracy is 0.6923, i.e. it solves 36 of 52 applicable goals including 12/12 verbatim and 15/20 paraphrased. This is a substantially stronger lexical null than the parent packet's, and the frozen headroom screen cannot detect that because it is computed on a denominator the null cannot exceed."
+    },
+    "B-RANDOM-ROLE": {
+      "evidence": [
+        "raw_evidence/task_results.jsonl (arm=B-RANDOM-ROLE)"
+      ],
+      "expected": "chance conditional on inferred role; approximately 1/(mechanisms_per_role)",
+      "observed": {
+        "expected_chance_1_of_5_mechanisms_per_role": 0.2,
+        "mechanism_identity_accuracy_applicable": 0.134615
+      },
+      "role": "baseline_null",
+      "verdict": "PASS",
+      "verdict_detail": "0.1346 is below the 0.2 chance level implied by the fixture's 5 mechanisms per role, i.e. the role-keyword inference is worse than uniform because its keyword table sometimes picks the wrong role and sometimes no role."
+    },
+    "NC-NO-APPLICABLE": {
+      "evidence": [
+        "raw_evidence/task_results.jsonl (arm=A-CANDIDATE, category=no_applicable)"
+      ],
+      "expected": "Abstention rate = 1.0, UNKNOWN precision = 1.0 (vacuously), false_accept = 0.0. Denominator must be > 0 and explicitly reported. Failure triggers MEASUREMENT_INVALID per decision_rule.",
+      "observed": {
+        "abstention_causes": {
+          "unfilled_parameter_slots": 8
+        },
+        "abstention_rate": 1.0,
+        "denominator": 8,
+        "false_accept": 0
+      },
+      "role": "null_control",
+      "verdict": "PASS",
+      "verdict_detail": "8 of 8 no-applicable goals were abstained on and none produced an EXECUTABLE decision. MATERIAL CAVEAT: every one of those 8 abstentions came from the parameter-binding stage ('unfilled_parameter_slots'), not from the calibrated gate. The gate abstained on 0 of 52 applicable goals and 0 of these 8."
+    },
+    "PC-VERBATIM-INTENT": {
+      "evidence": [
+        "raw_evidence/task_results.jsonl (arm=A-CANDIDATE, category=verbatim)"
+      ],
+      "expected": "Mechanism-identity accuracy = 1.0, false_accept = 0.0, UNKNOWN precision = 1.0, ECE = 0.0. Denominator must be > 0 and explicitly reported. Failure of this control triggers MEASUREMENT_INVALID per decision_rule.",
+      "observed": {
+        "abstentions": 0,
+        "denominator": 12,
+        "ece": 0.053249,
+        "false_accept": 0,
+        "mechanism_identity_accuracy": 1.0,
+        "p_applicable": 0.946751,
+        "unknown_precision": 1.0
+      },
+      "role": "positive_control",
+      "verdict": "PASS",
+      "verdict_detail": "the frozen decision gate for this control is pc_verbatim_accuracy == 1.0 with denominator > 0; both hold. The control's descriptive expectation 'ECE = 0.0' is NOT met exactly: the observed value is |p_applicable - 1.0| for a perfect row, and every verbatim row sits at cos = 1.0 so the fitted gate assigns them the single value 0.9468 rather than 1.0. UNKNOWN precision is vacuous at 1.0 because the arm never abstains here."
+    }
+  },
+  "experiment_id": "EXP-GRAPH-36279237023",
+  "frozen_decision_rule_evaluation": {
+    "gate_order": "V1-V11 -> degeneracy screen -> positive control -> oracle ceiling -> null control -> calibration fitted -> primary -> secondary",
+    "gates": [
+      {
+        "failing_conditions": [
+          "V9_CODE_HASHED_INTO_FREEZE"
+        ],
+        "gate": 1,
+        "name": "measurement_validity_V1_V11",
+        "order": "prereg 7.1 step 1",
+        "pass": false
+      },
+      {
+        "failing_conditions": [],
+        "gate": 2,
+        "name": "degeneracy_screen",
+        "order": "prereg 7.1 step 2",
+        "pass": true
+      },
+      {
+        "failing_conditions": [],
+        "gate": 3,
+        "name": "positive_control_PC-VERBATIM-INTENT",
+        "order": "prereg 7.1 step 3",
+        "pass": true
+      },
+      {
+        "failing_conditions": [],
+        "gate": 4,
+        "name": "oracle_ceiling_B-INTERNAL-ID-ORACLE",
+        "order": "prereg 7.1 step 4",
+        "pass": true
+      },
+      {
+        "denominator": 8,
+        "failing_conditions": [],
+        "gate": 5,
+        "name": "null_control_NC-NO-APPLICABLE",
+        "observed_abstention_rate": 1.0,
+        "order": "prereg 7.1 step 5",
+        "pass": true
+      },
+      {
+        "failing_conditions": [],
+        "gate": 6,
+        "name": "calibration_fitted_check",
+        "order": "prereg 7.1 step 6",
+        "pass": true
+      },
+      {
+        "failing_conditions": [
+          "does_not_exceed_B-LEXICAL-OVERLAP"
+        ],
+        "gate": 7,
+        "name": "primary_mechanism_identity_accuracy_above_nulls",
+        "observed": {
+          "A-CANDIDATE": 0.692308,
+          "B-LEXICAL-OVERLAP": 0.692308,
+          "B-RANDOM-ROLE": 0.134615,
+          "difference_vs_lexical": 0.0,
+          "one_sided_lower_95_vs_lexical": -0.065217,
+          "p_one_sided_vs_lexical": 0.5943,
+          "passes_vs_lexical": false,
+          "passes_vs_random_role": true
+        },
+        "order": "prereg 7.1 step 7",
+        "pass": false
+      },
+      {
+        "detail": [
+          {
+            "direction": "<=",
+            "interpretation_dependent": true,
+            "interpretation_dependent_detail": "the frozen text does not fix the numerator/denominator pairing. The coded 0.3077 is R4 (all-80 wrong-execution numerator over the 52-goal applicable denominator) and FAILS. Under R1 (applicable wrong-executions over applicable goals) the candidate scores 0.0962 and PASSES, while the lexical null scores 0.3077 and fails. Under R2 (all 80) it scores 0.2000 and fails. The gate verdict is therefore not invariant to the specification gap. Reported as coded; not repaired.",
+            "name": "pooled_false_accept",
+            "observed": 0.307692,
+            "pass": false,
+            "threshold": 0.1
+          },
+          {
+            "direction": ">=",
+            "name": "unknown_precision",
+            "observed": 0.607143,
+            "pass": false,
+            "threshold": 0.85
+          },
+          {
+            "bootstrap_upper_95": 0.285203,
+            "bootstrap_upper_threshold": 0.18,
+            "direction": "<=",
+            "name": "ece_global",
+            "observed": 0.203001,
+            "pass": false,
+            "threshold": 0.15
+          },
+          {
+            "bootstrap_upper_95": 0.838805,
+            "bootstrap_upper_threshold": 0.18,
+            "direction": "<=",
+            "name": "ece_per_class_max",
+            "observed": 0.788463,
+            "pass": false,
+            "threshold": 0.15
+          },
+          {
+            "direction": "==",
+            "name": "calibration_fitted",
+            "observed": true,
+            "pass": true,
+            "threshold": true
+          },
+          {
+            "direction": "==",
+            "name": "degeneracy_screen_passed",
+            "observed": true,
+            "pass": true,
+            "threshold": true
+          },
+          {
+            "denominator": 12,
+            "direction": "==",
+            "name": "positive_control_pass",
+            "observed": 1.0,
+            "pass": true,
+            "threshold": 1.0
+          },
+          {
+            "direction": "==",
+            "name": "oracle_ceiling_pass",
+            "observed": 1.0,
+            "pass": true,
+            "threshold": 1.0
+          },
+          {
+            "denominator": 8,
+            "direction": "==",
+            "name": "null_control_pass",
+            "observed": 1.0,
+            "pass": true,
+            "threshold": 1.0
+          }
+        ],
+        "failing_conditions": [
+          "pooled_false_accept",
+          "unknown_precision",
+          "ece_global",
+          "ece_per_class_max"
+        ],
+        "gate": 8,
+        "name": "secondary_gates",
+        "order": "prereg 7.1 step 8",
+        "pass": false
+      }
+    ],
+    "measurement_validity_conditions": {
+      "V10_FAMILY_BLOCKED_UNCERTAINTY": {
+        "blocks": [
+          "albums",
+          "comments",
+          "photos",
+          "posts",
+          "users"
+        ],
+        "evidence": "derived_evidence/metrics.json primary.vs_*",
+        "n_blocks": 5,
+        "n_resamples": 10000,
+        "paired": true,
+        "pass": true
+      },
+      "V11_FIXTURE_DISCRIMINATION": {
+        "evidence": "derived_evidence/phase0_preconditions.json fixture",
+        "n_endpoints": 20,
+        "n_mechanisms": 20,
+        "pass": true,
+        "verbs_per_family": {
+          "albums": [
+            "create",
+            "delete",
+            "read",
+            "update"
+          ],
+          "comments": [
+            "create",
+            "delete",
+            "read",
+            "update"
+          ],
+          "photos": [
+            "create",
+            "delete",
+            "read",
+            "update"
+          ],
+          "posts": [
+            "create",
+            "delete",
+            "read",
+            "update"
+          ],
+          "users": [
+            "create",
+            "delete",
+            "read",
+            "update"
+          ]
+        }
+      },
+      "V1_CONSTRUCT_VALIDITY": {
+        "evidence": "derived_evidence/metrics.json.primary.metric == 'mechanism_identity_accuracy'; HTTP is reported only under verification_measure_http and per-arm http_execution_success_rate",
+        "pass": true,
+        "statement": "primary metric is mechanism-identity binding, HTTP execution is a separate measure"
+      },
+      "V2_POSITIVE_CONTROL_EXECUTED": {
+        "accuracy": 1.0,
+        "denominator": 12,
+        "evidence": "raw_evidence/task_results.jsonl rows arm=A-CANDIDATE category=verbatim",
+        "pass": true
+      },
+      "V3_ORACLE_CEILING": {
+        "evidence": "raw_evidence rows arm=B-INTERNAL-ID-ORACLE",
+        "oracle_accuracy": 1.0,
+        "pass": true
+      },
+      "V4_CALIBRATION_FITTED": {
+        "b": 0.18530383624882538,
+        "caveat": "the gate is formally fitted but INERT at the selected threshold: see metrics.calibration_gate_fired_on_n_applicable_goals",
+        "estimator": "sklearn.linear_model.LogisticRegression(penalty=None, solver=lbfgs, max_iter=5000)",
+        "evidence": "derived_evidence/calibration.json",
+        "independent_refit_w_spread": 1.12296,
+        "n_train_rows": 42,
+        "pass": true,
+        "pass_reasoning": "parameters are learned by maximum likelihood on a held-out-split train set and move across independent train splits, so they are not a fixed algebraic transform of cos_sim",
+        "threshold": 0.02,
+        "w": 2.6927439442486354
+      },
+      "V5_CLOSED_TOP_BIN_ECE": {
+        "evidence": "derived_evidence/phase0_preconditions.json estimator_unit_tests",
+        "pass": true,
+        "rows_dropped": 0,
+        "top_bin_hi": 0.946751
+      },
+      "V6_UNKNOWN_PRECISION_DEFINED": {
+        "evidence": "derived_evidence/phase0_preconditions.json estimator_unit_tests; the metric is NOT an OOD abstention rate (unit test unknown_precision_not_ood_rate returns 0.0 for a single abstention on an applicable goal)",
+        "observed_FP_abstain": 11,
+        "observed_TP_abstain": 17,
+        "pass": true
+      },
+      "V7_PER_TASK_STATE_RESET": {
+        "distinct_start_state_hashes": 1,
+        "evidence": "derived_evidence/design_facts.json state; raw_evidence/task_results.jsonl task_start_state_hash + http.pre_state_hash",
+        "n_tasks": 80,
+        "pass": true,
+        "state_hash": "89172fdef25be36870d3bbd5fa90a6655a1e4ab8da73799b40d9d746aebe1cb8"
+      },
+      "V8_DEGENERACY_SCREEN": {
+        "condition_a_informational_caveat": "B-LEXICAL-OVERLAP never abstains, so every one of the 28 goals with no applicable mechanism is scored incorrect by construction. Its accuracy on the frozen 80-goal set is therefore capped at 52/80 = 0.6500 < 0.9 for any lexical selector whatsoever. V8(a) as frozen is structurally non-binding on this fixture and its PASS is not evidence that the lexical null is weak.",
+        "condition_a_lexical_all80": 0.45,
+        "condition_a_passes": true,
+        "condition_a_threshold": 0.9,
+        "condition_b_comparison_leg_nonempty": true,
+        "evidence": "derived_evidence/degeneracy_screen.json (written before any candidate arm ran); raw_evidence/degeneracy_screen_per_goal.jsonl",
+        "incumbent_executable_count": 0,
+        "pass": true,
+        "substitute_executable_count": 80,
+        "substitute_leg": "A-REFERENCE-EMBEDARGMAX"
+      },
+      "V9_CODE_HASHED_INTO_FREEZE": {
+        "cause": "freeze.json was produced by the deterministic freezer at commit 9b56d0b9, which hashes only request.json, spec.json and prereg.md. The outcome-bearing code did not exist at freeze time, so no code hash could be present. The freezer is scripts/freeze_experiment.py, which is outside every scientific lane's allowed_code_roots, so no EXECUTE-stage actor can repair this.",
+        "code_files_expected_by_v9": [
+          "candidate_resolver.py",
+          "goal_generator.py",
+          "http_server.py",
+          "experiment_runner.py",
+          "metric_estimators.py",
+          "fixture_def.py"
+        ],
+        "code_files_present_in_freeze": [],
+        "evidence": "research/experiments/EXP-GRAPH-36279237023/freeze.json (immutable, hash-verified) and scripts/freeze_experiment.py at commit 7f5879fc",
+        "freeze_json_hashes": [
+          "prereg.md",
+          "request.json",
+          "spec.json"
+        ],
+        "pass": false
+      }
+    },
+    "source": "spec.json decision_rule + prereg.md 7.1",
+    "status_outcome_mapping_note": "spec.json decision_rule.outcomes.MEASUREMENT_INVALID maps to packet status=MEASUREMENT_INVALID with outcome=INCONCLUSIVE. A MEASUREMENT_INVALID status here is a statement about the validity of the measurement transaction, not a scientific negative about C-SEMANTIC-RESOLVE. The gate-by-gate measurements are reported in full above so that nothing measured here is discarded.",
+    "status_reason": "frozen decision_rule.outcomes.MEASUREMENT_INVALID: measurement-validity condition V9_CODE_HASHED_INTO_FREEZE FAILED. prereg.md 7.1 evaluates gate 1 first and short-circuits."
+  },
+  "lane": "graph",
+  "metrics": {
+    "abstention_rate_on_applicable": 0.211538,
+    "abstention_rate_on_no_applicable_28": 0.607143,
+    "calibration_b": 0.18530383624882538,
+    "calibration_gate_fired_on_n_applicable_goals": 0,
+    "calibration_is_fitted": true,
+    "calibration_p_top_max": 0.946751,
+    "calibration_p_top_min": 0.678458,
+    "calibration_threshold": 0.02,
+    "calibration_w": 2.6927439442486354,
+    "candidate_abstention_causes": {
+      "unfilled_parameter_slots": 28
+    },
+    "degeneracy_lexical_accuracy_all80": 0.45,
+    "degeneracy_lexical_accuracy_applicable_only": 0.692308,
+    "degeneracy_lexical_structural_cap_all80": 0.65,
+    "degeneracy_screen_pass": true,
+    "distinct_arm_orderings": 78,
+    "distinct_task_start_state_hashes": 1,
+    "ece_global": 0.203001,
+    "ece_global_all_80_goals_sensitivity": 0.380654,
+    "ece_global_bins": [
+      {
+        "bin": 0,
+        "empirical_accuracy": 0.333333,
+        "gap": 0.385445,
+        "mean_confidence": 0.718778,
+        "n": 6
+      },
+      {
+        "bin": 1,
+        "empirical_accuracy": 0.5,
+        "gap": 0.286425,
+        "mean_confidence": 0.786425,
+        "n": 6
+      },
+      {
+        "bin": 2,
+        "empirical_accuracy": 0.8,
+        "gap": 0.028094,
+        "mean_confidence": 0.828094,
+        "n": 5
+      },
+      {
+        "bin": 3,
+        "empirical_accuracy": 0.8,
+        "gap": 0.052439,
+        "mean_confidence": 0.852439,
+        "n": 5
+      },
+      {
+        "bin": 4,
+        "empirical_accuracy": 0.6,
+        "gap": 0.267231,
+        "mean_confidence": 0.867231,
+        "n": 5
+      },
+      {
+        "bin": 5,
+        "empirical_accuracy": 0.4,
+        "gap": 0.480397,
+        "mean_confidence": 0.880397,
+        "n": 5
+      },
+      {
+        "bin": 6,
+        "empirical_accuracy": 0.6,
+        "gap": 0.298949,
+        "mean_confidence": 0.898949,
+        "n": 5
+      },
+      {
+        "bin": 7,
+        "empirical_accuracy": 1.0,
+        "gap": 0.071354,
+        "mean_confidence": 0.928646,
+        "n": 5
+      },
+      {
+        "bin": 8,
+        "empirical_accuracy": 1.0,
+        "gap": 0.053249,
+        "mean_confidence": 0.946751,
+        "n": 5
+      },
+      {
+        "bin": 9,
+        "empirical_accuracy": 1.0,
+        "gap": 0.053249,
+        "mean_confidence": 0.946751,
+        "n": 5
+      }
+    ],
+    "ece_global_bootstrap_upper_95": 0.285203,
+    "ece_global_n_bins": 10,
+    "ece_global_n_rows": 52,
+    "ece_global_nonabstain_rows_only_sensitivity": 0.131888,
+    "ece_global_rows_dropped": 0,
+    "ece_per_class": {
+      "ABSTAIN": {
+        "bootstrap_upper_95": 0.838805,
+        "ece": 0.788463,
+        "n": 11,
+        "n_bins": 10
+      },
+      "EXECUTABLE": {
+        "bootstrap_upper_95": 0.220822,
+        "ece": 0.131888,
+        "n": 41,
+        "n_bins": 10
+      }
+    },
+    "ece_per_class_max": 0.788463,
+    "estimator_unit_tests_all_pass": true,
+    "false_accept_rate": 0.307692,
+    "false_accept_rate_by_arm": {
+      "A-CANDIDATE": 0.307692,
+      "A-INCUMBENT": null,
+      "A-REFERENCE-EMBEDARGMAX": 0.4375,
+      "B-INTERNAL-ID-ORACLE": 0.0,
+      "B-LEXICAL-OVERLAP": 0.55,
+      "B-RANDOM-ROLE": 0.9125
+    },
+    "false_accept_rate_denominator": 52,
+    "false_accept_rate_numerator": 16,
+    "false_accept_rate_on_applicable_executable_only": 0.121951,
+    "false_accept_rate_reading_audit": {
+      "A-CANDIDATE_gate_0.10_under_each_reading": {
+        "R1_applicable_over_applicable": {
+          "passes_0.10": true,
+          "rate": 0.096154
+        },
+        "R2_all80_over_all80": {
+          "passes_0.10": false,
+          "rate": 0.2
+        },
+        "R3_applicable_executable_denominator": {
+          "passes_0.10": false,
+          "rate": 0.121951
+        },
+        "R4_coded": {
+          "passes_0.10": false,
+          "rate": 0.307692
+        }
+      },
+      "A-CANDIDATE_gate_verdict_is_interpretation_dependent": true,
+      "by_arm": {
+        "A-CANDIDATE": {
+          "R1_executable_wrong_among_applicable_over_applicable": {
+            "denominator": 52,
+            "numerator": 5,
+            "rate": 0.096154
+          },
+          "R2_executable_wrong_over_all_80": {
+            "denominator": 80,
+            "numerator": 16,
+            "rate": 0.2
+          },
+          "R3_executable_wrong_among_applicable_over_applicable_and_executable": {
+            "denominator": 41,
+            "numerator": 5,
+            "rate": 0.121951
+          },
+          "R4_executable_wrong_over_all80_numerator_with_applicable_denominator": {
+            "denominator": 52,
+            "numerator": 16,
+            "rate": 0.307692
+          }
+        },
+        "A-INCUMBENT": {
+          "R1_executable_wrong_among_applicable_over_applicable": {
+            "denominator": 52,
+            "numerator": 0,
+            "rate": 0.0
+          },
+          "R2_executable_wrong_over_all_80": {
+            "denominator": 80,
+            "numerator": 0,
+            "rate": 0.0
+          },
+          "R3_executable_wrong_among_applicable_over_applicable_and_executable": {
+            "denominator": 0,
+            "numerator": 0,
+            "rate": null
+          },
+          "R4_executable_wrong_over_all80_numerator_with_applicable_denominator": {
+            "denominator": 52,
+            "numerator": 0,
+            "rate": 0.0
+          }
+        },
+        "A-REFERENCE-EMBEDARGMAX": {
+          "R1_executable_wrong_among_applicable_over_applicable": {
+            "denominator": 52,
+            "numerator": 7,
+            "rate": 0.134615
+          },
+          "R2_executable_wrong_over_all_80": {
+            "denominator": 80,
+            "numerator": 35,
+            "rate": 0.4375
+          },
+          "R3_executable_wrong_among_applicable_over_applicable_and_executable": {
+            "denominator": 52,
+            "numerator": 7,
+            "rate": 0.134615
+          },
+          "R4_executable_wrong_over_all80_numerator_with_applicable_denominator": {
+            "denominator": 52,
+            "numerator": 35,
+            "rate": 0.673077
+          }
+        },
+        "B-INTERNAL-ID-ORACLE": {
+          "R1_executable_wrong_among_applicable_over_applicable": {
+            "denominator": 52,
+            "numerator": 0,
+            "rate": 0.0
+          },
+          "R2_executable_wrong_over_all_80": {
+            "denominator": 80,
+            "numerator": 0,
+            "rate": 0.0
+          },
+          "R3_executable_wrong_among_applicable_over_applicable_and_executable": {
+            "denominator": 52,
+            "numerator": 0,
+            "rate": 0.0
+          },
+          "R4_executable_wrong_over_all80_numerator_with_applicable_denominator": {
+            "denominator": 52,
+            "numerator": 0,
+            "rate": 0.0
+          }
+        },
+        "B-LEXICAL-OVERLAP": {
+          "R1_executable_wrong_among_applicable_over_applicable": {
+            "denominator": 52,
+            "numerator": 16,
+            "rate": 0.307692
+          },
+          "R2_executable_wrong_over_all_80": {
+            "denominator": 80,
+            "numerator": 44,
+            "rate": 0.55
+          },
+          "R3_executable_wrong_among_applicable_over_applicable_and_executable": {
+            "denominator": 52,
+            "numerator": 16,
+            "rate": 0.307692
+          },
+          "R4_executable_wrong_over_all80_numerator_with_applicable_denominator": {
+            "denominator": 52,
+            "numerator": 44,
+            "rate": 0.846154
+          }
+        },
+        "B-RANDOM-ROLE": {
+          "R1_executable_wrong_among_applicable_over_applicable": {
+            "denominator": 52,
+            "numerator": 45,
+            "rate": 0.865385
+          },
+          "R2_executable_wrong_over_all_80": {
+            "denominator": 80,
+            "numerator": 73,
+            "rate": 0.9125
+          },
+          "R3_executable_wrong_among_applicable_over_applicable_and_executable": {
+            "denominator": 52,
+            "numerator": 45,
+            "rate": 0.865385
+          },
+          "R4_executable_wrong_over_all80_numerator_with_applicable_denominator": {
+            "denominator": 52,
+            "numerator": 73,
+            "rate": 1.403846
+          }
+        }
+      },
+      "robustness": "the false-accept gate is the ONLY secondary gate whose verdict depends on this choice. UNKNOWN precision (0.6071 < 0.85), global ECE (0.2030 > 0.15, bootstrap upper 0.2852 > 0.18), per-class ECE (0.7885 > 0.15) and the primary gate (candidate == lexical exactly) all fail under every reading, so the packet's conclusion does not rest on this ambiguity.",
+      "why": "the frozen spec/prereg name a 'pooled false-accept rate' but never fix the numerator/denominator pairing. The four defensible readings are reported per arm. The coded value equals R2 for every arm EXCEPT A-CANDIDATE, where it equals R4 -- a hybrid that is the only cell in the table pairing an all-80 numerator with an applicable-only denominator. It is also the most pessimistic cell in the table. This defect is disclosed as OBS-11 / VN-06 and is not repaired here, because repairing it would mean changing an executed measurement after seeing the outcome."
+    },
+    "frozen_input_hashes_match_freeze_json": true,
+    "http_execution_success_rate_by_arm": {
+      "A-CANDIDATE": 1.0,
+      "A-INCUMBENT": null,
+      "A-REFERENCE-EMBEDARGMAX": 1.0,
+      "B-INTERNAL-ID-ORACLE": 1.0,
+      "B-LEXICAL-OVERLAP": 1.0,
+      "B-RANDOM-ROLE": 1.0
+    },
+    "http_requests_attempted_by_arm": {
+      "A-CANDIDATE": 52,
+      "A-INCUMBENT": 0,
+      "A-REFERENCE-EMBEDARGMAX": 52,
+      "B-INTERNAL-ID-ORACLE": 42,
+      "B-LEXICAL-OVERLAP": 51,
+      "B-RANDOM-ROLE": 43
+    },
+    "http_requests_total": 240,
+    "mechanism_identity_accuracy": 0.692308,
+    "mechanism_identity_accuracy_by_arm": {
+      "A-CANDIDATE": 0.692308,
+      "A-INCUMBENT": 0.0,
+      "A-REFERENCE-EMBEDARGMAX": 0.865385,
+      "B-INTERNAL-ID-ORACLE": 1.0,
+      "B-LEXICAL-OVERLAP": 0.692308,
+      "B-RANDOM-ROLE": 0.134615
+    },
+    "mechanism_identity_accuracy_by_category": {
+      "A-CANDIDATE": {
+        "composite": 0.5,
+        "paraphrased": 0.95,
+        "underspecified": 0.0,
+        "verbatim": 1.0
+      },
+      "A-INCUMBENT": {
+        "composite": 0.0,
+        "paraphrased": 0.0,
+        "underspecified": 0.0,
+        "verbatim": 0.0
+      },
+      "A-REFERENCE-EMBEDARGMAX": {
+        "composite": 0.5,
+        "paraphrased": 0.95,
+        "underspecified": 0.9,
+        "verbatim": 1.0
+      },
+      "B-INTERNAL-ID-ORACLE": {
+        "composite": 1.0,
+        "paraphrased": 1.0,
+        "underspecified": 1.0,
+        "verbatim": 1.0
+      },
+      "B-LEXICAL-OVERLAP": {
+        "composite": 0.4,
+        "paraphrased": 0.75,
+        "underspecified": 0.5,
+        "verbatim": 1.0
+      },
+      "B-RANDOM-ROLE": {
+        "composite": 0.1,
+        "paraphrased": 0.1,
+        "underspecified": 0.0,
+        "verbatim": 0.333333
+      }
+    },
+    "mechanism_identity_accuracy_counted_by_category": {
+      "A-CANDIDATE": {
+        "composite": {
+          "abstained": 0,
+          "correct": 5,
+          "n_applicable": 10,
+          "n_rows": 10,
+          "wrong_executable": 5
+        },
+        "no_applicable": {
+          "abstained": 8,
+          "correct": 0,
+          "n_applicable": 0,
+          "n_rows": 8,
+          "wrong_executable": 0
+        },
+        "ood": {
+          "abstained": 9,
+          "correct": 0,
+          "n_applicable": 0,
+          "n_rows": 20,
+          "wrong_executable": 11
+        },
+        "paraphrased": {
+          "abstained": 1,
+          "correct": 19,
+          "n_applicable": 20,
+          "n_rows": 20,
+          "wrong_executable": 0
+        },
+        "underspecified": {
+          "abstained": 10,
+          "correct": 0,
+          "n_applicable": 10,
+          "n_rows": 10,
+          "wrong_executable": 0
+        },
+        "verbatim": {
+          "abstained": 0,
+          "correct": 12,
+          "n_applicable": 12,
+          "n_rows": 12,
+          "wrong_executable": 0
+        }
+      },
+      "A-INCUMBENT": {
+        "composite": {
+          "abstained": 10,
+          "correct": 0,
+          "n_applicable": 10,
+          "n_rows": 10,
+          "wrong_executable": 0
+        },
+        "no_applicable": {
+          "abstained": 8,
+          "correct": 0,
+          "n_applicable": 0,
+          "n_rows": 8,
+          "wrong_executable": 0
+        },
+        "ood": {
+          "abstained": 20,
+          "correct": 0,
+          "n_applicable": 0,
+          "n_rows": 20,
+          "wrong_executable": 0
+        },
+        "paraphrased": {
+          "abstained": 20,
+          "correct": 0,
+          "n_applicable": 20,
+          "n_rows": 20,
+          "wrong_executable": 0
+        },
+        "underspecified": {
+          "abstained": 10,
+          "correct": 0,
+          "n_applicable": 10,
+          "n_rows": 10,
+          "wrong_executable": 0
+        },
+        "verbatim": {
+          "abstained": 12,
+          "correct": 0,
+          "n_applicable": 12,
+          "n_rows": 12,
+          "wrong_executable": 0
+        }
+      },
+      "A-REFERENCE-EMBEDARGMAX": {
+        "composite": {
+          "abstained": 0,
+          "correct": 5,
+          "n_applicable": 10,
+          "n_rows": 10,
+          "wrong_executable": 5
+        },
+        "no_applicable": {
+          "abstained": 0,
+          "correct": 0,
+          "n_applicable": 0,
+          "n_rows": 8,
+          "wrong_executable": 8
+        },
+        "ood": {
+          "abstained": 0,
+          "correct": 0,
+          "n_applicable": 0,
+          "n_rows": 20,
+          "wrong_executable": 20
+        },
+        "paraphrased": {
+          "abstained": 0,
+          "correct": 19,
+          "n_applicable": 20,
+          "n_rows": 20,
+          "wrong_executable": 1
+        },
+        "underspecified": {
+          "abstained": 0,
+          "correct": 9,
+          "n_applicable": 10,
+          "n_rows": 10,
+          "wrong_executable": 1
+        },
+        "verbatim": {
+          "abstained": 0,
+          "correct": 12,
+          "n_applicable": 12,
+          "n_rows": 12,
+          "wrong_executable": 0
+        }
+      },
+      "B-INTERNAL-ID-ORACLE": {
+        "composite": {
+          "abstained": 0,
+          "correct": 10,
+          "n_applicable": 10,
+          "n_rows": 10,
+          "wrong_executable": 0
+        },
+        "no_applicable": {
+          "abstained": 8,
+          "correct": 0,
+          "n_applicable": 0,
+          "n_rows": 8,
+          "wrong_executable": 0
+        },
+        "ood": {
+          "abstained": 20,
+          "correct": 0,
+          "n_applicable": 0,
+          "n_rows": 20,
+          "wrong_executable": 0
+        },
+        "paraphrased": {
+          "abstained": 0,
+          "correct": 20,
+          "n_applicable": 20,
+          "n_rows": 20,
+          "wrong_executable": 0
+        },
+        "underspecified": {
+          "abstained": 0,
+          "correct": 10,
+          "n_applicable": 10,
+          "n_rows": 10,
+          "wrong_executable": 0
+        },
+        "verbatim": {
+          "abstained": 0,
+          "correct": 12,
+          "n_applicable": 12,
+          "n_rows": 12,
+          "wrong_executable": 0
+        }
+      },
+      "B-LEXICAL-OVERLAP": {
+        "composite": {
+          "abstained": 0,
+          "correct": 4,
+          "n_applicable": 10,
+          "n_rows": 10,
+          "wrong_executable": 6
+        },
+        "no_applicable": {
+          "abstained": 0,
+          "correct": 0,
+          "n_applicable": 0,
+          "n_rows": 8,
+          "wrong_executable": 8
+        },
+        "ood": {
+          "abstained": 0,
+          "correct": 0,
+          "n_applicable": 0,
+          "n_rows": 20,
+          "wrong_executable": 20
+        },
+        "paraphrased": {
+          "abstained": 0,
+          "correct": 15,
+          "n_applicable": 20,
+          "n_rows": 20,
+          "wrong_executable": 5
+        },
+        "underspecified": {
+          "abstained": 0,
+          "correct": 5,
+          "n_applicable": 10,
+          "n_rows": 10,
+          "wrong_executable": 5
+        },
+        "verbatim": {
+          "abstained": 0,
+          "correct": 12,
+          "n_applicable": 12,
+          "n_rows": 12,
+          "wrong_executable": 0
+        }
+      },
+      "B-RANDOM-ROLE": {
+        "composite": {
+          "abstained": 0,
+          "correct": 1,
+          "n_applicable": 10,
+          "n_rows": 10,
+          "wrong_executable": 9
+        },
+        "no_applicable": {
+          "abstained": 0,
+          "correct": 0,
+          "n_applicable": 0,
+          "n_rows": 8,
+          "wrong_executable": 8
+        },
+        "ood": {
+          "abstained": 0,
+          "correct": 0,
+          "n_applicable": 0,
+          "n_rows": 20,
+          "wrong_executable": 20
+        },
+        "paraphrased": {
+          "abstained": 0,
+          "correct": 2,
+          "n_applicable": 20,
+          "n_rows": 20,
+          "wrong_executable": 18
+        },
+        "underspecified": {
+          "abstained": 0,
+          "correct": 0,
+          "n_applicable": 10,
+          "n_rows": 10,
+          "wrong_executable": 10
+        },
+        "verbatim": {
+          "abstained": 0,
+          "correct": 4,
+          "n_applicable": 12,
+          "n_rows": 12,
+          "wrong_executable": 8
+        }
+      }
+    },
+    "mechanism_identity_accuracy_denominator": 52,
+    "mechanism_identity_accuracy_unit": "proportion of the 52 goals with at least one applicable mechanism for which selected_mechanism_id == target_mechanism_id; an abstention is an incorrect outcome (prereg 6.1)",
+    "n_arms_per_task": 6,
+    "n_raw_rows": 480,
+    "n_tasks": 80,
+    "nc_abstention_causes": {
+      "unfilled_parameter_slots": 8
+    },
+    "nc_abstention_rate": 1.0,
+    "nc_denominator": 8,
+    "oracle_accuracy": 1.0,
+    "pc_verbatim_abstentions": 0,
+    "pc_verbatim_accuracy": 1.0,
+    "pc_verbatim_denominator": 12,
+    "pc_verbatim_ece_observed": 0.053249,
+    "pc_verbatim_ece_prereg_expected": 0.0,
+    "pc_verbatim_false_accept": 0,
+    "pc_verbatim_unknown_precision_note": "vacuous: the candidate never abstains on a verbatim goal, so TP_abstain + FP_abstain = 0 and the frozen vacuous rule (prereg 4.7) returns 1.0",
+    "pc_verbatim_unknown_precision_observed": 1.0,
+    "primary_alpha_one_sided": 0.05,
+    "primary_candidate_vs_lexical_contingency": {
+      "both_correct": 29,
+      "candidate_only_correct": 7,
+      "lexical_only_correct": 7,
+      "neither_correct": 9,
+      "note": "on the 52 applicable goals the two arms win different goals in equal number; the exact tie in the pooled rate is a compositional coincidence, not equivalence"
+    },
+    "primary_candidate_vs_uncalibrated_argmax_contingency": {
+      "argmax_only_correct": 9,
+      "both_correct": 36,
+      "candidate_only_correct": 0,
+      "neither_correct": 7,
+      "note": "the candidate's correct set is a strict SUBSET of the uncalibrated argmax's correct set"
+    },
+    "primary_ci95_two_sided_vs_B-LEXICAL-OVERLAP": [
+      -0.076923,
+      0.076923
+    ],
+    "primary_comparison": "paired_family_blocked_bootstrap",
+    "primary_difference_vs_A-REFERENCE-EMBEDARGMAX": -0.173077,
+    "primary_difference_vs_B-INTERNAL-ID-ORACLE": -0.307692,
+    "primary_difference_vs_B-LEXICAL-OVERLAP": 0.0,
+    "primary_difference_vs_B-RANDOM-ROLE": 0.557692,
+    "primary_metric": "mechanism_identity_accuracy",
+    "primary_one_sided_lower_95_vs_B-LEXICAL-OVERLAP": -0.065217,
+    "primary_p_one_sided_vs_B-LEXICAL-OVERLAP": 0.5943,
+    "primary_p_one_sided_vs_B-RANDOM-ROLE": 0.0,
+    "primary_split_wise_accuracy": {
+      "n_train": 42.0,
+      "n_val": 10.0,
+      "train_only": 0.666667,
+      "validation_only": 0.8
+    },
+    "primary_tie_decomposition_vs_lexical": {
+      "interpretation_boundary": "this decomposition is DERIVED from the raw per-goal rows and is offered as a diagnosis of the observed primary-gate failure. It is NOT a frozen preregistered analysis, it is not a substitute for the primary gate, and it was not used to alter any threshold or gate verdict.",
+      "statement": "the exact 0.0 pooled tie between A-CANDIDATE and B-LEXICAL-OVERLAP is the net of two large offsetting per-category effects, not equivalence between the two arms. Category contributions (candidate minus lexical) on the 52 applicable goals: verbatim 12-12=0, paraphrased 19-15=+4, underspecified 0-5=-5, composite 5-4=+1. Sum = 0."
+    },
+    "reproducibility": "two independent full re-runs produced byte-identical raw_evidence/task_results.jsonl and byte-identical derived_evidence/* (only wall_clock_seconds differs)",
+    "task_start_state_hash": "89172fdef25be36870d3bbd5fa90a6655a1e4ab8da73799b40d9d746aebe1cb8",
+    "unknown_precision": 0.607143,
+    "unknown_precision_FP_abstain": 11,
+    "unknown_precision_TP_abstain": 17,
+    "unknown_precision_by_arm": {
+      "A-CANDIDATE": 0.607143,
+      "A-INCUMBENT": 0.35,
+      "A-REFERENCE-EMBEDARGMAX": 1.0,
+      "B-INTERNAL-ID-ORACLE": 1.0,
+      "B-LEXICAL-OVERLAP": 1.0,
+      "B-RANDOM-ROLE": 1.0
+    }
+  },
+  "observations": [
+    {
+      "evidence": [
+        "raw_evidence/task_results.jsonl",
+        "derived_evidence/metrics.json"
+      ],
+      "id": "OBS-01",
+      "kind": "reproducibility",
+      "level": "raw_evidence",
+      "statement": "Two independent full executions of the runner produced byte-identical raw_evidence/task_results.jsonl and byte-identical derived_evidence/*; the only differing field anywhere is wall_clock_seconds.",
+      "value": "deterministic"
+    },
+    {
+      "evidence": [
+        "derived_evidence/design_facts.json"
+      ],
+      "id": "OBS-02",
+      "kind": "measurement_hygiene",
+      "level": "raw_evidence",
+      "statement": "All 80 tasks began from a single identical application state hash and the store was reset before every arm request.",
+      "value": {
+        "distinct_task_start_state_hashes": 1,
+        "state_hash": "89172fdef25be36870d3bbd5fa90a6655a1e4ab8da73799b40d9d746aebe1cb8"
+      }
+    },
+    {
+      "evidence": [
+        "derived_evidence/design_facts.json"
+      ],
+      "id": "OBS-03",
+      "kind": "measurement_hygiene",
+      "level": "raw_evidence",
+      "statement": "The frozen minimum of 43 distinct arm orderings was exceeded.",
+      "value": {
+        "n_distinct_orderings": 78,
+        "n_tasks": 80,
+        "prereg_minimum": 43
+      }
+    },
+    {
+      "evidence": [
+        "raw_evidence/task_results.jsonl"
+      ],
+      "id": "OBS-04",
+      "kind": "coverage",
+      "level": "raw_evidence",
+      "statement": "480 raw rows were written (80 tasks x 6 arms) and no estimator dropped any row.",
+      "value": {
+        "http_requests_total": 240,
+        "rows": 480,
+        "rows_dropped_by_any_estimator": 0
+      }
+    },
+    {
+      "evidence": [
+        "derived_evidence/phase1_validity_preconditions.json"
+      ],
+      "id": "OBS-05",
+      "kind": "integrity",
+      "level": "raw_evidence",
+      "statement": "The sha256 of each frozen input recomputed at execution time equals the value recorded in freeze.json; the frozen inputs were not modified.",
+      "value": {
+        "prereg.md": "0c95744647f7aa9943e14de5db7c758e1d45ea152a961f424aab6f610ac66657",
+        "request.json": "d482a1898b243f6bdeec5870ca70993fe64a811dd3e9b1a99cd32e2064bd8b3d",
+        "spec.json": "0151912409917e9098ff691df04b71097e769740bddc30d7bfd7e8862802fcd5"
+      }
+    },
+    {
+      "evidence": [
+        "raw_evidence/task_results.jsonl"
+      ],
+      "id": "OBS-06",
+      "kind": "primary_measurement",
+      "level": "observation",
+      "statement": "A-CANDIDATE selected the target mechanism on 36 of the 52 goals that have at least one applicable mechanism.",
+      "value": 0.692308
+    },
+    {
+      "evidence": [
+        "raw_evidence/task_results.jsonl"
+      ],
+      "id": "OBS-07",
+      "kind": "category_decomposition",
+      "level": "observation",
+      "statement": "Counted correctly out of applicable, A-CANDIDATE scored verbatim 12/12, paraphrased 19/20, underspecified 0/10, composite 5/10. B-LEXICAL-OVERLAP scored 12/12, 15/20, 5/10, 4/10. A-REFERENCE-EMBEDARGMAX scored 12/12, 19/20, 9/10, 5/10.",
+      "value": "see metrics.mechanism_identity_accuracy_counted_by_category"
+    },
+    {
+      "evidence": [
+        "raw_evidence/task_results.jsonl"
+      ],
+      "id": "OBS-08",
+      "kind": "decision_provenance",
+      "level": "raw_evidence",
+      "statement": "All 28 A-CANDIDATE abstentions carry abstain_reason 'unfilled_parameter_slots'. No abstention was produced by the calibrated gate.",
+      "value": {
+        "gate_threshold": 0,
+        "unfilled_parameter_slots": 28
+      }
+    },
+    {
+      "evidence": [
+        "derived_evidence/calibration.json"
+      ],
+      "id": "OBS-09",
+      "kind": "gate_behaviour",
+      "level": "derived_measurement",
+      "statement": "The fitted gate assigns p in [0.6785, 0.9468] to the 52 applicable goals. The selected threshold is 0.02, so 0 of 52 goals fall below it and the gate never fires.",
+      "value": {
+        "n_below_threshold": 0,
+        "p_max": 0.946751,
+        "p_min": 0.678462,
+        "threshold": 0.02
+      }
+    },
+    {
+      "evidence": [
+        "raw_evidence/task_results.jsonl"
+      ],
+      "id": "OBS-10",
+      "kind": "safety",
+      "level": "raw_evidence",
+      "statement": "On the 20 'ood' goals, which have no applicable mechanism at all, A-CANDIDATE produced 11 EXECUTABLE decisions at p between 0.6925 and 0.8407 (mean 0.7787) and abstained on 9.",
+      "value": {
+        "executable_on_ood": 11,
+        "mean_p_on_ood_executable": 0.778723,
+        "n_ood": 20
+      }
+    },
+    {
+      "evidence": [
+        "metrics.false_accept_rate_reading_audit"
+      ],
+      "id": "OBS-11",
+      "kind": "metric_defect",
+      "level": "derived_measurement",
+      "statement": "The coded false_accept_rate equals reading R2 (all-80 wrong executions over all 80) for every arm EXCEPT A-CANDIDATE, where it equals R4 (all-80 wrong executions over the 52 applicable goals). A-CANDIDATE's 0.3077 is therefore not comparable with the other arms' cells and is the most pessimistic cell in the table.",
+      "value": {
+        "A-CANDIDATE": 0.307692,
+        "A-REFERENCE-EMBEDARGMAX": 0.4375,
+        "B-INTERNAL-ID-ORACLE": 0.0,
+        "B-LEXICAL-OVERLAP": 0.55,
+        "B-RANDOM-ROLE": 0.9125
+      }
+    },
+    {
+      "evidence": [
+        "raw_evidence/task_results.jsonl",
+        "raw_evidence/degeneracy_screen_per_goal.jsonl"
+      ],
+      "id": "OBS-12",
+      "kind": "incumbent_behaviour",
+      "level": "raw_evidence",
+      "statement": "A-INCUMBENT produced 0 EXECUTABLE decisions out of 80 goals; all 80 were UNKNOWN.",
+      "value": {
+        "executable": 0,
+        "n_goals": 80
+      }
+    },
+    {
+      "evidence": [
+        "derived_evidence/metrics.json"
+      ],
+      "id": "OBS-13",
+      "kind": "baseline_comparison",
+      "level": "derived_measurement",
+      "statement": "The declared substitute leg A-REFERENCE-EMBEDARGMAX scores 45/52 = 0.8654 on the frozen primary metric against the candidate's 36/52 = 0.6923, and 45/80 = 0.5625 over all 80 against the candidate's 36/80 = 0.45. It never abstains.",
+      "value": {
+        "candidate": 0.692308,
+        "difference": -0.173077,
+        "embedargmax": 0.865385,
+        "one_sided_lower_95": -0.203704,
+        "p_one_sided": 1.0
+      }
+    },
+    {
+      "evidence": [
+        "raw_evidence/task_results.jsonl"
+      ],
+      "id": "OBS-14",
+      "kind": "contingency",
+      "level": "derived_measurement",
+      "statement": "On the 52 applicable goals A-CANDIDATE and B-LEXICAL-OVERLAP are both correct on 29, candidate-only correct on 7, lexical-only correct on 7, neither correct on 9.",
+      "value": {
+        "both": 29,
+        "candidate_only": 7,
+        "lexical_only": 7,
+        "neither": 9
+      }
+    },
+    {
+      "evidence": [
+        "raw_evidence/task_results.jsonl"
+      ],
+      "id": "OBS-15",
+      "kind": "difficulty_ceiling",
+      "level": "derived_measurement",
+      "statement": "B-INTERNAL-ID-ORACLE reached 52/52 on applicable goals and abstained on all 28 goals with no applicable mechanism.",
+      "value": {
+        "abstained_on_no_applicable": 28,
+        "applicable_accuracy": 1.0
+      }
+    },
+    {
+      "evidence": [
+        "derived_evidence/metrics.json"
+      ],
+      "id": "OBS-16",
+      "kind": "calibration_structure",
+      "level": "derived_measurement",
+      "statement": "ABSTAIN-class ECE is 0.7885 over 11 rows, but none of those 11 rows was abstained on by the gate; they were abstained on by the parameter slot filler while carrying a gate confidence of 0.68 to 0.91 that the gate never acted on.",
+      "value": {
+        "ece_abstain_class": 0.788463,
+        "gate_fired_on": 0,
+        "n": 11
+      }
+    },
+    {
+      "evidence": [
+        "research/experiments/EXP-GRAPH-36279237023/freeze.json",
+        "derived_evidence/phase1_validity_preconditions.json"
+      ],
+      "id": "OBS-17",
+      "kind": "freeze_contents",
+      "level": "raw_evidence",
+      "statement": "freeze.json records a sha256 for exactly three files (prereg.md, request.json, spec.json) and for zero code files. V9 requires outcome-bearing code to be hashed into the freeze.",
+      "value": {
+        "cause": "scripts/freeze_experiment.py at commit 7f5879fc hashes only the three design documents, and that file is outside the graph lane's allowed code roots",
+        "code_files_hashed": 0,
+        "files_hashed": 3
+      }
+    },
+    {
+      "evidence": [
+        "raw_evidence/task_results.jsonl"
+      ],
+      "id": "OBS-18",
+      "kind": "positive_control_detail",
+      "level": "raw_evidence",
+      "statement": "All 12 verbatim goals were bound and selected correctly, but every one carries p_applicable = 0.9468 rather than 1.0, because cos_sim = 1.0 maps through the fitted gate to 0.9468. The control's descriptive expectation of ECE = 0.0 is therefore not met exactly; the observed descriptive value is 0.0532. The frozen decision gate for the control is accuracy == 1.0 with denominator > 0, which is met.",
+      "value": {
+        "accuracy": 1.0,
+        "denominator": 12,
+        "ece_observed": 0.053249,
+        "ece_prereg_expected": 0.0
+      }
+    },
+    {
+      "evidence": [
+        "derived_evidence/metrics.json"
+      ],
+      "id": "OBS-19",
+      "kind": "split_wise",
+      "level": "derived_measurement",
+      "statement": "Primary accuracy is 0.6667 on the 42 train goals and 0.80 on the 10 validation goals. The frozen design has no held-out test split, so the primary metric is reported on the union.",
+      "value": {
+        "n_train": 42,
+        "n_val": 10,
+        "train_only": 0.666667,
+        "validation_only": 0.8
+      }
+    },
+    {
+      "evidence": [
+        "derived_evidence/calibration.json"
+      ],
+      "id": "OBS-20",
+      "kind": "gate_fittedness",
+      "level": "derived_measurement",
+      "statement": "Refitting on independent train splits moves the logistic weight (w = 2.7440, 1.6211, 1.9349; spread 1.1230), so the gate is a learned function of the data rather than a fixed algebraic transform of cos_sim.",
+      "value": {
+        "w_spread": 1.12296
+      }
+    },
+    {
+      "caveat": "this diagnostic was NOT preregistered; it is reported as supporting evidence only and did not alter any gate verdict",
+      "evidence": [
+        "diagnostic recomputation over derived_evidence/calibration.json cosine_top_only_rows"
+      ],
+      "id": "OBS-21",
+      "kind": "threshold_robustness_diagnostic",
+      "level": "derived_measurement",
+      "statement": "A post-hoc diagnostic that maximised the F1 of the ACCEPT class on the validation split instead of the frozen commit/abstain F1 also selected t = 0.02, so the gate's inertness is not an artifact of the declared threshold-selection reading.",
+      "value": {
+        "accept_class_f1_criterion_selected": 0.02,
+        "frozen_criterion_selected": 0.02
+      }
+    }
+  ],
+  "outcome": "INCONCLUSIVE",
+  "schema_version": 1,
+  "status": "MEASUREMENT_INVALID",
+  "unresolved": [
+    {
+      "id": "UNRES-01",
+      "partial_evidence": "the entire deficit is concentrated in the 10 underspecified goals, where the candidate scores 0/10 by abstaining on all 10 while the argmax scores 9/10. On paraphrased and composite goals the candidate ties the argmax (19/20 and 5/10). The frozen design has no arm that separates the two components.",
+      "question": "Is the candidate worse than the uncalibrated argmax because of the embedding, or purely because of its non-calibrated abstention policy?",
+      "status": "UNRESOLVED_BY_THIS_DESIGN"
+    },
+    {
+      "id": "UNRES-02",
+      "partial_evidence": "not testable here, because the frozen fitting set contains only goals that have an applicable mechanism, so the gate never sees a negative.",
+      "question": "Would an applicability gate fitted with a proper negative class abstain on the 20 ood goals, where the candidate fires on 11 of them?",
+      "status": "UNRESOLVED_BY_THIS_DESIGN"
+    },
+    {
+      "id": "UNRES-03",
+      "partial_evidence": "no. The category decomposition shows the two arms are not equivalent: the embedding route beats lexical by 4 goals on paraphrased intent (19/20 vs 15/20) and by 1 on composite, and loses 5 on underspecified. The pooled tie is a compositional cancellation, so the semantic route does carry real signal that the candidate's abstention policy destroys.",
+      "question": "Is the lexical null at 36/52 a genuine barrier to the semantic route?",
+      "status": "PARTIALLY_RESOLVED"
+    },
+    {
+      "id": "UNRES-04",
+      "partial_evidence": "not answerable without a new freeze that hashes code. artifact hashes are recorded in this packet after the fact and are explicitly NOT offered as satisfying V9.",
+      "question": "Is the V9 failure a documentation defect only, or does it mean the executed code cannot be tied to any reviewed artifact?",
+      "status": "UNRESOLVED"
+    },
+    {
+      "id": "UNRES-05",
+      "partial_evidence": "the packet's evidence points at a design change rather than a re-run: the gate is inert, the false-accept metric is ambiguous, the safety-relevant ood failures are invisible to the frozen gates, and the primary gate's failure decomposes into a category-specific abstention policy. A re-freeze of the same design would repair V9 and change none of these.",
+      "question": "What is the correct product action: re-freeze this same design with code hashes, or change the design?",
+      "status": "NOT_A_LANE_DECISION"
+    },
+    {
+      "id": "UNRES-06",
+      "partial_evidence": "52 is used and justified, but the prereg's own '60 applicable' figure counts the 20 ood goals as applicable and contradicts its own OOD description and its own NC-NO-APPLICABLE control. Carried forward unresolved from the freeze.",
+      "question": "What is the canonical applicable-goal count?",
+      "status": "UNRESOLVED_INHERITED"
+    },
+    {
+      "id": "UNRES-07",
+      "partial_evidence": "a post-hoc diagnostic maximising ACCEPT-class F1 selected the same t = 0.02, and every threshold from 0.02 up to 0.68 would abstain on 0 of 52 goals because the minimum p is 0.6785. Any threshold in (0.02, 0.68] is equally inert, so this is a property of the fitted coefficients on this fixture, not of the selection rule.",
+      "question": "Would a different threshold-selection objective produce a non-inert gate?",
+      "status": "WEAKLY_RESOLVED_NEGATIVE"
+    }
+  ],
+  "validity_notes": [
+    {
+      "affects": "status",
+      "id": "VN-01",
+      "note": "V9_CODE_HASHED_INTO_FREEZE fails structurally, not because of anything done during execution. freeze.json is immutable and the only freezer in the repository hashes no code, so no compliant execution of this design was possible. Under the frozen decision rule this forces status=MEASUREMENT_INVALID. The measurements themselves are internally valid and are reported in full so that nothing observed is discarded, but no VALIDATED or REJECTED promotion of C-SEMANTIC-RESOLVE may rest on this packet alone.",
+      "severity": "blocking"
+    },
+    {
+      "affects": "generalization",
+      "id": "VN-02",
+      "note": "The substrate is a stdlib-only local HTTP application with 20 mechanisms over 20 endpoints on 5 resource families. There is no live web, no third-party site, no LLM, no authentication, no pagination, no failure injection and no adversarial input. Every result here is a result about this substrate. It is not evidence about the open Web.",
+      "severity": "bounding"
+    },
+    {
+      "affects": "calibration",
+      "id": "VN-03",
+      "note": "All embeddings come from one model, sentence-transformers/all-MiniLM-L6-v2, 384 dimensions, loaded from the local cache with its revision recorded in derived_evidence/calibration.json. There is no model ensemble and no cross-model replication, so the fitted coefficients (w = 2.6927, b = 0.1853) are specific to this checkpoint.",
+      "severity": "moderate"
+    },
+    {
+      "affects": "primary_metric",
+      "id": "VN-04",
+      "note": "The frozen design supplies train/validation only and no held-out test split, so the primary mechanism-identity accuracy is reported on the union of train and validation (0.6667 vs 0.80 separately). Selection of the selected mechanism is a parameter-free argmax of a frozen embedding cosine, so the union does not contaminate mechanism selection; the fitted abstain decision is fitted on train and evaluated on the union.",
+      "severity": "moderate"
+    },
+    {
+      "affects": "safety_conclusions",
+      "id": "VN-05",
+      "note": "The 20-goal 'ood' pool with no applicable mechanism is small, so the 11/20 false-execution rate on that pool carries a wide binomial interval and is reported as a point estimate only. No frozen gate constrains it: those goals are outside the primary metric and outside the gate's fitting set.",
+      "severity": "moderate"
+    },
+    {
+      "affects": "pooled_false_accept gate",
+      "id": "VN-06",
+      "note": "The false-accept denominator is inconsistent across arms (OBS-11), so the false-accept column is not comparable across arms. The defect was found after the outcomes were visible and was NOT repaired, because repairing a metric after seeing the outcome is exactly what the freeze is meant to prevent. All four readings are reported. The false-accept gate is the only gate whose verdict changes across readings (0.0962 R1 passes, 0.2000 R2 fails, 0.1220 R3 fails, 0.3077 R4 as coded fails).",
+      "severity": "material"
+    },
+    {
+      "affects": "ece_global, ece_per_class_max, unknown_precision",
+      "id": "VN-07",
+      "note": "The calibrated gate never fires (OBS-09), so all abstention in the candidate is produced by the parameter slot filler, which is not calibrated at all. The ECE gates therefore score a gate that made no decisions, and the ABSTAIN-class ECE of 0.7885 measures the slot filler's abstentions against an unused confidence. The global ECE of 0.2030 is inflated by the same mechanism. These two gates are not clean tests of the candidate's actual decision rule.",
+      "severity": "material"
+    },
+    {
+      "affects": "V8a_degeneracy_screen",
+      "id": "VN-08",
+      "note": "The frozen headroom screen is computed on all 80 goals, but 28 of them have no applicable mechanism, which caps any arm at 52/80 = 0.65. The screen therefore cannot detect lexical adequacy, and the lexical null is in fact much stronger than the screen anticipates: it solves 36/52 including 12/12 verbatim and 15/20 paraphrased. V8a is non-binding by construction.",
+      "severity": "material"
+    },
+    {
+      "affects": "all_counts",
+      "id": "VN-09",
+      "note": "Three specification resolutions were declared before any candidate measurement and are disclosed in controls and in derived_evidence/calibration.json: the 52/28 applicable split instead of the prereg's arithmetically inconsistent '60 applicable'; value-bearing recorded intents so the verbatim positive control can bind slots; and A-REFERENCE-EMBEDARGMAX as the prereg-authorized substitute comparison leg. These change which rows count, so a different but equally defensible resolution yields different numbers. An auditor should re-derive under the 60-goal reading before treating any count as canonical.",
+      "severity": "material"
+    },
+    {
+      "affects": "primary_uncertainty",
+      "id": "VN-10",
+      "note": "The paired family-blocked bootstrap resamples 5 blocks of 7 to 14 goals 10000 times, but it resamples blocks, not goals, and there is only one arm ordering seed. The interval is therefore wide and does not propagate goal-sampling or seed variability.",
+      "severity": "moderate"
+    },
+    {
+      "affects": "safety_conclusions",
+      "id": "VN-11",
+      "note": "The 11 confident wrong executions on goals with no applicable mechanism carry no weight in the primary metric, no weight in the pooled false-accept numerator under reading R1, and no weight in either ECE gate, because the gate is fitted only on goals that have an applicable mechanism. The frozen metric suite structurally cannot see the candidate's most product-relevant failure mode.",
+      "severity": "material"
+    },
+    {
+      "affects": "primary_metric",
+      "id": "VN-12",
+      "note": "The primary metric scores an abstention as an incorrect outcome, which penalises the candidate for the conservative behaviour it exhibits on all 10 underspecified goals. A metric that scored abstention as a distinct, non-error outcome would rank the candidate differently on exactly the category where it differs most from the uncalibrated baseline.",
+      "severity": "moderate"
+    }
+  ]
+}

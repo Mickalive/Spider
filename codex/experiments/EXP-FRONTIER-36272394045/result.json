@@ -1,0 +1,1086 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-FRONTIER-36272394045",
+  "lane": "frontier",
+  "status": "COMPLETE",
+  "outcome": "INCONCLUSIVE",
+  "metrics": {
+    "primary_reference_replication": {
+      "novelty_rate": 0.5,
+      "per_span_witnessed_determinism_fraction": 0.5833333333333334,
+      "compilable_given_deterministic": 0.6857142857142857,
+      "compiled_share_of_all_spans": 0.4,
+      "amortized_cost_units_per_episode": 38.6,
+      "parent_values_expected": {
+        "per_span_witnessed_determinism_fraction": 0.5833,
+        "compilable_given_deterministic": 0.6857,
+        "compiled_share_of_all_spans": 0.4,
+        "amortized_cost_units_per_episode": 38.6
+      },
+      "exact": true,
+      "evidence": "artifacts/replication_parent_numbers.json"
+    },
+    "share_class_i_merely_novel": {
+      "definition": "prereg.md 9 sigma_1: fraction of span occurrences whose observable state key was novel, or recurred only with the same declared correct action",
+      "unit": "fraction of span occurrences",
+      "pooled": {
+        "point": 0.6771666666666667,
+        "ci95": [
+          0.665226,
+          0.688881
+        ]
+      },
+      "per_novelty_rate": {
+        "0.00": {
+          "point": 0.6233333333333333,
+          "ci95": [
+            0.595565,
+            0.650314
+          ]
+        },
+        "0.25": {
+          "point": 0.6483333333333333,
+          "ci95": [
+            0.620883,
+            0.674837
+          ]
+        },
+        "0.50": {
+          "point": 0.6783333333333333,
+          "ci95": [
+            0.651371,
+            0.704157
+          ]
+        },
+        "0.75": {
+          "point": 0.7016666666666667,
+          "ci95": [
+            0.67517,
+            0.726876
+          ]
+        },
+        "1.00": {
+          "point": 0.7341666666666666,
+          "ci95": [
+            0.708453,
+            0.758386
+          ]
+        }
+      }
+    },
+    "share_class_ii_epistemically_blocked": {
+      "definition": "prereg.md 9 sigma_2, prereg.md 8 step 2: observable state key recurred with a DIFFERENT declared correct action",
+      "unit": "fraction of span occurrences",
+      "pooled": {
+        "point": 0.22283333333333333,
+        "ci95": [
+          0.212483,
+          0.233539
+        ]
+      },
+      "per_novelty_rate": {
+        "0.00": {
+          "point": 0.27666666666666667,
+          "ci95": [
+            0.252099,
+            0.30266
+          ]
+        },
+        "0.25": {
+          "point": 0.25166666666666665,
+          "ci95": [
+            0.227932,
+            0.276986
+          ]
+        },
+        "0.50": {
+          "point": 0.22166666666666668,
+          "ci95": [
+            0.199074,
+            0.246035
+          ]
+        },
+        "0.75": {
+          "point": 0.19833333333333333,
+          "ci95": [
+            0.176751,
+            0.221841
+          ]
+        },
+        "1.00": {
+          "point": 0.16583333333333333,
+          "ci95": [
+            0.145863,
+            0.187937
+          ]
+        }
+      }
+    },
+    "share_class_iii_observation_absent": {
+      "definition": "prereg.md 9 sigma_3, prereg.md 8 step 1: correct action gated on a capability handle minted by a prior response, verified absent from the observable state and the goal prefix",
+      "unit": "fraction of span occurrences",
+      "planted_exact": true,
+      "pooled": {
+        "point": 0.1,
+        "ci95": [
+          0.092663,
+          0.107849
+        ]
+      },
+      "per_novelty_rate": {
+        "0.00": {
+          "point": 0.1,
+          "ci95": [
+            0.084282,
+            0.118271
+          ]
+        },
+        "0.25": {
+          "point": 0.1,
+          "ci95": [
+            0.084282,
+            0.118271
+          ]
+        },
+        "0.50": {
+          "point": 0.1,
+          "ci95": [
+            0.084282,
+            0.118271
+          ]
+        },
+        "0.75": {
+          "point": 0.1,
+          "ci95": [
+            0.084282,
+            0.118271
+          ]
+        },
+        "1.00": {
+          "point": 0.1,
+          "ci95": [
+            0.084282,
+            0.118271
+          ]
+        }
+      }
+    },
+    "headroom_ii_plus_iii": {
+      "definition": "prereg.md 9: maximum recoverable by any inheritance, sigma_2 + sigma_3",
+      "unit": "fraction of span occurrences",
+      "pooled": {
+        "point": 0.32283333333333336,
+        "ci95": [
+          0.311119,
+          0.334774
+        ]
+      },
+      "per_novelty_rate": {
+        "0.00": {
+          "point": 0.37666666666666665,
+          "ci95": [
+            0.349686,
+            0.404435
+          ]
+        },
+        "0.25": {
+          "point": 0.3516666666666667,
+          "ci95": [
+            0.325163,
+            0.379117
+          ]
+        },
+        "0.50": {
+          "point": 0.32166666666666666,
+          "ci95": [
+            0.295843,
+            0.348629
+          ]
+        },
+        "0.75": {
+          "point": 0.29833333333333334,
+          "ci95": [
+            0.273124,
+            0.32483
+          ]
+        },
+        "1.00": {
+          "point": 0.2658333333333333,
+          "ci95": [
+            0.241614,
+            0.291547
+          ]
+        }
+      }
+    },
+    "conditioned_coverage_all": {
+      "definition": "prereg.md 9 gamma_all: fraction of all reference-trace span occurrences whose DECLARED action the goal-conditioned arm emitted exactly",
+      "unit": "fraction of span occurrences",
+      "per_novelty_rate": {
+        "0.00": {
+          "point": 0.85,
+          "ci95": [
+            0.828682,
+            0.869085
+          ]
+        },
+        "0.25": {
+          "point": 0.85,
+          "ci95": [
+            0.828682,
+            0.869085
+          ]
+        },
+        "0.50": {
+          "point": 0.85,
+          "ci95": [
+            0.828682,
+            0.869085
+          ]
+        },
+        "0.75": {
+          "point": 0.85,
+          "ci95": [
+            0.828682,
+            0.869085
+          ]
+        },
+        "1.00": {
+          "point": 0.85,
+          "ci95": [
+            0.828682,
+            0.869085
+          ]
+        }
+      }
+    },
+    "conditioned_coverage_deterministic": {
+      "definition": "prereg.md 9 gamma_det: same, restricted to spans whose signature was witnessed in >= 2 episodes",
+      "unit": "fraction of witnessed-deterministic span occurrences",
+      "per_novelty_rate": {
+        "0.00": {
+          "point": 0.918918918918919,
+          "ci95": [
+            0.901379,
+            0.933569
+          ]
+        },
+        "0.25": {
+          "point": 0.9222222222222223,
+          "ci95": [
+            0.902876,
+            0.93798
+          ]
+        },
+        "0.50": {
+          "point": 0.9242424242424242,
+          "ci95": [
+            0.901509,
+            0.942066
+          ]
+        },
+        "0.75": {
+          "point": 0.9767441860465116,
+          "ci95": [
+            0.957726,
+            0.98732
+          ]
+        },
+        "1.00": {
+          "point": 1.0,
+          "ci95": [
+            0.981155,
+            1.0
+          ]
+        }
+      }
+    },
+    "conditioned_amortized_cost": {
+      "definition": "prereg.md 9 C_cond, primary basis: parent-identical ledger, 1 execution + 1 model unit per span, no compile, no machinery",
+      "unit": "abstract units per episode",
+      "threshold_for_clause_2": 38.6,
+      "value": 48.0,
+      "constant_across_grid": true
+    },
+    "conditioned_model_calls_only_amortized_cost": {
+      "definition": "prereg.md 7.2 literal wording sensitivity: 1 unit per oracle call, 0 per execution",
+      "unit": "abstract units per episode",
+      "value": 24.0,
+      "gating": false
+    },
+    "baseline_amortized_costs": {
+      "unit": "abstract units per episode",
+      "B-NO-MEMORY-DETERMINISTIC_parent_identical_no_class_iii": {
+        "0.00": 29.2,
+        "0.25": 33.9,
+        "0.50": 38.6,
+        "0.75": 43.3,
+        "1.00": 47.06
+      },
+      "B-NO-MEMORY-DETERMINISTIC_with_class_iii_plant": {
+        "0.00": 34.08,
+        "0.25": 36.64,
+        "0.50": 40.94,
+        "0.75": 44.84,
+        "1.00": 47.06
+      },
+      "B-COLD-EXPLORATION": {
+        "0.00": 72.0,
+        "0.25": 72.0,
+        "0.50": 72.0,
+        "0.75": 72.0,
+        "1.00": 72.0
+      }
+    },
+    "paired_bootstrap_cost_differences_nu_0.50": {
+      "definition": "prereg.md 9 measurement precision: paired bootstrap, episode as unit",
+      "resamples": 5000,
+      "seed": 36272394045,
+      "conditioned_minus_cold": {
+        "ci95": [
+          -24.0,
+          -24.0
+        ],
+        "mean_difference_units": -24.0,
+        "n_episodes_paired": 50,
+        "p_two_sided_bootstrap": 0.0,
+        "resamples": 5000,
+        "seed": 36272394045
+      },
+      "conditioned_minus_reference": {
+        "ci95": [
+          6.26,
+          7.7
+        ],
+        "mean_difference_units": 7.06,
+        "n_episodes_paired": 50,
+        "p_two_sided_bootstrap": 0.0,
+        "resamples": 5000,
+        "seed": 36272394045
+      },
+      "reference_minus_cold": {
+        "ci95": [
+          -31.7,
+          -30.26
+        ],
+        "mean_difference_units": -31.06,
+        "n_episodes_paired": 50,
+        "p_two_sided_bootstrap": 0.0,
+        "resamples": 5000,
+        "seed": 36272394045
+      }
+    },
+    "closure_attribution_nu_0.50": {
+      "closed_by_both": 342,
+      "closed_by_compilation": 362,
+      "closed_by_conditioned_only": 678,
+      "closed_by_neither": 160
+    },
+    "reference_false_compiled_replays": {
+      "definition": "span occurrences where the ratchet recorded decision_path=COMPILED_REPLAY but its emitted action differs from the declared plan action bound at execution time",
+      "unit": "count of span occurrences",
+      "per_novelty_rate": {
+        "0.00": {
+          "n_compiled_replays": 714,
+          "n_false_compiled_replays": 30,
+          "share_of_compiled_replays": 0.04201680672268908,
+          "by_role": {
+            "list_resources": 30
+          },
+          "all_are_class_iii": true
+        },
+        "0.25": {
+          "n_compiled_replays": 582,
+          "n_false_compiled_replays": 30,
+          "share_of_compiled_replays": 0.05154639175257732,
+          "by_role": {
+            "list_resources": 30
+          },
+          "all_are_class_iii": true
+        },
+        "0.50": {
+          "n_compiled_replays": 362,
+          "n_false_compiled_replays": 20,
+          "share_of_compiled_replays": 0.055248618784530384,
+          "by_role": {
+            "list_resources": 20
+          },
+          "all_are_class_iii": true
+        },
+        "0.75": {
+          "n_compiled_replays": 162,
+          "n_false_compiled_replays": 0,
+          "share_of_compiled_replays": 0.0,
+          "by_role": {},
+          "all_are_class_iii": true
+        },
+        "1.00": {
+          "n_compiled_replays": 48,
+          "n_false_compiled_replays": 0,
+          "share_of_compiled_replays": 0.0,
+          "by_role": {},
+          "all_are_class_iii": true
+        }
+      }
+    },
+    "span_level_action_correctness_by_arm": {
+      "definition": "arm's EMITTED (method, path, body) equals the declared plan action bound at execution time; arm-independent ground truth",
+      "unit": "fraction of span occurrences",
+      "by_arm": {
+        "B-COLD-EXPLORATION": {
+          "span_level": 1.0,
+          "n_incorrect": 0,
+          "goal_state_success": 1.0
+        },
+        "B-NO-MEMORY-CONDITIONED": {
+          "span_level": 0.85,
+          "n_incorrect": 180,
+          "goal_state_success": 1.0
+        },
+        "B-NO-MEMORY-CONDITIONED-NARROW": {
+          "span_level": 0.5666666666666667,
+          "n_incorrect": 520,
+          "goal_state_success": 1.0
+        },
+        "B-NO-MEMORY-DETERMINISTIC": {
+          "span_level": 0.9833333333333333,
+          "n_incorrect": 20,
+          "goal_state_success": 1.0
+        },
+        "NC-UNIQUE-STATES": {
+          "span_level": 1.0,
+          "n_incorrect": 0,
+          "goal_state_success": 1.0
+        },
+        "PC-PLANTED-DISAMBIGUATION": {
+          "span_level": 1.0,
+          "n_incorrect": 0,
+          "goal_state_success": 1.0
+        },
+        "REPL-REFERENCE-PARENT-IDENTICAL": {
+          "span_level": 1.0,
+          "n_incorrect": 0,
+          "goal_state_success": 1.0
+        }
+      }
+    },
+    "narrow_prefix_sensitivity": {
+      "definition": "non-gating sensitivity: same arm code, goal prefix reduced to intent+step+work_item+key (no body, no token_required flag)",
+      "unit": "fraction of span occurrences",
+      "conditioned_coverage_all_nu_0.50": 0.5666666666666667,
+      "wide_prefix_coverage_all_nu_0.50": 0.85,
+      "narrow_actions_differing_from_wide": 400,
+      "narrow_differences_that_wide_got_right": 0
+    }
+  },
+  "controls": {
+    "CTRL-FROZEN-INPUTS": {
+      "expected": "recomputed sha256 of request.json / spec.json / prereg.md equal freeze.json",
+      "observed": "all_match=True",
+      "result": "PASS",
+      "evidence": [
+        "artifacts/manifest.json",
+        "freeze.json"
+      ]
+    },
+    "CTRL-REPL-PARENT-NUMBERS": {
+      "expected": "prereg.md 10.3: per-span witnessed determinism ~0.5833, compilable-given-deterministic ~0.6857, compiled share ~0.40, deopt amortized cost ~38.6 vs cold 72.0",
+      "observed": "reference arm with NO class-(iii) plant reproduces the parent raw span evidence field for field: identical=True, rows=1200, field mismatches=0",
+      "result": "PASS",
+      "evidence": [
+        "artifacts/replication_parent_comparison.json",
+        "artifacts/spans_REPL-REFERENCE-PARENT-IDENTICAL.jsonl"
+      ]
+    },
+    "CTRL-SUBSTRATE-IDEMPOTENCY": {
+      "expected": "prereg.md 10.4: 8 request shapes x 100 repeats -> exactly 1 response hash and 1 status code per shape",
+      "observed": "n_probes=8, repeats_per_probe=100, identical_round_trips=800, all_deterministic=True",
+      "result": "PASS",
+      "evidence": [
+        "artifacts/substrate_idempotency.json"
+      ]
+    },
+    "CTRL-ARM-STATELESSNESS": {
+      "expected": "prereg.md 13: conditioned arm is a pure function action = f(observable_state, goal) with no cross-episode memory",
+      "observed": "14 checks, 0 failed; additionally the arm is handed a GoalOnlyPlan view that raises AttributeError for every attribute outside {index, work_item, role, token_required, novel, goal_prefix}, so the oracle path and body are unreachable at runtime rather than merely unused",
+      "result": "PASS",
+      "evidence": [
+        "artifacts/conditioned_arm_statelessness_test.json",
+        "research/frontier/episodegen_36272394045.py"
+      ]
+    },
+    "CTRL-MATCHED-TASK-INSTANCES": {
+      "expected": "prereg.md 12.1: all arms execute identical task instances",
+      "observed": "all_identical=True; identical span population, identical plan identity (role, work item, method, token flag) and capability handle bound to the handle observable in that episode at every gated span, with 50 distinct handles",
+      "result": "PASS",
+      "evidence": [
+        "artifacts/matched_task_instances_check.json"
+      ]
+    },
+    "CTRL-CORRECTNESS-INVARIANCE": {
+      "expected": "prereg.md 10.5: all arms must reach success_rate 1.0; any arm below -> MEASUREMENT_INVALID",
+      "observed": "goal-state success (every step expected code AND final store empty) = 1.000 for all 7 arms",
+      "result": "PASS",
+      "important_caveat": "goal-state success is 1.0 for arms whose span-level action correctness is as low as 0.5667, so this criterion cannot detect action-level error; see reference_false_compiled_replays",
+      "evidence": [
+        "artifacts/correctness_invariance.json"
+      ]
+    },
+    "PC-PLANTED-DISAMBIGUATION": {
+      "expected": "prereg.md 10.1: sigma_1 ~ 1.0, sigma_2 ~ 0, sigma_3 ~ 0 for planted spans",
+      "observed": {
+        "planted_span_occurrences": 200,
+        "planted_roles": [
+          "create_resource"
+        ],
+        "plant_verified_byte_identical_observations": true,
+        "planted_span_class_counts_reading_A_literal": {
+          "i": 1,
+          "ii": 199,
+          "iii": 0
+        },
+        "planted_span_closed_by_conditioned": 200,
+        "planted_span_closed_by_conditioned_fraction": 1.0,
+        "planted_span_compiled_replays": 0
+      },
+      "result": "UNRESOLVED_BY_PREREG_CONFLICT",
+      "reason": "the two readings of prereg.md 8 disagree about this control. Reading A (literal step 2) labels the planted spans class (ii), so the prereg's own sigma_2 ~ 0 criterion is unattainable by construction. Reading B (goal-aware: class (ii) means goal conditioning cannot bind the span) labels them class (i) and the criterion is met. The substantive part of the control DOES pass under both readings: the goal-conditioned arm closes 200/200 planted spans, i.e. goal conditioning does disambiguate the plant, so prereg.md 10.1's stated failure meaning (implementation defect) is excluded.",
+      "evidence": [
+        "artifacts/pc_verification.json",
+        "artifacts/classification_PC-PLANTED-DISAMBIGUATION.jsonl"
+      ]
+    },
+    "NC-UNIQUE-STATES": {
+      "expected": "prereg.md 10.2: sigma_2 == 0 exactly and sigma_3 == 0 exactly; failure meaning = classification logic defect (false positive on unique states)",
+      "observed": {
+        "class_counts": {
+          "i": 1151,
+          "ii": 49,
+          "iii": 0
+        },
+        "sigma_2_is_zero": false,
+        "sigma_3_is_zero": true,
+        "unique_state_keys": 1151,
+        "unique_signatures": 1200,
+        "all_class_ii_from_a_single_state_key": true,
+        "offending_state_key_multiplicity": 50,
+        "offending_state_key_distinct_declared_actions": 50,
+        "prereg_section_13_mitigation_variant_sigma_2_is_zero": true
+      },
+      "declared_deviation": "the class-(iii) plant is disabled in this control; otherwise a planted class-(iii) span would (correctly) be reported as class (iii) and the null's exactly-zero criterion would be unattainable by construction",
+      "result": "UNRESOLVED_BY_PREREG_CONFLICT",
+      "reason": "the literal prereg.md 10.2 criterion is NOT met (sigma_2 = 49/1200), but the prereg's own stated failure meaning (a classifier false positive on unique states) is NOT what occurred. prereg.md 5 makes every episode's first span share one observable state key, and the inherited prereg.md 13 mitigation does not touch that state, so 50 spans with 50 distinct declared actions are, correctly and by the prereg's literal step-2 rule, class (ii). Under prereg.md 13's mechanism as written (nonce in the world store snapshot) sigma_2 == 0 exactly. The null control is therefore UNRESOLVED_BY_PREREG_CONFLICT, not failed.",
+      "evidence": [
+        "artifacts/nc_verification.json",
+        "artifacts/classification_NC-UNIQUE-STATES.jsonl"
+      ]
+    },
+    "B-COLD-EXPLORATION": {
+      "expected": "prereg.md 10.3 strong baseline: 72.0 abstract units per episode, 0 compiled replays",
+      "observed": {
+        "amortized_cost_units_per_episode": 72.0,
+        "span_level_action_correctness": 1.0,
+        "goal_state_success": 1.0
+      },
+      "result": "PASS",
+      "evidence": [
+        "artifacts/costs_B-COLD-EXPLORATION.jsonl",
+        "artifacts/spans_B-COLD-EXPLORATION.jsonl"
+      ]
+    }
+  },
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-FRONTIER-36272394045/artifacts/classification_B-NO-MEMORY-DETERMINISTIC.jsonl",
+      "sha256": "06beda98295a7641ce9221c7541b2c068ee9c68b14b3d7d88095e61f158b8ba9",
+      "role": "derived",
+      "bytes": 4432473
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-36272394045/artifacts/classification_NC-UNIQUE-STATES.jsonl",
+      "sha256": "031c39d2a156bc8207e90359cc463f9a0e893a1ce0c037439ed62d2f063c551f",
+      "role": "derived",
+      "bytes": 874288
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-36272394045/artifacts/classification_PC-PLANTED-DISAMBIGUATION.jsonl",
+      "sha256": "ea0af4db6848d96f2a64ba2f9dcc068cca6353128eff495159518819b533822c",
+      "role": "derived",
+      "bytes": 873678
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-36272394045/artifacts/conditioned_arm_statelessness_test.json",
+      "sha256": "71353657c369b6b70cdae9c5252b942d538efc66ff49711c982474cd47aec3cf",
+      "role": "derived",
+      "bytes": 3971
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-36272394045/artifacts/correctness_invariance.json",
+      "sha256": "9a5d1df7c80160a7da0b54df04a7d317d7bcde5f3b4790d7b9f6cbb90d55cbff",
+      "role": "derived",
+      "bytes": 23874
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-36272394045/artifacts/costs_B-COLD-EXPLORATION.jsonl",
+      "sha256": "4980ee5566165380fc3cc856e743b6364d0fd0b9577b21739b0a17a2b744b92d",
+      "role": "derived",
+      "bytes": 68165
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-36272394045/artifacts/costs_B-NO-MEMORY-CONDITIONED-NARROW.jsonl",
+      "sha256": "fb7e7109858e02719e60f2e6a03a673ca95adec57ab4ae13b15d528a2f76fb45",
+      "role": "derived",
+      "bytes": 63210
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-36272394045/artifacts/costs_B-NO-MEMORY-CONDITIONED.jsonl",
+      "sha256": "38de836b1e4cfed2c1a2171df1183d1d1f906a38f7d2aa2d938a001bee40cf02",
+      "role": "derived",
+      "bytes": 61460
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-36272394045/artifacts/costs_B-NO-MEMORY-DETERMINISTIC.jsonl",
+      "sha256": "fc66cb261b07b46f5ecd65de9894eab71e1d3d2228667a7b08c95c78b16c1b36",
+      "role": "derived",
+      "bytes": 70799
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-36272394045/artifacts/costs_NC-UNIQUE-STATES-CONDITIONED.jsonl",
+      "sha256": "bc50dfb37b23dea0e1e006cb33bd9b575a854b6c83d9d404d22ba93d06cb4b77",
+      "role": "derived",
+      "bytes": 11352
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-36272394045/artifacts/costs_NC-UNIQUE-STATES.jsonl",
+      "sha256": "d302e968d6b72e056f00f711a1e7a85eadf5d07fa2f2e2ee71cc934c5c068b30",
+      "role": "derived",
+      "bytes": 12412
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-36272394045/artifacts/costs_PC-PLANTED-DISAMBIGUATION-CONDITIONED.jsonl",
+      "sha256": "3ff7876877b0083c8c51a77fa8bc54b5cefccf6c6a4e8afadebdd7b0a7ce8bf2",
+      "role": "derived",
+      "bytes": 11802
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-36272394045/artifacts/costs_PC-PLANTED-DISAMBIGUATION.jsonl",
+      "sha256": "d3fda5a8e14d81452f2ff719caeb436d4ea1282c328eb607631a2b1995dfa132",
+      "role": "derived",
+      "bytes": 12966
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-36272394045/artifacts/costs_REPL-REFERENCE-PARENT-IDENTICAL.jsonl",
+      "sha256": "17d383cfdfbd6193478d8fea4ab80c9c16f4ede554a99278472be22d13c861da",
+      "role": "derived",
+      "bytes": 72082
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-36272394045/artifacts/nc_verification.json",
+      "sha256": "b5c37b5cf3d6e3ab1a99b8c7d3b429cd31aa62daf0a8726dd908bf39222057f7",
+      "role": "derived",
+      "bytes": 2655
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-36272394045/artifacts/pc_verification.json",
+      "sha256": "f8f346d9f8761021b84fe4753e80c049fd617c3931f78c00552e07898da89d57",
+      "role": "derived",
+      "bytes": 1597
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-36272394045/artifacts/reference_false_compile.json",
+      "sha256": "67f0b94020e926333dd88bcc2709b13dfbe53c53c69f0315c08624b6bfcf37b7",
+      "role": "derived",
+      "bytes": 6381
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-36272394045/artifacts/spans_B-COLD-EXPLORATION.jsonl",
+      "sha256": "a0ac3c90a7eb95a4deaf7d8f2adfcf76b9f334b4869b37fd8bc3d31afa9cb754",
+      "role": "derived",
+      "bytes": 8626768
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-36272394045/artifacts/spans_B-NO-MEMORY-CONDITIONED-NARROW.jsonl",
+      "sha256": "1e86730ba733ba6029d1b74b99dece243787f1d14f29c4b905a37c6587c8e8ac",
+      "role": "derived",
+      "bytes": 5986920
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-36272394045/artifacts/spans_B-NO-MEMORY-CONDITIONED.jsonl",
+      "sha256": "278d9a2058bd301f40b28727a2552e66f795298965336fa7361219525d2d5d5b",
+      "role": "derived",
+      "bytes": 7008912
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-36272394045/artifacts/spans_B-NO-MEMORY-DETERMINISTIC.jsonl",
+      "sha256": "6b8e9c6d3910f2522a0ebbb8ac13005c27d663ff087e1dc62fb39468687259af",
+      "role": "derived",
+      "bytes": 8469486
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-36272394045/artifacts/spans_NC-UNIQUE-STATES.jsonl",
+      "sha256": "059599addd2e20cfd70e60da9b489180fdfbd52ef93e6445b236a02654d12a94",
+      "role": "derived",
+      "bytes": 1697601
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-36272394045/artifacts/spans_PC-PLANTED-DISAMBIGUATION-CONDITIONED.jsonl",
+      "sha256": "8e000cb8b6c282f0b730495e2dd83f7d9ae7e9aaa315f07d3d3d6d64d20d33ca",
+      "role": "derived",
+      "bytes": 1418307
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-36272394045/artifacts/spans_PC-PLANTED-DISAMBIGUATION.jsonl",
+      "sha256": "643261f45b9157fea8b02ee80e462525760135d26671018162ffc49a7affcd51",
+      "role": "derived",
+      "bytes": 1687051
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-36272394045/artifacts/spans_REPL-REFERENCE-PARENT-IDENTICAL.jsonl",
+      "sha256": "f8f565ac911b33a4122e6f6b340c6bf49b3110d9ebd9dbdb330f3d0a16165e54",
+      "role": "derived",
+      "bytes": 1694251
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-36272394045/artifacts/substrate_idempotency.json",
+      "sha256": "e23ba2360a00c826d9182fe99cff3719d7c899b61d2eef911bcd0dd1f884c00c",
+      "role": "derived",
+      "bytes": 1900
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-36272394045/artifacts/summary_0.00.json",
+      "sha256": "44f9f1ffef026dc9d6360c0008176a86ad6faa3e0936e5e7c7f6474ef31c82e7",
+      "role": "derived",
+      "bytes": 7539
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-36272394045/artifacts/summary_0.25.json",
+      "sha256": "fa1090439769e3ff8c1b82b6740208e342b5106d19a075505915597e5e60914b",
+      "role": "derived",
+      "bytes": 7527
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-36272394045/artifacts/summary_0.50.json",
+      "sha256": "286f8bd51efce74f58581ffbf7857939ea47d56e504e31b07ad13ee8689fce2c",
+      "role": "derived",
+      "bytes": 7551
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-36272394045/artifacts/summary_0.75.json",
+      "sha256": "cfbabadebbdeea77520137a94f86ba627c1b1409088ab1f4a71654eff642c402",
+      "role": "derived",
+      "bytes": 7549
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-36272394045/artifacts/summary_1.00.json",
+      "sha256": "f6daac6d93dea107381e86008522186e0cec7c3387f4bc92439083a59c5ebef0",
+      "role": "derived",
+      "bytes": 7455
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-36272394045/artifacts/task_generator_config.json",
+      "sha256": "948885a10d1a954f954ce5205cb88aae7c8cabbc9060c606ec49cd03d0e174a6",
+      "role": "derived",
+      "bytes": 2692
+    },
+    {
+      "path": "research/frontier/run_execute_36272394045.py",
+      "sha256": "5ec057aaca79b9a9049bd83d023b10a723fce3579b69caea06b7ed9cebf9fb40",
+      "role": "code",
+      "bytes": 67219
+    },
+    {
+      "path": "research/frontier/episodegen_36272394045.py",
+      "sha256": "5f81a9d652e22e3497c6a3effca1d84845c7557093b30e24d7089254f0b3ec78",
+      "role": "code",
+      "bytes": 18662
+    },
+    {
+      "path": "research/frontier/arms/conditioned_no_memory.py",
+      "sha256": "212b0e89f37f099251207580fdb6752af17d7fa8a3de5c543f80d0d466e41ee7",
+      "role": "code",
+      "bytes": 8850
+    },
+    {
+      "path": "research/frontier/test_conditioned_no_memory_36272394045.py",
+      "sha256": "98e7aecea5a57b5add2191d95ecd4d4c2339e1b4f7af36eb15212c9713555cd4",
+      "role": "code",
+      "bytes": 10381
+    },
+    {
+      "path": "research/frontier/substrate_deterministic_http.py",
+      "sha256": "c85af2154959dff837918fcb2497a36cfde043727ac78f70b48f8a1b4efad428",
+      "role": "code",
+      "bytes": 19718
+    },
+    {
+      "path": "research/frontier/taskplan.py",
+      "sha256": "8875a05b54761f96a92cea8d3ec43bd6886347b5e04ef81d594d65d53f910816",
+      "role": "code",
+      "bytes": 5276
+    },
+    {
+      "path": "research/frontier/arms/deopt_ratchet.py",
+      "sha256": "0c09a680a0dbde2488fdb9cf94632a9d70af135ab6351a7912401840063f3aee",
+      "role": "code",
+      "bytes": 7986
+    },
+    {
+      "path": "research/frontier/arms/cold_exploration.py",
+      "sha256": "628b9645f4d5817ff7e74cc31d29470e4ad5dfa33158f7ebca64e4f61bc42e7b",
+      "role": "code",
+      "bytes": 6355
+    },
+    {
+      "path": "research/frontier/arms/common.py",
+      "sha256": "d9ceeb6a6bfee1bac7fcd8b65f9403dd616c171c52cfccc654b20c9f75185af6",
+      "role": "code",
+      "bytes": 6362
+    },
+    {
+      "path": "research/frontier/_run_output_36272394045.json",
+      "sha256": "da33507db8733337dd54201a819f71117ad274e3d6d0c7964d558ccc9e2fc121",
+      "role": "derived",
+      "bytes": 116945
+    }
+  ],
+  "observations": [
+    {
+      "id": "OBS-01",
+      "kind": "observation",
+      "statement": "The parent reference arm was reproduced field for field: 1200/1200 span rows identical to the parent packet's raw evidence on state_sig, signature, response_code, response_body_hash, decision_path, role and work_item, with 0 field mismatches.",
+      "source": "artifacts/replication_parent_comparison.json"
+    },
+    {
+      "id": "OBS-02",
+      "kind": "observation",
+      "statement": "sigma_3 is exactly 0.10 at every novelty rate (600/6000 pooled). The capability handle is verified absent from the observable state blob and from the goal prefix on all 600 class-(iii) spans, and 50 distinct handles exist across 50 episodes.",
+      "source": "artifacts/classification_B-NO-MEMORY-DETERMINISTIC.jsonl, artifacts/matched_task_instances_check.json"
+    },
+    {
+      "id": "OBS-03",
+      "kind": "observation",
+      "statement": "sigma_2 (observable state key recurred with a different declared correct action) ranges from 0.1658 to 0.2767 across the grid, and its CI95 upper bound is 0.1879 at best, never approaching the preregistered 0.01 threshold.",
+      "source": "artifacts/summary_rates.json, artifacts/falsifier_clause_1.json"
+    },
+    {
+      "id": "OBS-04",
+      "kind": "observation",
+      "statement": "The goal-conditioned arm emitted the exact declared action on 0.8500 of all span occurrences (1020/1200) at every novelty rate, and on 0.9242 of witnessed-deterministic occurrences at novelty 0.50. Both clear the clause-2 thresholds of 0.40 and 0.6857.",
+      "source": "artifacts/summary_rates.json"
+    },
+    {
+      "id": "OBS-05",
+      "kind": "observation",
+      "statement": "The goal-conditioned arm's amortized cost is 48.0 abstract units per episode on the primary parent-identical ledger, against the clause-2 threshold of 38.6. The paired bootstrap gives conditioned-minus-reference 7.06 units (CI95 [6.26, 7.7], p=0.0), so the treatment is more expensive than the ratchet at every novelty rate.",
+      "source": "artifacts/costs_B-NO-MEMORY-CONDITIONED.jsonl, artifacts/summary_costs.json"
+    },
+    {
+      "id": "OBS-06",
+      "kind": "observation",
+      "statement": "The ratchet emitted a NON-declared action on 80 span occurrences across the grid, every one of them a class-(iii) span and every one of them the list_resources role. In all cases decision_path was recorded as COMPILED_REPLAY while the emitted action had dropped the handle. At novelty 0.50 this is 20/362 of its compiled replays.",
+      "source": "artifacts/reference_false_compile.json"
+    },
+    {
+      "id": "OBS-07",
+      "kind": "observation",
+      "statement": "Goal-state success (every step returned its expected status code and the final store was empty) is 1.000 for all seven arms, including arms whose span-level action correctness is 0.5667. The ungated read and list of a class-(iii) span still return 200, and the handle is not needed to reach the declared goal state.",
+      "source": "artifacts/correctness_invariance.json"
+    },
+    {
+      "id": "OBS-08",
+      "kind": "observation",
+      "statement": "Reducing the conditioning prefix to intent+step+work_item+key lowered the treatment's coverage from 0.8500 to 0.5667; the 400 differing narrow actions were never a case where the wide prefix was correct.",
+      "source": "artifacts/summary_rates.json"
+    },
+    {
+      "id": "OBS-09",
+      "kind": "observation",
+      "statement": "The positive control's 200 planted spans are all closed by the goal-conditioned arm (200/200) and none is compiled by the reference ratchet (0/200), so goal conditioning does disambiguate the exact parent failure mode.",
+      "source": "artifacts/pc_verification.json"
+    },
+    {
+      "id": "OBS-10",
+      "kind": "observation",
+      "statement": "In the null control, all 49 class-(ii) spans arise from exactly one state key occurring 50 times with 50 distinct declared actions (the entry-point span, whose observable state is necessarily (empty store, no prior request) at the start of every episode). Under prereg.md 13's stated mechanism, which puts the uniqueness nonce in the world store snapshot, sigma_2 is exactly 0.",
+      "source": "artifacts/nc_verification.json"
+    }
+  ],
+  "validity_notes": [
+    {
+      "id": "VN-01",
+      "topic": "declared instrument correction (measurement, not a preregistration change)",
+      "note": "The first execution scored span-level correctness with each arm's OWN emitted action, which made span_level_correct_action_fraction tautologically 1.0 for every arm, and made conditioned coverage vacuous when the shared ground truth was substituted in. The correct action is now the DECLARED PLAN action bound at the moment the arm requested that plan index, identical for all arms, and every arm's EMITTED action is compared against it. No preregistered threshold, control criterion, class-assignment rule or decision rule was changed, and the parent replication numbers (0.5833 / 0.6857 / 0.40 / 38.6) were recomputed after the correction and are unchanged. Full record in artifacts/manifest.json and the derived section declared_instrument_correction."
+    },
+    {
+      "id": "VN-02",
+      "topic": "representation loss",
+      "note": "The class-(iii) plant is a synthetic capability handle (an opaque token minted by the substrate and gated on a prior response), not a real-world authorization, session or CSRF mechanism. The claim it supports is about the STRUCTURE of a binding key absent from the agent's observation and goal channels, not about any particular real protocol. The handle is a deterministic function of a fixed salt and the substrate's episode counter; the experiment does not test handle unpredictability, expiry, replay windows or cross-episode leakage."
+    },
+    {
+      "id": "VN-03",
+      "topic": "representation loss: the conditioned arm is a rule, not a language model",
+      "note": "The treatment is a pure deterministic function of (observable state signature, goal prefix). It therefore measures the INFORMATION AVAILABLE to a goal-conditioned policy, not the ability of any particular model to exploit that information. Clause 2's sensitivity cost basis (model calls only, 24.0 units/episode) credits the treatment one model call per span; a real model would add token cost, tool calls and error modes that this ledger cannot express. A real model would in any case have to read the handle out of a prior response body, which this substrate never places in a body."
+    },
+    {
+      "id": "VN-04",
+      "topic": "the endpoint metric is insensitive to the class-(iii) binding key",
+      "note": "Because the ungated read and list of a gated resource return 200 and the goal state (empty store) does not require the handle, goal-state success is 1.0 for every arm including arms wrong on up to 43.3% of spans. Any product decision that reads only success rate, HTTP status or a goal-state predicate would have seen no difference between these arms at all."
+    },
+    {
+      "id": "VN-05",
+      "topic": "prereg internal conflicts, reported not resolved",
+      "note": "Three conflicts are inherited from the frozen text and are surfaced, not resolved: (a) prereg.md 8 step 2 (literal) versus the goal-aware reading used in prereg.md 7.3/10.1, which disagree about the positive control's class assignment; (b) prereg.md 5 (observable state = store + last request) versus prereg.md 13's stated mitigation (nonce in the world store snapshot), which makes the null control's sigma_2 == 0 criterion unattainable by the inherited path-nonce mechanism; (c) spec.json decision_rule.outcome_mapping labels clause-1 'FALSIFIES_INHERITANCE_NICHE' while prereg.md 3 prose for the same clause says the ratchet residual has 'a real economic niche'. None of the three is decision-triggering in this run because neither clause fires on the primary basis, but all three would matter for a future run."
+    },
+    {
+      "id": "VN-06",
+      "topic": "infrastructure deviations, declared",
+      "note": "Two substrate changes were required to complete the preregistered program and neither alters a parent response byte. (1) The stdlib HTTP handler was given disable_nagle_algorithm = True: the handler writes headers and body as two socket writes, so with Nagle enabled the body write waited on the peer's delayed ACK and pinned the substrate at about 24 requests/second, which is what caused the two prior stage failures recorded in failure.json (exit 66) and model_execute.json (exit 124). TCP_NODELAY changes no response byte. (2) do_PUT now treats a missing request body as an empty object, matching do_PATCH, instead of raising and dropping the keep-alive connection; the narrow-prefix arm cannot reconstruct a request body, and no request the parent task plan issues ever has a missing body. Verified: the create-PUT response body is byte-identical with and without ?mint=1."
+    },
+    {
+      "id": "VN-07",
+      "topic": "hash transcription discrepancy in the frozen preregistration",
+      "note": "prereg.md records research/frontier/common.py as sha256 d9ceeb6a6bfee1bac7fcd8b65f9407dd616c171c52cfccc654b20c9f75185af6, but the tracked unmodified file hashes to d9ceeb6a6bfee1bac7fcd8b65f9403dd616c171c52cfccc654b20c9f75185af6 (3d, not 7d, at that position). The file was not modified by this run; the discrepancy is a transcription error in the frozen preregistration and is recorded here rather than corrected, because the preregistration is frozen."
+    },
+    {
+      "id": "VN-08",
+      "topic": "cost model",
+      "note": "All costs are the parent's abstract units: 1 per model/oracle call, 1 per substrate execution, plus the parent's compile and machinery charges. They are not tokens, dollars, wall-clock or browser work. The comparison conditioned 48.0 vs ratchet 40.94 vs cold 72.0 at novelty 0.50 is only meaningful under the parent's own unit definition; a real conditioned policy would additionally pay for reading the prior response and for its own prompt tokens."
+    },
+    {
+      "id": "VN-09",
+      "topic": "environment",
+      "note": "Python 3.12.14 (main, Aug 13 2026, 02:47:42) [GCC 13.3.0], git HEAD a9a0ce105a7a5f07103d99eff51339636695100d, 35600 substrate requests, 22.9 s wall clock, single machine, no network access, deterministic substrate with no real concurrency, no real model calls, no browser."
+    },
+    {
+      "id": "VN-10",
+      "topic": "declared control deviation",
+      "note": "the class-(iii) plant is disabled in this control; otherwise a planted class-(iii) span would (correctly) be reported as class (iii) and the null's exactly-zero criterion would be unattainable by construction"
+    }
+  ],
+  "unresolved": [
+    {
+      "id": "UR-01",
+      "question": "spec.json decision_rule.outcome_mapping assigns the label FALSIFIES_INHERITANCE_NICHE to CLAUSE_1_TRIGGERED_and_NOT_CLAUSE_2, while prereg.md 3 prose for that same clause states the opposite consequence ('the ratchet's residual is irreducibly binding and inherited parameterization has a real economic niche'). Which is authoritative?",
+      "why_producer_cannot_settle": "the label and the prose assert opposite consequences for one frozen condition, and resolving it would require amending a frozen input or substituting producer judgement for the Global Research Director's.",
+      "impact_on_this_run": "none: clause 1 did not fire on any basis, so the ambiguity is not decision-triggering here."
+    },
+    {
+      "id": "UR-02",
+      "question": "Is class (ii) the prereg.md 8 literal rule (a state key recurring with any different action) or the goal-aware rule (a state key recurring with a different action that goal conditioning cannot disambiguate)?",
+      "why_producer_cannot_settle": "both readings are textually supported and they give different class assignments to the positive control and therefore different sigma_2 values. The literal reading is used as primary because it is what prereg.md 8 step 2 says; the goal-aware reading is reported alongside.",
+      "impact_on_this_run": "material to the positive control and to the absolute level of sigma_2; not decision-triggering, because sigma_2's CI95 upper bound is far above 0.01 under either reading."
+    },
+    {
+      "id": "UR-03",
+      "question": "The ratchet falsely compiled class-(iii) list_resources spans in 80 span occurrences across the grid, dropping the handle from a replayed action. Is this a cache-key defect to be fixed in the product, or an accepted consequence of a cache keyed only on the observable state?",
+      "why_producer_cannot_settle": "fixing it changes the mechanism under characterisation; this run only measures it. Whether the handle belongs in the cache key is a product decision, and the substrate deliberately never returns the handle in a response body, so no cache key derivable from a response can contain it.",
+      "impact_on_this_run": "does not affect either clause, but it means the reference arm's own span-level action correctness is 0.9833 rather than 1.0, and any economic comparison that credits the ratchet with serving those spans overstates it."
+    },
+    {
+      "id": "UR-04",
+      "question": "Under the prereg's own model calls only cost basis the treatment costs 24.0 units per episode and clause 2 fires, falsifying the SPIDER premise. Under the parent-identical ledger it costs 48.0 and clause 2 does not fire. Which basis is the intended one?",
+      "why_producer_cannot_settle": "prereg.md 7.2's literal wording ('1 unit per oracle call, 0 per execution') and the parent's ledger definition disagree, and the choice flips the headline outcome between INCONCLUSIVE and FALSIFIES_SPIDER_PREMISE.",
+      "impact_on_this_run": "decision-determining. Both are reported; outcome is set from the primary parent-identical basis and the sensitivity result is carried explicitly."
+    },
+    {
+      "id": "UR-05",
+      "question": "Is goal-conditioned coverage of 0.85 of all spans at 48.0 units/episode, against a ratchet that achieves 0.40 compiled share at 38.6 on the same task, an economic win anywhere?",
+      "why_producer_cannot_settle": "the treatment is closed to 0.85 coverage and the ratchet's coverage is 0.9833, so neither dominates; the crossover would need a cost model in which a conditioned policy does not pay 1 execution unit per span, which is exactly the unresolved UR-04 question.",
+      "impact_on_this_run": "no clause fires; this is the product-level question the DIRECTOR must price."
+    },
+    {
+      "id": "UR-06",
+      "question": "Does a real model, given the same goal prefix, behave like this rule?",
+      "why_producer_cannot_settle": "no model was called in this run; the substrate returns the handle only as a response header and a server-side observation, and the prereg forbids surfacing it to the agent.",
+      "impact_on_this_run": "gamma_det and gamma_all are upper bounds on what a goal-conditioned policy can serve from its declared channels, not predictions of model behaviour."
+    }
+  ],
+  "decision": {
+    "primary_cost_basis": "conditioned_amortized (parent-identical ledger: 1 execution + 1 model unit per span)",
+    "falsifier_clause_1": {
+      "definition": "share_class_ii_epistemically_blocked CI95 upper bound < 0.01 at ALL novelty rates (spec.json decision_rule.falsifier_clause_1)",
+      "threshold": 0.01,
+      "per_rate_ci95_upper": {
+        "0.00": 0.30266,
+        "0.25": 0.276986,
+        "0.50": 0.246035,
+        "0.75": 0.221841,
+        "1.00": 0.187937
+      },
+      "triggered": false
+    },
+    "falsifier_clause_2": {
+      "definition": "gamma_det >= 0.6857 AND gamma_all >= 0.40 AND conditioned_amortized_cost <= 38.6 at ANY novelty rate (spec.json decision_rule.falsifier_clause_2)",
+      "triggered_primary": false,
+      "triggered_sensitivity": true,
+      "per_rate": {
+        "0.00": {
+          "clause_2_met_at_this_rate": false,
+          "cost_le_threshold": false,
+          "cost_units_per_episode": 48.0,
+          "gamma_all": 0.85,
+          "gamma_all_ge_threshold": true,
+          "gamma_det": 0.918918918918919,
+          "gamma_det_ge_threshold": true
+        },
+        "0.25": {
+          "clause_2_met_at_this_rate": false,
+          "cost_le_threshold": false,
+          "cost_units_per_episode": 48.0,
+          "gamma_all": 0.85,
+          "gamma_all_ge_threshold": true,
+          "gamma_det": 0.9222222222222223,
+          "gamma_det_ge_threshold": true
+        },
+        "0.50": {
+          "clause_2_met_at_this_rate": false,
+          "cost_le_threshold": false,
+          "cost_units_per_episode": 48.0,
+          "gamma_all": 0.85,
+          "gamma_all_ge_threshold": true,
+          "gamma_det": 0.9242424242424242,
+          "gamma_det_ge_threshold": true
+        },
+        "0.75": {
+          "clause_2_met_at_this_rate": false,
+          "cost_le_threshold": false,
+          "cost_units_per_episode": 48.0,
+          "gamma_all": 0.85,
+          "gamma_all_ge_threshold": true,
+          "gamma_det": 0.9767441860465116,
+          "gamma_det_ge_threshold": true
+        },
+        "1.00": {
+          "clause_2_met_at_this_rate": false,
+          "cost_le_threshold": false,
+          "cost_units_per_episode": 48.0,
+          "gamma_all": 0.85,
+          "gamma_all_ge_threshold": true,
+          "gamma_det": 1.0,
+          "gamma_det_ge_threshold": true
+        }
+      },
+      "binding_constraint_primary": "cost",
+      "sensitivity_cost_basis": "conditioned_model_calls_only_amortized",
+      "sensitivity_cost_units_per_episode": 24.0,
+      "sensitivity_mapping_outcome": "FALSIFIES_SPIDER_PREMISE"
+    },
+    "outcome_mapping_applied": null,
+    "outcome_mapping_note": "spec.json outcome_mapping: NEITHER_TRIGGERED -> INCONCLUSIVE. Applied on the primary cost basis.",
+    "outcome_mapping_ambiguity": "spec.json decision_rule.outcome_mapping maps CLAUSE_1_TRIGGERED_and_NOT_CLAUSE_2 to the label 'FALSIFIES_INHERITANCE_NICHE' with the parenthetical '(share ii = 0 -> inheritance has niche)', while prereg.md section 3 prose for the same clause reads 'the ratchet's residual is irreducibly binding and inherited parameterization has a real economic niche'. The label and the prereg prose assert OPPOSITE consequences for the same condition. The mapping is reported but not silently resolved; the DIRECTOR owns it.",
+    "outcome_would_change_under_sensitivity_cost_basis": "FALSIFIES_SPIDER_PREMISE",
+    "sensitivity_outcome_is_not_claim_promotion": "the sensitivity result is recorded because prereg.md 7.2 and the parent ledger define C_cond differently. It is not promoted: result.outcome is INCONCLUSIVE from the primary basis."
+  },
+  "claims_not_made": [
+    "The treatment is not a language model and no model was called; coverage is an information-availability bound.",
+    "The substrate is a synthetic capability token, not a real authorization or session mechanism.",
+    "Nothing here promotes the class-(i)/(ii)/(iii) taxonomy or the conditioned arm into Product Core.",
+    "The prior stage failures (exit 66, exit 124) were infrastructure timeouts and are not scientific results."
+  ],
+  "next_questions_for_director": [
+    "UR-04 first: settle the C_cond basis, since it alone flips the outcome between INCONCLUSIVE and FALSIFIES_SPIDER_PREMISE.",
+    "UR-02 second: settle the class-(ii) rule, since it sets the absolute level of sigma_2 and the positive control's verdict.",
+    "UR-03 third: decide whether the capability handle belongs in the ratchet's cache key, given it produced 80 false compiles that no status-code metric can see.",
+    "A cost model in which a conditioned policy does not pay 1 execution unit per span is required before any economic crossover between the treatment and the ratchet can be computed."
+  ]
+}

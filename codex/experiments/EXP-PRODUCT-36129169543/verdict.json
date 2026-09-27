@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-36129169543",
+  "lane": "product",
+  "decision": "ACCEPT_INSTRUMENT_READINESS_ONLY",
+  "claim_updates": [
+    {
+      "claim_id": "C-PRODUCT-ECON",
+      "status": "HYPOTHESIS",
+      "reason": "The independent audit status=PASS supports the frozen Parts A-C at the bounded instrument ceiling: the deterministic scripted harness completed five arms x 192 trajectories, recorded all eight per-trajectory counters, passed 39 unit tests with zero crashes or surrogate/default fills, and computed a protocol-byte break-even value f*_bytes=36.70010423090146 with post-hoc CI95 [34.571564610683666, 39.15247828406805]. This does not test C-PRODUCT-ECON's registered proposition that SPIDER saves total cost per successful real task after retrieval, verification, and maintenance: every live-browser/policy-model arm is UNKNOWN, no real-agent success/accuracy/safety result exists, f*_latency_ms is not identifiable, token economics are NOT_APPLICABLE/UNKNOWN, and NC-SHUFFLED-FAMILY-STRATIFIED is MIXED. Conservatively retain HYPOTHESIS; the packet establishes instrument readiness, not claim-level product economics."
+    }
+  ],
+  "product_action": "Retain the audited harness as a bounded experimental accounting instrument only. Do not promote it to Product Core and do not immediately rerun the superseded full C-PRODUCT-ECON Pareto packet; first obtain durable Product integration and the certified live-agent, freshness, and WAN-like-substrate dependencies required for a decision-relevant economic measurement.",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "After the accounting harness is durably integrated and Runtime certifies a usable policy model, BrowserGym/Playwright, and a WAN-like distributed substrate, does SPIDER inheritance remain economically viable at matched real-task success against B-COLD, B-INSTRUCTIONS, B-RAG-EMBED k=5, B-DETERMINISTIC-EXECUTOR, and Stagehand when actual model tokens, browser/network work, and wall-clock latency are measured separately under a preregistered Pareto/break-even rule, a clean family-blocked null, and an active Graph freshness false-accept gate?",
+  "reason": "The frozen decision table was applied correctly and independently audited PASS: Parts A, B, and C pass for instrument decidability, and the result explicitly limits SUPPORTS to 'instrument correctness ONLY - not a scientific or product result.' The exact evidence is 5/5 arms x 192/192 trajectories on the deterministic scripted policy over the health-gated single-node HS256 sticky localhost service; eight counters per trajectory; B=5000 family-stratified bootstrap and block permutation; 39/39 tests; no live-mode fills; and f*_bytes=36.7001 [34.5716, 39.1525] with cold_serving_cost dominant under OAT sensitivity. However, the registered economics claim remains HYPOTHESIS: live arms are UNKNOWN because BrowserGym, Playwright, and the policy-model credential are absent; latency savings are not identifiable because both attempt-level denominator intervals span zero; token-denominated economics were excluded; B-RAG's illustrative 150 ms term was not instantiated; and the null control passes only under the shuffled-null reading while failing the observed per-stratum length-correlation reading in 3/5 strata on attempt 2. These bounds support retaining the instrument and refusing promotion, not a scientific validation or falsification of broad C-PRODUCT-ECON. Immediate chaining is false because another local/scripted run would not resolve the missing live economics; the next question waits for named dependencies and Global Research Director authorization.",
+  "evidence_refs": [
+    "research/experiments/EXP-PRODUCT-36129169543/request.json (sha256 8e21d1456b8390f1a89d87cfee2b0f3158757d81afe9987cc65ac6f4ecdaf703; director_mandate allocation PIVOT/SUPERSEDE and dependencies)",
+    "research/experiments/EXP-PRODUCT-36129169543/spec.json (sha256 788562e681fc2a7f7927a6216ea39e9f8ca42bf49276fe38f43497b28c267195; claim_ids [C-PRODUCT-ECON], positive_control PC-INSTRUMENT-CORRECTNESS, null_control NC-SHUFFLED-FAMILY-STRATIFIED, Parts A-C decision rule and product consequences)",
+    "research/experiments/EXP-PRODUCT-36129169543/prereg.md (sha256 e7e282bc86120f2b6c63c131af7c12db40733e8d6248f9e514cb708c0f594ac8; instrument-only disclosure, explicit non-goals, and no-promotion boundary)",
+    "research/experiments/EXP-PRODUCT-36129169543/freeze.json (frozen request/spec/prereg hashes and frozen_at 2026-09-25T11:30:16.617056+00:00)",
+    "research/experiments/EXP-PRODUCT-36129169543/result.json (status COMPLETE, outcome SUPPORTS only under frozen Parts A-C; disclosure instrument correctness ONLY; all 5 arms x 192, eight counters, f*_bytes and uncertainty, mixed null, UNKNOWN live gates, validity_notes and unresolved)",
+    "research/experiments/EXP-PRODUCT-36129169543/audit.json (status PASS, producer_claim_supported true, required_fixes empty, recomputed Parts A-C, f*=36.70010423090146 CI [34.5716,39.1525], mixed null, and bounded claim_ceiling)",
+    "research/experiments/EXP-PRODUCT-36129169543/provenance.json (artifact hashes, two-attempt provenance, untracked harness/test durability caveat, environment credentials/browser availability, and protected-file custody)",
+    "research/experiments/EXP-PRODUCT-36129169543/artifacts/raw/unit_tests.txt (sha256 abd8fc82f4cbc5b9667df1faf7424d9b1ccd00d00ff878421bb1ebc5231ad6e8; 39 tests, exit 0, OK)",
+    "research/experiments/EXP-PRODUCT-36129169543/artifacts/derived/metrics_summary.json (sha256 ac18c5eac5a44e5ad3845b47a0b0a326a2c01de6244d5b71329c71e4957934fb; execution, health-gate, counter, and payload measurements)",
+    "research/experiments/EXP-PRODUCT-36129169543/artifacts/derived/breakeven.json (sha256 7e90c935f7f32033b2049358dadb987366c3600d67a30d4b84124049ff6f39fc; measured f* inputs, bytes result, and sensitivity)",
+    "research/experiments/EXP-PRODUCT-36129169543/artifacts/derived/f_bytes_ci_supplement.json (sha256 836b4a297cf6382b114979accdb7bb583d1d277f4d5cbccbc6524bf39f7a687b; explicitly post-hoc f* uncertainty supplement, not a frozen gate input)",
+    "research/experiments/EXP-PRODUCT-36129169543/artifacts/derived/null_control.json (sha256 4f0720f46ef637e9c986591f5e569c94b045b94f2dbcec45258577e8321168f8; shuffled-null PASS and observed-rho failures)",
+    "research/experiments/EXP-PRODUCT-36129169543/artifacts/derived/gate_demo.json (sha256 6ba1f383217a813bc282ff314afb9ce3a0b5c1e62091667bcb983cdeb84c35be; fail-closed live-mode UNKNOWN records without numeric fills)",
+    "research/experiments/EXP-PRODUCT-36095578013/handoff.json (sha256 c598732958acd88943a0eb81baa6225e22545af924dd3b431aff04d0e37613c2; exact parent handoff and superseded live-economics dependencies)",
+    "research/claims/registry.json (sha256 3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b; C-PRODUCT-ECON remains HYPOTHESIS with next gate end-to-end amortized economics on real agents)"
+  ]
+}

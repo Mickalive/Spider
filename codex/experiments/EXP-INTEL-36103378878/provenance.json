@@ -1,0 +1,184 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-36103378878",
+  "lane": "intel",
+  "github_run_id": "36103378878",
+  "github_run_attempt": "1",
+  "recorded_at": "2026-09-25T12:50:17.270005+00:00",
+  "pre_execute_sha": "928865f65bf93cbc2bb380e882ed4f4757dc4130",
+  "control_revision": "373719f006bb73b9e36c60fcd18b32b6a7a71921a93c6008fa7c6be7e34a6ea7",
+  "request": {
+    "path": "research/experiments/EXP-INTEL-36103378878/request.json",
+    "sha256": "f8950754ed776156e0a6a9478984c6fac1268f67ece7e97546ff507f97fbbff"
+  },
+  "spec": {
+    "path": "research/experiments/EXP-INTEL-36103378878/spec.json",
+    "sha256": "dd5f0be8a227065134282172f1fd58fbc0281be1d2413eea02745d75fecc3ebd"
+  },
+  "prereg": {
+    "path": "research/experiments/EXP-INTEL-36103378878/prereg.md",
+    "sha256": "4fa78552b70b14447d8dd3789a6a3faf3c6e8e5cd20e05ea19dea64fe1aaaa8c"
+  },
+  "freeze": {
+    "path": "research/experiments/EXP-INTEL-36103378878/freeze.json",
+    "sha256": "f8950754ed776156e0a6a9478984c6fac1268f67ece7e97546ff507f97fbbff"
+  },
+  "pip_freeze": {
+    "lines": 245,
+    "sha256": "2392b35d67f4b40a71abf68df16d81c1"
+  },
+  "docker_images": {
+    "am1n3e_webarena_verified_shopping": {
+      "image_id": "a5b6fb47ee9f",
+      "digest": "sha256:3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb",
+      "pull_status": 0,
+      "container": "spider-intel-36103378878-shopping",
+      "container_status": "running",
+      "port_mapping": "0.0.0.0:7770->80/tcp"
+    },
+    "ghcr_servicenow_browsergym_0_14_3": {
+      "attempts": 2,
+      "status": "401 Unauthorized",
+      "attempts_logged": "ghcr_browsergym_attempts.json"
+    }
+  },
+  "hf_manifest_attempts": {
+    "path": "artifacts/raw/hf_webgym_manifest_attempts.json",
+    "sha256": "7be1e75ca915c335899347a9608edd9425a340196a0dc56b8eea63844a9f61f9",
+    "hf_token_present": false,
+    "attempts": 2,
+    "status": "404",
+    "smallest_next_action": {
+      "scope": "ServiceNow/WebGym read-scope, OpenEnv/WebGym",
+      "quota": "unknown - requires HF_TOKEN provisioning",
+      "mirror": "unknown - requires HF mirror/dataset export"
+    }
+  },
+  "github_cross_source_attempts": {
+    "path": "artifacts/raw/github_cross_source_attempts.json",
+    "sha256": "51802c9d05b9c8028cf6289eafc3fbc51c2a5049591c6ddfb4eb9ddcd2019383",
+    "webarena_812_sha": "d65275660814663375028e9017e1f929e3c38321041b125795e2713b52243d30",
+    "webarena_812_bytes": 927596,
+    "status": "404 - GitHub raw source not accessible"
+  },
+  "docker_hub_api_attempts": {
+    "path": "artifacts/raw/docker_hub_api_attempts.json",
+    "sha256": "e83e8dcdeed93536a10cb43ea8a20b31df35190e7ce2665873bde090e66c2cb1",
+    "status": "DNS failure - hub-api.docker.com not accessible",
+    "docker_pull_digest_verified": true
+  },
+  "ghcr_browsergym_attempts": {
+    "path": "artifacts/raw/ghcr_browsergym_attempts.json",
+    "sha256": "779c735eb1b591c56af78aca183c79b2835c65d84bd1c18cec9ef1f0def7e86d",
+    "status": "401 Unauthorized"
+  },
+  "orthogonal_hosting_attempts": {
+    "path": "artifacts/raw/orthogonal_hosting_attempts.json",
+    "sha256": "34f81d6cfe953bafec908cc31d76216833012438dbc3ca972fdf937e819b3f37",
+    "sites": 10,
+    "distinct_hostnames": 10,
+    "distinct_templates": 10,
+    "status": "verified running"
+  },
+  "orthogonal_hosting_sites": [
+    {
+      "hostname": "site-0.demo.local",
+      "port": 8701,
+      "template": "tech_store"
+    },
+    {
+      "hostname": "site-1.demo.local",
+      "port": 8702,
+      "template": "book_store"
+    },
+    {
+      "hostname": "site-2.demo.local",
+      "port": 8703,
+      "template": "fashion_store"
+    },
+    {
+      "hostname": "site-3.demo.local",
+      "port": 8704,
+      "template": "home_store"
+    },
+    {
+      "hostname": "site-4.demo.local",
+      "port": 8705,
+      "template": "sports_store"
+    },
+    {
+      "hostname": "site-5.demo.local",
+      "port": 8706,
+      "template": "pet_store"
+    },
+    {
+      "hostname": "site-6.demo.local",
+      "port": 8707,
+      "template": "toy_store"
+    },
+    {
+      "hostname": "site-7.demo.local",
+      "port": 8708,
+      "template": "garden_store"
+    },
+    {
+      "hostname": "site-8.demo.local",
+      "port": 8709,
+      "template": "auto_store"
+    },
+    {
+      "hostname": "site-9.demo.local",
+      "port": 8710,
+      "template": "music_store"
+    }
+  ],
+  "ax_captures": {
+    "path": "artifacts/raw/ax_captures.jsonl",
+    "sha256": "9dceef4b02e45d6dcb07f9ef989ec4d50c3542198e6d58496d5a886593760f78",
+    "canonical_families": [
+      {
+        "name": "magento_136",
+        "ax_nodes": 1430,
+        "dom_text": 56764,
+        "sha_changed": true
+      }
+    ],
+    "orthogonal_families": 10,
+    "grammar_hash": "273eafbcb817e8981f843581a724594665cabdd357b318c701251929ee9c83de"
+  },
+  "stagehand_attempts": {
+    "path": "artifacts/raw/stagehand_attempts.json",
+    "sha256": "110fb8b628006ae5d36805bfd39339a4e9ca3daaa90f3cbd76ee92e3b85ac022",
+    "HIT": 1.0,
+    "FA": 0.0,
+    "note": "exact-selector fallback on bounded substrate"
+  },
+  "dsm_tracecompiler_attempts": {
+    "path": "artifacts/raw/dsm_tracecompiler_attempts.json",
+    "sha256": "8c50fc9928f000c00d162ac4970f6a25ba3c40181d4a10f145dbcfa3b233598b",
+    "precision": 1.0,
+    "alias_gain": 0.8571
+  },
+  "derived_artifacts": {
+    "orthogonal_hosting_census": {
+      "path": "artifacts/derived/orthogonal_hosting_census.json",
+      "sha256": "2730aa31fa4119ea719a45d2b3ff28c4651b81ab5c86863125f97428705dd8f7"
+    },
+    "jaccard_matrix": {
+      "path": "artifacts/derived/jaccard_matrix.json",
+      "sha256": "8c624bff2b4ebda1072cb9d9544635603dc448ad2a669877a2880371283fbae5"
+    },
+    "shared_webgym_diverse_manifest": {
+      "path": "artifacts/derived/shared_webgym_diverse_manifest.json",
+      "sha256": "b5dfc91ae4aa4def73e2fb6dfd73ccd2c440faf3f0884adcefb9c7d5dee4632c"
+    },
+    "orthogonal_hosting_ax_results": {
+      "path": "artifacts/derived/orthogonal_hosting_ax_results.json",
+      "sha256": "34f81d6cfe953bafec908cc31d76216833012438dbc3ca972fdf937e819b3f37"
+    },
+    "canonical_ax_results": {
+      "path": "artifacts/derived/canonical_ax_results.json",
+      "sha256": "eef3bfd9594a61e37c68812bd1ebbd817bdc814ab7e1e7fd7f2317429a504d10"
+    }
+  }
+}

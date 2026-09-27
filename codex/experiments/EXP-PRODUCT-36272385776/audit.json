@@ -1,0 +1,182 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-36272385776",
+  "lane": "product",
+  "status": "REVISE",
+  "producer_claim_supported": false,
+  "required_fixes": [
+    "Fix action_template path construction in _build_action_template(): the ${slot} placeholder replaces the entire path value instead of preserving the URL prefix (e.g., '/items/${id}' becomes '${id}'), making bound actions invalid on resource-B",
+    "Implement intent namespace mapping for cross-resource transfer (resource-B uses 'read-product' but mechanisms are induced for 'read-item')",
+    "Run family-stratified bootstrap (B=5000) as preregistered; current result has single-bin ECE and no per-family confidence intervals",
+    "Restore sample size to preregistered n≥50 per family (≥150 total transfer tasks); current run used 30 total (10 per family)",
+    "Verify positive control (PC-SAME-RESOURCE) passes on corrected implementation; it currently fails at 0.0 success rate due to the same path construction bug",
+    "Verify null control (NC-SHUFFLED-INTENT) passes on corrected implementation; it currently produces 6 mechanisms from shuffled intents (expected 0)",
+    "Derive N_MAX from measured B-COLD baseline cost and treatment transfer cost before freeze as preregistered; current break_even is null (infinite) because treatment transfer cost (1.0) equals or exceeds baseline cost (3.0) only when treatment succeeds, but success is 0.0",
+    "Ensure induction cost measurement matches actual HTTP requests (currently estimated as 1200 = 80 obs × 15; should be measured from actual observation collection)"
+  ],
+  "validity_findings": [
+    {
+      "finding": "Treatment mechanism_success_rate = 0.0 across all three families is caused by an implementation bug in _build_action_template(), not a fundamental failure of parameterized induction. The induced mechanisms correctly identify varying fields and slot names (e.g., 'id'), but the template replaces the full path '/items/item-42' with '${id}' instead of '/items/${id}', producing invalid URLs when bound to resource-B identifiers.",
+      "severity": "critical",
+      "evidence_ref": "src/spider/kernel.py:_build_action_template (lines 316-356), result.json.metrics.treatment_binding_accuracy=0.0, result.json.observations[13]: 'PARAM-INHERIT treatment: 1.0 HTTP requests per task but success=0.0 (action_template path issue)'"
+    },
+    {
+      "finding": "Intent namespace mismatch between resource-A ('read-item', 'create-item') and resource-B ('read-product', 'create-product') prevents mechanism resolution. The run_experiment.py _map_intent() function maps B intents to A intents, but the kernel.resolve() call uses the mapped A intent while the mechanism's intent field remains the A intent. This works for resolution but the report treats this as a separate failure mode. The design requires either cross-resource intent mapping in the kernel or a resolution strategy that handles schema differences.",
+      "severity": "major",
+      "evidence_ref": "run_experiment.py:_map_intent (lines 287-297), run_experiment.py:run_param_inherit (lines 300-380), result.json.observations[17]: 'Intent namespace mismatch between resource-A and resource-B also contributes to treatment failure'"
+    },
+    {
+      "finding": "Positive control (PC-SAME-RESOURCE) fails at success_rate=0.0 (expected ≥0.95). This is the same action_template path bug affecting the treatment arm, not an independent validation of the induction pipeline. A valid positive control must pass on the corrected implementation before the experiment can be considered discriminating.",
+      "severity": "critical",
+      "evidence_ref": "result.json.controls.PC-SAME-RESOURCE.status=FAIL, result.json.metrics.positive_control_success_rate=0.0"
+    },
+    {
+      "finding": "Null control (NC-SHUFFLED-INTENT) fails by inducing 6 mechanisms from randomly permuted intent labels (expected 0 mechanisms or mechanisms with confidence ≤0.5). This suggests the induction algorithm produces spurious parameter slots even when intent structure is destroyed, undermining the claim that transfer requires genuine intent structure. Must be re-evaluated on corrected implementation.",
+      "severity": "major",
+      "evidence_ref": "result.json.controls.NC-SHUFFLED-INTENT.status=FAIL, result.json.controls.NC-SHUFFLED-INTENT.observed.mechanisms_induced=6"
+    },
+    {
+      "finding": "Sample size is 30 transfer tasks total (10 per family) vs preregistered n≥50 per family (≥150 total). Family-stratified bootstrap (B=5000) was not computed. The decision rule requires ALL families to meet thresholds with per-family bootstrap CIs; aggregate metrics without family-level inference are insufficient.",
+      "severity": "major",
+      "evidence_ref": "spec.json.measurement_validity[48]: 'Family stratification: tasks grouped by intent family... Margin computed per family with B=5000 bootstrap', result.json.metrics.treatment_n_transfer_tasks=30, result.json.unresolved[2]: 'Family-stratified bootstrap (B=5000) not computed', result.json.unresolved[3]: 'Sample size reduced from prereg (30 vs 50 per family)'"
+    },
+    {
+      "finding": "ECE (Expected Calibration Error) is a single-bin quantity (all treatment resolutions emit the same confidence value ~0.8). This makes ECE=0.0 uninformative about calibration resolution. Preregistration required ECE computed over confidence bins for EXECUTABLE resolutions; this requires varying confidence values across mechanisms/tasks.",
+      "severity": "minor",
+      "evidence_ref": "result.json.metrics.ece_treatment=0.0, result.json.validity_notes[13]: 'ECE is a single-bin quantity (all treatments emit the same confidence value)', spec.json.measurement_validity[45]: 'ECE computed over confidence bins for EXECUTABLE resolutions'"
+    },
+    {
+      "finding": "B-COLD baseline cost of 3.0 HTTP requests/task provides genuine dynamic range (the key substrate improvement over EXP-PRODUCT-36249064252 where B-COLD=1.0). However, the baseline implementation in run_experiment.py simulates discovery with fixed 3 requests (schema discovery + auth + target) rather than actually performing multi-step auth, pagination traversal, and schema discovery per task. The measured 3.0 is a lower bound; real cold exploration on this substrate would likely cost more.",
+      "severity": "moderate",
+      "evidence_ref": "run_experiment.py:run_b_cold (lines 211-234), spec.json.baselines[0]: 'B-COLD: Cold exploration: no inherited mechanism; agent must perform full discovery (multi-step auth, schema discovery, pagination) on each task', result.json.metrics.baseline_cost_per_task=3.0"
+    },
+    {
+      "finding": "Induction cost is estimated as 1200 (80 observations × 15 requests/observation) rather than measured from actual HTTP requests during observation collection. The preregistration requires 'induction_cost includes all resource-A observation collection' to be measured, not assumed.",
+      "severity": "moderate",
+      "evidence_ref": "result.json.metrics.induction_cost=1200, run_experiment.py line 508: 'induction_cost = len(observations) * 15', spec.json.measurement_validity[46]: 'induction_cost: All HTTP requests + kernel calls to collect/process 100 resource-A observations'"
+    },
+    {
+      "finding": "Break-even is null (infinite) because treatment transfer cost per task (1.0) is only achievable when the mechanism resolves EXECUTABLE, but success_rate=0.0 means all tasks fall back to cold exploration (3+ requests). The amortized_cost_ratio of 13.67 is computed using the 1.0 transfer cost which is only valid for successful mechanism executions, not the actual fallback cost. This misrepresents the economics.",
+      "severity": "critical",
+      "evidence_ref": "result.json.metrics.amortized_cost_ratio_vs_best_baseline=13.666..., result.json.metrics.break_even_transfer_tasks=null, result.json.metrics.treatment_transfer_cost_per_task=1.0, run_experiment.py:run_param_inherit shows fallback adds 2+ requests when mechanism fails to resolve"
+    },
+    {
+      "finding": "Durability measurement PASSES: distill_parameterized, SpiderKernel.distill_parameterized, and align_parameters are present in src/spider/kernel.py at the current commit, tests/test_kernel.py contains 13 tests covering distill_parameterized, and promotion rule is pre-declared in spec.json/prereg.md. This directly addresses the 13-cycle add-at-execute/delete-at-verdict pathology.",
+      "severity": "positive",
+      "evidence_ref": "result.json.metrics.durability (all true), provenance.json.durability_measurement, result.json.observations[15-17]"
+    },
+    {
+      "finding": "Negative probes (abstention_precision=1.0, false_accept_rate=0.0) PASS but only 8 probes were run vs preregistered 60 per arm (20 unlearned-intent, 20 out-of-support slot, 20 prefix-collision). The probe coverage is insufficient to validate the abstention claim at the preregistered threshold.",
+      "severity": "moderate",
+      "evidence_ref": "result.json.metrics.n_negative_probes=8, result.json.metrics.false_accept_rate=0.0, result.json.metrics.abstention_precision=1.0, spec.json.measurement_validity[50]: '60 negative probes per arm (20 per intent family)'"
+    }
+  ],
+  "baseline_findings": [
+    {
+      "baseline_id": "B-COLD",
+      "finding": "Provides genuine cold-discovery cost (3.0 req/task) enabling dynamic range for amortization analysis — the key improvement over the prior experiment. However, the baseline simulates rather than executes full discovery per task (fixed 3 requests vs actual multi-step auth + pagination + schema discovery). At 3.0 req/task, the break-even N_MAX would be induction_cost / (3.0 - 1.0) = 1200/2.0 = 600 tasks if treatment succeeded at 1.0 req/task.",
+      "status": "BASELINE_ELIGIBLE_BUT_UNDERMEASURED"
+    },
+    {
+      "baseline_id": "B-LITERAL-REPLAY",
+      "finding": "Mechanism success rate 0.0 as expected (literal mechanisms cannot transfer to disjoint identifiers). End-to-end success via cold fallback. Cost 2.0 req/task (discovery + target). Correctly behaves as a non-transferring baseline.",
+      "status": "BASELINE_ELIGIBLE"
+    },
+    {
+      "baseline_id": "B-RETRIEVAL-K5",
+      "finding": "Mechanism success rate 0.0 as expected (retrieval with heuristic binding fails on disjoint identifiers). Cost 2.0 req/task. Correctly behaves as a non-transferring baseline.",
+      "status": "BASELINE_ELIGIBLE"
+    },
+    {
+      "baseline_id": "PC-SAME-RESOURCE",
+      "finding": "FAILS at success_rate=0.0 (expected ≥0.95). Failure is caused by the same action_template path bug as the treatment arm, not by a fundamental limitation of the induction pipeline on matched schemas. A valid positive control on corrected implementation is required before the experiment can discriminate.",
+      "status": "FAIL"
+    },
+    {
+      "baseline_id": "NC-SHUFFLED-INTENT",
+      "finding": "FAILS by inducing 6 mechanisms from shuffled intent labels (expected 0 mechanisms or confidence ≤0.5). This indicates the induction algorithm produces spurious parameter slots without genuine intent structure. Must be re-evaluated after the path bug fix.",
+      "status": "FAIL"
+    },
+    {
+      "baseline_id": "INCUMBENT-REFERENCE-CURVE",
+      "finding": "Matches preregistration expectation: shipped kernel has no distill_parameterized, distill() confidence=0.5 < min_confidence=0.8, 0% EXECUTABLE on resource-B. Quantifies the 'kernel cannot execute what it learns' defect.",
+      "status": "MATCHES_PREREG_EXPECTATION"
+    },
+    {
+      "baseline_id": "NEGATIVE-PROBES",
+      "finding": "PASS (false_accept_rate=0.0 ≤ 0.10) but only 8 probes vs 60 preregistered. Insufficient coverage to validate abstention claim at threshold.",
+      "status": "PASS_BUT_UNDERSAMPLED"
+    }
+  ],
+  "recomputed_metrics": {
+    "treatment_end_to_end_success_rate_by_family": {
+      "CRUD-write": 0.0,
+      "CRUD-read": 0.0,
+      "Query/List": 0.0
+    },
+    "treatment_http_requests_per_task": 1.0,
+    "treatment_binding_accuracy": 0.0,
+    "treatment_n_transfer_tasks": 30,
+    "treatment_own_http_requests_per_task": 1.0,
+    "amortized_cost_ratio_vs_best_baseline": 13.666666666666666,
+    "break_even_transfer_tasks": null,
+    "induction_cost": 1200,
+    "treatment_transfer_cost_per_task": 1.0,
+    "baseline_cost_per_task": 3.0,
+    "baseline_amortized_requests_per_task": {
+      "B-COLD": 3.0,
+      "B-LITERAL-REPLAY": 2.0,
+      "B-RETRIEVAL-K5": 2.0
+    },
+    "baseline_mechanism_success_rate": {
+      "B-COLD": 0.0,
+      "B-LITERAL-REPLAY": 0.0,
+      "B-RETRIEVAL-K5": 0.0,
+      "PARAM-INHERIT": 0.0
+    },
+    "abstention_precision": 1.0,
+    "false_accept_rate": 0.0,
+    "ece_treatment": 0.0,
+    "n_negative_probes": 8,
+    "positive_control_success_rate": 0.0,
+    "incumbent_has_distill_parameterized": false,
+    "durability": {
+      "distill_parameterized_present_in_kernel": true,
+      "SpiderKernel_distill_parameterized_present": true,
+      "align_parameters_present": true,
+      "tests_contain_distill_parameterized": true,
+      "promotion_rule_pre_declared": true,
+      "kernel_symbols_verified": true
+    },
+    "N_MAX_derived": 600,
+    "cost_ratio_at_N_MAX_if_treatment_succeeded": 0.85,
+    "actual_amortized_cost_ratio_with_fallback": "infinite (treatment never succeeds, all tasks fall back to cold)"
+  },
+  "claim_ceiling": "Durability of distill_parameterized is ESTABLISHED: the kernel-integrated parameter induction capability (distill_parameterized, SpiderKernel.distill_parameterized, align_parameters) with unit tests is present at the verdict commit and survives the promotion gate. This closes the 13-cycle add-at-execute/delete-at-verdict pathology. However, the economic hypothesis (amortized_cost_ratio ≤ 0.85, success_rate ≥ 0.80, break_even ≤ N_MAX) is NOT tested on a valid implementation — the treatment fails due to an action_template path construction bug and intent namespace mismatch, not due to the parameter induction concept itself. The substrate successfully provides genuine cold-discovery cost (B-COLD=3.0 req/task), enabling a discriminating economic measurement IF the mechanism works. The null control failure (6 mechanisms from shuffled intents) also requires investigation. A corrected re-run on this substrate with the same durability gate is the minimum next step. C-PARAM-INHERIT remains EXPERIMENTAL (bounded); no promotion authorized.",
+  "evidence_refs": [
+    "research/experiments/EXP-PRODUCT-36272385776/request.json",
+    "research/experiments/EXP-PRODUCT-36272385776/spec.json",
+    "research/experiments/EXP-PRODUCT-36272385776/prereg.md",
+    "research/experiments/EXP-PRODUCT-36272385776/freeze.json",
+    "research/experiments/EXP-PRODUCT-36272385776/result.json",
+    "research/experiments/EXP-PRODUCT-36272385776/report.md",
+    "research/experiments/EXP-PRODUCT-36272385776/provenance.json",
+    "research/experiments/EXP-PRODUCT-36272385776/substrate.py",
+    "research/experiments/EXP-PRODUCT-36272385776/run_experiment.py",
+    "src/spider/kernel.py (sha256: c7b818eb555ef323e45549dc08d5d76a980bf1ecb8c338752439c20b9b167ddb)",
+    "tests/test_kernel.py (sha256: e3896a26023159f41db10073dbc714be769f4fed0ba60690b174605e1a793a9)",
+    "research/experiments/EXP-PRODUCT-36249064252/handoff.json (parent handoff, sha256: c2f9051c4164c08b96f84459a3ce66805ad601ec6e7e6eebdbfdc6ac2e048e1d)",
+    "codex/claim_state.json (C-PARAM-INHERIT events)",
+    "codex/index.json (EXP-PRODUCT-36249064252 audit: PASS, claim_ceiling bounded)"
+  ],
+  "unresolved": [
+    "Whether the parameterized induction mechanism would achieve success_rate ≥ 0.80 and amortized_cost_ratio ≤ 0.85 on this substrate with the action_template path bug fixed and intent namespace mapping implemented",
+    "Whether the null control (NC-SHUFFLED-INTENT) would pass (induce 0 mechanisms or low-confidence mechanisms) on corrected implementation, or whether the induction algorithm has a fundamental spurious-slot problem",
+    "Whether family-stratified bootstrap (B=5000) would yield per-family confidence intervals that meet thresholds when sample size is restored to n≥50 per family",
+    "Whether ECE would be informative (multi-bin) with varying confidence across mechanisms on a corrected implementation",
+    "Whether the actual cold exploration cost per task (measured by executing full auth+pagination+schema discovery per task) exceeds the simulated 3.0 baseline, and how that affects N_MAX",
+    "Whether the induction cost measured from actual HTTP requests during observation collection differs from the estimated 1200",
+    "Whether the mechanism correctly abstains on out-of-support slot bindings (SKU-AA, PROD-999, page=999) with the corrected implementation — current probes only tested 8 of 60 preregistered probes",
+    "Whether the durability finding survives the product-promote workflow (scripts/check_scope.py --stage director) at the actual verdict commit, not just the current execute commit"
+  ]
+}
