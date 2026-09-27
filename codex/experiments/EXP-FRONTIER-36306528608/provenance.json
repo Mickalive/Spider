@@ -1,0 +1,378 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-FRONTIER-36306528608",
+  "lane": "frontier",
+  "stage": "EXECUTE",
+  "claim_ids": [
+    "C-CROSSSITE"
+  ],
+  "github_run_id": "36306528608",
+  "request_id": "4ed27dcc225fc198f55026e8",
+  "run_attempt": "1",
+  "cycled_at": "2026-09-27",
+  "git": {
+    "head_at_execution": "67e1393b3fc46de8fb63ba15af4fa851ae777c65",
+    "head_subject": "R2 frontier: execution base EXP-FRONTIER-36306528608",
+    "freeze_commit": "d96ef707b0ce492b2fd0d5da76c1bf25ed29332a",
+    "allocate_commit": "2221f110",
+    "request_base_sha": "4682030b49d96a0dc1c4a7522ed767ac0efcc3d6",
+    "pre_execute_sha_from_checkpoint": "d96ef707b0ce492b2fd0d5da76c1bf25ed29332a",
+    "branch_operations_performed": "NONE. No commit, push, branch, checkout, reset, stash or tag was executed. The working tree carries uncommitted new files under research/frontier/ and research/experiments/EXP-FRONTIER-36306528608/ only."
+  },
+  "frozen_input_integrity": {
+    "verified_before_execution": true,
+    "verified_after_execution": true,
+    "freeze_json": {
+      "sha256": "a0a2423b223b23ec0c0ea5df3d4e366148f6b8e05716ad64eb3cee38422f0eda"
+    },
+    "hashes": {
+      "prereg.md": {
+        "frozen": "04512e92199ae7becac1036890387a1dfc628820d7957cb0352bc3d26f5561b1",
+        "on_disk": "04512e92199ae7becac1036890387a1dfc628820d7957cb0352bc3d26f5561b1",
+        "match": true
+      },
+      "request.json": {
+        "frozen": "aa18d40fd396f9611c448d6e0d0604edbdcdf130335ef650ee544a2c3f99ad65",
+        "on_disk": "aa18d40fd396f9611c448d6e0d0604edbdcdf130335ef650ee544a2c3f99ad65",
+        "match": true
+      },
+      "spec.json": {
+        "frozen": "e746160cb5d8ee16802202299081db3f179d564f294159f1af4881208f93b6e6",
+        "on_disk": "e746160cb5d8ee16802202299081db3f179d564f294159f1af4881208f93b6e6",
+        "match": true
+      }
+    },
+    "frozen_files_modified_by_execute": [],
+    "note": "freeze.json hashes exactly three files, matching the program-level control-plane defect recorded in the director mandate: scripts/freeze_experiment.py writes only request.json, spec.json and prereg.md, so no code artifact is bound by the freeze. The six producer code files below are therefore hashed into result.json#artifacts but are NOT cryptographically bound by freeze.json. An auditor must verify them by hash, not by freeze."
+  },
+  "environment": {
+    "os": "Linux",
+    "platform": "Linux-6.11.0-1018-azure",
+    "python_version": "3.12.14",
+    "working_directory": "/home/runner/work/Spider/Spider",
+    "network_access": "AVAILABLE. Outbound HTTPS to the frozen candidate sites succeeded.",
+    "packages_installed_during_execution": [
+      {
+        "package": "tiktoken",
+        "install_command": "pip install --quiet tiktoken",
+        "reason": "The frozen prereg 8 cost basis mandates the cl100k_base tokenizer and the director mandate required the tokenizer to be computed on the substrate rather than imported from another packet. tiktoken was absent from the environment and is not declared in pyproject.toml.",
+        "disclosure": "Build-time dependency only. It performs no model call, requires no API key, and issues no network request to anything other than the package index. Disclosed because it is a deviation from a pure-stdlib reading of dependency 1, and because the absence of the frozen tokenizer from pyproject.toml is itself a control-plane gap worth recording."
+      }
+    ],
+    "tokenizer": {
+      "name": "cl100k_base",
+      "source": "tiktoken.get_encoding('cl100k_base')",
+      "verified_at_runtime": true,
+      "note": "Used only to count tokens on the frozen body-sensitive observation structure."
+    },
+    "browser_used": false,
+    "docker_used": false,
+    "model_api_called": false,
+    "model_key_used": null
+  },
+  "substrate": {
+    "class": "credential-free public HTTPS, stdlib urllib only",
+    "frozen_candidate_pool_source": "prereg.md section 4.3, screened in the frozen order with no post-freeze addition, removal or substitution",
+    "calibration_site": "https://httpbin.org/forms/post",
+    "sites_screened": 15,
+    "sites_reachable": 14,
+    "sites_unreachable": [
+      {
+        "url": "https://api.publicapis.org",
+        "symptom": "no HTTP response; 1 request issued",
+        "substitution_made": false,
+        "note": "Deliberately NOT replaced. The director mandate forbids substituting always-200 read-only JSON endpoints for a failed candidate."
+      }
+    ],
+    "hosts_contacted_including_redirects": [
+      "about.gitlab.com",
+      "api.publicapis.org",
+      "auth.wikimedia.org",
+      "bitbucket.org",
+      "catfact.ninja",
+      "docs.gitlab.com",
+      "docs.python.org",
+      "developer.mozilla.org",
+      "dog.ceo",
+      "en.wikipedia.org",
+      "example.com",
+      "github.com",
+      "gitlab.com",
+      "httpbin.org",
+      "jsonplaceholder.typicode.org",
+      "postman-echo.com",
+      "reqres.in",
+      "www.atlassian.com",
+      "www.postman.com"
+    ],
+    "requests_total": 299,
+    "request_methods": {
+      "GET": 299
+    },
+    "non_get_requests": 0,
+    "write_leg_exercised": false,
+    "side_effects_on_third_parties": "NONE. No form was submitted, no account or trial subscription was created, and no non-GET request was sent to any host. This is a deliberate safety constraint, and it is also why the credential-free executability of the 2 C3-passing sites remains untested.",
+    "rate_limit": "MIN_INTERVAL_S = 0.35 between requests within a client, descriptive User-Agent, no retry storms.",
+    "bfs_bounds": {
+      "max_depth": 3,
+      "fanout_cap_per_page": 10,
+      "page_cap_per_site": 30,
+      "c5_repeat_probe_cap_per_site": 6,
+      "same_site_links_only": true,
+      "cross_host_observations": "arise only from the sites' own HTTP redirects, recorded per page as requested_url versus final url"
+    }
+  },
+  "execution_stages": [
+    {
+      "stage": 1,
+      "name": "prereg 4.1 calibration procedure",
+      "command": "python3 research/frontier/run_execute_36306528608.py",
+      "result": "FAIL -- calibration site does not satisfy the frozen screen (C1/C6/C7 pass, C2/C3/C4/C5 fail, 0 objects detected)"
+    },
+    {
+      "stage": 2,
+      "name": "prereg 4.2/4.3 frozen candidate-pool screen",
+      "command": "python3 research/frontier/run_execute_36306528608.py",
+      "result": "0 of 15 admitted; per-criterion pass counts C1 13, C2 4, C3 2, C4 4, C5 2, C6 14, C7 14"
+    },
+    {
+      "stage": 3,
+      "name": "prereg 7/11 object detection and re-derivable classification",
+      "command": "python3 research/frontier/run_execute_36306528608.py",
+      "result": "25 action-gating objects classified; 1 re-derivable; pooled same-unit diagnostic fraction 0.04, site-clustered 95% CI [0.0, 0.2]"
+    },
+    {
+      "stage": 4,
+      "name": "prereg 6 arm phase x episodes",
+      "command": "NOT RUN",
+      "result": "Gated by the frozen design: 0 qualifying sites against a frozen minimum of 3. All 7 arm metrics are null. No arm was stubbed and no arm metric was recorded as 0.0."
+    },
+    {
+      "stage": 5,
+      "name": "cross-session token stability probe (prereg identifier_classification_log + prereg 11 step 3)",
+      "command": "python3 research/frontier/probe_token_stability_36306528608.py",
+      "result": "2/2 probed targets minted a distinct token in each of 3 independent fresh sessions"
+    },
+    {
+      "stage": 6,
+      "name": "screen reproducibility pass (producer-added instrument control)",
+      "command": "python3 research/frontier/repeat_screen_36306528608.py",
+      "result": "6/6 object-yielding sites reproduced exactly"
+    },
+    {
+      "stage": 7,
+      "name": "prereg 17 analysis and frozen decision-rule evaluation",
+      "command": "python3 research/frontier/analyze_36306528608.py",
+      "result": "derived/analysis.json written; mechanical decision-rule branch ROW_1 selected and reported; H1 and F1 not evaluable"
+    }
+  ],
+  "code_paths": {
+    "authorized_root": "research/frontier",
+    "authorization_source": "research/lanes/registry.json#lanes.frontier.allowed_code_roots",
+    "lane_modification_note": "This is the frontier lane, not the product lane. No file under src/, tests/, sdk/ or pyproject.toml was created, modified or deleted. The product kernel was read only, to discharge the prereg 16 item 8 hard dependency check.",
+    "files_created": [
+      {
+        "path": "research/frontier/analyze_36306528608.py",
+        "sha256": "0dd256af0b03156e6653f2533f62a0fb8767c397355026fe5bf1cb5a1481c7d8",
+        "role": "prereg 17 analysis: same-unit prevalence with site-clustered bootstrap CI, body-sensitive cost statistics, identifier inventory, reproducibility comparison, frozen decision-rule branch evaluation"
+      },
+      {
+        "path": "research/frontier/harness_36306528608.py",
+        "sha256": "027eb5fd777346edd5c719a7f0657608687bacaec6664898d80233680ea8aa25",
+        "role": "stdlib HTTP substrate, cookie-bearing and stateless clients, regex HTML parsing, body-sensitive observation with cl100k_base tokens, non-self-referential JSONL writers, SHA256 response cache with URL-keyed read-through"
+      },
+      {
+        "path": "research/frontier/probe_token_stability_36306528608.py",
+        "sha256": "f7eb4395657e77bf68ae533a255693ed8b021a94df85da16f52666edc4b8736d",
+        "role": "read-only cross-session CSRF token stability probe on the 2 token-gated targets found by the screen"
+      },
+      {
+        "path": "research/frontier/repeat_screen_36306528608.py",
+        "sha256": "010d5a370b798accfeba167b075d68b07d0cfa7e1f790dbb5aebe799f5062f9a",
+        "role": "second independent live screen pass over the 6 object-yielding sites; instrument-validity control for Web dynamism and redirect drift"
+      },
+      {
+        "path": "research/frontier/run_execute_36306528608.py",
+        "sha256": "2eb8f9cfa63927be9da38c762c5398fffaee3b90775db29b819eac1c010f51ac",
+        "role": "staged orchestrator for calibration, pool screening, object detection, classification and the arm-phase gate"
+      },
+      {
+        "path": "research/frontier/screen_36306528608.py",
+        "sha256": "debad6347e937f6fb201729f58eebacd4319af3d7ae50be29fc89db60e892852",
+        "role": "transcription of the frozen prereg 4.1/4.2/4.3/4.4/7/11 into executable form: criteria C1-C7, action-gating object detection, deterministic re-derivable classification, identifier inventory"
+      }
+    ],
+    "test_execution": "The six scripts were executed end to end as the measurement itself; their stdout transcripts are the stage results recorded in execution_stages. No unit-test suite exists for research/frontier and none was added, because this lane's registry-authorized roots are research/harness and research/frontier, not tests/. The freeze-time hash binding of code noted under frozen_input_integrity is a program-level control-plane gap and is not Frontier's to fix."
+  },
+  "artifacts": {
+    "raw": [
+      {
+        "path": "research/experiments/EXP-FRONTIER-36306528608/raw/http.jsonl",
+        "sha256": "025aabdbde219445e6e9ec42b14301f8e6886417319278eac1a6c9c1dda56ae9",
+        "records": 299
+      },
+      {
+        "path": "research/experiments/EXP-FRONTIER-36306528608/raw/pages.jsonl",
+        "sha256": "ce6119aff12c8f3102f487d777603b19a48492515e20eae818b328006b147747",
+        "records": 232
+      },
+      {
+        "path": "research/experiments/EXP-FRONTIER-36306528608/raw/screen.jsonl",
+        "sha256": "0ca2b61fdd009d543acdc75c2179c2936eb375b4af4b800cd70ea7c5ad3d7868",
+        "records": 15
+      },
+      {
+        "path": "research/experiments/EXP-FRONTIER-36306528608/raw/calibration.jsonl",
+        "sha256": "37af30f0b4dc5263efacaa9dff16f939532aa4117a63ae2be4d77105a3785603",
+        "records": 1
+      },
+      {
+        "path": "research/experiments/EXP-FRONTIER-36306528608/raw/objects.jsonl",
+        "sha256": "7f61e5a01262fc6535092a00d92f482ceed8f4352f13c9fce73b1a736b745323",
+        "records": 25
+      },
+      {
+        "path": "research/experiments/EXP-FRONTIER-36306528608/raw/classification.jsonl",
+        "sha256": "de1dc5cba49b0f1f0947cd8774d5742769e6b133e4dc15787c40e1a1795fdd68",
+        "records": 25
+      },
+      {
+        "path": "research/experiments/EXP-FRONTIER-36306528608/raw/identifiers.jsonl",
+        "sha256": "e33ee7cc205738b2fc62fc8acac2b9350843f6babee363669686dbdb88b03eb9",
+        "records": 1696
+      },
+      {
+        "path": "research/experiments/EXP-FRONTIER-36306528608/raw/token_stability.jsonl",
+        "sha256": "1bbde51d4cf12c739bc68a435d03e4b0dc844672cb55acd570538b12eac3d429",
+        "records": 2
+      },
+      {
+        "path": "research/experiments/EXP-FRONTIER-36306528608/raw/repeat_screen.jsonl",
+        "sha256": "324f07d0686f10f99ec2f3e9568426d518716d2d7d7e8a53a9d71ae42ea5defa",
+        "records": 6
+      },
+      {
+        "path": "research/experiments/EXP-FRONTIER-36306528608/raw/http_pass2.jsonl",
+        "sha256": "9ef26ce8789872e1d4fb779ce9d377581d18bffef2731a978e4a9e3fa048e4cc",
+        "records": null,
+        "note": "record count not tallied separately; see raw/repeat_screen.jsonl for the pass-level summary"
+      },
+      {
+        "path": "research/experiments/EXP-FRONTIER-36306528608/raw/pages_pass2.jsonl",
+        "sha256": "ee24adf65ea53c868c03cf435604420f591df8171e54a5f8ea700865fa93ece2",
+        "records": null
+      }
+    ],
+    "derived": [
+      {
+        "path": "research/experiments/EXP-FRONTIER-36306528608/derived/analysis.json",
+        "sha256": "21fbb7d03f75404843172e4c866c3f57cb873547424f05a995685126908d536b"
+      },
+      {
+        "path": "research/experiments/EXP-FRONTIER-36306528608/derived/screen_summary.json",
+        "sha256": "7c2637bba3a27857c9bcc7e7db9fb9f0aa592ac00f2a2953f0c2053d7221af33"
+      },
+      {
+        "path": "research/experiments/EXP-FRONTIER-36306528608/derived/site_records.json",
+        "sha256": "2e3c6b38871570ec01954e7a2a96d979001c204214db81594600e7f508f0cae4"
+      },
+      {
+        "path": "research/experiments/EXP-FRONTIER-36306528608/derived/token_stability.json",
+        "sha256": "9064f091f1b43061b7119e8006a0afcfa227dfa67fb1811b3b5c182c7196dd8c"
+      },
+      {
+        "path": "research/experiments/EXP-FRONTIER-36306528608/derived/gate_decision.json",
+        "sha256": "ef8f71ada28c968050ebdb6d1150a9c25b84d7600c373383def5d7a765ce1f6e"
+      }
+    ],
+    "artifact_aggregates": {
+      "responses_cache_file_count": 313,
+      "responses_cache_aggregate_sha256": "e8a2ed5b40a8984ed43292d3a80ddf6567486fbd74ac013bb5711b1f6ecf8ac7",
+      "responses_cache_aggregate_method": "sha256 over the concatenation of, for each of the 313 files sorted by repository-relative path: the path bytes then the file's own sha256 hex bytes. Excludes result.json, report.md and provenance.json, so it is non-self-referential."
+    },
+    "non_self_referential": true,
+    "non_self_referential_note": "Every raw JSONL record carries a record_sha256 computed over that record's own payload, never over the containing file. No artifact hash in this file or in result.json is a hash of result.json, report.md or provenance.json. The response cache is addressed by content SHA256."
+  },
+  "reproduction": {
+    "preconditions": [
+      "Python 3.11+ with network egress to the frozen candidate sites.",
+      "tiktoken importable (installed during this run; not declared in pyproject.toml).",
+      "Working directory at the repository root."
+    ],
+    "commands_in_order": [
+      "python3 research/frontier/run_execute_36306528608.py",
+      "python3 research/frontier/probe_token_stability_36306528608.py",
+      "python3 research/frontier/repeat_screen_36306528608.py",
+      "python3 research/frontier/analyze_36306528608.py"
+    ],
+    "determinism": "The analysis stage is deterministic given the raw evidence (bootstrap seed 36306528608, 10000 resamples). The measurement stages are NOT deterministic in principle, because they read the live Web: en.wikipedia.org/wiki/Special:Random resolves to a different article per visit, and several candidate roots redirect off-host. The reproducibility pass shows that within one session the screen verdicts and object counts were exactly stable for all 6 object-yielding sites, but slow drift over weeks is not controlled.",
+    "raw_evidence_is_sufficient_to_recompute": "Every derived number in result.json#metrics is recomputable from raw/*.jsonl by an auditor using the frozen identifiers, without re-contacting any site.",
+    "expected_wall_clock": "about 90 s for the screen pass, about 25 s for the token probe, about 200 s for the reproducibility pass, about 5 s for analysis, dominated by the 0.35 s inter-request delay."
+  },
+  "inherited_state_preserved": {
+    "parent_handoff": {
+      "experiment_id": "EXP-FRONTIER-36293269574",
+      "path": "research/experiments/EXP-FRONTIER-36293269574/handoff.json",
+      "sha256": "7675d3e600381dc942c98ed028422657ebd91421e89330e6f78d5feb14b75f80",
+      "disposition": "USE, with director_mandate binding as the direction"
+    },
+    "established_and_still_held": [
+      "The credential-free real-web substrate is reachable with stdlib HTTP. Independently reconfirmed here: 299 GET requests, 16 hosts, 0 non-GET requests.",
+      "The committed kernel cannot execute an inherited mechanism. Independently reconfirmed at HEAD 67e1393b: distill() confidence 0.5 at kernel.py:90 against resolve() min_confidence 0.8 at kernel.py:59,61,114; distill_parameterized absent under src/.",
+      "The previous TEST sites' 0.000 session-scoped identifiers is a property of five read-only JSON APIs. Not overturned by this packet; see validity_notes."
+    ],
+    "rejected_and_not_carried_forward": [
+      "0.060 stable_identifier_prevalence (numerator/denominator mismatch) -- not recomputed, not reused.",
+      "NULL_STATE_KEYED 0.000 false-replay rate as evidence about the synthetic 80/600 finding -- not reused.",
+      "span_level_action_correctness = 1.0000 as a competence measure -- not reused; this packet's primary endpoint is content-verified by design and was never evaluated.",
+      "F2/F3/F4/F5 passing -- not carried forward; this packet reports no frozen clause as passing."
+    ],
+    "unknown_and_still_open": [
+      "Size of the re-derivable surface on a QUALIFYING site set -- still unmeasured; this packet measured it only as a diagnostic on a non-qualifying sample.",
+      "Whether a sound cross-episode replay cache exists -- untouched.",
+      "Whether a state-keyed cache produces silent wrong actions on the real credential-free substrate -- untouched, because no arm ran.",
+      "Correct token-to-latency and token-to-dollar mapping -- still UNKNOWN by explicit declaration."
+    ],
+    "do_not_assume_preserved": [
+      "Do not read the diagnostic 0.04 as the frozen primary metric rederivable_fraction, which is null.",
+      "Do not read outcome INCONCLUSIVE as a bounded negative for C-CROSSSITE. No bounded negative is recorded.",
+      "Do not read the 23 session-scoped identifier instances as a program-level prevalence; the denominator is objects on 2 of 14 reachable sites.",
+      "Do not read this as closing the Frontier lane, the C-CROSSSITE domain, or the inheritance question.",
+      "Do not read the 4 CSRF-token-gated objects as demonstrated-executable actions; no write was exercised.",
+      "Do not read the prereg 4.4 fallback as valid on this run's evidence; its stated premise is contradicted by this run's own raw evidence.",
+      "Do not treat the C-RESIDUAL-NOVELTY deterministic-compilation thread as reopenable; it is TERMINATED by the portfolio decision."
+    ]
+  },
+  "scope_discipline": {
+    "paths_written": [
+      "research/experiments/EXP-FRONTIER-36306528608/result.json",
+      "research/experiments/EXP-FRONTIER-36306528608/report.md",
+      "research/experiments/EXP-FRONTIER-36306528608/provenance.json",
+      "research/experiments/EXP-FRONTIER-36306528608/raw/**",
+      "research/experiments/EXP-FRONTIER-36306528608/derived/**",
+      "research/frontier/harness_36306528608.py",
+      "research/frontier/screen_36306528608.py",
+      "research/frontier/run_execute_36306528608.py",
+      "research/frontier/probe_token_stability_36306528608.py",
+      "research/frontier/repeat_screen_36306528608.py",
+      "research/frontier/analyze_36306528608.py"
+    ],
+    "paths_read_only": [
+      "src/spider/kernel.py",
+      "research/lanes/registry.json",
+      "codex/index.json",
+      "codex/claim_state.json",
+      "research/portfolio/POLICY.md",
+      "research/experiments/EXP-FRONTIER-36293269574/handoff.json",
+      "SPIDER_MASTER_PROMPT.md",
+      "SPIDER_ARCHITECTURE_RESEARCH2.md",
+      "AGENTS.md",
+      "research/EXPERIMENT_PACKET.md"
+    ],
+    "constitutional_files_modified": [],
+    "codex_modified": false,
+    "other_lanes_modified": [],
+    "other_experiments_modified": [],
+    "git_operations": "none"
+  }
+}

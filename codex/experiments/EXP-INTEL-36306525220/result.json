@@ -1,0 +1,537 @@
+{
+ "artifacts": [
+  {
+   "bytes": 53313,
+   "description": "machine-checkable artifact table required by spec.json output_contract, plus the coverage summary, the four control verdicts, the frozen-gate results and the integrity self-checks",
+   "path": "research/experiments/EXP-INTEL-36306525220/results/table.json",
+   "role": "derived",
+   "sha256": "e59885231d9afbd9837aea7aa684ba79b1e4fe4ec96b56e5a8945005fb67e938"
+  },
+  {
+   "bytes": 1767,
+   "description": "coverage summary in the prereg 9.1 form",
+   "path": "research/experiments/EXP-INTEL-36306525220/results/coverage.json",
+   "role": "derived",
+   "sha256": "32aebb8c12af325ef06a203e98532e9812ecdf0f69dc660156ee728539a4be70"
+  },
+  {
+   "bytes": 23589,
+   "description": "per-target application of the frozen prereg 4.1 matching rule with all four condition checks, including the full-set Jaccard and the substring/coverage statistics",
+   "path": "research/experiments/EXP-INTEL-36306525220/raw/identity_resolution.json",
+   "role": "raw",
+   "sha256": "17fa18797b56bde16328ff99930ccd97586be0d258e1c0aa3b871a016c0d75de"
+  },
+  {
+   "bytes": 5430,
+   "description": "base-identifier re-probe of the two targets that returned HTTP 404 on a non-existent version suffix",
+   "path": "research/experiments/EXP-INTEL-36306525220/raw/base_id_recheck.json",
+   "role": "raw",
+   "sha256": "9283511aca4c3d1a7fb68ad650642e97561700d0edf1b85265d3bd7ce042a3f1"
+  },
+  {
+   "bytes": 12737,
+   "description": "the four frozen controls: resolved identity, artifact reality, full-text status",
+   "path": "research/experiments/EXP-INTEL-36306525220/raw/controls_result.json",
+   "role": "raw",
+   "sha256": "8606d5109067e75afffd0415031742a07885d4ca7d39e12d974740544ff43c29"
+  },
+  {
+   "bytes": 39109,
+   "description": "29 field determinations, every extracted field carrying a verbatim whitespace-normalized evidence quote located by a recorded anchor",
+   "path": "research/experiments/EXP-INTEL-36306525220/raw/field_determinations.json",
+   "role": "derived",
+   "sha256": "7e1237e11982d551b49b25a7e65ad9ec8b3532c1ff93e9423ef700a1d0221aa9"
+  },
+  {
+   "bytes": 603246,
+   "description": "deterministic frozen-pattern sweep windows over every retrieved text",
+   "path": "research/experiments/EXP-INTEL-36306525220/raw/spans.json",
+   "role": "raw",
+   "sha256": "4f2f86707bd84b211ad2770a803d645a984db8c5cd3d7e32d59d41fa5ac48859"
+  },
+  {
+   "bytes": 42214,
+   "description": "append-only log of every HTTP attempt, control and resolve event with status, byte count and sha256",
+   "path": "research/experiments/EXP-INTEL-36306525220/raw/search_log.jsonl",
+   "role": "raw",
+   "sha256": "b18a32db4ce49aa05d8749b5c0a6770fb7f9349161e1d089d6b9fdfa2563aabe"
+  },
+  {
+   "bytes": 1951,
+   "description": "the prereg 4.4 bounded-snowball candidate list, frozen before any snowball content was fetched; records that the frozen inclusion rule selected 0 usable candidates",
+   "path": "research/experiments/EXP-INTEL-36306525220/raw/references/snowball_candidates.json",
+   "role": "raw",
+   "sha256": "b3e7dbc925f031031288c2697b79d65b47dccb2590f9a79c59ee10c5d411a7b2"
+  },
+  {
+   "bytes": 70219,
+   "description": "untruncated full text of the PC artifact (69,607 chars of PDF text layer)",
+   "path": "research/experiments/EXP-INTEL-36306525220/raw/fulltext/2608.05784v1.txt",
+   "role": "raw",
+   "sha256": "e286167a6ae51eebe1552f655876bae5a9c1728e16793b31e4adac4e9b154dbf"
+  },
+  {
+   "bytes": 72434,
+   "description": "full text of the Part 2 positive control",
+   "path": "research/experiments/EXP-INTEL-36306525220/raw/fulltext/2401.13919v4.txt",
+   "role": "raw",
+   "sha256": "abe7d67d7e6558c78f2e390413dc67cf2e0038605abb526f6bc456aec9905f81"
+  },
+  {
+   "bytes": 76969,
+   "description": "full text of WebArena v3",
+   "path": "research/experiments/EXP-INTEL-36306525220/raw/fulltext/2307.13854v3.txt",
+   "role": "raw",
+   "sha256": "fe0aa43b740f3c8a1d11d7c74366aa1fff96f32bd5cf802587da71d30a691eb7"
+  },
+  {
+   "bytes": 81535,
+   "description": "full text of Mind2Web v3",
+   "path": "research/experiments/EXP-INTEL-36306525220/raw/fulltext/2306.06070v3.txt",
+   "role": "raw",
+   "sha256": "7d888bc1f29c387094d2966dd682fca2c97c33978830fd1b35308171bbbc9f83"
+  },
+  {
+   "bytes": 87185,
+   "description": "full text of WebShop v4",
+   "path": "research/experiments/EXP-INTEL-36306525220/raw/fulltext/2207.01206v4.txt",
+   "role": "raw",
+   "sha256": "df012c4115b6c50556d3323978bf4458850988ef77fedb3ccb33529436c92b10"
+  },
+  {
+   "bytes": 165380,
+   "description": "full text of AgentBench v2",
+   "path": "research/experiments/EXP-INTEL-36306525220/raw/fulltext/2308.03688v2.txt",
+   "role": "raw",
+   "sha256": "4ab564295cd95642b7bdd196a9444e1ac53ec090db10f167993880c51a299550"
+  },
+  {
+   "bytes": 20801,
+   "description": "producer narrative: separates raw evidence, observations, derived measurements and interpretation, and does not exceed the frozen claim",
+   "path": "research/experiments/EXP-INTEL-36306525220/report.md",
+   "role": "derived",
+   "sha256": "8588245469069fea7e75921d99fbe2c53de56bed3081ecffbb4c8a973929f08f"
+  },
+  {
+   "bytes": 45609,
+   "description": "raw abstract page of the REAL-but-WRONG null-control artifact",
+   "path": "research/experiments/EXP-INTEL-36306525220/raw/html/ctrl_1802.05012v2.html",
+   "role": "raw",
+   "sha256": "6199cb88a1ff9022a1de28320eda4a9bc4b8894f15eb9bcdb40d8a2b31d0daf7"
+  },
+  {
+   "bytes": 2052,
+   "description": "parsed citation metadata of the PC artifact, including the retrieved author list that made frozen condition C3 unsatisfiable",
+   "path": "research/experiments/EXP-INTEL-36306525220/raw/artifacts/2608.05784v1.json",
+   "role": "raw",
+   "sha256": "fa4db6e8344c1c1e0cf24ff50c763fd81fb4fcd8614947c97814d4cd01cd3e73"
+  },
+  {
+   "bytes": 12617,
+   "description": "deterministic resolver implementing the frozen prereg 4.1/4.2 matching rule; this is the reusable identity-resolution instrument the mandate asked to be published",
+   "path": "research/experiments/EXP-INTEL-36306525220/resolve_identity.py",
+   "role": "code",
+   "sha256": "8cc63cf1768f0fb861388ff57857838966049b8e2696eb9fe58854043ee25a8a"
+  },
+  {
+   "bytes": 6766,
+   "description": "base-id transport-fidelity re-probe and the frozen bounded-snowball candidate list",
+   "path": "research/experiments/EXP-INTEL-36306525220/recheck_and_snowball.py",
+   "role": "code",
+   "sha256": "6515e75b45cfe21b5c5fc4c0fe5fe50ac9ce4942c81f23bd838652c6bade264b"
+  },
+  {
+   "bytes": 8322,
+   "description": "the four frozen controls",
+   "path": "research/experiments/EXP-INTEL-36306525220/run_controls.py",
+   "role": "code",
+   "sha256": "5e0ecb92e0b0ec6c91b97299025e2c5afe06f3ab654dd52cc64ea33e954c1cbd"
+  },
+  {
+   "bytes": 8294,
+   "description": "frozen pattern sweep",
+   "path": "research/experiments/EXP-INTEL-36306525220/extract_spans.py",
+   "role": "code",
+   "sha256": "61755d9384a40fea56ea2c7e2bed9adcf4fe8a62d33da07a7515cbd8151bac5c"
+  },
+  {
+   "bytes": 24220,
+   "description": "field determinations with quotes built by anchor slicing, so every quote is verbatim by construction",
+   "path": "research/experiments/EXP-INTEL-36306525220/field_determinations.py",
+   "role": "code",
+   "sha256": "20407b99b185ad92dc032197af429a2f46f261599886baaa31d888a3a478c91a"
+  },
+  {
+   "bytes": 22004,
+   "description": "table, coverage and frozen decision-rule application",
+   "path": "research/experiments/EXP-INTEL-36306525220/build_table.py",
+   "role": "code",
+   "sha256": "0bbc80d1599289fe76e638f945e84f33c8c7205774ae704a60d3595ef8c9a073"
+  },
+  {
+   "bytes": 6559,
+   "description": "producer self-check against research/EXPERIMENT_PACKET.md and spec.json output_contract, including a re-hash of the frozen inputs",
+   "path": "research/experiments/EXP-INTEL-36306525220/validate_packet.py",
+   "role": "code",
+   "sha256": "7e5fdee1d3fb4f1342b9fda2ef9126b985af240ffde89bce0914f7e78a7a1b73"
+  }
+ ],
+ "controls": {
+  "NC-FABRICATED-CLAIM": {
+   "evidence_ref": "raw/controls_result.json -> controls.NC-FABRICATED-CLAIM",
+   "expected_behavior": "arXiv:2609.99999 is not located and the resolver emits NOT_LOCATED",
+   "frozen_gate": "prereg.md section 6.4 -> recorded, triggers nothing",
+   "note": "sanity check only; per prereg 6.4 it has no power and triggers nothing",
+   "observed_behavior": "HTTP 404; resolution_status=NOT_LOCATED",
+   "pass_fail": true
+  },
+  "NC-REAL-BUT-WRONG": {
+   "evidence_ref": "raw/controls_result.json -> controls.NC-REAL-BUT-WRONG; raw/html/ctrl_1802.05012v2.html; raw/identity_resolution.json",
+   "expected_behavior": "arXiv:1802.05012v2 is retrieved as a REAL artifact, the resolver flags the identity mismatch against the named system WebArena, and emits UNMEASURED rather than NOT_FOUND",
+   "frozen_gate": "prereg.md section 7 gate 2 -> MEASUREMENT_INVALID for the entire experiment",
+   "note": "The domain-keyword condition alone would have passed (the abstract contains the token 'agent'); the identity gate has power only as a conjunction, and the conjunction fired.",
+   "observed_behavior": "artifact_is_real=True; returned title=\"'Getting out of the closet': Scientific authorship of literary fiction and knowledge transfer\"; failed conditions=['C2_title_mismatch', 'C3_author_mismatch']; resolution_status=AMBIGUOUS -> row scored_as=UNMEASURED; emitted NOT_FOUND=False",
+   "pass_fail": true
+  },
+  "PC-COST-ACCOUNTING": {
+   "evidence_ref": "raw/controls_result.json -> controls.PC-COST-ACCOUNTING; raw/field_determinations.json -> rows[part==1]; raw/fulltext/2608.05784.txt",
+   "expected_behavior": "artifact passes prereg 4.1 identity resolution AND all 10 prereg 5.1 fields are determined with evidence quotes",
+   "failure_reasons": [
+    "artifact arXiv:2608.05784v1 does not satisfy the frozen prereg 4.1 identity conjunction: failed conditions ['C3_author_unevaluable_TBD']. spec.json identity_resolution.frozen_target_list freezes expected_authors=['TBD'] for this entry, and prereg 4.1(3) requires at least one author-name substring match against the expected author list, so condition 3 is unsatisfiable as frozen. C1 (exact base id 2608.05784, frozen version v1 exists), C2 (expected title 'Activity Frames' is a case-insensitive substring of the returned title, token coverage 1.0) and C4 (5 of 6 domain keywords present in the abstract) all pass."
+   ],
+   "field_determination_map": {
+    "Routine_Overhead_Ratio_R": {
+     "determinations": [
+      {
+       "determination": "EXTRACTED",
+       "field": "Routine_Overhead_Ratio_R",
+       "has_absence_evidence": false,
+       "has_quote": true
+      },
+      {
+       "determination": "EXTRACTED",
+       "field": "Routine_Overhead_Ratio_R_ceiling_rung",
+       "has_absence_evidence": false,
+       "has_quote": true
+      }
+     ],
+     "determined": true
+    },
+    "accounting_convention": {
+     "determinations": [
+      {
+       "determination": "EXTRACTED",
+       "field": "accounting_convention",
+       "has_absence_evidence": false,
+       "has_quote": true
+      }
+     ],
+     "determined": true
+    },
+    "break_even_reuse_count_fstar": {
+     "determinations": [
+      {
+       "determination": "EXTRACTED",
+       "field": "break_even_reuse_count_fstar",
+       "has_absence_evidence": true,
+       "has_quote": true
+      }
+     ],
+     "determined": true
+    },
+    "delegable_recurrence_h": {
+     "determinations": [
+      {
+       "determination": "EXTRACTED",
+       "field": "delegable_recurrence_h",
+       "has_absence_evidence": false,
+       "has_quote": true
+      }
+     ],
+     "determined": true
+    },
+    "denominator": {
+     "determinations": [
+      {
+       "determination": "EXTRACTED",
+       "field": "denominator",
+       "has_absence_evidence": false,
+       "has_quote": true
+      }
+     ],
+     "determined": true
+    },
+    "marginal_cost_cached_vs_derived": {
+     "determinations": [
+      {
+       "determination": "EXTRACTED",
+       "field": "marginal_cost_cached_vs_derived",
+       "has_absence_evidence": false,
+       "has_quote": true
+      }
+     ],
+     "determined": true
+    },
+    "modeled_vs_measured": {
+     "determinations": [
+      {
+       "determination": "EXTRACTED",
+       "field": "modeled_vs_measured",
+       "has_absence_evidence": false,
+       "has_quote": true
+      }
+     ],
+     "determined": true
+    },
+    "real_cost_advantage_persistence": {
+     "determinations": [
+      {
+       "determination": "EXTRACTED",
+       "field": "real_cost_advantage_persistence",
+       "has_absence_evidence": false,
+       "has_quote": true
+      }
+     ],
+     "determined": true
+    },
+    "staleness_forgetting_maintenance_cost": {
+     "determinations": [
+      {
+       "determination": "EXTRACTED",
+       "field": "staleness_forgetting_maintenance_cost",
+       "has_absence_evidence": true,
+       "has_quote": true
+      }
+     ],
+     "determined": true
+    },
+    "stated_uncertainty": {
+     "determinations": [
+      {
+       "determination": "EXTRACTED",
+       "field": "stated_uncertainty",
+       "has_absence_evidence": false,
+       "has_quote": true
+      }
+     ],
+     "determined": true
+    }
+   },
+   "frozen_gate": "prereg.md section 7 gate 1 -> MEASUREMENT_INVALID for the entire experiment",
+   "observed_behavior": "identity resolution_status=AMBIGUOUS (failed ['C3_author_unevaluable_TBD']); 10/10 prereg 5.1 fields determined (14 with verbatim quotes, 0 recorded as absence with absence evidence)",
+   "pass_fail": false
+  },
+  "PC-PERFORMANCE-ENVELOPE": {
+   "evidence_ref": "raw/controls_result.json -> controls.PC-PERFORMANCE-ENVELOPE; raw/field_determinations.json -> rows[part==2 and system=='WebVoyager']",
+   "expected_behavior": "artifact passes prereg 4.1 identity resolution AND success_rate, denominator, evaluation_convention and benchmark_split are all extracted with evidence quotes",
+   "frozen_gate": "prereg.md section 7 gate 4 -> MEASUREMENT_INVALID for Part 2 only",
+   "observed_behavior": "identity resolution_status=CORRECTLY_RESOLVED; per-field extracted={'success_rate': True, 'denominator': True, 'evaluation_convention': True, 'benchmark_split': True}",
+   "pass_fail": true
+  }
+ },
+ "experiment_id": "EXP-INTEL-36306525220",
+ "lane": "intel",
+ "metrics": {
+  "artifact_table_path": "research/experiments/EXP-INTEL-36306525220/results/table.json",
+  "browser_interactions": 0,
+  "correctly_resolved_systems": [
+   "AgentBench-web",
+   "Mind2Web",
+   "WebArena",
+   "WebShop",
+   "WebVoyager"
+  ],
+  "coverage_summary": {
+   "correctly_resolved": 5,
+   "correctly_resolved_names": [
+    "AgentBench-web",
+    "Mind2Web",
+    "WebArena",
+    "WebShop",
+    "WebVoyager"
+   ],
+   "identity_resolution_recall": 0.357143,
+   "identity_resolution_recall_denominator_definition": "correctly_resolved / named_systems_searched over the 14 frozen entries of spec.json identity_resolution.frozen_target_list; no per-part partition of the frozen list exists, so the same denominator is used for Parts 1, 2 and 3",
+   "identity_resolution_recall_excluding_prereg_declared_placeholders": 0.555556,
+   "identity_resolution_recall_over_entries_with_real_author_lists": 0.625,
+   "n_entries_with_real_author_lists": 8,
+   "n_excluding_prereg_declared_placeholders": 9,
+   "named_systems_searched": 14,
+   "recall_robust_to_denominator_choice": false,
+   "snowball_coverage": {
+    "cap": 25,
+    "papers_examined": 0,
+    "papers_resolved": 0,
+    "reference_strings_found": 1,
+    "selection_rule": "raw/references/snowball_candidates.json -> selection_rule",
+    "usable_candidates_under_frozen_inclusion_rule": 0
+   },
+   "systems_not_in_frozen_list": [
+    "Agent Workflow Memory (Wang, Mao, Fried, Neubig 2024)",
+    "WebCoach",
+    "ReasoningBank",
+    "any published system reporting a measured break-even reuse count f*"
+   ],
+   "unsearched_systems": [],
+   "unsearched_systems_note": "The frozen target list is a closed list of 14 named systems; every entry was searched. The unsearched space is the published literature outside that list, which prereg 4.4 delegates to a bounded snowball. The snowball was ATTEMPTED and yielded 0 usable candidates (raw/references/snowball_candidates.json): the PC artifact's reference list prints no arXiv identifiers, so the frozen inclusion rule ('reference strings that contain an arXiv identifier') selects nothing."
+  },
+  "credentials_required": false,
+  "declared_vs_actual_cost": "prereg section 12 estimated ~200 network requests and ~300 wall-clock seconds; actual 32 HTTP attempts and 152 s of retrieval. Both inside the estimate, so no cost threat to the frozen design.",
+  "frozen_gates_fired": {
+   "gate_1_pc_cost_accounting_fails": true,
+   "gate_2_nc_real_but_wrong_fails_to_flag": false,
+   "gate_3_any_target_scored_NOT_FOUND": false,
+   "gate_4_pc_performance_envelope_fails": false,
+   "gate_5_identity_resolution_recall_below_0.6": true
+  },
+  "identity_resolution_recall_part1": 0.357143,
+  "identity_resolution_recall_part2": 0.357143,
+  "identity_resolution_recall_part3": 0.357143,
+  "identity_resolution_recall_threshold": 0.6,
+  "identity_resolution_recall_variants": {
+   "all_14_frozen_entries": 0.357143,
+   "excluding_5_prereg_declared_placeholders": 0.555556,
+   "over_entries_with_real_expected_author_lists": 0.625,
+   "recall_below_0.6_under_every_variant": false
+  },
+  "integrity_self_checks": {
+   "rows_exposing_denominator_when_value_present": 17,
+   "rows_exposing_modeled_label_when_modeled": 7,
+   "rows_scored_NOT_FOUND": 0,
+   "rows_scored_UNMEASURED": 11,
+   "rows_total": 38,
+   "rows_with_resolution_status_NOT_FOUND": 0,
+   "rows_with_value_null": 13,
+   "rows_with_value_null_and_absence_evidence": 13,
+   "rows_with_value_null_and_no_absence_evidence": 0
+  },
+  "model_calls": 0,
+  "model_tokens": 0,
+  "n_correctly_resolved": 5,
+  "n_named_systems_searched": 14,
+  "n_rows_in_artifact_table": 38,
+  "nc_fabricated_claim_pass": true,
+  "nc_real_but_wrong_pass": true,
+  "network_requests_http_200": 27,
+  "network_requests_http_404": 3,
+  "network_requests_http_406": 2,
+  "network_requests_http_get_attempts": 32,
+  "outcome_mapping_note": "research/EXPERIMENT_PACKET.md section 4 separates measurement validity (status) from the scientific answer (outcome). The frozen decision rule in spec.json decision_rule and prereg.md section 8 names MEASUREMENT_INVALID as an OUTCOME value; the packet contract encodes that as status=MEASUREMENT_INVALID. Because the frozen gates fire before any scientific verdict may be assigned, the packet-level outcome is NOT_APPLICABLE: none of SUPPORTS/FALSIFIES/MIXED/INCONCLUSIVE is licensed for the experiment as a whole. The frozen per-part rule outputs are preserved verbatim in part1_outcome / part2_outcome / part3_outcome / overall_outcome below.",
+  "overall_frozen_outcome": "MEASUREMENT_INVALID",
+  "overall_frozen_outcome_basis": "prereg 8 OVERALL row 1 (any part MEASUREMENT_INVALID)",
+  "overall_outcome": "MEASUREMENT_INVALID",
+  "p1_all_fleet_ceiling_h_times_1_minus_1_over_Rinfo": 0.077,
+  "p1_break_even_reuse_count_fstar": null,
+  "p1_break_even_reuse_count_fstar_status": "NOT_REPORTED_AS_A_COMPUTED_QUANTITY",
+  "p1_corpus_active_days": 51,
+  "p1_corpus_frames": 128756,
+  "p1_corpus_subjects": 1,
+  "p1_delegable_recurrence_h_in_sample": 0.09,
+  "p1_delegable_recurrence_h_out_of_sample": 0.077,
+  "p1_marginal_cost_cached_vs_derived_x_per_occurrence_modeled": 6.0,
+  "p1_measured_guard_coverage_median": 0.415,
+  "p1_measured_live_in_loop_saving_fraction": 0.14,
+  "p1_modeled_armB_token_saving_fraction": 0.833,
+  "p1_modeled_armC_token_saving_fraction": 0.408,
+  "p1_n_correctly_resolved_targets_persisting_state_across_sessions": 0,
+  "p1_n_correctly_resolved_targets_reporting_any_R_or_fstar": 0,
+  "p1_published_limitation_count": 5,
+  "p1_real_cost_advantage_persistence": "no_measured_real_cost_advantage",
+  "p1_routine_overhead_ratio_R_ceiling_x": 343.0,
+  "p1_routine_overhead_ratio_R_operational_x": 60.0,
+  "p1_staleness_forgetting_maintenance_cost": null,
+  "p1_staleness_forgetting_maintenance_cost_status": "NOT_REPORTED_AS_A_QUANTIFIED_COST",
+  "p2_agentbench_web_status": "NOT_REPORTED_AS_A_SINGLE_EXTRACTABLE_HEADLINE_RATE",
+  "p2_agentbench_web_success_rate": null,
+  "p2_conventions_observed": [
+   "WebArena/WebVoyager: end-to-end or task-level Success Rate judged on functional correctness, no step optimality (shared convention by explicit design)",
+   "Mind2Web: Step Success Rate and whole-task Success Rate with the GROUND TRUTH ACTION HISTORY PROVIDED at every step",
+   "WebShop: Task Score = 100 x average reward reported jointly with Success Rate (r = 1) over a 500-instance test split",
+   "AgentBench: per-environment Success Rate with an estimated #Avg. Turn, over 8 heterogeneous environments"
+  ],
+  "p2_mind2web_denominator_cross_domain_tasks": 912,
+  "p2_mind2web_denominator_cross_website_tasks": 177,
+  "p2_mind2web_sr_cross_domain": 0.027,
+  "p2_mind2web_sr_cross_task": 0.071,
+  "p2_mind2web_sr_cross_website": 0.011,
+  "p2_mind2web_step_sr_cross_task": 0.503,
+  "p2_n_distinct_evaluation_conventions_observed": 4,
+  "p2_webarena_denominator_tasks": 812,
+  "p2_webarena_end_to_end_task_success_rate_gpt4": 0.1441,
+  "p2_webarena_human_performance": 0.7824,
+  "p2_webshop_denominator_test_instances": 500,
+  "p2_webshop_human_expert": 0.59,
+  "p2_webshop_success_rate": 0.291,
+  "p2_webvoyager_denominator_tasks": 643,
+  "p2_webvoyager_seeact_online_test_set_success_rate": 0.3,
+  "p2_webvoyager_sites": 15,
+  "p2_webvoyager_task_success_rate": 0.591,
+  "p3_ablation_result": "write_pipeline_only_retrieval_held_constant",
+  "p3_downstream_accuracy_compiled_block": 0.984,
+  "p3_downstream_accuracy_llm_summary_range": "0.66-0.80",
+  "p3_n_correctly_resolved_targets_with_retrieval_vs_write_ablation": 0,
+  "p3_retrieval_quality_metric": null,
+  "p3_retrieval_quality_metric_status": "NOT_REPORTED_AND_NOT_VARIED",
+  "part1_outcome": "MEASUREMENT_INVALID",
+  "part1_outcome_basis": "prereg 8 Part 1 row 1 (Gate 1, 2 or 3 triggered)",
+  "part2_outcome": "INCONCLUSIVE",
+  "part2_outcome_basis": "prereg 8 Part 2 row 4 (identity resolution recall < 0.6)",
+  "part3_outcome": "INCONCLUSIVE",
+  "part3_outcome_basis": "prereg 8 Part 3 row 4 (identity resolution recall < 0.6)",
+  "pc_cost_accounting_pass": false,
+  "pc_performance_envelope_pass": true,
+  "retrieval_window_first_request_utc": "2026-09-27T09:03:32.466691+00:00",
+  "retrieval_window_last_request_utc": "2026-09-27T09:06:04.575884+00:00"
+ },
+ "observations": [
+  "OBS-1 (raw): the arXiv Atom API endpoints export.arxiv.org/api/query and arxiv.org/api/query both returned HTTP 406 with an empty body from arXiv's own varnish for this runner, while https://arxiv.org/abs/2207.01206v4 returned HTTP 200 with 44,083 bytes; the Semantic Scholar graph API returned HTTP 200 on the same probe. Evidence: raw/identity_resolution.json -> transport_probes, raw/search_log.jsonl.",
+  "OBS-2 (raw): of the 14 frozen target entries, 5 resolved CORRECTLY_RESOLVED under all four frozen conditions: WebShop 2207.01206v4, Mind2Web 2306.06070v3, WebVoyager 2401.13919v4, WebArena 2307.13854v3, AgentBench 2308.03688v2. identity_resolution_recall = 5/14 = 0.3571.",
+  "OBS-3 (raw): 5 frozen entries resolved to REAL artifacts that are demonstrably NOT the named system and were flagged AMBIGUOUS, never scored: 2401.15378 = 'A RAG-based Question Answering System Proposal for Understanding Islam: MufassirQAS LLM' (frozen BrowserGym); 1802.08827 = 'Integrable spin chains with random interactions' (frozen MiniWoB++); 2402.04566 = 'Triplet-constraint Transformer with Multi-scale Refinement for Dose Prediction in Radiotherapy' (frozen SeeAct); 2406.01234 = 'Achieving Tractable Minimax Optimal Regret in Average Reward MDPs' (frozen Crux); 2408.01234 = 'Entanglement Routing in Quantum Networks: A Comprehensive Survey' (frozen BrowserBench).",
+  "OBS-4 (raw): 5 frozen entries resolved to REAL artifacts outside the agent domain and were flagged AMBIGUOUS: 2403.01234 = 'Active Deep Kernel Learning of Molecular Functionalities'; 2405.01234 = 'Matrix invertible extensions over commutative rings. Part III: Hermite rings'; 2407.01234 = 'Optimal Control of a Power Storage Facility with Variable Payoffs'.",
+  "OBS-5 (raw): the frozen target entry for SeeAct 2402.04566 passed the author condition (matched Zheng, Chen, Liu) and was still flagged AMBIGUOUS because the title and domain-keyword conditions failed. A single identity condition is therefore insufficient; only the conjunction has power.",
+  "OBS-6 (raw): the null control NC-REAL-BUT-WRONG retrieved a REAL artifact, 'Getting out of the closet': Scientific authorship of literary fiction and knowledge transfer (Azagra-Caro et al.), at the frozen identifier 1802.05012v2, and the resolver flagged it AMBIGUOUS on the title and author conditions. Its abstract contains the token 'agent', so the domain-keyword condition alone would have passed and the conjunction is what fired.",
+  "OBS-7 (raw): arXiv:2608.05784v1 'Activity Frames: Deterministic Screen-Activity Compilation for Agent Memory and Replay' was retrieved, its base identifier matches the frozen identifier, frozen version v1 exists, the expected title is a case-insensitive substring of the returned title with token coverage 1.0, and 5 of 6 frozen domain keywords occur in the abstract. Its retrieved author list is a single author, 'Iyamu, Nossa'.",
+  "OBS-8 (raw): spec.json identity_resolution.frozen_target_list freezes expected_authors=['TBD'] for 6 of the 14 entries (Crux, WebAgent, RULER, WebCanvas, BrowserBench, ActivityFrames). prereg 4.1 condition 3 requires at least one author-name substring match, so for these entries condition 3 is unsatisfiable and was recorded as pass=null with reason C3_author_unevaluable_TBD.",
+  "OBS-9 (raw): NC-FABRICATED-CLAIM arXiv:2609.99999 returned HTTP 404 and the resolver emitted NOT_LOCATED.",
+  "OBS-10 (raw): in arXiv:2608.05784v1 the reuse count N appears only as a symbol in the piecewise cost model of Eq. (1); the paper never solves it for a break-even value. The frozen pattern sweep found 0 hits for break-even / breakeven / break even reuse / reuse count / payback / amortization point / f* over the 69,607-character full text.",
+  "OBS-11 (raw): in arXiv:2608.05784v1 the Routine Overhead Ratio is reported as a two-rung ladder whose numerator the paper labels modeled and whose denominators it labels measured: R_inject = 60x operational (interquartile 59-62x) and R_info = 343x ceiling (interquartile 297-390x).",
+  "OBS-12 (raw): in arXiv:2608.05784v1 the delegable recurrence is reported as a measured quantity at two levels: h_raw = 83.1% and h_specific = 9.0% in-sample, 13.1% at URL granularity, and 7.7% out-of-sample on a temporal holdout against 8.6% in-sample on the training days. The paper states its all-fleet ceiling as h(1 - 1/R_info), about 7.7%.",
+  "OBS-13 (raw): in arXiv:2608.05784v1 the three-arm dollar comparison is stated to be modeled from measured artifacts and token counts and explicitly not billed, and the paper reserves the live three-arm billing with real usage JSON. The one live in-loop comparison against an accessibility-tree agent is stated to have saved only about 14%.",
+  "OBS-14 (raw): in arXiv:2608.05784v1 no quantified staleness, forgetting or maintenance cost of retained state is reported. The only staleness-adjacent statements are an unquantified 'interface drift that a live run must confirm', a 'stale attribution' defect of the input recorder that the compiler repairs, and a capture operating cost of a 9.5 GB corpus at about 0.19 GB per active day with the accessibility tree present on 81.5% of frames.",
+  "OBS-15 (raw): arXiv:2608.05784v1 Section 8.4 states five limitations on its own overhead measurements, including that every number comes from one user's machine.",
+  "OBS-16 (raw): arXiv:2401.13919v4 reports a Task Success Rate of 59.1% on 643 tasks across 15 websites, explicitly following the WebArena convention, judged by GPT-4V over the whole trajectory, with a 300-task human-agreement subset.",
+  "OBS-17 (raw): the four correctly resolved benchmark artifacts report success rates under mutually incompatible conventions: WebArena 14.41% end-to-end on 812 tasks against 78.24% human; Mind2Web MINDACT/Flan-T5L Step SR 50.3% and task SR 7.1% cross-task, 1.1% cross-website (177 tasks), 2.7% cross-domain (912 tasks), evaluated with the ground truth action history provided at every step; WebShop 29.1% on a 500-instance test split with Task Score = 100 x average reward reported jointly.",
+  "OBS-18 (raw): arXiv:2608.05784v1 Section 6.2 varies the WRITE representation (raw search-API JSON at 126,812 tokens, compiled schema document at 34,815, compact context block at 1,469, LLM summary) while holding the retrieved context CONSTANT, reporting 98.4% answer accuracy with Wilson 95% CI 91.7-99.7% on 8 days and 64 ground-truth questions against an independent SQL oracle, versus 66-80% for the LLM summary. It reports no recall, precision, nDCG, hit rate or MRR over relevant context.",
+  "OBS-19 (raw): the prereg 4.4 bounded snowball yielded 0 usable candidates. The PC artifact's reference list prints no arXiv identifiers, so the frozen inclusion rule selected nothing; the single 'arXiv:' string found in its PDF text is a body-text occurrence of the paper's own identifier, not a reference entry. The reference list does cite 'Agent workflow memory' (Wang, Mao, Fried, Neubig 2024) and 'Position: Episodic memory is the missing piece for long-term LLM agents' (Pink et al. 2025) by author/title/year only.",
+  "OBS-20 (raw): 0 rows in the emitted artifact table carry resolution_status=NOT_FOUND and 0 rows are scored NOT_FOUND; 11 rows are scored UNMEASURED and all 13 rows with a null value carry explicit absence evidence. Evidence: results/table.json -> integrity_self_checks."
+ ],
+ "outcome": "NOT_APPLICABLE",
+ "schema_version": 1,
+ "status": "MEASUREMENT_INVALID",
+ "unresolved": [
+  "U-1 Whether the frozen Part 1 question has a positive or negative answer in the published literature is NOT settled by this packet. Within the corpus actually reached, the single artifact that reports the cost-accounting construct reports NO break-even reuse count, a MODELED numerator, a MODELED three-arm dollar table and an unquantified staleness surface, and its own live in-loop saving is about 14% against a modeled 83.3%. That is evidence about one artifact on one person's corpus, not a literature-level verdict, and gate 1 forbids adopting it as one.",
+  "U-2 The correct arXiv identifiers for BrowserGym, MiniWoB++ and SeeAct are unknown to this run, which was forbidden from searching for them because the frozen list is the corpus. The Smallest next action that would unblock this: a director mandate permitting an identifier repair pass whose only permitted mutation is replacing a frozen arXiv ID that provably resolves to an unrelated artifact, with every repair logged and the identity rule unchanged.",
+  "U-3 The Part 1 construct population inside the frozen list is 0 (VN-5). The smallest next action: a director mandate that restates the Part 1 target population as systems that actually persist state across sessions or episodes, and authorizes a corpus search for that population, since the frozen list of benchmarks cannot answer the frozen Part 1 question at any identity recall.",
+  "U-4 The bounded snowball could not be executed under its own frozen inclusion rule (VN-4). The smallest next action: a director mandate permitting the snowball to fall back to resolving reference entries by author-title-year against the Semantic Scholar graph API, which returned HTTP 200 on this run's substrate probe (OBS-1), with the identity rule unchanged. The candidate entries already visible in the PC artifact's bibliography are 'Agent workflow memory' and 'Position: Episodic memory is the missing piece for long-term LLM agents'.",
+  "U-5 Whether a published system anywhere reports a MEASURED break-even reuse count with denominator, accounting convention and uncertainty is genuinely unknown here, because the searched corpus was 5 benchmarks plus 1 memory paper. No estimate of the prevalence of such reporting is available and none is offered.",
+  "U-6 Whether the title-condition reading chosen in VN-3 is the reading a downstream auditor and director consider binding. This single implementation decision changes identity_resolution_recall between 0.0 and 0.357 and changes Parts 2 and 3 between INCONCLUSIVE-by-recall and INCONCLUSIVE-by-zero-recall. It does not change the overall MEASUREMENT_INVALID, which rests on gate 1 independently.",
+  "U-7 Whether the Part 2 envelope is a real spread or an artifact of the frozen list's benchmark-era composition is unknown. The four rates retrieved span 1.1% to 59.1% but under four different conventions, four different model tiers and four different date ranges, and none of the 5 correctly resolved artifacts is a memory-augmented or workflow-inducing agent, so the director mandate's actual comparison target (published memory-augmented web agents) was not reached by the frozen corpus at all.",
+  "U-8 Whether the arXiv Atom API 406 (OBS-1) is persistent or was triggered by this runner's egress. It does not affect this packet's validity because the abs/PDF transport returned the same authoritative citation metadata, but it does affect any future design that freezes the Atom endpoint as its retrieval channel."
+ ],
+ "validity_notes": [
+  "VN-1 MEASUREMENT-STATUS SEMANTICS. status=MEASUREMENT_INVALID. This is a measurement-validity failure, NOT a scientific falsification and NOT an infrastructure failure. No claim about the existence or absence of published break-even reuse counts is licensed by this packet.",
+  "VN-2 THE BINDING INVALID TRIGGER. prereg section 7 gate 1 fires because PC-COST-ACCOUNTING cannot pass: prereg 6.1 requires extraction from an artifact that passes the prereg 4.1 identity resolution, and arXiv:2608.05784v1 cannot pass it while spec.json freezes expected_authors=['TBD'] for that entry. The failure is in the frozen TARGET LIST, not in the resolver: the resolver correctly refused a target whose frozen expected author identity does not exist. The producer did not add an 'author list unavailable' branch, because doing so after observing this outcome would be a post-hoc change to a frozen identity contract that flips the experiment verdict.",
+  "VN-3 NO PREREGISTRATION WAS WEAKENED. The three substitutions actually made are recorded in provenance.json deviations_from_frozen_design: (a) arXiv abs/PDF transport in place of the blocked arXiv Atom API, which changes the retrieval channel and not the identity assertion; (b) a base-identifier re-probe of the two targets whose 404 was caused by a non-existent version suffix, which removed a transport artifact without relaxing any identity condition; (c) the title condition read as a case-insensitive substring test with a token-coverage threshold, because a full-token-set Jaccard of 0.85 is arithmetically unsatisfiable for a 1-2 token expected title against any real arXiv title. Both Jaccard and coverage values are logged per target so an auditor can recompute under either reading; under the strict full-set-Jaccard reading identity_resolution_recall would be 0.0 and Parts 1-3 would all be INCONCLUSIVE, which strengthens rather than weakens the conclusion that this frozen list cannot decide the science.",
+  "VN-4 SNOWBALL NOT EXECUTED AS FROZEN. prereg 4.4's bounded snowball was ATTEMPTED and returned 0 candidates because the frozen inclusion rule requires arXiv identifiers inside reference strings and the PC artifact prints none. No substitute search was run: using a different retrieval strategy to find persistent-state web agents would be a post-hoc corpus change, so the uncovered space is reported as uncovered rather than filled.",
+  "VN-5 CORPUS-CONSTRUCT MISMATCH, UNFROZEN. The frozen list of 14 named systems is a list of BENCHMARKS AND ENVIRONMENTS. None of the 5 correctly resolved targets reports persistent state across sessions or episodes, so the Part 1 construct population is 0 regardless of identity recall. identity_resolution_recall measures name-to-artifact identity and is therefore not a coverage metric for the Part 1 construct; the frozen gate 5 uses it as if it were. The derived count is reported as p1_n_correctly_resolved_targets_persisting_state_across_sessions = 0, computed by a declared keyword probe (persistent_state_construct) over title and abstract plus full text, and it is a derived measurement, not a frozen metric.",
+  "VN-6 SUB-VALIDITY OF THE RECORDED QUANTITIES. Because gate 1 fires, every Part 1, Part 2 and Part 3 quantity in metrics is recorded as evidence of what the artifacts say, at a claim ceiling of 'verbatim from a named artifact, denominators exposed, modeled quantities labelled'. None of them is a valid, packet-adopted measurement of the director mandate's question, because the frozen part-level INCONCLUSIVE/MEASUREMENT_INVALID verdicts stand.",
+  "VN-7 MODELED QUANTITIES ARE LABELLED, NOT CONVERTED. Every modeled quantity carries modeled_vs_measured and an accounting_convention stating the modeling assumption, per the mandate's output contract. p1_routine_overhead_ratio_R_*_x are MODELED numerators over measured denominators from an n=1 passive-capture corpus of one professional over 51 active days; they are a report about one person, not a bound on SPIDER's economics, and this packet does not use them as one.",
+  "VN-8 PDF TEXT-LAYER REPRESENTATION LOSS. Field evidence quotes are whitespace-normalized slices of the arXiv PDF text layer, which drops ligatures, de-hyphenates across line breaks and does not linearise table cells. Two consequences: (a) a missing number may be present in a figure or table cell the text layer did not linearise, which is why the AgentBench-web headline rate is reported as NOT_REPORTED rather than as a number; (b) a present number may appear with broken spacing. The retrieval scope and the character count searched are recorded on every absence determination so the absence claim is auditable at the strength the instrument actually supports ('absent from the retrieved text', not 'absent from the paper').",
+  "VN-9 FROZEN-LIST IDENTIFIER DEFECTS ARE REPORTED, NOT REPAIRED. Three frozen entries that the prereg did NOT declare as placeholders carry arXiv identifiers that resolve to unrelated real papers (BrowserGym 2401.15378, MiniWoB++ 1802.08827, SeeAct 2402.04566). They were left UNMEASURED. Correcting them requires a director mandate because the frozen list is the corpus definition; see unresolved.",
+  "VN-10 THE COVERAGE METRIC CAN VARY. identity_resolution_recall is computed as correctly_resolved / named_systems_searched over a denominator that is a constant 14, and it returned 0.3571, so the metric is not the degenerate searched/mandated ratio the parent packet was failed for. It is nevertheless a weak instrument: it conflates corpus design errors (placeholder and wrong identifiers) with resolver failure, and both are present here.",
+  "VN-11 NO INDEPENDENT VERIFICATION OF ANY PUBLISHED NUMBER. Every value in the table is read from a published artifact. Nothing was reproduced. The prereg section 10 scope explicitly excludes reproduction, so this is by design, but it means the envelope is a report of what papers claim, not a measurement of what those systems do.",
+  "VN-12 PART 2 CONVENTION COMPARABILITY IS PARTIAL, NOT ABSENT. WebVoyager states that it follows the WebArena evaluation convention by design, so those two are comparable to each other. Mind2Web, WebShop and AgentBench are not comparable to either. The frozen Part 2 SUPPORTS clause asks whether a COMMON convention enables direct comparison across the benchmark family, which the evidence does not establish; the frozen rule nevertheless assigns INCONCLUSIVE because gate 5 fires first.",
+  "VN-13 THIS IS A PRODUCER SELF-CHECK, NOT AN AUDIT. validate_packet.py re-hashes the frozen inputs and checks the packet shape. It is not the independent audit required by research/EXPERIMENT_PACKET.md section 6, and no claim here is self-promoted.",
+  "VN-14 THE MANDATE'S REUSABLE-ARTIFACT DEPENDENCY IS PARTIALLY MET. The identity-resolution instrument, the frozen matching rule and the four controls are published as code plus raw evidence at exact repository-relative paths with sha256 hashes in artifacts. They are NOT published 'at an exact commit' because branch discipline in this session forbids git commit; provenance.json records the working-tree HEAD so a later commit can pin them."
+ ]
+}
