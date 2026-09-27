@@ -1,0 +1,14 @@
+{
+  "status": "AVAILABLE",
+  "page_content_bytes": 2385,
+  "page_content_sha256": "0890557f88c60d3525ce46d9ccdbcd119934d8d2e4dd3009b1d1cf929781c4f2",
+  "cdp_dom_snapshot_nodes": 28,
+  "cdp_dom_snapshot_sha256": "2b661a61b9d96726767a09148b1fa65a67637c9226894686629e5eb281992651",
+  "ax_tree_nodes": 30,
+  "ax_tree_nodes_with_role": 30,
+  "ax_tree_sha256": "d9f9bb17db70ad054531c2d989c19d6bb982e44ee701e52286ae9c4808fdb12d",
+  "cdp_methods": [
+    "DOM.getDocument(depth=-1,pierce=True)",
+    "Accessibility.getFullAXTree"
+  ]
+}

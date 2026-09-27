@@ -1,0 +1,617 @@
+{
+  "seed": 36129163700,
+  "arms": [
+    "P-WRITE",
+    "P-DRIFT",
+    "N-READ",
+    "N-INVALID",
+    "N-EXPIRED",
+    "N-DELETED"
+  ],
+  "episodes_per_arm": 20,
+  "total_episodes": 120,
+  "order": [
+    {
+      "order_index": 0,
+      "arm": "N-INVALID",
+      "episode_id": 11
+    },
+    {
+      "order_index": 1,
+      "arm": "P-DRIFT",
+      "episode_id": 6
+    },
+    {
+      "order_index": 2,
+      "arm": "N-DELETED",
+      "episode_id": 1
+    },
+    {
+      "order_index": 3,
+      "arm": "N-EXPIRED",
+      "episode_id": 19
+    },
+    {
+      "order_index": 4,
+      "arm": "P-WRITE",
+      "episode_id": 6
+    },
+    {
+      "order_index": 5,
+      "arm": "N-DELETED",
+      "episode_id": 5
+    },
+    {
+      "order_index": 6,
+      "arm": "N-READ",
+      "episode_id": 5
+    },
+    {
+      "order_index": 7,
+      "arm": "P-DRIFT",
+      "episode_id": 19
+    },
+    {
+      "order_index": 8,
+      "arm": "P-DRIFT",
+      "episode_id": 14
+    },
+    {
+      "order_index": 9,
+      "arm": "N-EXPIRED",
+      "episode_id": 8
+    },
+    {
+      "order_index": 10,
+      "arm": "N-EXPIRED",
+      "episode_id": 17
+    },
+    {
+      "order_index": 11,
+      "arm": "N-READ",
+      "episode_id": 13
+    },
+    {
+      "order_index": 12,
+      "arm": "P-DRIFT",
+      "episode_id": 0
+    },
+    {
+      "order_index": 13,
+      "arm": "N-READ",
+      "episode_id": 0
+    },
+    {
+      "order_index": 14,
+      "arm": "N-DELETED",
+      "episode_id": 4
+    },
+    {
+      "order_index": 15,
+      "arm": "N-INVALID",
+      "episode_id": 0
+    },
+    {
+      "order_index": 16,
+      "arm": "N-EXPIRED",
+      "episode_id": 2
+    },
+    {
+      "order_index": 17,
+      "arm": "N-DELETED",
+      "episode_id": 19
+    },
+    {
+      "order_index": 18,
+      "arm": "N-INVALID",
+      "episode_id": 8
+    },
+    {
+      "order_index": 19,
+      "arm": "N-INVALID",
+      "episode_id": 13
+    },
+    {
+      "order_index": 20,
+      "arm": "N-EXPIRED",
+      "episode_id": 11
+    },
+    {
+      "order_index": 21,
+      "arm": "N-DELETED",
+      "episode_id": 13
+    },
+    {
+      "order_index": 22,
+      "arm": "P-DRIFT",
+      "episode_id": 18
+    },
+    {
+      "order_index": 23,
+      "arm": "P-WRITE",
+      "episode_id": 12
+    },
+    {
+      "order_index": 24,
+      "arm": "N-INVALID",
+      "episode_id": 3
+    },
+    {
+      "order_index": 25,
+      "arm": "P-DRIFT",
+      "episode_id": 11
+    },
+    {
+      "order_index": 26,
+      "arm": "P-DRIFT",
+      "episode_id": 16
+    },
+    {
+      "order_index": 27,
+      "arm": "N-DELETED",
+      "episode_id": 7
+    },
+    {
+      "order_index": 28,
+      "arm": "N-READ",
+      "episode_id": 9
+    },
+    {
+      "order_index": 29,
+      "arm": "N-EXPIRED",
+      "episode_id": 9
+    },
+    {
+      "order_index": 30,
+      "arm": "P-WRITE",
+      "episode_id": 2
+    },
+    {
+      "order_index": 31,
+      "arm": "P-DRIFT",
+      "episode_id": 15
+    },
+    {
+      "order_index": 32,
+      "arm": "N-EXPIRED",
+      "episode_id": 6
+    },
+    {
+      "order_index": 33,
+      "arm": "P-WRITE",
+      "episode_id": 8
+    },
+    {
+      "order_index": 34,
+      "arm": "P-DRIFT",
+      "episode_id": 9
+    },
+    {
+      "order_index": 35,
+      "arm": "N-READ",
+      "episode_id": 17
+    },
+    {
+      "order_index": 36,
+      "arm": "N-DELETED",
+      "episode_id": 17
+    },
+    {
+      "order_index": 37,
+      "arm": "N-EXPIRED",
+      "episode_id": 18
+    },
+    {
+      "order_index": 38,
+      "arm": "P-WRITE",
+      "episode_id": 14
+    },
+    {
+      "order_index": 39,
+      "arm": "N-INVALID",
+      "episode_id": 19
+    },
+    {
+      "order_index": 40,
+      "arm": "P-DRIFT",
+      "episode_id": 5
+    },
+    {
+      "order_index": 41,
+      "arm": "P-DRIFT",
+      "episode_id": 4
+    },
+    {
+      "order_index": 42,
+      "arm": "N-INVALID",
+      "episode_id": 16
+    },
+    {
+      "order_index": 43,
+      "arm": "P-WRITE",
+      "episode_id": 11
+    },
+    {
+      "order_index": 44,
+      "arm": "N-DELETED",
+      "episode_id": 15
+    },
+    {
+      "order_index": 45,
+      "arm": "N-EXPIRED",
+      "episode_id": 14
+    },
+    {
+      "order_index": 46,
+      "arm": "N-EXPIRED",
+      "episode_id": 7
+    },
+    {
+      "order_index": 47,
+      "arm": "N-READ",
+      "episode_id": 1
+    },
+    {
+      "order_index": 48,
+      "arm": "N-INVALID",
+      "episode_id": 2
+    },
+    {
+      "order_index": 49,
+      "arm": "N-READ",
+      "episode_id": 16
+    },
+    {
+      "order_index": 50,
+      "arm": "N-DELETED",
+      "episode_id": 18
+    },
+    {
+      "order_index": 51,
+      "arm": "N-READ",
+      "episode_id": 2
+    },
+    {
+      "order_index": 52,
+      "arm": "N-READ",
+      "episode_id": 4
+    },
+    {
+      "order_index": 53,
+      "arm": "P-DRIFT",
+      "episode_id": 10
+    },
+    {
+      "order_index": 54,
+      "arm": "N-READ",
+      "episode_id": 19
+    },
+    {
+      "order_index": 55,
+      "arm": "P-WRITE",
+      "episode_id": 3
+    },
+    {
+      "order_index": 56,
+      "arm": "P-WRITE",
+      "episode_id": 13
+    },
+    {
+      "order_index": 57,
+      "arm": "P-WRITE",
+      "episode_id": 0
+    },
+    {
+      "order_index": 58,
+      "arm": "P-WRITE",
+      "episode_id": 15
+    },
+    {
+      "order_index": 59,
+      "arm": "N-DELETED",
+      "episode_id": 11
+    },
+    {
+      "order_index": 60,
+      "arm": "N-INVALID",
+      "episode_id": 15
+    },
+    {
+      "order_index": 61,
+      "arm": "N-INVALID",
+      "episode_id": 18
+    },
+    {
+      "order_index": 62,
+      "arm": "N-EXPIRED",
+      "episode_id": 0
+    },
+    {
+      "order_index": 63,
+      "arm": "N-EXPIRED",
+      "episode_id": 1
+    },
+    {
+      "order_index": 64,
+      "arm": "N-READ",
+      "episode_id": 15
+    },
+    {
+      "order_index": 65,
+      "arm": "P-WRITE",
+      "episode_id": 17
+    },
+    {
+      "order_index": 66,
+      "arm": "N-EXPIRED",
+      "episode_id": 15
+    },
+    {
+      "order_index": 67,
+      "arm": "N-EXPIRED",
+      "episode_id": 4
+    },
+    {
+      "order_index": 68,
+      "arm": "N-DELETED",
+      "episode_id": 2
+    },
+    {
+      "order_index": 69,
+      "arm": "P-WRITE",
+      "episode_id": 10
+    },
+    {
+      "order_index": 70,
+      "arm": "P-DRIFT",
+      "episode_id": 8
+    },
+    {
+      "order_index": 71,
+      "arm": "N-INVALID",
+      "episode_id": 5
+    },
+    {
+      "order_index": 72,
+      "arm": "P-WRITE",
+      "episode_id": 18
+    },
+    {
+      "order_index": 73,
+      "arm": "N-INVALID",
+      "episode_id": 9
+    },
+    {
+      "order_index": 74,
+      "arm": "N-EXPIRED",
+      "episode_id": 16
+    },
+    {
+      "order_index": 75,
+      "arm": "P-DRIFT",
+      "episode_id": 7
+    },
+    {
+      "order_index": 76,
+      "arm": "N-INVALID",
+      "episode_id": 7
+    },
+    {
+      "order_index": 77,
+      "arm": "N-READ",
+      "episode_id": 7
+    },
+    {
+      "order_index": 78,
+      "arm": "P-DRIFT",
+      "episode_id": 17
+    },
+    {
+      "order_index": 79,
+      "arm": "N-READ",
+      "episode_id": 14
+    },
+    {
+      "order_index": 80,
+      "arm": "N-READ",
+      "episode_id": 12
+    },
+    {
+      "order_index": 81,
+      "arm": "N-DELETED",
+      "episode_id": 3
+    },
+    {
+      "order_index": 82,
+      "arm": "P-WRITE",
+      "episode_id": 19
+    },
+    {
+      "order_index": 83,
+      "arm": "N-READ",
+      "episode_id": 11
+    },
+    {
+      "order_index": 84,
+      "arm": "N-INVALID",
+      "episode_id": 17
+    },
+    {
+      "order_index": 85,
+      "arm": "P-DRIFT",
+      "episode_id": 3
+    },
+    {
+      "order_index": 86,
+      "arm": "P-WRITE",
+      "episode_id": 4
+    },
+    {
+      "order_index": 87,
+      "arm": "P-WRITE",
+      "episode_id": 5
+    },
+    {
+      "order_index": 88,
+      "arm": "N-DELETED",
+      "episode_id": 14
+    },
+    {
+      "order_index": 89,
+      "arm": "N-INVALID",
+      "episode_id": 6
+    },
+    {
+      "order_index": 90,
+      "arm": "N-INVALID",
+      "episode_id": 14
+    },
+    {
+      "order_index": 91,
+      "arm": "N-EXPIRED",
+      "episode_id": 13
+    },
+    {
+      "order_index": 92,
+      "arm": "P-DRIFT",
+      "episode_id": 13
+    },
+    {
+      "order_index": 93,
+      "arm": "N-READ",
+      "episode_id": 18
+    },
+    {
+      "order_index": 94,
+      "arm": "N-EXPIRED",
+      "episode_id": 12
+    },
+    {
+      "order_index": 95,
+      "arm": "N-READ",
+      "episode_id": 3
+    },
+    {
+      "order_index": 96,
+      "arm": "P-WRITE",
+      "episode_id": 7
+    },
+    {
+      "order_index": 97,
+      "arm": "N-DELETED",
+      "episode_id": 12
+    },
+    {
+      "order_index": 98,
+      "arm": "N-INVALID",
+      "episode_id": 1
+    },
+    {
+      "order_index": 99,
+      "arm": "P-DRIFT",
+      "episode_id": 12
+    },
+    {
+      "order_index": 100,
+      "arm": "N-DELETED",
+      "episode_id": 6
+    },
+    {
+      "order_index": 101,
+      "arm": "P-DRIFT",
+      "episode_id": 1
+    },
+    {
+      "order_index": 102,
+      "arm": "N-READ",
+      "episode_id": 6
+    },
+    {
+      "order_index": 103,
+      "arm": "P-WRITE",
+      "episode_id": 16
+    },
+    {
+      "order_index": 104,
+      "arm": "N-DELETED",
+      "episode_id": 8
+    },
+    {
+      "order_index": 105,
+      "arm": "P-WRITE",
+      "episode_id": 9
+    },
+    {
+      "order_index": 106,
+      "arm": "N-READ",
+      "episode_id": 10
+    },
+    {
+      "order_index": 107,
+      "arm": "N-EXPIRED",
+      "episode_id": 5
+    },
+    {
+      "order_index": 108,
+      "arm": "P-DRIFT",
+      "episode_id": 2
+    },
+    {
+      "order_index": 109,
+      "arm": "N-INVALID",
+      "episode_id": 4
+    },
+    {
+      "order_index": 110,
+      "arm": "N-DELETED",
+      "episode_id": 0
+    },
+    {
+      "order_index": 111,
+      "arm": "N-DELETED",
+      "episode_id": 10
+    },
+    {
+      "order_index": 112,
+      "arm": "N-INVALID",
+      "episode_id": 12
+    },
+    {
+      "order_index": 113,
+      "arm": "P-WRITE",
+      "episode_id": 1
+    },
+    {
+      "order_index": 114,
+      "arm": "N-INVALID",
+      "episode_id": 10
+    },
+    {
+      "order_index": 115,
+      "arm": "N-READ",
+      "episode_id": 8
+    },
+    {
+      "order_index": 116,
+      "arm": "N-DELETED",
+      "episode_id": 16
+    },
+    {
+      "order_index": 117,
+      "arm": "N-EXPIRED",
+      "episode_id": 10
+    },
+    {
+      "order_index": 118,
+      "arm": "N-EXPIRED",
+      "episode_id": 3
+    },
+    {
+      "order_index": 119,
+      "arm": "N-DELETED",
+      "episode_id": 9
+    }
+  ],
+  "archived_at": "2026-09-27T03:34:26.536271+00:00",
+  "note": "raw order archived before any scoring (prereg 4.1)"
+}

@@ -1,0 +1,62 @@
+{
+  "zero_mismatches": true,
+  "n_episodes_raw": 120,
+  "n_arms": 6,
+  "episodes_per_arm": {
+    "P-WRITE": 20,
+    "P-DRIFT": 20,
+    "N-READ": 20,
+    "N-INVALID": 20,
+    "N-EXPIRED": 20,
+    "N-DELETED": 20
+  },
+  "recomputed_arms": {
+    "P-WRITE": {
+      "k": 20,
+      "n": 20,
+      "point": 1.0,
+      "wilson_ci_lo": 0.8388748419471806,
+      "wilson_ci_hi": 1.0
+    },
+    "P-DRIFT": {
+      "k": 20,
+      "n": 20,
+      "point": 1.0,
+      "wilson_ci_lo": 0.8388748419471806,
+      "wilson_ci_hi": 1.0
+    },
+    "N-READ": {
+      "k": 20,
+      "n": 20,
+      "point": 1.0,
+      "wilson_ci_lo": 0.8388748419471806,
+      "wilson_ci_hi": 1.0
+    },
+    "N-INVALID": {
+      "k": 20,
+      "n": 20,
+      "point": 1.0,
+      "wilson_ci_lo": 0.8388748419471806,
+      "wilson_ci_hi": 1.0
+    },
+    "N-EXPIRED": {
+      "k": 20,
+      "n": 20,
+      "point": 1.0,
+      "wilson_ci_lo": 0.8388748419471806,
+      "wilson_ci_hi": 1.0
+    },
+    "N-DELETED": {
+      "k": 20,
+      "n": 20,
+      "point": 1.0,
+      "wilson_ci_lo": 0.8388748419471806,
+      "wilson_ci_hi": 1.0
+    }
+  },
+  "expected_verdict_from_recomputed": "SUPPORTS",
+  "producer_verdict": "SUPPORTS",
+  "mismatches": [],
+  "method": "independent re-implementation reading only raw JSONL; shares no code with the producer scorer",
+  "z": 1.959963984540054
+}

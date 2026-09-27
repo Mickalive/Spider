@@ -1,0 +1,19 @@
+{
+  "command": "python -m research.runtime.bringup --config research/experiments/EXP-RUNTIME-36129163700/bringup_contract.json --ledger research/experiments/EXP-RUNTIME-36129163700/artifacts/capability_ledger.json",
+  "argv": [
+    "/opt/hostedtoolcache/Python/3.12.14/x64/bin/python3",
+    "-m",
+    "research.runtime.bringup",
+    "--config",
+    "/home/runner/work/Spider/Spider/research/experiments/EXP-RUNTIME-36129163700/bringup_contract.json",
+    "--ledger",
+    "/home/runner/work/Spider/Spider/research/experiments/EXP-RUNTIME-36129163700/artifacts/capability_ledger.json"
+  ],
+  "cwd": "/home/runner/work/Spider/Spider",
+  "executed_at": "2026-09-27T03:34:41.609664+00:00",
+  "exit_status": 0,
+  "stdout_tail": "OK: all declared required scopes pass; ledger at /home/runner/work/Spider/Spider/research/experiments/EXP-RUNTIME-36129163700/artifacts/capability_ledger.json\n",
+  "stderr_tail": "",
+  "ledger_written": true,
+  "ledger_sha256": "ed08255ab08820e8cd1c956371229e751c7a0d12de402e36f1bae22c43f3ff1d"
+}

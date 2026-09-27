@@ -1,0 +1,39 @@
+{
+  "scope": [
+    "research/experiments/EXP-RUNTIME-36129163700/run_experiment.py",
+    "research/runtime/bringup.py"
+  ],
+  "declarative_hash_recorded": "research/experiments/EXP-RUNTIME-36129163700/bringup_contract.json",
+  "checks": [
+    {
+      "path": "research/experiments/EXP-RUNTIME-36129163700/run_experiment.py",
+      "worktree_exists": false,
+      "worktree_sha256": null,
+      "head_exists": false,
+      "head_sha256": null,
+      "head_matches_worktree": false
+    },
+    {
+      "path": "research/runtime/bringup.py",
+      "worktree_exists": false,
+      "worktree_sha256": null,
+      "head_exists": false,
+      "head_sha256": null,
+      "head_matches_worktree": false
+    },
+    {
+      "path": "research/experiments/EXP-RUNTIME-36129163700/bringup_contract.json",
+      "worktree_exists": false,
+      "worktree_sha256": null,
+      "head_exists": false,
+      "head_sha256": null,
+      "head_matches_worktree": false
+    }
+  ],
+  "DURABILITY_status": "UNSATISFIABLE",
+  "disposition": "REFERENCE_ONLY",
+  "explanation": "frozen executable scope is not present at HEAD with matching content; under the lane no-commit rule an uncommitted implementation is never measured as durable",
+  "smallest_sanctioned_repair": "use an implementation already at HEAD, or have an authorized commit/merge workflow apply research/runtime/bringup.py and this harness to HEAD, then start a new run; an in-place uncommitted measurement is never durable evidence",
+  "scientific_effect": "none on Part A; a contract/durability result, never a falsification",
+  "checked_at": "2026-09-27T03:34:42.753976+00:00"
+}
