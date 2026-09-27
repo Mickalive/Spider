@@ -1,0 +1,160 @@
+{
+  "all_passed": true,
+  "checks": {
+    "B-COLD-EXPLORATION_cost_is_72": true,
+    "B-COLD-EXPLORATION_span_correctness_is_1": true,
+    "B-NO-MEMORY-CONDITIONED-NARROW_span_correctness_matches_parent": true,
+    "B-NO-MEMORY-CONDITIONED-WIDE_cost_is_48": true,
+    "B-NO-MEMORY-CONDITIONED-WIDE_span_correctness_matches_parent": true,
+    "B-NO-MEMORY-DETERMINISTIC_cost_per_rate_matches_parent_with_plant": true,
+    "B-NO-MEMORY-DETERMINISTIC_false_compiles_per_rate_match_parent": true,
+    "B-NO-MEMORY-DETERMINISTIC_nu_0.50_correctness_matches_parent_headline": true,
+    "B-NO-MEMORY-DETERMINISTIC_per_rate_correctness_identical_to_parent_artifact": true,
+    "B-NO-MEMORY-DETERMINISTIC_pooled_correctness_identical_to_parent_artifact": true
+  },
+  "expected": {
+    "cold_amortized": {
+      "0.00": 72.0,
+      "0.25": 72.0,
+      "0.50": 72.0,
+      "0.75": 72.0,
+      "1.00": 72.0
+    },
+    "conditioned_amortized": 48.0,
+    "deopt_amortized_no_class_iii": {
+      "0.00": 29.2,
+      "0.25": 33.9,
+      "0.50": 38.6,
+      "0.75": 43.3,
+      "1.00": 47.06
+    },
+    "deopt_amortized_with_class_iii": {
+      "0.00": 34.08,
+      "0.25": 36.64,
+      "0.50": 40.94,
+      "0.75": 44.84,
+      "1.00": 47.06
+    },
+    "false_compiled_replays": {
+      "0.00": 30,
+      "0.25": 30,
+      "0.50": 20,
+      "0.75": 0,
+      "1.00": 0
+    },
+    "replication_at_nu_0.50": {
+      "amortized_cost_units_per_episode": 38.6,
+      "compilable_given_deterministic": 0.6857,
+      "compiled_share_of_all_spans": 0.4,
+      "per_span_witnessed_determinism_fraction": 0.5833
+    },
+    "span_level_action_correctness": {
+      "B-COLD-EXPLORATION": 1.0,
+      "B-NO-MEMORY-CONDITIONED": 0.85,
+      "B-NO-MEMORY-CONDITIONED-NARROW": 0.5666666666666667,
+      "B-NO-MEMORY-DETERMINISTIC_nu_0.50": 0.9833333333333333,
+      "B-NO-MEMORY-DETERMINISTIC_pooled": 0.9866666666666667
+    }
+  },
+  "observed": {
+    "amortized_cost_pooled": {
+      "B-COLD-EXPLORATION": 72.0,
+      "B-NO-MEMORY-CONDITIONED-NARROW": 48.0,
+      "B-NO-MEMORY-CONDITIONED-WIDE": 48.0,
+      "B-NO-MEMORY-DETERMINISTIC": 40.712,
+      "CROSS_EPISODE_COMPILED_BINDING": 48.204,
+      "WITHIN_EPISODE_SCRATCHPAD": 48.0,
+      "WITHIN_EPISODE_SCRATCHPAD-NO-MINTFLAG": 48.0
+    },
+    "cold_amortized_per_rate": {
+      "0.00": 72.0,
+      "0.25": 72.0,
+      "0.50": 72.0,
+      "0.75": 72.0,
+      "1.00": 72.0
+    },
+    "deopt_amortized_with_class_iii_per_rate": {
+      "0.00": 34.08,
+      "0.25": 36.64,
+      "0.50": 40.94,
+      "0.75": 44.84,
+      "1.00": 47.06
+    },
+    "false_compiled_replays_per_rate": {
+      "0.00": 30,
+      "0.25": 30,
+      "0.50": 20,
+      "0.75": 0,
+      "1.00": 0
+    },
+    "span_level_action_correctness_pooled": {
+      "B-COLD-EXPLORATION": 1.0,
+      "B-NO-MEMORY-CONDITIONED-NARROW": 0.5666666666666667,
+      "B-NO-MEMORY-CONDITIONED-WIDE": 0.85,
+      "B-NO-MEMORY-DETERMINISTIC": 0.9866666666666667,
+      "CROSS_EPISODE_COMPILED_BINDING": 1.0,
+      "WITHIN_EPISODE_SCRATCHPAD": 1.0,
+      "WITHIN_EPISODE_SCRATCHPAD-NO-MINTFLAG": 0.8833333333333333
+    }
+  },
+  "purpose": "the inherited parent arms, run unmodified on the identical task instances, must reproduce the parent packet's measured values; otherwise the new arms' comparison has no stable baseline",
+  "reference_arm_exact_replication": {
+    "authority": "research/experiments/EXP-FRONTIER-36272394045/artifacts/spans_B-NO-MEMORY-DETERMINISTIC.jsonl",
+    "authority_sha256": "6b8e9c6d3910f2522a0ebbb8ac13005c27d663ff087e1dc62fb39468687259af",
+    "parent_packet_headline_0.98333_is_the_nu_0.50_rate_not_the_pooled_value": true,
+    "parent_per_rate_correct_over_total": {
+      "0.00": [
+        1170,
+        1200
+      ],
+      "0.25": [
+        1170,
+        1200
+      ],
+      "0.50": [
+        1180,
+        1200
+      ],
+      "0.75": [
+        1200,
+        1200
+      ],
+      "1.00": [
+        1200,
+        1200
+      ]
+    },
+    "parent_pooled_correct_over_total": [
+      5920,
+      6000
+    ],
+    "per_rate_identical": true,
+    "pooled_identical": true,
+    "this_run_per_rate_correct_over_total": {
+      "0.00": [
+        1170,
+        1200
+      ],
+      "0.25": [
+        1170,
+        1200
+      ],
+      "0.50": [
+        1180,
+        1200
+      ],
+      "0.75": [
+        1200,
+        1200
+      ],
+      "1.00": [
+        1200,
+        1200
+      ]
+    },
+    "this_run_pooled_correct_over_total": [
+      5920,
+      6000
+    ]
+  }
+}

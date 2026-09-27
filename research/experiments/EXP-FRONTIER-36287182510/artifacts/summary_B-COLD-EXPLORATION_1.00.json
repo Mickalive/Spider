@@ -1,0 +1,65 @@
+{
+  "amortized_cost_units_per_episode": 72.0,
+  "arm": "B-COLD-EXPLORATION",
+  "arm_extras": {
+    "arm": "B-COLD-EXPLORATION",
+    "cache_size": 0,
+    "current_binding_at_end": null,
+    "n_persistent_bindings": 0,
+    "non_scalar_instance_attributes": [
+      "kernel_config"
+    ]
+  },
+  "class_iii_closure_rate": {
+    "ci95": [
+      0.9689808335812966,
+      1.0
+    ],
+    "k": 120,
+    "n": 120,
+    "point": 1.0
+  },
+  "decision_paths": {
+    "DEOPT_TO_MODEL_UNKNOWN": 1200
+  },
+  "episodes": 50,
+  "false_compiled_replays": 0,
+  "goal_state_success": {
+    "ci95": [
+      0.9286524008666414,
+      1.0
+    ],
+    "k": 50,
+    "n": 50,
+    "point": 1.0
+  },
+  "ledger": {
+    "amortized_cost_units_per_episode": 72.0,
+    "compile_units": 0,
+    "component_detail": {
+      "execution": 1200,
+      "machinery": 1200,
+      "model": 1200,
+      "resolve_calls": 1200,
+      "resolve_unknown": 1200
+    },
+    "episodes": 50,
+    "execution_units": 1200,
+    "machinery_units": 1200,
+    "model_units": 1200,
+    "total_units": 3600
+  },
+  "n_class_iii_span_occurrences": 120,
+  "n_incorrect": 0,
+  "novelty_rate": 1.0,
+  "span_level_action_correctness": {
+    "ci95": [
+      0.9968089993972651,
+      1.0
+    ],
+    "k": 1200,
+    "n": 1200,
+    "point": 1.0
+  },
+  "span_occurrences": 1200
+}

@@ -128,8 +128,10 @@ def state_signature(store: dict[str, dict[str, Any]]) -> str:
 # resource identity, so an executor that can observe only
 # (world_store_snapshot, last_request_method, last_request_path) -- the
 # observable state prereg.md section 5 fixes -- cannot derive it, and neither can
-# an executor that knows the task plan. The only channel that carries it is the
-# mint response.
+# an executor that knows the task plan. The only channels that carry it are the
+# mint response HEADER, the mint response BODY field ``capability_handle``
+# (added by EXP-FRONTIER-36287182510, prereg.md section 5) and the raw
+# server-side observation read by the runner.
 # ---------------------------------------------------------------------------
 TOKEN_LEN = 16
 
@@ -172,13 +174,15 @@ class _Handler(BaseHTTPRequestHandler):
     def log_message(self, fmt: str, *args: Any) -> None:  # silence stderr noise
         return
 
-    def _send(self, code: int, payload: Any) -> bytes:
+    def _send(self, code: int, payload: Any, extra_headers: dict[str, str] | None = None) -> bytes:
         raw = b"" if payload is None else canonical_json(payload).encode("utf-8")
         self.send_response(code)
         if raw:
             self.send_header("Content-Type", "application/json")
         self.send_header("Content-Length", str(len(raw)))
         self.send_header("Cache-Control", "no-store")
+        for name, value in sorted((extra_headers or {}).items()):
+            self.send_header(name, value)
         self.end_headers()
         if raw:
             self.wfile.write(raw)
@@ -258,14 +262,33 @@ class _Handler(BaseHTTPRequestHandler):
         # hash is unchanged.
         payload = body or {}
         self.store[rid] = {"title": payload.get("title"), "value": payload.get("value")}
+        extra_headers: dict[str, str] = {}
         if "mint" in query:
-            # Opt-in: mint a capability handle bound to (rid, episode counter).
-            # The handle is published ONLY as a response header and as a raw
-            # server-side observation, never in the response body, never in the
-            # store, and never in any request path. The response *body* of a
-            # minting PUT is byte-identical to the body of the same PUT without
-            # ``?mint=`` so the parent's per-span body hashes are preserved.
-            self.server.last_mint = mint_token(int(self.server.episode_counter))  # type: ignore[attr-defined]
+            # EXP-FRONTIER-36287182510 (prereg.md section 5, "Critical modification
+            # for this experiment"): the minted handle is published in the
+            # RESPONSE BODY, in addition to the response header and the raw
+            # server-side observation. This is what turns class (iii) from a
+            # server-side plant into a real observable-channel problem: a value
+            # an agent can read out of a prior response body and propagate.
+            #
+            # The body is the byte-identical non-mint PUT body PLUS the
+            # ``capability_handle`` field, so every non-mint request shape keeps
+            # its exact response bytes and CTRL-REPL-PARENT-NUMBERS (which runs
+            # the reference arm with the class-(iii) plant disabled) is
+            # unaffected. The handle is a pure function of (MINT_SALT, episode
+            # counter) and is still never a function of the store, of the request
+            # path, of the resource identity or of the plan.
+            handle = mint_token(int(self.server.episode_counter))  # type: ignore[attr-defined]
+            self.server.last_mint = handle  # type: ignore[attr-defined]
+            extra_headers["X-Capability-Handle"] = handle
+            response_payload: dict[str, Any] = {
+                "rid": rid,
+                "created": not existed,
+                "record": self.store[rid],
+                "capability_handle": handle,
+            }
+            self._send(200 if existed else 201, response_payload, extra_headers)
+            return
         self._send(200 if existed else 201, {"rid": rid, "created": not existed, "record": self.store[rid]})
 
     def do_PATCH(self) -> None:

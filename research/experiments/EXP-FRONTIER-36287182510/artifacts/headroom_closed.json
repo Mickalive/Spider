@@ -1,0 +1,242 @@
+{
+  "0.00": {
+    "by_arm": {
+      "B-COLD-EXPLORATION": {
+        "headroom_closed": 0.3766666666666667,
+        "headroom_closed_fraction": 1.0,
+        "residual_after_arm": 0.0,
+        "span_level_action_correctness": 1.0
+      },
+      "B-NO-MEMORY-CONDITIONED-NARROW": {
+        "headroom_closed": -0.05666666666666664,
+        "headroom_closed_fraction": -0.15044247787610612,
+        "residual_after_arm": 0.43333333333333335,
+        "span_level_action_correctness": 0.5666666666666667
+      },
+      "B-NO-MEMORY-CONDITIONED-WIDE": {
+        "headroom_closed": 0.22666666666666668,
+        "headroom_closed_fraction": 0.6017699115044247,
+        "residual_after_arm": 0.15000000000000002,
+        "span_level_action_correctness": 0.85
+      },
+      "B-NO-MEMORY-DETERMINISTIC": {
+        "headroom_closed": 0.3516666666666667,
+        "headroom_closed_fraction": 0.9336283185840707,
+        "residual_after_arm": 0.025000000000000022,
+        "span_level_action_correctness": 0.975
+      },
+      "CROSS_EPISODE_COMPILED_BINDING": {
+        "headroom_closed": 0.3766666666666667,
+        "headroom_closed_fraction": 1.0,
+        "residual_after_arm": 0.0,
+        "span_level_action_correctness": 1.0
+      },
+      "WITHIN_EPISODE_SCRATCHPAD": {
+        "headroom_closed": 0.3766666666666667,
+        "headroom_closed_fraction": 1.0,
+        "residual_after_arm": 0.0,
+        "span_level_action_correctness": 1.0
+      },
+      "WITHIN_EPISODE_SCRATCHPAD-NO-MINTFLAG": {
+        "headroom_closed": 0.26,
+        "headroom_closed_fraction": 0.6902654867256637,
+        "residual_after_arm": 0.1166666666666667,
+        "span_level_action_correctness": 0.8833333333333333
+      }
+    },
+    "novelty_rate": 0.0,
+    "sigma_2_plus_sigma_3": 0.3766666666666667
+  },
+  "0.25": {
+    "by_arm": {
+      "B-COLD-EXPLORATION": {
+        "headroom_closed": 0.3516666666666667,
+        "headroom_closed_fraction": 1.0,
+        "residual_after_arm": 0.0,
+        "span_level_action_correctness": 1.0
+      },
+      "B-NO-MEMORY-CONDITIONED-NARROW": {
+        "headroom_closed": -0.08166666666666667,
+        "headroom_closed_fraction": -0.23222748815165875,
+        "residual_after_arm": 0.43333333333333335,
+        "span_level_action_correctness": 0.5666666666666667
+      },
+      "B-NO-MEMORY-CONDITIONED-WIDE": {
+        "headroom_closed": 0.20166666666666666,
+        "headroom_closed_fraction": 0.5734597156398104,
+        "residual_after_arm": 0.15000000000000002,
+        "span_level_action_correctness": 0.85
+      },
+      "B-NO-MEMORY-DETERMINISTIC": {
+        "headroom_closed": 0.32666666666666666,
+        "headroom_closed_fraction": 0.928909952606635,
+        "residual_after_arm": 0.025000000000000022,
+        "span_level_action_correctness": 0.975
+      },
+      "CROSS_EPISODE_COMPILED_BINDING": {
+        "headroom_closed": 0.3516666666666667,
+        "headroom_closed_fraction": 1.0,
+        "residual_after_arm": 0.0,
+        "span_level_action_correctness": 1.0
+      },
+      "WITHIN_EPISODE_SCRATCHPAD": {
+        "headroom_closed": 0.3516666666666667,
+        "headroom_closed_fraction": 1.0,
+        "residual_after_arm": 0.0,
+        "span_level_action_correctness": 1.0
+      },
+      "WITHIN_EPISODE_SCRATCHPAD-NO-MINTFLAG": {
+        "headroom_closed": 0.235,
+        "headroom_closed_fraction": 0.6682464454976302,
+        "residual_after_arm": 0.1166666666666667,
+        "span_level_action_correctness": 0.8833333333333333
+      }
+    },
+    "novelty_rate": 0.25,
+    "sigma_2_plus_sigma_3": 0.3516666666666667
+  },
+  "0.50": {
+    "by_arm": {
+      "B-COLD-EXPLORATION": {
+        "headroom_closed": 0.32166666666666666,
+        "headroom_closed_fraction": 1.0,
+        "residual_after_arm": 0.0,
+        "span_level_action_correctness": 1.0
+      },
+      "B-NO-MEMORY-CONDITIONED-NARROW": {
+        "headroom_closed": -0.11166666666666669,
+        "headroom_closed_fraction": -0.3471502590673576,
+        "residual_after_arm": 0.43333333333333335,
+        "span_level_action_correctness": 0.5666666666666667
+      },
+      "B-NO-MEMORY-CONDITIONED-WIDE": {
+        "headroom_closed": 0.17166666666666663,
+        "headroom_closed_fraction": 0.5336787564766838,
+        "residual_after_arm": 0.15000000000000002,
+        "span_level_action_correctness": 0.85
+      },
+      "B-NO-MEMORY-DETERMINISTIC": {
+        "headroom_closed": 0.30499999999999994,
+        "headroom_closed_fraction": 0.9481865284974091,
+        "residual_after_arm": 0.01666666666666672,
+        "span_level_action_correctness": 0.9833333333333333
+      },
+      "CROSS_EPISODE_COMPILED_BINDING": {
+        "headroom_closed": 0.32166666666666666,
+        "headroom_closed_fraction": 1.0,
+        "residual_after_arm": 0.0,
+        "span_level_action_correctness": 1.0
+      },
+      "WITHIN_EPISODE_SCRATCHPAD": {
+        "headroom_closed": 0.32166666666666666,
+        "headroom_closed_fraction": 1.0,
+        "residual_after_arm": 0.0,
+        "span_level_action_correctness": 1.0
+      },
+      "WITHIN_EPISODE_SCRATCHPAD-NO-MINTFLAG": {
+        "headroom_closed": 0.20499999999999996,
+        "headroom_closed_fraction": 0.6373056994818652,
+        "residual_after_arm": 0.1166666666666667,
+        "span_level_action_correctness": 0.8833333333333333
+      }
+    },
+    "novelty_rate": 0.5,
+    "sigma_2_plus_sigma_3": 0.32166666666666666
+  },
+  "0.75": {
+    "by_arm": {
+      "B-COLD-EXPLORATION": {
+        "headroom_closed": 0.29833333333333334,
+        "headroom_closed_fraction": 1.0,
+        "residual_after_arm": 0.0,
+        "span_level_action_correctness": 1.0
+      },
+      "B-NO-MEMORY-CONDITIONED-NARROW": {
+        "headroom_closed": -0.135,
+        "headroom_closed_fraction": -0.45251396648044695,
+        "residual_after_arm": 0.43333333333333335,
+        "span_level_action_correctness": 0.5666666666666667
+      },
+      "B-NO-MEMORY-CONDITIONED-WIDE": {
+        "headroom_closed": 0.14833333333333332,
+        "headroom_closed_fraction": 0.49720670391061444,
+        "residual_after_arm": 0.15000000000000002,
+        "span_level_action_correctness": 0.85
+      },
+      "B-NO-MEMORY-DETERMINISTIC": {
+        "headroom_closed": 0.29833333333333334,
+        "headroom_closed_fraction": 1.0,
+        "residual_after_arm": 0.0,
+        "span_level_action_correctness": 1.0
+      },
+      "CROSS_EPISODE_COMPILED_BINDING": {
+        "headroom_closed": 0.29833333333333334,
+        "headroom_closed_fraction": 1.0,
+        "residual_after_arm": 0.0,
+        "span_level_action_correctness": 1.0
+      },
+      "WITHIN_EPISODE_SCRATCHPAD": {
+        "headroom_closed": 0.29833333333333334,
+        "headroom_closed_fraction": 1.0,
+        "residual_after_arm": 0.0,
+        "span_level_action_correctness": 1.0
+      },
+      "WITHIN_EPISODE_SCRATCHPAD-NO-MINTFLAG": {
+        "headroom_closed": 0.18166666666666664,
+        "headroom_closed_fraction": 0.6089385474860334,
+        "residual_after_arm": 0.1166666666666667,
+        "span_level_action_correctness": 0.8833333333333333
+      }
+    },
+    "novelty_rate": 0.75,
+    "sigma_2_plus_sigma_3": 0.29833333333333334
+  },
+  "1.00": {
+    "by_arm": {
+      "B-COLD-EXPLORATION": {
+        "headroom_closed": 0.26583333333333337,
+        "headroom_closed_fraction": 1.0,
+        "residual_after_arm": 0.0,
+        "span_level_action_correctness": 1.0
+      },
+      "B-NO-MEMORY-CONDITIONED-NARROW": {
+        "headroom_closed": -0.16749999999999998,
+        "headroom_closed_fraction": -0.6300940438871472,
+        "residual_after_arm": 0.43333333333333335,
+        "span_level_action_correctness": 0.5666666666666667
+      },
+      "B-NO-MEMORY-CONDITIONED-WIDE": {
+        "headroom_closed": 0.11583333333333334,
+        "headroom_closed_fraction": 0.43573667711598746,
+        "residual_after_arm": 0.15000000000000002,
+        "span_level_action_correctness": 0.85
+      },
+      "B-NO-MEMORY-DETERMINISTIC": {
+        "headroom_closed": 0.26583333333333337,
+        "headroom_closed_fraction": 1.0,
+        "residual_after_arm": 0.0,
+        "span_level_action_correctness": 1.0
+      },
+      "CROSS_EPISODE_COMPILED_BINDING": {
+        "headroom_closed": 0.26583333333333337,
+        "headroom_closed_fraction": 1.0,
+        "residual_after_arm": 0.0,
+        "span_level_action_correctness": 1.0
+      },
+      "WITHIN_EPISODE_SCRATCHPAD": {
+        "headroom_closed": 0.26583333333333337,
+        "headroom_closed_fraction": 1.0,
+        "residual_after_arm": 0.0,
+        "span_level_action_correctness": 1.0
+      },
+      "WITHIN_EPISODE_SCRATCHPAD-NO-MINTFLAG": {
+        "headroom_closed": 0.14916666666666667,
+        "headroom_closed_fraction": 0.561128526645768,
+        "residual_after_arm": 0.1166666666666667,
+        "span_level_action_correctness": 0.8833333333333333
+      }
+    },
+    "novelty_rate": 1.0,
+    "sigma_2_plus_sigma_3": 0.26583333333333337
+  }
+}

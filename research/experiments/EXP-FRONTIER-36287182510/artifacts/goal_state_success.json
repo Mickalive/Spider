@@ -1,0 +1,35 @@
+{
+  "all_arms_goal_state_success_1": true,
+  "interpretation": "an endpoint that is 1.0 for an arm that is wrong on a fifth of its spans cannot discriminate the arms; this is why the primary endpoint is span-level action correctness",
+  "per_arm": {
+    "B-COLD-EXPLORATION": {
+      "goal_state_success": 1.0,
+      "span_level_action_correctness": 1.0
+    },
+    "B-NO-MEMORY-CONDITIONED-NARROW": {
+      "goal_state_success": 1.0,
+      "span_level_action_correctness": 0.5666666666666667
+    },
+    "B-NO-MEMORY-CONDITIONED-WIDE": {
+      "goal_state_success": 1.0,
+      "span_level_action_correctness": 0.85
+    },
+    "B-NO-MEMORY-DETERMINISTIC": {
+      "goal_state_success": 1.0,
+      "span_level_action_correctness": 0.9866666666666667
+    },
+    "CROSS_EPISODE_COMPILED_BINDING": {
+      "goal_state_success": 1.0,
+      "span_level_action_correctness": 1.0
+    },
+    "WITHIN_EPISODE_SCRATCHPAD": {
+      "goal_state_success": 1.0,
+      "span_level_action_correctness": 1.0
+    },
+    "WITHIN_EPISODE_SCRATCHPAD-NO-MINTFLAG": {
+      "goal_state_success": 1.0,
+      "span_level_action_correctness": 0.8833333333333333
+    }
+  },
+  "purpose": "prereg.md 10: goal-state success is NOT the primary endpoint; it is measured to document that it stays 1.0 for arms with materially different span-level correctness"
+}

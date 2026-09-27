@@ -1,0 +1,175 @@
+{
+  "arm_collapse_mechanism_measured": {
+    "measured": {
+      "arms_that_read_the_plan_action": {
+        "compiled_binding": 1.0,
+        "inherited_cold": 1.0,
+        "inherited_ratchet": 1.0
+      },
+      "goal_conditioned_arms_that_reconstruct_from_the_prefix": {
+        "inherited_conditioned_wide": 0.0,
+        "scratchpad": 0.0
+      }
+    },
+    "what_happens": "in this control the inherited generator helper taskplan._with_nonce appends '?n=<episode>-<step>' to EVERY path, including '/'. The declared goal prefixes (wide, wide_mint, narrow) do not carry the path, so any arm that reconstructs its request from the prefix alone cannot reproduce the nonce.",
+    "why_this_is_not_a_memory_result": "the collapse is driven by the prefix's coverage of the request, not by memory scope: the NEW scratchpad and the INHERITED conditioned arm collapse identically, while the ratchet, the cold arm and the new compiled arm (all of which see the plan action) do not. no-go 4 is a criterion about the CLASSIFIER (sigma_2 == 0), and it is evaluated on the labels alone, so this arm-level collapse does not bear on it."
+  },
+  "arm_span_level_action_correctness": {
+    "compiled_binding": {
+      "ci95": [
+        0.9968089993972651,
+        1.0
+      ],
+      "k": 1200,
+      "n": 1200,
+      "point": 1.0
+    },
+    "reference": {
+      "ci95": [
+        0.9968089993972651,
+        1.0
+      ],
+      "k": 1200,
+      "n": 1200,
+      "point": 1.0
+    },
+    "scratchpad": {
+      "ci95": [
+        2.168404344971009e-19,
+        0.003191000602734924
+      ],
+      "k": 0,
+      "n": 1200,
+      "point": 0.0
+    }
+  },
+  "arm_span_level_action_correctness_measured": {
+    "compiled_binding": {
+      "ci95": [
+        0.9968089993972651,
+        1.0
+      ],
+      "k": 1200,
+      "n": 1200,
+      "point": 1.0
+    },
+    "inherited_cold": {
+      "ci95": [
+        0.9968089993972651,
+        1.0
+      ],
+      "k": 1200,
+      "n": 1200,
+      "point": 1.0
+    },
+    "inherited_conditioned_wide": {
+      "ci95": [
+        2.168404344971009e-19,
+        0.003191000602734924
+      ],
+      "k": 0,
+      "n": 1200,
+      "point": 0.0
+    },
+    "reference_ratchet": {
+      "ci95": [
+        0.9968089993972651,
+        1.0
+      ],
+      "k": 1200,
+      "n": 1200,
+      "point": 1.0
+    },
+    "scratchpad": {
+      "ci95": [
+        2.168404344971009e-19,
+        0.003191000602734924
+      ],
+      "k": 0,
+      "n": 1200,
+      "point": 0.0
+    }
+  },
+  "authoritative_variant": "authoritative_goal_aware_intent_role_prereg13_state_key",
+  "class_counts_and_shares_by_rule_variant": {
+    "authoritative_goal_aware_intent_role_arm_native_state_key": {
+      "counts": {
+        "i": 1151,
+        "ii": 49,
+        "iii": 0
+      },
+      "sigma_2_ci95": [
+        0.03102354197066147,
+        0.05357352691618343
+      ],
+      "sigma_2_point": 0.04083333333333333,
+      "sigma_3_point": 0.0
+    },
+    "authoritative_goal_aware_intent_role_prereg13_state_key": {
+      "counts": {
+        "i": 1200,
+        "ii": 0,
+        "iii": 0
+      },
+      "sigma_2_ci95": [
+        2.168404344971009e-19,
+        0.003191000602734924
+      ],
+      "sigma_2_point": 0.0,
+      "sigma_3_point": 0.0
+    },
+    "declared_alternate_literal_rule_arm_native_state_key": {
+      "counts": {
+        "i": 1151,
+        "ii": 49,
+        "iii": 0
+      },
+      "sigma_2_ci95": [
+        0.03102354197066147,
+        0.05357352691618343
+      ],
+      "sigma_2_point": 0.04083333333333333,
+      "sigma_3_point": 0.0
+    },
+    "declared_alternate_literal_rule_prereg13_state_key": {
+      "counts": {
+        "i": 1200,
+        "ii": 0,
+        "iii": 0
+      },
+      "sigma_2_ci95": [
+        2.168404344971009e-19,
+        0.003191000602734924
+      ],
+      "sigma_2_point": 0.0,
+      "sigma_3_point": 0.0
+    },
+    "declared_alternate_prefix_intent_prereg13_state_key": {
+      "counts": {
+        "i": 1200,
+        "ii": 0,
+        "iii": 0
+      },
+      "sigma_2_ci95": [
+        2.168404344971009e-19,
+        0.003191000602734924
+      ],
+      "sigma_2_point": 0.0,
+      "sigma_3_point": 0.0
+    }
+  },
+  "control": "NC-UNIQUE-STATES",
+  "declared_deviation": "the class-(iii) plant is disabled in this control, as in the parent, so that sigma_3 == 0 is attainable by construction",
+  "interpretation_note": "MEASURED, and it is the STATE KEY that decides this control, not the class-(ii) rule. With the prereg.md 13 mechanism the nonce makes every world-store key unique (1200/1200), so sigma_2 is exactly 0 under all three rule variants. With the arm-native key, which ignores the nonce in the request path, sigma_2 is 49/1200 under BOTH the inherited literal rule and the authoritative goal-aware (intent=role) rule, which agree exactly. The parent's NC residual of 49/1200 is therefore reproduced here by the arm-native state key alone, and the class-(ii) rule has no effect on it in either direction. The goal-aware rule is also indistinguishable from the literal rule on the main grid (both 1337/6000): the arm-native state key already contains the executor's last request, so it already separates the roles the intent field would separate. Only the strictest full-prefix intent reading changes the count (480/6000).",
+  "n_span_occurrences": 1200,
+  "no_go_4_satisfied": true,
+  "prereg_criterion": "sigma_2 == 0 under the authoritative goal-aware rule with the literal prereg.md 13 mechanism (no-go 4)",
+  "protocol": "prereg.md 8 and 13: every span carries a uniqueness nonce appended to the WORLD STORE SNAPSHOT (part of the declared observable state), not to the request path where the inherited generator put it",
+  "unique_state_keys": {
+    "authoritative_goal_aware_intent_role_arm_native_state_key": 1151,
+    "authoritative_goal_aware_intent_role_prereg13_state_key": 1200,
+    "declared_alternate_literal_rule_arm_native_state_key": 1151,
+    "declared_alternate_literal_rule_prereg13_state_key": 1200,
+    "declared_alternate_prefix_intent_prereg13_state_key": 1200
+  }
+}

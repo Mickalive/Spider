@@ -1,0 +1,75 @@
+{
+  "amortized_cost_units_per_episode": 48.2,
+  "arm": "CROSS_EPISODE_COMPILED_BINDING",
+  "arm_extras": {
+    "arm": "CROSS_EPISODE_COMPILED_BINDING",
+    "bound_replays": 0,
+    "cache_size": 631,
+    "compiled_replays": 360,
+    "conflicts_detected": 1,
+    "current_binding": "000000328f877156",
+    "current_binding_at_end": "000000328f877156",
+    "deopt_compile_misses": 209,
+    "deopt_no_entry": 631,
+    "n_persistent_bindings": 32,
+    "non_scalar_instance_attributes": [
+      "induced_bindings"
+    ]
+  },
+  "class_iii_closure_rate": {
+    "ci95": [
+      0.9689808335812966,
+      1.0
+    ],
+    "k": 120,
+    "n": 120,
+    "point": 1.0
+  },
+  "decision_paths": {
+    "COMPILED_REPLAY_BOUND": 360,
+    "DEOPT_TO_MODEL": 840
+  },
+  "episodes": 50,
+  "false_compiled_replays": 0,
+  "goal_state_success": {
+    "ci95": [
+      0.9286524008666414,
+      1.0
+    ],
+    "k": 50,
+    "n": 50,
+    "point": 1.0
+  },
+  "ledger": {
+    "amortized_cost_units_per_episode": 48.2,
+    "compile_units": 10,
+    "component_detail": {
+      "cache_key_conflicts": 1,
+      "compile": 10,
+      "execution": 1200,
+      "handles_induced_from_response_bodies": 60,
+      "machinery": 360,
+      "machinery_resolve_bind_verify": 360,
+      "model": 840,
+      "spans_compiled": 10
+    },
+    "episodes": 50,
+    "execution_units": 1200,
+    "machinery_units": 360,
+    "model_units": 840,
+    "total_units": 2410
+  },
+  "n_class_iii_span_occurrences": 120,
+  "n_incorrect": 0,
+  "novelty_rate": 0.5,
+  "span_level_action_correctness": {
+    "ci95": [
+      0.9968089993972651,
+      1.0
+    ],
+    "k": 1200,
+    "n": 1200,
+    "point": 1.0
+  },
+  "span_occurrences": 1200
+}

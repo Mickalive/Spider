@@ -1,0 +1,71 @@
+{
+  "amortized_cost_units_per_episode": 48.0,
+  "arm": "WITHIN_EPISODE_SCRATCHPAD",
+  "arm_extras": {
+    "arm": "WITHIN_EPISODE_SCRATCHPAD",
+    "cache_size": 0,
+    "current_binding_at_end": null,
+    "episodes_run": 50,
+    "goal_width": "wide_mint",
+    "handle_reads_from_bodies": 60,
+    "model_units_charged": 1200,
+    "n_persistent_bindings": 0,
+    "non_scalar_instance_attributes": [
+      "decide"
+    ],
+    "scratchpad_resolved_spans": 120
+  },
+  "class_iii_closure_rate": {
+    "ci95": [
+      0.9689808335812966,
+      1.0
+    ],
+    "k": 120,
+    "n": 120,
+    "point": 1.0
+  },
+  "decision_paths": {
+    "SCRATCHPAD_PREFIX_ONLY": 1080,
+    "SCRATCHPAD_PROPAGATED": 120
+  },
+  "episodes": 50,
+  "false_compiled_replays": 0,
+  "goal_state_success": {
+    "ci95": [
+      0.9286524008666414,
+      1.0
+    ],
+    "k": 50,
+    "n": 50,
+    "point": 1.0
+  },
+  "ledger": {
+    "amortized_cost_units_per_episode": 48.0,
+    "compile_units": 0,
+    "component_detail": {
+      "execution": 1200,
+      "handle_values_read_from_response_bodies": 60,
+      "model": 1200,
+      "spans_resolved_from_scratchpad": 120,
+      "spans_ungated_or_unresolved": 1080
+    },
+    "episodes": 50,
+    "execution_units": 1200,
+    "machinery_units": 0,
+    "model_units": 1200,
+    "total_units": 2400
+  },
+  "n_class_iii_span_occurrences": 120,
+  "n_incorrect": 0,
+  "novelty_rate": 0.25,
+  "span_level_action_correctness": {
+    "ci95": [
+      0.9968089993972651,
+      1.0
+    ],
+    "k": 1200,
+    "n": 1200,
+    "point": 1.0
+  },
+  "span_occurrences": 1200
+}

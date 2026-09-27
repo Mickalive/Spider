@@ -1,0 +1,287 @@
+{
+  "0.00": {
+    "CROSS_EPISODE_COMPILED_BINDING_minus_B-COLD-EXPLORATION": {
+      "ci95": [
+        -24.0,
+        -23.04
+      ],
+      "mean_difference_units": -23.6,
+      "n_episodes_paired": 50,
+      "p_two_sided_bootstrap": 0.0,
+      "resamples": 5000,
+      "seed": 36287182510
+    },
+    "CROSS_EPISODE_COMPILED_BINDING_minus_B-NO-MEMORY-DETERMINISTIC": {
+      "ci95": [
+        13.32,
+        15.14
+      ],
+      "mean_difference_units": 14.32,
+      "n_episodes_paired": 50,
+      "p_two_sided_bootstrap": 0.0,
+      "resamples": 5000,
+      "seed": 36287182510
+    },
+    "WITHIN_EPISODE_SCRATCHPAD_minus_B-COLD-EXPLORATION": {
+      "ci95": [
+        -24.0,
+        -24.0
+      ],
+      "mean_difference_units": -24.0,
+      "n_episodes_paired": 50,
+      "p_two_sided_bootstrap": 0.0,
+      "resamples": 5000,
+      "seed": 36287182510
+    },
+    "WITHIN_EPISODE_SCRATCHPAD_minus_B-NO-MEMORY-CONDITIONED-WIDE": {
+      "ci95": [
+        0.0,
+        0.0
+      ],
+      "mean_difference_units": 0.0,
+      "n_episodes_paired": 50,
+      "p_two_sided_bootstrap": 0.0,
+      "resamples": 5000,
+      "seed": 36287182510
+    },
+    "WITHIN_EPISODE_SCRATCHPAD_minus_B-NO-MEMORY-DETERMINISTIC": {
+      "ci95": [
+        12.48,
+        15.04
+      ],
+      "mean_difference_units": 13.92,
+      "n_episodes_paired": 50,
+      "p_two_sided_bootstrap": 0.0,
+      "resamples": 5000,
+      "seed": 36287182510
+    }
+  },
+  "0.25": {
+    "CROSS_EPISODE_COMPILED_BINDING_minus_B-COLD-EXPLORATION": {
+      "ci95": [
+        -24.0,
+        -23.18
+      ],
+      "mean_difference_units": -23.7,
+      "n_episodes_paired": 50,
+      "p_two_sided_bootstrap": 0.0,
+      "resamples": 5000,
+      "seed": 36287182510
+    },
+    "CROSS_EPISODE_COMPILED_BINDING_minus_B-NO-MEMORY-DETERMINISTIC": {
+      "ci95": [
+        10.86,
+        12.28
+      ],
+      "mean_difference_units": 11.66,
+      "n_episodes_paired": 50,
+      "p_two_sided_bootstrap": 0.0,
+      "resamples": 5000,
+      "seed": 36287182510
+    },
+    "WITHIN_EPISODE_SCRATCHPAD_minus_B-COLD-EXPLORATION": {
+      "ci95": [
+        -24.0,
+        -24.0
+      ],
+      "mean_difference_units": -24.0,
+      "n_episodes_paired": 50,
+      "p_two_sided_bootstrap": 0.0,
+      "resamples": 5000,
+      "seed": 36287182510
+    },
+    "WITHIN_EPISODE_SCRATCHPAD_minus_B-NO-MEMORY-CONDITIONED-WIDE": {
+      "ci95": [
+        0.0,
+        0.0
+      ],
+      "mean_difference_units": 0.0,
+      "n_episodes_paired": 50,
+      "p_two_sided_bootstrap": 0.0,
+      "resamples": 5000,
+      "seed": 36287182510
+    },
+    "WITHIN_EPISODE_SCRATCHPAD_minus_B-NO-MEMORY-DETERMINISTIC": {
+      "ci95": [
+        10.14,
+        12.22
+      ],
+      "mean_difference_units": 11.36,
+      "n_episodes_paired": 50,
+      "p_two_sided_bootstrap": 0.0,
+      "resamples": 5000,
+      "seed": 36287182510
+    }
+  },
+  "0.50": {
+    "CROSS_EPISODE_COMPILED_BINDING_minus_B-COLD-EXPLORATION": {
+      "ci95": [
+        -24.0,
+        -23.48
+      ],
+      "mean_difference_units": -23.8,
+      "n_episodes_paired": 50,
+      "p_two_sided_bootstrap": 0.0,
+      "resamples": 5000,
+      "seed": 36287182510
+    },
+    "CROSS_EPISODE_COMPILED_BINDING_minus_B-NO-MEMORY-DETERMINISTIC": {
+      "ci95": [
+        6.72,
+        7.78
+      ],
+      "mean_difference_units": 7.26,
+      "n_episodes_paired": 50,
+      "p_two_sided_bootstrap": 0.0,
+      "resamples": 5000,
+      "seed": 36287182510
+    },
+    "WITHIN_EPISODE_SCRATCHPAD_minus_B-COLD-EXPLORATION": {
+      "ci95": [
+        -24.0,
+        -24.0
+      ],
+      "mean_difference_units": -24.0,
+      "n_episodes_paired": 50,
+      "p_two_sided_bootstrap": 0.0,
+      "resamples": 5000,
+      "seed": 36287182510
+    },
+    "WITHIN_EPISODE_SCRATCHPAD_minus_B-NO-MEMORY-CONDITIONED-WIDE": {
+      "ci95": [
+        0.0,
+        0.0
+      ],
+      "mean_difference_units": 0.0,
+      "n_episodes_paired": 50,
+      "p_two_sided_bootstrap": 0.0,
+      "resamples": 5000,
+      "seed": 36287182510
+    },
+    "WITHIN_EPISODE_SCRATCHPAD_minus_B-NO-MEMORY-DETERMINISTIC": {
+      "ci95": [
+        6.28,
+        7.72
+      ],
+      "mean_difference_units": 7.06,
+      "n_episodes_paired": 50,
+      "p_two_sided_bootstrap": 0.0,
+      "resamples": 5000,
+      "seed": 36287182510
+    }
+  },
+  "0.75": {
+    "CROSS_EPISODE_COMPILED_BINDING_minus_B-COLD-EXPLORATION": {
+      "ci95": [
+        -24.0,
+        -23.72
+      ],
+      "mean_difference_units": -23.9,
+      "n_episodes_paired": 50,
+      "p_two_sided_bootstrap": 0.0,
+      "resamples": 5000,
+      "seed": 36287182510
+    },
+    "CROSS_EPISODE_COMPILED_BINDING_minus_B-NO-MEMORY-DETERMINISTIC": {
+      "ci95": [
+        2.88,
+        3.62
+      ],
+      "mean_difference_units": 3.26,
+      "n_episodes_paired": 50,
+      "p_two_sided_bootstrap": 0.0,
+      "resamples": 5000,
+      "seed": 36287182510
+    },
+    "WITHIN_EPISODE_SCRATCHPAD_minus_B-COLD-EXPLORATION": {
+      "ci95": [
+        -24.0,
+        -24.0
+      ],
+      "mean_difference_units": -24.0,
+      "n_episodes_paired": 50,
+      "p_two_sided_bootstrap": 0.0,
+      "resamples": 5000,
+      "seed": 36287182510
+    },
+    "WITHIN_EPISODE_SCRATCHPAD_minus_B-NO-MEMORY-CONDITIONED-WIDE": {
+      "ci95": [
+        0.0,
+        0.0
+      ],
+      "mean_difference_units": 0.0,
+      "n_episodes_paired": 50,
+      "p_two_sided_bootstrap": 0.0,
+      "resamples": 5000,
+      "seed": 36287182510
+    },
+    "WITHIN_EPISODE_SCRATCHPAD_minus_B-NO-MEMORY-DETERMINISTIC": {
+      "ci95": [
+        2.72,
+        3.58
+      ],
+      "mean_difference_units": 3.16,
+      "n_episodes_paired": 50,
+      "p_two_sided_bootstrap": 0.0,
+      "resamples": 5000,
+      "seed": 36287182510
+    }
+  },
+  "1.00": {
+    "CROSS_EPISODE_COMPILED_BINDING_minus_B-COLD-EXPLORATION": {
+      "ci95": [
+        -24.0,
+        -23.94
+      ],
+      "mean_difference_units": -23.98,
+      "n_episodes_paired": 50,
+      "p_two_sided_bootstrap": 0.0,
+      "resamples": 5000,
+      "seed": 36287182510
+    },
+    "CROSS_EPISODE_COMPILED_BINDING_minus_B-NO-MEMORY-DETERMINISTIC": {
+      "ci95": [
+        0.9,
+        1.0
+      ],
+      "mean_difference_units": 0.96,
+      "n_episodes_paired": 50,
+      "p_two_sided_bootstrap": 0.0,
+      "resamples": 5000,
+      "seed": 36287182510
+    },
+    "WITHIN_EPISODE_SCRATCHPAD_minus_B-COLD-EXPLORATION": {
+      "ci95": [
+        -24.0,
+        -24.0
+      ],
+      "mean_difference_units": -24.0,
+      "n_episodes_paired": 50,
+      "p_two_sided_bootstrap": 0.0,
+      "resamples": 5000,
+      "seed": 36287182510
+    },
+    "WITHIN_EPISODE_SCRATCHPAD_minus_B-NO-MEMORY-CONDITIONED-WIDE": {
+      "ci95": [
+        0.0,
+        0.0
+      ],
+      "mean_difference_units": 0.0,
+      "n_episodes_paired": 50,
+      "p_two_sided_bootstrap": 0.0,
+      "resamples": 5000,
+      "seed": 36287182510
+    },
+    "WITHIN_EPISODE_SCRATCHPAD_minus_B-NO-MEMORY-DETERMINISTIC": {
+      "ci95": [
+        0.84,
+        1.0
+      ],
+      "mean_difference_units": 0.94,
+      "n_episodes_paired": 50,
+      "p_two_sided_bootstrap": 0.0,
+      "resamples": 5000,
+      "seed": 36287182510
+    }
+  }
+}

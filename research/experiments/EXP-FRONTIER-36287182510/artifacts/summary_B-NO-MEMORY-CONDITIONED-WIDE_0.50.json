@@ -1,0 +1,62 @@
+{
+  "amortized_cost_units_per_episode": 48.0,
+  "arm": "B-NO-MEMORY-CONDITIONED-WIDE",
+  "arm_extras": {
+    "arm": "B-NO-MEMORY-CONDITIONED-WIDE",
+    "cache_size": 0,
+    "current_binding_at_end": null,
+    "goal_width": "wide",
+    "model_calls": 1200,
+    "n_persistent_bindings": 0,
+    "non_scalar_instance_attributes": []
+  },
+  "class_iii_closure_rate": {
+    "ci95": [
+      0.0,
+      0.031019166418703486
+    ],
+    "k": 0,
+    "n": 120,
+    "point": 0.0
+  },
+  "decision_paths": {
+    "GOAL_CONDITIONED": 1200
+  },
+  "episodes": 50,
+  "false_compiled_replays": 0,
+  "goal_state_success": {
+    "ci95": [
+      0.9286524008666414,
+      1.0
+    ],
+    "k": 50,
+    "n": 50,
+    "point": 1.0
+  },
+  "ledger": {
+    "amortized_cost_units_per_episode": 48.0,
+    "compile_units": 0,
+    "component_detail": {
+      "execution": 1200,
+      "model": 1200
+    },
+    "episodes": 50,
+    "execution_units": 1200,
+    "machinery_units": 0,
+    "model_units": 1200,
+    "total_units": 2400
+  },
+  "n_class_iii_span_occurrences": 120,
+  "n_incorrect": 180,
+  "novelty_rate": 0.5,
+  "span_level_action_correctness": {
+    "ci95": [
+      0.8286816663969149,
+      0.8690846331811707
+    ],
+    "k": 1020,
+    "n": 1200,
+    "point": 0.85
+  },
+  "span_occurrences": 1200
+}

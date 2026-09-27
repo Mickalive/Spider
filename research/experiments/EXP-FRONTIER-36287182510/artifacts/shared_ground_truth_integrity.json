@@ -1,0 +1,8 @@
+{
+  "agrees_with_reference_arm_pass": true,
+  "every_gated_handle_equals_declared_pure_function": true,
+  "independent_passes_agree": true,
+  "n_gated_spans_checked": 120,
+  "n_spans_checked": 1200,
+  "purpose": "the single shared declared plan action (prereg.md 10) must be arm-independent and reproducible: two independent reference passes at novelty 0.50 materialise identical actions, they agree with the reference arm's own materialisation, and every gated span's handle equals the declared pure function mint_token(episode counter)"
+}

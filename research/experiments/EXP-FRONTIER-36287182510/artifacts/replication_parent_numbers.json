@@ -1,0 +1,217 @@
+{
+  "by_novelty_rate": {
+    "0.00": {
+      "amortized_cost_units_per_episode": 29.2,
+      "compilable_given_deterministic": 0.8,
+      "compiled_replays": 960,
+      "compiled_share_of_all_spans": 0.8,
+      "episodes": 50,
+      "ledger": {
+        "amortized_cost_units_per_episode": 29.2,
+        "compile_units": 20,
+        "component_detail": {
+          "cache_key_conflicts": 1,
+          "compile": 20,
+          "compiled_replays": 960,
+          "execution": 1200,
+          "model": 240,
+          "spans_compiled": 20
+        },
+        "episodes": 50,
+        "execution_units": 1200,
+        "machinery_units": 0,
+        "model_units": 240,
+        "total_units": 1460
+      },
+      "novelty_rate": 0.0,
+      "per_span_witnessed_determinism_fraction": 1.0,
+      "span_occurrences": 1200,
+      "substrate_requests": 1200
+    },
+    "0.25": {
+      "amortized_cost_units_per_episode": 33.9,
+      "compilable_given_deterministic": 0.7578947368421053,
+      "compiled_replays": 720,
+      "compiled_share_of_all_spans": 0.6,
+      "episodes": 50,
+      "ledger": {
+        "amortized_cost_units_per_episode": 33.9,
+        "compile_units": 15,
+        "component_detail": {
+          "cache_key_conflicts": 1,
+          "compile": 15,
+          "compiled_replays": 720,
+          "execution": 1200,
+          "model": 480,
+          "spans_compiled": 15
+        },
+        "episodes": 50,
+        "execution_units": 1200,
+        "machinery_units": 0,
+        "model_units": 480,
+        "total_units": 1695
+      },
+      "novelty_rate": 0.25,
+      "per_span_witnessed_determinism_fraction": 0.7916666666666666,
+      "span_occurrences": 1200,
+      "substrate_requests": 1200
+    },
+    "0.50": {
+      "amortized_cost_units_per_episode": 38.6,
+      "compilable_given_deterministic": 0.6857142857142857,
+      "compiled_replays": 480,
+      "compiled_share_of_all_spans": 0.4,
+      "episodes": 50,
+      "ledger": {
+        "amortized_cost_units_per_episode": 38.6,
+        "compile_units": 10,
+        "component_detail": {
+          "cache_key_conflicts": 1,
+          "compile": 10,
+          "compiled_replays": 480,
+          "execution": 1200,
+          "model": 720,
+          "spans_compiled": 10
+        },
+        "episodes": 50,
+        "execution_units": 1200,
+        "machinery_units": 0,
+        "model_units": 720,
+        "total_units": 1930
+      },
+      "novelty_rate": 0.5,
+      "per_span_witnessed_determinism_fraction": 0.5833333333333334,
+      "span_occurrences": 1200,
+      "substrate_requests": 1200
+    },
+    "0.75": {
+      "amortized_cost_units_per_episode": 43.3,
+      "compilable_given_deterministic": 0.5333333333333333,
+      "compiled_replays": 240,
+      "compiled_share_of_all_spans": 0.2,
+      "episodes": 50,
+      "ledger": {
+        "amortized_cost_units_per_episode": 43.3,
+        "compile_units": 5,
+        "component_detail": {
+          "cache_key_conflicts": 1,
+          "compile": 5,
+          "compiled_replays": 240,
+          "execution": 1200,
+          "model": 960,
+          "spans_compiled": 5
+        },
+        "episodes": 50,
+        "execution_units": 1200,
+        "machinery_units": 0,
+        "model_units": 960,
+        "total_units": 2165
+      },
+      "novelty_rate": 0.75,
+      "per_span_witnessed_determinism_fraction": 0.375,
+      "span_occurrences": 1200,
+      "substrate_requests": 1200
+    },
+    "1.00": {
+      "amortized_cost_units_per_episode": 47.06,
+      "compilable_given_deterministic": 0.24,
+      "compiled_replays": 48,
+      "compiled_share_of_all_spans": 0.04,
+      "episodes": 50,
+      "ledger": {
+        "amortized_cost_units_per_episode": 47.06,
+        "compile_units": 1,
+        "component_detail": {
+          "cache_key_conflicts": 1,
+          "compile": 1,
+          "compiled_replays": 48,
+          "execution": 1200,
+          "model": 1152,
+          "spans_compiled": 1
+        },
+        "episodes": 50,
+        "execution_units": 1200,
+        "machinery_units": 0,
+        "model_units": 1152,
+        "total_units": 2353
+      },
+      "novelty_rate": 1.0,
+      "per_span_witnessed_determinism_fraction": 0.16666666666666666,
+      "span_occurrences": 1200,
+      "substrate_requests": 1200
+    }
+  },
+  "cost_anchor_comparison": {
+    "deopt_amortized_no_class_iii": {
+      "0.00": {
+        "identical": true,
+        "parent": 29.2,
+        "this_run": 29.2
+      },
+      "0.25": {
+        "identical": true,
+        "parent": 33.9,
+        "this_run": 33.9
+      },
+      "0.50": {
+        "identical": true,
+        "parent": 38.6,
+        "this_run": 38.6
+      },
+      "0.75": {
+        "identical": true,
+        "parent": 43.3,
+        "this_run": 43.3
+      },
+      "1.00": {
+        "identical": true,
+        "parent": 47.06,
+        "this_run": 47.06
+      }
+    }
+  },
+  "parent_expected": {
+    "cold_amortized": {
+      "0.00": 72.0,
+      "0.25": 72.0,
+      "0.50": 72.0,
+      "0.75": 72.0,
+      "1.00": 72.0
+    },
+    "conditioned_amortized": 48.0,
+    "deopt_amortized_no_class_iii": {
+      "0.00": 29.2,
+      "0.25": 33.9,
+      "0.50": 38.6,
+      "0.75": 43.3,
+      "1.00": 47.06
+    },
+    "deopt_amortized_with_class_iii": {
+      "0.00": 34.08,
+      "0.25": 36.64,
+      "0.50": 40.94,
+      "0.75": 44.84,
+      "1.00": 47.06
+    },
+    "false_compiled_replays": {
+      "0.00": 30,
+      "0.25": 30,
+      "0.50": 20,
+      "0.75": 0,
+      "1.00": 0
+    },
+    "replication_at_nu_0.50": {
+      "amortized_cost_units_per_episode": 38.6,
+      "compilable_given_deterministic": 0.6857,
+      "compiled_share_of_all_spans": 0.4,
+      "per_span_witnessed_determinism_fraction": 0.5833
+    },
+    "span_level_action_correctness": {
+      "B-COLD-EXPLORATION": 1.0,
+      "B-NO-MEMORY-CONDITIONED": 0.85,
+      "B-NO-MEMORY-CONDITIONED-NARROW": 0.5666666666666667,
+      "B-NO-MEMORY-DETERMINISTIC_nu_0.50": 0.9833333333333333,
+      "B-NO-MEMORY-DETERMINISTIC_pooled": 0.9866666666666667
+    }
+  }
+}

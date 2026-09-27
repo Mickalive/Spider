@@ -1,0 +1,31 @@
+{
+  "all_passed": true,
+  "handle_changes_with_the_counter": {
+    "all_later_handles_are_distinct": true,
+    "all_later_handles_differ_from_counter_1": true,
+    "all_later_handles_match_the_declared_pure_function": true,
+    "counter_1_handle": "00000001fac708db",
+    "later_counters": {
+      "2": "00000002ef34b84a",
+      "3": "00000003b58b3c4f",
+      "4": "0000000400bf7fac"
+    }
+  },
+  "handle_equals_declared_pure_function": true,
+  "handle_format": {
+    "expected_length": 16,
+    "mint_salt": "014630eeab62b06a",
+    "value": "00000001fac708db"
+  },
+  "handle_is_deterministic_at_a_fixed_counter": {
+    "repeats": 20,
+    "unique_handles": 1,
+    "unique_hashes": 1
+  },
+  "mint_body_is_non_mint_body_plus_exactly_one_field": true,
+  "mint_response_body_carries_capability_handle": true,
+  "mint_status_code_unchanged": true,
+  "n_substrate_requests": 25,
+  "non_mint_put_body_unchanged": true,
+  "purpose": "prereg.md section 5 'Critical modification for this experiment' and no-go 6: the capability handle must be present in the mint response BODY, so class (iii) is an observable-channel problem rather than a server-side plant"
+}

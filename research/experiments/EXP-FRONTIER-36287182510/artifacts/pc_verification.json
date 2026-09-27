@@ -1,0 +1,123 @@
+{
+  "closure_readings": {
+    "emitted_correct": {
+      "B-NO-MEMORY-DETERMINISTIC": {
+        "closed": 200,
+        "closed_by_the_memory_mechanism_itself": 0,
+        "closed_fraction": {
+          "ci95": [
+            0.9811546736227335,
+            1.0
+          ],
+          "k": 200,
+          "n": 200,
+          "point": 1.0
+        },
+        "planted_span_occurrences": 200
+      },
+      "CROSS_EPISODE_COMPILED_BINDING": {
+        "closed": 200,
+        "closed_by_the_memory_mechanism_itself": 0,
+        "closed_fraction": {
+          "ci95": [
+            0.9811546736227335,
+            1.0
+          ],
+          "k": 200,
+          "n": 200,
+          "point": 1.0
+        },
+        "planted_span_occurrences": 200
+      },
+      "WITHIN_EPISODE_SCRATCHPAD": {
+        "closed": 200,
+        "closed_by_the_memory_mechanism_itself": 0,
+        "closed_fraction": {
+          "ci95": [
+            0.9811546736227335,
+            1.0
+          ],
+          "k": 200,
+          "n": 200,
+          "point": 1.0
+        },
+        "planted_span_occurrences": 200
+      }
+    },
+    "mechanism_reading_note": "the planted population is ungated by construction (the class-(iii) plant is off), so neither new arm's value-propagation mechanism can be exercised on it: the scratchpad's mechanism closure is 0 and the ratchet's compiled-replay count is 0, while all three arms emit the declared action. The PC therefore tests goal disambiguation, not binding-value propagation.",
+    "memory_mechanism_only": {
+      "B-NO-MEMORY-DETERMINISTIC": 0,
+      "CROSS_EPISODE_COMPILED_BINDING": 0,
+      "WITHIN_EPISODE_SCRATCHPAD": 0
+    },
+    "what_is_gated": "prereg.md 7 and spec.json positive_control gate no-go 3 on the count of planted spans each arm CLOSES, i.e. whose emitted (method, path, body) equals the declared plan action. The prereg's expected string (200/200, 200/200, 0/200) is only simultaneously attainable under a mechanism reading for the ratchet ('compiles 0/200'), so BOTH readings are reported and the gate is applied to the emitted-correct reading, with the mechanism reading reported alongside."
+  },
+  "control": "PC-PLANTED-DISAMBIGUATION",
+  "declared_deviation_from_parent": "the class-(iii) plant is disabled, as in the parent PC, so the only disambiguation under test is goal-distinct-but-observation-identical",
+  "no_go_3_satisfied": true,
+  "per_episode_distinct_plant_state_keys": {
+    "1": 1,
+    "10": 1,
+    "11": 1,
+    "12": 1,
+    "13": 1,
+    "14": 1,
+    "15": 1,
+    "16": 1,
+    "17": 1,
+    "18": 1,
+    "19": 1,
+    "2": 1,
+    "20": 1,
+    "21": 1,
+    "22": 1,
+    "23": 1,
+    "24": 1,
+    "25": 1,
+    "26": 1,
+    "27": 1,
+    "28": 1,
+    "29": 1,
+    "3": 1,
+    "30": 1,
+    "31": 1,
+    "32": 1,
+    "33": 1,
+    "34": 1,
+    "35": 1,
+    "36": 1,
+    "37": 1,
+    "38": 1,
+    "39": 1,
+    "4": 1,
+    "40": 1,
+    "41": 1,
+    "42": 1,
+    "43": 1,
+    "44": 1,
+    "45": 1,
+    "46": 1,
+    "47": 1,
+    "48": 1,
+    "49": 1,
+    "5": 1,
+    "50": 1,
+    "6": 1,
+    "7": 1,
+    "8": 1,
+    "9": 1
+  },
+  "plant_verified_observation_identical": true,
+  "planted_roles": [
+    "create_resource"
+  ],
+  "planted_span_class_counts": {
+    "i": 1,
+    "ii": 199,
+    "iii": 0
+  },
+  "planted_span_distinct_correct_actions_per_episode": true,
+  "planted_span_occurrences": 200,
+  "prereg_expected": "scratchpad_closure = 200/200, compiled_closure = 200/200, ratchet_closure = 0/200",
+  "protocol": "prereg.md 7: 200 create_resource span occurrences, all issued from (empty store, last_request=GET /) with 4 different resource identities, so the correct action is goal-distinct but the observation is identical"
+}

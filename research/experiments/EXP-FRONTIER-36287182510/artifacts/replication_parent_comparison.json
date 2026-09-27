@@ -1,0 +1,19 @@
+{
+  "fields_compared": [
+    "state_sig",
+    "signature",
+    "response_body_hash",
+    "response_code",
+    "decision_path",
+    "role",
+    "work_item"
+  ],
+  "identical": true,
+  "mismatches": [],
+  "n_field_mismatches": 0,
+  "parent_artifact": "research/experiments/EXP-FRONTIER-36272394045/artifacts/spans_REPL-REFERENCE-PARENT-IDENTICAL.jsonl",
+  "parent_artifact_sha256": "f8f565ac911b33a4122e6f6b340c6bf49b3110d9ebd9dbdb330f3d0a16165e54",
+  "parent_rows": 1200,
+  "purpose": "prereg.md 15.2 / no-go 2: reproduce the parent packet's reference-arm raw span evidence field for field",
+  "this_run_rows": 1200
+}

@@ -158,6 +158,41 @@ class PlanStep:
                 novel=int(self.novel),
                 tok=int(self.token_required),
             )
+        if width == "wide_mint":
+            # EXP-FRONTIER-36287182510 DECLARED INSTRUMENT DEVIATION DI-01.
+            #
+            # Identical to ``wide`` plus ONE extra field, ``mint={0|1}``, which
+            # says whether the declared plan action for this span is the
+            # capability-minting create ``PUT /resources/{rid}?mint=1``.
+            #
+            # Why it is necessary: the capability handle is obtainable ONLY by
+            # issuing a minting create and reading the handle out of that
+            # response body (prereg.md section 5). Without the flag an arm that
+            # emits ``PUT /resources/{rid}`` never receives a handle, so its
+            # span-level action correctness is capped at 0.95 by construction
+            # (the 0.05 is the planted mint-create share, measured in the parent
+            # packet as B-NO-MEMORY-CONDITIONED's 0.0500 mint-create residual) --
+            # a cap created by a representation choice, not by memory scope.
+            #
+            # What it does NOT leak: the handle VALUE is still never in any
+            # prefix, so a class-(iii) span's correct action still depends on a
+            # value absent from the observable state AND from the goal prefix.
+            # ``wide`` and ``narrow`` are byte-for-byte unchanged, so the
+            # inherited B-NO-MEMORY-CONDITIONED-WIDE and
+            # B-NO-MEMORY-CONDITIONED-NARROW baselines remain the parent's arms.
+            return (
+                "spider-frontier-goal-v1 || intent={role} || step={i}/24 || work_item={w} || "
+                "key={key} || body={body} || novel={novel} || token_required={tok} || mint={mint}"
+            ).format(
+                role=self.role,
+                i=self.index,
+                w=self.work_item,
+                key=self.goal_key if self.goal_key is not None else "-",
+                body=canonical_json(self.body) if self.body is not None else "-",
+                novel=int(self.novel),
+                tok=int(self.token_required),
+                mint=int(self.mint),
+            )
         if width == "narrow":
             return "spider-frontier-goal-v1 || intent={role} || key={key}".format(
                 role=self.role, key=self.goal_key if self.goal_key is not None else "-"

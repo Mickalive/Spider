@@ -1,0 +1,494 @@
+{
+  "all_passed": true,
+  "checks": [
+    {
+      "check": "scratchpad_action_signature_is_exactly_obs_goal_scratchpad",
+      "detail": {
+        "parameters": [
+          "observable_state_sig",
+          "goal_prefix",
+          "scratchpad_values"
+        ]
+      },
+      "passed": true
+    },
+    {
+      "check": "always_mint_action_signature_is_identical",
+      "detail": {
+        "parameters": [
+          "observable_state_sig",
+          "goal_prefix",
+          "scratchpad_values"
+        ]
+      },
+      "passed": true
+    },
+    {
+      "check": "scratchpad_action_source_has_no_arm_state",
+      "detail": {
+        "found": []
+      },
+      "passed": true
+    },
+    {
+      "check": "scratchpad_action_reads_only_frozen_module_constants",
+      "detail": {
+        "globals": [
+          "EXPECTED_CODES",
+          "ROLE_METHOD",
+          "TOKEN_PARAM",
+          "json",
+          "parse_goal_prefix",
+          "resolve_handle"
+        ]
+      },
+      "passed": true
+    },
+    {
+      "check": "purity_under_reordering_and_repetition",
+      "detail": {
+        "n_pairs": 480
+      },
+      "passed": true
+    },
+    {
+      "check": "purity_under_repetition",
+      "detail": {
+        "n_pairs": 480
+      },
+      "passed": true
+    },
+    {
+      "check": "arm_dataclass_stores_no_span_history",
+      "detail": {
+        "fields": [
+          "arm",
+          "decide",
+          "episodes_run",
+          "goal_width",
+          "handle_reads_from_bodies",
+          "ledger",
+          "model_units_charged",
+          "scratchpad_resolved_spans"
+        ]
+      },
+      "passed": true
+    },
+    {
+      "check": "two_fresh_arm_instances_agree",
+      "detail": {},
+      "passed": true
+    },
+    {
+      "check": "scratchpad_is_a_local_of_run_episode",
+      "detail": {
+        "local_annotated_assignments": [
+          "scratchpad_values"
+        ],
+        "self_attributes_referenced": [
+          "arm",
+          "decide",
+          "episodes_run",
+          "goal_width",
+          "handle_reads_from_bodies",
+          "ledger",
+          "model_units_charged",
+          "scratchpad_resolved_spans"
+        ]
+      },
+      "passed": true
+    },
+    {
+      "check": "no_scratchpad_attribute_on_the_arm",
+      "detail": {
+        "fields": [
+          "arm",
+          "decide",
+          "episodes_run",
+          "goal_width",
+          "handle_reads_from_bodies",
+          "ledger",
+          "model_units_charged",
+          "scratchpad_resolved_spans"
+        ]
+      },
+      "passed": true
+    },
+    {
+      "check": "capability_handle_absent_from_both_inputs",
+      "detail": {
+        "leaks": [],
+        "n_token_spans_checked": 12
+      },
+      "passed": true
+    },
+    {
+      "check": "goal_prefix_never_contains_a_handle_query",
+      "detail": {
+        "bad": []
+      },
+      "passed": true
+    },
+    {
+      "check": "wide_mint_is_wide_plus_exactly_the_mint_field",
+      "detail": {
+        "wide": [
+          "body",
+          "intent",
+          "key",
+          "novel",
+          "step",
+          "token_required",
+          "work_item"
+        ],
+        "wide_mint": [
+          "body",
+          "intent",
+          "key",
+          "mint",
+          "novel",
+          "step",
+          "token_required",
+          "work_item"
+        ]
+      },
+      "passed": true
+    },
+    {
+      "check": "narrow_prefix_unchanged",
+      "detail": {
+        "narrow_fields": [
+          "intent",
+          "key"
+        ]
+      },
+      "passed": true
+    },
+    {
+      "check": "prefix_version_unchanged",
+      "detail": {
+        "versions": [
+          "spider-frontier-goal-v1"
+        ]
+      },
+      "passed": true
+    },
+    {
+      "check": "no_handle_is_ever_invented_or_guessed",
+      "detail": {
+        "bad": [],
+        "n_gated_spans": 12
+      },
+      "passed": true
+    },
+    {
+      "check": "resolve_handle_reads_by_rid_for_a_resource_span",
+      "detail": {},
+      "passed": true
+    },
+    {
+      "check": "resolve_handle_reads_last_handle_for_the_collection_span",
+      "detail": {},
+      "passed": true
+    },
+    {
+      "check": "resolve_handle_reports_absence_rather_than_guessing",
+      "detail": {},
+      "passed": true
+    },
+    {
+      "check": "resolve_handle_on_empty_scratchpad",
+      "detail": {},
+      "passed": true
+    },
+    {
+      "check": "scratchpad_action_never_mutates_the_scratchpad",
+      "detail": {
+        "scratchpad_after": {
+          "by_rid": {
+            "r-001-0": "AAAA",
+            "r-001-1": "BBBB"
+          },
+          "last_handle": "CCCC"
+        }
+      },
+      "passed": true
+    },
+    {
+      "check": "carrying_a_handle_does_not_change_any_ungated_action",
+      "detail": {
+        "differing_indices": []
+      },
+      "passed": true
+    },
+    {
+      "check": "goal_only_plan_withholds_the_oracle_action",
+      "detail": {
+        "attempts": [
+          {
+            "attribute": "path",
+            "raised": true
+          },
+          {
+            "attribute": "body",
+            "raised": true
+          },
+          {
+            "attribute": "mint",
+            "raised": true
+          },
+          {
+            "attribute": "token_param",
+            "raised": true
+          },
+          {
+            "attribute": "goal_key",
+            "raised": true
+          },
+          {
+            "attribute": "expect_code",
+            "raised": true
+          }
+        ]
+      },
+      "passed": true
+    },
+    {
+      "check": "goal_step_withholds_the_oracle_action",
+      "detail": {
+        "attempts": [
+          {
+            "attribute": "path",
+            "raised": true
+          },
+          {
+            "attribute": "body",
+            "raised": true
+          },
+          {
+            "attribute": "mint",
+            "raised": true
+          },
+          {
+            "attribute": "token_param",
+            "raised": true
+          }
+        ]
+      },
+      "passed": true
+    },
+    {
+      "check": "goal_only_plan_still_exposes_the_declared_conditioning_set",
+      "detail": {
+        "allowed": [
+          "goal_prefix",
+          "index",
+          "novel",
+          "role",
+          "token_required",
+          "work_item"
+        ]
+      },
+      "passed": true
+    },
+    {
+      "check": "episode_shape_frozen_24_spans",
+      "detail": {
+        "episodes_per_rate": 50,
+        "spans_per_episode": 24
+      },
+      "passed": true
+    },
+    {
+      "check": "class_iii_realized_span_fraction_is_0_10",
+      "detail": {
+        "class_iii_spans": 120,
+        "planted_work_items": 60
+      },
+      "passed": true
+    },
+    {
+      "check": "base_plan_identical_to_parent_generator",
+      "detail": {
+        "mismatches": []
+      },
+      "passed": true
+    },
+    {
+      "check": "every_gated_span_uses_the_handle_minted_in_its_own_episode",
+      "detail": {
+        "bad": [],
+        "n_gated_spans": 14
+      },
+      "passed": true
+    },
+    {
+      "check": "every_gated_span_is_resolved_from_the_scratchpad",
+      "detail": {
+        "n_unresolved": 0
+      },
+      "passed": true
+    },
+    {
+      "check": "all_gated_responses_were_expected_codes",
+      "detail": {
+        "n": 14
+      },
+      "passed": true
+    },
+    {
+      "check": "no_capability_handle_is_retained_on_the_arm",
+      "detail": {
+        "leaks": []
+      },
+      "passed": true
+    },
+    {
+      "check": "ledger_charges_no_compile_and_no_machinery",
+      "detail": {
+        "compile": 0,
+        "execution": 144,
+        "machinery": 0,
+        "model": 144
+      },
+      "passed": true
+    },
+    {
+      "check": "arm_reads_its_handles_from_response_bodies_only",
+      "detail": {
+        "reads": 7
+      },
+      "passed": true
+    },
+    {
+      "check": "cache_key_is_state_plus_binding",
+      "detail": {
+        "n_keys": 96
+      },
+      "passed": true
+    },
+    {
+      "check": "binding_key_is_populated_after_a_mint_is_read",
+      "detail": {
+        "n_spans_with_binding_key": 10
+      },
+      "passed": true
+    },
+    {
+      "check": "compiled_binding_persists_state_across_episodes",
+      "detail": {
+        "cache_size": 63,
+        "induced_bindings": 4
+      },
+      "passed": true
+    },
+    {
+      "check": "compiled_binding_charges_machinery_only_on_cache_serve",
+      "detail": {
+        "machinery": 8,
+        "served": 8
+      },
+      "passed": true
+    },
+    {
+      "check": "mint_response_body_carries_the_capability_handle",
+      "detail": {
+        "capability_handle": "00000001fac708db"
+      },
+      "passed": true
+    },
+    {
+      "check": "mint_body_is_the_non_mint_body_plus_exactly_one_field",
+      "detail": {
+        "mint_keys": [
+          "capability_handle",
+          "created",
+          "record",
+          "rid"
+        ],
+        "plain_keys": [
+          "created",
+          "record",
+          "rid"
+        ]
+      },
+      "passed": true
+    },
+    {
+      "check": "non_mint_put_body_is_unchanged_by_the_modification",
+      "detail": {
+        "non_mint_body": {
+          "created": true,
+          "record": {
+            "title": "t",
+            "value": 1
+          },
+          "rid": "alpha"
+        }
+      },
+      "passed": true
+    },
+    {
+      "check": "mint_status_code_unchanged",
+      "detail": {
+        "mint": 201,
+        "plain": 201
+      },
+      "passed": true
+    },
+    {
+      "check": "handle_equals_the_declared_pure_function",
+      "detail": {
+        "handle": "00000001fac708db",
+        "mint_token_1": "00000001fac708db"
+      },
+      "passed": true
+    },
+    {
+      "check": "always_mint_arm_uses_the_parent_7_field_prefix",
+      "detail": {
+        "goal_width": "wide"
+      },
+      "passed": true
+    },
+    {
+      "check": "always_mint_requests_a_handle_the_declared_action_does_not_need",
+      "detail": {
+        "declared": "/resources/r-002-1",
+        "sensitivity_emitted": "/resources/r-002-1?mint=1"
+      },
+      "passed": true
+    },
+    {
+      "check": "primary_arm_follows_the_declared_mint_flag_on_a_planted_create",
+      "detail": {
+        "planted_declared": "/resources/r-001-0?mint=1",
+        "planted_mint_flag": true,
+        "ungated_declared": "/resources/r-002-1",
+        "ungated_mint_flag": false
+      },
+      "passed": true
+    },
+    {
+      "check": "mint_flag_is_delivered_only_through_the_goal_prefix",
+      "detail": {
+        "goal_only_plan_allowed": [
+          "goal_prefix",
+          "index",
+          "novel",
+          "role",
+          "token_required",
+          "work_item"
+        ],
+        "planstep_exposes_mint": true
+      },
+      "passed": true
+    }
+  ],
+  "experiment_id": "EXP-FRONTIER-36287182510",
+  "frozen_check_floor_declared_in_prereg": 14,
+  "goal_only_plan_attributeerror_guard_present": true,
+  "n_checks": 47,
+  "n_failed": 0,
+  "purpose": "prereg.md section 6.1 statelessness guarantee and section 17 no-go condition 5: the within-episode scratchpad holds no state between episodes, reads its binding values only out of its own response bodies, and physically cannot reach the oracle action"
+}
