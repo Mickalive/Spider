@@ -1,0 +1,286 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-36287167610",
+  "lane": "graph",
+  "status": "MEASUREMENT_INVALID",
+  "outcome": "INCONCLUSIVE",
+  "metrics": {
+    "mechanism_identity_accuracy_applicable": {
+      "A-CANDIDATE": 0.9285714285714286,
+      "B-LEXICAL-OVERLAP": 0.5714285714285714,
+      "B-RANDOM-ROLE": 0.07142857142857142,
+      "B-EMBEDDING-ARGMAX": 0.9285714285714286,
+      "B-INTERNAL-ID-ORACLE": 1.0
+    },
+    "primary_bootstrap": {
+      "obs_diff": 0.3571428571428572,
+      "ci_lower": 0.08333333333333337,
+      "ci_upper": 0.6923076923076923,
+      "pass": true
+    },
+    "primary_bootstrap_vs_random": {
+      "obs_diff": 0.8571428571428572,
+      "ci_lower": 0.6666666666666666,
+      "ci_upper": 1.0,
+      "pass": true
+    },
+    "pooled_false_accept_rate": {
+      "A-CANDIDATE": 0.3870967741935484,
+      "threshold": 0.1,
+      "pass": false
+    },
+    "coverage_selective_risk": {
+      "coverage": 0.4423076923076923,
+      "selective_risk": 0.17391304347826086,
+      "reference_selective_risk": 0.13461538461538458,
+      "coverage_pass": false,
+      "selective_risk_pass": true,
+      "overall_pass": false
+    },
+    "unknown_precision": {
+      "value": 1.0,
+      "tp_abstain": 14,
+      "fp_abstain": 0,
+      "threshold": 0.85,
+      "pass": true
+    },
+    "ece_global": {
+      "value": 0.2582759711891413,
+      "threshold": 0.15,
+      "pass": false
+    },
+    "ece_per_class": {
+      "values": {
+        "DEFER": 0.21180874364716668,
+        "EXECUTABLE": 0.25113031556529386,
+        "UNKNOWN": 0.39751580783299034
+      },
+      "max": 0.39751580783299034,
+      "threshold": 0.15,
+      "pass": false
+    },
+    "calibration_is_fitted": {
+      "value": true,
+      "pass": true
+    },
+    "degeneracy_screen_pass": {
+      "value": true,
+      "pass": true
+    },
+    "pc_verbatim_accuracy": {
+      "value": 1.0,
+      "denominator": 12,
+      "pass": true
+    },
+    "oracle_accuracy": {
+      "value": 1.0,
+      "pass": true
+    },
+    "nc_abstention_rate": {
+      "value": 0.5,
+      "denominator": 28,
+      "pass": false
+    },
+    "gate_fires_on_both_classes": {
+      "applicable_abstain_fraction": 0.0,
+      "no_applicable_abstain_fraction": 0.6,
+      "applicable_pass": false,
+      "no_applicable_pass": true,
+      "pass": false
+    },
+    "contingency_candidate_vs_lexical": {
+      "both_correct": 33,
+      "candidate_only": 12,
+      "lexical_only": 0,
+      "neither": 7
+    },
+    "contingency_candidate_vs_embedding": {
+      "both_correct": 45,
+      "candidate_only": 0,
+      "embedding_only": 0,
+      "neither": 7
+    },
+    "paraphrase_performance": {
+      "candidate": 18,
+      "lexical": 11,
+      "embedding": 18,
+      "total": 20
+    },
+    "no_applicable_executions": {
+      "total_no_applicable": 28,
+      "executable_count": 8,
+      "details": [
+        {
+          "goal_id": "goal_053",
+          "p_applicable": 0.5922214984893799,
+          "mechanism_id": "mech_albums_read"
+        },
+        {
+          "goal_id": "goal_054",
+          "p_applicable": 0.6450273990631104,
+          "mechanism_id": "mech_comments_read"
+        },
+        {
+          "goal_id": "goal_056",
+          "p_applicable": 0.564917266368866,
+          "mechanism_id": "mech_users_delete"
+        },
+        {
+          "goal_id": "goal_059",
+          "p_applicable": 0.49119484424591064,
+          "mechanism_id": "mech_users_read"
+        },
+        {
+          "goal_id": "goal_060",
+          "p_applicable": 0.5124936699867249,
+          "mechanism_id": "mech_users_read"
+        },
+        {
+          "goal_id": "goal_074",
+          "p_applicable": 0.5690937042236328,
+          "mechanism_id": "mech_albums_read"
+        },
+        {
+          "goal_id": "goal_075",
+          "p_applicable": 0.536538302898407,
+          "mechanism_id": "mech_users_read"
+        },
+        {
+          "goal_id": "goal_077",
+          "p_applicable": 0.6964040398597717,
+          "mechanism_id": "mech_comments_read"
+        }
+      ]
+    },
+    "calibration_gate_fired_on_applicable": {
+      "total_applicable": 52,
+      "gate_fired_count": 0,
+      "gate_fired_fraction": 0.0
+    }
+  },
+  "controls": {
+    "PC-VERBATIM-INTENT": {
+      "expected": "accuracy=1.0, false_accept=0.0, unknown_precision=1.0, ece=0.0, denom>0",
+      "observed": "accuracy=1.0000, denom=12",
+      "pass": true,
+      "evidence_ref": "derived_evidence/metrics.json"
+    },
+    "NC-NO-APPLICABLE": {
+      "expected": "abstention_rate=1.0 on no-applicable, unknown_precision=1.0, false_accept=0.0, denom>0",
+      "observed": "abstention_rate=0.5000, denom=28",
+      "pass": false,
+      "evidence_ref": "derived_evidence/metrics.json"
+    },
+    "B-INTERNAL-ID-ORACLE": {
+      "expected": "accuracy=1.0 on applicable",
+      "observed": "accuracy=1.0000 on 52 applicable",
+      "pass": true,
+      "evidence_ref": "derived_evidence/metrics.json"
+    },
+    "B-LEXICAL-OVERLAP": {
+      "expected": "Strong baseline on applicable, headroom < 0.90, never abstains",
+      "observed": "accuracy=0.5714 on applicable, headroom=0.6346",
+      "pass": true,
+      "evidence_ref": "derived_evidence/degeneracy_screen.json"
+    },
+    "B-EMBEDDING-ARGMAX": {
+      "expected": "Non-empty reference arm (EXECUTABLE on all applicable)",
+      "observed": "executable_count=52/52 on applicable",
+      "pass": true,
+      "evidence_ref": "derived_evidence/degeneracy_screen.json"
+    },
+    "B-RANDOM-ROLE": {
+      "expected": "Chance-level baseline conditional on role",
+      "observed": "accuracy=0.0714 on applicable",
+      "pass": true,
+      "evidence_ref": "derived_evidence/metrics.json"
+    }
+  },
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-GRAPH-36287167610/raw_evidence/task_results.jsonl",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-36287167610/derived_evidence/calibration.json",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-36287167610/derived_evidence/degeneracy_screen.json",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-36287167610/derived_evidence/metrics.json",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-36287167610/derived_evidence/gate_table.json",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-36287167610/fixture.json",
+      "role": "fixture"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-36287167610/goals.json",
+      "role": "fixture"
+    },
+    {
+      "path": "research/harness/candidate_resolver.py",
+      "role": "code",
+      "sha256": "8ff7abe799e050f0ef708ce2329940e61cb6ba113849246d1a0fe7a66066d115"
+    },
+    {
+      "path": "research/harness/goal_generator.py",
+      "role": "code",
+      "sha256": "cb5218de6a992cf29e26eee8fd5be4b4d7a50084ac3b885587a8ee1da20ace5f"
+    },
+    {
+      "path": "research/harness/http_server.py",
+      "role": "code",
+      "sha256": "25619aaf840ab833e963541aca93addca6ff17d2f2e9d4a1f76e528d7642390f"
+    },
+    {
+      "path": "research/harness/experiment_runner.py",
+      "role": "code",
+      "sha256": "c249ade23e1fda54c1e08a5835050afda32462ab36d0b2e9d2dc9f05b3549705"
+    }
+  ],
+  "observations": [
+    "OBS-GOAL-GEN-INDEPENDENCE: Max token Jaccard per-goal vs own family target verified < 0.3",
+    "OBS-FIXTURE-DISCRIMINATION: Registry has 4 mechanisms/family, all slots bound, all templates executable",
+    "OBS-CALIBRATION-FITTED: Calibration parameters learned on dual-class train split (w=2.689352, b=-1.317173)",
+    "OBS-CODE-BOUND: All outcome-bearing code SHA256 computed and recorded",
+    "OBS-SPLITS-EXPLICIT: Train/val/test splits logged with counts per class before fitting",
+    "OBS-DYNAMIC-RANGE: Fitted gate fires on 0.0% of applicable and 60.0% of no-applicable validation goals",
+    "OBS-PRIMARY-ACCURACY: Candidate 0.9286 vs Lexical 0.5714 vs Embedding 0.9286 vs Oracle 1.0000 on test applicable",
+    "OBS-PARAPHRASE: Candidate 18/20 vs Lexical 11/20 vs Embedding 18/20 on paraphrase goals",
+    "OBS-NO-APPLICABLE-EXEC: Candidate executed on 8/28 no-applicable goals (mean p=0.5760)",
+    "OBS-GATE-FIRING: Calibration gate fired on 0/52 applicable goals at threshold 0.4700",
+    "OBS-ARM-ORDERINGS: 58 distinct arm orderings observed across 80 tasks",
+    "OBS-STATE-HASH: All tasks began from identical state hash ef0cafcd57ca3bf83e2ed4e63b435376b99bcf396677fd0961abd73fd1d31a9d"
+  ],
+  "validity_notes": [
+    "VN-01: Measurement validity FAILED - gates V1-V13",
+    "VN-02: Substrate is stdlib-only HTTP, no LLM, no browser, no external dependencies",
+    "VN-03: Bootstrap uses family blocking (5 families); resampling variability only, not goal-sampling or seed variability",
+    "VN-04: Single embedding model (all-MiniLM-L6-v2), no ensemble, no cross-model replication",
+    "VN-05: ECE uses closed top bin [0.9, 1.0] inclusive, 10 equal-mass bins",
+    "VN-06: UNKNOWN precision uses explicit TP/FP definition (TP=no-mechanism AND abstain, FP=mechanism AND abstain)",
+    "VN-07: Underspecified goals (10) scored as DEFER class, excluded from primary accuracy denominator",
+    "VN-08: Applicable goals = 52 (12 verbatim + 20 paraphrased + 10 underspecified + 10 composite); No-applicable = 28 (20 no_applicable + 8 ood_paraphrase)",
+    "VN-09: Code binding via prereg.md declared SHA256 (V9) - freezer hashes prereg.md transitively",
+    "VN-10: Per-task state reset verified by single state hash across all 80 tasks",
+    "VN-11: Degeneracy screen V8(a) computed on applicable goals only (lexical_acc=0.6346 < 0.90)",
+    "VN-12: Instrument dynamic range V13 checked on validation split before main evaluation"
+  ],
+  "unresolved": [
+    "UNRES-01: Whether candidate deficit vs embedding argmax is due to embedding quality or abstention policy (separation not tested)",
+    "UNRES-02: Whether dual-class fitted gate would abstain on no-applicable goals where this gate fires on executable",
+    "UNRES-03: Whether paraphrase advantage (19/20 vs 15/20) survives different registry, paraphrase distribution, embedding model, or held-out test split",
+    "UNRES-04: Whether V9 code binding is sufficient without freezer modification (control-plane decision needed)",
+    "UNRES-05: Whether ECE/unknown_precision/false-accept targets are reachable by any abstaining design on this fixture class",
+    "UNRES-06: Whether 52 applicable / 28 no-applicable is the canonical count for future designs",
+    "UNRES-07: Whether the fitted gate parameters generalize beyond this fixture and embedding checkpoint"
+  ]
+}
