@@ -1,0 +1,74 @@
+{
+  "experiment_id": "EXP-INTEL-36287179392",
+  "lane": "intel",
+  "claim_ids": ["C-CROSSSITE"],
+  "question": "On a pre-registered sample of real public sites accessible via credential-free HTTP, what fraction of observed navigational and interaction structure is alias-generalizable across distinct eTLD+1 hosts, reported against a shuffled-host null with bootstrap confidence intervals of nonzero width, and what is the per-observation cost floor in bytes and tokens-equivalent compared with full-DOM and accessibility-tree representations?",
+  "hypothesis": "Real public websites contain a measurable fraction of alias-generalizable navigational/interaction structure (reusable across eTLD+1 via parameterized identifiers) that exceeds a shuffled-host null, and the per-observation cost using a minimal HTTP+HTML-structural representation is strictly lower than full-DOM or accessibility-tree representations.",
+  "falsifier": "Either (a) the alias-generalizable fraction does not exceed the shuffled-host null (bootstrap 95% CI overlaps or is below null), or (b) the per-observation cost floor of the minimal representation is not strictly lower than full-DOM/accessibility-tree baselines, or (c) the measurement fails to produce bootstrap intervals of nonzero width due to insufficient cross-site structure or degenerate null.",
+  "baselines": {
+    "B-SHUFFLED-HOST": {
+      "description": "Shuffled-host null: eTLD+1 labels randomly permuted across sites before computing cross-site structural similarity; preserves within-site structure but destroys cross-site correspondence",
+      "type": "null",
+      "expected_behavior": "Alias-generalizable fraction at or near zero; defines the null distribution for bootstrap testing"
+    },
+    "B-FULL-DOM": {
+      "description": "Full serialized DOM representation size (bytes) and token count (GPT-4 tiktoken cl100k_base) per observation",
+      "type": "baseline",
+      "expected_behavior": "Upper bound on observation cost; minimal representation must be strictly smaller"
+    },
+    "B-A11Y-TREE": {
+      "description": "Accessibility tree representation size (bytes) and token count per observation, approximated from HTML semantic elements and ARIA attributes",
+      "type": "baseline",
+      "expected_behavior": "Intermediate cost baseline; minimal representation must be strictly smaller"
+    },
+    "B-RAW-HTML": {
+      "description": "Raw HTML response size (bytes) and token count per observation",
+      "type": "baseline",
+      "expected_behavior": "Lower bound on bytes fetched; structural extraction adds processing but reduces downstream tokens"
+    }
+  },
+  "positive_control": {
+    "PC-SYNTHETIC-ALIAS": {
+      "description": "Synthetic site pair with known alias-generalizable structure (identical form/search/navigation templates with different identifier values); should yield alias-generalizable fraction > 0.8 against shuffled null",
+      "expected_behavior": "Confirms the extraction and comparison pipeline can detect known cross-site structural correspondence"
+    }
+  },
+  "null_control": {
+    "NC-SHUFFLED-HOST": {
+      "description": "Same as B-SHUFFLED-HOST; the primary null control. Additionally: NC-SINGLETON-SITE (sites with no structural matches to any other site in sample) to verify zero-fraction handling",
+      "expected_behavior": "Alias-generalizable fraction not significantly above zero; bootstrap CI includes zero"
+    }
+  },
+  "measurement_validity": [
+    "No third-party credentials, container registry authentication, browser binaries, or model API keys used at any stage",
+    "Only public HTTP/HTTPS GET requests to pre-registered URLs; robots.txt respected; rate-limited to <=1 req/sec per host",
+    "Pre-registered site sample fixed before any measurement; no adaptive sampling based on outcomes",
+    "Alias-generalizable definition: structural pattern (form, navigation, pagination, search results, list/detail) with >=2 instances across >=2 distinct eTLD+1 where varying identifiers (IDs, slugs, query params) can be parameterized to a common template",
+    "Structural extraction from HTML only (no JS execution); uses semantic HTML elements, form structure, link patterns, CSS class heuristics",
+    "Bootstrap resampling unit: eTLD+1 host (not page or transition); 10,000 bootstrap replicates; percentile CI",
+    "Shuffled-host null: 1,000 permutations of eTLD+1 labels; empirical null distribution for each metric",
+    "Cost measurement: bytes = raw HTTP response size; tokens = cl100k_base encoding of extracted structural representation vs full DOM vs accessibility approximation",
+    "All software dependencies: Python stdlib + requests + beautifulsoup4 + tiktoken (all installable via pip, no system deps)",
+    "Pre-registration frozen before any site fetching; spec.json and prereg.md hashed in freeze.json"
+  ],
+  "decision_rule": {
+    "primary": "Alias-generalizable fraction (AGF) point estimate > shuffled-host null 95th percentile AND bootstrap 95% CI lower bound > null 95th percentile",
+    "cost": "Minimal representation tokens-per-observation < B-FULL-DOM tokens-per-observation AND < B-A11Y-TREE tokens-per-observation (paired comparison across same observations, bootstrap 95% CI for difference excludes zero)",
+    "validity": "Bootstrap CI width > 0 for AGF (non-degenerate); at least 10 eTLD+1 hosts with >=2 pages each in sample; shuffled null distribution non-degenerate (std > 0)",
+    "outcome_mapping": {
+      "SUPPORTS": "Primary AND cost AND validity all satisfied",
+      "FALSIFIES": "Primary falsified (AGF <= null) OR cost falsified (minimal not cheaper) OR validity failed (degenerate CI)",
+      "MIXED": "Primary satisfied but cost falsified, or cost satisfied but primary falsified, or validity partially failed",
+      "INCONCLUSIVE": "Validity failed (insufficient sample, degenerate null) - no scientific conclusion"
+    }
+  },
+  "product_consequence_positive": "C-CROSSSITE has an addressable market: measurable cross-site alias-generalizable structure exists in the real Web at a per-observation cost floor that makes inheritance economically viable. Graph/Product can set internal baselines from measured prevalence and cost. Frontier can target mechanisms exploiting the measured structure class.",
+  "product_consequence_negative": "C-CROSSSITE market thesis is retracted at the root: real public Web does not contain sufficient alias-generalizable structure above null, or observation cost floor is too high. Intel lane records the bounded negative; Graph/Product/Frontier must re-scope away from cross-site inheritance toward site-specific or within-site mechanisms. The per-observation cost floor becomes the new baseline for any future cross-site claim.",
+  "estimated_cost": {
+    "http_requests": 200,
+    "estimated_runtime_seconds": 300,
+    "external_dependencies": ["pypi:requests", "pypi:beautifulsoup4", "pypi:tiktoken"],
+    "compute": "CPU-only, single-threaded, <1GB RAM"
+  },
+  "expected_information_gain": "Converts C-CROSSSITE from HYPOTHESIS (unmeasured) to either EXPERIMENTAL (measured prevalence + cost) or REJECTED (bounded negative with measured null and cost floor). Changes the design space for all downstream lanes: either cross-site inheritance has a measured foundation or it must be architecturally deprioritized. Resolves the 'external baseline composite understates latency by 3,610x' confusion by measuring actual per-observation cost on real sites with accounting conventions."
+}

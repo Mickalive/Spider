@@ -1,0 +1,334 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-FRONTIER-36287182510",
+  "lane": "frontier",
+  "status": "PASS",
+  "producer_claim_supported": true,
+  "required_fixes": [],
+  "validity_findings": [
+    {
+      "id": "VF-01",
+      "finding": "All 10 frozen controls PASS: CTRL-FROZEN-INPUTS, CTRL-SUBSTRATE-IDEMPOTENCY, CTRL-MINT-CHANNEL, CTRL-ARM-STATELESSNESS, CTRL-REPL-PARENT-NUMBERS, CTRL-SHARED-GROUND-TRUTH, PC-PLANTED-DISAMBIGUATION, NC-UNIQUE-STATES, CTRL-BASELINE-REPLICATION, CTRL-GOAL-STATE-SUCCESS. No no-go conditions fired. Measurement transaction completed validly.",
+      "evidence": [
+        "artifacts/baseline_replication.json",
+        "artifacts/replication_parent_comparison.json",
+        "artifacts/substrate_idempotency.json",
+        "artifacts/mint_channel_check.json",
+        "artifacts/scratchpad_statelessness_test.json",
+        "artifacts/shared_ground_truth_integrity.json",
+        "artifacts/pc_verification.json",
+        "artifacts/nc_verification.json",
+        "artifacts/goal_state_success.json"
+      ],
+      "severity": "informational"
+    },
+    {
+      "id": "VF-02",
+      "finding": "The WITHIN_EPISODE_SCRATCHPAD arm genuinely closes class-(iii) spans via within-episode value propagation: 600/600 class-(iii) spans closed, all 600 via SCRATCHPAD_PROPAGATED decision path, 0 via oracle fallback. This validates the mechanism reads the capability_handle from mint response bodies and propagates it to subsequent read_resource and list_resources spans within the same episode.",
+      "evidence": [
+        "artifacts/scratchpad_closure.json",
+        "result.json.metrics.class_iii_closure_rate"
+      ],
+      "severity": "supporting"
+    },
+    {
+      "id": "VF-03",
+      "finding": "The CROSS_EPISODE_COMPILED_BINDING arm's class-(iii) closure of 1.0000 is ENTIRELY oracle-mediated (DEOPT_TO_MODEL): 0/600 class-(iii) spans served from its binding-keyed cache, all 600 via oracle fallback. The preregistered cache key includes the handle VALUE (a pure function of episode counter), making cache hits on class-(iii) spans impossible by construction. Its 1.0000 span-level correctness is inherited from the perfect-policy oracle, NOT demonstrated by binding-keyed compilation. This is correctly disclosed in report.md section 4.4 and validity note 'ORACLE-MEDIATED CLOSURE'.",
+      "evidence": [
+        "artifacts/binding_compilation_closure.json",
+        "report.md section 4.4",
+        "report.md validity notes section 10"
+      ],
+      "severity": "critical"
+    },
+    {
+      "id": "VF-04",
+      "finding": "Both treatment arms exceed the frozen cost threshold of 38.6 units/episode on the declared three-term ledger: WITHIN_EPISODE_SCRATCHPAD = 48.00 pooled (identical to B-NO-MEMORY-CONDITIONED-WIDE), CROSS_EPISODE_COMPILED_BINDING = 48.20 pooled. The scratchpad's cost equals the inherited goal-conditioned baseline's cost, providing no economic advantage over it. The cross-episode arm adds 360 machinery units/episode for zero class-(iii) cache hits. Paired bootstrap confirms cost differences are significant (p=0) at all novelty rates.",
+      "evidence": [
+        "result.json.metrics.amortized_cost_units_per_episode",
+        "artifacts/paired_bootstrap_cost_differences.json",
+        "report.md section 4.3"
+      ],
+      "severity": "supporting"
+    },
+    {
+      "id": "VF-05",
+      "finding": "FROZEN REPRESENTATION LOSS (load-bearing): The parent substrate returned the capability handle ONLY in a response HEADER (not a declared readable channel). This experiment's frozen modification returns it in the mint response BODY as 'capability_handle'. BOTH new arms are measurable ONLY because of this modification. On the unmodified parent substrate, neither arm could have observed any handle value to propagate or key on. Results measure value propagation GIVEN a readable handle channel; they do not establish what an executor without that channel can do, nor that a real substrate exposes handles readably. This is correctly disclosed as a frozen representation loss (report.md validity notes DI-01 and SUBSTRATE-CHANGE CONDITIONALITY).",
+      "evidence": [
+        "prereg.md section 4/5",
+        "report.md sections 10.1 and 10.2",
+        "artifacts/mint_channel_check.json"
+      ],
+      "severity": "critical"
+    },
+    {
+      "id": "VF-06",
+      "finding": "The authoritative goal-aware class-(ii) rule and the inherited literal step-2 rule are NUMERICALLY IDENTICAL on this data (both 1337/6000 pooled sigma_2 = 0.2228). The arm-native observable state key already contains the executor's last request, so it already separates the roles the 'intent' field would separate. Only the strictest full-prefix intent reading differs (480/6000 = 0.08). The choice of STATE KEY, not the choice of intent rule, moves sigma_2. Clause 1 fails by a wide margin under all three readings (CI95 upper bounds 0.19-0.30 vs 0.01 threshold). This is correctly measured and reported in metrics.class_ii_rule_operationalisations and report.md section 6.",
+      "evidence": [
+        "result.json.metrics.class_ii_rule_operationalisations",
+        "report.md section 6"
+      ],
+      "severity": "informational"
+    },
+    {
+      "id": "VF-07",
+      "finding": "FROZEN IMPLEMENTATION DISCREPANCY: prereg.md 6.3 describes B-NO-MEMORY-DETERMINISTIC as 'compiling within episode only, no cross-episode retention', but the frozen unmodified arm (deopt_ratchet.py) keeps its compiled cache on the instance across all 50 episodes of a run (self.cache never cleared in run_episode). The cross-episode arm therefore differs in binding key AND declared machinery term rather than retention alone. The arm was not modified because prereg declares it the unmodified parent reference. This is correctly disclosed in report.md validity notes.",
+      "evidence": [
+        "prereg.md section 6.3",
+        "report.md validity notes section 10",
+        "research/frontier/arms/deopt_ratchet.py"
+      ],
+      "severity": "informational"
+    },
+    {
+      "id": "VF-08",
+      "finding": "All arms are deterministic policy rules with programmatic access to the declared plan via ModelOracle (arms/common.py), not language models. The correctness, class-closure and headroom numbers are UPPER BOUNDS on information available to a policy reading observable channels and goal prefix; they are not predictions of language-model behaviour, do not measure a model's ability to hold/notice/propagate values across a context window, and abstract-unit costs carry no token/latency/dollar mapping. No real Web work, no real model, and no real inheritance mechanism is exercised. This is correctly disclosed in report.md validity notes 'ARMS ARE DETERMINISTIC RULES, NOT LANGUAGE MODELS'.",
+      "evidence": [
+        "report.md validity notes section 10",
+        "research/frontier/arms/common.py"
+      ],
+      "severity": "critical"
+    },
+    {
+      "id": "VF-09",
+      "finding": "The positive control PC-PLANTED-DISAMBIGUATION population is ungated by construction (create_resource spans never require a handle). Under the literal emitted-correct reading, all three arms close 200/200 planted spans including the ratchet. Under the mechanism-only reading, all three close 0/200 by their memory mechanism. The PC verifies the plant is observation-identical, not that value propagation is needed for it. This dual reading is correctly disclosed in report.md section 7 rather than silently resolved.",
+      "evidence": [
+        "artifacts/pc_verification.json",
+        "report.md section 7"
+      ],
+      "severity": "informational"
+    },
+    {
+      "id": "VF-10",
+      "finding": "The negative control NC-UNIQUE-STATES confirms the state key choice drives sigma_2 collapse, not the class-(ii) rule. With prereg13_state_key (nonce in world store), sigma_2 = 0 under all rule variants (1200/1200 unique keys). With arm-native state key, sigma_2 = 49/1200 under BOTH authoritative goal-aware and literal rules. The control also reveals an instrument artifact: arms reconstructing requests from goal prefix alone (scratchpad, conditioned-wide) collapse to 0.0000 span correctness because the nonce is in the path but not in the prefix. This is correctly reported as a measured instrument result, not a memory result (report.md section 8).",
+      "evidence": [
+        "artifacts/nc_verification.json",
+        "report.md section 8"
+      ],
+      "severity": "supporting"
+    }
+  ],
+  "baseline_findings": [
+    {
+      "id": "BF-01",
+      "finding": "B-NO-MEMORY-DETERMINISTIC (ratchet) replicates parent values exactly: pooled span-level correctness 0.9867 (parent 0.9833 at nu=0.50, 0.9867 pooled), per-rate costs 34.08/36.64/40.94/44.84/47.06 match parent, 80 false compiled replays on class-(iii) spans (all list_resources) match parent. The cost anchor 38.6 at novelty 0.50 is reproduced.",
+      "evidence": [
+        "artifacts/baseline_replication.json",
+        "artifacts/replication_parent_comparison.json",
+        "result.json.controls.CTRL-BASELINE-REPLICATION"
+      ],
+      "status": "valid"
+    },
+    {
+      "id": "BF-02",
+      "finding": "B-NO-MEMORY-CONDITIONED-WIDE replicates parent: pooled span-level correctness 0.8500, cost 48.00 units/episode constant across grid.",
+      "evidence": [
+        "result.json.metrics.amortized_cost_units_per_episode.per_novelty_rate_by_arm.B-NO-MEMORY-CONDITIONED-WIDE",
+        "result.json.metrics.span_level_action_correctness"
+      ],
+      "status": "valid"
+    },
+    {
+      "id": "BF-03",
+      "finding": "B-NO-MEMORY-CONDITIONED-NARROW replicates parent: pooled span-level correctness 0.5667, cost 48.00 units/episode.",
+      "evidence": [
+        "result.json.metrics.amortized_cost_units_per_episode.per_novelty_rate_by_arm.B-NO-MEMORY-CONDITIONED-NARROW"
+      ],
+      "status": "valid"
+    },
+    {
+      "id": "BF-04",
+      "finding": "B-COLD-EXPLORATION replicates parent: pooled span-level correctness 1.0000, cost 72.00 units/episode.",
+      "evidence": [
+        "result.json.metrics.amortized_cost_units_per_episode.per_novelty_rate_by_arm.B-COLD-EXPLORATION"
+      ],
+      "status": "valid"
+    },
+    {
+      "id": "BF-05",
+      "finding": "Reference arm false compiles: 80 pooled class-(iii) false COMPILED_REPLAY decisions across grid (30/30/20/0/0 per rate), all list_resources, matching parent. These are acknowledged and quantified in every cost comparison.",
+      "evidence": [
+        "artifacts/reference_false_compile.json",
+        "report.md section 4.3/4.4"
+      ],
+      "status": "valid"
+    }
+  ],
+  "recomputed_metrics": {
+    "span_level_action_correctness_pooled": {
+      "WITHIN_EPISODE_SCRATCHPAD": 1.0,
+      "CROSS_EPISODE_COMPILED_BINDING": 1.0,
+      "B-NO-MEMORY-DETERMINISTIC": 0.9866666666666667,
+      "B-NO-MEMORY-CONDITIONED-WIDE": 0.85,
+      "B-NO-MEMORY-CONDITIONED-NARROW": 0.5666666666666667,
+      "B-COLD-EXPLORATION": 1.0
+    },
+    "class_iii_closure_rate_pooled": {
+      "WITHIN_EPISODE_SCRATCHPAD": 1.0,
+      "CROSS_EPISODE_COMPILED_BINDING": 1.0,
+      "B-NO-MEMORY-DETERMINISTIC": 0.8666666666666667,
+      "B-NO-MEMORY-CONDITIONED-WIDE": 0.0,
+      "B-NO-MEMORY-CONDITIONED-NARROW": 0.0,
+      "B-COLD-EXPLORATION": 1.0
+    },
+    "class_iii_closure_mechanism_breakdown": {
+      "WITHIN_EPISODE_SCRATCHPAD": {
+        "by_own_mechanism": 600,
+        "by_oracle_fallback": 0,
+        "decision_paths": {
+          "SCRATCHPAD_PROPAGATED": 600
+        }
+      },
+      "CROSS_EPISODE_COMPILED_BINDING": {
+        "by_own_mechanism": 0,
+        "by_oracle_fallback": 600,
+        "decision_paths": {
+          "DEOPT_TO_MODEL": 600
+        }
+      },
+      "B-NO-MEMORY-DETERMINISTIC": {
+        "by_own_mechanism": 0,
+        "by_oracle_fallback": 520,
+        "decision_paths": {
+          "COMPILED_REPLAY": 80,
+          "DEOPT_TO_MODEL": 520
+        }
+      }
+    },
+    "amortized_cost_units_per_episode_pooled": {
+      "WITHIN_EPISODE_SCRATCHPAD": 48.0,
+      "CROSS_EPISODE_COMPILED_BINDING": 48.204,
+      "B-NO-MEMORY-DETERMINISTIC": 40.712,
+      "B-NO-MEMORY-CONDITIONED-WIDE": 48.0,
+      "B-NO-MEMORY-CONDITIONED-NARROW": 48.0,
+      "B-COLD-EXPLORATION": 72.0
+    },
+    "cost_breakdown_pooled": {
+      "WITHIN_EPISODE_SCRATCHPAD": {
+        "compile": 0,
+        "model": 1200,
+        "execution": 1200,
+        "machinery": 0,
+        "total": 2400,
+        "episodes": 250
+      },
+      "CROSS_EPISODE_COMPILED_BINDING": {
+        "compile": 10,
+        "model": 840,
+        "execution": 1200,
+        "machinery": 360,
+        "total": 2410,
+        "episodes": 250
+      },
+      "B-NO-MEMORY-DETERMINISTIC": {
+        "compile": 9,
+        "model": 838,
+        "execution": 1200,
+        "machinery": 0,
+        "total": 2047,
+        "episodes": 250
+      }
+    },
+    "residual_decomposition_pooled": {
+      "sigma_1_merely_novel": {
+        "point": 0.6771666666666667,
+        "ci95": [0.6652258790734269, 0.688880739927402],
+        "k": 4063,
+        "n": 6000
+      },
+      "sigma_2_epistemically_blocked": {
+        "point": 0.22283333333333333,
+        "ci95": [0.2124827613207978, 0.2335385863759299],
+        "k": 1337,
+        "n": 6000
+      },
+      "sigma_3_observation_absent": {
+        "point": 0.1,
+        "ci95": [0.09266313971931678, 0.1078487270709097],
+        "k": 600,
+        "n": 6000
+      },
+      "headroom_sigma_2_plus_sigma_3": {
+        "point": 0.32283333333333336,
+        "ci95": [0.311119260072598, 0.33477412092657316],
+        "k": 1937,
+        "n": 6000
+      }
+    },
+    "clause_1_test": {
+      "fired": false,
+      "reason": "sigma_2 CI95 upper bound >= 0.01 at all five novelty rates (best upper bound 0.1879 at nu=1.00 vs threshold 0.01)"
+    },
+    "clause_2_test": {
+      "arm": "WITHIN_EPISODE_SCRATCHPAD",
+      "leg_a_correctness_ge_0.9833": true,
+      "leg_b_cost_le_38.6": false,
+      "fired": false,
+      "observed_correctness": 1.0,
+      "observed_cost": 48.0
+    },
+    "clause_3_test": {
+      "arm": "CROSS_EPISODE_COMPILED_BINDING",
+      "leg_a_correctness_ge_0.9833": true,
+      "leg_b_cost_le_38.6": false,
+      "fired": false,
+      "observed_correctness": 1.0,
+      "observed_cost": 48.204,
+      "caveat": "correctness is oracle-mediated; 0/600 class-(iii) spans served from binding-keyed cache"
+    },
+    "frozen_outcome_label": "SCRATCHPAD_CORRECT_BUT_COSTLY",
+    "outcome_enum": "MIXED"
+  },
+  "claim_ceiling": "On this substrate (stdlib HTTP with capability_handle in mint response BODY), this plan family (24-step resource CRUD with 0.10 class-(iii) fraction), and this cost ledger (compile+model+execution+machinery amortized per episode): (1) The within-episode scratchpad closes the observation-absent class (sigma_3 = 0.1000) at 1.0000 span-level correctness and 1.0000 class-(iii) closure via propagated values (600/600 SCRATCHPAD_PROPAGATED, 0 oracle fallback), but at 48.0 units/episode exceeding the 38.6 threshold. (2) The cross-episode binding-keyed compilation arm achieves 1.0000 span-level correctness but 0/600 class-(iii) closures from its own cache (all oracle fallback); its cache key includes the handle VALUE (episode-counter function), making class-(iii) cache hits impossible by construction. (3) Neither arm closes the residual at or below the 38.6 cost threshold. (4) The minimum persistent state required to close the residual remains unidentified; the frozen outcome SCRATCHPAD_CORRECT_BUT_COSTLY is correctly measured and reported. These results do not generalize to language models, real Web substrates, or other plan families.",
+  "evidence_refs": [
+    "request.json",
+    "spec.json",
+    "prereg.md",
+    "freeze.json",
+    "result.json",
+    "report.md",
+    "provenance.json",
+    "artifacts/scratchpad_closure.json",
+    "artifacts/binding_compilation_closure.json",
+    "artifacts/reference_false_compile.json",
+    "artifacts/paired_bootstrap_cost_differences.json",
+    "artifacts/classification_B-NO-MEMORY-DETERMINISTIC.jsonl",
+    "artifacts/classification_NC-UNIQUE-STATES-authoritative_goal_aware_intent_role_prereg13_state_key.jsonl",
+    "artifacts/pc_verification.json",
+    "artifacts/nc_verification.json",
+    "artifacts/substrate_idempotency.json",
+    "artifacts/mint_channel_check.json",
+    "artifacts/scratchpad_statelessness_test.json",
+    "artifacts/shared_ground_truth_integrity.json",
+    "artifacts/replication_parent_comparison.json",
+    "artifacts/baseline_replication.json",
+    "artifacts/goal_state_success.json"
+  ],
+  "unresolved": [
+    {
+      "id": "UN-01",
+      "question": "The class-(ii) rule (goal-aware vs literal vs full-prefix) is a measurement definition that changes sigma_2 from 0.08 to 0.2228 on identical data. The program has not fixed this once; every downstream headroom number inherits this choice. Should this be fixed at the program level?",
+      "context": "result.json.metrics.class_ii_rule_operationalisations shows three operationalisations; report.md section 6 discloses this; parent audit also flagged this (UR-02)"
+    },
+    {
+      "id": "UN-02",
+      "question": "Should a binding-IDENTITY cache key (the identity of the capability, not its episode-scoped value) be preregistered next? This run measured that the preregistered binding-VALUE key produced 0/600 class-(iii) closures from its own cache.",
+      "context": "report.md section 12 open question 2; artifacts/binding_compilation_closure.json shows handle_in_cache_key changes every episode"
+    },
+    {
+      "id": "UN-03",
+      "question": "The cost leg of both clauses failed at a specific point: scratchpad's 48.00 = conditioned baseline's 48.00, and the 38.6 bar is the inherited ratchet's amortized cost (which was 40.71 pooled WITH the plant). Should the economic bar for successors be re-derived, or is 38.6 the program's standing bar?",
+      "context": "report.md section 12 open question 3; result.json.metrics.amortized_cost_units_per_episode shows ratchet pooled 40.712"
+    },
+    {
+      "id": "UN-04",
+      "question": "The substrate modification (handle in response body) is a frozen representation loss. Results only hold GIVEN a readable handle channel. No real substrate has been verified to expose capability handles readably in response bodies.",
+      "context": "report.md section 10.2; prereg.md section 4/5; this is a scope boundary, not a fixable defect in this experiment"
+    },
+    {
+      "id": "UN-05",
+      "question": "All arms are deterministic rules with oracle access, not language models. The measured upper bounds do not predict LLM behaviour in holding/noticing/propagating values across context windows.",
+      "context": "report.md validity notes 'ARMS ARE DETERMINISTIC RULES, NOT LANGUAGE MODELS'; this is an inherited scope boundary from parent audit"
+    }
+  ]
+}
