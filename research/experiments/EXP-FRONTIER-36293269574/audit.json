@@ -1,0 +1,232 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-FRONTIER-36293269574",
+  "lane": "frontier",
+  "status": "FAIL",
+  "producer_claim_supported": false,
+  "required_fixes": [
+    {
+      "category": "measurement_validity",
+      "severity": "high",
+      "issue": "NULL_STATE_KEYED (mandatory null control) is not discriminating on the selected read-only TEST sites.",
+      "description": "False replay rate is 0.0 because read-only endpoints return 200 for identical requests; the cache-hit path never produces a distinguishably wrong action that manifests as a false replay under the current detection. The prereg requires false_replay_rate >= 0.05 for the null arm to be valid. Either select TEST sites with session-scoped/rotating gating identifiers that cause wrong bound actions to fail verification, or redefine the null-arm measurement to detect silent semantic divergence.",
+      "fix": "Re-run on at least one write-capable credential-free endpoint(s) with CSRF/session-scoped gating objects, or add a discriminating test case where cached binding is semantically incorrect and verification can detect it. Update prereg before freeze if changing selection.",
+      "evidence_refs": [
+        "research/experiments/EXP-FRONTIER-36293269574/result.json:controls.NULL_STATE_KEYED",
+        "research/experiments/EXP-FRONTIER-36293269574/result.json:metrics.false_replay_rate.NULL_STATE_KEYED",
+        "research/frontier/realweb_arms.py:144-271 (NullStateKeyedArm.false replay logic)"
+      ]
+    },
+    {
+      "category": "measurement_validity",
+      "severity": "high",
+      "issue": "INHERITED_PARAMETERIZED arm unavailable; transfer execution and amortization clauses cannot be tested as specified.",
+      "description": "src/spider/kernel.py lacks distill_parameterized(); distill() hardcodes confidence=0.5 < min_confidence=0.8. The experiment is measurement-incomplete for F2,F4,F5,F7. Producer acknowledges this but outcome is marked MIXED rather than MEASUREMENT_INVALID for the core clauses.",
+      "fix": "Implement distill_parameterized() with parameter slots and confidence >= min_confidence in kernel, or adjust the experimental arm to use the actual product path. Do not test transfer without an executable parameterized mechanism.",
+      "evidence_refs": [
+        "src/spider/kernel.py:1-132",
+        "research/experiments/EXP-FRONTIER-36293269574/result.json:validity_notes[0]",
+        "research/frontier/realweb_arms.py:506-537"
+      ]
+    },
+    {
+      "category": "measurement_validity",
+      "severity": "medium",
+      "issue": "Denominator definition for stable_identifier_prevalence is ambiguous relative to prereg.",
+      "description": "Prevalence computed as (# stable identifier keys across episodes) / (total_action_gating_spans) where total_action_gating_spans increments once per episode in the prevalence measurement. But episodes also tested read_resource on up to 3 resources; identifiers from those checks were aggregated but denominator was not incremented per span. Prereg states prevalence = count(STABLE) / count(action-gating spans). This mismatch could bias the prevalence estimate.",
+      "fix": "Define denominator explicitly (e.g., list_resources spans + read_resource spans counted separately). Increment per actual span tested and report per-span counts. Document classification rules.",
+      "evidence_refs": [
+        "research/frontier/run_exp_36293269574.py:75-127 (measure_identifier_prevalence)",
+        "research/experiments/EXP-FRONTIER-36293269574/prereg.md:8.4",
+        "research/experiments/EXP-FRONTIER-36293269574/result.json:metrics.stable_identifier_prevalence"
+      ]
+    },
+    {
+      "category": "external_validity",
+      "severity": "medium",
+      "issue": "Token/representation baseline (763 tokens) does not match measured tokens on JSON APIs (119/obs).",
+      "description": "Producer uses 763-token minimal structural baseline from EXP-INTEL-36287179392 (HTML pages), but actual observations on TEST sites (mostly JSON APIs) yield ~35-200 tokens. This is a scope shift (HTML structural vs API responses). The cost comparison logic is internally consistent but the 'minimal structural representation' magnitude differs from the cited baseline.",
+      "fix": "Either select HTML-based credential-free sites matching the 763-token baseline, or report a separate API-minimal representation baseline with its own tokenizer counts. Avoid conflating HTML structural observation costs with API JSON observation costs.",
+      "evidence_refs": [
+        "research/experiments/EXP-FRONTIER-36293269574/provenance.json:measurement_instruments",
+        "research/experiments/EXP-FRONTIER-36293269574/result.json:validity_notes[2,3]",
+        "research/frontier/realweb_substrate.py:88-115"
+      ]
+    },
+    {
+      "category": "internal_validity",
+      "severity": "medium",
+      "issue": "Identifier detection heuristics may miss site-specific schemas (breed-as-id case), reducing measured prevalence.",
+      "description": "dog.ceo returns breed names as dict keys; no 'id' JSON field. The canonical_resource_id patterns look for 'id' or numeric IDs in paths. This can undercount stable identifiers even if semantically present as resource keys. The measurement is instrument-limited.",
+      "fix": "Broaden heuristics to treat top-level collection keys/values as candidate resource identifiers when they appear stable across episodes, or use API-specific extractors per site class. Document detection precision/recall limitations.",
+      "evidence_refs": [
+        "research/frontier/realweb_substrate.py:289-324, 327-415",
+        "research/experiments/EXP-FRONTIER-36293269574/result.json:validity_notes[3]"
+      ]
+    }
+  ],
+  "validity_findings": [
+    {
+      "category": "falsification_conditions",
+      "finding": "F1 (stable_identifier_prevalence > 0.10) fails: observed 0.060 (3/50).",
+      "evidence": "Prevalence computed from 5 TEST sites, 10 episodes each. Per-site: catfact.ninja 0.100, api.chucknorris.io 0.100, zenquotes.io 0.100, others 0.000.",
+      "impact": "Architectural precondition for cross-episode replay is not met on this sample with current detection heuristics.",
+      "evidence_refs": [
+        "research/experiments/EXP-FRONTIER-36293269574/result.json:metrics.stable_identifier_prevalence",
+        "research/experiments/EXP-FRONTIER-36293269574/report.md:lines 18-31"
+      ]
+    },
+    {
+      "category": "falsification_conditions",
+      "finding": "F2 (INHERITED_PARAMETERIZED correctness > COLD+0.05) fails due to unavailable mechanism.",
+      "evidence": "INHERITED_PARAMETERIZED.span_level_action_correctness = 0.000; mechanism unavailable (F7). Cannot test transfer execution.",
+      "impact": "Core transfer hypothesis untestable under current product kernel.",
+      "evidence_refs": [
+        "research/experiments/EXP-FRONTIER-36293269574/result.json:metrics.span_level_action_correctness",
+        "src/spider/kernel.py:89-131 (distill/resolve lack distill_parameterized)"
+      ]
+    },
+    {
+      "category": "falsification_conditions",
+      "finding": "F3 passes (abstention 0.0 < 0.5), F4 passes (cost 0.0 < 240.0), F5 passes (cost 0.0 < 240.0) by ledger arithmetic, but values reflect 'unavailable' state.",
+      "evidence": "Inherited arm records 0 cost and 0 abstentions; abstention metric counts only decision_path==ABSTAIN, so unavailable spans don't count as abstentions. This is a metric-labeling artifact.",
+      "impact": "Cost/abstention 'passes' are not meaningful when the mechanism is unavailable.",
+      "evidence_refs": [
+        "research/frontier/realweb_arms.py:109-138 (ArmBase.get_metrics), 506-537"
+      ]
+    },
+    {
+      "category": "falsification_conditions",
+      "finding": "F6 (NULL_STATE_KEYED false_replay_rate >= 0.05) fails: 0.000.",
+      "evidence": "Null arm produced 94 verification calls total (implied) but no false replays recorded. False replay only occurs when cached action produces non-200; read-only APIs return 200 for identical requests.",
+      "impact": "Null control is not discriminating on this TEST set; cannot validate the synthetic 80/600 finding on this substrate.",
+      "evidence_refs": [
+        "research/experiments/EXP-FRONTIER-36293269574/result.json:controls.NULL_STATE_KEYED",
+        "research/frontier/realweb_arms.py:144-271"
+      ]
+    },
+    {
+      "category": "falsification_conditions",
+      "finding": "F7 fails: parameterized mechanism unavailable.",
+      "evidence": "kernel.py has no distill_parameterized(); distill() confidence 0.5 < 0.8.",
+      "impact": "Measurement incomplete for transfer/amortization clauses.",
+      "evidence_refs": [
+        "src/spider/kernel.py:89-131",
+        "research/experiments/EXP-FRONTIER-36293269574/result.json:validity_notes[0]"
+      ]
+    },
+    {
+      "category": "outcome_classification",
+      "finding": "Producer outcome MIXED is not the strongest appropriate classification given measurement limitations.",
+      "evidence": "Multiple clauses untestable (F2,F4,F5,F7 unavailable mechanism) and null control invalid (F6). Architectural precondition fails (F1). A more precise classification is MEASUREMENT_INVALID for the transfer/amortization test and a negative on precondition for this sample.",
+      "impact": "Downstream readers may treat untestable clauses as 'failed' rather than 'not measured'.",
+      "evidence_refs": [
+        "research/experiments/EXP-FRONTIER-36293269574/result.json:outcome",
+        "research/experiments/EXP-FRONTIER-36293269574/report.md"
+      ]
+    }
+  ],
+  "baseline_findings": [
+    {
+      "baseline_id": "COLD_REEXPLORATION",
+      "finding": "Costs and behavior match reported aggregates (240.0 amortized/ep). No memory inheritance as expected.",
+      "evidence_refs": [
+        "research/experiments/EXP-FRONTIER-36293269574/result.json:controls.COLD_REEXPLORATION",
+        "research/frontier/realweb_arms.py:273-317"
+      ]
+    },
+    {
+      "baseline_id": "NO_MEMORY_DETERMINISTIC",
+      "finding": "Correctness 1.0, cost 240.0/ep. Re-derives from observation each episode.",
+      "evidence_refs": [
+        "research/experiments/EXP-FRONTIER-36293269574/result.json:controls.NO_MEMORY_DETERMINISTIC",
+        "research/frontier/realweb_arms.py:319-377"
+      ]
+    },
+    {
+      "baseline_id": "WITHIN_EPISODE_SCRATCHPAD",
+      "finding": "Correctness 1.0, within-episode propagation only; zero cross-episode retention as specified.",
+      "evidence_refs": [
+        "research/experiments/EXP-FRONTIER-36293269574/result.json:controls.WITHIN_EPISODE_SCRATCHPAD",
+        "research/frontier/realweb_arms.py:379-438"
+      ]
+    },
+    {
+      "baseline_id": "ORACLE_PERFECT_TRANSFER",
+      "finding": "Correctness 1.0, abstention 0.0. Cost 252.0/ep matches (extra requests to learn known resources).",
+      "evidence_refs": [
+        "research/experiments/EXP-FRONTIER-36293269574/result.json:controls.ORACLE_PERFECT_TRANSFER",
+        "research/frontier/realweb_arms.py:440-503"
+      ]
+    }
+  ],
+  "recomputed_metrics": {
+    "stable_identifier_prevalence": {
+      "value": 0.06,
+      "method": "3 stable keys / 50 episode-spans (as reported)",
+      "verified": true,
+      "recomputation_note": "Count matches: total_stable=3, total_spans=50. Denominator definition per episode (not per individual read span) as implemented."
+    },
+    "session_scoped_identifier_prevalence": {
+      "value": 0.0,
+      "verified": true
+    },
+    "amortized_cost_per_episode_NULL_STATE_KEYED": {
+      "value": 241.88,
+      "components": {
+        "observation_tokens": 11900,
+        "requests": 100,
+        "verification_calls": 94,
+        "repair_events": 0,
+        "total": 12094,
+        "episodes": 50
+      },
+      "verified": true,
+      "formula": "(11900+100+94+0)/50 = 241.88"
+    },
+    "amortized_cost_per_episode_ORACLE_PERFECT_TRANSFER": {
+      "value": 252.0,
+      "components": {
+        "observation_tokens": 12495,
+        "requests": 105,
+        "verification_calls": 0,
+        "repair_events": 0,
+        "total": 12600,
+        "episodes": 50
+      },
+      "verified": true
+    },
+    "tokens_per_observation_mean": {
+      "value": 119.0,
+      "verified": true,
+      "note": "11900 tokens / 100 requests; actual varies by site (35-200). Differs from 763-token baseline due to API vs HTML structural content."
+    },
+    "false_replay_rate_NULL_STATE_KEYED": {
+      "value": 0.0,
+      "verified": true,
+      "note": "No false replays recorded; discriminating condition absent on read-only TEST sites."
+    }
+  },
+  "claim_ceiling": "For the tested credential-free API sample (5 sites, read-only), stable identifier prevalence is ~6% (instrument-limited) which does not meet the preregistered >10% architectural precondition. The parameterized transfer mechanism (INHERITED_PARAMETERIZED) is unavailable in the product kernel, so transfer correctness/amortization cannot be evaluated. The mandatory null control produces 0% false replays on read-only endpoints (not discriminating), preventing validation of the synthetic false-replay finding. No positive support exists for C-CROSSSITE's full claim; at most a bounded negative on precondition and a measurement-incomplete result on transfer/amortization for this substrate selection.",
+  "evidence_refs": [
+    "research/experiments/EXP-FRONTIER-36293269574/request.json",
+    "research/experiments/EXP-FRONTIER-36293269574/spec.json",
+    "research/experiments/EXP-FRONTIER-36293269574/prereg.md",
+    "research/experiments/EXP-FRONTIER-36293269574/freeze.json",
+    "research/experiments/EXP-FRONTIER-36293269574/result.json",
+    "research/experiments/EXP-FRONTIER-36293269574/report.md",
+    "research/experiments/EXP-FRONTIER-36293269574/provenance.json",
+    "research/frontier/run_exp_36293269574.py",
+    "research/frontier/realweb_substrate.py",
+    "research/frontier/realweb_arms.py",
+    "src/spider/kernel.py",
+    "research/experiments/EXP-FRONTIER-36287182510/result.json (parent, synthetic false replays reference)"
+  ],
+  "unresolved": [
+    "Whether stable_identifier_prevalence > 0.10 on HTML-based credential-free sites (not just read-only JSON APIs).",
+    "Whether the null arm's false replay rate reaches >= 0.05 on write-capable sites with CSRF/session-scoped gating identifiers.",
+    "Whether a properly implemented distill_parameterized() would enable transfer correctness/amortization above baselines on true holdout sites.",
+    "Whether identifier detection sensitivity (heuristics) undercounts semantically stable identifiers (breed-as-id case) enough to flip F1 on this sample.",
+    "How the episode-level denominator definition for prevalence affects the estimate relative to per-span counting."
+  ]
+}
