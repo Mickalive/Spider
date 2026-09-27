@@ -8,7 +8,7 @@
   "next_question": "On the committed product kernel, does a corrected _build_action_template that preserves the URL prefix (src/spider/kernel.py:316-356 currently overwrites the entire path value with the slot placeholder, and the module's own _strip_common_prefix at line 258 is defined but never called) let distill_parameterized execute bound mechanisms end-to-end on never-observed resource-B identifiers -- specifically, can PC-SAME-RESOURCE reach its preregistered success_rate >= 0.95 with a bound path of the form /api/v1/<collection>/<slot> -- and, with B-COLD re-measured by actually executing multi-step auth, pagination traversal and schema discovery per task instead of the current fixed 3-request harness policy, does that executable mechanism then reach amortized_cost_ratio <= 0.85 against B-COLD, B-LITERAL-REPLAY and B-RETRIEVAL-K5 at matched end-to-end success and break even at or before an N_MAX derived before freeze from that executed baseline cost, at the preregistered n >= 50 per family with the family-stratified B=5000 bootstrap and 60 negative probes per arm, with NC-SHUFFLED-INTENT re-evaluated against its preregistered transfer-success criterion rather than its induced-mechanism count?",
   "promotion_ready": false,
   "consecutive_failures": 1,
-  "updated_at": "2026-09-27T07:04:15.273870+00:00",
+  "updated_at": "2026-09-27T07:24:54.750770+00:00",
   "last_failure_retryable": true,
   "last_handoff_sha256": "518afa996bdc075e75e017bcb9430ec7e286f39acf304a32b969542df6d2bb20",
   "same_failure_count": 1,
