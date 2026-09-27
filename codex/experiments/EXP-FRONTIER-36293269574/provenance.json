@@ -1,0 +1,61 @@
+{
+  "code_paths": [
+    "research/frontier/realweb_substrate.py",
+    "research/frontier/realweb_arms.py",
+    "research/frontier/run_exp_36293269574.py"
+  ],
+  "dependencies": {
+    "tiktoken": "763-token baseline from EXP-INTEL-36287179392"
+  },
+  "environment": {
+    "no_browser": true,
+    "no_docker": true,
+    "no_model_api": true,
+    "platform": "linux",
+    "stdlib_only_http": true
+  },
+  "episode_structure": {
+    "episodes_per_test_site": 10,
+    "task_family": "Read resource CRUD on REST-like endpoints (adapted to read-only APIs)",
+    "total_episodes": 50
+  },
+  "experiment_id": "EXP-FRONTIER-36293269574",
+  "git_branch": "lab2/frontier",
+  "git_commit": "68173dc18b43860977483bc112491be55142e3f2",
+  "measurement_instruments": {
+    "identifier_detection": "Heuristic regex patterns for canonical IDs, link relations, CSRF tokens, rotating handles, nonces",
+    "observation_representation": "Minimal HTTP+HTML structural (status, headers, link relations, form actions, input names, semantic landmarks)",
+    "tokenizer": "cl100k_base (n_vocab 100277)"
+  },
+  "python_version": "3.12.14 (main, Aug 13 2026, 02:47:42) [GCC 13.3.0]",
+  "run_timestamp": "2026-09-27T04:34:21.292661+00:00",
+  "schema_version": 1,
+  "sites": {
+    "reachable_test_sites": [
+      "https://api.ipify.org",
+      "https://dog.ceo",
+      "https://catfact.ninja",
+      "https://api.chucknorris.io",
+      "https://zenquotes.io"
+    ],
+    "test_sites": [
+      "https://api.ipify.org",
+      "https://dog.ceo",
+      "https://catfact.ninja",
+      "https://api.chucknorris.io",
+      "https://zenquotes.io"
+    ],
+    "train_sites": [
+      "https://httpbin.org",
+      "https://jsonplaceholder.typicode.com",
+      "https://api.github.com",
+      "https://developer.mozilla.org",
+      "https://docs.python.org",
+      "https://doc.rust-lang.org",
+      "https://go.dev",
+      "https://en.wikipedia.org",
+      "https://example.com",
+      "https://postman-echo.com"
+    ]
+  }
+}
